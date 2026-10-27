@@ -15,8 +15,8 @@ normalize:emphatic-spelling	アンタどんだけくっさいのよ！	너 얼�
 normalize:emphatic-spelling	「彼女いるのに何やってんのよ。バッカじゃないの？」	has:바보가 아닌 거야?	fix	normalize
 normalize:emphatic-spelling	「ば、バッカ、これはわざとつけてたの！」	「바, 바보, 이건 일부러 붙였어!」	fix	normalize
 normalize:emphatic-spelling	「はあ！？　バッカじゃないの！？」	「하아!? 바보가 아닌 거야!?」	fix	normalize
-normalize:emphatic-spelling	「冗談に決まってるでしょ、ばっかじゃないの」	「농담일 게 뻔하잖아, 바보가 아닌 거야」	fix	normalize
-normalize:emphatic-spelling	「ばっかじゃないの！　ばっかじゃないの！」	「바보가 아닌 거야! 바보가 아닌 거야!」	fix	normalize
+normalize:emphatic-spelling	「冗談に決まってるでしょ、ばっかじゃないの」	「농담일 게 뻔하잖아, 바보가 아니야」	fix	normalize
+normalize:emphatic-spelling	「ばっかじゃないの！　ばっかじゃないの！」	「바보가 아니야! 바보가 아니야!」	fix	normalize
 normalize:emphatic-spelling	「みんなでとか……ばっかみたい」	has:바보같다	fix	normalize
 normalize:emphatic-spelling	「うわ……今日もあっついねー」	「우와……오늘도 덥네~」	fix	normalize
 normalize:emphatic-spelling	「あー……今日もあっついなぁ……」	「아―……오늘도 더워……」	fix	normalize

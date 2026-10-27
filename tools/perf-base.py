@@ -4,12 +4,13 @@
   tools/perf-base.py COMMIT DIR [--wait SECONDS]
   tools/perf-base.py --self-test
 
-Looks for the artifact hdtrans-linux (hdtrans, dicts.hdsnap) of the Build workflow in the push runs
+Looks for the artifact hdtrans-linux (hdtrans, hdtrans-data/dicts.hdsnap) of the Build workflow in the push runs
 of COMMIT, then in the runs that recorded COMMIT's tree as tested (artifact tested-tree-<tree>). The
 linux job uploads it while the rest of its run goes on, so while a push run of COMMIT is not finished
 it looks again every POLL seconds, for at most --wait seconds (default 600). Needs gh with a token
 that reads actions (GH_TOKEN) and GITHUB_REPOSITORY, and COMMIT in the local repository.
-DIR is emptied before each download; it must be empty, missing or an earlier download.
+DIR is emptied before each download; it must be empty, missing or an earlier download. A build
+with dicts.hdsnap at the artifact root has it moved to hdtrans-data/.
 Exit: 0 downloaded into DIR, 1 no build found, 2 invalid arguments.
 """
 import json
@@ -22,7 +23,7 @@ import time
 from pathlib import Path
 
 ARTIFACT = "hdtrans-linux"
-FILES = ("hdtrans", "dicts.hdsnap")
+FILES = ("hdtrans", "hdtrans-data/dicts.hdsnap")
 POLL = 30
 WORKFLOW = "build.yml"
 
@@ -70,6 +71,13 @@ class GitHub:
         return status == 0
 
 
+def place_snapshot(directory):
+    snapshot, root = Path(directory) / FILES[1], Path(directory) / "dicts.hdsnap"
+    if not snapshot.is_file() and root.is_file():
+        snapshot.parent.mkdir(exist_ok=True)
+        root.rename(snapshot)
+
+
 def tree_of(commit):
     r = subprocess.run(["git", "rev-parse", f"{commit}^{{tree}}"], capture_output=True, text=True)
     return r.stdout.strip() if r.returncode == 0 else ""
@@ -89,7 +97,10 @@ def fetch(hub, commit, tree, directory, wait, clock=time.monotonic, pause=time.s
                 # gh run download does not overwrite files.
                 shutil.rmtree(directory, ignore_errors=True)
                 Path(directory).mkdir(parents=True)
-                if hub.download(run, directory) and all((Path(directory) / name).is_file() for name in FILES):
+                if not hub.download(run, directory):
+                    continue
+                place_snapshot(directory)
+                if all((Path(directory) / name).is_file() for name in FILES):
                     (Path(directory) / "hdtrans").chmod(0o755)
                     return run
             failed.add(run)
@@ -105,6 +116,7 @@ def self_test():
     class Fake:
         def __init__(self):
             self.pushes, self.tested, self.builds, self.downloads, self.finished = [], [], set(), [], set()
+            self.files = FILES
 
         def push_runs(self, commit):
             return self.pushes
@@ -120,7 +132,8 @@ def self_test():
 
         def download(self, run, directory):
             self.downloads.append(run)
-            for name in FILES:
+            for name in self.files:
+                (Path(directory) / name).parent.mkdir(exist_ok=True)
                 (Path(directory) / name).write_text("x")
             return True
 
@@ -141,6 +154,10 @@ def self_test():
             hub.builds = {1}
             assert fetch(hub, "c", "t", tmp, 600, clock, pause) == 1
             assert os.access(Path(tmp) / "hdtrans", os.X_OK)
+            # A build with the snapshot at the artifact root.
+            hub = Fake()
+            hub.pushes, hub.builds, hub.files = [(1, True)], {1}, ("hdtrans", "dicts.hdsnap")
+            assert fetch(hub, "c", "t", tmp, 600, clock, pause) == 1 and (Path(tmp) / FILES[1]).is_file()
             # The tree was tested by another run.
             hub = Fake()
             hub.tested, hub.builds = [7], {7}

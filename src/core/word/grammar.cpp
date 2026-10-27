@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/output/compose.h"
 #include "core/output/korean.h"
 #include "core/output/families.h"
 #include "core/output/inflect.h"
@@ -150,7 +151,8 @@ bool Transitive(const Item* it) {
 // The passive reading of a られた, られて or られ、 with no other cue.
 bool NarrativePassive(const Item* it, std::string_view rest) {
     if (!rest.starts_with("た") && !rest.starts_with("て") && !rest.starts_with(kJaComma)) return false;
-    return !dict::InClass(HDTRANS_CLASS("verb.potential-rareta"), it->group->surface);
+    return it->detail->syntheticCausative ||
+           !dict::InClass(HDTRANS_CLASS("verb.potential-rareta"), it->group->surface);
 }
 
 // Whether the clause before item it has an object を and no に (夜伽を命じられれば, not
@@ -188,7 +190,7 @@ bool PassiveReading(const Worker& w, const Item* it, std::string_view rest) {
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0) return false;
     const bool listed =
         dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), it->group->surface) || CompoundAction(it->group->surface);
-    if (!listed && !Transitive(it)) return false;
+    if (!listed && !Transitive(it) && !it->detail->syntheticCausative) return false;
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-passive"), rest) > 0) return true;
     const Item* subject = nullptr;
     for (const Item* p = it->prev; p != nullptr; p = p->prev) {
@@ -771,16 +773,82 @@ void ObjectAgain(Item* it) {
 // a dictionary word that ends in (ら)れ (見られ, 盗まれ, され).
 enum class VoiceForm { None, Godan, Rare, Shorter, Lexical };
 
+// The empty ending of a folded causative has both the causative's S52 and the potential's S54
+// candidates until voice is known. S54 carries 수 itself, leaving only the causative to compose.
+bool CausativeEnding(Item* it, bool potential) {
+    Detail& d = *it->detail;
+    if (!d.syntheticCausative || d.kind != 2 || d.group == nullptr) return false;
+    bool found = false;
+    for (std::size_t i = 0; i < d.group->entries.size(); i++) {
+        const char form = At(d.group->entries[i]->code, 1);
+        if (form != '2' && form != '4') continue;
+        if (i < d.enabled.size()) {
+            d.enabled[i] = d.enabled[i] && form == (potential ? '4' : '2');
+            found = found || (potential && d.enabled[i]);
+        }
+    }
+    return found;
+}
+
+// The slot the defaults choose before any rule: the first candidate coded XXX, else the first.
+int DefaultSlot(const Item* it) {
+    const int count = static_cast<int>(it->group->entries.size());
+    for (int slot = 0; slot < count; slot++) {
+        if (Has(it->Attr(slot), "XXX")) return slot;
+    }
+    return 0;
+}
+
+bool ExperiencedCausative(const Item* it, int slot) {
+    return std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("verb.cp-experience")),
+                               [&](std::string_view word) { return IsWord(it, word, slot); }) ||
+           dict::StartsWithMember(HDTRANS_CLASS("noun.cp-change"), it->group->surface) > 0;
+}
+
 // The form of the (ら)れ of verb item it. stem is the verb before it, rest the text after it,
 // spelled the verb with it (for Shorter, 絡まれ) and ichidan whether it is the られ of an ichidan or
 // くる verb.
 VoiceForm VoiceFormOf(Flusher& f, const Item* it, std::string_view& stem, std::string_view& rest, std::string& spelled,
                       bool& ichidan) {
     const int record = it->detail->record;
-    if (record != 0 && record != 1 && record != 4) return VoiceForm::None;
+    const bool synthetic = record == 5 && it->detail->syntheticCausative;
+    if (!synthetic && record != 0 && record != 1 && record != 4) return VoiceForm::None;
     const std::string_view surface = it->group->surface;
     rest = From(it->text, it->start + static_cast<long>(surface.size()));
     stem = surface;
+    if (synthetic) {
+        const int slot = it->selected >= 0 ? it->selected : DefaultSlot(it);
+        const bool copula = output::CopulaTarget(it->EntryText(slot), f.families);
+        const bool particle = GrammarCode(it->GAttr(slot), "Pj");
+        const bool experienced = ExperiencedCausative(it, slot);
+        // Selection runs later; mixed classifications cannot authorize a new potential reading.
+        for (int candidate = 0; candidate < static_cast<int>(it->group->entries.size()); candidate++) {
+            if (output::CopulaTarget(it->EntryText(candidate), f.families) != copula ||
+                GrammarCode(it->GAttr(candidate), "Pj") != particle ||
+                ExperiencedCausative(it, candidate) != experienced) {
+                return VoiceForm::None;
+            }
+        }
+        if (copula || (particle && HonouredPerson(it->prev))) return VoiceForm::None;
+        const std::size_t rare = rest.find(kRare);
+        if (rare == std::string_view::npos ||
+            surface.size() + rare + kRare.size() > static_cast<std::size_t>(it->length)) {
+            return VoiceForm::None;
+        }
+        spelled.assign(surface);
+        spelled += rest.substr(0, rare);
+        stem = spelled;
+        rest.remove_prefix(rare + kRare.size());
+        // A following noun such as なし is not a conjugated negative.
+        const Item* n = it->After();
+        if (n != nullptr && !n->group->surface.empty() && n->Code(0).starts_with("1") &&
+            rest.starts_with(n->group->surface) &&
+            dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0) {
+            return VoiceForm::None;
+        }
+        ichidan = true;
+        return VoiceForm::Rare;
+    }
     // The れ comes right after the stem or after its one a-row kana.
     const std::size_t re = rest.substr(0, 2 * kRareRe.size()).find(kRareRe);
     if (record == 1) {
@@ -818,15 +886,6 @@ VoiceForm VoiceFormOf(Flusher& f, const Item* it, std::string_view& stem, std::s
     return VoiceForm::None;
 }
 
-// The slot the defaults choose before any rule: the first candidate coded XXX, else the first.
-int DefaultSlot(const Item* it) {
-    const int count = static_cast<int>(it->group->entries.size());
-    for (int slot = 0; slot < count; slot++) {
-        if (Has(it->Attr(slot), "XXX")) return slot;
-    }
-    return 0;
-}
-
 // The agent of the (ら)れ of verb item it, the verb stem before it: going back through its clause,
 // the nearest に, によって or により after a person or an animal (Animate), not a に that ends a
 // quotation (次の王になんて言われたら: particle.quote right after it). A verb whose に names the other party
@@ -860,6 +919,18 @@ Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
 // Whether a word of word.ability-scope (誰でも, 自分で), or a particle of particle.even-person after a
 // person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
 // condition.
+// Whether a word of noun.ability-condition with なら stands before item it in its clause: the
+// situation that makes the act possible (これなら, ここなら).
+bool AbilityCondition(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (p->group->surface == "なら" && p->prev != nullptr &&
+            dict::InClass(HDTRANS_CLASS("noun.ability-condition"), p->prev->group->surface)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool AbilityScope(const Item* it, std::string_view rest) {
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0) return false;
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
@@ -1034,6 +1105,21 @@ bool Respectful(Flusher& f, const Item* it, VoiceForm form, std::string_view ste
     return RespectfulReading(it, transitive) || (asks && ListenerQuestion(it, rest, transitive));
 }
 
+// A forcing adverb in the same clause names a forced act, even when its predicate is negative.
+bool ForcingInClause(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("adverb.forcing"), p->group->surface) > 0) return true;
+    }
+    return false;
+}
+
+// たら, たり, affirmative ます and the presumptive よう alone do not establish ability after a
+// derived causative.
+bool CausativePotentialEnding(std::string_view rest) {
+    return dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0 &&
+           !rest.starts_with("たら") && !rest.starts_with("たり") && !rest.starts_with("ます") && !rest.starts_with("よう");
+}
+
 // The voice of the (ら)れ of verb item it, first signal first (spec GRM-10): an agent that is a
 // person or an animal makes the passive; then the respectful form; a godan passive, and たい after
 // it, the passive; a word of ability the potential; a trouble after its condition the passive; a
@@ -1050,9 +1136,14 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     // The られ of an ichidan verb that takes no object has no Korean passive (寝られたら困る), so only
     // its form and clause decide it; an object in its clause or in the word (服を着) shows one.
     const std::string_view surface = it->group->surface;
-    const bool object = form != VoiceForm::Rare || dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), surface) ||
+    const bool synthetic = it->detail->record == 5 && it->detail->syntheticCausative;
+    const bool object = synthetic || form != VoiceForm::Rare || dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), surface) ||
                         CompoundAction(surface) || Transitive(it) || ObjectBefore(it) || Has(surface, "を");
-    if (agent != nullptr && object) return Voice::Passive;
+    if ((synthetic && ForcingInClause(it)) || (agent != nullptr && object)) return Voice::Passive;
+    if (synthetic && !CausativePotentialEnding(rest) &&
+        (NarrativePassive(it, rest) || rest.starts_with("ちゃ") || rest.starts_with("ちま"))) {
+        return Voice::Passive;
+    }
     if (Respectful(f, it, form, stem, rest, passive, ichidan)) return Voice::Respectful;
     if (form == VoiceForm::Godan || (form == VoiceForm::Lexical && stem.empty() && SufferedActBefore(it))) {
         return Voice::Passive;
@@ -1063,6 +1154,15 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     // ichidan or くる verb also reads.
     if (ichidan && object && AdverseCondition(it, rest)) return Voice::Passive;
     if (ichidan && object && dict::InClass(HDTRANS_CLASS("verb.spontaneous"), stem)) return Voice::Spontaneous;
+    if (synthetic) {
+        // A derived causative needs a potential cue; unmarked られる keeps the causative-passive.
+        // An object alone does not turn an experienced event into an ability.
+        // The presumptive よう reads the potential only after a condition that makes the act possible.
+        const bool potentialEnding = CausativePotentialEnding(rest) || (rest.starts_with("よう") && AbilityCondition(it));
+        const int slot = it->selected >= 0 ? it->selected : DefaultSlot(it);
+        if (ExperiencedCausative(it, slot) && !potentialEnding) return Voice::Passive;
+        return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
+    }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
     return Voice::None;
 }
@@ -1209,6 +1309,7 @@ void DecideVoice(Flusher& f) {
         bool ichidan = false;
         const VoiceForm form = VoiceFormOf(f, it, stem, rest, spelled, ichidan);
         if (form == VoiceForm::None) {
+            CausativeEnding(it, false);
             SpelledPotential(f, it);
             continue;
         }
@@ -1216,6 +1317,12 @@ void DecideVoice(Flusher& f) {
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
         const Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
+        if (it->detail->record == 5 && it->detail->syntheticCausative) {
+            it->detail->voice = v == Voice::Potential ? Voice::Potential : Voice::Passive;
+            if (CausativeEnding(it, v == Voice::Potential)) it->detail->record = 2;
+            if (v == Voice::Potential) it->AppendRuleCandidateMarker("Ka");
+            continue;
+        }
         it->detail->voice = v;
         const bool passiveVoice = v == Voice::Passive || v == Voice::Spontaneous;
         // The candidates of a word no rule may change (a user's word) stay as they are.
@@ -2420,7 +2527,8 @@ std::string InitialSound(std::string_view s) {
 }  // namespace
 
 // The Sino-Korean reading that starts a word follows the initial sound rule (隆書 륭서 →
-// 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading stays (興隆 흥륭).
+// 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading, a letter, a digit or a
+// mask stays (興隆 흥륭, ○年 ○년).
 void InitialSoundRule(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!OnReading(it)) continue;
@@ -2432,7 +2540,9 @@ void InitialSoundRule(Flusher& f) {
             const std::string_view ps = p->group->surface;
             const char32_t last = ps.empty() ? 0 : DecodeLastRune(ps).cp;
             const bool particle = p->selected >= 0 && At(p->Code(p->selected), 0) == '2';
-            if (!particle && (text::IsLetter(last) || text::IsDigit(last))) continue;
+            // A mask stands for a letter or a digit (○年 ○년).
+            const bool mask = std::u32string_view(U"○●◯◎×✕＊*■□△▲◇◆").find(last) != std::u32string_view::npos;
+            if (!particle && (text::IsLetter(last) || text::IsDigit(last) || mask)) continue;
         }
         if (CounterAfterSpacedNumber(f, it)) continue;
         const std::string target(it->EntryText(it->selected));

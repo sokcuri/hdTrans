@@ -195,7 +195,8 @@ std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& sna
 
 // The kana of a verb form said ん or っ in casual speech written back where a verb of the
 // dictionary has the form: the る of an ichidan verb, する or くる before the な of a prohibition
-// (contraction.n-ru,見んな 見るな, 邪魔すんなよ 邪魔するなよ), not of a verb of ability (想像できんな);
+// (contraction.n-ru,見んな 見るな, 邪魔すんなよ 邪魔するなよ), not of a verb of ability or of verb.observed-state
+// (想像できんな, 見えんな);
 // the られ of a potential, the ら of a godan verb in る or the れ ending an ichidan stem before
 // contraction.n-nai (信じらんない 信じられない, 分かんない 分からない, してくんない してくれない), with
 // contraction.n-nee written as ない (変わんねえ 変わらない); the negative ない after an ichidan or
@@ -332,6 +333,9 @@ struct SoundRow {
     // The last word of the Korean in polite speech (fourth column polite=봬요: 내일 봬요), read
     // where the quote speaks politely or an honoured person is called right before the row.
     std::string polite;
+    // The Korean of a cry row said once, not again right before or after it (alone=갈_것_같아, _
+    // for a space: イっちゃう 갈 것 같아, but イっちゃう、イっちゃう 가버려, 가버려).
+    std::string alone;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

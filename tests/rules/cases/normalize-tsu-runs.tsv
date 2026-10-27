@@ -17,7 +17,7 @@ normalize:tsu-run	あっったりまえでしょ	다아앙연하지	fix	normaliz
 normalize:tsu-run	しっっかり獲ってみせるから！	has:확실히	keep	normalize
 normalize:tsu-run	私、お祝いで健康ケーキ、いっっぱい作りました！	has:많이 만들었습니다!	fix	normalize
 normalize:tsu-run	「待っっって！」	「기이이다려!」	fix	normalize
-normalize:tsu-run	「冗談に決まってるでしょ、ばっっかじゃないの」	has:바아아보가 아닌 거야	fix	normalize
+normalize:tsu-run	「冗談に決まってるでしょ、ばっっかじゃないの」	has:바아아보가 아니야	fix	normalize
 normalize:tsu-run	「おっっっはよ～！」	「좋은 아침~!」	keep	normalize
 normalize:tsu-run	「あっっ！」	「앗!」	keep	normalize
 normalize:tsu-run	「ああッッッ！！」	「아앗!!」	keep	normalize

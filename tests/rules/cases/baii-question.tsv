@@ -29,7 +29,7 @@ cx:baii-question:30	「これを使えばいいんだ。」	!rule:cx:baii-questi
 dict:jisjk:342502	いつ待てばいいの？	언제 기다리면 되는 거야?	fix	local
 dict:jisjk:342502	どうすればいいの？	어떻게 하면 되는 거야?	fix	local
 dict:jisjk:342502	何を言えばいいの？	무슨 말을 하면 되는 거야?	fix	local
-dict:jisjk:342502	行けばいいの。	가면 되는 거야.	fix	local
+dict:jisjk:342502	行けばいいの。	가면 돼.	fix	local
 dict:jisjk:342502	行けばいいのか？	가면 되는 건가?	fix	local
 dict:jisjk:342502	来ればいいのよ。	오면 돼.	fix	local
 dict:jisjk:342502	晴れればいいのに。	개이면 좋을 텐데.	keep	local

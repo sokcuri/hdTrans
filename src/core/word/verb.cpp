@@ -64,6 +64,23 @@ bool OneKana(std::string_view s) {
     return r.size == s.size() && r.cp >= U'ぁ' && r.cp <= U'ゖ';
 }
 
+// Whether tail starts with the short causative of a verb of kind, the causative stem of branch
+// 2 (entry, ending in せ) with し for its せ before て, た, ちゃ, ちま or ます (読まして, 塗らして,
+// 食べさして): the godan す verb that the short causative is, in the forms that read as the
+// causative's. Other kana after し begin other words (知らしめる, 食べさしの). The match stays branch 2,
+// whose pattern is measured by the width of its entry: し takes the one kana of the せ it replaces.
+bool ShortCausative(int kind, std::string_view entry, std::string_view tail) {
+    constexpr std::string_view kSe = "せ", kShi = "し";
+    if (kind == 9 || kind == 10 || kind == 11 || kind == 13 || !entry.ends_with(kSe)) return false;
+    const std::string_view stem = entry.substr(0, entry.size() - kSe.size());
+    if (!Starts(tail, stem) || !Starts(tail.substr(stem.size()), kShi)) return false;
+    const std::string_view rest = tail.substr(stem.size() + kShi.size());
+    for (const std::string_view after : {"て", "た", "ちゃ", "ちま", "ます", "まし", "ませ"}) {
+        if (Starts(rest, after)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool ProgressiveEndings(Group& g, Detail& d, std::string_view head) {
@@ -126,13 +143,15 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
     if (kind == kKindDirect) {
         d.patternMatched = 1;
         d.patternLength = static_cast<int>(recordText.size());
+        d.kind = 0;  // a whole form (ワロタ) takes the endings of a dictionary form after it
         return true;
     }
     for (int branch = 0; branch < kConjugationBranches; branch++) {
         if (branch == 13) continue;
         const std::string_view entry = Conjugation(kind, branch);
         const bool contractedConditional = kind == 9 && branch == 3 && Starts(tail, "すりゃ");
-        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional)) continue;
+        const bool shortCausative = branch == 2 && ShortCausative(kind, entry, tail);
+        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional && !shortCausative)) continue;
         // A bare ichidan stem is no form the quoting って or と follows (行けって, 言えと are the
         // godan imperatives 行け, 言え, not potential stems); と after it only begins the
         // ておく contraction (食べとく, 食べとけ, 食べといて, 食べとかない, 食べとこう, 食べとった).
@@ -414,6 +433,13 @@ bool Item::AcceptVerbContinuation(Record* following) {
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
     if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
+    // A short causative (ShortCausative: 読まして) is read on the text path, and not where the dictionary
+    // has the す verb it spells (表す あらわして, 任す まかして, 鳴らす 鳴らして).
+    if (!matched && oldState == 2 && !Starts(tail, Conjugation(oldKind, 2))) {
+        const std::string_view entry = Conjugation(oldKind, 2);
+        const std::string stem = surface + std::string(entry.substr(0, entry.size() - std::string_view("せ").size()));
+        if (!w->settings.text || w->SuVerb(stem)) return false;
+    }
     // The られ of a dictionary causative of a shorter word in a narrative form (食べさせられた) is
     // that word's causative-passive, analysed on the shorter word; its other forms read the
     // potential (食べさせられない 먹일 수 없다).
@@ -430,6 +456,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         if (shortCausativePassive || (w->settings.text && w->settings.improvements.causativePassive &&
                                      oldState == 2 && tail.starts_with(kJaRare))) {
             base.record = 5;
+            base.syntheticCausative = !shortCausativePassive;
             sourceLength += static_cast<int>(kJaRare.size());
             tail.remove_prefix(kJaRare.size());
         }
@@ -572,7 +599,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
             const std::string_view afterGroup = From(after(), g->length);
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
-                if ((Has(e.gattr, "Sh") && Classify(afterGroup) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
+                const bool potentialForm = base.syntheticCausative && base.kind == 2 && At(e.code, 1) == '4';
+                if ((Has(e.gattr, "Sh") && Classify(afterGroup) != 0) ||
+                    (Byte(At(e.code, 1)) != base.kind + '0' && !potentialForm) ||
                     !w->EndingApplies(e, afterGroup, tokenIndex) ||
                     w->CutsWord(tail.substr(0, tail.size() - endingText.size()), endingText.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), endingText.size())), afterGroup)) {
                     base.enabled[index] = false;
@@ -683,7 +712,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
             return false;
         }
         auto applies = [&](const Entry& e) {
-            return Byte(At(e.code, 1)) == base.kind + '0' && w->EndingApplies(e, after(), tokenIndex);
+            const bool potentialForm = base.syntheticCausative && base.kind == 2 && At(e.code, 1) == '4';
+            return (Byte(At(e.code, 1)) == base.kind + '0' || potentialForm) &&
+                   w->EndingApplies(e, after(), tokenIndex);
         };
         // A plain-dictionary group none of whose endings applies gives way to the groups
         // after it.

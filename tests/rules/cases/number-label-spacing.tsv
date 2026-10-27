@@ -33,3 +33,23 @@ compose:number-label	SP消費	SP 소비	fix	compose
 compose:number-label	SP消費する	SP 소비한다	fix	compose
 compose:number-label	HPが1回復した	HP가 1 회복했다	keep	compose
 compose:number-label	S評価する	S평가한다	keep	compose
+compose:number-label	Googleカレンダーと連携した	Google 캘린더와 연계했다	fix	compose
+compose:number-label	iPhoneケースを買った	iPhone 케이스를 샀다	fix	compose
+compose:number-label	YouTubeチャンネルを作った	YouTube 채널을 만들었다	fix	compose
+compose:number-label	Twitterアカウントを消した	Twitter 계정을 지웠다	fix	compose
+compose:number-label	Excelファイルを開く	Excel 파일을 연다	fix	compose
+compose:number-label	Discordサーバーに入る	Discord 서버에 들어간다	fix	compose
+compose:number-label	Wi-Fiルーターを買った	Wi-Fi 라우터를 샀다	fix	compose
+compose:number-label	Gmailアドレスを教えて	Gmail 주소를 가르쳐 줘	fix	compose
+compose:number-label	HPポイントが増えた	HP 포인트가 늘어났다	fix	compose
+compose:number-label	Googleで検索した	Google로 검색했다	keep	compose
+compose:number-label	iPhoneを落とした	iPhone을 떨어뜨렸다	keep	compose
+compose:number-label	YouTubeが好きだ	YouTube를 좋아한다	keep	compose
+compose:number-label	Tシャツを着る	T셔츠를 입는다	keep	compose
+compose:number-label	Xデーが来た	X데이가 왔다	keep	compose
+compose:number-label	Aランクの冒険者	A랭크의 모험가	keep	compose
+compose:number-label	Christmasダヨ	Christmas다요	keep	compose
+compose:number-label	Java風の書き方	Java풍의 쓰는 법	keep	compose
+compose:number-label	3ケース買った	3케이스 샀다	keep	compose
+compose:number-label	1レベル上がった	1레벨 올랐다	keep	compose
+compose:number-label	Google カレンダーを開く	Google 캘린더를 연다	keep	compose

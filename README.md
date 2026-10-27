@@ -48,8 +48,28 @@ Windows 번역 창이나 네이티브 엔진을 쓰는 도구에 연결하려면
 2. Windows에서는 `hdTransGUI.exe`를 실행합니다. Linux와 macOS에서는 아래 CLI 사용법을 따릅니다.
 3. 다른 도구에 연결하려면 [도구별 설치 안내](docs/using-with-tools.md)를 보세요.
 
-기본 사전은 Windows에서 `hdTrans\dicts.hdsnap`, Linux와 macOS에서 프로그램 옆 `dicts.hdsnap`입니다.
-같은 폴더의 `dicts.txt`는 사전 버전입니다. 원본 TSV나 `dicts/` 폴더를 따로 받을 필요가 없습니다.
+### 폴더 구성
+
+모든 운영체제에서 실행 파일 옆에 아래 폴더를 둡니다.
+
+```text
+hdtrans-data/
+  dicts.hdsnap
+  dicts.txt
+  user/
+    hdtrans.config.example.yaml
+    userdict.example.txt
+  ehnd/
+    README.txt
+    PreFilter_example.txt
+    PostFilter_example.txt
+    UserDict_example.txt
+```
+
+`dicts.hdsnap`은 필수이고, `dicts.txt`는 사전 버전입니다. `user/`, 설정 파일과 `ehnd/`는 선택입니다.
+다른 사전은 `--dicts PATH`, 다른 설정은 `--config FILE`로 지정합니다. 원본 TSV는 따로 받을 필요가 없습니다.
+
+0.6.2 이하 버전을 쓰던 경우: 사용자 사전, 설정(user/)과 Ehnd 사전을 hdtrans-data/ 아래로 옮겨 주세요.
 
 ## 시작하기
 
@@ -104,6 +124,7 @@ Linux, macOS:
 ```
 
 기본 사전은 자동으로 읽습니다. 배포판에서 줄마다 독립적으로 번역하려면 `--each`를 추가합니다.
+`--verbose`는 읽은 사전 정보를 표준 오류에 보여 줍니다. `--version`(`-v`)과 함께 쓰면 버전 한 줄만 출력합니다.
 [npm CLI와 배포판 CLI 사용법](docs/api.md#명령줄-hdtrans)
 
 ## 말투와 번역 방식
@@ -163,17 +184,12 @@ CLI는 `--speech soft`, 설정 파일은 `speech: soft`, 웹 번역기는 **대�
 Windows 배포판의 네이티브 엔진을 LunaTranslator, 투컨트롤, 아네모네, XUnity.AutoTranslator, 아랄트랜스, VNR 등에 연결할 수 있습니다.
 도구에 엔진 경로를 설정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
 
-- `J2KEngine.dll`과 `hdTrans` 폴더를 함께 둡니다.
+- `J2KEngine.dll`과 `hdtrans-data` 폴더를 함께 둡니다.
 - 도구에 따라 DLL 파일이나 폴더를 선택합니다. [도구별 설치 안내](docs/using-with-tools.md)의 설정을 따르세요.
 
 ## 사용자 사전
 
-프로그램 폴더를 기준으로 아래 파일을 만듭니다.
-
-| 운영체제 | 사용자 사전 경로 |
-|---|---|
-| Windows | `hdTrans\user\userdict.txt` |
-| Linux, macOS | `user/userdict.txt` |
+프로그램 폴더의 `hdtrans-data/user/userdict.txt`에 작성합니다.
 
 UTF-8로 저장하고 한 줄에 일본어와 한국어를 **탭**으로 구분해 적습니다.
 
@@ -188,8 +204,7 @@ UTF-8로 저장하고 한 줄에 일본어와 한국어를 **탭**으로 구분�
 
 ## 설정과 Ehnd 사전
 
-Windows는 `hdTrans\user\hdtrans.config.example.yaml`, Linux와 macOS는 `user/hdtrans.config.example.yaml`을
-같은 폴더의 `hdtrans.config.yaml`로 복사해 수정합니다.
+`hdtrans-data/user/hdtrans.config.example.yaml`을 같은 폴더의 `hdtrans.config.yaml`로 복사해 수정합니다.
 
 꿀도르 같은 Ehnd 사전은 **기본으로 꺼져 있습니다**. 필요할 때 설정에서 켤 수 있지만 번역 품질이 낮아질 수 있습니다.
 [Ehnd 설정 안내](docs/ehnd-compat.md)
@@ -203,7 +218,7 @@ Windows는 `hdTrans\user\hdtrans.config.example.yaml`, Linux와 macOS는 `user/h
 ## 문제 해결
 
 - **DLL을 불러오지 못함:** 도구에 지정한 경로에 `J2KEngine.dll`이 있는지 확인합니다.
-- **사전을 찾지 못함:** Windows에서는 DLL이나 실행 파일 옆 `hdTrans\dicts.hdsnap`이 있는지 확인합니다. Linux와 macOS는 실행 파일 옆에 사전을 둡니다. DLL만 복사했다면 `hdTrans` 폴더도 복사하세요.
+- **사전을 찾지 못함:** DLL이나 실행 파일 옆 `hdtrans-data/dicts.hdsnap`이 있는지 확인합니다. DLL을 복사할 때 `hdtrans-data` 폴더도 함께 복사하세요.
 - **계속 예전 엔진으로 번역됨:** 도구의 엔진 경로를 확인합니다. XUnity는 `J2KEngineH.dll`을 먼저 읽으므로 기존 파일이 있으면 제거합니다.
 - **사용자 사전이 적용되지 않음:** 파일 경로와 `userdict`로 시작하는 이름, UTF-8 인코딩, 항목 사이의 탭을 확인합니다.
 

@@ -9,6 +9,7 @@
 // holds the row's _AUX text and the code units PCRE2 finds every match needs. Toggles
 // live per line: Pre may set them for Post, and the next line starts again from the
 // declared states.
+#include <cstddef>
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -40,11 +41,14 @@ struct Source {
     bool native = false;
 };
 
-// A line or a file that does not load.
+enum class ErrorKind : uint8_t { BadRow, IgnoredShortFields };
+
+// A diagnostic for a skipped row or a file that does not load.
 struct Error {
     std::string file;
     int line = 0;  // 1-based; 0 for the whole file
     std::string message;
+    ErrorKind kind = ErrorKind::BadRow;
 };
 
 class Filters {
@@ -68,7 +72,8 @@ public:
     std::size_t Rows(Stage stage) const { return (stage == Stage::Pre ? pre_ : post_).rules.size(); }
 
 private:
-    friend std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors);
+    friend std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors,
+                                                std::vector<std::size_t>* acceptedCounts);
 
     enum class Kind : uint8_t { Plain, Guard, Guarded };
 
@@ -117,8 +122,10 @@ private:
 };
 
 // The filters of sources, which are in load order; null for no sources. Lines that do
-// not load are skipped and listed in errors.
-std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors);
+// not load are skipped and listed in errors. acceptedCounts, when given, receives one
+// count per source of accepted rows, not toggle declarations or expanded dictionary keys.
+std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors,
+                                     std::vector<std::size_t>* acceptedCounts = nullptr);
 
 // Puts back into filtered, the line source after the pre-filter, the spaces the pre-filter
 // removed between a digit or a Latin letter and a word in kanji, katakana or Latin letters

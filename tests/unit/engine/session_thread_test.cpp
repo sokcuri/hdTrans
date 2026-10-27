@@ -187,6 +187,40 @@ HD_TEST(engine_session_threads_stress) {
     HD_CHECK_EQ(differing, 0);
 }
 
+HD_TEST(engine_session_caption_inline_reading_isolation) {
+    DictionaryFolder dicts(
+        "key\tko\tpos\tsem\tgram\tdict\tid\n"
+        "恭\t야스시\tN130\tQPN\tWb\tGN\t1\n"
+        "恭\t공\tN110\tXXX\tOn\tGN\t2\n"
+        "光\t히카루\tN130\tQPN\tWb\tGN\t3\n"
+        "光\t빛\tN110\t\t\tGN\t4\n"
+        "はい\t네\tN110\t\tJ1J2\tGN\t5\n"
+        "きょう\t오늘\tN110\tUMe\t\tGN\t6\n");
+    HD_REQUIRE(!dicts.path.empty());
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.Open({dicts.path.string()}));
+    hdTrans::Session session(engine);
+    for (const auto speech : {hdTrans::Speech::Strict, hdTrans::Speech::Soft}) {
+        session.SetSpeech(speech);
+        hdTrans::Session fresh(engine);
+        fresh.SetSpeech(speech);
+        const std::string bare = fresh.Translate("恭");
+        const std::string label = fresh.Translate("（恭）はい");
+        HD_CHECK_EQ(session.Translate("（恭(きょう)）はい"), "(쿄) 네");
+        HD_CHECK_EQ(session.Translate("恭"), bare);
+        HD_CHECK_EQ(session.Translate("（恭(きょう)）はい\n恭"), "(쿄) 네\n" + bare);
+        HD_CHECK_EQ(session.Translate("（恭(きょう)）はい。恭"), "(쿄) " + fresh.Translate("はい。恭"));
+        HD_CHECK_EQ(session.Translate("（恭(きょう)／恭）はい"), "(쿄/공) 네");
+        HD_CHECK_EQ(session.Translate("恭"), bare);
+        HD_CHECK_EQ(session.Translate("（恭）はい"), label);
+        HD_CHECK_EQ(session.Translate("（光(ひかり)）はい\n（光(ひかる)）はい"), "(히카리) 네\n(히카루) 네");
+        HD_CHECK_EQ(session.Translate("恭", "（恭(きょう)）はい"), bare);
+        HD_CHECK_EQ(session.Translate("恭"), bare);
+        HD_CHECK_EQ(session.Translate("（恭(きょう)）\nはい"), "(공)\n네");
+        HD_CHECK_EQ(session.Translate("（恭）はい"), label);
+    }
+}
+
 // A call is translated on its own: what an earlier call of the session held (a speech cue,
 // a reading) does not reach it, and the lines of one call are read together.
 HD_TEST(engine_session_call_context) {

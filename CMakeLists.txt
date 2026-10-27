@@ -154,14 +154,15 @@ if(NOT EMSCRIPTEN)
     target_include_directories(hdtrans_cli PRIVATE src)
     target_link_libraries(hdtrans_cli PRIVATE hdtrans)
     set_target_properties(hdtrans_cli PROPERTIES OUTPUT_NAME hdtrans PDB_NAME hdtrans_cli)
-    set(HDTRANS_USER_STAGE "$<TARGET_FILE_DIR:hdtrans_cli>/user")
-    if(WIN32)
-        set(HDTRANS_USER_STAGE "$<TARGET_FILE_DIR:hdtrans_cli>/hdTrans/user")
-    endif()
+    set(HDTRANS_USER_STAGE "$<TARGET_FILE_DIR:hdtrans_cli>/hdtrans-data/user")
     add_custom_command(TARGET hdtrans_cli POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${HDTRANS_USER_STAGE}"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/user/userdict.example.txt"
-            "${HDTRANS_USER_STAGE}/userdict.example.txt" VERBATIM)
+            "${HDTRANS_USER_STAGE}/userdict.example.txt"
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/hdtrans.config.example.yaml"
+            "${HDTRANS_USER_STAGE}/hdtrans.config.example.yaml"
+        COMMAND "${CMAKE_COMMAND}" -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/ehnd"
+            "$<TARGET_FILE_DIR:hdtrans_cli>/hdtrans-data/ehnd" VERBATIM)
 
 
     file(GLOB_RECURSE HDTRANS_TEST_SOURCES CONFIGURE_DEPENDS tests/unit/*.cpp)
@@ -200,6 +201,9 @@ if(NOT EMSCRIPTEN)
     endforeach()
     add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
         -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
+    # The shipped rows pass --verify-dicts: every marker family expands.
+    add_test(NAME dicts.verify COMMAND hdtrans_cli --dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --no-cache --verify-dicts
+        -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
@@ -215,6 +219,8 @@ if(NOT EMSCRIPTEN)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
+            add_test(NAME tools.package-release COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_package_release.py")
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
             add_test(NAME tools.measure COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/measure.sh"
                 "$<TARGET_FILE:hdtrans_cli>")
@@ -252,8 +258,12 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.cases.wrapped-soft COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/wrapped-soft"
             --documents -- --wrapped --speech soft)
+        # Documents, each input a document of its own: tests/rules/documents/.
+        add_test(NAME rules.cases.documents COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/documents"
+            --documents)
         set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
-            rules.cases.wrapped rules.cases.wrapped-soft
+            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).
@@ -314,7 +324,8 @@ if(NOT EMSCRIPTEN)
         file(GLOB HDTRANS_RULEC_SOURCES CONFIGURE_DEPENDS src/rulec/*.cpp)
         add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/body.cpp src/core/rules/load.cpp src/core/rules/eval.cpp
             src/core/rules/match.cpp src/core/rules/attr_families_gen.cpp src/core/dict/codes.cpp
-            src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp)
+            src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp
+            src/core/output/inflect.cpp src/core/output/ko_families_gen.cpp src/core/text/utf8.cpp src/core/text/unicode_gen.cpp)
         target_include_directories(hdrulec PRIVATE src)
         # The local rules live in the dictionary rows, so the checks read the program the
         # engine assembles from them; the CLI writes it once for the tests below.
@@ -391,7 +402,7 @@ elseif(WIN32)
     target_include_directories(hdtrans_gui PRIVATE src src/gui)
     target_compile_definitions(hdtrans_gui PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN NOMINMAX
         WINVER=0x0A00 _WIN32_WINNT=0x0A00)
-    target_link_libraries(hdtrans_gui PRIVATE hdtrans_gui_support comctl32 comdlg32 shell32 ole32 uuid gdi32 user32)
+    target_link_libraries(hdtrans_gui PRIVATE hdtrans_gui_support comctl32 comdlg32 shell32 ole32 uuid gdi32 user32 imm32)
     hdtrans_version_resource(hdtrans_cli hdtrans.exe VFT_APP)
     hdtrans_version_resource(hdtrans_gui hdTransGUI.exe VFT_APP)
     set_source_files_properties(src/gui/main.cpp PROPERTIES COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")

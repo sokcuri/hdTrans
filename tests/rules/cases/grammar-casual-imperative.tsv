@@ -1,0 +1,27 @@
+# 규칙: GRM-42
+rule	input	expected	kind	layer
+dict:imperative-na:2	「ちょｗｗｗ落ち着きなってｗｗｗｗｗｗ」	「잠깐ㅋㅋㅋ 침착해 ㅋㅋㅋㅋㅋㅋ」	fix	local-ending
+dict:imperative-na:2	早く行きなって。	빨리 가.	fix	local-ending
+dict:imperative-na:2	早く帰りなって	빨리 돌아가	fix	local-ending
+dict:imperative-na:2	安心しなって、ここにいるから。	안심해, 여기에 있으니까.	fix	local-ending
+dict:imperative-na:2	そのぐらいにしときなって。	has:해 두어.	fix	local-ending
+dict:imperative-na:2	ほら来なって。	자 와.	fix	local-ending
+dict:imperative-na:2	元気出しなって。	기운 내.	fix	local-ending
+dict:imperative-na:2	あさあさやめなって、くすぐったいから	has:그만두어,	fix	local-ending
+dict:imperative-na:1	もう寝なって	이제 자	fix	local-ending
+dict:imperative-na:1	食べなって	먹어	fix	local-ending
+dict:imperative-na:1	見なって	봐	fix	local-ending
+dict:imperative-na:3	自信持ちなよ	has:가져	fix	local-ending
+dict:imperative-na:3	買いなよ｡	사.	fix	local-ending
+dict:imperative-na:3	元気出しなよ	기운 내	fix	local-ending
+dict:imperative-na:3	ちゃんと払って帰りなよ	has:돌아가	fix	local-ending
+dict:imperative-na:3	先に名前を名乗りなよ……	lacks:이름 밝히기	fix	local-ending
+dict:imperative-na:3	自分のクラスに帰りなよ	has:돌아가	fix	local-ending
+dict:imperative-na:2	もう大人になって	이제 어른이 되어	keep	local-ending
+dict:imperative-na:2	好きになって	좋아하게 되어	keep	local-ending
+dict:imperative-na:2	えっ!?てなって｡	lacks:되어라	keep	local-ending
+dict:imperative-na:2	はい 羨ましいなって	네 부럽다고	keep	local-ending
+dict:imperative-na:2	仲良くなって	사이가 좋아져	keep	local-ending
+dict:imperative-na:2	しなくていいって	lacks:해라	keep	local-ending
+dict:imperative-na:2	静かになって	조용하게 되어	keep	local-ending
+dict:imperative-na:3	諦めなよ	포기해	keep	local-ending

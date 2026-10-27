@@ -4,6 +4,7 @@
 #include <charconv>
 #include <set>
 
+#include "core/rules/match.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/userdict/compile.h"
@@ -182,7 +183,7 @@ bool IsVerbPos(std::string_view pos) { return pos == "v" || pos == "v1" || pos =
 }  // namespace
 
 std::string Compile(std::string_view jp, std::string_view kr, std::string_view pos, std::string_view cls, bool space,
-                    const dict::Dict* base, Families& families, std::vector<Rec>& out) {
+                    const dict::Dict* base, Families& families, std::vector<Rec>& out, std::size_t* ehndAttrPosErrors) {
     std::vector<Rec> recs;
     const auto add = [&recs](std::string key, std::string target, std::string_view part, std::string_view sem = {},
                              std::string_view gram = {}) {
@@ -248,6 +249,14 @@ std::string Compile(std::string_view jp, std::string_view kr, std::string_view p
         if (std::string err = CompileEnding(jp, kr, r); !err.empty()) return err;
         recs.push_back(std::move(r));
     } else {
+        if (ehndAttrPosErrors && pos.size() == 3) {
+            for (const auto& family : rules::internal::AttributeFamilies()) {
+                if (pos == family.name) {
+                    ++*ehndAttrPosErrors;
+                    break;
+                }
+            }
+        }
         return "unknown POS " + Quote(pos);
     }
     for (Rec& r : recs) {
@@ -269,7 +278,7 @@ using internal::Quote;
 // The entries of one line, none for a blank or comment line. Returns an error
 // message, empty on success.
 std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::UserEntry>& out,
-                      std::vector<SourceEntry>* sourceEntries) {
+                      std::vector<SourceEntry>* sourceEntries, std::size_t& ehndAttrPosErrors, std::size_t* acceptedCount) {
     if (const std::string_view t = internal::TrimSpace(line); t.empty() || t.starts_with("//") || t.starts_with("#")) {
         return {};
     }
@@ -327,8 +336,9 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
             // Read by the sound stage (an exclamation is no sound before a question mark).
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
-        } else if (key == "polite" && hasValue && pos == "intj") {
-            // Read by the sound stage (the last word of the Korean in polite speech).
+        } else if ((key == "polite" || key == "alone") && hasValue && pos == "intj") {
+            // Read by the sound stage (the last word of the Korean in polite speech, the Korean of a
+            // cry said once).
         } else if (key == "register" && pos == "end" && internal::RegisterOf(value) != 0) {
             registerLevel = internal::RegisterOf(value);
         } else if (key == "neg" && hasValue && (internal::IsVerbPos(pos) || pos == "adj")) {
@@ -339,7 +349,8 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
     }
 
     std::vector<internal::Rec> recs;
-    if (std::string err = internal::Compile(jp, kr, pos, cls, space, ctx.base, *ctx.families, recs); !err.empty()) {
+    if (std::string err = internal::Compile(jp, kr, pos, cls, space, ctx.base, *ctx.families, recs, &ehndAttrPosErrors);
+        !err.empty()) {
         return err;
     }
     std::string negativeTarget;
@@ -375,20 +386,25 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
         sourceEntries->push_back({std::string(jp), std::string(kr), std::string(internal::TrimSpace(fields[2])),
                                   std::string(internal::TrimSpace(fields[3]))});
     }
+    if (acceptedCount) ++*acceptedCount;
     return {};
 }
 
 }  // namespace
 
-Compiled Parse(std::string_view text, int file, Context& ctx, std::vector<SourceEntry>* sourceEntries) {
+Compiled Parse(std::string_view text, int file, Context& ctx, std::vector<SourceEntry>* sourceEntries,
+               std::size_t* acceptedCount) {
+    if (acceptedCount) *acceptedCount = 0;
     if (text.starts_with("\xEF\xBB\xBF")) text.remove_prefix(3);
     Compiled out;
+    std::size_t ehndAttrPosErrors = 0;
     int n = 0;
     for (std::string_view line : internal::Split(text, '\n')) {
         n++;
         while (line.ends_with('\r')) line.remove_suffix(1);
         const std::size_t start = out.entries.size();
-        if (std::string err = ParseLine(line, ctx, out.entries, sourceEntries); !err.empty()) {
+        if (std::string err = ParseLine(line, ctx, out.entries, sourceEntries, ehndAttrPosErrors, acceptedCount);
+            !err.empty()) {
             out.entries.resize(start);
             out.errors.push_back({n, std::move(err)});
             continue;
@@ -398,6 +414,9 @@ Compiled Parse(std::string_view text, int file, Context& ctx, std::vector<Source
             out.entries[i].line = n;
             out.entries[i].order = static_cast<int>(i - start);
         }
+    }
+    if (ehndAttrPosErrors > out.errors.size() / 2) {
+        out.errors.front().message += " (Ehnd 형식 사전으로 보입니다: ehnd 폴더에 두세요)";
     }
     return out;
 }

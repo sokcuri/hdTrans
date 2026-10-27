@@ -1,0 +1,23 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+dict:w:28820	身を横たえるんです。	몸을 눕힙니다.	fix	lookup
+dict:w:28820	自分は固い床に身体を横たえた。	자신은 단단한 바닥에 몸을 눕혔다.	fix	lookup
+dict:w:28820	彼女を横たえる。	그녀를 눕힌다.	fix	lookup
+dict:w:28820	彼女を横たえている。	그녀를 눕히고 있다.	fix	lookup
+dict:w:28820	子供を横たえます。	아이를 눕힙니다.	fix	lookup
+dict:w:28820	体を横たえない。	몸을 눕히지 않는다.	fix	lookup
+dict:w:28820	体を横たえなかった。	몸을 눕히지 않았다.	fix	lookup
+dict:w:28820	体を横たえさせた。	몸을 눕히게 했다.	fix	lookup
+dict:w:28820	ここなら体を横たえられる。	여기라면 몸을 눕힐 수 있다.	fix	lookup
+dict:w:28820	横たえろ。	눕혀라.	fix	lookup
+dict:jisjk:116506	無数のくぎの上に横たわり…	무수한 못 위에 누워…	keep	lookup
+dict:jisjk:116506	恥ずかしそうに横たわっている。	부끄러운 듯이 누워 있다.	keep	lookup
+dict:jisjk:116506	俺はビーチに横たわっていた。	나는 비치에 누워 있었다.	keep	lookup
+dict:jisjk:116506	ベッドに横たわった。	침대에 누웠다.	keep	lookup
+dict:jisjk:116506	ベッドに横たわる。	침대에 눕는다.	keep	lookup
+dict:jisjk:116506	雪……冬……横たわる未来……。	눈……겨울……눕는 미래…….	keep	lookup
+dict:jisjk:116506	布の上に横たわる人間。	천 위에 눕는 인간.	keep	lookup
+lookup:yokotaeru-boundary	こっち 横にある	여기 옆에 있다	keep	lookup
+lookup:yokotaeru-boundary	横から見たら	옆에서 보면	keep	lookup
+lookup:yokotaeru-boundary	耐えました！	참았습니다!	keep	lookup
+lookup:yokotaeru-boundary	耐えねばなるまい	참아야 할 것이다	keep	lookup

@@ -318,6 +318,13 @@ struct NamedFeature {
 };
 
 // The features a condition names with F. Each is a property of the item at the atom's position.
+// Whether the word is an ellipsis or a dash, which ends a sound said on its own (ドキドキ……).
+bool EllipsisItem(const Item* it) {
+    const std::string_view s = it->group->surface;
+    return s.find("…") != std::string_view::npos || s.find("‥") != std::string_view::npos ||
+           s.find("―") != std::string_view::npos;
+}
+
 constexpr NamedFeature kFeatures[] = {
     {"exists", [](Flusher&, const Item*) { return true; }},
     {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }},
@@ -334,12 +341,71 @@ constexpr NamedFeature kFeatures[] = {
          const Item* n = it->After();
          return !lemma.empty() && n != nullptr && ItemLemma(f, n, n->selected).starts_with(lemma + " ");
      }},
+    // The Korean is a doubled mimetic (삐걱삐걱) whose half starts the Korean of a verb after it in its
+    // clause (삐걱거리다): the verb already says the sound.
+    {"echoed-by-verb",
+     [](Flusher& f, const Item* it) {
+         if (it->selected < 0) return false;
+         const std::string_view ko = it->EntryText(it->selected);
+         if (ko.size() < 6 || ko.size() % 2 != 0 || ko.substr(0, ko.size() / 2) != ko.substr(ko.size() / 2)) return false;
+         const std::string half(ko.substr(0, ko.size() / 2));
+         // Not a sound said on its own before a pause (ドキドキ……心臓が).
+         if (const Item* n = it->After(); n != nullptr) {
+             for (int j = it->tokenIndex + 1; j < n->tokenIndex; j++) {
+                 const std::string_view t = f.w.Tok(j).text;
+                 for (const std::string_view mark : {"…", "‥", "―", "、", "。", "！", "？", "!", "?"}) {
+                     if (t.find(mark) != std::string_view::npos) return false;
+                 }
+             }
+         }
+         int words = 0;
+         for (const Item* n = it->After(); n != nullptr && words < 4 && !PauseOrEnd(n) && !EllipsisItem(n);
+              n = n->After(), words++) {
+             if (n->detail->cls == kDetailVerb && n->selected >= 0 && ItemLemma(f, n, n->selected).starts_with(half)) return true;
+         }
+         return false;
+     }},
+    // A question mark follows the word, with only other marks between (ないの!? ないの？).
+    {"question-after",
+     [](Flusher&, const Item* it) {
+         const auto asks = [](std::string_view rest) {
+             while (!rest.empty()) {
+                 const text::Rune r = text::DecodeRune(rest);
+                 if (r.cp == U'?' || r.cp == U'？') return 1;
+                 if (r.size == 0 || !RuneIn(r.cp, "!！…‥〜～~ーっッ")) return 0;
+                 rest.remove_prefix(r.size);
+             }
+             return -1;  // only marks that draw out or pause, up to the end
+         };
+         const Item* cur = it;
+         for (int n = 0; n < 4 && cur != nullptr; n++) {
+             if (const int a = asks(TextAfter(cur)); a >= 0) return a == 1;
+             cur = cur->After();
+             if (cur == nullptr) return false;
+             if (const int a = asks(cur->group->surface); a >= 0) return a == 1;
+         }
+         return false;
+     }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
     // The line uses the tic ぽい (PoiLine).
     {"poi-line", [](Flusher& f, const Item*) { return f.w.settings.poiTic; }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
+    {"after-space", [](Flusher& f, const Item* it) {
+         return it->start == 0 && it->tokenIndex >= 0 &&
+                f.w.tokens[static_cast<std::size_t>(it->tokenIndex)].afterSpace;
+     }},
+    {"after-blank", [](Flusher& f, const Item* it) {
+         if (it->start != 0 || it->tokenIndex <= 0) return false;
+         const int type = f.w.Tok(it->tokenIndex - 1).type;
+         return type == tokenizer::kTypeAsciiSpace || type == tokenizer::kTypeWideSpace;
+     }},
+    {"filler", [](Flusher&, const Item* it) {
+         return (it->Code(it->selected).starts_with("32") ||
+                 (it->detail->cls == kDetailInfo &&
+                  dict::InClass(HDTRANS_CLASS("word.pause-filler"), it->group->surface)));
+     }},
     {"number", [](Flusher&, const Item* it) { return NumberSurface(it->group->surface); }},
     {"quote-verb", [](Flusher&, const Item* it) { return QuoteVerbFollows(it); }},
     // A fixed word span that the phrase or sound stage already read (an utterance in brackets).
@@ -378,6 +444,8 @@ constexpr NamedFeature kFeatures[] = {
     {"narrated", [](Flusher& f, const Item* it) { return Narrated(f, it); }},
     // The word stands outside quotes in a document that writes its speech in 「」: narration.
     {"narration", [](Flusher& f, const Item* it) { return f.w.settings.narrated && !it->InQuote(); }},
+    // The word stands inside 「」 or 『』 (Item::InQuote).
+    {"quoted", [](Flusher&, const Item* it) { return it->InQuote(); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
@@ -398,13 +466,18 @@ constexpr NamedFeature kFeatures[] = {
          return std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes->sem.HasPrefix("QPN"); });
      }},
     // The verb was analysed as a causative.
-    {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
+    {"causative", [](Flusher&, const Item* it) {
+         return it->detail->record == 2 ||
+                (it->detail->syntheticCausative && it->detail->voice == Voice::Potential);
+     }},
     // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
     {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
     // A dictionary word that is the passive of a dictionary verb (書かれ, 使われ, 見られ; PassiveBaseVerb).
     {"lexical-passive", [](Flusher& f, const Item* it) { return !PassiveBaseVerb(f, it->group->surface).empty(); }},
     // The verb was analysed as a causative-passive (待たされ, 読ませられ).
-    {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
+    {"causative-passive", [](Flusher&, const Item* it) {
+         return it->DetailRecord() == 5 && it->detail->voice != Voice::Potential;
+     }},
     // The (ら)れ of the verb reads as the respectful form (DecideVoice: 確認されますか).
     {"respectful", [](Flusher&, const Item* it) { return it->detail->Yougo() && it->detail->voice == Voice::Respectful; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
@@ -472,7 +545,10 @@ constexpr NamedFeature kFeatures[] = {
          return false;
      }},
     // The conjugation of a verb in the potential (潜れる, 使える).
-    {"potential", [](Flusher&, const Item* it) { return it->DetailRecord() == 4; }},
+    {"potential", [](Flusher&, const Item* it) {
+         return it->DetailRecord() == 4 ||
+                (it->detail->syntheticCausative && it->detail->voice == Voice::Potential);
+     }},
     // The Korean of the chosen candidate is an adjective or 있다, 없다 (배고프다, 효과가 있다): a
     // marker of an adjective family, of a family whose declarative is bare, or a stem that ends like
     // an adjective of ko-adjective.stem-end.
@@ -667,6 +743,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"clip-ending", CxVerb::ClipEnding},
         {"set-base-verb", CxVerb::SetBaseVerb},
         {"draw-ending", CxVerb::DrawEnding},
+        {"take-prev-target", CxVerb::TakePrevTarget},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -675,7 +752,14 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         CxAction a;
         const std::size_t at = word.find('@');
         const std::string_view verb = word.substr(0, at);
-        if (at != std::string_view::npos && !rules::ParseDelta(word.substr(at + 1), a.delta)) {
+        std::string_view position = at == std::string_view::npos ? std::string_view() : word.substr(at + 1);
+        a.scanned = position.starts_with("scan");
+        if (a.scanned) position.remove_prefix(std::string_view("scan").size());
+        if (at != std::string_view::npos && !position.empty() && !rules::ParseDelta(position, a.delta)) {
+            tokens.Fail("bad action position");
+            break;
+        }
+        if (at != std::string_view::npos && position.empty() && !a.scanned) {
             tokens.Fail("bad action position");
             break;
         }
@@ -708,7 +792,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         const char* bad = nullptr;
         if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
             a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding ||
-            a.verb == CxVerb::SetBaseVerb || a.verb == CxVerb::DrawEnding) {
+            a.verb == CxVerb::SetBaseVerb || a.verb == CxVerb::DrawEnding || a.verb == CxVerb::TakePrevTarget) {
             out.push_back(std::move(a));
             continue;
         }
@@ -775,6 +859,10 @@ bool SurfaceKeys(const ConstructionTable& t, uint32_t i, std::vector<std::string
 
 // Fills the surface index of family c.
 void IndexFamily(const ConstructionTable& t, CxFamily& c) {
+    if (std::vector<std::string_view> guard; c.guard != kNoGuard && SurfaceKeys(t, c.guard, guard)) {
+        c.guardKeyed = true;
+        c.guardSurfaces.insert(guard.begin(), guard.end());
+    }
     std::vector<std::vector<std::string_view>> keys(c.rows.size());
     std::vector<bool> keyed(c.rows.size());
     for (std::size_t k = 0; k < c.rows.size(); k++) {
@@ -840,16 +928,41 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             std::string_view head = line.substr(3);
             while (head.starts_with(' ')) head.remove_prefix(1);
             const std::vector<std::string_view> f = SplitTabs(head);
-            const std::size_t space = f.size() == 3 ? f[1].rfind(' ') : std::string_view::npos;
+            const bool guarded = f.size() == 4;
+            const std::size_t space = f.size() == 3 || guarded ? f[1].rfind(' ') : std::string_view::npos;
             int stage = 0;
-            if (f.size() != 3 || !FamilyName(f[0]) || !f[1].starts_with("after ") || space < 6 ||
-                !rules::ParseInt(f[1].substr(space + 1), 1, 1 << 20, stage) || f[2].empty()) {
-                fail(number, "a family line is //= FAMILY <TAB> after PASS STAGE <TAB> what it is for");
-            } else if (!families.emplace(f[0], t.families.size()).second) {
-                fail(number, "a second line for the family " + std::string(f[0]));
-            } else {
-                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6, space - 6)), stage, {}, number, {}, {}, false});
+            if ((f.size() != 3 && !guarded) || !FamilyName(f[0]) || !f[1].starts_with("after ") || space < 6 ||
+                !rules::ParseInt(f[1].substr(space + 1), 1, 1 << 20, stage) || f.back().empty() ||
+                (guarded && !f[2].starts_with("guard "))) {
+                fail(number, "a family line is //= FAMILY <TAB> after PASS STAGE [<TAB> guard CONDITION] <TAB> what it is for");
+                continue;
             }
+            if (families.contains(f[0])) {
+                fail(number, "a second line for the family " + std::string(f[0]));
+                continue;
+            }
+            uint32_t guard = internal::kNoGuard;
+            if (guarded) {
+                if (!ExpandNamed(f[2].substr(std::string_view("guard ").size()), named, expanded, expandError)) {
+                    fail(number, "guard: " + expandError);
+                    continue;
+                }
+                guard = static_cast<uint32_t>(t.nodes.size());
+                rules::Tokens tokens(expanded);
+                CxSink sink(t);
+                if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
+                    fail(number, std::string("guard: ") + (tokens.error != nullptr ? tokens.error : "trailing tokens"));
+                    continue;
+                }
+            }
+            families.emplace(f[0], t.families.size());
+            internal::CxFamily family;
+            family.name = f[0];
+            family.after = f[1].substr(6, space - 6);
+            family.stage = stage;
+            family.line = number;
+            family.guard = guard;
+            t.families.push_back(std::move(family));
             continue;
         }
         if (line.starts_with("//~")) {
@@ -931,7 +1044,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, "condition: " + expandError);
             continue;
         }
-        CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, number};
+        CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, false, number};
         rules::Tokens tokens(expanded);
         CxSink sink(t);
         if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
@@ -943,6 +1056,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, std::string("actions: ") + error);
             continue;
         }
+        row.scans = std::ranges::any_of(row.actions, &internal::CxAction::scanned);
         ids.emplace_back(id);
         t.families[family->second].rows.push_back(static_cast<int>(t.rows.size()));
         t.rows.push_back(std::move(row));
@@ -1121,12 +1235,37 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     return n.kind != rules::BodyKind::Or && all;
 }
 
+// The word where the first scan of the condition at node i, outside a !1, finds its target at it;
+// null for none. Tried only for a row that fired and places an action by @scan.
+const Item* Scanned(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom || n.kind == rules::BodyKind::Not) return nullptr;
+    if (n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight) {
+        const uint32_t target = i + 1;
+        const uint32_t barrier = t.nodes[target].end;
+        const int step = n.kind == rules::BodyKind::ScanLeft ? -1 : 1;
+        int k = 0;
+        for (const Item* x = Neighbour(it, step); x != nullptr && (n.count == 0 || k < static_cast<int>(n.count));
+             x = Neighbour(x, step), k++) {
+            if (Eval(f, t, target, x)) return x;
+            if (Eval(f, t, barrier, x)) return nullptr;
+        }
+        return nullptr;
+    }
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) {
+        if (const Item* x = Scanned(f, t, child, it)) return x;
+    }
+    return nullptr;
+}
+
 // The marker a verb written into the word takes: '$' on an i-adjective, whose families conjugate
 // with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
 char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
 
-void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
-    Item* it = Neighbour(origin, a.delta);
+void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, const internal::CxAction& a,
+           Selection source) {
+    Item* it = Neighbour(a.scanned ? scanned : origin, a.delta);
     if (it == nullptr) return;
     switch (a.verb) {
         case internal::CxVerb::SelectLemma:
@@ -1206,6 +1345,16 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             it->AssignEntrySurface(it->selected, a.value + std::string(it->EntryText(it->selected)), source);
             break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
+        case internal::CxVerb::TakePrevTarget: {
+            // The word writes the Korean of the word before it, which then writes nothing, word or
+            // ending: the predicate moves onto this word's ending (堂々と + している 당당하다).
+            Item* prev = it->prev;
+            if (prev == nullptr || prev->selected < 0 || it->selected < 0) break;
+            it->AssignEntrySurface(it->selected, std::string(prev->EntryText(prev->selected)), source);
+            prev->AssignEntrySurface(prev->selected, std::string(), source);
+            if (const int at = prev->DirectIndex(); at >= 0) prev->AssignDirectSlot(at, std::string(), source);
+            break;
+        }
         case internal::CxVerb::ClipEnding:
         case internal::CxVerb::DrawEnding: {
             // The mark after the ending, or after the word that has none; the restore stage writes the
@@ -1298,16 +1447,22 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             // A translation that ends in the old tail is the verb whose dictionary form is its head
             // and the new tail (기다리게 &C6@ with "게 &C6@" "다" is 기다리다).
             const std::string_view target = it->EntryText(it->selected);
-            if (target.size() > a.value.size() && target.ends_with(a.value)) {
-                const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
-                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, VerbSigil(it), "", f.families).target, source);
+            // The head may be empty when the new tail is a verb of its own (시&AQ@ with "시&AQ@" "하다").
+            const std::string lemma = target.ends_with(a.value)
+                                          ? std::string(target.substr(0, target.size() - a.value.size())) + a.with
+                                          : std::string();
+            if (lemma.size() > std::string_view("다").size()) {
+                // A stem whose class its spelling leaves open (붙이다: 붙여 or 붙이어) is a regular one.
+                output::Conjugated c = output::Conjugating(lemma, VerbSigil(it), "", f.families);
+                if (c.target.empty()) c = output::Conjugating(lemma, VerbSigil(it), "규칙", f.families);
+                if (!c.target.empty()) it->AssignEntrySurface(it->selected, c.target, source);
             }
             break;
         }
         case internal::CxVerb::SetActive:
-            // The verb is written in the active voice: its Korean without the passive or the
-            // causative-passive (읽혀지다, 읽게 되다 → 읽다).
-            if (it->DetailRecord() == 1 || it->DetailRecord() == 5) {
+            // The verb is written in the plain voice: its Korean without the passive, the causative,
+            // the potential or the causative-passive (읽혀지다, 읽게 하다, 읽을 수 있다, 읽게 되다 → 읽다).
+            if (it->DetailRecord() == 1 || it->DetailRecord() == 2 || it->DetailRecord() == 4 || it->DetailRecord() == 5) {
                 it->detail->record = 0;
                 if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
                 it->choice = source;
@@ -1331,7 +1486,11 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
 }  // namespace
 
 void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_view name)) {
-    const ConstructionTable& t = internal::BuiltinConstructions();
+    internal::RunConstructions(f, internal::BuiltinConstructions(), pass, skip);
+}
+
+void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::size_t pass,
+                                bool (*skip)(std::string_view name)) {
     if (pass >= t.afterPass.size()) return;
     rules::Tally* tally = f.w.settings.ruleTally;
     if (tally != nullptr && tally->constructionRuns.size() < t.rows.size()) {
@@ -1342,6 +1501,8 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
         for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+            if (family.guardKeyed && !family.guardSurfaces.contains(std::string_view(it->group->surface))) continue;
+            if (family.guard != internal::kNoGuard && !Eval(f, t, family.guard, it)) continue;
             // Rule counts try every row.
             const std::vector<int>* rows = &family.rows;
             if (family.indexed && tally == nullptr) {
@@ -1357,7 +1518,9 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
                     if (fired) tally->constructionFires[static_cast<std::size_t>(r)]++;
                 }
                 if (!fired) continue;
-                for (const internal::CxAction& a : row.actions) Apply(f, t, it, a, {Provenance::Rewrite, r});
+                // The chain is the flusher's; the conditions read it through const pointers.
+                Item* found = row.scans ? const_cast<Item*>(Scanned(f, t, row.root, it)) : nullptr;
+                for (const internal::CxAction& a : row.actions) Apply(f, t, it, found, a, {Provenance::Rewrite, r});
                 break;
             }
         }

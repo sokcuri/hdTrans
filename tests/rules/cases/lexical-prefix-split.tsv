@@ -1,0 +1,34 @@
+# 규칙: LEX-65
+rule	input	expected	kind	layer
+dict:missing-compounds	大間違いをした	큰 착각을 했다	fix	lookup
+dict:missing-compounds	こんなので丸く収まると思ったら大間違いだぞー！	이런 것으로 둥글게 들어간다고 생각하면 큰 착각이야~!	fix	lookup
+dict:missing-compounds	とんだ大間違いだった	터무니 없는 큰 착각이었다	fix	lookup
+lookup:prefix-word	大間抜けだ	대얼간이다	fix	lookup
+lookup:prefix-word	この大間抜けめ	이 대얼간이 녀석	fix	lookup
+dict:missing-compounds	大満足だって！	대만족이래!	fix	lookup
+dict:missing-compounds	最後に一本取れたから大満足かな	마지막으로 이길 수 있었으니까 대만족일까	fix	lookup
+lookup:prefix-word	今回は大奮発してもらったよ	이번에는 대분발받았어	fix	lookup
+lookup:prefix-word	大善戦だよ！	대선전이야!	fix	lookup
+lookup:prefix-word	大貴族の邸宅には似つかわしくない大声	대귀족의 저택에는 어울리지 않은 큰 소리	fix	lookup
+lookup:prefix-word	大貴族との繋がりなどなくとも	대귀족과의 연결 같은 건 없어도	fix	lookup
+lookup:prefix-word	大進歩だね	대진보구나	fix	lookup
+dict:missing-compounds	大手柄を立てた	큰 공을 세웠다	fix	lookup
+lookup:prefix-word	実はここにはもう１本脇道があった。	실은 여기에는 또 1개 옆길이 있었다.	fix	lookup
+lookup:prefix-word	新改装された戦艦	신개장된 전함	fix	lookup
+lookup:prefix-word	米出身の艦娘	미 출신의 칸무스	fix	lookup
+lookup:prefix-word	最上さん、作戦前の整備ですか？	모가미 씨, 작전 전의 정비입니까?	keep	lookup
+lookup:prefix-word	大東さん！こんにちは。	오오토 씨! 안녕하세요.	keep	lookup
+lookup:prefix-word	柏木と大見にそんなもの分かるわけがない。	카시와기와 오미에 그런 것 알 리가 없다.	keep	lookup
+lookup:prefix-word	未来ちゃん、相談があるんだけど	미라이짱, 상담이 있는데	keep	lookup
+lookup:prefix-word	春日大橋を渡りはじめた。	봄날 오오하시를 건너기 시작했다.	keep	lookup
+lookup:prefix-word	多賀大社前	다가 다이샤 전	keep	lookup
+lookup:prefix-word	大間町の役場	오마정의 동사무소	keep	lookup
+lookup:prefix-word	小西洋子さん	코니시 요코 씨	keep	lookup
+lookup:prefix-word	大好きだよ	정말 좋아해	keep	lookup
+lookup:prefix-word	大喧嘩した	크게 싸웠다	keep	lookup
+lookup:prefix-word	大手企業に勤める	대기업에 근무한다	keep	lookup
+dict:missing-compounds	大一番を迎える	큰 승부를 맞이한다	fix	lookup
+lookup:prefix-word	大失敗した	대실패했다	keep	lookup
+lookup:prefix-word	大川沿いを歩く	has:오오카와	keep	lookup
+lookup:prefix-word	大川側の道	has:오오카와	keep	lookup
+lookup:prefix-word	大川付近	오오카와 부근	keep	lookup

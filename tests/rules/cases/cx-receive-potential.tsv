@@ -10,7 +10,7 @@ cx:receive-potential:10	「謝ることじゃない。聞いてきてもらえ�
 cx:receive-potential:10	「いえ、お話を聞いてもらえただけで十分です」	「아뇨, 이야기를 들어 준 것만으로 충분합니다」	fix	rewrites
 cx:receive-potential:10	「そう言ってもらえてよかったです」	「그렇게 말해 줘서 좋았습니다」	fix	rewrites
 cx:receive-potential:10	「あはっ、そう言ってもらえると、わたしもうれしいです……と、そうだ」	「아핫, 그렇게 말해 주면, 나도 기쁩니다……아, 맞다」	fix	rewrites
-cx:receive-potential:10	今日はとってもゆっくりさせてもらえて、ありがとうございました。	오늘은 매우 천천히 시켜 주어서, 감사합니다.	fix	rewrites
+cx:receive-potential:10	今日はとってもゆっくりさせてもらえて、ありがとうございました。	오늘은 매우 천천히 하게 해 주어서, 감사합니다.	fix	rewrites
 cx:receive-potential:10	「……私がお姉ちゃんのフリをして、あの子に好きになってもらえれば……」	「……내가 언니의 척해, 그 아이에게 좋아하게 돼 주면……」	fix	rewrites
 cx:receive-potential:10	教えてもらえたら嬉しい	가르쳐 주면 기쁘다	fix	rewrites
 cx:receive-potential:5	手伝ってもらえますか？	도움을 받을 수 있습니까?	keep	rewrites

@@ -21,6 +21,7 @@
 #include "core/dict/char_readings.h"
 #include "core/text/utf8.h"
 #include "core/text/lines.h"
+#include "core/tokenizer/classify.h"
 #include "core/userdict/userdict.h"
 
 namespace hdTrans::pipeline {
@@ -163,6 +164,14 @@ const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view
 
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
                                                bool extraBuiltin) {
+    std::vector<std::string> canonicalLines;
+    if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
+            return line.find("゙") != std::string::npos || line.find("゚") != std::string::npos;
+        })) {
+        canonicalLines.reserve(lines.size());
+        for (const std::string& line : lines) canonicalLines.push_back(internal::ComposeKanaPairs(line));
+        lines = canonicalLines;
+    }
     auto doc = std::make_unique<DocumentContext>();
     doc->snap = &snap;
     doc->extraBuiltin = extraBuiltin;
@@ -271,17 +280,66 @@ std::optional<std::string> KanaNameLine(const dict::Snapshot& snap, std::string_
     return std::string(line.substr(0, at)) + name + std::string(line.substr(at + t.size()));
 }
 
+// The marks around a lone kanji written as the text path writes them (！ !, （ ().
+std::string WrittenMarks(std::string_view marks) {
+    std::string out;
+    for (std::size_t i = 0; i < marks.size();) {
+        const text::Rune r = text::DecodeRune(marks.substr(i));
+        if (r.cp >= 0xFF01 && r.cp <= 0xFF5E) {
+            out += static_cast<char>(r.cp - 0xFEE0);  // full-width ASCII
+        } else {
+            tokenizer::AppendCanonical(out, r.cp);
+        }
+        i += std::max<std::size_t>(1, r.size);
+    }
+    while (!out.empty() && out.back() == ' ') out.pop_back();
+    return out;
+}
+
+std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line, bool marked = false);
+
+// A lone kanji in brackets or before sentence marks, read like the bare line ((望) (노조미),
+// 恵？ 메구미?, 勝！ 카츠!) unless it is a word (NameLine with marked).
+std::optional<std::string> MarkedKanjiNameLine(const dict::Snapshot& snap, std::string_view t) {
+    constexpr std::u32string_view kOpen = U"（(「『【", kClose = U"）)」』】", kMarks = U"！？!?…‥。、～ー";
+    std::size_t start = 0, end = t.size();
+    const text::Rune first = text::DecodeRune(t);
+    const std::size_t bracket = kOpen.find(first.cp);
+    if (bracket != std::u32string_view::npos) start = first.size;
+    while (end > start) {
+        const text::Rune last = names::internal::RuneBefore(t, end);
+        if (kMarks.find(last.cp) == std::u32string_view::npos) break;
+        end -= last.size;
+    }
+    std::size_t closeAt = end;
+    if (bracket != std::u32string_view::npos) {
+        const text::Rune last = names::internal::RuneBefore(t, end);
+        if (end <= start || last.cp != kClose[bracket]) return std::nullopt;
+        closeAt = end - last.size;
+    }
+    const std::string_view core = t.substr(start, closeAt - start);
+    if ((start == 0 && end == t.size()) || names::internal::RuneCount(core) != 1 ||
+        !names::internal::AllRunes(core, names::internal::IsKanji)) {
+        return std::nullopt;
+    }
+    const std::optional<std::string> name = NameLine(snap, core, true);
+    if (!name) return std::nullopt;
+    return WrittenMarks(t.substr(0, start)) + *name + WrittenMarks(t.substr(closeAt));
+}
+
 // A line that is one name and nothing else, a speaker line before a quote: a run
 // of kanji with a person reading, read as that person (筧 카케이), or a hiragana name
-// (KanaNameLine).
-std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line) {
+// (KanaNameLine). A marked lone kanji (MarkedKanjiNameLine) is also a word where an adjective or
+// adjectival noun has it as its stem (好, 楽) or a noun row reads it, even as its Sino-Korean
+// reading (王 왕); a bare one, a speaker label, only where a noun reads it otherwise.
+std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line, bool marked) {
     const std::string_view t = names::internal::TrimLineSpace(line);
     const std::size_t runes = names::internal::RuneCount(t);
     if (runes == 0 || runes > 6) return std::nullopt;
     if (names::internal::AllRunes(t, names::internal::IsHiragana)) return KanaNameLine(snap, line, t);
     if (!names::internal::AllRunes(t, names::internal::IsKanji)) return std::nullopt;
     std::string surname, given;  // the first person readings of each kind
-    bool word = false;           // a noun of its own beyond the kanji's Sino-Korean reading
+    bool word = false;           // a word of its own beyond the kanji's Sino-Korean reading
     auto person = [&](const dict::Codes* codes, std::string_view target) {
         if (codes == nullptr || !codes->sem.Text().starts_with("QPN") || !names::internal::IsHangulText(target)) return;
         std::string& slot = codes->gram.Text().starts_with("Wa") ? surname : given;
@@ -290,8 +348,14 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
     auto noun = [&](const dict::Codes* codes, std::string_view target) {
         if (codes == nullptr || codes->sem.Text().starts_with("QPN") || codes->sem.Text().starts_with("QCT")) return;
         const char tag = codes->partText.empty() ? 0 : codes->partText[0];
+        if (marked && (tag == 'H' || tag == 'P') && codes->partText.size() > 1 &&
+            (codes->partText[1] == '7' || codes->partText[1] == '8')) {
+            word = true;
+            return;
+        }
         if (tag != 'N' && tag != 'I') return;
-        if (runes == 1) {
+        if (marked && codes->sem.Text().find("XXX") != std::string_view::npos) return;
+        if (!marked && runes == 1) {
             const std::optional<char32_t> sino = dict::Written(text::DecodeRune(t).cp);
             if (sino && target == Utf8Of(*sino)) return;
         }
@@ -321,8 +385,15 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
 LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     LineFacts facts;
     if (line.ends_with('\r')) line.remove_suffix(1);
+    std::string canonical;
+    if (line.find("゙") != std::string_view::npos || line.find("゚") != std::string_view::npos) {
+        canonical = internal::ComposeKanaPairs(line);
+        line = canonical;
+    }
     names::Registry& r = *doc.registry;
-    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)));
+    std::string cueText;
+    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)), &cueText, &facts.cued);
+    const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
         if (o.noun) {
@@ -339,14 +410,19 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
         if (plain.count(t) == 0) facts.skip.push_back(t);
     }
     std::sort(facts.skip.begin(), facts.skip.end());
-    facts.persons = internal::PersonPlaces(*doc.snap, facts.text, doc.registry.get(), &doc.persons_);
+    facts.persons = internal::PersonPlaces(*doc.snap, cues, doc.registry.get(), &doc.persons_);
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
+    // A reading in the line ((恭(きょう)）) is read, not the name.
+    if (!facts.wholeLine && names::internal::TrimLineSpace(facts.text) == names::internal::TrimLineSpace(line)) {
+        facts.wholeLine = MarkedKanjiNameLine(*doc.snap, names::internal::TrimLineSpace(facts.text));
+    }
     facts.verse = doc.verseLines.count(std::string(line)) > 0;
     facts.prose = names::ProseRuns(names::StripRuby(line));
-    for (const names::NameCue& c : CuesOf(doc, facts.text)) facts.cued.push_back(c.key);
+    for (const names::NameCue& c : CuesOf(doc, cues)) facts.cued.push_back(c.key);
     std::sort(facts.cued.begin(), facts.cued.end());
+    facts.cued.erase(std::unique(facts.cued.begin(), facts.cued.end()), facts.cued.end());
     return facts;
 }
 
@@ -378,7 +454,10 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     out.confirmed = facts.skip.empty() ? &doc.accepted : &found->second.confirmed;
     out.persons.insert(facts.persons.begin(), facts.persons.end());
     out.cued = doc.cued;
-    out.cued.insert(facts.cued.begin(), facts.cued.end());
+    for (const std::string& t : facts.cued) {
+        const std::vector<std::size_t> keys = doc.snap->PersonKeysAt(t);
+        if (!keys.empty() && keys.back() == t.size()) out.cued.insert(t);
+    }
     out.prose = facts.prose;
     return out;
 }

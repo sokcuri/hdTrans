@@ -1,0 +1,19 @@
+# 규칙: NUM-12
+rule	input	expected	kind	layer
+normalize:circle-zero	〇〇さんが来た	○○ 씨가 왔다	fix	normalize
+normalize:circle-zero	〇〇市に住んでいる	○○시에 살고 있다	fix	normalize
+normalize:circle-zero	〇か×で答えて	has:○나	fix	normalize
+normalize:circle-zero	〇と×が描かれた扉	○와×가 그려진 문	fix	normalize
+normalize:circle-zero	○○さんが来た	○○ 씨가 왔다	fix	compose
+normalize:circle-zero	二〇二六年の春	2026년 봄	keep	normalize
+normalize:circle-zero	第三〇条を読む	제30조를 읽는다	keep	normalize
+normalize:circle-zero	ちょうど〇時よ	마침 0시야	keep	normalize
+normalize:circle-zero	現在時刻、〇〇〇〇、です	현재 시각, 0000, 입니다	keep	normalize
+normalize:circle-zero	二時〇〇分に集合	has:2시00분	keep	normalize
+normalize:circle-zero	時間は〇〇:〇〇です	has:00:00	keep	normalize
+normalize:circle-zero	十時〇分に起きた	has:10시0분	keep	normalize
+normalize:circle-zero	〇〇年〇月〇日に届いた	has:○○	fix	normalize
+normalize:circle-zero	令和〇年に建てた	has:○년	fix	rewrites
+normalize:circle-zero	〇〇年〇月〇日に届いた	has:○○년 ○월 ○일	fix	rewrites
+normalize:circle-zero	林道を歩く	산길을 걷는다	keep	rewrites
+normalize:circle-zero	赤か青で答えて	빨강이나 파랑으로 대답해	keep	local

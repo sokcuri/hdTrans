@@ -152,6 +152,7 @@ char32_t BracketForm(char32_t r) {
         case U'’': return U'＇';
         case U'〝': return U'˝';
         case U'〟': return U'〃';
+        case U'−': return U'－';
     }
     return 0;
 }
@@ -173,7 +174,7 @@ Pieces RestoreLineBrackets(const Pieces& in, const Pieces& out) {
             if (const char32_t form = BracketForm(r); form != 0) {
                 typed[form].push_back(KoreanQuote(r));
                 retyped = true;
-            } else if (Contains(U"「」()＇˝〃", r)) {
+            } else if (Contains(U"「」()＇˝〃－", r)) {
                 typed[r].push_back(r);
             }
         }
@@ -895,6 +896,8 @@ std::string WriteLaughter(std::string_view line, std::string_view source) {
         }
         out.append(line, byteAt(copied), byteAt(start) - byteAt(copied));
         for (std::size_t n = 0; n < count; n++) out += korean;
+        // Laughter ends what it follows: a word typed right after it is written apart (있어ㅋ 미도리).
+        if (end < rs.size() && IsSyllable(rs[end].cp)) out += ' ';
         copied = end;
         changed = true;
     }

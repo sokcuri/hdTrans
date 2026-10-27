@@ -1,0 +1,8 @@
+#! layer=base
+# 迷惑: 명사로 홀로 쓰면 `민폐`, する 앞과 굳은 말에서는 `폐`
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+迷惑	민폐	N110			GN							meiwaku:1
+迷惑	곤란해	N110		Hd	GN	8640	||3 S+1== "Lし" S+1== "Lす" S+1== "Lさ"	迷惑는 する 앞에서 곤란해하다로 고른다.				meiwaku:2
+近所迷惑	이웃 민폐	N110			GN							meiwaku:4
+迷惑が掛か	민폐가 &C6@	M448			GN							meiwaku:5
+迷惑がかか	민폐가 &C6@	M448			GN							meiwaku:6

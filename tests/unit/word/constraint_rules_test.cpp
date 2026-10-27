@@ -116,6 +116,9 @@ const dict::Snapshot* Dictionary() {
          "ちゃうわ\t아니거든\tN110\t\t\tGN\t117\n"
          "嘘\t거짓말\tN110\t\t\tGN\t118\n"
          "見\t&AY@\tM417\t\t\tGN\t119\n"
+         "だ\t(이)다\tP200\t\t\tGN\t122\n"
+         "だ\t만&AJ@\tM4U1\t\t\tGN\t123\n"
+         "だけ\t만\tP211\t\t\tGN\t124\n"
          "バレ\t들&AA@\tM417\t\t\tGN\t120\n"},
         {0, "names.tsv",
          "#! layer=names\n"
@@ -171,7 +174,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{48});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{49});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -370,6 +373,15 @@ HD_TEST(constraint_o_stem_nasai) {
 
 // いただけ before だ, で, じゃ, に, の or か is いた and だけ (待っていただけだ); before a verb
 // ending it stays (待っていただける).
+// A だ that け follows reads no verb: the け makes the particle だけ (一度だけやらせて).
+HD_TEST(constraint_da_before_ke) {
+    CheckCases({
+        {"一度だけやらせて", "だけやらせて", "だ", "(이)다"},
+        {"一度だけやらせて", "だけやらせて", "だけ", "만"},
+        {"そうだ。", "だ。", "だ", "만&AJ@ (이)다"},
+    });
+}
+
 HD_TEST(constraint_itadake_dake) {
     CheckCases({
         {"待っていただけだ", "いただけだ", "いただけ", ""},

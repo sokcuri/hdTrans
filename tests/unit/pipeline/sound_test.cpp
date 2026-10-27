@@ -226,6 +226,14 @@ HD_TEST(pipeline_sound) {
         {"「む…、むっ」", "「む…、뭇」"},
         {"「ちょ…直撃」", "「\xEE\x80\x80" "…直撃」"},
         {"「ちょ、直撃」", "「잠깐、直撃」"},
+        // Before a space or laughter too, but for a conjunction and a syllable that starts the
+        // reading of the kanji word after the space.
+        {"ちょ 待って", "잠깐 待って"},
+        {"ちょｗｗ待って", "잠깐ｗｗ待って"},
+        {"ちょwhat", "ちょwhat"},
+        {"さ 行こう", "자 行こう"},
+        {"で 何", "で 何"},
+        {"む 無理", "む 無理"},
         {"「う…美味い」", "「\xEE\x80\x80" "…美味い」"},
         // Longer pieces that each begin the next: a kana mark for each kana of the piece and
         // a rest mark for each kana of the word it does not reach.
@@ -1151,6 +1159,7 @@ HD_TEST(pipeline_contracted_n) {
         {"帰んなよ", "帰んなよ"},  // a godan verb in る: as often the imperative 帰りな
         {"邪魔すんな", "邪魔するな"},  // する by its forms after a noun
         {"想像できんな", "想像できんな"},  // できる: a verb of ability takes no prohibition
+        {"火縄銃には見えんな", "火縄銃には見えんな"},  // 見える: a perceived state takes none either
         {"帰んない", "帰らない"},
         {"帰んねえ", "帰らない"},
         {"信じらんない", "信じられない"},

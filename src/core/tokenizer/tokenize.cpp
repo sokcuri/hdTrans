@@ -123,7 +123,8 @@ private:
         size_t from = i;
         while (from > 0 && i - from < reach &&
                (Class(s_[from - 1]) != 0 ||
-                (word != SpaceWord::Phrase && blank(s_[from - 1]) && from > 1 && Class(s_[from - 2]) != 0))) {
+                (word != SpaceWord::Phrase && word != SpaceWord::Filler && blank(s_[from - 1]) && from > 1 &&
+                 Class(s_[from - 2]) != 0))) {
             from--;
         }
         size_t to = i + 1;
@@ -159,20 +160,8 @@ private:
             while (k > start && text::IsKanji(s_[k - 1])) k--;
             if (k > start && Class(s_[k - 1]) == kClassKatakana) return false;
         }
-        // A piece that starts with a small kana or a long mark goes on with the word before it
-        // (消す っていう).
-        if (OneOf(At(i + 1), U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮーヽヾゝゞ")) return false;
-        // A piece said again after the space is a copy, which the word stage reads on its own
-        // (やめて やめて).
-        if (i - start == end - i - 1 && std::equal(s_.begin() + start, s_.begin() + i, s_.begin() + i + 1)) return false;
-        // The last piece before a mark or the end may end the one before (そうだ ね……).
-        if (end == s_.size() || !blank(s_[end])) {
-            std::string before, after;
-            for (size_t k = start; k < i; k++) text::AppendRune(before, s_[k]);
-            for (size_t k = i + 1; k < end; k++) text::AppendRune(after, s_[k]);
-            if ((*joins_)(before, after, SpaceWord::Ending)) return false;
-        }
-        // Pieces of one character in a row up to the space and on after it.
+        // Pieces of one character in a row up to the space and on after it: a letter of the
+        // spelling is not a filler even when it has that reading on its own.
         size_t run = 0;
         for (size_t from = start, to = i; to - from == 1;) {
             run++;
@@ -186,7 +175,22 @@ private:
             from = to + 1;
             for (to = from; to < s_.size() && Class(s_[to]) != 0;) to++;
         }
-        return run < (kanji ? 2u : 3u) && !Joins(i, SpaceWord::Name) && !Joins(i, SpaceWord::Phrase);
+        if (run >= (kanji ? 2u : 3u)) return false;
+        if (Joins(i, SpaceWord::Filler)) return true;
+        // A piece that starts with a small kana or a long mark goes on with the word before it
+        // (消す っていう).
+        if (OneOf(At(i + 1), U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮーヽヾゝゞ")) return false;
+        // A piece said again after the space is a copy, which the word stage reads on its own
+        // (やめて やめて).
+        if (i - start == end - i - 1 && std::equal(s_.begin() + start, s_.begin() + i, s_.begin() + i + 1)) return false;
+        // The last piece before a mark or the end may end the one before (そうだ ね……).
+        if (end == s_.size() || !blank(s_[end])) {
+            std::string before, after;
+            for (size_t k = start; k < i; k++) text::AppendRune(before, s_[k]);
+            for (size_t k = i + 1; k < end; k++) text::AppendRune(after, s_[k]);
+            if ((*joins_)(before, after, SpaceWord::Ending)) return false;
+        }
+        return !Joins(i, SpaceWord::Binding) && !Joins(i, SpaceWord::Phrase);
     }
 
     // Ends the Japanese token being built at a space that parts two words; the next one goes on
@@ -196,9 +200,8 @@ private:
         afterSpace_ = true;
     }
 
-    // Whether the letter at i after kana goes on with the Japanese token: a word of the dictionary
-    // spans the kana before it and the letter (うp, おk; SpaceJoins on the text before and the
-    // letters, folded, with the Japanese text after them).
+    // A Latin run after kana joins the Japanese token only when a dictionary word spans the
+    // whole folded run (うp, おk). A following digit makes it an identifier instead.
     bool KeptLetter(size_t i) const {
         if (joins_ == nullptr || (prev_ != kClassHiragana && prev_ != kClassKatakana)) return false;
         constexpr size_t kBefore = 10, kAfter = 10;
@@ -208,6 +211,7 @@ private:
         for (size_t k = from; k < i; k++) text::AppendRune(before, s_[k]);
         size_t to = i;
         while (to < s_.size() && IsAlphaRune(s_[to])) text::AppendRune(after, Fold(s_[to++]));
+        if (IsDigitRune(At(to))) return false;
         for (const size_t end = to + kAfter; to < s_.size() && to < end && Class(s_[to]) != 0; to++) {
             text::AppendRune(after, s_[to]);
         }
@@ -401,9 +405,9 @@ private:
             case U'＜': case U'＞': case U'‘': case U'’': case U'〔': case U'〕': case U'［': case U'］':
             case U'｛': case U'｝': case U'〈': case U'〉': case U'《': case U'》': case U'【': case U'】':
                 return kTypeBracket;
-            case U'―': case U'－': {
+            case U'―': case U'－': case U'−': {
                 const char32_t next = At(p_ + 1);
-                const bool keepDash = dashes_ && ((c == U'－' && Class(next) == 0) || OneOf(next, U"―－"));
+                const bool keepDash = dashes_ && ((c != U'―' && Class(next) == 0) || OneOf(next, U"―－−"));
                 if (Class(Before(p_)) != 0 && !keepDash) {
                     s_[p_] = U'ー';
                     return kTypeJapanese;
@@ -773,7 +777,6 @@ void AppendCanonicalText(std::string& out, std::string_view s) {
     if (form && (first.size == s.size() || !MarkForm(first.cp).empty())) {
         out.append(*form);
     } else {
-        const bool run = first.size < s.size();
         size_t i = 0;
         if (form) {
             out.append(s.substr(0, first.size));
@@ -781,11 +784,7 @@ void AppendCanonicalText(std::string& out, std::string_view s) {
         }
         for (; i < s.size();) {
             const text::Rune r = text::DecodeRune(s.substr(i));
-            if (run && !text::IsKanji(r.cp) && CanonicalForm(r.cp) == "□") {
-                text::AppendRune(out, r.cp);
-            } else {
-                AppendCanonical(out, r.cp);
-            }
+            AppendCanonical(out, r.cp);
             i += r.size;
         }
     }

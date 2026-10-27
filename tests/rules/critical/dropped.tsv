@@ -1,5 +1,15 @@
-# 규칙: MNG-5
+# 규칙: MNG-5, LEX-29
 rule	input	expected	kind	layer
+normalize:caption-inline-reading	（安田美沙子(みさこ)）毎年 見てます	has:야스다 미사코	fix	normalize
+normalize:caption-inline-reading	（丸山和也(かずや)）これは… やらせは ないんですね？	has:마루야마 카즈야	fix	normalize
+normalize:caption-inline-reading	（木村祐一(ゆういち)）盛り上がっておりますが	has:키무라 유이치	fix	normalize
+normalize:caption-inline-reading	（小杉竜一(りゅういち)）はい どうも	has:코스기 류이치	fix	normalize
+normalize:caption-inline-reading	（岩井元気(げんき)）いや もう	has:이와이 겐키	fix	normalize
+normalize:caption-inline-reading	（小宮浩信(ひろのぶ)）絶対 受かってね	has:코미야 히로노부	fix	normalize
+normalize:caption-inline-reading	（大上(おおうえ)）うるさい？　ホントにごめんね	has:(오우에)	fix	normalize
+normalize:caption-inline-reading	（恭(きょう)）はい	has:쿄	fix	normalize
+normalize:caption-inline-reading	（恭(きょう・な)）はい	has:공	keep	normalize
+normalize:caption-inline-reading	（恭(きょう な)）はい	has:공	keep	normalize
 conjugation:voice-later-form	褒められちゃった♪	has:칭찬받아	keep	conjugation
 conjugation:voice-later-form	「気を遣わせちゃってごめんね」	has:신경을 쓰게 해서	keep	conjugation
 conjugation:voice-later-form	たった一言で黙らせちゃった	has:입을 다물게 해	keep	conjugation
@@ -23,3 +33,9 @@ lexical:spoken-words	嫌な音がして、腕がもげた。	has:팔이 떨어�
 lexical:spoken-words	ガラスがわれた	has:깨졌다	keep	lookup
 constraint:cued-name	「わたし、つむぎです」	has:츠무기	fix	lookup
 constraint:cued-name	「わたし、みちるです」	has:미치루	fix	lookup
+pre-select:unplaced-head	まりやん！	has:마리잖아	fix	pre-select
+pre-select:unplaced-head	まりです。	has:마리입니다	fix	pre-select
+pre-select:unplaced-head	私はまりです。	has:마리입니다	fix	pre-select
+pre-select:unplaced-head	(まりやん)	has:마리얀	keep	pre-select
+pre-select:unplaced-head	まりやん≫	has:마리얀	keep	pre-select
+pre-select:unplaced-head	学生やん	has:학생이잖아	keep	pre-select

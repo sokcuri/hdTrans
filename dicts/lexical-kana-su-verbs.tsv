@@ -1,0 +1,11 @@
+#! layer=words
+# 한자로만 있던 가나 표기: ふかす(吹かす, 蒸かす), 一泡ふかせる, 任せておく의 입말 まかしとく
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ふか	피&AI@	M433			GN							kana-su:1
+ふか	&Ah@	M433			GN	8501	||1 &&2 S-1== "を" A-2== "VFd"	ふかす는 を 앞이 먹을거리이면 찌다를 고른다(芋をふかす 감자를 찐다).				kana-su:2
+ふかし芋	찐 감자	N110	VFd		GN							kana-su:3
+まかしといて	맡겨 둬	A9D0			GN							kana-su:4
+まかしとき	맡겨 둬	A9D0			GN							kana-su:5
+まかしとけ	맡겨 둬	A9D0			GN							kana-su:6
+まかしといてください	맡겨 주세요	A9D0			GN							kana-su:7
+一泡ふかせ	한방 먹&AJ@	M427			GN							kana-su:8

@@ -33,12 +33,20 @@ bool BarRuby(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([一-龥々〆ヶ]+)《([^《》]{1,30})》, base as group 3
+// ([一-龥々〆ヶ]+)《([ぁ-ヿ　 ]{1,30})》, base as group 3: without the bar only a kana reading is ruby,
+// and a title in 《》 after kanji (是《胧月夜》) stays.
 bool KanjiRuby(std::string_view s, size_t pos, Match& m) {
     return Repeat(s, pos, [](char32_t c) { return IsKanjiClass(c) || c == U'〆' || c == U'ヶ'; }, 1, kUnbounded,
                   [&](size_t q) {
                       m.group[3] = Span(s, pos, q);
-                      return Reading(s, q, m);
+                      size_t p = q;
+                      if (!Lit(s, p, "《")) return false;
+                      return Repeat(s, p, [](char32_t c) { return (c >= U'ぁ' && c <= U'ヿ') || c == U'　' || c == U' '; }, 1, 30,
+                                    [&](size_t r) {
+                                        if (!Lit(s, r, "》")) return false;
+                                        m.end = r;
+                                        return true;
+                                    });
                   });
 }
 
@@ -166,6 +174,52 @@ std::string JoinBraceRuby(std::string_view line, ReadBase read, const void* cont
         const std::string_view in = kana.substr(0, r.wordEnd > 0 && r.wordEnd < kana.size() ? r.wordEnd : kana.size());
         return internal::Cat({"{rb}", base, in, "{/rb}{rt}", reading, in, "{/rt}", kana.substr(in.size())});
     });
+}
+
+std::string RTagsAsBraceRuby(std::string_view line) {
+    if (line.find("<R ") == std::string_view::npos || line.find("{rb}") != std::string_view::npos) return {};
+    std::string out;
+    bool any = false;
+    for (size_t at = 0; at < line.size();) {
+        const size_t open = line.find("<R ", at);
+        const size_t readingEnd = open == std::string_view::npos ? open : line.find('>', open + 3);
+        const size_t close = readingEnd == std::string_view::npos ? readingEnd : line.find("</R>", readingEnd + 1);
+        if (close == std::string_view::npos) {
+            out.append(line.substr(at));
+            break;
+        }
+        const std::string_view reading = line.substr(open + 3, readingEnd - open - 3);
+        const std::string_view base = line.substr(readingEnd + 1, close - readingEnd - 1);
+        if (reading.empty() || base.empty() || reading.find('<') != std::string_view::npos ||
+            base.find('<') != std::string_view::npos) {
+            out.append(line.substr(at, open + 3 - at));
+            at = open + 3;
+            continue;
+        }
+        out.append(line.substr(at, open - at));
+        out.append("{rb}").append(base).append("{/rb}{rt}").append(reading).append("{/rt}");
+        any = true;
+        at = close + 4;
+    }
+    return any ? out : std::string();
+}
+
+std::string BraceRubyAsRTags(std::string_view line) {
+    std::string out;
+    for (size_t at = 0; at < line.size();) {
+        const size_t rb = line.find("{rb}", at);
+        const size_t rbEnd = rb == std::string_view::npos ? rb : line.find("{/rb}{rt}", rb + 4);
+        const size_t rtEnd = rbEnd == std::string_view::npos ? rbEnd : line.find("{/rt}", rbEnd + 9);
+        if (rtEnd == std::string_view::npos) {
+            out.append(line.substr(at));
+            break;
+        }
+        out.append(line.substr(at, rb - at));
+        out.append("<R ").append(line.substr(rbEnd + 9, rtEnd - rbEnd - 9)).append(">");
+        out.append(line.substr(rb + 4, rbEnd - rb - 4)).append("</R>");
+        at = rtEnd + 5;
+    }
+    return out;
 }
 
 }  // namespace hdTrans::pipeline

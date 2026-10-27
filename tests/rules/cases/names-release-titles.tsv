@@ -1,0 +1,10 @@
+# 규칙: LEX-4
+rule	input	expected	kind	layer
+names:release-titles	他国での根こそぎ奪ったあとの令息は本来の婚約者たちにリリースされてそれぞれ処分されます。	타국에서의 모조리 빼앗은 뒤의 영식은 본래의 약혼자들에게 릴리스되어 각각 처분됩니다.	fix	lookup
+names:release-titles	対潜警戒は、昔も今も大切さに変わりはありません。	대잠 경계는, 옛날도 지금도 중요함에 변함은 없습니다.	fix	lookup
+names:release-titles	祭りの準備をなさっている兵隊さん	축제 준비를 하고 계시는 군인 씨	fix	lookup
+names:release-titles	マッチングアプリですよね？	매칭 앱이죠?	fix	lookup
+names:release-titles	ガッチャマン	독수리 오형제	keep	lookup
+names:release-titles	『甘い人生』を見た	『달콤한 인생』을 보았다	keep	lookup
+names:release-titles	『魂斗羅』をクリアした	『콘트라』를 클리어했다	keep	lookup
+names:release-titles	生きるべきか死ぬべきか、それが問題だ	사느냐 죽느냐, 그것이 문제다	keep	lookup

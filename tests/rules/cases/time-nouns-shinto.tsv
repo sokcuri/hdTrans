@@ -1,0 +1,16 @@
+# 규칙: LEX-66, LEX-72
+rule	input	expected	kind	layer
+dict:jisjk:13574	次の休みに会おう	다음 휴일에 만나자	fix	local
+dict:jisjk:13574	休みに会おう	휴일에 만나자	fix	local
+dict:jisjk:98668	連休に会おう	연휴에 만나자	fix	local
+dict:jisjk:40078	休暇に会おう	휴가에 만나자	fix	local
+dict:jisjk:13574	休みを取る	휴가를 낸다	keep	defaults
+dict:jisjk:13574	今日は休みだ	오늘은 휴일이다	keep	defaults
+dict:jisjk:13574	友達に会おう	친구를 만나자	keep	local
+dict:jisjk:13574	週末に会おう	주말에 만나자	keep	local
+cx:toshite-state:40	しんとしている	고요하다	fix	rewrites
+cx:toshite-state:40	部屋はしんとしていた	방은 고요했다	fix	rewrites
+cx:toshite-state:40	しんとしている部屋	고요한 방	fix	rewrites
+cx:toshite-state:40	教室がしんとした	교실이 고요했다	fix	rewrites
+cx:toshite-state:40	しんと静まり返った	고요히 아주 조용해졌다	keep	rewrites
+cx:toshite-state:40	ぼーっとしている	멍하고 있다	keep	rewrites

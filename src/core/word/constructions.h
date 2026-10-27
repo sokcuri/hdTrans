@@ -10,6 +10,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -63,11 +64,13 @@ struct CxNode {
 enum class CxVerb : uint8_t {
     SelectLemma, SelectTarget, TakeTarget, SetTarget, AppendTarget, PrependTarget, SetEnding, ReplaceHead, ReplaceEndingTail,
     MapEndingTail, MapTargetTail, MapLemma, MapTarget, SelectMap, SetVerb, SetVerbFrom, CopyEnding, CopyWord, SetSound, SetActive, ClipEnding, SetBaseVerb, DrawEnding,
+    TakePrevTarget,
 };
 
 struct CxAction {
     CxVerb verb = CxVerb::SelectLemma;
     int8_t delta = 0;
+    bool scanned = false;     // @scan±n: counted from the word where the row's first scan outside !1 finds its target
     std::string value, with;  // with: the new head of replace-head, the new tail of replace-ending-tail and set-verb-from
     int map = -1;             // map-lemma, map-target, select-map, map-ending-tail: into maps
 };
@@ -84,6 +87,7 @@ struct CxRow {
     int prio = 0;
     uint32_t root = 0;  // into nodes
     std::vector<CxAction> actions;
+    bool scans = false;  // an action is placed by @scan
     int line = 0;  // in the table
 };
 
@@ -92,12 +96,21 @@ struct CxSurfaceHash {
     std::size_t operator()(std::string_view s) const { return std::hash<std::string_view>{}(s); }
 };
 
+inline constexpr uint32_t kNoGuard = UINT32_MAX;
+
 struct CxFamily {
     std::string name;
     std::string after;      // the text pass it runs after
     int stage = 0;          // its order among the families after that pass
     std::vector<int> rows;  // into rows, by PRIO
     int line = 0;           // of its //= line
+    // The root of its guard in nodes, kNoGuard for none: a word on which the guard is false tries
+    // none of the family's rows.
+    uint32_t guard = kNoGuard;
+    // The surfaces the guard needs the word to have, when it names them (S+0== "もら", S+0== @set):
+    // a word with another surface skips the family without trying the guard.
+    std::unordered_set<std::string, CxSurfaceHash, std::equal_to<>> guardSurfaces;
+    bool guardKeyed = false;
     // The rows worth trying on a word, by PRIO. A row whose condition needs the word to be one of a
     // few surfaces (S+0== "で", S+0== @set) is listed under each of them; the other rows (open) are
     // listed under every surface. A word whose surface is no key tries the open rows only.
@@ -126,6 +139,8 @@ struct ConstructionTable {
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes);
 // The parsed builtin constructions.tsv.
 const ConstructionTable& BuiltinConstructions();
+// RunConstructions over table t instead of the builtin one.
+void RunConstructions(Flusher& f, const ConstructionTable& t, std::size_t pass, bool (*skip)(std::string_view name) = nullptr);
 // The word after it that repeats it: the same text in the same token, with nothing or a
 // pause.copy mark between (いや|いや, 待って、待って); null for none.
 const Item* CopyAfter(const Item* it);

@@ -1,11 +1,10 @@
 # 이 파일을 hdtrans.config.yaml로 복사해 고치세요.
 # 상대 경로는 이 파일이 있는 폴더 기준입니다.
-dicts:
-  - ../dicts
+# dicts: ../dicts.hdsnap
 # userdict: .  # 생략하면 이 폴더의 userdict*.txt와 userdict*.tsv를 읽음
 # userdict: [userdict.txt, custom.tsv, extra]
 # ehnd: true  # 꿀도르 등 Ehnd 사전. 켜면 번역 품질이 떨어질 수 있음
-# ehnd: custom/Ehnd  # 다른 폴더
+# ehnd: ../../my-ehnd  # 다른 폴더
 # cache: ../cache  # off면 캐시 끔, 생략하면 기존 환경변수와 기본 경로 사용
 cg: true
 misread: false

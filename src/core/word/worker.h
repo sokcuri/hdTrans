@@ -91,6 +91,7 @@ public:
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
     bool Dispatch(int i, int& last);
+    bool LatinOrDigits(int j) const;
 
     // Dictionary lookup with the plain-entry filters of the word stage.
     Lookup DoLookup(std::string_view query, int mode);
@@ -182,6 +183,7 @@ private:
     bool SplitsKashira(const Record& r, std::string_view query) const;
     bool SplitsDeshou(const Record& r, std::string_view query) const;
     bool SplitsVerb(const Record& r, std::string_view query) const;
+    bool SplitsPrefixWord(const Record& r, std::string_view query) const;
     bool PersonSuffixAt(std::string_view s) const;
     // Whether text starts with an honorific that HonorificItem reads after a name.
     static bool StartsWithHonorific(std::string_view text);

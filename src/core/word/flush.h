@@ -38,6 +38,7 @@ void PreferTerminal(Flusher& f);
 
 // Passes (passes.cpp).
 void DrainNmTail(Flusher& f);
+void ReadUnplacedHeads(Flusher& f);
 void ReadUnplacedParticles(Flusher& f);
 void ReinsertPhrases(Flusher& f);
 void CleanupClass3(Flusher& f);
@@ -160,6 +161,7 @@ bool IsOneOf(const Item* it, const std::string_view (&set)[N]) {
 // Whether the item is word, a key or the dictionary form of the verb or adjective the item is a
 // stem of (sense.cpp). IsAny is IsWord over a list of words.
 bool IsWord(const Item* it, std::string_view word);
+bool IsWord(const Item* it, std::string_view word, int candidate);
 template <class Words>
 bool IsAny(const Item* it, const Words& words) {
     for (const auto& w : words) {

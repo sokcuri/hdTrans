@@ -5,6 +5,17 @@
 using hdTrans::text::FromKana;
 using hdTrans::text::Preset;
 
+HD_TEST(kana_caption_single_long_pair) {
+    const struct { const char* reading; const char* want; } cases[] = {
+        {"おおうえ", "오우에"}, {"おおうち", "오우치"}, {"こうう", "코우"},
+        {"さとう", "사토"}, {"おおの", "오노"}, {"ゆうき", "유키"}, {"きょう", "쿄"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(FromKana(c.reading, Preset::FanShort, true), std::string(c.want));
+    HD_CHECK_EQ(FromKana("おおうえ", Preset::Fan), "오오우에");
+    HD_CHECK_EQ(FromKana("おおうえ", Preset::Fan, true), "오오우에");
+    HD_CHECK_EQ(FromKana("おおうえ", Preset::FanShort), "오에");
+}
+
 HD_TEST(kana_from_kana) {
     struct Case {
         const char* reading;

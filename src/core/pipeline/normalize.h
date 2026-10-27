@@ -51,6 +51,14 @@ using ReadBase = BaseReading (*)(const void* context, std::string_view base, std
 // with the dictionary.
 std::string JoinBraceRuby(std::string_view line, ReadBase read, const void* context);
 
+// line with each ruby tag <R reading>base</R> written {rb}base{/rb}{rt}reading{/rt}, so that it
+// is read like brace ruby; "" when line holds none or already holds brace ruby.
+std::string RTagsAsBraceRuby(std::string_view line);
+
+// The translation of a line that RTagsAsBraceRuby rewrote, with each {rb}base{/rb}{rt}reading{/rt}
+// written back as <R reading>base</R>.
+std::string BraceRubyAsRTags(std::string_view line);
+
 // Whether the variant at line[at, at + variant.size()) is part of another dictionary word and so
 // stays as written (身の程, ときめく).
 using WordKeepsVariant = bool (*)(const void* context, std::string_view line, size_t at, std::string_view variant,
@@ -61,7 +69,8 @@ using WordKeepsVariant = bool (*)(const void* context, std::string_view line, si
 // 見た時): a kanji variant after hiragana, or after a kanji or katakana when
 // spelling.variant-after-word lists it; a kana variant written in kanji only after a kana of
 // spelling.variant-kana-after; another kana variant anywhere. A variant in a context of spelling.variant-kept (神の位) stays, and so does one where
-// keeps says a dictionary word cuts across it or holds it. Run after Normalize, with the dictionary.
+// keeps says a dictionary word cuts across it or holds it, or it is in a Chinese run
+// (internal::ChineseRuns). Run after Normalize, with the dictionary.
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context);
 
 // line with each ending of classes.tsv spelling.katakana-ending written in katakana right after a
@@ -81,11 +90,24 @@ std::string RespellKanjiCries(std::string_view line);
 
 // line with each old form of a kanji in classes.tsv spelling.old-form (OLD=NEW) written in its
 // new form, so that both read alike (格好惡い 格好悪い), unless holds says a dictionary word holds
-// the old form (赤澤, 澤 on its own). Run after Normalize, with the dictionary.
+// the old form (赤澤, 澤 on its own) or it is in a Chinese run (internal::ChineseRuns). Run after
+// Normalize, with the dictionary.
 std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context);
+
+// line with each iteration mark written as the letter it repeats: ゝ and ヽ the kana before
+// them, ゞ and ヾ that kana voiced (こゝろ こころ, いすゞ いすず); 々 the kanji before it
+// (易々 易易) unless holds says a dictionary word holds the kanji and 々 (時々, 佐々木) or noun
+// says the kanji is a noun of its own, which 々 makes plural (星々 별들). A mark with no letter
+// of its kind before it stays (「々」, ゝ), and so does a kana mark after a particle that ends
+// a phrase (これはゝです). Run after Normalize, with the dictionary.
+std::string RespellIterationMarks(std::string_view line, WordHoldsRun holds, WordHoldsRun noun, const void* context);
 
 namespace internal {
 
+// Composes only adjacent voiced/semivoiced kana letter pairs, without other form rewrites.
+std::string ComposeKanaPairs(std::string_view text);
+
+// Adjacent kana letter pairs with U+3099/U+309A composed, excluding iteration marks.
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced
 // or semi-voiced mark composed (ｶﾞ ガ, ﾊﾟ パ, ｳﾞ ヴ; another mark becomes ゛ or ゜); a voiced
 // mark after a vowel, ん, っ, ー or a small kana dropped (あ゛っ あっ, ｱﾞ ア), on ウ before a
@@ -168,8 +190,8 @@ struct SpeechCues {
 SpeechCues ReadSpeechCues(std::string_view line);
 bool FemaleSpeech(std::span<const std::string> lines);
 
-// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 and HTML
-// <ruby>.
+// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 with a kana reading and
+// HTML <ruby>.
 std::string StripRuby(std::string_view line);
 
 }  // namespace internal

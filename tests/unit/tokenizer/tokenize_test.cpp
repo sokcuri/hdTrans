@@ -389,7 +389,7 @@ const PrepareCase kPrepareCases[] = {
     {"「あ」"sv, "24:「あ」|「あ」 9:|", ""},
     {"あ<BR>い。ab"sv, "24:あ|あ 77:<BR>|<BR> 24:い|い 17:.|。 2:ab|ab 9:|", ""},
     {"あー！"sv, "24:あ|あ 17:―！|ー！ 9:|", ""},
-    {"♪〒①髙"sv, "22:♪‡①高|♪〒①髙 9:|", ""},
+    {"♪〒①髙"sv, "22:♪〒①高|♪〒①髙 9:|", ""},
     {"１２"sv, "1:12|12 9:|", ""},
     {"ｱ｡"sv, "24:ア|ア 22:.|。 9:|", ""},
     {"あ･"sv, "24:あ|あ 22:·|・ 9:|", ""},
@@ -454,9 +454,9 @@ HD_TEST(tokenizer_canonical_text) {
         const char* want;
     } cases[] = {
         {"。", "."},  {"、", ","},     {"？！", "?"}, {"！？", "!"},       {"〒", "(우)"},
-        {"♪〒", "♪‡"}, {"【】", "【】"}, {"　", "　"},   {"a。b", "a. b"},   {"ｱ", "ア"},
+        {"♪〒", "♪〒"}, {"【】", "【】"}, {"　", "　"},   {"a。b", "a. b"},   {"ｱ", "ア"},
         {"％", "%"},  {"％＆＄＃", "％＆＄＃"}, {"／／", "／／"}, {"〒♪", "〒♪"}, {"♪％", "♪％"},
-        {"／ヽ", "／ヽ"}, {"ヽ", "□"}, {"纊褜", "□□"},
+        {"／ヽ", "／ヽ"}, {"ヽ", "ヽ"}, {"纊褜", "광褜"}, {"蕙", "혜"}, {"°", "°"},
     };
     for (const Case& c : cases) {
         std::string out = "x";
@@ -485,7 +485,8 @@ HD_TEST(tokenizer_mark_run) {
 // them; two lone pieces of a name stay one token.
 HD_TEST(tokenize_kept_kanji_space) {
     // The words 未来 and 通知表, starting anywhere in the text before the space.
-    const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord) {
+    const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord kind) {
+        if (kind == SpaceWord::Filler) return false;
         for (const std::string_view word : {"未来"sv, "通知表"sv}) {
             for (std::size_t start = 0; start < before.size(); start++) {
                 const std::string text = std::string(before.substr(start)) + std::string(after);
@@ -524,9 +525,12 @@ HD_TEST(tokenize_space_parts_words) {
                 if (text.find(w) != std::string::npos) return true;
             }
             return false;
-        case SpaceWord::Name: return text.starts_with("山田太郎");
+        case SpaceWord::Binding:
+            return text.starts_with("山田太郎") || (before == "いや" && after.starts_with("そう")) ||
+                   (before == "では" && after.starts_with("あり"));
         case SpaceWord::Phrase: return before == "何だ" && after.starts_with("あれ");
         case SpaceWord::Ending: return after == "ね";
+        case SpaceWord::Filler: return before == "あ" || before == "いや";
         }
         return false;
     };
@@ -546,13 +550,19 @@ HD_TEST(tokenize_space_parts_words) {
     HD_CHECK_EQ(scan("あ ごめん いいよ。"), std::string("24:あ +24:ごめん +24:いいよ 17:。 9:"));
     HD_CHECK_EQ(scan("山田 太郎が来た"), std::string("24:山田太郎が来た 9:"));
     HD_CHECK_EQ(scan("何だ あれ"), std::string("24:何だあれ 9:"));
+    HD_CHECK_EQ(scan("では ありません"), std::string("24:ではありません 9:"));
     HD_CHECK_EQ(scan("そうだ ね……"), std::string("24:そうだね 22:…… 9:"));
     HD_CHECK_EQ(scan("そうだ ねえ"), std::string("24:そうだ +24:ねえ 9:"));
     HD_CHECK_EQ(scan("やめて やめて"), std::string("24:やめてやめて 9:"));
     HD_CHECK_EQ(scan("消す っていう"), std::string("24:消すっていう 9:"));
     HD_CHECK_EQ(scan("こ の 展 開 は"), std::string("24:この展開は 9:"));
     HD_CHECK_EQ(scan("ね え さ ん"), std::string("24:ねえさん 9:"));
+    HD_CHECK_EQ(scan("あ れ が"), std::string("24:あれが 9:"));
+    HD_CHECK_EQ(scan("あ な た"), std::string("24:あなた 9:"));
+    HD_CHECK_EQ(scan("あ の 人"), std::string("24:あの人 9:"));
     HD_CHECK_EQ(scan("あ い"), std::string("24:あ +24:い 9:"));
+    HD_CHECK_EQ(scan("何 これ"), std::string("24:何 +24:これ 9:"));
+    HD_CHECK_EQ(scan("どう する"), std::string("24:どう +24:する 9:"));
     // Not between Japanese characters: digits, letters and marks keep their own rules.
     HD_CHECK_EQ(scan("2 人"), std::string("1:2 7:  24:人 9:"));
     HD_CHECK_EQ(scan("え、 そう"), std::string("24:え、そう 9:"));
@@ -563,10 +573,13 @@ HD_TEST(tokenize_space_parts_words) {
 // With SpaceJoins, a letter after kana goes on with the Japanese token when a word spans both.
 HD_TEST(tokenize_kept_letter_after_kana) {
     const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord) {
+        const std::size_t end = after.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        const std::size_t letters = end == std::string_view::npos ? after.size() : end;
         for (const std::string_view word : {"うp"sv, "おk"sv}) {
             for (std::size_t start = 0; start < before.size(); start++) {
                 const std::string text = std::string(before.substr(start)) + std::string(after);
-                if (text.starts_with(word) && word.size() > before.size() - start) return true;
+                const std::size_t left = before.size() - start;
+                if (text.starts_with(word) && word.size() > left && word.size() - left >= letters) return true;
             }
         }
         return false;
@@ -580,6 +593,14 @@ HD_TEST(tokenize_kept_letter_after_kana) {
     HD_CHECK_EQ(scan("写真うｐ"), std::string("24/0:写真うp 9/0:"));
     HD_CHECK_EQ(scan("おｋおｋ"), std::string("24/0:おkおk 9/0:"));
     HD_CHECK_EQ(scan("うpした"), std::string("24/0:うpした 9/0:"));
+    HD_CHECK_EQ(scan("うｐ乙"), std::string("24/0:うp乙 9/0:"));
+    HD_CHECK_EQ(scan("おk"), std::string("24/0:おk 9/0:"));
+    for (const std::string_view input : {"思うp8です"sv, "言うp6です"sv, "思うp12です"sv, "思うpxです"sv,
+                                        "思うp8&x:"sv, "見るp8です"sv, "思うq8です"sv, "思うP8です"sv,
+                                        "思うｐ８です"sv, "思うp８です"sv, "思うｐxです"sv, "思うpｘです"sv,
+                                        "うp8"sv, "おkmです"sv}) {
+        HD_CHECK_EQ(scan(input), ScanText(input, true));
+    }
     HD_CHECK_EQ(scan("これはOKです"), ScanText("これはOKです", true));
     HD_CHECK_EQ(ScanText("写真うｐ", true), std::string("24/0:写真う 2/0:p 9/0:"));
 }

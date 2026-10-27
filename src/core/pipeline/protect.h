@@ -39,8 +39,8 @@ namespace internal {
 // text cut into its protected spans and the text between them. The classes are
 // searched one after the other, a later class never matching inside or across an
 // earlier match:
-//   - markup tags <...> of up to 1024 characters other than <BR> and <LI> (SpanOpen, a
-//     closing tag SpanClose);
+//   - markup tags <...> of up to 1024 characters other than <BR> and <LI> and those holding
+//     。、！？「」… (SpanOpen, a closing tag SpanClose);
 //   - BBCode tags [b], [/b], [color=red] and the same in braces ({rb}, {/rt}) of up to
 //     128 characters (SpanOpen, SpanClose);
 //   - entities &amp; &#123; &#x1F;  (SpanOpen);
@@ -52,6 +52,7 @@ namespace internal {
 //     mark U+E00A, a run of the drawn mark U+E00B and the cry marks U+E00E and U+E00F (SpanClose);
 //   - Hangul runs with the masks in or after them (자○), joined by ASCII or full-width
 //     spaces (SpanWord);
+//   - the Han runs written in Chinese (ChineseRuns; SpanWord);
 //   - runs of foreign characters other than white space (IsForeign) or of ◯, a ゔ
 //     taking the small vowel after it (SpanWord);
 //   - runs of marks of tone that name a thing, after の and before a particle
@@ -63,7 +64,8 @@ output::Pieces CutSpans(std::string_view text, std::span<const std::string> mark
 // A colour or reset does not follow &, where it is a malformed entity (&#12345678;).
 size_t StyleCodeLength(std::string_view s, char before);
 
-// A character kept as written: outside CP932 and neither a Han character nor kana.
+// A character kept as written: outside CP932, neither a Han character nor kana, and
+// without a canonical form (㊙ has one).
 // Hangul, emoji, the letters and symbols of other scripts and the hiragana ゔゕゖ are
 // foreign; ASCII, the half-width forms, ヷヸヹヺ and the marks of tone outside CP932
 // (kToneMarks) are not: like ♪ they close an utterance rather than name a thing.

@@ -1,5 +1,10 @@
 # 규칙: MNG-4, GRM-9
 rule	input	expected	kind	layer
+verb:synthetic-causative-potential	私は先生に練習を続けさせられた。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-potential	先生に書かされる。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-potential	貴様の仕事の遅さにはへきえきさせられる｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-potential	殿下にあらせられるぞ！	lacks:있게 할 수	keep	analysis
+verb:synthetic-causative-potential	かしこくも天皇陛下におかせられましては	lacks:두게 할 수	keep	analysis
 cx:ni-partner:20	お前ごときが私に勝てると思うな	has:나를 이길	fix	rewrites
 cx:ni-partner:20	私に勝てる	has:나를 이길 수 있다	fix	rewrites
 cx:ni-partner:20	もし私に勝てたら考えてあげるわ	has:나를 이길	fix	rewrites
@@ -56,3 +61,7 @@ cx:receive-potential:10	良い家族がいて、こういう人に出会えて�
 verb:causative-of-shorter	子供に野菜を食べさせられない。	has:아이에게 야채를 먹일 수 없다	fix	conjugation
 verb:causative-of-shorter	私は苦い野菜を食べさせられた。	has:먹게 되었다	fix	conjugation
 verb:causative-of-shorter	嫌って言うほど信じさせられたよ	has:믿게 되었	fix	conjugation
+dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	fix	compose
+dict:jisjk:147415	ようなしとされた。	has:쓸모없다고 여겨졌다	fix	compose
+dict:jisjk:267367	俺は黙って電話を切った。	has:전화를 끊었다	keep	compose
+dict:jisjk:362260	見ていただきたい。	has:주셨으면 한다	keep	analysis

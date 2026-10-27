@@ -79,6 +79,7 @@ HD_TEST(pipeline_restore_brackets) {
         // The n-th form takes the n-th bracket typed in it.
         {{{"「あ」『い』"}}, {{"「아」「이」"}}, {{"「아」『이』"}}},
         {{{"〝あ〟’"}}, {{"˝아〃＇"}}, {{"“아”’"}}},
+        {{{"GT−R－1"}}, {{"GT－R－1"}}, {{"GT−R－1"}}},
         {{{"「あ」"}}, {{"『아』"}}, {{"『아』"}}},
         {{{"『"}, {"딸랑", SpanWord}, {"』"}},
          {{"「"}, {"「딸랑」", SpanWord}, {"」"}},
@@ -393,21 +394,22 @@ HD_TEST(pipeline_laughter_letters) {
         {"\xff 진짜야www", "\xff 진짜야ㅋㅋㅋ"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(pipeline::WriteLaughter(c.in, ""), std::string(c.want));
-    // With the typed text: a letter used as a word stays, laughter before the next words goes.
+    // With the typed text: a letter used as a word stays, laughter before the next words goes and
+    // a word right after it is written apart.
     HD_CHECK_EQ(pipeline::WriteLaughter("변수 w의 값", "変数wの値"), std::string("변수 w의 값"));
     HD_CHECK_EQ(pipeline::WriteLaughter("www의 의미", "wwwの意味"), std::string("www의 의미"));
     HD_CHECK_EQ(pipeline::WriteLaughter("키보드의 w키", "キーボードのwキー"), std::string("키보드의 w키"));
-    HD_CHECK_EQ(pipeline::WriteLaughter("있어w미도리 씨w", "あるよなｗミドリさんｗ"), std::string("있어ㅋ미도리 씨ㅋ"));
-    HD_CHECK_EQ(pipeline::WriteLaughter("웃은 wwww미안해", "笑ったｗｗｗｗゴメン"), std::string("웃은 ㅋㅋㅋㅋ미안해"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("있어w미도리 씨w", "あるよなｗミドリさんｗ"), std::string("있어ㅋ 미도리 씨ㅋ"));
+    HD_CHECK_EQ(pipeline::WriteLaughter("웃은 wwww미안해", "笑ったｗｗｗｗゴメン"), std::string("웃은 ㅋㅋㅋㅋ 미안해"));
     // Each run is read in the typed text when both have the same runs.
     const struct { const char* in; const char* typed; const char* want; } typed[] = {
         {"좋아. www", "大好き。ｗｗｗ", "좋아. ㅋㅋㅋ"},
         {"좋아―ww", "ホントだねーｗｗ", "좋아―ㅋㅋ"},
         {"≫454www≫456", "≫454ｗｗｗ≫456", "≫454ㅋㅋㅋ≫456"},
         {"맛있지 wwby", "おいしいよねｗｗby", "맛있지 ㅋㅋby"},
-        {"wwwwww일을", "ｗｗｗｗｗｗ一乙", "ㅋㅋㅋㅋㅋㅋ일을"},
+        {"wwwwww일을", "ｗｗｗｗｗｗ一乙", "ㅋㅋㅋㅋㅋㅋ 일을"},
         {"그것은 ㅋㅋ w", "それは草ｗ", "그것은 ㅋㅋ"},
-        {"ㅋㅋㅋwwwww", "ワロタwwwww", "ㅋㅋㅋㅋㅋ"},
+        {"ㅋㅋwwwww", "草wwwww", "ㅋㅋㅋㅋㅋ"},
         {"진짜냐(w)", "マジかよ（ｗ）", "진짜냐(웃음)"},
         {"ww (웃음)", "ｗｗ（笑）", "ㅋㅋ"},
         {"f(w)를 구한다", "f(w)を求める", "f(w)를 구한다"},

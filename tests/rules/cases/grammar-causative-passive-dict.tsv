@@ -33,3 +33,13 @@ dict:jisjk:364866	掃除をさせられますか。	청소를 시킬 수 있습�
 dict:jisjk:364866	彼に掃除をさせられた。	그에게 청소를 하도록 강요받았다.	keep	local
 dict:jisjk:364866	掃除はさせられました。	청소는 하도록 강요받았습니다.	keep	local
 dict:jisjk:364866	駄目よ！　そんなことさせられない。	has:시킬 수 없	keep	local
+# adapted examples
+dict:jisjk:364866	練習後も帰れず、選手はいつもコーチに片付けをさせられます。	has:정리를 하도록 강요받습니다	fix	local
+dict:jisjk:364866	断ることもできず、私は毎朝、教室の掃除をさせられます。	has:청소를 하도록 강요받습니다	fix	local
+dict:jisjk:364866	帰りたいのに、私は閉店後も店内の片付けをさせられます。	has:정리를 하도록 강요받습니다	fix	local
+dict:jisjk:364866	担当者に仕事を割り振る立場です。午後は、この二人に倉庫の整理をさせられますか。	has:창고 정리를 시킬 수 있습니까	keep	local
+dict:jisjk:364866	私は清掃係を指揮しています。今から、班員に廊下の掃除をさせられますか。	has:복도 청소를 시킬 수 있습니까	keep	local
+dict:jisjk:364866	掃除をさせられますでしょうか。	rule:dict:jisjk:364866=시킬 수 &HN@	keep	local
+dict:jisjk:364866	掃除をさせられますでしょうかね。	rule:dict:jisjk:364866=시킬 수 &HN@	keep	local
+dict:jisjk:364866	掃除をさせられますでしょう。	rule:dict:jisjk:364866=하도록 강요&FD@	keep	local
+dict:jisjk:364866	掃除をさせられますから、早く帰れません。	rule:dict:jisjk:364866=하도록 강요&FD@	keep	local

@@ -7,8 +7,8 @@ dict:打たれ強	強い衝撃に耐える。	강한 충격에 참는다.	keep	d
 dict:jisjk:266534	大根を薄く切る。	무를 얇게 자른다.	fix	local
 dict:jisjk:266534	味が薄い。	싱겁다.	keep	local
 dict:jisjk:266534	薄いスープを飲む。	싱거운 스프를 먹는다.	keep	local
-dict:jisjk:5727	仕事を辛くしないで。	일을 괴롭게 하지 말아줘.	fix	local
-dict:jisjk:5727	カレーを辛くしないで。	카레를 맵게 하지 말아줘.	keep	local
+dict:jisjk:5727	仕事を辛くしないで。	일을 괴롭게 하지 마.	fix	local
+dict:jisjk:5727	カレーを辛くしないで。	카레를 맵게 하지 마.	keep	local
 dict:見にく	文字が見にくかった。	문자가 보기 어려웠다.	fix	defaults
 dict:見にく	文字が見えた。	문자가 보였다.	keep	defaults
 dict:始めに	春の始めに客が来た。	봄의 처음에 손님이 왔다.	fix	defaults

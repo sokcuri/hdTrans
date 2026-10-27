@@ -3,12 +3,19 @@
 #include <algorithm>
 #include <chrono>
 #include <cstddef>
+#include <filesystem>
 #include <memory>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
+
+#include "core/config/config.h"
+#include "core/dict/runes.h"
 
 #include "core/dict/folders.h"
 #include "core/dict/snapshot.h"
 #include "core/engine/driver.h"
+#include "core/engine/load_info.h"
 #include "core/engine/raw.h"
 #include "core/engine/rules.h"
 #include "core/engine/user_watch.h"
@@ -28,29 +35,172 @@ bool Loaded(const dict::LoadResult& r) { return r.snapshot && r.snapshot->HasDic
 
 const std::vector<dict::File> kNoFiles;
 
+struct MemoryInput {
+    std::optional<dict::File> user;
+    std::optional<std::vector<EhndFile>> ehnd;
+    bool strictEhnd = true;
+    bool strictEhndOverride = false;
+    std::optional<bool> usersStrictOverride;
+    std::optional<bool> folderStrictOverride;
+};
+
 // The filters of the prefilter and postfilter files of a snapshot and of an Ehnd folder.
 struct FilterLoad {
     std::shared_ptr<const filter::Filters> filters;
     std::vector<std::string> errors;  // the lines skipped, as "file:line: message"
+    std::vector<dict::LoadFileInfo> info;
+    std::unordered_set<std::string> rejectedSources;
     internal::FolderVersion version;  // the Ehnd folder as read
     bool read = true;                 // false when the Ehnd folder cannot be read
+    bool valid = true;                // false when strict mode rejects an Ehnd file
 };
 
-// The filters of snap and of the Ehnd folder dir (none when empty).
-FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir) {
+bool StrictDict(const EngineOptions& options, bool verify, const internal::ConfigResult& config) {
+    if (verify) return true;
+    if (options.strictDict) return *options.strictDict;
+    return config.settings.strictDict.value_or(options.defaultStrictDict);
+}
+
+bool ConfigMatches(const internal::ConfigResult& config, const internal::FileVersion& version) {
+    return version.present == config.sourceStamp.has_value() &&
+           (!version.present || version.stamp == *config.sourceStamp);
+}
+
+void RefreshMemoryPolicy(MemoryInput& memory, bool strict) {
+    if (memory.user && !memory.user->strictOverride) memory.user->strict = strict;
+    if (!memory.strictEhndOverride) memory.strictEhnd = strict;
+}
+
+std::string UpperAscii(std::string text) {
+    for (char& c : text) if (c >= 'a' && c <= 'z') c = static_cast<char>(c - 'a' + 'A');
+    return text;
+}
+
+dict::LoadFileKind FilterFileKind(const filter::Source& source, bool memory) {
+    using Kind = filter::Source::Kind;
+    using FileKind = dict::LoadFileKind;
+    switch (source.kind) {
+    case Kind::PreFilter:
+        return source.native ? FileKind::NativePreFilter
+                             : memory ? FileKind::MemoryEhndPreFilter : FileKind::EhndPreFilter;
+    case Kind::PostFilter:
+        return source.native ? FileKind::NativePostFilter
+                             : memory ? FileKind::MemoryEhndPostFilter : FileKind::EhndPostFilter;
+    case Kind::SkipLayer:
+        return memory ? FileKind::MemoryEhndSkipLayer : FileKind::EhndSkipLayer;
+    case Kind::UserDict:
+        return memory ? FileKind::MemoryEhndUserDict : FileKind::EhndUserDict;
+    }
+    return FileKind::Shipped;
+}
+
+// The filters of snap and of one Ehnd input (none when empty).
+FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool strict,
+                       const std::optional<std::vector<EhndFile>>& memory = {}, bool memoryStrict = true,
+                       bool explicitPath = true, const std::optional<dict::UserSource>& known = {}) {
     FilterLoad out;
     out.version = internal::FolderVersionOf(dir);
     std::vector<filter::Source> sources;
     std::vector<filter::Error> errors;
+    std::unordered_map<std::string, bool> userFilters;
     for (const dict::File& f : snap ? snap->PlainFiles() : kNoFiles) {
         if (f.layer != dict::FileLayer::PreFilter && f.layer != dict::FileLayer::PostFilter) continue;
         const auto kind = f.layer == dict::FileLayer::PreFilter ? filter::Source::Kind::PreFilter
                                                                  : filter::Source::Kind::PostFilter;
         sources.push_back({kind, f.name, std::string(dict::internal::WithoutHeader(f.text)), true});
+        if (f.user) userFilters.insert_or_assign(f.name, f.strict);
     }
-    out.read = dir.empty() || filter::ReadEhndFolder(dir, sources, errors);
-    out.filters = filter::Build(sources, errors);
-    for (const filter::Error& e : errors) out.errors.push_back(e.file + ":" + std::to_string(e.line) + ": " + e.message);
+    if (memory) {
+        std::vector<filter::Source> added;
+        for (const EhndFile& file : *memory) {
+            if (file.name.empty() || file.name == "." || file.name == ".." ||
+                file.name.find_first_of("/\\\0", 0, 3) != std::string::npos ||
+                !dict::internal::ValidUtf8(file.name) || !dict::internal::ValidUtf8(file.text)) {
+                errors.push_back({file.name, 0, "invalid UTF-8 text or Ehnd filename"});
+                out.read = false;
+                continue;
+            }
+            const std::string name = UpperAscii(file.name);
+            if (!name.ends_with(".TXT")) continue;
+            filter::Source::Kind kind;
+            if (name.starts_with("PREFILTER")) kind = filter::Source::Kind::PreFilter;
+            else if (name.starts_with("POSTFILTER")) kind = filter::Source::Kind::PostFilter;
+            else if (name.starts_with("SKIPLAYER")) kind = filter::Source::Kind::SkipLayer;
+            else if (name.starts_with("USERDICT")) kind = filter::Source::Kind::UserDict;
+            else continue;
+            added.push_back({kind, file.name, filter::EhndText(file.text), false});
+        }
+        std::stable_sort(added.begin(), added.end(), [](const filter::Source& a, const filter::Source& b) {
+            if (a.kind != b.kind) return a.kind < b.kind;
+            return UpperAscii(a.name) < UpperAscii(b.name);
+        });
+        sources.insert(sources.end(), added.begin(), added.end());
+    } else if (!dir.empty()) {
+        if (dir.find('\0') != std::string::npos || !dict::internal::ValidUtf8(dir)) {
+            errors.push_back({dir, 0, "invalid Ehnd folder path"});
+            out.read = false;
+        } else {
+            std::error_code error;
+            const auto path = std::filesystem::path(std::u8string(
+                reinterpret_cast<const char8_t*>(dir.data()), dir.size()));
+            const bool missing = !std::filesystem::exists(path, error) && !error;
+            if (missing && !(explicitPath && known && known->explicitPath && known->path == dir && known->available)) {
+                if (explicitPath) errors.push_back({dir, 0, "the explicit Ehnd folder is missing"});
+            } else {
+                out.read = filter::ReadEhndFolder(dir, sources, errors);
+            }
+        }
+    }
+    std::unordered_set<std::string> seen;
+    const auto remember = [&](const std::vector<filter::Error>& found) {
+        for (const auto& error : found) {
+            std::string text = error.file + ":" + std::to_string(error.line) + ": " + error.message;
+            if (seen.insert(text).second) out.errors.push_back(std::move(text));
+        }
+    };
+    remember(errors);
+    for (;;) {
+        std::vector<filter::Error> rows;
+        std::vector<std::size_t> acceptedCounts;
+        auto built = filter::Build(sources, rows, &acceptedCounts);
+        remember(rows);
+        std::unordered_set<std::string> failed;
+        for (const auto& source : sources) {
+            if (source.native) {
+                const auto policy = userFilters.find(source.name);
+                if (policy == userFilters.end() || !policy->second) continue;
+            } else if (!(memory ? memoryStrict : strict)) {
+                continue;
+            }
+            for (const auto& error : rows) {
+                if (error.file == source.name && error.kind != filter::ErrorKind::IgnoredShortFields) {
+                    failed.insert(source.name);
+                }
+            }
+        }
+        if (failed.empty()) {
+            out.filters = std::move(built);
+            for (std::size_t i = 0; i < sources.size(); ++i) {
+                std::string path = sources[i].name;
+                if (!sources[i].native && !memory) {
+                    const auto folder = std::filesystem::path(std::u8string(
+                        reinterpret_cast<const char8_t*>(dir.data()), dir.size()));
+                    const auto name = std::filesystem::path(std::u8string(
+                        reinterpret_cast<const char8_t*>(path.data()), path.size()));
+                    const auto joined = (folder / name).u8string();
+                    path.assign(reinterpret_cast<const char*>(joined.data()), joined.size());
+                }
+                out.info.push_back({std::move(path), FilterFileKind(sources[i], memory.has_value()), acceptedCounts[i]});
+            }
+            if (!memory && dir.empty()) out.info.push_back({{}, dict::LoadFileKind::EhndDisabled, {}});
+            break;
+        }
+        out.valid = false;
+        out.rejectedSources.insert(failed.begin(), failed.end());
+        std::erase_if(sources, [&](const filter::Source& source) {
+            return (!source.native || userFilters.contains(source.name)) && failed.contains(source.name);
+        });
+    }
     return out;
 }
 
@@ -115,17 +265,20 @@ struct Access {
 
     // e.mu_ is held. A later successful load supersedes this ticket.
     static bool Finish(Engine& e, std::uint64_t ticket, const UserVersion& version, dict::LoadResult r,
-                       std::vector<dict::LoadError> userErrors, FilterLoad filters, bool keepFailed) {
+                       std::vector<dict::LoadError> userErrors, FilterLoad filters, bool keepFailed,
+                       MemoryInput memory, const dict::UserSource& ehndSource,
+                       const std::vector<dict::UserSource>& requested) {
         if (ticket < e.current_) return Loaded(r);
         UserWatch& w = *e.watch_;
-        const bool allFailed = !userErrors.empty() && std::all_of(version.begin(), version.end(),
-            [&userErrors](const auto& source) {
-                return std::any_of(userErrors.begin(), userErrors.end(), [&source](const dict::LoadError& error) {
-                    return error.file == source.first;
-                });
-            });
+        const bool filterFailed = !filters.read || !filters.valid;
+        const bool failed = filterFailed || std::any_of(userErrors.begin(), userErrors.end(),
+            [](const dict::LoadError& error) { return dict::FailsLoad(error.kind); });
         w.errors = std::move(userErrors);
-        if (!Loaded(r) || (keepFailed && allFailed)) {
+        if (!Loaded(r) || (keepFailed && failed)) {
+            if (filterFailed) {
+                w.filterFailed = true;
+                e.filterErrors_ = std::move(filters.errors);
+            }
             w.ehnd.failed = std::move(filters.version);
             w.ehnd.hasFailed = true;
             w.watch.failed = version;
@@ -135,6 +288,47 @@ struct Access {
             }
             return false;
         }
+        w.filterFailed = filterFailed;
+        w.sourceHistorySeeded = false;
+        w.acceptedSources.clear();
+        for (const auto& source : version.sources) {
+            if (!source.available) continue;
+            const bool skipped = !source.directory && std::any_of(w.errors.begin(), w.errors.end(), [&](const auto& error) {
+                return error.file == source.path && dict::FailsLoad(error.kind);
+            });
+            if (!skipped && (source.directory || !filters.rejectedSources.contains(source.path))) {
+                w.acceptedSources.push_back(source);
+            }
+        }
+        for (const auto& [path, stamp] : version.files) {
+            if (!stamp.present || stamp.headerProbeFailed) continue;
+            const bool rejected = std::any_of(w.errors.begin(), w.errors.end(), [&](const auto& error) {
+                return error.file == path && dict::FailsLoad(error.kind);
+            });
+            const bool listed = std::any_of(w.acceptedSources.begin(), w.acceptedSources.end(), [&](const auto& source) {
+                return source.path == path;
+            });
+            if (!rejected && !listed && !filters.rejectedSources.contains(path)) {
+                w.acceptedSources.push_back({path, false, true, false});
+            }
+        }
+        w.memoryUser = std::move(memory.user);
+        w.memoryEhnd = std::move(memory.ehnd);
+        w.memoryEhndStrict = memory.strictEhnd;
+        w.memoryEhndStrictOverride = memory.strictEhndOverride;
+        w.userStrictOverride = memory.usersStrictOverride;
+        w.ehndStrictOverride = memory.folderStrictOverride;
+        e.ehndDir_ = ehndSource.path;
+        w.requestedSources = requested;
+        w.requestedEhnd = ehndSource;
+        w.acceptedEhnd.reset();
+        if (!w.memoryEhnd && !ehndSource.path.empty() && filters.read && filters.version.available) {
+            w.acceptedEhnd = ehndSource;
+            w.acceptedEhnd->directory = true;
+            w.acceptedEhnd->available = true;
+        }
+        w.dictionaryInfo = std::move(r.info);
+        w.filterInfo = std::move(filters.info);
         w.watch.loaded = version;
         w.watch.hasFailed = false;
         e.current_ = ticket;
@@ -149,12 +343,53 @@ struct Access {
 
     // Retry without failed user files. Dictionary-folder errors still fail the load.
     static dict::LoadResult LoadUsers(const std::vector<std::string>& dirs, bool verify, bool cacheWrite,
-                                      const std::vector<std::string>& paths,
+                                      const UserVersion& version, const std::vector<dict::UserSource>& accepted,
+                                      bool strict, const std::optional<dict::File>& memory,
                                       std::vector<dict::LoadError>& userErrors) {
-        auto files = dict::UserFiles(paths);
+        std::vector<std::string> files;
+        for (const auto& [path, stamp] : version.files) {
+            if (stamp.headerProbeFailed) {
+                const bool known = std::any_of(accepted.begin(), accepted.end(), [&](const auto& source) {
+                    return source.path == path && source.available;
+                });
+                userErrors.push_back({path, known ? dict::LoadErrorKind::Read : dict::LoadErrorKind::OptionalSource,
+                    0, dict::TsvErrorKind::Read, known ? std::string() : "cannot read the optional filter header"});
+            } else if (stamp.present) {
+                files.push_back(path);
+            } else {
+                userErrors.push_back({path, dict::LoadErrorKind::Read, 0, dict::TsvErrorKind::Read, {}});
+            }
+        }
+        for (const auto& source : version.sources) {
+            const auto known = std::find_if(accepted.begin(), accepted.end(), [&](const auto& old) {
+                return old.path == source.path;
+            });
+            const bool unavailable = !source.available ||
+                (known != accepted.end() && known->directory != source.directory);
+            if ((source.directory && !source.available) ||
+                (source.explicitPath && known != accepted.end() && known->explicitPath && unavailable)) {
+                const bool folder = source.directory || (known != accepted.end() && known->directory);
+                userErrors.push_back({source.path, folder ? dict::LoadErrorKind::Folder : dict::LoadErrorKind::Read,
+                                      0, dict::TsvErrorKind::Read, {}});
+            } else if (!source.available && source.explicitPath && known == accepted.end() &&
+                       std::none_of(version.files.begin(), version.files.end(), [&](const auto& file) {
+                           return file.first == source.path;
+                       })) {
+                userErrors.push_back({source.path, dict::LoadErrorKind::OptionalSource, 0,
+                                      dict::TsvErrorKind::Read, "the explicit user dictionary source is missing"});
+            }
+        }
         for (;;) {
-            auto result = dict::LoadFolders(dirs, {}, verify, cacheWrite, files);
-            if (Loaded(result)) return result;
+            auto result = dict::LoadFolders(dirs, {}, verify, cacheWrite, files, strict, memory ? &*memory : nullptr);
+            if (Loaded(result)) {
+                for (const auto& error : result.errors) {
+                    // A Japanese target is a notice of --verify-dicts; the row loads.
+                    if (!dict::FailsLoad(error.kind) && error.kind != dict::LoadErrorKind::JapaneseTarget &&
+                        (std::find(files.begin(), files.end(), error.file) != files.end() ||
+                         (memory && error.file == memory->name))) userErrors.push_back(error);
+                }
+                return result;
+            }
             const auto attempted = files;
             const auto count = files.size();
             std::erase_if(files, [&result](const std::string& path) {
@@ -174,32 +409,89 @@ struct Access {
     }
 
     // The filters of r, the outcome of a load with the Ehnd folder dir.
-    static FilterLoad FiltersOf(const dict::LoadResult& r, const std::string& dir) {
+    static FilterLoad FiltersOf(const dict::LoadResult& r, const dict::UserSource& source, bool strict,
+                                const MemoryInput& memory, const std::optional<dict::UserSource>& known, bool verify) {
+        const std::string& dir = source.path;
         if (!Loaded(r)) {
             FilterLoad failed;
             failed.version = FolderVersionOf(dir);
             return failed;
         }
-        return LoadFilters(r.snapshot.get(), dir);
+        return LoadFilters(r.snapshot.get(), dir, strict, memory.ehnd, verify || memory.strictEhnd, source.explicitPath, known);
     }
 
     static bool Load(Engine& e, const std::vector<std::string>& dirs, bool verify,
-                     const std::vector<std::string>& userPaths, bool open) {
-        std::uint64_t ticket;
-        std::string ehnd;
+                     const std::vector<std::string>& userPaths, bool open, const DictionaryOptions& local = {},
+                     const dict::File* newUser = nullptr, const std::vector<EhndFile>* newEhnd = nullptr,
+                     const std::vector<dict::UserSource>* origins = nullptr,
+                     const ConfigResult* suppliedConfig = nullptr) {
+        std::uint64_t ticket, revision;
+        bool active;
+        dict::UserSource ehnd;
+        std::optional<dict::UserSource> knownEhnd;
+        EngineOptions options;
+        MemoryInput memory;
+        std::vector<dict::UserSource> accepted, requested;
+        if (origins) requested = *origins;
+        else for (const auto& path : userPaths) requested.push_back({path});
         {
             std::lock_guard<std::mutex> lock(e.mu_);
             ticket = ++e.loads_;
-            ehnd = e.ehndDir_;
+            active = e.snapshot_ != nullptr || e.watch_->sourceHistorySeeded;
+            ehnd = e.watch_->requestedEhnd;
+            knownEhnd = e.watch_->acceptedEhnd;
+            options = e.watch_->options;
+            revision = e.watch_->optionsRevision;
+            accepted = e.watch_->acceptedSources;
+            memory = {e.watch_->memoryUser, e.watch_->memoryEhnd, e.watch_->memoryEhndStrict,
+                      e.watch_->memoryEhndStrictOverride, e.watch_->userStrictOverride, e.watch_->ehndStrictOverride};
         }
+        const UserVersion version = UserVersionOf(requested, options.configPath, revision);
+        const ConfigResult config = suppliedConfig ? *suppliedConfig :
+            options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
+        const bool baseStrict = StrictDict(options, verify, config);
+        if (open) memory.usersStrictOverride.reset();
+        if (newUser) {
+            memory.user = *newUser;
+            memory.user->strict = local.strict.value_or(baseStrict);
+            memory.user->strictOverride = local.strict.has_value();
+        }
+        if (newEhnd) {
+            memory.ehnd = *newEhnd;
+            memory.strictEhnd = local.strict.value_or(baseStrict);
+            memory.strictEhndOverride = local.strict.has_value();
+            memory.folderStrictOverride.reset();
+            ehnd.path.clear();
+        }
+        if (!newUser && !newEhnd && local.strict) {
+            memory.usersStrictOverride = local.strict;
+            memory.folderStrictOverride = local.strict;
+            if (memory.user) {
+                memory.user->strict = *local.strict;
+                memory.user->strictOverride = true;
+            }
+            if (memory.ehnd) {
+                memory.strictEhnd = *local.strict;
+                memory.strictEhndOverride = true;
+            }
+        }
+        RefreshMemoryPolicy(memory, baseStrict);
+        const bool strict = verify || memory.usersStrictOverride.value_or(baseStrict);
+        const bool ehndStrict = verify || memory.folderStrictOverride.value_or(baseStrict);
         const bool cacheWrite = e.cacheWrite_ == CacheWrite::Sync;
-        const UserVersion version = UserVersionOf(userPaths);
         std::vector<dict::LoadError> userErrors;
-        dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, userPaths, userErrors);
-        FilterLoad filters = FiltersOf(r, ehnd);
+        dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
+        FilterLoad filters = FiltersOf(r, ehnd, ehndStrict, memory, knownEhnd, verify);
+        if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
+            UserVersionOf(requested, options.configPath, revision) != version) {
+            userErrors.push_back({requested.empty() ? std::string() : requested.front().path,
+                dict::LoadErrorKind::Read, 0, dict::TsvErrorKind::Read, "the user sources changed while loading"});
+            r.snapshot.reset();
+        }
         std::lock_guard<std::mutex> lock(e.mu_);
-        if (!Finish(e, ticket, version, std::move(r), std::move(userErrors), std::move(filters), !open)) return false;
-        if (open) {
+        if (!Finish(e, ticket, version, std::move(r), std::move(userErrors), std::move(filters), active || !open,
+                    std::move(memory), ehnd, requested)) return false;
+        if (open && ticket == e.current_) {
             e.dirs_ = dirs;
             e.verifyDicts_ = verify;
             e.userPaths_ = userPaths;
@@ -213,27 +505,51 @@ struct Access {
                             std::chrono::steady_clock::duration interval) {
         UserWatch& w = *e.watch_;
         if (!w.automatic || w.detached || w.running || !e.snapshot_) return false;
+        const bool watchUser = !e.userPaths_.empty() || !w.options.configPath.empty() ||
+                               w.optionsRevision != 0 || w.memoryUser || w.memoryEhnd;
+        const bool userChecked = !watchUser || now >= w.watch.next;
+        const bool ehndChecked = e.ehndDir_.empty() || now >= w.ehnd.next;
         UserVersion found;
         FolderVersion foundEhnd;
-        const bool user = !e.userPaths_.empty() && w.watch.Due(e.userPaths_, now, interval, found);
+        const bool user = watchUser && w.watch.Due(w.requestedSources, now, interval, found,
+                                                   w.options.configPath, w.optionsRevision);
         const bool ehnd = !e.ehndDir_.empty() && w.ehnd.Due(e.ehndDir_, now, interval, foundEhnd);
-        if (!user && !ehnd) return false;
+        // A failed load belongs to both source versions, not to either one alone.
+        const bool retry = userChecked && ehndChecked && w.watch.hasFailed && w.ehnd.hasFailed &&
+            (found != w.watch.failed || foundEhnd != w.ehnd.failed);
+        if (!user && !ehnd && !retry) return false;
         w.worker.Join();
         const std::uint64_t ticket = ++e.loads_;
         // The thread reaches the engine only through target, which the engine clears
         // before it goes; it never needs the engine to wait for it.
         w.running = w.worker.Start([target = w.target, ticket, dirs = e.dirs_, verify = e.verifyDicts_,
-                                    paths = e.userPaths_, ehndDir = e.ehndDir_,
-                                    cacheWrite = e.cacheWrite_ == CacheWrite::Sync] {
-            const UserVersion version = UserVersionOf(paths);
+                                    paths = w.requestedSources, ehndSource = w.requestedEhnd,
+                                    knownEhnd = w.acceptedEhnd, options = w.options,
+                                    revision = w.optionsRevision, accepted = w.acceptedSources,
+                                    memory = MemoryInput{w.memoryUser, w.memoryEhnd, w.memoryEhndStrict,
+                                        w.memoryEhndStrictOverride, w.userStrictOverride, w.ehndStrictOverride},
+                                    cacheWrite = e.cacheWrite_ == CacheWrite::Sync]() mutable {
+            const UserVersion version = UserVersionOf(paths, options.configPath, revision);
+            const ConfigResult config = options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
+            const bool baseStrict = StrictDict(options, verify, config);
+            RefreshMemoryPolicy(memory, baseStrict);
+            const bool strict = verify || memory.usersStrictOverride.value_or(baseStrict);
+            const bool ehndStrict = verify || memory.folderStrictOverride.value_or(baseStrict);
             std::vector<dict::LoadError> userErrors;
-            dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, paths, userErrors);
-            FilterLoad filters = FiltersOf(r, ehndDir);
+            dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
+            FilterLoad filters = FiltersOf(r, ehndSource, ehndStrict, memory, knownEhnd, verify);
+            if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
+                UserVersionOf(paths, options.configPath, revision) != version) {
+                userErrors.push_back({paths.empty() ? std::string() : paths.front().path,
+                    dict::LoadErrorKind::Read, 0, dict::TsvErrorKind::Read, "the user sources changed while loading"});
+                r.snapshot.reset();
+            }
             std::lock_guard<std::mutex> owner(target->mu);
             if (!target->engine) return;
             Engine& engine = *target->engine;
             std::lock_guard<std::mutex> lock(engine.mu_);
-            Finish(engine, ticket, version, std::move(r), std::move(userErrors), std::move(filters), true);
+            Finish(engine, ticket, version, std::move(r), std::move(userErrors), std::move(filters), true,
+                   std::move(memory), ehndSource, paths);
             engine.watch_->running = false;
             engine.watch_->done.notify_all();
         });
@@ -267,6 +583,42 @@ struct Access {
         return e.watch_->errors;
     }
 
+    static LoadInfo SourceInfo(const Engine& e) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        LoadInfo info;
+        info.generation = e.current_;
+        info.files = e.watch_->dictionaryInfo;
+        info.files.insert(info.files.end(), e.watch_->filterInfo.begin(), e.watch_->filterInfo.end());
+        return info;
+    }
+
+    static std::optional<std::uint64_t> DiagnosticsVersion(const Engine& e) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        if (e.watch_->running) return {};
+        return e.loads_;
+    }
+
+    static bool FilterFailed(const Engine& e) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        return e.watch_->filterFailed;
+    }
+
+    static std::vector<dict::UserSource> AcceptedSources(const Engine& e,
+                                                        std::optional<dict::UserSource>* ehnd = nullptr) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        if (ehnd) *ehnd = e.watch_->acceptedEhnd;
+        return e.watch_->acceptedSources;
+    }
+
+    static void SeedSources(Engine& e, std::vector<dict::UserSource> sources,
+                            std::optional<dict::UserSource> ehnd = {}) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        if (e.snapshot_) return;
+        e.watch_->acceptedSources = std::move(sources);
+        e.watch_->acceptedEhnd = std::move(ehnd);
+        e.watch_->sourceHistorySeeded = true;
+    }
+
     static void Current(const Engine& e, std::shared_ptr<const dict::Snapshot>& snap,
                         std::shared_ptr<Generated>& generated, std::shared_ptr<const filter::Filters>& filters) {
         std::lock_guard<std::mutex> lock(e.mu_);
@@ -275,24 +627,84 @@ struct Access {
         filters = e.filters_;
     }
 
-    static bool OpenEhnd(Engine& e, const std::string& dir) {
+    static bool Reload(Engine& e, const DictionaryOptions& local, const dict::File* user = nullptr,
+                       const std::vector<EhndFile>* ehnd = nullptr, const ConfigResult* config = nullptr) {
+        std::vector<std::string> dirs, paths;
+        std::vector<dict::UserSource> sources;
+        bool verify;
+        {
+            std::lock_guard<std::mutex> lock(e.mu_);
+            if (!e.snapshot_) return false;
+            dirs = e.dirs_;
+            paths = e.userPaths_;
+            sources = e.watch_->requestedSources;
+            verify = e.verifyDicts_;
+        }
+        return Load(e, dirs, verify, paths, false, local, user, ehnd, &sources, config);
+    }
+
+    static bool EntryError(Engine& e, int line) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        ++e.loads_;
+        e.watch_->errors = {{"userdict.tsv", dict::LoadErrorKind::Plain, line, dict::TsvErrorKind::Read,
+                              "a field contains a tab, line break or NUL"}};
+        return false;
+    }
+
+    static bool OpenEhnd(Engine& e, const std::string& dir, const DictionaryOptions& local,
+                         bool explicitPath = true, const ConfigResult* suppliedConfig = nullptr) {
         for (;;) {
             std::shared_ptr<const dict::Snapshot> snap;
+            EngineOptions options;
+            std::optional<dict::UserSource> known;
+            bool verify;
+            std::uint64_t ticket;
             {
                 std::lock_guard<std::mutex> lock(e.mu_);
                 if (!e.snapshot_) {
                     e.ehndDir_ = dir;
+                    e.watch_->requestedEhnd = {dir, true, false, explicitPath};
+                    e.watch_->ehndStrictOverride = local.strict;
+                    e.watch_->memoryEhnd.reset();
                     return true;
                 }
+                ticket = ++e.loads_;
                 snap = e.snapshot_;
+                options = e.watch_->options;
+                known = e.watch_->acceptedEhnd;
+                verify = e.verifyDicts_;
             }
-            FilterLoad filters = LoadFilters(snap.get(), dir);
-            if (!filters.read) return false;
+            const FileVersion version = VersionOf(options.configPath);
+            const ConfigResult config = suppliedConfig ? *suppliedConfig :
+                options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
+            const bool strict = verify || local.strict.value_or(StrictDict(options, verify, config));
+            FilterLoad filters = LoadFilters(snap.get(), dir, strict, {}, true, explicitPath, known);
+            if ((!options.configPath.empty() && !ConfigMatches(config, version)) ||
+                VersionOf(options.configPath) != version) {
+                filters.read = false;
+                filters.errors.push_back(options.configPath + ":0: the config changed while loading");
+            }
             std::lock_guard<std::mutex> lock(e.mu_);
             if (snap != e.snapshot_) continue;
-            // Loads under way read the folder before; they are dropped when they finish.
-            e.current_ = ++e.loads_;
+            if (ticket < e.current_) return false;
+            if (!filters.read || !filters.valid) {
+                e.watch_->filterFailed = true;
+                e.filterErrors_ = std::move(filters.errors);
+                return false;
+            }
+            e.current_ = ticket;
             e.ehndDir_ = dir;
+            e.watch_->requestedEhnd = {dir, true, false, explicitPath};
+            e.watch_->ehndStrictOverride = local.strict;
+            e.watch_->acceptedEhnd.reset();
+            if (!dir.empty() && filters.version.available) {
+                e.watch_->acceptedEhnd = dict::UserSource{dir, true, true, explicitPath};
+            }
+            e.watch_->filterInfo = std::move(filters.info);
+            e.watch_->memoryEhnd.reset();
+            e.watch_->memoryEhndStrictOverride = false;
+            e.watch_->watch.hasFailed = false;
+            e.watch_->filterFailed = false;
             e.filters_ = std::move(filters.filters);
             e.filterErrors_ = std::move(filters.errors);
             e.watch_->ehnd.loaded = std::move(filters.version);
@@ -308,6 +720,55 @@ bool CheckUserFile(const Engine& e) { return Access::CheckNow(e, true); }
 bool StartUserFileCheck(const Engine& e) { return Access::CheckNow(e, false); }
 
 std::vector<dict::LoadError> UserFileErrors(const Engine& e) { return Access::Errors(e); }
+
+bool FilterFileFailed(const Engine& e) { return Access::FilterFailed(e); }
+
+std::optional<std::uint64_t> LoadDiagnosticsVersion(const Engine& e) { return Access::DiagnosticsVersion(e); }
+
+LoadInfo LoadedSourceInfo(const Engine& e) { return Access::SourceInfo(e); }
+
+std::vector<dict::UserSource> AcceptedUserSources(const Engine& e) { return Access::AcceptedSources(e); }
+
+void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources) {
+    Access::SeedSources(e, std::move(sources));
+}
+
+std::vector<dict::UserSource> AcceptedUserSources(const Engine& e, std::optional<dict::UserSource>& ehnd) {
+    return Access::AcceptedSources(e, &ehnd);
+}
+
+void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources, std::optional<dict::UserSource> ehnd) {
+    Access::SeedSources(e, std::move(sources), std::move(ehnd));
+}
+
+bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,
+                     const std::vector<dict::UserSource>& sources) {
+    if (!RulesLoaded()) return false;
+    std::vector<std::string> paths;
+    for (const auto& source : sources) paths.push_back(source.path);
+    return Access::Load(e, dirs, verify, paths, true, {}, nullptr, nullptr, &sources);
+}
+
+bool OpenEhndSource(Engine& e, const dict::UserSource& source, const DictionaryOptions& options) {
+    return Access::OpenEhnd(e, source.path, options, source.explicitPath);
+}
+
+bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,
+                     const std::vector<dict::UserSource>& sources, const ConfigResult& config) {
+    if (!RulesLoaded()) return false;
+    std::vector<std::string> paths;
+    for (const auto& source : sources) paths.push_back(source.path);
+    return Access::Load(e, dirs, verify, paths, true, {}, nullptr, nullptr, &sources, &config);
+}
+
+bool OpenEhndSource(Engine& e, const dict::UserSource& source, const ConfigResult& config,
+                    const DictionaryOptions& options) {
+    return Access::OpenEhnd(e, source.path, options, source.explicitPath, &config);
+}
+
+bool ReloadWithConfig(Engine& e, const ConfigResult& config, const DictionaryOptions& options) {
+    return Access::Reload(e, options, nullptr, nullptr, &config);
+}
 
 // The text of a load error.
 std::string ErrorText(const dict::LoadError& e) {
@@ -326,9 +787,20 @@ std::string ErrorText(const dict::LoadError& e) {
 }  // namespace internal
 
 Engine::Engine(bool reference, CacheWrite cacheWrite, UserReload userReload)
+    : Engine(reference, cacheWrite, userReload, EngineOptions{}) {}
+
+Engine::Engine(bool reference, CacheWrite cacheWrite, UserReload userReload, const EngineOptions& options)
     : reference_(reference), cacheWrite_(cacheWrite), watch_(std::make_unique<internal::UserWatch>()) {
+    watch_->options = options;
     watch_->automatic = userReload == UserReload::Auto;
     watch_->target->engine = this;
+}
+
+void Engine::SetOptions(const EngineOptions& options) {
+    std::lock_guard<std::mutex> lock(mu_);
+    if (watch_->options == options) return;
+    watch_->options = options;
+    ++watch_->optionsRevision;
 }
 
 Engine::~Engine() {
@@ -366,21 +838,51 @@ bool Engine::OpenUserDicts(const std::vector<std::string>& dirs, bool verifyDict
     return internal::Access::Load(*this, dirs, verifyDicts, userPaths, true);
 }
 
-bool Engine::Reload() {
-    std::vector<std::string> dirs;
-    bool verify;
-    std::vector<std::string> userPaths;
-    {
-        std::lock_guard<std::mutex> lock(mu_);
-        if (!snapshot_) return false;
-        dirs = dirs_;
-        verify = verifyDicts_;
-        userPaths = userPaths_;
-    }
-    return internal::Access::Load(*this, dirs, verify, userPaths, false);
+bool Engine::Reload() { return Reload(DictionaryOptions{}); }
+
+bool Engine::Reload(const DictionaryOptions& options) { return internal::Access::Reload(*this, options); }
+
+bool Engine::SetUserDictRaw(std::string_view text, const DictionaryOptions& options) {
+    dict::File file;
+    file.name = "userdict.tsv";
+    file.text = text;
+    file.user = true;
+    file.memory = true;
+    return internal::Access::Reload(*this, options, &file);
 }
 
-bool Engine::OpenEhnd(std::string_view dir) { return internal::Access::OpenEhnd(*this, std::string(dir)); }
+bool Engine::SetUserDict(const std::vector<UserDictEntry>& entries, const DictionaryOptions& options) {
+    std::string text;
+    int line = 0;
+    for (const auto& entry : entries) {
+        ++line;
+        for (const auto* field : {&entry.ja, &entry.ko, &entry.pos, &entry.options}) {
+            if (field->find_first_of("\t\r\n\0", 0, 4) != std::string::npos) {
+                return internal::Access::EntryError(*this, line);
+            }
+        }
+        text += entry.ja + "\t" + entry.ko + "\t" + entry.pos + "\t" + entry.options + "\n";
+    }
+    return SetUserDictRaw(text, options);
+}
+
+std::vector<UserDictEntry> Engine::GetUserDict() const {
+    std::lock_guard<std::mutex> lock(mu_);
+    std::vector<UserDictEntry> rows;
+    if (!snapshot_) return rows;
+    for (const auto& row : snapshot_->MemoryUserEntries()) rows.push_back({row.ja, row.ko, row.pos, row.options});
+    return rows;
+}
+
+bool Engine::SetEhnd(const std::vector<EhndFile>& files, const DictionaryOptions& options) {
+    return internal::Access::Reload(*this, options, nullptr, &files);
+}
+
+bool Engine::OpenEhnd(std::string_view dir) { return OpenEhnd(dir, DictionaryOptions{}); }
+
+bool Engine::OpenEhnd(std::string_view dir, const DictionaryOptions& options) {
+    return internal::Access::OpenEhnd(*this, std::string(dir), options);
+}
 
 std::vector<std::string> Engine::FilterErrors() const {
     std::lock_guard<std::mutex> lock(mu_);

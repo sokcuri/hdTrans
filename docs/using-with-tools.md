@@ -11,7 +11,7 @@
 ```text
 C:\hdTrans\
   J2KEngine.dll
-  hdTrans\
+  hdtrans-data\
     dicts.hdsnap
     dicts.txt
     user\
@@ -20,7 +20,7 @@ C:\hdTrans\
 ```
 
 - `dicts.hdsnap`은 기본 사전, `dicts.txt`는 사전 버전입니다. `dicts/` 폴더나 원본 TSV는 배포하지 않으며 따로 받을 필요도 없습니다.
-- DLL을 다른 폴더로 옮기면 `hdTrans` 폴더도 함께 옮깁니다.
+- DLL을 다른 폴더로 옮기면 `hdtrans-data` 폴더도 함께 옮깁니다.
 
 ## LunaTranslator
 
@@ -40,7 +40,7 @@ C:\hdTrans\
 
 3. 아네모네를 다시 실행합니다.
 
-사용자 사전은 `C:\hdTrans\hdTrans\user\userdict.txt`에 작성합니다. 아네모네의 구형 `AneDic.txt` 대신 이 파일을 씁니다.
+사용자 사전은 `C:\hdTrans\hdtrans-data\user\userdict.txt`에 작성합니다. 아네모네의 구형 `AneDic.txt` 대신 이 파일을 씁니다.
 형식은 [사용자 사전](dictionary-files.md#사용자-사전)을 보세요.
 
 ## Textractor에서 아네모네로 보내기
@@ -105,7 +105,7 @@ Textractor는 텍스트를 클립보드로 보내고 아네모네가 번역합�
 
 1. 투컨트롤을 끕니다.
 2. 하드트랜스 배포본의 `J2KEngine.dll`을 두 개 복사하고, 각각 `Ehnd.dll`과 `Ehnd.dlx`로 이름을 바꿔 투컨트롤의 `Ehnd` 폴더에 덮어씁니다.
-3. 하드트랜스 배포본의 `hdTrans` 폴더를 투컨트롤의 `Ehnd` 폴더 안에 복사합니다.
+3. 하드트랜스 배포본의 `hdtrans-data` 폴더를 투컨트롤의 `Ehnd` 폴더 안에 복사합니다.
 4. 나머지 투컨트롤 동봉 파일은 그대로 둡니다.
 5. 투컨트롤을 다시 실행하고 이지트랜스 번역을 사용합니다.
 
@@ -115,7 +115,7 @@ TwoControl\
   Ehnd\
     Ehnd.dll
     Ehnd.dlx
-    hdTrans\
+    hdtrans-data\
       dicts.hdsnap
       dicts.txt
       user\
@@ -152,6 +152,7 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
   않기 때문입니다. 다시 시작은 사전을 새로 읽을 뿐입니다.
 - **사전 바꾸기:** 사용자 사전(`user/userdict*.txt`)은 저장하면 다음 번역부터 반영됩니다. 설정 파일과 기본 사전은 도구를
   다시 시작하거나 다시 읽기(`J2K_ReloadUserDict`, `hdTrans_Reload`)를 하면 반영됩니다.
+- **사전 진단:** 번역이 이상하면 hdTrans 프로그램의 로그 탭(또는 `hdtrans --verify-dicts`)에서 사전 경고를 확인합니다.
 - **말투 설정:** `J2KEngine.dll`과 C API는 설정 파일의 `speech`로 엔진 전체에 정합니다. TypeScript는 `setSpeech()`로
   이후 번역에, `translate(text, { speech })`로 그 호출에만 정하고, C++은 `Session::SetSpeech`, CLI는 `--speech`입니다.
   말투마다 무엇이 달라지는지는 [README](../README.md#말투-strict와-soft)에 있습니다.

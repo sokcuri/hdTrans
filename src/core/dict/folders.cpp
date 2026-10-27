@@ -1,10 +1,13 @@
 #include "core/dict/folders.h"
 
 #include <algorithm>
+#include <cstdio>
 #include <filesystem>
 #include <system_error>
 
 #include "core/dict/runes.h"
+#include "core/dict/mapped_file.h"
+#include "core/dict/snapshot.h"
 
 namespace hdTrans::dict {
 namespace {
@@ -18,6 +21,29 @@ std::string Utf8(const std::filesystem::path& path) {
     return {reinterpret_cast<const char*>(text.data()), text.size()};
 }
 
+bool UserFilterHeader(const std::filesystem::path& path, bool& filter) {
+    filter = false;
+    std::FILE* file = internal::OpenShared(path);
+    if (!file) return false;
+    std::string first;
+    bool ok = true;
+    char buffer[4096];
+    for (;;) {
+        const auto n = std::fread(buffer, 1, sizeof buffer, file);
+        if (std::ferror(file)) { ok = false; break; }
+        const std::string_view bytes(buffer, n);
+        const auto newline = bytes.find('\n');
+        first.append(bytes.substr(0, newline));
+        if (newline != std::string_view::npos || n < sizeof buffer) break;
+    }
+    std::fclose(file);
+    FileLayer layer;
+    if (ok && internal::ReadLayer(first, layer)) {
+        filter = layer == FileLayer::PreFilter || layer == FileLayer::PostFilter;
+    }
+    return ok;
+}
+
 std::string Lower(std::string text) {
     for (char& c : text) if (c >= 'A' && c <= 'Z') c = static_cast<char>(c - 'A' + 'a');
     return text;
@@ -25,10 +51,12 @@ std::string Lower(std::string text) {
 
 }  // namespace
 
-std::string FindChild(std::string_view folder, std::string_view name, bool directory) {
+std::string FindChild(std::string_view folder, std::string_view name, bool directory,
+                      std::vector<std::string>* warnings) {
     const auto parent = PathOf(folder);
     const auto wanted = Lower(std::string(name));
-    std::string matched;
+    std::string matched, exact;
+    std::vector<std::string> names;
     std::error_code error;
     std::filesystem::directory_iterator entries(folder.empty() ? std::filesystem::path(".") : parent, error), end;
     while (!error && entries != end) {
@@ -36,21 +64,39 @@ std::string FindChild(std::string_view folder, std::string_view name, bool direc
         const auto filename = Utf8(child.filename());
         std::error_code kindError;
         const bool kind = directory ? entries->is_directory(kindError) : entries->is_regular_file(kindError);
-        if (!kindError && kind) {
-            if (filename == name) return Utf8(child);
+        if (!kindError && kind && Lower(filename) == wanted) {
             const auto candidate = Utf8(child);
-            if (Lower(filename) == wanted && (matched.empty() || candidate < matched)) matched = candidate;
+            if (filename == name) {
+                if (!warnings) return candidate;
+                exact = candidate;
+            }
+            if (matched.empty() || candidate < matched) matched = candidate;
+            if (warnings && directory) names.push_back(filename);
         }
         entries.increment(error);
     }
-    return matched.empty() ? Utf8(parent / PathOf(name)) : matched;
+    const auto selected = !exact.empty() ? exact : matched.empty() ? Utf8(parent / PathOf(name)) : matched;
+    if (warnings && names.size() > 1) {
+        std::sort(names.begin(), names.end());
+        std::string listed;
+        for (const auto& filename : names) listed += (listed.empty() ? "" : ", ") + filename;
+        warnings->push_back(Utf8(parent) + ":0: " + std::string(name) + " 폴더가 여러 개 있습니다 (" +
+                            listed + "). " + Utf8(PathOf(selected).filename()) + "를 씁니다");
+    }
+    return selected;
 }
 
-std::string DataFolder(std::string_view programDir) {
-    if (programDir.empty()) return {};
-    const auto folder = FindChild(programDir, "hdTrans", true);
-    std::error_code error;
-    return std::filesystem::is_directory(PathOf(folder), error) ? folder : std::string(programDir);
+std::string DataFolder(std::string_view programDir, std::vector<std::string>* warnings) {
+    return FindChild(programDir, "hdtrans-data", true, warnings);
+}
+
+std::vector<std::string> FolderWarnings(std::string_view programDir) {
+    std::vector<std::string> warnings;
+    if (programDir.empty()) return warnings;
+    const auto data = DataFolder(programDir, &warnings);
+    FindChild(data, "user", true, &warnings);
+    FindChild(data, "ehnd", true, &warnings);
+    return warnings;
 }
 
 std::string UserFolder(std::string_view programDir) {
@@ -58,48 +104,53 @@ std::string UserFolder(std::string_view programDir) {
 }
 
 std::string ShippedFolder(std::string_view programDir) {
-    const auto data = DataFolder(programDir);
-    const auto snapshot = FindChild(data, "dicts.hdsnap");
-    std::error_code error;
-    if (std::filesystem::is_regular_file(PathOf(snapshot), error)) return snapshot;
-    return FindChild(data, "dicts", true);
+    return FindChild(DataFolder(programDir), "dicts.hdsnap");
 }
 
 std::string DefaultFolder(std::string_view programDir) {
-    if (programDir.empty()) return "dicts";
-    const auto folder = ShippedFolder(programDir);
-    std::error_code error;
-    if (std::filesystem::is_regular_file(PathOf(folder), error)) return folder;
-    return std::filesystem::is_directory(PathOf(folder), error) ? folder : "dicts";
+    return ShippedFolder(programDir);
 }
 
 namespace {
 
 std::string UserPath(std::string_view programDir, std::string_view name) {
-    const auto path = FindChild(UserFolder(programDir), name);
-    std::error_code error;
-    if (std::filesystem::is_regular_file(PathOf(path), error)) return path;
-    if (DataFolder(programDir) == programDir) {
-        const auto legacy = FindChild(programDir, name);
-        if (std::filesystem::is_regular_file(PathOf(legacy), error)) return legacy;
-    }
-    return path;
+    return FindChild(UserFolder(programDir), name);
 }
 
 }  // namespace
 
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths) {
+    std::vector<UserSource> sources;
+    return UserFiles(paths, sources);
+}
+
+std::vector<std::string> UserFiles(const std::vector<std::string>& paths, std::vector<UserSource>& sources) {
+    std::vector<UserSource> requested;
+    for (const auto& path : paths) requested.push_back({path});
+    return UserFiles(requested, sources);
+}
+
+std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::vector<UserSource>& sources,
+                                   std::vector<std::string>* readFailures) {
     std::vector<std::string> files;
-    for (const std::string& path : paths) {
+    for (const auto& input : paths) {
+        const std::string& path = input.path;
         if (path.empty()) continue;
+        UserSource source{path};
+        source.explicitPath = input.explicitPath;
         if (path.find('\0') != std::string::npos || !internal::ValidUtf8(path)) {
+            sources.push_back(source);
             files.push_back(path);
             continue;
         }
         std::error_code error;
-        if (!std::filesystem::is_directory(PathOf(path), error)) {
+        source.directory = std::filesystem::is_directory(PathOf(path), error);
+        if (!source.directory) {
             error.clear();
-            if (std::filesystem::exists(PathOf(path), error) || error) files.push_back(path);
+            source.available = std::filesystem::is_regular_file(PathOf(path), error);
+            if (error == std::errc::no_such_file_or_directory || error == std::errc::not_a_directory) error.clear();
+            if (source.available || error) files.push_back(path);
+            sources.push_back(source);
             continue;
         }
         std::vector<std::string> names;
@@ -107,11 +158,23 @@ std::vector<std::string> UserFiles(const std::vector<std::string>& paths) {
         while (!error && entries != end) {
             const auto filename = Utf8(entries->path().filename());
             const auto lower = Lower(filename);
-            std::error_code kindError;
-            if (lower.starts_with("userdict") && (lower.ends_with(".txt") || lower.ends_with(".tsv")) &&
-                entries->is_regular_file(kindError) && !kindError) names.push_back(filename);
-            entries.increment(error);
+            if (lower.ends_with(".txt") || lower.ends_with(".tsv")) {
+                std::error_code kindError;
+                if (entries->is_regular_file(kindError)) {
+                    bool selected = lower.starts_with("userdict");
+                    if (!selected && !UserFilterHeader(entries->path(), selected)) {
+                        selected = true;
+                        if (readFailures) readFailures->push_back(Utf8(entries->path()));
+                    }
+                    if (selected) names.push_back(filename);
+                }
+                if (kindError) error = kindError;
+            }
+            if (!error) entries.increment(error);
         }
+        source.available = !error;
+        sources.push_back(source);
+        if (!source.available) continue;
         std::sort(names.begin(), names.end(), [](const std::string& left, const std::string& right) {
             const auto lowerLeft = Lower(left), lowerRight = Lower(right);
             return lowerLeft == lowerRight ? left < right : lowerLeft < lowerRight;
@@ -123,22 +186,14 @@ std::vector<std::string> UserFiles(const std::vector<std::string>& paths) {
 
 std::vector<std::string> UserPaths(std::string_view programDir) {
     if (programDir.empty()) return {};
-    std::vector<std::string> paths{UserFolder(programDir)};
-    if (DataFolder(programDir) == programDir) {
-        const auto legacy = FindChild(programDir, "userdict.tsv");
-        std::error_code error;
-        if (std::filesystem::is_regular_file(PathOf(legacy), error)) paths.insert(paths.begin(), legacy);
-    }
-    return paths;
+    return {UserFolder(programDir)};
 }
 
 std::string ConfigFile(std::string_view programDir) { return UserPath(programDir, "hdtrans.config.yaml"); }
 
 std::string EhndFolder(std::string_view programDir) {
     if (programDir.empty()) return {};
-    const auto folder = FindChild(programDir, "Ehnd", true);
-    std::error_code error;
-    return std::filesystem::is_directory(PathOf(folder), error) ? folder : std::string();
+    return FindChild(DataFolder(programDir), "ehnd", true);
 }
 
 }  // namespace hdTrans::dict

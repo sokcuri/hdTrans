@@ -91,3 +91,16 @@ HD_TEST(output_particle_class_latin) {
     };
     for (const auto& c : cases) HD_CHECK_EQ(Show(ParticleClass(c.in)) + " " + c.in, Show(c.want) + " " + c.in);
 }
+
+// A unit, currency or letter sign reads by its Korean reading (℃ 도, ㎏ 킬로그램, ‰ 퍼밀, ③ 삼).
+HD_TEST(output_particle_class_signs) {
+    struct Case {
+        const char* in;
+        char want;
+    };
+    const Case cases[] = {
+        {"100℃", 'v'}, {"3㎞", 'v'}, {"10€", 'v'}, {"100$", 'v'}, {"5㎏", 'c'}, {"1000₩", 'c'},
+        {"5‰", 'l'},   {"①", 'l'},  {"②", 'v'},  {"③", 'c'},    {"α", 'v'},  {"ε", 'c'},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Show(ParticleClass(c.in)) + " " + c.in, Show(c.want) + " " + c.in);
+}

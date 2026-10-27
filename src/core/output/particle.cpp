@@ -1,6 +1,7 @@
 #include "core/output/particle.h"
 
 #include "core/dict/char_readings.h"
+#include "core/dict/classes.h"
 #include "core/output/cleanup.h"
 #include "core/text/hangul.h"
 
@@ -269,6 +270,10 @@ char ParticleClass(const TextBefore& text) {
         if (DigitValue(r) >= 0) return NumberClass(text, i);
         if (LatinValue(r) != 0) return LatinClass(text, i);
         if (r == U'%' || r == U'％') return 'v';
+        // A sign read as a word decides by its reading (100℃ 백 도, 5㎏ 오 킬로그램, ③ 삼, α 알파).
+        if (dict::InClassRune(HDTRANS_CLASS("sign.final-vowel"), r)) return 'v';
+        if (dict::InClassRune(HDTRANS_CLASS("sign.final-consonant"), r)) return 'c';
+        if (dict::InClassRune(HDTRANS_CLASS("sign.final-rieul"), r)) return 'l';
         if ((r >= 0x3041 && r <= 0x30FA) || r == U'ー' || (r >= 0xFF66 && r <= 0xFF9F)) return 'v';
         if ((r >= 0x3400 && r <= 0x9FFF) || (r >= 0xF900 && r <= 0xFAFF) || r == U'々' || r == U'〆') {
             if (const auto reading = dict::Reading(r)) return HangulClass(text::Final(*reading));

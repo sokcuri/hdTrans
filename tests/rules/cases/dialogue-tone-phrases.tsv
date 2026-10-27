@@ -10,8 +10,8 @@ dict:ikanai	そういうわけにはいきません。	그런 수는 없어요.	
 cx:betsuni-not:10	「べ、別にあんたのためじゃないんだからね！」	「따, 딱히 너를 위해서가 아니니까!」	fix	rewrites
 cx:betsuni-not:10	別に用事があるわけじゃない。	딱히 용무가 있는 건 아니다.	fix	rewrites
 cx:betsuni-not:10	別に怒ってない。	별로 화내지 않다.	keep	rewrites
-cx:prohibit-particle:10	「勘違いしないでよね！」	「착각하지 말아!」	fix	rewrites
-cx:prohibit-particle:20	「勘違いしないでね」	「착각하지 말아」	fix	rewrites
+cx:prohibit-particle:10	「勘違いしないでよね！」	「착각하지 마!」	fix	rewrites
+cx:prohibit-particle:20	「勘違いしないでね」	「착각하지 마」	fix	rewrites
 cx:prohibit-particle:10	勘違いしないでよね、と言った。	착각하지 않고지, 라고 말했다.	keep	rewrites
 cx:suki-de:10	「好きでやってるわけじゃないわよ」	「좋아서 하고 있는 게 아니야」	fix	rewrites
 cx:suki-de:10	「好きでこうなったんじゃない」	「좋아서 이렇게 된 거 아니야」	fix	rewrites
@@ -24,7 +24,7 @@ cx:mou-scold:10	もうバカはやめた。	이제 바보는 그만두었다.	ke
 cx:gentle-request:10	「優しくしてね」	「부드럽게 해 줘」	fix	rewrites
 cx:gentle-request:20	「優しく、してね」	「부드럽게, 해 줘」	fix	rewrites
 cx:gentle-request:10	「みんなに優しくしてね」	「모두에게 다정하게 해」	keep	rewrites
-cx:voice-out:10	「声出ちゃう」	「소리 나와버린다」	fix	rewrites
+cx:voice-out:10	「声出ちゃう」	「소리 나올 것 같아」	fix	rewrites
 sense:koe-sound	「声が漏れる」	「소리가 샌다」	fix	senses
 cx:voice-out:10	「彼の声が聞こえる」	!rule:cx:voice-out:10	keep	rewrites
 dict:jisjk:374181	「悪いんだけど」	「미안한데」	fix	local
@@ -39,3 +39,58 @@ cx:betsuni-not:10	別に好きで乗っている訳じゃない。	딱히 좋아
 cx:mou-scold:10	あーもう、バカばっかり！	아-정말, 바보뿐!	fix	rewrites
 cx:voice-out:10	つい熱くなって、声に出してしまった。	!rule:cx:voice-out:10	keep	rewrites
 cx:voice-out:10	「声が出ない」	!rule:cx:voice-out:10	keep	rewrites
+dict:jisjk:264789	勘違いしないで。	착각하지 마.	fix	local-ending
+dict:jisjk:264789	心配しないで	걱정하지 마	fix	local-ending
+dict:jisjk:264789	邪魔しないで	방해하지 마	fix	local-ending
+dict:jisjk:264789	皆、油断しないで	모두, 방심하지 마	fix	local-ending
+cx:prohibit-particle:20	あまり火遊びはしないでね	has:하지 마	fix	rewrites
+cx:prohibit-particle:10	頭をなでなでしないでよ	has:하지 마	fix	rewrites
+dict:jisjk:264789	二度としないで	두 번 다시 하지 마	fix	local-ending
+cx:prohibit-request:10	早まらないでください	성급하게 굴지 마세요	fix	rewrites
+cx:prohibit-request:10	そんなに見ないで下さい	그렇게 보지 마세요	fix	rewrites
+cx:prohibit-request:10	驚かさないでくださいね	놀라게 하지 마세요	fix	rewrites
+cx:prohibit-request:10	気を使わないでください	신경을 쓰지 마세요	fix	rewrites
+cx:prohibit-request:20	心配しないでくださいね	걱정하지 마세요	fix	rewrites
+cx:prohibit-request:20	無理はしないでくださいね	무리는 하지 마세요	fix	rewrites
+cx:prohibit-request:20	勘違いしないでください。	착각하지 마세요.	fix	rewrites
+cx:prohibit-particle:20	勘違いしないでね。	착각하지 마.	fix	rewrites
+dict:jisjk:264789	勘違いしないで聞いて。	착각하지 않고 들어.	keep	local-ending
+ending:naide	食べないで寝る。	먹지 않고 잔다.	keep	local-ending
+cx:prohibit-request:20	心配しないでくれ	걱정하지 말아 줘	keep	rewrites
+cx:prohibit-request:10	気を使わないでくれ	신경을 쓰지 말아줘	keep	rewrites
+cx:prohibit-request:10	何度も言わせないでくれ	몇 번이나 말하게 하지 말아줘	keep	rewrites
+cx:prohibit-request:10	今は話しかけないでくれ	지금은 말을 걸지 말아줘	keep	rewrites
+cx:prohibit-request:10	行かないでほしい。	가지 말았으면 좋겠다.	keep	rewrites
+cx:prohibit-request:10	食べてくださいね	먹어 주세요	keep	rewrites
+dict:jisjk:264789	才能があるとか勘違いしないで、ひたすら練習に励むべきだ。	!rule:dict:jisjk:264789	keep	local-ending
+cx:prohibit-request:10	食べないでください、と言った。	!rule:cx:prohibit-request:10	keep	rewrites
+cx:prohibit-request:20	勘違いしないでくださいと言った。	!rule:cx:prohibit-request:20	keep	rewrites
+ending:naide	泣かないで。	울지 마.	keep	local-ending
+cx:prohibit-request:20	費用を心配しないでいいし	비용을 걱정하지 않아도 좋고	keep	rewrites
+cx:prohibit-particle:10	いいわよ、もう着ないから…今年だけなんだから！ …えっ、そ、そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	좋아, 이제 입지 않으니까…금년만이니까! …어, 그, 그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
+cx:prohibit-particle:10	そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
+cx:prohibit-particle:10	そんな顔しないでよ...もぅ...わかったわよぉ	그런 얼굴 하지 마...정말...알았어	keep	rewrites
+cx:prohibit-particle:10	そんな顔しないでよ‥もぅ‥わかったわよぉ	그런 얼굴 하지 마‥정말‥알았어	fix	rewrites
+cx:prohibit-particle:10	気にしないでよ……ね☆	has:신경 쓰지 마	keep	rewrites
+cx:prohibit-particle:20	あまり火遊びはしないでね。お願いよ？	has:하지 마.	keep	rewrites
+dict:jisjk:264789	心配しないで…。色々と優しく、指導させて頂きますから。	has:걱정하지 마….	keep	local-ending
+dict:jisjk:264789	心配しないで......！	걱정하지 마......!	keep	local-ending
+cx:prohibit-particle:10	心配しないで…今度は司令に指一本触れさせません。	!rule:cx:prohibit-particle:10	keep	rewrites
+cx:prohibit-particle:10	心配しないで…司令にも、皆さんにも、平戸が指一本触れさせません。	!rule:cx:prohibit-particle:10	keep	rewrites
+cx:prohibit-request:10	そのように、仰らないでください……どうして良いか、わからなくなります	has:말씀하시지 마세요	fix	rewrites
+cx:prohibit-request:10	ああっ、みんな見ないでください…恥ずかしいよぉ…	has:보지 마세요	fix	rewrites
+cx:prohibit-request:20	気にしないでください。お茶を用意させますので少々お待ちを	has:신경 쓰지 마세요.	keep	rewrites
+cx:prohibit-request:20	無理はしないでください。あ、海風、お茶を淹れますね？	has:무리는 하지 마세요.	keep	rewrites
+dict:jisjk:264789	その呼び方　二度としないで。おお　怖ぇ。怖ぇ。	has:두 번 다시 하지 마.	keep	local-ending
+dict:jisjk:264789	無理しないで無理しないで｡	has:무리하지 마.	keep	local-ending
+cx:prohibit-particle:10	みんな、油断しないで行こう。	모두, 방심하지 않고 가자.	keep	rewrites
+cx:prohibit-request:20	その間の費用を心配しないでいいし	그 사이의 비용을 걱정하지 않아도 좋고	keep	rewrites
+cx:prohibit-particle:10	あんまり危険なことはしないで欲しいです…	!rule:cx:prohibit-particle:10	keep	rewrites
+cx:prohibit-particle:10	あまり無理はしないで欲しいデース！	!rule:cx:prohibit-particle:10	keep	rewrites
+cx:prohibit-request:20	あ、気を使わないでくれ	아, 신경을 쓰지 말아줘	keep	rewrites
+cx:prohibit-particle:10	勘違いしないでよ…と言った。	!rule:cx:prohibit-particle:10	keep	rewrites
+cx:prohibit-request:20	勘違いしないでください…と言った。	!rule:cx:prohibit-request:20	keep	rewrites
+cx:prohibit-particle:20	心配しないでね、と言った。	!rule:cx:prohibit-particle:20	keep	rewrites
+cx:prohibit-particle:10	食べないで…寝る。	먹지 않고…잔다.	keep	rewrites
+cx:prohibit-particle:20	勘違いしないでね…お願い。	착각하지 마…부탁.	fix	rewrites
+cx:prohibit-request:10	食べないでください…お願い。	먹지 마세요…부탁.	fix	rewrites

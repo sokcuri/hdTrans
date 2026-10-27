@@ -19,7 +19,17 @@ std::string Katakana(std::string_view in) {
 }  // namespace
 
 HD_TEST(kana_katakana_cases) {
-    HD_CHECK_EQ(Katakana("コンピューター"), std::string("콘퓨타"));
+    HD_CHECK_EQ(Katakana("コンピューター"), std::string("콘퓨터"));
+    // A final long a after ン, ッ, ー or イ is English -er; other endings keep a.
+    HD_CHECK_EQ(Katakana("イベンター"), std::string("이벤터"));
+    HD_CHECK_EQ(Katakana("ヒッパー"), std::string("힙퍼"));
+    HD_CHECK_EQ(Katakana("ダーター"), std::string("다터"));
+    HD_CHECK_EQ(Katakana("アバター"), std::string("아바타"));
+    HD_CHECK_EQ(Katakana("キター"), std::string("키타"));
+    HD_CHECK_EQ(Katakana("カーカー"), std::string("카카"));
+    HD_CHECK_EQ(Katakana("クゥーマー"), std::string("쿠마"));
+    HD_CHECK_EQ(Katakana("ウォンター"), std::string("원터"));
+    HD_CHECK_EQ(Katakana("ーラー"), std::string("라"));
     HD_CHECK_EQ(Katakana("メント"), std::string("먼트"));
     HD_CHECK_EQ(Katakana("ベッド"), std::string("벳드"));
     HD_CHECK_EQ(Katakana("ー"), std::string(""));

@@ -1,5 +1,12 @@
 # 규칙: MNG-1
 rule	input	expected	kind	layer
+verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
+verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
+verb:synthetic-causative-potential	続けさせられません。	has:할 수 없습니다	fix	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられない。	has:않는다	keep	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられない。	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	毎日無理やり練習を続けさせられなかった。	has:않았다	keep	analysis
+verb:synthetic-causative-potential	毎日無理やり練習を続けさせられなかった。	lacks:할 수	keep	analysis
 dict:jisjk:121099	高圧的ではない。	고압적이지 않다.	fix	lookup
 dict:jisjk:121099	高圧的だ。	고압적이다.	keep	lookup
 dict:jisjk:136663	深大ではない。	심대하지 않다.	fix	lookup
@@ -57,3 +64,9 @@ cx:trailing-ja:10	「ち、違うっ！　別にそういうつもりじゃ…�
 cx:trailing-ja:10	「……それで、アルファさんは、幽霊じゃ……ないんだよな？」	has:아닌	keep	rewrites
 normalize:ikanai	「そういうわけにはいかねえんだよ！」	has:없어	fix	normalize
 normalize:ikanai	「そうはいかねえんだよ」	has:되지 않아	fix	normalize
+analysis:degree-negative	多過ぎない？	has:많지 않아	fix	analysis
+analysis:degree-negative	記憶が多すぎる。	has:많다	keep	analysis
+dict:jisjk:138705	その場に在り合わない物だ。	has:있지 않은	fix	compose
+dict:jisjk:138705	在り合う物を使う。	has:마침 있는	keep	compose
+dict:jisjk:139107	それは言兼ねる。	has:말할 수 없다	fix	compose
+dict:jisjk:201724	あるのではない。	has:있는 것은 아니다	keep	compose

@@ -20,7 +20,7 @@ dict:jisjk:342993	よく走るねぇ。	잘 달리네.	fix	local
 dict:jisjk:346800	まさかの成功だ。	뜻밖의 성공이다.	fix	local
 dict:jisjk:346800	まさか忘れないだろう。	설마 잊지 않을 것이다.	fix	local
 dict:jisjk:340827	静かにしないでください。	!rule:dict:jisjk:340827	keep	local
-dict:jisjk:340827	話しをしないでください。	이야기를 하지 말아 주세요.	fix	local
+dict:jisjk:340827	話しをしないでください。	이야기를 하지 마세요.	fix	local
 dict:jisjk:375160	無理だとは思わない。	무리라고는 생각하지 않는다.	keep	local
 dict:jisjk:268040	お詫びの申し上げもございませんが、失礼します。	뭐라 사과의 말씀을 드려야 할지 모르겠습니다만, 실례합니다.	fix	local
 dict:jisjk:268040	お詫びの申し上げもございませんでした。	!rule:dict:jisjk:268040	keep	local

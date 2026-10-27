@@ -512,12 +512,12 @@ Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::st
 
 // Text path: the noun records of records move ahead of a verb whose continuative they
 // spell, the stem and one kana of the i or e row (争い, not 争 + い), when no record is
-// longer, the word before is a modifier a verb cannot follow (の, a word in な, この) and
+// longer, the word before is a modifier a verb cannot follow (の, a word in の or な, この) and
 // a particle or punctuation follows the noun. Plain-dictionary records stay in front.
 Record* NounAfterModifier(const Item& parent, Record* records, std::string_view text) {
     const std::string_view p = parent.group->surface;
     if (parent.detail->Yougo() ||
-        (p != "の" && !p.ends_with("な") && p != "この" && p != "その" && p != "あの" && p != "どの")) {
+        (!p.ends_with("の") && !p.ends_with("な") && p != "この" && p != "その" && p != "あの" && p != "どの")) {
         return records;
     }
     Record* owned = nullptr;
@@ -606,6 +606,34 @@ Record* VerbBeforePolite(Record* records, std::string_view text) {
     if (owned == nullptr) return verbs;
     owned->child = verbs;
     return records;
+}
+
+// A degree suffix after an adjective stem or a verb's continuative cannot take
+// adnominal な from the verb's ない or なければ. Complete finite endings stay available.
+bool DegreeNegativeAdnominal(const Item& parent, const Item& candidate, std::string_view source) {
+    const Detail& detail = *parent.detail;
+    const bool degreeStem = (detail.cls == kDetailKeiyo && detail.kind == 'x') ||
+                            (detail.cls == kDetailDakeiyo && detail.kind == 'X') ||
+                            (detail.cls == kDetailVerb && detail.kind == 10 && parent.DirectLength() == 0);
+    if (!degreeStem || candidate.detail->cls != kDetailDakeiyo || candidate.group->entries.front()->user != nullptr ||
+        candidate.DirectSurface() != "な" ||
+        !dict::InClass(HDTRANS_CLASS("suffix.continuative"), candidate.group->surface)) {
+        return false;
+    }
+    const std::string_view ending = source.substr(candidate.group->surface.size());
+    if (!ending.starts_with("ない") && !ending.starts_with("なければ")) return false;
+    bool adnominal = false;
+    for (int i = 0; i < candidate.DirectCount(); i++) {
+        if (!candidate.DirectEnabled(i)) continue;
+        const std::string_view target = candidate.DirectText(i);
+        if (target != "4" && !target.starts_with("4 ")) return false;
+        adnominal = true;
+    }
+    if (!adnominal) return false;
+    for (const Record* other = candidate.group->records; other != nullptr; other = other->child) {
+        if (other->source == candidate.group->surface && At(other->partCode, 1) == '4') return true;
+    }
+    return false;
 }
 
 // Rejects some kind-1 records next to level-2 kanji and the characters after them in
@@ -738,7 +766,58 @@ bool Worker::Transliterate(std::string_view s, std::string& out) {
         out = std::move(kr);
         return true;
     }
+    // A particle stretched after a word spelled in katakana (セツブンガー 세츠분가) is not -er.
+    for (const std::string_view particle : {"ガー", "ハー", "ナー", "カー", "サー", "ダー"}) {
+        if (!s.ends_with(particle)) continue;
+        const std::string_view stem = s.substr(0, s.size() - particle.size());
+        std::string hiragana;
+        for (std::string_view rest = stem; !rest.empty();) {
+            const text::Rune r = text::DecodeRune(rest);
+            text::AppendRune(hiragana, r.cp >= U'ァ' && r.cp <= U'ヶ' ? r.cp - 0x60 : r.cp);
+            rest.remove_prefix(r.size);
+        }
+        std::string tail;
+        if (text::RuneCount(stem) >= 3 && snapshot.DictionaryWord(hiragana) && TransliterateName(stem, out) &&
+            TransliterateName(particle, tail)) {
+            out += tail;
+            return true;
+        }
+        break;
+    }
     return TransliterateName(s, out);
+}
+
+namespace {
+
+// Whether text is one letter or number written as a symbol (①, Ⅳ, α): a word, not a mark.
+// Han characters and the marks of Japanese writing (U+3000..U+30FF: ゝ, ヾ, 〆) are not.
+bool SymbolWord(std::string_view s) {
+    if (s.empty()) return false;
+    const char32_t r = text::DecodeRune(s).cp;
+    return text::DecodeRune(s).size == s.size() && r >= 0x80 && (r < 0x3000 || r > 0x30FF) && !text::IsKanji(r) &&
+           !text::IsSymbol(r) && !text::IsPunct(r) && !text::IsSpace(r);
+}
+
+// Whether text is one sign that a number before it takes as its unit (℃, ㎏, °).
+bool UnitSign(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    return !s.empty() && r.size == s.size() && r.cp >= 0x80 && (text::IsSymbol(r.cp) || text::IsPunct(r.cp)) &&
+           (dict::InClassRune(HDTRANS_CLASS("sign.final-vowel"), r.cp) ||
+            dict::InClassRune(HDTRANS_CLASS("sign.final-consonant"), r.cp) ||
+            dict::InClassRune(HDTRANS_CLASS("sign.final-rieul"), r.cp));
+}
+
+}  // namespace
+
+// Whether token j is Latin letters or digits (a symbol written on to one is part of its word:
+// 6461π, BoyzⅡMen).
+bool Worker::LatinOrDigits(int j) const {
+    if (j < 0 || j >= TokenCount()) return false;
+    switch (Tok(j).type) {
+    case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16:
+        return true;
+    }
+    return false;
 }
 
 bool Worker::Dispatch(int i, int& last) {
@@ -752,7 +831,7 @@ bool Worker::Dispatch(int i, int& last) {
         BuildTokenTransformText(i);
         break;
     case tokenizer::kTypeAsciiClose: case tokenizer::kTypeAsciiOpen: case tokenizer::kTypeAsciiSymbol:
-        if (left == "(" || left == ")" || Has(left, "%")) BuildTokenTransformText(i);
+        if (left == "(" || left == ")" || Has(left, "%") || tokenizer::SignedNumber(left)) BuildTokenTransformText(i);
         break;
     case tokenizer::kTypeJapanese:
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
@@ -768,7 +847,12 @@ bool Worker::Dispatch(int i, int& last) {
         }
         break;
     case 18: case 20: case 22:
-        if (left == "(" || left == ")" || left == "?" || left == "%") BuildTokenTransformText(i);
+        if (left == "(" || left == ")" || left == "?" || left == "%" ||
+            (type == tokenizer::kTypeSymbol && SymbolWord(merged) && !LatinOrDigits(i - 1) && !LatinOrDigits(i + 1)) ||
+            (type == tokenizer::kTypeSymbol && left == merged && UnitSign(merged) && i > 0 &&
+             (Tok(i - 1).type == tokenizer::kTypeNumber || Tok(i - 1).type == 15))) {
+            BuildTokenTransformText(i);
+        }
         break;
     case tokenizer::kTypeProtected:
         Insert(ProtectedItem(i));
@@ -1523,6 +1607,11 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
+    while (settings.text && parent != nullptr && candidate != nullptr && DegreeNegativeAdnominal(*parent, *candidate, text)) {
+        Record* remaining = candidate->group->records;
+        candidate->group->records = nullptr;
+        candidate = InsertLateCandidate(full, cursor, token, remaining);
+    }
     if (candidate == nullptr) {
         const std::string_view pair = PairText(text);
         if (FindHonorificPrefix(pair) != -1) {

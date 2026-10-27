@@ -1,0 +1,28 @@
+# 규칙: LEX-80
+rule	input	expected	kind	layer
+analysis:noun-covers-verb	なる 書けない	된다 쓸 수 없다	fix	analysis
+analysis:noun-covers-verb	なる 走れない	된다 달릴 수 없다	fix	analysis
+analysis:noun-covers-verb	する 走れない	한다 달릴 수 없다	fix	analysis
+analysis:noun-covers-verb	みた 書けない	보았다 쓸 수 없다	fix	analysis
+analysis:noun-covers-verb	鈍くなる走れなくなる	has:달릴 수 없게 된다	fix	analysis
+analysis:noun-covers-verb	なにか、嫌な夢をみた……思い出せないけど……	뭔가, 싫은 꿈을 보았다……생각해 낼 수 없는데……	fix	analysis
+analysis:noun-covers-verb	いっかうまく投げられない	has:던질 수 없다	fix	analysis
+analysis:noun-covers-verb	いっかうまく投げられない	lacks:られ	fix	analysis
+analysis:noun-covers-verb	見る 話せない	has:이야기할 수 없다	fix	analysis
+analysis:noun-covers-verb	笑う 歌えない	has:노래할 수 없다	fix	analysis
+analysis:noun-covers-verb	言った 答えられない	has:대답할 수 없다	fix	analysis
+analysis:noun-covers-verb	待つ 戦えない	has:싸울 수 없다	fix	analysis
+analysis:noun-covers-verb	思った 書けなかった	has:쓸 수 없었다	fix	analysis
+analysis:noun-covers-verb	いる 走れなかった	has:달릴 수 없었다	fix	analysis
+analysis:noun-covers-verb	読んだ本を	읽은 책을	keep	analysis
+analysis:noun-covers-verb	大きな書を	큰 책을	keep	analysis
+analysis:noun-covers-verb	する話	하는 이야기	keep	analysis
+analysis:noun-covers-verb	なる走り	되는 달리기	keep	analysis
+analysis:noun-covers-verb	する走りを見せた	하는 달리기를 보였다	keep	analysis
+analysis:noun-covers-verb	歌う歌	노래하는 노래	keep	analysis
+analysis:noun-covers-verb	横道に逸れた考えを戻そう。	옆길에 벗어난 생각을 되돌리자.	keep	analysis
+analysis:noun-covers-verb	お付き合いする話。	교제하는 이야기.	keep	analysis
+analysis:noun-covers-verb	痛くてうまく走れない。	아프고 잘 달릴 수 없다.	keep	analysis
+analysis:noun-covers-verb	なる 読めない	된다 읽을 수 없다	keep	analysis
+analysis:noun-covers-verb	猫 走れない	고양이 달릴 수 없다	keep	analysis
+analysis:noun-covers-verb	なる。走れなくなる	된다. 달릴 수 없게 된다	keep	analysis

@@ -1,0 +1,22 @@
+# 규칙: LAY-15, LAY-9
+rule	input	expected	kind	layer
+compose:symbol-word	確率は50%です	확률은 50%입니다	fix	compose
+compose:symbol-word	気温は100%だった	기온은 100%였다	fix	compose
+compose:symbol-word	値段は100$だった	가격은 100$였다	fix	compose
+compose:symbol-word	カップルは、1~6の番号をつける	커플은, 1~6의 번호를 매긴다	fix	compose
+compose:symbol-word	初期レベルが+1だ	초기 레벨이 +1이다	fix	compose
+compose:symbol-word	割合は3-3-6だ	비율은 3-3-6이다	fix	compose
+compose:symbol-word	これは①です	이것은 ①입니다	fix	compose
+compose:symbol-word	答えは②だ	대답은 ②다	fix	compose
+compose:symbol-word	これはⅣです	이것은 Ⅳ입니다	fix	compose
+compose:symbol-word	係数はαだ	계수는 α다	fix	compose
+compose:symbol-word	支持率は５３％です。	지지율은 53%입니다.	keep	compose
+compose:symbol-word	50%の確率	50%의 확률	keep	compose
+compose:symbol-word	５/１４　２３：４０追記	5/14 23：40 추기	keep	compose
+compose:symbol-word	HP（体力）:30	HP(체력):30	keep	compose
+compose:symbol-word	これは★です	이것은★입니다	keep	compose
+compose:symbol-word	これは…です	이것은…입니다	keep	compose
+compose:symbol-word	スキル①を使う	스킬①을 쓴다	keep	compose
+compose:symbol-word	ステージⅣの患者	스테이지Ⅳ의 환자	keep	compose
+compose:symbol-word	プラスαの価値	플러스α의 가치	keep	compose
+compose:symbol-word	行われたβテスト	행해진 β테스트	fix	compose

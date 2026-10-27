@@ -5,6 +5,8 @@
 #include <string_view>
 #include <vector>
 
+#include "core/dict/dict.h"
+
 namespace hdTrans::gui {
 
 // A user dictionary file of the user sources (files, or folders of userdict*.txt/tsv). A file
@@ -34,8 +36,9 @@ struct DictText {
     bool column = false;
 };
 
+// A row of a plain dictionary file; note is the text of a trailing // field, which the loader skips.
 struct DictRow {
-    std::string key, ko, pos, options;
+    std::string key{}, ko{}, pos{}, options{}, note{};
 };
 
 bool ReadDictText(const std::filesystem::path& path, DictText& text);
@@ -43,8 +46,17 @@ bool ReadDictText(const std::filesystem::path& path, DictText& text);
 bool WriteDictText(const std::filesystem::path& path, const DictText& text);
 bool EntryLine(std::string_view line);
 DictRow ParseRow(std::string_view line);
-// The line of row; a trailing // comment of old is kept. Tabs and newlines in fields become spaces.
-std::string RowLine(const DictRow& row, std::string_view old = {});
+// The line of row, its note as a trailing "// note" field. Tabs and newlines in fields become spaces.
+std::string RowLine(const DictRow& row);
+// The field a row problem is in, and the problem in Korean; an empty message when the row loads.
+enum class RowField { Key, Ko, Pos, Options };
+struct RowProblem {
+    RowField field = RowField::Key;
+    std::string message;
+};
+// Checks row as the user dictionary loader does; base resolves る-verbs as at load, null for none.
+RowProblem CheckRow(const DictRow& row, const dict::Dict* base = nullptr);
+
 // Copies source (any encoding ReadTextFile reads) into folder as a UTF-8 user dictionary under a
 // free name; returns the new path, empty on failure.
 std::filesystem::path ImportUserDict(const std::filesystem::path& source, const std::filesystem::path& folder);

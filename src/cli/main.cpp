@@ -26,6 +26,10 @@
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
 #include "core/engine/rules.h"
+#include "core/engine/user_watch.h"
+#include "core/engine/load_info.h"
+#include "frontend/load_info.h"
+#include "core/output/families.h"
 #include "core/word/constructions.h"
 #include "core/word/select.h"
 #include "stage_records.h"
@@ -89,6 +93,7 @@ void Usage(std::FILE* file) {
                "  --why                  write selection and filter logs to stderr\n"
                "  --trace FILE           write every candidate of every word to FILE\n"
                "  --version              load dictionaries and show engine, runtime and dictionary versions\n"
+               "  --verbose              write loaded dictionary information to stderr (except with --version)\n"
                "  --help                 show this help\n"
                "  --config FILE          settings file\n"
                "  --dicts DIR,...        dictionary paths in load order\n"
@@ -102,7 +107,7 @@ void Usage(std::FILE* file) {
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
-               "Legacy single-hyphen options are also accepted. Use -- before literal text starting with '-'.\n", file);
+               "Legacy single-hyphen options are also accepted, except --verbose. Use -- before literal text starting with '-'.\n", file);
 }
 
 std::FILE* OpenFile(const std::string& path, bool write) {
@@ -282,6 +287,7 @@ int RunMain(int argc, char** argv) {
     bool hasText = false;
     bool json = false;
     bool version = false;
+    bool verbose = false;
     bool literal = false;
     std::string ruleCountsPath;
     std::string dumpRulesPath;
@@ -343,6 +349,7 @@ int RunMain(int argc, char** argv) {
         }
         if (option == "-help") { Usage(stdout); return 0; }
         else if (option == "-version") version = true;
+        else if (option == "-verbose" && std::string_view(argv[i]) == "--verbose") verbose = true;
         else if (option == "-json") json = true;
         else if (option == "-dicts") dictsArg = *value;
         else if (option == "-config") configArg = *value;
@@ -388,6 +395,8 @@ int RunMain(int argc, char** argv) {
     }
 
     const std::string programDir = ExecutableDir();
+    for (const auto& warning : hdTrans::dict::FolderWarnings(programDir))
+        std::fprintf(stderr, "hdtrans: warning: %s\n", warning.c_str());
     const std::string configPath = configArg ? *configArg : hdTrans::dict::ConfigFile(programDir);
     const auto config = hdTrans::internal::LoadConfig(configPath);
     if (configArg && !config.found && config.diagnostics.empty()) {
@@ -442,7 +451,12 @@ int RunMain(int argc, char** argv) {
     }
     if (snapshotOut) {
         if (!hdTrans::dict::CompileSnapshot(folders, *snapshotOut)) {
-            std::fprintf(stderr, "hdtrans: cannot compile the dictionary snapshot; a column dictionary must load successfully\n");
+            for (const hdTrans::dict::LoadError& e : hdTrans::dict::LoadFoldersTsv(folders).errors) {
+                if (e.kind != hdTrans::dict::LoadErrorKind::MarkerClass) continue;
+                std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
+            }
+            std::fprintf(stderr, "hdtrans: cannot compile the dictionary snapshot; a column dictionary must load successfully "
+                                 "and every marker family must expand\n");
             return 1;
         }
         std::printf("%s\n", snapshotOut->c_str());
@@ -474,32 +488,55 @@ int RunMain(int argc, char** argv) {
     }
     if (why) std::setvbuf(stderr, nullptr, _IOFBF, 1 << 16);
 
-    hdTrans::Engine engine(reference);
-    if (!engine.OpenUserDicts(folders, verifyDicts, userPaths)) {
+    if (!dictsArg && !config.settings.dicts) {
+        std::error_code error;
+        const auto path = std::filesystem::path(std::u8string(reinterpret_cast<const char8_t*>(dicts.data()), dicts.size()));
+        if (!std::filesystem::exists(path, error) && !error) {
+            std::fprintf(stderr, "hdtrans: %s을 찾을 수 없습니다\n", dicts.c_str());
+            return 1;
+        }
+    }
+    const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
+    verifyDicts = verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1");
+    const hdTrans::EngineOptions dictionaryOptions{
+        verifyDicts ? std::optional<bool>(true) : std::nullopt, false, configPath};
+    hdTrans::Engine engine(reference, hdTrans::CacheWrite::Sync, hdTrans::UserReload::Off, dictionaryOptions);
+    const std::string ehnd = ehndArg ? *ehndArg : config.settings.useEhnd ? hdTrans::dict::EhndFolder(programDir) : "";
+    std::vector<hdTrans::dict::UserSource> userSources;
+    for (const auto& path : userPaths)
+        userSources.push_back({path, false, false, userPathsArg.has_value()});
+    const hdTrans::dict::UserSource ehndSource{ehnd, true, false, ehndArg.has_value()};
+    static_cast<void>(hdTrans::internal::OpenEhndSource(engine, ehndSource, config));
+    bool loaded = hdTrans::internal::OpenUserSources(engine, folders, verifyDicts, userSources, config);
+    if (verifyDicts) {
+        for (const auto& error : hdTrans::internal::UserFileErrors(engine))
+            if (hdTrans::dict::FailsLoad(error.kind)) loaded = false;
+        if (hdTrans::internal::FilterFileFailed(engine)) loaded = false;
+    }
+    if (!loaded) {
         std::fprintf(stderr, "hdtrans: no dictionary loaded from %s\n", dicts.c_str());
         // The reason a folder or a snapshot file did not load, one line per file.
         const std::string reason = engine.UserFileError();
         if (!reason.empty()) std::fprintf(stderr, "%s\n", reason.c_str());
+        for (const std::string& error : engine.FilterErrors()) std::fprintf(stderr, "hdtrans: %s\n", error.c_str());
         return 1;
     }
-    if (const std::string error = engine.UserFileError(); !error.empty()) {
-        const bool single = userPathsArg && hdTrans::dict::UserFiles(userPaths).size() == 1;
-        std::fprintf(stderr, "hdtrans: %suser dictionary not loaded:\n%s\n", single ? "" : "warning: ",
-                     error.c_str());
-        if (single) return 1;
-    }
-    const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
-    if (verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1")) {
+    if (const std::string error = engine.UserFileError(); !error.empty())
+        std::fprintf(stderr, "hdtrans: warning: user dictionary lines skipped:\n%s\n", error.c_str());
+    for (const std::string& error : engine.FilterErrors()) std::fprintf(stderr, "hdtrans: warning: %s\n", error.c_str());
+    if (verifyDicts) {
         // Verification also fails on loaded lines whose marker family does not fit their part code
         // and on negations in 지 않 that the class of their key does not account for, and on noun lines
-        // whose target is a verb made a noun.
+        // whose target is a verb made a noun, and on lines whose target holds kana or kanji.
         const auto checked = hdTrans::dict::LoadFolders(folders, {}, true, false, hdTrans::dict::UserFiles(userPaths));
         std::size_t failed = 0;
         for (const hdTrans::dict::LoadError& e : checked.errors) {
             if (e.kind != hdTrans::dict::LoadErrorKind::MarkerClass &&
                 e.kind != hdTrans::dict::LoadErrorKind::MissingRuleBodies &&
                 e.kind != hdTrans::dict::LoadErrorKind::NegationEnding &&
-                e.kind != hdTrans::dict::LoadErrorKind::VerbNoun)
+                e.kind != hdTrans::dict::LoadErrorKind::VerbNoun &&
+                e.kind != hdTrans::dict::LoadErrorKind::UserRow &&
+                e.kind != hdTrans::dict::LoadErrorKind::JapaneseTarget)
                 continue;
             std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
             failed++;
@@ -509,13 +546,10 @@ int RunMain(int argc, char** argv) {
             return 1;
         }
     }
-    const std::string ehnd = ehndArg ? *ehndArg : config.settings.useEhnd ? hdTrans::dict::EhndFolder(programDir) : "";
-    if (!ehnd.empty() && !engine.OpenEhnd(ehnd)) {
-        std::fprintf(stderr, "hdtrans: cannot read the Ehnd folder %s\n", ehnd.c_str());
-        return 1;
+    if (!version && (verbose || verifyDicts)) {
+        for (const auto& info : hdTrans::internal::LoadedSourceInfo(engine).files)
+            std::fprintf(stderr, "%s\n", hdTrans::frontend::FormatLoadFileInfo(info, programDir).c_str());
     }
-    for (const std::string& e : engine.FilterErrors()) std::fprintf(stderr, "hdtrans: %s\n", e.c_str());
-
     if (version) {
         const std::string dictionaryVersion = hdTrans::frontend::DictionaryVersion(folders);
         std::printf("hdTrans v%s (native) / dict %s\n", HDTRANS_VERSION_TEXT, dictionaryVersion.c_str());
@@ -693,6 +727,15 @@ int RunMain(int argc, char** argv) {
     return finish();
 }
 
+// status, after reporting the marker families that reached the output unexpanded.
+int ReportUnexpanded(int status) {
+    if (const std::uint64_t n = hdTrans::output::UnexpandedMarkers(); n > 0) {
+        std::fprintf(stderr, "hdtrans: internal error: %llu marker families reached the output unexpanded\n",
+                     static_cast<unsigned long long>(n));
+    }
+    return status;
+}
+
 }  // namespace
 
 #ifdef _WIN32
@@ -710,10 +753,10 @@ int wmain(int argc, wchar_t** argv) {
     std::vector<char*> arguments;
     for (auto& text : storage) arguments.push_back(text.data());
     arguments.push_back(nullptr);
-    return RunMain(argc, arguments.data());
+    return ReportUnexpanded(RunMain(argc, arguments.data()));
 }
 #else
 int main(int argc, char** argv) {
-    return RunMain(argc, argv);
+    return ReportUnexpanded(RunMain(argc, argv));
 }
 #endif

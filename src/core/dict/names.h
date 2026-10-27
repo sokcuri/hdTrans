@@ -23,6 +23,11 @@ struct NameKeyCounts {
 // plus four (longer ones render a work or a description), and counts them by kind. A
 // person row of two hiragana or more is kept though its key reads as an inflected word
 // (つぐみ, のぞみ): it takes part only where the key is confirmed.
+// Cuts the title marks (!, ☆ and the like) off the end of the Korean of name-layer rows whose
+// key ends in a Japanese character, which the text lacks there (ぼっちざろっく 봇치 더 록).
+// Returns the number of rows changed.
+int DropTargetMarks(Row* rows, std::size_t count);
+
 NameKeyCounts DropNameKeys(Row* rows, std::size_t count, const Dict& base, const CodeTable& codes);
 
 }  // namespace hdTrans::dict::internal

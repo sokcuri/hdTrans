@@ -24,5 +24,5 @@ cx:toward-adverbial:10	銃口をこちらに向けていた。	!rule:cx:toward-a
 cx:toward-adverbial:10	手のひらを空に向けている	!rule:cx:toward-adverbial:10	keep	local
 cx:toward-adverbial:10	銃口を男に向け、胸を撃つ	!rule:cx:toward-adverbial:10	keep	local
 cx:toward-adverbial:10	学校に向かうと言った。	!rule:cx:toward-adverbial:10	keep	defaults
-cx:toward-adverbial:10	本選に向けての戦い	본선을 향한 싸워	keep	defaults
+cx:toward-adverbial:10	本選に向けての戦い	본선을 향한 싸움	keep	defaults
 cx:toward-adverbial:10	視線を夕日に向けたまま	!rule:cx:toward-adverbial:10	keep	local

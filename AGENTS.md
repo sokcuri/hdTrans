@@ -46,6 +46,10 @@ checkout with `mkdir -p .claude && ln -s ../skills .claude/skills`.
 - Squash ordinary PRs into `develop`; merge `develop` into `main` without squashing to preserve change history.
   The promotion PR title controls the release bump. After CI, the bot commits version files and CHANGELOG,
   then creates the release without another PR (docs/contributing.md).
+- A squash merge has the PR title as its subject and a short body of two to four lines: what
+  changed, why, and whether expectation sets moved. No co-author or session trailers and no list
+  of branch commits.
+- Dates shown to users (release notes, CHANGELOG, the web page) are in KST (Asia/Seoul).
 
 ## Fixing a translation
 - docs/fixing-translations.md has the steps. Fix the stage where the error first appears

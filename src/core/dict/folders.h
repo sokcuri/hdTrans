@@ -7,22 +7,38 @@
 namespace hdTrans::dict {
 
 // Existing file (or directory) ignoring case, otherwise folder/name.
-std::string FindChild(std::string_view folder, std::string_view name, bool directory = false);
-// programDir/hdTrans when it is a folder, otherwise programDir.
-std::string DataFolder(std::string_view programDir);
+std::string FindChild(std::string_view folder, std::string_view name, bool directory = false,
+                      std::vector<std::string>* warnings = nullptr);
+// The selected or expected hdtrans-data directory next to the program.
+std::string DataFolder(std::string_view programDir, std::vector<std::string>* warnings = nullptr);
+// Ambiguous case variants of the data, user and ehnd directories.
+std::vector<std::string> FolderWarnings(std::string_view programDir);
 // The user directory of the data root.
 std::string UserFolder(std::string_view programDir);
-// Data root's dicts.hdsnap when present, otherwise its dicts folder.
+// The selected or expected dicts.hdsnap in the data root.
 std::string ShippedFolder(std::string_view programDir);
-// ShippedFolder(programDir) when it exists, else dicts in the current directory.
+// The default snapshot path, including when it does not exist.
 std::string DefaultFolder(std::string_view programDir);
-// Default user sources; the legacy file precedes the user folder in a flat layout.
+// The optional user directory in the data root.
 std::vector<std::string> UserPaths(std::string_view programDir);
-// Expands folders to userdict*.txt/tsv files in lowercase filename byte order.
+// A requested path's provenance and the availability found by the last observation.
+struct UserSource {
+    std::string path;
+    bool directory = false;
+    bool available = false;  // a file exists, or a folder was completely enumerated
+    bool explicitPath = true;
+    bool operator==(const UserSource&) const = default;
+};
+
+// Expands folders to top-level userdict*.txt/tsv and .txt/tsv files whose first line
+// is a prefilter/postfilter header, in lowercase filename byte order.
 // Explicit files keep their positions; empty paths are ignored.
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths);
+std::vector<std::string> UserFiles(const std::vector<std::string>& paths, std::vector<UserSource>& sources);
+std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::vector<UserSource>& sources,
+                                   std::vector<std::string>* readFailures = nullptr);
 std::string ConfigFile(std::string_view programDir);
-// programDir/Ehnd when present, outside the hdTrans data folder.
+// The selected or expected optional ehnd directory in the data root.
 std::string EhndFolder(std::string_view programDir);
 
 }  // namespace hdTrans::dict

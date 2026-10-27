@@ -64,7 +64,7 @@ async function main() {
     }
   }
   const { HdTrans } = await import('./index.js');
-  const translator = await HdTrans.init({ ehnd, wrapped: values.wrapped ?? false });
+  const translator = await HdTrans.init({ ehnd, wrapped: values.wrapped ?? false, strictDict: false });
   try {
     if (values.version) {
       process.stdout.write(`hdTrans v${translator.version.replace(/^v/, '')} (${translator.runtime}) / dict ${translator.dictionaryVersion}\n`);
@@ -72,7 +72,7 @@ async function main() {
     }
     if (values.userdict) {
       translator.setUserDictRaw(await readFile(values.userdict[0], 'utf8'));
-      if (translator.userDictError) throw new Error(translator.userDictError);
+      if (translator.userDictError) process.stderr.write(`${translator.userDictError}\n`);
     }
     for (const diagnostic of translator.filterErrors) process.stderr.write(`${diagnostic}\n`);
     const input = positionals.length

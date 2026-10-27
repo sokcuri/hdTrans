@@ -359,7 +359,42 @@ bool Registry::BaseReading(std::string_view base, std::string_view reading, std:
     return person || ReadingMorae(reading) >= RuneCount(base);
 }
 
-std::string Registry::DropReadings(std::string_view line) {
+std::string Registry::CaptionNameReading(std::string_view base, std::string_view reading) {
+    const std::string written = text::FromKana(reading, text::Preset::FanShort, true);
+    if (written.empty() || RuneCount(base) == 1) return written;
+    const auto& names = Accepted();
+    const auto found = names.find(std::string(base));
+    if (found == names.end() || !found->second.hasParts) {
+        return NamedWithSound(base, reading) ? written : std::string();
+    }
+    const std::vector<std::string>& parts = found->second.parts;
+    if (parts.size() != 2 || parts[0] + parts[1] != base) return {};
+    const std::string first = RenderPart(parts[0]), second = RenderPart(parts[1]);
+    if (first.empty() || second.empty()) return {};
+    std::string out;
+    if (NamedWithSound(parts[0], reading)) out = written + " " + second;
+    if (NamedWithSound(parts[1], reading)) {
+        if (!out.empty()) return {};
+        out = first + " " + written;
+    }
+    // Align only whole established parts; more than one matching span or kana cut abstains.
+    for (const std::size_t at : RuneStarts(reading)) {
+        if (at == 0) continue;
+        const std::string_view left = reading.substr(0, at), right = reading.substr(at);
+        // A known part anchors the cut; the other established part gets the supplied remainder.
+        if (!NamedWithSound(parts[0], left) && !NamedWithSound(parts[1], right)) continue;
+        const std::string leftWritten = text::FromKana(left, text::Preset::FanShort, true);
+        const std::string rightWritten = text::FromKana(right, text::Preset::FanShort, true);
+        if (leftWritten.empty() || rightWritten.empty()) continue;
+        if (!out.empty()) return {};
+        out = leftWritten + " " + rightWritten;
+    }
+    return out;
+}
+
+std::string Registry::DropReadings(std::string_view line, std::string* cueText, std::vector<std::string>* captionNames) {
+    if (cueText != nullptr) cueText->clear();
+    if (captionNames != nullptr) captionNames->clear();
     if (line.find("（") == std::string_view::npos && line.find('(') == std::string_view::npos &&
         line.find("「") == std::string_view::npos) {
         return std::string(line);
@@ -367,32 +402,64 @@ std::string Registry::DropReadings(std::string_view line) {
     struct Found {
         RubyMatch m;
         std::string hiragana;
+        std::size_t bareBegin;
         bool bracket;
     };
     std::vector<Found> found;
     const bool styled = Styled(line);
+    std::string bare;
+    std::size_t at = 0;
     RubyMatch m;
     for (std::size_t from = 0; FindReading(line, from, m); from = m.end) {
-        Found x{m, ToHiragana(m.reading), line.substr(m.begin + m.base.size()).starts_with("「")};
-        const DictFlags f = Flags(x.hiragana);
-        if (IsKatakana(FirstRune(m.reading).cp) && (!f.common || f.person)) continue;
-        if (f.pronoun && Flags(m.base).human) continue;
-        found.push_back(std::move(x));
+        bare.append(line.substr(at, m.begin - at));
+        found.push_back({m, ToHiragana(m.reading), bare.size(), line.substr(m.begin + m.base.size()).starts_with("「")});
+        bare.append(m.base);
+        at = m.end;
     }
+    if (found.empty()) return std::string(line);
+    bare.append(line.substr(at));
     std::string out;
-    std::size_t at = 0;
+    bool captionText = false;
+    at = 0;
     for (const Found& x : found) {
-        // Written apart from the base, only a reading the dictionaries confirm is one (山田 (やまだ),
-        // not 条件 (つよい) or 選択肢 (はい・いいえ)).
-        if (x.m.spaced ? !(SameWord(x.m.base, x.hiragana, line.substr(x.m.end)) || NamedWithSound(x.m.base, x.hiragana))
-                       : !BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) {
-            continue;
+        const DictFlags b = Flags(x.m.base);
+        const char32_t open = RuneAt(line, x.m.begin + x.m.base.size()).cp;
+        const char32_t close = RuneBefore(line, x.m.end).cp;
+        const bool paired = (open == U'(' && close == U')') || (open == U'（' && close == U'）');
+        const bool person = b.person || !b.layerName.empty() || (b.records == 0 && !b.city);
+        const bool captionAt = !x.m.spaced && paired && person && !RoleLike(x.m.base) && !LabelRole(x.m.base) &&
+                               !dict::InClass(HDTRANS_CLASS("noun.bracket-note"), x.m.base) &&
+                               BracketLabelAt(std::string_view(bare).substr(0, x.bareBegin),
+                                              std::string_view(bare).substr(x.bareBegin + x.m.base.size()));
+        const std::string captionReading = captionAt ? CaptionNameReading(x.m.base, x.m.reading) : std::string();
+        const bool caption = !captionReading.empty();
+        if (!caption) {
+            const DictFlags f = Flags(x.hiragana);
+            if (IsKatakana(FirstRune(x.m.reading).cp) && (!f.common || f.person)) continue;
+            if (f.pronoun && b.human) continue;
+            // Written apart from the base, only a reading the dictionaries confirm is one (山田 (やまだ),
+            // not 条件 (つよい) or 選択肢 (はい・いいえ)).
+            if (x.m.spaced ? !(SameWord(x.m.base, x.hiragana, line.substr(x.m.end)) || NamedWithSound(x.m.base, x.hiragana))
+                           : !BaseReading(x.m.base, x.hiragana, line.substr(x.m.end), x.bracket, styled)) {
+                continue;
+            }
+        }
+        if (caption && captionNames != nullptr) captionNames->emplace_back(x.m.base);
+        if (caption && cueText != nullptr && !captionText) {
+            *cueText = out;
+            captionText = true;
+        }
+        if (captionText) {
+            cueText->append(line.substr(at, x.m.begin - at));
+            cueText->append(x.m.base);
         }
         out.append(line.substr(at, x.m.begin - at));
-        out.append(x.m.base);
+        // Resolve the written reading here, only in this label occurrence; it is not a document alias.
+        out.append(caption ? captionReading : std::string(x.m.base));
         at = x.m.end;
     }
     out.append(line.substr(at));
+    if (captionText) cueText->append(line.substr(at));
     return out;
 }
 
@@ -542,10 +609,12 @@ const std::map<std::string, Name>& Registry::Accepted() {
             }
             if (p.empty() || RoleLike(p) || LabelRole(p) || !AllRunes(p, IsNameRune)) continue;
             // A plain-text label that is a common word and no person of the name layer is
-            // a role (放送, 司会), not a name.
+            // a role (放送, 司会), and one of common katakana words a field (セットスキル：), not
+            // a name.
             if (plain) {
                 const DictFlags f = Flags(p);
                 if (f.common && !f.person && !f.layerSurname && !f.layerGiven) continue;
+                if (CommonWords(p)) continue;
             }
             labelled.insert(p);
         }
@@ -565,7 +634,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         double w = 1.0;
         if (f.role) {
             w = 0;
-        } else if (f.common && !f.person && !f.city && PersonName(t).empty()) {
+        } else if ((f.common || CommonWords(t)) && !f.person && !f.city && PersonName(t).empty()) {
             w = 0.5;
         }
         Name& n = all[t];
@@ -626,11 +695,22 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (n.score >= kThreshold) att.insert(t);
     }
     for (const auto& [t, kr] : tables_->fixed) att.insert(t);
+    // Whether the katakana run t goes on after its head x in words of two kana or more: common
+    // words of the dictionaries (ダンジョンゲート) or a run the lines write on its own
+    // (ゴブリンアーチャー beside アーチャー). Such a run is a compound of x, not a longer name; x
+    // written twice (メイメイ) is one.
+    auto compound = [&](std::string_view t, std::string_view x) {
+        const std::string_view rest = t.substr(x.size());
+        return RuneCount(rest) >= 2 && rest != x && (CommonWords(rest) || kana_.count(std::string(rest)) > 0);
+    };
+    // A katakana run before an honorific that starts a longer name or unknown run is that name's
+    // short form (アルくん, アルガルド), but a common word is the word (ダンジョンさん).
     for (const auto& [x, c] : hon_) {
         (void)c;
-        if (att.count(x) || RuneCount(x) < 2 || !AllRunes(x, IsKatakana) || Flags(x).role) continue;
+        if (att.count(x) || RuneCount(x) < 2 || !AllRunes(x, IsKatakana) || Flags(x).role || CommonWords(x)) continue;
         for (const auto& [t, kc] : kana_) {
-            if (t.size() > x.size() && t.starts_with(x) && (att.count(t) || (kc >= 2 && Flags(t).records == 0))) {
+            if (t.size() > x.size() && t.starts_with(x) && (att.count(t) || (kc >= 2 && Flags(t).records == 0)) &&
+                !compound(t, x)) {
                 Name& n = all[x];
                 n.score = std::max(n.score, kThreshold);
                 n.person = true;
@@ -714,10 +794,13 @@ const std::map<std::string, Name>& Registry::Accepted() {
         g.person = true;
         g.given = true;
     }
+    // An unknown katakana run that starts with a katakana name is a longer name, unless it is a
+    // compound of the name.
     for (const auto& [t, c] : kana_) {
         if (c < 2 || att.count(t) || Flags(t).records > 0) continue;
         for (const std::string& x : att) {
-            if (x.size() < t.size() && t.starts_with(x) && RuneCount(x) >= 2 && AllRunes(x, IsKatakana)) {
+            if (x.size() < t.size() && t.starts_with(x) && RuneCount(x) >= 2 && AllRunes(x, IsKatakana) &&
+                !compound(t, x)) {
                 all[t].score += kThreshold;
                 all[t].person = true;
                 break;
@@ -967,6 +1050,27 @@ bool Registry::NicknameCompound(std::string_view t) {
         if ((TranslatedWord(a) && name(b)) || (name(a) && TranslatedWord(b))) return true;
     }
     return false;
+}
+
+bool Registry::CommonWords(std::string_view s) {
+    if (!AllRunes(s, IsKatakana)) return false;
+    auto word = [&](std::string_view w) {
+        const DictFlags f = Flags(w);
+        return f.common && !f.person && !f.layerSurname && !f.layerGiven;
+    };
+    if (word(s)) return true;
+    std::vector<std::size_t> starts = RuneStarts(s);
+    starts.push_back(s.size());
+    // split[k]: s up to starts[k] is a sequence of such words.
+    std::vector<bool> split(starts.size(), false);
+    split[0] = true;
+    for (std::size_t i = 0; i + 2 < starts.size(); i++) {
+        if (!split[i]) continue;
+        for (std::size_t j = i + 2; j < starts.size(); j++) {
+            if (!split[j] && word(s.substr(starts[i], starts[j] - starts[i]))) split[j] = true;
+        }
+    }
+    return split.back();
 }
 
 const std::set<std::string>& Registry::SiblingNames() {

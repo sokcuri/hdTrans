@@ -41,8 +41,13 @@ output::ResolvedItem ItemOf(const word::Item& it) {
     r.detailClass = static_cast<output::DetailClass>(it.detail->cls);
     r.detailKind = it.DetailKind();
     r.detailRecord = it.DetailRecord();
+    r.causativePotential = r.detailRecord == 5 && it.detail->syntheticCausative &&
+                           it.detail->voice == word::Voice::Potential;
     r.directIndex = it.DirectIndex();
     r.entry = EntryOf(it, it.selected);
+    if (const word::Entry* e = it.group == nullptr ? nullptr : it.group->At(it.selected)) {
+        r.reread = e->targetChoice.layer == word::Provenance::Rewrite;
+    }
     const int entries = it.group == nullptr ? 0 : static_cast<int>(it.group->entries.size());
     if (entries > 0) {
         r.first = EntryOf(it, 0);

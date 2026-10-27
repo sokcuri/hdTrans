@@ -1,5 +1,6 @@
 #include "core/engine/user_watch.h"
 
+#include <algorithm>
 #include <new>
 #include <utility>
 
@@ -57,11 +58,15 @@ bool FileWatch::Due(std::string_view path, std::chrono::steady_clock::time_point
 FolderVersion FolderVersionOf(std::string_view dir) {
     FolderVersion v;
     std::vector<filter::EhndFile> files;
-    if (dir.empty() || !filter::EhndFiles(dir, files)) return v;
+    if (dir.empty()) return v;
+    if (!filter::EhndFiles(dir, files)) {
+        v.available = false;
+        return v;
+    }
     for (const filter::EhndFile& f : files) {
         dict::internal::FileStamp stamp;
         dict::internal::ReadStamp(f.path, stamp);
-        v.emplace_back(f.path, stamp);
+        v.files.emplace_back(f.path, stamp);
     }
     return v;
 }
@@ -75,16 +80,49 @@ bool FolderWatch::Due(std::string_view dir, std::chrono::steady_clock::time_poin
 }
 
 UserVersion UserVersionOf(const std::vector<std::string>& paths) {
+    return UserVersionOf(paths, {});
+}
+
+UserVersion UserVersionOf(const std::vector<std::string>& paths, std::string_view configPath) {
+    return UserVersionOf(paths, configPath, 0);
+}
+
+UserVersion UserVersionOf(const std::vector<std::string>& paths, std::string_view configPath,
+                          std::uint64_t optionsRevision) {
+    std::vector<dict::UserSource> sources;
+    for (const auto& path : paths) sources.push_back({path});
+    return UserVersionOf(sources, configPath, optionsRevision);
+}
+
+UserVersion UserVersionOf(const std::vector<dict::UserSource>& paths, std::string_view configPath,
+                          std::uint64_t optionsRevision) {
     UserVersion version;
-    for (const std::string& file : dict::UserFiles(paths)) version.emplace_back(file, VersionOf(file));
+    version.optionsRevision = optionsRevision;
+    std::vector<std::string> failed;
+    for (const std::string& file : dict::UserFiles(paths, version.sources, &failed)) {
+        auto found = VersionOf(file);
+        found.headerProbeFailed = std::find(failed.begin(), failed.end(), file) != failed.end();
+        version.files.emplace_back(file, found);
+    }
+    version.config = VersionOf(configPath);
     return version;
 }
 
 bool UserFilesWatch::Due(const std::vector<std::string>& paths, std::chrono::steady_clock::time_point now,
-                         std::chrono::steady_clock::duration interval, UserVersion& found) {
+                         std::chrono::steady_clock::duration interval, UserVersion& found, std::string_view configPath,
+                         std::uint64_t optionsRevision) {
     if (now < next) return false;
     next = now + interval;
-    found = UserVersionOf(paths);
+    found = UserVersionOf(paths, configPath, optionsRevision);
+    return found != loaded && !(hasFailed && found == failed);
+}
+
+bool UserFilesWatch::Due(const std::vector<dict::UserSource>& paths, std::chrono::steady_clock::time_point now,
+                         std::chrono::steady_clock::duration interval, UserVersion& found, std::string_view configPath,
+                         std::uint64_t optionsRevision) {
+    if (now < next) return false;
+    next = now + interval;
+    found = UserVersionOf(paths, configPath, optionsRevision);
     return found != loaded && !(hasFailed && found == failed);
 }
 

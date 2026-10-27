@@ -1,0 +1,29 @@
+# 규칙: LEX-71
+rule	input	expected	kind	layer
+compose:anida-spoken	不本意だよ	본의가 아니야	fix	compose
+compose:anida-spoken	不本意っす	본의가 아니에요	fix	compose
+compose:anida-spoken	バカじゃねーのｗ	바보가 아니야 ㅋ	fix	compose
+compose:anida-spoken	バカじゃないのｗｗ	바보가 아니야 ㅋㅋ	fix	compose
+compose:anida-spoken	季節はずれだよ	때아니야	fix	compose
+compose:anida-spoken	学生じゃないよ	학생이 아니야	keep	compose
+compose:anida-spoken	不本意だから	본의가 아니니까	keep	compose
+compose:anida-spoken	不本意だけど	본의가 아니지만	keep	compose
+compose:anida-spoken	不本意だった	본의가 아니었다	keep	compose
+compose:anida-spoken	行くよｗ	가 ㅋ	keep	compose
+dict:meiwaku:1	迷惑もいいところだ	민폐도 이만저만이 아니다	fix	defaults
+dict:meiwaku:1	人の迷惑を考えろ	사람의 민폐를 생각해라	fix	defaults
+dict:meiwaku:1	みんなの迷惑になる	모두의 폐가 된다	keep	defaults
+dict:meiwaku:4	近所迷惑だ	이웃 민폐다	fix	defaults
+dict:meiwaku:4	近所迷惑もいいところだ。	이웃 민폐도 이만저만이 아니다.	fix	defaults
+dict:meiwaku:5	迷惑が掛かる	민폐가 된다	fix	defaults
+dict:meiwaku:6	みんなに迷惑がかかった	모두에게 민폐가 되었다	fix	defaults
+dict:meiwaku:6	迷惑がかからないように	민폐가 되지 않도록	fix	defaults
+phrase:ii-meiwaku	いい迷惑だ	완전 민폐다	fix	phrases
+phrase:ii-meiwaku	こっちはいい迷惑だよ	여기는 완전 민폐야	fix	phrases
+phrase:ii-meiwaku	いい迷惑な話だ	완전 민폐인 이야기다	fix	phrases
+dict:meiwaku:2	迷惑している	곤란해하고 있다	keep	local
+dict:meiwaku:1	迷惑をかけた	폐를 끼쳤다	keep	defaults
+dict:meiwaku:1	ご迷惑をおかけしました	폐를 끼쳤습니다	keep	defaults
+dict:meiwaku:1	迷惑行為	폐를 끼치는 행위	keep	defaults
+dict:meiwaku:1	迷惑だよ	민폐야	keep	defaults
+dict:meiwaku:1	迷惑メール	스팸 메일	keep	defaults

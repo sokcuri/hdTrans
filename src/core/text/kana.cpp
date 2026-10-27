@@ -177,11 +177,12 @@ bool LongVowel(std::string_view prev, std::string_view vowel, Preset p) {
 
 }  // namespace
 
-std::string FromKana(std::string_view reading, Preset p) {
+std::string FromKana(std::string_view reading, Preset p, bool singleLongPair) {
     std::vector<Mora> ms;
     if (!Morae(reading, ms)) return "";
     std::vector<Syllable> out;
     std::string prev;
+    bool shortenedPair = false;
     for (const auto& m : ms) {
         if (m.cons == "Q" || m.cons == "N") {
             if (!out.empty() && out.back().final == 0) {
@@ -190,7 +191,12 @@ std::string FromKana(std::string_view reading, Preset p) {
             continue;
         }
         if (m.cons == "L") continue;
-        if (m.cons.empty() && !out.empty() && out.back().final == 0 && LongVowel(prev, m.vowel, p)) continue;
+        if (m.cons.empty() && !out.empty() && out.back().final == 0 && LongVowel(prev, m.vowel, p) &&
+            !(singleLongPair && p == Preset::FanShort && shortenedPair)) {
+            shortenedPair = true;
+            continue;
+        }
+        shortenedPair = false;
         int v = VowelJamo(m.vowel);
         const bool yVowel = m.vowel.size() == 2 && m.vowel[0] == 'y';
         if ((m.cons == "j" || m.cons == "ch") && yVowel && p != Preset::Official) {

@@ -45,6 +45,7 @@
 //   final           intj rows: only where the utterance ends after the key: the end, a
 //                   sentence mark, a closing bracket, an ellipsis or a drawn vowel, not a
 //                   comma or a word (また明日 내일 보자, not また明日来る)
+#include <cstddef>
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -84,7 +85,9 @@ struct SourceEntry {
 
 // Compiles text, the file-th source in load order: entries carry file, their line
 // and their order within the line. sourceEntries receives valid noncomment rows.
-Compiled Parse(std::string_view text, int file, Context& ctx, std::vector<SourceEntry>* sourceEntries = nullptr);
+// acceptedCount, when non-null, receives their count for this call, before expansion.
+Compiled Parse(std::string_view text, int file, Context& ctx, std::vector<SourceEntry>* sourceEntries = nullptr,
+               std::size_t* acceptedCount = nullptr);
 
 // The register values of end rows: 1 plain (해라체), 2 casual (해체), 3 polite (해요체),
 // 4 formal (합쇼체), 5 archaic (하오체).

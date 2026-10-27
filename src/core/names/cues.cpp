@@ -397,6 +397,39 @@ std::size_t CaptionLabelEnd(std::string_view line) {
     return SpeechAfterLabel(line.substr(end)) ? end : 0;
 }
 
+bool BracketLabelAt(std::string_view before, std::string_view after) {
+    static constexpr std::string_view kLabelSeparators = "／/・･＆&，,：: 　";
+    static constexpr std::string_view kStops = "()（）\n「」『』、。！？!?…‥";
+    std::size_t open = before.size();
+    for (int n = 0; open > 0; n++) {
+        const text::Rune r = RuneBefore(before, open);
+        if (r.cp == U'(' || r.cp == U'（') break;
+        if (InRunes(r.cp, kStops) || n >= kMaxCaptionGroup) return false;
+        open -= r.size;
+    }
+    if (open == 0) return false;
+    const char32_t bracket = RuneBefore(before, open).cp;
+    const std::string_view parts = before.substr(open);
+    if (!parts.empty() && !InRunes(RuneBefore(parts, parts.size()).cp, kLabelSeparators)) return false;
+    if (!CaptionLead(before.substr(0, open - RuneBefore(before, open).size))) return false;
+    std::string_view rest = after;
+    rest.remove_prefix(dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest));
+    if (!rest.empty() && !InRunes(FirstRune(rest).cp, kLabelSeparators) && FirstRune(rest).cp != (bracket == U'(' ? U')' : U'）')) {
+        return false;
+    }
+    for (std::size_t i = 0, n = 0; i < rest.size() && n <= static_cast<std::size_t>(kMaxCaptionGroup); n++) {
+        const text::Rune r = text::DecodeRune(rest.substr(i));
+        if (r.cp == (bracket == U'(' ? U')' : U'）')) {
+            // Speech follows a label; a word in brackets alone is a heading or an aside ((春)), and
+            // one that a particle takes is a word of the sentence (（アヤメ）と呼ばれた).
+            return SpeechAfterLabel(rest.substr(i + r.size));
+        }
+        if (InRunes(r.cp, kStops)) return false;
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return false;
+}
+
 bool SpeechAfterLabel(std::string_view rest) {
     while (rest.starts_with(" ") || rest.starts_with("　")) rest.remove_prefix(rest.starts_with(" ") ? 1 : std::string_view("　").size());
     if (rest.empty() || rest.starts_with("\n") || rest.starts_with("\r") || rest.starts_with("と") || rest.starts_with("って")) return false;

@@ -1,5 +1,8 @@
 #include "core/output/families.h"
 
+#include <algorithm>
+#include <atomic>
+
 #include "core/output/markers.h"
 
 namespace hdTrans::output {
@@ -112,6 +115,37 @@ std::string_view LookupByMarker(std::string_view key, const Families& generated)
         case '&': return LookupSource(key, generated);
     }
     return {};
+}
+
+namespace {
+
+bool FamilyChar(char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
+
+std::atomic<std::uint64_t>& Unexpanded() {
+    static std::atomic<std::uint64_t> count{0};
+    return count;
+}
+
+}  // namespace
+
+std::uint64_t UnexpandedMarkers() { return Unexpanded().load(std::memory_order_relaxed); }
+
+std::string DictionaryForms(std::string text, const Families& generated) {
+    for (size_t at = 3; (at = text.find('@', at)) != std::string::npos;) {
+        const size_t start = at - 3;
+        if (MarkerIndex(text[start]) < 0 || !FamilyChar(text[start + 1]) || !FamilyChar(text[start + 2])) {
+            at++;
+            continue;
+        }
+        std::string key = text.substr(start, 4);
+        key += '1';
+        const std::string_view stem = LookupByMarker(key, generated);
+        const std::string form = stem.empty() ? std::string() : std::string(stem) + "다";
+        text.replace(start, 4, form);
+        Unexpanded().fetch_add(1, std::memory_order_relaxed);
+        at = std::max<size_t>(start + form.size(), 3);
+    }
+    return text;
 }
 
 std::string Lemma(std::string_view target, const Families& generated) {

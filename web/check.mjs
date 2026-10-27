@@ -15,7 +15,7 @@
 // text in the input before the engine is ready gets translated once it is:
 // the sample of the first visit, and text typed during the second visit's
 // load, that a long translation shows its progress bar, and the version
-// next to the title (vVERSION (commit, yyyy-MM-dd)). Then it checks the
+// under the title (vVERSION (commit, yyyy-MM-dd)). Then it checks the
 // dictionaries: that the user dictionary and names table kept in localStorage
 // move into 기본 사용자 사전 on the first run with IndexedDB, and, at a desktop
 // and a mobile viewport, the 사전 tab's layout (list beside or above the
@@ -59,6 +59,7 @@ await new Promise((r) => ws.addEventListener('open', r));
 let id = 0;
 const waiting = new Map();
 let promptText = ''; // the answer to the page's next prompt; confirms are accepted
+let lastDialog = '';
 let bytes = 0;
 let requests = 0;
 ws.addEventListener('message', (ev) => {
@@ -67,6 +68,7 @@ ws.addEventListener('message', (ev) => {
     waiting.get(m.id)(m);
     waiting.delete(m.id);
   } else if (m.method === 'Page.javascriptDialogOpening') {
+    lastDialog = m.params.message;
     ws.send(JSON.stringify({ id: ++id, method: 'Page.handleJavaScriptDialog', params: { accept: true, promptText } }));
   } else if (m.method === 'Network.loadingFinished') {
     bytes += m.params.encodedDataLength;
@@ -371,10 +373,65 @@ async function libraryCheck() {
   await type('개');
   await press('Tab');
   await type('xx');
+  await focusCell('userdict', 1, 3);
+  await press('Enter');
+  await type('鳥');
+  await press('Tab');
+  await type('수리새');
+  out = await probe('鳥が来た。');
   const bad = (await settled()).info;
   ok(bad.includes('새 사전 사용자 사전 2행'), `a load error names the dictionary and row: ${bad}`);
-  await evaluate(`document.querySelectorAll('#userdict tbody tr')[1].querySelector('button.del').click()`);
-  ok(!(await settled()).info.includes('오류'), 'deleting the row clears it');
+  ok(out.includes('수리새'), `a good new row after a bad row applies: ${out}`);
+  ok(await evaluate(`document.getElementById('info').getBoundingClientRect().height > 0`), 'warnings are visible on the dictionary tab');
+  await click('#tab-docs');
+  ok(await evaluate(`document.getElementById('info').getBoundingClientRect().height > 0`), 'warnings are visible on the document tab');
+  await evaluate(`(() => {
+    const input = document.getElementById('files');
+    const files = new DataTransfer();
+    files.items.add(new File(['鳥が来た。'], 'document.txt', { type: 'text/plain' }));
+    input.files = files.files;
+    input.dispatchEvent(new Event('change'));
+  })()`);
+  await until(`!document.getElementById('run').disabled`);
+  await click('#run');
+  await until(`document.querySelector('#filelist tbody tr td:nth-child(3)').textContent.startsWith('완료')`);
+  const documentWarning = await evaluate(`document.getElementById('info').textContent`);
+  ok(documentWarning.includes('새 사전 사용자 사전 2행'), `completed documents retain the dictionary warning: ${documentWarning}`);
+  const documentFile = await download('#filelist tbody tr button');
+  ok(Object.values(documentFile).some((text) => text.includes('수리새')), 'a document with warnings still saves the good-row translation');
+  await click('#tab-dictionaries');
+  await evaluate(`document.querySelectorAll('#userdict tbody tr')[2].querySelector('button.del').click()`);
+  await evaluate(`document.querySelectorAll('#userdict tbody tr')[0].querySelector('button.del').click()`);
+  out = await probe('猫が来た。ユフィリアが来た。');
+  ok(out.includes('고양이님') && out.includes('유피') && !out.includes('냥이'), `an all-bad file clears its old rows without discarding another good dictionary: ${out}`);
+  ok((await settled()).info.includes('새 사전 사용자 사전 1행'), 'the all-bad dictionary still warns');
+  await evaluate(`document.querySelectorAll('#userdict tbody tr')[0].querySelector('button.del').click()`);
+  await focusCell('userdict', 0, 0);
+  await type('猫');
+  await press('Tab');
+  await type('냥이');
+  ok(!(await settled()).info.includes('오류'), 'a valid replacement clears the warning');
+
+  await evaluate(`(() => {
+    const read = File.prototype.arrayBuffer;
+    globalThis.restoreFileRead = () => { File.prototype.arrayBuffer = read; delete globalThis.restoreFileRead; };
+    File.prototype.arrayBuffer = function () {
+      if (this.name === 'userdict-unreadable.txt') return Promise.reject(new DOMException('Cannot read file', 'NotReadableError'));
+      return read.call(this);
+    };
+  })()`);
+  lastDialog = '';
+  try {
+    await upload({ 'userdict-unreadable.txt': '猫\t실패\n', 'userdict-readable.txt': '鳥\t수리새\n' });
+    await until(`document.querySelector('#dictlist li.sel .name')?.textContent === 'readable'`);
+  } finally {
+    await evaluate(`globalThis.restoreFileRead()`);
+  }
+  ok(lastDialog === '읽지 못함: userdict-unreadable.txt', `a file read failure reports its filename, not a row warning: ${lastDialog}`);
+  ok((await dictRows()).length === 3 && (await probe('鳥が来た。')).includes('수리새'), 'other readable files in the upload still apply');
+  await clickRow('readable', 'button[title="삭제"]');
+  await clickRow('새 사전', '.name');
+  await settled();
 
   const exported = await download('button[title="내보내기"]', '새 사전');
   ok(exported['userdict-새 사전.txt'] === '猫\t냥이\n', `a dictionary exports as userdict-새 사전.txt: ${JSON.stringify(exported)}`);
@@ -405,6 +462,19 @@ async function libraryCheck() {
   const one = await download('#dict-export');
   ok(Object.keys(one).join() === 'userdict.txt' && one['userdict.txt'] === all['userdict.txt'], 'and only userdict.txt without an applied Ehnd dictionary');
   await clickRow('test', 'input');
+
+  await upload({ 'UserDict_bad.txt': 'ポチ\t바둑이\t1\n犬\t' + '가'.repeat(16) + '\t1\n' });
+  await until(`document.querySelectorAll('#dictlist li').length === 5`);
+  out = await probe('ポチ');
+  ok(out.includes('바둑이') && (await settled()).info.includes('bad 2행'), `Ehnd good rows apply with a dictionary-and-row warning: ${out}`);
+  await click('#tab-docs');
+  await click('#run');
+  await until(`document.querySelector('#filelist tbody tr td:nth-child(3)').textContent.startsWith('완료')`);
+  ok((await evaluate(`document.getElementById('info').textContent`)).includes('bad 2행'), 'documents also show Ehnd dictionary warnings while completing');
+  await click('#tab-dictionaries');
+  await clickRow('bad', 'button[title="삭제"]');
+  await clickRow('test', '.name');
+  await settled();
 
   await clickRow('가져온 사전', 'button[title="삭제"]');
   await until(`document.querySelectorAll('#dictlist li').length === 3`);

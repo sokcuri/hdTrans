@@ -1,0 +1,29 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+normalize:caption-inline-reading	（安田美沙子(みさこ)）毎年 見てます	has:야스다 미사코	fix	normalize
+normalize:caption-inline-reading	（丸山和也(かずや)）これは… やらせは ないんですね？	has:마루야마 카즈야	fix	normalize
+normalize:caption-inline-reading	（木村祐一(ゆういち)）盛り上がっておりますが	has:키무라 유이치	fix	normalize
+normalize:caption-inline-reading	（小杉竜一(りゅういち)）はい どうも	has:코스기 류이치	fix	normalize
+normalize:caption-inline-reading	（岩井元気(げんき)）いや もう	has:이와이 겐키	fix	normalize
+normalize:caption-inline-reading	（小宮浩信(ひろのぶ)）絶対 受かってね	has:코미야 히로노부	fix	normalize
+normalize:caption-inline-reading	（相田周二(しゅうじ):小宮のモノマネで）絶対受かって	has:아이다 슈지	fix	normalize
+normalize:caption-inline-reading	（今田耕司(いまだこうじ)）さあ いよいよ始まりました	has:이마다	keep	normalize
+normalize:caption-inline-reading	（加藤(かとう) 歩(あゆむ)）悔しいです！	has:아유무	keep	normalize
+normalize:caption-inline-reading	（山里亮太(やまさとりょうた)）きた～！	has:야마사토	keep	normalize
+normalize:caption-inline-reading	（西田幸治(にしだこうじ)）笑い飯ですお願いします	has:니시다	keep	normalize
+normalize:caption-inline-reading	（徳井義実(とくいよしみ)）バーベキューに行きたい？	has:토쿠이	keep	normalize
+normalize:caption-inline-reading	（山本浩司(やまもとこうじ)）どうも よろしくお願いします	has:야마모토	keep	normalize
+normalize:caption-inline-reading	（川島(かわしま) 明(あきら)）ヤバいよ～！	has:아키라	keep	normalize
+normalize:caption-inline-reading	（田村(たむら) 裕(ひろし)）全国ネットや頑張れ 俺たち！	has:히로시	keep	normalize
+normalize:caption-inline-reading	（後藤輝基(ごとうてるもと)）言うてますやん	has:테루모토	keep	normalize
+normalize:caption-inline-reading	（佐藤哲夫(さとうてつお)）何言うてるんすか	has:테츠오	keep	normalize
+normalize:caption-inline-reading	（井戸田(いとだ) 潤(じゅん)）当たりめえだろ	has:이토다	keep	normalize
+normalize:caption-inline-reading	（岡田圭右(おかだけいすけ)）そうですよ そうですよ	has:케이스케	keep	normalize
+normalize:caption-inline-reading	（小杉竜一(こすぎりゅういち)）どこまで転がって…	has:코스기	keep	normalize
+normalize:caption-inline-reading	（陣内智則(じんないとものり)）さあ こちらですね	has:토모노리	keep	normalize
+normalize:caption-inline-reading	（田中一彦(たなかかずひこ)）あっ ちょっと あの…	has:카즈히코	keep	normalize
+normalize:caption-inline-reading	（大上(おおうえ)）うるさい？　ホントにごめんね	has:(오우에)	fix	normalize
+normalize:caption-inline-reading	（拍手と歓声）（山崎弘也(やまざきひろなり)･柴田英嗣(しばたひでつぐ)）どうも～！	has:히로나리	fix	normalize
+normalize:caption-inline-reading	（拍手と歓声）（山崎弘也(やまざきひろなり)･柴田英嗣(しばたひでつぐ)）どうも～！	lacks:아무래도	keep	normalize
+normalize:caption-inline-reading	（拍手と歓声）（山崎弘也(やまざきひろなり)･柴田英嗣(しばたひでつぐ)）どうも～！	has:네~!	keep	normalize
+normalize:caption-inline-reading	（相田周二(しゅうじ):小宮のモノマネで）絶対受かって	lacks:습자	fix	normalize

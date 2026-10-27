@@ -167,7 +167,8 @@ hdTrans.clearUserDict();
 `getUserDict()`는 유효한 원본 항목을 반환합니다. 기본 사전 전체, 동사 활용으로 생성된 항목,
 중복 항목을 병합한 최종 사전이 아닙니다. 중복 항목의 순서도 보존됩니다.
 
-잘못된 TSV로 교체를 시도하면 `userDictError`에 진단을 남기고 이전에 적용한 사용자 사전을 유지합니다.
+`init({ strictDict })`와 `setUserDict`, `setUserDictRaw`, `setEhnd`의 `{ strict }`는 [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리)를 정합니다.
+엄격 모드에서 잘못된 TSV로 교체를 시도하면 예외와 `userDictError`에 진단을 남기고 이전에 적용한 사용자 사전을 유지합니다.
 이때 `getUserDict()`는 여전히 적용 중인 항목을 반환하고, `getUserDictRaw()`는 수정 작업을 위해 마지막으로 제출한 원문을 반환합니다.
 두 조회 결과가 다를 수 있으므로 원문 편집기에서는 `userDictError`도 함께 확인합니다.
 

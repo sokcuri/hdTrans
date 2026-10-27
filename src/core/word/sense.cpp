@@ -26,12 +26,12 @@ constexpr std::string_view kVerbFinals = "うくぐすつぬぶむる";
 
 // Whether the item is word, a key or the dictionary form of the verb or adjective the item
 // is a stem of.
-bool IsWord(const Item* it, std::string_view word) {
+bool IsWord(const Item* it, std::string_view word, int candidate) {
     const std::string_view surface = it->group->surface;
     if (surface == word) return true;
     if (surface.empty() || !word.starts_with(surface)) return false;
     const std::string_view rest = word.substr(surface.size());
-    switch (At(it->Code(it->selected), 0)) {
+    switch (At(it->Code(candidate), 0)) {
         case '4':
             return rest == kJaSuru || (text::RuneCount(rest) == 1 && Has(kVerbFinals, rest));
         case '7':
@@ -39,6 +39,8 @@ bool IsWord(const Item* it, std::string_view word) {
     }
     return false;
 }
+
+bool IsWord(const Item* it, std::string_view word) { return IsWord(it, word, it->selected); }
 
 namespace {
 

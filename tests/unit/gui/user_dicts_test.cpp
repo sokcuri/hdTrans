@@ -60,13 +60,16 @@ HD_TEST(GuiUserDictRowsRoundTrip) {
     HD_CHECK(text.bom && text.crlf && !text.column && text.lines.size() == 4);
     HD_CHECK(!gui::EntryLine(text.lines[0]) && gui::EntryLine(text.lines[1]) && !gui::EntryLine(text.lines[2]));
     const gui::DictRow row = gui::ParseRow(text.lines[3]);
-    HD_CHECK(row.key == "ユキ" && row.ko == "유키" && row.pos == "name" && row.options.empty());
-    text.lines[3] = gui::RowLine({"ユキ", "유키", "surname", ""}, text.lines[3]);
-    text.lines[1] = gui::RowLine({"魔導具", "마\t도구", "", "prio=5"}, text.lines[1]);
+    HD_CHECK(row.key == "ユキ" && row.ko == "유키" && row.pos == "name" && row.options.empty() && row.note == "이름");
+    HD_CHECK(gui::ParseRow(text.lines[1]).note.empty());
+    text.lines[3] = gui::RowLine({"ユキ", "유키", "surname", "", row.note});
+    text.lines[1] = gui::RowLine({"魔導具", "마\t도구", "", "prio=5", ""});
+    text.lines.push_back(gui::RowLine({"月", "달", "", "", "메모\t둘"}));
+    HD_CHECK_EQ(gui::RowLine({"#메모", "", "", "", ""}), std::string("#메모"));
     text.lines.push_back(gui::RowLine({"蒼月", "아오츠키", "", ""}));
     HD_REQUIRE(gui::WriteDictText(path, text));
     HD_CHECK_EQ(ReadBytes(path), std::string("\xEF\xBB\xBF# 주석\r\n魔導具\t마 도구\tn\tprio=5\r\n\r\n"
-                                             "ユキ\t유키\tsurname\t// 이름\r\n蒼月\t아오츠키\r\n"));
+                                             "ユキ\t유키\tsurname\t// 이름\r\n月\t달\t// 메모 둘\r\n蒼月\t아오츠키\r\n"));
     WriteBytes(path, "#! layer=user\nkey\tko\tpos\n");
     HD_CHECK(gui::ReadDictText(path, text) && text.column && !text.bom && !text.crlf);
 }
@@ -105,4 +108,28 @@ HD_TEST(GuiUserDictToggleAndImport) {
     std::vector<fs::path> files{folder.path / "a.txt"};
     gui::AppendFiles(files, {folder.path / "b.txt", folder.path / "." / "a.txt", folder.path / "b.txt"});
     HD_CHECK(files == (std::vector<fs::path>{folder.path / "a.txt", folder.path / "b.txt"}));
+}
+
+HD_TEST(GuiUserDictRowCheck) {
+    struct Case {
+        gui::DictRow row;
+        gui::RowField field;
+        const char* message;
+    };
+    const Case cases[] = {
+        {{"鳥", "새", "", ""}, gui::RowField::Key, ""},
+        {{"鳥", "새", "n", "prio=2"}, gui::RowField::Key, ""},
+        {{"様", "", "hon", ""}, gui::RowField::Key, ""},
+        {{"鳥", "", "", ""}, gui::RowField::Ko, "한국어가 비어 있습니다"},
+        {{"鳥", "새", "zzz", ""}, gui::RowField::Pos, "알 수 없는 품사입니다: zzz"},
+        {{"鳥", "새", "n", "prio=x"}, gui::RowField::Options, "옵션 오류: option \"prio=x\": \"x\" is not an integer"},
+        {{"#メモ", "", "", ""}, gui::RowField::Key, ""},
+        {{"鳥", "새", "", "", "메모"}, gui::RowField::Key, ""},
+        {{"鳥", "새", "adj", ""}, gui::RowField::Pos, "품사와 맞지 않습니다: adj JP must be a dictionary form ending in い"},
+    };
+    for (const Case& test : cases) {
+        const gui::RowProblem problem = gui::CheckRow(test.row);
+        HD_CHECK_EQ(problem.message, std::string(test.message));
+        if (*test.message) HD_CHECK(problem.field == test.field);
+    }
 }

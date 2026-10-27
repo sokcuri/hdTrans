@@ -15,6 +15,7 @@
 #include "core/dict/names.h"
 #include "core/dict/snapshot.h"
 #include "core/dict/snapshot_file.h"
+#include "core/output/inflect.h"
 #include "core/rules/rules.h"
 #include "core/text/hangul.h"
 #include "core/text/utf8.h"
@@ -204,8 +205,6 @@ bool ReadUserFile(std::string_view path, std::size_t folders, bool plainOnly, st
         errors.push_back({file.name, LoadErrorKind::Read, 0, TsvErrorKind::Read, {}});
         return false;
     }
-    std::error_code ec;
-    if (!std::filesystem::exists(PathOf(path), ec) && !ec) return true;
     if (!ReadFile(PathOf(path), file.text, &file.head)) {
         errors.push_back({file.name, LoadErrorKind::Read, 0, TsvErrorKind::Read, {}});
         return false;
@@ -282,17 +281,17 @@ struct RuleBodyTable {
              std::vector<LoadError>& errors) {
         if (rule < 0 || body.empty()) return true;
         const auto at = static_cast<std::size_t>(rule);
-        if (bodies.size() <= at) bodies.resize(at + 1);
-        if (bodies[at].empty()) {
+        if (bodies.size() <= at || bodies[at].empty()) {
             // A body names no other rule, so it stands on its own in a one-rule program.
             const std::string text = "rules 1 1 0\nL 0 " + std::string(body) + "\n";
             rules::Program probe;
             rules::LoadError error{};
             if (!rules::Load(text, probe, error)) {
                 errors.push_back({file, LoadErrorKind::Tsv, line, TsvErrorKind::Read,
-                                  "the rule body does not parse"});
+                                  std::string("the rule body does not parse: ") + error.message});
                 return false;
             }
+            if (bodies.size() <= at) bodies.resize(at + 1);
             bodies[at] = std::string(body);
             return true;
         }
@@ -331,12 +330,47 @@ std::string NegationEndingError(std::string_view key, std::string_view target, P
            "\") but starts with no member of ending.negative-start or ending.other-negation";
 }
 
+std::string_view TsvReason(TsvErrorKind kind) {
+    switch (kind) {
+    case TsvErrorKind::NoKeyColumn: return "missing key column";
+    case TsvErrorKind::NoKoColumn: return "missing ko column";
+    case TsvErrorKind::NoPosColumn: return "missing pos column";
+    case TsvErrorKind::NoIdColumn: return "missing id column";
+    case TsvErrorKind::TooManyColumns: return "too many columns";
+    case TsvErrorKind::BadNumber: return "invalid number";
+    case TsvErrorKind::BadFlag: return "unknown flag";
+    case TsvErrorKind::EmptyKeyOrId: return "empty key or id";
+    case TsvErrorKind::DuplicateColumn: return "duplicate column";
+    case TsvErrorKind::Read: return "cannot read the file";
+    }
+    return "malformed line";
+}
+
+// Why the marker family of a target cannot be expanded: MarkerClassError, or a family
+// ("먹&ZZ@") that the marker tables do not hold. Empty for a target without a family and for
+// a match.
+std::string MarkerRowError(std::string_view target, PartCode part) {
+    if (std::string why = MarkerClassError(target, part); !why.empty()) return why;
+    if (target.size() < 4 || target.back() != '@') return {};
+    const std::string_view id = target.substr(target.size() - 4);
+    if (id[0] != '&' && id[0] != '$' && id[0] != '%') return {};
+    if (output::internal::FindKoreanFamily(id) != nullptr) return {};
+    return "the marker family " + std::string(id) + " is not in the marker tables";
+}
+
 // Parses the column file f into layer, interning its codes in codes; adds the indexes
 // of its rows with the flag replace to replacing. false on an error that FailsLoad: a
 // file with malformed lines fails the load, and its unknown pos and marker class lines
 // are not listed.
 bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, internal::Layer& layer,
-                    std::vector<uint32_t>* replacing, std::vector<LoadError>& errors) {
+                    std::vector<uint32_t>* replacing, std::vector<LoadError>& errors, bool strictUser,
+                    std::vector<userdict::SourceEntry>* sourceEntries, std::size_t* acceptedCount) {
+    if (acceptedCount) *acceptedCount = 0;
+    if (f.user && !internal::ValidUtf8(f.text)) {
+        errors.push_back({f.name, LoadErrorKind::Read, 0, TsvErrorKind::Read, "invalid UTF-8"});
+        return false;
+    }
+    const bool skip = f.user && !strictUser;
     layer.Rows().reserve(layer.Rows().size() + static_cast<std::size_t>(std::count(f.text.begin(), f.text.end(), '\n')) + 1);
     CodeReader reader(codes);
     TsvReader rows(f.text);
@@ -347,14 +381,33 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
     while (senses.Next(s)) {
         int32_t code;
         if (!reader.Code(s, code)) {
-            notices.push_back({f.name, LoadErrorKind::UnknownPos, rows.Line(), TsvErrorKind::Read, {}});
+            notices.push_back({f.name, f.user ? (skip ? LoadErrorKind::UserRow : LoadErrorKind::Tsv)
+                                             : LoadErrorKind::UnknownPos,
+                               rows.Line(), TsvErrorKind::Read,
+                               f.user ? "unknown pos: " + std::string(s.pos) : std::string()});
+            if (f.user && !skip) bodyFailed = true;
             continue;
         }
-        if (std::string why = MarkerClassError(s.ko, codes.At(code)->part); !why.empty()) {
-            notices.push_back({f.name, LoadErrorKind::MarkerClass, rows.Line(), TsvErrorKind::Read, std::move(why)});
+        if (std::string why = MarkerRowError(s.ko, codes.At(code)->part); !why.empty()) {
+            notices.push_back({f.name, f.user ? (skip ? LoadErrorKind::UserRow : LoadErrorKind::Tsv)
+                                             : LoadErrorKind::MarkerClass,
+                               rows.Line(), TsvErrorKind::Read, std::move(why)});
+            if (f.user) {
+                if (!skip) bodyFailed = true;
+                continue;
+            }
         }
         if (std::string why = NegationEndingError(s.key, s.ko, codes.At(code)->part); !why.empty()) {
-            notices.push_back({f.name, LoadErrorKind::NegationEnding, rows.Line(), TsvErrorKind::Read, std::move(why)});
+            notices.push_back({f.name, f.user ? (skip ? LoadErrorKind::UserRow : LoadErrorKind::Tsv)
+                                             : LoadErrorKind::NegationEnding,
+                               rows.Line(), TsvErrorKind::Read, std::move(why)});
+            if (f.user) {
+                if (!skip) bodyFailed = true;
+                continue;
+            }
+        }
+        if (std::string why = JapaneseTargetError(s.ko); !why.empty()) {
+            notices.push_back({f.name, LoadErrorKind::JapaneseTarget, rows.Line(), TsvErrorKind::Read, std::move(why)});
         }
         if (f.layer == FileLayer::Base || f.layer == FileLayer::Words) {
             if (std::string why = VerbNounError(s.key, s.ko, codes.At(code)->part, s.sem); !why.empty()) {
@@ -362,29 +415,36 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
             }
         }
 
-        if (s.rule > 0) bodies.named++;
+        bool badBody = false;
         if (!s.ctx.empty() && s.rule <= 0) {
             errors.push_back({f.name, LoadErrorKind::Tsv, rows.Line(), TsvErrorKind::Read,
                               "a rule body without a rule number"});
-            bodyFailed = true;
+            badBody = true;
         } else if (!bodies.Add(s.rule, s.ctx, f.name, rows.Line(), errors)) {
-            bodyFailed = true;
+            badBody = true;
         }
+        if (badBody) {
+            if (skip) errors.back().kind = LoadErrorKind::UserRow;
+            else bodyFailed = true;
+            if (f.user) continue;
+        }
+        if (s.rule > 0) bodies.named++;
+        if (sourceEntries) sourceEntries->push_back({std::string(s.key), std::string(s.ko), std::string(s.pos), {}});
+        if (acceptedCount) ++*acceptedCount;
         for (const std::string_view key : {s.key, s.reading}) {
             if (key.empty()) continue;
             if (s.replace && replacing) replacing->push_back(static_cast<uint32_t>(layer.Rows().size()));
             layer.Add(key, s.ko, code, s.prio, s.rule, s.id);
         }
     }
-    if (senses.Errors().empty()) {
-        errors.insert(errors.end(), notices.begin(), notices.end());
-        return !bodyFailed;
-    }
+    if (senses.Errors().empty() || f.user) errors.insert(errors.end(), notices.begin(), notices.end());
     for (const TsvError& e : senses.Errors()) {
-        const LoadErrorKind kind = e.kind == TsvErrorKind::Read ? LoadErrorKind::Read : LoadErrorKind::Tsv;
-        errors.push_back({f.name, kind, e.line, e.kind, {}});
+        const LoadErrorKind kind = e.kind == TsvErrorKind::Read ? LoadErrorKind::Read
+                                                               : skip ? LoadErrorKind::UserRow : LoadErrorKind::Tsv;
+        errors.push_back({f.name, kind, e.line, e.kind, skip ? std::string(TsvReason(e.kind)) : std::string()});
+        if (FailsLoad(kind)) bodyFailed = true;
     }
-    return false;
+    return !bodyFailed;
 }
 
 // The builtin files that the text path reads itself; the other builtin files are
@@ -457,6 +517,17 @@ std::string_view internal::WithoutHeader(std::string_view text) {
     return nl == std::string_view::npos ? std::string_view() : bare.substr(nl);
 }
 
+bool internal::ColumnText(std::string_view text) { return ColumnFile(text); }
+
+std::vector<std::string> internal::OptionalUserFile(std::string_view path) {
+    if (path.empty()) return {};
+    if (path.find('\0') == std::string_view::npos && internal::ValidUtf8(path)) {
+        std::error_code error;
+        if (!std::filesystem::exists(PathOf(path), error) && !error) return {};
+    }
+    return {std::string(path)};
+}
+
 bool internal::ReadColumnHeader(std::string_view utf8Path, bool& column) {
     column = false;
     if (utf8Path.find('\0') != std::string_view::npos || !internal::ValidUtf8(utf8Path)) return false;
@@ -474,9 +545,11 @@ struct SnapshotLoader {
     std::vector<LoadError> errors;
     RuleBodyTable ruleBodies;
     std::shared_ptr<Snapshot> snap{new Snapshot()};
+    bool strictUser = true;
 
     SnapshotLoader() = default;
-    explicit SnapshotLoader(std::shared_ptr<Snapshot> existing) : snap(std::move(existing)) {}
+    explicit SnapshotLoader(std::shared_ptr<Snapshot> existing, bool strict = true)
+        : snap(std::move(existing)), strictUser(strict) {}
 
     LoadResult Run();
     bool ReadLayers();
@@ -486,7 +559,8 @@ struct SnapshotLoader {
     LoadResult FinishPlain(const std::vector<std::size_t>& rest);
     bool CompilePlain(const std::vector<std::size_t>& rest);
     bool Compile(const std::string& name, std::string_view text, int file, userdict::Context& ctx,
-                 std::vector<UserEntry>& out);
+                 std::vector<UserEntry>& out, bool user = false, bool memory = false, bool memoryStrict = true,
+                 std::size_t* acceptedCount = nullptr);
     void Respell(std::string_view key, std::string_view ko);
     std::string PersonSpelling(std::string_view ko, const std::vector<Record>& records) const;
 };
@@ -508,26 +582,43 @@ void SnapshotLoader::Respell(std::string_view key, std::string_view ko) {
 }
 
 bool SnapshotLoader::Compile(const std::string& name, std::string_view text, int file, userdict::Context& ctx,
-                             std::vector<UserEntry>& out) {
-    userdict::Compiled c = userdict::Parse(text, file, ctx);
+                             std::vector<UserEntry>& out, bool user, bool memory, bool memoryStrict,
+                             std::size_t* acceptedCount) {
+    userdict::Compiled c = userdict::Parse(text, file, ctx, memory ? &snap->memoryUserEntries_ : nullptr, acceptedCount);
+    const bool skip = user && !(memory ? memoryStrict : strictUser);
     for (userdict::Error& e : c.errors) {
-        errors.push_back({name, LoadErrorKind::Plain, e.line, TsvErrorKind::Read, std::move(e.message)});
+        errors.push_back({name, skip ? LoadErrorKind::UserRow : LoadErrorKind::Plain,
+                          e.line, TsvErrorKind::Read, std::move(e.message)});
     }
     std::move(c.entries.begin(), c.entries.end(), std::back_inserter(out));
-    return c.errors.empty();
+    return skip || c.errors.empty();
 }
 
 // Sets the layer of each file from its header.
 bool SnapshotLoader::ReadLayers() {
     for (File& f : files) {
+        if (f.user && !f.memory) f.strict = strictUser;
+        if (f.user && !f.head && !internal::ValidUtf8(f.text)) {
+            errors.push_back({f.name, LoadErrorKind::Read, 0, TsvErrorKind::Read, "invalid UTF-8"});
+            return false;
+        }
         const char* message = nullptr;
         if (f.user) {
             const bool column = Column(f);
-            if (!internal::ReadLayer(f.text, f.layer) ||
-                (f.layer != FileLayer::User && internal::WithoutHeader(f.text).size() != f.text.size())) {
-                message = "the first line of the user dictionary is not #! layer=user";
+            const bool header = internal::ReadLayer(f.text, f.layer);
+            const bool filter = !f.memory && header &&
+                (f.layer == FileLayer::PreFilter || f.layer == FileLayer::PostFilter);
+            if (filter && column) {
+                errors.push_back({f.name, LoadErrorKind::Header, 1, TsvErrorKind::Read,
+                                  "a column file cannot be a prefilter or postfilter"});
+                return false;
             }
-            f.layer = column ? FileLayer::User : FileLayer::Base;
+            if (!header || (!filter && f.layer != FileLayer::User &&
+                             internal::WithoutHeader(f.text).size() != f.text.size())) {
+                message = f.memory ? "the first line of the user dictionary is not #! layer=user"
+                                   : "the first line of the user dictionary is not #! layer=user|prefilter|postfilter";
+            }
+            if (!filter) f.layer = column ? FileLayer::User : FileLayer::Base;
         } else if (!internal::ReadLayer(f.text, f.layer)) {
             message = "the first line is not #! layer=base|words|names|user|kana|readings|prefilter|postfilter";
         } else if (f.layer != FileLayer::Base) {
@@ -538,8 +629,10 @@ bool SnapshotLoader::ReadLayers() {
             if (!column && !plainLayer) message = "a plain file cannot be of the layer words, names or user";
         }
         if (message) {
-            errors.push_back({f.name, LoadErrorKind::Header, 1, TsvErrorKind::Read, message});
-            return false;
+            const bool skip = f.user && !(f.memory ? f.strict : strictUser);
+            errors.push_back({f.name, skip ? LoadErrorKind::UserRow : LoadErrorKind::Header,
+                              1, TsvErrorKind::Read, message});
+            if (!skip) return false;
         }
     }
     return true;
@@ -564,16 +657,23 @@ bool SnapshotLoader::CompilePlain(const std::vector<std::size_t>& rest) {
     int file = 0;
     for (const std::size_t i : rest) {
         const std::string_view text = internal::WithoutHeader(files[i].text);
-        if (files[i].layer == FileLayer::Readings || files[i].layer == FileLayer::PreFilter ||
-            files[i].layer == FileLayer::PostFilter) {
+        if (files[i].layer == FileLayer::Readings) {
+            s.sourceInfo_.push_back({files[i].name, LoadFileKind::Shipped, {}});
             continue;
         }
+        if (files[i].layer == FileLayer::PreFilter || files[i].layer == FileLayer::PostFilter) continue;
         if (files[i].layer == FileLayer::Kana) {
             std::vector<UserEntry> k = userdict::KanaSpellings(text, s.base_, s.codes_);
             std::move(k.begin(), k.end(), std::back_inserter(kana));
+            s.sourceInfo_.push_back({files[i].name, LoadFileKind::Shipped, {}});
             continue;
         }
-        ok = Compile(files[i].name, text, file++, ctx, entries) && ok;
+        std::size_t accepted = 0;
+        ok = Compile(files[i].name, text, file++, ctx, entries, files[i].user,
+                     files[i].memory, files[i].strict, &accepted) && ok;
+        s.sourceInfo_.push_back({files[i].name, files[i].memory ? LoadFileKind::MemoryUser
+                                            : files[i].user ? LoadFileKind::NativeUser : LoadFileKind::Shipped,
+                                accepted});
     }
     userdict::CompiledSenses senses = userdict::ParseSenses(BuiltinText("senses.tsv"), s.families_);
     for (userdict::Error& e : senses.errors) {
@@ -633,7 +733,12 @@ bool SnapshotLoader::ReadColumns(std::size_t i, internal::Layer& layer, std::vec
             return false;
         }
     }
-    const bool ok = ReadColumnFile(f, snap->codes_, ruleBodies, layer, replacing, errors);
+    std::size_t accepted = 0;
+    const bool ok = ReadColumnFile(f, snap->codes_, ruleBodies, layer, replacing, errors,
+                                   f.memory ? f.strict : strictUser, f.memory ? &snap->memoryUserEntries_ : nullptr,
+                                   &accepted);
+    if (ok) snap->sourceInfo_.push_back({f.name, f.memory ? LoadFileKind::MemoryUser
+                                                : f.user ? LoadFileKind::NativeUser : LoadFileKind::Shipped, accepted});
     std::string().swap(f.text);
     return ok;
 }
@@ -706,6 +811,7 @@ bool SnapshotLoader::BuildNames(const std::vector<std::size_t>& nameFiles) {
         }
         names.Compact();
         names.ByPrio(start);
+        internal::DropTargetMarks(rows.data() + start, rows.size() - start);
         const auto dropped = internal::DropNameKeys(rows.data() + start, rows.size() - start, s.base_, s.codes_);
         if (dropped.punct + dropped.inflected + dropped.longKorean > 0) {
             s.warnings_.push_back(files[i].name + ": name senses dropped: " + std::to_string(dropped.punct) +
@@ -747,20 +853,24 @@ LoadResult SnapshotLoader::FinishPlain(const std::vector<std::size_t>& rest) {
     CloseCodes(s.codes_, s.columnCodes_->Size());
     for (const std::size_t i : rest) s.plain_.push_back(std::move(files[i]));
     files.clear();
-    return {std::move(snap), std::move(errors)};
+    auto info = s.sourceInfo_;
+    return {std::move(snap), std::move(errors), std::move(info)};
 }
 
-LoadResult Load(std::vector<File> files) {
+LoadResult Load(std::vector<File> files, bool strictUser) {
     SnapshotLoader loader;
     loader.files = std::move(files);
+    loader.strictUser = strictUser;
     return loader.Run();
 }
 
-LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, std::string_view userFile) {
-    return LoadFoldersTsv(folders, std::vector<std::string>{std::string(userFile)});
+LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, std::string_view userFile,
+                          bool strictUser, const File* memory) {
+    return LoadFoldersTsv(folders, internal::OptionalUserFile(userFile), strictUser, memory);
 }
 
-LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::vector<std::string>& userFiles) {
+LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::vector<std::string>& userFiles,
+                          bool strictUser, const File* memory) {
     std::vector<File> files;
     std::vector<LoadError> errors;
     if (!ReadFolderFiles(folders, false, files, errors)) return {nullptr, std::move(errors)};
@@ -769,20 +879,23 @@ LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::ve
         read = ReadUserFile(userFile, folders.size(), false, files, errors) && read;
     }
     if (!read) return {nullptr, std::move(errors)};
-    return Load(std::move(files));
+    if (memory) files.push_back(*memory);
+    return Load(std::move(files), strictUser);
 }
 
 LoadResult LoadPlainFolders(std::shared_ptr<Snapshot> snapshot, const std::vector<std::string>& folders,
-                           std::vector<LoadError> errors, const std::vector<std::string>& userFiles) {
+                           std::vector<LoadError> errors, const std::vector<std::string>& userFiles,
+                           bool strictUser, const File* memory) {
     std::vector<File> files;
     std::vector<LoadError> readErrors;
     if (!ReadFolderFiles(folders, true, files, readErrors)) return {nullptr, std::move(readErrors)};
-    return LoadPlainFiles(std::move(snapshot), std::move(files), folders.size(), std::move(errors), userFiles);
+    return LoadPlainFiles(std::move(snapshot), std::move(files), folders.size(), std::move(errors), userFiles, strictUser, memory);
 }
 
 LoadResult LoadPlainFiles(std::shared_ptr<Snapshot> snapshot, std::vector<File> files, std::size_t folders,
-                         std::vector<LoadError> errors, const std::vector<std::string>& userFiles) {
-    SnapshotLoader loader(std::move(snapshot));
+                         std::vector<LoadError> errors, const std::vector<std::string>& userFiles,
+                         bool strictUser, const File* memory) {
+    SnapshotLoader loader(std::move(snapshot), strictUser);
     loader.files = std::move(files);
     std::vector<LoadError> readErrors;
     bool read = true;
@@ -790,6 +903,7 @@ LoadResult LoadPlainFiles(std::shared_ptr<Snapshot> snapshot, std::vector<File> 
         read = ReadUserFile(userFile, folders, true, loader.files, readErrors) && read;
     }
     if (!read) return {nullptr, std::move(readErrors)};
+    if (memory) loader.files.push_back(*memory);
     loader.errors = std::move(errors);
     if (!loader.ReadLayers()) return {nullptr, std::move(loader.errors)};
     std::vector<std::size_t> rest;

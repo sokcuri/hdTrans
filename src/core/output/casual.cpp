@@ -826,7 +826,7 @@ void Composer::WriteCasual(int first, int last) {
             case 1: stem = "&AL@"; break;
             case 2: stem = "&AV@"; break;
             case 4: stem = "&HN@"; break;
-            case 5: stem = "&C6@"; break;
+            case 5: stem = it.causativePotential ? "&HN@" : "&C6@"; break;
         }
         const std::string_view marker = Marker(stem);
         if (it.ending.text.size() < 2) continue;

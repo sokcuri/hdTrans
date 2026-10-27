@@ -1,0 +1,33 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:drawn-in-word	これは～です	이것은~입니다	fix	sound
+sound:drawn-in-word	それは～だよ	그것은~이야	fix	sound
+sound:drawn-in-word	ここに～がある	여기에~가 있다	fix	sound
+sound:drawn-in-word	答えは～です	대답은~입니다	fix	sound
+sound:drawn-in-word	今日は～晴れ	오늘은~맑음	keep	sound
+sound:drawn-in-word	私は～好きです	저는~좋아합니다	keep	sound
+sound:drawn-in-word	それは～ですね	그것은~이군요	fix	sound
+sound:drawn-in-word	家に～帰る	집에~돌아간다	keep	sound
+sound:drawn-in-word	僕は～好き	나는~좋아	keep	sound
+sound:drawn-in-word	これが～です	이것이~입니다	keep	sound
+sound:drawn-in-word	東京～大阪	도쿄~오사카	keep	sound
+sound:drawn-in-word	かわいい～	귀여워~	keep	sound
+sound:drawn-in-word	ちょ～かわいい	완전 귀엽다	keep	sound
+sound:drawn-in-word	艦隊帰投でーす。	함대 귀환입니다~.	keep	sound
+sound:drawn-in-word	お手紙でーす。	편지입니다~.	keep	sound
+sound:drawn-in-word	早くしなさーい。	빨리 해~.	keep	sound
+sound:drawn-in-word	なんとなーく	왠지~	keep	sound
+sound:drawn-in-word	べーつに	딱히	keep	sound
+sound:drawn-in-word	ほーんと	정말	keep	sound
+sound:drawn-in-word	かーしこまりました	알겠습니다	keep	sound
+sound:drawn-in-word	寒くなーい？	춥지 않아~?	keep	sound
+sound:drawn-in-word	いっきまぁーす！	갑니다~!	keep	sound
+sound:drawn-in-word	ここに～がいる	여기에~가 있다	fix	sound
+sound:drawn-in-word	これはーです	이것은-입니다	fix	sound
+sound:drawn-in-word	それはーだよ	그것은-이야	fix	sound
+sound:drawn-in-word	ここにーがある	여기에-가 있다	fix	sound
+sound:drawn-in-word	答えはーです	대답은-입니다	fix	sound
+sound:drawn-in-word	ありがとーでした	고마워였습니다	keep	sound
+sound:drawn-in-word	ほんっとーにお疲れ様！	정말 수고하셨습니다!	keep	sound
+sound:drawn-in-word	シロップをとーにゅー！	시럽을 토우에~!	keep	sound
+sound:drawn-in-word	明日もがんばろー！	내일도 힘내자~!	keep	sound

@@ -1,0 +1,13 @@
+# 규칙: SND-1, SND-4
+rule	input	expected	kind	layer
+sound:grunt	っん…これ以上はやらせねーよ。	읏…더 이상 유행하게 한-.	fix	sound
+sound:grunt	っん、かすり傷だ！全く問題ない。	읏, 찰상이야! 전혀 문제없다.	fix	sound
+sound:grunt	Thanks a lot. っん、いける！	Thanks a lot. 읏, 갈 수 있어!	fix	sound
+sound:stutter-small-wa	…ゎ、わたしもっ…	…나, 나도…	fix	sound
+sound:stutter-small-wa	ゎ、わたしも行く。	나, 나도 간다.	fix	sound
+sound:stutter-small-wa	わ、わたしも行く。	나, 나도 간다.	keep	sound
+sound:moan	ンンッンッ…	으읏읏…	fix	sound
+sound:moan	んんっんっ…	으읏읏…	keep	sound
+sound:moan	ンンッ…	으읏…	keep	sound
+dict:adult:11	何度か甘噛みを繰り返してから、唇に吸いついた。	몇 번이나 살짝 깨물기를 반복하고 나서, 입술에 들러 붙었다.	fix	lookup
+dict:adult:11	甘噛みした。	살짝 깨물었다.	keep	lookup

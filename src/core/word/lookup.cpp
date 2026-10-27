@@ -179,6 +179,11 @@ bool SaysOrNegates(std::string_view left, std::string_view query) {
     return false;
 }
 
+// Whether a code is that of a proper noun: class N130 or a Q meaning.
+bool ProperCodes(std::string_view part, std::string_view sem) {
+    return (part.size() == 4 && part.substr(2, 2) == "30") || sem.starts_with("Q");
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -202,6 +207,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         return s->w->Skip(e, s->query);
     };
     ctx.skip.context = &sc;
+    if (current + 1 < TokenCount()) ctx.after = Tok(current + 1).text;
     dict::Candidates found = snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
     if (!found.names.empty()) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
@@ -624,7 +630,8 @@ void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsDeshou(*r, query) || SplitsVerb(*r, query)) {
+        if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsDeshou(*r, query) || SplitsVerb(*r, query) ||
+            SplitsPrefixWord(*r, query)) {
             l.count--;
             continue;
         }
@@ -698,6 +705,48 @@ bool Worker::SplitsVerb(const Record& r, std::string_view query) const {
         }
     }
     return false;
+}
+
+// A proper noun of a prefix kanji and one more kanji, outside a run of kanji, whose last kanji
+// starts a longer common word of two kanji or more that ends before hiragana, katakana,
+// punctuation or the end (大間違い: 大 and 間違い, not the place 大間 and 違い; 大満足, 大手柄): the
+// prefix stands alone. A kanji or a person suffix after that word, or a word of place, keeps the
+// record (小西洋子, 大東さん, 大川沿い).
+bool Worker::SplitsPrefixWord(const Record& r, std::string_view query) const {
+    if (!ProperCodes(r.partCode, r.semantic) || !query.starts_with(r.source) || text::RuneCount(r.source) != 2 ||
+        NameClassOf(LastChar(r.source)) != kClassKanji) {
+        return false;
+    }
+    const std::string_view surface = transformSurface;
+    if (!surface.ends_with(query) || NameClassOf(LastChar(surface.substr(0, surface.size() - query.size()))) == kClassKanji) {
+        return false;
+    }
+    const std::string_view last = LastChar(r.source);
+    const std::string_view head = r.source.substr(0, r.source.size() - last.size());
+    if (NameClassOf(head) != kClassKanji) return false;
+    bool prefix = false;
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(head, dict::LookupMode::General)) {
+        prefix = prefix || c.codes->gram.HasCode("Z6");
+    }
+    if (!prefix) return false;
+    const std::string_view tail = query.substr(head.size());
+    const std::size_t word = snapshot.WordAt(tail);
+    if (word <= last.size()) return false;
+    int kanji = 0;
+    for (std::string_view w = tail.substr(0, word); !w.empty(); w.remove_prefix(FirstChar(w).size())) {
+        kanji += NameClassOf(FirstChar(w)) == kClassKanji ? 1 : 0;
+    }
+    const std::string_view rest = tail.substr(word);
+    if (kanji < 2 || NameClassOf(FirstChar(rest)) == kClassKanji || StartsWithHonorific(rest) || PersonSuffixAt(rest)) {
+        return false;
+    }
+    // A word of place keeps the name it follows (大川沿い 오카와 강가, not 대 강가).
+    const std::vector<dict::Candidate> common = snapshot.RetrieveRecords(tail.substr(0, word), dict::LookupMode::General);
+    if (std::any_of(common.begin(), common.end(), [](const dict::Candidate& c) { return c.codes->sem.HasCode("VPl"); })) {
+        return false;
+    }
+    return std::any_of(common.begin(), common.end(),
+                       [](const dict::Candidate& c) { return !ProperCodes(c.codes->partText, c.codes->sem.Text()); });
 }
 
 // Whether s starts with a noun of persons of two kana or more that the dictionary

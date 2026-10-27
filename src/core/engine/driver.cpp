@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+#include "core/dict/char_readings.h"
 #include "core/dict/classes.h"
 #include "core/engine/glue.h"
 #include "core/engine/resolve.h"
@@ -29,6 +30,7 @@
 #include "core/text/lines.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/conjugation.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
 
@@ -275,6 +277,24 @@ bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t 
     return false;
 }
 
+// Whether line[at, end) is a kanji that the dictionary holds as a common noun read other than
+// by its Hangul reading (星 별, not 易 역), which 々 makes plural (pipeline::RespellIterationMarks).
+bool KanjiNoun(const void* context, std::string_view line, size_t at, size_t end) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const std::string_view kanji = line.substr(at, end - at);
+    const auto reading = dict::Written(text::DecodeRune(kanji).cp);
+    std::string sound;
+    if (reading) text::AppendRune(sound, *reading);
+    for (const dict::Candidate& c : Find(d, kanji).list) {
+        if (c.source != kanji || c.codes == nullptr || c.codes->part.Tag() != 'N' || c.codes->part.ClassDigit() != '1' ||
+            c.codes->part.Sub() != '1' || c.target.empty() || c.target == sound) {
+            continue;
+        }
+        return true;
+    }
+    return false;
+}
+
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
 // past it, as written or with the っ dropped (あったりまえ as あたりまえ): the earliest that starts up
 // to kRunLookBackRunes Japanese runes before it, npos for none (pipeline::CollapseTsuRuns).
@@ -350,6 +370,15 @@ bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::
         if (j > first && j <= last && tokens[static_cast<std::size_t>(j)].afterSpace && into >= 0 &&
             t.type == tokenizer::kTypeJapanese && joined[static_cast<std::size_t>(into)].type == tokenizer::kTypeJapanese &&
             (head < 0 || head > intoLast)) {
+            const int tail = to[static_cast<std::size_t>(j - 1)];
+            if (tail >= 0) {
+                output::ResolvedItem& previous = items[static_cast<std::size_t>(tail)];
+                if (previous.entry.code.starts_with("32") ||
+                    (previous.detailClass == output::DetailClass::None &&
+                     dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1))))) {
+                    previous.spaceAfter = true;
+                }
+            }
             intoLast = std::max(intoLast, to[static_cast<std::size_t>(j)]);
             index[static_cast<std::size_t>(j)] = into;
             shift[static_cast<std::size_t>(j)] = static_cast<int>(joined[static_cast<std::size_t>(into)].text.size());
@@ -627,9 +656,19 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after, tokenizer::SpaceWord word) {
         using tokenizer::SpaceWord;
         if (word == SpaceWord::Ending) return dict::InClass(HDTRANS_CLASS("particle.after-space"), after);
+        if (word == SpaceWord::Filler) {
+            if (dict::InClass(HDTRANS_CLASS("word.pause-filler"), head)) return true;
+            const dict::Candidates found = snap.GetWordInfo(head, dict::LookupMode::General, lookup);
+            return std::any_of(found.list.begin(), found.list.end(), [&](const dict::Candidate& c) {
+                return c.source == head && c.codes != nullptr && c.codes->part.ClassDigit() == '3' &&
+                       c.codes->part.Sub() == '2';
+            });
+        }
+        const std::size_t letterEnd = after.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        const std::size_t letters = word == SpaceWord::Any ? std::min(letterEnd, after.size()) : 0;
         for (std::size_t start = 0; start < head.size();) {
             const std::string_view left = head.substr(start);
-            if (word == SpaceWord::Name && text::RuneCount(left) < 2 &&
+            if (word == SpaceWord::Binding && text::RuneCount(left) < 2 &&
                 !(start == 0 && text::IsKanji(text::DecodeRune(left).cp))) {
                 break;
             }
@@ -643,12 +682,31 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
             for (const dict::Candidate& c : words.list) {
                 if (c.source.size() <= left.size()) continue;
+                if (c.source.size() - left.size() < letters) continue;
                 // A name: a person or a work, or a row of the name layer other than a place.
                 const bool place = c.codes != nullptr && c.codes->sem.HasPrefix("QCT");
                 const bool name = (c.codes != nullptr && (c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QWK"))) ||
                                   (c.user != nullptr && c.user->nameLayer && !place);
-                const bool fits = word == SpaceWord::Any || (word == SpaceWord::Name && name) ||
-                                  (word == SpaceWord::Phrase && text::RuneCount(c.source.substr(left.size())) >= 2);
+                bool bound = false;
+                if (word == SpaceWord::Binding && ClassOf(c) == '4' && c.codes->gram.HasCode("Pj") && c.codes->gram.HasCode("Tu") &&
+                    c.codes->gram.HasCode("Ma")) {
+                    const std::string_view rest = std::string_view(query).substr(c.source.size());
+                    for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+                        const std::string_view form = word::Conjugation(c.codes->part.VerbKind(), branch);
+                        if (!form.empty() && rest.starts_with(form)) bound = true;
+                    }
+                    if (bound) {
+                        const dict::Candidates right = snap.GetWordInfo(after, dict::LookupMode::General, lookup);
+                        for (const dict::Candidate& r : right.list) {
+                            if (r.source.size() > c.source.size() - left.size() && r.codes != nullptr &&
+                                std::string_view("0134789").find(ClassOf(r)) != std::string_view::npos) {
+                                bound = false;
+                            }
+                        }
+                    }
+                }
+                const bool phrase = word == SpaceWord::Phrase && text::RuneCount(c.source.substr(left.size())) >= 2;
+                const bool fits = word == SpaceWord::Any || (word == SpaceWord::Binding && (name || bound)) || phrase;
                 if (fits) return true;
             }
             start += std::max<std::size_t>(1, text::DecodeRune(left).size);
@@ -724,8 +782,8 @@ bool Observes(const StageObserver& o) {
 // own, with a kBreakSpan between them that the chunks turn into break markers.
 std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext& doc, std::string_view body,
                           QuoteCarry carry, Scratch& s, Generated& generated, const StageObserver& observer,
-                          const TranslationOptions& options, std::optional<bool> narrated = std::nullopt,
-                          std::span<const std::string> parts = {}) {
+                          const TranslationOptions& options, std::optional<bool> narrated,
+                          std::span<const std::string> parts) {
     const pipeline::LineFacts facts = pipeline::ReadLine(doc, body);
     if (facts.wholeLine && parts.empty()) return *facts.wholeLine;
     const pipeline::LineLookup lookup = pipeline::LookupOf(doc, facts);
@@ -745,6 +803,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             normalized = pipeline::RespellKatakanaEndings(normalized);
             normalized = pipeline::RespellKanjiCries(normalized);
             normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
+            normalized = pipeline::RespellIterationMarks(normalized, WordHoldsRun, KanjiNoun, &respell);
         }
         return normalized;
     };
@@ -881,6 +940,19 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     return output::SpokenWords(again ? compose(speech, observer, options) : first, carry.depth, speech.styles);
 }
 
+// TranslateBody with the ruby tags <R reading>base</R> read as brace ruby (LAY-4) and written back.
+std::string TranslateRubyBody(const dict::Snapshot& snap, pipeline::DocumentContext& doc, std::string_view body,
+                              QuoteCarry carry, Scratch& s, Generated& generated, const StageObserver& observer,
+                              const TranslationOptions& options, std::optional<bool> narrated = std::nullopt,
+                              std::span<const std::string> parts = {}) {
+    const std::string braced = pipeline::RTagsAsBraceRuby(body);
+    if (braced.empty() || !parts.empty()) {
+        return TranslateBody(snap, doc, body, carry, s, generated, observer, options, narrated, parts);
+    }
+    return pipeline::BraceRubyAsRTags(
+        TranslateBody(snap, doc, braced, carry, s, generated, observer, options, narrated, parts));
+}
+
 // Watches the resolved chains of a line for its first and last words.
 struct EdgeWatch {
     std::vector<output::ResolvedItem> items;
@@ -957,7 +1029,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
-        alone[i] = TranslateBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
+        alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
@@ -983,7 +1055,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             joinedOptions.joinedLines = true;
             if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
             pieces = SplitAtBreaks(
-                TranslateBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
+                TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
                 j - i + 1);
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         }
@@ -1001,7 +1073,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 // The stages of the line on its own, for the observer; the translation stays the one made
                 // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
-                TranslateBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
+                TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
                               narratedOf(lines[k]));
             }
             if (arrows[k].empty()) {
@@ -1013,7 +1085,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             } else {
                 // The stages did not keep kGoesOn at the end: the line without it.
                 out[k] = WithArrow(
-                    TranslateBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
+                    TranslateRubyBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
                     arrows[k]);
                 if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             }
@@ -1076,7 +1148,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             // A quote left open counts on a line only when the line or a later one closes it.
             const LineQuotes quotes = QuotesOf(lines[i], carry);
             const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
-            std::string translated = TranslateBody(snap, *doc, lines[i], used, s, generated, watch, options);
+            std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, options);
             carry = quotes.end;
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             if (cr) translated += '\r';

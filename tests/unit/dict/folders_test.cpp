@@ -21,97 +21,116 @@ std::string Utf8(const std::filesystem::path& p) {
     return std::string(reinterpret_cast<const char*>(s.data()), s.size());
 }
 
+struct TempFolder {
+    std::filesystem::path path;
+    explicit TempFolder(const char* name) {
+        std::error_code error;
+        path = std::filesystem::temp_directory_path(error) /
+            (std::string(name) + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+        std::filesystem::create_directories(path, error);
+    }
+    ~TempFolder() {
+        std::error_code error;
+        std::filesystem::remove_all(path, error);
+    }
+};
+
 }  // namespace
 
 HD_TEST(DictFoldersOfProgram) {
-    std::error_code ec;
-    const auto dir = std::filesystem::temp_directory_path(ec) /
-                     ("hdtrans-folders-" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
-    HD_REQUIRE(std::filesystem::create_directory(dir, ec));
-    const std::string program = Utf8(dir);
-
-    HD_CHECK(Path(ShippedFolder(program)) == dir / "dicts");
+    TempFolder temp("hdtrans-folders-");
+    const auto data = temp.path / "hdtrans-data";
+    const auto program = Utf8(temp.path);
+    HD_CHECK(Path(DataFolder(program)) == data);
+    HD_CHECK(Path(ShippedFolder(program)) == data / "dicts.hdsnap");
+    HD_CHECK(Path(DefaultFolder(program)) == data / "dicts.hdsnap");
+    HD_CHECK(Path(UserFolder(program)) == data / "user");
     HD_REQUIRE(UserPaths(program).size() == 1);
-    HD_CHECK(Path(UserPaths(program).front()) == dir / "user");
+    HD_CHECK(Path(UserPaths(program).front()) == data / "user");
+    HD_CHECK(Path(ConfigFile(program)) == data / "user/hdtrans.config.yaml");
+    HD_CHECK(Path(EhndFolder(program)) == data / "ehnd");
     HD_CHECK(UserPaths("").empty());
-    // Without dicts next to the program, dicts in the current directory.
-    HD_CHECK_EQ(DefaultFolder(program), "dicts");
-    HD_CHECK_EQ(DefaultFolder(""), "dicts");
-    std::filesystem::create_directory(dir / "dicts", ec);
-    HD_REQUIRE(!ec);
-    HD_CHECK(Path(DefaultFolder(program)) == dir / "dicts");
-    // The Ehnd folder only when it is there.
-    HD_CHECK_EQ(EhndFolder(program), "");
     HD_CHECK_EQ(EhndFolder(""), "");
-    std::filesystem::create_directory(dir / "Ehnd", ec);
-    HD_REQUIRE(!ec);
-    HD_CHECK(Path(EhndFolder(program)) == dir / "Ehnd");
-
-    std::filesystem::remove_all(dir, ec);
+    HD_CHECK(FolderWarnings(program).empty());
+    HD_CHECK(FolderWarnings("").empty());
 }
 
 HD_TEST(DictDataLayouts) {
-    std::error_code error;
-    const auto root = std::filesystem::temp_directory_path(error) /
-        ("hdtrans-layouts-" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
-    const struct Case { const char* data; const char* user; const char* dicts; const char* userdict; const char* config; } cases[] = {
-        {"", "", "dicts", "userdict.tsv", "hdtrans.config.yaml"},
-        {"", "user", "dicts", "userdict.tsv", "hdtrans.config.yaml"},
-        {"hdTrans", "user", "dicts", "userdict.tsv", "hdtrans.config.yaml"},
-        {"hdtrans", "USER", "DICTS", "USERDICT.TSV", "HDTRANS.CONFIG.YAML"},
-        {"HDTRANS", "User", "Dicts", "UserDict.tsv", "HdTrans.Config.yaml"},
+    TempFolder temp("hdtrans-layouts-");
+    const struct Case { const char* data; const char* user; const char* snapshot; const char* config;
+                        const char* userdict; const char* ehnd; } cases[] = {
+        {"hdtrans-data", "user", "dicts.hdsnap", "hdtrans.config.yaml", "userdict.tsv", "ehnd"},
+        {"HDTRANS-DATA", "USER", "DICTS.HDSNAP", "HDTRANS.CONFIG.YAML", "USERDICT.TSV", "EHND"},
+        {"HdTrans-Data", "User", "Dicts.HdSnap", "HdTrans.Config.yaml", "UserDict.tsv", "Ehnd"},
     };
     std::size_t index = 0;
     for (const auto& test : cases) {
-        const auto program = root / std::to_string(index++);
-        const auto data = test.data[0] ? program / test.data : program;
-        const auto user = test.user[0] ? data / test.user : data;
-        std::filesystem::create_directories(program, error);
-        if (!test.data[0]) std::ofstream(program / "hdtrans") << "executable";
-        std::filesystem::create_directories(data / test.dicts, error);
-        HD_REQUIRE(!error);
+        const auto program = temp.path / std::to_string(index++);
+        const auto data = program / test.data;
+        const auto user = data / test.user;
+        std::error_code error;
         std::filesystem::create_directories(user, error);
         HD_REQUIRE(!error);
+        std::filesystem::create_directory(data / test.ehnd, error);
+        HD_REQUIRE(!error);
+        std::ofstream(data / test.snapshot) << "snapshot\n";
         std::ofstream(user / test.userdict) << "# user dictionary\n";
         std::ofstream(user / test.config) << "cg: true\n";
-        std::filesystem::create_directory(program / "EHND", error);
-        HD_REQUIRE(!error);
         const auto path = Utf8(program);
         HD_CHECK(Path(DataFolder(path)) == data);
-        HD_CHECK(Path(UserFolder(path)) == (test.user[0] ? user : data / "user"));
-        HD_CHECK(Path(ShippedFolder(path)) == data / test.dicts);
-        HD_CHECK(Path(DefaultFolder(path)) == data / test.dicts);
-        HD_REQUIRE(!UserFiles(UserPaths(path)).empty());
-        HD_CHECK(Path(UserFiles(UserPaths(path)).front()) == user / test.userdict);
+        HD_CHECK(Path(UserFolder(path)) == user);
+        HD_CHECK(Path(ShippedFolder(path)) == data / test.snapshot);
+        HD_CHECK(Path(DefaultFolder(path)) == data / test.snapshot);
         HD_CHECK(Path(ConfigFile(path)) == user / test.config);
-        HD_CHECK(Path(EhndFolder(path)) == program / "EHND");
-        HD_CHECK(Path(FindChild(path, "missing")) == program / "missing");
-        if (test.data[0]) {
-            std::filesystem::create_directory(program / "dicts", error);
-            std::ofstream(program / "dicts.hdsnap") << "outer snapshot\n";
-            std::ofstream(program / "userdict.tsv") << "# legacy\n";
-            std::ofstream(program / "hdtrans.config.yaml") << "cg: false\n";
-            HD_CHECK(Path(ShippedFolder(path)) == data / test.dicts);
-            HD_REQUIRE(!UserFiles(UserPaths(path)).empty());
-            HD_CHECK(Path(UserFiles(UserPaths(path)).front()) == user / test.userdict);
-            HD_CHECK(Path(ConfigFile(path)) == user / test.config);
-        }
-        const auto snapshot = data / "DiCtS.HdSnAp";
-        std::ofstream(snapshot) << "damaged snapshot\n";
-        HD_CHECK(Path(ShippedFolder(path)) == snapshot);
-        HD_CHECK(Path(DefaultFolder(path)) == snapshot);
-        HD_CHECK(Path(UserFolder(path)) == (test.user[0] ? user : data / "user"));
+        HD_REQUIRE(UserFiles(UserPaths(path)).size() == 1);
         HD_CHECK(Path(UserFiles(UserPaths(path)).front()) == user / test.userdict);
-        HD_CHECK(Path(ConfigFile(path)) == user / test.config);
-        std::filesystem::remove_all(data / test.dicts, error);
-        HD_CHECK(Path(ShippedFolder(path)) == snapshot);
-        HD_CHECK(Path(DefaultFolder(path)) == snapshot);
-        std::filesystem::remove(snapshot, error);
-        std::filesystem::create_directory(snapshot, error);
-        HD_CHECK(Path(ShippedFolder(path)) == data / "dicts");
-        HD_CHECK_EQ(DefaultFolder(path), "dicts");
+        HD_CHECK(Path(EhndFolder(path)) == data / test.ehnd);
+        HD_CHECK(FolderWarnings(path).empty());
+        std::filesystem::remove(data / test.snapshot, error);
+        HD_CHECK(Path(ShippedFolder(path)) == data / "dicts.hdsnap");
+        HD_CHECK(Path(DefaultFolder(path)) == data / "dicts.hdsnap");
     }
-    std::filesystem::remove_all(root, error);
+}
+
+HD_TEST(DictDirectoryCaseCollisions) {
+    TempFolder temp("hdtrans-folder-cases-");
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(temp.path / "CaseProbe", error));
+    const bool distinct = std::filesystem::create_directory(temp.path / "caseprobe", error);
+    HD_REQUIRE(!error);
+    if (!distinct) HD_SKIP("filesystem does not distinguish directory case variants");
+    for (const char* name : {"HDTRANS-DATA", "Hdtrans-Data", "hdtrans-data"}) {
+        HD_REQUIRE(std::filesystem::create_directory(temp.path / name, error));
+    }
+    const auto data = temp.path / "hdtrans-data";
+    for (const char* name : {"USER", "User", "user", "EHND", "Ehnd", "ehnd"}) {
+        HD_REQUIRE(std::filesystem::create_directory(data / name, error));
+    }
+    const auto program = Utf8(temp.path);
+    HD_CHECK(Path(DataFolder(program)) == data);
+    HD_CHECK(Path(UserFolder(program)) == data / "user");
+    HD_CHECK(Path(EhndFolder(program)) == data / "ehnd");
+    auto warnings = FolderWarnings(program);
+    HD_REQUIRE(warnings.size() == 3);
+    HD_CHECK(warnings[0].find("HDTRANS-DATA, Hdtrans-Data, hdtrans-data") != std::string::npos);
+    HD_CHECK(warnings[0].find("hdtrans-data를 씁니다") != std::string::npos);
+    HD_CHECK(warnings[1].find("USER, User, user") != std::string::npos);
+    HD_CHECK(warnings[1].find("user를 씁니다") != std::string::npos);
+    HD_CHECK(warnings[2].find("EHND, Ehnd, ehnd") != std::string::npos);
+    HD_CHECK(warnings[2].find("ehnd를 씁니다") != std::string::npos);
+    std::filesystem::remove(data / "user", error);
+    std::filesystem::remove(data / "ehnd", error);
+    HD_CHECK(Path(UserFolder(program)) == data / "USER");
+    HD_CHECK(Path(EhndFolder(program)) == data / "EHND");
+    warnings = FolderWarnings(program);
+    HD_REQUIRE(warnings.size() == 3);
+    HD_CHECK(warnings[1].find("USER를 씁니다") != std::string::npos);
+    HD_CHECK(warnings[2].find("EHND를 씁니다") != std::string::npos);
+    std::filesystem::remove_all(data, error);
+    HD_CHECK(Path(DataFolder(program)) == temp.path / "HDTRANS-DATA");
+    warnings = FolderWarnings(program);
+    HD_REQUIRE(warnings.size() == 1);
+    HD_CHECK(warnings[0].find("HDTRANS-DATA를 씁니다") != std::string::npos);
 }
 
 HD_TEST(UserDictionaryDiscovery) {

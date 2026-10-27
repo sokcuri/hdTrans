@@ -27,7 +27,8 @@ struct Rec {
 // る-verbs whose class the lemma does not show. Returns an error message, empty on
 // success.
 std::string Compile(std::string_view jp, std::string_view kr, std::string_view pos, std::string_view cls, bool space,
-                    const dict::Dict* base, Families& families, std::vector<Rec>& out);
+                    const dict::Dict* base, Families& families, std::vector<Rec>& out,
+                    std::size_t* ehndAttrPosErrors = nullptr);
 
 // The ending record of an end or pat row: jp and kr are a model word (書く 쓰다,
 // 高い 높다, 静か 조용하다 or 学生 학생) with the ending. Returns an error message.

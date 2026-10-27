@@ -248,6 +248,10 @@ struct SoundMatch {
     bool phrase = false;      // an interjection of phrases.tsv, a word rather than a sound
     bool drawn = false;       // the text ends in a kana that draws out the vowel before it (ひぃ, ふぁー)
     bool cry = false;         // a predicate said as a cry (SoundRow::cry)
+    // The Korean drawn out vowel by vowel, for a cry drawn out by two vowel kana, which only a
+    // copy of it right before draws out so (イっちゃう、イっちゃうぅぅっ 가버려, 가버려어엇).
+    std::string redrawn;
+    std::string alone;  // SoundRow::alone
 };
 
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
@@ -269,7 +273,10 @@ std::u32string_view CryStem(const SoundMatch& m) {
 // Whether b says the cry a again with the same Korean, as it is, drawn out or clipped (やだ+やだぁ,
 // やだ+やだっ, やだっ+やだっ; not いやっ+やだっ).
 bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
-    return a.cry && b.cry && a.korean == b.korean && CryStem(a) == CryStem(b);
+    // The Korean of one may draw out the other's (가버려, 가버려어어엇).
+    const auto plain = [](std::string_view k) { return k.ends_with('~') ? k.substr(0, k.size() - 1) : k; };
+    const std::string_view x = plain(a.korean), y = plain(b.korean);
+    return a.cry && b.cry && (x.starts_with(y) || y.starts_with(x)) && CryStem(a) == CryStem(b);
 }
 
 // Whether the text of the sound ends in a clipping っ or ッ of mark.clip (やだっ).
@@ -441,6 +448,7 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
+    size_t LaughterEnd(size_t p) const;
     // With ending, the end rows go there instead of into user.
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
                      size_t* ending = nullptr) const;
@@ -514,6 +522,16 @@ private:
 bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
     return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
+}
+
+// The end of a run of mark.laughter letters at character p that no Latin letter or digit follows
+// (ｗｗ, not www.example), or p.
+size_t SoundText::LaughterEnd(size_t p) const {
+    size_t e = p;
+    while (e < rs_.size() && dict::InClassRune(HDTRANS_CLASS("mark.laughter"), rs_[e])) e++;
+    const bool latin = e < rs_.size() && (rs_[e] < 0x2000 || (rs_[e] >= 0xFF01 && rs_[e] <= 0xFF5E)) &&
+                       (text::IsLetter(rs_[e]) || text::IsDigit(rs_[e]));
+    return latin ? p : e;
 }
 
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
@@ -681,13 +699,21 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                  pause = PauseAt(end) || (In(rs_[end - 1], U"？?") && p != stutterEnd_);  // a key that asks ends in its own pause (ね？)
             // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
             // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
-            // う……多分, ちょ……待って).
-            // Not when the syllable is said again after the marks (む…、むっ).
+            // う……多分, ちょ……待って) and, unless it is a conjunction (で 그리고), before a space or
+            // laughter (ちょ 待って, ちょｗｗ落ち着け). Not when the syllable is said again after the
+            // marks (む…、むっ), nor before a space when it starts the reading of the kanji word after
+            // it (む 無理, う 動き).
+            const std::string key = EncodeText(s.key);
+            const bool spaced = end < rs_.size() && text::IsSpace(rs_[end]);
             if (start && end == p + s.key.size() && end < rs_.size() && (p == 0 || !text::IsSpace(rs_[p - 1])) &&
-                dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) && dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), EncodeText(s.key))) {
+                (dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) ||
+                 ((spaced || LaughterEnd(end) > end) && !dict::InClass(HDTRANS_CLASS("sound.stutter-conjunction"), key))) &&
+                dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), key)) {
                 size_t again = end;
                 while (again < rs_.size() && (StutterSeparator(rs_, again) > 0 || text::IsSpace(rs_[again]))) again++;
-                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key;
+                again = LaughterEnd(again);
+                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key &&
+                        !(spaced && again < rs_.size() && IsKanjiRune(rs_[again]) && StutterHeadMora(rs_, again, false) == s.key);
             }
             // A lead asked on its own after an ellipsis that opens an utterance is one too
             // (！…そう？ 그래?); after words the ellipsis only pauses them (したい…ね？).
@@ -744,10 +770,12 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         if (ok && EndsInsideKatakana(p, end)) ok = false;  // するリスク is する and リスク, not するり
         // An interjection drawn out by three or more vowel kana draws out its last syllable
         // whatever its initial (だめぇぇぇっ 안 돼애애애, not 안 돼~).
+        std::string copyDrawn;
         if (ok && s.intj && runKorean.empty()) {
             size_t vowels = 0;
             for (size_t k = p + 1; k < end; k++) vowels += PlainVowel(f_[k]) != 0 && Lengthens(f_[k], f_[k - 1]);
             if (vowels >= 3) units += 'd';
+            if (vowels == 2 && s.cry && units.find('h') == std::string::npos) copyDrawn = Lengthen(Reading(s, p, end), units + 'd');
         }
         // An exclamation said as written before a question mark asks for the words
         // (よかった？ 좋았어?); drawn out it stays the exclamation (よかったぁ? 다행이다~?),
@@ -774,10 +802,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             }
         }
         // A final row needs the end of the utterance after it and any spaces: no letter, digit, comma or
-        // question mark.
+        // question mark. Laughter ends the utterance too (ウケるｗｗ).
         if (ok && s.final) {
             size_t q = end;
             while (q < rs_.size() && text::IsSpace(rs_[q])) q++;
+            q = LaughterEnd(q);
             const std::string next = q < rs_.size() ? EncodeText(f.substr(q, 1)) : std::string();
             if (q < rs_.size() && (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass(HDTRANS_CLASS("mark.comma"), next) ||
                                    dict::InClass(HDTRANS_CLASS("mark.question"), next))) {
@@ -812,7 +841,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 }
             }
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, open, spaceAfter, s.phrase,
-                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry};
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone};
             chosen = &s;
         }
     }
@@ -1337,7 +1366,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const std::u32string_view rs = rs_, f = f_;
     pieces.clear();
     if (p > 0 && !text::IsSpace(rs[p - 1]) && !In(rs[p - 1], U"「『（(“‘〈《【。、，！？!?…‥―─—")) return 0;
-    if ((!IsHiraganaRune(rs[p]) && !IsKatakanaRune(rs[p])) || In(f[p], U"ッンーャュョヮ")) return 0;
+    if ((!IsHiraganaRune(rs[p]) && !IsKatakanaRune(rs[p])) || In(f[p], U"ッンーャュョ")) return 0;
     // が that opens a line, not an utterance, is the conjunction (　が……本当に; 「が、頑張る」),
     // unless it is said again (が、が、頑張ります).
     if (rs[p] == U'が') {
@@ -1347,8 +1376,8 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         const bool again = k != 0 && p + 1 + k < rs.size() && rs[p + 1 + k] == U'が';
         if ((q == 0 || rs[q - 1] == U'\n') && !again) return 0;
     }
-    // A small vowel stutters only the plain vowel that starts the word (ぃ――いや).
-    const char32_t smallOf = In(f[p], U"ァィゥェォ") ? PlainVowel(f[p]) : 0;
+    // A small vowel or ゎ stutters only the plain kana that starts the word (ぃ――いや, ゎ、わたし).
+    const char32_t smallOf = In(f[p], U"ァィゥェォ") ? PlainVowel(f[p]) : f[p] == U'ヮ' ? U'ワ' : 0;
     size_t n = 1;
     if (p + n < rs.size() && In(f[p + n], U"ャュョ")) n++;
     if (p + n < rs.size() && f[p + n] == U'ッ') n++;
@@ -1903,8 +1932,14 @@ std::string SoundText::Write() {
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
                 if (k == chain.size() - 1 && doing && !m.root.empty()) {
                     b += m.root;
-                } else if (ClippedCryCopy(m, k > 0 ? CryCopies(chain[k - 1], m) : CryCopyBefore(lastCry, m))) {
+                } else if (const bool copy = k > 0 ? CryCopies(chain[k - 1], m) : CryCopyBefore(lastCry, m);
+                           copy && !m.redrawn.empty()) {
+                    b += m.redrawn;
+                } else if (ClippedCryCopy(m, copy)) {
                     b += Lengthen(m.korean, "d!");  // a clipped copy of a cry closes with ㅅ (싫어 싫엇, 싫엇, 싫엇)
+                } else if (SoundMatch after; !m.alone.empty() && !copy && !CryCopyAfter(m, after)) {
+                    b += m.alone;
+                    if (m.korean.ends_with('~')) b += '~';
                 } else {
                     b += m.korean;
                 }
@@ -1928,6 +1963,11 @@ std::string SoundText::Write() {
                 b += "하게";
                 next++;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (chain.back().lead && !chain.back().open && next + 1 < rs.size() && rs[next] == U'　' &&
+                       !Sounds(next + 1, false, false).empty()) {
+                // An ideographic space between a lead and another sound is a plain space (さ　じゃあ 자 그럼).
+                b += ' ';
+                next++;
             } else if (Spaced(next) || chain.back().spaceAfter) {
                 b += ' ';
             }
@@ -2762,9 +2802,11 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
     }
     switch (says) {
         case Says::Ru:
-            // Not after a verb of ability (想像できんな is できないな).
+            // Not after a verb of ability or of a perceived state, which no prohibition takes (想像できんな
+            // is できないな, 見えんな 見えないな).
             if (VerbFormIs(s + std::string(kRu), kDictionaryForm, ProhibitedKind, ctx, snap) &&
-                !VerbFormIs(s + std::string(kRu), kDictionaryForm, AbilityVerb, ctx, snap)) {
+                !VerbFormIs(s + std::string(kRu), kDictionaryForm, AbilityVerb, ctx, snap) &&
+                !dict::InClass(HDTRANS_CLASS("verb.observed-state"), s)) {
                 return kRu;
             }
             return {};
@@ -2997,7 +3039,9 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 
 }  // namespace internal
 
-std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
+namespace {
+
+std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
@@ -3013,6 +3057,49 @@ std::string Sound(std::string_view normalized, const LineContext& ctx, const dic
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
     return internal::WriteCries(sounded, ctx, snap);
+}
+
+}  // namespace
+
+// A work title of the name layer that the sound passes would change goes through unchanged, so
+// that its key still reads it (ぼっち・ざ・ろっく keeps the っ that would be emphasis elsewhere).
+std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
+    std::string whole = SoundRun(normalized, ctx, snap);
+    if (whole == normalized) return whole;
+    std::vector<std::pair<std::size_t, std::size_t>> titles;
+    for (std::size_t i = 0; i < normalized.size();) {
+        const std::size_t n = snap.TitleAt(normalized.substr(i));
+        if (n == 0) {
+            i += std::max<std::size_t>(1, text::DecodeRune(normalized.substr(i)).size);
+            continue;
+        }
+        titles.emplace_back(i, n);
+        i += n;
+    }
+    // A title the passes keep, keep standing alone (ドリドリ of ドリドリッと), or read as a sound in
+    // Hangul (ククク) is left to them.
+    std::erase_if(titles, [&](const auto& t) {
+        const std::string_view key = normalized.substr(t.first, t.second);
+        if (whole.find(key) != std::string::npos) return true;
+        const std::string alone = SoundRun(key, ctx, snap);
+        if (alone == key) return true;
+        for (std::size_t i = 0; i < alone.size();) {
+            const auto r = text::DecodeRune(std::string_view(alone).substr(i));
+            if (r.cp >= text::kBase && r.cp <= text::kLast) return true;
+            i += std::max<std::size_t>(1, r.size);
+        }
+        return false;
+    });
+    if (titles.empty()) return whole;
+    std::string out;
+    std::size_t done = 0;
+    for (const auto& [at, n] : titles) {
+        if (at > done) out += SoundRun(normalized.substr(done, at - done), ctx, snap);
+        out.append(normalized.substr(at, n));
+        done = at + n;
+    }
+    if (done < normalized.size()) out += SoundRun(normalized.substr(done), ctx, snap);
+    return out;
 }
 
 }  // namespace hdTrans::pipeline

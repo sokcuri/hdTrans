@@ -86,7 +86,13 @@ HD_TEST(rules_edit_bad_body) {
         const char* message;
     };
     const Case cases[] = {
-        {"||1 S+1==  \"が\"", "", 3, "the rule body does not parse"},
+        {"||1 S+1==  \"が\"", "", 3, "the rule body does not parse: empty token"},
+        {"||1 &&2 S+1== \"が\" D+0= \"먹&ZZ@\"", "", 3,
+         "the rule body does not parse: the assigned marker family is not in the marker tables"},
+        {"||1 &&2 S+1== \"が\" D+0= \"먹&A1@다\"", "", 3,
+         "the rule body does not parse: a marker family does not end the assigned text"},
+        {"||1 &&2 S+1== \"が\" Y+0= \"6주었으면 &AV@\"", "", 3,
+         "the rule body does not parse: an ending text holds a marker family"},
         {"||1 G+0== \"Ow\"", "人気\t인기도\tN110\t\t\tGN\t2\t3\t||0\n", 4, "a second body for the local rule"},
     };
     for (const Case& c : cases) {

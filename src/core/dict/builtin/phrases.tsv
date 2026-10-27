@@ -9,9 +9,11 @@
 // only where the utterance ends after it, no comma or question mark (また明日 내일 보자, not
 // また明日来る). With polite=W the last word of the Korean is W where the quote speaks politely
 // or an honoured person is called right before it (先生、また明日 선생님, 내일 봬요). cry marks a
-// predicate said as a cry, as in sound.tsv.
+// predicate said as a cry, as in sound.tsv; with alone=K a cry said once, not again right before or
+// after it, is K, _ standing for a space (イっちゃう 갈 것 같아, イっちゃう、イっちゃう 가버려, 가버려).
 
 // Greetings and everyday set phrases.
+いい迷惑	완전 민폐	n
 ただいま帰りました	다녀왔습니다	intj
 ただいま戻りました	다녀왔습니다	intj
 お帰りなさいませ	어서 오세요	intj
@@ -474,11 +476,11 @@
 お酒に目がない	술이라면 사족을 못 쓰다	adj	gattr=Av
 
 // Stock phrases of erotic scenes.
-イクッ	가버려	intj
-イクゥ	가버려	intj
+イクッ	가버려	intj	cry
+イクゥ	가버려	intj	cry
 イクイク	간다 간다	intj
-イっちゃう	가버려	intj
-イっちゃ	가버려	intj
+イっちゃう	가버려	intj	cry alone=갈_것_같아
+イっちゃ	가버려	intj	cry alone=갈_것_같아
 イっちゃった	가버렸어	intj
 イキそう	갈 것 같아	intj
 イかせて	가게 해 줘	intj
@@ -1229,7 +1231,6 @@
 おけ	오케이	intj	final
 おけおけ	오케이 오케이	intj
 おけまる	오케이	intj
-ワロタ	ㅋㅋㅋ	intj
 てぇてぇ	존귀해	intj
 ウケる	웃겨	intj	exclaim final
 

@@ -30,4 +30,14 @@ HD_TEST(word_unplaced_kana) {
     HD_CHECK(has(translate("「む、無理です」"), "무, 무리"));
     HD_CHECK(has(translate("す、と頭を撫でた。"), "스, "));
     HD_CHECK(!has(translate("がばり、と身体を起こした。"), "리,"));
+    HD_CHECK_EQ(translate("まりやん！"), "마리잖아!");
+    HD_CHECK_EQ(translate("まりです。"), "마리입니다.");
+    HD_CHECK_EQ(translate("ぽぺやん！"), "포페잖아!");
+    HD_CHECK(has(translate("私はまりです。"), "마리입니다"));
+    HD_CHECK_EQ(translate("(まりやん)"), "(마리얀)");
+    HD_CHECK_EQ(translate("まりやん≫"), "마리얀≫");
+    HD_CHECK_EQ(translate("学生やん"), "학생이잖아");
+    HD_CHECK_EQ(translate("書いたやん"), "썼잖아");
+    HD_CHECK_EQ(translate("まりちゃん。"), "마리짱.");
+    HD_CHECK(!has(translate("えへへ、どうぞです♪"), "도우조"));
 }

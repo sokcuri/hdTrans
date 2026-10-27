@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+dict:w:20766	重い瞼を上げた	has:눈꺼풀	fix	global-stem
+dict:w:20766	重い瞼を開けた	has:눈꺼풀	keep	defaults
+dict:w:20766	重い瞼	has:눈꺼풀	keep	defaults
+dict:w:20766	上の瞼と下の瞼	has:눈꺼풀	keep	defaults
+dict:w:20766	瞼の外側にも	has:눈꺼풀	keep	defaults
+dict:w:20766	まぶた ちぎれるよ	has:눈꺼풀	keep	defaults
+dict:w:20766	まぶたをまつり縫い	has:눈꺼풀	keep	defaults
+dict:w:20766	目頭が熱くなってしまう	has:눈시울	keep	global-stem
+dict:w:20766	目頭を押さえる	has:눈시울	keep	global-stem
+dict:w:20766	目尻の涙を拭った	has:눈꼬리	keep	defaults
+dict:w:20766	その目尻も力なく落ちていて覇気がない	has:눈꼬리	keep	defaults
+dict:w:20766	頬を伝う涙	has:뺨	keep	defaults
+dict:w:20766	子どもたちに頭を下げた	has:고개	keep	defaults
+dict:w:20766	頬をなでる初夏の風	has:뺨	keep	defaults
+dict:w:20766	頭を下げている	has:고개	keep	defaults
+dict:w:20766	肩をたたく音	has:어깨	keep	defaults
+dict:w:20766	頭を使いましょう	has:머리	keep	defaults
+dict:w:20766	眼瞼	has:눈꺼풀	keep	defaults
+dict:w:20766	眼瞼下垂	has:안검	keep	defaults

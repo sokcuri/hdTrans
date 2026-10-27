@@ -1,5 +1,6 @@
 EXPORTS
     hdTrans_Initialize
+    hdTrans_SetOptions
     hdTrans_Terminate
     hdTrans_Translate
     hdTrans_TranslateContext
