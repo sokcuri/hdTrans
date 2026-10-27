@@ -48,7 +48,6 @@ checkout with `mkdir -p .claude && ln -s ../skills .claude/skills`.
   then creates the release without another PR (docs/contributing.md).
 - A squash merge keeps the PR title as its only line: no body, no co-author or session trailers.
 - Dates shown to users (release notes, CHANGELOG, the web page) are in KST (Asia/Seoul).
-- Released history is never rewritten: CHANGELOG entries, release notes and tags stay as published.
 
 ## Fixing a translation
 - docs/fixing-translations.md has the steps. Fix the stage where the error first appears
