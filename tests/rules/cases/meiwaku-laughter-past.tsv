@@ -1,0 +1,17 @@
+# 규칙: LEX-71
+rule	input	expected	kind	layer
+L2822	彼は笑ったｗ	그는 웃었다 ㅋ	fix	local-ending
+L2822	食べたｗｗ	먹었다 ㅋㅋ	fix	local-ending
+L2822	負けたｗ	졌다 ㅋ	fix	local-ending
+L2822	見たwww	보았다 ㅋㅋㅋ	fix	local-ending
+L2822	笑った人	웃은 사람	keep	local-ending
+dict:w:24329	迷惑だ	민폐다	fix	defaults
+dict:w:24329	それは迷惑だ	그것은 민폐다	fix	defaults
+dict:w:24329	本当に迷惑だよ	정말 민폐야	fix	defaults
+dict:w:24329	迷惑です	민폐입니다	fix	defaults
+dict:w:28863	この騒音は迷惑だ	이 소음은 성가시다	keep	local
+dict:w:28863	虫が迷惑だ	벌레가 성가시다	keep	local
+dict:meiwaku:2	迷惑している	곤란해하고 있다	fix	local
+dict:meiwaku:2	近所の騒音に迷惑している	이웃의 소음에 곤란해하고 있다	fix	local
+dict:meiwaku:2	本当に迷惑した	정말 곤란해했다	fix	local
+dict:meiwaku:2	迷惑をかけた	폐를 끼쳤다	keep	local
