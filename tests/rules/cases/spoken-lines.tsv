@@ -1,0 +1,44 @@
+# 규칙: LEX-68
+rule	input	expected	kind	layer
+sound:cry-copy	イっちゃう、イっちゃうぅぅっ！	가버려, 가버려어엇!	fix	sound
+sound:cry-copy	イっちゃう、イっちゃうぅぅ	가버려, 가버려어어	fix	sound
+sound:cry-copy	イっちゃうぅぅっ！	가버려~!	keep	sound
+sound:cry-copy	やだっ、やだっ	싫엇, 싫엇	keep	sound
+sound:cry-copy	やだ、やだぁぁっ	싫어, 싫어엇	keep	sound
+sound:cry-copy	イっちゃう、イっちゃうぅぅぅっ！	가버려, 가버려어어엇!	keep	sound
+dict:ino-final:1	そこ、弱いの……	거기, 약해……	fix	local-ending
+dict:ino-final:1	痛いの……	아파……	fix	local-ending
+dict:ino-final:1	怖いの	무서워	fix	local-ending
+dict:ino-final:1	「寒いの」	「추워」	fix	local-ending
+dict:ino-final:1	くすぐったいの。	낯간지러워.	fix	local-ending
+dict:ino-final:1	痛いのが嫌だ	아픈 것이 싫다	keep	local-ending
+dict:ino-final:1	痛いのを我慢する	아픈 것을 참는다	keep	local-ending
+dict:ino-final:1	好きなの……	좋아해……	keep	local-ending
+dict:chau-final:1	「声、出ちゃう……」	「목소리, 나와버릴 거야……」	fix	ending-defaults
+dict:chau-final:1	「遅れちゃう！」	「늦어버릴 거야!」	fix	ending-defaults
+dict:chau-final:1	忘れちゃう	잊어버릴 거야	fix	ending-defaults
+dict:chau-final:1	負けちゃう	져버릴 거야	fix	ending-defaults
+dict:chau-final:1	負けちゃう人	져버리는 사람	keep	ending-defaults
+dict:chau-final:1	食べちゃうよ	먹어버릴 거야	keep	ending-defaults
+dict:chau-final:1	出ちゃうと困る	나와버리자 곤란하다	keep	ending-defaults
+cx:mimetic-echo:10	ギシギシとベッドが軋む	침대가 삐걱거린다	fix	rewrites
+cx:mimetic-echo:10	ドアがギシギシと軋む	문이 삐걱거린다	fix	rewrites
+cx:mimetic-echo:10	ドキドキと胸が高鳴る	가슴이 두근거린다	fix	rewrites
+cx:mimetic-echo:10	ベッドがギシギシと軋んだ	침대가 삐걱거렸다	fix	rewrites
+cx:mimetic-echo:10	ガタガタと窓が揺れる	덜컹덜컹 창이 흔들린다	keep	rewrites
+cx:mimetic-echo:10	ギシギシとベッドが鳴る	삐걱삐걱 침대가 울린다	keep	rewrites
+cx:mimetic-echo:10	心臓がドキドキする	심장이 두근두근한다	keep	rewrites
+dict:w:28861	そんな顔されたら	그런 얼굴을 하면	fix	local
+dict:w:28861	嫌な顔された	싫은 얼굴을 했다	fix	local
+dict:w:28861	変な顔されても	이상한 얼굴을 해도	fix	local
+dict:w:28862	そんな顔をされたら困る	그런 얼굴을 하면 곤란하다	fix	local
+dict:w:28862	悲しそうな表情をされた	슬픈 것 같은 표정을 했다	fix	local
+dict:w:28861	無視された	무시당했다	keep	local
+dict:w:28861	質問された	질문받았다	keep	local
+dict:w:28862	顔を殴られた	얼굴을 맞았다	keep	local
+cx:ino-question:10	進展ないの!?	진전 없는 거야!?	fix	rewrites
+cx:ino-question:10	入れないの！？	넣지 않는 거야!?	fix	rewrites
+cx:ino-question:10	まだ帰ってこないの!?	아직 돌아오지 않는 거야!?	fix	rewrites
+cx:ino-question:10	痛いの！	아파!	keep	rewrites
+cx:ino-question:10	そこ、弱いの……	거기, 약해……	keep	rewrites
+dict:chau-final:1	死んじゃう！	죽어버릴 거야!	fix	ending-defaults

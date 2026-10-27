@@ -22,7 +22,7 @@ compose:particle-start-gloss	猫とは関係がない	고양이와는 관계가 
 compose:particle-start-gloss	学生でありながら	학생이면서	keep	compose
 compose:particle-start-gloss	友達とは別の道	친구와는 다른 길	keep	compose
 compose:particle-start-gloss	去年より一層寒い	작년보다 한층 춥다	fix	compose
-compose:particle-start-gloss	笑顔で答えるとよりさらに怪訝な顔をされた	웃는 얼굴로 대답하니 보다 더 의아스러운 표정을 하셨다	keep	compose
+compose:particle-start-gloss	笑顔で答えるとよりさらに怪訝な顔をされた	웃는 얼굴로 대답하니 보다 더 의아스러운 표정을 했다	keep	compose
 compose:particle-start-gloss	何故か耳元で話しているかの如く	어째서인지 귓가로 이야기할까 와 같이	current	compose
 dict:yori-after-noun:4	去年より一層寒い	rule:dict:yori-after-noun:4=보다 한층	fix	local
 dict:yori-after-noun:4	その美しさをより一層神秘的に	!rule:dict:yori-after-noun:4	keep	local
