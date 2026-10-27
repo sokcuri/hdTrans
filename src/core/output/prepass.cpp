@@ -396,8 +396,8 @@ bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
 
 // Whether the number or the Latin word that ends item i in the source stands apart from the
 // noun of item n written straight after it. A number before a noun counts it and joins it; a
-// number after a word labels that word and stands apart from the next noun. They join before a
-// counter, a unit or a suffix (5ポイント 5포인트, 1939年, 10cm, 1000G, Iowa級 Iowa급, Java風 Java풍,
+// number after a word labels that word and stands apart from the next noun. A number joins a
+// counter or a unit after it, and both join a suffix (5ポイント 5포인트, 1939年, 10cm, 1000G, Iowa級 Iowa급, Java風 Java풍,
 // ID欄 ID란), a noun of one character (34世 34세), a noun counted in an ordinal (1ゲーム目
 // 1게임째), after 第 (第2エリア 제2에리어), when the number counts the noun (3学期 3학기, 8等分
 // 8등분, 22コンボ 22콤보, 3セット 3세트), and after one letter or a letter written two or three
@@ -406,15 +406,16 @@ bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
 // (ステージ3ボス戦 스테이지 3 보스전, Lv.10スキル Lv.10 스킬, No.2-1キャラクター No.2-1 캐릭터,
 // R1ボタン R1 버튼, ver2.0アップデート ver2.0 업데이트); when a word in Latin capitals, an
 // abbreviation, is before a noun (ATBゲージ ATB 게이지), or a word with small letters, a name or
-// a word, before a noun in kanji of two characters or more (class空母 class 항공모함,
-// Bismarck追撃戦 Bismarck 추격전); and for a reply number after ≫ or >> (≫372過疎 ≫372 과소), a
-// time (23：40追記 23：40 추기) and a number of four digits before a noun in kanji, a year or a
-// time (2026特別 2026 특별, 2300提督 2300 제독). A word in katakana after a word with small
-// letters may be a spoken ending and joins it (Christmasダヨ Christmas다요).
+// a word, before a noun of two characters or more (class空母 class 항공모함, Bismarck追撃戦
+// Bismarck 추격전, Googleカレンダー Google 캘린더); and for a reply number after ≫ or >>
+// (≫372過疎 ≫372 과소), a time (23：40追記 23：40 추기) and a number of four digits before a noun
+// in kanji, a year or a time (2026特別 2026 특별, 2300提督 2300 제독). Katakana after a word with
+// small letters that is no common noun, unknown to the dictionary or a name, may be a spoken
+// ending and joins it (Christmasダヨ Christmas다요, Decemberネー December네).
 bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
     const ResolvedItem& a = items[i];
     const ResolvedItem& b = items[n];
-    if (Contains(GAttr(b), "Ct") || Contains(GAttr(b), "Z7") || Ordinal(items, n)) return false;
+    if (Contains(GAttr(b), "Z7") || Ordinal(items, n)) return false;
     const auto ascii = [](char32_t r) { return r >= U'！' && r <= U'～' ? r - 0xFEE0 : r; };
     const auto latin = [](char32_t r) { return (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z'); };
     const auto digit = [](char32_t r) { return r >= U'0' && r <= U'9'; };
@@ -433,6 +434,7 @@ bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<Resol
         rest = DropLastRune(rest);
     }
     if (digits > 0) {
+        if (Contains(GAttr(b), "Ct")) return false;
         std::string before(rest);
         for (int k = a.tokenIndex - 1; k >= 0 && text::RuneCount(before) < 2; k--) before.insert(0, tokens[k].text);
         if (before.ends_with("≫") || before.ends_with(">>") || before.ends_with("＞＞")) return true;
@@ -469,7 +471,7 @@ bool ApartFromNoun(const std::vector<TokenText>& tokens, const std::vector<Resol
     if (letters == 1 || (same && !small && letters <= 3)) return false;
     // One kanji after a Latin word is a suffix (ID欄 ID란, USS風 USS풍).
     if (IsKanji(lead) && text::RuneCount(b.surface) == 1) return false;
-    return !small || IsKanji(lead);
+    return !small || IsKanji(lead) || (!Contains(GAttr(b), "Nm") && !Code(b).starts_with("130"));
 }
 
 // A count the dictionary reads as one word, 하루 for 一日: in an ordinal the first day is 첫날.

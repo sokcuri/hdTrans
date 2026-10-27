@@ -102,7 +102,7 @@ restore:laughter	大好き：20XX/10/03 00:43 ID:awSQDPpc5	has:ID:awSQDPpc5	keep
 restore:laughter	こわい名無し：20XX/10/02 23:51 ID:ikriJwww+	has:ID:ikriJwww+	keep	restore
 restore:laughter	20XX/10/02 20:15 ID:duGJ45bwE	20XX/10/02 20:15 ID:duGJ45bwE	keep	restore
 restore:laughter	w=3とする	w=3으로 한다	fix	restore
-restore:laughter	#wwwタグ	#www태그	keep	restore
+restore:laughter	#wwwタグ	#www 태그	keep	restore
 restore:laughter	100Wの電球	100W의 전구	keep	restore
 restore:laughter	5Whのバッテリー	5Wh의 배터리	keep	restore
 restore:laughter	60w電球を買った	60w전구를 샀다	keep	restore
@@ -137,7 +137,7 @@ analysis:laughter-ends-clause	あいつふてぶてしいww	has:뻔뻔스럽다 
 analysis:laughter-ends-clause	これマジだったら伝説になれるwwwww	has:될 수 있다 ㅋㅋㅋㅋㅋ	fix	analysis
 analysis:laughter-ends-clause	先生に怒られましたｗ	has:혼났습니다 ㅋ	fix	analysis
 analysis:laughter-ends-clause	ウケるｗｗ	웃겨ㅋㅋ	fix	analysis
-analysis:laughter-ends-clause	かわいいwebサイト	귀여운 web사이트	keep	analysis
+analysis:laughter-ends-clause	かわいいwebサイト	귀여운 web 사이트	keep	analysis
 restore:laughter	ながくなっちゃったｗゴメン	has:ㅋ 미안해	fix	restore
 restore:laughter	ちょっと安心してる自分がいるwwゴメンww	has:있다 ㅋㅋ 미안해	fix	restore
 restore:laughter	田中ｗｗｗ良かったｗｗお疲れ	has:ㅋㅋ 수고했어	fix	restore
