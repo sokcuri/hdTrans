@@ -125,3 +125,24 @@ verb:synthetic-causative-evidence	それなら仕方なく続けさせられる	
 verb:synthetic-causative-polite	毎日残業を続けさせられます。	lacks:할 수	keep	analysis
 verb:synthetic-causative-polite	会社で毎日残業を続けさせられますか。	lacks:할 수	keep	analysis
 verb:synthetic-causative-polite	毎朝早く起きさせられます。	lacks:할 수	keep	analysis
+verb:synthetic-causative-made-to	いや、サラが脅されてこの船の操縦をさせられたり…	has:조종을 하도록 강요받	keep	analysis
+verb:synthetic-causative-made-to	幼馴染の伊織はそれにハラハラさせられたりする。	has:조마조마하게 되	keep	analysis
+verb:synthetic-causative-made-to	見限られて、主人を交代させられてもおかしくない気がしてきた。	has:교대하게 되어도	keep	analysis
+verb:synthetic-causative-made-to	どんな修行をさせられても俺を恨むなよ。	has:수행을 하도록 강요받	keep	analysis
+verb:synthetic-causative-made-to	何度ワープさせられても懲りずに王都を目指すって相当偏屈だ。	has:워프하게 되어도	keep	analysis
+verb:synthetic-causative-made-to	閉じ込められて、才能を見つけさせられていたんだろう。	has:찾아내게 되고	keep	analysis
+verb:synthetic-causative-made-to	あの一瞬で完全に興奮させられてしまった。	has:흥분하게 되어버렸	keep	analysis
+verb:synthetic-causative-made-to	強制的に別の職場に転職させられたら、そこもブラックだった。	has:전직하게 되었더니	keep	analysis
+verb:synthetic-causative-made-to	化け物同士の争いなんかに参加させられたらかなわん。	has:참가하게 되면	keep	analysis
+verb:synthetic-causative-made-to	珀崎を粛清した奴等は、生徒会庶務の奴に退学にさせられたらしい。	has:퇴학으로 몰린	keep	analysis
+verb:synthetic-causative-made-to	まあ、自分だけ仕事させられたら怒るわな。	has:일하게 되면	keep	analysis
+verb:synthetic-causative-can-make	ウィジュリナはどうしても、この絵を完成させられなかった。	has:시킬 수 없었	keep	analysis
+verb:synthetic-causative-made-to	このときの私は本当に自分の力の無さを痛感させられた。	has:통감하지 않을 수 없었	keep	analysis
+verb:synthetic-causative-made-to	嫌というほど敵の攻撃能力を学習させられた。	has:학습하게 되었	keep	analysis
+verb:synthetic-causative-made-to	怖いお兄さんまで出てきて、無理矢理サインさせられました。	has:사인하게 되었	keep	analysis
+verb:synthetic-causative-made-to	「半強制的に入部させられましたけどねっ！」	has:입부하게 됐	keep	analysis
+verb:synthetic-causative-made-to	当番を断っても無駄です。私は毎週、部長に休日出勤をさせられます。	has:휴일 출근을 시킵니다	keep	analysis
+verb:synthetic-causative-made-to	休憩中にまで上司に荷物の運搬をさせられたら、体がもたない。	has:운반을 하도록 강요받으면	keep	analysis
+verb:synthetic-causative-made-to	私は新人なので、先輩に雑用をさせられたり、失敗の責任を押し付けられたりする。	has:잡무를 하도록 강요받거나	keep	analysis
+verb:synthetic-causative-made-to	上司に予定外の出張をさせられても、会社は交通費を払ってくれない。	has:출장을 하도록 강요받아도	keep	analysis
+verb:synthetic-causative-can-make	雪で道が閉ざされているので、今夜は救援隊を出発させられない。	has:시킬 수 없다	keep	analysis
