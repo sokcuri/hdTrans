@@ -141,6 +141,7 @@ struct App {
     std::optional<std::pair<std::uintmax_t, fs::file_time_type>> dictStamp;  // dictText as read
     std::vector<gui::DictRow> rows;
     std::vector<std::size_t> rowLines;  // the line of dictText of each row
+    std::size_t totalRows = 0;           // the rows of dictText; rows holds those the search shows
 
     ~App() {
         cancel = true;
@@ -355,7 +356,10 @@ void LayoutDicts(HWND page) {
     p.Put(IDC_DICT_REMOVE, m, upper, third, bh);
     const int x = m + left + p(10), w = p.width - x - m;
     const int fields = bottom - p(8) - field;
-    p.Put(IDC_ENTRIES, x, m, w, fields - p(8) - m);
+    const int countWidth = p(90), top = m + field + p(6);
+    p.Put(IDC_DICT_SEARCH, x, m, w - countWidth - gap, field);
+    p.Put(IDC_DICT_SEARCH_COUNT, x + w - countWidth, m, countWidth, field);
+    p.Put(IDC_ENTRIES, x, top, w, fields - p(8) - top);
     const int room = w - 4 * gap;
     const int widths[] = {room * 25 / 100, room * 25 / 100, room * 13 / 100, room * 15 / 100,
                           room - 2 * (room * 25 / 100) - room * 13 / 100 - room * 15 / 100};
@@ -1220,17 +1224,46 @@ void ShowEntry(App& app, int row) {
     SetDlgItemTextW(app.dicts, IDC_ENTRY_NOTE, Wide(entry.note).c_str());
 }
 
-// Lists the rows of the open file and selects row; fill also shows that row in the entry fields.
+// text folded for search: lower case, full width, hiragana for katakana.
+std::wstring SearchFold(std::wstring_view text) {
+    if (text.empty()) return {};
+    const DWORD flags = LCMAP_LOWERCASE | LCMAP_FULLWIDTH | LCMAP_HIRAGANA;
+    const int size = LCMapStringEx(LOCALE_NAME_INVARIANT, flags, text.data(), static_cast<int>(text.size()), nullptr, 0,
+                                   nullptr, nullptr, 0);
+    std::wstring out(static_cast<std::size_t>(std::max(size, 0)), L'\0');
+    if (size <= 0 || LCMapStringEx(LOCALE_NAME_INVARIANT, flags, text.data(), static_cast<int>(text.size()), out.data(),
+                                   size, nullptr, nullptr, 0) != size) {
+        out.assign(text);
+        CharLowerBuffW(out.data(), static_cast<DWORD>(out.size()));
+    }
+    return out;
+}
+
+// Whether the search text matches the Japanese or Korean of row; an empty search matches all.
+bool SearchMatches(const std::wstring& folded, const gui::DictRow& row) {
+    return folded.empty() || SearchFold(Wide(row.key)).find(folded) != std::wstring::npos ||
+           SearchFold(Wide(row.ko)).find(folded) != std::wstring::npos;
+}
+
+// Lists the rows of the open file that match the search and selects row; fill also shows that
+// row in the entry fields. rowLines maps each listed row back to its line in the file.
 void ShowEntries(App& app, int row, bool fill = true) {
     app.rows.clear();
     app.rowLines.clear();
+    app.totalRows = 0;
+    const std::wstring search = SearchFold(ControlText(app.dicts, IDC_DICT_SEARCH));
     if (!app.dictText.column) {
         for (std::size_t line = 0; line < app.dictText.lines.size(); ++line) {
             if (!gui::EntryLine(app.dictText.lines[line])) continue;
-            app.rows.push_back(gui::ParseRow(app.dictText.lines[line]));
+            ++app.totalRows;
+            gui::DictRow parsed = gui::ParseRow(app.dictText.lines[line]);
+            if (!SearchMatches(search, parsed)) continue;
+            app.rows.push_back(std::move(parsed));
             app.rowLines.push_back(line);
         }
     }
+    SetDlgItemTextW(app.dicts, IDC_DICT_SEARCH_COUNT,
+                    (std::to_wstring(app.rows.size()) + L" / " + std::to_wstring(app.totalRows)).c_str());
     const HWND grid = GetDlgItem(app.dicts, IDC_ENTRIES);
     const int count = static_cast<int>(app.rows.size());
     row = std::min(row, count - 1);
@@ -1432,7 +1465,9 @@ void ChangeEntry(App& app, int id) {
     }
     if (id == IDC_ENTRY_ADD && !comment) {
         bool same = false, other = false;
-        for (const auto& r : app.rows) {
+        for (const std::string& text : app.dictText.lines) {
+            if (!gui::EntryLine(text)) continue;
+            const gui::DictRow r = gui::ParseRow(text);
             if (r.key != entry.key) continue;
             (RowKind(r) == RowKind(entry) ? same : other) = true;
         }
@@ -1444,6 +1479,13 @@ void ChangeEntry(App& app, int id) {
     if (id == IDC_ENTRY_ADD) {
         app.dictText.lines.push_back(gui::RowLine(entry));
         next = static_cast<int>(app.rows.size());
+        // A new row the search hides clears the search, so the row shows selected.
+        if (!comment && !SearchMatches(SearchFold(ControlText(app.dicts, IDC_DICT_SEARCH)), entry)) {
+            app.filling = true;
+            SetDlgItemTextW(app.dicts, IDC_DICT_SEARCH, L"");
+            app.filling = false;
+            next = static_cast<int>(app.totalRows);
+        }
     } else {
         const std::size_t line = app.rowLines[static_cast<std::size_t>(row)];
         if (id == IDC_ENTRY_EDIT) app.dictText.lines[line] = gui::RowLine(entry);
@@ -1551,7 +1593,7 @@ void RemoveDict(App& app) {
     if (!dict) return;
     const fs::path file = DictFile(*dict);
     const std::wstring question = L"이 사전 파일을 휴지통으로 옮길까요?\n\n" + file.filename().native() + L"\n항목 " +
-                                  std::to_wstring(app.rows.size()) + L"개";
+                                  std::to_wstring(app.totalRows) + L"개";
     const int answer = app.selftest ? app.removeAnswer
                                     : MessageBoxW(app.main, question.c_str(), L"hdTrans", MB_YESNO | MB_ICONWARNING | MB_DEFBUTTON2);
     if (answer != IDYES) return;
@@ -1785,6 +1827,9 @@ INT_PTR CALLBACK DictsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPar
         case IDC_DICT_EXPORT: ExportDict(*app); return TRUE;
         case IDC_DICT_REMOVE: RemoveDict(*app); return TRUE;
         case IDC_DICT_FOLDER: OpenFolder(*app, UserFolderPath(*app)); return TRUE;
+        case IDC_DICT_SEARCH:
+            if (HIWORD(wParam) == EN_CHANGE && !app->filling) ShowEntries(*app, -1, false);
+            return TRUE;
         case IDC_ENTRY_ADD:
         case IDC_ENTRY_EDIT:
         case IDC_ENTRY_DELETE: ChangeEntry(*app, LOWORD(wParam)); return TRUE;
@@ -1973,6 +2018,20 @@ void Dispatch(App& app, MSG& message) {
         if (IsWindowEnabled(GetDlgItem(app.dicts, IDC_ENTRY_ADD))) ChangeEntry(app, IDC_ENTRY_ADD);
         return;
     }
+    // Esc in the search box clears it instead of closing the window; Ctrl+F on the 사전 tab
+    // focuses it.
+    if (message.message == WM_KEYDOWN && app.dicts) {
+        const HWND search = GetDlgItem(app.dicts, IDC_DICT_SEARCH);
+        if (message.wParam == VK_ESCAPE && message.hwnd == search) {
+            SetWindowTextW(search, L"");
+            return;
+        }
+        if (message.wParam == 'F' && GetKeyState(VK_CONTROL) < 0 && CurrentPage(app) == kDictsPage) {
+            SetFocus(search);
+            SendMessageW(search, EM_SETSEL, 0, -1);
+            return;
+        }
+    }
     if (app.main && IsDialogMessageW(app.main, &message)) return;
     TranslateMessage(&message);
     DispatchMessageW(&message);
@@ -2031,18 +2090,20 @@ std::wstring TranslateShort(App& app, const wchar_t* source) {
     return ControlText(app.text, IDC_RESULT);
 }
 
-// Sends a key press as the message loop delivers it, with Shift held when shift is set.
-void PressKey(App& app, UINT key, bool shift = false) {
+// Sends a key press as the message loop delivers it, with Shift or Ctrl held when set.
+void PressKey(App& app, UINT key, bool shift = false, bool control = false) {
     BYTE keys[256]{};
     GetKeyboardState(keys);
-    const BYTE before = keys[VK_SHIFT];
+    const BYTE before = keys[VK_SHIFT], beforeControl = keys[VK_CONTROL];
     keys[VK_SHIFT] = shift ? 0x80 : 0;
+    keys[VK_CONTROL] = control ? 0x80 : 0;
     SetKeyboardState(keys);
     MSG down{GetFocus(), WM_KEYDOWN, key, 0, 0, {}};
     Dispatch(app, down);
     MSG message{};
     while (PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) Dispatch(app, message);
     keys[VK_SHIFT] = before;
+    keys[VK_CONTROL] = beforeControl;
     SetKeyboardState(keys);
 }
 
@@ -2234,6 +2295,50 @@ bool SelfTestExternalEdits(App& app, const fs::path& file, const std::wstring& w
     return Check(app.rows.size() == 1, "the restored file is listed") && ok;
 }
 
+// The search box over the 44 rows SelfTestEntryKeys and the scroll check leave in the open file.
+bool SelfTestSearch(App& app) {
+    const HWND grid = GetDlgItem(app.dicts, IDC_ENTRIES);
+    const HWND search = GetDlgItem(app.dicts, IDC_DICT_SEARCH);
+    const fs::path open = DictFile(*CurrentDict(app));
+    std::string text;
+    gui::TextEncoding encoding{};
+    ShowEntry(app, -1);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ネコ");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"고양이시험");
+    NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    SetWindowTextW(search, L"ねこ");
+    bool ok = Check(app.rows.size() == 1 && app.rows[0].key == "ネコ" && ControlText(app.dicts, IDC_DICT_SEARCH_COUNT) == L"1 / 45",
+                    "search treats hiragana and katakana alike and shows the count");
+    SetWindowTextW(search, L"zz3");
+    ok = Check(app.rows.size() == 11 && app.rows[1].key == "ＺＺ30" && ControlText(app.dicts, IDC_DICT_SEARCH_COUNT) == L"11 / 45",
+               "search ignores case and width") && ok;
+    Select(grid, 1);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"고친목록");
+    NotifyClick(app.dicts, IDC_ENTRY_EDIT);
+    ok = Check(gui::ReadTextFile(open, text, encoding) && text.find("ＺＺ30\t고친목록\n") != std::string::npos &&
+               text.find("ＺＺ1\t목록\n") != std::string::npos && text.find("ＺＺ3\t목록\n") != std::string::npos,
+               "an edit while filtered changes the selected row of the file") && ok;
+    Select(grid, 1);
+    NotifyClick(app.dicts, IDC_ENTRY_DELETE);
+    ok = Check(gui::ReadTextFile(open, text, encoding) && text.find("ＺＺ30\t") == std::string::npos &&
+               text.find("ＺＺ1\t목록\n") != std::string::npos && app.rows.size() == 10 &&
+               ControlText(app.dicts, IDC_DICT_SEARCH_COUNT) == L"10 / 44", "a delete while filtered removes the selected row") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ99");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"새목록");
+    NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    ok = Check(ControlText(app.dicts, IDC_DICT_SEARCH).empty() && app.rows.size() == 45 && Selected(grid) == 44 &&
+               app.rows[44].key == "ＺＺ99", "an add the search hides clears the search and selects the row") && ok;
+    SetWindowTextW(search, L"zz");
+    SetFocus(search);
+    PressKey(app, VK_ESCAPE);
+    ok = Check(IsWindow(app.main) && ControlText(app.dicts, IDC_DICT_SEARCH).empty() && app.rows.size() == 45,
+               "Esc clears the search without closing the window") && ok;
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, 'F', false, true);
+    ok = Check(FocusIn(app.dicts, IDC_DICT_SEARCH), "Ctrl+F focuses the search on the 사전 tab") && ok;
+    return ok;
+}
+
 // The dictionary page on the user folder of the default layout under program.
 bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     app.userSources = UserSources(Utf8(program.native()));
@@ -2298,6 +2403,7 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     }
     ok = Check(app.rows.size() == 44 && Selected(grid) == 43 && ListView_IsItemVisible(grid, 43) && ListView_GetTopIndex(grid) > 0,
                "the list scrolls to the newest added row") && ok;
+    ok = SelfTestSearch(app) && ok;
     const fs::path created = gui::UserDictPath(user, "새 사전");
     const std::wstring createdWhere = L"[" + user.filename().native() + L"/" + created.filename().native() + L"] ";
     ok = Check(Logged(app, L"INFO", createdWhere + L"새 사전"), "a new dictionary is logged") && ok;
