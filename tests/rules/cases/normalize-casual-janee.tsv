@@ -12,6 +12,6 @@ normalize:casual-janee	マルフタマルマルじゃねぇ。	0200이 아니다
 normalize:casual-janee	とても俺なんかが理解できるシロモノじゃねぇみてぇだ。	has:물건이 아닌	fix	normalize
 normalize:casual-janee	冗談じゃねーよ	농담하지 마	keep	normalize
 normalize:casual-janee	「じゃねー！」	has:그럼	keep	normalize
-normalize:casual-janee	バカじゃねーのｗ	has:바보가 아닌	keep	normalize
+normalize:casual-janee	バカじゃねーのｗ	has:바보가 아니	keep	normalize
 normalize:casual-janee	時刻はぁ、マルヒトマルマルじゃねぇ。ふふ～ん、どうじゃ？	has:0100이구나	fix	normalize
 normalize:casual-janee	ええっと、マルヨンマルマルじゃ！もうすぐ朝じゃねぇ。	has:아침이구나	fix	normalize

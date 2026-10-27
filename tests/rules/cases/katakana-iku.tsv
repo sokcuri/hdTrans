@@ -10,8 +10,8 @@ katakana:iku-stem	「先にイッちゃって……」	「먼저 가버려……
 katakana:iku-stem	「タコさんやイカさんになっちゃうよね」	「문어씨랑 오징어 씨가 돼버리지」	keep	normalize
 lexical:icchau	「わたしもっ、もうっ……いっちゃいそう……」	「나도, 정말……가버릴 것 같아……」	fix	lookup
 lexical:icchau	「それ、言っちゃっていいの？」	「그거, 말해서 좋은 거야?」	keep	lookup
-sound:phrase-icchau	「イクっ、イっちゃっ……ああっ！」	「가버려, 가버려……아앗!」	fix	sound
-sound:phrase-icchau	「も、もう、い、いっちゃう……！」	「이, 이제, 가, 가버려……!」	keep	sound
+sound:phrase-icchau	「イクっ、イっちゃっ……ああっ！」	「가버려, 갈 것 같아……아앗!」	fix	sound
+sound:phrase-icchau	「も、もう、い、いっちゃう……！」	「이, 이제, 가, 갈 것 같아……!」	keep	sound
 sound:phrase-icchau	「私もイっちゃってっ……」	「나도 가버려……」	fix	sound
 katakana:iku-stem	「……イクよ、もうっ……くっ」	「……가, 정말……큭」	fix	normalize
 katakana:iku-stem	イカなんて嫌いだ。	오징어 같은 건 싫다.	fix	normalize

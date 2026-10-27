@@ -333,6 +333,9 @@ struct SoundRow {
     // The last word of the Korean in polite speech (fourth column polite=봬요: 내일 봬요), read
     // where the quote speaks politely or an honoured person is called right before the row.
     std::string polite;
+    // The Korean of a cry row said once, not again right before or after it (alone=갈_것_같아, _
+    // for a space: イっちゃう 갈 것 같아, but イっちゃう、イっちゃう 가버려, 가버려).
+    std::string alone;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

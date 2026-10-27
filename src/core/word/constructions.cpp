@@ -318,6 +318,13 @@ struct NamedFeature {
 };
 
 // The features a condition names with F. Each is a property of the item at the atom's position.
+// Whether the word is an ellipsis or a dash, which ends a sound said on its own (ドキドキ……).
+bool EllipsisItem(const Item* it) {
+    const std::string_view s = it->group->surface;
+    return s.find("…") != std::string_view::npos || s.find("‥") != std::string_view::npos ||
+           s.find("―") != std::string_view::npos;
+}
+
 constexpr NamedFeature kFeatures[] = {
     {"exists", [](Flusher&, const Item*) { return true; }},
     {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }},
@@ -333,6 +340,51 @@ constexpr NamedFeature kFeatures[] = {
          const std::string lemma = ItemLemma(f, it, it->selected);
          const Item* n = it->After();
          return !lemma.empty() && n != nullptr && ItemLemma(f, n, n->selected).starts_with(lemma + " ");
+     }},
+    // The Korean is a doubled mimetic (삐걱삐걱) whose half starts the Korean of a verb after it in its
+    // clause (삐걱거리다): the verb already says the sound.
+    {"echoed-by-verb",
+     [](Flusher& f, const Item* it) {
+         if (it->selected < 0) return false;
+         const std::string_view ko = it->EntryText(it->selected);
+         if (ko.size() < 6 || ko.size() % 2 != 0 || ko.substr(0, ko.size() / 2) != ko.substr(ko.size() / 2)) return false;
+         const std::string half(ko.substr(0, ko.size() / 2));
+         // Not a sound said on its own before a pause (ドキドキ……心臓が).
+         if (const Item* n = it->After(); n != nullptr) {
+             for (int j = it->tokenIndex + 1; j < n->tokenIndex; j++) {
+                 const std::string_view t = f.w.Tok(j).text;
+                 for (const std::string_view mark : {"…", "‥", "―", "、", "。", "！", "？", "!", "?"}) {
+                     if (t.find(mark) != std::string_view::npos) return false;
+                 }
+             }
+         }
+         int words = 0;
+         for (const Item* n = it->After(); n != nullptr && words < 4 && !PauseOrEnd(n) && !EllipsisItem(n);
+              n = n->After(), words++) {
+             if (n->detail->cls == kDetailVerb && n->selected >= 0 && ItemLemma(f, n, n->selected).starts_with(half)) return true;
+         }
+         return false;
+     }},
+    // A question mark follows the word, with only other marks between (ないの!? ないの？).
+    {"question-after",
+     [](Flusher&, const Item* it) {
+         const auto asks = [](std::string_view rest) {
+             while (!rest.empty()) {
+                 const text::Rune r = text::DecodeRune(rest);
+                 if (r.cp == U'?' || r.cp == U'？') return 1;
+                 if (r.size == 0 || !RuneIn(r.cp, "!！…‥〜～~ーっッ")) return 0;
+                 rest.remove_prefix(r.size);
+             }
+             return -1;  // only marks that draw out or pause, up to the end
+         };
+         const Item* cur = it;
+         for (int n = 0; n < 4 && cur != nullptr; n++) {
+             if (const int a = asks(TextAfter(cur)); a >= 0) return a == 1;
+             cur = cur->After();
+             if (cur == nullptr) return false;
+             if (const int a = asks(cur->group->surface); a >= 0) return a == 1;
+         }
+         return false;
      }},
     {"opens-line", [](Flusher& f, const Item* it) { return OpensLine(f.w, it); }},
     // The line uses the tic ぽい (PoiLine).
@@ -392,6 +444,8 @@ constexpr NamedFeature kFeatures[] = {
     {"narrated", [](Flusher& f, const Item* it) { return Narrated(f, it); }},
     // The word stands outside quotes in a document that writes its speech in 「」: narration.
     {"narration", [](Flusher& f, const Item* it) { return f.w.settings.narrated && !it->InQuote(); }},
+    // The word stands inside 「」 or 『』 (Item::InQuote).
+    {"quoted", [](Flusher&, const Item* it) { return it->InQuote(); }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
