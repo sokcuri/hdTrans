@@ -68,6 +68,7 @@ enum class ConstraintContext : uint8_t {
     AfterTeBeforeDake,  // right after て or で, with け after the word and then what BeforeCopula
                         // takes (いただ of いただけ〜)
     BeforeDake,         // the same without the て or で (していただ of していただけ。)
+    BeforeKe,           // け right after the word (the だ of だけ)
     NotCommonSense,     // no start of name.common-after follows, which keeps the common sense of
                         // weather, sky and sea words (時雨が降る, 雷が落ちた)
     BeforeChan,         // the word ends in ち and ゃん follows, the rest of ちゃん (夕立ち before ゃん), not ゃんと

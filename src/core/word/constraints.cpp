@@ -106,6 +106,8 @@ constexpr ConstraintRule kRules[] = {
      "て, で 바로 뒤에서 けだ, け〜처럼 だけ로 읽히는 け 앞의 いただ는 いただく의 명령이 아니라 いた + だけ (フリしていただけ〜 척해 주셔라 → 척하고 있었을 뿐)", {}},
     {"teitadaku-ke", ConstraintWord::EndsInSource, "ていただ", ConstraintContext::BeforeDake, ConstraintReject::Word,
      "그런 け 앞에서 ていただ로 끝나는 말도 같다 (していただけ。 해 주셔라 → 하고 있었을 뿐)", {}},
+    {"da-before-ke", ConstraintWord::Source, "だ", ConstraintContext::BeforeKe, ConstraintReject::Verbs,
+     "け 앞의 だ는 동사(だく의 だけ)로 읽지 않음: 그 だけ는 조사 (一度だけやらせて 한 번 만일 수 있는 시켜 → 한 번만 시켜, オレのだけ？ 내가 만여라? → 내 것만?)", {}},
     {"sou-itta-predicate", ConstraintWord::Source, "そう言った", ConstraintContext::NotBeforeNoun,
      ConstraintReject::Word, "명사 앞이 아닌 そう言った는 연체사 그런이 아니라 そう言う의 과거 (そう言った。 그런. → 그렇게 말했다.)", {}},
     {"toiu-kotode-opening", ConstraintWord::Source, "とい", ConstraintContext::OpeningKotode, ConstraintReject::Word,
@@ -330,6 +332,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                DakeEnds(after.substr(std::string_view("け").size()));
     case ConstraintContext::BeforeDake:
         return after.starts_with("け") && DakeEnds(after.substr(std::string_view("け").size()));
+    case ConstraintContext::BeforeKe:
+        return after.starts_with("け");
     case ConstraintContext::AfterWordBeforeTe:
         // The word before may be Korean already and spaced off (ソワソワ written 안절부절 by the sound stage).
         return after.starts_with("て") &&
