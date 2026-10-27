@@ -1,0 +1,27 @@
+# 규칙: LEX-4
+rule	input	expected	kind	layer
+names:title-marks	ぼっち・ざ・ろっく！	봇치 더 록!	fix	lookup
+names:title-marks	ぼっち・ざ・ろっく!	봇치 더 록!	fix	lookup
+names:title-marks	『ぼっち・ざ・ろっく！』を見た	『봇치 더 록!』을 보았다	fix	lookup
+names:title-marks	ぼっちざろっくを見た	봇치 더 록을 보았다	fix	lookup
+names:title-marks	ぼっちざろっく	봇치 더 록	fix	lookup
+names:title-marks	けいおん！	케이온!	fix	lookup
+names:title-marks	『けいおん』を見た	『케이온』을 보았다	fix	lookup
+names:title-marks	Cagayake! GIRLS(けいおん! OP)	has:(케이온! OP)	fix	lookup
+names:title-marks	One Day(ハイキュー!! TO THE TOP ED)	has:(하이큐!! TO	fix	lookup
+names:title-marks	Snow halation(ラブライブ! OST)	has:(러브 라이브! OST)	fix	lookup
+names:title-marks	一緒にラブライブを目指し	lacks:라이브!	fix	lookup
+names:title-marks	少女Q(ぱにぽにだっしゅ! OP)	has:파니포니 대시! OP	fix	lookup
+names:title-marks	私はぼっちだ	나는 외톨이다	fix	lookup
+names:title-marks	OK ぼっち www	has:외톨이	fix	lookup
+names:title-marks	ひとりぼっち	외톨이	keep	lookup
+names:title-marks	ぼっち飯	혼밥	keep	lookup
+names:title-marks	ぼっちちゃん	봇치짱	keep	lookup
+names:title-marks	ぼっちさん、待って	has:봇치 씨	keep	lookup
+names:title-marks	お金がない人は	돈이 없는 사람은	keep	lookup
+names:title-marks	キャンピングカー！？	캠핑카!?	keep	lookup
+names:title-marks	ククク	크크크	keep	lookup
+names:title-marks	俺の罰ゲームはッ！！！	내 벌칙 게임은!!!	keep	lookup
+names:title-marks	けいおんを見た	lacks:케이온	keep	lookup
+names:title-marks	おつかれさま！	has:수고	keep	lookup
+names:title-marks	そばにいて！	has:곁에 있어	keep	lookup

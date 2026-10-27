@@ -150,6 +150,9 @@ struct LookupContext {
     // (names::NameCues): the constraint rules read them as the name, and the person senses
     // of a hiragana key take part where no dictionary word has the key.
     const KeySet* cued = nullptr;
+    // The text that follows the looked-up text in the line, where a token ends it (the marks
+    // after a title); empty for none.
+    std::string_view after;
     SkipFunc skip;
 };
 
@@ -297,6 +300,9 @@ public:
     bool KeyPast(std::string_view text, std::size_t past, const LookupContext& ctx) const;
     // Whether key is a key of the base or user dictionary.
     bool DictionaryWord(std::string_view key) const { return BaseWord(key); }
+    // The byte length of the longest name-layer work title (QWK) that starts text and takes part
+    // in lookups without a cue, 0 for none.
+    std::size_t TitleAt(std::string_view text) const;
 
     // Bytes held by the snapshot, the texts of the plain files included.
     std::size_t MemoryBytes() const;
@@ -331,6 +337,9 @@ private:
     void NameEntries(std::string_view text, LookupMode mode, const LookupContext& ctx,
                      const std::vector<const UserEntry*>& owned, std::vector<UserEntry>& out) const;
     bool StrongName(std::string_view s, std::size_t n) const;
+    bool KanaWords(std::string_view key) const;
+    bool KanaTitle(std::string_view s, std::size_t n, std::string_view after) const;
+    int MarkedKey(std::string_view key, std::string_view after) const;
     bool TitleKey(std::string_view key) const;
     bool AddressedName(std::string_view s, std::size_t n) const;
     bool CuedKey(std::string_view key) const;
