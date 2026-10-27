@@ -111,6 +111,9 @@ struct App {
     std::string engineModuleDir;
     hdTrans::internal::UserVersion loadedUserVersion;
     hdTrans::internal::FolderVersion loadedEhndVersion;
+    // The source versions the timer last reloaded, so a failing version is not retried every second.
+    std::optional<std::pair<hdTrans::internal::UserVersion, hdTrans::internal::FolderVersion>> triedVersions;
+    std::shared_ptr<const hdTrans::dict::Snapshot> snapshot;  // the engine's dictionaries, under mutex
     std::thread worker;
     std::atomic<bool> cancel{false};
     std::atomic<bool> reloadDicts{false};
@@ -645,6 +648,10 @@ bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, c
         return false;
     }
     if (candidate) app.engine = std::move(candidate);
+    {
+        std::lock_guard lock(app.mutex);
+        app.snapshot = app.engine->Dictionaries();
+    }
     CommitSettings(app, settings);
     app.engineDictDirs = dirs;
     app.engineUserPaths = userPaths;
@@ -1286,14 +1293,30 @@ void OpenDict(App& app, int index) {
     ShowEntries(app, 0);
 }
 
-// Rereads the open file when it changed on disk, keeping the selection and the typed entry.
+bool SameRow(const gui::DictRow& a, const gui::DictRow& b) {
+    return a.key == b.key && a.ko == b.ko && a.pos == b.pos && a.options == b.options && a.note == b.note;
+}
+
+// Rereads the open file when it changed on disk, keeping the typed entry. The selection follows
+// its row by content; a selected row that is gone leaves nothing selected.
 bool RefreshChangedDict(App& app) {
     const gui::UserDict* dict = CurrentDict(app);
     if (!dict || FileStamp(DictFile(*dict)) == app.dictStamp) return false;
     const int row = Selected(GetDlgItem(app.dicts, IDC_ENTRIES));
+    std::optional<gui::DictRow> selected;
+    if (row >= 0 && static_cast<std::size_t>(row) < app.rows.size()) selected = app.rows[static_cast<std::size_t>(row)];
     ReadOpenDict(app);
     LogDict(app, L"INFO", DictFile(*dict), "외부에서 바뀜, 다시 읽음");
-    ShowEntries(app, row, false);
+    ShowEntries(app, -1, false);
+    if (!selected) return true;
+    const auto found = std::find_if(app.rows.begin(), app.rows.end(), [&](const auto& r) { return SameRow(r, *selected); });
+    if (found == app.rows.end()) {
+        LogDict(app, L"INFO", DictFile(*dict), "선택한 줄이 바깥에서 바뀌어 선택을 풀었습니다: " + selected->key);
+        return true;
+    }
+    app.filling = true;
+    Select(GetDlgItem(app.dicts, IDC_ENTRIES), static_cast<int>(found - app.rows.begin()));
+    app.filling = false;
     return true;
 }
 
@@ -1363,10 +1386,6 @@ std::string RowKind(const gui::DictRow& row) {
     return kind;
 }
 
-bool SameRow(const gui::DictRow& a, const gui::DictRow& b) {
-    return a.key == b.key && a.ko == b.ko && a.pos == b.pos && a.options == b.options;
-}
-
 void ChangeEntry(App& app, int id) {
     const HWND grid = GetDlgItem(app.dicts, IDC_ENTRIES);
     int row = Selected(grid);
@@ -1385,7 +1404,12 @@ void ChangeEntry(App& app, int id) {
     }
     if (id != IDC_ENTRY_DELETE && !comment) {
         // A row the loader would skip is not saved; the fields stay for correction.
-        const auto snapshot = app.engine ? app.engine->Dictionaries() : nullptr;
+        // The engine may be replaced by a reload on the worker; its dictionaries are shared under mutex.
+        std::shared_ptr<const hdTrans::dict::Snapshot> snapshot;
+        {
+            std::lock_guard lock(app.mutex);
+            snapshot = app.snapshot;
+        }
         const gui::RowProblem problem = gui::CheckRow(entry, snapshot ? &snapshot->Base() : nullptr);
         if (!problem.message.empty()) {
             constexpr int fields[] = {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS};
@@ -1537,7 +1561,8 @@ void RemoveDict(App& app) {
     operation.hwnd = app.main;
     operation.wFunc = FO_DELETE;
     operation.pFrom = from.c_str();
-    operation.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION | FOF_SILENT | FOF_NOERRORUI;
+    // Without a Recycle Bin on the drive, Windows asks before deleting for good.
+    operation.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION | FOF_WANTNUKEWARNING | FOF_SILENT | FOF_NOERRORUI;
     if (SHFileOperationW(&operation) != 0 || operation.fAnyOperationsAborted) {
         LogDict(app, L"사전", file, "사전 삭제 실패 (파일을 옮길 수 없습니다)");
         ReportError(app, L"사전 파일을 휴지통으로 옮기지 못했습니다.");
@@ -1569,9 +1594,13 @@ void CheckExternalEdits(App& app) {
     RefreshChangedDict(app);
     if (!app.engine || !app.engine->loaded()) return;
     const auto requested = RequestedSources(app.engineUserPaths, app.settings.userdict.has_value());
-    if (hdTrans::internal::UserVersionOf(requested, app.engineConfigPath) != app.loadedUserVersion ||
-        hdTrans::internal::FolderVersionOf(app.engineEhndDir) != app.loadedEhndVersion)
-        StartDictionaryCheck(app);
+    auto versions = std::pair{hdTrans::internal::UserVersionOf(requested, app.engineConfigPath),
+                              hdTrans::internal::FolderVersionOf(app.engineEhndDir)};
+    // A version that already failed to load waits for the next change instead of retrying.
+    if ((versions.first == app.loadedUserVersion && versions.second == app.loadedEhndVersion) || versions == app.triedVersions)
+        return;
+    app.triedVersions = std::move(versions);
+    StartDictionaryCheck(app);
 }
 
 void ImportDicts(App& app, const std::vector<fs::path>& paths) {
@@ -2155,6 +2184,33 @@ bool SelfTestExternalEdits(App& app, const fs::path& file, const std::wstring& w
                     "an external edit refreshes the list, keeps the typed entry and is logged");
     if (!WaitForJob(app)) return false;
     ok = Check(TranslateShort(app, L"象") == L"외부사전", "an external edit reloads the engine") && ok;
+    ShowPage(app, kDictsPage);
+    Select(grid, 1);
+    if (!Check(WriteExternally(file, "猿\t원숭이\n犬\t고친사용자\n象\t외부사전\n"), "insert a row above the selected row externally"))
+        return false;
+    CheckExternalEdits(app);
+    ok = Check(Selected(grid) == 2 && app.rows[2].key == "象", "a reread keeps the selected row by content, not by index") && ok;
+    if (!WaitForJob(app)) return false;
+    if (!Check(WriteExternally(file, "猿\t원숭이\n犬\t고친사용자\n"), "remove the selected row externally")) return false;
+    CheckExternalEdits(app);
+    ok = Check(Selected(grid) == -1 && Logged(app, L"INFO", where + L"선택한 줄이 바깥에서 바뀌어 선택을 풀었습니다: 象"),
+               "a selected row removed outside leaves nothing selected and is logged") && ok;
+    if (!WaitForJob(app)) return false;
+    const auto failures = [&] {
+        std::lock_guard lock(app.mutex);
+        return std::count_if(app.logEntries.begin(), app.logEntries.end(),
+                             [](const auto& entry) { return entry.message == L"사전을 다시 읽지 못했습니다. 이전 사전 유지."; });
+    };
+    if (!Check(WriteExternally(file, "\xff\n"), "write a file the reload rejects")) return false;
+    CheckExternalEdits(app);
+    if (!WaitForJob(app)) return false;
+    const auto failed = failures();
+    CheckExternalEdits(app);
+    ok = Check(failed >= 1 && !app.busy && failures() == failed, "a reload that failed is not retried until the file changes") && ok;
+    if (!Check(WriteExternally(file, "犬\t고친사용자\n象\t외부사전\n"), "repair the rejected file")) return false;
+    CheckExternalEdits(app);
+    ok = Check(app.busy, "a file changed after a failed reload is tried again") && ok;
+    if (!WaitForJob(app)) return false;
     ShowPage(app, kDictsPage);
     if (!Check(WriteExternally(file, "犬\t고친사용자\n象\t외부사전\n蛇\t뱀사전\n"), "edit the file again externally")) return false;
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"熊");
