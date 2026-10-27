@@ -23590,7 +23590,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 訳	것	N110		Oq	GN				xxx llm	1		w:23544
 訳がな	$GF@	H7U0			GN				llm		わけがない	w:23545
 訳が無	$GF@	H7U0			GN				llm		わけがない	w:23546
-訳ではない	는 것은 아니다	A9D0			GN				llm		わけではない	w:23547
 訳では無い	는 것은 아니다	A9D0			GN				llm		わけではない	w:23548
 訳なく	쉬이	E300			GN						わけなく	w:23549
 訳の分からない	영문 모를	E010			GN				llm			w:23550
@@ -27136,3 +27135,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 歪	기형적	N110			GN							w:28895
 両親を養	부모님을 부양&AV@	M410			GN							w:28953
 親を養	부모를 부양&AV@	M410			GN							w:28954
+無さそう	없을 것 %B3@	G8U0			GN							w:28956
+察しろっての	눈치 좀 채라니까	A9D0			GN							w:28957
