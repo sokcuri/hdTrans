@@ -99,8 +99,31 @@ struct CharMap {
 
 // Characters mapped to the form CP932 encodes for them.
 constexpr CharMap kCp932Forms[] = {
-    {U'〜', U'～'}, {U'−', U'－'}, {U'‖', U'∥'}, {U'¢', U'￠'}, {U'£', U'￡'}, {U'¬', U'￢'},
+    {U'〜', U'～'},
 };
+
+// The words of the squared katakana U+3300..U+3357 (㌔ キロ, ㍍ メートル).
+constexpr std::string_view kSquareWords[] = {
+    "アパート", "アルファ", "アンペア", "アール", "イニング", "インチ", "ウォン", "エスクード", "エーカー", "オンス", "オーム", "カイリ", "カラット", "カロリー",
+    "ガロン", "ガンマ", "ギガ", "ギニー", "キュリー", "ギルダー", "キロ", "キログラム", "キロメートル", "キロワット", "グラム", "グラムトン", "クルゼイロ",
+    "クローネ", "ケース", "コルナ", "コーポ", "サイクル", "サンチーム", "シリング", "センチ", "セント", "ダース", "デシ", "ドル", "トン", "ナノ", "ノット",
+    "ハイツ", "パーセント", "パーツ", "バーレル", "ピアストル", "ピクル", "ピコ", "ビル", "ファラッド", "フィート", "ブッシェル", "フラン", "ヘクタール", "ペソ",
+    "ペニヒ", "ヘルツ", "ペンス", "ページ", "ベータ", "ポイント", "ボルト", "ホン", "ポンド", "ホール", "ホーン", "マイクロ", "マイル", "マッハ", "マルク",
+    "マンション", "ミクロン", "ミリ", "ミリバール", "メガ", "メガトン", "メートル", "ヤード", "ヤール", "ユアン", "リットル", "リラ", "ルピー", "ルーブル",
+    "レム", "レントゲン", "ワット",
+};
+
+// The era names of the squared eras.
+std::string_view SquareEra(char32_t c) {
+    switch (c) {
+        case U'㍻': return "平成";
+        case U'㍼': return "昭和";
+        case U'㍽': return "大正";
+        case U'㍾': return "明治";
+        case U'㋿': return "令和";
+        default: return {};
+    }
+}
 
 // Kanji forms outside JIS X 0208 (the JIS X 0213 forms of web text) with the form the
 // dictionary holds.
@@ -110,6 +133,11 @@ constexpr CharMap kKanjiForms[] = {
     {U'蔣', U'蒋'}, {U'﨑', U'崎'}, {U'髙', U'高'}, {U'德', U'徳'}, {U'淸', U'清'}, {U'靑', U'青'},
     {U'瀨', U'瀬'}, {U'吞', U'呑'}, {U'揭', U'掲'}, {U'涉', U'渉'}, {U'焰', U'焔'}, {U'狀', U'状'},
     {U'卽', U'即'}, {U'蟬', U'蝉'},
+    // the CJK compatibility ideographs of CP932 with their unified forms
+    {U'\uF929', U'朗'}, {U'\uF9DC', U'隆'}, {U'\uFA10', U'塚'}, {U'\uFA12', U'晴'}, {U'\uFA15', U'凞'}, {U'\uFA16', U'猪'}, {U'\uFA17', U'益'},
+    {U'\uFA18', U'礼'}, {U'\uFA19', U'神'}, {U'\uFA1A', U'祥'}, {U'\uFA1B', U'福'}, {U'\uFA1C', U'靖'}, {U'\uFA1D', U'精'}, {U'\uFA1E', U'羽'},
+    {U'\uFA20', U'蘒'}, {U'\uFA22', U'諸'}, {U'\uFA25', U'逸'}, {U'\uFA26', U'都'}, {U'\uFA2A', U'飯'}, {U'\uFA2B', U'飼'}, {U'\uFA2C', U'館'},
+    {U'\uFA2D', U'鶴'},
 };
 
 char32_t MapForm(char32_t c) {
@@ -556,6 +584,12 @@ std::string NormalizeForms(std::string_view text) {
             c = U'締';  // 〆切, 〆る, 〆日: the kanji 締 written short
         } else if (c == U'〆' && i < text.size() && At(text, i).cp >= U'ぁ' && At(text, i).cp <= U'ゖ') {
             out += "しめ";  // 〆た: the kana しめ written short
+            continue;
+        } else if (c >= 0x3300 && c <= 0x3357) {
+            out += kSquareWords[c - 0x3300];
+            continue;
+        } else if (const std::string_view era = SquareEra(c); !era.empty()) {
+            out += era;
             continue;
         } else if (c <= 3) {
             c = U' ';

@@ -6,6 +6,7 @@
 #include "core/pipeline/runes.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/tokenizer/canonical.h"
 #include "core/tokenizer/charsets.h"
 
 namespace hdTrans::pipeline::internal {
@@ -288,7 +289,7 @@ bool IsForeign(char32_t r) {
         r == U'ー' || r == U'—' || text::IsKanji(r) || RuneIn(r, kToneMarks)) {
         return false;
     }
-    return !tokenizer::IsCp932Symbol(r);
+    return !tokenizer::IsCp932Symbol(r) && !tokenizer::CanonicalForm(r);
 }
 
 output::Pieces CutSpans(std::string_view text, std::span<const std::string> markers) {
