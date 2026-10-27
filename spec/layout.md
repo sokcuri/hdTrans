@@ -403,7 +403,7 @@ wrapped에서 줄의 지문 여부(SPC-18)는 문서 전체가 아니라 이은 
 사례: `tests/rules/wrapped/join.tsv`, `tests/rules/wrapped/captions.tsv`(자막), `tests/rules/wrapped-soft/speech.tsv`(soft, 지문 여부),
 `tests/unit/engine/wrapped_test.cpp`
 
-## LAY-15 중국어로 쓴 한자 구간은 원문 그대로 둔다
+## LAY-17 중국어로 쓴 한자 구간은 원문 그대로 둔다
 
 일본어 글자에 없는 한자(们 这 说)가 든 한자 구간은 중국어라서 라틴 문자처럼 번역하지 않고 원문 그대로 둔다. 그런 구간이
 있는 줄에서는 앞뒤에 가나가 붙지 않은 한자 구간도 중국어다. 일본어 부분은 보통대로 번역한다. 옛 자체와 이체자(說 𠮷)는

@@ -1,6 +1,7 @@
 #include "core/pipeline/runes.h"
 
 #include <algorithm>
+#include <cstdint>
 
 #include "core/dict/classes.h"
 #include "core/text/unicode.h"
@@ -41,24 +42,59 @@ namespace {
 bool IsKanaRune(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || (r >= 0xFF66 && r <= 0xFF9F); }
 
 // Whether r is written only in Chinese: in script.chinese-han, or outside Japanese and no old
-// or variant form.
+// or variant form. Computed once per character of U+3400..U+FAFF into a bitset.
+bool ComputeChineseRune(char32_t r) {
+    if (dict::InClassRune(HDTRANS_CLASS("script.chinese-han"), r)) return true;
+    if (tokenizer::IsJapaneseHan(r)) return false;
+    for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
+        if (text::DecodeRune(pair).cp == r) return false;
+    }
+    return true;
+}
+
+constexpr char32_t kBitsFirst = 0x3400, kBitsEnd = 0xFB00;
+
 bool ChineseRune(char32_t r) {
-    static const std::vector<char32_t> forms = [] {
-        std::vector<char32_t> v;
+    static const std::vector<uint64_t> bits = [] {
+        std::vector<uint64_t> v((kBitsEnd - kBitsFirst + 63) / 64);
+        std::vector<char32_t> forms;
         for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("spelling.old-form"))) {
-            v.push_back(text::DecodeRune(pair).cp);
+            forms.push_back(text::DecodeRune(pair).cp);
         }
-        std::sort(v.begin(), v.end());
+        std::sort(forms.begin(), forms.end());
+        for (char32_t c = kBitsFirst; c < kBitsEnd; c++) {
+            const bool chinese = dict::InClassRune(HDTRANS_CLASS("script.chinese-han"), c) ||
+                                 (text::IsKanji(c) && !tokenizer::IsJapaneseHan(c) &&
+                                  !std::binary_search(forms.begin(), forms.end(), c));
+            if (chinese) v[(c - kBitsFirst) / 64] |= uint64_t{1} << ((c - kBitsFirst) % 64);
+        }
         return v;
     }();
-    if (dict::InClassRune(HDTRANS_CLASS("script.chinese-han"), r)) return true;
-    return !tokenizer::IsJapaneseHan(r) && !std::binary_search(forms.begin(), forms.end(), r);
+    if (r < kBitsFirst) return false;
+    if (r < kBitsEnd) return (bits[(r - kBitsFirst) / 64] >> ((r - kBitsFirst) % 64) & 1) != 0;
+    return text::IsKanji(r) && ComputeChineseRune(r);
+}
+
+// Whether text holds a character of ChineseRune; most lines hold none.
+bool HoldsChineseRune(std::string_view text) {
+    for (size_t i = 0; i < text.size();) {
+        const auto lead = static_cast<unsigned char>(text[i]);
+        if (lead < 0xE3) {  // below U+3000: ASCII, Latin, symbols
+            i++;
+            continue;
+        }
+        const text::Rune r = text::DecodeRune(text.substr(i));
+        if (ChineseRune(r.cp)) return true;
+        i += std::max<size_t>(1, r.size);
+    }
+    return false;
 }
 
 }  // namespace
 
 std::vector<std::pair<size_t, size_t>> ChineseRuns(std::string_view text) {
     std::vector<std::pair<size_t, size_t>> runs, loose;
+    if (!HoldsChineseRune(text)) return runs;
     for (size_t i = 0; i < text.size();) {
         const size_t n = RunOf(text.substr(i), text::IsKanji);
         if (n == 0) {
