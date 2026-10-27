@@ -47372,7 +47372,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アレッサンドロ・メッリ	알렉산드로·멜리	N130	QPN		SO				jisjk:373017		
 アレッサンドロ・リナルディ	알렉산드로·리날디	N130	QPN		SO				jisjk:373125		
 アレッサンドロ・ルカレッリ	알렉산드로·루카렐리	N130	QPN		SO				jisjk:372974		
-アレッシオ	아레시오	N130	QPN		GN				jisjk:367379		
+アレッシオ	알레시오	N130	QPN		GN				jisjk:367379		
 アレッシオ・スカルキッリ	아레씨오·스칼킬리	N130	QPN		SO				jisjk:373158		
 アレッシオ・スカルピ	아레씨오·스칼피	N130	QPN		SO				jisjk:373160		
 アレッシオ・タッキナルディ	아레씨오·타키나르디	N130	QPN		SO				jisjk:373185		
@@ -53924,7 +53924,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カッシ	갑자	N110			GN				jisjk:99106		
 カッシオーネ	카시오네	N130	QPN		GN				jisjk:367308		
 カッション	캇션	N110			GN				jisjk:99107		
-カッセッティ	카세띠	N130	QPN		GN				jisjk:367314		
+カッセッティ	카세티	N130	QPN		GN				jisjk:367314		
 カッセルマン	캇셀맨	N110			GN				jisjk:99108		
 カッタ	컷터	N110			GN				jisjk:106400		
 カッター	커터	N110	VPeVCk		GN				jisjk:45408		
@@ -56028,7 +56028,7 @@ ttt	ttt	K110			GN				jisjk:201744
 キーセグメントフィールド	키 세그먼트 필드	N110			GN				jisjk:45843		
 キーソケット	키서키트	N110			GN				jisjk:45846		
 キーソート	키소트	N110			GN				jisjk:45844		
-キーソートメソッド	키소트 메소드	N110	UTt		GN				jisjk:45845		
+キーソートメソッド	키 소트 메서드	N110	UTt		GN				jisjk:45845		
 キータイプコード	키 타이프 코드	N110	UTt		GN				jisjk:45847		
 キーチェンジ	키체인지	N110	UTt		GN				jisjk:45848		
 キーツーカセット	키 투 카세트	N110	UTt		GN				jisjk:45849		
@@ -60685,10 +60685,10 @@ ttt	ttt	K110			GN				jisjk:201744
 サマリ	요약	N119			GN				jisjk:104300		
 サマリア人	사마리아인	N130	QPN		GN				jisjk:115311		
 サマリファイル	썸머리 파일	N110			GN				jisjk:47733		
-サマリレポート	섬머리 리포트	N110			GN				jisjk:47734		
+サマリレポート	서머리 리포트	N110			GN				jisjk:47734		
 サマリンダ	사마린다	N130	QPN		GN				jisjk:101704		
 サマリー	서머리	N110			GN				jisjk:101703		
-サマリーカード	섬머리 카드	N110			GN				jisjk:47732		
+サマリーカード	서머리 카드	N110			GN				jisjk:47732		
 サマレック	서머렉	N130			BZ				jisjk:347387		
 サマー	서머	N110	UMe		GN				jisjk:47730		
 サマー	여름	N110			GN				jisjk:47731		
@@ -61371,7 +61371,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サーボメカニックス	서보 메커닉스	N110			GN				jisjk:47537		
 サーボモータ	서보모터	N110			GN				jisjk:47538		
 サーボモーター	서보 모터	N110	VPe		GN				jisjk:47539		
-サーボユニット	서보 유니트	N110			GN				jisjk:47540		
+サーボユニット	서보 유닛	N110			GN				jisjk:47540		
 サーボリンク	써보링크	N110			GN				jisjk:47541		
 サーボ弁	서보밸브	N110			GN				jisjk:128844		
 サーボ機構	서보 기구	N110	VPe		GN				jisjk:128843		
@@ -61396,7 +61396,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サーモシャワー	서모쇼어	N110			GN				jisjk:47553		
 サーモスイッチ	서모 스위치	N110	VPe		GN				jisjk:47554		
 サーモスタット	서모스탯	N110	VPe		GN				jisjk:47555		
-サーモセット	서멀셋트	N110	VPe		GN				jisjk:47556		
+サーモセット	서모셋	N110	VPe		GN				jisjk:47556		
 サーモタイムスイッチ	서모 타임 스위치	N110			GN				jisjk:47557		
 サーモファックス	서모팩스	N110			GN				jisjk:47558		
 サーモフォーム	사무포무	N110			GN				jisjk:47559		
@@ -65707,17 +65707,17 @@ ttt	ttt	K110			GN				jisjk:201744
 スリング	슬링	N110			GN				jisjk:49409		
 スリングショット	슬링샷	N110	VRwVPe		GN				jisjk:130188		
 スリ・ランカ	스리랑카	N110	VPl		GN				jisjk:130163		
-スリー	스리	N110			GN				jisjk:14010		
+スリー	쓰리	N110			GN				jisjk:14010		
 スリーエス	스리에스	N130	QIDVGt		GN				jisjk:49382		
 スリーエスシンワ	S에스신와	N110	VPl		GN				jisjk:49383		
 スリーエフ	스리에프	N130	QIDVGt		GN				jisjk:49384		
 スリーエム	스리엠	N130	QIDVGt		GN				jisjk:49385		
 スリーエムヘルスケア	3M 헬스케어	N130	QIDVGt		GN				jisjk:49386		
-スリークォーター	스리쿼터	N110	VRw		GN				jisjk:130164		
+スリークォーター	쓰리쿼터	N110	VRw		GN				jisjk:130164		
 スリークォーターレングス	스리쿼터 랭스	N110	VCp		GN				jisjk:152274		
 スリークオーター	쓰리쿼터	N110	VRw		GN				jisjk:130165		
 スリーコム	쓰리 컴	N130	QIDVGt		GN				jisjk:362577		
-スリーサイズ	스리 사이즈	N110	VCp		GN				jisjk:130166		
+スリーサイズ	쓰리 사이즈	N110	VCp		GN				jisjk:130166		
 スリーシーズンコート	쓰리시즌 코트	N110	VCp		GN				jisjk:130167		
 スリーター	삼륜 자전거	N110	VPeVTp		GN				jisjk:130168		
 スリーダブりュー	쓰리더블유	N110			GN				jisjk:152275		
@@ -65730,7 +65730,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スリーピングボード	슬리핑 보드	N110			BZ				jisjk:350817		
 スリーピングメンバー	슬리핑 멤버	N110	VHn		GN				jisjk:130173		
 スリーピー	3P	N110	VHn		GN				jisjk:49387		
-スリーピース	스리피스	N110	VCp		GN				jisjk:49388		
+スリーピース	쓰리피스	N110	VCp		GN				jisjk:49388		
 スリーピー興発	3P 흥발	N130	QIDVGt		GN				jisjk:49389		
 スリーブ	슬리브	N110			GN				jisjk:49392		
 スリーブ。 インストーラー	슬리브 인스톨러	N110			GN				jisjk:49393		
@@ -78997,7 +78997,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フィッシュロック	피쉬럭	N130	QPN		GN				jisjk:368470		
 フィッシング	피싱	N110			GN				jisjk:54774		
 フィッシーバック	피시백	N110			GN				jisjk:54771		
-フィッソーレ	휘소레	N130	QPN		GN				jisjk:367460		
+フィッソーレ	피소레	N130	QPN		GN				jisjk:367460		
 フィッター	핏터	N110			GN				jisjk:54775		
 フィッチ	피치	N130	QIDQMS		GN				jisjk:133295		
 フィッツパトリック	피츠패트릭	N130	QPN		GN				jisjk:368940		
@@ -86529,7 +86529,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マークアップ言語	마크업 언어	N110			IT				jisjk:261197		
 マークキー	마크 키	N110			GN				jisjk:56973		
 マークシート	마크 시트	N110			IT				jisjk:263015		
-マークスリー	마크 스리	N110			IT				jisjk:263016		
+マークスリー	마크 쓰리	N110			IT				jisjk:263016		
 マークテック	마크테크	N110	VPl		GN				jisjk:56974		
 マークホールド	마크 홀드	N110			GN				jisjk:56975		
 マーク入り	마크표시	N110			GN				jisjk:113340		
@@ -92827,7 +92827,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ロッケ	로케	N130	QPN		GN				jisjk:371181		
 ロッコ	로꼬	N130	QPN		GN				jisjk:366683		
 ロッシ	로시	N130	QPN		GN				jisjk:367164		
-ロッシット	로시또	N130	QPN		GN				jisjk:367696		
+ロッシット	로시토	N130	QPN		GN				jisjk:367696		
 ロッシーニ	로시니	N130	QPN		GN				jisjk:59859		
 ロッシーニルネサンス	롯시니 르네상스	N110			GN				jisjk:107819		
 ロッジ	로지	N110	VBl		GN				jisjk:159129		

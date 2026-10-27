@@ -24,16 +24,20 @@
 
 ## LEX-2 외래어 표기는 쓰임으로 고른다
 
-같은 외래어를 적는 표기가 여럿이면 많이 쓰이는 표기를 쓴다.
+같은 외래어를 적는 표기가 여럿이면 많이 쓰이는 표기를 쓴다. 된소리는 표기법대로 예사소리로 적되(써프라이즈 → 서프라이즈,
+썸머리 → 서머리), 된소리로 굳은 말은 그대로 둔다(スリーサイズ 쓰리 사이즈).
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
 | リポジトリをクローンしてください。 | 리포지토리를 클론해 주세요. | 고침 |
 | ディレクトリを移動する。 | 디렉터리를 이동한다. | 고침 |
 | メッセージを送った。 | 메시지를 보냈다. | 유지 |
+| サマリーカードを作った。 | 서머리 카드를 만들었다. | 고침 |
+| スリーサイズを測った。 | 쓰리 사이즈를 측정했다. | 유지 |
 
 사례: `tests/rules/cases/it-vocabulary.tsv`, `tests/rules/cases/rules-words.tsv`,
-`tests/rules/cases/loanword-spellings.tsv`, `tests/rules/cases/lexical-gloss-cleanup.tsv`
+`tests/rules/cases/loanword-spellings.tsv`, `tests/rules/cases/lexical-gloss-cleanup.tsv`,
+`tests/rules/cases/lexical-loanword-spelling.tsv`
 
 ## LEX-3 사전 뜻풀이는 짧은 한국어 낱말이나 구다
 
