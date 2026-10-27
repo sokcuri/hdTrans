@@ -1,0 +1,10 @@
+# 규칙: LAY-18
+rule	input	expected	kind	layer
+protect:markup-bracket	<Come On！ジャパニーズエール>	<Come On! 재패니스 에일>	fix	protect
+protect:markup-bracket	<さあ、始めよう！>	<자, 시작하자!>	keep	protect
+protect:markup-bracket	<みんな、ありがとう…>	<모두, 고마워…>	keep	protect
+protect:markup-bracket	<b>太字</b>だ	<b>굵은 글씨</b>다	keep	protect
+protect:markup-bracket	<a href="x">リンク</a>	<a href="x">링크</a>	keep	protect
+protect:markup-bracket	<Hello>こんにちは	<Hello>안녕하세요	keep	protect
+protect:markup-bracket	<R>abc</R> テスト	<R>abc</R> 테스트	keep	protect
+protect:markup-bracket	<color=red>赤い</color>花	<color=red>붉은</color> 꽃	keep	protect

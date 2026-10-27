@@ -51,6 +51,14 @@ using ReadBase = BaseReading (*)(const void* context, std::string_view base, std
 // with the dictionary.
 std::string JoinBraceRuby(std::string_view line, ReadBase read, const void* context);
 
+// line with each ruby tag <R reading>base</R> written {rb}base{/rb}{rt}reading{/rt}, so that it
+// is read like brace ruby; "" when line holds none or already holds brace ruby.
+std::string RTagsAsBraceRuby(std::string_view line);
+
+// The translation of a line that RTagsAsBraceRuby rewrote, with each {rb}base{/rb}{rt}reading{/rt}
+// written back as <R reading>base</R>.
+std::string BraceRubyAsRTags(std::string_view line);
+
 // Whether the variant at line[at, at + variant.size()) is part of another dictionary word and so
 // stays as written (身の程, ときめく).
 using WordKeepsVariant = bool (*)(const void* context, std::string_view line, size_t at, std::string_view variant,

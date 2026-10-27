@@ -36,13 +36,17 @@ bool EqualFoldAscii(std::string_view a, std::string_view b) {
     return true;
 }
 
-// <BR> and <LI> are left to the tokenizer, which ends the sentence at them.
+// <BR> and <LI> are left to the tokenizer, which ends the sentence at them. Brackets around text
+// with sentence marks (<Come On！ジャパニーズエール>) are no tag.
 Match TagSpan(std::string_view s) {
     if (s.size() < 2 || s[0] != '<' || !(IsAsciiLetter(s[1]) || s[1] == '!' || s[1] == '/' || s[1] == '?')) return {};
     const size_t end = s.find_first_of("<>", 1);
     if (end == std::string_view::npos || s[end] != '>') return {};
     const std::string_view tag = s.substr(0, end + 1);
     if (text::RuneCount(tag) > 1024 || EqualFoldAscii(tag, "<BR>") || EqualFoldAscii(tag, "<LI>")) return {};
+    for (const std::string_view mark : {"。", "、", "！", "？", "「", "」", "…"}) {
+        if (tag.find(mark) != std::string_view::npos) return {};
+    }
     return {tag.size(), s[1] == '/' ? output::SpanClose : output::SpanOpen};
 }
 
