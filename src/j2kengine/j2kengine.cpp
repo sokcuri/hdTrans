@@ -109,10 +109,10 @@ hdTrans::internal::ConfigResult ReadConfig(const std::string& path) {
     return config;
 }
 
-// Writes diagnostics only when a completed load changes, including failed loads.
+// Writes diagnostics once per completed load, including failed loads.
 void LogLoadErrors(const hdTrans::Engine& engine, bool force, bool loaded) {
     const auto ticket = hdTrans::internal::LoadDiagnosticsVersion(engine);
-    if (!ticket) return;
+    if (!ticket || (!force && g_loggedDiagnosticsVersion == ticket)) return;
     const auto snapshot = engine.Dictionaries();
     const auto filters = engine.Filters();
     const bool sourcesChanged = force || snapshot != g_loggedSnapshot.lock() || filters != g_loggedFilters.lock();
