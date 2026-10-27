@@ -252,8 +252,12 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.cases.wrapped-soft COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/wrapped-soft"
             --documents -- --wrapped --speech soft)
+        # Documents, each input a document of its own: tests/rules/documents/.
+        add_test(NAME rules.cases.documents COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/documents"
+            --documents)
         set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
-            rules.cases.wrapped rules.cases.wrapped-soft
+            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).

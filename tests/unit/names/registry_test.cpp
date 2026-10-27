@@ -103,7 +103,12 @@ const dict::Snapshot* Dictionary() {
          "佐藤\t사토우\tN130\tQPN\tWa\tGN\t101\n"
          "大野\t오오노\tN130\tQPN\tWa\tGN\t102\n"
          "結城\t유우키\tN130\tQPN\tWa\tGN\t103\n"
-         "大上\t오우에\tN130\tQCTVPl\t\tGN\t104\n"},
+         "大上\t오우에\tN130\tQCTVPl\t\tGN\t104\n"
+         "ダンジョン\t던전\tN110\tVPl\t\tGN\t106\n"
+         "ゲート\t게이트\tN110\t\t\tGN\t107\n"
+         "セット\t세트\tN110\t\t\tGN\t108\n"
+         "スキル\t스킬\tN110\t\t\tGN\t109\n"
+         "スケルトン\t스켈레톤\tN110\t\t\tGN\t110\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -666,6 +671,37 @@ HD_TEST(names_prefix_of_learned_name) {
     }
     names::Registry alone = Scan(snap, Repeat("レオくん、おはよう。", 2));
     HD_CHECK_EQ(alone.Render("レオ"), std::string("레오"));
+}
+
+// A common katakana word is no short form of a longer run, a run that goes on in words after a
+// name or a common word is a compound, not a longer name, and a label of common words is a
+// field.
+HD_TEST(names_common_katakana_words) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    const std::vector<std::string> none;
+    HD_CHECK(Scan(snap, Repeat("ダンジョンゲート", 2) + "ダンジョンさんの意思だ。\n試練はダンジョンさんだ。").Names() == none);
+    HD_CHECK(Scan(snap, Repeat("スケルトンくんが来た。", 2) + Repeat("スケルトンナイトが来た。", 2)).Names() == none);
+    HD_CHECK(Scan(snap, Repeat("セットスキルさんが来た。", 3)).Names() == none);
+    HD_CHECK(Scan(snap, Repeat("セットスキル：剣術", 3)).Names() == none);
+    HD_CHECK(Scan(snap, Repeat("アルくんが来た。", 2) + Repeat("アルゲートが来た。", 2)).Names() ==
+             (std::vector<std::string>{"アル"}));
+
+    const std::vector<std::string> leon = {"レオン"};
+    HD_CHECK(Scan(snap, Repeat("レオン様が来た。", 2) + Repeat("レオンアーチャーが来た。", 2) + "アーチャーが来た。").Names() ==
+             leon);
+    HD_CHECK(Scan(snap, Repeat("レオン様が来た。", 2) + Repeat("レオンスキルが来た。", 2)).Names() == leon);
+
+    // A name of no dictionary before an honorific, as a speaker label, or one the name layer
+    // knows as a person.
+    HD_CHECK(Scan(snap, Repeat("ミナさんが来た。", 2)).Names() == (std::vector<std::string>{"ミナ"}));
+    HD_CHECK(Scan(snap, Repeat("リリカ「おはよう」", 3)).Names() == (std::vector<std::string>{"リリカ"}));
+    HD_CHECK(Scan(snap, Repeat("セリス：おはよう", 3)).Names() == (std::vector<std::string>{"セリス"}));
+    HD_CHECK(Scan(snap, Repeat("ハル君、おはよう。", 4)).Names() == (std::vector<std::string>{"ハル"}));
+    HD_CHECK(Scan(snap, Repeat("メイさんが来た。", 2) + Repeat("メイメイが笑った。", 2)).Names() ==
+             (std::vector<std::string>{"メイ", "メイメイ"}));
+    names::Registry nick = Scan(snap, "アルくんが来た。\n" + Repeat("アルガルドは王子だ。", 2));
+    HD_CHECK(nick.Names() == (std::vector<std::string>{"アル", "アルガルド"}));
 }
 
 // The parts of a chain name read as the words of its name-layer person reading, in the
