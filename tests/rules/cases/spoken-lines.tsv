@@ -14,13 +14,6 @@ dict:ino-final:1	くすぐったいの。	낯간지러워.	fix	local-ending
 dict:ino-final:1	痛いのが嫌だ	아픈 것이 싫다	keep	local-ending
 dict:ino-final:1	痛いのを我慢する	아픈 것을 참는다	keep	local-ending
 dict:ino-final:1	好きなの……	좋아해……	keep	local-ending
-cx:chau-involuntary:10	「声、出ちゃう……」	「목소리, 나올 것 같아……」	fix	rewrites
-cx:chau-involuntary:10	「遅れちゃう！」	「늦을 것 같아!」	fix	rewrites
-cx:chau-involuntary:10	忘れちゃう	잊을 것 같아	fix	rewrites
-cx:chau-involuntary:10	負けちゃう	질 것 같아	fix	rewrites
-dict:chau-final:1	負けちゃう人	져버리는 사람	keep	ending-defaults
-dict:chau-final:1	食べちゃうよ	먹어버릴 거야	keep	ending-defaults
-dict:chau-final:1	出ちゃうと困る	나와버리자 곤란하다	keep	ending-defaults
 cx:mimetic-echo:10	ギシギシとベッドが軋む	침대가 삐걱거린다	fix	rewrites
 cx:mimetic-echo:10	ドアがギシギシと軋む	문이 삐걱거린다	fix	rewrites
 cx:mimetic-echo:10	ドキドキと胸が高鳴る	가슴이 두근거린다	fix	rewrites
@@ -41,10 +34,21 @@ cx:ino-question:10	入れないの！？	넣지 않는 거야!?	fix	rewrites
 cx:ino-question:10	まだ帰ってこないの!?	아직 돌아오지 않는 거야!?	fix	rewrites
 cx:ino-question:10	痛いの！	아파!	keep	rewrites
 cx:ino-question:10	そこ、弱いの……	거기, 약해……	keep	rewrites
-cx:chau-involuntary:10	死んじゃう！	죽을 것 같아!	fix	rewrites
-cx:chau-involuntary:10	泣いちゃう	울 것 같아	fix	rewrites
-cx:chau-involuntary:10	食べちゃう	먹어버릴 거야	keep	rewrites
 sound:cry-alone	イっちゃう	갈 것 같아	fix	sound
 sound:cry-alone	「イっちゃう……」	「갈 것 같아……」	fix	sound
 sound:cry-alone	イっちゃう、イっちゃう	가버려, 가버려	keep	sound
-cx:chau-involuntary:10	疲れたまま出ると、死んじゃうよ。	지친 채로 나오면, 죽어버릴 거야.	keep	rewrites
+cx:chau-final:10	「声、出ちゃう……」	「목소리, 나올 것 같아……」	fix	rewrites
+cx:chau-final:10	「遅れちゃう！」	「늦을 것 같아!」	fix	rewrites
+cx:chau-final:10	「死んじゃう！」	「죽을 것 같아!」	fix	rewrites
+cx:chau-final:10	「泣いちゃう」	「울 것 같아」	fix	rewrites
+cx:chau-final:10	「怒られちゃう」	「혼날 것 같아」	fix	rewrites
+cx:chau-final:10	「もう遅刻しちゃう……」	「이제 지각할 것 같아……」	fix	rewrites
+cx:chau-final:10	「出ちゃう、出ちゃう」	「나올 것 같아, 나올 것 같아」	fix	rewrites
+cx:chau-final:10	忘れちゃう	잊어버린다	keep	rewrites
+cx:chau-final:10	彼は泣いちゃう。	그는 울어버린다.	keep	rewrites
+cx:chau-final:20	「やっちゃう」	「해 치운다」	fix	rewrites
+cx:chau-final:20	「全部食べちゃう」	「전부 먹어버릴 거야」	fix	rewrites
+cx:chau-final:20	「食べちゃうよ」	「먹어버릴 거야」	keep	rewrites
+cx:chau-final:20	彼は全部食べちゃう。	그는 전부 먹어버린다.	keep	rewrites
+cx:chau-final:20	「負けちゃう人」	「져버리는 사람」	keep	rewrites
+cx:chau-final:20	「出ちゃうと困る」	「나와버리자 곤란해」	keep	rewrites

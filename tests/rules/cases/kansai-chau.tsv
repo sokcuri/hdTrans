@@ -7,7 +7,7 @@ constraint:chau-after-verb	そんなんちゃいます。	has:아닙니다	fix	l
 constraint:chau-after-verb	行くんちゃう？	has:아니야	fix	lookup
 constraint:chau-after-verb	やっちゃうね。	해 치우네.	keep	lookup
 constraint:chau-after-verb	旗艦やっちゃうね！	기함 해 치우네!	keep	lookup
-constraint:chau-after-verb	食べちゃう。	먹어버릴 거야.	keep	lookup
+constraint:chau-after-verb	食べちゃう。	먹어버린다.	keep	lookup
 constraint:chau-after-verb	見ちゃうよ。	봐버릴 거야.	keep	lookup
 constraint:chau-after-verb	寝ちゃうわ。	자버려.	keep	lookup
 constraint:chau-after-verb	言っちゃうか？	말해버릴까?	keep	lookup
