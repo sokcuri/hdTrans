@@ -24372,7 +24372,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 迷い込	길을 잃고 들어&AH@	M425			GN				xxx llm	1		w:24326
 迷光	미광	N110			GN						めいこう	w:24327
 迷彩	위장	N110			GN				xxx llm	1		w:24328
-迷惑	성가%DO@	E8U0			GN				xxx llm	1		w:24329
+迷惑	민폐%D4@	E8U0			GN				xxx llm	1		w:24329
 迷惑がかか	폐가 &C6@	M428			GN				llm			w:24330
 迷霧	짙은 안개	N110			GN				xxx llm	1		w:24331
 迸り	용솟음	N110			GN						ほとばしり	w:24332
@@ -27114,3 +27114,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鬱々と	울적하게	E300			GN						うつうつと	w:28866
 清々	후련&AV@	M429			GN						せいせい	w:28867
 精々が	기껏해야	E300			GN						せいぜいが	w:28868
+迷惑	성가%DO@	E8U0			GN	8641	||1 &&2 ||2 S-1== "は" S-1== "が" A-2== "UHrVFnUGsVFrQAEQAA"	소리, 물건, 연기, 날씨, 벌레가 주어인 迷惑だ는 성가시다로 고른다.				w:28869

@@ -9,8 +9,8 @@ dict:w:24329	迷惑だ	민폐다	fix	defaults
 dict:w:24329	それは迷惑だ	그것은 민폐다	fix	defaults
 dict:w:24329	本当に迷惑だよ	정말 민폐야	fix	defaults
 dict:w:24329	迷惑です	민폐입니다	fix	defaults
-dict:w:28863	この騒音は迷惑だ	이 소음은 성가시다	keep	local
-dict:w:28863	虫が迷惑だ	벌레가 성가시다	keep	local
+dict:w:28869	この騒音は迷惑だ	이 소음은 성가시다	keep	local
+dict:w:28869	虫が迷惑だ	벌레가 성가시다	keep	local
 dict:meiwaku:2	迷惑している	곤란해하고 있다	fix	local
 dict:meiwaku:2	近所の騒音に迷惑している	이웃의 소음에 곤란해하고 있다	fix	local
 dict:meiwaku:2	本当に迷惑した	정말 곤란해했다	fix	local
