@@ -69,6 +69,7 @@ enum class CxVerb : uint8_t {
 struct CxAction {
     CxVerb verb = CxVerb::SelectLemma;
     int8_t delta = 0;
+    bool scanned = false;     // @scan±n: counted from the word where the row's first scan outside !1 finds its target
     std::string value, with;  // with: the new head of replace-head, the new tail of replace-ending-tail and set-verb-from
     int map = -1;             // map-lemma, map-target, select-map, map-ending-tail: into maps
 };
@@ -85,6 +86,7 @@ struct CxRow {
     int prio = 0;
     uint32_t root = 0;  // into nodes
     std::vector<CxAction> actions;
+    bool scans = false;  // an action is placed by @scan
     int line = 0;  // in the table
 };
 

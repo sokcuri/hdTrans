@@ -370,3 +370,20 @@ HD_TEST(constructions_family_guard) {
     HD_CHECK(errors.find("2: guard: no named condition :missing") != std::string::npos);
     HD_CHECK(errors.find("3: a family line is //= FAMILY <TAB> after PASS STAGE [<TAB> guard CONDITION]") != std::string::npos);
 }
+
+// @scan±n counts from the word where a scan of the row's condition found its target.
+HD_TEST(constructions_scan_positions) {
+    const std::vector<std::string_view> lines = {
+        "//~ m\t저=제\tdoc\n",
+        "//= a\tafter First 10\tdoc\n",
+        "cx:a:10\t\t<4 S+0== \"に\" ||0\tset-target@scan \"(이)가\" map-lemma@scan-1 @m set-ending \"1\"\t\n",
+    };
+    const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
+    HD_CHECK_EQ(Errors(t), std::string());
+    HD_REQUIRE(t.rows.size() == 1 && t.rows[0].actions.size() == 3);
+    HD_CHECK(t.rows[0].actions[0].scanned && t.rows[0].actions[0].delta == 0);
+    HD_CHECK(t.rows[0].actions[1].scanned && t.rows[0].actions[1].delta == -1);
+    HD_CHECK(!t.rows[0].actions[2].scanned);
+    const std::vector<std::string_view> bad = {"//= a\tafter First 10\tdoc\n", "cx:a:10\t\tS+0== \"に\"\tset-target@ \"X\"\t\n"};
+    HD_CHECK(Errors(internal::ParseConstructions(bad, kPasses)).find("bad action position") != std::string::npos);
+}

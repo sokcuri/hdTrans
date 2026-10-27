@@ -697,7 +697,14 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         CxAction a;
         const std::size_t at = word.find('@');
         const std::string_view verb = word.substr(0, at);
-        if (at != std::string_view::npos && !rules::ParseDelta(word.substr(at + 1), a.delta)) {
+        std::string_view position = at == std::string_view::npos ? std::string_view() : word.substr(at + 1);
+        a.scanned = position.starts_with("scan");
+        if (a.scanned) position.remove_prefix(std::string_view("scan").size());
+        if (at != std::string_view::npos && !position.empty() && !rules::ParseDelta(position, a.delta)) {
+            tokens.Fail("bad action position");
+            break;
+        }
+        if (at != std::string_view::npos && position.empty() && !a.scanned) {
             tokens.Fail("bad action position");
             break;
         }
@@ -982,7 +989,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, "condition: " + expandError);
             continue;
         }
-        CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, number};
+        CxRow row{std::string(id), std::string(f[1]), prio, static_cast<uint32_t>(t.nodes.size()), {}, false, number};
         rules::Tokens tokens(expanded);
         CxSink sink(t);
         if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
@@ -994,6 +1001,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             fail(number, std::string("actions: ") + error);
             continue;
         }
+        row.scans = std::ranges::any_of(row.actions, &internal::CxAction::scanned);
         ids.emplace_back(id);
         t.families[family->second].rows.push_back(static_cast<int>(t.rows.size()));
         t.rows.push_back(std::move(row));
@@ -1172,12 +1180,37 @@ bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     return n.kind != rules::BodyKind::Or && all;
 }
 
+// The word where the first scan of the condition at node i, outside a !1, finds its target at it;
+// null for none. Tried only for a row that fired and places an action by @scan.
+const Item* Scanned(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom || n.kind == rules::BodyKind::Not) return nullptr;
+    if (n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight) {
+        const uint32_t target = i + 1;
+        const uint32_t barrier = t.nodes[target].end;
+        const int step = n.kind == rules::BodyKind::ScanLeft ? -1 : 1;
+        int k = 0;
+        for (const Item* x = Neighbour(it, step); x != nullptr && (n.count == 0 || k < static_cast<int>(n.count));
+             x = Neighbour(x, step), k++) {
+            if (Eval(f, t, target, x)) return x;
+            if (Eval(f, t, barrier, x)) return nullptr;
+        }
+        return nullptr;
+    }
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) {
+        if (const Item* x = Scanned(f, t, child, it)) return x;
+    }
+    return nullptr;
+}
+
 // The marker a verb written into the word takes: '$' on an i-adjective, whose families conjugate
 // with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
 char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
 
-void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal::CxAction& a, Selection source) {
-    Item* it = Neighbour(origin, a.delta);
+void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, const internal::CxAction& a,
+           Selection source) {
+    Item* it = Neighbour(a.scanned ? scanned : origin, a.delta);
     if (it == nullptr) return;
     switch (a.verb) {
         case internal::CxVerb::SelectLemma:
@@ -1420,7 +1453,9 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
                     if (fired) tally->constructionFires[static_cast<std::size_t>(r)]++;
                 }
                 if (!fired) continue;
-                for (const internal::CxAction& a : row.actions) Apply(f, t, it, a, {Provenance::Rewrite, r});
+                // The chain is the flusher's; the conditions read it through const pointers.
+                Item* found = row.scans ? const_cast<Item*>(Scanned(f, t, row.root, it)) : nullptr;
+                for (const internal::CxAction& a : row.actions) Apply(f, t, it, found, a, {Provenance::Rewrite, r});
                 break;
             }
         }
