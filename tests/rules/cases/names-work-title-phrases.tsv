@@ -1,0 +1,32 @@
+# 규칙: LEX-4
+rule	input	expected	kind	layer
+names:work-title-phrases	彼女は甘い吐息を漏らしながら	그녀는 달콤한 숨결을 흘리면서	fix	lookup
+names:work-title-phrases	甘い罠にかかった	lacks:초콜릿	fix	lookup
+names:work-title-phrases	赤い唇が震えた	붉은 입술이 떨렸다	fix	lookup
+names:work-title-phrases	白い恐怖に襲われた	흰 공포에 습격당했다	fix	lookup
+names:work-title-phrases	遠い雷鳴が聞こえる	먼 천둥소리가 들린다	fix	lookup
+names:work-title-phrases	彼女の青い春は終わった	그녀의 푸른 봄은 끝났다	fix	lookup
+names:work-title-phrases	冷たい嘘をついた	lacks:붙었다	fix	lookup
+names:work-title-phrases	『甘い吐息』を見た	『달콤한 숨결』을 보았다	fix	lookup
+names:work-title-phrases	「私はあなたと、どんな時も、一緒にいる」	「나는 당신과 어떤 때도, 함께 있다」	fix	lookup
+names:work-title-phrases	「全ては愛する人のためですから」	「모든 건 사랑하는 사람을 위해서니까」	fix	lookup
+names:work-title-phrases	「え、普通じゃないの……？」	「어, 보통이 아닌 거야……?」	fix	lookup
+names:work-title-phrases	問題があったのは、１位のセンターステージに集まった票についてだ。	문제가 있던 것은, 1위의 센터 스테이지에 모인 표에 대해다.	fix	lookup
+names:work-title-phrases	主要な名所、いえ激戦地を訪れました。	주요한 명소, 아뇨 격전지를 방문했습니다.	fix	lookup
+names:work-title-phrases	ようやく遅れていた落下音が届き	드디어 늦은 낙하음이 닿아	fix	lookup
+names:work-title-phrases	これからの人生を北海道でか…とも思った	앞으로의 인생을 홋카이도에서인가…라고도 생각했다	fix	lookup
+names:work-title-phrases	最近 見知らぬ人が	최근 낯선 사람이	fix	lookup
+names:work-title-phrases	みんな 元気だったか？	lacks:에브리바디스	fix	lookup
+names:work-title-phrases	例えば 愛人契約とか	예를 들면 애인 계약이라든지	fix	lookup
+dict:everyday-words:16	チョコはふたりで半分こする決まりなので	has:반반	fix	lookup
+names:work-title-phrases	『甘い人生』を見た	『달콤한 인생』을 보았다	keep	lookup
+names:work-title-phrases	…一番最初にやった罰ゲームが残ってますです。	…제일 처음에 한 벌칙 게임이 남아 있습니다요.	keep	lookup
+names:work-title-phrases	２０年前初めてネットゲームに触れた時のことだった。	20년 전 처음으로 온라인 게임에 접했을 때였다.	keep	lookup
+names:work-title-phrases	財布はポケットの中に入っている。	지갑은 주머니 속에 들어가 있다.	keep	lookup
+names:work-title-phrases	「ガッチャマン」ね	「독수리 오형제」네	keep	lookup
+names:work-title-phrases	なるほど『キャシャーン』の犬型ロボット｡	그렇구나 『정의의 캐산』의 견형로봇.	keep	lookup
+names:work-title-phrases	カメラ付きの携帯ゲーム機	카메라 부착의 휴대용 게임기	keep	lookup
+names:work-title-phrases	椎名真昼が来た。	시이나 마히루가 왔다.	keep	lookup
+names:work-title-phrases	「蜻蛉日記」には朝早く京を出立し	has:「청령일기」	keep	lookup
+names:work-title-phrases	あなたの好きなところ今　思い出そうとしてもあんまりない。	has:너의 좋은 부분	keep	lookup
+names:work-title-phrases	カメラ付きの携帯ゲーム、ありったけだ！	has:휴대용 게임기,	keep	lookup
