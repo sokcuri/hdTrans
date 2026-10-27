@@ -113,6 +113,45 @@ constexpr std::string_view kSquareWords[] = {
     "レム", "レントゲン", "ワット",
 };
 
+// Whether the 〇 at byte at of text is a digit. The run of 〇 it is in is a number when a kanji
+// numeral, a digit or another run of 〇 is written next to it (二〇二六, 三〇, 百〇八) or across a
+// colon (〇〇:〇〇), when it is the hour, minute or second of a time (〇時, 二時〇〇分, 十時〇分), when
+// it counts a year, month or day of a date written with numerals (二〇二六年〇月), or when it is
+// four 〇 standing alone, a time (現在時刻、〇〇〇〇、です). Elsewhere it is the circle mark ○
+// (〇〇さん, 答えは〇, 〇〇年〇月〇日).
+bool CircleIsDigit(std::string_view text, size_t at) {
+    constexpr std::u32string_view kNumerals = U"一二三四五六七八九十百千万億0123456789０１２３４５６７８９";
+    const auto before = [&](size_t p) { return p > 0 ? LastRune(text.substr(0, p)) : text::Rune{0, 0}; };
+    const auto after = [&](size_t p) { return p < text.size() ? At(text, p) : text::Rune{0, 0}; };
+    size_t begin = at;
+    while (before(begin).cp == U'〇') begin -= before(begin).size;
+    size_t end = begin;
+    int run = 0;
+    for (; after(end).cp == U'〇'; run++) end += after(end).size;
+    const char32_t prev = before(begin).cp;
+    const char32_t next = after(end).cp;
+    if (In(prev, kNumerals) || In(next, kNumerals) || In(next, U"時分秒")) return true;
+    // Across a colon: a number or a run of 〇 on the other side.
+    if (In(prev, U":：") && begin > before(begin).size) {
+        const char32_t other = before(begin - before(begin).size).cp;
+        if (other == U'〇' || In(other, kNumerals)) return true;
+    }
+    if (In(next, U":：")) {
+        const char32_t other = after(end + after(end).size).cp;
+        if (other == U'〇' || In(other, kNumerals)) return true;
+    }
+    // A unit of a date or time before the run, after a number (二時〇〇分, 二〇二六年〇月).
+    if (In(next, U"年月日") || In(prev, U"時分年月")) {
+        size_t p = begin;
+        while (p > 0 && (In(before(p).cp, kNumerals) || In(before(p).cp, U"〇年月日時分"))) {
+            if (In(before(p).cp, kNumerals)) return true;
+            p -= before(p).size;
+        }
+    }
+    const auto word = [](char32_t r) { return IsKanjiRune(r) || IsHiraganaRune(r) || IsKatakanaRune(r) || r == U'○'; };
+    return run == 4 && !word(prev) && !word(next);
+}
+
 // The era names of the squared eras.
 std::string_view SquareEra(char32_t c) {
     switch (c) {
@@ -591,6 +630,8 @@ std::string NormalizeForms(std::string_view text) {
         } else if (const std::string_view era = SquareEra(c); !era.empty()) {
             out += era;
             continue;
+        } else if (c == U'〇' && !CircleIsDigit(text, i - r.size)) {
+            c = U'○';
         } else if (c <= 3) {
             c = U' ';
         } else if (c == U'‼' || c == U'⁉' || c == U'⁈') {
