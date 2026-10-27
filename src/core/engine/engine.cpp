@@ -328,14 +328,6 @@ struct Access {
             w.acceptedEhnd->available = true;
         }
         w.dictionaryInfo = std::move(r.info);
-        for (const auto& source : version.sources) {
-            if (!source.available && !source.directory && !source.explicitPath &&
-                std::none_of(version.files.begin(), version.files.end(), [&](const auto& file) {
-                    return file.first == source.path;
-                })) {
-                w.dictionaryInfo.push_back({source.path, dict::LoadFileKind::DefaultUserMissing, {}});
-            }
-        }
         w.filterInfo = std::move(filters.info);
         w.watch.loaded = version;
         w.watch.hasFailed = false;

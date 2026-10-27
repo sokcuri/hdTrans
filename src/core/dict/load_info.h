@@ -24,7 +24,6 @@ enum class LoadFileKind : std::uint8_t {
     MemoryEhndSkipLayer,
     MemoryEhndUserDict,
     EhndDisabled,
-    DefaultUserMissing,
 };
 
 struct LoadFileInfo {

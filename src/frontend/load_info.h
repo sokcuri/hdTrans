@@ -49,8 +49,7 @@ inline std::string_view LoadInfoKind(dict::LoadFileKind kind) {
     case Kind::MemoryEhndPostFilter: return "Ehnd 후처리 필터, 메모리";
     case Kind::MemoryEhndSkipLayer: return "Ehnd 레이어 조건, 메모리";
     case Kind::MemoryEhndUserDict: return "Ehnd 사용자 사전, 메모리";
-    case Kind::EhndDisabled:
-    case Kind::DefaultUserMissing: return {};
+    case Kind::EhndDisabled: return {};
     }
     return {};
 }
@@ -60,9 +59,8 @@ inline std::string_view LoadInfoKind(dict::LoadFileKind kind) {
 inline std::string FormatLoadFileInfo(const dict::LoadFileInfo& info, std::string_view programDir) {
     if (info.kind == dict::LoadFileKind::EhndDisabled)
         return "Ehnd 활성화가 꺼져 있어 필터 및 사전 불러오기를 건너뜁니다";
-    if (info.kind == dict::LoadFileKind::DefaultUserMissing) return "기본 사용자 사전이 없습니다";
-    std::string out = internal::EscapeLoadInfoPath(internal::LoadInfoPath(info.path, programDir));
-    if (!out.empty()) out += ' ';
+    std::string out = "사전 읽음: ";
+    if (!info.path.empty()) out += internal::EscapeLoadInfoPath(internal::LoadInfoPath(info.path, programDir)) + ' ';
     out += '(';
     out += internal::LoadInfoKind(info.kind);
     if (info.acceptedCount) out += ", " + std::to_string(*info.acceptedCount) + "개";

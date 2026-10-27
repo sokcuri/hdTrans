@@ -921,14 +921,7 @@ HD_TEST(UserDictionaryOptionalSourceOrigins) {
             HD_REQUIRE(internal::OpenUserSources(generated, {Fixture()}, verify, {{missing, true, true, false}}));
             HD_CHECK(generated.UserFileError().empty());
             const auto info = internal::LoadedSourceInfo(generated);
-            std::size_t defaults = 0;
-            for (const auto& file : info.files) {
-                if (file.kind != dict::LoadFileKind::DefaultUserMissing) continue;
-                ++defaults;
-                HD_CHECK_EQ(file.path, missing);
-                HD_CHECK(!file.acceptedCount);
-            }
-            HD_CHECK_EQ(defaults, std::size_t{1});
+            for (const auto& file : info.files) HD_CHECK(file.path != missing);
             HD_CHECK(internal::AcceptedUserSources(generated).empty());
 
             const auto missingEhnd = (temp.path / "not-created-ehnd").string();
