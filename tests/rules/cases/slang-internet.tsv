@@ -100,3 +100,28 @@ analysis:kept-latin-run	おk	has:오케이	keep	analysis
 analysis:kept-latin-run	見るp8です	has:p8	keep	analysis
 analysis:kept-latin-run	思うq8です	has:q8	keep	analysis
 analysis:kept-latin-run	思うP8です	has:P8	keep	analysis
+analysis:kept-latin-run	地元で愛され50年	has:50년	keep	analysis
+analysis:kept-latin-run	およそ20年間	has:20년간	keep	analysis
+analysis:kept-latin-run	｢アタックZERO｣	has:ZERO	keep	analysis
+analysis:kept-latin-run	Travis Japanは	has:Travis Japan	keep	analysis
+analysis:kept-latin-run	保有するｅギフト	has:e	keep	analysis
+analysis:kept-latin-run	まずＧＭは	has:GM	keep	analysis
+analysis:kept-latin-run	道路は10mから15m	has:10m	keep	analysis
+analysis:kept-latin-run	万円をGMOに支払う	has:GMO	keep	analysis
+analysis:kept-latin-run	ご飯うめぇｗｗｗ	has:ㅋㅋㅋ	keep	analysis
+analysis:kept-latin-run	「ちょｗｗｗ落ち着きなってｗｗｗｗｗｗ」	has:ㅋㅋㅋㅋㅋㅋ	keep	analysis
+analysis:kept-latin-run	『説明雑すぎわろたｗｗ』	has:ㅋㅋ	keep	analysis
+analysis:kept-latin-run	めっちゃ笑ってるｗｗｗ	has:ㅋㅋㅋ	keep	analysis
+analysis:kept-latin-run	だれかこの状況を詳しく私に説明してくれｗｗ	has:ㅋㅋ	keep	analysis
+analysis:kept-latin-run	ざまあｗｗ	has:ㅋㅋ	keep	analysis
+analysis:kept-latin-run	「なんでわかんだよｗｗｗ」	has:ㅋㅋㅋ	keep	analysis
+analysis:kept-latin-run	一人死にかけおるやんｗｗｗ	has:ㅋㅋㅋ	keep	analysis
+analysis:kept-latin-run	相変わらず仲良いなｗｗ	has:ㅋㅋ	keep	analysis
+analysis:kept-latin-run	比較に使うp8の図だけ別に保存した。	has:p8	fix	analysis
+analysis:kept-latin-run	枠線に使うpx値は別欄にまとめた。	has: px	fix	analysis
+analysis:kept-latin-run	なおkg単位の合計は最後に記す。	has:kg	keep	analysis
+analysis:kept-latin-run	なおkmで示す距離は概算値です。	has:km	keep	analysis
+analysis:kept-latin-run	画像はうp済み。確認できたらおkで返して。	has:업	keep	analysis
+analysis:kept-latin-run	予告だけでわろたｗｗ。最後の一枚も草w	has:ㅋㅋ	keep	analysis
+analysis:kept-latin-run	図の保存形式はver2で、余白は12pxのまま。	has:ver2	keep	analysis
+analysis:kept-latin-run	「p8」の欄には3kgとだけ書いておく。	has:3kg	keep	analysis
