@@ -683,3 +683,6 @@ cx:voice-out:10	LEX-61	&&3 S+0== "声" D+0== "목소리" S+1== "L出"	set-target
 
 //= ending-presumptive-rare	after Select 50	Bare よう after a recognized potential or causative-passive is presumptive; plain passives are excluded and the selected voice stays.
 cx:ending-presumptive-rare:10	GRM-10	&&6 F+0== "conjugating" U+0== "よう" Y+0== "1자" ||2 F+0== "utterance-end" F+0== "quote-end" ||3 F+0== "potential" F+0== "causative-passive" G+0== "Ke" !1 F+0== "respectful"	set-ending "3 것이다"	これなら行けよう 갈 수 있을 것이다
+//= doumo-greeting	after Select 75	The どうも of a greeting: before thanks or an apology it is 정말 (どうもありがとう 정말 고마워, どうもすみません 정말 죄송합니다); before 初めまして it is the greeting 안녕하세요 (どうも初めまして 안녕하세요 처음 뵙겠습니다).
+cx:doumo-greeting:10	LEX-73	&&2 S+0== "どうも" ||5 S+1== "ありがとう" S+1== "ありがとうございます" S+1== "ありがと" S+1== "すみません" S+1== "失礼"	set-target "정말"	どうもありがとう 정말 고마워
+cx:doumo-greeting:20	LEX-73	&&2 S+0== "どうも" ||2 S+1== "初めまして" S+1== "はじめまして"	set-target "안녕하세요"	どうも初めまして 안녕하세요 처음 뵙겠습니다
