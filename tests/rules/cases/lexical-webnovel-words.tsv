@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+lookup:webnovel-words	スランタニア王国に古の時代より伝わる儀式。	has:옛 시대	fix	lookup
+lookup:webnovel-words	部屋に入ってきた赤髪君	has:빨간 머리	fix	lookup
+lookup:webnovel-words	その足でこの国を出ることにした。	has:그 길로	fix	lookup
+lookup:webnovel-words	断りもなく人を呼び付けた。	has:양해도 없이	fix	lookup
+lookup:webnovel-words	和と洋が見事に調和した。	has:동양과 서양	fix	lookup
+lookup:webnovel-words	色素の薄い金髪	has:색소가 옅은	fix	lookup
+lookup:webnovel-words	始業のチャイムが鳴った。	has:수업 시작 종	fix	lookup
+lookup:webnovel-words	これ見よがしに溜息を吐く。	has:보란 듯이	fix	lookup
+lookup:webnovel-words	結婚活動、略して婚活	has:줄여서	fix	lookup
+lookup:webnovel-words	かなりいい加減だと思います。	has:엉터리	fix	lookup
