@@ -325,7 +325,7 @@ if(NOT EMSCRIPTEN)
         add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/body.cpp src/core/rules/load.cpp src/core/rules/eval.cpp
             src/core/rules/match.cpp src/core/rules/attr_families_gen.cpp src/core/dict/codes.cpp
             src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp
-            src/core/output/inflect.cpp src/core/output/ko_families_gen.cpp src/core/text/utf8.cpp)
+            src/core/output/inflect.cpp src/core/output/ko_families_gen.cpp src/core/text/utf8.cpp src/core/text/unicode_gen.cpp)
         target_include_directories(hdrulec PRIVATE src)
         # The local rules live in the dictionary rows, so the checks read the program the
         # engine assembles from them; the CLI writes it once for the tests below.

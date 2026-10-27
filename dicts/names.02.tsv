@@ -18575,7 +18575,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 特務機体カタフラクト	특무기체 카타프락트	N110			GN							names.645099
 特務機関	특무기관	N110			GN							names.645100
 特務機関MJP	특무기관 MJP	N130	VGt		GN							names.645101
-特務機関森羅	특무기관 森羅	N130	VGt		GN							names.645102
+特務機関森羅	특무기관 삼라	N130	VGt		GN							names.645102
 特務艦	특무함	N110			GN							names.645103
 特務艦娘	특무함낭	N130	QPNVHn	Wb	GN							names.645104
 特務警察官玲子	특무경찰관 레이코	N130	QWK		GN						とくむけいさつかんれいこ	names.645105
@@ -40463,7 +40463,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 神バディファイト	신 버디파이트	N110			GN							names.667292
 神バンド	가미 밴드	N130	VGt		GN						かみばんど	names.667293
 神ファミリー	진 패밀리	N130	QPNVHn		GN							names.667294
-神メニュー	神메뉴	N130	QWK		GN							names.667295
+神メニュー	갓 메뉴	N130	QWK		GN							names.667295
 神ユキ	진 유키	N130	QPNVHn		GN							names.667296
 神・スライム	신 슬라임	N130	QPNVHn		GN							names.667297
 神一	카미이치	N130	QPNVHn	Wa	GN						かみいち	names.667298
@@ -61119,7 +61119,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 翔香	쇼카	N130	QPNVHn	Wb	GN							names.688237
 翔鶴	쇼우카쿠	N130	QPNVHn	Wb	GN						しょうかく	names.688238
 翔鶴型	쇼카쿠급	N130	QPNVHn	Wb	GN						しょうかくがた	names.688239
-翔鶴改二	쇼카쿠改二	N110			GN						しょうかくかいに	names.688240
+翔鶴改二	쇼카쿠 개2	N110			GN						しょうかくかいに	names.688240
 翔龍	쇼우류우	N130	QPNVHn	Wb	GN						しょうりゅう	names.688241
 翔龍子	쇼 류코	N130	QPNVHn		GN						しょうりゅうこ	names.688242
 翔龍子	쇼류시	N130	QPNVHn	Wb	GN							names.688243
@@ -73161,7 +73161,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蒼き雷霆 ガンヴォルト	푸른 뇌정 건볼트	N130	QWK		GN							names.700415
 蒼き雷霆 ガンヴォルト 鎖環	푸른 뇌정 건볼트 3	N130	QWK		GN							names.700416
 蒼き雷霆 ガンヴォルト爪	푸른 뇌정 건볼트 2	N130	QWK		GN							names.700417
-蒼き雷霆ガンヴォルト鎖環	푸른 뇌정 건볼트 鎖環	N130	QPNVHn		GN							names.700418
+蒼き雷霆ガンヴォルト鎖環	푸른 뇌정 건볼트 쇄환	N130	QPNVHn		GN							names.700418
 蒼き革命のヴァルキュリア	푸른 혁명의 발큐리아	N130	QWK		GN							names.700419
 蒼ざめた馬	창백한 말	N130	QWK		GN							names.700420
 蒼のサフィール	사피르	N130	QPNVHn	Wb	GN							names.700421
@@ -92336,7 +92336,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 辻本良三	츠지모토 료조	N110			GN						つじもと りょうぞう	names.719805
 辻本茂輝	쓰지모토 시게키	N130	QPNVHn		GN							names.719806
 辻本茂雄	쓰지모토 시게오	N110			GN						つじもとしげお	names.719807
-辻本貴則	孝則 츠지 모토	N130	QPNVHn		GN							names.719808
+辻本貴則	츠지모토 다카노리	N130	QPNVHn		GN							names.719808
 辻本達規	츠지모토 타츠노리	N130	QPNVHn		GN							names.719809
 辻本雅史	쓰지모토 마사시	N130	QPNVHn		GN							names.719810
 辻村	쓰지무라	N130	QPNVHn	Wa	GN							names.719811
@@ -99212,7 +99212,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 重戦士	중전사	N110			GN							names.726777
 重戦士ヘビィガンダム	중전사 헤비 건담	N130	QPNVHn		GN							names.726778
 重戦機エルガイム	중전기 엘가임	N130	QWK		GN							names.726779
-重戦車	중(重)전차	N110			GN							names.726780
+重戦車	중전차	N110			GN							names.726780
 重政	시게마사	N130	QPNVHn	Wb	GN							names.726781
 重政庸徳	시게마사 요토쿠	N130	QPNVHn		GN							names.726782
 重政由里恵	시게마사 유리에	N130	QPNVHn		GN						しげまさゆりえ	names.726783
@@ -109505,7 +109505,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長島滋	나가시마 시게루	N110			GN						ながしましげる	names.737120
 長島理香	나가시마 리카	N130	QPNVHn		GN							names.737121
 長島瑞穂	나가시마 미즈호	N130	QPNVHn		GN							names.737122
-長島甲子男	나가시마 甲子男	N130	QPNVHn		GN							names.737123
+長島甲子男	나가시마 기네오	N130	QPNVHn		GN							names.737123
 長島県	창다오현	N130	QCTVPl		GN							names.737124
 長島真祐	나가시마 신스케	N130	QPNVHn		GN							names.737125
 長島良三	나가시마 료조	N130	QPNVHn		GN							names.737126

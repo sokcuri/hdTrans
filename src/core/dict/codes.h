@@ -211,6 +211,11 @@ std::string MarkerClassError(std::string_view target, PartCode part);
 // in 期 (夏期 하기, 氷河期 빙하기).
 std::string VerbNounError(std::string_view key, std::string_view target, PartCode part, std::string_view sem);
 
+// Why a target cannot be Korean: it holds kana (hiragana, katakana, half-width katakana,
+// the long vowel mark ー) or kanji, which the output would show as they are. Empty for a
+// target without them; ・ and other punctuation are allowed.
+std::string JapaneseTargetError(std::string_view target);
+
 namespace internal {
 
 struct PosTag {

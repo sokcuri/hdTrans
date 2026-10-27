@@ -992,7 +992,7 @@ bool SnapshotStorage::RestoreAux(Reader& r, Snapshot& s, std::vector<LoadError>&
         LoadError e;
         e.file = RestorePath(r, folders, sourceFolders);
         const auto kind = r.Number(); e.line = r.Signed(); const auto tsv = r.Number(); e.message = r.Text();
-        if (kind > static_cast<unsigned>(LoadErrorKind::OptionalSource) ||
+        if (kind > static_cast<unsigned>(LoadErrorKind::JapaneseTarget) ||
             tsv > static_cast<unsigned>(TsvErrorKind::EmptyKeyOrId)) return false;
         e.kind = static_cast<LoadErrorKind>(kind); e.tsv = static_cast<TsvErrorKind>(tsv);
         errors.push_back(std::move(e));

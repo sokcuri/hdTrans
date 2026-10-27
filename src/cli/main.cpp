@@ -527,7 +527,7 @@ int RunMain(int argc, char** argv) {
     if (verifyDicts) {
         // Verification also fails on loaded lines whose marker family does not fit their part code
         // and on negations in 지 않 that the class of their key does not account for, and on noun lines
-        // whose target is a verb made a noun.
+        // whose target is a verb made a noun, and on lines whose target holds kana or kanji.
         const auto checked = hdTrans::dict::LoadFolders(folders, {}, true, false, hdTrans::dict::UserFiles(userPaths));
         std::size_t failed = 0;
         for (const hdTrans::dict::LoadError& e : checked.errors) {
@@ -535,7 +535,8 @@ int RunMain(int argc, char** argv) {
                 e.kind != hdTrans::dict::LoadErrorKind::MissingRuleBodies &&
                 e.kind != hdTrans::dict::LoadErrorKind::NegationEnding &&
                 e.kind != hdTrans::dict::LoadErrorKind::VerbNoun &&
-                e.kind != hdTrans::dict::LoadErrorKind::UserRow)
+                e.kind != hdTrans::dict::LoadErrorKind::UserRow &&
+                e.kind != hdTrans::dict::LoadErrorKind::JapaneseTarget)
                 continue;
             std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
             failed++;

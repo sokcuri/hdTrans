@@ -254,6 +254,25 @@ HD_TEST(VerbNounErrors) {
     }
 }
 
+HD_TEST(JapaneseTargetErrors) {
+    struct Case {
+        std::string_view target, error;
+    };
+    const Case cases[] = {
+        {"오보로 개", ""},
+        {"마감&AV@", ""},
+        {"사이토・아카리", ""},
+        {"Ez-8 ○", ""},
+        {"오보로改", "the target \"오보로改\" holds the Japanese 改; write it in Korean"},
+        {"스ィ르", "the target \"스ィ르\" holds the Japanese ィ; write it in Korean"},
+        {"포포포포~ン", "the target \"포포포포~ン\" holds the Japanese ン; write it in Korean"},
+        {"키키ｷｷ", "the target \"키키ｷｷ\" holds the Japanese ｷ; write it in Korean"},
+        {"케이크ー", "the target \"케이크ー\" holds the Japanese ー; write it in Korean"},
+        {"마감〆", "the target \"마감〆\" holds the Japanese 〆; write it in Korean"},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(hdTrans::dict::JapaneseTargetError(c.target), std::string(c.error));
+}
+
 HD_TEST(CodeTablePrefixTupleIdentity) {
     using namespace std::string_view_literals;
     struct Tuple {

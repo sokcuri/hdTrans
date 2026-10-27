@@ -1,5 +1,8 @@
 #include "core/dict/codes.h"
 
+#include "core/text/unicode.h"
+#include "core/text/utf8.h"
+
 #include <cstdint>
 #include <algorithm>
 #include <cstring>
@@ -170,6 +173,21 @@ std::string VerbNounError(std::string_view key, std::string_view target, PartCod
     }
     return "the noun target " + Quoted(target) + " is a verb made a noun; write the noun " +
            Quoted(target.substr(0, target.size() - kHagi.size()));
+}
+
+std::string JapaneseTargetError(std::string_view target) {
+    for (std::string_view rest = target; !rest.empty();) {
+        const text::Rune d = text::DecodeRune(rest);
+        const char32_t r = d.cp;
+        const bool kana = (r >= 0x3041 && r <= 0x30FA) || (r >= 0x30FC && r <= 0x30FF) || (r >= 0x31F0 && r <= 0x31FF) ||
+                          (r >= 0xFF66 && r <= 0xFF9F);
+        if (kana || r == U'〆' || text::IsKanji(r)) {
+            return "the target " + Quoted(target) + " holds the Japanese " + std::string(rest.substr(0, d.size)) +
+                   "; write it in Korean";
+        }
+        rest.remove_prefix(d.size);
+    }
+    return {};
 }
 
 }  // namespace hdTrans::dict
