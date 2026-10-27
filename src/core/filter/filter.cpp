@@ -195,7 +195,8 @@ void ReadRows(const Source& source, std::size_t ordinal, std::vector<ParsedRow>&
         const std::vector<std::u16string_view> f = Fields(line, start, true);
         if (f.size() < 3) {
             if (!source.native && !line.empty()) {
-                errors.push_back({source.name, number, "a filter line needs three tab-separated fields"});
+                errors.push_back({source.name, number, "a filter line needs three tab-separated fields",
+                                  ErrorKind::IgnoredShortFields});
             }
             continue;
         }

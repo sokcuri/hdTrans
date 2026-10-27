@@ -88,6 +88,7 @@ struct File {
     bool head = false;
     bool memory = false;
     bool strict = true;  // the policy of an accepted user source
+    bool strictOverride = false;  // a per-call policy, rather than an inherited one
 };
 
 namespace internal {
@@ -112,7 +113,7 @@ enum class LoadErrorKind : uint8_t {
     NegationEnding,     // a line loaded whose 지 않 negation fits no class of its key (NegationEndingError)
     VerbNoun,    // a line loaded whose noun target is a 하다 verb made a noun (VerbNounError)
     UserRow,     // a bad user dictionary row skipped in non-strict mode
-    OptionalSource,  // an explicit source that has not been read yet is missing
+    OptionalSource,  // a missing explicit source, or an unreadable unclassified header probe
 };
 
 // Whether an error of kind fails the load of its file; the other kinds list lines of a

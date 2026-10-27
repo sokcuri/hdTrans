@@ -215,6 +215,8 @@ bool SpeechOf(std::string_view name, Speech& out) {
 
 ConfigResult LoadConfig(std::string_view path) {
     ConfigResult result;
+    dict::internal::FileStamp stamp;
+    if (dict::internal::ReadStamp(path, stamp)) result.sourceStamp = stamp;
     const auto filePath = PathOf(path);
 #ifdef _WIN32
     std::FILE* file = _wfopen(filePath.c_str(), L"rb");

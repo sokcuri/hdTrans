@@ -26,6 +26,7 @@ namespace hdTrans::internal {
 struct FileVersion {
     bool present = false;
     dict::internal::FileStamp stamp;
+    bool headerProbeFailed = false;
     bool operator==(const FileVersion&) const = default;
 };
 
@@ -132,11 +133,13 @@ struct UserWatch {
     dict::UserSource requestedEhnd;
     std::vector<dict::UserSource> acceptedSources;
     std::optional<dict::UserSource> acceptedEhnd;
-    std::vector<dict::LoadError> ehndSourceWarnings;
     bool sourceHistorySeeded = false;
     std::optional<dict::File> memoryUser;
     std::optional<std::vector<EhndFile>> memoryEhnd;
     bool memoryEhndStrict = true;
+    bool memoryEhndStrictOverride = false;
+    std::optional<bool> userStrictOverride;
+    std::optional<bool> ehndStrictOverride;
     bool automatic = false;  // UserReload::Auto
     bool detached = false;   // no more reloads: the engine is being abandoned
     UserFilesWatch watch;
@@ -162,6 +165,8 @@ bool StartUserFileCheck(const Engine& e);
 // The errors and skipped-row warnings of the last user dictionary load.
 std::vector<dict::LoadError> UserFileErrors(const Engine& e);
 bool FilterFileFailed(const Engine& e);
+// Wrapper-serialized observation; an automatic reload in progress has no completed ticket.
+std::optional<std::uint64_t> LoadDiagnosticsVersion(const Engine& e);
 
 // Carries active source history into a replacement engine before its first Open.
 std::vector<dict::UserSource> AcceptedUserSources(const Engine& e);
@@ -173,5 +178,13 @@ void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources, std::opti
 bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,
                      const std::vector<dict::UserSource>& sources);
 bool OpenEhndSource(Engine& e, const dict::UserSource& source, const DictionaryOptions& options = {});
+
+struct ConfigResult;
+// Paths and policy use this same parse; the engine does not read the config again.
+bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,
+                     const std::vector<dict::UserSource>& sources, const ConfigResult& config);
+bool OpenEhndSource(Engine& e, const dict::UserSource& source, const ConfigResult& config,
+                    const DictionaryOptions& options = {});
+bool ReloadWithConfig(Engine& e, const ConfigResult& config, const DictionaryOptions& options = {});
 
 }  // namespace hdTrans::internal

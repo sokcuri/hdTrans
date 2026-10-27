@@ -45,7 +45,14 @@ HD_TEST(FilterLiteralRows) {
     // A replacement resumes after the text it inserted. "x\ty" with its newline has three
     // fields (layer 0); the same row at the end of the file without one has two and is
     // dropped.
-    auto f = Make({{Kind::PreFilter, "p.txt", "//comment\na\taa\t1\t0\nx\ty\nq\tQ", false}});
+    std::vector<Error> errors;
+    std::vector<std::size_t> counts;
+    auto f = Build({{Kind::PreFilter, "p.txt", "//comment\na\taa\t1\t0\nx\ty\nq\tQ", false}}, errors, &counts);
+    HD_REQUIRE(errors.size() == 1);
+    HD_CHECK(errors[0].kind == ErrorKind::IgnoredShortFields);
+    HD_CHECK_EQ(errors[0].line, 4);
+    HD_REQUIRE(counts.size() == 1);
+    HD_CHECK_EQ(counts[0], std::size_t{2});
     HD_CHECK_EQ(Run(*f, "aXa x q"), "aaXaa y q");
     HD_CHECK_EQ(Run(*f, ""), "");
     // A "//" ends the line; in the REGEX field "0//" reads 0.
@@ -56,6 +63,83 @@ HD_TEST(FilterLiteralRows) {
     HD_CHECK_EQ(Run(*f, "#"), "#");
     f = Make({{Kind::PreFilter, "p.txt", "#\tX\t1\t0\n", false}});
     HD_CHECK_EQ(Run(*f, "#"), "X");
+}
+
+HD_TEST(FilterErrorKindDefaultsToBadRow) {
+    const Error empty;
+    const Error aggregate{"p.txt", 2, "bad row"};
+    HD_CHECK(empty.kind == ErrorKind::BadRow);
+    HD_CHECK(aggregate.kind == ErrorKind::BadRow);
+}
+
+HD_TEST(FilterShortFieldsAreWarnings) {
+    for (const Kind kind : {Kind::PreFilter, Kind::PostFilter}) {
+        for (const bool native : {false, true}) {
+            for (const std::string_view ending : {"\n", "\r\n"}) {
+                const std::string text = "a\tA\t1\t0\nDictionary title" + std::string(ending) + "b\tB\t1\t0\n";
+                std::vector<Error> errors;
+                std::vector<std::size_t> counts;
+                const auto f = Build({{kind, "rows.txt", text, native}}, errors, &counts);
+                HD_REQUIRE(f != nullptr);
+                HD_REQUIRE(counts.size() == 1);
+                HD_CHECK_EQ(counts[0], std::size_t{2});
+                const Stage stage = kind == Kind::PreFilter ? Stage::Pre : Stage::Post;
+                HD_CHECK_EQ(f->Rows(stage), std::size_t{2});
+                std::vector<std::string> logs;
+                const LogSink sink{&logs, [](void* context, std::string_view message) {
+                                       static_cast<std::vector<std::string>*>(context)->emplace_back(message);
+                                   }};
+                auto toggles = f->Start();
+                std::string line = "ab";
+                f->Apply(stage, line, toggles, sink);
+                HD_CHECK_EQ(line, "AB");
+                HD_REQUIRE(logs.size() == 2);
+                HD_CHECK(logs[0].find("[rows.txt:0]") != std::string::npos);
+                HD_CHECK(logs[1].find("[rows.txt:2]") != std::string::npos);
+                if (native) {
+                    HD_CHECK(errors.empty());
+                } else {
+                    HD_REQUIRE(errors.size() == 1);
+                    HD_CHECK(errors[0].kind == ErrorKind::IgnoredShortFields);
+                    HD_CHECK_EQ(errors[0].file, "rows.txt");
+                    HD_CHECK_EQ(errors[0].line, 2);
+                    HD_CHECK_EQ(errors[0].message, "a filter line needs three tab-separated fields");
+                }
+            }
+        }
+    }
+}
+
+HD_TEST(FilterPostTitleDoesNotCountAsRow) {
+    std::vector<Error> errors;
+    std::vector<std::size_t> counts;
+    const auto f = Build({{Kind::PostFilter, "post.txt", "Dictionary title\na\tA\t0\t\n", false}}, errors, &counts);
+    HD_REQUIRE(f != nullptr);
+    HD_REQUIRE(errors.size() == 1);
+    HD_CHECK(errors[0].kind == ErrorKind::IgnoredShortFields);
+    HD_CHECK_EQ(errors[0].file, "post.txt");
+    HD_CHECK_EQ(errors[0].line, 1);
+    HD_REQUIRE(counts.size() == 1);
+    HD_CHECK_EQ(counts[0], std::size_t{1});
+    HD_CHECK_EQ(f->Rows(Stage::Post), std::size_t{1});
+    auto toggles = f->Start();
+    std::string line = "a";
+    f->Apply(Stage::Post, line, toggles);
+    HD_CHECK_EQ(line, "A");
+}
+
+HD_TEST(FilterMalformedToggleIsBadRow) {
+    std::vector<Error> errors;
+    std::vector<std::size_t> counts;
+    const auto f = Build({{Kind::PreFilter, "p.txt", "a\tA\t1\t0\n_TGL\t_DECR:T_\nb\tB\t1\t0\n", false}},
+                         errors, &counts);
+    HD_REQUIRE(f != nullptr);
+    HD_REQUIRE(errors.size() == 1);
+    HD_CHECK(errors[0].kind == ErrorKind::BadRow);
+    HD_CHECK_EQ(errors[0].line, 2);
+    HD_REQUIRE(counts.size() == 1);
+    HD_CHECK_EQ(counts[0], std::size_t{2});
+    HD_CHECK_EQ(Run(*f, "ab"), "AB");
 }
 
 HD_TEST(FilterAcceptedSourceCounts) {
@@ -188,10 +272,14 @@ HD_TEST(FilterRejectsBadRegex) {
     std::vector<Error> errors;
     auto f = Make({{Kind::PreFilter, "p.txt", "x\ty\t1\t0\n(a\tc\t1\t1\n", false}}, &errors);
     HD_CHECK_EQ(Shown(errors), "p.txt:2: regex rejected (missing closing parenthesis at 2): (a");
+    HD_REQUIRE(errors.size() == 1);
+    HD_CHECK(errors[0].kind == ErrorKind::BadRow);
     HD_CHECK_EQ(Run(*f, "ax"), "ay");
     errors.clear();
     Make({{Kind::SkipLayer, "s.txt", "PRE\t1\t[a\n", false}}, &errors);
     HD_CHECK_EQ(Shown(errors), "s.txt:1: regex rejected (missing terminating ] for character class at 2): [a");
+    HD_REQUIRE(errors.size() == 1);
+    HD_CHECK(errors[0].kind == ErrorKind::BadRow);
 }
 
 HD_TEST(FilterApplicationLogs) {
@@ -285,6 +373,47 @@ HD_TEST(FilterSkipLayerLogs) {
     HD_CHECK_EQ(logs[0], "PreSkipLayer : 0005, 6\n");
 }
 
+HD_TEST(FilterUserDictShortFieldsAreWarnings) {
+    for (const std::string_view ending : {"\n", "\r\n"}) {
+        const std::string text = "猫\t고양이\t1\nDictionary title" + std::string(ending) + "犬\t개\t1\n";
+        std::vector<Error> errors;
+        std::vector<std::size_t> counts;
+        const auto f = Build({{Kind::UserDict, "UserDict.txt", text, false}}, errors, &counts);
+        HD_REQUIRE(f != nullptr);
+        HD_REQUIRE(errors.size() == 1);
+        HD_CHECK(errors[0].kind == ErrorKind::IgnoredShortFields);
+        HD_CHECK_EQ(errors[0].file, "UserDict.txt");
+        HD_CHECK_EQ(errors[0].line, 2);
+        HD_CHECK_EQ(errors[0].message, "a UserDict line needs two tab-separated fields");
+        HD_REQUIRE(counts.size() == 1);
+        HD_CHECK_EQ(counts[0], std::size_t{2});
+        const dict::Dict* user = f->User();
+        HD_REQUIRE(user != nullptr);
+        HD_CHECK_EQ(user->Len(), std::size_t{2});
+        std::string cat, dog;
+        for (const dict::Record& r : user->Records("猫")) cat += r.target;
+        for (const dict::Record& r : user->Records("犬")) dog += r.target;
+        HD_CHECK_EQ(cat, "고양이");
+        HD_CHECK_EQ(dog, "개");
+    }
+}
+
+HD_TEST(FilterUserDictEmptyKeyIsBadRow) {
+    std::vector<Error> errors;
+    std::vector<std::size_t> counts;
+    const auto f = Build({{Kind::UserDict, "UserDict.txt", "猫\t고양이\t1\n\t개\t1\n犬\t개\t1\n", false}},
+                         errors, &counts);
+    HD_REQUIRE(f != nullptr);
+    HD_REQUIRE(errors.size() == 1);
+    HD_CHECK(errors[0].kind == ErrorKind::BadRow);
+    HD_CHECK_EQ(errors[0].line, 2);
+    HD_CHECK_EQ(errors[0].message, "a UserDict line without a key");
+    HD_REQUIRE(counts.size() == 1);
+    HD_CHECK_EQ(counts[0], std::size_t{2});
+    HD_REQUIRE(f->User() != nullptr);
+    HD_CHECK_EQ(f->User()->Len(), std::size_t{2});
+}
+
 HD_TEST(FilterUserDict) {
     std::vector<Error> errors;
     auto f = Make({{Kind::UserDict, "UserDict_a.txt",
@@ -294,6 +423,9 @@ HD_TEST(FilterUserDict) {
                   &errors);
     HD_CHECK_EQ(Shown(errors), "UserDict_a.txt:5: the key is longer than 30 bytes in CP932\n"
                                "UserDict_a.txt:6: a UserDict line needs two tab-separated fields");
+    HD_REQUIRE(errors.size() == 2);
+    HD_CHECK(errors[0].kind == ErrorKind::BadRow);
+    HD_CHECK(errors[1].kind == ErrorKind::IgnoredShortFields);
     const dict::Dict* user = f->User();
     HD_REQUIRE(user != nullptr);
     HD_CHECK_EQ(user->Len(), std::size_t{3});

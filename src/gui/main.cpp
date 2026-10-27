@@ -433,6 +433,7 @@ void ReportError(App& app, const wchar_t* message) {
     const wchar_t* kind = CurrentPage(app) == kDictsPage ? L"사전" : CurrentPage(app) == kDocsPage ? L"문서" : L"엔진";
     AddLog(app, kind, message, std::wstring(kind) + L" 오류");
     if (app.selftest) std::fprintf(stderr, "GUI: %s\n", Utf8(message).c_str());
+    else MessageBoxW(app.main, message, L"hdTrans", MB_OK | MB_ICONERROR);
 }
 
 std::vector<std::string> UserSources(const std::string& dir) {
@@ -542,9 +543,14 @@ void CommitSettings(App& app, const hdTrans::internal::Config& settings) {
 }
 
 bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, const std::string& dir,
-                      const std::string& configPath, const hdTrans::internal::FileVersion& configVersion, bool configChanged) {
+                      const std::string& configPath, hdTrans::internal::FileVersion configVersion) {
     const bool initial = !app.engine || !app.engine->loaded();
-    const auto& settings = initial || configChanged ? config.settings : app.settings;
+    if (config.sourceStamp) {
+        configVersion.present = true;
+        configVersion.stamp = *config.sourceStamp;
+    }
+    const bool configChanged = configVersion != app.loadedUserVersion.config;
+    const auto& settings = config.settings;
     const bool newSources = initial || settings.userdict != app.settings.userdict;
     const auto dirs = initial || settings.dicts != app.settings.dicts ?
         settings.dicts.value_or(std::vector<std::string>{hdTrans::dict::ShippedFolder(dir)}) : app.engineDictDirs;
@@ -558,10 +564,11 @@ bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, c
     const auto userPaths = ActiveUserPaths(sources);
     // GUI edits change paths, not whether their source came from YAML.
     const auto requested = RequestedSources(userPaths, settings.userdict.has_value());
-    const std::string ehndDir = initial || settings.useEhnd != app.settings.useEhnd || settings.ehnd != app.settings.ehnd ?
+    const bool newEhnd = initial || settings.useEhnd != app.settings.useEhnd || settings.ehnd != app.settings.ehnd;
+    const std::string ehndDir = newEhnd ?
         (settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "") : app.engineEhndDir;
     auto userVersion = hdTrans::internal::UserVersionOf(requested, configPath);
-    // The frontend parse and core strict resolver may read different in-flight edits.
+    // Without a parse-entry stamp, retain the conservative pre-parse observation.
     userVersion.config = configVersion;
     const auto ehndVersion = hdTrans::internal::FolderVersionOf(ehndDir);
     const auto report = [&](const hdTrans::Engine& engine, bool loaded) {
@@ -583,7 +590,7 @@ bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, c
     }
     std::unique_ptr<hdTrans::Engine> candidate;
     hdTrans::Engine* attempt = app.engine.get();
-    if (initial || configChanged) {
+    if (configChanged || newEhnd || settings.reference != app.settings.reference) {
         hdTrans::EngineOptions options;
         options.defaultStrictDict = false;
         options.configPath = configPath;
@@ -596,12 +603,13 @@ bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, c
         hdTrans::dict::UserSource ehndSource;
         ehndSource.path = ehndDir;
         ehndSource.explicitPath = settings.useEhnd && settings.ehnd.has_value();
-        hdTrans::internal::OpenEhndSource(*candidate, ehndSource);
+        hdTrans::internal::OpenEhndSource(*candidate, ehndSource, config);
         attempt = candidate.get();
     }
-    bool loaded = candidate ? hdTrans::internal::OpenUserSources(*attempt, dirs, false, requested) :
-        (userPaths != app.engineUserPaths ? hdTrans::internal::OpenUserSources(*attempt, app.engineDictDirs, false, requested) : attempt->Reload());
-    if (loaded && candidate) {
+    const bool reconfigure = candidate || newSources || dirs != app.engineDictDirs || userPaths != app.engineUserPaths;
+    bool loaded = reconfigure ? hdTrans::internal::OpenUserSources(*attempt, dirs, false, requested, config) :
+        hdTrans::internal::ReloadWithConfig(*attempt, config);
+    if (loaded && candidate && !initial) {
         const auto errors = hdTrans::internal::UserFileErrors(*attempt);
         loaded = std::none_of(errors.begin(), errors.end(), [](const auto& error) { return hdTrans::dict::FailsLoad(error.kind); }) &&
                  !hdTrans::internal::FilterFileFailed(*attempt);
@@ -654,7 +662,7 @@ bool LoadEngine(App& app, std::string dir = {}) {
     }
     const std::string configPath = hdTrans::dict::ConfigFile(dir);
     const auto version = hdTrans::internal::VersionOf(configPath);
-    return ReadDictionaries(app, hdTrans::internal::LoadConfig(configPath), dir, configPath, version, true);
+    return ReadDictionaries(app, hdTrans::internal::LoadConfig(configPath), dir, configPath, version);
 }
 
 // Reloads changed sources before translation; unchanged healthy sources do not reload.
@@ -671,7 +679,7 @@ bool ReadyEngine(App& app) {
     }
     if (!reload && !pending && userVersion == app.loadedUserVersion && ehndVersion == app.loadedEhndVersion) return true;
     return ReadDictionaries(app, hdTrans::internal::LoadConfig(app.engineConfigPath), app.engineModuleDir,
-                            app.engineConfigPath, userVersion.config, userVersion.config != app.loadedUserVersion.config);
+                            app.engineConfigPath, userVersion.config);
 }
 
 gui::TranslationOptions ConfiguredOptions(const App& app, gui::TranslationOptions options) {
@@ -1837,6 +1845,10 @@ bool SelfTestConfig(App& app, const fs::path& folder) {
     if (!Check(!error, "remove optional config")) return false;
     app.engine.reset();
     if (!Check(LoadEngine(app, programDir), "load default mixed-case data layout")) return false;
+    const auto* withoutConfig = app.engine.get();
+    app.reloadDicts = true;
+    ok = Check(ReadyEngine(app) && app.engine.get() == withoutConfig,
+               "reload without a config file reuses the active engine") && ok;
     const wchar_t* restoredCache = _wgetenv(L"HDTRANS_CACHE_DIR");
     ok = Check(previousCache ? restoredCache && *previousCache == restoredCache : !restoredCache,
                "GUI restores cache environment") && ok;
@@ -2016,37 +2028,95 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     ok = Check(afterOptions.output == uiOptions.output && afterOptions.wholeDocument == uiOptions.wholeDocument &&
                afterOptions.skipBlankLines == uiOptions.skipBlankLines && app.userSources == app.engineUserPaths,
                "config reload refreshes committed source rows without resetting translation controls") && ok;
-    const auto publishedVersion = app.loadedUserVersion;
     const auto publishedSettings = app.settings;
     app.engine.reset();
     ClearLogs(app);
     const HANDLE blockedInitial = CreateFileW(nextUser.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (!Check(blockedInitial != INVALID_HANDLE_VALUE, "deny a user file during the first candidate Open")) return false;
-    const bool rejectedInitialUser = !LoadEngine(app, Utf8(program.native()));
+    const bool loadedInitialUser = LoadEngine(app, Utf8(program.native()));
     CloseHandle(blockedInitial);
-    ok = Check(rejectedInitialUser && !app.engine && app.reloadDicts.load() && !app.error.empty() &&
-               app.loadedUserVersion == publishedVersion && app.settings.cache == publishedSettings.cache &&
-               std::none_of(app.logEntries.begin(), app.logEntries.end(), [](const auto& entry) { return entry.kind == L"INFO"; }) &&
-               LogContains(app, L"custom-live.txt"), "initial typed fatal candidate cannot publish a subset or its INFO") && ok;
-    if (!Check(LoadEngine(app, Utf8(program.native())), "recover the initial user-file load")) return false;
+    if (!Check(loadedInitialUser && app.engine && app.engine->loaded(), "initial unreadable user file does not block base Open")) return false;
+    ok = Check(!app.reloadDicts.load() && app.error.empty() && app.settings.cache == publishedSettings.cache &&
+               translate() == "BASE_STUDENT BASE_CAT LIVE_DOG" &&
+               std::any_of(app.logEntries.begin(), app.logEntries.end(), [](const auto& entry) { return entry.kind == L"INFO"; }) &&
+               LogContains(app, L"custom-live.txt"), "initial Open keeps base and healthy Ehnd with the rejected user file logged") && ok;
+    app.reloadDicts = true;
+    if (!Check(ReadyEngine(app) && translate() == "USER_LIVE BASE_CAT LIVE_DOG", "reload the recovered user file")) return false;
+    const fs::path badEncoding = nextUser.parent_path() / L"bad-encoding.txt";
+    std::string encodingConfig = nextConfig;
+    encodingConfig.replace(encodingConfig.find("userdict: [custom-live.txt]"), sizeof("userdict: [custom-live.txt]") - 1,
+                           "userdict: [custom-live.txt, bad-encoding.txt]");
+    if (!Check(WriteFixture(badEncoding, "\xff\n") && WriteFixture(config, encodingConfig), "write an invalid UTF-8 user sibling")) return false;
+    app.engine.reset();
+    ClearLogs(app);
+    if (!Check(LoadEngine(app, Utf8(program.native())) && app.engine && app.engine->loaded(), "invalid UTF-8 user file permits startup")) return false;
+    ok = Check(app.error.empty() && translate() == "USER_LIVE BASE_CAT LIVE_DOG" && LogContains(app, L"bad-encoding.txt"),
+               "cold skip mode keeps the good user file and base with the bad sibling diagnosed") && ok;
+    const fs::path badStrictUser = nextUser.parent_path() / L"strict-user.txt";
+    std::string strictUserConfig = nextConfig;
+    strictUserConfig.replace(strictUserConfig.find("userdict: [custom-live.txt]"), sizeof("userdict: [custom-live.txt]") - 1,
+                             "userdict: [custom-live.txt, strict-user.txt]");
+    strictUserConfig.replace(strictUserConfig.find("strict_dict: false"), sizeof("strict_dict: false") - 1, "strict_dict: true");
+    if (!Check(WriteFixture(badStrictUser, "猫\tREJECTED_CAT\tn\n学生\tREJECTED_STUDENT\tunknown-tag\n") &&
+               WriteFixture(config, strictUserConfig), "write a strict user-file rejection")) return false;
+    app.engine.reset();
+    ClearLogs(app);
+    if (!Check(LoadEngine(app, Utf8(program.native())) && app.engine && app.engine->loaded(), "strict user-file rejection permits startup")) return false;
+    ok = Check(app.error.empty() && app.settings.strictDict == true && translate() == "USER_LIVE BASE_CAT LIVE_DOG" &&
+               LogContains(app, L"strict-user.txt"), "strict cold Open rejects the whole bad user file, not the engine") && ok;
+    if (!Check(WriteFixture(config, nextConfig), "restore the healthy user source configuration")) return false;
+    app.engine.reset();
+    if (!Check(LoadEngine(app, Utf8(program.native())), "load the healthy source stack before active strict rollback")) return false;
     const auto beforeStrictFilter = app.engine->Dictionaries();
     const auto beforeStrictFilters = app.engine->Filters();
     const auto* beforeStrictEngine = app.engine.get();
     std::string strictConfig = nextConfig;
     strictConfig.replace(strictConfig.find("strict_dict: false"), sizeof("strict_dict: false") - 1, "strict_dict: true");
     const fs::path rejectedFilter = nextEhnd / L"PreFilter_99.txt";
-    if (!Check(WriteFixture(rejectedFilter, "(\tBAD_PRE\t10\t1\n") && WriteFixture(config, strictConfig),
+    if (!Check(WriteFixture(rejectedFilter, "学生\t犬\t10\t0\n(\tBAD_PRE\t10\t1\n") && WriteFixture(config, strictConfig),
                "write a strict filter-file rejection")) return false;
     ok = Check(!ReadyEngine(app) && app.engine.get() == beforeStrictEngine && app.engine->Dictionaries() == beforeStrictFilter &&
                app.engine->Filters() == beforeStrictFilters && app.settings.strictDict == publishedSettings.strictDict &&
                LogContains(app, L"PreFilter_99.txt"), "strict filter candidate keeps the old engine and settings") && ok;
     app.engine.reset();
-    ok = Check(!LoadEngine(app, Utf8(program.native())) && !app.engine && app.reloadDicts.load() &&
-               app.settings.strictDict == publishedSettings.strictDict,
-               "initial Open cannot publish an optional-compatible strict filter-file failure") && ok;
+    ClearLogs(app);
+    if (!Check(LoadEngine(app, Utf8(program.native())) && app.engine && app.engine->loaded(), "strict filter-file rejection permits base Open")) return false;
+    ok = Check(!app.reloadDicts.load() && app.error.empty() && app.settings.strictDict == true &&
+               hdTrans::internal::FilterFileFailed(*app.engine) && translate() == "USER_LIVE BASE_CAT LIVE_DOG" &&
+               LogContains(app, L"PreFilter_99.txt"), "initial strict filter failure excludes its whole file and logs the diagnostic") && ok;
     if (!Check(WriteFixture(rejectedFilter, "ZZSTRICTCONTROL\tSAFE\t10\t0\n"), "repair the rejected strict filter file")) return false;
-    ok = Check(LoadEngine(app, Utf8(program.native())) && !hdTrans::internal::FilterFileFailed(*app.engine) && app.error.empty(),
-               "a healthy filter candidate succeeds after strict rejection") && ok;
+    app.reloadDicts = true;
+    ok = Check(ReadyEngine(app) && !hdTrans::internal::FilterFileFailed(*app.engine) && app.error.empty(),
+               "a healthy filter reload succeeds after strict rejection") && ok;
+    const auto cheapConfigVersion = app.loadedUserVersion.config;
+    const auto* beforeParsedEngine = app.engine.get();
+    const fs::path parsedUser = nextUser.parent_path() / L"parsed-user.txt";
+    std::string parsedConfig = nextConfig;
+    parsedConfig.replace(parsedConfig.find("userdict: [custom-live.txt]"), sizeof("userdict: [custom-live.txt]") - 1,
+                         "userdict: [parsed-user.txt]");
+    if (!Check(WriteFixture(parsedUser, "学生\tPARSED_STUDENT\tn\n猫\tREJECTED_CAT\tunknown-tag\n") &&
+               WriteFixture(config, parsedConfig), "change config after the cheap metadata observation")) return false;
+    const auto parsed = hdTrans::internal::LoadConfig(Utf8(config.native()));
+    if (!Check(parsed.sourceStamp && ReadDictionaries(app, parsed, Utf8(program.native()), Utf8(config.native()), cheapConfigVersion),
+               "parse-entry stamp replaces the stale cheap config observation")) return false;
+    ok = Check(app.engine.get() != beforeParsedEngine && app.settings.strictDict == false &&
+               app.engineUserPaths == std::vector<std::string>{Utf8(parsedUser.native())} &&
+               translate() == "PARSED_STUDENT BASE_CAT LIVE_DOG" && LogContains(app, L"parsed-user.txt"),
+               "one parsed config supplies replacement paths and skip policy") && ok;
+    const auto* parsedEngine = app.engine.get();
+    const auto parsedDictionaries = app.engine->Dictionaries();
+    const auto parsedFilters = app.engine->Filters();
+    const auto parsedVersion = app.loadedUserVersion;
+    std::string laterConfig = parsedConfig;
+    laterConfig.replace(laterConfig.find("strict_dict: false"), sizeof("strict_dict: false") - 1, "strict_dict: true");
+    if (!Check(WriteFixture(config, laterConfig), "change config after parsing")) return false;
+    ok = Check(!ReadDictionaries(app, parsed, Utf8(program.native()), Utf8(config.native()), parsedVersion.config) &&
+               app.engine.get() == parsedEngine && app.engine->Dictionaries() == parsedDictionaries && app.engine->Filters() == parsedFilters &&
+               app.loadedUserVersion == parsedVersion && app.settings.strictDict == false && app.reloadDicts.load() &&
+               translate() == "PARSED_STUDENT BASE_CAT LIVE_DOG", "a stale supplied parse cannot publish paths or policy") && ok;
+    if (!Check(WriteFixture(parsedUser, "学生\tPARSED_REPAIRED\tn\n"), "repair the user file for the new strict config")) return false;
+    ok = Check(ReadyEngine(app) && app.settings.strictDict == true && app.error.empty() &&
+               translate() == "PARSED_REPAIRED BASE_CAT LIVE_DOG", "the next request reparses config and recovers") && ok;
     NotifyClick(app.logs, IDC_LOG_CLEAR);
     ok = Check(ListView_GetItemCount(logList) == 0 && ControlText(app.main, IDC_LOG_STATUS).empty(), "clear log entries and status") && ok;
     for (std::size_t index = 0; index <= kLogLimit; ++index) AddLog(app, L"엔진", std::to_wstring(index));
@@ -2199,10 +2269,19 @@ bool SelfTestOptionalSources(App& app, const fs::path& folder) {
     const std::string explicitConfig = common + "userdict: missing-user.txt\nehnd: missing-ehnd\n";
     if (!Check(WriteFixture(config, explicitConfig), "write explicit missing-source control")) return false;
     app.engine.reset();
+    ClearLogs(app);
     if (!Check(LoadEngine(app, programDir), "explicit missing sources do not fail initial strict loading")) return false;
-    ok = Check(!hdTrans::internal::FilterFileFailed(*app.engine) && LogContains(app, L"missing-user.txt") &&
-               LogContains(app, L"missing-ehnd") && ControlText(app.main, IDC_LOG_STATUS).find(L"경고") != std::wstring::npos,
-               "explicit missing-source warnings are visible and nonfatal") && ok;
+    const auto userWarnings = app.engine->UserFileError();
+    const auto filterWarnings = app.engine->FilterErrors();
+    const auto ehndLogRows = std::count_if(app.logEntries.begin(), app.logEntries.end(), [](const auto& entry) {
+        return entry.kind == L"사전" && entry.message.find(L"missing-ehnd") != std::wstring::npos;
+    });
+    ok = Check(!hdTrans::internal::FilterFileFailed(*app.engine) && userWarnings.find("missing-user.txt") != std::string::npos &&
+               userWarnings.find("missing-ehnd") == std::string::npos && filterWarnings.size() == 1 &&
+               filterWarnings.front().find("missing-ehnd") != std::string::npos && ehndLogRows == 1 &&
+               LogContains(app, L"missing-user.txt") && LogContains(app, L"missing-ehnd") &&
+               ControlText(app.main, IDC_LOG_STATUS) == L"사전 경고 2건",
+               "explicit missing-source warnings use separate getters and log each warning once without failing startup") && ok;
     fs::create_directories(ehnd, error);
     if (!Check(!error && WriteFixture(userFile, "猫\tUSER_LOADED\n") &&
                WriteFixture(ehnd / L"UserDict_10.txt", "犬\tEHND_LOADED\t0\n"), "create previously missing sources")) return false;

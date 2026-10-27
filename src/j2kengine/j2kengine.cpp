@@ -56,8 +56,7 @@ std::unique_ptr<hdTrans::Engine> g_engine;
 std::unique_ptr<hdTrans::Session> g_session;
 std::weak_ptr<const hdTrans::dict::Snapshot> g_loggedSnapshot;
 std::weak_ptr<const hdTrans::filter::Filters> g_loggedFilters;
-std::string g_loggedDiagnostics;
-std::optional<std::uint64_t> g_loggedSourceGeneration;
+std::optional<std::uint64_t> g_loggedDiagnosticsVersion;
 
 // Queued state changes run before new translations.
 class AdminLock {
@@ -108,25 +107,25 @@ hdTrans::internal::ConfigResult ReadConfig(const std::string& path) {
     return config;
 }
 
-// Writes diagnostics and loaded source information to the debugger output.
+// Writes diagnostics only when a completed load changes, including failed loads.
 void LogLoadErrors(const hdTrans::Engine& engine, bool force, bool loaded) {
-    std::string diagnostics = engine.UserFileError();
-    for (const std::string& line : engine.FilterErrors()) diagnostics += (diagnostics.empty() ? "" : "\n") + line;
+    const auto ticket = hdTrans::internal::LoadDiagnosticsVersion(engine);
+    if (!ticket) return;
     const auto snapshot = engine.Dictionaries();
     const auto filters = engine.Filters();
-    const bool changed = force || snapshot != g_loggedSnapshot.lock() || filters != g_loggedFilters.lock();
-    if (!diagnostics.empty() && (changed || diagnostics != g_loggedDiagnostics))
+    const bool sourcesChanged = force || snapshot != g_loggedSnapshot.lock() || filters != g_loggedFilters.lock();
+    if (!sourcesChanged && g_loggedDiagnosticsVersion == ticket) return;
+    std::string diagnostics = engine.UserFileError();
+    for (const std::string& line : engine.FilterErrors()) diagnostics += (diagnostics.empty() ? "" : "\n") + line;
+    const auto info = loaded && sourcesChanged ? hdTrans::internal::LoadedSourceInfo(engine) : hdTrans::internal::LoadInfo{};
+    if (hdTrans::internal::LoadDiagnosticsVersion(engine) != ticket) return;
+    if (!diagnostics.empty())
         OutputDebugStringW(WideFromUtf8("J2KEngine: dictionary diagnostics:\n" + diagnostics + "\n").c_str());
-    if (loaded) {
-        const auto info = hdTrans::internal::LoadedSourceInfo(engine);
-        if (changed || g_loggedSourceGeneration != info.generation) {
-            const auto programDir = hdTrans::frontend::ModuleDirectory();
-            for (const auto& file : info.files)
-                OutputDebugStringW(WideFromUtf8(hdTrans::frontend::FormatLoadFileInfo(file, programDir) + "\n").c_str());
-        }
-        g_loggedSourceGeneration = info.generation;
-    }
-    g_loggedDiagnostics = std::move(diagnostics);
+    if (!loaded) return;
+    const auto programDir = hdTrans::frontend::ModuleDirectory();
+    for (const auto& file : info.files)
+        OutputDebugStringW(WideFromUtf8(hdTrans::frontend::FormatLoadFileInfo(file, programDir) + "\n").c_str());
+    g_loggedDiagnosticsVersion = ticket;
     g_loggedSnapshot = snapshot;
     g_loggedFilters = filters;
 }
@@ -182,8 +181,8 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     const hdTrans::EngineOptions dictionaryOptions{std::nullopt, false, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
                                             hdTrans::UserReload::Auto, dictionaryOptions);
-    const bool loaded = hdTrans::internal::OpenEhndSource(*e, ehndSource) &&
-                        hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources) && !HasFatalLoadError(*e);
+    static_cast<void>(hdTrans::internal::OpenEhndSource(*e, ehndSource, config));
+    const bool loaded = hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources, config);
     AdminLock lock;
     if (generation != g_generation) return 0;
     LogLoadErrors(*e, true, loaded);
@@ -205,8 +204,7 @@ int __stdcall J2K_Terminate() {
     g_engine.reset();
     g_loggedSnapshot.reset();
     g_loggedFilters.reset();
-    g_loggedDiagnostics.clear();
-    g_loggedSourceGeneration.reset();
+    g_loggedDiagnosticsVersion.reset();
     static_cast<void>(g_cache.Apply(std::nullopt));
     return 1;
 }
@@ -272,8 +270,8 @@ void __stdcall J2K_ReloadUserDict() {
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
                                             hdTrans::UserReload::Auto, dictionaryOptions);
     hdTrans::internal::SeedUserSources(*e, std::move(userSources), std::move(acceptedEhnd));
-    const bool loaded = hdTrans::internal::OpenEhndSource(*e, ehndSource) &&
-                        hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources) && !HasFatalLoadError(*e);
+    const bool loaded = hdTrans::internal::OpenEhndSource(*e, ehndSource, config) &&
+                        hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources, config) && !HasFatalLoadError(*e);
     AdminLock lock;
     if (generation != g_generation) return;
     LogLoadErrors(*e, true, loaded);

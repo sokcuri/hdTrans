@@ -44,6 +44,26 @@ struct TempConfig {
 
 }  // namespace
 
+HD_TEST(ConfigCarriesItsParseEntryStamp) {
+    TempConfig file;
+    const auto missing = hdTrans::internal::LoadConfig(file.path);
+    HD_CHECK(!missing.found);
+    HD_CHECK(!missing.sourceStamp);
+    HD_CHECK(missing.diagnostics.empty());
+    const std::string text = "strict_dict: false\n";
+    const auto first = file.Load(text);
+    HD_CHECK(first.found);
+    HD_REQUIRE(first.sourceStamp.has_value());
+    HD_CHECK_EQ(first.sourceStamp->size, static_cast<std::uint64_t>(text.size()));
+    hdTrans::dict::internal::FileStamp current;
+    HD_REQUIRE(hdTrans::dict::internal::ReadStamp(file.path, current));
+    HD_CHECK(current == *first.sourceStamp);
+    const auto second = file.Load("strict_dict: true\n# changed version\n");
+    HD_REQUIRE(second.sourceStamp.has_value());
+    HD_CHECK(*second.sourceStamp != *first.sourceStamp);
+    HD_CHECK(second.settings.strictDict == true);
+}
+
 HD_TEST(ConfigAllKeys) {
     TempConfig file;
     const auto result = file.Load(

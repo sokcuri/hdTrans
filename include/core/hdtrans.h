@@ -35,13 +35,14 @@ typedef struct hdTrans_Options {
     uint32_t strict_dict; /* 0: config/default, 1: strict, 2: skip bad rows */
 } hdTrans_Options;
 
-/* Sets options for following dictionary loads, including before Initialize.
+/* Sets options for following dictionary loads, including before Initialize, without
+ * canceling a load already in progress. Terminate resets these options.
  * NULL or size 0 resets defaults; size 1..3 is invalid. Fields absent from size
  * use defaults; future trailing fields are ignored. Returns 0 or -1 for invalid
  * size/values, leaving the options unchanged on error. */
 HDTRANS_API int hdTrans_SetOptions(const hdTrans_Options* options);
 
-/* Releases the session and dictionaries. Repeated calls are harmless; Initialize may be called again. */
+/* Releases the session and dictionaries and resets options. Repeated calls are harmless. */
 HDTRANS_API void hdTrans_Terminate(void);
 
 /* Translates text[0..n), one or more "\n"-separated lines, in the process session.

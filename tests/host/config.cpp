@@ -125,15 +125,17 @@ void CheckDictionaryOptions(const std::filesystem::path& config, const std::file
     Write(config, base + "strict_dict: false\n");
     Check(hdTrans_Reload() == 0, "reload rereads skip YAML");
     for (int round = 0; round < 3; ++round) {
-        Check(SetStrict(1) == 0, "prepare concurrent strict candidate");
+        Write(user, "犬\tOPTION_NEW\n");
+        Check(SetStrict(1) == 0, "prepare valid concurrent strict candidate");
         std::atomic<bool> started{false};
-        int status = 0;
+        int status = -1;
         std::thread candidate([&] { started = true; status = hdTrans_Reload(); });
         while (!started) std::this_thread::yield();
-        Check(SetStrict(2) == 0, "replace pending candidate option");
+        Check(SetStrict(2) == 0, "set the following load option without canceling this load");
         candidate.join();
-        Check(status == 0 || status == -1, "concurrent reload status");
-        Check(hdTrans_Reload() == 0, "candidate cannot overwrite newer skip request");
+        Check(status == 0, "SetOptions does not cancel a valid in-flight load");
+        Write(user, "犬\tOPTION_NEW\n猫\n");
+        Check(hdTrans_Reload() == 0, "published candidate preserves the newer skip request");
         Check(Translate("犬") == "OPTION_NEW", "newer option keeps good rows");
     }
     Write(user, "犬\tOPTION_NEW\n");
@@ -151,11 +153,96 @@ void CheckDictionaryOptions(const std::filesystem::path& config, const std::file
     Check(hdTrans_OpenEhnd("") == 0, "drop malformed Ehnd with stored strict option");
     Write(user, "犬\tOPTION_NEW\n猫\n");
     hdTrans_Terminate();
-    Check(hdTrans_Initialize(nullptr) == -1, "stored strict option applies on reinitialization");
-    Check(Errors().find("options-user.txt:2: empty KR") != std::string::npos, "failed initial load diagnostics retained");
-    Check(SetStrict(2) == 0, "set options while uninitialized");
-    Check(hdTrans_Initialize(nullptr) == 0, "initialize inherits stored skip option");
+    Check(hdTrans_Initialize(nullptr) == 0, "Terminate resets strict override to YAML skip");
+    Check(Translate("犬") == "OPTION_NEW", "reset override permits the good user row");
+    Check(Errors().find("options-user.txt:2: empty KR") != std::string::npos, "initial skipped-row warning remains queryable");
+    hdTrans_Terminate();
+    Check(SetStrict(1) == 0, "set strict before initialization");
+    Check(hdTrans_Initialize(nullptr) == 0, "strict initial file exclusion still permits the base");
+    Check(Translate("猫") == "고양이" && Translate("犬") != "OPTION_NEW", "strict cold load excludes the whole bad user file");
+    Check(Errors().find("options-user.txt:2: empty KR") != std::string::npos, "excluded initial file diagnostic remains queryable");
+    hdTrans_Terminate();
+    Check(SetStrict(2) == 0, "set skip while uninitialized");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize uses the pending skip option");
+    hdTrans_Terminate();
+    Write(config, base + "strict_dict: true\n");
+    Check(hdTrans_Initialize(nullptr) == 0, "Terminate also resets skip override to YAML strict");
+    Check(Translate("猫") == "고양이" && Translate("犬") != "OPTION_NEW", "reset skip override excludes the malformed file");
     Check(hdTrans_SetOptions(nullptr) == 0, "reset stored options after test");
+}
+
+void CheckColdExclusions(const std::filesystem::path& config, const std::filesystem::path& fixtures) {
+    const auto user = fixtures / "cold-bad.txt";
+    const auto ehnd = fixtures / "cold-ehnd";
+    std::error_code error;
+    std::filesystem::create_directory(ehnd, error);
+    Check(!error, "create cold Ehnd fixture");
+    Write(fixtures / "cold-good.txt", "犬\tCOLD_KEEP\n");
+    const std::string base = "dicts: fixtures/first\nuserdict: [fixtures/cold-good.txt, fixtures/cold-bad.txt]\n"
+                             "ehnd: fixtures/cold-ehnd\ncache: off\nstrict_dict: true\n";
+    hdTrans_Terminate();
+    Write(config, "dicts: fixtures/first\nuserdict: ''\nehnd: ''\ncache: off\nstrict_dict: true\n");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize a base-only engine with no accepted optional sources");
+    Write(user, "鳥\tEXCLUDED\n犬\t개\tzzz\n");
+    Write(config, "dicts: fixtures/second\nuserdict: fixtures/cold-bad.txt\nehnd: ''\ncache: off\nstrict_dict: true\n");
+    Check(hdTrans_Reload() == -1, "base-only active reload rejects a new bad optional file");
+    Check(Errors().find("cold-bad.txt:2: unknown POS") != std::string::npos, "base-only failure reports the new optional file");
+    Check(Translate("猫") == "고양이", "empty optional history still retains the old base on reload failure");
+    Check(hdTrans_Initialize(nullptr) == -1, "base-only active Initialize rejects a new bad optional file");
+    Check(Translate("猫") == "고양이", "empty optional history still retains the old base on Initialize failure");
+    const struct Case { std::string user; std::string filter; const char* diagnostic; bool filterError; } cases[] = {
+        {"鳥\tEXCLUDED\n犬\t개\tzzz\n", "// empty\n", "cold-bad.txt:2: unknown POS", false},
+        {"鳥\tEXCLUDED\n犬\t\xB0\xED\n", "// empty\n", "cold-bad.txt: invalid UTF-8", false},
+        {"鳥\tCOLD_USER\n", "title\n猫\t犬\t1\t0\n(\tbad\t1\t1\n", "PreFilter_cold.txt:1:", true},
+    };
+    for (const auto& test : cases) {
+        hdTrans_Terminate();
+        Write(config, base);
+        Write(user, test.user);
+        Write(ehnd / "PreFilter_cold.txt", test.filter);
+        Check(hdTrans_Initialize(nullptr) == 0, "cold load excludes one bad optional file");
+        Check(Translate("猫") == "고양이" && Translate("犬") == "COLD_KEEP", "cold exclusion keeps base and other user file");
+        Check(Translate("鳥") != "EXCLUDED", "no good row from an excluded file is applied");
+        char* output = nullptr;
+        std::size_t size = 0;
+        Check(hdTrans_FilterErrors(&output, &size) == 0, "query cold filter diagnostics");
+        const std::string filters = output ? std::string(output, size) : std::string();
+        hdTrans_FreeMem(output);
+        Check((test.filterError ? filters : Errors()).find(test.diagnostic) != std::string::npos,
+              "excluded cold file diagnostic is preserved");
+        Write(user, "鳥\tCOLD_USER\n");
+        Write(ehnd / "PreFilter_cold.txt", "// empty\n");
+        Check(hdTrans_Reload() == 0, "repair cold excluded files");
+        Check(Translate("鳥") == "COLD_USER", "repaired file becomes active");
+        Write(user, test.user);
+        Write(ehnd / "PreFilter_cold.txt", test.filter);
+        std::string changed = base;
+        changed.replace(changed.find("fixtures/first"), std::strlen("fixtures/first"), "fixtures/second");
+        Write(config, changed);
+        Check(hdTrans_Reload() == -1, "active reload rejects the same bad optional file");
+        Check(Translate("猫") == "고양이" && Translate("犬") == "COLD_KEEP" && Translate("鳥") == "COLD_USER",
+              "failed active reload retains the whole old stack");
+        Check(hdTrans_Initialize(nullptr) == -1, "active Initialize also retains the whole stack on failure");
+        Check(Translate("猫") == "고양이" && Translate("鳥") == "COLD_USER", "failed active Initialize keeps old outputs");
+    }
+    Write(user, "鳥\tCOLD_USER\n");
+    Write(ehnd / "PreFilter_cold.txt", "title\n猫\t犬\t1\t0\n");
+    Write(config, base);
+    Check(hdTrans_Reload() == 0, "ignored Ehnd title does not reject a healthy active file");
+    Check(Translate("猫") == "COLD_KEEP", "valid row following a title remains active");
+    Write(ehnd / "PreFilter_cold.txt", "// empty\n");
+    Write(config, base + "unknown: value\n");
+    Check(hdTrans_Reload() == 0, "publish config warning with healthy dictionaries");
+    Check(Errors().find("unknown key: unknown") != std::string::npos, "active config warning is visible");
+    Write(config, "dicts: fixtures/missing\ncache: off\n");
+    Check(hdTrans_Reload() == -1, "fail a candidate with a clean config parse");
+    Check(Errors().find("unknown key: unknown") == std::string::npos, "failed candidate uses fresh config diagnostics");
+    Write(config, "dicts: fixtures/missing\nunknown: value\ncache: off\n");
+    Check(hdTrans_Reload() == -1, "failed candidate can carry its own config warning");
+    Check(Errors().find("unknown key: unknown") != std::string::npos, "failed config warning remains queryable");
+    Write(config, base);
+    Check(hdTrans_OpenEhnd("") == 0, "clear failed candidate after config repair");
+    Check(Errors().empty(), "OpenEhnd refreshes and clears stale config diagnostics");
 }
 
 void CheckAcceptedUserSources(const std::filesystem::path& config, const std::filesystem::path& fixtures) {
@@ -174,6 +261,8 @@ void CheckAcceptedUserSources(const std::filesystem::path& config, const std::fi
     Check(std::filesystem::remove(user, error) && !error, "remove accepted explicit user file");
     Write(config, second + "userdict: fixtures/history-user.txt\n");
     Write(fixtures / "Ehnd/UserDict_test.txt", "タマ\tHISTORY_EHND_NEW\t1\n");
+    Check(hdTrans_Initialize(nullptr) == -1, "active Initialize rejects a missing accepted same-path source");
+    Check(Translate("猫") == "고양이" && Translate("犬") == "HISTORY_OLD", "failed active Initialize retains base and user");
     Check(hdTrans_Reload() == -1, "candidate rejects missing accepted user file");
     Check(Translate("猫") == "고양이", "missing source keeps old base dictionary");
     Check(Translate("犬") == "HISTORY_OLD", "missing source keeps old user dictionary");
@@ -412,7 +501,12 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         checkTranslation(L"犬", L"J2K_NEW", "J2K rereads skip YAML and keeps good rows");
         terminate();
         Write(config, rowConfig + "strict_dict: true\n");
-        Check(initialize(nullptr) == 0, "J2K strict initialization rejects bad row");
+        Check(initialize(nullptr) == 1, "J2K strict initialization excludes the bad file");
+        checkTranslation(L"猫", L"고양이", "J2K strict cold load keeps the base");
+        wchar_t* excluded = translate(nullptr, L"犬");
+        Check(excluded && std::wstring(excluded) != L"J2K_NEW", "J2K excludes good rows from the malformed file");
+        freeMem(excluded);
+        terminate();
         Write(config, rowConfig);
         Check(initialize(nullptr) == 1, "J2K default initialization skips bad row");
         checkTranslation(L"犬", L"J2K_NEW", "J2K default keeps good rows from mixed file");
@@ -430,6 +524,54 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         Write(config, "dicts: fixtures/first\nuserdict: fixtures/j2k-renamed.txt\ncache: off\n");
         reload();
         checkTranslation(L"犬", L"J2K_RESTORED", "J2K changed requested path permits rename");
+        const auto coldUser = userRows.parent_path() / "cold-bad.txt";
+        const auto coldFilter = userRows.parent_path() / "cold-ehnd/PreFilter_cold.txt";
+        const std::string coldConfig = "dicts: fixtures/first\nuserdict: [fixtures/cold-good.txt, fixtures/cold-bad.txt]\n"
+                                       "ehnd: fixtures/cold-ehnd\ncache: off\n";
+        terminate();
+        Write(config, "dicts: fixtures/first\nuserdict: ''\nehnd: ''\ncache: off\nstrict_dict: true\n");
+        Check(initialize(nullptr) == 1, "J2K initializes a base-only engine with empty optional history");
+        Write(coldUser, "鳥\tEXCLUDED\n犬\t개\tzzz\n");
+        Write(config, "dicts: fixtures/second\nuserdict: fixtures/cold-bad.txt\nehnd: ''\ncache: off\nstrict_dict: true\n");
+        reload();
+        checkTranslation(L"猫", L"고양이", "J2K empty optional history still retains the old base on failure");
+        const struct ColdCase { const char* user; const char* filter; bool strict; } coldCases[] = {
+            {"鳥\tEXCLUDED\n犬\t개\tzzz\n", "// empty\n", true},
+            {"鳥\tEXCLUDED\n犬\t\xB0\xED\n", "// empty\n", false},
+            {"鳥\tCOLD_USER\n", "title\n猫\t犬\t1\t0\n(\tbad\t1\t1\n", true},
+        };
+        for (const auto& test : coldCases) {
+            terminate();
+            const std::string strict = test.strict ? "strict_dict: true\n" : "strict_dict: false\n";
+            Write(config, coldConfig + strict);
+            Write(coldUser, test.user);
+            Write(coldFilter, test.filter);
+            Check(initialize(nullptr) == 1, "J2K cold bad POS, decode or Ehnd file is excluded");
+            checkTranslation(L"猫", L"고양이", "J2K cold exclusion keeps the base");
+            checkTranslation(L"犬", L"COLD_KEEP", "J2K cold exclusion keeps the other user file");
+            Write(coldUser, "鳥\tCOLD_USER\n");
+            Write(coldFilter, "// empty\n");
+            reload();
+            checkTranslation(L"鳥", L"COLD_USER", "J2K repaired file becomes active");
+            Write(coldUser, test.user);
+            Write(coldFilter, test.filter);
+            std::string changed = coldConfig;
+            changed.replace(changed.find("fixtures/first"), std::strlen("fixtures/first"), "fixtures/second");
+            Write(config, changed + strict);
+            reload();
+            checkTranslation(L"猫", L"고양이", "J2K failed active load retains the old base");
+            checkTranslation(L"鳥", L"COLD_USER", "J2K failed active load retains the old user");
+            checkTranslation(L"鳥", L"COLD_USER", "J2K unchanged retained generation remains usable");
+            Write(config, coldConfig + strict);
+            Write(coldUser, "鳥\tCOLD_USER\n");
+            Write(coldFilter, "// empty\n");
+            reload();
+            checkTranslation(L"鳥", L"COLD_USER", "J2K recovery publishes a healthy generation");
+        }
+        Write(coldFilter, "title\n猫\t犬\t1\t0\n");
+        Write(config, coldConfig + "strict_dict: true\n");
+        reload();
+        checkTranslation(L"猫", L"COLD_KEEP", "J2K ignored title preserves the following valid filter row");
         terminate();
         std::filesystem::remove(config, error);
         std::filesystem::create_directories(folder / "dicts", error);
@@ -528,6 +670,7 @@ int main(int argc, char** argv) {
     Check(hdTrans_Reload() == -1, "failed reload");
     Check(Translate("猫") == "야옹이", "failed reload retains dictionaries");
     CheckDictionaryOptions(config, fixtures / "options-user.txt");
+    CheckColdExclusions(config, fixtures);
     CheckAcceptedUserSources(config, fixtures);
     std::filesystem::create_directories(fixtures / "speech", error);
     Write(fixtures / "speech/base.tsv", header + "高\t$D3@\tH7N0\t\t\tGN\t\t\t\t\t1\nい\t1다\tT500\t\t\tGN\t\t\t\t\t2\n");
@@ -581,19 +724,24 @@ int main(int argc, char** argv) {
     for (const bool missing : {false, true}) {
         if (missing) {
             Write(config, "userdict: fixtures/never-user.txt\nehnd: fixtures/never-ehnd\ncache: off\n");
-            Check(hdTrans_Reload() == 0, "never-read explicit missing sources are nonfatal");
+            hdTrans_Terminate();
+            Check(hdTrans_Initialize(explicitDirs.c_str()) == 0, "never-read explicit missing sources permit initialization");
             Check(Translate("猫") == "고양이", "optional missing sources preserve the base dictionary");
             const std::string warnings = Errors();
             Check(warnings.find("never-user.txt: the explicit user dictionary source is missing") != std::string::npos &&
-                  warnings.find("never-ehnd: the explicit Ehnd folder is missing") != std::string::npos,
-                  "explicit missing source warnings are queryable");
+                  warnings.find("never-ehnd") == std::string::npos,
+                  "user error query contains only the missing user source warning");
             Check(warnings.find("기본 사전") == std::string::npos && warnings.find("Ehnd 활성화") == std::string::npos,
                   "source INFO is absent from the user error query");
         }
         char* output = nullptr;
         std::size_t size = 0;
         Check(hdTrans_FilterErrors(&output, &size) == 0, "query healthy or optional-missing filter diagnostics");
-        Check(output && size == 0 && *output == '\0', "source INFO and optional missing paths do not populate filter errors");
+        const std::string filterErrors = output ? std::string(output, size) : std::string();
+        Check(output && (missing ? filterErrors.find("never-ehnd") != std::string::npos : filterErrors.empty()),
+              "only explicit missing Ehnd populates the filter error query");
+        Check(filterErrors.find("never-user") == std::string::npos && filterErrors.find("Ehnd 활성화") == std::string::npos,
+              "filter errors contain neither user-source warnings nor INFO");
         hdTrans_FreeMem(output);
     }
     std::filesystem::remove(config, error);

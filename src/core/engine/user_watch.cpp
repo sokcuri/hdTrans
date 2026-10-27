@@ -100,8 +100,9 @@ UserVersion UserVersionOf(const std::vector<dict::UserSource>& paths, std::strin
     version.optionsRevision = optionsRevision;
     std::vector<std::string> failed;
     for (const std::string& file : dict::UserFiles(paths, version.sources, &failed)) {
-        version.files.emplace_back(file, std::find(failed.begin(), failed.end(), file) == failed.end()
-                                           ? VersionOf(file) : FileVersion{});
+        auto found = VersionOf(file);
+        found.headerProbeFailed = std::find(failed.begin(), failed.end(), file) != failed.end();
+        version.files.emplace_back(file, found);
     }
     version.config = VersionOf(configPath);
     return version;

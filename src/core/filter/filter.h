@@ -41,11 +41,14 @@ struct Source {
     bool native = false;
 };
 
-// A line or a file that does not load.
+enum class ErrorKind : uint8_t { BadRow, IgnoredShortFields };
+
+// A diagnostic for a skipped row or a file that does not load.
 struct Error {
     std::string file;
     int line = 0;  // 1-based; 0 for the whole file
     std::string message;
+    ErrorKind kind = ErrorKind::BadRow;
 };
 
 class Filters {

@@ -12,6 +12,7 @@
 #include "core/dict/snapshot_file.h"
 #include "core/engine.h"
 #include "core/engine/user_watch.h"
+#include "core/engine/load_info.h"
 #include "hdtest.h"
 
 namespace {
@@ -65,14 +66,11 @@ HD_TEST(EngineFilters) {
     for (const bool strict : {false, true}) {
         const auto missing = (ehnd.path / (strict ? "missing-strict" : "missing")).string();
         HD_REQUIRE(e.OpenEhnd(missing, hdTrans::DictionaryOptions{strict}));
-        const auto warnings = hdTrans::internal::UserFileErrors(e);
+        HD_CHECK(hdTrans::internal::UserFileErrors(e).empty());
+        HD_CHECK(e.UserFileError().empty());
+        const auto warnings = e.FilterErrors();
         HD_REQUIRE(warnings.size() == 1);
-        HD_CHECK(warnings[0].file == missing);
-        HD_CHECK(warnings[0].kind == hdTrans::dict::LoadErrorKind::OptionalSource);
-        HD_CHECK(warnings[0].line == 0);
-        HD_CHECK(!hdTrans::dict::FailsLoad(warnings[0].kind));
-        HD_CHECK_EQ(e.UserFileError(), missing + ": the explicit Ehnd folder is missing");
-        HD_CHECK(e.FilterErrors().empty());
+        HD_CHECK_EQ(warnings[0], missing + ":0: the explicit Ehnd folder is missing");
         HD_CHECK(!hdTrans::internal::FilterFileFailed(e));
         HD_CHECK_EQ(Translate(e, "猫\n\r\n犬\r"), "멍멍이\n\r\n멍멍이\r");
         HD_CHECK_EQ(Translate(e, "ポチ"), "포치");
@@ -207,12 +205,17 @@ HD_TEST(EngineEhndRowsFollowStrictOption) {
             HD_REQUIRE(warnings.size() == 1);
             HD_CHECK(warnings[0].starts_with("PostFilter_a.txt:2: regex rejected"));
             HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
-            ehnd.Write("PostFilter_a.txt", "broken\n");
+            const auto beforeAllBad = engine.Dictionaries();
+            const auto beforeAllBadFilters = engine.Filters();
+            ehnd.Write("PostFilter_a.txt", "(x\ty\t1\t1\n");
             if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
             else HD_CHECK(engine.Reload() == !strict);
+            HD_CHECK((engine.Dictionaries() == beforeAllBad) == strict);
+            HD_CHECK((engine.Filters() == beforeAllBadFilters) == strict);
+            HD_CHECK(hdTrans::internal::FilterFileFailed(engine) == strict);
             HD_CHECK_EQ(Translate(engine, "猫"), strict ? "냥이" : "고양이");
             HD_REQUIRE(engine.FilterErrors().size() == 1);
-            HD_CHECK(engine.FilterErrors()[0].starts_with("PostFilter_a.txt:1:"));
+            HD_CHECK(engine.FilterErrors()[0].starts_with("PostFilter_a.txt:1: regex rejected"));
             ehnd.Write("PostFilter_a.txt", "고양이\t검은고양이\t1\t0\n");
             if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
             else HD_CHECK(engine.Reload());
@@ -586,7 +589,7 @@ HD_TEST(EngineUserFolderHeaderRowsFollowStrictOption) {
     }
 }
 
-HD_TEST(EngineUserFolderHeaderCallOverrideDoesNotPersist) {
+HD_TEST(EngineUserFolderHeaderAcceptedCallOverridePersists) {
     for (const bool strict : {false, true}) {
         TempFolder dicts("header-call-dicts"), users("header-call-users");
         WriteHeaderFilterBase(dicts);
@@ -602,11 +605,149 @@ HD_TEST(EngineUserFolderHeaderCallOverrideDoesNotPersist) {
         const auto accepted = engine.Dictionaries();
         const auto filters = engine.Filters();
         users.Write("after.tsv", "#! layer=postfilter\n고양이\t다른필터\t1\t0\n(x\tz\t1\t1\n");
-        HD_CHECK(engine.Reload() == !strict);
-        HD_CHECK((engine.Dictionaries() == accepted) == strict);
-        HD_CHECK((engine.Filters() == filters) == strict);
-        HD_CHECK_EQ(Translate(engine, "猫"), strict ? "새필터" : "다른필터");
+        HD_CHECK(engine.Reload());
+        HD_CHECK(engine.Dictionaries() != accepted);
+        HD_CHECK(engine.Filters() != filters);
+        HD_CHECK_EQ(Translate(engine, "猫"), "다른필터");
         HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
+        const auto beforeStrict = engine.Dictionaries();
+        HD_CHECK(!engine.Reload(hdTrans::DictionaryOptions{true}));
+        HD_CHECK(engine.Dictionaries() == beforeStrict);
+        HD_CHECK(engine.Reload());
+    }
+}
+
+HD_TEST(EngineIgnoredEhndShortFieldsNeverRejectGoodRows) {
+    for (const bool strict : {false, true}) {
+        for (const auto cache : {hdTrans::CacheWrite::Off, hdTrans::CacheWrite::Sync}) {
+            TempFolder dicts("short-dicts"), ehnd("short-ehnd");
+            WriteHeaderFilterBase(dicts);
+            const std::string text = "고양이\t첫필터\t1\t0\nTITLE\n개\t둘필터\t2\t\n";
+            ehnd.Write("PostFilter.txt", text);
+            hdTrans::EngineOptions options;
+            options.strictDict = strict;
+            const std::vector<std::string> folders{dicts.path.string()};
+            hdTrans::Engine cold(false, cache, hdTrans::UserReload::Off, options);
+            HD_REQUIRE(cold.OpenEhnd(ehnd.path.string()));
+            HD_REQUIRE(cold.Open(folders));
+            HD_CHECK(!hdTrans::internal::FilterFileFailed(cold));
+            HD_CHECK(HasHeaderFilterError(cold, "PostFilter.txt", 2));
+            HD_REQUIRE(cold.FilterErrors().size() == 1);
+            HD_CHECK_EQ(Translate(cold, "猫"), "첫필터");
+            HD_CHECK_EQ(Translate(cold, "犬"), "둘필터");
+            hdTrans::Engine warm(false, cache, hdTrans::UserReload::Auto, options);
+            HD_REQUIRE(warm.OpenEhnd(ehnd.path.string()));
+            HD_REQUIRE(warm.Open(folders));
+            const char* snapshotMode = std::getenv("HDTRANS_SNAPSHOT");
+            if (cache == hdTrans::CacheWrite::Sync &&
+                !(snapshotMode && std::string_view(snapshotMode) == "off") &&
+                !hdTrans::dict::internal::SnapshotPath(folders, {}).empty()) {
+                HD_CHECK(warm.Dictionaries()->Mapped());
+            }
+            HD_CHECK(!hdTrans::internal::FilterFileFailed(warm));
+            HD_CHECK_EQ(Translate(warm, "猫"), "첫필터");
+            HD_CHECK_EQ(Translate(warm, "犬"), "둘필터");
+            for (const auto& file : hdTrans::internal::LoadedSourceInfo(warm).files) {
+                if (file.kind != hdTrans::dict::LoadFileKind::EhndPostFilter) continue;
+                HD_REQUIRE(file.acceptedCount.has_value());
+                HD_CHECK_EQ(*file.acceptedCount, std::size_t{2});
+            }
+            ehnd.Write("PostFilter.txt", "고양이\t새필터\t1\t0\nTITLE\n개\t둘필터\t2\t\n");
+            HD_CHECK(warm.Reload());
+            HD_CHECK(!hdTrans::internal::FilterFileFailed(warm));
+            HD_CHECK_EQ(Translate(warm, "猫"), "새필터");
+            const auto good = warm.Dictionaries();
+            const auto filters = warm.Filters();
+            ehnd.Write("PostFilter.txt", text + "[\tx\t3\t1\n");
+            HD_CHECK(hdTrans::internal::CheckUserFile(warm));
+            HD_CHECK((warm.Dictionaries() == good) == strict);
+            HD_CHECK((warm.Filters() == filters) == strict);
+            HD_CHECK(hdTrans::internal::FilterFileFailed(warm) == strict);
+            HD_CHECK_EQ(Translate(warm, "猫"), strict ? "새필터" : "첫필터");
+            ehnd.Write("PostFilter.txt", text);
+            HD_REQUIRE(warm.SetUserDictRaw("狐\t여우\n鳥\n", hdTrans::DictionaryOptions{false}));
+            HD_REQUIRE(warm.Reload());
+            HD_REQUIRE(warm.GetUserDict().size() == 1);
+            HD_CHECK_EQ(Translate(warm, "狐"), "여우");
+            HD_CHECK(warm.SetUserDictRaw("狐\t흰여우\n鳥\n") == !strict);
+            HD_CHECK(warm.Reload());
+        }
+    }
+}
+
+HD_TEST(UnclassifiedUnreadableHeaderIsOptionalButAcceptedHeaderIOIsFatal) {
+    for (const bool strict : {false, true}) {
+        TempFolder dicts("probe-dicts"), users("probe-users");
+        WriteHeaderFilterBase(dicts);
+        users.Write("notes.txt", "plain notes\n");
+        users.Write("after.tsv", "#! layer=postfilter\n고양이\t기존필터\t1\t0\n");
+        users.Write("userdict.txt", "狐\t여우\n");
+        const auto stray = users.path / "notes.txt";
+        const auto header = users.path / "after.tsv";
+        std::error_code error;
+        const auto original = std::filesystem::status(stray, error).permissions();
+        HD_REQUIRE(!error);
+        std::filesystem::permissions(stray, std::filesystem::perms::none, error);
+        HD_REQUIRE(!error);
+        const std::vector<std::string> paths{users.path.string()};
+        const auto observed = hdTrans::internal::UserVersionOf(paths);
+        bool denied = false;
+        for (const auto& file : observed.files) denied |= file.first == stray.string() && file.second.headerProbeFailed;
+        if (!denied) {
+            std::filesystem::permissions(stray, original, error);
+            HD_SKIP("file read permissions are not enforced");
+        }
+        hdTrans::EngineOptions options;
+        options.strictDict = strict;
+        hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto, options);
+        const bool opened = engine.OpenUserDicts({dicts.path.string()}, false, paths);
+        std::filesystem::permissions(stray, original, error);
+        HD_REQUIRE(!error);
+        HD_REQUIRE(opened);
+        const auto warnings = hdTrans::internal::UserFileErrors(engine);
+        HD_REQUIRE(warnings.size() == 1);
+        HD_CHECK_EQ(warnings[0].file, stray.string());
+        HD_CHECK(warnings[0].kind == hdTrans::dict::LoadErrorKind::OptionalSource);
+        HD_CHECK(!hdTrans::dict::FailsLoad(warnings[0].kind));
+        HD_CHECK_EQ(warnings[0].line, 0);
+        HD_CHECK_EQ(Translate(engine, "猫"), "기존필터");
+        HD_CHECK(engine.Reload());
+        HD_CHECK(engine.UserFileError().empty());
+        const auto good = engine.Dictionaries();
+        const auto filters = engine.Filters();
+        users.Write("userdict.txt", "狐\t금빛여우\n");
+        const auto headerPermissions = std::filesystem::status(header, error).permissions();
+        HD_REQUIRE(!error);
+        std::filesystem::permissions(header, std::filesystem::perms::none, error);
+        HD_REQUIRE(!error);
+        const bool reloaded = engine.Reload();
+        std::filesystem::permissions(header, headerPermissions, error);
+        HD_REQUIRE(!error);
+        HD_CHECK(!reloaded);
+        HD_CHECK(engine.Dictionaries() == good);
+        HD_CHECK(engine.Filters() == filters);
+        const auto failed = hdTrans::internal::UserFileErrors(engine);
+        HD_REQUIRE(!failed.empty());
+        HD_CHECK(failed[0].kind == hdTrans::dict::LoadErrorKind::Read);
+        HD_CHECK_EQ(failed[0].file, header.string());
+        HD_CHECK_EQ(Translate(engine, "猫"), "기존필터");
+        HD_CHECK(engine.Reload());
+        HD_CHECK(engine.UserFileError().empty());
+        HD_CHECK_EQ(Translate(engine, "狐"), "금빛여우");
+        const auto history = hdTrans::internal::AcceptedUserSources(engine);
+        std::filesystem::permissions(header, std::filesystem::perms::none, error);
+        HD_REQUIRE(!error);
+        hdTrans::Engine candidate(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off, options);
+        hdTrans::internal::SeedUserSources(candidate, history);
+        const bool candidateLoaded = candidate.OpenUserDicts({dicts.path.string()}, false, paths);
+        std::filesystem::permissions(header, headerPermissions, error);
+        HD_REQUIRE(!error);
+        HD_CHECK(!candidateLoaded);
+        HD_CHECK(!candidate.loaded());
+        const auto candidateErrors = hdTrans::internal::UserFileErrors(candidate);
+        HD_REQUIRE(!candidateErrors.empty());
+        HD_CHECK(candidateErrors[0].kind == hdTrans::dict::LoadErrorKind::Read);
+        HD_CHECK_EQ(candidateErrors[0].file, header.string());
     }
 }
 

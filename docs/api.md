@@ -203,16 +203,16 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 
 | 함수 | 설명 |
 |---|---|
-| `int hdTrans_SetOptions(const hdTrans_Options* options)` | 다음 사전 불러오기에 적용. 초기화 전에도 사용 가능. NULL 또는 size 0은 초기화. 0 성공, -1 잘못된 크기나 값(기존 옵션 유지) |
+| `int hdTrans_SetOptions(const hdTrans_Options* options)` | 다음 사전 불러오기에 적용하며 진행 중인 불러오기는 취소하지 않음. 초기화 전에도 사용 가능. NULL 또는 size 0은 기본값으로 초기화. 0 성공, -1 잘못된 크기나 값(기존 옵션 유지) |
 | `int hdTrans_Initialize(const char* dirs)` | 사전 목록을 불러옴. `dirs`는 NUL로 구분하고 NUL 두 개로 끝나며 뒤 폴더가 앞을 덮어씀. `.hdsnap` 하나만 넘겨도 됨. NULL이나 빈 목록이면 설정의 `dicts`, 없으면 데이터 루트의 `dicts.hdsnap`, `dicts/` 순서로 찾음. 0 성공, -1은 불러오기 실패 또는 동시에 진행된 Terminate, Initialize, Reload가 이 불러오기를 취소함 |
-| `void hdTrans_Terminate(void)` | 세션과 사전 해제. 여러 번 불러도 되고, 다시 Initialize할 수 있음 |
+| `void hdTrans_Terminate(void)` | 세션과 사전 해제, 옵션을 기본값으로 초기화. 여러 번 불러도 되고, 다시 Initialize할 수 있음 |
 | `int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn)` | `text[0..n)`(`\n`으로 구분한 한 줄 이상)을 프로세스 세션에서 번역. `*out`에 NUL로 끝나는 버퍼, `*outn`에 길이(NUL 제외). 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, size_t n, char** out, size_t* outn)` | `context[0..cn)`의 줄을 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 `hdTrans_Translate`처럼 돌려줌. 문맥 줄은 단서와, `wrapped`이면 `text`가 이어 가는 문장의 앞부분으로만 쓰고 호출 뒤에 남기지 않음. NULL이나 `cn` 0은 문맥 없음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reset(void)` | 엔진의 지금 사전을 세션에 가져옴. 번역은 원래 호출마다 따로라서 결과는 바뀌지 않음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reload(void)` | 설정 파일과 사전 폴더, 사용자 사전, 켜 둔 Ehnd 폴더를 다시 불러옴. 0 성공, -1 초기화 전, 종료 후, 실패(이전 사전 유지) |
-| `int hdTrans_UserDictError(char** out, size_t* outn)` | 설정 파일 진단과 마지막 사용자 사전 읽기 오류(오류마다 한 줄, 없으면 빈 문자열)를 `hdTrans_Translate`처럼 버퍼로 돌려줌. 0 성공, -1 초기화 전, 종료 후 |
+| `int hdTrans_UserDictError(char** out, size_t* outn)` | 설정 파일 진단과 마지막 사용자 사전 읽기 오류(오류마다 한 줄, 없으면 빈 문자열)를 `hdTrans_Translate`처럼 버퍼로 돌려줌. 초기화에 성공해도 처음부터 없는 명시 사용자 경로의 경고가 있을 수 있음. 읽기 INFO는 포함하지 않음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_OpenEhnd(const char* dir)` | Ehnd 폴더 `dir`의 필터와 사용자 사전을 이후 번역에 씀(NULL이나 빈 값은 뗌). 사용자 사전처럼 자동으로 다시 읽음. 0 성공, -1 초기화 전, 종료 후, 폴더를 못 읽음 |
-| `int hdTrans_FilterErrors(char** out, size_t* outn)` | 필터 파일과 Ehnd 폴더에서 건너뛴 줄(`파일:줄: 이유`, 줄마다 하나)을 버퍼로 돌려줌. 0 성공, -1 초기화 전, 종료 후 |
+| `int hdTrans_FilterErrors(char** out, size_t* outn)` | 필터 파일과 Ehnd 폴더 진단(`파일:줄: 이유`, 줄마다 하나)을 버퍼로 돌려줌. 처음부터 없는 명시 Ehnd 경로의 비치명적 경고는 이 함수에만 포함하며 읽기 INFO는 포함하지 않음. 0 성공, -1 초기화 전, 종료 후 |
 | `void hdTrans_FreeMem(void* p)` | `hdTrans_Translate`가 돌려준 버퍼 해제 |
 | `const char* hdTrans_Version(void)` | 라이브러리 버전 문자열 |
 

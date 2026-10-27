@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "core/engine.h"
+#include "core/dict/mapped_file.h"
 
 namespace hdTrans::internal {
 
@@ -33,6 +34,7 @@ struct ConfigResult {
     Config settings;
     std::vector<ConfigDiagnostic> diagnostics;
     bool found = false;
+    std::optional<dict::internal::FileStamp> sourceStamp;
 };
 
 // The speech level named soft or strict; false for another name.

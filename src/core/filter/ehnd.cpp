@@ -195,7 +195,10 @@ std::vector<UserRow> ParseUserDict(std::string_view text, std::string_view file,
             }
         }
         if (t < 2) {
-            if (!line.empty()) errors.push_back({std::string(file), number, "a UserDict line needs two tab-separated fields"});
+            if (!line.empty()) {
+                errors.push_back({std::string(file), number, "a UserDict line needs two tab-separated fields",
+                                  ErrorKind::IgnoredShortFields});
+            }
             continue;
         }
         UserRow row;

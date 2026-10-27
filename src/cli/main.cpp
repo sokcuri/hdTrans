@@ -490,11 +490,14 @@ int RunMain(int argc, char** argv) {
     for (const auto& path : userPaths)
         userSources.push_back({path, false, false, userPathsArg.has_value()});
     const hdTrans::dict::UserSource ehndSource{ehnd, true, false, ehndArg.has_value()};
-    bool loaded = hdTrans::internal::OpenEhndSource(engine, ehndSource) &&
-                  hdTrans::internal::OpenUserSources(engine, folders, verifyDicts, userSources);
-    for (const auto& error : hdTrans::internal::UserFileErrors(engine))
-        if (hdTrans::dict::FailsLoad(error.kind)) loaded = false;
-    if (!loaded || hdTrans::internal::FilterFileFailed(engine)) {
+    static_cast<void>(hdTrans::internal::OpenEhndSource(engine, ehndSource, config));
+    bool loaded = hdTrans::internal::OpenUserSources(engine, folders, verifyDicts, userSources, config);
+    if (verifyDicts) {
+        for (const auto& error : hdTrans::internal::UserFileErrors(engine))
+            if (hdTrans::dict::FailsLoad(error.kind)) loaded = false;
+        if (hdTrans::internal::FilterFileFailed(engine)) loaded = false;
+    }
+    if (!loaded) {
         std::fprintf(stderr, "hdtrans: no dictionary loaded from %s\n", dicts.c_str());
         // The reason a folder or a snapshot file did not load, one line per file.
         const std::string reason = engine.UserFileError();

@@ -35,6 +35,7 @@ std::string g_configPath;
 std::optional<bool> g_strictDictOverride;
 bool g_failedLoad = false;
 std::string g_failedUserError;
+std::string g_failedConfigErrors;
 std::vector<std::string> g_failedFilterErrors;
 std::weak_ptr<const hdTrans::dict::Snapshot> g_failedSnapshot;
 std::weak_ptr<const hdTrans::filter::Filters> g_failedFilters;
@@ -93,6 +94,7 @@ bool HasFatalLoadError(const hdTrans::Engine& engine) {
 void ClearFailedLoad() {
     g_failedLoad = false;
     g_failedUserError.clear();
+    g_failedConfigErrors.clear();
     g_failedFilterErrors.clear();
     g_failedSnapshot.reset();
     g_failedFilters.reset();
@@ -110,7 +112,7 @@ void RefreshFailedLoad() {
 int FailedLoad(std::uint64_t generation, const hdTrans::Engine& engine, const std::string& configErrors) {
     AdminLock lock;
     if (generation == g_generation) {
-        g_configErrors = configErrors;
+        g_failedConfigErrors = configErrors;
         g_failedLoad = true;
         g_failedUserError = engine.UserFileError();
         g_failedFilterErrors = engine.FilterErrors();
@@ -159,7 +161,6 @@ int hdTrans_SetOptions(const hdTrans_Options* options) {
     AdminLock lock;
     if (strictDict != g_strictDictOverride) {
         g_strictDictOverride = strictDict;
-        ++g_generation;
         if (g_engine) g_engine->SetOptions(hdTrans::EngineOptions{strictDict, true, g_configPath});
     }
     return 0;
@@ -168,10 +169,15 @@ int hdTrans_SetOptions(const hdTrans_Options* options) {
 int hdTrans_Initialize(const char* dirs) {
     std::uint64_t generation;
     std::optional<bool> strictDict;
+    bool hadActiveEngine;
+    std::vector<hdTrans::dict::UserSource> acceptedSources;
+    std::optional<hdTrans::dict::UserSource> acceptedEhnd;
     {
         AdminLock lock;
         generation = g_generation;
         strictDict = g_strictDictOverride;
+        hadActiveEngine = static_cast<bool>(g_engine);
+        if (g_engine) acceptedSources = hdTrans::internal::AcceptedUserSources(*g_engine, acceptedEhnd);
     }
     auto paths = SplitNul(dirs);
     const std::string dir = hdTrans::frontend::ModuleDirectory();
@@ -194,12 +200,16 @@ int hdTrans_Initialize(const char* dirs) {
     }
     const hdTrans::EngineOptions dictionaryOptions{strictDict, true, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, kUserReload, dictionaryOptions);
+    if (hadActiveEngine)
+        hdTrans::internal::SeedUserSources(*e, std::move(acceptedSources), std::move(acceptedEhnd));
     const hdTrans::dict::UserSource ehndSource{ehnd, true, false, settings.ehnd.has_value()};
-    if (!hdTrans::internal::OpenEhndSource(*e, ehndSource) ||
-        !hdTrans::internal::OpenUserSources(*e, paths, false, requestedUserSources) || HasFatalLoadError(*e))
+    const bool ehndLoaded = hdTrans::internal::OpenEhndSource(*e, ehndSource, config);
+    const bool loaded = hdTrans::internal::OpenUserSources(*e, paths, false, requestedUserSources, config);
+    if (!loaded || (hadActiveEngine && (!ehndLoaded || HasFatalLoadError(*e))))
         return FailedLoad(generation, *e, hdTrans::internal::ConfigErrors(config, configPath));
     AdminLock lock;
     if (generation != g_generation) return -1;
+    e->SetOptions(hdTrans::EngineOptions{g_strictDictOverride, true, configPath});
     g_session.reset();
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
@@ -223,6 +233,7 @@ void hdTrans_Terminate(void) {
     g_ehnd.reset();
     g_configErrors.clear();
     g_configPath.clear();
+    g_strictDictOverride.reset();
     ClearFailedLoad();
     static_cast<void>(g_cache.Apply(std::nullopt));
 }
@@ -288,11 +299,12 @@ int hdTrans_Reload(void) {
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, kUserReload, dictionaryOptions);
     hdTrans::internal::SeedUserSources(*e, std::move(userSources), std::move(acceptedEhnd));
     const hdTrans::dict::UserSource ehndSource{ehnd, true, false, ehndOverride.has_value() || settings.ehnd.has_value()};
-    if (!hdTrans::internal::OpenEhndSource(*e, ehndSource) ||
-        !hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources) || HasFatalLoadError(*e))
+    if (!hdTrans::internal::OpenEhndSource(*e, ehndSource, config) ||
+        !hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources, config) || HasFatalLoadError(*e))
         return FailedLoad(generation, *e, hdTrans::internal::ConfigErrors(config, configPath));
     AdminLock lock;
     if (generation != g_generation) return -1;
+    e->SetOptions(hdTrans::EngineOptions{g_strictDictOverride, true, configPath});
     g_session.reset();
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
@@ -310,7 +322,7 @@ int hdTrans_UserDictError(char** out, size_t* outn) {
     g_adminsDone.wait(lock, [] { return g_waitingAdmins == 0; });
     RefreshFailedLoad();
     if (!g_engine && !g_failedLoad) return -1;
-    std::string errors = g_configErrors;
+    std::string errors = g_failedLoad ? g_failedConfigErrors : g_configErrors;
     const std::string userError = g_failedLoad ? g_failedUserError : g_engine->UserFileError();
     if (!userError.empty()) errors += (errors.empty() ? "" : "\n") + userError;
     return Copy(errors, out, outn);
@@ -320,8 +332,10 @@ int hdTrans_OpenEhnd(const char* dir) {
     AdminLock lock;
     if (!g_engine) return -1;
     const std::string d = dir ? dir : "";
+    const auto config = hdTrans::internal::LoadConfig(g_configPath);
+    g_configErrors = hdTrans::internal::ConfigErrors(config, g_configPath);
     ClearFailedLoad();
-    if (!hdTrans::internal::OpenEhndSource(*g_engine, {d, true, false, true})) return -1;
+    if (!hdTrans::internal::OpenEhndSource(*g_engine, {d, true, false, true}, config)) return -1;
     g_ehnd = d;
     return 0;
 }
