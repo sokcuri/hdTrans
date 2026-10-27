@@ -3,3 +3,4 @@ lookup:name-adjective-phrase	優しい男だった。	다정한 남자였다.	fi
 lookup:name-adjective-phrase	新しい権利を得た。	새로운 권리를 얻었다.	fix	lookup
 lookup:name-adjective-phrase	赤い唇が震えた。	has:붉은 입술	keep	lookup
 lookup:name-adjective-phrase	白鳥さんが来た。	has:시라토리	keep	lookup
+lookup:name-adjective-phrase	『優しい男』を見た	『다정한 남자』를 보았다	fix	lookup

@@ -250,6 +250,10 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     return l;
 }
 
+// Whether a name-layer row is a work title (QWK): a title in plain words reads as those
+// words even inside 『』 (LEX-4).
+bool WorkTitle(const dict::UserEntry& u) { return u.codes != nullptr && u.codes->sem.HasPrefix("QWK"); }
+
 // Whether the name-layer key is an adjective of the dictionaries followed by a noun of
 // them (優しい男, 新しい権利, 赤い唇): a phrase of the sentence, not a name.
 bool Worker::AdjectiveNounKey(std::string_view key) const {
@@ -276,7 +280,8 @@ bool Worker::AdjectiveNounKey(std::string_view key) const {
 bool Worker::Skip(const dict::UserEntry& u, std::string_view query) const {
     return !EndRowFits(u, query) || (u.nameLayer && !KanaBounded(u.key, query)) ||
            (u.nameLayer && PhraseTitle(u) && !StandsApart(u.key, query)) ||
-           (u.nameLayer && !StandsApart(u.key, query) && AdjectiveNounKey(u.key)) || (u.kana && !KanaWord(u, query)) ||
+           (u.nameLayer && (WorkTitle(u) || !StandsApart(u.key, query)) && AdjectiveNounKey(u.key)) ||
+           (u.kana && !KanaWord(u, query)) ||
            (settings.text && BoundImperative(u, query)) ||
            (u.utteranceEnd && query.starts_with(u.key) && !UtteranceEnds(query.substr(u.key.size())));
 }
