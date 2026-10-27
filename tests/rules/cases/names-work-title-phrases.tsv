@@ -33,5 +33,17 @@ names:work-title-phrases	カメラ付きの携帯ゲーム、ありったけだ�
 names:work-title-phrases	月光花 (ブラック・ジャック OP)	월광화 (블랙 잭 OP)	fix	lookup
 names:work-title-phrases	月光花が咲いた	월광화가 피었다	fix	lookup
 names:work-title-phrases	月光が差す	달빛이 비친다	keep	lookup
-names:work-title-phrases	ザ・スーパー忍をプレイした	더 슈퍼 시노비를 플레이했다	fix	lookup
+names:work-title-phrases	ザ・スーパー忍をプレイした	has:슈퍼 시노비를 플레이했다	fix	lookup
 names:work-title-phrases	獄丁ヒグマを読んだ	옥졸 히그마를 읽었다	fix	lookup
+names:work-title-phrases	恋姫†無双	연희†무쌍	fix	lookup
+names:work-title-phrases	恋姫無双	연희무쌍	fix	lookup
+names:work-title-phrases	恋姫が来た	연희가 왔다	fix	lookup
+names:work-title-phrases	戦国†恋姫	전국†연희	fix	lookup
+names:work-title-phrases	パリピ孔明を見た	파티피플 공명을 보았다	fix	lookup
+names:work-title-phrases	勇午	유고	fix	lookup
+names:work-title-phrases	『龍兄虎弟』を見た	『용형호제』를 보았다	fix	lookup
+names:work-title-phrases	人月の神話を読んだ	인월의 신화를 읽었다	keep	lookup
+names:work-title-phrases	屍姫	시희	keep	lookup
+names:work-title-phrases	物語の開端	lacks:알파티하	keep	lookup
+names:work-title-phrases	『満月をさがして』	『보름달을 찾아』	keep	lookup
+names:work-title-phrases	ホワイト・バッジ	lacks:하얀 전쟁	keep	lookup
