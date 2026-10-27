@@ -28,7 +28,7 @@ sound:end-row-after-particle	ありがとぴょん！	고마워뿅!	keep	sound
 sound:end-row-after-particle	猫がにゃーにゃーと鳴く。	고양이가 냐옹냐옹 운다.	keep	sound
 sound:end-row-after-particle	猫がにゃんにゃんと鳴いた。	고양이가 냥냥 울었다.	keep	sound
 sound:end-row-after-particle	家をでちゃった。	집을 나와버렸다.	keep	lookup
-sound:end-row-after-particle	外にでちゃう。	밖에 나와버린다.	keep	lookup
+sound:end-row-after-particle	外にでちゃう。	밖에 나와버릴 거야.	keep	lookup
 ending:dechi	もう行くでち。	이제 가요.	keep	builtin-ending
 ending:sshu	がんばるっしゅ！	열심히 해요!	keep	builtin-ending
 ending:ssho	それでいいっしょ。	그것으로 좋지.	keep	builtin-ending

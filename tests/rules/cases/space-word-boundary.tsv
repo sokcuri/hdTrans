@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 lookup:space-boundary	おい 行こう	이봐 가자	fix	lookup
 lookup:space-boundary	おい 何で直すんだよ	이봐 왜 고쳐	fix	lookup
 lookup:space-boundary	あら いいわねえ	어머나 좋네	fix	lookup
-lookup:space-boundary	あら すてきな駅じゃないの｡	어머나 멋진 역이 아닌 거야.	fix	lookup
+lookup:space-boundary	あら すてきな駅じゃないの｡	어머나 멋진 역이 아니야.	fix	lookup
 lookup:space-boundary	どうも すみません｡あら すいません｡	has:어머나 미안해요	fix	lookup
 lookup:space-boundary	はい いただきましょう｡	네 받읍시다.	fix	lookup
 lookup:space-boundary	はい かしこまりました｡	has:알겠습니다	fix	lookup

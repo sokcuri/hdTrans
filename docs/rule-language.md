@@ -422,7 +422,7 @@ cx:return-to:10		&&4 F-1== "exists" S+0== "に" L+0== "하러" S+1== "L戻"	sele
   `sentence-end`(`utterance-end`이거나 뒤에 ！？!?가 옴), `speech-goes-on`(말줄임과 공백을 건너 같은 문장에, 또는 대사 안의 ！？ 뒤 다음 문장에 닫는 부호가 아닌 글이 더 옴: ……そうだ、ほら, 「……そうだ！　ねえ」), `predicate-follows`(문장에서 뒤에 동사가 옴, て형의 보조 동사는 아님),
   `plain-voice`(수동, 가능, 사역 없이 분석된 동사), `described-noun`(같은 토큰에서 뒤에 이 말이 꾸미는 명사가 옴),
   `holding-verb`(사전형 한국어가 `ko-verb.holding`의 말이거나 공백 뒤 그 말로 끝남: 이를 악물다),
-  `potential`(가능형으로 활용한 동사), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
+  `potential`(가능형으로 활용한 동사), `echoed-by-verb`(겹친 의태어의 반이 같은 절 뒤 동사의 한국어로 시작함: 삐걱삐걱 … 삐걱거리다), `question-after`(뒤에 물음표가 옴, ! … 사이는 건너뜀), `ko-state`(고른 한국어가 형용사나 있다, 없다의 표지로 끝남),
   `predicate-copies`(바로, 또는 쉼표를 사이에 두고 되풀이한 형용사, 형용동사의 사본이고 마지막 사본이 い나 だ로 끝나 1다나 6으로 읽힘),
   `cried-copies`(그 사본들이 외침: 세 번 이상, 또는 마지막 사본 뒤에 `mark.cry`의 부호), `drawn-ending`(어미가 `kana.drawn-out`의 부호로 시작함: すご|ーい), `clipped`(단어 바로 뒤에 `mark.clip`의 っ가 옴), `copies-clipped`(그 사본들의 마지막 사본이 `clipped`),
   `drawn`(단어 바로 뒤에 `mark.drawn`의 모음 가나가 옴), `lengthened`(단어 바로 뒤에 `mark.lengthening`의 늘임 표시가 옴: 思うなぁ, 思うなー), `exclaim-after`(단어 뒤 두 글자 안에 `mark.exclaim`의 느낌표가 있음), `speech-close`(단어 뒤가 글 끝이거나 닫는 괄호 」』）나 느낌표 ！가 옴: 대사의 끝),

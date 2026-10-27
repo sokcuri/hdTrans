@@ -24,7 +24,7 @@ cx:mou-scold:10	もうバカはやめた。	이제 바보는 그만두었다.	ke
 cx:gentle-request:10	「優しくしてね」	「부드럽게 해 줘」	fix	rewrites
 cx:gentle-request:20	「優しく、してね」	「부드럽게, 해 줘」	fix	rewrites
 cx:gentle-request:10	「みんなに優しくしてね」	「모두에게 다정하게 해」	keep	rewrites
-cx:voice-out:10	「声出ちゃう」	「소리 나와버린다」	fix	rewrites
+cx:voice-out:10	「声出ちゃう」	「소리 나와버릴 거야」	fix	rewrites
 sense:koe-sound	「声が漏れる」	「소리가 샌다」	fix	senses
 cx:voice-out:10	「彼の声が聞こえる」	!rule:cx:voice-out:10	keep	rewrites
 dict:jisjk:374181	「悪いんだけど」	「미안한데」	fix	local
