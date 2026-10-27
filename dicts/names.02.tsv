@@ -32644,6 +32644,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 盲導犬クイールの一生	퀼	N130	QWK		GN							names.659382
 盲愛	맹애	N110			GN						もうあい	names.659383
 盲点	맹점	N110			GN							names.659384
+盲獣	눈먼 짐승	N130	QWK		GN							names.659385
 盲目	맹목	N110			GN							names.659386
 盲目のもの	눈먼 자	N130	QPNVHn		GN							names.659387
 盲目のメロディ～インド式殺人狂騒曲～	블라인드 멜로디	N130	QWK		GN							names.659388
@@ -34034,12 +34035,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 真・女神転生トレーディングカード カードサマナー	진 여신전생 트레이딩 카드 카드 서머너	N130	QWK		GN							names.660778
 真・女神転生廃墟の中のジン	진·여신전생 폐허 속의 진	N130	QWK		GN							names.660779
 真・帝国学園	진 제국학원	N130	VGt		GN						しん ていこくがくえん	names.660780
-真・恋姫†夢想	진 연희무쌍	N110			GN							names.660781
+真・恋姫†夢想	진·연희†몽상	N110			GN							names.660781
 真・恋姫†夢想-革命-	진 연희†몽상 -혁명-	N130	QWK		GN							names.660782
 真・恋姫†無双	진·연희†무쌍	N110			GN							names.660783
-真・恋姫†無双 ～乙女繚乱☆三国志演義～	진 연희무쌍	N130	QWK		GN							names.660784
+真・恋姫†無双 ～乙女繚乱☆三国志演義～	진·연희†무쌍 ~소녀요란☆삼국지연의~	N130	QWK		GN							names.660784
 真・恋姫†英雄譚	진·연희†영웅담	N130	QWK		GN							names.660785
-真・恋姫無双	진 연희무쌍	N110			GN							names.660786
+真・恋姫無双	진·연희무쌍	N110			GN							names.660786
 真・昇龍拳	진 승룡권	N110			GN							names.660787
 真・浦島太郎	진 우라시마 타로	N110			GN							names.660788
 真・獅子王	진 시시오	N110			GN						しんししおう	names.660789
@@ -35256,6 +35257,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 真説エロティック・ゴースト・ストーリー/艶魔大戦	요재연담	N130	QWK		GN							names.662023
 真説サムライスピリッツ 武士道烈伝	진설 사무라이 스피리츠 무사도열전	N130	QWK		GN							names.662024
 真説サムライスピリッツ武士道烈伝	진설 사무라이 스피리츠 무사도열전	N130	QWK		GN							names.662025
+真説チャイニーズ・ゴースト・ストーリー	진설 차이니즈·고스트·스토리	N130	QWK		GN							names.662026
 真説ボボボーボ・ボーボボ	진설 보보보보 보보보	N130	QPNVHn		GN							names.662027
 真諦	파라마르타	N130	QPNVHn	Wb	GN							names.662028
 真諦訳の摂大乗論	섭대승론	N130	QWK		GN							names.662029
@@ -54137,6 +54139,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 紅巴	쿠레하	N130	QPNVHn	Wb	GN						くれは	names.681138
 紅式部	베니시키부	N130	QPNVHn	Wb	GN						べにしきぶ	names.681139
 紅影	베니카게	N130	QPNVHn	Wb	GN						べにかげ	names.681140
+紅忍 血河の舞	홍인 혈하의 춤	N130	QWK		GN							names.681141
 紅愛	쿠레아	N130	QPNVHn	Wb	GN						くれあ	names.681142
 紅摺絵	베니즈리에	N130	VGt		GN							names.681143
 紅旗	훙치	N130	QCTVPl		GN						こうき	names.681144
@@ -94892,6 +94895,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 運命の衝突	운명의 충돌	N130	QWK		GN							names.722414
 運命の車輪	운명의 수레바퀴	N110			GN							names.722417
 運命の迷宮	운명의 미궁	N110			GN							names.722418
+運命の銃爪	운명의 방아쇠	N130	QWK		GN							names.722419
 運命の饗宴	운명의 향연	N130	QWK		GN							names.722420
 運命を分けたザイル	터칭 더 보이드	N130	QWK		GN							names.722422
 運命を操る程度の能力	운명을 조종하는 정도의 능력	N110			GN							names.722424
@@ -138975,6 +138979,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 龍伍	료고	N130	QPNVHn	Wb	GN							names.766847
 龍佑	류스케	N130	QPNVHn	Wb	GN							names.766848
 龍作	류사쿠	N130	QPNVHn	Wb	GN							names.766849
+龍兄虎弟	용형호제	N130	QWK		GN							names.766850
 龍光	류코	N130	QPNVHn	Wb	GN						りゅうこう	names.766851
 龍光寺カイ	류코지 카이	N130	QPNVHn		GN						りゅうこうじかい	names.766852
 龍円	류엔	N130	QPNVHn	Wa	GN							names.766853
@@ -139123,6 +139128,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 龍我	류우가	N130	QPNVHn	Wb	GN						りゅうが	names.766996
 龍戦丸	류센마루	N110			GN						りゅうせんまる	names.766997
 龍拳	당산비권	N130	QPNVHn	Wb	GN							names.766998
+龍拳蛇手	용권사수	N130	QWK		GN							names.766999
 龍文	류분	N130	QPNVHn	Wb	GN						りゅうぶん	names.767000
 龍文高等学校	용문고등학교	N130	VGt		GN							names.767001
 龍斗	타츠토	N110			GN						たつと	names.767002
