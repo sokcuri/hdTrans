@@ -368,12 +368,21 @@ constexpr NamedFeature kFeatures[] = {
     // A question mark follows the word, with only other marks between (ないの!? ないの？).
     {"question-after",
      [](Flusher&, const Item* it) {
-         std::string_view rest = TextAfter(it);
-         while (!rest.empty()) {
-             const text::Rune r = text::DecodeRune(rest);
-             if (r.cp == U'?' || r.cp == U'？') return true;
-             if (r.size == 0 || !(r.cp == U'!' || r.cp == U'！' || r.cp == U'…' || r.cp == U'‥')) return false;
-             rest.remove_prefix(r.size);
+         const auto asks = [](std::string_view rest) {
+             while (!rest.empty()) {
+                 const text::Rune r = text::DecodeRune(rest);
+                 if (r.cp == U'?' || r.cp == U'？') return 1;
+                 if (r.size == 0 || !RuneIn(r.cp, "!！…‥〜～~ーっッ")) return 0;
+                 rest.remove_prefix(r.size);
+             }
+             return -1;  // only marks that draw out or pause, up to the end
+         };
+         const Item* cur = it;
+         for (int n = 0; n < 4 && cur != nullptr; n++) {
+             if (const int a = asks(TextAfter(cur)); a >= 0) return a == 1;
+             cur = cur->After();
+             if (cur == nullptr) return false;
+             if (const int a = asks(cur->group->surface); a >= 0) return a == 1;
          }
          return false;
      }},

@@ -1,4 +1,4 @@
-# 규칙: LEX-68
+# 규칙: LEX-69
 rule	input	expected	kind	layer
 dict:ino-final:1	「寒いの」	「추워」	fix	local-ending
 dict:chau-final:1	「声、出ちゃう……」	「목소리, 나와버릴 거야……」	fix	ending-defaults
