@@ -2269,6 +2269,8 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     const auto folderSources = app.engineUserPaths;
     const fs::path renamed = gui::UserDictPath(user, "places-renamed");
     if (!Check(RenameDict(app, app.dictIndex, L"places-renamed"), "rename a dictionary inside a default folder source")) return false;
+    ok = Check(Logged(app, L"INFO", L"[" + user.filename().native() + L"/userdict-places.txt] 사전 이름 바꿈: " +
+                                        user.filename().native() + L"/" + renamed.filename().native()), "a rename is logged") && ok;
     ShowDicts(app, renamed);
     ok = Check(TranslateShort(app, L"東京") == L"가져온장소" && app.engineUserPaths == folderSources,
                "folder child rename preserves the configured folder source") && ok;
