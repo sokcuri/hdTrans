@@ -42,7 +42,7 @@ export function mergedPromotion(pullRequests, repo, source) {
   return matches[0];
 }
 
-export async function buildCandidate(scm, baselineVersion, releaseAs, promotion) {
+export async function buildCandidate(scm, baselineVersion, releaseAs, promotion, now) {
   const releaseScm = Object.create(scm);
   releaseScm.mergeCommitIterator = async function* (...args) {
     let first = true;
@@ -59,7 +59,24 @@ export async function buildCandidate(scm, baselineVersion, releaseAs, promotion)
   manifest.releasedVersions = baselineVersion ? { '.': Version.parse(baselineVersion) } : {};
   const candidates = await manifest.buildPullRequests();
   if (candidates.length > 1) throw new Error('Expected one root release candidate.');
-  return candidates[0];
+  const candidate = candidates[0];
+  if (candidate) {
+    const changelog = candidate.updates.find(update => update.path === 'CHANGELOG.md')?.updater;
+    const data = candidate.body.releaseData;
+    if (typeof changelog?.changelogEntry !== 'string' || data.length !== 1 || data[0].notes !== changelog.changelogEntry) {
+      throw new Error('Expected one matching generated changelog entry.');
+    }
+    const date = new Intl.DateTimeFormat('sv-SE', {
+      timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(now ?? new Date());
+    const heading = /^(#{1,3} [^\r\n]+) \(\d{4}-\d{2}-\d{2}\)(?=\r?\n|$)/;
+    if (!heading.test(changelog.changelogEntry)) throw new Error('The generated changelog date heading is missing.');
+    // Only the freshly generated heading is dated here.
+    const notes = changelog.changelogEntry.replace(heading, (_, prefix) => `${prefix} (${date})`);
+    changelog.changelogEntry = notes;
+    data[0].notes = notes;
+  }
+  return candidate;
 }
 
 export function readVersion(root, requireManifest = true) {

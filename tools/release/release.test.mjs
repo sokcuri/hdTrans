@@ -154,6 +154,53 @@ test('regenerating an untagged version replaces its changelog entry instead of d
   assert.equal((changelog.match(/^# Changelog/gm) ?? []).length, 1);
 });
 
+for (const [instant, expected] of [
+  ['2026-10-26T20:42:00Z', '2026-10-27'],
+  ['2026-10-26T14:59:59.999Z', '2026-10-26'],
+  ['2026-10-26T15:00:00Z', '2026-10-27'],
+  ['2026-10-26T23:59:59.999Z', '2026-10-27'],
+  ['2026-10-27T00:00:00Z', '2026-10-27'],
+  ['2026-12-31T15:00:00Z', '2027-01-01'],
+  ['2024-02-28T15:00:00Z', '2024-02-29'],
+  ['2024-02-29T15:00:00Z', '2024-03-01'],
+]) {
+  test(`release date uses the Seoul calendar at ${instant}`, async () => {
+    const { scm } = fixture(['fix: correct output'], '0.6.2');
+    const candidate = await buildCandidate(scm, '0.6.2', undefined, undefined, new Date(instant));
+    const notes = candidate.body.releaseData[0].notes;
+    const changelog = candidate.updates.find(update => update.path === 'CHANGELOG.md').updater;
+    assert.equal(changelog.changelogEntry, notes);
+    const heading = notes.split('\n')[0];
+    assert.match(heading, /^#{1,3} \[0\.6\.3\]\([^\n]+\) \(\d{4}-\d{2}-\d{2}\)$/);
+    assert.ok(heading.endsWith(`(${expected})`), heading);
+    assert.ok(heading.includes('/compare/v0.6.2...v0.6.3'), heading);
+  });
+}
+
+test('release date preserves prior entries byte-for-byte and matches published notes', async t => {
+  const { files, scm } = fixture(['fix: preserve the body date (2026-10-26)'], '0.6.2');
+  const previousEntries = '## [0.6.2](https://example.invalid/compare) (2026-10-26)\n\n' +
+    '### Bug Fixes\n\n* Existing text at 2026-10-26T20:42Z.\n\n' +
+    '## 0.6.1 (2026-10-19)\n\n* Existing older text.\n';
+  files['CHANGELOG.md'] = '# Changelog\n\n' + previousEntries;
+  const root = tempRoot(t, files);
+  const candidate = await buildCandidate(scm, '0.6.2', undefined, undefined, new Date('2026-10-26T20:42Z'));
+  const notes = candidate.body.releaseData[0].notes;
+  assert.ok(notes.split('\n')[0].endsWith('(2026-10-27)'));
+  assert.match(notes, /preserve the body date \(2026-10-26\)/);
+  assert.equal(applyCandidate(root, candidate), '0.6.3');
+  const changelog = readFileSync(join(root, 'CHANGELOG.md'), 'utf8');
+  assert.equal(changelog.slice(changelog.indexOf(previousEntries.split('\n')[0])), previousEntries);
+  assert.equal(releaseNotes(root, '0.6.3'), notes);
+});
+
+test('release date retains the first-release heading format without a comparison link', async () => {
+  const { scm } = fixture(['fix: first release']);
+  const candidate = await buildCandidate(scm, undefined, '0.6.3', promotion, new Date('2026-10-26T20:42Z'));
+  const heading = candidate.body.releaseData[0].notes.split('\n')[0];
+  assert.match(heading, /^#{1,3} 0\.6\.3 \(2026-10-27\)$/);
+});
+
 test('Build validation rejects failures, forks, wrong workflows, branches and events', () => {
   assert.equal(validateBuild(goodRun, repo, 42), source);
   for (const patch of [
