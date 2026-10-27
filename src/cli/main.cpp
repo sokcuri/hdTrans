@@ -92,6 +92,7 @@ void Usage(std::FILE* file) {
                "  --why                  write selection and filter logs to stderr\n"
                "  --trace FILE           write every candidate of every word to FILE\n"
                "  --version              load dictionaries and show engine, runtime and dictionary versions\n"
+               "  --verbose              write loaded dictionary information to stderr (except with --version)\n"
                "  --help                 show this help\n"
                "  --config FILE          settings file\n"
                "  --dicts DIR,...        dictionary paths in load order\n"
@@ -105,7 +106,7 @@ void Usage(std::FILE* file) {
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
-               "Legacy single-hyphen options are also accepted. Use -- before literal text starting with '-'.\n", file);
+               "Legacy single-hyphen options are also accepted, except --verbose. Use -- before literal text starting with '-'.\n", file);
 }
 
 std::FILE* OpenFile(const std::string& path, bool write) {
@@ -285,6 +286,7 @@ int RunMain(int argc, char** argv) {
     bool hasText = false;
     bool json = false;
     bool version = false;
+    bool verbose = false;
     bool literal = false;
     std::string ruleCountsPath;
     std::string dumpRulesPath;
@@ -346,6 +348,7 @@ int RunMain(int argc, char** argv) {
         }
         if (option == "-help") { Usage(stdout); return 0; }
         else if (option == "-version") version = true;
+        else if (option == "-verbose" && std::string_view(argv[i]) == "--verbose") verbose = true;
         else if (option == "-json") json = true;
         else if (option == "-dicts") dictsArg = *value;
         else if (option == "-config") configArg = *value;
@@ -523,7 +526,7 @@ int RunMain(int argc, char** argv) {
             return 1;
         }
     }
-    if (version || verifyDicts) {
+    if (!version && (verbose || verifyDicts)) {
         for (const auto& info : hdTrans::internal::LoadedSourceInfo(engine).files)
             std::fprintf(stderr, "%s\n", hdTrans::frontend::FormatLoadFileInfo(info, programDir).c_str());
     }
