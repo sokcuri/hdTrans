@@ -512,12 +512,12 @@ Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::st
 
 // Text path: the noun records of records move ahead of a verb whose continuative they
 // spell, the stem and one kana of the i or e row (争い, not 争 + い), when no record is
-// longer, the word before is a modifier a verb cannot follow (の, a word in な, この) and
+// longer, the word before is a modifier a verb cannot follow (の, a word in の or な, この) and
 // a particle or punctuation follows the noun. Plain-dictionary records stay in front.
 Record* NounAfterModifier(const Item& parent, Record* records, std::string_view text) {
     const std::string_view p = parent.group->surface;
     if (parent.detail->Yougo() ||
-        (p != "の" && !p.ends_with("な") && p != "この" && p != "その" && p != "あの" && p != "どの")) {
+        (!p.ends_with("の") && !p.ends_with("な") && p != "この" && p != "その" && p != "あの" && p != "どの")) {
         return records;
     }
     Record* owned = nullptr;
