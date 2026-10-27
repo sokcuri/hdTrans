@@ -96,6 +96,7 @@
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
 `tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
 `tests/rules/cases/names-phrase-titles.tsv`, `tests/rules/cases/names-work-title-phrases.tsv`,
+`tests/rules/cases/names-release-titles.tsv`,
 `tests/rules/documents/names-katakana-compounds.tsv`
 
 ### 이름 행 판정
