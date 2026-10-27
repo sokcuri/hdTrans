@@ -194,6 +194,14 @@ Match HangulSpan(std::string_view s) {
     return {n, output::SpanWord};
 }
 
+// The Chinese run of runs (ChineseRuns) that starts at the start of s, before is the text
+// before s; it must end within s.
+Match ChineseSpan(std::string_view before, std::string_view s, std::span<const std::pair<size_t, size_t>> runs) {
+    const auto it = std::lower_bound(runs.begin(), runs.end(), std::pair<size_t, size_t>{before.size(), 0});
+    if (it == runs.end() || it->first != before.size() || it->second - it->first > s.size()) return {};
+    return {it->second - it->first, output::SpanWord};
+}
+
 // A run of foreign characters other than white space, or of ◯, which has no Korean form
 // of its own; a ゔ in it takes the small vowel after it (ゔぁ, ゔぉ).
 Match ForeignSpan(std::string_view s) {
@@ -225,13 +233,14 @@ Match ToneNounSpan(std::string_view before, std::string_view s) {
     return {n, output::SpanWord};
 }
 
-enum class SpanClass { Tag, BbCode, Entity, Style, Marker, Stutter, Drawl, Emphasis, Hangul, Foreign, ToneNoun };
+enum class SpanClass { Tag, BbCode, Entity, Style, Marker, Stutter, Drawl, Emphasis, Hangul, Chinese, Foreign, ToneNoun };
 
 constexpr SpanClass kClasses[] = {SpanClass::Tag,     SpanClass::BbCode, SpanClass::Entity,   SpanClass::Style,
                                   SpanClass::Marker,  SpanClass::Stutter, SpanClass::Drawl,   SpanClass::Emphasis,
-                                  SpanClass::Hangul,  SpanClass::Foreign, SpanClass::ToneNoun};
+                                  SpanClass::Hangul,  SpanClass::Chinese, SpanClass::Foreign, SpanClass::ToneNoun};
 
-Match MatchClass(SpanClass c, std::string_view before, std::string_view s, std::span<const std::string> markers) {
+Match MatchClass(SpanClass c, std::string_view before, std::string_view s, std::span<const std::string> markers,
+                 std::span<const std::pair<size_t, size_t>> chinese) {
     switch (c) {
         case SpanClass::Tag: return TagSpan(s);
         case SpanClass::BbCode: return BbCodeSpan(s);
@@ -242,6 +251,7 @@ Match MatchClass(SpanClass c, std::string_view before, std::string_view s, std::
         case SpanClass::Drawl: return DrawlSpan(s);
         case SpanClass::Emphasis: return EmphasisSpan(s);
         case SpanClass::Hangul: return HangulSpan(s);
+        case SpanClass::Chinese: return ChineseSpan(before, s, chinese);
         case SpanClass::Foreign: return ForeignSpan(s);
         case SpanClass::ToneNoun: return ToneNounSpan(before, s);
     }
@@ -279,6 +289,7 @@ bool IsForeign(char32_t r) {
 
 output::Pieces CutSpans(std::string_view text, std::span<const std::string> markers) {
     std::vector<Cut> cuts;
+    const std::vector<std::pair<size_t, size_t>> chinese = ChineseRuns(text);
     for (const SpanClass c : kClasses) {
         size_t next = 0;  // the first cut that ends after i
         for (size_t i = 0; i < text.size();) {
@@ -288,7 +299,7 @@ output::Pieces CutSpans(std::string_view text, std::span<const std::string> mark
                 continue;
             }
             const size_t free = next < cuts.size() ? cuts[next].start : text.size();
-            if (const Match m = MatchClass(c, text.substr(0, i), text.substr(i, free - i), markers); m.length > 0) {
+            if (const Match m = MatchClass(c, text.substr(0, i), text.substr(i, free - i), markers, chinese); m.length > 0) {
                 cuts.push_back({i, i + m.length, m.kind});
                 i += m.length;
                 continue;

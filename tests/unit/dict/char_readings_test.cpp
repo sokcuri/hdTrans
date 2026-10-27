@@ -28,6 +28,10 @@ HD_TEST(char_readings_sample) {
         {U'国', 0, U'국'},  // written only
         {U'学', 0, U'학'},
         {U'乗', 0, U'승'},
+        {U'噛', 0, U'교'},
+        {U'嚙', 0, U'교'},
+        {U'蕙', U'혜', U'혜'},
+        {U'曩', 0, U'낭'},
         {U'々', 0, U'ː'},
         {U'〇', 0, U'○'},
         {U'・', 0, U'·'},
@@ -56,8 +60,8 @@ HD_TEST(char_readings_table) {
         written += r.written != 0;
         differ += r.reading != 0 && r.written != 0 && r.reading != r.written;
     }
-    HD_CHECK_EQ(table.size(), size_t{7162});
+    HD_CHECK_EQ(table.size(), size_t{8250});
     HD_CHECK_EQ(reading, size_t{4888});
-    HD_CHECK_EQ(written, size_t{6358});
+    HD_CHECK_EQ(written, size_t{7853});
     HD_CHECK_EQ(differ, size_t{75});
 }

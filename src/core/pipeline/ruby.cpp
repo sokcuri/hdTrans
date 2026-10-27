@@ -33,12 +33,20 @@ bool BarRuby(std::string_view s, size_t pos, Match& m) {
     });
 }
 
-// ([一-龥々〆ヶ]+)《([^《》]{1,30})》, base as group 3
+// ([一-龥々〆ヶ]+)《([ぁ-ヿ　 ]{1,30})》, base as group 3: without the bar only a kana reading is ruby,
+// and a title in 《》 after kanji (是《胧月夜》) stays.
 bool KanjiRuby(std::string_view s, size_t pos, Match& m) {
     return Repeat(s, pos, [](char32_t c) { return IsKanjiClass(c) || c == U'〆' || c == U'ヶ'; }, 1, kUnbounded,
                   [&](size_t q) {
                       m.group[3] = Span(s, pos, q);
-                      return Reading(s, q, m);
+                      size_t p = q;
+                      if (!Lit(s, p, "《")) return false;
+                      return Repeat(s, p, [](char32_t c) { return (c >= U'ぁ' && c <= U'ヿ') || c == U'　' || c == U' '; }, 1, 30,
+                                    [&](size_t r) {
+                                        if (!Lit(s, r, "》")) return false;
+                                        m.end = r;
+                                        return true;
+                                    });
                   });
 }
 

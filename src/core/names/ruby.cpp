@@ -92,12 +92,13 @@ bool BarParenRuby(std::string_view s, std::size_t pos, RubyMatch& m) {
     return true;
 }
 
-// ([一-龥々〆ヶ]+)《([^《》]{1,30})》 at pos, where the kanji run from pos ends at baseEnd.
+// ([一-龥々〆ヶ]+)《([ぁ-ヿ　 ]{1,30})》 at pos, where the kanji run from pos ends at baseEnd: without
+// the bar only a kana reading is ruby, and a title in 《》 after kanji (是《胧月夜》) stays.
 bool KanjiRuby(std::string_view s, std::size_t pos, std::size_t baseEnd, RubyMatch& m) {
     std::size_t p = baseEnd;
     if (baseEnd == pos || !Lit(s, p, "《")) return false;
     const std::size_t readStart = p;
-    const std::size_t k = Take(s, p, 31, NotBracket);
+    const std::size_t k = Take(s, p, 31, [](char32_t c) { return (c >= U'ぁ' && c <= U'ヿ') || c == U'　' || c == U' '; });
     const std::size_t readEnd = p;
     if (k < 1 || k > 30 || !Lit(s, p, "》")) return false;
     m.begin = pos;

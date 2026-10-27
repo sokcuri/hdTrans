@@ -61,7 +61,8 @@ using WordKeepsVariant = bool (*)(const void* context, std::string_view line, si
 // 見た時): a kanji variant after hiragana, or after a kanji or katakana when
 // spelling.variant-after-word lists it; a kana variant written in kanji only after a kana of
 // spelling.variant-kana-after; another kana variant anywhere. A variant in a context of spelling.variant-kept (神の位) stays, and so does one where
-// keeps says a dictionary word cuts across it or holds it. Run after Normalize, with the dictionary.
+// keeps says a dictionary word cuts across it or holds it, or it is in a Chinese run
+// (internal::ChineseRuns). Run after Normalize, with the dictionary.
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context);
 
 // line with each ending of classes.tsv spelling.katakana-ending written in katakana right after a
@@ -81,7 +82,8 @@ std::string RespellKanjiCries(std::string_view line);
 
 // line with each old form of a kanji in classes.tsv spelling.old-form (OLD=NEW) written in its
 // new form, so that both read alike (格好惡い 格好悪い), unless holds says a dictionary word holds
-// the old form (赤澤, 澤 on its own). Run after Normalize, with the dictionary.
+// the old form (赤澤, 澤 on its own) or it is in a Chinese run (internal::ChineseRuns). Run after
+// Normalize, with the dictionary.
 std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context);
 
 namespace internal {
@@ -172,8 +174,8 @@ struct SpeechCues {
 SpeechCues ReadSpeechCues(std::string_view line);
 bool FemaleSpeech(std::span<const std::string> lines);
 
-// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 and HTML
-// <ruby>.
+// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 with a kana reading and
+// HTML <ruby>.
 std::string StripRuby(std::string_view line);
 
 }  // namespace internal

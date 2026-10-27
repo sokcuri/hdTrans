@@ -2,6 +2,8 @@
 // Character classes and UTF-8 scanning shared by the protect and segment stages.
 #include <cstddef>
 #include <string_view>
+#include <utility>
+#include <vector>
 
 #include "core/text/utf8.h"
 
@@ -33,6 +35,12 @@ inline bool IsJapaneseRune(char32_t r) {
     return (r >= 0x3041 && r <= 0x30FF) || (r >= 0x3400 && r <= 0x4DBF) || (r >= 0x4E00 && r <= 0x9FFF) ||
            (r >= 0xF900 && r <= 0xFAFF) || r == 0x3005 || r == 0x3006;
 }
+
+// The byte ranges [first, second) of the Han runs of text written in Chinese: a whole Han run
+// holding a character of script.chinese-han (你, 么) or outside Japanese (tokenizer::IsJapaneseHan)
+// that is no old or variant form of spelling.old-form (說, 𠮷), and, on a text holding such a run, a Han run with no kana
+// right before or after it (（你也是）).
+std::vector<std::pair<size_t, size_t>> ChineseRuns(std::string_view text);
 
 // The length in bytes of the leading run of s whose characters satisfy in.
 template <class Pred>

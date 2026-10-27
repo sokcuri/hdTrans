@@ -254,6 +254,7 @@
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
+//= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
@@ -275,7 +276,7 @@
 //= spelling.katakana-ending	Polite endings of する written in katakana right after a word, before a pause or the end (受信シマシタ), respelled in hiragana with their ー kept (でーす) before lookup.
 //= spelling.katakana-ending-after-kana	Endings of spelling.katakana-ending that are respelled only after hiragana, the stem of a verb (行きマース; not 一マス).
 //= spelling.katakana-particle	Final particles written in katakana, respelled like spelling.katakana-ending but only after hiragana or kanji (楽しいネー, 天気ネ; not Decemberネー).
-//= spelling.old-form	Old forms of kanji that the Jōyō kanji table gives with their new forms, OLD=NEW: an old form that no dictionary word holds, not even on its own, is written in its new form before lookup, so that both read alike (格好惡い 格好悪い, 隱れる 隠れる; 赤澤 of a name stays).
+//= spelling.old-form	Old forms of kanji that the Jōyō kanji table gives with their new forms, and variant forms with the form Japanese text uses (說 説, 嚙 噛, 𠮷 吉), OLD=NEW: an old form that no dictionary word holds, not even on its own, is written in its new form before lookup, so that both read alike (格好惡い 格好悪い, 隱れる 隠れる; 赤澤 of a name stays).
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
 //= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
@@ -4369,6 +4370,31 @@ spelling.old-form	逸=逸
 spelling.old-form	難=難
 spelling.old-form	響=響
 spelling.old-form	頻=頻
+spelling.old-form	𠮷=吉
+spelling.old-form	說=説
+spelling.old-form	嚙=噛
+spelling.old-form	悅=悦
+spelling.old-form	銳=鋭
+spelling.old-form	稅=税
+spelling.old-form	脫=脱
+spelling.old-form	閱=閲
+spelling.old-form	𠮟=叱
+spelling.old-form	頰=頬
+spelling.old-form	剝=剥
+spelling.old-form	塡=填
+spelling.old-form	蟬=蝉
+spelling.old-form	摑=掴
+spelling.old-form	醬=醤
+spelling.old-form	搔=掻
+spelling.old-form	禱=祷
+spelling.old-form	簞=箪
+spelling.old-form	瀆=涜
+spelling.old-form	噓=嘘
+spelling.old-form	顚=顛
+spelling.old-form	鷗=鴎
+spelling.old-form	屛=屏
+spelling.old-form	繫=繋
+spelling.old-form	蠟=蝋
 spelling.variant	程=ほど
 spelling.variant	位=くらい
 spelling.variant	等=など
@@ -7184,3 +7210,20 @@ wrap.sentence-start	うわ
 wrap.sentence-start	よし
 wrap.sentence-start	じゃあ
 wrap.sentence-start	ところが
+script.chinese-han	你
+script.chinese-han	您
+script.chinese-han	么
+script.chinese-han	嗎
+script.chinese-han	呢
+script.chinese-han	吧
+script.chinese-han	啊
+script.chinese-han	咦
+script.chinese-han	喂
+script.chinese-han	开
+script.chinese-han	关
+script.chinese-han	种
+script.chinese-han	复
+script.chinese-han	灵
+script.chinese-han	帮
+script.chinese-han	阳
+script.chinese-han	极

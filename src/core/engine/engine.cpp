@@ -383,7 +383,8 @@ struct Access {
             auto result = dict::LoadFolders(dirs, {}, verify, cacheWrite, files, strict, memory ? &*memory : nullptr);
             if (Loaded(result)) {
                 for (const auto& error : result.errors) {
-                    if (!dict::FailsLoad(error.kind) &&
+                    // A Japanese target is a notice of --verify-dicts; the row loads.
+                    if (!dict::FailsLoad(error.kind) && error.kind != dict::LoadErrorKind::JapaneseTarget &&
                         (std::find(files.begin(), files.end(), error.file) != files.end() ||
                          (memory && error.file == memory->name))) userErrors.push_back(error);
                 }

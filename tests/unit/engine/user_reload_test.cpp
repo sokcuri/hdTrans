@@ -430,6 +430,17 @@ HD_TEST(UserDictionaryReloadKeepsValidRowsBesideWarning) {
     HD_CHECK(!dict::FailsLoad(warnings[0].kind));
 }
 
+HD_TEST(UserDictionaryJapaneseTargetLoadsWithoutError) {
+    TempFolder temp;
+    const auto user = temp.path / "userdict.tsv";
+    HD_REQUIRE(Write(user, "#! layer=user\nkey\tko\tpos\tid\n猫\t고양이改\tN110\t1\n"));
+    Engine engine(false, CacheWrite::Off);
+    HD_REQUIRE(engine.Open({Fixture()}, false, user.string()));
+    HD_REQUIRE(engine.Dictionaries()->User() != nullptr);
+    HD_CHECK(engine.Dictionaries()->User()->Records("猫").size() == 1);
+    HD_CHECK(engine.UserFileError().empty());
+}
+
 HD_TEST(UserDictionaryBadFilesAreIsolated) {
     TempFolder temp;
     const auto first = temp.path / "userdict-a.txt";

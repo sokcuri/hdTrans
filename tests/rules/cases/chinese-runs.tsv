@@ -1,0 +1,21 @@
+# 규칙: LAY-17
+rule	input	expected	kind	layer
+protect:chinese-run	这里就是我们的宇宙	这里就是我们的宇宙	fix	protect
+protect:chinese-run	喂 还不行 我说还不行啊	喂 还不行 我说还不行啊	fix	protect
+protect:chinese-run	是黑帮的报复吗	是黑帮的报复吗	fix	protect
+protect:chinese-run	ユニバース我们的宇宙	유니버스 我们的宇宙	fix	protect
+protect:chinese-run	約束しよう所以我们约定好了	약속하자 所以我们约定好了	fix	protect
+protect:chinese-run	ここが僕らのユニバース这里就是我们的宇宙	여기가 우리의 유니버스 这里就是我们的宇宙	fix	protect
+protect:chinese-run	誰でも一つぐらい持っているでしょう（キミも　キミも）无论谁都至少有一个（你也是 你也是）	누구라도 하나 정도 가지고 있겠지요(너도 너도) 无论谁都至少有一个(你也是 你也是)	fix	protect
+protect:chinese-run	さあ 顔を上げて来 抬起头来	자 고개를 들어 와 抬起头来	fix	protect
+protect:chinese-run	时间轴 : 塔塔君	时间轴 : 塔塔君	fix	protect
+protect:chinese-run	本字幕由夏叶字幕团制作	本字幕由夏叶字幕团制作	fix	protect
+protect:chinese-run	今日は学校に行った。	오늘은 학교에 갔다.	keep	protect
+protect:chinese-run	龍が空を飛んだ。	용이 하늘을 날았다.	keep	protect
+protect:chinese-run	國の王様に会った。	나라의 임금님을 만났다.	keep	protect
+protect:chinese-run	彼は學校へ行く。	그는 학교에 간다.	keep	protect
+protect:chinese-run	髙橋さんが来た。	타카하시 씨가 왔다.	keep	protect
+protect:chinese-run	山﨑さんの家だ。	야마자키 씨의 집이다.	keep	protect
+protect:chinese-run	是 那天傍晚是《败犬们的挽歌2》的台词训练	是 那天傍晚是《败犬们的挽歌2》的台词训练	fix	normalize
+protect:chinese-run	魔法《マジック》を使う。	마법을 쓴다.	keep	normalize
+protect:chinese-run	但是 这力量可不同于远程操作型	但是 这力量可不同于远程操作型	fix	normalize
