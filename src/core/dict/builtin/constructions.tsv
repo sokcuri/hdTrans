@@ -635,5 +635,5 @@ cx:prohibit-request:20	LEX-61	&&4 :prohibit-please S-1== "しな" P-1== "7**" U-
 //= voice-out	after OfferPromise 650	The 声 read 목소리 right before 出る with no particle between is a sound that escapes: 소리 (声出ちゃう 소리 나와 버린다). Not before に (声に出す says it aloud) nor が (声が出ない 목소리가 나오지 않는다).
 cx:voice-out:10	LEX-61	&&3 S+0== "声" D+0== "목소리" S+1== "L出"	set-target "소리"	声出ちゃう 소리 나와 버린다
 
-//= ending-presumptive-rare	after Select 50	Bare よう after a recognized potential, passive or causative-passive is presumptive, not an invitation; the selected voice stays.
-cx:ending-presumptive-rare:10	GRM-10	&&6 F+0== "conjugating" U+0== "よう" Y+0== "1자" ||2 F+0== "utterance-end" F+0== "quote-end" ||4 F+0== "potential" F+0== "passive" F+0== "causative-passive" G+0== "Ke" !1 F+0== "respectful"	set-ending "3 것이다"	bare よう
+//= ending-presumptive-rare	after Select 50	Bare よう after a recognized potential or causative-passive is presumptive; plain passives are excluded and the selected voice stays.
+cx:ending-presumptive-rare:10	GRM-10	&&6 F+0== "conjugating" U+0== "よう" Y+0== "1자" ||2 F+0== "utterance-end" F+0== "quote-end" ||3 F+0== "potential" F+0== "causative-passive" G+0== "Ke" !1 F+0== "respectful"	set-ending "3 것이다"	これなら行けよう 갈 수 있을 것이다
