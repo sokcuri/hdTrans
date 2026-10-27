@@ -214,10 +214,12 @@ cx:toward-adverbial:10	LEX-9	&&5 C+0== "(을)를 향하다" ||2 L+0== "(으)로 
 //= rest-entrusted	after Select 40	The 後 or あと before は or を and a verb of verb.entrust, with no other verb between, is the rest of the task, 나머지, also after an ellipsis or a name (あとは…頼んだ 나머지는…부탁했어); after の or a verb it is the time after (食事の後は 식사 뒤는).
 cx:rest-entrusted:10	LEX-10	&&5 ||2 S+0== "後" S+0== "あと" ||2 S+1== "は" S+1== "を" F+0== "selected" !1 ||2 S-1== "の" F-1== "conjugating" >8 B+0== @verb.entrust ||2 F+0== "conjugating" S+0== @mark.sentence-end	select-lemma "나머지"	あとは…頼んだ 나머지는…부탁했어
 //~ hada-adjective	&AV@=&Mf@	The 하다 verb of a root written as the 하다 adjective (당당하다).
+//~ state-root	고요=고요&Mf@	The root of ko-root.hada-state written as its 하다 adjective (고요하다).
 //= toshite-state	after Select 60	The している after a word in と says the state it names, not an act. A と word read as the 하다 verb of a 하다 adjective of ko-adjective.hada-state is that adjective, conjugated with the ending of いる (堂々としている 당당하다, 堂々としていた 당당했다, 堂々としている人 당당한 사람); after an adverb in 히 or 게 it is the adverb with 있다, without 하고 (じっとしている 가만히 있다).
 cx:toshite-state:10	LEX-66	&&4 S+0== "してい" D+0== "하고 &HN@" S-1== "Rと" ||2 D-1== "R히" D-1== "R게"	set-target "&HN@"	毅然としている 의연히 있다
 cx:toshite-state:20	LEX-66	&&6 S+0== "Rと" F+0== "verb" D+0== "R&AV@" L+0== @ko-adjective.hada-state Y+0== "1고" ||2 S+1== "い" S+1== "居"	map-target-tail @hada-adjective take-prev-target@+1	堂々としている 당당하다
 cx:toshite-state:30	LEX-66	&&5 S+0== "Rと" F+0== "verb" D+0== "R&AV@" L+0== @ko-adjective.hada-state Y+0== "1고 있어"	map-target-tail @hada-adjective set-ending "6"	堂々としていなさい 당당해
+cx:toshite-state:40	LEX-66	&&4 F+0== "fixed" D+0== @ko-root.hada-state S+1== "してい" D+1== "하고 &HN@"	map-target @state-root take-prev-target@+1	しんとしている 고요하다
 //= ino-question	after Select 80	The いの that ends a sentence before a question mark asks for the reason, -는 거야, not the -아/어 of a statement (進展ないの!? 진전 없는 거야!?, 痛いの…… 아파……).
 cx:ino-question:10	LEX-69	&&3 U+0== "Rいの" Y+0== "6" F+0== "question-after"	set-ending "4 거야"	進展ないの!? 진전 없는 거야!?
 //= chau-final	after Select 90	The ちゃう that ends a line inside 「」 or 『』 is speech, not -어버린다: after a verb of what happens to one (verb.involuntary) it is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아, 死んじゃう 죽을 것 같아), after another verb -어버릴 거야 (やっちゃう 해버릴 거야). Narration keeps -어버린다.
