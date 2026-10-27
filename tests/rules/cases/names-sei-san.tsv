@@ -1,0 +1,2 @@
+rule	input	expected	kind	layer
+lookup:sei-san	聖さん、こんにちは。	has: 씨, 안녕하세요	fix	lookup
