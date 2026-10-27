@@ -142,6 +142,7 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
     if (kind == kKindDirect) {
         d.patternMatched = 1;
         d.patternLength = static_cast<int>(recordText.size());
+        d.kind = 0;  // a whole form (ワロタ) takes the endings of a dictionary form after it
         return true;
     }
     for (int branch = 0; branch < kConjugationBranches; branch++) {

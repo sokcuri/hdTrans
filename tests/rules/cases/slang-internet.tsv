@@ -66,7 +66,7 @@ phrase:おけ	おけ。	오케이.	fix	builtin-phrase
 phrase:おけおけ	おけおけ	오케이 오케이	fix	builtin-phrase
 phrase:おけ	次はないぞ、覚えておけ。	다음은 없어, 기억해 두어라.	keep	builtin-phrase
 phrase:おけ	時報も任せておけ。	시보도 맡겨 두어라.	keep	builtin-phrase
-phrase:ワロタ	ワロタ	ㅋㅋㅋ	fix	builtin-phrase
+cx:laugh-comment:10	ワロタ	웃겨	fix	rewrites
 phrase:てぇてぇ	てぇてぇ	존귀해	fix	builtin-phrase
 phrase:ウケる	「無理に決まってるじゃん。ウケる」	「무리일 게 뻔하잖아. 웃겨」	fix	builtin-phrase
 phrase:ウケる	「は？　ちげーし、なんだよそれ～～ウケる～～～」	「뭐? 아니고, 뭐야 그게~ 웃겨~」	fix	builtin-phrase
