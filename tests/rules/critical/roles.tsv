@@ -1,6 +1,5 @@
 # 규칙: MNG-4, GRM-9
 rule	input	expected	kind	layer
-verb:synthetic-causative-potential	これなら彼を助けさせられる。	has:그를 돕게 할 수 있다	fix	analysis
 verb:synthetic-causative-potential	私は先生に練習を続けさせられた。	has:선생님 때문에 억지로	keep	analysis
 verb:synthetic-causative-potential	先生に書かされる。	has:선생님 때문에 억지로	keep	analysis
 verb:synthetic-causative-potential	貴様の仕事の遅さにはへきえきさせられる｡	lacks:게 할 수	keep	analysis

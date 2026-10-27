@@ -22,7 +22,6 @@ verb:synthetic-causative-potential	単調な計算を繰り返させられた。
 verb:synthetic-causative-potential	続けさせられない。	계속하게 할 수 없다.	fix	analysis
 verb:synthetic-causative-potential	続けさせられません。	계속하게 할 수 없습니다.	fix	analysis
 verb:synthetic-causative-potential	続けさせられますか。	계속하게 할 수 있습니까.	fix	analysis
-verb:synthetic-causative-potential	これなら練習を続けさせられる。	이것이라면 연습을 계속하게 할 수 있다.	fix	analysis
 verb:synthetic-causative-potential	最後まで続けさせられればいい。	끝까지 계속하게 할 수 있으면 된다.	fix	analysis
 verb:synthetic-causative-potential	続けさせられなかった。	계속하게 할 수 없었다.	fix	analysis
 verb:synthetic-causative-potential	私は先生に練習を続けさせられた。	has:선생님 때문에 억지로	keep	analysis
@@ -102,3 +101,26 @@ verb:synthetic-causative-honorific	お二人共　ご無事でいらっしゃい
 verb:synthetic-causative-honorific	皆様ご無事でいらっしゃいました	lacks:할 수	keep	analysis
 verb:synthetic-causative-honorific	殿下にあらせられません。	lacks:할 수	keep	analysis
 verb:synthetic-causative-honorific	殿下であらせられなかった。	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	毎日残業を続けさせられる。	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	仕事を続けさせられる	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	嫌いな仕事を続けさせられるのはつらい。	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	こんな仕事を続けさせられたら、体がもたない。	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	続けさせられたら	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	無理やり食べさせられた	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	考えさせられる話だ	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-evidence	待たされる	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	驚かされた	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	早く寝させられたら困る	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	あの子を泣かせられない	has:울릴 수 없	keep	analysis
+verb:synthetic-causative-evidence	食べさせられます	has:먹일 수 있	keep	analysis
+verb:synthetic-causative-evidence	信じさせられる証拠はない	has:믿게 할 수	keep	analysis
+verb:synthetic-causative-evidence	待たせられない	has:기다리게 할 수 없	keep	analysis
+verb:synthetic-causative-evidence	待たせられません	has:기다리게 할 수 없	keep	analysis
+verb:synthetic-causative-evidence	続けさせられればいい	has:할 수 있으면	keep	analysis
+verb:synthetic-causative-evidence	続けさせられよう	has:할 수	keep	analysis
+verb:synthetic-causative-evidence	続けさせられます	has:할 수 있	keep	analysis
+verb:synthetic-causative-evidence	続けさせられたりする	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	仕事を続けさせられたりした	lacks:할 수	keep	analysis
+verb:synthetic-causative-evidence	食べられたらいい	has:먹을 수	keep	analysis
+verb:synthetic-causative-evidence	食べられたりする	has:먹을 수	keep	analysis
+verb:synthetic-causative-evidence	それなら仕方なく続けさせられる	lacks:할 수	keep	analysis

@@ -1101,6 +1101,12 @@ bool ForcingInClause(const Item* it) {
     return false;
 }
 
+// The たら and たり of a derived causative keep the causative-passive reading.
+bool CausativePotentialEnding(std::string_view rest) {
+    return dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0 &&
+           !rest.starts_with("たら") && !rest.starts_with("たり");
+}
+
 // The voice of the (ら)れ of verb item it, first signal first (spec GRM-10): an agent that is a
 // person or an animal makes the passive; then the respectful form; a godan passive, and たい after
 // it, the passive; a word of ability the potential; a trouble after its condition the passive; a
@@ -1121,7 +1127,7 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     const bool object = synthetic || form != VoiceForm::Rare || dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), surface) ||
                         CompoundAction(surface) || Transitive(it) || ObjectBefore(it) || Has(surface, "を");
     if ((synthetic && ForcingInClause(it)) || (agent != nullptr && object)) return Voice::Passive;
-    if (synthetic && dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) == 0 &&
+    if (synthetic && !CausativePotentialEnding(rest) &&
         (NarrativePassive(it, rest) || rest.starts_with("ちゃ") || rest.starts_with("ちま"))) {
         return Voice::Passive;
     }
@@ -1138,11 +1144,10 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     if (synthetic) {
         // A derived causative needs a potential cue; unmarked られる keeps the causative-passive.
         // An object alone does not turn an experienced event into an ability.
-        const bool potentialEnding = dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0;
+        const bool potentialEnding = CausativePotentialEnding(rest);
         const int slot = it->selected >= 0 ? it->selected : DefaultSlot(it);
         if (ExperiencedCausative(it, slot) && !potentialEnding) return Voice::Passive;
-        const bool potential = potentialEnding || ObjectBefore(it);
-        return !passive && potential ? Voice::Potential : Voice::Passive;
+        return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
     return Voice::None;
