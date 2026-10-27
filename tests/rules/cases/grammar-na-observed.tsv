@@ -1,21 +1,21 @@
 # 규칙: GRM-43
 rule	input	expected	kind	layer
-cx:na-observed:10	ちょっと萌えるなｗ	조금 설레는구나 ㅋ	fix	rewrites
-cx:na-observed:10	ちょっと萌えるな。	조금 설레는구나.	fix	rewrites
-cx:na-observed:10	泣けるなｗ	눈물이 나오는구나 ㅋ	fix	rewrites
-cx:na-observed:10	泣けるな。	눈물이 나오는구나.	fix	rewrites
-cx:na-observed:10	笑えるなｗ	웃기는구나 ㅋ	fix	rewrites
-cx:na-observed:10	佳奈の気持ちもわかるな。	카나의 마음도 아는구나.	fix	rewrites
-cx:na-observed:10	俺でも分かるな	나라도 아는구나	fix	rewrites
-cx:na-observed:10	人気あるのもわかるな」	인기 있는 것도 아는구나」	fix	rewrites
-cx:na-observed:10	あり得るな。	있을 수 있는구나.	fix	rewrites
-cx:na-observed:10	ありえるな…	있을 수 있는구나…	fix	rewrites
-cx:na-observed:10	刺すこともできるな	찌를 수도 있는구나	fix	rewrites
-cx:na-observed:10	これでしばらくはゆっくり出来るな」	이것으로 당분간은 천천히 할 수 있는구나」	fix	rewrites
-cx:na-observed:10	扇子ならこっちにあるな」	부채라면 여기에 있는구나」	fix	rewrites
-cx:na-observed:10	手もあるな	방법도 있는구나	fix	rewrites
-cx:na-observed:10	よい目をしておるな。	좋은 눈을 하고 있는구나.	fix	rewrites
-cx:na-observed:10	突っ立ってるのも疲れるな。	has:지치는구나	fix	rewrites
+cx:na-observed:10	ちょっと萌えるなｗ	조금 설레네 ㅋ	fix	rewrites
+cx:na-observed:10	ちょっと萌えるな。	조금 설레네.	fix	rewrites
+cx:na-observed:10	泣けるなｗ	눈물이 나오네 ㅋ	fix	rewrites
+cx:na-observed:10	泣けるな。	눈물이 나오네.	fix	rewrites
+cx:na-observed:10	笑えるなｗ	웃기네 ㅋ	fix	rewrites
+cx:na-observed:5	佳奈の気持ちもわかるな。	카나의 마음도 알겠네.	fix	rewrites
+cx:na-observed:5	俺でも分かるな	나라도 알겠네	fix	rewrites
+cx:na-observed:5	人気あるのもわかるな」	인기 있는 것도 알겠네」	fix	rewrites
+cx:na-observed:10	あり得るな。	있을 수 있네.	fix	rewrites
+cx:na-observed:10	ありえるな…	있을 수 있네…	fix	rewrites
+cx:na-observed:10	刺すこともできるな	찌를 수도 있네	fix	rewrites
+cx:na-observed:10	これでしばらくはゆっくり出来るな」	이것으로 당분간은 천천히 할 수 있네」	fix	rewrites
+cx:na-observed:10	扇子ならこっちにあるな」	부채라면 여기에 있네」	fix	rewrites
+cx:na-observed:10	手もあるな	방법도 있네	fix	rewrites
+cx:na-observed:10	よい目をしておるな。	좋은 눈을 하고 있네.	fix	rewrites
+cx:na-observed:10	突っ立ってるのも疲れるな。	has:지치네	fix	rewrites
 cx:na-observed:10	何か聞こえるな。	뭔가 들리는구나.	fix	rewrites
 cx:na-observed:10	笑うな！	웃지 마!	keep	rewrites
 cx:na-observed:10	笑うなｗ	웃지 마 ㅋ	keep	rewrites
@@ -38,3 +38,5 @@ cx:na-observed:10	「高峰、水を差すな」	「고봉, 찬물을 끼얹지 
 cx:na-observed:10	この2人以外は誰も入れるな。	lacks:있는구나	keep	rewrites
 cx:na-observed:10	火縄銃には見えんな。	has:보이지 않지	keep	rewrites
 cx:na-observed:10	何も聞こえんな	has:들리지 않지	keep	rewrites
+cx:na-observed:5	見えるなｗ	!rule:cx:na-observed:5	keep	rewrites
+cx:na-observed:5	触るな	!rule:cx:na-observed:5	keep	rewrites
