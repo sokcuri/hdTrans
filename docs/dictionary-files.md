@@ -6,12 +6,11 @@
 
 | | 사전 | 버전 |
 |---|---|---|
-| 배포판(Releases) | `hdTrans\dicts.hdsnap` 한 파일. `dicts/`를 [컴파일한 것](#컴파일한-사전-hdsnap) | 옆의 `dicts.txt` |
+| 배포판(Releases) | `hdtrans-data/dicts.hdsnap` 한 파일. `dicts/`를 [컴파일한 것](#컴파일한-사전-hdsnap) | 옆의 `dicts.txt` |
 | git에서 받은 것 | `dicts/` 폴더의 TSV | 없음(개발판으로 표시) |
 
-엔진은 데이터 폴더(프로그램 옆 `hdTrans\`, 없으면 프로그램 폴더)에 `dicts.hdsnap`이 있으면 그것을 쓰고,
-없으면 `dicts\` 폴더를 씁니다. 배포판에서 git의 TSV를 쓰려면 `dicts.hdsnap`과 `dicts.txt`를 지우고 저장소의
-`dicts/` 폴더를 그 자리에 둡니다. 사전 TSV를 직접 고쳐 쓸 때도 이렇게 합니다. 사용자 사전(`user\`)은 어느 쪽이든 그대로 읽습니다.
+기본 사전은 실행 파일 옆 `hdtrans-data/dicts.hdsnap`입니다. 저장소의 TSV나 직접 고친 사전은
+`--dicts dicts`로 폴더를 지정합니다. 사용자 사전은 `hdtrans-data/user/`에서 따로 읽습니다.
 
 ## dicts/ 구성
 
@@ -118,11 +117,10 @@ TSV만 고칩니다. 내장 표의 행은 모두 같은 파일 번호로 컴파�
 
 - 사전 폴더 목록을 차례로 불러오며, 뒤 폴더가 앞 폴더를 덮어씁니다.
 - 각 폴더에서는 최상위의 `*.tsv` 파일만 이름 순서로 읽습니다. 하위 폴더는 읽지 않습니다.
-- 프로그램 폴더에 `hdTrans/` 디렉터리가 있으면 데이터 루트로 쓰고, 없으면 프로그램 폴더 자체를 씁니다.
-  이름은 대소문자를 가리지 않습니다. 기본 사전은 `dicts.hdsnap` 또는 `dicts/`, 설정과 사용자 사전은 `user/`에 둡니다.
-  Windows 배포는 `hdTrans/` 아래, macOS와 Linux CLI 배포는 프로그램 옆에 둡니다.
-- CLI, C API, GUI와 `J2KEngine.dll`은 사전을 따로 지정하지 않으면 데이터 루트의 `dicts.hdsnap`, `dicts/`
-  순서로 찾습니다. CLI는 둘 다 없으면 현재 폴더의 `dicts`를 씁니다. 설정의 `dicts`나 명시한 사전 목록이 우선합니다.
+- 모든 운영체제에서 프로그램 옆 `hdtrans-data/`가 데이터 루트입니다. 이름은 대소문자를 가리지 않습니다.
+  기본 사전은 `dicts.hdsnap`, 설정과 사용자 사전은 `user/`, Ehnd 파일은 `ehnd/`에 둡니다.
+- CLI, C API, GUI와 `J2KEngine.dll`은 사전을 따로 지정하지 않으면 데이터 루트의 `dicts.hdsnap`을 읽습니다.
+  설정의 `dicts`나 명시한 사전 목록이 우선합니다.
   선택한 `.hdsnap`이 잘못되었으면 TSV로 바꾸지 않고 실패합니다.
 - 폴더 다음에 [사용자 사전 파일](#사용자-사전-파일)를 불러옵니다.
 - 목록의 첫 항목이 `.hdsnap` 파일이면 [컴파일한 사전](#컴파일한-사전-hdsnap)입니다.
@@ -261,7 +259,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 - 데이터 루트의 `user/`에서 이름이 `userdict`로 시작하고 `.txt`나 `.tsv`로 끝나는 파일을 모두 읽습니다.
   대소문자는 구별하지 않고 하위 폴더는 읽지 않습니다. 소문자 파일 이름의 바이트 순서로 읽으며 같은 항목은 뒤 파일이 우선합니다.
   배포본의 `userdict.example.txt`도 읽지만 주석만 있습니다. 새 항목은 `userdict.txt` 같은 별도 파일에 적으세요.
-  옛 배치에서는 프로그램 옆 `userdict.tsv`를 먼저 읽습니다.
 - `user/hdtrans.config.yaml`의 `userdict: path` 또는 `userdict: [first.tsv, second.txt, folder]`는 기본 탐색을 대신합니다.
   폴더에서는 같은 파일 이름 규칙으로 찾고, 목록 순서대로 읽습니다. 상대 경로는 설정 파일 기준입니다. 빈 문자열이나 빈 목록은 끕니다.
   CLI의 `-userdict PATH`도 파일이나 폴더를 받으며 여러 번 줄 수 있습니다. CLI 인자가 설정을 대신합니다.
@@ -322,7 +319,7 @@ Ehnd 필터와 UserDict의 필드가 부족해 원래 읽지 않던 줄은 엄�
 Ehnd(이지트랜스 확장)의 전처리, 후처리 필터, SkipLayer, 사용자 사전을 그대로 쓸 수 있습니다. 형식과
 적용 순서는 [ehnd-compat.md](ehnd-compat.md)에 있습니다.
 
-- 기존 Ehnd 폴더: 설정 파일의 `ehnd: true`로 프로그램 옆 `Ehnd` 폴더를 켜거나 `ehnd: 경로`로 지정합니다.
+- Ehnd 폴더: 설정 파일의 `ehnd: true`로 `hdtrans-data/ehnd/`를 켜거나 `ehnd: 경로`로 지정합니다.
   CLI `-ehnd DIR`, C API `hdTrans_OpenEhnd`, C++ `Engine::OpenEhnd`로도 켤 수 있습니다.
   `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt`, `UserDict*.txt`를 Ehnd와 같은 순서로 읽습니다.
   꿀도르 같은 Ehnd 사전은 `dicts/`에 들어 있지 않고 기본으로 켜지지 않습니다.

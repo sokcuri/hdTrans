@@ -21,9 +21,9 @@ extern "C" {
 #endif
 
 /* Loads dirs (NUL-separated, double NUL at the end), later folders overriding earlier
- * ones. Empty dirs uses the config's dicts. The data root is hdTrans/ next to the library
- * when present, otherwise the library folder; user/ holds config and userdict*.txt/tsv.
- * Legacy files next to the library remain supported. Ehnd is opt-in through config
+ * ones. Empty dirs uses the config's dicts. The data root is hdtrans-data/ next to the
+ * library; dicts.hdsnap is required and user/ holds optional config and userdict*.txt/tsv.
+ * Ehnd is opt-in through config
  * or hdTrans_OpenEhnd. User dictionary errors are available through hdTrans_UserDictError.
  * Changed user files reload in the background, except on WebAssembly.
  * Returns 0, or -1 when no dictionary loads or a concurrent Terminate, successful

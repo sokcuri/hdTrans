@@ -6,7 +6,7 @@ tmp=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-config.XXXXXX")
 tmp=$(cd "$tmp" && pwd -P)
 trap 'rm -rf "$tmp"' EXIT
 trap 'exit 1' HUP INT TERM
-mkdir -p "$tmp/bin" "$tmp/settings/first" "$tmp/settings/second" "$tmp/other"
+mkdir -p "$tmp/bin/hdtrans-data/user" "$tmp/settings/first" "$tmp/settings/second" "$tmp/other"
 cp "$cli" "$tmp/bin/hdtrans-cli"
 cli=$tmp/bin/hdtrans-cli
 printf 'key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n猫\t고양이\tN110\t\t\tGN\t\t\t\t\t1\n' > "$tmp/settings/first/base.tsv"
@@ -18,26 +18,26 @@ cd "$tmp/other"
 [ "$(cat "$tmp/out")" = 고양이 ]
 "$cli" -dicts "$tmp/settings/second" -config "$tmp/settings/custom.yaml" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 야옹이 ]
-printf 'dicts: ../settings/second\nuserdict: ""\nehnd: ""\ncache: off\n' > "$tmp/bin/hdtrans.config.yaml"
+printf 'dicts: ../../../settings/second\nuserdict: ""\nehnd: ""\ncache: off\n' > "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 야옹이 ]
-mkdir -p "$tmp/bin/Ehnd"
-printf '야옹이\t흰고양이\t1\t0\n' > "$tmp/bin/Ehnd/PostFilter_test.txt"
-printf 'dicts: ../settings/second\nuserdict: ""\ncache: off\n' > "$tmp/bin/hdtrans.config.yaml"
+mkdir -p "$tmp/bin/hdtrans-data/ehnd"
+printf '야옹이\t흰고양이\t1\t0\n' > "$tmp/bin/hdtrans-data/ehnd/PostFilter_test.txt"
+printf 'dicts: ../../../settings/second\nuserdict: ""\ncache: off\n' > "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 야옹이 ]
-printf 'ehnd: true\n' >> "$tmp/bin/hdtrans.config.yaml"
+printf 'ehnd: true\n' >> "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 흰고양이 ]
-printf 'ehnd: false\n' >> "$tmp/bin/hdtrans.config.yaml"
+printf 'ehnd: false\n' >> "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 야옹이 ]
-"$cli" -ehnd "$tmp/bin/Ehnd" -in "$tmp/input" > "$tmp/out"
+"$cli" -ehnd "$tmp/bin/hdtrans-data/ehnd" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 흰고양이 ]
 printf 'dicts: second\nuserdict: ""\ncache: off\nehnd: true\n' > "$tmp/settings/custom.yaml"
 "$cli" -config "$tmp/settings/custom.yaml" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 흰고양이 ]
-rm "$tmp/bin/hdtrans.config.yaml"
+rm "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
 "$cli" -dicts "$tmp/settings/second" -userdict "" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 야옹이 ]
 printf 'dicts: [first, second]\nunknown: value\ncg: wrong\nuserdict: ""\nehnd: ""\ncache: off\n' > "$tmp/settings/custom.yaml"
@@ -56,53 +56,33 @@ status=0
 status=0
 "$cli" -config "$tmp/missing.yaml" -in "$tmp/input" > /dev/null 2> "$tmp/errors" || status=$?
 [ "$status" -eq 1 ]
-mkdir -p "$tmp/bin/dicts" "$tmp/bin/hdTrans/dicts" "$tmp/bin/hdTrans/user"
-cp "$tmp/settings/second/base.tsv" "$tmp/bin/dicts/"
-printf '犬\t옛사전\n' > "$tmp/bin/userdict.tsv"
-cp "$tmp/settings/first/base.tsv" "$tmp/bin/hdTrans/dicts/"
-printf '犬\t새사전\n' > "$tmp/bin/hdTrans/user/userdict.tsv"
+mkdir -p "$tmp/bin/hdtrans-data/user"
+"$cli" --dicts "$tmp/settings/first" --compile-snapshot "$tmp/bin/hdtrans-data/dicts.hdsnap" > "$tmp/snapshot-path"
+printf '犬\t새사전\n' > "$tmp/bin/hdtrans-data/user/userdict.tsv"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 고양이 ]
 printf '犬' > "$tmp/dog"
 "$cli" -in "$tmp/dog" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 새사전 ]
-printf 'dicts: ../../../settings/second\nuserdict: userdict.tsv\ncache: off\n' > "$tmp/bin/hdTrans/user/hdtrans.config.yaml"
+printf 'dicts: ../../../settings/second\nuserdict: userdict.tsv\ncache: off\n' > "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 야옹이 ]
 "$cli" -dicts "$tmp/settings/first" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 고양이 ]
-printf 'cache: off\n' > "$tmp/bin/hdTrans/user/hdtrans.config.yaml"
-mv "$tmp/bin/hdTrans/user/userdict.tsv" "$tmp/bin/hdTrans/user/staged.tsv"
-mv "$tmp/bin/hdTrans/user/staged.tsv" "$tmp/bin/hdTrans/user/USERDICT.TSV"
-mv "$tmp/bin/hdTrans/user/hdtrans.config.yaml" "$tmp/bin/hdTrans/user/staged.yaml"
-mv "$tmp/bin/hdTrans/user/staged.yaml" "$tmp/bin/hdTrans/user/HDTRANS.CONFIG.YAML"
-mv "$tmp/bin/hdTrans/dicts" "$tmp/bin/hdTrans/staged-dicts"
-mv "$tmp/bin/hdTrans/staged-dicts" "$tmp/bin/hdTrans/DICTS"
-mv "$tmp/bin/hdTrans/user" "$tmp/bin/hdTrans/staged-user"
-mv "$tmp/bin/hdTrans/staged-user" "$tmp/bin/hdTrans/USER"
-mv "$tmp/bin/hdTrans" "$tmp/bin/staged-data"
-mv "$tmp/bin/staged-data" "$tmp/bin/HDTRANS"
+printf 'cache: off\n' > "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml"
+mv "$tmp/bin/hdtrans-data/user/userdict.tsv" "$tmp/bin/hdtrans-data/user/staged.tsv"
+mv "$tmp/bin/hdtrans-data/user/staged.tsv" "$tmp/bin/hdtrans-data/user/USERDICT.TSV"
+mv "$tmp/bin/hdtrans-data/user/hdtrans.config.yaml" "$tmp/bin/hdtrans-data/user/staged.yaml"
+mv "$tmp/bin/hdtrans-data/user/staged.yaml" "$tmp/bin/hdtrans-data/user/HDTRANS.CONFIG.YAML"
 "$cli" -in "$tmp/input" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 고양이 ]
 "$cli" -in "$tmp/dog" > "$tmp/out"
 [ "$(cat "$tmp/out")" = 새사전 ]
-rm -rf "$tmp/bin/HDTRANS"
+rm "$tmp/bin/hdtrans-data/user/USERDICT.TSV" "$tmp/bin/hdtrans-data/user/HDTRANS.CONFIG.YAML"
+printf '# comments only\n# 犬\t견본사전\n' > "$tmp/bin/hdtrans-data/user/userdict.txt"
+printf 'dicts: missing\n' > "$tmp/bin/hdtrans-data/user/hdtrans.config.example.yaml"
 "$cli" -in "$tmp/input" > "$tmp/out"
-[ "$(cat "$tmp/out")" = 야옹이 ]
-"$cli" -in "$tmp/dog" > "$tmp/out"
-[ "$(cat "$tmp/out")" = 옛사전 ]
-mkdir -p "$tmp/bin/user"
-printf '犬\t새사전\n' > "$tmp/bin/user/userdict.tsv"
-printf 'cache: off\n' > "$tmp/bin/user/hdtrans.config.yaml"
-"$cli" -in "$tmp/dog" > "$tmp/out"
-[ "$(cat "$tmp/out")" = 새사전 ]
-rm "$tmp/bin/user/userdict.tsv" "$tmp/bin/user/hdtrans.config.yaml"
-printf '# comments only\n# 犬\t견본사전\n' > "$tmp/bin/user/userdict.txt"
-printf 'dicts: missing\n' > "$tmp/bin/user/hdtrans.config.example.yaml"
-"$cli" -in "$tmp/dog" > "$tmp/out"
-[ "$(cat "$tmp/out")" = 옛사전 ]
-"$cli" -in "$tmp/input" > "$tmp/out"
-[ "$(cat "$tmp/out")" = 야옹이 ]
+[ "$(cat "$tmp/out")" = 고양이 ]
 printf '犬\t첫파일\n' > "$tmp/settings/first-user.txt"
 printf '犬\t뒤파일\n' > "$tmp/settings/second-user.tsv"
 "$cli" -userdict "$tmp/settings/first-user.txt" -userdict "$tmp/settings/second-user.tsv" -in "$tmp/dog" > "$tmp/out"

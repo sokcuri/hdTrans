@@ -13,20 +13,25 @@ C:\hdTrans\
   J2KEngine.dll
   hdTransEngine.dll
   hdTransEngine_x86.dll
-  hdTrans\
+  hdtrans-data\
     dicts.hdsnap
     dicts.txt
     user\
       userdict.example.txt
       hdtrans.config.example.yaml
+    ehnd\
+      README.txt
+      PreFilter_example.txt
+      PostFilter_example.txt
+      UserDict_example.txt
 ```
 
 배포판은 컴파일한 `dicts.hdsnap`과 버전 파일 `dicts.txt`를 담으며 `dicts/`나 원본 TSV를 담지 않습니다.
-Linux와 macOS는 사전 두 파일과 `user/`를 실행 파일 옆에 둡니다.
+Linux와 macOS도 같은 `hdtrans-data/`를 실행 파일 옆에 둡니다.
 구성은 [패키징 스크립트](../tools/package-release.py)에 있습니다.
 
-J2K DLL은 초기화 인자의 `Dat`, 현재 폴더, 레지스트리와 무관하게 DLL 옆 `hdTrans/`를 데이터 루트로 씁니다.
-그 폴더가 없으면 DLL이 있는 폴더를 씁니다. 기본 사전은 데이터 루트의 `dicts.hdsnap`, 없으면 `dicts/`입니다.
+J2K DLL은 초기화 인자의 `Dat`, 현재 폴더, 레지스트리와 무관하게 DLL 옆 `hdtrans-data/`를 데이터 루트로 씁니다.
+기본 사전은 데이터 루트의 `dicts.hdsnap`입니다.
 TwoControl 2024.08.30은 별도로 원본 사전 파일을 검사합니다. 다른 아래 로더는 `Dat` 폴더나 이지트랜스 실행 파일의 존재를 필수 검사하지 않습니다.
 도구의 ANSI 변환 문제를 피하려면 영문 경로를 씁니다.
 
@@ -186,7 +191,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 - 플러그인은 `J2K_InitializeEx`, `J2K_TranslateMMNT`, `J2K_FreeMem`, `J2K_StopTranslation`, `J2K_Terminate`, `J2K_ReloadUserDict`를 조회합니다. hdTrans는 이 export와 호출 규약을 제공합니다. 이 버전의 플러그인은 `J2K_TranslateMMNTW`를 조회하지 않으므로 hdTrans의 W 함수 지원과 별개로 클라이언트의 번역 경로는 ANSI입니다.
 - 번역 호출은 `char* __stdcall J2K_TranslateMMNT(int, const char*)` 형태로 두 인자를 전달하고 원래 결과 포인터를 `J2K_FreeMem`에 넘깁니다. export 조회는 플러그인 RVA `0x17ce8a`, 번역 호출은 `0x17dfd7`, 결과 해제는 `0x17e3cb`에서 시작합니다.
 - `Ehnd/Ehnd.dll`과 `Ehnd/Ehnd.dlx`를 모두 x86 hdTrans DLL의 복사본으로 교체합니다. 원본 Ehnd 래퍼 자체를 교체하므로 원본 엔진에 대한 내부 코드 패치는 거치지 않습니다. 나머지 동봉 파일은 유지해 로더의 사전 검사를 통과시킵니다.
-- hdTrans는 파일명과 무관하게 로드된 DLL 옆에서 데이터를 찾으므로 사전과 사용자 파일은 `Ehnd/hdTrans/`에 둡니다. 두 파일을 교체하면 `EhndUnload`와 NTLEA 조건의 어느 분기에서도 hdTrans를 읽습니다. [설치 순서](using-with-tools.md#투컨트롤-twocontrol)
+- hdTrans는 파일명과 무관하게 로드된 DLL 옆에서 데이터를 찾으므로 사전과 사용자 파일은 `Ehnd/hdtrans-data/`에 둡니다. 두 파일을 교체하면 `EhndUnload`와 NTLEA 조건의 어느 분기에서도 hdTrans를 읽습니다. [설치 순서](using-with-tools.md#투컨트롤-twocontrol)
 - 이 교체 방식의 근거는 정적 로더와 호출 계약입니다. 실제 TwoControl GUI는 실행하지 않았고 이 배포본에 대응하는 hdTrans 호스트 테스트는 없습니다.
 - 공개 RAR SHA-256은 `7faf4f6c7698da1008e0fe67b9e293e55fbc97117b9e54018301f0cb683dc232`입니다.
 
@@ -205,7 +210,7 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 `hdTransEngine.dll`, 32비트면 `hdTransEngine_x86.dll`을 고릅니다.
 macOS는 `libhdTransEngine.dylib`, Linux는 `libhdTransEngine.so`이며 문자열은 모두 UTF-8, 호출 규약은 Cdecl입니다.
 
-아래를 `translate.py`로 저장하고 `python translate.py C:\hdTrans\hdTransEngine.dll C:\hdTrans\hdTrans\dicts.hdsnap`로 실행합니다.
+아래를 `translate.py`로 저장하고 `python translate.py C:\hdTrans\hdTransEngine.dll C:\hdTrans\hdtrans-data\dicts.hdsnap`로 실행합니다.
 둘째 인자는 배포판의 사전 스냅샷 경로입니다. DLL과 Python의 비트수를 맞춥니다.
 
 ```python

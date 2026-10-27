@@ -127,6 +127,13 @@ int FailedLoad(std::uint64_t generation, const hdTrans::Engine& engine, const st
     return -1;
 }
 
+std::string ConfigDiagnostics(const hdTrans::internal::ConfigResult& config, const std::string& path,
+                              const std::string& programDir) {
+    std::string errors = hdTrans::internal::ConfigErrors(config, path);
+    for (const auto& warning : hdTrans::dict::FolderWarnings(programDir)) errors += (errors.empty() ? "" : "\n") + warning;
+    return errors;
+}
+
 }  // namespace
 
 #if defined(_WIN32) && defined(HDTRANS_BUILD_DLL)
@@ -206,7 +213,7 @@ int hdTrans_Initialize(const char* dirs) {
     const bool ehndLoaded = hdTrans::internal::OpenEhndSource(*e, ehndSource, config);
     const bool loaded = hdTrans::internal::OpenUserSources(*e, paths, false, requestedUserSources, config);
     if (!loaded || (hadActiveEngine && (!ehndLoaded || HasFatalLoadError(*e))))
-        return FailedLoad(generation, *e, hdTrans::internal::ConfigErrors(config, configPath));
+        return FailedLoad(generation, *e, ConfigDiagnostics(config, configPath, dir));
     AdminLock lock;
     if (generation != g_generation) return -1;
     e->SetOptions(hdTrans::EngineOptions{g_strictDictOverride, true, configPath});
@@ -218,7 +225,7 @@ int hdTrans_Initialize(const char* dirs) {
     g_dirs = requestedPaths;
     g_ehnd.reset();
     ClearFailedLoad();
-    g_configErrors = hdTrans::internal::ConfigErrors(config, configPath);
+    g_configErrors = ConfigDiagnostics(config, configPath, dir);
     g_configPath = configPath;
     ++g_generation;
     return 0;
@@ -301,7 +308,7 @@ int hdTrans_Reload(void) {
     const hdTrans::dict::UserSource ehndSource{ehnd, true, false, ehndOverride.has_value() || settings.ehnd.has_value()};
     if (!hdTrans::internal::OpenEhndSource(*e, ehndSource, config) ||
         !hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources, config) || HasFatalLoadError(*e))
-        return FailedLoad(generation, *e, hdTrans::internal::ConfigErrors(config, configPath));
+        return FailedLoad(generation, *e, ConfigDiagnostics(config, configPath, dir));
     AdminLock lock;
     if (generation != g_generation) return -1;
     e->SetOptions(hdTrans::EngineOptions{g_strictDictOverride, true, configPath});
@@ -310,7 +317,7 @@ int hdTrans_Reload(void) {
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
     g_session->SetSpeech(settings.speech);
     g_session->SetWrapped(settings.wrapped);
-    g_configErrors = hdTrans::internal::ConfigErrors(config, configPath);
+    g_configErrors = ConfigDiagnostics(config, configPath, dir);
     g_configPath = configPath;
     ClearFailedLoad();
     ++g_generation;
@@ -333,7 +340,7 @@ int hdTrans_OpenEhnd(const char* dir) {
     if (!g_engine) return -1;
     const std::string d = dir ? dir : "";
     const auto config = hdTrans::internal::LoadConfig(g_configPath);
-    g_configErrors = hdTrans::internal::ConfigErrors(config, g_configPath);
+    g_configErrors = ConfigDiagnostics(config, g_configPath, hdTrans::frontend::ModuleDirectory());
     ClearFailedLoad();
     if (!hdTrans::internal::OpenEhndSource(*g_engine, {d, true, false, true}, config)) return -1;
     g_ehnd = d;

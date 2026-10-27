@@ -263,8 +263,7 @@ jobs:
           cp third_party/pcre2/deps/sljit/LICENSE "$root/third_party/pcre2/deps/sljit/"
           cp third_party/libyaml/License "$root/third_party/libyaml/"
           if [[ "${{ matrix.preset }}" != wasm ]]; then
-            data="$root"
-            if [[ "$RUNNER_OS" == Windows ]]; then data="$root/hdTrans"; fi
+            data="$root/hdtrans-data"
             mkdir -p "$data/user"
             home="$(mktemp -d)"
             HOME="$home" USERPROFILE="$home" HDTRANS_CACHE_DIR=off \
@@ -281,6 +280,7 @@ jobs:
           PY
             read -r -a userFiles <<< "$HDTRANS_USER_FILES"
             cp "${userFiles[@]}" "$data/user/"
+            cp -R ehnd "$data/"
           fi
       - name: Test without external fixtures
         run: |
@@ -291,10 +291,7 @@ jobs:
               build/wasm/hdtrans_engine.js tests/unit/dict/testdata/folder/base.tsv \
               2>&1 | tee build/wasm/ctest.log
           else
-            export HDTRANS_DICTS="$GITHUB_WORKSPACE/build/${{ matrix.preset }}/dicts.hdsnap"
-            if [[ "$RUNNER_OS" == Windows ]]; then
-              export HDTRANS_DICTS="$GITHUB_WORKSPACE/build/${{ matrix.preset }}/hdTrans/dicts.hdsnap"
-            fi
+            export HDTRANS_DICTS="$GITHUB_WORKSPACE/build/${{ matrix.preset }}/hdtrans-data/dicts.hdsnap"
             ctest --preset "${{ matrix.preset }}" --parallel "$BUILD_JOBS" --verbose \
               2>&1 | tee "build/${{ matrix.preset }}/ctest.log"
           fi
@@ -385,7 +382,7 @@ jobs:
             rm -rf "$home"
             base="$src/build/linux"
           }
-          args=(--report build/linux/hdtrans build/linux/dicts.hdsnap --base "$BASE_SHA")
+          args=(--report build/linux/hdtrans build/linux/hdtrans-data/dicts.hdsnap --base "$BASE_SHA")
           base="$RUNNER_TEMP/base"
           if ! python3 -I tools/perf-base.py "$BASE_SHA" "$base" --wait 600; then
             base=
@@ -481,10 +478,7 @@ jobs:
             build/${{ matrix.preset }}/hdtrans_engine.wasm
             build/${{ matrix.preset }}/translator.js
             build/${{ matrix.preset }}/translator.d.ts
-            build/${{ matrix.preset }}/hdTrans/
-            build/${{ matrix.preset }}/dicts.hdsnap
-            build/${{ matrix.preset }}/dicts.txt
-            build/${{ matrix.preset }}/user/
+            build/${{ matrix.preset }}/hdtrans-data/
             build/${{ matrix.preset }}/THIRD-PARTY-NOTICES.txt
             build/${{ matrix.preset }}/third_party/
       - name: Upload test and compiler-cache logs

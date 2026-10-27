@@ -13,6 +13,8 @@
 #include "core/engine.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
+#include "core/filter/ehnd.h"
+#include "core/filter/filter.h"
 #include "hdtest.h"
 
 namespace {
@@ -87,6 +89,33 @@ HD_TEST(EngineFilters) {
     HD_CHECK_EQ(Translate(e, "ポチ"), "흰둥이");
     HD_CHECK(e.OpenEhnd(""));
     HD_CHECK_EQ(Translate(e, "ポチ"), "포치");
+}
+
+HD_TEST(EngineEhndExamplesAreComments) {
+    TempFolder dicts("example-dicts");
+    dicts.Write("base.tsv", "key\tko\tpos\tid\n猫\t고양이\tN110\t1\n");
+    const auto examples = std::filesystem::path(__FILE__).parent_path().parent_path().parent_path().parent_path() / "ehnd";
+    const auto text = examples.u8string();
+    const std::string path(reinterpret_cast<const char*>(text.data()), text.size());
+    std::vector<hdTrans::filter::Source> sources;
+    std::vector<hdTrans::filter::Error> errors;
+    HD_REQUIRE(hdTrans::filter::ReadEhndFolder(path, sources, errors));
+    HD_CHECK(errors.empty());
+    HD_REQUIRE(sources.size() == 3);
+    HD_CHECK_EQ(sources[0].name, "PreFilter_example.txt");
+    HD_CHECK_EQ(sources[1].name, "PostFilter_example.txt");
+    HD_CHECK_EQ(sources[2].name, "UserDict_example.txt");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.OpenEhnd(path));
+    HD_REQUIRE(engine.Open({dicts.path.string()}));
+    if (const auto filters = engine.Filters()) {
+        HD_CHECK(filters->Rows(hdTrans::filter::Stage::Pre) == 0);
+        HD_CHECK(filters->Rows(hdTrans::filter::Stage::Post) == 0);
+        HD_CHECK(filters->User() == nullptr);
+    }
+    HD_CHECK(engine.FilterErrors().empty());
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK_EQ(Translate(engine, "猫"), "고양이");
 }
 
 HD_TEST(EngineEhndAutoReload) {

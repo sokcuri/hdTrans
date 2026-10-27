@@ -22,18 +22,18 @@ X: https://x.com/sokcuri
 
 다른 번역 도구에 연결하기
 
-도구가 읽는 위치에 J2KEngine.dll과 hdTrans 폴더를 함께 둡니다.
+도구가 읽는 위치에 J2KEngine.dll과 hdtrans-data 폴더를 함께 둡니다.
 도구에 엔진 경로를 지정하면 원본 이지트랜스를 따로 설치할 필요가 없습니다.
 XUnity는 J2KEngineH.dll을 먼저 읽으므로 기존 파일이 있으면 제거합니다.
 도구별 설정: https://github.com/sokcuri/hdTrans/blob/main/docs/using-with-tools.md
 
 사전과 설정
 
-기본 사전은 Windows에서 hdTrans\dicts.hdsnap, Linux와 macOS에서 프로그램 옆 dicts.hdsnap입니다.
-같은 폴더의 dicts.txt는 사전 버전입니다. 원본 TSV는 필요 없습니다.
+모든 운영체제에서 실행 파일 옆 hdtrans-data/dicts.hdsnap이 기본 사전입니다.
+이 파일은 필수이며 같은 폴더의 dicts.txt는 사전 버전입니다. 원본 TSV는 필요 없습니다.
+user/, 설정 파일과 ehnd/는 선택입니다. 다른 사전은 --dicts, 다른 설정은 --config로 지정합니다.
 
-사용자 사전은 Windows에서 hdTrans\user\userdict.txt,
-Linux와 macOS에서 user/userdict.txt에 만듭니다.
+사용자 사전은 hdtrans-data/user/userdict.txt에 만듭니다.
 UTF-8로 저장하고 일본어와 한국어를 탭으로 구분합니다.
 userdict로 시작하는 .txt 파일로 나누어도 됩니다.
 

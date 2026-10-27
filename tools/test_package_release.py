@@ -39,6 +39,9 @@ class PackageReleaseTest(unittest.TestCase):
             self.write(self.source / "dicts" / name, content)
         self.write(self.source / "dicts/ignored.txt", b"not dictionary data\n")
         self.write(self.source / "npm/package.json", b'{"version":"0.1.0"}\n')
+        self.ehnd = {path.name: path.read_bytes() for path in (ROOT / "ehnd").iterdir()}
+        for name, content in self.ehnd.items():
+            self.write(self.source / "ehnd" / name, content)
         for name in (
             "README.txt", "LICENSE", "NOTICE", "THIRD-PARTY-NOTICES.txt",
             "third_party/pcre2/LICENCE.md", "third_party/pcre2/deps/sljit/LICENSE",
@@ -53,7 +56,7 @@ class PackageReleaseTest(unittest.TestCase):
                 if preset.startswith("windows-") else ("hdtrans", "libhdTransEngine.so", "libhdTransEngine.dylib")
             for name in names:
                 self.write(folder / name, f"{preset}/{name}\n".encode())
-            data = folder / "hdTrans" if preset.startswith("windows-") else folder
+            data = folder / "hdtrans-data"
             self.write(data / "user/hdtrans.config.example.yaml", b"# user configuration\n")
             self.write(data / "user/userdict.example.txt", b"# user dictionary\n")
             self.write(data / "dicts/stale.tsv", b"must not be shipped\n")
@@ -103,7 +106,6 @@ class PackageReleaseTest(unittest.TestCase):
                     with zipfile.ZipFile(path) as archive:
                         members = archive.namelist()
                         files = {member: archive.read(member) for member in members}
-                    data = "hdTrans/"
                     binaries = {"hdtrans.exe", "hdTransGUI.exe", "hdTransEngine.dll",
                                 "J2KEngine.dll", "hdTransEngine_x86.dll", "hdtrans_x86.exe"}
                 else:
@@ -115,12 +117,13 @@ class PackageReleaseTest(unittest.TestCase):
                         cli = archive.getmember(prefix + "hdtrans")
                         self.assertEqual(cli.mode & 0o777, 0o755)
                     self.assertTrue(all(member == prefix[:-1] or member.startswith(prefix) for member in members))
-                    data = ""
                     library = "libhdTransEngine.so" if "-linux-" in name else "libhdTransEngine.dylib"
                     binaries = {"hdtrans", library}
                 self.assertFalse(any(PurePosixPath(member).suffix.lower() == ".tsv" for member in members))
                 self.assertFalse(any("dicts" in PurePosixPath(member).parts for member in members))
-                self.assertEqual(set(files), common | binaries | {
+                data = "hdtrans-data/"
+                ehnd = {data + "ehnd/" + name for name in self.ehnd}
+                self.assertEqual(set(files), common | binaries | ehnd | {
                     data + "dicts.hdsnap", data + "dicts.txt",
                     data + "user/hdtrans.config.example.yaml", data + "user/userdict.example.txt",
                 })
@@ -131,6 +134,8 @@ class PackageReleaseTest(unittest.TestCase):
                 self.assertEqual(files[data + "dicts.hdsnap"], shared_snapshot)
                 self.assertEqual(files[data + "user/hdtrans.config.example.yaml"], b"# user configuration\n")
                 self.assertEqual(files[data + "user/userdict.example.txt"], b"# user dictionary\n")
+                for name, content in self.ehnd.items():
+                    self.assertEqual(files[data + "ehnd/" + name], content)
                 for notice in ("third_party/pcre2/LICENCE.md", "third_party/pcre2/deps/sljit/LICENSE",
                                "third_party/libyaml/License"):
                     self.assertIn(f"=== {notice} ===".encode(), files["THIRD-PARTY-NOTICES.txt"])
