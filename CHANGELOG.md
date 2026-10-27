@@ -1,5 +1,73 @@
 # Changelog
 
+## [0.7.0](https://github.com/sokcuri/hdTrans/compare/v0.6.2...v0.7.0) (2026-10-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* **data:** users of 0.6.2 or earlier move user/ and Ehnd dictionaries into hdtrans-data/. Expectation sets are unchanged.
+
+### Features
+
+* **data:** read native data from hdtrans-data next to the program ([#230](https://github.com/sokcuri/hdTrans/issues/230)) ([f3a7840](https://github.com/sokcuri/hdTrans/commit/f3a7840f65084f99135671b46c4a1de261f715f4))
+* **dict:** skip bad dictionary rows and keep the old stack on failed reloads ([#226](https://github.com/sokcuri/hdTrans/issues/226)) ([35fd56c](https://github.com/sokcuri/hdTrans/commit/35fd56c0b7f26565b4b5863c3c4592fb793e1f9f))
+* **gui:** add a 사전 확인 button to the log tab ([#235](https://github.com/sokcuri/hdTrans/issues/235)) ([1ddba56](https://github.com/sokcuri/hdTrans/commit/1ddba5636fc2394a56dc90a46c78cf76d61171d0))
+* **gui:** log dictionary changes as full rows and pick up external edits ([#247](https://github.com/sokcuri/hdTrans/issues/247)) ([e1269c8](https://github.com/sokcuri/hdTrans/commit/e1269c8f878e4a26352b08872aad3f2009830851))
+* **gui:** search the 사전 tab entries ([#249](https://github.com/sokcuri/hdTrans/issues/249)) ([187432c](https://github.com/sokcuri/hdTrans/commit/187432c0c7a418533613d281445a759913e005bb))
+* **release:** hdtrans-data folder, dictionary warnings and a fuller dictionary tab ([f6c87f2](https://github.com/sokcuri/hdTrans/commit/f6c87f222e7ec175a4e1f3f44287ec77478f45be))
+* **web:** credit the author in the title and put the version on its own line ([#213](https://github.com/sokcuri/hdTrans/issues/213)) ([c57d82f](https://github.com/sokcuri/hdTrans/commit/c57d82f22b9ee36f13c04c07ae5ebc70bf6bacef))
+
+
+### Bug Fixes
+
+* **conjugation:** read short causatives and the past of かねる ([#217](https://github.com/sokcuri/hdTrans/issues/217)) ([6e74d62](https://github.com/sokcuri/hdTrans/commit/6e74d620660eb64627eee2f50ac26ea5831655f7))
+* **dict:** add the missing ざわつき noun ([#198](https://github.com/sokcuri/hdTrans/issues/198)) ([860fbd2](https://github.com/sokcuri/hdTrans/commit/860fbd2c6b030cf4684bb5308da4462c48d8088a))
+* **dict:** add the missing 横たえる verb stem ([#191](https://github.com/sokcuri/hdTrans/issues/191)) ([4c6b441](https://github.com/sokcuri/hdTrans/commit/4c6b441bc91d1dc42924453c0dfc1c6133810939))
+* **dict:** give 32 rows marker families that fit their class ([#227](https://github.com/sokcuri/hdTrans/issues/227)) ([a39b124](https://github.com/sokcuri/hdTrans/commit/a39b124a888eb40d4fc12e39f52b81984abd9b90))
+* **dict:** keep work-title rows from matching ordinary phrases ([#219](https://github.com/sokcuri/hdTrans/issues/219)) ([2e11737](https://github.com/sokcuri/hdTrans/commit/2e11737277a9a7108f6a8772f0d3a4a1bc33ca78))
+* **dict:** mark 連綿 as a tari noun ([#199](https://github.com/sokcuri/hdTrans/issues/199)) ([a50be6c](https://github.com/sokcuri/hdTrans/commit/a50be6c64965cdc73309a1955f562cc4e09ec235))
+* **dict:** read common idioms as the Korean idioms and 苦手 of things as 질색 ([#237](https://github.com/sokcuri/hdTrans/issues/237)) ([f58fb68](https://github.com/sokcuri/hdTrans/commit/f58fb6838907ea4e6a11f99a09e3342c80fce53e))
+* **dict:** read 月光花 as 월광화 and keep two coined titles ([#220](https://github.com/sokcuri/hdTrans/issues/220)) ([c5a3bb5](https://github.com/sokcuri/hdTrans/commit/c5a3bb5a7587de251508d3d0cfc6dc79a420944b))
+* **dict:** read 迷惑だ as 민폐다, 迷惑する as 곤란해하다 and a past before laughter as ended ([#250](https://github.com/sokcuri/hdTrans/issues/250)) ([09f2c1b](https://github.com/sokcuri/hdTrans/commit/09f2c1bd6cbdbdc7f083a9a74c63cc0757217b6a))
+* **dict:** regenerate the rules program and fix two targets after the bulk merge ([0ce2ad2](https://github.com/sokcuri/hdTrans/commit/0ce2ad22facccd9e2ef237c8418f2dbe54892542))
+* **dict:** render coined work titles literally and keep their symbols ([#221](https://github.com/sokcuri/hdTrans/issues/221)) ([3f2250e](https://github.com/sokcuri/hdTrans/commit/3f2250ed0bc548f1b2c079ac5a2be475b5c0acfb))
+* **dict:** render work titles literally instead of unrelated release titles ([#239](https://github.com/sokcuri/hdTrans/issues/239)) ([8b8884d](https://github.com/sokcuri/hdTrans/commit/8b8884d530eec07472885688f4cb839969b69df1))
+* **dict:** tell literal 油を売る, read が苦手 of food and noun に越したことはない ([#244](https://github.com/sokcuri/hdTrans/issues/244)) ([5b94787](https://github.com/sokcuri/hdTrans/commit/5b94787941c38d68ea3685982edd2d419851120c))
+* **dict:** type 瞼 as an eyelid body part ([#197](https://github.com/sokcuri/hdTrans/issues/197)) ([a8c5c88](https://github.com/sokcuri/hdTrans/commit/a8c5c8879a64ae1050d1ea5298f4683a7a2be196))
+* **dict:** write Korean in 87 targets that held kana or kanji ([#228](https://github.com/sokcuri/hdTrans/issues/228)) ([76713da](https://github.com/sokcuri/hdTrans/commit/76713daa4a8e462cc950056cde81ee4fc0fe8208))
+* **grammar:** distinguish synthetic causative potential from passive ([#208](https://github.com/sokcuri/hdTrans/issues/208)) ([fdebfae](https://github.com/sokcuri/hdTrans/commit/fdebfae999f9210258dca5c509e0afb57a023091))
+* **grammar:** exclude plain passive volition from presumptive selection ([#222](https://github.com/sokcuri/hdTrans/issues/222)) ([514905b](https://github.com/sokcuri/hdTrans/commit/514905b0fc09515e3034639e16964e5a431a00e3))
+* **grammar:** preserve lexical causative-passive polite statements ([#216](https://github.com/sokcuri/hdTrans/issues/216)) ([afafeb3](https://github.com/sokcuri/hdTrans/commit/afafeb3b3f756cbfba38f828802ce87feca2d702))
+* **grammar:** read a derived causative in られよう as the causative-passive ([#234](https://github.com/sokcuri/hdTrans/issues/234)) ([b8d59ec](https://github.com/sokcuri/hdTrans/commit/b8d59ec460b0cfdaf59156a8f35d0a92b07c39e8))
+* **grammar:** read させてもらう as the speaker's act with leave ([#218](https://github.com/sokcuri/hdTrans/issues/218)) ([2b9bb6f](https://github.com/sokcuri/hdTrans/commit/2b9bb6f5592d0d9cb9f84901942bdd48bbb8c685))
+* **gui:** clear the entry fields after adding a dictionary row ([#243](https://github.com/sokcuri/hdTrans/issues/243)) ([7724bfb](https://github.com/sokcuri/hdTrans/commit/7724bfb168fd1b347499be61808cbfcffe07f497))
+* **layout:** preserve spaced fillers and bound grammar ([#201](https://github.com/sokcuri/hdTrans/issues/201)) ([8283606](https://github.com/sokcuri/hdTrans/commit/8283606b860fa78c3ec51c1f4049c628c091b831))
+* **lookup:** read a prefix kanji before a common word instead of a place name ([#224](https://github.com/sokcuri/hdTrans/issues/224)) ([8becc8e](https://github.com/sokcuri/hdTrans/commit/8becc8e6372c0d40e0869ac3225317e29d05dbfa))
+* **markup:** read &lt;R&gt; ruby tags like brace ruby and keep text brackets ([#242](https://github.com/sokcuri/hdTrans/issues/242)) ([5c4b005](https://github.com/sokcuri/hdTrans/commit/5c4b0056c64f54484be451068666c46e76e19ae7))
+* **names:** honor explicit readings in speaker labels ([#206](https://github.com/sokcuri/hdTrans/issues/206)) ([2a4201e](https://github.com/sokcuri/hdTrans/commit/2a4201ef9baa0e35acebdcc898599c53cdcc3a21))
+* **names:** keep compounds of common katakana words out of document names ([#211](https://github.com/sokcuri/hdTrans/issues/211)) ([0426a8a](https://github.com/sokcuri/hdTrans/commit/0426a8ad438e828160be3fc001fe688a20211fc2))
+* **names:** read marked lone name kanji like the bare line, and read unread kana ([#245](https://github.com/sokcuri/hdTrans/issues/245)) ([d622eba](https://github.com/sokcuri/hdTrans/commit/d622eba5d1fda0b9c0d47a400574d6cddda755a6))
+* **names:** read work titles with the marks and kana of the text ([#225](https://github.com/sokcuri/hdTrans/issues/225)) ([41eeea6](https://github.com/sokcuri/hdTrans/commit/41eeea62a94ab4a91d22bfbeac11b9eda79f7f0d))
+* **normalize:** compose canonical kana before ruby parsing ([#209](https://github.com/sokcuri/hdTrans/issues/209)) ([aae477f](https://github.com/sokcuri/hdTrans/commit/aae477f7f5ab63908ba3b2ca4cd93886d8ed976a))
+* **normalize:** compose kana before name and reading discovery ([#212](https://github.com/sokcuri/hdTrans/issues/212)) ([988faa6](https://github.com/sokcuri/hdTrans/commit/988faa6328b112ad802bcacbe120a5b089ef59ca))
+* **output:** end 아니다 in 아니야 and 아니에요 for every family, also before laughter ([#246](https://github.com/sokcuri/hdTrans/issues/246)) ([6c5fdb8](https://github.com/sokcuri/hdTrans/commit/6c5fdb8f82fd9c6fb36fda97e3d28a33d9075f26))
+* **output:** never emit raw conjugation markers ([#229](https://github.com/sokcuri/hdTrans/issues/229)) ([6b7e6cf](https://github.com/sokcuri/hdTrans/commit/6b7e6cf9494a251a25f57d3814fd320a24b1506b))
+* **release:** date new release entries in Asia/Seoul ([#215](https://github.com/sokcuri/hdTrans/issues/215)) ([0817e60](https://github.com/sokcuri/hdTrans/commit/0817e60f4c0ea1c6e1240db1358ed1d19b0f560b))
+* **rewrite:** end spoken lines in 해체 and read quoted ちゃう by what befalls one ([#241](https://github.com/sokcuri/hdTrans/issues/241)) ([dec707e](https://github.com/sokcuri/hdTrans/commit/dec707e447e9957b5cb2db835d30043c1d7ee49a))
+* **rewrite:** read Xとしている of a 하다 adjective as that adjective ([#233](https://github.com/sokcuri/hdTrans/issues/233)) ([b74b2e1](https://github.com/sokcuri/hdTrans/commit/b74b2e1935720e6dc44ed2e0cf81508740a0d494))
+* **rewrite:** read しんとしている as 고요하다 ([#248](https://github.com/sokcuri/hdTrans/issues/248)) ([b14a399](https://github.com/sokcuri/hdTrans/commit/b14a399e56e31926c916967f0bb601259e3965b5))
+* **rules:** normalize terminal negative imperatives ([#203](https://github.com/sokcuri/hdTrans/issues/203)) ([d2109d2](https://github.com/sokcuri/hdTrans/commit/d2109d2cae0d089bb15da353f53c824c00079ed1))
+* **rules:** read marks, ＄ and stretched kana after the symbol fix ([#238](https://github.com/sokcuri/hdTrans/issues/238)) ([e63062c](https://github.com/sokcuri/hdTrans/commit/e63062c22c2069ee627b09f6be424ca073fecc13))
+* **spacing:** read unit signs by their reading and space numbers written with signs ([#236](https://github.com/sokcuri/hdTrans/issues/236)) ([3116d30](https://github.com/sokcuri/hdTrans/commit/3116d307637f396ece9023c501c4a6b0f70a1ce9))
+* **spacing:** space a Latin word from the Korean noun after it ([#223](https://github.com/sokcuri/hdTrans/issues/223)) ([c72f584](https://github.com/sokcuri/hdTrans/commit/c72f58438bc6b1a98a835973165fb56894894ac9))
+* **speech:** distinguish おいで requests from respectful progressives ([#200](https://github.com/sokcuri/hdTrans/issues/200)) ([0a6fccf](https://github.com/sokcuri/hdTrans/commit/0a6fccff30d5e279150f6581fcea0a84f8b5e883))
+* **text:** keep Chinese text as written and read every Japanese kanji ([#240](https://github.com/sokcuri/hdTrans/issues/240)) ([b7ad335](https://github.com/sokcuri/hdTrans/commit/b7ad33516ba42af137dd403d985d7554033bc593))
+* **tokenizer:** preserve Latin identifiers after kana ([#210](https://github.com/sokcuri/hdTrans/issues/210)) ([138235c](https://github.com/sokcuri/hdTrans/commit/138235cc059b4bc12afa886a49cfd8714f44b9cb))
+* **tokenizer:** write symbols as they stand and read 〇, 々, ゝ, ～ by context ([#231](https://github.com/sokcuri/hdTrans/issues/231)) ([816a1a0](https://github.com/sokcuri/hdTrans/commit/816a1a00ffaaf04f2455cb7b550c42aa9083ce93))
+* **word:** keep degree-suffix negation out of adnominal parsing ([#207](https://github.com/sokcuri/hdTrans/issues/207)) ([12c0c32](https://github.com/sokcuri/hdTrans/commit/12c0c328d98f2d1f4f568b376e0ee15d0b00c7dc))
+* **word:** preserve unknown kana stems before particles and endings ([#202](https://github.com/sokcuri/hdTrans/issues/202)) ([80eb903](https://github.com/sokcuri/hdTrans/commit/80eb9032182355dc315699fc0c50adfaf31381f4))
+* **word:** read だけ before a verb as the particle ([#232](https://github.com/sokcuri/hdTrans/issues/232)) ([d0c1ded](https://github.com/sokcuri/hdTrans/commit/d0c1ded94e7eb98a46613312bef5f843eb30dc49))
+
 ## [0.6.2](https://github.com/sokcuri/hdTrans/compare/v0.6.1...v0.6.2) (2026-10-26)
 
 
