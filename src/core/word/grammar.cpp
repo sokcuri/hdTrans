@@ -2527,7 +2527,8 @@ std::string InitialSound(std::string_view s) {
 }  // namespace
 
 // The Sino-Korean reading that starts a word follows the initial sound rule (隆書 륭서 →
-// 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading stays (興隆 흥륭).
+// 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading, a letter, a digit or a
+// mask stays (興隆 흥륭, ○年 ○년).
 void InitialSoundRule(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!OnReading(it)) continue;
@@ -2539,7 +2540,9 @@ void InitialSoundRule(Flusher& f) {
             const std::string_view ps = p->group->surface;
             const char32_t last = ps.empty() ? 0 : DecodeLastRune(ps).cp;
             const bool particle = p->selected >= 0 && At(p->Code(p->selected), 0) == '2';
-            if (!particle && (text::IsLetter(last) || text::IsDigit(last))) continue;
+            // A mask stands for a letter or a digit (○年 ○년).
+            const bool mask = std::u32string_view(U"○●◯◎×✕＊*■□△▲◇◆").find(last) != std::u32string_view::npos;
+            if (!particle && (text::IsLetter(last) || text::IsDigit(last) || mask)) continue;
         }
         if (CounterAfterSpacedNumber(f, it)) continue;
         const std::string target(it->EntryText(it->selected));

@@ -18,3 +18,5 @@ compose:symbol-as-written	㈱山田商店に寄った	㈜야마다 상점에 들
 compose:symbol-as-written	気温は30℃だ	has:30℃	keep	compose
 compose:symbol-as-written	角度は45度だ	각도는 45도다	keep	compose
 compose:symbol-as-written	アパ−トに住む	아파트에 산다	keep	compose
+compose:symbol-as-written	これは＄です	has:$	fix	compose
+compose:symbol-as-written	「＄＃＠！」	「＄＃＠!」	keep	compose

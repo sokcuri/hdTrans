@@ -24,12 +24,12 @@ uint64_t FormFingerprint(std::optional<std::string_view> (*lookup)(char32_t)) {
 // Hashes of the tables; a change to a table changes its hash.
 HD_TEST(canonical_fingerprints) {
     HD_CHECK_EQ(FormFingerprint(CanonicalForm), uint64_t{0xe4e9758e31bb72c2ull});
-    HD_CHECK_EQ(FormFingerprint(FirstForm), uint64_t{0xfe57652a1c8a0bc1ull});
+    HD_CHECK_EQ(FormFingerprint(FirstForm), uint64_t{0xa6eaf75cd1d112dfull});
     hdtest::Fnv widen;
     for (char32_t c = 0; c <= 0x10FFFF; c++) widen.U32(static_cast<uint32_t>(WidenHalfWidth(c)));
     HD_CHECK_EQ(widen.h, uint64_t{0x29e553f923d31d83ull});
     HD_CHECK_EQ(internal::CanonicalFormTable().size(), size_t{2617});
-    HD_CHECK_EQ(internal::FirstFormTable().size(), size_t{7});
+    HD_CHECK_EQ(internal::FirstFormTable().size(), size_t{8});
 }
 
 HD_TEST(canonical_tables_sorted) {

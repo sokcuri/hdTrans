@@ -7,7 +7,7 @@ compose:unit-sign-particle	重さは5㎏だ	무게는 5㎏이다	fix	compose
 compose:unit-sign-particle	距離は3㎞が限界だ	거리는 3㎞가 한계다	fix	compose
 compose:unit-sign-particle	周波数は50㎐だ	주파수는 50㎐다	fix	compose
 compose:unit-sign-particle	値段は10€だった	가격은 10€였다	fix	compose
-compose:unit-sign-particle	値段は100＄だった	가격은 100＄였다	fix	compose
+compose:unit-sign-particle	値段は100＄だった	가격은 100$였다	fix	compose
 compose:unit-sign-particle	水は2ℓで足りる	물은 2ℓ로 충분하다	fix	compose
 compose:unit-sign-particle	濃度は5‰だった	농도는 5‰이었다	fix	compose
 compose:unit-sign-particle	1000₩を払った	1000₩을 지불했다	keep	compose

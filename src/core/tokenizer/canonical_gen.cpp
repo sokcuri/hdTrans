@@ -446,8 +446,8 @@ constexpr CharForm kCanonical[] = {
 };
 
 constexpr CharForm kFirst[] = {
-    {U'“', " \""}, {U'”', "\""}, {U'〒', "(우)"}, {U'！', "!"}, {U'％', "%"}, {U'／', "/"},
-    {U'？', "?"},
+    {U'“', " \""}, {U'”', "\""}, {U'〒', "(우)"}, {U'！', "!"}, {U'＄', "$"}, {U'％', "%"},
+    {U'／', "/"}, {U'？', "?"},
 };
 
 constexpr char32_t kHalfWidth[] = {
