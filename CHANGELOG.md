@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.1](https://github.com/sokcuri/hdTrans/compare/v0.7.0...v0.7.1) (2026-10-27)
+
+
+### Bug Fixes
+
+* **dict:** read 気味悪がる, 面白がる and 可愛がられる as verbs ([#252](https://github.com/sokcuri/hdTrans/issues/252)) ([bc6c792](https://github.com/sokcuri/hdTrans/commit/bc6c7929747925dd0f34c105f2fb94cfd57f9d4d))
+* **release:** read 気味悪がる, 面白がる and 可愛がられる as verbs ([d183523](https://github.com/sokcuri/hdTrans/commit/d183523c32f6b096320846f5c26696bf88e05cfe))
+
 ## [0.7.0](https://github.com/sokcuri/hdTrans/compare/v0.6.2...v0.7.0) (2026-10-27)
 
 
