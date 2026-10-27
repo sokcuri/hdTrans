@@ -27,6 +27,8 @@ HD_TEST(kana_katakana_cases) {
     HD_CHECK_EQ(Katakana("アバター"), std::string("아바타"));
     HD_CHECK_EQ(Katakana("キター"), std::string("키타"));
     HD_CHECK_EQ(Katakana("カーカー"), std::string("카카"));
+    HD_CHECK_EQ(Katakana("クゥーマー"), std::string("쿠마"));
+    HD_CHECK_EQ(Katakana("ウォンター"), std::string("원터"));
     HD_CHECK_EQ(Katakana("ーラー"), std::string("라"));
     HD_CHECK_EQ(Katakana("メント"), std::string("먼트"));
     HD_CHECK_EQ(Katakana("ベッド"), std::string("벳드"));

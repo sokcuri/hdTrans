@@ -766,6 +766,24 @@ bool Worker::Transliterate(std::string_view s, std::string& out) {
         out = std::move(kr);
         return true;
     }
+    // A particle stretched after a word spelled in katakana (セツブンガー 세츠분가) is not -er.
+    for (const std::string_view particle : {"ガー", "ハー", "ナー", "カー", "サー", "ダー"}) {
+        if (!s.ends_with(particle)) continue;
+        const std::string_view stem = s.substr(0, s.size() - particle.size());
+        std::string hiragana;
+        for (std::string_view rest = stem; !rest.empty();) {
+            const text::Rune r = text::DecodeRune(rest);
+            text::AppendRune(hiragana, r.cp >= U'ァ' && r.cp <= U'ヶ' ? r.cp - 0x60 : r.cp);
+            rest.remove_prefix(r.size);
+        }
+        std::string tail;
+        if (text::RuneCount(stem) >= 3 && snapshot.DictionaryWord(hiragana) && TransliterateName(stem, out) &&
+            TransliterateName(particle, tail)) {
+            out += tail;
+            return true;
+        }
+        break;
+    }
     return TransliterateName(s, out);
 }
 

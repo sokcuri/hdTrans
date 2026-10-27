@@ -38,6 +38,7 @@ constexpr std::string_view kMarkBPRows = "バビブベボパピプペポ";
 constexpr std::string_view kMarkPu = "プ";
 constexpr std::string_view kMarkMu = "ム";
 constexpr std::string_view kSmallVowels = "ァィゥェォャュョ";
+constexpr std::string_view kSmallPlainVowels[] = {"ァ", "ィ", "ゥ", "ェ", "ォ"};  // by column a i u e o
 constexpr std::string_view kFinalRu = "르";
 // Kana ending in a or i: before エール they leave the エ a vowel of its own (ピエール, カナエール);
 // after u or o it may be a glide (ホエール whale).
@@ -175,7 +176,13 @@ struct Run {
         if (n < 4 || source[n - 1] != kLongVowel) return false;
         const std::string_view before = source[n - 3];
         if (before != kMarkN && before != kMarkTsu && before != kLongVowel && before != kSourceKanaI) return false;
-        return !(before == kLongVowel && source[n - 4] == source[n - 2]);
+        if (before == kLongVowel && source[n - 4] == source[n - 2]) return false;
+        // A small vowel that repeats the vowel of its kana stretches the word (クゥーマー 쿠마).
+        for (std::size_t i = 1; i + 2 < n; i++) {
+            const int index = KanaMatrixIndex(source[i - 1]);
+            if (index >= 0 && source[i] == kSmallPlainVowels[index % 5]) return false;
+        }
+        return true;
     }
 
     void ApplyFinal(long i, int row);
