@@ -16,8 +16,11 @@
 | ガスマスクが必要だ。 | 방독면이 필요하다. | 유지 |
 | ファイルをダウンロードした。 | 파일을 다운로드했다. | 유지 |
 
+사전에 없는 가타카나 낱말 끝의 ン, ッ, ー, イ 뒤 장음 a는 영어 -er로 읽는다(イベンター 이벤터, リンター 린터).
+그 밖의 끝은 a로 둔다(アバター 아바타, キター 키타).
+
 사례: `tests/rules/cases/it-vocabulary.tsv`, `tests/rules/cases/loanword-spellings.tsv`,
-`tests/rules/cases/rules-words.tsv`
+`tests/rules/cases/rules-words.tsv`, `tests/rules/cases/sound-katakana-final-er.tsv`
 
 ## LEX-2 외래어 표기는 쓰임으로 고른다
 
