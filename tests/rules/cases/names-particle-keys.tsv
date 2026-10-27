@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+lookup:names-particle-key	ウチの子も寂しがってるから	has:아이도	fix	lookup
+lookup:names-particle-key	彼と学会に行った。	그와 학회에 갔다.	fix	lookup

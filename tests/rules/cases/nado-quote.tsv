@@ -1,10 +1,14 @@
 # 규칙: GRM-38
 rule	input	expected	kind	layer
-cx:nado-quote:20	「嘘だ」などと叫んだ。	has:등이라고	keep	rewrites
-cx:nado-quote:20	「ファッションに興味がないなんて！」などと言われるので口にはしない。	has:등이라는	keep	rewrites
-cx:nado-quote:20	　などと考えながらジュースを飲む。	has:등이라고	keep	rewrites
-cx:nado-quote:20	　などと思っていたのだが。	has:등이라고	keep	rewrites
-cx:nado-quote:20	りんごやみかんなどと言った。	has:등	keep	rewrites
+cx:nado-quote:30	「嘘だ」などと叫んだ。	has:하고 외쳤다	fix	rewrites
+cx:nado-quote:40	「ファッションに興味がないなんて！」などと言われるので口にはしない。	has:같은 말을 들으	fix	rewrites
+cx:nado-quote:20	　などと考えながらジュースを飲む。	has:하고 생각하면서	fix	rewrites
+cx:nado-quote:20	　などと思っていたのだが。	has:하고 생각했	fix	rewrites
+cx:nado-quote:45	「嘘だ」などと言った。	rule:cx:nado-quote:45= 말을 &AV@	fix	rewrites
+cx:nado-quote:45	りんごやみかんなどと言った。	has:등이라고 말했다	keep	rewrites
+cx:nado-quote:30	りんごやみかんなどと思った。	!rule:cx:nado-quote:30	keep	rewrites
+cx:nado-quote:40	りんごやみかんなどと言われた。	!rule:cx:nado-quote:40	keep	rewrites
+cx:nado-quote:30	本などと一緒に置いた。	has:등과 함께	keep	rewrites
 cx:nado-quote:20	若ければーっ！　などと何度も言われた。	has:하고 몇 번이나	fix	rewrites
 cx:nado-quote:20	　などと戸惑っているうちに	lacks:등과	fix	rewrites
 cx:nado-quote:20	りんごやみかんなどと一緒に	has:등과 함께	keep	rewrites

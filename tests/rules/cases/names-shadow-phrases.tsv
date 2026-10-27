@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+lookup:names-shadow	優しい男だった。	다정한 남자였다.	fix	lookup
+lookup:names-shadow	新しい権利を得た。	새로운 권리를 얻었다.	fix	lookup
+lookup:names-shadow	あいはら友子さんが来た。	has:아이하라 토모코	keep	lookup

@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+lookup:loanword-spelling	サプライズだ。	has:서프라이즈	fix	lookup
+lookup:loanword-spelling	ゴー・ホーム	has:고 홈	fix	lookup
+lookup:loanword-spelling	ノークレームノーリターン	has:노 클레임 노 리턴	fix	lookup
+lookup:loanword-spelling	サマリーカードを作った。	has:서머리 카드	fix	lookup
+lookup:loanword-spelling	サマリレポートを出す。	has:서머리 리포트	fix	lookup
+lookup:loanword-spelling	スリーサイズを測った。	has:쓰리 사이즈	keep	lookup
+lookup:loanword-spelling	スリー・サイズは秘密だ。	has:쓰리 사이즈	keep	lookup
+lookup:loanword-spelling	スリーピースのスーツ	has:쓰리피스	keep	lookup
+lookup:loanword-spelling	ワン、ツー、スリー！	has:쓰리	keep	lookup
+lookup:loanword-spelling	マークスリーを着た。	has:마크 쓰리	keep	lookup
+lookup:loanword-spelling	サーボユニットを交換した。	has:서보 유닛	fix	lookup
+lookup:loanword-spelling	サーモセット樹脂	has:서모셋	fix	lookup

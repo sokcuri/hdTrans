@@ -1257,7 +1257,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 サービスステイション	서비스 스테이션	N110	VMo		GN							jisjk:128833
 サーフ・ボード	서프보드	N110			GN							w:4519
 サーフ・ライダー	서프라이더	N110	VHn		GN							jisjk:128836
-サベイヤー	써베이어	N110			GN							jisjk:47520
+サベイヤー	서베이어	N110			GN							jisjk:47520
 サーベーヤー	써베이어	N110			GN							jisjk:47520
 サベーヤー	써베이어	N110			GN							jisjk:47520
 サーベランス	서베일런스	N110	UQfUAq		BZ							jisjk:128842
@@ -1298,9 +1298,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 サファリ・ルック	사파리 룩	N110	VCp		GN							jisjk:128988
 サブウェー	지하철	N110	VPeVTp		GN							jisjk:128990
 サブ・リーダー	부지도자	N110	VHn		GN							jisjk:129004
-サプライアー	써플라이어	N110	VHn		GN							jisjk:47721
+サプライアー	서플라이어	N110	VHn		GN							jisjk:47721
 サプライアー	공급자	N110			GN							jisjk:47722
-サプライア	써플라이어	N110	VHn		GN							jisjk:47721
+サプライア	서플라이어	N110	VHn		GN							jisjk:47721
 サプライア	공급자	N110			GN							jisjk:47722
 サマー・スクール	서머 스쿨	N110	VBl		GN							jisjk:129017
 サマー・タイム	섬머 타임	N110	UMe		GN							jisjk:129018

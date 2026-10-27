@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+lookup:novel-words-2	現在一人暮らしの37歳。	has:혼자 사는	fix	lookup
+lookup:novel-words-2	絶対に当てつけだろう。	has:빈정거림	fix	lookup

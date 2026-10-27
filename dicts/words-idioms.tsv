@@ -31,28 +31,28 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 儘ならぬ	뜻대로 되지 않는	A9D0			GN				llm			i:26
 侭ならぬ	뜻대로 되지 않는	A9D0			GN				llm			i:27
 様にな	하게 &C6@	M428		Dx	GN				llm			i:28
-アウトオブファッション	유행에 뒤떨어짐	N110			GN				llm			i:29
-アウト・オブ・ファッション	유행에 뒤떨어짐	N110			GN				llm			i:30
-エバーオンワード	영원히 앞으로	A9D0			GN				llm			i:31
-エバー・オンワード	영원히 앞으로	A9D0			GN				llm			i:32
+アウトオブファッション	아웃 오브 패션	N110			GN				llm			i:29
+アウト・オブ・ファッション	아웃 오브 패션	N110			GN				llm			i:30
+エバーオンワード	에버 온워드	A9D0			GN				llm			i:31
+エバー・オンワード	에버 온워드	A9D0			GN				llm			i:32
 グラッチェ	그라치에	A9D0			GN				llm			i:33
 グラッツェ	그라치에	A9D0			GN				llm			i:34
 グルにな	짜고 &AO@	M428			GN				llm			i:35
 コロンブスの卵	콜럼버스의 달걀	N110			GN				llm			i:36
-ザッツオール	그게 전부야	A9D0			GN				llm			i:37
-ザッツ・オール	그게 전부야	A9D0			GN				llm			i:38
-ザッツライト	맞아	A9D0			GN				llm			i:39
-ザッツ・ライト	맞아	A9D0			GN				llm			i:40
+ザッツオール	댓츠 올	A9D0			GN				llm			i:37
+ザッツ・オール	댓츠 올	A9D0			GN				llm			i:38
+ザッツライト	댓츠 라이트	A9D0			GN				llm			i:39
+ザッツ・ライト	댓츠 라이트	A9D0			GN				llm			i:40
 シュトルムウントドランク	질풍노도	A9D0			GN				llm			i:41
 シュトルム・ウント・ドランク	질풍노도	A9D0			GN				llm			i:42
 ダイヤの指輪	다이아몬드 반지	N110			GN				llm			i:43
 トワエモア	너와 나	A9D0			GN				llm			i:44
 トワ・エ・モア	너와 나	A9D0			GN				llm			i:45
-ネバーギブアップ	포기하지 마	A9D0			GN				llm			i:46
-ネバー・ギブ・アップ	포기하지 마	A9D0			GN				llm			i:47
-ネバーハップン	그런 일은 절대 일어나지 않아	A9D0			GN				llm			i:48
-ネバー・ハップン	그런 일은 절대 일어나지 않아	A9D0			GN				llm			i:49
-ネバーマイン	신경 쓰지 마	A9D0			GN				llm			i:50
+ネバーギブアップ	네버 기브 업	A9D0			GN				llm			i:46
+ネバー・ギブ・アップ	네버 기브 업	A9D0			GN				llm			i:47
+ネバーハップン	네버 해픈	A9D0			GN				llm			i:48
+ネバー・ハップン	네버 해픈	A9D0			GN				llm			i:49
+ネバーマイン	네버 마인드	A9D0			GN				llm			i:50
 ノーモア	노 모어	A9D0			GN				llm			i:51
 ノー・モア	노 모어	A9D0			GN							i:52
 バナナの皮	바나나 껍질	N110			GN							i:53
@@ -3541,7 +3541,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 なろう事なら	가능하다면	A9D0			GN				llm			i:3535
 成ろう事なら	가능하다면	A9D0			GN				llm			i:3536
 けじめを付け	매듭을 &JA@	M427		Pn	GN				llm			i:3537
-サムズ・アップ	엄지 척	A9D0			GN				llm			i:3538
+サムズ・アップ	섬즈 업	A9D0			GN				llm			i:3538
 参考にな	참고&C6@	M428		Dx	GN							i:3539
 バランスを取	균형을 &FK@	M428		Pn	GN				llm			i:3540
 手をこまね	팔짱을 끼고 &AY@	M421		Pn	GN				llm			i:3541
@@ -3570,8 +3570,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 サーセン	죄송합니다	A9D0			GN				llm			i:3564
 雨が降ろうが槍が降ろうが	무슨 일이 있어도	A9D0			GN				llm			i:3565
 雨が降ろうと槍が降ろうと	무슨 일이 있어도	A9D0			GN				llm			i:3566
-ノーリターン	반품 불가	A9D0			GN				llm			i:3567
-ノー・リターン	반품 불가	A9D0			GN				llm			i:3568
+ノーリターン	노 리턴	A9D0			GN				llm			i:3567
+ノー・リターン	노 리턴	A9D0			GN				llm			i:3568
 口がかか	부름을 &FD@	M428			GN				llm			i:3569
 口が掛か	부름을 &FD@	M428			GN				llm			i:3570
 飛ぶ鳥も落とす勢い	하늘을 나는 새도 떨어뜨릴 기세	A9D0			GN				llm			i:3571
@@ -4109,8 +4109,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 イン・ビトロ	인 비트로	A9D0			GN				llm			i:4103
 インビボ	인 비보	A9D0			GN				llm			i:4104
 イン・ビボ	인 비보	A9D0			GN				llm			i:4105
-ノーコントロール	제구력 난조	A9D0			GN				llm			i:4106
-ノー・コントロール	제구력 난조	A9D0			GN				llm			i:4107
+ノーコントロール	노 컨트롤	A9D0			GN				llm			i:4106
+ノー・コントロール	노 컨트롤	A9D0			GN				llm			i:4107
 ブラシの木	병솔나무	N110			GN				llm			i:4108
 ブラシのき	병솔나무	N110			GN				llm			i:4109
 血の日曜日	피의 일요일	N110			GN							i:4110
@@ -4150,7 +4150,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ゴーイングマイウエイ	고잉 마이 웨이	A9D0			GN				llm			i:4144
 パッシングザセンターライン	패싱 더 센터 라인	A9D0			GN				llm			i:4145
 パッシング・ザ・センター・ライン	패싱 더 센터 라인	A9D0			GN				llm			i:4146
-ラインアンドスタッフ	스태프와 라인	A9D0			GN							i:4147
+ラインアンドスタッフ	라인 앤드 스태프	A9D0			GN							i:4147
 ライン・アンド・スタッフ	라인 앤드 스태프	A9D0			GN				llm			i:4148
 ポイントアンドフィギュア	포인트 앤드 피겨	A9D0			GN				llm			i:4149
 ポイント・アンド・フィギュア	포인트 앤드 피겨	A9D0			GN				llm			i:4150
@@ -4801,8 +4801,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 籍に入れ	호적에 올&AA@	M427			GN				llm			i:4796
 金玉が縮み上が	간담이 서늘해&AL@	M428			GN				llm			i:4797
 金玉が縮みあが	간담이 서늘해&AL@	M428			GN				llm			i:4798
-アイムソーリーヒゲソーリー	아임 쏘리 히게쏘리	A9D0			GN				llm			i:4799
-アイム・ソーリー・ヒゲソーリー	아임 쏘리 히게쏘리	A9D0			GN				llm			i:4800
+アイムソーリーヒゲソーリー	아임 소리 히게소리	A9D0			GN				llm			i:4799
+アイム・ソーリー・ヒゲソーリー	아임 소리 히게소리	A9D0			GN				llm			i:4800
 実の事を言うと	사실을 말하자면	A9D0			GN				llm			i:4801
 実のことを言うと	사실을 말하자면	A9D0			GN				llm			i:4802
 いいとこの坊ちゃん	부잣집 도련님	N110			GN				llm			i:4803
@@ -4814,8 +4814,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バカも休み休み言え	헛소리도 작작해라	A9D0			GN				llm			i:4809
 時あたかも	때마침	E300			GN				llm			i:4810
 ニヤッと笑	씩 &HJ@	M420			GN				llm			i:4811
-ノークレームノーリターン	클레임 불가 반품 불가	A9D0			GN				llm			i:4812
-ノークレーム・ノーリターン	클레임 불가 반품 불가	A9D0			GN				llm			i:4813
+ノークレームノーリターン	노 클레임 노 리턴	A9D0			GN				llm			i:4812
+ノークレーム・ノーリターン	노 클레임 노 리턴	A9D0			GN				llm			i:4813
 ドロンを決め	종적을 감&CL@	M427		Pn	GN				llm			i:4814
 どろんを決め	종적을 감&CL@	M427		Pn	GN				llm			i:4815
 否定の否定	부정의 부정	N110			GN				llm			i:4816
@@ -7471,7 +7471,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 手が届かないところ	손이 닿지 않는 곳	N110			GN				llm			i:7469
 手が届かない所	손이 닿지 않는 곳	N110			GN				llm			i:7470
 ゴーホーム	고 홈	E320			GN				llm			i:7471
-ゴー・ホーム	꺼져라	E320			GN				llm			i:7472
+ゴー・ホーム	고 홈	E320			GN				llm			i:7472
 気をそ	의욕을 &H2@	M422		Pn	GN				llm			i:7473
 気を削	의욕을 &H2@	M422		Pn	GN				llm			i:7474
 好評につき	호평에 힘입어	A9D0			GN				llm			i:7475
