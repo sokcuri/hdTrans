@@ -112,6 +112,13 @@ bool CriedCopy(const Item* it) {
     return false;
 }
 
+// Whether a noun spelled stem + ending covers all the verb reads. A potential, passive or
+// causative stem holds kana that are in neither part (書け, 投げられ); a noun of the stem alone
+// would leave them unread (LEX-80), so the verb stays.
+bool CoversVerb(const Worker& w, const Item* verb, std::string_view noun) {
+    return !w.settings.text || static_cast<int>(noun.size()) == verb->length;
+}
+
 struct Phrase {
     std::string_view text;
     int start = 0;
@@ -211,10 +218,11 @@ Phrase FindPhrase(Flusher& f) {
                 Item* next = it->After();
                 if (next == nullptr || !next->detail->Yougo()) break;
                 const std::string combined = next->group->surface + std::string(next->DirectSurface());
+                const bool covers = CoversVerb(w, next, combined);
                 Record* record = next->group->records;
                 next->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
-                    if (combined == record->source && At(record->partCode, 0) == 'N') {
+                    if (covers && combined == record->source && At(record->partCode, 0) == 'N') {
                         return {next->text, next->start, next->tokenIndex, record};
                     }
                 }
@@ -229,11 +237,12 @@ Phrase FindPhrase(Flusher& f) {
                     break;
                 }
                 const std::string combined = it->group->surface + std::string(it->DirectSurface());
+                const bool covers = CoversVerb(w, it, combined);
                 const bool cry = CriedCopy(it);
                 Record* record = it->group->records;
                 it->group->records = nullptr;
                 for (; record != nullptr; record = record->child) {
-                    if (combined != record->source || At(record->partCode, 0) != 'N') continue;
+                    if (!covers || combined != record->source || At(record->partCode, 0) != 'N') continue;
                     // Copies said straight after it are passed over: the word reads like the last
                     // copy of the run (好き好き好き, 迷い迷い、).
                     Item* next = it->After();

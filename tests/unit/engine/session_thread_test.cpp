@@ -216,7 +216,7 @@ HD_TEST(engine_session_caption_inline_reading_isolation) {
         HD_CHECK_EQ(session.Translate("（光(ひかり)）はい\n（光(ひかる)）はい"), "(히카리) 네\n(히카루) 네");
         HD_CHECK_EQ(session.Translate("恭", "（恭(きょう)）はい"), bare);
         HD_CHECK_EQ(session.Translate("恭"), bare);
-        HD_CHECK_EQ(session.Translate("（恭(きょう)）\nはい"), fresh.Translate("（恭）\nはい"));
+        HD_CHECK_EQ(session.Translate("（恭(きょう)）\nはい"), "(공)\n네");
         HD_CHECK_EQ(session.Translate("（恭）はい"), label);
     }
 }

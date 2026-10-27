@@ -1,0 +1,21 @@
+# 규칙: LEX-81
+rule	input	expected	kind	layer
+names:lone-kanji-line	悟!!	사토루!!	fix	names
+names:lone-kanji-line	（望）	(노조미)	fix	names
+names:lone-kanji-line	恵？	메구미?	fix	names
+names:lone-kanji-line	薫…！	카오루…!	fix	names
+names:lone-kanji-line	忍!?	시노부!?	fix	names
+names:lone-kanji-line	咲…	사키…	keep	names
+names:lone-kanji-line	筧	카케이	keep	names
+names:lone-kanji-line	筧！	카케이!	fix	names
+names:lone-kanji-line	「筧」	「카케이」	fix	names
+names:lone-kanji-line	慶？	케이?	fix	names
+names:lone-kanji-line	好！	호!	keep	names
+names:lone-kanji-line	「無」？	무?	keep	names
+names:lone-kanji-line	王？	왕?	keep	names
+names:lone-kanji-line	剣？	검?	keep	names
+names:lone-kanji-line	楽！	편해!	keep	names
+names:lone-kanji-line	鬼！	귀신!	keep	names
+names:lone-kanji-line	水	수	keep	names
+names:lone-kanji-line	朝。	아침.	keep	names
+names:lone-kanji-line	（恭(きょう)）	(공)	keep	names

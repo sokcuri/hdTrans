@@ -1366,7 +1366,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const std::u32string_view rs = rs_, f = f_;
     pieces.clear();
     if (p > 0 && !text::IsSpace(rs[p - 1]) && !In(rs[p - 1], U"「『（(“‘〈《【。、，！？!?…‥―─—")) return 0;
-    if ((!IsHiraganaRune(rs[p]) && !IsKatakanaRune(rs[p])) || In(f[p], U"ッンーャュョヮ")) return 0;
+    if ((!IsHiraganaRune(rs[p]) && !IsKatakanaRune(rs[p])) || In(f[p], U"ッンーャュョ")) return 0;
     // が that opens a line, not an utterance, is the conjunction (　が……本当に; 「が、頑張る」),
     // unless it is said again (が、が、頑張ります).
     if (rs[p] == U'が') {
@@ -1376,8 +1376,8 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         const bool again = k != 0 && p + 1 + k < rs.size() && rs[p + 1 + k] == U'が';
         if ((q == 0 || rs[q - 1] == U'\n') && !again) return 0;
     }
-    // A small vowel stutters only the plain vowel that starts the word (ぃ――いや).
-    const char32_t smallOf = In(f[p], U"ァィゥェォ") ? PlainVowel(f[p]) : 0;
+    // A small vowel or ゎ stutters only the plain kana that starts the word (ぃ――いや, ゎ、わたし).
+    const char32_t smallOf = In(f[p], U"ァィゥェォ") ? PlainVowel(f[p]) : f[p] == U'ヮ' ? U'ワ' : 0;
     size_t n = 1;
     if (p + n < rs.size() && In(f[p + n], U"ャュョ")) n++;
     if (p + n < rs.size() && f[p + n] == U'ッ') n++;
