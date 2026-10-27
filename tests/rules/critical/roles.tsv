@@ -61,3 +61,7 @@ cx:receive-potential:10	良い家族がいて、こういう人に出会えて�
 verb:causative-of-shorter	子供に野菜を食べさせられない。	has:아이에게 야채를 먹일 수 없다	fix	conjugation
 verb:causative-of-shorter	私は苦い野菜を食べさせられた。	has:먹게 되었다	fix	conjugation
 verb:causative-of-shorter	嫌って言うほど信じさせられたよ	has:믿게 되었	fix	conjugation
+dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	fix	compose
+dict:jisjk:147415	ようなしとされた。	has:쓸모없다고 여겨졌다	fix	compose
+dict:jisjk:267367	俺は黙って電話を切った。	has:전화를 끊었다	keep	compose
+dict:jisjk:362260	見ていただきたい。	has:주셨으면 한다	keep	analysis

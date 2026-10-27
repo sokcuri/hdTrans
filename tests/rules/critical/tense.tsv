@@ -47,3 +47,11 @@ cx:oide-come:5	称賛しておいででした｡	has:계셨습니다	fix	rewrite
 cx:oide-come:5	称賛しておいででした｡	lacks:하고 와	fix	rewrites
 cx:oide-come:50	お前は黙っといで	has:다물고 있어	fix	rewrites
 cx:oide-come:5	見ておいで	has:보고 와	keep	rewrites
+dict:jisjk:117033	この菓子は足が早かった。	has:상하기 쉬웠다	fix	compose
+dict:jisjk:117033	この魚は足が早い。	has:상하기 쉽다	keep	compose
+dict:jisjk:147415	ようなしとされた。	has:쓸모없다고 여겨졌다	fix	compose
+dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	keep	compose
+dict:jisjk:262923	揃っていていただきたい	has:있어 주셨으면 한다	fix	analysis
+dict:jisjk:262923	待っていていただきたい	has:기다리고 있어 주셨으면 한다	fix	analysis
+dict:jisjk:262923	ここにいていただきたい	has:있어 주셨으면 한다	fix	analysis
+dict:jisjk:362260	見ていただきたかった。	has:주셨으면 했다	keep	analysis
