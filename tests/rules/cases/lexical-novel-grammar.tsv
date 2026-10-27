@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+cx:doumo-greeting:20	「どうも初めまして、沢渡美穂です。」	rule:cx:doumo-greeting:20=안녕하세요	fix	rewrites
+cx:doumo-greeting:10	どうもありがとう	rule:cx:doumo-greeting:10=정말	fix	rewrites
+cx:doumo-greeting:10	どうもおかしい	!rule:cx:doumo-greeting:10	keep	rewrites
+lookup:dekizu	無視することもできず、目を開けた。	has:무시할 수도 없어	fix	lookup
+lookup:dekizu	眠ることもできず、朝になった。	has:잘 수도 없어	fix	lookup
+lookup:dekizu	何もできず、泣いた。	has:아무것도 하지 못하고	keep	lookup
+lookup:yashinau	兄が両親を養っている。	has:부모님을 부양하고	fix	lookup
+lookup:yashinau	子供を養う。	has:아이를 기른다	keep	lookup
+cx:doumo-greeting:20	どうも、ご丁寧に。	!rule:cx:doumo-greeting:20	keep	rewrites
