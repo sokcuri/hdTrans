@@ -709,8 +709,8 @@ bool Worker::SplitsVerb(const Record& r, std::string_view query) const {
 // A proper noun of a prefix kanji and one more kanji, outside a run of kanji, whose last kanji
 // starts a longer common word of two kanji or more that ends before hiragana, katakana,
 // punctuation or the end (大間違い: 大 and 間違い, not the place 大間 and 違い; 大満足, 大手柄): the
-// prefix stands alone. A kanji or a person suffix after that word keeps the record (小西洋子,
-// 大東さん).
+// prefix stands alone. A kanji or a person suffix after that word, or a word of place, keeps the
+// record (小西洋子, 大東さん, 大川沿い).
 bool Worker::SplitsPrefixWord(const Record& r, std::string_view query) const {
     if (!ProperCodes(r.partCode, r.semantic) || !query.starts_with(r.source) || text::RuneCount(r.source) != 2 ||
         NameClassOf(LastChar(r.source)) != kClassKanji) {
@@ -739,10 +739,13 @@ bool Worker::SplitsPrefixWord(const Record& r, std::string_view query) const {
     if (kanji < 2 || NameClassOf(FirstChar(rest)) == kClassKanji || StartsWithHonorific(rest) || PersonSuffixAt(rest)) {
         return false;
     }
-    for (const dict::Candidate& c : snapshot.RetrieveRecords(tail.substr(0, word), dict::LookupMode::General)) {
-        if (!ProperCodes(c.codes->partText, c.codes->sem.Text())) return true;
+    // A word of place keeps the name it follows (大川沿い 오카와 강가, not 대 강가).
+    const std::vector<dict::Candidate> common = snapshot.RetrieveRecords(tail.substr(0, word), dict::LookupMode::General);
+    if (std::any_of(common.begin(), common.end(), [](const dict::Candidate& c) { return c.codes->sem.HasCode("VPl"); })) {
+        return false;
     }
-    return false;
+    return std::any_of(common.begin(), common.end(),
+                       [](const dict::Candidate& c) { return !ProperCodes(c.codes->partText, c.codes->sem.Text()); });
 }
 
 // Whether s starts with a noun of persons of two kana or more that the dictionary
