@@ -1101,10 +1101,10 @@ bool ForcingInClause(const Item* it) {
     return false;
 }
 
-// The たら and たり of a derived causative keep the causative-passive reading.
+// たら, たり and affirmative ます alone do not establish ability after a derived causative.
 bool CausativePotentialEnding(std::string_view rest) {
     return dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0 &&
-           !rest.starts_with("たら") && !rest.starts_with("たり");
+           !rest.starts_with("たら") && !rest.starts_with("たり") && !rest.starts_with("ます");
 }
 
 // The voice of the (ら)れ of verb item it, first signal first (spec GRM-10): an agent that is a

@@ -94,12 +94,12 @@ HD_TEST(word_synthetic_causative_candidate_classifications) {
     };
     const std::string stem = "続け\t계속&AV@\tM437\tXXX\t\tGN\t0\t100\n";
     HD_CHECK_EQ(translate(stem, "仕事を続けさせられる。"), "일을 계속하게 된다.");
-    const std::string polite = stem + "ます\t5습니다\tS5:0\tXXX\t\tGN\t0\t102\n";
-    HD_CHECK(translate(polite, "仕事を続けさせられます。").find("할 수") != std::string::npos);
+    const std::string negative = stem + "ません\t1지 않습니다\tS5:0\tXXX\tYn\tGN\t0\t102\n";
+    HD_CHECK(translate(negative, "仕事を続けさせられません。").find("할 수 없") != std::string::npos);
     // A later selection may replace the default: mixed copula or particle-predicate candidates abstain.
-    HD_CHECK(translate(polite + "続け\t&Ac@\tM437\t\t\tGN\t0\t101\n", "仕事を続けさせられます。")
+    HD_CHECK(translate(negative + "続け\t&Ac@\tM437\t\t\tGN\t0\t101\n", "仕事を続けさせられません。")
                  .find("할 수") == std::string::npos);
-    HD_CHECK(translate(polite + "続け\t계속&AV@\tM437\t\tPj\tGN\t0\t101\n", "仕事を続けさせられます。")
+    HD_CHECK(translate(negative + "続け\t계속&AV@\tM437\t\tPj\tGN\t0\t101\n", "仕事を続けさせられません。")
                  .find("할 수") == std::string::npos);
     // Dictionary-form classes use the same candidate even before a slot has been selected.
     const std::string experience = "考え\t생각&AV@\tM437\tXXX\t\tGN\t0\t100\n"
