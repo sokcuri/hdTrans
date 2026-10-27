@@ -102,6 +102,8 @@
 `tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
 `tests/rules/cases/names-phrase-titles.tsv`, `tests/rules/cases/names-work-title-phrases.tsv`,
 `tests/rules/cases/names-title-marks.tsv`,
+
+`tests/rules/cases/names-release-titles.tsv`,
 `tests/rules/documents/names-katakana-compounds.tsv`
 
 ### 이름 행 판정
