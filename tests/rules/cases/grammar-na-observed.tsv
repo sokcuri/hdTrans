@@ -1,0 +1,42 @@
+# 규칙: GRM-43
+rule	input	expected	kind	layer
+cx:na-observed:10	ちょっと萌えるなｗ	조금 설레네 ㅋ	fix	rewrites
+cx:na-observed:10	ちょっと萌えるな。	조금 설레네.	fix	rewrites
+cx:na-observed:10	泣けるなｗ	눈물이 나오네 ㅋ	fix	rewrites
+cx:na-observed:10	泣けるな。	눈물이 나오네.	fix	rewrites
+cx:na-observed:10	笑えるなｗ	웃기네 ㅋ	fix	rewrites
+cx:na-observed:5	佳奈の気持ちもわかるな。	카나의 마음도 알겠네.	fix	rewrites
+cx:na-observed:5	俺でも分かるな	나라도 알겠네	fix	rewrites
+cx:na-observed:5	人気あるのもわかるな」	인기 있는 것도 알겠네」	fix	rewrites
+cx:na-observed:10	あり得るな。	있을 수 있네.	fix	rewrites
+cx:na-observed:10	ありえるな…	있을 수 있네…	fix	rewrites
+cx:na-observed:10	刺すこともできるな	찌를 수도 있네	fix	rewrites
+cx:na-observed:10	これでしばらくはゆっくり出来るな」	이것으로 당분간은 천천히 할 수 있네」	fix	rewrites
+cx:na-observed:10	扇子ならこっちにあるな」	부채라면 여기에 있네」	fix	rewrites
+cx:na-observed:10	手もあるな	방법도 있네	fix	rewrites
+cx:na-observed:10	よい目をしておるな。	좋은 눈을 하고 있네.	fix	rewrites
+cx:na-observed:10	突っ立ってるのも疲れるな。	has:지치네	fix	rewrites
+cx:na-observed:10	何か聞こえるな。	뭔가 들리는구나.	fix	rewrites
+cx:na-observed:10	笑うな！	웃지 마!	keep	rewrites
+cx:na-observed:10	笑うなｗ	웃지 마 ㅋ	keep	rewrites
+cx:na-observed:10	触るな	만지지 마	keep	rewrites
+cx:na-observed:10	見るなよ	보지 마	keep	rewrites
+cx:na-observed:10	そんな目で見るな。	그런 눈으로 보지 마.	keep	rewrites
+cx:na-observed:10	負けるな！	지지 마!	keep	rewrites
+cx:na-observed:10	うろたえるな	당황하지 마	keep	rewrites
+cx:na-observed:10	騙されるな	속지 마	keep	rewrites
+cx:na-observed:10	羽目を外し過ぎるな」	너무 도가 지나치지 마」	keep	rewrites
+cx:na-observed:10	つまんない大人になるな」	재미없는 어른이 되지 마」	keep	rewrites
+cx:na-observed:10	ケンカ腰になるな	싸우려는 기세가 되지 마	keep	rewrites
+cx:na-observed:10	何かを口に入れるな	뭔가를 입에 넣지 마	keep	rewrites
+cx:na-observed:10	襲いかかるな！	덤벼들지 마!	keep	rewrites
+cx:na-observed:10	秤にかけるなｗｗｗ	저울에 달지 마 ㅋㅋㅋ	keep	rewrites
+cx:na-observed:10	だから責任を感じるな。	그러니까 책임을 느끼지 마.	keep	rewrites
+cx:na-observed:10	死亡時刻からみてそれはありえんな。	has:있을 수 없지	keep	rewrites
+cx:na-observed:10	「疑うな」じゃなくて「決めつけるな」が正しい。	has:의심하지 마	keep	rewrites
+cx:na-observed:10	「高峰、水を差すな」	「고봉, 찬물을 끼얹지 마」	keep	rewrites
+cx:na-observed:10	この2人以外は誰も入れるな。	lacks:있는구나	keep	rewrites
+cx:na-observed:10	火縄銃には見えんな。	has:보이지 않지	keep	rewrites
+cx:na-observed:10	何も聞こえんな	has:들리지 않지	keep	rewrites
+cx:na-observed:5	見えるなｗ	!rule:cx:na-observed:5	keep	rewrites
+cx:na-observed:5	触るな	!rule:cx:na-observed:5	keep	rewrites

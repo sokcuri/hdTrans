@@ -973,6 +973,8 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
+    // A word span keeps its text unless a rewrite read it anew (ちょ 잠깐 → 완전 before an adjective).
+    if (protectedToken && item.reread) tokens[item.tokenIndex].spanText = translated;
     const bool hadaNoun = HadaNounBeforeSuru(items, i, translated);
     if (hadaNoun) translated.resize(translated.size() - kHagi.size());
     std::string composed;

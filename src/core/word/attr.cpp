@@ -381,10 +381,21 @@ bool ClosingMarks(std::string_view t) {
     return true;
 }
 
+// Whether t is a run of letters of mark.laughter (ｗｗ, folded to ww).
+bool LaughterRun(std::string_view t) {
+    if (t.empty()) return false;
+    for (std::string_view r = t; !r.empty();) {
+        const text::Rune c = text::DecodeRune(r);
+        if (!dict::InClass(HDTRANS_CLASS("mark.laughter"), r.substr(0, c.size))) return false;
+        r.remove_prefix(c.size);
+    }
+    return true;
+}
+
 }  // namespace
 
 // Whether the next item (after a parenthesised group) is missing or its first target
-// starts with ) 」 ! ” = or -.
+// starts with ) 」 ! ” = or -, or it is laughter typed right after the item (楽しいｗｗ).
 bool Item::IsRuleRightBoundary() const {
     const Item* n = After();
     if (n == nullptr) return true;
@@ -399,6 +410,7 @@ bool Item::IsRuleRightBoundary() const {
         n = n->next;
     }
     if (n == nullptr) return true;
+    if (n->tokenIndex == tokenIndex + 1 && LaughterRun(n->group->surface)) return true;
     // A word closed by っ before a comma or an ellipsis ends its clause (いいっ、それ,
     // すごいっ……」): the next word is 、, or only tokens of ellipsis marks stand between.
     // So does a predicate with its ending before an ellipsis (うるさい…テメェ 시끄럽다…).

@@ -441,6 +441,7 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
+    size_t LaughterEnd(size_t p) const;
     // With ending, the end rows go there instead of into user.
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
                      size_t* ending = nullptr) const;
@@ -514,6 +515,16 @@ private:
 bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
     return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
+}
+
+// The end of a run of mark.laughter letters at character p that no Latin letter or digit follows
+// (ｗｗ, not www.example), or p.
+size_t SoundText::LaughterEnd(size_t p) const {
+    size_t e = p;
+    while (e < rs_.size() && dict::InClassRune(HDTRANS_CLASS("mark.laughter"), rs_[e])) e++;
+    const bool latin = e < rs_.size() && (rs_[e] < 0x2000 || (rs_[e] >= 0xFF01 && rs_[e] <= 0xFF5E)) &&
+                       (text::IsLetter(rs_[e]) || text::IsDigit(rs_[e]));
+    return latin ? p : e;
 }
 
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
@@ -681,13 +692,21 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                  pause = PauseAt(end) || (In(rs_[end - 1], U"？?") && p != stutterEnd_);  // a key that asks ends in its own pause (ね？)
             // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
             // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
-            // う……多分, ちょ……待って).
-            // Not when the syllable is said again after the marks (む…、むっ).
+            // う……多分, ちょ……待って) and, unless it is a conjunction (で 그리고), before a space or
+            // laughter (ちょ 待って, ちょｗｗ落ち着け). Not when the syllable is said again after the
+            // marks (む…、むっ), nor before a space when it starts the reading of the kanji word after
+            // it (む 無理, う 動き).
+            const std::string key = EncodeText(s.key);
+            const bool spaced = end < rs_.size() && text::IsSpace(rs_[end]);
             if (start && end == p + s.key.size() && end < rs_.size() && (p == 0 || !text::IsSpace(rs_[p - 1])) &&
-                dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) && dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), EncodeText(s.key))) {
+                (dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) ||
+                 ((spaced || LaughterEnd(end) > end) && !dict::InClass(HDTRANS_CLASS("sound.stutter-conjunction"), key))) &&
+                dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), key)) {
                 size_t again = end;
                 while (again < rs_.size() && (StutterSeparator(rs_, again) > 0 || text::IsSpace(rs_[again]))) again++;
-                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key;
+                again = LaughterEnd(again);
+                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key &&
+                        !(spaced && again < rs_.size() && IsKanjiRune(rs_[again]) && StutterHeadMora(rs_, again, false) == s.key);
             }
             // A lead asked on its own after an ellipsis that opens an utterance is one too
             // (！…そう？ 그래?); after words the ellipsis only pauses them (したい…ね？).
@@ -774,10 +793,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             }
         }
         // A final row needs the end of the utterance after it and any spaces: no letter, digit, comma or
-        // question mark.
+        // question mark. Laughter ends the utterance too (ウケるｗｗ).
         if (ok && s.final) {
             size_t q = end;
             while (q < rs_.size() && text::IsSpace(rs_[q])) q++;
+            q = LaughterEnd(q);
             const std::string next = q < rs_.size() ? EncodeText(f.substr(q, 1)) : std::string();
             if (q < rs_.size() && (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass(HDTRANS_CLASS("mark.comma"), next) ||
                                    dict::InClass(HDTRANS_CLASS("mark.question"), next))) {
@@ -1928,6 +1948,11 @@ std::string SoundText::Write() {
                 b += "하게";
                 next++;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (chain.back().lead && !chain.back().open && next + 1 < rs.size() && rs[next] == U'　' &&
+                       !Sounds(next + 1, false, false).empty()) {
+                // An ideographic space between a lead and another sound is a plain space (さ　じゃあ 자 그럼).
+                b += ' ';
+                next++;
             } else if (Spaced(next) || chain.back().spaceAfter) {
                 b += ' ';
             }
@@ -2762,9 +2787,11 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
     }
     switch (says) {
         case Says::Ru:
-            // Not after a verb of ability (想像できんな is できないな).
+            // Not after a verb of ability or of a perceived state, which no prohibition takes (想像できんな
+            // is できないな, 見えんな 見えないな).
             if (VerbFormIs(s + std::string(kRu), kDictionaryForm, ProhibitedKind, ctx, snap) &&
-                !VerbFormIs(s + std::string(kRu), kDictionaryForm, AbilityVerb, ctx, snap)) {
+                !VerbFormIs(s + std::string(kRu), kDictionaryForm, AbilityVerb, ctx, snap) &&
+                !dict::InClass(HDTRANS_CLASS("verb.observed-state"), s)) {
                 return kRu;
             }
             return {};

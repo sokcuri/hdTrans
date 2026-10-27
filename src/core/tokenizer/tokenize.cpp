@@ -200,9 +200,8 @@ private:
         afterSpace_ = true;
     }
 
-    // Whether the letter at i after kana goes on with the Japanese token: a word of the dictionary
-    // spans the kana before it and the letter (うp, おk; SpaceJoins on the text before and the
-    // letters, folded, with the Japanese text after them).
+    // A Latin run after kana joins the Japanese token only when a dictionary word spans the
+    // whole folded run (うp, おk). A following digit makes it an identifier instead.
     bool KeptLetter(size_t i) const {
         if (joins_ == nullptr || (prev_ != kClassHiragana && prev_ != kClassKatakana)) return false;
         constexpr size_t kBefore = 10, kAfter = 10;
@@ -212,6 +211,7 @@ private:
         for (size_t k = from; k < i; k++) text::AppendRune(before, s_[k]);
         size_t to = i;
         while (to < s_.size() && IsAlphaRune(s_[to])) text::AppendRune(after, Fold(s_[to++]));
+        if (IsDigitRune(At(to))) return false;
         for (const size_t end = to + kAfter; to < s_.size() && to < end && Class(s_[to]) != 0; to++) {
             text::AppendRune(after, s_[to]);
         }

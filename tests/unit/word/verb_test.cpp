@@ -221,7 +221,7 @@ HD_TEST(verb_match_direct_kind) {
     word::Detail d;
     word::Record* stop = nullptr;
     HD_CHECK(word::MatchConjugation(d, "書", 0, records, stop));
-    HD_CHECK_EQ(d.kind, -1);
+    HD_CHECK_EQ(d.kind, 0);  // the form ends as a dictionary form: endings follow it as they follow 書く
     HD_CHECK_EQ(d.patternKind, 14);
     HD_CHECK_EQ(d.patternMatched, 1);
     HD_CHECK_EQ(d.patternLength, 3);

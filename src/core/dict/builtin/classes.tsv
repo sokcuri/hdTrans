@@ -295,6 +295,7 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
+//= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
 //= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
 //= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
@@ -304,6 +305,7 @@
 //= verb.extent	Verbs of moving or changing by some amount, before which ちょっと is how far, not how long (ちょっと離れて 조금 떨어져).
 //= verb.happening	Starts and ends of Japanese verbs of what appears, happens or is felt, which no one does on purpose: with ね they are observed, not promised (始まるね, 思い出すね, 照れるね). Not 出る, which the speaker does (先に出るね 먼저 나갈게).
 //= word.liking	Starts of words of liking and delight that make a やばい right before or after them praise, 대박 (かわいすぎてやばい, やばい、可愛い).
+//= word.laugh-comment	Words of internet speech that comment on what was just said by laughing at it, read as the predicate 웃기다 (ワロタ 웃겨, 長すぎワロタ 너무 길어서 웃겨).
 //= verb.polite-remark	Starts of verbs of eating and drinking whose polite ますね after an adverb of amount (adverb.amount) remarks on how much the listener eats, not a promise (たくさん食べますね 많이 먹네요; ここで食べますね 먹을게요).
 //= adverb.amount	Adverbs of amount that make a polite ますね of eating or drinking a remark (たくさん食べますね, しっかり食べますね).
 //= adverb.polite-observation	Adverbs before which a polite ますね comments on what the listener does (急に切り替えますね 갑자기 바꾸네요); with a plain ね they may still promise (急に出かけるね).
@@ -506,6 +508,10 @@ word.liking	楽し
 word.liking	綺麗
 word.liking	きれい
 word.liking	素敵
+word.laugh-comment	ワロタ
+word.laugh-comment	わろた
+word.laugh-comment	ワロス
+word.laugh-comment	わろす
 verb.passive-end	われ
 verb.passive-end	かれ
 verb.passive-end	され
@@ -568,6 +574,10 @@ casual.ikanai-after	うまく
 casual.ikanai-after	上手く
 
 casual.nna-word	ごめんな
+casual.nna-word	ありえんな
+casual.nna-word	あり得んな
+casual.nna-word	見えんな
+casual.nna-word	聞こえんな
 
 copula.after-dake	だ
 copula.after-dake	で
@@ -4611,6 +4621,27 @@ verb.casual-state	流行
 verb.casual-state	はや
 verb.casual-state	似合
 verb.casual-state	限
+verb.observed-state	分か
+verb.observed-state	わか
+verb.observed-state	解か
+verb.observed-state	見え
+verb.observed-state	聞こえ
+verb.observed-state	似合
+verb.observed-state	目立
+verb.observed-state	疲れ
+verb.observed-state	違
+verb.observed-state	似
+verb.observed-state	足り
+verb.observed-state	異な
+verb.observed-state	助か
+verb.observed-state	萌え
+verb.observed-state	泣け
+verb.observed-state	笑え
+verb.observed-state	ありえ
+verb.observed-state	あり得
+verb.observed-state	間に合
+verb.observed-state	でき
+verb.observed-state	出来
 verb.causative-passive	気づかされ
 verb.causative-passive	あやまらされ
 verb.causative-passive	受けもたされ
@@ -4746,6 +4777,10 @@ verb.happening	年老い
 verb.happening	当た
 verb.happening	狂
 verb.happening	負け
+verb.happening	ワロタ
+verb.happening	わろた
+verb.happening	ワロス
+verb.happening	わろす
 
 verb.stay	待
 verb.stay	見
