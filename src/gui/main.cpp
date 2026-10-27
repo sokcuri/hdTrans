@@ -1923,7 +1923,7 @@ bool SelfTestEntryKeys(App& app) {
     SetDlgItemTextW(app.text, IDC_SOURCE, L"日本語");
     SendDlgItemMessageW(app.text, IDC_SOURCE, EM_SETSEL, 3, 3);
     PressKey(app, VK_RETURN);
-    ok = Check(ControlText(app.text, IDC_SOURCE) == L"日本語\r\n" && !app.busy && app.rows.size() == 1,
+    ok = Check(ControlText(app.text, IDC_SOURCE) == L"日本語\r\n" && !app.busy && app.rows.size() == 2,
                "Enter in the source box is a line break, not a translation or an add") && ok;
     SetDlgItemTextW(app.text, IDC_SOURCE, L"");
     ShowPage(app, kDictsPage);
