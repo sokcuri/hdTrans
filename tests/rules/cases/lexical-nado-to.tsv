@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+lookup:noka-nado-to	何故自分はモテないのかなどと考えてしまった。	has:인기 없는 건지 하고	fix	lookup
+lookup:noka-nado-to	行かないのかなどと聞いた。	has:가지 않는 건지 하고	fix	lookup
+lookup:noka-nado-to	誰が来たのかなどと聞かれた。	has:온 건지 하고	fix	lookup
+lookup:ka-nado-to	行くかなどと聞いた。	has:갈지 하고	fix	lookup
+lookup:da-nado-to	彼は無理だなどと言った。	has:무리라는 둥	fix	lookup
+lookup:nado-to	友達などと遊んだ。	has:친구 등과	keep	lookup
+lookup:nado-to	なぜモテないのかと考えた。	has:인기 없는 건가 하고	keep	lookup
+lookup:taiaux	寝ていたいが、無理だ。	has:자고 싶지만	fix	lookup
+lookup:taiaux	ずっと見ていたい。	has:계속 보고 싶	fix	lookup
+lookup:wake-dewanai	言い訳してる訳ではないよ？	has:있는 것은 아니야	fix	lookup
+lookup:wake-dewanai	嫌いな訳ではない。	has:싫은 것은 아니다	fix	lookup
+lookup:nasasou	縁の無さそうな話だ。	has:없을 것 같은	fix	lookup
+lookup:sasshiro	察しろっての。	has:눈치 좀 채라니까	fix	lookup
+lookup:verb-nado-to	帰るなどと言い出した。	has:돌아간다는 둥	fix	lookup
+lookup:verb-nado-to	行きたくないなどと言った。	has:싶지 않다는 둥	fix	lookup
+lookup:verb-nado-to	彼は学生だなどと言った。	has:학생이라는 둥	fix	lookup
+lookup:verb-nado-to	帰るなどして過ごした。	has:돌아가는 등	keep	lookup
+lookup:verb-nado-to	本を読むなどの趣味	has:읽는 등의	keep	lookup
+lookup:verb-nado-to	りんごやみかんなどと言った。	has:사과나 귤 등이라고	keep	lookup
