@@ -10,12 +10,14 @@
 // with the flag replace respells the key's base senses instead (Load).
 #include <algorithm>
 #include <array>
+#include <vector>
 
 #include "core/dict/names.h"
 #include "core/dict/runes.h"
 #include "core/dict/snapshot.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
+#include "core/text/unicode.h"
 #include "core/text/utf8.h"
 
 namespace hdTrans::dict {
@@ -93,6 +95,46 @@ constexpr std::array<std::string_view, 4> kPoliteCues = {"さん", "様", "さ�
 constexpr std::string_view kPhraseParticles = "のとがをにへや";
 constexpr std::string_view kNumerals = "〇一二三四五六七八九十百千万億兆0123456789０１２３４５６７８９";
 constexpr std::string_view kCounters = "本人個回日年月時分秒歳枚匹頭台冊杯度番号階件通名羽隻機発門両着足軒";
+// One-character particles between the words of a kana phrase (KanaWords).
+constexpr std::string_view kKanaParticles = "のをにがはでとへもや";
+// Marks that end a title and stand apart from its words in a text, so that the text keeps them
+// (アイカツ! and アイカツ！ both read the key アイカツ).
+constexpr std::string_view kTitleMarks = "!?！？‼⁉～~☆★♪♡△▽○●◎◇◆□■…‥+＋#＃*＊♯";
+
+// Whether r is one of kTitleMarks.
+bool TitleMark(char32_t r) {
+    if (r < 0x80) return r == U'!' || r == U'?' || r == U'~' || r == U'+' || r == U'#' || r == U'*';
+    return r == U'！' || r == U'？' || r == U'‼' || r == U'⁉' || r == U'～' || r == U'☆' || r == U'★' || r == U'♪' ||
+           r == U'♡' || r == U'△' || r == U'▽' || r == U'○' || r == U'●' || r == U'◎' || r == U'◇' || r == U'◆' ||
+           r == U'□' || r == U'■' || r == U'…' || r == U'‥' || r == U'＋' || r == U'＃' || r == U'＊' || r == U'♯';
+}
+// The ASCII or full-width spelling of a title mark (！ and !), or the mark itself.
+std::string FoldedMark(std::string_view mark, bool wide) {
+    static constexpr std::array<std::pair<std::string_view, std::string_view>, 6> kWidths = {
+        {{"!", "！"}, {"?", "？"}, {"~", "～"}, {"+", "＋"}, {"#", "＃"}, {"*", "＊"}}};
+    for (const auto& [a, w] : kWidths) {
+        if (mark == a || mark == w) return std::string(wide ? w : a);
+    }
+    return std::string(mark);
+}
+// Marks at the end of a title's Korean that its key lacks (ぼっちざろっく 봇치 더 록!): the
+// translation takes such marks from the text.
+// Whether b is the last UTF-8 byte of one of the marks of TargetMark.
+bool MarkEnd(unsigned char b) {
+    return b == 0x21 || b == 0x3F || b == 0x81 || b == 0x9F || b == 0xBC || b == 0x89 || b == 0x86 || b == 0x85 || b == 0xAA ||
+           b == 0xA1 || b == 0xB3;
+}
+
+bool TargetMark(char32_t r) {
+    switch (r) {
+    case U'!': case U'?': case U'！': case U'？': case U'‼': case U'⁉': case U'☆': case U'★': case U'♪': case U'♡': case U'△':
+        return true;
+    default:
+        return false;
+    }
+}
+// The fewest characters of a hiragana work title that takes part without a cue.
+constexpr std::size_t kKanaTitleRunes = 5;
 
 bool PersonCue(std::string_view key, std::string_view after) {
     if (HasPrefixIn(after, kPersonCues)) return true;
@@ -186,6 +228,26 @@ bool InflectedKey(std::string_view key, const Dict& base) {
 namespace internal {
 
 bool PlaceSense(const SemCodes& sem) { return sem.Contains("QCT") || sem.Contains("QNN"); }
+
+int DropTargetMarks(Row* rows, std::size_t count) {
+    int n = 0;
+    for (std::size_t i = 0; i < count; i++) {
+        Row& r = rows[i];
+        if (r.target.empty() || !MarkEnd(static_cast<unsigned char>(r.target.back())) || r.code == Layer::kDeleted ||
+            r.key.empty() || !TargetMark(DecodeLastRune(r.target).cp)) {
+            continue;
+        }
+        const char32_t last = DecodeLastRune(r.key).cp;
+        if (!IsHiragana(last) && !IsKatakana(last) && !text::IsKanji(last)) continue;
+        std::string_view target = r.target;
+        while (!target.empty() && TargetMark(DecodeLastRune(target).cp)) target.remove_suffix(DecodeLastRune(target).size);
+        while (!target.empty() && target.back() == ' ') target.remove_suffix(1);
+        if (target.empty() || target.size() == r.target.size()) continue;
+        r.target = target;
+        n++;
+    }
+    return n;
+}
 
 NameKeyCounts DropNameKeys(Row* rows, std::size_t count, const Dict& base, const CodeTable& codes) {
     NameKeyCounts n;
@@ -377,6 +439,106 @@ bool Snapshot::PhraseKey(std::string_view key) const {
     return false;
 }
 
+// Whether the kana key reads as dictionary words end to end: base keys of two characters or
+// more, with one-character particles between them and お or ご before them (ひとりじゃない,
+// おつかれさま, but not ぼっちざろっく).
+bool Snapshot::KanaWords(std::string_view key) const {
+    std::vector<char> reach(key.size() + 1, 0);
+    reach[0] = 1;
+    for (std::size_t i = 0; i < key.size();) {
+        const auto r = DecodeRune(key.substr(i));
+        if (reach[i]) {
+            const std::string_view rest = key.substr(i);
+            base_.Prefixes(rest, [&](int, std::size_t n) {
+                if (RuneCount(rest.substr(0, n)) >= 2) reach[i + n] = 1;
+            });
+            if (ContainsRune(kKanaParticles, r.cp) || (i == 0 && (r.cp == U'お' || r.cp == U'ご'))) reach[i + r.size] = 1;
+        }
+        i += r.size == 0 ? 1 : r.size;
+    }
+    return reach[key.size()] != 0;
+}
+
+// The name-layer key number of key with the longest run of the title marks that start after,
+// in the width written or the other (けいおん! for けいおん before ！ or !), -1 for none.
+int Snapshot::MarkedKey(std::string_view key, std::string_view after) const {
+    if (after.empty() || !TitleMark(FirstRune(after))) return -1;
+    std::string ascii(key), wide(key), plain(key);
+    int found = -1;
+    for (std::size_t i = 0; i < after.size();) {
+        const auto r = DecodeRune(after.substr(i));
+        if (r.size == 0 || !TitleMark(r.cp)) break;
+        const std::string_view raw = after.substr(i, r.size);
+        ascii += FoldedMark(raw, false);
+        wide += FoldedMark(raw, true);
+        plain += raw;
+        i += r.size;
+        for (const std::string* marked : {&plain, &ascii, &wide}) {
+            if (const int k = names_.Find(*marked); k >= 0) {
+                found = k;
+                break;
+            }
+        }
+    }
+    return found;
+}
+
+// Whether the key s[:n] is a hiragana work title that takes part without a cue: one that no base
+// key spells and that the name layer has with the title marks that follow it in s, in either
+// width (けいおん!), or a work title before a closing title bracket (『けいおん』), or a work title of
+// kKanaTitleRunes characters or more that no dictionary words spell (ぼっちざろっく).
+bool Snapshot::KanaTitle(std::string_view s, std::size_t n, std::string_view after, int k) const {
+    const std::string_view key = s.substr(0, n);
+    const std::string_view next = n < s.size() ? s.substr(n) : after;
+    const char32_t first = next.empty() ? 0 : FirstRune(next);
+    const bool marked = first != 0 && TitleMark(first);
+    const bool bracket = first == U'』' || first == U'》';
+    // Without a mark or bracket only a key of kKanaTitleRunes kana (three bytes each) or more can be one.
+    if (!marked && !bracket && key.size() < 3 * kKanaTitleRunes) return false;
+    if (RuneCount(key) < 2 || AnyRune(key, [](char32_t r) { return !IsHiragana(r) && r != U'ー'; })) return false;
+    auto workTitle = [&](int at) {
+        bool title = false;
+        if (at >= 0) {
+            names_.EachRecord(at, [&](const Record& r) {
+                title = title || r.codes->sem.HasPrefix("QWK");
+                return !title;
+            });
+        }
+        return title;
+    };
+    const bool title = workTitle(k);
+    if ((!marked && !bracket && !title) || BaseWord(key)) return false;
+    if (marked && workTitle(MarkedKey(key, next))) return true;
+    if (bracket) {
+        // The key, or the key with a title mark, is a work title (『けいおん』 of けいおん!).
+        if (title) return true;
+        for (std::size_t i = 0; i < kTitleMarks.size();) {
+            const auto r = DecodeRune(kTitleMarks.substr(i));
+            if (workTitle(names_.Find(std::string(key) + std::string(kTitleMarks.substr(i, r.size))))) return true;
+            i += r.size;
+        }
+        return false;
+    }
+    return title && RuneCount(key) >= kKanaTitleRunes && !KanaWords(key);
+}
+
+// The byte length of the longest work title of the name layer that starts text and takes part
+// without a cue, 0 for none.
+std::size_t Snapshot::TitleAt(std::string_view text) const {
+    if (names_.Len() == 0) return 0;
+    std::size_t best = 0;
+    names_.Prefixes(text, [&](int k, std::size_t n) {
+        if (n <= best || RuneCount(text.substr(0, n)) < 3) return;
+        bool title = false;
+        names_.EachRecord(k, [&](const Record& r) {
+            title = title || r.codes->sem.HasPrefix("QWK");
+            return !title;
+        });
+        if (title && (StrongName(text, n) || KanaTitle(text, n, {}, k))) best = n;
+    });
+    return best;
+}
+
 // Whether the name key s[:n] is not a word of the base dictionary: the base and user
 // dictionaries have no sense with it nor, for katakana, with its hiragana spelling
 // (アレ, イク); it is not a single character, a number (CountedKey), hiragana only, a phrase
@@ -445,16 +607,22 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
     struct Match {
         int k;
         std::size_t n;
+        bool marked = false;
     };
     std::vector<Match> matches;
     names_.Prefixes(text, [&](int k, std::size_t n) { matches.push_back({k, n}); });
+    // A key written with the title marks that follow the text in its line (けいおん! for けいおん
+    // before ！) reads the text, without the marks, which the translation takes from the text.
+    if (const int k = MarkedKey(text, ctx.after); k >= 0 && !BaseWord(text) && !InflectedKey(text, base_)) {
+        matches.push_back({k, text.size(), true});
+    }
     for (auto m = matches.rbegin(); m != matches.rend(); ++m) {
         const std::string_view key = text.substr(0, m->n);
         const Respelling* sp = Place(key);
         // A key that takes part only as confirmed (by the registry or a cue in the
         // line) is a person's name: its place senses stay out.
         bool person = false, cued = false;
-        if (!StrongName(text, m->n) && !AddressedName(text, m->n)) {
+        if (!m->marked && !StrongName(text, m->n) && !AddressedName(text, m->n) && !KanaTitle(text, m->n, ctx.after, m->k)) {
             person = true;
             if (!ctx.confirmed || ctx.confirmed->find(key) == ctx.confirmed->end()) {
                 // A cued name no dictionary word spells takes part (まるゆです, 凛); other cued keys
@@ -475,6 +643,12 @@ void Snapshot::NameEntries(std::string_view text, LookupMode mode, const LookupC
             UserEntry& e = out.emplace_back();
             e.key = key;
             e.target = Respelled(sp, ctx.persons, key, r);
+            if (m->marked) {
+                std::string_view t = e.target;
+                while (!t.empty() && TitleMark(DecodeLastRune(t).cp)) t.remove_suffix(DecodeLastRune(t).size);
+                while (!t.empty() && t.back() == ' ') t.remove_suffix(1);
+                if (!t.empty()) e.target.resize(t.size());
+            }
             e.codes = r.codes->asPlain;
             e.file = -2;
             e.line = r.id;

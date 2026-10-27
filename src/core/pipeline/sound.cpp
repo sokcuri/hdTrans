@@ -3024,7 +3024,9 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 
 }  // namespace internal
 
-std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
+namespace {
+
+std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
@@ -3040,6 +3042,49 @@ std::string Sound(std::string_view normalized, const LineContext& ctx, const dic
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
     return internal::WriteCries(sounded, ctx, snap);
+}
+
+}  // namespace
+
+// A work title of the name layer that the sound passes would change goes through unchanged, so
+// that its key still reads it (ぼっち・ざ・ろっく keeps the っ that would be emphasis elsewhere).
+std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
+    std::string whole = SoundRun(normalized, ctx, snap);
+    if (whole == normalized) return whole;
+    std::vector<std::pair<std::size_t, std::size_t>> titles;
+    for (std::size_t i = 0; i < normalized.size();) {
+        const std::size_t n = snap.TitleAt(normalized.substr(i));
+        if (n == 0) {
+            i += std::max<std::size_t>(1, text::DecodeRune(normalized.substr(i)).size);
+            continue;
+        }
+        titles.emplace_back(i, n);
+        i += n;
+    }
+    // A title the passes keep, keep standing alone (ドリドリ of ドリドリッと), or read as a sound in
+    // Hangul (ククク) is left to them.
+    std::erase_if(titles, [&](const auto& t) {
+        const std::string_view key = normalized.substr(t.first, t.second);
+        if (whole.find(key) != std::string::npos) return true;
+        const std::string alone = SoundRun(key, ctx, snap);
+        if (alone == key) return true;
+        for (std::size_t i = 0; i < alone.size();) {
+            const auto r = text::DecodeRune(std::string_view(alone).substr(i));
+            if (r.cp >= text::kBase && r.cp <= text::kLast) return true;
+            i += std::max<std::size_t>(1, r.size);
+        }
+        return false;
+    });
+    if (titles.empty()) return whole;
+    std::string out;
+    std::size_t done = 0;
+    for (const auto& [at, n] : titles) {
+        if (at > done) out += SoundRun(normalized.substr(done, at - done), ctx, snap);
+        out.append(normalized.substr(at, n));
+        done = at + n;
+    }
+    if (done < normalized.size()) out += SoundRun(normalized.substr(done), ctx, snap);
+    return out;
 }
 
 }  // namespace hdTrans::pipeline

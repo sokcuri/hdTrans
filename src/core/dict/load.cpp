@@ -808,6 +808,7 @@ bool SnapshotLoader::BuildNames(const std::vector<std::size_t>& nameFiles) {
         }
         names.Compact();
         names.ByPrio(start);
+        internal::DropTargetMarks(rows.data() + start, rows.size() - start);
         const auto dropped = internal::DropNameKeys(rows.data() + start, rows.size() - start, s.base_, s.codes_);
         if (dropped.punct + dropped.inflected + dropped.longKorean > 0) {
             s.warnings_.push_back(files[i].name + ": name senses dropped: " + std::to_string(dropped.punct) +

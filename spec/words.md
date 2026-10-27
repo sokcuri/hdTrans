@@ -72,6 +72,8 @@
 - 일반 독자가 널리 아는 작품의 한국어 제목은 쓸 수 있다(ガッチャマン 독수리 오형제).
 - 관계없는 개봉 제목이나 속편 제목으로 바꾸지 않는다(甘い吐息을 젊은엄마 3으로 옮기지 않는다).
 - 키의 기호는 같은 자리에 둔다(恋姫†無双 연희†무쌍).
+- 제목 끝의 기호는 원문을 따른다. 넓은 기호와 좁은 기호는 같고, 원문에 없는 기호는 붙이지 않는다(けいおん！ 케이온!).
+- 낱말로 읽히지 않는 다섯 자 이상의 히라가나 제목은 문장 안에서도 제목으로 읽는다. 짧은 히라가나 제목은 제목 기호나 『』가 붙을 때만 제목이다(『けいおん』 『케이온』).
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
@@ -96,6 +98,7 @@
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
 `tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
 `tests/rules/cases/names-phrase-titles.tsv`, `tests/rules/cases/names-work-title-phrases.tsv`,
+`tests/rules/cases/names-title-marks.tsv`,
 `tests/rules/documents/names-katakana-compounds.tsv`
 
 ### 이름 행 판정

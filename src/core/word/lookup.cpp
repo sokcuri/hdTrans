@@ -207,6 +207,7 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         return s->w->Skip(e, s->query);
     };
     ctx.skip.context = &sc;
+    if (current + 1 < TokenCount()) ctx.after = Tok(current + 1).text;
     dict::Candidates found = snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
     if (!found.names.empty()) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
