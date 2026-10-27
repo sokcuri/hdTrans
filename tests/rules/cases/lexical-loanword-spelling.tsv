@@ -1,0 +1,4 @@
+rule	input	expected	kind	layer
+lookup:loanword-spelling	サプライズだ。	has:서프라이즈	fix	lookup
+lookup:loanword-spelling	ゴー・ホーム	has:고 홈	fix	lookup
+lookup:loanword-spelling	ノークレームノーリターン	has:노 클레임 노 리턴	fix	lookup
