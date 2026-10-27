@@ -165,9 +165,13 @@ std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const
     std::string out;
     size_t copied = 0, pos = 0;
     const std::span<const std::string_view> pairs = dict::ClassMembers(HDTRANS_CLASS("spelling.variant"));
+    const std::vector<std::pair<size_t, size_t>> chinese = internal::ChineseRuns(line);
+    auto run = chinese.begin();
     while (pos < line.size()) {
         size_t taken = 0;
-        for (const std::string_view pair : pairs) {
+        while (run != chinese.end() && run->second <= pos) ++run;
+        const bool inChinese = run != chinese.end() && run->first <= pos;
+        for (const std::string_view pair : inChinese ? std::span<const std::string_view>() : pairs) {
             const size_t eq = pair.find('=');
             const std::string_view variant = pair.substr(0, eq), spelling = pair.substr(eq + 1);
             if (!line.substr(pos).starts_with(variant) || !StandsAsWord(line, pos, variant, spelling) ||

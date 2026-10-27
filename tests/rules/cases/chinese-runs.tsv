@@ -18,3 +18,4 @@ protect:chinese-run	髙橋さんが来た。	타카하시 씨가 왔다.	keep	pr
 protect:chinese-run	山﨑さんの家だ。	야마자키 씨의 집이다.	keep	protect
 protect:chinese-run	是 那天傍晚是《败犬们的挽歌2》的台词训练	是 那天傍晚是《败犬们的挽歌2》的台词训练	fix	normalize
 protect:chinese-run	魔法《マジック》を使う。	마법을 쓴다.	keep	normalize
+protect:chinese-run	但是 这力量可不同于远程操作型	但是 这力量可不同于远程操作型	fix	normalize

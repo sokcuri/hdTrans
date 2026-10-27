@@ -31,7 +31,7 @@ constexpr UnicodeSample kUnicodeSamples[] = {
     {"猫", "고양이", "Unicode Japanese translation"},
     {"㐂", "㐂", "Unicode Japanese outside CP932"},
     {"ᄓꥠ", "ᄓꥠ", "Unicode Hangul outside CP949"},
-    {"\U00020bb7\U0001f642", "\U00020bb7\U0001f642", "Unicode supplementary CJK and emoji"},
+    {"\U00020000\U0001f642", "\U00020000\U0001f642", "Unicode supplementary CJK and emoji"},
     {"猫\U0001f642", "고양이 \U0001f642", "Unicode translation next to a surrogate pair"},
     {"�A�", "�A�", "Unicode replacement characters preserved"},
 };

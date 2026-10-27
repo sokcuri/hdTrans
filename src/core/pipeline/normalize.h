@@ -61,7 +61,8 @@ using WordKeepsVariant = bool (*)(const void* context, std::string_view line, si
 // 見た時): a kanji variant after hiragana, or after a kanji or katakana when
 // spelling.variant-after-word lists it; a kana variant written in kanji only after a kana of
 // spelling.variant-kana-after; another kana variant anywhere. A variant in a context of spelling.variant-kept (神の位) stays, and so does one where
-// keeps says a dictionary word cuts across it or holds it. Run after Normalize, with the dictionary.
+// keeps says a dictionary word cuts across it or holds it, or it is in a Chinese run
+// (internal::ChineseRuns). Run after Normalize, with the dictionary.
 std::string RespellVariants(std::string_view line, WordKeepsVariant keeps, const void* context);
 
 // line with each ending of classes.tsv spelling.katakana-ending written in katakana right after a
