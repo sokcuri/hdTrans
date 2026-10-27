@@ -20433,6 +20433,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 猿魔王ゼーマン	원마왕 제만	N130	QPNVHn		GN							names.647000
 獄	교도소	N130	QPNVHn	Wb	GN						だけ	names.647001
 獄々丸	고쿠고쿠마루	N110			GN						ごくごくまる	names.647002
+獄丁ヒグマ	옥졸 히그마	N130	QWK		GN							names.647003
 獄中	옥중	N110			GN						ごくちゅう	names.647004
 獄中の逆転	옥중의 역전	N110			GN							names.647005
 獄中刀	옥중도	N130	QWK		GN							names.647007
