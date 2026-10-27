@@ -16,6 +16,7 @@
 | `rules.critical` | 뜻이 뒤집히는 오역의 사례 `tests/rules/critical/<갈래>.tsv`. 한 행도 실패하지 않아야 하고 `current` 행을 받지 않음 ([번역 규칙 MNG](../spec/meaning.md)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
 | `rules.cases.speech-<단계>` | `tests/rules/speech-soft/`, `speech-strict/`의 사례를 그 말투 단계로 확인 |
+| `rules.cases.documents` | `tests/rules/documents/`의 입력을 하나씩 문서로 번역해 확인. 줄은 입력과 기대값에 `\n`으로 씀 |
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
 | `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`를 넘지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
 | `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |

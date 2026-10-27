@@ -609,10 +609,12 @@ const std::map<std::string, Name>& Registry::Accepted() {
             }
             if (p.empty() || RoleLike(p) || LabelRole(p) || !AllRunes(p, IsNameRune)) continue;
             // A plain-text label that is a common word and no person of the name layer is
-            // a role (放送, 司会), not a name.
+            // a role (放送, 司会), and one of common katakana words a field (セットスキル：), not
+            // a name.
             if (plain) {
                 const DictFlags f = Flags(p);
                 if (f.common && !f.person && !f.layerSurname && !f.layerGiven) continue;
+                if (CommonWords(p)) continue;
             }
             labelled.insert(p);
         }
@@ -632,7 +634,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         double w = 1.0;
         if (f.role) {
             w = 0;
-        } else if (f.common && !f.person && !f.city && PersonName(t).empty()) {
+        } else if ((f.common || CommonWords(t)) && !f.person && !f.city && PersonName(t).empty()) {
             w = 0.5;
         }
         Name& n = all[t];
@@ -693,11 +695,22 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (n.score >= kThreshold) att.insert(t);
     }
     for (const auto& [t, kr] : tables_->fixed) att.insert(t);
+    // Whether the katakana run t goes on after its head x in words of two kana or more: common
+    // words of the dictionaries (ダンジョンゲート) or a run the lines write on its own
+    // (ゴブリンアーチャー beside アーチャー). Such a run is a compound of x, not a longer name; x
+    // written twice (メイメイ) is one.
+    auto compound = [&](std::string_view t, std::string_view x) {
+        const std::string_view rest = t.substr(x.size());
+        return RuneCount(rest) >= 2 && rest != x && (CommonWords(rest) || kana_.count(std::string(rest)) > 0);
+    };
+    // A katakana run before an honorific that starts a longer name or unknown run is that name's
+    // short form (アルくん, アルガルド), but a common word is the word (ダンジョンさん).
     for (const auto& [x, c] : hon_) {
         (void)c;
-        if (att.count(x) || RuneCount(x) < 2 || !AllRunes(x, IsKatakana) || Flags(x).role) continue;
+        if (att.count(x) || RuneCount(x) < 2 || !AllRunes(x, IsKatakana) || Flags(x).role || CommonWords(x)) continue;
         for (const auto& [t, kc] : kana_) {
-            if (t.size() > x.size() && t.starts_with(x) && (att.count(t) || (kc >= 2 && Flags(t).records == 0))) {
+            if (t.size() > x.size() && t.starts_with(x) && (att.count(t) || (kc >= 2 && Flags(t).records == 0)) &&
+                !compound(t, x)) {
                 Name& n = all[x];
                 n.score = std::max(n.score, kThreshold);
                 n.person = true;
@@ -781,10 +794,13 @@ const std::map<std::string, Name>& Registry::Accepted() {
         g.person = true;
         g.given = true;
     }
+    // An unknown katakana run that starts with a katakana name is a longer name, unless it is a
+    // compound of the name.
     for (const auto& [t, c] : kana_) {
         if (c < 2 || att.count(t) || Flags(t).records > 0) continue;
         for (const std::string& x : att) {
-            if (x.size() < t.size() && t.starts_with(x) && RuneCount(x) >= 2 && AllRunes(x, IsKatakana)) {
+            if (x.size() < t.size() && t.starts_with(x) && RuneCount(x) >= 2 && AllRunes(x, IsKatakana) &&
+                !compound(t, x)) {
                 all[t].score += kThreshold;
                 all[t].person = true;
                 break;
@@ -1034,6 +1050,27 @@ bool Registry::NicknameCompound(std::string_view t) {
         if ((TranslatedWord(a) && name(b)) || (name(a) && TranslatedWord(b))) return true;
     }
     return false;
+}
+
+bool Registry::CommonWords(std::string_view s) {
+    if (!AllRunes(s, IsKatakana)) return false;
+    auto word = [&](std::string_view w) {
+        const DictFlags f = Flags(w);
+        return f.common && !f.person && !f.layerSurname && !f.layerGiven;
+    };
+    if (word(s)) return true;
+    std::vector<std::size_t> starts = RuneStarts(s);
+    starts.push_back(s.size());
+    // split[k]: s up to starts[k] is a sequence of such words.
+    std::vector<bool> split(starts.size(), false);
+    split[0] = true;
+    for (std::size_t i = 0; i + 2 < starts.size(); i++) {
+        if (!split[i]) continue;
+        for (std::size_t j = i + 2; j < starts.size(); j++) {
+            if (!split[j] && word(s.substr(starts[i], starts[j] - starts[i]))) split[j] = true;
+        }
+    }
+    return split.back();
 }
 
 const std::set<std::string>& Registry::SiblingNames() {

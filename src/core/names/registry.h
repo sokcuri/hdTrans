@@ -145,6 +145,9 @@ private:
     const std::set<std::string>& SiblingNames();
     bool NicknameCompound(std::string_view t);
     bool TranslatedWord(std::string_view w);
+    // Whether the katakana run s is a common word of the dictionaries that reads as no person
+    // (ダンジョン), or splits into such words of two kana or more (セットスキル, ダンジョンゲート).
+    bool CommonWords(std::string_view s);
     void FindSiblingNames();
 
     // Scores, splits and the accepted names (registry.cpp).
