@@ -1200,7 +1200,8 @@ void ShowEntry(App& app, int row) {
     SetDlgItemTextW(app.dicts, IDC_ENTRY_OPTIONS, Wide(entry.options).c_str());
 }
 
-void ShowEntries(App& app, int row) {
+// Lists the rows of the open file and selects row; fill also shows that row in the entry fields.
+void ShowEntries(App& app, int row, bool fill = true) {
     app.rows.clear();
     app.rowLines.clear();
     if (!app.dictText.column) {
@@ -1223,7 +1224,7 @@ void ShowEntries(App& app, int row) {
         EnableWindow(GetDlgItem(app.dicts, id), editable);
     }
     EnableWindow(GetDlgItem(app.dicts, IDC_DICT_EXPORT), CurrentDict(app) ? TRUE : FALSE);
-    ShowEntry(app, row);
+    if (fill) ShowEntry(app, row);
 }
 
 void OpenDict(App& app, int index) {
@@ -1310,8 +1311,17 @@ void ChangeEntry(App& app, int id) {
         if (id == IDC_ENTRY_EDIT) app.dictText.lines[line] = gui::RowLine(entry, app.dictText.lines[line]);
         else app.dictText.lines.erase(app.dictText.lines.begin() + static_cast<std::ptrdiff_t>(line));
     }
-    if (!SaveDict(app)) app.dictText = before;
-    ShowEntries(app, next);
+    const bool saved = SaveDict(app);
+    if (!saved) app.dictText = before;
+    if (id != IDC_ENTRY_ADD) {
+        ShowEntries(app, saved ? next : row);
+        return;
+    }
+    // A failed add keeps the typed entry for correction; a saved one selects the new row and
+    // clears the fields for the next entry.
+    ShowEntries(app, saved ? next : row, false);
+    if (saved) ShowEntry(app, -1);
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
 }
 
 void ToggleDict(App& app, int index, bool on) {
@@ -1797,7 +1807,18 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     gui::TextEncoding encoding{};
     ok = Check(gui::ReadTextFile(file, text, encoding) && encoding == gui::TextEncoding::Utf8 &&
                text == "犬\t고친사용자\n鳥\t추가사용자\n", "edited dictionary file") && ok;
+    ok = Check(ControlText(app.dicts, IDC_ENTRY_KEY).empty() && ControlText(app.dicts, IDC_ENTRY_KO).empty() &&
+               Selected(grid) == 1 && app.rows[1].key == "鳥", "a saved add clears the fields and selects the new row") && ok;
     ok = Check(TranslateShort(app, L"鳥\r\n犬") == L"추가사용자\r\n고친사용자", "translation reads the edited dictionary") && ok;
+    const HANDLE locked = CreateFileW(file.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (!Check(locked != INVALID_HANDLE_VALUE, "deny writes to the dictionary file")) return false;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"魚");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"실패사용자");
+    NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    CloseHandle(locked);
+    ok = Check(ControlText(app.dicts, IDC_ENTRY_KEY) == L"魚" && ControlText(app.dicts, IDC_ENTRY_KO) == L"실패사용자" &&
+               app.rows.size() == 2 && gui::ReadTextFile(file, text, encoding) && text == "犬\t고친사용자\n鳥\t추가사용자\n",
+               "a failed add keeps the typed entry and the file") && ok;
 
     ListView_SetCheckState(list, 0, FALSE);
     std::error_code error;
@@ -1814,6 +1835,13 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     NotifyClick(app.dicts, IDC_DICT_NEW);
     ok = Check(fs::exists(gui::UserDictPath(user, "새 사전"), error) && app.userDicts.size() == 2 && app.rows.empty(),
                "new dictionary") && ok;
+    for (int n = 0; n < 40; ++n) {
+        SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, (L"ＺＺ" + std::to_wstring(n)).c_str());
+        SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
+        NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    }
+    ok = Check(app.rows.size() == 40 && Selected(grid) == 39 && ListView_IsItemVisible(grid, 39) && ListView_GetTopIndex(grid) > 0,
+               "the list scrolls to the newest added row") && ok;
     const fs::path places = program / L"places.txt";
     ok = Check(WriteFixture(places, "東京\t가져온장소\n"), "write dictionary to import") && ok;
     ShowPage(app, kDictsPage);
