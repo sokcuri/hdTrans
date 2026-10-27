@@ -3050,6 +3050,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
 // that its key still reads it (ぼっち・ざ・ろっく keeps the っ that would be emphasis elsewhere).
 std::string Sound(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     std::string whole = SoundRun(normalized, ctx, snap);
+    if (whole == normalized) return whole;
     std::vector<std::pair<std::size_t, std::size_t>> titles;
     for (std::size_t i = 0; i < normalized.size();) {
         const std::size_t n = snap.TitleAt(normalized.substr(i));

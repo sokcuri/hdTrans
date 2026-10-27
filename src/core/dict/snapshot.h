@@ -338,7 +338,7 @@ private:
                      const std::vector<const UserEntry*>& owned, std::vector<UserEntry>& out) const;
     bool StrongName(std::string_view s, std::size_t n) const;
     bool KanaWords(std::string_view key) const;
-    bool KanaTitle(std::string_view s, std::size_t n, std::string_view after) const;
+    bool KanaTitle(std::string_view s, std::size_t n, std::string_view after, int k) const;
     int MarkedKey(std::string_view key, std::string_view after) const;
     bool TitleKey(std::string_view key) const;
     bool AddressedName(std::string_view s, std::size_t n) const;
