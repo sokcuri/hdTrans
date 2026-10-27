@@ -116,7 +116,7 @@ verb:synthetic-causative-evidence	信じさせられる証拠はない	has:믿�
 verb:synthetic-causative-evidence	待たせられない	has:기다리게 할 수 없	keep	analysis
 verb:synthetic-causative-evidence	待たせられません	has:기다리게 할 수 없	keep	analysis
 verb:synthetic-causative-evidence	続けさせられればいい	has:할 수 있으면	keep	analysis
-verb:synthetic-causative-evidence	続けさせられよう	has:할 수	keep	analysis
+verb:synthetic-causative-evidence	続けさせられよう	has:계속하게 될 것이다	fix	analysis
 verb:synthetic-causative-evidence	続けさせられたりする	lacks:할 수	keep	analysis
 verb:synthetic-causative-evidence	仕事を続けさせられたりした	lacks:할 수	keep	analysis
 verb:synthetic-causative-evidence	食べられたらいい	has:먹을 수	keep	analysis
@@ -146,3 +146,10 @@ verb:synthetic-causative-made-to	休憩中にまで上司に荷物の運搬を�
 verb:synthetic-causative-made-to	私は新人なので、先輩に雑用をさせられたり、失敗の責任を押し付けられたりする。	has:잡무를 하도록 강요받거나	keep	analysis
 verb:synthetic-causative-made-to	上司に予定外の出張をさせられても、会社は交通費を払ってくれない。	has:출장을 하도록 강요받아도	keep	analysis
 verb:synthetic-causative-can-make	雪で道が閉ざされているので、今夜は救援隊を出発させられない。	has:시킬 수 없다	keep	analysis
+verb:synthetic-causative-potential	毎日残業を続けさせられよう	has:계속하게 될 것이다	fix	analysis
+verb:synthetic-causative-potential	毎日走らせられよう	lacks:할 수 있	fix	analysis
+verb:synthetic-causative-potential	それなら続けさせられよう	has:계속하게 될 것이다	fix	analysis
+verb:synthetic-causative-potential	これなら続けさせられよう	has:계속하게 할 수 있을 것이다	keep	analysis
+verb:synthetic-causative-potential	ここなら走らせられよう	has:달리게 할 수 있을 것이다	keep	analysis
+verb:synthetic-causative-potential	続けさせられれば	has:계속하게 할 수 있으면	keep	analysis
+verb:synthetic-causative-potential	部長に褒められよう	has:칭찬받자	keep	analysis
