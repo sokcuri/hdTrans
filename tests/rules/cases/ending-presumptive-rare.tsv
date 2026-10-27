@@ -1,0 +1,37 @@
+# 규칙: GRM-10
+rule	input	expected	kind	layer
+cx:ending-presumptive-rare:10	これは不朽の逸品といえよう。	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	このようにも言えよう。	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	これは不朽の逸品といえよう。	has:할 수 있을 것이다	fix	compose
+cx:ending-presumptive-rare:10	このようにも言えよう。	has:말할 수 있을 것이다	fix	compose
+# adapted examples
+cx:ending-presumptive-rare:10	毎日残業を続けさせられよう	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	これなら続けさせられよう	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:forced-act:10	部長に残業を続けさせられよう	rule:cx:forced-act:10=계속&AV@	keep	rewrites
+cx:ending-presumptive-rare:10	続けさせられよう	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	これなら行けよう。	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	行けよう	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	褒められよう。	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	この問題も、科学の発達によっていつかは明らかにされよう。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	そう言いきってしまっては、問題があろう。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	行なわれようとしている。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	褒められようと努力した。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	何を言われようと、俺は行くだろう。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	どれほど責められようとも、黙っている。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	部長に残業を続けさせられようとも、今日は断る。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	これなら続けさせられようと思う。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	続けさせられるだろう。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	続けよう。	has:계속하자	keep	rewrites
+cx:ending-presumptive-rare:10	続けさせよう。	has:계속하게 하자	keep	rewrites
+cx:ending-presumptive-rare:10	させよう。	has:시키자	keep	rewrites
+cx:ending-presumptive-rare:10	食べよう。	has:먹자	keep	rewrites
+cx:ending-presumptive-rare:10	何でもしてあげよう	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	早くしようよ	has:하자	keep	rewrites
+cx:ending-presumptive-rare:10	行けるように練習した。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	褒められようが、叱られようが、方針は変えない。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	「行けよう」と言った。	rule:cx:ending-presumptive-rare:10=3 것이다	fix	rewrites
+cx:ending-presumptive-rare:10	部長に褒められよう。	!rule:cx:ending-presumptive-rare:10	keep	rewrites
+cx:ending-presumptive-rare:10	今度こそみんなに褒められよう。	has:칭찬받자	keep	rewrites
+cx:ending-presumptive-rare:10	これなら行けよう。	has:갈 수 있을 것이다	fix	compose
+cx:ending-presumptive-rare:10	行けよう	has:갈 수 있을 것이다	fix	compose
+cx:ending-presumptive-rare:10	「行けよう」と言った。	has:갈 수 있을 것이다	fix	compose
