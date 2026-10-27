@@ -342,7 +342,8 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         if (c == "Rw") return prev != nullptr && prev->JoinsNext() && prev->group->surface == group->surface;
         if (c == "Td" && next == nullptr && prev == nullptr) return true;
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
-        if (c == "Vp") return detail != nullptr && detail->record == 4;
+        if (c == "Vp") return detail != nullptr &&
+            (detail->record == 4 || (detail->syntheticCausative && detail->voice == Voice::Potential));
         // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
         if (c == "Nq") return ReadsCount(i);
         // Qw: a question word is the word or comes before it in its sentence.

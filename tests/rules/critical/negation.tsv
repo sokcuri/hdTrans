@@ -1,5 +1,12 @@
 # 규칙: MNG-1
 rule	input	expected	kind	layer
+verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
+verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
+verb:synthetic-causative-potential	続けさせられません。	has:할 수 없습니다	fix	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられない。	has:않는다	keep	analysis
+verb:synthetic-causative-potential	私は先生に練習を続けさせられない。	lacks:할 수	keep	analysis
+verb:synthetic-causative-potential	毎日無理やり練習を続けさせられなかった。	has:않았다	keep	analysis
+verb:synthetic-causative-potential	毎日無理やり練習を続けさせられなかった。	lacks:할 수	keep	analysis
 dict:jisjk:121099	高圧的ではない。	고압적이지 않다.	fix	lookup
 dict:jisjk:121099	高圧的だ。	고압적이다.	keep	lookup
 dict:jisjk:136663	深大ではない。	심대하지 않다.	fix	lookup

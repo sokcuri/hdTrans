@@ -430,6 +430,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         if (shortCausativePassive || (w->settings.text && w->settings.improvements.causativePassive &&
                                      oldState == 2 && tail.starts_with(kJaRare))) {
             base.record = 5;
+            base.syntheticCausative = !shortCausativePassive;
             sourceLength += static_cast<int>(kJaRare.size());
             tail.remove_prefix(kJaRare.size());
         }
@@ -572,7 +573,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
             const std::string_view afterGroup = From(after(), g->length);
             for (int index = 0; keepScanning && index < static_cast<int>(g->entries.size()); index++) {
                 const Entry& e = *g->entries[static_cast<std::size_t>(index)];
-                if ((Has(e.gattr, "Sh") && Classify(afterGroup) != 0) || Byte(At(e.code, 1)) != base.kind + '0' ||
+                const bool potentialForm = base.syntheticCausative && base.kind == 2 && At(e.code, 1) == '4';
+                if ((Has(e.gattr, "Sh") && Classify(afterGroup) != 0) ||
+                    (Byte(At(e.code, 1)) != base.kind + '0' && !potentialForm) ||
                     !w->EndingApplies(e, afterGroup, tokenIndex) ||
                     w->CutsWord(tail.substr(0, tail.size() - endingText.size()), endingText.substr(0, std::min<std::size_t>(static_cast<std::size_t>(g->length), endingText.size())), afterGroup)) {
                     base.enabled[index] = false;
@@ -683,7 +686,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
             return false;
         }
         auto applies = [&](const Entry& e) {
-            return Byte(At(e.code, 1)) == base.kind + '0' && w->EndingApplies(e, after(), tokenIndex);
+            const bool potentialForm = base.syntheticCausative && base.kind == 2 && At(e.code, 1) == '4';
+            return (Byte(At(e.code, 1)) == base.kind + '0' || potentialForm) &&
+                   w->EndingApplies(e, after(), tokenIndex);
         };
         // A plain-dictionary group none of whose endings applies gives way to the groups
         // after it.

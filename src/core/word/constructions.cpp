@@ -407,13 +407,18 @@ constexpr NamedFeature kFeatures[] = {
          return std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes->sem.HasPrefix("QPN"); });
      }},
     // The verb was analysed as a causative.
-    {"causative", [](Flusher&, const Item* it) { return it->detail->record == 2; }},
+    {"causative", [](Flusher&, const Item* it) {
+         return it->detail->record == 2 ||
+                (it->detail->syntheticCausative && it->detail->voice == Voice::Potential);
+     }},
     // The verb was analysed as a passive that no Korean passive word has taken over yet (撫でられ).
     {"passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 1 && !it->lexical; }},
     // A dictionary word that is the passive of a dictionary verb (書かれ, 使われ, 見られ; PassiveBaseVerb).
     {"lexical-passive", [](Flusher& f, const Item* it) { return !PassiveBaseVerb(f, it->group->surface).empty(); }},
     // The verb was analysed as a causative-passive (待たされ, 読ませられ).
-    {"causative-passive", [](Flusher&, const Item* it) { return it->DetailRecord() == 5; }},
+    {"causative-passive", [](Flusher&, const Item* it) {
+         return it->DetailRecord() == 5 && it->detail->voice != Voice::Potential;
+     }},
     // The (ら)れ of the verb reads as the respectful form (DecideVoice: 確認されますか).
     {"respectful", [](Flusher&, const Item* it) { return it->detail->Yougo() && it->detail->voice == Voice::Respectful; }},
     // The word starts where the word before it ends: in the same token, or at the start of the next
@@ -481,7 +486,10 @@ constexpr NamedFeature kFeatures[] = {
          return false;
      }},
     // The conjugation of a verb in the potential (潜れる, 使える).
-    {"potential", [](Flusher&, const Item* it) { return it->DetailRecord() == 4; }},
+    {"potential", [](Flusher&, const Item* it) {
+         return it->DetailRecord() == 4 ||
+                (it->detail->syntheticCausative && it->detail->voice == Voice::Potential);
+     }},
     // The Korean of the chosen candidate is an adjective or 있다, 없다 (배고프다, 효과가 있다): a
     // marker of an adjective family, of a family whose declarative is bare, or a stem that ends like
     // an adjective of ko-adjective.stem-end.

@@ -34,6 +34,7 @@ struct ResolvedItem {
     DetailClass detailClass = DetailClass::None;
     int detailKind = -1;     // conjugation kind; -1 without a detail
     int detailRecord = 0;    // the verb branch folded into a kind-7 ending; 0 without a detail
+    bool causativePotential = false;  // the folded causative's られ reads ability, not passive voice
     int directIndex = -1;    // the selected ending; -1 without an ending group or selection
 
     ResolvedEntry entry;     // the selected entry (empty when selected is outside the entries)

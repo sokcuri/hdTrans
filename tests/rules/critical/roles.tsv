@@ -1,5 +1,10 @@
 # 규칙: MNG-4, GRM-9
 rule	input	expected	kind	layer
+verb:synthetic-causative-potential	私は先生に練習を続けさせられた。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-potential	先生に書かされる。	has:선생님 때문에 억지로	keep	analysis
+verb:synthetic-causative-potential	貴様の仕事の遅さにはへきえきさせられる｡	lacks:게 할 수	keep	analysis
+verb:synthetic-causative-potential	殿下にあらせられるぞ！	lacks:있게 할 수	keep	analysis
+verb:synthetic-causative-potential	かしこくも天皇陛下におかせられましては	lacks:두게 할 수	keep	analysis
 cx:ni-partner:20	お前ごときが私に勝てると思うな	has:나를 이길	fix	rewrites
 cx:ni-partner:20	私に勝てる	has:나를 이길 수 있다	fix	rewrites
 cx:ni-partner:20	もし私に勝てたら考えてあげるわ	has:나를 이길	fix	rewrites
