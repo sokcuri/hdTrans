@@ -294,7 +294,18 @@ bool SentenceEndAfter(std::string_view after) {
     for (const std::string_view end : {"!", "?", ".", "…", "」", "』", "~", "～"}) {
         if (after.starts_with(end)) return true;
     }
-    return false;
+    // Laughter that ends the line (バカじゃないのｗ 바보가 아니야 ㅋ).
+    bool laugh = false;
+    for (std::string_view rest = after; !rest.empty();) {
+        const text::Rune r = text::DecodeRune(rest);
+        if (r.cp == U'w' || r.cp == U'ｗ' || r.cp == U'ㅋ' || r.cp == U'W' || r.cp == U'Ｗ') {
+            laugh = true;
+        } else if (r.size == 0 || !(r.cp == U' ' || r.cp == U'!' || r.cp == U'?' || r.cp == U'」' || r.cp == U'』')) {
+            return false;
+        }
+        rest.remove_prefix(r.size);
+    }
+    return laugh;
 }
 
 // Whether the form of key with suffix ends a clause in speech: the 아/어 form alone or with
@@ -753,8 +764,9 @@ void Composer::BuildAdjective(int i) {
         }
         // 아니다 ending a sentence in the casual form is 아니야 (아니에요), not 아니어.
         if (SpokenEnd(key, suffix, TextAfter(items, i), it.endingSurface, sc.spoken || CopyFollows(items, i))) {
-            if (replacement == "니어" && stem.ends_with("아")) {
-                replacement = suffix.empty() ? "니야" : "니에";
+            if (replacement.ends_with("니어") && Cat({stem, replacement}).ends_with("아니어")) {
+                replacement.resize(replacement.size() - std::string_view("어").size());
+                replacement += suffix.empty() ? "야" : "에";
             } else {
                 replacement = SpokenInfinitive(replacement);
             }
