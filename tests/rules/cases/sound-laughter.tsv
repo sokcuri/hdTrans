@@ -1,6 +1,6 @@
 # 규칙: SND-5
 rule	input	expected	kind	layer
-restore:laughter	何でそんな発想になったんだよｗｗｗｗｗｗ	왜 그런 발상이 되었어 ㅋㅋㅋㅋㅋㅋ	fix	restore
+restore:laughter	何でそんな発想になったんだよｗｗｗｗｗｗ	왜 그런 발상이 됐어 ㅋㅋㅋㅋㅋㅋ	fix	restore
 restore:laughter	キツネのお面被った変な人が祓ってくれたやつでしょwww	여우의 가면 쓴 이상한 사람이 정화해 준 녀석이지 ㅋㅋㅋ	fix	restore
 restore:laughter	いや女王様のせいだろｗ	아니 여왕님 탓이지 ㅋ	fix	restore
 restore:laughter	これは創作だろｗ	이것은 창작이지 ㅋ	fix	restore
@@ -132,7 +132,7 @@ analysis:laughter-ends-clause	こいつのテンションにいちいち笑うww
 analysis:laughter-ends-clause	良かった釣りじゃなかったw	has:아니었다 ㅋ	fix	analysis
 analysis:laughter-ends-clause	何それ凄いｗｗｗｗｗｗ	그게 뭐야 굉장하다 ㅋㅋㅋㅋㅋㅋ	fix	analysis
 analysis:laughter-ends-clause	おまけに性格もいいｗ	has:좋다 ㅋ	fix	analysis
-analysis:laughter-ends-clause	なんでそうなったのｗｗｗ	has:되었어 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	なんでそうなったのｗｗｗ	has:됐어 ㅋㅋㅋ	fix	analysis
 analysis:laughter-ends-clause	あいつふてぶてしいww	has:뻔뻔스럽다 ㅋㅋ	fix	analysis
 analysis:laughter-ends-clause	これマジだったら伝説になれるwwwww	has:될 수 있다 ㅋㅋㅋㅋㅋ	fix	analysis
 analysis:laughter-ends-clause	先生に怒られましたｗ	has:혼났습니다 ㅋ	fix	analysis
