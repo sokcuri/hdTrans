@@ -441,6 +441,7 @@ private:
     }
     bool UtteranceStart(size_t p) const;
     bool PauseAt(size_t p) const;
+    size_t LaughterEnd(size_t p) const;
     // With ending, the end rows go there instead of into user.
     void LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, bool skipEnds = false,
                      size_t* ending = nullptr) const;
@@ -514,6 +515,16 @@ private:
 bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
     return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
+}
+
+// The end of a run of mark.laughter letters at character p that no Latin letter or digit follows
+// (ｗｗ, not www.example), or p.
+size_t SoundText::LaughterEnd(size_t p) const {
+    size_t e = p;
+    while (e < rs_.size() && dict::InClassRune(HDTRANS_CLASS("mark.laughter"), rs_[e])) e++;
+    const bool latin = e < rs_.size() && (rs_[e] < 0x2000 || (rs_[e] >= 0xFF01 && rs_[e] <= 0xFF5E)) &&
+                       (text::IsLetter(rs_[e]) || text::IsDigit(rs_[e]));
+    return latin ? p : e;
 }
 
 // Whether there is a pause at character p: the end of the text or a comma, sentence end,
@@ -774,10 +785,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             }
         }
         // A final row needs the end of the utterance after it and any spaces: no letter, digit, comma or
-        // question mark.
+        // question mark. Laughter ends the utterance too (ウケるｗｗ).
         if (ok && s.final) {
             size_t q = end;
             while (q < rs_.size() && text::IsSpace(rs_[q])) q++;
+            q = LaughterEnd(q);
             const std::string next = q < rs_.size() ? EncodeText(f.substr(q, 1)) : std::string();
             if (q < rs_.size() && (text::IsLetter(rs_[q]) || text::IsDigit(rs_[q]) || dict::InClass(HDTRANS_CLASS("mark.comma"), next) ||
                                    dict::InClass(HDTRANS_CLASS("mark.question"), next))) {

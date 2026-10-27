@@ -49,7 +49,7 @@ restore:laughter	ご飯いいなぁーｗ	밥 좋겠다―ㅋ	fix	restore
 restore:laughter	まぁそのときはすごい鬱々してたよーｗ	has:―ㅋ	fix	restore
 restore:laughter	≫454ｗｗｗ≫456がひでぇｗ	has:≫454ㅋㅋㅋ≫456	fix	restore
 restore:laughter	豚足おいしいよねｗｗby	has:ㅋㅋby	fix	restore
-restore:laughter	ｗｗｗｗｗｗ一乙と言う間もなくｗｗｗｗ	has:ㅋㅋㅋㅋㅋㅋ일	fix	restore
+restore:laughter	ｗｗｗｗｗｗ一乙と言う間もなくｗｗｗｗ	has:ㅋㅋㅋㅋㅋㅋ 일	fix	restore
 restore:laughter	なんか良いわーｗｗｗｗ	왠지 좋아―ㅋㅋㅋㅋ	fix	restore
 restore:laughter	マジか...ｗ	진짜야...ㅋ	fix	restore
 restore:laughter	ｗｗｗ、それは笑うしかない。	ㅋㅋㅋ, 그것은 웃을 수밖에 없다.	keep	restore
@@ -121,3 +121,26 @@ restore:laughter	　ＷＷの修正作業をしつつ	has:WW	keep	restore
 restore:laughter	チームＷの勝ち	팀 W의 승리	keep	restore
 restore:laughter	W＝Wagner	W=Wagner	keep	restore
 restore:laughter	いや、wikiで調べた	아니, wiki로 조사했다	keep	restore
+analysis:laughter-ends-clause	なにそれ可愛いｗｗｗ	뭐야 그게 귀엽다 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	分かるｗ	안다 ㅋ	fix	analysis
+analysis:laughter-ends-clause	羨ましいｗ	부럽다 ㅋ	fix	analysis
+analysis:laughter-ends-clause	ひでえｗｗｗ	심하다 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	姐さんつええｗｗｗ	누님 강하다 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	えっ怖い怖いｗｗ	어 무서워 무서워 ㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	どっちみち目立つｗｗｗ	has:눈에 띈다 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	こいつのテンションにいちいち笑うwww	has:웃는다 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	良かった釣りじゃなかったw	has:아니었다 ㅋ	fix	analysis
+analysis:laughter-ends-clause	何それ凄いｗｗｗｗｗｗ	그게 뭐야 굉장하다 ㅋㅋㅋㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	おまけに性格もいいｗ	has:좋다 ㅋ	fix	analysis
+analysis:laughter-ends-clause	なんでそうなったのｗｗｗ	has:되었어 ㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	あいつふてぶてしいww	has:뻔뻔스럽다 ㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	これマジだったら伝説になれるwwwww	has:될 수 있다 ㅋㅋㅋㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	先生に怒られましたｗ	has:혼났습니다 ㅋ	fix	analysis
+analysis:laughter-ends-clause	ウケるｗｗ	웃겨ㅋㅋ	fix	analysis
+analysis:laughter-ends-clause	かわいいwebサイト	귀여운 web사이트	keep	analysis
+restore:laughter	ながくなっちゃったｗゴメン	has:ㅋ 미안해	fix	restore
+restore:laughter	ちょっと安心してる自分がいるwwゴメンww	has:있다 ㅋㅋ 미안해	fix	restore
+restore:laughter	田中ｗｗｗ良かったｗｗお疲れ	has:ㅋㅋ 수고했어	fix	restore
+restore:laughter	何かがあるよなｗ田中さんｗ	has:있어ㅋ 타나카	fix	restore
+restore:laughter	笑い事じゃないだろうけどなｗ本人からしたらｗ	has:ㅋ 본인	fix	restore
+restore:laughter	ID:abcwww+	ID:abcwww+	keep	restore

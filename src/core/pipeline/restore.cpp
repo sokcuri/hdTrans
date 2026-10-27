@@ -895,6 +895,8 @@ std::string WriteLaughter(std::string_view line, std::string_view source) {
         }
         out.append(line, byteAt(copied), byteAt(start) - byteAt(copied));
         for (std::size_t n = 0; n < count; n++) out += korean;
+        // Laughter ends what it follows: a word typed right after it is written apart (있어ㅋ 미도리).
+        if (end < rs.size() && IsSyllable(rs[end].cp)) out += ' ';
         copied = end;
         changed = true;
     }
