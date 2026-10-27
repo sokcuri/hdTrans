@@ -18,10 +18,12 @@ names:work-title-phrases	これからの人生を北海道でか…とも思っ�
 names:work-title-phrases	最近 見知らぬ人が	최근 낯선 사람이	fix	lookup
 names:work-title-phrases	みんな 元気だったか？	lacks:에브리바디스	fix	lookup
 names:work-title-phrases	例えば 愛人契約とか	예를 들면 애인 계약이라든지	fix	lookup
+dict:everyday-words:16	チョコはふたりで半分こする決まりなので	has:반반	fix	lookup
 names:work-title-phrases	『甘い人生』を見た	『달콤한 인생』을 보았다	keep	lookup
 names:work-title-phrases	…一番最初にやった罰ゲームが残ってますです。	…제일 처음에 한 벌칙 게임이 남아 있습니다요.	keep	lookup
 names:work-title-phrases	２０年前初めてネットゲームに触れた時のことだった。	20년 전 처음으로 온라인 게임에 접했을 때였다.	keep	lookup
 names:work-title-phrases	財布はポケットの中に入っている。	지갑은 주머니 속에 들어가 있다.	keep	lookup
 names:work-title-phrases	「ガッチャマン」ね	「독수리 오형제」네	keep	lookup
 names:work-title-phrases	なるほど『キャシャーン』の犬型ロボット｡	그렇구나 『정의의 캐산』의 견형로봇.	keep	lookup
+names:work-title-phrases	カメラ付きの携帯ゲーム機	카메라 부착의 휴대용 게임기	keep	lookup
 names:work-title-phrases	椎名真昼が来た。	시이나 마히루가 왔다.	keep	lookup
