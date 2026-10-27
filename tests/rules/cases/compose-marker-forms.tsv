@@ -5,6 +5,16 @@ compose:marker-forms	下卑た笑いのせいで、声は聞こえなくても�
 compose:marker-forms	下卑た顔で笑った。	lacks:&AV@	fix	compose
 compose:marker-forms	名残惜しさに電話を切りかねたが、思い切ってボタンを押した。	lacks:&Hk@	fix	compose
 compose:marker-forms	電話を切りかねた。	lacks:&Hk@	fix	compose
+lookup:marker-family	忙しげな顔をしていた。	has:바쁜	fix	lookup
+lookup:marker-family	彼は忙しげだった。	has:바빴	fix	lookup
+lookup:marker-family	無気味な音がした。	has:기분 나쁜	fix	lookup
+lookup:marker-family	交渉は不首尾だった。	has:결과가 나빴	fix	lookup
+lookup:marker-family	雲が長くたなびいていた。	has:뻗	keep	lookup
+lookup:marker-family	布の目が荒い。	has:올이 성기	fix	lookup
+lookup:marker-family	のぶとい声で呼んだ。	has:굵은 목소리	fix	lookup
+lookup:marker-family	めぼしい物はなかった。	has:두드러진	fix	lookup
+lookup:marker-family	服をゆすいだ。	has:헹궜	keep	lookup
+lookup:marker-family	口をゆすぐ。	has:헹군	keep	lookup
 compose:marker-forms	電話を切った。	전화를 끊었다.	keep	compose
 compose:marker-forms	少し待っていただきたいです。	조금 기다려 주셨으면 합니다.	keep	compose
 compose:marker-forms	明日は学校に行く。	내일은 학교에 간다.	keep	compose

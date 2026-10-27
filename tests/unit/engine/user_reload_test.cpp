@@ -470,7 +470,7 @@ HD_TEST(UserDictionaryBadBodyRowDoesNotChangeRules) {
     HD_CHECK(loaded->User()->Records("犬").empty());
     HD_CHECK(loaded->User()->Records("猫").size() == 1);
     HD_CHECK(loaded->User()->Records("鳥").size() == 1);
-    HD_CHECK_EQ(engine.UserFileError(), user.string() + ":4: the rule body does not parse");
+    HD_CHECK_EQ(engine.UserFileError(), user.string() + ":4: the rule body does not parse: bad atom delta");
     HD_CHECK(UserErrorKind(engine) == dict::LoadErrorKind::UserRow);
 }
 
