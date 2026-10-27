@@ -152,7 +152,7 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
   않기 때문입니다. 다시 시작은 사전을 새로 읽을 뿐입니다.
 - **사전 바꾸기:** 사용자 사전(`user/userdict*.txt`)은 저장하면 다음 번역부터 반영됩니다. 설정 파일과 기본 사전은 도구를
   다시 시작하거나 다시 읽기(`J2K_ReloadUserDict`, `hdTrans_Reload`)를 하면 반영됩니다.
-- **사전 진단:** DLL은 경고 파일을 만들지 않으며, 사용자 사전과 Ehnd의 진단은 GUI 로그 탭이나 같은 설정의 `hdtrans --verify-dicts`로 확인합니다.
+- **사전 진단:** 번역이 이상하면 hdTrans 프로그램의 로그 탭(또는 `hdtrans --verify-dicts`)에서 사전 경고를 확인합니다.
 - **말투 설정:** `J2KEngine.dll`과 C API는 설정 파일의 `speech`로 엔진 전체에 정합니다. TypeScript는 `setSpeech()`로
   이후 번역에, `translate(text, { speech })`로 그 호출에만 정하고, C++은 `Session::SetSpeech`, CLI는 `--speech`입니다.
   말투마다 무엇이 달라지는지는 [README](../README.md#말투-strict와-soft)에 있습니다.
