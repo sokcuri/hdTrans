@@ -1,0 +1,34 @@
+# 규칙: LEX-66
+rule	input	expected	kind	layer
+cx:toshite-state:20	彼は堂々としていた	그는 당당하게 있었다	fix	rewrites
+cx:toshite-state:20	もっと堂々としていればいい	좀 더 당당하게 있으면 된다	fix	rewrites
+cx:toshite-state:20	堂々としている姿	당당하게 있는 모습	fix	rewrites
+cx:toshite-state:20	堂々としてて	당당하고 있어	keep	rewrites
+cx:toshite-state:10	堂々とした態度	당당한 태도	keep	rewrites
+cx:toshite-state:10	堂々と胸を張る	당당히 가슴을 편다	keep	rewrites
+cx:toshite-state:10	堂々と歩いている	당당히 걷고 있다	keep	rewrites
+cx:toshite-state:20	淡々としていた	담담하게 있었다	fix	rewrites
+cx:toshite-state:10	淡々と話している	담담하게 이야기하고 있다	keep	rewrites
+cx:toshite-state:20	凛としていて美しい	늠름하게 있어 아름답다	fix	rewrites
+cx:toshite-state:10	毅然としていなさい	의연히 있어	fix	rewrites
+cx:toshite-state:10	毅然とした態度	의연히 한 태도	keep	rewrites
+cx:toshite-state:10	黙々としていた	묵묵히 있었다	fix	rewrites
+cx:toshite-state:10	泰然としている	태연하게 있다	fix	rewrites
+cx:toshite-state:10	じっとしていろ	가만히 있어라	fix	rewrites
+cx:toshite-state:10	じっとしていた	가만히 있었다	fix	rewrites
+cx:toshite-state:10	じっとしててね	가만히 하고 있어	keep	rewrites
+cx:toshite-state:10	じっと見ている	가만히 보고 있다	keep	rewrites
+cx:toshite-state:10	のんびりとしていた	느긋하게 있었다	fix	rewrites
+cx:toshite-state:10	平然としていられない	태연하게 있을 수 없다	keep	rewrites
+cx:toshite-state:10	唖然としていた	아연실색하고 있었다	keep	rewrites
+lookup:noun-after-modifier	日々の暮らし	나날의 생활	fix	lookup
+lookup:noun-after-modifier	日々の暮らしに追われる	나날의 생활에 쫓긴다	fix	lookup
+lookup:noun-after-modifier	いつもの暮らしが戻った	평소의 생활이 돌아왔다	keep	lookup
+lookup:noun-after-modifier	彼らの暮らしは楽ではない	그들의 생활은 편하지 않다	keep	lookup
+lookup:noun-after-modifier	毎日の暮らしが大切だ	매일의 생활이 중요하다	keep	lookup
+lookup:noun-after-modifier	本当の争いはこれからだ	진정한 분쟁은 지금부터다	keep	lookup
+lookup:noun-after-modifier	いつもの戦いに疲れた	평소의 싸움에 지쳤다	keep	lookup
+lookup:noun-after-modifier	普段の行いが悪い	평소의 행동이 나쁘다	keep	lookup
+lookup:noun-after-modifier	一人暮らしを始めた	자취를 시작했다	keep	lookup
+lookup:noun-after-modifier	ここで暮らしている	여기서 살고 있다	keep	lookup
+lookup:noun-after-modifier	暮らしやすい町	살기 쉬운 마을	keep	lookup
