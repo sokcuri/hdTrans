@@ -30,3 +30,13 @@ normalize:old-form	曾孫の顔が見たいんだと	증손의 얼굴을 보고 
 normalize:old-form	曾祖母のもとに帰ってきたのは	has:증조모	keep	normalize
 normalize:old-form	越前敦賀郡、氣比神宮の大宮司	has:기비신궁	keep	normalize
 normalize:old-form	澤ひろしとTOKYO 99	has:택히로시	current	normalize
+normalize:old-form	𠮷田菊次郎さん。	요시다 기쿠지로 씨.	fix	normalize
+normalize:old-form	舌嚙むぞ	혀 깨물겠어	fix	normalize
+normalize:old-form	そう說明した。	그렇게 설명했다.	fix	normalize
+normalize:old-form	彼の說明は長かった。	그의 설명은 길었다.	fix	normalize
+normalize:old-form	悅びの声が上がった。	즐거움의 목소리가 나왔다.	fix	normalize
+normalize:old-form	頰を赤らめた。	뺨을 붉혔다.	keep	normalize
+normalize:old-form	蟬が鳴いている。	매미가 울고 있다.	keep	normalize
+normalize:old-form	黑い猫がいた。	검은 고양이가 있었다.	keep	normalize
+defaults:kanji-reading	周蕙	주혜	fix	defaults
+defaults:kanji-reading	不愛賞花悅目	불애상화열목	fix	defaults
