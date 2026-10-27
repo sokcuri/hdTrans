@@ -1,8 +1,8 @@
 # 규칙: LEX-64
 rule	input	expected	kind	layer
-dict:mo-iitokoro:1	迷惑もいいところだ	폐도 이만저만이 아니다	fix	defaults
+dict:mo-iitokoro:1	迷惑もいいところだ	민폐도 이만저만이 아니다	fix	defaults
 dict:mo-iitokoro:1	とんだ大間違いもいいところだった	터무니 없는 큰 착각도 이만저만이 아니었다	fix	defaults
-dict:mo-iitokoro:1	近所迷惑もいいところだ。	이웃 폐도 이만저만이 아니다.	fix	defaults
+dict:mo-iitokoro:1	近所迷惑もいいところだ。	이웃 민폐도 이만저만이 아니다.	fix	defaults
 dict:mo-iitokoro:1	逆玉の輿もいいところだが、	역 신분 상승 결혼도 이만저만이 아니지만,	fix	defaults
 dict:mo-iitokoro:1	トホホもいいところだな……	트호호도 이만저만이 아니네……	fix	defaults
 dict:mo-iitokoro:1	言いがかりもいいところっす！	has:트집도 이만저만이 아니	fix	defaults
