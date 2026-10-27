@@ -10,9 +10,9 @@ cx:permission:40	参加させてもらった。	참가했다.	fix	rewrites
 cx:permission:40	先生に読ませてもらった。	선생님이 읽게 해 주었다.	keep	rewrites
 cx:permission:50	「やらせてもらう」	「하겠다」	fix	rewrites
 cx:permission:50	子供に本を読ませてもらう。	!rule:cx:permission:50	keep	rewrites
-cx:permission:60	やらせてもらえますか？	하게 해 주시겠습니까?	fix	rewrites
+cx:permission:60	やらせてもらえますか？	해도 될까요?	fix	rewrites
 cx:permission:60	手伝ってもらえますか？	!rule:cx:permission:60	keep	rewrites
-cx:permission-request:10	私にやらせてもらえませんか？	저에게 하게 해 주실 수 없을까요?	fix	rewrites
+cx:permission-request:10	やらせてもらえませんか？	해도 될까요?	fix	rewrites
 cx:permission-request:10	少し用立ててもらえませんか？	!rule:cx:permission-request:10	keep	rewrites
 cx:permission-verb:10	書かせてもらいます。	쓰겠습니다.	fix	rewrites
 cx:permission-verb:10	調べさせてもらったんですが	!rule:cx:permission-verb:10	keep	rewrites
@@ -20,8 +20,10 @@ cx:permission-verb:20	勝負はつけさせてもらう	승부는 붙이겠다	f
 cx:permission-verb:20	楽しませてもらったお礼だよ	has:즐겁게 해 준	keep	rewrites
 cx:permission-verb:30	参加させてもらいました。	참가했습니다.	fix	rewrites
 cx:permission-verb:30	誰にやらせるつもりだ？	!rule:cx:permission-verb:30	keep	rewrites
-cx:permission-verb:40	やらせてもらえますか？	하게 해 주시겠습니까?	fix	rewrites
-cx:permission-verb:40	願いをかなえてもらえるんだよ	!rule:cx:permission-verb:40	keep	rewrites
+cx:permission-request:20	読ませていただけますか？	읽어도 될까요?	fix	rewrites
+cx:permission-request:20	これ、いただけますか？	!rule:cx:permission-request:20	keep	rewrites
+cx:permission-request:30	それ、使わせてもらえませんか？	has:사용해도 될까요	fix	rewrites
+cx:permission-request:30	手伝ってもらえませんか？	!rule:cx:permission-request:30	keep	rewrites
 cx:permission:52	休ませてもらうね。	쉴게.	fix	rewrites
 cx:permission:52	明日もよろしくね。	!rule:cx:permission:52	keep	rewrites
 cx:permission:54	休ませてもらうわ。	쉬겠어.	fix	rewrites
@@ -30,3 +32,5 @@ cx:permission:56	使わせてもらいます。	사용하겠습니다.	fix	rewri
 cx:permission:56	見せてもらいます。	!rule:cx:permission:56	keep	rewrites
 cx:permission:55	前スレも読ませてもらったよ	이전 스레드도 읽었어	fix	rewrites
 cx:permission:55	記念に書かせてもらえよ。	!rule:cx:permission:55	keep	rewrites
+cx:permission-verb:40	勉強させてもらえてんのよ！	has:공부하게 해	fix	rewrites
+cx:permission-verb:40	願いをかなえてもらえるんだよ	!rule:cx:permission-verb:40	keep	rewrites

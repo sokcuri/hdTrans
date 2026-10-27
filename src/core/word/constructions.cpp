@@ -1362,9 +1362,9 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             break;
         }
         case internal::CxVerb::SetActive:
-            // The verb is written in the active voice: its Korean without the passive, the causative
-            // or the causative-passive (읽혀지다, 읽게 하다, 읽게 되다 → 읽다).
-            if (it->DetailRecord() == 1 || it->DetailRecord() == 2 || it->DetailRecord() == 5) {
+            // The verb is written in the plain voice: its Korean without the passive, the causative,
+            // the potential or the causative-passive (읽혀지다, 읽게 하다, 읽을 수 있다, 읽게 되다 → 읽다).
+            if (it->DetailRecord() == 1 || it->DetailRecord() == 2 || it->DetailRecord() == 4 || it->DetailRecord() == 5) {
                 it->detail->record = 0;
                 if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
                 it->choice = source;
