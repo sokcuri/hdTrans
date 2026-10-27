@@ -6,7 +6,7 @@ lookup:kin-default	いつかお兄ちゃんの船に乗せてくれる？	언젠
 lookup:kin-default	「はいお兄ちゃん……。」	「네오빠…….」	fix	lookup
 normalize:kin-terms	お兄ちゃん先輩のラノベを見せてあげるぜ♪	형선배의 라노벨을 보여 줄게♪	keep	normalize
 lookup:kin-default	おにいちゃん、ありがとう。大事にするからね。	오빠, 고마워. 소중히 하니까.	fix	lookup
-lookup:kin-default	おにいちゃんの赤い風船もいいね。	오빠의 빨간풍선도 좋네.	fix	lookup
+lookup:kin-default	おにいちゃんの赤い風船もいいね。	오빠의 붉은 풍선도 좋네.	fix	lookup
 normalize:kin-terms	お兄ちゃん、僕も一緒に行っていいだろ？	형, 나도 함께 가도 좋지?	keep	normalize
 lookup:kin-default	兄ちゃん、ちょっと待って	형, 잠깐 기다려	keep	lookup
 lookup:kin-default	お兄さん、どうしたの？	오빠, 무슨 일이야?	keep	lookup

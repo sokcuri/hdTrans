@@ -250,9 +250,33 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     return l;
 }
 
+// Whether the name-layer key is an adjective of the dictionaries followed by a noun of
+// them (優しい男, 新しい権利, 赤い唇): a phrase of the sentence, not a name.
+bool Worker::AdjectiveNounKey(std::string_view key) const {
+    for (std::size_t i = 0; i < key.size();) {
+        const std::string_view c = FirstChar(key.substr(i));
+        i += c.size();
+        if (c != "い" || i >= key.size()) continue;
+        // Adjective stems are keyed without the い (優し).
+        const std::string_view left = key.substr(0, i - c.size());
+        const std::string_view right = key.substr(i);
+        if (NameClassOf(FirstChar(right)) == kClassHiragana) continue;
+        bool adjective = false;
+        for (const dict::Candidate& a : snapshot.RetrieveRecords(left, dict::LookupMode::General)) {
+            if (a.user == nullptr && a.source == left && a.codes != nullptr && a.codes->part.TagIn("H")) adjective = true;
+        }
+        if (!adjective) continue;
+        for (const dict::Candidate& n : snapshot.RetrieveRecords(right, dict::LookupMode::General)) {
+            if (n.user == nullptr && n.source == right && n.codes != nullptr && n.codes->part.TagIn("N")) return true;
+        }
+    }
+    return false;
+}
+
 bool Worker::Skip(const dict::UserEntry& u, std::string_view query) const {
     return !EndRowFits(u, query) || (u.nameLayer && !KanaBounded(u.key, query)) ||
-           (u.nameLayer && PhraseTitle(u) && !StandsApart(u.key, query)) || (u.kana && !KanaWord(u, query)) ||
+           (u.nameLayer && PhraseTitle(u) && !StandsApart(u.key, query)) ||
+           (u.nameLayer && !StandsApart(u.key, query) && AdjectiveNounKey(u.key)) || (u.kana && !KanaWord(u, query)) ||
            (settings.text && BoundImperative(u, query)) ||
            (u.utteranceEnd && query.starts_with(u.key) && !UtteranceEnds(query.substr(u.key.size())));
 }
