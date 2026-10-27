@@ -2,6 +2,7 @@
 #include "core/dict/snapshot.h"
 
 #include <algorithm>
+#include <atomic>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -9,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <system_error>
+#include <thread>
 
 #ifdef _WIN32
 #include <windows.h>
@@ -72,6 +74,151 @@ std::string Errors() {
     const std::string result = output ? std::string(output, size) : std::string();
     hdTrans_FreeMem(output);
     return result;
+}
+
+int SetStrict(uint32_t value) {
+    const hdTrans_Options options{static_cast<uint32_t>(sizeof(hdTrans_Options)), value};
+    return hdTrans_SetOptions(&options);
+}
+
+void CheckDictionaryOptions(const std::filesystem::path& config, const std::filesystem::path& user) {
+    const std::string base = "dicts: fixtures/first\nuserdict: fixtures/options-user.txt\ncache: off\n";
+    Write(config, base);
+    Write(user, "犬\tOPTION_OLD\n");
+    hdTrans_Terminate();
+    Check(hdTrans_SetOptions(nullptr) == 0, "reset options before initialization");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize with default options");
+    Write(user, "犬\tOPTION_NEW\n猫\n");
+    Check(hdTrans_Reload() == -1, "C API defaults to strict rows");
+    Check(Translate("犬") == "OPTION_OLD", "strict reload keeps old output");
+    Check(Errors().find("options-user.txt:2: empty KR") != std::string::npos, "failed candidate diagnostics retained");
+    Check(SetStrict(2) == 0, "select skip mode");
+    Check(hdTrans_Reload() == 0, "skip mode reloads good rows");
+    Check(Translate("犬") == "OPTION_NEW", "good row in mixed file loads");
+    Check(Errors().find("options-user.txt:2: empty KR") != std::string::npos, "row warning is queryable");
+    for (uint32_t size : {1u, 2u, 3u}) {
+        const hdTrans_Options invalid{size, 0};
+        Check(hdTrans_SetOptions(&invalid) == -1, "reject truncated size header");
+        Check(hdTrans_Reload() == 0, "invalid size preserves skip option");
+    }
+    Check(SetStrict(3) == -1, "reject unknown strict encoding");
+    Check(hdTrans_Reload() == 0, "invalid value preserves skip option");
+    struct FutureOptions { hdTrans_Options known; uint32_t tail; };
+    const FutureOptions future{{static_cast<uint32_t>(sizeof(FutureOptions)), 2}, 99};
+    Check(hdTrans_SetOptions(&future.known) == 0, "ignore future option tail");
+    Check(hdTrans_Reload() == 0, "future option tail preserves known value");
+    Write(config, base + "strict_dict: true\n");
+    Check(hdTrans_Reload() == 0, "explicit skip overrides strict YAML");
+    Write(config, base + "strict_dict: false\n");
+    Check(SetStrict(1) == 0, "select strict mode");
+    Check(hdTrans_Reload() == -1, "explicit strict overrides skip YAML");
+    Check(Translate("犬") == "OPTION_NEW", "failed strict candidate retains output");
+    for (uint32_t size : {0u, 4u, 5u, 6u, 7u}) {
+        const hdTrans_Options missing{size, 99};
+        Check(hdTrans_SetOptions(&missing) == 0, "absent strict field uses config/default");
+        Check(hdTrans_Reload() == 0, "absent strict field permits YAML skip");
+    }
+    Check(SetStrict(0) == 0 && hdTrans_Reload() == 0, "encoding zero uses YAML");
+    Check(hdTrans_SetOptions(nullptr) == 0, "NULL resets explicit override");
+    Write(config, base + "strict_dict: true\n");
+    Check(hdTrans_Reload() == -1, "reload rereads strict YAML");
+    Write(config, base + "strict_dict: false\n");
+    Check(hdTrans_Reload() == 0, "reload rereads skip YAML");
+    for (int round = 0; round < 3; ++round) {
+        Check(SetStrict(1) == 0, "prepare concurrent strict candidate");
+        std::atomic<bool> started{false};
+        int status = 0;
+        std::thread candidate([&] { started = true; status = hdTrans_Reload(); });
+        while (!started) std::this_thread::yield();
+        Check(SetStrict(2) == 0, "replace pending candidate option");
+        candidate.join();
+        Check(status == 0 || status == -1, "concurrent reload status");
+        Check(hdTrans_Reload() == 0, "candidate cannot overwrite newer skip request");
+        Check(Translate("犬") == "OPTION_NEW", "newer option keeps good rows");
+    }
+    Write(user, "犬\tOPTION_NEW\n");
+    Check(hdTrans_Reload() == 0, "prepare valid user rows for Ehnd options");
+    const auto ehnd = user.parent_path() / "options-ehnd";
+    std::error_code error;
+    std::filesystem::create_directory(ehnd, error);
+    Check(!error, "create Ehnd option fixture");
+    Write(ehnd / "PreFilter_options.txt", "(\tbad\t100\t1\n");
+    const auto ehndPath = Utf8(ehnd);
+    Check(hdTrans_OpenEhnd(ehndPath.c_str()) == 0, "OpenEhnd inherits skip option");
+    Check(SetStrict(1) == 0, "select strict before OpenEhnd");
+    Check(hdTrans_OpenEhnd(ehndPath.c_str()) == -1, "OpenEhnd inherits changed strict option");
+    Check(Translate("犬") == "OPTION_NEW", "failed OpenEhnd preserves old output");
+    Check(hdTrans_OpenEhnd("") == 0, "drop malformed Ehnd with stored strict option");
+    Write(user, "犬\tOPTION_NEW\n猫\n");
+    hdTrans_Terminate();
+    Check(hdTrans_Initialize(nullptr) == -1, "stored strict option applies on reinitialization");
+    Check(Errors().find("options-user.txt:2: empty KR") != std::string::npos, "failed initial load diagnostics retained");
+    Check(SetStrict(2) == 0, "set options while uninitialized");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize inherits stored skip option");
+    Check(hdTrans_SetOptions(nullptr) == 0, "reset stored options after test");
+}
+
+void CheckAcceptedUserSources(const std::filesystem::path& config, const std::filesystem::path& fixtures) {
+    const auto user = fixtures / "history-user.txt";
+    const auto renamed = fixtures / "history-renamed.txt";
+    const auto folder = fixtures / "history-users";
+    const std::string first = "dicts: fixtures/first\nehnd: fixtures/Ehnd\ncache: off\n";
+    const std::string second = "dicts: fixtures/second\nehnd: fixtures/Ehnd\ncache: off\n";
+    Write(user, "犬\tHISTORY_OLD\n");
+    Write(config, first + "userdict: fixtures/history-user.txt\n");
+    hdTrans_Terminate();
+    Check(hdTrans_SetOptions(nullptr) == 0, "reset options for source history");
+    Check(hdTrans_Initialize(nullptr) == 0, "accept explicit user source");
+    Check(Translate("犬") == "HISTORY_OLD", "accepted user source output");
+    std::error_code error;
+    Check(std::filesystem::remove(user, error) && !error, "remove accepted explicit user file");
+    Write(config, second + "userdict: fixtures/history-user.txt\n");
+    Write(fixtures / "Ehnd/UserDict_test.txt", "タマ\tHISTORY_EHND_NEW\t1\n");
+    Check(hdTrans_Reload() == -1, "candidate rejects missing accepted user file");
+    Check(Translate("猫") == "고양이", "missing source keeps old base dictionary");
+    Check(Translate("犬") == "HISTORY_OLD", "missing source keeps old user dictionary");
+    Check(Translate("タマ") == "나비", "missing source keeps old Ehnd dictionary");
+    Check(Errors().find("history-user.txt") != std::string::npos, "missing accepted source diagnostic");
+    Write(user, "犬\tHISTORY_NEW\n");
+    Check(hdTrans_Reload() == 0, "restored accepted path reloads");
+    Check(Translate("猫") == "야옹이", "restored source publishes new base dictionary");
+    Check(Translate("犬") == "HISTORY_NEW", "restored source publishes new user dictionary");
+    Check(Translate("タマ") == "HISTORY_EHND_NEW", "restored source publishes new Ehnd dictionary");
+    Check(Errors().empty(), "restored source clears missing diagnostic");
+    Check(std::filesystem::remove(user, error) && !error, "remove source intentionally");
+    Write(config, second + "userdict: ''\n");
+    Check(hdTrans_Reload() == 0, "removing path from requested list is allowed");
+    Check(Translate("犬") != "HISTORY_NEW", "removed source no longer applies");
+    Write(user, "犬\tHISTORY_RENAMED\n");
+    Write(config, second + "userdict: fixtures/history-user.txt\n");
+    Check(hdTrans_Reload() == 0, "accept source before rename");
+    std::filesystem::remove(renamed, error);
+    error.clear();
+    std::filesystem::rename(user, renamed, error);
+    Check(!error, "rename accepted source");
+    Write(config, second + "userdict: fixtures/history-renamed.txt\n");
+    Check(hdTrans_Reload() == 0, "new requested path permits intentional rename");
+    Check(Translate("犬") == "HISTORY_RENAMED", "renamed source applies");
+    std::filesystem::create_directories(folder, error);
+    Check(!error, "create configured user folder");
+    Write(folder / "userdict-a.txt", "犬\tHISTORY_FOLDER\n");
+    Write(config, second + "userdict: fixtures/history-users\n");
+    Check(hdTrans_Reload() == 0, "accept configured user folder");
+    std::filesystem::rename(folder / "userdict-a.txt", folder / "userdict-b.txt", error);
+    Check(!error, "rename member of configured folder");
+    Check(hdTrans_Reload() == 0, "folder member rename is allowed");
+    Check(Translate("犬") == "HISTORY_FOLDER", "renamed folder member still applies");
+    std::filesystem::remove_all(folder, error);
+    Check(!error, "remove accepted configured folder");
+    Check(hdTrans_Reload() == -1, "candidate rejects missing accepted folder");
+    Check(Translate("犬") == "HISTORY_FOLDER", "missing folder keeps old stack");
+    Check(Errors().find("history-users") != std::string::npos, "missing accepted folder diagnostic");
+    std::filesystem::create_directory(folder, error);
+    Check(!error, "restore accepted configured folder");
+    Write(folder / "userdict-b.txt", "犬\tHISTORY_FOLDER_NEW\n");
+    Check(hdTrans_Reload() == 0, "restored configured folder reloads");
+    Check(Translate("犬") == "HISTORY_FOLDER_NEW", "restored folder applies");
+    Write(fixtures / "Ehnd/UserDict_test.txt", "タマ\t나비\t1\n");
 }
 
 template<class Initialize, class Reload, class Terminate, class Translation>
@@ -250,6 +397,39 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         Write(config, base + "ehnd: fixtures/Ehnd\n");
         reload();
         checkTranslation(L"タマ", L"나비", "J2K configured Ehnd path");
+        const auto userRows = folder / "fixtures/j2k-user.txt";
+        const std::string rowConfig = "dicts: fixtures/first\nuserdict: fixtures/j2k-user.txt\ncache: off\n";
+        Write(userRows, "犬\tJ2K_OLD\n");
+        Write(config, rowConfig);
+        reload();
+        checkTranslation(L"犬", L"J2K_OLD", "J2K loads valid user row");
+        Write(userRows, "犬\tJ2K_NEW\n猫\n");
+        Write(config, rowConfig + "strict_dict: true\n");
+        reload();
+        checkTranslation(L"犬", L"J2K_OLD", "J2K strict YAML retains old dictionary");
+        Write(config, rowConfig + "strict_dict: false\n");
+        reload();
+        checkTranslation(L"犬", L"J2K_NEW", "J2K rereads skip YAML and keeps good rows");
+        terminate();
+        Write(config, rowConfig + "strict_dict: true\n");
+        Check(initialize(nullptr) == 0, "J2K strict initialization rejects bad row");
+        Write(config, rowConfig);
+        Check(initialize(nullptr) == 1, "J2K default initialization skips bad row");
+        checkTranslation(L"犬", L"J2K_NEW", "J2K default keeps good rows from mixed file");
+        Check(std::filesystem::remove(userRows, error) && !error, "remove accepted J2K user file");
+        reload();
+        checkTranslation(L"犬", L"J2K_NEW", "J2K missing source keeps old user dictionary");
+        Write(userRows, "犬\tJ2K_RESTORED\n");
+        reload();
+        checkTranslation(L"犬", L"J2K_RESTORED", "J2K restored source reloads");
+        const auto renamedRows = folder / "fixtures/j2k-renamed.txt";
+        std::filesystem::remove(renamedRows, error);
+        error.clear();
+        std::filesystem::rename(userRows, renamedRows, error);
+        Check(!error, "rename accepted J2K user file");
+        Write(config, "dicts: fixtures/first\nuserdict: fixtures/j2k-renamed.txt\ncache: off\n");
+        reload();
+        checkTranslation(L"犬", L"J2K_RESTORED", "J2K changed requested path permits rename");
         terminate();
         std::filesystem::remove(config, error);
         std::filesystem::create_directories(folder / "dicts", error);
@@ -332,9 +512,14 @@ int main(int argc, char** argv) {
     Write(fixtures / "second-user.txt", "犬\t뒤파일\n");
     Write(fixtures / "bad-user.tsv", "猫\n");
     Write(config, "dicts: fixtures/first\nuserdict: [fixtures/user.tsv, fixtures/bad-user.tsv, fixtures/second-user.txt]\ncache: off\n");
-    Check(hdTrans_Reload() == 0, "reload multiple user dictionaries with one bad file");
+    Check(hdTrans_Reload() == -1, "default strict rejects one bad user file");
+    Check(Translate("犬") == "멍멍이", "bad user file keeps old dictionary");
+    Check(Errors().find("bad-user.tsv:1: empty KR") != std::string::npos, "failed user file diagnostics");
+    Check(SetStrict(2) == 0, "skip malformed user rows");
+    Check(hdTrans_Reload() == 0, "reload multiple user dictionaries with row warning");
     Check(Translate("犬") == "뒤파일", "later configured user file wins");
-    Check(Errors().find("bad-user.tsv:1: empty KR") != std::string::npos, "bad user file diagnostics");
+    Check(Errors().find("bad-user.tsv:1: empty KR") != std::string::npos, "bad user row diagnostics");
+    Check(hdTrans_SetOptions(nullptr) == 0, "restore default dictionary options");
     Write(config, "dicts: fixtures/second\nuserdict: ''\nehnd: ''\ncache: off\nunknown: value\n");
     Check(hdTrans_Reload() == 0, "reload config");
     Check(Translate("猫") == "야옹이", "reloaded dictionary");
@@ -342,6 +527,8 @@ int main(int argc, char** argv) {
     Write(config, "dicts: fixtures/missing\ncache: off\n");
     Check(hdTrans_Reload() == -1, "failed reload");
     Check(Translate("猫") == "야옹이", "failed reload retains dictionaries");
+    CheckDictionaryOptions(config, fixtures / "options-user.txt");
+    CheckAcceptedUserSources(config, fixtures);
     std::filesystem::create_directories(fixtures / "speech", error);
     Write(fixtures / "speech/base.tsv", header + "高\t$D3@\tH7N0\t\t\tGN\t\t\t\t\t1\nい\t1다\tT500\t\t\tGN\t\t\t\t\t2\n");
     Write(config, "dicts: fixtures/speech\nuserdict: ''\nehnd: ''\ncache: off\n");
@@ -391,6 +578,25 @@ int main(int argc, char** argv) {
     Check(Errors().empty(), "removed config clears diagnostics");
     const char* cache = std::getenv("HDTRANS_CACHE_DIR");
     Check(cache && std::string(cache) == "off", "removed config restores cache environment");
+    for (const bool missing : {false, true}) {
+        if (missing) {
+            Write(config, "userdict: fixtures/never-user.txt\nehnd: fixtures/never-ehnd\ncache: off\n");
+            Check(hdTrans_Reload() == 0, "never-read explicit missing sources are nonfatal");
+            Check(Translate("猫") == "고양이", "optional missing sources preserve the base dictionary");
+            const std::string warnings = Errors();
+            Check(warnings.find("never-user.txt: the explicit user dictionary source is missing") != std::string::npos &&
+                  warnings.find("never-ehnd: the explicit Ehnd folder is missing") != std::string::npos,
+                  "explicit missing source warnings are queryable");
+            Check(warnings.find("기본 사전") == std::string::npos && warnings.find("Ehnd 활성화") == std::string::npos,
+                  "source INFO is absent from the user error query");
+        }
+        char* output = nullptr;
+        std::size_t size = 0;
+        Check(hdTrans_FilterErrors(&output, &size) == 0, "query healthy or optional-missing filter diagnostics");
+        Check(output && size == 0 && *output == '\0', "source INFO and optional missing paths do not populate filter errors");
+        hdTrans_FreeMem(output);
+    }
+    std::filesystem::remove(config, error);
     hdTrans_Terminate();
     const auto data = folder / "HDTRANS";
     const auto user = data / "USER";

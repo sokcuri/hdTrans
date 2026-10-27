@@ -233,6 +233,8 @@ bool WriteText(const std::filesystem::path& path, std::string_view text) {
     return f.good();
 }
 
+std::string PlainTarget(const hdTrans::dict::Snapshot& snap, std::string_view key);
+
 std::string CacheResource(const std::string& path) {
     if (!path.ends_with(".latest")) return path;
     const auto resource = hdTrans::dict::internal::SnapshotResourcePath(path);
@@ -1023,6 +1025,116 @@ HD_TEST(SnapshotCachedMarkerClassLines) {
     HD_REQUIRE(cached.errors.size() == 1);
     HD_CHECK(cached.errors[0].kind == hdTrans::dict::LoadErrorKind::MarkerClass);
     HD_CHECK_EQ(cached.errors[0].line, 3);
+}
+
+HD_TEST(SnapshotUserRowPoliciesMatchCacheAndCompiled) {
+    using namespace hdTrans::dict;
+    CacheTestEnvironment environment;
+    TempFolder temp;
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(temp.path / "source", error));
+    const std::vector<std::string> folders{temp.File("source")};
+    const auto user = temp.File("userdict.txt");
+    const auto cache = temp.File("cache");
+    const auto compiled = temp.File("dicts.hdsnap");
+    HD_REQUIRE(WriteText(temp.path / "source" / "base.tsv", "key\tko\tpos\tdict\tid\n愛\t사랑\tN110\tGN\t1\n"));
+    HD_REQUIRE(WriteText(Utf8Path(user), "猫\t냥이\n犬\t멍멍이\n鳥\n"));
+    const std::vector<std::string> users{user};
+    const auto editable = LoadFoldersTsv(folders, users, false);
+    const auto written = LoadFolders(folders, cache, false, true, users, false);
+    const auto warm = LoadFolders(folders, cache, false, false, users, false);
+    HD_REQUIRE(editable.snapshot && written.snapshot && warm.snapshot);
+    HD_REQUIRE(warm.snapshot->Mapped());
+    CheckLoadErrors(warm.errors, editable.errors);
+    HD_REQUIRE(warm.errors.size() == 1);
+    HD_CHECK(warm.errors[0].kind == LoadErrorKind::UserRow);
+    HD_CHECK_EQ(PlainTarget(*warm.snapshot, "猫"), "냥이");
+    HD_CHECK_EQ(PlainTarget(*warm.snapshot, "犬"), "멍멍이");
+    const auto index = internal::SnapshotPath(folders, cache);
+    const auto bytes = ReadBytes(index);
+    const auto verified = LoadFolders(folders, cache, true, false, users, false);
+    const auto strict = LoadFoldersTsv(folders, users, true);
+    HD_CHECK(!verified.snapshot);
+    HD_CHECK(!strict.snapshot);
+    CheckLoadErrors(verified.errors, strict.errors);
+    HD_REQUIRE(verified.errors.size() == 1);
+    HD_CHECK(FailsLoad(verified.errors[0].kind));
+    HD_CHECK(ReadBytes(index) == bytes);
+    HD_REQUIRE(WriteText(Utf8Path(user), "猫\t고양이\n"));
+    const auto repaired = LoadFolders(folders, cache, true, false, users, false);
+    HD_REQUIRE(repaired.snapshot && repaired.snapshot->Mapped());
+    HD_CHECK(repaired.errors.empty());
+    HD_CHECK_EQ(PlainTarget(*repaired.snapshot, "猫"), "고양이");
+
+    HD_REQUIRE(CompileSnapshot(folders, compiled));
+    File memory;
+    memory.folder = 1;
+    memory.name = "userdict.tsv";
+    memory.text = "猫\t냥이\tn\tprio=2\n犬\t멍멍이\n鳥\n";
+    memory.user = true;
+    memory.memory = true;
+    memory.strict = false;
+    const std::vector<std::string> noFiles;
+    const auto raw = LoadFoldersTsv(folders, noFiles, false, &memory);
+    const auto cached = LoadFolders(folders, cache, false, false, noFiles, false, &memory);
+    const auto standalone = LoadFolders({compiled}, {}, false, false, noFiles, false, &memory);
+    HD_REQUIRE(raw.snapshot && cached.snapshot && standalone.snapshot);
+    HD_CHECK(cached.snapshot->Mapped());
+    HD_CHECK(standalone.snapshot->Mapped());
+    CheckLoadErrors(raw.errors, cached.errors);
+    CheckLoadErrors(raw.errors, standalone.errors);
+    for (const auto* loaded : {&raw, &cached, &standalone}) {
+        HD_REQUIRE(loaded->errors.size() == 1);
+        HD_REQUIRE(loaded->snapshot->MemoryUserEntries().size() == 2);
+        HD_CHECK_EQ(loaded->snapshot->MemoryUserEntries()[0].options, "prio=2");
+        HD_CHECK_EQ(loaded->snapshot->MemoryUserEntries()[1].ja, "犬");
+        HD_CHECK_EQ(PlainTarget(*loaded->snapshot, "猫"), "냥이");
+        std::size_t receipts = 0;
+        for (const auto& info : loaded->info) {
+            if (info.kind != LoadFileKind::MemoryUser) continue;
+            ++receipts;
+            HD_CHECK_EQ(info.path, "userdict.tsv");
+            HD_REQUIRE(info.acceptedCount.has_value());
+            HD_CHECK_EQ(*info.acceptedCount, std::size_t{2});
+        }
+        HD_CHECK_EQ(receipts, std::size_t{1});
+    }
+    for (const auto* loaded : {&cached, &standalone}) {
+        std::size_t containers = 0;
+        const auto kind = loaded == &cached ? LoadFileKind::CachedDictionary : LoadFileKind::CompiledSnapshot;
+        for (const auto& info : loaded->info) {
+            if (info.kind != kind) continue;
+            ++containers;
+            HD_CHECK(!info.path.empty());
+            HD_CHECK(!info.acceptedCount);
+        }
+        HD_CHECK_EQ(containers, std::size_t{1});
+    }
+    const auto strictImage = LoadFolders({compiled}, {}, true, false, noFiles, false, &memory);
+    HD_CHECK(!strictImage.snapshot);
+    HD_REQUIRE(strictImage.errors.size() == 1);
+    HD_CHECK(FailsLoad(strictImage.errors[0].kind));
+    HD_REQUIRE(WriteText(temp.path / "source" / "plain.tsv", "猫\n"));
+    const auto shipped = LoadFoldersTsv(folders, noFiles, false, &memory);
+    HD_CHECK(!shipped.snapshot);
+    HD_REQUIRE(!shipped.errors.empty());
+    HD_CHECK(shipped.errors[0].kind == LoadErrorKind::Plain);
+}
+
+HD_TEST(SnapshotSourceCountsBeforeReadingExpansion) {
+    using namespace hdTrans::dict;
+    File column;
+    column.name = "base.tsv";
+    column.text = "key\tko\tpos\tflags\treading\tid\n猫\t고양이\tN110\tkana\tねこ\t1\n猫\t냥이\tN110\tkana\tねこ\t2\n";
+    const auto loaded = Load({column});
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    HD_REQUIRE(loaded.info.size() == 1);
+    HD_CHECK_EQ(loaded.info[0].path, "base.tsv");
+    HD_CHECK(loaded.info[0].kind == LoadFileKind::Shipped);
+    HD_REQUIRE(loaded.info[0].acceptedCount.has_value());
+    HD_CHECK_EQ(*loaded.info[0].acceptedCount, std::size_t{2});
+    HD_CHECK(!loaded.snapshot->Base().Records("猫").empty());
+    HD_CHECK(!loaded.snapshot->Base().Records("ねこ").empty());
 }
 
 HD_TEST(SnapshotWarmPlainErrorsKeepOrder) {
@@ -2087,6 +2199,11 @@ HD_TEST(SnapshotUserFile) {
     HD_REQUIRE(missing.snapshot != nullptr);
     HD_CHECK(missing.errors.empty());
     HD_CHECK_EQ(missing.snapshot->PlainFiles().size(), size_t{1});
+    const auto required = hdTrans::dict::LoadFoldersTsv(folders, std::vector<std::string>{user});
+    HD_CHECK(required.snapshot == nullptr);
+    HD_REQUIRE(required.errors.size() == 1);
+    HD_CHECK(required.errors[0].kind == hdTrans::dict::LoadErrorKind::Read);
+    HD_CHECK_EQ(required.errors[0].file, user);
 
     // A plain file, with or without the header, is the last plain dictionary, through
     // the cache too.

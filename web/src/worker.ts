@@ -2,7 +2,7 @@
 // in: init with engine URL, compiled module and snapshot;
 //     translate with id, mode, speech, lines, userdict and ehnd (the text of an
 //     Ehnd UserDict file).
-// out: ready/fatal, result/error. A failed userdict update keeps the prior overlay.
+// out: ready/fatal, result/error, with skipped dictionary lines reported as warnings.
 import { HdTrans, type WasmModule } from './translator.js';
 
 interface Module extends WasmModule {
@@ -29,7 +29,7 @@ self.onmessage = async (ev: MessageEvent) => {
       });
       e.FS.writeFile('/dicts.hdsnap', new Uint8Array(msg.snapshot));
       translator?.close();
-      translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap'] });
+      translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap'], strictDict: false });
       loaded = '';
       loadedEhnd = '';
       m = e;

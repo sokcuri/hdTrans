@@ -13,7 +13,7 @@ import {
 } from 'hdtrans';
 
 async function check() {
-  const options: InitOptions = { ehnd: { 'PreFilter_test.txt': '' } };
+  const options: InitOptions = { ehnd: { 'PreFilter_test.txt': '' }, strictDict: false };
   const inspected: HdTransInfo = await HdTrans.getInfo(options);
   const translator: HdTrans = await HdTrans.init(options);
   const info: HdTransInfo = translator.getInfo();
@@ -47,6 +47,28 @@ async function check() {
   const errors: string[] = translator.filterErrors;
   const files: EhndFiles = { 'PostFilter_test.txt': '' };
   translator.setEhnd(files);
+  translator.setUserDict(rows, { strict: false });
+  translator.setUserDict(rows, { strict: true });
+  translator.setUserDictRaw('学生\t학우\n', { strict: false });
+  translator.setUserDictRaw('学生\t학우\n', { strict: true });
+  translator.setEhnd(files, { strict: false });
+  translator.setEhnd(files, { strict: true });
+  HdTrans.init({ strictDict: true });
+  HdTrans.getInfo({ strictDict: false });
+  // @ts-expect-error Dictionary policy is a boolean.
+  HdTrans.init({ strictDict: 'false' });
+  // @ts-expect-error Dictionary policy is a boolean.
+  HdTrans.getInfo({ strictDict: 0 });
+  // @ts-expect-error Per-load policy is a boolean.
+  translator.setUserDict(rows, { strict: 'false' });
+  // @ts-expect-error Per-load policy is a boolean.
+  translator.setUserDictRaw('', { strict: 'true' });
+  // @ts-expect-error Per-load policy is a boolean.
+  translator.setEhnd(files, { strict: 1 });
+  // @ts-expect-error Dictionary policy is not a translation option.
+  translator.translate('学生', { strictDict: false });
+  // @ts-expect-error Dictionary policy is not a translation option.
+  translator.translate('学生', { strict: false });
   translator.clearEhnd();
   translator.clearUserDict();
   translator.reset();

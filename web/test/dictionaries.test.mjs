@@ -61,3 +61,24 @@ test('overlay merges the applied dictionaries in list order and locates rows', (
   const none = overlay([]);
   assert.deepEqual([none.userdict, none.ehnd], ['', '']);
 });
+
+test('overlay keeps malformed rows and line offsets across files and names tables', () => {
+  const first = '# comment\n猫\t냥이\n\n犬\t개\txx\n';
+  const second = '鳥\t수리새\n東京\t도시\tn\tbogus\n';
+  const o = overlay([
+    dict('첫째', 'hdtrans', first, 'ユキ\t유키\n蒼月\t아오츠키'),
+    dict('둘째', 'hdtrans', second),
+    dict('필터 첫째', 'ehnd', '// comment\nポチ\t바둑이\t1\n'),
+    dict('필터 둘째', 'ehnd', 'bad\nタマ\t나비\t1'),
+    dict('모두 오류', 'hdtrans', '犬\t개\txx\nmalformed'),
+  ]);
+  assert.equal(o.userdict, first + '\n' + second + '\n犬\t개\txx\nmalformed\nユキ\t유키\tname\n蒼月\t아오츠키\tname');
+  assert.equal(o.ehnd, '// comment\nポチ\t바둑이\t1\n\nbad\nタマ\t나비\t1');
+  assert.equal(o.where(false, 4), '첫째 사용자 사전 4행');
+  assert.equal(o.where(false, 6), '둘째 사용자 사전 1행');
+  assert.equal(o.where(false, 7), '둘째 사용자 사전 2행');
+  assert.equal(o.where(false, 9), '모두 오류 사용자 사전 1행');
+  assert.equal(o.where(false, 11), '첫째 이름 표 1행');
+  assert.equal(o.where(true, 4), '필터 둘째 1행');
+  assert.equal(o.where(true, 5), '필터 둘째 2행');
+});

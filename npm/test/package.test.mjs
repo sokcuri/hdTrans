@@ -54,7 +54,10 @@ async function checkRuntime(HdTrans, dictionaryVersion) {
     translator.setUserDictRaw(raw);
     assert.equal(translator.getUserDictRaw(), raw);
     assert.equal(translator.translate('学生'), '동료');
-    translator.setUserDictRaw('学生\t실패\tn\tbogus\n');
+    const rejected = '学生\t실패\tn\tbogus\n';
+    assert.throws(() => translator.setUserDictRaw(rejected), /bogus/);
+    assert.equal(translator.getUserDictRaw(), rejected);
+    assert.deepEqual(translator.getUserDict(), [{ ja: '学生', ko: '동료', pos: 'n', options: 'prio=3 force' }]);
     assert.match(translator.userDictError, /bogus/);
     assert.equal(translator.translate('学生'), '동료');
     translator.clearUserDict();
@@ -97,6 +100,36 @@ async function checkRuntime(HdTrans, dictionaryVersion) {
       assert.equal(typeof choice.choice.source, 'string');
       assert(Number.isInteger(choice.line) && Number.isInteger(choice.start));
     }
+    const mixed = '学生\t부분학우\n東京\t실패\tn\tbogus\n鳥\t수리새\n';
+    const lenient = await HdTrans.init({ strictDict: false });
+    try {
+      lenient.setUserDictRaw(mixed);
+      assert.deepEqual(lenient.getUserDict(), [{ ja: '学生', ko: '부분학우' }, { ja: '鳥', ko: '수리새' }]);
+      assert.match(lenient.userDictError, /userdict\.tsv:2: .*bogus/);
+      assert.equal(lenient.translate('鳥'), '수리새');
+      assert.throws(() => lenient.setUserDictRaw('学生\t실패\tn\tbogus\n', { strict: true }), /bogus/);
+      assert.equal(lenient.getUserDict()[0].ko, '부분학우');
+      lenient.setUserDictRaw('学生\t실패\tn\tbogus\n');
+      assert.deepEqual(lenient.getUserDict(), [], 'strict override must not change npm instance policy');
+      lenient.setUserDict([{ ja: '学生', ko: '부분학우' }, { ja: '犬', ko: '개', options: 'bogus' }]);
+      assert.deepEqual(lenient.getUserDict(), [{ ja: '学生', ko: '부분학우' }]);
+      lenient.clearUserDict();
+      assert.equal(lenient.userDictError, '');
+      const badEhnd = { 'PostFilter_bad.txt': '(x\tz\t1\t1\n' };
+      lenient.setEhnd(ehnd);
+      assert.throws(() => lenient.setEhnd(badEhnd, { strict: true }), /PostFilter_bad\.txt:1:/);
+      assert.equal(lenient.translate('魔導具'), '필터값');
+      lenient.setEhnd(badEhnd);
+      assert.equal(lenient.filterErrors.length, 1);
+      assert.notEqual(lenient.translate('魔導具'), '필터값');
+    } finally {
+      lenient.close();
+    }
+    translator.setUserDictRaw(mixed, { strict: false });
+    assert.equal(translator.translate('鳥'), '수리새');
+    assert.throws(() => translator.setUserDictRaw(mixed), /bogus/, 'npm defaults remain strict after a false override');
+    translator.clearUserDict();
+    await assert.rejects(HdTrans.init({ strictDict: 'false' }), TypeError);
     const configured = await HdTrans.init({ ehnd });
     try {
       assert.equal(configured.translate('魔導具'), '필터값');
@@ -219,6 +252,21 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     assert.match(badOutput.stderr, /^hdtrans: /);
     await writeFile(join(cwd, 'userdict.tsv'), '学生\t학우\tn\tforce\n', 'utf8');
     assert.equal(run(['--userdict', 'userdict.tsv', '学生']).trim(), '학우');
+    await writeFile(join(cwd, 'mixed.tsv'), '学生\t동료\n東京\t실패\tn\tbogus\n犬\t개\txx\n', 'utf8');
+    const mixed = spawnSync(bin, ['--userdict', 'mixed.tsv', '学生'], { cwd, encoding: 'utf8', timeout: 90_000 });
+    assert.equal(mixed.status, 0);
+    assert.equal(mixed.stdout.trim(), '동료');
+    assert.match(mixed.stderr, /^userdict\.tsv:2: .*bogus/m);
+    assert.match(mixed.stderr, /^userdict\.tsv:3: /m);
+    await writeFile(join(cwd, 'bad.tsv'), '学生\t실패\tn\tbogus\n', 'utf8');
+    const allBad = spawnSync(bin, ['--userdict', 'bad.tsv', '学生'], { cwd, encoding: 'utf8', timeout: 90_000 });
+    assert.equal(allBad.status, 0);
+    assert.equal(allBad.stdout, run(['学生']));
+    assert.match(allBad.stderr, /bogus/);
+    const missingUser = spawnSync(bin, ['--userdict', 'missing.tsv', '学生'], { cwd, encoding: 'utf8', timeout: 90_000 });
+    assert.notEqual(missingUser.status, 0);
+    assert.equal(missingUser.stdout, '');
+    assert.match(missingUser.stderr, /ENOENT/);
     const repeated = spawnSync(bin, ['--userdict', 'userdict.tsv', '--userdict', 'userdict.tsv', '学生'], { cwd, encoding: 'utf8', timeout: 90_000 });
     assert.notEqual(repeated.status, 0);
     assert.equal(repeated.stdout, '');
@@ -232,6 +280,16 @@ test('packed install includes a ready-to-use engine, dictionary, types and CLI',
     assert.match(why.stderr, /^PreFilter : \[PreFilter_cli\.txt:/m);
     assert.match(why.stderr, /^PostFIlter : \[PostFilter_cli\.txt:/m);
     assert.match(why.stderr, /^WHY\t\{/m);
+    await writeFile(join(cwd, 'Ehnd/PreFilter_cli.txt'), '魔導具\t学生\t1\t0\n(x\tz\t1\t1\n(y\tz\t1\t1\n', 'utf8');
+    const ehndWarnings = spawnSync(bin, ['--ehnd', 'Ehnd', '魔導具'], { cwd, encoding: 'utf8', timeout: 90_000 });
+    assert.equal(ehndWarnings.status, 0);
+    assert.equal(ehndWarnings.stdout.trim(), '필터값');
+    assert.match(ehndWarnings.stderr, /PreFilter_cli\.txt:2:/);
+    assert.match(ehndWarnings.stderr, /PreFilter_cli\.txt:3:/);
+    const missingEhnd = spawnSync(bin, ['--ehnd', 'missing-ehnd', '学生'], { cwd, encoding: 'utf8', timeout: 90_000 });
+    assert.notEqual(missingEhnd.status, 0);
+    assert.equal(missingEhnd.stdout, '');
+    assert.match(missingEhnd.stderr, /ENOENT/);
     const failed = spawnSync(bin, ['--in', 'missing.txt'], { cwd, encoding: 'utf8', timeout: 90_000 });
     assert.notEqual(failed.status, 0);
     assert.equal(failed.stdout, '');

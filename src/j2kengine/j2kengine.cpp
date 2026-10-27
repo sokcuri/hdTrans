@@ -18,6 +18,9 @@
 #include "core/config/config.h"
 #include "core/dict/folders.h"
 #include "core/engine.h"
+#include "core/engine/user_watch.h"
+#include "core/engine/load_info.h"
+#include "frontend/load_info.h"
 #include "frontend/module_dir.h"
 
 namespace {
@@ -51,6 +54,10 @@ std::uint64_t g_generation = 0;
 hdTrans::internal::ConfigCache g_cache;
 std::unique_ptr<hdTrans::Engine> g_engine;
 std::unique_ptr<hdTrans::Session> g_session;
+std::weak_ptr<const hdTrans::dict::Snapshot> g_loggedSnapshot;
+std::weak_ptr<const hdTrans::filter::Filters> g_loggedFilters;
+std::string g_loggedDiagnostics;
+std::optional<std::uint64_t> g_loggedSourceGeneration;
 
 // Queued state changes run before new translations.
 class AdminLock {
@@ -69,7 +76,14 @@ private:
     std::unique_lock<std::mutex> lock_;
 };
 
-std::string TranslateUtf8(const std::string& text) { return g_session ? g_session->Translate(text) : std::string(); }
+void LogLoadErrors(const hdTrans::Engine& engine, bool force = true, bool loaded = true);
+
+std::string TranslateUtf8(const std::string& text) {
+    if (!g_session) return {};
+    const std::string output = g_session->Translate(text);
+    LogLoadErrors(*g_engine, false);
+    return output;
+}
 
 // Copies s into a NUL-terminated block the host releases with J2K_FreeMem.
 template <class Char>
@@ -81,22 +95,40 @@ Char* Block(const std::basic_string<Char>& s) {
     return p;
 }
 
-hdTrans::internal::ConfigResult ReadConfig(const std::string& dir) {
-    const std::string path = hdTrans::dict::ConfigFile(dir);
+bool HasFatalLoadError(const hdTrans::Engine& engine) {
+    for (const auto& error : hdTrans::internal::UserFileErrors(engine))
+        if (hdTrans::dict::FailsLoad(error.kind)) return true;
+    return hdTrans::internal::FilterFileFailed(engine);
+}
+
+hdTrans::internal::ConfigResult ReadConfig(const std::string& path) {
     auto config = hdTrans::internal::LoadConfig(path);
     const std::string errors = hdTrans::internal::ConfigErrors(config, path);
     if (!errors.empty()) OutputDebugStringW(WideFromUtf8("J2KEngine: " + errors + "\n").c_str());
     return config;
 }
 
-// Writes user dictionary errors and skipped Ehnd lines to the
-// debugger output.
-void LogLoadErrors(const hdTrans::Engine& e) {
-    const std::string error = e.UserFileError();
-    if (!error.empty()) OutputDebugStringW(WideFromUtf8("J2KEngine: user dictionary not loaded:\n" + error + "\n").c_str());
-    std::string skipped;
-    for (const std::string& line : e.FilterErrors()) skipped += line + "\n";
-    if (!skipped.empty()) OutputDebugStringW(WideFromUtf8("J2KEngine: Ehnd lines skipped:\n" + skipped).c_str());
+// Writes diagnostics and loaded source information to the debugger output.
+void LogLoadErrors(const hdTrans::Engine& engine, bool force, bool loaded) {
+    std::string diagnostics = engine.UserFileError();
+    for (const std::string& line : engine.FilterErrors()) diagnostics += (diagnostics.empty() ? "" : "\n") + line;
+    const auto snapshot = engine.Dictionaries();
+    const auto filters = engine.Filters();
+    const bool changed = force || snapshot != g_loggedSnapshot.lock() || filters != g_loggedFilters.lock();
+    if (!diagnostics.empty() && (changed || diagnostics != g_loggedDiagnostics))
+        OutputDebugStringW(WideFromUtf8("J2KEngine: dictionary diagnostics:\n" + diagnostics + "\n").c_str());
+    if (loaded) {
+        const auto info = hdTrans::internal::LoadedSourceInfo(engine);
+        if (changed || g_loggedSourceGeneration != info.generation) {
+            const auto programDir = hdTrans::frontend::ModuleDirectory();
+            for (const auto& file : info.files)
+                OutputDebugStringW(WideFromUtf8(hdTrans::frontend::FormatLoadFileInfo(file, programDir) + "\n").c_str());
+        }
+        g_loggedSourceGeneration = info.generation;
+    }
+    g_loggedDiagnostics = std::move(diagnostics);
+    g_loggedSnapshot = snapshot;
+    g_loggedFilters = filters;
 }
 
 }  // namespace
@@ -128,10 +160,17 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
         generation = g_generation;
     }
     const std::string dir = hdTrans::frontend::ModuleDirectory();
-    const auto config = ReadConfig(dir);
+    const std::string configPath = hdTrans::dict::ConfigFile(dir);
+    const auto config = ReadConfig(configPath);
     const auto& settings = config.settings;
     const auto dirs = settings.dicts.value_or(std::vector<std::string>{hdTrans::dict::ShippedFolder(dir)});
     const auto userPaths = settings.userdict.value_or(hdTrans::dict::UserPaths(dir));
+    std::vector<hdTrans::dict::UserSource> requestedUserSources;
+    for (const auto& path : userPaths)
+        requestedUserSources.push_back({path, false, false, settings.userdict.has_value()});
+    const hdTrans::dict::UserSource ehndSource{
+        settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "",
+        true, false, settings.ehnd.has_value()};
     {
         AdminLock lock;
         if (generation != g_generation) return 0;
@@ -140,12 +179,15 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
             return 0;
         }
     }
-    auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto);
-    e->OpenEhnd(settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "");
-    if (!e->OpenUserDicts(dirs, false, userPaths)) return 0;
-    LogLoadErrors(*e);
+    const hdTrans::EngineOptions dictionaryOptions{std::nullopt, false, configPath};
+    auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
+                                            hdTrans::UserReload::Auto, dictionaryOptions);
+    const bool loaded = hdTrans::internal::OpenEhndSource(*e, ehndSource) &&
+                        hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources) && !HasFatalLoadError(*e);
     AdminLock lock;
     if (generation != g_generation) return 0;
+    LogLoadErrors(*e, true, loaded);
+    if (!loaded) return 0;
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
     g_session->SetSpeech(settings.speech);
@@ -161,6 +203,10 @@ int __stdcall J2K_Terminate() {
     ++g_generation;
     g_session.reset();
     g_engine.reset();
+    g_loggedSnapshot.reset();
+    g_loggedFilters.reset();
+    g_loggedDiagnostics.clear();
+    g_loggedSourceGeneration.reset();
     static_cast<void>(g_cache.Apply(std::nullopt));
     return 1;
 }
@@ -194,16 +240,26 @@ void __stdcall J2K_FreeMem(void* block) {
 int __stdcall J2K_StopTranslation(void* /*target*/) { return 1; }
 void __stdcall J2K_ReloadUserDict() {
     std::uint64_t generation;
+    std::vector<hdTrans::dict::UserSource> userSources;
+    std::optional<hdTrans::dict::UserSource> acceptedEhnd;
     {
         AdminLock lock;
         if (!g_engine) return;
         generation = g_generation;
+        userSources = hdTrans::internal::AcceptedUserSources(*g_engine, acceptedEhnd);
     }
     const std::string dir = hdTrans::frontend::ModuleDirectory();
-    const auto config = ReadConfig(dir);
+    const std::string configPath = hdTrans::dict::ConfigFile(dir);
+    const auto config = ReadConfig(configPath);
     const auto& settings = config.settings;
     const auto dirs = settings.dicts.value_or(std::vector<std::string>{hdTrans::dict::ShippedFolder(dir)});
     const auto userPaths = settings.userdict.value_or(hdTrans::dict::UserPaths(dir));
+    std::vector<hdTrans::dict::UserSource> requestedUserSources;
+    for (const auto& path : userPaths)
+        requestedUserSources.push_back({path, false, false, settings.userdict.has_value()});
+    const hdTrans::dict::UserSource ehndSource{
+        settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "",
+        true, false, settings.ehnd.has_value()};
     {
         AdminLock lock;
         if (generation != g_generation) return;
@@ -212,13 +268,16 @@ void __stdcall J2K_ReloadUserDict() {
             return;
         }
     }
-    auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto);
-    e->OpenEhnd(settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "");
-    if (!e->OpenUserDicts(dirs, false, userPaths)) return;
-    LogLoadErrors(*e);
-    if (!e->UserFileError().empty() && hdTrans::dict::UserFiles(userPaths).size() == 1) return;
+    const hdTrans::EngineOptions dictionaryOptions{std::nullopt, false, configPath};
+    auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
+                                            hdTrans::UserReload::Auto, dictionaryOptions);
+    hdTrans::internal::SeedUserSources(*e, std::move(userSources), std::move(acceptedEhnd));
+    const bool loaded = hdTrans::internal::OpenEhndSource(*e, ehndSource) &&
+                        hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources) && !HasFatalLoadError(*e);
     AdminLock lock;
     if (generation != g_generation) return;
+    LogLoadErrors(*e, true, loaded);
+    if (!loaded) return;
     g_session.reset();
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);

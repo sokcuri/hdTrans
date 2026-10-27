@@ -47,6 +47,31 @@ bool ReadBytes(const std::filesystem::path& path, std::string& out) {
     return ok;
 }
 
+bool ValidEhndText(std::string_view bytes) {
+    if (!bytes.starts_with("\xFF\xFE")) {
+        for (std::size_t i = 0; i < bytes.size();) {
+            const auto rune = text::DecodeRune(bytes.substr(i));
+            if (rune.size == 1 && rune.cp == text::kReplacement) return false;
+            i += rune.size;
+        }
+        return true;
+    }
+    if (bytes.size() % 2 != 0) return false;
+    const auto unit = [&](std::size_t i) {
+        return static_cast<unsigned char>(bytes[i]) | (static_cast<unsigned char>(bytes[i + 1]) << 8);
+    };
+    for (std::size_t i = 2; i < bytes.size(); i += 2) {
+        const auto cp = unit(i);
+        if (cp >= 0xD800 && cp <= 0xDBFF) {
+            if (i + 3 >= bytes.size() || unit(i + 2) < 0xDC00 || unit(i + 2) > 0xDFFF) return false;
+            i += 2;
+        } else if (cp >= 0xDC00 && cp <= 0xDFFF) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // The width of s in a double-byte code page: 1 for ASCII and, with halfKana, for the
 // half-width katakana of CP932, else 2.
 std::size_t CodePageBytes(std::string_view s, bool halfKana) {
@@ -131,6 +156,10 @@ bool ReadEhndFolder(std::string_view dir, std::vector<Source>& sources, std::vec
             errors.push_back({f.name, 0, "the file cannot be read"});
             return false;
         }
+        if (!ValidEhndText(bytes)) {
+            errors.push_back({f.name, 0, "the file cannot be decoded"});
+            return false;
+        }
         read.push_back({f.kind, f.name, EhndText(bytes), false});
     }
     std::move(read.begin(), read.end(), std::back_inserter(sources));
@@ -165,7 +194,10 @@ std::vector<UserRow> ParseUserDict(std::string_view text, std::string_view file,
                 p++, n++;
             }
         }
-        if (t < 2) continue;
+        if (t < 2) {
+            if (!line.empty()) errors.push_back({std::string(file), number, "a UserDict line needs two tab-separated fields"});
+            continue;
+        }
         UserRow row;
         row.key = fields[0];
         row.target = fields[1];

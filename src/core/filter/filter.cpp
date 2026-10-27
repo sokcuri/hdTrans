@@ -114,6 +114,7 @@ struct ParsedRow {
     int kind = 0;  // 0 plain, 1 guard, 2 guarded
     std::string file;
     int line = 0;
+    std::size_t source = 0;
 };
 
 // The builder of the toggles: names to numbers, and the declared states.
@@ -140,7 +141,8 @@ struct ToggleTable {
 };
 
 // Reads the rows of a filter file; declarations go to toggles.
-void ReadRows(const Source& source, std::vector<ParsedRow>& rows, ToggleTable& toggles, std::vector<Error>& errors) {
+void ReadRows(const Source& source, std::size_t ordinal, std::vector<ParsedRow>& rows,
+              ToggleTable& toggles, std::vector<Error>& errors) {
     const std::u16string text = Utf16(source.text);
     int number = 0;
     for (const std::u16string_view line : LinesOf(text)) {
@@ -149,6 +151,7 @@ void ReadRows(const Source& source, std::vector<ParsedRow>& rows, ToggleTable& t
         ParsedRow row;
         row.file = source.name;
         row.line = number;
+        row.source = ordinal;
         std::size_t start = 0;
         bool malformed = false;
         if (line.starts_with(u"_TGL\t")) {
@@ -190,7 +193,12 @@ void ReadRows(const Source& source, std::vector<ParsedRow>& rows, ToggleTable& t
             continue;
         }
         const std::vector<std::u16string_view> f = Fields(line, start, true);
-        if (f.size() < 3) continue;
+        if (f.size() < 3) {
+            if (!source.native && !line.empty()) {
+                errors.push_back({source.name, number, "a filter line needs three tab-separated fields"});
+            }
+            continue;
+        }
         row.src = f[0];
         row.dest = f[1];
         row.layer = ToInt(f[2]);
@@ -212,7 +220,9 @@ bool Cased(uint32_t c) {
 
 }  // namespace
 
-std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors) {
+std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors,
+                                     std::vector<std::size_t>* acceptedCounts) {
+    if (acceptedCounts) acceptedCounts->assign(sources.size(), 0);
     if (sources.empty()) return nullptr;
     auto out = std::make_shared<Filters>();
     Filters& fs = *out;
@@ -225,18 +235,20 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
         std::u16string cond;
         std::string file;
         int line;
+        std::size_t source;
     };
     std::vector<ParsedCondition> conditions;
     dict::internal::Layer user(false);
     std::vector<UserRow> userRows;
 
-    for (const Source& s : sources) {
+    for (std::size_t ordinal = 0; ordinal < sources.size(); ++ordinal) {
+        const Source& s = sources[ordinal];
         switch (s.kind) {
         case Source::Kind::PreFilter:
-            ReadRows(s, rows[0], toggles, errors);
+            ReadRows(s, ordinal, rows[0], toggles, errors);
             break;
         case Source::Kind::PostFilter:
-            ReadRows(s, rows[1], toggles, errors);
+            ReadRows(s, ordinal, rows[1], toggles, errors);
             break;
         case Source::Kind::SkipLayer: {
             const std::u16string text = Utf16(s.text);
@@ -247,12 +259,13 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
                 const std::vector<std::u16string_view> f = Fields(line, 0, false);
                 if (f.size() < 2 || !(f[0].starts_with(u"PRE") || f[0].starts_with(u"POST"))) continue;
                 conditions.push_back({f[0].starts_with(u"PRE") ? Stage::Pre : Stage::Post, ToInt(f[1]), Utf8(f[1]),
-                                      f.size() > 2 ? std::u16string(f[2]) : std::u16string(), s.name, number});
+                                      f.size() > 2 ? std::u16string(f[2]) : std::u16string(), s.name, number, ordinal});
             }
             break;
         }
         case Source::Kind::UserDict: {
             std::vector<UserRow> r = ParseUserDict(s.text, s.name, errors);
+            if (acceptedCounts) (*acceptedCounts)[ordinal] = r.size();
             std::move(r.begin(), r.end(), std::back_inserter(userRows));
             break;
         }
@@ -324,6 +337,7 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
             rule.src = std::move(r.src);
             rule.dest = std::move(r.dest);
             p.rules.push_back(std::move(rule));
+            if (acceptedCounts) ++(*acceptedCounts)[r.source];
         }
         for (std::size_t i = 0; i < p.rules.size(); i++) {
             p.rules[i].blockEnd = i + 1 == p.rules.size() || p.rules[i + 1].kind != Filters::Kind::Guarded;
@@ -336,7 +350,10 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
         Filters::Condition cond;
         cond.layer = c.layer;
         cond.label = c.label;
-        if (compile(c.cond, p.matcher, cond.regex, cond.units, c.file, c.line)) p.conditions.push_back(std::move(cond));
+        if (compile(c.cond, p.matcher, cond.regex, cond.units, c.file, c.line)) {
+            p.conditions.push_back(std::move(cond));
+            if (acceptedCounts) ++(*acceptedCounts)[c.source];
+        }
     }
     pcre2_compile_context_free_16(context);
     fs.pre_.matcher.Build();

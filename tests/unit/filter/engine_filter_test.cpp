@@ -1,12 +1,15 @@
 // The filters through the engine: prefilter and postfilter files of a dictionary folder,
 // and an Ehnd folder with its user dictionary.
 #include <chrono>
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
 
+#include "core/dict/folders.h"
 #include "core/dict/snapshot.h"
+#include "core/dict/snapshot_file.h"
 #include "core/engine.h"
 #include "core/engine/user_watch.h"
 #include "hdtest.h"
@@ -51,13 +54,29 @@ HD_TEST(EngineFilters) {
     ehnd.Write("PreFilter_a.txt", "(?<=犬が)タマ\tポチ\t1\t1\n(x\tz\t1\t1\n");
 
     // Without CacheWrite, so nothing is published from the temporary folder.
-    hdTrans::Engine e(false, hdTrans::CacheWrite::Off);
+    hdTrans::EngineOptions options;
+    options.strictDict = false;
+    hdTrans::Engine e(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off, options);
     HD_REQUIRE(e.Open({dicts.path.string()}));
     HD_CHECK_EQ(Translate(e, "猫\n\r\n犬\r"), "멍멍이\n\r\n멍멍이\r");
     HD_CHECK_EQ(Translate(e, "ポチ"), "포치");
     HD_CHECK(e.FilterErrors().empty());
 
-    HD_CHECK(!e.OpenEhnd((ehnd.path / "missing").string()));
+    for (const bool strict : {false, true}) {
+        const auto missing = (ehnd.path / (strict ? "missing-strict" : "missing")).string();
+        HD_REQUIRE(e.OpenEhnd(missing, hdTrans::DictionaryOptions{strict}));
+        const auto warnings = hdTrans::internal::UserFileErrors(e);
+        HD_REQUIRE(warnings.size() == 1);
+        HD_CHECK(warnings[0].file == missing);
+        HD_CHECK(warnings[0].kind == hdTrans::dict::LoadErrorKind::OptionalSource);
+        HD_CHECK(warnings[0].line == 0);
+        HD_CHECK(!hdTrans::dict::FailsLoad(warnings[0].kind));
+        HD_CHECK_EQ(e.UserFileError(), missing + ": the explicit Ehnd folder is missing");
+        HD_CHECK(e.FilterErrors().empty());
+        HD_CHECK(!hdTrans::internal::FilterFileFailed(e));
+        HD_CHECK_EQ(Translate(e, "猫\n\r\n犬\r"), "멍멍이\n\r\n멍멍이\r");
+        HD_CHECK_EQ(Translate(e, "ポチ"), "포치");
+    }
     HD_CHECK(e.OpenEhnd(ehnd.path.string()));
     HD_CHECK_EQ(Translate(e, "猫がタマ"), "멍멍이가 바둑이");
     const std::vector<std::string> errors = e.FilterErrors();
@@ -92,6 +111,194 @@ HD_TEST(EngineEhndAutoReload) {
     HD_CHECK_EQ(s.Translate("ポチ"), "흰둥이");
 }
 
+namespace {
+
+void EhndReadFailureKeepsWholeStack(bool strict) {
+    for (const auto mode : {hdTrans::UserReload::Off, hdTrans::UserReload::Auto}) {
+        TempFolder root("reload-filter");
+        const auto dicts = root.path / "dicts";
+        const auto ehnd = root.path / "ehnd";
+        const auto away = root.path / "ehnd-away";
+        const auto user = root.path / "userdict.tsv";
+        std::error_code error;
+        HD_REQUIRE(std::filesystem::create_directory(dicts, error));
+        HD_REQUIRE(std::filesystem::create_directory(ehnd, error));
+        root.Write("dicts/base.tsv",
+                   "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
+                   "猫\t고양이\tN110\t\t\tGN\t\t\t\t\t1\n"
+                   "犬\t개\tN110\t\t\tGN\t\t\t\t\t2\n");
+        root.Write("userdict.tsv", "猫\t냥이\n");
+        root.Write("ehnd/UserDict_a.txt", "ポチ\t바둑이\t1\n");
+        hdTrans::EngineOptions options;
+        options.strictDict = strict;
+        hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, mode, options);
+        HD_REQUIRE(engine.OpenEhnd(ehnd.string()));
+        HD_REQUIRE(engine.OpenUserDicts({dicts.string()}, false, {user.string()}));
+        HD_CHECK_EQ(Translate(engine, "猫"), "냥이");
+        HD_CHECK_EQ(Translate(engine, "ポチ"), "바둑이");
+        const auto good = engine.Dictionaries();
+        const auto filters = engine.Filters();
+        const auto ehndVersion = hdTrans::internal::FolderVersionOf(ehnd.string());
+
+        root.Write("userdict.tsv", "猫\t야옹이\n");
+        const auto pendingUser = hdTrans::internal::UserVersionOf({user.string()});
+        std::filesystem::rename(ehnd, away, error);
+        HD_REQUIRE(!error);
+        if (mode == hdTrans::UserReload::Auto) {
+            HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+        } else {
+            HD_CHECK(!engine.Reload());
+        }
+        HD_CHECK(engine.Dictionaries() == good);
+        HD_CHECK(engine.Filters() == filters);
+        const auto errors = engine.FilterErrors();
+        HD_REQUIRE(errors.size() == 1);
+        HD_CHECK(errors[0].find("the folder cannot be listed") != std::string::npos);
+        HD_CHECK_EQ(Translate(engine, "猫"), "냥이");
+        HD_CHECK_EQ(Translate(engine, "犬"), "개");
+        HD_CHECK_EQ(Translate(engine, "ポチ"), "바둑이");
+        HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+
+        std::filesystem::rename(away, ehnd, error);
+        HD_REQUIRE(!error);
+        HD_CHECK(hdTrans::internal::FolderVersionOf(ehnd.string()) == ehndVersion);
+        HD_CHECK(hdTrans::internal::UserVersionOf({user.string()}) == pendingUser);
+        if (mode == hdTrans::UserReload::Auto) {
+            HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+        } else {
+            HD_CHECK(engine.Reload());
+        }
+        HD_CHECK(engine.Dictionaries() != good);
+        HD_CHECK(engine.FilterErrors().empty());
+        HD_CHECK_EQ(Translate(engine, "猫"), "야옹이");
+        HD_CHECK_EQ(Translate(engine, "ポチ"), "바둑이");
+    }
+}
+
+}  // namespace
+
+HD_TEST(EngineEhndReadFailureKeepsWholeStack) {
+    for (const bool strict : {false, true}) EhndReadFailureKeepsWholeStack(strict);
+}
+
+HD_TEST(EngineEhndRowsFollowStrictOption) {
+    for (const bool strict : {false, true}) {
+        for (const auto mode : {hdTrans::UserReload::Off, hdTrans::UserReload::Auto}) {
+            TempFolder dicts("dicts"), ehnd("ehnd");
+            dicts.Write("base.tsv", "key\tko\tpos\tdict\tid\n猫\t고양이\tN110\tGN\t1\n");
+            ehnd.Write("UserDict_a.txt", "ポチ\t바둑이\t1\n");
+            ehnd.Write("PostFilter_a.txt", "고양이\t냥이\t1\t0\n");
+            hdTrans::EngineOptions options;
+            options.strictDict = strict;
+            hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, mode, options);
+            HD_REQUIRE(engine.OpenEhnd(ehnd.path.string()));
+            HD_REQUIRE(engine.Open({dicts.path.string()}));
+            const auto good = engine.Dictionaries();
+            const auto filters = engine.Filters();
+            ehnd.Write("UserDict_a.txt", "ポチ\t흰둥이\t1\n");
+            ehnd.Write("PostFilter_a.txt", "고양이\t흰고양이\t1\t0\n(x\ty\t1\t1\n");
+            if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload() == !strict);
+            HD_CHECK((engine.Dictionaries() == good) == strict);
+            HD_CHECK((engine.Filters() == filters) == strict);
+            HD_CHECK_EQ(Translate(engine, "猫"), strict ? "냥이" : "흰고양이");
+            HD_CHECK_EQ(Translate(engine, "ポチ"), strict ? "바둑이" : "흰둥이");
+            const auto warnings = engine.FilterErrors();
+            HD_REQUIRE(warnings.size() == 1);
+            HD_CHECK(warnings[0].starts_with("PostFilter_a.txt:2: regex rejected"));
+            HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+            ehnd.Write("PostFilter_a.txt", "broken\n");
+            if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload() == !strict);
+            HD_CHECK_EQ(Translate(engine, "猫"), strict ? "냥이" : "고양이");
+            HD_REQUIRE(engine.FilterErrors().size() == 1);
+            HD_CHECK(engine.FilterErrors()[0].starts_with("PostFilter_a.txt:1:"));
+            ehnd.Write("PostFilter_a.txt", "고양이\t검은고양이\t1\t0\n");
+            if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload());
+            HD_CHECK_EQ(Translate(engine, "猫"), "검은고양이");
+            HD_CHECK_EQ(Translate(engine, "ポチ"), "흰둥이");
+            HD_CHECK(engine.FilterErrors().empty());
+        }
+    }
+}
+
+HD_TEST(EngineEhndInitialStrictSkipsWholeBadFile) {
+    TempFolder dicts("dicts"), ehnd("ehnd");
+    dicts.Write("base.tsv", "key\tko\tpos\tdict\tid\n猫\t고양이\tN110\tGN\t1\n");
+    ehnd.Write("UserDict_a.txt", "ポチ\t바둑이\t1\n");
+    ehnd.Write("PostFilter_bad.txt", "고양이\t냥이\t1\t0\n(x\ty\t1\t1\n");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.OpenEhnd(ehnd.path.string()));
+    HD_REQUIRE(engine.Open({dicts.path.string()}));
+    HD_CHECK_EQ(Translate(engine, "猫"), "고양이");
+    HD_CHECK_EQ(Translate(engine, "ポチ"), "바둑이");
+    HD_CHECK(!engine.FilterErrors().empty());
+    const auto filters = engine.Filters();
+    HD_CHECK(!engine.OpenEhnd(ehnd.path.string()));
+    HD_CHECK(engine.Filters() == filters);
+    HD_CHECK(engine.OpenEhnd(ehnd.path.string(), hdTrans::DictionaryOptions{false}));
+    HD_CHECK_EQ(Translate(engine, "猫"), "냥이");
+    HD_CHECK(!engine.FilterErrors().empty());
+    HD_CHECK(!engine.OpenEhnd(ehnd.path.string()));
+    HD_CHECK_EQ(Translate(engine, "猫"), "냥이");
+}
+
+HD_TEST(EngineEhndDecodeFailuresAreFatalInBothModes) {
+    for (const bool strict : {false, true}) {
+        TempFolder dicts("dicts"), ehnd("ehnd");
+        dicts.Write("base.tsv", "key\tko\tpos\tdict\tid\n猫\t고양이\tN110\tGN\t1\n");
+        ehnd.Write("UserDict_a.txt", "ポチ\t바둑이\t1\n");
+        hdTrans::EngineOptions options;
+        options.strictDict = strict;
+        hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto, options);
+        HD_REQUIRE(engine.OpenEhnd(ehnd.path.string()));
+        HD_REQUIRE(engine.Open({dicts.path.string()}));
+        const auto good = engine.Dictionaries();
+        const auto filters = engine.Filters();
+        const std::string invalid[] = {std::string("\xFF"), std::string("\xFF\xFE\x00", 3),
+                                      std::string("\xFF\xFE\x00\xD8", 4)};
+        for (const auto& bytes : invalid) {
+            ehnd.Write("UserDict_a.txt", bytes);
+            HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            HD_CHECK(engine.Dictionaries() == good);
+            HD_CHECK(engine.Filters() == filters);
+            HD_CHECK_EQ(Translate(engine, "ポチ"), "바둑이");
+            HD_REQUIRE(engine.FilterErrors().size() == 1);
+            HD_CHECK(engine.FilterErrors()[0].find("the file cannot be decoded") != std::string::npos);
+            HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+        }
+        ehnd.Write("UserDict_a.txt", "ポチ\t흰둥이\t1\n");
+        HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+        HD_CHECK_EQ(Translate(engine, "ポチ"), "흰둥이");
+        HD_CHECK(engine.FilterErrors().empty());
+    }
+}
+
+HD_TEST(EngineEhndEmptyFolderFailureAndRestore) {
+    TempFolder root("empty-ehnd");
+    const auto folder = root.path / "ehnd";
+    const auto away = root.path / "away";
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(folder, error));
+    root.Write("base.tsv", "key\tko\tpos\tdict\tid\n猫\t고양이\tN110\tGN\t1\n");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto);
+    HD_REQUIRE(engine.OpenEhnd(folder.string()));
+    HD_REQUIRE(engine.Open({root.path.string()}));
+    const auto good = engine.Dictionaries();
+    std::filesystem::rename(folder, away, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(!engine.FilterErrors().empty());
+    HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+    std::filesystem::rename(away, folder, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK(engine.FilterErrors().empty());
+    HD_CHECK_EQ(Translate(engine, "猫"), "고양이");
+}
+
 HD_TEST(FilterLayersArePlain) {
     std::vector<hdTrans::dict::File> files;
     files.push_back({0, "a/pre.tsv", "#! layer=prefilter\nkey\tko\n", {}});
@@ -116,4 +323,381 @@ HD_TEST(EngineEhndKeepsSpaceAfterNumber) {
     HD_CHECK(e.FilterErrors().empty());
     HD_CHECK_EQ(Translate(e, "3猫"), "3고양이");
     HD_CHECK_EQ(Translate(e, "3 猫"), "3 고양이");
+}
+
+namespace {
+
+void WriteHeaderFilterBase(const TempFolder& folder) {
+    folder.Write("base.tsv", "key\tko\tpos\tdict\tid\n"
+                            "猫\t고양이\tN110\tGN\t1\n"
+                            "犬\t개\tN110\tGN\t2\n"
+                            "鳥\t새\tN110\tGN\t3\n");
+}
+
+bool HasHeaderFilterError(const hdTrans::Engine& engine, std::string_view file, int line) {
+    const std::string location = std::string(file) + ":" + std::to_string(line) + ":";
+    for (const auto& error : engine.FilterErrors()) {
+        if (error.find(location) != std::string::npos) return true;
+    }
+    return false;
+}
+
+}  // namespace
+
+HD_TEST(EngineUserFolderHeaderForms) {
+    for (const std::string& bom : {std::string(), std::string("\xEF\xBB\xBF")}) {
+        for (const std::string& newline : {std::string("\n"), std::string("\r\n")}) {
+            for (const bool strict : {false, true}) {
+                TempFolder dicts("header-forms-dicts"), users("header-forms-users");
+                WriteHeaderFilterBase(dicts);
+                users.Write("before.TXT", bom + "#! layer=prefilter\t " + newline + "# comment" + newline +
+                                          "猫\t犬\t1\t0" + newline);
+                users.Write("after.tSv", bom + "#! layer=postfilter" + newline + "// comment" + newline +
+                                         "개\t필터값\t1\t0" + newline);
+                const auto base = hdTrans::dict::LoadFoldersTsv({dicts.path.string()});
+                HD_REQUIRE(base.snapshot);
+                hdTrans::EngineOptions options;
+                options.strictDict = strict;
+                hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off, options);
+                HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {users.path.string()}));
+                HD_CHECK_EQ(Translate(engine, "猫"), "필터값");
+                HD_CHECK(engine.UserFileError().empty());
+                HD_CHECK(engine.FilterErrors().empty());
+                HD_CHECK(engine.GetUserDict().empty());
+                HD_CHECK(engine.Dictionaries()->User() == nullptr);
+                HD_CHECK(engine.Dictionaries()->Plain().Entries().size() == base.snapshot->Plain().Entries().size());
+                HD_CHECK(engine.Dictionaries()->TextPlain().Entries().size() == base.snapshot->TextPlain().Entries().size());
+            }
+        }
+    }
+}
+
+HD_TEST(EngineUserFolderHeaderDiscoveryKeepsLegacy) {
+    TempFolder dicts("header-discovery-dicts"), users("header-discovery-users");
+    WriteHeaderFilterBase(dicts);
+    users.Write("UserDict_legacy.TXT", "猫\t냥이\n");
+    users.Write("userdict-z.tsv", "狐\t여우\n");
+    users.Write("userdict_before.txt", "#! layer=prefilter\n鳥\t犬\t1\t0\n");
+    users.Write("after.tsv", "#! layer=postfilter\n개\t멍멍이\t1\t0\n");
+    const struct {
+        const char* file;
+        const char* text;
+    } ignored[] = {
+        {"arbitrary.txt", "猫\t잘못됨\n"},
+        {"bad-header.txt", "#! layer=prefilterx\n猫\t犬\t1\t0\n"},
+        {"other-layer.tsv", "#! layer=user\n猫\t잘못됨\n"},
+        {"late-header.txt", "\n#! layer=prefilter\n猫\t犬\t1\t0\n"},
+        {"uppercase-header.txt", "#! layer=PREFILTER\n猫\t犬\t1\t0\n"},
+        {"before.txt.bak", "#! layer=prefilter\n猫\t犬\t1\t0\n"},
+        {"before.csv", "#! layer=prefilter\n猫\t犬\t1\t0\n"},
+    };
+    for (const auto& file : ignored) users.Write(file.file, file.text);
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(users.path / "nested", error));
+    users.Write("nested/before.txt", "#! layer=prefilter\n猫\t犬\t1\t0\n");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {users.path.string()}));
+    HD_CHECK_EQ(Translate(engine, "猫"), "냥이");
+    HD_CHECK_EQ(Translate(engine, "狐"), "여우");
+    HD_CHECK_EQ(Translate(engine, "鳥"), "멍멍이");
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK(engine.FilterErrors().empty());
+}
+
+HD_TEST(EngineUserFolderHeaderOrderAndExplicitPaths) {
+    TempFolder dicts("header-order-dicts"), users("header-order-users");
+    WriteHeaderFilterBase(dicts);
+    users.Write("a_stage.TXT", "#! layer=prefilter\n鳥\t猫\t1\t0\n");
+    users.Write("Z_stage.tSv", "#! layer=prefilter\n猫\t犬\t1\t0\n");
+    users.Write("named.txt", "猫\t냥이\n");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {users.path.string()}));
+    HD_CHECK_EQ(Translate(engine, "鳥"), "개");
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false,
+                                   {(users.path / "Z_stage.tSv").string(), (users.path / "a_stage.TXT").string()}));
+    HD_CHECK_EQ(Translate(engine, "鳥"), "고양이");
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {}));
+    HD_CHECK_EQ(Translate(engine, "鳥"), "새");
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {(users.path / "named.txt").string()}));
+    HD_CHECK_EQ(Translate(engine, "猫"), "냥이");
+    HD_CHECK_EQ(Translate(engine, "鳥"), "새");
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {(users.path / "a_stage.TXT").string()}));
+    HD_CHECK_EQ(Translate(engine, "鳥"), "고양이");
+}
+
+HD_TEST(EngineUserFolderHeaderAutoReload) {
+    TempFolder dicts("header-auto-dicts"), users("header-auto-users");
+    WriteHeaderFilterBase(dicts);
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto);
+    HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {users.path.string()}));
+    hdTrans::Session session(engine);
+    HD_CHECK_EQ(session.Translate("猫"), "고양이");
+    HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+    users.Write("before.txt", "#! layer=prefilter\n猫\t犬\t1\t0\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "개");
+    users.Write("before.txt", "# disabled\n猫\t잘못됨\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "고양이");
+    HD_CHECK(engine.UserFileError().empty());
+    users.Write("before.txt", "\xEF\xBB\xBF#! layer=prefilter\r\n猫\t鳥\t1\t0\r\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "새");
+    users.Write("after.tsv", "#! layer=postfilter\n새\t조류\t1\t0\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "조류");
+    users.Write("before.txt", "#! layer=prefilter\n# changed\n猫\t犬\t1\t0\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "개");
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::remove(users.path / "after.tsv", error));
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_REQUIRE(std::filesystem::remove(users.path / "before.txt", error));
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "고양이");
+    users.Write("userdict_alias.txt", "#! layer=prefilter\n猫\t犬\t1\t0\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "개");
+    users.Write("userdict_alias.txt", "猫\t집고양이\n");
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "집고양이");
+    HD_REQUIRE(std::filesystem::remove(users.path / "userdict_alias.txt", error));
+    HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+    HD_CHECK_EQ(session.Translate("猫"), "고양이");
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK(engine.FilterErrors().empty());
+    HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+}
+
+HD_TEST(EngineUserFolderHeaderReadFailureKeepsWholeStack) {
+    for (const bool strict : {false, true}) {
+        for (const auto mode : {hdTrans::UserReload::Off, hdTrans::UserReload::Auto}) {
+            for (const bool folderSource : {false, true}) {
+                TempFolder dicts("header-io-dicts"), root("header-io-users");
+                WriteHeaderFilterBase(dicts);
+                const auto users = root.path / "users";
+                const auto before = users / "before.txt";
+                const auto after = users / "after.tsv";
+                const auto legacy = users / "userdict.txt";
+                const auto away = root.path / "saved";
+                std::error_code error;
+                HD_REQUIRE(std::filesystem::create_directory(users, error));
+                root.Write("users/before.txt", "#! layer=prefilter\n猫\t犬\t1\t0\n");
+                root.Write("users/after.tsv", "#! layer=postfilter\n개\t기존필터\t1\t0\n");
+                root.Write("users/userdict.txt", "狐\t여우\n");
+                hdTrans::EngineOptions options;
+                options.strictDict = strict;
+                hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, mode, options);
+                const std::vector<std::string> paths = folderSource
+                    ? std::vector<std::string>{users.string()}
+                    : std::vector<std::string>{before.string(), after.string(), legacy.string()};
+                HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, paths));
+                const auto good = engine.Dictionaries();
+                const auto filters = engine.Filters();
+                HD_CHECK_EQ(Translate(engine, "猫"), "기존필터");
+                HD_CHECK_EQ(Translate(engine, "狐"), "여우");
+                root.Write("users/after.tsv", "#! layer=postfilter\n개\t새필터\t1\t0\n");
+                root.Write("users/userdict.txt", "狐\t금빛여우\n");
+                const auto source = folderSource ? users : before;
+                std::filesystem::rename(source, away, error);
+                HD_REQUIRE(!error);
+                if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+                else HD_CHECK(!engine.Reload());
+                HD_CHECK(engine.Dictionaries() == good);
+                HD_CHECK(engine.Filters() == filters);
+                HD_CHECK(!engine.UserFileError().empty());
+                HD_CHECK_EQ(Translate(engine, "猫"), "기존필터");
+                HD_CHECK_EQ(Translate(engine, "狐"), "여우");
+                if (mode == hdTrans::UserReload::Auto) HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+                if (folderSource) root.Write("users", "# replacement\n");
+                else HD_REQUIRE(std::filesystem::create_directory(source, error));
+                if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+                else HD_CHECK(!engine.Reload());
+                HD_CHECK(engine.Dictionaries() == good);
+                HD_CHECK(engine.Filters() == filters);
+                HD_CHECK_EQ(Translate(engine, "猫"), "기존필터");
+                HD_REQUIRE(std::filesystem::remove(source, error));
+                std::filesystem::rename(away, source, error);
+                HD_REQUIRE(!error);
+                if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+                else HD_CHECK(engine.Reload());
+                HD_CHECK(engine.Dictionaries() != good);
+                HD_CHECK(engine.Filters() != filters);
+                HD_CHECK(engine.UserFileError().empty());
+                HD_CHECK(engine.FilterErrors().empty());
+                HD_CHECK_EQ(Translate(engine, "猫"), "새필터");
+                HD_CHECK_EQ(Translate(engine, "狐"), "금빛여우");
+            }
+        }
+    }
+}
+
+HD_TEST(EngineUserFolderHeaderRowsFollowStrictOption) {
+    for (const bool strict : {false, true}) {
+        for (const auto mode : {hdTrans::UserReload::Off, hdTrans::UserReload::Auto}) {
+            TempFolder dicts("header-strict-dicts"), users("header-strict-users"), ehnd("header-strict-ehnd");
+            WriteHeaderFilterBase(dicts);
+            users.Write("before.txt", "#! layer=prefilter\n猫\t犬\t1\t0\n");
+            users.Write("after.tsv", "#! layer=postfilter\n개\t기존필터\t1\t0\n");
+            users.Write("userdict.txt", "狐\t여우\n");
+            ehnd.Write("UserDict_a.txt", "ポチ\t바둑이\t1\n");
+            hdTrans::EngineOptions options;
+            options.strictDict = strict;
+            hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, mode, options);
+            HD_REQUIRE(engine.OpenEhnd(ehnd.path.string()));
+            HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {users.path.string()}));
+            const auto good = engine.Dictionaries();
+            const auto filters = engine.Filters();
+            users.Write("userdict.txt", "狐\t금빛여우\n");
+            ehnd.Write("UserDict_a.txt", "ポチ\t흰둥이\t1\n");
+            users.Write("after.tsv", "\xEF\xBB\xBF#! layer=postfilter\r\n# comment\r\n"
+                                     "개\t새필터\t1\t0\r\n(x\tz\t1\t1\r\n(y\tz\t1\t1\r\n");
+            if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload() == !strict);
+            HD_CHECK((engine.Dictionaries() == good) == strict);
+            HD_CHECK((engine.Filters() == filters) == strict);
+            HD_CHECK_EQ(Translate(engine, "猫"), strict ? "기존필터" : "새필터");
+            HD_CHECK_EQ(Translate(engine, "狐"), strict ? "여우" : "금빛여우");
+            HD_CHECK_EQ(Translate(engine, "ポチ"), strict ? "바둑이" : "흰둥이");
+            HD_REQUIRE(engine.FilterErrors().size() == 2);
+            HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 4));
+            HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 5));
+            HD_CHECK(!hdTrans::internal::CheckUserFile(engine));
+            users.Write("after.tsv", "#! layer=postfilter\n(x\tz\t1\t1\n(y\tz\t1\t1\n");
+            if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload() == !strict);
+            HD_CHECK_EQ(Translate(engine, "猫"), strict ? "기존필터" : "개");
+            HD_CHECK_EQ(Translate(engine, "狐"), strict ? "여우" : "금빛여우");
+            HD_CHECK_EQ(Translate(engine, "ポチ"), strict ? "바둑이" : "흰둥이");
+            HD_REQUIRE(engine.FilterErrors().size() == 2);
+            HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 2));
+            HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
+            users.Write("after.tsv", "#! layer=postfilter\n개\t복구필터\t1\t0\n");
+            if (mode == hdTrans::UserReload::Auto) HD_CHECK(hdTrans::internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload());
+            HD_CHECK(engine.Dictionaries() != good);
+            HD_CHECK(engine.Filters() != filters);
+            HD_CHECK_EQ(Translate(engine, "猫"), "복구필터");
+            HD_CHECK_EQ(Translate(engine, "狐"), "금빛여우");
+            HD_CHECK_EQ(Translate(engine, "ポチ"), "흰둥이");
+            HD_CHECK(engine.UserFileError().empty());
+            HD_CHECK(engine.FilterErrors().empty());
+        }
+    }
+}
+
+HD_TEST(EngineUserFolderHeaderCallOverrideDoesNotPersist) {
+    for (const bool strict : {false, true}) {
+        TempFolder dicts("header-call-dicts"), users("header-call-users");
+        WriteHeaderFilterBase(dicts);
+        users.Write("after.tsv", "#! layer=postfilter\n고양이\t기존필터\t1\t0\n");
+        hdTrans::EngineOptions options;
+        options.strictDict = strict;
+        hdTrans::Engine engine(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off, options);
+        HD_REQUIRE(engine.OpenUserDicts({dicts.path.string()}, false, {users.path.string()}));
+        users.Write("after.tsv", "#! layer=postfilter\n고양이\t새필터\t1\t0\n(x\tz\t1\t1\n");
+        HD_CHECK(engine.Reload(hdTrans::DictionaryOptions{!strict}) == strict);
+        HD_CHECK_EQ(Translate(engine, "猫"), strict ? "새필터" : "기존필터");
+        HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
+        const auto accepted = engine.Dictionaries();
+        const auto filters = engine.Filters();
+        users.Write("after.tsv", "#! layer=postfilter\n고양이\t다른필터\t1\t0\n(x\tz\t1\t1\n");
+        HD_CHECK(engine.Reload() == !strict);
+        HD_CHECK((engine.Dictionaries() == accepted) == strict);
+        HD_CHECK((engine.Filters() == filters) == strict);
+        HD_CHECK_EQ(Translate(engine, "猫"), strict ? "새필터" : "다른필터");
+        HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
+    }
+}
+
+HD_TEST(EngineUserFolderHeaderCache) {
+    TempFolder dicts("header-cache-dicts"), users("header-cache-users"), cache("header-cache");
+    const std::vector<std::string> folders{dicts.path.string()};
+    const char* snapshotMode = std::getenv("HDTRANS_SNAPSHOT");
+    if ((snapshotMode && std::string_view(snapshotMode) == "off") ||
+        hdTrans::dict::internal::SnapshotPath(folders, cache.path.string()).empty()) {
+        HD_SKIP("snapshot cache is disabled");
+    }
+    WriteHeaderFilterBase(dicts);
+    users.Write("before.txt", "\xEF\xBB\xBF#! layer=prefilter\r\n# comment\r\n猫\t犬\t1\t0\r\n");
+    users.Write("after.tsv", "#! layer=postfilter\n개\t필터값\t1\t0\n");
+    const auto files = hdTrans::dict::UserFiles({users.path.string()});
+    HD_REQUIRE(files.size() == 2);
+    const auto base = hdTrans::dict::LoadFoldersTsv(folders);
+    const auto cold = hdTrans::dict::LoadFoldersTsv(folders, files);
+    const auto written = hdTrans::dict::LoadFolders(folders, cache.path.string(), false, true, files);
+    const auto warm = hdTrans::dict::LoadFolders(folders, cache.path.string(), false, false, files);
+    HD_REQUIRE(base.snapshot && cold.snapshot && written.snapshot && warm.snapshot);
+    HD_CHECK(warm.snapshot->Mapped());
+    HD_CHECK(warm.errors.empty());
+    HD_CHECK(warm.snapshot->Plain().Entries().size() == base.snapshot->Plain().Entries().size());
+    HD_CHECK(warm.snapshot->TextPlain().Entries().size() == base.snapshot->TextPlain().Entries().size());
+    const auto& coldFiles = cold.snapshot->PlainFiles();
+    const auto& warmFiles = warm.snapshot->PlainFiles();
+    HD_REQUIRE(warmFiles.size() == coldFiles.size());
+    std::size_t filterFiles = 0;
+    for (std::size_t i = 0; i < warmFiles.size(); ++i) {
+        HD_CHECK(warmFiles[i].name == coldFiles[i].name);
+        HD_CHECK(warmFiles[i].text == coldFiles[i].text);
+        HD_CHECK(warmFiles[i].layer == coldFiles[i].layer);
+        HD_CHECK(warmFiles[i].user == coldFiles[i].user);
+        if (warmFiles[i].layer == hdTrans::dict::FileLayer::PreFilter ||
+            warmFiles[i].layer == hdTrans::dict::FileLayer::PostFilter) {
+            ++filterFiles;
+            HD_CHECK(warmFiles[i].user);
+        }
+    }
+    HD_CHECK(filterFiles == 2);
+}
+
+HD_TEST(EngineUserFolderHeaderCompiled) {
+    TempFolder dicts("header-image-dicts"), root("header-image-users");
+    WriteHeaderFilterBase(dicts);
+    const auto users = root.path / "users";
+    const auto compiled = (root.path / "dicts.hdsnap").string();
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(users, error));
+    root.Write("users/before.txt", "\xEF\xBB\xBF#! layer=prefilter\r\n猫\t犬\t1\t0\r\n");
+    root.Write("users/after.tsv", "#! layer=postfilter\n개\t필터값\t1\t0\n");
+    root.Write("users/userdict.txt", "狐\t여우\n");
+    const std::vector<std::string> folders{dicts.path.string()};
+    const auto files = hdTrans::dict::UserFiles({users.string()});
+    HD_REQUIRE(files.size() == 3);
+    const auto base = hdTrans::dict::LoadFoldersTsv(folders);
+    const auto cold = hdTrans::dict::LoadFoldersTsv(folders, files);
+    HD_REQUIRE(base.snapshot && cold.snapshot);
+    HD_CHECK(cold.errors.empty());
+    HD_CHECK(cold.snapshot->Plain().Entries().size() == base.snapshot->Plain().Entries().size() + 1);
+    std::size_t filterFiles = 0;
+    for (const auto& file : cold.snapshot->PlainFiles()) {
+        if (file.layer == hdTrans::dict::FileLayer::PreFilter || file.layer == hdTrans::dict::FileLayer::PostFilter) {
+            ++filterFiles;
+            HD_CHECK(file.user);
+        }
+    }
+    HD_CHECK(filterFiles == 2);
+    HD_REQUIRE(hdTrans::dict::CompileSnapshot(folders, compiled));
+    hdTrans::Engine bare(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(bare.Open({compiled}));
+    HD_CHECK_EQ(Translate(bare, "猫"), "고양이");
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.OpenUserDicts({compiled}, false, {users.string()}));
+    HD_CHECK_EQ(Translate(engine, "猫"), "필터값");
+    HD_CHECK_EQ(Translate(engine, "狐"), "여우");
+    HD_CHECK(engine.Dictionaries()->Plain().Entries().size() == cold.snapshot->Plain().Entries().size());
+    HD_CHECK(engine.Dictionaries()->TextPlain().Entries().size() == cold.snapshot->TextPlain().Entries().size());
+    HD_CHECK(engine.GetUserDict().empty());
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK(engine.FilterErrors().empty());
+    const auto good = engine.Dictionaries();
+    const auto filters = engine.Filters();
+    root.Write("users/after.tsv", "#! layer=postfilter\r\n개\t이미지필터\t1\t0\r\n(x\tz\t1\t1\r\n");
+    HD_CHECK(!engine.Reload());
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(engine.Filters() == filters);
+    HD_CHECK_EQ(Translate(engine, "猫"), "필터값");
+    HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
+    HD_CHECK(engine.Reload(hdTrans::DictionaryOptions{false}));
+    HD_CHECK_EQ(Translate(engine, "猫"), "이미지필터");
+    HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
 }

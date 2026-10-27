@@ -81,7 +81,7 @@ hdtrans [--json] [--version] [--config FILE] [--dicts PATH,...] [--userdict PATH
 |---|---|
 | `--config FILE` | 기본 `user/hdtrans.config.yaml` 대신 읽을 설정 파일 |
 | `--dicts PATH[,PATH...]` | 사전 폴더 목록 또는 [컴파일한 사전](dictionary-files.md#컴파일한-사전-hdsnap) `.hdsnap` 파일. 스냅샷 하나면 원본 폴더 없이 읽음. 기본값은 데이터 루트의 `dicts.hdsnap`, `dicts/`, 현재 폴더의 `dicts` 순서 |
-| `--userdict PATH` | 사용자 사전 파일이나 폴더. 여러 번 지정 가능. 기본값은 데이터 루트 `user/`의 `userdict*.txt`, `userdict*.tsv`. 빈 값이면 끔. 명시한 파일이 하나뿐이면 오류 때 실패 |
+| `--userdict PATH` | 사용자 사전 파일이나 폴더. 여러 번 지정 가능. 기본값은 데이터 루트 `user/`의 `userdict*.txt`, `userdict*.tsv`. 빈 값이면 끔. [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리) |
 | `--in FILE`, `--file FILE` | 표준 입력 대신 UTF-8 파일을 읽음 |
 | `--out FILE` | 결과를 UTF-8 파일로 저장. 생략하면 표준 출력. `--json`과 함께 쓰면 JSON 저장 |
 | `--json` | `{ text, choices, logs }` 객체를 JSON으로 출력. WASM과 같은 선택 기록과 필터 로그 |
@@ -148,6 +148,7 @@ CLI 플래그가 파일보다 우선합니다.
 | `reference` | bool, 기본 `false`. `true`는 `--reference` |
 | `speech` | `strict`(기본) 또는 `soft`, `--speech`와 같음 |
 | `wrapped` | bool, 기본 `false`. 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. `true`는 `--wrapped` |
+| `strict_dict` | bool. [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리) |
 
 `cache`를 지우거나 DLL을 종료하면 적용 전 환경변수를 복원합니다. `HDTRANS_SNAPSHOT=off`는 그대로 유효합니다.
 알 수 없는 키와 잘못된 값은 건너뛰고, 문법 오류 앞의 정상 항목은 유지합니다. 진단은 CLI의 표준 오류,
@@ -157,8 +158,9 @@ WebAssembly의 `HdTrans` 클래스는 YAML 대신 초기화 옵션과 사용자 
 
 ## 번역 창 (hdTransGUI.exe, Windows)
 
-창 하나에 **단문 번역**, **문서 번역**, **사전** 탭이 있습니다. 실행 파일 옆의 `hdTrans\`(없으면 실행 파일 폴더)에서 사전, 사용자 사전,
-설정을 엔진을 처음 불러올 때 읽습니다. 문서 번역은 Shift-JIS, UTF-8(BOM 유무 무관), UTF-16LE(BOM)를 읽고
+창 하나에 **단문 번역**, **문서 번역**, **사전**, **로그** 탭이 있습니다. 실행 파일 옆의 `hdTrans\`(없으면 실행 파일 폴더)에서 사전, 사용자 사전,
+설정을 엔진을 처음 불러올 때 읽습니다. 설정 파일 변경은 다음 사전 다시 읽기가 성공하면 함께 반영합니다.
+문서 번역은 Shift-JIS, UTF-8(BOM 유무 무관), UTF-16LE(BOM)를 읽고
 UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF 또는 CR)을 따릅니다. 파일마다 문서 전체를 한 번에 번역하므로 문맥이 그 파일 안에서 이어집니다.
 
 - 파일 여러 개를 목록에 넣어 차례로 번역합니다. 창에 끌어 놓은 파일은 문서 번역 탭의 목록 끝에 붙고, 이미 있는 파일과 폴더는 무시합니다. 미리보기는 고른 파일입니다.
@@ -169,6 +171,8 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
   삭제하며 바로 파일에 저장하고 다음 번역부터 반영합니다. 주석, 빈 줄과 BOM, 줄바꿈 방식은 그대로 둡니다. 열 형식 파일은 편집하지 않습니다.
 - 사전을 끄면 파일 이름 끝에 `.off`를 붙여 CLI와 연결 도구도 읽지 않게 하고, 켜면 되돌립니다. **가져오기**와 사전 탭에 끌어 놓은 파일은
   `userdict-이름.txt`로 UTF-8로 복사하고, **내보내기**는 파일을 그대로 저장합니다. 목록에서 이름을 고치면 파일 이름이 바뀝니다.
+- **로그** 탭은 사전 읽기 정보와 경고, 문서 파일 오류를 시간, 종류, 메시지로 최신 300건까지 보여 줍니다. **복사**와 **지우기**를 쓸 수 있고
+  창 아래 상태를 누르면 로그로 이동합니다. 기록은 메모리에만 두며 창을 닫으면 없어집니다.
 
 ## C API (hdTransEngine)
 
@@ -183,20 +187,28 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 - 호출은 스레드 안전하지만 재진입은 안 됩니다. 라이브러리를 내리기 전에 모든 호출을 끝내야 합니다.
 - 초기화, 다시 읽기, 종료는 대기 중인 번역보다 먼저 처리됩니다.
 - 데이터 루트 `user/`의 `userdict*.txt`, `userdict*.tsv`를 사전 폴더 다음에 읽고, 추가, 변경, 삭제를 자동 반영합니다
-  ([dictionary-files.md](dictionary-files.md#사용자-사전-파일)). 불러오지 못하면 빼고 시작합니다(`hdTrans_UserDictError`).
+  ([dictionary-files.md](dictionary-files.md#사용자-사전-파일)). 진단은 `hdTrans_UserDictError`로 확인합니다.
 - Ehnd는 설정 파일의 `ehnd`나 `hdTrans_OpenEhnd`로 켭니다. 켠 폴더가 바뀌면 함께 다시 읽습니다
   ([ehnd-compat.md](ehnd-compat.md)).
 - Windows에서 프로세스 종료 시에는 엔진을 정리하지 않고 OS에 맡기며, `FreeLibrary`로 내릴 때는 진행 중인
   다시 읽기를 기다리지 않습니다. 깔끔하게 정리하려면 `hdTrans_Terminate`를 부릅니다.
 
+`hdTrans_Options`의 `strict_dict` 정책은 [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리)를 보세요.
+
+| 필드 | 값 |
+|---|---|
+| `uint32_t size` | `sizeof(hdTrans_Options)`. 없는 필드는 기본값, 뒤에 추가된 필드는 무시 |
+| `uint32_t strict_dict` | 0 설정/기본값, 1 strict, 2 skip |
+
 | 함수 | 설명 |
 |---|---|
+| `int hdTrans_SetOptions(const hdTrans_Options* options)` | 다음 사전 불러오기에 적용. 초기화 전에도 사용 가능. NULL 또는 size 0은 초기화. 0 성공, -1 잘못된 크기나 값(기존 옵션 유지) |
 | `int hdTrans_Initialize(const char* dirs)` | 사전 목록을 불러옴. `dirs`는 NUL로 구분하고 NUL 두 개로 끝나며 뒤 폴더가 앞을 덮어씀. `.hdsnap` 하나만 넘겨도 됨. NULL이나 빈 목록이면 설정의 `dicts`, 없으면 데이터 루트의 `dicts.hdsnap`, `dicts/` 순서로 찾음. 0 성공, -1은 불러오기 실패 또는 동시에 진행된 Terminate, Initialize, Reload가 이 불러오기를 취소함 |
 | `void hdTrans_Terminate(void)` | 세션과 사전 해제. 여러 번 불러도 되고, 다시 Initialize할 수 있음 |
 | `int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn)` | `text[0..n)`(`\n`으로 구분한 한 줄 이상)을 프로세스 세션에서 번역. `*out`에 NUL로 끝나는 버퍼, `*outn`에 길이(NUL 제외). 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, size_t n, char** out, size_t* outn)` | `context[0..cn)`의 줄을 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 `hdTrans_Translate`처럼 돌려줌. 문맥 줄은 단서와, `wrapped`이면 `text`가 이어 가는 문장의 앞부분으로만 쓰고 호출 뒤에 남기지 않음. NULL이나 `cn` 0은 문맥 없음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reset(void)` | 엔진의 지금 사전을 세션에 가져옴. 번역은 원래 호출마다 따로라서 결과는 바뀌지 않음. 0 성공, -1 초기화 전, 종료 후 |
-| `int hdTrans_Reload(void)` | 설정 파일과 사전 폴더, 사용자 사전, 켜 둔 Ehnd 폴더를 다시 불러옴. 0 성공, -1 초기화 전, 종료 후, 실패(이전 사전 유지, 여러 사용자 파일 중 오류 파일은 빼고 나머지를 읽음) |
+| `int hdTrans_Reload(void)` | 설정 파일과 사전 폴더, 사용자 사전, 켜 둔 Ehnd 폴더를 다시 불러옴. 0 성공, -1 초기화 전, 종료 후, 실패(이전 사전 유지) |
 | `int hdTrans_UserDictError(char** out, size_t* outn)` | 설정 파일 진단과 마지막 사용자 사전 읽기 오류(오류마다 한 줄, 없으면 빈 문자열)를 `hdTrans_Translate`처럼 버퍼로 돌려줌. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_OpenEhnd(const char* dir)` | Ehnd 폴더 `dir`의 필터와 사용자 사전을 이후 번역에 씀(NULL이나 빈 값은 뗌). 사용자 사전처럼 자동으로 다시 읽음. 0 성공, -1 초기화 전, 종료 후, 폴더를 못 읽음 |
 | `int hdTrans_FilterErrors(char** out, size_t* outn)` | 필터 파일과 Ehnd 폴더에서 건너뛴 줄(`파일:줄: 이유`, 줄마다 하나)을 버퍼로 돌려줌. 0 성공, -1 초기화 전, 종료 후 |
@@ -226,8 +238,8 @@ Windows 전용이며, 이지트랜스를 불러오는 도구는 대부분 32비�
 
 - 기본 사전은 설정의 `dicts`, 없으면 데이터 루트의 `dicts.hdsnap`, `dicts/` 순서로 찾습니다.
   사용자 사전은 `user/`의 `userdict*.txt`, `userdict*.tsv`에서 따로 읽습니다. 호스트가 넘기는 사전 경로는 무시합니다.
-  사용자 사전의 추가, 변경, 삭제는 자동 반영됩니다([dictionary-files.md](dictionary-files.md#사용자-사전-파일)). 불러오지 못하면
-  빼고 시작하며 이유를 디버거 출력(`OutputDebugString`)에 씁니다.
+  사용자 사전의 추가, 변경, 삭제는 자동 반영됩니다([dictionary-files.md](dictionary-files.md#사용자-사전-파일)).
+  진단은 디버거 출력(`OutputDebugString`)에 씁니다.
 - Ehnd는 설정 파일의 `ehnd`로 켭니다. 켠 폴더가 바뀌면 함께 다시 읽으며 건너뛴 줄은
   디버거 출력에 씁니다 ([ehnd-compat.md](ehnd-compat.md)).
 - 프로세스 종료 시에는 엔진을 정리하지 않고, `FreeLibrary`로 내릴 때는 진행 중인 다시 읽기를 기다리지 않습니다.

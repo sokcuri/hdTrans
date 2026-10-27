@@ -1,25 +1,18 @@
 #include <emscripten/bind.h>
 
-#include <cstdio>
-#include <filesystem>
 #include <memory>
-#include <system_error>
 #include <string>
-#include <string_view>
 #include <vector>
 
 #include "core/config/config.h"
 #include "core/engine.h"
 #include "core/engine/driver.h"
 #include "core/engine/trace.h"
-#include "core/userdict/userdict.h"
 #include "frontend/dictionary_version.h"
 
 namespace {
 
 using emscripten::val;
-
-unsigned nextUserFile = 0;
 
 val Selection(const hdTrans::internal::TraceSelection& selection) {
     auto out = val::object();
@@ -64,15 +57,18 @@ val Result(const hdTrans::internal::TranslationTrace& trace) {
 
 class Translator {
 public:
-    Translator() : userFile_("/hdtrans-userdict-" + std::to_string(++nextUserFile) + ".tsv") {}
+    Translator() = default;
     ~Translator() { Close(); }
 
-    bool Open(const val& directories) {
+    bool Open(const val& directories, const val& strictDict) {
         Close();
         directories_ = emscripten::vecFromJSArray<std::string>(directories);
-        engine_ = std::make_unique<hdTrans::Engine>(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off);
-        if (!engine_->Open(directories_, false, userFile_)) {
-            error_ = "hdtrans: the dictionaries do not load";
+        hdTrans::EngineOptions options;
+        if (!strictDict.isUndefined()) options.strictDict = strictDict.as<bool>();
+        engine_ = std::make_unique<hdTrans::Engine>(
+            false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off, options);
+        if (!engine_->Open(directories_)) {
+            LoadError("hdtrans: the dictionaries do not load");
             engine_.reset();
             return false;
         }
@@ -119,44 +115,37 @@ public:
         if (session_) session_->SetWrapped(wrapped_);
     }
 
-    bool SetUserDictRaw(const std::string& text) {
+    bool SetUserDict(const val& rows, const val& strict) {
         if (!Ready()) return false;
-        if (text.empty()) {
-            std::remove(userFile_.c_str());
-        } else {
-            std::FILE* file = std::fopen(userFile_.c_str(), "wb");
-            if (!file) {
-                error_ = "hdtrans: cannot write the user dictionary";
-                return false;
-            }
-            const bool written = std::fwrite(text.data(), 1, text.size(), file) == text.size();
-            const bool closed = std::fclose(file) == 0;
-            if (!written || !closed) {
-                error_ = "hdtrans: cannot write the user dictionary";
-                return false;
-            }
+        std::vector<hdTrans::UserDictEntry> entries;
+        const unsigned length = rows["length"].as<unsigned>();
+        entries.reserve(length);
+        for (unsigned i = 0; i < length; ++i) {
+            const auto row = rows[i];
+            entries.push_back({row["ja"].as<std::string>(), row["ko"].as<std::string>(),
+                               row["pos"].as<std::string>(), row["options"].as<std::string>()});
         }
-        if (!engine_->Reload()) {
-            if (!engine_->UserFileError().empty()) return true;
-            error_ = "hdtrans: the dictionaries do not load";
-            return false;
+        if (!engine_->SetUserDict(entries, Options(strict))) {
+            return LoadError("hdtrans: the user dictionary does not load");
         }
         session_->Reset();
-        userEntries_.clear();
-        if (engine_->UserFileError().empty()) {
-            hdTrans::dict::CodeTable codes;
-            hdTrans::userdict::Families families;
-            const auto snapshot = engine_->Dictionaries();
-            hdTrans::userdict::Context context{&codes, &families, &snapshot->Base()};
-            hdTrans::userdict::Parse(text, 0, context, &userEntries_);
+        return true;
+    }
+
+    bool SetUserDictRaw(const std::string& text, const val& strict) {
+        if (!Ready()) return false;
+        if (!engine_->SetUserDictRaw(text, Options(strict))) {
+            return LoadError("hdtrans: the user dictionary does not load");
         }
+        session_->Reset();
         return true;
     }
 
     val GetUserDict() const {
         auto out = val::array();
+        if (!engine_) return out;
         unsigned i = 0;
-        for (const auto& entry : userEntries_) {
+        for (const auto& entry : engine_->GetUserDict()) {
             auto row = val::object();
             row.set("ja", entry.ja);
             row.set("ko", entry.ko);
@@ -167,62 +156,21 @@ public:
         return out;
     }
 
-    bool SetEhnd(const val& files) {
+    bool SetEhnd(const val& files, const val& strict) {
         if (!Ready()) return false;
         const auto names = emscripten::vecFromJSArray<std::string>(val::global("Object").call<val>("keys", files));
-        if (names.empty()) {
-            if (!engine_->OpenEhnd("")) return false;
-            RemoveEhnd();
-            session_->Reset();
-            return true;
+        std::vector<hdTrans::EhndFile> sources;
+        sources.reserve(names.size());
+        for (const auto& name : names) sources.push_back({name, files[name].as<std::string>()});
+        if (!engine_->SetEhnd(sources, Options(strict))) {
+            return LoadError("hdtrans: the Ehnd filters do not load");
         }
-        for (const auto& name : names) {
-            if (name.empty() || name == "." || name == ".." || name.find_first_of("/\\\0", 0, 3) != std::string::npos) {
-                error_ = "hdtrans: invalid Ehnd filename";
-                return false;
-            }
-        }
-        const std::string folder = userFile_ + "-ehnd-" + std::to_string(++ehndGeneration_);
-        std::error_code error;
-        std::filesystem::create_directory(folder, error);
-        if (error) {
-            error_ = "hdtrans: cannot create the Ehnd folder";
-            return false;
-        }
-        for (const auto& name : names) {
-            const std::string text = files[name].as<std::string>();
-            std::FILE* file = std::fopen((folder + "/" + name).c_str(), "wb");
-            bool written = false;
-            if (file) {
-                written = std::fwrite(text.data(), 1, text.size(), file) == text.size();
-                written = std::fclose(file) == 0 && written;
-            }
-            if (!written) {
-                std::filesystem::remove_all(folder, error);
-                error_ = "hdtrans: cannot write the Ehnd file";
-                return false;
-            }
-        }
-        if (!engine_->OpenEhnd(folder)) {
-            std::filesystem::remove_all(folder, error);
-            error_ = "hdtrans: the Ehnd filters do not load";
-            return false;
-        }
-        RemoveEhnd();
-        ehndDir_ = folder;
         session_->Reset();
         return true;
     }
 
     std::string UserDictError() const {
-        if (!engine_) return {};
-        std::string errors = engine_->UserFileError();
-        std::size_t start = 0;
-        while ((start = errors.find(userFile_, start)) != std::string::npos) {
-            errors.replace(start, userFile_.size(), "userdict.tsv");
-            start += std::string_view("userdict.tsv").size();
-        }
-        return errors;
+        return engine_ ? engine_->UserFileError() : std::string{};
     }
 
     val FilterErrors() const {
@@ -240,17 +188,21 @@ public:
     void Close() {
         session_.reset();
         engine_.reset();
-        userEntries_.clear();
-        std::remove(userFile_.c_str());
-        RemoveEhnd();
     }
 
 private:
-    void RemoveEhnd() {
-        if (ehndDir_.empty()) return;
-        std::error_code error;
-        std::filesystem::remove_all(ehndDir_, error);
-        ehndDir_.clear();
+    static hdTrans::DictionaryOptions Options(const val& strict) {
+        hdTrans::DictionaryOptions options;
+        if (!strict.isUndefined()) options.strict = strict.as<bool>();
+        return options;
+    }
+
+    bool LoadError(const char* message) {
+        error_ = message;
+        const auto user = engine_->UserFileError();
+        if (!user.empty()) error_ += "\n" + user;
+        for (const auto& error : engine_->FilterErrors()) error_ += "\n" + error;
+        return false;
     }
 
     bool Ready() {
@@ -258,11 +210,7 @@ private:
         return session_ != nullptr;
     }
 
-    const std::string userFile_;
-    std::string ehndDir_;
-    unsigned ehndGeneration_ = 0;
     std::vector<std::string> directories_;
-    std::vector<hdTrans::userdict::SourceEntry> userEntries_;
     std::unique_ptr<hdTrans::Engine> engine_;
     std::unique_ptr<hdTrans::Session> session_;
     hdTrans::Speech speech_ = hdTrans::Speech::Strict;
@@ -284,6 +232,7 @@ EMSCRIPTEN_BINDINGS(hdtrans) {
         .function("reset", &Translator::Reset)
         .function("setSpeech", &Translator::SetSpeech)
         .function("setWrapped", &Translator::SetWrapped)
+        .function("setUserDict", &Translator::SetUserDict)
         .function("setUserDictRaw", &Translator::SetUserDictRaw)
         .function("getUserDict", &Translator::GetUserDict)
         .function("setEhnd", &Translator::SetEhnd)

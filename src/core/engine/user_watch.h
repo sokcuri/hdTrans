@@ -15,6 +15,7 @@
 #include <thread>
 #endif
 
+#include "core/dict/folders.h"
 #include "core/dict/mapped_file.h"
 #include "core/dict/snapshot.h"
 #include "core/engine.h"
@@ -43,8 +44,19 @@ struct FileWatch {
              std::chrono::steady_clock::duration interval, FileVersion& found);
 };
 
-using UserVersion = std::vector<std::pair<std::string, FileVersion>>;
+struct UserVersion {
+    std::vector<std::pair<std::string, FileVersion>> files;
+    std::vector<dict::UserSource> sources;
+    FileVersion config;
+    std::uint64_t optionsRevision = 0;
+    bool operator==(const UserVersion&) const = default;
+};
 UserVersion UserVersionOf(const std::vector<std::string>& paths);
+UserVersion UserVersionOf(const std::vector<std::string>& paths, std::string_view configPath);
+UserVersion UserVersionOf(const std::vector<std::string>& paths, std::string_view configPath,
+                          std::uint64_t optionsRevision);
+UserVersion UserVersionOf(const std::vector<dict::UserSource>& paths, std::string_view configPath,
+                          std::uint64_t optionsRevision = 0);
 
 struct UserFilesWatch {
     UserVersion loaded;
@@ -53,11 +65,19 @@ struct UserFilesWatch {
     std::chrono::steady_clock::time_point next{};
 
     bool Due(const std::vector<std::string>& paths, std::chrono::steady_clock::time_point now,
-             std::chrono::steady_clock::duration interval, UserVersion& found);
+             std::chrono::steady_clock::duration interval, UserVersion& found, std::string_view configPath = {},
+             std::uint64_t optionsRevision = 0);
+    bool Due(const std::vector<dict::UserSource>& paths, std::chrono::steady_clock::time_point now,
+             std::chrono::steady_clock::duration interval, UserVersion& found, std::string_view configPath,
+             std::uint64_t optionsRevision);
 };
 
 // The files of an Ehnd folder that a load reads, with their stamps, in load order.
-using FolderVersion = std::vector<std::pair<std::string, dict::internal::FileStamp>>;
+struct FolderVersion {
+    std::vector<std::pair<std::string, dict::internal::FileStamp>> files;
+    bool available = true;
+    bool operator==(const FolderVersion&) const = default;
+};
 
 FolderVersion FolderVersionOf(std::string_view dir);
 
@@ -106,11 +126,25 @@ struct ReloadTarget {
 
 // The user dictionary state of an engine, guarded by the engine's mutex.
 struct UserWatch {
+    EngineOptions options;
+    std::uint64_t optionsRevision = 0;
+    std::vector<dict::UserSource> requestedSources;
+    dict::UserSource requestedEhnd;
+    std::vector<dict::UserSource> acceptedSources;
+    std::optional<dict::UserSource> acceptedEhnd;
+    std::vector<dict::LoadError> ehndSourceWarnings;
+    bool sourceHistorySeeded = false;
+    std::optional<dict::File> memoryUser;
+    std::optional<std::vector<EhndFile>> memoryEhnd;
+    bool memoryEhndStrict = true;
     bool automatic = false;  // UserReload::Auto
     bool detached = false;   // no more reloads: the engine is being abandoned
     UserFilesWatch watch;
     FolderWatch ehnd;  // the Ehnd folder
     std::vector<dict::LoadError> errors;  // why the failed version did not load
+    bool filterFailed = false;
+    std::vector<dict::LoadFileInfo> dictionaryInfo;
+    std::vector<dict::LoadFileInfo> filterInfo;
     std::shared_ptr<ReloadTarget> target = std::make_shared<ReloadTarget>();
     ReloadThread worker;
     bool running = false;
@@ -125,7 +159,19 @@ int RunningReloads();
 bool CheckUserFile(const Engine& e);
 // Like CheckUserFile, without waiting for the reload.
 bool StartUserFileCheck(const Engine& e);
-// The load errors of the version of the user dictionary file that last failed.
+// The errors and skipped-row warnings of the last user dictionary load.
 std::vector<dict::LoadError> UserFileErrors(const Engine& e);
+bool FilterFileFailed(const Engine& e);
+
+// Carries active source history into a replacement engine before its first Open.
+std::vector<dict::UserSource> AcceptedUserSources(const Engine& e);
+void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources);
+std::vector<dict::UserSource> AcceptedUserSources(const Engine& e, std::optional<dict::UserSource>& ehnd);
+void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources, std::optional<dict::UserSource> ehnd);
+
+// Public string-path calls are explicit; frontends preserve generated defaults here.
+bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,
+                     const std::vector<dict::UserSource>& sources);
+bool OpenEhndSource(Engine& e, const dict::UserSource& source, const DictionaryOptions& options = {});
 
 }  // namespace hdTrans::internal

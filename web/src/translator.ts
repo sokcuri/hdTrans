@@ -60,16 +60,26 @@ export interface TranslateOptions {
 /** UTF-8 contents of PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt. */
 export type EhndFiles = Readonly<Record<string, string>>;
 
+type DictionaryCallOptions = { strict?: boolean };
+
+function dictionaryStrict(value: boolean | undefined): boolean | undefined {
+  if (value !== undefined && typeof value !== 'boolean') {
+    throw new TypeError('hdtrans: strict dictionary option must be a boolean');
+  }
+  return value;
+}
+
 interface Binding {
-  open(directories: readonly string[]): boolean;
+  open(directories: readonly string[], strictDict: boolean | undefined): boolean;
   translate(text: string, context: string): string;
   translateJson(text: string, context: string): TranslationResult;
   reset(): boolean;
   setSpeech(speech: Speech): boolean;
   setWrapped(wrapped: boolean): void;
-  setUserDictRaw(text: string): boolean;
+  setUserDict(entries: readonly { ja: string; ko: string; pos: string; options: string }[], strict: boolean | undefined): boolean;
+  setUserDictRaw(text: string, strict: boolean | undefined): boolean;
   getUserDict(): UserDictEntry[];
-  setEhnd(files: EhndFiles): boolean;
+  setEhnd(files: EhndFiles, strict: boolean | undefined): boolean;
   close(): void;
   delete(): void;
   readonly error: string;
@@ -98,6 +108,7 @@ export interface InitOptions {
   ehnd?: EhndFiles;
   speech?: Speech;
   wrapped?: boolean;
+  strictDict?: boolean;
 }
 
 export class HdTrans {
@@ -115,6 +126,7 @@ export class HdTrans {
   }
 
   static async init(options: InitOptions = {}): Promise<HdTrans> {
+    const strictDict = dictionaryStrict(options.strictDict);
     const directories = options.directories ?? ['/dicts'];
     if (!Array.isArray(directories) || directories.some((path) => typeof path !== 'string' || path.includes('\0'))) {
       throw new TypeError('hdtrans: dictionary paths must be strings without NUL');
@@ -129,7 +141,7 @@ export class HdTrans {
     const binding = new module.Translator();
     const translator = new HdTrans(binding, version);
     try {
-      if (!binding.open(directories)) throw new Error(binding.error);
+      if (!binding.open(directories, strictDict)) throw new Error(binding.error);
       translator.dictionaryVersion_ = binding.dictionaryVersion;
       if (options.ehnd) translator.setEhnd(options.ehnd);
       if (options.speech) translator.setSpeech(options.speech);
@@ -207,23 +219,28 @@ export class HdTrans {
     if (!binding.reset()) throw new Error(binding.error);
   }
 
-  setUserDict(entries: readonly UserDictEntry[]): void {
+  setUserDict(entries: readonly UserDictEntry[], options: DictionaryCallOptions = {}): void {
     const rows = entries.map((entry) => {
       const fields = [entry.ja, entry.ko, entry.pos ?? '', entry.options ?? ''];
       if (fields.some((field) => typeof field !== 'string' || /[\t\r\n\0]/.test(field))) {
         throw new TypeError('hdtrans: user dictionary fields must be strings without tabs, newlines or NUL');
       }
-      return fields.join('\t').replace(/\t+$/, '');
+      return fields;
     });
-    this.setUserDictRaw(rows.length ? rows.join('\n') + '\n' : '');
+    const binding = this.binding();
+    const strict = dictionaryStrict(options.strict);
+    this.userDictRaw_ = rows.length ? rows.map((fields) => fields.join('\t').replace(/\t+$/, '')).join('\n') + '\n' : '';
+    const normalized = rows.map(([ja, ko, pos, entryOptions]) => ({ ja, ko, pos, options: entryOptions }));
+    if (!binding.setUserDict(normalized, strict)) throw new Error(binding.error);
   }
 
-  /** Replaces the overlay and resets context. A malformed update keeps the prior overlay and sets userDictError. */
-  setUserDictRaw(text: string): void {
+  /** Replaces the overlay and resets context. A rejected update keeps the prior overlay. */
+  setUserDictRaw(text: string, options: DictionaryCallOptions = {}): void {
     const binding = this.binding();
     if (typeof text !== 'string') throw new TypeError('hdtrans: user dictionary must be a string');
-    if (!binding.setUserDictRaw(text)) throw new Error(binding.error);
+    const strict = dictionaryStrict(options.strict);
     this.userDictRaw_ = text;
+    if (!binding.setUserDictRaw(text, strict)) throw new Error(binding.error);
   }
 
   /** Active registered source rows, not expanded or merged winners. Returns an independent copy. */
@@ -254,14 +271,14 @@ export class HdTrans {
   }
 
   /** Replaces only this instance's Ehnd files and resets context. No Ehnd files load by default. */
-  setEhnd(files: EhndFiles): void {
+  setEhnd(files: EhndFiles, options: DictionaryCallOptions = {}): void {
     const binding = this.binding();
     for (const [name, text] of Object.entries(files)) {
       if (!/^(PreFilter|PostFilter|SkipLayer|UserDict)[^/\\\0]*\.txt$/i.test(name) || typeof text !== 'string') {
         throw new TypeError('hdtrans: expected named Ehnd .txt files with string contents');
       }
     }
-    if (!binding.setEhnd(files)) throw new Error(binding.error);
+    if (!binding.setEhnd(files, dictionaryStrict(options.strict))) throw new Error(binding.error);
   }
 
   clearEhnd(): void {

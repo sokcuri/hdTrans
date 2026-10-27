@@ -16,6 +16,7 @@ struct Config {
     std::optional<std::string> ehnd;
     bool useEhnd = false;
     std::optional<std::string> cache;
+    std::optional<bool> strictDict;
     bool cg = true;
     bool misread = false;
     bool reference = false;

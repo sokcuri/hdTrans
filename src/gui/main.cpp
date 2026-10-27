@@ -13,10 +13,12 @@
 #include <cstdlib>
 #include <cstring>
 #include <cwchar>
+#include <deque>
 #include <filesystem>
 #include <fstream>
 #include <initializer_list>
 #include <memory>
+#include <mutex>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -29,6 +31,9 @@
 #include "core/config/config.h"
 #include "core/dict/folders.h"
 #include "core/engine.h"
+#include "core/engine/load_info.h"
+#include "core/engine/user_watch.h"
+#include "frontend/load_info.h"
 #include "frontend/module_dir.h"
 #include "gui/resource.h"
 #include "gui/text_file.h"
@@ -44,9 +49,23 @@ constexpr UINT kPhase = WM_APP + 2;
 constexpr UINT kFont = WM_APP + 3;
 constexpr UINT kStart = WM_APP + 4;
 constexpr UINT kRelist = WM_APP + 5;
+constexpr UINT kLog = WM_APP + 6;
+constexpr std::size_t kLogLimit = 300;
 
-enum Page { kTextPage, kDocsPage, kDictsPage };
-constexpr const wchar_t* kPageNames[] = {L"단문 번역", L"문서 번역", L"사전"};
+enum Page { kTextPage, kDocsPage, kDictsPage, kLogsPage };
+constexpr const wchar_t* kPageNames[] = {L"단문 번역", L"문서 번역", L"사전", L"로그"};
+
+struct UserSourceEdit {
+    fs::path from;
+    fs::path to;
+    bool on = true;
+};
+
+struct LogEntry {
+    std::wstring time;
+    std::wstring kind;
+    std::wstring message;
+};
 
 // Phases a file job reports to the document page.
 enum Phase { kTranslating = 1, kSaving, kSaved, kFailed };
@@ -64,6 +83,13 @@ struct App {
     HWND text = nullptr;
     HWND docs = nullptr;
     HWND dicts = nullptr;
+    HWND logs = nullptr;
+    std::mutex mutex;  // logs and source edits shared with the worker
+    std::vector<UserSourceEdit> sourceEdits;
+    std::optional<std::vector<gui::UserDict>> relistSources;
+    std::deque<LogEntry> logEntries;
+    std::wstring logStatus;
+    bool logPosted = false;
     HFONT font = nullptr;
     bool selftest = false;
     bool busy = false;
@@ -72,6 +98,14 @@ struct App {
     hdTrans::internal::Config settings;
     hdTrans::internal::ConfigCache cache;
     std::unique_ptr<hdTrans::Engine> engine;
+    std::vector<std::string> engineDictDirs;
+    std::vector<std::string> engineUserPaths;
+    std::vector<gui::UserDict> engineSources;  // ordered source slots, including files turned off in the GUI
+    std::string engineEhndDir;
+    std::string engineConfigPath;
+    std::string engineModuleDir;
+    hdTrans::internal::UserVersion loadedUserVersion;
+    hdTrans::internal::FolderVersion loadedEhndVersion;
     std::thread worker;
     std::atomic<bool> cancel{false};
     std::atomic<bool> reloadDicts{false};
@@ -122,6 +156,19 @@ std::string Utf8(std::wstring_view text) {
     std::string out(static_cast<std::size_t>(count), '\0');
     WideCharToMultiByte(CP_UTF8, WC_ERR_INVALID_CHARS, text.data(), size, out.data(), count, nullptr, nullptr);
     return out;
+}
+
+// Workers update bounded memory only; the main dialog paints it on kLog.
+void AddLog(App& app, const wchar_t* kind, std::wstring message, std::wstring status = {}) {
+    SYSTEMTIME now{};
+    GetLocalTime(&now);
+    wchar_t time[32]{};
+    GetTimeFormatEx(LOCALE_NAME_USER_DEFAULT, TIME_FORCE24HOURFORMAT, &now, L"HH:mm:ss", time, 32);
+    std::lock_guard lock(app.mutex);
+    app.logEntries.push_front({time, kind, std::move(message)});
+    if (app.logEntries.size() > kLogLimit) app.logEntries.pop_back();
+    if (!status.empty()) app.logStatus = std::move(status);
+    if (!app.logPosted && app.main) app.logPosted = PostMessageW(app.main, kLog, 0, 0) != FALSE;
 }
 
 std::wstring Title(int page) {
@@ -310,6 +357,17 @@ void LayoutDicts(HWND page) {
     p.Put(IDC_ENTRY_DELETE, p.width - m - bw, bottom, bw, bh);
 }
 
+void LayoutLogs(HWND page) {
+    const Placer p(page);
+    const int m = p(10), bh = p(26), full = p.width - 2 * m;
+    p.Put(IDC_LOG_ENTRIES, m, m, full, p.height - 2 * m - bh - p(8));
+    p.Column(IDC_LOG_ENTRIES, 0, p(76));
+    p.Column(IDC_LOG_ENTRIES, 1, p(60));
+    p.Column(IDC_LOG_ENTRIES, 2, std::max(full - p(140) - p.Scrollbar(), p(300)));
+    p.Put(IDC_LOG_COPY, m, p.height - m - bh, p(90), bh);
+    p.Put(IDC_LOG_CLEAR, m + p(98), p.height - m - bh, p(90), bh);
+}
+
 // The work area of the monitor that holds most of the window.
 RECT WorkArea(HWND window) {
     MONITORINFO info{};
@@ -331,9 +389,10 @@ void LayoutMain(App& app) {
     TabCtrl_GetItemRect(app.tabs, 0, &item);
     const int top = p(6), header = item.bottom + p(3);
     SetWindowPos(app.tabs, nullptr, p(8), top, std::max(p.width - p(16), 0), header, SWP_NOZORDER | SWP_NOACTIVATE);
-    for (HWND page : {app.text, app.docs, app.dicts}) {
-        SetWindowPos(page, nullptr, 0, top + header, p.width, std::max(p.height - top - header, 0), SWP_NOZORDER | SWP_NOACTIVATE);
+    for (HWND page : {app.text, app.docs, app.dicts, app.logs}) {
+        SetWindowPos(page, nullptr, 0, top + header, p.width, std::max(p.height - top - header - p(24), 0), SWP_NOZORDER | SWP_NOACTIVATE);
     }
+    p.Put(IDC_LOG_STATUS, p(10), p.height - p(22), p.width - p(20), p(20));
 }
 
 void LayoutAll(App& app) {
@@ -341,16 +400,17 @@ void LayoutAll(App& app) {
     LayoutText(app.text);
     LayoutDocs(app.docs);
     LayoutDicts(app.dicts);
+    LayoutLogs(app.logs);
 }
 
 int CurrentPage(const App& app) {
-    return std::clamp(TabCtrl_GetCurSel(app.tabs), 0, 2);
+    return std::clamp(TabCtrl_GetCurSel(app.tabs), 0, static_cast<int>(kLogsPage));
 }
 
 void ShowPage(App& app, int page) {
     TabCtrl_SetCurSel(app.tabs, page);
-    const HWND pages[] = {app.text, app.docs, app.dicts};
-    for (int index = 0; index < 3; ++index) ShowWindow(pages[index], index == page ? SW_SHOW : SW_HIDE);
+    const HWND pages[] = {app.text, app.docs, app.dicts, app.logs};
+    for (int index = 0; index <= kLogsPage; ++index) ShowWindow(pages[index], index == page ? SW_SHOW : SW_HIDE);
     SetWindowTextW(app.main, Title(page).c_str());
 }
 
@@ -370,8 +430,9 @@ gui::TranslationOptions Options(HWND window, bool document) {
 }
 
 void ReportError(App& app, const wchar_t* message) {
+    const wchar_t* kind = CurrentPage(app) == kDictsPage ? L"사전" : CurrentPage(app) == kDocsPage ? L"문서" : L"엔진";
+    AddLog(app, kind, message, std::wstring(kind) + L" 오류");
     if (app.selftest) std::fprintf(stderr, "GUI: %s\n", Utf8(message).c_str());
-    else MessageBoxW(app.main, message, L"hdTrans", MB_OK | MB_ICONERROR);
 }
 
 std::vector<std::string> UserSources(const std::string& dir) {
@@ -380,43 +441,237 @@ std::vector<std::string> UserSources(const std::string& dir) {
     return config.settings.userdict.value_or(hdTrans::dict::UserPaths(dir));
 }
 
-bool LoadEngine(App& app, std::string dir = {}) {
-    if (app.engine && app.engine->loaded()) return true;
-    if (dir.empty()) dir = hdTrans::frontend::ModuleDirectory();
-    if (dir.empty()) {
-        app.error = L"실행 파일의 위치를 찾지 못했습니다.";
-        return false;
+void QueueSourceEdit(App& app, const fs::path& from, const fs::path& to, bool on) {
+    std::lock_guard lock(app.mutex);
+    app.sourceEdits.push_back({from, to, on});
+    app.reloadDicts = true;
+}
+
+void ApplySourceEdits(std::vector<gui::UserDict>& sources, const std::vector<UserSourceEdit>& edits) {
+    for (const auto& edit : edits) {
+        for (auto& source : sources) {
+            if (source.path != edit.from) continue;
+            source.path = edit.to;
+            source.on = edit.on;
+        }
     }
-    const std::string configPath = hdTrans::dict::ConfigFile(dir);
-    const auto config = hdTrans::internal::LoadConfig(configPath);
-    const std::string errors = hdTrans::internal::ConfigErrors(config, configPath);
-    if (!errors.empty()) OutputDebugStringW(Wide("hdTransGUI: " + errors + "\n").c_str());
-    app.settings = config.settings;
-    const auto& settings = app.settings;
-    if (!app.cache.Apply(settings.cache)) {
+}
+
+std::vector<UserSourceEdit> TakeSourceEdits(App& app, std::vector<gui::UserDict>& sources) {
+    std::vector<UserSourceEdit> edits;
+    {
+        std::lock_guard lock(app.mutex);
+        edits.swap(app.sourceEdits);
+    }
+    ApplySourceEdits(sources, edits);
+    return edits;
+}
+
+void RestoreSourceEdits(App& app, const std::vector<UserSourceEdit>& edits) {
+    if (edits.empty()) return;
+    std::lock_guard lock(app.mutex);
+    app.sourceEdits.insert(app.sourceEdits.begin(), edits.begin(), edits.end());
+}
+
+std::vector<std::string> ActiveUserPaths(const std::vector<gui::UserDict>& sources) {
+    std::vector<std::string> paths;
+    for (const auto& source : sources) {
+        if (source.on && !source.path.empty()) paths.push_back(Utf8(source.path.native()));
+    }
+    return paths;
+}
+
+std::vector<hdTrans::dict::UserSource> RequestedSources(const std::vector<std::string>& paths, bool explicitPath) {
+    std::vector<hdTrans::dict::UserSource> sources;
+    for (const auto& path : paths) {
+        if (path.empty()) continue;
+        hdTrans::dict::UserSource source;
+        source.path = path;
+        source.explicitPath = explicitPath;
+        sources.push_back(std::move(source));
+    }
+    return sources;
+}
+
+std::size_t LogDiagnosticLines(App& app, const wchar_t* kind, std::string_view text) {
+    std::size_t count = 0;
+    while (!text.empty()) {
+        const std::size_t end = text.find('\n');
+        const auto line = text.substr(0, end);
+        if (!line.empty()) {
+            AddLog(app, kind, Wide(line));
+            OutputDebugStringW(Wide("hdTransGUI: " + std::string(line) + "\n").c_str());
+            ++count;
+        }
+        if (end == std::string_view::npos) break;
+        text.remove_prefix(end + 1);
+    }
+    return count;
+}
+
+void LogDictionaryResult(App& app, const hdTrans::Engine& engine, bool loaded, bool reload, std::size_t configWarnings) {
+    std::size_t warnings = configWarnings + LogDiagnosticLines(app, L"사전", engine.UserFileError());
+    for (const auto& line : engine.FilterErrors()) warnings += LogDiagnosticLines(app, L"사전", line);
+    const std::wstring message = loaded ? (reload ? L"사전을 다시 읽었습니다." : L"사전을 읽었습니다.") :
+        (reload ? L"사전을 다시 읽지 못했습니다. 이전 사전 유지." : L"사전을 읽지 못했습니다.");
+    const std::wstring status = !loaded ? (reload ? L"사전 다시 읽기 실패" : L"사전 읽기 실패") :
+        warnings ? (configWarnings ? L"경고 " : L"사전 경고 ") + std::to_wstring(warnings) + L"건" : L"사전 읽음";
+    AddLog(app, L"사전", message, status);
+}
+
+void LogActiveSourceInfo(App& app) {
+    if (!app.engine || !app.engine->loaded()) return;
+    const auto info = hdTrans::internal::LoadedSourceInfo(*app.engine);
+    for (const auto& file : info.files) {
+        LogDiagnosticLines(app, L"INFO", hdTrans::frontend::FormatLoadFileInfo(file, app.engineModuleDir));
+    }
+}
+
+void CommitSettings(App& app, const hdTrans::internal::Config& settings) {
+    if (app.settings.dicts != settings.dicts) app.settings.dicts = settings.dicts;
+    if (app.settings.userdict != settings.userdict) app.settings.userdict = settings.userdict;
+    if (app.settings.ehnd != settings.ehnd) app.settings.ehnd = settings.ehnd;
+    if (app.settings.useEhnd != settings.useEhnd) app.settings.useEhnd = settings.useEhnd;
+    if (app.settings.cache != settings.cache) app.settings.cache = settings.cache;
+    if (app.settings.strictDict != settings.strictDict) app.settings.strictDict = settings.strictDict;
+    if (app.settings.cg != settings.cg) app.settings.cg = settings.cg;
+    if (app.settings.misread != settings.misread) app.settings.misread = settings.misread;
+    if (app.settings.reference != settings.reference) app.settings.reference = settings.reference;
+    if (app.settings.speech != settings.speech) app.settings.speech = settings.speech;
+    if (app.settings.wrapped != settings.wrapped) app.settings.wrapped = settings.wrapped;
+}
+
+bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, const std::string& dir,
+                      const std::string& configPath, const hdTrans::internal::FileVersion& configVersion, bool configChanged) {
+    const bool initial = !app.engine || !app.engine->loaded();
+    const auto& settings = initial || configChanged ? config.settings : app.settings;
+    const bool newSources = initial || settings.userdict != app.settings.userdict;
+    const auto dirs = initial || settings.dicts != app.settings.dicts ?
+        settings.dicts.value_or(std::vector<std::string>{hdTrans::dict::ShippedFolder(dir)}) : app.engineDictDirs;
+    auto sources = app.engineSources;
+    if (newSources) {
+        sources.clear();
+        for (const auto& path : settings.userdict.value_or(hdTrans::dict::UserPaths(dir)))
+            sources.push_back({fs::path(Wide(path)), true});
+    }
+    const auto edits = TakeSourceEdits(app, sources);
+    const auto userPaths = ActiveUserPaths(sources);
+    // GUI edits change paths, not whether their source came from YAML.
+    const auto requested = RequestedSources(userPaths, settings.userdict.has_value());
+    const std::string ehndDir = initial || settings.useEhnd != app.settings.useEhnd || settings.ehnd != app.settings.ehnd ?
+        (settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "") : app.engineEhndDir;
+    auto userVersion = hdTrans::internal::UserVersionOf(requested, configPath);
+    // The frontend parse and core strict resolver may read different in-flight edits.
+    userVersion.config = configVersion;
+    const auto ehndVersion = hdTrans::internal::FolderVersionOf(ehndDir);
+    const auto report = [&](const hdTrans::Engine& engine, bool loaded) {
+        // Keep diagnostics newer than INFO in the bounded log.
+        LogActiveSourceInfo(app);
+        const auto configWarnings = LogDiagnosticLines(app, L"엔진", hdTrans::internal::ConfigErrors(config, configPath));
+        LogDictionaryResult(app, engine, loaded, !initial, configWarnings);
+    };
+    const bool cacheChanged = settings.cache != app.settings.cache;
+    if (cacheChanged && !app.cache.Apply(settings.cache)) {
         app.error = L"캐시 폴더 설정을 적용하지 못했습니다.";
+        if (!app.cache.Apply(app.settings.cache)) app.error += L"\n이전 캐시 설정을 복원하지 못했습니다.";
+        RestoreSourceEdits(app, edits);
+        app.reloadDicts = true;
+        LogActiveSourceInfo(app);
+        LogDiagnosticLines(app, L"엔진", hdTrans::internal::ConfigErrors(config, configPath));
+        AddLog(app, L"엔진", app.error, L"설정 적용 실패");
         return false;
     }
-    app.engine = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, hdTrans::UserReload::Auto);
-    const auto dirs = settings.dicts.value_or(std::vector<std::string>{hdTrans::dict::ShippedFolder(dir)});
-    const auto userPaths = settings.userdict.value_or(hdTrans::dict::UserPaths(dir));
-    app.engine->OpenEhnd(settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "");
-    if (!app.engine->OpenUserDicts(dirs, false, userPaths)) {
-        app.error = L"사전을 읽지 못했습니다. 데이터 폴더의 dicts와 user/hdtrans.config.yaml 설정을 확인해 주세요.";
+    std::unique_ptr<hdTrans::Engine> candidate;
+    hdTrans::Engine* attempt = app.engine.get();
+    if (initial || configChanged) {
+        hdTrans::EngineOptions options;
+        options.defaultStrictDict = false;
+        options.configPath = configPath;
+        candidate = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off, options);
+        if (!initial) {
+            std::optional<hdTrans::dict::UserSource> acceptedEhnd;
+            auto accepted = hdTrans::internal::AcceptedUserSources(*app.engine, acceptedEhnd);
+            hdTrans::internal::SeedUserSources(*candidate, std::move(accepted), std::move(acceptedEhnd));
+        }
+        hdTrans::dict::UserSource ehndSource;
+        ehndSource.path = ehndDir;
+        ehndSource.explicitPath = settings.useEhnd && settings.ehnd.has_value();
+        hdTrans::internal::OpenEhndSource(*candidate, ehndSource);
+        attempt = candidate.get();
+    }
+    bool loaded = candidate ? hdTrans::internal::OpenUserSources(*attempt, dirs, false, requested) :
+        (userPaths != app.engineUserPaths ? hdTrans::internal::OpenUserSources(*attempt, app.engineDictDirs, false, requested) : attempt->Reload());
+    if (loaded && candidate) {
+        const auto errors = hdTrans::internal::UserFileErrors(*attempt);
+        loaded = std::none_of(errors.begin(), errors.end(), [](const auto& error) { return hdTrans::dict::FailsLoad(error.kind); }) &&
+                 !hdTrans::internal::FilterFileFailed(*attempt);
+    }
+    if (!loaded) {
+        report(*attempt, false);
+        app.error = initial ? L"사전을 읽지 못했습니다." : L"사전을 다시 읽지 못했습니다.";
+        const std::string userError = attempt->UserFileError();
+        if (!userError.empty()) app.error += L"\n" + Wide(userError);
+        for (const auto& line : attempt->FilterErrors()) app.error += L"\n" + Wide(line);
+        if (cacheChanged && !app.cache.Apply(app.settings.cache)) {
+            app.error += L"\n이전 캐시 설정을 복원하지 못했습니다.";
+            AddLog(app, L"엔진", app.error, L"설정 복원 실패");
+        }
+        RestoreSourceEdits(app, edits);
+        app.reloadDicts = true;
         return false;
     }
-    const std::string userError = app.engine->UserFileError();
-    if (!userError.empty()) OutputDebugStringW(Wide("hdTransGUI: " + userError + "\n").c_str());
-    for (const auto& line : app.engine->FilterErrors()) OutputDebugStringW(Wide("hdTransGUI: " + line + "\n").c_str());
+    if (candidate) app.engine = std::move(candidate);
+    CommitSettings(app, settings);
+    app.engineDictDirs = dirs;
+    app.engineUserPaths = userPaths;
+    {
+        std::lock_guard lock(app.mutex);
+        if (newSources || app.relistSources) {
+            app.relistSources = sources;
+            PostMessageW(app.dicts, kRelist, 0, 0);
+        }
+    }
+    app.engineSources = std::move(sources);
+    app.engineEhndDir = ehndDir;
+    app.engineConfigPath = configPath;
+    app.engineModuleDir = dir;
+    app.loadedUserVersion = userVersion;
+    app.loadedEhndVersion = ehndVersion;
+    app.error.clear();
+    report(*app.engine, true);
     return true;
 }
 
-// The loaded engine, with the user dictionaries read again after edits on the dictionary page.
+bool LoadEngine(App& app, std::string dir = {}) {
+    if (app.engine && app.engine->loaded()) return true;
+    app.reloadDicts.exchange(false);
+    if (dir.empty()) dir = hdTrans::frontend::ModuleDirectory();
+    if (dir.empty()) {
+        app.error = L"실행 파일의 위치를 찾지 못했습니다.";
+        AddLog(app, L"엔진", app.error, L"엔진 초기화 실패");
+        app.reloadDicts = true;
+        return false;
+    }
+    const std::string configPath = hdTrans::dict::ConfigFile(dir);
+    const auto version = hdTrans::internal::VersionOf(configPath);
+    return ReadDictionaries(app, hdTrans::internal::LoadConfig(configPath), dir, configPath, version, true);
+}
+
+// Reloads changed sources before translation; unchanged healthy sources do not reload.
 bool ReadyEngine(App& app) {
-    const bool reload = app.reloadDicts.exchange(false);
     if (!app.engine || !app.engine->loaded()) return LoadEngine(app);
-    if (reload) app.engine->Reload();
-    return true;
+    const bool reload = app.reloadDicts.exchange(false);
+    const auto requested = RequestedSources(app.engineUserPaths, app.settings.userdict.has_value());
+    const auto userVersion = hdTrans::internal::UserVersionOf(requested, app.engineConfigPath);
+    const auto ehndVersion = hdTrans::internal::FolderVersionOf(app.engineEhndDir);
+    bool pending;
+    {
+        std::lock_guard lock(app.mutex);
+        pending = !app.sourceEdits.empty();
+    }
+    if (!reload && !pending && userVersion == app.loadedUserVersion && ehndVersion == app.loadedEhndVersion) return true;
+    return ReadDictionaries(app, hdTrans::internal::LoadConfig(app.engineConfigPath), app.engineModuleDir,
+                            app.engineConfigPath, userVersion.config, userVersion.config != app.loadedUserVersion.config);
 }
 
 gui::TranslationOptions ConfiguredOptions(const App& app, gui::TranslationOptions options) {
@@ -464,12 +719,10 @@ void FinishShort(App& app) {
         DestroyWindow(app.main);
         return;
     }
-    if (!app.error.empty()) ReportError(app, app.error.c_str());
-    else if (!app.wasCancelled) SetDlgItemTextW(app.text, IDC_RESULT, EditText(app.result).c_str());
+    if (app.error.empty() && !app.wasCancelled) SetDlgItemTextW(app.text, IDC_RESULT, EditText(app.result).c_str());
 }
 
-void CopyResult(App& app) {
-    const std::wstring text = ControlText(app.text, IDC_RESULT);
+void CopyText(App& app, const std::wstring& text) {
     const std::size_t bytes = (text.size() + 1) * sizeof(wchar_t);
     HGLOBAL block = GlobalAlloc(GMEM_MOVEABLE, bytes);
     if (!block) return;
@@ -488,6 +741,19 @@ void CopyResult(App& app) {
         GlobalFree(block);
         ReportError(app, L"클립보드에 복사하지 못했습니다.");
     }
+}
+
+void CopyResult(App& app) {
+    CopyText(app, ControlText(app.text, IDC_RESULT));
+}
+
+void CopyLogs(App& app) {
+    std::wstring text;
+    {
+        std::lock_guard lock(app.mutex);
+        for (const auto& entry : app.logEntries) text += entry.time + L"\t" + entry.kind + L"\t" + entry.message + L"\r\n";
+    }
+    CopyText(app, text);
 }
 
 constexpr const wchar_t* kTextFilter = L"텍스트 파일 (*.txt)\0*.txt\0모든 파일 (*.*)\0*.*\0\0";
@@ -555,6 +821,42 @@ void InsertColumns(HWND list, std::initializer_list<const wchar_t*> names, DWORD
 
 void SetCell(HWND list, int item, int column, const std::wstring& text) {
     ListView_SetItemText(list, item, column, const_cast<wchar_t*>(text.c_str()));
+}
+
+void ShowLogs(App& app) {
+    std::deque<LogEntry> entries;
+    std::wstring status;
+    {
+        std::lock_guard lock(app.mutex);
+        entries = app.logEntries;
+        status = app.logStatus;
+        app.logPosted = false;
+    }
+    const HWND list = GetDlgItem(app.logs, IDC_LOG_ENTRIES);
+    SendMessageW(list, WM_SETREDRAW, FALSE, 0);
+    ListView_DeleteAllItems(list);
+    int index = 0;
+    for (const auto& entry : entries) {
+        LVITEMW row{};
+        row.mask = LVIF_TEXT;
+        row.iItem = index;
+        row.pszText = const_cast<wchar_t*>(entry.time.c_str());
+        ListView_InsertItem(list, &row);
+        SetCell(list, index, 1, entry.kind);
+        SetCell(list, index++, 2, entry.message);
+    }
+    SendMessageW(list, WM_SETREDRAW, TRUE, 0);
+    InvalidateRect(list, nullptr, TRUE);
+    SetDlgItemTextW(app.main, IDC_LOG_STATUS, status.c_str());
+}
+
+void ClearLogs(App& app) {
+    {
+        std::lock_guard lock(app.mutex);
+        app.logEntries.clear();
+        app.logStatus.clear();
+    }
+    ShowLogs(app);
 }
 
 int Selected(HWND list) {
@@ -631,21 +933,21 @@ void ShowFiles(App& app, int item) {
 // Appends the readable files that are not in the list yet and selects the first of them.
 bool AddInputFiles(App& app, const std::vector<fs::path>& paths) {
     std::vector<fs::path> readable;
-    std::wstring unreadable;
+    bool unreadable = false;
     for (const fs::path& path : paths) {
         std::string text;
         gui::TextEncoding encoding{};
         if (gui::ReadTextFile(path, text, encoding)) readable.push_back(path);
-        else unreadable += L"\n" + path.filename().native();
+        else {
+            unreadable = true;
+            AddLog(app, L"문서", path.native() + L": 텍스트 파일을 읽지 못했습니다.", L"문서 읽기 오류");
+        }
     }
     const std::size_t before = app.inputFiles.size();
     gui::AppendFiles(app.inputFiles, readable);
     app.fileStates.resize(app.inputFiles.size());
     ShowFiles(app, app.inputFiles.size() > before ? static_cast<int>(before) : -1);
-    if (!unreadable.empty()) {
-        ReportError(app, (L"읽지 못한 파일은 넣지 않았습니다. Shift-JIS, UTF-8 또는 UTF-16LE 텍스트 파일을 골라 주세요.\n" + unreadable).c_str());
-    }
-    return unreadable.empty();
+    return !unreadable;
 }
 
 void RemoveFiles(App& app) {
@@ -686,10 +988,16 @@ void StartFileWorker(App& app) {
             std::string_view lineBreak;
             if (!gui::ReadTextFile(job.input, text, encoding, &lineBreak)) {
                 app.failed.push_back(job.input.filename().native() + L" (읽기)");
+                AddLog(app, L"문서", job.input.native() + L": 파일을 읽지 못했습니다.", L"문서 읽기 오류");
                 PostMessageW(app.docs, kPhase, kFailed, position);
                 continue;
             }
-            if (!ReadyEngine(app)) break;
+            if (!ReadyEngine(app)) {
+                app.failed.push_back(job.input.filename().native() + L" (사전)");
+                AddLog(app, L"문서", job.input.native() + L": " + app.error);
+                PostMessageW(app.docs, kPhase, kFailed, position);
+                break;
+            }
             if (app.cancel) break;
             PostMessageW(app.docs, kPhase, kTranslating, position);
             app.result = gui::TranslateText(*app.engine, text, ConfiguredOptions(app, options), app.cancel);
@@ -700,6 +1008,7 @@ void StartFileWorker(App& app) {
                 PostMessageW(app.docs, kPhase, kSaved, position);
             } else if (!app.cancel) {
                 app.failed.push_back(job.output.filename().native() + L" (저장)");
+                AddLog(app, L"문서", job.output.native() + L": 파일을 저장하지 못했습니다.", L"문서 저장 오류");
                 PostMessageW(app.docs, kPhase, kFailed, position);
             }
         }
@@ -821,14 +1130,10 @@ void FinishFile(App& app) {
     if (app.skippedCount) status += L" 이미 있는 " + std::to_wstring(app.skippedCount) + L"개는 건너뛰었습니다.";
     if (!app.error.empty()) {
         SetDlgItemTextW(app.docs, IDC_STATUS, L"번역하지 못했습니다.");
-        ReportError(app, app.error.c_str());
     } else if (app.wasCancelled) {
         SetDlgItemTextW(app.docs, IDC_STATUS, (L"중단했습니다. " + status + L" 나머지는 저장하지 않았습니다.").c_str());
     } else if (!app.failed.empty()) {
-        SetDlgItemTextW(app.docs, IDC_STATUS, status.c_str());
-        std::wstring message = L"처리하지 못한 파일이 있습니다.\n";
-        for (const std::wstring& name : app.failed) message += L"\n" + name;
-        ReportError(app, message.c_str());
+        SetDlgItemTextW(app.docs, IDC_STATUS, (L"처리하지 못한 파일 " + std::to_wstring(app.failed.size()) + L"개. " + status).c_str());
     } else {
         SetDlgItemTextW(app.docs, IDC_STATUS, (L"번역이 끝났습니다. " + status).c_str());
     }
@@ -923,6 +1228,23 @@ void ShowDicts(App& app, const fs::path& path) {
     OpenDict(app, found);
 }
 
+void RelistDicts(App& app) {
+    std::optional<std::vector<gui::UserDict>> sources;
+    {
+        std::lock_guard lock(app.mutex);
+        if (app.relistSources) {
+            sources = std::move(app.relistSources);
+            app.relistSources.reset();
+            ApplySourceEdits(*sources, app.sourceEdits);
+        }
+    }
+    if (sources) {
+        app.userSources.clear();
+        for (const auto& source : *sources) app.userSources.push_back(Utf8(source.path.native()));
+    }
+    ShowDicts(app, {});
+}
+
 bool SaveDict(App& app) {
     const gui::UserDict* dict = CurrentDict(app);
     if (!dict || !gui::WriteDictText(DictFile(*dict), app.dictText)) {
@@ -963,7 +1285,7 @@ void ToggleDict(App& app, int index, bool on) {
     gui::UserDict& dict = app.userDicts[static_cast<std::size_t>(index)];
     if (dict.on == on) return;
     if (gui::SetUserDictOn(dict, on)) {
-        app.reloadDicts = true;
+        QueueSourceEdit(app, dict.path, dict.path, on);
         return;
     }
     app.filling = true;
@@ -1016,8 +1338,12 @@ bool RenameDict(App& app, int index, const wchar_t* name) {
         ReportError(app, L"사전 파일의 이름을 바꾸지 못했습니다.");
         return false;
     }
+    const fs::path previous = dict.path;
+    for (auto& source : app.userSources) {
+        if (fs::path(Wide(source)) == previous) source = Utf8(path.native());
+    }
     dict.path = path;
-    app.reloadDicts = true;
+    QueueSourceEdit(app, previous, path, dict.on);
     return true;
 }
 
@@ -1191,7 +1517,7 @@ INT_PTR CALLBACK DictsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPar
         return FALSE;
     }
     case WM_SIZE: LayoutDicts(window); return TRUE;
-    case kRelist: ShowDicts(*app, {}); return TRUE;
+    case kRelist: RelistDicts(*app); return TRUE;
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
         case IDC_DICT_NEW: NewDict(*app); return TRUE;
@@ -1249,6 +1575,25 @@ INT_PTR CALLBACK DictsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPar
     return FALSE;
 }
 
+INT_PTR CALLBACK LogsProc(HWND window, UINT message, WPARAM wParam, LPARAM lParam) {
+    App* app = DialogApp(window, message, lParam);
+    if (!app) return FALSE;
+    switch (message) {
+    case WM_INITDIALOG:
+        app->logs = window;
+        InsertColumns(GetDlgItem(window, IDC_LOG_ENTRIES), {L"시간", L"종류", L"메시지"}, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+        return FALSE;
+    case WM_SIZE: LayoutLogs(window); return TRUE;
+    case WM_COMMAND:
+        switch (LOWORD(wParam)) {
+        case IDC_LOG_COPY: CopyLogs(*app); return TRUE;
+        case IDC_LOG_CLEAR: ClearLogs(*app); return TRUE;
+        }
+        break;
+    }
+    return FALSE;
+}
+
 INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lParam) {
     App* app = DialogApp(window, message, lParam);
     if (!app) return FALSE;
@@ -1256,7 +1601,7 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_INITDIALOG: {
         app->main = window;
         app->tabs = GetDlgItem(window, IDC_TABS);
-        for (int page = 0; page < 3; ++page) {
+        for (int page = 0; page <= kLogsPage; ++page) {
             TCITEMW item{};
             item.mask = TCIF_TEXT;
             item.pszText = const_cast<wchar_t*>(kPageNames[page]);
@@ -1265,7 +1610,8 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         const LPARAM data = reinterpret_cast<LPARAM>(app);
         if (!CreateDialogParamW(app->instance, MAKEINTRESOURCEW(IDD_PAGE_TEXT), window, TextProc, data) ||
             !CreateDialogParamW(app->instance, MAKEINTRESOURCEW(IDD_PAGE_DOCS), window, DocsProc, data) ||
-            !CreateDialogParamW(app->instance, MAKEINTRESOURCEW(IDD_PAGE_DICTS), window, DictsProc, data)) {
+            !CreateDialogParamW(app->instance, MAKEINTRESOURCEW(IDD_PAGE_DICTS), window, DictsProc, data) ||
+            !CreateDialogParamW(app->instance, MAKEINTRESOURCEW(IDD_PAGE_LOGS), window, LogsProc, data)) {
             DestroyWindow(window);
             return FALSE;
         }
@@ -1306,12 +1652,17 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         }
         break;
     case WM_COMMAND:
+        if (LOWORD(wParam) == IDC_LOG_STATUS && HIWORD(wParam) == STN_CLICKED) {
+            ShowPage(*app, kLogsPage);
+            return TRUE;
+        }
         if (LOWORD(wParam) == IDCANCEL) {
             SendMessageW(window, WM_CLOSE, 0, 0);
             return TRUE;
         }
         break;
     case WM_DROPFILES: TakeDrop(*app, reinterpret_cast<HDROP>(wParam)); return TRUE;
+    case kLog: ShowLogs(*app); return TRUE;
     case kDone: FinishShort(*app); return TRUE;
     case WM_CLOSE:
         if (app->busy) {
@@ -1438,6 +1789,17 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     return ok;
 }
 
+bool LogContains(App& app, std::wstring_view text) {
+    SendMessageW(app.main, kLog, 0, 0);
+    const HWND list = GetDlgItem(app.logs, IDC_LOG_ENTRIES);
+    for (int index = 0; index < ListView_GetItemCount(list); ++index) {
+        wchar_t message[1024]{};
+        ListView_GetItemText(list, index, 2, message, 1024);
+        if (std::wstring_view(message).find(text) != std::wstring_view::npos) return true;
+    }
+    return false;
+}
+
 bool SelfTestConfig(App& app, const fs::path& folder) {
     const fs::path program = folder / L"설정 배치";
     const fs::path data = program / L"HDTRANS";
@@ -1455,13 +1817,17 @@ bool SelfTestConfig(App& app, const fs::path& folder) {
                WriteFixture(user / L"custom.tsv", "犬\t앞파일\n") &&
                WriteFixture(user / L"custom.txt", "犬\t사용자설정\n") &&
                WriteFixture(config, "dicts: ../別辞書\nuserdict: [custom.tsv, custom.txt]\ncache: off\n"
-                                    "cg: false\nmisread: true\nreference: true\n"), "write config fixtures")) return false;
+                                    "cg: false\nmisread: true\nreference: true\n"
+                                    "unknown_first: true\nunknown_second: true\n"), "write config fixtures")) return false;
     const wchar_t* initialCache = _wgetenv(L"HDTRANS_CACHE_DIR");
     const std::optional<std::wstring> previousCache = initialCache ? std::optional<std::wstring>(initialCache) : std::nullopt;
     app.engine.reset();
     const std::string programDir = Utf8(program.native());
     if (!Check(LoadEngine(app, programDir), "load nested case-insensitive config")) return false;
     bool ok = Check(!app.settings.cg && app.settings.misread && app.settings.reference, "GUI config session settings");
+    ok = Check(LogContains(app, L"HDTRANS.CONFIG.YAML:7:") && LogContains(app, L"HDTRANS.CONFIG.YAML:8:") &&
+               ControlText(app.main, IDC_LOG_STATUS).find(L"경고") != std::wstring::npos,
+               "initial config diagnostics have separate log rows and a visible warning status") && ok;
     const wchar_t* configuredCache = _wgetenv(L"HDTRANS_CACHE_DIR");
     ok = Check(configuredCache && std::wstring(configuredCache) == L"off", "GUI config cache setting") && ok;
     CheckRadioButton(app.text, IDC_OUTPUT_TRANSLATION, IDC_OUTPUT_SPACED, IDC_OUTPUT_TRANSLATION);
@@ -1475,8 +1841,404 @@ bool SelfTestConfig(App& app, const fs::path& folder) {
     ok = Check(previousCache ? restoredCache && *previousCache == restoredCache : !restoredCache,
                "GUI restores cache environment") && ok;
     ok = Check(app.settings.cg && !app.settings.misread && !app.settings.reference, "GUI defaults without config") && ok;
+    ok = Check(LogContains(app, L"Ehnd 활성화가 꺼져 있어 필터 및 사전 불러오기를 건너뜁니다") &&
+               ControlText(app.main, IDC_LOG_STATUS).find(L"경고") == std::wstring::npos,
+               "disabled Ehnd is visible as INFO without a warning status") && ok;
     ok = Check(TranslateShort(app, L"猫\r\n犬") == L"기본사전\r\n기본사용자", "GUI default dictionary and user folder") && ok;
     ok = SelfTestDicts(app, program, user) && ok;
+    app.engine.reset();
+    return ok;
+}
+
+bool SelfTestReload(App& app, const fs::path& folder) {
+    const fs::path program = folder / L"reload";
+    const fs::path data = program / L"hdTrans";
+    const fs::path user = data / L"user";
+    const fs::path shipped = data / L"dicts/base.tsv";
+    const fs::path first = user / L"userdict-a.txt";
+    const fs::path second = user / L"userdict-b.txt";
+    const fs::path ehnd = data / L"Ehnd/UserDict_10.txt";
+    const fs::path config = user / L"hdtrans.config.yaml";
+    const std::string settings = "cache: off\nehnd: ../Ehnd\nuserdict: [userdict-a.txt, userdict-b.txt]\n";
+    std::error_code error;
+    for (const auto& directory : {shipped.parent_path(), user, ehnd.parent_path()}) {
+        fs::create_directories(directory, error);
+        if (!Check(!error, "create reload fixture folder")) return false;
+    }
+    const std::string base = "#! layer=base\n# Neutral lookup fixtures\n"
+        "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+        "学生\tBASE_STUDENT\tN110\t\t\tGN\t\tneutral:1\n"
+        "猫\tBASE_CAT\tN110\t\t\tGN\t\tneutral:2\n"
+        "犬\tBASE_DOG\tN110\t\t\tGN\t\tneutral:3\n"
+        "日本語\tBASE_LANGUAGE\tN110\t\t\tGN\t\tneutral:4\n";
+    if (!Check(WriteFixture(shipped, base) &&
+               WriteFixture(first, "学生\tUSER_A_OLD\tn\n") &&
+               WriteFixture(second, "猫\tUSER_B_OLD\tn\n") &&
+               WriteFixture(ehnd, "学生\tEHND_STUDENT\t0\n犬\tEHND_DOG\t0\n") &&
+               WriteFixture(config, settings),
+               "write reload fixtures")) return false;
+    if (!Check(LoadEngine(app, Utf8(program.native())), "load reload fixtures")) return false;
+    gui::TranslationOptions options;
+    options.wholeDocument = true;
+    const auto translate = [&] {
+        return gui::TranslateText(*app.engine, "学生 猫 犬", ConfiguredOptions(app, options), app.cancel);
+    };
+    bool ok = Check(translate() == "USER_A_OLD USER_B_OLD EHND_DOG", "reload initial literal");
+    const auto dictionaries = app.engine->Dictionaries();
+    const auto filters = app.engine->Filters();
+    const auto loadedUserVersion = app.loadedUserVersion;
+    const auto loadedEhndVersion = app.loadedEhndVersion;
+    if (!Check(WriteFixture(shipped, "key\tko\n学生\tBROKEN\n"), "prepare unchanged-source control")) return false;
+    ok = Check(ReadyEngine(app) && ReadyEngine(app) && app.error.empty() &&
+               app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters,
+               "unchanged healthy sources do not reload shipped dictionaries") && ok;
+    if (!Check(WriteFixture(first, "学生\tUSER_A_NEW\tn\n") &&
+               WriteFixture(shipped, "key\tko\n学生\tBROKEN\n") &&
+               WriteFixture(ehnd, "学生\tEHND_STUDENT_NEW\t0\n犬\tEHND_DOG_NEW\t0\n"),
+               "write fatal reload mutation")) return false;
+    app.reloadDicts = true;
+    ok = Check(!ReadyEngine(app), "readiness rejects a failed reload") && ok;
+    ok = Check(app.reloadDicts.load() && !app.error.empty() && !app.engine->UserFileError().empty() &&
+               LogContains(app, L"이전 사전 유지"), "failed reload keeps pending work and logs its error and old stack") && ok;
+    ok = Check(app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters &&
+               app.loadedUserVersion == loadedUserVersion && app.loadedEhndVersion == loadedEhndVersion &&
+               translate() == "USER_A_OLD USER_B_OLD EHND_DOG", "failed reload keeps the complete old stack and stamps") && ok;
+    ok = Check(!ReadyEngine(app), "the next readiness request retries a failed reload") && ok;
+    if (!Check(WriteFixture(shipped, base), "repair fatal reload fixture")) return false;
+    ok = Check(ReadyEngine(app), "readiness recovers after repair") && ok;
+    ok = Check(app.error.empty() && !app.reloadDicts.load() && translate() == "USER_A_NEW USER_B_OLD EHND_DOG_NEW",
+               "recovery publishes the complete new stack") && ok;
+    ok = Check(app.loadedUserVersion == hdTrans::internal::UserVersionOf(RequestedSources(app.engineUserPaths, app.settings.userdict.has_value()), app.engineConfigPath) &&
+               app.loadedEhndVersion == hdTrans::internal::FolderVersionOf(app.engineEhndDir),
+               "successful reload commits source stamps") && ok;
+    if (!Check(WriteFixture(first, "学生\tUSER_A_EXTERNAL\tn\n"), "write external user edit")) return false;
+    ok = Check(!app.reloadDicts.load() && translate() == "USER_A_NEW USER_B_OLD EHND_DOG_NEW" && ReadyEngine(app) &&
+               translate() == "USER_A_EXTERNAL USER_B_OLD EHND_DOG_NEW", "readiness reads external edits to opened user paths") && ok;
+    if (!Check(WriteFixture(ehnd, "学生\tEHND_STUDENT_NEW\t0\n犬\tEHND_DOG_EXTERNAL\t0\n"), "write external Ehnd edit")) return false;
+    ok = Check(!app.reloadDicts.load() && ReadyEngine(app) && translate() == "USER_A_EXTERNAL USER_B_OLD EHND_DOG_EXTERNAL",
+               "readiness reads external edits to the enabled Ehnd folder") && ok;
+    const auto beforeUserFailure = app.engine->Dictionaries();
+    const auto beforeUserFilters = app.engine->Filters();
+    const auto beforeUserVersion = app.loadedUserVersion;
+    if (!Check(WriteFixture(first, "学生\tUSER_A_RECOVERED\tn\n"), "change a valid file beside an unreadable file")) return false;
+    const HANDLE blocked = CreateFileW(second.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (!Check(blocked != INVALID_HANDLE_VALUE, "hold an exclusive user file handle")) return false;
+    const bool rejectedUser = !ReadyEngine(app);
+    ok = Check(rejectedUser && app.reloadDicts.load() && !app.error.empty() &&
+               app.engine->Dictionaries() == beforeUserFailure && app.engine->Filters() == beforeUserFilters &&
+               app.loadedUserVersion == beforeUserVersion && translate() == "USER_A_EXTERNAL USER_B_OLD EHND_DOG_EXTERNAL",
+               "an unreadable user file rejects partial publication") && ok;
+    CloseHandle(blocked);
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "USER_A_RECOVERED USER_B_OLD EHND_DOG_EXTERNAL",
+               "user file readability recovery retries the pending load") && ok;
+    const auto beforeEhndFailure = app.engine->Dictionaries();
+    const auto beforeEhndFilters = app.engine->Filters();
+    const auto beforeEhndUserVersion = app.loadedUserVersion;
+    const auto beforeEhndVersion = app.loadedEhndVersion;
+    const fs::path away = data / L"Ehnd-away";
+    if (!Check(WriteFixture(first, "学生\tUSER_A_EXTERNAL\tn\n"), "change a valid file before Ehnd failure")) return false;
+    fs::rename(ehnd.parent_path(), away, error);
+    if (!Check(!error, "move the enabled Ehnd folder away")) return false;
+    ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
+               app.engine->Dictionaries() == beforeEhndFailure && app.engine->Filters() == beforeEhndFilters &&
+               app.loadedUserVersion == beforeEhndUserVersion && app.loadedEhndVersion == beforeEhndVersion &&
+               translate() == "USER_A_RECOVERED USER_B_OLD EHND_DOG_EXTERNAL", "Ehnd I/O failure keeps the complete old stack") && ok;
+    fs::rename(away, ehnd.parent_path(), error);
+    if (!Check(!error, "restore the enabled Ehnd folder")) return false;
+    ok = Check(hdTrans::internal::FolderVersionOf(app.engineEhndDir) == beforeEhndVersion && ReadyEngine(app) && app.error.empty() &&
+               translate() == "USER_A_EXTERNAL USER_B_OLD EHND_DOG_EXTERNAL", "restoring identical Ehnd stamps retries the pending load") && ok;
+    if (!Check(WriteFixture(second, "#! layer=user\nkey\tko\tpos\tid\n"
+                           "猫\tUSER_B_VALID\tN110\t1\n不明\tDISCARD\tunknown-tag\t2\n"),
+               "write typed user row skip control")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "USER_A_EXTERNAL USER_B_VALID EHND_DOG_EXTERNAL",
+               "a skipped malformed row does not fail readiness") && ok;
+    const HWND logList = GetDlgItem(app.logs, IDC_LOG_ENTRIES);
+    ok = Check(LogContains(app, L"userdict-b.txt:4:") && ControlText(app.main, IDC_LOG_STATUS).starts_with(L"사전 경고 "),
+               "a skipped row warning is visible in the log tab and status") && ok;
+    SendMessageW(app.main, WM_COMMAND, MAKEWPARAM(IDC_LOG_STATUS, STN_CLICKED),
+                 reinterpret_cast<LPARAM>(GetDlgItem(app.main, IDC_LOG_STATUS)));
+    ok = Check(CurrentPage(app) == kLogsPage && WindowText(app.main) == Title(kLogsPage), "warning status opens the log tab") && ok;
+    ShowPage(app, kTextPage);
+    const auto warningDictionaries = app.engine->Dictionaries();
+    const auto warningFilters = app.engine->Filters();
+    const auto* engine = app.engine.get();
+    if (!Check(WriteFixture(config, settings + "strict_dict: true\ncg: false\n"), "enable strict parsing in config only")) return false;
+    ok = Check(!app.reloadDicts.load() && !ReadyEngine(app) && !app.error.empty() && app.reloadDicts.load() &&
+               app.engine->Dictionaries() == warningDictionaries && app.engine->Filters() == warningFilters &&
+               translate() == "USER_A_EXTERNAL USER_B_VALID EHND_DOG_EXTERNAL",
+               "config-only strict change rejects bad rows and keeps the old stack") && ok;
+    if (!Check(WriteFixture(config, settings + "strict_dict: false\ncg: false\n"), "disable strict parsing in config only")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && !app.reloadDicts.load() && app.engine.get() != engine && !app.settings.cg &&
+               translate() == "USER_A_EXTERNAL USER_B_VALID EHND_DOG_EXTERNAL",
+               "config-only recovery publishes a new engine and the changed session setting together") && ok;
+    if (!Check(WriteFixture(config, settings + "strict_dict: not-a-bool\n"), "write invalid config value")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && LogContains(app, L"hdtrans.config.yaml:4:"),
+               "config entry diagnostics are visible without changing the reader's fallback policy") && ok;
+    if (!Check(WriteFixture(ehnd.parent_path() / L"PreFilter_20.txt", "(\tBAD_PRE\t10\t1\n"),
+               "write regex warning control")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && !app.engine->FilterErrors().empty() &&
+               translate() == "USER_A_EXTERNAL USER_B_VALID EHND_DOG_EXTERNAL", "a regex warning does not fail readiness") && ok;
+    const fs::path nextDicts = data / L"replacement-dicts";
+    const fs::path nextEhnd = data / L"replacement-ehnd";
+    const fs::path nextUser = user / L"custom-live.txt";
+    for (const auto& directory : {nextDicts, nextEhnd}) {
+        fs::create_directories(directory, error);
+        if (!Check(!error, "create config replacement folders")) return false;
+    }
+    if (!Check(WriteFixture(nextDicts / L"base.tsv", "key\tko\n学生\tBROKEN\n") &&
+               WriteFixture(nextUser, "学生\tUSER_LIVE\tn\n") &&
+               WriteFixture(nextEhnd / L"UserDict_10.txt", "犬\tLIVE_DOG\t0\n"), "write config replacement files")) return false;
+    const auto priorDicts = app.engineDictDirs;
+    const auto priorUsers = app.engineUserPaths;
+    const auto priorEhnd = app.engineEhndDir;
+    const auto priorVersion = app.loadedUserVersion;
+    const auto priorStack = app.engine->Dictionaries();
+    const auto priorFilters = app.engine->Filters();
+    const auto priorSettings = app.settings;
+    const auto uiOptions = Options(app.text, false);
+    const std::string nextConfig = "dicts: ../replacement-dicts\nuserdict: [custom-live.txt]\nehnd: ../replacement-ehnd\n"
+        "strict_dict: false\ncg: false\nmisread: true\nreference: true\nspeech: soft\nwrapped: true\n";
+    if (!Check(WriteFixture(config, nextConfig), "change dictionary, filter and session settings together")) return false;
+    ok = Check(!ReadyEngine(app) && app.engine->Dictionaries() == priorStack && app.engine->Filters() == priorFilters &&
+               app.engineDictDirs == priorDicts && app.engineUserPaths == priorUsers && app.engineEhndDir == priorEhnd &&
+               app.loadedUserVersion == priorVersion && app.settings.cg == priorSettings.cg &&
+               app.settings.reference == priorSettings.reference && app.settings.cache == priorSettings.cache &&
+               _wgetenv(L"HDTRANS_CACHE_DIR") && std::wstring(_wgetenv(L"HDTRANS_CACHE_DIR")) == L"off",
+               "failed config candidate keeps settings and whole source context and restores the cache") && ok;
+    if (!Check(WriteFixture(nextDicts / L"base.tsv", base), "repair config replacement dictionary")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && !app.settings.cg && app.settings.misread && app.settings.reference &&
+               app.settings.speech == hdTrans::Speech::Soft && app.settings.wrapped && !app.settings.cache &&
+               app.engineDictDirs == std::vector<std::string>{Utf8(nextDicts.native())} &&
+               app.engineUserPaths == std::vector<std::string>{Utf8(nextUser.native())} && app.engineEhndDir == Utf8(nextEhnd.native()) &&
+               translate() == "USER_LIVE BASE_CAT LIVE_DOG", "successful config candidate commits all requested settings and sources") && ok;
+    SendMessageW(app.dicts, kRelist, 0, 0);
+    const auto afterOptions = Options(app.text, false);
+    ok = Check(afterOptions.output == uiOptions.output && afterOptions.wholeDocument == uiOptions.wholeDocument &&
+               afterOptions.skipBlankLines == uiOptions.skipBlankLines && app.userSources == app.engineUserPaths,
+               "config reload refreshes committed source rows without resetting translation controls") && ok;
+    const auto publishedVersion = app.loadedUserVersion;
+    const auto publishedSettings = app.settings;
+    app.engine.reset();
+    ClearLogs(app);
+    const HANDLE blockedInitial = CreateFileW(nextUser.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (!Check(blockedInitial != INVALID_HANDLE_VALUE, "deny a user file during the first candidate Open")) return false;
+    const bool rejectedInitialUser = !LoadEngine(app, Utf8(program.native()));
+    CloseHandle(blockedInitial);
+    ok = Check(rejectedInitialUser && !app.engine && app.reloadDicts.load() && !app.error.empty() &&
+               app.loadedUserVersion == publishedVersion && app.settings.cache == publishedSettings.cache &&
+               std::none_of(app.logEntries.begin(), app.logEntries.end(), [](const auto& entry) { return entry.kind == L"INFO"; }) &&
+               LogContains(app, L"custom-live.txt"), "initial typed fatal candidate cannot publish a subset or its INFO") && ok;
+    if (!Check(LoadEngine(app, Utf8(program.native())), "recover the initial user-file load")) return false;
+    const auto beforeStrictFilter = app.engine->Dictionaries();
+    const auto beforeStrictFilters = app.engine->Filters();
+    const auto* beforeStrictEngine = app.engine.get();
+    std::string strictConfig = nextConfig;
+    strictConfig.replace(strictConfig.find("strict_dict: false"), sizeof("strict_dict: false") - 1, "strict_dict: true");
+    const fs::path rejectedFilter = nextEhnd / L"PreFilter_99.txt";
+    if (!Check(WriteFixture(rejectedFilter, "(\tBAD_PRE\t10\t1\n") && WriteFixture(config, strictConfig),
+               "write a strict filter-file rejection")) return false;
+    ok = Check(!ReadyEngine(app) && app.engine.get() == beforeStrictEngine && app.engine->Dictionaries() == beforeStrictFilter &&
+               app.engine->Filters() == beforeStrictFilters && app.settings.strictDict == publishedSettings.strictDict &&
+               LogContains(app, L"PreFilter_99.txt"), "strict filter candidate keeps the old engine and settings") && ok;
+    app.engine.reset();
+    ok = Check(!LoadEngine(app, Utf8(program.native())) && !app.engine && app.reloadDicts.load() &&
+               app.settings.strictDict == publishedSettings.strictDict,
+               "initial Open cannot publish an optional-compatible strict filter-file failure") && ok;
+    if (!Check(WriteFixture(rejectedFilter, "ZZSTRICTCONTROL\tSAFE\t10\t0\n"), "repair the rejected strict filter file")) return false;
+    ok = Check(LoadEngine(app, Utf8(program.native())) && !hdTrans::internal::FilterFileFailed(*app.engine) && app.error.empty(),
+               "a healthy filter candidate succeeds after strict rejection") && ok;
+    NotifyClick(app.logs, IDC_LOG_CLEAR);
+    ok = Check(ListView_GetItemCount(logList) == 0 && ControlText(app.main, IDC_LOG_STATUS).empty(), "clear log entries and status") && ok;
+    for (std::size_t index = 0; index <= kLogLimit; ++index) AddLog(app, L"엔진", std::to_wstring(index));
+    SendMessageW(app.main, kLog, 0, 0);
+    ok = Check(app.logEntries.size() == kLogLimit && app.logEntries.front().message == L"300" &&
+               app.logEntries.back().message == L"1" && ListView_GetItemCount(logList) == static_cast<int>(kLogLimit),
+               "log keeps and displays the newest 300 entries in memory") && ok;
+    NotifyClick(app.logs, IDC_LOG_CLEAR);
+    app.engine.reset();
+    return ok;
+}
+
+bool SelfTestExplicitSources(App& app, const fs::path& folder) {
+    for (const bool legacy : {true, false}) {
+        const fs::path program = folder / (legacy ? L"legacy-sources" : L"configured-sources");
+        const fs::path dicts = program / L"dicts";
+        const fs::path user = program / L"user";
+        const fs::path first = legacy ? program / L"userdict.tsv" : user / L"custom.txt";
+        const fs::path second = user / L"userdict-b.txt";
+        const std::string fixtureConfig = legacy ? "cache: off\n" : "cache: off\nuserdict: [custom.txt, userdict-b.txt]\n";
+        std::error_code error;
+        for (const auto& directory : {dicts, user}) {
+            fs::create_directories(directory, error);
+            if (!Check(!error, "create explicit-source fixture folder")) return false;
+        }
+        if (!Check(WriteFixture(dicts / L"base.tsv", "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
+                                "猫\t고양이\tN110\t\t\tGN\t\t\t\t\t1\n犬\t개\tN110\t\t\tGN\t\t\t\t\t2\n") &&
+                   WriteFixture(first, "猫\t앞사전\n") && WriteFixture(second, "犬\t뒤사전\n") &&
+                   WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig), "write explicit-source fixtures")) return false;
+        const std::string programDir = Utf8(program.native());
+        app.engine.reset();
+        if (!Check(LoadEngine(app, programDir), "load explicit sources")) return false;
+        app.userSources = UserSources(programDir);
+        ShowDicts(app, first);
+        const int index = app.dictIndex;
+        if (!Check(index >= 0 && app.userDicts[static_cast<std::size_t>(index)].path == first,
+                   "GUI selects the opened explicit file")) return false;
+        gui::TranslationOptions options;
+        const auto translate = [&] {
+            return gui::TranslateText(*app.engine, "猫 犬", ConfiguredOptions(app, options), app.cancel);
+        };
+        bool ok = Check(translate() == "앞사전 뒤사전", "explicit sources initial literal");
+        ToggleDict(app, index, false);
+        ok = Check(ReadyEngine(app) && translate() == "고양이 뒤사전" &&
+                   std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
+                   "GUI off explicitly removes an active file source") && ok;
+        ToggleDict(app, index, true);
+        ok = Check(ReadyEngine(app) && translate() == "앞사전 뒤사전" && app.engineUserPaths.front() == Utf8(first.native()),
+                   "GUI on restores the explicit file in its original source order") && ok;
+        const auto dictionaries = app.engine->Dictionaries();
+        const auto filters = app.engine->Filters();
+        const auto paths = app.engineUserPaths;
+        const auto version = app.loadedUserVersion;
+        const HANDLE blocked = CreateFileW(second.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+        if (!Check(blocked != INVALID_HANDLE_VALUE, "deny reads during explicit reconfiguration")) return false;
+        const bool renamed = RenameDict(app, index, L"renamed");
+        if (!Check(renamed, "rename the explicit file in the GUI")) {
+            CloseHandle(blocked);
+            return false;
+        }
+        const fs::path renamedPath = app.userDicts[static_cast<std::size_t>(index)].path;
+        ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
+                   app.engineUserPaths == paths && app.loadedUserVersion == version &&
+                   app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters && translate() == "앞사전 뒤사전",
+                   "failed reconfiguration keeps old sources, stamps and the whole stack") && ok;
+        ToggleDict(app, index, false);
+        CloseHandle(blocked);
+        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이 뒤사전",
+                   "reconfiguration recovery preserves a newer GUI off edit") && ok;
+        ShowDicts(app, renamedPath);
+        if (!Check(app.dictIndex >= 0 && app.userDicts[static_cast<std::size_t>(app.dictIndex)].path == renamedPath,
+                   "renamed explicit source stays visible in the dictionary page")) return false;
+        const auto offPaths = app.engineUserPaths;
+        if (!Check(WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig + "cg: false\nreference: true\n"),
+                   "change scalar config fields after an explicit rename and off")) return false;
+        ok = Check(ReadyEngine(app) && !app.settings.cg && app.settings.reference && app.engineUserPaths == offPaths &&
+                   translate() == "고양이 뒤사전", "scalar config changes preserve an existing GUI off and renamed source slot") && ok;
+        ToggleDict(app, app.dictIndex, true);
+        ok = Check(ReadyEngine(app) && translate() == "앞사전 뒤사전" && app.engineUserPaths.front() == Utf8(renamedPath.native()) &&
+                   std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
+                   "renamed explicit source recovers without leaving the old path active") && ok;
+        const auto beforeMissing = app.engine->Dictionaries();
+        const auto beforeMissingFilters = app.engine->Filters();
+        fs::path away = renamedPath;
+        away += L".away";
+        fs::rename(renamedPath, away, error);
+        if (!Check(!error, "remove an explicit source without a GUI intent")) return false;
+        ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
+                   app.engine->Dictionaries() == beforeMissing && app.engine->Filters() == beforeMissingFilters &&
+                   translate() == "앞사전 뒤사전", "unannounced explicit-file disappearance is fatal, not a GUI off") && ok;
+        fs::rename(away, renamedPath, error);
+        if (!Check(!error, "restore the disappeared explicit source")) return false;
+        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "앞사전 뒤사전",
+                   "same-path source restoration retries the pending load") && ok;
+        app.engine.reset();
+        if (!ok) return false;
+    }
+    return true;
+}
+
+bool SelfTestOptionalSources(App& app, const fs::path& folder) {
+    const fs::path program = folder / L"optional-sources";
+    const fs::path dicts = program / L"toy-dicts";
+    const std::string programDir = Utf8(program.native());
+    const fs::path config(Wide(hdTrans::dict::ConfigFile(programDir)));
+    const fs::path userFile = config.parent_path() / L"missing-user.txt";
+    const fs::path ehnd = config.parent_path() / L"missing-ehnd";
+    std::error_code error;
+    for (const auto& directory : {dicts, config.parent_path()}) {
+        fs::create_directories(directory, error);
+        if (!Check(!error, "create optional-source fixture folders")) return false;
+    }
+    const fs::path relativeDicts = fs::relative(dicts, config.parent_path(), error);
+    if (!Check(!error, "resolve the toy dictionary path")) return false;
+    const std::string common = "dicts: '" + Utf8(relativeDicts.native()) + "'\ncache: off\nstrict_dict: true\n";
+    if (!Check(WriteFixture(dicts / L"base.tsv", "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
+                            "猫\tBASE_CAT\tN110\t\t\tGN\t\t\t\t\t1\n犬\tBASE_DOG\tN110\t\t\tGN\t\t\t\t\t2\n") &&
+               WriteFixture(config, common + "ehnd: true\n"), "write default-source absence control")) return false;
+    app.engine.reset();
+    ClearLogs(app);
+    if (!Check(LoadEngine(app, programDir), "load with an absent default Ehnd folder")) return false;
+    SendMessageW(app.main, kLog, 0, 0);
+    gui::TranslationOptions options;
+    const auto translate = [&] {
+        return gui::TranslateText(*app.engine, "猫 犬", ConfiguredOptions(app, options), app.cancel);
+    };
+    const auto defaultStack = app.engine->Dictionaries();
+    const auto defaultRows = app.logEntries.size();
+    bool ok = Check(app.engine->UserFileError().empty() && app.engine->FilterErrors().empty() &&
+                    ControlText(app.main, IDC_LOG_STATUS).find(L"경고") == std::wstring::npos &&
+                    std::any_of(app.logEntries.begin(), app.logEntries.end(), [](const auto& entry) { return entry.kind == L"INFO"; }) &&
+                    !LogContains(app, L"Ehnd 활성화가 꺼져 있어 필터 및 사전 불러오기를 건너뜁니다") &&
+                    ReadyEngine(app) && ReadyEngine(app) && app.engine->Dictionaries() == defaultStack && app.logEntries.size() == defaultRows,
+                    "absent default Ehnd is warning-free with INFO and unchanged healthy readiness does not reload");
+    const fs::path defaultEhnd(Wide(app.engineEhndDir));
+    if (!Check(!defaultEhnd.empty(), "default helper preserves the enabled expected Ehnd path")) return false;
+    fs::create_directories(defaultEhnd, error);
+    if (!Check(!error && WriteFixture(defaultEhnd / L"UserDict_10.txt", "犬\tDEFAULT_EHND\t0\n"), "create the default Ehnd source later")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "BASE_CAT DEFAULT_EHND",
+               "later default Ehnd creation is detected without a config or GUI edit") && ok;
+    fs::path defaultAway = defaultEhnd;
+    defaultAway += L".away";
+    fs::rename(defaultEhnd, defaultAway, error);
+    if (!Check(!error, "remove an accepted default Ehnd source")) return false;
+    ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && translate() == "BASE_CAT DEFAULT_EHND",
+               "an accepted default source cannot downgrade disappearance to quiet absence") && ok;
+    fs::rename(defaultAway, defaultEhnd, error);
+    if (!Check(!error, "restore the accepted default Ehnd source")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "BASE_CAT DEFAULT_EHND", "restore the default source at the same path") && ok;
+    const std::string explicitConfig = common + "userdict: missing-user.txt\nehnd: missing-ehnd\n";
+    if (!Check(WriteFixture(config, explicitConfig), "write explicit missing-source control")) return false;
+    app.engine.reset();
+    if (!Check(LoadEngine(app, programDir), "explicit missing sources do not fail initial strict loading")) return false;
+    ok = Check(!hdTrans::internal::FilterFileFailed(*app.engine) && LogContains(app, L"missing-user.txt") &&
+               LogContains(app, L"missing-ehnd") && ControlText(app.main, IDC_LOG_STATUS).find(L"경고") != std::wstring::npos,
+               "explicit missing-source warnings are visible and nonfatal") && ok;
+    fs::create_directories(ehnd, error);
+    if (!Check(!error && WriteFixture(userFile, "猫\tUSER_LOADED\n") &&
+               WriteFixture(ehnd / L"UserDict_10.txt", "犬\tEHND_LOADED\t0\n"), "create previously missing sources")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "USER_LOADED EHND_LOADED",
+               "newly available explicit sources are detected without a GUI edit") && ok;
+    const auto loaded = app.engine->Dictionaries();
+    const auto filters = app.engine->Filters();
+    const auto version = app.loadedUserVersion;
+    fs::path userAway = userFile;
+    userAway += L".away";
+    fs::path ehndAway = ehnd;
+    ehndAway += L".away";
+    fs::rename(userFile, userAway, error);
+    if (!Check(!error, "remove the previously loaded explicit file")) return false;
+    fs::rename(ehnd, ehndAway, error);
+    if (!Check(!error, "remove the previously loaded explicit Ehnd folder")) return false;
+    ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && app.engine->Dictionaries() == loaded &&
+               app.engine->Filters() == filters && app.loadedUserVersion == version && translate() == "USER_LOADED EHND_LOADED",
+               "previously loaded missing sources are fatal and keep the old whole stack") && ok;
+    fs::rename(userAway, userFile, error);
+    if (!Check(!error, "restore the explicit file")) return false;
+    fs::rename(ehndAway, ehnd, error);
+    if (!Check(!error, "restore the explicit Ehnd folder")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "USER_LOADED EHND_LOADED",
+               "same-path restoration retries with unchanged file contents") && ok;
+    const auto beforeConfig = app.engine->Dictionaries();
+    const auto beforeFilters = app.engine->Filters();
+    fs::rename(ehnd, ehndAway, error);
+    if (!Check(!error && WriteFixture(config, explicitConfig + "cg: false\n"), "change config while a loaded Ehnd folder is absent")) return false;
+    ok = Check(!ReadyEngine(app) && app.settings.cg && app.engine->Dictionaries() == beforeConfig &&
+               app.engine->Filters() == beforeFilters && translate() == "USER_LOADED EHND_LOADED",
+               "a config candidate inherits accepted Ehnd history and cannot downgrade disappearance to an optional warning") && ok;
+    fs::rename(ehndAway, ehnd, error);
+    if (!Check(!error, "restore Ehnd before retrying the config candidate")) return false;
+    ok = Check(ReadyEngine(app) && !app.settings.cg && app.error.empty() && translate() == "USER_LOADED EHND_LOADED",
+               "config and restored Ehnd commit together after history-preserving retry") && ok;
     app.engine.reset();
     return ok;
 }
@@ -1565,6 +2327,9 @@ bool SelfTest(App& app) {
                ControlText(app.docs, IDC_PREVIEW) == L"日本語\r\n", "dropped files are appended without duplicates") && ok;
     ShowPage(app, kTextPage);
     ok = SelfTestConfig(app, folder) && ok;
+    ok = SelfTestReload(app, folder) && ok;
+    ok = SelfTestExplicitSources(app, folder) && ok;
+    ok = SelfTestOptionalSources(app, folder) && ok;
     fs::remove_all(folder, error);
     return ok;
 }

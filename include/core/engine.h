@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -29,8 +30,8 @@ struct UserWatch;
 enum class CacheWrite { Off, Sync };
 
 // Auto checks user dictionary sources at most once a second. Changes, additions and
-// removals are loaded in the background. Files that fail to load are skipped until
-// their versions change again.
+// removals are loaded in the background. A failed load keeps the previous stack and
+// is retried when its source versions or requested options change.
 enum class UserReload { Off, Auto };
 
 // The speech level of the sentence ends of speech: the text inside 「」, with a quote an
@@ -41,12 +42,39 @@ enum class Speech {
              // 해체 (大丈夫か？ 괜찮아?)
 };
 
+// Dictionary parsing at load time; explicit strictDict takes precedence over the config.
+struct EngineOptions {
+    std::optional<bool> strictDict{};
+    bool defaultStrictDict = true;
+    std::string configPath{};
+    bool operator==(const EngineOptions&) const = default;
+};
+
+struct DictionaryOptions {
+    std::optional<bool> strict{};
+};
+
+struct UserDictEntry {
+    std::string ja{};
+    std::string ko{};
+    std::string pos{};
+    std::string options{};
+};
+
+struct EhndFile {
+    std::string name{};
+    std::string text{};
+};
+
 // The loaded dictionaries. Shared by any number of sessions and threads.
 class Engine {
 public:
     // Reference mode disables translation improvements. Sessions inherit it.
     explicit Engine(bool reference = false, CacheWrite cacheWrite = CacheWrite::Sync,
                     UserReload userReload = UserReload::Off);
+    Engine(bool reference, CacheWrite cacheWrite, UserReload userReload, const EngineOptions& options);
+    // Changes options for later loads; does not read or reload a dictionary.
+    void SetOptions(const EngineOptions& options);
     // Waits for a background reload, unless DetachReload was called.
     ~Engine();
     Engine(const Engine&) = delete;
@@ -54,8 +82,8 @@ public:
 
     // Loads the folders in order, later folders overriding earlier ones, then the user
     // dictionary file userFile (none when empty or missing). A user dictionary file that
-    // does not load is left out (UserFileError says why). Returns false when no
-    // dictionary could be loaded; the dictionaries loaded before stay.
+    // does not load is left out on the first Open (UserFileError says why). An active
+    // engine keeps its previous stack on failure. Returns false when the load fails.
     bool Open(const std::vector<std::string>& dirs, bool verifyDicts = false, std::string_view userFile = {});
     // User sources replace the single file: explicit files or folders of userdict*.txt/tsv.
     bool OpenUserDicts(const std::vector<std::string>& dirs, bool verifyDicts,
@@ -66,6 +94,12 @@ public:
     // they started with (see UserReload). Returns false when the load fails; the
     // dictionaries loaded before stay.
     bool Reload();
+    bool Reload(const DictionaryOptions& options);
+
+    bool SetUserDictRaw(std::string_view text, const DictionaryOptions& options = {});
+    bool SetUserDict(const std::vector<UserDictEntry>& entries, const DictionaryOptions& options = {});
+    std::vector<UserDictEntry> GetUserDict() const;
+    bool SetEhnd(const std::vector<EhndFile>& files, const DictionaryOptions& options = {});
 
     // Takes the filters and the user dictionary of the Ehnd folder dir (its
     // PreFilter*.txt, PostFilter*.txt, SkipLayer*.txt and UserDict*.txt files, see
@@ -75,6 +109,7 @@ public:
     // folder is watched like the user dictionary file. Returns false when dir cannot be
     // read; the folder taken before stays.
     bool OpenEhnd(std::string_view dir);
+    bool OpenEhnd(std::string_view dir, const DictionaryOptions& options);
 
     // The lines of the filter files and of the Ehnd folder that the last Open, Reload or
     // OpenEhnd skipped, as "file:line: message".
@@ -82,8 +117,8 @@ public:
 
     bool loaded() const;
 
-    // Why the last version of the user dictionary file that was read did not load, one
-    // line per error; empty when it loaded or there is none.
+    // User dictionary errors and skipped-row warnings of the last load, one line per
+    // diagnostic as file:line: reason; empty when there are none.
     std::string UserFileError() const;
 
     // Stops automatic reloads and lets a running one finish on its own, so that the

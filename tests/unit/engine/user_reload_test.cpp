@@ -1,7 +1,9 @@
 // The automatic reload of the user dictionary file.
+#include <barrier>
 #include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <memory>
 #include <string>
 #include <string_view>
 #include <system_error>
@@ -9,6 +11,8 @@
 
 #include "core/dict/folders.h"
 #include "core/engine.h"
+#include "core/engine/driver.h"
+#include "core/engine/load_info.h"
 #include "core/engine/user_watch.h"
 #include "hdtest.h"
 
@@ -39,6 +43,12 @@ bool Write(const std::filesystem::path& path, std::string_view text) {
     std::ofstream f(path, std::ios::binary | std::ios::trunc);
     f << text;
     return f.good();
+}
+
+dict::LoadErrorKind UserErrorKind(const Engine& engine) {
+    const auto errors = internal::UserFileErrors(engine);
+    HD_CHECK(!errors.empty());
+    return errors.empty() ? dict::LoadErrorKind::Read : errors.front().kind;
 }
 
 }  // namespace
@@ -115,15 +125,23 @@ HD_TEST(UserFileReload) {
     HD_CHECK(engine.Dictionaries() != loaded);
     HD_CHECK(session.Translate("猫").find("야옹이") != std::string::npos);
 
-    // Removing the file removes the user dictionary.
+    // A still-configured explicit file that disappears keeps the last complete stack.
+    const auto beforeRemoval = engine.Dictionaries();
+    const auto filters = engine.Filters();
     std::error_code ec;
-    std::filesystem::remove(user, ec);
+    HD_REQUIRE(std::filesystem::remove(user, ec));
     HD_CHECK(internal::CheckUserFile(engine));
-    HD_CHECK_EQ(session.Translate("猫"), before);
+    HD_CHECK(engine.Dictionaries() == beforeRemoval);
+    HD_CHECK(engine.Filters() == filters);
+    HD_CHECK_EQ(session.Translate("猫"), "야옹이");
+    HD_CHECK_EQ(engine.UserFileError(), user.string() + ": cannot read the file");
+    HD_CHECK(UserErrorKind(engine) == dict::LoadErrorKind::Read);
 
     // An explicit Reload keeps working.
     HD_REQUIRE(Write(user, "猫\t고양이\n"));
     HD_CHECK(engine.Reload());
+    HD_CHECK(engine.Dictionaries() != beforeRemoval);
+    HD_CHECK(engine.UserFileError().empty());
     HD_CHECK(!internal::CheckUserFile(engine));
     HD_CHECK(session.Translate("猫").find("고양이") != std::string::npos);
 
@@ -229,11 +247,18 @@ HD_TEST(UserDictionaryFilesReload) {
     HD_CHECK(internal::CheckUserFile(engine));
     HD_CHECK_EQ(session.Translate("猫"), "야옹이");
 
+    const auto good = engine.Dictionaries();
+    const auto filters = engine.Filters();
+    const std::string dog = session.Translate("犬");
     HD_REQUIRE(Write(broken, "# comment\n猫\n犬\n"));
     HD_REQUIRE(Write(first, "猫\t흰고양이\n犬\t멍멍이\n"));
     HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(engine.Filters() == filters);
     HD_CHECK_EQ(session.Translate("猫"), "야옹이");
-    HD_CHECK_EQ(session.Translate("犬"), "멍멍이");
+    HD_CHECK_EQ(session.Translate("犬"), dog);
+    Session fresh(engine);
+    HD_CHECK_EQ(fresh.Translate("犬"), dog);
     HD_CHECK(engine.UserFileError().find(broken.string() + ":2: empty KR") != std::string::npos);
     HD_CHECK(engine.UserFileError().find(broken.string() + ":3: empty KR") != std::string::npos);
     HD_CHECK(!internal::CheckUserFile(engine));
@@ -241,13 +266,167 @@ HD_TEST(UserDictionaryFilesReload) {
     std::error_code error;
     HD_REQUIRE(std::filesystem::remove(later, error));
     HD_CHECK(internal::CheckUserFile(engine));
-    HD_CHECK_EQ(session.Translate("猫"), "흰고양이");
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK_EQ(session.Translate("猫"), "야옹이");
     HD_REQUIRE(std::filesystem::remove(broken, error));
     HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() != good);
+    HD_CHECK_EQ(session.Translate("猫"), "흰고양이");
+    HD_CHECK_EQ(session.Translate("犬"), "멍멍이");
     HD_CHECK(engine.UserFileError().empty());
     HD_REQUIRE(std::filesystem::remove(first, error));
     HD_CHECK(internal::CheckUserFile(engine));
     HD_CHECK(session.Translate("猫") != "흰고양이");
+}
+
+HD_TEST(UserDictionaryPartialReloadKeepsAllFiles) {
+    TempFolder temp;
+    const auto first = temp.path / "userdict-a.txt";
+    const auto second = temp.path / "userdict-b.txt";
+    HD_REQUIRE(Write(first, "猫\t고양이\n"));
+    HD_REQUIRE(Write(second, "犬\t멍멍이\n"));
+    Engine engine(false, CacheWrite::Off);
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), second.string()}));
+    Session old(engine);
+    HD_CHECK_EQ(old.Translate("猫"), "고양이");
+    HD_CHECK_EQ(old.Translate("犬"), "멍멍이");
+    const auto good = engine.Dictionaries();
+    const auto filters = engine.Filters();
+
+    HD_REQUIRE(Write(first, "猫\t냥이\n"));
+    HD_REQUIRE(Write(second, "犬\n"));
+    HD_CHECK(!engine.Reload());
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(engine.Filters() == filters);
+    HD_CHECK(engine.UserFileError().find(second.string() + ":1: empty KR") == 0);
+    Session failed(engine);
+    HD_CHECK_EQ(failed.Translate("猫"), "고양이");
+    HD_CHECK_EQ(failed.Translate("犬"), "멍멍이");
+
+    HD_REQUIRE(Write(second, "犬\t강아지\n"));
+    HD_CHECK(engine.Reload());
+    HD_CHECK(engine.Dictionaries() != good);
+    HD_CHECK(engine.UserFileError().empty());
+    Session repaired(engine);
+    HD_CHECK_EQ(repaired.Translate("猫"), "냥이");
+    HD_CHECK_EQ(repaired.Translate("犬"), "강아지");
+    HD_CHECK_EQ(old.Translate("猫"), "고양이");
+}
+
+namespace {
+
+void AutoReloadPinsConcurrentCalls(bool strict) {
+    TempFolder temp;
+    const auto first = temp.path / "userdict-a.txt";
+    const auto second = temp.path / "userdict-b.txt";
+    const auto ehnd = temp.path / "ehnd";
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(ehnd, error));
+    HD_REQUIRE(Write(first, "猫\t고양이\n"));
+    HD_REQUIRE(Write(second, "犬\t멍멍이\n"));
+    HD_REQUIRE(Write(ehnd / "UserDict_a.txt", "ポチ\t바둑이\t1\n"));
+    HD_REQUIRE(Write(ehnd / "PostFilter_a.txt", "고양이\t흰고양이\t1\t0\n"));
+    EngineOptions options;
+    options.strictDict = strict;
+    Engine engine(false, CacheWrite::Off, UserReload::Auto, options);
+    HD_REQUIRE(engine.OpenEhnd(ehnd.string()));
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), second.string()}));
+    const std::string input = "猫\n犬\nポチ";
+    const std::string before = "흰고양이\n멍멍이\n바둑이";
+    const auto translate = [&] {
+        Session session(engine);
+        return session.Translate(input);
+    };
+    HD_CHECK_EQ(translate(), before);
+    const std::weak_ptr<const dict::Snapshot> good = engine.Dictionaries();
+    const std::weak_ptr<const filter::Filters> filters = engine.Filters();
+
+    constexpr int kThreads = 4;
+    std::barrier entered(kThreads + 1), resume(kThreads + 1);
+    struct Pause {
+        std::barrier<>& entered;
+        std::barrier<>& resume;
+    } pause{entered, resume};
+    internal::StageObserver observer;
+    observer.context = &pause;
+    observer.line = [](void* context, int line) {
+        if (line != 0) return;
+        auto& p = *static_cast<Pause*>(context);
+        p.entered.arrive_and_wait();
+        p.resume.arrive_and_wait();
+    };
+    std::vector<std::string> results(kThreads);
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kThreads; ++i) {
+        workers.emplace_back([&, i] {
+            Session session(engine);
+            session.SetWrapped(false);
+            results[i] = internal::TranslateObserved(session, input, observer);
+        });
+    }
+    entered.arrive_and_wait();
+
+    // All calls hold the old stack while Auto rejects an incomplete replacement.
+    HD_CHECK(Write(first, "猫\t냥이\n"));
+    HD_CHECK(Write(second, "\xFF"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == good.lock());
+    HD_CHECK(engine.Filters() == filters.lock());
+    HD_CHECK_EQ(engine.UserFileError(), second.string() + ": invalid UTF-8");
+    HD_CHECK_EQ(translate(), before);
+    HD_CHECK(!internal::CheckUserFile(engine));
+
+    HD_CHECK(Write(second, "犬\t강아지\n"));
+    HD_CHECK(Write(ehnd / "UserDict_a.txt", "ポチ\t흰둥이\t1\n"));
+    HD_CHECK(Write(ehnd / "PostFilter_a.txt", "냥이\t검은고양이\t1\t0\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() != good.lock());
+    HD_CHECK(engine.Filters() != filters.lock());
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK_EQ(translate(), "검은고양이\n강아지\n흰둥이");
+    HD_CHECK(!good.expired());
+    HD_CHECK(!filters.expired());
+    resume.arrive_and_wait();
+    for (std::thread& worker : workers) worker.join();
+    for (const auto& result : results) HD_CHECK_EQ(result, before);
+}
+
+}  // namespace
+
+HD_TEST(UserDictionaryAutoReloadPinsConcurrentCalls) {
+    for (const bool strict : {false, true}) AutoReloadPinsConcurrentCalls(strict);
+}
+
+HD_TEST(UserDictionaryReloadKeepsValidRowsBesideWarning) {
+    TempFolder temp;
+    const auto user = temp.path / "userdict.tsv";
+    const std::string header = "#! layer=user\nkey\tko\tpos\tid\n";
+    HD_REQUIRE(Write(user, header + "猫\t고양이\tN110\t1\n"));
+    EngineOptions options;
+    options.strictDict = false;
+    Engine engine(false, CacheWrite::Off, UserReload::Off, options);
+    HD_REQUIRE(engine.Open({Fixture()}, false, user.string()));
+    const auto good = engine.Dictionaries();
+
+    HD_REQUIRE(Write(user, header + "猫\t냥이\tN110\t1\n"
+                                  "不明\t버림\tunknown-tag\t2\n"
+                                  "犬\t멍멍이\tN110\t3\n"));
+    HD_CHECK(engine.Reload());
+    const auto loaded = engine.Dictionaries();
+    HD_CHECK(loaded != good);
+    HD_REQUIRE(loaded->User() != nullptr);
+    const auto cats = loaded->User()->Records("猫");
+    const auto dogs = loaded->User()->Records("犬");
+    HD_REQUIRE(cats.size() == 1);
+    HD_REQUIRE(dogs.size() == 1);
+    HD_CHECK_EQ(std::string(cats[0].target), "냥이");
+    HD_CHECK_EQ(std::string(dogs[0].target), "멍멍이");
+    HD_CHECK(loaded->User()->Records("不明").empty());
+    HD_CHECK_EQ(engine.UserFileError(), user.string() + ":4: unknown pos: unknown-tag");
+    const auto warnings = internal::UserFileErrors(engine);
+    HD_REQUIRE(warnings.size() == 1);
+    HD_CHECK(warnings[0].kind == dict::LoadErrorKind::UserRow);
+    HD_CHECK(!dict::FailsLoad(warnings[0].kind));
 }
 
 HD_TEST(UserDictionaryBadFilesAreIsolated) {
@@ -270,13 +449,626 @@ HD_TEST(UserDictionaryBadFilesAreIsolated) {
     }
 }
 
+HD_TEST(UserDictionaryBadBodyRowDoesNotChangeRules) {
+    TempFolder temp;
+    const auto user = temp.path / "userdict.tsv";
+    const std::string header = "#! layer=user\nkey\tko\tpos\trule\tctx\tid\n";
+    HD_REQUIRE(Write(user, header + "猫\t고양이\tN110\t0\t\t1\n"));
+    EngineOptions options;
+    options.strictDict = false;
+    Engine engine(false, CacheWrite::Off, UserReload::Off, options);
+    HD_REQUIRE(engine.Open({Fixture()}, false, user.string()));
+    const auto rules = engine.Dictionaries()->RuleBodies();
+    HD_REQUIRE(Write(user, header + "猫\t냥이\tN110\t0\t\t1\n"
+                                  "犬\t버림\tN110\t1\tNOT_A_RULE\t2\n"
+                                  "鳥\t새\tN110\t0\t\t3\n"));
+    HD_CHECK(engine.Reload());
+    const auto loaded = engine.Dictionaries();
+    HD_CHECK(loaded->RuleBodies() == rules);
+    HD_REQUIRE(loaded->User() != nullptr);
+    HD_CHECK(loaded->User()->Records("犬").empty());
+    HD_CHECK(loaded->User()->Records("猫").size() == 1);
+    HD_CHECK(loaded->User()->Records("鳥").size() == 1);
+    HD_CHECK_EQ(engine.UserFileError(), user.string() + ":4: the rule body does not parse");
+    HD_CHECK(UserErrorKind(engine) == dict::LoadErrorKind::UserRow);
+}
+
+HD_TEST(UserDictionaryRowsFollowStrictOption) {
+    for (const bool strict : {false, true}) {
+        for (const auto mode : {UserReload::Off, UserReload::Auto}) {
+            TempFolder temp;
+            const auto first = temp.path / "userdict-a.txt";
+            const auto second = temp.path / "userdict-b.txt";
+            HD_REQUIRE(Write(first, "猫\t고양이\n"));
+            HD_REQUIRE(Write(second, "犬\t멍멍이\n"));
+            EngineOptions options;
+            options.strictDict = strict;
+            Engine engine(false, CacheWrite::Off, mode, options);
+            HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), second.string()}));
+            const auto good = engine.Dictionaries();
+            HD_REQUIRE(Write(first, "猫\t냥이\n"));
+            HD_REQUIRE(Write(second, "犬\t강아지\n壊\t버림\tn\tunknown=1\n猫\t버림\tn\tx\textra\n"));
+            if (mode == UserReload::Auto) HD_CHECK(internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload() == !strict);
+            HD_CHECK((engine.Dictionaries() == good) == strict);
+            Session changed(engine);
+            HD_CHECK_EQ(changed.Translate("猫"), strict ? "고양이" : "냥이");
+            HD_CHECK_EQ(changed.Translate("犬"), strict ? "멍멍이" : "강아지");
+            HD_CHECK(engine.UserFileError().find(second.string() + ":2: ") != std::string::npos);
+            HD_CHECK(engine.UserFileError().find(second.string() + ":3: ") != std::string::npos);
+            const auto errors = internal::UserFileErrors(engine);
+            HD_REQUIRE(errors.size() == 2);
+            for (const auto& error : errors) HD_CHECK(dict::FailsLoad(error.kind) == strict);
+            HD_CHECK(!internal::CheckUserFile(engine));
+
+            HD_REQUIRE(Write(second, "犬\n猫\n"));
+            if (mode == UserReload::Auto) HD_CHECK(internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload() == !strict);
+            Session empty(engine);
+            HD_CHECK_EQ(empty.Translate("猫"), strict ? "고양이" : "냥이");
+            if (strict) HD_CHECK_EQ(empty.Translate("犬"), "멍멍이");
+            else HD_CHECK(empty.Translate("犬") != "강아지");
+            HD_REQUIRE(internal::UserFileErrors(engine).size() == 2);
+            HD_CHECK(!internal::CheckUserFile(engine));
+
+            HD_REQUIRE(Write(second, "犬\t흰둥이\n"));
+            if (mode == UserReload::Auto) HD_CHECK(internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload());
+            Session repaired(engine);
+            HD_CHECK_EQ(repaired.Translate("猫"), "냥이");
+            HD_CHECK_EQ(repaired.Translate("犬"), "흰둥이");
+            HD_CHECK(engine.UserFileError().empty());
+        }
+    }
+}
+
+HD_TEST(UserDictionaryInitialRowsUseResolvedPolicy) {
+    for (const bool strict : {false, true}) {
+        TempFolder temp;
+        const auto first = temp.path / "userdict-a.txt";
+        const auto second = temp.path / "userdict-b.txt";
+        HD_REQUIRE(Write(first, "猫\t고양이\n"));
+        HD_REQUIRE(Write(second, "犬\t멍멍이\n猫\n"));
+        EngineOptions options;
+        options.strictDict = strict;
+        Engine engine(false, CacheWrite::Off, UserReload::Off, options);
+        HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), second.string()}));
+        Session session(engine);
+        HD_CHECK_EQ(session.Translate("猫"), "고양이");
+        HD_CHECK((session.Translate("犬") == "멍멍이") == !strict);
+        const auto errors = internal::UserFileErrors(engine);
+        HD_REQUIRE(errors.size() == 1);
+        HD_CHECK_EQ(errors[0].line, 2);
+        HD_CHECK(dict::FailsLoad(errors[0].kind) == strict);
+    }
+}
+
+HD_TEST(UserDictionaryDecodeFailureKeepsWholeStack) {
+    for (const bool strict : {false, true}) {
+        for (const auto mode : {UserReload::Off, UserReload::Auto}) {
+            TempFolder temp;
+            const auto first = temp.path / "userdict-a.txt";
+            const auto second = temp.path / "userdict-b.txt";
+            HD_REQUIRE(Write(first, "猫\t고양이\n"));
+            HD_REQUIRE(Write(second, "犬\t멍멍이\n"));
+            EngineOptions options;
+            options.strictDict = strict;
+            Engine engine(false, CacheWrite::Off, mode, options);
+            HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), second.string()}));
+            const auto good = engine.Dictionaries();
+            const auto filters = engine.Filters();
+            HD_REQUIRE(Write(first, "猫\t냥이\n"));
+            HD_REQUIRE(Write(second, "\xFF"));
+            if (mode == UserReload::Auto) HD_CHECK(internal::CheckUserFile(engine));
+            else HD_CHECK(!engine.Reload());
+            HD_CHECK(engine.Dictionaries() == good);
+            HD_CHECK(engine.Filters() == filters);
+            HD_CHECK_EQ(engine.UserFileError(), second.string() + ": invalid UTF-8");
+            Session failed(engine);
+            HD_CHECK_EQ(failed.Translate("猫"), "고양이");
+            HD_CHECK_EQ(failed.Translate("犬"), "멍멍이");
+            HD_CHECK(!internal::CheckUserFile(engine));
+            HD_REQUIRE(Write(second, "犬\t강아지\n"));
+            if (mode == UserReload::Auto) HD_CHECK(internal::CheckUserFile(engine));
+            else HD_CHECK(engine.Reload());
+            Session repaired(engine);
+            HD_CHECK_EQ(repaired.Translate("猫"), "냥이");
+            HD_CHECK_EQ(repaired.Translate("犬"), "강아지");
+            HD_CHECK(engine.UserFileError().empty());
+        }
+    }
+}
+
+HD_TEST(UserDictionaryMissingSourceKinds) {
+    TempFolder temp;
+    const auto first = temp.path / "userdict-a.txt";
+    const auto second = temp.path / "userdict-b.txt";
+    const auto away = temp.path / "saved.txt";
+    HD_REQUIRE(Write(first, "猫\t고양이\n"));
+    HD_REQUIRE(Write(second, "犬\t멍멍이\n"));
+    Engine engine(false, CacheWrite::Off, UserReload::Auto);
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), second.string()}));
+    const auto good = engine.Dictionaries();
+    std::error_code error;
+    std::filesystem::rename(second, away, error);
+    HD_REQUIRE(!error);
+    HD_REQUIRE(Write(first, "猫\t냥이\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(engine.UserFileError().find(second.string() + ": cannot read the file") == 0);
+    Session failed(engine);
+    HD_CHECK_EQ(failed.Translate("猫"), "고양이");
+    HD_CHECK_EQ(failed.Translate("犬"), "멍멍이");
+    HD_CHECK(!internal::CheckUserFile(engine));
+    std::filesystem::rename(away, second, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() != good);
+    HD_CHECK_EQ(failed.Translate("猫"), "냥이");
+    HD_CHECK(engine.UserFileError().empty());
+
+    const auto folder = temp.path / "users";
+    const auto folderAway = temp.path / "users-away";
+    HD_REQUIRE(std::filesystem::create_directory(folder, error));
+    const auto child = folder / "userdict.txt";
+    HD_REQUIRE(Write(child, "犬\t강아지\n"));
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {first.string(), folder.string()}));
+    HD_REQUIRE(std::filesystem::remove(child, error));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.UserFileError().empty());
+    Session removed(engine);
+    HD_CHECK(removed.Translate("犬") != "강아지");
+    const auto emptyFolder = engine.Dictionaries();
+    std::filesystem::rename(folder, folderAway, error);
+    HD_REQUIRE(!error);
+    HD_REQUIRE(Write(first, "猫\t흰고양이\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == emptyFolder);
+    HD_CHECK(engine.UserFileError().find(folder.string() + ": cannot list the folder") == 0);
+    HD_CHECK_EQ(removed.Translate("猫"), "냥이");
+    std::filesystem::rename(folderAway, folder, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK_EQ(removed.Translate("猫"), "흰고양이");
+    HD_CHECK(engine.UserFileError().empty());
+
+    const auto optional = temp.path / "not-created";
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {optional.string()}));
+    const auto optionalErrors = internal::UserFileErrors(engine);
+    HD_REQUIRE(optionalErrors.size() == 1);
+    HD_CHECK(optionalErrors[0].kind == dict::LoadErrorKind::OptionalSource);
+    HD_CHECK(!dict::FailsLoad(optionalErrors[0].kind));
+    HD_CHECK_EQ(optionalErrors[0].file, optional.string());
+    HD_CHECK_EQ(optionalErrors[0].line, 0);
+    HD_CHECK(!internal::CheckUserFile(engine));
+    HD_REQUIRE(std::filesystem::create_directory(optional, error));
+    HD_REQUIRE(Write(optional / "userdict.txt", "犬\t멍멍이\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    Session appeared(engine);
+    HD_CHECK_EQ(appeared.Translate("犬"), "멍멍이");
+}
+
+HD_TEST(UserDictionaryCandidateKeepsSourceHistory) {
+    TempFolder temp;
+    const auto user = temp.path / "userdict.txt";
+    const auto renamed = temp.path / "renamed.txt";
+    HD_REQUIRE(Write(user, "猫\t고양이\n"));
+    Engine original(false, CacheWrite::Off);
+    HD_REQUIRE(original.Open({Fixture()}, false, user.string()));
+    const auto good = original.Dictionaries();
+    const auto history = internal::AcceptedUserSources(original);
+    HD_REQUIRE(history.size() == 1);
+    HD_CHECK(!history[0].directory);
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::remove(user, error));
+    Engine candidate(false, CacheWrite::Off);
+    internal::SeedUserSources(candidate, history);
+    HD_CHECK(!candidate.Open({Fixture()}, false, user.string()));
+    HD_CHECK(!candidate.loaded());
+    HD_CHECK(candidate.UserFileError().find(user.string() + ": cannot read the file") == 0);
+    HD_CHECK(original.Dictionaries() == good);
+    Session old(original);
+    HD_CHECK_EQ(old.Translate("猫"), "고양이");
+    HD_REQUIRE(Write(user, "猫\t냥이\n"));
+    HD_CHECK(candidate.Open({Fixture()}, false, user.string()));
+    HD_CHECK(candidate.UserFileError().empty());
+    Session repaired(candidate);
+    HD_CHECK_EQ(repaired.Translate("猫"), "냥이");
+    std::filesystem::rename(user, renamed, error);
+    HD_REQUIRE(!error);
+    Engine moved(false, CacheWrite::Off);
+    internal::SeedUserSources(moved, history);
+    HD_CHECK(moved.Open({Fixture()}, false, renamed.string()));
+    HD_CHECK(moved.UserFileError().empty());
+    Engine cleared(false, CacheWrite::Off);
+    internal::SeedUserSources(cleared, history);
+    HD_CHECK(cleared.OpenUserDicts({Fixture()}, false, {}));
+    HD_CHECK(cleared.UserFileError().empty());
+    Engine emptyHistory(false, CacheWrite::Off);
+    internal::SeedUserSources(emptyHistory, {});
+    HD_REQUIRE(Write(user, "犬\n"));
+    HD_CHECK(!emptyHistory.Open({Fixture()}, false, user.string()));
+    HD_CHECK(!emptyHistory.loaded());
+}
+
+HD_TEST(UserDictionaryActiveReconfigurationIsTransactional) {
+    TempFolder temp;
+    const auto oldPath = temp.path / "userdict.txt";
+    const auto renamed = temp.path / "renamed.txt";
+    const auto bad = temp.path / "bad.txt";
+    HD_REQUIRE(Write(oldPath, "猫\t고양이\n"));
+    HD_REQUIRE(Write(bad, "犬\n"));
+    Engine engine(false, CacheWrite::Off);
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {oldPath.string()}));
+    const auto good = engine.Dictionaries();
+    const auto filters = engine.Filters();
+    HD_CHECK(!engine.OpenUserDicts({Fixture()}, false, {bad.string()}));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(engine.Filters() == filters);
+    HD_REQUIRE(Write(oldPath, "猫\t냥이\n"));
+    HD_CHECK(engine.Reload());
+    Session current(engine);
+    HD_CHECK_EQ(current.Translate("猫"), "냥이");
+    std::error_code error;
+    std::filesystem::rename(oldPath, renamed, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(!engine.Reload());
+    HD_CHECK(engine.OpenUserDicts({Fixture()}, false, {renamed.string()}));
+    Session moved(engine);
+    HD_CHECK_EQ(moved.Translate("猫"), "냥이");
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK(engine.OpenUserDicts({Fixture()}, false, {}));
+    Session cleared(engine);
+    HD_CHECK(cleared.Translate("猫") != "냥이");
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK(engine.Reload());
+}
+
+HD_TEST(FilterFailureStatusDistinguishesWarnings) {
+    TempFolder temp;
+    const auto ehnd = temp.path / "ehnd";
+    const auto away = temp.path / "away";
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(ehnd, error));
+    HD_REQUIRE(Write(ehnd / "PostFilter_a.txt", "(x\tz\t1\t1\n"));
+    Engine engine(false, CacheWrite::Off);
+    HD_CHECK(!internal::FilterFileFailed(engine));
+    HD_REQUIRE(engine.OpenEhnd(ehnd.string()));
+    HD_CHECK(!internal::FilterFileFailed(engine));
+    HD_REQUIRE(engine.Open({Fixture()}));
+    HD_CHECK(internal::FilterFileFailed(engine));
+    HD_REQUIRE(!engine.FilterErrors().empty());
+    HD_CHECK(internal::UserFileErrors(engine).empty());
+    HD_REQUIRE(engine.OpenEhnd(ehnd.string(), DictionaryOptions{false}));
+    HD_CHECK(!internal::FilterFileFailed(engine));
+    HD_CHECK(!engine.FilterErrors().empty());
+    const auto good = engine.Dictionaries();
+    const auto filters = engine.Filters();
+    HD_CHECK(!engine.Reload());
+    HD_CHECK(internal::FilterFileFailed(engine));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(engine.Filters() == filters);
+    HD_REQUIRE(Write(ehnd / "PostFilter_a.txt", "a\tb\t1\t0\n"));
+    HD_REQUIRE(engine.Reload());
+    HD_CHECK(!internal::FilterFileFailed(engine));
+    HD_CHECK(engine.FilterErrors().empty());
+    const auto repaired = engine.Dictionaries();
+    std::filesystem::rename(ehnd, away, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(!engine.Reload());
+    HD_CHECK(internal::FilterFileFailed(engine));
+    HD_CHECK(engine.Dictionaries() == repaired);
+    std::filesystem::rename(away, ehnd, error);
+    HD_REQUIRE(!error);
+    HD_REQUIRE(engine.Reload());
+    HD_CHECK(!internal::FilterFileFailed(engine));
+    HD_CHECK(engine.FilterErrors().empty());
+}
+
+HD_TEST(UserDictionaryConfigAndPendingOptions) {
+    TempFolder temp;
+    const auto user = temp.path / "userdict.txt";
+    const auto config = temp.path / "config.yaml";
+    HD_REQUIRE(Write(user, "猫\t고양이\n"));
+    HD_REQUIRE(Write(config, "strict_dict: true\n"));
+    EngineOptions options;
+    options.defaultStrictDict = false;
+    options.configPath = config.string();
+    Engine engine(false, CacheWrite::Off, UserReload::Auto, options);
+    HD_REQUIRE(engine.Open({Fixture()}, false, user.string()));
+    const auto good = engine.Dictionaries();
+    HD_REQUIRE(Write(user, "猫\t냥이\n犬\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_CHECK(!engine.UserFileError().empty());
+    HD_REQUIRE(Write(config, "strict_dict: false\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    Session accepted(engine);
+    HD_CHECK_EQ(accepted.Translate("猫"), "냥이");
+    HD_REQUIRE(internal::UserFileErrors(engine).size() == 1);
+    HD_CHECK(UserErrorKind(engine) == dict::LoadErrorKind::UserRow);
+    const auto lenient = engine.Dictionaries();
+
+    options.strictDict = true;
+    engine.SetOptions(options);
+    HD_CHECK(engine.Dictionaries() == lenient);
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == lenient);
+    HD_CHECK(dict::FailsLoad(UserErrorKind(engine)));
+    HD_REQUIRE(Write(config, "strict_dict: false\n# changed\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() == lenient);
+    options.strictDict = false;
+    engine.SetOptions(options);
+    HD_CHECK(engine.Dictionaries() == lenient);
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(engine.Dictionaries() != lenient);
+    HD_CHECK(!dict::FailsLoad(UserErrorKind(engine)));
+    HD_REQUIRE(Write(config, "strict_dict: true\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK(!dict::FailsLoad(UserErrorKind(engine)));
+
+    HD_CHECK(!engine.Reload(DictionaryOptions{true}));
+    HD_CHECK(engine.Reload());
+    HD_CHECK(!dict::FailsLoad(UserErrorKind(engine)));
+    Engine verified(false, CacheWrite::Off, UserReload::Off, options);
+    HD_REQUIRE(verified.Open({Fixture()}, true, user.string()));
+    HD_REQUIRE(!internal::UserFileErrors(verified).empty());
+    HD_CHECK(dict::FailsLoad(internal::UserFileErrors(verified)[0].kind));
+    Session noBadFile(verified);
+    HD_CHECK(noBadFile.Translate("猫") != "냥이");
+}
+
+HD_TEST(UserDictionaryMemorySettersAreTransactional) {
+    Engine engine(false, CacheWrite::Off);
+    HD_REQUIRE(engine.Open({Fixture()}));
+    HD_REQUIRE(engine.SetUserDict({{"猫", "고양이", "n", "prio=2 force"},
+                                  {"猫", "냥이", "", "prio=1"}}));
+    auto entries = engine.GetUserDict();
+    HD_REQUIRE(entries.size() == 2);
+    HD_CHECK_EQ(entries[0].ja, "猫");
+    HD_CHECK_EQ(entries[0].pos, "n");
+    HD_CHECK_EQ(entries[0].options, "prio=2 force");
+    HD_CHECK_EQ(entries[1].ko, "냥이");
+    HD_CHECK(entries[1].pos.empty());
+    const auto good = engine.Dictionaries();
+    HD_CHECK(!engine.SetUserDictRaw("猫\t흰고양이\n犬\n"));
+    HD_CHECK(engine.Dictionaries() == good);
+    HD_REQUIRE(engine.GetUserDict().size() == 2);
+    HD_CHECK_EQ(engine.GetUserDict()[0].ko, "고양이");
+    HD_CHECK(engine.UserFileError().find("userdict.tsv:2: empty KR") == 0);
+    HD_CHECK(engine.SetUserDictRaw("猫\t흰고양이\n犬\n", DictionaryOptions{false}));
+    HD_REQUIRE(engine.GetUserDict().size() == 1);
+    HD_CHECK_EQ(engine.GetUserDict()[0].ko, "흰고양이");
+    HD_CHECK(!dict::FailsLoad(UserErrorKind(engine)));
+    HD_CHECK(!engine.SetUserDictRaw("犬\n"));
+    HD_REQUIRE(engine.GetUserDict().size() == 1);
+    HD_CHECK(engine.SetUserDictRaw("犬\n", DictionaryOptions{false}));
+    HD_CHECK(engine.GetUserDict().empty());
+    HD_CHECK(!engine.UserFileError().empty());
+    HD_CHECK(engine.SetUserDictRaw("猫\t고�양이\nあ゙\t아\n"));
+    HD_REQUIRE(engine.GetUserDict().size() == 2);
+    HD_CHECK_EQ(engine.GetUserDict()[0].ko, "고�양이");
+    HD_CHECK(engine.UserFileError().empty());
+    const auto decoded = engine.Dictionaries();
+    HD_CHECK(!engine.SetUserDictRaw("\xFF", DictionaryOptions{false}));
+    HD_CHECK(engine.Dictionaries() == decoded);
+    HD_CHECK_EQ(engine.UserFileError(), "userdict.tsv: invalid UTF-8");
+    HD_CHECK(engine.SetUserDictRaw(""));
+    HD_CHECK(engine.GetUserDict().empty());
+    HD_CHECK(engine.UserFileError().empty());
+}
+
+HD_TEST(UserDictionaryMemoryOverlaysKeepUnrelatedPolicy) {
+    Engine engine(false, CacheWrite::Off);
+    HD_REQUIRE(engine.Open({Fixture()}));
+    HD_REQUIRE(engine.SetUserDictRaw("猫\t고양이\n犬\n", DictionaryOptions{false}));
+    HD_REQUIRE(engine.SetEhnd({{"PostFilter_a.txt", "고양이\t냥이\t1\t0\n"}}));
+    Session first(engine);
+    HD_CHECK_EQ(first.Translate("猫"), "냥이");
+    HD_REQUIRE(engine.GetUserDict().size() == 1);
+    HD_CHECK(!engine.UserFileError().empty());
+    HD_CHECK(!engine.SetUserDictRaw("犬\n"));
+    HD_CHECK(engine.SetEhnd({}));
+    Session cleared(engine);
+    HD_CHECK_EQ(cleared.Translate("猫"), "고양이");
+    HD_REQUIRE(engine.SetEhnd({{"PostFilter_a.txt", "고양이\t냥이\t1\t0\n(x\ty\t1\t1\n"}},
+                              DictionaryOptions{false}));
+    HD_CHECK(!engine.FilterErrors().empty());
+    HD_REQUIRE(engine.SetUserDict({{"猫", "고양이", "", ""}}));
+    Session second(engine);
+    HD_CHECK_EQ(second.Translate("猫"), "냥이");
+    HD_CHECK(engine.UserFileError().empty());
+    HD_CHECK(!engine.FilterErrors().empty());
+    const auto accepted = engine.Dictionaries();
+    HD_CHECK(!engine.Reload());
+    HD_CHECK(engine.Dictionaries() == accepted);
+    HD_CHECK(!engine.FilterErrors().empty());
+    HD_CHECK(engine.Reload(DictionaryOptions{false}));
+    HD_CHECK(engine.SetEhnd({}));
+    HD_CHECK(engine.FilterErrors().empty());
+    HD_CHECK(!engine.SetEhnd({{"PostFilter_a.txt", "x\n"}}));
+    HD_CHECK(!engine.FilterErrors().empty());
+    HD_CHECK(engine.SetEhnd({{"PostFilter_a.txt", "x\n"}}, DictionaryOptions{false}));
+    HD_CHECK(!engine.FilterErrors().empty());
+    HD_CHECK(engine.SetUserDictRaw("猫\t고양이\n"));
+    HD_CHECK(engine.GetUserDict().size() == 1);
+}
+
+HD_TEST(UserDictionaryOptionalSourceOrigins) {
+    TempFolder temp;
+    const auto missing = (temp.path / "not-created").string();
+    for (const bool strict : {false, true}) {
+        for (const bool verify : {false, true}) {
+            EngineOptions options;
+            options.strictDict = strict;
+            Engine explicitSource(false, CacheWrite::Off, UserReload::Off, options);
+            HD_REQUIRE(explicitSource.OpenUserDicts({Fixture()}, verify, {missing}));
+            const auto errors = internal::UserFileErrors(explicitSource);
+            HD_REQUIRE(errors.size() == 1);
+            HD_CHECK(errors[0].kind == dict::LoadErrorKind::OptionalSource);
+            HD_CHECK(!dict::FailsLoad(errors[0].kind));
+            HD_CHECK_EQ(errors[0].file, missing);
+            HD_CHECK_EQ(errors[0].line, 0);
+            HD_CHECK(explicitSource.Reload());
+
+            Engine generated(false, CacheWrite::Off, UserReload::Off, options);
+            HD_REQUIRE(internal::OpenUserSources(generated, {Fixture()}, verify, {{missing, true, true, false}}));
+            HD_CHECK(generated.UserFileError().empty());
+            const auto info = internal::LoadedSourceInfo(generated);
+            std::size_t defaults = 0;
+            for (const auto& file : info.files) {
+                if (file.kind != dict::LoadFileKind::DefaultUserMissing) continue;
+                ++defaults;
+                HD_CHECK_EQ(file.path, missing);
+                HD_CHECK(!file.acceptedCount);
+            }
+            HD_CHECK_EQ(defaults, std::size_t{1});
+            HD_CHECK(internal::AcceptedUserSources(generated).empty());
+
+            const auto missingEhnd = (temp.path / "not-created-ehnd").string();
+            HD_CHECK(explicitSource.OpenEhnd(missingEhnd));
+            HD_CHECK(explicitSource.FilterErrors().empty());
+            HD_CHECK(!internal::FilterFileFailed(explicitSource));
+            const auto both = internal::UserFileErrors(explicitSource);
+            HD_REQUIRE(both.size() == 2);
+            HD_CHECK(both[1].kind == dict::LoadErrorKind::OptionalSource);
+            HD_CHECK_EQ(both[1].file, missingEhnd);
+            HD_CHECK(!dict::FailsLoad(both[1].kind));
+            HD_CHECK(internal::OpenEhndSource(generated, {missingEhnd, false, true, false}));
+            HD_CHECK(generated.UserFileError().empty());
+            HD_CHECK(generated.FilterErrors().empty());
+            HD_CHECK(generated.Reload());
+        }
+    }
+}
+
+HD_TEST(EhndCandidateKeepsAcceptedFolderHistory) {
+    TempFolder temp;
+    const auto folder = temp.path / "filters";
+    const auto renamed = temp.path / "renamed";
+    std::error_code error;
+    HD_REQUIRE(std::filesystem::create_directory(folder, error));
+    HD_REQUIRE(Write(folder / "PreFilter.txt", "猫\t犬\t1\t0\n"));
+    const dict::UserSource source{folder.string(), false, false, false};
+    Engine original(false, CacheWrite::Off);
+    HD_REQUIRE(internal::OpenEhndSource(original, source));
+    HD_REQUIRE(original.Open({Fixture()}));
+    std::optional<dict::UserSource> ehnd;
+    const auto users = internal::AcceptedUserSources(original, ehnd);
+    HD_REQUIRE(ehnd.has_value());
+    HD_CHECK(ehnd->available && ehnd->directory && !ehnd->explicitPath);
+    const auto before = internal::LoadedSourceInfo(original);
+    std::size_t receipts = 0;
+    for (const auto& file : before.files) {
+        if (file.kind != dict::LoadFileKind::EhndPreFilter) continue;
+        ++receipts;
+        HD_CHECK_EQ(file.path, (folder / "PreFilter.txt").string());
+        HD_REQUIRE(file.acceptedCount.has_value());
+        HD_CHECK_EQ(*file.acceptedCount, std::size_t{1});
+    }
+    HD_CHECK_EQ(receipts, std::size_t{1});
+    const auto filters = original.Filters();
+    std::filesystem::rename(folder, renamed, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(!original.Reload());
+    HD_CHECK(original.Filters() == filters);
+    HD_CHECK_EQ(internal::LoadedSourceInfo(original).generation, before.generation);
+    Engine missing(false, CacheWrite::Off);
+    internal::SeedUserSources(missing, users, ehnd);
+    HD_REQUIRE(internal::OpenEhndSource(missing, source));
+    HD_CHECK(!missing.Open({Fixture()}));
+    HD_CHECK(!missing.loaded());
+    HD_CHECK(internal::FilterFileFailed(missing));
+    HD_CHECK(!missing.FilterErrors().empty());
+    HD_CHECK(internal::LoadedSourceInfo(missing).files.empty());
+
+    Engine moved(false, CacheWrite::Off);
+    internal::SeedUserSources(moved, users, ehnd);
+    HD_REQUIRE(internal::OpenEhndSource(moved, {renamed.string()}));
+    HD_CHECK(moved.Open({Fixture()}));
+    HD_CHECK(moved.FilterErrors().empty());
+    Engine disabled(false, CacheWrite::Off);
+    internal::SeedUserSources(disabled, users, ehnd);
+    HD_REQUIRE(disabled.OpenEhnd(""));
+    HD_CHECK(disabled.Open({Fixture()}));
+    HD_CHECK(disabled.FilterErrors().empty());
+    std::filesystem::rename(renamed, folder, error);
+    HD_REQUIRE(!error);
+    HD_CHECK(original.Reload());
+    HD_CHECK(original.FilterErrors().empty());
+}
+
+HD_TEST(LoadedSourceReceiptsAreTransactional) {
+    TempFolder temp;
+    HD_REQUIRE(Write(temp.path / "userdict.txt", "# comment\n猫\t고양이\n猫\t냥이\n鳥\n"));
+    HD_REQUIRE(Write(temp.path / "before.tsv", "#! layer=prefilter\n# comment\n猫\t犬\t1\t0\n[\tx\t2\t1\n"));
+    EngineOptions options;
+    options.strictDict = false;
+    Engine engine(false, CacheWrite::Off, UserReload::Off, options);
+    HD_REQUIRE(engine.OpenUserDicts({Fixture()}, false, {temp.path.string()}));
+    const auto count = [](const internal::LoadInfo& info, dict::LoadFileKind kind,
+                          const std::string& path, std::size_t expected) {
+        std::size_t found = 0;
+        for (const auto& file : info.files) {
+            if (file.kind != kind || file.path != path) continue;
+            ++found;
+            HD_REQUIRE(file.acceptedCount.has_value());
+            HD_CHECK_EQ(*file.acceptedCount, expected);
+        }
+        HD_CHECK_EQ(found, std::size_t{1});
+    };
+    const auto initial = internal::LoadedSourceInfo(engine);
+    HD_CHECK(initial.generation != 0);
+    count(initial, dict::LoadFileKind::Shipped, (std::filesystem::path(Fixture()) / "base.tsv").string(), 2);
+    count(initial, dict::LoadFileKind::NativeUser, (temp.path / "userdict.txt").string(), 2);
+    count(initial, dict::LoadFileKind::NativePreFilter, (temp.path / "before.tsv").string(), 1);
+    std::size_t disabled = 0;
+    for (const auto& file : initial.files) disabled += file.kind == dict::LoadFileKind::EhndDisabled;
+    HD_CHECK_EQ(disabled, std::size_t{1});
+
+    const std::vector<EhndFile> ehnd{
+        {"PreFilter_toggles.txt", "_TGL\t_DECR:T_\t_ON\n"},
+        {"PostFilter.txt", "고양이\t야옹이\t1\t0\n[\tx\t2\t1\n"},
+        {"SkipLayer.txt", "PRE\t1\t猫\nPOST\t2\t[\n"},
+        {"UserDict.txt", "猫\t고양이\t0\t\n猫\t냥이\t0\t\n鳥\n"},
+    };
+    HD_REQUIRE(engine.SetEhnd(ehnd));
+    HD_REQUIRE(engine.SetUserDictRaw("猫\t야옹이\n猫\t냥이\n鳥\n"));
+    const auto accepted = internal::LoadedSourceInfo(engine);
+    count(accepted, dict::LoadFileKind::MemoryUser, "userdict.tsv", 2);
+    count(accepted, dict::LoadFileKind::MemoryEhndPreFilter, "PreFilter_toggles.txt", 0);
+    count(accepted, dict::LoadFileKind::MemoryEhndPostFilter, "PostFilter.txt", 1);
+    count(accepted, dict::LoadFileKind::MemoryEhndSkipLayer, "SkipLayer.txt", 1);
+    count(accepted, dict::LoadFileKind::MemoryEhndUserDict, "UserDict.txt", 2);
+    for (const auto& file : accepted.files) HD_CHECK(file.kind != dict::LoadFileKind::EhndDisabled);
+    HD_CHECK(!engine.SetEhnd(ehnd, DictionaryOptions{true}));
+    const auto rejected = internal::LoadedSourceInfo(engine);
+    HD_CHECK_EQ(rejected.generation, accepted.generation);
+    HD_REQUIRE(rejected.files.size() == accepted.files.size());
+    for (std::size_t i = 0; i < accepted.files.size(); ++i) {
+        HD_CHECK_EQ(rejected.files[i].path, accepted.files[i].path);
+        HD_CHECK(rejected.files[i].kind == accepted.files[i].kind);
+        HD_CHECK(rejected.files[i].acceptedCount == accepted.files[i].acceptedCount);
+    }
+    HD_REQUIRE(engine.SetEhnd({}));
+    for (const auto& file : internal::LoadedSourceInfo(engine).files) {
+        HD_CHECK(file.kind != dict::LoadFileKind::EhndDisabled);
+    }
+    HD_REQUIRE(engine.OpenEhnd(""));
+    disabled = 0;
+    for (const auto& file : internal::LoadedSourceInfo(engine).files) disabled += file.kind == dict::LoadFileKind::EhndDisabled;
+    HD_CHECK_EQ(disabled, std::size_t{1});
+}
+
 HD_TEST(UserDictionaryWatchInterval) {
     TempFolder temp;
     const std::vector<std::string> sources{temp.path.string()};
     internal::UserFilesWatch watch;
     internal::UserVersion found;
     const auto start = std::chrono::steady_clock::now();
-    HD_CHECK(!watch.Due(sources, start, 1s, found));
+    HD_CHECK(watch.Due(sources, start, 1s, found));
+    watch.loaded = found;
     HD_REQUIRE(Write(temp.path / "userdict.txt", "猫\t고양이\n"));
     HD_CHECK(!watch.Due(sources, start + 500ms, 1s, found));
     HD_CHECK(watch.Due(sources, start + 1s, 1s, found));

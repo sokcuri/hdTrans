@@ -55,8 +55,28 @@ translator.setUserDict([{ ja: '学生', ko: '학생', pos: 'noun' }]);
 
 const filters: EhndFiles = { 'PostFilter_test.txt': '학생\t학우\t1\t0\n' };
 translator.setEhnd(filters);
+translator.setUserDict(entries, { strict: false });
+translator.setUserDictRaw('学生\t학생\n', { strict: true });
+translator.setEhnd(filters, { strict: false });
+translator.setEhnd(filters, { strict: true });
 translator.clearEhnd();
-const options: InitOptions = { ehnd: filters };
+const options: InitOptions = { ehnd: filters, strictDict: false };
+HdTrans.init({ strictDict: true });
+HdTrans.getInfo({ strictDict: false });
+// @ts-expect-error Dictionary policy is a boolean.
+HdTrans.init({ strictDict: 'false' });
+// @ts-expect-error Dictionary policy is a boolean.
+HdTrans.getInfo({ strictDict: 'true' });
+// @ts-expect-error Per-load policy is a boolean.
+translator.setUserDict(entries, { strict: 'false' });
+// @ts-expect-error Per-load policy is a boolean.
+translator.setUserDictRaw('', { strict: 'true' });
+// @ts-expect-error Per-load policy is a boolean.
+translator.setEhnd(filters, { strict: 1 });
+// @ts-expect-error Dictionary policy is not a translation option.
+translator.translate('学生', { strictDict: false });
+// @ts-expect-error Dictionary policy is not a translation option.
+translator.translate('学生', { strict: false });
 // @ts-expect-error Selection settings are not public initialization options.
 HdTrans.init({ cg: false });
 // @ts-expect-error Selection settings are not public initialization options.
