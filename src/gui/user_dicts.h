@@ -36,8 +36,9 @@ struct DictText {
     bool column = false;
 };
 
+// A row of a plain dictionary file; note is the text of a trailing // field, which the loader skips.
 struct DictRow {
-    std::string key, ko, pos, options;
+    std::string key{}, ko{}, pos{}, options{}, note{};
 };
 
 bool ReadDictText(const std::filesystem::path& path, DictText& text);
@@ -45,8 +46,8 @@ bool ReadDictText(const std::filesystem::path& path, DictText& text);
 bool WriteDictText(const std::filesystem::path& path, const DictText& text);
 bool EntryLine(std::string_view line);
 DictRow ParseRow(std::string_view line);
-// The line of row; a trailing // comment of old is kept. Tabs and newlines in fields become spaces.
-std::string RowLine(const DictRow& row, std::string_view old = {});
+// The line of row, its note as a trailing "// note" field. Tabs and newlines in fields become spaces.
+std::string RowLine(const DictRow& row);
 // The field a row problem is in, and the problem in Korean; an empty message when the row loads.
 enum class RowField { Key, Ko, Pos, Options };
 struct RowProblem {

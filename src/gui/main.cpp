@@ -20,6 +20,7 @@
 #include <initializer_list>
 #include <memory>
 #include <mutex>
+#include <functional>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -53,6 +54,7 @@ constexpr UINT kStart = WM_APP + 4;
 constexpr UINT kRelist = WM_APP + 5;
 constexpr UINT kLog = WM_APP + 6;
 constexpr UINT kChecked = WM_APP + 7;
+constexpr UINT_PTR kWatchTimer = 1;
 constexpr std::size_t kLogLimit = 300;
 
 enum Page { kTextPage, kDocsPage, kDictsPage, kLogsPage };
@@ -109,6 +111,9 @@ struct App {
     std::string engineModuleDir;
     hdTrans::internal::UserVersion loadedUserVersion;
     hdTrans::internal::FolderVersion loadedEhndVersion;
+    // The source versions the timer last reloaded, so a failing version is not retried every second.
+    std::optional<std::pair<hdTrans::internal::UserVersion, hdTrans::internal::FolderVersion>> triedVersions;
+    std::shared_ptr<const hdTrans::dict::Snapshot> snapshot;  // the engine's dictionaries, under mutex
     std::thread worker;
     std::atomic<bool> cancel{false};
     std::atomic<bool> reloadDicts{false};
@@ -125,11 +130,15 @@ struct App {
     std::size_t skippedCount = 0;
     std::vector<std::wstring> failed;
     int overwriteAnswer = IDYES;
+    int removeAnswer = IDYES;
+    // Opens a folder in Explorer; the selftest replaces it.
+    std::function<bool(const fs::path&)> openFolder;
 
     std::vector<std::string> userSources;
     std::vector<gui::UserDict> userDicts;
     int dictIndex = -1;
     gui::DictText dictText;
+    std::optional<std::pair<std::uintmax_t, fs::file_time_type>> dictStamp;  // dictText as read
     std::vector<gui::DictRow> rows;
     std::vector<std::size_t> rowLines;  // the line of dictText of each row
 
@@ -336,20 +345,23 @@ void LayoutDicts(HWND page) {
     const int m = p(10), bh = p(26), gap = p(6), field = p(24);
     const int left = std::clamp(p.width * 3 / 10, p(200), p(280));
     const int bottom = p.height - m - bh;
-    p.Put(IDC_DICTS, m, m, left, bottom - p(8) - m);
+    const int upper = bottom - bh - gap;
+    p.Put(IDC_DICTS, m, m, left, upper - p(8) - m);
     p.Column(IDC_DICTS, 0, left - p.Scrollbar() - p(4));
     const int third = (left - 2 * gap) / 3;
     p.Put(IDC_DICT_NEW, m, bottom, third, bh);
     p.Put(IDC_DICT_IMPORT, m + third + gap, bottom, third, bh);
     p.Put(IDC_DICT_EXPORT, m + 2 * (third + gap), bottom, left - 2 * (third + gap), bh);
+    p.Put(IDC_DICT_REMOVE, m, upper, third, bh);
     const int x = m + left + p(10), w = p.width - x - m;
     const int fields = bottom - p(8) - field;
     p.Put(IDC_ENTRIES, x, m, w, fields - p(8) - m);
-    const int room = w - 3 * gap;
-    const int widths[] = {room * 3 / 10, room * 3 / 10, room * 15 / 100, room - 2 * (room * 3 / 10) - room * 15 / 100};
-    const int ids[] = {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS};
+    const int room = w - 4 * gap;
+    const int widths[] = {room * 25 / 100, room * 25 / 100, room * 13 / 100, room * 15 / 100,
+                          room - 2 * (room * 25 / 100) - room * 13 / 100 - room * 15 / 100};
+    const int ids[] = {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_NOTE};
     const int inner = w - p.Scrollbar() - p(4);
-    for (int column = 0, at = x; column < 4; ++column) {
+    for (int column = 0, at = x; column < 5; ++column) {
         p.Put(ids[column], at, fields, widths[column], ids[column] == IDC_ENTRY_POS ? p(200) : field);
         p.Column(IDC_ENTRIES, column, room > 0 ? MulDiv(widths[column], inner, room) : 0);
         at += widths[column] + gap;
@@ -358,6 +370,7 @@ void LayoutDicts(HWND page) {
     p.Put(IDC_ENTRY_ADD, p.width - m - 3 * bw - 2 * gap, bottom, bw, bh);
     p.Put(IDC_ENTRY_EDIT, p.width - m - 2 * bw - gap, bottom, bw, bh);
     p.Put(IDC_ENTRY_DELETE, p.width - m - bw, bottom, bw, bh);
+    p.Put(IDC_DICT_FOLDER, x, bottom, p(80), bh);
 }
 
 void LayoutLogs(HWND page) {
@@ -368,8 +381,9 @@ void LayoutLogs(HWND page) {
     p.Column(IDC_LOG_ENTRIES, 1, p(60));
     p.Column(IDC_LOG_ENTRIES, 2, std::max(full - p(140) - p.Scrollbar(), p(300)));
     p.Put(IDC_DICT_CHECK, m, p.height - m - bh, p(90), bh);
-    p.Put(IDC_LOG_COPY, m + p(98), p.height - m - bh, p(90), bh);
-    p.Put(IDC_LOG_CLEAR, m + p(196), p.height - m - bh, p(90), bh);
+    p.Put(IDC_LOG_FOLDER, m + p(98), p.height - m - bh, p(90), bh);
+    p.Put(IDC_LOG_COPY, m + p(196), p.height - m - bh, p(90), bh);
+    p.Put(IDC_LOG_CLEAR, m + p(294), p.height - m - bh, p(90), bh);
 }
 
 // The work area of the monitor that holds most of the window.
@@ -634,6 +648,10 @@ bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, c
         return false;
     }
     if (candidate) app.engine = std::move(candidate);
+    {
+        std::lock_guard lock(app.mutex);
+        app.snapshot = app.engine->Dictionaries();
+    }
     CommitSettings(app, settings);
     app.engineDictDirs = dirs;
     app.engineUserPaths = userPaths;
@@ -1199,6 +1217,7 @@ void ShowEntry(App& app, int row) {
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, Wide(entry.ko).c_str());
     SetDlgItemTextW(app.dicts, IDC_ENTRY_POS, Wide(entry.pos).c_str());
     SetDlgItemTextW(app.dicts, IDC_ENTRY_OPTIONS, Wide(entry.options).c_str());
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_NOTE, Wide(entry.note).c_str());
 }
 
 // Lists the rows of the open file and selects row; fill also shows that row in the entry fields.
@@ -1221,23 +1240,84 @@ void ShowEntries(App& app, int row, bool fill = true) {
     app.filling = false;
     InvalidateRect(grid, nullptr, TRUE);
     const BOOL editable = CurrentDict(app) && !app.dictText.column ? TRUE : FALSE;
-    for (int id : {IDC_ENTRIES, IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_ADD, IDC_ENTRY_EDIT, IDC_ENTRY_DELETE}) {
+    for (int id : {IDC_ENTRIES, IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_NOTE, IDC_ENTRY_ADD,
+                   IDC_ENTRY_EDIT, IDC_ENTRY_DELETE}) {
         EnableWindow(GetDlgItem(app.dicts, id), editable);
     }
     EnableWindow(GetDlgItem(app.dicts, IDC_DICT_EXPORT), CurrentDict(app) ? TRUE : FALSE);
+    EnableWindow(GetDlgItem(app.dicts, IDC_DICT_REMOVE), CurrentDict(app) ? TRUE : FALSE);
     if (fill) ShowEntry(app, row);
+}
+
+std::optional<std::pair<std::uintmax_t, fs::file_time_type>> FileStamp(const fs::path& path) {
+    std::error_code sizeError, timeError;
+    const auto size = fs::file_size(path, sizeError);
+    const auto time = fs::last_write_time(path, timeError);
+    if (sizeError || timeError) return std::nullopt;
+    return std::pair{size, time};
+}
+
+std::string ProgramDir(const App& app) {
+    return app.engineModuleDir.empty() ? hdTrans::frontend::ModuleDirectory() : app.engineModuleDir;
+}
+
+// path relative to the data folder, with / separators.
+std::string DataRelative(const App& app, const fs::path& path) {
+    const fs::path data(Wide(hdTrans::dict::DataFolder(ProgramDir(app))));
+    const auto text = path.lexically_proximate(data).generic_u8string();
+    return {reinterpret_cast<const char*>(text.data()), text.size()};
+}
+
+// Logs "[file] text" as kind; INFO for changes, 사전 for failures and warnings.
+void LogDict(App& app, const wchar_t* kind, const fs::path& file, const std::string& text) {
+    LogDiagnosticLines(app, kind, "[" + DataRelative(app, file) + "] " + text);
+}
+
+// Reads the open file into dictText; false when it cannot be read.
+bool ReadOpenDict(App& app) {
+    app.dictText = {};
+    app.dictStamp.reset();
+    const gui::UserDict* dict = CurrentDict(app);
+    if (!dict) return true;
+    app.dictStamp = FileStamp(DictFile(*dict));
+    if (gui::ReadDictText(DictFile(*dict), app.dictText)) return true;
+    app.dictText = {};
+    app.dictText.column = true;
+    return false;
 }
 
 void OpenDict(App& app, int index) {
     app.dictIndex = index;
-    app.dictText = {};
-    const gui::UserDict* dict = CurrentDict(app);
-    if (dict && !gui::ReadDictText(DictFile(*dict), app.dictText)) {
-        app.dictText = {};
-        app.dictText.column = true;
-        ReportError(app, (L"사전 파일을 읽지 못했습니다.\n\n" + DictFile(*dict).native()).c_str());
-    }
+    if (!ReadOpenDict(app))
+        ReportError(app, (L"사전 파일을 읽지 못했습니다.\n\n" + DictFile(*CurrentDict(app)).native()).c_str());
     ShowEntries(app, 0);
+}
+
+bool SameRow(const gui::DictRow& a, const gui::DictRow& b) {
+    return a.key == b.key && a.ko == b.ko && a.pos == b.pos && a.options == b.options && a.note == b.note;
+}
+
+// Rereads the open file when it changed on disk, keeping the typed entry. The selection follows
+// its row by content; a selected row that is gone leaves nothing selected.
+bool RefreshChangedDict(App& app) {
+    const gui::UserDict* dict = CurrentDict(app);
+    if (!dict || FileStamp(DictFile(*dict)) == app.dictStamp) return false;
+    const int row = Selected(GetDlgItem(app.dicts, IDC_ENTRIES));
+    std::optional<gui::DictRow> selected;
+    if (row >= 0 && static_cast<std::size_t>(row) < app.rows.size()) selected = app.rows[static_cast<std::size_t>(row)];
+    ReadOpenDict(app);
+    LogDict(app, L"INFO", DictFile(*dict), "외부에서 바뀜, 다시 읽음");
+    ShowEntries(app, -1, false);
+    if (!selected) return true;
+    const auto found = std::find_if(app.rows.begin(), app.rows.end(), [&](const auto& r) { return SameRow(r, *selected); });
+    if (found == app.rows.end()) {
+        LogDict(app, L"INFO", DictFile(*dict), "선택한 줄이 바깥에서 바뀌어 선택을 풀었습니다: " + selected->key);
+        return true;
+    }
+    app.filling = true;
+    Select(GetDlgItem(app.dicts, IDC_ENTRIES), static_cast<int>(found - app.rows.begin()));
+    app.filling = false;
+    return true;
 }
 
 // Lists the dictionary files again and opens the one at path, or the open one when path is empty.
@@ -1287,35 +1367,78 @@ bool SaveDict(App& app) {
         ReportError(app, L"사전 파일을 저장하지 못했습니다.");
         return false;
     }
+    app.dictStamp = FileStamp(DictFile(*dict));
     app.reloadDicts = true;
     return true;
 }
 
+// What the loader compares besides the key when a later row replaces an earlier one: the POS
+// (n by default) and the register and stative options.
+std::string RowKind(const gui::DictRow& row) {
+    std::string kind = row.pos.empty() ? "n" : row.pos;
+    for (std::size_t at = 0; at < row.options.size();) {
+        const std::size_t space = row.options.find(' ', at);
+        const std::string option = row.options.substr(at, space == std::string::npos ? std::string::npos : space - at);
+        if (option == "stative" || option.starts_with("register=")) kind += ' ' + option;
+        if (space == std::string::npos) break;
+        at = space + 1;
+    }
+    return kind;
+}
+
 void ChangeEntry(App& app, int id) {
     const HWND grid = GetDlgItem(app.dicts, IDC_ENTRIES);
-    const int row = Selected(grid);
+    int row = Selected(grid);
     if (!CurrentDict(app) || app.dictText.column) return;
     if (id != IDC_ENTRY_ADD && (row < 0 || static_cast<std::size_t>(row) >= app.rows.size())) return;
+    const fs::path file = DictFile(*CurrentDict(app));
+    const std::string action = id == IDC_ENTRY_ADD ? "사전 추가" : id == IDC_ENTRY_EDIT ? "사전 수정" : "사전 삭제";
     gui::DictRow entry{Utf8(ControlText(app.dicts, IDC_ENTRY_KEY)), Utf8(ControlText(app.dicts, IDC_ENTRY_KO)),
-                       Utf8(ControlText(app.dicts, IDC_ENTRY_POS)), Utf8(ControlText(app.dicts, IDC_ENTRY_OPTIONS))};
+                       Utf8(ControlText(app.dicts, IDC_ENTRY_POS)), Utf8(ControlText(app.dicts, IDC_ENTRY_OPTIONS)),
+                       Utf8(ControlText(app.dicts, IDC_ENTRY_NOTE))};
+    // A key starting with # or // makes the line a comment; it is saved as typed.
+    const bool comment = !gui::EntryLine(entry.key);
     if (id != IDC_ENTRY_DELETE && entry.key.find_first_not_of(" \t") == std::string::npos) {
         SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
         return;
     }
-    if (id != IDC_ENTRY_DELETE) {
+    if (id != IDC_ENTRY_DELETE && !comment) {
         // A row the loader would skip is not saved; the fields stay for correction.
-        const auto snapshot = app.engine ? app.engine->Dictionaries() : nullptr;
+        // The engine may be replaced by a reload on the worker; its dictionaries are shared under mutex.
+        std::shared_ptr<const hdTrans::dict::Snapshot> snapshot;
+        {
+            std::lock_guard lock(app.mutex);
+            snapshot = app.snapshot;
+        }
         const gui::RowProblem problem = gui::CheckRow(entry, snapshot ? &snapshot->Base() : nullptr);
         if (!problem.message.empty()) {
             constexpr int fields[] = {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS};
-            LogDiagnosticLines(app, L"사전", std::string(id == IDC_ENTRY_ADD ? "사전 추가 실패: " : "사전 수정 실패: ") +
-                                                 entry.key + " (" + problem.message + ")");
+            LogDict(app, L"사전", file, action + " 실패: " + entry.key + " (" + problem.message + ")");
             SetFocus(GetDlgItem(app.dicts, fields[static_cast<int>(problem.field)]));
             return;
         }
     }
-    if (id == IDC_ENTRY_ADD && std::any_of(app.rows.begin(), app.rows.end(), [&](const auto& r) { return r.key == entry.key; }))
-        LogDiagnosticLines(app, L"사전", "같은 단어가 이미 있습니다: " + entry.key + " (앞 줄이 우선합니다)");
+    // A file changed on disk since it was read is read again first, so a save never writes
+    // stale rows; an edit or delete then acts on the same row if it is still there.
+    std::optional<gui::DictRow> old;
+    if (id != IDC_ENTRY_ADD) old = app.rows[static_cast<std::size_t>(row)];
+    if (RefreshChangedDict(app) && old) {
+        const auto found = std::find_if(app.rows.begin(), app.rows.end(), [&](const auto& r) { return SameRow(r, *old); });
+        if (found == app.rows.end()) {
+            LogDict(app, L"사전", file, action + " 실패: " + old->key + " (파일이 바뀌어 그 줄이 없습니다)");
+            return;
+        }
+        row = static_cast<int>(found - app.rows.begin());
+    }
+    if (id == IDC_ENTRY_ADD && !comment) {
+        bool same = false, other = false;
+        for (const auto& r : app.rows) {
+            if (r.key != entry.key) continue;
+            (RowKind(r) == RowKind(entry) ? same : other) = true;
+        }
+        if (same) LogDict(app, L"사전", file, "같은 단어가 이미 있습니다: " + entry.key + " (앞 줄이 우선합니다)");
+        else if (other) LogDict(app, L"사전", file, "같은 단어가 다른 품사로 이미 있습니다: " + entry.key);
+    }
     const gui::DictText before = app.dictText;
     int next = row;
     if (id == IDC_ENTRY_ADD) {
@@ -1323,11 +1446,25 @@ void ChangeEntry(App& app, int id) {
         next = static_cast<int>(app.rows.size());
     } else {
         const std::size_t line = app.rowLines[static_cast<std::size_t>(row)];
-        if (id == IDC_ENTRY_EDIT) app.dictText.lines[line] = gui::RowLine(entry, app.dictText.lines[line]);
+        if (id == IDC_ENTRY_EDIT) app.dictText.lines[line] = gui::RowLine(entry);
         else app.dictText.lines.erase(app.dictText.lines.begin() + static_cast<std::ptrdiff_t>(line));
     }
     const bool saved = SaveDict(app);
-    if (!saved) app.dictText = before;
+    if (!saved) {
+        app.dictText = before;
+        LogDict(app, L"사전", file, action + " 실패: " + (old ? old->key : entry.key) + " (파일을 쓸 수 없습니다)");
+    } else if (comment && id != IDC_ENTRY_DELETE) {
+        LogDict(app, L"INFO", file, "주석으로 저장됨: " + gui::RowLine(entry));
+    } else if (id == IDC_ENTRY_ADD) {
+        LogDict(app, L"INFO", file, action + ": " + gui::RowLine(entry));
+    } else if (id == IDC_ENTRY_EDIT) {
+        // The previous row without its key when the key stayed, so the line reads as the row it replaced.
+        const std::string previous = old->key == entry.key ? gui::RowLine({"", old->ko, old->pos, old->options, old->note}).substr(1)
+                                                           : gui::RowLine(*old);
+        LogDict(app, L"INFO", file, action + ": " + gui::RowLine(entry) + " (이전: " + previous + ")");
+    } else {
+        LogDict(app, L"INFO", file, action + ": " + gui::RowLine(*old));
+    }
     if (id != IDC_ENTRY_ADD) {
         ShowEntries(app, saved ? next : row);
         return;
@@ -1373,6 +1510,7 @@ void NewDict(App& app) {
         return;
     }
     app.reloadDicts = true;
+    LogDict(app, L"INFO", path, "새 사전");
     ShowDicts(app, path);
     if (!app.selftest && app.dictIndex >= 0) {
         SetFocus(GetDlgItem(app.dicts, IDC_DICTS));
@@ -1403,7 +1541,66 @@ bool RenameDict(App& app, int index, const wchar_t* name) {
     }
     dict.path = path;
     QueueSourceEdit(app, previous, path, dict.on);
+    LogDict(app, L"INFO", previous, "사전 이름 바꿈: " + DataRelative(app, path));
     return true;
+}
+
+// Moves the open dictionary file to the Recycle Bin after a confirmation naming it and its rows.
+void RemoveDict(App& app) {
+    const gui::UserDict* dict = CurrentDict(app);
+    if (!dict) return;
+    const fs::path file = DictFile(*dict);
+    const std::wstring question = L"이 사전 파일을 휴지통으로 옮길까요?\n\n" + file.filename().native() + L"\n항목 " +
+                                  std::to_wstring(app.rows.size()) + L"개";
+    const int answer = app.selftest ? app.removeAnswer
+                                    : MessageBoxW(app.main, question.c_str(), L"hdTrans", MB_YESNO | MB_ICONWARNING | MB_DEFBUTTON2);
+    if (answer != IDYES) return;
+    std::wstring from = file.native();
+    from.push_back(L'\0');
+    SHFILEOPSTRUCTW operation{};
+    operation.hwnd = app.main;
+    operation.wFunc = FO_DELETE;
+    operation.pFrom = from.c_str();
+    // Without a Recycle Bin on the drive, Windows asks before deleting for good.
+    operation.fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION | FOF_WANTNUKEWARNING | FOF_SILENT | FOF_NOERRORUI;
+    if (SHFileOperationW(&operation) != 0 || operation.fAnyOperationsAborted) {
+        LogDict(app, L"사전", file, "사전 삭제 실패 (파일을 옮길 수 없습니다)");
+        ReportError(app, L"사전 파일을 휴지통으로 옮기지 못했습니다.");
+        return;
+    }
+    // A GUI removal, not a disappearance: the reload drops the source.
+    QueueSourceEdit(app, dict->path, dict->path, false);
+    LogDict(app, L"INFO", file, "사전 삭제됨 (휴지통)");
+    ShowDicts(app, {});
+}
+
+// Opens folder in Explorer, creating it first when it is missing.
+void OpenFolder(App& app, const fs::path& folder) {
+    std::error_code error;
+    fs::create_directories(folder, error);
+    const bool opened = !error && fs::is_directory(folder, error) &&
+        (app.openFolder ? app.openFolder(folder)
+                        : reinterpret_cast<INT_PTR>(ShellExecuteW(app.main, L"open", folder.c_str(), nullptr, nullptr, SW_SHOWNORMAL)) > 32);
+    if (!opened) LogDiagnosticLines(app, L"사전", "폴더를 열 수 없습니다: " + Utf8(folder.native()));
+}
+
+fs::path DataFolderPath(const App& app) { return fs::path(Wide(hdTrans::dict::DataFolder(ProgramDir(app)))); }
+fs::path UserFolderPath(const App& app) { return fs::path(Wide(hdTrans::dict::UserFolder(ProgramDir(app)))); }
+
+// Picks up edits made outside the GUI: the open file is read again, and changed sources reload
+// the engine through the dictionary check. Runs once a second while no job is running.
+void CheckExternalEdits(App& app) {
+    if (app.busy || !app.dicts) return;
+    RefreshChangedDict(app);
+    if (!app.engine || !app.engine->loaded()) return;
+    const auto requested = RequestedSources(app.engineUserPaths, app.settings.userdict.has_value());
+    auto versions = std::pair{hdTrans::internal::UserVersionOf(requested, app.engineConfigPath),
+                              hdTrans::internal::FolderVersionOf(app.engineEhndDir)};
+    // A version that already failed to load waits for the next change instead of retrying.
+    if ((versions.first == app.loadedUserVersion && versions.second == app.loadedEhndVersion) || versions == app.triedVersions)
+        return;
+    app.triedVersions = std::move(versions);
+    StartDictionaryCheck(app);
 }
 
 void ImportDicts(App& app, const std::vector<fs::path>& paths) {
@@ -1563,7 +1760,7 @@ INT_PTR CALLBACK DictsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPar
     case WM_INITDIALOG: {
         app->dicts = window;
         InsertColumns(GetDlgItem(window, IDC_DICTS), {L""}, LVS_EX_CHECKBOXES | LVS_EX_FULLROWSELECT);
-        InsertColumns(GetDlgItem(window, IDC_ENTRIES), {L"일본어", L"한국어", L"품사", L"옵션"}, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+        InsertColumns(GetDlgItem(window, IDC_ENTRIES), {L"일본어", L"한국어", L"품사", L"옵션", L"메모"}, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
         for (const wchar_t* pos : {L"n", L"phrase", L"name", L"surname", L"place", L"intj", L"hon", L"v", L"v1", L"v5",
                                    L"adj", L"na", L"adv", L"ono", L"end", L"pat"}) {
             SendDlgItemMessageW(window, IDC_ENTRY_POS, CB_ADDSTRING, 0, reinterpret_cast<LPARAM>(pos));
@@ -1586,6 +1783,8 @@ INT_PTR CALLBACK DictsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPar
             return TRUE;
         }
         case IDC_DICT_EXPORT: ExportDict(*app); return TRUE;
+        case IDC_DICT_REMOVE: RemoveDict(*app); return TRUE;
+        case IDC_DICT_FOLDER: OpenFolder(*app, UserFolderPath(*app)); return TRUE;
         case IDC_ENTRY_ADD:
         case IDC_ENTRY_EDIT:
         case IDC_ENTRY_DELETE: ChangeEntry(*app, LOWORD(wParam)); return TRUE;
@@ -1613,8 +1812,8 @@ INT_PTR CALLBACK DictsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPar
                 const auto row = static_cast<std::size_t>(info->item.iItem);
                 if ((info->item.mask & LVIF_TEXT) && row < app->rows.size() && info->item.cchTextMax > 0) {
                     const gui::DictRow& entry = app->rows[row];
-                    const std::string* fields[] = {&entry.key, &entry.ko, &entry.pos, &entry.options};
-                    const std::string* field = info->item.iSubItem >= 0 && info->item.iSubItem < 4 ? fields[info->item.iSubItem] : nullptr;
+                    const std::string* fields[] = {&entry.key, &entry.ko, &entry.pos, &entry.options, &entry.note};
+                    const std::string* field = info->item.iSubItem >= 0 && info->item.iSubItem < 5 ? fields[info->item.iSubItem] : nullptr;
                     lstrcpynW(info->item.pszText, field ? Wide(*field).c_str() : L"", info->item.cchTextMax);
                 }
                 return TRUE;
@@ -1646,6 +1845,7 @@ INT_PTR CALLBACK LogsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
         case IDC_DICT_CHECK: StartDictionaryCheck(*app); return TRUE;
+        case IDC_LOG_FOLDER: OpenFolder(*app, DataFolderPath(*app)); return TRUE;
         case IDC_LOG_COPY: CopyLogs(*app); return TRUE;
         case IDC_LOG_CLEAR: ClearLogs(*app); return TRUE;
         }
@@ -1676,6 +1876,7 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
             return FALSE;
         }
         DragAcceptFiles(window, TRUE);
+        if (!app->selftest) SetTimer(window, kWatchTimer, 1000, nullptr);
         SetFont(window, app->font);
         const Placer p(window);
         const RECT frame = FitInside({p(640), p(680)}, WorkArea(window));
@@ -1724,6 +1925,9 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_DROPFILES: TakeDrop(*app, reinterpret_cast<HDROP>(wParam)); return TRUE;
     case kLog: ShowLogs(*app); return TRUE;
     case kChecked: FinishDictionaryCheck(*app); return TRUE;
+    case WM_TIMER:
+        if (wParam == kWatchTimer) CheckExternalEdits(*app);
+        return TRUE;
     case kDone: FinishShort(*app); return TRUE;
     case WM_CLOSE:
         if (app->busy) {
@@ -1746,7 +1950,7 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
 // The entry fields of the dictionary page, including the edit box inside the POS combo box.
 bool EntryField(const App& app, HWND window) {
     if (!app.dicts || !window) return false;
-    for (const int id : {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_OPTIONS})
+    for (const int id : {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_OPTIONS, IDC_ENTRY_NOTE})
         if (window == GetDlgItem(app.dicts, id)) return true;
     const HWND pos = GetDlgItem(app.dicts, IDC_ENTRY_POS);
     return (window == pos || GetParent(window) == pos) && !SendMessageW(pos, CB_GETDROPPEDSTATE, 0, 0);
@@ -1862,13 +2066,14 @@ bool SelfTestEntryKeys(App& app) {
     if (!Check(FocusIn(app.dicts, IDC_ENTRY_KEY), "focus the Japanese entry field")) return false;
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드");
+    const std::wstring where = L"[" + Wide(DataRelative(app, DictFile(*CurrentDict(app)))) + L"] ";
     bool ok = true;
-    for (const int id : {IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_ADD}) {
+    for (const int id : {IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_NOTE, IDC_ENTRY_ADD}) {
         PressKey(app, VK_TAB);
         ok = Check(FocusIn(app.dicts, id), "Tab moves to the next entry control") && ok;
     }
     PressKey(app, VK_TAB, true);
-    ok = Check(FocusIn(app.dicts, IDC_ENTRY_OPTIONS), "Shift+Tab moves back from 추가") && ok;
+    ok = Check(FocusIn(app.dicts, IDC_ENTRY_NOTE), "Shift+Tab moves back from 추가") && ok;
     PressKey(app, VK_RETURN);
     ok = Check(app.rows.size() == 1 && app.rows[0].key == "ＺＺ0" && app.rows[0].ko == "키보드" &&
                ControlText(app.dicts, IDC_ENTRY_KEY).empty() && FocusIn(app.dicts, IDC_ENTRY_KEY) && IsWindow(app.main),
@@ -1878,22 +2083,47 @@ bool SelfTestEntryKeys(App& app) {
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ9");
     PressKey(app, VK_RETURN);
     ok = Check(app.rows.size() == 1 && ControlText(app.dicts, IDC_ENTRY_KEY) == L"ＺＺ9" && FocusIn(app.dicts, IDC_ENTRY_KO) &&
-               Logged(app, L"사전", L"사전 추가 실패: ＺＺ9 (한국어가 비어 있습니다)"),
+               Logged(app, L"사전", where + L"사전 추가 실패: ＺＺ9 (한국어가 비어 있습니다)"),
                "an empty Korean field is not saved, keeps the entry and focuses the Korean field") && ok;
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
     SetDlgItemTextW(app.dicts, IDC_ENTRY_POS, L"zzz");
     SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
     PressKey(app, VK_RETURN);
     ok = Check(app.rows.size() == 1 && ControlText(app.dicts, IDC_ENTRY_POS) == L"zzz" && FocusIn(app.dicts, IDC_ENTRY_POS) &&
-               Logged(app, L"사전", L"사전 추가 실패: ＺＺ9 (알 수 없는 품사입니다: zzz)"),
+               Logged(app, L"사전", where + L"사전 추가 실패: ＺＺ9 (알 수 없는 품사입니다: zzz)"),
                "an unknown POS is not saved and focuses the POS field") && ok;
     ShowEntry(app, -1);
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드2");
     SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
     PressKey(app, VK_RETURN);
-    ok = Check(app.rows.size() == 2 && Logged(app, L"사전", L"같은 단어가 이미 있습니다: ＺＺ0 (앞 줄이 우선합니다)"),
+    ok = Check(app.rows.size() == 2 && Logged(app, L"사전", where + L"같은 단어가 이미 있습니다: ＺＺ0 (앞 줄이 우선합니다)"),
                "a duplicate key is added with a warning") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드3");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_POS, L"name");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 3 && Logged(app, L"사전", where + L"같은 단어가 다른 품사로 이미 있습니다: ＺＺ0") &&
+               Logged(app, L"INFO", where + L"사전 추가: ＺＺ0\t키보드3\tname"),
+               "a key with another POS is added with its own warning and logged as a full row") && ok;
+    ShowEntry(app, -1);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"#メモ");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, VK_RETURN);
+    std::string saved;
+    gui::TextEncoding savedEncoding{};
+    const fs::path open = DictFile(*CurrentDict(app));
+    ok = Check(gui::ReadTextFile(open, saved, savedEncoding) && saved.ends_with("#メモ\n") && app.rows.size() == 3 &&
+               Logged(app, L"INFO", where + L"주석으로 저장됨: #メモ"), "a key starting with # is saved as a comment line") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ7");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"메모있음");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_NOTE, L"출처 확인");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_NOTE));
+    PressKey(app, VK_RETURN);
+    ok = Check(gui::ReadTextFile(open, saved, savedEncoding) && saved.ends_with("ＺＺ7\t메모있음\t// 출처 확인\n") && app.rows.size() == 4 &&
+               app.rows[3].note == "출처 확인" && Logged(app, L"INFO", where + L"사전 추가: ＺＺ7\t메모있음\t// 출처 확인"),
+               "a note is saved as a trailing // field, listed and logged") && ok;
     // An IME composition takes Enter; where no IME can compose, this only reports the skip.
     const HWND keyField = GetDlgItem(app.dicts, IDC_ENTRY_KEY);
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ8");
@@ -1923,11 +2153,85 @@ bool SelfTestEntryKeys(App& app) {
     SetDlgItemTextW(app.text, IDC_SOURCE, L"日本語");
     SendDlgItemMessageW(app.text, IDC_SOURCE, EM_SETSEL, 3, 3);
     PressKey(app, VK_RETURN);
-    ok = Check(ControlText(app.text, IDC_SOURCE) == L"日本語\r\n" && !app.busy && app.rows.size() == 2,
+    ok = Check(ControlText(app.text, IDC_SOURCE) == L"日本語\r\n" && !app.busy && app.rows.size() == 4,
                "Enter in the source box is a line break, not a translation or an add") && ok;
     SetDlgItemTextW(app.text, IDC_SOURCE, L"");
     ShowPage(app, kDictsPage);
     return ok;
+}
+
+// Writes the bytes of text to file as another program would, with a later modification time.
+bool WriteExternally(const fs::path& file, const std::string& text) {
+    std::error_code error;
+    const auto before = fs::last_write_time(file, error);
+    FILE* out = _wfopen(file.c_str(), L"wb");
+    if (!out) return false;
+    const bool written = std::fwrite(text.data(), 1, text.size(), out) == text.size();
+    if (std::fclose(out) != 0 || !written) return false;
+    fs::last_write_time(file, before + std::chrono::seconds(5), error);
+    return !error;
+}
+
+// Edits made to the open file outside the GUI: the list rereads them without touching the typed
+// entry, the engine reloads, and a GUI change never writes over them.
+bool SelfTestExternalEdits(App& app, const fs::path& file, const std::wstring& where) {
+    const HWND grid = GetDlgItem(app.dicts, IDC_ENTRIES);
+    std::string text;
+    gui::TextEncoding encoding{};
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"メモ");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"입력중");
+    if (!Check(WriteExternally(file, "犬\t고친사용자\n象\t외부사전\n"), "edit the open file externally")) return false;
+    CheckExternalEdits(app);
+    bool ok = Check(app.rows.size() == 2 && app.rows[1].key == "象" && ControlText(app.dicts, IDC_ENTRY_KEY) == L"メモ" &&
+                    ControlText(app.dicts, IDC_ENTRY_KO) == L"입력중" && Logged(app, L"INFO", where + L"외부에서 바뀜, 다시 읽음"),
+                    "an external edit refreshes the list, keeps the typed entry and is logged");
+    if (!WaitForJob(app)) return false;
+    ok = Check(TranslateShort(app, L"象") == L"외부사전", "an external edit reloads the engine") && ok;
+    ShowPage(app, kDictsPage);
+    Select(grid, 1);
+    if (!Check(WriteExternally(file, "猿\t원숭이\n犬\t고친사용자\n象\t외부사전\n"), "insert a row above the selected row externally"))
+        return false;
+    CheckExternalEdits(app);
+    ok = Check(Selected(grid) == 2 && app.rows[2].key == "象", "a reread keeps the selected row by content, not by index") && ok;
+    if (!WaitForJob(app)) return false;
+    if (!Check(WriteExternally(file, "猿\t원숭이\n犬\t고친사용자\n"), "remove the selected row externally")) return false;
+    CheckExternalEdits(app);
+    ok = Check(Selected(grid) == -1 && Logged(app, L"INFO", where + L"선택한 줄이 바깥에서 바뀌어 선택을 풀었습니다: 象"),
+               "a selected row removed outside leaves nothing selected and is logged") && ok;
+    if (!WaitForJob(app)) return false;
+    const auto failures = [&] {
+        std::lock_guard lock(app.mutex);
+        return std::count_if(app.logEntries.begin(), app.logEntries.end(),
+                             [](const auto& entry) { return entry.message == L"사전을 다시 읽지 못했습니다. 이전 사전 유지."; });
+    };
+    if (!Check(WriteExternally(file, "\xff\n"), "write a file the reload rejects")) return false;
+    CheckExternalEdits(app);
+    if (!WaitForJob(app)) return false;
+    const auto failed = failures();
+    CheckExternalEdits(app);
+    ok = Check(failed >= 1 && !app.busy && failures() == failed, "a reload that failed is not retried until the file changes") && ok;
+    if (!Check(WriteExternally(file, "犬\t고친사용자\n象\t외부사전\n"), "repair the rejected file")) return false;
+    CheckExternalEdits(app);
+    ok = Check(app.busy, "a file changed after a failed reload is tried again") && ok;
+    if (!WaitForJob(app)) return false;
+    ShowPage(app, kDictsPage);
+    if (!Check(WriteExternally(file, "犬\t고친사용자\n象\t외부사전\n蛇\t뱀사전\n"), "edit the file again externally")) return false;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"熊");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"곰사전");
+    NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    ok = Check(gui::ReadTextFile(file, text, encoding) && text == "犬\t고친사용자\n象\t외부사전\n蛇\t뱀사전\n熊\t곰사전\n",
+               "an add after an unseen external edit keeps that edit") && ok;
+    Select(grid, 1);
+    if (!Check(WriteExternally(file, "猿\t원숭이\n犬\t고친사용자\n象\t외부사전\n蛇\t뱀사전\n熊\t곰사전\n"),
+               "insert a row above the selection externally")) return false;
+    NotifyClick(app.dicts, IDC_ENTRY_DELETE);
+    ok = Check(gui::ReadTextFile(file, text, encoding) && text == "猿\t원숭이\n犬\t고친사용자\n蛇\t뱀사전\n熊\t곰사전\n",
+               "a delete after an external edit removes the selected row, not the one now at its index") && ok;
+    if (!Check(WriteExternally(file, "犬\t고친사용자\n"), "restore the dictionary file")) return false;
+    CheckExternalEdits(app);
+    if (!WaitForJob(app)) return false;
+    ShowPage(app, kDictsPage);
+    return Check(app.rows.size() == 1, "the restored file is listed") && ok;
 }
 
 // The dictionary page on the user folder of the default layout under program.
@@ -1941,6 +2245,8 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
                     "dictionary page lists the user dictionary");
     if (!ok) return false;
     Select(grid, 0);
+    const gui::DictRow original = app.rows[0];
+    const std::wstring where = L"[" + user.filename().native() + L"/USERDICT.TSV] ";
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"고친사용자");
     NotifyClick(app.dicts, IDC_ENTRY_EDIT);
     SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"鳥");
@@ -1952,6 +2258,9 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
                text == "犬\t고친사용자\n鳥\t추가사용자\n", "edited dictionary file") && ok;
     ok = Check(ControlText(app.dicts, IDC_ENTRY_KEY).empty() && ControlText(app.dicts, IDC_ENTRY_KO).empty() &&
                Selected(grid) == 1 && app.rows[1].key == "鳥", "a saved add clears the fields and selects the new row") && ok;
+    ok = Check(Logged(app, L"INFO", where + L"사전 수정: " + Wide(gui::RowLine({"犬", "고친사용자", original.pos, original.options, original.note})) +
+                                        L" (이전: " + Wide(gui::RowLine({"", original.ko, original.pos, original.options, original.note}).substr(1)) + L")") &&
+               Logged(app, L"INFO", where + L"사전 추가: 鳥\t추가사용자"), "edit and add are logged as full rows") && ok;
     ok = Check(TranslateShort(app, L"鳥\r\n犬") == L"추가사용자\r\n고친사용자", "translation reads the edited dictionary") && ok;
     const HANDLE locked = CreateFileW(file.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (!Check(locked != INVALID_HANDLE_VALUE, "deny writes to the dictionary file")) return false;
@@ -1962,6 +2271,7 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     ok = Check(ControlText(app.dicts, IDC_ENTRY_KEY) == L"魚" && ControlText(app.dicts, IDC_ENTRY_KO) == L"실패사용자" &&
                app.rows.size() == 2 && gui::ReadTextFile(file, text, encoding) && text == "犬\t고친사용자\n鳥\t추가사용자\n",
                "a failed add keeps the typed entry and the file") && ok;
+    ok = Check(Logged(app, L"사전", where + L"사전 추가 실패: 魚 (파일을 쓸 수 없습니다)"), "a failed write is logged") && ok;
 
     ListView_SetCheckState(list, 0, FALSE);
     std::error_code error;
@@ -1974,6 +2284,8 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     Select(grid, 1);
     NotifyClick(app.dicts, IDC_ENTRY_DELETE);
     ok = Check(gui::ReadTextFile(file, text, encoding) && text == "犬\t고친사용자\n", "turned on and deleted a row") && ok;
+    ok = Check(Logged(app, L"INFO", where + L"사전 삭제: 鳥\t추가사용자"), "a delete is logged as the full row") && ok;
+    ok = SelfTestExternalEdits(app, file, where) && ok;
 
     NotifyClick(app.dicts, IDC_DICT_NEW);
     ok = Check(fs::exists(gui::UserDictPath(user, "새 사전"), error) && app.userDicts.size() == 2 && app.rows.empty(),
@@ -1984,18 +2296,40 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
         SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
         NotifyClick(app.dicts, IDC_ENTRY_ADD);
     }
-    ok = Check(app.rows.size() == 42 && Selected(grid) == 41 && ListView_IsItemVisible(grid, 41) && ListView_GetTopIndex(grid) > 0,
+    ok = Check(app.rows.size() == 44 && Selected(grid) == 43 && ListView_IsItemVisible(grid, 43) && ListView_GetTopIndex(grid) > 0,
                "the list scrolls to the newest added row") && ok;
+    const fs::path created = gui::UserDictPath(user, "새 사전");
+    const std::wstring createdWhere = L"[" + user.filename().native() + L"/" + created.filename().native() + L"] ";
+    ok = Check(Logged(app, L"INFO", createdWhere + L"새 사전"), "a new dictionary is logged") && ok;
+    app.removeAnswer = IDNO;
+    NotifyClick(app.dicts, IDC_DICT_REMOVE);
+    ok = Check(fs::exists(created, error) && app.userDicts.size() == 2, "declining 사전 삭제 keeps the file") && ok;
+    app.removeAnswer = IDYES;
+    NotifyClick(app.dicts, IDC_DICT_REMOVE);
+    ok = Check(!fs::exists(created, error) && app.userDicts.size() == 1 && Logged(app, L"INFO", createdWhere + L"사전 삭제됨 (휴지통)"),
+               "사전 삭제 moves the file away, lists the rest and logs it") && ok;
+    std::vector<fs::path> opened;
+    app.openFolder = [&](const fs::path& path) { opened.push_back(path); return true; };
+    NotifyClick(app.dicts, IDC_DICT_FOLDER);
+    NotifyClick(app.logs, IDC_LOG_FOLDER);
+    ok = Check(opened == std::vector<fs::path>{UserFolderPath(app), DataFolderPath(app)} && fs::equivalent(opened[0], user, error) &&
+               fs::equivalent(opened[1], user.parent_path(), error), "폴더 열기 opens the user folder and the data folder") && ok;
+    app.openFolder = [](const fs::path&) { return false; };
+    NotifyClick(app.logs, IDC_LOG_FOLDER);
+    ok = Check(Logged(app, L"사전", L"폴더를 열 수 없습니다: " + DataFolderPath(app).native()), "a folder that cannot open is logged") && ok;
+    app.openFolder = nullptr;
     const fs::path places = program / L"places.txt";
     ok = Check(WriteFixture(places, "東京\t가져온장소\n"), "write dictionary to import") && ok;
     ShowPage(app, kDictsPage);
     DropFiles(app.main, {places});
-    ok = Check(CurrentPage(app) == kDictsPage && app.userDicts.size() == 3 && app.dictIndex >= 0 &&
+    ok = Check(CurrentPage(app) == kDictsPage && app.userDicts.size() == 2 && app.dictIndex >= 0 &&
                app.userDicts[static_cast<std::size_t>(app.dictIndex)].path == user / L"userdict-places.txt" && app.rows.size() == 1,
                "a file dropped on the dictionary page is imported") && ok;
     const auto folderSources = app.engineUserPaths;
     const fs::path renamed = gui::UserDictPath(user, "places-renamed");
     if (!Check(RenameDict(app, app.dictIndex, L"places-renamed"), "rename a dictionary inside a default folder source")) return false;
+    ok = Check(Logged(app, L"INFO", L"[" + user.filename().native() + L"/userdict-places.txt] 사전 이름 바꿈: " +
+                                        user.filename().native() + L"/" + renamed.filename().native()), "a rename is logged") && ok;
     ShowDicts(app, renamed);
     ok = Check(TranslateShort(app, L"東京") == L"가져온장소" && app.engineUserPaths == folderSources,
                "folder child rename preserves the configured folder source") && ok;
