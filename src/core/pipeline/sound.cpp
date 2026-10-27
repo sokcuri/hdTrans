@@ -2787,9 +2787,11 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
     }
     switch (says) {
         case Says::Ru:
-            // Not after a verb of ability (想像できんな is できないな).
+            // Not after a verb of ability or of a perceived state, which no prohibition takes (想像できんな
+            // is できないな, 見えんな 見えないな).
             if (VerbFormIs(s + std::string(kRu), kDictionaryForm, ProhibitedKind, ctx, snap) &&
-                !VerbFormIs(s + std::string(kRu), kDictionaryForm, AbilityVerb, ctx, snap)) {
+                !VerbFormIs(s + std::string(kRu), kDictionaryForm, AbilityVerb, ctx, snap) &&
+                !dict::InClass(HDTRANS_CLASS("verb.observed-state"), s)) {
                 return kRu;
             }
             return {};

@@ -195,7 +195,8 @@ std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& sna
 
 // The kana of a verb form said ん or っ in casual speech written back where a verb of the
 // dictionary has the form: the る of an ichidan verb, する or くる before the な of a prohibition
-// (contraction.n-ru,見んな 見るな, 邪魔すんなよ 邪魔するなよ), not of a verb of ability (想像できんな);
+// (contraction.n-ru,見んな 見るな, 邪魔すんなよ 邪魔するなよ), not of a verb of ability or of verb.observed-state
+// (想像できんな, 見えんな);
 // the られ of a potential, the ら of a godan verb in る or the れ ending an ichidan stem before
 // contraction.n-nai (信じらんない 信じられない, 分かんない 分からない, してくんない してくれない), with
 // contraction.n-nee written as ない (変わんねえ 変わらない); the negative ない after an ichidan or

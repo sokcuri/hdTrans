@@ -1159,6 +1159,7 @@ HD_TEST(pipeline_contracted_n) {
         {"帰んなよ", "帰んなよ"},  // a godan verb in る: as often the imperative 帰りな
         {"邪魔すんな", "邪魔するな"},  // する by its forms after a noun
         {"想像できんな", "想像できんな"},  // できる: a verb of ability takes no prohibition
+        {"火縄銃には見えんな", "火縄銃には見えんな"},  // 見える: a perceived state takes none either
         {"帰んない", "帰らない"},
         {"帰んねえ", "帰らない"},
         {"信じらんない", "信じられない"},
