@@ -106,3 +106,25 @@ HD_TEST(GuiUserDictToggleAndImport) {
     gui::AppendFiles(files, {folder.path / "b.txt", folder.path / "." / "a.txt", folder.path / "b.txt"});
     HD_CHECK(files == (std::vector<fs::path>{folder.path / "a.txt", folder.path / "b.txt"}));
 }
+
+HD_TEST(GuiUserDictRowCheck) {
+    struct Case {
+        gui::DictRow row;
+        gui::RowField field;
+        const char* message;
+    };
+    const Case cases[] = {
+        {{"鳥", "새", "", ""}, gui::RowField::Key, ""},
+        {{"鳥", "새", "n", "prio=2"}, gui::RowField::Key, ""},
+        {{"様", "", "hon", ""}, gui::RowField::Key, ""},
+        {{"鳥", "", "", ""}, gui::RowField::Ko, "한국어가 비어 있습니다"},
+        {{"鳥", "새", "zzz", ""}, gui::RowField::Pos, "알 수 없는 품사입니다: zzz"},
+        {{"鳥", "새", "n", "prio=x"}, gui::RowField::Options, "옵션 오류: option \"prio=x\": \"x\" is not an integer"},
+        {{"鳥", "새", "adj", ""}, gui::RowField::Pos, "품사와 맞지 않습니다: adj JP must be a dictionary form ending in い"},
+    };
+    for (const Case& test : cases) {
+        const gui::RowProblem problem = gui::CheckRow(test.row);
+        HD_CHECK_EQ(problem.message, std::string(test.message));
+        if (*test.message) HD_CHECK(problem.field == test.field);
+    }
+}

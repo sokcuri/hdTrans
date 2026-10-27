@@ -6,6 +6,8 @@
 #include <string>
 #include <system_error>
 
+#include "core/dict/codes.h"
+#include "core/userdict/userdict.h"
 #include "gui/text_file.h"
 
 namespace hdTrans::gui {
@@ -237,6 +239,20 @@ fs::path ImportUserDict(const fs::path& source, const fs::path& folder) {
         target += name.extension();
     }
     return WriteTextFile(target, utf8) ? target : fs::path();
+}
+
+RowProblem CheckRow(const DictRow& row, const dict::Dict* base) {
+    dict::CodeTable codes;
+    userdict::Families families;
+    userdict::Context ctx{&codes, &families, base};
+    const auto compiled = userdict::Parse(RowLine(row), 0, ctx);
+    if (compiled.errors.empty()) return {};
+    const std::string& error = compiled.errors.front().message;
+    if (error == "empty JP") return {RowField::Key, "일본어가 비어 있습니다"};
+    if (error == "empty KR") return {RowField::Ko, "한국어가 비어 있습니다"};
+    if (error.starts_with("unknown POS ")) return {RowField::Pos, "알 수 없는 품사입니다: " + row.pos};
+    if (error.starts_with("option ") || error.starts_with("neg:")) return {RowField::Options, "옵션 오류: " + error};
+    return {RowField::Pos, "품사와 맞지 않습니다: " + error};
 }
 
 }  // namespace hdTrans::gui

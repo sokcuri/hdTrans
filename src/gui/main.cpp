@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <commctrl.h>
+#include <imm.h>
 #include <commdlg.h>
 #include <objbase.h>
 #include <shellapi.h>
@@ -1200,7 +1201,8 @@ void ShowEntry(App& app, int row) {
     SetDlgItemTextW(app.dicts, IDC_ENTRY_OPTIONS, Wide(entry.options).c_str());
 }
 
-void ShowEntries(App& app, int row) {
+// Lists the rows of the open file and selects row; fill also shows that row in the entry fields.
+void ShowEntries(App& app, int row, bool fill = true) {
     app.rows.clear();
     app.rowLines.clear();
     if (!app.dictText.column) {
@@ -1223,7 +1225,7 @@ void ShowEntries(App& app, int row) {
         EnableWindow(GetDlgItem(app.dicts, id), editable);
     }
     EnableWindow(GetDlgItem(app.dicts, IDC_DICT_EXPORT), CurrentDict(app) ? TRUE : FALSE);
-    ShowEntry(app, row);
+    if (fill) ShowEntry(app, row);
 }
 
 void OpenDict(App& app, int index) {
@@ -1300,6 +1302,20 @@ void ChangeEntry(App& app, int id) {
         SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
         return;
     }
+    if (id != IDC_ENTRY_DELETE) {
+        // A row the loader would skip is not saved; the fields stay for correction.
+        const auto snapshot = app.engine ? app.engine->Dictionaries() : nullptr;
+        const gui::RowProblem problem = gui::CheckRow(entry, snapshot ? &snapshot->Base() : nullptr);
+        if (!problem.message.empty()) {
+            constexpr int fields[] = {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS};
+            LogDiagnosticLines(app, L"사전", std::string(id == IDC_ENTRY_ADD ? "사전 추가 실패: " : "사전 수정 실패: ") +
+                                                 entry.key + " (" + problem.message + ")");
+            SetFocus(GetDlgItem(app.dicts, fields[static_cast<int>(problem.field)]));
+            return;
+        }
+    }
+    if (id == IDC_ENTRY_ADD && std::any_of(app.rows.begin(), app.rows.end(), [&](const auto& r) { return r.key == entry.key; }))
+        LogDiagnosticLines(app, L"사전", "같은 단어가 이미 있습니다: " + entry.key + " (앞 줄이 우선합니다)");
     const gui::DictText before = app.dictText;
     int next = row;
     if (id == IDC_ENTRY_ADD) {
@@ -1310,8 +1326,17 @@ void ChangeEntry(App& app, int id) {
         if (id == IDC_ENTRY_EDIT) app.dictText.lines[line] = gui::RowLine(entry, app.dictText.lines[line]);
         else app.dictText.lines.erase(app.dictText.lines.begin() + static_cast<std::ptrdiff_t>(line));
     }
-    if (!SaveDict(app)) app.dictText = before;
-    ShowEntries(app, next);
+    const bool saved = SaveDict(app);
+    if (!saved) app.dictText = before;
+    if (id != IDC_ENTRY_ADD) {
+        ShowEntries(app, saved ? next : row);
+        return;
+    }
+    // A failed add keeps the typed entry for correction; a saved one selects the new row and
+    // clears the fields for the next entry.
+    ShowEntries(app, saved ? next : row, false);
+    if (saved) ShowEntry(app, -1);
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
 }
 
 void ToggleDict(App& app, int index, bool on) {
@@ -1718,7 +1743,32 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     return FALSE;
 }
 
+// The entry fields of the dictionary page, including the edit box inside the POS combo box.
+bool EntryField(const App& app, HWND window) {
+    if (!app.dicts || !window) return false;
+    for (const int id : {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_OPTIONS})
+        if (window == GetDlgItem(app.dicts, id)) return true;
+    const HWND pos = GetDlgItem(app.dicts, IDC_ENTRY_POS);
+    return (window == pos || GetParent(window) == pos) && !SendMessageW(pos, CB_GETDROPPEDSTATE, 0, 0);
+}
+
+// Whether an IME holds an uncommitted composition in window.
+bool Composing(HWND window) {
+    const HIMC context = ImmGetContext(window);
+    if (!context) return false;
+    const LONG bytes = ImmGetCompositionStringW(context, GCS_COMPSTR, nullptr, 0);
+    ImmReleaseContext(window, context);
+    return bytes > 0;
+}
+
 void Dispatch(App& app, MSG& message) {
+    // Enter in an entry field adds the entry, as the 추가 button does. Enter that an IME takes to
+    // commit its composition (VK_PROCESSKEY, or a composition still open) does not add.
+    if (message.message == WM_KEYDOWN && message.wParam == VK_RETURN && EntryField(app, message.hwnd) &&
+        !Composing(message.hwnd)) {
+        if (IsWindowEnabled(GetDlgItem(app.dicts, IDC_ENTRY_ADD))) ChangeEntry(app, IDC_ENTRY_ADD);
+        return;
+    }
     if (app.main && IsDialogMessageW(app.main, &message)) return;
     TranslateMessage(&message);
     DispatchMessageW(&message);
@@ -1777,6 +1827,109 @@ std::wstring TranslateShort(App& app, const wchar_t* source) {
     return ControlText(app.text, IDC_RESULT);
 }
 
+// Sends a key press as the message loop delivers it, with Shift held when shift is set.
+void PressKey(App& app, UINT key, bool shift = false) {
+    BYTE keys[256]{};
+    GetKeyboardState(keys);
+    const BYTE before = keys[VK_SHIFT];
+    keys[VK_SHIFT] = shift ? 0x80 : 0;
+    SetKeyboardState(keys);
+    MSG down{GetFocus(), WM_KEYDOWN, key, 0, 0, {}};
+    Dispatch(app, down);
+    MSG message{};
+    while (PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) Dispatch(app, message);
+    keys[VK_SHIFT] = before;
+    SetKeyboardState(keys);
+}
+
+bool Logged(App& app, const wchar_t* kind, const std::wstring& message) {
+    std::lock_guard lock(app.mutex);
+    return std::any_of(app.logEntries.begin(), app.logEntries.end(),
+                       [&](const auto& entry) { return entry.kind == kind && entry.message == message; });
+}
+
+bool FocusIn(HWND page, int id) {
+    const HWND focus = GetFocus();
+    const HWND control = GetDlgItem(page, id);
+    return focus && (focus == control || GetParent(focus) == control);
+}
+
+// Tab walks the entry fields of an open, empty dictionary and Enter adds the entry; the
+// translation page keeps its Tab order and Enter in the source box is a line break.
+bool SelfTestEntryKeys(App& app) {
+    ShowPage(app, kDictsPage);
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    if (!Check(FocusIn(app.dicts, IDC_ENTRY_KEY), "focus the Japanese entry field")) return false;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드");
+    bool ok = true;
+    for (const int id : {IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_ADD}) {
+        PressKey(app, VK_TAB);
+        ok = Check(FocusIn(app.dicts, id), "Tab moves to the next entry control") && ok;
+    }
+    PressKey(app, VK_TAB, true);
+    ok = Check(FocusIn(app.dicts, IDC_ENTRY_OPTIONS), "Shift+Tab moves back from 추가") && ok;
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1 && app.rows[0].key == "ＺＺ0" && app.rows[0].ko == "키보드" &&
+               ControlText(app.dicts, IDC_ENTRY_KEY).empty() && FocusIn(app.dicts, IDC_ENTRY_KEY) && IsWindow(app.main),
+               "Enter in an entry field adds the entry and returns to the Japanese field") && ok;
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1, "Enter with an empty Japanese field adds nothing") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ9");
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1 && ControlText(app.dicts, IDC_ENTRY_KEY) == L"ＺＺ9" && FocusIn(app.dicts, IDC_ENTRY_KO) &&
+               Logged(app, L"사전", L"사전 추가 실패: ＺＺ9 (한국어가 비어 있습니다)"),
+               "an empty Korean field is not saved, keeps the entry and focuses the Korean field") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_POS, L"zzz");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1 && ControlText(app.dicts, IDC_ENTRY_POS) == L"zzz" && FocusIn(app.dicts, IDC_ENTRY_POS) &&
+               Logged(app, L"사전", L"사전 추가 실패: ＺＺ9 (알 수 없는 품사입니다: zzz)"),
+               "an unknown POS is not saved and focuses the POS field") && ok;
+    ShowEntry(app, -1);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드2");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 2 && Logged(app, L"사전", L"같은 단어가 이미 있습니다: ＺＺ0 (앞 줄이 우선합니다)"),
+               "a duplicate key is added with a warning") && ok;
+    // An IME composition takes Enter; where no IME can compose, this only reports the skip.
+    const HWND keyField = GetDlgItem(app.dicts, IDC_ENTRY_KEY);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ8");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"고양");
+    SetFocus(keyField);
+    if (const HIMC context = ImmGetContext(keyField)) {
+        ImmSetOpenStatus(context, TRUE);
+        const wchar_t composing[] = L"이";
+        ImmSetCompositionStringW(context, SCS_SETSTR, const_cast<wchar_t*>(composing), sizeof(wchar_t), nullptr, 0);
+        if (Composing(keyField)) {
+            PressKey(app, VK_RETURN);
+            ok = Check(app.rows.size() == 2, "Enter during an IME composition does not add") && ok;
+            ImmNotifyIME(context, NI_COMPOSITIONSTR, CPS_CANCEL, 0);
+        } else {
+            std::fprintf(stderr, "SKIP no IME composition is available for the Enter check\n");
+        }
+        ImmReleaseContext(keyField, context);
+    } else {
+        std::fprintf(stderr, "SKIP no IME context is available for the Enter check\n");
+    }
+    ShowEntry(app, -1);
+
+    ShowPage(app, kTextPage);
+    SetFocus(GetDlgItem(app.text, IDC_WHOLE_DOCUMENT));
+    PressKey(app, VK_TAB);
+    ok = Check(FocusIn(app.text, IDC_SOURCE), "Tab on the translation page still reaches the source box") && ok;
+    SetDlgItemTextW(app.text, IDC_SOURCE, L"日本語");
+    SendDlgItemMessageW(app.text, IDC_SOURCE, EM_SETSEL, 3, 3);
+    PressKey(app, VK_RETURN);
+    ok = Check(ControlText(app.text, IDC_SOURCE) == L"日本語\r\n" && !app.busy && app.rows.size() == 2,
+               "Enter in the source box is a line break, not a translation or an add") && ok;
+    SetDlgItemTextW(app.text, IDC_SOURCE, L"");
+    ShowPage(app, kDictsPage);
+    return ok;
+}
+
 // The dictionary page on the user folder of the default layout under program.
 bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     app.userSources = UserSources(Utf8(program.native()));
@@ -1797,7 +1950,18 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     gui::TextEncoding encoding{};
     ok = Check(gui::ReadTextFile(file, text, encoding) && encoding == gui::TextEncoding::Utf8 &&
                text == "犬\t고친사용자\n鳥\t추가사용자\n", "edited dictionary file") && ok;
+    ok = Check(ControlText(app.dicts, IDC_ENTRY_KEY).empty() && ControlText(app.dicts, IDC_ENTRY_KO).empty() &&
+               Selected(grid) == 1 && app.rows[1].key == "鳥", "a saved add clears the fields and selects the new row") && ok;
     ok = Check(TranslateShort(app, L"鳥\r\n犬") == L"추가사용자\r\n고친사용자", "translation reads the edited dictionary") && ok;
+    const HANDLE locked = CreateFileW(file.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (!Check(locked != INVALID_HANDLE_VALUE, "deny writes to the dictionary file")) return false;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"魚");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"실패사용자");
+    NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    CloseHandle(locked);
+    ok = Check(ControlText(app.dicts, IDC_ENTRY_KEY) == L"魚" && ControlText(app.dicts, IDC_ENTRY_KO) == L"실패사용자" &&
+               app.rows.size() == 2 && gui::ReadTextFile(file, text, encoding) && text == "犬\t고친사용자\n鳥\t추가사용자\n",
+               "a failed add keeps the typed entry and the file") && ok;
 
     ListView_SetCheckState(list, 0, FALSE);
     std::error_code error;
@@ -1814,6 +1978,14 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     NotifyClick(app.dicts, IDC_DICT_NEW);
     ok = Check(fs::exists(gui::UserDictPath(user, "새 사전"), error) && app.userDicts.size() == 2 && app.rows.empty(),
                "new dictionary") && ok;
+    ok = SelfTestEntryKeys(app) && ok;
+    for (int n = 1; n < 41; ++n) {
+        SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, (L"ＺＺ" + std::to_wstring(n)).c_str());
+        SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
+        NotifyClick(app.dicts, IDC_ENTRY_ADD);
+    }
+    ok = Check(app.rows.size() == 42 && Selected(grid) == 41 && ListView_IsItemVisible(grid, 41) && ListView_GetTopIndex(grid) > 0,
+               "the list scrolls to the newest added row") && ok;
     const fs::path places = program / L"places.txt";
     ok = Check(WriteFixture(places, "東京\t가져온장소\n"), "write dictionary to import") && ok;
     ShowPage(app, kDictsPage);

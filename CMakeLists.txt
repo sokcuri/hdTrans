@@ -402,7 +402,7 @@ elseif(WIN32)
     target_include_directories(hdtrans_gui PRIVATE src src/gui)
     target_compile_definitions(hdtrans_gui PRIVATE UNICODE _UNICODE WIN32_LEAN_AND_MEAN NOMINMAX
         WINVER=0x0A00 _WIN32_WINNT=0x0A00)
-    target_link_libraries(hdtrans_gui PRIVATE hdtrans_gui_support comctl32 comdlg32 shell32 ole32 uuid gdi32 user32)
+    target_link_libraries(hdtrans_gui PRIVATE hdtrans_gui_support comctl32 comdlg32 shell32 ole32 uuid gdi32 user32 imm32)
     hdtrans_version_resource(hdtrans_cli hdtrans.exe VFT_APP)
     hdtrans_version_resource(hdtrans_gui hdTransGUI.exe VFT_APP)
     set_source_files_properties(src/gui/main.cpp PROPERTIES COMPILE_DEFINITIONS HDTRANS_VERSION="${HDTRANS_VERSION}")
