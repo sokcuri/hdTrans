@@ -1,0 +1,5 @@
+#! layer=base
+# 〜もいいところだ: 정도가 심함을 말하는 문형 (〜도 이만저만이 아니다)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+もいいところ	도 이만저만이 %B6@	G8U0		TuPj	GN							mo-iitokoro:1
+もいいところ	도 좋은 곳%D4@	G8U0		TuPj	GN	8600	||2 A-1== "VPl" P-1== "12*"					mo-iitokoro:2
