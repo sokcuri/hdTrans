@@ -203,22 +203,24 @@ bool EntryLine(std::string_view line) {
 }
 
 DictRow ParseRow(std::string_view line) {
-    const std::vector<std::string_view> fields = Fields(line, nullptr);
+    std::string_view tail;
+    const std::vector<std::string_view> fields = Fields(line, &tail);
     DictRow row;
+    row.note = std::string(Trim(Trim(tail).substr(std::min<std::size_t>(2, Trim(tail).size()))));
     std::string* targets[] = {&row.key, &row.ko, &row.pos, &row.options};
     for (std::size_t index = 0; index < fields.size() && index < 4; ++index) *targets[index] = std::string(Trim(fields[index]));
     return row;
 }
 
-std::string RowLine(const DictRow& row, std::string_view old) {
-    std::string_view tail;
-    Fields(old, &tail);
+std::string RowLine(const DictRow& row) {
+    const std::string note = Field(row.note);
+    const std::string tail = note.empty() ? std::string() : "// " + note;
     std::vector<std::string> fields{Field(row.key), Field(row.ko), Field(row.pos), Field(row.options)};
     if (fields[2].empty() && !fields[3].empty()) fields[2] = "n";
     while (fields.size() > 2 && fields.back().empty()) fields.pop_back();
     std::string line;
     for (std::size_t index = 0; index < fields.size(); ++index) line += (index ? "\t" : "") + fields[index];
-    if (!tail.empty()) line += "\t" + std::string(tail);
+    if (!tail.empty()) line += "\t" + tail;
     return line;
 }
 
