@@ -771,8 +771,8 @@ os.makedirs(sys.argv[2])
 `);
     writeFileSync(join(dir, 'tools/perf-budget.py'), `import os, sys
 base = os.environ["RUNNER_TEMP"] + "/base"
-assert sys.argv[1:] == ["--report", "build/linux/hdtrans", "build/linux/dicts.hdsnap", "--base", "abc123",
-                        "--against", base + "/hdtrans", base + "/dicts.hdsnap"], sys.argv
+assert sys.argv[1:] == ["--report", "build/linux/hdtrans", "build/linux/hdtrans-data/dicts.hdsnap", "--base", "abc123",
+                        "--against", base + "/hdtrans", base + "/hdtrans-data/dicts.hdsnap"], sys.argv
 print(os.environ["FIXTURE_OUTPUT"])
 sys.exit(int(os.environ["FIXTURE_STATUS"]))
 `);

@@ -17,8 +17,7 @@ Ehnd 호환은 기능일 뿐입니다. 꿀도르 같은 Ehnd 사전은 `dicts/`�
 
 ## 쓰는 법
 
-- 데이터 루트의 `user/hdtrans.config.yaml`에 `ehnd: true`를 적으면 실행 파일이나 DLL 옆의
-  `Ehnd` 폴더를 씁니다. `ehnd: 경로`는 지정한 폴더(상대 경로는 설정 파일 기준)를 씁니다.
+- `hdtrans-data/user/hdtrans.config.yaml`에 `ehnd: true`를 적으면 `hdtrans-data/ehnd/`를 씁니다. `ehnd: 경로`는 지정한 폴더(상대 경로는 설정 파일 기준)를 씁니다.
   생략하거나 `ehnd: false`이면 폴더가 있어도 쓰지 않습니다.
 - 라이브러리와 DLL은 켠 폴더를 `userdict.tsv`처럼 1초에 한 번까지 확인해, 바뀌면 사전과 함께
   백그라운드에서 다시 읽습니다. 설정 자체를 바꾼 뒤에는 다시 초기화하거나 `hdTrans_Reload`,
@@ -63,7 +62,7 @@ hdTrans:
 ## 파일 찾기, 인코딩, 순서
 
 - 폴더: Ehnd는 `<J2KEngine.dll 폴더>\Ehnd\`(3.20은 `FILTER_FILE_PATH` 설정으로 바꿀 수 있음),
-  hdTrans는 명시적으로 켠 프로그램 옆 `Ehnd` 또는 지정한 폴더. 하위 폴더는 읽지 않습니다.
+  hdTrans는 명시적으로 켠 `hdtrans-data/ehnd/` 또는 지정한 폴더. 하위 폴더는 읽지 않습니다.
 - 파일: `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt`, `UserDict*.txt`. 이름은 대소문자를
   가리지 않습니다. 접두사 뒤(`_@Hdor`, `#0#req`, `_C` 등)는 이름표일 뿐 뜻이 없고 순서에만 영향을
   줍니다.

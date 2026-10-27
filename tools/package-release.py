@@ -33,6 +33,14 @@ def common_files(source, destination):
     (destination / "THIRD-PARTY-NOTICES.txt").write_text(notices, encoding="utf-8")
 
 
+def program_data(source, build, snapshot, version, destination):
+    data = destination / "hdtrans-data"
+    shutil.copytree(build / "hdtrans-data/user", data / "user")
+    shutil.copytree(source / "ehnd", data / "ehnd")
+    copy_file(snapshot, data / "dicts.hdsnap")
+    (data / "dicts.txt").write_text(version, encoding="utf-8")
+
+
 def dictionary_version(source):
     digest = hashlib.sha256()
     for path in sorted((source / "dicts").glob("*.tsv"), key=lambda path: path.name.encode("utf-8")):
@@ -105,9 +113,7 @@ def main():
             ("hdtrans.exe", "hdtrans_x86.exe"),
         ):
             copy_file(builds["windows-x86"] / name, windows / renamed)
-        shutil.copytree(builds["windows-x64"] / "hdTrans/user", windows / "hdTrans/user")
-        copy_file(snapshot, windows / "hdTrans/dicts.hdsnap")
-        (windows / "hdTrans/dicts.txt").write_text(dict_version, encoding="utf-8")
+        program_data(args.source, builds["windows-x64"], snapshot, dict_version, windows)
         common_files(args.source, windows)
         package = args.output / f"hdTrans-{version}-windows.zip"
         zip_folder(windows, package)
@@ -124,9 +130,7 @@ def main():
             for name in ("hdtrans", library):
                 copy_file(builds[preset] / name, folder / name)
             (folder / "hdtrans").chmod(0o755)
-            shutil.copytree(builds[preset] / "user", folder / "user")
-            copy_file(snapshot, folder / "dicts.hdsnap")
-            (folder / "dicts.txt").write_text(dict_version, encoding="utf-8")
+            program_data(args.source, builds[preset], snapshot, dict_version, folder)
             common_files(args.source, folder)
             package = args.output / f"hdTrans-{version}-{platform}-{arch_names[architecture]}.tar.gz"
             with tarfile.open(package, "w:gz", compresslevel=6) as archive:

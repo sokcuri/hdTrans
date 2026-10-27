@@ -30,6 +30,7 @@
 #include "core/config/cache.h"
 #include "core/config/config.h"
 #include "core/dict/folders.h"
+#include "core/dict/snapshot.h"
 #include "core/engine.h"
 #include "core/engine/load_info.h"
 #include "core/engine/user_watch.h"
@@ -574,7 +575,8 @@ bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, c
     const auto report = [&](const hdTrans::Engine& engine, bool loaded) {
         // Keep diagnostics newer than INFO in the bounded log.
         LogActiveSourceInfo(app);
-        const auto configWarnings = LogDiagnosticLines(app, L"엔진", hdTrans::internal::ConfigErrors(config, configPath));
+        auto configWarnings = LogDiagnosticLines(app, L"엔진", hdTrans::internal::ConfigErrors(config, configPath));
+        for (const auto& line : hdTrans::dict::FolderWarnings(dir)) configWarnings += LogDiagnosticLines(app, L"사전", line);
         LogDictionaryResult(app, engine, loaded, !initial, configWarnings);
     };
     const bool cacheChanged = settings.cache != app.settings.cache;
@@ -1787,12 +1789,24 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     ok = Check(fs::exists(gui::UserDictPath(user, "새 사전"), error) && app.userDicts.size() == 2 && app.rows.empty(),
                "new dictionary") && ok;
     const fs::path places = program / L"places.txt";
-    ok = Check(WriteFixture(places, "東京\t도쿄\n"), "write dictionary to import") && ok;
+    ok = Check(WriteFixture(places, "東京\t가져온장소\n"), "write dictionary to import") && ok;
     ShowPage(app, kDictsPage);
     DropFiles(app.main, {places});
     ok = Check(CurrentPage(app) == kDictsPage && app.userDicts.size() == 3 && app.dictIndex >= 0 &&
                app.userDicts[static_cast<std::size_t>(app.dictIndex)].path == user / L"userdict-places.txt" && app.rows.size() == 1,
                "a file dropped on the dictionary page is imported") && ok;
+    const auto folderSources = app.engineUserPaths;
+    const fs::path renamed = gui::UserDictPath(user, "places-renamed");
+    if (!Check(RenameDict(app, app.dictIndex, L"places-renamed"), "rename a dictionary inside a default folder source")) return false;
+    ShowDicts(app, renamed);
+    ok = Check(TranslateShort(app, L"東京") == L"가져온장소" && app.engineUserPaths == folderSources,
+               "folder child rename preserves the configured folder source") && ok;
+    ListView_SetCheckState(list, app.dictIndex, FALSE);
+    ok = Check(TranslateShort(app, L"東京") != L"가져온장소" && app.engineUserPaths == folderSources,
+               "folder child off does not remove or replace the folder source") && ok;
+    ListView_SetCheckState(list, app.dictIndex, TRUE);
+    ok = Check(TranslateShort(app, L"東京") == L"가져온장소" && app.engineUserPaths == folderSources,
+               "folder child on keeps the folder source and restores the row") && ok;
     ShowPage(app, kTextPage);
     return ok;
 }
@@ -1810,17 +1824,22 @@ bool LogContains(App& app, std::wstring_view text) {
 
 bool SelfTestConfig(App& app, const fs::path& folder) {
     const fs::path program = folder / L"설정 배치";
-    const fs::path data = program / L"HDTRANS";
+    const fs::path data = program / L"HdTrAnS-DaTa";
+    const fs::path snapshot = data / L"dicts.hdsnap";
+    const fs::path source = program / L"snapshot-source";
     const fs::path user = data / L"USER";
     const fs::path config = user / L"HDTRANS.CONFIG.YAML";
     std::error_code error;
-    for (const auto& directory : {data / L"DiCtS", data / L"別辞書", user}) {
+    for (const auto& directory : {source, data / L"別辞書", user}) {
         fs::create_directories(directory, error);
         if (!Check(!error, "create config fixture folder")) return false;
     }
     const std::string header = "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n";
-    if (!Check(WriteFixture(data / L"DiCtS/base.tsv", header + "猫\t기본사전\tN110\t\t\tGN\t\t\t\t\t1\n") &&
-               WriteFixture(data / L"別辞書/base.tsv", header + "猫\t설정사전\tN110\t\t\tGN\t\t\t\t\t1\n") &&
+    if (!Check(WriteFixture(source / L"base.tsv", header + "猫\t기본사전\tN110\t\t\tGN\t\t\t\t\t1\n") &&
+               hdTrans::dict::CompileSnapshot({Utf8(source.native())}, Utf8(snapshot.native())), "write default snapshot fixture")) return false;
+    fs::remove_all(source, error);
+    if (!Check(!error, "remove snapshot source folder")) return false;
+    if (!Check(WriteFixture(data / L"別辞書/base.tsv", header + "猫\t설정사전\tN110\t\t\tGN\t\t\t\t\t1\n") &&
                WriteFixture(user / L"USERDICT.TSV", "犬\t기본사용자\n") &&
                WriteFixture(user / L"custom.tsv", "犬\t앞파일\n") &&
                WriteFixture(user / L"custom.txt", "犬\t사용자설정\n") &&
@@ -1831,7 +1850,7 @@ bool SelfTestConfig(App& app, const fs::path& folder) {
     const std::optional<std::wstring> previousCache = initialCache ? std::optional<std::wstring>(initialCache) : std::nullopt;
     app.engine.reset();
     const std::string programDir = Utf8(program.native());
-    if (!Check(LoadEngine(app, programDir), "load nested case-insensitive config")) return false;
+    if (!Check(LoadEngine(app, programDir), "load mixed-case data-root config")) return false;
     bool ok = Check(!app.settings.cg && app.settings.misread && app.settings.reference, "GUI config session settings");
     ok = Check(LogContains(app, L"HDTRANS.CONFIG.YAML:7:") && LogContains(app, L"HDTRANS.CONFIG.YAML:8:") &&
                ControlText(app.main, IDC_LOG_STATUS).find(L"경고") != std::wstring::npos,
@@ -1864,14 +1883,14 @@ bool SelfTestConfig(App& app, const fs::path& folder) {
 
 bool SelfTestReload(App& app, const fs::path& folder) {
     const fs::path program = folder / L"reload";
-    const fs::path data = program / L"hdTrans";
+    const fs::path data(Wide(hdTrans::dict::DataFolder(Utf8(program.native()))));
     const fs::path user = data / L"user";
-    const fs::path shipped = data / L"dicts/base.tsv";
+    const fs::path shipped = data / L"toy-dicts/base.tsv";
     const fs::path first = user / L"userdict-a.txt";
     const fs::path second = user / L"userdict-b.txt";
-    const fs::path ehnd = data / L"Ehnd/UserDict_10.txt";
+    const fs::path ehnd = data / L"ehnd/UserDict_10.txt";
     const fs::path config = user / L"hdtrans.config.yaml";
-    const std::string settings = "cache: off\nehnd: ../Ehnd\nuserdict: [userdict-a.txt, userdict-b.txt]\n";
+    const std::string settings = "dicts: ../toy-dicts\ncache: off\nehnd: ../ehnd\nuserdict: [userdict-a.txt, userdict-b.txt]\n";
     std::error_code error;
     for (const auto& directory : {shipped.parent_path(), user, ehnd.parent_path()}) {
         fs::create_directories(directory, error);
@@ -1947,7 +1966,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     const auto beforeEhndFilters = app.engine->Filters();
     const auto beforeEhndUserVersion = app.loadedUserVersion;
     const auto beforeEhndVersion = app.loadedEhndVersion;
-    const fs::path away = data / L"Ehnd-away";
+    const fs::path away = data / L"ehnd-away";
     if (!Check(WriteFixture(first, "学生\tUSER_A_EXTERNAL\tn\n"), "change a valid file before Ehnd failure")) return false;
     fs::rename(ehnd.parent_path(), away, error);
     if (!Check(!error, "move the enabled Ehnd folder away")) return false;
@@ -1984,7 +2003,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
                translate() == "USER_A_EXTERNAL USER_B_VALID EHND_DOG_EXTERNAL",
                "config-only recovery publishes a new engine and the changed session setting together") && ok;
     if (!Check(WriteFixture(config, settings + "strict_dict: not-a-bool\n"), "write invalid config value")) return false;
-    ok = Check(ReadyEngine(app) && app.error.empty() && LogContains(app, L"hdtrans.config.yaml:4:"),
+    ok = Check(ReadyEngine(app) && app.error.empty() && LogContains(app, L"hdtrans.config.yaml:5:"),
                "config entry diagnostics are visible without changing the reader's fallback policy") && ok;
     if (!Check(WriteFixture(ehnd.parent_path() / L"PreFilter_20.txt", "(\tBAD_PRE\t10\t1\n"),
                "write regex warning control")) return false;
@@ -2131,96 +2150,89 @@ bool SelfTestReload(App& app, const fs::path& folder) {
 }
 
 bool SelfTestExplicitSources(App& app, const fs::path& folder) {
-    for (const bool legacy : {true, false}) {
-        const fs::path program = folder / (legacy ? L"legacy-sources" : L"configured-sources");
-        const fs::path dicts = program / L"dicts";
-        const fs::path user = program / L"user";
-        const fs::path first = legacy ? program / L"userdict.tsv" : user / L"custom.txt";
-        const fs::path second = user / L"userdict-b.txt";
-        const std::string fixtureConfig = legacy ? "cache: off\n" : "cache: off\nuserdict: [custom.txt, userdict-b.txt]\n";
-        std::error_code error;
-        for (const auto& directory : {dicts, user}) {
-            fs::create_directories(directory, error);
-            if (!Check(!error, "create explicit-source fixture folder")) return false;
-        }
-        if (!Check(WriteFixture(dicts / L"base.tsv", "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
-                                "猫\t고양이\tN110\t\t\tGN\t\t\t\t\t1\n犬\t개\tN110\t\t\tGN\t\t\t\t\t2\n") &&
-                   WriteFixture(first, "猫\t앞사전\n") && WriteFixture(second, "犬\t뒤사전\n") &&
-                   WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig), "write explicit-source fixtures")) return false;
-        const std::string programDir = Utf8(program.native());
-        app.engine.reset();
-        if (!Check(LoadEngine(app, programDir), "load explicit sources")) return false;
-        app.userSources = UserSources(programDir);
-        ShowDicts(app, first);
-        const int index = app.dictIndex;
-        if (!Check(index >= 0 && app.userDicts[static_cast<std::size_t>(index)].path == first,
-                   "GUI selects the opened explicit file")) return false;
-        gui::TranslationOptions options;
-        const auto translate = [&] {
-            return gui::TranslateText(*app.engine, "猫 犬", ConfiguredOptions(app, options), app.cancel);
-        };
-        bool ok = Check(translate() == "앞사전뒤사전", "explicit sources initial literal");
-        ToggleDict(app, index, false);
-        ok = Check(ReadyEngine(app) && translate() == "고양이뒤사전" &&
-                   std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
-                   "GUI off explicitly removes an active file source") && ok;
-        ToggleDict(app, index, true);
-        ok = Check(ReadyEngine(app) && translate() == "앞사전뒤사전" && app.engineUserPaths.front() == Utf8(first.native()),
-                   "GUI on restores the explicit file in its original source order") && ok;
-        const auto dictionaries = app.engine->Dictionaries();
-        const auto filters = app.engine->Filters();
-        const auto paths = app.engineUserPaths;
-        const auto version = app.loadedUserVersion;
-        const HANDLE blocked = CreateFileW(second.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-        if (!Check(blocked != INVALID_HANDLE_VALUE, "deny reads during explicit reconfiguration")) return false;
-        const bool renamed = RenameDict(app, index, L"renamed");
-        if (!Check(renamed, "rename the explicit file in the GUI")) {
-            CloseHandle(blocked);
-            return false;
-        }
-        const fs::path renamedPath = app.userDicts[static_cast<std::size_t>(index)].path;
-        ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
-                   app.engineUserPaths == paths && app.loadedUserVersion == version &&
-                   app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters && translate() == "앞사전뒤사전",
-                   "failed reconfiguration keeps old sources, stamps and the whole stack") && ok;
-        ToggleDict(app, index, false);
-        CloseHandle(blocked);
-        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이뒤사전",
-                   "reconfiguration recovery preserves a newer GUI off edit") && ok;
-        ShowDicts(app, renamedPath);
-        if (!Check(app.dictIndex >= 0 && app.userDicts[static_cast<std::size_t>(app.dictIndex)].path == renamedPath,
-                   "renamed explicit source stays visible in the dictionary page")) return false;
-        const auto offPaths = app.engineUserPaths;
-        if (!Check(WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig + "cg: false\nreference: true\n"),
-                   "change scalar config fields after an explicit rename and off")) return false;
-        ok = Check(ReadyEngine(app) && !app.settings.cg && app.settings.reference && app.engineUserPaths == offPaths &&
-                   translate() == "고양이뒤사전", "scalar config changes preserve an existing GUI off and renamed source slot") && ok;
-        ToggleDict(app, app.dictIndex, true);
-        ok = Check(ReadyEngine(app) && translate() == "앞사전뒤사전" && app.engineUserPaths.front() == Utf8(renamedPath.native()) &&
-                   std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
-                   "renamed explicit source recovers without leaving the old path active") && ok;
-        const auto beforeMissing = app.engine->Dictionaries();
-        const auto beforeMissingFilters = app.engine->Filters();
-        fs::path away = renamedPath;
-        away += L".away";
-        fs::rename(renamedPath, away, error);
-        if (!Check(!error, "remove an explicit source without a GUI intent")) return false;
-        if (legacy) {
-            ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이뒤사전",
-                       "a discovered file that disappears is removed") && ok;
-        } else {
-            ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
-                       app.engine->Dictionaries() == beforeMissing && app.engine->Filters() == beforeMissingFilters &&
-                       translate() == "앞사전뒤사전", "unannounced explicit-file disappearance is fatal, not a GUI off") && ok;
-        }
-        fs::rename(away, renamedPath, error);
-        if (!Check(!error, "restore the disappeared explicit source")) return false;
-        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "앞사전뒤사전",
-                   "same-path source restoration retries the pending load") && ok;
-        app.engine.reset();
-        if (!ok) return false;
+    const fs::path program = folder / L"configured-sources";
+    const std::string programDir = Utf8(program.native());
+    const fs::path data(Wide(hdTrans::dict::DataFolder(programDir)));
+    const fs::path dicts = data / L"toy-dicts";
+    const fs::path user(Wide(hdTrans::dict::UserFolder(programDir)));
+    const fs::path first = user / L"custom.txt";
+    const fs::path second = user / L"userdict-b.txt";
+    const std::string fixtureConfig = "dicts: ../toy-dicts\ncache: off\nuserdict: [custom.txt, userdict-b.txt]\n";
+    std::error_code error;
+    for (const auto& directory : {dicts, user}) {
+        fs::create_directories(directory, error);
+        if (!Check(!error, "create explicit-source fixture folder")) return false;
     }
-    return true;
+    if (!Check(WriteFixture(dicts / L"base.tsv", "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
+                            "猫\t고양이\tN110\t\t\tGN\t\t\t\t\t1\n犬\t개\tN110\t\t\tGN\t\t\t\t\t2\n") &&
+               WriteFixture(first, "猫\t앞사전\n") && WriteFixture(second, "犬\t뒤사전\n") &&
+               WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig), "write explicit-source fixtures")) return false;
+    app.engine.reset();
+    if (!Check(LoadEngine(app, programDir), "load explicit sources")) return false;
+    app.userSources = UserSources(programDir);
+    ShowDicts(app, first);
+    const int index = app.dictIndex;
+    if (!Check(index >= 0 && app.userDicts[static_cast<std::size_t>(index)].path == first,
+               "GUI selects the opened explicit file")) return false;
+    gui::TranslationOptions options;
+    const auto translate = [&] {
+        return gui::TranslateText(*app.engine, "猫 犬", ConfiguredOptions(app, options), app.cancel);
+    };
+    bool ok = Check(translate() == "앞사전뒤사전", "explicit sources initial literal");
+    ToggleDict(app, index, false);
+    ok = Check(ReadyEngine(app) && translate() == "고양이뒤사전" &&
+               std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
+               "GUI off explicitly removes an active file source") && ok;
+    ToggleDict(app, index, true);
+    ok = Check(ReadyEngine(app) && translate() == "앞사전뒤사전" && app.engineUserPaths.front() == Utf8(first.native()),
+               "GUI on restores the explicit file in its original source order") && ok;
+    const auto dictionaries = app.engine->Dictionaries();
+    const auto filters = app.engine->Filters();
+    const auto paths = app.engineUserPaths;
+    const auto version = app.loadedUserVersion;
+    const HANDLE blocked = CreateFileW(second.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (!Check(blocked != INVALID_HANDLE_VALUE, "deny reads during explicit reconfiguration")) return false;
+    const bool renamed = RenameDict(app, index, L"renamed");
+    if (!Check(renamed, "rename the explicit file in the GUI")) {
+        CloseHandle(blocked);
+        return false;
+    }
+    const fs::path renamedPath = app.userDicts[static_cast<std::size_t>(index)].path;
+    ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
+               app.engineUserPaths == paths && app.loadedUserVersion == version &&
+               app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters && translate() == "앞사전뒤사전",
+               "failed reconfiguration keeps old sources, stamps and the whole stack") && ok;
+    ToggleDict(app, index, false);
+    CloseHandle(blocked);
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이뒤사전",
+               "reconfiguration recovery preserves a newer GUI off edit") && ok;
+    ShowDicts(app, renamedPath);
+    if (!Check(app.dictIndex >= 0 && app.userDicts[static_cast<std::size_t>(app.dictIndex)].path == renamedPath,
+               "renamed explicit source stays visible in the dictionary page")) return false;
+    const auto offPaths = app.engineUserPaths;
+    if (!Check(WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig + "cg: false\nreference: true\n"),
+               "change scalar config fields after an explicit rename and off")) return false;
+    ok = Check(ReadyEngine(app) && !app.settings.cg && app.settings.reference && app.engineUserPaths == offPaths &&
+               translate() == "고양이뒤사전", "scalar config changes preserve an existing GUI off and renamed source slot") && ok;
+    ToggleDict(app, app.dictIndex, true);
+    ok = Check(ReadyEngine(app) && translate() == "앞사전뒤사전" && app.engineUserPaths.front() == Utf8(renamedPath.native()) &&
+               std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
+               "renamed explicit source recovers without leaving the old path active") && ok;
+    const auto beforeMissing = app.engine->Dictionaries();
+    const auto beforeMissingFilters = app.engine->Filters();
+    fs::path away = renamedPath;
+    away += L".away";
+    fs::rename(renamedPath, away, error);
+    if (!Check(!error, "remove an explicit source without a GUI intent")) return false;
+    ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
+               app.engine->Dictionaries() == beforeMissing && app.engine->Filters() == beforeMissingFilters &&
+               translate() == "앞사전뒤사전", "unannounced explicit-file disappearance is fatal, not a GUI off") && ok;
+    fs::rename(away, renamedPath, error);
+    if (!Check(!error, "restore the disappeared explicit source")) return false;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "앞사전뒤사전",
+               "same-path source restoration retries the pending load") && ok;
+    app.engine.reset();
+    return ok;
 }
 
 bool SelfTestOptionalSources(App& app, const fs::path& folder) {

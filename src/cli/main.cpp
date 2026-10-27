@@ -394,6 +394,8 @@ int RunMain(int argc, char** argv) {
     }
 
     const std::string programDir = ExecutableDir();
+    for (const auto& warning : hdTrans::dict::FolderWarnings(programDir))
+        std::fprintf(stderr, "hdtrans: warning: %s\n", warning.c_str());
     const std::string configPath = configArg ? *configArg : hdTrans::dict::ConfigFile(programDir);
     const auto config = hdTrans::internal::LoadConfig(configPath);
     if (configArg && !config.found && config.diagnostics.empty()) {
@@ -480,6 +482,14 @@ int RunMain(int argc, char** argv) {
     }
     if (why) std::setvbuf(stderr, nullptr, _IOFBF, 1 << 16);
 
+    if (!dictsArg && !config.settings.dicts) {
+        std::error_code error;
+        const auto path = std::filesystem::path(std::u8string(reinterpret_cast<const char8_t*>(dicts.data()), dicts.size()));
+        if (!std::filesystem::exists(path, error) && !error) {
+            std::fprintf(stderr, "hdtrans: %s을 찾을 수 없습니다\n", dicts.c_str());
+            return 1;
+        }
+    }
     const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
     verifyDicts = verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1");
     const hdTrans::EngineOptions dictionaryOptions{

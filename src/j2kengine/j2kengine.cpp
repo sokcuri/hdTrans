@@ -1,5 +1,5 @@
 // J2KEngine-compatible exports: Shift-JIS or UTF-16 in, CP949 or UTF-16 out.
-// Program data are in hdTrans/ next to the DLL, or the DLL folder itself.
+// Program data are in hdtrans-data/ next to the DLL.
 // The host's path is ignored. The user dictionary is reloaded when it changes.
 // Calls are thread-safe, not reentrant; finish all calls before unloading the DLL.
 #include <windows.h>
@@ -102,15 +102,17 @@ bool HasFatalLoadError(const hdTrans::Engine& engine) {
 
 hdTrans::internal::ConfigResult ReadConfig(const std::string& path) {
     auto config = hdTrans::internal::LoadConfig(path);
-    const std::string errors = hdTrans::internal::ConfigErrors(config, path);
+    std::string errors = hdTrans::internal::ConfigErrors(config, path);
+    for (const auto& warning : hdTrans::dict::FolderWarnings(hdTrans::frontend::ModuleDirectory()))
+        errors += (errors.empty() ? "" : "\n") + warning;
     if (!errors.empty()) OutputDebugStringW(WideFromUtf8("J2KEngine: " + errors + "\n").c_str());
     return config;
 }
 
-// Writes diagnostics only when a completed load changes, including failed loads.
+// Writes diagnostics once per completed load, including failed loads.
 void LogLoadErrors(const hdTrans::Engine& engine, bool force, bool loaded) {
     const auto ticket = hdTrans::internal::LoadDiagnosticsVersion(engine);
-    if (!ticket) return;
+    if (!ticket || (!force && g_loggedDiagnosticsVersion == ticket)) return;
     const auto snapshot = engine.Dictionaries();
     const auto filters = engine.Filters();
     const bool sourcesChanged = force || snapshot != g_loggedSnapshot.lock() || filters != g_loggedFilters.lock();

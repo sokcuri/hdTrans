@@ -1278,6 +1278,9 @@ LoadResult LoadCompiled(const std::string& path, const std::vector<std::string>&
     file->userFiles = userFiles;
     file->strictUser = strictUser;
     if (memory) file->memoryUser = *memory;
+    // Files stored in the snapshot are reported as the snapshot itself.
+    std::vector<std::string> stored;
+    if (folders.empty()) for (const auto& f : file->plainFiles) if (!f.user && !f.memory) stored.push_back(f.name);
     auto loaded = folders.empty()
         ? LoadPlainFiles(std::move(compiled.snapshot), std::move(file->plainFiles), file->sourceFolders,
                          std::move(compiled.errors), userFiles, strictUser, memory)
@@ -1285,6 +1288,9 @@ LoadResult LoadCompiled(const std::string& path, const std::vector<std::string>&
     if (file->bad.load(std::memory_order_relaxed)) {
         return {nullptr, {{path, LoadErrorKind::Read, 0, TsvErrorKind::Read, "the compiled snapshot is damaged"}}};
     }
+    std::erase_if(loaded.info, [&](const LoadFileInfo& info) {
+        return info.kind == LoadFileKind::Shipped && std::find(stored.begin(), stored.end(), info.path) != stored.end();
+    });
     return loaded;
 }
 

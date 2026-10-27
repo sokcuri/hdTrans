@@ -140,29 +140,14 @@ static void SiblingPath(const wchar_t* path, const wchar_t* leaf, wchar_t* out, 
     out[cap - 1] = L'\0';
 }
 
-static int DirExists(const wchar_t* path) {
-    DWORD attr = GetFileAttributesW(path);
-    return attr != INVALID_FILE_ATTRIBUTES && (attr & FILE_ATTRIBUTE_DIRECTORY) != 0;
-}
-
 static int FileExists(const wchar_t* path) {
     DWORD attr = GetFileAttributesW(path);
     return attr != INVALID_FILE_ATTRIBUTES && (attr & FILE_ATTRIBUTE_DIRECTORY) == 0;
 }
 
 static int ShippedPath(const wchar_t* module, wchar_t* out, size_t cap) {
-    wchar_t data[MAX_PATH];
-    SiblingPath(module, L"hdTrans", data, MAX_PATH);
-    if (DirExists(data)) {
-        SiblingPath(module, L"hdTrans\\dicts.hdsnap", out, cap);
-        if (FileExists(out)) return 1;
-        SiblingPath(module, L"hdTrans\\dicts", out, cap);
-    } else {
-        SiblingPath(module, L"dicts.hdsnap", out, cap);
-        if (FileExists(out)) return 1;
-        SiblingPath(module, L"dicts", out, cap);
-    }
-    return DirExists(out);
+    SiblingPath(module, L"hdtrans-data\\dicts.hdsnap", out, cap);
+    return FileExists(out);
 }
 
 /* Prints a translation to stdout and to the output file, one line per translation. */
