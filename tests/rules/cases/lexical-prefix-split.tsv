@@ -29,3 +29,6 @@ lookup:prefix-word	大喧嘩した	크게 싸웠다	keep	lookup
 lookup:prefix-word	大手企業に勤める	대기업에 근무한다	keep	lookup
 dict:missing-compounds	大一番を迎える	큰 승부를 맞이한다	fix	lookup
 lookup:prefix-word	大失敗した	대실패했다	keep	lookup
+lookup:prefix-word	大川沿いを歩く	has:오오카와	keep	lookup
+lookup:prefix-word	大川側の道	has:오오카와	keep	lookup
+lookup:prefix-word	大川付近	오오카와 부근	keep	lookup

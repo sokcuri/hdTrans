@@ -1,0 +1,5 @@
+#! layer=base
+# 苦手: 먹을 것, 짐승과 벌레, 꺼리는 것 앞에서는 `질색이다`
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+苦手	서%C2@	G8U0			GN							nigate:1
+苦手	질색%D4@	G8U0			GN	8610	||1 &&2 ||2 S-1== "は" S-1== "も" ||2 &&2 A-2== "VFdQAAQAE" G-2!= "Hd" U-2== "Rもの"					nigate:2
