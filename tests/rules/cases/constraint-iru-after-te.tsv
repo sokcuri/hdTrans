@@ -17,7 +17,7 @@ constraint:iru-form-after-te	でも、一番大きいのは、作者が御園さ
 constraint:iru-past-after-te	化け物が持っていたっていうあの鈴、なにか哀しい音色だった。	괴물이 가지고 있었다고 하는 그 방울, 뭔가 슬픈 음색이었다.	keep	local-ending
 constraint:iru-past-after-te	じゃあ、マキナはいつの間にか有名人になってたってこと？	그럼, 마키나는 어느새인가 유명인이 되어 있었다는 것?	keep	local-ending
 constraint:iru-past-after-te	誰が泣いてたって？	누가 울고 있었다고?	keep	local-ending
-constraint:iru-past-after-te	って言っても漠然としてたっていうか。	라고 말해도 막연히 하고 있었다고 할까.	keep	local-ending
+constraint:iru-past-after-te	って言っても漠然としてたっていうか。	라고 말해도 막연하고 있었다고 할까.	keep	local-ending
 constraint:iru-past-after-te	提督が言ってたって？	제독이 말했다고?	keep	local-ending
 constraint:iru-past-after-te	大昔にバベルと碧玉はお互いに戦争をしてたってことだな。	먼 옛날에 바벨과 벽옥은 서로 전쟁을 하고 있었다는 것이네.	keep	local-ending
 constraint:iru-form-after-te	手を洗っていらっしゃい	손을 씻고 와	fix	lookup
