@@ -93,3 +93,10 @@ normalize:ruby	{rb}上{/rb}{rt}あ{/rt}がった	{rb}올랐다{/rb}{rt}올랐다
 normalize:ruby	頭を{rb}撫{/rb}{rt}な{/rt}でた	머리를 {rb}쓰다듬었다{/rb}{rt}쓰다듬었다{/rt}	keep	normalize
 normalize:ruby	{rb}読{/rb}{rt}よ{/rt}もう	{rb}읽자{/rb}{rt}읽자{/rt}	keep	normalize
 normalize:ruby	{rb}死{/rb}{rt}し{/rt}ね	{rb}죽어라{/rb}{rt}죽어라{/rt}	keep	normalize
+normalize:ruby-r-tag	そこに<R すが>縋</R>ったのか。	거기에 <R 매달린 건가>매달린 건가</R>.	fix	normalize
+normalize:ruby-r-tag	<R なだ>宥</R>めつつ、ふといたずら心が芽生える。	<R 달래면서>달래면서</R>, 문득 장난심이 싹튼다.	fix	normalize
+normalize:ruby-r-tag	「<R あいにく>生憎</R>ですが、望月さんは不在です」	「<R 공교롭게도>공교롭게도</R>입니다만, 모치즈키 씨는 부재입니다」	fix	normalize
+normalize:ruby-r-tag	彼は<R あんど>安堵</R>した。	그는 <R 안도>안도</R>했다.	fix	normalize
+normalize:ruby-r-tag	<R げんじつ>現実</R>は厳しい。	<R 현실>현실</R>은 어렵다.	fix	normalize
+normalize:ruby-r-tag	<R ここ>現実</R>に彼女はいない	<R 여기>현실</R>에 그녀는 없다	fix	normalize
+normalize:ruby-r-tag	パンを<R た>食</R>べて寝た。	빵을 <R 먹고>먹고</R> 잤다.	fix	normalize

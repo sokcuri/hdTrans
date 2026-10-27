@@ -763,8 +763,8 @@ bool Observes(const StageObserver& o) {
 // own, with a kBreakSpan between them that the chunks turn into break markers.
 std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext& doc, std::string_view body,
                           QuoteCarry carry, Scratch& s, Generated& generated, const StageObserver& observer,
-                          const TranslationOptions& options, std::optional<bool> narrated = std::nullopt,
-                          std::span<const std::string> parts = {}) {
+                          const TranslationOptions& options, std::optional<bool> narrated,
+                          std::span<const std::string> parts) {
     const pipeline::LineFacts facts = pipeline::ReadLine(doc, body);
     if (facts.wholeLine && parts.empty()) return *facts.wholeLine;
     const pipeline::LineLookup lookup = pipeline::LookupOf(doc, facts);
@@ -920,6 +920,19 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     return output::SpokenWords(again ? compose(speech, observer, options) : first, carry.depth, speech.styles);
 }
 
+// TranslateBody with the ruby tags <R reading>base</R> read as brace ruby (LAY-4) and written back.
+std::string TranslateRubyBody(const dict::Snapshot& snap, pipeline::DocumentContext& doc, std::string_view body,
+                              QuoteCarry carry, Scratch& s, Generated& generated, const StageObserver& observer,
+                              const TranslationOptions& options, std::optional<bool> narrated = std::nullopt,
+                              std::span<const std::string> parts = {}) {
+    const std::string braced = pipeline::RTagsAsBraceRuby(body);
+    if (braced.empty() || !parts.empty()) {
+        return TranslateBody(snap, doc, body, carry, s, generated, observer, options, narrated, parts);
+    }
+    return pipeline::BraceRubyAsRTags(
+        TranslateBody(snap, doc, braced, carry, s, generated, observer, options, narrated, parts));
+}
+
 // Watches the resolved chains of a line for its first and last words.
 struct EdgeWatch {
     std::vector<output::ResolvedItem> items;
@@ -996,7 +1009,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
-        alone[i] = TranslateBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
+        alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
@@ -1022,7 +1035,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             joinedOptions.joinedLines = true;
             if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
             pieces = SplitAtBreaks(
-                TranslateBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
+                TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
                 j - i + 1);
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         }
@@ -1040,7 +1053,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 // The stages of the line on its own, for the observer; the translation stays the one made
                 // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
-                TranslateBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
+                TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
                               narratedOf(lines[k]));
             }
             if (arrows[k].empty()) {
@@ -1052,7 +1065,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             } else {
                 // The stages did not keep kGoesOn at the end: the line without it.
                 out[k] = WithArrow(
-                    TranslateBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
+                    TranslateRubyBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
                     arrows[k]);
                 if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             }
@@ -1115,7 +1128,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             // A quote left open counts on a line only when the line or a later one closes it.
             const LineQuotes quotes = QuotesOf(lines[i], carry);
             const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
-            std::string translated = TranslateBody(snap, *doc, lines[i], used, s, generated, watch, options);
+            std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, options);
             carry = quotes.end;
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             if (cr) translated += '\r';

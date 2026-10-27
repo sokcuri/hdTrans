@@ -39,8 +39,8 @@ namespace internal {
 // text cut into its protected spans and the text between them. The classes are
 // searched one after the other, a later class never matching inside or across an
 // earlier match:
-//   - markup tags <...> of up to 1024 characters other than <BR> and <LI> (SpanOpen, a
-//     closing tag SpanClose);
+//   - markup tags <...> of up to 1024 characters other than <BR> and <LI> and those holding
+//     。、！？「」… (SpanOpen, a closing tag SpanClose);
 //   - BBCode tags [b], [/b], [color=red] and the same in braces ({rb}, {/rt}) of up to
 //     128 characters (SpanOpen, SpanClose);
 //   - entities &amp; &#123; &#x1F;  (SpanOpen);
