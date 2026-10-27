@@ -689,6 +689,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         {"clip-ending", CxVerb::ClipEnding},
         {"set-base-verb", CxVerb::SetBaseVerb},
         {"draw-ending", CxVerb::DrawEnding},
+        {"take-prev-target", CxVerb::TakePrevTarget},
     };
     rules::Tokens tokens(text);
     while (!tokens.AtEnd()) {
@@ -737,7 +738,7 @@ bool ParseActions(std::string_view text, const std::vector<CxMap>& maps, std::ve
         const char* bad = nullptr;
         if (a.verb == CxVerb::CopyEnding || a.verb == CxVerb::CopyWord || a.verb == CxVerb::SetSound ||
             a.verb == CxVerb::SetActive || a.verb == CxVerb::ClipEnding ||
-            a.verb == CxVerb::SetBaseVerb || a.verb == CxVerb::DrawEnding) {
+            a.verb == CxVerb::SetBaseVerb || a.verb == CxVerb::DrawEnding || a.verb == CxVerb::TakePrevTarget) {
             out.push_back(std::move(a));
             continue;
         }
@@ -1290,6 +1291,16 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, 
             it->AssignEntrySurface(it->selected, a.value + std::string(it->EntryText(it->selected)), source);
             break;
         case internal::CxVerb::SetEnding: it->AssignDirectSlot(it->DirectIndex(), a.value, source); break;
+        case internal::CxVerb::TakePrevTarget: {
+            // The word writes the Korean of the word before it, which then writes nothing, word or
+            // ending: the predicate moves onto this word's ending (堂々と + している 당당하다).
+            Item* prev = it->prev;
+            if (prev == nullptr || prev->selected < 0 || it->selected < 0) break;
+            it->AssignEntrySurface(it->selected, std::string(prev->EntryText(prev->selected)), source);
+            prev->AssignEntrySurface(prev->selected, std::string(), source);
+            if (const int at = prev->DirectIndex(); at >= 0) prev->AssignDirectSlot(at, std::string(), source);
+            break;
+        }
         case internal::CxVerb::ClipEnding:
         case internal::CxVerb::DrawEnding: {
             // The mark after the ending, or after the word that has none; the restore stage writes the
