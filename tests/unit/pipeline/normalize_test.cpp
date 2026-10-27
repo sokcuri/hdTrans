@@ -54,6 +54,145 @@ HD_TEST(pipeline_normalize_forms) {
     Check(NormalizeForms, cases);
 }
 
+HD_TEST(pipeline_normalize_canonical_kana_pairs) {
+    const Case pairs[] = {
+        {"か\u3099"sv, "が"sv},
+        {"き\u3099"sv, "ぎ"sv},
+        {"く\u3099"sv, "ぐ"sv},
+        {"け\u3099"sv, "げ"sv},
+        {"こ\u3099"sv, "ご"sv},
+        {"さ\u3099"sv, "ざ"sv},
+        {"し\u3099"sv, "じ"sv},
+        {"す\u3099"sv, "ず"sv},
+        {"せ\u3099"sv, "ぜ"sv},
+        {"そ\u3099"sv, "ぞ"sv},
+        {"た\u3099"sv, "だ"sv},
+        {"ち\u3099"sv, "ぢ"sv},
+        {"つ\u3099"sv, "づ"sv},
+        {"て\u3099"sv, "で"sv},
+        {"と\u3099"sv, "ど"sv},
+        {"は\u3099"sv, "ば"sv},
+        {"は\u309A"sv, "ぱ"sv},
+        {"ひ\u3099"sv, "び"sv},
+        {"ひ\u309A"sv, "ぴ"sv},
+        {"ふ\u3099"sv, "ぶ"sv},
+        {"ふ\u309A"sv, "ぷ"sv},
+        {"へ\u3099"sv, "べ"sv},
+        {"へ\u309A"sv, "ぺ"sv},
+        {"ほ\u3099"sv, "ぼ"sv},
+        {"ほ\u309A"sv, "ぽ"sv},
+        {"う\u3099"sv, "ゔ"sv},
+        {"カ\u3099"sv, "ガ"sv},
+        {"キ\u3099"sv, "ギ"sv},
+        {"ク\u3099"sv, "グ"sv},
+        {"ケ\u3099"sv, "ゲ"sv},
+        {"コ\u3099"sv, "ゴ"sv},
+        {"サ\u3099"sv, "ザ"sv},
+        {"シ\u3099"sv, "ジ"sv},
+        {"ス\u3099"sv, "ズ"sv},
+        {"セ\u3099"sv, "ゼ"sv},
+        {"ソ\u3099"sv, "ゾ"sv},
+        {"タ\u3099"sv, "ダ"sv},
+        {"チ\u3099"sv, "ヂ"sv},
+        {"ツ\u3099"sv, "ヅ"sv},
+        {"テ\u3099"sv, "デ"sv},
+        {"ト\u3099"sv, "ド"sv},
+        {"ハ\u3099"sv, "バ"sv},
+        {"ハ\u309A"sv, "パ"sv},
+        {"ヒ\u3099"sv, "ビ"sv},
+        {"ヒ\u309A"sv, "ピ"sv},
+        {"フ\u3099"sv, "ブ"sv},
+        {"フ\u309A"sv, "プ"sv},
+        {"ヘ\u3099"sv, "ベ"sv},
+        {"ヘ\u309A"sv, "ペ"sv},
+        {"ホ\u3099"sv, "ボ"sv},
+        {"ホ\u309A"sv, "ポ"sv},
+        {"ウ\u3099"sv, "ヴ"sv},
+        {"ワ\u3099"sv, "ヷ"sv},
+        {"ヰ\u3099"sv, "ヸ"sv},
+        {"ヱ\u3099"sv, "ヹ"sv},
+        {"ヲ\u3099"sv, "ヺ"sv},
+    };
+    for (const Case& c : pairs) {
+        const std::string composed = NormalizeForms(c.in);
+        HD_CHECK_EQ(composed, std::string(c.want));
+        HD_CHECK_EQ(NormalizeForms(c.want), composed);
+        HD_CHECK_EQ(NormalizeForms(composed), composed);
+        for (const LineContext& ctx : {LineContext{}, LineContext{.document = true}}) {
+            const std::string normalized = Normalize(c.in, ctx);
+            HD_CHECK_EQ(normalized, Normalize(c.want, ctx));
+            HD_CHECK_EQ(Normalize(normalized, ctx), normalized);
+        }
+    }
+}
+
+HD_TEST(pipeline_normalize_canonical_kana_boundaries) {
+    const Case cases[] = {
+        {"か\u3099"sv, "が"sv},
+        {"さ\u3099"sv, "ざ"sv},
+        {"た\u3099"sv, "だ"sv},
+        {"は\u3099"sv, "ば"sv},
+        {"は\u309A"sv, "ぱ"sv},
+        {"う\u3099"sv, "ゔ"sv},
+        {"カ\u3099"sv, "ガ"sv},
+        {"ハ\u309A"sv, "パ"sv},
+        {"ウ\u3099"sv, "ヴ"sv},
+        {"ワ\u3099"sv, "ヷ"sv},
+        {"か\u3099んは\u3099れ"sv, "がんばれ"sv},
+        {"漢\u3099 A\u309A"sv, "漢\u3099 A\u309A"sv},
+        {"\u3099\u309A"sv, "\u3099\u309A"sv},
+        {"か\u309A"sv, "か\u309A"sv},
+        {"が\u3099"sv, "が\u3099"sv},
+        {"カ゛ハ゜"sv, "カ゛ハ゜"sv},
+        {"ゝ\u3099ヽ\u3099ゞヾ"sv, "ゝ\u3099ヽ\u3099ゞヾ"sv},
+        {"か \u3099"sv, "か \u3099"sv},
+        {"か́\u3099"sv, "か́\u3099"sv},
+        {"ｶﾞﾊﾟｳﾞ"sv, "ガパヴ"sv},
+        {"ﾜﾞ"sv, "ワ゛"sv},
+        {"カﾞ"sv, "カ゛"sv},
+        {"い\u3099や"sv, "いや"sv},
+        {"ウ゛ー"sv, "ウー"sv},
+        {"ウ゛ァ"sv, "ヴァ"sv},
+        {"う゛ぁ"sv, "う゛ぁ"sv},
+        {"ｶ\u3099"sv, "ガ"sv},
+        {"う\u3099ぁ"sv, "ゔぁ"sv},
+        {"ウ\u3099ー"sv, "ヴー"sv},
+        {"か\u3099\u3099"sv, "が\u3099"sv},
+        {"か\u309A\u3099"sv, "か\u309A\u3099"sv},
+    };
+    for (const Case& c : cases) {
+        const std::string normalized = NormalizeForms(c.in);
+        HD_CHECK_EQ(normalized, std::string(c.want));
+        HD_CHECK_EQ(NormalizeForms(normalized), normalized);
+        const std::string line = Normalize(c.in, LineContext{});
+        HD_CHECK_EQ(line, Normalize(c.want, LineContext{}));
+        HD_CHECK_EQ(Normalize(line, LineContext{}), line);
+    }
+}
+
+HD_TEST(pipeline_normalize_canonical_kana_before_ruby_bounds) {
+    const LineContext ctx{.document = true};
+    std::string base, decomposedBase, reading, decomposedReading;
+    for (int i = 0; i < 20; i++) {
+        base += "が";
+        decomposedBase += "か\u3099";
+    }
+    for (int i = 0; i < 30; i++) {
+        reading += "が";
+        decomposedReading += "か\u3099";
+    }
+    const std::string canonical[] = {"|" + base + "《か》", "漢《" + reading + "》"};
+    const std::string decomposed[] = {"|" + decomposedBase + "《か》", "漢《" + decomposedReading + "》"};
+    const std::string expected[] = {base, "漢"};
+    for (int i = 0; i < 2; i++) {
+        HD_CHECK(NormalizeForms(StripRuby(decomposed[i])) != NormalizeForms(StripRuby(canonical[i])));
+        const std::string normalized = Normalize(decomposed[i], ctx);
+        HD_CHECK_EQ(normalized, expected[i]);
+        HD_CHECK_EQ(normalized, Normalize(canonical[i], ctx));
+        HD_CHECK_EQ(Normalize(normalized, ctx), normalized);
+    }
+}
+
 HD_TEST(pipeline_join_nasai) {
     const Case cases[] = {
         {"ごめん、なさい"sv, "ごめんなさい"sv},

@@ -29,3 +29,11 @@ normalize:voiced-mark	「ウ゛ァンパイア」	「뱀파이어」	fix	normali
 normalize:voiced-mark	「ウ゛ウ゛ー」	「으으으」	fix	normalize
 normalize:voiced-mark	「ウ゛ウ゛ッ」	「으읏」	fix	normalize
 normalize:voiced-mark	……ウ゛ウ゛ウ゛ッ	……으으읏	fix	normalize
+normalize:canonical-kana	ガラス	유리	keep	normalize
+normalize:canonical-kana	ガラス	유리	fix	normalize
+normalize:canonical-kana	パン	빵	keep	normalize
+normalize:canonical-kana	パン	빵	fix	normalize
+normalize:canonical-kana	バス	버스	keep	normalize
+normalize:canonical-kana	バス	버스	fix	normalize
+normalize:canonical-kana	ヴァイオリン	바이올린	keep	normalize
+normalize:canonical-kana	ヴァイオリン	바이올린	fix	normalize
