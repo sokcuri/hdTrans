@@ -91,6 +91,7 @@ public:
     // Per-token step for token i (control markers are merged by the tokenizer). Sets
     // last to the last token it consumed and returns whether token i ends a sentence.
     bool Dispatch(int i, int& last);
+    bool LatinOrDigits(int j) const;
 
     // Dictionary lookup with the plain-entry filters of the word stage.
     Lookup DoLookup(std::string_view query, int mode);

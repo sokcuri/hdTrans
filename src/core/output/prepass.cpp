@@ -380,8 +380,14 @@ bool DigitOrLatin(char32_t r) {
 // a word of its own (≫758それ 그것). A predicate, a verbal noun with する or a word read as a
 // verb or an adjective, stands apart after a number (HPが1回復した 1 회복했다); after Latin
 // letters it is a noun like any other (SP消費 SP 소비).
-bool JoinsNoun(const std::vector<ResolvedItem>& items, int i, int n) {
-    if (n != i + 1 || !Adjoins(items, n)) return false;
+bool JoinsNoun(const std::vector<TokenText>& tokens, const std::vector<ResolvedItem>& items, int i, int n) {
+    if (n != i + 1) return false;
+    // A number written with signs is a token of its own (20~30層): a noun that starts the next
+    // token is written straight after it.
+    const TokenText& number = tokens[static_cast<std::size_t>(items[i].tokenIndex)];
+    const bool afterSigned = number.type == tokenizer::kTypeAsciiSymbol && tokenizer::SignedNumber(number.text) &&
+                             items[n].tokenIndex == items[i].tokenIndex + 1 && items[n].offset == 0;
+    if (!Adjoins(items, n) && !afterSigned) return false;
     const ResolvedItem& b = items[n];
     char32_t end = LastRune(items[i].surface);
     if (end >= U'Ａ' && end <= U'ｚ') end -= 0xFEE0;
@@ -587,6 +593,23 @@ bool AttachesAfter(const std::vector<ResolvedItem>& items, const std::vector<Tok
     }
     return dict::InClass(HDTRANS_CLASS("suru.verbal-noun-whole"), next.surface) ||
            dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0;
+}
+
+// Whether text is one sign read as a word after a number: %, ％ or a sign of the sign.final-*
+// classes (℃, ㎏, °).
+bool ReadSign(std::string_view text) {
+    const text::Rune r = text::DecodeRune(text);
+    if (text.empty() || r.size != text.size()) return false;
+    return r.cp == U'%' || r.cp == U'％' || dict::InClassRune(HDTRANS_CLASS("sign.final-vowel"), r.cp) ||
+           dict::InClassRune(HDTRANS_CLASS("sign.final-consonant"), r.cp) ||
+           dict::InClassRune(HDTRANS_CLASS("sign.final-rieul"), r.cp);
+}
+
+// Whether a token is one letter or number written as a symbol (①, Ⅳ, α), a word of its own.
+bool SymbolLetter(const TokenText& tok) {
+    const text::Rune r = text::DecodeRune(tok.text);
+    return tok.type == tokenizer::kTypeSymbol && tok.span == 0 && !tok.text.empty() && r.size == tok.text.size() &&
+           r.cp >= 0x80 && !text::IsKanji(r.cp) && !text::IsSymbol(r.cp) && !text::IsPunct(r.cp);
 }
 
 // Whether item k follows item k - 1 with nothing between them: in the same token, or at the
@@ -1214,6 +1237,13 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     const ResolvedItem& next = items[nextIndex];
     if (item.spaceAfter && (nextKind != '2' || Contains(nextTags, "Z0"))) return Result(std::move(t), true);
+    // A letter or number written as a symbol keeps the source spacing after a noun (스테이지Ⅳ, 플러스α);
+    // after a particle or an ending it stands apart as a word (이것은 ①입니다).
+    if (const char32_t end = LastRune(item.surface);
+        kind == '1' && (IsKanji(end) || tokenizer::Class(end) == tokenizer::kClassKatakana) &&
+        SymbolLetter(tokens[static_cast<std::size_t>(next.tokenIndex)]) && Follows(items, nextIndex)) {
+        return Result(std::move(t), false);
+    }
     if (const int a = tokens[item.tokenIndex].type, b = tokens[next.tokenIndex].type;
         (a == tokenizer::kTypeProtected || b == tokenizer::kTypeProtected) && KeepsAdjacency(a) && KeepsAdjacency(b)) {
         return Result(std::move(t), false);
@@ -1286,7 +1316,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (JoinedCopies(items, i, nextIndex)) return Result(std::move(t), false);  // 네네네
     if (MimeticBeforeSuru(item, next, nextEntry)) return Result(std::move(t), false);
     if (nextEntry == "「") return Result(std::move(t), true);
-    if (!allowSpacing || nextEntry == "%") return Result(std::move(t), false);
+    // A number keeps its unit sign (50%, 30℃).
+    if (!allowSpacing || nextEntry == "%" || (!t.empty() && IsDigit(t.back()) && ReadSign(next.surface))) return Result(std::move(t), false);
     // 씨 and 군 after a name are dependent nouns, written apart (카케이 씨, 타나카 군).
     if (kind == '1' && (nextEntry == "씨" || nextEntry == "군")) {
         if (dict::InClass(HDTRANS_CLASS("honorific.prepass-spaced"), next.surface)) return Result(std::move(t), true);
@@ -1338,7 +1369,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     // a space between them (JoinsNoun); without one, they join when the number counts the noun
     // or the letter grades it and stand apart when the number labels the word before it
     // (ApartFromNoun).
-    if (nextKind == '1' && DigitOrLatin(LastRune(t)) && JoinsNoun(items, i, nextIndex)) {
+    if (nextKind == '1' && DigitOrLatin(LastRune(t)) && JoinsNoun(tokens, items, i, nextIndex)) {
         return Result(std::move(t), ApartFromNoun(tokens, items, i, nextIndex));
     }
     if (!Contains(nextTags, "Tu")) {
@@ -1412,6 +1443,19 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         case '0': case '2':
             return Result(std::move(t), nextKind != '2' && nextKind != '6');
         case '1': {
+            // A sign written after a number is its unit (50％, 30℃, 180°): a predicate, an adverb or a
+            // noun after it stands apart as after the number (50% 늘어났다, 180° 바뀌었다, 30℃ 이상).
+            if (const std::string_view number = previous >= 0 ? EntryText(items[previous]) : std::string_view();
+                ReadSign(item.surface) && Follows(items, i) && !number.empty() && IsDigit(number.back())) {
+                // A counter, a closing bracket and a noun of one character (150㎝台 150㎝대) stay attached.
+                if (text::IsClosePunctuation(text::DecodeRune(nextEntry).cp)) return Result(std::move(t), false);
+                if (nextKind == '1') {
+                    return Result(std::move(t), !Contains(nextTags, "Ct") && text::RuneCount(next.surface) > 1);
+                }
+                const bool adverb = nextKind == '3' && !Contains(nextTags, "Ct");
+                const bool predicate = nextKind == '4' || adverb || nextKind == '7';
+                return Result(std::move(t), predicate && nextEntry.find(' ') == std::string_view::npos);
+            }
             const TokenText& tok = tokens[item.tokenIndex];
             // A token of one narrow character (at most three bytes) keeps the word after it.
             const bool narrow = tok.text.size() <= 3 && WidthOf(tok.text) == 1;
@@ -1492,6 +1536,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             // A number joins a counter after it (3개); a noun written on to it was joined above
             // (JoinsNoun), so before other nouns it stands apart.
             if (IsDigit(First(t))) {
+                if (text::IsClosePunctuation(text::DecodeRune(nextEntry).cp)) return Result(std::move(t), false);
                 if (nextKind == '1') return Result(std::move(t), !Contains(nextTags, "Ct"));
                 if (item.tokenIndex - 1 >= 0 && previous >= 0 && tokens[next.tokenIndex].type != 15 &&
                     tokens[next.tokenIndex].type != tokenizer::kTypeNumber &&
@@ -1599,6 +1644,10 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
             case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16:
             case tokenizer::kTypeJapanese: case tokenizer::kTypeProtected:
                 break;
+            case tokenizer::kTypeAsciiSymbol:
+                // A number written with signs is a word (50%, 10:30, +1) and keeps the space before it.
+                if (tokenizer::SignedNumber(tok.text)) break;
+                [[fallthrough]];
             default:
                 if (tok.span == 0 && !out.empty() && i - 1 >= 0 && tokens[i - 1].type != tokenizer::kTypeAsciiSpace) {
                     TrimRight(out);
