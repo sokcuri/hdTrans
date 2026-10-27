@@ -52,6 +52,7 @@ namespace internal {
 //     mark U+E00A, a run of the drawn mark U+E00B and the cry marks U+E00E and U+E00F (SpanClose);
 //   - Hangul runs with the masks in or after them (자○), joined by ASCII or full-width
 //     spaces (SpanWord);
+//   - the Han runs written in Chinese (ChineseRuns; SpanWord);
 //   - runs of foreign characters other than white space (IsForeign) or of ◯, a ゔ
 //     taking the small vowel after it (SpanWord);
 //   - runs of marks of tone that name a thing, after の and before a particle

@@ -254,6 +254,7 @@
 //= question.wonder	Question words that make a sentence-final だろう a question (何だろう 뭘까, どっちだろう 어느 쪽일까).
 //= question.wonder-not	Starts of words that begin like a question word but are none (何か, どうせ, いつも).
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
+//= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
@@ -7209,3 +7210,20 @@ wrap.sentence-start	うわ
 wrap.sentence-start	よし
 wrap.sentence-start	じゃあ
 wrap.sentence-start	ところが
+script.chinese-han	你
+script.chinese-han	您
+script.chinese-han	么
+script.chinese-han	嗎
+script.chinese-han	呢
+script.chinese-han	吧
+script.chinese-han	啊
+script.chinese-han	咦
+script.chinese-han	喂
+script.chinese-han	开
+script.chinese-han	关
+script.chinese-han	种
+script.chinese-han	复
+script.chinese-han	灵
+script.chinese-han	帮
+script.chinese-han	阳
+script.chinese-han	极

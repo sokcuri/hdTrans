@@ -196,12 +196,16 @@ std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const voi
         }
         return m;
     }();
+    const std::vector<std::pair<size_t, size_t>> chinese = internal::ChineseRuns(line);
+    auto run = chinese.begin();
     std::string out;
     size_t copied = 0;
     for (size_t pos = 0; pos < line.size();) {
         const text::Rune r = text::DecodeRune(line.substr(pos));
         const size_t end = pos + std::max<size_t>(1, r.size);
-        if (const auto it = forms.find(r.cp); it != forms.end() && !holds(context, line, pos, end)) {
+        while (run != chinese.end() && run->second <= pos) ++run;
+        const bool inChinese = run != chinese.end() && run->first <= pos;
+        if (const auto it = forms.find(r.cp); it != forms.end() && !inChinese && !holds(context, line, pos, end)) {
             out.append(line.substr(copied, pos - copied));
             out.append(it->second);
             copied = end;

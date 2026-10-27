@@ -81,7 +81,8 @@ std::string RespellKanjiCries(std::string_view line);
 
 // line with each old form of a kanji in classes.tsv spelling.old-form (OLD=NEW) written in its
 // new form, so that both read alike (格好惡い 格好悪い), unless holds says a dictionary word holds
-// the old form (赤澤, 澤 on its own). Run after Normalize, with the dictionary.
+// the old form (赤澤, 澤 on its own) or it is in a Chinese run (internal::ChineseRuns). Run after
+// Normalize, with the dictionary.
 std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context);
 
 namespace internal {
@@ -172,8 +173,8 @@ struct SpeechCues {
 SpeechCues ReadSpeechCues(std::string_view line);
 bool FemaleSpeech(std::span<const std::string> lines);
 
-// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 and HTML
-// <ruby>.
+// line without ruby markup, keeping the base text: |漢字《かな》, 漢字《かな》 with a kana reading and
+// HTML <ruby>.
 std::string StripRuby(std::string_view line);
 
 }  // namespace internal
