@@ -15,7 +15,7 @@
 // text in the input before the engine is ready gets translated once it is:
 // the sample of the first visit, and text typed during the second visit's
 // load, that a long translation shows its progress bar, and the version
-// next to the title (vVERSION (commit, yyyy-MM-dd)). Then it checks the
+// under the title (vVERSION (commit, yyyy-MM-dd)). Then it checks the
 // dictionaries: that the user dictionary and names table kept in localStorage
 // move into 기본 사용자 사전 on the first run with IndexedDB, and, at a desktop
 // and a mobile viewport, the 사전 tab's layout (list beside or above the

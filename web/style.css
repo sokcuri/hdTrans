@@ -2,7 +2,8 @@
 * { box-sizing: border-box; }
 body { margin: 0 auto; max-width: 72rem; padding: 1rem; font: 15px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
 h1 { font-size: 1.4rem; margin: 0; }
-h1 small { font-size: .8rem; font-weight: normal; opacity: .6; margin-left: .3rem; }
+h1 .by { font-size: .9rem; font-weight: normal; opacity: .7; margin-left: .3rem; }
+#hver { display: block; font-size: .8rem; opacity: .6; margin-top: .15rem; }
 .note { font-size: .9rem; margin: .5rem 0 0; }
 .status { margin: 1rem 0 .5rem; font-size: .9rem; display: flex; gap: .5rem; align-items: center; }
 progress { flex: 1; max-width: 20rem; }
