@@ -342,6 +342,7 @@
 //= verb.result-state-past	Stems of the result-state verbs whose state reads as the Korean past (亡くなっているから 돌아가셨으니까, 古びている本 오래된 책).
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
+//= verb.involuntary	Verbs of what happens to one rather than what one does (出る, 死ぬ, 遅れる, 負ける, 忘れる): their ちゃう that ends a line is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아), not a resolve.
 //= verb.spontaneous	Ichidan stems whose られ is a feeling that comes by itself, never the potential (将来が案じられる, 気配が感じられる).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
@@ -5546,6 +5547,37 @@ verb.speech	泣
 verb.speech	続け
 verb.speech	言い
 verb.speech	思
+
+verb.involuntary	出る
+verb.involuntary	死ぬ
+verb.involuntary	遅れる
+verb.involuntary	負ける
+verb.involuntary	忘れる
+verb.involuntary	落ちる
+verb.involuntary	壊れる
+verb.involuntary	倒れる
+verb.involuntary	漏れる
+verb.involuntary	溶ける
+verb.involuntary	消える
+verb.involuntary	崩れる
+verb.involuntary	折れる
+verb.involuntary	割れる
+verb.involuntary	転ぶ
+verb.involuntary	泣く
+verb.involuntary	疲れる
+verb.involuntary	濡れる
+verb.involuntary	溢れる
+verb.involuntary	逃げる
+verb.involuntary	惚れる
+verb.involuntary	困る
+verb.involuntary	狂う
+verb.involuntary	壊す
+verb.involuntary	漏らす
+verb.involuntary	溺れる
+verb.involuntary	焦げる
+verb.involuntary	冷める
+verb.involuntary	腐る
+verb.involuntary	間に合う
 
 verb.spontaneous	案じ
 verb.spontaneous	感じ

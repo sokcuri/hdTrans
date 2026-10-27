@@ -1,8 +1,9 @@
 # 규칙: LEX-69
 rule	input	expected	kind	layer
 dict:ino-final:1	「寒いの」	「추워」	fix	local-ending
-dict:chau-final:1	「声、出ちゃう……」	「목소리, 나와버릴 거야……」	fix	ending-defaults
-dict:chau-final:1	「遅れちゃう！」	「늦어버릴 거야!」	fix	ending-defaults
-dict:chau-final:1	忘れちゃう	잊어버릴 거야	fix	ending-defaults
-dict:chau-final:1	負けちゃう	져버릴 거야	fix	ending-defaults
-dict:chau-final:1	死んじゃう！	죽어버릴 거야!	fix	ending-defaults
+cx:chau-involuntary:10	「声、出ちゃう……」	「목소리, 나올 것 같아……」	fix	rewrites
+cx:chau-involuntary:10	「遅れちゃう！」	「늦을 것 같아!」	fix	rewrites
+cx:chau-involuntary:10	忘れちゃう	잊을 것 같아	fix	rewrites
+cx:chau-involuntary:10	負けちゃう	질 것 같아	fix	rewrites
+cx:chau-involuntary:10	死んじゃう！	죽을 것 같아!	fix	rewrites
+cx:chau-involuntary:10	泣いちゃう	울 것 같아	fix	rewrites

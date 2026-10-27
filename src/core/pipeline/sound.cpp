@@ -251,6 +251,7 @@ struct SoundMatch {
     // The Korean drawn out vowel by vowel, for a cry drawn out by two vowel kana, which only a
     // copy of it right before draws out so (イっちゃう、イっちゃうぅぅっ 가버려, 가버려어엇).
     std::string redrawn;
+    std::string alone;  // SoundRow::alone
 };
 
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
@@ -272,8 +273,10 @@ std::u32string_view CryStem(const SoundMatch& m) {
 // Whether b says the cry a again with the same Korean, as it is, drawn out or clipped (やだ+やだぁ,
 // やだ+やだっ, やだっ+やだっ; not いやっ+やだっ).
 bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
+    // The Korean of one may draw out the other's (가버려, 가버려어어엇).
     const auto plain = [](std::string_view k) { return k.ends_with('~') ? k.substr(0, k.size() - 1) : k; };
-    return a.cry && b.cry && plain(a.korean) == plain(b.korean) && CryStem(a) == CryStem(b);
+    const std::string_view x = plain(a.korean), y = plain(b.korean);
+    return a.cry && b.cry && (x.starts_with(y) || y.starts_with(x)) && CryStem(a) == CryStem(b);
 }
 
 // Whether the text of the sound ends in a clipping っ or ッ of mark.clip (やだっ).
@@ -838,7 +841,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 }
             }
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, open, spaceAfter, s.phrase,
-                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn)};
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone};
             chosen = &s;
         }
     }
@@ -1934,6 +1937,9 @@ std::string SoundText::Write() {
                     b += m.redrawn;
                 } else if (ClippedCryCopy(m, copy)) {
                     b += Lengthen(m.korean, "d!");  // a clipped copy of a cry closes with ㅅ (싫어 싫엇, 싫엇, 싫엇)
+                } else if (SoundMatch after; !m.alone.empty() && !copy && !CryCopyAfter(m, after)) {
+                    b += m.alone;
+                    if (m.korean.ends_with('~')) b += '~';
                 } else {
                     b += m.korean;
                 }
