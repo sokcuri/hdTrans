@@ -374,8 +374,9 @@ jobs:
             if ! (cd "$src" && cmake --preset linux -G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=sccache \
                   -DCMAKE_C_COMPILER_LAUNCHER=sccache &&
                   cmake --build --preset linux --parallel "$BUILD_JOBS" --target hdtrans_cli &&
+                  mkdir -p build/linux/hdtrans-data &&
                   HOME="$home" HDTRANS_CACHE_DIR=off build/linux/hdtrans --dicts "$PWD/dicts" \
-                    --compile-snapshot "$PWD/build/linux/dicts.hdsnap") > "$RUNNER_TEMP/base-build.log" 2>&1; then
+                    --compile-snapshot "$PWD/build/linux/hdtrans-data/dicts.hdsnap") > "$RUNNER_TEMP/base-build.log" 2>&1; then
               tail -n 40 "$RUNNER_TEMP/base-build.log"
               return 1
             fi
@@ -394,7 +395,7 @@ jobs:
             echo "perf-base: building $BASE_SHA here"
             build_base || { base=; echo "perf-base: the base commit $BASE_SHA could not be built"; }
           fi
-          if [[ -n "$base" ]]; then args+=(--against "$base/hdtrans" "$base/dicts.hdsnap"); fi
+          if [[ -n "$base" ]]; then args+=(--against "$base/hdtrans" "$base/hdtrans-data/dicts.hdsnap"); fi
           python3 -I tools/perf-budget.py "${args[@]}" 2>&1 | tee "$RUNNER_TEMP/perf-budget.log"
           status=${PIPESTATUS[0]}
           {

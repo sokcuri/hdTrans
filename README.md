@@ -69,7 +69,7 @@ hdtrans-data/
 `dicts.hdsnap`은 필수이고, `dicts.txt`는 사전 버전입니다. `user/`, 설정 파일과 `ehnd/`는 선택입니다.
 다른 사전은 `--dicts PATH`, 다른 설정은 `--config FILE`로 지정합니다. 원본 TSV는 따로 받을 필요가 없습니다.
 
-0.6.2 이하 버전을 쓰던 경우: 사용자 사전·설정(user/)과 Ehnd 사전을 hdtrans-data/ 아래로 옮겨 주세요.
+0.6.2 이하 버전을 쓰던 경우: 사용자 사전, 설정(user/)과 Ehnd 사전을 hdtrans-data/ 아래로 옮겨 주세요.
 
 ## 시작하기
 

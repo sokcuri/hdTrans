@@ -1110,6 +1110,7 @@ HD_TEST(SnapshotUserRowPoliciesMatchCacheAndCompiled) {
         }
         HD_CHECK_EQ(containers, std::size_t{1});
     }
+    for (const auto& info : standalone.info) HD_CHECK(info.kind != LoadFileKind::Shipped);
     const auto strictImage = LoadFolders({compiled}, {}, true, false, noFiles, false, &memory);
     HD_CHECK(!strictImage.snapshot);
     HD_REQUIRE(strictImage.errors.size() == 1);
