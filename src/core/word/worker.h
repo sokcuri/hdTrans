@@ -182,6 +182,7 @@ private:
     bool SplitsKashira(const Record& r, std::string_view query) const;
     bool SplitsDeshou(const Record& r, std::string_view query) const;
     bool SplitsVerb(const Record& r, std::string_view query) const;
+    bool SplitsPrefixWord(const Record& r, std::string_view query) const;
     bool PersonSuffixAt(std::string_view s) const;
     // Whether text starts with an honorific that HonorificItem reads after a name.
     static bool StartsWithHonorific(std::string_view text);

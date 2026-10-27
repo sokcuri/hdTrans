@@ -1,0 +1,28 @@
+# 규칙: LEX-64
+rule	input	expected	kind	layer
+dict:mo-iitokoro:1	迷惑もいいところだ	폐도 이만저만이 아니다	fix	defaults
+dict:mo-iitokoro:1	とんだ大間違いもいいところだった	터무니 없는 큰 착각도 이만저만이 아니었다	fix	defaults
+dict:mo-iitokoro:1	近所迷惑もいいところだ。	이웃 폐도 이만저만이 아니다.	fix	defaults
+dict:mo-iitokoro:1	逆玉の輿もいいところだが、	역 신분 상승 결혼도 이만저만이 아니지만,	fix	defaults
+dict:mo-iitokoro:1	トホホもいいところだな……	트호호도 이만저만이 아니네……	fix	defaults
+dict:mo-iitokoro:1	言いがかりもいいところっす！	has:트집도 이만저만이 아니	fix	defaults
+dict:mo-iitokoro:1	身の程知らずもいいところである。	주제넘음도 이만저만이 아니다.	fix	defaults
+dict:mo-iitokoro:1	マナー違反もいいところだが、	매너 위반도 이만저만이 아니지만,	fix	defaults
+dict:mo-iitokoro:1	児戯もいいところであった	아이들 장난도 이만저만이 아니었다	fix	defaults
+dict:mo-iitokoro:1	まだ序盤もいいところだが、	아직 초반도 이만저만이 아니지만,	fix	defaults
+dict:mo-iitokoro:1	素人作品もいいところだが、	아마추어 작품도 이만저만이 아니지만,	fix	defaults
+dict:mo-iitokoro:1	見当違いもいいところです	예상이 어긋남도 이만저만이 아닙니다	fix	defaults
+dict:mo-iitokoro:1	勘違いもいいところでした	착각도 이만저만이 아니었습니다	fix	defaults
+dict:mo-iitokoro:1	時代錯誤もいいところだろう	시대 착오도 이만저만이 아닐 것이다	fix	defaults
+dict:mo-iitokoro:2	ここもいいところだ	여기도 좋은 곳이다	keep	local
+dict:mo-iitokoro:2	京都もいいところだよ	교토도 좋은 곳이야	keep	local
+dict:mo-iitokoro:2	田舎もいいところだ	시골도 좋은 곳이다	keep	local
+dict:mo-iitokoro:2	この町もいいところですね	이 마을도 좋은 곳이네요	keep	local
+dict:jisjk:114834	彼にもいいところがある	그에도 좋은 곳이 있다	keep	defaults
+dict:jisjk:114834	いいところもある	좋은 곳도 있다	keep	defaults
+dict:jisjk:114834	ここはいいところだ	여기는 좋은 곳이다	keep	defaults
+dict:jisjk:114834	いいところで止める	좋은 곳으로 멈춘다	keep	defaults
+dict:jisjk:114834	いいところを見せる	좋은 곳을 보인다	keep	defaults
+dict:jisjk:114834	ちょうどいいところに来た	마침 좋은 곳에 왔다	keep	defaults
+dict:jisjk:114834	いいところだったのに	좋은 곳이었는데	keep	defaults
+dict:jisjk:114834	どこもいいところだ	어디도 좋은 곳이다	keep	defaults
