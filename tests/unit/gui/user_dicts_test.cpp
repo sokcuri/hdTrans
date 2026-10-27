@@ -65,6 +65,7 @@ HD_TEST(GuiUserDictRowsRoundTrip) {
     text.lines[3] = gui::RowLine({"ユキ", "유키", "surname", "", row.note});
     text.lines[1] = gui::RowLine({"魔導具", "마\t도구", "", "prio=5", ""});
     text.lines.push_back(gui::RowLine({"月", "달", "", "", "메모\t둘"}));
+    HD_CHECK_EQ(gui::RowLine({"#메모", "", "", "", ""}), std::string("#메모"));
     text.lines.push_back(gui::RowLine({"蒼月", "아오츠키", "", ""}));
     HD_REQUIRE(gui::WriteDictText(path, text));
     HD_CHECK_EQ(ReadBytes(path), std::string("\xEF\xBB\xBF# 주석\r\n魔導具\t마 도구\tn\tprio=5\r\n\r\n"
