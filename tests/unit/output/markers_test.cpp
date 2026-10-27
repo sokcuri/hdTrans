@@ -129,3 +129,19 @@ HD_TEST(markers_generated_fallback_and_precedence) {
     HD_CHECK(DollarMarkerRow("$J6@8").empty());
     HD_CHECK(SourceMarkerRow("&LA@B").empty());
 }
+
+HD_TEST(markers_dictionary_forms) {
+    const Families none;
+    const std::uint64_t before = UnexpandedMarkers();
+    HD_CHECK_EQ(DictionaryForms("천하다 웃음", none), std::string("천하다 웃음"));
+    HD_CHECK_EQ(UnexpandedMarkers(), before);
+    HD_CHECK_EQ(DictionaryForms("천&AV@", none), std::string("천하다"));
+    HD_CHECK_EQ(DictionaryForms("천&AV@웃음", none), std::string("천하다웃음"));
+    HD_CHECK_EQ(DictionaryForms("좋아주었으면 &AV@ 있고", none), std::string("좋아주었으면 하다 있고"));
+    HD_CHECK_EQ(DictionaryForms("$D3@ 새%CC@", none), std::string("높다 새하얗다"));
+    HD_CHECK_EQ(DictionaryForms("올이 $FG@", none), std::string("올이 "));  // no such family
+    HD_CHECK_EQ(DictionaryForms("a@b &a@ $1@ %20@x", none), std::string("a@b &a@ $1@ x"));
+    HD_CHECK_EQ(DictionaryForms("@", none), std::string("@"));
+    HD_CHECK_EQ(DictionaryForms("", none), std::string());
+    HD_CHECK(UnexpandedMarkers() >= before + 6);
+}

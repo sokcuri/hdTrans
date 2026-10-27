@@ -3,6 +3,7 @@
 // for stems that no static family conjugates. A key such as "&A1@0" is a family id
 // (marker &, $ or %, two characters, '@') and a form code '0'..'9', 'A', 'B'.
 #include <array>
+#include <cstdint>
 #include <mutex>
 #include <string>
 #include <string_view>
@@ -66,6 +67,14 @@ std::string_view LookupPercent(std::string_view key, const Families& generated);
 
 // The lookup of the table that the first byte of key names; "" for other keys.
 std::string_view LookupByMarker(std::string_view key, const Families& generated);
+
+// text with each marker family left in it written as its dictionary form (천&AV@ 천하다); the
+// marker of a family without a stem row is dropped. The loader keeps such rows out of the
+// output, so a family here is an internal error: each one counts in UnexpandedMarkers.
+std::string DictionaryForms(std::string text, const Families& generated);
+
+// The marker families DictionaryForms has written since the process started.
+std::uint64_t UnexpandedMarkers();
 
 // A conjugating target that ends in a marker family ("만&A5@") in its dictionary form
 // (만나다); other targets as they are.
