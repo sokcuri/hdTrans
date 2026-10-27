@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <commctrl.h>
+#include <imm.h>
 #include <commdlg.h>
 #include <objbase.h>
 #include <shellapi.h>
@@ -1301,6 +1302,20 @@ void ChangeEntry(App& app, int id) {
         SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
         return;
     }
+    if (id != IDC_ENTRY_DELETE) {
+        // A row the loader would skip is not saved; the fields stay for correction.
+        const auto snapshot = app.engine ? app.engine->Dictionaries() : nullptr;
+        const gui::RowProblem problem = gui::CheckRow(entry, snapshot ? &snapshot->Base() : nullptr);
+        if (!problem.message.empty()) {
+            constexpr int fields[] = {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS};
+            LogDiagnosticLines(app, L"사전", std::string(id == IDC_ENTRY_ADD ? "사전 추가 실패: " : "사전 수정 실패: ") +
+                                                 entry.key + " (" + problem.message + ")");
+            SetFocus(GetDlgItem(app.dicts, fields[static_cast<int>(problem.field)]));
+            return;
+        }
+    }
+    if (id == IDC_ENTRY_ADD && std::any_of(app.rows.begin(), app.rows.end(), [&](const auto& r) { return r.key == entry.key; }))
+        LogDiagnosticLines(app, L"사전", "같은 단어가 이미 있습니다: " + entry.key + " (앞 줄이 우선합니다)");
     const gui::DictText before = app.dictText;
     int next = row;
     if (id == IDC_ENTRY_ADD) {
@@ -1737,9 +1752,20 @@ bool EntryField(const App& app, HWND window) {
     return (window == pos || GetParent(window) == pos) && !SendMessageW(pos, CB_GETDROPPEDSTATE, 0, 0);
 }
 
+// Whether an IME holds an uncommitted composition in window.
+bool Composing(HWND window) {
+    const HIMC context = ImmGetContext(window);
+    if (!context) return false;
+    const LONG bytes = ImmGetCompositionStringW(context, GCS_COMPSTR, nullptr, 0);
+    ImmReleaseContext(window, context);
+    return bytes > 0;
+}
+
 void Dispatch(App& app, MSG& message) {
-    // Enter in an entry field adds the entry, as the 추가 button does.
-    if (message.message == WM_KEYDOWN && message.wParam == VK_RETURN && EntryField(app, message.hwnd)) {
+    // Enter in an entry field adds the entry, as the 추가 button does. Enter that an IME takes to
+    // commit its composition (VK_PROCESSKEY, or a composition still open) does not add.
+    if (message.message == WM_KEYDOWN && message.wParam == VK_RETURN && EntryField(app, message.hwnd) &&
+        !Composing(message.hwnd)) {
         if (IsWindowEnabled(GetDlgItem(app.dicts, IDC_ENTRY_ADD))) ChangeEntry(app, IDC_ENTRY_ADD);
         return;
     }
@@ -1816,6 +1842,12 @@ void PressKey(App& app, UINT key, bool shift = false) {
     SetKeyboardState(keys);
 }
 
+bool Logged(App& app, const wchar_t* kind, const std::wstring& message) {
+    std::lock_guard lock(app.mutex);
+    return std::any_of(app.logEntries.begin(), app.logEntries.end(),
+                       [&](const auto& entry) { return entry.kind == kind && entry.message == message; });
+}
+
 bool FocusIn(HWND page, int id) {
     const HWND focus = GetFocus();
     const HWND control = GetDlgItem(page, id);
@@ -1843,6 +1875,46 @@ bool SelfTestEntryKeys(App& app) {
                "Enter in an entry field adds the entry and returns to the Japanese field") && ok;
     PressKey(app, VK_RETURN);
     ok = Check(app.rows.size() == 1, "Enter with an empty Japanese field adds nothing") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ9");
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1 && ControlText(app.dicts, IDC_ENTRY_KEY) == L"ＺＺ9" && FocusIn(app.dicts, IDC_ENTRY_KO) &&
+               Logged(app, L"사전", L"사전 추가 실패: ＺＺ9 (한국어가 비어 있습니다)"),
+               "an empty Korean field is not saved, keeps the entry and focuses the Korean field") && ok;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_POS, L"zzz");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1 && ControlText(app.dicts, IDC_ENTRY_POS) == L"zzz" && FocusIn(app.dicts, IDC_ENTRY_POS) &&
+               Logged(app, L"사전", L"사전 추가 실패: ＺＺ9 (알 수 없는 품사입니다: zzz)"),
+               "an unknown POS is not saved and focuses the POS field") && ok;
+    ShowEntry(app, -1);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드2");
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 2 && Logged(app, L"사전", L"같은 단어가 이미 있습니다: ＺＺ0 (앞 줄이 우선합니다)"),
+               "a duplicate key is added with a warning") && ok;
+    // An IME composition takes Enter; where no IME can compose, this only reports the skip.
+    const HWND keyField = GetDlgItem(app.dicts, IDC_ENTRY_KEY);
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ8");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"고양");
+    SetFocus(keyField);
+    if (const HIMC context = ImmGetContext(keyField)) {
+        ImmSetOpenStatus(context, TRUE);
+        const wchar_t composing[] = L"이";
+        ImmSetCompositionStringW(context, SCS_SETSTR, const_cast<wchar_t*>(composing), sizeof(wchar_t), nullptr, 0);
+        if (Composing(keyField)) {
+            PressKey(app, VK_RETURN);
+            ok = Check(app.rows.size() == 2, "Enter during an IME composition does not add") && ok;
+            ImmNotifyIME(context, NI_COMPOSITIONSTR, CPS_CANCEL, 0);
+        } else {
+            std::fprintf(stderr, "SKIP no IME composition is available for the Enter check\n");
+        }
+        ImmReleaseContext(keyField, context);
+    } else {
+        std::fprintf(stderr, "SKIP no IME context is available for the Enter check\n");
+    }
+    ShowEntry(app, -1);
 
     ShowPage(app, kTextPage);
     SetFocus(GetDlgItem(app.text, IDC_WHOLE_DOCUMENT));
@@ -1912,7 +1984,7 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
         SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
         NotifyClick(app.dicts, IDC_ENTRY_ADD);
     }
-    ok = Check(app.rows.size() == 41 && Selected(grid) == 40 && ListView_IsItemVisible(grid, 40) && ListView_GetTopIndex(grid) > 0,
+    ok = Check(app.rows.size() == 42 && Selected(grid) == 41 && ListView_IsItemVisible(grid, 41) && ListView_GetTopIndex(grid) > 0,
                "the list scrolls to the newest added row") && ok;
     const fs::path places = program / L"places.txt";
     ok = Check(WriteFixture(places, "東京\t가져온장소\n"), "write dictionary to import") && ok;
