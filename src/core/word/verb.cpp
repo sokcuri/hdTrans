@@ -67,7 +67,8 @@ bool OneKana(std::string_view s) {
 // Whether tail starts with the short causative of a verb of kind, the causative stem of branch
 // 2 (entry, ending in せ) with し for its せ before て, た, ちゃ, ちま or ます (読まして, 塗らして,
 // 食べさして): the godan す verb that the short causative is, in the forms that read as the
-// causative's. Other kana after し begin other words (知らしめる, 食べさしの).
+// causative's. Other kana after し begin other words (知らしめる, 食べさしの). The match stays branch 2,
+// whose pattern is measured by the width of its entry: し takes the one kana of the せ it replaces.
 bool ShortCausative(int kind, std::string_view entry, std::string_view tail) {
     constexpr std::string_view kSe = "せ", kShi = "し";
     if (kind == 9 || kind == 10 || kind == 11 || kind == 13 || !entry.ends_with(kSe)) return false;
