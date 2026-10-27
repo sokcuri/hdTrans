@@ -2160,11 +2160,14 @@ bool SelfTestEntryKeys(App& app) {
     return ok;
 }
 
-// Writes text to file as another program would, with a later modification time.
+// Writes the bytes of text to file as another program would, with a later modification time.
 bool WriteExternally(const fs::path& file, const std::string& text) {
     std::error_code error;
     const auto before = fs::last_write_time(file, error);
-    if (!gui::WriteTextFile(file, text)) return false;
+    FILE* out = _wfopen(file.c_str(), L"wb");
+    if (!out) return false;
+    const bool written = std::fwrite(text.data(), 1, text.size(), out) == text.size();
+    if (std::fclose(out) != 0 || !written) return false;
     fs::last_write_time(file, before + std::chrono::seconds(5), error);
     return !error;
 }
