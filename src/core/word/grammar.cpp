@@ -919,6 +919,18 @@ Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
 // Whether a word of word.ability-scope (誰でも, 自分で), or a particle of particle.even-person after a
 // person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
 // condition.
+// Whether a word of noun.ability-condition with なら stands before item it in its clause: the
+// situation that makes the act possible (これなら, ここなら).
+bool AbilityCondition(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (p->group->surface == "なら" && p->prev != nullptr &&
+            dict::InClass(HDTRANS_CLASS("noun.ability-condition"), p->prev->group->surface)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool AbilityScope(const Item* it, std::string_view rest) {
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0) return false;
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
@@ -1101,10 +1113,11 @@ bool ForcingInClause(const Item* it) {
     return false;
 }
 
-// たら, たり and affirmative ます alone do not establish ability after a derived causative.
+// たら, たり, affirmative ます and the presumptive よう alone do not establish ability after a
+// derived causative.
 bool CausativePotentialEnding(std::string_view rest) {
     return dict::StartsWithMember(HDTRANS_CLASS("ending.rare-potential"), rest) > 0 &&
-           !rest.starts_with("たら") && !rest.starts_with("たり") && !rest.starts_with("ます");
+           !rest.starts_with("たら") && !rest.starts_with("たり") && !rest.starts_with("ます") && !rest.starts_with("よう");
 }
 
 // The voice of the (ら)れ of verb item it, first signal first (spec GRM-10): an agent that is a
@@ -1144,7 +1157,8 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     if (synthetic) {
         // A derived causative needs a potential cue; unmarked られる keeps the causative-passive.
         // An object alone does not turn an experienced event into an ability.
-        const bool potentialEnding = CausativePotentialEnding(rest);
+        // The presumptive よう reads the potential only after a condition that makes the act possible.
+        const bool potentialEnding = CausativePotentialEnding(rest) || (rest.starts_with("よう") && AbilityCondition(it));
         const int slot = it->selected >= 0 ? it->selected : DefaultSlot(it);
         if (ExperiencedCausative(it, slot) && !potentialEnding) return Voice::Passive;
         return !passive && potentialEnding ? Voice::Potential : Voice::Passive;

@@ -153,6 +153,7 @@
 //= ending.copies-bare	The bare endings of the last copy of an adjective or adjectival noun said again as a predicate (痛い痛い, 嫌だ嫌だ).
 //= ending.copies-plain	The Korean endings of that last copy that the copies may recast: the plain 1다 and the exclamative 6.
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
+//= noun.ability-condition	Words that with なら name the situation that makes an act possible (これなら, ここなら): before a derived causative in られよう they make it the potential.
 //= noun.arrival-suru	Verbal nouns of moving to a post or a place whose する in the て form before 来る says the arrival (転属してきている 전속해 와 있다, 帰国してきている 귀국해 와 있다).
 //= noun.coming-flow	Nouns of what keeps coming, whose 来ている comes on rather than has arrived (いい風きてる 좋은 바람 오고 있어, 波が来ている 파도가 오고 있다).
 //= noun.kin	Kinship words that たん and っち after them belong to, as ちゃん does (お兄ちゃんたん 오빠, 妹たん 여동생).
@@ -879,6 +880,8 @@ ko-noun.cp-danghada	강등
 ko-noun.cp-danghada	부상
 ko-noun.cp-danghada	괴멸
 ko-noun.cp-danghada	파멸
+noun.ability-condition	これ
+noun.ability-condition	ここ
 noun.cp-change	中断
 noun.cp-change	孤立
 noun.cp-change	停止
