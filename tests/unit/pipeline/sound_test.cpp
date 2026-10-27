@@ -226,6 +226,14 @@ HD_TEST(pipeline_sound) {
         {"「む…、むっ」", "「む…、뭇」"},
         {"「ちょ…直撃」", "「\xEE\x80\x80" "…直撃」"},
         {"「ちょ、直撃」", "「잠깐、直撃」"},
+        // Before a space or laughter too, but for a conjunction and a syllable that starts the
+        // reading of the kanji word after the space.
+        {"ちょ 待って", "잠깐 待って"},
+        {"ちょｗｗ待って", "잠깐ｗｗ待って"},
+        {"ちょwhat", "ちょwhat"},
+        {"さ 行こう", "자 行こう"},
+        {"で 何", "で 何"},
+        {"む 無理", "む 無理"},
         {"「う…美味い」", "「\xEE\x80\x80" "…美味い」"},
         // Longer pieces that each begin the next: a kana mark for each kana of the piece and
         // a rest mark for each kana of the word it does not reach.

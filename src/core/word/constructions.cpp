@@ -344,6 +344,11 @@ constexpr NamedFeature kFeatures[] = {
          return it->start == 0 && it->tokenIndex >= 0 &&
                 f.w.tokens[static_cast<std::size_t>(it->tokenIndex)].afterSpace;
      }},
+    {"after-blank", [](Flusher& f, const Item* it) {
+         if (it->start != 0 || it->tokenIndex <= 0) return false;
+         const int type = f.w.Tok(it->tokenIndex - 1).type;
+         return type == tokenizer::kTypeAsciiSpace || type == tokenizer::kTypeWideSpace;
+     }},
     {"filler", [](Flusher&, const Item* it) {
          return (it->Code(it->selected).starts_with("32") ||
                  (it->detail->cls == kDetailInfo &&

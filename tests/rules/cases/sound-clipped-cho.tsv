@@ -16,3 +16,25 @@ sound:clipped-cho	「ちょっ！？　他にいないのかよ？」	「잠깐!
 sound:clipped-cho	ちょこんと座った	다소곳 앉았다	keep	fixed
 sound:clipped-cho	ちょうど良かった	마침 좋았다	keep	defaults
 sound:clipped-cho	「い、いいのか佐藤。ちょ、調子に乗りすぎてるんじゃないか？！」	「괘, 괜찮아 사토. 잠깐, 너무 신이 나고 있는 게 아니야?!」	fix	fixed
+sound:clipped-cho	「ちょｗｗｗ落ち着きなってｗｗｗｗｗｗ」	has:「잠깐ㅋㅋㅋ 침착해	fix	fixed
+sound:clipped-cho	ちょｗｗｗ	잠깐ㅋㅋㅋ	fix	fixed
+sound:clipped-cho	ちょｗｗｗやめて	잠깐ㅋㅋㅋ 그만해	fix	fixed
+sound:clipped-cho	ちょ どいて	잠깐 물러나	fix	fixed
+sound:clipped-cho	ちょ　うるさい	잠깐 시끄럽다	fix	fixed
+sound:clipped-cho	ちょ やめてよ	잠깐 그만해	fix	fixed
+sound:clipped-cho	ちょ 離せよ！	has:잠깐 	fix	fixed
+sound:clipped-cho	ちょ 何の話？	잠깐 무슨 이야기?	fix	fixed
+sound:clipped-cho	ちょ 田中さん!?	잠깐 타나카 씨!?	fix	fixed
+sound:clipped-cho	ちょ こっち来いって	has:잠깐 여기	fix	fixed
+sound:clipped-cho	さ 行きましょう	자 갑시다	fix	fixed
+sound:clipped-cho	さ 稔さんそろそろ帰りましょう	has:자 미노루	fix	fixed
+sound:clipped-cho	で この水の体積を出せってやつですか？	has:그리고	keep	fixed
+sound:clipped-cho	で　依頼は来てるんですか？	has:그리고	keep	fixed
+sound:clipped-cho	む 無理です	무리입니다	keep	sound
+sound:clipped-cho	う 動きが あざとすぎる！	움직임이 너무 약삭빠르다!	keep	sound
+sound:clipped-cho	お 俺	나	keep	sound
+sound:clipped-cho	う うん	응	keep	sound
+sound:clipped-cho	そうだ ね……	그렇네……	keep	sound
+sound:clipped-cho	さ　じゃあ　みんな手伝って。	has:자 그럼	fix	fixed
+sound:clipped-cho	お　またな	오 또 보자	keep	sound
+sound:clipped-cho	ちょ　なんで	잠깐 왜	fix	fixed

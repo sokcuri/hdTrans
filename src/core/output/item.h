@@ -43,6 +43,7 @@ struct ResolvedItem {
 
     bool spaceAfter = false;     // a source space after an isolated interjection stays a word boundary
     bool fixed = false;          // entry 0 comes from a plain dictionary: its targets are not reassigned
+    bool reread = false;         // a rewrite wrote the target of the selected entry
     std::string endingSurface;   // source text of the ending group, "" without one
     int endingLength = 0;        // bytes of the ending group's source key, 0 without one
     bool ownedEnding = false;    // the ending group comes from a plain dictionary

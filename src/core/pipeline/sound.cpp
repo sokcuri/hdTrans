@@ -692,13 +692,21 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                  pause = PauseAt(end) || (In(rs_[end - 1], U"？?") && p != stutterEnd_);  // a key that asks ends in its own pause (ね？)
             // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
             // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
-            // う……多分, ちょ……待って).
-            // Not when the syllable is said again after the marks (む…、むっ).
+            // う……多分, ちょ……待って) and, unless it is a conjunction (で 그리고), before a space or
+            // laughter (ちょ 待って, ちょｗｗ落ち着け). Not when the syllable is said again after the
+            // marks (む…、むっ), nor before a space when it starts the reading of the kanji word after
+            // it (む 無理, う 動き).
+            const std::string key = EncodeText(s.key);
+            const bool spaced = end < rs_.size() && text::IsSpace(rs_[end]);
             if (start && end == p + s.key.size() && end < rs_.size() && (p == 0 || !text::IsSpace(rs_[p - 1])) &&
-                dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) && dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), EncodeText(s.key))) {
+                (dict::InClassRune(HDTRANS_CLASS("mark.pause"), rs_[end]) ||
+                 ((spaced || LaughterEnd(end) > end) && !dict::InClass(HDTRANS_CLASS("sound.stutter-conjunction"), key))) &&
+                dict::InClass(HDTRANS_CLASS("sound.stutter-alone"), key)) {
                 size_t again = end;
                 while (again < rs_.size() && (StutterSeparator(rs_, again) > 0 || text::IsSpace(rs_[again]))) again++;
-                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key;
+                again = LaughterEnd(again);
+                pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key &&
+                        !(spaced && again < rs_.size() && IsKanjiRune(rs_[again]) && StutterHeadMora(rs_, again, false) == s.key);
             }
             // A lead asked on its own after an ellipsis that opens an utterance is one too
             // (！…そう？ 그래?); after words the ellipsis only pauses them (したい…ね？).
@@ -1940,6 +1948,11 @@ std::string SoundText::Write() {
                 b += "하게";
                 next++;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (chain.back().lead && !chain.back().open && next + 1 < rs.size() && rs[next] == U'　' &&
+                       !Sounds(next + 1, false, false).empty()) {
+                // An ideographic space between a lead and another sound is a plain space (さ　じゃあ 자 그럼).
+                b += ' ';
+                next++;
             } else if (Spaced(next) || chain.back().spaceAfter) {
                 b += ' ';
             }

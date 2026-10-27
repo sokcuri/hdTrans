@@ -1,0 +1,48 @@
+# 규칙: LEX-62, SND-3
+rule	input	expected	kind	layer
+cx:cho-intensifier:10	ちょｗｗかわいいｗ	완전ㅋㅋ 귀엽다 ㅋ	fix	rewrites
+cx:cho-intensifier:10	ちょｗｗｗかわいい	완전ㅋㅋㅋ 귀엽다	fix	rewrites
+cx:cho-intensifier:10	ちょwwwかわいい	완전ㅋㅋㅋ 귀엽다	fix	rewrites
+cx:cho-intensifier:10	「ちょｗｗ可愛い」	「완전ㅋㅋ 귀엽다」	fix	rewrites
+cx:cho-intensifier:10	ちょｗ優しい	has:완전ㅋ	fix	rewrites
+cx:cho-intensifier:10	ちょ…かわいい	완전…귀엽다	fix	rewrites
+cx:cho-intensifier:10	ちょっ…眠い	완전…졸리다	fix	rewrites
+cx:cho-intensifier:10	ちょ……嬉しい！	완전……기뻐!	fix	rewrites
+cx:cho-intensifier:10	ちょｗｗすごい	has:완전ㅋㅋ	fix	rewrites
+cx:cho-intensifier:10	ちょｗｗｗ落ち着きなってｗｗｗｗｗｗ	has:잠깐ㅋㅋㅋ	keep	rewrites
+cx:cho-intensifier:10	ちょｗｗｗ待ってｗ	잠깐ㅋㅋㅋ 기다려 ㅋ	keep	rewrites
+cx:cho-intensifier:10	ちょ、かわいい	잠깐, 귀엽다	keep	rewrites
+cx:cho-intensifier:10	ちょ… 危ないから降りて	has:잠깐… 위험하니까	keep	rewrites
+cx:cho-intensifier:10	ちょっ…何でよ	잠깐…왜	keep	rewrites
+cx:cho-intensifier:10	ちょっ… アンフェアって？	has:잠깐…	keep	rewrites
+cx:cho-intensifier:10	ちょっ… いきなり何言ってんの!?	has:잠깐…	keep	rewrites
+cx:cho-intensifier:10	ちょっ…ちょっと待ってください｡	잠깐…잠깐 기다려 주세요.	keep	rewrites
+cx:cho-intensifier:10	ちょｗｗかわいい？	잠깐ㅋㅋ 귀여워?	keep	rewrites
+cx:cho-intensifier:10	ちょ…待って	잠깐…기다려	keep	rewrites
+cx:cho-intensifier:20	ちょうかわいい	완전 귀엽다	fix	rewrites
+cx:cho-intensifier:20	ちょう楽しかった	완전 즐거웠다	fix	rewrites
+cx:cho-intensifier:20	ちょうこええええ	완전 무섭다	fix	rewrites
+cx:cho-intensifier:20	ちょうど良かった	마침 좋았다	keep	rewrites
+cx:cho-intensifier:20	この、どんちょう懐かしいんちゃうかな	lacks:완전	keep	rewrites
+cx:cho-intensifier:20	ちょうちょが飛んでいる	has:나비	keep	rewrites
+cx:cho-intensifier:20	ちょうだい	줘	keep	rewrites
+dict:intensifier-choo:1	ちょーかわいい	완전 귀엽다	fix	defaults
+dict:intensifier-choo:1	ちょー嬉しい	완전 기쁘다	fix	defaults
+dict:intensifier-choo:1	やるやる、ちょーやりたい！	has:완전 하고 싶어	fix	defaults
+dict:intensifier-choo:1	ちょー大事な日	완전 소중한 날	fix	defaults
+dict:intensifier-choo:1	ちょーゆっくり歩く	완전 천천히 걷는다	fix	defaults
+dict:intensifier-choo:1	妹もちょー生意気で、可愛い	has:완전 건방져	fix	defaults
+dict:intensifier-choo:1	デスクワークちょー得意	has:완전 특기	fix	defaults
+dict:intensifier-choo:2	チョー忙しいじゃん！	완전 바쁘잖아!	fix	defaults
+dict:intensifier-choo:2	ポイントがチョー貯まって	has:완전 모여	fix	defaults
+dict:intensifier-choo:2	チョー好きなんだけど	has:완전 좋아하는데	fix	defaults
+dict:intensifier-choo:2	チョーｗかわいい	완전 ㅋ 귀엽다	fix	defaults
+dict:intensifier-choo:3	アタシ、ちょ～眠い。	나, 완전 졸리다.	fix	defaults
+dict:intensifier-choo:3	ちょ～ステキ	완전 멋지다	fix	defaults
+dict:intensifier-choo:2	首のこのウイングチョーカーは特徴的だから。	has:초커	keep	defaults
+dict:intensifier-choo:2	黒板のチョーク	has:초크	keep	defaults
+dict:choudai-long:1	片付けてちょーだい♪	정리해 줘♪	fix	local-ending
+dict:choudai-long:2	コーラちょーだい。	콜라 줘.	keep	defaults
+dict:intensifier-choo:1	ちょーっと雰囲気違うけど	lacks:완전	keep	defaults
+cx:cho-intensifier:10	ちょ うるさい	잠깐 시끄럽다	keep	rewrites
+cx:cho-intensifier:10	ちょ… かわいい	잠깐… 귀엽다	keep	rewrites
