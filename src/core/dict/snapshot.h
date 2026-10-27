@@ -115,6 +115,7 @@ enum class LoadErrorKind : uint8_t {
     VerbNoun,    // a line loaded whose noun target is a 하다 verb made a noun (VerbNounError)
     UserRow,     // a bad user dictionary row skipped in non-strict mode
     OptionalSource,  // a missing explicit source, or an unreadable unclassified header probe
+    JapaneseTarget,  // a line loaded whose target holds kana or kanji (JapaneseTargetError)
 };
 
 // Whether an error of kind fails the load of its file; the other kinds list lines of a
@@ -123,7 +124,7 @@ constexpr bool FailsLoad(LoadErrorKind kind) {
     return kind != LoadErrorKind::UnknownPos && kind != LoadErrorKind::MarkerClass &&
            kind != LoadErrorKind::MissingRuleBodies && kind != LoadErrorKind::NegationEnding &&
            kind != LoadErrorKind::VerbNoun && kind != LoadErrorKind::UserRow &&
-           kind != LoadErrorKind::OptionalSource;
+           kind != LoadErrorKind::OptionalSource && kind != LoadErrorKind::JapaneseTarget;
 }
 
 struct LoadError {

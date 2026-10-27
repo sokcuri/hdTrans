@@ -406,6 +406,9 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
                 continue;
             }
         }
+        if (std::string why = JapaneseTargetError(s.ko); !why.empty()) {
+            notices.push_back({f.name, LoadErrorKind::JapaneseTarget, rows.Line(), TsvErrorKind::Read, std::move(why)});
+        }
         if (f.layer == FileLayer::Base || f.layer == FileLayer::Words) {
             if (std::string why = VerbNounError(s.key, s.ko, codes.At(code)->part, s.sem); !why.empty()) {
                 notices.push_back({f.name, LoadErrorKind::VerbNoun, rows.Line(), TsvErrorKind::Read, std::move(why)});

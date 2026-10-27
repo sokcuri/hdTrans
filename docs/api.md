@@ -94,7 +94,7 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--wrapped` | 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계. 줄 끝 화살표(➡, ￫, →, ⇒)는 다음 줄로 이어지며 번역 끝에 한 칸 띄어 남음, 규칙은 `spec/layout.md`의 LAY-14. `--each`, `--raw`와 함께 쓸 수 없고, 설정 파일의 `wrapped`는 그 둘에서 쓰지 않음 |
 | `--context FILE` | FILE의 UTF-8 줄을 입력 앞에 오는 같은 문서로 읽음. 이름, 「」 대사, 가족 호칭, 뜻 같은 단서로만 번역하고 출력하지 않음. `--wrapped`이면 입력이 이어 가는 문장의 앞부분. 끝의 줄바꿈 하나는 줄로 세지 않음. `--each`, `--raw`와 함께 쓸 수 없음 |
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
-| `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사하고 읽은 사전 정보를 표준 오류에 씀. 펼 수 없는 표지(품사 코드의 부류와 어긋나거나 표에 없는 계열)를 쓴 사전 줄([rule-language.md](rule-language.md#번역-안의-표지-d-y))이나 기본, 어휘 계층의 명사 줄 중 번역이 `하기`로 끝나는 한 낱말(출항하기, [dictionary-files.md](dictionary-files.md#열-파일))이 있으면 나열하고 실패 |
+| `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사하고 읽은 사전 정보를 표준 오류에 씀. 펼 수 없는 표지(품사 코드의 부류와 어긋나거나 표에 없는 계열)를 쓴 사전 줄([rule-language.md](rule-language.md#번역-안의-표지-d-y))이나 기본, 어휘 계층의 명사 줄 중 번역이 `하기`로 끝나는 한 낱말(출항하기, [dictionary-files.md](dictionary-files.md#열-파일)), 번역에 가나나 한자가 있는 사전 줄이 있으면 나열하고 실패 |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
 | `--compile-snapshot FILE` | 기본 사전 전체를 FILE(`.hdsnap`)에 컴파일하고 종료. FILE을 출력. 펼 수 없는 표지를 쓴 줄이 있으면 나열하고 실패 |
 | `--no-cache` | 사전 캐시를 끔 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음). `.hdsnap`은 그대로 읽음 |

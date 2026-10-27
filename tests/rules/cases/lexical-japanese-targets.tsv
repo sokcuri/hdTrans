@@ -1,0 +1,25 @@
+# 규칙: LEX-27
+rule	input	expected	kind	layer
+dict:names.586651	「朧改」で出撃するよ！	「오보로 개」로 출격할게!	fix	lookup
+dict:names.688240	旗艦は翔鶴改二だ。	기함은 쇼카쿠 개2다.	fix	lookup
+dict:names.545957	川内改、夜戦に突入します！	센다이 개, 야전에 돌입합니다!	fix	lookup
+dict:names.471920	加古改が戻ってきた。	카코 개가 돌아왔다.	fix	lookup
+dict:names.179598	ジム改の小隊が前に出る。	짐 개의 소대가 앞에 나온다.	fix	lookup
+dict:names.112750	ガンダムサンドロック改、出るぞ。	건담 샌드록 개, 나가겠어.	keep	lookup
+dict:names.62475	イフリート改は強いな。	이프리트는 강하네.	keep	lookup
+dict:names.481926	原貫太さんが来た。	하라 간타 씨가 왔다.	fix	lookup
+dict:jisjk:339705	俊太郎は小さく笑った。	슌타로는 작게 웃었다.	fix	lookup
+dict:jisjk:289646	喜屋武の海は青い。	기얀의 바다는 푸르다.	keep	lookup
+dict:jisjk:300693	春田町まで歩いた。	슌다쵸까지 걸었다.	fix	lookup
+dict:names.726780	重戦車が三両、こちらに向かってくる。	중전차가 3량, 이쪽을 향해 온다.	keep	lookup
+dict:names.667295	神メニューを考えたぞ！	갓 메뉴를 생각했어!	fix	lookup
+dict:names.645102	特務機関森羅の任務だ。	특무기관 삼라의 임무다.	fix	lookup
+dict:names.521244	守岡未央という名前だった。	모리오카 미오라는 이름이었다.	keep	lookup
+dict:names.737123	長島甲子男が言った。	나가시마 카시오가 말했다.	keep	lookup
+dict:names.230704	ツナっちと遊んだ。	참치치와 놀았다.	keep	lookup
+dict:names.83499	エモいな、これ。	감성적이다, 이것.	keep	lookup
+lookup:japanese-target	全艦一次改装を終えた。	전 함선 일차 개장을 끝냈다.	keep	lookup
+lookup:japanese-target	朧は静かに頷いた。	농은 조용하게 끄덕였다.	keep	lookup
+lookup:japanese-target	新しいジムに通い始めた。	새로운 헬스장에 다니기 시작했다.	keep	lookup
+lookup:japanese-target	重い戦車だった。	무거운 전차였다.	keep	lookup
+lookup:japanese-target	今日の献立はカレーだ。	오늘의 메뉴는 카레다.	keep	lookup
