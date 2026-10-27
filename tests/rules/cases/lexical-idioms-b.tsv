@@ -1,0 +1,22 @@
+# 규칙: LEX-70
+rule	input	expected	kind	layer
+dict:idiom-literal:2	油を売るな	농땡이 부리지 마	fix	local
+dict:idiom-literal:2	いいのか、こんな所で油を売ってて。	괜찮아, 이런 곳에서 농땡이 부리고 있어.	fix	local
+dict:idiom-literal:2	どこで油を売ってたんだ	어디서 농땡이 부리고 있었어	fix	local
+dict:idiom-literal:2	油を売らないで	농땡이 부리지 마	fix	local
+dict:idiom-literal:2	油を売っている場合じゃない	농땡이 부리고 있을 때가 아니다	fix	local
+dict:idiom-literal:1	ガソリンスタンドで油を売る	주유소에서 기름을 판다	fix	defaults
+dict:idiom-literal:1	油を売る商売	기름을 파는 장사	fix	defaults
+dict:idiom-literal:1	この店では料理用の油を売っている。	이 가게에서는 요리용의 기름을 팔고 있다.	fix	defaults
+dict:idiom-literal:1	店では油を売っています	가게에서는 기름을 팔고 있습니다	fix	defaults
+dict:nigate:4	ピーマンが苦手だ	피망이 질색이다	fix	local
+dict:nigate:4	私は虫が苦手です	저는 벌레가 질색입니다	fix	local
+dict:nigate:4	犬が苦手なので	개가 질색이어서	fix	local
+dict:nigate:4	甘いものが苦手で	단 것이 질색이라서	fix	local
+dict:nigate:4	数学が苦手だ	수학에 약하다	keep	local
+dict:nigate:4	料理が苦手です	요리에 약합니다	keep	local
+cx:koshita-noun:10	健康に越したことはない	건강보다 좋은 건 없다	fix	rewrites
+cx:koshita-noun:10	安全に越したことはない	안전보다 좋은 건 없다	fix	rewrites
+cx:koshita-noun:10	用心に越したことはない	조심보다 좋은 건 없다	fix	lookup
+cx:koshita-noun:10	早いに越したことはない	빠른 게 제일이다	keep	lookup
+cx:koshita-noun:10	健康に良い	건강에 좋다	keep	rewrites

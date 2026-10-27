@@ -1,0 +1,5 @@
+#! layer=base
+# 관용구의 뜻과 글자 그대로의 뜻: 油を売る
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+油を売	기름을 &K8@	M448			GN							idiom-literal:1
+油を売	농땡이 부&AA@	M448			GN	8630	||1 &&2 ||5 U+0== "な" U+0== "Lて" U+0== "Lた" U+0== "Lっ" U+0== "Lないで" ||2 G+0== "Hz" &&2 S-1!= "の" S-1!= "では"	油を売る는 て형, 과거, 금지에서 농땡이 부리다는 뜻이고, 앞에 の로 꾸민 기름이나 では의 가게가 오면 글자 그대로다.				idiom-literal:2

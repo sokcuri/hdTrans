@@ -3,3 +3,5 @@
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 苦手	서%C2@	G8U0			GN							nigate:1
 苦手	질색%D4@	G8U0			GN	8610	||1 &&2 ||2 S-1== "は" S-1== "も" ||2 &&2 A-2== "VFdQAAQAE" G-2!= "Hd" U-2== "Rもの"					nigate:2
+が苦手	에 약%E3@	G8U0		TuPj	GN							nigate:3
+が苦手	(이)가 질색%D4@	G8U0		TuPj	GN	8611	||2 &&2 A-1== "VFdQAAQAE" G-1!= "Hd" U-1== "Rもの"					nigate:4
