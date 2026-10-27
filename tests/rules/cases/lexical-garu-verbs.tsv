@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:w:28873	可愛がられるか、気味悪がられて消されるか。	has:기분 나쁘게 여겨져	fix	local
+dict:w:28873	彼は皆に気味悪がられた。	has:기분 나쁘게 여겨졌다	fix	local
+dict:w:28870	子供たちは気味悪がって逃げた。	has:기분 나빠해	fix	local
+dict:w:28874	変な格好を面白がられて困った。	has:재미있게 여겨져	fix	local
+dict:w:28871	猫の動きを面白がっている。	has:재미있어하고 있다	fix	local
+dict:w:28870	気味悪い話だった。	has:기분 나쁜	keep	local
+dict:w:28875	祖母に可愛がられて育った。	has:귀여움 받아 자랐다	fix	local
+dict:w:28875	犬を可愛がる。	has:귀여워한다	keep	local
