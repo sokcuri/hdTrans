@@ -1728,7 +1728,21 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     return FALSE;
 }
 
+// The entry fields of the dictionary page, including the edit box inside the POS combo box.
+bool EntryField(const App& app, HWND window) {
+    if (!app.dicts || !window) return false;
+    for (const int id : {IDC_ENTRY_KEY, IDC_ENTRY_KO, IDC_ENTRY_OPTIONS})
+        if (window == GetDlgItem(app.dicts, id)) return true;
+    const HWND pos = GetDlgItem(app.dicts, IDC_ENTRY_POS);
+    return (window == pos || GetParent(window) == pos) && !SendMessageW(pos, CB_GETDROPPEDSTATE, 0, 0);
+}
+
 void Dispatch(App& app, MSG& message) {
+    // Enter in an entry field adds the entry, as the 추가 button does.
+    if (message.message == WM_KEYDOWN && message.wParam == VK_RETURN && EntryField(app, message.hwnd)) {
+        if (IsWindowEnabled(GetDlgItem(app.dicts, IDC_ENTRY_ADD))) ChangeEntry(app, IDC_ENTRY_ADD);
+        return;
+    }
     if (app.main && IsDialogMessageW(app.main, &message)) return;
     TranslateMessage(&message);
     DispatchMessageW(&message);
@@ -1787,6 +1801,63 @@ std::wstring TranslateShort(App& app, const wchar_t* source) {
     return ControlText(app.text, IDC_RESULT);
 }
 
+// Sends a key press as the message loop delivers it, with Shift held when shift is set.
+void PressKey(App& app, UINT key, bool shift = false) {
+    BYTE keys[256]{};
+    GetKeyboardState(keys);
+    const BYTE before = keys[VK_SHIFT];
+    keys[VK_SHIFT] = shift ? 0x80 : 0;
+    SetKeyboardState(keys);
+    MSG down{GetFocus(), WM_KEYDOWN, key, 0, 0, {}};
+    Dispatch(app, down);
+    MSG message{};
+    while (PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) Dispatch(app, message);
+    keys[VK_SHIFT] = before;
+    SetKeyboardState(keys);
+}
+
+bool FocusIn(HWND page, int id) {
+    const HWND focus = GetFocus();
+    const HWND control = GetDlgItem(page, id);
+    return focus && (focus == control || GetParent(focus) == control);
+}
+
+// Tab walks the entry fields of an open, empty dictionary and Enter adds the entry; the
+// translation page keeps its Tab order and Enter in the source box is a line break.
+bool SelfTestEntryKeys(App& app) {
+    ShowPage(app, kDictsPage);
+    SetFocus(GetDlgItem(app.dicts, IDC_ENTRY_KEY));
+    if (!Check(FocusIn(app.dicts, IDC_ENTRY_KEY), "focus the Japanese entry field")) return false;
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, L"ＺＺ0");
+    SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"키보드");
+    bool ok = true;
+    for (const int id : {IDC_ENTRY_KO, IDC_ENTRY_POS, IDC_ENTRY_OPTIONS, IDC_ENTRY_ADD}) {
+        PressKey(app, VK_TAB);
+        ok = Check(FocusIn(app.dicts, id), "Tab moves to the next entry control") && ok;
+    }
+    PressKey(app, VK_TAB, true);
+    ok = Check(FocusIn(app.dicts, IDC_ENTRY_OPTIONS), "Shift+Tab moves back from 추가") && ok;
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1 && app.rows[0].key == "ＺＺ0" && app.rows[0].ko == "키보드" &&
+               ControlText(app.dicts, IDC_ENTRY_KEY).empty() && FocusIn(app.dicts, IDC_ENTRY_KEY) && IsWindow(app.main),
+               "Enter in an entry field adds the entry and returns to the Japanese field") && ok;
+    PressKey(app, VK_RETURN);
+    ok = Check(app.rows.size() == 1, "Enter with an empty Japanese field adds nothing") && ok;
+
+    ShowPage(app, kTextPage);
+    SetFocus(GetDlgItem(app.text, IDC_WHOLE_DOCUMENT));
+    PressKey(app, VK_TAB);
+    ok = Check(FocusIn(app.text, IDC_SOURCE), "Tab on the translation page still reaches the source box") && ok;
+    SetDlgItemTextW(app.text, IDC_SOURCE, L"日本語");
+    SendDlgItemMessageW(app.text, IDC_SOURCE, EM_SETSEL, 3, 3);
+    PressKey(app, VK_RETURN);
+    ok = Check(ControlText(app.text, IDC_SOURCE) == L"日本語\r\n" && !app.busy && app.rows.size() == 1,
+               "Enter in the source box is a line break, not a translation or an add") && ok;
+    SetDlgItemTextW(app.text, IDC_SOURCE, L"");
+    ShowPage(app, kDictsPage);
+    return ok;
+}
+
 // The dictionary page on the user folder of the default layout under program.
 bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     app.userSources = UserSources(Utf8(program.native()));
@@ -1835,12 +1906,13 @@ bool SelfTestDicts(App& app, const fs::path& program, const fs::path& user) {
     NotifyClick(app.dicts, IDC_DICT_NEW);
     ok = Check(fs::exists(gui::UserDictPath(user, "새 사전"), error) && app.userDicts.size() == 2 && app.rows.empty(),
                "new dictionary") && ok;
-    for (int n = 0; n < 40; ++n) {
+    ok = SelfTestEntryKeys(app) && ok;
+    for (int n = 1; n < 41; ++n) {
         SetDlgItemTextW(app.dicts, IDC_ENTRY_KEY, (L"ＺＺ" + std::to_wstring(n)).c_str());
         SetDlgItemTextW(app.dicts, IDC_ENTRY_KO, L"목록");
         NotifyClick(app.dicts, IDC_ENTRY_ADD);
     }
-    ok = Check(app.rows.size() == 40 && Selected(grid) == 39 && ListView_IsItemVisible(grid, 39) && ListView_GetTopIndex(grid) > 0,
+    ok = Check(app.rows.size() == 41 && Selected(grid) == 40 && ListView_IsItemVisible(grid, 40) && ListView_GetTopIndex(grid) > 0,
                "the list scrolls to the newest added row") && ok;
     const fs::path places = program / L"places.txt";
     ok = Check(WriteFixture(places, "東京\t가져온장소\n"), "write dictionary to import") && ok;
