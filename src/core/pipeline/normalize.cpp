@@ -1,5 +1,5 @@
 // The rewrites of Normalize, in order:
-//   0. characters of the private use area escaped (EscapePrivateUse);
+//   0. canonical kana letter pairs composed, then private-use characters escaped (EscapePrivateUse);
 //   1. on a document line, the kin terms for the speaker's sex (WriteKinTerms), then
 //      ruby markup removed (StripRuby);
 //   2. character forms: half-width katakana, CP932 mapping differences, kanji forms
@@ -30,7 +30,53 @@ namespace hdTrans::pipeline {
 
 using namespace internal;
 
+namespace {
+
+constexpr std::u32string_view kDakutenBases =
+    U"かきくけこさしすせそたちつてとはひふへほカキクケコサシスセソタチツテトハヒフヘホ";
+constexpr std::u32string_view kHandakutenBases = U"はひふへほハヒフヘホ";
+
+char32_t ComposeKanaPair(char32_t base, char32_t mark) {
+    if (mark == U'\u3099') {
+        if (In(base, kDakutenBases)) return base + 1;
+        if (base == U'う') return U'ゔ';
+        if (base == U'ウ') return U'ヴ';
+        if (base >= U'ワ' && base <= U'ヲ') return U'ヷ' + (base - U'ワ');
+    } else if (mark == U'\u309A' && In(base, kHandakutenBases)) {
+        return base + 2;
+    }
+    return 0;
+}
+
+std::string ComposeKanaPairs(std::string_view in) {
+    std::string out;
+    out.reserve(in.size());
+    for (size_t at = 0; at < in.size();) {
+        const text::Rune r = At(in, at);
+        at += r.size;
+        if (r.cp == text::kReplacement && r.size == 1) {
+            out.push_back(in[at - 1]);
+            continue;
+        }
+        char32_t c = r.cp;
+        const text::Rune mark = At(in, at);
+        if (const char32_t composed = ComposeKanaPair(c, mark.cp)) {
+            c = composed;
+            at += mark.size;
+        }
+        text::AppendRune(out, c);
+    }
+    return out;
+}
+
+}  // namespace
+
 std::string Normalize(std::string_view line, const LineContext& ctx, const RunLookup& runs) {
+    std::string canonical;
+    if (line.find("\u3099") != std::string_view::npos || line.find("\u309A") != std::string_view::npos) {
+        canonical = ComposeKanaPairs(line);
+        line = canonical;
+    }
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
     text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), runs)));
@@ -491,14 +537,11 @@ std::string NormalizeForms(std::string_view text) {
         if (c >= 0xFF61 && c <= 0xFF9F && c != U'｢' && c != U'｣') {
             c = tokenizer::WidenHalfWidth(c);
             const text::Rune mark = At(text, i);
-            if (mark.size > 0 && mark.cp == U'ﾞ' && In(c, U"カキクケコサシスセソタチツテトハヒフヘホ")) {
-                c++;
+            if (mark.size > 0 && mark.cp == U'ﾞ' && (c == U'ウ' || In(c, kDakutenBases))) {
+                c = ComposeKanaPair(c, U'\u3099');
                 i += mark.size;
-            } else if (mark.size > 0 && mark.cp == U'ﾞ' && c == U'ウ') {
-                c = U'ヴ';
-                i += mark.size;
-            } else if (mark.size > 0 && mark.cp == U'ﾟ' && In(c, U"ハヒフヘホ")) {
-                c += 2;
+            } else if (mark.size > 0 && mark.cp == U'ﾟ' && In(c, kHandakutenBases)) {
+                c = ComposeKanaPair(c, U'\u309A');
                 i += mark.size;
             }
         } else if (c == U'〆' && (i == text.size() || In(At(text, i).cp, U"のはをがにでも」』、。！？…"))) {
@@ -518,6 +561,11 @@ std::string NormalizeForms(std::string_view text) {
             if (const text::Rune vs = At(text, i); vs.cp == 0xFE0E || vs.cp == 0xFE0F) i += vs.size;  // ‼︎
         } else {
             c = MapForm(c);
+        }
+        const text::Rune mark = At(text, i);
+        if (const char32_t composed = ComposeKanaPair(c, mark.cp)) {
+            c = composed;
+            i += mark.size;
         }
         // A voiced mark on a kana that has no voiced form strains the voice of a cry (あ゛っ, ん゛,
         // ウ゛ー); the kana is read without it. Katakana ウ with the mark before a small vowel or
