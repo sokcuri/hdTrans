@@ -1,0 +1,54 @@
+# 규칙: LEX-67
+rule	input	expected	kind	layer
+lexical:common-idioms	彼は本の虫だ	그는 책벌레다	fix	lookup
+lexical:common-idioms	本の虫と呼ばれている	책벌레로 불리고 있다	fix	lookup
+lexical:common-idioms	父は仕事の鬼だ	아버지는 일벌레다	fix	lookup
+lexical:common-idioms	猫の手も借りたいほど忙しい	눈코 뜰 새 없이 바쁘다	fix	lookup
+lexical:common-idioms	猫の手も借りたい	눈코 뜰 새 없이 바쁘다	fix	lookup
+lexical:common-idioms	猫の手も借りたいくらいだ	눈코 뜰 새 없이 바쁠 정도다	fix	lookup
+lexical:common-idioms	手が出ない値段	엄두를 낼 수 없는 가격	fix	lookup
+lexical:common-idioms	とても手が出ない	도저히 엄두를 낼 수 없다	fix	lookup
+lexical:common-idioms	油を売るな	농땡이 부리지 마	fix	lookup
+lexical:common-idioms	油を売っている場合じゃない	농땡이 부리고 있을 때가 아니다	fix	lookup
+lexical:common-idioms	目を光らせていた	눈을 번뜩이고 있었다	fix	lookup
+lexical:common-idioms	目から鱗が落ちた	눈이 번쩍 뜨였다	fix	lookup
+lexical:common-idioms	手を貸してくれ	도와 줘	fix	lookup
+lexical:common-idioms	手も足も出ない	꼼짝도 할 수 없다	fix	lookup
+lexical:common-idioms	手も足も出なかった	꼼짝도 할 수 없었다	fix	lookup
+lexical:common-idioms	骨身を惜しまない	몸을 아끼지 않는다	fix	lookup
+lexical:common-idioms	二枚舌を使う	말을 바꾼다	fix	lookup
+lexical:common-idioms	図に乗るな	우쭐대지 마	fix	lookup
+lexical:common-idioms	雀の涙ほどの給料	쥐꼬리만 한 급료	fix	lookup
+lexical:common-idioms	願ったり叶ったりだ	더할 나위 없는 일이다	fix	lookup
+lexical:common-idioms	こっちはたまったもんじゃない	여기는 견딜 수 없다	fix	lookup
+lexical:common-idioms	気が気でなかった	조마조마했다	fix	lookup
+lexical:common-idioms	虫の居所が悪かった	심기가 불편했다	fix	lookup
+lexical:common-idioms	彼は泣き虫だ	그는 울보다	keep	lookup
+lexical:common-idioms	弱虫	겁쟁이	keep	lookup
+lexical:common-idioms	彼は顔が広い	그는 발이 넓다	keep	lookup
+lexical:common-idioms	耳が痛い話だ	귀가 따가운 이야기다	keep	lookup
+lexical:common-idioms	甘いものに目がない	단 것에 약하다	keep	lookup
+lexical:common-idioms	気が置けない仲間	허물없는 동료	keep	lookup
+lexical:common-idioms	口が滑った	말실수 했다	keep	lookup
+lexical:common-idioms	骨が折れる仕事だ	애를 먹는 일이다	keep	lookup
+lexical:common-idioms	猫をかぶっている	내숭을 떨고 있다	keep	lookup
+lexical:common-idioms	手を出すな	손을 대지 마	keep	lookup
+lexical:common-idioms	油を差す	기름을 친다	keep	lookup
+dict:nigate:2	猫舌なので熱いものは苦手だ	뜨거운 것을 먹지 못하는 사람이므로 뜨거운 것은 질색이다	fix	local
+dict:nigate:2	熱いものは苦手です	뜨거운 것은 질색입니다	fix	local
+dict:nigate:2	虫は苦手だ	벌레는 질색이다	fix	local
+dict:nigate:2	野菜は苦手だった	야채는 질색이었다	fix	local
+dict:nigate:2	私はピーマンも苦手だ	나는 피망도 질색이다	fix	local
+dict:nigate:2	甘いものは苦手なんだ	단 것은 질색이다	fix	local
+dict:nigate:2	数学は苦手だ	수학은 서투르다	keep	local
+dict:nigate:2	人前で話すのは苦手だ	남의 앞에서 이야기하는 것은 서투르다	keep	local
+dict:nigate:2	料理は苦手です	요리는 서투릅니다	keep	local
+dict:nigate:2	あの人は苦手だ	그 사람은 서투르다	keep	local
+pattern:koshita	安いに越したことはない	싼 게 제일이다	fix	lookup
+pattern:koshita	早いに越したことはない	빠른 게 제일이다	fix	lookup
+pattern:koshita	用心するに越したことはない	조심하는 게 제일이다	fix	lookup
+pattern:koshita	確認するに越したことはありません	확인하는 게 제일입니다	fix	lookup
+pattern:dokoro	恋愛どころじゃないよ	연애 정도가 아니야	fix	lookup
+pattern:dokoro	魔族討伐どころではない	마족 토벌 정도가 아니다	keep	lookup
+pattern:dokoro	それどころではない	그럴 때가 아니다	keep	lookup
+pattern:dokoro	寝るどころではない	잘 때가 아니다	keep	lookup
