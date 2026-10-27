@@ -13,7 +13,7 @@ constraint:adverb-copula	「相変わらずですね」	「변함없네요」	ke
 constraint:adverb-copula	相変わらず元気だな	변함없이 건강하네	keep	lookup
 constraint:adverb-copula	少しだけ	약간	keep	lookup
 constraint:adverb-copula	一緒だよ	함께야	keep	lookup
-constraint:adverb-copula	あいつだって 迷惑だよ	저 녀석도 성가셔	keep	lookup
+constraint:adverb-copula	あいつだって 迷惑だよ	저 녀석도 민폐야	keep	lookup
 constraint:adverb-copula	ああ、それだけでも、充分だ。	아, 그것만으로도, 충분하다.	keep	lookup
 constraint:adverb-copula	残念だな	유감이네	keep	lookup
 constraint:adverb-copula	当然だな	당연하네	keep	lookup
