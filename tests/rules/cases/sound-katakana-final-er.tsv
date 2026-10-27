@@ -1,0 +1,19 @@
+# 규칙: LEX-1
+rule	input	expected	kind	layer
+sound:katakana-final-er	Googleカレンダーと連携して、僕のイベンター生活が180°変わった	has:내 이벤터 생활이	fix	sound
+sound:katakana-final-er	イベンターとして生きる。	이벤터로서 산다.	fix	sound
+sound:katakana-final-er	彼はリンターを入れた。	그는 린터를 넣었다.	fix	sound
+sound:katakana-final-er	浮上してくるのはダーターじゃん。	부상해 오는 것은 다터잖아.	fix	sound
+sound:katakana-final-er	ヒッパーの無能め！	힙퍼의 무능한!	fix	sound
+sound:katakana-final-er	ピヴォワーヌメンバーだ。	피보워누멘버다.	fix	sound
+sound:katakana-final-er	スキャンダラスなトレンダーだ。	has:트렌더다	fix	sound
+sound:katakana-final-er	クリエイターになりたい。	크리에이터가 되고 싶다.	keep	sound
+sound:katakana-final-er	ゲーマーの朝は早い。	게이머의 아침은 빠르다.	keep	sound
+sound:katakana-final-er	ポインターを動かす。	포인터를 움직인다.	keep	sound
+sound:katakana-final-er	新しいアバターを作った。	새로운 아바타를 만들었다.	keep	sound
+sound:katakana-final-er	ギターを弾く。	기타를 연주한다.	keep	sound
+sound:katakana-final-er	スターになった。	스타가 되었다.	keep	sound
+sound:katakana-final-er	キター！	키타!	keep	sound
+sound:katakana-final-er	カーカーと鳴いた。	까악까악 울었다.	keep	sound
+sound:katakana-final-er	マキナー！	마키나!	keep	sound
+sound:katakana-final-er	ゲブラーの剣だ。	게브라의 검이다.	keep	sound

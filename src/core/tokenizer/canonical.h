@@ -6,10 +6,10 @@
 
 namespace hdTrans::tokenizer {
 
-// The canonical form of c when it differs from c: the KS X 1001 form of a kanji, its
-// Hangul reading or □ when KS X 1001 has no such hanja, the full-width form of a
-// half-width character, the Korean usage of punctuation (、 -> ", ", 。 -> ". ").
-// Forms may begin or end with spaces.
+// The canonical form of c when it differs from c: the KS X 1001 form of a kanji or its
+// Hangul reading, the full-width form of a half-width character, the Korean usage of
+// punctuation (、 -> ", ", 。 -> ". "). A symbol has none: it is written as it stands
+// (°, ′, ゝ). Forms may begin or end with spaces.
 std::optional<std::string_view> CanonicalForm(char32_t c);
 
 // The canonical form of a whole text that starts with c (？ -> "?", 〒 -> "(우)");

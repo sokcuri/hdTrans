@@ -42,10 +42,14 @@ HD_TEST(pipeline_normalize_forms) {
         {"ウ゛ー ウ゛ーッ ウ゛ゥ ウ゛ィーナス ウ゛"sv, "ウー ウーッ ウゥ ヴィーナス ウ"sv},
         {"ウ゛ウ゛ー ウ゛ウ゛ッ ウ゛ン ウ゛ウ゛ァ"sv, "ウウー ウウッ ウン ヴヴァ"sv},
         {"｢ｱｲｳ｣､ｦ･ｰ｡"sv, "｢アイウ｣、ヲ・ー。"sv},
-        {"〜−‖¢£¬"sv, "～－∥￠￡￢"sv},
+        {"〜−‖¢£¬"sv, "～−‖¢£¬"sv},
+        {"二〇二六 〇〇さん 〇時 、〇〇〇〇、"sv, "二〇二六 ○○さん 〇時 、〇〇〇〇、"sv},
+        {"二時〇〇分 〇〇:〇〇 十時〇分 〇〇年〇月〇日"sv, "二時〇〇分 〇〇:〇〇 十時〇分 ○○年○月○日"sv},
+        {"10㌔ ㍍ ㍻"sv, "10キロ メートル 平成"sv},
         {"ＡＢＣ①"sv, "ＡＢＣ①"sv},
         {"a\x00" "b\x01" "c\x02" "d\x03" "e"sv, "a b c d e"sv},
         {"頰𠮟﨑髙"sv, "頬叱崎高"sv},
+        {"\uFA12\uFA19"sv, "晴神"sv},
         {"ﾍﾟﾎﾞﾍﾞ"sv, "ペボベ"sv},
         {"x\xffy"sv, "x\xffy"sv},
         {"ｶ"sv, "カ"sv},
@@ -788,6 +792,31 @@ HD_TEST(pipeline_respell_old_forms) {
                  hdTrans::text::RuneCount(pair.substr(eq + 1)) == 1);
         HD_CHECK(olds.insert(pair.substr(0, eq)).second);
     }
+}
+
+HD_TEST(pipeline_respell_iteration_marks) {
+    // Stand-ins for the dictionary: 時々 is a word, 星 a noun of its own.
+    const WordHoldsRun words = [](const void*, std::string_view line, size_t at, size_t) {
+        return line.substr(at).starts_with("時々");
+    };
+    const WordHoldsRun nouns = [](const void*, std::string_view line, size_t at, size_t end) {
+        return line.substr(at, end - at) == "星";
+    };
+    const Case cases[] = {
+        {"こゝろ"sv, "こころ"sv},
+        {"いすゞ"sv, "いすず"sv},
+        {"ばゝ"sv, "ばは"sv},
+        {"ハヾ"sv, "ハバ"sv},
+        {"易々と"sv, "易易と"sv},
+        {"時々来る"sv, "時々来る"sv},
+        {"星々"sv, "星々"sv},
+        {"「々」"sv, "「々」"sv},
+        {"これはゝです"sv, "これはゝです"sv},
+        {"「ゝ」"sv, "「ゝ」"sv},
+        {"ゝ"sv, "ゝ"sv},
+        {"これは々です"sv, "これは々です"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellIterationMarks(c.in, words, nouns, nullptr), std::string(c.want));
 }
 
 HD_TEST(pipeline_write_kin_terms) {

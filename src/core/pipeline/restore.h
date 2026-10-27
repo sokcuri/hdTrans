@@ -34,8 +34,8 @@ std::string Restore(const output::Pieces& cleaned, const output::Pieces& typed, 
 output::Pieces DropAddedSpaces(const output::Pieces& typed, const output::Pieces& out);
 
 // The brackets of typed written over the forms the engine writes for them, line by line
-// (the whole text when the line counts differ): 『』 ｢｣ （） ’ 〝〟 come out as 「」 「」 () ＇
-// ˝〃, and the n-th occurrence of such a form in out becomes the n-th bracket of typed
+// (the whole text when the line counts differ): 『』 ｢｣ （） ’ 〝〟 − come out as 「」 「」 () ＇
+// ˝〃 －, and the n-th occurrence of such a form in out becomes the n-th bracket of typed
 // written in it, with 〝〟 as “”. A form that occurs a different number of times in
 // typed and out is left as it is. Spans are left as they are.
 output::Pieces RestoreBrackets(const output::Pieces& typed, const output::Pieces& out);

@@ -64,7 +64,8 @@ output::Pieces CutSpans(std::string_view text, std::span<const std::string> mark
 // A colour or reset does not follow &, where it is a malformed entity (&#12345678;).
 size_t StyleCodeLength(std::string_view s, char before);
 
-// A character kept as written: outside CP932 and neither a Han character nor kana.
+// A character kept as written: outside CP932, neither a Han character nor kana, and
+// without a canonical form (㊙ has one).
 // Hangul, emoji, the letters and symbols of other scripts and the hiragana ゔゕゖ are
 // foreign; ASCII, the half-width forms, ヷヸヹヺ and the marks of tone outside CP932
 // (kToneMarks) are not: like ♪ they close an utterance rather than name a thing.

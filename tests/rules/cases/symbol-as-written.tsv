@@ -1,0 +1,20 @@
+# 규칙: LAY-16
+rule	input	expected	kind	layer
+compose:symbol-as-written	Googleカレンダーと連携して、僕のイベンター生活が180°変わった	has:180°	fix	compose
+compose:symbol-as-written	僕の生活が180°変わった	lacks:о	fix	compose
+compose:symbol-as-written	北緯35°の町だ	북위 35°의 마을이다	fix	compose
+compose:symbol-as-written	角度は15′ずれている	has:15′	fix	compose
+compose:symbol-as-written	ここで♯を押す	has:♯	fix	compose
+compose:symbol-as-written	⑳番の席に座った	has:⑳	fix	compose
+compose:symbol-as-written	£100を払った	£100을 지불했다	fix	normalize
+compose:symbol-as-written	ＧＴ−Ｒが走る	GT−R이 달린다	fix	compose
+compose:symbol-as-written	答えは「ゝ」だ	대답은 「ゝ」다	fix	compose
+compose:symbol-as-written	これは㊙情報だ	has:(비)정보	fix	compose
+compose:symbol-as-written	㊤巻を読んだ	(상)권을 읽었다	fix	compose
+compose:symbol-as-written	㈲山田商店に寄った	(유)야마다 상점에 들렀다	fix	compose
+compose:symbol-as-written	10㌔歩いた	has:10킬로	fix	normalize
+compose:symbol-as-written	㍻元年の話だ	헤이세이 원년 이야기다	fix	normalize
+compose:symbol-as-written	㈱山田商店に寄った	㈜야마다 상점에 들렀다	keep	compose
+compose:symbol-as-written	気温は30℃だ	has:30℃	keep	compose
+compose:symbol-as-written	角度は45度だ	각도는 45도다	keep	compose
+compose:symbol-as-written	アパ−トに住む	아파트에 산다	keep	compose

@@ -71,7 +71,7 @@ dict:names.374274	モーガー県。	모가 디스트릭트.	fix	fixed
 dict:names.374274	モーガー県に行った。	모가 디스트릭트에 갔다.	fix	fixed
 dict:names.374274	モーガー県の地図。	모가 디스트릭트의 지도.	fix	fixed
 dict:names.374274	モーガー県を見た。	모가 디스트릭트를 보았다.	fix	fixed
-dict:names.374274	モーガー	모가	keep	fixed
+dict:names.374274	モーガー	lacks:디스트릭트	keep	fixed
 dict:names.374274	モーガン	모건	keep	fixed
 names:country-reading	モーリタニア	모리타니	fix	fixed
 dict:names.376210	ヤルミラ・グロート	야르밀라 그로트	fix	fixed

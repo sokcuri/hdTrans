@@ -20,6 +20,8 @@
 이어지면 장음으로 읽는다(じーさん 할아버지, おかーさん 어머니). 의지형 끝의 ー는 구를 끝내는 문장 끝 조사나 っと, って 앞에서도
 う다(がんばろーぜ 힘내자구, 探ろーっと 찾아야지). 늘인 모음으로 시작하는 감탄사(あーそう, えーまさか), ね 뒤의 ー(知らねー, だよねー),
 늘인 경칭(くーん, ちゃーん), 경칭 앞의 애칭(うーちゃん), ー를 쓴 사전 낱말과 가타카나 낱말(すごーく, チュー)은 그대로 둔다.
+낱말과 조사 뒤의 ～는 그 앞 가나에서 시작해 ～ 바로 뒤의 낱말보다 짧게 끝나는 낱말로 읽어 빼지 않는다(これは～です 이것은~입니다,
+ここに～がある 여기에~가 있다).
 말머리에서 작은 모음, ー, っ로 늘여 외친 嫌는 외침 いや와 같이 옮긴다(嫌ぁぁぁ 싫어어어, 嫌っ！ 싫어!). 늘인 모음 하나
 뒤에 느낌표나 쉼표가 없으면 외침이 아니고(嫌ぁ……), 말 가운데의 嫌(すごく嫌ー, 嫌っている)는 낱말로 둔다.
 음절마다 ー나 ～로 늘인 낱말(とーにーかーく, か～わ～い～い～)은 사전 낱말이거나 활용 어미가 붙은 동사, 형용사 어간이면 그 낱말로 읽고, 끝을 늘이면 끝에 ~를 붙인다(어쨌든,
@@ -74,7 +76,7 @@
 `tests/rules/cases/sound-drawl-shout.tsv`(외침의 ッ), `tests/rules/cases/sound-vowel-run.tsv`(낱말 안에서 늘인 모음),
 `tests/rules/cases/sound-quoting-to-iu.tsv`(소리 뒤의 という), `tests/rules/cases/sound-drawn-word.tsv`(늘여 쓴 낱말),
 `tests/rules/cases/sound-drawn-in-hiragana-word.tsv`(히라가나 낱말 안의 ー), `tests/rules/cases/sound-kanji-cry.tsv`(한자로 쓴 외침),
-`tests/rules/cases/sound-syllable-stretch.tsv`(음절마다 늘인 낱말)
+`tests/rules/cases/sound-syllable-stretch.tsv`(음절마다 늘인 낱말), `tests/rules/cases/sound-tilde-after-particle.tsv`(조사 뒤의 ～)
 
 ## SND-2 되풀이한 말은 사본마다 같은 말로 옮긴다
 

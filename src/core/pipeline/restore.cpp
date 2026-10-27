@@ -152,6 +152,7 @@ char32_t BracketForm(char32_t r) {
         case U'’': return U'＇';
         case U'〝': return U'˝';
         case U'〟': return U'〃';
+        case U'−': return U'－';
     }
     return 0;
 }
@@ -173,7 +174,7 @@ Pieces RestoreLineBrackets(const Pieces& in, const Pieces& out) {
             if (const char32_t form = BracketForm(r); form != 0) {
                 typed[form].push_back(KoreanQuote(r));
                 retyped = true;
-            } else if (Contains(U"「」()＇˝〃", r)) {
+            } else if (Contains(U"「」()＇˝〃－", r)) {
                 typed[r].push_back(r);
             }
         }

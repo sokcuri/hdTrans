@@ -1318,8 +1318,15 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (nextEntry == "「") return Result(std::move(t), true);
     // A number keeps its unit sign (50%, 30℃).
     if (!allowSpacing || nextEntry == "%" || (!t.empty() && IsDigit(t.back()) && ReadSign(next.surface))) return Result(std::move(t), false);
-    // 씨 and 군 after a name are dependent nouns, written apart (카케이 씨, 타나카 군).
-    if (kind == '1' && (nextEntry == "씨" || nextEntry == "군")) {
+    // 씨 and 군 after a name or its mask are dependent nouns, written apart (카케이 씨, 타나카 군,
+    // ○○ 씨).
+    bool mask = !t.empty();
+    for (std::size_t k = 0; mask && k < t.size();) {
+        const text::Rune r = text::DecodeRune(std::string_view(t).substr(k));
+        mask = HasRune(U"○●◯◎×✕＊*■□△▲◇◆", r.cp);
+        k += r.size;
+    }
+    if ((kind == '1' || mask) && (nextEntry == "씨" || nextEntry == "군")) {
         if (dict::InClass(HDTRANS_CLASS("honorific.prepass-spaced"), next.surface)) return Result(std::move(t), true);
     }
     // A noun of degree, time, listing or span read as a free noun after a word stands apart

@@ -17,6 +17,7 @@ constexpr std::string_view kLongVowel = "ー";
 constexpr std::string_view kInitialKu = "쿠";
 constexpr std::string_view kLongRu = "루";
 constexpr std::string_view kSourceI = "이";
+constexpr std::string_view kSourceKanaI = "イ";
 constexpr std::string_view kDirectSet = "ファフィフュフェフォ";
 constexpr std::string_view kEmptyCell = "  ";
 constexpr std::string_view kReplacementChar = "\xEF\xBF\xBD";
@@ -166,6 +167,17 @@ struct Run {
     // The kana before the last three of the run (the X of Xール), or empty.
     std::string_view BeforeTail() const { return source.size() >= 4 ? source[source.size() - 4] : std::string_view(); }
 
+    // Whether the run ends in a long a read as English -er: the kana before that a is ン, ッ,
+    // ー or イ (イベンター 이벤터, ヒッパー 힙퍼, ゲーマー 게이머, ファイター 파이터) and the a
+    // does not repeat the kana before ー (カーカー). Other endings keep a (アバター 아바타).
+    bool EnglishEr() const {
+        const std::size_t n = source.size();
+        if (n < 4 || source[n - 1] != kLongVowel) return false;
+        const std::string_view before = source[n - 3];
+        if (before != kMarkN && before != kMarkTsu && before != kLongVowel && before != kSourceKanaI) return false;
+        return !(before == kLongVowel && source[n - 4] == source[n - 2]);
+    }
+
     void ApplyFinal(long i, int row);
     void AddFinal(long i, int final, std::string_view mark);
     void AddFinalN(long i);
@@ -269,7 +281,7 @@ void Run::Matrix(long cursor) {
             } else if (cursor + 2 == Size() && Has(cursor + 1, kMarkRu)) {
                 AddFinal(cursor, 8, kMarkRu);
             }
-        } else if (column == 0 && cursor >= Size() - 1) {
+        } else if (column == 0 && cursor + 2 == Size() && KanaCell(row, 6) != kEmptyCell && EnglishEr()) {
             Replace(cursor, search, KanaCell(row, 6));
             Replace(cursor + 1, kLongVowel, "");
         } else if (column == 2 && cursor + 3 == Size() && Has(cursor + 2, kMarkRu) &&

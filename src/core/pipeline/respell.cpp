@@ -221,4 +221,65 @@ std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const voi
     return out;
 }
 
+namespace {
+
+constexpr std::u32string_view kVoicedBases =
+    U"かきくけこさしすせそたちつてとはひふへほカキクケコサシスセソタチツテトハヒフヘホ";
+
+bool KanaLetter(char32_t c) { return (c >= U'ぁ' && c <= U'ゖ') || (c >= U'ァ' && c <= U'ヺ'); }
+
+// The kana without its voicing mark (が か, ぱ は, ゔ う).
+char32_t Unvoiced(char32_t c) {
+    if (c == U'ゔ') return U'う';
+    if (c == U'ヴ') return U'ウ';
+    for (const char32_t back : {char32_t{1}, char32_t{2}}) {
+        const char32_t base = c - back;
+        if (kVoicedBases.find(base) != std::u32string_view::npos &&
+            (back == 1 || (base >= U'は' && base <= U'ほ') || (base >= U'ハ' && base <= U'ホ'))) {
+            return base;
+        }
+    }
+    return c;
+}
+
+char32_t Voiced(char32_t c) {
+    if (c == U'う') return U'ゔ';
+    if (c == U'ウ') return U'ヴ';
+    return kVoicedBases.find(c) != std::u32string_view::npos ? c + 1 : c;
+}
+
+}  // namespace
+
+std::string RespellIterationMarks(std::string_view line, WordHoldsRun holds, WordHoldsRun noun, const void* context) {
+    std::string out;
+    size_t copied = 0;
+    char32_t prev = 0;
+    size_t prevAt = 0;
+    for (size_t pos = 0; pos < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(pos));
+        const size_t end = pos + std::max<size_t>(1, r.size);
+        char32_t repeat = 0;
+        // A mark after a particle that ends a phrase starts a word of its own (これはゝです).
+        const bool afterParticle = prevAt > 0 && std::u32string_view(U"はがをにでとも").find(prev) != std::u32string_view::npos;
+        if ((r.cp == U'ゝ' || r.cp == U'ゞ' || r.cp == U'ヽ' || r.cp == U'ヾ') && KanaLetter(prev) && !afterParticle) {
+            repeat = Unvoiced(prev);
+            if (r.cp == U'ゞ' || r.cp == U'ヾ') repeat = Voiced(repeat);
+        } else if (r.cp == U'々' && prev != 0 && prev != U'々' && text::IsKanji(prev) &&
+                   !holds(context, line, prevAt, end) && !noun(context, line, prevAt, pos)) {
+            repeat = prev;
+        }
+        if (repeat != 0) {
+            out.append(line.substr(copied, pos - copied));
+            text::AppendRune(out, repeat);
+            copied = end;
+        }
+        prev = repeat != 0 ? repeat : r.cp;
+        prevAt = pos;
+        pos = end;
+    }
+    if (copied == 0) return std::string(line);
+    out.append(line.substr(copied));
+    return out;
+}
+
 }  // namespace hdTrans::pipeline

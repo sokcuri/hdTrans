@@ -405,9 +405,9 @@ private:
             case U'＜': case U'＞': case U'‘': case U'’': case U'〔': case U'〕': case U'［': case U'］':
             case U'｛': case U'｝': case U'〈': case U'〉': case U'《': case U'》': case U'【': case U'】':
                 return kTypeBracket;
-            case U'―': case U'－': {
+            case U'―': case U'－': case U'−': {
                 const char32_t next = At(p_ + 1);
-                const bool keepDash = dashes_ && ((c == U'－' && Class(next) == 0) || OneOf(next, U"―－"));
+                const bool keepDash = dashes_ && ((c != U'―' && Class(next) == 0) || OneOf(next, U"―－−"));
                 if (Class(Before(p_)) != 0 && !keepDash) {
                     s_[p_] = U'ー';
                     return kTypeJapanese;
@@ -777,7 +777,6 @@ void AppendCanonicalText(std::string& out, std::string_view s) {
     if (form && (first.size == s.size() || !MarkForm(first.cp).empty())) {
         out.append(*form);
     } else {
-        const bool run = first.size < s.size();
         size_t i = 0;
         if (form) {
             out.append(s.substr(0, first.size));
@@ -785,11 +784,7 @@ void AppendCanonicalText(std::string& out, std::string_view s) {
         }
         for (; i < s.size();) {
             const text::Rune r = text::DecodeRune(s.substr(i));
-            if (run && !text::IsKanji(r.cp) && CanonicalForm(r.cp) == "□") {
-                text::AppendRune(out, r.cp);
-            } else {
-                AppendCanonical(out, r.cp);
-            }
+            AppendCanonical(out, r.cp);
             i += r.size;
         }
     }
