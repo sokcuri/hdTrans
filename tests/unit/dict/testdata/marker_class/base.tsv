@@ -1,4 +1,4 @@
-# Marker families against part codes: the first three lines fit, the last three do not.
+# Marker families against part codes: the first three lines fit, the last four do not.
 key	ko	pos	sem	gram	dict	id
 行	가&AA@	M428			GN	1
 あけすけ	노골적%D4@	G8U0			GN	2
@@ -6,3 +6,4 @@ key	ko	pos	sem	gram	dict	id
 窮りな	끝이 $FA@	K110			GN	4
 下卑	천&AV@	N110			GN	5
 済まな	끝&A5@	H7U0			GN	6
+目が荒	올이 $FG@	H7U0			GN	7

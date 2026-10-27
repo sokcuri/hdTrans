@@ -2,6 +2,7 @@
 #include <cstdint>
 
 #include "core/dict/codes.h"
+#include "core/output/inflect.h"
 #include "core/rules/body.h"
 #include "core/rules/rules.h"
 
@@ -34,6 +35,28 @@ constexpr OpSpelling kOps[] = {
     {'W', "==", false, Op::GobiGramEq},  {'W', "!=", false, Op::GobiGramNe},
 };
 
+bool FamilyChar(char c) { return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
+
+// Why the marker family ("&AV@") in the text value that a D= or Y= assignment writes cannot be
+// expanded: a word's text may end in a family of the marker tables, an ending's text holds none.
+// Null when it can.
+const char* AssignedMarkerError(Op op, std::string_view value) {
+    if (op != Op::DstSet && op != Op::GobiDstSet) return nullptr;
+    for (std::size_t i = 0; i + 4 <= value.size(); i++) {
+        const char c = value[i];
+        if ((c != '&' && c != '$' && c != '%') || !FamilyChar(value[i + 1]) || !FamilyChar(value[i + 2]) ||
+            value[i + 3] != '@') {
+            continue;
+        }
+        if (op == Op::GobiDstSet) return "an ending text holds a marker family";
+        if (i + 4 != value.size()) return "a marker family does not end the assigned text";
+        if (output::internal::FindKoreanFamily(value.substr(i, 4)) == nullptr) {
+            return "the assigned marker family is not in the marker tables";
+        }
+    }
+    return nullptr;
+}
+
 // The nodes of a rule body appended to a program.
 class RuleSink final : public BodySink {
 public:
@@ -58,6 +81,10 @@ public:
         for (const OpSpelling& o : kOps) {
             if (o.field == field && o.op == op && o.wordOperand == wordOperand) {
                 n.op = o.value;
+                if (!wordOperand) {
+                    const std::string_view value = std::string_view(program_.literals).substr(n.first, n.second);
+                    if (const char* why = AssignedMarkerError(n.op, value)) return tokens.Fail(why);
+                }
                 program_.nodes.push_back(n);
                 return true;
             }

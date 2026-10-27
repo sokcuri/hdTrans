@@ -29,6 +29,7 @@
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
 #include "frontend/load_info.h"
+#include "core/output/families.h"
 #include "core/word/constructions.h"
 #include "core/word/select.h"
 #include "stage_records.h"
@@ -450,7 +451,12 @@ int RunMain(int argc, char** argv) {
     }
     if (snapshotOut) {
         if (!hdTrans::dict::CompileSnapshot(folders, *snapshotOut)) {
-            std::fprintf(stderr, "hdtrans: cannot compile the dictionary snapshot; a column dictionary must load successfully\n");
+            for (const hdTrans::dict::LoadError& e : hdTrans::dict::LoadFoldersTsv(folders).errors) {
+                if (e.kind != hdTrans::dict::LoadErrorKind::MarkerClass) continue;
+                std::fprintf(stderr, "hdtrans: %s:%d: %s\n", e.file.c_str(), e.line, e.message.c_str());
+            }
+            std::fprintf(stderr, "hdtrans: cannot compile the dictionary snapshot; a column dictionary must load successfully "
+                                 "and every marker family must expand\n");
             return 1;
         }
         std::printf("%s\n", snapshotOut->c_str());
@@ -720,6 +726,15 @@ int RunMain(int argc, char** argv) {
     return finish();
 }
 
+// status, after reporting the marker families that reached the output unexpanded.
+int ReportUnexpanded(int status) {
+    if (const std::uint64_t n = hdTrans::output::UnexpandedMarkers(); n > 0) {
+        std::fprintf(stderr, "hdtrans: internal error: %llu marker families reached the output unexpanded\n",
+                     static_cast<unsigned long long>(n));
+    }
+    return status;
+}
+
 }  // namespace
 
 #ifdef _WIN32
@@ -737,10 +752,10 @@ int wmain(int argc, wchar_t** argv) {
     std::vector<char*> arguments;
     for (auto& text : storage) arguments.push_back(text.data());
     arguments.push_back(nullptr);
-    return RunMain(argc, arguments.data());
+    return ReportUnexpanded(RunMain(argc, arguments.data()));
 }
 #else
 int main(int argc, char** argv) {
-    return RunMain(argc, argv);
+    return ReportUnexpanded(RunMain(argc, argv));
 }
 #endif

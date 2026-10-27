@@ -201,6 +201,9 @@ if(NOT EMSCRIPTEN)
     endforeach()
     add_test(NAME dicts.classes COMMAND "${CMAKE_COMMAND}" -DSOURCE=${CMAKE_CURRENT_SOURCE_DIR}
         -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/word_classes.cmake")
+    # The shipped rows pass --verify-dicts: every marker family expands.
+    add_test(NAME dicts.verify COMMAND hdtrans_cli --dicts "${CMAKE_CURRENT_SOURCE_DIR}/dicts" --no-cache --verify-dicts
+        -in "${CMAKE_CURRENT_SOURCE_DIR}/tests/empty.in")
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
@@ -321,7 +324,8 @@ if(NOT EMSCRIPTEN)
         file(GLOB HDTRANS_RULEC_SOURCES CONFIGURE_DEPENDS src/rulec/*.cpp)
         add_executable(hdrulec ${HDTRANS_RULEC_SOURCES} src/core/rules/body.cpp src/core/rules/load.cpp src/core/rules/eval.cpp
             src/core/rules/match.cpp src/core/rules/attr_families_gen.cpp src/core/dict/codes.cpp
-            src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp)
+            src/core/dict/pos_tags_gen.cpp src/core/dict/pos_schema_gen.cpp src/core/dict/part_patterns_gen.cpp
+            src/core/output/inflect.cpp src/core/output/ko_families_gen.cpp src/core/text/utf8.cpp)
         target_include_directories(hdrulec PRIVATE src)
         # The local rules live in the dictionary rows, so the checks read the program the
         # engine assembles from them; the CLI writes it once for the tests below.

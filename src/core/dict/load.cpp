@@ -15,6 +15,7 @@
 #include "core/dict/names.h"
 #include "core/dict/snapshot.h"
 #include "core/dict/snapshot_file.h"
+#include "core/output/inflect.h"
 #include "core/rules/rules.h"
 #include "core/text/hangul.h"
 #include "core/text/utf8.h"
@@ -287,7 +288,7 @@ struct RuleBodyTable {
             rules::LoadError error{};
             if (!rules::Load(text, probe, error)) {
                 errors.push_back({file, LoadErrorKind::Tsv, line, TsvErrorKind::Read,
-                                  "the rule body does not parse"});
+                                  std::string("the rule body does not parse: ") + error.message});
                 return false;
             }
             if (bodies.size() <= at) bodies.resize(at + 1);
@@ -345,6 +346,18 @@ std::string_view TsvReason(TsvErrorKind kind) {
     return "malformed line";
 }
 
+// Why the marker family of a target cannot be expanded: MarkerClassError, or a family
+// ("먹&ZZ@") that the marker tables do not hold. Empty for a target without a family and for
+// a match.
+std::string MarkerRowError(std::string_view target, PartCode part) {
+    if (std::string why = MarkerClassError(target, part); !why.empty()) return why;
+    if (target.size() < 4 || target.back() != '@') return {};
+    const std::string_view id = target.substr(target.size() - 4);
+    if (id[0] != '&' && id[0] != '$' && id[0] != '%') return {};
+    if (output::internal::FindKoreanFamily(id) != nullptr) return {};
+    return "the marker family " + std::string(id) + " is not in the marker tables";
+}
+
 // Parses the column file f into layer, interning its codes in codes; adds the indexes
 // of its rows with the flag replace to replacing. false on an error that FailsLoad: a
 // file with malformed lines fails the load, and its unknown pos and marker class lines
@@ -375,7 +388,7 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
             if (f.user && !skip) bodyFailed = true;
             continue;
         }
-        if (std::string why = MarkerClassError(s.ko, codes.At(code)->part); !why.empty()) {
+        if (std::string why = MarkerRowError(s.ko, codes.At(code)->part); !why.empty()) {
             notices.push_back({f.name, f.user ? (skip ? LoadErrorKind::UserRow : LoadErrorKind::Tsv)
                                              : LoadErrorKind::MarkerClass,
                                rows.Line(), TsvErrorKind::Read, std::move(why)});

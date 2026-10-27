@@ -365,6 +365,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"%C5@", "렇", Pos::Adjective, Class::Hieuh, 0, 0x01fe, std::span{kExceptions}.subspan(42, 3)},
     {"%C6@", "궂", Pos::Adjective, Class::Regular, 0, 0x01fe, {}},
     {"%C7@", "으르", Pos::Adjective, Class::Reu, 0, 0x01fe, {}},
+    {"%C8@", "쁘", Pos::Adjective, Class::Eu, kBrightEu, 0x01fe, {}},
     {"%C9@", "쁘", Pos::Adjective, Class::Eu, 0, 0x01fe, {}},
     {"%CA@", "빨갛", Pos::Adjective, Class::Hieuh, 0, 0x01fe, std::span{kExceptions}.subspan(45, 3)},
     {"%CB@", "까맣", Pos::Adjective, Class::Hieuh, 0, 0x01fe, std::span{kExceptions}.subspan(48, 3)},
@@ -752,6 +753,7 @@ constexpr KoreanFamily kFamilies[] = {
     {"&ND@", "붇", Pos::Verb, Class::Digeut, 0, 0x0fff, {}},
     {"&NE@", "꿇", Pos::Verb, Class::Regular, kFormalHortative, 0x0fff, {}},
     {"&NF@", "않", Pos::Verb, Class::Regular, kFormalHortative, 0x0fff, {}},
+    {"&NG@", "구", Pos::Verb, Class::Regular, 0, 0x0fff, {}},
 };
 
 }  // namespace
