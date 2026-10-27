@@ -163,6 +163,14 @@ const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view
 
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
                                                bool extraBuiltin) {
+    std::vector<std::string> canonicalLines;
+    if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
+            return line.find("゙") != std::string::npos || line.find("゚") != std::string::npos;
+        })) {
+        canonicalLines.reserve(lines.size());
+        for (const std::string& line : lines) canonicalLines.push_back(internal::ComposeKanaPairs(line));
+        lines = canonicalLines;
+    }
     auto doc = std::make_unique<DocumentContext>();
     doc->snap = &snap;
     doc->extraBuiltin = extraBuiltin;
@@ -321,6 +329,11 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
 LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     LineFacts facts;
     if (line.ends_with('\r')) line.remove_suffix(1);
+    std::string canonical;
+    if (line.find("゙") != std::string_view::npos || line.find("゚") != std::string_view::npos) {
+        canonical = internal::ComposeKanaPairs(line);
+        line = canonical;
+    }
     names::Registry& r = *doc.registry;
     std::string cueText;
     facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)), &cueText, &facts.cued);
