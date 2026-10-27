@@ -10590,7 +10590,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 アブク銭	검은 돈	I110	VMoHGu		GN							jisjk:40321
 かばん持ち	비서	N110	VHn		GN							jisjk:169190
 カバン持ち	비서	N110	VHn		GN							jisjk:169190
-飽足らな	부족&Mf@	H7U0			GN	1380	||1 &&2 S-1== "では" D-1= "(으)로는"	앞에 では가 오면 飽き足らな를 부족하다로 고르고 그 조사를 로는으로 바꾼다. (미발동: rare-word)				jisjk:119449
+飽足らな	부족$AB@	H7U0			GN	1380	||1 &&2 S-1== "では" D-1= "(으)로는"	앞에 では가 오면 飽き足らな를 부족하다로 고르고 그 조사를 로는으로 바꾼다. (미발동: rare-word)				jisjk:119449
 腹穢	마음이 나$AG@	H7U0			GN							jisjk:5611
 腹ぐあい	배 상태	I110			GN							jisjk:70452
 覆蔵	숨김	N110			GN							jisjk:23929
@@ -17350,9 +17350,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 溜塗り	다메누리	N110			GN							jisjk:241731
 溜塗	다메누리	N110			GN							jisjk:241731
 ため塗り	다메누리	N110			GN							jisjk:241731
-在り合わ	마침 $FB@	M420			GN							jisjk:138705
-あり合わ	마침 $FB@	M420			GN							jisjk:138705
-在り合	마침 $FB@	M420			GN							jisjk:138705
+在り合わ	마침 &HN@	M420			GN							jisjk:138705
+あり合わ	마침 &HN@	M420			GN							jisjk:138705
+在り合	마침 &HN@	M420			GN							jisjk:138705
 胸を躍らせ	가슴을 두근거&AA@	M427			GN							jisjk:118192
 ハーベスト	수확	N110			GN							jisjk:132211
 泣悲し	울면서 슬퍼&AV@	M415			GN							jisjk:94371
@@ -20637,3 +20637,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 推しはか	헤아&AA@	M438			GN						おしはか	variant:kana:oshihaka
 お兄たん	오빠	N110	VHn		GN						おにいたん	variant:babytalk:oniitan
 お姉たん	언니	N110	VHn		GN						おねえたん	variant:babytalk:oneetan
+まっしろ	새%CC@	G8U0			GN							jisjk:3709

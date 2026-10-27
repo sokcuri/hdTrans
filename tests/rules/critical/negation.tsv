@@ -66,3 +66,7 @@ normalize:ikanai	「そういうわけにはいかねえんだよ！」	has:없�
 normalize:ikanai	「そうはいかねえんだよ」	has:되지 않아	fix	normalize
 analysis:degree-negative	多過ぎない？	has:많지 않아	fix	analysis
 analysis:degree-negative	記憶が多すぎる。	has:많다	keep	analysis
+dict:jisjk:138705	その場に在り合わない物だ。	has:있지 않은	fix	compose
+dict:jisjk:138705	在り合う物を使う。	has:마침 있는	keep	compose
+dict:jisjk:139107	それは言兼ねる。	has:말할 수 없다	fix	compose
+dict:jisjk:201724	あるのではない。	has:있는 것은 아니다	keep	compose

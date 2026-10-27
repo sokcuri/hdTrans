@@ -1,3 +1,4 @@
+# 규칙: LEX-3, MNG-1, MNG-2, MNG-4
 rule	input	expected	kind	layer
 dict:jisjk:147422	予感が当たる	예감이 맞는다	fix	lookup
 dict:jisjk:147422	予感が当たった	예감이 맞았다	fix	lookup
@@ -13,3 +14,68 @@ dict:jisjk:91837	見出だす	발견한다	keep	lookup
 dict:jisjk:144090	うつし出す	비춘다	keep	lookup
 dict:jisjk:141481	持ち出す	꺼낸다	keep	lookup
 dict:jisjk:344046	金をかける	돈을 들인다	keep	lookup
+dict:jisjk:137667	服があかじみる。	has:때가 낀다	fix	compose
+dict:jisjk:137667	あかじみた服だ。	has:때가 낀 옷	fix	compose
+dict:jisjk:138707	ありあう道具を使う。	has:마침 있는	fix	compose
+dict:jisjk:138721	ありあわせる物がない。	has:마침 그 자리에 있는	fix	compose
+dict:jisjk:138705	有り合う物で作る。	has:마침 있는	fix	compose
+dict:jisjk:138724	有り合せた布を使う。	has:마침 그 자리에 있던	fix	compose
+dict:jisjk:138708	有合う物で間に合わせる。	has:마침 그 자리에 있는	fix	compose
+dict:jisjk:138705	その場に在り合わない物だ。	has:있지 않은	fix	compose
+dict:jisjk:138705	在り合う物を使う。	has:마침 있는	fix	compose
+dict:jisjk:122315	昔から彼としたしむ。	has:친하다	fix	compose
+dict:jisjk:266961	割り勘する。	has:각자 부담으로 계산한다	fix	compose
+dict:jisjk:5524	名残惜しむ。	has:이별을 아쉬워한다	fix	compose
+dict:jisjk:147189	中低だ。	has:가운데가 낮다	fix	compose
+dict:jisjk:5676	小意気な服だ。	has:멋진 옷	fix	compose
+dict:jisjk:5676	小意気に笑った。	has:멋지게 웃었다	fix	compose
+dict:jisjk:139107	それは言兼ねる。	has:말할 수 없다	fix	compose
+dict:jisjk:139107	理由は言兼ねた。	has:말할 수 없었다	fix	compose
+dict:jisjk:119449	その服では飽き足らない。	has:부족하다	fix	compose
+dict:jisjk:119449	それでは飽足らなかった。	has:부족했다	fix	compose
+dict:jisjk:94922	水が足りる。	has:충분하다	keep	compose
+dict:jisjk:94922	量が足りない。	has:부족하다	keep	compose
+dict:jisjk:122315	親しい友人だ。	has:친한 친구	keep	compose
+dict:jisjk:122315	「ゆうちゃんも今言ってましたし……」	has:말했고요	keep	compose
+dict:jisjk:122315	勉強もしたし、	has:공부도 했고	keep	compose
+dict:jisjk:201724	あるのではない。	has:있는 것은 아니다	keep	analysis
+dict:jisjk:201724	あるのではなかった。	has:있는 것은 아니었다	keep	analysis
+dict:jisjk:262286	ひとりにしない。	has:혼자 두지 않는다	fix	analysis
+dict:jisjk:262286	ひとりにしなかった。	has:혼자 두지 않았다	fix	analysis
+dict:jisjk:260730	聞く耳持たなかった。	has:들으려고도 하지 않았다	keep	analysis
+dict:jisjk:260730	「聞く耳持たないよ」	has:들으려고도 하지 않아	keep	analysis
+dict:jisjk:260847	超嬉しい。	has:기쁘다	keep	analysis
+dict:jisjk:260847	超嬉しかった。	has:기뻤다	keep	analysis
+dict:jisjk:120362	窮りない喜びだ。	has:끝이 없는 기쁨	fix	analysis
+dict:jisjk:120362	窮りなく続く。	has:끝이 없게	fix	analysis
+dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	fix	analysis
+dict:jisjk:147415	ようなしとされた。	has:쓸모없다고 여겨졌다	fix	analysis
+dict:jisjk:267367	俺は黙って電話を切った。	has:전화를 끊었다	keep	analysis
+dict:jisjk:267367	電話を切る。	has:전화를 끊는다	keep	analysis
+dict:jisjk:201724	ない物は買わない。	has:사지 않는다	keep	analysis
+dict:jisjk:260847	とても嬉しい。	has:무척 기쁘다	keep	analysis
+dict:jisjk:120362	窮まりない喜びだ。	has:끝이 없는 기쁨	keep	analysis
+dict:jisjk:267367	電話が切れた。	has:전화가 끊어졌다	keep	analysis
+dict:jisjk:119884	後ろめたい。	has:꺼림칙하다	keep	analysis
+dict:jisjk:117033	この魚は足が早い。	has:상하기 쉽다	keep	compose
+dict:jisjk:117033	足が早い食品を冷やす。	has:상하기 쉬운 식품	fix	compose
+dict:jisjk:117033	この菓子は足が早かった。	has:상하기 쉬웠다	fix	compose
+dict:jisjk:121138	失敗したら冗談じゃ済まないわよ。	has:웃고 넘길 일이 아니야	keep	compose
+dict:jisjk:121138	済まない。	has:미안하다	keep	compose
+dict:jisjk:121138	迷惑をかけて済まない。	has:폐를 끼쳐 미안하다	keep	compose
+dict:jisjk:121138	心配をかけて済まなかった。	has:걱정을 끼쳐 미안했다	keep	compose
+dict:jisjk:353318	この仕事は済んだ。	has:끝났다	keep	compose
+dict:jisjk:117033	彼は足が速い。	has:발이 빠르다	keep	compose
+dict:jisjk:121138	申し訳ない。	has:미안하다	keep	compose
+dict:jisjk:3709	まっしろだ。	has:새하얗다	fix	analysis
+dict:jisjk:3709	まっしろな紙。	has:새하얀 종이	fix	analysis
+dict:jisjk:136278	まっしろい紙。	has:희디흰 종이	fix	analysis
+dict:jisjk:3709	真っ白だ。	has:새하얗다	keep	analysis
+dict:jisjk:136278	真っ白い紙。	has:희디흰 종이	keep	analysis
+dict:jisjk:119609	下卑る。	has:천하다	fix	analysis
+dict:jisjk:119609	下卑た笑い。	has:천한 웃음	fix	analysis
+dict:jisjk:262923	揃っていていただきたい	has:있어 주셨으면 한다	fix	analysis
+dict:jisjk:262923	待っていていただきたい	has:기다리고 있어 주셨으면 한다	fix	analysis
+dict:jisjk:262923	ここにいていただきたい	has:있어 주셨으면 한다	fix	analysis
+dict:jisjk:362260	見ていただきたい。	has:주셨으면 한다	keep	analysis
+dict:jisjk:362260	見ていただきたかった。	has:주셨으면 했다	keep	analysis
