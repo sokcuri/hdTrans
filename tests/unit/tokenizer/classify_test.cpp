@@ -27,3 +27,8 @@ HD_TEST(tokenizer_classes) {
         HD_CHECK(!Foreign(c));
     }
 }
+
+HD_TEST(tokenizer_signed_number) {
+    for (const char* s : {"50%", "100$", "+1", "-5", "1~6", "3-3-6", "3.5%", "1,000$"}) HD_CHECK(SignedNumber(s));
+    for (const char* s : {"10:30", "3/20", "86-", "/14", "$100", "#1", "%", "", "+", "a1%"}) HD_CHECK(!SignedNumber(s));
+}

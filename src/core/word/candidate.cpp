@@ -769,6 +769,39 @@ bool Worker::Transliterate(std::string_view s, std::string& out) {
     return TransliterateName(s, out);
 }
 
+namespace {
+
+// Whether text is one letter or number written as a symbol (①, Ⅳ, α): a word, not a mark.
+// Han characters and the marks of Japanese writing (U+3000..U+30FF: ゝ, ヾ, 〆) are not.
+bool SymbolWord(std::string_view s) {
+    if (s.empty()) return false;
+    const char32_t r = text::DecodeRune(s).cp;
+    return text::DecodeRune(s).size == s.size() && r >= 0x80 && (r < 0x3000 || r > 0x30FF) && !text::IsKanji(r) &&
+           !text::IsSymbol(r) && !text::IsPunct(r) && !text::IsSpace(r);
+}
+
+// Whether text is one sign that a number before it takes as its unit (℃, ㎏, °).
+bool UnitSign(std::string_view s) {
+    const text::Rune r = text::DecodeRune(s);
+    return !s.empty() && r.size == s.size() && r.cp >= 0x80 && (text::IsSymbol(r.cp) || text::IsPunct(r.cp)) &&
+           (dict::InClassRune(HDTRANS_CLASS("sign.final-vowel"), r.cp) ||
+            dict::InClassRune(HDTRANS_CLASS("sign.final-consonant"), r.cp) ||
+            dict::InClassRune(HDTRANS_CLASS("sign.final-rieul"), r.cp));
+}
+
+}  // namespace
+
+// Whether token j is Latin letters or digits (a symbol written on to one is part of its word:
+// 6461π, BoyzⅡMen).
+bool Worker::LatinOrDigits(int j) const {
+    if (j < 0 || j >= TokenCount()) return false;
+    switch (Tok(j).type) {
+    case tokenizer::kTypeNumber: case tokenizer::kTypeAlpha: case 15: case 16:
+        return true;
+    }
+    return false;
+}
+
 bool Worker::Dispatch(int i, int& last) {
     current = i;
     last = i;
@@ -780,7 +813,7 @@ bool Worker::Dispatch(int i, int& last) {
         BuildTokenTransformText(i);
         break;
     case tokenizer::kTypeAsciiClose: case tokenizer::kTypeAsciiOpen: case tokenizer::kTypeAsciiSymbol:
-        if (left == "(" || left == ")" || Has(left, "%")) BuildTokenTransformText(i);
+        if (left == "(" || left == ")" || Has(left, "%") || tokenizer::SignedNumber(left)) BuildTokenTransformText(i);
         break;
     case tokenizer::kTypeJapanese:
         if (Classify(left) == 13 && WidthOf(left) == 2 && AnchorAround(i)) BuildTokenTransformText(i);
@@ -796,7 +829,12 @@ bool Worker::Dispatch(int i, int& last) {
         }
         break;
     case 18: case 20: case 22:
-        if (left == "(" || left == ")" || left == "?" || left == "%") BuildTokenTransformText(i);
+        if (left == "(" || left == ")" || left == "?" || left == "%" ||
+            (type == tokenizer::kTypeSymbol && SymbolWord(merged) && !LatinOrDigits(i - 1) && !LatinOrDigits(i + 1)) ||
+            (type == tokenizer::kTypeSymbol && left == merged && UnitSign(merged) && i > 0 &&
+             (Tok(i - 1).type == tokenizer::kTypeNumber || Tok(i - 1).type == 15))) {
+            BuildTokenTransformText(i);
+        }
         break;
     case tokenizer::kTypeProtected:
         Insert(ProtectedItem(i));

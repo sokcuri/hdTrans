@@ -31,6 +31,16 @@ bool Foreign(char32_t c) {
     return !IsCp932Symbol(c);
 }
 
+bool SignedNumber(std::string_view s) {
+    const auto digit = [](char c) { return c >= '0' && c <= '9'; };
+    if (!s.empty() && (s[0] == '+' || s[0] == '-')) s.remove_prefix(1);
+    if (s.empty() || !digit(s.front())) return false;
+    const char last = s.back();
+    if (last == '%' || last == '$') s.remove_suffix(1);
+    else if (!digit(last)) return false;
+    return s.find_first_not_of("0123456789.,-~+") == std::string_view::npos;
+}
+
 void AppendCanonical(std::string& out, char32_t c) {
     if (const auto form = CanonicalForm(c)) {
         out.append(*form);

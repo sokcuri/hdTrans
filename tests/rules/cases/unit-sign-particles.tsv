@@ -1,0 +1,25 @@
+# 규칙: LAY-7
+rule	input	expected	kind	layer
+compose:unit-sign-particle	気温は30℃だった	기온은 30℃였다	fix	compose
+compose:unit-sign-particle	今日は100℉を超えた	오늘은 100℉를 넘었다	fix	compose
+compose:unit-sign-particle	身長は180㎝だ	키는 180㎝다	fix	compose
+compose:unit-sign-particle	重さは5㎏だ	무게는 5㎏이다	fix	compose
+compose:unit-sign-particle	距離は3㎞が限界だ	거리는 3㎞가 한계다	fix	compose
+compose:unit-sign-particle	周波数は50㎐だ	주파수는 50㎐다	fix	compose
+compose:unit-sign-particle	値段は10€だった	가격은 10€였다	fix	compose
+compose:unit-sign-particle	値段は100＄だった	가격은 100＄였다	fix	compose
+compose:unit-sign-particle	水は2ℓで足りる	물은 2ℓ로 충분하다	fix	compose
+compose:unit-sign-particle	濃度は5‰だった	농도는 5‰이었다	fix	compose
+compose:unit-sign-particle	1000₩を払った	1000₩을 지불했다	keep	compose
+compose:unit-sign-particle	千円札は1000¥だ	천 엔권은 1000¥이다	keep	compose
+compose:unit-sign-particle	10cm砲を撃つ。	10cm포를 쏜다.	keep	compose
+compose:unit-sign-particle	1000Gを貸して	1000G를 빌려 줘	keep	compose
+compose:unit-sign-particle	騒音は90㏈だった	소음은 90㏈이었다	keep	compose
+compose:unit-sign-spacing	50％増えた	50% 늘어났다	fix	compose
+compose:unit-sign-spacing	50%増えた	50% 늘어났다	keep	compose
+compose:unit-sign-spacing	180度変わった	180도 바뀌었다	keep	compose
+compose:unit-sign-spacing	30℃以上の熱	30℃ 이상의 열	fix	compose
+compose:unit-sign-spacing	5㎏減った	5㎏ 줄어들었다	fix	compose
+compose:unit-sign-spacing	身長は150㎝台だ	키는 150㎝대다	keep	compose
+compose:unit-sign-spacing	30℃が限界だ	30℃가 한계다	fix	compose
+compose:unit-sign-spacing	気温が30℃を超えた	기온이 30℃를 넘었다	fix	compose
