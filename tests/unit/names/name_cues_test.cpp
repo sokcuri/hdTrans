@@ -241,6 +241,49 @@ HD_TEST(names_caption_reading_cue_passage) {
     HD_CHECK(!lexicalDoc->cued.contains("恭"));
 }
 
+HD_TEST(names_canonical_kana_before_document_and_line_readings) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    struct Case {
+        std::string_view canonical;
+        std::string_view decomposed;
+    };
+    const Case cases[] = {
+        {"見れば見るほど頭はモヤモヤ　心もモヤモヤ。", "見れば見るほど頭はモヤモヤ　心もモヤモヤ。"},
+        {"おはようございます。", "おはようございます。"},
+        {"私と社長が　丹精込めて作ったんじゃないの。", "私と社長が　丹精込めて作ったんじゃないの。"},
+        {"（ゴン）はんそくまけ！", "（ゴン）はんそくまけ！"},
+        {"（ランディー）ノー。", "（ランディー）ノー。"},
+        {"（ゲンノウ）はっ！", "（ゲンノウ）はっ！"},
+        {"神頭有右生（こうずゆうせい）に出会います。", "神頭有右生（こうずゆうせい）に出会います。"},
+        {"佐殿（すけどの）をお助けするのです。", "佐殿（すけどの）をお助けするのです。"},
+        {"みんな！　ハピハピハッピー！", "みんな！　ハピハピハッピー！"},
+        {"超エネルギッシュ！", "超エネルギッシュ！"},
+        {"利きいちご大会があるんですね。", "利きいちご大会があるんですね。"},
+        {"まあ　谷のおじ様ですね。", "まあ　谷のおじ様ですね。"},
+        {"だったら　１番のルルヴェとか？", "だったら　１番のルルヴェとか？"},
+        {"大英帝国最大の兵器会社ヴィッカース社の機関銃です。", "大英帝国最大の兵器会社ヴィッカース社の機関銃です。"},
+        {"あっ！　おんなじだ。これも　これも。", "あっ！　おんなじだ。これも　これも。"},
+    };
+    for (const Case& c : cases) {
+        const std::vector<std::string> canonicalLines = {std::string(c.canonical)};
+        const std::vector<std::string> decomposedLines = {std::string(c.decomposed)};
+        const auto canonicalDoc = pipeline::BuildDocument(*snap, canonicalLines);
+        const auto decomposedDoc = pipeline::BuildDocument(*snap, decomposedLines);
+        HD_REQUIRE(canonicalDoc != nullptr);
+        HD_REQUIRE(decomposedDoc != nullptr);
+        HD_CHECK_EQ(canonicalDoc->key, decomposedDoc->key);
+        HD_CHECK(canonicalDoc->accepted == decomposedDoc->accepted);
+        HD_CHECK(canonicalDoc->cued == decomposedDoc->cued);
+        const auto canonicalFacts = pipeline::ReadLine(*canonicalDoc, c.canonical);
+        const auto decomposedFacts = pipeline::ReadLine(*decomposedDoc, c.decomposed);
+        HD_CHECK_EQ(canonicalFacts.text, decomposedFacts.text);
+        HD_CHECK(canonicalFacts.cued == decomposedFacts.cued);
+        HD_CHECK_EQ(pipeline::ReadLine(*canonicalDoc, c.decomposed).text, canonicalFacts.text);
+        HD_CHECK_EQ(pipeline::ReadLine(*decomposedDoc, c.canonical).text, canonicalFacts.text);
+    }
+}
+
 HD_TEST(text_japanese_spelling) {
     for (const char* s : {"무라사메", "신지", "핫토리", "유우키", "와카바"}) HD_CHECK(text::JapaneseSpelling(s));
     for (const char* s : {"펑", "러", "김", "샹", "", "abc"}) HD_CHECK(!text::JapaneseSpelling(s));

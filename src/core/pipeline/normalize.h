@@ -86,6 +86,9 @@ std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const voi
 
 namespace internal {
 
+// Composes only adjacent voiced/semivoiced kana letter pairs, without other form rewrites.
+std::string ComposeKanaPairs(std::string_view text);
+
 // Adjacent kana letter pairs with U+3099/U+309A composed, excluding iteration marks.
 // Half-width katakana and punctuation other than ｢｣ in full width, a following voiced
 // or semi-voiced mark composed (ｶﾞ ガ, ﾊﾟ パ, ｳﾞ ヴ; another mark becomes ゛ or ゜); a voiced

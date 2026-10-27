@@ -48,6 +48,10 @@ char32_t ComposeKanaPair(char32_t base, char32_t mark) {
     return 0;
 }
 
+}  // namespace
+
+namespace internal {
+
 std::string ComposeKanaPairs(std::string_view in) {
     std::string out;
     out.reserve(in.size());
@@ -69,7 +73,7 @@ std::string ComposeKanaPairs(std::string_view in) {
     return out;
 }
 
-}  // namespace
+}  // namespace internal
 
 std::string Normalize(std::string_view line, const LineContext& ctx, const RunLookup& runs) {
     std::string canonical;
