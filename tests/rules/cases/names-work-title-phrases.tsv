@@ -27,3 +27,6 @@ names:work-title-phrases	「ガッチャマン」ね	「독수리 오형제」�
 names:work-title-phrases	なるほど『キャシャーン』の犬型ロボット｡	그렇구나 『정의의 캐산』의 견형로봇.	keep	lookup
 names:work-title-phrases	カメラ付きの携帯ゲーム機	카메라 부착의 휴대용 게임기	keep	lookup
 names:work-title-phrases	椎名真昼が来た。	시이나 마히루가 왔다.	keep	lookup
+names:work-title-phrases	「蜻蛉日記」には朝早く京を出立し	has:「청령일기」	keep	lookup
+names:work-title-phrases	あなたの好きなところ今　思い出そうとしてもあんまりない。	has:너의 좋은 부분	keep	lookup
+names:work-title-phrases	カメラ付きの携帯ゲーム、ありったけだ！	has:휴대용 게임기,	keep	lookup

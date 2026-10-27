@@ -268545,6 +268545,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 携帯	휴대	N110			GN							names.569130
 携帯する他人の運命	휴대하는 타인의 운명	N130	QPNVHn		GN							names.569131
 携帯アプリ	휴대폰 앱	N110			GN							names.569132
+携帯ゲーム	휴대용 게임기	N130	QWK		GN						けいたいげーむ	names.569133
 携帯ゲーム機	휴대용 게임기	N110			GN							names.569134
 携帯コミック	휴대폰 만화	N130	QWK		GN							names.569135
 携帯ストラップ	휴대전화 스트랩	N110			GN							names.569136
@@ -311654,6 +311655,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 極底探検船ポーラボーラ	극저 탐험선 포라보라	N130	QWK		GN							names.612588
 極度乾燥	슈퍼드라이	N130	VGt		GN							names.612589
 極座標	극좌표계	N110			GN							names.612590
+極彩	고쿠사이	N130	QWK		GN							names.612591
 極彩「彩光乱舞」	극채 「채광난무」	N110			GN							names.612592
 極彩色	극채색	N110			GN							names.612593
 極征竜-シャスマティス	극정룡-샤스마티스	N130	QPNVHn	Wb	GN							names.612594
