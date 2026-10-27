@@ -1,0 +1,8 @@
+#! layer=base
+# かねる의 과거: 연용형 뒤 かねた, かねたが, かねたけど, かねたので
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+かねた	1기 어려웠다	S5:0			GN				kaneru-past:1		
+かねた	1기 어려웠던 	S5:1			GN	8500	||1 P+1== "1**7**8**"	かねた는 다음 말이 명사·い형용사·형용동사이면 ‘-기 어려웠던’ 어미를 고른다.	kaneru-past:2		
+かねたが	1기 어려웠지만	S5:0			GN				kaneru-past:3		
+かねたけど	1기 어려웠지만	S5:0			GN				kaneru-past:4		
+かねたので	1기 어려웠으므로	S5:0			GN				kaneru-past:5		

@@ -1,0 +1,11 @@
+rule	input	expected	kind	layer
+dict:kaneru-past:1	返事を書きかねた。	대답을 쓰기 어려웠다.	fix	lookup
+dict:kaneru-past:2	決めかねた問題がある。	has:결정하기 어려웠던 문제	fix	lookup
+dict:kaneru-past:5	答えかねたので黙った。	has:대답하기 어려웠으므로	fix	lookup
+dict:kaneru-past:3	書きかねたが、結局書いた。	has:쓰기 어려웠지만	fix	lookup
+dict:kaneru-past:1	返事を書きかねる。	대답을 쓰기 어렵다.	keep	lookup
+dict:kaneru-past:1	お答えしかねます。	대답하기 어렵습니다.	keep	lookup
+dict:kaneru-past:1	彼ならやりかねない。	그라면 할 수도 있다.	keep	lookup
+dict:kaneru-past:1	見かねて声をかけた。	보다 못해 말을 걸었다.	keep	lookup
+dict:kaneru-past:1	待ちかねた日が来た。	has:기다림에 지친	keep	lookup
+dict:kaneru-past:1	言いかねた。	has:말하기 곤란했다	keep	lookup
