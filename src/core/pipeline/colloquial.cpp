@@ -584,6 +584,29 @@ std::u32string Spliced(std::u32string_view rs, size_t i, std::u32string_view c, 
 
 bool ShoutEnd(std::u32string_view rs, size_t i);
 
+// Whether the run of ー or ～ at [i, j) of rs stands between a lone particle after words and the
+// copula or a particle (これはーです, ここに～がいる): a mark of its own that draws out no word.
+bool ParticleBreak(const Emphasis& e, std::u32string_view rs, size_t i, size_t j) {
+    if (i < 2 || j >= rs.size() || !std::all_of(rs.begin() + i, rs.begin() + j, IsDash)) return false;
+    if (!In(rs[i - 1], U"はがをにもでとへの")) return false;
+    size_t st = i - 1;
+    while (st > 0 && i - st < kMaxKeyRunes && (IsHiraganaRune(rs[st - 1]) || IsKanjiRune(rs[st - 1]))) st--;
+    // Words of two or more characters or with a kanji before the particle (not を alone).
+    if (st + 1 >= i || (i - 1 - st < 2 && !IsKanjiRune(rs[st])) || !e.ReadsAsWords(rs.substr(st, i - 1 - st))) return false;
+    const std::u32string dropped = Spliced(rs, i, U"", j);
+    for (size_t k = st; k + 1 < i; k++) {
+        // The kana ends a word (ありがと), not a key of a word and the particle (答えは), and no word
+        // before it reads past the mark dropped (ほんっとーに).
+        if (!e.Tags(rs.substr(k, i - k)).empty() && e.Tags(rs.substr(k, i - 1 - k)).empty()) return false;
+        if (e.KeyEnd(dropped, k) > i) return false;
+    }
+    const std::u32string_view rest = rs.substr(j);
+    for (const std::u32string_view w : {U"です", U"でし", U"だ", U"じゃ"}) {
+        if (rest.starts_with(w)) return true;
+    }
+    return In(rest[0], U"がをはにもでとへの");
+}
+
 // Whether the run of ー, ～ or small vowels at [i, j) of rs draws out a kana of a word
 // (internal::DrawnInWord), with fill set to what stands for the run: none, or with spelled the long
 // vowel spelled (じーさん じいさん, おいしそーだけど おいしそうだけど); wordEnd is the end of the word
@@ -2136,6 +2159,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             if (!longer) continue;
         }
         if (r == U'っ' && CopiedAfter(rs, i, end)) continue;
+        if (ParticleBreak(e, rs, i, end)) continue;
         const size_t before = e.Reach(rs, from, i);
         // A sound that ends in the っ stands only before と; before other kana the っ is emphasis
         // when a verb or adjective stem or a word of two kana or more past it follows (ひっどい,
@@ -2284,6 +2308,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             changed = true;
             continue;
         }
+        if (ParticleBreak(e, rs, i, j)) continue;
         const size_t covered = SoundCoverEnd(e, rs, from, i, ctx.extraBuiltin);
         std::u32string fill;
         size_t wordEnd = 0;
