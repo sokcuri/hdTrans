@@ -645,6 +645,8 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                        c.codes->part.Sub() == '2';
             });
         }
+        const std::size_t letterEnd = after.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        const std::size_t letters = word == SpaceWord::Any ? std::min(letterEnd, after.size()) : 0;
         for (std::size_t start = 0; start < head.size();) {
             const std::string_view left = head.substr(start);
             if (word == SpaceWord::Binding && text::RuneCount(left) < 2 &&
@@ -661,6 +663,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             const dict::Candidates words = snap.GetWordInfo(query, dict::LookupMode::General, lookup);
             for (const dict::Candidate& c : words.list) {
                 if (c.source.size() <= left.size()) continue;
+                if (c.source.size() - left.size() < letters) continue;
                 // A name: a person or a work, or a row of the name layer other than a place.
                 const bool place = c.codes != nullptr && c.codes->sem.HasPrefix("QCT");
                 const bool name = (c.codes != nullptr && (c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasPrefix("QWK"))) ||

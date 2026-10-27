@@ -89,3 +89,14 @@ dict:s:9454	おｋ。すぐ確認の電話	오케이. 바로 확인의 전화	fi
 dict:s:9454	これはOKです	이것은 OK입니다	keep	lookup
 dict:s:9453	あれをupした	저것을 up 했다	keep	lookup
 dict:s:9453	そうかなｗ	그럴까 ㅋ	keep	lookup
+analysis:kept-latin-run	思うp8です	생각하는 p8입니다	fix	analysis
+analysis:kept-latin-run	言うp6です	has:p6	fix	analysis
+analysis:kept-latin-run	思うp12です	has:p12	fix	analysis
+analysis:kept-latin-run	思うpxです	생각하는 px입니다	fix	analysis
+analysis:kept-latin-run	思うp8&x:	has:p8&x:	fix	analysis
+analysis:kept-latin-run	うpした	has:업	keep	analysis
+analysis:kept-latin-run	うｐ乙	has:업	keep	analysis
+analysis:kept-latin-run	おk	has:오케이	keep	analysis
+analysis:kept-latin-run	見るp8です	has:p8	keep	analysis
+analysis:kept-latin-run	思うq8です	has:q8	keep	analysis
+analysis:kept-latin-run	思うP8です	has:P8	keep	analysis

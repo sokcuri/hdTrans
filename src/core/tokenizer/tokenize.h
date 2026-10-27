@@ -19,9 +19,9 @@ namespace hdTrans::tokenizer {
 // With joins, a space or an ideographic space between two kanji stays a space token of its own,
 // so that the words on its sides are read apart (光 影, 副総理 兼 外務大臣), unless joins says
 // that a word of the dictionary spans it (未 来, text spaced out character by character), and a
-// letter after kana goes on with the Japanese text when a word spans both (うｐ, おｋ). joins gets
-// the Japanese text before the space or letter and the text after it, the space left out and the
-// letters folded to ASCII. word says which words count (SpaceWord).
+// Latin run after kana goes on with the Japanese text when a word spans the whole run (うｐ, おｋ)
+// and no digit follows it. joins gets the text before the space or letter and the text after it,
+// with the space left out and letters folded to ASCII. word says which words count (SpaceWord).
 // With joins, any other single space or ideographic space between two Japanese characters that
 // the text leaves out still parts two words: the Japanese token ends there and the next one is
 // afterSpace, so that no word of the dictionary spans it (あ ごめんね, いや そうじゃない). Not

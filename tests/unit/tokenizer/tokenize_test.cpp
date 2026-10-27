@@ -573,10 +573,13 @@ HD_TEST(tokenize_space_parts_words) {
 // With SpaceJoins, a letter after kana goes on with the Japanese token when a word spans both.
 HD_TEST(tokenize_kept_letter_after_kana) {
     const SpaceJoins joins = [](std::string_view before, std::string_view after, SpaceWord) {
+        const std::size_t end = after.find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        const std::size_t letters = end == std::string_view::npos ? after.size() : end;
         for (const std::string_view word : {"うp"sv, "おk"sv}) {
             for (std::size_t start = 0; start < before.size(); start++) {
                 const std::string text = std::string(before.substr(start)) + std::string(after);
-                if (text.starts_with(word) && word.size() > before.size() - start) return true;
+                const std::size_t left = before.size() - start;
+                if (text.starts_with(word) && word.size() > left && word.size() - left >= letters) return true;
             }
         }
         return false;
@@ -590,6 +593,14 @@ HD_TEST(tokenize_kept_letter_after_kana) {
     HD_CHECK_EQ(scan("写真うｐ"), std::string("24/0:写真うp 9/0:"));
     HD_CHECK_EQ(scan("おｋおｋ"), std::string("24/0:おkおk 9/0:"));
     HD_CHECK_EQ(scan("うpした"), std::string("24/0:うpした 9/0:"));
+    HD_CHECK_EQ(scan("うｐ乙"), std::string("24/0:うp乙 9/0:"));
+    HD_CHECK_EQ(scan("おk"), std::string("24/0:おk 9/0:"));
+    for (const std::string_view input : {"思うp8です"sv, "言うp6です"sv, "思うp12です"sv, "思うpxです"sv,
+                                        "思うp8&x:"sv, "見るp8です"sv, "思うq8です"sv, "思うP8です"sv,
+                                        "思うｐ８です"sv, "思うp８です"sv, "思うｐxです"sv, "思うpｘです"sv,
+                                        "うp8"sv, "おkmです"sv}) {
+        HD_CHECK_EQ(scan(input), ScanText(input, true));
+    }
     HD_CHECK_EQ(scan("これはOKです"), ScanText("これはOKです", true));
     HD_CHECK_EQ(ScanText("写真うｐ", true), std::string("24/0:写真う 2/0:p 9/0:"));
 }
