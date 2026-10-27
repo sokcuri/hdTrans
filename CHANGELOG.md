@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.7.2](https://github.com/sokcuri/hdTrans/compare/v0.7.1...v0.7.2) (2026-10-27)
+
+
+### Features
+
+* **tools:** find dictionary rows that shadow the words they are made of ([#260](https://github.com/sokcuri/hdTrans/issues/260)) ([0bc9123](https://github.com/sokcuri/hdTrans/commit/0bc9123ffd123d524bb1616d3cf504f6640ca05e))
+
+
+### Bug Fixes
+
+* **dict:** drop name rows that read ordinary phrases as unrelated titles ([#259](https://github.com/sokcuri/hdTrans/issues/259)) ([6cb5055](https://github.com/sokcuri/hdTrans/commit/6cb50557a9ce1218b33c54b215f4f2895eb34fd6))
+* **dict:** drop name rows whose key starts with a particle ([#261](https://github.com/sokcuri/hdTrans/issues/261)) ([62727b2](https://github.com/sokcuri/hdTrans/commit/62727b286e963311985a1ac762ecca2c65ea63fd))
+* **dict:** keep 쓰리 in established loanwords ([#269](https://github.com/sokcuri/hdTrans/issues/269)) ([f197f04](https://github.com/sokcuri/hdTrans/commit/f197f04d93e1d9b9a1e320a3da1a3c74c8d0057a))
+* **dict:** read web-novel phrases as Korean words ([#263](https://github.com/sokcuri/hdTrans/issues/263)) ([191e33f](https://github.com/sokcuri/hdTrans/commit/191e33f2ec670eb3f00e3f72dc17a7ddac349acb))
+* **dict:** read 一人暮らしの and 当てつけ as Korean words ([#265](https://github.com/sokcuri/hdTrans/issues/265)) ([a66e3fa](https://github.com/sokcuri/hdTrans/commit/a66e3fad16bdb1abb4b94f1a0bb224d63020fb03))
+* **dict:** read 聖さん as a name with さん, not 성찬 ([#264](https://github.com/sokcuri/hdTrans/issues/264)) ([1a39d92](https://github.com/sokcuri/hdTrans/commit/1a39d921da2ce878dcad0e8774f3b39a48292062))
+* **dict:** spell katakana loanwords by the standard and transliterate English phrases ([#262](https://github.com/sokcuri/hdTrans/issues/262)) ([4ced747](https://github.com/sokcuri/hdTrans/commit/4ced747ccec23fd5dab9f11d7252b6afeed6d3b7))
+* **grammar:** read greeting どうも, ことも + できず and 両親を養う naturally ([#266](https://github.com/sokcuri/hdTrans/issues/266)) ([d371bc5](https://github.com/sokcuri/hdTrans/commit/d371bc54ab4be4ae26af4d371fd5b00edbdb3aea))
+* **grammar:** read quoting などと as a quote, not a list ([#267](https://github.com/sokcuri/hdTrans/issues/267)) ([9d63d8b](https://github.com/sokcuri/hdTrans/commit/9d63d8bc56eb375542184324c5e8e3de1f1833b8))
+* **release:** read name rows, loanwords and quoting などと correctly ([720f754](https://github.com/sokcuri/hdTrans/commit/720f754c73dd7253539f3ec6124b9ab2bdb2985a))
+
 ## [0.7.1](https://github.com/sokcuri/hdTrans/compare/v0.7.0...v0.7.1) (2026-10-27)
 
 
