@@ -1181,6 +1181,11 @@ bool Compile(const std::vector<std::string>& folders, std::string_view outPath, 
     if (!loaded.snapshot || !loaded.snapshot->HasDictionary()) {
         return false;
     }
+    // A standalone snapshot ships no row whose marker family cannot be expanded.
+    if (!cache && std::any_of(loaded.errors.begin(), loaded.errors.end(),
+                              [](const LoadError& e) { return e.kind == LoadErrorKind::MarkerClass; })) {
+        return false;
+    }
     std::vector<Source> after;
     if (!ListSources(folders, after, !cache, !cache) || after.size() != sources.size()) {
         return false;

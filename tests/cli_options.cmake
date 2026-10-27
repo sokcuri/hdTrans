@@ -235,7 +235,8 @@ run_cli(--dicts "${markerDicts}" "高")
 require_success()
 run_cli(--dicts "${markerDicts}" --verify-dicts "高")
 if(status EQUAL 0 OR NOT error MATCHES "base.tsv:7: the marker family &AV@ conjugates class 4 \\(verb\\) stems, not the part code N110\n"
-   OR NOT error MATCHES "3 dictionary lines fail verification")
+   OR NOT error MATCHES "base.tsv:9: the marker family \\$FG@ is not in the marker tables\n"
+   OR NOT error MATCHES "4 dictionary lines fail verification")
     message(FATAL_ERROR "verification must fail on marker families that do not fit the part code (${status}): ${error}")
 endif()
 set(negationDicts "${CMAKE_CURRENT_LIST_DIR}/unit/dict/testdata/negation_ending")

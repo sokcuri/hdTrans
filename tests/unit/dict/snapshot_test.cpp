@@ -301,8 +301,8 @@ HD_TEST(SnapshotFileErrors) {
 }
 
 HD_TEST(SnapshotMarkerClassLines) {
-    // Lines whose marker family does not fit the part code are listed; the load takes
-    // place with them.
+    // Lines whose marker family does not fit the part code or is no family are listed; the
+    // load takes place with them.
     const LoadResult r = LoadFoldersTsv({SourceDir() + "/testdata/marker_class"});
     HD_REQUIRE(r.snapshot != nullptr);
     struct Want {
@@ -313,6 +313,7 @@ HD_TEST(SnapshotMarkerClassLines) {
         {6, "the marker family $FA@ conjugates class 7 (adjective) stems, not the part code K110"},
         {7, "the marker family &AV@ conjugates class 4 (verb) stems, not the part code N110"},
         {8, "the marker family &A5@ conjugates class 4 (verb) stems, not the part code H7U0"},
+        {9, "the marker family $FG@ is not in the marker tables"},
     };
     HD_REQUIRE(r.errors.size() == std::size(want));
     for (std::size_t i = 0; i < std::size(want); i++) {

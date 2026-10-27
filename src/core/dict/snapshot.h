@@ -106,7 +106,8 @@ enum class LoadErrorKind : uint8_t {
     Read,        // the file cannot be read
     Tsv,         // a malformed line or header of a column file (tsv says which)
     UnknownPos,  // a line skipped for a pos that is neither a part code nor a known tag
-    MarkerClass, // a line loaded whose marker family does not end the target or fit its part code (MarkerClassError)
+    MarkerClass, // a line loaded whose marker family cannot be expanded: it does not end the target, fit its
+                 // part code (MarkerClassError) or stand in the marker tables
     Plain,       // a line of a plain dictionary or sense table that does not compile
     Header,      // a "#!" first line that is not a header or a layer the file cannot have
     MissingRuleBodies,  // rows name local rules and no row carries a body (an older dictionary)
@@ -224,7 +225,7 @@ LoadResult LoadPlainFiles(std::shared_ptr<Snapshot> snapshot, std::vector<File> 
                          std::vector<LoadError> errors, const std::vector<std::string>& userFiles,
                          bool strictUser = true, const File* memory = nullptr);
 // Compiles all dictionary files to a standalone resource; publishes only a fully
-// validated file. Any build of the same engine data reads it (LoadFolders).
+// validated file, which holds no MarkerClass line. Any build of the same engine data reads it (LoadFolders).
 bool CompileSnapshot(const std::vector<std::string>& folders, std::string_view outPath);
 // Loads files in load order.
 LoadResult Load(std::vector<File> files, bool strictUser = true);
