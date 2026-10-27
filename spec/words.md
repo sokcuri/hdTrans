@@ -65,6 +65,17 @@
 
 조사(を, に, へ, は)로 이은 구 모양의 이름(작품 이름)은 앞뒤가 문장과 떨어져 있을 때만 이름으로 읽는다.
 
+일반 낱말로 된 작품 이름(甘い吐息, どんな時も)은 낱말 뜻대로 읽는다. 낱말 뜻과 다른 한국어 제목으로 바꾸지 않으며, 낫표 안의
+제목도 그렇다. 일반 낱말이 아닌 고유한 작품 이름은 그 제목으로 읽는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| 彼女は甘い吐息を漏らしながら | 그녀는 달콤한 숨결을 흘리면서 | 고침 |
+| 赤い唇が震えた | 붉은 입술이 떨렸다 | 고침 |
+| 『甘い吐息』を見た | 『달콤한 숨결』을 보았다 | 고침 |
+| 『甘い人生』を見た | 『달콤한 인생』을 보았다 | 유지 |
+| …一番最初にやった罰ゲームが残ってますです。 | …제일 처음에 한 벌칙 게임이 남아 있습니다요. | 유지 |
+
 문서 전체에서 배운 가타카나 이름도 그렇다. 사전의 일반 명사는 호칭 뒤에 쓰였다고 더 긴 가타카나 낱말의 줄인 이름이 되지
 않는다(ダンジョンさん과 ダンジョンゲート). 이름이나 일반 명사 뒤에 사전의 낱말이나 문서가 따로 쓰는 낱말이 이어진
 가타카나 구간은 합성어이지 더 긴 이름이 아니다(ゴブリンシャーマン 옆의 シャーマン). 같은 이름을 두 번 쓴 것(メイメイ)은 한 이름이다.
@@ -79,7 +90,8 @@
 
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
 `tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
-`tests/rules/cases/names-phrase-titles.tsv`, `tests/rules/documents/names-katakana-compounds.tsv`
+`tests/rules/cases/names-phrase-titles.tsv`, `tests/rules/cases/names-work-title-phrases.tsv`,
+`tests/rules/documents/names-katakana-compounds.tsv`
 
 ## LEX-5 가타카나로 쓴 일반 낱말은 그 낱말로 읽는다
 
