@@ -23838,6 +23838,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 生きてるだけで、愛。	살아있는 것만으로도, 사랑	N130	QWK		GN							names.650519
 生きものの記録	산 자의 기록	N130	QWK		GN							names.650523
 生きるに値しない命	살 가치가 없는 생명	N130	VGt		GN							names.650525
+生きるべきか死ぬべきか	사느냐 죽느냐	N130	QWK		GN							names.650526
 生きる事はそんなことさ	산다는 건 그런 거야	N130	QWK		GN							names.650527
 生きる偲びのシルキィ	추억 속의 실키	N130	QPNVHn		GN							names.650528
 生きる歓び	삶의 기쁨	N130	QWK		GN							names.650529
@@ -35321,6 +35322,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 真骨類	진골어류	N110			GN							names.662186
 真髄	진수	N110			GN							names.662187
 真鬼マナセ	마키 마나세	N130	QPNVHn		GN						まきまなせ	names.662188
+真魂斗羅	진 콘트라	N130	QWK		GN							names.662189
 真魔六武衆-キザン	진마육무중-키잔	N130	QPNVHn	Wb	GN							names.662190
 真魔六武衆-シエン	진마육무중-시엔	N130	QPNVHn	Wb	GN							names.662191
 真魔剛竜剣	진마강룡검	N130	QPNVHn	Wb	GN							names.662192
@@ -130654,6 +130656,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 魂具ピライバ-1	혼구 피라이바-1	N110			GN							names.758874
 魂子	타마코	N130	QPNVHn	Wb	GN						たまこ	names.758875
 魂寄せお蛍	혼요세 오호타루	N130	QPNVHn		GN						たまよせ おほたる	names.758876
+魂斗羅	콘트라	N130	QWK		GN							names.758877
 魂斗羅ザ・ハードコア	콘트라: 하드 코어	N130	QWK		GN							names.758878
 魂斗羅スピリッツ	콘트라 III: 디 에일리언 워즈	N110			GN							names.758879
 魂斗羅デュアルスピリッツ	혼두라 듀얼 스피리츠	N130	QWK		GN							names.758880
