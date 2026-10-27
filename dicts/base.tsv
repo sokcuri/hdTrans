@@ -120987,7 +120987,7 @@ ttt	ttt	K110			GN				jisjk:201744
 休ま	편안해&AL@	M418			GN				jisjk:96099		
 休ませ	쉬게 &AV@	M437		SaKj	GN				jisjk:96100		
 休ませていただ	&CG@	M431			GN				jisjk:374755		
-休み	휴일	N110			GN				jisjk:13574		
+休み	휴일	N110	UMe		GN				jisjk:13574		
 休みなく	휴일 없이	E300			GN				jisjk:149555		
 休みなし	휴일없음	N110			GN				jisjk:365972		
 休みには	휴일에는	N110			GN				jisjk:268139		
@@ -121028,7 +121028,7 @@ ttt	ttt	K110			GN				jisjk:201744
 休戦線	휴전선	N130	QCT		GN				jisjk:203754		
 休戦記念日	휴전기념일	I110			GN				jisjk:107970		
 休日	휴일	N110	UMe		GN				jisjk:40090		
-休暇	휴가	N110			GN				jisjk:40078		
+休暇	휴가	N110	UMe		GN				jisjk:40078		
 休暇あけ	휴가 다음날	N110			GN				jisjk:159801		
 休暇が明け	휴가가 끝&A5@	M417			GN				jisjk:96101		
 休暇明け	휴가 다음날	N110			GN				jisjk:159800		
@@ -336321,7 +336321,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連中	일행	N110	VHn		GN				jisjk:20372		
 連乗	연승	N110		Hd	GN				jisjk:156646		
 連代寺	렌타이지	N130	QCTVPl		GN				jisjk:338645		
-連休	연휴	N110			GN				jisjk:98668		
+連休	연휴	N110	UMe		GN				jisjk:98668		
 連休中	연휴 중	I110			GN				jisjk:98671		
 連休前	연휴 전	I110			GN				jisjk:98670		
 連休惚け	연휴병	N110			GN				jisjk:256448		
