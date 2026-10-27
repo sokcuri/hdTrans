@@ -797,6 +797,10 @@ bool SurfaceKeys(const ConstructionTable& t, uint32_t i, std::vector<std::string
 
 // Fills the surface index of family c.
 void IndexFamily(const ConstructionTable& t, CxFamily& c) {
+    if (std::vector<std::string_view> guard; c.guard != kNoGuard && SurfaceKeys(t, c.guard, guard)) {
+        c.guardKeyed = true;
+        c.guardSurfaces.insert(guard.begin(), guard.end());
+    }
     std::vector<std::vector<std::string_view>> keys(c.rows.size());
     std::vector<bool> keyed(c.rows.size());
     for (std::size_t k = 0; k < c.rows.size(); k++) {
@@ -862,16 +866,41 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             std::string_view head = line.substr(3);
             while (head.starts_with(' ')) head.remove_prefix(1);
             const std::vector<std::string_view> f = SplitTabs(head);
-            const std::size_t space = f.size() == 3 ? f[1].rfind(' ') : std::string_view::npos;
+            const bool guarded = f.size() == 4;
+            const std::size_t space = f.size() == 3 || guarded ? f[1].rfind(' ') : std::string_view::npos;
             int stage = 0;
-            if (f.size() != 3 || !FamilyName(f[0]) || !f[1].starts_with("after ") || space < 6 ||
-                !rules::ParseInt(f[1].substr(space + 1), 1, 1 << 20, stage) || f[2].empty()) {
-                fail(number, "a family line is //= FAMILY <TAB> after PASS STAGE <TAB> what it is for");
-            } else if (!families.emplace(f[0], t.families.size()).second) {
-                fail(number, "a second line for the family " + std::string(f[0]));
-            } else {
-                t.families.push_back({std::string(f[0]), std::string(f[1].substr(6, space - 6)), stage, {}, number, {}, {}, false});
+            if ((f.size() != 3 && !guarded) || !FamilyName(f[0]) || !f[1].starts_with("after ") || space < 6 ||
+                !rules::ParseInt(f[1].substr(space + 1), 1, 1 << 20, stage) || f.back().empty() ||
+                (guarded && !f[2].starts_with("guard "))) {
+                fail(number, "a family line is //= FAMILY <TAB> after PASS STAGE [<TAB> guard CONDITION] <TAB> what it is for");
+                continue;
             }
+            if (families.contains(f[0])) {
+                fail(number, "a second line for the family " + std::string(f[0]));
+                continue;
+            }
+            uint32_t guard = internal::kNoGuard;
+            if (guarded) {
+                if (!ExpandNamed(f[2].substr(std::string_view("guard ").size()), named, expanded, expandError)) {
+                    fail(number, "guard: " + expandError);
+                    continue;
+                }
+                guard = static_cast<uint32_t>(t.nodes.size());
+                rules::Tokens tokens(expanded);
+                CxSink sink(t);
+                if (!rules::ParseBody(tokens, sink, true) || !tokens.AtEnd()) {
+                    fail(number, std::string("guard: ") + (tokens.error != nullptr ? tokens.error : "trailing tokens"));
+                    continue;
+                }
+            }
+            families.emplace(f[0], t.families.size());
+            internal::CxFamily family;
+            family.name = f[0];
+            family.after = f[1].substr(6, space - 6);
+            family.stage = stage;
+            family.line = number;
+            family.guard = guard;
+            t.families.push_back(std::move(family));
             continue;
         }
         if (line.starts_with("//~")) {
@@ -1320,16 +1349,22 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
             // A translation that ends in the old tail is the verb whose dictionary form is its head
             // and the new tail (기다리게 &C6@ with "게 &C6@" "다" is 기다리다).
             const std::string_view target = it->EntryText(it->selected);
-            if (target.size() > a.value.size() && target.ends_with(a.value)) {
-                const std::string lemma = std::string(target.substr(0, target.size() - a.value.size())) + a.with;
-                it->AssignEntrySurface(it->selected, output::Conjugating(lemma, VerbSigil(it), "", f.families).target, source);
+            // The head may be empty when the new tail is a verb of its own (시&AQ@ with "시&AQ@" "하다").
+            const std::string lemma = target.ends_with(a.value)
+                                          ? std::string(target.substr(0, target.size() - a.value.size())) + a.with
+                                          : std::string();
+            if (lemma.size() > std::string_view("다").size()) {
+                // A stem whose class its spelling leaves open (붙이다: 붙여 or 붙이어) is a regular one.
+                output::Conjugated c = output::Conjugating(lemma, VerbSigil(it), "", f.families);
+                if (c.target.empty()) c = output::Conjugating(lemma, VerbSigil(it), "규칙", f.families);
+                if (!c.target.empty()) it->AssignEntrySurface(it->selected, c.target, source);
             }
             break;
         }
         case internal::CxVerb::SetActive:
-            // The verb is written in the active voice: its Korean without the passive or the
-            // causative-passive (읽혀지다, 읽게 되다 → 읽다).
-            if (it->DetailRecord() == 1 || it->DetailRecord() == 5) {
+            // The verb is written in the active voice: its Korean without the passive, the causative
+            // or the causative-passive (읽혀지다, 읽게 하다, 읽게 되다 → 읽다).
+            if (it->DetailRecord() == 1 || it->DetailRecord() == 2 || it->DetailRecord() == 5) {
                 it->detail->record = 0;
                 if (Entry* e = it->group->At(it->selected)) e->targetChoice = source;
                 it->choice = source;
@@ -1353,7 +1388,11 @@ void Apply(Flusher& f, const ConstructionTable& t, Item* origin, const internal:
 }  // namespace
 
 void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_view name)) {
-    const ConstructionTable& t = internal::BuiltinConstructions();
+    internal::RunConstructions(f, internal::BuiltinConstructions(), pass, skip);
+}
+
+void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::size_t pass,
+                                bool (*skip)(std::string_view name)) {
     if (pass >= t.afterPass.size()) return;
     rules::Tally* tally = f.w.settings.ruleTally;
     if (tally != nullptr && tally->constructionRuns.size() < t.rows.size()) {
@@ -1364,6 +1403,8 @@ void RunConstructions(Flusher& f, std::size_t pass, bool (*skip)(std::string_vie
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
         for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+            if (family.guardKeyed && !family.guardSurfaces.contains(std::string_view(it->group->surface))) continue;
+            if (family.guard != internal::kNoGuard && !Eval(f, t, family.guard, it)) continue;
             // Rule counts try every row.
             const std::vector<int>* rows = &family.rows;
             if (family.indexed && tally == nullptr) {

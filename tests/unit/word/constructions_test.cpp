@@ -5,7 +5,12 @@
 #include <utility>
 #include <vector>
 
+#include "core/dict/snapshot.h"
+#include "core/engine/driver.h"
+#include "core/tokenizer/tokenize.h"
+#include "core/word/analyze.h"
 #include "core/word/flush.h"
+#include "core/word/worker.h"
 #include "hdtest.h"
 
 using namespace hdTrans::word;
@@ -268,7 +273,7 @@ HD_TEST(constructions_parse_errors) {
     };
     const internal::ConstructionTable t = internal::ParseConstructions(lines, kPasses);
     HD_CHECK_EQ(Errors(t), std::string("2: a second line for the family a\n"
-                                       "6: a family line is //= FAMILY <TAB> after PASS STAGE <TAB> what it is for\n"
+                                       "6: a family line is //= FAMILY <TAB> after PASS STAGE [<TAB> guard CONDITION] <TAB> what it is for\n"
                                        "8: a row is ID <TAB> SPEC <TAB> CONDITION <TAB> ACTIONS <TAB> NOTE\n"
                                        "9: an id is cx:FAMILY:PRIO\n"
                                        "10: no family line for cx:z:10\n"
@@ -298,4 +303,70 @@ HD_TEST(constructions_builtin_table) {
         HD_CHECK_EQ(std::string(ConstructionId(static_cast<int>(i))), t.rows[i].id);
     }
     HD_CHECK(ConstructionId(-1).empty() && ConstructionId(static_cast<int>(t.rows.size())).empty());
+}
+
+namespace {
+
+// The target of 人気 in 人気。 after the word stage and then the family of table, which runs after
+// pass First.
+std::string GuardedTarget(const std::vector<std::string_view>& table) {
+    const internal::ConstructionTable t = internal::ParseConstructions(table, kPasses);
+    if (!t.errors.empty()) return "(table: " + Errors(t) + ")";
+    std::vector<hdTrans::dict::File> files{
+        {0, "base.tsv", "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n人気\t인기\tN110\t\t\tGN\t0\t1\t\n"}};
+    const hdTrans::dict::LoadResult loaded = hdTrans::dict::Load(std::move(files));
+    if (loaded.snapshot == nullptr) return "(no dictionary)";
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    hdTrans::tokenizer::Tokens tokens;
+    Arena arena;
+    Analysis analysis;
+    hdTrans::tokenizer::Tokenize("人気。", tokens);
+    Analyze(tokens, *loaded.snapshot, {}, Settings::Reference(), arena, analysis);
+    if (analysis.fault || analysis.sentences.empty()) return "(no analysis)";
+    Worker& w = *analysis.worker;
+    w.chain = analysis.sentences[0].chain;
+    w.current = analysis.sentences[0].current;
+    w.transformSurface = analysis.sentences[0].transformSurface;
+    Flusher f{w, generated->rules, loaded.snapshot->OutputFamilies()};
+    Flush(f);
+    internal::RunConstructions(f, t, 0);
+    for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+        if (it->group->surface == "人気") return std::string(it->EntryText(it->selected));
+    }
+    return "(no item)";
+}
+
+}  // namespace
+
+// A family guard is a condition tried on each word before the family's rows: a false guard skips
+// every row, a true one leaves the rows as they are without a guard.
+HD_TEST(constructions_family_guard) {
+    const std::string_view row = "cx:a:10\t\tS+0== \"人気\"\tset-target \"X\"\t\n";
+    HD_CHECK_EQ(GuardedTarget({"//= a\tafter First 10\tdoc\n", row}), std::string("X"));
+    HD_CHECK_EQ(GuardedTarget({"//= a\tafter First 10\tguard S+0== \"人気\"\tdoc\n", row}), std::string("X"));
+    HD_CHECK_EQ(GuardedTarget({"//= a\tafter First 10\tguard S+0== \"犬\"\tdoc\n", row}), std::string("인기"));
+    HD_CHECK_EQ(GuardedTarget({"//: n\tS+0== \"犬\"\tdoc\n", "//= a\tafter First 10\tguard :n\tdoc\n", row}),
+                std::string("인기"));
+    // A guard that names surfaces skips the other words by surface; one that names none is tried on each.
+    const std::vector<std::string_view> keyed = {
+        "//= a\tafter First 10\tguard ||2 S+0== \"人気\" S+0== \"犬\"\tdoc\n",
+        "//= b\tafter First 20\tguard U+0== \"ます\"\tdoc\n",
+        "cx:a:10\t\tF+0== \"selected\"\tset-target \"X\"\t\n",
+        "cx:b:10\t\tF+0== \"selected\"\tset-target \"X\"\t\n",
+    };
+    const internal::ConstructionTable k = internal::ParseConstructions(keyed, kPasses);
+    HD_CHECK_EQ(Errors(k), std::string());
+    HD_REQUIRE(k.families.size() == 2);
+    HD_CHECK(k.families[0].guardKeyed && k.families[0].guardSurfaces.size() == 2);
+    HD_CHECK(!k.families[1].guardKeyed && k.families[1].guard != internal::kNoGuard);
+    const std::vector<std::string_view> bad = {
+        "//= a\tafter First 10\tguard S+0= \"人気\"\tdoc\n",
+        "//= b\tafter First 20\tguard :missing\tdoc\n",
+        "//= c\tafter First 30\tS+0== \"人気\"\tdoc\n",
+        "cx:a:10\t\tS+0== \"人気\"\tset-target \"X\"\t\n",
+    };
+    const std::string errors = Errors(internal::ParseConstructions(bad, kPasses));
+    HD_CHECK(errors.find("1: guard: unknown operator") != std::string::npos);
+    HD_CHECK(errors.find("2: guard: no named condition :missing") != std::string::npos);
+    HD_CHECK(errors.find("3: a family line is //= FAMILY <TAB> after PASS STAGE [<TAB> guard CONDITION]") != std::string::npos);
 }
