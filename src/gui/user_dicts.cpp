@@ -217,7 +217,7 @@ std::string RowLine(const DictRow& row) {
     const std::string tail = note.empty() ? std::string() : "// " + note;
     std::vector<std::string> fields{Field(row.key), Field(row.ko), Field(row.pos), Field(row.options)};
     if (fields[2].empty() && !fields[3].empty()) fields[2] = "n";
-    while (fields.size() > 2 && fields.back().empty()) fields.pop_back();
+    while (fields.size() > 1 && fields.back().empty()) fields.pop_back();
     std::string line;
     for (std::size_t index = 0; index < fields.size(); ++index) line += (index ? "\t" : "") + fields[index];
     if (!tail.empty()) line += "\t" + tail;
