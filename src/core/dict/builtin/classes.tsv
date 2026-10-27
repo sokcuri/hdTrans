@@ -350,6 +350,7 @@
 //= verb.youni-purpose	Verbs of asking, telling, wishing, trying and making after a ように, which is what is aimed at, 도록 (待っているように言った 기다리고 있도록 말했다, 冷静でいるように努める 냉정하도록 노력한다).
 //= verb.transfer	Ichidan stems of giving, entrusting, ordering and borrowing, whose に before their (ら)れ names the other party, not who acts (私に弟を任せられた 나에게 남동생을 맡길 수 있었다, 父に車を借りられた).
 //= verb.grant	Verbs of giving, showing, teaching, granting or allowing something to someone, by dictionary form (授ける, 与える, 教える, 見せる, 許す, 叶える, 渡す): their volitional that ends a sentence, with an object, the listener in に or the speaker as subject, and no other recipient and nothing inclusive, is the speaker's will, 주마 (力を授けよう 힘을 내려 주마), not 자.
+//= verb.permission-word	Dictionary words that hold a causative and the stem of もらう (使わせてもら, 聞かせてもら): their sentence-final ます is the speaker's act with leave, 겠습니다 (spec GRM-44).
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
@@ -6983,6 +6984,12 @@ verb.grant	譲る
 verb.grant	恵む
 verb.grant	分け与える
 verb.grant	贈る
+verb.permission-word	あげさせてもら
+verb.permission-word	使わせてもら
+verb.permission-word	差し控えさせてもら
+verb.permission-word	挙げさせてもら
+verb.permission-word	聞かせてもら
+verb.permission-word	選手に引き合わせてもら
 word.inclusive	一緒に
 word.inclusive	いっしょに
 word.inclusive	共に
