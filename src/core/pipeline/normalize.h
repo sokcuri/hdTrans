@@ -94,6 +94,14 @@ std::string RespellKanjiCries(std::string_view line);
 // Normalize, with the dictionary.
 std::string RespellOldForms(std::string_view line, WordHoldsRun holds, const void* context);
 
+// line with each iteration mark written as the letter it repeats: ゝ and ヽ the kana before
+// them, ゞ and ヾ that kana voiced (こゝろ こころ, いすゞ いすず); 々 the kanji before it
+// (易々 易易) unless holds says a dictionary word holds the kanji and 々 (時々, 佐々木) or noun
+// says the kanji is a noun of its own, which 々 makes plural (星々 별들). A mark with no letter
+// of its kind before it stays (「々」, ゝ), and so does a kana mark after a particle that ends
+// a phrase (これはゝです). Run after Normalize, with the dictionary.
+std::string RespellIterationMarks(std::string_view line, WordHoldsRun holds, WordHoldsRun noun, const void* context);
+
 namespace internal {
 
 // Composes only adjacent voiced/semivoiced kana letter pairs, without other form rewrites.

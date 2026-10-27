@@ -1,0 +1,29 @@
+# 규칙: LEX-85
+rule	input	expected	kind	layer
+normalize:kana-iteration	こゝろが痛い	마음이 아프다	fix	normalize
+normalize:kana-iteration	いすゞの車	이스즈의 차	fix	normalize
+normalize:kana-iteration	あゝ、無情	아, 무정	fix	normalize
+normalize:kanji-iteration	隆々と反り返った	융륭하게 젖혀져 돌아갔다	fix	normalize
+lookup:kanji-iteration	易々と越えた	손쉽게 넘었다	fix	lookup
+lookup:kanji-iteration	脈々と流れる	면면히 흐른다	fix	lookup
+lookup:kanji-iteration	一人だと清々する	한 사람이라고 후련한다	fix	lookup
+lookup:kanji-iteration	精々頑張れ	기껏해야 힘내라	fix	lookup
+local:iteration-plural	これは々です	이것은 々입니다	fix	local
+local:iteration-plural	「々」という記号	「々」라는 기호	fix	local
+local:iteration-plural	人々が集まった	사람들이 모였다	keep	local
+local:iteration-plural	山々が見える	산들이 보인다	keep	local
+local:iteration-plural	国々を回った	나라들을 돌았다	keep	local
+local:iteration-plural	星々が輝く	별들이 빛난다	keep	local
+lookup:kanji-iteration	日々の暮らし	나날의 생활	keep	lookup
+lookup:kanji-iteration	時々来る	가끔 온다	keep	lookup
+lookup:kanji-iteration	色々ある	여러 가지 있다	keep	lookup
+lookup:kanji-iteration	佐々木さんが来た	사사키 씨가 왔다	keep	lookup
+lookup:kanji-iteration	我々の勝ちだ	우리의 승리다	keep	lookup
+lookup:kanji-iteration	少々お待ちください	조금 기다려 주세요	keep	lookup
+lookup:kanji-iteration	代々伝わる	대대로 전해진다	keep	lookup
+lookup:kanji-iteration	刻々と変わる	시시각각 바뀐다	keep	lookup
+lookup:kanji-iteration	黙々と働く	묵묵히 일한다	keep	lookup
+lookup:kanji-iteration	神々の怒り	신들의 분노	keep	lookup
+lookup:kanji-iteration	様々な人がいる	여러 가지 사람이 있다	keep	lookup
+normalize:kana-iteration	これはゝです	이것은ゝ입니다	fix	normalize
+normalize:kana-iteration	答えは「ゝ」だ	has:「ゝ」	keep	normalize

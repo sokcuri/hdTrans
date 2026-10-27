@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+#include "core/dict/char_readings.h"
 #include "core/dict/classes.h"
 #include "core/engine/glue.h"
 #include "core/engine/resolve.h"
@@ -272,6 +273,24 @@ bool WordHoldsRun(const void* context, std::string_view line, size_t at, size_t 
         const text::Rune last = pipeline::internal::LastRune(line.substr(0, start));
         if (!pipeline::internal::IsJapaneseRune(last.cp) && last.cp != U'・') break;
         start -= last.size;
+    }
+    return false;
+}
+
+// Whether line[at, end) is a kanji that the dictionary holds as a common noun read other than
+// by its Hangul reading (星 별, not 易 역), which 々 makes plural (pipeline::RespellIterationMarks).
+bool KanjiNoun(const void* context, std::string_view line, size_t at, size_t end) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    const std::string_view kanji = line.substr(at, end - at);
+    const auto reading = dict::Written(text::DecodeRune(kanji).cp);
+    std::string sound;
+    if (reading) text::AppendRune(sound, *reading);
+    for (const dict::Candidate& c : Find(d, kanji).list) {
+        if (c.source != kanji || c.codes == nullptr || c.codes->part.Tag() != 'N' || c.codes->part.ClassDigit() != '1' ||
+            c.codes->part.Sub() != '1' || c.target.empty() || c.target == sound) {
+            continue;
+        }
+        return true;
     }
     return false;
 }
@@ -784,6 +803,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             normalized = pipeline::RespellKatakanaEndings(normalized);
             normalized = pipeline::RespellKanjiCries(normalized);
             normalized = pipeline::RespellOldForms(normalized, WordHoldsRun, &respell);
+            normalized = pipeline::RespellIterationMarks(normalized, WordHoldsRun, KanjiNoun, &respell);
         }
         return normalized;
     };

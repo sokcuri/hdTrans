@@ -794,6 +794,31 @@ HD_TEST(pipeline_respell_old_forms) {
     }
 }
 
+HD_TEST(pipeline_respell_iteration_marks) {
+    // Stand-ins for the dictionary: 時々 is a word, 星 a noun of its own.
+    const WordHoldsRun words = [](const void*, std::string_view line, size_t at, size_t) {
+        return line.substr(at).starts_with("時々");
+    };
+    const WordHoldsRun nouns = [](const void*, std::string_view line, size_t at, size_t end) {
+        return line.substr(at, end - at) == "星";
+    };
+    const Case cases[] = {
+        {"こゝろ"sv, "こころ"sv},
+        {"いすゞ"sv, "いすず"sv},
+        {"ばゝ"sv, "ばは"sv},
+        {"ハヾ"sv, "ハバ"sv},
+        {"易々と"sv, "易易と"sv},
+        {"時々来る"sv, "時々来る"sv},
+        {"星々"sv, "星々"sv},
+        {"「々」"sv, "「々」"sv},
+        {"これはゝです"sv, "これはゝです"sv},
+        {"「ゝ」"sv, "「ゝ」"sv},
+        {"ゝ"sv, "ゝ"sv},
+        {"これは々です"sv, "これは々です"sv},
+    };
+    for (const Case& c : cases) HD_CHECK_EQ(RespellIterationMarks(c.in, words, nouns, nullptr), std::string(c.want));
+}
+
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},
