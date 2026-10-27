@@ -2008,6 +2008,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     const auto priorFilters = app.engine->Filters();
     const auto priorSettings = app.settings;
     const auto uiOptions = Options(app.text, false);
+    // Reference mode keeps no space after 学生.
     const std::string nextConfig = "dicts: ../replacement-dicts\nuserdict: [custom-live.txt]\nehnd: ../replacement-ehnd\n"
         "strict_dict: false\ncg: false\nmisread: true\nreference: true\nspeech: soft\nwrapped: true\n";
     if (!Check(WriteFixture(config, nextConfig), "change dictionary, filter and session settings together")) return false;
@@ -2022,7 +2023,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
                app.settings.speech == hdTrans::Speech::Soft && app.settings.wrapped && !app.settings.cache &&
                app.engineDictDirs == std::vector<std::string>{Utf8(nextDicts.native())} &&
                app.engineUserPaths == std::vector<std::string>{Utf8(nextUser.native())} && app.engineEhndDir == Utf8(nextEhnd.native()) &&
-               translate() == "USER_LIVE BASE_CAT LIVE_DOG", "successful config candidate commits all requested settings and sources") && ok;
+               translate() == "USER_LIVEBASE_CAT LIVE_DOG", "successful config candidate commits all requested settings and sources") && ok;
     SendMessageW(app.dicts, kRelist, 0, 0);
     const auto afterOptions = Options(app.text, false);
     ok = Check(afterOptions.output == uiOptions.output && afterOptions.wholeDocument == uiOptions.wholeDocument &&
@@ -2037,11 +2038,11 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     CloseHandle(blockedInitial);
     if (!Check(loadedInitialUser && app.engine && app.engine->loaded(), "initial unreadable user file does not block base Open")) return false;
     ok = Check(!app.reloadDicts.load() && app.error.empty() && app.settings.cache == publishedSettings.cache &&
-               translate() == "BASE_STUDENT BASE_CAT LIVE_DOG" &&
+               translate() == "BASE_STUDENTBASE_CAT LIVE_DOG" &&
                std::any_of(app.logEntries.begin(), app.logEntries.end(), [](const auto& entry) { return entry.kind == L"INFO"; }) &&
                LogContains(app, L"custom-live.txt"), "initial Open keeps base and healthy Ehnd with the rejected user file logged") && ok;
     app.reloadDicts = true;
-    if (!Check(ReadyEngine(app) && translate() == "USER_LIVE BASE_CAT LIVE_DOG", "reload the recovered user file")) return false;
+    if (!Check(ReadyEngine(app) && translate() == "USER_LIVEBASE_CAT LIVE_DOG", "reload the recovered user file")) return false;
     const fs::path badEncoding = nextUser.parent_path() / L"bad-encoding.txt";
     std::string encodingConfig = nextConfig;
     encodingConfig.replace(encodingConfig.find("userdict: [custom-live.txt]"), sizeof("userdict: [custom-live.txt]") - 1,
@@ -2050,7 +2051,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     app.engine.reset();
     ClearLogs(app);
     if (!Check(LoadEngine(app, Utf8(program.native())) && app.engine && app.engine->loaded(), "invalid UTF-8 user file permits startup")) return false;
-    ok = Check(app.error.empty() && translate() == "USER_LIVE BASE_CAT LIVE_DOG" && LogContains(app, L"bad-encoding.txt"),
+    ok = Check(app.error.empty() && translate() == "USER_LIVEBASE_CAT LIVE_DOG" && LogContains(app, L"bad-encoding.txt"),
                "cold skip mode keeps the good user file and base with the bad sibling diagnosed") && ok;
     const fs::path badStrictUser = nextUser.parent_path() / L"strict-user.txt";
     std::string strictUserConfig = nextConfig;
@@ -2062,7 +2063,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     app.engine.reset();
     ClearLogs(app);
     if (!Check(LoadEngine(app, Utf8(program.native())) && app.engine && app.engine->loaded(), "strict user-file rejection permits startup")) return false;
-    ok = Check(app.error.empty() && app.settings.strictDict == true && translate() == "USER_LIVE BASE_CAT LIVE_DOG" &&
+    ok = Check(app.error.empty() && app.settings.strictDict == true && translate() == "USER_LIVEBASE_CAT LIVE_DOG" &&
                LogContains(app, L"strict-user.txt"), "strict cold Open rejects the whole bad user file, not the engine") && ok;
     if (!Check(WriteFixture(config, nextConfig), "restore the healthy user source configuration")) return false;
     app.engine.reset();
@@ -2082,7 +2083,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     ClearLogs(app);
     if (!Check(LoadEngine(app, Utf8(program.native())) && app.engine && app.engine->loaded(), "strict filter-file rejection permits base Open")) return false;
     ok = Check(!app.reloadDicts.load() && app.error.empty() && app.settings.strictDict == true &&
-               hdTrans::internal::FilterFileFailed(*app.engine) && translate() == "USER_LIVE BASE_CAT LIVE_DOG" &&
+               hdTrans::internal::FilterFileFailed(*app.engine) && translate() == "USER_LIVEBASE_CAT LIVE_DOG" &&
                LogContains(app, L"PreFilter_99.txt"), "initial strict filter failure excludes its whole file and logs the diagnostic") && ok;
     if (!Check(WriteFixture(rejectedFilter, "ZZSTRICTCONTROL\tSAFE\t10\t0\n"), "repair the rejected strict filter file")) return false;
     app.reloadDicts = true;
@@ -2101,7 +2102,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
                "parse-entry stamp replaces the stale cheap config observation")) return false;
     ok = Check(app.engine.get() != beforeParsedEngine && app.settings.strictDict == false &&
                app.engineUserPaths == std::vector<std::string>{Utf8(parsedUser.native())} &&
-               translate() == "PARSED_STUDENT BASE_CAT LIVE_DOG" && LogContains(app, L"parsed-user.txt"),
+               translate() == "PARSED_STUDENTBASE_CAT LIVE_DOG" && LogContains(app, L"parsed-user.txt"),
                "one parsed config supplies replacement paths and skip policy") && ok;
     const auto* parsedEngine = app.engine.get();
     const auto parsedDictionaries = app.engine->Dictionaries();
@@ -2113,10 +2114,10 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     ok = Check(!ReadDictionaries(app, parsed, Utf8(program.native()), Utf8(config.native()), parsedVersion.config) &&
                app.engine.get() == parsedEngine && app.engine->Dictionaries() == parsedDictionaries && app.engine->Filters() == parsedFilters &&
                app.loadedUserVersion == parsedVersion && app.settings.strictDict == false && app.reloadDicts.load() &&
-               translate() == "PARSED_STUDENT BASE_CAT LIVE_DOG", "a stale supplied parse cannot publish paths or policy") && ok;
+               translate() == "PARSED_STUDENTBASE_CAT LIVE_DOG", "a stale supplied parse cannot publish paths or policy") && ok;
     if (!Check(WriteFixture(parsedUser, "学生\tPARSED_REPAIRED\tn\n"), "repair the user file for the new strict config")) return false;
     ok = Check(ReadyEngine(app) && app.settings.strictDict == true && app.error.empty() &&
-               translate() == "PARSED_REPAIRED BASE_CAT LIVE_DOG", "the next request reparses config and recovers") && ok;
+               translate() == "PARSED_REPAIREDBASE_CAT LIVE_DOG", "the next request reparses config and recovers") && ok;
     NotifyClick(app.logs, IDC_LOG_CLEAR);
     ok = Check(ListView_GetItemCount(logList) == 0 && ControlText(app.main, IDC_LOG_STATUS).empty(), "clear log entries and status") && ok;
     for (std::size_t index = 0; index <= kLogLimit; ++index) AddLog(app, L"엔진", std::to_wstring(index));
@@ -2158,13 +2159,13 @@ bool SelfTestExplicitSources(App& app, const fs::path& folder) {
         const auto translate = [&] {
             return gui::TranslateText(*app.engine, "猫 犬", ConfiguredOptions(app, options), app.cancel);
         };
-        bool ok = Check(translate() == "앞사전 뒤사전", "explicit sources initial literal");
+        bool ok = Check(translate() == "앞사전뒤사전", "explicit sources initial literal");
         ToggleDict(app, index, false);
-        ok = Check(ReadyEngine(app) && translate() == "고양이 뒤사전" &&
+        ok = Check(ReadyEngine(app) && translate() == "고양이뒤사전" &&
                    std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
                    "GUI off explicitly removes an active file source") && ok;
         ToggleDict(app, index, true);
-        ok = Check(ReadyEngine(app) && translate() == "앞사전 뒤사전" && app.engineUserPaths.front() == Utf8(first.native()),
+        ok = Check(ReadyEngine(app) && translate() == "앞사전뒤사전" && app.engineUserPaths.front() == Utf8(first.native()),
                    "GUI on restores the explicit file in its original source order") && ok;
         const auto dictionaries = app.engine->Dictionaries();
         const auto filters = app.engine->Filters();
@@ -2180,11 +2181,11 @@ bool SelfTestExplicitSources(App& app, const fs::path& folder) {
         const fs::path renamedPath = app.userDicts[static_cast<std::size_t>(index)].path;
         ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
                    app.engineUserPaths == paths && app.loadedUserVersion == version &&
-                   app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters && translate() == "앞사전 뒤사전",
+                   app.engine->Dictionaries() == dictionaries && app.engine->Filters() == filters && translate() == "앞사전뒤사전",
                    "failed reconfiguration keeps old sources, stamps and the whole stack") && ok;
         ToggleDict(app, index, false);
         CloseHandle(blocked);
-        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이 뒤사전",
+        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이뒤사전",
                    "reconfiguration recovery preserves a newer GUI off edit") && ok;
         ShowDicts(app, renamedPath);
         if (!Check(app.dictIndex >= 0 && app.userDicts[static_cast<std::size_t>(app.dictIndex)].path == renamedPath,
@@ -2193,9 +2194,9 @@ bool SelfTestExplicitSources(App& app, const fs::path& folder) {
         if (!Check(WriteFixture(user / L"hdtrans.config.yaml", fixtureConfig + "cg: false\nreference: true\n"),
                    "change scalar config fields after an explicit rename and off")) return false;
         ok = Check(ReadyEngine(app) && !app.settings.cg && app.settings.reference && app.engineUserPaths == offPaths &&
-                   translate() == "고양이 뒤사전", "scalar config changes preserve an existing GUI off and renamed source slot") && ok;
+                   translate() == "고양이뒤사전", "scalar config changes preserve an existing GUI off and renamed source slot") && ok;
         ToggleDict(app, app.dictIndex, true);
-        ok = Check(ReadyEngine(app) && translate() == "앞사전 뒤사전" && app.engineUserPaths.front() == Utf8(renamedPath.native()) &&
+        ok = Check(ReadyEngine(app) && translate() == "앞사전뒤사전" && app.engineUserPaths.front() == Utf8(renamedPath.native()) &&
                    std::find(app.engineUserPaths.begin(), app.engineUserPaths.end(), Utf8(first.native())) == app.engineUserPaths.end(),
                    "renamed explicit source recovers without leaving the old path active") && ok;
         const auto beforeMissing = app.engine->Dictionaries();
@@ -2204,12 +2205,17 @@ bool SelfTestExplicitSources(App& app, const fs::path& folder) {
         away += L".away";
         fs::rename(renamedPath, away, error);
         if (!Check(!error, "remove an explicit source without a GUI intent")) return false;
-        ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
-                   app.engine->Dictionaries() == beforeMissing && app.engine->Filters() == beforeMissingFilters &&
-                   translate() == "앞사전 뒤사전", "unannounced explicit-file disappearance is fatal, not a GUI off") && ok;
+        if (legacy) {
+            ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "고양이뒤사전",
+                       "a discovered file that disappears is removed") && ok;
+        } else {
+            ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && !app.error.empty() &&
+                       app.engine->Dictionaries() == beforeMissing && app.engine->Filters() == beforeMissingFilters &&
+                       translate() == "앞사전뒤사전", "unannounced explicit-file disappearance is fatal, not a GUI off") && ok;
+        }
         fs::rename(away, renamedPath, error);
         if (!Check(!error, "restore the disappeared explicit source")) return false;
-        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "앞사전 뒤사전",
+        ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "앞사전뒤사전",
                    "same-path source restoration retries the pending load") && ok;
         app.engine.reset();
         if (!ok) return false;
@@ -2261,8 +2267,8 @@ bool SelfTestOptionalSources(App& app, const fs::path& folder) {
     defaultAway += L".away";
     fs::rename(defaultEhnd, defaultAway, error);
     if (!Check(!error, "remove an accepted default Ehnd source")) return false;
-    ok = Check(!ReadyEngine(app) && app.reloadDicts.load() && translate() == "BASE_CAT DEFAULT_EHND",
-               "an accepted default source cannot downgrade disappearance to quiet absence") && ok;
+    ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "BASE_CATBASE_DOG",
+               "a default Ehnd folder that disappears is removed") && ok;
     fs::rename(defaultAway, defaultEhnd, error);
     if (!Check(!error, "restore the accepted default Ehnd source")) return false;
     ok = Check(ReadyEngine(app) && app.error.empty() && translate() == "BASE_CAT DEFAULT_EHND", "restore the default source at the same path") && ok;
