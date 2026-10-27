@@ -51,6 +51,7 @@ constexpr UINT kFont = WM_APP + 3;
 constexpr UINT kStart = WM_APP + 4;
 constexpr UINT kRelist = WM_APP + 5;
 constexpr UINT kLog = WM_APP + 6;
+constexpr UINT kChecked = WM_APP + 7;
 constexpr std::size_t kLogLimit = 300;
 
 enum Page { kTextPage, kDocsPage, kDictsPage, kLogsPage };
@@ -365,8 +366,9 @@ void LayoutLogs(HWND page) {
     p.Column(IDC_LOG_ENTRIES, 0, p(76));
     p.Column(IDC_LOG_ENTRIES, 1, p(60));
     p.Column(IDC_LOG_ENTRIES, 2, std::max(full - p(140) - p.Scrollbar(), p(300)));
-    p.Put(IDC_LOG_COPY, m, p.height - m - bh, p(90), bh);
-    p.Put(IDC_LOG_CLEAR, m + p(98), p.height - m - bh, p(90), bh);
+    p.Put(IDC_DICT_CHECK, m, p.height - m - bh, p(90), bh);
+    p.Put(IDC_LOG_COPY, m + p(98), p.height - m - bh, p(90), bh);
+    p.Put(IDC_LOG_CLEAR, m + p(196), p.height - m - bh, p(90), bh);
 }
 
 // The work area of the monitor that holds most of the window.
@@ -698,6 +700,7 @@ void ResetJob(App& app) {
     app.error.clear();
     app.wasCancelled = false;
     app.busy = true;
+    EnableWindow(GetDlgItem(app.logs, IDC_DICT_CHECK), FALSE);
 }
 
 void EnableShortControls(App& app, bool enabled) {
@@ -724,12 +727,32 @@ void StartShort(App& app) {
 void FinishShort(App& app) {
     if (app.worker.joinable()) app.worker.join();
     app.busy = false;
+    EnableWindow(GetDlgItem(app.logs, IDC_DICT_CHECK), TRUE);
     EnableShortControls(app, true);
     if (app.closing) {
         DestroyWindow(app.main);
         return;
     }
     if (app.error.empty() && !app.wasCancelled) SetDlgItemTextW(app.text, IDC_RESULT, EditText(app.result).c_str());
+}
+
+void StartDictionaryCheck(App& app) {
+    if (app.busy) return;
+    ResetJob(app);
+    for (HWND page : {app.text, app.docs}) EnableWindow(GetDlgItem(page, IDC_TRANSLATE), FALSE);
+    app.reloadDicts = true;
+    app.worker = std::thread([&app] {
+        if (!app.cancel) ReadyEngine(app);
+        PostMessageW(app.main, kChecked, 0, 0);
+    });
+}
+
+void FinishDictionaryCheck(App& app) {
+    if (app.worker.joinable()) app.worker.join();
+    app.busy = false;
+    EnableWindow(GetDlgItem(app.logs, IDC_DICT_CHECK), TRUE);
+    for (HWND page : {app.text, app.docs}) EnableWindow(GetDlgItem(page, IDC_TRANSLATE), TRUE);
+    if (app.closing) DestroyWindow(app.main);
 }
 
 void CopyText(App& app, const std::wstring& text) {
@@ -1127,6 +1150,7 @@ void ShowPhase(App& app, WPARAM phase, LPARAM index) {
 void FinishFile(App& app) {
     if (app.worker.joinable()) app.worker.join();
     app.busy = false;
+    EnableWindow(GetDlgItem(app.logs, IDC_DICT_CHECK), TRUE);
     EnableDocControls(app, true);
     if (app.closing) {
         DestroyWindow(app.main);
@@ -1596,6 +1620,7 @@ INT_PTR CALLBACK LogsProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case WM_SIZE: LayoutLogs(window); return TRUE;
     case WM_COMMAND:
         switch (LOWORD(wParam)) {
+        case IDC_DICT_CHECK: StartDictionaryCheck(*app); return TRUE;
         case IDC_LOG_COPY: CopyLogs(*app); return TRUE;
         case IDC_LOG_CLEAR: ClearLogs(*app); return TRUE;
         }
@@ -1673,6 +1698,7 @@ INT_PTR CALLBACK MainProc(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         break;
     case WM_DROPFILES: TakeDrop(*app, reinterpret_cast<HDROP>(wParam)); return TRUE;
     case kLog: ShowLogs(*app); return TRUE;
+    case kChecked: FinishDictionaryCheck(*app); return TRUE;
     case kDone: FinishShort(*app); return TRUE;
     case WM_CLOSE:
         if (app->busy) {
@@ -1989,6 +2015,18 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     SendMessageW(app.main, WM_COMMAND, MAKEWPARAM(IDC_LOG_STATUS, STN_CLICKED),
                  reinterpret_cast<LPARAM>(GetDlgItem(app.main, IDC_LOG_STATUS)));
     ok = Check(CurrentPage(app) == kLogsPage && WindowText(app.main) == Title(kLogsPage), "warning status opens the log tab") && ok;
+    const std::wstring sourceBeforeCheck = ControlText(app.text, IDC_SOURCE);
+    const std::wstring resultBeforeCheck = ControlText(app.text, IDC_RESULT);
+    const auto beforeCheck = app.engine->Dictionaries();
+    NotifyClick(app.logs, IDC_DICT_CHECK);
+    ok = Check(app.busy && !IsWindowEnabled(GetDlgItem(app.logs, IDC_DICT_CHECK)), "dictionary check uses the shared worker") && ok;
+    const auto checkWorker = app.worker.get_id();
+    NotifyClick(app.logs, IDC_DICT_CHECK);
+    ok = Check(app.worker.get_id() == checkWorker, "a busy dictionary check cannot start another worker") && ok;
+    if (!WaitForJob(app)) return false;
+    ok = Check(app.error.empty() && app.engine->Dictionaries() != beforeCheck &&
+               ControlText(app.text, IDC_SOURCE) == sourceBeforeCheck && ControlText(app.text, IDC_RESULT) == resultBeforeCheck &&
+               LogContains(app, L"userdict-b.txt:4:"), "dictionary check reloads and logs warnings without translating or replacing text") && ok;
     ShowPage(app, kTextPage);
     const auto warningDictionaries = app.engine->Dictionaries();
     const auto warningFilters = app.engine->Filters();
