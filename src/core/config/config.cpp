@@ -150,7 +150,7 @@ public:
                 Error("speech: expected soft or strict");
                 return Skip();
             }
-        } else if (key == "cg" || key == "misread" || key == "reference" || key == "wrapped") {
+        } else if (key == "cg" || key == "misread" || key == "reference" || key == "wrapped" || key == "strict_dict") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::Bool ||
                 (Lower(Scalar(event_)) != "true" && Lower(Scalar(event_)) != "false")) {
                 Error(key + ": expected a boolean (true or false)");
@@ -160,6 +160,7 @@ public:
             if (key == "cg") result_.settings.cg = value;
             else if (key == "misread") result_.settings.misread = value;
             else if (key == "wrapped") result_.settings.wrapped = value;
+            else if (key == "strict_dict") result_.settings.strictDict = value;
             else result_.settings.reference = value;
         } else {
             Error("unknown key: " + key);
@@ -214,6 +215,8 @@ bool SpeechOf(std::string_view name, Speech& out) {
 
 ConfigResult LoadConfig(std::string_view path) {
     ConfigResult result;
+    dict::internal::FileStamp stamp;
+    if (dict::internal::ReadStamp(path, stamp)) result.sourceStamp = stamp;
     const auto filePath = PathOf(path);
 #ifdef _WIN32
     std::FILE* file = _wfopen(filePath.c_str(), L"rb");

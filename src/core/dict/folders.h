@@ -18,11 +18,24 @@ std::string ShippedFolder(std::string_view programDir);
 std::string DefaultFolder(std::string_view programDir);
 // Default user sources; the legacy file precedes the user folder in a flat layout.
 std::vector<std::string> UserPaths(std::string_view programDir);
-// Expands folders to userdict*.txt/tsv files in lowercase filename byte order.
+// A requested path's provenance and the availability found by the last observation.
+struct UserSource {
+    std::string path;
+    bool directory = false;
+    bool available = false;  // a file exists, or a folder was completely enumerated
+    bool explicitPath = true;
+    bool operator==(const UserSource&) const = default;
+};
+
+// Expands folders to top-level userdict*.txt/tsv and .txt/tsv files whose first line
+// is a prefilter/postfilter header, in lowercase filename byte order.
 // Explicit files keep their positions; empty paths are ignored.
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths);
+std::vector<std::string> UserFiles(const std::vector<std::string>& paths, std::vector<UserSource>& sources);
+std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::vector<UserSource>& sources,
+                                   std::vector<std::string>* readFailures = nullptr);
 std::string ConfigFile(std::string_view programDir);
-// programDir/Ehnd when present, outside the hdTrans data folder.
+// The selected or expected Ehnd directory next to the program.
 std::string EhndFolder(std::string_view programDir);
 
 }  // namespace hdTrans::dict

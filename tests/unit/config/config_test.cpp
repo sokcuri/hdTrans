@@ -44,6 +44,26 @@ struct TempConfig {
 
 }  // namespace
 
+HD_TEST(ConfigCarriesItsParseEntryStamp) {
+    TempConfig file;
+    const auto missing = hdTrans::internal::LoadConfig(file.path);
+    HD_CHECK(!missing.found);
+    HD_CHECK(!missing.sourceStamp);
+    HD_CHECK(missing.diagnostics.empty());
+    const std::string text = "strict_dict: false\n";
+    const auto first = file.Load(text);
+    HD_CHECK(first.found);
+    HD_REQUIRE(first.sourceStamp.has_value());
+    HD_CHECK_EQ(first.sourceStamp->size, static_cast<std::uint64_t>(text.size()));
+    hdTrans::dict::internal::FileStamp current;
+    HD_REQUIRE(hdTrans::dict::internal::ReadStamp(file.path, current));
+    HD_CHECK(current == *first.sourceStamp);
+    const auto second = file.Load("strict_dict: true\n# changed version\n");
+    HD_REQUIRE(second.sourceStamp.has_value());
+    HD_CHECK(*second.sourceStamp != *first.sourceStamp);
+    HD_CHECK(second.settings.strictDict == true);
+}
+
 HD_TEST(ConfigAllKeys) {
     TempConfig file;
     const auto result = file.Load(
@@ -65,6 +85,31 @@ HD_TEST(ConfigAllKeys) {
     HD_CHECK(settings.reference);
     HD_CHECK(settings.speech == hdTrans::Speech::Strict);
     HD_CHECK(settings.wrapped);
+}
+
+HD_TEST(ConfigStrictDictionary) {
+    TempConfig file;
+    const auto missing = file.Load("cg: true\n");
+    HD_CHECK(missing.diagnostics.empty());
+    HD_CHECK(!missing.settings.strictDict.has_value());
+    for (const bool strict : {false, true}) {
+        const auto result = file.Load(strict ? "strict_dict: true\n" : "strict_dict: false\n");
+        HD_CHECK(result.diagnostics.empty());
+        HD_REQUIRE(result.settings.strictDict.has_value());
+        HD_CHECK(*result.settings.strictDict == strict);
+    }
+    for (const char* value : {"'false'", "1", "yes"}) {
+        const auto result = file.Load(std::string("strict_dict: ") + value + "\n");
+        HD_REQUIRE(result.diagnostics.size() == 1);
+        HD_CHECK_EQ(result.diagnostics[0].line, std::size_t{1});
+        HD_CHECK_EQ(result.diagnostics[0].message, "strict_dict: expected a boolean (true or false)");
+        HD_CHECK(!result.settings.strictDict.has_value());
+    }
+    const auto earlier = file.Load("strict_dict: false\nstrict_dict: invalid\n");
+    HD_REQUIRE(earlier.settings.strictDict.has_value());
+    HD_CHECK(!*earlier.settings.strictDict);
+    HD_REQUIRE(earlier.diagnostics.size() == 1);
+    HD_CHECK_EQ(earlier.diagnostics[0].line, std::size_t{2});
 }
 
 HD_TEST(ConfigSpeech) {

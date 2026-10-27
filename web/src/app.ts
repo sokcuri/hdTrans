@@ -250,9 +250,13 @@ fileInput.addEventListener('change', async () => {
   let last: Dictionary | undefined;
   const failed: string[] = [];
   for (const f of Array.from(fileInput.files ?? [])) {
-    const d = fromFile(f.name, new Uint8Array(await f.arrayBuffer()));
-    if (d) last = await add(d);
-    else failed.push(f.name);
+    try {
+      const d = fromFile(f.name, new Uint8Array(await f.arrayBuffer()));
+      if (d) last = await add(d);
+      else failed.push(f.name);
+    } catch {
+      failed.push(f.name);
+    }
   }
   fileInput.value = '';
   if (failed.length > 0) alert('읽지 못함: ' + failed.join(', '));
@@ -510,10 +514,13 @@ async function runDocs() {
     showDocs();
     const t0 = performance.now();
     try {
-      const m = await request('document', d.source!.split('\n'), overlay(dicts));
+      const dictionaries = overlay(dicts);
+      const m = await request('document', d.source!.split('\n'), dictionaries);
       if (m.lines === undefined) throw new Error(m.message);
       if (docsCancel) break;
       d.translated = m.lines.join('\n');
+      const warning = warningText(m.warning ?? '', m.ehndWarning ?? [], dictionaries.where);
+      info.textContent = warning ? '사전 오류: ' + warning : '';
       setState(d, `완료 · ${Math.round(performance.now() - t0)} ms`);
     } catch (err) {
       setState(d, '번역 실패: ' + (err instanceof Error ? err.message : String(err)));

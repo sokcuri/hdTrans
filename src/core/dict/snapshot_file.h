@@ -14,6 +14,9 @@ namespace hdTrans::dict::internal {
 // Reads through the first nonblank, noncomment physical line; false on an I/O error.
 // Only a BOM on the first physical line is stripped; the first raw tab field is key.
 bool ReadColumnHeader(std::string_view utf8Path, bool& column);
+bool ColumnText(std::string_view text);
+// A single optional file argument; vector inputs name files the load must read.
+std::vector<std::string> OptionalUserFile(std::string_view path);
 
 // Hashes the ordered canonical folders and data version.
 // An empty cacheDir selects HDTRANS_CACHE_DIR or the per-user cache directory.

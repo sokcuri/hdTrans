@@ -20,6 +20,10 @@ const init = (options = {}) => HdTrans.init({ module: engine, directories: ['/di
 await assert.rejects(init({ directories: ['/missing'] }), /dictionaries do not load/);
 await assert.rejects(init({ directories: [42] }), TypeError);
 await assert.rejects(init({ directories: ['/dicts\0hidden'] }), TypeError);
+await assert.rejects(init({ strictDict: 'false' }), TypeError);
+for (const strictDict of [true, false]) {
+    await assert.rejects(init({ directories: ['/missing'], strictDict }), /dictionaries do not load/);
+}
 const inspect = (options = {}) => HdTrans.getInfo({ module: engine, directories: ['/dicts'], ...options });
 await assert.rejects(inspect({ directories: ['/missing'] }), /dictionaries do not load/);
 await assert.rejects(inspect({ directories: [42] }), TypeError);
@@ -100,8 +104,12 @@ try {
     assert.equal(translator.getUserDictRaw(), raw);
     assert.equal(translator.userDictError, '');
     assert.equal(translator.translate(text), '동료');
-    const malformed = '学生\t실패\tn\tbogus\n東京\t도시\n';
-    translator.setUserDictRaw(malformed);
+    const malformed = '学生\t실패\tn\tbogus\n東京\t도시\n犬\t개\txx\n';
+    assert.throws(() => translator.setUserDictRaw(malformed), (error) => {
+        assert.match(error.message, /^userdict\.tsv:1: .*bogus/m);
+        assert.match(error.message, /^userdict\.tsv:3: /m);
+        return true;
+    });
     assert.match(translator.userDictError, /^userdict\.tsv:1: .*bogus/m);
     assert.equal(translator.getUserDictRaw(), malformed);
     assert.deepEqual(translator.getUserDict(), registered, 'failed whole-file update retains the active rows');
@@ -149,7 +157,7 @@ try {
     translator.setEhnd({
         'PreFilter_live.txt': '魔導具\t学生\t1\t0\n(x\tz\t1\t1\n',
         'PostFilter_live.txt': '학우\t필터값\t1\t0\n',
-    });
+    }, { strict: false });
     assert.equal(translator.translate(probe), '필터값');
     assert(translator.filterErrors.some((error) => error.startsWith('PreFilter_live.txt:2: regex rejected')));
     const diagnosticsTrace = translator.translate(probe, { json: true });
@@ -173,6 +181,137 @@ try {
     } finally {
         configured.close();
     }
+
+    const mixedRows = [
+        { ja: '学生', ko: '부분학우' },
+        { ja: '東京', ko: '실패', pos: 'n', options: 'bogus' },
+        { ja: '犬', ko: '개', pos: 'xx' },
+        { ja: '鳥', ko: '수리새' },
+    ];
+    const rowsText = (rows) => rows.map((row) => [row.ja, row.ko, row.pos ?? '', row.options ?? '']
+        .join('\t').replace(/\t+$/, '')).join('\n') + '\n';
+    const goodRows = [mixedRows[0], mixedRows[3]];
+    const badRows = mixedRows.slice(1, 3);
+    const mixedFilters = {
+        'PostFilter_first.txt': '^.+$\t부분필터\t1\t1\n',
+        'PreFilter_second.txt': '魔導具\t学生\t1\t0\n(x\tz\t1\t1\n(y\tz\t1\t1\n',
+    };
+    const badFilters = { 'PreFilter_bad.txt': '(x\tz\t1\t1\n(y\tz\t1\t1\n' };
+    for (const strictDict of [undefined, true, false]) {
+        const local = await init({ strictDict });
+        const strictDefault = strictDict !== false;
+        try {
+            for (const strict of [true, false]) {
+                assert.throws(() => local.setUserDict([{ ja: '学生\n東京', ko: '금지' }], { strict }), TypeError);
+                assert.throws(() => local.setUserDict([{ ja: '学生', ko: '금지\0' }], { strict }), TypeError);
+                assert.throws(() => local.setUserDictRaw(42, { strict }), TypeError);
+                assert.throws(() => local.setEhnd({ 'PreFilter/bad.txt': '' }, { strict }), TypeError);
+            }
+            for (const typed of [false, true]) {
+                const load = (rows, options) => typed
+                    ? local.setUserDict(rows, options)
+                    : local.setUserDictRaw(rowsText(rows), options);
+                load(mixedRows, { strict: false });
+                assert.deepEqual(local.getUserDict(), goodRows);
+                assert.match(local.userDictError, /^userdict\.tsv:2: .*bogus/m);
+                assert.match(local.userDictError, /^userdict\.tsv:3: /m);
+                assert.equal(local.translate('学生'), '부분학우');
+                local.reset();
+                assert.equal(local.translate('鳥'), '수리새');
+                if (strictDefault) {
+                    assert.throws(() => load(badRows), /bogus/);
+                    assert.deepEqual(local.getUserDict(), goodRows, 'false override does not change strict instance policy');
+                } else {
+                    load(badRows);
+                    assert.deepEqual(local.getUserDict(), [], 'all-bad input replaces the active overlay with empty rows');
+                    assert.match(local.userDictError, /bogus/);
+                }
+                load([{ ja: '学生', ko: '기존학우' }]);
+                assert.equal(local.userDictError, '');
+                assert.throws(() => load(mixedRows, { strict: true }), (error) => {
+                    assert.match(error.message, /^userdict\.tsv:2: .*bogus/m);
+                    assert.match(error.message, /^userdict\.tsv:3: /m);
+                    return true;
+                });
+                assert.equal(local.getUserDictRaw(), rowsText(mixedRows), 'failed typed/raw submissions retain their submitted text');
+                assert.deepEqual(local.getUserDict(), [{ ja: '学生', ko: '기존학우' }]);
+                assert.equal(local.translate('学生'), '기존학우');
+                if (strictDefault) assert.throws(() => load(mixedRows), /bogus/);
+                else {
+                    load(mixedRows);
+                    assert.deepEqual(local.getUserDict(), goodRows, 'true override does not change lenient instance policy');
+                }
+                for (const value of ['false', null, 0]) assert.throws(() => load(goodRows, { strict: value }), TypeError);
+                local.clearUserDict();
+                assert.deepEqual(local.getUserDict(), []);
+                assert.equal(local.userDictError, '');
+            }
+            local.setEhnd(mixedFilters, { strict: false });
+            assert.equal(local.translate(probe), '부분필터', 'a bad second file does not discard the good first file');
+            assert(local.translate(probe, { json: true }).logs.includes('[PRE] 学生\n\n'), 'good rows of the second file apply');
+            assert(local.filterErrors.some((error) => error.startsWith('PreFilter_second.txt:2:')));
+            assert(local.filterErrors.some((error) => error.startsWith('PreFilter_second.txt:3:')));
+            if (strictDefault) {
+                assert.throws(() => local.setEhnd(badFilters), /PreFilter_bad\.txt:1:/);
+                assert.equal(local.translate(probe), '부분필터', 'false Ehnd override does not change instance policy');
+            } else {
+                local.setEhnd(badFilters);
+                assert.equal(local.translate(probe), unfiltered, 'all-bad Ehnd replacement clears old filters');
+                assert.equal(local.filterErrors.length, 2);
+            }
+            local.setEhnd({ 'PostFilter_old.txt': '^.+$\t기존필터\t1\t1\n' });
+            assert.deepEqual(local.filterErrors, []);
+            assert.throws(() => local.setEhnd(mixedFilters, { strict: true }), (error) => {
+                assert.match(error.message, /PreFilter_second\.txt:2:/);
+                assert.match(error.message, /PreFilter_second\.txt:3:/);
+                return true;
+            });
+            assert.equal(local.translate(probe), '기존필터');
+            if (strictDefault) assert.throws(() => local.setEhnd(mixedFilters), /PreFilter_second\.txt:2:/);
+            else {
+                local.setEhnd(mixedFilters);
+                assert.equal(local.translate(probe), '부분필터', 'true Ehnd override does not change instance policy');
+            }
+            assert.throws(() => local.setEhnd({}, { strict: 'false' }), TypeError);
+            local.clearEhnd();
+            assert.deepEqual(local.filterErrors, []);
+            assert.equal(local.translate(probe), unfiltered);
+            const badUserText = `犬\t${'가'.repeat(16)}\t1\n\t실패\t1\n`;
+            const userFiles = {
+                'UserDict_first.txt': 'ポチ\t바둑이\t1\n',
+                'UserDict_second.txt': 'タマ\t나비\t1\n' + badUserText,
+            };
+            local.setEhnd(userFiles, { strict: false });
+            assert.equal(local.translate('ポチ'), '바둑이');
+            assert.equal(local.translate('タマ'), '나비', 'good rows in a malformed second Ehnd dictionary still apply');
+            assert.equal(local.filterErrors.length, 2);
+            assert(local.filterErrors.some((error) => error.startsWith('UserDict_second.txt:2:')));
+            assert(local.filterErrors.some((error) => error.startsWith('UserDict_second.txt:3:')));
+            const badUserFile = { 'UserDict_bad.txt': badUserText };
+            assert.throws(() => local.setEhnd(badUserFile, { strict: true }), (error) => {
+                assert.match(error.message, /UserDict_bad\.txt:1:/);
+                assert.match(error.message, /UserDict_bad\.txt:2:/);
+                return true;
+            });
+            assert.equal(local.translate('ポチ'), '바둑이', 'strict Ehnd dictionary failure preserves the prior overlay');
+            local.setEhnd(badUserFile, { strict: false });
+            assert.equal(local.translate('ポチ'), independent.translate('ポチ'));
+            assert.equal(local.filterErrors.length, 2);
+            local.clearEhnd();
+            assert.deepEqual(local.filterErrors, []);
+        } finally {
+            local.close();
+        }
+    }
+    await assert.rejects(init({ ehnd: mixedFilters }), /PreFilter_second\.txt:2:/);
+    const lenientInit = await init({ ehnd: mixedFilters, strictDict: false });
+    try {
+        assert.equal(lenientInit.translate(probe), '부분필터');
+        assert.equal(lenientInit.filterErrors.length, 2);
+    } finally {
+        lenientInit.close();
+    }
+    assert.deepEqual(engine.FS.readdir('/').filter((name) => name.startsWith('hdtrans-userdict-')), [], 'memory loads do not stage temporary files');
 
     assert.equal(translator.dictionaryVersion, 'fixture-v1', 'overlays and filters do not change the base version');
     const document = '学生の学生\n行く';
@@ -337,5 +476,5 @@ for (let i = 0; i < 5; ++i) {
     assert(reopened.translate(text));
     reopened.close();
 }
-assert.deepEqual(engine.FS.readdir('/').filter((name) => name.startsWith('hdtrans-userdict-')), [], 'close must remove private files');
-console.log('PASS wasm smoke: close, use-after-close, repeated initialization, private file cleanup');
+assert.deepEqual(engine.FS.readdir('/').filter((name) => name.startsWith('hdtrans-userdict-')), [], 'memory overlays leave no private files');
+console.log('PASS wasm smoke: close, use-after-close, repeated initialization, memory overlays');

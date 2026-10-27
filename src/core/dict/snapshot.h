@@ -34,9 +34,10 @@
 //     layers kana, readings, prefilter and postfilter are for plain files only, the
 //     others but base for column files only.
 //   - The user dictionary file, when given and present, loads after the folders.
-//     Its header, if any, must be "#! layer=user": as a column file it joins the
-//     user dictionary, as a plain file it is the last plain dictionary. A column
-//     user dictionary file is read without the cache.
+//     Its dictionary header, if any, is "#! layer=user": as a column file it joins
+//     the user dictionary, as a plain file it is the last plain dictionary. Filesystem
+//     prefilter/postfilter headers instead retain native filter text. A column user
+//     dictionary file is read without the cache.
 //   - The builtin endings.tsv is a plain dictionary numbered -1, loaded before the
 //     others (their entries of an equal key and part code replace its entries); so
 //     are the builtin phrases.tsv (but its interjections in kana, which are
@@ -55,11 +56,13 @@
 #include "core/dict/codes.h"
 #include "core/dict/dict.h"
 #include "core/dict/tsv.h"
+#include "core/dict/load_info.h"
 #include "core/dict/user_text.h"
 #include "core/output/families.h"
 #include "core/text/lifetime.h"
 #include "core/userdict/conjugating.h"
 #include "core/userdict/sense.h"
+#include "core/userdict/userdict.h"
 
 namespace hdTrans::pipeline {
 struct DocumentData;
@@ -83,6 +86,9 @@ struct File {
     // text holds only the head of a column file, through the line that makes it one;
     // the load reads the rest when it parses the file.
     bool head = false;
+    bool memory = false;
+    bool strict = true;  // the policy of an accepted user source
+    bool strictOverride = false;  // a per-call policy, rather than an inherited one
 };
 
 namespace internal {
@@ -106,6 +112,8 @@ enum class LoadErrorKind : uint8_t {
     MissingRuleBodies,  // rows name local rules and no row carries a body (an older dictionary)
     NegationEnding,     // a line loaded whose 지 않 negation fits no class of its key (NegationEndingError)
     VerbNoun,    // a line loaded whose noun target is a 하다 verb made a noun (VerbNounError)
+    UserRow,     // a bad user dictionary row skipped in non-strict mode
+    OptionalSource,  // a missing explicit source, or an unreadable unclassified header probe
 };
 
 // Whether an error of kind fails the load of its file; the other kinds list lines of a
@@ -113,7 +121,8 @@ enum class LoadErrorKind : uint8_t {
 constexpr bool FailsLoad(LoadErrorKind kind) {
     return kind != LoadErrorKind::UnknownPos && kind != LoadErrorKind::MarkerClass &&
            kind != LoadErrorKind::MissingRuleBodies && kind != LoadErrorKind::NegationEnding &&
-           kind != LoadErrorKind::VerbNoun;
+           kind != LoadErrorKind::VerbNoun && kind != LoadErrorKind::UserRow &&
+           kind != LoadErrorKind::OptionalSource;
 }
 
 struct LoadError {
@@ -184,11 +193,11 @@ struct Candidates {
 class Snapshot;
 
 struct LoadResult {
-    // Null when a file could not be read or holds malformed lines.
+    // Null when a file could not be read or a strict parse failed.
     std::shared_ptr<const Snapshot> snapshot;
-    // Every error, in file order. With a snapshot, only lines skipped for an unknown
-    // pos.
+    // File errors and row diagnostics; FailsLoad distinguishes them.
     std::vector<LoadError> errors;
+    std::vector<LoadFileInfo> info{};
 };
 
 // Lists the *.tsv files of the folders in order, those of each folder in name order,
@@ -197,25 +206,28 @@ struct LoadResult {
 // other entries, its embedded plain files are used. Otherwise, the entries supply the
 // current plain files instead of the embedded ones. A column userFile fails such a load.
 LoadResult LoadFolders(const std::vector<std::string>& folders, std::string_view cacheDir = {}, bool verify = false,
-                       bool cacheWrite = true, std::string_view userFile = {});
+                       bool cacheWrite = true, std::string_view userFile = {}, bool strictUser = true, const File* memory = nullptr);
 // Loads explicit user files in order.
 LoadResult LoadFolders(const std::vector<std::string>& folders, std::string_view cacheDir, bool verify,
-                       bool cacheWrite, const std::vector<std::string>& userFiles);
+                       bool cacheWrite, const std::vector<std::string>& userFiles, bool strictUser = true, const File* memory = nullptr);
 // Loads the editable files without reading or writing a cache.
-LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, std::string_view userFile = {});
-LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::vector<std::string>& userFiles);
+LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, std::string_view userFile = {}, bool strictUser = true, const File* memory = nullptr);
+LoadResult LoadFoldersTsv(const std::vector<std::string>& folders, const std::vector<std::string>& userFiles,
+                          bool strictUser = true, const File* memory = nullptr);
 // Finishes a new column-only snapshot with the folders' current noncolumn files and a
 // plain userFile.
 LoadResult LoadPlainFolders(std::shared_ptr<Snapshot> snapshot, const std::vector<std::string>& folders,
-                           std::vector<LoadError> errors, const std::vector<std::string>& userFiles);
+                           std::vector<LoadError> errors, const std::vector<std::string>& userFiles,
+                           bool strictUser = true, const File* memory = nullptr);
 // Finishes a new column-only snapshot with ordered plain files and external user files.
 LoadResult LoadPlainFiles(std::shared_ptr<Snapshot> snapshot, std::vector<File> files, std::size_t folders,
-                         std::vector<LoadError> errors, const std::vector<std::string>& userFiles);
+                         std::vector<LoadError> errors, const std::vector<std::string>& userFiles,
+                         bool strictUser = true, const File* memory = nullptr);
 // Compiles all dictionary files to a standalone resource; publishes only a fully
 // validated file. Any build of the same engine data reads it (LoadFolders).
 bool CompileSnapshot(const std::vector<std::string>& folders, std::string_view outPath);
 // Loads files in load order.
-LoadResult Load(std::vector<File> files);
+LoadResult Load(std::vector<File> files, bool strictUser = true);
 
 class Snapshot {
 public:
@@ -226,6 +238,7 @@ public:
     bool HasDictionary() const { return hasDictionary_; }
     const Dict& Base() const { return base_; }
     const Dict* User() const { return user_.Len() > 0 ? &user_ : nullptr; }
+    const std::vector<userdict::SourceEntry>& MemoryUserEntries() const { return memoryUserEntries_; }
     const Dict* Names() const { return names_.Len() > 0 ? &names_ : nullptr; }
     // The files that are not column files, in load order.
     const std::vector<File>& PlainFiles() const { return plain_; }
@@ -306,7 +319,7 @@ public:
     std::shared_ptr<const Snapshot> Fallback() const;
 
 private:
-    friend LoadResult Load(std::vector<File> files);
+    friend LoadResult Load(std::vector<File> files, bool strictUser);
     friend struct SnapshotLoader;
     friend struct SnapshotStorage;
 
@@ -348,6 +361,8 @@ private:
     std::unordered_map<std::string, Respelling, StringHash, std::equal_to<>> places_;
     std::vector<std::string> warnings_;
     std::vector<File> plain_;
+    std::vector<LoadFileInfo> sourceInfo_;
+    std::vector<userdict::SourceEntry> memoryUserEntries_;
     std::vector<std::string> ruleBodies_;
     userdict::Families families_;
     mutable output::Families outputFamilies_;

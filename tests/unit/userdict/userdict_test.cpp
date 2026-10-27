@@ -1,6 +1,7 @@
 #include "core/userdict/userdict.h"
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include "core/dict/builtin.h"
@@ -16,6 +17,8 @@ struct Case {
     const char* in;
     const char* want;
 };
+
+constexpr std::string_view kEhndFormatHint = " (Ehnd 형식 사전으로 보입니다: ehnd 폴더에 두세요)";
 
 std::string Collapse(const std::string& s) {
     std::string out;
@@ -185,6 +188,83 @@ HD_TEST(userdict_parse_errors) {
     HD_CHECK_EQ(Show(p.out.entries), std::string("猫 냥이 N110 @1.0"));
 }
 
+HD_TEST(userdict_ehnd_format_hint) {
+    const struct {
+        const char* in;
+        const char* errors;
+        std::size_t errorCount;
+        const char* entries;
+        bool hint;
+    } cases[] = {
+        {"\n# comment\n // comment\n", "", 0, "", false},
+        {"猫\t고양이\tn", "", 0, "猫 고양이 N110 @1.0", false},
+        {"猫\t고양이\tn\tattr=VHn", "", 0, "猫 고양이 N110 VHn @1.0", false},
+        {"猫\t고양이\tVHn", "1: unknown POS \"VHn\"", 1, "", true},
+        {"\xEF\xBB\xBF猫\t고양이\t VPl \r\n", "1: unknown POS \"VPl\"", 1, "", true},
+        {"猫\t고양이\tVBp", "1: unknown POS \"VBp\"", 1, "", true},
+        {"猫\t고양이\tQPNVHn", "1: unknown POS \"QPNVHn\"", 1, "", false},
+        {"猫\t고양이\tVHnXYZ", "1: unknown POS \"VHnXYZ\"", 1, "", false},
+        {"猫\t고양이\tvhn\n猫\t고양이\tVHN\n猫\t고양이\tVH\n猫\t고양이\tVHnX",
+         "1: unknown POS \"vhn\"\n2: unknown POS \"VHN\"\n3: unknown POS \"VH\"\n4: unknown POS \"VHnX\"",
+         4, "", false},
+        {"猫\t고양이\tnoun\n猫\t고양이\tN110\n猫\t고양이\tXYZ",
+         "1: unknown POS \"noun\"\n2: unknown POS \"N110\"\n3: unknown POS \"XYZ\"", 3, "", false},
+        {"猫\t\tVHn", "1: empty KR", 1, "", false},
+        {"猫\t고양이\tVHn\tbogus", "1: option \"bogus\": unknown option \"bogus\"", 1, "", false},
+        {"猫\t고양이\tVHn:AA", "1: POS VHn takes no conjugation class", 1, "", false},
+        {"猫\t고양이\t1\tVHn", "1: option \"VHn\": unknown option \"VHn\"", 1, "", false},
+        {"猫\t고양이\tVHn\n犬\t\tn", "1: unknown POS \"VHn\"\n2: empty KR", 2, "", false},
+        {"猫\t고양이\tVHn\n猫\t고양이\tVPl\n犬\t\tn",
+         "1: unknown POS \"VHn\"\n2: unknown POS \"VPl\"\n3: empty KR", 3, "", true},
+        {"猫\t고양이\tVHn\n猫\t고양이\tXYZ\n犬\t\tn",
+         "1: unknown POS \"VHn\"\n2: unknown POS \"XYZ\"\n3: empty KR", 3, "", false},
+        {"猫\t고양이\tVHn\n猫\t고양이\tVBp\n猫\t고양이\tXYZ\n犬\t\tn",
+         "1: unknown POS \"VHn\"\n2: unknown POS \"VBp\"\n3: unknown POS \"XYZ\"\n4: empty KR", 4, "", false},
+        {"鳥\t새\tn\n鳥\t새\tn\n鳥\t새\tn\n猫\t고양이\tVHn", "4: unknown POS \"VHn\"", 1,
+         "鳥 새 N110 @1.0 | 鳥 새 N110 @2.0 | 鳥 새 N110 @3.0", true},
+    };
+    for (const auto& c : cases) {
+        Parsed p;
+        Run(p, c.in);
+        std::string want = c.errors;
+        if (c.hint) {
+            const std::size_t end = want.find('\n');
+            want.insert(end == std::string::npos ? want.size() : end, kEhndFormatHint);
+        }
+        HD_CHECK_EQ(Errors(p.out.errors), want);
+        HD_CHECK_EQ(p.out.errors.size(), c.errorCount);
+        HD_CHECK_EQ(Show(p.out.entries), std::string(c.entries));
+    }
+}
+
+HD_TEST(userdict_ehnd_format_hint_per_file) {
+    Parsed p;
+    Context ctx{&p.codes, &p.families, nullptr};
+    const std::string_view first = "猫\t고양이\tVHn\n犬\t\tn";
+    const std::string firstErrors = "1: unknown POS \"VHn\"\n2: empty KR";
+    const auto a = Parse(first, 0, ctx);
+    HD_CHECK_EQ(Errors(a.errors), firstErrors);
+    HD_CHECK_EQ(a.errors.size(), std::size_t{2});
+
+    const auto b = Parse("犬\t\tn\n猫\t고양이\tVHn\n猫\t고양이\tVPl", 1, ctx);
+    HD_CHECK_EQ(Errors(b.errors), "1: empty KR" + std::string(kEhndFormatHint) +
+                                    "\n2: unknown POS \"VHn\"\n3: unknown POS \"VPl\"");
+    HD_CHECK_EQ(b.errors.size(), std::size_t{3});
+    HD_CHECK_EQ(Errors(a.errors), firstErrors);
+
+    const auto fixed = Parse("鳥\t새\tn", 1, ctx);
+    HD_CHECK(fixed.errors.empty());
+    HD_REQUIRE(fixed.entries.size() == 1);
+    HD_CHECK_EQ(Show(fixed.entries), std::string("鳥 새 N110 @1.0"));
+    HD_CHECK_EQ(fixed.entries[0].file, 1);
+    HD_CHECK_EQ(Errors(Parse(first, 0, ctx).errors), firstErrors);
+
+    std::vector<internal::Rec> recs;
+    HD_CHECK_EQ(internal::Compile("猫", "고양이", "VHn", "", false, nullptr, p.families, recs),
+                std::string("unknown POS \"VHn\""));
+    HD_CHECK(recs.empty());
+}
+
 // The past and infinitive rows of lemmas written without a class, and of the regular
 // homographs written with one.
 HD_TEST(userdict_auto_class) {
@@ -342,6 +422,65 @@ HD_TEST(userdict_eu_imperative_model) {
     HD_CHECK_EQ(p.out.entries[0].target, "1라고");
     HD_CHECK(!p.out.entries[1].euImperative);
     HD_CHECK(!p.out.entries[2].euImperative);
+}
+
+HD_TEST(userdict_accepted_source_count) {
+    const struct {
+        const char* in;
+        std::size_t accepted, entries, errors;
+    } cases[] = {
+        {"\n# comment\n // comment\n", 0, 0, 0},
+        {"猫\t고양이\tn", 1, 1, 0},
+        {"ゆっくり\t천천히\tadv", 1, 2, 0},
+        {"猫\t고양이\tn\thidden", 1, 1, 0},
+        {"たん\t\thon", 1, 1, 0},
+        {"猫\t고양이\tn\n犬\t\tn", 1, 1, 1},
+        {"猫\t고양이\tVHn\nゆっくり\t천천히\tadv", 1, 2, 1},
+        {"猫\t고양이\tQPNVHn", 0, 0, 1},
+    };
+    for (const auto& c : cases) {
+        Parsed normal, counted;
+        Context normalCtx{&normal.codes, &normal.families, nullptr};
+        Context countedCtx{&counted.codes, &counted.families, nullptr};
+        std::vector<SourceEntry> normalRows, countedRows;
+        normal.out = Parse(c.in, 0, normalCtx, &normalRows);
+        std::size_t accepted = 99;
+        counted.out = Parse(c.in, 0, countedCtx, &countedRows, &accepted);
+        HD_CHECK_EQ(accepted, c.accepted);
+        HD_CHECK_EQ(accepted, countedRows.size());
+        HD_CHECK_EQ(counted.out.entries.size(), c.entries);
+        HD_CHECK_EQ(counted.out.errors.size(), c.errors);
+        HD_CHECK_EQ(Show(counted.out.entries), Show(normal.out.entries));
+        HD_CHECK_EQ(Errors(counted.out.errors), Errors(normal.out.errors));
+        HD_REQUIRE(countedRows.size() == normalRows.size());
+        for (std::size_t i = 0; i < countedRows.size(); i++) {
+            HD_CHECK_EQ(countedRows[i].ja, normalRows[i].ja);
+            HD_CHECK_EQ(countedRows[i].ko, normalRows[i].ko);
+            HD_CHECK_EQ(countedRows[i].pos, normalRows[i].pos);
+            HD_CHECK_EQ(countedRows[i].options, normalRows[i].options);
+        }
+    }
+}
+
+HD_TEST(userdict_accepted_source_count_per_call) {
+    Parsed p;
+    Context ctx{&p.codes, &p.families, nullptr};
+    std::size_t accepted = 99;
+    p.out = Parse("ゆっくり\t천천히\tadv\n猫\t고양이\tn\thidden", 0, ctx, nullptr, &accepted);
+    HD_CHECK_EQ(accepted, std::size_t{2});
+    HD_CHECK_EQ(p.out.entries.size(), std::size_t{3});
+    HD_CHECK(p.out.errors.empty());
+
+    p.out = Parse("\n# comment\n猫\t고양이\tn\tbogus", 1, ctx, nullptr, &accepted);
+    HD_CHECK_EQ(accepted, std::size_t{0});
+    HD_CHECK(p.out.entries.empty());
+    HD_CHECK_EQ(p.out.errors.size(), std::size_t{1});
+
+    std::vector<SourceEntry> rows{{"既存", "기존", "n", ""}};
+    p.out = Parse("猫\t고양이\tn", 2, ctx, &rows, &accepted);
+    HD_CHECK_EQ(accepted, std::size_t{1});
+    HD_CHECK_EQ(rows.size(), std::size_t{2});
+    HD_CHECK(p.out.errors.empty());
 }
 
 HD_TEST(userdict_validated_source_rows) {
