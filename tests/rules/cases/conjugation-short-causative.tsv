@@ -1,0 +1,19 @@
+rule	input	expected	kind	layer
+conjugation:short-causative	ドーランを塗らしていただきたい	has:바르게 해	fix	conjugation
+conjugation:short-causative	少し休ましてください	has:쉬게 해 주세요	fix	conjugation
+conjugation:short-causative	本を読ましてもらった	has:읽게 해	fix	conjugation
+conjugation:short-causative	手紙を書かしてください	has:쓰게 해	fix	conjugation
+conjugation:short-causative	話聞かして ねっ？	has:듣게 해	fix	conjugation
+conjugation:short-causative	これで終わらしてください。	has:끝나게 해 주세요	fix	conjugation
+conjugation:short-causative	バイトに行かしてるやん。	has:가게 하고	fix	conjugation
+conjugation:short-causative	これ 使わしてもらいます	has:쓰게 해	fix	conjugation
+conjugation:short-causative	やらしてくださいよ	has:하게 해 주세요	fix	conjugation
+conjugation:short-causative	あいつらの人生狂わしちゃったんだよ。	has:꼬이게 해	fix	conjugation
+conjugation:short-causative	子供に食べさしてやった	has:먹게 해	fix	conjugation
+conjugation:short-causative	知らしたいことがあるんだけど	has:알게 하고 싶은	fix	conjugation
+conjugation:short-causative	動かしてください	움직여 주세요	keep	conjugation
+conjugation:short-causative	ベルを鳴らしてみた	has:울려	keep	conjugation
+conjugation:short-causative	川の美しさをあらわしています。	has:나타내고	keep	conjugation
+conjugation:short-causative	驚かしてごめん	has:놀라게 해서	keep	conjugation
+conjugation:short-causative	読ませてください	읽게 해 주세요	keep	conjugation
+conjugation:short-causative	子供を学校に行かせる。	아이를 학교에 가게 한다.	keep	conjugation

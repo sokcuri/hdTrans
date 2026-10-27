@@ -64,6 +64,22 @@ bool OneKana(std::string_view s) {
     return r.size == s.size() && r.cp >= U'ぁ' && r.cp <= U'ゖ';
 }
 
+// Whether tail starts with the short causative of a verb of kind, the causative stem of branch
+// 2 (entry, ending in せ) with し for its せ before て, た, ちゃ, ちま or ます (読まして, 塗らして,
+// 食べさして): the godan す verb that the short causative is, in the forms that read as the
+// causative's. Other kana after し begin other words (知らしめる, 食べさしの).
+bool ShortCausative(int kind, std::string_view entry, std::string_view tail) {
+    constexpr std::string_view kSe = "せ", kShi = "し";
+    if (kind == 9 || kind == 10 || kind == 11 || kind == 13 || !entry.ends_with(kSe)) return false;
+    const std::string_view stem = entry.substr(0, entry.size() - kSe.size());
+    if (!Starts(tail, stem) || !Starts(tail.substr(stem.size()), kShi)) return false;
+    const std::string_view rest = tail.substr(stem.size() + kShi.size());
+    for (const std::string_view after : {"て", "た", "ちゃ", "ちま", "ます", "まし", "ませ"}) {
+        if (Starts(rest, after)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool ProgressiveEndings(Group& g, Detail& d, std::string_view head) {
@@ -132,7 +148,8 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if (branch == 13) continue;
         const std::string_view entry = Conjugation(kind, branch);
         const bool contractedConditional = kind == 9 && branch == 3 && Starts(tail, "すりゃ");
-        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional)) continue;
+        const bool shortCausative = branch == 2 && ShortCausative(kind, entry, tail);
+        if ((kind != 7 && entry.empty()) || (!Starts(tail, entry) && !contractedConditional && !shortCausative)) continue;
         // A bare ichidan stem is no form the quoting って or と follows (行けって, 言えと are the
         // godan imperatives 行け, 言え, not potential stems); と after it only begins the
         // ておく contraction (食べとく, 食べとけ, 食べといて, 食べとかない, 食べとこう, 食べとった).
@@ -414,6 +431,13 @@ bool Item::AcceptVerbContinuation(Record* following) {
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
     if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
+    // A short causative (ShortCausative: 読まして) is read on the text path, and not where the dictionary
+    // has the す verb it spells (表す あらわして, 任す まかして, 鳴らす 鳴らして).
+    if (!matched && oldState == 2 && !Starts(tail, Conjugation(oldKind, 2))) {
+        const std::string_view entry = Conjugation(oldKind, 2);
+        const std::string stem = surface + std::string(entry.substr(0, entry.size() - std::string_view("せ").size()));
+        if (!w->settings.text || w->SuVerb(stem)) return false;
+    }
     // The られ of a dictionary causative of a shorter word in a narrative form (食べさせられた) is
     // that word's causative-passive, analysed on the shorter word; its other forms read the
     // potential (食べさせられない 먹일 수 없다).
