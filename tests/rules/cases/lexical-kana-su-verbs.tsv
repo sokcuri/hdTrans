@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:kana-su:1	タバコをふかしていた。	담배를 피우고 있었다.	fix	lookup
+dict:kana-su:2	芋をふかす。	has:찐다	fix	local
+dict:kana-su:3	ふかし芋を食べた。	찐 감자를 먹었다.	fix	lookup
+dict:kana-su:8	魅音に一泡ふかせてやろう	has:한방 먹여	fix	lookup
+dict:kana-su:5	ここはまかしとき！	여기는 맡겨 둬!	fix	lookup
+dict:kana-su:7	俺にまかしといてください	has:맡겨 주세요	fix	lookup
+dict:kana-su:1	エンジンをふかした。	엔진을 공회전시켰다.	keep	lookup
+dict:kana-su:1	海はふかい。	바다는 깊다.	keep	lookup
