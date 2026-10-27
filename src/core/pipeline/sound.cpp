@@ -248,6 +248,9 @@ struct SoundMatch {
     bool phrase = false;      // an interjection of phrases.tsv, a word rather than a sound
     bool drawn = false;       // the text ends in a kana that draws out the vowel before it (ひぃ, ふぁー)
     bool cry = false;         // a predicate said as a cry (SoundRow::cry)
+    // The Korean drawn out vowel by vowel, for a cry drawn out by two vowel kana, which only a
+    // copy of it right before draws out so (イっちゃう、イっちゃうぅぅっ 가버려, 가버려어엇).
+    std::string redrawn;
 };
 
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
@@ -269,7 +272,8 @@ std::u32string_view CryStem(const SoundMatch& m) {
 // Whether b says the cry a again with the same Korean, as it is, drawn out or clipped (やだ+やだぁ,
 // やだ+やだっ, やだっ+やだっ; not いやっ+やだっ).
 bool CryCopies(const SoundMatch& a, const SoundMatch& b) {
-    return a.cry && b.cry && a.korean == b.korean && CryStem(a) == CryStem(b);
+    const auto plain = [](std::string_view k) { return k.ends_with('~') ? k.substr(0, k.size() - 1) : k; };
+    return a.cry && b.cry && plain(a.korean) == plain(b.korean) && CryStem(a) == CryStem(b);
 }
 
 // Whether the text of the sound ends in a clipping っ or ッ of mark.clip (やだっ).
@@ -763,10 +767,12 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         if (ok && EndsInsideKatakana(p, end)) ok = false;  // するリスク is する and リスク, not するり
         // An interjection drawn out by three or more vowel kana draws out its last syllable
         // whatever its initial (だめぇぇぇっ 안 돼애애애, not 안 돼~).
+        std::string copyDrawn;
         if (ok && s.intj && runKorean.empty()) {
             size_t vowels = 0;
             for (size_t k = p + 1; k < end; k++) vowels += PlainVowel(f_[k]) != 0 && Lengthens(f_[k], f_[k - 1]);
             if (vowels >= 3) units += 'd';
+            if (vowels == 2 && s.cry && units.find('h') == std::string::npos) copyDrawn = Lengthen(Reading(s, p, end), units + 'd');
         }
         // An exclamation said as written before a question mark asks for the words
         // (よかった？ 좋았어?); drawn out it stays the exclamation (よかったぁ? 다행이다~?),
@@ -832,7 +838,7 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 }
             }
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, open, spaceAfter, s.phrase,
-                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry};
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn)};
             chosen = &s;
         }
     }
@@ -1923,7 +1929,10 @@ std::string SoundText::Write() {
                 if (k > 0 && Separate(chain[k - 1], m)) b += ' ';
                 if (k == chain.size() - 1 && doing && !m.root.empty()) {
                     b += m.root;
-                } else if (ClippedCryCopy(m, k > 0 ? CryCopies(chain[k - 1], m) : CryCopyBefore(lastCry, m))) {
+                } else if (const bool copy = k > 0 ? CryCopies(chain[k - 1], m) : CryCopyBefore(lastCry, m);
+                           copy && !m.redrawn.empty()) {
+                    b += m.redrawn;
+                } else if (ClippedCryCopy(m, copy)) {
                     b += Lengthen(m.korean, "d!");  // a clipped copy of a cry closes with ㅅ (싫어 싫엇, 싫엇, 싫엇)
                 } else {
                     b += m.korean;

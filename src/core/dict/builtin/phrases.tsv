@@ -474,11 +474,11 @@
 お酒に目がない	술이라면 사족을 못 쓰다	adj	gattr=Av
 
 // Stock phrases of erotic scenes.
-イクッ	가버려	intj
-イクゥ	가버려	intj
+イクッ	가버려	intj	cry
+イクゥ	가버려	intj	cry
 イクイク	간다 간다	intj
-イっちゃう	가버려	intj
-イっちゃ	가버려	intj
+イっちゃう	가버려	intj	cry
+イっちゃ	가버려	intj	cry
 イっちゃった	가버렸어	intj
 イキそう	갈 것 같아	intj
 イかせて	가게 해 줘	intj
