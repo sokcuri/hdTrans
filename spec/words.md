@@ -94,6 +94,8 @@
 않는다(ダンジョンさん과 ダンジョンゲート). 이름이나 일반 명사 뒤에 사전의 낱말이나 문서가 따로 쓰는 낱말이 이어진
 가타카나 구간은 합성어이지 더 긴 이름이 아니다(ゴブリンシャーマン 옆의 シャーマン). 같은 이름을 두 번 쓴 것(メイメイ)은 한 이름이다.
 일반 가타카나 낱말로 된 줄 머리 표지(セットスキル：)는 항목 이름이지 화자가 아니다.
+명사가 아닌 낱말 뒤의 ちゃんと는 부사라 경칭으로 세지 않는다(大丈夫ちゃんと 괜찮아 제대로). 문서에 여러 번 나와도
+그 낱말이 이름이 되지 않는다. 이름이나 명사 뒤의 ちゃん과 と는 경칭과 조사다(桃花ちゃんと 모모카짱과).
 
 | 원문(한 문서) | 출력 | 구분 |
 |---|---|---|
@@ -108,7 +110,7 @@
 `tests/rules/cases/names-title-marks.tsv`,
 
 `tests/rules/cases/names-release-titles.tsv`,
-`tests/rules/documents/names-katakana-compounds.tsv`
+`tests/rules/documents/names-katakana-compounds.tsv`, `tests/rules/documents/names-chanto-adverb.tsv`
 
 ### 이름 행 판정
 

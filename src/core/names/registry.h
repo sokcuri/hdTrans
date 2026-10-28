@@ -132,6 +132,7 @@ private:
     std::string CaptionNameReading(std::string_view base, std::string_view reading);
     bool BaseReading(std::string_view base, std::string_view reading, std::string_view after, bool bracket, bool styled);
     std::string HonorificRun(std::string_view line, const internal::Run& run);
+    bool NoNounWord(std::string_view t);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
