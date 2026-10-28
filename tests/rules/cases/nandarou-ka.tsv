@@ -1,0 +1,22 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:342713	異次元なんだろうか？	이차원일까?	fix	lookup
+dict:jisjk:342713	スランプなんやろか？	슬럼프일까?	fix	lookup
+dict:jisjk:342713	シャ、シャレのつもりなんだろうか……	자, 장난의 작정일까……	fix	lookup
+dict:jisjk:342713	この人も無茶振り系の人なんだろうか？	이 사람도 덤터기계의 사람일까?	fix	lookup
+dict:jisjk:342713	こういうもんなんやろか…撮影って…。	이런 걸까…촬영은….	fix	lookup
+dict:jisjk:342713	どうして、俺が許される立場なんだろうか？	왜, 내가 허락되는 입장일까?	fix	lookup
+dict:jisjk:342713	やっぱり、先生より東雲さんが好きってことなんだろうか？	역시, 선생님보다 시노노메 씨를 좋아한다는 걸까?	fix	lookup
+dict:jisjk:342713	手間をかけるっていうのはそんなにムダなことなんだろうか	수고를 들인다고 하는 것은 그렇게 소용없는 일일까	fix	lookup
+dict:jisjk:342713	私の魔力は土だから土と対話をしろということなんだろうか……	내 마력은 흙이니까 흙과 대화를 하라고 말하는 걸까……	fix	lookup
+dict:jisjk:342713	⟨この人たちは 何という名前のお笑いグループなんだろうか⟩	⟨이 사람들은 뭐라는 이름의 웃음 그룹일까 ⟩	fix	lookup
+dict:jisjk:342713	<ここが旅の終わりなんだろうか>	<여기가 여행의 끝나일까>	fix	lookup
+dict:jisjk:342714	　やっぱり、30レベル差は大きすぎるよね。毒が効きやすい敵とかなんだろうか。	 역시, 30레벨차이는 너무 크지. 독이 효과가 있기 쉬운 적이라든지 뭘까.	fix	lookup
+dict:jisjk:342714	なんだろうか	뭘까	fix	lookup
+dict:jisjk:342714	司令はん、なんやろかー？	사령은, 뭘까~?	fix	lookup
+dict:jisjk:342714	なんだろうか…なんだ あの顔…｡	뭘까…야 그 얼굴….	fix	lookup
+dict:jisjk:342714	これはなんだろうか。	이것은 뭘까.	fix	lookup
+dict:jisjk:342714	あの音はなんだろうか？	그 소리는 뭘까?	fix	lookup
+dict:jisjk:342714	なんだろう	무엇일까	keep	lookup
+dict:jisjk:342714	これはなんだろう？	이것은 무엇일까?	keep	lookup
+dict:jisjk:342714	なんだろうね	무엇일까	keep	lookup
