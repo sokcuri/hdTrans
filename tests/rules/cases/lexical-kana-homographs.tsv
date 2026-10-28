@@ -11,7 +11,7 @@ lookup:kana-homograph	「三角テントだったら２人じゃきつかった�
 lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이야!	fix	lookup
 lookup:kana-homograph	あ、今はね、マルヒトマルマルよ。	has:지금은 말이야	fix	lookup
 lookup:kana-homograph	車にはねられた。	차에 받혔다.	keep	lookup
-lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨, 그렇지 않아……저, 마신 라페르이죠?」	keep	lookup
+lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨 그렇지 않아……저, 마신 라페르이죠?」	keep	lookup
 validity:genki-nai	「……元気ない？」	「……기운이 없어?」	fix	analysis
 validity:genki-nai	司令官、元気ないね。	사령관, 기운이 없네.	fix	analysis
 validity:genki-nai	提督、あなたも元気ないわね！	제독, 당신도 기운이 없네!	fix	analysis
@@ -24,7 +24,7 @@ dict:jisjk:266093	異常なし、です！	이상 없음, 입니다!	fix	local
 dict:jisjk:266093	提督、鎮守府内は異常なし、です！	제독, 진수부내는 이상 없음, 입니다!	fix	local
 dict:jisjk:266093	爆雷も問題なし、魚雷もOK、と。	폭뢰도 문제 없음, 어뢰도 OK, 라고.	fix	local
 dict:jisjk:266093	問題なし。	문제 없음.	keep	local
-sound:teka-open	てかおかしい	그보다, 이상하다	fix	sound
+sound:teka-open	てかおかしい	그보다 이상하다	fix	sound
 sound:teka-open	てかイケメン納得だわ	그보다 미남 납득이야	fix	sound
 sound:teka-open	マルサン、マルマル。てかさ、うちらもカタパルト欲しくない？	0300. 그보다, 중 등도 캐터펄트 갖고 싶지 않아?	fix	sound
 sound:teka-open	説教を食らわしてから一週間が経った	lacks:그보다	keep	sound

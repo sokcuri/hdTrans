@@ -15,7 +15,7 @@ normalize:nsu	だから　俺も　後ないんすよ。	그러니까 나도 후
 normalize:nsu	きっと 性に合ってんすよこの仕事	분명 성미에 맞고 있는 거예요 이 일	fix	normalize
 normalize:nsu	なんか弱い者苛めみたいになってんすけど	has:되어 있는데요	fix	normalize
 normalize:nsu	桃太郎機関と違って俺らは何の権限もないんすから	모모타로 기관과 달리 우리는 아무 권한도 없으니까	fix	normalize
-normalize:nsu	じゃあ 来ないんすかね	그럼, 오지 않습니까	fix	normalize
+normalize:nsu	じゃあ 来ないんすかね	그럼 오지 않습니까	fix	normalize
 normalize:nsu	いいんじゃないんすかね	좋지 않습니까	fix	normalize
 normalize:nsu	行かないんすか？	가지 않나요?	keep	normalize
 normalize:nsu	知らないんすか	알지 않나요	keep	normalize

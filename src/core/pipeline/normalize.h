@@ -156,7 +156,8 @@ std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool 
 // dash with a small っ (あれ、 あれっ、, え―― えっ――, えぇ？ えっ？), but not あれ when a
 // particle follows its …‥ or dash run
 // (あれ――は何だ), え after an ellipsis or a dash before a question mark as えっ
-// (へ……え？ へ……えっ？), じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
+// (へ……え？ へ……えっ？), じゃあ before a word with a comma that reads as a pause and is not
+// written (output::kSilentComma: じゃあどっち じゃあ、どっち 그럼 어느 쪽).
 std::string RewriteInterjections(std::string_view text);
 
 // Words said with an emphatic っ or ん inside written plain (さっすが さすが, しっかたない

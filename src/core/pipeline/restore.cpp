@@ -404,6 +404,31 @@ std::string KoreanCleanup(std::string_view s) {
     return out;
 }
 
+std::string WriteSilentCommas(std::string_view s) {
+    const std::u32string rs = Runes(s);
+    if (!Contains(rs, output::kSilentComma)) return std::string(s);
+    std::u32string out;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] != output::kSilentComma) {
+            out.push_back(rs[i]);
+            continue;
+        }
+        size_t k = out.size();
+        while (k > 0 && out[k - 1] == U' ') k--;
+        if (k > 0 && out[k - 1] == U',') {
+            out.erase(k - 1, 1);
+            // The words on its sides stay apart; a mark after it closes on the word before (참나!).
+            size_t j = i + 1;
+            while (j < rs.size() && rs[j] == U' ') j++;
+            const bool word = j < rs.size() && std::u32string_view(U"!?.,…‥~)」』）】>").find(rs[j]) == std::u32string_view::npos;
+            while (!out.empty() && out.back() == U' ') out.pop_back();
+            if (word) out.push_back(U' ');
+            i = j - 1;
+        }
+    }
+    return Utf8(out);
+}
+
 std::string WriteDropped(std::string_view s) {
     const std::u32string rs = Runes(s);
     bool any = false;
@@ -916,7 +941,7 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
     });
     st.line = UnescapePrivateUse(WriteLaughter(
         DropEchoedGlosses(DropParticleMarks(
-            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(WriteStress(output::String(st.korean))))))))),
+            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(WriteStress(WriteSilentCommas(output::String(st.korean)))))))))),
         output::String(typed)));
     if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;

@@ -369,7 +369,7 @@ HD_TEST(pipeline_sound) {
         {"待って！…そう？", "待って！…그래？"},
         {"したい…ね？", "したい…ね？"},
         // いえ that opens an utterance before a word is the answer; 言え takes an ending.
-        {"いえなんでも", "아뇨, なんでも"},
+        {"いえなんでも", "아뇨,\xEE\x80\x93 なんでも"},
         {"いえない", "いえない"},
         // かかれ that opens an utterance is the order to attack.
         {"これより突入。かかれっ！", "これより突入。덤벼라！"},

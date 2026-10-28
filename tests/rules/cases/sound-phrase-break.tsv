@@ -29,3 +29,20 @@ segment:phrase-break	ありがと 助かったよ。	고마워 살았어.	keep	s
 segment:phrase-break	アッ ペット可でしたよね？	앗 펫 가능이었어요?	keep	segment
 segment:phrase-break	おっ 入った！	오 들어갔다!	keep	segment
 segment:phrase-break	ふわふわはしてた	푹신푹신은 했다	keep	segment
+segment:phrase-break	じゃあ 始めようか	그럼 시작할까	fix	segment
+segment:phrase-break	じゃあ、始めようか	그럼, 시작할까	keep	segment
+segment:phrase-break	じゃあどっちがいい？	그럼 어느 쪽이 좋아?	fix	segment
+segment:phrase-break	じゃあ悪いけど	그럼 미안한데	fix	segment
+segment:phrase-break	じゃあ どうぞ 座って｡	그럼 어서 앉아.	fix	segment
+segment:phrase-break	じゃあさ 今日からさ下の名前で呼ぼうよ｡	그럼 오늘부터 이름으로 부르자.	fix	segment
+segment:phrase-break	じゃあさ…｡	그럼….	fix	segment
+segment:phrase-break	(春斗) ってかさ この冷蔵庫俺 もらっていいんだよな？	has:그보다 이 냉장고	fix	segment
+segment:phrase-break	≫俺は インチで家なんか建てらんねえよ ったくよ！	has:참나!	fix	segment
+segment:phrase-break	(中岡)あっはい｡	(나카오카) 아 네.	fix	segment
+segment:phrase-break	せ～の 出てきてくれ	하나 둘~ 나와 줘	fix	segment
+segment:phrase-break	暑かったでしょ！どうぞどうぞ｡	has:자 어서 어서	fix	segment
+segment:phrase-break	ねえってば	있잖아 좀	fix	segment
+segment:phrase-break	ちょっ待て！	기 기다려!	fix	segment
+segment:phrase-break	ばあちゃんちは　ここ！かっ手に出ちゃ　だめ！	has:소 손에	fix	segment
+segment:phrase-break	近所の居酒屋で飲食し、さて、帰ろうか、と店を出た。	has:자 그럼, 돌아갈까	fix	segment
+segment:phrase-break	「うん、どうぞどうぞ」	「응, 자 어서 어서」	fix	segment

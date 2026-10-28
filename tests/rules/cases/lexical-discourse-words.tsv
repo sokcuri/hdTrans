@@ -14,9 +14,9 @@ cx:nante-said:10	今なんて言った？	지금 뭐라고 말했어?	fix	rewrit
 cx:nante-said:10	さっきなんて言ったの？	조금 전 뭐라고 말했어?	fix	rewrites
 cx:nante-said:10	なんて言ったの？	뭐라고 말했어?	keep	local
 cx:nante-said:10	婚約破棄なんて言われても困る。	파혼 같은 건 해도 곤란하다.	current	local
-dict:function-nouns:60	そう今、俺は落ちている。	그래, 지금, 나는 떨어져 있다.	fix	local
-dict:function-nouns:60	そう荒野だ。	그래, 황야다.	fix	local
-dict:function-nouns:60	そうそれ、と桜庭が扇子を閉じる。	그래, 그것, 이라고 사쿠라바가 부채를 접는다.	fix	local
+dict:function-nouns:60	そう今、俺は落ちている。	그래 지금, 나는 떨어져 있다.	fix	local
+dict:function-nouns:60	そう荒野だ。	그래 황야다.	fix	local
+dict:function-nouns:60	そうそれ、と桜庭が扇子を閉じる。	그래 그것, 이라고 사쿠라바가 부채를 접는다.	fix	local
 dict:function-nouns:60	そう言えば、今日は休みだ。	그러고 보니, 오늘은 휴일이다.	keep	defaults
 dict:function-nouns:60	そう思った。	그렇게 생각했다.	keep	defaults
 dict:function-nouns:60	そう簡単にはいかない。	그렇게 간단하지는 않다.	keep	defaults

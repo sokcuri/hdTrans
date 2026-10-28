@@ -21,9 +21,11 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/pipeline/pattern.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
+#include "core/text/utf8.h"
 #include "core/tokenizer/canonical.h"
 
 namespace hdTrans::pipeline {
@@ -741,7 +743,9 @@ std::string RewriteInterjections(std::string_view text) {
     s = ReplaceAll(s, StartEe, [](const Match& m) { return Cat({m.group[1], m.group[2], "えっ", m.group[3]}); });
     s = ReplaceAll(s, PauseEe, [](const Match& m) { return Cat({m.group[1], "えっ", m.group[2]}); });
     return ReplaceAll(s, StartJaa, [](const Match& m) {
-        return Cat({m.group[1], m.group[2], "じゃあ、", m.group[3]});
+        std::string comma = "、";
+        text::AppendRune(comma, output::kSilentComma);
+        return Cat({m.group[1], m.group[2], "じゃあ", comma, m.group[3]});
     });
 }
 

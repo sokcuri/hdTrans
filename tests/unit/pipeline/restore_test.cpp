@@ -425,3 +425,14 @@ HD_TEST(pipeline_laughter_letters) {
     };
     for (const auto& c : typed) HD_CHECK_EQ(pipeline::WriteLaughter(c.in, c.typed), std::string(c.want));
 }
+
+HD_TEST(pipeline_write_silent_commas) {
+    // The comma right before the mark goes with it; the words on its sides stay apart, and a mark
+    // after it closes on the word before.
+    const char* const mark = "\xEE\x80\x93";
+    HD_CHECK_EQ(pipeline::WriteSilentCommas(std::string("그럼,") + mark + " 시작할까"), std::string("그럼 시작할까"));
+    HD_CHECK_EQ(pipeline::WriteSilentCommas(std::string("그럼,") + mark + "어느 쪽"), std::string("그럼 어느 쪽"));
+    HD_CHECK_EQ(pipeline::WriteSilentCommas(std::string("참나,") + mark + "!"), std::string("참나!"));
+    HD_CHECK_EQ(pipeline::WriteSilentCommas(std::string("그럼,") + mark + " …."), std::string("그럼…."));
+    HD_CHECK_EQ(pipeline::WriteSilentCommas("그럼, 시작할까"), std::string("그럼, 시작할까"));  // a comma of the source
+}
