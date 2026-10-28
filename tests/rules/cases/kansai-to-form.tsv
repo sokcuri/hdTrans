@@ -39,3 +39,5 @@ conjugation:to-form	サンドウィッチマン 確かにすごいウケとり�
 normalize:contracted-toru	錦玉。　気に入ってくれとったよな。	금옥. 마음에 들어 주고 있었지.	fix	normalize
 normalize:contracted-toru	知らんです。妻は妻の考えで動いてくれとるんです。	모르지 않습니다. 아내는 아내의 생각으로 움직여 주고 있습니다.	fix	normalize
 normalize:contracted-toru	相変わらず　太一のためにやってくれとるんやな。	변함없이 타이이치를 위해 해 주고 있는구나.	fix	normalize
+conjugation:to-form	見てしまうとっていうのは	봐버리면이라는 것은	keep	conjugation
+conjugation:to-form	言うとって	말하고	fix	conjugation

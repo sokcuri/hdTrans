@@ -111,11 +111,15 @@ bool ShortCausative(int kind, std::string_view entry, std::string_view tail) {
 }
 
 // Whether tail starts with a form of the おる after a と form, by the table: not its passive or
-// causative, which read as those of the 取る that と also starts (言うとられました), and its
-// continuative り only before the ます it takes there (覚えとります; じっとり is an adverb).
+// causative, which read as those of the 取る that と also starts (言うとられました), its
+// continuative り only before the ます it takes there (覚えとります; じっとり is an adverb), and its
+// て form って not before いう or 言う, where the って quotes the clause that と ends (見てしまうと
+// っていうのは).
 bool OruForm(std::string_view tail, int& branch, int& length) {
-    return AnalyseVerbTail(kJaO, '8', tail, branch, length) && branch != 1 && branch != 2 &&
-           (branch != 10 || tail.substr(static_cast<std::size_t>(length)).starts_with(kJaMa));
+    if (!AnalyseVerbTail(kJaO, '8', tail, branch, length) || branch == 1 || branch == 2) return false;
+    const std::string_view rest = tail.substr(static_cast<std::size_t>(length));
+    if (branch == 10 && !rest.starts_with(kJaMa)) return false;
+    return !(tail.substr(0, static_cast<std::size_t>(length)) == "って" && (rest.starts_with("いう") || rest.starts_with("言")));
 }
 
 }  // namespace
