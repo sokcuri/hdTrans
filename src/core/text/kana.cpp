@@ -177,6 +177,18 @@ bool LongVowel(std::string_view prev, std::string_view vowel, Preset p) {
 
 }  // namespace
 
+bool SpellsSound(std::string_view kana, std::string_view korean, bool loanword) {
+    std::string ko;
+    for (const char c : korean) {
+        if (c != ' ') ko += c;
+    }
+    if (ko.empty()) return false;
+    for (const Preset p : {Preset::Fan, Preset::FanShort, Preset::Official}) {
+        if ((p != Preset::Official || loanword) && FromKana(kana, p) == ko) return true;
+    }
+    return false;
+}
+
 std::string FromKana(std::string_view reading, Preset p, bool singleLongPair) {
     std::vector<Mora> ms;
     if (!Morae(reading, ms)) return "";

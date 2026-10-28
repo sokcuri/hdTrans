@@ -17,6 +17,11 @@ enum class Preset {
     Official,
 };
 
+// Whether the Korean korean, spaces left out, only spells the sound of kana as a name is written
+// (Preset::Fan or FanShort; パラパラ 파라파라, フタバ 후타바), or with loanword as a loanword is
+// written too (Preset::Official): such a row gives the word no meaning of its own.
+bool SpellsSound(std::string_view kana, std::string_view korean, bool loanword);
+
 // The kana reading of one word (hiragana or katakana) in Hangul under p; "" when
 // reading is empty or holds anything other than kana. singleLongPair limits FanShort
 // shortening to non-overlapping vowel pairs.

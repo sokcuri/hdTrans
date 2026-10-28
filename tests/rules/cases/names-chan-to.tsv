@@ -3,6 +3,7 @@ rule	input	expected	kind	layer
 names:nickname-chanto	ふたばちゃんと遊ぶ。	후타바짱과 논다.	fix	fixed
 names:nickname-chanto	ふたばちゃんと話そう。	후타바짱과 이야기하자.	fix	fixed
 names:nickname-chanto	ふたばちゃんと。	후타바짱과.	fix	fixed
+names:katakana-honorific	ふたばチャンと遊ぶ。	후타바짱과 논다.	fix	fixed
 names:nickname-chanto	ふたばちゃんとご飯を食べた。	후타바짱과 밥을 먹었다.	keep	fixed
 names:nickname-chanto	ナナちゃんと仲良くね。	나나짱과 사이 좋게.	keep	fixed
 names:nickname-chanto	わたしもマキちゃんと同じです	저도 마키짱과 같습니다	keep	fixed

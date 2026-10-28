@@ -396,9 +396,21 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
     return pieces;
 }
 
+// Whether the name layer reads s as a person.
+bool LayerPerson(std::string_view s, const dict::Snapshot& snap) {
+    for (const dict::Record& rec : snap.NameRecords(s)) {
+        if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN")) return true;
+    }
+    return false;
+}
+
+// Whether the Korean of a dictionary row only spells the sound of its katakana key
+// (パラパラ 파라파라): such a row gives the run no meaning.
+bool SoundGloss(const dict::Candidate& c) { return text::SpellsSound(c.source, c.target, true); }
+
 // The length of the katakana name that kana ends in an honorific after (ヨウタサマ: 3), or
-// 0: a name of the name layer only or no dictionary word, not after オ (オジサン) nor a
-// run the document shows to be a name whole, before
+// 0: a name of the name layer only or of rows that spell its sound (フタバ 후타바), or no
+// dictionary word, not after オ (オジサン) nor a run the document shows to be a name whole, before
 // サマ サン クン チャン or ドノ, the whole run no dictionary word in katakana or hiragana.
 size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx, const dict::Snapshot& snap) {
     for (const std::u32string_view h : {std::u32string_view(U"サマ"), std::u32string_view(U"サン"),
@@ -414,7 +426,7 @@ size_t KataNameBeforeHonorific(std::u32string_view kana, const LineContext& ctx,
         // A name of the name layer only, or no word (タン of タンサン is a word).
         const std::string key = Utf8(name);
         for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
-            if (c.codes != nullptr && !c.codes->sem.HasPrefix("QPN")) return 0;
+            if (c.codes != nullptr && !c.codes->sem.HasPrefix("QPN") && !SoundGloss(c)) return 0;
         }
         return name.size();
     }
@@ -747,19 +759,6 @@ bool ConjugatesWith(int kind, std::string_view text) {
     return false;
 }
 
-// Whether the Korean of a dictionary row only spells the sound of its katakana key
-// (パラパラ 파라파라): such a row gives the run no meaning.
-bool SoundGloss(const dict::Candidate& c) {
-    std::string ko;
-    for (const char ch : c.target) {
-        if (ch != ' ') ko += ch;
-    }
-    for (const text::Preset p : {text::Preset::Fan, text::Preset::FanShort, text::Preset::Official}) {
-        if (text::FromKana(c.source, p) == ko) return true;
-    }
-    return false;
-}
-
 // The hiragana spelling of a katakana run that writes a native word for emphasis, or "":
 //   - a verb or i-adjective stem that the hiragana after the run conjugates (カブれない
 //     かぶれない, ナメられ なめられ, ビビッた びびった) or that runs on into the text after it
@@ -960,8 +959,33 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
 
 namespace {
 
+// Whether before ends in a name written in hiragana or kanji: two to four hiragana or two to
+// four kanji that the name layer reads as a person and the other dictionaries only as a proper
+// noun or not at all (ふたば, not この).
+bool NameEnds(std::string_view before, const dict::Snapshot& snap) {
+    const char32_t last = LastRune(before).cp;
+    const bool kanji = IsKanjiRune(last);
+    if (!kanji && !IsHiraganaRune(last)) return false;
+    size_t start = before.size();
+    for (int n = 1; n <= 4 && start > 0; n++) {
+        const text::Rune r = LastRune(before.substr(0, start));
+        if (r.size == 0 || (kanji ? !IsKanjiRune(r.cp) : !IsHiraganaRune(r.cp))) break;
+        start -= r.size;
+        if (n < 2) continue;
+        const std::string_view t = before.substr(start);
+        if (!LayerPerson(t, snap)) continue;
+        bool word = false;
+        for (const dict::Candidate& c : snap.RetrieveRecords(t, dict::LookupMode::General)) {
+            word = word || (c.codes != nullptr && !c.codes->sem.HasPrefix("QPN") && !c.codes->part.ProperNoun());
+        }
+        if (!word) return true;
+    }
+    return false;
+}
+
 // text with the katakana honorific that ends a katakana run after a name, written in
-// hiragana (ヨウタサマ ヨウタさま).
+// hiragana (ヨウタサマ ヨウタさま), and so with a katakana run that is only the honorific
+// after a name in hiragana or kanji (ふたばチャン ふたばちゃん).
 std::string KataHonorificsIn(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::string b;
     size_t at = 0;
@@ -974,8 +998,10 @@ std::string KataHonorificsIn(std::string_view text, const LineContext& ctx, cons
         const size_t start = i;
         i += RunOf(text.substr(i), IsKatakanaRune);
         const std::u32string kana = Runes(text.substr(start, i - start));
-        const size_t n = KataNameBeforeHonorific(kana, ctx, snap);
-        if (n == 0) continue;
+        size_t n = KataNameBeforeHonorific(kana, ctx, snap);
+        if (n == 0 && !(dict::InClass(HDTRANS_CLASS("honorific.katakana-name"), Utf8(kana)) && NameEnds(text.substr(0, start), snap))) {
+            continue;
+        }
         b.append(text.substr(at, start - at));
         b += Utf8(std::u32string_view(kana).substr(0, n));
         b += ToHiragana(Utf8(std::u32string_view(kana).substr(n)));
@@ -1087,14 +1113,6 @@ namespace {
 constexpr std::u32string_view kParticleRunes = U"はがをにともへでや";
 
 bool NicknameRune(char32_t r) { return IsHiraganaRune(r) || r == U'ー'; }
-
-// Whether the name layer reads s as a person.
-bool LayerPerson(std::string_view s, const dict::Snapshot& snap) {
-    for (const dict::Record& rec : snap.NameRecords(s)) {
-        if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN")) return true;
-    }
-    return false;
-}
 
 // Whether s is a person name of the name layer that no dictionary reads as a person noun
 // (はとこ 육촌).
