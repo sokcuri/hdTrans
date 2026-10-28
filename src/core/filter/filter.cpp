@@ -357,6 +357,7 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
         }
     }
     pcre2_compile_context_free_16(context);
+    for (const Filters::Rule& r : fs.pre_.rules) AddMarkCharacters(r.src, r.dest, fs.marks_);
     fs.pre_.matcher.Build();
     fs.post_.matcher.Build();
     fs.defaults_ = toggles.states;
@@ -722,6 +723,38 @@ void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered) {
         const std::size_t l = to[g->left], r = to[g->right];
         if (l == SIZE_MAX || r != l + 1) continue;
         filtered.insert(b.starts[r], source.substr(a.starts[g->left + 1], a.starts[g->right] - a.starts[g->left + 1]));
+    }
+}
+
+namespace {
+
+std::u32string Runes32(std::u16string_view s) {
+    std::u32string out;
+    for (std::size_t i = 0; i < s.size(); i++) {
+        char32_t c = s[i];
+        if (c >= 0xD800 && c <= 0xDBFF && i + 1 < s.size() && s[i + 1] >= 0xDC00 && s[i + 1] <= 0xDFFF) {
+            c = 0x10000 + ((c - 0xD800) << 10) + (s[++i] - 0xDC00);
+        }
+        out.push_back(c);
+    }
+    return out;
+}
+
+bool MarkCharacter(char32_t c) {
+    const bool kana = (c >= 0x3040 && c <= 0x30FF) || (c >= 0x31F0 && c <= 0x31FF) || (c >= 0xFF66 && c <= 0xFF9F);
+    const bool hangul = (c >= 0xAC00 && c <= 0xD7A3) || (c >= 0x1100 && c <= 0x11FF) || (c >= 0x3130 && c <= 0x318F);
+    return c >= 0x80 && !kana && !hangul && !text::IsKanji(c) && !text::IsDigit(c) && !text::IsPunct(c) &&
+           !text::IsSymbol(c) && !text::IsSpace(c);
+}
+
+}  // namespace
+
+void AddMarkCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& marks) {
+    const std::u32string from = Runes32(src);
+    for (const char32_t c : Runes32(dest)) {
+        if (!MarkCharacter(c) || from.find(c) != std::u32string::npos) continue;
+        const auto at = std::lower_bound(marks.begin(), marks.end(), c);
+        if (at == marks.end() || *at != c) marks.insert(at, c);
     }
 }
 

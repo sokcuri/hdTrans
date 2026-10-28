@@ -13,6 +13,7 @@
 #include "core/engine.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
+#include "core/engine/raw.h"
 #include "core/filter/ehnd.h"
 #include "core/filter/filter.h"
 #include "hdtest.h"
@@ -355,6 +356,34 @@ HD_TEST(EngineEhndKeepsSpaceAfterNumber) {
     HD_CHECK(e.FilterErrors().empty());
     HD_CHECK_EQ(Translate(e, "3猫"), "3고양이");
     HD_CHECK_EQ(Translate(e, "3 猫"), "3 고양이");
+}
+
+// A sign the loaded pre-filter writes as a mark is no word of its own: it stays joined to its
+// neighbours as the post-filter expects, on the text path and the raw path, also where the source
+// has it. Other signs stay words (LAY-15), and the marks are known only while the filter is loaded.
+HD_TEST(EngineEhndMarksStayJoined) {
+    TempFolder dicts("dicts"), ehnd("ehnd");
+    dicts.Write("base.tsv",
+                "key\tko\tpos\tsem\tgram\tdict\trule\tflags\tprio\treading\tid\n"
+                "犬\t개\tN110\t\t\tGN\t\t\t\t\t1\n"
+                "猫\t고양이\tN110\t\t\tGN\t\t\t\t\t2\n"
+                "が\t가\tP200\t\t\tGN\t\t\t\t\t3\n");
+    ehnd.Write("PreFilter_a.txt", "が猫\tがρ猫\t1\t0\n");
+    ehnd.Write("PostFilter_a.txt", "가ρ\t가 \t1\t0\n");
+    hdTrans::Engine e(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(e.Open({dicts.path.string()}));
+    HD_CHECK_EQ(Translate(e, "犬がρ猫"), "개가 ρ고양이");
+    HD_CHECK_EQ(hdTrans::internal::TranslateRaw(e, "犬がρ猫"), "개가 ρ고양이");
+    HD_CHECK(e.OpenEhnd(ehnd.path.string()));
+    HD_CHECK(e.FilterErrors().empty());
+    HD_CHECK_EQ(Translate(e, "犬が猫"), "개가 고양이");
+    HD_CHECK_EQ(Translate(e, "犬が猫\n犬が猫"), "개가 고양이\n개가 고양이");
+    HD_CHECK_EQ(hdTrans::internal::TranslateRaw(e, "犬が猫"), "개가 고양이");
+    HD_CHECK_EQ(Translate(e, "犬がρ猫"), "개가 고양이");
+    HD_CHECK_EQ(Translate(e, "犬がα猫"), "개가 α고양이");
+    HD_CHECK_EQ(Translate(e, "犬が①"), "개가 ①");
+    HD_CHECK_EQ(Translate(e, "犬が+1"), "개가 +1");
+    HD_CHECK_EQ(Translate(e, "犬が♪猫"), "개가♪고양이");
 }
 
 namespace {

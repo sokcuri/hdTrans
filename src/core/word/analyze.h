@@ -95,6 +95,9 @@ struct Settings {
     int hanjaToHangul = 1;    // synthetic targets: kanji as their Hangul reading
     int deleteJapan = 1;      // synthetic targets: kana dropped
     int tokenizerOption = 1;  // a J2 ending matches at the end of the token text
+    // The marks the loaded pre-filter writes (filter::Filters::Marks), sorted: such a character
+    // standing alone is no word of its own, so it stays joined to its neighbours for the post-filter.
+    std::span<const char32_t> filterMarks;
 };
 
 // Called after every dictionary lookup with the token being processed (-1 before the

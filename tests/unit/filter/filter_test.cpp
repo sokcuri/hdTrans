@@ -8,6 +8,7 @@
 
 #include "core/filter/ehnd.h"
 #include "core/filter/matcher.h"
+#include "core/text/utf8.h"
 #include "hdtest.h"
 
 using namespace hdTrans;
@@ -503,4 +504,21 @@ HD_TEST(FilterKeepSpacesAfterNumbers) {
     HD_CHECK_EQ(keep(longSource, longFiltered), longSource);
     // Unchanged text stays.
     HD_CHECK_EQ(keep("3 ボス", "3 ボス"), "3 ボス");
+}
+
+HD_TEST(FilterMarkCharacters) {
+    auto marks = [](std::initializer_list<std::pair<const char*, const char*>> rows) {
+        std::vector<char32_t> out;
+        for (const auto& [src, dest] : rows) AddMarkCharacters(Utf16(src), Utf16(dest), out);
+        std::string joined;
+        for (const char32_t c : out) hdTrans::text::AppendRune(joined, c);
+        return joined;
+    };
+    // Characters a replacement writes that its source lacks, once each and sorted.
+    HD_CHECK_EQ(marks({{"あるため", "あるためρ"}, {"てよ、", "てчmA、"}, {"ため、", "ためρ、"}}), "ρч");
+    HD_CHECK_EQ(marks({{"ルーデウス", "Ω"}, {"ʞカズオ", "ʞカズオҡ"}, {"い", "い\u033A"}}), "\u033AΩҡ");
+    // Kana, kanji, Hangul, ASCII, digits, punctuation, symbols and spaces are no marks, nor is a
+    // character the source has.
+    HD_CHECK_EQ(marks({{"あ", "在る　요1A、。！"}, {"ない", "ない▂"}, {"「", "Ⓐ"}, {"好き", "好き♪★"}}), "");
+    HD_CHECK_EQ(marks({{"①", "①"}, {"(?<=犬)α", "αβ"}}), "β");
 }

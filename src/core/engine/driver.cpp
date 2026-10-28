@@ -537,6 +537,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
     }
     s.sessionSenses = text ? sessionSenses : nullptr;
     s.ruleTally = options.ruleTally;
+    if (options.filters != nullptr) s.filterMarks = options.filters->Marks();
     return s;
 }
 
