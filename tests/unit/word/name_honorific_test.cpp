@@ -19,9 +19,12 @@ HD_TEST(word_name_honorific_after_proper_noun) {
              "ちゃん\t짱\tN110\tVHn\tTu\tGN\t0\t4\t\n"
              "と\t(와)과\tP200\t\t\tGN\t0\t5\t\n"
              "が\t(이)가\tP200\t\t\tGN\t0\t6\t\n"
-             "ここ\t여기\tI120\t\t\tGN\t0\t8\t\n"},
+             "ここ\t여기\tI120\t\t\tGN\t0\t8\t\n"
+             "アリス\t앨리스\tN110\tVHn\t\tGN\t0\t11\t\n"
+             "マスク\t마스크\tN110\t\t\tGN\t0\t12\t\n"},
         {0, "names.tsv",
-         "#! layer=names\n" + header + "ふたば\t후타바\tN130\tQPNVHn\tWb\tGN\t0\t9\t\n"},
+         "#! layer=names\n" + header + "ふたば\t후타바\tN130\tQPNVHn\tWb\tGN\t0\t9\t\n" +
+             "アリス\t앨리스\tN130\tQPNVHn\tWb\tGN\t0\t13\t\n"},
     };
     const auto loaded = hdTrans::dict::Load(files);
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
@@ -34,6 +37,9 @@ HD_TEST(word_name_honorific_after_proper_noun) {
         {"ふたばちゃんと", "후타바짱과"},
         {"ふたばチャンが", "후타바짱이"},
         {"フタバチャンが", "후타바짱이"},
+        // A katakana name of the name layer, and a common word.
+        {"アリスちゃんと", "앨리스짱과"},
+        {"マスクちゃんと", "마스크 제대로"},
         // No person of the name layer before the adverb.
         {"ここちゃんと", "여기 제대로"},
     };

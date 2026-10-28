@@ -1889,7 +1889,23 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     const std::string_view text = From(full, cursor);
     // The nickname すけ also follows a person name of the base dictionary (里奈すけ).
     const bool person = !name->group->entries.empty() && std::string_view(name->group->entries[0]->attr).starts_with("QPN");
-    if (!name->IsNameItem() && !(person && NicknameSuke(text))) return nullptr;
+    // A katakana name of the name layer takes ちゃん as the honorific before と too (アリスちゃんと
+    // 앨리스짱과, not the adverb ちゃんと), unless a dictionary gives it a common sense other than a
+    // person or its sound as names are written (マスクちゃんと 마스크 제대로).
+    const auto katakanaPerson = [&] {
+        const std::string_view surface = name->group->surface;
+        if (!text.starts_with("ちゃん") || NameClassOf(LastChar(surface)) != kClassKatakana) return false;
+        bool layer = false;
+        for (const dict::Record& r : snapshot.NameRecords(surface)) layer = layer || (r.codes != nullptr && r.codes->sem.HasCode("QPN"));
+        if (!layer) return false;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(surface, dict::LookupMode::General)) {
+            if (c.codes == nullptr || c.source != surface || c.user != nullptr) continue;
+            if (c.codes->sem.HasCode("QPN") || c.codes->sem.HasCode("VHn") || c.codes->part.ProperNoun()) continue;
+            if (!text::SpellsSound(surface, c.target, false)) return false;
+        }
+        return true;
+    };
+    if (!name->IsNameItem() && !(person && NicknameSuke(text)) && !katakanaPerson()) return nullptr;
     const bool titleWord = dict::StartsWithMember(HDTRANS_CLASS("noun.title-word"), text) > 0;
     std::string_view key, kr;
     bool space = false;
