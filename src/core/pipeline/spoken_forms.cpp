@@ -362,16 +362,20 @@ bool KansaiConjecture(std::string_view s, size_t pos, Match& m) {
         return true;
     }
     p = pos;
+    // After the polite negative ません or まへん the conjecture is でしょう (もらえまへんやろか).
+    const std::string_view head = s.substr(0, pos);
+    const bool politeNegative = head.ends_with("ません") || head.ends_with("まへん");
     if (OneOf(s, p, U"そせど")) {
         if (pos > 0 && IsHiraganaClass(LastRune(s.substr(0, pos)).cp)) return false;
         if (!Lit(s, p, "やろ")) return false;
-    } else if (!BeforeCopula(s, pos)) {
+    } else if (!politeNegative && !BeforeCopula(s, pos)) {
         return false;
     } else if (!Lit(s, p, "やろ")) {
         if (!Lit(s, p, "じゃろ")) return false;
         if (size_t q = p; Lit(s, q, "う") && OpenParticleAt(s, q)) p = q;
     }
     if (!OpenParticleAt(s, p)) return false;
+    if (politeNegative) m.group[1] = "でしょう";
     m.end = p;
     return true;
 }
@@ -389,6 +393,35 @@ std::string ReplaceKansaiNegative(const Match& m) {
     if (stem == "あら" || stem == "あれ") stem = {};
     else if (stem == "せえ") stem = "し";
     return Cat({stem, g.group[2].empty() ? "ない" : "なかった"});
+}
+
+// The Kansai polite negative まへん in words of their own: おまへん ありません, すんまへん and
+// すいまへん すみません, あきまへん いけません, かまへん かまわない and でけしまへん できません.
+// まへん after the stem of a verb is read by the word stage as ません.
+bool KansaiMahen(std::string_view s, size_t pos, Match& m) {
+    // The sentence-final で after it is the よ of Kansai speech (あきまへんで いけませんよ), not
+    // the で of a negative that goes on.
+    auto finalDe = [&](size_t p) {
+        size_t q = p;
+        if (!Lit(s, q, "で")) return p;
+        size_t r = q;
+        if (q == s.size() || OneOf(s, r, U"。｡、！!？?…‥」』　 ")) {
+            m.group[2] = "よ";
+            return q;
+        }
+        return p;
+    };
+    static constexpr std::string_view kWords[][2] = {
+        {"おまへん", "ありません"}, {"すんまへん", "すみません"}, {"すいまへん", "すいません"}, {"あきまへん", "いけません"},
+        {"かまへん", "かまわない"}, {"でけしまへん", "できません"}};
+    for (const auto& w : kWords) {
+        if (size_t p = pos; Lit(s, p, w[0])) {
+            m.group[1] = w[1];
+            m.end = w[0] == "かまへん" ? p : finalDe(p);
+            return true;
+        }
+    }
+    return false;
 }
 
 // The Kyoto どす of the copula after the ん of のです, and its past どした (やったんどす,
@@ -723,6 +756,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         text = ReplaceAll(text, JaneQuestion, [](const Match& m) { return Group1Plus(m, "ない"); });
         text = ReplaceAll(text, ParticleNee, [](const Match& m) { return Group1Plus(m, "ない"); });
         if (dialectForms) text = ReplaceAll(text, NegativeNee, ReplaceNegativeNee);
+    }
+    if (dialectForms && Contains(text, "まへん")) {
+        text = ReplaceAll(text, KansaiMahen, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     }
     if (dialectForms && Contains(text, "へん")) text = ReplaceAll(text, KansaiNegative, ReplaceKansaiNegative);
     if (dialectForms && (Contains(text, "やろ") || Contains(text, "じゃろ"))) {

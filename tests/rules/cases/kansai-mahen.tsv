@@ -1,0 +1,32 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:kansai-mahen	すんまへん	죄송합니다	fix	normalize
+normalize:kansai-mahen	（大上）かまへんねん	(오우에) 상관없거든	fix	normalize
+normalize:kansai-mahen	動いたらあきまへんで	움직이면 안돼요	fix	normalize
+normalize:kansai-mahen	ええ あの…いえ 何も おまへんで	네 그…아뇨 아무것도 없어요	fix	normalize
+normalize:kansai-mahen	せっかくでっけど それを受け取ることは でけしまへん	모처럼으로 지만 그것을 받을 수 없습니다	fix	normalize
+normalize:kansai-mahen	ええ子 おまへんやろか？	네자 없겠습니까?	fix	normalize
+normalize:kansai-mahen	すいまへん おおきに	미안해요 크게	fix	normalize
+conjugation:kansai-masen	知りまへん｡	모릅니다.	fix	conjugation
+conjugation:kansai-masen	分かりまへん！ 噂だと	모릅니다! 소문이라고	fix	conjugation
+conjugation:kansai-masen	遺体 揚がってまへん	시신 오르지 않았습니다	fix	conjugation
+conjugation:kansai-masen	どうにもなりまへんな	어떻게도 되지 않네	fix	conjugation
+conjugation:kansai-masen	どっちが悪いとも言えまへんで	어느 쪽이 나쁘다고 말할 수 없어요	fix	conjugation
+conjugation:kansai-masen	いつか またここへ 帰ってくることがあるかもしれまへん｡	언젠가 또 여기에 돌아오는 일이 있을지도 모릅니다.	fix	conjugation
+conjugation:kansai-masen	(丸山)そこは抜け目ありまへんわ	(마루야마) 거기는 빈틈 없어요	fix	conjugation
+conjugation:kansai-masen	んなアホな…埼玉に タワーなんてありまへん	응인 어리석은…사이타마에 타워 같은 건 없습니다	fix	conjugation
+conjugation:kansai-masen	弁償して 弁償銭いりまへんって　お金 いらん…	변상해 변상전 필요하지 않는다고요 돈필요 없어…	fix	conjugation
+conjugation:kansai-masen	海に放り込んどいたら絶対バレまへんて	바다에 집어넣어 두면 절대 들키지 않습니다라고	fix	conjugation
+conjugation:kansai-masen	弟らのためや思て 何とか力貸してもらえまへんやろか	남동생등이기 때문에나 사라고 어떻게든 힘 빌릴 수 없겠습니까	fix	conjugation
+conjugation:kansai-masen	芸も おもてなしも誰にも 負けしまへん｡	재주도 앞없음도 누구에게도 지지 않습니다.	fix	conjugation
+conjugation:kansai-masen	遊びの恋は できしまへん｡	놀이의 사랑은 할 수 없습니다.	fix	conjugation
+conjugation:kansai-masen	へえ｡ そんじょそこらの高根には咲いてしまへん｡	헤에. 그 근처의 타카네에게는 피지 않았습니다.	fix	conjugation
+conjugation:kansai-masen	お客さんとそういう関係に なれしまへん｡	손님과 그런 관계에 될 수 없습니다.	fix	conjugation
+conjugation:kansai-masen	な～んか 嫌～なオーラを感じまへんか？	왠지 싫은 아우라를 느끼지 않습니까?	fix	conjugation
+conjugation:kansai-masen	兄貴に知れたらただじゃ済まへんで	형에게 알려지면 다만은 미안하고	keep	conjugation
+conjugation:kansai-masen	あたまへんだよ	머리에 야	keep	conjugation
+conjugation:kansai-masen	くるまへんだね	차에 구나	keep	conjugation
+conjugation:kansai-masen	いまへんなおとがした	지금에 더 갈게 했다	keep	conjugation
+conjugation:kansai-masen	いまへんなこと言った	지금에 인 일 말했다	keep	conjugation
+conjugation:kansai-masen	ちょっといまへんなにおいがする	조금 지금에 뭐 두고가 한다	keep	conjugation
+conjugation:kansai-masen	いまへんじするね	지금에 떠날게	keep	conjugation

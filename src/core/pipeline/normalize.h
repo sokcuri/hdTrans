@@ -169,7 +169,7 @@ std::string RewriteEmphaticSpellings(std::string_view text);
 // 置いてく 置いていく, 行くんすか 行くんですか, わかるっス わかるっす, そだね そうだね). With runs.holds,
 // a contracted ておく that a dictionary word holds stays as written (言っとくけど). With contracted
 // (the dialect and contracted forms of the line), てんす is てるんです and ないんす after a noun
-// ないんです.
+// ないんです, and まへんな keeps its な.
 std::string RewriteCasual(std::string_view text, const RunLookup& runs = {}, bool contracted = true);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル

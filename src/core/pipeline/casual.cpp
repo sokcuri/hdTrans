@@ -200,11 +200,14 @@ bool NaTsu(std::string_view s, size_t pos, Match& m) {
 
 // ([えけげてねへべめれすく])んな([よぁー]|[っッ]?[！!、。？?…‥・」]|$), or before an ideographic space
 // other than after て, ね or へ (決めてんな　お前 says what is so, ねんな and へんな are also the ねん and へん
-// of Kansai); not where the んな ends a word of casual.nna-word.
+// of Kansai); not where the んな ends a word of casual.nna-word, nor with contracted forms read after
+// the まへん of Kansai ません (いきまへんな).
+template <bool kContracted>
 bool Nna(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"えけげてねへべめれすく")) return false;
     m.group[1] = Span(s, pos, p);
+    if (kContracted && m.group[1] == "へ" && s.substr(0, pos).ends_with("ま")) return false;
     if (!Lit(s, p, "んな")) return false;
     if (dict::EndsWithMember(HDTRANS_CLASS("casual.nna-word"), s.substr(0, p)) > 0) return false;
     size_t q = p;
@@ -945,7 +948,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, Tsuu, [](const Match&) { return std::string("という"); });
     // The prohibition spelled with ん is read first, so that its emphasis っ goes as that of
     // るな does (すんなッ！ するな！).
-    text = ReplaceAll(text, Nna, [](const Match& m) { return Cat({m.group[1], "るな", m.group[2]}); });
+    text = ReplaceAll(text, contracted ? Nna<true> : Nna<false>, [](const Match& m) { return Cat({m.group[1], "るな", m.group[2]}); });
     text = ReplaceAll(text, NaTsu, [](const Match& m) { return Cat({m.group[1], "な", m.group[2]}); });
     text = ReplaceAll(text, Sun, [](const Match& m) {
         const Match g = Rematch(m, Sun);

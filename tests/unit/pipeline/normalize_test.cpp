@@ -1019,6 +1019,14 @@ HD_TEST(pipeline_kansai_verb_forms) {
         {"なんどしたか"sv, "なんどしたか"sv},
         // The word stage reads the honorific はる.
         {"アハハハ… 怒ってはる"sv, "アハハハ… 怒ってはる"sv},
+        // The polite negative まへん in words of their own; after a verb the word stage reads it as ません.
+        {"すんまへん"sv, "すみません"sv},
+        {"すいまへん おおきに"sv, "すいません おおきに"sv},
+        {"ええ子 おまへんやろか？"sv, "ええ子 ありませんでしょうか？"sv},
+        {"かまへんか"sv, "かまわないか"sv},
+        {"動いたらあきまへんで"sv, "動いたらいけませんよ"sv},
+        {"知りまへん｡"sv, "知りまへん｡"sv},
+        {"負けしまへん｡"sv, "負けしまへん｡"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));
@@ -1068,6 +1076,7 @@ HD_TEST(pipeline_dialect_conjecture) {
         {"うそやろか"sv, "うそだろうか"sv},
         {"乗ってんねやろな"sv, "乗ってるんだろうな"sv},
         {"ほんまやろな"sv, "ほんまだろうな"sv},
+        {"もらえまへんやろか"sv, "もらえまへんでしょうか"sv},
         {"邪魔やろさ｡"sv, "邪魔やろさ｡"sv},
     };
     for (const Case& c : cases) {

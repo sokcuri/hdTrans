@@ -59,6 +59,24 @@ bool WayOfDoing(int patternKind, std::string_view s, std::string_view next) {
     return false;
 }
 
+// The text of an ending with the Kansai まへん of the polite negative written ません, the same
+// morpheme, so that the ending rows of ません and their rules read it (知りまへん 모릅니다, 揚がって
+// まへん 오르지 않았습니다); a で that ends the sentence after it is the よ of Kansai speech (言えまへんで
+// 말할 수 없어요). The text has the same length; s itself where it starts otherwise.
+std::string_view KansaiMasen(std::string_view s, Arena& arena) {
+    constexpr std::string_view kMahen = "まへん", kMasen = "ません", kDe = "で", kYo = "よ";
+    if (!s.starts_with(kMahen)) return s;
+    std::string_view rest = s.substr(kMahen.size());
+    std::string standard(kMasen);
+    // No hiragana, katakana or kanji after the で (tokenizer classes 13, 14, 24): it ends the sentence.
+    const int next = Classify(rest.substr(std::min(rest.size(), kDe.size())));
+    if (rest.starts_with(kDe) && next != 13 && next != 14 && next != 24) {
+        standard += kYo;
+        rest.remove_prefix(kDe.size());
+    }
+    return arena.Keep(standard + std::string(rest));
+}
+
 // Whether s holds a kanji.
 bool HasKanji(std::string_view s) {
     for (std::string_view t = s; !t.empty();) {
@@ -627,6 +645,13 @@ bool Item::AcceptVerbContinuation(Record* following) {
         patternWidth += WidthOf(Conjugation(7, kBranchTo));
         base.kind = kBranchTo;
     }
+    // The Kyoto しまへん after a continuative (an ichidan stem) or て form is the ません of that form
+    // (負けしまへん 負けません, 持ってしまへん 持ってません): its し goes with the form, and KansaiMasen
+    // reads the まへん.
+    if (base.dialect && (base.kind == 10 || base.kind == 7 || (base.patternKind == 7 && base.kind == 8)) &&
+        after().starts_with("しまへん")) {
+        patternWidth += WidthOf(std::string_view("し"));
+    }
     const std::string_view rest = after();
     const bool punctuation = tail.starts_with(kJaComma) || tail.starts_with(",");
     bool queryAllowed = !rest.empty() && !punctuation;
@@ -641,10 +666,25 @@ bool Item::AcceptVerbContinuation(Record* following) {
         const std::string_view longer = w->longerEnding;
         return !longer.empty() && longer.starts_with(ending) && afterEnding.starts_with(longer.substr(ending.size()));
     };
+    // Whether a Kansai まへん after the stem form reads as ません (KansaiMasen): not after a form of one
+    // kana, which the kana of other words spell as well, nor where a word of the dictionary other than
+    // a verb starts at the stem and reaches past its form (いまへんなおと is 今 and 変な), as for the と
+    // form; the forms of する, くる and 来る are those verbs (しまへん).
+    auto masenSpelled = [&]() {
+        if (!w->settings.text || !w->settings.improvements.dialectForms) return false;
+        if (matched) return true;
+        const std::string form = surface + std::string(tail.substr(0, static_cast<std::size_t>(pattern())));
+        if (OneKana(form)) return false;
+        for (const Record* r = w->DoLookup(From(text, start), kModeGeneral).records; r != nullptr; r = r->child) {
+            if (r->source.size() > form.size() && At(r->partCode, 1) != '4') return false;
+        }
+        return true;
+    };
     // The ending group at endingText, the text after the conjugation pattern.
-    auto endingGroup = [&](std::string_view endingText) -> Group* {
+    auto endingGroup = [&](std::string_view spelled) -> Group* {
         Group* g = nullptr;
-        if (!queryAllowed || endingText.empty()) return g;
+        if (!queryAllowed || spelled.empty()) return g;
+        const std::string_view endingText = masenSpelled() ? KansaiMasen(spelled, w->arena) : spelled;
         const Lookup found = w->DoLookup(endingText, kModeVerbEnding);
         if (found.count == 0) return g;
         g = w->NewGroup(found.records, ' ');
