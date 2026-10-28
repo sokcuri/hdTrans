@@ -14,6 +14,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 われ	나	I120	VHn		GN							spoken-words:11
 おまはん	당신	N120	VHn		GN							spoken-words:12
 もろとも	(와)과 함께	P200			GN							spoken-words:13
+なんぼ	얼마	N300			GN	5	||6 &&4 S+1== "で" P+1== "2**" S+2== "買" P+2== "4**" &&2 P-1== "2**" A-2== "VMo" P+1== "2**" S+1== "くらい" &&2 ||3 S+1== "掛か" S+1== "掛" S+1== "かか" P+1== "4**" &&4 S+1== "あ" D+1== "&HN@" P+1== "4**" U+1== "か"	なんぼ는 いくら처럼 값과 양을 묻는 구문에서 ‘얼마’다.				spoken-words:14
+なんぼ	아무리	N300		Bh	GN	2140	||5 &&2 P+1== "4**" U+1== "も" &&2 P+1== "7**" U+1== "くても" P+1== "7**" &&4 P+1== "12*" S+2== "が" P+2== "2**" P+3== "4**" &&2 P+1== "1**" G+1== "Hd"	なんぼ는 いくら처럼 양보 구문에서 ‘아무리’다.				spoken-words:15
+なんぼでも	얼마든지	E311			GN							spoken-words:16
+なんぼなんでも	아무리 그래도	E300			GN							spoken-words:17
+ほなら	그럼	E331			GN							spoken-words:18
+ほってお	그냥 &C7@	M441			GN							spoken-words:19
+なんぼ何でも	아무리 그래도	E300			GN							spoken-words:20
 もろともに	함께	E311			GN							spoken-words:21
 このやろ	이 자식	C110			GN							spoken-words:22
 ばかやろ	바보 녀석	N110			GN							spoken-words:23
