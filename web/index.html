@@ -20,33 +20,42 @@
     <button type="button" role="tab" id="tab-text" aria-controls="text" aria-selected="true">텍스트 번역</button>
     <button type="button" role="tab" id="tab-docs" aria-controls="docs" aria-selected="false">문서 번역</button>
     <button type="button" role="tab" id="tab-dictionaries" aria-controls="dictionaries" aria-selected="false">사전</button>
-    <label title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅).">대사 말투 <select id="speech">
-      <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
-      <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
-    </select></label>
-    <label title="복사하거나 받는 번역의 형식">출력 <select id="outmode">
-      <option value="translation" selected>번역문만</option>
-      <option value="interleaved">원문 병기</option>
-      <option value="spaced">원문 병기 + 빈 줄</option>
-    </select></label>
+  </div>
+
+  <div class="settings" id="settings">
+    <button type="button" class="settings-toggle" id="settings-toggle" aria-expanded="false" aria-controls="settings-body">
+      <span>설정</span> <small id="settings-sum"></small></button>
+    <div class="settings-body" id="settings-body">
+      <div class="seg" data-tab="text" role="radiogroup" aria-labelledby="mode-name"><span id="mode-name">방식</span>
+        <span class="opts"><label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked><span>문서 (이름 통일)</span></label><label
+          title="줄마다 따로 번역합니다. 게임 연결 도구와 같은 결과입니다."><input type="radio" name="mode" value="line"><span>줄 단위</span></label></span>
+      </div>
+      <label class="field" title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅)."><span>대사 말투</span> <select id="speech">
+        <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
+        <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
+      </select></label>
+      <label class="field" title="복사하거나 받는 번역의 형식"><span>출력</span> <select id="outmode">
+        <option value="translation" selected>번역문만</option>
+        <option value="interleaved">원문 병기</option>
+        <option value="spaced">원문 병기 + 빈 줄</option>
+      </select></label>
+      <label class="field" data-tab="text"><span>예제</span> <select id="example"><option value="">고르기…</option></select></label>
+    </div>
   </div>
 
   <section id="text" role="tabpanel" aria-labelledby="tab-text">
-  <div class="controls">
-    <fieldset>
-      <legend>방식</legend>
-      <label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked> 문서 (이름 통일)</label>
-      <label title="줄마다 따로 번역합니다. 게임 연결 도구와 같은 결과입니다."><input type="radio" name="mode" value="line"> 줄 단위</label>
-    </fieldset>
-    <label>예제 <select id="example"><option value="">고르기…</option></select></label>
-  </div>
-
-  <div class="panes">
-    <label class="pane"><span>일본어</span>
-      <textarea id="src" spellcheck="false" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea></label>
-    <div class="pane"><span>한국어 <small id="info"></small> <progress id="tbar" hidden></progress>
-      <button type="button" id="copy">복사</button></span>
-      <div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
+  <div class="langbar"><span>일본어</span><span class="arrow" aria-hidden="true">→</span><span>한국어</span></div>
+  <div class="panes texts">
+    <div class="pane card">
+      <div class="head"><small id="count"></small>
+        <button type="button" id="clear" class="icon" title="입력 지우기" aria-label="입력 지우기">×</button></div>
+      <textarea id="src" spellcheck="false" aria-label="일본어 원문" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea>
+    </div>
+    <div class="pane card result">
+      <div class="head"><small id="info"></small> <progress id="tbar" hidden></progress>
+        <button type="button" id="copy">복사</button></div>
+      <div class="body"><div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
+    </div>
   </div>
 
   <div id="editor">
@@ -59,9 +68,9 @@
   </section>
 
   <section id="docs" role="tabpanel" aria-labelledby="tab-docs" hidden>
-    <label class="drop" id="drop">파일을 끌어다 놓거나 클릭해서 고르기
+    <label class="drop" id="drop"><span class="wide">파일을 끌어다 놓거나 클릭해서 고르기</span><span class="narrow">텍스트 파일 고르기</span>
       <input type="file" id="files" multiple accept=".txt,text/plain"></label>
-    <div class="controls">
+    <div class="actions">
       <button type="button" id="run" disabled>모두 번역</button>
       <button type="button" id="zip" disabled>ZIP으로 받기</button>
     </div>

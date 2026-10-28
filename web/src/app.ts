@@ -36,16 +36,31 @@ const cacheName = 'hdtrans-assets';
 const mb = (n: number) => (n / 1e6).toFixed(1);
 let ready = false;
 
+const srcCount = $<HTMLElement>('count');
+const clear = $<HTMLButtonElement>('clear');
+/** Shows the input's size and the clear button when there is input. */
+function counted() {
+  srcCount.textContent = `${Array.from(src.value).length}자 · ${src.value === '' ? 0 : src.value.split('\n').length}줄`;
+  clear.hidden = src.value === '';
+}
 src.value = localStorage.getItem('hdtrans.src') ?? '';
+counted();
 src.addEventListener('input', () => {
   localStorage.setItem('hdtrans.src', src.value);
+  counted();
   schedule();
+});
+clear.addEventListener('click', () => {
+  src.value = '';
+  src.dispatchEvent(new Event('input'));
+  src.focus();
 });
 const savedMode = localStorage.getItem('hdtrans.mode');
 if (savedMode) (document.querySelector(`input[name=mode][value=${savedMode}]`) as HTMLInputElement).checked = true;
 document.querySelectorAll('input[name=mode]').forEach((el) =>
   el.addEventListener('change', () => {
     localStorage.setItem('hdtrans.mode', mode());
+    summed();
     schedule();
   }),
 );
@@ -54,6 +69,7 @@ const savedSpeech = localStorage.getItem('hdtrans.speech');
 if (savedSpeech === 'soft' || savedSpeech === 'strict') speech.value = savedSpeech;
 speech.addEventListener('change', () => {
   localStorage.setItem('hdtrans.speech', speech.value);
+  summed();
   schedule();
   staleDocs();
 });
@@ -62,8 +78,30 @@ const savedOutput = localStorage.getItem('hdtrans.output');
 if (savedOutput === 'translation' || savedOutput === 'interleaved' || savedOutput === 'spaced') outMode.value = savedOutput;
 outMode.addEventListener('change', () => {
   localStorage.setItem('hdtrans.output', outMode.value);
+  summed();
   showOutput();
 });
+
+// The settings: a toolbar, or on narrow screens a row that opens it and
+// sums up the choices. Each setting's own change handler updates the sum, so
+// a change event that does not bubble updates it too.
+const settings = $('settings');
+const settingsToggle = $('settings-toggle');
+const settingsSum = $('settings-sum');
+settingsToggle.addEventListener('click', () => {
+  const open = settingsToggle.getAttribute('aria-expanded') !== 'true';
+  settingsToggle.setAttribute('aria-expanded', String(open));
+  settings.classList.toggle('open', open);
+});
+function summed() {
+  const picked = [...settings.querySelectorAll<HTMLElement>('[data-tab], .field')]
+    .filter((el) => !el.hidden && !el.querySelector('#example'))
+    .map((el) => {
+      const select = el.querySelector('select');
+      return select ? select.selectedOptions[0]?.text : el.querySelector('input:checked + span')?.textContent;
+    });
+  settingsSum.textContent = picked.filter(Boolean).join(', ');
+}
 
 // Tabs: the dictionary editor (the selected dictionary's grids) sits below
 // the text tab's panes and beside the list in the dictionary tab.
@@ -79,6 +117,9 @@ function showTab(panel: string) {
     p.hidden = p.id !== panel;
   }
   (panel === 'dictionaries' ? $('dictedit') : $('text')).append(editorBox);
+  settings.hidden = panel === 'dictionaries';
+  settings.querySelectorAll<HTMLElement>('[data-tab]').forEach((el) => (el.hidden = el.dataset.tab !== panel));
+  summed();
   localStorage.setItem('hdtrans.tab', panel);
 }
 for (const [button, p] of tabs) button.addEventListener('click', () => showTab(p.id));
@@ -320,6 +361,7 @@ fetch('examples/list.json')
       const text = await exampleText(list[0][1]);
       if (src.value !== '') return;
       src.value = text;
+      counted();
       schedule();
     }
   })

@@ -24,7 +24,8 @@
 // dictionary and an entry, turning it off and on, priority by list order, a
 // load error naming the dictionary and row, export and import of the
 // desktop files (userdict*.txt and Ehnd UserDict*.txt) byte for byte, renaming,
-// deleting, and that the list survives a reload. With SHOT set it saves
+// deleting, and that the list survives a reload. Last it checks the text tab's
+// layout at a desktop, a phone and a 360 px viewport and the × button. With SHOT set it saves
 // screenshots there (text tab) and next to it (-dictionaries, -mobile). Exits 1
 // on a failed check or a load failure.
 import { spawn } from 'node:child_process';
@@ -280,9 +281,31 @@ async function outputCheck() {
     ok(shown === want[mode] && label === '복사됨' && copied === shown && muted === (mode === 'translation' ? '' : '猫が来た。\n|犬が来た。\n'),
       `${mode}: shown and copied ${JSON.stringify(shown)}`);
   }
+  // The settings row's summary, the select and the shown output agree after a
+  // change, on the document tab, and after a reload.
+  const agree = async (mode, where) => {
+    const r = await evaluate(`(() => {
+      const s = document.getElementById('outmode');
+      return { value: s.value, label: s.selectedOptions[0].text, sum: document.getElementById('settings-sum').textContent,
+        muted: document.querySelectorAll('#out .src').length, shown: document.getElementById('out').textContent };
+    })()`);
+    const good = r.value === mode && r.sum.split(', ').includes(r.label) && r.shown === want[mode] && (r.muted > 0) === (mode !== 'translation');
+    ok(good, `${where}: summary, select and output agree on ${mode}${good ? '' : ' ' + JSON.stringify(r)}`);
+  };
   await pick('spaced');
+  await agree('spaced', 'after a change');
   ok((await evaluate(`localStorage.getItem('hdtrans.output')`)) === 'spaced', 'the choice is saved');
+  await click('#tab-docs');
+  await agree('spaced', 'on the document tab');
+  await pick('interleaved');
+  await click('#tab-text');
+  await agree('interleaved', 'back on the text tab after a change on the document tab');
+  await send('Page.reload');
+  await dictsReady();
+  await settled();
+  await agree('interleaved', 'after a reload');
   await pick('translation');
+  await agree('translation', 'after changing back');
 }
 
 // The 사전 tab. Files go through folders of a temporary directory: in/
@@ -556,6 +579,49 @@ async function mobileCheck() {
   await click('#tab-text');
 }
 
+// layoutCheck checks the text tab at a desktop and a phone viewport: cards
+// side by side or stacked with both in the first screen, the settings as a
+// toolbar or a closed row, no sideways page scroll down to 360 px, 40 px
+// touch targets, and the clear button and input count.
+async function layoutCheck() {
+  const ok = say('layout');
+  const measure = () => evaluate(`(() => {
+    const [a, b] = [...document.querySelectorAll('#text .card')].map((c) => c.getBoundingClientRect());
+    const small = [...document.querySelectorAll('main button, main select, .seg label')]
+      .filter((e) => e.offsetParent && !e.closest('table.grid') && e.getBoundingClientRect().height < 40).map((e) => e.id || e.textContent);
+    return { side: Math.abs(a.top - b.top) < 1 && b.left > a.right, stacked: b.top >= a.bottom, inView: b.top + 80 < innerHeight,
+      toolbar: getComputedStyle(document.getElementById('settings-body')).display !== 'none',
+      page: document.documentElement.scrollWidth <= innerWidth, small };
+  })()`);
+  await click('#tab-text');
+  await send('Emulation.setDeviceMetricsOverride', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false });
+  let m = await measure();
+  ok(m.side && m.toolbar && m.page, `desktop: cards side by side under an open toolbar${m.side && m.toolbar && m.page ? '' : ' ' + JSON.stringify(m)}`);
+  await send('Emulation.setDeviceMetricsOverride', phone);
+  await send('Emulation.setTouchEmulationEnabled', { enabled: true });
+  m = await measure();
+  const phoneOk = m.stacked && m.inView && !m.toolbar && m.page && m.small.length === 0;
+  ok(phoneOk, `phone: stacked cards in the first screen, settings closed${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
+  await click('#settings-toggle');
+  m = await measure();
+  ok(m.toolbar && m.small.length === 0, `phone: the settings open with 40 px targets (${m.small.join(' ')})`);
+  await click('#settings-toggle');
+  await send('Emulation.setDeviceMetricsOverride', { ...phone, width: 360 });
+  for (const tab of ['text', 'docs', 'dictionaries']) {
+    await click(`#tab-${tab}`);
+    m = await measure();
+    ok(m.page && m.small.length === 0, `360 px ${tab} tab: no sideways scroll, 40 px targets${m.small.length ? ': ' + m.small.join(' ') : ''}`);
+  }
+  await click('#tab-text');
+  await send('Emulation.setTouchEmulationEnabled', { enabled: false });
+  await send('Emulation.clearDeviceMetricsOverride');
+  const before = await evaluate(`document.getElementById('src').value`);
+  const counted = await evaluate(`document.getElementById('count').textContent`);
+  await click('#clear');
+  ok((await evaluate(`document.getElementById('src').value === '' && document.getElementById('count').textContent === '0자 · 0줄' && document.getElementById('clear').hidden`)) &&
+    counted === `${[...before].length}자 · ${before.split('\n').length}줄` && (await settled()).out === '', `× clears the input (count was ${counted})`);
+}
+
 let failed = false;
 try {
   let wasReady;
@@ -582,6 +648,7 @@ try {
   await migrationCheck();
   await libraryCheck();
   await mobileCheck();
+  await layoutCheck();
   const typed = '猫が好きです。\n「おはよう、レナ」';
   await visit(2, async (ready) => {
     wasReady = ready;
