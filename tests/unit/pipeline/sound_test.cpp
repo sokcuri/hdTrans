@@ -824,7 +824,9 @@ HD_TEST(pipeline_phrase_break) {
         "なんか\t어쩐지\tP251\t\tZ0\t1\n"
         "なんか\t(은)는\tP251\t\t\t2\n"
         "もっと\t더\tE300\t\t\t3\n"
-        "い\t있\tM400\t\t\t4\n",
+        "い\t있\tM400\t\t\t4\n"
+        "だから\t그러니까\tP200\t\tZ0\t5\n"
+        "だからね\t(이)니까\tP201\t\t\t6\n",
     }});
     HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
     LineContext ctx;
@@ -832,16 +834,29 @@ HD_TEST(pipeline_phrase_break) {
     const Case cases[] = {
         {"あっ なんか", "앗\xEE\x80\x91 なんか"},
         {"「あっ なんか」", "「앗\xEE\x80\x91 なんか」"},
-        // A word no conjunction reads, kana after the word, a sound that does not open its utterance and
-        // a space between other words stay.
+        // A word no conjunction reads, a longer key that none reads, a sound that does not open its
+        // utterance and a space between other words stay.
         {"あっ もっと", "앗 もっと"},
-        {"あっ なんかさ", "앗 なんかさ"},
+        {"あっ なんかさ", "앗\xEE\x80\x91 なんかさ"},  // the longest key なんか
+        {"あっ だからね", "앗 だからね"},             // the longest key だからね, no conjunction
         {"あっ いた", "앗 いた"},
         {"あっ は", "앗 は"},
         {"…あっ なんか", "…앗 なんか"},
         {"これ なんか", "これ なんか"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+HD_TEST(pipeline_sound_plain_spaces) {
+    // A single ideographic space between two sounds written in Hangul is an ASCII space; two stay a
+    // column separator.
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    HD_CHECK_EQ(Sound("うわっ　あっ", ctx, *loaded.snapshot), std::string("우왓 앗"));
+    HD_CHECK_EQ(Sound("うわっ　　あっ", ctx, *loaded.snapshot), std::string("우왓　　앗"));
+    HD_CHECK_EQ(Sound("うわっ　彼", ctx, *loaded.snapshot), std::string("우왓　彼"));
 }
 
 HD_TEST(pipeline_write_spaced_copies) {
@@ -862,6 +877,10 @@ HD_TEST(pipeline_write_spaced_copies) {
         {"え え え", "에 에 에"},
         {"ど ど ど…", "도 도 도…"},
         {"ない ない ない", "아냐 아냐 아냐"},
+        // Not after a subject particle (particle.copies-subject), nor a half in 해요 (haeyo).
+        {"財布が、ない ない", "財布が、ない ない"},
+        {"そうです そうです", "そうです そうです"},
+        {"はぁ　はぁ", "はぁ　はぁ"},  // the mimetic はぁはぁ: no interjection
         {"パン パン", "パン パン"},  // the mimetic ぱんぱん
         // Copies written together, one kana alone, a stutter before its word, copies next to
         // other kana and copies that read otherwise together stay.

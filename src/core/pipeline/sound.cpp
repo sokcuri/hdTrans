@@ -36,16 +36,18 @@ bool OpensUtterance(std::u32string_view rs, size_t p) {
 
 // Whether an ASCII space at rs[p] parts a sound that opens its utterance at rs[start] from a
 // hiragana word that the dictionary also reads as a conjunction (gram Z0), which would otherwise be
-// read as a particle or ending of the sound (あっ でも 앗 하지만, あっ なんか 앗 뭔가): the whole
-// hiragana run after the space is that word (not あっ だからね, nor だっけ, ならば, です, which no
-// conjunction reads), and the dictionary has no row that drops it (not なんて, which then stays
-// with the sound).
+// read as a particle or ending of the sound (あっ でも 앗 하지만, あっ でもさ 앗 하지만): the
+// longest dictionary key that starts the hiragana after the space is that word (not あっ だからね,
+// whose key だからね no conjunction reads, nor だっけ, ならば, です), and the dictionary has no row
+// that drops it (not なんて, which then stays with the sound).
 bool SpacedFromText(std::u32string_view rs, size_t start, size_t p, const dict::Snapshot& snap) {
     if (!OpensUtterance(rs, start) || p + 2 >= rs.size() || rs[p] != U' ' || !IsHiraganaRune(rs[p + 1])) return false;
     size_t end = p + 1;
     while (end < rs.size() && IsHiraganaRune(rs[end])) end++;
-    std::string word;
-    for (size_t k = p + 1; k < end; k++) text::AppendRune(word, rs[k]);
+    std::string run;
+    for (size_t k = p + 1; k < end; k++) text::AppendRune(run, rs[k]);
+    const std::string word = run.substr(0, snap.WordAt(run));
+    if (word.empty()) return false;
     bool conjunction = false;
     for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
         if (c.target.empty()) return false;
