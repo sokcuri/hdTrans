@@ -53,10 +53,19 @@ src.addEventListener('input', () => {
   counted();
   schedule();
 });
-clear.addEventListener('click', () => {
-  src.value = '';
+let outFromTop = false; // the next translation shown starts at its first line
+/** Replaces the input with text and shows both cards from their first lines. */
+function newText(text: string) {
+  src.value = text;
   src.dispatchEvent(new Event('input'));
-  src.focus();
+  src.scrollTop = 0;
+  out.scrollTop = 0;
+  outFromTop = true;
+  toCard(cards[0]);
+}
+clear.addEventListener('click', () => {
+  newText('');
+  src.focus({ preventScroll: true });
 });
 const savedMode = localStorage.getItem('hdtrans.mode');
 if (savedMode) (document.querySelector(`input[name=mode][value=${savedMode}]`) as HTMLInputElement).checked = true;
@@ -85,16 +94,40 @@ outMode.addEventListener('change', () => {
   showOutput();
 });
 
-// The settings: a toolbar, or on narrow screens a row that opens it and
-// sums up the choices. Each setting's own change handler updates the sum, so
-// a change event that does not bubble updates it too.
+// The settings open as a layer from the 설정 button: a popover under it, or
+// on narrow screens a sheet at the bottom. Choices apply at once; the button
+// sums them up.
 const settings = $('settings');
 const settingsToggle = $('settings-toggle');
 const settingsSum = $('settings-sum');
+const sheet = $<HTMLDialogElement>('settings-sheet');
 settingsToggle.addEventListener('click', () => {
-  const open = settingsToggle.getAttribute('aria-expanded') !== 'true';
-  settingsToggle.setAttribute('aria-expanded', String(open));
-  settings.classList.toggle('open', open);
+  const b = settingsToggle.getBoundingClientRect();
+  sheet.style.top = `${b.bottom + 6}px`;
+  sheet.style.left = `${b.left}px`;
+  sheet.showModal();
+  settingsToggle.setAttribute('aria-expanded', 'true');
+});
+sheet.addEventListener('close', () => settingsToggle.setAttribute('aria-expanded', 'false'));
+sheet.addEventListener('click', (ev) => {
+  if (ev.target === sheet) sheet.close();
+});
+$('settings-close').addEventListener('click', () => sheet.close());
+// Esc closes the layer (also where the browser's close request needs a fresh
+// user gesture); Tab and Shift+Tab go round inside it.
+sheet.addEventListener('keydown', (ev) => {
+  if (ev.key === 'Escape') {
+    ev.preventDefault();
+    sheet.close();
+  }
+  if (ev.key !== 'Tab') return;
+  const stops = [...sheet.querySelectorAll<HTMLElement>('button, select, input')].filter(
+    (el) => el.offsetParent && !(el as HTMLButtonElement).disabled && !(el instanceof HTMLInputElement && el.type === 'radio' && !el.checked),
+  );
+  const [first, last] = [stops[0], stops[stops.length - 1]];
+  if (ev.shiftKey ? document.activeElement !== first : document.activeElement !== last) return;
+  ev.preventDefault();
+  (ev.shiftKey ? last : first).focus();
 });
 function summed() {
   const picked = [...settings.querySelectorAll<HTMLElement>('[data-tab], .field')]
@@ -111,7 +144,6 @@ function summed() {
 // and language rows and the card headers stay on top.
 const texts = document.querySelector<HTMLElement>('.texts')!;
 const cards = [$('srccard'), $('outcard')];
-const expandBoth = $<HTMLButtonElement>('expand-both');
 const expanded = (card: HTMLElement) => card.classList.contains('expanded');
 /** Sets the input's height to its text while its card is expanded. */
 function fitSource() {
@@ -124,19 +156,22 @@ function expand(card: HTMLElement, on: boolean) {
   b.setAttribute('aria-pressed', String(on));
   b.title = b.ariaLabel = `${card.dataset.name} ${on ? '접기' : '펼치기'}`;
   localStorage.setItem(`hdtrans.expand.${card.id}`, on ? '1' : '0');
-  const both = cards.every(expanded);
-  expandBoth.setAttribute('aria-pressed', String(both));
-  expandBoth.textContent = both ? '↕ 둘 다 접기' : '↕ 둘 다 펼치기';
   if (card === cards[0]) fitSource();
   stick();
 }
-for (const card of cards) {
-  card.querySelector('.expand')!.addEventListener('click', () => expand(card, !expanded(card)));
+/** Scrolls the page so that card starts right under the rows on top, or to the top when no card is expanded. */
+function toCard(card: HTMLElement) {
+  if (!cards.some(expanded)) scrollTo(0, 0);
+  else scrollTo(0, card.getBoundingClientRect().top + scrollY - parseFloat(texts.style.getPropertyValue('--head-top') || '0'));
 }
-expandBoth.addEventListener('click', () => {
-  const on = !cards.every(expanded);
-  for (const card of cards) expand(card, on);
-});
+for (const card of cards) {
+  card.querySelector('.expand')!.addEventListener('click', () => {
+    const on = !expanded(card);
+    expand(card, on);
+    // Collapsed below the fold, the card is brought back into view.
+    if (!on && card.getBoundingClientRect().top < 0) toCard(card);
+  });
+}
 src.addEventListener('input', fitSource);
 // A new width rewraps the text: on a window resize, and when a scroll bar comes or goes.
 let srcWidth = 0;
@@ -156,6 +191,7 @@ function stick() {
   document.body.classList.toggle('sticky', on);
   const rows = [settings, examplebar, langbar];
   for (const row of rows) row.style.top = '';
+  document.documentElement.style.scrollPaddingTop = '';
   if (!on) return;
   const head = cards[0].querySelector<HTMLElement>('.head')!.offsetHeight;
   const keep = new Set(rows);
@@ -170,6 +206,8 @@ function stick() {
     top += row.offsetHeight;
   }
   texts.style.setProperty('--head-top', `${top}px`);
+  // Focus and caret scrolling keep the text clear of the rows and header on top.
+  document.documentElement.style.scrollPaddingTop = `${top + head}px`;
 }
 const stickRows = new ResizeObserver(() => stick());
 for (const el of [settings, examplebar, langbar]) stickRows.observe(el);
@@ -408,6 +446,7 @@ function showApplied() {
   summed();
 }
 $('dict-edit').addEventListener('click', () => {
+  sheet.close();
   const first = dicts.find((d) => d.on);
   if (first && !editing?.on) select(first);
   showTab('dictionaries');
@@ -455,8 +494,7 @@ example.addEventListener('change', async () => {
   const file = example.value;
   example.value = '';
   try {
-    src.value = await exampleText(file);
-    src.dispatchEvent(new Event('input'));
+    newText(await exampleText(file));
   } catch (err) {
     warning.textContent = '예제를 불러오지 못했습니다: ' + String(err);
   }
@@ -574,6 +612,8 @@ async function translate() {
       shownSource = lines.join('\n');
       shownTranslation = m.lines.join('\n');
       showOutput();
+      if (outFromTop) out.scrollTop = 0;
+      outFromTop = false;
     }
   } catch (err) {
     problem = '번역 실패: ' + (err instanceof Error ? err.message : String(err));

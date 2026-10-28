@@ -23,8 +23,11 @@
   </div>
 
   <div class="settings" id="settings">
-    <button type="button" class="settings-toggle" id="settings-toggle" aria-expanded="false" aria-controls="settings-body">
+    <button type="button" class="settings-toggle" id="settings-toggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="settings-sheet">
       <span>설정</span> <small id="settings-sum"></small></button>
+    <dialog class="settings-sheet" id="settings-sheet" aria-labelledby="settings-title"><div class="sheet">
+    <div class="sheet-head"><strong id="settings-title">설정</strong>
+      <button type="button" id="settings-close" class="icon" aria-label="닫기" title="닫기">×</button></div>
     <div class="settings-body" id="settings-body">
       <div class="seg" data-tab="text" role="radiogroup" aria-labelledby="mode-name"><span id="mode-name">방식</span>
         <span class="opts"><label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked><span>문서 (이름 통일)</span></label><label
@@ -42,12 +45,12 @@
       <div class="field dictfield"><span>사전</span> <span id="applied" title=""></span>
         <button type="button" id="dict-edit" title="사전 탭에서 이 사전 편집">사전 편집</button></div>
     </div>
+    </div></dialog>
   </div>
 
   <section id="text" role="tabpanel" aria-labelledby="tab-text">
   <div class="examplebar" id="examplebar">
     <label class="field"><span>예제</span> <select id="example" title="예제 텍스트 불러오기"><option value="">고르기…</option></select></label>
-    <button type="button" id="expand-both" aria-pressed="false" title="원문과 번역을 함께 펼치기">↕ 둘 다 펼치기</button>
   </div>
   <div class="langbar" id="langbar"><span>일본어</span><span class="arrow" aria-hidden="true">→</span><span>한국어</span></div>
   <div class="panes texts">

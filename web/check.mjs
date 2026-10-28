@@ -145,6 +145,7 @@ const keys = {
   Tab: { code: 'Tab', windowsVirtualKeyCode: 9 },
   Enter: { code: 'Enter', windowsVirtualKeyCode: 13, text: '\r' },
   ArrowUp: { code: 'ArrowUp', windowsVirtualKeyCode: 38 },
+  Escape: { code: 'Escape', windowsVirtualKeyCode: 27 },
   v: { code: 'KeyV', windowsVirtualKeyCode: 86 },
 };
 async function press(key, modifiers = 0, commands) {
@@ -604,9 +605,11 @@ async function mobileCheck() {
 }
 
 // layoutCheck checks the text tab at a desktop and a phone viewport: cards
-// side by side or stacked with both in the first screen, the settings as a
-// toolbar or a closed row, no sideways page scroll down to 360 px, 40 px
-// touch targets, and the clear button and input count.
+// side by side or stacked with both in the first screen, the 설정 button with
+// its layer (a popover under it, a bottom sheet on a phone) that closes on
+// Esc, a backdrop tap and its × and keeps the focus inside while open, no
+// sideways page scroll down to 360 px, 40 px touch targets, and the clear
+// button and input count.
 async function layoutCheck() {
   const ok = say('layout');
   const measure = () => evaluate(`(() => {
@@ -616,23 +619,57 @@ async function layoutCheck() {
     const ex = document.getElementById('example').getBoundingClientRect();
     return { side: Math.abs(a.top - b.top) < 1 && b.left > a.right, stacked: b.top >= a.bottom, inView: b.top + 80 < innerHeight,
       example: ex.height >= 40 && ex.bottom <= a.top + 60 && ex.right <= innerWidth && !document.getElementById('example').closest('#settings'),
-      toolbar: getComputedStyle(document.getElementById('settings-body')).display !== 'none',
-      page: document.documentElement.scrollWidth <= innerWidth, small };
+      sheet: document.getElementById('settings-sheet').open, page: document.documentElement.scrollWidth <= innerWidth, small };
   })()`);
+  const layer = () => evaluate(`(() => {
+    const d = document.getElementById('settings-sheet'), r = d.getBoundingClientRect(), t = document.getElementById('settings-toggle').getBoundingClientRect();
+    return { open: d.open, modal: d.matches(':modal'), focus: d.contains(document.activeElement), bottom: Math.abs(r.bottom - innerHeight) < 1 && Math.abs(r.width - innerWidth) < 1,
+      anchored: Math.abs(r.top - t.bottom - 6) < 2 && Math.abs(r.left - t.left) < 2, expanded: document.getElementById('settings-toggle').getAttribute('aria-expanded') };
+  })()`);
+  const settingsLayer = async (name) => {
+    await click('#settings-toggle');
+    let l = await layer();
+    ok(l.open && l.modal && l.focus && l.expanded === 'true' && (name === 'desktop' ? l.anchored : l.bottom),
+      `${name}: 설정 opens ${name === 'desktop' ? 'a popover under the button' : 'a bottom sheet'} with the focus inside${l.open && l.focus ? '' : ' ' + JSON.stringify(l)}`);
+    let inside = true;
+    for (let i = 0; i < 12; i++) {
+      await press('Tab');
+      inside &&= await evaluate(`document.getElementById('settings-sheet').contains(document.activeElement)`);
+    }
+    ok(inside, `${name}: Tab stays inside the open layer`);
+    await evaluate(`(() => { const s = document.getElementById('outmode'); s.value = 'spaced'; s.dispatchEvent(new Event('change')); })()`);
+    ok((await evaluate(`document.getElementById('settings-sheet').open && document.getElementById('settings-sum').textContent.includes('원문 병기 + 빈 줄') && document.querySelectorAll('#out .src').length > 0`)),
+      `${name}: a choice applies at once, with the layer still open`);
+    await evaluate(`(() => { const s = document.getElementById('outmode'); s.value = 'translation'; s.dispatchEvent(new Event('change')); })()`);
+    const focused = await evaluate(`document.activeElement.id || document.activeElement.tagName`);
+    await press('Escape');
+    await until(`document.getElementById('settings-toggle').getAttribute('aria-expanded') === 'false'`, 2000).catch(() => {});
+    l = await layer();
+    ok(!l.open && l.expanded === 'false', `${name}: Esc closes it${l.open ? ' (focus on ' + focused + ')' : ''}`);
+    await click('#settings-toggle');
+    for (const type of ['mousePressed', 'mouseReleased']) await send('Input.dispatchMouseEvent', { type, x: 5, y: 5, button: 'left', clickCount: 1 });
+    ok(!(await layer()).open, `${name}: a tap on the backdrop closes it`);
+    await click('#settings-toggle');
+    await click('#settings-close');
+    ok(!(await layer()).open, `${name}: × closes it`);
+  };
   await click('#tab-text');
+  await send('Emulation.setFocusEmulationEnabled', { enabled: true });
   await send('Emulation.setDeviceMetricsOverride', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false });
   let m = await measure();
-  ok(m.side && m.toolbar && m.page, `desktop: cards side by side under an open toolbar${m.side && m.toolbar && m.page ? '' : ' ' + JSON.stringify(m)}`);
+  ok(m.side && !m.sheet && m.page, `desktop: cards side by side, settings closed${m.side && !m.sheet && m.page ? '' : ' ' + JSON.stringify(m)}`);
+  await settingsLayer('desktop');
   await send('Emulation.setDeviceMetricsOverride', phone);
   await send('Emulation.setTouchEmulationEnabled', { enabled: true });
   m = await measure();
-  const phoneOk = m.stacked && m.inView && !m.toolbar && m.page && m.small.length === 0 && m.example;
+  const phoneOk = m.stacked && m.inView && !m.sheet && m.page && m.small.length === 0 && m.example;
   ok(phoneOk, `phone: stacked cards in the first screen, settings closed, the 예제 row above the cards${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
   await click('#settings-toggle');
   m = await measure();
-  ok(m.toolbar && m.small.length === 0, `phone: the settings open with 40 px targets (${m.small.join(' ')})`);
-  await click('#settings-toggle');
-  await send('Emulation.setDeviceMetricsOverride', { ...phone, width: 360 });
+  ok(m.small.length === 0, `phone: the settings sheet has 40 px targets${m.small.length ? ': ' + m.small.join(' ') : ''}`);
+  await click('#settings-close');
+  await settingsLayer('phone');
+  await send('Emulation.setDeviceMetricsOverride', { ...phone, width: 360, height: 780 });
   m = await measure();
   ok(m.inView && m.example, `360 px: 예제 and both cards in the first screen${m.inView && m.example ? '' : ' ' + JSON.stringify(m)}`);
   for (const tab of ['text', 'docs', 'dictionaries']) {
@@ -665,10 +702,13 @@ async function exampleCheck(filledBeforeReady) {
 }
 
 // expandCheck fills the input with a few hundred lines and, at a desktop and
-// a phone viewport, expands one card (only it grows to its text), then both
-// with 둘 다 펼치기; while the page scrolls through each card, the settings,
-// 예제 and language rows and that card's header stay stacked on top, within
-// half of the window. Each card's state survives a reload.
+// a phone viewport, expands one card (only it grows to its text), then the
+// other; while the page scrolls through each card, the settings, 예제 and
+// language rows and that card's header stay stacked on top within half of the
+// window. Stepping across the end of the source card on a phone, the rows
+// never overlap or get covered, the two headers never overlap, and the
+// translation's header takes over the place under the rows. Each card's state
+// survives a reload; collapsing a card scrolled out of view brings it back.
 async function expandCheck() {
   const ok = say('expand');
   const lines = readFileSync(inputFile, 'utf8').split('\n').filter(Boolean);
@@ -694,6 +734,30 @@ async function expandCheck() {
     const head = box(c.querySelector('.head'));
     return { rows: rows.map((el) => el.id), stacked: stacked && Math.abs(head.top - top) < 1.5, share: head.bottom / innerHeight };
   })()`);
+  // Problems with the rows and headers on top at page offset y, or ''.
+  const glitches = (y) => evaluate(`(() => {
+    scrollTo(0, ${y});
+    const box = (el) => el.getBoundingClientRect();
+    const hit = (el, b) => { const h = document.elementFromPoint(b.left + 12, (Math.max(b.top, 0) + Math.min(b.bottom, innerHeight)) / 2); return el.contains(h); };
+    const bad = [];
+    const rows = ['settings', 'examplebar', 'langbar'].map((id) => document.getElementById(id)).filter((el) => el.classList.contains('stuck'));
+    let bottom = 0;
+    for (const el of rows) {
+      const b = box(el);
+      if (b.top < bottom - 0.5) bad.push(el.id + ' overlaps the row above');
+      if (!hit(el, b)) bad.push(el.id + ' is covered');
+      bottom = b.bottom;
+    }
+    const cards = ['srccard', 'outcard'].map((id) => document.getElementById(id));
+    const heads = cards.map((c) => box(c.querySelector('.head')));
+    const shown = heads.map((h) => ({ left: h.left, top: Math.max(h.top, bottom), bottom: h.bottom })).map((v) => (v.bottom - v.top > 1 ? v : null));
+    if (shown[0] && shown[1] && shown[0].bottom > shown[1].top + 0.5 && heads[0].left === heads[1].left) bad.push('the headers overlap');
+    shown.forEach((v, i) => { if (v && v.top < innerHeight && !hit(cards[i].querySelector('.head'), v)) bad.push(cards[i].id + ' header is covered'); });
+    const [src, out] = cards.map(box);
+    if (out.top <= bottom && out.bottom > bottom + heads[1].height && Math.abs(heads[1].top - bottom) > 1) bad.push('the translation header does not take over');
+    else if (out.top > bottom && src.bottom >= bottom + heads[0].height && Math.abs(heads[0].top - bottom) > 1) bad.push('the source header is not on top');
+    return bad.join(', ');
+  })()`);
   for (const [name, metrics] of [['desktop', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false }], ['phone', phone]]) {
     await send('Emulation.setDeviceMetricsOverride', metrics);
     await evaluate('scrollTo(0, 0)');
@@ -701,17 +765,30 @@ async function expandCheck() {
     await fitted();
     let st = await state();
     ok(st.src && !st.out && st.srcFits && !st.outFits, `${name}: 원문 펼치기 grows only the source card${st.src && !st.out && st.srcFits && !st.outFits ? '' : ' ' + JSON.stringify(st)}`);
-    await click('#expand-both');
+    await click('#outcard .expand');
     st = await state();
-    ok(st.src && st.out && st.srcFits && st.outFits && st.page, `${name}: 둘 다 펼치기 grows both and the page scrolls${st.outFits && st.page ? '' : ' ' + JSON.stringify(st)}`);
+    ok(st.src && st.out && st.srcFits && st.outFits && st.page, `${name}: 번역 펼치기 grows the translation too and the page scrolls${st.outFits && st.page ? '' : ' ' + JSON.stringify(st)}`);
     for (const card of ['srccard', 'outcard']) {
       const k = await stack(card);
       const good = k.stacked && k.rows.includes('examplebar') && (name === 'desktop' ? k.rows.length === 3 : k.share <= 0.5);
       ok(good, `${name}: in ${card}, ${k.rows.join(', ')} and the header stay stacked on top (${Math.round(k.share * 100)}% of the window)`);
     }
+    const [from, to, end] = await evaluate(`(() => { const y = (id, side) => document.getElementById(id).getBoundingClientRect()[side] + scrollY;
+      return [y('srccard', 'bottom') - 400, y('outcard', 'top') + 200, document.documentElement.scrollHeight - innerHeight]; })()`);
+    const found = new Set();
+    const steps = [0, 300, ...Array.from({ length: Math.ceil((to - from) / 12) }, (_, k) => Math.round(from + k * 12)), Math.round(end * 0.7), Math.round(end)];
+    for (const y of steps) {
+      const g = await glitches(y);
+      if (g) found.add(`${g} at ${y}`);
+    }
+    ok(found.size === 0, `${name}: scrolling from the top across the end of the source card to the bottom, the rows and headers hand over cleanly${found.size ? ': ' + [...found].slice(0, 4).join('; ') : ''}`);
     await shot(`-expanded-${name}`, metrics);
+    await evaluate(`scrollTo(0, ${Math.round(end * 0.8)})`);
+    await click('#outcard .expand');
+    ok(await evaluate(`(() => { const t = document.getElementById('outcard').getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; })()`),
+      `${name}: 번역 접기 while scrolled deep brings the card back into view`);
+    await click('#srccard .expand');
     await evaluate('scrollTo(0, 0)');
-    await click('#expand-both');
   }
   await click('#srccard .expand');
   await send('Page.reload');
@@ -723,6 +800,45 @@ async function expandCheck() {
   st = await state();
   ok(!st.src && !st.out && !st.srcFits && !(await evaluate(`document.body.classList.contains('sticky')`)), '접기 brings back the fixed boxes and the rows scroll again');
   await evaluate(`document.getElementById('outmode').value = 'translation'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
+  await send('Emulation.clearDeviceMetricsOverride');
+}
+
+// resetCheck checks that a new example and × start both cards at their first
+// line: the page at the source card (expanded) or at the top (collapsed), and
+// no scroll left inside either box.
+async function resetCheck() {
+  const ok = say('reset');
+  const lines = readFileSync(inputFile, 'utf8').split('\n').filter(Boolean);
+  const long = Array.from({ length: 300 }, (_, k) => lines[k % lines.length]).join('\n');
+  const file = await evaluate(`document.getElementById('example').options[1].value`);
+  const pickExample = async () => {
+    await evaluate(`(() => { const s = document.getElementById('example'); s.value = ${JSON.stringify(file)}; s.dispatchEvent(new Event('change')); })()`);
+    await until(`document.getElementById('src').value.length > 0 && document.getElementById('src').value.length < ${long.length - 10}`, 10000);
+  };
+  const scrolledDeep = async () => {
+    await translate(long);
+    await evaluate(`scrollTo(0, document.documentElement.scrollHeight); document.getElementById('src').scrollTop = 1e6; document.getElementById('out').scrollTop = 1e6`);
+  };
+  const where = () => evaluate(`(() => ({ y: scrollY, card: document.getElementById('srccard').getBoundingClientRect().top,
+    rows: parseFloat(document.querySelector('.texts').style.getPropertyValue('--head-top') || '0'),
+    max: document.documentElement.scrollHeight - innerHeight, src: document.getElementById('src').scrollTop, out: document.getElementById('out').scrollTop }))()`);
+  await click('#tab-text');
+  await send('Emulation.setDeviceMetricsOverride', phone);
+  for (const [what, act] of [['a new example', pickExample], ['×', () => click('#clear')]]) {
+    await scrolledDeep();
+    await act();
+    await settled();
+    let w = await where();
+    ok(w.y === 0 && w.src === 0 && w.out === 0, `collapsed: ${what} scrolls the page to the top and both boxes to their first line${w.y || w.src || w.out ? ' ' + JSON.stringify(w) : ''}`);
+    await click('#srccard .expand');
+    await scrolledDeep();
+    await act();
+    await settled();
+    w = await where();
+    const good = (Math.abs(w.card - w.rows) < 2 || Math.abs(w.y - w.max) < 2) && w.src === 0 && w.out === 0;
+    ok(good, `expanded source: ${what} brings the source card's first line under the rows on top${good ? '' : ' ' + JSON.stringify(w)}`);
+    await click('#srccard .expand');
+  }
   await send('Emulation.clearDeviceMetricsOverride');
 }
 
@@ -753,6 +869,7 @@ try {
   await outputCheck();
   await exampleCheck(examplesEarly);
   await expandCheck();
+  await resetCheck();
   const version = await evaluate(`document.getElementById('hver').textContent`);
   const versionOk = /^v\S+ \([0-9a-f]{7,}, \d{4}-\d\d-\d\d\)$/.test(version);
   failed ||= !versionOk;
