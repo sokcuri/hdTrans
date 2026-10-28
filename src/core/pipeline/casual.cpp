@@ -279,11 +279,14 @@ bool Run(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// ([るたなういくすつぬむぶぐてだ])ん[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
-// んです (行くんすか, 苦手なんスけど), but not ないんすか, ないんすよ.
+// ([るたなういくすつぬむぶぐてでだ])ん[すス]([かけよねわ」』！？!?。…‥ー〜～ぉぇ、]|$): the spoken
+// んです (行くんすか, 苦手なんスけど), but not ないんすか, ないんすよ that end the sentence after
+// a verb, which the end rows read (書かないんすか 쓰지 않나요). Without contracted forms read, not
+// after で, and not ないんすか or ないんすよ anywhere.
+template <bool kContracted>
 bool Nsu(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (!OneOf(s, p, U"るたなういくすつぬむぶぐてだ")) return false;
+    if (!OneOf(s, p, kContracted ? U"るたなういくすつぬむぶぐてでだ" : U"るたなういくすつぬむぶぐてだ")) return false;
     // なんすか starting a word is 何すか (なんすか？ 뭔데요), its own phrase.
     if (Span(s, pos, p) == "な") {
         size_t before = pos;
@@ -294,9 +297,17 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
     }
     m.group[1] = Span(s, pos, p);
     if (!Lit(s, p, "ん") || !OneOf(s, p, U"すス")) return false;
-    // ないんすか and ないんすよ have their own end rows (書かないんすか 쓰지 않나요).
-    size_t q = p;
-    if (m.group[1] == "い" && s.substr(0, pos).ends_with("な") && OneOf(s, q, U"かよ")) return false;
+    // The end rows of ないんすか and ないんすよ read a verb's ない at the end of a sentence; the ない
+    // of a noun or a particle (問題ないんすか, 何にもないんすか) and one the sentence goes on after
+    // (じゃないんすかね) are read as ないんです.
+    if (size_t q = p; m.group[1] == "い" && s.substr(0, pos).ends_with("な") && OneOf(s, q, U"かよ")) {
+        if (!kContracted) return false;
+        const std::string_view head = s.substr(0, pos - std::string_view("な").size());
+        const char32_t before = head.empty() ? 0 : LastRune(head).cp;
+        const bool verb = IsHiraganaClass(before) && !In(before, U"はもがにとへやで");
+        size_t r = q;
+        if (verb && (q == s.size() || OneOf(s, r, U"」』！？!?。…‥ー〜～ぁぃぅぇぉっ、"))) return false;
+    }
     return CharOrEnd(s, p, U"かけよねわ」』！？!?。…‥ー〜～ぉぇ、", m, 2);
 }
 
@@ -905,7 +916,7 @@ std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
 
-std::string RewriteCasual(std::string_view in, const RunLookup& runs) {
+std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contracted) {
     std::string text = ReplaceAll(in, Shiren, [](const Match& m) { return Cat({"かも", m.group[1], "ない"}); });
     text = ReplaceAll(text, Nee, [](const Match& m) {
         const Match g = Rematch(m, Nee);
@@ -949,7 +960,11 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs) {
     text = ReplaceAll(text, Literal<kUssai>, [](const Match&) { return std::string("うるさい"); });
     text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
     text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
-    text = ReplaceAll(text, Nsu, [](const Match& m) { return Cat({m.group[1], "んです", m.group[2]}); });
+    // てんす and でんす are the contracted ている before it (言ってんすか 言ってるんですか).
+    text = ReplaceAll(text, contracted ? Nsu<true> : Nsu<false>, [contracted](const Match& m) {
+        const bool te = contracted && (m.group[1] == "て" || m.group[1] == "で");
+        return Cat({m.group[1], te ? "るんです" : "んです", m.group[2]});
+    });
     text = ReplaceAll(text, KonnaN, [](const Match& m) { return Cat({m.group[1], "の"}); });
     text = ReplaceAll(text, QuestionKai, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     text = ReplaceAll(text, Ikka, [](const Match& m) { return Cat({"いいか", m.group[1]}); });

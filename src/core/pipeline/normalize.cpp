@@ -84,7 +84,7 @@ std::string Normalize(std::string_view line, const LineContext& ctx, const RunLo
     std::string text = EscapePrivateUse(line);
     if (ctx.document) text = StripRuby(WriteKinTerms(text, ctx.female));
     text = RewriteEmphaticSpellings(JoinNasai(CollapseTsuRuns(NormalizeForms(text), runs)));
-    text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)), runs);
+    text = RewriteCasual(RewriteInterjections(SpokenForms(JoinMasu(text), ctx.exclamationNa, ctx.dialectForms)), runs, ctx.dialectForms);
     return CollapseDoubledWo(JoinPausedCopula(RewriteMilitaryTime(text)));
 }
 
