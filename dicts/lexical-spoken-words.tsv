@@ -27,3 +27,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 バカやろ	바보 녀석	N110			GN							spoken-words:24
 見はり	파수	N110			GN							spoken-words:25
 バカやろう	바보 녀석	N110			GN							spoken-words:26
+そやけど	그렇지만	E331			GN							spoken-words:27
+せやけど	그렇지만	E331			GN							spoken-words:28
