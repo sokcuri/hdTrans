@@ -13,3 +13,32 @@ ending:静かでござるな	この刀は見事でござるな。	이 칼은 훌
 ending:静かでござる	静かでござるが、怖い。	조용하지만, 무섭다.	keep	local-ending
 ending:静かでござる	先生でござる。	선생님이오.	keep	fixed
 ending:静かでござる	お腹いっぱいであります。	배부릅니다.	keep	ending-defaults
+dict:gozaru:copula-10	大丈夫でございますよ。	괜찮습니다.	fix	lookup
+dict:gozaru:copula-6	大丈夫でございますどうぞ どうぞ！	괜찮습니다 어서 자!	fix	lookup
+dict:gozaru:copula-10	気の毒がっていただかなくても結構でございますよ	has:좋습니다	fix	lookup
+dict:gozaru:copula-6	おなじみでございます 皆さん｡	친숙합니다 여러분.	fix	lookup
+dict:gozaru:copula-6	楽しみでございますさあ いかがですか？	기다려집니다 자 어떻습니까?	fix	lookup
+dict:gozaru:copula-1	アッ お目障りでございましたか	앗 눈에 거슬렸습니까	fix	lookup
+dict:gozaru:copula-1	そうでございましたか	그랬습니까	fix	lookup
+dict:gozaru:copula-4	かわいそうに窮屈そうでございましたわ	has:그랬습니다	fix	lookup
+dict:gozaru:copula-5	あっ　私のおしゃべりよりもお疲れでございましょう。	앗 제 수다보다 피곤하겠죠.	fix	lookup
+dict:gozaru:copula-13	お呼びでございましょうか？	부를까요?	fix	lookup
+dict:gozaru:copula-7	お呼びでございますかおう	has:부릅니까	fix	lookup
+dict:gozaru:copula-9	お薬を持参いたしましたがどうやらそれも　無用のようでございますね。	lacks:할게요	fix	lookup
+dict:gozaru:copula-9	同じでございますね。	같네요.	fix	lookup
+dict:gozaru:copula-16	どんなネタか楽しみでございますけども	어떤 소재인가 기다려지지만	fix	lookup
+ending:静かでございますから	うちのね 旅行会社にやってたら完璧でございますから｡	우리의 것 여행사에 하고 있으면 완벽하니까요.	fix	builtin-ending
+ending:静かでございますからな	近頃の魚は利口でございますからな	최근의 물고기는 영리하니까요	fix	builtin-ending
+dict:gozaru:copula-3	大丈夫でございましたよ	괜찮았습니다	fix	lookup
+dict:gozaru:copula-10	嫌でございますよ	싫습니다	fix	lookup
+dict:gozaru:copula-10	綺麗でございますよ	예쁩니다	fix	lookup
+dict:gozaru:copula-12	平気でございますわ	괜찮아요	fix	lookup
+dict:gozaru:copula-12	「上等でございますわーー！！！！」	「훌륭해요~!!!!」	keep	lookup
+dict:gozaru:copula-18	意外に想像力貧困でございますのね〜。	has:빈곤하네요	fix	lookup
+dict:gozaru:copula-21	「貧民風情は逃げ帰って涙で枕をぬらすのがお似合いでございますことよ〜？？」	has:어울려요	fix	lookup
+ending:静かでござる	大丈夫でござる	괜찮으오	fix	builtin-ending
+ending:静かでござる	嫌でござる	싫으오	fix	builtin-ending
+ending:静かでござる	静かでござる	조용하오	keep	builtin-ending
+ending:静かでござる	綺麗でござる	예쁘오	keep	builtin-ending
+dict:gozaru:copula-10	静かでございますよ	조용합니다	keep	lookup
+dict:gozaru:copula-6	大丈夫でございます	괜찮습니다	keep	lookup

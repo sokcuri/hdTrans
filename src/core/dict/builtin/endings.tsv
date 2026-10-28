@@ -396,6 +396,9 @@
 静かでござります	조용합니다	end	prio=-1
 静かでございました	조용했습니다	end	prio=-1
 静かでございますか	조용합니까	end	prio=-1
+静かでございますから	조용하니까요	end	prio=-1
+静かでございますからな	조용하니까요	end	prio=-1
+静かでございますからね	조용하니까요	end	prio=-1
 // だろ: seeking agreement (言っただろ 말했지, そうだろ？ 그렇지?); だろう
 // stays a guess
 書いただろ	썼지	end	prio=-1
