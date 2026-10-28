@@ -27,33 +27,31 @@ bool IsKana(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || r == 
 
 bool In(char32_t r, std::u32string_view set) { return set.find(r) != std::u32string_view::npos; }
 
-// Whether an ASCII space at rs[p] parts a sound that starts its utterance at rs[start] from a
-// hiragana word after it that could otherwise be read as its particle (あっ でも, あっ なんか; not
-// 高くつく…んっ だから): a word of two kana or more that does not start with a particle of one kana
-// (ンッグ は白ワイン, はあ はあちょっと, ウワー ねっ 猫) and whose longest dictionary key has more
-// readings as a particle or conjunction (P2) than as a verb or adjective (not あっ いた, nor the
-// adverb of さっ どうぞ).
-bool SpacedFromText(std::u32string_view rs, size_t start, size_t p, const LineContext& ctx, const dict::Snapshot& snap) {
-    // The sound starts its utterance: the line, a quote, a sentence or a word after a space.
-    if (start > 0 && !In(rs[start - 1], U" 　、。！？!?「」『』（）()")) return false;
-    if (p + 2 >= rs.size() || rs[p] != U' ' || !IsHiraganaRune(rs[p + 1]) || !IsHiraganaRune(rs[p + 2]) ||
-        In(rs[p + 1], U"はがをにもへとのね")) {
-        return false;
-    }
+// Whether character p starts an utterance: the start of the text, or after an opening or closing
+// bracket, a sentence end, a comma, a dash or a heart, spaces before p skipped.
+bool OpensUtterance(std::u32string_view rs, size_t p) {
+    while (p > 0 && (rs[p - 1] == U' ' || rs[p - 1] == U'　')) p--;
+    return p == 0 || In(rs[p - 1], U"\n「」『』（）()。！？!?、♪♡♥❤―");
+}
+
+// Whether an ASCII space at rs[p] parts a sound that opens its utterance at rs[start] from a
+// hiragana word that the dictionary also reads as a conjunction (gram Z0), which would otherwise be
+// read as a particle or ending of the sound (あっ でも 앗 하지만, あっ なんか 앗 뭔가): the whole
+// hiragana run after the space is that word (not あっ だからね, nor だっけ, ならば, です, which no
+// conjunction reads), and the dictionary has no row that drops it (not なんて, which then stays
+// with the sound).
+bool SpacedFromText(std::u32string_view rs, size_t start, size_t p, const dict::Snapshot& snap) {
+    if (!OpensUtterance(rs, start) || p + 2 >= rs.size() || rs[p] != U' ' || !IsHiraganaRune(rs[p + 1])) return false;
     size_t end = p + 1;
-    while (end < rs.size() && end < p + 13 && IsHiraganaRune(rs[end])) end++;
+    while (end < rs.size() && IsHiraganaRune(rs[end])) end++;
     std::string word;
     for (size_t k = p + 1; k < end; k++) text::AppendRune(word, rs[k]);
-    const dict::Candidates found = snap.GetWordInfo(word, dict::LookupMode::General, ctx.lookup);
-    size_t longest = 0;
-    for (const dict::Candidate& c : found.list) longest = std::max(longest, c.source.size());
-    int attaching = 0, predicates = 0;
-    for (const dict::Candidate& c : found.list) {
-        if (c.source.size() != longest || c.codes == nullptr) continue;
-        attaching += c.codes->part.Tag() == 'P' && c.codes->part.ClassDigit() == '2' ? 1 : 0;
-        predicates += In(static_cast<char32_t>(c.codes->part.Tag()), U"MH") ? 1 : 0;
+    bool conjunction = false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
+        if (c.target.empty()) return false;
+        conjunction = conjunction || (c.codes != nullptr && c.codes->gram.HasCode("Z0"));
     }
-    return attaching > predicates;
+    return conjunction;
 }
 
 constexpr std::u32string_view kSmallVowels = U"ァィゥェォ";
@@ -1999,7 +1997,7 @@ std::string SoundText::Write() {
                 next++;
             } else if (Spaced(next) || chain.back().spaceAfter) {
                 b += ' ';
-            } else if (SpacedFromText(rs, chain.front().start, next, ctx_, snap_)) {
+            } else if (SpacedFromText(rs, chain.front().start, next, snap_)) {
                 text::AppendRune(b, output::kPhraseBreak);
             }
         } else if (const size_t lone = LoneCatch(i); lone > 0) {
@@ -2373,7 +2371,7 @@ std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, con
             out += korean;
             if (k + unit < end) out.push_back(rs[k + unit]);
         }
-        if (SpacedFromText(rs, i, end, ctx, snap)) out.push_back(output::kPhraseBreak);
+        if (SpacedFromText(rs, i, end, snap)) out.push_back(output::kPhraseBreak);
         at = end;
         i = end - 1;
     }

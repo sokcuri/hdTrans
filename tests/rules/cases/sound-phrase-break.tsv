@@ -3,13 +3,18 @@ rule	input	expected	kind	layer
 segment:phrase-break	あっ じゃ｡	앗 그러면.	fix	segment
 segment:phrase-break	（貫大くん）あっ なんか 隙間ある	has:앗 뭔가 틈새	fix	segment
 segment:phrase-break	あっ だから花見来たがってたのか｡	has:앗 그러니까 꽃놀이	fix	segment
-segment:phrase-break	(圭吾)ふふっ なんだよ？	(케이고) 후훗 뭐야?	fix	segment
 segment:phrase-break	あっ でも分かんないか	has:앗 하지만 모르	fix	segment
-segment:phrase-break	いえ まだです	아뇨 아직입니다	fix	segment
 segment:phrase-break	ハァー でも よかった	has:하아아 하지만	fix	segment
 segment:phrase-break	あっ では 私はここで	앗 그럼 나는 여기서	fix	segment
-segment:phrase-break	うへえ まだ 半分か…	우헤에 아직 반인가…	fix	segment
 segment:phrase-break	お お お なんかデカそうっすよ。	has:오 오 오 왠지	fix	segment
+segment:phrase-break	あっ だけど	앗 하지만	fix	segment
+segment:phrase-break	あっ なんで	앗 왜	fix	segment
+segment:phrase-break	あっ でも 場所まではちょっと…｡	앗 하지만 장소까지는 조금….	fix	segment
+segment:phrase-break	えーい ならば斬れ！	lacks:에잇 이라면	keep	segment
+segment:phrase-break	あっ だからね	lacks:앗 이니까	keep	segment
+segment:phrase-break	あっ です	lacks:앗 입니다	keep	segment
+segment:phrase-break	あっ なんて…	lacks:앗 …	keep	segment
+segment:phrase-break	あっ だっけ	lacks:앗 이던가	keep	segment
 segment:phrase-break	あっ はい	앗 네	keep	segment
 segment:phrase-break	あっ いた！	앗 있었다!	keep	segment
 segment:phrase-break	さっ どうぞ	자 받아 주세요	keep	segment

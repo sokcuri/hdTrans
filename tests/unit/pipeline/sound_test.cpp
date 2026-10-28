@@ -820,11 +820,11 @@ HD_TEST(pipeline_join_spaced_out) {
 HD_TEST(pipeline_phrase_break) {
     const auto loaded = dict::Load({{
         0, "base.tsv",
-        "key\tko\tpos\tid\n"
-        "なんか\t뭔가\tP251\t1\n"
-        "なんか\t(은)는\tP251\t2\n"
-        "もっと\t더\tE300\t3\n"
-        "い\t있\tM400\t4\n",
+        "key\tko\tpos\tsem\tgram\tid\n"
+        "なんか\t어쩐지\tP251\t\tZ0\t1\n"
+        "なんか\t(은)는\tP251\t\t\t2\n"
+        "もっと\t더\tE300\t\t\t3\n"
+        "い\t있\tM400\t\t\t4\n",
     }});
     HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
     LineContext ctx;
@@ -832,8 +832,10 @@ HD_TEST(pipeline_phrase_break) {
     const Case cases[] = {
         {"あっ なんか", "앗\xEE\x80\x91 なんか"},
         {"「あっ なんか」", "「앗\xEE\x80\x91 なんか」"},
-        // An adverb, a verb, a particle of one kana, text after a word and a space between other words stay.
+        // A word no conjunction reads, kana after the word, a sound that does not open its utterance and
+        // a space between other words stay.
         {"あっ もっと", "앗 もっと"},
+        {"あっ なんかさ", "앗 なんかさ"},
         {"あっ いた", "앗 いた"},
         {"あっ は", "앗 は"},
         {"…あっ なんか", "…앗 なんか"},

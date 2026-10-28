@@ -222,3 +222,13 @@ HD_TEST(output_cleanup_column_gaps) {
     // Without gaps the chunks take one space.
     HD_CHECK_EQ(String(Cleanup(sentences)), std::string("의사 부유 중 상태"));
 }
+
+HD_TEST(output_cleanup_phrase_gap) {
+    // A chunk after a phrase break joins with one space, or with none where its words left only
+    // a closing mark; after another cut the space stays.
+    const std::vector<Sentence> sentences = {{0, {Text("헤에")}}, {1, {Text("?")}}};
+    HD_CHECK_EQ(String(Cleanup(sentences, std::vector<std::string>{"", std::string(kPhraseGap)})), std::string("헤에?"));
+    HD_CHECK_EQ(String(Cleanup(sentences)), std::string("헤에 ?"));
+    const std::vector<Sentence> words = {{0, {Text("앗")}}, {1, {Text("하지만")}}};
+    HD_CHECK_EQ(String(Cleanup(words, std::vector<std::string>{"", std::string(kPhraseGap)})), std::string("앗 하지만"));
+}
