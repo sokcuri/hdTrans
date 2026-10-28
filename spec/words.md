@@ -96,6 +96,10 @@
 일반 가타카나 낱말로 된 줄 머리 표지(セットスキル：)는 항목 이름이지 화자가 아니다.
 명사가 아닌 낱말 뒤의 ちゃんと는 부사라 경칭으로 세지 않는다(大丈夫ちゃんと 괜찮아 제대로). 문서에 여러 번 나와도
 그 낱말이 이름이 되지 않는다. 이름이나 명사 뒤의 ちゃん과 と는 경칭과 조사다(桃花ちゃんと 모모카짱과).
+한자 이름의 단서도 그렇다. 앞의 글자와 함께 사전 낱말을 이루는 한자 뒤의 경칭은 그 낱말의 것이고(笑い飯さん의 笑い飯),
+낱말이면서 지명이기도 한 한자 위에 그 낱말의 읽기를 단 괄호(飯（めし）)와 동사 어간 한자 뒤에서 그 활용으로 시작하는 경칭 꼴
+(行くんか, 出さんか: 뒤에 조사나 쉼표가 오면 경칭)은 이름의 단서가 아니다. 그런 단서만 있는 한자는
+문서의 다른 줄에서도 낱말로 읽는다(笑い飯さん이 있는 문서의 飯 `밥`).
 
 | 원문(한 문서) | 출력 | 구분 |
 |---|---|---|
@@ -103,6 +107,7 @@
 | セットスキル：剣術 / セットスキル：鑑定 / セットスキル：隠密 | 세트 스킬：검술 / 세트 스킬：감정 / 세트 스킬：은밀 | 고침 |
 | レオンさんが来た。 / レオンハルトが来た。 / レオンハルトは王子だ。 | 레온 씨가 왔다. / 레온하르트가 왔다. / 레온하르트는 왕자다. | 유지 |
 | セリス「行くわよ」 / セリス「ええ」 / セリス「待って」 | 세리스 「갈 거야」 / 세리스 「네」 / 세리스 「기다려」 | 유지 |
+| 笑(わら)い飯(めし)さんに勝ってほしい / 笑い飯さんの３組 / 飯 食うとるらしい | 와라이메시 씨를 이겨 줬으면 / 와라이메시 씨의 3조 / 밥 … | 고침 |
 
 사례: `tests/rules/cases/names-common-nouns.tsv`, `tests/rules/cases/names-polite-cues.tsv`,
 `tests/rules/cases/names-chain-parts.tsv`, `tests/rules/cases/names-glosses.tsv`,
@@ -110,7 +115,8 @@
 `tests/rules/cases/names-title-marks.tsv`,
 
 `tests/rules/cases/names-release-titles.tsv`,
-`tests/rules/documents/names-katakana-compounds.tsv`, `tests/rules/documents/names-chanto-adverb.tsv`
+`tests/rules/documents/names-katakana-compounds.tsv`, `tests/rules/documents/names-chanto-adverb.tsv`,
+`tests/rules/documents/names-word-tail-evidence.tsv`
 
 ### 이름 행 판정
 

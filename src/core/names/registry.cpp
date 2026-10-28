@@ -134,13 +134,14 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 // word, or ends in one, and the reading is one too: its own reading (私（わたくし）,
 // 夾叉（きょうさ）) or another word read in its place (提督（あなた）, 各艦（ふね）). A
 // reading that is no word still names (三日（みか）, 千里（ちさと）), unless it is in no
-// dictionary at all and the base is only a word (用途（ようと）); and so does one that is
-// also a name, unless a word of it has the base's Korean (秋刀魚（さんま）: 꽁치).
+// dictionary at all and the base is only a word, or a word that also names a place
+// (用途（ようと）, 飯（めし）); and so does one that is also a name, unless a word of it has the
+// base's Korean (秋刀魚（さんま）: 꽁치).
 bool Registry::Gikun(std::string_view base, std::string_view reading) {
     const DictFlags r = Flags(reading);
     if (r.records == 0 && !r.layerSurname && !r.layerGiven) {
         const DictFlags b = Flags(base);
-        return b.common && !b.person && !b.city && !b.layerSurname && !b.layerGiven;
+        return b.common && !b.person && (!b.city || b.word) && !b.layerSurname && !b.layerGiven;
     }
     if (!r.common) return false;
     if (r.person) {

@@ -77,6 +77,10 @@ const dict::Snapshot* Dictionary() {
          "ウチ\t우리\tN110\t\t\tGN\t59\n"
          "フトン\t이불\tN110\t\t\tGN\t60\n"
          "ふとん\t이부자리\tN110\t\t\tGN\t61\n"
+         "行\t가&AE@\tM421\t\t\tGN\t9104\n"
+         "笑い飯\t와라이메시\tN110\t\t\tGN\t9101\n"
+         "飯\t밥\tN110\tVFd\t\tGN\t9102\n"
+         "飯\t이\tN130\tQCTVPl\t\tGN\t9103\n"
          "猫\t고양이\tN110\t\t\tGN\t68\n"
          "猫\t네코\tN130\tQPN\tWb\tGN\t69\n"
          "たま\t구슬\tN110\t\t\tGN\t70\n"
@@ -518,6 +522,14 @@ HD_TEST(names_honorifics) {
         names::Registry r = Scan(snap, doc);
         HD_CHECK(r.Names() == want);
     }
+    // The honorific after a word that ends in the run is the word's (笑い飯さん), and the
+    // word's own reading over a word that also names a place is no gloss (飯（めし）).
+    HD_CHECK(Scan(snap, Repeat("笑い飯さんだ。", 6)).Names().empty());
+    const std::vector<std::string> glossed = Scan(snap, Repeat("笑(わら)い飯さんだ。", 6)).Names();
+    HD_CHECK(std::find(glossed.begin(), glossed.end(), "飯") == glossed.end());
+    HD_CHECK(Scan(snap, Repeat("飯（めし）を食べた。", 2)).Names().empty());
+    // The kana of a verb's conjugation are no honorific (行くんか 行く).
+    HD_CHECK(Scan(snap, Repeat("行くんか？", 8)).Names().empty());
     // A common word that honorifics show to be a person reads as the person of the name layer.
     HD_CHECK_EQ(Scan(snap, Repeat("桃花ちゃん、おはよう。", 4)).Render("桃花"), std::string("모모카"));
     names::Registry r = Scan(snap, Repeat("リン様", 4));
