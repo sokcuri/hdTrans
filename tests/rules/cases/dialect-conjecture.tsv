@@ -47,3 +47,8 @@ dict:spoken-words:24	バカやろが	바보 녀석이	fix	lookup
 dict:spoken-words:23	ばかやろって	바보 녀석은	fix	lookup
 dict:spoken-words:23	う〜ん… ばかやろー。	으음~… 바보 녀석~.	fix	lookup
 dict:spoken-words:23	(一同)ばかやろー。	(일동) 바보 녀석~.	fix	lookup
+dict:spoken-words:26	バカやろう茶化すなよ！	바보 녀석 놀리지 마!	fix	lookup
+dict:spoken-words:26	バカやろう！	바보 녀석!	fix	lookup
+dict:jisjk:353397	ばかやろう！　何で　お前が　わざわざ…。でもよ…。	바보 녀석! 왜 네가 일부러…. 하지만….	fix	lookup
+dict:jisjk:353397	ばかやろう茶化すなよ	바보 녀석 놀리지 마	fix	lookup
+dict:jisjk:373562	このやろう茶化すなよ	이 자식 놀리지 마	keep	lookup
