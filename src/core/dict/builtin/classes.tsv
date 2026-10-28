@@ -157,6 +157,7 @@
 //= mark.question	Question marks, after which a row read only where the utterance ends asks instead (また明日？ 또 내일?).
 //= ending.copies-bare	The bare endings of the last copy of an adjective or adjectival noun said again as a predicate (痛い痛い, 嫌だ嫌だ).
 //= ending.copies-plain	The Korean endings of that last copy that the copies may recast: the plain 1다 and the exclamative 6.
+//= ending.nominal	The ending rows, as key=ko, that make the word before them a noun (素早さ 재빠름, 重さ 무게): a word that starts with a sign is written on to it as to a noun (素早さ+2 재빠름+2).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.ability-condition	Words that with なら name the situation that makes an act possible (これなら, ここなら): before a derived causative in られよう they make it the potential.
 //= noun.arrival-suru	Verbal nouns of moving to a post or a place whose する in the て form before 来る says the arrival (転属してきている 전속해 와 있다, 帰国してきている 귀국해 와 있다).
@@ -7101,6 +7102,8 @@ ending.no-exclamation-na	よう
 ending.no-exclamation-na	そう
 ending.no-exclamation-na	です
 ending.no-exclamation-na	ます
+ending.nominal	さ=8
+ending.nominal	み=8
 adverb.negative-polarity	二度と
 adverb.negative-polarity	決して
 adverb.negative-polarity	けっして

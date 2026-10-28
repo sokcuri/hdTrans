@@ -6,6 +6,7 @@
 #include "core/dict/classes.h"
 #include "core/output/cleanup.h"
 #include "core/output/compose.h"
+#include "core/output/inflect.h"
 #include "core/output/particle.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
@@ -605,11 +606,49 @@ bool ReadSign(std::string_view text) {
            dict::InClassRune(HDTRANS_CLASS("sign.final-rieul"), r.cp);
 }
 
-// Whether a token is one letter or number written as a symbol (①, Ⅳ, α), a word of its own.
-bool SymbolLetter(const TokenText& tok) {
-    const text::Rune r = text::DecodeRune(tok.text);
-    return tok.type == tokenizer::kTypeSymbol && tok.span == 0 && !tok.text.empty() && r.size == tok.text.size() &&
-           r.cp >= 0x80 && !text::IsKanji(r.cp) && !text::IsSymbol(r.cp) && !text::IsPunct(r.cp);
+// Whether an item of a token of the given type is one letter or number written as a symbol (①, Ⅳ, α),
+// a word of its own.
+bool SymbolLetter(int type, std::string_view surface) {
+    const text::Rune r = text::DecodeRune(surface);
+    return type == tokenizer::kTypeSymbol && !surface.empty() && r.size == surface.size() && r.cp >= 0x80 &&
+           !text::IsKanji(r.cp) && !text::IsSymbol(r.cp) && !text::IsPunct(r.cp);
+}
+
+// Whether item k is a word that starts with a sign: a number led by + or - (+10, -5) or a symbol
+// letter (①, Ⅳ, α). Reads the source surface: the token text of a later item is already written.
+bool SignLedWord(const std::vector<TokenText>& tokens, const ResolvedItem& item) {
+    const TokenText& tok = tokens[static_cast<std::size_t>(item.tokenIndex)];
+    if (tok.span != 0 || item.offset != 0) return false;
+    if (SymbolLetter(tok.type, item.surface)) return true;
+    return tok.type == tokenizer::kTypeAsciiSymbol && (item.surface.starts_with('+') || item.surface.starts_with('-')) &&
+           tokenizer::SignedNumber(item.surface);
+}
+
+// Whether the form 8 a stem writes is its noun form: a stem row written as a word (重さ 무게) or one
+// whose marker family writes form 8 by the rule (재$C1@ 재빠름), not by an exception of the family
+// (그%C5@ 그래, 시퍼%C5@ 시퍼래).
+bool NominalForm(std::string_view stem) {
+    if (stem.size() < 4 || stem.back() != '@') return true;
+    const std::string_view key = stem.substr(stem.size() - 4);
+    if (key.find_first_of("&$%") != 0) return true;
+    const internal::KoreanFamily* family = internal::FindKoreanFamily(key);
+    if (family == nullptr) return true;
+    return std::none_of(family->exceptions.begin(), family->exceptions.end(),
+                        [](const internal::InflectionException& e) { return e.code == '8'; });
+}
+
+// Whether a word that starts with a sign stands apart after item by the kind of the row that
+// produced it. It is written on only to a noun row other than a pronoun (pos x120: 우리 μ's, 이것 α)
+// that reads as a bare noun (no gram Nn: 答えは 대답은, 当然 당연히 have it) and to an adjective or adjectival noun whose ending row makes it a
+// noun (ending.nominal) in its noun form (素早さ 재빠름); after any other row it stands apart (여기서
+// ①, 그 ①, 좋아 +1, 그래 +1).
+bool ApartAfterRow(const ResolvedItem& item, char kind, std::string_view tags) {
+    if (item.directIndex >= 0) {
+        const std::string row = item.endingSurface + "=" + item.ending.text;
+        return !((kind == '7' || kind == '8') && dict::InClass(HDTRANS_CLASS("ending.nominal"), row) &&
+                 NominalForm(EntryText(item)));
+    }
+    return kind != '1' || Code(item).starts_with("120") || Contains(tags, "Nn");
 }
 
 // Whether item k follows item k - 1 with nothing between them: in the same token, or at the
@@ -1237,12 +1276,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     }
     const ResolvedItem& next = items[nextIndex];
     if (item.spaceAfter && (nextKind != '2' || Contains(nextTags, "Z0"))) return Result(std::move(t), true);
-    // A letter or number written as a symbol keeps the source spacing after a noun (스테이지Ⅳ, 플러스α);
-    // after a particle or an ending it stands apart as a word (이것은 ①입니다).
-    if (const char32_t end = LastRune(item.surface);
-        kind == '1' && (IsKanji(end) || tokenizer::Class(end) == tokenizer::kClassKatakana) &&
-        SymbolLetter(tokens[static_cast<std::size_t>(next.tokenIndex)]) && Follows(items, nextIndex)) {
-        return Result(std::move(t), false);
+    // A word that starts with a sign (+10, ①, Ⅳ, α) written straight on to a noun stays joined to it
+    // (방패+10, 스테이지Ⅳ, 재빠름+2); after a particle or an ending it stands apart (레벨이 +1,
+    // 이것은 ①입니다, 있기 때문에 α).
+    if (kind != '6' && SignLedWord(tokens, next) && Follows(items, nextIndex)) {
+        return Result(std::move(t), ApartAfterRow(item, kind, tags));
     }
     if (const int a = tokens[item.tokenIndex].type, b = tokens[next.tokenIndex].type;
         (a == tokenizer::kTypeProtected || b == tokenizer::kTypeProtected) && KeepsAdjacency(a) && KeepsAdjacency(b)) {
@@ -1652,8 +1690,9 @@ void EmitSynchronousOutput(const std::vector<TokenText>& tokens, int first, int 
             case tokenizer::kTypeJapanese: case tokenizer::kTypeProtected:
                 break;
             case tokenizer::kTypeAsciiSymbol:
-                // A number written with signs is a word (50%, 10:30, +1) and keeps the space before it.
-                if (tokenizer::SignedNumber(tok.text)) break;
+                // A number written with signs is a word (50%, +1) and keeps the space before it, also
+                // when the space after it is written (레벨을 +1 한다).
+                if (tokenizer::SignedNumber(std::string_view(tok.text).substr(0, tok.text.find_last_not_of(' ') + 1))) break;
                 [[fallthrough]];
             default:
                 if (tok.span == 0 && !out.empty() && i - 1 >= 0 && tokens[i - 1].type != tokenizer::kTypeAsciiSpace) {

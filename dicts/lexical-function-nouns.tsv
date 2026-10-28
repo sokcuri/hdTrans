@@ -56,7 +56,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 流石は	역시	E300			GN							function-nouns:57
 だがしかし	하지만	E300			GN					1		function-nouns:58
 ちょっと	잠깐	E300			GN	8309	||1 &&2 G+0== "Hz" ||5 S+2== "くん" S+2== "君" S+2== "さん" S+2== "ちゃん" S+2== "様"	문장 첫머리에서 경칭을 붙인 이름이 뒤따르는 ちょっと는 부르는 잠깐이다(ちょっとアルくん 잠깐 아르 군).				function-nouns:59
-そう	그래,	N110			GN	8310	||1 &&5 G+0== "Hz" ||2 P+1== "1**" S+1== "今" S+1!= "Lじゃ" S+1!= "では" ||2 D+2== "," &&2 S+2== "だ" G+2== "Ow"	문장 첫머리의 そう 뒤에 명사 하나와 쉼표나 だ가 오면 맞장구 그래다(そう今、 그래, 지금).				function-nouns:60
+そう	그래,	N110		Nn	GN	8310	||1 &&5 G+0== "Hz" ||2 P+1== "1**" S+1== "今" S+1!= "Lじゃ" S+1!= "では" ||2 D+2== "," &&2 S+2== "だ" G+2== "Ow"	문장 첫머리의 そう 뒤에 명사 하나와 쉼표나 だ가 오면 맞장구 그래다(そう今、 그래, 지금).				function-nouns:60
 五分	대등	N110			GN						ごぶ	function-nouns:61
 こんなところ	이런 곳	C110	XXXVPl		GN							function-nouns:63
 あんなところ	저런 곳	C110	XXXVPl		GN							function-nouns:64

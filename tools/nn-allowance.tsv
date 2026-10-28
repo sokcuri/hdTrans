@@ -1,0 +1,93 @@
+# Noun rows of the base and words layers that have the shape tools/nn-rows.py looks for but read as
+# a bare noun (毛がに 털게, 子ども 아이, チューリヒ 취리히): they have no gram Nn. tools/nn-rows.py
+# --check fails on a row of that shape not listed here, on a listed row that no longer needs to be
+# and on a line listed twice.
+file	key	ko
+base.tsv	あてもの	수수께끼 놀이
+base.tsv	あわてもの	덜렁이
+base.tsv	いえもと	종가
+base.tsv	いっこくもの	고집쟁이
+base.tsv	いとなが	실길이
+base.tsv	うつけもの	멍청이
+base.tsv	うに	게
+base.tsv	おくびょうもの	겁쟁이
+base.tsv	かが	가가
+base.tsv	かぎのて	길모퉁이
+base.tsv	かけすて	부금 중도
+base.tsv	かに	게
+base.tsv	きゅうと	옛 수도
+base.tsv	きょうと	교도
+base.tsv	きれもの	수완가
+base.tsv	ぎゃくと	역도
+base.tsv	ぎょうじゅうざが	행주 좌와
+base.tsv	くちもと	입가
+base.tsv	くろうと	전문가
+base.tsv	けがに	털게
+base.tsv	こと	거문고
+base.tsv	こども	어린이
+base.tsv	さわがに	민물게
+base.tsv	しゃれもの	멋쟁이
+base.tsv	じょうと	양도
+base.tsv	すきもの	호사가
+base.tsv	せいきょうと	청교도
+base.tsv	せんと	천도
+base.tsv	ついたて	칸막이
+base.tsv	つい立て	칸막이
+base.tsv	なまけもの	게으름뱅이
+base.tsv	ひ	히
+base.tsv	ひとざと	마을
+base.tsv	へだて	칸막이
+base.tsv	ままごと	소꿉놀이
+base.tsv	やきもの	구이
+base.tsv	よすが	연고
+base.tsv	れんぞくなが	연속 길이
+base.tsv	アンジッヒ	앙 지히
+base.tsv	チューリヒ	취리히
+base.tsv	テレあさ	TV 아사히
+base.tsv	テレ朝	TV 아사히
+base.tsv	フリードリヒ	프리드리히
+base.tsv	ペニヒ	페니히
+base.tsv	ライプチヒ	라이프치히
+base.tsv	ライプツィヒ	라이프치히
+base.tsv	前立て	가슴받이
+base.tsv	南飛	난히
+base.tsv	口もと	입가
+base.tsv	合肥	고우히
+base.tsv	土用丑の日	도요노우시노히
+base.tsv	大伴武日	오오토모노 다케히
+base.tsv	子ども	아이
+base.tsv	小じゅうと	시누이
+base.tsv	怠けもの	게으름뱅이
+base.tsv	慌てもの	덜렁이
+base.tsv	成れの果て	말로
+base.tsv	掛け捨て	부금 중도
+base.tsv	旭-旭川地方  売市場	교쿠이치아사히
+base.tsv	本たて	책꽂이
+base.tsv	本立て	책꽂이
+base.tsv	東北アサヒ	도호쿠아사히
+base.tsv	栗のいが	밤송이
+base.tsv	桜田常久	사쿠라다츠네히
+base.tsv	毛がに	털게
+base.tsv	獅子公	하인리히
+base.tsv	筆立て	붓꽂이
+base.tsv	耳当て	귀걸이
+base.tsv	胸当て	가슴받이
+base.tsv	臆病もの	겁쟁이
+base.tsv	衝立て	칸막이
+base.tsv	鉤のて	길모퉁이
+base.tsv	食いもの	먹이
+lexical-everyday-words.tsv	もくずがに	참게
+words-idioms.tsv	困ったひと	골칫덩이
+words-slang.tsv	求肥	규히
+words-variants.tsv	アン・ジッヒ	앙 지히
+words-variants.tsv	小もの	잔챙이
+words-variants.tsv	本もの	전문가
+words-variants.tsv	焼きもの	구이
+words-variants.tsv	胸あて	가슴받이
+words-variants.tsv	若いもの	젊은이
+words-variants.tsv	雪つぶて	뭉친 눈덩이
+words.tsv	オリガルヒ	올리가르히
+words.tsv	ズワイがに	대게
+words.tsv	ナマハゲ	나마하게
+words.tsv	ヘラクレスおおかぶと	헤라클레스장수풍뎅이
+words.tsv	耳あて	귀걸이

@@ -466,7 +466,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 力こぶを入れ	힘을 &FT@	M427		Pn	GN				llm			i:461
 力瘤を入れ	힘을 &FT@	M427		Pn	GN				llm			i:462
 礼を言	감사 인사를 &AV@	M420		Pn	GN				llm			i:463
-連日連夜	밤낮없이	N110			GN				llm			i:464
+連日連夜	밤낮없이	N110		Nn	GN				llm			i:464
 傲慢不遜	오만불손%A1@	G8U0			GN							i:465
 毀誉褒貶	칭찬과 비난	N110			GN				llm			i:466
 彗星のように現れ	혜성처럼 나타&A5@	M427			GN				llm			i:467
@@ -3507,8 +3507,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 降りみ降らずみ	오락가락	A9D0			GN							i:3501
 目から鱗の落ちる	눈이 번쩍 뜨이는	A9D0			GN				llm			i:3502
 目からウロコの落ちる	눈이 번쩍 뜨이는	A9D0			GN				llm			i:3503
-見ての通り	보시는 바와 같이	N110			GN				llm			i:3504
-見てのとおり	보시는 바와 같이	N110			GN				llm			i:3505
+見ての通り	보시는 바와 같이	N110		Nn	GN				llm			i:3504
+見てのとおり	보시는 바와 같이	N110		Nn	GN				llm			i:3505
 嫁に行き遅れ	혼기를 놓&AO@	M427			GN				llm			i:3506
 たちの悪い	질이 나쁜	A9D0			GN				llm			i:3507
 タチの悪い	질이 나쁜	A9D0			GN				llm			i:3508
@@ -5976,8 +5976,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 風のうわさ	풍문	N110			GN				llm			i:5971
 誰彼かまわず	누구 할 것 없이	E300			GN				llm			i:5972
 誰彼構わず	누구 할 것 없이	E300			GN				llm			i:5973
-誰彼となく	누구랄 것 없이	N110			GN				llm			i:5974
-誰かれとなく	누구랄 것 없이	N110			GN				llm			i:5975
+誰彼となく	누구랄 것 없이	N110		Nn	GN				llm			i:5974
+誰かれとなく	누구랄 것 없이	N110		Nn	GN				llm			i:5975
 夜の営み	잠자리	N110			GN				llm			i:5976
 猛省を促	맹성을 촉구&AV@	M423		Pn	GN				llm			i:5977
 よくある事	흔한 일	N110			GN				llm			i:5978

@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/text/unicode.h"
 #include "core/word/conjugation.h"
 #include "core/word/constructions.h"
 #include "core/word/flush.h"
@@ -405,6 +406,17 @@ bool Adjacent(const Item* a, const Item* b) {
            a->start + a->length == b->start;
 }
 
+// Whether the character right before the run at it is one the loaded pre-filter writes before kana
+// ((⊆るな): the kana after it are text the pre-filter wrote, which its post-filter takes out again.
+bool AfterFilterText(const Worker& w, const Item* it) {
+    if (w.settings.filterWritten.empty()) return false;
+    std::string_view before = it->text.substr(0, static_cast<std::size_t>(it->start));
+    for (int j = it->tokenIndex - 1; before.empty() && j >= 0; j--) before = w.tokens.Raw(static_cast<std::size_t>(j));
+    if (before.empty()) return false;
+    const char32_t c = text::DecodeRune(LastChar(before)).cp;
+    return std::binary_search(w.settings.filterWritten.begin(), w.settings.filterWritten.end(), c);
+}
+
 }  // namespace
 
 // An unread kana head before a placed particle or ending is still the noun that grammar
@@ -445,7 +457,7 @@ void ReadUnplacedHeads(Flusher& f) {
         for (std::string_view rest = raw; !rest.empty(); rest.remove_prefix(FirstChar(rest).size())) {
             if (!Has("ぁぃぅぇぉゃゅょゎっゕゖ", FirstChar(rest))) voiced = true;
         }
-        if (!voiced) continue;
+        if (!voiced || AfterFilterText(w, it)) continue;
         const std::string target = TransliterateHiragana(raw);
         if (target.empty()) continue;
         Record* record = w.CreateSyntheticRecord(it->tokenIndex, raw, true);
