@@ -659,4 +659,11 @@ std::string HistoricalNames(const dict::Snapshot& snap, std::span<const std::str
     return HistoricalRows(snap, views);
 }
 
+std::string_view CommonNamePrefix(std::string_view prefix) {
+    for (const OfficeKey& p : NamePrefixes()) {
+        if (p.key == prefix) return p.kana;
+    }
+    return {};
+}
+
 }  // namespace hdTrans::names

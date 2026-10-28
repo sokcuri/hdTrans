@@ -177,6 +177,50 @@ bool LongVowel(std::string_view prev, std::string_view vowel, Preset p) {
 
 }  // namespace
 
+bool NameLongVowel(std::string_view prev, std::string_view vowel, std::string_view next) {
+    if (vowel == "u" && next == "e") return false;
+    return ((prev == "o" || prev == "yo") && (vowel == "u" || vowel == "o")) || ((prev == "u" || prev == "yu") && vowel == "u");
+}
+
+std::string WithoutNameLongVowels(std::string_view hangul, bool oo) {
+    // The vowel name of a syllable with the initial ㅇ and no final, the kind that writes a bare
+    // vowel mora (우, 오, 에).
+    const auto vowelOf = [](char32_t c) -> std::string_view {
+        const std::optional<Syllable> s = Split(c);
+        if (!s || s->final != 0) return "";
+        switch (s->vowel) {
+            case 5: return "e";
+            case 8: return "o";
+            case 12: return "yo";
+            case 13: return "u";
+            case 17: return "yu";
+        }
+        return "";
+    };
+    std::vector<char32_t> rs;
+    for (std::size_t i = 0; i < hangul.size();) {
+        const Rune r = DecodeRune(hangul.substr(i));
+        rs.push_back(r.cp);
+        i += r.size;
+    }
+    std::string out;
+    bool dropped = false;
+    for (std::size_t i = 0; i < rs.size(); i++) {
+        const std::optional<Syllable> s = Split(rs[i]);
+        const bool bare = s && s->initial == 11 && s->final == 0;
+        const std::string_view prev = i > 0 ? vowelOf(rs[i - 1]) : "";
+        const std::string_view next = i + 1 < rs.size() && Split(rs[i + 1]) && Split(rs[i + 1])->initial == 11 ? vowelOf(rs[i + 1]) : "";
+        const std::string_view vowel = bare ? vowelOf(rs[i]) : "";
+        if (bare && !dropped && !prev.empty() && (oo || vowel != "o") && NameLongVowel(prev, vowel, next)) {
+            dropped = true;
+            continue;
+        }
+        dropped = false;
+        AppendRune(out, rs[i]);
+    }
+    return out;
+}
+
 bool SpellsSound(std::string_view kana, std::string_view korean, bool loanword) {
     std::string ko;
     for (const char c : korean) {

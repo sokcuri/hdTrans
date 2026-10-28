@@ -36,7 +36,9 @@
 내장 표의 원본은 저장소의 `src/core/dict/builtin/*.tsv`이고, 기본 모드에서만 더하는 행은
 `src/core/dict/builtin/extra/*.tsv`(번역문 철자 교정 `cleanup.tsv` 포함)에 있습니다. 빌드할 때
 `cmake/builtin_tables.cmake`가 이 파일들을 C++ 소스로 바꿔 라이브러리에 넣으므로, 표를 고칠 때는
-TSV만 고칩니다. 내장 표의 행은 모두 같은 파일 번호로 컴파일되므로, 키가 같은 행끼리는 `prio`가 같으면
+TSV만 고칩니다. `extra/kanji_on.tsv`(한자의 첫 음독, Unihan에서 `tools/kanji-on.py`)와
+`extra/name_heads.tsv`(이름 사전의 이름들이 첫 한자에 주는 읽기, `tools/name-heads.py`)는 한자 하나와 郎으로 된
+이름(LEX-29)을 읽는 표로, 엔진이 파일 이름으로 찾아 읽습니다. 이름 사전을 바꾸면 `tools/name-heads.py`를 다시 돌립니다. 내장 표의 행은 모두 같은 파일 번호로 컴파일되므로, 키가 같은 행끼리는 `prio`가 같으면
 파일과 상관없이 줄 번호가 작은 행이 이깁니다. 컴파일되지 않는 행이 하나라도 있으면 사전을 불러오지
 못하므로 단위 테스트가 모든 내장 표를 컴파일해 봅니다.
 

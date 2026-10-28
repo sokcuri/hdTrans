@@ -17,6 +17,16 @@ enum class Preset {
     Official,
 };
 
+// Whether vowel ("u", "o"), after the vowel prev and before the vowel next of a bare vowel
+// mora ("" for none), is a long vowel that a Japanese name drops: ou, oo and uu, but not a
+// u before e (いのうえ 이노우에).
+bool NameLongVowel(std::string_view prev, std::string_view vowel, std::string_view next);
+
+// hangul without the long vowels that NameLongVowel drops, one pair at a time (쿄우이치로우
+// 쿄이치로, 이노우에 kept); oo also drops the second o of oo (오오노 오노), which dictionary rows of
+// names keep (LEX-29).
+std::string WithoutNameLongVowels(std::string_view hangul, bool oo);
+
 // Whether the Korean korean, spaces left out, only spells the sound of kana as a name is written
 // (Preset::Fan or FanShort; パラパラ 파라파라, フタバ 후타바), or with loanword as a loanword is
 // written too (Preset::Official): such a row gives the word no meaning of its own.
