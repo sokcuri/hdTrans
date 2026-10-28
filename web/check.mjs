@@ -780,14 +780,38 @@ async function expandCheck() {
     await evaluate(`(() => { const s = document.getElementById('src'); s.value = s.value + '\\n猫が来た。'; s.dispatchEvent(new Event('input')); })()`);
     const r = await settled();
     ok(r.out.length > before && r.out.endsWith('고양이가 왔다.'), `${name}: the hidden translation keeps up with the input`);
+    await click('#settings-toggle');
+    await press('Escape');
+    await until(`!document.getElementById('settings-sheet').open`, 2000).catch(() => {});
+    ok(await evaluate(`!document.getElementById('settings-sheet').open && document.getElementById('srccard').classList.contains('expanded')`),
+      `${name}: Esc on the settings layer closes only the layer, the card stays expanded`);
+    // A key pressed right after a close request can be swallowed by the browser.
+    await sleep(500);
     if (name === 'phone') {
       await evaluate(`document.getElementById('src').focus()`);
       await send('Emulation.setDeviceMetricsOverride', { ...phone, height: 500 });
       await until(`Math.abs(document.getElementById('srccard').getBoundingClientRect().bottom - (innerHeight - 12)) < 2`, 3000).catch(() => {});
       v = await view();
       ok(alone(v.src), `phone: with the window cut to 500 px as by a keyboard, the expanded source still fits${alone(v.src) ? '' : ' ' + JSON.stringify(v)}`);
-      await evaluate(`document.activeElement.blur()`);
       await send('Emulation.setDeviceMetricsOverride', phone);
+      await laidOut();
+      const unzoomed = await evaluate(`document.getElementById('srccard').style.height`);
+      await send('Emulation.setPageScaleFactor', { pageScaleFactor: 2 });
+      await sleep(400);
+      const zoomed = await evaluate(`document.getElementById('srccard').style.height`);
+      await send('Emulation.setPageScaleFactor', { pageScaleFactor: 1 });
+      ok(zoomed === unzoomed, `phone: a pinch zoom leaves the expanded card at ${unzoomed} (${zoomed} zoomed)`);
+      await press('Escape');
+      await evaluate(`document.getElementById('src').focus()`);
+      await send('Emulation.setDeviceMetricsOverride', { ...phone, width: 844, height: 390 });
+      await laidOut();
+      v = await view();
+      const turned = v.src && v.out && Math.abs((v.src.bottom - v.src.top) - (v.out.bottom - v.out.top)) < 1 && Math.abs(v.src.top - v.out.top) < 1;
+      ok(turned, `phone: turned sideways with the input focused, the cards are laid out again side by side${turned ? '' : ' ' + JSON.stringify(v)}`);
+      await send('Emulation.setDeviceMetricsOverride', phone);
+      await evaluate(`document.activeElement.blur()`);
+      await laidOut();
+      await click('#srccard .expand');
     }
     await press('Escape');
     v = await view();

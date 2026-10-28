@@ -119,6 +119,7 @@ $('settings-close').addEventListener('click', () => sheet.close());
 sheet.addEventListener('keydown', (ev) => {
   if (ev.key === 'Escape') {
     ev.preventDefault();
+    ev.stopPropagation();
     sheet.close();
   }
   if (ev.key !== 'Tab') return;
@@ -150,7 +151,8 @@ const textPanel = $('text');
 const cards = [$('srccard'), $('outcard')];
 const expanded = (card: HTMLElement) => card.classList.contains('expanded');
 const stacked = matchMedia('(max-width: 48rem)');
-let normalHeight = 0; // the window height the two-card sizes were made for
+let normalHeight = 0; // the window height and width the two-card sizes were made for
+let normalWidth = 0;
 function layout() {
   const card = cards.find(expanded);
   const on = card !== undefined && !textPanel.hidden;
@@ -159,8 +161,11 @@ function layout() {
   if (on) textPanel.dataset.expanded = card.id;
   else delete textPanel.dataset.expanded;
   if (textPanel.hidden) return;
-  // The visual viewport leaves out an on-screen keyboard.
-  const height = window.visualViewport?.height ?? innerHeight;
+  // The visual viewport leaves out an on-screen keyboard; while it is
+  // pinch-zoomed the sizes stay as they are.
+  const vv = window.visualViewport;
+  if (vv && Math.abs(vv.scale - 1) > 0.01) return;
+  const height = vv?.height ?? innerHeight;
   const pageTop = (el: HTMLElement) => el.getBoundingClientRect().top + scrollY;
   const margin = 12;
   if (on) {
@@ -169,9 +174,11 @@ function layout() {
     scrollTo(0, top);
     return;
   }
-  // While typing with the keyboard up, the two cards keep their sizes.
-  if (document.activeElement === src && height < normalHeight) return;
+  // While typing with the keyboard up (a shorter window of the same width,
+  // unlike a rotation), the two cards keep their sizes.
+  if (document.activeElement === src && height < normalHeight && innerWidth === normalWidth) return;
   normalHeight = height;
+  normalWidth = innerWidth;
   const room = height - pageTop(texts) - margin;
   if (stacked.matches) {
     const both = room - (parseFloat(getComputedStyle(texts).rowGap) || 0);
@@ -195,15 +202,23 @@ function expand(card: HTMLElement | undefined) {
 }
 for (const card of cards) card.querySelector('.expand')!.addEventListener('click', () => expand(expanded(card) ? undefined : card));
 document.addEventListener('keydown', (ev) => {
-  if (ev.key === 'Escape' && !sheet.open && cards.some(expanded)) expand(undefined);
+  if (ev.key === 'Escape' && !ev.defaultPrevented && !sheet.open && cards.some(expanded)) expand(undefined);
 });
-addEventListener('resize', layout);
-window.visualViewport?.addEventListener('resize', layout);
-const above = new ResizeObserver(() => layout());
+// Window, visual viewport and row size changes lay out once per frame.
+let laying = 0;
+const relayout = () => {
+  if (laying) return;
+  laying = requestAnimationFrame(() => {
+    laying = 0;
+    layout();
+  });
+};
+addEventListener('resize', relayout);
+window.visualViewport?.addEventListener('resize', relayout);
+const above = new ResizeObserver(relayout);
 for (const el of [document.querySelector('header')!, document.querySelector<HTMLElement>('.status')!, settings, $('examplebar'), $('langbar')]) above.observe(el);
 
-// Tabs: the dictionary editor (the selected dictionary's grids) sits below
-// the text tab's panes and beside the list in the dictionary tab.
+// Tabs; the last one shown is kept.
 const tabs: [HTMLElement, HTMLElement][] = [
   [$('tab-text'), $('text')],
   [$('tab-docs'), $('docs')],
