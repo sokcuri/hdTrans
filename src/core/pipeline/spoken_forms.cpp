@@ -316,9 +316,11 @@ bool KansaiNegative(std::string_view s, size_t pos, Match& m) {
 // (やろう, Kansai やろ), which follows a て or で form (貸してやろか, 読んでやろ) or a particle of an
 // object, a doer or a partner (これをやろう, 一緒にやろな, 俺がやろか, ちゃんとやろな, 今度はやろ,
 // これもやろ) or starts a sentence or a clause (よし、やろか), nor the やろ of 野郎 after a
-// demonstrative or ばか (このやろが, バカやろって). Nor after a polite ます or ません, which takes no
-// copula (なりますやろか), a Kansai negative へん the spoken forms could not read (気ぃつかへん) or a
-// noun quoted by いう without と (平和いうんじゃろうか), which leave the predicate unread.
+// demonstrative or ばか (このやろが, バカやろって), nor after the Kansai adverbial う of an
+// adjective of one kanji (景気良うやろか, 早うやろ), which describes a verb. Nor after a polite
+// ます or ません, which takes no copula (なりますやろか), a Kansai negative へん the spoken forms
+// could not read (気ぃつかへん) or a noun quoted by いう without と (平和いうんじゃろうか), which
+// leave the predicate unread.
 bool BeforeCopula(std::string_view s, size_t pos) {
     const std::string_view head = s.substr(0, pos);
     if (head.empty() || head.ends_with("へん") || head.ends_with("ます") || head.ends_with("ません")) return false;
@@ -328,6 +330,12 @@ bool BeforeCopula(std::string_view s, size_t pos) {
     }
     for (const std::string_view w : {"この", "その", "あの", "どの", "ばか", "バカ", "馬鹿"}) {
         if (head.ends_with(w)) return false;
+    }
+    if (head.ends_with("う")) {
+        const char32_t stem = LastRune(head.substr(0, head.size() - std::string_view("う").size())).cp;
+        if (std::u32string_view(U"良早遅強高安長偉寒暑痛若古悪近遠深浅広狭重軽太細").find(stem) != std::u32string_view::npos) {
+            return false;
+        }
     }
     // The question word なんで (何で) and the noun こと end in the kana of a particle.
     if (head.ends_with("なんで") || head.ends_with("何で") || head.ends_with("こと")) return true;
