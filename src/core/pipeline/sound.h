@@ -353,6 +353,9 @@ struct SoundRow {
     // The Korean of a cry row said once, not again right before or after it (alone=갈_것_같아, _
     // for a space: イっちゃう 갈 것 같아, but イっちゃう、イっちゃう 가버려, 가버려).
     std::string alone;
+    // The Korean is in 해요 speech (fourth column haeyo: そうですそうです 맞아요 맞아요), which copies said
+    // apart do not take, as said on their own (그렇습니다).
+    bool haeyo = false;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

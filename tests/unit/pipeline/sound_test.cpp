@@ -851,7 +851,7 @@ HD_TEST(pipeline_write_spaced_copies) {
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     const Case cases[] = {
         {"お お お", "오 오 오"},
-        {"お　お　お", "오　오　오"},
+        {"お　お　お", "오 오 오"},
         {"あ あ あ…", "아 아 아…"},
         {"「ア ア ア」", "「아 아 아」"},
         {"う う", "으 으"},

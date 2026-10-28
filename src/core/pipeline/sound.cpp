@@ -2338,9 +2338,12 @@ std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, con
             const std::string bytes = EncodeText(joined);
             if (snap.WordAt(bytes) == bytes.size()) continue;
         }
-        // Copies read as an interjection said twice start an utterance (not 新ギャグ ない ない).
-        const bool utterance = i == 0 || In(rs[i - 1], U"、。！？!?「」『』（）()…") ||
-                               (space(rs[i - 1]) && (i == 1 || In(rs[i - 2], U"、。！？!?「」『』（）()…ー～っッ")));
+        // Copies read as an interjection said twice open an utterance and follow no subject (not
+        // 新ギャグ ない ない, 財布が、ない ない).
+        size_t before = i;
+        while (before > 0 && (space(rs[before - 1]) || rs[before - 1] == U'、')) before--;
+        const bool utterance = OpensUtterance(rs, i) &&
+                               dict::EndsWithMember(HDTRANS_CLASS("particle.copies-subject"), EncodeText(rs.substr(0, before))) == 0;
         std::u32string korean;
         if (unit == 1) {
             // A kana alone reads as the sound lexicon has it (お 오, う 으, ね 저기) or as heard (あ 아, ん 응).
@@ -2349,7 +2352,7 @@ std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, con
             if (!hangul(korean)) continue;
         } else {
             // Two copies that an interjection of the sound lexicon reads as two equal halves (ないない
-            // 아냐 아냐; not the mimetic ぼうぼう 활활, whose half is no sound of its own).
+            // 아냐 아냐; not the mimetic ぼうぼう 활활, whose half is no sound of its own, nor a half in 해요).
             const std::u32string pair = ToKatakana(std::u32string(piece) + std::u32string(piece));
             for (const SoundRow& row : SoundRows(pair[0], ctx.extraBuiltin)) {
                 if (row.key != pair || !row.intj || !utterance) continue;
@@ -2357,9 +2360,7 @@ std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, con
                 const size_t half = k.size() / 2;
                 if (k.size() % 2 == 0 && k.substr(0, half) == k.substr(half)) korean = k.substr(0, half);
                 if (k.size() % 2 == 1 && k[half] == U' ' && k.substr(0, half) == k.substr(half + 1)) korean = k.substr(0, half);
-                // A polite half (맞아요 of そうですそうです) would lower the speech of the copies, which
-                // read on their own as said (그렇습니다).
-                if (!korean.empty() && korean.back() == U'요') korean.clear();
+                if (row.haeyo) korean.clear();
                 break;
             }
             if (korean.empty() || !std::all_of(korean.begin(), korean.end(), [&](char32_t r) { return r == U' ' || hangul(std::u32string(1, r)); })) {
@@ -2369,7 +2370,7 @@ std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, con
         out.append(rs, at, i - at);
         for (size_t k = i; k < end; k += unit + 1) {
             out += korean;
-            if (k + unit < end) out.push_back(rs[k + unit]);
+            if (k + unit < end) out.push_back(U' ');
         }
         if (SpacedFromText(rs, i, end, snap)) out.push_back(output::kPhraseBreak);
         at = end;
@@ -3169,6 +3170,21 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 
 namespace {
 
+// text with an ideographic space that stands alone between two Hangul syllables written as an
+// ASCII space, the space between words of the line (LAY-2: お　お　お 오 오 오, うわっ　あっ 우왓 앗).
+std::string PlainSpaces(std::string text) {
+    std::u32string rs = internal::DecodeText(text);
+    bool changed = false;
+    const auto syllable = [](char32_t r) { return r >= text::kBase && r <= text::kLast; };
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (rs[i] == U'　' && syllable(rs[i - 1]) && syllable(rs[i + 1])) {
+            rs[i] = U' ';
+            changed = true;
+        }
+    }
+    return changed ? internal::EncodeText(rs) : text;
+}
+
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
         internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
@@ -3184,7 +3200,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
-    return internal::WriteCries(sounded, ctx, snap);
+    return PlainSpaces(internal::WriteCries(sounded, ctx, snap));
 }
 
 }  // namespace

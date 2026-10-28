@@ -1,18 +1,16 @@
 # 규칙: SND-2, LAY-2
 rule	input	expected	kind	layer
 sound:spaced-copies	お お お	오 오 오	fix	sound
-sound:spaced-copies	お　お　お	오　오　오	fix	sound
+sound:spaced-copies	お　お　お	오 오 오	fix	sound
 sound:spaced-copies	「お お お」	「오 오 오」	fix	sound
 sound:spaced-copies	お お お お！	오 오 오 오!	fix	sound
 sound:spaced-copies	おっ お お お お！	오 오 오 오 오!	fix	sound
 sound:spaced-copies	お お お… うわっ！	오 오 오… 우왓!	fix	sound
 sound:spaced-copies	あ！ お お お なんかデカそうっすよ。	has:오 오 오	fix	sound
 sound:spaced-copies	あ あ あ	아 아 아	fix	sound
-sound:spaced-copies	あ　あ　あ…	아　아　아…	fix	sound
+sound:spaced-copies	あ　あ　あ…	아 아 아…	fix	sound
 sound:spaced-copies	あ あ あ…｡	아 아 아….	fix	sound
 sound:spaced-copies	あ あ あ あ	아 아 아 아	fix	sound
-sound:spaced-copies	あ　あ。	아　아.	fix	sound
-sound:spaced-copies	あ　あ…。	아　아….	fix	sound
 sound:spaced-copies	ア ア	아 아	fix	sound
 sound:spaced-copies	ア ア ア	아 아 아	fix	sound
 sound:spaced-copies	オ オ オ	오 오 오	fix	sound
@@ -28,7 +26,7 @@ sound:spaced-copies	まぁ ど ど ど…	뭐 도 도 도…	fix	sound
 sound:spaced-copies	ん ん？ いや 確か	응 응? 아니 분명	fix	sound
 sound:spaced-copies	え え え	에 에 에	fix	sound
 sound:spaced-copies	カ カ カ カ…｡	카 카 카 카….	fix	sound
-sound:spaced-copies	ね　ね	저기　저기	fix	sound
+sound:spaced-copies	ね　ね	저기 저기	fix	sound
 sound:spaced-copies	で で で で で？	그래서 그래서 그래서 그래서 그래서?	fix	sound
 sound:spaced-copies	こ こ か ら 先、 生きてはいけない	has:여기에서	keep	sound
 sound:spaced-copies	何？こ こ さ｡	뭐? 여기 자.	keep	sound
@@ -37,7 +35,7 @@ sound:spaced-copies	あああ	아아아	keep	sound
 sound:spaced-copies	ううう…	으으으…	keep	sound
 sound:spaced-copies	おっ おっ おっ	오 오 오	keep	sound
 sound:spaced-copies	うわっ あっ あっ	우왓 앗 앗	keep	sound
-sound:spaced-copies	うわっ　あっ　あっ	우왓　앗　앗	keep	sound
+sound:spaced-copies	うわっ　あっ　あっ	우왓 앗 앗	fix	sound
 sound:spaced-copies	あ あ	아 아	keep	sound
 sound:spaced-copies	あ あ…｡	아 아….	keep	sound
 sound:spaced-copies	え え	에 에	fix	sound

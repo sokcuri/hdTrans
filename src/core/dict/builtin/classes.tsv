@@ -235,6 +235,7 @@
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
+//= particle.copies-subject	Particles of a subject or topic after which copies of a word said apart are its predicate, not an interjection (財布が、ない ない).
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.even-person	Particles that after a person make the (ら)れ of their clause the potential (子供でも着られる).
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
@@ -3652,6 +3653,10 @@ particle.contrast	んですが
 particle.contrast	んだけど
 particle.contrast	でしょうが
 particle.contrast	だろうが
+
+particle.copies-subject	が
+particle.copies-subject	は
+particle.copies-subject	も
 
 particle.do-angle	に
 particle.do-angle	を

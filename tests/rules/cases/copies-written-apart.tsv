@@ -28,7 +28,9 @@ lookup:copies-apart	キレイ キレイ｡	키레이 키레이.	fix	lookup
 lookup:copies-apart	(男性)駄目 駄目 そこ入っちゃ	has:안돼 안돼 거기	keep	lookup
 lookup:copies-apart	毎日 毎日 雨が降ろうが	has:매일 매일 비가	fix	lookup
 lookup:copies-apart	こう こう こう…	공고 이렇게…	keep	lookup
-lookup:copies-apart	ドン ドン ドン！	돈돈돈!	keep	lookup
+lookup:copies-apart	ドン ドン ドン！	돈 돈 돈!	fix	lookup
+lookup:copies-apart	プリ プリ プリ プリ	프리 프리 프리 프리	fix	lookup
+lookup:copies-apart	えっ えっ それは 何？	어 어 그것은 뭐?	fix	lookup
 lookup:copies-apart	うん うん	응 응	keep	lookup
 lookup:copies-apart	はい はい はい	네 네 네	keep	lookup
 lookup:copies-apart	これ これ	이러이러	keep	lookup
