@@ -101,7 +101,7 @@ function summed() {
     .filter((el) => !el.hidden)
     .map((el) => {
       const select = el.querySelector('select');
-      return select ? select.selectedOptions[0]?.text : el.querySelector('input:checked + span')?.textContent;
+      return select ? select.selectedOptions[0]?.text : (el.querySelector('input:checked + span') ?? el.querySelector('#applied'))?.textContent;
     });
   settingsSum.textContent = picked.filter(Boolean).join(', ');
 }
@@ -188,7 +188,6 @@ function showTab(panel: string) {
     button.setAttribute('aria-selected', String(p.id === panel));
     p.hidden = p.id !== panel;
   }
-  (panel === 'dictionaries' ? $('dictedit') : $('text')).append(editorBox);
   settings.hidden = panel === 'dictionaries';
   if (panel === 'text') fitSource();
   stick();
@@ -207,7 +206,7 @@ let dictsLoaded = false;
 let dicts: Dictionary[] = [];
 let editing: Dictionary | undefined;
 const list = $<HTMLOListElement>('dictlist');
-const editSelect = $<HTMLSelectElement>('editdict');
+const applied = $('applied');
 const namesPane = $('namespane');
 const heads = {
   hdtrans: [['일본어', '한국어', '품사', '옵션'], ['手伝う', '돕다', 'v:ㅂ', '']],
@@ -216,6 +215,7 @@ const heads = {
 
 /** Translates again with the applied dictionaries, and drops document results made without them. */
 function dictsChanged() {
+  showApplied();
   schedule();
   staleDocs();
 }
@@ -272,9 +272,7 @@ let dragged: Dictionary | undefined;
 
 function render() {
   list.replaceChildren();
-  editSelect.replaceChildren();
   dicts.forEach((d, i) => {
-    editSelect.add(new Option(d.name, d.id, false, d === editing));
     const li = list.appendChild(document.createElement('li'));
     li.dataset.id = d.id;
     li.draggable = true;
@@ -401,9 +399,19 @@ $('dict-export').addEventListener('click', async () => {
     save('hdtrans-사전.zip', await zip(out.map((f) => ({ name: f.name, data: utf8(f.text + '\n') }))), 'application/zip');
   }
 });
-editSelect.addEventListener('change', () => {
-  const d = dicts.find((x) => x.id === editSelect.value);
-  if (d) select(d);
+// The settings name the applied dictionaries; 사전 편집 opens the 사전 tab on
+// the one being edited, or the first applied one.
+function showApplied() {
+  const on = dicts.filter((d) => d.on);
+  applied.textContent = on.length === 0 ? '없음' : on.length === 1 ? on[0].name : `${on[0].name} 외 ${on.length - 1}개`;
+  applied.title = on.map((d) => d.name).join(', ');
+  summed();
+}
+$('dict-edit').addEventListener('click', () => {
+  const first = dicts.find((d) => d.on);
+  if (first && !editing?.on) select(first);
+  showTab('dictionaries');
+  if (matchMedia('(max-width: 48rem)').matches) editorBox.scrollIntoView({ block: 'start' });
 });
 
 openStore()

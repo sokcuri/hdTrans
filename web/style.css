@@ -37,6 +37,8 @@ progress { flex: 1; max-width: 20rem; }
 .settings-body { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; }
 .field { display: inline-flex; gap: .45rem; align-items: center; }
 .field > span, .seg > span:first-child { color: var(--muted); font-size: 13px; }
+#applied { max-width: 14rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#dict-edit { min-height: 2.25rem; padding: 0 .7rem; font-size: 13px; }
 #example { width: 16rem; min-height: 2.25rem; text-overflow: ellipsis; }
 .seg { display: inline-flex; align-items: center; gap: .45rem; }
 .seg .opts { display: inline-flex; }
@@ -88,7 +90,6 @@ progress { flex: 1; max-width: 20rem; }
 textarea { font: inherit; }
 
 /* The dictionary editor. */
-#editor { margin-top: .5rem; }
 .dicts { margin-top: 1rem; align-items: start; }
 table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .grid th { font-weight: normal; font-size: .8rem; color: var(--muted); text-align: left; padding: 0 .3rem; }
@@ -118,12 +119,9 @@ table.files { width: 100%; border-collapse: collapse; }
 .files button { min-height: 2.5rem; padding: 0 .9rem; font-size: 13px; }
 
 /* The dictionary tab. */
-.editing { display: flex; gap: .4rem; align-items: center; margin: 1rem 0 .3rem; }
-.editing select { min-width: 0; max-width: 100%; }
 .gridscroll { overflow-x: auto; }
 table.grid { min-width: 26rem; }
 .library { display: grid; grid-template-columns: minmax(18rem, 30rem) minmax(0, 1fr); gap: 1.2rem; align-items: start; margin-top: .7rem; }
-#dictedit .editing { display: none; }
 #dictedit .dicts { grid-template-columns: minmax(0, 1fr); margin-top: 0; }
 .dicts .pane { min-width: 0; }
 .dictbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .5rem; }
@@ -161,6 +159,8 @@ table.grid { min-width: 26rem; }
   .examplebar { flex-wrap: nowrap; padding: .2rem 0; }
   .examplebar .field { flex: 1; min-width: 0; }
   #example { flex: 1; min-width: 0; width: auto; min-height: 2.75rem; }
+  .dictfield #applied { flex: 1; max-width: none; text-align: right; }
+  #dict-edit { min-height: 2.75rem; }
   #expand-both { min-height: 2.75rem; padding: 0 .7rem; white-space: nowrap; }
   .langbar { padding: .2rem 0 .3rem; }
   .seg label { flex: 1; justify-content: center; min-height: 2.75rem; padding: 0 .5rem; }
@@ -196,7 +196,7 @@ table.grid { min-width: 26rem; }
 
   .library { grid-template-columns: minmax(0, 1fr); }
   .dictlist .acts { width: 100%; justify-content: flex-end; }
-  .dictbar button, .gridbar button, .dictlist .acts button, .editing select { min-height: 2.75rem; padding-inline: .9rem; }
+  .dictbar button, .gridbar button, .dictlist .acts button { min-height: 2.75rem; padding-inline: .9rem; }
   .dictlist .name { min-height: 2.75rem; }
   .dictlist input[type=checkbox] { width: 1.5rem; height: 1.5rem; }
   .grid input { padding: .55rem .4rem; font-size: 16px; }

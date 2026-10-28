@@ -172,6 +172,7 @@ async function gridCheck() {
     console.log(`grid: ${cond ? 'ok    ' : 'FAILED'} ${what}`);
     failed ||= !cond;
   };
+  await click('#tab-dictionaries');
   const base = (await translate(probe)).out;
   console.log(`grid: baseline   ${base}`);
 
@@ -213,6 +214,14 @@ async function gridCheck() {
     document.activeElement.dispatchEvent(new ClipboardEvent('copy', { clipboardData: dt, bubbles: true }));
     return dt.getData('text/plain'); })()`);
   ok(copied === 'ユフィリア\t유피', 'copy without a selection gives the row as TSV');
+
+  await click('#tab-text');
+  ok(await evaluate(`!document.getElementById('text').contains(document.getElementById('userdict')) && document.getElementById('applied').textContent === '기본 사용자 사전'`),
+    'the text tab has no dictionary grids and names the applied dictionary in the settings');
+  await click('#dict-edit');
+  ok(await evaluate(`!document.getElementById('dictionaries').hidden && document.querySelector('#dictlist li.sel .name').textContent === '기본 사용자 사전'`),
+    '사전 편집 opens the 사전 tab on it');
+  await click('#tab-text');
 
   const api = await fetch(new URL('api/translate', url), { method: 'POST', body: '{}' });
   ok(api.status === 404, `POST /api/translate answers ${api.status}`);

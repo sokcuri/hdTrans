@@ -39,6 +39,8 @@
         <option value="interleaved">원문 병기</option>
         <option value="spaced">원문 병기 + 빈 줄</option>
       </select></label>
+      <div class="field dictfield"><span>사전</span> <span id="applied" title=""></span>
+        <button type="button" id="dict-edit" title="사전 탭에서 이 사전 편집">사전 편집</button></div>
     </div>
   </div>
 
@@ -60,14 +62,6 @@
         <button type="button" class="expand icon" aria-pressed="false" title="번역 펼치기" aria-label="번역 펼치기">↕</button>
         <button type="button" id="copy">복사</button></div>
       <div class="body"><div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
-    </div>
-  </div>
-
-  <div id="editor">
-    <label class="editing">사전 <select id="editdict"></select></label>
-    <div class="panes dicts">
-      <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
-      <div class="pane" id="namespane"><span>이름 표</span><div id="names"></div></div>
     </div>
   </div>
   </section>
@@ -96,7 +90,12 @@
         </div>
         <ol id="dictlist" class="dictlist"></ol>
       </div>
-      <div id="dictedit"></div>
+      <div id="dictedit"><div id="editor">
+        <div class="panes dicts">
+          <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
+          <div class="pane" id="namespane"><span>이름 표</span><div id="names"></div></div>
+        </div>
+      </div></div>
     </div>
   </section>
 </main>
