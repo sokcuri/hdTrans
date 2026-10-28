@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.3](https://github.com/sokcuri/hdTrans/compare/v0.7.2...v0.7.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* **release:** space sign-led words by the word before them and keep Ehnd marks working ([2130884](https://github.com/sokcuri/hdTrans/commit/213088425802e9521afa72d20471aee818ffd92e))
+* **spacing:** space sign-led words by the row before them and keep pre-filter marks out of words ([#278](https://github.com/sokcuri/hdTrans/issues/278)) ([4d32c37](https://github.com/sokcuri/hdTrans/commit/4d32c374ea4ae483c9771ff9a5738bf34906f55b))
+
 ## [0.7.2](https://github.com/sokcuri/hdTrans/compare/v0.7.1...v0.7.2) (2026-10-27)
 
 
