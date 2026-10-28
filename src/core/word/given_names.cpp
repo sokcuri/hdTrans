@@ -41,6 +41,8 @@ bool NameEndsAt(std::string_view rest, int last) {
 // (쿄우이치로우 쿄이치로, 오오시마 사부로우 오오시마 사부로).
 void Worker::ShortenRoNames(Record* records) {
     for (Record* r = records; r != nullptr; r = r->child) {
+        // A user's row is written as the user wrote it.
+        if (r->user != nullptr && !r->user->nameLayer) continue;
         if (!r->partCode.starts_with("N") || !Has(r->semantic, "QPN")) continue;
         const bool ro = std::any_of(names::RoCores().begin(), names::RoCores().end(),
                                     [&](const names::RoCore& c) { return r->source.ends_with(c.kanji); });

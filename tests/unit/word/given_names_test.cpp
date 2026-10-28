@@ -46,3 +46,32 @@ HD_TEST(word_ro_given_names) {
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
 }
+
+// A 郎 name of the dictionaries is written without its long vowels, a user's row as written, in
+// a sentence and on a line of its own.
+HD_TEST(word_ro_names_keep_user_rows) {
+    const std::string header = "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n";
+    const std::string base = header + "恭一郎\t쿄우이치로우\tN130\tQPN\tWb\tGN\t0\t1\t\n" + "が\t(이)가\tP200\t\t\tGN\t0\t2\t\n";
+    struct Case {
+        const char* input;
+        const char* dictionary;
+        const char* user;
+    };
+    const Case cases[] = {
+        {"恭一郎が", "쿄이치로가", "쿄우이치로우가"},
+        {"恭一郎", "쿄이치로", "쿄우이치로우"},
+    };
+    for (const bool user : {false, true}) {
+        std::vector<hdTrans::dict::File> files = {{0, "base.tsv", base}};
+        if (user) files.push_back({0, "user.tsv", "恭一郎\t쿄우이치로우\tname\n"});
+        const auto loaded = hdTrans::dict::Load(files);
+        HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+        const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+        for (const Case& c : cases) {
+            const std::string input = c.input;
+            const auto out = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&input, 1}, {}, {});
+            HD_REQUIRE(out.size() == 1);
+            HD_CHECK_EQ(out[0], std::string(user ? c.user : c.dictionary));
+        }
+    }
+}

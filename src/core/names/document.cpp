@@ -368,8 +368,12 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
         noun(c.codes, c.target);
     }
     for (const dict::Record& rec : snap.NameRecords(t)) person(rec.codes, rec.target);
+    bool userRow = false;
     for (const dict::UserEntry* e : snap.TextPlain().Search(t, dict::LookupMode::General)) {
-        if (e->key == t && !e->nameLayer) noun(e->codes, e->target);
+        if (e->key == t && !e->nameLayer) {
+            noun(e->codes, e->target);
+            userRow = true;
+        }
     }
     // A surname of two kanji or more names the speaker though it is a word too (高峰
     // 타카미네); a given name or a single kanji only where it is no word (朔夜, 慶; 未来,
@@ -379,9 +383,9 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
     else if (!given.empty() && !word) name = given;
     if (name.empty()) return std::nullopt;
     // A name in a 郎 core is written without its long vowels ou and uu (竜一郎 류이치로), as the
-    // lookup writes it (Worker::ShortenRoNames).
+    // lookup writes it (Worker::ShortenRoNames), unless a user's row has the key.
     for (const names::RoCore& c : names::RoCores()) {
-        if (t.ends_with(c.kanji)) {
+        if (!userRow && t.ends_with(c.kanji)) {
             name = text::WithoutNameLongVowels(name, false);
             break;
         }
