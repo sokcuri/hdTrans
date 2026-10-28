@@ -1758,7 +1758,17 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         // of a contracted ending (骨折れてんだぞ: てる and んだ, not 折れて and ん) or of another word
         // (ウェーブがかった is 掛かった, not 買った).
         const bool bare = shorter != nullptr && (shorter->detail->group == nullptr || shorter->detail->group->length <= 0);
-        if (shorter == nullptr || shorter->detail->cls != kDetailVerb || shorter->group->surface != candidate->group->surface ||
+        // A stem of one hiragana with an ending of one kana is two kana that the words around them spell
+        // as well (いんだけど after a line cut in 忙し|い is not いる and ん); with a longer ending the
+        // shorter reading still shows the verb (いますよ, みましょうか).
+        auto twoKana = [&] {
+            const std::string_view form = From(full, cursor).substr(0, static_cast<std::size_t>(shorter->length));
+            const std::size_t ending = bare ? 0 : std::min(form.size(), shorter->detail->group->surface.size());
+            const std::string_view stem = form.substr(0, form.size() - ending);
+            return text::RuneCount(stem) == 1 && Classify(stem) == 13 && text::RuneCount(form) <= 2;
+        };
+        if (shorter == nullptr || twoKana() ||
+            shorter->detail->cls != kDetailVerb || shorter->group->surface != candidate->group->surface ||
             shorter->EntryText(0) != candidate->EntryText(0) || shorter->Code(0) != candidate->Code(0) ||
             shorter->length >= candidate->length || (bare && shorter->detail->kind != 0) ||
             !StandsAlone(full, cursor, token, from, *shorter)) {

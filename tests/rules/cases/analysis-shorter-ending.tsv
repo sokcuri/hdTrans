@@ -29,3 +29,6 @@ analysis:shorter-ending	お前も食うとるやないか	lacks:깔본다	keep	a
 analysis:shorter-ending	ああ…。まあ　やる気があんのは伝わんだけどね。	lacks:타지 않아	keep	analysis
 analysis:shorter-ending	あっ… どこ行っちゃったんだろごめんごめん	lacks:실시	keep	analysis
 analysis:shorter-ending	ああ… 買うときゃよかった	lacks:꺄	keep	analysis
+analysis:shorter-ending	いんだけど。	lacks:있지 않아	keep	analysis
+analysis:shorter-ending	うん いますようちは 子だくさんだから	응 있어요 집은 자식 부자니까	fix	analysis
+analysis:shorter-ending	(ｷｭﾋｮﾝ)入ってみましょうかうわ～暑いです｡	(규현) 들어가 봅시다 사~덥습니다.	fix	analysis
