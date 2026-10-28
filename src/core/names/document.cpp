@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "core/names/chars.h"
+#include "core/names/given.h"
 #include "core/names/historical.h"
 #include "core/names/labels.h"
 #include "core/names/name_cues.h"
@@ -19,6 +20,7 @@
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
 #include "core/dict/char_readings.h"
+#include "core/text/kana.h"
 #include "core/text/utf8.h"
 #include "core/text/lines.h"
 #include "core/tokenizer/classify.h"
@@ -376,6 +378,14 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
     if (!surname.empty() && (runes > 1 || !word)) name = surname;
     else if (!given.empty() && !word) name = given;
     if (name.empty()) return std::nullopt;
+    // A name in a 郎 core is written without its long vowels ou and uu (竜一郎 류이치로), as the
+    // lookup writes it (Worker::ShortenRoNames).
+    for (const names::RoCore& c : names::RoCores()) {
+        if (t.ends_with(c.kanji)) {
+            name = text::WithoutNameLongVowels(name, false);
+            break;
+        }
+    }
     const std::size_t at = line.find(t);
     return std::string(line.substr(0, at)) + name + std::string(line.substr(at + t.size()));
 }

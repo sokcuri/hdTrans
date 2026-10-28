@@ -596,7 +596,7 @@ HD_TEST(names_dict_rows) {
     HD_REQUIRE(snap != nullptr);
     names::Registry r = Scan(snap, "宝生ミナ（ほうしょうみな）\n" + Repeat("高森恭平「おはよう」", 3) + Repeat("恭平くん", 2));
     HD_CHECK_EQ(r.Dict(),
-                std::string("宝生ミナ\t호우쇼우 미나\tname\n恭平\t쿄헤이\tname\n"
+                std::string("宝生ミナ\t호쇼 미나\tname\n恭平\t쿄헤이\tname\n"
                             "高森\t타카모리\tsurname\n高森恭平\t타카모리 쿄헤이\tname\nちゃん\t짱\thon\n"));
     r.chan = "쨩";
     const std::string dict = r.Dict();

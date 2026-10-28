@@ -293,6 +293,8 @@ bool Registry::NamedWithSound(std::string_view base, std::string_view reading) {
     if (snap_ == nullptr) return false;
     const std::string sound = text::FromKana(reading, text::Preset::Fan);
     if (sound.empty()) return false;
+    // The names this registry writes drop the long vowels (Written).
+    const std::string written = Written(reading);
     auto named = [&](const dict::Codes* codes, std::string_view target) {
         if (codes == nullptr || target.empty()) return false;
         const dict::SemCodes& sem = codes->sem;
@@ -300,7 +302,7 @@ bool Registry::NamedWithSound(std::string_view base, std::string_view reading) {
         if (!sem.HasPrefix("QPN") && !sem.HasPrefix("QCT") && !attr.starts_with("Wa") && !attr.starts_with("Wb")) {
             return false;
         }
-        return text::SameSound(target, sound);
+        return text::SameSound(target, sound) || text::SameSound(target, written);
     };
     for (const dict::Candidate& rec : snap_->RetrieveRecords(base, dict::LookupMode::General)) {
         if (rec.source == base && named(rec.codes, rec.target)) return true;
@@ -969,13 +971,13 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     if (!reading_[x].empty() && !reading_[y].empty()) return;
     auto known = [&](const std::string& part) -> std::string {
         const auto r = reading_.find(part);
-        if (r != reading_.end() && !r->second.empty()) return text::FromKana(r->second, preset);
+        if (r != reading_.end() && !r->second.empty()) return Written(r->second);
         const auto v = tables_->readings.find(part);
         if (v != tables_->readings.end() && !v->second.empty()) {
-            if (IsKanaText(v->second)) return text::FromKana(v->second, preset);
+            if (IsKanaText(v->second)) return Written(v->second);
             return v->second;
         }
-        if (!AllRunes(part, IsKanji)) return text::FromKana(part, preset);
+        if (!AllRunes(part, IsKanji)) return Written(part);
         return "";
     };
     // The longest tail that renders as the known given name, else the longest head that
@@ -988,7 +990,7 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     if (!h.empty() && reading_[x].empty()) {
         for (std::size_t idx = 1; idx + 1 < at.size(); idx++) {
             for (const text::Preset p : presets) {
-                if (text::FromKana(rs.substr(at[idx]), p) == h) {
+                if (text::FromKana(rs.substr(at[idx]), p) == h || Written(rs.substr(at[idx])) == h) {
                     reading_[x] = std::string(rs.substr(0, at[idx]));
                     return;
                 }
@@ -999,7 +1001,7 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     if (!sh.empty() && reading_[y].empty()) {
         for (std::size_t idx = at.size() - 1; idx-- > 1;) {
             for (const text::Preset p : presets) {
-                if (text::FromKana(rs.substr(0, at[idx]), p) == sh) {
+                if (text::FromKana(rs.substr(0, at[idx]), p) == sh || Written(rs.substr(0, at[idx])) == sh) {
                     reading_[y] = std::string(rs.substr(at[idx]));
                     return;
                 }

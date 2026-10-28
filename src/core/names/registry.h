@@ -69,8 +69,9 @@ struct Name {
 
 class Registry {
 public:
-    // The registry of snap (null for none): the Fan preset writes the names, and ちゃん
-    // is written 짱.
+    // The registry of snap (null for none): the FanShort preset writes the names, dropping
+    // the long vowels ou, oo and uu of hiragana readings one pair at a time (しどう 시도,
+    // ほうおうじ 호오지), and ちゃん is written 짱.
     explicit Registry(const dict::Snapshot* snap);
 
     // Records the Hangul rendering kr of the name t of a plain dictionary (kr must be
@@ -115,7 +116,7 @@ public:
     std::string DropReadings(std::string_view line, std::string* cueText = nullptr,
                              std::vector<std::string>* captionNames = nullptr);
 
-    text::Preset preset = text::Preset::Fan;
+    text::Preset preset = text::Preset::FanShort;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
     std::string chan = "짱";
 
@@ -171,6 +172,9 @@ private:
     std::string PrefixForm(std::string_view x);
 
     void SetReading(const std::string& key, const std::string& value);
+    // The kana in Hangul by preset, FanShort with one long vowel pair at a time; katakana keeps
+    // its long vowels (ハイロウ 하이로우), as katakana names are written.
+    std::string Written(std::string_view kana) const;
     void SetActor(const std::string& key, const std::string& value);
     const dict::Snapshot* snap_;
     struct Tables {

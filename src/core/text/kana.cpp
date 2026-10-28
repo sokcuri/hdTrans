@@ -239,7 +239,9 @@ std::string FromKana(std::string_view reading, Preset p, bool singleLongPair) {
     std::vector<Syllable> out;
     std::string prev;
     bool shortenedPair = false;
-    for (const auto& m : ms) {
+    for (std::size_t i = 0; i < ms.size(); i++) {
+        const Mora& m = ms[i];
+        const std::string_view next = i + 1 < ms.size() && ms[i + 1].cons.empty() ? std::string_view(ms[i + 1].vowel) : "";
         if (m.cons == "Q" || m.cons == "N") {
             if (!out.empty() && out.back().final == 0) {
                 out.back().final = m.cons == "N" ? kFinalN : kFinalS;
@@ -247,8 +249,9 @@ std::string FromKana(std::string_view reading, Preset p, bool singleLongPair) {
             continue;
         }
         if (m.cons == "L") continue;
-        if (m.cons.empty() && !out.empty() && out.back().final == 0 && LongVowel(prev, m.vowel, p) &&
-            !(singleLongPair && p == Preset::FanShort && shortenedPair)) {
+        const bool drop = singleLongPair && p == Preset::FanShort ? !shortenedPair && NameLongVowel(prev, m.vowel, next)
+                                                                   : LongVowel(prev, m.vowel, p);
+        if (m.cons.empty() && !out.empty() && out.back().final == 0 && drop) {
             shortenedPair = true;
             continue;
         }

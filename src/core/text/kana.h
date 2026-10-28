@@ -34,7 +34,7 @@ bool SpellsSound(std::string_view kana, std::string_view korean, bool loanword);
 
 // The kana reading of one word (hiragana or katakana) in Hangul under p; "" when
 // reading is empty or holds anything other than kana. singleLongPair limits FanShort
-// shortening to non-overlapping vowel pairs.
+// shortening to the non-overlapping pairs of NameLongVowel.
 std::string FromKana(std::string_view reading, Preset p, bool singleLongPair = false);
 
 }  // namespace hdTrans::text
