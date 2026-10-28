@@ -58,6 +58,16 @@ bool WayOfDoing(int patternKind, std::string_view s, std::string_view next) {
     return false;
 }
 
+// Whether s holds a kanji.
+bool HasKanji(std::string_view s) {
+    for (std::string_view t = s; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (text::IsKanji(r.cp)) return true;
+        t.remove_prefix(r.size);
+    }
+    return false;
+}
+
 // Whether s is a single hiragana (the stem で of 出る, which でもする is not).
 bool OneKana(std::string_view s) {
     const text::Rune r = text::DecodeRune(s);
@@ -81,14 +91,23 @@ bool ShortCausative(int kind, std::string_view entry, std::string_view tail) {
     return false;
 }
 
+// Whether tail starts with a form of the おる after a と form, by the table: not its passive or
+// causative, which read as those of the 取る that と also starts (言うとられました), and its
+// continuative り only before the ます it takes there (覚えとります; じっとり is an adverb).
+bool OruForm(std::string_view tail, int& branch, int& length) {
+    return AnalyseVerbTail(kJaO, '8', tail, branch, length) && branch != 1 && branch != 2 &&
+           (branch != 10 || tail.substr(static_cast<std::size_t>(length)).starts_with(kJaMa));
+}
+
 }  // namespace
 
-bool ProgressiveEndings(Group& g, Detail& d, std::string_view head) {
+bool ProgressiveEndings(Group& g, Detail& d, std::string_view head, bool every) {
     if (head.size() < 4) return false;
     const std::string_view prefix = head.substr(0, head.size() - 4), family = head.substr(head.size() - 4);
     bool any = false;
     for (std::size_t i = 0; i < g.entries.size(); i++) {
-        if (i < d.enabled.size() && !d.enabled[i]) continue;
+        const bool enabled = i >= d.enabled.size() || d.enabled[i];
+        if (!enabled && !every) continue;
         Entry& e = *g.entries[i];
         const std::string_view row = e.dst.empty() ? std::string_view() : output::SourceMarkerRow(std::string(family) + e.dst[0]);
         if (row.empty()) {
@@ -96,7 +115,7 @@ bool ProgressiveEndings(Group& g, Detail& d, std::string_view head) {
             continue;
         }
         e.dst = std::string(prefix) + std::string(row) + e.dst.substr(1);
-        any = true;
+        any = any || enabled;
     }
     return any;
 }
@@ -125,16 +144,27 @@ bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* reco
         }
     }
     potential = potential && imperative;
+    // A stem in kana only that the dictionary also has as a noun is that noun before the と of a と
+    // form (ずれとる, ウケとりました): kana do not show where a word ends. A noun or pronoun that comes
+    // first in the lookup is read first anyway (だれとった 誰 and 取った).
+    const bool dialect = d.dialect;
+    for (const Record* r = dialect && !HasKanji(recordText) ? records : nullptr; r != nullptr; r = r->child) {
+        if (r->source == recordText && At(r->partCode, 1) == '1') d.dialect = false;
+    }
+    auto matched = [&](bool m) {
+        d.dialect = dialect;
+        return m;
+    };
     int previousKind = -1;
     for (Record* record = records; record != nullptr; record = record->child) {
         stop = record;
-        if (recordText.size() != record->source.size() || At(record->partCode, 1) != '4') return false;
+        if (recordText.size() != record->source.size() || At(record->partCode, 1) != '4') return matched(false);
         d.patternKind = Byte(At(record->partCode, 3)) - '0';
-        if (d.patternKind != previousKind && MatchKind(d, tail, recordText, *record, potential)) return true;
+        if (d.patternKind != previousKind && MatchKind(d, tail, recordText, *record, potential)) return matched(true);
         previousKind = d.patternKind;
     }
     stop = nullptr;
-    return false;
+    return matched(false);
 }
 
 bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, const Record& record, bool potential) {
@@ -145,6 +175,18 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         d.patternLength = static_cast<int>(recordText.size());
         d.kind = 0;  // a whole form (ワロタ) takes the endings of a dictionary form after it
         return true;
+    }
+    // In dialect speech the て form says と or ど for its て or で before the おる after it, the いる of
+    // western speech (生きとる, 読んどった, and 言うとる after the う a わ-row verb says for っ):
+    // where a form of おる follows, by the table (OruForm). A stem of one kana, which the kana of other
+    // words spell as well, takes no と form (うっとり, しっとり; MatchConjugation for longer kana stems).
+    if (d.dialect && !OneKana(recordText)) {
+        for (const std::string_view to : {Conjugation(kind, kBranchTo), kind == kKindWa ? kOnbinTo : std::string_view()}) {
+            int branch = 0, length = 0;
+            if (to.empty() || !Starts(tail, to) || !OruForm(tail.substr(to.size()), branch, length)) continue;
+            d.kind = kBranchTo;
+            return true;
+        }
     }
     for (int branch = 0; branch < kConjugationBranches; branch++) {
         if (branch == 13) continue;
@@ -460,14 +502,22 @@ bool Item::AcceptVerbContinuation(Record* following) {
             sourceLength += static_cast<int>(kJaRare.size());
             tail.remove_prefix(kJaRare.size());
         }
-        int branch = 0;
-        for (; branch < kConjugationBranches; branch++) {
-            if (tail.starts_with(Conjugation(7, branch))) {
-                base.kind = branch;
-                break;
+        int branch = 0, oru = 0, oruLength = 0;
+        // The と form of the passive, potential or causative (固定されとる, いじめられとった), as after
+        // a stem (MatchKind).
+        if (base.dialect && tail.starts_with(Conjugation(7, kBranchTo)) &&
+            OruForm(tail.substr(Conjugation(7, kBranchTo).size()), oru, oruLength)) {
+            branch = kBranchTo;
+            base.kind = kBranchTo;
+        } else {
+            for (branch = 0; branch < kConjugationBranches; branch++) {
+                if (tail.starts_with(Conjugation(7, branch))) {
+                    base.kind = branch;
+                    break;
+                }
             }
+            if (branch == kConjugationBranches) return false;
         }
-        if (branch == kConjugationBranches) return false;
         // The empty stem form gives way to the first later form that begins the tail, as after
         // an ichidan stem (褒められちゃった, 褒められず); not to an imperative (11, 12), which a
         // passive, potential or causative form does not take before よ (言えよ is 言え and よ), not
@@ -568,6 +618,14 @@ bool Item::AcceptVerbContinuation(Record* following) {
         for (std::size_t i = 0; i < g->entries.size(); i++) base.classes[i] = static_cast<uint8_t>(base.punct);
     };
 
+    // The と form after a form of する, くる or 来る that is an ichidan stem, its passive, causative or
+    // potential (固定されとる, 準備ができとる), as after the passive of another verb.
+    if (int b = 0, n = 0; matched && base.dialect && (base.kind == 1 || base.kind == 2 || base.kind == 4) &&
+                          after().starts_with(Conjugation(7, kBranchTo)) &&
+                          OruForm(after().substr(Conjugation(7, kBranchTo).size()), b, n)) {
+        patternWidth += WidthOf(Conjugation(7, kBranchTo));
+        base.kind = kBranchTo;
+    }
     const std::string_view rest = after();
     const bool punctuation = tail.starts_with(kJaComma) || tail.starts_with(",");
     bool queryAllowed = !rest.empty() && !punctuation;
@@ -632,7 +690,25 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
         return g;
     };
-    Group* ending = endingGroup(rest);
+    Group* ending = nullptr;
+    std::string_view auxHead;
+    bool everyEnding = false;  // the auxiliary of the と form: ProgressiveEndings rewrites all
+    // The と form before おる (MatchKind): the ending after the form of おる is read on that form and
+    // written for 있 after 고 (4다 → 1고 있다, 5지만 → 1고 있었지만), as for the いる of 見てた; without
+    // an ending row of its own the form takes the empty ending below, as a verb does.
+    if (base.kind == kBranchTo) {
+        everyEnding = true;
+        const std::span<const std::string_view> head = dict::ClassMembers(HDTRANS_CLASS("ko.progressive-head"));
+        int branch = 0, n = 0;
+        if (head.empty() || !OruForm(rest, branch, n)) return false;
+        patternWidth += WidthOf(rest.substr(0, static_cast<std::size_t>(n)));
+        base.kind = branch;
+        length = sourceLength + pattern();
+        if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front(), everyEnding)) ending = g;
+        else auxHead = head.front();
+    } else {
+        ending = endingGroup(rest);
+    }
     // V連用形 + やがる without an ending of its own conjugates as the verb in the form
     // of やがる (書きやがったので 썼으므로); its やがれ is always the imperative.
     if (ending == nullptr && w->settings.text && rest.starts_with(kJaYaga)) {
@@ -672,7 +748,6 @@ bool Item::AcceptVerbContinuation(Record* following) {
     // state after it happened, done and past as ちゃった; the ending after いる is read on the past
     // and written for 버리 after the verb (5지만 → 6 버렸지만). Without an ending of its own the form
     // takes the empty ending below.
-    std::string_view auxHead;
     if (base.kind == 17 && w->settings.text && queryAllowed && rest.starts_with(Conjugation(0, 7))) {
         const std::string_view iru = rest.substr(Conjugation(0, 7).size());
         const std::span<const std::string_view> head = dict::ClassMembers(HDTRANS_CLASS("ko.completive-head"));
@@ -746,7 +821,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
             if (applies(*ending->entries[static_cast<std::size_t>(index)])) base.group = ending;
             else base.enabled[index] = false;
         }
-        if (!auxHead.empty() && !ProgressiveEndings(*ending, base, auxHead)) {
+        if (!auxHead.empty() && !ProgressiveEndings(*ending, base, auxHead, everyEnding)) {
             base.group = nullptr;
             return false;
         }

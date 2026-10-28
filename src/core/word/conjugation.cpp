@@ -2,7 +2,19 @@
 
 namespace hdTrans::word {
 
+namespace {
+
+// The て forms of branch 7 with と for て and ど for で, by kind.
+constexpr std::string_view kTo[kConjugationKinds] = {"っと", "いと", "いど", "しと", "っと", "んど", "んど",
+                                                     "と",   "っと", "しと", "じと", "きと", "んど", "来と"};
+
+}  // namespace
+
 std::string_view Conjugation(int kind, int branch) {
+    if (branch == kBranchTo) {
+        if (kind == kKindIku) return "っと";
+        return kind >= 0 && kind < kConjugationKinds ? kTo[kind] : std::string_view();
+    }
     if (branch < 0 || branch >= kConjugationBranches) return {};
     if (kind == kKindIku) {
         switch (branch) {

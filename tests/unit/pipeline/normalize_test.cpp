@@ -1002,6 +1002,19 @@ HD_TEST(pipeline_dialect_forms) {
     HD_CHECK_EQ(Normalize("金がねえ", ctx), "金がない");
 }
 
+HD_TEST(pipeline_kansai_verb_forms) {
+    const Case cases[] = {
+        // The と form of くれる; the word stage reads the other と forms.
+        {"気に入ってくれとったよな。"sv, "気に入ってくれていたよな。"sv},
+        {"くれとった"sv, "くれていた"sv},
+        {"ちゃんと覚えとる！"sv, "ちゃんと覚えとる！"sv},
+    };
+    for (const Case& c : cases) {
+        HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));
+        HD_CHECK_EQ(SpokenForms(c.in, false, false), std::string(c.in));
+    }
+}
+
 HD_TEST(pipeline_dialect_conjecture) {
     const Case cases[] = {
         {"司令はん、なんやろかー？"sv, "司令はん、なんだろうかー？"sv},

@@ -58,7 +58,7 @@
 //= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
 //= ending.other-negation	Starts of ending rows written with 지 않 that negate no verb stem before them: questions that expect a yes (じゃないか, ではありませんか, んじゃないの), the negation of a copula, an adjective or an auxiliary in the ending (でない, くありません, いない, おらず, いただかない, きれず), guesses quoted (かと, しまいかと) and choices (と 1지 않든지).
 //= ending.no-exclamation-na	Ends of the clause before a final な that keep the な as it is, not the exclamation なあ the normalizer makes of な after a clause in が (お前が言うな, 勝てると思うな, 先生ですな).
-//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
+//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
@@ -140,7 +140,7 @@
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼, and $Kz@, 하다 in a word of the adjective class), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
-//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), ending in the marker family that the ending after it conjugates.
+//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), or of the おる after a て form said with と or ど (生きとる 살고 있다), ending in the marker family that the ending after it conjugates.
 //= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자 버린 거야), ending in the marker family that the ending after it conjugates.
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.spoken-exclamation	Marks right after an offer of あげる outside brackets that make it a line of dialogue, as a final particle does (見せてあげる！ 보여 줄게!, 見せてあげるっ！).
@@ -1128,6 +1128,10 @@ ending.rare-passive	てる
 ending.rare-passive	てお
 ending.rare-passive	てた
 ending.rare-passive	ちゃ
+ending.rare-passive	とる
+ending.rare-passive	とっ
+ending.rare-passive	とら
+ending.rare-passive	とり
 
 ending.rare-potential	な
 ending.rare-potential	ず

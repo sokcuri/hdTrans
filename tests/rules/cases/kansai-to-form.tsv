@@ -1,0 +1,41 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+conjugation:to-form	(太助)生きとったんか！	(타이스케) 살아 있던 건가!	fix	conjugation
+conjugation:to-form	客に裸さらして生きとる分際で	손님에게 알몸 쬐어 살아 있는 분수로	fix	conjugation
+conjugation:to-form	あら クラさん 生きとったと？	어머나 쿠라 씨 살아 있었다고?	fix	conjugation
+conjugation:to-form	フッ まだ言うとる	훗아직 말하고 있다	fix	conjugation
+conjugation:to-form	そうは言うとりません	그렇게는 말하고 있지 않습니다	fix	conjugation
+conjugation:to-form	半年前に向かいの店で　もめとるの見たわ。	반년 전에 맞은편의 가게에서 옥신각신하고 있는 것 봤어.	fix	conjugation
+conjugation:to-form	（牢番）ずっと　手分けして探しとりました！	(옥지기) 계속 분담해 찾고 있었습니다!	fix	conjugation
+conjugation:to-form	何か しゃべっとったね？何ば しゃべっとったと？	뭔가 말하고 있었네? 무엇말하고 있었다고?	fix	conjugation
+conjugation:to-form	ババさん 電話 かかっとります｡おう｡	바바 씨 전화 걸리고 있습니다. 어.	fix	conjugation
+conjugation:to-form	あんたの出とるドラマたまに見るよ	네가 나오고 있는 드라마 이따금 봐	fix	conjugation
+conjugation:to-form	まあ そんくらいにしか考えとらんかった	뭐 정도밖에 생각하고 있지 않았다	fix	conjugation
+conjugation:to-form	けど 火葬場の煙突煙 出とらんなあ	지만 화장장의 굴뚝연기 나오고 있지 않지	fix	conjugation
+conjugation:to-form	いや ただ白い着物を着て黒っぽい羽織を着とりました	아니 다만 흰 기모노를 입어 거뭇한 하오리를 입고 있었습니다	fix	conjugation
+conjugation:to-form	もっと いじめられとるやないか	좀 더 괴롭힘을 당하고 있는이 아닌가	fix	conjugation
+conjugation:to-form	みんなの呼び方が松で固定されとるｗｗ	모두의 부르는 법이 송으로 고정되어 있다 ㅋㅋ	fix	conjugation
+conjugation:to-form	(浦和支部長)施設内の隠し部屋で幽閉されとったとこを	(우라와 지부장) 시설내의 숨겨진 방에서 유폐되고 있던 참을	fix	conjugation
+conjugation:to-form	きれいに切ってきとるわ アホ	예쁘게 잘라 오고 있어 바보	fix	conjugation
+conjugation:to-form	彼女 妊娠しとるらしいです	그녀 임신하고 있는 것 같습니다	fix	conjugation
+conjugation:to-form	外で受付しとるから見れんよ	밖에서 접수하고 있으니까 볼 수 없어	fix	conjugation
+conjugation:to-form	私 心のどこかで予感しとりました	저심의 어디선가 예감하고 있었습니다	fix	conjugation
+conjugation:to-form	汚れを拭きとる	더러움을 닦아낸다	keep	conjugation
+conjugation:to-form	聞きとった	알아들었다	keep	conjugation
+conjugation:to-form	書きとる	받아쓴다	keep	conjugation
+conjugation:to-form	引きとった	물러갔다	keep	conjugation
+conjugation:to-form	彼が引きとる	그가 물러간다	keep	conjugation
+conjugation:to-form	だれとった	누구 잡았다	keep	conjugation
+conjugation:to-form	まえとった	앞 잡았다	keep	conjugation
+conjugation:to-form	写真をとる	사진을 찍는다	keep	conjugation
+conjugation:to-form	手にとる	집는다	keep	conjugation
+conjugation:to-form	メモをとる	메모를 적는다	keep	conjugation
+conjugation:to-form	身動きとれない	꼼짝 취할 수 없다	keep	conjugation
+conjugation:to-form	さっきとった	조금 전 취했다	keep	conjugation
+conjugation:to-form	手紙を受けとった	편지를 받았다	keep	conjugation
+conjugation:to-form	うっとり見つめる。	넋을 잃고 바라본다.	keep	conjugation
+conjugation:to-form	後輩二人組が、つぐみにじっとりとした視線を注いでいる。	후배 두 사람조가, 다물어 무지개새로 한 시선을 쏟고 있다.	keep	conjugation
+conjugation:to-form	サンドウィッチマン 確かにすごいウケとりました	샌드위치맨 확실히 대단한 인기 잡았습니다	keep	conjugation
+normalize:contracted-toru	錦玉。　気に入ってくれとったよな。	금옥. 마음에 들어 주고 있었지.	fix	normalize
+normalize:contracted-toru	知らんです。妻は妻の考えで動いてくれとるんです。	모르지 않습니다. 아내는 아내의 생각으로 움직여 주고 있습니다.	fix	normalize
+normalize:contracted-toru	相変わらず　太一のためにやってくれとるんやな。	변함없이 타이이치를 위해 해 주고 있는구나.	fix	normalize

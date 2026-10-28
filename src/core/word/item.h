@@ -90,8 +90,9 @@ struct Detail {
     bool nonterminalBoundary = false;
     bool tailLengthCheck = false;
     bool causativePassive = false;
+    bool dialect = false;  // dialect forms may be read (the と form of kBranchTo)
 
-    // The conjugation branch 0..17 of a verb; '0', 'x' or 'X' for adjectives; -1 unset.
+    // The conjugation branch 0..17 or kBranchTo of a verb; '0', 'x' or 'X' for adjectives; -1 unset.
     int kind = -1;
     int record = 0;  // verb: 1 passive, 2 causative, 4 potential, 5 causative-passive
     bool syntheticCausative = false;  // record 5 folded a full causative plus られ, not a short され

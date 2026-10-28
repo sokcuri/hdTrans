@@ -1918,6 +1918,7 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
             Detail* word = NewDetail(kDetailVerb, token);
             const int pattern = rec->partCode[3] - '0';
             word->patternKind = pattern;
+            word->dialect = settings.text && settings.improvements.dialectForms;
             Record* stop = nullptr;
             const bool ok = MatchConjugation(*word, text, offset, rec, stop);
             rec = stop;
@@ -2055,6 +2056,25 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
         const std::string_view rest = tail.substr(off);
         return WidthOf(rest) >= n ? Left(rest, n) : Window{};
     };
+    static constexpr int kKinds[] = {0, 9, 11, 13};
+    // The と form of する, くる or 来る before おる (切ってきとる, 勉強しとった), as of other verbs (MatchKind):
+    // their て form with と for its て.
+    for (int tableGroup = 1; settings.text && settings.improvements.dialectForms && tableGroup < 4; tableGroup++) {
+        const std::string_view te = PrefixForm(50 * tableGroup + 7);
+        const std::string to = std::string(te.substr(0, te.size() - kJaTe.size())) + std::string(kJaTo);
+        if (!tail.starts_with(to)) continue;
+        const Lookup found = DoLookup(PrefixForm(50 * tableGroup), kModePrefixVerb);
+        if (found.count == 0) continue;
+        Detail* verb = NewDetail(kDetailVerb, token);
+        verb->patternKind = kKinds[tableGroup];
+        verb->patternMatched = 1;
+        verb->dialect = true;
+        verb->patternLength = static_cast<int>(to.size());
+        Group* group = NewGroup(found.records, static_cast<char>(kBranchTo + '0'));
+        Item* candidate = NewItem(verb, group, text, offset, token);
+        verb->kind = kBranchTo;
+        if (candidate->AcceptVerbContinuation(group->records)) return candidate;
+    }
     for (int tableGroup = 1; tableGroup < 4; tableGroup++) {
         for (int entry = 0; entry < kConjugationBranches; entry++) {
             const std::string_view prefix = PrefixForm(50 * tableGroup + entry);
@@ -2096,9 +2116,9 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
             const Lookup found = DoLookup(PrefixForm(50 * tableGroup), kModePrefixVerb);
             if (found.count == 0) continue;
             Detail* verb = NewDetail(kDetailVerb, token);
-            static constexpr int kKinds[] = {0, 9, 11, 13};
             verb->patternKind = kKinds[tableGroup];
             verb->patternMatched = 1;
+            verb->dialect = settings.text && settings.improvements.dialectForms;
             verb->patternLength = static_cast<int>(PrefixForm(50 * tableGroup + entry).size());
             Group* group = NewGroup(found.records, static_cast<char>(verb->kind + '0'));
             Item* candidate = NewItem(verb, group, text, offset, token);

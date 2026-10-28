@@ -408,7 +408,11 @@ bool ContractedToru(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (OneOf(s, p, U"いっし") && Lit(s, p, "と") && rest(p)) return true;
     p = pos;
-    return Lit(s, p, "んど") && rest(p);
+    if (Lit(s, p, "んど") && rest(p)) return true;
+    // The と form of くれる, whose くれ the word stage reads inside the ending row of a て form, where
+    // it cannot take the と form (入れてくれとった 入れてくれていた).
+    p = pos;
+    return Lit(s, p, "くれと") && rest(p);
 }
 
 std::string ReplaceContractedToru(const Match& m) {
