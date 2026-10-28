@@ -1,0 +1,14 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:spoken-words:12	おまはんの	당신의	fix	lookup
+dict:spoken-words:12	今日のところはおまはんの顔	오늘은 당신의 얼굴	fix	lookup
+dict:spoken-words:12	この場のけりはおまはんがつけるっちゅうのか	has:당신이	fix	lookup
+dict:spoken-words:12	おまはんも	당신도	fix	lookup
+dict:spoken-words:13	鉄骨もろとも落下してくたばりな	철골과 함께 낙하해 죽어	fix	lookup
+dict:spoken-words:13	女神もろとも抹殺するためオレは送り込まれた	여신과 함께 말살하기 위해 나는 보내졌다	fix	lookup
+dict:spoken-words:13	太陽もろとも！	태양과 함께!	fix	lookup
+dict:spoken-words:13	徳川もろともこの江戸も潰れてしまえばよいのじゃ	토쿠가와와 함께 이 에도도 무너져버리면 되는 게야	fix	lookup
+dict:spoken-words:13	もろに当たった	lacks:함께	keep	lookup
+dict:spoken-words:12	おまえはんの	lacks:당신	keep	lookup
+dict:spoken-words:21	♪ 月もろともに いでしおの～	♪ 달 함께 있고로 소금의~	fix	lookup
+dict:spoken-words:21	もろともに滅ぶ	함께 멸망한다	keep	lookup

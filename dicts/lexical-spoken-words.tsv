@@ -12,6 +12,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 わたわた	허둥지둥	E311			GN							spoken-words:9
 かえりうち	반격	N110			GN					1		spoken-words:10
 われ	나	I120	VHn		GN							spoken-words:11
+おまはん	당신	N120	VHn		GN							spoken-words:12
+もろとも	(와)과 함께	P200			GN							spoken-words:13
+もろともに	함께	E311			GN							spoken-words:21
 このやろ	이 자식	C110			GN							spoken-words:22
 ばかやろ	바보 녀석	N110			GN							spoken-words:23
 バカやろ	바보 녀석	N110			GN							spoken-words:24
