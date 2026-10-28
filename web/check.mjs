@@ -97,6 +97,13 @@ const until = async (expression, ms = 180000) => {
   throw new Error('timeout: ' + expression);
 };
 
+// laidOut waits until the page has sized the text cards for the window (after a resize).
+const laidOut = () =>
+  until(`(() => { const t = document.getElementById('text'); if (t.hidden) return true;
+    const c = [...document.querySelectorAll('#text .card')].filter((e) => e.offsetParent).pop();
+    return Math.abs(c.getBoundingClientRect().bottom + scrollY - (document.querySelector('html.locked') ? scrollY : 0) - (innerHeight - 12)) < 2
+; })()`, 3000).catch(() => {});
+
 await send('Network.enable');
 await send('Page.enable');
 
@@ -661,6 +668,7 @@ async function layoutCheck() {
   await settingsLayer('desktop');
   await send('Emulation.setDeviceMetricsOverride', phone);
   await send('Emulation.setTouchEmulationEnabled', { enabled: true });
+  await laidOut();
   m = await measure();
   const phoneOk = m.stacked && m.inView && !m.sheet && m.page && m.small.length === 0 && m.example;
   ok(phoneOk, `phone: stacked cards in the first screen, settings closed, the 예제 row above the cards${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
@@ -670,6 +678,7 @@ async function layoutCheck() {
   await click('#settings-close');
   await settingsLayer('phone');
   await send('Emulation.setDeviceMetricsOverride', { ...phone, width: 360, height: 780 });
+  await laidOut();
   m = await measure();
   ok(m.inView && m.example, `360 px: 예제 and both cards in the first screen${m.inView && m.example ? '' : ' ' + JSON.stringify(m)}`);
   for (const tab of ['text', 'docs', 'dictionaries']) {
@@ -701,14 +710,14 @@ async function exampleCheck(filledBeforeReady) {
   ok((await evaluate(`document.getElementById('src').value`)) === want && r.out !== '', `choosing ${file} fills the input and translates it (${r.info})`);
 }
 
-// expandCheck fills the input with a few hundred lines and, at a desktop and
-// a phone viewport, expands one card (only it grows to its text), then the
-// other; while the page scrolls through each card, the settings, 예제 and
-// language rows and that card's header stay stacked on top within half of the
-// window. Stepping across the end of the source card on a phone, the rows
-// never overlap or get covered, the two headers never overlap, and the
-// translation's header takes over the place under the rows. Each card's state
-// survives a reload; collapsing a card scrolled out of view brings it back.
+// expandCheck fills the input with a few hundred lines and checks, at a
+// desktop, a phone and a 360 px viewport: the two cards fill the window under
+// the rows above them with no page scroll, each scrolling inside; 펼치기 shows
+// one card alone, filling the window exactly under the settings, 예제 and
+// language rows, with the page held still and the other card hidden but still
+// translated; ↕ and Esc bring both back. On a phone the expanded source still
+// fits when the window shrinks as for an on-screen keyboard. The expanded card
+// survives a reload.
 async function expandCheck() {
   const ok = say('expand');
   const lines = readFileSync(inputFile, 'utf8').split('\n').filter(Boolean);
@@ -716,96 +725,74 @@ async function expandCheck() {
   await click('#tab-text');
   await translate(long);
   await evaluate(`document.getElementById('outmode').value = 'interleaved'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
-  const state = () => evaluate(`(() => {
+  const view = () => evaluate(`(() => {
+    const box = (id) => { const b = document.getElementById(id).getBoundingClientRect(); return { top: b.top, bottom: b.bottom }; };
+    const shown = (id) => document.getElementById(id).offsetParent !== null;
     const src = document.getElementById('src'), out = document.getElementById('out');
-    return { src: document.getElementById('srccard').classList.contains('expanded'), out: document.getElementById('outcard').classList.contains('expanded'),
-      srcFits: src.scrollHeight <= src.clientHeight + 2, outFits: out.scrollHeight <= out.clientHeight + 2,
-      page: document.documentElement.scrollHeight > innerHeight * 3 };
+    return { y: scrollY, h: innerHeight, src: shown('srccard') ? box('srccard') : null, out: shown('outcard') ? box('outcard') : null,
+      langbar: box('langbar').bottom, settings: box('settings').top,
+      srcScrolls: src.scrollHeight > src.clientHeight, outScrolls: out.scrollHeight > out.clientHeight, outText: out.textContent.length };
   })()`);
-  const fitted = () => until(`(() => { const s = document.getElementById('src'); return s.scrollHeight <= s.clientHeight + 2; })()`, 3000).catch(() => {});
-  // The stacked rows while the page is scrolled into the middle of a card.
-  const stack = (card) => evaluate(`(() => {
-    const c = document.getElementById('${card}'), r = c.getBoundingClientRect();
-    scrollTo(0, scrollY + r.top + r.height / 2);
-    const box = (el) => el.getBoundingClientRect();
-    const rows = ['settings', 'examplebar', 'langbar'].map((id) => document.getElementById(id)).filter((el) => el.classList.contains('stuck'));
-    let top = 0, stacked = true;
-    for (const el of rows) { stacked &&= Math.abs(box(el).top - top) < 1.5; top = box(el).bottom; }
-    const head = box(c.querySelector('.head'));
-    return { rows: rows.map((el) => el.id), stacked: stacked && Math.abs(head.top - top) < 1.5, share: head.bottom / innerHeight };
-  })()`);
-  // Problems with the rows and headers on top at page offset y, or ''.
-  const glitches = (y) => evaluate(`(() => {
-    scrollTo(0, ${y});
-    const box = (el) => el.getBoundingClientRect();
-    const hit = (el, b) => { const h = document.elementFromPoint(b.left + 12, (Math.max(b.top, 0) + Math.min(b.bottom, innerHeight)) / 2); return el.contains(h); };
-    const bad = [];
-    const rows = ['settings', 'examplebar', 'langbar'].map((id) => document.getElementById(id)).filter((el) => el.classList.contains('stuck'));
-    let bottom = 0;
-    for (const el of rows) {
-      const b = box(el);
-      if (b.top < bottom - 0.5) bad.push(el.id + ' overlaps the row above');
-      if (!hit(el, b)) bad.push(el.id + ' is covered');
-      bottom = b.bottom;
-    }
-    const cards = ['srccard', 'outcard'].map((id) => document.getElementById(id));
-    const heads = cards.map((c) => box(c.querySelector('.head')));
-    const shown = heads.map((h) => ({ left: h.left, top: Math.max(h.top, bottom), bottom: h.bottom })).map((v) => (v.bottom - v.top > 1 ? v : null));
-    if (shown[0] && shown[1] && shown[0].bottom > shown[1].top + 0.5 && heads[0].left === heads[1].left) bad.push('the headers overlap');
-    shown.forEach((v, i) => { if (v && v.top < innerHeight && !hit(cards[i].querySelector('.head'), v)) bad.push(cards[i].id + ' header is covered'); });
-    const [src, out] = cards.map(box);
-    if (out.top <= bottom && out.bottom > bottom + heads[1].height && Math.abs(heads[1].top - bottom) > 1) bad.push('the translation header does not take over');
-    else if (out.top > bottom && src.bottom >= bottom + heads[0].height && Math.abs(heads[0].top - bottom) > 1) bad.push('the source header is not on top');
-    return bad.join(', ');
-  })()`);
-  for (const [name, metrics] of [['desktop', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false }], ['phone', phone]]) {
+  // Whether a wheel turn over the rows above the cards scrolls the page.
+  const wheelMoves = async () => {
+    const [x, y, before] = await evaluate(`(() => { const b = document.getElementById('langbar').getBoundingClientRect(); return [b.left + 4, b.top + b.height / 2, scrollY]; })()`);
+    await send('Input.dispatchMouseEvent', { type: 'mouseWheel', x, y, deltaX: 0, deltaY: 400 });
+    await sleep(300);
+    const after = await evaluate('scrollY');
+    await evaluate(`scrollTo(0, ${before})`);
+    return after !== before;
+  };
+  const fits = (v) => [v.src, v.out].every((b) => !b || (b.top >= 0 && b.bottom <= v.h + 0.5));
+  for (const [name, metrics] of [['desktop', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false }], ['phone', phone], ['360 px', { ...phone, width: 360, height: 780 }]]) {
     await send('Emulation.setDeviceMetricsOverride', metrics);
     await evaluate('scrollTo(0, 0)');
+    await laidOut();
+    let v = await view();
+    ok(fits(v) && v.src && v.out && v.srcScrolls && v.outScrolls && Math.abs(v.out.bottom - (v.h - 12)) < 2,
+      `${name}: both cards fill the window under the rows, each scrolling inside${fits(v) && v.out && Math.abs(v.out.bottom - (v.h - 12)) < 2 ? '' : ' ' + JSON.stringify(v)}`);
     await click('#srccard .expand');
-    await fitted();
-    let st = await state();
-    ok(st.src && !st.out && st.srcFits && !st.outFits, `${name}: 원문 펼치기 grows only the source card${st.src && !st.out && st.srcFits && !st.outFits ? '' : ' ' + JSON.stringify(st)}`);
-    await click('#outcard .expand');
-    st = await state();
-    ok(st.src && st.out && st.srcFits && st.outFits && st.page, `${name}: 번역 펼치기 grows the translation too and the page scrolls${st.outFits && st.page ? '' : ' ' + JSON.stringify(st)}`);
-    for (const card of ['srccard', 'outcard']) {
-      const k = await stack(card);
-      const good = k.stacked && k.rows.includes('examplebar') && (name === 'desktop' ? k.rows.length === 3 : k.share <= 0.5);
-      ok(good, `${name}: in ${card}, ${k.rows.join(', ')} and the header stay stacked on top (${Math.round(k.share * 100)}% of the window)`);
+    v = await view();
+    v.moved = await wheelMoves();
+    const alone = (b) => b && Math.abs(v.settings) < 1 && b.top >= v.langbar && Math.abs(b.bottom - (v.h - 12)) < 2 && !v.moved;
+    ok(alone(v.src) && !v.out && v.srcScrolls, `${name}: 원문 펼치기 fills the window exactly under the rows, the page holds still and 번역 is hidden${alone(v.src) && !v.out ? '' : ' ' + JSON.stringify(v)}`);
+    const before = v.outText;
+    await evaluate(`(() => { const s = document.getElementById('src'); s.value = s.value + '\\n猫が来た。'; s.dispatchEvent(new Event('input')); })()`);
+    const r = await settled();
+    ok(r.out.length > before && r.out.endsWith('고양이가 왔다.'), `${name}: the hidden translation keeps up with the input`);
+    if (name === 'phone') {
+      await evaluate(`document.getElementById('src').focus()`);
+      await send('Emulation.setDeviceMetricsOverride', { ...phone, height: 500 });
+      await until(`Math.abs(document.getElementById('srccard').getBoundingClientRect().bottom - (innerHeight - 12)) < 2`, 3000).catch(() => {});
+      v = await view();
+      ok(alone(v.src), `phone: with the window cut to 500 px as by a keyboard, the expanded source still fits${alone(v.src) ? '' : ' ' + JSON.stringify(v)}`);
+      await evaluate(`document.activeElement.blur()`);
+      await send('Emulation.setDeviceMetricsOverride', phone);
     }
-    const [from, to, end] = await evaluate(`(() => { const y = (id, side) => document.getElementById(id).getBoundingClientRect()[side] + scrollY;
-      return [y('srccard', 'bottom') - 400, y('outcard', 'top') + 200, document.documentElement.scrollHeight - innerHeight]; })()`);
-    const found = new Set();
-    const steps = [0, 300, ...Array.from({ length: Math.ceil((to - from) / 12) }, (_, k) => Math.round(from + k * 12)), Math.round(end * 0.7), Math.round(end)];
-    for (const y of steps) {
-      const g = await glitches(y);
-      if (g) found.add(`${g} at ${y}`);
-    }
-    ok(found.size === 0, `${name}: scrolling from the top across the end of the source card to the bottom, the rows and headers hand over cleanly${found.size ? ': ' + [...found].slice(0, 4).join('; ') : ''}`);
-    await shot(`-expanded-${name}`, metrics);
-    await evaluate(`scrollTo(0, ${Math.round(end * 0.8)})`);
+    await press('Escape');
+    v = await view();
+    ok(fits(v) && v.src && v.out && v.y === 0, `${name}: Esc brings both cards back${v.src && v.out ? '' : ' ' + JSON.stringify(v)}`);
     await click('#outcard .expand');
-    ok(await evaluate(`(() => { const t = document.getElementById('outcard').getBoundingClientRect().top; return t >= 0 && t < innerHeight / 2; })()`),
-      `${name}: 번역 접기 while scrolled deep brings the card back into view`);
-    await click('#srccard .expand');
-    await evaluate('scrollTo(0, 0)');
+    v = await view();
+    v.moved = await wheelMoves();
+    ok(alone(v.out) && !v.src && v.outScrolls, `${name}: 번역 펼치기 fills the window and hides 원문${alone(v.out) && !v.src ? '' : ' ' + JSON.stringify(v)}`);
+    if (name === 'desktop') {
+      await send('Page.reload');
+      await dictsReady();
+      await settled();
+      v = await view();
+      ok(alone(v.out) && !v.src, 'the expanded card survives a reload');
+    }
+    await click('#outcard .expand');
+    v = await view();
+    ok(v.src && v.out && fits(v), `${name}: ↕ brings both cards back`);
   }
-  await click('#srccard .expand');
-  await send('Page.reload');
-  await dictsReady();
-  await settled();
-  let st = await state();
-  ok(st.src && !st.out, `each card's state survives a reload${st.src && !st.out ? '' : ' ' + JSON.stringify(st)}`);
-  await click('#srccard .expand');
-  st = await state();
-  ok(!st.src && !st.out && !st.srcFits && !(await evaluate(`document.body.classList.contains('sticky')`)), '접기 brings back the fixed boxes and the rows scroll again');
   await evaluate(`document.getElementById('outmode').value = 'translation'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
   await send('Emulation.clearDeviceMetricsOverride');
 }
 
 // resetCheck checks that a new example and × start both cards at their first
-// line: the page at the source card (expanded) or at the top (collapsed), and
-// no scroll left inside either box.
+// line: the page at the top, and no scroll left inside either box, also with
+// a card expanded.
 async function resetCheck() {
   const ok = say('reset');
   const lines = readFileSync(inputFile, 'utf8').split('\n').filter(Boolean);
@@ -819,9 +806,8 @@ async function resetCheck() {
     await translate(long);
     await evaluate(`scrollTo(0, document.documentElement.scrollHeight); document.getElementById('src').scrollTop = 1e6; document.getElementById('out').scrollTop = 1e6`);
   };
-  const where = () => evaluate(`(() => ({ y: scrollY, card: document.getElementById('srccard').getBoundingClientRect().top,
-    rows: parseFloat(document.querySelector('.texts').style.getPropertyValue('--head-top') || '0'),
-    max: document.documentElement.scrollHeight - innerHeight, src: document.getElementById('src').scrollTop, out: document.getElementById('out').scrollTop }))()`);
+  const where = () => evaluate(`(() => ({ y: scrollY, settings: document.getElementById('settings').getBoundingClientRect().top,
+    src: document.getElementById('src').scrollTop, out: document.getElementById('out').scrollTop }))()`);
   await click('#tab-text');
   await send('Emulation.setDeviceMetricsOverride', phone);
   for (const [what, act] of [['a new example', pickExample], ['×', () => click('#clear')]]) {
@@ -829,15 +815,17 @@ async function resetCheck() {
     await act();
     await settled();
     let w = await where();
-    ok(w.y === 0 && w.src === 0 && w.out === 0, `collapsed: ${what} scrolls the page to the top and both boxes to their first line${w.y || w.src || w.out ? ' ' + JSON.stringify(w) : ''}`);
-    await click('#srccard .expand');
-    await scrolledDeep();
-    await act();
-    await settled();
-    w = await where();
-    const good = (Math.abs(w.card - w.rows) < 2 || Math.abs(w.y - w.max) < 2) && w.src === 0 && w.out === 0;
-    ok(good, `expanded source: ${what} brings the source card's first line under the rows on top${good ? '' : ' ' + JSON.stringify(w)}`);
-    await click('#srccard .expand');
+    ok(w.y === 0 && w.src === 0 && w.out === 0, `${what} scrolls the page to the top and both boxes to their first line${w.y || w.src || w.out ? ' ' + JSON.stringify(w) : ''}`);
+    for (const card of ['srccard', 'outcard']) {
+      await click(`#${card} .expand`);
+      await scrolledDeep();
+      await act();
+      await settled();
+      w = await where();
+      const good = Math.abs(w.settings) < 1 && w.src === 0 && w.out === 0;
+      ok(good, `${card} expanded: ${what} starts its text at the first line${good ? '' : ' ' + JSON.stringify(w)}`);
+      await click(`#${card} .expand`);
+    }
   }
   await send('Emulation.clearDeviceMetricsOverride');
 }

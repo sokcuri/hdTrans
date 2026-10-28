@@ -84,24 +84,18 @@ progress { flex: 1; max-width: 20rem; }
 .card .icon { font-size: 20px; line-height: 1; padding: 0; }
 #tbar { width: 6rem; height: .5rem; flex: none; }
 .texts textarea, .out { font-size: 18px; line-height: 1.6; padding: .9rem 1rem; color: inherit; }
-.texts textarea { display: block; width: 100%; height: 22rem; min-height: 8rem; border: 0; border-radius: 0; resize: vertical; background: transparent; }
+.texts textarea { display: block; flex: 1; width: 100%; min-height: 0; border: 0; border-radius: 0; resize: none; background: transparent; }
 .texts textarea:focus-visible, .out:focus-visible { outline: none; }
-.card .body { position: relative; height: 22rem; }
+.card .body { position: relative; flex: 1; min-height: 0; }
 .out { position: absolute; inset: 0; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
 .out .src { color: var(--muted); }
-/* An expanded card grows to its text and the page scrolls; the rows above
-   (top set by the page) and the card's header stay on top. */
+/* The page sets the card heights to fill the window (a fallback height until then).
+   펼치기 shows one card alone and holds the page still. */
 .texts { align-items: start; }
-.card.expanded { overflow: visible; }
-.card.expanded .head { position: sticky; top: var(--head-top, 0); z-index: 2; }
-.card.expanded textarea { resize: none; overflow: hidden; }
-.card.expanded .body { height: auto; }
-.card.expanded .out { position: static; height: auto; max-height: none; overflow: visible; }
-.sticky .stuck { position: sticky; z-index: 4; }
-/* A row pushed up at the end of its section slides under the rows above it. */
-.sticky #settings.stuck { z-index: 6; }
-.sticky #examplebar.stuck { z-index: 5; }
-.card.expanded .head { box-shadow: 0 -1px 0 var(--line); }
+.texts .card { height: 22rem; min-height: 0; }
+.texts.focused { grid-template-columns: minmax(0, 1fr); }
+.texts.focused .card:not(.expanded) { display: none; }
+html.locked { overflow: hidden; }
 textarea { font: inherit; }
 
 /* The dictionary editor. */
@@ -182,9 +176,6 @@ table.grid { min-width: 26rem; }
   .card .head button { min-height: 2.75rem; min-width: 2.5rem; padding: 0 .6rem; }
   .card .head .icon { padding: 0; }
   .texts textarea, .out { font-size: 16px; padding: .7rem .8rem; }
-  .texts textarea { height: 9.5rem; }
-  .card .body { height: auto; }
-  .out { position: static; min-height: 9.5rem; max-height: 60vh; }
 
   .drop { padding: 1.4rem 1rem; }
   .drop .wide { display: none; }
