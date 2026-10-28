@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 conjugation:to-form	(太助)生きとったんか！	(타이스케) 살아 있던 건가!	fix	conjugation
 conjugation:to-form	客に裸さらして生きとる分際で	손님에게 알몸 쬐어 살아 있는 분수로	fix	conjugation
 conjugation:to-form	あら クラさん 生きとったと？	어머나 쿠라 씨 살아 있었다고?	fix	conjugation
-conjugation:to-form	フッ まだ言うとる	훗아직 말하고 있다	fix	conjugation
+conjugation:to-form	フッ まだ言うとる	훗 아직 말하고 있다	fix	conjugation
 conjugation:to-form	そうは言うとりません	그렇게는 말하고 있지 않습니다	fix	conjugation
 conjugation:to-form	半年前に向かいの店で　もめとるの見たわ。	반년 전에 맞은편의 가게에서 옥신각신하고 있는 것 봤어.	fix	conjugation
 conjugation:to-form	（牢番）ずっと　手分けして探しとりました！	(옥지기) 계속 분담해 찾고 있었습니다!	fix	conjugation
