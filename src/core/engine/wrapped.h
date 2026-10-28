@@ -28,6 +28,10 @@ struct WrapEdges {
     std::optional<WrapWord> last;
     int words = 0;
     bool predicate = false;
+    // The kana the line read alone left unread before its first word read (the る of るとか, the
+    // げる of げるしかない); empty when the line starts with a word read.
+    std::string unreadStart;
+    bool wordRead = false;  // a word of the line was read, which ends unreadStart
 };
 
 // The arrows a caption ends with when its sentence goes on in the next caption: ➡, ￫, → and ⇒.
@@ -64,6 +68,21 @@ void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edg
 // kBreakMark, and a next line that starts an item of its own (a bracket, a list or heading mark, a
 // speaker, turn or voice mark, a speaker label) never go on.
 bool GoesOn(std::string_view line, const WrapEdges& edges, std::string_view next, const WrapEdges& nextEdges);
+
+// Whether the break between line and next may fall inside a word: line ends in kana or kanji and
+// next starts with kana that it left unread (WrapEdges::unreadStart: 始め / るとか, 逃 / げるしかない),
+// with neither a blank line nor an item of its own (StartsItem) between them. The joined lines
+// decide whether one word is read across the break (CutStem, ReadWord).
+bool MayCutWord(std::string_view line, std::string_view next, const WrapEdges& nextEdges);
+
+// Whether head, the part of a word read across a break that stands before it, and run, the unread
+// kana after the break, cut one word: head holds a kanji (始め / る, 逃 / げる), run starts with a
+// small kana or ン that starts no word (こ / りゃ), or both are katakana and a kana or kanji, after
+// stands after run (ラ / ノベって).
+bool CutStem(std::string_view head, std::string_view run, char32_t after);
+
+// Whether item, read from the joined lines, is a word that the dictionary or a conjugation read.
+bool ReadWord(const output::ResolvedItem& item);
 
 // The span piece (U+E010) put between joined lines before the chunks are cut, and the control
 // marker the chunks write for it into the translation, at the word the break stands before.

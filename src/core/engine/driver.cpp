@@ -967,6 +967,49 @@ void WatchEdges(void* context, int, int, const word::Chain& chain) {
     AddWrapEdges(watch->items, watch->edges);
 }
 
+// Watches two joined lines (MayCutWord) for a word read across their break: a word the dictionary
+// or a conjugation read (ReadWord) that starts before the break, holds the break in its stem or
+// conjugation, not in the ending after them (思います / よう), covers the unread kana after the break
+// and makes a stem with them (CutStem).
+struct CutWatch {
+    std::string run;  // the unread kana after the break (WrapEdges::unreadStart)
+    char32_t after = 0;  // the character after run
+    // The break markers of each chunk, with the text of the token each stands in.
+    std::vector<std::vector<std::pair<tokenizer::ControlMarker, std::string>>> markers;
+    std::vector<output::ResolvedItem> items;
+    bool across = false;
+};
+
+void WatchCutTokens(void* context, int chunk, const tokenizer::Tokens& tokens) {
+    auto* watch = static_cast<CutWatch*>(context);
+    if (chunk < 0) return;
+    if (watch->markers.size() <= static_cast<std::size_t>(chunk)) watch->markers.resize(static_cast<std::size_t>(chunk) + 1);
+    watch->markers[static_cast<std::size_t>(chunk)].clear();
+    for (const tokenizer::ControlMarker& m : tokens.markers) {
+        if (m.markerKind == 1 && m.tokenIndex >= 0 && static_cast<std::size_t>(m.tokenIndex) < tokens.size()) {
+            watch->markers[static_cast<std::size_t>(chunk)].emplace_back(m, std::string(tokens.Merged(static_cast<std::size_t>(m.tokenIndex))));
+        }
+    }
+}
+
+void WatchCutWords(void* context, int chunk, int, const word::Chain& chain) {
+    auto* watch = static_cast<CutWatch*>(context);
+    if (chunk < 0 || static_cast<std::size_t>(chunk) >= watch->markers.size()) return;
+    ResolvedItems(chain, watch->items);
+    for (const output::ResolvedItem& it : watch->items) {
+        for (const auto& [m, token] : watch->markers[static_cast<std::size_t>(chunk)]) {
+            if (it.tokenIndex == m.tokenIndex && it.offset < m.textLength &&
+                static_cast<std::size_t>(it.offset + it.length) >= m.textLength + watch->run.size() && ReadWord(it) &&
+                // The break falls in the stem or its conjugation, not in the ending after them (思います / よう).
+                m.textLength - it.offset <= it.length - static_cast<int>(it.endingSurface.size()) &&
+                CutStem(std::string_view(token).substr(std::min<std::size_t>(it.offset, token.size()),
+                                                       static_cast<std::size_t>(m.textLength - it.offset)), watch->run, watch->after)) {
+                watch->across = true;
+            }
+        }
+    }
+}
+
 // The most lines one sentence is joined from.
 constexpr std::size_t kMaxJoined = 12;
 
@@ -1036,10 +1079,35 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
     }
+    // Whether line k and the next one are read with a word across their break (始め / るとか).
+    const auto readAcross = [&](std::size_t k) {
+        if (!MayCutWord(lines[k], lines[k + 1], edges[k + 1])) return false;
+        const std::vector<std::string> texts{std::string(PartsOf(bare[k]).body), std::string(PartsOf(bare[k + 1]).body)};
+        CutWatch watch;
+        watch.run = edges[k + 1].unreadStart;
+        const std::string_view rest = std::string_view(texts[1]).substr(std::min(watch.run.size(), texts[1].size()));
+        watch.after = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+        StageObserver cutObserver;
+        cutObserver.context = &watch;
+        cutObserver.tokens = WatchCutTokens;
+        cutObserver.resolved = WatchCutWords;
+        TranslationOptions joinedOptions = options;
+        joinedOptions.joinedLines = true;
+        joinedOptions.ruleTally = nullptr;
+        word::SessionSenses* const senses = s.sessionSenses;
+        s.sessionSenses = nullptr;
+        TranslateRubyBody(snap, doc, texts[0] + texts[1], used[k], s, generated, cutObserver, joinedOptions,
+                          narratedOf(lines[k]) || narratedOf(lines[k + 1]), texts);
+        s.sessionSenses = senses;
+        return watch.across;
+    };
     std::vector<std::string> out(lines.size());
     for (std::size_t i = 0; i < lines.size();) {
         std::size_t j = i;
-        while (j + 1 < lines.size() && j + 1 - i < kMaxJoined && GoesOn(lines[j], edges[j], lines[j + 1], edges[j + 1])) j++;
+        while (j + 1 < lines.size() && j + 1 - i < kMaxJoined &&
+               (GoesOn(lines[j], edges[j], lines[j + 1], edges[j + 1]) || readAcross(j))) {
+            j++;
+        }
         std::vector<std::string> pieces;
         std::vector<LineParts> parts;
         if (j > i && j >= context) {

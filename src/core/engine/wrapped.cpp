@@ -197,6 +197,14 @@ bool QuoteStart(std::string_view next, const WrapWord& n) {
     return !In(after, kCommas) && !In(after, U"…‥。｡！？!?");
 }
 
+bool Kana(char32_t r) { return (r >= U'ぁ' && r <= U'ゖ') || (r >= U'ァ' && r <= U'ヺ'); }
+
+// Whether it is a run the dictionary did not read, written as it sounds (る 루).
+bool Unread(const output::ResolvedItem& it) {
+    const output::ResolvedEntry& e = !it.entry.code.empty() ? it.entry : it.first;
+    return e.code == "110" && e.gattr.find("Nm") != std::string::npos;
+}
+
 WrapWord WordOf(const output::ResolvedItem& it) {
     WrapWord w;
     w.surface = it.surface;
@@ -215,7 +223,13 @@ void AddWrapEdges(const std::vector<output::ResolvedItem>& items, WrapEdges& edg
         const std::string_view code = !it.entry.code.empty() ? it.entry.code : it.first.code;
         if (it.surface.empty() || code.starts_with('6')) continue;
         if (!text::IsLetter(FirstRune(it.surface))) continue;
+        const bool unread = Unread(it) && Kana(FirstRune(it.surface));
         if (!edges.first) edges.first = WordOf(it);
+        if (unread && !edges.wordRead) {
+            edges.unreadStart += it.surface;
+        } else {
+            edges.wordRead = true;
+        }
         if (edges.last && edges.last->detail != output::DetailClass::None) edges.predicate = true;
         edges.last = WordOf(it);
         edges.words++;
@@ -297,6 +311,37 @@ bool GoesOn(std::string_view line, const WrapEdges& edges, std::string_view next
     if (BoundStart(*edges.last, te, *nextEdges.first)) return true;
     // A line of the predicate alone is mostly said on its own (分かった / じゃあ行こう).
     return edges.words > 1 && BareEnd(*edges.last) && Head(*nextEdges.first);
+}
+
+bool MayCutWord(std::string_view line, std::string_view next, const WrapEdges& nextEdges) {
+    line = Trim(line);
+    next = Trim(next);
+    if (line.empty() || next.empty() || line.find(kBreakMark) != std::string_view::npos ||
+        next.find(kBreakMark) != std::string_view::npos || StartsItem(next)) {
+        return false;
+    }
+    const char32_t end = LastRune(line);
+    if (!Kana(end) && !text::IsKanji(end)) return false;
+    const std::string_view run = nextEdges.unreadStart;
+    return !run.empty() && next.starts_with(run);
+}
+
+bool CutStem(std::string_view head, std::string_view run, char32_t after) {
+    for (std::size_t at = 0; at < head.size();) {
+        const text::Rune r = text::DecodeRune(head.substr(at));
+        if (text::IsKanji(r.cp)) return true;
+        at += std::max<std::size_t>(1, r.size);
+    }
+    const char32_t first = FirstRune(run);
+    if (In(first, U"ぁぃぅぇぉゃゅょゎァィゥェォャュョヮン")) return true;
+    const char32_t last = LastRune(head);
+    return ((last >= U'ァ' && last <= U'ヺ') || last == U'ー') && first >= U'ァ' && first <= U'ヺ' &&
+           (Kana(after) || text::IsKanji(after));
+}
+
+bool ReadWord(const output::ResolvedItem& item) {
+    const std::string_view code = !item.entry.code.empty() ? item.entry.code : item.first.code;
+    return !code.empty() && !Unread(item) && text::IsLetter(FirstRune(item.surface));
 }
 
 std::vector<std::string> SplitAtBreaks(std::string_view translated, std::size_t count) {
