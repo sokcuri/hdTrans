@@ -63,9 +63,11 @@ constexpr char32_t kClippedCryMark = 0xE00F;
 // The mark the sound stage writes after a sound that a source space parts from the Japanese text
 // after it (あっ なんか): the segment stage ends the chunk there, so that the text after the space
 // starts anew and takes no particle or ending of the sound (앗 뭔가).
-constexpr char32_t kPhraseBreak = 0xE011;
+// U+E010 and U+E011 are the break spans of joined lines (engine/wrapped.h), which the segment
+// stage keeps in their chunk.
+constexpr char32_t kPhraseBreak = 0xE012;
 // The gap pipeline::Segment gives a chunk that starts after a phrase break: the mark in UTF-8.
-inline constexpr std::string_view kPhraseGap = "\xEE\x80\x91";
+inline constexpr std::string_view kPhraseGap = "\xEE\x80\x92";
 
 constexpr bool IsCryMark(char32_t c) { return c == kCryMark || c == kClippedCryMark; }
 

@@ -832,12 +832,12 @@ HD_TEST(pipeline_phrase_break) {
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     const Case cases[] = {
-        {"あっ なんか", "앗\xEE\x80\x91 なんか"},
-        {"「あっ なんか」", "「앗\xEE\x80\x91 なんか」"},
+        {"あっ なんか", "앗\xEE\x80\x92 なんか"},
+        {"「あっ なんか」", "「앗\xEE\x80\x92 なんか」"},
         // A word no conjunction reads, a longer key that none reads, a sound that does not open its
         // utterance and a space between other words stay.
         {"あっ もっと", "앗 もっと"},
-        {"あっ なんかさ", "앗\xEE\x80\x91 なんかさ"},  // the longest key なんか
+        {"あっ なんかさ", "앗\xEE\x80\x92 なんかさ"},  // the longest key なんか
         {"あっ だからね", "앗 だからね"},             // the longest key だからね, no conjunction
         {"あっ いた", "앗 いた"},
         {"あっ は", "앗 は"},
