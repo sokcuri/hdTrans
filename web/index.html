@@ -39,7 +39,6 @@
         <option value="interleaved">원문 병기</option>
         <option value="spaced">원문 병기 + 빈 줄</option>
       </select></label>
-      <label class="field" data-tab="text"><span>예제</span> <select id="example"><option value="">고르기…</option></select></label>
     </div>
   </div>
 
@@ -47,12 +46,15 @@
   <div class="langbar"><span>일본어</span><span class="arrow" aria-hidden="true">→</span><span>한국어</span></div>
   <div class="panes texts">
     <div class="pane card">
-      <div class="head"><small id="count"></small>
+      <div class="head"><select id="example" aria-label="예제" title="예제 텍스트 불러오기"><option value="">예제 불러오기…</option></select>
+        <small id="count"></small>
+        <button type="button" class="expand icon" aria-pressed="false" title="펼치기" aria-label="펼치기">↕</button>
         <button type="button" id="clear" class="icon" title="입력 지우기" aria-label="입력 지우기">×</button></div>
       <textarea id="src" spellcheck="false" aria-label="일본어 원문" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea>
     </div>
     <div class="pane card result">
       <div class="head"><small id="info"></small> <progress id="tbar" hidden></progress>
+        <button type="button" class="expand icon" aria-pressed="false" title="펼치기" aria-label="펼치기">↕</button>
         <button type="button" id="copy">복사</button></div>
       <div class="body"><div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
     </div>

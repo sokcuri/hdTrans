@@ -9,21 +9,21 @@
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { background: var(--bg); }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0 auto; max-width: 76rem; padding: 1rem; color: var(--fg); background: var(--bg);
-  font: 15px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+  font: 14px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 a { color: var(--accent); }
-h1 { font-size: 1.4rem; margin: 0; }
-h1 .by { font-size: .9rem; font-weight: normal; color: var(--muted); margin-left: .3rem; }
-#hver { display: block; font-size: .8rem; color: var(--muted); margin-top: .15rem; }
+h1 { font-size: 20px; margin: 0; }
+h1 .by { font-size: 13px; font-weight: normal; color: var(--muted); margin-left: .3rem; }
+#hver { display: block; font-size: 12px; color: var(--muted); margin-top: .15rem; }
 .note { font-size: .9rem; margin: .5rem 0 0; }
 button, select { font: inherit; color: inherit; }
 button { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
 button:disabled { opacity: .45; cursor: default; }
 select { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0 .5rem; min-height: 2.5rem; max-width: 100%; }
 
-.status { margin: .8rem 0 .5rem; font-size: .9rem; display: flex; flex-wrap: wrap; gap: .25rem .75rem; align-items: center; }
+.status { margin: .6rem 0 .5rem; font-size: 13px; display: flex; flex-wrap: wrap; gap: .25rem .75rem; align-items: center; }
 progress { flex: 1; max-width: 20rem; }
 #warning { color: var(--warn); overflow-wrap: anywhere; }
 
@@ -35,12 +35,12 @@ progress { flex: 1; max-width: 20rem; }
 .settings { margin: .7rem 0; }
 .settings-toggle { display: none; }
 .settings-body { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; }
-.field { display: inline-flex; gap: .45rem; align-items: center; font-size: .9rem; }
-.field > span, .seg > span:first-child { color: var(--muted); font-size: .85rem; }
-#example { width: 15rem; text-overflow: ellipsis; }
+.field { display: inline-flex; gap: .45rem; align-items: center; }
+.field > span, .seg > span:first-child { color: var(--muted); font-size: 13px; }
+#example { width: 12rem; min-height: 2.25rem; font-size: 13px; text-overflow: ellipsis; background: transparent; }
 .seg { display: inline-flex; align-items: center; gap: .45rem; }
 .seg .opts { display: inline-flex; }
-.seg label { position: relative; display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 .85rem; font-size: .9rem;
+.seg label { position: relative; display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 .85rem;
   border: 1px solid var(--line); background: var(--surface); cursor: pointer; }
 .seg label:first-of-type { border-radius: 6px 0 0 6px; }
 .seg label:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
@@ -54,22 +54,31 @@ progress { flex: 1; max-width: 20rem; }
 .langbar span { padding: 0 .9rem; }
 .langbar .arrow { padding: 0; text-align: center; color: var(--muted); font-weight: normal; }
 .panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; }
-.pane { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; min-width: 0; }
+.pane { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
 .card { gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
 .card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 .card.result { background: var(--sunk); }
-.card .head { display: flex; align-items: center; gap: .5rem; min-height: 2.9rem; padding: .2rem .35rem .2rem .9rem; border-bottom: 1px solid var(--line); }
-.card .head small { color: var(--muted); white-space: nowrap; }
-.card .head button { margin-left: auto; min-height: 2.5rem; min-width: 2.5rem; padding: 0 .8rem; background: transparent; border-color: transparent; }
+.card .head { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-height: 2.9rem; padding: .2rem .35rem .2rem .5rem;
+  border-bottom: 1px solid var(--line); border-radius: 10px 10px 0 0; background: inherit; }
+.card .head small { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.card .head .expand { margin-left: auto; }
+.card .head .expand[aria-pressed=true] { color: var(--accent); }
+.card .head button { min-height: 2.5rem; min-width: 2.5rem; padding: 0 .8rem; background: transparent; border-color: transparent; }
 .card .head button:hover { border-color: var(--line); }
-.card .icon { font-size: 1.4rem; line-height: 1; padding: 0; }
+.card .icon { font-size: 20px; line-height: 1; padding: 0; }
 #tbar { width: 6rem; height: .5rem; flex: none; }
-.texts textarea, .out { font-size: 1.15rem; line-height: 1.7; padding: .9rem 1rem; color: inherit; }
+.texts textarea, .out { font-size: 18px; line-height: 1.6; padding: .9rem 1rem; color: inherit; }
 .texts textarea { display: block; width: 100%; height: 22rem; min-height: 8rem; border: 0; border-radius: 0; resize: vertical; background: transparent; }
 .texts textarea:focus-visible, .out:focus-visible { outline: none; }
 .card .body { position: relative; flex: 1; min-height: 8rem; }
 .out { position: absolute; inset: 0; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
 .out .src { color: var(--muted); }
+/* Expanded: the cards grow to their text, the page scrolls and the headers stay on top. */
+.texts.expanded .card { overflow: visible; }
+.texts.expanded .card .head { position: sticky; top: 0; z-index: 2; }
+.texts.expanded textarea { resize: none; overflow: hidden; }
+.texts.expanded .card .body { min-height: 0; }
+.texts.expanded .out { position: static; height: auto; max-height: none; overflow: visible; }
 textarea { font: inherit; }
 
 /* The dictionary editor. */
@@ -86,7 +95,7 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .grid button.del:hover { opacity: 1; }
 .gridbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
 .gridbar button { padding: .15rem .6rem; font-size: .8rem; }
-.contact { margin: 2rem 0 0; font-size: .8rem; color: var(--muted); text-align: center; }
+.contact { margin: 2rem 0 0; font-size: 12px; color: var(--muted); text-align: center; }
 
 /* The document tab. */
 .drop { display: block; padding: 2rem 1rem; border: 2px dashed var(--line); border-radius: 10px; background: var(--surface); text-align: center; cursor: pointer; }
@@ -97,13 +106,13 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: .7rem 0; }
 .actions button { min-height: 2.5rem; padding: 0 1.1rem; }
 #run:not(:disabled) { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
-table.files { width: 100%; border-collapse: collapse; font-size: .9rem; }
+table.files { width: 100%; border-collapse: collapse; }
 .files th { font-weight: normal; font-size: .8rem; color: var(--muted); text-align: left; }
 .files td, .files th { padding: .25rem .4rem; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
-.files button { min-height: 2.5rem; padding: 0 .9rem; font-size: .85rem; }
+.files button { min-height: 2.5rem; padding: 0 .9rem; font-size: 13px; }
 
 /* The dictionary tab. */
-.editing { display: flex; gap: .4rem; align-items: center; margin: 1rem 0 .3rem; font-size: .9rem; }
+.editing { display: flex; gap: .4rem; align-items: center; margin: 1rem 0 .3rem; }
 .editing select { min-width: 0; max-width: 100%; }
 .gridscroll { overflow-x: auto; }
 table.grid { min-width: 26rem; }
@@ -128,24 +137,31 @@ table.grid { min-width: 26rem; }
 @media (min-width: 48.01rem) { .dictlist li { cursor: grab; } }
 
 @media (max-width: 48rem) {
-  body { padding: .75rem; }
+  body { padding: .6rem .75rem .75rem; }
+  h1 { font-size: 17px; }
+  h1 .by { font-size: 12px; }
+  #hver { font-size: 11px; margin-top: 0; }
+  .status { margin: .35rem 0 .45rem; font-size: 12px; }
   .tabs button { flex: 1; padding: 0 .5rem; }
   .settings { margin: .5rem 0; }
   .settings-toggle { display: flex; align-items: center; gap: .6rem; width: 100%; min-height: 2.75rem; padding: 0 .9rem; text-align: left; }
-  .settings-toggle small { flex: 1; min-width: 0; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .settings-toggle small { font-size: 12px; flex: 1; min-width: 0; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .settings-toggle::after { content: "▾"; color: var(--muted); }
   .settings.open .settings-toggle::after { content: "▴"; }
   .settings-body { display: none; flex-direction: column; align-items: stretch; gap: .6rem; padding: .7rem .2rem .2rem; }
   .settings.open .settings-body { display: flex; }
   .field, .seg { display: flex; justify-content: space-between; gap: 1rem; }
-  .field select, #example, .seg .opts { flex: 1; max-width: 17rem; min-height: 2.75rem; }
+  .field select, .seg .opts { flex: 1; max-width: 17rem; min-height: 2.75rem; }
+  #example { flex: 0 1 auto; width: auto; max-width: 8.5rem; min-height: 2.75rem; }
   .seg label { flex: 1; justify-content: center; min-height: 2.75rem; padding: 0 .5rem; }
   .langbar { grid-template-columns: auto auto auto; justify-content: center; gap: .6rem; }
   .langbar span { padding: 0; }
   .panes { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
   .card .head { min-height: 3rem; }
-  .card .head button { min-height: 2.75rem; min-width: 2.75rem; }
-  .texts textarea, .out { font-size: 1.1rem; padding: .7rem .8rem; }
+  .card .head { gap: .25rem; padding: .2rem .25rem; }
+  .card .head button { min-height: 2.75rem; min-width: 2.5rem; padding: 0 .6rem; }
+  .card .head .icon { padding: 0; }
+  .texts textarea, .out { font-size: 16px; padding: .7rem .8rem; }
   .texts textarea { height: 9.5rem; }
   .card .body { min-height: 0; }
   .out { position: static; min-height: 9.5rem; max-height: 60vh; }

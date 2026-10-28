@@ -69,7 +69,7 @@ export function grid(
     a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   });
-  button('TSV 복사', '표 전체를 탭 구분 텍스트로 복사', () => navigator.clipboard.writeText(text()));
+  button('TSV 복사', '표 전체를 탭 구분 텍스트로 복사', () => copyText(text()));
   button('모두 지우기', '모든 행 삭제', () => {
     if (text() !== '' && !confirm('모든 행을 지울까요?')) return;
     setText('');
@@ -217,4 +217,27 @@ export function grid(
       setText(t);
     },
   };
+}
+
+/**
+ * Copies text to the clipboard; outside a secure context, where
+ * navigator.clipboard is missing, through a hidden textarea. Returns whether
+ * it was copied.
+ */
+export async function copyText(text: string): Promise<boolean> {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const focused = document.activeElement as HTMLElement | null;
+    const t = document.body.appendChild(document.createElement('textarea'));
+    t.value = text;
+    t.readOnly = true;
+    t.style.cssText = 'position: fixed; top: 0; opacity: 0';
+    t.select();
+    const ok = document.execCommand('copy');
+    t.remove();
+    focused?.focus();
+    return ok;
+  }
 }

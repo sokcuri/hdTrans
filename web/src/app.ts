@@ -3,7 +3,8 @@
 // there as the input changes.
 import { decodeText, encodeOutput, formatDocument, outputName, outputParts, zip, type OutputMode } from './documents.js';
 import { count, firstName, fromFile, newId, openStore, overlay, toFile, type Dictionary, type Store } from './dictionaries.js';
-import { grid } from './grid.js';
+import { copyText, grid } from './grid.js';
+import { sha256 as sha256Bytes } from './sha256.js';
 
 interface Asset {
   name: string;
@@ -38,9 +39,11 @@ let ready = false;
 
 const srcCount = $<HTMLElement>('count');
 const clear = $<HTMLButtonElement>('clear');
+/** n자 · n줄 of t: code points, and lines split at LF. */
+const size = (t: string) => `${Array.from(t).length}자 · ${t === '' ? 0 : t.split('\n').length}줄`;
 /** Shows the input's size and the clear button when there is input. */
 function counted() {
-  srcCount.textContent = `${Array.from(src.value).length}자 · ${src.value === '' ? 0 : src.value.split('\n').length}줄`;
+  srcCount.textContent = size(src.value);
   clear.hidden = src.value === '';
 }
 src.value = localStorage.getItem('hdtrans.src') ?? '';
@@ -73,6 +76,35 @@ speech.addEventListener('change', () => {
   schedule();
   staleDocs();
 });
+// 펼치기 grows both cards to their text so that the page scrolls instead of
+// the boxes; the choice is kept.
+const texts = document.querySelector<HTMLElement>('.texts')!;
+const expanders = [...texts.querySelectorAll<HTMLButtonElement>('.expand')];
+/** Sets the input's height to its text while expanded. */
+function fitSource() {
+  src.style.height = '';
+  if (texts.classList.contains('expanded') && src.offsetParent) src.style.height = `${src.scrollHeight}px`;
+}
+function expand(on: boolean) {
+  texts.classList.toggle('expanded', on);
+  for (const b of expanders) {
+    b.setAttribute('aria-pressed', String(on));
+    b.title = b.ariaLabel = on ? '접기' : '펼치기';
+  }
+  localStorage.setItem('hdtrans.expand', on ? '1' : '0');
+  fitSource();
+}
+for (const b of expanders) b.addEventListener('click', () => expand(!texts.classList.contains('expanded')));
+src.addEventListener('input', fitSource);
+// A new width rewraps the text: on a window resize, and when a scroll bar comes or goes.
+let srcWidth = 0;
+new ResizeObserver(() => {
+  if (src.clientWidth === srcWidth) return;
+  srcWidth = src.clientWidth;
+  fitSource();
+}).observe(src);
+expand(localStorage.getItem('hdtrans.expand') === '1');
+
 const outputMode = () => outMode.value as OutputMode;
 const savedOutput = localStorage.getItem('hdtrans.output');
 if (savedOutput === 'translation' || savedOutput === 'interleaved' || savedOutput === 'spaced') outMode.value = savedOutput;
@@ -95,7 +127,7 @@ settingsToggle.addEventListener('click', () => {
 });
 function summed() {
   const picked = [...settings.querySelectorAll<HTMLElement>('[data-tab], .field')]
-    .filter((el) => !el.hidden && !el.querySelector('#example'))
+    .filter((el) => !el.hidden)
     .map((el) => {
       const select = el.querySelector('select');
       return select ? select.selectedOptions[0]?.text : el.querySelector('input:checked + span')?.textContent;
@@ -118,6 +150,7 @@ function showTab(panel: string) {
   }
   (panel === 'dictionaries' ? $('dictedit') : $('text')).append(editorBox);
   settings.hidden = panel === 'dictionaries';
+  if (panel === 'text') fitSource();
   settings.querySelectorAll<HTMLElement>('[data-tab]').forEach((el) => (el.hidden = el.dataset.tab !== panel));
   summed();
   localStorage.setItem('hdtrans.tab', panel);
@@ -362,6 +395,7 @@ fetch('examples/list.json')
       if (src.value !== '') return;
       src.value = text;
       counted();
+      fitSource();
       schedule();
     }
   })
@@ -421,6 +455,7 @@ function warningText(warning: string, ehnd: string[], where: (ehnd: boolean, lin
 // its text is what 복사 copies and what a document saves.
 let shownSource = '';
 let shownTranslation = '';
+let shownTime = ''; // n ms of the shown translation, '' after a failure
 function showOutput() {
   out.replaceChildren(
     ...outputParts(shownSource, shownTranslation, outputMode()).map((p) => {
@@ -431,6 +466,11 @@ function showOutput() {
       return span;
     }),
   );
+  showInfo();
+}
+/** The size of what 복사 copies, and the time of the translation. */
+function showInfo() {
+  info.textContent = shownTime && `${size(out.textContent ?? '')} · ${shownTime}`;
 }
 out.addEventListener('keydown', (ev) => {
   if (ev.key !== 'a' || !(ev.ctrlKey || ev.metaKey)) return;
@@ -439,10 +479,8 @@ out.addEventListener('keydown', (ev) => {
 });
 const copy = $<HTMLButtonElement>('copy');
 copy.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(out.textContent ?? '');
-    copy.textContent = '복사됨';
-  } catch {
+  if (await copyText(out.textContent ?? '')) copy.textContent = '복사됨';
+  else {
     getSelection()?.selectAllChildren(out);
     copy.textContent = '선택됨';
   }
@@ -479,7 +517,7 @@ async function translate() {
     const m = await request(mode(), lines, d);
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);
-    text = `${lines.length}줄 · ${Math.round(performance.now() - t0)} ms`;
+    text = `${Math.round(performance.now() - t0)} ms`;
     const w = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
     if (w) problem = '사전 오류: ' + w;
     if (g === generation) {
@@ -498,7 +536,8 @@ async function translate() {
     return;
   }
   shown = g;
-  info.textContent = text;
+  shownTime = text;
+  showInfo();
   warning.textContent = problem;
   out.dataset.done = '1';
 }
@@ -649,9 +688,14 @@ zipButton.addEventListener('click', async () => {
 });
 showDocs();
 
-/** Hex SHA-256 of b. */
+/**
+ * Hex SHA-256 of b. Outside a secure context (plain http on a LAN address)
+ * crypto.subtle is missing and the page hashes in JavaScript, which takes a
+ * fraction of a second for the dictionary; the check still catches truncated
+ * or stale downloads, which plain http does nothing against.
+ */
 async function sha256(b: Uint8Array): Promise<string> {
-  const d = new Uint8Array(await crypto.subtle.digest('SHA-256', b as BufferSource));
+  const d = globalThis.crypto?.subtle ? new Uint8Array(await crypto.subtle.digest('SHA-256', b as BufferSource)) : sha256Bytes(b);
   return Array.from(d, (x) => x.toString(16).padStart(2, '0')).join('');
 }
 
@@ -695,6 +739,7 @@ async function load() {
   const total = all.reduce((s, a) => s + a.size, 0);
   const done = all.map(() => 0);
   const show = () => {
+    if (document.body.dataset.engine === 'error') return;
     const n = done.reduce((s, x) => s + x, 0);
     bar.max = total;
     bar.value = n;

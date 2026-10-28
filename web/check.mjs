@@ -25,7 +25,9 @@
 // load error naming the dictionary and row, export and import of the
 // desktop files (userdict*.txt and Ehnd UserDict*.txt) byte for byte, renaming,
 // deleting, and that the list survives a reload. Last it checks the text tab's
-// layout at a desktop, a phone and a 360 px viewport and the × button. With SHOT set it saves
+// layout at a desktop, a phone and a 360 px viewport and the × button.
+// Served over plain http from a LAN address (not a secure context), the same
+// checks run, with clipboard paste and copy seen through events. With SHOT set it saves
 // screenshots there (text tab) and next to it (-dictionaries, -mobile). Exits 1
 // on a failed check or a load failure.
 import { spawn } from 'node:child_process';
@@ -193,8 +195,13 @@ async function gridCheck() {
   const tsv = 'パレッティア\t팔레티아\nユフィリア\t유피\nアルガルド\t알군\tname\n';
   await send('Browser.grantPermissions', { permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'] });
   await focusCell('names', 0, 0);
-  await evaluate(`navigator.clipboard.writeText(${JSON.stringify(tsv)})`);
-  await press('v', process.platform === 'darwin' ? 4 : 2, ['paste']);
+  if (secure) {
+    await evaluate(`navigator.clipboard.writeText(${JSON.stringify(tsv)})`);
+    await press('v', process.platform === 'darwin' ? 4 : 2, ['paste']);
+  } else {
+    await evaluate(`(() => { const dt = new DataTransfer(); dt.setData('text/plain', ${JSON.stringify(tsv)});
+      document.activeElement.dispatchEvent(new ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true })); })()`);
+  }
   ok((await gridText('names')) === tsv.trimEnd(), 'Ctrl+V of a 3-row TSV fills 3 rows');
   const two = (await settled()).out;
   console.log(`grid: + names    ${two}`);
@@ -237,10 +244,10 @@ async function progressCheck() {
   const ok = seen && hidden;
   failed ||= !ok;
   console.log(`progress: ${ok ? 'ok    ' : 'FAILED'} bar shown during a ${all.split('\n').length}-line translation and hidden after (${r.info})`);
-  const infoOk = /^\d+줄 · \d+ ms$/.test(r.info) &&
+  const infoOk = /^\d+자 · \d+줄 · \d+ ms$/.test(r.info) &&
     (await evaluate(`document.getElementById('info').closest('.pane')?.contains(document.getElementById('out')) ?? false`));
   failed ||= !infoOk;
-  console.log(`info: ${infoOk ? 'ok    ' : 'FAILED'} line count and time in the 한국어 pane title (${r.info})`);
+  console.log(`info: ${infoOk ? 'ok    ' : 'FAILED'} character and line count and time in the 한국어 card header (${r.info})`);
 }
 
 // speechCheck sets 대사 말투 to 부드럽게 and back, and checks that quoted speech
@@ -270,14 +277,22 @@ async function outputCheck() {
   const want = { translation: `${a}\n${b}`, interleaved: `猫が来た。\n${a}\n犬が来た。\n${b}`, spaced: `猫が来た。\n${a}\n\n犬が来た。\n${b}` };
   await send('Browser.grantPermissions', { permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'] });
   await send('Emulation.setFocusEmulationEnabled', { enabled: true });
+  // Without a secure context there is no navigator.clipboard; the page copies
+  // through a hidden textarea, seen here by its copy event.
+  await evaluate(`document.addEventListener('copy', (e) => {
+    const t = e.target;
+    window.copied = t instanceof HTMLTextAreaElement ? t.value.slice(t.selectionStart, t.selectionEnd) : String(getSelection());
+  }, true)`);
   for (const mode of ['interleaved', 'spaced', 'translation']) {
     await pick(mode);
     const shown = await evaluate(`document.getElementById('out').textContent`);
     const muted = await evaluate(`[...document.querySelectorAll('#out .src')].map((e) => e.textContent).join('|')`);
     await until(`document.getElementById('copy').textContent === '복사'`);
-    await click('#copy');
+    await send('Runtime.evaluate', { expression: `document.getElementById('copy').click()`, userGesture: true });
     const label = await until(`document.getElementById('copy').textContent !== '복사' && document.getElementById('copy').textContent`);
-    const copied = await evaluate(`navigator.clipboard.readText()`);
+    const copied = await evaluate(secure ? `navigator.clipboard.readText()` : `window.copied`);
+    const info = await evaluate(`document.getElementById('info').textContent`);
+    ok(info.startsWith(`${[...shown].length}자 · ${shown.split('\n').length}줄 · `), `${mode}: the header counts the copied text: ${info}`);
     ok(shown === want[mode] && label === '복사됨' && copied === shown && muted === (mode === 'translation' ? '' : '猫が来た。\n|犬が来た。\n'),
       `${mode}: shown and copied ${JSON.stringify(shown)}`);
   }
@@ -589,7 +604,9 @@ async function layoutCheck() {
     const [a, b] = [...document.querySelectorAll('#text .card')].map((c) => c.getBoundingClientRect());
     const small = [...document.querySelectorAll('main button, main select, .seg label')]
       .filter((e) => e.offsetParent && !e.closest('table.grid') && e.getBoundingClientRect().height < 40).map((e) => e.id || e.textContent);
+    const ex = document.getElementById('example').getBoundingClientRect();
     return { side: Math.abs(a.top - b.top) < 1 && b.left > a.right, stacked: b.top >= a.bottom, inView: b.top + 80 < innerHeight,
+      example: ex.height >= 40 && ex.bottom <= a.top + 60 && ex.right <= innerWidth && !document.getElementById('example').closest('#settings'),
       toolbar: getComputedStyle(document.getElementById('settings-body')).display !== 'none',
       page: document.documentElement.scrollWidth <= innerWidth, small };
   })()`);
@@ -600,13 +617,15 @@ async function layoutCheck() {
   await send('Emulation.setDeviceMetricsOverride', phone);
   await send('Emulation.setTouchEmulationEnabled', { enabled: true });
   m = await measure();
-  const phoneOk = m.stacked && m.inView && !m.toolbar && m.page && m.small.length === 0;
-  ok(phoneOk, `phone: stacked cards in the first screen, settings closed${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
+  const phoneOk = m.stacked && m.inView && !m.toolbar && m.page && m.small.length === 0 && m.example;
+  ok(phoneOk, `phone: stacked cards in the first screen, settings closed, 예제 in the source card${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
   await click('#settings-toggle');
   m = await measure();
   ok(m.toolbar && m.small.length === 0, `phone: the settings open with 40 px targets (${m.small.join(' ')})`);
   await click('#settings-toggle');
   await send('Emulation.setDeviceMetricsOverride', { ...phone, width: 360 });
+  m = await measure();
+  ok(m.inView && m.example, `360 px: 예제 and both cards in the first screen${m.inView && m.example ? '' : ' ' + JSON.stringify(m)}`);
   for (const tab of ['text', 'docs', 'dictionaries']) {
     await click(`#tab-${tab}`);
     m = await measure();
@@ -622,10 +641,75 @@ async function layoutCheck() {
     counted === `${[...before].length}자 · ${before.split('\n').length}줄` && (await settled()).out === '', `× clears the input (count was ${counted})`);
 }
 
+// exampleCheck picks an example and checks that the input becomes its text
+// and gets translated.
+async function exampleCheck(filledBeforeReady) {
+  const ok = say('examples');
+  const options = await evaluate(`[...document.getElementById('example').options].slice(1).map((o) => o.value)`);
+  ok(options.length > 0, `the list has ${options.length} examples${filledBeforeReady ? ', filled before the engine was ready' : ''}`);
+  const file = options[options.length - 1];
+  await evaluate(`(() => { const s = document.getElementById('example'); s.value = ${JSON.stringify(file)}; s.dispatchEvent(new Event('change')); })()`);
+  const want = await evaluate(`fetch('examples/${file}').then((r) => r.text()).then((t) => t.replace(/\\r/g, '').replace(/\\n+$/, ''))`);
+  await until(`document.getElementById('src').value === ${JSON.stringify(want)}`, 10000).catch(() => {});
+  const r = await settled();
+  ok((await evaluate(`document.getElementById('src').value`)) === want && r.out !== '', `choosing ${file} fills the input and translates it (${r.info})`);
+}
+
+// expandCheck fills the input with a few hundred lines, expands the cards at a
+// desktop and a phone viewport and checks that both grow to their text, the
+// page scrolls, a card's header stays at the top while its text scrolls by,
+// the choice survives a reload, and 접기 brings back the fixed boxes.
+async function expandCheck() {
+  const ok = say('expand');
+  const lines = readFileSync(inputFile, 'utf8').split('\n').filter(Boolean);
+  const long = Array.from({ length: 300 }, (_, k) => lines[k % lines.length]).join('\n');
+  await click('#tab-text');
+  await translate(long);
+  await evaluate(`document.getElementById('outmode').value = 'interleaved'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
+  const state = () => evaluate(`(() => {
+    const src = document.getElementById('src'), out = document.getElementById('out');
+    return { expanded: document.querySelector('.texts').classList.contains('expanded'),
+      src: src.scrollHeight <= src.clientHeight + 2, out: out.scrollHeight <= out.clientHeight + 2,
+      page: document.documentElement.scrollHeight > innerHeight * 3 };
+  })()`);
+  const stuck = (card) => evaluate(`(() => {
+    const c = document.querySelectorAll('#text .card')[${card}], r = c.getBoundingClientRect();
+    scrollTo(0, scrollY + r.top + r.height / 2);
+    return Math.abs(c.querySelector('.head').getBoundingClientRect().top) < 1;
+  })()`);
+  for (const [name, metrics] of [['desktop', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false }], ['phone', phone]]) {
+    await send('Emulation.setDeviceMetricsOverride', metrics);
+    if (!(await state()).expanded) await click('#text .card .expand');
+    await until(`(() => { const s = document.getElementById('src'); return s.scrollHeight <= s.clientHeight + 2; })()`, 3000).catch(() => {});
+    let st = await state();
+    ok(st.expanded && st.src && st.out && st.page, `${name}: both cards grow to 300 lines and the page scrolls${st.src && st.out && st.page ? '' : ' ' + JSON.stringify(st)}`);
+    ok((await stuck(0)) && (await stuck(1)), `${name}: each card's header stays on top while its text scrolls by`);
+    await shot(`-expanded-${name}`, metrics);
+    await evaluate('scrollTo(0, 0)');
+  }
+  await send('Page.reload');
+  await dictsReady();
+  await settled();
+  ok((await state()).expanded && (await evaluate(`document.querySelector('.expand').getAttribute('aria-pressed')`)) === 'true', 'expanded after a reload');
+  await click('#text .result .expand');
+  const st = await state();
+  ok(!st.expanded && !st.src && !st.out, '접기 brings back the fixed boxes');
+  await evaluate(`document.getElementById('outmode').value = 'translation'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
+  await send('Emulation.clearDeviceMetricsOverride');
+}
+
+let secure = true;
+let examplesEarly = false;
 let failed = false;
 try {
   let wasReady;
-  await visit(1, async (ready) => (wasReady = ready));
+  await visit(1, async (ready) => {
+    wasReady = ready;
+    await until(`document.getElementById('example').options.length > 1`, 30000);
+    examplesEarly = (await evaluate(`document.body.dataset.engine ?? ''`)) !== 'ready';
+  });
+  secure = await evaluate('isSecureContext');
+  console.log(`context: ${secure ? 'secure' : 'not secure (no crypto.subtle, Cache API or navigator.clipboard)'}`);
   await earlyCheck('first-visit sample translated when the engine became ready', wasReady);
   const r = await translate(input);
   const same = r.out === expected;
@@ -639,6 +723,8 @@ try {
   await progressCheck();
   await speechCheck();
   await outputCheck();
+  await exampleCheck(examplesEarly);
+  await expandCheck();
   const version = await evaluate(`document.getElementById('hver').textContent`);
   const versionOk = /^v\S+ \([0-9a-f]{7,}, \d{4}-\d\d-\d\d\)$/.test(version);
   failed ||= !versionOk;

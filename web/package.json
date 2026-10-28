@@ -7,7 +7,7 @@
     "compile": "tsc -p .",
     "test:types": "tsc --ignoreConfig --noEmit --strict --target es2022 --module es2022 --moduleResolution bundler --lib es2022,dom ../tools/wasm_types.ts",
     "check": "node check.mjs",
-    "test": "node --test test/documents.test.mjs test/dictionaries.test.mjs"
+    "test": "node --test test/documents.test.mjs test/dictionaries.test.mjs test/sha256.test.mjs"
   },
   "devDependencies": {
     "typescript": "^7.0.2"
