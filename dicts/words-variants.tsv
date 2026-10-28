@@ -4371,7 +4371,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 空胴	동굴	N110	VPl		GN							jisjk:16174
 空とぶ円盤	비행접시	N110	VSs		GN							jisjk:240579
 空ふく	공복	N110			GN							jisjk:16189
-遇然	우연히	N110			GN							jisjk:30121
+遇然	우연히	N110		Nn	GN							jisjk:30121
 遇然	우연	N110			GN	1424	||6 ||5 S+1== "も" S+1== "は" S+1== "を" S+1== "Lです" S+1== "Lだ" P-1== "7**" &&2 S+1== "でしかな" P+1== "7**" &&2 ||4 S+1== "じゃな" S+1== "ではな" S+1== "でな" S+1== "では無" P+1== "7**" &&3 ||2 S+1== "じゃあ" S+1== "ではあ" P+1== "4**" U+1== "Lません" S+1== "ではありませんでした"	偶然은 지정 조사와 계사 앞, 형용사 뒤 또는 부정 계사 앞에서 명사 ‘우연’을 고른다.				jisjk:123035
 串やき	꼬치구이	N110	VFd		GN							jisjk:175902
 くし焼	꼬치구이	N110	VFd		GN							jisjk:175902
@@ -19001,9 +19001,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 名ぜりふ	명대사	N110			GN							jisjk:163099
 貰い火	유소	I110			GN							jisjk:112768
 プレホスピタル・ケア	프리호스피털 케어	N110			GN							jisjk:56057
-諜々	거침없이	N110	UTs		GN				llm			w:13909
+諜々	거침없이	N110	UTs	Nn	GN				llm			w:13909
 諜々	재잘거&AA@	M429			GN				llm			w:13910
-諜諜	거침없이	N110	UTs		GN				llm			w:13909
+諜諜	거침없이	N110	UTs	Nn	GN				llm			w:13909
 諜諜	재잘거&AA@	M429			GN				llm			w:13910
 打ちなお	다시 &F6@	M443			GN							jisjk:145682
 打直	다시 &F6@	M443			GN							jisjk:145682
@@ -19764,7 +19764,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お見かぎり	단념	I110			GN							jisjk:40545
 御見限	단념	I110			GN							jisjk:40545
 ファクトリー・アウトレット	팩토리 아웃렛	N110	VBlVMo		GN							jisjk:152461
-フォーエヴァー	영원히	N110			GN							jisjk:54943
+フォーエヴァー	영원히	N110		Nn	GN							jisjk:54943
 翫物	완물	N110			GN							jisjk:230429
 グラフィック・ソフト	그래픽 소프트웨어	N110			IT							jisjk:261641
 ファイバーガラス	파이버글래스	N110			GN							jisjk:54524
@@ -20340,7 +20340,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戦域高々度防衛ミサイル	전역고고도방어 미사일	N110	VTw		BZ							jisjk:359313
 戦々きょうきょう	전전 긍긍	N110		Hd	GN							jisjk:199115
 戸々	집집마다	N110			GN							jisjk:182060
-所所に	곳곳에	I110			GN							jisjk:260471
+所所に	곳곳에	I110		Nn	GN							jisjk:260471
 擦文々化	사츠몬 문화	N110			GN							jisjk:232594
 斉々哈爾	치치하루	N110	VPl		GN							jisjk:257201
 斜歯々車	헬리컬 기어	N110	VPe		GN							jisjk:249571
@@ -20453,7 +20453,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 社会民主々義	사회민주주의	N110			GN							jisjk:234522
 神々の誕生	신들의 탄생	N110	VBkVSw		GN							jisjk:229285
 私同さま	자신과 같음	N110			GN	879	||1 G+0== "Ow"	私同様를 오른쪽 문장 경계에서 자신과 같음으로 고른다. (미발동: rare-word)				jisjk:100597
-私同さま	저와 같이	N110	XXX		GN							jisjk:267008
+私同さま	저와 같이	N110	XXX	Nn	GN							jisjk:267008
 種種な	다양한	E0H0			GN							jisjk:149897
 種々の	여러 가지	C0D1			GN							jisjk:4756
 空模さま	형세	I110			GN							jisjk:61933

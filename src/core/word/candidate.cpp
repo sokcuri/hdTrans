@@ -820,6 +820,13 @@ bool Worker::LatinOrDigits(int j) const {
     return false;
 }
 
+// Whether text is one character the loaded pre-filter writes as a mark (Settings::filterMarks).
+bool Worker::FilterMark(std::string_view s) const {
+    const text::Rune r = text::DecodeRune(s);
+    return !s.empty() && r.size == s.size() &&
+           std::binary_search(settings.filterMarks.begin(), settings.filterMarks.end(), r.cp);
+}
+
 bool Worker::Dispatch(int i, int& last) {
     current = i;
     last = i;
@@ -848,7 +855,8 @@ bool Worker::Dispatch(int i, int& last) {
         break;
     case 18: case 20: case 22:
         if (left == "(" || left == ")" || left == "?" || left == "%" ||
-            (type == tokenizer::kTypeSymbol && SymbolWord(merged) && !LatinOrDigits(i - 1) && !LatinOrDigits(i + 1)) ||
+            (type == tokenizer::kTypeSymbol && SymbolWord(merged) && !FilterMark(merged) && !LatinOrDigits(i - 1) &&
+             !LatinOrDigits(i + 1)) ||
             (type == tokenizer::kTypeSymbol && left == merged && UnitSign(merged) && i > 0 &&
              (Tok(i - 1).type == tokenizer::kTypeNumber || Tok(i - 1).type == 15))) {
             BuildTokenTransformText(i);

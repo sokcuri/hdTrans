@@ -1,0 +1,101 @@
+# 규칙: LAY-15
+rule	input	expected	kind	layer
+compose:sign-number-noun	銀の盾+10	은의 방패+10	fix	compose
+compose:sign-number-noun	魔法の指輪+2	마법의 반지+2	fix	compose
+compose:sign-number-noun	回復速度+1	회복 속도+1	fix	compose
+compose:sign-number-noun	防御+1、魔力+2	방어+1, 마력+2	fix	compose
+compose:sign-number-noun	装備+3	장비+3	fix	compose
+compose:sign-number-noun	攻撃力+10%	공격력+10%	fix	compose
+compose:sign-number-noun	命中率+5%	명중율+5%	fix	compose
+compose:sign-number-noun	経験値+20%	경험치+20%	fix	compose
+compose:sign-number-noun	移動速度+1	이동 속도+1	fix	compose
+compose:sign-number-noun	鋼の鎧+5を装備した	강철의 갑옷+5를 장비했다	fix	compose
+compose:sign-number-noun	これにも初期レベル+1が付いている	이것에도 초기 레벨+1이 붙어 있다	fix	compose
+compose:sign-number-noun	守備力+4の盾	수비력+4의 방패	fix	compose
+compose:sign-number-noun	鉄の剣+3	철의 검+3	keep	compose
+compose:sign-number-noun	攻撃力-5	공격력-5	keep	compose
+compose:sign-number-noun	防御力-10%	방어력-10%	keep	compose
+compose:sign-number-noun	最大HP+50	최대 HP+50	keep	compose
+compose:sign-number-noun	HP+20	HP+20	keep	compose
+compose:sign-number-noun	MP-10	MP-10	keep	compose
+compose:sign-number-noun	炎の剣+7を手に入れた	불길의 검+7을 손에 넣었다	keep	compose
+compose:sign-number-noun	おまけ+1	덤+1	keep	compose
+compose:sign-word-nominal	素早さ+2	재빠름+2	fix	compose
+compose:sign-word-nominal	強さ+5	강함+5	fix	compose
+compose:sign-word-nominal	賢さ+3	영리함+3	fix	compose
+compose:sign-word-nominal	平気さ+1	괜찮음+1	fix	compose
+compose:sign-word-nominal	重さ+2	무게+2	fix	compose
+compose:sign-word-nominal	きれいさ+1	예쁨+1	fix	compose
+compose:sign-word-nominal	なさ+1	없음+1	fix	compose
+compose:sign-word-nominal	甘み+2	단맛+2	fix	compose
+compose:sign-word-nominal	大きさ+1	크기+1	fix	compose
+compose:sign-word-nominal	苦しさ①	괴로움①	fix	compose
+compose:sign-word-nominal	悲しみ①	슬픔①	fix	compose
+compose:sign-word-nominal	いいさ+1	좋아 +1	keep	compose
+compose:sign-word-nominal	そうさ。	그래.	keep	compose
+compose:sign-word-nominal	まあいいさα	뭐 좋아 α	keep	compose
+compose:sign-word-nominal	それでいいさ①	그것으로 좋아 ①	keep	compose
+compose:sign-word-nominal	楽しいさ+1	즐거워 +1	keep	compose
+compose:sign-word-nominal	そうさ+1	그래 +1	keep	compose
+compose:sign-word-nominal	真っ青さ+1	시퍼래 +1	keep	compose
+compose:symbol-letter-noun	ふろく①	부록①	fix	compose
+compose:symbol-letter-noun	ひみつ①	비밀①	fix	compose
+compose:symbol-letter-noun	おはなし②	이야기②	fix	compose
+compose:symbol-letter-noun	おしらせ①	소식①	fix	compose
+compose:symbol-letter-noun	ぼうけんⅡ	모험Ⅱ	fix	compose
+compose:symbol-letter-noun	しおり①	서표①	fix	compose
+compose:symbol-letter-noun	あらすじⅡ	줄거리Ⅱ	fix	compose
+compose:symbol-letter-noun	きのこ②	버섯②	fix	compose
+compose:symbol-letter-noun	おまけα	덤α	keep	compose
+compose:symbol-letter-noun	主人公視点①	주인공 시점①	keep	compose
+compose:symbol-letter-noun	後日談①	후일담①	keep	compose
+compose:symbol-letter-noun	前編②	전편②	keep	compose
+compose:symbol-letter-noun	書籍『物語Ⅷ〈上〉』	서적 『이야기Ⅷ〈상〉』	keep	compose
+compose:symbol-letter-noun	プラスαの価値	플러스α의 가치	keep	compose
+compose:symbol-letter-noun	時間があるためα、急ぐ。	시간이 있기 때문에 α, 서두른다.	keep	compose
+compose:symbol-letter-noun	時間があるためρ、急ぐ。	시간이 있기 때문에 ρ, 서두른다.	keep	compose
+compose:sign-word-apart	レベルを+1する	레벨을 +1 한다	fix	compose
+compose:sign-word-apart	攻撃力が+5された	공격력이 +5 되었다	fix	compose
+compose:sign-word-apart	効果は+10だ	효과는 +10이다	keep	compose
+compose:sign-word-apart	戦力は+10と見積もった	전력은 +10이라고 어림잡았다	keep	compose
+compose:sign-word-apart	誰かが+1	누군가가 +1	keep	compose
+compose:sign-word-apart	割引率は30%オフ	할인율은 30% 오프	fix	compose
+compose:sign-word-apart	これ100%闇バイト	이것 100% 어둠 아르바이트	fix	compose
+compose:sign-word-apart	一言もないのに100%断言できる	할 말이 없는데 100% 단언할 수 있다	fix	compose
+compose:sign-word-apart	俺病院の前に30%くらいでそっから	나 병원 앞에 30% 정도로 거기에서	fix	compose
+compose:sign-word-apart	回避率を70%まで積んだ	회피율을 70%까지 쌓았다	keep	compose
+compose:sign-word-apart	身長は190㎝以上でしょうか	키는 190㎝ 이상입니까	keep	compose
+compose:sign-word-apart	(★+3以上)	(★+3 이상)	keep	compose
+compose:sign-word-apart	1~6の番号のついたゼッケン	1~6의 번호가 붙은 제킨	keep	compose
+compose:sign-word-apart	予算の５０％カットですぞ！	예산의 50% 컷이지!	keep	compose
+compose:sign-word-apart	相棒とのシンクロ率１２％。	파트너와의 싱크로율 12%.	keep	compose
+compose:sign-word-apart	30℃以上の熱	30℃ 이상의 열	keep	compose
+compose:sign-word-apart	50％増えた	50% 늘어났다	keep	compose
+compose:sign-word-apart	10:30に集合	10:30에 집합	keep	compose
+compose:sign-word-apart	3/20に出発	3/20에 출발	keep	compose
+compose:sign-word-apart	ここで①を押す	여기서 ①을 누른다	keep	compose
+compose:sign-word-apart	その①	그 ①	keep	compose
+compose:sign-word-apart	今日は+1	오늘은 +1	keep	compose
+compose:sign-word-apart	ああ+1	아 +1	keep	compose
+compose:sign-word-apart	とても+1	무척 +1	keep	compose
+compose:sign-word-apart	この+1	이 +1	keep	compose
+compose:sign-word-apart	大きな+1	큰 +1	keep	compose
+compose:sign-word-apart	ずっと+1	계속 +1	keep	compose
+compose:sign-word-not-bare-noun	答えは①	대답은 ①	keep	compose
+compose:sign-word-not-bare-noun	あれから+1	그때부터 +1	keep	compose
+compose:sign-word-not-bare-noun	休みには+1	휴일에는 +1	keep	compose
+compose:sign-word-not-bare-noun	中学校から①	중학교때부터 ①	keep	compose
+compose:sign-word-not-bare-noun	心から①	진심으로 ①	keep	compose
+compose:sign-word-not-bare-noun	用に+1	용으로 +1	keep	compose
+compose:sign-word-not-bare-noun	20歳で+1	20세에 +1	keep	compose
+compose:sign-word-not-bare-noun	朝ご飯に+1	아침밥으로 +1	keep	compose
+compose:sign-word-not-bare-noun	当然+1	당연히 +1	keep	compose
+compose:sign-word-not-bare-noun	大分+1	상당히 +1	keep	compose
+compose:sign-word-not-bare-noun	いわゆる①	이른바 ①	keep	compose
+compose:sign-word-not-bare-noun	あと①	그리고 ①	keep	compose
+compose:sign-word-not-bare-noun	このあと①	이후에 ①	keep	compose
+compose:sign-word-not-bare-noun	いや+1	아니 +1	keep	compose
+compose:sign-word-not-bare-noun	わたしたちμ'sは	우리 μ's는	keep	compose
+compose:sign-word-not-bare-noun	私たち①	우리 ①	keep	compose
+compose:sign-word-not-bare-noun	彼ら+1	그들 +1	keep	compose
+compose:sign-word-not-bare-noun	これα	이것 α	keep	compose

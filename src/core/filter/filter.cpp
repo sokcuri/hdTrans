@@ -357,6 +357,10 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
         }
     }
     pcre2_compile_context_free_16(context);
+    for (const Filters::Rule& r : fs.pre_.rules) {
+        AddMarkCharacters(r.src, r.dest, fs.marks_);
+        AddWrittenCharacters(r.src, r.dest, fs.written_);
+    }
     fs.pre_.matcher.Build();
     fs.post_.matcher.Build();
     fs.defaults_ = toggles.states;
@@ -698,7 +702,7 @@ void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered) {
     for (std::size_t i = 0; i < head; i++) to[i] = i;
     for (std::size_t i = n - tail; i < n; i++) to[i] = i - n + m;
     const std::size_t an = n - head - tail, bm = m - head - tail;
-    if (an > 0 && bm > 0 && an * bm <= kMaxCells) {
+    if (an > 0 && bm > 0 && an <= kMaxCells / bm) {
         // lcs[i * (bm + 1) + j]: the longest common subsequence of the parts from i and j.
         std::vector<uint16_t> lcs((an + 1) * (bm + 1), 0);
         for (std::size_t i = an; i-- > 0;) {
@@ -722,6 +726,64 @@ void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered) {
         const std::size_t l = to[g->left], r = to[g->right];
         if (l == SIZE_MAX || r != l + 1) continue;
         filtered.insert(b.starts[r], source.substr(a.starts[g->left + 1], a.starts[g->right] - a.starts[g->left + 1]));
+    }
+}
+
+namespace {
+
+std::u32string Runes32(std::u16string_view s) {
+    std::u32string out;
+    for (std::size_t i = 0; i < s.size(); i++) {
+        char32_t c = s[i];
+        if (c >= 0xD800 && c <= 0xDBFF && i + 1 < s.size() && s[i + 1] >= 0xDC00 && s[i + 1] <= 0xDFFF) {
+            c = 0x10000 + ((c - 0xD800) << 10) + (s[++i] - 0xDC00);
+        }
+        out.push_back(c);
+    }
+    return out;
+}
+
+bool MarkCharacter(char32_t c) {
+    const bool kana = (c >= 0x3040 && c <= 0x30FF) || (c >= 0x31F0 && c <= 0x31FF) || (c >= 0xFF66 && c <= 0xFF9F);
+    const bool hangul = (c >= 0xAC00 && c <= 0xD7A3) || (c >= 0x1100 && c <= 0x11FF) || (c >= 0x3130 && c <= 0x318F);
+    return c >= 0x80 && !kana && !hangul && !text::IsKanji(c) && !text::IsDigit(c) && !text::IsPunct(c) &&
+           !text::IsSymbol(c) && !text::IsSpace(c);
+}
+
+// Whether c is a kana letter: hiragana and katakana with their small and half-width forms, not the
+// middle dot ・ or the length mark ー.
+bool KanaLetter(char32_t c) {
+    return (c >= 0x3041 && c <= 0x309F) || (c >= 0x30A1 && c <= 0x30FA) || (c >= 0x30FD && c <= 0x30FF) ||
+           (c >= 0x31F0 && c <= 0x31FF) || (c >= 0xFF66 && c <= 0xFF9D);
+}
+
+// Whether c is a character a pre-filter row writes into the text for its own use: not kana (・ and
+// ー included), kanji, Hangul, ASCII, a digit, punctuation or white space.
+bool WrittenCharacter(char32_t c) {
+    const bool hangul = (c >= 0xAC00 && c <= 0xD7A3) || (c >= 0x1100 && c <= 0x11FF) || (c >= 0x3130 && c <= 0x318F);
+    return c >= 0x80 && !KanaLetter(c) && c != U'・' && c != U'ー' && !hangul && !text::IsKanji(c) &&
+           !text::IsDigit(c) && !text::IsPunct(c) && !text::IsSpace(c);
+}
+
+}  // namespace
+
+void AddWrittenCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& written) {
+    const std::u32string from = Runes32(src);
+    const std::u32string to = Runes32(dest);
+    for (std::size_t i = 0; i + 1 < to.size(); i++) {
+        const char32_t c = to[i];
+        if (!KanaLetter(to[i + 1]) || !WrittenCharacter(c) || from.find(c) != std::u32string::npos) continue;
+        const auto at = std::lower_bound(written.begin(), written.end(), c);
+        if (at == written.end() || *at != c) written.insert(at, c);
+    }
+}
+
+void AddMarkCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& marks) {
+    const std::u32string from = Runes32(src);
+    for (const char32_t c : Runes32(dest)) {
+        if (!MarkCharacter(c) || from.find(c) != std::u32string::npos) continue;
+        const auto at = std::lower_bound(marks.begin(), marks.end(), c);
+        if (at == marks.end() || *at != c) marks.insert(at, c);
     }
 }
 

@@ -10,6 +10,7 @@
 | `unit.shards` | 모든 단위 테스트가 한 묶음에 들고, 묶음의 항목마다 테스트가 있는지 확인 |
 | `tools.selfbase` | `tools/snapshot.sh`와 `compare.sh`를 작은 사전으로 두 번 실행해 결과가 같은지 확인 (Unix) |
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
+| `dicts.nn-rows` | `base`, `words` 층의 명사 행 가운데 맨 명사로 읽지 않는 꼴(조사로 끝나는 구, 부사로 옮기는 행)에 문법 코드 `Nn`이 있거나 `tools/nn-allowance.tsv`에 올라 있는지, 허용 목록에 필요 없거나 두 번 적힌 줄이 없는지 확인 (`tools/nn-rows.py --check`, Unix, Python 3) |
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
 | `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |

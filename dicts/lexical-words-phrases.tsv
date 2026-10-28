@@ -12,7 +12,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 家ん中	집안	N110	VPl		GN							words-phrases:9
 三方向	세 방향	N110			GN							words-phrases:10
 仰向けのまま	위를 보고 누운 채	N110			GN							words-phrases:11
-てことは	라는 것은	I110			GN							words-phrases:12
+てことは	라는 것은	I110		Nn	GN							words-phrases:12
 窪	움푹 패&AJ@	M445			GN							words-phrases:13
 振りかぶ	치켜&L4@	M448			GN							words-phrases:14
 ひる	기가 &HT@	M435			GN							words-phrases:15

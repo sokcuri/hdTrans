@@ -537,6 +537,8 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
     }
     s.sessionSenses = text ? sessionSenses : nullptr;
     s.ruleTally = options.ruleTally;
+    if (options.filters != nullptr) s.filterMarks = options.filters->Marks();
+    s.filterWritten = options.filterWritten;
     return s;
 }
 
@@ -1270,8 +1272,19 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
         filter::KeepSpacesAfterNumbers(lines[i], filtered[i]);
         if (logged(i)) FilterSnapshot(observer, "PRE", filtered[i]);
     }
+    // A character the pre-filter writes is its own only where the text before it did not hold it.
+    std::vector<char32_t> written(f.Written().begin(), f.Written().end());
+    for (const std::string& line : lines) {
+        for (std::string_view rest = line; !rest.empty();) {
+            const text::Rune r = text::DecodeRune(rest);
+            std::erase(written, r.cp);
+            rest.remove_prefix(std::max<std::size_t>(r.size, 1));
+        }
+    }
+    TranslationOptions writtenOptions = options;
+    writtenOptions.filterWritten = written;
     std::vector<std::string> out =
-        TranslateDocumentPieces(snap, generated, filtered, observer, options, filtered, context);
+        TranslateDocumentPieces(snap, generated, filtered, observer, writtenOptions, filtered, context);
     // An empty input line is not post-filtered either.
     for (std::size_t i = context; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {

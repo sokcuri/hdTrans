@@ -7788,7 +7788,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ネトウヨ	인터넷 우익	N110			GN				llm			s:7785
 ネットウヨ	인터넷 우익	N110			GN				llm			s:7786
 バカウヨ	멍청한 우익	N110			GN				llm			s:7787
-無勉	공부 없이	N110			GN				llm			s:7788
+無勉	공부 없이	N110		Nn	GN				llm			s:7788
 ヤー公	야쿠자	N110			GN				llm			s:7789
 粉をかけ	작업을 &L1@	M427		Pn	GN				llm			s:7790
 粉を掛け	작업을 &L1@	M427		Pn	GN				llm			s:7791
