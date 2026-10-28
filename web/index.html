@@ -43,18 +43,21 @@
   </div>
 
   <section id="text" role="tabpanel" aria-labelledby="tab-text">
-  <div class="langbar"><span>일본어</span><span class="arrow" aria-hidden="true">→</span><span>한국어</span></div>
+  <div class="examplebar" id="examplebar">
+    <label class="field"><span>예제</span> <select id="example" title="예제 텍스트 불러오기"><option value="">고르기…</option></select></label>
+    <button type="button" id="expand-both" aria-pressed="false" title="원문과 번역을 함께 펼치기">↕ 둘 다 펼치기</button>
+  </div>
+  <div class="langbar" id="langbar"><span>일본어</span><span class="arrow" aria-hidden="true">→</span><span>한국어</span></div>
   <div class="panes texts">
-    <div class="pane card">
-      <div class="head"><select id="example" aria-label="예제" title="예제 텍스트 불러오기"><option value="">예제 불러오기…</option></select>
-        <small id="count"></small>
-        <button type="button" class="expand icon" aria-pressed="false" title="펼치기" aria-label="펼치기">↕</button>
+    <div class="pane card" id="srccard" data-name="원문">
+      <div class="head"><small id="count"></small>
+        <button type="button" class="expand icon" aria-pressed="false" title="원문 펼치기" aria-label="원문 펼치기">↕</button>
         <button type="button" id="clear" class="icon" title="입력 지우기" aria-label="입력 지우기">×</button></div>
       <textarea id="src" spellcheck="false" aria-label="일본어 원문" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea>
     </div>
-    <div class="pane card result">
+    <div class="pane card result" id="outcard" data-name="번역">
       <div class="head"><small id="info"></small> <progress id="tbar" hidden></progress>
-        <button type="button" class="expand icon" aria-pressed="false" title="펼치기" aria-label="펼치기">↕</button>
+        <button type="button" class="expand icon" aria-pressed="false" title="번역 펼치기" aria-label="번역 펼치기">↕</button>
         <button type="button" id="copy">복사</button></div>
       <div class="body"><div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
     </div>

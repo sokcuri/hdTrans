@@ -32,12 +32,12 @@ progress { flex: 1; max-width: 20rem; }
 .tabs button[aria-selected=true] { color: var(--fg); background: var(--surface); border-color: var(--line); box-shadow: inset 0 3px 0 var(--accent); font-weight: 600; }
 
 /* Settings: a toolbar; on narrow screens a row that opens it. */
-.settings { margin: .7rem 0; }
+.settings { margin-top: .2rem; padding: .5rem 0; background: var(--bg); }
 .settings-toggle { display: none; }
 .settings-body { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; }
 .field { display: inline-flex; gap: .45rem; align-items: center; }
 .field > span, .seg > span:first-child { color: var(--muted); font-size: 13px; }
-#example { width: 12rem; min-height: 2.25rem; font-size: 13px; text-overflow: ellipsis; background: transparent; }
+#example { width: 16rem; min-height: 2.25rem; text-overflow: ellipsis; }
 .seg { display: inline-flex; align-items: center; gap: .45rem; }
 .seg .opts { display: inline-flex; }
 .seg label { position: relative; display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0 .85rem;
@@ -49,7 +49,10 @@ progress { flex: 1; max-width: 20rem; }
 .seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* The text tab: a language bar over two equal cards. */
-.langbar { display: grid; grid-template-columns: minmax(0, 1fr) 1rem minmax(0, 1fr); align-items: center; margin: .2rem 0 .4rem;
+.examplebar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .3rem 0; background: var(--bg); }
+#expand-both { margin-left: auto; min-height: 2.25rem; padding: 0 .8rem; font-size: 13px; }
+#expand-both[aria-pressed=true] { color: var(--accent); }
+.langbar { display: grid; grid-template-columns: minmax(0, 1fr) 1rem minmax(0, 1fr); align-items: center; padding: .3rem 0 .4rem; background: var(--bg);
   font-weight: 600; }
 .langbar span { padding: 0 .9rem; }
 .langbar .arrow { padding: 0; text-align: center; color: var(--muted); font-weight: normal; }
@@ -58,7 +61,7 @@ progress { flex: 1; max-width: 20rem; }
 .card { gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
 .card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 .card.result { background: var(--sunk); }
-.card .head { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-height: 2.9rem; padding: .2rem .35rem .2rem .5rem;
+.card .head { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-height: 2.9rem; padding: .2rem .35rem .2rem .9rem;
   border-bottom: 1px solid var(--line); border-radius: 10px 10px 0 0; background: inherit; }
 .card .head small { color: var(--muted); font-size: 12px; white-space: nowrap; }
 .card .head .expand { margin-left: auto; }
@@ -70,15 +73,18 @@ progress { flex: 1; max-width: 20rem; }
 .texts textarea, .out { font-size: 18px; line-height: 1.6; padding: .9rem 1rem; color: inherit; }
 .texts textarea { display: block; width: 100%; height: 22rem; min-height: 8rem; border: 0; border-radius: 0; resize: vertical; background: transparent; }
 .texts textarea:focus-visible, .out:focus-visible { outline: none; }
-.card .body { position: relative; flex: 1; min-height: 8rem; }
+.card .body { position: relative; height: 22rem; }
 .out { position: absolute; inset: 0; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
 .out .src { color: var(--muted); }
-/* Expanded: the cards grow to their text, the page scrolls and the headers stay on top. */
-.texts.expanded .card { overflow: visible; }
-.texts.expanded .card .head { position: sticky; top: 0; z-index: 2; }
-.texts.expanded textarea { resize: none; overflow: hidden; }
-.texts.expanded .card .body { min-height: 0; }
-.texts.expanded .out { position: static; height: auto; max-height: none; overflow: visible; }
+/* An expanded card grows to its text and the page scrolls; the rows above
+   (top set by the page) and the card's header stay on top. */
+.texts { align-items: start; }
+.card.expanded { overflow: visible; }
+.card.expanded .head { position: sticky; top: var(--head-top, 0); z-index: 2; }
+.card.expanded textarea { resize: none; overflow: hidden; }
+.card.expanded .body { height: auto; }
+.card.expanded .out { position: static; height: auto; max-height: none; overflow: visible; }
+.sticky .stuck { position: sticky; z-index: 3; }
 textarea { font: inherit; }
 
 /* The dictionary editor. */
@@ -143,7 +149,7 @@ table.grid { min-width: 26rem; }
   #hver { font-size: 11px; margin-top: 0; }
   .status { margin: .35rem 0 .45rem; font-size: 12px; }
   .tabs button { flex: 1; padding: 0 .5rem; }
-  .settings { margin: .5rem 0; }
+  .settings { margin-top: 0; padding: .4rem 0; }
   .settings-toggle { display: flex; align-items: center; gap: .6rem; width: 100%; min-height: 2.75rem; padding: 0 .9rem; text-align: left; }
   .settings-toggle small { font-size: 12px; flex: 1; min-width: 0; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .settings-toggle::after { content: "▾"; color: var(--muted); }
@@ -152,7 +158,11 @@ table.grid { min-width: 26rem; }
   .settings.open .settings-body { display: flex; }
   .field, .seg { display: flex; justify-content: space-between; gap: 1rem; }
   .field select, .seg .opts { flex: 1; max-width: 17rem; min-height: 2.75rem; }
-  #example { flex: 0 1 auto; width: auto; max-width: 8.5rem; min-height: 2.75rem; }
+  .examplebar { flex-wrap: nowrap; padding: .2rem 0; }
+  .examplebar .field { flex: 1; min-width: 0; }
+  #example { flex: 1; min-width: 0; width: auto; min-height: 2.75rem; }
+  #expand-both { min-height: 2.75rem; padding: 0 .7rem; white-space: nowrap; }
+  .langbar { padding: .2rem 0 .3rem; }
   .seg label { flex: 1; justify-content: center; min-height: 2.75rem; padding: 0 .5rem; }
   .langbar { grid-template-columns: auto auto auto; justify-content: center; gap: .6rem; }
   .langbar span { padding: 0; }
@@ -163,7 +173,7 @@ table.grid { min-width: 26rem; }
   .card .head .icon { padding: 0; }
   .texts textarea, .out { font-size: 16px; padding: .7rem .8rem; }
   .texts textarea { height: 9.5rem; }
-  .card .body { min-height: 0; }
+  .card .body { height: auto; }
   .out { position: static; min-height: 9.5rem; max-height: 60vh; }
 
   .drop { padding: 1.4rem 1rem; }

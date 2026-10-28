@@ -618,7 +618,7 @@ async function layoutCheck() {
   await send('Emulation.setTouchEmulationEnabled', { enabled: true });
   m = await measure();
   const phoneOk = m.stacked && m.inView && !m.toolbar && m.page && m.small.length === 0 && m.example;
-  ok(phoneOk, `phone: stacked cards in the first screen, settings closed, 예제 in the source card${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
+  ok(phoneOk, `phone: stacked cards in the first screen, settings closed, the 예제 row above the cards${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
   await click('#settings-toggle');
   m = await measure();
   ok(m.toolbar && m.small.length === 0, `phone: the settings open with 40 px targets (${m.small.join(' ')})`);
@@ -655,10 +655,11 @@ async function exampleCheck(filledBeforeReady) {
   ok((await evaluate(`document.getElementById('src').value`)) === want && r.out !== '', `choosing ${file} fills the input and translates it (${r.info})`);
 }
 
-// expandCheck fills the input with a few hundred lines, expands the cards at a
-// desktop and a phone viewport and checks that both grow to their text, the
-// page scrolls, a card's header stays at the top while its text scrolls by,
-// the choice survives a reload, and 접기 brings back the fixed boxes.
+// expandCheck fills the input with a few hundred lines and, at a desktop and
+// a phone viewport, expands one card (only it grows to its text), then both
+// with 둘 다 펼치기; while the page scrolls through each card, the settings,
+// 예제 and language rows and that card's header stay stacked on top, within
+// half of the window. Each card's state survives a reload.
 async function expandCheck() {
   const ok = say('expand');
   const lines = readFileSync(inputFile, 'utf8').split('\n').filter(Boolean);
@@ -668,32 +669,50 @@ async function expandCheck() {
   await evaluate(`document.getElementById('outmode').value = 'interleaved'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
   const state = () => evaluate(`(() => {
     const src = document.getElementById('src'), out = document.getElementById('out');
-    return { expanded: document.querySelector('.texts').classList.contains('expanded'),
-      src: src.scrollHeight <= src.clientHeight + 2, out: out.scrollHeight <= out.clientHeight + 2,
+    return { src: document.getElementById('srccard').classList.contains('expanded'), out: document.getElementById('outcard').classList.contains('expanded'),
+      srcFits: src.scrollHeight <= src.clientHeight + 2, outFits: out.scrollHeight <= out.clientHeight + 2,
       page: document.documentElement.scrollHeight > innerHeight * 3 };
   })()`);
-  const stuck = (card) => evaluate(`(() => {
-    const c = document.querySelectorAll('#text .card')[${card}], r = c.getBoundingClientRect();
+  const fitted = () => until(`(() => { const s = document.getElementById('src'); return s.scrollHeight <= s.clientHeight + 2; })()`, 3000).catch(() => {});
+  // The stacked rows while the page is scrolled into the middle of a card.
+  const stack = (card) => evaluate(`(() => {
+    const c = document.getElementById('${card}'), r = c.getBoundingClientRect();
     scrollTo(0, scrollY + r.top + r.height / 2);
-    return Math.abs(c.querySelector('.head').getBoundingClientRect().top) < 1;
+    const box = (el) => el.getBoundingClientRect();
+    const rows = ['settings', 'examplebar', 'langbar'].map((id) => document.getElementById(id)).filter((el) => el.classList.contains('stuck'));
+    let top = 0, stacked = true;
+    for (const el of rows) { stacked &&= Math.abs(box(el).top - top) < 1.5; top = box(el).bottom; }
+    const head = box(c.querySelector('.head'));
+    return { rows: rows.map((el) => el.id), stacked: stacked && Math.abs(head.top - top) < 1.5, share: head.bottom / innerHeight };
   })()`);
   for (const [name, metrics] of [['desktop', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false }], ['phone', phone]]) {
     await send('Emulation.setDeviceMetricsOverride', metrics);
-    if (!(await state()).expanded) await click('#text .card .expand');
-    await until(`(() => { const s = document.getElementById('src'); return s.scrollHeight <= s.clientHeight + 2; })()`, 3000).catch(() => {});
+    await evaluate('scrollTo(0, 0)');
+    await click('#srccard .expand');
+    await fitted();
     let st = await state();
-    ok(st.expanded && st.src && st.out && st.page, `${name}: both cards grow to 300 lines and the page scrolls${st.src && st.out && st.page ? '' : ' ' + JSON.stringify(st)}`);
-    ok((await stuck(0)) && (await stuck(1)), `${name}: each card's header stays on top while its text scrolls by`);
+    ok(st.src && !st.out && st.srcFits && !st.outFits, `${name}: 원문 펼치기 grows only the source card${st.src && !st.out && st.srcFits && !st.outFits ? '' : ' ' + JSON.stringify(st)}`);
+    await click('#expand-both');
+    st = await state();
+    ok(st.src && st.out && st.srcFits && st.outFits && st.page, `${name}: 둘 다 펼치기 grows both and the page scrolls${st.outFits && st.page ? '' : ' ' + JSON.stringify(st)}`);
+    for (const card of ['srccard', 'outcard']) {
+      const k = await stack(card);
+      const good = k.stacked && k.rows.includes('examplebar') && (name === 'desktop' ? k.rows.length === 3 : k.share <= 0.5);
+      ok(good, `${name}: in ${card}, ${k.rows.join(', ')} and the header stay stacked on top (${Math.round(k.share * 100)}% of the window)`);
+    }
     await shot(`-expanded-${name}`, metrics);
     await evaluate('scrollTo(0, 0)');
+    await click('#expand-both');
   }
+  await click('#srccard .expand');
   await send('Page.reload');
   await dictsReady();
   await settled();
-  ok((await state()).expanded && (await evaluate(`document.querySelector('.expand').getAttribute('aria-pressed')`)) === 'true', 'expanded after a reload');
-  await click('#text .result .expand');
-  const st = await state();
-  ok(!st.expanded && !st.src && !st.out, '접기 brings back the fixed boxes');
+  let st = await state();
+  ok(st.src && !st.out, `each card's state survives a reload${st.src && !st.out ? '' : ' ' + JSON.stringify(st)}`);
+  await click('#srccard .expand');
+  st = await state();
+  ok(!st.src && !st.out && !st.srcFits && !(await evaluate(`document.body.classList.contains('sticky')`)), '접기 brings back the fixed boxes and the rows scroll again');
   await evaluate(`document.getElementById('outmode').value = 'translation'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
   await send('Emulation.clearDeviceMetricsOverride');
 }

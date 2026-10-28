@@ -76,35 +76,6 @@ speech.addEventListener('change', () => {
   schedule();
   staleDocs();
 });
-// 펼치기 grows both cards to their text so that the page scrolls instead of
-// the boxes; the choice is kept.
-const texts = document.querySelector<HTMLElement>('.texts')!;
-const expanders = [...texts.querySelectorAll<HTMLButtonElement>('.expand')];
-/** Sets the input's height to its text while expanded. */
-function fitSource() {
-  src.style.height = '';
-  if (texts.classList.contains('expanded') && src.offsetParent) src.style.height = `${src.scrollHeight}px`;
-}
-function expand(on: boolean) {
-  texts.classList.toggle('expanded', on);
-  for (const b of expanders) {
-    b.setAttribute('aria-pressed', String(on));
-    b.title = b.ariaLabel = on ? '접기' : '펼치기';
-  }
-  localStorage.setItem('hdtrans.expand', on ? '1' : '0');
-  fitSource();
-}
-for (const b of expanders) b.addEventListener('click', () => expand(!texts.classList.contains('expanded')));
-src.addEventListener('input', fitSource);
-// A new width rewraps the text: on a window resize, and when a scroll bar comes or goes.
-let srcWidth = 0;
-new ResizeObserver(() => {
-  if (src.clientWidth === srcWidth) return;
-  srcWidth = src.clientWidth;
-  fitSource();
-}).observe(src);
-expand(localStorage.getItem('hdtrans.expand') === '1');
-
 const outputMode = () => outMode.value as OutputMode;
 const savedOutput = localStorage.getItem('hdtrans.output');
 if (savedOutput === 'translation' || savedOutput === 'interleaved' || savedOutput === 'spaced') outMode.value = savedOutput;
@@ -135,6 +106,75 @@ function summed() {
   settingsSum.textContent = picked.filter(Boolean).join(', ');
 }
 
+// 펼치기 grows a card to its text so that the page scrolls instead of the
+// box; each card's choice is kept. While one is expanded, the settings, 예제
+// and language rows and the card headers stay on top.
+const texts = document.querySelector<HTMLElement>('.texts')!;
+const cards = [$('srccard'), $('outcard')];
+const expandBoth = $<HTMLButtonElement>('expand-both');
+const expanded = (card: HTMLElement) => card.classList.contains('expanded');
+/** Sets the input's height to its text while its card is expanded. */
+function fitSource() {
+  src.style.height = '';
+  if (expanded(cards[0]) && src.offsetParent) src.style.height = `${src.scrollHeight}px`;
+}
+function expand(card: HTMLElement, on: boolean) {
+  card.classList.toggle('expanded', on);
+  const b = card.querySelector<HTMLButtonElement>('.expand')!;
+  b.setAttribute('aria-pressed', String(on));
+  b.title = b.ariaLabel = `${card.dataset.name} ${on ? '접기' : '펼치기'}`;
+  localStorage.setItem(`hdtrans.expand.${card.id}`, on ? '1' : '0');
+  const both = cards.every(expanded);
+  expandBoth.setAttribute('aria-pressed', String(both));
+  expandBoth.textContent = both ? '↕ 둘 다 접기' : '↕ 둘 다 펼치기';
+  if (card === cards[0]) fitSource();
+  stick();
+}
+for (const card of cards) {
+  card.querySelector('.expand')!.addEventListener('click', () => expand(card, !expanded(card)));
+}
+expandBoth.addEventListener('click', () => {
+  const on = !cards.every(expanded);
+  for (const card of cards) expand(card, on);
+});
+src.addEventListener('input', fitSource);
+// A new width rewraps the text: on a window resize, and when a scroll bar comes or goes.
+let srcWidth = 0;
+new ResizeObserver(() => {
+  if (src.clientWidth === srcWidth) return;
+  srcWidth = src.clientWidth;
+  fitSource();
+}).observe(src);
+
+// The rows that stay on top while a card is expanded, each below the one
+// before. They may take at most 45% of the window with a card header; the
+// language row, then the settings, scroll away first.
+const examplebar = $('examplebar');
+const langbar = $('langbar');
+function stick() {
+  const on = !$('text').hidden && cards.some(expanded);
+  document.body.classList.toggle('sticky', on);
+  const rows = [settings, examplebar, langbar];
+  for (const row of rows) row.style.top = '';
+  if (!on) return;
+  const head = cards[0].querySelector<HTMLElement>('.head')!.offsetHeight;
+  const keep = new Set(rows);
+  const height = () => [...keep].reduce((sum, row) => sum + row.offsetHeight, head);
+  if (height() > innerHeight * 0.45) keep.delete(langbar);
+  if (height() > innerHeight * 0.45) keep.delete(settings);
+  let top = 0;
+  for (const row of rows) {
+    row.classList.toggle('stuck', keep.has(row));
+    if (!keep.has(row)) continue;
+    row.style.top = `${top}px`;
+    top += row.offsetHeight;
+  }
+  texts.style.setProperty('--head-top', `${top}px`);
+}
+const stickRows = new ResizeObserver(() => stick());
+for (const el of [settings, examplebar, langbar]) stickRows.observe(el);
+addEventListener('resize', stick);
+
 // Tabs: the dictionary editor (the selected dictionary's grids) sits below
 // the text tab's panes and beside the list in the dictionary tab.
 const tabs: [HTMLElement, HTMLElement][] = [
@@ -151,12 +191,14 @@ function showTab(panel: string) {
   (panel === 'dictionaries' ? $('dictedit') : $('text')).append(editorBox);
   settings.hidden = panel === 'dictionaries';
   if (panel === 'text') fitSource();
+  stick();
   settings.querySelectorAll<HTMLElement>('[data-tab]').forEach((el) => (el.hidden = el.dataset.tab !== panel));
   summed();
   localStorage.setItem('hdtrans.tab', panel);
 }
 for (const [button, p] of tabs) button.addEventListener('click', () => showTab(p.id));
 showTab(tabs.some(([, p]) => p.id === localStorage.getItem('hdtrans.tab')) ? localStorage.getItem('hdtrans.tab')! : 'text');
+for (const card of cards) expand(card, localStorage.getItem(`hdtrans.expand.${card.id}`) === '1');
 
 // The dictionaries: dicts is the list in priority order, editing the one the
 // grids show. Every edit is stored at once.
