@@ -817,6 +817,34 @@ HD_TEST(pipeline_join_spaced_out) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpacedOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+HD_TEST(pipeline_write_spaced_copies) {
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"お お お", "오 오 오"},
+        {"お　お　お", "오　오　오"},
+        {"あ あ あ…", "아 아 아…"},
+        {"「ア ア ア」", "「아 아 아」"},
+        {"う う", "으 으"},
+        {"ア ア", "아 아"},
+        // Copies written together, one kana alone, a stutter before its word, copies next to
+        // other kana and copies that read otherwise together stay.
+        {"おおお", "おおお"},
+        {"お", "お"},
+        {"お お お前", "お お お前"},
+        {"ど ど… どうして", "ど ど… どうして"},
+        {"う う… 噂", "う う… 噂"},
+        {"む む 無理", "む む 無理"},
+        {"う う~ん", "う う~ん"},
+        {"お お っ！", "お お っ！"},
+        {"かお お", "かお お"},
+        {"ん ん", "ん ん"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::WriteSpacedCopies(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 HD_TEST(pipeline_rewrite_casual_adjectives) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty());

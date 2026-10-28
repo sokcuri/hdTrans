@@ -2252,6 +2252,52 @@ std::string WriteSounds(std::string_view text, const LineContext& ctx, const dic
     return t.Write();
 }
 
+std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find(' ') == std::string_view::npos && text.find("　") == std::string_view::npos) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const auto space = [](char32_t r) { return r == U' ' || r == U'　'; };
+    const auto word = [](char32_t r) {
+        return IsKana(r) || IsKanjiRune(r) || text::IsLetter(r) || text::IsDigit(r) || In(r, U"~〜");
+    };
+    const auto copy = [](char32_t r) {
+        return (IsHiraganaRune(r) || IsKatakanaRune(r)) && !In(r, U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶーヽヾゝゞ・");
+    };
+    std::u32string out;
+    size_t at = 0;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (!copy(rs[i]) || (i > 0 && word(rs[i - 1]))) continue;
+        size_t end = i + 1, copies = 1;
+        while (end + 1 < rs.size() && space(rs[end]) && rs[end + 1] == rs[i] && (end + 2 >= rs.size() || !word(rs[end + 2]))) {
+            end += 2;
+            copies++;
+        }
+        if (copies < 2 || (end < rs.size() && word(rs[end]))) continue;
+        // A stutter before the word it starts (お お お前, ど ど… どうして, む む 無理) is left to the
+        // stutter reading, and a small kana or a long mark after the space goes on from the last copy
+        // (お お っ！).
+        size_t next = end;
+        while (next < rs.size() && (space(rs[next]) || In(rs[next], U"…‥、,・―"))) next++;
+        if (next < rs.size() && (rs[next] == rs[i] || IsKanjiRune(rs[next]) ||
+                                 In(rs[next], U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー～~〜"))) {
+            continue;
+        }
+        // Read as three copies at least: two of a kana may be a word rather than a sound (ああ).
+        const size_t said = std::max<size_t>(copies, 3);
+        const std::u32string sound = DecodeText(WriteSounds(EncodeText(std::u32string(said, rs[i])), ctx, snap));
+        if (sound.size() != said || sound[0] < text::kBase || sound[0] > text::kLast ||
+            sound.find_first_not_of(sound[0]) != std::u32string::npos) {
+            continue;
+        }
+        out.append(rs, at, i - at);
+        for (size_t k = i; k < end; k++) out.push_back(space(rs[k]) ? rs[k] : sound[0]);
+        at = end;
+        i = end - 1;
+    }
+    if (at == 0) return std::string(text);
+    out.append(rs, at, std::u32string::npos);
+    return EncodeText(out);
+}
+
 std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     SoundText t(text, ctx, snap);
     t.Write();
@@ -3043,7 +3089,7 @@ namespace {
 
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
-        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap),
+        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
     std::string sounded = internal::WriteSounds(
         internal::RewriteCasualAdjectives(

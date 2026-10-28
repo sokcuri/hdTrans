@@ -1,0 +1,44 @@
+# 규칙: SND-2, LAY-2
+rule	input	expected	kind	layer
+sound:spaced-copies	お お お	오 오 오	fix	sound
+sound:spaced-copies	お　お　お	오　오　오	fix	sound
+sound:spaced-copies	「お お お」	「오 오 오」	fix	sound
+sound:spaced-copies	お お お お！	오 오 오 오!	fix	sound
+sound:spaced-copies	おっ お お お お！	오 오 오 오 오!	fix	sound
+sound:spaced-copies	お お お… うわっ！	오 오 오… 우왓!	fix	sound
+sound:spaced-copies	あ！ お お お なんかデカそうっすよ。	has:오 오 오	fix	sound
+sound:spaced-copies	あ あ あ	아 아 아	fix	sound
+sound:spaced-copies	あ　あ　あ…	아　아　아…	fix	sound
+sound:spaced-copies	あ あ あ…｡	아 아 아….	fix	sound
+sound:spaced-copies	あ あ あ あ	아 아 아 아	fix	sound
+sound:spaced-copies	あ　あ。	아　아.	fix	sound
+sound:spaced-copies	あ　あ…。	아　아….	fix	sound
+sound:spaced-copies	ア ア	아 아	fix	sound
+sound:spaced-copies	ア ア ア	아 아 아	fix	sound
+sound:spaced-copies	オ オ オ	오 오 오	fix	sound
+sound:spaced-copies	う う う	으 으 으	fix	sound
+sound:spaced-copies	うぅっ う う…｡	으읏 으 으….	fix	sound
+sound:spaced-copies	あぁっ！ うっ う う…｡	아앗! 윽 으 으….	fix	sound
+sound:spaced-copies	ア… ひ ひ…	아… 히 히…	fix	sound
+sound:spaced-copies	は は は	하 하 하	fix	sound
+sound:spaced-copies	ハ ハ ハ	하 하 하	fix	sound
+sound:spaced-copies	ふ ふ ふ…	후 후 후…	fix	sound
+sound:spaced-copies	へ へ へ	헤 헤 헤	fix	sound
+sound:spaced-copies	まぁ ど ど ど…	뭐 두 두 두…	fix	sound
+sound:spaced-copies	おおお	오오오	keep	sound
+sound:spaced-copies	あああ	아아아	keep	sound
+sound:spaced-copies	ううう…	으으으…	keep	sound
+sound:spaced-copies	おっ おっ おっ	오 오 오	keep	sound
+sound:spaced-copies	うわっ あっ あっ	우왓 앗 앗	keep	sound
+sound:spaced-copies	うわっ　あっ　あっ	우왓　앗　앗	keep	sound
+sound:spaced-copies	あ あ	아 아	keep	sound
+sound:spaced-copies	あ あ…｡	아 아….	keep	sound
+sound:spaced-copies	え え	네 네	keep	sound
+sound:spaced-copies	お お お前は何者だ！	has:너는 누구야	keep	sound
+sound:spaced-copies	お　お…　俺のプリン	오 오… 내 푸딩	keep	sound
+sound:spaced-copies	う う… 噂を聞いたんです	lacks:으 으	keep	sound
+sound:spaced-copies	う う~ん・-・	lacks:으 으	keep	sound
+sound:spaced-copies	お お っ！ そうそうコレコレ！	오옷! 맞아 맞아 이것 이것!	keep	sound
+sound:spaced-copies	は は は… はい…｡	has:네	keep	sound
+sound:spaced-copies	あ あ ああっ	아 아 아앗	keep	sound
+sound:spaced-copies	かお お	얼굴 오	keep	sound

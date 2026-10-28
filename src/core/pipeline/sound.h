@@ -91,7 +91,7 @@
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// The normalized line after the sound stage: WriteSpacedCopies, JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
 // RewriteVolitionalSo, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
 // RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
@@ -126,6 +126,15 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
 // lexicon reads them as words as JoinSpelledOut does. A run of kanji only stays for the
 // tokenizer (通 知 表), and a run that is no word stays as written (し　ら　さ　き, あ い う).
 std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// A sound of one syllable said again with a space or an ideographic space between the copies
+// (お お お, あ　あ　あ) written in Korean with the spaces kept (오 오 오, 아　아　아): two or more
+// copies of one kana, not next to other kana, kanji, letters or digits, that the sound lexicon reads
+// written together three or more times as one syllable said as often (おおお 오오오, ううう 으으으,
+// アアア 아아아). Not a stutter before the word it starts (お お お前は, ど ど… どうして, う う… 噂),
+// a last copy drawn out or gone on from after the space (う う~ん, お お っ！), nor copies that read
+// otherwise together (んんん 으으응).
+std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).
 std::string WriteMasked(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
