@@ -577,6 +577,11 @@ bool Item::AcceptVerbContinuation(Record* following) {
         queryAllowed = false;
     }
 
+    // Whether the ending and the text after it start with the longer ending that was tried.
+    auto takesLonger = [&](std::string_view ending, std::string_view afterEnding) {
+        const std::string_view longer = w->longerEnding;
+        return !longer.empty() && longer.starts_with(ending) && afterEnding.starts_with(longer.substr(ending.size()));
+    };
     // The ending group at endingText, the text after the conjugation pattern.
     auto endingGroup = [&](std::string_view endingText) -> Group* {
         Group* g = nullptr;
@@ -584,6 +589,10 @@ bool Item::AcceptVerbContinuation(Record* following) {
         const Lookup found = w->DoLookup(endingText, kModeVerbEnding);
         if (found.count == 0) return g;
         g = w->NewGroup(found.records, ' ');
+        while (!w->longerEnding.empty() && g->length >= static_cast<int>(w->longerEnding.size())) {
+            if (g->records == nullptr) return nullptr;
+            g = w->NewGroup(g->records, ' ');
+        }
         if (g->length <= 0) return g;
         bool keepScanning = true;
         for (;;) {
@@ -608,7 +617,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
                     continue;
                 }
                 base.group = g;
-                if (g->length <= 0 || w->MatchDictionary(afterGroup, g->surface, '5', '4')) accepted = true;
+                if (g->length <= 0 || w->MatchDictionary(afterGroup, g->surface, '5', '4') || takesLonger(g->surface, afterGroup)) {
+                    accepted = true;
+                }
                 else keepScanning = false;
             }
             if (accepted) break;
