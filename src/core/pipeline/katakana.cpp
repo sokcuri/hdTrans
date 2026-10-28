@@ -397,12 +397,7 @@ std::vector<KataPiece> SegmentRun(std::u32string_view kana, std::u32string_view 
 }
 
 // Whether the name layer reads s as a person.
-bool LayerPerson(std::string_view s, const dict::Snapshot& snap) {
-    for (const dict::Record& rec : snap.NameRecords(s)) {
-        if (rec.codes != nullptr && rec.codes->sem.Text().starts_with("QPN")) return true;
-    }
-    return false;
-}
+bool LayerPerson(std::string_view s, const dict::Snapshot& snap) { return snap.NamePerson(s); }
 
 // Whether the Korean of a dictionary row only spells the sound of its katakana key
 // (パラパラ 파라파라): such a row gives the run no meaning.

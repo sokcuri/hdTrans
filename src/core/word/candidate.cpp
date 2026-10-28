@@ -323,10 +323,7 @@ bool SuffixHost(const Item* before, const dict::Snapshot& snapshot) {
         proper = proper || properCode;
     }
     if (!proper || common) return false;
-    for (const dict::Record& r : snapshot.NameRecords(before->group->surface)) {
-        if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN")) return true;
-    }
-    return false;
+    return snapshot.NamePerson(before->group->surface);
 }
 
 }  // namespace
@@ -1895,9 +1892,7 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     const auto katakanaPerson = [&] {
         const std::string_view surface = name->group->surface;
         if (!text.starts_with("ちゃん") || NameClassOf(LastChar(surface)) != kClassKatakana) return false;
-        bool layer = false;
-        for (const dict::Record& r : snapshot.NameRecords(surface)) layer = layer || (r.codes != nullptr && r.codes->sem.HasCode("QPN"));
-        if (!layer) return false;
+        if (!snapshot.NamePerson(surface)) return false;
         for (const dict::Candidate& c : snapshot.RetrieveRecords(surface, dict::LookupMode::General)) {
             if (c.codes == nullptr || c.source != surface || c.user != nullptr) continue;
             if (c.codes->sem.HasCode("QPN") || c.codes->sem.HasCode("VHn") || c.codes->part.ProperNoun()) continue;

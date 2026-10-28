@@ -298,6 +298,13 @@ std::string_view Snapshot::Respelled(const Respelling* sp, const KeySet* persons
 
 std::vector<Record> Snapshot::NameRecords(std::string_view key) const { return names_.Records(key); }
 
+bool Snapshot::NamePerson(std::string_view key) const {
+    for (const Record& r : names_.Records(key)) {
+        if (r.codes != nullptr && r.codes->sem.HasCode("QPN")) return true;
+    }
+    return false;
+}
+
 std::vector<std::string> Snapshot::PersonPlaceKeys(std::string_view text) const {
     std::vector<std::string> keys;
     if (names_.Len() == 0 || places_.empty()) return keys;

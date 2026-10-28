@@ -293,6 +293,8 @@ public:
 
     // The name-layer records of key, whether or not the key takes part in lookups.
     std::vector<Record> NameRecords(std::string_view key) const;
+    // Whether the name layer has a person record (sem QPN) under key.
+    bool NamePerson(std::string_view key) const;
     // In order of first occurrence, the respelled place keys in text that have a
     // person spelling of the same sound (霧島: 기리시마 as a place, 키리시마 as a person).
     std::vector<std::string> PersonPlaceKeys(std::string_view text) const;
