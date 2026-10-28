@@ -87,6 +87,8 @@ bool ReadWord(const output::ResolvedItem& item);
 // The span piece (U+E010) put between joined lines before the chunks are cut, and the control
 // marker the chunks write for it into the translation, at the word the break stands before.
 inline constexpr std::string_view kBreakSpan = "\xEE\x80\x90";
+// The span piece (U+E011) put in place of kBreakSpan where the break falls inside a word (MayCutWord).
+inline constexpr std::string_view kCutBreakSpan = "\xEE\x80\x91";
 inline constexpr std::string_view kBreakMark = "&#CS";
 
 // The translation of count joined lines split at its break marks, the spaces around each mark

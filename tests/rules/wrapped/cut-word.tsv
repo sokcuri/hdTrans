@@ -36,10 +36,10 @@ wrapped:cut-word	おもち\nゃ屋の中には、	장난감\n가게 안에는,	f
 wrapped:cut-word	司令官、ち\nょっとお休みしましょうか？	사령관,\n조금 쉴까요?	fix	driver
 wrapped:cut-word	このままじ\nゃ大損よぉ。	이대로는\n대손해야.	fix	driver
 wrapped:cut-word	みらいフ\nァクトリー	미래\n팩토리	fix	driver
-wrapped:cut-word	国王は盛大なパーテ\nィーを開催した。	국왕은 성대한 파티\n를 개최했다.	fix	driver
+wrapped:cut-word	国王は盛大なパーテ\nィーを開催した。	국왕은 성대한 파티를\n개최했다.	fix	driver
 wrapped:cut-word	ばあち\nゃんそれをよく分かってるから	할머니\n그것을 잘 알고 있으니까	fix	driver
 wrapped:cut-word	他の３人は思わぬラストギ\nャンブルにごくりと唾を飲みこむ。	다른 3명은 생각하지 않는 라스트\n도박에 꿀꺽 침을 삼킨다.	fix	driver
-wrapped:cut-word	とタチア\nナも追随する。	라고 타티아나\n도 추종한다.	fix	driver
+wrapped:cut-word	とタチア\nナも追随する。	라고 타티아나도\n추종한다.	fix	driver
 wrapped:cut-word	木材、角材、ベニ\nヤ板。	목재, 각재, 베니어판\n.	fix	driver
 wrapped:cut-word	遊んでるバ\nヤイじゃねぇ！	놀고 있는\n경우가 아니야!	fix	driver
 wrapped:cut-word	あなたマ\nジで良い人だねｗ	당신\n진짜로 좋은 사람이구나 ㅋ	fix	driver
@@ -49,11 +49,11 @@ wrapped:cut-word	つまり、ソ\nロ向けじゃないのだ。	즉, 솔로\n�
 wrapped:cut-word	男はM14のト\nリガーに指を掛ける。	남자는 M14\n트리거에 손가락을 건다.	fix	driver
 wrapped:cut-word	魔王たん、ラ\nノベって好きなの？	마왕짱,\n라노벨은 좋아해?	fix	driver
 wrapped:cut-word	提督～、もうちょっとリ\nズムが欲しいのー？	제독~, 좀 더\n리듬을 갖고 싶어~?	fix	driver
-wrapped:cut-word	彼の人生はクライマ\nックスを迎えていた。	그의 인생은 클라이맥스\n를 맞이하고 있었다.	fix	driver
+wrapped:cut-word	彼の人生はクライマ\nックスを迎えていた。	그의 인생은 클라이맥스를\n맞이하고 있었다.	fix	driver
 wrapped:cut-word	過去数年分のバ\nックナンバーが重ねられている。	과거 수년분의\n백 넘버가 거듭되어 있다.	fix	driver
-wrapped:cut-word	ハインリヒはエビフラ\nイの先端を切り落とし、	하인리히는 새우튀김\n의 끝을 잘라 떨어뜨려,	fix	driver
-wrapped:cut-word	食べるなら上のテーブ\nルで待ってておくれ。	먹는다면 위의 테이블\n로 기다리고 있어 보내라.	fix	driver
-wrapped:cut-word	それを見て、ディートリ\nヒが顔を真っ赤に染めた。	그것을 보고, 디트리히\n가 얼굴을 새빨갛게 붉혔다.	fix	driver
+wrapped:cut-word	ハインリヒはエビフラ\nイの先端を切り落とし、	하인리히는 새우튀김의\n끝을 잘라 떨어뜨려,	fix	driver
+wrapped:cut-word	食べるなら上のテーブ\nルで待ってておくれ。	먹는다면 위의 테이블로\n기다리고 있어 보내라.	fix	driver
+wrapped:cut-word	それを見て、ディートリ\nヒが顔を真っ赤に染めた。	그것을 보고, 디트리히가\n얼굴을 새빨갛게 붉혔다.	fix	driver
 wrapped:cut-word	あぁ 知り合いの子がね 欲しがっててさ\nお優しいんですね	아아 아는 사람의 아이가 갖고 싶어하고 있어\n다정하네요	keep	driver
 wrapped:cut-word	まあまあだな\nお見事	그럭저럭이네\n훌륭히	keep	driver
 wrapped:cut-word	危ないじゃないの\nお… おのれ怪物め	위험하잖아\n오… 당신 괴물	keep	driver
@@ -68,3 +68,6 @@ wrapped:cut-word	処刑されます\nそ… そんな！	처형당합니다\n소
 wrapped:cut-word	キスしたくせに\n（るな）しおちゃん差し入れ　持ってきたよ～。	키스했으면서\n(루인) 시오짱 간식 가져왔어~.	keep	driver
 wrapped:cut-word	彼はゲームを始め\n\nるとか、そういう話。	그는 게임을 시작해\n\n루라든지, 그런 이야기.	keep	driver
 wrapped:cut-word	もう逃\n「げるしかない」	이제 도\n「밖에 없다」	keep	driver
+wrapped:cut-word	試合が始ま\nりです	시합이 시작\n입니다	keep	driver
+wrapped:cut-word	「…始ま\nりです」	「…시작\n입니다」	fix	driver
+wrapped:cut-word	テーブ\nルでしょう。	테이블\n이죠.	fix	driver

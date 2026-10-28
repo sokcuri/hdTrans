@@ -6,6 +6,7 @@
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/terminal.h"
+#include "core/word/util.h"
 
 namespace hdTrans::internal {
 
@@ -202,7 +203,7 @@ bool Kana(char32_t r) { return (r >= U'ぁ' && r <= U'ゖ') || (r >= U'ァ' && r
 // Whether it is a run the dictionary did not read, written as it sounds (る 루).
 bool Unread(const output::ResolvedItem& it) {
     const output::ResolvedEntry& e = !it.entry.code.empty() ? it.entry : it.first;
-    return e.code == "110" && e.gattr.find("Nm") != std::string::npos;
+    return e.code == "110" && word::Has(e.gattr, "Nm");
 }
 
 WrapWord WordOf(const output::ResolvedItem& it) {

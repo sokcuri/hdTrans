@@ -249,12 +249,12 @@ HD_TEST(engine_wrapped_cut_word) {
     HD_CHECK(!MayCutWord("もう逃", "しかない。", cut));
 
     // A stem with a kanji, a small kana that starts no word, or katakana on both sides before a letter.
-    HD_CHECK(CutStem("を始め", "る", U'と'));
+    HD_CHECK(CutStem("始め", "る", U'と'));
     HD_CHECK(CutStem("逃", "げる", U'し'));
-    HD_CHECK(CutStem("こ", "りゃ", 0) == false);
     HD_CHECK(CutStem("こり", "ゃ", U'。'));
     HD_CHECK(CutStem("バラ", "ンス", U'大'));
     HD_CHECK(CutStem("ラ", "ノベ", U'っ'));
+    HD_CHECK(!CutStem("こ", "りゃ", U'ま'));
     HD_CHECK(!CutStem("ク", "キ", U'\''));
     HD_CHECK(!CutStem("す", "そ", U'い'));
     HD_CHECK(!CutStem("な", "お", U'ケ'));
