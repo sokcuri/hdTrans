@@ -356137,7 +356137,7 @@ ttt	ttt	K110			GN				jisjk:201744
 食	&FD@	M435	VMo		GN				jisjk:13733		
 食	&HU@	M430	VFdVFd		GN	397	||1 &&2 P-1== "3**" A-1== "VFd"	음식 의미 코드가 있는 부사 뒤의 食을 '먹다'로 고른다. (미발동: rare-context)	jisjk:13734		
 食	&HU@	M435	VFdVFd		GN				jisjk:13735		
-食	깔&AY@	M430	VHn		GN				jisjk:13736		
+食	깔&AY@	M430			GN	8644	||1 &&3 S-1== "を" P-2== "1**" A-2-= "VHn"	食う는 사람을 가리키는 명사가 を로 받는 목적어일 때만 '깔보다'로 고른다(人を食う).	jisjk:13736		
 食	해&AO@	M435	VBp		GN				jisjk:13737		
 食	식	N110	VFd	Z7	GN				jisjk:115881		
 食	식	N110		On	GN				jisjk:258939		
