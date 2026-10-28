@@ -506,6 +506,23 @@ HD_TEST(FilterKeepSpacesAfterNumbers) {
     HD_CHECK_EQ(keep("3 ボス", "3 ボス"), "3 ボス");
 }
 
+HD_TEST(FilterWrittenCharacters) {
+    auto written = [](std::initializer_list<std::pair<const char*, const char*>> rows) {
+        std::vector<char32_t> out;
+        for (const auto& [src, dest] : rows) AddWrittenCharacters(Utf16(src), Utf16(dest), out);
+        std::string joined;
+        for (const char32_t c : out) hdTrans::text::AppendRune(joined, c);
+        return joined;
+    };
+    // Marks and symbols a replacement writes before kana that its source lacks, once each and sorted.
+    HD_CHECK_EQ(written({{"するな、", "するな(⊆るな、"}, {"ため", "ρため"}, {"(⊆", "(⊆る"}}), "ρ⊆");
+    // Not one at the end or before other text, nor punctuation, kana, kanji, Hangul, ASCII, digits and
+    // spaces, nor a character the source has.
+    HD_CHECK_EQ(written({{"あるため", "あるためρ"}, {"な、", "⌒。な、"}, {"あ", "在る　요1Aあ"}, {"「", "「あ"}}), "");
+    // ・ and ー are kana, not written characters, and a kana run does not start with them.
+    HD_CHECK_EQ(written({{"な", "・な"}, {"な", "ーな"}, {"な", "∴ーな"}}), "");
+}
+
 HD_TEST(FilterMarkCharacters) {
     auto marks = [](std::initializer_list<std::pair<const char*, const char*>> rows) {
         std::vector<char32_t> out;

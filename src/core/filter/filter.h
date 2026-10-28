@@ -74,6 +74,8 @@ public:
 
     // The marks the pre-filter writes (MarkCharacters of its rows), sorted.
     std::span<const char32_t> Marks() const { return marks_; }
+    // The characters the pre-filter writes (WrittenCharacters of its rows), sorted.
+    std::span<const char32_t> Written() const { return written_; }
 
 private:
     friend std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::vector<Error>& errors,
@@ -124,12 +126,18 @@ private:
     dict::CodeTable codes_;
     dict::Dict user_;
     std::vector<char32_t> marks_;
+    std::vector<char32_t> written_;
 };
 
 // Adds to marks the characters dest has and src lacks other than kana, kanji, Hangul, ASCII,
 // digits, punctuation, symbols and white space: the letters a pre-filter row writes as marks for
 // its post-filter (ρ, чmA's ч, ʞ, ҡ). marks stays sorted and holds each character once.
 void AddMarkCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& marks);
+
+// Adds to written the characters dest has right before a kana letter and src lacks, other than
+// kana, kanji, Hangul, ASCII, digits, punctuation and white space: the marks and symbols a pre-filter
+// row writes before kana ((⊆るな). written stays sorted and holds each character once.
+void AddWrittenCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& written);
 
 // The filters of sources, which are in load order; null for no sources. Lines that do
 // not load are skipped and listed in errors. acceptedCounts, when given, receives one

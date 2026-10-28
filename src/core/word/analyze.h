@@ -98,6 +98,9 @@ struct Settings {
     // The marks the loaded pre-filter writes (filter::Filters::Marks), sorted: such a character
     // standing alone is no word of its own, so it stays joined to its neighbours for the post-filter.
     std::span<const char32_t> filterMarks;
+    // The characters the loaded pre-filter writes before kana (filter::Filters::Written), sorted:
+    // kana right after one is text the pre-filter wrote, not an unknown stem to read by sound.
+    std::span<const char32_t> filterWritten;
 };
 
 // Called after every dictionary lookup with the token being processed (-1 before the

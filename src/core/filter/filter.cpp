@@ -357,7 +357,10 @@ std::shared_ptr<const Filters> Build(const std::vector<Source>& sources, std::ve
         }
     }
     pcre2_compile_context_free_16(context);
-    for (const Filters::Rule& r : fs.pre_.rules) AddMarkCharacters(r.src, r.dest, fs.marks_);
+    for (const Filters::Rule& r : fs.pre_.rules) {
+        AddMarkCharacters(r.src, r.dest, fs.marks_);
+        AddWrittenCharacters(r.src, r.dest, fs.written_);
+    }
     fs.pre_.matcher.Build();
     fs.post_.matcher.Build();
     fs.defaults_ = toggles.states;
@@ -747,7 +750,33 @@ bool MarkCharacter(char32_t c) {
            !text::IsSymbol(c) && !text::IsSpace(c);
 }
 
+// Whether c is a kana letter: hiragana and katakana with their small and half-width forms, not the
+// middle dot ・ or the length mark ー.
+bool KanaLetter(char32_t c) {
+    return (c >= 0x3041 && c <= 0x309F) || (c >= 0x30A1 && c <= 0x30FA) || (c >= 0x30FD && c <= 0x30FF) ||
+           (c >= 0x31F0 && c <= 0x31FF) || (c >= 0xFF66 && c <= 0xFF9D);
+}
+
+// Whether c is a character a pre-filter row writes into the text for its own use: not kana (・ and
+// ー included), kanji, Hangul, ASCII, a digit, punctuation or white space.
+bool WrittenCharacter(char32_t c) {
+    const bool hangul = (c >= 0xAC00 && c <= 0xD7A3) || (c >= 0x1100 && c <= 0x11FF) || (c >= 0x3130 && c <= 0x318F);
+    return c >= 0x80 && !KanaLetter(c) && c != U'・' && c != U'ー' && !hangul && !text::IsKanji(c) &&
+           !text::IsDigit(c) && !text::IsPunct(c) && !text::IsSpace(c);
+}
+
 }  // namespace
+
+void AddWrittenCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& written) {
+    const std::u32string from = Runes32(src);
+    const std::u32string to = Runes32(dest);
+    for (std::size_t i = 0; i + 1 < to.size(); i++) {
+        const char32_t c = to[i];
+        if (!KanaLetter(to[i + 1]) || !WrittenCharacter(c) || from.find(c) != std::u32string::npos) continue;
+        const auto at = std::lower_bound(written.begin(), written.end(), c);
+        if (at == written.end() || *at != c) written.insert(at, c);
+    }
+}
 
 void AddMarkCharacters(std::u16string_view src, std::u16string_view dest, std::vector<char32_t>& marks) {
     const std::u32string from = Runes32(src);

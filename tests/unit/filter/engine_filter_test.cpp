@@ -900,3 +900,31 @@ HD_TEST(EngineUserFolderHeaderCompiled) {
     HD_CHECK_EQ(Translate(engine, "猫"), "이미지필터");
     HD_CHECK(HasHeaderFilterError(engine, "after.tsv", 3));
 }
+
+// Kana right after a character the pre-filter writes before kana ((⊆るな) are text the pre-filter
+// wrote: the word stage leaves them out, so the post-filter finds its mark as it wrote it ((⊆인). A
+// character the source line holds itself does not count, and without the filter the same text reads
+// as before. Needs HDTRANS_DICTS.
+HD_TEST(EngineEhndWrittenKanaUnread) {
+    const char* dicts = std::getenv("HDTRANS_DICTS");
+    if (dicts == nullptr || *dicts == '\0') return hdtest::Skip("HDTRANS_DICTS is not set");
+    TempFolder ehnd("ehnd-written");
+    ehnd.Write("PreFilter_a.txt", "するな、\tするな(⊆るな、\t1\t1\nりだ、\tりだ(⊆りだ、\t1\t1\n"
+                                  "ほげ\t∴ほげ\t1\t1\nふが\tρふが\t1\t1\nぴよ\tĐぴよ\t1\t1\n");
+    ehnd.Write("PostFilter_a.txt", "\\(⊆인\t\t1\t1\n\\(⊆다\t\t1\t1\n");
+    hdTrans::Engine e(false, hdTrans::CacheWrite::Off, hdTrans::UserReload::Off);
+    HD_REQUIRE(e.Open({dicts}));
+    HD_CHECK_EQ(Translate(e, "心配するな(⊆るな、大丈夫。"), "걱정하지 마(⊆루인, 괜찮아.");
+    HD_CHECK_EQ(Translate(e, "終わりだ(⊆りだ、もう。"), "끝이다(⊆리다, 이제.");
+    HD_CHECK_EQ(Translate(e, "∴まりです。"), "∴마리입니다.");
+    HD_REQUIRE(e.OpenEhnd(ehnd.path.string()));
+    HD_CHECK(e.FilterErrors().empty());
+    HD_CHECK_EQ(Translate(e, "心配するな、大丈夫。"), "걱정하지 마, 괜찮아.");
+    HD_CHECK_EQ(Translate(e, "終わりだ、もう。"), "끝이다, 이제.");
+    HD_CHECK_EQ(Translate(e, "もう行くな、危ない。"), "이제 가지 마, 위험하다.");
+    HD_CHECK_EQ(Translate(e, "まりです。"), "마리입니다.");
+    HD_CHECK_EQ(Translate(e, "∴まりです。"), "∴마리입니다.");
+    HD_CHECK_EQ(Translate(e, "ρまりです。"), "ρ마리입니다.");
+    HD_CHECK_EQ(Translate(e, "Đまりです。"), "Đ마리입니다.");
+    HD_CHECK_EQ(Translate(e, "心配するな(⊆るな、大丈夫。"), "걱정하지 마(⊆루인, 괜찮아.");
+}
