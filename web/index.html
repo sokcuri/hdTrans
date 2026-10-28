@@ -24,6 +24,11 @@
       <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
       <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
     </select></label>
+    <label title="복사하거나 받는 번역의 형식">출력 <select id="outmode">
+      <option value="translation" selected>번역문만</option>
+      <option value="interleaved">원문 병기</option>
+      <option value="spaced">원문 병기 + 빈 줄</option>
+    </select></label>
   </div>
 
   <section id="text" role="tabpanel" aria-labelledby="tab-text">
@@ -39,8 +44,9 @@
   <div class="panes">
     <label class="pane"><span>일본어</span>
       <textarea id="src" spellcheck="false" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea></label>
-    <label class="pane"><span>한국어 <small id="info"></small> <progress id="tbar" hidden></progress></span>
-      <textarea id="out" readonly></textarea></label>
+    <div class="pane"><span>한국어 <small id="info"></small> <progress id="tbar" hidden></progress>
+      <button type="button" id="copy">복사</button></span>
+      <div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
   </div>
 
   <div id="editor">
@@ -56,12 +62,6 @@
     <label class="drop" id="drop">파일을 끌어다 놓거나 클릭해서 고르기
       <input type="file" id="files" multiple accept=".txt,text/plain"></label>
     <div class="controls">
-      <fieldset>
-        <legend>출력</legend>
-        <label><input type="radio" name="output" value="translation" checked> 번역문만</label>
-        <label><input type="radio" name="output" value="interleaved"> 원문/번역문</label>
-        <label><input type="radio" name="output" value="spaced"> 원문/번역문 + 개행</label>
-      </fieldset>
       <button type="button" id="run" disabled>모두 번역</button>
       <button type="button" id="zip" disabled>ZIP으로 받기</button>
     </div>

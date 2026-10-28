@@ -17,6 +17,9 @@ select { font: inherit; }
 .pane { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; }
 .pane small { opacity: .7; margin-left: .5rem; white-space: nowrap; }
 textarea { width: 100%; min-height: 22rem; font: inherit; line-height: 1.6; padding: .5rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; background: transparent; color: inherit; }
+.out { height: 22rem; padding: .5rem; border: 1px solid var(--line); border-radius: 6px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
+.out .src { opacity: .55; }
+#copy { font: inherit; font-size: .8rem; margin-left: .5rem; }
 .dicts { margin-top: 1rem; align-items: start; }
 table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .grid th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; padding: 0 .3rem; }

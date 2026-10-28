@@ -11,7 +11,8 @@
 // dropped); then it drives the user dictionary and names table editors
 // with key events and a clipboard paste, checks that the entries change the
 // translation, and that POST /api/translate is 404. It checks that the
-// 대사 말투 select changes quoted speech and is saved. It also checks that
+// 대사 말투 select changes quoted speech and is saved, and that each 출력 mode
+// shows and copies the output in that format. It also checks that
 // text in the input before the engine is ready gets translated once it is:
 // the sample of the first visit, and text typed during the second visit's
 // load, that a long translation shows its progress bar, and the version
@@ -124,7 +125,7 @@ const settled = () =>
   evaluate(`(async () => {
     const out = document.getElementById('out');
     while (out.dataset.done !== '1') await new Promise((r) => setTimeout(r, 20));
-    return { out: out.value, info: document.getElementById('info').textContent, warning: document.getElementById('warning').textContent };
+    return { out: out.textContent, info: document.getElementById('info').textContent, warning: document.getElementById('warning').textContent };
   })()`);
 
 async function translate(text) {
@@ -255,6 +256,33 @@ async function speechCheck() {
   const ok = soft !== strict && back === strict && saved === 'soft';
   failed ||= !ok;
   console.log(`speech: ${ok ? 'ok    ' : 'FAILED'} soft ${soft}, strict ${strict}, saved ${saved}`);
+}
+
+// outputCheck shows a two-line translation in each 출력 mode and checks the
+// shown text, the muted source lines, 복사 and that the choice is saved.
+async function outputCheck() {
+  const ok = say('output');
+  const pick = (value) => evaluate(`(() => { const s = document.getElementById('outmode');
+    s.value = '${value}'; s.dispatchEvent(new Event('change')); })()`);
+  const src = '猫が来た。\n犬が来た。';
+  const [a, b] = (await translate(src)).out.split('\n');
+  const want = { translation: `${a}\n${b}`, interleaved: `猫が来た。\n${a}\n犬が来た。\n${b}`, spaced: `猫が来た。\n${a}\n\n犬が来た。\n${b}` };
+  await send('Browser.grantPermissions', { permissions: ['clipboardReadWrite', 'clipboardSanitizedWrite'] });
+  await send('Emulation.setFocusEmulationEnabled', { enabled: true });
+  for (const mode of ['interleaved', 'spaced', 'translation']) {
+    await pick(mode);
+    const shown = await evaluate(`document.getElementById('out').textContent`);
+    const muted = await evaluate(`[...document.querySelectorAll('#out .src')].map((e) => e.textContent).join('|')`);
+    await until(`document.getElementById('copy').textContent === '복사'`);
+    await click('#copy');
+    const label = await until(`document.getElementById('copy').textContent !== '복사' && document.getElementById('copy').textContent`);
+    const copied = await evaluate(`navigator.clipboard.readText()`);
+    ok(shown === want[mode] && label === '복사됨' && copied === shown && muted === (mode === 'translation' ? '' : '猫が来た。\n|犬が来た。\n'),
+      `${mode}: shown and copied ${JSON.stringify(shown)}`);
+  }
+  await pick('spaced');
+  ok((await evaluate(`localStorage.getItem('hdtrans.output')`)) === 'spaced', 'the choice is saved');
+  await pick('translation');
 }
 
 // The 사전 tab. Files go through folders of a temporary directory: in/
@@ -544,6 +572,7 @@ try {
   }
   await progressCheck();
   await speechCheck();
+  await outputCheck();
   const version = await evaluate(`document.getElementById('hver').textContent`);
   const versionOk = /^v\S+ \([0-9a-f]{7,}, \d{4}-\d\d-\d\d\)$/.test(version);
   failed ||= !versionOk;

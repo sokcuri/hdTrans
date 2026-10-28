@@ -1,7 +1,7 @@
 // The page: loads the engine and the dictionaries (from Cache Storage when
 // their content hashes are cached), hands them to the worker and translates
 // there as the input changes.
-import { decodeText, encodeOutput, formatDocument, outputName, zip, type OutputMode } from './documents.js';
+import { decodeText, encodeOutput, formatDocument, outputName, outputParts, zip, type OutputMode } from './documents.js';
 import { count, firstName, fromFile, newId, openStore, overlay, toFile, type Dictionary, type Store } from './dictionaries.js';
 import { grid } from './grid.js';
 
@@ -21,9 +21,10 @@ interface Manifest {
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const src = $<HTMLTextAreaElement>('src');
-const out = $<HTMLTextAreaElement>('out');
+const out = $<HTMLElement>('out');
 const example = $<HTMLSelectElement>('example');
 const speech = $<HTMLSelectElement>('speech');
+const outMode = $<HTMLSelectElement>('outmode');
 const status = $<HTMLElement>('status');
 const bar = $<HTMLProgressElement>('bar');
 const info = $<HTMLElement>('info');
@@ -55,6 +56,13 @@ speech.addEventListener('change', () => {
   localStorage.setItem('hdtrans.speech', speech.value);
   schedule();
   staleDocs();
+});
+const outputMode = () => outMode.value as OutputMode;
+const savedOutput = localStorage.getItem('hdtrans.output');
+if (savedOutput === 'translation' || savedOutput === 'interleaved' || savedOutput === 'spaced') outMode.value = savedOutput;
+outMode.addEventListener('change', () => {
+  localStorage.setItem('hdtrans.output', outMode.value);
+  showOutput();
 });
 
 // Tabs: the dictionary editor (the selected dictionary's grids) sits below
@@ -367,6 +375,38 @@ function warningText(warning: string, ehnd: string[], where: (ehnd: boolean, lin
   return [...user, ...e].join(' / ');
 }
 
+// The output shows the last translation in the output mode, source lines muted;
+// its text is what 복사 copies and what a document saves.
+let shownSource = '';
+let shownTranslation = '';
+function showOutput() {
+  out.replaceChildren(
+    ...outputParts(shownSource, shownTranslation, outputMode()).map((p) => {
+      if (!p.source) return p.text;
+      const span = document.createElement('span');
+      span.className = 'src';
+      span.textContent = p.text;
+      return span;
+    }),
+  );
+}
+out.addEventListener('keydown', (ev) => {
+  if (ev.key !== 'a' || !(ev.ctrlKey || ev.metaKey)) return;
+  ev.preventDefault();
+  getSelection()?.selectAllChildren(out);
+});
+const copy = $<HTMLButtonElement>('copy');
+copy.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(out.textContent ?? '');
+    copy.textContent = '복사됨';
+  } catch {
+    getSelection()?.selectAllChildren(out);
+    copy.textContent = '선택됨';
+  }
+  setTimeout(() => (copy.textContent = '복사'), 1500);
+});
+
 // The input is translated a moment after it last changed. Every change
 // (text, mode, speech, dictionaries) starts a new generation; a result is shown
 // only if no change came while it was made, otherwise the translation runs
@@ -400,7 +440,11 @@ async function translate() {
     text = `${lines.length}줄 · ${Math.round(performance.now() - t0)} ms`;
     const w = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
     if (w) problem = '사전 오류: ' + w;
-    if (g === generation) out.value = m.lines.join('\n');
+    if (g === generation) {
+      shownSource = lines.join('\n');
+      shownTranslation = m.lines.join('\n');
+      showOutput();
+    }
   } catch (err) {
     problem = '번역 실패: ' + (err instanceof Error ? err.message : String(err));
   }
@@ -439,7 +483,6 @@ let docsRunning = false;
 let docsCancel = false;
 let docsAt = 0;
 
-const outputMode = () => (document.querySelector('input[name=output]:checked') as HTMLInputElement).value as OutputMode;
 const outputBytes = (d: Doc) => encodeOutput(formatDocument(d.source!, d.translated!, outputMode()), d.lineBreak);
 const setState = (d: Doc, text: string) => (d.row.cells[2].textContent = text);
 
