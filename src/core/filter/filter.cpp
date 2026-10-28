@@ -698,7 +698,7 @@ void KeepSpacesAfterNumbers(std::string_view source, std::string& filtered) {
     for (std::size_t i = 0; i < head; i++) to[i] = i;
     for (std::size_t i = n - tail; i < n; i++) to[i] = i - n + m;
     const std::size_t an = n - head - tail, bm = m - head - tail;
-    if (an > 0 && bm > 0 && an * bm <= kMaxCells) {
+    if (an > 0 && bm > 0 && an <= kMaxCells / bm) {
         // lcs[i * (bm + 1) + j]: the longest common subsequence of the parts from i and j.
         std::vector<uint16_t> lcs((an + 1) * (bm + 1), 0);
         for (std::size_t i = an; i-- > 0;) {

@@ -470,6 +470,27 @@ HD_TEST(compose_emit_closing_symbols) {
     }
 }
 
+// A number written with signs keeps the space written before it, also when a space after it is
+// written into its token (레벨을 +1 한다); other ASCII symbols join the word before them.
+HD_TEST(compose_emit_signed_number_space) {
+    struct Case {
+        std::vector<TokenText> tokens;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {{{tokenizer::kTypeJapanese, 0, "레벨을 ", ""}, {tokenizer::kTypeAsciiSymbol, 0, "+1 ", ""}, {tokenizer::kTypeJapanese, 0, "한다", ""}},
+         "레벨을 +1 한다"},
+        {{{tokenizer::kTypeJapanese, 0, "확률은 ", ""}, {tokenizer::kTypeAsciiSymbol, 0, "50%", ""}}, "확률은 50%"},
+        {{{tokenizer::kTypeJapanese, 0, "그건 ", ""}, {tokenizer::kTypeAsciiSymbol, 0, "#", ""}}, "그건#"},
+    };
+    Settings settings;
+    for (const Case& c : cases) {
+        Pieces out;
+        EmitSynchronousOutput(c.tokens, 0, static_cast<int>(c.tokens.size()) - 1, settings, out);
+        HD_CHECK_EQ(String(out), c.expected);
+    }
+}
+
 // An opening bracket token other than 〔 (【 〈 《 ［ ‘ ｛) stands apart from a word, a word span or
 // a comma before it, as a word does; 〔, ＜ and [, and an opening bracket after punctuation, an
 // escape, a tag or another bracket, stay attached.
@@ -558,6 +579,89 @@ HD_TEST(compose_comma_before_symbol_run) {
         Families families;
         Settings settings;
         settings.text = c.text;
+        Pieces result;
+        composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
+        HD_CHECK_EQ(String(result), c.expected);
+    }
+}
+
+// A word that starts with a sign (+10, Ⅳ, α) is written straight on to a noun row and to an adjective
+// whose ending row makes a noun (ending.nominal), and apart after any other row: a particle, a noun
+// row that does not read as a bare noun (gram Nn), a pronoun, an adverb, an adnominal, another ending (あるため 있기
+// 때문에, the final さ of いいさ 좋아, そうさ 그래).
+HD_TEST(compose_sign_led_word_after_noun) {
+    struct Placed {
+        const char *surface, *code, *target;
+        const char* endingSurface = "";
+        const char* ending = "";
+        const char* tags = "";
+    };
+    struct Case {
+        std::vector<Placed> words;
+        const char* sign;
+        int type;
+        const char* expected;
+    };
+    const Case cases[] = {
+        {{{"盾", "110", "방패"}}, "+10", tokenizer::kTypeAsciiSymbol, "방패+10."},
+        {{{"剣", "110", "검"}}, "+3", tokenizer::kTypeAsciiSymbol, "검+3."},
+        {{{"攻撃力", "110", "공격력"}}, "-5", tokenizer::kTypeAsciiSymbol, "공격력-5."},
+        {{{"ステージ", "110", "스테이지"}}, "Ⅳ", tokenizer::kTypeSymbol, "스테이지Ⅳ."},
+        {{{"おまけ", "110", "덤"}}, "α", tokenizer::kTypeSymbol, "덤α."},
+        {{{"あ", "900", "있기 때문에", "るため"}}, "α", tokenizer::kTypeSymbol, "있기 때문에 α."},
+        {{{"レベル", "110", "레벨"}, {"が", "200", "이"}}, "+1", tokenizer::kTypeAsciiSymbol, "레벨이 +1."},
+        {{{"これ", "120", "이것"}, {"は", "200", "은"}}, "①", tokenizer::kTypeSymbol, "이것은 ①."},
+        {{{"答えは", "110", "대답은", "", "", "Nn"}}, "②", tokenizer::kTypeSymbol, "대답은 ②."},
+        {{{"素早", "700", "재$C1@", "さ", "8"}}, "+2", tokenizer::kTypeAsciiSymbol, "재빠름+2."},
+        {{{"い", "700", "$DE@", "さ", "6"}}, "+1", tokenizer::kTypeAsciiSymbol, "좋아 +1."},
+        {{{"そう", "800", "그%C5@", "さ", "8"}}, "+1", tokenizer::kTypeAsciiSymbol, "그래 +1."},
+        {{{"ここで", "300", "여기서"}}, "①", tokenizer::kTypeSymbol, "여기서 ①."},
+        {{{"その", "000", "그"}}, "①", tokenizer::kTypeSymbol, "그 ①."},
+        {{{"私たち", "120", "우리"}}, "①", tokenizer::kTypeSymbol, "우리 ①."},
+        {{{"こと", "110", "것"}}, "②", tokenizer::kTypeSymbol, "것②."},
+        {{{"開", "900", "열린", "いた"}}, "β", tokenizer::kTypeSymbol, "열린 β."},
+        {{{"確率", "110", "확률"}, {"は", "200", "은"}}, "50%", tokenizer::kTypeAsciiSymbol, "확률은 50%."},
+    };
+    for (const Case& c : cases) {
+        std::string source;
+        for (const Placed& p : c.words) source += p.surface;
+        std::vector<TokenText> tokens = {
+            {tokenizer::kTypeJapanese, 0, source, ""},
+            {c.type, 0, c.sign, ""},
+            {tokenizer::kTypeSentenceEnd, 0, ".", ""},
+            {tokenizer::kTypeTruncated, 0, "", ""},
+        };
+        std::vector<ResolvedItem> items;
+        int offset = 0;
+        for (const Placed& p : c.words) {
+            ResolvedItem item;
+            item.offset = offset;
+            item.surface = p.surface;
+            item.length = static_cast<int>(item.surface.size());
+            offset += item.length;
+            item.selected = 0;
+            item.first = item.entry = {p.code, p.tags, p.target};
+            if (*p.endingSurface != '\0') {
+                item.directIndex = 0;
+                item.ending = {"500", "", p.ending};
+                item.endingSurface = p.endingSurface;
+            }
+            items.push_back(std::move(item));
+        }
+        ResolvedItem sign;
+        sign.tokenIndex = 1;
+        sign.surface = c.sign;
+        sign.length = static_cast<int>(sign.surface.size());
+        sign.selected = 0;
+        sign.first = sign.entry = {"110", "", c.sign};
+        items.push_back(std::move(sign));
+        Nodes nodes;
+        BuildItems(items, tokens, nodes);
+        Composer composer;
+        Families families;
+        Settings settings;
+        settings.text = true;
+        settings.literal = true;
         Pieces result;
         composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
         HD_CHECK_EQ(String(result), c.expected);
