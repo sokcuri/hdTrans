@@ -424,6 +424,27 @@ bool KansaiMahen(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// The Kansai しもうた, しもた of しまう and もろうた, もろた of もらう after a て form, and their て
+// forms (行ってしもうた, 来てもろて): しまった, しまって, もらった, もらって.
+bool KansaiShimota(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    m.group[1] = Span(s, pos, p);
+    for (const std::string_view stem : {"しも", "もろ"}) {
+        size_t q = p;
+        if (!Lit(s, q, stem)) continue;
+        size_t r = q;
+        Lit(s, r, "う");
+        if (size_t t = r; Lit(s, t, "た") || Lit(s, t, "て")) {
+            m.group[2] = stem == "しも" ? "しまっ" : "もらっ";
+            m.group[3] = Span(s, r, t);
+            m.end = t;
+            return true;
+        }
+    }
+    return false;
+}
+
 // The Kyoto どす of the copula after the ん of のです, and its past どした (やったんどす,
 // 覚えててくれはったんどすか): です, でした, where the copula ends the predicate: before the end, a
 // mark, a space or a sentence particle (え, か, な, ね, よ, わ, けど; not か after どした, nor って).
@@ -763,6 +784,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && Contains(text, "へん")) text = ReplaceAll(text, KansaiNegative, ReplaceKansaiNegative);
     if (dialectForms && (Contains(text, "やろ") || Contains(text, "じゃろ"))) {
         text = ReplaceAll(text, KansaiConjecture, ReplaceKansaiConjecture);
+    }
+    if (dialectForms && (Contains(text, "しも") || Contains(text, "もろ"))) {
+        text = ReplaceAll(text, KansaiShimota, [](const Match& m) { return Cat({m.group[1], m.group[2], m.group[3]}); });
     }
     if (dialectForms && Contains(text, "んど")) {
         text = ReplaceAll(text, KyotoDosu, [](const Match& m) { return std::string(m.group[1]); });

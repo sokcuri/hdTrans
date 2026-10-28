@@ -229,7 +229,9 @@
 あきまへん은 いけません, かまへん은 かまわない로 쓴 꼴로 읽고, ません, まへん 뒤의 やろ는 でしょう다. 교토 말에서
 のです의 ん 뒤 どす, どした가 문장 끝, 부호, 문장 끝 조사(え, か, な, ね, よ, わ, けど) 앞에서 술어를
 맺으면 です, でした로 읽고(覚えててくれはったんどすか 기억하고 있어 주셨습니까; なんどすれば는 何度すれば), もん과 부르는
-말 さん, はん 뒤의 どす는 그대로 둔다(おめでとうさんどす). 이 꼴들은 방언 꼴을 읽을 때만 읽는다.
+말 さん, はん 뒤의 どす는 그대로 둔다(おめでとうさんどす). て형 뒤의 しもうた, しもた, しもうて, しもて는 しまった,
+しまって이고 もろうた, もろた, もろうて, もろて는 もらった, もらって다(なってしもうた 되어버렸다, 来てもろて 와 줘).
+이 꼴들은 방언 꼴을 읽을 때만 읽는다.
 
 | 원문 | 출력 | 구분 |
 |---|---|---|
@@ -239,8 +241,9 @@
 | 学校まではるばる | 학교까지 멀리 | 유지 |
 | 知りまへん｡ | 모릅니다. | 고침 |
 | 動いたらあきまへんで | 움직이면 안돼요 | 고침 |
+| なくなってしもうた。 | 없어져버렸다. | 고침 |
 
-사례: `tests/rules/cases/kansai-to-form.tsv`, `tests/rules/cases/kyoto-dosu.tsv`, `tests/rules/cases/kansai-te-haru.tsv`, `tests/rules/cases/kansai-mahen.tsv`
+사례: `tests/rules/cases/kansai-to-form.tsv`, `tests/rules/cases/kyoto-dosu.tsv`, `tests/rules/cases/kansai-te-haru.tsv`, `tests/rules/cases/kansai-mahen.tsv`, `tests/rules/cases/kansai-shimota.tsv`
 
 ## SPC-5 문장 끝 ね는 약속과 감탄으로 나눠 옮긴다
 

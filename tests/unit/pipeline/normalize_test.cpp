@@ -1027,6 +1027,12 @@ HD_TEST(pipeline_kansai_verb_forms) {
         {"動いたらあきまへんで"sv, "動いたらいけませんよ"sv},
         {"知りまへん｡"sv, "知りまへん｡"sv},
         {"負けしまへん｡"sv, "負けしまへん｡"sv},
+        // しもうた of しまう and もろうて of もらう after a て form.
+        {"なってしもうた"sv, "なってしまった"sv},
+        {"離れてしもたら"sv, "離れてしまったら"sv},
+        {"来てもろて｡"sv, "来てもらって｡"sv},
+        {"やめてもろたけど"sv, "やめてもらったけど"sv},
+        {"鉄骨もろとも"sv, "鉄骨もろとも"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));
