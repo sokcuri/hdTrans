@@ -16,10 +16,12 @@
 #include "core/names/name_cues.h"
 #include "core/names/readings.h"
 #include "core/names/registry.h"
+#include "core/names/ruby.h"
 #include "core/pipeline/normalize.h"
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
 #include "core/dict/char_readings.h"
+#include "core/text/hangul.h"
 #include "core/text/kana.h"
 #include "core/text/utf8.h"
 #include "core/text/lines.h"
@@ -300,6 +302,28 @@ std::string WrittenMarks(std::string_view marks) {
 
 std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line, bool marked = false);
 
+// Whether a dictionary's name spells written, a reading as the registry writes it, but for the
+// conventions of SameSound and spaces, and し, じ and ち with a glide written without it
+// (순푸테이 코아사 for しゅんぷうていこあさ).
+bool SpellsReading(std::string_view written, std::string_view name) {
+    auto key = [](std::string_view s) {
+        std::string out;
+        while (!s.empty()) {
+            const text::Rune ru = text::DecodeRune(s);
+            s.remove_prefix(ru.size == 0 ? 1 : ru.size);
+            if (ru.cp == U' ') continue;
+            char32_t cp = ru.cp;
+            if (const auto syl = text::Split(cp); syl && (syl->initial == 9 || syl->initial == 10)) {
+                const int v = syl->vowel == 2 ? 0 : syl->vowel == 6 ? 4 : syl->vowel == 12 ? 8 : syl->vowel == 17 ? 13 : syl->vowel;
+                cp = text::Join(syl->initial, v, syl->final);
+            }
+            text::AppendRune(out, cp);
+        }
+        return out;
+    };
+    return text::SameSound(key(written), key(name));
+}
+
 // A lone kanji in brackets or before sentence marks, read like the bare line ((望) (노조미),
 // 恵？ 메구미?, 勝！ 카츠!) unless it is a word (NameLine with marked).
 std::optional<std::string> MarkedKanjiNameLine(const dict::Snapshot& snap, std::string_view t) {
@@ -406,7 +430,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     }
     names::Registry& r = *doc.registry;
     std::string cueText;
-    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)), &cueText, &facts.cued);
+    const std::string kin = pipeline::internal::WriteKinTerms(line, doc.female);
+    facts.text = r.DropReadings(names::StripRuby(kin), &cueText, &facts.cued);
     const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
@@ -428,6 +453,22 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
+    // A name alone on its line is read by a reading written over it where the dictionary's name
+    // spells another (龍生《たつき》 타츠키, not 타츠오).
+    if (facts.wholeLine && facts.text != kin) {
+        const std::string_view t = names::internal::TrimLineSpace(facts.text);
+        names::internal::RubyMatch m;
+        if ((names::internal::FindRuby(kin, 0, m) || names::internal::FindReading(kin, 0, m) ||
+             names::internal::FindGloss(kin, 0, m)) && m.base == t) {
+            const std::size_t at = facts.text.find(t);
+            const std::size_t tail = facts.text.size() - at - t.size();
+            const std::string name = facts.wholeLine->substr(at, facts.wholeLine->size() - at - tail);
+            const std::string written = r.Written(m.reading);
+            if (!written.empty() && !SpellsReading(written, name)) {
+                facts.wholeLine = facts.text.substr(0, at) + written + facts.text.substr(at + t.size());
+            }
+        }
+    }
     // A reading in the line ((恭(きょう)）) is read, not the name.
     if (!facts.wholeLine && names::internal::TrimLineSpace(facts.text) == names::internal::TrimLineSpace(line)) {
         facts.wholeLine = MarkedKanjiNameLine(*doc.snap, names::internal::TrimLineSpace(facts.text));

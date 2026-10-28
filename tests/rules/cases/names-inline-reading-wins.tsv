@@ -21,3 +21,8 @@ names:reading	身柄を確保(かくほ)した	신병을 확보했다	keep	norma
 names:reading	朝日(あさひ)が昇る。	아침해가 뜬다.	keep	normalize
 names:reading	（チェリー）水馬(あめんぼ)が 水面(みなも)に残す 波紋かな	lacks:아멘보	keep	normalize
 names:reading	松竹(しょうちく)芸能の ますだおかだ…	has:쇼치쿠 예능의	fix	normalize
+names:reading	龍生《たつき》	타츠키	fix	normalize
+names:reading	家族(そしき)	가족	keep	normalize
+names:reading	真(まこと)	마코토	fix	normalize
+names:reading	上沼恵美子(かみぬまえみこ)	카미누마 에미코	keep	normalize
+names:reading	春風亭小朝(しゅんぷうていこあさ)	순푸테이 코아사	keep	normalize

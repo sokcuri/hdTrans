@@ -119,6 +119,9 @@ public:
     text::Preset preset = text::Preset::FanShort;
     // The rendering of ちゃん written to Dict; "" leaves ちゃん to the engine.
     std::string chan = "짱";
+    // The kana in Hangul by preset, FanShort with one long vowel pair at a time; katakana keeps
+    // its long vowels (ハイロウ 하이로우), as katakana names are written.
+    std::string Written(std::string_view kana) const;
 
 private:
     // Labels and the evidence of a single run (cues.cpp).
@@ -172,9 +175,6 @@ private:
     std::string PrefixForm(std::string_view x);
 
     void SetReading(const std::string& key, const std::string& value);
-    // The kana in Hangul by preset, FanShort with one long vowel pair at a time; katakana keeps
-    // its long vowels (ハイロウ 하이로우), as katakana names are written.
-    std::string Written(std::string_view kana) const;
     void SetActor(const std::string& key, const std::string& value);
     const dict::Snapshot* snap_;
     struct Tables {
