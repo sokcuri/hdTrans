@@ -320,6 +320,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お陰さまで	덕분입니다	A9D0	UTs		GN				llm		おかげさまで	w:316
 お陰で	덕분에	A9D0			GN				llm		おかげで	w:317
 お願いします	부탁드립니다	A9D0			GN				llm		おねがいします	w:318
+おねがいします	부탁드립니다	A9D0			GN						おねがいします	w:28971
 お飯	밥	N110			GN						おまんま	w:319
 お馴染み	낯익은	N110			GN				xxx llm		おなじみ	w:320
 お馴染み	단골	N110	VHn		GN				llm		おなじみ	w:321
@@ -15108,6 +15109,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 宜しくお願い致します	잘 부탁드립니다	A9D0			GN				xxx llm		よろしくおねがいいたします	w:15072
 宜しくお願い致します	부탁드립니다	A9D0			GN				llm		よろしくおねがいいたします	w:15073
 宜しくね	잘 부탁해	A9D0			GN				llm			w:15074
+よろしくな	잘 부탁해	A9D0			GN						よろしくな	w:28968
+よろしくよ	잘 부탁해	A9D0			GN						よろしくよ	w:28969
+宜しくな	잘 부탁해	A9D0			GN						よろしくな	w:28970
+よろしくいたします	잘 부탁드립니다	A9D0			GN						よろしくいたします	w:28972
+よろしく致します	잘 부탁드립니다	A9D0			GN						よろしくいたします	w:28973
 宜しければ	괜찮으시다면	A9D0			GN				llm		よろしければ	w:15075
 宝剣	보검	N110			GN						ほうけん	w:15076
 宝瓶宮	보병궁	N110			GN						ほうへいきゅう	w:15077

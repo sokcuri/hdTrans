@@ -373,6 +373,7 @@
 //= word.demo-concessive	Words that open a concession before the noun in でも, which then stays (이)라도 even in a setting (どんな苦境でも 어떤 곤경이라도, どんな世界でも).
 //= word.demo-permission	Starts of the words of permission and of being all right, before which a でも is (이)라도 even after a noun of noun.arena (ここでもいい 여기라도 좋아).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
+//= word.closing-greeting	Greetings that end in a closing particle, kept like word.closing-utterance only where the sentence or a clause ends after them, also after a particle (これからもよろしくな 앞으로도 잘 부탁해, not よろしくない).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
 //= word.copula-predicate	Adverbs and nouns that a copula, an adnominal な or a question か after them makes the adjectival noun of the same key (ばっちりです 완벽해요, しっかりですね 확실하네요, アリなのか 괜찮은 건가), not an adverb or a noun before a copula.
@@ -6012,6 +6013,10 @@ word.iru-form	いらっしゃいませ
 word.closing-utterance	ゴメンな
 word.closing-utterance	ゴメンね
 word.closing-utterance	ゴメンよ
+
+word.closing-greeting	よろしくな
+word.closing-greeting	よろしくよ
+word.closing-greeting	宜しくな
 
 word.comitative	合う
 word.comitative	戦う
