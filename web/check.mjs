@@ -113,6 +113,9 @@ async function visit(n, early) {
   const memory = Number(await evaluate(`document.body.dataset.memory ?? 0`));
   console.log(`visit ${n}: ${state} in ${(ms / 1000).toFixed(2)} s, ${requests} requests, ${(bytes / 1e6).toFixed(2)} MB transferred, wasm memory ${(memory / 1e6).toFixed(0)} MB; ${status}`);
   if (state !== 'ready') throw new Error(status);
+  const statusOk = /^준비 완료 · [\d.]+초 \(로딩 [\d.]+초, 메모리 \d+ MB\)$/.test(status);
+  failed ||= !statusOk;
+  if (!statusOk) console.log(`status: FAILED ${status}`);
 }
 
 // settled waits for the page's translation after the last change and
@@ -121,7 +124,7 @@ const settled = () =>
   evaluate(`(async () => {
     const out = document.getElementById('out');
     while (out.dataset.done !== '1') await new Promise((r) => setTimeout(r, 20));
-    return { out: out.value, info: document.getElementById('info').textContent };
+    return { out: out.value, info: document.getElementById('info').textContent, warning: document.getElementById('warning').textContent };
   })()`);
 
 async function translate(text) {
@@ -232,6 +235,10 @@ async function progressCheck() {
   const ok = seen && hidden;
   failed ||= !ok;
   console.log(`progress: ${ok ? 'ok    ' : 'FAILED'} bar shown during a ${all.split('\n').length}-line translation and hidden after (${r.info})`);
+  const infoOk = /^\d+줄 · \d+ ms$/.test(r.info) &&
+    (await evaluate(`document.getElementById('info').closest('.pane')?.contains(document.getElementById('out')) ?? false`));
+  failed ||= !infoOk;
+  console.log(`info: ${infoOk ? 'ok    ' : 'FAILED'} line count and time in the 한국어 pane title (${r.info})`);
 }
 
 // speechCheck sets 대사 말투 to 부드럽게 and back, and checks that quoted speech
@@ -379,12 +386,12 @@ async function libraryCheck() {
   await press('Tab');
   await type('수리새');
   out = await probe('鳥が来た。');
-  const bad = (await settled()).info;
+  const bad = (await settled()).warning;
   ok(bad.includes('새 사전 사용자 사전 2행'), `a load error names the dictionary and row: ${bad}`);
   ok(out.includes('수리새'), `a good new row after a bad row applies: ${out}`);
-  ok(await evaluate(`document.getElementById('info').getBoundingClientRect().height > 0`), 'warnings are visible on the dictionary tab');
+  ok(await evaluate(`document.getElementById('warning').getBoundingClientRect().height > 0`), 'warnings are visible on the dictionary tab');
   await click('#tab-docs');
-  ok(await evaluate(`document.getElementById('info').getBoundingClientRect().height > 0`), 'warnings are visible on the document tab');
+  ok(await evaluate(`document.getElementById('warning').getBoundingClientRect().height > 0`), 'warnings are visible on the document tab');
   await evaluate(`(() => {
     const input = document.getElementById('files');
     const files = new DataTransfer();
@@ -395,7 +402,7 @@ async function libraryCheck() {
   await until(`!document.getElementById('run').disabled`);
   await click('#run');
   await until(`document.querySelector('#filelist tbody tr td:nth-child(3)').textContent.startsWith('완료')`);
-  const documentWarning = await evaluate(`document.getElementById('info').textContent`);
+  const documentWarning = await evaluate(`document.getElementById('warning').textContent`);
   ok(documentWarning.includes('새 사전 사용자 사전 2행'), `completed documents retain the dictionary warning: ${documentWarning}`);
   const documentFile = await download('#filelist tbody tr button');
   ok(Object.values(documentFile).some((text) => text.includes('수리새')), 'a document with warnings still saves the good-row translation');
@@ -404,13 +411,13 @@ async function libraryCheck() {
   await evaluate(`document.querySelectorAll('#userdict tbody tr')[0].querySelector('button.del').click()`);
   out = await probe('猫が来た。ユフィリアが来た。');
   ok(out.includes('고양이님') && out.includes('유피') && !out.includes('냥이'), `an all-bad file clears its old rows without discarding another good dictionary: ${out}`);
-  ok((await settled()).info.includes('새 사전 사용자 사전 1행'), 'the all-bad dictionary still warns');
+  ok((await settled()).warning.includes('새 사전 사용자 사전 1행'), 'the all-bad dictionary still warns');
   await evaluate(`document.querySelectorAll('#userdict tbody tr')[0].querySelector('button.del').click()`);
   await focusCell('userdict', 0, 0);
   await type('猫');
   await press('Tab');
   await type('냥이');
-  ok(!(await settled()).info.includes('오류'), 'a valid replacement clears the warning');
+  ok(!(await settled()).warning.includes('오류'), 'a valid replacement clears the warning');
 
   await evaluate(`(() => {
     const read = File.prototype.arrayBuffer;
@@ -466,11 +473,11 @@ async function libraryCheck() {
   await upload({ 'UserDict_bad.txt': 'ポチ\t바둑이\t1\n犬\t' + '가'.repeat(16) + '\t1\n' });
   await until(`document.querySelectorAll('#dictlist li').length === 5`);
   out = await probe('ポチ');
-  ok(out.includes('바둑이') && (await settled()).info.includes('bad 2행'), `Ehnd good rows apply with a dictionary-and-row warning: ${out}`);
+  ok(out.includes('바둑이') && (await settled()).warning.includes('bad 2행'), `Ehnd good rows apply with a dictionary-and-row warning: ${out}`);
   await click('#tab-docs');
   await click('#run');
   await until(`document.querySelector('#filelist tbody tr td:nth-child(3)').textContent.startsWith('완료')`);
-  ok((await evaluate(`document.getElementById('info').textContent`)).includes('bad 2행'), 'documents also show Ehnd dictionary warnings while completing');
+  ok((await evaluate(`document.getElementById('warning').textContent`)).includes('bad 2행'), 'documents also show Ehnd dictionary warnings while completing');
   await click('#tab-dictionaries');
   await clickRow('bad', 'button[title="삭제"]');
   await clickRow('test', '.name');

@@ -27,6 +27,7 @@ const speech = $<HTMLSelectElement>('speech');
 const status = $<HTMLElement>('status');
 const bar = $<HTMLProgressElement>('bar');
 const info = $<HTMLElement>('info');
+const warning = $<HTMLElement>('warning');
 const tbar = $<HTMLProgressElement>('tbar');
 
 const started = performance.now();
@@ -287,7 +288,7 @@ openStore()
     store = s;
     navigator.storage?.persist?.().catch(() => {});
   })
-  .catch((err) => (info.textContent = '사전을 열지 못했습니다: ' + String(err)))
+  .catch((err) => (warning.textContent = '사전을 열지 못했습니다: ' + String(err)))
   .finally(async () => {
     if (dicts.length === 0) await add({ name: firstName, format: 'hdtrans', on: true, entries: '', names: '' });
     select(dicts.find((d) => d.id === localStorage.getItem('hdtrans.edit')) ?? dicts[0]);
@@ -323,7 +324,7 @@ example.addEventListener('change', async () => {
     src.value = await exampleText(file);
     src.dispatchEvent(new Event('input'));
   } catch (err) {
-    info.textContent = '예제를 불러오지 못했습니다: ' + String(err);
+    warning.textContent = '예제를 불러오지 못했습니다: ' + String(err);
   }
 });
 
@@ -346,7 +347,7 @@ worker.onmessage = (ev) => {
     document.body.dataset.engine = 'ready';
     document.body.dataset.memory = String(m.memory);
     const total = performance.now() - started;
-    status.textContent = `준비 완료 · ${(total / 1000).toFixed(1)}초 (엔진 사전 적재 ${(m.ms / 1000).toFixed(1)}초, 메모리 ${Math.round(m.memory / 1e6)} MB)`;
+    status.textContent = `준비 완료 · ${(total / 1000).toFixed(1)}초 (로딩 ${(m.ms / 1000).toFixed(1)}초, 메모리 ${Math.round(m.memory / 1e6)} MB)`;
     bar.hidden = true;
     schedule();
     showDocs();
@@ -390,17 +391,18 @@ async function translate() {
   const d = overlay(dicts);
   const t0 = performance.now();
   const slow = setTimeout(() => (tbar.hidden = false), 300);
-  let text: string;
+  let text = '';
+  let problem = '';
   try {
     const m = await request(mode(), lines, d);
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);
     text = `${lines.length}줄 · ${Math.round(performance.now() - t0)} ms`;
-    const warning = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
-    if (warning) text += ' / 사전 오류: ' + warning;
+    const w = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
+    if (w) problem = '사전 오류: ' + w;
     if (g === generation) out.value = m.lines.join('\n');
   } catch (err) {
-    text = '번역 실패: ' + (err instanceof Error ? err.message : String(err));
+    problem = '번역 실패: ' + (err instanceof Error ? err.message : String(err));
   }
   clearTimeout(slow);
   running = false;
@@ -411,6 +413,7 @@ async function translate() {
   }
   shown = g;
   info.textContent = text;
+  warning.textContent = problem;
   out.dataset.done = '1';
 }
 
@@ -519,8 +522,8 @@ async function runDocs() {
       if (m.lines === undefined) throw new Error(m.message);
       if (docsCancel) break;
       d.translated = m.lines.join('\n');
-      const warning = warningText(m.warning ?? '', m.ehndWarning ?? [], dictionaries.where);
-      info.textContent = warning ? '사전 오류: ' + warning : '';
+      const w = warningText(m.warning ?? '', m.ehndWarning ?? [], dictionaries.where);
+      warning.textContent = w ? '사전 오류: ' + w : '';
       setState(d, `완료 · ${Math.round(performance.now() - t0)} ms`);
     } catch (err) {
       setState(d, '번역 실패: ' + (err instanceof Error ? err.message : String(err)));

@@ -5,7 +5,7 @@ h1 { font-size: 1.4rem; margin: 0; }
 h1 .by { font-size: .9rem; font-weight: normal; opacity: .7; margin-left: .3rem; }
 #hver { display: block; font-size: .8rem; opacity: .6; margin-top: .15rem; }
 .note { font-size: .9rem; margin: .5rem 0 0; }
-.status { margin: 1rem 0 .5rem; font-size: .9rem; display: flex; gap: .5rem; align-items: center; }
+.status { margin: 1rem 0 .5rem; font-size: .9rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
 progress { flex: 1; max-width: 20rem; }
 .controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: .5rem; }
 fieldset { border: 1px solid var(--line); border-radius: 6px; padding: .2rem .7rem; margin: 0; }
@@ -15,7 +15,7 @@ select { font: inherit; }
 .panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .8rem; }
 @media (max-width: 48rem) { .panes { grid-template-columns: minmax(0, 1fr); } }
 .pane { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; }
-.pane small { opacity: .7; margin-left: .5rem; }
+.pane small { opacity: .7; margin-left: .5rem; white-space: nowrap; }
 textarea { width: 100%; min-height: 22rem; font: inherit; line-height: 1.6; padding: .5rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; background: transparent; color: inherit; }
 .dicts { margin-top: 1rem; align-items: start; }
 table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }

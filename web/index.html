@@ -14,7 +14,7 @@
 </header>
 
 <main>
-  <div class="status"><span id="status">불러오는 중…</span> <progress id="bar"></progress> <small id="info"></small></div>
+  <div class="status"><span id="status">불러오는 중…</span> <progress id="bar"></progress> <small id="warning"></small></div>
 
   <div class="tabs" role="tablist">
     <button type="button" role="tab" id="tab-text" aria-controls="text" aria-selected="true">텍스트 번역</button>
@@ -39,7 +39,7 @@
   <div class="panes">
     <label class="pane"><span>일본어</span>
       <textarea id="src" spellcheck="false" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea></label>
-    <label class="pane"><span>한국어 <progress id="tbar" hidden></progress></span>
+    <label class="pane"><span>한국어 <small id="info"></small> <progress id="tbar" hidden></progress></span>
       <textarea id="out" readonly></textarea></label>
   </div>
 
