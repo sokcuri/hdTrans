@@ -74,16 +74,22 @@ progress { flex: 1; max-width: 20rem; }
 .card { gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
 .card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 .card.result { background: var(--sunk); }
-.card .head { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-height: 2.9rem; padding: .2rem .35rem .2rem .9rem;
+/* The header text starts where the text below starts. */
+.texts { --pad-x: 1rem; }
+.card .head { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-height: 2.9rem; padding: .2rem .35rem .2rem var(--pad-x);
   border-bottom: 1px solid var(--line); border-radius: 10px 10px 0 0; background: inherit; }
 .card .head small { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.badge { flex: none; padding: 0 .4rem; border: 1px solid var(--line); border-radius: 5px; font-size: 12px; line-height: 1.5; font-weight: 600; }
+/* With one card shown alone, the language row names only its language. */
+#text[data-expanded] .langbar { grid-template-columns: minmax(0, 1fr); }
+#text[data-expanded] .langbar .arrow, #text[data-expanded=srccard] .langbar .ko, #text[data-expanded=outcard] .langbar .ja { display: none; }
 .card .head .expand { margin-left: auto; }
 .card .head .expand[aria-pressed=true] { color: var(--accent); }
 .card .head button { min-height: 2.5rem; min-width: 2.5rem; padding: 0 .8rem; background: transparent; border-color: transparent; }
 .card .head button:hover { border-color: var(--line); }
 .card .icon { font-size: 20px; line-height: 1; padding: 0; }
 #tbar { width: 6rem; height: .5rem; flex: none; }
-.texts textarea, .out { font-size: 18px; line-height: 1.6; padding: .9rem 1rem; color: inherit; }
+.texts textarea, .out { font-size: 18px; line-height: 1.6; padding: .9rem var(--pad-x); color: inherit; }
 .texts textarea { display: block; flex: 1; width: 100%; min-height: 0; border: 0; border-radius: 0; resize: none; background: transparent; }
 .texts textarea:focus-visible, .out:focus-visible { outline: none; }
 .card .body { position: relative; flex: 1; min-height: 0; }
@@ -172,10 +178,11 @@ table.grid { min-width: 26rem; }
   .langbar span { padding: 0; }
   .panes { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
   .card .head { min-height: 3rem; }
-  .card .head { gap: .25rem; padding: .2rem .25rem; }
+  .texts { --pad-x: .8rem; }
+  .card .head { gap: .25rem; padding: .2rem .25rem .2rem var(--pad-x); }
   .card .head button { min-height: 2.75rem; min-width: 2.5rem; padding: 0 .6rem; }
   .card .head .icon { padding: 0; }
-  .texts textarea, .out { font-size: 16px; padding: .7rem .8rem; }
+  .texts textarea, .out { font-size: 16px; padding: .7rem var(--pad-x); }
 
   .drop { padding: 1.4rem 1rem; }
   .drop .wide { display: none; }

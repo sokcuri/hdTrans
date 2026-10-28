@@ -156,6 +156,8 @@ function layout() {
   const on = card !== undefined && !textPanel.hidden;
   document.documentElement.classList.toggle('locked', on);
   texts.classList.toggle('focused', on);
+  if (on) textPanel.dataset.expanded = card.id;
+  else delete textPanel.dataset.expanded;
   if (textPanel.hidden) return;
   // The visual viewport leaves out an on-screen keyboard.
   const height = window.visualViewport?.height ?? innerHeight;

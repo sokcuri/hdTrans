@@ -631,13 +631,13 @@ async function layoutCheck() {
   const layer = () => evaluate(`(() => {
     const d = document.getElementById('settings-sheet'), r = d.getBoundingClientRect(), t = document.getElementById('settings-toggle').getBoundingClientRect();
     return { open: d.open, modal: d.matches(':modal'), focus: d.contains(document.activeElement), bottom: Math.abs(r.bottom - innerHeight) < 1 && Math.abs(r.width - innerWidth) < 1,
-      anchored: Math.abs(r.top - t.bottom - 6) < 2 && Math.abs(r.left - t.left) < 2, expanded: document.getElementById('settings-toggle').getAttribute('aria-expanded') };
+      anchored: Math.abs(r.top - t.bottom - 6) < 2 && Math.abs(r.left - t.left) < 2, r: [r.top, r.bottom, r.width, innerHeight, innerWidth], expanded: document.getElementById('settings-toggle').getAttribute('aria-expanded') };
   })()`);
   const settingsLayer = async (name) => {
     await click('#settings-toggle');
     let l = await layer();
     ok(l.open && l.modal && l.focus && l.expanded === 'true' && (name === 'desktop' ? l.anchored : l.bottom),
-      `${name}: 설정 opens ${name === 'desktop' ? 'a popover under the button' : 'a bottom sheet'} with the focus inside${l.open && l.focus ? '' : ' ' + JSON.stringify(l)}`);
+      `${name}: 설정 opens ${name === 'desktop' ? 'a popover under the button' : 'a bottom sheet'} with the focus inside${l.open && l.focus && (name === 'desktop' ? l.anchored : l.bottom) ? '' : ' ' + JSON.stringify(l)}`);
     let inside = true;
     for (let i = 0; i < 12; i++) {
       await press('Tab');
@@ -660,15 +660,35 @@ async function layoutCheck() {
     await click('#settings-close');
     ok(!(await layer()).open, `${name}: × closes it`);
   };
+  // How far the header text of each card starts from its first text line.
+  const aligned = async (name) => {
+    const d = await evaluate(`(() => {
+      const src = document.getElementById('src'), out = document.getElementById('out');
+      const srcText = src.getBoundingClientRect().left + src.clientLeft + parseFloat(getComputedStyle(src).paddingLeft);
+      const node = document.createTreeWalker(out, NodeFilter.SHOW_TEXT).nextNode();
+      const range = document.createRange();
+      range.setStart(node, 0);
+      range.setEnd(node, 1);
+      const left = (id) => document.getElementById(id).getBoundingClientRect().left;
+      const badges = [...document.querySelectorAll('#text .card .badge')];
+      return [badges[0].getBoundingClientRect().left - srcText, badges[1].getBoundingClientRect().left - range.getBoundingClientRect().left,
+        badges.map((e) => e.textContent).join() === '원문,번역문' && badges.every((e) => getComputedStyle(e).borderTopStyle === 'solid') ? 0 : 99];
+    })()`);
+    ok(d.every((x) => Math.abs(x) <= 1), `${name}: the boxed labels 원문 and 번역문 start the headers at the text's left edge (${d.slice(0, 2).map((x) => x.toFixed(1)).join(', ')} px)`);
+  };
   await click('#tab-text');
+  await translate('猫が来た。\n犬が来た。');
   await send('Emulation.setFocusEmulationEnabled', { enabled: true });
   await send('Emulation.setDeviceMetricsOverride', { width: 1366, height: 800, deviceScaleFactor: 1, mobile: false });
+  await laidOut();
+  await aligned('desktop');
   let m = await measure();
   ok(m.side && !m.sheet && m.page, `desktop: cards side by side, settings closed${m.side && !m.sheet && m.page ? '' : ' ' + JSON.stringify(m)}`);
   await settingsLayer('desktop');
   await send('Emulation.setDeviceMetricsOverride', phone);
   await send('Emulation.setTouchEmulationEnabled', { enabled: true });
   await laidOut();
+  await aligned('phone');
   m = await measure();
   const phoneOk = m.stacked && m.inView && !m.sheet && m.page && m.small.length === 0 && m.example;
   ok(phoneOk, `phone: stacked cards in the first screen, settings closed, the 예제 row above the cards${phoneOk ? '' : ' ' + JSON.stringify(m)}`);
@@ -730,7 +750,7 @@ async function expandCheck() {
     const shown = (id) => document.getElementById(id).offsetParent !== null;
     const src = document.getElementById('src'), out = document.getElementById('out');
     return { y: scrollY, h: innerHeight, src: shown('srccard') ? box('srccard') : null, out: shown('outcard') ? box('outcard') : null,
-      langbar: box('langbar').bottom, settings: box('settings').top,
+      langbar: box('langbar').bottom, settings: box('settings').top, lang: document.getElementById('langbar').innerText.replace(/\\s+/g, ' ').trim(),
       srcScrolls: src.scrollHeight > src.clientHeight, outScrolls: out.scrollHeight > out.clientHeight, outText: out.textContent.length };
   })()`);
   // Whether a wheel turn over the rows above the cards scrolls the page.
@@ -754,6 +774,7 @@ async function expandCheck() {
     v = await view();
     v.moved = await wheelMoves();
     const alone = (b) => b && Math.abs(v.settings) < 1 && b.top >= v.langbar && Math.abs(b.bottom - (v.h - 12)) < 2 && !v.moved;
+    ok(v.lang === '일본어', `${name}: with 원문 alone the language row reads ${v.lang}`);
     ok(alone(v.src) && !v.out && v.srcScrolls, `${name}: 원문 펼치기 fills the window exactly under the rows, the page holds still and 번역 is hidden${alone(v.src) && !v.out ? '' : ' ' + JSON.stringify(v)}`);
     const before = v.outText;
     await evaluate(`(() => { const s = document.getElementById('src'); s.value = s.value + '\\n猫が来た。'; s.dispatchEvent(new Event('input')); })()`);
@@ -774,6 +795,7 @@ async function expandCheck() {
     await click('#outcard .expand');
     v = await view();
     v.moved = await wheelMoves();
+    ok(v.lang === '한국어', `${name}: with 번역문 alone the language row reads ${v.lang}`);
     ok(alone(v.out) && !v.src && v.outScrolls, `${name}: 번역 펼치기 fills the window and hides 원문${alone(v.out) && !v.src ? '' : ' ' + JSON.stringify(v)}`);
     if (name === 'desktop') {
       await send('Page.reload');
@@ -784,7 +806,7 @@ async function expandCheck() {
     }
     await click('#outcard .expand');
     v = await view();
-    ok(v.src && v.out && fits(v), `${name}: ↕ brings both cards back`);
+    ok(v.src && v.out && fits(v) && v.lang === '일본어 → 한국어', `${name}: ↕ brings both cards back${v.lang === '일본어 → 한국어' ? '' : ' ' + v.lang}`);
   }
   await evaluate(`document.getElementById('outmode').value = 'translation'; document.getElementById('outmode').dispatchEvent(new Event('change'))`);
   await send('Emulation.clearDeviceMetricsOverride');
