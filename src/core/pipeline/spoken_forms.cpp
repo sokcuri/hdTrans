@@ -311,6 +311,77 @@ bool KansaiNegative(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// Whether the やろ or じゃろ at pos can be the conjecture of the copula: not the volitional of やる
+// (やろう, Kansai やろ), which follows a て or で form (貸してやろか, 読んでやろ) or a particle of an
+// object, a doer or a partner (これをやろう, 一緒にやろな, 俺がやろか, ちゃんとやろな, 今度はやろ,
+// これもやろ) or starts a sentence or a clause (よし、やろか), nor the やろ of 野郎 after a
+// demonstrative or ばか (このやろが, バカやろって). Nor after a polite ます or ません, which takes no
+// copula (なりますやろか), a Kansai negative へん the spoken forms could not read (気ぃつかへん) or a
+// noun quoted by いう without と (平和いうんじゃろうか), which leave the predicate unread.
+bool BeforeCopula(std::string_view s, size_t pos) {
+    const std::string_view head = s.substr(0, pos);
+    if (head.empty() || head.ends_with("へん") || head.ends_with("ます") || head.ends_with("ません")) return false;
+    if (head.ends_with("いうん")) {
+        const std::string_view quoted = head.substr(0, head.size() - std::string_view("いうん").size());
+        if (!quoted.ends_with("と") && !quoted.ends_with("って")) return false;
+    }
+    for (const std::string_view w : {"この", "その", "あの", "どの", "ばか", "バカ", "馬鹿"}) {
+        if (head.ends_with(w)) return false;
+    }
+    // The question word なんで (何で) and the noun こと end in the kana of a particle.
+    if (head.ends_with("なんで") || head.ends_with("何で") || head.ends_with("こと")) return true;
+    const char32_t before = LastRune(head).cp;
+    if (In(before, U"てでをにへがとはもっゃゅょぁぃぅぇぉ")) return false;
+    return IsKanjiClass(before) || IsKatakanaRune(before) || IsHiraganaClass(before) || before == U'ー';
+}
+
+// Whether a particle of kKansaiConjectureBefore that leaves the sentence open starts s at p: a
+// sentence-final が is the rebuke that the end rows read (お前やろが！ 너잖아).
+bool OpenParticleAt(std::string_view s, size_t p) {
+    for (std::string_view w : kKansaiConjectureBefore) {
+        size_t q = p;
+        if (!Lit(s, q, w)) continue;
+        size_t r = q;
+        return w != "が" || (q != s.size() && !OneOf(s, r, U"」』）！？!?。．…‥～ーぁぃぅぇぉっ"));
+    }
+    return false;
+}
+
+// The conjecture of the copula (だろう) in Kansai やろ and in the じゃろ(う) of western and old
+// speech, before a particle that leaves the predicate open, after what the copula follows
+// (なんやろか, 増えるやろね, お前やろが書く, あるじゃろうな, もらえんじゃろうか), and そやろ, せやろ,
+// どやろ at the start of a word: the analysis reads them as だろう. A sentence-final one is read
+// by the end rows. Not the volitional of やる (BeforeCopula).
+bool KansaiConjecture(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    // The ね of the Kansai ねん after ん is the の of んだ (乗ってんねやろな 乗ってんだろうな).
+    if (s.substr(0, pos).ends_with("ん") && Lit(s, p, "ねやろ") && OpenParticleAt(s, p)) {
+        m.group[1] = "だろう";
+        m.end = p;
+        return true;
+    }
+    p = pos;
+    if (OneOf(s, p, U"そせど")) {
+        if (pos > 0 && IsHiraganaClass(LastRune(s.substr(0, pos)).cp)) return false;
+        if (!Lit(s, p, "やろ")) return false;
+    } else if (!BeforeCopula(s, pos)) {
+        return false;
+    } else if (!Lit(s, p, "やろ")) {
+        if (!Lit(s, p, "じゃろ")) return false;
+        if (size_t q = p; Lit(s, q, "う") && OpenParticleAt(s, q)) p = q;
+    }
+    if (!OpenParticleAt(s, p)) return false;
+    m.end = p;
+    return true;
+}
+
+std::string ReplaceKansaiConjecture(const Match& m) {
+    if (!m.group[1].empty()) return std::string(m.group[1]);
+    if (m.group[0].starts_with("ど")) return "どうだろう";
+    if (m.group[0].starts_with("そ") || m.group[0].starts_with("せ")) return "そうだろう";
+    return "だろう";
+}
+
 std::string ReplaceKansaiNegative(const Match& m) {
     const Match g = Rematch(m, KansaiNegative);
     std::string_view stem = g.group[1];
@@ -621,6 +692,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         if (dialectForms) text = ReplaceAll(text, NegativeNee, ReplaceNegativeNee);
     }
     if (dialectForms && Contains(text, "へん")) text = ReplaceAll(text, KansaiNegative, ReplaceKansaiNegative);
+    if (dialectForms && (Contains(text, "やろ") || Contains(text, "じゃろ"))) {
+        text = ReplaceAll(text, KansaiConjecture, ReplaceKansaiConjecture);
+    }
     if (dialectForms && (Contains(text, "と") || Contains(text, "ど")))
         text = ReplaceAll(text, ContractedToru, ReplaceContractedToru);
     if (Contains(text, "ん")) {

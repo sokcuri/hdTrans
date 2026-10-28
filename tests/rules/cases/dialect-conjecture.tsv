@@ -1,0 +1,49 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:kansai-conjecture	そりゃ あるやろな｡	그야 있겠지.	fix	normalize
+normalize:kansai-conjecture	(松本)変な感じには思ったんやろね｡	has:생각했겠지	fix	normalize
+normalize:kansai-conjecture	あの どつきはいるんやろか？	has:들어가는 걸까?	fix	normalize
+normalize:kansai-conjecture	多分 ウソやろと思いながら	아마 거짓말일 거라고 생각하면서	fix	normalize
+normalize:kansai-conjecture	もう疲れるやろな～	이제 지치겠지~	fix	normalize
+normalize:kansai-conjecture	そういう犯罪が これからどんどん増えるやろね	그런 범죄가 지금부터 점점 늘어날 것이다	fix	normalize
+normalize:kansai-conjecture	(大悟) この番組 終わるやろな！ってお前が先に感じたりしてたんや｡	has:끝나겠지!	fix	normalize
+normalize:kansai-conjecture	私のことで　何か気に入らんことでもあるのやろか。	has:있는 걸까.	fix	normalize
+normalize:kansai-conjecture	京都大学の学生さんやったら分かるけど…曜子さんは　どうやろな？	has:어떨까?	fix	normalize
+normalize:kansai-conjecture	まあ　曜子と結婚する気はないやろけどな。	뭐 요코와 결혼할 생각은 없겠지만.	fix	normalize
+normalize:kansai-conjecture	(あや子)さあな どやろね｡	(아야코) 글쎄 어떨까.	fix	normalize
+normalize:kansai-conjecture	お赤飯は 祇園に帰るための保険やろか｡	팥찰밥은 기온에 돌아가기 위한 보험일까.	fix	normalize
+normalize:kansai-conjecture	さっきの子らも　ひもじいんやろな。	조금 전의 아이등도 시장하겠지.	fix	normalize
+normalize:kansai-conjecture	何じゃろな？	무엇일까?	fix	normalize
+normalize:kansai-conjecture	たまげたなぁ 何年ぶりじゃろか元気で何よりでした	has:몇 년만일까	fix	normalize
+normalize:kansai-conjecture	(清十郎)う～ん 二丁はあるじゃろうな	has:2정은 있겠지	fix	normalize
+normalize:kansai-conjecture	（小杉）気付いてほしいんやろが書くしかあらへんがな	lacks:로가	fix	normalize
+ending:学生やろが	今 おばはんの話やろが	지금 아줌마는 이야기잖아	fix	builtin-ending
+ending:書いたやろが	お仕事って言うたやろが｡	일이라고 말했잖아.	fix	builtin-ending
+ending:学生やろが	勝手に出てったのはそっちやろが！	마음대로 나간 것은 그쪽이잖아!	fix	builtin-ending
+ending:書いたじゃろうが	あっ それ 言うたらいかん｡いかんって言うたじゃろうが｡	앗 그것 말하면 안돼. 안돼라고 말했잖아.	fix	builtin-ending
+ending:学生じゃろうが	申し込んだのは宅食のコースだけじゃろうが	신청한 것은 택식의 코스만이잖아	fix	builtin-ending
+normalize:kansai-conjecture	(ノブ) ウソやろ!?	(노브) 거짓말이지!?	keep	normalize
+normalize:kansai-conjecture	(秋良)どっちやろ	(아키라) 어느 쪽이지	keep	normalize
+normalize:kansai-conjecture	こん人はよか本引き 引くじゃろう	has:당기겠지	keep	normalize
+normalize:kansai-conjecture	貸してやろか	lacks:일까	keep	normalize
+normalize:kansai-conjecture	こういうのが平和いうんじゃろうか	이런 것이 평화인가	keep	normalize
+normalize:kansai-conjecture	ほんでもお前も知らんやろ	has:모르	keep	normalize
+normalize:kansai-conjecture	うそやろか	거짓말일까	fix	normalize
+normalize:kansai-conjecture	ほんまやろな	진짜일 것이다	fix	normalize
+normalize:kansai-conjecture	乗ってんねやろな乗ってんねやろな	타겠지타겠지	fix	normalize
+normalize:kansai-conjecture	この桜たちも来週には 散ってんねやろなぁ｡	이 벚꽃들도 다음주에는 지겠지.	fix	normalize
+normalize:kansai-conjecture	どないかして店開けられんやろかって 相談に	없는가 해 가게 열리지 않을까는 상담에	fix	normalize
+normalize:kansai-conjecture	ミチコちゃん。　おじいさんにみんなの前で　話　してもらえんやろか？	미치코짱. 할아버지에게 모두의 앞에서 이야기 해 줄 수 없을까?	fix	normalize
+normalize:kansai-conjecture	一緒にやろう	함께 하자	keep	normalize
+normalize:kansai-conjecture	やろうぜ	하자구	keep	normalize
+normalize:kansai-conjecture	俺がやろか	내가 야로인가	keep	normalize
+normalize:kansai-conjecture	よし、やろか	좋아, 야로인가	keep	normalize
+dict:colloquial-endings:24	わしの頼みを聞いてもらえんじゃろうか？	나의 부탁을 들어 줄 수 없을까?	fix	lookup
+dict:colloquial-endings:24	そうなんじゃが判を押すの もう少し待ってもらえんじゃろうか	그러면이 도장을 찍는 것 좀 더 기다려 줄 수 없을까	fix	lookup
+dict:colloquial-endings:24	あれを わしらに譲ってはもらえんじゃろうか？	저것을 우리들에게 양보해 줄 수 없을까?	fix	lookup
+dict:spoken-words:22	このやろって	이 자식은	fix	lookup
+dict:spoken-words:22	このやろが！	이 자식이!	fix	lookup
+dict:spoken-words:24	バカやろが	바보 녀석이	fix	lookup
+dict:spoken-words:23	ばかやろって	바보 녀석은	fix	lookup
+dict:spoken-words:23	う〜ん… ばかやろー。	으음~… 바보 녀석~.	fix	lookup
+dict:spoken-words:23	(一同)ばかやろー。	(일동) 바보 녀석~.	fix	lookup
