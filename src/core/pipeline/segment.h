@@ -24,9 +24,11 @@ using Chunk = output::Pieces;
 //     character (こ　の　展　開).
 //   - after a speaker label or an aside in round brackets that opens the line
 //     (names::internal::CaptionLabelEnd: （島田）では皆さん);
+//   - at the span of the mark output::kPhraseBreak after a sound, which is dropped;
 //   - at a column separator (internal::ColumnGap) and at an escape \n, \r or \t typed as two
 //     characters (internal::EscapeGap); gaps, when given, receives for each chunk the
-//     separator or escape before it as typed, "" after the other cuts and for the first.
+//     separator or escape before it as typed,
+//     output::kPhraseGap after a phrase break, "" after the other cuts and for the first.
 // The white space after a cut is dropped. Spans are never cut and stay with the text
 // before them.
 std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string>* gaps = nullptr);

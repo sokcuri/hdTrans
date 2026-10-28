@@ -173,6 +173,16 @@ std::vector<Chunk> Segment(const output::Pieces& pieces, std::vector<std::string
         const size_t pieceStart = offset;
         offset += p.text.size();
         if (p.span != output::SpanText) {
+            if (p.text == output::kPhraseGap) {
+                if (!part.empty()) {
+                    parts.push_back(std::move(part));
+                    gapsBefore.push_back(std::move(gap));
+                    part.clear();
+                    gap = std::string(output::kPhraseGap);
+                }
+                count = 0;
+                continue;
+            }
             part.push_back(p);
             continue;
         }

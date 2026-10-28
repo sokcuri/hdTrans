@@ -77,6 +77,10 @@
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //
+// A sound that starts its utterance and is parted by a source space from a hiragana word read
+// mostly as a particle or conjunction (あっ でも, あっ なんか) takes the mark output::kPhraseBreak,
+// at which the segment stage starts a new chunk.
+//
 // A stutter (な、なにを, だっ、だめ, べ…別に, ご、ごめ、ごめんなさい) becomes stutter marks
 // before each separator; the restore stage writes them as the start of the next Korean
 // word (WriteStutters).

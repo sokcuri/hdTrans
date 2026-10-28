@@ -23,7 +23,8 @@ struct Sentence {
 // The cleaned-up text of a line from its sentences in order: the sentences of a chunk
 // joined (AppendSentence), the chunks joined by one space (AppendChunk) or, where gaps
 // holds a column separator before a chunk (pipeline::Segment), by that separator as a
-// SpanGap piece, then CleanupText and FixSpacing.
+// SpanGap piece, and after a phrase break (kPhraseGap) without the space where the chunk
+// starts with ? or !, then CleanupText and FixSpacing.
 Pieces Cleanup(const std::vector<Sentence>& sentences, std::span<const std::string> gaps = {});
 
 // Appends the output of a sentence to that of its chunk. A sentence only ends in a

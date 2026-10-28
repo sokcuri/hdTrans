@@ -930,7 +930,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
-            if (!gaps[i].empty()) before.clear();  // a column starts as a line does
+            if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
             TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
                            generated, watch, opts, sentences);
             std::string chunkText = output::String(chunks[i]);

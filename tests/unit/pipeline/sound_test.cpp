@@ -817,6 +817,31 @@ HD_TEST(pipeline_join_spaced_out) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::JoinSpacedOut(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+HD_TEST(pipeline_phrase_break) {
+    const auto loaded = dict::Load({{
+        0, "base.tsv",
+        "key\tko\tpos\tid\n"
+        "なんか\t뭔가\tP251\t1\n"
+        "なんか\t(은)는\tP251\t2\n"
+        "もっと\t더\tE300\t3\n"
+        "い\t있\tM400\t4\n",
+    }});
+    HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"あっ なんか", "앗\xEE\x80\x91 なんか"},
+        {"「あっ なんか」", "「앗\xEE\x80\x91 なんか」"},
+        // An adverb, a verb, a particle of one kana, text after a word and a space between other words stay.
+        {"あっ もっと", "앗 もっと"},
+        {"あっ いた", "앗 いた"},
+        {"あっ は", "앗 は"},
+        {"…あっ なんか", "…앗 なんか"},
+        {"これ なんか", "これ なんか"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 HD_TEST(pipeline_write_spaced_copies) {
     const auto& loaded = SoundDictionary();
     HD_REQUIRE(loaded.errors.empty() && loaded.snapshot != nullptr);
