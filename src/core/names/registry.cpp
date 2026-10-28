@@ -136,9 +136,25 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 // reading that is no word still names (三日（みか）, 千里（ちさと）), unless it is in no
 // dictionary at all and the base is only a word, or a word that also names a place
 // (用途（ようと）, 飯（めし）); and so does one that is also a name, unless a word of it has the
-// base's Korean (秋刀魚（さんま）: 꽁치).
+// base's Korean (秋刀魚（さんま）: 꽁치). A reading over a name, or one that is only a name, is none.
 bool Registry::Gikun(std::string_view base, std::string_view reading) {
     const DictFlags r = Flags(reading);
+    // A reading over a name of no common sense names it when the reading is a name too or no
+    // word of its own meaning (龍生《たつき》; not 水馬（あめんぼ）), and a reading that is a name
+    // of the name layer and no common word names a base that is no word (二刃《ふたば》; not
+    // 朝日（あさひ）).
+    bool proper = true, sound = true;
+    if (snap_ != nullptr) {
+        for (const dict::Candidate& rec : snap_->RetrieveRecords(reading, dict::LookupMode::General)) {
+            if (rec.codes == nullptr || rec.source != reading || rec.codes->sem.HasCode("QPN")) continue;
+            proper = proper && rec.codes->part.ProperNoun();
+            sound = sound && text::SpellsSound(reading, rec.target, false);
+        }
+    }
+    const DictFlags named = Flags(base);
+    const bool readingName = r.person || r.layerGiven || r.layerSurname;
+    if ((named.person || named.layerGiven || named.layerSurname) && !named.common && (readingName || sound)) return false;
+    if ((r.layerGiven || r.layerSurname) && proper && !named.common) return false;
     if (r.records == 0 && !r.layerSurname && !r.layerGiven) {
         const DictFlags b = Flags(base);
         return b.common && !b.person && (!b.city || b.word) && !b.layerSurname && !b.layerGiven;

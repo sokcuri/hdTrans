@@ -676,6 +676,8 @@
 그 이름을 쓴다(デジモン `디지몬`). 사전 행이 읽는 일본 인명에서 장음을 모음 두 개로 적는 おお는 줄이지 않는다(大石 `오오이시`,
 大川 `오오카와`). 굳어진 지명은 늘 쓰는 꼴을 쓴다(東京 `도쿄`, 大阪 `오사카`).
 
+- 한자 바로 뒤의 가나 독음(괄호나 루비)은 그 한자가 일반 뜻 없는 이름이거나 독음이 일반 낱말 아닌 이름이면 이름의 독음이라,
+  숫자 읽기와 사전 읽기보다 먼저 쓴다(二刃《ふたば》ちゃん `후타바짱`, （二刃(ふたば)） `(후타바)`, 龍生《たつき》 `타츠키`).
 - 히라가나 독음(괄호나 루비)으로 읽는 일본 인명은 おう, おお, うう의 장음을 겹치지 않는 모음 한 쌍씩 줄인다(獅堂(しどう)
   `시도`, 龍咲(りゅうざき) `류자키`, 鳳凰寺(ほうおうじ) `호오지`). 가타카나 독음은 장음을 살린다(｜灰狼（ハイロウ） `하이로우`).
 
@@ -804,7 +806,8 @@
 `tests/rules/cases/names-cued.tsv`, `tests/rules/cases/names-class.tsv`, `tests/rules/cases/names-hiragana-calls.tsv`,
 `tests/rules/cases/names-given-from-full-name.tsv`, `tests/rules/cases/names-caption-labels.tsv`,
 `tests/rules/cases/names-caption-inline-reading.tsv`, `tests/rules/cases/names-caption-reading-parts.tsv`,
-`tests/rules/cases/names-ro-given.tsv`, `tests/rules/cases/names-ro-given-kana.tsv`
+`tests/rules/cases/names-ro-given.tsv`, `tests/rules/cases/names-ro-given-kana.tsv`,
+`tests/rules/cases/names-inline-reading-wins.tsv`
 
 
 ## LEX-30 이름 뒤의 애칭 ちゃん, たん, っち는 붙여 쓴 짱, 치다

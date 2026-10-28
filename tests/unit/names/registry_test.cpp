@@ -79,6 +79,10 @@ const dict::Snapshot* Dictionary() {
          "ふとん\t이부자리\tN110\t\t\tGN\t61\n"
          "行\t가&AE@\tM421\t\t\tGN\t9104\n"
          "笑い飯\t와라이메시\tN110\t\t\tGN\t9101\n"
+         "刃\t칼날\tN110\t\t\tGN\t9107\n"
+         "生\t날것\tN110\t\t\tGN\t9108\n"
+         "たつき\t생계\tN110\t\t\tGN\t9109\n"
+         "ふたば\t후타바\tI130\t\t\tGN\t9110\n"
          "飯\t밥\tN110\tVFd\t\tGN\t9102\n"
          "飯\t이\tN130\tQCTVPl\t\tGN\t9103\n"
          "猫\t고양이\tN110\t\t\tGN\t68\n"
@@ -137,7 +141,10 @@ const dict::Snapshot* Dictionary() {
          "セリーヌ・アルドルフェン\t셀린 알돌펜\tN130\tQPNVHn\t\tGN\t89\n"
          "ミレイユ・ベルクロア\t미레유 베르크로아\tN130\tQPNVHn\t\tGN\t90\n"
          "ニーナ・ルーナ\t니나루나\tN130\tQPNVHn\t\tGN\t91\n"
-         "大上\t오오카미\tN130\tQPNVHn\tWb\tGN\t105\n"},
+         "大上\t오오카미\tN130\tQPNVHn\tWb\tGN\t105\n"
+         "龍生\t타츠오\tN130\tQPNVHn\tWb\tGN\t9105\n"
+         "ふたば\t후타바\tN130\tQPNVHn\tWb\tGN\t9106\n"
+         "たつき\t다쓰키\tN130\tQPNVHn\tWb\tGN\t9111\n"},
     });
     return loaded.snapshot.get();
 }
@@ -528,6 +535,10 @@ HD_TEST(names_honorifics) {
     const std::vector<std::string> glossed = Scan(snap, Repeat("笑(わら)い飯さんだ。", 6)).Names();
     HD_CHECK(std::find(glossed.begin(), glossed.end(), "飯") == glossed.end());
     HD_CHECK(Scan(snap, Repeat("飯（めし）を食べた。", 2)).Names().empty());
+    // A reading over a name that is a name too, or one that is only a name, names the kanji over
+    // every other reading (龍生《たつき》 타츠키, 二刃《ふたば》 후타바).
+    HD_CHECK_EQ(Scan(snap, "龍生《たつき》が来た。").Render("龍生"), std::string("타츠키"));
+    HD_CHECK_EQ(Scan(snap, "（二刃(ふたば)）待って").Render("二刃"), std::string("후타바"));
     // The kana of a verb's conjugation are no honorific (行くんか 行く).
     HD_CHECK(Scan(snap, Repeat("行くんか？", 8)).Names().empty());
     // A common word that honorifics show to be a person reads as the person of the name layer.
