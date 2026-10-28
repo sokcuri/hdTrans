@@ -3,11 +3,13 @@
 the name dictionaries give a kanji they start with.
 
   tools/name-heads.py [DICTS] [OUT]
+  tools/name-heads.py --check [DICTS]
 
 DICTS (default dicts/) holds names.*.tsv. For each kanji, the person rows whose key is two kanji
 or more starting with it and whose reading column is hiragana are read; the head is the longest
 reading prefix, ending on a whole mora, that at least 70% of three or more such readings share
-(塩 しお: 塩田 しおた, 塩見 しおみ). Run it again when the name dictionaries change.
+(塩 しお: 塩田 しおた, 塩見 しおみ). Run it again when the name dictionaries change; --check
+exits 1 when the table differs from what the dictionaries give (ctest dicts.name-heads).
 """
 import collections
 import re
@@ -22,8 +24,12 @@ LEAST = 3
 
 def main():
     here = Path(__file__).resolve().parent.parent
-    dicts = Path(sys.argv[1]) if len(sys.argv) > 1 else here / "dicts"
-    out = Path(sys.argv[2]) if len(sys.argv) > 2 else here / "src/core/dict/builtin/extra/name_heads.tsv"
+    args = sys.argv[1:]
+    check = args[:1] == ["--check"]
+    if check:
+        args = args[1:]
+    dicts = Path(args[0]) if args else here / "dicts"
+    out = Path(args[1]) if len(args) > 1 else here / "src/core/dict/builtin/extra/name_heads.tsv"
     readings = collections.defaultdict(list)
     for path in sorted(dicts.glob("names.*.tsv")):
         for line in path.read_text(encoding="utf-8").splitlines():
@@ -48,7 +54,13 @@ def main():
                 head = prefix
         if head:
             lines.append(f"{kanji}\t{head}")
-    out.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    text = "\n".join(lines) + "\n"
+    if check:
+        if out.read_text(encoding="utf-8") != text:
+            print(f"{out} is stale: run tools/name-heads.py", file=sys.stderr)
+            sys.exit(1)
+        return
+    out.write_text(text, encoding="utf-8")
     print(f"{len(lines) - 1} kanji", file=sys.stderr)
 
 
