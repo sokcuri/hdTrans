@@ -42,3 +42,54 @@ ending:静かでござる	静かでござる	조용하오	keep	builtin-ending
 ending:静かでござる	綺麗でござる	예쁘오	keep	builtin-ending
 dict:gozaru:copula-10	静かでございますよ	조용합니다	keep	lookup
 dict:gozaru:copula-6	大丈夫でございます	괜찮습니다	keep	lookup
+dict:でござ	男でございますよ私がお育ていたしました	남자예요 제가 길렀습니다	fix	lookup
+dict:でござ	先生朝焼けでございましょうね	선생님 아침 놀이에요	fix	lookup
+dict:でござ	「恋の季節」でございますよ！なるほど…	「사랑의 계절」이에요! 그렇구나…	fix	lookup
+dict:でござ	あの… 姉でございますけれども	그… 언니입니다만	fix	lookup
+cx:honoured-copula:10	お客様がお待ちでございますよ若い女の方	손님이 대기이셔요 젊은 여자의 쪽	fix	rewrites
+dict:でござ	お気に入りはこの子でござりまするか？	마음에 드는 것은 이 아이이옵니까?	fix	lookup
+dict:でござ	それで　さらった相手でございますがやはり	그래서 가로챈 상대입니다만 역시	fix	lookup
+dict:でござ	なかなかに太腹そうな御仁でございますな	꽤에 태복 그런 그분입니다	fix	lookup
+dict:でござ	はい はい あたしゃどうせ悪党でございますよ	네 네 난 어차피 악당이에요	fix	lookup
+dict:でござ	まだでございます。初産でございますから。	아직입니다. 초산이니까요.	fix	lookup
+dict:でござ	亡くなりました父の趣味でございますの	돌아가셨던 아버지의 취미예요	fix	lookup
+dict:でござ	今や我が子と その育ての親とは我らが敵でござります	지금은 우리 아이와 그 양친이란 우리들이 적입니다	fix	lookup
+dict:でござ	遅れ来た天下人でございますなあ	늦고 온 천하인이군	fix	lookup
+dict:でござ	夫のある身でございますよよろしいのですね？	남편이 있는 몸이에요 좋군요?	fix	lookup
+dict:でござ	身寄りのないみなしごでございますよ	친척이 없는 고아예요	fix	lookup
+dict:でござ	本当でございますよ	사실이에요	fix	lookup
+dict:でござ	断りもなしに店をあけてもう３日でございますよ	거절도 없이 가게를 비워 벌써 3일이에요	fix	lookup
+dict:でござ	虎でも心の優しい虎でございますわ	범으로도 마음의 다정한 범이에요	fix	lookup
+dict:でござ	頭らしき者に率いられた数人の男たちでございました。	머리 같은 사람에게 이끌린 몇 사람의 남자들이었습니다.	fix	lookup
+dict:でござ	食わせるのは女の役目でございますから。	먹일 수 있는 것은 여자의 역할이니까요.	fix	lookup
+dict:でござ	死んだらそれっきりでございますよ｡	죽으면 그것뿐이에요.	fix	lookup
+dict:でござ	日本一でございますよ！	일본 제일이에요!	fix	lookup
+dict:でござ	学生でございますよ	학생이에요	fix	lookup
+dict:でござ	私でございますよ	저예요	fix	lookup
+dict:でござ	学生でございますね	학생이네요	fix	lookup
+dict:でござ	学生でございます	학생입니다	keep	lookup
+dict:でござ	お部屋でございますね	방이네요	keep	lookup
+dict:でござ	学生でございましょう	학생이겠지요	keep	lookup
+cx:honoured-copula:10	皇子様でございますぞ！	황자님이십니다!	fix	rewrites
+cx:honoured-copula:10	殿下でございますよ	전하이셔요	fix	rewrites
+cx:honoured-copula:10	姫様でございますよ	공주님이셔요	fix	rewrites
+cx:honoured-copula:10	学生でございますよ	학생이에요	keep	rewrites
+cx:honoured-copula:10	私でございますよ	저예요	keep	rewrites
+cx:honoured-copula:20	男の子です！王子様でございます。おめでとうございます！	남자아이입니다! 왕자님이십니다. 축하합니다!	fix	rewrites
+cx:honoured-copula:20	「……王女殿下でございますか」	「……왕녀 전하이십니까」	fix	rewrites
+cx:honoured-copula:20	姫様はただでさえ、その名を広める程の才女でございますから	공주님은 그렇지 않아도, 그 이름을 퍼뜨릴 정도의 재녀이시니까요	fix	rewrites
+cx:honoured-copula:20	お里の旦那様がお越しでございます	친정의 주인님이 행차이십니다	fix	rewrites
+cx:honoured-copula:20	父上でございますか	아버님이십니까	fix	rewrites
+cx:honoured-copula:20	あの… 姉でございますけれども	그… 언니입니다만	keep	rewrites
+cx:honoured-copula:20	旦那さまが殺されたというのは 本当でございますか｡	남편이 살해당했다는 것은 사실입니까.	keep	rewrites
+cx:honoured-copula:20	もちろん それは 奥様に対しても同様でございます｡	물론 그것은 사모님에 대해서도 마찬가지입니다.	keep	rewrites
+cx:honoured-copula:20	ご苦労さまでございます	수고했습니다	keep	rewrites
+cx:honoured-copula:20	私が社長でございます	제가 사장입니다	keep	rewrites
+cx:honoured-copula:20	御用人様 何しろ 当時ご禁制のたばこの葉でございますから	용무 남 어쨌든 당시 금제의 담배의 잎이니까요	keep	rewrites
+cx:honoured-copula:30	右大臣信長様でございますな	우의정 노부나가 님이십니다	fix	rewrites
+cx:honoured-copula:30	田中様でございますか	타나카님이십니까	fix	rewrites
+cx:honoured-copula:30	田中様でございました	타나카님이셨습니다	fix	rewrites
+cx:honoured-copula:30	中宮様でございます。	!rule:cx:honoured-copula:30	keep	rewrites
+cx:honoured-copula:10	今日はご主人様は、圧勝でございますね…。	오늘은 주인님은, 압승이시네요….	fix	rewrites
+cx:honoured-copula:10	何かこう勝負の神様が宿っているような そんな熱戦でございましたね	!rule:cx:honoured-copula:10	keep	rewrites
+cx:honoured-copula:10	御用人様が城代家老になられるのも もうまもなくでございますな	!rule:cx:honoured-copula:10	keep	rewrites

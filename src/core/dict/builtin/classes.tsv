@@ -96,6 +96,7 @@
 //= honorific.phrase-tag	Drawn-out honorifics that a greeting or an interjection takes as a familiar tag: the phrase keeps its reading and the drawl (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
 //= honorific.phrase-tag-word	Apologies, greetings and replies said with a drawn-out honorific of honorific.phrase-tag as a familiar tag like a greeting, WORD or WORD=CASUAL with the casual spelling the tag gives the word (ごめんちゃーん 미안~, よろしく=よろしくね: よろしくちゃーん 잘 부탁해~).
 //= honorific.kanji-reading	Kanji honorifics of honorific.drawn-after with their kana reading, KANJI=KANA, whose last vowel the speaker draws them out with (様=さま: 姫様ぁ 공주님~).
+//= honorific.copula-honour	Suffixes that honour the person they end, matched at the end of a word: a でございます after such a word, or after a topic or subject that ends in one, takes the honorific 시 (信長様でございます 노부나가님이십니다), which a plain person noun does not (学生でございます 학생입니다).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -1401,6 +1402,16 @@ honorific.constraint-familiar	君
 honorific.constraint-familiar	ちゃん
 honorific.constraint-familiar	たん
 
+honorific.copula-honour	様
+honorific.copula-honour	さま
+honorific.copula-honour	殿
+honorific.copula-honour	陛下
+honorific.copula-honour	殿下
+honorific.copula-honour	閣下
+honorific.copula-honour	父上
+honorific.copula-honour	母上
+honorific.copula-honour	兄上
+honorific.copula-honour	姉上
 honorific.honoured-person	様
 honorific.honoured-person	さま
 honorific.honoured-person	殿
