@@ -1,0 +1,18 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+dict:colloquial-endings:22	ぱっと消えたんだろところで 姉さん	has:사라진 거지	fix	lookup
+dict:colloquial-endings:22	どうせ女の武器使ったんだろって決めつける男	has:무기 쓴 거지	fix	lookup
+dict:colloquial-endings:22	あっ… どこ行っちゃったんだろごめんごめん	앗… 어디 가버린 거지 미안 미안	fix	lookup
+dict:colloquial-endings:22	「どっかの誰かに罵倒されたんだろ、よかったな」	has:매도된 거지	fix	lookup
+dict:colloquial-endings:22	そう言われて来たんだろ何しろ一人でサンバルカンを	has:들어 온 거지	fix	lookup
+dict:colloquial-endings:22	お前 また閉めんの忘れたんだろいいえ そんなことありませんよ	has:잊은 거지	fix	lookup
+dict:colloquial-endings:22	流れが変わったんだろ｡	흐름이 바뀐 거지.	keep	lookup
+dict:colloquial-endings:22	来たんだろう	왔을 것이다	keep	lookup
+dict:colloquial-endings:22	行ったんだろ？	간 거지?	keep	lookup
+dict:colloquial-endings:25	アヴェの帝都襲撃をきっかけにまた大きな戦争が始まる……。いつからこうなっちまったんだろう？	아베의 제국의 수도 습격을 계기로 또 큰 전쟁이 시작돼……. 언제부터 이렇게 되어버린 걸까?	fix	lookup
+dict:colloquial-endings:25	ネタ的には面白いと思うんだけど、なんでやめちゃったんだろう？	소재적으로는 재미있다고 생각하는데, 왜 그만두어버린 걸까?	fix	lookup
+dict:colloquial-endings:25	何で別れちゃったんだろうねえ｡	왜 헤어져버린 걸까 응.	fix	lookup
+dict:colloquial-endings:25	どうして こんなことになっちゃったんだろうね	왜 이렇게 되어버린 걸까	fix	lookup
+dict:colloquial-endings:25	どこで間違えちまったんだろうな	어디서 잘못해버린 걸까	fix	lookup
+dict:colloquial-endings:25	いつの間に こんなに大きくなっちゃったんだろう	어느새 이렇게 커져버린 걸까	fix	lookup
+dict:colloquial-endings:25	紅鶴屋敷の密室のことまでしゃべっちゃったんだろう	홍학 저택의 밀실까지 말해버린 걸까	fix	lookup
