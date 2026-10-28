@@ -568,6 +568,22 @@ HD_TEST(tokenize_space_parts_words) {
     HD_CHECK_EQ(scan("え、 そう"), std::string("24:え、そう 9:"));
     // Without joins every such space is dropped.
     HD_CHECK_EQ(ScanText("あ ごめんね", true), std::string("24/0:あごめんね 9/0:"));
+    // The space between copies of two characters or more stays in the token as a CopySpace: its token,
+    // the byte offset of the copy after it and the bytes of one copy.
+    const auto copies = [&](std::string_view input) {
+        const std::vector<Piece> pieces = {{std::string(input), 0}};
+        Tokens t;
+        TokenizeSpans(pieces, true, t, &joins);
+        std::string s;
+        for (const CopySpace& c : t.copySpaces) {
+            s += std::to_string(c.tokenIndex) + "@" + std::to_string(c.at) + "/" + std::to_string(c.unit) + " ";
+        }
+        return s;
+    };
+    HD_CHECK_EQ(copies("えっ えっ"), std::string("0@6/6 "));
+    HD_CHECK_EQ(copies("やめて やめて やめて"), std::string("0@9/9 0@18/9 "));
+    HD_CHECK_EQ(copies("お お"), std::string(""));  // one kana: the sound stage's
+    HD_CHECK_EQ(copies("あ ごめんね"), std::string(""));
 }
 
 // With SpaceJoins, a letter after kana goes on with the Japanese token when a word spans both.

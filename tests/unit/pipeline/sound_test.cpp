@@ -829,6 +829,13 @@ HD_TEST(pipeline_write_spaced_copies) {
         {"「ア ア ア」", "「아 아 아」"},
         {"う う", "으 으"},
         {"ア ア", "아 아"},
+        // A kana the sound lexicon lacks reads as heard; copies that an interjection reads as two
+        // equal halves read as the half.
+        {"ん ん？", "응 응？"},
+        {"え え え", "에 에 에"},
+        {"ど ど ど…", "도 도 도…"},
+        {"ない ない ない", "아냐 아냐 아냐"},
+        {"パン パン", "パン パン"},  // the mimetic ぱんぱん
         // Copies written together, one kana alone, a stutter before its word, copies next to
         // other kana and copies that read otherwise together stay.
         {"おおお", "おおお"},
@@ -840,7 +847,7 @@ HD_TEST(pipeline_write_spaced_copies) {
         {"う う~ん", "う う~ん"},
         {"お お っ！", "お お っ！"},
         {"かお お", "かお お"},
-        {"ん ん", "ん ん"},
+        {"こ こ か ら", "こ こ か ら"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::WriteSpacedCopies(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

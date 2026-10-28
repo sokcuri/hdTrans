@@ -55,6 +55,16 @@ struct ControlMarker {
     bool inWord = false;  // a break of joined lines that falls inside a word
 };
 
+// A source space left out between two copies of a piece said again (やめて やめて): the token
+// that holds both copies, the byte offset of the second copy in its raw text and the bytes of
+// one copy. The word stage reads the pieces between such spaces as the copies, and the output
+// writes a space there.
+struct CopySpace {
+    int tokenIndex;
+    uint32_t at;
+    uint32_t unit;
+};
+
 // A text of Tokens::text.
 struct TextRef {
     uint32_t offset = 0;
@@ -98,6 +108,7 @@ struct TokenView {
 struct Tokens {
     std::vector<Token> tokens;
     std::vector<ControlMarker> markers;  // in token order
+    std::vector<CopySpace> copySpaces;   // in token order
     std::string text;
 
     size_t size() const { return tokens.size(); }
@@ -106,6 +117,28 @@ struct Tokens {
     std::string_view Raw(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].raw); }
     std::string_view Merged(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].merged); }
     std::string_view Canonical(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].canonical); }
+
+    // Whether a CopySpace of token i stands at byte offset at of its text.
+    bool CopySpaceAt(size_t i, uint32_t at) const {
+        for (const CopySpace& c : copySpaces) {
+            if (c.tokenIndex == static_cast<int>(i) && c.at == at) return true;
+        }
+        return false;
+    }
+    // The byte offset of the first CopySpace of token i after offset from, or npos.
+    size_t CopySpaceAfter(size_t i, size_t from) const {
+        for (const CopySpace& c : copySpaces) {
+            if (c.tokenIndex == static_cast<int>(i) && c.at > from) return c.at;
+        }
+        return std::string_view::npos;
+    }
+    // The bytes of the copy that starts at byte offset at of token i, next to a CopySpace; 0 for none.
+    size_t CopyUnitAt(size_t i, size_t at) const {
+        for (const CopySpace& c : copySpaces) {
+            if (c.tokenIndex == static_cast<int>(i) && (c.at == at || c.at == at + c.unit)) return c.unit;
+        }
+        return 0;
+    }
 
     // The type after the token has been visited: 77 when it was emptied.
     int TypeAfter(size_t i) const { return tokens[i].clearedBy >= 0 ? kTypeMarkup : tokens[i].type; }

@@ -54,11 +54,21 @@ NmWord BuildNmTail(Flusher& f) {
         int start = it->start;
         int length = it->length;
         int neighbours = 0;
-        if (Item* n = it->After(); n != nullptr && katakana(n) && it->tokenIndex == n->tokenIndex) {
+        // A source space between copies (tokenizer::CopySpace) parts the run (エッ エッ), unless a word
+        // of the dictionary already reads across one, which the run then reads as before.
+        const auto t = static_cast<std::size_t>(it->tokenIndex);
+        const auto across = [&](const Item* x) {
+            return !Has(x->GAttr(0), "Nm") &&
+                   w.tokens.CopySpaceAfter(t, static_cast<std::size_t>(x->start)) < static_cast<std::size_t>(x->start + x->length);
+        };
+        const auto apart = [&](const Item* other, int at) {
+            return w.tokens.CopySpaceAt(t, static_cast<uint32_t>(at)) && !across(it) && !across(other);
+        };
+        if (Item* n = it->After(); n != nullptr && katakana(n) && it->tokenIndex == n->tokenIndex && !apart(n, n->start)) {
             neighbours = 1;
             length += n->length;
         }
-        if (Item* p = it->prev; p != nullptr && katakana(p) && it->tokenIndex == p->tokenIndex) {
+        if (Item* p = it->prev; p != nullptr && katakana(p) && it->tokenIndex == p->tokenIndex && !apart(p, it->start)) {
             start = p->start;
             neighbours++;
             length += p->length;

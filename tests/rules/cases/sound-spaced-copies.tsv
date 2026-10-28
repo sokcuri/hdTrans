@@ -24,7 +24,14 @@ sound:spaced-copies	は は は	하 하 하	fix	sound
 sound:spaced-copies	ハ ハ ハ	하 하 하	fix	sound
 sound:spaced-copies	ふ ふ ふ…	후 후 후…	fix	sound
 sound:spaced-copies	へ へ へ	헤 헤 헤	fix	sound
-sound:spaced-copies	まぁ ど ど ど…	뭐 두 두 두…	fix	sound
+sound:spaced-copies	まぁ ど ど ど…	뭐 도 도 도…	fix	sound
+sound:spaced-copies	ん ん？ いや 確か	응 응? 아니 분명	fix	sound
+sound:spaced-copies	え え え	에 에 에	fix	sound
+sound:spaced-copies	カ カ カ カ…｡	카 카 카 카….	fix	sound
+sound:spaced-copies	ね　ね	저기　저기	fix	sound
+sound:spaced-copies	で で で で で？	그래서 그래서 그래서 그래서 그래서?	fix	sound
+sound:spaced-copies	こ こ か ら 先、 生きてはいけない	has:여기에서	keep	sound
+sound:spaced-copies	何？こ こ さ｡	뭐? 여기 자.	keep	sound
 sound:spaced-copies	おおお	오오오	keep	sound
 sound:spaced-copies	あああ	아아아	keep	sound
 sound:spaced-copies	ううう…	으으으…	keep	sound
@@ -33,7 +40,7 @@ sound:spaced-copies	うわっ あっ あっ	우왓 앗 앗	keep	sound
 sound:spaced-copies	うわっ　あっ　あっ	우왓　앗　앗	keep	sound
 sound:spaced-copies	あ あ	아 아	keep	sound
 sound:spaced-copies	あ あ…｡	아 아….	keep	sound
-sound:spaced-copies	え え	네 네	keep	sound
+sound:spaced-copies	え え	에 에	fix	sound
 sound:spaced-copies	お お お前は何者だ！	has:너는 누구야	keep	sound
 sound:spaced-copies	お　お…　俺のプリン	오 오… 내 푸딩	keep	sound
 sound:spaced-copies	う う… 噂を聞いたんです	lacks:으 으	keep	sound

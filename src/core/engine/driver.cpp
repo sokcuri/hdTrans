@@ -341,6 +341,38 @@ std::vector<tokenizer::Piece> TokenizerPieces(const output::Pieces& pieces) {
     return out;
 }
 
+// A word that ends where the source had a space between two copies (tokenizer::CopySpace) keeps
+// that space before the next word of its token, and a word that spells two such copies and reads
+// as one copy's Korean or its sound said twice (毎日毎日 매일매일, コッコッ 콧콧) is written with the
+// space between the halves (매일 매일); not where the half is no reading of the copy (これこれ 이러이러).
+void MarkCopySpaces(const dict::Snapshot& snap, const dict::LookupContext& lookup, const tokenizer::Tokens& tokens,
+                    std::vector<output::ResolvedItem>& items) {
+    if (tokens.copySpaces.empty()) return;
+    for (std::size_t k = 0; k < items.size(); k++) {
+        output::ResolvedItem& it = items[k];
+        if (it.tokenIndex < 0) continue;
+        const auto t = static_cast<std::size_t>(it.tokenIndex);
+        const int half = it.length / 2;
+        std::string& ko = it.entry.text;
+        if (it.length % 2 == 0 && tokens.CopySpaceAt(t, static_cast<uint32_t>(it.offset + half)) &&
+            tokens.CopyUnitAt(t, static_cast<std::size_t>(it.offset + half)) == static_cast<std::size_t>(half) &&
+            !ko.empty() && ko.size() % 2 == 0 && ko.compare(0, ko.size() / 2, ko, ko.size() / 2) == 0 &&
+            static_cast<unsigned char>(ko[0]) >= 0xEA && static_cast<unsigned char>(ko[0]) <= 0xED) {
+            const std::string copy = it.surface.substr(0, it.surface.size() / 2);
+            const std::string_view halfKo = std::string_view(ko).substr(0, ko.size() / 2);
+            bool reads = pipeline::internal::ReadKana(copy) == halfKo;  // as heard (コッ 콧)
+            for (const dict::Candidate& c : snap.GetWordInfo(copy, dict::LookupMode::General, lookup).list) {
+                reads = reads || (c.source == copy && c.target == halfKo);
+            }
+            if (reads) ko.insert(ko.size() / 2, " ");
+        }
+        if (k + 1 == items.size()) continue;
+        const output::ResolvedItem& next = items[k + 1];
+        if (next.tokenIndex != it.tokenIndex || next.offset != it.offset + it.length) continue;
+        if (tokens.CopySpaceAt(t, static_cast<uint32_t>(next.offset))) it.spaceAfter = true;
+    }
+}
+
 // Each Japanese token of the sentence first..last that goes on after a space parting two words
 // (Token::afterSpace) joined back to the Japanese token before it, so that the compose stage
 // writes them as the one token they were typed as: its text, items and markers move into that
@@ -768,6 +800,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             ResolveSentence(program, generated.families, analysis, k);
             if (observer.resolved) observer.resolved(observer.context, index, static_cast<int>(k), sentence.chain);
             ResolvedItems(sentence.chain, s.items);
+            MarkCopySpaces(snap, lookup, s.tokens, s.items);
             BuildTexts(s.tokens, analysis, sentence.first, sentence.last, s.texts);
             s.markers.assign(s.tokens.markers.begin() + sentence.markerBegin,
                              s.tokens.markers.begin() + sentence.markerEnd);

@@ -127,13 +127,17 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
 // tokenizer (通 知 表), and a run that is no word stays as written (し　ら　さ　き, あ い う).
 std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
-// A sound of one syllable said again with a space or an ideographic space between the copies
-// (お お お, あ　あ　あ) written in Korean with the spaces kept (오 오 오, 아　아　아): two or more
-// copies of one kana, not next to other kana, kanji, letters or digits, that the sound lexicon reads
-// written together three or more times as one syllable said as often (おおお 오오오, ううう 으으으,
-// アアア 아아아). Not a stutter before the word it starts (お お お前は, ど ど… どうして, う う… 噂),
-// a last copy drawn out or gone on from after the space (う う~ん, お お っ！), nor copies that read
-// otherwise together (んんん 으으응).
+// Copies of a sound said again with a space or an ideographic space between them written in Korean
+// with the spaces kept, two or more copies not next to other kana, kanji, letters or digits:
+//   - copies of one kana, each as the sound lexicon reads the kana alone or else as heard (お お お
+//     오 오 오, お　お　お 오　오　오, あ あ あ 아 아 아, ん ん 응 응);
+//   - copies of a kana word that an interjection of the sound lexicon reads, said twice, as two equal
+//     halves, each as that half, where the copies start an utterance (ない ない ない 아냐 아냐 아냐;
+//     not the mimetic ぼうぼう 활활, nor a half in 해요 such as 맞아요 of そうですそうです).
+// Not a stutter before the word it starts (お お お前は, ど ど… どうして, う う… 噂), copies said on
+// into a word (そう そう そういい), a last copy drawn out or gone on from after the space (う う~ん,
+// お お っ！), one-kana copies inside text spaced out character by character (こ こ か ら) or that
+// spell a word with the piece before them (とっ と と…).
 std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).

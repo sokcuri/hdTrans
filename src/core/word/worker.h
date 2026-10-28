@@ -96,6 +96,9 @@ public:
 
     // Dictionary lookup with the plain-entry filters of the word stage.
     Lookup DoLookup(std::string_view query, int mode);
+    // The bytes of the copy written apart from the one next to it (tokenizer::CopySpace) that starts
+    // text, a view into the current token; 0 for none.
+    std::size_t CopyUnit(std::string_view text) const;
     bool SuVerb(std::string_view stem);
     // Whether after, the text after the stem in い of a わ-row verb written in kanji
     // (彷徨い), is the て or past た that only a く verb in い takes there (彷徨いて is 彷徨く

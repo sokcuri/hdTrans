@@ -1,0 +1,34 @@
+# 규칙: SND-2, LAY-2
+rule	input	expected	kind	layer
+lookup:copies-apart	えっ えっ マジか ヤバっ｡	어 어 진짜야 큰일 났다.	fix	lookup
+lookup:copies-apart	えっ えっ？	어 어?	fix	lookup
+lookup:copies-apart	えっ えっ えっ？	어 어 어?	fix	lookup
+lookup:copies-apart	エッ エッ… エッ…	엣 엣… 엣…	fix	lookup
+lookup:copies-apart	ハオ ハオ｡	하오 하오.	fix	lookup
+lookup:copies-apart	ハオ ハオ ハオ！ 頑張れ｡	하오 하오 하오! 힘내라.	fix	lookup
+lookup:copies-apart	☎もしもし もしもし！	☎여보세요 여보세요!	fix	lookup
+lookup:copies-apart	お城 お城 お城	성 성 성	fix	lookup
+lookup:copies-apart	父ちゃん お金｡ お金 お金｡	아빠 돈. 돈 돈.	fix	lookup
+lookup:copies-apart	ちょっと なに なに なに？	조금 뭐 뭐 뭐?	fix	lookup
+lookup:copies-apart	ｼｬｯﾌﾙ ｼｬｯﾌﾙ ｼｬｯﾌﾙ…	샷훌 샷훌 샷훌…	fix	lookup
+lookup:copies-apart	ﾁｬﾝｶﾁｬﾝｶ ﾁｬﾝｶﾁｬﾝｶ…	찬카찬카 찬카찬카…	fix	lookup
+lookup:copies-apart	パン パン	판 판	fix	lookup
+lookup:copies-apart	おぉ～ ﾛﾐｵ ﾛﾐｵ！	오오~ 로미오 로미오!	fix	lookup
+lookup:copies-apart	♪～ テン テン テン テン	♪~텐 텐 텐 텐	fix	lookup
+lookup:copies-apart	ｺｯ ｺｯ ｺｯ ｺｯ ｺｯ ｺｯ…｡	콧 콧 콧 콧 콧 콧….	fix	lookup
+lookup:copies-apart	ゴー ゴー！	고고!	keep	lookup
+lookup:copies-apart	お松 お松！	has:마쓰 	fix	lookup
+lookup:copies-apart	とっ と と…	냉큼…	keep	lookup
+lookup:copies-apart	やめて やめて	그만해 그만해	keep	lookup
+lookup:copies-apart	すごい すごい｡	대단해 대단해.	keep	lookup
+lookup:copies-apart	どうも どうも｡	고맙습니다.	keep	lookup
+lookup:copies-apart	とても とても	도저히	keep	lookup
+lookup:copies-apart	（剛）ピーポー ピーポー	(강) 삐뽀삐뽀	keep	lookup
+lookup:copies-apart	キレイ キレイ｡	키레이 키레이.	fix	lookup
+lookup:copies-apart	(男性)駄目 駄目 そこ入っちゃ	has:안돼 안돼 거기	keep	lookup
+lookup:copies-apart	毎日 毎日 雨が降ろうが	has:매일 매일 비가	fix	lookup
+lookup:copies-apart	こう こう こう…	공고 이렇게…	keep	lookup
+lookup:copies-apart	ドン ドン ドン！	돈돈돈!	keep	lookup
+lookup:copies-apart	うん うん	응 응	keep	lookup
+lookup:copies-apart	はい はい はい	네 네 네	keep	lookup
+lookup:copies-apart	これ これ	이러이러	keep	lookup
