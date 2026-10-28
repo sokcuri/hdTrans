@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/names/labels.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/runes.h"
 #include "core/text/kana.h"
@@ -998,6 +999,17 @@ output::Pieces KataHonorifics(const output::Pieces& text, const LineContext& ctx
 output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::vector<output::Pieces> byLine = Lines(text);
     for (output::Pieces& line : byLine) {
+        // A line whose katakana are all in a speaker label in round brackets that opens it is no
+        // speech in katakana: the label names who speaks (（アマリヤ）ん ん…).
+        size_t label = 0;
+        if (!line.empty() && line[0].span == output::SpanText) {
+            std::string head;
+            for (const output::Piece& p : line) {
+                if (p.span != output::SpanText && p.span != output::SpanWord) break;
+                head += p.text;
+            }
+            label = std::min(names::internal::CaptionLabelEnd(head), line[0].text.size());
+        }
         int kata = 0, japanese = 0, hira = 0;
         for (const output::Piece& p : line) {
             const std::string_view t = TextOf(p);
@@ -1005,6 +1017,7 @@ output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, co
             japanese += CountRunes(t, IsJapaneseRune);
             hira += CountRunes(t, IsHiraganaRune);
         }
+        if (label > 0 && kata == CountRunes(std::string_view(line[0].text).substr(0, label), IsKatakanaRune)) continue;
         // Not speech whatever the runs read as, unless kanji words take their particles and
         // okurigana in katakana (発信源ハ、物置ノ、内部).
         if (2 * kata < japanese && hira > 0) continue;

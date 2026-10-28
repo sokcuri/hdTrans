@@ -47,3 +47,7 @@ sound:spaced-copies	お お っ！ そうそうコレコレ！	오옷! 맞아 �
 sound:spaced-copies	は は は… はい…｡	has:네	keep	sound
 sound:spaced-copies	あ あ ああっ	아 아 아앗	keep	sound
 sound:spaced-copies	かお お	얼굴 오	keep	sound
+sound:spaced-copies	（アマリヤ）ん ん…	(아마추어 리어) 응 응…	fix	sound
+sound:spaced-copies	（アマリヤ）はあ？	(아마추어 리어) 하아?	fix	sound
+sound:spaced-copies	(ﾌﾟﾗｽﾙ)ﾌﾟﾗﾌﾟﾗ！	(플러시) 대롱대롱!	fix	sound
+sound:spaced-copies	(ノブ) ダメ ダメ！	(노부) 안돼 안돼!	keep	sound
