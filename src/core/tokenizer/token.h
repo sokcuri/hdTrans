@@ -1,9 +1,11 @@
 #pragma once
 // Tokens of one chunk of text, with every view of a token the later stages read.
+#include <algorithm>
 #include <cstdint>
 #include <span>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include "core/text/lifetime.h"
@@ -108,7 +110,7 @@ struct TokenView {
 struct Tokens {
     std::vector<Token> tokens;
     std::vector<ControlMarker> markers;  // in token order
-    std::vector<CopySpace> copySpaces;   // in token order
+    std::vector<CopySpace> copySpaces;   // in token order, then by offset
     std::string text;
 
     size_t size() const { return tokens.size(); }
@@ -119,25 +121,28 @@ struct Tokens {
     std::string_view Canonical(size_t i) const HDTRANS_LIFETIMEBOUND { return Text(tokens[i].canonical); }
 
     // Whether a CopySpace of token i stands at byte offset at of its text.
-    bool CopySpaceAt(size_t i, uint32_t at) const {
-        for (const CopySpace& c : copySpaces) {
-            if (c.tokenIndex == static_cast<int>(i) && c.at == at) return true;
-        }
-        return false;
+    bool CopySpaceAt(size_t i, size_t at) const {
+        const auto it = FirstCopySpace(i, at);
+        return it != copySpaces.end() && it->tokenIndex == static_cast<int>(i) && it->at == at;
     }
     // The byte offset of the first CopySpace of token i after offset from, or npos.
     size_t CopySpaceAfter(size_t i, size_t from) const {
-        for (const CopySpace& c : copySpaces) {
-            if (c.tokenIndex == static_cast<int>(i) && c.at > from) return c.at;
-        }
-        return std::string_view::npos;
+        const auto it = FirstCopySpace(i, from + 1);
+        return it != copySpaces.end() && it->tokenIndex == static_cast<int>(i) ? it->at : std::string_view::npos;
     }
     // The bytes of the copy that starts at byte offset at of token i, next to a CopySpace; 0 for none.
     size_t CopyUnitAt(size_t i, size_t at) const {
-        for (const CopySpace& c : copySpaces) {
-            if (c.tokenIndex == static_cast<int>(i) && (c.at == at || c.at == at + c.unit)) return c.unit;
-        }
-        return 0;
+        const auto it = FirstCopySpace(i, at);
+        if (it == copySpaces.end() || it->tokenIndex != static_cast<int>(i)) return 0;
+        return it->at == at || it->at == at + it->unit ? it->unit : 0;
+    }
+
+    // The first CopySpace at or after byte offset at of token i, in the order of copySpaces.
+    std::vector<CopySpace>::const_iterator FirstCopySpace(size_t i, size_t at) const {
+        return std::lower_bound(copySpaces.begin(), copySpaces.end(), std::pair<size_t, size_t>(i, at),
+                                [](const CopySpace& c, const std::pair<size_t, size_t>& key) {
+                                    return std::pair<size_t, size_t>(static_cast<size_t>(c.tokenIndex), c.at) < key;
+                                });
     }
 
     // The type after the token has been visited: 77 when it was emptied.
