@@ -232,7 +232,7 @@ bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::s
 // is the Korean of the auxiliary ending in its marker family (6 버&AA@), and the ending's class
 // digit picks the form of that family (5지만 → 6 버렸지만). An ending whose class has no such form
 // is disabled; false when none is left. With every, the disabled endings are rewritten too, for a
-// later stage that enables one again (the auxiliary of the と form).
+// later stage that enables one again (the auxiliary of the と form and of はる).
 bool ProgressiveEndings(Group& g, Detail& d, std::string_view head, bool every = false);
 
 // Whether a verb record of conjugation class sub may join a group whose first record

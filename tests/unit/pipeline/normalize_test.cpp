@@ -1017,6 +1017,8 @@ HD_TEST(pipeline_kansai_verb_forms) {
         {"なんどすれば"sv, "なんどすれば"sv},
         {"なんどしたって"sv, "なんどしたって"sv},
         {"なんどしたか"sv, "なんどしたか"sv},
+        // The word stage reads the honorific はる.
+        {"アハハハ… 怒ってはる"sv, "アハハハ… 怒ってはる"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));

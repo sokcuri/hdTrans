@@ -141,6 +141,9 @@
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼, and $Kz@, 하다 in a word of the adjective class), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
 //= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), or of the おる after a て form said with と or ど (生きとる 살고 있다), ending in the marker family that the ending after it conjugates.
+//= ko.honorific-progressive-head	The Korean of the Kansai はる after a て form, the いる of a respected doer (怒ってはる 화내고 계신다), ending in the marker family that the ending after it conjugates.
+//= ko.honorific-iru	The Korean of いる in its て form before the Kansai はる, the honorific of the いる itself (島にいてはる人 섬에 계시는 사람).
+//= ko.honorific-head	The Korean of the Kansai はる after the stem of a verb, the honorific 시 of the verb itself (捨てはった 버리셨다), ending in the marker family that the ending after it conjugates.
 //= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자 버린 거야), ending in the marker family that the ending after it conjugates.
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.spoken-exclamation	Marks right after an offer of あげる outside brackets that make it a line of dialogue, as a final particle does (見せてあげる！ 보여 줄게!, 見せてあげるっ！).
@@ -2189,6 +2192,12 @@ ko.doing	$Kz@
 ko.adjective-past-adnominal	5던
 
 ko.progressive-head	1고 &HN@
+
+ko.honorific-progressive-head	1고 계&AE@
+
+ko.honorific-head	2&AE@
+
+ko.honorific-iru	계&AE@
 
 ko.completive-head	6 버&AA@
 

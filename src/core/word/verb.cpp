@@ -15,6 +15,7 @@ namespace hdTrans::word {
 namespace {
 
 constexpr int kKindDirect = 14;  // pattern kind matched without an ending
+constexpr std::string_view kExistence = "&HN@";  // the Korean of いる, 있다
 
 int Byte(char c) { return static_cast<unsigned char>(c); }
 
@@ -690,9 +691,81 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
         return g;
     };
+    // The bytes of the longest word of the dictionary that starts from.
+    auto longestWord = [&](std::string_view from) {
+        std::size_t n = 0;
+        for (const Record* r = w->DoLookup(from, kModeGeneral).records; r != nullptr; r = r->child) {
+            if (from.starts_with(r->source)) n = std::max(n, r->source.size());
+        }
+        return n;
+    };
+    // The stem はる follows: of an ichidan verb (its empty stem form), or of する, くる or 来る (し, き, 来).
+    const bool stemOfHaru =
+        (base.patternKind == 7 && !matched && (base.kind == 8 || base.kind == 10) && Conjugation(7, base.kind).empty()) ||
+        (matched && base.kind == 10 && (base.patternKind == 9 || base.patternKind == 11 || base.patternKind == 13));
     Group* ending = nullptr;
     std::string_view auxHead;
-    bool everyEnding = false;  // the auxiliary of the と form: ProgressiveEndings rewrites all
+    bool everyEnding = false;  // the auxiliary of the と form or of はる: ProgressiveEndings rewrites all
+    // The Kansai はる of a respected doer: after a て form the いる (怒ってはる 화내고 계신다, 言うてはった
+    // 말하고 계셨다, 持ってはります 가지고 계십니다), written for 계시 after 고; after the stem of an ichidan
+    // verb, する, くる or 来る the verb itself (捨てはった 버리셨다, しはった 하셨다), written with 시. はる
+    // conjugates by the table as a verb in る, and the ending after its form is read on that form, as
+    // for the と form. Not where a word of the dictionary reaches past the form and its ending
+    // (はるばる, はるかに; not まとめてはるから): false, and nothing changed.
+    auto readsHaru = [&]() {
+        int branch = 0, n = 0;
+        if ((base.kind != 7 && !stemOfHaru) || !w->settings.text || !w->settings.improvements.dialectForms || !queryAllowed ||
+            !rest.starts_with(kJaHa) || !AnalyseVerbTail(kJaHa, '8', rest.substr(kJaHa.size()), branch, n)) {
+            return false;
+        }
+        const std::size_t form = kJaHa.size() + static_cast<std::size_t>(n);
+        // An honorific takes no command: not in the imperative of はる nor its て form before the ろ
+        // of いろ (見はってろ).
+        if (branch == 4 || branch == 11 || (branch == 7 && rest.substr(form).starts_with("ろ"))) return false;
+        // A noun or adjectival noun of the dictionary that starts at the は and reaches past the form is
+        // that word where a particle follows it (はるかに, はるかを; not はるから, はる and から).
+        for (const Record* r = w->DoLookup(rest, kModeGeneral).records; r != nullptr; r = r->child) {
+            const char cls = At(r->partCode, 1);
+            if (r->source.size() <= form || (cls != '1' && cls != '8') || !rest.starts_with(r->source)) continue;
+            const std::string_view beyond = rest.substr(r->source.size());
+            for (const Record* q = w->DoLookup(beyond, kModeGeneral).records; q != nullptr; q = q->child) {
+                if (At(q->partCode, 1) == '2' && beyond.starts_with(q->source)) return false;
+            }
+        }
+        // After a stem, not where a word of the dictionary spans the stem and the は (見はり 파수).
+        for (const Record* r = stemOfHaru ? w->DoLookup(From(text, start), kModeGeneral).records : nullptr; r != nullptr; r = r->child) {
+            if (r->source.starts_with(surface + std::string(kJaHa))) return false;
+        }
+        const std::span<const std::string_view> head =
+            base.kind == 7 ? dict::ClassMembers(HDTRANS_CLASS("ko.honorific-progressive-head"))
+                           : dict::ClassMembers(HDTRANS_CLASS("ko.honorific-head"));
+        if (head.empty()) return false;
+        const Detail saved = base;
+        const int savedWidth = patternWidth, savedLength = length;
+        patternWidth += WidthOf(rest.substr(0, form));
+        base.kind = branch;
+        length = sourceLength + pattern();
+        Group* g = endingGroup(after());
+        const std::size_t reach = form + (g != nullptr ? static_cast<std::size_t>(std::max(g->length, 0)) : 0);
+        if (longestWord(rest) >= std::max(reach, form + 1)) {
+            base = saved;
+            patternWidth = savedWidth;
+            length = savedLength;
+            return false;
+        }
+        // The いる of a て form before はる is itself the honorific 계시다 (島にいてはる人 섬에 계시는 사람):
+        // the ending conjugates it.
+        const std::span<const std::string_view> iru = dict::ClassMembers(HDTRANS_CLASS("ko.honorific-iru"));
+        if (saved.kind == 7 && !iru.empty() && !group->entries.empty() && group->entries.front()->dst == kExistence) {
+            for (Entry* e : group->entries) e->dst = std::string(iru.front());
+            ending = g;
+            return true;
+        }
+        everyEnding = true;
+        if (g != nullptr && ProgressiveEndings(*g, base, head.front(), everyEnding)) ending = g;
+        else auxHead = head.front();
+        return true;
+    };
     // The と form before おる (MatchKind): the ending after the form of おる is read on that form and
     // written for 있 after 고 (4다 → 1고 있다, 5지만 → 1고 있었지만), as for the いる of 見てた; without
     // an ending row of its own the form takes the empty ending below, as a verb does.
@@ -706,7 +779,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         length = sourceLength + pattern();
         if (Group* g = endingGroup(after()); g != nullptr && ProgressiveEndings(*g, base, head.front(), everyEnding)) ending = g;
         else auxHead = head.front();
-    } else {
+    } else if (!readsHaru()) {
         ending = endingGroup(rest);
     }
     // V連用形 + やがる without an ending of its own conjugates as the verb in the form
