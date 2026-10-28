@@ -583,6 +583,26 @@ HD_TEST(tokenize_space_parts_words) {
     HD_CHECK_EQ(copies("えっ えっ"), std::string("0@6/6 "));
     HD_CHECK_EQ(copies("やめて やめて やめて"), std::string("0@9/9 0@18/9 "));
     HD_CHECK_EQ(copies("お お"), std::string(""));  // one kana: the sound stage's
+    // The lookups at the edges of a run: the first copy, a later copy, between copies and past the run.
+    {
+        const std::vector<Piece> pieces = {{"やめて やめて やめて 何", 0}};
+        Tokens t;
+        TokenizeSpans(pieces, true, t, &joins);
+        HD_CHECK(t.CopySpaceAt(0, 9));
+        HD_CHECK(t.CopySpaceAt(0, 18));
+        HD_CHECK(!t.CopySpaceAt(0, 0));
+        HD_CHECK(!t.CopySpaceAt(0, 10));
+        HD_CHECK(!t.CopySpaceAt(1, 9));
+        HD_CHECK_EQ(t.CopyUnitAt(0, 0), size_t{9});
+        HD_CHECK_EQ(t.CopyUnitAt(0, 9), size_t{9});
+        HD_CHECK_EQ(t.CopyUnitAt(0, 18), size_t{9});
+        HD_CHECK_EQ(t.CopyUnitAt(0, 3), size_t{0});
+        HD_CHECK_EQ(t.CopyUnitAt(0, 27), size_t{0});
+        HD_CHECK_EQ(t.CopySpaceAfter(0, 0), size_t{9});
+        HD_CHECK_EQ(t.CopySpaceAfter(0, 9), size_t{18});
+        HD_CHECK_EQ(t.CopySpaceAfter(0, 18), std::string_view::npos);
+        HD_CHECK_EQ(t.CopySpaceAfter(1, 0), std::string_view::npos);
+    }
     HD_CHECK_EQ(copies("あ ごめんね"), std::string(""));
 }
 
