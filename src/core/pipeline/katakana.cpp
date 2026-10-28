@@ -1153,13 +1153,14 @@ bool ClauseVerb(std::string_view name, const dict::Snapshot& snap) {
 // that the name layer reads as no person (ここにちゃんと), that is an adverb or a word that
 // modifies (いつかちゃんと, もっとちゃんと) or a verb ending a clause (しろちゃんと), or
 // after a common word before a verb that conjugates (りんごちゃんと遊ぶ). After a name of
-// no other word, ちゃん and と are the honorific and the particle (りこちゃんと目が合う,
-// りこちゃんと遊ぶ).
+// no other word, a proper noun included, ちゃん and と are the honorific and the particle
+// (りこちゃんと目が合う, りこちゃんと遊ぶ, ふたばちゃんと遊ぶ).
 bool ChantoAdverb(std::string_view name, std::string_view rest, const dict::Snapshot& snap) {
     if (!LayerPerson(name, snap) || ClauseVerb(name, snap)) return true;
     bool word = false;
     for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
         if (c.codes == nullptr || c.codes->part.Empty() || c.codes->sem.Text().starts_with("QPN")) continue;
+        if (c.codes->part.ProperNoun()) continue;
         const char tag = c.codes->part.Tag();
         if (tag == 'E' || tag == 'P') return true;
         word = true;

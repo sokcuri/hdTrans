@@ -1,0 +1,17 @@
+# 규칙: LEX-30
+rule	input	expected	kind	layer
+names:nickname-chanto	ふたばちゃんと遊ぶ。	후타바짱과 논다.	fix	fixed
+names:nickname-chanto	ふたばちゃんと話そう。	후타바짱과 이야기하자.	fix	fixed
+names:nickname-chanto	ふたばちゃんと。	후타바짱과.	fix	fixed
+names:nickname-chanto	ふたばちゃんとご飯を食べた。	후타바짱과 밥을 먹었다.	keep	fixed
+names:nickname-chanto	ナナちゃんと仲良くね。	나나짱과 사이 좋게.	keep	fixed
+names:nickname-chanto	わたしもマキちゃんと同じです	저도 마키짱과 같습니다	keep	fixed
+names:nickname-chanto	ちゃんと食べる。	제대로 먹는다.	keep	fixed
+names:nickname-chanto	彼はちゃんと来た。	그는 제대로 왔다.	keep	fixed
+names:nickname-chanto	ここちゃんと拭いて。	여기 제대로 닦아.	keep	fixed
+names:nickname-chanto	しろちゃんと。	해라 제대로.	keep	fixed
+names:nickname-chanto	理由ならちゃんとある。	이유라면 제대로 있다.	keep	fixed
+names:nickname-chanto	いつもちゃんと正しくって	has:언제나 제대로	keep	fixed
+names:nickname-chanto	マスクちゃんと付けてる？	마스크 제대로 쓰고 있어?	keep	fixed
+names:nickname-chanto	昨日ちゃんと寝てないから	어제 제대로 자지 않으니까	keep	fixed
+names:nickname-chanto	こういうのちゃんと撮っといてね	이런 것 제대로 찍어 둬	keep	fixed
