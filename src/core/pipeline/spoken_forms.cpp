@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <span>
+#include <utility>
 
 #include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
@@ -390,6 +391,34 @@ std::string ReplaceKansaiNegative(const Match& m) {
     return Cat({stem, g.group[2].empty() ? "ない" : "なかった"});
 }
 
+// The Kyoto どす of the copula after the ん of のです, and its past どした (やったんどす,
+// 覚えててくれはったんどすか): です, でした, where the copula ends the predicate: before the end, a
+// mark, a space or a sentence particle (え, か, な, ね, よ, わ, けど; not か after どした, nor って).
+// Elsewhere なんど is 何度 and す, した the verb (なんどすれば, なんどしたか). Not after the もん of
+// もの or the さん or はん of address (野暮っちゅうもんどす, おめでとうさんどす), whose ん is no の.
+bool KyotoDosu(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (head.ends_with("も") || head.ends_with("さ") || head.ends_with("は")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "んど")) return false;
+    for (const auto& [kyoto, standard] : {std::pair<std::string_view, std::string_view>{"す", "んです"}, {"した", "んでした"}}) {
+        size_t q = p;
+        if (!Lit(s, q, kyoto)) continue;
+        size_t r = q;
+        const bool ends = q == s.size() || OneOf(s, r, U"。｡、！!？?…‥」』）) 　＞>～ー");
+        bool particle = false;
+        for (const std::string_view w : {"え", "か", "な", "ね", "よ", "わ", "けど"}) {
+            size_t t = q;
+            particle = particle || (Lit(s, t, w) && !(kyoto == "した" && w == "か"));
+        }
+        if (!ends && !particle) return false;
+        m.group[1] = standard;
+        m.end = q;
+        return true;
+    }
+    return false;
+}
+
 bool ContractedToru(std::string_view s, size_t pos, Match& m) {
     auto rest = [&](size_t p) {
         m.group[1] = Span(s, pos, p);
@@ -698,6 +727,9 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && Contains(text, "へん")) text = ReplaceAll(text, KansaiNegative, ReplaceKansaiNegative);
     if (dialectForms && (Contains(text, "やろ") || Contains(text, "じゃろ"))) {
         text = ReplaceAll(text, KansaiConjecture, ReplaceKansaiConjecture);
+    }
+    if (dialectForms && Contains(text, "んど")) {
+        text = ReplaceAll(text, KyotoDosu, [](const Match& m) { return std::string(m.group[1]); });
     }
     if (dialectForms && (Contains(text, "と") || Contains(text, "ど")))
         text = ReplaceAll(text, ContractedToru, ReplaceContractedToru);

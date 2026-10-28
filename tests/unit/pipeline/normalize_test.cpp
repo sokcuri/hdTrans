@@ -1008,6 +1008,15 @@ HD_TEST(pipeline_kansai_verb_forms) {
         {"気に入ってくれとったよな。"sv, "気に入ってくれていたよな。"sv},
         {"くれとった"sv, "くれていた"sv},
         {"ちゃんと覚えとる！"sv, "ちゃんと覚えとる！"sv},
+        // The Kyoto どす of the copula after ん.
+        {"覚えててくれはったんどすか？"sv, "覚えててくれはったんですか？"sv},
+        {"やったんどした"sv, "やったんでした"sv},
+        {"混んどって"sv, "混んどって"sv},
+        {"おめでとうさんどす。"sv, "おめでとうさんどす。"sv},
+        {"野暮っちゅうもんどす｡"sv, "野暮っちゅうもんどす｡"sv},
+        {"なんどすれば"sv, "なんどすれば"sv},
+        {"なんどしたって"sv, "なんどしたって"sv},
+        {"なんどしたか"sv, "なんどしたか"sv},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(SpokenForms(c.in, false, true), std::string(c.want));
