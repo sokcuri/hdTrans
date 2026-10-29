@@ -951,6 +951,11 @@ void Composer::Compose(std::vector<ResolvedItem>& items, std::vector<TokenText>&
     EmitSynchronousOutput(tokens, first, last, settings, out);
 }
 
+namespace {
+void KeepParticlesWithCutWord(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens,
+                              std::span<tokenizer::ControlMarker> markers);
+}  // namespace
+
 void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes& nodes,
                                   std::vector<TokenText>& tokens, int first, int last,
                                   std::span<tokenizer::ControlMarker> markers,
@@ -963,6 +968,7 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
         if (settings.casual || settings.asked) WriteCasual(first, last);
     }
+    if (settings.markerBeforeWord) KeepParticlesWithCutWord(items, tokens, markers);
     for (int n = static_cast<int>(nodes.size()) - 1; n >= 0; n--) {
         const int begin = n > 0 ? nodes[n - 1] : 0;
         for (int index = nodes[n] - 1; index >= begin; index--) WriteItem(index, ClipsEnd(items, index, nodes[n]), markers);
@@ -982,7 +988,8 @@ void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector
             continue;
         }
         const std::string& written = tokens[t].text;
-        if (First(Code(item)) != '2' || written.empty() || written.front() == ' ') continue;
+        // A particle row written apart (Ha: まだ 아직) keeps the space (いえ まだです 아뇨 아직입니다).
+        if (First(Code(item)) != '2' || Contains(GAttr(item), "Ha") || written.empty() || written.front() == ' ') continue;
         space.text.clear();
     }
 }
@@ -1004,6 +1011,60 @@ bool WritesMarkerBefore(const ResolvedItem& item, std::string_view tokenText, in
         return false;
     }
     return headRunes < text::RuneCount(tail);
+}
+
+// A break of joined lines inside a word (ControlMarker::inWord) that keeps the word on the line before
+// (パーテ / ィーを 파티 / 를) moves past the particles and copulas in kana after the word in its token,
+// which go on the word's line (파티를 / 개최했다), unless only marks are left after them.
+void KeepParticlesWithCutWord(const std::vector<ResolvedItem>& items, const std::vector<TokenText>& tokens,
+                              std::span<tokenizer::ControlMarker> markers) {
+    for (tokenizer::ControlMarker& m : markers) {
+        if (m.markerKind != 1 || !m.inWord) continue;
+        for (int i = 0; i < static_cast<int>(items.size()); i++) {
+            const ResolvedItem& item = items[i];
+            if (item.tokenIndex != m.tokenIndex || m.textLength <= item.offset || m.textLength >= item.offset + item.length) {
+                continue;
+            }
+            bool last = true;
+            for (int k = i + 1; k < static_cast<int>(items.size()) && last; k++) {
+                last = items[k].tokenIndex != item.tokenIndex || First(Code(items[k])) == '6';
+            }
+            if (WritesMarkerBefore(item, tokens[item.tokenIndex].text, m.textLength, last)) break;
+            int end = i;
+            // A particle or copula written in kana, not a suffix noun (向け 전용).
+            const auto attached = [&](const ResolvedItem& p) {
+                if (First(Code(p)) != '2' || p.surface.empty()) return false;
+                for (std::size_t at = 0; at < p.surface.size();) {
+                    const text::Rune r = text::DecodeRune(std::string_view(p.surface).substr(at));
+                    if (r.cp < U'ぁ' || r.cp > U'ゖ') return false;
+                    at += std::max<std::size_t>(1, r.size);
+                }
+                return true;
+            };
+            while (end + 1 < static_cast<int>(items.size()) && items[end + 1].tokenIndex == item.tokenIndex &&
+                   items[end + 1].offset == items[end].offset + items[end].length && attached(items[end + 1])) {
+                end++;
+            }
+            // The next line keeps them when no letter or digit would be left for it, only marks (始ま / りです。).
+            const auto words = [](std::string_view s) {
+                for (std::size_t at = 0; at < s.size();) {
+                    const text::Rune r = text::DecodeRune(s.substr(at));
+                    if (text::IsLetter(r.cp) || text::IsDigit(r.cp)) return true;
+                    at += std::max<std::size_t>(1, r.size);
+                }
+                return false;
+            };
+            bool rest = words(std::string_view(tokens[item.tokenIndex].text)
+                                  .substr(std::min(tokens[item.tokenIndex].text.size(),
+                                                   static_cast<std::size_t>(items[end].offset + items[end].length))));
+            for (std::size_t t = static_cast<std::size_t>(item.tokenIndex) + 1; t < tokens.size() && !rest; t++) {
+                rest = words(tokens[t].text);
+            }
+            if (!rest) end = i;
+            if (end > i) m.textLength = items[end].offset + items[end].length;
+            break;
+        }
+    }
 }
 
 }  // namespace

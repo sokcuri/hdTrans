@@ -61,14 +61,28 @@ Pieces Cleanup(const std::vector<Sentence>& sentences, std::span<const std::stri
     Pieces out;
     Pieces got;
     int chunk = sentences.empty() ? 0 : sentences.front().chunk;
+    // A chunk after a phrase break that only kept a closing mark goes on from the one before (헤에?).
+    bool phrase = false;
+    const auto append = [&]() {
+        const std::string_view head = Head(got);
+        if (phrase && (StartsWith(head, "?") || StartsWith(head, "!"))) {
+            TrimRight(out);
+            TrimLeft(got);
+            Append(out, std::move(got));
+        } else {
+            AppendChunk(out, std::move(got));
+        }
+    };
     for (const auto& s : sentences) {
         if (s.chunk != chunk) {
-            AppendChunk(out, std::move(got));
+            append();
             got.clear();
             std::string gap;
             for (int c = chunk + 1; c <= s.chunk; c++) {
                 if (static_cast<size_t>(c) < gaps.size()) gap += gaps[static_cast<size_t>(c)];
             }
+            phrase = gap == kPhraseGap;
+            if (phrase) gap.clear();
             if (!gap.empty()) {
                 TrimRight(out);
                 out.push_back({std::move(gap), SpanGap});
@@ -77,7 +91,7 @@ Pieces Cleanup(const std::vector<Sentence>& sentences, std::span<const std::stri
         }
         AppendSentence(got, s.pieces);
     }
-    AppendChunk(out, std::move(got));
+    append();
     out = CleanupText(std::move(out));
     FixSpacing(out);
     return out;

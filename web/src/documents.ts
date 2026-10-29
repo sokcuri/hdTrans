@@ -47,30 +47,48 @@ function documentLines(v: string): string[] {
   return lines;
 }
 
+/** A run of output text; source is true for the source lines of the mixed modes. */
+export interface OutputPart {
+  text: string;
+  source: boolean;
+}
+
 /**
- * The output file text. Blank lines stay single in every mode; spaced puts a
- * blank line between pairs. If the line counts differ, mixed modes show the
- * whole source and the whole translation as one pair.
+ * The output file text in parts. Blank lines stay single in every mode; spaced
+ * puts a blank line between pairs. If the line counts differ, mixed modes show
+ * the whole source and the whole translation as one pair.
  */
-export function formatDocument(source: string, translated: string, mode: OutputMode): string {
+export function outputParts(source: string, translated: string, mode: OutputMode): OutputPart[] {
   const s = documentLines(source);
   const t = documentLines(translated);
   const pairs: [string, string][] = s.length === t.length ? s.map((line, i) => [line, t[i]]) : [[s.join('\n'), t.join('\n')]];
-  let out = '';
+  const parts: OutputPart[] = [];
+  const put = (text: string, isSource = false) => {
+    const last = parts[parts.length - 1];
+    if (last && last.source === isSource) last.text += text;
+    else if (text !== '') parts.push({ text, source: isSource });
+  };
   let hasLine = false;
   let hasPair = false;
   for (const [a, b] of pairs) {
-    if (hasLine) out += '\n';
+    if (hasLine) put('\n');
     if (a !== '' || b !== '') {
-      if (hasPair && mode === 'spaced') out += '\n';
-      if (mode !== 'translation') out += a + '\n';
-      out += b;
+      if (hasPair && mode === 'spaced') put('\n');
+      if (mode !== 'translation') put(a + '\n', true);
+      put(b);
       hasPair = true;
     }
     hasLine = true;
   }
-  if (hasLine && (source.endsWith('\n') || translated.endsWith('\n'))) out += '\n';
-  return out;
+  if (hasLine && (source.endsWith('\n') || translated.endsWith('\n'))) put('\n');
+  return parts;
+}
+
+/** The output file text: the parts of outputParts joined. */
+export function formatDocument(source: string, translated: string, mode: OutputMode): string {
+  return outputParts(source, translated, mode)
+    .map((p) => p.text)
+    .join('');
 }
 
 /** <stem>_번역.txt for the file name name. */

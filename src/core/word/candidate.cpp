@@ -1037,12 +1037,74 @@ Record* Worker::ProbeNumericPrefix(int token, std::string_view source, bool afte
     return LookupFallbackRecord(token, source.substr(0, prefix), left, right);
 }
 
+namespace {
+
+// A word the search placed without reading it: a hiragana or kanji character no dictionary
+// word covers.
+bool Unread(const Item* it) {
+    if (it->group == nullptr || it->group->entries.size() != 1) return false;
+    const Entry* e = it->group->entries.front();
+    const int typ = Classify(it->group->surface);
+    return e->field.empty() && Has(e->gattr, "Nm") && (typ == 13 || typ == 24);
+}
+
+}  // namespace
+
 // Splits a Japanese token into dictionary words, inserting each into the chain;
-// unknown characters become synthetic words.
+// unknown characters become synthetic words. A token the search leaves partly unread is
+// searched again with the shorter endings of verbs (ProcessCandidateRecord). The second
+// reading replaces the first when it reads the whole token and a verb with a shorter ending
+// reads a character the first left unread.
 void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
     transformSurface = surface;
     resumeCursor = -1;
+    Item* const mark = chain.tail;
     CoverSurface(token, surface, 0, nullptr);
+    if (!settings.text || !settings.improvements.shorterEndings) return;
+    // The items of this token follow the items of the tokens before it.
+    auto items = [&] { return mark != nullptr ? mark->next : chain.head; };
+    std::vector<const Item*> unread;
+    for (const Item* it = items(); it != nullptr; it = it->next) {
+        if (Unread(it)) unread.push_back(it);
+    }
+    if (unread.empty()) return;
+    Item* const firstHead = items();
+    Item* const firstTail = chain.tail;
+    auto cut = [&] {
+        if (mark != nullptr) mark->next = nullptr;
+        else chain.head = nullptr;
+        chain.tail = mark;
+    };
+    cut();
+    transformSurface = surface;
+    resumeCursor = -1;
+    shorterEndings = true;
+    shortenedVerbs.clear();
+    CoverSurface(token, surface, 0, nullptr);
+    shorterEndings = false;
+    bool reads = false, whole = true;
+    for (const Item* it = items(); it != nullptr; it = it->next) {
+        if (Unread(it)) whole = false;
+        if (std::find(shortenedVerbs.begin(), shortenedVerbs.end(), it) == shortenedVerbs.end()) continue;
+        // A verb in its dictionary form ends its clause or describes the noun after it; it goes on
+        // to no verb, which only its て or continuative form does (食うとる is not 食う and 取る).
+        const bool bare = it->detail->group == nullptr || it->detail->group->length <= 0;
+        if (bare && it->next != nullptr && At(it->next->Code(0), 0) == '4') whole = false;
+        // A shorter ending gives back kana the longer one took, so the second reading counts as reading
+        // more only where a shortened verb covers a hiragana the first left unread; an unread kanji is a
+        // word the dictionary lacks, which no ending reaches. Either kind left unread in the second
+        // reading makes it no whole reading.
+        for (const Item* u : unread) {
+            reads = reads || (Classify(u->group->surface) == 13 && it->start < u->start + u->length && u->start < it->start + it->length);
+        }
+    }
+    if (reads && whole) return;
+    cut();
+    if (firstHead == nullptr) return;
+    firstHead->prev = mark;
+    if (mark != nullptr) mark->next = firstHead;
+    else chain.head = firstHead;
+    chain.tail = firstTail;
 }
 
 void Worker::CoverSurface(int token, std::string_view full, int cursor, Item* parent) {
@@ -1367,7 +1429,15 @@ struct DepthScope {
 // A dictionary word that spells all the copies keeps them (いろいろ, はいはい); one that
 // spells only some of them does not (はい|はい|はい).
 std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
-    const Copies c = CopiesAt(text);
+    Copies c = CopiesAt(text);
+    // Copies written apart are the pieces between the source spaces (もしもし もしもし, not もし four times).
+    if (const std::size_t unit = CopyUnit(text); unit > c.unit && unit <= text.size()) {
+        c = {unit, 0, 1, unit};
+        while (text.substr(c.end).starts_with(text.substr(0, unit))) {
+            c.count++;
+            c.end += unit;
+        }
+    }
     if (c.count < 2) return 0;
     const std::string_view unit = text.substr(0, c.unit);
     const bool kanji = HasKanji(unit);
@@ -1601,6 +1671,33 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
     return records;
 }
 
+// Whether a small kana starts full[cursor:]: the ending ends inside a contraction (ときゃ), not
+// before a word.
+bool SmallKanaAt(std::string_view full, int cursor) {
+    const std::string_view rest = From(full, cursor);
+    return !rest.empty() && Has("ぁぃぅぇぉっゃゅょゎ", FirstChar(rest));
+}
+
+bool Worker::StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter) {
+    // The stem form of the first reading was checked against the ending and the text after it; the
+    // shorter reading is checked the same way against what is left of it, as the text ending after
+    // it: the form it reads there must be the same (傾げる before わたし is the dictionary form there
+    // too; 隠せ of 隠せぬ is the negative stem only before the ぬ, and no word without it).
+    const std::string_view cut = full.substr(0, static_cast<std::size_t>(cursor + shorter.length));
+    const Item* alone = InsertLateCandidate(cut, cursor, token, records);
+    auto ending = [](const Item& it) {
+        return it.detail->group == nullptr || it.detail->group->length <= 0 ? std::string_view() : std::string_view(it.detail->group->surface);
+    };
+    return alone != nullptr && alone->detail->cls == kDetailVerb && alone->length == shorter.length &&
+           alone->detail->kind == shorter.detail->kind && alone->detail->patternKind == shorter.detail->patternKind &&
+           ending(*alone) == ending(shorter) && alone->Code(0) == shorter.Code(0);
+}
+
+bool Worker::WordAt(std::string_view full, int cursor, int token) {
+    const Lookup l = DoLookup(From(full, cursor), kModeGeneral);
+    return l.count != 0 && InsertLateCandidate(full, cursor, token, l.records) != nullptr;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
@@ -1615,9 +1712,11 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
+    Record* from = records;
     while (settings.text && parent != nullptr && candidate != nullptr && DegreeNegativeAdnominal(*parent, *candidate, text)) {
         Record* remaining = candidate->group->records;
         candidate->group->records = nullptr;
+        from = remaining;
         candidate = InsertLateCandidate(full, cursor, token, remaining);
     }
     if (candidate == nullptr) {
@@ -1643,7 +1742,43 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     const int savedRetries = candidateRetryCount;
     if (settings.improvements.perLevelRetries) candidateRetryCount = 0;
-    const bool translated = TranslateCandidateAt(full, cursor + candidate->length, token, candidate);
+    bool translated = TranslateCandidateAt(full, cursor + candidate->length, token, candidate);
+    // A verb whose ending leaves text that no word reads takes the next shorter ending of
+    // the same stem before another stem is tried (読むのですぞ: 読む, の, ですぞ; not 読むのです
+    // and ぞ, then 読 as a noun).
+    while (!translated && shorterEndings && candidate->detail->cls == kDetailVerb && candidate->detail->group != nullptr &&
+           candidate->detail->group->length > 0 && !SmallKanaAt(full, cursor + candidate->length) &&
+           !WordAt(full, cursor + candidate->length, token)) {
+        const std::string_view longer = longerEnding;
+        longerEnding = candidate->detail->group->surface;
+        Item* shorter = InsertLateCandidate(full, cursor, token, from);
+        longerEnding = longer;
+        // Without an ending row the verb is kept only in its dictionary form, which ends a word before
+        // the next one (傾げる before わたし). A bare past or て form left before kana is mostly the head
+        // of a contracted ending (骨折れてんだぞ: てる and んだ, not 折れて and ん) or of another word
+        // (ウェーブがかった is 掛かった, not 買った).
+        const bool bare = shorter != nullptr && (shorter->detail->group == nullptr || shorter->detail->group->length <= 0);
+        // A stem of one hiragana with an ending of one kana is two kana that the words around them spell
+        // as well (いんだけど after a line cut in 忙し|い is not いる and ん); with a longer ending the
+        // shorter reading still shows the verb (いますよ, みましょうか).
+        auto twoKana = [&] {
+            const std::string_view form = From(full, cursor).substr(0, static_cast<std::size_t>(shorter->length));
+            const std::size_t ending = bare ? 0 : std::min(form.size(), shorter->detail->group->surface.size());
+            const std::string_view stem = form.substr(0, form.size() - ending);
+            return text::RuneCount(stem) == 1 && Classify(stem) == 13 && text::RuneCount(form) <= 2;
+        };
+        if (shorter == nullptr || twoKana() ||
+            shorter->detail->cls != kDetailVerb || shorter->group->surface != candidate->group->surface ||
+            shorter->EntryText(0) != candidate->EntryText(0) || shorter->Code(0) != candidate->Code(0) ||
+            shorter->length >= candidate->length || (bare && shorter->detail->kind != 0) ||
+            !StandsAlone(full, cursor, token, from, *shorter)) {
+            break;
+        }
+        candidate = shorter;
+        if (settings.improvements.perLevelRetries) candidateRetryCount = 0;
+        translated = TranslateCandidateAt(full, cursor + candidate->length, token, candidate);
+        if (translated) shortenedVerbs.push_back(candidate);
+    }
     if (settings.improvements.perLevelRetries) candidateRetryCount = savedRetries;
     if (translated) {
         Insert(candidate);
@@ -1793,6 +1928,7 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
             Detail* word = NewDetail(kDetailVerb, token);
             const int pattern = rec->partCode[3] - '0';
             word->patternKind = pattern;
+            word->dialect = settings.text && settings.improvements.dialectForms;
             Record* stop = nullptr;
             const bool ok = MatchConjugation(*word, text, offset, rec, stop);
             rec = stop;
@@ -1930,6 +2066,25 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
         const std::string_view rest = tail.substr(off);
         return WidthOf(rest) >= n ? Left(rest, n) : Window{};
     };
+    static constexpr int kKinds[] = {0, 9, 11, 13};
+    // The と form of する, くる or 来る before おる (切ってきとる, 勉強しとった), as of other verbs (MatchKind):
+    // their て form with と for its て.
+    for (int tableGroup = 1; settings.text && settings.improvements.dialectForms && tableGroup < 4; tableGroup++) {
+        const std::string_view te = PrefixForm(50 * tableGroup + 7);
+        const std::string to = std::string(te.substr(0, te.size() - kJaTe.size())) + std::string(kJaTo);
+        if (!tail.starts_with(to)) continue;
+        const Lookup found = DoLookup(PrefixForm(50 * tableGroup), kModePrefixVerb);
+        if (found.count == 0) continue;
+        Detail* verb = NewDetail(kDetailVerb, token);
+        verb->patternKind = kKinds[tableGroup];
+        verb->patternMatched = 1;
+        verb->dialect = true;
+        verb->patternLength = static_cast<int>(to.size());
+        Group* group = NewGroup(found.records, static_cast<char>(kBranchTo + '0'));
+        Item* candidate = NewItem(verb, group, text, offset, token);
+        verb->kind = kBranchTo;
+        if (candidate->AcceptVerbContinuation(group->records)) return candidate;
+    }
     for (int tableGroup = 1; tableGroup < 4; tableGroup++) {
         for (int entry = 0; entry < kConjugationBranches; entry++) {
             const std::string_view prefix = PrefixForm(50 * tableGroup + entry);
@@ -1971,9 +2126,9 @@ Item* Worker::QueryPrefixTable(std::string_view text, int offset, int token) {
             const Lookup found = DoLookup(PrefixForm(50 * tableGroup), kModePrefixVerb);
             if (found.count == 0) continue;
             Detail* verb = NewDetail(kDetailVerb, token);
-            static constexpr int kKinds[] = {0, 9, 11, 13};
             verb->patternKind = kKinds[tableGroup];
             verb->patternMatched = 1;
+            verb->dialect = settings.text && settings.improvements.dialectForms;
             verb->patternLength = static_cast<int>(PrefixForm(50 * tableGroup + entry).size());
             Group* group = NewGroup(found.records, static_cast<char>(verb->kind + '0'));
             Item* candidate = NewItem(verb, group, text, offset, token);

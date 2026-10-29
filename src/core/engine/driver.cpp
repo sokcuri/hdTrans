@@ -27,6 +27,7 @@
 #include "core/pipeline/sound.h"
 #include "core/pipeline/speech.h"
 #include "core/tokenizer/tokenize.h"
+#include "core/text/hangul.h"
 #include "core/text/lines.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -341,6 +342,63 @@ std::vector<tokenizer::Piece> TokenizerPieces(const output::Pieces& pieces) {
     return out;
 }
 
+// A word that ends where the source had a space between two copies (tokenizer::CopySpace) keeps
+// that space before the next word, also where the last copy ends its token before a word after a
+// source space (えっ えっ それは 어 어 그것은). A word that spells two or more such copies and reads
+// as one copy's Korean or its sound said as often (毎日毎日 매일매일, プリプリプリ 프리프리프리) is
+// written with a space between the copies (매일 매일); not where that Korean is no reading of the copy
+// (これこれ 이러이러).
+void MarkCopySpaces(const dict::Snapshot& snap, const dict::LookupContext& lookup, const tokenizer::Tokens& tokens,
+                    std::vector<output::ResolvedItem>& items) {
+    if (tokens.copySpaces.empty()) return;
+    for (std::size_t k = 0; k < items.size(); k++) {
+        output::ResolvedItem& it = items[k];
+        if (it.tokenIndex < 0 || static_cast<std::size_t>(it.tokenIndex) >= tokens.size()) continue;
+        const auto t = static_cast<std::size_t>(it.tokenIndex);
+        const std::size_t unit = tokens.CopyUnitAt(t, static_cast<std::size_t>(it.offset));
+        std::string& ko = it.entry.text;
+        if (unit > 0 && it.length > static_cast<int>(unit) && it.length % unit == 0 && it.surface.size() == static_cast<std::size_t>(it.length)) {
+            const std::size_t copies = static_cast<std::size_t>(it.length) / unit;
+            bool apart = true;
+            for (std::size_t c = 1; c < copies && apart; c++) {
+                apart = tokens.CopySpaceAt(t, static_cast<std::size_t>(it.offset) + c * unit) &&
+                        it.surface.compare(c * unit, unit, it.surface, 0, unit) == 0;
+            }
+            const std::u32string rs = pipeline::internal::DecodeText(ko);
+            const std::size_t part = rs.size() / copies;
+            apart = apart && part > 0 && rs.size() % copies == 0 &&
+                    std::all_of(rs.begin(), rs.end(), [](char32_t r) { return r >= text::kBase && r <= text::kLast; });
+            for (std::size_t c = 1; c < copies && apart; c++) apart = rs.compare(c * part, part, rs, 0, part) == 0;
+            if (apart) {
+                const std::string copy = it.surface.substr(0, unit);
+                const std::string half = pipeline::internal::EncodeText(rs.substr(0, part));
+                // A katakana run written as heard (Nm: プリ 프리), the copy as heard (コッ 콧) or a reading
+                // of it (毎日 매일).
+                bool reads = it.entry.gattr.find("Nm") != std::string::npos || pipeline::internal::ReadKana(copy) == half;
+                for (const dict::Candidate& c : snap.GetWordInfo(copy, dict::LookupMode::General, lookup).list) {
+                    reads = reads || (c.source == copy && c.target == half);
+                }
+                if (reads) {
+                    ko = half;
+                    for (std::size_t c = 1; c < copies; c++) ko += " " + half;
+                }
+            }
+        }
+        if (k + 1 == items.size()) continue;
+        const output::ResolvedItem& next = items[k + 1];
+        const auto end = static_cast<std::size_t>(it.offset + it.length);
+        if (next.tokenIndex == it.tokenIndex && static_cast<std::size_t>(next.offset) == end) {
+            if (tokens.CopySpaceAt(t, end)) it.spaceAfter = true;
+        } else if (next.tokenIndex == it.tokenIndex + 1 && next.offset == 0 && tokens[t + 1].afterSpace &&
+                   end == tokens.Raw(t).size()) {
+            // The last copy of a run ends the token.
+            for (auto c = tokens.FirstCopySpace(t, 0); c != tokens.copySpaces.end() && c->tokenIndex == it.tokenIndex; ++c) {
+                it.spaceAfter = it.spaceAfter || c->at + c->unit == end;
+            }
+        }
+    }
+}
+
 // Each Japanese token of the sentence first..last that goes on after a space parting two words
 // (Token::afterSpace) joined back to the Japanese token before it, so that the compose stage
 // writes them as the one token they were typed as: its text, items and markers move into that
@@ -545,13 +603,14 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
 // Adds a "&#CS" control marker to tokens for each byte offset of breaks in the text they were
 // scanned from: inside the token that holds the offset, else after the last word before it, else
 // before the first word after it.
-void AddBreakMarkers(tokenizer::Tokens& tokens, std::span<const std::size_t> breaks) {
+void AddBreakMarkers(tokenizer::Tokens& tokens, std::span<const std::size_t> breaks, std::span<const char> inWord) {
     const auto word = [&](std::size_t t) {
         const int type = tokens.TypeAfter(t);
         return type != tokenizer::kTypeEnd && type != tokenizer::kTypeMarkup && type != tokenizer::kTypeAsciiSpace &&
                type != tokenizer::kTypeWideSpace && !tokens.Merged(t).empty();
     };
-    for (const std::size_t at : breaks) {
+    for (std::size_t b = 0; b < breaks.size(); b++) {
+        const std::size_t at = breaks[b];
         int index = -1, length = 0;
         for (std::size_t t = 0; t < tokens.size() && index < 0; t++) {
             const tokenizer::Token& token = tokens[t];
@@ -583,7 +642,7 @@ void AddBreakMarkers(tokenizer::Tokens& tokens, std::span<const std::size_t> bre
         for (std::size_t t = 0; t < tokens.size() && index < 0; t++) {
             if (word(t)) index = static_cast<int>(t);
         }
-        if (index >= 0) tokens.markers.push_back({index, length, 1});
+        if (index >= 0) tokens.markers.push_back({index, length, 1, b < inWord.size() && inWord[b] != 0});
     }
     std::stable_sort(tokens.markers.begin(), tokens.markers.end(),
                      [](const tokenizer::ControlMarker& a, const tokenizer::ControlMarker& b) {
@@ -591,10 +650,17 @@ void AddBreakMarkers(tokenizer::Tokens& tokens, std::span<const std::size_t> bre
                      });
 }
 
+// The span piece of break k of joined lines.
+std::string_view BreakSpan(std::span<const char> cutBreaks, std::size_t k) {
+    return k < cutBreaks.size() && cutBreaks[k] != 0 ? kCutBreakSpan : kBreakSpan;
+}
+
 // marked with a kBreakSpan piece where each line of lines (the marked texts of joined lines through
 // the stages one by one) ends: after the lines up to it when they start marked, else before the
 // lines after it when they end it. None when a break falls in neither way or inside a span.
-std::optional<output::Pieces> BreakAt(const output::Pieces& marked, std::span<const std::string> lines) {
+// cutBreaks says which breaks fall inside a word (kCutBreakSpan).
+std::optional<output::Pieces> BreakAt(const output::Pieces& marked, std::span<const std::string> lines,
+                                      std::span<const char> cutBreaks) {
     const std::string whole = output::String(marked);
     std::vector<std::size_t> breaks;
     for (std::size_t k = 0; k + 1 < lines.size(); k++) {
@@ -618,7 +684,7 @@ std::optional<output::Pieces> BreakAt(const output::Pieces& marked, std::span<co
             const std::size_t cut = breaks[next] - pos;
             if (p.span != output::SpanText && cut > 0 && cut < p.text.size()) return std::nullopt;
             if (cut > from) out.push_back({p.text.substr(from, cut - from), p.span});
-            out.push_back({std::string(kBreakSpan), output::SpanOpen});
+            out.push_back({std::string(BreakSpan(cutBreaks, next)), output::SpanOpen});
             from = cut;
         }
         if (from < p.text.size() || (from == 0 && p.text.empty())) out.push_back({p.text.substr(from), p.span});
@@ -637,12 +703,14 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     s.texts.clear();
     // Joined wrapped lines: the break spans become break markers at their places in the tokens.
     std::vector<std::size_t> breaks;
+    std::vector<char> inWord;
     output::Pieces unbroken;
     if (options.joinedLines) {
         std::size_t at = 0;
         for (const output::Piece& p : chunk) {
-            if (p.span == output::SpanOpen && p.text == kBreakSpan) {
+            if (p.span == output::SpanOpen && (p.text == kBreakSpan || p.text == kCutBreakSpan)) {
                 breaks.push_back(at);
+                inWord.push_back(p.text == kCutBreakSpan);
                 continue;
             }
             if (p.span == output::SpanText) {
@@ -716,7 +784,9 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         return false;
     };
     tokenizer::TokenizeSpans(pieces, text, s.tokens, text && !options.reference ? &joins : nullptr);
-    if (!breaks.empty()) AddBreakMarkers(s.tokens, breaks);
+    if (!breaks.empty()) {
+        AddBreakMarkers(s.tokens, breaks, inWord);
+    }
     if (observer.tokens) observer.tokens(observer.context, index, s.tokens);
 
     word::Analysis analysis;
@@ -756,6 +826,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             ResolveSentence(program, generated.families, analysis, k);
             if (observer.resolved) observer.resolved(observer.context, index, static_cast<int>(k), sentence.chain);
             ResolvedItems(sentence.chain, s.items);
+            MarkCopySpaces(snap, lookup, s.tokens, s.items);
             BuildTexts(s.tokens, analysis, sentence.first, sentence.last, s.texts);
             s.markers.assign(s.tokens.markers.begin() + sentence.markerBegin,
                              s.tokens.markers.begin() + sentence.markerEnd);
@@ -830,13 +901,13 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             std::string partNormalized, partSounded;
             front(pipeline::ReadLine(doc, parts[k]).text, partTyped, partMarkedPieces, partNormalized, partSounded);
             partMarked.push_back(output::String(partMarkedPieces));
-            if (k > 0) partsMarked.push_back({std::string(kBreakSpan), output::SpanOpen});
+            if (k > 0) partsMarked.push_back({std::string(BreakSpan(options.cutBreaks, k - 1)), output::SpanOpen});
             output::Append(partsMarked, std::move(partMarkedPieces));
             output::Append(partsTyped, std::move(partTyped));
             partsNormalized += partNormalized;
             partsSounded += partSounded;
         }
-        std::optional<output::Pieces> broken = BreakAt(marked, partMarked);
+        std::optional<output::Pieces> broken = BreakAt(marked, partMarked, options.cutBreaks);
         if (broken) {
             marked = std::move(*broken);
         } else {
@@ -885,11 +956,13 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
-            if (!gaps[i].empty()) before.clear();  // a column starts as a line does
+            if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
             TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
                            generated, watch, opts, sentences);
             std::string chunkText = output::String(chunks[i]);
-            for (std::size_t at; (at = chunkText.find(kBreakSpan)) != std::string::npos;) chunkText.erase(at, kBreakSpan.size());
+            for (const std::string_view span : {kBreakSpan, kCutBreakSpan}) {
+                for (std::size_t at; (at = chunkText.find(span)) != std::string::npos;) chunkText.erase(at, span.size());
+            }
             pass.quotes = output::QuotesAfter(pass.quotes, chunkText);
             if (const std::string_view t = word::TrimRunes(chunkText, " 　"); !t.empty()) before = word::LastChar(t);
         }
@@ -967,6 +1040,49 @@ void WatchEdges(void* context, int, int, const word::Chain& chain) {
     AddWrapEdges(watch->items, watch->edges);
 }
 
+// Watches two joined lines (MayCutWord) for a word read across their break: a word the dictionary
+// or a conjugation read (ReadWord) that starts before the break, holds the break in its stem or
+// conjugation, not in the ending after them (思います / よう), covers the unread kana after the break
+// and makes a stem with them (CutStem).
+struct CutWatch {
+    std::string run;  // the unread kana after the break (WrapEdges::unreadStart)
+    char32_t after = 0;  // the character after run
+    // The break markers of each chunk, with the text of the token each stands in.
+    std::vector<std::vector<std::pair<tokenizer::ControlMarker, std::string>>> markers;
+    std::vector<output::ResolvedItem> items;
+    bool across = false;
+};
+
+void WatchCutTokens(void* context, int chunk, const tokenizer::Tokens& tokens) {
+    auto* watch = static_cast<CutWatch*>(context);
+    if (chunk < 0) return;
+    if (watch->markers.size() <= static_cast<std::size_t>(chunk)) watch->markers.resize(static_cast<std::size_t>(chunk) + 1);
+    watch->markers[static_cast<std::size_t>(chunk)].clear();
+    for (const tokenizer::ControlMarker& m : tokens.markers) {
+        if (m.markerKind == 1 && m.tokenIndex >= 0 && static_cast<std::size_t>(m.tokenIndex) < tokens.size()) {
+            watch->markers[static_cast<std::size_t>(chunk)].emplace_back(m, std::string(tokens.Merged(static_cast<std::size_t>(m.tokenIndex))));
+        }
+    }
+}
+
+void WatchCutWords(void* context, int chunk, int, const word::Chain& chain) {
+    auto* watch = static_cast<CutWatch*>(context);
+    if (chunk < 0 || static_cast<std::size_t>(chunk) >= watch->markers.size()) return;
+    ResolvedItems(chain, watch->items);
+    for (const output::ResolvedItem& it : watch->items) {
+        for (const auto& [m, token] : watch->markers[static_cast<std::size_t>(chunk)]) {
+            if (it.tokenIndex == m.tokenIndex && it.offset < m.textLength &&
+                static_cast<std::size_t>(it.offset + it.length) >= m.textLength + watch->run.size() && ReadWord(it) &&
+                // The break falls in the stem or its conjugation, not in the ending after them (思います / よう).
+                m.textLength - it.offset <= it.length - static_cast<int>(it.endingSurface.size()) &&
+                CutStem(std::string_view(token).substr(std::min<std::size_t>(it.offset, token.size()),
+                                                       static_cast<std::size_t>(m.textLength - it.offset)), watch->run, watch->after)) {
+                watch->across = true;
+            }
+        }
+    }
+}
+
 // The most lines one sentence is joined from.
 constexpr std::size_t kMaxJoined = 12;
 
@@ -1036,10 +1152,47 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
     }
+    // Whether line k and the next one are read with a word across their break (始め / るとか), read as the
+    // joined lines are: with the white space before line k when it starts them.
+    const auto readAcross = [&](std::size_t k, bool starts) {
+        if (!MayCutWord(lines[k], lines[k + 1], edges[k + 1])) return false;
+        const LineParts head = PartsOf(bare[k]);
+        const std::vector<std::string> texts{std::string(starts ? head.lead : std::string_view()) + std::string(head.body),
+                                             std::string(PartsOf(bare[k + 1]).body)};
+        CutWatch watch;
+        watch.run = edges[k + 1].unreadStart;
+        const std::string_view rest = std::string_view(texts[1]).substr(std::min(watch.run.size(), texts[1].size()));
+        watch.after = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+        StageObserver cutObserver;
+        cutObserver.context = &watch;
+        cutObserver.tokens = WatchCutTokens;
+        cutObserver.resolved = WatchCutWords;
+        static constexpr char kInWord[] = {1};
+        TranslationOptions joinedOptions = options;
+        joinedOptions.joinedLines = true;
+        joinedOptions.cutBreaks = kInWord;
+        joinedOptions.ruleTally = nullptr;
+        word::SessionSenses* const senses = s.sessionSenses;
+        s.sessionSenses = nullptr;
+        TranslateRubyBody(snap, doc, texts[0] + texts[1], used[k], s, generated, cutObserver, joinedOptions,
+                          narratedOf(lines[k]) || narratedOf(lines[k + 1]), texts);
+        s.sessionSenses = senses;
+        return watch.across;
+    };
     std::vector<std::string> out(lines.size());
     for (std::size_t i = 0; i < lines.size();) {
         std::size_t j = i;
-        while (j + 1 < lines.size() && j + 1 - i < kMaxJoined && GoesOn(lines[j], edges[j], lines[j + 1], edges[j + 1])) j++;
+        std::vector<char> cuts;
+        while (j + 1 < lines.size() && j + 1 - i < kMaxJoined) {
+            if (GoesOn(lines[j], edges[j], lines[j + 1], edges[j + 1])) {
+                cuts.push_back(0);
+            } else if (readAcross(j, j == i)) {
+                cuts.push_back(1);
+            } else {
+                break;
+            }
+            j++;
+        }
         std::vector<std::string> pieces;
         std::vector<LineParts> parts;
         if (j > i && j >= context) {
@@ -1055,6 +1208,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             }
             TranslationOptions joinedOptions = options;
             joinedOptions.joinedLines = true;
+            joinedOptions.cutBreaks = cuts;
             if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
             pieces = SplitAtBreaks(
                 TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),

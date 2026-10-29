@@ -28,6 +28,7 @@
 学生やな	학생이네	end	prio=-1
 学生やなあ	학생이구나	end	prio=-1
 学生やろ	학생이지	end	prio=-1
+学生やろが	학생이잖아	end	prio=-1
 学生やで	학생이야	end	prio=-1
 学生やねん	학생이거든	end	prio=-1
 学生やん	학생이잖아	end	prio=-1
@@ -36,6 +37,7 @@
 静かやな	조용하네	end	prio=-1
 静かやなあ	조용하구나	end	prio=-1
 静かやろ	조용하지	end	prio=-1
+静かやろが	조용하잖아	end	prio=-1
 静かやで	조용해	end	prio=-1
 静かやねん	조용하거든	end	prio=-1
 静かやん	조용하잖아	end	prio=-1
@@ -45,6 +47,8 @@
 書いたんやな	썼구나	end	prio=-1
 書くんやろ	쓰는 거지	end	prio=-1
 書いたんやろ	쓴 거지	end	prio=-1
+書くんやろが	쓰는 거잖아	end	prio=-1
+書いたんやろが	쓴 거잖아	end	prio=-1
 書くんやろう	쓰는 걸까	end	prio=-1
 書くんやろな	쓰는 걸까	end	prio=-1
 書くんやろなあ	쓰는 걸까	end	prio=-1
@@ -52,12 +56,16 @@
 高いんや	높은 거야	end	prio=-1
 高いんやな	높구나	end	prio=-1
 高いんやろ	높은 거지	end	prio=-1
+高いんやろが	높은 거잖아	end	prio=-1
 高いやん	높잖아	end	prio=-1
 書くやん	쓰잖아	end	prio=-1
 書いたやん	썼잖아	end	prio=-1
 書くやろ	쓰겠지	end	prio=-1
 書いたやろ	썼지	end	prio=-1
 高いやろ	높지	end	prio=-1
+書くやろが	쓰잖아	end	prio=-1
+書いたやろが	썼잖아	end	prio=-1
+高いやろが	높잖아	end	prio=-1
 学生じゃけえ	학생이니까	end	prio=-1
 学生じゃけん	학생이니까	end	prio=-1
 書くけえ	쓸 테니까	end	prio=-1
@@ -229,6 +237,10 @@
 書いたじゃろう	썼겠지	end	prio=-1
 高いじゃろう	높겠지	end	prio=-1
 書くじゃろ	쓰겠지	end	prio=-1
+学生じゃろうが	학생이잖아	end	prio=-1
+書くじゃろうが	쓰잖아	end	prio=-1
+書いたじゃろうが	썼잖아	end	prio=-1
+高いじゃろうが	높잖아	end	prio=-1
 学生じゃった	학생이었지	end	prio=-1
 書くわい	쓴다네	end	prio=-1
 書いたわい	썼구먼	end	prio=-1

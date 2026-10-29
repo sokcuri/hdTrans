@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { crc32 as zlibCrc32, inflateRawSync } from 'node:zlib';
 
-const { decodeText, formatDocument, outputName, encodeOutput, crc32, zip } = await import(
+const { decodeText, formatDocument, outputParts, outputName, encodeOutput, crc32, zip } = await import(
   new URL('../../build/web/documents.js', import.meta.url).href
 );
 
@@ -52,6 +52,15 @@ test('formatDocument matches the Windows window with blank lines kept single', (
   for (const [source, translated, ...want] of cases) {
     assert.deepEqual(['translation', 'interleaved', 'spaced'].map((m) => formatDocument(source, translated, m)), want, source);
   }
+});
+
+test('outputParts marks the source lines of the mixed modes', () => {
+  const parts = (source, translated, mode) => outputParts(source, translated, mode).map((p) => [p.source, p.text]);
+  assert.deepEqual(parts('学生\n\nASCII\n', '학생님\n\nASCII\n', 'translation'), [[false, '학생님\n\nASCII\n']]);
+  assert.deepEqual(parts('学生\n\nASCII\n', '학생님\n\nASCII\n', 'spaced'),
+    [[true, '学生\n'], [false, '학생님\n\n\n'], [true, 'ASCII\n'], [false, 'ASCII\n']]);
+  assert.deepEqual(parts('a\nb', '가나', 'interleaved'), [[true, 'a\nb\n'], [false, '가나']]);
+  assert.deepEqual(parts('', '', 'interleaved'), []);
 });
 
 test('outputName adds _번역.txt to the stem', () => {

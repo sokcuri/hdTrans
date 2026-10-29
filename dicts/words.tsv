@@ -320,6 +320,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お陰さまで	덕분입니다	A9D0	UTs		GN				llm		おかげさまで	w:316
 お陰で	덕분에	A9D0			GN				llm		おかげで	w:317
 お願いします	부탁드립니다	A9D0			GN				llm		おねがいします	w:318
+おねがいします	부탁드립니다	A9D0			GN						おねがいします	w:28971
 お飯	밥	N110			GN						おまんま	w:319
 お馴染み	낯익은	N110			GN				xxx llm		おなじみ	w:320
 お馴染み	단골	N110	VHn		GN				llm		おなじみ	w:321
@@ -15108,6 +15109,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 宜しくお願い致します	잘 부탁드립니다	A9D0			GN				xxx llm		よろしくおねがいいたします	w:15072
 宜しくお願い致します	부탁드립니다	A9D0			GN				llm		よろしくおねがいいたします	w:15073
 宜しくね	잘 부탁해	A9D0			GN				llm			w:15074
+よろしくな	잘 부탁해	A9D0			GN						よろしくな	w:28968
+よろしくよ	잘 부탁해	A9D0			GN						よろしくよ	w:28969
+宜しくな	잘 부탁해	A9D0			GN						よろしくな	w:28970
+よろしくいたします	잘 부탁드립니다	A9D0			GN						よろしくいたします	w:28972
+よろしく致します	잘 부탁드립니다	A9D0			GN						よろしくいたします	w:28973
 宜しければ	괜찮으시다면	A9D0			GN				llm		よろしければ	w:15075
 宝剣	보검	N110			GN						ほうけん	w:15076
 宝瓶宮	보병궁	N110			GN						ほうへいきゅう	w:15077
@@ -26407,7 +26413,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 １面	일면	N110			GN						いちめん	w:26361
 １０	십	N110			GN						じゅう	w:26362
 １０人	열 명	N110	VHn		GN				llm		じゅうにん	w:26363
-１０代	십대	N110			GN						じゅうだい	w:26364
+１０代	십대	N110		Nd	GN						じゅうだい	w:26364
 １０分	십 분	N110	UMe	Tm	GN				llm		じゅっぷん	w:26365
 １０日	열흘	N110			GN						とおか	w:26366
 １０月	시월	N110			GN				xxx		じゅうがつ	w:26367
@@ -27137,3 +27143,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 親を養	부모를 부양&AV@	M410			GN							w:28954
 無さそう	없을 것 %B3@	G8U0			GN							w:28956
 察しろっての	눈치 좀 채라니까	A9D0			GN							w:28957
+年半ば	년 중반	N110	UMe	Ct	GN							w:28958
+年半ばかり	년반 정도	N110		Ct	GN							w:28959
+志半ばで	뜻을 이루지 못하고	E300			GN							w:28960
+志半ばにして	뜻을 이루지 못하고	E300			GN							w:28961
+道半ばで	도중에	E300			GN							w:28962
+道半ばにして	도중에	E300			GN							w:28963
+道半ば	도중	N110	UMe		GN							w:28964
+その道半ばで	그 도중에	E300			GN							w:28965
+半ばかり	반 정도	N110		Tu	GN	8643	||2 &&2 G-1== "Ct" G-2== "NjNdCt" &&2 S-1== "R年" G-1== "NjNd"	수량 뒤의 半ばかり는 그 수량에 붙여 쓰는 ‘반 정도’로 고른다(三年半ばかり 3년반 정도).				w:28966
+半ばかり	반 정도	N110	XXX		GN							w:28967

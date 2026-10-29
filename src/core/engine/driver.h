@@ -108,6 +108,8 @@ struct TranslationOptions {
     bool wrapped = false;
     // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).
     bool joinedLines = false;
+    // For each break of the joined lines, whether it falls inside a word (kCutBreakSpan).
+    std::span<const char> cutBreaks;
     // The characters the pre-filter writes before kana (filter::Filters::Written) that none of the
     // call's lines held before it; TranslateDocument sets them.
     std::span<const char32_t> filterWritten;

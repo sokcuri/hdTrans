@@ -156,7 +156,8 @@ std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool 
 // dash with a small っ (あれ、 あれっ、, え―― えっ――, えぇ？ えっ？), but not あれ when a
 // particle follows its …‥ or dash run
 // (あれ――は何だ), え after an ellipsis or a dash before a question mark as えっ
-// (へ……え？ へ……えっ？), じゃあ before a word with a comma (じゃあどっち じゃあ、どっち).
+// (へ……え？ へ……えっ？), じゃあ before a word with a comma that reads as a pause and is not
+// written (output::kSilentComma: じゃあどっち じゃあ、どっち 그럼 어느 쪽).
 std::string RewriteInterjections(std::string_view text);
 
 // Words said with an emphatic っ or ん inside written plain (さっすが さすが, しっかたない
@@ -167,8 +168,10 @@ std::string RewriteEmphaticSpellings(std::string_view text);
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,
 // やらねー やらない, 渡しちまった 渡しちゃった, なめんなよ なめるなよ, 貰っとく 貰っておく,
 // 置いてく 置いていく, 行くんすか 行くんですか, わかるっス わかるっす, そだね そうだね). With runs.holds,
-// a contracted ておく that a dictionary word holds stays as written (言っとくけど).
-std::string RewriteCasual(std::string_view text, const RunLookup& runs = {});
+// a contracted ておく that a dictionary word holds stays as written (言っとくけど). With contracted
+// (the dialect and contracted forms of the line), てんす is てるんです and ないんす after a noun
+// ないんです, and まへんな keeps its な.
+std::string RewriteCasual(std::string_view text, const RunLookup& runs = {}, bool contracted = true);
 
 // Four words of the military time in digits (マルフタマルマル 0200, ヒトヨン、マルマル
 // 1400, ヒトハチ～マルマル 1800, マルサン…マルマル 0300) when no kana follows, or when

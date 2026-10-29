@@ -2464,6 +2464,14 @@ std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const d
             if (!space(rs[k])) joined.push_back(rs[k]);
         }
         if (std::all_of(joined.begin(), joined.end(), [](char32_t c) { return IsKanjiRune(c); })) continue;
+        // The same piece of two characters said again (はぁ　はぁ　はぁ) is copies of a sound, no word
+        // spaced out; copies of one kana are WriteSpacedCopies'.
+        bool copies = ends[0] - i >= 2;
+        for (size_t k = 1; k < ends.size() && copies; k++) {
+            copies = std::u32string_view(rs).substr(ends[k - 1] + 1, ends[k] - ends[k - 1] - 1) ==
+                     std::u32string_view(rs).substr(i, ends[0] - i);
+        }
+        if (copies) continue;
         // Katakana that starts the run is a key of the dictionary; the rest reads as words in
         // hiragana, and is no list, label's choices or name only.
         size_t kata = 0;

@@ -405,6 +405,19 @@ HD_TEST(compose_hada_noun_before_suru) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+// The copula verb after a noun (でござ &Ac@) takes 에 before 요 and its stem alone before 군, as
+// the copula after a noun does (학생이에요, 저예요, 학생이군).
+HD_TEST(compose_copula_verb_forms) {
+    const CompositionCase cases[] = {
+        {{{"学生", "110", "", "학생"}, {"でござ", "4U8", "PjTu", "&Ac@", "6요"}}, {1, 2}, "학생이에요."},
+        {{{"私", "120", "", "저"}, {"でござ", "4U8", "PjTu", "&Ac@", "6요"}}, {1, 2}, "저예요."},
+        {{{"学生", "110", "", "학생"}, {"でござ", "4U8", "PjTu", "&Ac@", "0군"}}, {1, 2}, "학생이군."},
+        {{{"学生", "110", "", "학생"}, {"でござ", "4U8", "PjTu", "&Ac@", "7니다"}}, {1, 2}, "학생입니다."},
+        {{{"学生", "110", "", "학생"}, {"でござ", "4U8", "PjTu", "&Ac@", "5습니다"}}, {1, 2}, "학생이었습니다."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 // 아니다 takes 라 before the quoting endings (아니라고, 아니라는, 아니라면); other adjectives keep 다.
 HD_TEST(compose_ani_quoting_form) {
     const CompositionCase cases[] = {

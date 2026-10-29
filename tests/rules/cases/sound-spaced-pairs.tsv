@@ -1,0 +1,14 @@
+# 규칙: SND-2, LAY-2
+rule	input	expected	kind	layer
+sound:spaced-pairs	ない ない ない ない｡	아냐 아냐 아냐 아냐.	fix	sound
+sound:spaced-pairs	おお…｡ ない ない ない｡	오오…. 아냐 아냐 아냐.	fix	sound
+sound:spaced-pairs	これが　東京駅？そう　そう　そう！	이것이 도쿄역? 맞아 맞아 맞아!	fix	sound
+sound:spaced-pairs	こら こら こら｡	이봐 이봐 이봐.	fix	sound
+sound:spaced-pairs	おい おい！	이봐 이봐!	fix	sound
+sound:spaced-pairs	そうです　そうです。　こっち。	그렇습니다 그렇습니다. 여기.	keep	sound
+sound:spaced-pairs	お～　よし　よし　よし。	오~ 좋아 좋아 좋아.	keep	sound
+sound:spaced-pairs	ハァ ハァ	하아 하아	keep	sound
+sound:spaced-pairs	財布が、ない ない！	lacks:아냐	keep	sound
+sound:spaced-pairs	ないない	아냐 아냐	keep	sound
+sound:spaced-pairs	ドンドン	점점	keep	sound
+sound:spaced-pairs	そうそう そうそう	맞아 맞아 맞아 맞아	keep	sound

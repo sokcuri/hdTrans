@@ -1,0 +1,32 @@
+# 규칙: LEX-50
+rule	input	expected	kind	layer
+cx:regards:10	乙姫さまによろしくな	용녀님에게 안부 전해 줘	fix	rewrites
+cx:regards:10	じゃあ、先生によろしくね。	그럼, 선생님에게 안부 전해 줘.	fix	rewrites
+cx:regards:10	………。先生によろしくね……。	has:선생님에게 안부 전해 줘	fix	rewrites
+cx:regards:10	『そうなんだ。おばさんによろしくね』	『그렇구나. 아줌마에게 안부 전해 줘』	fix	rewrites
+cx:regards:10	編集長によろしく。	편집장에게 안부 전해 줘.	fix	rewrites
+cx:regards:10	長谷川さんによろしく｡ はい｡	하세가와 씨에게 안부 전해 줘. 네.	fix	rewrites
+cx:regards:10	｢邦子さんに よろしく｣か…	has:쿠니코 씨에게 안부 전해 줘	fix	rewrites
+cx:regards:10	お母さんに よろしくね	엄마에게 안부 전해 줘	fix	rewrites
+cx:regards:10	親御さんによろしくな	rule:cx:regards:10=안부 전해 줘	fix	rewrites
+cx:regards:10	「じゃあね、また連絡するからね。タナトスちゃんにもよろしくね」	has:타나토스짱에게도 안부 전해 줘」	fix	rewrites
+cx:regards:10	──じゃ、ジュリちゃんたちにもよろしくね！	has:쥬리짱들에게도 안부 전해 줘!	fix	rewrites
+cx:regards:10	「絵本研究会の皆さんにもよろしく」	has:여러분에게도 안부 전해 줘」	fix	rewrites
+cx:regards:10	奥さんによろしく	부인에게 안부 전해 줘	fix	rewrites
+cx:regards:10	この件についてはよろしく	!rule:cx:regards:10	keep	local
+cx:regards:10	「あたしはライアだ。ほどほどによろしく」	!rule:cx:regards:10	keep	local
+cx:regards:10	じゃあまた次の機会によろしく、だね！	!rule:cx:regards:10	keep	defaults
+cx:regards:10	ゲートのほうによろしくお願いします	게이트 쪽에 잘 부탁드립니다	keep	local
+cx:regards:10	今日もよろしくね！	오늘도 잘 부탁해!	keep	lookup
+cx:regards:10	先生によろしくお願いします。	!rule:cx:regards:10	keep	local
+cx:regards:20	彼によろしくと伝えて	그에게 안부 전해	fix	rewrites
+cx:regards:20	母によろしくと伝えてください。	어머니에게 안부 전해 주세요.	fix	rewrites
+cx:regards:20	宇川にもよろしく言っておいて	!rule:cx:regards:20	keep	local
+cx:regards:30	西川先生によろしく伝えてください。	has:니시카와 선생님에게 안부 전해 주세요.	fix	rewrites
+cx:regards:30	"群れのボスによろしく伝えてくださいね	has:보스에게 안부 전해 주세요	fix	rewrites
+cx:regards:30	お母さんによろしく言ってね｡	엄마에게 잘 말해.	keep	local
+cx:regards:30	よろしく伝えてください	잘 전해 주세요	keep	local
+dict:jisjk:340935	田中君に よろしくお伝えください	has:군에게 안부 전해 주세요	fix	lookup
+dict:jisjk:340935	ご一緒できませんが、木場先輩によろしくお伝えください」	has:기바 선배에게 안부 전해 주세요」	fix	lookup
+dict:jisjk:340935	その親切な方にもくれぐれもよろしくお伝えください。	그 친절한 분에게도 부디 안부 전해 주세요.	fix	lookup
+dict:jisjk:340935	皆さんによろしくお伝えください	여러분에게 안부 전해 주세요	fix	lookup

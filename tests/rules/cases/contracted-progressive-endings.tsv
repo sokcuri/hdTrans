@@ -1,0 +1,29 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+dict:colloquial-endings:14	始めちゃいましょう！	시작해버립시다!	fix	lookup
+dict:colloquial-endings:14	置いちゃいましょう｡	두어버립시다.	fix	lookup
+dict:colloquial-endings:14	はいっ。テキパキと片付けちゃいましょう。	네. 척척 정리해버립시다.	fix	lookup
+dict:colloquial-endings:14	まっ 終電までに終わらせちゃいましょう｡	뭐 막차까지 끝내버립시다.	fix	lookup
+dict:colloquial-endings:14	もう 言っちゃいましょうよ｡	이제 말해버립시다.	fix	lookup
+dict:colloquial-endings:15	今日はお祝いですね！ 酒保開けちゃいましょ！	오늘은 축하군요! 피엑스 열어버립시다!	fix	lookup
+dict:colloquial-endings:15	楽しんじゃいましょ今日はね	즐겨버립시다 오늘은	fix	lookup
+dict:colloquial-endings:16	先に奥様梱包しちゃいましょうか｡	먼저 사모님 꾸려버릴까요.	fix	lookup
+dict:colloquial-endings:16	クレーンにイルミネーション飾っちゃいましょうか？	크레인에 일루미네이션 장식해버릴까요?	fix	lookup
+dict:colloquial-endings:17	待って！ご家族だって心配してるでしょう	기다려! 가족도 걱정하고 있겠지요	fix	lookup
+dict:colloquial-endings:17	(女性警官)交通法規は知ってるでしょう	(여성 경관) 교통 법규는 알고 있겠지요	fix	lookup
+dict:colloquial-endings:17	アッ あそこにも石 残ってるでしょう	앗 저기에도 돌 남아 있겠지요	fix	lookup
+dict:colloquial-endings:17	さすがにもう 逃げてるでしょう？	아무래도 이제 도망치고 있겠죠?	fix	lookup
+dict:colloquial-endings:17	だって　ここの人たちを見下してるでしょう？	왜냐하면 여기의 사람들을 업신여기고 있겠죠?	fix	lookup
+dict:colloquial-endings:18	そちらの状況どうなってるでしょうか	그쪽의 상황 어떻게 되어 있을까요	fix	lookup
+dict:colloquial-endings:18	うちらの関係どうなってるでしょうか	has:어떻게 되어 있을까요	fix	lookup
+dict:colloquial-endings:19	家族のために頑張ってるんだぞ	가족을 위해 노력하고 있는 거야	fix	lookup
+dict:colloquial-endings:19	２人も殺してるんだぞ	2명이나 죽이고 있는 거야	fix	lookup
+dict:colloquial-endings:19	「俺はみんなのために焼いてるんだぞ」	has:굽고 있는 거야	fix	lookup
+dict:colloquial-endings:20	包み隠さず言ってるでしょうが。	숨기지 않고 말하겠지만.	fix	lookup
+dict:colloquial-endings:14	食べちゃいます	먹어버립니다	keep	lookup
+dict:colloquial-endings:14	食べちゃいました	먹어버렸습니다	keep	lookup
+dict:colloquial-endings:14	言っちゃった	말해버렸다	keep	lookup
+dict:colloquial-endings:14	行きましょう	갑시다	keep	lookup
+dict:colloquial-endings:17	頑張ってるでしょ	노력하고 있지	keep	lookup
+dict:colloquial-endings:17	知っているでしょう	알고 있겠지요	keep	lookup
+dict:colloquial-endings:19	待ってるんだ	기다리고 있어	keep	lookup

@@ -198,6 +198,13 @@ bool NounBefore(std::string_view text) {
 
 uint8_t Worker::Register(const dict::UserEntry& u) const { return u.polite ? settings.registers[1] : settings.registers[0]; }
 
+std::size_t Worker::CopyUnit(std::string_view text) const {
+    if (tokens.copySpaces.empty() || current < 0 || current >= TokenCount()) return 0;
+    const std::string_view own = tokens.Canonical(static_cast<std::size_t>(current));
+    if (own.empty() || text.data() < own.data() || text.data() >= own.data() + own.size()) return 0;
+    return tokens.CopyUnitAt(static_cast<std::size_t>(current), static_cast<std::size_t>(text.data() - own.data()));
+}
+
 Lookup Worker::DoLookup(std::string_view query, int mode) {
     if (fault) return {};
     dict::LookupContext ctx = lookupContext;
@@ -528,7 +535,8 @@ void Worker::DropBoundUtterances(Lookup& l, std::string_view query) {
 // Text path, mode 0: a word of word.closing-utterance (ゴメンな) is an utterance of its
 // own only where the sentence or a clause ends after it and no particle of
 // particle.before-predicate stands before it; elsewhere the words it starts with read it
-// (ゴメンなら, そんなのゴメンよ 싫어).
+// (ゴメンなら, そんなのゴメンよ 싫어). A word of word.closing-greeting needs only the end
+// (これからもよろしくな; not よろしくない).
 void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
     const std::string_view surface = transformSurface;
     std::string_view before;
@@ -541,8 +549,11 @@ void Worker::DropOpenUtterances(Lookup& l, std::string_view query) {
     Record* out = nullptr;
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
-        if (r->source.size() <= query.size() && dict::InClass(HDTRANS_CLASS("word.closing-utterance"), r->source) &&
-            (predicate || !SentenceFinal(query.substr(r->source.size()), current, true))) {
+        const bool fits = r->source.size() <= query.size();
+        const bool utterance = fits && dict::InClass(HDTRANS_CLASS("word.closing-utterance"), r->source);
+        const bool greeting = fits && dict::InClass(HDTRANS_CLASS("word.closing-greeting"), r->source);
+        if ((utterance || greeting) &&
+            ((utterance && predicate) || !SentenceFinal(query.substr(r->source.size()), current, true))) {
             l.count--;
             continue;
         }

@@ -49,6 +49,10 @@ std::string KoreanForms(std::string_view s);
 // marked final applies only after a Hangul syllable with a final consonant (있읍니다 -> 있습니다).
 std::string KoreanCleanup(std::string_view s);
 
+// s without each output::kSilentComma and the comma right before it, the words on its sides
+// apart (그럼,\uE013 어느 쪽 그럼 어느 쪽).
+std::string WriteSilentCommas(std::string_view s);
+
 // Each run of kana that the composer shifted by DropShift (kana the translation does
 // not render) written in Hangul as heard (internal::ReadKana).
 std::string WriteDropped(std::string_view s);

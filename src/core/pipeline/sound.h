@@ -77,6 +77,10 @@
 // A burst of breath that stands alone (かはっ, だっは, かッハ……) and that no dictionary
 // word reads is written as heard (카핫, 닷하, 캇하) rather than as particles.
 //
+// A sound that starts its utterance and is parted by a source space from a hiragana word read
+// mostly as a particle or conjunction (あっ でも, あっ なんか) takes the mark output::kPhraseBreak,
+// at which the segment stage starts a new chunk.
+//
 // A stutter (な、なにを, だっ、だめ, べ…別に, ご、ごめ、ごめんなさい) becomes stutter marks
 // before each separator; the restore stage writes them as the start of the next Korean
 // word (WriteStutters).
@@ -91,7 +95,7 @@
 
 namespace hdTrans::pipeline {
 
-// The normalized line after the sound stage: JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
+// The normalized line after the sound stage: WriteSpacedCopies, JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
 // RewriteVolitionalSo, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
 // RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
@@ -126,6 +130,19 @@ std::string JoinSpelledOut(std::string_view text, const LineContext& ctx, const 
 // lexicon reads them as words as JoinSpelledOut does. A run of kanji only stays for the
 // tokenizer (通 知 表), and a run that is no word stays as written (し　ら　さ　き, あ い う).
 std::string JoinSpacedOut(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// Copies of a sound said again with a space or an ideographic space between them written in Korean
+// with the spaces kept, two or more copies not next to other kana, kanji, letters or digits:
+//   - copies of one kana, each as the sound lexicon reads the kana alone or else as heard (お お お
+//     오 오 오, お　お　お 오　오　오, あ あ あ 아 아 아, ん ん 응 응);
+//   - copies of a kana word that an interjection of the sound lexicon reads, said twice, as two equal
+//     halves, each as that half, where the copies start an utterance (ない ない ない 아냐 아냐 아냐;
+//     not the mimetic ぼうぼう 활활, nor a half in 해요 such as 맞아요 of そうですそうです).
+// Not a stutter before the word it starts (お お お前は, ど ど… どうして, う う… 噂), copies said on
+// into a word (そう そう そういい), a last copy drawn out or gone on from after the space (う う~ん,
+// お お っ！), one-kana copies inside text spaced out character by character (こ こ か ら) or that
+// spell a word with the piece before them (とっ と と…).
+std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // text with its masked words in Korean (see the comment at the top).
 std::string WriteMasked(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
@@ -336,6 +353,9 @@ struct SoundRow {
     // The Korean of a cry row said once, not again right before or after it (alone=갈_것_같아, _
     // for a space: イっちゃう 갈 것 같아, but イっちゃう、イっちゃう 가버려, 가버려).
     std::string alone;
+    // The Korean is in 해요 speech (fourth column haeyo: そうですそうです 맞아요 맞아요), which copies said
+    // apart do not take, as said on their own (그렇습니다).
+    bool haeyo = false;
 };
 
 // The rows of the sound lexicon whose key starts with the katakana c, longer keys

@@ -27,6 +27,35 @@ bool IsKana(char32_t r) { return IsHiraganaRune(r) || IsKatakanaRune(r) || r == 
 
 bool In(char32_t r, std::u32string_view set) { return set.find(r) != std::u32string_view::npos; }
 
+// Whether character p starts an utterance: the start of the text, or after an opening or closing
+// bracket, a sentence end, a comma, a dash or a heart, spaces before p skipped.
+bool OpensUtterance(std::u32string_view rs, size_t p) {
+    while (p > 0 && (rs[p - 1] == U' ' || rs[p - 1] == U'　')) p--;
+    return p == 0 || In(rs[p - 1], U"\n「」『』（）()。！？!?、♪♡♥❤―");
+}
+
+// Whether an ASCII space at rs[p] parts a sound that opens its utterance at rs[start] from a
+// hiragana word that the dictionary also reads as a conjunction (gram Z0), which would otherwise be
+// read as a particle or ending of the sound (あっ でも 앗 하지만, あっ でもさ 앗 하지만): the
+// longest dictionary key that starts the hiragana after the space is that word (not あっ だからね,
+// whose key だからね no conjunction reads, nor だっけ, ならば, です), and the dictionary has no row
+// that drops it (not なんて, which then stays with the sound).
+bool SpacedFromText(std::u32string_view rs, size_t start, size_t p, const dict::Snapshot& snap) {
+    if (!OpensUtterance(rs, start) || p + 2 >= rs.size() || rs[p] != U' ' || !IsHiraganaRune(rs[p + 1])) return false;
+    size_t end = p + 1;
+    while (end < rs.size() && IsHiraganaRune(rs[end])) end++;
+    std::string run;
+    for (size_t k = p + 1; k < end; k++) text::AppendRune(run, rs[k]);
+    const std::string word = run.substr(0, snap.WordAt(run));
+    if (word.empty()) return false;
+    bool conjunction = false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(word, dict::LookupMode::General)) {
+        if (c.target.empty()) return false;
+        conjunction = conjunction || (c.codes != nullptr && c.codes->gram.HasCode("Z0"));
+    }
+    return conjunction;
+}
+
 constexpr std::u32string_view kSmallVowels = U"ァィゥェォ";
 constexpr std::u32string_view kPlainVowels = U"アイウエオ";
 
@@ -825,10 +854,13 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                                            ? text::FromKana(EncodeText(std::u32string_view(f_).substr(p, end - p)),
                                                             text::Preset::Fan)
                                            : Lengthen(Reading(s, p, end), units);
-            // An open row before no pause is followed by a comma, so the words after it
-            // read as the start of a clause (ってかなんで 그보다, 왜).
+            // An open row before no pause is followed by a comma, so the words after it read as the
+            // start of a clause; the source has none, so it is not written (ってかなんで 그보다 왜).
             if (open && !PauseAt(end)) {
-                if (IsHiraganaRune(rs_[end])) korean += ',';
+                if (IsHiraganaRune(rs_[end])) {
+                    korean += ',';
+                    text::AppendRune(korean, output::kSilentComma);
+                }
                 spaceAfter = !In(rs_[end], U"…‥―─—");
             }
             // A small ぅ that opens a cry before 아 is the weak vowel 으 (ぅあ 으아; not ぅお 우오,
@@ -1382,7 +1414,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     if (p + n < rs.size() && In(f[p + n], U"ャュョ")) n++;
     if (p + n < rs.size() && f[p + n] == U'ッ') n++;
     if (f[p + n - 1] == U'ッ' && p + n < rs.size() && IsKanjiRune(rs[p + n]) && !In(f[p], kSoundsBeforeKanji)) {
-        pieces.push_back({U"、"});
+        pieces.push_back({U" "});  // the source writes no comma there (ちょっ待て 기 기다려)
         return p + n;
     }
     const std::u32string_view x = f.substr(p, n);
@@ -1970,6 +2002,8 @@ std::string SoundText::Write() {
                 next++;
             } else if (Spaced(next) || chain.back().spaceAfter) {
                 b += ' ';
+            } else if (SpacedFromText(rs, chain.front().start, next, snap_)) {
+                text::AppendRune(b, output::kPhraseBreak);
             }
         } else if (const size_t lone = LoneCatch(i); lone > 0) {
             b += "읏";
@@ -2250,6 +2284,106 @@ std::string Lengthen(std::string_view korean, std::string_view units) {
 std::string WriteSounds(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     SoundText t(text, ctx, snap);
     return t.Write();
+}
+
+std::string WriteSpacedCopies(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (text.find(' ') == std::string_view::npos && text.find("　") == std::string_view::npos) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const auto space = [](char32_t r) { return r == U' ' || r == U'　'; };
+    const auto word = [](char32_t r) {
+        return IsKana(r) || IsKanjiRune(r) || text::IsLetter(r) || text::IsDigit(r) || In(r, U"~〜");
+    };
+    const auto first = [](char32_t r) {
+        return (IsHiraganaRune(r) || IsKatakanaRune(r)) && !In(r, U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶーヽヾゝゞ・");
+    };
+    const auto hangul = [](std::u32string_view k) {
+        return !k.empty() && std::all_of(k.begin(), k.end(), [](char32_t r) { return r >= text::kBase && r <= text::kLast; });
+    };
+    // Whether a piece of one character stands at [p, p + 1) after a space or the start of the text.
+    const auto lone = [&](size_t p) {
+        return p < rs.size() && word(rs[p]) && (p == 0 || space(rs[p - 1])) && (p + 1 == rs.size() || !word(rs[p + 1]));
+    };
+    std::u32string out;
+    size_t at = 0;
+    for (size_t i = 0; i < rs.size(); i++) {
+        if (!first(rs[i]) || (i > 0 && word(rs[i - 1]))) continue;
+        size_t unit = 1;
+        while (i + unit < rs.size() && ((IsKatakanaRune(rs[i + unit]) && IsKatakanaRune(rs[i])) ||
+                                        (IsHiraganaRune(rs[i + unit]) && IsHiraganaRune(rs[i])))) {
+            unit++;
+        }
+        const std::u32string_view piece = std::u32string_view(rs).substr(i, unit);
+        size_t end = i + unit, copies = 1;
+        while (end + unit < rs.size() && space(rs[end]) && std::u32string_view(rs).substr(end + 1, unit) == piece &&
+               (end + 1 + unit >= rs.size() || !word(rs[end + 1 + unit]))) {
+            end += 1 + unit;
+            copies++;
+        }
+        if (copies < 2 || (end < rs.size() && word(rs[end]))) continue;
+        // A stutter before the word it starts (お お お前, ど ど… どうして, む む 無理) is left to the
+        // stutter reading, a small kana or a long mark after the space goes on from the last copy
+        // (お お っ！), and copies inside text spaced out character by character stay for JoinSpacedOut
+        // (こ こ か ら).
+        size_t next = end;
+        while (next < rs.size() && (space(rs[next]) || In(rs[next], U"…‥、,・―"))) next++;
+        // A copy said on into a word (そう そう そういい, あら あら私) is no sound said again either.
+        if (next < rs.size() && (std::u32string_view(rs).substr(next).starts_with(piece) ||
+                                 (unit == 1 && IsKanjiRune(rs[next])) ||
+                                 In(rs[next], U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮー～~〜"))) {
+            continue;
+        }
+        if (unit == 1 && ((next == end + 1 && lone(next)) || (i >= 2 && lone(i - 2)))) continue;
+        // Copies that spell a word with the piece before them are that word said haltingly (とっ と と…
+        // とっとと).
+        if (i >= 2 && space(rs[i - 1]) && IsKana(rs[i - 2])) {
+            size_t from = i - 1;
+            while (from > 0 && IsKana(rs[from - 1])) from--;
+            std::u32string joined(rs.substr(from, i - 1 - from));
+            for (size_t k = i; k < end; k += unit + 1) joined += piece;
+            const std::string bytes = EncodeText(joined);
+            if (snap.WordAt(bytes) == bytes.size()) continue;
+        }
+        // Copies read as an interjection said twice open an utterance and follow no subject (not
+        // 新ギャグ ない ない, 財布が、ない ない).
+        size_t before = i;
+        while (before > 0 && (space(rs[before - 1]) || rs[before - 1] == U'、')) before--;
+        const bool utterance = OpensUtterance(rs, i) &&
+                               dict::EndsWithMember(HDTRANS_CLASS("particle.copies-subject"), EncodeText(rs.substr(0, before))) == 0;
+        std::u32string korean;
+        if (unit == 1) {
+            // A kana alone reads as the sound lexicon has it (お 오, う 으, ね 저기) or as heard (あ 아, ん 응).
+            korean = DecodeText(WriteSounds(EncodeText(piece), ctx, snap));
+            if (!hangul(korean)) korean = DecodeText(ReadKana(EncodeText(piece)));
+            if (!hangul(korean)) continue;
+        } else {
+            // Two copies that an interjection of the sound lexicon reads as two equal halves (ないない
+            // 아냐 아냐; not the mimetic ぼうぼう 활활, whose half is no sound of its own, nor a half in 해요).
+            const std::u32string pair = ToKatakana(std::u32string(piece) + std::u32string(piece));
+            for (const SoundRow& row : SoundRows(pair[0], ctx.extraBuiltin)) {
+                if (row.key != pair || !row.intj || !utterance) continue;
+                const std::u32string k = DecodeText(row.korean);
+                const size_t half = k.size() / 2;
+                if (k.size() % 2 == 0 && k.substr(0, half) == k.substr(half)) korean = k.substr(0, half);
+                if (k.size() % 2 == 1 && k[half] == U' ' && k.substr(0, half) == k.substr(half + 1)) korean = k.substr(0, half);
+                if (row.haeyo) korean.clear();
+                break;
+            }
+            if (korean.empty() || !std::all_of(korean.begin(), korean.end(), [&](char32_t r) { return r == U' ' || hangul(std::u32string(1, r)); })) {
+                continue;
+            }
+        }
+        out.append(rs, at, i - at);
+        for (size_t k = i; k < end; k += unit + 1) {
+            out += korean;
+            if (k + unit < end) out.push_back(U' ');
+        }
+        if (SpacedFromText(rs, i, end, snap)) out.push_back(output::kPhraseBreak);
+        at = end;
+        i = end - 1;
+    }
+    if (at == 0) return std::string(text);
+    out.append(rs, at, std::u32string::npos);
+    return EncodeText(out);
 }
 
 std::vector<std::pair<size_t, size_t>> SoundSpans(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -3041,9 +3175,24 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 
 namespace {
 
+// text with an ideographic space that stands alone between two Hangul syllables written as an
+// ASCII space, the space between words of the line (LAY-2: お　お　お 오 오 오, うわっ　あっ 우왓 앗).
+std::string PlainSpaces(std::string text) {
+    std::u32string rs = internal::DecodeText(text);
+    bool changed = false;
+    const auto syllable = [](char32_t r) { return r >= text::kBase && r <= text::kLast; };
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (rs[i] == U'　' && syllable(rs[i - 1]) && syllable(rs[i + 1])) {
+            rs[i] = U' ';
+            changed = true;
+        }
+    }
+    return changed ? internal::EncodeText(rs) : text;
+}
+
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
-        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap),
+        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
     std::string sounded = internal::WriteSounds(
         internal::RewriteCasualAdjectives(
@@ -3056,7 +3205,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
-    return internal::WriteCries(sounded, ctx, snap);
+    return PlainSpaces(internal::WriteCries(sounded, ctx, snap));
 }
 
 }  // namespace

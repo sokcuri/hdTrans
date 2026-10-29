@@ -34,6 +34,7 @@ struct SessionSenses;
     X(preserveNeighbourSlots, false)  /* Preserve direct slots during neighbour traversal. */ \
     X(perLevelRetries, false)         /* Give each candidate search level its own retry count. */ \
     X(nonterminalBoundary, true)      /* End an unterminated ending at the query boundary. */ \
+    X(shorterEndings, true)           /* Read a verb with a shorter ending when its longest leaves text unread. */ \
     X(tailLengthCheck, false)         /* Measure the matched tail rather than the whole record. */ \
     X(preparedNextToken, false)       /* Canonicalize lookahead token text before lookup. */ \
     X(forwardTerminal, false)         /* Visit terminal-form candidates from left to right. */ \

@@ -1,0 +1,73 @@
+# 규칙: LAY-14
+rule	input	expected	kind	layer
+wrapped:cut-word	彼はゲームを始め\nるとか、そういう話。	그는 게임을 시작한다든가,\n그런 이야기.	fix	driver
+wrapped:cut-word	試合が始ま\nりです。	시합이 시작\n입니다.	fix	driver
+wrapped:cut-word	もう逃\nげるしかない。	이제\n도망칠 수밖에 없다.	fix	driver
+wrapped:cut-word	月に濡\nれたふたり	달에\n젖은 두 사람	fix	driver
+wrapped:cut-word	B「なんで分\nかる」	B 「왜\n안다」	fix	driver
+wrapped:cut-word	くそっ、待ち伏\nせか。	젠장, 매복\n인가.	fix	driver
+wrapped:cut-word	ほら、電文よ。読\nめば？	자, 전문이야.\n읽으면?	fix	driver
+wrapped:cut-word	店内を包\nむ漆黒の瘴気…。	가게 안을 감싸는\n칠흑의 독기….	fix	driver
+wrapped:cut-word	そのカードを裏返\nす……。	그 카드를 뒤집는다\n…….	fix	driver
+wrapped:cut-word	風が強い。窓が鳴\nる。	바람이 강하다. 창이 울린다\n.	fix	driver
+wrapped:cut-word	首を振ってから言\nうルーク。	고개를 젓고 나서 말하는\n루크.	fix	driver
+wrapped:cut-word	すべては、ここから始ま\nる。	모든 것은, 여기부터 시작된다\n.	fix	driver
+wrapped:cut-word	何やってんだ！ 早\nく来い！	뭐 하는 거야! 빨리\n와라!	fix	driver
+wrapped:cut-word	忘れた頃に……仕掛\nけてくる！	잊었을 무렵에……걸어\n온다!	fix	driver
+wrapped:cut-word	うん、いいみたいだ。助\nかる。	응, 좋은 것 같다.\n도움이 된다.	fix	driver
+wrapped:cut-word	私の絶叫は屋敷中に響き渡\nった。	내 절규는 저택 전체에 울려 퍼졌다\n.	fix	driver
+wrapped:cut-word	そいつは僕を見て、にやって笑\nった。	그 녀석은 나를 보고, 씨익\n웃었다.	fix	driver
+wrapped:cut-word	全国大会で、彼は十位以内に入\nった。	전국 대회에서, 그는 10위 이내에\n들어갔다.	fix	driver
+wrapped:cut-word	どこからか、三人目の声が聞こえ\nる。	어디에선가, 세 번째의 목소리가 들린다\n.	fix	driver
+wrapped:cut-word	賞金“2500G”を受\nけ取った！	상금 “2500G”를\n받았다!	fix	driver
+wrapped:cut-word	何も言えな\nくて...夏	아무것도 말할 수 없어서...\n여름	fix	driver
+wrapped:cut-word	なぁに？ 私結構忙し\nいんだけど。	뭐야? 나 상당히\n바쁜데.	fix	driver
+wrapped:cut-word	おいおい、デケーな、こり\nゃ。	이봐 이봐, 크다, 이건\n.	fix	driver
+wrapped:cut-word	やだ…これじ\nゃうまく踊れない。	싫어…이래서야\n잘 춤출 수 없다.	fix	driver
+wrapped:cut-word	新手の新興宗教なんじ\nゃ…	새로운 방법의 신흥 종교지\n…	fix	driver
+wrapped:cut-word	あ！ ひ\nょっとしてアレ？	아!\n혹시 그것?	fix	driver
+wrapped:cut-word	なんか…ち\nょっと本格的に寝込むっぽい～？	왠지…\n조금 본격적으로 드러눕는 것 같아~?	fix	driver
+wrapped:cut-word	チッ…こんなとこまで……ち\nょっと重傷。	쳇…이런 곳까지……\n조금 중상.	fix	driver
+wrapped:cut-word	コテハ\nンついてる？	고정닉\n붙어 있어?	fix	driver
+wrapped:cut-word	戦力と生産性、バラ\nンス大事です。	전력과 생산성, 밸런스\n소중합니다.	fix	driver
+wrapped:cut-word	あ、あと一人暮らしです。マ\nンションの3階。	그, 그리고 자취입니다.\n맨션의 3층.	fix	driver
+wrapped:cut-word	その時、俺の頭の中に実にシ\nンプルな方法が浮かんだのだ。	그 때, 내 머릿속에 실로\n심플한 방법이 떠올랐다.	fix	driver
+wrapped:cut-word	おもち\nゃ屋の中には、	장난감\n가게 안에는,	fix	driver
+wrapped:cut-word	司令官、ち\nょっとお休みしましょうか？	사령관,\n조금 쉴까요?	fix	driver
+wrapped:cut-word	このままじ\nゃ大損よぉ。	이대로는\n대손해야.	fix	driver
+wrapped:cut-word	みらいフ\nァクトリー	미래\n팩토리	fix	driver
+wrapped:cut-word	国王は盛大なパーテ\nィーを開催した。	국왕은 성대한 파티를\n개최했다.	fix	driver
+wrapped:cut-word	ばあち\nゃんそれをよく分かってるから	할머니\n그것을 잘 알고 있으니까	fix	driver
+wrapped:cut-word	他の３人は思わぬラストギ\nャンブルにごくりと唾を飲みこむ。	다른 3명은 생각하지 않는 라스트\n도박에 꿀꺽 침을 삼킨다.	fix	driver
+wrapped:cut-word	とタチア\nナも追随する。	라고 타티아나도\n추종한다.	fix	driver
+wrapped:cut-word	木材、角材、ベニ\nヤ板。	목재, 각재, 베니어판\n.	fix	driver
+wrapped:cut-word	遊んでるバ\nヤイじゃねぇ！	놀고 있는\n경우가 아니야!	fix	driver
+wrapped:cut-word	あなたマ\nジで良い人だねｗ	당신\n진짜로 좋은 사람이구나 ㅋ	fix	driver
+wrapped:cut-word	何かこえーしト\nイレいけねーよ	왠지 무섭고\n화장실 안돼	fix	driver
+wrapped:cut-word	やべえな超ラノ\nベ主人公ｗｗｗ	위험하다 초라노벨\n주인공 ㅋㅋㅋ	fix	driver
+wrapped:cut-word	つまり、ソ\nロ向けじゃないのだ。	즉, 솔로\n전용이 아닌 것이다.	fix	driver
+wrapped:cut-word	男はM14のト\nリガーに指を掛ける。	남자는 M14\n트리거에 손가락을 건다.	fix	driver
+wrapped:cut-word	魔王たん、ラ\nノベって好きなの？	마왕짱,\n라노벨은 좋아해?	fix	driver
+wrapped:cut-word	提督～、もうちょっとリ\nズムが欲しいのー？	제독~, 좀 더\n리듬을 갖고 싶어~?	fix	driver
+wrapped:cut-word	彼の人生はクライマ\nックスを迎えていた。	그의 인생은 클라이맥스를\n맞이하고 있었다.	fix	driver
+wrapped:cut-word	過去数年分のバ\nックナンバーが重ねられている。	과거 수년분의\n백 넘버가 거듭되어 있다.	fix	driver
+wrapped:cut-word	ハインリヒはエビフラ\nイの先端を切り落とし、	하인리히는 새우튀김의\n끝을 잘라 떨어뜨려,	fix	driver
+wrapped:cut-word	食べるなら上のテーブ\nルで待ってておくれ。	먹는다면 위의 테이블로\n기다리고 있어 보내라.	fix	driver
+wrapped:cut-word	それを見て、ディートリ\nヒが顔を真っ赤に染めた。	그것을 보고, 디트리히가\n얼굴을 새빨갛게 붉혔다.	fix	driver
+wrapped:cut-word	あぁ 知り合いの子がね 欲しがっててさ\nお優しいんですね	아아 아는 사람의 아이가 갖고 싶어하고 있어\n다정하네요	keep	driver
+wrapped:cut-word	まあまあだな\nお見事	그럭저럭이네\n훌륭히	keep	driver
+wrapped:cut-word	危ないじゃないの\nお… おのれ怪物め	위험하잖아\n오… 당신 괴물	keep	driver
+wrapped:cut-word	行っちゃおうかな\nお～ 私 是非 ご一緒に	가버릴까\n오~ 나 부디 함께	keep	driver
+wrapped:cut-word	全く同期です\nうわ〜このあと２人で戦ってもらいます	전혀 동기입니다\n우와~이후에 2명이 싸워 줍니다	keep	driver
+wrapped:cut-word	10組が３組に絞られる戦いです\nうわ～なんか スゲえリハーサルより出にくい	10조가 3조에 좁혀지는 싸움입니다\n우와~무슨 대박 리허설보다 나오기 어렵다	keep	driver
+wrapped:cut-word	そんな壺なんて持ってくからだよ\nけっ 偉そうに言いやがって	그런 항아리 같은 건 가져가기 때문이야\n켓 거만하게 말하다니	keep	driver
+wrapped:cut-word	(患者)はあ\nおいくらでしょうか？	(환자) 하아\n얼마입니까?	keep	driver
+wrapped:cut-word	これで間違いないと思います\nよう　さっきは電話でどうも	이것으로 틀림없다고 생각합니다\n요우 조금 전은 전화로 아무래도	keep	driver
+wrapped:cut-word	含まれております\nよ～う　考えた	포함되어 있습니다\n요우~ 생각했다	keep	driver
+wrapped:cut-word	処刑されます\nそ… そんな！	처형당합니다\n소… 그런!	keep	driver
+wrapped:cut-word	キスしたくせに\n（るな）しおちゃん差し入れ　持ってきたよ～。	키스했으면서\n(루인) 시오짱 간식 가져왔어~.	keep	driver
+wrapped:cut-word	彼はゲームを始め\n\nるとか、そういう話。	그는 게임을 시작해\n\n루라든지, 그런 이야기.	keep	driver
+wrapped:cut-word	もう逃\n「げるしかない」	이제 도\n「밖에 없다」	keep	driver
+wrapped:cut-word	試合が始ま\nりです	시합이 시작\n입니다	keep	driver
+wrapped:cut-word	「…始ま\nりです」	「…시작\n입니다」	fix	driver
+wrapped:cut-word	テーブ\nルでしょう。	테이블\n이죠.	fix	driver

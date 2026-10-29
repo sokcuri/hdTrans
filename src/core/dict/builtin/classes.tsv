@@ -58,7 +58,7 @@
 //= ending.negative-start-not	Starts of ending.negative-start after which the verb is not negated: the の said ん before じゃ (できんじゃん できるじゃん, 出せんじゃない).
 //= ending.other-negation	Starts of ending rows written with 지 않 that negate no verb stem before them: questions that expect a yes (じゃないか, ではありませんか, んじゃないの), the negation of a copula, an adjective or an auxiliary in the ending (でない, くありません, いない, おらず, いただかない, きれず), guesses quoted (かと, しまいかと) and choices (と 1지 않든지).
 //= ending.no-exclamation-na	Ends of the clause before a final な that keep the な as it is, not the exclamation なあ the normalizer makes of な after a clause in が (お前が言うな, 勝てると思うな, 先生ですな).
-//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, and ちゃう, which happens to one: 忘れられちゃった).
+//= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
@@ -96,6 +96,7 @@
 //= honorific.phrase-tag	Drawn-out honorifics that a greeting or an interjection takes as a familiar tag: the phrase keeps its reading and the drawl (おはようちゃーん 좋은 아침~, お待たせちゃーん 기다렸지~).
 //= honorific.phrase-tag-word	Apologies, greetings and replies said with a drawn-out honorific of honorific.phrase-tag as a familiar tag like a greeting, WORD or WORD=CASUAL with the casual spelling the tag gives the word (ごめんちゃーん 미안~, よろしく=よろしくね: よろしくちゃーん 잘 부탁해~).
 //= honorific.kanji-reading	Kanji honorifics of honorific.drawn-after with their kana reading, KANJI=KANA, whose last vowel the speaker draws them out with (様=さま: 姫様ぁ 공주님~).
+//= honorific.copula-honour	Suffixes that honour the person they end, matched at the end of a word: a でございます after such a word, or after a topic or subject that ends in one, takes the honorific 시 (信長様でございます 노부나가님이십니다), which a plain person noun does not (学生でございます 학생입니다).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
 //= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
@@ -140,7 +141,10 @@
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼, and $Kz@, 하다 in a word of the adjective class), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
-//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), ending in the marker family that the ending after it conjugates.
+//= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), or of the おる after a て form said with と or ど (生きとる 살고 있다), ending in the marker family that the ending after it conjugates.
+//= ko.honorific-progressive-head	The Korean of the Kansai はる after a て form, the いる of a respected doer (怒ってはる 화내고 계신다), ending in the marker family that the ending after it conjugates.
+//= ko.honorific-iru	The Korean of いる in its て form before the Kansai はる, the honorific of the いる itself (島にいてはる人 섬에 계시는 사람).
+//= ko.honorific-head	The Korean of the Kansai はる after the stem of a verb, the honorific 시 of the verb itself (捨てはった 버리셨다), ending in the marker family that the ending after it conjugates.
 //= ko.completive-head	The Korean of the ちゃう in its て form before a いる whose い is dropped (寝ちゃってたんだ 자 버린 거야), ending in the marker family that the ending after it conjugates.
 //= ko.title-end	The Korean endings of a name after which a following honorific is written as nothing (님, 씨, 선배).
 //= mark.spoken-exclamation	Marks right after an offer of あげる outside brackets that make it a line of dialogue, as a final particle does (見せてあげる！ 보여 줄게!, 見せてあげるっ！).
@@ -235,6 +239,7 @@
 //= particle.before-predicate	Particles after which a word reads as a predicate, not as an utterance of its own (そんなのゴメンよ 싫어).
 //= particle.case-before-stem	The case particles after which a verb stem in kana goes on (二つにわけ、, パンをわけない).
 //= particle.contrast	Particles after ではない or ではなかった that make a contrast that goes on (大した傷ではないが), which keeps the topic particle.
+//= particle.copies-subject	Particles of a subject or topic after which copies of a word said apart are its predicate, not an interjection (財布が、ない ない).
 //= particle.do-angle	Particles that may stand between 度 and a word of word.do-angle.
 //= particle.even-person	Particles that after a person make the (ら)れ of their clause the potential (子供でも着られる).
 //= particle.hodo-degree	Starts of the word after 程 or ほど that make it a degree (それほどの, 程まで).
@@ -369,6 +374,7 @@
 //= word.demo-concessive	Words that open a concession before the noun in でも, which then stays (이)라도 even in a setting (どんな苦境でも 어떤 곤경이라도, どんな世界でも).
 //= word.demo-permission	Starts of the words of permission and of being all right, before which a でも is (이)라도 even after a noun of noun.arena (ここでもいい 여기라도 좋아).
 //= word.closing-utterance	Set phrases that end in a closing particle and are an utterance of their own only where the sentence or a clause ends after them (ゴメンな 미안해, not ゴメンなら).
+//= word.closing-greeting	Greetings that end in a closing particle, kept like word.closing-utterance only where the sentence or a clause ends after them, also after a particle (これからもよろしくな 앞으로도 잘 부탁해, not よろしくない).
 //= word.comitative	Verbs and nouns of doing something with someone or comparing with something, whose partner takes と (戦う, 結婚, 同じ).
 //= word.confirm-action	Verbal nouns before する and verb stems of the actions a confirm dialog asks about: a ますか after one offers the act, 까요 (上書きしますか？ 덮어쓰기할까요?, 回復薬を使いますか？ 회복약을 쓸까요?).
 //= word.copula-predicate	Adverbs and nouns that a copula, an adnominal な or a question か after them makes the adjectival noun of the same key (ばっちりです 완벽해요, しっかりですね 확실하네요, アリなのか 괜찮은 건가), not an adverb or a noun before a copula.
@@ -1127,6 +1133,10 @@ ending.rare-passive	てる
 ending.rare-passive	てお
 ending.rare-passive	てた
 ending.rare-passive	ちゃ
+ending.rare-passive	とる
+ending.rare-passive	とっ
+ending.rare-passive	とら
+ending.rare-passive	とり
 
 ending.rare-potential	な
 ending.rare-potential	ず
@@ -1392,6 +1402,16 @@ honorific.constraint-familiar	君
 honorific.constraint-familiar	ちゃん
 honorific.constraint-familiar	たん
 
+honorific.copula-honour	様
+honorific.copula-honour	さま
+honorific.copula-honour	殿
+honorific.copula-honour	陛下
+honorific.copula-honour	殿下
+honorific.copula-honour	閣下
+honorific.copula-honour	父上
+honorific.copula-honour	母上
+honorific.copula-honour	兄上
+honorific.copula-honour	姉上
 honorific.honoured-person	様
 honorific.honoured-person	さま
 honorific.honoured-person	殿
@@ -2184,6 +2204,12 @@ ko.doing	$Kz@
 ko.adjective-past-adnominal	5던
 
 ko.progressive-head	1고 &HN@
+
+ko.honorific-progressive-head	1고 계&AE@
+
+ko.honorific-head	2&AE@
+
+ko.honorific-iru	계&AE@
 
 ko.completive-head	6 버&AA@
 
@@ -3652,6 +3678,10 @@ particle.contrast	んですが
 particle.contrast	んだけど
 particle.contrast	でしょうが
 particle.contrast	だろうが
+
+particle.copies-subject	が
+particle.copies-subject	は
+particle.copies-subject	も
 
 particle.do-angle	に
 particle.do-angle	を
@@ -5994,6 +6024,10 @@ word.iru-form	いらっしゃいませ
 word.closing-utterance	ゴメンな
 word.closing-utterance	ゴメンね
 word.closing-utterance	ゴメンよ
+
+word.closing-greeting	よろしくな
+word.closing-greeting	よろしくよ
+word.closing-greeting	宜しくな
 
 word.comitative	合う
 word.comitative	戦う

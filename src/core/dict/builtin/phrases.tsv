@@ -11,6 +11,7 @@
 // or an honoured person is called right before it (先生、また明日 선생님, 내일 봬요). cry marks a
 // predicate said as a cry, as in sound.tsv; with alone=K a cry said once, not again right before or
 // after it, is K, _ standing for a space (イっちゃう 갈 것 같아, イっちゃう、イっちゃう 가버려, 가버려).
+// haeyo marks a Korean in 해요 speech (そうですそうです 맞아요 맞아요).
 
 // Greetings and everyday set phrases.
 いい迷惑	완전 민폐	n
@@ -115,8 +116,8 @@
 わけわかめ	뭐가 뭔지 모르겠어	intj
 やめなって	그만하라니까	intj
 やめなってば	그만하라니까 좀	intj
-ねぇってば	있잖아, 좀	intj
-ねえってば	있잖아, 좀	intj
+ねぇってば	있잖아 좀	intj
+ねえってば	있잖아 좀	intj
 すっこんどれ	물러나 있어	intj
 だまらっしゃい	입 다물거라	intj
 どんとこい	얼마든지 덤벼	intj
@@ -136,13 +137,13 @@
 にげろ	도망쳐	intj
 かっけええ	멋있다	intj
 あくしろよ	빨리 해	intj
-あっそうそう	아, 맞다 맞다	intj
-あっはい	아, 네	intj
+あっそうそう	아 맞다 맞다	intj
+あっはい	아 네	intj
 あれっ	어라	intj
 うっし	좋았어	intj
 よいっしょ	영차	intj
 どっこいしょ	영차	intj
-せーの	하나, 둘	intj
+せーの	하나 둘	intj
 へっくち	에취	intj
 もとい	아니지	intj
 はて	글쎄	intj
@@ -192,10 +193,10 @@
 そうだったそだった	그랬지 그랬지	intj
 そうだろうそうだろう	그렇겠지 그렇겠지	intj
 そうだろそうだろう	그렇겠지 그렇겠지	intj
-そうでしょうそうでしょう	그렇죠 그렇죠	intj
-そうでしょそうでしょ	그렇죠 그렇죠	intj
-そうですかそうですか	그렇군요 그렇군요	intj
-そうですそうです	맞아요 맞아요	intj
+そうでしょうそうでしょう	그렇죠 그렇죠	intj	haeyo
+そうでしょそうでしょ	그렇죠 그렇죠	intj	haeyo
+そうですかそうですか	그렇군요 그렇군요	intj	haeyo
+そうですそうです	맞아요 맞아요	intj	haeyo
 そうですよそうです	맞아요 맞아요	intj
 そうともそうとも	그렇고말고	intj
 そうなのそうなの	맞아 맞아	intj
@@ -219,7 +220,7 @@
 やばいやばいやばい	큰일이다 큰일이다 큰일이다	intj
 まてまてまて	잠깐 잠깐 잠깐	intj
 待て待て待て	잠깐 잠깐 잠깐	intj
-えーとえーと	음, 그러니까	intj
+えーとえーと	음 그러니까	intj
 ここからこっから	여기서부터	intj
 よかったよかった	다행이다 다행이다	intj
 よかった	다행이다	intj	exclaim predicate
@@ -236,7 +237,7 @@
 あそぼあそぼ	놀자 놀자	intj
 やろやろ	하자 하자	intj
 できないできない	못 해 못 해	intj
-どうぞどうぞ	자, 어서 어서	intj
+どうぞどうぞ	자 어서 어서	intj
 いいかいいか	잘 들어 잘 들어	intj
 
 // Set phrases inside a sentence.
@@ -1408,8 +1409,8 @@
 んなわけあるか	그럴 리가 있냐	intj
 そんなわけあるか	그럴 리가 있냐	intj
 そんなわけないだろ	그럴 리가 없잖아	intj
-またまたぁ	에이, 또 그런다~	intj
-またまたー	에이, 또 그런다~	intj
+またまたぁ	에이 또 그런다~	intj
+またまたー	에이 또 그런다~	intj
 お待たせ	기다렸지	intj
 おまたせ	기다렸지	intj
 そっか	그렇구나	intj

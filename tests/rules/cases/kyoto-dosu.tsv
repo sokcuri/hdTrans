@@ -1,0 +1,14 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:kyoto-dosu	覚えててくれはったんどすか？	기억하고 있어 주셨습니까?	fix	normalize
+normalize:kyoto-dosu	今まで どこで 誰と何してはったんどすか？	지금까지 어디서 누구와 뭐하고 계셨습니까?	fix	normalize
+normalize:kyoto-dosu	なんどす？	뭡니까?	fix	normalize
+normalize:kyoto-dosu	(紗江子)なんどす？	(사에코) 뭡니까?	fix	normalize
+normalize:kyoto-dosu	うちは お座敷が いちばんどす｡	집은 다다미방이 가장입니다.	fix	normalize
+normalize:kyoto-dosu	＜けど これからがうちにとっての ﾎﾝﾏのいくさ｡花いくさの始まりやったんどす＞	<지만 지금부터가 집에 있어서의 진짜의 전쟁. 꽃전쟁의 시작 했습니다>	fix	normalize
+normalize:kyoto-dosu	ちょうど混んどって	마침 혼잡해	keep	normalize
+normalize:kyoto-dosu	卵焼きは？しょっぱいのと甘いの　どっちがいい？	계란말이는? 짠 것과 달아 어느 쪽이 좋아?	keep	normalize
+normalize:kyoto-dosu	なんどすれば	몇 번 하면	keep	normalize
+normalize:kyoto-dosu	なんどすりゃ	몇 번 하면	keep	normalize
+normalize:kyoto-dosu	なんどしたって	몇 번 했대	keep	normalize
+normalize:kyoto-dosu	なんどしたか	몇 번 했나	keep	normalize
