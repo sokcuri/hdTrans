@@ -1,0 +1,45 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+conjugation:te-haru	言ってはった｡	말하고 계셨다.	fix	conjugation
+conjugation:te-haru	知ってはりますか？	알고 계십니까?	fix	conjugation
+conjugation:te-haru	アハハハ… 怒ってはる	아하하하… 화내고 계신다	fix	conjugation
+conjugation:te-haru	こ… 呼吸器つけてはる	와… 호흡기 붙이고 계신다	fix	conjugation
+conjugation:te-haru	（平畠）何してはるの？	(히라하타) 뭐하고 계시는 거야?	fix	conjugation
+conjugation:te-haru	もう結婚してはるんでしょ？	이제 결혼하고 계시는 거지?	fix	conjugation
+conjugation:te-haru	ああ…　覚えてはるんですか。	아… 기억하고 계십니까.	fix	conjugation
+conjugation:te-haru	奥さん 時々 来てはるのか？	부인 가끔 오고 계시는 건가?	fix	conjugation
+conjugation:te-haru	(田中)言うてはったから頭で｡	(타나카) 말하고 계셨으니까 머리로.	fix	conjugation
+conjugation:te-haru	なんで 持ってはるのかなんで	왜 가지고 계시는지 왜	fix	conjugation
+conjugation:te-haru	それをやってはったところがあったんですよ｡	그것을 하고 계신 곳이 있던 거예요.	fix	conjugation
+conjugation:te-haru	つけられて困るようなことしてはりますの？	붙여져 곤란한 것 같은 일 하고 계셔요?	fix	conjugation
+conjugation:te-haru	勤王浪人が 大勢出入りしてはります｡	근왕 재수생이 여럿 출입하고 계십니다.	fix	conjugation
+conjugation:te-haru	高校の先生やってはるねん。	고등학교의 선생님 하고 계시거든.	fix	conjugation
+conjugation:te-haru	（清治）写真見したやろ。　あのおばちゃん。向こうは　はるかに会いたいなって言うてくれてはるねんけど。	(세이지) 사진 보고 했지. 그 아줌마. 저편은 아득하게 만나고 싶다고 말해 주고 계시는군 이지만.	fix	conjugation
+conjugation:te-haru	島… 島にいてはる人で若い人たちは	섬… 섬에 계시는 사람으로 젊은 사람들은	fix	conjugation
+conjugation:te-haru	そうそう… 役者さんがいてはるイメージがあるな｡	맞아 맞아… 배우가 계시는 이미지가 있구나.	fix	conjugation
+conjugation:te-haru	(丸山)はあ はいあ いてはります	(마루야마) 하아 네아 계십니다	fix	conjugation
+conjugation:te-haru	ここにいてはいけない	여기에 있어선 안된다	keep	conjugation
+conjugation:te-haru	半分の生徒は町の学校まではるばる自転車で	반의 학생은 마을의 학교까지 멀리 자전거로	keep	conjugation
+conjugation:te-haru	それにしてはるかに大きい	그에 비해서 게 크다	keep	conjugation
+conjugation:te-haru	けど あいつに釣り合う 男になるまではって…	지만 저 녀석에게 어울리는 남자가 될 때까지 붙여…	keep	conjugation
+conjugation:te-haru	持っていらっしゃる	가지고 계신다	keep	conjugation
+conjugation:te-haru	春	봄	keep	conjugation
+conjugation:te-haru	言ってはいけない	말해선 안된다	keep	conjugation
+conjugation:te-haru	待ってはるかに遠い	대는 훨씬 멀다	keep	conjugation
+conjugation:te-haru	・(チャイム)・誰か来はった	·(차임) ·누군가 오셨다	fix	conjugation
+conjugation:te-haru	お客さん！何しはりますの｡	손님! 무엇 하셔요.	fix	conjugation
+conjugation:te-haru	間違えて捨てはったかもしれないですね	잘못해 버리셨을지도 모르네요	fix	conjugation
+conjugation:te-haru	(田所)いやあ ほんまに 宮原はんいい助手さん 当てはりましたな	(타도코로) 이야 진짜로 미야하라는 좋은 조수 맞히셨던	fix	conjugation
+conjugation:te-haru	よう見つけはりましたな。	요우 찾아내셨던.	fix	conjugation
+conjugation:te-haru	一緒にやってくれはりますか？	함께 해 주십니까?	fix	conjugation
+conjugation:te-haru	よかった。　すみれさん　喜んでくれはった。	다행이다. 스미레 씨 기뻐해 주셨다.	fix	conjugation
+conjugation:te-haru	急に倒れはって	갑자기 쓰러지시고	fix	conjugation
+conjugation:te-haru	(道代)お迎えが来はりました｡	(미치요) 마중이 오셨습니다.	fix	conjugation
+conjugation:te-haru	融資　受けはるんですか？ゆくゆくは考えています。	융자 받으십니까? 장래는 생각하고 있습니다.	fix	conjugation
+conjugation:te-haru	あ 麦茶 お砂糖 入れはるか	아 보리차설탕 넣고 하루카	keep	conjugation
+conjugation:te-haru	見はしない	보지는 않는다	keep	conjugation
+conjugation:te-haru	勉強しはしない	공부하지는 하지 않는다	keep	conjugation
+dict:spoken-words:25	見はりを立てる	파수를 세운다	fix	lookup
+conjugation:te-haru	見はってろ	보고 붙여라	keep	conjugation
+conjugation:te-haru	書いてはるかに	책이라고 아득하게	keep	conjugation
+conjugation:te-haru	マッハ30を はるかに超える	마하 30을 아득하게 넘는다	keep	conjugation

@@ -257,6 +257,12 @@ inline constexpr std::string_view kKansaiNegativeRa[] = {
     "変わ",
 };
 
+// What follows the Kansai やろ of conjecture where the predicate goes on: a sentence
+// particle or a particle of quoting or concession.
+inline constexpr std::string_view kKansaiConjectureBefore[] = {
+    "か", "な", "ね", "が", "けど", "と", "って", "て", "に", "から",
+};
+
 inline constexpr std::string_view kKansaiNegativeStems[] = {
     "あら",
     "あれ",

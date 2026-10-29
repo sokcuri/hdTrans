@@ -1,0 +1,34 @@
+# 규칙: MNG-5
+rule	input	expected	kind	layer
+analysis:shorter-ending	　ただ、電話向こうの相手がやたらと興奮しているのだけは伝わってきた。	 다만, 전화 저편의 상대가 유난히 흥분하고 있는 것만은 전해져 왔다.	fix	analysis
+analysis:shorter-ending	…そう考えるときれいだけどちょっと怖いね。	…그렇게 생각하면 예쁘지만 조금 무섭네.	fix	analysis
+analysis:shorter-ending	首を傾げるわたしを見て、母が悲しそうに目を伏せた。	has:고개를 갸웃하는	fix	analysis
+analysis:shorter-ending	野分、どこ？助けてよ！嫌…沈むのだけは嫌！	노와키, 어디? 도와줘! 싫다…가라앉는 것만은 싫어!	fix	analysis
+analysis:shorter-ending	激しく頭を振り、座布団を強く握りしめるのぞみ。	has:움켜쥐는	fix	analysis
+analysis:shorter-ending	思わず口をついて出た褒め言葉に、大まじめに反応するのぞみ。	has:반응하는	fix	analysis
+analysis:shorter-ending	涙声で訴えるのぞみ。	has:호소하는	fix	analysis
+analysis:shorter-ending	我が『驚嘆祝祭部』の活動には金がかかるのですぞ！	우리 『경탄 축제부』 활동에는 돈이 드는 것이지!	fix	analysis
+analysis:shorter-ending	「頑張るのですぞっ！」	「노력하는 거지!」	fix	analysis
+analysis:shorter-ending	「発表されたのですぞ！　東雲皐月のマニフェストが！」	「발표된 거지! 시노노메 사츠키의 마니페스트가!」	fix	analysis
+analysis:shorter-ending	読むのですぞ	읽는 것이지	fix	analysis
+analysis:shorter-ending	⟨するとここで…⟩	⟨하면 여기서…⟩	fix	analysis
+analysis:shorter-ending	いろんな観光地で乗ったけどもう張ってあったからね｡	여러 가지 관광지에서 탔지만 이미 쳐 두었으니까.	fix	analysis
+analysis:shorter-ending	普通に焼いたのより何倍も香ばしい｡	보통으로 구운 것보다 몇 배나 고소하다.	fix	analysis
+analysis:shorter-ending	ガードレールにぶつかったあとですか？	가드 레일에 부딪친 뒤입니까?	fix	analysis
+analysis:shorter-ending	慎一も　変えようとしてますよ。そう…。	신이치도 바꾸려고 하고 있어요. 그래….	fix	analysis
+analysis:shorter-ending	盛り上がってるとこ悪いんですけど・	has:고조되고 있는 곳	fix	analysis
+analysis:shorter-ending	(香尾里)こうやってね 光のほうを向けるときれいに見えるのよ	has:향하면 예쁘게	fix	analysis
+analysis:shorter-ending	願かけなどはやめ　今後は薬をのむとここで約束せよ。	has:마시면 여기서	fix	analysis
+analysis:shorter-ending	他人事として見ているぶんには美しいかもしれないけれど、自分となるとこれは落ち着かないわ……。	lacks:나루와	fix	analysis
+analysis:shorter-ending	それをあげるのです	그것을 줍니다	keep	analysis
+analysis:shorter-ending	わかんないんだけど	모르는데	keep	analysis
+analysis:shorter-ending	考えてみると、これ	생각해 보면, 이것	keep	analysis
+analysis:shorter-ending	落胆を隠せぬまま、しばらく	lacks:숨길 수 있는	keep	analysis
+analysis:shorter-ending	またいくさばに身を投じる者が現れたか……	lacks:고등어	keep	analysis
+analysis:shorter-ending	お前も食うとるやないか	lacks:깔본다	keep	analysis
+analysis:shorter-ending	ああ…。まあ　やる気があんのは伝わんだけどね。	lacks:타지 않아	keep	analysis
+analysis:shorter-ending	あっ… どこ行っちゃったんだろごめんごめん	lacks:실시	keep	analysis
+analysis:shorter-ending	ああ… 買うときゃよかった	lacks:꺄	keep	analysis
+analysis:shorter-ending	いんだけど。	lacks:있지 않아	keep	analysis
+analysis:shorter-ending	うん いますようちは 子だくさんだから	응 있어요 집은 자식 부자니까	fix	analysis
+analysis:shorter-ending	(ｷｭﾋｮﾝ)入ってみましょうかうわ～暑いです｡	(규현) 들어가 봅시다 사~덥습니다.	fix	analysis

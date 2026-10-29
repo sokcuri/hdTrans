@@ -23,7 +23,7 @@ HD_TEST(conjugation_fingerprints) {
     for (int kind = -2; kind <= 20; kind++) {
         for (int branch = -2; branch <= 20; branch++) lookups.Str(Conjugation(kind, branch));
     }
-    HD_CHECK_EQ(lookups.h, uint64_t{0x1ffca4cb6945f929ull});
+    HD_CHECK_EQ(lookups.h, uint64_t{0x7ed2ea5c6c748107ull});
 
     hdtest::Fnv prefix;
     prefix.U32(kPrefixForms);
@@ -44,8 +44,20 @@ HD_TEST(conjugation_samples) {
     HD_CHECK_EQ(std::string(Conjugation(kKindIku, 0)), std::string("く"));
     HD_CHECK_EQ(std::string(Conjugation(9, 1)), std::string("(-X8|)"));
     HD_CHECK(Conjugation(14, 0).empty());
-    HD_CHECK(Conjugation(0, 18).empty());
+    HD_CHECK(Conjugation(0, kBranchTo + 1).empty());
+    HD_CHECK(Conjugation(14, kBranchTo).empty());
     HD_CHECK_EQ(std::string(PrefixForm(50)), std::string("する"));
     HD_CHECK_EQ(std::string(PrefixForm(150)), std::string("来る"));
     HD_CHECK(PrefixForm(200).empty());
+}
+
+// The と form: the て form with と for て and ど for で.
+HD_TEST(conjugation_to_form) {
+    for (int kind = 0; kind < kConjugationKinds; kind++) {
+        const std::string te(Conjugation(kind, 7)), to(Conjugation(kind, kBranchTo));
+        const std::string_view last = te.ends_with("て") ? "と" : "ど";
+        HD_CHECK_EQ(to, te.substr(0, te.size() - std::string_view("て").size()) + std::string(last));
+    }
+    HD_CHECK_EQ(std::string(Conjugation(kKindIku, kBranchTo)), std::string("っと"));
+    HD_CHECK_EQ(std::string(kOnbinTo), std::string("うと"));
 }

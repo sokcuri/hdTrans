@@ -58,6 +58,14 @@ public:
     int current = -1;  // the token being processed
     int insertedLength = 0;
     int candidateRetryCount = 0;
+    // While set, a verb takes only an ending shorter than this one, which left text that no
+    // word reads; a validity rule does not reject the shorter ending for the text that the
+    // longer one would have taken (と before これ after とこ).
+    std::string_view longerEnding;
+    // A search that left text unread runs again with the shorter endings of verbs, and keeps
+    // the verbs that a shorter ending let it read.
+    bool shorterEndings = false;
+    std::vector<const Item*> shortenedVerbs;
     // The word search of a token recurses once per word. At kMaxWordDepth levels it stops
     // with the words found so far, and BuildSurfaceTransform goes on at resumeCursor
     // (-1 for none) with resumeParent as the word before and resumeRetries retries used.
@@ -151,6 +159,11 @@ private:
     bool VerbalNounAtCounter(Record* records, const Record& number, std::string_view text);
     bool CountBeforeFollower(Record* records, const Record& number, std::string_view text, int token);
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
+    // Whether a dictionary word starts at full[cursor:].
+    bool WordAt(std::string_view full, int cursor, int token);
+    // Whether the verb shorter, read from records at full[cursor:] with a shorter ending, reads the
+    // same where the text ends after it.
+    bool StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter);
     // Text path: a country or province (noun.realm-name) with 国 before a compound of that 国
     // (noun.realm-compound, and noun.realm-province-compound after a province) gives it its 国 (美濃国境
     // 美濃 + 国境, 日本国内 日本 + 国内, 出羽国人 出羽 + 国人): the reading of
@@ -218,8 +231,9 @@ bool VerbOrNounKey(const dict::Snapshot& snapshot, std::string_view stem, std::s
 // The enabled endings of g, read on a form of an auxiliary, rewritten for the verb before it: head
 // is the Korean of the auxiliary ending in its marker family (6 버&AA@), and the ending's class
 // digit picks the form of that family (5지만 → 6 버렸지만). An ending whose class has no such form
-// is disabled; false when none is left.
-bool ProgressiveEndings(Group& g, Detail& d, std::string_view head);
+// is disabled; false when none is left. With every, the disabled endings are rewritten too, for a
+// later stage that enables one again (the auxiliary of the と form and of はる).
+bool ProgressiveEndings(Group& g, Detail& d, std::string_view head, bool every = false);
 
 // Whether a verb record of conjugation class sub may join a group whose first record
 // has class first, for conjugation branch mode.

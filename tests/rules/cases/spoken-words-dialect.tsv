@@ -1,0 +1,38 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:spoken-words:12	おまはんの	당신의	fix	lookup
+dict:spoken-words:12	今日のところはおまはんの顔	오늘은 당신의 얼굴	fix	lookup
+dict:spoken-words:12	この場のけりはおまはんがつけるっちゅうのか	has:당신이	fix	lookup
+dict:spoken-words:12	おまはんも	당신도	fix	lookup
+dict:spoken-words:13	鉄骨もろとも落下してくたばりな	철골과 함께 낙하해 죽어	fix	lookup
+dict:spoken-words:13	女神もろとも抹殺するためオレは送り込まれた	여신과 함께 말살하기 위해 나는 보내졌다	fix	lookup
+dict:spoken-words:13	太陽もろとも！	태양과 함께!	fix	lookup
+dict:spoken-words:13	徳川もろともこの江戸も潰れてしまえばよいのじゃ	토쿠가와와 함께 이 에도도 무너져버리면 되는 게야	fix	lookup
+dict:spoken-words:13	もろに当たった	lacks:함께	keep	lookup
+dict:spoken-words:12	おまえはんの	lacks:당신	keep	lookup
+dict:spoken-words:14	なんぼでした？	얼마였습니까?	fix	lookup
+dict:spoken-words:14	今なんぼや！	지금 얼마야!	fix	lookup
+dict:spoken-words:14	なんぼで売れるかな	얼마로 팔릴까	fix	lookup
+dict:spoken-words:15	なんぼやっても負けるわけや	아무리 해도 지는 것이야	fix	lookup
+dict:spoken-words:15	そんなとこ なんぼ掃除したってきれいにならん	그런 곳 아무리 청소해도 예쁘게 되지 않아	fix	lookup
+dict:spoken-words:16	(高田)お前なら なんぼでもコネがあるじゃろうが	(타카다) 너라면 얼마든지 커넥션이 있잖아	fix	lookup
+dict:spoken-words:17	こんな 具合の悪い日はなんぼなんでも例外やと思います｡	has:아무리 그래도	fix	lookup
+dict:spoken-words:20	なんぼ何でも葉山さんが 自分でそんなことするわけない思います	has:아무리 그래도	fix	lookup
+dict:spoken-words:18	ふん ほなら待ってます	흥 그럼 기다리고 있습니다	fix	lookup
+dict:spoken-words:18	ほなら あとで言うわ	그럼 나중에 말해	fix	lookup
+dict:spoken-words:19	このまま ほっておくと きっと…	이대로 그냥 두면 분명…	fix	lookup
+dict:spoken-words:19	ほっておいても世界に知れ渡るだろうが	그냥 두어도 세계에 널리 알려지겠지만	fix	lookup
+dict:colloquial-endings:23	やっぱ潜水してなんぼよね。	역시 잠수해야 제맛이지.	fix	lookup
+dict:colloquial-endings:23	ミシンは　これが回ってなんぼ。	미싱은 이것이 돌아야 제맛.	fix	lookup
+dict:colloquial-endings:23	いいよ道具は使ってなんぼだから｡	좋아 도구는 써야 제맛이니까.	fix	lookup
+dict:spoken-words:18	ほなみさん	호나미 씨	keep	lookup
+dict:spoken-words:19	ほっとした	lacks:그냥	keep	lookup
+dict:spoken-words:21	♪ 月もろともに いでしおの～	♪ 달 함께 있고로 소금의~	fix	lookup
+dict:spoken-words:21	もろともに滅ぶ	함께 멸망한다	keep	lookup
+dict:spoken-words:27	いや そやけど びっくりしたわ～	아니 그렇지만 놀랐어~	fix	lookup
+dict:spoken-words:27	そやけど　もう戦争が始まってしもてて…。	그렇지만 이제 전쟁이 시작되어버려 있어….	fix	lookup
+dict:spoken-words:27	そやけど 初めての個展で・	그렇지만 첫 개인전에서·	fix	lookup
+dict:spoken-words:27	秋子もそやけど紀子は どんな気でおるんやろ	아키코도 그렇지만 토시코는 어떤 기분으로 있는 거지	fix	lookup
+dict:spoken-words:28	せやけど　社長。　俺は　もっと金が欲しい。	그렇지만 사장. 나는 좀 더 돈을 갖고 싶다.	fix	lookup
+dict:spoken-words:28	せやけどね おもろかったよ	그렇지만 재미있었어	fix	lookup
+dict:spoken-words:28	せやけど 幽霊を信じるキャラでもありませんよ	그렇지만 유령을 믿는 캐릭터이기도 하지 않아요	fix	lookup

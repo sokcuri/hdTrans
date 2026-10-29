@@ -1,0 +1,15 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+normalize:kansai-shimota	けど 死んでしもたら	has:죽어버리면	fix	normalize
+normalize:kansai-shimota	楽しんでもろうたか？	즐겨 주었나?	fix	normalize
+normalize:kansai-shimota	なくなってしもうた。	없어져버렸다.	fix	normalize
+normalize:kansai-shimota	また やられてしもうた	또 당해버렸다	fix	normalize
+normalize:kansai-shimota	もう　やめてもろたけど。	이제 그만두어 주었지만.	fix	normalize
+normalize:kansai-shimota	つい　血ぃ上ってしもた。	무심코 피 거꾸로 솟아버렸다.	fix	normalize
+normalize:kansai-shimota	(梅千代)言うてしもた…｡	has:말해버렸다	fix	normalize
+normalize:kansai-shimota	何で 死んでしもうたんや？	왜 죽어버린 거야?	fix	normalize
+normalize:kansai-shimota	言ってしもうただけなんです！	말해버렸을 뿐입니다!	fix	normalize
+normalize:kansai-shimota	逆に　ご馳走になってしもうて	반대로 대접받아버려	fix	normalize
+normalize:kansai-shimota	取りあえず ちょっとこっちの世界に来てもろて｡	우선 조금 여기의 세계에 와 줘.	fix	normalize
+normalize:kansai-shimota	鉄骨もろとも落下してくたばりな	철골과 함께 낙하해 죽어	keep	normalize
+normalize:kansai-shimota	もろに当たった	lacks:받	keep	normalize

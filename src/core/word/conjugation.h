@@ -9,11 +9,17 @@ constexpr int kConjugationKinds = 14;     // rows: the kind digit of a verb's pa
 constexpr int kConjugationBranches = 18;  // columns: the conjugation branch
 constexpr int kKindWa = 0;                // わ-row godan verbs (しまう, and its ちゃう, ちまう)
 constexpr int kKindIku = '?' - '0';       // 行く-type verbs
+// A branch past the table, of dialect speech only: the て form said with と or ど for its て or
+// で, which only the おる after it follows (生きとる, 読んどった, 書いとらん). A わ-row verb
+// says it also after the う it says for っ (言うとる, 思うとった): kOnbinTo.
+constexpr int kBranchTo = kConjugationBranches;
+constexpr std::string_view kOnbinTo = "うと";
 constexpr int kPrefixForms = 200;
 constexpr int kPrefixGates = 34;
 
 // The ending of kind and branch; kind kKindIku is kind 1 (く) with った, って and
-// っちゃ in branches 6, 7 and 17. "" outside the table. Some cells are the literal
+// っちゃ in branches 6, 7 and 17. Branch kBranchTo is the て form (branch 7) with と for
+// its て and ど for its で. "" outside the table. Some cells are the literal
 // pseudo-forms "(-X8|)" and "XX".
 std::string_view Conjugation(int kind, int branch);
 

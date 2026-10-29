@@ -66,3 +66,11 @@ dict:jisjk:268079	きーんと冷えててすっごくおいしいですよ～	�
 dict:jisjk:90693	ＳとＮがぴったりくっついてるような感じ	S와 N이 딱 들러붙어 있는 것 같은 느낌	fix	lookup
 dict:i:3378	挨拶を交わし、一日が始まる。	인사를 나누어, 하루가 시작된다.	fix	lookup
 dict:i:3378	二人は挨拶を交わす。	두 사람은 인사를 나눈다.	fix	lookup
+dict:jisjk:13736	田中が食う	타나카가 먹는다	fix	local
+dict:jisjk:13736	お前も食うとるやないか	너도 먹고 있는이 아닌가	fix	local
+dict:jisjk:13736	「知ってるわよ。アタシも食ってんだから。つーか口の周りベトベト。きったないなぁチビ」	has:나도 먹는 거니까	keep	local
+dict:jisjk:13736	そんな…！　そんな…！　好きだけど俺　毎日は食わねえよ。	그런…! 그런…! 좋아하지만 나 매일은 먹지 않아.	keep	local
+dict:jisjk:13736	飯を食う	밥을 먹는다	keep	local
+dict:jisjk:13736	彼を食う	그를 깔본다	keep	local
+dict:jisjk:94410	人を食った態度	남을 무시한 태도	keep	lookup
+dict:jisjk:94410	人を食った話だ	남을 무시한 이야기다	keep	lookup
