@@ -207,3 +207,55 @@ HD_TEST(engine_wrapped_arrows) {
     HD_CHECK_EQ(AloneText("揚げた。➡"), "揚げた。");
     HD_CHECK_EQ(AloneText("揚げた"), "揚げた");
 }
+
+namespace {
+
+output::ResolvedItem Item(std::string surface, std::string code, std::string gattr = {}) {
+    output::ResolvedItem it;
+    it.surface = std::move(surface);
+    it.entry.code = std::move(code);
+    it.entry.gattr = std::move(gattr);
+    it.first = it.entry;
+    return it;
+}
+
+}  // namespace
+
+HD_TEST(engine_wrapped_cut_word) {
+    using internal::AddWrapEdges;
+    using internal::CutStem;
+    using internal::MayCutWord;
+    using internal::ReadWord;
+    // The kana a line leaves unread before its first word read (げ, る of げるしかない).
+    WrapEdges cut;
+    AddWrapEdges({Item("げ", "110", "Nm"), Item("る", "110", "Nm"), Item("しかな", "7U0", "XnTu")}, cut);
+    HD_CHECK_EQ(cut.unreadStart, "げる");
+    WrapEdges read;
+    AddWrapEdges({Item("とか", "200"), Item("る", "110", "Nm")}, read);
+    HD_CHECK(read.unreadStart.empty());
+    WrapEdges latin;
+    AddWrapEdges({Item("ABC", "110", "Nm")}, latin);
+    HD_CHECK(latin.unreadStart.empty());
+    HD_CHECK(!ReadWord(Item("る", "110", "Nm")));
+    HD_CHECK(ReadWord(Item("始まり", "110")));
+
+    HD_CHECK(MayCutWord("もう逃", "げるしかない。", cut));
+    HD_CHECK(MayCutWord("ほら、読 ", "げるしかない", cut));
+    // Not after a mark, a blank line or into an item of its own; not when next starts with a word read.
+    HD_CHECK(!MayCutWord("もう逃。", "げるしかない。", cut));
+    HD_CHECK(!MayCutWord("", "げるしかない。", cut));
+    HD_CHECK(!MayCutWord("もう逃", "「げるしかない」", cut));
+    HD_CHECK(!MayCutWord("もう逃", "げるしかない。", read));
+    HD_CHECK(!MayCutWord("もう逃", "しかない。", cut));
+
+    // A stem with a kanji, a small kana that starts no word, or katakana on both sides before a letter.
+    HD_CHECK(CutStem("始め", "る", U'と'));
+    HD_CHECK(CutStem("逃", "げる", U'し'));
+    HD_CHECK(CutStem("こり", "ゃ", U'。'));
+    HD_CHECK(CutStem("バラ", "ンス", U'大'));
+    HD_CHECK(CutStem("ラ", "ノベ", U'っ'));
+    HD_CHECK(!CutStem("こ", "りゃ", U'ま'));
+    HD_CHECK(!CutStem("ク", "キ", U'\''));
+    HD_CHECK(!CutStem("す", "そ", U'い'));
+    HD_CHECK(!CutStem("な", "お", U'ケ'));
+}

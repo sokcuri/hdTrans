@@ -1,0 +1,42 @@
+# 규칙: LEX-86
+rule	input	expected	kind	layer
+dict:jisjk:114680	五十代半ば、白髪交じりの頭をしていた。	50대 중반, 백발 섞임의 머리를 하고 있었다.	fix	defaults
+dict:jisjk:114680	まだ二十代半ばの若い教師で、	아직 이십대 중반의 젊은 교사로,	fix	defaults
+dict:jisjk:114680	振り向いたのは三十代半ばほどの女だった。	뒤돌아 본 것은 30대 중반 정도의 여자였다.	fix	defaults
+dict:jisjk:114680	眉目麗しく二十代も半ばを過ぎたばかりだ。	미목 아름답게 이십대도 중반을 지난 지 얼마 안됐다.	fix	defaults
+dict:jisjk:114680	四十代も半ばに差し掛かり、	40대도 중반에 접어들어,	fix	defaults
+dict:jisjk:114680	年齢は二十代半ばほどだろうか。	연령은 이십대 중반만큼일까.	fix	defaults
+dict:jisjk:114680	重ねた彼は20代半ばにして宇宙軍大尉になった。	거듭한 그는 20대 중반으로 해 우주군 대위가 되었다.	fix	defaults
+dict:jisjk:114680	歳は３０代半ばだろうか、	나이는 30대 중반일까,	fix	defaults
+dict:jisjk:114680	若い男女。10代半ばから20代までを対象とする。	젊은 남녀. 10대 중반부터 20대까지를 대상으로 한다.	fix	defaults
+dict:jisjk:114680	年の頃は二十代半ばであり、マナと釣り合う。	해 무렵은 이십대 중반이며, 마나와 어울린다.	fix	defaults
+dict:jisjk:114680	２０１３年に 20代半ばの男性が	2013년에 20대 중반의 남성이	fix	defaults
+dict:jisjk:114680	権兵衛は２０代半ばになっていた。	시골 사람은 20대 중반이 되어 있었다.	fix	defaults
+dict:jisjk:114680	彫りの深い４０代半ばの男ですか。	조각의 깊은 40대 중반의 남자입니까.	fix	defaults
+dict:jisjk:114680	性格が災いし、３０歳半ばにして異性との噂一つない。	성격이 화가 되어, 30세 중반으로 해 이성과의 소문 하나 없다.	fix	defaults
+dict:jisjk:114680	ヴィクトリア朝（19世紀半ば）時代の服飾文化。	빅토리아 시대(19세기 중반) 시대의 복식 문화.	fix	defaults
+dict:jisjk:114680	18世紀半ばにローマで発生した。	18세기 중반에 로마에서 발생했다.	fix	defaults
+dict:jisjk:114680	７世紀初めから7世紀半ばまで、高句麗が栄えた。	7세기 처음부터 7세기 중반까지, 고구려가 돋보였다.	fix	defaults
+dict:jisjk:114680	１９世紀半ば以降のイギリスの一極支配。	19세기 중반 이후의 영국의 일극지배.	fix	defaults
+dict:jisjk:114680	１６世紀半ば　日本が初めて出会ったヨーロッパの国。	16세기 중반 일본이 처음으로 만난 유럽의 나라.	fix	defaults
+dict:jisjk:114680	卑弥呼は３世紀半ばに亡くなります。	히미코는 3세기 중반에 돌아가십니다.	keep	defaults
+dict:jisjk:114680	2015年の2月半ば、俺は電車の事故で死んだ。	2015년의 2월 중순, 나는 전철의 사고로 죽었다.	keep	defaults
+dict:jisjk:114680	奴の数字は２月も半ばだというのに予算の3割しかない。	놈의 숫자는 2월도 중순이라고 하는데 예산의 3할밖에 없다.	keep	defaults
+dict:jisjk:114680	それも６月の半ばという中途半端な時期だった。	그것도 6월 중순이라는 어중간한 시기였다.	keep	defaults
+dict:jisjk:114680	１月の半ばです。	1월 중순입니다.	keep	defaults
+dict:jisjk:114680	90年代半ば パソコンとインターネットの普及が加速した。	90년대 중반 PC와 인터넷 보급이 가속했다.	keep	defaults
+dict:jisjk:114680	来年半ばまでに完成させる。	내년 중반까지 완성시킨다.	keep	defaults
+dict:jisjk:114680	この十台半ばという年齢の少年には重すぎる。	이 10대 반이라는 연령의 소년에게는 너무 무겁다.	keep	defaults
+dict:jisjk:114680	三十歳半の男が立っていた。	30세반의 남자가 서 있었다.	keep	defaults
+dict:jisjk:114680	志半ばで命を落とした。	뜻을 이루지 못하고 목숨을 잃었다.	keep	defaults
+dict:jisjk:114680	お前は組の半ばを率いよ。	너는 조의 반을 이끌어라.	keep	defaults
+dict:jisjk:114680	その音に半ば反射的にサラは愛用のダガーを抜いた。	그 소리에 반쯤 반사적으로 사라는 애용하는 단검을 뽑았다.	keep	defaults
+dict:jisjk:114680	もう半ば自棄である。	이제 반쯤 자포자기이다.	keep	defaults
+dict:jisjk:114680	幹の半ば辺りに舌をあてがう。	줄기의 반근처에 혀를 나누어준다.	keep	defaults
+dict:jisjk:114680	2020年も半ばを過ぎた。	2020년도 중반을 지났다.	fix	defaults
+dict:jisjk:114680	三十歳も半ばを過ぎた。	30세도 중반을 지났다.	fix	defaults
+dict:jisjk:114680	佳代半ばに会った。	카요반에 만났다.	keep	defaults
+dict:jisjk:114680	少年半ばにして倒れた。	소년 반으로 해 쓰러졌다.	keep	defaults
+dict:jisjk:114680	八代半ばに会った。	야시로 반에 만났다.	keep	defaults
+dict:jisjk:114680	五代半ばの家。	고다이 반의 집.	keep	defaults
+dict:jisjk:114680	三代半ばの頃。	삼대 반의 무렵.	keep	defaults

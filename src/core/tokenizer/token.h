@@ -52,6 +52,7 @@ struct ControlMarker {
     int tokenIndex;
     int textLength;
     int markerKind;
+    bool inWord = false;  // a break of joined lines that falls inside a word
 };
 
 // A text of Tokens::text.
