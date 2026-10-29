@@ -854,10 +854,13 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                                            ? text::FromKana(EncodeText(std::u32string_view(f_).substr(p, end - p)),
                                                             text::Preset::Fan)
                                            : Lengthen(Reading(s, p, end), units);
-            // An open row before no pause is followed by a comma, so the words after it
-            // read as the start of a clause (ってかなんで 그보다, 왜).
+            // An open row before no pause is followed by a comma, so the words after it read as the
+            // start of a clause; the source has none, so it is not written (ってかなんで 그보다 왜).
             if (open && !PauseAt(end)) {
-                if (IsHiraganaRune(rs_[end])) korean += ',';
+                if (IsHiraganaRune(rs_[end])) {
+                    korean += ',';
+                    text::AppendRune(korean, output::kSilentComma);
+                }
                 spaceAfter = !In(rs_[end], U"…‥―─—");
             }
             // A small ぅ that opens a cry before 아 is the weak vowel 으 (ぅあ 으아; not ぅお 우오,
@@ -1411,7 +1414,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     if (p + n < rs.size() && In(f[p + n], U"ャュョ")) n++;
     if (p + n < rs.size() && f[p + n] == U'ッ') n++;
     if (f[p + n - 1] == U'ッ' && p + n < rs.size() && IsKanjiRune(rs[p + n]) && !In(f[p], kSoundsBeforeKanji)) {
-        pieces.push_back({U"、"});
+        pieces.push_back({U" "});  // the source writes no comma there (ちょっ待て 기 기다려)
         return p + n;
     }
     const std::u32string_view x = f.substr(p, n);

@@ -63,6 +63,10 @@ constexpr char32_t kClippedCryMark = 0xE00F;
 // The mark the sound stage writes after a sound that a source space parts from the Japanese text
 // after it (あっ なんか): the segment stage ends the chunk there, so that the text after the space
 // starts anew and takes no particle or ending of the sound (앗 뭔가).
+// The mark written right after a comma that the source does not have (じゃあ、 of じゃあどっち, the
+// open row ってか): the comma reads as a pause, and the restore stage drops it with the mark.
+constexpr char32_t kSilentComma = 0xE013;
+
 // U+E010 and U+E011 are the break spans of joined lines (engine/wrapped.h), which the segment
 // stage keeps in their chunk.
 constexpr char32_t kPhraseBreak = 0xE012;

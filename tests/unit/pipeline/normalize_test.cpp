@@ -369,7 +369,8 @@ HD_TEST(pipeline_rewrite_interjections) {
         {"「え？」"sv, "「えっ？」"sv},
         {"えぇ？"sv, "えっ？"sv},
         {"「えー…？」"sv, "「えっ…？」"sv},
-        {"じゃあどっち"sv, "じゃあ、どっち"sv},
+        {"じゃあどっち"sv, "じゃあ、\xEE\x80\x93どっち"sv},  // the comma that is not written (output::kSilentComma)
+        {"じゃあ 始めようか"sv, "じゃあ、\xEE\x80\x93 始めようか"sv},
         {"じゃあね"sv, "じゃあね"sv},
         {"あれ！あれ、"sv, "あれっ！あれっ、"sv},
         {"「え？…え？」"sv, "「えっ？…えっ？」"sv},

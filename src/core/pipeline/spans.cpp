@@ -166,7 +166,7 @@ Match DrawlSpan(std::string_view s) {
 Match EmphasisSpan(std::string_view s) {
     const text::Rune r = text::DecodeRune(s);
     if (r.cp == kEmphasisOpen || r.cp == output::kStressMark) return {r.size, output::SpanOpen};
-    if (r.cp == kEmphasisClose || r.cp == kLengthenMark) return {r.size, output::SpanClose};
+    if (r.cp == kEmphasisClose || r.cp == kLengthenMark || r.cp == output::kSilentComma) return {r.size, output::SpanClose};
     if (r.cp == output::kDrawnMark || output::IsCryMark(r.cp)) {
         size_t n = 0;
         while (n < s.size() && text::DecodeRune(s.substr(n)).cp == r.cp) n += r.size;

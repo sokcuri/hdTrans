@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 normalize:nde-start	「んで、どうやって相談を集める？」	「그래서, 어떻게 상담을 모아?」	fix	normalize
-normalize:shaanai	「しゃーない。じゃあ今回は特別に譲ってあげるよ」	「어쩔 수 없어. 그럼, 이번에는 특별히 양보해 줄게」	fix	normalize
+normalize:shaanai	「しゃーない。じゃあ今回は特別に譲ってあげるよ」	「어쩔 수 없어. 그럼 이번에는 특별히 양보해 줄게」	fix	normalize
 normalize:saate	「さーて、帰ってご飯にしよう！」	「자, 돌아가 밥으로 하자!」	fix	normalize
 normalize:soyu-koto	「じゃっ、そゆことで」	「그러면, 그런 걸로」	fix	normalize
 normalize:hidee	「ひでえな」	「심하네」	fix	normalize
