@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.7.4](https://github.com/sokcuri/hdTrans/compare/v0.7.3...v0.7.4) (2026-10-29)
+
+
+### Features
+
+* **web:** two translation cards with output modes, a settings layer and per-card expand ([#283](https://github.com/sokcuri/hdTrans/issues/283)) ([9e01d40](https://github.com/sokcuri/hdTrans/commit/9e01d404575ed6b327455990fcf1cfb0c5113457))
+
+
+### Bug Fixes
+
+* **dict:** keep work titles off ordinary phrases and conjugate でございます ([#288](https://github.com/sokcuri/hdTrans/issues/288)) ([415e8d6](https://github.com/sokcuri/hdTrans/commit/415e8d654e7b0253d8a5deeaf77134335fdfb011))
+* **dict:** read よろしく greetings as 잘 부탁 and regards to a person as 안부 ([#287](https://github.com/sokcuri/hdTrans/issues/287)) ([9f17712](https://github.com/sokcuri/hdTrans/commit/9f177126f1fc5df3fae1b0abcec25ad60b34275f))
+* **release:** analyse spoken forms, join split words and keep source spacing ([24622c6](https://github.com/sokcuri/hdTrans/commit/24622c6bf4c11e977b873284f88e0896878a6f32))
+* **sound:** keep the source spaces between sounds and copies of a word ([#284](https://github.com/sokcuri/hdTrans/issues/284)) ([e14ab67](https://github.com/sokcuri/hdTrans/commit/e14ab678c75c0d7656c06beea382e2d437820ed3))
+* **sound:** write no comma the source lacks after a sound or conjunction ([#286](https://github.com/sokcuri/hdTrans/issues/286)) ([a0a0812](https://github.com/sokcuri/hdTrans/commit/a0a081210dd6503c2de345822c40c045261a68ec))
+* **word:** analyse spoken and Kansai forms instead of sounding them out ([#285](https://github.com/sokcuri/hdTrans/issues/285)) ([5dcf600](https://github.com/sokcuri/hdTrans/commit/5dcf600e6da28e9eb82c259084a90c347928a9a8))
+* **wrapped:** join a word split across a line break and read 半ば by its use ([#282](https://github.com/sokcuri/hdTrans/issues/282)) ([e82a7e5](https://github.com/sokcuri/hdTrans/commit/e82a7e5c0cd1d88b97df5f4797a1ad735f7bf36c))
+
 ## [0.7.3](https://github.com/sokcuri/hdTrans/compare/v0.7.2...v0.7.3) (2026-10-28)
 
 
