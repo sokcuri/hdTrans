@@ -1,59 +1,146 @@
-:root { color-scheme: light dark; --line: #8884; --accent: #2b6cb0; }
+:root {
+  color-scheme: light dark;
+  --bg: #f6f7f9; --fg: #1b1d21; --surface: #fff; --sunk: #f0f2f5; --line: #c9ced6; --muted: #5f6672;
+  --accent: #1a5fb4; --accent-fg: #fff; --warn: #a33a00;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #131416; --fg: #e6e7ea; --surface: #1c1e22; --sunk: #17191c; --line: #3a3f47; --muted: #9aa1ad;
+    --accent: #7ab4ff; --accent-fg: #0d1520; --warn: #ffab70; }
+}
 * { box-sizing: border-box; }
-body { margin: 0 auto; max-width: 72rem; padding: 1rem; font: 15px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
-h1 { font-size: 1.4rem; margin: 0; }
-h1 .by { font-size: .9rem; font-weight: normal; opacity: .7; margin-left: .3rem; }
-#hver { display: block; font-size: .8rem; opacity: .6; margin-top: .15rem; }
+[hidden] { display: none !important; }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0 auto; max-width: 76rem; padding: 1rem; color: var(--fg); background: var(--bg);
+  font: 14px/1.5 system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+a { color: var(--accent); }
+h1 { font-size: 20px; margin: 0; }
+h1 .by { font-size: 13px; font-weight: normal; color: var(--muted); margin-left: .3rem; }
+#hver { display: block; font-size: 12px; color: var(--muted); margin-top: .15rem; }
 .note { font-size: .9rem; margin: .5rem 0 0; }
-.status { margin: 1rem 0 .5rem; font-size: .9rem; display: flex; gap: .5rem; align-items: center; }
+button, select { font: inherit; color: inherit; }
+button { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+button:disabled { opacity: .45; cursor: default; }
+select { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0 .5rem; min-height: 2.5rem; max-width: 100%; }
+
+.status { margin: .6rem 0 .5rem; font-size: 13px; display: flex; flex-wrap: wrap; gap: .25rem .75rem; align-items: center; }
 progress { flex: 1; max-width: 20rem; }
-.controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: .5rem; }
-fieldset { border: 1px solid var(--line); border-radius: 6px; padding: .2rem .7rem; margin: 0; }
-legend { font-size: .8rem; opacity: .7; }
-select { font: inherit; }
-#example { width: 16rem; max-width: 100%; text-overflow: ellipsis; }
-.panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .8rem; }
-@media (max-width: 48rem) { .panes { grid-template-columns: minmax(0, 1fr); } }
-.pane { display: flex; flex-direction: column; gap: .2rem; font-size: .9rem; }
-.pane small { opacity: .7; margin-left: .5rem; }
-textarea { width: 100%; min-height: 22rem; font: inherit; line-height: 1.6; padding: .5rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; background: transparent; color: inherit; }
+#warning { color: var(--warn); overflow-wrap: anywhere; }
+
+.tabs { display: flex; gap: .3rem; border-bottom: 1px solid var(--line); }
+.tabs button { min-height: 2.75rem; padding: 0 1.1rem; border-bottom: 0; border-radius: 8px 8px 0 0; background: transparent; color: var(--muted); }
+.tabs button[aria-selected=true] { color: var(--fg); background: var(--surface); border-color: var(--line); box-shadow: inset 0 3px 0 var(--accent); font-weight: 600; }
+
+/* Settings: a button with a summary that opens the settings layer. */
+.settings { margin-top: .2rem; padding: .4rem 0; background: var(--bg); }
+.settings-toggle { display: inline-flex; align-items: center; gap: .6rem; max-width: 100%; min-height: 2.5rem; padding: 0 .9rem; text-align: left; }
+.settings-toggle small { min-width: 0; font-size: 12px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.settings-toggle::after { content: "▾"; color: var(--muted); }
+.settings-toggle[aria-expanded=true]::after { content: "▴"; }
+/* The settings layer: a popover under the button (top and left set by the page), a bottom sheet on narrow screens. */
+.settings-sheet { position: fixed; margin: 0; padding: 0; width: 26rem; max-width: calc(100vw - 2rem); max-height: calc(100dvh - 2rem); overflow: auto;
+  color: var(--fg); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 30px rgb(0 0 0 / .3); }
+.settings-sheet::backdrop { background: rgb(0 0 0 / .2); }
+.sheet { padding: .5rem 1rem 1rem; }
+.sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .4rem; }
+.sheet-head button { min-width: 2.5rem; min-height: 2.5rem; font-size: 20px; line-height: 1; background: transparent; border-color: transparent; }
+.settings-body { display: flex; flex-direction: column; align-items: stretch; gap: .7rem; }
+.field { display: inline-flex; gap: .45rem; align-items: center; }
+.field > span, .seg > span:first-child { color: var(--muted); font-size: 13px; }
+.settings-body .field, .seg { display: flex; justify-content: space-between; gap: 1rem; }
+.settings-body select, .seg .opts { flex: 1; max-width: 16rem; min-height: 2.5rem; }
+#applied { flex: 1; min-width: 0; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#dict-edit { min-height: 2.5rem; padding: 0 .7rem; font-size: 13px; }
+#example { width: 16rem; min-height: 2.25rem; text-overflow: ellipsis; }
+.seg { align-items: center; }
+.seg .opts { display: flex; }
+.seg label { position: relative; display: inline-flex; flex: 1; justify-content: center; align-items: center; min-height: 2.5rem; padding: 0 .6rem;
+  border: 1px solid var(--line); background: var(--surface); cursor: pointer; }
+.seg label:first-of-type { border-radius: 6px 0 0 6px; }
+.seg label:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg label:has(input:checked) { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* The text tab: a language bar over two equal cards. */
+.examplebar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; padding: .3rem 0; background: var(--bg); }
+
+.langbar { display: grid; grid-template-columns: minmax(0, 1fr) 1rem minmax(0, 1fr); align-items: center; padding: .3rem 0 .4rem; background: var(--bg);
+  font-weight: 600; }
+.langbar span { padding: 0 .9rem; }
+.langbar .arrow { padding: 0; text-align: center; color: var(--muted); font-weight: normal; }
+.panes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; }
+.pane { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.card { gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.card:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.card.result { background: var(--sunk); }
+/* The header text starts where the text below starts. */
+.texts { --pad-x: 1rem; }
+.card .head { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; min-height: 2.9rem; padding: .2rem .35rem .2rem var(--pad-x);
+  border-bottom: 1px solid var(--line); border-radius: 10px 10px 0 0; background: inherit; }
+.card .head small { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.badge { flex: none; padding: 0 .4rem; border: 1px solid var(--line); border-radius: 5px; font-size: 12px; line-height: 1.5; font-weight: 600; }
+/* With one card shown alone, the language row names only its language. */
+#text[data-expanded] .langbar { grid-template-columns: minmax(0, 1fr); }
+#text[data-expanded] .langbar .arrow, #text[data-expanded=srccard] .langbar .ko, #text[data-expanded=outcard] .langbar .ja { display: none; }
+.card .head .expand { margin-left: auto; }
+.card .head .expand[aria-pressed=true] { color: var(--accent); }
+.card .head button { min-height: 2.5rem; min-width: 2.5rem; padding: 0 .8rem; background: transparent; border-color: transparent; }
+.card .head button:hover { border-color: var(--line); }
+.card .icon { font-size: 20px; line-height: 1; padding: 0; }
+#tbar { width: 6rem; height: .5rem; flex: none; }
+.texts textarea, .out { font-size: 18px; line-height: 1.6; padding: .9rem var(--pad-x); color: inherit; }
+.texts textarea { display: block; flex: 1; width: 100%; min-height: 0; border: 0; border-radius: 0; resize: none; background: transparent; }
+.texts textarea:focus-visible, .out:focus-visible { outline: none; }
+.card .body { position: relative; flex: 1; min-height: 0; }
+.out { position: absolute; inset: 0; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; overflow: auto; }
+.out .src { color: var(--muted); }
+/* The page sets the card heights to fill the window (a fallback height until then).
+   펼치기 shows one card alone and holds the page still. */
+.texts { align-items: start; }
+.texts .card { height: 22rem; min-height: 0; }
+.texts.focused { grid-template-columns: minmax(0, 1fr); }
+.texts.focused .card:not(.expanded) { display: none; }
+html.locked { overflow: hidden; }
+textarea { font: inherit; }
+
+/* The dictionary editor. */
 .dicts { margin-top: 1rem; align-items: start; }
 table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
-.grid th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; padding: 0 .3rem; }
-.grid td { border: 1px solid var(--line); padding: 0; }
-.grid td:last-child { border: 0; width: 1.6rem; }
+.grid th { font-weight: normal; font-size: .8rem; color: var(--muted); text-align: left; padding: 0 .3rem; }
+.grid td { border: 1px solid var(--line); padding: 0; background: var(--surface); }
+.grid td:last-child { border: 0; width: 1.6rem; background: transparent; }
 .grid input { width: 100%; font: inherit; border: 0; padding: .25rem .35rem; background: transparent; color: inherit; }
 .grid input:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
-.grid button, .gridbar button { font: inherit; border-radius: 4px; cursor: pointer; background: transparent; color: inherit; }
+.grid button, .gridbar button { border-radius: 4px; background: transparent; }
 .grid button.del { padding: 0 .4rem; border: 0; opacity: .5; }
 .grid button.del:hover { opacity: 1; }
 .gridbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .3rem; }
-.gridbar button { padding: .15rem .6rem; font-size: .8rem; border: 1px solid var(--line); }
-.contact { margin: 2rem 0 0; font-size: .8rem; opacity: .7; text-align: center; }
-#tbar { width: 8rem; height: .6rem; vertical-align: middle; }
-.tabs { display: flex; flex-wrap: wrap; gap: .3rem; align-items: center; border-bottom: 1px solid var(--line); margin-bottom: .7rem; }
-.tabs button { font: inherit; padding: .3rem .9rem; border: 1px solid var(--line); border-bottom: 0; border-radius: 6px 6px 0 0; background: transparent; color: inherit; cursor: pointer; opacity: .7; }
-.tabs button[aria-selected=true] { opacity: 1; border-color: var(--accent); font-weight: 600; }
-.tabs label { margin-left: auto; }
-.drop { display: block; padding: 2rem 1rem; border: 2px dashed var(--line); border-radius: 8px; text-align: center; cursor: pointer; }
+.gridbar button { padding: .15rem .6rem; font-size: .8rem; }
+.contact { margin: 2rem 0 0; font-size: 12px; color: var(--muted); text-align: center; }
+
+/* The document tab. */
+.drop { display: block; padding: 2rem 1rem; border: 2px dashed var(--line); border-radius: 10px; background: var(--surface); text-align: center; cursor: pointer; }
 .drop.over { border-color: var(--accent); }
-.drop input { display: none; }
-#docs .controls button { font: inherit; padding: .2rem .8rem; }
-table.files { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: .5rem; }
-.files th { font-weight: normal; font-size: .8rem; opacity: .7; text-align: left; }
-.files td, .files th { padding: .25rem .4rem; border-bottom: 1px solid var(--line); }
-.files button { font: inherit; font-size: .8rem; }
-.editing { display: flex; gap: .4rem; align-items: center; margin: 1rem 0 .3rem; font-size: .9rem; }
-.editing select { min-width: 0; max-width: 100%; }
+.drop:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.drop .narrow { display: none; }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: .7rem 0; }
+.actions button { min-height: 2.5rem; padding: 0 1.1rem; }
+#run:not(:disabled) { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+table.files { width: 100%; border-collapse: collapse; }
+.files th { font-weight: normal; font-size: .8rem; color: var(--muted); text-align: left; }
+.files td, .files th { padding: .25rem .4rem; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.files button { min-height: 2.5rem; padding: 0 .9rem; font-size: 13px; }
+
+/* The dictionary tab. */
 .gridscroll { overflow-x: auto; }
 table.grid { min-width: 26rem; }
-.library { display: grid; grid-template-columns: minmax(18rem, 30rem) minmax(0, 1fr); gap: 1.2rem; align-items: start; }
-#dictedit .editing { display: none; }
-.pane[hidden] { display: none; }
+.library { display: grid; grid-template-columns: minmax(18rem, 30rem) minmax(0, 1fr); gap: 1.2rem; align-items: start; margin-top: .7rem; }
 #dictedit .dicts { grid-template-columns: minmax(0, 1fr); margin-top: 0; }
 .dicts .pane { min-width: 0; }
 .dictbar { display: flex; flex-wrap: wrap; gap: .3rem; margin-bottom: .5rem; }
-.dictbar button, .dictlist button { font: inherit; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: inherit; cursor: pointer; }
+.dictbar button, .dictlist button { border-radius: 4px; background: transparent; }
 .dictbar button { padding: .25rem .8rem; }
 .dictlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .dictlist li { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .5rem; padding: .35rem .3rem; border-bottom: 1px solid var(--line); }
@@ -61,19 +148,70 @@ table.grid { min-width: 26rem; }
 .dictlist input[type=checkbox] { width: 1.1rem; height: 1.1rem; margin: 0; }
 .dictlist .name { flex: 1; min-width: 6rem; border: 0; padding: .2rem 0; text-align: left; overflow-wrap: anywhere; }
 .dictlist li.sel .name { font-weight: 600; }
-.dictlist .count, .dictlist .fmt { font-size: .8rem; opacity: .7; }
+.dictlist .count, .dictlist .fmt { font-size: .8rem; color: var(--muted); }
 .dictlist .fmt { border: 1px solid var(--line); border-radius: 3px; padding: 0 .3rem; }
 .dictlist .acts { display: flex; flex-wrap: wrap; gap: .25rem; margin-left: auto; }
 .dictlist .acts button { font-size: .8rem; padding: .05rem .5rem; }
 .dictlist button:disabled { opacity: .35; cursor: default; }
 @media (min-width: 48.01rem) { .dictlist li { cursor: grab; } }
+
 @media (max-width: 48rem) {
+  body { padding: .6rem .75rem .75rem; }
+  h1 { font-size: 17px; }
+  h1 .by { font-size: 12px; }
+  #hver { font-size: 11px; margin-top: 0; }
+  .status { margin: .35rem 0 .45rem; font-size: 12px; }
+  .tabs button { flex: 1; padding: 0 .5rem; }
+  .settings { margin-top: 0; padding: .3rem 0; }
+  .settings-toggle { display: flex; width: 100%; min-height: 2.75rem; }
+  .settings-toggle small { flex: 1; }
+  .settings-sheet { inset: auto 0 0 0 !important; width: 100%; max-width: none; max-height: 85dvh; border-radius: 14px 14px 0 0; border-bottom: 0; }
+  .settings-sheet::backdrop { background: rgb(0 0 0 / .45); }
+  .sheet { padding-bottom: calc(1rem + env(safe-area-inset-bottom)); }
+  .sheet-head button, .settings-body select, .seg .opts, #dict-edit { min-height: 2.75rem; }
+  .examplebar { flex-wrap: nowrap; padding: .2rem 0; }
+  .examplebar .field { flex: 1; min-width: 0; }
+  #example { flex: 1; min-width: 0; width: auto; min-height: 2.75rem; }
+  .langbar { padding: .2rem 0 .3rem; }
+  .seg label { min-height: 2.75rem; }
+  .langbar { grid-template-columns: auto auto auto; justify-content: center; gap: .6rem; }
+  .langbar span { padding: 0; }
+  .panes { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
+  .card .head { min-height: 3rem; }
+  .texts { --pad-x: .8rem; }
+  .card .head { gap: .25rem; padding: .2rem .25rem .2rem var(--pad-x); }
+  .card .head button { min-height: 2.75rem; min-width: 2.5rem; padding: 0 .6rem; }
+  .card .head .icon { padding: 0; }
+  .texts textarea, .out { font-size: 16px; padding: .7rem var(--pad-x); }
+
+  .drop { padding: 1.4rem 1rem; }
+  .drop .wide { display: none; }
+  .drop .narrow { display: inline; }
+  #docs:not([hidden]) { display: flex; flex-direction: column; }
+  .actions { order: 1; position: sticky; bottom: 0; z-index: 1; margin: .6rem -.75rem 0; padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom));
+    background: var(--bg); border-top: 1px solid var(--line); }
+  .actions button { flex: 1; min-height: 2.75rem; }
+  table.files, .files tbody { display: block; }
+  table.files { margin-bottom: .2rem; }
+  .files thead { display: none; }
+  .files tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem .6rem; align-items: center; margin-top: .6rem; padding: .7rem .8rem;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+  .files td { border: 0; padding: 0; }
+  .files td:nth-child(1) { font-weight: 600; }
+  .files td:nth-child(2), .files td:nth-child(3) { grid-column: 1; font-size: .85rem; color: var(--muted); }
+  .files td:nth-child(4) { grid-column: 2; grid-row: 1 / span 3; }
+  .files button { min-height: 2.75rem; padding: 0 1rem; }
+
   .library { grid-template-columns: minmax(0, 1fr); }
   .dictlist .acts { width: 100%; justify-content: flex-end; }
-  .tabs button, .dictbar button, .gridbar button, .dictlist .acts button, .editing select { min-height: 2.75rem; padding-inline: .9rem; }
+  .dictbar button, .gridbar button, .dictlist .acts button { min-height: 2.75rem; padding-inline: .9rem; }
   .dictlist .name { min-height: 2.75rem; }
   .dictlist input[type=checkbox] { width: 1.5rem; height: 1.5rem; }
   .grid input { padding: .55rem .4rem; font-size: 16px; }
   .grid button.del { min-height: 2.75rem; padding: 0 .8rem; }
   .grid td:last-child { width: 2.6rem; }
+}
+
+@media (pointer: coarse) {
+  .dictbar button, .gridbar button, .dictlist .acts button, .dictlist .name, .grid button.del, .files button { min-height: 2.75rem; }
 }

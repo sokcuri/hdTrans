@@ -1,9 +1,10 @@
 // The page: loads the engine and the dictionaries (from Cache Storage when
 // their content hashes are cached), hands them to the worker and translates
 // there as the input changes.
-import { decodeText, encodeOutput, formatDocument, outputName, zip, type OutputMode } from './documents.js';
+import { decodeText, encodeOutput, formatDocument, outputName, outputParts, zip, type OutputMode } from './documents.js';
 import { count, firstName, fromFile, newId, openStore, overlay, toFile, type Dictionary, type Store } from './dictionaries.js';
-import { grid } from './grid.js';
+import { copyText, grid } from './grid.js';
+import { sha256 as sha256Bytes } from './sha256.js';
 
 interface Asset {
   name: string;
@@ -21,12 +22,14 @@ interface Manifest {
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const src = $<HTMLTextAreaElement>('src');
-const out = $<HTMLTextAreaElement>('out');
+const out = $<HTMLElement>('out');
 const example = $<HTMLSelectElement>('example');
 const speech = $<HTMLSelectElement>('speech');
+const outMode = $<HTMLSelectElement>('outmode');
 const status = $<HTMLElement>('status');
 const bar = $<HTMLProgressElement>('bar');
 const info = $<HTMLElement>('info');
+const warning = $<HTMLElement>('warning');
 const tbar = $<HTMLProgressElement>('tbar');
 
 const started = performance.now();
@@ -34,16 +37,43 @@ const cacheName = 'hdtrans-assets';
 const mb = (n: number) => (n / 1e6).toFixed(1);
 let ready = false;
 
+const srcCount = $<HTMLElement>('count');
+const clear = $<HTMLButtonElement>('clear');
+/** n자 · n줄 of t: code points, and lines split at LF. */
+const size = (t: string) => `${Array.from(t).length}자 · ${t === '' ? 0 : t.split('\n').length}줄`;
+/** Shows the input's size and the clear button when there is input. */
+function counted() {
+  srcCount.textContent = size(src.value);
+  clear.hidden = src.value === '';
+}
 src.value = localStorage.getItem('hdtrans.src') ?? '';
+counted();
 src.addEventListener('input', () => {
   localStorage.setItem('hdtrans.src', src.value);
+  counted();
   schedule();
+});
+let outFromTop = false; // the next translation shown starts at its first line
+/** Replaces the input with text and shows both cards from their first lines. */
+function newText(text: string) {
+  src.value = text;
+  src.dispatchEvent(new Event('input'));
+  src.scrollTop = 0;
+  out.scrollTop = 0;
+  outFromTop = true;
+  if (cards.some(expanded)) layout();
+  else scrollTo(0, 0);
+}
+clear.addEventListener('click', () => {
+  newText('');
+  src.focus({ preventScroll: true });
 });
 const savedMode = localStorage.getItem('hdtrans.mode');
 if (savedMode) (document.querySelector(`input[name=mode][value=${savedMode}]`) as HTMLInputElement).checked = true;
 document.querySelectorAll('input[name=mode]').forEach((el) =>
   el.addEventListener('change', () => {
     localStorage.setItem('hdtrans.mode', mode());
+    summed();
     schedule();
   }),
 );
@@ -52,12 +82,143 @@ const savedSpeech = localStorage.getItem('hdtrans.speech');
 if (savedSpeech === 'soft' || savedSpeech === 'strict') speech.value = savedSpeech;
 speech.addEventListener('change', () => {
   localStorage.setItem('hdtrans.speech', speech.value);
+  summed();
   schedule();
   staleDocs();
 });
+const outputMode = () => outMode.value as OutputMode;
+const savedOutput = localStorage.getItem('hdtrans.output');
+if (savedOutput === 'translation' || savedOutput === 'interleaved' || savedOutput === 'spaced') outMode.value = savedOutput;
+outMode.addEventListener('change', () => {
+  localStorage.setItem('hdtrans.output', outMode.value);
+  summed();
+  showOutput();
+});
 
-// Tabs: the dictionary editor (the selected dictionary's grids) sits below
-// the text tab's panes and beside the list in the dictionary tab.
+// The settings open as a layer from the 설정 button: a popover under it, or
+// on narrow screens a sheet at the bottom. Choices apply at once; the button
+// sums them up.
+const settings = $('settings');
+const settingsToggle = $('settings-toggle');
+const settingsSum = $('settings-sum');
+const sheet = $<HTMLDialogElement>('settings-sheet');
+settingsToggle.addEventListener('click', () => {
+  const b = settingsToggle.getBoundingClientRect();
+  sheet.style.top = `${b.bottom + 6}px`;
+  sheet.style.left = `${b.left}px`;
+  sheet.showModal();
+  settingsToggle.setAttribute('aria-expanded', 'true');
+});
+sheet.addEventListener('close', () => settingsToggle.setAttribute('aria-expanded', 'false'));
+sheet.addEventListener('click', (ev) => {
+  if (ev.target === sheet) sheet.close();
+});
+$('settings-close').addEventListener('click', () => sheet.close());
+// Esc closes the layer (also where the browser's close request needs a fresh
+// user gesture); Tab and Shift+Tab go round inside it.
+sheet.addEventListener('keydown', (ev) => {
+  if (ev.key === 'Escape') {
+    ev.preventDefault();
+    ev.stopPropagation();
+    sheet.close();
+  }
+  if (ev.key !== 'Tab') return;
+  const stops = [...sheet.querySelectorAll<HTMLElement>('button, select, input')].filter(
+    (el) => el.offsetParent && !(el as HTMLButtonElement).disabled && !(el instanceof HTMLInputElement && el.type === 'radio' && !el.checked),
+  );
+  const [first, last] = [stops[0], stops[stops.length - 1]];
+  if (ev.shiftKey ? document.activeElement !== first : document.activeElement !== last) return;
+  ev.preventDefault();
+  (ev.shiftKey ? last : first).focus();
+});
+function summed() {
+  const picked = [...settings.querySelectorAll<HTMLElement>('[data-tab], .field')]
+    .filter((el) => !el.hidden)
+    .map((el) => {
+      const select = el.querySelector('select');
+      return select ? select.selectedOptions[0]?.text : (el.querySelector('input:checked + span') ?? el.querySelector('#applied'))?.textContent;
+    });
+  settingsSum.textContent = picked.filter(Boolean).join(', ');
+}
+
+// The two cards fill the window below the rows above them: side by side, or
+// stacked with 45% for the source and 55% for the translation; each scrolls
+// inside. 펼치기 shows one card alone, filling the window under the settings,
+// 예제 and language rows, with the page held still; ↕ or Esc brings both back.
+// The hidden card keeps working, and the choice is kept.
+const texts = document.querySelector<HTMLElement>('.texts')!;
+const textPanel = $('text');
+const cards = [$('srccard'), $('outcard')];
+const expanded = (card: HTMLElement) => card.classList.contains('expanded');
+const stacked = matchMedia('(max-width: 48rem)');
+let normalHeight = 0; // the window height and width the two-card sizes were made for
+let normalWidth = 0;
+function layout() {
+  const card = cards.find(expanded);
+  const on = card !== undefined && !textPanel.hidden;
+  document.documentElement.classList.toggle('locked', on);
+  texts.classList.toggle('focused', on);
+  if (on) textPanel.dataset.expanded = card.id;
+  else delete textPanel.dataset.expanded;
+  if (textPanel.hidden) return;
+  // The visual viewport leaves out an on-screen keyboard; while it is
+  // pinch-zoomed the sizes stay as they are.
+  const vv = window.visualViewport;
+  if (vv && Math.abs(vv.scale - 1) > 0.01) return;
+  const height = vv?.height ?? innerHeight;
+  const pageTop = (el: HTMLElement) => el.getBoundingClientRect().top + scrollY;
+  const margin = 12;
+  if (on) {
+    const top = pageTop(settings);
+    card.style.height = `${Math.max(200, Math.floor(height - (pageTop(card) - top) - margin))}px`;
+    scrollTo(0, top);
+    return;
+  }
+  // While typing with the keyboard up (a shorter window of the same width,
+  // unlike a rotation), the two cards keep their sizes.
+  if (document.activeElement === src && height < normalHeight && innerWidth === normalWidth) return;
+  normalHeight = height;
+  normalWidth = innerWidth;
+  const room = height - pageTop(texts) - margin;
+  if (stacked.matches) {
+    const both = room - (parseFloat(getComputedStyle(texts).rowGap) || 0);
+    cards[0].style.height = `${Math.max(140, Math.floor(both * 0.45))}px`;
+    cards[1].style.height = `${Math.max(160, Math.floor(both * 0.55))}px`;
+  } else {
+    for (const c of cards) c.style.height = `${Math.max(240, Math.floor(room))}px`;
+  }
+}
+function expand(card: HTMLElement | undefined) {
+  for (const c of cards) {
+    const on = c === card;
+    c.classList.toggle('expanded', on);
+    const b = c.querySelector<HTMLButtonElement>('.expand')!;
+    b.setAttribute('aria-pressed', String(on));
+    b.title = b.ariaLabel = `${c.dataset.name} ${on ? '접기' : '펼치기'}`;
+  }
+  localStorage.setItem('hdtrans.expand', card?.id ?? '');
+  layout();
+  if (!card) scrollTo(0, 0);
+}
+for (const card of cards) card.querySelector('.expand')!.addEventListener('click', () => expand(expanded(card) ? undefined : card));
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'Escape' && !ev.defaultPrevented && !sheet.open && cards.some(expanded)) expand(undefined);
+});
+// Window, visual viewport and row size changes lay out once per frame.
+let laying = 0;
+const relayout = () => {
+  if (laying) return;
+  laying = requestAnimationFrame(() => {
+    laying = 0;
+    layout();
+  });
+};
+addEventListener('resize', relayout);
+window.visualViewport?.addEventListener('resize', relayout);
+const above = new ResizeObserver(relayout);
+for (const el of [document.querySelector('header')!, document.querySelector<HTMLElement>('.status')!, settings, $('examplebar'), $('langbar')]) above.observe(el);
+
+// Tabs; the last one shown is kept.
 const tabs: [HTMLElement, HTMLElement][] = [
   [$('tab-text'), $('text')],
   [$('tab-docs'), $('docs')],
@@ -69,11 +230,15 @@ function showTab(panel: string) {
     button.setAttribute('aria-selected', String(p.id === panel));
     p.hidden = p.id !== panel;
   }
-  (panel === 'dictionaries' ? $('dictedit') : $('text')).append(editorBox);
+  settings.hidden = panel === 'dictionaries';
+  layout();
+  settings.querySelectorAll<HTMLElement>('[data-tab]').forEach((el) => (el.hidden = el.dataset.tab !== panel));
+  summed();
   localStorage.setItem('hdtrans.tab', panel);
 }
 for (const [button, p] of tabs) button.addEventListener('click', () => showTab(p.id));
 showTab(tabs.some(([, p]) => p.id === localStorage.getItem('hdtrans.tab')) ? localStorage.getItem('hdtrans.tab')! : 'text');
+expand(cards.find((c) => c.id === localStorage.getItem('hdtrans.expand')));
 
 // The dictionaries: dicts is the list in priority order, editing the one the
 // grids show. Every edit is stored at once.
@@ -82,7 +247,7 @@ let dictsLoaded = false;
 let dicts: Dictionary[] = [];
 let editing: Dictionary | undefined;
 const list = $<HTMLOListElement>('dictlist');
-const editSelect = $<HTMLSelectElement>('editdict');
+const applied = $('applied');
 const namesPane = $('namespane');
 const heads = {
   hdtrans: [['일본어', '한국어', '품사', '옵션'], ['手伝う', '돕다', 'v:ㅂ', '']],
@@ -91,6 +256,7 @@ const heads = {
 
 /** Translates again with the applied dictionaries, and drops document results made without them. */
 function dictsChanged() {
+  showApplied();
   schedule();
   staleDocs();
 }
@@ -147,9 +313,7 @@ let dragged: Dictionary | undefined;
 
 function render() {
   list.replaceChildren();
-  editSelect.replaceChildren();
   dicts.forEach((d, i) => {
-    editSelect.add(new Option(d.name, d.id, false, d === editing));
     const li = list.appendChild(document.createElement('li'));
     li.dataset.id = d.id;
     li.draggable = true;
@@ -276,9 +440,20 @@ $('dict-export').addEventListener('click', async () => {
     save('hdtrans-사전.zip', await zip(out.map((f) => ({ name: f.name, data: utf8(f.text + '\n') }))), 'application/zip');
   }
 });
-editSelect.addEventListener('change', () => {
-  const d = dicts.find((x) => x.id === editSelect.value);
-  if (d) select(d);
+// The settings name the applied dictionaries; 사전 편집 opens the 사전 tab on
+// the one being edited, or the first applied one.
+function showApplied() {
+  const on = dicts.filter((d) => d.on);
+  applied.textContent = on.length === 0 ? '없음' : on.length === 1 ? on[0].name : `${on[0].name} 외 ${on.length - 1}개`;
+  applied.title = on.map((d) => d.name).join(', ');
+  summed();
+}
+$('dict-edit').addEventListener('click', () => {
+  sheet.close();
+  const first = dicts.find((d) => d.on);
+  if (first && !editing?.on) select(first);
+  showTab('dictionaries');
+  if (matchMedia('(max-width: 48rem)').matches) editorBox.scrollIntoView({ block: 'start' });
 });
 
 openStore()
@@ -287,7 +462,7 @@ openStore()
     store = s;
     navigator.storage?.persist?.().catch(() => {});
   })
-  .catch((err) => (info.textContent = '사전을 열지 못했습니다: ' + String(err)))
+  .catch((err) => (warning.textContent = '사전을 열지 못했습니다: ' + String(err)))
   .finally(async () => {
     if (dicts.length === 0) await add({ name: firstName, format: 'hdtrans', on: true, entries: '', names: '' });
     select(dicts.find((d) => d.id === localStorage.getItem('hdtrans.edit')) ?? dicts[0]);
@@ -311,6 +486,7 @@ fetch('examples/list.json')
       const text = await exampleText(list[0][1]);
       if (src.value !== '') return;
       src.value = text;
+      counted();
       schedule();
     }
   })
@@ -320,10 +496,9 @@ example.addEventListener('change', async () => {
   const file = example.value;
   example.value = '';
   try {
-    src.value = await exampleText(file);
-    src.dispatchEvent(new Event('input'));
+    newText(await exampleText(file));
   } catch (err) {
-    info.textContent = '예제를 불러오지 못했습니다: ' + String(err);
+    warning.textContent = '예제를 불러오지 못했습니다: ' + String(err);
   }
 });
 
@@ -346,7 +521,7 @@ worker.onmessage = (ev) => {
     document.body.dataset.engine = 'ready';
     document.body.dataset.memory = String(m.memory);
     const total = performance.now() - started;
-    status.textContent = `준비 완료 · ${(total / 1000).toFixed(1)}초 (엔진 사전 적재 ${(m.ms / 1000).toFixed(1)}초, 메모리 ${Math.round(m.memory / 1e6)} MB)`;
+    status.textContent = `준비 완료 · ${(total / 1000).toFixed(1)}초 (로딩 ${(m.ms / 1000).toFixed(1)}초, 메모리 ${Math.round(m.memory / 1e6)} MB)`;
     bar.hidden = true;
     schedule();
     showDocs();
@@ -365,6 +540,42 @@ function warningText(warning: string, ehnd: string[], where: (ehnd: boolean, lin
   const e = ehnd.map((w) => w.replace(/^(?:.*\/)?UserDict\.txt:(\d+): /, (_, n) => where(true, Number(n)) + ': '));
   return [...user, ...e].join(' / ');
 }
+
+// The output shows the last translation in the output mode, source lines muted;
+// its text is what 복사 copies and what a document saves.
+let shownSource = '';
+let shownTranslation = '';
+let shownTime = ''; // n ms of the shown translation, '' after a failure
+function showOutput() {
+  out.replaceChildren(
+    ...outputParts(shownSource, shownTranslation, outputMode()).map((p) => {
+      if (!p.source) return p.text;
+      const span = document.createElement('span');
+      span.className = 'src';
+      span.textContent = p.text;
+      return span;
+    }),
+  );
+  showInfo();
+}
+/** The size of what 복사 copies, and the time of the translation. */
+function showInfo() {
+  info.textContent = shownTime && `${size(out.textContent ?? '')} · ${shownTime}`;
+}
+out.addEventListener('keydown', (ev) => {
+  if (ev.key !== 'a' || !(ev.ctrlKey || ev.metaKey)) return;
+  ev.preventDefault();
+  getSelection()?.selectAllChildren(out);
+});
+const copy = $<HTMLButtonElement>('copy');
+copy.addEventListener('click', async () => {
+  if (await copyText(out.textContent ?? '')) copy.textContent = '복사됨';
+  else {
+    getSelection()?.selectAllChildren(out);
+    copy.textContent = '선택됨';
+  }
+  setTimeout(() => (copy.textContent = '복사'), 1500);
+});
 
 // The input is translated a moment after it last changed. Every change
 // (text, mode, speech, dictionaries) starts a new generation; a result is shown
@@ -390,17 +601,24 @@ async function translate() {
   const d = overlay(dicts);
   const t0 = performance.now();
   const slow = setTimeout(() => (tbar.hidden = false), 300);
-  let text: string;
+  let text = '';
+  let problem = '';
   try {
     const m = await request(mode(), lines, d);
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);
-    text = `${lines.length}줄 · ${Math.round(performance.now() - t0)} ms`;
-    const warning = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
-    if (warning) text += ' / 사전 오류: ' + warning;
-    if (g === generation) out.value = m.lines.join('\n');
+    text = `${Math.round(performance.now() - t0)} ms`;
+    const w = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
+    if (w) problem = '사전 오류: ' + w;
+    if (g === generation) {
+      shownSource = lines.join('\n');
+      shownTranslation = m.lines.join('\n');
+      showOutput();
+      if (outFromTop) out.scrollTop = 0;
+      outFromTop = false;
+    }
   } catch (err) {
-    text = '번역 실패: ' + (err instanceof Error ? err.message : String(err));
+    problem = '번역 실패: ' + (err instanceof Error ? err.message : String(err));
   }
   clearTimeout(slow);
   running = false;
@@ -410,7 +628,9 @@ async function translate() {
     return;
   }
   shown = g;
-  info.textContent = text;
+  shownTime = text;
+  showInfo();
+  warning.textContent = problem;
   out.dataset.done = '1';
 }
 
@@ -436,7 +656,6 @@ let docsRunning = false;
 let docsCancel = false;
 let docsAt = 0;
 
-const outputMode = () => (document.querySelector('input[name=output]:checked') as HTMLInputElement).value as OutputMode;
 const outputBytes = (d: Doc) => encodeOutput(formatDocument(d.source!, d.translated!, outputMode()), d.lineBreak);
 const setState = (d: Doc, text: string) => (d.row.cells[2].textContent = text);
 
@@ -519,8 +738,8 @@ async function runDocs() {
       if (m.lines === undefined) throw new Error(m.message);
       if (docsCancel) break;
       d.translated = m.lines.join('\n');
-      const warning = warningText(m.warning ?? '', m.ehndWarning ?? [], dictionaries.where);
-      info.textContent = warning ? '사전 오류: ' + warning : '';
+      const w = warningText(m.warning ?? '', m.ehndWarning ?? [], dictionaries.where);
+      warning.textContent = w ? '사전 오류: ' + w : '';
       setState(d, `완료 · ${Math.round(performance.now() - t0)} ms`);
     } catch (err) {
       setState(d, '번역 실패: ' + (err instanceof Error ? err.message : String(err)));
@@ -561,9 +780,14 @@ zipButton.addEventListener('click', async () => {
 });
 showDocs();
 
-/** Hex SHA-256 of b. */
+/**
+ * Hex SHA-256 of b. Outside a secure context (plain http on a LAN address)
+ * crypto.subtle is missing and the page hashes in JavaScript, which takes a
+ * fraction of a second for the dictionary; the check still catches truncated
+ * or stale downloads, which plain http does nothing against.
+ */
 async function sha256(b: Uint8Array): Promise<string> {
-  const d = new Uint8Array(await crypto.subtle.digest('SHA-256', b as BufferSource));
+  const d = globalThis.crypto?.subtle ? new Uint8Array(await crypto.subtle.digest('SHA-256', b as BufferSource)) : sha256Bytes(b);
   return Array.from(d, (x) => x.toString(16).padStart(2, '0')).join('');
 }
 
@@ -607,6 +831,7 @@ async function load() {
   const total = all.reduce((s, a) => s + a.size, 0);
   const done = all.map(() => 0);
   const show = () => {
+    if (document.body.dataset.engine === 'error') return;
     const n = done.reduce((s, x) => s + x, 0);
     bar.max = total;
     bar.value = n;

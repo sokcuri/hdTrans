@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, interactive-widget=resizes-content">
 <title>일한 기계번역 hdTrans</title>
 <meta name="description" content="규칙 기반 일본어→한국어 번역 엔진 hdtrans. 번역은 브라우저 안에서 실행됩니다.">
 <link rel="stylesheet" href="style.css">
@@ -14,54 +14,65 @@
 </header>
 
 <main>
-  <div class="status"><span id="status">불러오는 중…</span> <progress id="bar"></progress> <small id="info"></small></div>
+  <div class="status"><span id="status">불러오는 중…</span> <progress id="bar"></progress> <small id="warning"></small></div>
 
   <div class="tabs" role="tablist">
     <button type="button" role="tab" id="tab-text" aria-controls="text" aria-selected="true">텍스트 번역</button>
     <button type="button" role="tab" id="tab-docs" aria-controls="docs" aria-selected="false">문서 번역</button>
     <button type="button" role="tab" id="tab-dictionaries" aria-controls="dictionaries" aria-selected="false">사전</button>
-    <label title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅).">대사 말투 <select id="speech">
-      <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
-      <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
-    </select></label>
+  </div>
+
+  <div class="settings" id="settings">
+    <button type="button" class="settings-toggle" id="settings-toggle" aria-haspopup="dialog" aria-expanded="false" aria-controls="settings-sheet">
+      <span>설정</span> <small id="settings-sum"></small></button>
+    <dialog class="settings-sheet" id="settings-sheet" aria-labelledby="settings-title"><div class="sheet">
+    <div class="sheet-head"><strong id="settings-title">설정</strong>
+      <button type="button" id="settings-close" class="icon" aria-label="닫기" title="닫기">×</button></div>
+    <div class="settings-body" id="settings-body">
+      <div class="seg" data-tab="text" role="radiogroup" aria-labelledby="mode-name"><span id="mode-name">방식</span>
+        <span class="opts"><label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked><span>문서 (이름 통일)</span></label><label
+          title="줄마다 따로 번역합니다. 게임 연결 도구와 같은 결과입니다."><input type="radio" name="mode" value="line"><span>줄 단위</span></label></span>
+      </div>
+      <label class="field" title="엄격하게: -다를 두고 원문의 반말 표지만 따릅니다(소설). 부드럽게: 「」 안과 대사로 보이는 줄을 반말로 씁니다(게임, 채팅)."><span>대사 말투</span> <select id="speech">
+        <option value="strict" selected title="「暑い」 → 「덥다」">엄격하게</option>
+        <option value="soft" title="「暑い」 → 「더워」, それは違う → 그건 달라">부드럽게</option>
+      </select></label>
+      <label class="field" title="복사하거나 받는 번역의 형식"><span>출력</span> <select id="outmode">
+        <option value="translation" selected>번역문만</option>
+        <option value="interleaved">원문 병기</option>
+        <option value="spaced">원문 병기 + 빈 줄</option>
+      </select></label>
+      <div class="field dictfield"><span>사전</span> <span id="applied" title=""></span>
+        <button type="button" id="dict-edit" title="사전 탭에서 이 사전 편집">사전 편집</button></div>
+    </div>
+    </div></dialog>
   </div>
 
   <section id="text" role="tabpanel" aria-labelledby="tab-text">
-  <div class="controls">
-    <fieldset>
-      <legend>방식</legend>
-      <label title="여러 줄을 한 번에 번역합니다. 이름을 맞추고, 「」를 쓰는 글이면 「」 밖 줄을 지문으로 봅니다."><input type="radio" name="mode" value="document" checked> 문서 (이름 통일)</label>
-      <label title="줄마다 따로 번역합니다. 게임 연결 도구와 같은 결과입니다."><input type="radio" name="mode" value="line"> 줄 단위</label>
-    </fieldset>
-    <label>예제 <select id="example"><option value="">고르기…</option></select></label>
+  <div class="examplebar" id="examplebar">
+    <label class="field"><span>예제</span> <select id="example" title="예제 텍스트 불러오기"><option value="">고르기…</option></select></label>
   </div>
-
-  <div class="panes">
-    <label class="pane"><span>일본어</span>
-      <textarea id="src" spellcheck="false" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea></label>
-    <label class="pane"><span>한국어 <progress id="tbar" hidden></progress></span>
-      <textarea id="out" readonly></textarea></label>
-  </div>
-
-  <div id="editor">
-    <label class="editing">사전 <select id="editdict"></select></label>
-    <div class="panes dicts">
-      <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
-      <div class="pane" id="namespane"><span>이름 표</span><div id="names"></div></div>
+  <div class="langbar" id="langbar"><span class="ja">일본어</span><span class="arrow" aria-hidden="true">→</span><span class="ko">한국어</span></div>
+  <div class="panes texts">
+    <div class="pane card" id="srccard" data-name="원문">
+      <div class="head"><span class="badge">원문</span> <small id="count"></small>
+        <button type="button" class="expand icon" aria-pressed="false" title="원문 펼치기" aria-label="원문 펼치기">↕</button>
+        <button type="button" id="clear" class="icon" title="입력 지우기" aria-label="입력 지우기">×</button></div>
+      <textarea id="src" spellcheck="false" aria-label="일본어 원문" placeholder="일본어 문장을 입력하거나 붙여 넣으면 바로 번역합니다."></textarea>
+    </div>
+    <div class="pane card result" id="outcard" data-name="번역">
+      <div class="head"><span class="badge">번역문</span> <small id="info"></small> <progress id="tbar" hidden></progress>
+        <button type="button" class="expand icon" aria-pressed="false" title="번역 펼치기" aria-label="번역 펼치기">↕</button>
+        <button type="button" id="copy">복사</button></div>
+      <div class="body"><div id="out" class="out" tabindex="0" role="textbox" aria-readonly="true" aria-multiline="true" aria-label="한국어 번역"></div></div>
     </div>
   </div>
   </section>
 
   <section id="docs" role="tabpanel" aria-labelledby="tab-docs" hidden>
-    <label class="drop" id="drop">파일을 끌어다 놓거나 클릭해서 고르기
+    <label class="drop" id="drop"><span class="wide">파일을 끌어다 놓거나 클릭해서 고르기</span><span class="narrow">텍스트 파일 고르기</span>
       <input type="file" id="files" multiple accept=".txt,text/plain"></label>
-    <div class="controls">
-      <fieldset>
-        <legend>출력</legend>
-        <label><input type="radio" name="output" value="translation" checked> 번역문만</label>
-        <label><input type="radio" name="output" value="interleaved"> 원문/번역문</label>
-        <label><input type="radio" name="output" value="spaced"> 원문/번역문 + 개행</label>
-      </fieldset>
+    <div class="actions">
       <button type="button" id="run" disabled>모두 번역</button>
       <button type="button" id="zip" disabled>ZIP으로 받기</button>
     </div>
@@ -82,7 +93,12 @@
         </div>
         <ol id="dictlist" class="dictlist"></ol>
       </div>
-      <div id="dictedit"></div>
+      <div id="dictedit"><div id="editor">
+        <div class="panes dicts">
+          <div class="pane"><span>사용자 사전</span><div id="userdict"></div></div>
+          <div class="pane" id="namespane"><span>이름 표</span><div id="names"></div></div>
+        </div>
+      </div></div>
     </div>
   </section>
 </main>
