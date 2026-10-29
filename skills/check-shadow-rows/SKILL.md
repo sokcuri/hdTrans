@@ -18,8 +18,11 @@ tools/shadow-rows.py build/mac/hdtrans dicts $HDTRANS_WORK/shadow/rows.tsv
 - The default checks `names.*.tsv` in the frame `{}だった。`. `--files` picks other files
   (`--files 'lexical-*.tsv'`), `--frame` another sentence, `--all` writes every row whose reading
   changes instead of the likely shadows only.
-- A likely shadow holds kana in its key and its two readings share few Hangul syllables, and the
-  reading without the row has no Japanese left.
+- A key splits at joining kana and spaces; a one-character word counts after either or next to
+  the same word (俺俺, 俺 俺).
+- A likely shadow holds hiragana in its key, or is a work title (`QWK`) whose key holds no
+  katakana (全然大丈夫); its two readings share few Hangul syllables, or the title adds a comma
+  the key lacks (俺俺 나야, 나); and the reading without the row has no Japanese left.
 
 ## Judge
 
