@@ -3,12 +3,16 @@
 #include <algorithm>
 
 #include "core/dict/classes.h"
+#include "core/output/pieces.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/terminal.h"
 #include "core/word/util.h"
 
 namespace hdTrans::internal {
+
+// The segment stage cuts a chunk at the phrase break and keeps the break spans in their chunk.
+static_assert(kBreakSpan != output::kPhraseGap && kCutBreakSpan != output::kPhraseGap);
 
 namespace {
 

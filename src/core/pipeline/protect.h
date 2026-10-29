@@ -79,7 +79,8 @@ constexpr std::u32string_view kToneMarks = U"♡♥❤❣♫♬";
 // words inside a run stay. A line written only in katakana with the punctuation of
 // speech, and a line without hiragana that writes its okurigana in katakana (痛イ……
 // 沈マナイ), count as speech on weaker evidence. A span with Hangul next to the text
-// counts as a sound already written.
+// counts as a sound already written. A line whose katakana are all in a speaker label in round
+// brackets that opens it (names::internal::CaptionLabelEnd) is no speech.
 output::Pieces KataSpeech(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // A katakana honorific (サマ サン クン チャン ドノ) that ends a katakana run in the text

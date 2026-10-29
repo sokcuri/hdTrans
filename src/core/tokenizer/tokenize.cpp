@@ -145,7 +145,8 @@ private:
     // Whether the space at i, left out of the Japanese token being built, parts two words
     // (TokenizeSpans): a single space between two Japanese characters, unless the pieces on its
     // sides are spaced out character by character or a name.
-    bool Parts(size_t i) const {
+    bool Parts(size_t i, bool& copy) const {
+        copy = false;
         const auto blank = [](char32_t c) { return c != '\n' && c != '\r' && text::IsSpace(c); };
         if (joins_ == nullptr || BufSize() == 0 || Class(Before(i)) == 0 || Class(At(i + 1)) == 0) return false;
         size_t start = i, end = i + 1;
@@ -181,8 +182,12 @@ private:
         // (消す っていう).
         if (OneOf(At(i + 1), U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮーヽヾゝゞ")) return false;
         // A piece said again after the space is a copy, which the word stage reads on its own
-        // (やめて やめて).
-        if (i - start == end - i - 1 && std::equal(s_.begin() + start, s_.begin() + i, s_.begin() + i + 1)) return false;
+        // (やめて やめて); the space between copies of two or more characters stays a boundary
+        // (CopySpace). Copies of one kana are sounds, which the sound stage writes.
+        if (i - start == end - i - 1 && std::equal(s_.begin() + start, s_.begin() + i, s_.begin() + i + 1)) {
+            copy = i - start >= 2;
+            return false;
+        }
         // The last piece before a mark or the end may end the one before (そうだ ね……).
         if (end == s_.size() || !blank(s_[end])) {
             std::string before, after;
@@ -191,6 +196,22 @@ private:
             if ((*joins_)(before, after, SpaceWord::Ending)) return false;
         }
         return !Joins(i, SpaceWord::Binding) && !Joins(i, SpaceWord::Phrase);
+    }
+
+    // Leaves out the space at p_ between Japanese text: it parts two words (Parts), stands between
+    // copies (CopySpace) or is dropped.
+    void DropSpace() {
+        bool copy = false;
+        if (Parts(p_, copy)) {
+            PartAtSpace();
+        } else if (copy) {
+            size_t start = p_;
+            while (start > 0 && Class(s_[start - 1]) != 0) start--;
+            std::string piece;
+            for (size_t k = start; k < p_; k++) text::AppendRune(piece, s_[k]);
+            out_.copySpaces.push_back({static_cast<int>(out_.tokens.size()), static_cast<uint32_t>(BufSize()),
+                                       static_cast<uint32_t>(piece.size())});
+        }
     }
 
     // Ends the Japanese token being built at a space that parts two words; the next one goes on
@@ -294,7 +315,7 @@ private:
             Add(c);
         } else if (cur_ == kTypeJapanese && type == kTypeAsciiSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A space between Japanese text is dropped.
-            if (Parts(p_)) PartAtSpace();
+            DropSpace();
         } else if (cur_ == kTypeJapanese && type == kTypeAlpha && KeptLetter(p_)) {
             Add(c);
             p_++;  // prev_ stays the class of the kana, for the letters after it
@@ -489,7 +510,7 @@ private:
             return;
         } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && IsSkippableTranslateRun(p_ + 1) && !KeptSpace(p_)) {
             // A full-width space between Japanese text is dropped.
-            if (Parts(p_)) PartAtSpace();
+            DropSpace();
         } else if (cur_ == kTypeJapanese && type == kTypeWideSpace && KeptSpace(p_)) {
             // A kept space between two words (KeptSpace) is a space, not a break of the sentence.
             if (BufSize() > 0) Emit(cur_);
@@ -560,6 +581,7 @@ private:
 void Reset(Tokens& out) {
     out.tokens.clear();
     out.markers.clear();
+    out.copySpaces.clear();
     out.text.clear();
     out.chars.clear();
     out.offsets.clear();

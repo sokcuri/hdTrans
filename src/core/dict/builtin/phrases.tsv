@@ -11,6 +11,7 @@
 // or an honoured person is called right before it (先生、また明日 선생님, 내일 봬요). cry marks a
 // predicate said as a cry, as in sound.tsv; with alone=K a cry said once, not again right before or
 // after it, is K, _ standing for a space (イっちゃう 갈 것 같아, イっちゃう、イっちゃう 가버려, 가버려).
+// haeyo marks a Korean in 해요 speech (そうですそうです 맞아요 맞아요).
 
 // Greetings and everyday set phrases.
 いい迷惑	완전 민폐	n
@@ -192,10 +193,10 @@
 そうだったそだった	그랬지 그랬지	intj
 そうだろうそうだろう	그렇겠지 그렇겠지	intj
 そうだろそうだろう	그렇겠지 그렇겠지	intj
-そうでしょうそうでしょう	그렇죠 그렇죠	intj
-そうでしょそうでしょ	그렇죠 그렇죠	intj
-そうですかそうですか	그렇군요 그렇군요	intj
-そうですそうです	맞아요 맞아요	intj
+そうでしょうそうでしょう	그렇죠 그렇죠	intj	haeyo
+そうでしょそうでしょ	그렇죠 그렇죠	intj	haeyo
+そうですかそうですか	그렇군요 그렇군요	intj	haeyo
+そうですそうです	맞아요 맞아요	intj	haeyo
 そうですよそうです	맞아요 맞아요	intj
 そうともそうとも	그렇고말고	intj
 そうなのそうなの	맞아 맞아	intj

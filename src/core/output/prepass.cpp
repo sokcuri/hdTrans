@@ -988,7 +988,8 @@ void JoinParticlesAfterSpace(const std::vector<ResolvedItem>& items, std::vector
             continue;
         }
         const std::string& written = tokens[t].text;
-        if (First(Code(item)) != '2' || written.empty() || written.front() == ' ') continue;
+        // A particle row written apart (Ha: まだ 아직) keeps the space (いえ まだです 아뇨 아직입니다).
+        if (First(Code(item)) != '2' || Contains(GAttr(item), "Ha") || written.empty() || written.front() == ' ') continue;
         space.text.clear();
     }
 }

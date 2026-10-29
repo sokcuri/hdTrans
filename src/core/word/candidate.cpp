@@ -1367,7 +1367,15 @@ struct DepthScope {
 // A dictionary word that spells all the copies keeps them (いろいろ, はいはい); one that
 // spells only some of them does not (はい|はい|はい).
 std::size_t Worker::CopyEnd(std::string_view text, std::string_view before) {
-    const Copies c = CopiesAt(text);
+    Copies c = CopiesAt(text);
+    // Copies written apart are the pieces between the source spaces (もしもし もしもし, not もし four times).
+    if (const std::size_t unit = CopyUnit(text); unit > c.unit && unit <= text.size()) {
+        c = {unit, 0, 1, unit};
+        while (text.substr(c.end).starts_with(text.substr(0, unit))) {
+            c.count++;
+            c.end += unit;
+        }
+    }
     if (c.count < 2) return 0;
     const std::string_view unit = text.substr(0, c.unit);
     const bool kanji = HasKanji(unit);

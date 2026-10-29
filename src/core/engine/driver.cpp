@@ -27,6 +27,7 @@
 #include "core/pipeline/sound.h"
 #include "core/pipeline/speech.h"
 #include "core/tokenizer/tokenize.h"
+#include "core/text/hangul.h"
 #include "core/text/lines.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
@@ -339,6 +340,63 @@ std::vector<tokenizer::Piece> TokenizerPieces(const output::Pieces& pieces) {
     out.reserve(pieces.size());
     for (const output::Piece& p : pieces) out.push_back({p.text, static_cast<int>(p.span)});
     return out;
+}
+
+// A word that ends where the source had a space between two copies (tokenizer::CopySpace) keeps
+// that space before the next word, also where the last copy ends its token before a word after a
+// source space (えっ えっ それは 어 어 그것은). A word that spells two or more such copies and reads
+// as one copy's Korean or its sound said as often (毎日毎日 매일매일, プリプリプリ 프리프리프리) is
+// written with a space between the copies (매일 매일); not where that Korean is no reading of the copy
+// (これこれ 이러이러).
+void MarkCopySpaces(const dict::Snapshot& snap, const dict::LookupContext& lookup, const tokenizer::Tokens& tokens,
+                    std::vector<output::ResolvedItem>& items) {
+    if (tokens.copySpaces.empty()) return;
+    for (std::size_t k = 0; k < items.size(); k++) {
+        output::ResolvedItem& it = items[k];
+        if (it.tokenIndex < 0 || static_cast<std::size_t>(it.tokenIndex) >= tokens.size()) continue;
+        const auto t = static_cast<std::size_t>(it.tokenIndex);
+        const std::size_t unit = tokens.CopyUnitAt(t, static_cast<std::size_t>(it.offset));
+        std::string& ko = it.entry.text;
+        if (unit > 0 && it.length > static_cast<int>(unit) && it.length % unit == 0 && it.surface.size() == static_cast<std::size_t>(it.length)) {
+            const std::size_t copies = static_cast<std::size_t>(it.length) / unit;
+            bool apart = true;
+            for (std::size_t c = 1; c < copies && apart; c++) {
+                apart = tokens.CopySpaceAt(t, static_cast<std::size_t>(it.offset) + c * unit) &&
+                        it.surface.compare(c * unit, unit, it.surface, 0, unit) == 0;
+            }
+            const std::u32string rs = pipeline::internal::DecodeText(ko);
+            const std::size_t part = rs.size() / copies;
+            apart = apart && part > 0 && rs.size() % copies == 0 &&
+                    std::all_of(rs.begin(), rs.end(), [](char32_t r) { return r >= text::kBase && r <= text::kLast; });
+            for (std::size_t c = 1; c < copies && apart; c++) apart = rs.compare(c * part, part, rs, 0, part) == 0;
+            if (apart) {
+                const std::string copy = it.surface.substr(0, unit);
+                const std::string half = pipeline::internal::EncodeText(rs.substr(0, part));
+                // A katakana run written as heard (Nm: プリ 프리), the copy as heard (コッ 콧) or a reading
+                // of it (毎日 매일).
+                bool reads = it.entry.gattr.find("Nm") != std::string::npos || pipeline::internal::ReadKana(copy) == half;
+                for (const dict::Candidate& c : snap.GetWordInfo(copy, dict::LookupMode::General, lookup).list) {
+                    reads = reads || (c.source == copy && c.target == half);
+                }
+                if (reads) {
+                    ko = half;
+                    for (std::size_t c = 1; c < copies; c++) ko += " " + half;
+                }
+            }
+        }
+        if (k + 1 == items.size()) continue;
+        const output::ResolvedItem& next = items[k + 1];
+        const auto end = static_cast<std::size_t>(it.offset + it.length);
+        if (next.tokenIndex == it.tokenIndex && static_cast<std::size_t>(next.offset) == end) {
+            if (tokens.CopySpaceAt(t, end)) it.spaceAfter = true;
+        } else if (next.tokenIndex == it.tokenIndex + 1 && next.offset == 0 && tokens[t + 1].afterSpace &&
+                   end == tokens.Raw(t).size()) {
+            // The last copy of a run ends the token.
+            for (auto c = tokens.FirstCopySpace(t, 0); c != tokens.copySpaces.end() && c->tokenIndex == it.tokenIndex; ++c) {
+                it.spaceAfter = it.spaceAfter || c->at + c->unit == end;
+            }
+        }
+    }
 }
 
 // Each Japanese token of the sentence first..last that goes on after a space parting two words
@@ -768,6 +826,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             ResolveSentence(program, generated.families, analysis, k);
             if (observer.resolved) observer.resolved(observer.context, index, static_cast<int>(k), sentence.chain);
             ResolvedItems(sentence.chain, s.items);
+            MarkCopySpaces(snap, lookup, s.tokens, s.items);
             BuildTexts(s.tokens, analysis, sentence.first, sentence.last, s.texts);
             s.markers.assign(s.tokens.markers.begin() + sentence.markerBegin,
                              s.tokens.markers.begin() + sentence.markerEnd);
@@ -897,7 +956,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
-            if (!gaps[i].empty()) before.clear();  // a column starts as a line does
+            if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
             TranslateChunk(snap, ctx.lookup, chunks[i], static_cast<int>(i), true, facts.verse, before, pass, s,
                            generated, watch, opts, sentences);
             std::string chunkText = output::String(chunks[i]);

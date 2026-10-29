@@ -198,6 +198,13 @@ bool NounBefore(std::string_view text) {
 
 uint8_t Worker::Register(const dict::UserEntry& u) const { return u.polite ? settings.registers[1] : settings.registers[0]; }
 
+std::size_t Worker::CopyUnit(std::string_view text) const {
+    if (tokens.copySpaces.empty() || current < 0 || current >= TokenCount()) return 0;
+    const std::string_view own = tokens.Canonical(static_cast<std::size_t>(current));
+    if (own.empty() || text.data() < own.data() || text.data() >= own.data() + own.size()) return 0;
+    return tokens.CopyUnitAt(static_cast<std::size_t>(current), static_cast<std::size_t>(text.data() - own.data()));
+}
+
 Lookup Worker::DoLookup(std::string_view query, int mode) {
     if (fault) return {};
     dict::LookupContext ctx = lookupContext;

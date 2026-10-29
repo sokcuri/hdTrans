@@ -428,6 +428,9 @@ HD_TEST(pipeline_kata_speech) {
     // Spans are passed over.
     const output::Pieces spans = {{"ワタシハ ", output::SpanText}, {"김", output::SpanWord}, {"ネコデス", output::SpanText}};
     HD_CHECK_EQ(Show(internal::KataSpeech(spans, ctx, *snap)), std::string("わたしは 〖1김〗ねこです"));
+    // A line whose katakana are all in a speaker label that opens it is no speech in katakana.
+    const output::Pieces label = {{"（ワタシ）", output::SpanText}, {"응 응", output::SpanWord}, {"…", output::SpanText}};
+    HD_CHECK_EQ(Show(internal::KataSpeech(label, ctx, *snap)), std::string("（ワタシ）〖1응 응〗…"));
 }
 
 HD_TEST(pipeline_katakana_dictionary) {

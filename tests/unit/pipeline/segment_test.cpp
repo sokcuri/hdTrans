@@ -254,3 +254,18 @@ HD_TEST(pipeline_segment_column_gaps) {
     const std::string blanks(1 << 20, ' ');
     HD_CHECK_EQ(cut({{blanks + "猫" + blanks, output::SpanText}}), blanks + "猫" + blanks);
 }
+
+HD_TEST(pipeline_segment_phrase_break) {
+    // The span of the phrase break mark ends the chunk, is dropped and gives the next chunk the
+    // gap output::kPhraseGap; the space after it goes.
+    const output::Pieces pieces = {{"앗", output::SpanWord},
+                                   {std::string(output::kPhraseGap), output::SpanWord},
+                                   {" でも", output::SpanText}};
+    std::vector<std::string> gaps;
+    HD_CHECK_EQ(Show(Segment(pieces, &gaps)), std::string("〖1앗〗|でも"));
+    HD_REQUIRE(gaps.size() == 2);
+    HD_CHECK_EQ(gaps[0], std::string(""));
+    HD_CHECK_EQ(gaps[1], std::string(output::kPhraseGap));
+    // Without the mark the sound and the word stay one chunk.
+    HD_CHECK_EQ(Show(Segment({{"앗", output::SpanWord}, {" でも", output::SpanText}})), std::string("〖1앗〗 でも"));
+}
