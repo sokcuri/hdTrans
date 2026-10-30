@@ -1243,7 +1243,8 @@ void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
     hints.ends.clear();
     hints.rejected.clear();
     hintText = surface;
-    if (settings.text && !QueryBoundaries(surface, &hints)) hints.ends.clear();
+    const Segmenter* seg = settings.text ? settings.segmenter : nullptr;
+    if (seg == nullptr || seg->hints == nullptr || !seg->hints(seg->ctx, surface, &hints)) hints.ends.clear();
     transformSurface = surface;
     resumeCursor = -1;
     Item* const mark = chain.tail;
@@ -1886,6 +1887,31 @@ bool Worker::WordAt(std::string_view full, int cursor, int token) {
     return l.count != 0 && InsertLateCandidate(full, cursor, token, l.records) != nullptr;
 }
 
+void Worker::PreferLemma(std::string_view full, int cursor, Item* item) {
+    if (!Hinted(full) || hints.lemmas.empty() || item->group == nullptr) return;
+    const char part = At(item->Code(0), 0);
+    if (part != '4' && part != '7') return;
+    for (const auto& h : hints.lemmas) {
+        if (static_cast<int>(h.begin) != cursor) continue;
+        const Lookup l = DoLookup(h.kanji, kModeGeneral);
+        std::vector<std::pair<std::string_view, std::string_view>> same;
+        for (Record* r = l.records; r != nullptr; r = r->child) {
+            if (r->source.empty() || r->partCode.size() < 2 || r->partCode[1] != part) continue;
+            same.emplace_back(r->target, r->partCode.substr(1));
+        }
+        if (same.empty()) return;
+        auto known = [&](const Entry* e) {
+            for (const auto& [dst, code] : same)
+                if (e->dst == dst && e->code == code) return true;
+            return false;
+        };
+        auto& es = item->group->entries;
+        if (!std::any_of(es.begin(), es.end(), known)) return;
+        std::stable_partition(es.begin(), es.end(), known);
+        return;
+    }
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
@@ -1934,6 +1960,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
             from = firstFrom;
         }
     }
+    if (candidate != nullptr) PreferLemma(full, cursor, candidate);
     if (candidate == nullptr) {
         const std::string_view pair = PairText(text);
         if (FindHonorificPrefix(pair) != -1) {

@@ -9,6 +9,7 @@
 
 #include "core/dict/snapshot.h"
 #include "core/tokenizer/token.h"
+#include "core/word/boundaries.h"
 #include "core/word/item.h"
 #include "core/word/select.h"
 
@@ -89,6 +90,8 @@ struct Settings {
     bool selectShadow = false;
     bool selectRules = false;  // scorers may override context or rule choices, never sense rows
     const MisreadModel* misreadModel = nullptr;  // the misread filter's model; null for the built-in one
+    // The external analyzer's word ends and lemma hints (boundaries.h); null keeps the word search as is.
+    const Segmenter* segmenter = nullptr;
     rules::Tally* ruleTally = nullptr;  // counts the runs of the selection rules when set
     // The speech level (an output register, 0 for automatic) of sentence-final plain
     // and polite predicates; it selects the plain-dictionary end rows with a register.

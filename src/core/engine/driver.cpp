@@ -31,6 +31,7 @@
 #include "core/text/lines.h"
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
+#include "core/word/boundaries.h"
 #include "core/word/conjugation.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
@@ -592,6 +593,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
         s.selectShadow = options.selectShadow;
         s.selectRules = options.selectRules;
         s.misreadModel = options.misreadModel;
+        s.segmenter = options.segmenter;
     }
     s.sessionSenses = text ? sessionSenses : nullptr;
     s.ruleTally = options.ruleTally;
@@ -721,7 +723,20 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             at += p.text.size();
         }
     }
-    const std::vector<tokenizer::Piece> pieces = TokenizerPieces(options.joinedLines ? unbroken : chunk);
+    output::Pieces respelled;
+    const output::Pieces* source = options.joinedLines ? &unbroken : &chunk;
+    if (text && !options.reference && options.segmenter != nullptr && options.segmenter->respell != nullptr) {
+        const word::Segmenter& seg = *options.segmenter;
+        std::string spelled;
+        for (const output::Piece& p : *source) {
+            if (p.span == output::SpanText && seg.respell(seg.ctx, p.text, &spelled)) {
+                if (respelled.empty()) respelled = *source;
+                respelled[static_cast<std::size_t>(&p - source->data())].text = spelled;
+            }
+        }
+        if (!respelled.empty()) source = &respelled;
+    }
+    const std::vector<tokenizer::Piece> pieces = TokenizerPieces(*source);
     // A word of the dictionary that starts in the text before a space and goes on past it.
     const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after, tokenizer::SpaceWord word) {
         using tokenizer::SpaceWord;

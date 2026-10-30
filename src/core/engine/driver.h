@@ -97,6 +97,7 @@ struct TranslationOptions {
     bool selectShadow = false;
     bool selectRules = false;
     const word::MisreadModel* misreadModel = nullptr;  // null: the built-in model
+    const word::Segmenter* segmenter = nullptr;        // the external analyzer; null: none
     rules::Tally* ruleTally = nullptr;  // counts the runs of the selection rules when set
     const rules::Program* rules = nullptr;  // the selection rules; null for the built-in program
     // The pre-filter rewrites each line before translation and the post-filter its

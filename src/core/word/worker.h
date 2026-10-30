@@ -95,6 +95,9 @@ public:
         }
         return prevNoun || noun(e[static_cast<std::size_t>(f)]);
     }
+    // Puts first the candidates of a kana verb or adjective item that the kanji key of the analyzer's
+    // word also has (たっ of 経つ: 지나, not 끊).
+    void PreferLemma(std::string_view full, int cursor, Item* item);
     bool HintsAllow(std::string_view full, int start, int end, char part) const {
         if (!Hinted(full)) return true;
         const auto& e = hints.ends;

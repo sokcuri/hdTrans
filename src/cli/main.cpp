@@ -33,6 +33,9 @@
 #include "core/word/constructions.h"
 #include "core/word/select.h"
 #include "stage_records.h"
+#ifdef HDTRANS_ANALYZER_HOOK
+#include "cli/analyzer_hook.h"
+#endif
 #include "trace_json.h"
 #include "frontend/dictionary_version.h"
 
@@ -298,6 +301,10 @@ int RunMain(int argc, char** argv) {
     bool why = false;
     std::string tracePath;
     bool selectShadow = false;
+#ifdef HDTRANS_ANALYZER_HOOK
+    std::string analyzerDir;
+    hdTrans::cli::AnalyzerOptions analyzerOptions;
+#endif
     bool misread = false;
     std::optional<std::string> speechArg;
     bool wrapped = false;
@@ -336,7 +343,7 @@ int RunMain(int argc, char** argv) {
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
-            || option == "-dump-rules" || option == "-speech" || option == "-context";
+            || option == "-dump-rules" || option == "-speech" || option == "-context" || option == "-analyzer";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -378,6 +385,11 @@ int RunMain(int argc, char** argv) {
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
         else if (option == "-no-cg") noCg = true;
+#ifdef HDTRANS_ANALYZER_HOOK
+        else if (option == "-analyzer") analyzerDir = *value;
+        else if (option == "-analyzer-lemma") analyzerOptions.lemma = true;
+        else if (option == "-analyzer-respell") analyzerOptions.respell = true;
+#endif
         else if (option == "-cg-learned") cgLearned = true;
         else {
             std::fprintf(stderr, "hdtrans: unknown option %s\n", argv[i]);
@@ -594,6 +606,16 @@ int RunMain(int argc, char** argv) {
     options.speech = speech;
     options.wrapped = wrapped;
     if (noCg) options.wordImprovements.cgRules = false;
+#ifdef HDTRANS_ANALYZER_HOOK
+    if (!analyzerDir.empty()) {
+        std::string analyzerError;
+        options.segmenter = hdTrans::cli::LoadAnalyzer(analyzerDir, analyzerOptions, &analyzerError);
+        if (options.segmenter == nullptr) {
+            std::fprintf(stderr, "hdtrans: analyzer: %s\n", analyzerError.c_str());
+            return 1;
+        }
+    }
+#endif
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
         options.shadowScorers = diagnosticScorers;
@@ -756,10 +778,7 @@ int wmain(int argc, wchar_t** argv) {
     return ReportUnexpanded(RunMain(argc, arguments.data()));
 }
 #else
-void InstallAnalyzerHook();
-
 int main(int argc, char** argv) {
-    InstallAnalyzerHook();
     return ReportUnexpanded(RunMain(argc, argv));
 }
 #endif

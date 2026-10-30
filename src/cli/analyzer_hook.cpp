@@ -1,18 +1,23 @@
-// Measurement hook: HDTRANS_ANALYZER=<snapshot> (and HDTRANS_ANALYZER_LONG=<overlay>) makes the word
-// search keep the 0.8 analyzer's word ends.
-#include <cstdlib>
+// The 0.8 analyzer as the word search's segmenter (built with HDTRANS_ANALYZER_HOOK).
+// --analyzer DIR loads DIR/core.bin and, when present, DIR/long.bin.
+#include "cli/analyzer_hook.h"
+
 #include <fstream>
 #include <sstream>
-#include <string>
 
-#include "core/word/boundaries.h"
 #include "hd8/analyzer.h"
+
+namespace hdTrans::cli {
 
 namespace {
 
-hd8::ana::Analyzer* analyzer = nullptr;
+struct AnalyzerHook {
+    hd8::ana::Analyzer analyzer;
+    AnalyzerOptions options;
+    word::Segmenter segmenter;
+};
 
-bool ReadAll(const char* path, std::string* out) {
+bool ReadAll(const std::string& path, std::string* out) {
     std::ifstream in(path, std::ios::binary);
     if (!in) return false;
     std::ostringstream ss;
@@ -21,40 +26,60 @@ bool ReadAll(const char* path, std::string* out) {
     return true;
 }
 
-bool Ends(void*, std::string_view text, hdTrans::word::BoundaryHints* out) {
+void Hints(const AnalyzerHook& h, std::string_view text, hd8::ana::SegHints* out) {
     thread_local hd8::ana::WorkspacePtr ws = hd8::ana::NewWorkspace();
-    hd8::ana::SegHints h;
-    static const char* slackEnv = std::getenv("HDTRANS_ANALYZER_SLACK");
-    // measured: rejected words and the particle reading cost more rule cases than they win lines
-    static const bool noRejected = std::getenv("HDTRANS_ANALYZER_REJECT") == nullptr;
-    static const bool noParticle = std::getenv("HDTRANS_ANALYZER_PARTICLE") == nullptr;
-    analyzer->Hints(text, &h, ws.get(), slackEnv ? static_cast<float>(std::atof(slackEnv)) : 2.0f);
-    out->ends = std::move(h.ends);
+    h.analyzer.Hints(text, out, ws.get(), h.options.slack);
+}
+
+bool Ends(void* ctx, std::string_view text, word::BoundaryHints* out) {
+    const auto& h = *static_cast<const AnalyzerHook*>(ctx);
+    hd8::ana::SegHints s;
+    Hints(h, text, &s);
+    out->ends = std::move(s.ends);
     out->rejected.clear();
-    if (!noRejected)
-        for (auto& r : h.rejected) out->rejected.push_back({r.span.begin, r.span.end, r.cls});
-    out->blockParticleReading = !noParticle;
+    out->lemmas.clear();
+    if (h.options.reject)
+        for (auto& r : s.rejected) out->rejected.push_back({r.span.begin, r.span.end, r.cls});
+    out->blockParticleReading = h.options.particle;
+    if (h.options.lemma)
+        for (auto& r : s.respell) out->lemmas.push_back({r.span.begin, r.span.end, r.kanji});
+    return true;
+}
+
+bool Respell(void* ctx, std::string_view text, std::string* out) {
+    const auto& h = *static_cast<const AnalyzerHook*>(ctx);
+    hd8::ana::SegHints s;
+    Hints(h, text, &s);
+    if (s.respell.empty()) return false;
+    out->clear();
+    uint32_t at = 0;
+    for (auto& r : s.respell) {
+        if (r.span.begin < at) continue;
+        out->append(text.substr(at, r.span.begin - at));
+        out->append(r.kanji);
+        at = r.span.end;
+    }
+    out->append(text.substr(at));
     return true;
 }
 
 }  // namespace
 
-void InstallAnalyzerHook() {
-    const char* core = std::getenv("HDTRANS_ANALYZER");
-    if (core == nullptr || *core == 0) return;
-    std::string bytes, err;
-    if (!ReadAll(core, &bytes)) return;
-    auto* a = new hd8::ana::Analyzer;
-    if (!a->Load(bytes, &err)) {
-        delete a;
-        return;
+const word::Segmenter* LoadAnalyzer(const std::string& dir, const AnalyzerOptions& options, std::string* err) {
+    static AnalyzerHook hook;  // one per process, read-only after this call
+    std::string bytes;
+    if (!ReadAll(dir + "/core.bin", &bytes)) {
+        *err = "cannot read " + dir + "/core.bin";
+        return nullptr;
     }
-    const char* longPath = std::getenv("HDTRANS_ANALYZER_LONG");
-    std::string lb;
-    if (longPath != nullptr && *longPath && ReadAll(longPath, &lb) && !a->LoadOverlay(lb, &err)) {
-        delete a;
-        return;
-    }
-    analyzer = a;
-    hdTrans::word::SetBoundaryOracle(&Ends, nullptr);
+    if (!hook.analyzer.Load(bytes, err)) return nullptr;
+    std::string overlay;
+    if (ReadAll(dir + "/long.bin", &overlay) && !hook.analyzer.LoadOverlay(overlay, err)) return nullptr;
+    hook.options = options;
+    hook.segmenter.ctx = &hook;
+    hook.segmenter.hints = &Ends;
+    hook.segmenter.respell = options.respell ? &Respell : nullptr;
+    return &hook.segmenter;
 }
+
+}  // namespace hdTrans::cli
