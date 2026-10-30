@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+dict:novel-idioms:8	一度目だけでも醜聞どころの話じゃないレベルだよ？	첫 번째만으로도 추문 정도가 아닌 레벨이야?	fix	local
+dict:novel-idioms:8	不味いどころの話ではない。	곤란한 정도가 아니다.	fix	local
+dict:novel-idioms:8	無理ゲーどころの話じゃない	불가능한 도전 정도가 아니다	fix	local
+dict:novel-idioms:8	痛いどころの話じゃない。	아픈 정도가 아니다.	fix	local
+dict:novel-idioms:8	迷惑どころの話ではない。	민폐 정도가 아니다.	fix	local
+dict:novel-idioms:8	スキャンダルどころの話じゃない。	스캔들 정도가 아니다.	fix	local
+dict:novel-idioms:8	怪我人なんか出たら、人気投票どころの話じゃない	부상자 같은 것 나오면, 인기 투표할 형편이 아니다	keep	local
+dict:novel-idioms:8	今は勉強どころの話じゃない。	지금은 공부할 형편이 아니다.	keep	local
+dict:novel-idioms:8	今は旅行どころの話ではない。	지금은 여행할 형편이 아니다.	keep	local
+dict:novel-idioms:8	仕事どころの話じゃない。	일할 형편이 아니다.	keep	local
+dict:novel-idioms:8	それどころではない。	그럴 때가 아니다.	keep	local
+dict:novel-idioms:8	話どころか顔も見ない。	이야기는 커녕 얼굴도 보지 않는다.	keep	local
