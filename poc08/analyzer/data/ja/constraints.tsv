@@ -1,0 +1,6 @@
+#! constraints
+# Arcs removed before scoring. remove: LEMMA[key=value,...] (keys pos cform ud surf; * = any lemma).
+# when/unless: conditions joined by &: prev=A|B (text before), next=A|B, prev.cc=, next.cc= (char classes); ! negates.
+id	remove	when	unless	prov	note
+cn.tatta-adv	唯[surf=たった]	!next.cc=digit & !next=一|二|三|四|五|六|七|八|九|十|百|千|万|数|何|今|これ|それ|あれ|この|その|あの|ひと|ふた|一人|独り|ひとり|だけ|それだけ	-	own	たった is the adverb only before an amount: たった一行, たった今; 三日程たった頃 → 経つ
+cn.tatsu-rumor	経つ	prev=噂が|噂も|噂は|噂なんて|噂など|噂の|評判が|煙が|波風が|波が	-	own	噂がたつ → 立つ, not 経つ
