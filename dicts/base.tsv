@@ -78324,6 +78324,14 @@ ttt	ttt	K110			GN				jisjk:201744
 ピンホールク	핀 홀크	N110			GN				jisjk:54436		
 ピンボール	핀볼	N110			GN				jisjk:103324		
 ピンポン	딩동	N110			GN				jisjk:54437		
+ピンポン	탁구	N110	VRw		GN	9810	||1 &&2 S+1== "を" ||4 S+2== "し" S+2== "す" S+2== "する" S+2== "さ"	する를 받는 ピンポンを는 경기라서 `탁구`다(ピンポンをした 탁구를 했다).	pingpong:1		
+ピンポン部	탁구부	N110			GN				pingpong:2		
+ピンポン台	탁구대	N110			GN				pingpong:3		
+ピンポンの試合	탁구 시합	N110			GN				pingpong:4		
+ピンポン鳴ら	초인종을 울&AA@	M433			GN				pingpong:5		
+ピンポン押	초인종을 &EB@	M443			GN				pingpong:6		
+ピンポンを押	초인종을 &EB@	M443			GN				pingpong:7		
+ピンポンが鳴	초인종이 울&AA@	M4U8			GN				pingpong:8		
 ピンレバーウォッチ	핀 레버 왓치	N110			GN				jisjk:54438		
 ピンワーク	핀워크	N110	VCp		GN				jisjk:133189		
 ピン互換	핀 호환	N110			IT				jisjk:261951		

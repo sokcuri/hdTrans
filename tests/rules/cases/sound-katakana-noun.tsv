@@ -22,6 +22,16 @@ sound:katakana-noun	ドアがガチャガチャという音を立てた	문이 �
 sound:katakana-noun	お肌がツルツルでびっくり	has:매끈매끈	keep	sound
 sound:katakana-noun	提督シャキっとしてください。	제독 꼿꼿해 주세요.	keep	sound
 sound:katakana-noun	いきなりバターンは怖い	has:콰앙은	keep	sound
-sound:katakana-noun	ピンポン鳴らしても開けへんかった	has:딩동 울려도	keep	sound
+lookup:pingpong	ピンポン鳴らしても開けへんかった	has:초인종을 울려도	fix	lookup
 sound:katakana-noun	みんなでワイワイやるのもたまには楽しいでしょ	has:와글와글	keep	sound
 sound:katakana-noun	腹パンパンさぁ。	has:팡팡	keep	sound
+dict:pingpong:1	ピンポンをした	탁구를 했다	fix	local
+lookup:pingpong	ピンポン部に入った	탁구부에 들어갔다	fix	lookup
+lookup:pingpong	ピンポン台がある	탁구대가 있다	fix	lookup
+lookup:pingpong	ピンポン鳴らして	초인종을 울려	fix	lookup
+lookup:pingpong	(ｷｭﾋｮﾝ)ピンポン押します｡	(규현) 초인종을 누릅니다.	fix	lookup
+lookup:pingpong	ピンポンを押した	초인종을 눌렀다	fix	lookup
+lookup:pingpong	ピンポン！	딩동!	keep	sound
+lookup:pingpong	ピンポーン	딩동	keep	sound
+lookup:pingpong	ピンポンピンポン！	딩동 딩동!	keep	sound
+lookup:pingpong	高校の授業でピンポン 正解	고등학교의 수업에서 딩동 정답	keep	sound
