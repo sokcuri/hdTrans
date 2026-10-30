@@ -1,0 +1,14 @@
+# 규칙: SPC-15
+rule	input	expected	kind	layer
+dict:novel-imperative-drawn	「よし、囲んで追い込め、追い込めぇ！」	has:몰아넣어라!」	fix	lookup
+dict:novel-imperative-drawn	「近衛騎士団、今こそ力を尽くせぇ！」	「근위 기사단, 이제야말로 힘을 다해라!」	fix	lookup
+dict:novel-imperative-drawn	黙れっ	입을 다물어라	fix	lookup
+dict:novel-imperative-drawn	急げぇ！	서둘러라!	fix	lookup
+dict:novel-imperative-drawn	止まれぇ！	멈추어라!	fix	lookup
+dict:novel-imperative-drawn	捕捉済みよ！撃てぇ！	has:쏘아라!	fix	lookup
+dict:novel-imperative-drawn	残弾は十分。撃ちまくれぇ！	has:마구 쳐라!	fix	lookup
+dict:novel-imperative-drawn	この海から出ていけぇ！	has:나가라!	fix	lookup
+dict:novel-imperative-drawn	見ろっ	봐라	keep	lookup
+dict:novel-imperative-drawn	逃げろぉ！	도망쳐라!	keep	lookup
+dict:novel-imperative-drawn	急げ！	서둘러라!	keep	lookup
+dict:novel-imperative-drawn	急げよ	서둘러	keep	lookup
