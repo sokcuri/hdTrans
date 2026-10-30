@@ -37,7 +37,11 @@ constexpr std::string_view kRows =
     "仕事\t일\tN110\t\t\tGN\t0\t21\n"
     "寝\t&AK@\tM427\t\t\tGN\t0\t22\n"
     "なれ\t될 수 &HN@\tM427\t\tKe\tGN\t0\t23\n"
-    "なれ\t익숙해 &AL@\tM427\t\t\tGN\t0\t24\n";
+    "なれ\t익숙해 &AL@\tM427\t\t\tGN\t0\t24\n"
+    "連れてこられ\t끌려&AH@\tM427\tXXX\t\tGN\t0\t25\n"
+    "連れてこられ\t데려올 수 &HN@\tM427\t\tKe\tGN\t0\t26\n"
+    "な\t$FA@\tH7U0\t\tXn\tGN\t0\t27\n"
+    "い\t1다\tT500\tXXX\t\tGN\t0\t28\n";
 
 std::string Translate(std::string_view text) {
     static const auto loaded = dict::Load({{0, "base.tsv", std::string(kRows)}});
@@ -67,6 +71,12 @@ HD_TEST(word_voice_keeps_the_candidates_of_its_reading) {
     HD_CHECK_EQ(Translate("彼に見られた。"), "그에게 보였다.");
     HD_CHECK_EQ(Translate("見られると困る。"), "보이면 곤란하다.");
     HD_CHECK_EQ(Translate("見られた。"), "볼 수 있었다.");
+}
+
+HD_TEST(word_voice_kuru_word_before_a_negative) {
+    // A dictionary word in the られ of くる before a negative is the potential (GRM-10, 7).
+    HD_CHECK_EQ(Translate("連れてこられない。"), "데려올 수 없다.");
+    HD_CHECK_EQ(Translate("連れてこられた。"), "끌려왔다.");
 }
 
 HD_TEST(word_voice_no_passive_for_a_verb_without_object) {

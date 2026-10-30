@@ -6,7 +6,7 @@ dict:novel-tsuretekorare:3	こんなところに連れてこられたのか…	h
 dict:novel-tsuretekorare:3	幼い頃に父に連れてこられて以来	has:끌려온	fix	defaults
 dict:novel-tsuretekorare:3	調査兵団に連れてこられたって聞いたよ	has:끌려왔다고	fix	defaults
 dict:novel-tsuretekorare:6	無理やり連れて来られた	억지로 끌려왔다	fix	defaults
-dict:novel-tsuretekorare:1	吉岡さん もし けがしてたら一人じゃここまで連れてこれません	has:데려올 수 없습니다	keep	local
+voice:kuru-word	吉岡さん もし けがしてたら一人じゃここまで連れてこれません	has:데려올 수 없습니다	keep	defaults
 dict:novel-tsuretekorare:2	なかなか 足が悪いから連れてこれなくて	has:데려올 수 없어서	keep	local
 dict:novel-tsuretekorare:10	死因は首を絞められた窒息死	사인은 목을 졸린 질식사	fix	defaults
 dict:novel-tsuretekorare:10	オルファンスに首を絞められたアニスフィアは	has:목을 졸린	fix	defaults

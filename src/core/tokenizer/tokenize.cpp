@@ -142,6 +142,25 @@ private:
         return (*joins_)(before, after, word);
     }
 
+    // SpaceWord::Spelled on the text from the piece at from to the space at i and the text after it,
+    // which reaches over single spaces.
+    bool Spelled(size_t from, size_t i) const {
+        const auto blank = [](char32_t c) { return c != '\n' && c != '\r' && text::IsSpace(c); };
+        size_t to = i + 1;
+        while (to < s_.size() && to < i + 25 &&
+               (Class(s_[to]) != 0 || (blank(s_[to]) && to + 1 < s_.size() && Class(s_[to + 1]) != 0))) {
+            to++;
+        }
+        std::string before, after;
+        for (size_t k = from; k < i; k++) {
+            if (!blank(s_[k])) text::AppendRune(before, s_[k]);
+        }
+        for (size_t k = i + 1; k < to; k++) {
+            if (!blank(s_[k])) text::AppendRune(after, s_[k]);
+        }
+        return (*joins_)(before, after, SpaceWord::Spelled);
+    }
+
     // Whether the space at i, left out of the Japanese token being built, parts two words
     // (TokenizeSpans): a single space between two Japanese characters, unless the pieces on its
     // sides are spaced out character by character or a name.
@@ -162,21 +181,28 @@ private:
             if (k > start && Class(s_[k - 1]) == kClassKatakana) return false;
         }
         // Pieces of one character in a row up to the space and on after it: a letter of the
-        // spelling is not a filler even when it has that reading on its own.
-        size_t run = 0;
+        // spelling is not a filler even when it has that reading on its own. Where the run ends in a
+        // piece of more than one character, between kanji joins finds a word in the kanji pieces
+        // across the space as SpaceWord::Spelled (通 知 表が, こ の 展 開は; not 私 先 行く).
+        size_t run = 0, kanjiStart = i;
+        bool kanjiRun = true;
         for (size_t from = start, to = i; to - from == 1;) {
             run++;
+            kanjiRun = kanjiRun && text::IsKanji(s_[from]);
+            if (kanjiRun) kanjiStart = from;
             if (from < 2 || !blank(s_[from - 1]) || Class(s_[from - 2]) == 0) break;
             to = from - 1;
             for (from = to; from > 0 && Class(s_[from - 1]) != 0;) from--;
         }
+        bool wordAfter = end - i - 1 > 1;  // the run ends in a piece of more characters
         for (size_t from = i + 1, to = end; run > 0 && to - from == 1;) {
             run++;
             if (to + 1 >= s_.size() || !blank(s_[to]) || Class(s_[to + 1]) == 0) break;
             from = to + 1;
             for (to = from; to < s_.size() && Class(s_[to]) != 0;) to++;
+            wordAfter = to - from > 1;
         }
-        if (run >= (kanji ? 2u : 3u)) return false;
+        if (run >= (kanji ? 2u : 3u) && (!kanji || !wordAfter || Spelled(kanjiStart, i))) return false;
         if (Joins(i, SpaceWord::Filler)) return true;
         // A piece that starts with a small kana or a long mark goes on with the word before it
         // (消す っていう).

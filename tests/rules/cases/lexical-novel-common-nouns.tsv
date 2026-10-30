@@ -1,7 +1,7 @@
 # 규칙: LEX-3
 rule	input	expected	kind	layer
 dict:novel-common-nouns:1	夏には湿気がこもり、蚊も蠅も湧きまする。	여름에는 습기가 가득차, 모기도 파리도 솟아나옵니다.	fix	defaults
-dict:novel-common-nouns:1	これで臭いも減り、蠅も湧きませぬ	이것으로 구린 것도 줄어들어, 파리도 솟아나지 않사옵니다	fix	defaults
+dict:novel-common-nouns:1	これで臭いも減り、蠅も湧きませぬ	이것으로 냄새도 줄어들어, 파리도 솟아나지 않사옵니다	fix	defaults
 dict:novel-common-nouns:1	笑ワセル！蠅ドモメ…ッ！	소와셀! 파리 드모메…!	fix	defaults
 dict:novel-common-nouns:16	今 高専には蠅頭があふれている	지금 고등전문학교에는 승두가 넘치고 있다	keep	defaults
 dict:novel-common-nouns:2	ただ 元 教師で 同年代の人で	다만 전 교사로 또래의 사람으로	fix	defaults

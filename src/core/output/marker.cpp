@@ -931,7 +931,9 @@ bool Composer::TextGate(int i, std::string_view key) {
         if (DirectText(it).ends_with("려고")) return false;
         // A connective said again (泣いて泣いて 울어 울어) is written each time.
         if (cls == '7') return WidthOf(DirectText(it)) <= 1 && (it.surface != next.surface || it.endingSurface != next.endingSurface);
-        return true;
+        // The same verb said again after a question that closes its clause is a predicate of
+        // its own (忘れちゃったのか忘れたのか 잊어버린 건가 잊은 건가).
+        return it.surface != next.surface || !it.endingSurface.ends_with("か");
     }
     return it.endingSurface != kJaNaide && marker == "&CJ@" && EntryText(next) == kKoJuseyo;
 }

@@ -915,6 +915,15 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
         {"最浅っ！", "最浅っ！"},  // inside a word
         {"もっと浅っす", "もっと浅っす"},
         {"おめぇ、何してんだ", "おめぇ、何してんだ"},  // a word spelled with the small vowel
+        // みてえ after a word is みたい; みて drawn out where a clause starts, after を or as a て form
+        // drawn with dashes stays.
+        {"経営者だったみてえだな", "経営者だったみたいだな"},
+        {"水みてぇに飲む", "水みたいに飲む"},
+        {"会ってみてえええ！", "会ってみたい！"},
+        {"手紙みてーな話", "手紙みたいな話"},
+        {"みてえ！", "みてえ！"},
+        {"これをみてえ", "これをみてえ"},
+        {"あ、みてみてー", "あ、みてみてー"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
@@ -983,8 +992,9 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
 
-// A name-layer key that runs on from a sound into kanji, and a word the dictionary reads only
-// as a noun right before を or が, rule the sound out.
+// A name-layer key that runs on from a sound into kanji, a word the dictionary reads only as a
+// noun right before を or が, and a katakana word it reads only as a common noun before another
+// particle or after kanji, rule the sound out.
 HD_TEST(pipeline_sound_name_and_noun) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
@@ -1004,10 +1014,53 @@ HD_TEST(pipeline_sound_name_and_noun) {
         {"ニコニコ動画で見た", "ニコニコ動画で見た"},
         {"ニコニコ笑う", "싱글벙글 笑う"},
         {"ガチャを回す", "ガチャを回す"},
+        {"ガチャで引く", "ガチャで引く"},
+        {"人生ガチャ", "人生ガチャ"},
         {"ガチャと開く", "철컥 開く"},
+        {"ガチャ…", "철컥…"},
         {"モヤモヤが残る", "찜찜が残る"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+// A katakana interjection right before a hiragana verb is the interjection (ハイハイわかりました);
+// before する, a noun's particle or an adjective ending it stays with the dictionary word.
+HD_TEST(pipeline_sound_interjection_before_verb) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "ハイハイ\t기어 다니기\tN110\t1\n"
+                                     "わか\t&K6@\tM418\t2\n"
+                                     "し\t&AV@\tM429\t3\n"
+                                     "だけ\t만\tP211\t4\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"ハイハイわかりました", "네네 わかりました"},
+        {"ハイハイして", "ハイハイして"},
+        {"ハイハイだけ", "ハイハイだけ"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
+// An acts row keeps its own reading before a する that describes a noun after it and writes its
+// lemma before other forms of する (ぷるぷるさせる 부들부들, ぷるぷるした身 탱글탱글).
+HD_TEST(pipeline_sound_acts_row) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'プ')) flagged = flagged || (r.key == U"プルプル" && r.acts && !r.root.empty());
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"肩をぷるぷるさせていた", "肩を부들부들させていた"},
+        {"ぷるぷるした身", "탱글탱글した身"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
 
 // An exclaim row (よかった 다행이다) as written is no sound before a question mark, after
@@ -1208,8 +1261,10 @@ HD_TEST(pipeline_contracted_no) {
 
 // A ん or っ said for a kana of a verb form takes it back: る before the な of a prohibition, ら, れ
 // or られ before ない (and ねえ, written ない), the negative ない after an ichidan or potential stem
-// before ぞ, から or か, る before から, the れ of しれない after かも; not after a verb of ability, a
-// godan negative stem or a dictionary form, in a word, nor after a lone kana elsewhere or kana alone.
+// before ぞ, から or か and after a godan negative stem with a kanji before か, から, けど or し, the の
+// of a question after a past before か, る before から, the れ of しれない after かも; not after a verb of
+// ability, a godan negative stem elsewhere or a dictionary form, in a word, nor after a lone kana
+// elsewhere or kana alone.
 HD_TEST(pipeline_contracted_n) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tgram\tid\n"
@@ -1230,7 +1285,10 @@ HD_TEST(pipeline_contracted_n) {
                                      "止ま\t멈&CL@\tM428\t\t15\n"
                                      "な\t&C6@\tM418\t\t16\n"
                                      "なん\t무엇\tN110\t\t17\n"
-                                     "みんな\t모두\tE100\t\t18\n"}});
+                                     "みんな\t모두\tE100\t\t18\n"
+                                     "待\t기다&AA@\tM434\t\t19\n"
+                                     "任\t맡&AA@\tM433\t\t20\n"
+                                     "主任\t주임\tN110\t\t21\n"}});
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
@@ -1264,6 +1322,19 @@ HD_TEST(pipeline_contracted_n) {
         {"止まんぞ", "止まんぞ"},
         {"練習になんない", "練習にならない"},  // なん is no word before ない
         {"みんないい", "みんないい"},          // a word past the ん
+        {"やんない", "やらない"},              // a lone kana where a clause starts, before ない
+        {"これ　やんなきゃ", "これ　やらなきゃ"},
+        {"やんなっちゃう", "やんなっちゃう"},  // 嫌になっちゃう
+        {"やんなよ", "やんなよ"},              // no prohibition from a lone kana there
+        {"待たんか？", "待たないか？"},        // a godan negative stem with a kanji before か
+        {"待たんか！", "待たんか！"},          // the reproach, left to the end rows of んか
+        {"知らんし", "知らないし"},
+        {"知らんけど", "知らないけど"},
+        {"知らんわ", "知らんわ"},
+        {"知らんかて", "知らんかて"},          // the かて of ても
+        {"見たんかい", "見たのかい"},          // the の after a past
+        {"主任さんから", "主任さんから"},      // the honorific after a noun
+        {"負けんしゅ", "負けんしゅ"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

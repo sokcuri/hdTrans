@@ -604,6 +604,24 @@ HD_TEST(pipeline_rewrite_casual) {
         {"あんだけ言った"sv, "あんだけ言った"sv},
         {"とぼけんな　この野郎"sv, "とぼけるな　この野郎"sv},
         {"決めてんな　お前"sv, "決めてんな　お前"sv},
+        // っす where the sentence goes on: です, んです after a verb; から only after a verb. A final
+        // けど, よね or かね is left to the end rows of っす.
+        {"怖いっすよね｡"sv, "怖いっすよね｡"sv},
+        {"大丈夫っすけど　いいんすか？"sv, "大丈夫ですけど　いいんですか？"sv},
+        {"どっちがいいっすかね？"sv, "どっちがいいですかね？"sv},
+        {"首つったっすけど"sv, "首つったっすけど"sv},
+        {"首つったっすけど　死ねなくて"sv, "首つったんですけど　死ねなくて"sv},
+        {"兄貴も絶対そう思うっすよね？"sv, "兄貴も絶対そう思うんですよね？"sv},
+        {"そうっすよね…"sv, "そうっすよね…"sv},
+        {"やることがあるっすから"sv, "やることがあるんですから"sv},
+        {"調達屋っすから顔は広い"sv, "調達屋っすから顔は広い"sv},
+        {"意味ないっすからね。"sv, "意味ないっすからね。"sv},
+        {"雨っすね。"sv, "雨っすね。"sv},
+        {"そっスよねー！"sv, "そっすよねー！"sv},
+        {"うぃっす！"sv, "うぃっす！"sv},
+        {"まっすぐ行く"sv, "まっすぐ行く"sv},
+        {"待たんかい！"sv, "待たんかい！"sv},  // after a kanji left to RewriteContractedN
+        {"書いたんか"sv, "書いたのか"sv},
     };
     Check([](std::string_view text) { return RewriteCasual(text); }, cases);
 }

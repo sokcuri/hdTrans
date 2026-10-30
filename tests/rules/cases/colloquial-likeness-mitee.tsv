@@ -1,0 +1,30 @@
+# 규칙: SPC-19
+rule	input	expected	kind	layer
+sound:fused-adjective	親は 会社経営者だったみてえだな	부모는 회사 경영자였던 것 같네	fix	sound
+sound:fused-adjective	ヘッ まるで猿みてえな野郎だ	헷 마치 원숭이 같은 놈이다	fix	sound
+sound:fused-adjective	子供みてえに わがままばっかり	아이같이 이기적임뿐	fix	sound
+sound:fused-adjective	やったことあるみてえじゃねえかよ	한 적 있는 것 같지 않을까	fix	sound
+sound:fused-adjective	水みてぇに ぐびぐび飲めんだ	물같이 꿀꺽꿀꺽 마실 수 있는 이다	fix	sound
+sound:fused-adjective	産んでみてえよ	낳아 보고 싶어	fix	sound
+sound:fused-adjective	熱が出てきたみてえだな	열이 나 온 것 같네	fix	sound
+sound:fused-adjective	うまく かみ合わなかったみてえだ	잘 맞물리지 않았던 것 같다	fix	sound
+sound:fused-adjective	妙に騒いでるみてえだな	묘하게 떠들고 있는 것 같네	fix	sound
+sound:fused-adjective	進歩してるみてえだな	진보하고 있는 것 같네	fix	sound
+sound:fused-adjective	大豆みてぇな大いなる男になるぜ！	대두 같은 커다란 남자가 돼!	fix	sound
+sound:fused-adjective	信頼してくれてるみてぇだな｡	신뢰해 주고 있는 것 같네.	fix	sound
+sound:fused-adjective	王将の床みてえだよ	왕장의 바닥 같아	fix	sound
+sound:fused-adjective	噂は本当みてえですね	소문은 사실 같네요	fix	sound
+sound:fused-adjective	まったく夢みてえだな えっ？	완전히 꿈 같다 어?	fix	sound
+sound:fused-adjective	あんた新入りみてえだから特別に	너신입 같으니까 특별히	fix	sound
+sound:fused-adjective	弟みてぇに思ってる	남동생같이 생각한다	fix	sound
+sound:fused-adjective	オカマみてえだぜ	게이 같아	fix	sound
+sound:fused-adjective	電話してみてえええ！	전화해 보고 싶어!	fix	sound
+sound:fused-adjective	あーもー会ってみてえええ！	아-도-만나 보고 싶어!	fix	sound
+sound:fused-adjective	目が醒めたみてぇだぞ	깨어난 것 같다	fix	sound
+sound:fused-adjective	こんな舞台で泳いでみてえ…	이런 무대에서 헤엄쳐 보고 싶어…	fix	sound
+sound:fused-adjective	バッカみてぇ	바보같다	fix	sound
+sound:fused-adjective	あの手紙みてーな意味不明なこと	그 편지 같은 의미 불명한 일	fix	sound
+sound:fused-adjective	あ、みてみてー	아, 봐 봐―	keep	sound
+sound:fused-adjective	これをみてえ	이것을 봐	keep	sound
+sound:fused-adjective	しばらく休みてぇ～。	한동안 쉬고 싶다.	keep	sound
+sound:fused-adjective	何を頼みてえんだ？	뭘 부탁하고 싶어?	keep	sound

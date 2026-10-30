@@ -21,3 +21,4 @@ cx:ni-after-adverb:35	約束の時間ちょうどに、インターホンが鳴�
 cx:ni-after-adverb:35	その間に次の方針を考える。	has:그 사이에	keep	rewrites
 cx:ni-after-adverb:35	すぐに行く。	곧바로 간다.	keep	rewrites
 cx:naku-adverbial:10	調子の戻ったアールは、興味もないテレビを観るでもなく観ていた。	has:보는 것도 아니게	keep	rewrites
+cx:ni-after-adverb:35	一目で分かるのにも拘わらずに、彼女は全部見た。	has:불구하고, 그녀는	fix	rewrites

@@ -892,6 +892,14 @@ bool Worker::SentenceFinal(std::string_view rest, int token, bool comma) const {
     tokenizer::TokenView next = Tok(token + 1);
     next.text = NextText(token + 1);
     if (comma && (next.text.starts_with(kJaComma) || next.text.starts_with(kJaFullComma))) return true;
+    // A space before the mark that ends the sentence, as captions write it (そうっすね 。).
+    // Only a mark that ends a sentence counts there (. ! ? 。 ！ ？ ｡), not a comma, a ー or a closing bracket.
+    if ((next.type == tokenizer::kTypeAsciiSpace || next.type == tokenizer::kTypeWideSpace) && token + 2 < TokenCount()) {
+        const std::string_view after = Tok(token + 2).text;
+        for (const std::string_view mark : {".", "!", "?", "。", "！", "？", "｡"}) {
+            if (after.starts_with(mark)) return true;
+        }
+    }
     switch (next.type) {
     case tokenizer::kTypeAsciiPunct:
     case tokenizer::kTypeAsciiClose:
@@ -938,6 +946,22 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
     if (ending.ends_with("か") && after.starts_with("ら")) return true;
     if (ending.ends_with("もので") && after.starts_with("しょ")) return true;
+    // An ending in けども gives its も to an adverb that starts with it and reaches as far as the words
+    // after the ending do (分からないけどもう一度: けど + もう一度, けどもしかしたら; not けども + うん).
+    if (ending.ends_with("けども") && !after.empty()) {
+        const std::string_view rest = after.substr(0, std::min<std::size_t>(after.size(), 24));
+        std::size_t word = 0;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(rest, dict::LookupMode::General, lookupContext).list) {
+            if (c.user == nullptr || !c.user->nameLayer) word = std::max(word, text::RuneCount(c.source));
+        }
+        std::string query = "も";
+        query += rest;
+        for (const dict::Candidate& c : snapshot.GetWordInfo(query, dict::LookupMode::General, lookupContext).list) {
+            const std::string_view part = c.codes != nullptr ? std::string_view(c.codes->partText) : std::string_view();
+            const std::size_t n = text::RuneCount(c.source);
+            if ((c.user == nullptr || !c.user->nameLayer) && At(part, 0) == 'E' && n >= 2 && n >= word + 1) return true;
+        }
+    }
     if (ending.ends_with("です") && !after.empty()) {
         std::string query = "す";
         query += after.substr(0, std::min<std::size_t>(after.size(), 24));

@@ -1,0 +1,14 @@
+# 의태어 행의 acts: 명사를 꾸미지 않는 する 앞에서는 사전형(부들부들)을, 명사를 꾸미는 した 앞과 그 밖에서는 행의 번역(탱글탱글)을 쓴다.
+rule	input	expected	kind	layer
+sound:acts	何故か目をくわっと見開いて、握り拳をぷるぷるさせている。	어째서인지 눈을 확 크게 떠, 주먹을 부들부들시키고 있다.	fix	sound
+sound:acts	しばらくして、肩をプルプルさせていたジオルド王子が顔をあげた。	잠시 후, 어깨를 부들부들시키던 지오르드 왕자가 얼굴을 들었다.	fix	sound
+sound:acts	笑い袋さんは笑いでぷるぷるしている。	웃음보 씨는 웃음으로 부들부들하고 있다.	fix	sound
+sound:acts	……あ、よくよく見たら、マリアローゼ様の肩と扇子を持った手もぷるぷるしてらっしゃる……。	……아, 자세히 보면, 마리아 로제님의 어깨와 부채를 가진 손도 부들부들하고 계신다…….	fix	sound
+sound:acts	「当たるの？　そんなプルプルしてて」	「맞는 거야? 그런 부들부들하고 있어」	fix	sound
+sound:acts	下級貴族クラスの男子が一人、お腹を抱えてぷるぷるしている。	하급 귀족 반의 남자가 한 사람, 배를 움켜 쥐어 부들부들하고 있다.	fix	sound
+sound:acts	⟨さらに プルプルした身と軟骨のコリコリ食感が絶品のエイ⟩	has:탱글탱글한 몸	keep	sound
+sound:acts	ぷるぷるしたゼリー	탱글탱글한 젤리	keep	sound
+sound:acts	ぷるぷるのゼリー	탱글탱글의 젤리	keep	sound
+sound:acts	肌がぷるぷるになる	피부가 탱글탱글하게 된다	keep	sound
+sound:acts	『ぷるぷるはにぃ』が!?	has:탱글탱글	keep	sound
+sound:acts	ぷるんとした唇	탱글한 입술	keep	sound

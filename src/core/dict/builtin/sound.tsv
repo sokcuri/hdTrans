@@ -7,7 +7,9 @@
 // (おい、 ちょっと…, but not ちょっと高い); open rows are lead rows that need no pause
 // (ってかなんで 그보다, 왜). cry in the fourth column marks an intj row that is a predicate said
 // as a cry (やだ 싫어), whose last copy said again and clipped with っ closes its last syllable
-// with ㅅ (やだやだっ 싫어 싫엇).
+// with ㅅ (やだやだっ 싫어 싫엇). KR/lemma writes the lemma before する (ぼーっとした 멍했다); acts in
+// the fourth column keeps KR before a する that describes a noun after it (ぷるぷるさせる 부들부들,
+// ぷるぷるした身 탱글탱글한).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -978,7 +980,7 @@
 ぷるんっ	탱글	ono
 ぷるる	탱글	ono
 ぷるるん	탱그르르	ono
-ぷるぷる	탱글탱글	ono
+ぷるぷる	탱글탱글/부들부들하다	ono	acts
 ぷるんぷるん	출렁출렁	ono
 ぷりっ	탱	ono
 ぷりぷり	탱글탱글	ono

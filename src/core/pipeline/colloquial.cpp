@@ -1099,16 +1099,29 @@ size_t ClippedAdjectiveAt(const Emphasis& e, std::u32string_view rs, size_t s, b
     return 0;
 }
 
+// Whether the て at rs[t], drawn out up to q, is the みたい of a likeness or of the wish of みる said みてえ,
+// みてぇ or みてー after a word (経営者だったみてえ, 水みてぇに, 女のトルソみてえだ, 会ってみてえ), before
+// FusedTailAt, に, だ, で or ね. Not みて drawn out where a clause starts or after a particle that takes
+// what is seen (みてー！, これをみてえ, 俺もみてえ), nor after a て form drawn with dashes alone (見てみてー).
+bool LikenessAt(std::u32string_view rs, size_t t, size_t q) {
+    if (t < 2 || rs[t - 1] != U'み' || !LetterAt(rs, t - 2) || In(rs[t - 2], U"をがはにへも")) return false;
+    if (q < rs.size() && !FusedTailAt(rs, q, false) && !In(rs[q], U"にだでね")) return false;
+    const bool dashes = std::all_of(rs.begin() + static_cast<std::ptrdiff_t>(t) + 1, rs.begin() + static_cast<std::ptrdiff_t>(q), IsDash);
+    return !(dashes && In(rs[t - 2], U"てで"));
+}
+
 // The たい of a wish said てえ, てぇ or てー after the continuative of a verb whose て form differs from
 // it (行きてえんだ 行きたいんだ, 食いてぇな, やりてー; not 見てえ or 話してぇ, which may be a て form drawn
 // out, nor 向いて～ or いきてぇ, the て form of 向く and of 生きる), before FusedTailAt: the end of the run at rs[t:]
 // that draws the て out, or 0. A plain てえ before no particle (食いてえ。, 帰りてえ…) is left to the
-// ending row of てえ.
+// ending row of てえ. みてえ after a word is みたい (LikenessAt).
 size_t FusedWishAt(const Emphasis& e, std::u32string_view rs, std::u32string_view hs, size_t t) {
     if (t == 0 || rs[t] != U'て' || !IsHiraganaRune(rs[t - 1])) return 0;
     size_t q = t + 1;
     while (q < rs.size() && In(hs[q], kFusedE) && DrawnKana(rs[q], false)) q++;
-    if (q == t + 1 || !FusedTailAt(rs, q, false)) return 0;
+    if (q == t + 1) return 0;
+    if (LikenessAt(rs, t, q)) return q;
+    if (!FusedTailAt(rs, q, false)) return 0;
     // Before no particle, a plain てえ is read by the ending row of てえ (食いてえ。, 帰りてえ…).
     if ((q >= rs.size() || !IsHiraganaRune(rs[q])) && rs.substr(t + 1, q - t - 1) == U"え") return 0;
     size_t start = t;
@@ -1432,6 +1445,11 @@ bool FusedAnchor(std::u32string_view rs, std::u32string_view hs, size_t f) {
     const char32_t c = rs[f];
     if (!In(c, U"えぇ") && (f + 1 == rs.size() || !In(rs[f + 1], U"えぇいぃー～エェイィ"))) return false;
     if (f > 0 && IsKanjiRune(rs[f - 1]) && In(c, U"えぇ") && DrawnRunEnds(rs, hs, f, kFusedE, false)) return true;
+    if (c == U'て') {
+        size_t q = f + 1;
+        while (q < rs.size() && In(hs[q], kFusedE) && DrawnKana(rs[q], false)) q++;
+        if (q > f + 1 && LikenessAt(rs, f, q)) return true;
+    }
     const bool katakana = IsKatakanaRune(c);
     if (!katakana && !IsHiraganaRune(c)) return false;
     const int row = HiraganaVowel(hs[f]);

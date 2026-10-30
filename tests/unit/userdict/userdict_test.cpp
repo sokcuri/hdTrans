@@ -41,8 +41,9 @@ struct Parsed {
     Compiled out;
 };
 
-void Run(Parsed& p, std::string_view text) {
+void Run(Parsed& p, std::string_view text, bool soundTable = false) {
     Context ctx{&p.codes, &p.families, nullptr};
+    ctx.soundTable = soundTable;
     p.out = Parse(text, 0, ctx);
 }
 
@@ -158,6 +159,7 @@ HD_TEST(userdict_parse_errors) {
         {"猫\t냥이\tn\t\tloop", "1: 5 columns, at most 4"},
         {"猫\t냥이\tn\tsource=loop", "1: option \"source=loop\": unknown option \"source=loop\""},
         {"猫\t냥이\tn\tbogus", "1: option \"bogus\": unknown option \"bogus\""},
+        {"ぷるぷる\t탱글탱글\tono\tacts", "1: option \"acts\": acts is only for the built-in sound table"},
         {"猫\t냥이\tn\tprio=x", "1: option \"prio=x\": \"x\" is not an integer"},
         {"猫\t냥이\tn\tprio=+-1", "1: option \"prio=+-1\": \"+-1\" is not an integer"},
         {"猫\t냥이\tn\tspace", "1: option \"space\": unknown option \"space\""},
@@ -401,7 +403,7 @@ HD_TEST(userdict_builtin_tables_compile) {
     for (const char* name : {"endings.tsv", "patterns.tsv", "phrases.tsv", "sound.tsv"}) {
         for (const std::string& text : {dict::BuiltinText(name), dict::ExtraBuiltinText(name)}) {
             Parsed p;
-            Run(p, text);
+            Run(p, text, std::string_view(name) == "sound.tsv");
             HD_CHECK_EQ(Errors(p.out.errors), std::string());
         }
     }

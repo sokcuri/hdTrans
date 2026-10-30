@@ -1,0 +1,20 @@
+# 가타카나 감탄사 바로 뒤에 히라가나 동사가 오면 감탄사다. 명사가 받는 조사, する, できる, 형용사 어간, 다른 낱말로 이어지는 말 앞은 그대로 둔다.
+rule	input	expected	kind	layer
+sound:intj-before-verb	ハイハイわかりました	네네 알겠습니다	fix	sound
+sound:intj-before-verb	ハイハイわかってますよ	네네 알고 있어요	fix	sound
+sound:intj-before-verb	ヤダやめてよ	싫어 그만해	fix	sound
+sound:intj-before-verb	ヤダやめて！	싫어 그만해!	fix	sound
+sound:intj-before-verb	ハイハイ、わかってるわよ！	네네, 알고 있어!	keep	sound
+sound:intj-before-verb	ハイハイ釣り釣り	네네 낚시 낚시	keep	sound
+sound:intj-before-verb	ママの方に　ハイハイして来てごらん。	엄마에게 기어 다녀 와 봐.	keep	sound
+sound:intj-before-verb	俺もハイハイぐらいは出来るようになった。	나도 기어 다니기 정도는 할 수 있게 되었다.	keep	sound
+sound:intj-before-verb	ハイハイレースいよいよスタートです	기어 다니기 레이스 드디어 스타트입니다	keep	sound
+sound:intj-before-verb	ハイハイとはいえ、移動できるようになると	has:기어 다니기라고는	keep	sound
+sound:intj-before-verb	薫　ハイハイが　できたの？	has:기어 다니기가	keep	sound
+sound:intj-before-verb	ハイハイだけ	기어 다니기만	keep	sound
+sound:intj-before-verb	ヤバいな｡	위험하네.	keep	sound
+sound:intj-before-verb	グッてやったら 戻せるんですよ｡	lacks:윽 어	keep	sound
+sound:intj-before-verb	これホンマにアカンやつ…	lacks:안돼 녀석	keep	sound
+sound:intj-before-verb	ﾆｬｰたちの食べ物が！	야옹들의 음식이!	keep	sound
+sound:intj-before-verb	(松島)ハハハハハためらいがない｡	lacks:하하하하하망설임	keep	sound
+sound:intj-before-verb	ｷｬｴﾗさんが付いてるとはいえ	lacks:꺄	keep	sound

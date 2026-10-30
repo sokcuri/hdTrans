@@ -8628,7 +8628,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かかる重大	이러한 중요%A1@	G8U0			GN				jisjk:139534		
 かかれ	쓰여&C6@	M427			GN				jisjk:142189		
 かかわ	관계&C6@	M418		Dx	GN				jisjk:90550		
-かかわらず	불구하고	E300			GN	1172	||1 &&3 P-1== "4**" U-1== "にも" M-1== "56*"	동사의 'にも' 어미 뒤에 오는 'かかわらず'를 양보 표현 '불구하고'로 고른다.	jisjk:116564		
+かかわらず	불구하고	E300			GN	1172	||3 &&4 S-1== "も" ||2 U-2== "Rのに" S-2== "Rのに" S+1== "に" D+1= "" &&3 P-1== "4**" U-1== "にも" M-1== "56*" &&2 S-1== "も" ||2 U-2== "Rのに" S-2== "Rのに"	동사의 'にも' 어미 뒤나 のに와 も 뒤에 오는 'かかわらず'를 양보 표현 '불구하고'로 고른다. 뒤의 に(のにも関わらずに)는 옮기지 않는다.	jisjk:116564		
 かかわらず	관계없이	E300	XXX		GN				jisjk:122940		
 かかわり	 관련	N110			GN				jisjk:150798		
 かかわり	관계	N110			GN				jisjk:167370		-1
@@ -31044,7 +31044,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ために	5기 때문에	S560		J1	GN				jisjk:4133		
 ために	속셈이 &HN@	M449			GN				jisjk:138238		
 ために	위해	E300			GN				jisjk:262253		
-ために	1기 위해서	S500			GN	5068	||1 &&2 ||3 S+0== "助け" S+0== "守" S+0== "まも" S-1== "を"	助け·守·まも 어간에 붙고 앞에 を가 있으면 어미 ために의 기 위해서 후보를 고른다. (미발동: other)	jisjk:375331		
+ために	1기 위해	S500			GN	5068	||1 &&2 ||3 S+0== "助け" S+0== "守" S+0== "まも" S-1== "を"	助け·守·まも 어간에 붙고 앞에 を가 있으면 어미 ために의 기 위해 후보를 고른다. (미발동: other)	jisjk:375331		
 ためにな	도움이 &C6@	E428		Dx	GN				jisjk:138240		
 ためにも	1기 위해서도	T5a1			GN				jisjk:4134		
 ための	1기 위한	S500			GN				jisjk:265846		
@@ -36911,7 +36911,7 @@ ttt	ttt	K110			GN				jisjk:201744
 にもい	에도 $DE@	H7U0		Tu	GN				jisjk:257384		
 にもいかな	도 $FA@	H7U0		Tu	GN	1757	||1 S-1== "わけ"	にもいかな는 わけ 뒤에서 ‘도 없다’를 고른다.	jisjk:202213		
 にもかかわらず	에도 불구하고	E311		Tu	GN				jisjk:988		
-にもかかわらず	0 것에도 불구하고	S500			GN				jisjk:989		
+にもかかわらず	B에도 불구하고	S500			GN				jisjk:989		
 にもかかわらず	그럼에도 불구하고	E311			GN	1654	||1 G+0== "Hz"	문장 첫머리의 にもかかわらず를 그럼에도 불구하고로 고른다. (미발동: rare-word)	jisjk:159907		
 にもかかわりませず	에도 불구하고	E300		Tu	GN				jisjk:267336		
 にもこのよう	에도 이와 %B3@	G8U0			GN				jisjk:139557		
@@ -36943,7 +36943,7 @@ ttt	ttt	K110			GN				jisjk:201744
 にも怒られ	도 화&A5@	M467		TuPj	GN				jisjk:342109		
 にも言われ	에게 &J6@	M427		TuPj	GN				jisjk:341871		
 にも関かわらず	에도 불구하고	E311		Tu	GN				jisjk:990		
-にも関わらず	0 것에도 불구하고	S500			GN				jisjk:373984		
+にも関わらず	B에도 불구하고	S500			GN				jisjk:373984		
 にゃんにゃん	냥냥	N130	VGt		GN				jisjk:268280		
 にやっかい	귀%C4@	G8U0			GN				jisjk:143223		
 にやってきてくれ	에 찾아와 &CJ@	M427		Tu	GN				jisjk:147517		
@@ -75357,7 +75357,6 @@ ttt	ttt	K110			GN				jisjk:201744
 バターソース	버터소스	N110			GN				jisjk:113210		
 バタードワイフシンドローム	매맞는 여성 신드롬	N110	UTh		GN				jisjk:152417		
 バターワース	버터워스	N110			GN				jisjk:53444		
-バターン	패턴	N110			GN				jisjk:113198		
 バタ材	버터재	N110			GN				jisjk:164728		
 バタ臭	서양티가 $A2@	H7U0			GN				jisjk:5315		
 バチェフ	바체프	N130	QPN		GN				jisjk:370469		
@@ -77073,7 +77072,6 @@ ttt	ttt	K110			GN				jisjk:201744
 パール工業	파루공업	N110			GN				jisjk:114043		
 パール金属	펄 금속	N130	QIDVGt		GN				jisjk:53678		
 パーレン	둥근 괄호	N110			GN				jisjk:132734		
-パーン	펀	N110			GN				jisjk:163974		
 パー発行	파 발행	N110			BZ				jisjk:347849		
 パ行	파행	N110			GN				jisjk:341728		
 ヒアリング	히어링	N110			GN				jisjk:53979		
@@ -78325,7 +78323,15 @@ ttt	ttt	K110			GN				jisjk:201744
 ピンホールカメラ	핀홀 카메라	N110	VPe		GN				jisjk:133188		
 ピンホールク	핀 홀크	N110			GN				jisjk:54436		
 ピンボール	핀볼	N110			GN				jisjk:103324		
-ピンポン	탁구	N110	VRw		GN				jisjk:54437		
+ピンポン	딩동	N110			GN				jisjk:54437		
+ピンポン	탁구	N110	VRw		GN	9810	||1 &&2 S+1== "を" ||4 S+2== "し" S+2== "す" S+2== "する" S+2== "さ"	する를 받는 ピンポンを는 경기라서 `탁구`다(ピンポンをした 탁구를 했다).	pingpong:1		
+ピンポン部	탁구부	N110			GN				pingpong:2		
+ピンポン台	탁구대	N110			GN				pingpong:3		
+ピンポンの試合	탁구 시합	N110			GN				pingpong:4		
+ピンポン鳴ら	초인종을 울&AA@	M433			GN				pingpong:5		
+ピンポン押	초인종을 &EB@	M443			GN				pingpong:6		
+ピンポンを押	초인종을 &EB@	M443			GN				pingpong:7		
+ピンポンが鳴	초인종이 울&AA@	M4U8			GN				pingpong:8		
 ピンレバーウォッチ	핀 레버 왓치	N110			GN				jisjk:54438		
 ピンワーク	핀워크	N110	VCp		GN				jisjk:133189		
 ピン互換	핀 호환	N110			IT				jisjk:261951		
@@ -79189,7 +79195,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フィードラ	피드러	N130	QPN		GN				jisjk:369510		
 フィードリール	피드 릴	N110			GN				jisjk:54724		
 フィードロット	비육장	N110	VBl		GN				jisjk:133273		
-フィード率	피드률	N110			GN				jisjk:163982		
+フィード率	피드율	N110			GN				jisjk:163982		
 フィーバ	열광	N110			GN				jisjk:133274		
 フィーバー	피버	N110			GN				jisjk:114004		
 フィーラン	피란	N130	QPN		GN				jisjk:370409		
@@ -113806,7 +113812,7 @@ ttt	ttt	K110			GN				jisjk:201744
 予定利率	예정이율	N110			BZ				jisjk:360444		
 予定収入	예정수입	N110			BZ				jisjk:360451		
 予定地	예정지	N110	VPl		GN				jisjk:156203		
-予定率	예정율	N110			BZ				jisjk:352959		
+予定率	예정률	N110			BZ				jisjk:352959		
 予定申告	예정신고	N110			BZ				jisjk:360450		
 予定納税	예정납세	N110			BZ				jisjk:255362		
 予定説	예정설	N110	UCl		GN				jisjk:255360		
@@ -121557,7 +121563,7 @@ ttt	ttt	K110			GN				jisjk:201744
 伸び悩んでい	부진&Mf@	M427		Va	GN				jisjk:147908		
 伸び悩んでお	향상되지 않고 &HN@	M428			GN				jisjk:147909		
 伸び振動	신장 진동	N110			GN				jisjk:162553		
-伸び率	신장율	I110		Ct	GN				jisjk:76452		
+伸び率	신장률	I110		Ct	GN				jisjk:76452		
 伸び盛り	성장기	N110	UMe		GN				jisjk:249049		
 伸び線	연장선	N110			GN				jisjk:164440		
 伸び縮み	신축	I110			GN				jisjk:76453		
@@ -123123,7 +123129,7 @@ ttt	ttt	K110			GN				jisjk:201744
 体腔動物	체강동물	N110	VAm		GN				jisjk:240841		
 体膜	체막	N110	VBp		GN				jisjk:35824		
 体膨張	체적 팽창	N110	QHP		GN				jisjk:241002		
-体膨張率	체적 팽창율	N110	QHP		GN				jisjk:241003		
+体膨張率	체적 팽창률	N110	QHP		GN				jisjk:241003		
 体膨脹	체팽창	I110			GN				jisjk:86311		
 体臭	체취	N110	UYa		GN				jisjk:35846		
 体色	체색	N110	UCl		GN				jisjk:35829		
@@ -134778,7 +134784,7 @@ ttt	ttt	K110			GN				jisjk:201744
 出来	만&L4@	M4U7			GN	1250	||1 &&2 S-1== "で" P-1== "2**"	出来는 조사 で 뒤에서 재료·수단으로 만들어짐을 나타내는 ‘만들다’로 고른다.	jisjk:116808		
 出来	&HN@	M427		Ma	GN	2030	||3 &&4 U+0== "Lません" ||3 U-1== "Rことは" U-1== "Rことが" U-1== "R事が" M-1== "50*" D+0= "&M9@" ||5 U-1== "Rことも" U-1== "Rことが" U-1== "R事が" U-1== "Rのが" U-1== "Rことは" &&2 S-1== "の" U-2== "こと"	出来는 앞 동사의 ことが・ことは 등의 명사화 어미 뒤에서 '있다'를 고르며 일부 ません 활용에서는 '없다'로 바꾼다.	jisjk:262135		
 出来	생&A2@	M427			GN	2545	||3 &&3 S-1== "が" ||6 S-2== "急用" S-2== "用事" S-2== "R金" S-2== "出会い" S-2== "R人" S-2== "友達" D-1= "(이)가" &&5 S-1== "が" P-2== "1**" A-2== "UQfUYhVGtUMeVMoVHnVPlVBlVTp" ||3 P-2!= "12*" S-2== "彼女" S-2== "彼氏" D-1= "(이)가" &&4 P-1== "3**" S-2== "が" ||4 S-3== "友達" S-3== "出会い" S-3== "R人" S-3== "子供" D-2= "(이)가"	용무·돈·만남·사람 등의 명사와 주격 조사 뒤의 '出来'를 '생기다'로 고르고 앞 조사를 주격으로 맞추기도 한다.	jisjk:266427		
-出来	할 수 &HN@	M427	XXX	Ke	GN	3044	||8 &&2 S-1== "自由に" P-1== "3**" &&2 U+0== "Lません" D+0= "할 수 &M9@" &&2 P-1== "1**" G-1== "Hd" &&2 U+0== "ませず" D+0= "&AV@" &&3 S-1== "の" P-1== "2**" D-1= "(을)를" &&3 S-1== "が" ||4 G-2== "Hd" S-2== "R語" A-2== "QLG" S-2== "L何" D-1= "(을)를" &&5 S-1== "が" P-2== "12*" S-2!= "彼女" S-2!= "彼氏" D-1= "(이)가" &&7 S-1== "が" P-1== "2**" U+0!= "Lた" U+0!= "Lまし" U+0!= "Lちゃ" U+0!= "Lちま" D-1= "(을)를"	出来는 自由に·する형 명사·특정 부정형, の 뒤, 동작 명사·언어·何·대명사(彼女, 彼氏 제외)와 が 뒤, 그리고 과거가 아닌 꼴에서 명사와 が 뒤에 오면 ‘할 수 있다’로 고르며 부정 번역과 앞 조사도 정리한다. 과거의 명사와 が 뒤는 생기다다(L9523).	jisjk:341217		
+出来	할 수 &HN@	M427	XXX	Ke	GN	3044	||8 &&2 S-1== "自由に" P-1== "3**" &&2 U+0== "Lません" D+0= "할 수 &M9@" &&2 P-1== "1**" G-1== "Hd" &&2 U+0== "ませず" D+0= "&AV@" &&3 S-1== "の" P-1== "2**" D-1= "(을)를" &&3 S-1== "が" ||4 G-2== "Hd" S-2== "R語" A-2== "QLG" S-2== "L何" D-1= "(을)를" &&5 S-1== "が" P-2== "12*" S-2!= "彼女" S-2!= "彼氏" D-1= "(이)가" &&7 S-1== "が" P-1== "2**" ||3 M+0== "50*" M+0== "5:*" M+0== "57*" U+0!= "Lまし" U+0!= "Lちゃ" U+0!= "Lちま" D-1= "(을)를"	出来는 自由に·する형 명사·특정 부정형, の 뒤, 동작 명사·언어·何·대명사(彼女, 彼氏 제외)와 が 뒤, 그리고 과거가 아닌 꼴에서 명사와 が 뒤에 오면 ‘할 수 있다’로 고르며 부정 번역과 앞 조사도 정리한다. 과거의 명사와 が 뒤는 생기다다(L9523).	jisjk:341217		
 出来	가능&AV@	M427			GN	3174	||1 &&4 S-1== "なら" D-1== "(이)라면" P-1== "2**" P-2== "1**"	出来는 명사와 라면으로 번역된 なら 조사 뒤에서 가능하다로 고른다. (미발동: rare-context)	jisjk:342000		
 出来	할 수 &HN@	M427	XXX	Ke	GN	4428	||2 &&2 U+0== "Lません" D+0= "할 수 &M9@" &&2 M+0== "590" D+0= "&AV@"	「出来」는 공손 부정형이면 ‘할 수 없다’로 바꾸고 지정된 어미형에서는 가능 표현을 걷어내 ‘하다’로 바꾼다.	jisjk:364410		
 出来あい	기성	I110			GN				jisjk:110217		
@@ -134910,7 +134916,7 @@ ttt	ttt	K110			GN				jisjk:201744
 出物	매물	N110			GN				jisjk:36320		
 出猟	출렵	N110			GN				jisjk:234951		
 出獄	출옥	N110		Hd	GN				jisjk:36342		
-出玉率	당첨율	N110			GN				jisjk:160443		
+出玉率	당첨률	N110			GN				jisjk:160443		
 出現	출현	N110		Hd	GN				jisjk:36371		
 出生	출생	N110		Hd	GN				jisjk:36330		
 出生体重	출생 체중	N110			GN				jisjk:234943		
@@ -136871,7 +136877,7 @@ ttt	ttt	K110			GN				jisjk:201744
 利益回収	이익회수	N110			BZ				jisjk:359994		
 利益図表	이익도표	N110	VSw		BZ				jisjk:360001		
 利益実現	이익실현	N110			BZ				jisjk:359999		
-利益成長率	이익 성장율	N110			BZ				jisjk:360002		
+利益成長率	이익 성장률	N110			BZ				jisjk:360002		
 利益曲線	이익곡선	N110			BZ				jisjk:359996		
 利益概念	이익개념	N110	UTh		BZ				jisjk:361178		
 利益比準法	이익 비준법	N110			BZ				jisjk:348207		
@@ -137203,7 +137209,7 @@ ttt	ttt	K110			GN				jisjk:201744
 削成	깍아 만들기	N110			GN				jisjk:25349		
 削機	절삭기	N110			GN				jisjk:100665		
 削減	삭감	N110		Hd	BZ				jisjk:25347		
-削減率	삭감율	N110			BZ				jisjk:350023		
+削減率	삭감률	N110			BZ				jisjk:350023		
 削減策	삭감책	N110			GN				jisjk:184882		
 削滅	삭감	N110			GN				jisjk:100666		
 削除	삭제	N110		Hd	GN				jisjk:25350		
@@ -138218,7 +138224,7 @@ ttt	ttt	K110			GN				jisjk:201744
 割増	할증	N110			GN	505	||1 G-1== "NjNd"	割増 앞에 수사가 오면 할증을 고른다. (미발동: rare-word)	jisjk:38515		
 割増し	할증	N110	VMo	Hd	GN				jisjk:156915		
 割増償却	할증상각	N110			BZ				jisjk:359651		
-割増償却率	할증 상각율	N110			BZ				jisjk:359652		
+割増償却率	할증 상각률	N110			BZ				jisjk:359652		
 割増償還請求	할증상환청구	N110		Hd	BZ				jisjk:358620		
 割増料	할증료	I110	VMo		GN				jisjk:88545		
 割増料金	할증요금	I110	VMo		GN				jisjk:266334		
@@ -148263,7 +148269,7 @@ ttt	ttt	K110			GN				jisjk:201744
 原子	하라코	N130	QCTVPl		GN				jisjk:321441		
 原子価	원자가	I110		Ct	GN				jisjk:79254		
 原子兵器	핵무기	N110	VPe		GN				jisjk:179296		
-原子分裂	원자 분렬	I110			GN				jisjk:108521		
+原子分裂	원자 분열	I110			GN				jisjk:108521		
 原子力	원자력	I110			BZ				jisjk:79256		
 原子力エンジニアリング	원자력 엔지니어링	I130	QIDVGt		GN				jisjk:79257		
 原子力事故早期通報条約	원자력 사고 조기 통보 조약	N110			BZ				jisjk:355136		
@@ -149367,7 +149373,7 @@ ttt	ttt	K110			GN				jisjk:201744
 収益満期受取	수익만기 수취	N110			BZ				jisjk:355747		
 収益満期受取型貸付信託	수익만기 수취형 대부신탁	N110			BZ				jisjk:357842		
 収益源	수익원	N110			BZ				jisjk:351005		
-収益率	수익율	N110			BZ				jisjk:360525		
+収益率	수익률	N110			BZ				jisjk:360525		
 収益税	수익세	N110	VMy		GN				jisjk:234642		
 収益立て直し	수익재건	N110			BZ				jisjk:355984		
 収益見通し	수익전망	N110			BZ				jisjk:357664		
@@ -150264,7 +150270,7 @@ ttt	ttt	K110			GN				jisjk:201744
 受取割引料	수취 할인료	N110			BZ				jisjk:348833		
 受取勘定	수취 계산	N110			BZ				jisjk:348818		
 受取勘定商品在庫率	수취 계산 상품 재고율	N110			BZ				jisjk:348820		
-受取勘定回転率	수취계산 회전률	N110			BZ				jisjk:348819		
+受取勘定回転率	수취계산 회전율	N110			BZ				jisjk:348819		
 受取家賃	수취집세	N110			BZ				jisjk:348831		
 受取手形	수취어음	N110			BZ				jisjk:348429		
 受取手形記入帳	수취어음 기입장	N110			BZ				jisjk:348826		
@@ -153726,7 +153732,7 @@ ttt	ttt	K110			GN				jisjk:201744
 同一分子内	동일 분자내	N110	VPl		GN				jisjk:162997		
 同一分子内	동일 분자내	N110	VPl		GN				jisjk:162998		
 同一名称	동일 명칭	N110			GN				jisjk:161930		
-同一律	동일율	I110			GN				jisjk:66312		
+同一律	동일률	I110			GN				jisjk:66312		
 同一性	동일성	N110			BZ				jisjk:160685		
 同一果程説	동일과정설	N110	USu		GN				jisjk:205656		
 同一番号	동일 번호	N110			GN				jisjk:164052		
@@ -153904,7 +153910,7 @@ ttt	ttt	K110			GN				jisjk:201744
 同族	동족	N110	VHn		GN				jisjk:19643		
 同族会社	동족회사	N110	VBl		GN				jisjk:246447		
 同族元素	동족원소	N110			GN				jisjk:246448		
-同族列	동족열	N110			GN				jisjk:246450		
+同族列	동족렬	N110			GN				jisjk:246450		
 同族村	동족촌	N110	VPl		GN				jisjk:205654		
 同日	같은 날	N110	UMe		GN				jisjk:19638		
 同日	동일	N110	UMe		GN	450	||1 P+1== "1**"	同日은 뒤에 명사가 오면 같은 날을 뜻하는 ‘동일’로 고른다.	jisjk:19639		
@@ -160406,7 +160412,7 @@ ttt	ttt	K110			GN				jisjk:201744
 国民総需要	국민 총수요	I110			GN				jisjk:109030		
 国民葬	국민장	I110			GN				jisjk:62905		
 国民議会	국민의회	N110	VGt		GN				jisjk:206412		
-国民負担率	국민 부담율	N110			BZ				jisjk:355155		
+国民負担率	국민 부담률	N110			BZ				jisjk:355155		
 国民貸借対照表	국민 대차 대조표	N110	VSw		BZ				jisjk:355109		
 国民車計画	국민차 계획	N110			BZ				jisjk:355096		
 国民運動	국민운동	I110			GN				jisjk:109015		
@@ -161545,7 +161551,7 @@ ttt	ttt	K110			GN				jisjk:201744
 圧縮木材	압축 목재	N110			GN				jisjk:227388		
 圧縮機	압축기	N110	VPe		GN				jisjk:124534		
 圧縮状	압축 상태	N110			GN				jisjk:161729		
-圧縮率	압축율	I110			IT				jisjk:261904		
+圧縮率	압축률	I110			IT				jisjk:261904		
 圧縮空気	압축 공기	N110	VPe		GN				jisjk:124535		
 圧縮空気機械	압축 공기 기계	N110	VPe		GN				jisjk:227386		
 圧縮解凍ツール	압축/해제 툴	N110			IT				jisjk:261899		
@@ -162626,7 +162632,7 @@ ttt	ttt	K110			GN				jisjk:201744
 均薺の取れ	균형이 잡&AW@	M417			GN				jisjk:92140		
 均衡	균형	N110		Dd	GN				jisjk:17280		
 均衡価格	균형가격	N110	UYp		BZ				jisjk:206288		
-均衡失業率	균형 실업율	I110			BZ				jisjk:354746		
+均衡失業率	균형 실업률	I110			BZ				jisjk:354746		
 均衡材政	균형재정	N110	VMo		GN				jisjk:206287		
 均衡理論	균형이론	N110			BZ				jisjk:348082		
 均衡相場	균형시세	N110			BZ				jisjk:350311		
@@ -165827,7 +165833,7 @@ ttt	ttt	K110			GN				jisjk:201744
 売上債権	매상 채권	N110			BZ				jisjk:348428		
 売上債権回収期間	매상 채권 회수 기간	N110			BZ				jisjk:348786		
 売上債権回転日数	매상채권 회전일수	N110			BZ				jisjk:348427		
-売上債権回転率	매상 채권 회전률	I110			BZ				jisjk:348787		
+売上債権回転率	매상 채권 회전율	I110			BZ				jisjk:348787		
 売上元帳	매상 원장	N110			BZ				jisjk:349318		
 売上分析	매상 분석	N110			BZ				jisjk:349319		
 売上利益率	매출 이익률	N110			BZ				jisjk:349317		
@@ -165839,7 +165845,7 @@ ttt	ttt	K110			GN				jisjk:201744
 売上収益	매상수익	N110			BZ				jisjk:348788		
 売上品構成	매상품 구성	N110			BZ				jisjk:348806		
 売上基準	매상 기준	N110			BZ				jisjk:348782		
-売上増加率	매상 증가률	N110			BZ				jisjk:348795		
+売上増加率	매상 증가율	N110			BZ				jisjk:348795		
 売上帳	매상장	N110			BZ				jisjk:348803		
 売上戻り	반품	N110			BZ				jisjk:363311		
 売上戻り高	매상 공제액	N110			BZ				jisjk:363323		
@@ -165937,8 +165943,8 @@ ttt	ttt	K110			GN				jisjk:201744
 売掛保険	미수금 계정 보험	N110			BZ				jisjk:349295		
 売掛債権	외상판매 채권	N110			BZ				jisjk:348511		
 売掛債権債務者	미수금 채권 채무자	N110			BZ				jisjk:349300		
-売掛債権回転率	미수금 채권 회전률	N110			BZ				jisjk:349304		
-売掛債権率	미수금 채권률	N110			BZ				jisjk:349299		
+売掛債権回転率	미수금 채권 회전율	N110			BZ				jisjk:349304		
+売掛債権率	미수금 채권율	N110			BZ				jisjk:349299		
 売掛債権買取業務	미수금 채무 매수 사무	N110			BZ				jisjk:349301		
 売掛先	외상판매처	N110			BZ				jisjk:349297		
 売掛勘定	미수금 계산	N110			BZ				jisjk:349310		
@@ -165993,7 +165999,7 @@ ttt	ttt	K110			GN				jisjk:201744
 売買基準価格	매매기준가격	N110			BZ				jisjk:361710		
 売買基準価額	매매기준가액	N110	VMo		BZ				jisjk:363598		
 売買契約	매매계약	N110			BZ				jisjk:348358		
-売買差益率	매매 차익율	N110			BZ				jisjk:351614		
+売買差益率	매매 차익률	N110			BZ				jisjk:351614		
 売買差額	매매차액	N110			BZ				jisjk:356108		
 売買市場	매매시장	N110			BZ				jisjk:351545		
 売買法	매매법	N110			GN				jisjk:160965		
@@ -166119,7 +166125,7 @@ ttt	ttt	K110			GN				jisjk:201744
 変動条項	변동조항	N110			BZ				jisjk:361108		
 変動為替相場	변동 환시세	N110			BZ				jisjk:361104		
 変動為替相場制	변동 환율제	N110	ULw		BZ				jisjk:151758		
-変動率	변동율	N110			BZ				jisjk:361111		
+変動率	변동률	N110			BZ				jisjk:361111		
 変動相場	변동시장	N110			BZ				jisjk:361109		
 変動相場制	변동 환율제	I110	ULw		BZ				jisjk:70093		
 変動管理費	변동 관리비	N110			BZ				jisjk:361105		
@@ -178890,7 +178896,7 @@ ttt	ttt	K110			GN				jisjk:201744
 安全灯	안전등	N110	VPe		GN				jisjk:125048		
 安全燈	안전등	I110	VEI		GN				jisjk:77401		
 安全牌	안전패	N110			GN				jisjk:227877		
-安全率	안전률	N110			GN				jisjk:227875		
+安全率	안전율	N110			GN				jisjk:227875		
 安全石油	안젠 석유	I130	QIDVGt		GN				jisjk:77405		
 安全索道	안젠 삭도	I130	QIDVGt		GN				jisjk:77403		
 安全自動車	안젠 자동차	I130			GN				jisjk:77406		
@@ -180328,7 +180334,7 @@ ttt	ttt	K110			GN				jisjk:201744
 定数関数	정수 함수	N110			GN				jisjk:244356		
 定斎	죠사이	N110			GN				jisjk:237445		
 定方	사다카타	N130	QCTVPl		GN				jisjk:296070		
-定旋律	정선률	N110	USoQMU		GN				jisjk:244365		
+定旋律	정선율	N110	USoQMU		GN				jisjk:244365		
 定旨	사다무네	N130	QCTVPl		GN				jisjk:296088		
 定昇	 정기 승급	N110			GN				jisjk:244334		
 定明町	죠묘마치	N130	QCTVPl		GN				jisjk:302771		
@@ -180391,7 +180397,7 @@ ttt	ttt	K110			GN				jisjk:201744
 定点	정점	N110	VPl		GN				jisjk:33149		
 定点観測	정점관측	I110			GN				jisjk:111252		
 定率	정률	N110			GN				jisjk:33145		
-定率	정율	N110			GN				jisjk:33146		
+定率	정률	N110			GN				jisjk:33146		
 定率償却	정률상각	N110			BZ				jisjk:358965		
 定率公募	정율공모	N110			BZ				jisjk:360711		
 定率法	정률법	N110			BZ				jisjk:351103		
@@ -180944,7 +180950,7 @@ ttt	ttt	K110			GN				jisjk:201744
 実物大	실물 크기	I110			GN				jisjk:77019		
 実物市場	실물시장	N110	VPl		BZ				jisjk:358127		
 実物教育	실물교육	I110			GN				jisjk:107740		
-実物資産収益率	실물자산 수익율	N110	UYr		BZ				jisjk:363540		
+実物資産収益率	실물자산 수익률	N110	UYr		BZ				jisjk:363540		
 実物資産投資	실물 자산 투자	N110			BZ				jisjk:350153		
 実状	실상	N110			GN				jisjk:28157		
 実現	실현	N110		Hd	GN				jisjk:10376		
@@ -182468,7 +182474,7 @@ ttt	ttt	K110			GN				jisjk:201744
 容疑者	용의자	I110	VHnUQf		GN				jisjk:78823		
 容積	용적	N110			GN				jisjk:30045		
 容積トン	용적톤	N110			GN				jisjk:255071		
-容積率	용적율	N110			BZ				jisjk:255070		
+容積率	용적률	N110			BZ				jisjk:255070		
 容納	용납	N110			GN				jisjk:30034		
 容色	용색	N110	VBpUCl		GN				jisjk:30038		
 容認	용인	N110		Hd	GN				jisjk:30043		
@@ -184534,7 +184540,7 @@ ttt	ttt	K110			GN				jisjk:201744
 対称	대칭	N110		Hd	GN				jisjk:19151		
 対称中心	대칭중심	N110			GN				jisjk:240887		
 対称式	대칭식	N110	UTs		GN				jisjk:240882		
-対称律	대칭율	N110			GN				jisjk:240890		
+対称律	대칭률	N110			GN				jisjk:240890		
 対称軸	대칭축	N110			GN				jisjk:240883		
 対空	대공	N110			GN				jisjk:19103		
 対空布板	대공포판	N110			MI				jisjk:346096		
@@ -198137,7 +198143,7 @@ ttt	ttt	K110			GN				jisjk:201744
 平均並	평균 정도	K110			GN				jisjk:345179		
 平均並み	평균 수준	N110			BZ				jisjk:348205		
 平均並み	평균 수준	I110			BZ				jisjk:348206		
-平均伸び率	평균 신장율	N110			BZ				jisjk:361047		
+平均伸び率	평균 신장률	N110			BZ				jisjk:361047		
 平均余命	평균여명	I110			GN				jisjk:87831		
 平均価格加重	평균 가격가중	N110			BZ				jisjk:361038		
 平均修復時間	평균 수리 시간	N110			IT				jisjk:262762		
@@ -198157,7 +198163,7 @@ ttt	ttt	K110			GN				jisjk:201744
 平均回転待ち時間	평균 회전 대기 시간	I110			IT				jisjk:262759		
 平均在庫	평균 재고	N110			BZ				jisjk:361041		
 平均在院日数	평균 입원 일수	N110	UMe		GN				jisjk:354158		
-平均変動率	평균 변동율	N110			BZ				jisjk:360988		
+平均変動率	평균 변동률	N110			BZ				jisjk:360988		
 平均太陽日	평균 태양일	N110	VSsUMe		GN				jisjk:154797		
 平均寿命	평균수명	N110	UMe		GN				jisjk:203314		
 平均差	평균차	N110			BZ				jisjk:360978		
@@ -220228,8 +220234,8 @@ ttt	ttt	K110			GN				jisjk:201744
 断機	단기	N110			GN				jisjk:242389		
 断水	단수	N110		Hd	GN				jisjk:18581		
 断滅	단멸	N110		Hd	GN				jisjk:18576		
-断烈	단렬	N110			GN				jisjk:164670		
-断烈	단렬	N110			GN				jisjk:164671		
+断烈	단열	N110			GN				jisjk:164670		
+断烈	단열	N110			GN				jisjk:164671		
 断然	단연	E311			GN				jisjk:1533		
 断然たる	단호한	C0D1			GN				jisjk:4660		
 断煙	금연	N110			GN				jisjk:98158		
@@ -222580,7 +222586,7 @@ ttt	ttt	K110			GN				jisjk:201744
 新鼻甲	심바나코우	N130	QCTVPl		GN				jisjk:302024		
 新龍山	신용산	N130	QST		GN				jisjk:374401		
 方	0 방법	S5:0			GN				jisjk:4504		
-方	분	N110	VHn		GN	1131	||2 &&5 S-1== "どんな" P-1== "0**" P-2== "2**" P-3== "1**" A-3== "VHn" S-1== "お持ちの"	方을 사람과 조사 및 どんな가 이어진 뒤나 お持ちの 뒤에서 '분'으로 선택한다.	jisjk:116252		
+方	분	N110	VHn		GN	1131	||3 &&5 S-1== "どんな" P-1== "0**" P-2== "2**" P-3== "1**" A-3== "VHn" S-1== "お持ちの" S-1== "お越しの"	方을 사람과 조사 및 どんな가 이어진 뒤나 お持ちの, お越しの 뒤에서 '분'으로 선택한다.	jisjk:116252		
 方	(쪽)편	N120	VTpUDr		GN	1132	||2 &&6 P-1== "2**" P-2== "1**" A-2-= "VPlVHn" P+1== "2**" P+2== "4**" A+2== "UMv" &&4 S-1== "の" P-1== "2**" P-2== "1**" A-2-= "VSp"	장소·사람과 이동 동사 사이이거나 그림 의미 계열 명사와 の 뒤이면 方를 쪽·편으로 고른다. (미발동: rare-context)	jisjk:116253		
 方	(분)편	N110	XXXVHn		GN				jisjk:118283		
 方	0 방법	S580			GN				jisjk:265813		
@@ -228701,7 +228707,7 @@ ttt	ttt	K110			GN				jisjk:201744
 普及化	보급화	N110		Hd	GN				jisjk:161119		
 普及機	보급기	I110	VPe		GN				jisjk:70253		
 普及版	보급판	I110			GN				jisjk:70254		
-普及率	보급율	N110			BZ				jisjk:361480		
+普及率	보급률	N110			BZ				jisjk:361480		
 普天間	후텐마	I110	QCT		GN				jisjk:70257		
 普天間	후템마	N130	QCTVPl		GN				jisjk:326725		
 普寂	후자쿠	N130	VHn		GN				jisjk:220565		
@@ -231116,7 +231122,7 @@ ttt	ttt	K110			GN				jisjk:201744
 有留	아리도메	N130	QCTVPl		GN				jisjk:271025		
 有畜	유축	N110			GN				jisjk:30714		
 有畜農業	유축 농업	N110			GN				jisjk:254693		
-有病率	유병율	N110	QHP		GN				jisjk:254722		
+有病率	유병률	N110	QHP		GN				jisjk:254722		
 有益	유익%A1@	G8L0			GN				jisjk:3497		
 有益	유익	N110			GN				jisjk:3498		
 有知	유지	N110			GN				jisjk:254692		
@@ -242019,7 +242025,7 @@ ttt	ttt	K110			GN				jisjk:201744
 染物	염색물	N110			GN				jisjk:29409		
 染田	소메다	N130	QPN	Wa	GN				jisjk:10564		
 染田屋	소메타야	N130	QPN	Wa	GN				jisjk:78319		
-染着率	염착율	I110			GN				jisjk:78320		
+染着率	염착률	I110			GN				jisjk:78320		
 染矢	소메야	N130	QPN	Wa	GN				jisjk:10561		
 染筆	염필	N110			GN				jisjk:239589		
 染織	염색과 직조	N110		Hd	GN				jisjk:199040		
@@ -249344,7 +249350,7 @@ ttt	ttt	K110			GN				jisjk:201744
 欠入前山	카케이리마에야마	I130	QCTVPl		GN				jisjk:281611		
 欠入菅	카케이리스게	N130	QCTVPl		GN				jisjk:281609		
 欠勤	결근	N110		Hd	GN				jisjk:15336		
-欠勤率	결근률	I110			GN				jisjk:105590		
+欠勤率	결근율	I110			GN				jisjk:105590		
 欠勤者	결근자	N110	VHn		GN				jisjk:177887		
 欠号	결호	N110	VCm		GN				jisjk:178020		
 欠品	결품	N110			GN				jisjk:96543		
@@ -253145,7 +253151,7 @@ ttt	ttt	K110			GN				jisjk:201744
 気泡	기포	N110			GN				jisjk:17828		
 気流	기류	N110	VFr		GN				jisjk:17796		
 気温	기온	N110	VFr		GN				jisjk:17815		
-気温減率	기온 감율	N110			GN				jisjk:230483		
+気温減率	기온 감률	N110			GN				jisjk:230483		
 気温逆転	기온 역전	N110	VSs		GN				jisjk:230482		
 気炎	기염	N110	VBp		GN				jisjk:17813		
 気炎を上げ	기염을 토&AV@	M427			GN				jisjk:118252		
@@ -263739,7 +263745,7 @@ ttt	ttt	K110			GN				jisjk:201744
 減価償却期間	감가 상각 기간	N110	UMe		BZ				jisjk:352855		
 減価償却法	감가상각법	I110	ULw		BZ				jisjk:355727		
 減価償却済み	감가상각 완료	I110			BZ				jisjk:355744		
-減価償却率	감가상각율	I110			BZ				jisjk:355726		
+減価償却率	감가상각률	I110			BZ				jisjk:355726		
 減価償却発生額	감가상각 발생액	N110			BZ				jisjk:355737		
 減価償却範囲額	감가상각 범위액	I110	VMo		BZ				jisjk:353258		
 減価償却負担	감가상각 부담	I110			BZ				jisjk:355730		
@@ -273470,7 +273476,7 @@ ttt	ttt	K110			GN				jisjk:201744
 現行通貨	현행통화	N110	VMoVMy		GN				jisjk:207029		
 現視	현시	N110			GN				jisjk:38981		
 現認	실제 확인&AV@	M4U9			GN				jisjk:141843		
-現調率	현지조달율	I110		Ct	GN				jisjk:88894		
+現調率	현지조달률	I110		Ct	GN				jisjk:88894		
 現象	현상	N110			GN				jisjk:38979		
 現象学	현상학	N110	USu		GN				jisjk:204058		
 現象界	현상계	N110	VPl		GN				jisjk:179319		
@@ -274738,7 +274744,7 @@ ttt	ttt	K110			GN				jisjk:201744
 生存	생존	N110		Hd	GN				jisjk:25999		
 生存保険	생존 보험	N110	VMo		GN				jisjk:238593		
 生存権	생존권	N110	ULw		GN				jisjk:197732		
-生存率	생존률	N110	UYr		BZ				jisjk:358861		
+生存率	생존율	N110	UYr		BZ				jisjk:358861		
 生存競争	생존 경쟁	N110	VBpVMo	Hd	GN				jisjk:197730		
 生存者	생존자	N110	VHn		GN				jisjk:197734		
 生守	이고모리	N130	QCTVPl		GN				jisjk:271904		
@@ -281975,7 +281981,7 @@ ttt	ttt	K110			GN				jisjk:201744
 相当額	상당액	N110			GN				jisjk:160727		
 相役	동료	N110	VHn		GN				jisjk:25903		
 相待	상대	N110		Hd	GN				jisjk:240156		
-相律	상율	N110		Hd	GN				jisjk:240269		
+相律	상률	N110		Hd	GN				jisjk:240269		
 相従	상종	N110			GN				jisjk:25908		
 相徳	아이토쿠	N130	QPN	Wa	GN				jisjk:8337		
 相応	상응%D1@	G8U0			GN				jisjk:3179		
@@ -286948,7 +286954,7 @@ ttt	ttt	K110			GN				jisjk:201744
 社会保険雇用者負担	사회보험 고용자부담	N110			BZ				jisjk:356478		
 社会保障	사회 보장	N110	ULw		BZ				jisjk:188757		
 社会保障給付費	사회보장 급부비	N110	VMo		BZ				jisjk:363552		
-社会保障負担率	사회 보장 부담율	N110			BZ				jisjk:355158		
+社会保障負担率	사회 보장 부담률	N110			BZ				jisjk:355158		
 社会倫理	사회윤리	N110			GN				jisjk:234525		
 社会党	사회당	N110	VBl		GN				jisjk:188745		
 社会内	사회내	N110	VPl		GN				jisjk:160031		
@@ -290495,7 +290501,7 @@ ttt	ttt	K110			GN				jisjk:201744
 移動平均線	이동 평균선	N110			BZ				jisjk:348248		
 移動店舗	이동점포	N110			BZ				jisjk:362033		
 移動度	이동도	N110			GN				jisjk:228657		
-移動律	이동율	N110			GN				jisjk:228659		
+移動律	이동률	N110			GN				jisjk:228659		
 移動性高気圧	이동성 고기압	I110			GN				jisjk:107034		
 移動枠	이동범위	N110	VPl		GN				jisjk:164135		
 移動演劇	이동 연극	N110	VBlUAr		GN				jisjk:228653		
@@ -299219,7 +299225,7 @@ ttt	ttt	K110			GN				jisjk:201744
 組谷	쿠미타니	N130	QPN	Wa	GN				jisjk:11451		
 組谷	쿠미야	N130	QPN	Wa	GN				jisjk:344101		
 組込み	편성	N110			GN				jisjk:176381		
-組込率	조입율	N110			BZ				jisjk:353184		
+組込率	조입률	N110			BZ				jisjk:353184		
 組長	조장	N110			GN				jisjk:33668		
 組長ら	조장들	N110	VHn		GN				jisjk:176395		
 組閣	내각 조성	N110			GN				jisjk:33664		
@@ -299291,7 +299297,7 @@ ttt	ttt	K110			GN				jisjk:201744
 経営行き詰まり	경영 악화	N110			GN				jisjk:151018		
 経営計画	경영계획	N110			BZ				jisjk:352962		
 経営費	경영비	N110	VMy		BZ				jisjk:353060		
-経営資本利益率	경영 자본 이익율	N110			BZ				jisjk:353069		
+経営資本利益率	경영 자본 이익률	N110			BZ				jisjk:353069		
 経営資本回転率	경영 자본 회전율	N110			BZ				jisjk:353071		
 経営資源	경영 자원	N110			BZ				jisjk:348909		
 経営陣	경영진	N110	VHn		GN				jisjk:177170		
@@ -299338,7 +299344,7 @@ ttt	ttt	K110			GN				jisjk:201744
 経常費用	경상 비용	N110			BZ				jisjk:352633		
 経常購入	경상구입	N110			BZ				jisjk:358816		
 経年	경년	N110			GN				jisjk:15471		
-経年変動率	경년 변동율	N110			BZ				jisjk:353795		
+経年変動率	경년 변동률	N110			BZ				jisjk:353795		
 経広社	케이코우사	I130			GN				jisjk:96568		
 経度	경도	N110			GN				jisjk:15472		
 経念	쿄넨	N130	QCTVPl		GN				jisjk:289790		
@@ -300075,7 +300081,7 @@ ttt	ttt	K110			GN				jisjk:201744
 絶対単位系	절대 단위계	N110			GN				jisjk:239705		
 絶対命令	절대명령	I110			GN				jisjk:110460		
 絶対多数	절대다수	I110			GN				jisjk:110458		
-絶対屈折率	절대 굴절율	N110			GN				jisjk:239721		
+絶対屈折率	절대 굴절률	N110			GN				jisjk:239721		
 絶対権	절대권	N110	ULw		GN				jisjk:239701		
 絶対権力	절대권력	I110			GN				jisjk:110457		
 絶対温度	절대온도	I110			GN				jisjk:110456		
@@ -301320,7 +301326,7 @@ ttt	ttt	K110			GN				jisjk:201744
 線矢視図	선시도면	I110	VPl		GN				jisjk:74344		
 線維	섬유	N110	VCp		GN				jisjk:26327		
 線膨張	선팽창	N110			GN				jisjk:239605		
-線膨張率	선팽창율	N110			GN				jisjk:239606		
+線膨張率	선팽창률	N110			GN				jisjk:239606		
 線膨脹率	선팽창률	I110			GN				jisjk:111038		
 線虫	선충	N110	QAAQAE		GN				jisjk:26329		
 線虫類	선충류	N110	VAm		GN				jisjk:239511		
@@ -302382,7 +302388,7 @@ ttt	ttt	K110			GN				jisjk:201744
 罹災	이재	N110	VSsVTw		GN				jisjk:156361		
 罹災民	이재민	N110	QHPVHn		GN				jisjk:156363		
 罹病	이병	N110	QHP	Hd	GN				jisjk:156421		
-罹病率	이병율	N110	QHP		GN				jisjk:156423		
+罹病率	이병률	N110	QHP		GN				jisjk:156423		
 羅Byungsun	나병선	N130	QPN		GN				jisjk:207680		
 羅JongIl	나종일	N130	QPN		GN				jisjk:207689		
 羅Oyun	나오연	N130	QPN		GN				jisjk:207687		
@@ -326682,7 +326688,7 @@ ttt	ttt	K110			GN				jisjk:201744
 調達先	조달처	N110	VPl		GN				jisjk:151405		
 調達利回り	조달 이율	N110			BZ				jisjk:359423		
 調達制度改革	조달제도 개혁	N110			BZ				jisjk:360115		
-調達率	조달율	N110			BZ				jisjk:355518		
+調達率	조달률	N110			BZ				jisjk:355518		
 調音	조음	N110			GN				jisjk:33689		
 調髪	이발	N110		Hd	GN				jisjk:33684		
 諂	아첨&AV@	M430			GN				jisjk:95271		
@@ -330080,7 +330086,7 @@ ttt	ttt	K110			GN				jisjk:201744
 賃金ベース	임금수준	I110			GN				jisjk:111568		
 賃金体系	임금체계	I110			GN				jisjk:111539		
 賃金制度	임금제도	N110	UMn		GN				jisjk:354361		
-賃金割増率	임금 할증율	N110	UYr		BZ				jisjk:360228		
+賃金割増率	임금 할증률	N110	UYr		BZ				jisjk:360228		
 賃金労動	임금 노동	I110		Hd	GN				jisjk:81940		
 賃金基金説	임금기금설	N110			GN				jisjk:243608		
 賃金外給付	임금외 급부	I110			GN				jisjk:111546		
@@ -336364,7 +336370,7 @@ ttt	ttt	K110			GN				jisjk:201744
 連動	연동	N110		Hd	GN				jisjk:20347		
 連動価格制	연동 가격제	N110	ULw		GN				jisjk:354669		
 連動機	연동기	I110			GN				jisjk:67749		
-連動率	연동율	N110	UYr		BZ				jisjk:363317		
+連動率	연동률	N110	UYr		BZ				jisjk:363317		
 連動誤差	연동오차	N110			BZ				jisjk:359830		
 連動論	연동론	N110			GN				jisjk:160869		
 連勝	연승	N110	VMo	HdCt	GN				jisjk:20362		
@@ -337243,7 +337249,7 @@ ttt	ttt	K110			GN				jisjk:201744
 運転者	운전자	N110	VHn		GN				jisjk:162000		
 運転費用	운전 비용	N110			BZ				jisjk:349396		
 運転資本	운전 자본	N110			BZ				jisjk:349388		
-運転資本売上率	운전 자본 매상율	N110			BZ				jisjk:349392		
+運転資本売上率	운전 자본 매상률	N110			BZ				jisjk:349392		
 運転資本構成	운전 자본 구성	N110			BZ				jisjk:349393		
 運転資本状態	운전 자본 상태	N110			BZ				jisjk:349394		
 運転資金	운용자금	N110	VMyVMo		GN				jisjk:127315		
@@ -339693,7 +339699,7 @@ ttt	ttt	K110			GN				jisjk:201744
 配当損金算入	배당손실금 산입	N110			BZ				jisjk:363096		
 配当比率	배당비율	N110			BZ				jisjk:359997		
 配当漢字	배당 한자	N110	UTs		GN				jisjk:249232		
-配当率	배당율	N110			GN				jisjk:249234		
+配当率	배당률	N110			GN				jisjk:249234		
 配当落ち	배당락	I110		Hd	BZ				jisjk:69880		
 配当金	배당금	I110	VMo		GN				jisjk:69879		
 配役	배역	N110	UQf		GN				jisjk:23201		
@@ -340088,7 +340094,7 @@ ttt	ttt	K110			GN				jisjk:201744
 酸化炭素	산화 탄소	N110			GN				jisjk:232857		
 酸化物	산화물	N110			GN				jisjk:185646		
 酸化物イオン	산화물 이온	N110			GN				jisjk:232866		
-酸化率	산화률	N110			GN				jisjk:164763		
+酸化率	산화율	N110			GN				jisjk:164763		
 酸化環元反応	산화환원반응	N110			GN				jisjk:232834		
 酸化環元滴定	산화환원적정	N110			GN				jisjk:232832		
 酸化環元電位	산화환원전위	N110			GN				jisjk:232833		
@@ -349208,7 +349214,7 @@ ttt	ttt	K110			GN				jisjk:201744
 限界原価計算	한계 원가 계산	N110			BZ				jisjk:355787		
 限界収入	한계수입	N110			BZ				jisjk:355780		
 限界収益	한계수익	N110			BZ				jisjk:355782		
-限界収益率	한계 수익율	N110			BZ				jisjk:355781		
+限界収益率	한계 수익률	N110			BZ				jisjk:355781		
 限界控除制度	한계 공제 제도	N110	UMn		BZ				jisjk:355786		
 限界損益計算	한계 손익 계산	N110			BZ				jisjk:355775		
 限界效用	한계효용	I110			GN				jisjk:108531		
@@ -351102,7 +351108,7 @@ ttt	ttt	K110			GN				jisjk:201744
 離席	자리를 뜸	N110			GN				jisjk:99294		
 離弁花	이판화	I110	QAL		GN				jisjk:68175		
 離弁花類	이판화류	N110	VPt		GN				jisjk:255815		
-離心率	이심율	N110			GN				jisjk:255725		
+離心率	이심률	N110			GN				jisjk:255725		
 離愁	이수	N110			GN				jisjk:21093		
 離散	이산	N110		Hd	GN				jisjk:21092		
 離散コサイン変換	이산 코사인 변환	N110			IT				jisjk:261528		
@@ -351122,7 +351128,7 @@ ttt	ttt	K110			GN				jisjk:201744
 離籍	이적	N110	ULw	Hd	GN				jisjk:156371		
 離縁	이연	N110			GN				jisjk:21094		
 離職	이직	N110		Hd	GN				jisjk:21096		
-離職率	이직율	N110	UYr		BZ				jisjk:358379		
+離職率	이직률	N110	UYr		BZ				jisjk:358379		
 離職者	이직자	N110	VHn		BZ				jisjk:356564		
 離背	이반	N110			GN				jisjk:255813		
 離脱	이탈	N110		Hd	GN				jisjk:21098		
@@ -354231,7 +354237,7 @@ ttt	ttt	K110			GN				jisjk:201744
 音戸工作所	온도 공작소	I130	VGt		PN				jisjk:79688		
 音戸町	온도쵸	N130	QCTVPl		GN				jisjk:281058		
 音数	음수	N110			GN				jisjk:166356		
-音数律	음수률	N110			GN				jisjk:166358		
+音数律	음수율	N110			GN				jisjk:166358		
 音数論	음수론	I110	USu		GN				jisjk:79682		
 音曲	음곡	N110			GN				jisjk:30950		
 音曲吹き寄せ	메들리	N110			GN				jisjk:166314		
@@ -356413,7 +356419,7 @@ ttt	ttt	K110			GN				jisjk:201744
 食糧政策	식량정책	N110			GN				jisjk:235660		
 食糧管理制度	식량관리제도	N110			GN				jisjk:235657		
 食糧管理法	식량관리법	N110	ULw		GN				jisjk:235658		
-食糧自給率	식량자급율	N110			BZ				jisjk:235659		
+食糧自給率	식량자급률	N110			BZ				jisjk:235659		
 食糧販売協同組合	식량판매협동조합	I110			GN				jisjk:110154		
 食糧販売協同組合連合	식량판매협동조합연합	I110			GN				jisjk:110190		
 食糧需給価格安定法	식량수급 가격안정법	N110	ULw		BZ				jisjk:356448		
@@ -358646,7 +358652,7 @@ ttt	ttt	K110			GN				jisjk:201744
 騰波ノ江	도바노에	N130	VPl		GN				jisjk:218457		
 騰波ノ江	도바노에	N130	VPl		GN				jisjk:218458		
 騰落	등락	N110			GN				jisjk:19890		
-騰落率	등락율	N110	UYr		BZ				jisjk:363363		
+騰落率	등락률	N110	UYr		BZ				jisjk:363363		
 騰貴	등귀	N110		Hd	GN				jisjk:19889		
 騷	웅성거&AA@	M422			GN				jisjk:9356		
 騷が	시끄럽게&AV@	M4U3			GN				jisjk:259772		
@@ -363712,7 +363718,7 @@ ttt	ttt	K110			GN				jisjk:201744
 黄金期	황금기	N110	UMe		GN				jisjk:127874		
 黄金海岸	황금해안	I110			GN				jisjk:108778		
 黄金湯温泉	고가네유온천	I110	QCT		GN				jisjk:89738		
-黄金率	황금율	N110			BZ				jisjk:349717		
+黄金率	황금률	N110			BZ				jisjk:349717		
 黄金田	코가네다	N130	QCTVPl		GN				jisjk:293010		
 黄金町	코가네쵸	N130	QCTVPl		GN				jisjk:293014		
 黄金町	코가네마치	N130	QCTVPl		GN				jisjk:293022		

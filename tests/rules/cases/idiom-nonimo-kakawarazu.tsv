@@ -1,20 +1,20 @@
 rule	input	expected	kind	layer
-dict:novel-idioms:2	彼女はその裸体を見られているのにも拘わらず、微笑んでいる。	그녀는 그 나체를 보여지고 있는데도 불구하고, 미소 짓고 있다.	fix	local
-dict:novel-idioms:2	一目で分かるのにも拘わらずに、彼女は全く動揺せず近付いてくる。	한눈에 아는데도 불구하고, 그녀는 전혀 동요하지 않고 가까워져 온다.	fix	local
-dict:novel-idioms:1	たった１なのにも関わらず塗りつぶしたのか。	끊은 1인데도 불구하고 전부 칠한 건가.	fix	local
-dict:novel-idioms:3	認識できなかった？ 自分で書いたのにもかかわらず？	인식할 수 없었어? 스스로 썼는데도 불구하고?	fix	local
-dict:novel-idioms:4	約束したのにも拘らず、彼は来なかった。	약속했는데도 불구하고, 그는 오지 않았다.	fix	local
-dict:novel-idioms:1	雨なのにも関わらず出かけた。	비인데도 불구하고 나갔다.	fix	local
-dict:lexical-novel-idioms	それにも関わらず私の家族に手を出しました。	그럼에도 불구하고 제 가족에게 손을 대었습니다.	fix	lookup
+dict:nimo-kakawarazu:2	彼女はその裸体を見られているのにも拘わらず、微笑んでいる。	그녀는 그 나체를 보여지고 있는데도 불구하고, 미소 짓고 있다.	fix	local
+dict:nimo-kakawarazu:2	一目で分かるのにも拘わらずに、彼女は全く動揺せず近付いてくる。	한눈에 아는데도 불구하고, 그녀는 전혀 동요하지 않고 가까워져 온다.	fix	local
+dict:nimo-kakawarazu:1	たった１なのにも関わらず塗りつぶしたのか。	단 1인데도 불구하고 전부 칠한 건가.	fix	local
+dict:jisjk:116564	認識できなかった？ 自分で書いたのにもかかわらず？	인식할 수 없었어? 스스로 썼는데도 불구하고?	fix	local
+dict:nimo-kakawarazu:3	約束したのにも拘らず、彼は来なかった。	약속했는데도 불구하고, 그는 오지 않았다.	fix	local
+dict:nimo-kakawarazu:1	雨なのにも関わらず出かけた。	비인데도 불구하고 나갔다.	fix	local
+dict:nimo-kakawarazu:9	それにも関わらず私の家族に手を出しました。	그럼에도 불구하고 제 가족에게 손을 대었습니다.	fix	lookup
 dict:lexical-novel-idioms	それにも拘わらず、彼女は笑った。	그럼에도 불구하고, 그녀는 웃었다.	fix	lookup
 dict:lexical-novel-idioms	それにもかかわらず私の家族に手を出しました。	그럼에도 불구하고 제 가족에게 손을 대었습니다.	keep	lookup
-dict:novel-idioms:1	何に刺激されたのか、その男の子は突然、自習中にも関わらずバケツを持ち出した。	무엇에 자극되었는지, 그 남자아이는 갑자기, 자습 중에도 불구하고 양동이를 꺼냈다.	keep	local
-dict:novel-idioms:1	汚れているにも関わらず、レナは嬉しそうに頬擦りをしている。	더러워져 있는 것에도 불구하고, 레나는 기쁜 듯이 뺨스침을 하고 있다.	keep	local
-dict:novel-idioms:3	なぜ犯罪を犯したにもかかわらず	왜 범죄를 범했음에도 불구하고	keep	local
-dict:novel-idioms:3	と きつく言われていたにもかかわらず	라고 힘들게 듣고 있었음에도 불구하고	keep	local
-dict:novel-idioms:3	無実にもかかわらず自白し逮捕されてしまった。	결백에도 불구하고 자백해 체포되어버렸다.	keep	local
-dict:novel-idioms:3	このような緊急時にもかかわらず	이러한 긴급시에도 불구하고	keep	local
-dict:novel-idioms:1	年齢に関わらず参加できる。	연령에 관계없이 참가할 수 있다.	keep	local
-dict:novel-idioms:2	結果に拘わらず報酬は払う。	결과에 관계없이 보수는 지불한다.	keep	local
-dict:novel-idioms:4	天候に拘らず決行する。	날씨에 관계없이 결행한다.	keep	local
-dict:novel-idioms:3	好むと好まざるとにかかわらず	좋든 싫든 간에	keep	local
+dict:nimo-kakawarazu:1	何に刺激されたのか、その男の子は突然、自習中にも関わらずバケツを持ち出した。	무엇에 자극되었는지, 그 남자아이는 갑자기, 자습 중에도 불구하고 양동이를 꺼냈다.	keep	local
+dict:nimo-kakawarazu:1	汚れているにも関わらず、レナは嬉しそうに頬擦りをしている。	더러워져 있음에도 불구하고, 레나는 기쁜 듯이 뺨스침을 하고 있다.	keep	local
+dict:jisjk:116564	なぜ犯罪を犯したにもかかわらず	왜 범죄를 범했음에도 불구하고	keep	local
+dict:jisjk:116564	と きつく言われていたにもかかわらず	라고 힘들게 듣고 있었음에도 불구하고	keep	local
+dict:jisjk:116564	無実にもかかわらず自白し逮捕されてしまった。	결백에도 불구하고 자백해 체포되어버렸다.	keep	local
+dict:jisjk:116564	このような緊急時にもかかわらず	이러한 긴급시에도 불구하고	keep	local
+dict:nimo-kakawarazu:1	年齢に関わらず参加できる。	연령에 관계없이 참가할 수 있다.	keep	local
+dict:nimo-kakawarazu:2	結果に拘わらず報酬は払う。	결과에 관계없이 보수는 지불한다.	keep	local
+dict:nimo-kakawarazu:3	天候に拘らず決行する。	날씨에 관계없이 결행한다.	keep	local
+dict:jisjk:116564	好むと好まざるとにかかわらず	좋든 싫든 간에	keep	local

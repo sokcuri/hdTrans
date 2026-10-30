@@ -776,7 +776,15 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     }
                 }
                 const bool phrase = word == SpaceWord::Phrase && text::RuneCount(c.source.substr(left.size())) >= 2;
-                const bool fits = word == SpaceWord::Any || (word == SpaceWord::Binding && (name || bound)) || phrase;
+                // Spelled out, the word ends before no hiragana but a particle or a copula: it does not
+                // take the stem of a word written after the space (通 知 表が; not 先 行くね, 先行 + くね).
+                bool spelled = false;
+                if (word == SpaceWord::Spelled) {
+                    const std::string_view rest = std::string_view(query).substr(c.source.size());
+                    const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+                    spelled = !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"がをはもでとへのにやかだじ").find(next) != std::u32string_view::npos;
+                }
+                const bool fits = word == SpaceWord::Any || spelled || (word == SpaceWord::Binding && (name || bound)) || phrase;
                 if (fits) return true;
             }
             start += std::max<std::size_t>(1, text::DecodeRune(left).size);

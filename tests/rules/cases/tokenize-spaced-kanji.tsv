@@ -1,0 +1,14 @@
+# 원문 공백으로 띄운 한자 한 글자 조각은 공백을 건너는 사전 낱말이 조각 첫머리에서 시작해 뒤 낱말의 어간을 가르지 않을 때만 한 낱말로 붙인다.
+rule	input	expected	kind	layer
+tokenize:spaced-kanji	(龍)私 先 行くね。	lacks:선행	fix	lookup
+tokenize:spaced-kanji	私 下 行って寝ますから	lacks:하행	fix	lookup
+tokenize:spaced-kanji	（西野）俺 今 入ってきたやん	has:지금 들어 왔	fix	lookup
+tokenize:spaced-kanji	通 知 表が来た	성적표가 왔다	keep	lookup
+tokenize:spaced-kanji	こ の 展 開は予想外	이 전개는 예상외	keep	lookup
+tokenize:spaced-kanji	未 来	미래	keep	lookup
+tokenize:spaced-kanji	結 婚 願 望♪	결혼 욕구♪	keep	lookup
+tokenize:spaced-kanji	右 左 右 左やもん｡	has:좌우 좌우	keep	lookup
+tokenize:spaced-kanji	首 肩 背中 腰 手 足…	목 어깨 등 허리 수족…	keep	lookup
+tokenize:spaced-kanji	昼 夜 雨 風 環境でも変わる｡	밤낮 비바람 환경에서도 바뀐다.	keep	lookup
+tokenize:spaced-kanji	副総理 兼 外務大臣	부총리 겸 외무 대신	keep	lookup
+tokenize:spaced-kanji	先 行くね	lacks:선행	keep	lookup

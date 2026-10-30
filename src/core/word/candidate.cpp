@@ -181,6 +181,7 @@ std::string SinoKoreanNumber(std::string_view digits) {
 // After a noun parent, the particle records (kind 2) that follow the first verb or
 // adjective record move to the front (behind the leading plain-dictionary records).
 bool AllHiragana(std::string_view s);
+bool HasKanji(std::string_view s);
 
 // Whether every particle among records is a single character.
 bool OneKanaParticles(const Record* records) {
@@ -277,6 +278,56 @@ Record* SuffixAfterNoun(const Item& parent, Record* records) {
         Record* next = r->child;
         r->child = nullptr;
         if (At(r->partCode, 1) == '1' && r->source == suffix) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
+bool SuffixHost(const Item* before, const dict::Snapshot& snapshot);
+
+// After a name or a noun of persons or animals (SuffixHost) read as a noun, the noun records of an
+// honorific (honorific.candidate) move ahead of a longer hiragana noun that starts with it
+// (田中さんまで 다나카 씨까지, not さんま 꽁치 + で; 敵さんかい 적 씨야, not さんかい 산회; but
+// 大小さまざま, 進みさまざま), unless a particle row spells the honorific with what follows
+// (節子さんや 씨랑). Plain-dictionary records stay in front.
+Record* HonorificAfterNoun(const Item& parent, Record* records, const dict::Snapshot& snapshot) {
+    if (At(parent.Code(0), 0) != '1' || !SuffixHost(&parent, snapshot)) return records;
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    std::string_view honorific;
+    for (Record* r = first; r != nullptr && honorific.empty(); r = r->child) {
+        if (At(r->partCode, 1) == '1' && dict::InClass(HDTRANS_CLASS("honorific.candidate"), r->source)) honorific = r->source;
+    }
+    bool longer = false;
+    for (Record* r = first; r != nullptr && !honorific.empty(); r = r->child) {
+        if (r->source.size() <= honorific.size() || !r->source.starts_with(honorific)) continue;
+        // A row that spells the honorific with a particle (さんや 씨랑) reads it already.
+        if (FirstChar(r->partCode) == "P") return records;
+        longer = longer || (At(r->partCode, 0) == 'N' && At(r->partCode, 1) == '1' && AllHiragana(r->source));
+    }
+    if (!longer) return records;
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '1' && r->source == honorific) {
             *nounTail = r;
             nounTail = &r->child;
         } else {
@@ -519,7 +570,8 @@ Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::st
 }
 
 // Text path: the noun records of records move ahead of a verb whose continuative they
-// spell, the stem and one kana of the i or e row (争い, not 争 + い), when no record is
+// spell, the stem and one kana of the i or e row (争い, not 争 + い), or of an adjective with kanji
+// whose dictionary form they spell (変な臭いが 냄새가, not 구리지만), when no record is
 // longer, the word before is a modifier a verb cannot follow (の, a word in の or な, この) and
 // a particle or punctuation follows the noun. Plain-dictionary records stay in front.
 Record* NounAfterModifier(const Item& parent, Record* records, std::string_view text) {
@@ -534,13 +586,15 @@ Record* NounAfterModifier(const Item& parent, Record* records, std::string_view 
         owned = first;
         first = first->child;
     }
-    if (first == nullptr || At(first->partCode, 1) != '4') return records;
+    if (first == nullptr) return records;
+    const bool adjective = At(first->partCode, 0) == 'H' && At(first->partCode, 1) == '7' && HasKanji(first->source);
+    if (At(first->partCode, 1) != '4' && !adjective) return records;
     std::string_view noun;
     for (Record* r = first; r != nullptr; r = r->child) {
         if (!r->source.starts_with(first->source)) continue;
         const std::string_view tail = r->source.substr(first->source.size());
         if (At(r->partCode, 0) == 'N' && text::RuneCount(tail) == 1 &&
-            Has("いきしちにひみりぎじびぴえけせてねへめれげぜでべぺ", tail) && text.starts_with(r->source) &&
+            (adjective ? tail == "い" : Has("いきしちにひみりぎじびぴえけせてねへめれげぜでべぺ", tail)) && text.starts_with(r->source) &&
             NounEnd(text.substr(r->source.size()))) {
             noun = r->source;
             break;
@@ -569,6 +623,127 @@ Record* NounAfterModifier(const Item& parent, Record* records, std::string_view 
     *nounTail = rest;
     if (owned == nullptr) return nouns;
     owned->child = nouns;
+    return records;
+}
+
+// Text path: the noun records of records move ahead of an adjective with kanji whose dictionary
+// form they spell, the stem and い (臭い 냄새, not 臭 + い 구린), where an adjective cannot stand: before を,
+// before も that starts no もの or もん, or before は that starts no はず (臭いも減り; but
+// 臭いものに蓋, 臭いはずだ). After a modifier NounAfterModifier moves them. Plain-dictionary
+// records stay in front.
+Record* NounBeforeCaseParticle(Record* records, std::string_view text) {
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || At(first->partCode, 0) != 'H' || At(first->partCode, 1) != '7' || !HasKanji(first->source)) {
+        return records;
+    }
+    std::string noun(first->source);
+    noun += "い";
+    if (!text.starts_with(noun)) return records;
+    const std::string_view after = text.substr(noun.size());
+    if (!after.starts_with("を") && !(after.starts_with("も") && !after.starts_with("もの") && !after.starts_with("もん")) &&
+        !(after.starts_with("は") && !after.starts_with("はず"))) {
+        return records;
+    }
+    bool found = false;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > noun.size()) return records;
+        found = found || (NounRow(*r) && r->source == noun);
+    }
+    if (!found) return records;
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (NounRow(*r) && r->source == noun) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
+// Text path: the adverb records of records move ahead of a verb of a hiragana stem whose past or
+// て form they spell (たった: た + った), where no case particle, amount or noun that the verb
+// would take comes right before them (年がたった頃, 東京へたったあと, 三日程たった頃) and a word
+// that no ending of the verb starts follows right after them: a kanji, katakana, digit or
+// bracket, or a hiragana noun (たった二人 단 두 사람, たったひとりで; but 席をたった。, たったら).
+// Plain-dictionary records stay in front.
+Record* AdverbOverKanaVerb(const dict::Snapshot& snapshot, Record* records, std::string_view full, int cursor) {
+    const std::string_view text = From(full, cursor);
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || !AllHiragana(first->source)) return records;
+    auto isAdverb = [](const Record& r) { return r.user == nullptr && At(r.partCode, 0) == 'N' && At(r.partCode, 1) == '3'; };
+    std::string_view adverb;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (!isAdverb(*r) || !AllHiragana(r->source) || !text.starts_with(r->source)) continue;
+        for (const Record* v = first; v != nullptr; v = v->child) {
+            if (At(v->partCode, 0) != 'M' || At(v->partCode, 1) != '4' || v->partCode.size() != 4 ||
+                !r->source.starts_with(v->source) || v->source.size() >= r->source.size()) {
+                continue;
+            }
+            const std::string_view form = r->source.substr(v->source.size());
+            const int kind = v->partCode[3] - '0';
+            if (form == Conjugation(kind, 6) || form == Conjugation(kind, 7)) adverb = r->source;
+        }
+    }
+    if (adverb.empty()) return records;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > adverb.size() && text.starts_with(r->source)) return records;  // たった一人
+    }
+    const std::string_view before = full.substr(0, static_cast<std::size_t>(cursor));
+    for (const std::string_view p : {"が", "を", "へ", "ほど", "くらい", "ぐらい"}) {
+        if (before.ends_with(p)) return records;
+    }
+    if (!before.empty()) {
+        const std::string_view last = LastChar(before);
+        if (HasKanji(last) || NameClassOf(last) == kClassKatakana || IsDigit(At(last, 0)) || Has("０１２３４５６７８９", last)) {
+            return records;
+        }
+    }
+    const std::string_view after = text.substr(adverb.size());
+    if (after.empty() || NounEnd(after) || Has("…‥―ー～", FirstChar(after))) return records;
+    if (AllHiragana(FirstChar(after)) && (KeyLengths(snapshot, after, dict::LookupMode::General, 'N') & ~uint64_t{3}) == 0) {
+        return records;
+    }
+    Record* adverbs = nullptr;
+    Record* rest = nullptr;
+    Record** adverbTail = &adverbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (isAdverb(*r) && r->source == adverb) {
+            *adverbTail = r;
+            adverbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *adverbTail = rest;
+    if (owned == nullptr) return adverbs;
+    owned->child = adverbs;
     return records;
 }
 
@@ -1713,10 +1888,13 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
+    if (settings.text) records = NounBeforeCaseParticle(records, From(full, cursor));
+    if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
+        if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);

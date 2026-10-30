@@ -397,8 +397,17 @@
 | 連絡先を交換しましょう | 연락처를 교환합시다 | 유지 |
 | 彼が先に行く。 | 그가 먼저 간다. | 유지 |
 
+가타카나 명사 뒤의 状은 모양이나 상태라서 `모양`이다. 편지의 `장`(招待状 초대장)은 한자 명사 뒤에만 쓴다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| このパウダー状の おがくずの販売も してるんです | 이 파우더 모양의 톱밥 판매도 하고 있습니다 | 고침 |
+| ポール状のベンチが備え付けられており | 폴 모양의 벤치가 비치되어 있어 | 고침 |
+| 招待状が届いた。 | 초대장이 도착했다. | 유지 |
+
 사례: `tests/rules/cases/suffix-after-hangul.tsv`, `tests/rules/cases/suffix-after-pause.tsv`,
-`tests/rules/cases/winter-not-affix.tsv`, `tests/rules/cases/lexical-saki-destination.tsv`
+`tests/rules/cases/winter-not-affix.tsv`, `tests/rules/cases/lexical-saki-destination.tsv`,
+`tests/rules/cases/shape-suffix.tsv`
 
 ## LEX-17 말머리의 と、와 そうだ는 감탄사다
 
@@ -644,7 +653,20 @@
 | 「朧改」で出撃するよ！ | 「오보로 개」로 출격할게! | 고침 |
 | 原貫太さんが来た。 | 하라 간타 씨가 왔다. | 고침 |
 
-사례: `tests/rules/cases/lexical-korean-spelling.tsv`, `tests/rules/cases/lexical-japanese-targets.tsv`
+한자 읽기 렬, 률(列, 烈, 裂, 劣, 率, 律)이 명사 뒤에 붙으면 앞말이 모음이나 ㄴ 받침으로 끝날 때 열, 율로, 그 밖의 받침
+뒤에서는 렬, 률로 쓴다. 사전에 없는 복합어(達成率, ドロップ率)도 같다. 수 뒤의 列은 수량이라 따르지 않는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| 筋トレすれば命中率が上がるんですか？ | 근력 운동 하면 명중률이 오릅니까? | 고침 |
+| アイテムのドロップ率が低い。 | 아이템의 드롭률이 낮다. | 고침 |
+| 車列が２つに分かれて行きます。 | 차열이 2개로 나누어져 갑니다. | 고침 |
+| テレビの普及率は９割に迫り | 텔레비전의 보급률은 9할에 다가와 | 고침 |
+| 驚異のシンクロ率を誇る。 | 경이의 싱크로율을 자랑한다. | 유지 |
+| 隊列が安定してきたようです。 | 대열이 안정되어 온 것 같습니다. | 유지 |
+
+사례: `tests/rules/cases/lexical-korean-spelling.tsv`, `tests/rules/cases/lexical-japanese-targets.tsv`,
+`tests/rules/cases/initial-sound-rule.tsv`, `tests/rules/cases/lexical-liquid-spelling.tsv`
 
 ## LEX-28 수량 앞의 もう는 `더`를 수량 뒤에 둔다
 
@@ -1885,3 +1907,18 @@
 | 美也子は悲しみのあまり１年後に死んだ | 미야코는 슬픈 나머지 1년 후에 죽었다 | 유지 |
 
 사례: `tests/rules/cases/idiom-no-amari.tsv`, `tests/rules/cases/lexical-novel-amari.tsv`
+
+## LEX-89 동사 앞의 頑張って는 `열심히`다
+
+홀로 쓰거나 부탁하는 頑張って는 `힘내`다(頑張って！ 힘내!, 頑張ってください 힘내 주세요). 바로 뒤에 동사가 오면 그 동사를 하는 모양이므로
+`열심히`다(頑張って走る 열심히 달린다, 頑張って作ったのに 열심히 만들었는데). する 명사와 그 동사도 같다(頑張って勉強したら 열심히 공부하면).
+て형 뒤의 보조 동사(いく, くる, いる, みる, ください, まいる)는 동사가 아니므로 `힘내`로 둔다(頑張っていこう, 頑張って参りましょう).
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| 頑張って作ったのに。 | 열심히 만들었는데. | 고침 |
+| ねえ もし頑張って勉強したら… | 저기 만약 열심히 공부하면… | 고침 |
+| 頑張って！ | 힘내! | 유지 |
+| 頑張ってください | 힘내 주세요 | 유지 |
+
+사례: `tests/rules/cases/lexical-ganbatte-adverb.tsv`

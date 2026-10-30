@@ -286,9 +286,15 @@ Phrase FindPhrase(Flusher& f) {
 
 // cleanupClass3Item: for a class-3 word with a Zn candidate, look right for the word
 // it attaches to and select the Zn candidate (or, before an Sp ending, move away from
-// it).
+// it). A word after a noun and の is a noun, no adverb of the predicate: it keeps its
+// candidate (ショックのあまり誰とも会わない, the excess, not 그다지; そんなのあんまり is the adverb).
 void CleanupClass3Item(Item* it) {
     const int count = static_cast<int>(it->group->entries.size());
+    if (const Item* p = it->prev; p != nullptr && p->group->surface == "の" && p->selected >= 0 &&
+                                  At(p->Code(p->selected), 0) == '2' && p->prev != nullptr &&
+                                  p->prev->selected >= 0 && At(p->prev->Code(p->prev->selected), 0) == '1') {
+        return;
+    }
     for (int index = 0; index < count; index++) {
         if (!Has(it->GAttr(index), "Zn")) continue;
         bool accepted = false;
