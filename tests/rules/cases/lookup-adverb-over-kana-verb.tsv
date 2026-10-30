@@ -1,0 +1,24 @@
+# 히라가나 동사의 과거형, て형과 같은 꼴의 부사(たった)는 바로 뒤에 명사, 수가 오고 앞에 동사가 받는 조사, 수량, 명사가 없을 때 부사다.
+rule	input	expected	kind	layer
+lookup:adverb-over-kana-verb	たった二人でやらせるなんて	단 둘이서 시키다니	fix	lookup
+lookup:adverb-over-kana-verb	たったひとりの妹…	단 한 명의 여동생…	fix	lookup
+lookup:adverb-over-kana-verb	『たった一撃でだと！？』	『단 일격으로라고!?』	fix	lookup
+lookup:adverb-over-kana-verb	⟨記録はたった７ｍ⟩	⟨기록은 단 7 m⟩	fix	lookup
+lookup:adverb-over-kana-verb	⟨たったひと口で 顔に…⟩	⟨단 한 입으로 얼굴에…⟩	fix	lookup
+lookup:adverb-over-kana-verb	たった一つの道楽でございまして	단 하나의 도락이어서	fix	lookup
+lookup:adverb-over-kana-verb	たった数日で　分かるわけないでしょ。	단 며칠에 알 리가 없잖아.	fix	lookup
+lookup:adverb-over-kana-verb	　世界にたったひとり。	 세계에 단 혼자.	fix	lookup
+lookup:adverb-over-kana-verb	俺の中で生まれた疑惑は、たった一晩でずいぶん大きくなってしまった。	나 중에서 태어난 의혹은, 단 하룻밤에 꽤 커져버렸다.	fix	lookup
+lookup:adverb-over-kana-verb	たった２～３日の患いで	단 2~3일의 병으로	fix	lookup
+lookup:adverb-over-kana-verb	たったひと言でもいい。	단 한마디라도 좋다.	fix	lookup
+lookup:adverb-over-kana-verb	「……たった５％。	「……단 5%.	fix	lookup
+lookup:adverb-over-kana-verb	勇敢な斎藤先輩は たった１人で…	용감한 사이토 선배는 단 혼자서…	fix	lookup
+lookup:adverb-over-kana-verb	＜結婚して４年がたった頃浩介は浮気をした＞	<결혼해 4년이 지났을 무렵 코스케는 바람기를 했다>	keep	lookup
+lookup:adverb-over-kana-verb	変な噂なんてたったらどうするんですか！	has:끊으면	keep	lookup
+lookup:adverb-over-kana-verb	王都を出て三日程たった頃に野盗と遭遇してしまった。	왕도를 나와 3일정 지났을 무렵에 도적과 조우해버렸다.	keep	lookup
+lookup:adverb-over-kana-verb	２～３日たったら帰るから	2~3일 지나면 돌아가니까	keep	lookup
+lookup:adverb-over-kana-verb	たった一人で 生きていて	단 한 사람으로 살아 있어	keep	lookup
+lookup:adverb-over-kana-verb	たった今帰った	방금 돌아갔다	keep	lookup
+lookup:adverb-over-kana-verb	たったそれだけのことで	단지 그것만으로	keep	lookup
+lookup:adverb-over-kana-verb	彼は席をたった。	그는 자리를 떴다.	keep	lookup
+lookup:adverb-over-kana-verb	摩子が東京へたったあとということですね？	lacks:단 뒤	keep	lookup

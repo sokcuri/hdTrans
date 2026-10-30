@@ -627,6 +627,76 @@ Record* NounBeforeCaseParticle(Record* records, std::string_view text) {
     return records;
 }
 
+// Text path: the adverb records of records move ahead of a verb of a hiragana stem whose past or
+// て form they spell (たった: た + った), where no case particle, amount or noun that the verb
+// would take comes right before them (年がたった頃, 東京へたったあと, 三日程たった頃) and a word
+// that no ending of the verb starts follows right after them: a kanji, katakana, digit or
+// bracket, or a hiragana noun (たった二人 단 두 사람, たったひとりで; but 席をたった。, たったら).
+// Plain-dictionary records stay in front.
+Record* AdverbOverKanaVerb(const dict::Snapshot& snapshot, Record* records, std::string_view full, int cursor) {
+    const std::string_view text = From(full, cursor);
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr || !AllHiragana(first->source)) return records;
+    auto isAdverb = [](const Record& r) { return r.user == nullptr && At(r.partCode, 0) == 'N' && At(r.partCode, 1) == '3'; };
+    std::string_view adverb;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (!isAdverb(*r) || !AllHiragana(r->source) || !text.starts_with(r->source)) continue;
+        for (const Record* v = first; v != nullptr; v = v->child) {
+            if (At(v->partCode, 0) != 'M' || At(v->partCode, 1) != '4' || v->partCode.size() != 4 ||
+                !r->source.starts_with(v->source) || v->source.size() >= r->source.size()) {
+                continue;
+            }
+            const std::string_view form = r->source.substr(v->source.size());
+            const int kind = v->partCode[3] - '0';
+            if (form == Conjugation(kind, 6) || form == Conjugation(kind, 7)) adverb = r->source;
+        }
+    }
+    if (adverb.empty()) return records;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (r->source.size() > adverb.size() && text.starts_with(r->source)) return records;  // たった一人
+    }
+    const std::string_view before = full.substr(0, static_cast<std::size_t>(cursor));
+    for (const std::string_view p : {"が", "を", "へ", "ほど", "くらい", "ぐらい"}) {
+        if (before.ends_with(p)) return records;
+    }
+    if (!before.empty()) {
+        const std::string_view last = LastChar(before);
+        if (HasKanji(last) || NameClassOf(last) == kClassKatakana || IsDigit(At(last, 0)) || Has("０１２３４５６７８９", last)) {
+            return records;
+        }
+    }
+    const std::string_view after = text.substr(adverb.size());
+    if (after.empty() || NounEnd(after) || Has("…‥―ー～", FirstChar(after))) return records;
+    if (AllHiragana(FirstChar(after)) && (KeyLengths(snapshot, after, dict::LookupMode::General, 'N') & ~uint64_t{3}) == 0) {
+        return records;
+    }
+    Record* adverbs = nullptr;
+    Record* rest = nullptr;
+    Record** adverbTail = &adverbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (isAdverb(*r) && r->source == adverb) {
+            *adverbTail = r;
+            adverbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *adverbTail = rest;
+    if (owned == nullptr) return adverbs;
+    owned->child = adverbs;
+    return records;
+}
+
 // Text path: the verb records of records move ahead of a longer record that is no verb but
 // spells a form of the verb before a polite ます (喜び + ます: 喜ぶ, not the noun 喜び; 急ぎます,
 // 頑張れます): the verb's stem and its continuative or its potential stem, and no record longer.
@@ -1769,6 +1839,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
     if (settings.text) records = NounBeforeCaseParticle(records, From(full, cursor));
+    if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
