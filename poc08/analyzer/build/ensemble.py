@@ -5,7 +5,10 @@
   ensemble.py packet PATTERNS.tsv N K TAIL OUT_DIR      blind packets: K examples of the N most frequent
                                                         patterns, one example of TAIL patterns drawn by count
                                                         from the rest
-  ensemble.py apply UNIDIC SUDACHI VERDICTS LEX OUT     silver where adjudicated patterns take Sudachi's reading
+  ensemble.py apply UNIDIC SUDACHI VERDICTS LEX OUT     silver where adjudicated patterns take Sudachi's reading;
+                                                        a pattern not adjudicated where UniDic splits content
+                                                        words that Sudachi reads as one content word takes it
+                                                        too (adjudicated tail sample: Sudachi 67%, UniDic 2%)
 
 UNIDIC and SUDACHI are tag.py-format files over the same lines. A disagreement region is a minimal span
 where the two token boundary sets differ, or a token of the same span with another pos1. Its pattern is
@@ -139,12 +142,19 @@ def load_lex(path):
 
 def cmd_apply(a):
     fu_path, fs_path, verdicts, lexp, outp = a
-    win = set()
+    win, judged = set(), set()
     with open(verdicts, encoding='utf-8') as fh:
         for line in fh:
             f = line.rstrip('\n').split('\t')
-            if len(f) >= 4 and f[3] == 'S':
-                win.add(f[1] + '\t' + f[2])
+            if len(f) >= 4:
+                judged.add(f[1] + '\t' + f[2])
+                if f[3] == 'S':
+                    win.add(f[1] + '\t' + f[2])
+    function = ('助詞', '助動詞', '補助記号', '記号', '空白')
+
+    def merge_content(ut, st):
+        return len(st) == 1 and len(ut) > 1 and st[0][2][2] not in function and \
+            all(t[2][2] not in function for t in ut)
     lex = load_lex(lexp)
     applied = unmapped = 0
     with open(fu_path, encoding='utf-8') as fu, open(fs_path, encoding='utf-8') as fs, \
@@ -156,7 +166,8 @@ def cmd_apply(a):
             uidx = [i for i, f in enumerate(raw) if f[2] != '空白']
             repl = {}
             for (i0, i1, j0, j1) in regions(u, s):
-                if reading(u[i0:i1]) + '\t' + reading(s[j0:j1]) not in win:
+                pat = reading(u[i0:i1]) + '\t' + reading(s[j0:j1])
+                if pat not in win and (pat in judged or not merge_content(u[i0:i1], s[j0:j1])):
                     continue
                 new = []
                 ok = True
