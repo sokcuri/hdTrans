@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:novel-idioms:13	帝国軍大将。軍内部でも1・2を争う有能な人物。	제국군 대장. 군내부에서도 손꼽히는 유능한 인물.	fix	local
+dict:novel-idioms:13	彼は国で1、2を争った。	그는 나라에서 손꼽혔다.	fix	local
+dict:lexical-novel-idioms	相手は先輩で、この学校でも一、二を争うほど危ない奴だった。	상대는 선배로, 이 학교에서도 손꼽힐 만큼 위험한 놈이었다.	fix	lookup
+dict:lexical-novel-idioms	当時は日本で一二を争うランカーだった。	당시는 일본에서 손꼽히는 랭커였다.	fix	lookup
+dict:lexical-novel-idioms	クラスで一・二を争う成績だ。	반에서 손꼽히는 성적이다.	fix	lookup
+dict:lexical-novel-idioms	王国で一二を争う剣士だ。	왕국에서 손꼽히는 검사다.	fix	lookup
+dict:novel-idioms:13	優勝を争う。	우승을 다툰다.	keep	local
+dict:novel-idioms:13	1位と2位が争う。	1위와 2위가 싸운다.	keep	local
