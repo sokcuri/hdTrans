@@ -19,7 +19,8 @@ struct AnalyzerData {
 namespace {
 
 bool ReadAll(const std::string& path, std::string* out) {
-  std::ifstream in(path, std::ios::binary);
+  // UTF-8 paths on every platform.
+  std::ifstream in(std::filesystem::path(std::u8string(path.begin(), path.end())), std::ios::binary);
   if (!in) return false;
   std::ostringstream ss;
   ss << in.rdbuf();

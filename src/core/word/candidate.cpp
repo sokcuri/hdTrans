@@ -1908,8 +1908,13 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
 #ifdef HDTRANS_POC08_HOOKS
     // The segmentation of the hooks: a word that ends inside one of its words gives way to the next
     // shorter candidate here that ends on a boundary; when none does, the first stays.
-    if (settings.hookFits != nullptr && candidate != nullptr) {
-        const tokenizer::Token& t = tokens[static_cast<std::size_t>(token)];
+    // Only where the token's text is its source text byte for byte (no folded spaces, merged markers or
+    // canonical forms), so that an offset in it is an offset in the chunk text.
+    const tokenizer::Token& hookToken = tokens[static_cast<std::size_t>(token)];
+    if (settings.hookFits != nullptr && candidate != nullptr &&
+        hookToken.sourceEnd - hookToken.sourceBegin == full.size() &&
+        tokens.Raw(static_cast<std::size_t>(token)) == full) {
+        const tokenizer::Token& t = hookToken;
         const auto fits = [&](const Item* c) {
             const uint32_t begin = std::min(t.sourceBegin + static_cast<uint32_t>(cursor), t.sourceEnd);
             const uint32_t end = std::min(begin + static_cast<uint32_t>(c->length), t.sourceEnd);

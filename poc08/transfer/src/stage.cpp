@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "decide.h"
+#include "ir/file.h"
 #include "ir/stages.h"
 #include "transfer.h"
 
@@ -27,10 +28,13 @@ struct TransferData {
 
 namespace {
 
-void LoadBase(const std::string& path, std::vector<BaseRow>& out) {
-  std::ifstream in(path);
+bool LoadBase(const std::string& path, std::vector<BaseRow>& out) {
+  std::string text;
+  if (!ReadWholeFile(path, text)) return false;
+  std::istringstream in(text);
   std::string l;
   while (std::getline(in, l)) {
+    if (!l.empty() && l.back() == '\r') l.pop_back();
     if (l.empty() || l[0] == '#') continue;
     std::istringstream s(l);
     BaseRow r;
@@ -40,6 +44,7 @@ void LoadBase(const std::string& path, std::vector<BaseRow>& out) {
     std::getline(s, r.cls, '\t');
     if (!r.cls.empty()) out.push_back(r);
   }
+  return !out.empty();
 }
 
 // 0.7.x's class at a point: the facts of the T decisions whose span overlaps the point's token.
@@ -82,12 +87,14 @@ std::string Base075(const TransferData& t, const Doc& doc, const Line& line, con
   return "";
 }
 
-// Writes a decider's class into the slots of the nodes over the point.
-void Apply(const std::string& family, const std::string& cls, Line& line, Span at) {
+// Writes a decider's class into the slots of the predicate nodes over the point; returns how many nodes
+// took it (0 when the class has no slot or no predicate node covers the point).
+int Apply(const std::string& family, const std::string& cls, Line& line, Span at) {
+  int changed = 0;
   for (KNode& n : line.kir) {
-    if (!Overlaps(n.src, at)) continue;
+    if (!Overlaps(n.src, at) || n.kind != KK::V) continue;
+    const KNode before = n;
     if (family == "voice") {
-      if (n.kind != KK::V) continue;
       n.passive = cls == "PASSIVE";
       n.potential = cls == "POTENTIAL";
       n.spont = cls == "SPONTANEOUS";
@@ -102,7 +109,10 @@ void Apply(const std::string& family, const std::string& cls, Line& line, Span a
     } else if (family == "tokorode") {
       if (cls == "CONCESSIVE") n.rel = rel::even_try;
     }
+    changed += before.passive != n.passive || before.potential != n.potential || before.spont != n.spont ||
+               before.ja != n.ja || before.rel != n.rel;
   }
+  return changed;
 }
 
 }  // namespace
@@ -111,7 +121,16 @@ TransferData* LoadTransfer(const Config& cfg, std::string& err) {
   auto* d = new TransferData;
   xfer::LoadTable(cfg.data + "/transfer/data", d->table);
   xfer::LoadDeciders(cfg.data + "/transfer/data", d->deciders);
-  LoadBase(cfg.data + "/transfer/data/decide/base075.tsv", d->base);
+  if (!d->deciders.errors.empty()) {
+    err = "transfer: " + d->deciders.errors.front();
+    delete d;
+    return nullptr;
+  }
+  if (!LoadBase(cfg.data + "/transfer/data/decide/base075.tsv", d->base)) {
+    err = "transfer: cannot read the rows of " + cfg.data + "/transfer/data/decide/base075.tsv";
+    delete d;
+    return nullptr;
+  }
   if (d->table.rows.empty()) {
     err = "transfer: no construction rows under " + cfg.data + "/transfer/data/cx";
     delete d;
@@ -181,9 +200,11 @@ void StageD(const TransferData& t, const Config&, Doc& doc, Line& line) {
     const std::string base =
         Base075(t, doc, line, p.family, at, p.tok > 0 ? std::string_view(view.toks[static_cast<size_t>(p.tok - 1)].lemma) : "");
     const xfer::DeciderResult r = xfer::Decide(dec->second, xfer::Features(t.table, view, p), base);
+    // An override no predicate node can take stays a decision only (the class has no slot yet).
+    const int taken = r.overridden ? Apply(p.family, r.chosen, line, at) : 0;
     Decision d;
     d.stage = 'T';
-    d.kind = r.overridden ? Ev::Cued : Ev::Default;
+    d.kind = taken > 0 ? Ev::Cued : Ev::Default;
     d.rule = doc.I("dec:" + dec->second.id);
     d.src = at;
     d.margin = r.margin;
@@ -191,10 +212,10 @@ void StageD(const TransferData& t, const Config&, Doc& doc, Line& line) {
     d.nAlt = static_cast<uint8_t>(std::min<size_t>(dec->second.classes.size(), 255));
     d.runnerUp = doc.I("t075:" + (base.empty() ? std::string("NONE") : base));
     d.because.push_back(doc.I("class=" + r.chosen));
-    if (r.overridden) d.because.push_back(doc.I("overrode=" + (base.empty() ? std::string("NONE") : base)));
+    if (taken > 0) d.because.push_back(doc.I("overrode=" + (base.empty() ? std::string("NONE") : base)));
+    else if (r.overridden) d.because.push_back(doc.I("unrealised=" + r.chosen));
     for (const xfer::Contribution& c : r.because) d.contrib.emplace_back(doc.I(c.feature), c.weight);
     line.Decide(std::move(d));
-    if (r.overridden) Apply(p.family, r.chosen, line, at);
   }
 }
 

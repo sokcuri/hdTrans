@@ -18,4 +18,17 @@ for mode in --each ""; do
     cmp -s "$tmp/a.txt" "$tmp/c.txt" || { echo "FAIL: hdtrans08 --poc08 none with the side IR ${mode:-document} differs"; fail=1; }
     grep -q '"ko":' "$tmp/why.jsonl" || { echo "FAIL: no side IR records"; fail=1; }
 done
+# The hooks know every line: in --wrapped mode, and after a line longer than the engine's piece limit.
+printf '猫が好きだ。\n犬も好きだ。\n' > "$tmp/w.txt"
+"$b" --dicts "$dicts" --wrapped --poc08 none --poc08-stats --poc08-stages "$tmp/w.jsonl" --in "$tmp/w.txt" \
+    > /dev/null 2> "$tmp/w.err" || fail=1
+grep -q 'sentences=[1-9]' "$tmp/w.err" || { echo "FAIL: --wrapped reaches no sentence"; fail=1; }
+python3 - "$tmp/long.txt" <<'PY'
+import sys
+open(sys.argv[1], "w", encoding="utf-8").write("あ" * 30000 + "。\n犬も好きだ。\n鳥も好きだ。\n")
+PY
+"$b" --dicts "$dicts" --poc08 none --poc08-stages "$tmp/long.jsonl" --in "$tmp/long.txt" > /dev/null || fail=1
+for want in '"line":2,' '"line":3,'; do
+    grep '"case"' "$tmp/long.jsonl" | grep -q "$want" || { echo "FAIL: no side IR for $want after a long line"; fail=1; }
+done
 exit $fail

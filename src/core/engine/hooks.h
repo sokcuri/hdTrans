@@ -7,6 +7,7 @@
 #include <span>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "core/output/item.h"
 #include "core/tokenizer/token.h"
@@ -59,6 +60,12 @@ struct Run {
     const Hooks* hooks = nullptr;
     void* doc = nullptr;
     int line = -1;
+    // While a call translates the pieces of lines longer than kMaxLineBytes: the line of each piece.
+    std::vector<int> pieceLine;
+    int LineOf(std::size_t piece) const {
+        if (pieceLine.empty()) return static_cast<int>(piece);
+        return piece < pieceLine.size() ? pieceLine[piece] : -1;
+    }
 };
 
 }  // namespace hdTrans::hooks

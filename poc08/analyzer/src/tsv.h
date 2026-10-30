@@ -1,6 +1,7 @@
 // Minimal TSV reading for the data tools: `#` lines are comments, the first other line is the header.
 #pragma once
 
+#include <filesystem>
 #include <fstream>
 #include <string>
 #include <vector>
@@ -26,7 +27,7 @@ inline std::string Trim(const std::string& s) {
 
 template <class Fn>
 bool ReadTsv(const std::string& path, Fn fn, std::string* err, bool header = true) {
-  std::ifstream in(path, std::ios::binary);
+  std::ifstream in(std::filesystem::path(std::u8string(path.begin(), path.end())), std::ios::binary);  // UTF-8 path
   if (!in) {
     *err = "cannot open " + path;
     return false;

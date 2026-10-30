@@ -11,6 +11,14 @@
 namespace hd08::xfer {
 
 namespace {
+// A path as UTF-8 (path::string() aborts on characters the narrow code page lacks).
+[[maybe_unused]] std::string Utf8Of(const std::filesystem::path& p) {
+  const std::u8string s = p.u8string();
+  return std::string(s.begin(), s.end());
+}
+}  // namespace
+
+namespace {
 
 struct V {
   const Table& t;
@@ -229,10 +237,15 @@ std::vector<std::string> Features(const Table& t, const LineIR& v, const Decisio
 bool LoadDeciders(const std::string& dirName, DecideData& d) {
   namespace fs = std::filesystem;
   std::error_code ec;
-  fs::path dir = fs::path(dirName) / "decide";
-  for (const auto& e : fs::directory_iterator(dir, ec)) {
-    if (e.path().extension() != ".tsv") continue;
-    std::ifstream in(e.path(), std::ios::binary);
+  fs::path dir = fs::path(std::u8string(dirName.begin(), dirName.end())) / "decide";  // UTF-8 path
+  // Sorted, so that the order of the files never depends on the file system; no throwing iteration.
+  std::vector<fs::path> files;
+  for (fs::directory_iterator it(dir, ec), end; !ec && it != end; it.increment(ec))
+    if (it->path().extension() == ".tsv" && it->path().filename() != "base075.tsv") files.push_back(it->path());
+  if (ec) d.errors.push_back("cannot list the decider tables");
+  std::sort(files.begin(), files.end());
+  for (const fs::path& file : files) {
+    std::ifstream in(file, std::ios::binary);
     Decider dec;
     std::string line;
     while (std::getline(in, line)) {
@@ -261,7 +274,7 @@ bool LoadDeciders(const std::string& dirName, DecideData& d) {
       if (c.size() < 3) continue;
       auto ci = std::find(dec.classes.begin(), dec.classes.end(), c[1]);
       if (ci == dec.classes.end()) {
-        d.errors.push_back(e.path().filename().string() + ": unknown class " + c[1]);
+        d.errors.push_back(Utf8Of(file.filename()) + ": unknown class " + c[1]);
         continue;
       }
       size_t k = static_cast<size_t>(ci - dec.classes.begin());
@@ -274,7 +287,7 @@ bool LoadDeciders(const std::string& dirName, DecideData& d) {
       }
     }
     if (dec.family.empty() || dec.classes.empty()) {
-      d.errors.push_back(e.path().filename().string() + ": no family or classes");
+      d.errors.push_back(Utf8Of(file.filename()) + ": no family or classes");
       continue;
     }
     if (dec.id.empty()) dec.id = dec.family;

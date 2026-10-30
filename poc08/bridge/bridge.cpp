@@ -27,8 +27,11 @@ struct SentenceRecord {
 struct DocState {
     Doc doc;                     // the side IR: one Line per line of the call
     std::vector<uint32_t> from;  // per line: where the lift's source search goes on
+    std::vector<std::pair<int, int>> last;  // per line: the (chunk, sentence) lifted last; an earlier one starts a pass
     std::vector<std::map<std::pair<int, int>, SentenceRecord>> records;  // per line, by (chunk, sentence)
 };
+
+constexpr size_t kMaxStructureBytes = 4096;
 
 struct ChunkState {
     std::vector<uint32_t> ends;  // token ends of the analyzer, sorted, in chunk bytes
@@ -63,6 +66,7 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
         ds->doc.lines.push_back(std::move(l));
     }
     ds->from.assign(lines.size(), 0);
+    ds->last.assign(lines.size(), {-1, -1});
     ds->records.resize(lines.size());
     if (b.opt.sideIr || b.opt.decide || b.opt.generate) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
@@ -75,6 +79,8 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
         std::vector<ForcedSpan> forced;
         StageS(*b.engine.discourse, cfg, ds->doc, forced);
         for (Line& l : ds->doc.lines) {
+            // Structure is not linear in the length of a line; a very long line keeps its tokens only.
+            if (l.src.size() > kMaxStructureBytes) continue;
             const int paths = l.alt.toks.empty() ? 1 : 2;
             for (int p = 0; p < paths; p++) {
                 StageC(*b.engine.structure, cfg, ds->doc, l, p);
@@ -144,12 +150,73 @@ bool Fits(const void* chunk, uint32_t, uint32_t end, char) {
     return fits;
 }
 
+// The tokens of whole inside span, with their bunsetsu and clauses (indexes renumbered; a clause or
+// bunsetsu that reaches outside the span is left out), into sent. Path 1 is not copied.
+void CopyAnalysis(const Line& whole, Span span, Line& sent) {
+    std::vector<int> tok(whole.toks.size(), -1), bun(whole.buns.size(), -1), cl(whole.clauses.size(), -1);
+    for (size_t i = 0; i < whole.toks.size(); i++) {
+        if (!Contains(span, whole.toks[i].src)) continue;
+        tok[i] = static_cast<int>(sent.toks.size());
+        Token t = whole.toks[i];
+        t.alt = static_cast<uint16_t>(sent.alts.size());
+        for (uint16_t k = 0; k < whole.toks[i].nAlt && whole.toks[i].alt + k < whole.alts.size(); k++)
+            sent.alts.push_back(whole.alts[whole.toks[i].alt + k]);
+        sent.toks.push_back(t);
+    }
+    for (size_t i = 0; i < whole.buns.size(); i++) {
+        const Bunsetsu& b = whole.buns[i];
+        if (b.last >= tok.size() || tok[b.first] < 0 || tok[b.last] < 0) continue;
+        bun[i] = static_cast<int>(sent.buns.size());
+        sent.buns.push_back(b);
+    }
+    for (size_t i = 0; i < whole.buns.size(); i++) {
+        if (bun[i] < 0) continue;
+        Bunsetsu& b = sent.buns[static_cast<size_t>(bun[i])];
+        b.first = static_cast<uint16_t>(tok[b.first]);
+        b.last = static_cast<uint16_t>(tok[b.last]);
+        b.content = static_cast<uint16_t>(b.content < tok.size() && tok[b.content] >= 0 ? tok[b.content] : b.first);
+        b.head = b.head >= 0 && static_cast<size_t>(b.head) < bun.size() ? static_cast<int16_t>(bun[static_cast<size_t>(b.head)]) : -1;
+        b.head2 = b.head2 >= 0 && static_cast<size_t>(b.head2) < bun.size() ? static_cast<int16_t>(bun[static_cast<size_t>(b.head2)]) : -1;
+    }
+    for (size_t i = 0; i < whole.clauses.size(); i++) {
+        const Clause& c = whole.clauses[i];
+        if (c.lastBun >= bun.size() || bun[c.firstBun] < 0 || bun[c.lastBun] < 0) continue;
+        cl[i] = static_cast<int>(sent.clauses.size());
+        sent.clauses.push_back(c);
+    }
+    auto mapTok = [&](std::vector<uint16_t>& v) {
+        std::vector<uint16_t> out;
+        for (uint16_t t : v)
+            if (t < tok.size() && tok[t] >= 0) out.push_back(static_cast<uint16_t>(tok[t]));
+        v = std::move(out);
+    };
+    for (size_t i = 0; i < whole.clauses.size(); i++) {
+        if (cl[i] < 0) continue;
+        Clause& c = sent.clauses[static_cast<size_t>(cl[i])];
+        c.firstBun = static_cast<uint16_t>(bun[c.firstBun]);
+        c.lastBun = static_cast<uint16_t>(bun[c.lastBun]);
+        c.pred = static_cast<uint16_t>(c.pred < bun.size() && bun[c.pred] >= 0 ? bun[c.pred] : c.lastBun);
+        c.parent = c.parent >= 0 && static_cast<size_t>(c.parent) < cl.size() ? static_cast<int16_t>(cl[static_cast<size_t>(c.parent)]) : -1;
+        for (Arg& a : c.args)
+            a.bun = a.bun < bun.size() && bun[a.bun] >= 0 ? static_cast<uint16_t>(bun[a.bun]) : uint16_t{0xFFFF};
+        for (Referent* r : {&c.subj, &c.beneTo})
+            if (r->bun != 0xFFFF) r->bun = r->bun < bun.size() && bun[r->bun] >= 0 ? static_cast<uint16_t>(bun[r->bun]) : uint16_t{0xFFFF};
+        mapTok(c.consumed);
+        mapTok(c.unfolded);
+    }
+    for (const Mention& m : whole.mentions)
+        if (Overlaps(m.src, span)) sent.mentions.push_back(m);
+}
+
 bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s, std::string& out) {
     auto& b = *static_cast<Bridge*>(context);
     auto& ds = *static_cast<DocState*>(doc);
     if (s.line < 0 || static_cast<size_t>(s.line) >= ds.doc.lines.size()) return false;
     const auto lineIndex = static_cast<size_t>(s.line);
-    if (s.chunk == 0 && s.index == 0) ds.from[lineIndex] = 0;  // a pass over the line starts again
+    // The compose stage may go over a line more than once; a sentence not after the last one starts a pass.
+    const std::pair<int, int> here{s.chunk, s.index};
+    if (here <= ds.last[lineIndex]) ds.from[lineIndex] = 0;
+    ds.last[lineIndex] = here;
     const Line& whole = ds.doc.lines[static_cast<size_t>(s.line)];
     // The sentence as a line of its own: the line's analysis and scope, the sentence's nodes.
     Line sent;
@@ -158,15 +225,17 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     sent.src = whole.src;
     sent.norm = whole.norm;
     sent.map = whole.map;
-    sent.toks = whole.toks;
-    sent.alts = whole.alts;
     sent.utts = whole.utts;
-    sent.mentions = whole.mentions;
-    sent.buns = whole.buns;
-    sent.clauses = whole.clauses;
-    sent.alt = whole.alt;
     std::vector<LiftMiss> misses;
     const bool lifted = Lift(b.lift, s, ds.doc, sent, ds.from[lineIndex], misses);
+    // The line's analysis within the sentence's words, so that D, R and the canary see this sentence only.
+    Span span{UINT32_MAX, 0};
+    for (const KNode& n : sent.kir) {
+        if (n.src.end <= n.src.begin) continue;
+        span.begin = std::min(span.begin, n.src.begin);
+        span.end = std::max(span.end, n.src.end);
+    }
+    if (span.begin < span.end) CopyAnalysis(whole, span, sent);
     const Config& cfg = b.engine.cfg;
     if (b.opt.decide) StageD(*b.engine.transfer, cfg, ds.doc, sent);
     StageR(*b.engine.discourse, cfg, ds.doc, sent);

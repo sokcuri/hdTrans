@@ -446,6 +446,7 @@ int RunMain(int argc, char** argv) {
 #ifdef HDTRANS_POC08_HOOKS
     // The levels only the 0.8 generator writes; 0.7.x composes with its default.
     hd08::Speech speech08 = hd08::Speech::Strict;
+    bool speech08Only = false;  // a level only the 0.8 generator writes
     if (speechArg) {
         static const std::pair<const char*, hd08::Speech> kLevels[] = {
             {"strict", hd08::Speech::Strict}, {"soft", hd08::Speech::Soft}, {"auto", hd08::Speech::Auto},
@@ -462,6 +463,7 @@ int RunMain(int argc, char** argv) {
                 return 2;
             }
             speechArg.reset();
+            speech08Only = true;
         }
     }
 #endif
@@ -666,7 +668,7 @@ int RunMain(int argc, char** argv) {
         hd08::bridge::Bridge* bridge = nullptr;
         ~BridgeCloser() { hd08::bridge::Destroy(bridge); }
     } poc08;
-    const bool poc08On = poc08Parts != "none" || poc08Options.sideIr || !poc08Misses.empty();
+    const bool poc08On = poc08Parts != "none" || poc08Options.sideIr || !poc08Misses.empty() || poc08Stats;
     if (poc08On) {
         std::string error;
         poc08.bridge = hd08::bridge::Create(poc08Options, error);
@@ -675,6 +677,11 @@ int RunMain(int argc, char** argv) {
             return 1;
         }
         options.hooks = hd08::bridge::HooksOf(poc08.bridge);
+    }
+    if (speech08Only && (poc08.bridge == nullptr ||
+                         hd08::bridge::ActiveParts(poc08.bridge).find("generate") == std::string::npos)) {
+        std::fputs("hdtrans: warning: this --speech level is written only by the 0.8 generator, which is off\n",
+                   stderr);
     }
     const auto finish08 = [&]() -> bool {
         if (poc08.bridge == nullptr) return true;

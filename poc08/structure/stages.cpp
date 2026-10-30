@@ -1,5 +1,6 @@
 // StageC and StageL (ir/stages.h) over the structure library, which works on its own view of the IR
 // (ir_view.h); values cross by their JSON names.
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 
@@ -16,7 +17,7 @@ struct StructureData {
 namespace {
 
 std::string ReadFile(const std::string& path) {
-    std::ifstream in(path, std::ios::binary);
+    std::ifstream in(std::filesystem::path(std::u8string(path.begin(), path.end())), std::ios::binary);  // UTF-8 path
     if (!in) return {};
     std::ostringstream ss;
     ss << in.rdbuf();

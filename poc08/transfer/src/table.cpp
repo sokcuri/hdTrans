@@ -9,6 +9,14 @@
 namespace hd08::xfer {
 
 namespace {
+// A path as UTF-8 (path::string() aborts on characters the narrow code page lacks).
+[[maybe_unused]] std::string Utf8Of(const std::filesystem::path& p) {
+  const std::u8string s = p.u8string();
+  return std::string(s.begin(), s.end());
+}
+}  // namespace
+
+namespace {
 
 std::vector<std::string> Split(const std::string& s, char sep) {
   std::vector<std::string> out;
@@ -301,24 +309,24 @@ std::string Table::ClassOf(const std::string& lemma, const std::string& surf, co
 
 bool LoadTable(const std::string& dirName, Table& t) {
   namespace fs = std::filesystem;
-  fs::path dir(dirName);
+  fs::path dir(std::u8string(dirName.begin(), dirName.end()));  // UTF-8 path
   LoadSupport(dir, t);
   std::error_code ec;
   std::vector<fs::path> files;
-  for (const auto& e : fs::directory_iterator(dir / "cx", ec))
-    if (e.path().extension() == ".tsv") files.push_back(e.path());
+  for (fs::directory_iterator it(dir / "cx", ec), end; !ec && it != end; it.increment(ec))
+    if (it->path().extension() == ".tsv") files.push_back(it->path());
   if (ec) {
-    t.errors.push_back("cannot list " + (dir / "cx").string());
+    t.errors.push_back("cannot list " + Utf8Of(dir / "cx"));
     return false;
   }
   std::sort(files.begin(), files.end());
   for (const auto& p : files) {
-    std::string name = p.filename().string();
+    std::string name = Utf8Of(p.filename());
     bool cases = name.size() > 10 && name.compare(name.size() - 10, 10, ".cases.tsv") == 0;
     std::vector<std::string> h;
     std::vector<std::pair<int, std::vector<std::string>>> rows;
     if (!ReadTsv(p, h, rows)) {
-      t.errors.push_back("cannot read " + p.string());
+      t.errors.push_back("cannot read " + Utf8Of(p));
       continue;
     }
     for (const auto& [n, r] : rows) {

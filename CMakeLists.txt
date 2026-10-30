@@ -492,6 +492,16 @@ if(HDTRANS_POC08 AND NOT EMSCRIPTEN)
     if(HDTRANS_INTERPRET_RULES)
         target_compile_definitions(hdtrans_hooked PRIVATE HDTRANS_INTERPRET_RULES)
     endif()
+    if(HDTRANS_PASS_EXPERIMENTS)
+        target_compile_definitions(hdtrans_hooked PRIVATE HDTRANS_PASS_EXPERIMENTS)
+    endif()
+    # One target runs the generators, so that no build tool runs a generator twice at once for the two
+    # libraries that compile its output.
+    add_custom_target(hdtrans_generated DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp"
+        "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp"
+        "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
+    add_dependencies(hdtrans hdtrans_generated)
+    add_dependencies(hdtrans_hooked hdtrans_generated)
     target_link_libraries(hdtrans_hooked PRIVATE pcre2-16 yaml PUBLIC Threads::Threads)
     target_include_directories(hdtrans_hooked PUBLIC include src PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
     set_target_properties(hdtrans_hooked PROPERTIES OUTPUT_NAME hdTransCoreHooked COMPILE_PDB_NAME hdTransCoreHooked)

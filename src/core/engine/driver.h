@@ -92,6 +92,11 @@ struct QuoteCarry {
     int lines = 0;
 };
 
+#ifdef HDTRANS_POC08_HOOKS
+// The hooked build lays these options out differently; the inline namespace gives every function that
+// takes them another symbol, so that code built for one layout never links against the other.
+inline namespace hooked {
+#endif
 struct TranslationOptions {
     bool reference = false;
     word::Improvements wordImprovements;
@@ -123,6 +128,9 @@ struct TranslationOptions {
     hooks::Run* hookRun = nullptr;
 #endif
 };
+#ifdef HDTRANS_POC08_HOOKS
+}  // namespace hooked
+#endif
 
 // Translates the lines of one call as one document. Nothing is kept from one call to the
 // next: the names, speech and senses of a call come from its own lines. The first context

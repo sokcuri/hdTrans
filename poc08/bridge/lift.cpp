@@ -103,10 +103,13 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
 
         // The item's source text in the line, searched forward: its key, then the ending it read
         // (length counts both).
+        // A text that 0.7.x changed (normalization, sound) is not found; a short one is only taken
+        // close by, so that a miss does not push the later words past their places.
         Span src{from, from};
         if (!it.surface.empty()) {
             const size_t at = line.src.find(it.surface, from);
-            if (at != std::string::npos) {
+            const size_t reach = std::max<size_t>(24, 4 * it.surface.size());
+            if (at != std::string::npos && at - from <= reach) {
                 const size_t length = std::max(it.surface.size(), static_cast<size_t>(std::max(it.length, 0)));
                 src = {static_cast<uint32_t>(at), static_cast<uint32_t>(std::min(at + length, line.src.size()))};
                 from = src.end;
@@ -211,7 +214,10 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             node = KNode{};
             node.kind = KK::Raw;
             node.src = src;
-            node.lemma = doc.I(target);
+            // The carried text without 0.7.x's marker families.
+            std::string carried(target);
+            for (size_t m; (m = MarkerAt(carried)) != std::string::npos;) carried.erase(m, 4);
+            node.lemma = doc.I(carried);
             d.kind = Ev::Fallback;
             d.because.push_back(doc.I(d.rule ? std::string(doc.S(d.rule)) : std::string()));
             d.rule = doc.I("code:lift");
