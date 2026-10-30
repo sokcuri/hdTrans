@@ -16,6 +16,7 @@ neg.mot	못	neg=mot
 aux.neg	않다	neg=ji-anh
 aux.neg-mot	못하다	neg=ji-mot
 conn.neg	-지	before 않다, 못하다
+aux.prohib	말다	neg=ji-ma: -지 말다
 family.jima	jima	neg=ji-ma: the -지 마 endings
 nom.geot	것	ctype=nom:geot
 conn.default	-고	a connective without rel or eomi

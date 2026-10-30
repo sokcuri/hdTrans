@@ -484,6 +484,7 @@ std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, 
         case CType::adn: {
             std::string rel = n.rel;
             if (rel.empty()) rel = n.tense == Tense::past ? "past" : "nonpast";
+            if (rel == "nonpast" && n.tense == Tense::past) rel = "past";
             row = FindEomi(t, "adn", rel, "", "", p);
             break;
         }
@@ -491,7 +492,7 @@ std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, 
             row = FindEomi(t, "nom", n.rel.empty() ? "m" : n.rel, "", "", p);
             break;
         case CType::quote:
-            row = FindEomi(t, "quote", n.rel == "adn" ? "adn" : mood, "", "", p);
+            row = FindEomi(t, "quote", !n.rel.empty() ? n.rel : mood, "", "", p);
             break;
         case CType::stem:
             finalForm = "~";
@@ -506,7 +507,8 @@ std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, 
         finalForm = t.G("final.fallback");
     }
     if (x.hon && !honIncl) forms.push_back(t.G("pre.hon"));
-    if (n.tense == Tense::past && n.ctype != CType::adn && n.ctype != CType::stem) forms.push_back(t.G("pre.past"));
+    // past on an adnominal only before -ㄹ (갔을); the other adnominals carry tense in their row (간, 갔던)
+    if (n.tense == Tense::past && n.ctype != CType::stem && (n.ctype != CType::adn || n.rel == "fut")) forms.push_back(t.G("pre.past"));
     if (n.modal == "gess") forms.push_back(t.G("pre.gess"));
     forms.push_back(finalForm);
     std::string hostArg;
@@ -555,10 +557,10 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
                 bool consumeNext = false;
                 {
                     const SpokenRow* sr = SpokenFor(t, n.lemma, next, nextCls);
-                    if (sr && !x.spoken && sr->mode != "always") sr = nullptr;
+                    if (sr && !x.spoken && sr->mode != "always" && sr->mode != "always-fuse") sr = nullptr;
                     if (sr) {
                         text = sr->result;
-                        if (sr->mode == "fuse") fusePending = true;
+                        if (sr->mode == "fuse" || sr->mode == "always-fuse") fusePending = true;
                         else if (next && next->kind == Kind::P && sr->next != "-") consumeNext = true;
                     }
                 }

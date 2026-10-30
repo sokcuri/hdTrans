@@ -71,7 +71,6 @@ lemma	kind	attach	note
 씩	suffix	always	하나씩
 씨	dep	never	김 씨
 군	dep	never	김 군
-제	prefix	next	제1장
 있다	aux	never	하고 있다, 앉아 있다
 주다	aux	never	해 주다
 보다	aux	never	해 보다

@@ -250,6 +250,71 @@ id	slot	family	mood	level	pos	form	flags	note
 -습니까	final	jiyo	q	hapsyo	*	습니까/ㅂ니까		갑니까
 -지	final	jiyo	-	hao	*	지		가지
 -지	final	jiyo	-	hage	*	지		가지
+-deonga	final	deonga	-	haera	*	던가		-던가 (retrospective question)
+-deonga	final	deonga	-	hae	*	던가		-던가 (retrospective question)
+-deonga	final	deonga	-	haeyo	*	던가요		-던가 (retrospective question)
+-deonga	final	deonga	-	hapsyo	*	던가요		-던가 (retrospective question)
+-deonga	final	deonga	-	hao	*	던가		-던가 (retrospective question)
+-deonga	final	deonga	-	hage	*	던가		-던가 (retrospective question)
+-nikka	final	nikka	-	haera	*	(으)니까		-니까 as a sentence end
+-nikka	final	nikka	-	hae	*	(으)니까		-니까 as a sentence end
+-nikka	final	nikka	-	haeyo	*	(으)니까요		-니까 as a sentence end
+-nikka	final	nikka	-	hapsyo	*	(으)니까요		-니까 as a sentence end
+-nikka	final	nikka	-	hao	*	(으)니까		-니까 as a sentence end
+-nikka	final	nikka	-	hage	*	(으)니까		-니까 as a sentence end
+-eoyaji	final	eoyaji	-	haera	*	어야지		-어야지 (must)
+-eoyaji	final	eoyaji	-	hae	*	어야지		-어야지 (must)
+-eoyaji	final	eoyaji	-	haeyo	*	어야죠		-어야지 (must)
+-eoyaji	final	eoyaji	-	hapsyo	*	어야죠		-어야지 (must)
+-eoyaji	final	eoyaji	-	hao	*	어야지		-어야지 (must)
+-eoyaji	final	eoyaji	-	hage	*	어야지		-어야지 (must)
+-jiman	final	jiman	-	haera	*	지만		-지만 as a sentence end
+-jiman	final	jiman	-	hae	*	지만		-지만 as a sentence end
+-jiman	final	jiman	-	haeyo	*	지만요		-지만 as a sentence end
+-jiman	final	jiman	-	hapsyo	*	지만요		-지만 as a sentence end
+-jiman	final	jiman	-	hao	*	지만		-지만 as a sentence end
+-jiman	final	jiman	-	hage	*	지만		-지만 as a sentence end
+-danikka	final	danikka	-	haera	V	는다니까/ㄴ다니까		-다니까 (insisting)
+-danikka	final	danikka	-	haera	C	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	haera	N	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	haera	*	다니까		-다니까 (insisting)
+-danikka	final	danikka	-	hae	V	는다니까/ㄴ다니까		-다니까 (insisting)
+-danikka	final	danikka	-	hae	C	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	hae	N	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	hae	*	다니까		-다니까 (insisting)
+-danikka	final	danikka	-	haeyo	V	는다니까요/ㄴ다니까요		-다니까 (insisting)
+-danikka	final	danikka	-	haeyo	C	라니까요		-다니까 (insisting)
+-danikka	final	danikka	-	haeyo	N	라니까요		-다니까 (insisting)
+-danikka	final	danikka	-	haeyo	*	다니까요		-다니까 (insisting)
+-danikka	final	danikka	-	hapsyo	V	는다니까요/ㄴ다니까요		-다니까 (insisting)
+-danikka	final	danikka	-	hapsyo	C	라니까요		-다니까 (insisting)
+-danikka	final	danikka	-	hapsyo	N	라니까요		-다니까 (insisting)
+-danikka	final	danikka	-	hapsyo	*	다니까요		-다니까 (insisting)
+-danikka	final	danikka	-	hao	V	는다니까/ㄴ다니까		-다니까 (insisting)
+-danikka	final	danikka	-	hao	C	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	hao	N	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	hao	*	다니까		-다니까 (insisting)
+-danikka	final	danikka	-	hage	V	는다니까/ㄴ다니까		-다니까 (insisting)
+-danikka	final	danikka	-	hage	C	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	hage	N	라니까		-다니까 (insisting)
+-danikka	final	danikka	-	hage	*	다니까		-다니까 (insisting)
+-ryeona	final	ryeona	-	haera	*	(으)려나		-려나 (wondering)
+-ryeona	final	ryeona	-	hae	*	(으)려나		-려나 (wondering)
+-ryeona	final	ryeona	-	haeyo	*	(으)려나요		-려나 (wondering)
+-ryeona	final	ryeona	-	hapsyo	*	(으)려나요		-려나 (wondering)
+-ryeona	final	ryeona	-	hao	*	(으)려나		-려나 (wondering)
+-ryeona	final	ryeona	-	hage	*	(으)려나		-려나 (wondering)
+-deonde	final	deonde	-	haera	*	던데		-던데 as a sentence end
+-deonde	final	deonde	-	hae	*	던데		-던데 as a sentence end
+-deonde	final	deonde	-	haeyo	*	던데요		-던데 as a sentence end
+-deonde	final	deonde	-	hapsyo	*	던데요		-던데 as a sentence end
+-deonde	final	deonde	-	hao	*	던데		-던데 as a sentence end
+-deonde	final	deonde	-	hage	*	던데		-던데 as a sentence end
+-ra	final	ra	-	haera	*	(으)라		-(으)라 (written imperative)
+-ra	final	ra	-	hae	*	(으)라		-(으)라 (written imperative)
+-ra	final	ra	-	hao	*	(으)라		-(으)라 (written imperative)
+-ra	final	ra	-	hage	*	(으)라		-(으)라 (written imperative)
+-bsio	final	bsio	-	hapsyo	*	(으)ㅂ시오		-ㅂ시오 after -시- (주십시오 read as 주+시+ㅂ시오)
 # ---------------------------------------------------------------- persona variants (ko/persona.tsv picks them)
 -구먼	final	gumeon	-	haera	V	는구먼		가는구먼
 -구먼	final	gumeon	-	haera	*	구먼		좋구먼
@@ -319,6 +384,19 @@ id	slot	family	mood	level	pos	form	flags	note
 -다든가	conn	or-quote	-	-	*	다든가		좋다든가
 -습니다만	conn	but-formal	-	-	*	습니다만/ㅂ니다만		갑니다만
 -지요	final	jiyo	-	haeyo	*	지요		가지요 (uncontracted 죠)
+-라	conn	not-but	-	-	C	라		학생이 아니라 (A가 아니라 B)
+-라	conn	not-but	-	-	N	라		아니라
+-라도	conn	even-cop	-	-	C	라도		학생이라도
+-라도	conn	even-cop	-	-	N	라도		아니라도
+-든	conn	or-any-2	-	-	*	든		가든
+-든가	conn	or-any-3	-	-	*	든가		가든가
+-던가	conn	retro-q	-	-	*	던가		가던가
+-던지	conn	retro-whether	-	-	*	던지		가던지
+-던데	conn	retro-bg	-	-	*	던데		가던데
+-려	conn	purpose-2	-	-	*	(으)려		가려, 먹으려
+-어야지	conn	must-2	-	-	*	어야지		가야지 (되다)
+-려는	adn	purpose	-	-	*	(으)려는		가려는, 먹으려는
+-자는	quote	adn-prop	-	-	*	자는		가자는
 # ---------------------------------------------------------------- quote connectives (-다고 하다)
 -다고	quote	decl	-	-	V	는다고/ㄴ다고		간다고
 -다고	quote	decl	-	-	*	다고		좋다고, 갔다고

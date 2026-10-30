@@ -105,3 +105,22 @@ particle	에도	lex:에도
 particle	에서는	lex:에서는
 particle	으로는	lex:(으)로는
 particle	로는	lex:(으)로는
+dep	동안
+pred	아니다
+particle	뿐	lex:뿐
+particle	만이	lex:만이
+particle	만은	lex:만은
+particle	마저	lex:마저
+particle	조차	lex:조차
+particle	이라든가	lex:(이)라든가
+jima	마	hae
+jima	마라	haera
+jima	마요	haeyo
+jima	마세요	haeyo
+jima	마십시오	hapsyo
+fused	건	top
+fused	걸	obj
+fused	게	subj
+fused	겁	cop
+pred	어떻다
+pred	나다

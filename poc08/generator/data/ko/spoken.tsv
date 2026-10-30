@@ -9,7 +9,7 @@
 #           that is not a particle, including nothing)
 #   result  the fused form. With `fuse` the host takes the copula's 이 into itself (거+ㄴ데 → 건데, 거+ㅂ니다 → 겁니다)
 #   mode    replace: result replaces host and particle; fuse: result replaces the host, the copula fuses;
-#           always: like replace, in narration too (obligatory forms)
+#           always: like replace, in narration too (obligatory forms); always-fuse: fuse, in narration too
 host	next	result	mode	example
 것	subj	게	replace	그런 것이 → 그런 게
 것	top	건	replace	그런 것은 → 그런 건
@@ -41,6 +41,7 @@ host	next	result	mode	example
 거	subj	게	replace	거가 → 게
 거	top	건	replace	거는 → 건
 거	obj	걸	replace	거를 → 걸
+터	COP	테	always-fuse	할 터인데 → 할 텐데, 할 터이니 → 할 테니 (standard contraction)
 무엇	obj	뭘	replace	무엇을 → 뭘
 무엇	subj	뭐가	replace	무엇이 → 뭐가
 무엇	COP	뭐	fuse	무엇이야 → 뭐야

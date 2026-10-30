@@ -63,7 +63,9 @@ std::vector<std::pair<std::string, Bundle>> Paradigm(const Tables& t, const std:
         for (Mood mood : moods)
             for (int pre = 0; pre < 8; ++pre) {
                 const bool past = pre & 1, gess = pre & 2, hon = pre & 4;
-                if ((row.slot == "adn" || row.slot == "stem" || row.slot == "nom") && (past || gess)) continue;
+                if (row.slot == "stem" && (past || gess)) continue;
+                if ((row.slot == "adn" || row.slot == "nom") && (gess || (past && row.family != "fut" && row.family != "m" && row.family != "gi")))
+                    continue;
                 Bundle b;
                 Node& v = b.node;
                 v.kind = Kind::V;
@@ -90,8 +92,7 @@ std::vector<std::pair<std::string, Bundle>> Paradigm(const Tables& t, const std:
                     v.rel = row.family;
                 } else if (row.slot == "quote") {
                     v.ctype = CType::quote;
-                    if (row.family == "adn") v.rel = "adn";
-                    else ParseMood(row.family, v.mood);
+                    if (!ParseMood(row.family, v.mood)) v.rel = row.family;
                 } else if (row.slot == "stem") {
                     v.ctype = CType::stem;
                 } else {

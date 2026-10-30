@@ -50,13 +50,16 @@
 {"case": "gen-052", "kir2": [{"kind": "N", "lemma": "학생", "id": 1}, {"kind": "V", "lemma": "이다", "ctype": "quote", "id": 2}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "학생이라고"}
 {"case": "gen-053", "kir2": [{"kind": "V", "lemma": "아니다", "ctype": "quote", "id": 1}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "아니라고"}
 {"case": "gen-054", "kir2": [{"kind": "V", "lemma": "만들다", "aspect": "result", "passive": false, "id": 1}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "만들어 있다"}
-{"case": "gen-055", "kir2": [{"kind": "N", "lemma": "제", "id": 1}, {"kind": "N", "lemma": "1", "id": 2}, {"kind": "N", "lemma": "장", "id": 3}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "제1장"}
-{"case":"gen-056","kir2":[{"id":1,"kind":"N","lemma":"문"},{"id":2,"kind":"P","kase":"subj"},{"id":3,"kind":"V","lemma":"사용하다","passive":true,"tense":"past"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"문이 사용됐다"}
-{"case":"gen-057","kir2":[{"id":1,"kind":"V","lemma":"느끼다","spont":true}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"느껴진다"}
-{"case":"gen-058","kir2":[{"id":1,"kind":"V","lemma":"가다","potential":true}],"lev":[{"utt":0,"level":"hae","narration":false}],"out":"갈 수 있어"}
-{"case":"gen-059","kir2":[{"id":1,"kind":"V","lemma":"가다","potential":true,"neg":"ji-anh","tense":"past"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"갈 수 없었다"}
-{"case":"gen-060","kir2":[{"id":1,"kind":"V","lemma":"잊다","ctype":"conn","rel":"sothat"},{"id":2,"kind":"V","lemma":"적다","tense":"past"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"잊도록 적었다"}
-{"case":"gen-061","kir2":[{"id":1,"kind":"V","lemma":"울다","ctype":"conn","rel":"like"},{"id":2,"kind":"V","lemma":"웃다","tense":"past"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"울듯이 웃었다"}
-{"case":"gen-062","kir2":[{"id":1,"kind":"V","lemma":"가다","ctype":"conn","rel":"even-try"},{"id":2,"kind":"N","lemma":"소용"},{"id":3,"kind":"V","lemma":"없다"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"가 봤자 소용 없다"}
-{"case":"gen-063","kir2":[{"id":1,"kind":"V","lemma":"행복하다","eomi":"wish"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"행복하기를"}
-{"case":"gen-064","kir2":[{"id":1,"kind":"V","lemma":"먹다","causative":true,"tense":"past"}],"lev":[{"utt":0,"level":"haera","narration":true}],"out":"먹게 했다"}
+{"case": "gen-055", "kir2": [{"kind": "N", "lemma": "제", "id": 1}, {"kind": "N", "lemma": "1", "id": 2, "glue": true}, {"kind": "N", "lemma": "장", "id": 3}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "제1장"}
+{"case": "gen-056", "kir2": [{"id": 1, "kind": "N", "lemma": "문"}, {"id": 2, "kind": "P", "kase": "subj"}, {"id": 3, "kind": "V", "lemma": "사용하다", "passive": true, "tense": "past"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "문이 사용됐다"}
+{"case": "gen-057", "kir2": [{"id": 1, "kind": "V", "lemma": "느끼다", "spont": true}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "느껴진다"}
+{"case": "gen-058", "kir2": [{"id": 1, "kind": "V", "lemma": "가다", "potential": true}], "lev": [{"utt": 0, "level": "hae", "narration": false}], "out": "갈 수 있어"}
+{"case": "gen-059", "kir2": [{"id": 1, "kind": "V", "lemma": "가다", "potential": true, "neg": "ji-anh", "tense": "past"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "갈 수 없었다"}
+{"case": "gen-060", "kir2": [{"id": 1, "kind": "V", "lemma": "잊다", "ctype": "conn", "rel": "sothat"}, {"id": 2, "kind": "V", "lemma": "적다", "tense": "past"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "잊도록 적었다"}
+{"case": "gen-061", "kir2": [{"id": 1, "kind": "V", "lemma": "울다", "ctype": "conn", "rel": "like"}, {"id": 2, "kind": "V", "lemma": "웃다", "tense": "past"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "울듯이 웃었다"}
+{"case": "gen-062", "kir2": [{"id": 1, "kind": "V", "lemma": "가다", "ctype": "conn", "rel": "even-try"}, {"id": 2, "kind": "N", "lemma": "소용"}, {"id": 3, "kind": "V", "lemma": "없다"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "가 봤자 소용 없다"}
+{"case": "gen-063", "kir2": [{"id": 1, "kind": "V", "lemma": "행복하다", "eomi": "wish"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "행복하기를"}
+{"case": "gen-064", "kir2": [{"id": 1, "kind": "V", "lemma": "먹다", "causative": true, "tense": "past"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "먹게 했다"}
+{"case": "gen-065", "kir2": [{"id": 1, "kind": "V", "lemma": "가다", "ctype": "adn", "rel": "fut"}, {"id": 2, "kind": "N", "lemma": "터", "dep": true}, {"id": 3, "kind": "V", "lemma": "이다", "ctype": "conn", "eomi": "-는데"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "갈 텐데"}
+{"case": "gen-066", "kir2": [{"id": 1, "kind": "V", "lemma": "가다", "ctype": "conn", "eomi": "-지"}, {"id": 2, "kind": "P", "kase": "lex", "lemma": "도"}, {"id": 3, "kind": "V", "lemma": "않다", "aux": true, "tense": "past"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "가지도 않았다"}
+{"case": "gen-067", "kir2": [{"id": 1, "kind": "N", "lemma": "학생"}, {"id": 2, "kind": "V", "lemma": "아니다", "ctype": "conn", "eomi": "-라"}, {"id": 3, "kind": "N", "lemma": "선생"}, {"id": 4, "kind": "V", "lemma": "이다"}], "lev": [{"utt": 0, "level": "haera", "narration": true}], "out": "학생 아니라 선생이다"}
