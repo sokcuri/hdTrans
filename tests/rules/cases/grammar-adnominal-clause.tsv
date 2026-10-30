@@ -14,7 +14,7 @@ cx:adnominal-clause:20	力出せないみたいだね	!rule:cx:adnominal-clause:
 cx:adnominal-clause:20	お金がないみたい	돈이 없는 것 같다	keep	rewrites
 cx:adnominal-clause:30	宿題を死んじゃうのだ	숙제를 죽어버리는 것이다	fix	rewrites
 cx:adnominal-clause:30	交換しちゃったものを今更消せ	교환해버린 것을 이제 와서 지워라	fix	rewrites
-cx:adnominal-clause:30	佐藤くんを横取りしちゃったこと	has:횡령해버린 일	fix	rewrites
+cx:adnominal-clause:30	佐藤くんを横取りしちゃったこと	has:가로채기해버린 일	fix	rewrites
 cx:adnominal-clause:30	我慢しなきゃいけないこともある	참아야 하는 것도 있다	fix	rewrites
 cx:adnominal-clause:30	殺されちゃうんじゃない？	살해당해버리는 것이 아니야?	fix	rewrites
 cx:adnominal-clause:30	安心してると、こうなっちゃうのよね。	안심하고 있으면, 이렇게 되어버리는 것이지.	fix	rewrites

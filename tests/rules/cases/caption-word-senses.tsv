@@ -1,0 +1,51 @@
+rule	input	expected	kind	layer
+sense:散る	散ってくれ。	흩어져 줘.	fix	senses
+sense:散る	みんな、それぞれ思い思いの方向へ散っていく。	모두, 각각 제각각의 방향에 흩어져 간다.	fix	senses
+sense:散る	住民に対応するため方々に散っていきました。	주민에게 대응하기 위해 분들에게 흩어져 갔습니다.	fix	senses
+sense:散る	桜が散る	벚꽃이 진다	keep	senses
+sense:散る	この戦いで散った将兵への黙とうをささげた。	이 싸움으로 진 장병에 대한 묵도를 바쳤다.	keep	senses
+sense:散る	火花が散る	불꽃이 튄다	keep	senses
+sense:卵	中華麺は一般的に卵とかも混ぜたりして	중화면은 일반적으로 계란이라든지도 섞거나 해	fix	senses
+sense:卵	鳥インフルエンザの影響で卵の生産量が減り	조류 독감의 영향으로 계란의 생산량이 줄어들어	fix	senses
+sense:卵	卵や肉など､料理に欠かせない食材	계란이나 고기 등, 요리에 빠뜨릴 수 없는 식재료	fix	senses
+sense:卵	ボウルに卵をほぐします。	볼에 계란을 풉니다.	fix	senses
+sense:卵	トーストもミルクも卵もあるじゃないか	토스트도 밀크도 계란도 있잖아	fix	senses
+sense:卵	それは絶滅危惧種の鳥の卵なのです！	그것은 멸종위기종의 새의 알인 겁니다!	keep	senses
+sense:卵	僕らは 卵から生まれた少年	우리는 알로부터 태어난 소년	keep	senses
+sense:卵	鳥が卵を産んだ。	새가 알을 낳았다.	keep	senses
+sense:卵	あっ　卵！	앗 알!	keep	senses
+sense:呼びかける	投票を呼びかけ続けています。	투표를 계속 촉구하고 있습니다.	fix	senses
+sense:呼びかける	写真を公開して情報提供を呼びかけました。	사진을 공개해 정보 제공을 촉구했습니다.	fix	senses
+sense:呼びかける	一度、投降を呼びかけなさい。	한 번, 투항을 촉구해.	fix	senses
+sense:呼びかける	呼びかけると顔を上げる。	부르면 고개를 든다.	keep	senses
+sense:呼びかける	グリッドマンが俺に呼びかけてる	그리드맨이 나에게 부르고 있다	keep	senses
+sense:進む	人口減少が進み将来的な	인구감소가 진행되어 장래적인	fix	senses
+sense:進む	iPS細胞の研究がすごく進んでいます。	iPS 세포 연구가 정말 진행되고 있습니다.	fix	senses
+sense:進む	前に進む	앞으로 나아간다	keep	senses
+sense:進む	計画が進んでいる。	계획이 나아가고 있다.	keep	senses
+sense:打つ	注射打ったらヒーローになれるよ｡	주사 놓으면 히어로가 될 수 있어.	fix	senses
+sense:打つ	釘を打つ	못을 친다	keep	senses
+L9600	過去最高の１リットル当たり	과거 최고의 1리터당	fix	local
+L9600	当たり！	정답!	keep	local
+L9600	これが当たりだ。	이것이 당이다.	keep	local
+L1293	濃い青で示したところは0度未満。	진한 파랑으로 가리킨 곳은 0도 미만.	fix	local
+L1293	十度も言った。	열 번이나 말했다.	keep	local
+lookup:無糖	おいしい無糖	맛있는 무가당	fix	defaults
+lookup:積み重ね	８年間の積み重ねがついに花開く！	8년간의 축적이 마침내 꽃핀다!	fix	defaults
+lookup:横取り	１０万円 横取りタイム	10만엔 가로채기 타임	fix	defaults
+lookup:傷む	体が傷んでしまっては何にもならない。	몸이 상해버려 아무것도 안된다.	fix	defaults
+lookup:傷む	ﾎｺﾘでも髪って傷むんだよ｡	먼지라도 머리카락은 상해.	fix	defaults
+lookup:取り組む	竹内教授が取り組んだのは…。	타케우치 교수가 몰두한 것은….	fix	defaults
+lookup:取り組み	欠かせない取り組みなのです。	빠뜨릴 수 없는 노력인 것입니다.	fix	defaults
+lookup:ちくわ	ちくわにしか見えませんけど。	어묵밖에 보이지 않지만.	fix	defaults
+lookup:バレー	春の高校バレー福島県代表決定戦。	봄의 고등학교 배구 후쿠시마현 대표 결정전.	fix	defaults
+dict:lexical-caption-senses	一方の列車に、もう一方の列車の接近を	한편의 열차에, 다른 한쪽 열차 접근을	fix	lookup
+dict:lexical-caption-senses	空いているもう片方の手で	비어 있는 다른 한쪽 손으로	fix	lookup
+dict:lexical-caption-senses	前へお越しください。	앞으로 와 주세요.	fix	lookup
+dict:lexical-caption-senses	スタジアムにお越しのお客様！	스타디움에 오신 손님!	fix	lookup
+dict:lexical-caption-senses	お近くにお越しの際はぜひ お立ち寄りください	근처에 오실 때는 꼭 들러 주세요	fix	lookup
+dict:lexical-caption-senses	公式認定員の方にもお越しいただきました。	공식 인정원에게도 와 주셨습니다.	fix	lookup
+dict:lexical-caption-senses	あっどうもわざわざお越しくださいまして｡	아아무래도 일부러 와 주셔서.	fix	lookup
+dict:lexical-caption-senses	彼は 金の卵を産むガチョウを殺してしまった。	그는 황금알을 낳는 거위를 죽여버렸다.	fix	lookup
+dict:lexical-caption-senses	本当に親身になって考えてるんですね。	정말 자기 일처럼 생각하고 있어요.	fix	lookup
+dict:lexical-caption-senses	一方の列車に	한편의 열차에	keep	lookup

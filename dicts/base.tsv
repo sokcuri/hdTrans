@@ -31795,7 +31795,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ちくちくと痛	따끔따금 아&Aa@	E425			GN				jisjk:373757		
 ちくび	젖꼭지	I110			GN				jisjk:106299		
 ちくりと	조금	E311			GN				jisjk:720		
-ちくわ	생선살 꼬치구이	N110	VFd		GN				jisjk:153352		
+ちくわ	어묵	N110	VFd		GN				jisjk:153352		
 ちぐはぐ	짝짝이	I110			GN				jisjk:41284		
 ちぐはぐ	조화가 잘 안 %D5@	G8U0			GN				jisjk:140384		
 ちけっと	티켓	I110	VMo		GN				jisjk:119130		
@@ -75834,7 +75834,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バレンタインデー	발렌타인데이	N110	UMe		GN				jisjk:53574		
 バレンツァーナ	발렌시아	N130	QPN		GN				jisjk:365217		
 バレンティノガラバーニ	발렌티노 가라바니	N110	VCp		GN				jisjk:132652		
-バレー	발레	N110	VRw		GN				jisjk:53565		
+バレー	배구	N110	VRw		GN				jisjk:53565		
 バレージ	바레지	N130	QPN		GN				jisjk:367192		
 バレード	퍼레이드	N110			GN				jisjk:53566		
 バレーボール	발리볼	N110	VRw		GN				jisjk:53567		
@@ -127059,7 +127059,7 @@ ttt	ttt	K110			GN				jisjk:201744
 債鬼	빚쟁이	N110	VHn		GN				jisjk:184190		
 傷	상처	N110	UTi		GN				jisjk:115847		
 傷	손상&C6@	M425			GN				jisjk:140794		
-傷	아&Aa@	M425	VBpSFl		GN				jisjk:140801		
+傷	상&AV@	M425	VBpSFl		GN				jisjk:140801		
 傷	상&AV@	M415	VFd		GN				jisjk:140802		
 傷	상	N110		On	GN				jisjk:258911		
 傷い	상이	N110			GN				jisjk:190529		
@@ -149749,9 +149749,9 @@ ttt	ttt	K110			GN				jisjk:201744
 取り紛れ	정신을 빼앗&A2@	M427			GN				jisjk:146370		
 取り終え	다 끝마&AO@	M427			GN				jisjk:143758		
 取り組	힘&AF@	M425			GN				jisjk:146030		
-取り組	맞&HC@	M425	VHnVRw		GN				jisjk:146037		
+取り組	몰두&AV@	M425	VHnVRw		GN				jisjk:146037		
 取り組	임&AV@	M425	XXX		GN	2482	||1 &&2 S-1== "に" S-2== "R事"	取り組를 事로 끝나는 말과 に 뒤에서 임하다로 고른다. (미발동: rare-word)	jisjk:266181		
-取り組み	대처	N110		Hd	GN				jisjk:13086		
+取り組み	노력	N110		Hd	GN				jisjk:13086		
 取り組み	대결	N110			GN	2522	||1 &&3 P-1== "2**" S-2== "相撲" P-2== "1**"	명사 「相撲」와 조사 뒤에서 「取り組み」를 ‘대결’로 고른다. (미발동: rare-word)	jisjk:266332		
 取り組みについて	대전에 관하여	N110			GN				jisjk:151511		
 取り組み姿勢	 대처자세	N110			GN				jisjk:152795		
@@ -200525,7 +200525,7 @@ ttt	ttt	K110			GN				jisjk:201744
 度	3 때	S500	UMe		GN				jisjk:4502		
 度	구제&AV@	M439			GN				jisjk:4503		
 度	번	N110		Ct	GN	1109	||1 &&4 G-1== "NjNd" A-2== "UMe" G-2== "Ct" G-3== "NjNd"	앞에 시간 단위 조수사와 수사가 교대로 놓이면 度를 횟수 단위 번으로 고른다. (미발동: rare-context)	jisjk:116079		
-度	도	N110	UXt	Z7TuOnCt	GN	1293	||5 &&2 G-1== "NdNj" ||6 S-2== "R経" S-2== "零上" S-2== "零下" S-2== "マイナス" S-2== "氷点下" S-2== "摂氏" &&2 ||2 S+1== "以下" S+1== "以上" P+1== "1**" G-3== "NdNj" &&3 G-1== "NdNj" P-2== "2**" ||5 S-3== "零上" S-3== "零下" S-3== "マイナス" S-3== "氷点下" S-3== "熱" &&4 G-1== "NdNj" P-2== "2**" ||4 S-3== "熱" S-3== "温度" S-3== "気温" S-3== "R水" P-3== "1**"	度를 온도·경도·수치 범위를 나타내는 앞뒤 표현에 따라 '도'로 선택한다.	jisjk:116947		
+度	도	N110	UXt	Z7TuOnCt	GN	1293	||5 &&2 G-1== "NdNj" ||6 S-2== "R経" S-2== "零上" S-2== "零下" S-2== "マイナス" S-2== "氷点下" S-2== "摂氏" &&2 ||3 S+1== "以下" S+1== "以上" S+1== "未満" P+1== "1**" G-3== "NdNj" &&3 G-1== "NdNj" P-2== "2**" ||5 S-3== "零上" S-3== "零下" S-3== "マイナス" S-3== "氷点下" S-3== "熱" &&4 G-1== "NdNj" P-2== "2**" ||4 S-3== "熱" S-3== "温度" S-3== "気温" S-3== "R水" P-3== "1**"	度를 온도·경도·수치 범위를 나타내는 앞뒤 표현에 따라 '도'로 선택한다.	jisjk:116947		
 度	제도&AV@	M449	UCl		GN				jisjk:146691		
 度	때	N110	UMe		GN				jisjk:265109		
 度	도	N110	UXt	Ct	GN	3513	||5 &&3 G-1== "NjNd" S+1== "あ" P+1== "4**" &&4 G-1== "NjNd" S+1== "と" S+2== "あ" P+2== "4**" ||2 S+3== "暑さ" S+3== "寒さ" &&5 P-1== "1**" G-1== "NjNd" P-2== "2**" P-3== "1**" A-3== "UXt" A+2== "VFr"	度가 지정 수량·날씨·온도 문맥에 있으면 온도 단위 도를 고른다. (미발동: rare-context)	jisjk:343867		
@@ -203079,7 +203079,7 @@ ttt	ttt	K110			GN				jisjk:201744
 当たって砕け	일단 부딪쳐 &AY@	M427			GN				jisjk:117062		
 当たらずと	해당되지 않는다고 &AV@	M429			GN				jisjk:148059		
 当たらず障らず	무해 무득	N110			GN				jisjk:227357		
-当たり	당	N311		Ct	GN				jisjk:1535		
+当たり	당	N311		Ct	GN	9600	||1 G-1== "Ct"	조수사나 단위 뒤의 当たり는 문장 끝에서도 붙여 쓰는 당으로 고른다(1リットル当たり 1리터당).	jisjk:1535		
 当たり	해당하고	N310		J1	GN				jisjk:1536		
 当たり	정답	N300			GN	4818	||1 G+0== "Ow"	문장 끝의 当たり를 정답으로 고른다.	jisjk:373780		
 当たりがい	붙임성이 $DE@	H7U0			GN				jisjk:117063		
@@ -247928,7 +247928,7 @@ ttt	ttt	K110			GN				jisjk:201744
 横割本町	요코와리혼쵸	I130	QCTVPl		GN				jisjk:337680		
 横北町	요코기타마치	N130	QCTVPl		GN				jisjk:337485		
 横十間川	요코짓켄가와	I110	QCT		GN				jisjk:89874		
-横取り	횡령	I110	HGu	Hd	GN				jisjk:89881		
+横取り	가로채기	I110	HGu	Hd	GN				jisjk:89881		
 横合い	측면	I110	VPl		GN				jisjk:89905		
 横向き	옆쪽	I110	VPlVTpUDr		GN				jisjk:89906		
 横向温泉	요코무키온센	I110	QCT		GN				jisjk:89907		
@@ -268456,7 +268456,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無精卵	무정란	I110			GN				jisjk:69163		
 無精子症	무정자증	I110	UTi		GN				jisjk:69165		
 無精液症	무정액증	I110	UTi		GN				jisjk:69164		
-無糖	무당	N110			GN				jisjk:253178		
+無糖	무가당	N110			GN				jisjk:253178		
 無糖化	무당화	I110			GN				jisjk:99573		
 無糖練乳	무당연유	N110	VFd		GN				jisjk:205378		
 無糸分裂	무사 분열	N110	VAm		GN				jisjk:253070		
@@ -291378,7 +291378,7 @@ ttt	ttt	K110			GN				jisjk:201744
 積み重な	겹겹이 쌓&AJ@	M418			GN				jisjk:94675		
 積み重ね	겹쳐 &FP@	M437			GN				jisjk:94676		
 積み重ね	쌓아 올&AA@	M447			GN	1491	||1 S-2== "努力"	두 단어 앞이 「努力」이면 「積み重ね」를 ‘쌓아 올리다’로 고른다. (미발동: rare-word)	jisjk:143504		
-積み重ね	시행착오	N110			GN				jisjk:266300		
+積み重ね	축적	N110			GN				jisjk:266300		
 積み重ねられ	쌓&AJ@	M427			GN				jisjk:148475		
 積み金	적금	I110			GN				jisjk:106127		
 積み降ろし	하역	N110		Hd	GN				jisjk:244114		
@@ -293874,7 +293874,7 @@ ttt	ttt	K110			GN				jisjk:201744
 竹貫	타카누키	N130	QCTVPl		GN				jisjk:305761		
 竹越	타케코시	N130	QCTVPl		GN				jisjk:306324		
 竹越与三郎	다케고시요사부로	N110	VHn		GN				jisjk:241280		
-竹輪	생선살 꼬치구이	N110	VFd		GN				jisjk:153351		
+竹輪	어묵	N110	VFd		GN				jisjk:153351		
 竹輪麩	지쿠와부	N110	VFd		GN				jisjk:242589		
 竹辺町	타케베쵸	N130	QCTVPl		GN				jisjk:306509		
 竹迫	타카바	N130	QCTVPl		GN				jisjk:305857		

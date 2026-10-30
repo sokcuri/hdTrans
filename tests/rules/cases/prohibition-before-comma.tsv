@@ -11,4 +11,4 @@ normalize:prohibition-nna	「真似すんな、小ザル！」	「흉내내지 �
 normalize:prohibition-nna	「泣きそうな顔すんなっ！　ジョークだから！」	「울 것 같은 얼굴 하지 마! 농담이니까!」	fix	normalize
 normalize:prohibition-nna	「オメェら抜け駆けすんなッ！」	「너희 빠지고 달리고 하지 마!」	fix	normalize
 normalize:prohibition-nna	大した事ないだろ？心配すんな・・・	별일 아니지? 걱정하지 마···	fix	normalize
-normalize:prohibition-nna	交渉はすんなり進んだ。	교섭은 순조롭게 나아갔다.	keep	normalize
+normalize:prohibition-nna	交渉はすんなり進んだ。	교섭은 순조롭게 진행되었다.	keep	normalize
