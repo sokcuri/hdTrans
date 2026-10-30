@@ -304,8 +304,20 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
 
 // Whether a dictionary's name spells written, a reading as the registry writes it, but for the
 // conventions of SameSound and spaces, and し, じ and ち with a glide written without it
-// (순푸테이 코아사 for しゅんぷうていこあさ).
+// (순푸테이 코아사 for しゅんぷうていこあさ, 주 for じゅ). A name that writes ㅈ where the reading has
+// ㅊ, or ㅊ for ㅈ, spells another sound (주야 for 츄야 of ちゅうや).
 bool SpellsReading(std::string_view written, std::string_view name) {
+    auto affricates = [](std::string_view s) {
+        std::string out;
+        while (!s.empty()) {
+            const text::Rune ru = text::DecodeRune(s);
+            s.remove_prefix(ru.size == 0 ? 1 : ru.size);
+            if (const auto syl = text::Split(ru.cp); syl && (syl->initial == 12 || syl->initial == 14)) {
+                out += syl->initial == 12 ? 'j' : 'c';
+            }
+        }
+        return out;
+    };
     auto key = [](std::string_view s) {
         std::string out;
         while (!s.empty()) {
@@ -313,7 +325,8 @@ bool SpellsReading(std::string_view written, std::string_view name) {
             s.remove_prefix(ru.size == 0 ? 1 : ru.size);
             if (ru.cp == U' ') continue;
             char32_t cp = ru.cp;
-            if (const auto syl = text::Split(cp); syl && (syl->initial == 9 || syl->initial == 10)) {
+            if (const auto syl = text::Split(cp);
+                syl && (syl->initial == 9 || syl->initial == 10 || syl->initial == 12 || syl->initial == 14)) {
                 const int v = syl->vowel == 2 ? 0 : syl->vowel == 6 ? 4 : syl->vowel == 12 ? 8 : syl->vowel == 17 ? 13 : syl->vowel;
                 cp = text::Join(syl->initial, v, syl->final);
             }
@@ -321,7 +334,7 @@ bool SpellsReading(std::string_view written, std::string_view name) {
         }
         return out;
     };
-    return text::SameSound(key(written), key(name));
+    return text::SameSound(key(written), key(name)) && affricates(written) == affricates(name);
 }
 
 // A lone kanji in brackets or before sentence marks, read like the bare line ((望) (노조미),
