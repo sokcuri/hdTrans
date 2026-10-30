@@ -1,0 +1,16 @@
+rule	input	expected	kind	layer
+ending:kedomo-adverb	石の可能性はあるんですけどもしかしたら…｡	돌의 가능성은 있는데요 혹시….	fix	lookup
+ending:kedomo-adverb	有香のことは忘れないけどもう捜さない	유카는 잊지 않지만 이제 찾지 않는다	fix	lookup
+ending:kedomo-adverb	悪いけどもう一度 確かめてくんないか？	미안하지만 한번 더 확인해 주지 않는가?	fix	lookup
+ending:kedomo-adverb	なんかわかんねえけどものすご～く ﾑｶつくわ！	왠지 모르지만 대단히~ 화나!	fix	lookup
+ending:kedomo-adverb	分からないけどもうちょっと	모르지만 좀 더	fix	lookup
+ending:kedomo-adverb	みたいだけどもうん まともなのは１つもなかったかもしれないね	같지만 응 착실한 것은 1개도 없었던 걸지도 모르네	keep	lookup
+ending:kedomo-adverb	いろんな観光地で乗ったけどもう張ってあったからね｡	여러 가지 관광지에서 탔지만 이미 쳐 두었으니까.	keep	lookup
+ending:kedomo-adverb	３人で行ったことありますけどもう結構前ですね｡	3명이 간 적 있는데요 이제 상당히 전이군요.	keep	lookup
+ending:kedomo-adverb	そうだけども、	그렇지만,	keep	lookup
+ending:kedomo-adverb	分からないけども	모르지만	keep	lookup
+ending:kedomo-adverb	既定路線ではあるんですけどもう１つ…。	기정 노선인데요 또 하나….	keep	lookup
+ending:kedomo-adverb	僕らね若手 若手って言ってましたけどもう10年目ですよね	저희젊은이 젊은이라고 말했는데요 벌써 10년째이죠	keep	lookup
+ending:kedomo-adverb	うちのお墓があったんですけどもう入れないから	우리 묘가 있었는데요 이제 들어갈 수 없으니까	keep	lookup
+ending:kedomo-adverb	いいお肉 買っといたんだけどもう 改めて話し合うことも なさそうだわ	좋은 고기 사 두었는데 이제 다시 서로 이야기하는 일도 없을 것 같구나	keep	lookup
+ending:kedomo-adverb	弟さんのボケがベタなのもいいんですけどもうちょっとシャープなやつが	동생의 노망이 베타인 것도 좋은데요 좀 더 샤프한 녀석이	keep	lookup
