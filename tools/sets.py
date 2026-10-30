@@ -266,7 +266,7 @@ def run(argv):
     cli_sha, dicts_sha = sha(cli.read_bytes()), dicts_hash(dicts)
     start = time.time()
     with tempfile.TemporaryDirectory(prefix="hdtrans-sets.") as tmp:
-        runner = Runner(cli.resolve(), dicts.resolve(), jobs, options, Path(tmp))
+        runner = None
         pending = []
         for spec in specs:
             key = cache_key(cli_sha, dicts_sha, spec, options)
@@ -291,6 +291,8 @@ def run(argv):
                     fail(f"{b}: line count differs from {spec.path}")
                 if pattern is not None:
                     selected = [i for i, s in enumerate(spec.lines) if pattern.search(fold(s))]
+            if runner is None:
+                runner = Runner(cli.resolve(), dicts.resolve(), jobs, options, Path(tmp))
             pending.append((spec, meta, base_lines, selected,
                             plan(spec, runner, jobs, selected if pattern is None else set(selected),
                                  canary if pattern is not None and spec.mode == "each" else 0)))
@@ -317,7 +319,8 @@ def run(argv):
             for s in bad:
                 status = 1
                 print(f"{spec.name}: canary line changed without a needle: {s}", file=sys.stderr)
-        runner.pool.shutdown()
+        if runner:
+            runner.pool.shutdown()
     return status
 
 
