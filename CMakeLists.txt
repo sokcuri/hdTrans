@@ -215,7 +215,8 @@ if(NOT EMSCRIPTEN)
         find_program(HDTRANS_PYTHON python3)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
-                    construction-cases audit blind new-pairs perf-budget perf-base fuzz variants nn-rows)
+                    construction-cases audit blind new-pairs perf-budget perf-base fuzz variants nn-rows
+                    affected sets)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
