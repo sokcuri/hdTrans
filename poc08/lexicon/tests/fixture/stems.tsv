@@ -1,0 +1,7 @@
+#! stems
+# Fixture.
+lemma	class	kpos	from	flags
+잡다	REG	V	family	
+찍다	REG	V	family	
+벗다	REG	V	family	
+있다	EXIST	A	rule	

@@ -1,0 +1,1772 @@
+#! lexicon
+# One row per sense; (ja, yomi, pos) is the lemma id and sense 1 is the default.
+ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
+割と	わりと	adv	1	꽤				u	wl	
+割と	わりと	adv	2	비교적				u	w	
+割と	わりと	adv	3	생각보다는				u	b	
+あむ	あむ	adv	1	짜다				u	b	
+生憎	あいにく	adv	1	공교롭게도				u	w	
+生憎	あいにく	adv	2	공교롭게				u	b	
+敢えて	あえて	adv	1	굳이				u	wl	
+敢えて	あえて	adv	2	감히				u	w	
+齷齪	あくせく	adv	1	악착같이				u	b	
+齷齪	あくせく	adv	2	열심히	next=と			u	b	
+飽くまで	あくまで	adv	1	어디까지나				u	b	
+恰も	あたかも	adv	1	마치				u	b	
+あたふた	あたふた	adv	1	허둥지둥				u	b	
+あっけらかん	あっけらかん	adv	1	태평하다				u	wl	
+あっけらかん	あっけらかん	adv	2	태연하게	next=と			u	wl	
+あっけらかん	あっけらかん	adv	3	어이없이	next=と			u	b	
+あっさり	あっさり	adv	1	간단히				u	wl	
+あっさり	あっさり	adv	2	시원시럽게				u	b	
+あっさり	あっさり	adv	3	시원스럽게	next=と			u	b	
+あっぷあっぷ	あっぷあっぷ	adv	1	허위적 허위적				u	b	
+強ち	あながち	adv	1	반드시				u	b	
+数多	あまた	adv	1	무수히				u	b	
+剰え	あまつさえ	adv	1	게다가				u	b	
+遍く	あまねく	adv	1	널리				u	b	
+粗々	あらあら	adv	1	어머어머				u	wl	
+粗々	あらあら	adv	2	대강				u	w	
+洗い浚い	あらいざらい	adv	1	모두				u	b	
+洗い浚い	あらいざらい	adv	2	전부				u	b	
+予め	あらかじめ	adv	1	미리				u	b	
+ありあり	ありあり	adv	1	역력히				u	b	
+ありあり	ありあり	adv	2	또렷이	next=と			u	b	
+或いは	あるいは	conj	1	혹은				u	b	
+あわや	あわや	adv	1	하마터면				u	b	
+あわよくば	あわよくば	adv	1	잘 되면				u	b	
+案の定	あんのじょう	adv	1	생각한 대로				u	b	
+案の定	あんのじょう	adv	2	아니나 다를까				u	b	
+如何なる	いかなる	adn	1	어떠한				u	b	
+如何なる	いかなる	adn	2	어떤				u	b	
+如何に	いかに	adv	1	오죽이나				u	w	
+如何に	いかに	adv	2	제아무리				u	w	
+如何に	いかに	adv	3	얼마나				u	b	
+如何に	いかに	adv	4	어떻게				u	b	
+如何に	いかに	adv	5	아무리				u	b	rule:4 +unmapped
+生き生き	いきいき	adv	1	생기있게				u	w	
+生き生き	いきいき	adv	2	생생히				u	w	
+生き生き	いきいき	adv	3	생생				u	b	
+生き生き	いきいき	adv	4	생생하게	next=と			u	b	
+幾許	いくばく	adv	1	얼마간				u	b	
+些か	いささか	adv	1	조금				u	b	
+些か	いささか	adv	2	약간				u	b	
+いざ	いざ	intj	1	막상				u	b	
+何れ	いずれ	adv	1	언젠가				u	wl	
+何れ	いずれ	adv	2	머지않아				u	b	
+何れ	いずれ	adv	3	어차피				u	b	
+何れ	いずれ	adv	4	어느 것	next=にも			u	b	rule:6
+いそいそ	いそいそ	adv	1	허겁지겁				u	b	
+至って	いたって	adv	1	매우				u	b	
+一	いち	num	1	한				u	b	
+一	いち	num	2	일				u	b	
+逸早く	いちはやく	adv	1	재빨리				u	b	
+一躍	いちやく	adv	1	한 역할				u	b	
+一躍	いちやく	adv	2	일약				u	b	
+一見	いっけん	adv	1	한 건				u	b	
+一見	いっけん	adv	2	언뜻 보기에				u	b	
+一向	いっこう	adv	1	매우				u	b	
+一向	いっこう	adv	2	전혀				u	b	
+一向	いっこう	adv	3	조금도				u	b	
+いっそ	いっそ	adv	1	차라리				u	b	
+いっそ	いっそ	adv	2	도리어				u	b	
+一層	いっそう	adv	1	한층 더				u	b	
+一層	いっそう	adv	2	한층				u	b	rule:1351 +unmapped
+一旦	いったん	adv	1	일단				u	b	
+一端	いっぱし	adv	1	남 못지 않게				u	b	
+いとど	いとど	adv	1	매우				u	b	
+最も	いとも	adv	1	아주				u	b	
+今一	いまいち	adv	1	별로				u	x	
+今一	いまいち	adv	2	조금 모자름				u	b	
+苟も	いやしくも	adv	1	적어도				u	b	
+言わば	いわば	adv	1	말하자면				u	b	
+所謂	いわゆる	adn	1	소위				u	w	
+所謂	いわゆる	adn	2	이른바				u	b	
+況んや	いわんや	adv	1	하물며				u	w	
+うい	うい	adn	1	괴롭다				u	b	
+うる	うる	adv	1	팔다				u	b	
+うる	うる	adv	2	메				u	b	
+うかうか	うかうか	adv	1	헛되이				u	b	
+うかうか	うかうか	adv	2	얼떨결에				u	b	
+浮き浮き	うきうき	adv	1	들떠				u	b	
+浮き浮き	うきうき	adv	2	들썽들썽				u	b	
+浮き浮き	うきうき	adv	3	기분이 들떠	next=で			u	b	
+うざうざ	うざうざ	adv	1	우글우글				u	b	
+うじうじ	うじうじ	adv	1	우물쭈물				u	b	
+うじゃうじゃ	うじゃうじゃ	adv	1	우글우글				u	b	
+薄々	うすうす	adv	1	어렴풋이				u	wl	
+薄々	うすうす	adv	2	희미하게				u	b	
+うそうそ	うそうそ	adv	1	거짓말 거짓말				u	b	
+薄ら	うっすら	adv	1	희미하게				u	wl	
+薄ら	うっすら	adv	2	어렴풋이				u	b	
+うっすり	うっすり	adv	1	희미하게				u	b	
+うっとり	うっとり	adv	1	넋을 잃고				u	b	
+うつうつ	うつうつ	adv	1	울적하게				u	b	
+うつらうつら	うつらうつら	adv	1	꾸벅꾸벅				u	b	
+うとうと	うとうと	adv	1	꾸벅꾸벅				u	b	
+うねうね	うねうね	adv	1	꾸불꾸불				u	b	
+うまうま	うまうま	adv	1	감쪽같이				u	b	
+うまうま	うまうま	adv	2	맘마				u	b	
+うまうま	うまうま	adv	3	교묘하게	next=と			u	b	
+うようよ	うようよ	adv	1	우글우글				u	b	
+うるうる	うるうる	adv	1	글썽 글썽				u	b	
+うろうろ	うろうろ	adv	1	우왕좌왕				u	b	
+うろちょろ	うろちょろ	adv	1	어정어정				u	b	
+うんざり	うんざり	adv	1	지긋지긋				u	b	
+うんざり	うんざり	adv	2	지긋지긋하다				u	b	
+得てして	えてして	adv	1	자칫하면				u	b	
+えんえん	えんえん	adv	1	활활				u	b	
+えんえん	えんえん	adv	2	끝없이	next=と			u	b	
+おいおい	おいおい	adv	1	이봐 이봐				u	b	
+おいそれと	おいそれと	adv	1	쉽사리는				u	b	
+おおい	おおい	intj	1	이봐				u	b	
+おおい	おおい	intj	2	많다				u	b	
+往々	おうおう	adv	1	왕왕				u	b	
+往々	おうおう	adv	2	때때로				u	b	
+往々	おうおう	adv	3	우와				u	b	rule:1836 +unmapped
+往々	おうおう	adv	4	자주	next=に			u	w	
+大いなる	おおいなる	adn	1	커다란				u	b	
+大いに	おおいに	adv	1	크게				u	wl	
+大いに	おおいに	adv	2	많이				u	b	
+大方	おおかた	adv	1	대충				u	b	
+大方	おおかた	adv	2	대부분				u	b	
+大凡	おおよそ	adv	1	대체로				u	b	
+大凡	おおよそ	adv	2	대강				u	b	
+可笑しな	おかしな	adn	1	이상한				u	b	
+置き	おき	suf	1	먼 바다				u	b	
+置き	おき	suf	2	간격				u	b	rule:4504 +unmapped
+おさおさ	おさおさ	adv	1	전혀				u	b	
+押し並べて	おしなべて	adv	1	대체로				u	b	
+おずおず	おずおず	adv	1	흠칫흠칫				u	b	
+おずおず	おずおず	adv	2	쭈뼛쭈뼛	next=と			u	wl	
+恐る恐る	おそるおそる	adv	1	주뼛주뼛				u	b	
+恐る恐る	おそるおそる	adv	2	조심조심				u	b	
+おたおた	おたおた	adv	1	허둥지둥				u	b	
+おちおち	おちおち	adv	1	안심하고				u	b	
+おっかなびっくり	おっかなびっくり	adv	1	흠칫흠칫				u	b	
+おっとり	おっとり	adv	1	차분히				u	b	
+おどおど	おどおど	adv	1	벌벌				u	b	
+同じく	おなじく	adv	1	마찬가지로				u	wl	
+同じく	おなじく	adv	2	동일하게				u	b	
+同じく	おなじく	adv	3	같이				u	b	
+同じく	おなじく	adv	4	같은				u	b	rule:4285 +unmapped
+自ずから	おのずから	adv	1	저절로				u	b	
+自ずから	おのずから	adv	2	스스로				u	b	
+自ずと	おのずと	adv	1	저절로				u	b	
+自ずと	おのずと	adv	2	스스로				u	b	
+おめおめ	おめおめ	adv	1	염치없이				u	b	
+思い思い	おもいおもい	adv	1	각자 생각대로				u	b	
+思い思い	おもいおもい	adv	2	제각각				u	b	
+思い思い	おもいおもい	adv	3	각자 나름대로의	next=の			u	b	
+主な	おもな	adn	1	주된				u	b	
+主に	おもに	adv	1	주로				u	b	
+徐に	おもむろに	adv	1	천천히				u	wl	
+徐に	おもむろに	adv	2	조용히				u	b	
+徐に	おもむろに	adv	3	서서히				u	b	
+凡そ	およそ	adv	1	대략				u	b	
+凡そ	およそ	adv	2	전연				u	b	
+おろおろ	おろおろ	adv	1	허둥지둥				u	b	
+おろおろ	おろおろ	adv	2	엉엉				u	b	
+斯く	かく	adv	1	이렇게				u	wl	
+斯く	かく	adv	2	쓰다				u	b	rule:2139 +unmapped assigns-neighbour
+斯く	かく	adv	3	흘리다				u	b	rule:2502 +unmapped
+斯く	かく	adv	4	긁다				u	b	rule:3909 +unmapped assigns-neighbour
+且つ	かつ	conj	1	또한				u	wl	
+且つ	かつ	conj	2	한편				u	b	
+且つ	かつ	conj	3	이기다				u	b	rule:3507 +unmapped
+皆目	かいもく	adv	1	전혀				u	b	
+返す返す	かえすがえす	adv	1	거듭				u	b	
+却って	かえって	adv	1	오히려				u	b	
+却って	かえって	adv	2	돌아가서	after=に			u	b	rule:3681 +unmapped
+却って	かえって	adv	3	돌아가서	after=から			u	b	rule:3681 +unmapped
+斯く斯く	かくかく	adv	1	여차저차				u	b	
+斯く斯く	かくかく	adv	2	여차여차				u	b	
+斯く斯く	かくかく	adv	3	각각				u	b	
+かさかさ	かさかさ	adv	1	바삭바삭				u	b	
+かさかさ	かさかさ	adv	2	꺼칠꺼칠				u	b	
+かさこそ	かさこそ	adv	1	바스락바스락				u	b	
+重ね重ね	かさねがさね	adv	1	거듭거듭				u	b	
+重ね重ね	かさねがさね	adv	2	거듭해서				u	b	
+かしゃかしゃ	かしゃかしゃ	adv	1	딸가닥딸가닥				u	b	
+かたかた	かたかた	adv	1	달가닥달가닥				u	b	
+かたん	かたん	adv	1	뚝	next=と			u	b	
+かちかち	かちかち	adv	1	톡톡				u	w	
+かちかち	かちかち	adv	2	째깍째깍				u	b	
+かちかち	かちかち	adv	3	꽁꽁				u	b	
+かち	かち	adv	1	찰칵				u	b	
+かちり	かちり	adv	1	짤까닥	next=と			u	b	
+かちん	かちん	adv	1	짤그랑				u	b	
+かっか	かっか	adv	1	활활	next=と			u	b	
+かっきり	かっきり	adv	1	확연히				u	b	
+かったん	かったん	adv	1	갈탄				u	b	
+かっちり	かっちり	adv	1	꼭				u	b	
+かっと	かっと	adv	1	확확				u	b	
+かっと	かっと	adv	2	딱				u	b	
+かつかつ	かつかつ	adv	1	간신히				u	b	
+かつかつ	かつかつ	adv	2	빠듯하다				u	b	
+且且	かつがつ	adv	1	하나하나				u	b	
+かねがね	かねがね	adv	1	전부터				u	w	
+予て	かねて	adv	1	미리				u	b	
+かほど	かほど	adv	1	이만큼				u	b	
+からから	からから	adv	1	바삭바삭	next=と			u	b	
+辛々	からがら	adv	1	간신히				u	b	
+からり	からり	adv	1	활짝	next=と			u	b	
+からり	からり	adv	2	바삭하게	next=と			u	b	
+からんからん	からんからん	adv	1	땡땡				u	b	
+かりかり	かりかり	adv	1	아삭아삭				u	b	
+かりり	かりり	adv	1	오도독	next=と			u	b	
+軽々	かるがる	adv	1	가볍게				u	b	
+彼此	かれこれ	adv	1	이러쿵 저러쿵				u	b	
+彼此	かれこれ	adv	2	이러쿵저러쿵				u	b	
+彼此	かれこれ	adv	3	이럭저럭				u	b	rule:4446 +unmapped
+辛うじて	かろうじて	adv	1	간신히				u	b	
+辛うじて	かろうじて	adv	2	가까스로				u	b	
+代わる代わる	かわるがわる	adv	1	번갈아				u	wl	
+かんかん	かんかん	adv	1	땡땡				u	b	
+かんかん	かんかん	adv	2	쨍쨍				u	b	rule:1315 +unmapped
+がくり	がくり	adv	1	학리				u	b	
+がくん	がくん	adv	1	덜컥	next=と			u	b	
+がさがさ	がさがさ	adv	1	가슬가슬				u	b	
+がさごそ	がさごそ	adv	1	부스럭부스럭				u	b	
+がさり	がさり	adv	1	바스락	next=と			u	b	
+がしゃがしゃ	がしゃがしゃ	adv	1	대그락대그락				u	b	
+俄然	がぜん	adv	1	갑자기				u	b	
+難い	がたい	suf	1	어렵다				u	b	rule:242 +unmapped
+がたがた	がたがた	adv	1	덜커덩덜커덩				u	b	
+がたがた	がたがた	adv	2	덜컹덜컹				u	b	
+がた	がた	adv	1	갑자기	next=と			u	b	
+がたぴし	がたぴし	adv	1	삐걱삐걱				u	b	
+がたん	がたん	adv	1	뚝	next=と			u	b	
+がたん	がたん	adv	2	쾅	next=と			u	b	
+勝ち	がち	suf	1	십상이다				u	b	rule:2448 +unmapped assigns-neighbour
+がちゃがちゃ	がちゃがちゃ	adv	1	가챠				u	wl	
+がちゃがちゃ	がちゃがちゃ	adv	2	짤가닥짤가닥				u	b	
+がちゃり	がちゃり	adv	1	짤각				u	b	
+がちゃん	がちゃん	adv	1	쨍그랑				u	b	
+がっかり	がっかり	adv	1	실망				u	b	
+がっくり	がっくり	adv	1	푹				u	b	
+がっしり	がっしり	adv	1	튼튼				u	b	
+がっちり	がっちり	adv	1	단단히				u	b	
+がつがつ	がつがつ	adv	1	걸근걸근				u	b	
+がつがつ	がつがつ	adv	2	게걸스럽게				u	b	rule:4478 +unmapped
+がばがば	がばがば	adv	1	출렁출렁				u	b	
+がば	がば	adv	1	벌떡	next=と			u	b	
+がぶがぶ	がぶがぶ	adv	1	벌컥벌컥				u	b	
+がぶり	がぶり	adv	1	덥석				u	b	
+がみがみ	がみがみ	adv	1	군시렁 군시렁				u	b	
+がやがや	がやがや	adv	1	왁자지껄				u	b	
+がやがや	がやがや	adv	2	와글와글				u	b	
+がらがら	がらがら	adv	1	와르르				u	b	
+がらがら	がらがら	adv	2	텅텅	after=R式			u	b	rule:3297 +unmapped
+絡み	がらみ	suf	1	에 얽힌	next=の			u	b	
+がらり	がらり	adv	1	드르륵				u	b	
+がらり	がらり	adv	2	드르르	next=と			u	b	
+がらん	がらん	adv	1	텅	next=と			u	b	
+がりがり	がりがり	adv	1	으드득으드득				u	b	
+がりり	がりり	adv	1	우두둑	next=と			u	b	
+がんがん	がんがん	adv	1	땅땅				u	b	
+がんがん	がんがん	adv	2	욱신욱신				u	b	
+がんがん	がんがん	adv	3	많이	next=と			u	b	
+がんがん	がんがん	adv	4	마구	next=と			u	b	
+がんがん	がんがん	adv	5	마구	next=する			u	wl	rule:5091 +unmapped assigns-neighbour
+がんがん	がんがん	adv	6	마구	next=痛			u	wl	rule:5091 +unmapped assigns-neighbour
+がんがん	がんがん	adv	7	마구	next=痛ん			u	wl	rule:5091 +unmapped assigns-neighbour
+元来	がんらい	adv	1	원래				u	b	
+きいきい	きいきい	adv	1	삐걱삐걱				u	b	
+きき	きき	adv	1	위기				u	b	
+きしきし	きしきし	adv	1	삐걱삐걱				u	b	
+きちきち	きちきち	adv	1	빽빽				u	b	
+きちりと	きちりと	adv	1	정연히				u	b	
+きちんきちん	きちんきちん	adv	1	또박또박				u	b	
+きちんと	きちんと	adv	1	제대로				u	b	
+きちんと	きちんと	adv	2	깔끔히				u	b	
+きちんと	きちんと	adv	3	정확히				u	b	
+きっかり	きっかり	adv	1	딱				u	b	
+きっちり	きっちり	adv	1	제대로				u	x	
+きっちり	きっちり	adv	2	빈틈없이				u	b	
+きっちり	きっちり	adv	3	딱				u	b	
+きっぱり	きっぱり	adv	1	단호히				u	b	
+きびきび	きびきび	adv	1	발랄히				u	b	
+九十	きゅうじゅう	num	1	구십				u	b	
+きゅっきゅっ	きゅっきゅっ	adv	1	삐걱삐걱				u	b	
+きゅっ	きゅっ	adv	1	꽉	next=と			u	b	
+きゅっ	きゅっ	adv	2	꼭	next=と			u	b	
+きょときょと	きょときょと	adv	1	두리번두리번				u	b	
+きょとん	きょとん	adv	1	어리둥절히	next=と			u	wl	
+きょとん	きょとん	adv	2	멍청히	next=と			u	b	
+きょろきょろ	きょろきょろ	adv	1	두리번두리번				u	b	
+きらきら	きらきら	adv	1	반짝반짝				u	b	
+きらり	きらり	adv	1	반짝				u	b	
+きりきり	きりきり	adv	1	쑥쑥				u	b	
+きりり	きりり	adv	1	꽉	next=と			u	b	
+極めて	きわめて	adv	1	극히				u	b	
+極めて	きわめて	adv	2	지극히				u	b	
+きんきん	きんきん	adv	1	머지않아				u	b	
+ぎいぎい	ぎいぎい	adv	1	삐걱삐걱				u	b	
+ぎくしゃく	ぎくしゃく	adv	1	불조화				u	b	
+ぎくり	ぎくり	adv	1	움찔				u	b	
+ぎしぎし	ぎしぎし	adv	1	삐걱삐걱				u	b	
+ぎすぎす	ぎすぎす	adv	1	빼빼				u	b	
+ぎちぎち	ぎちぎち	adv	1	삐걱삐걱				u	b	
+ぎっしり	ぎっしり	adv	1	가득				u	b	
+ぎっちり	ぎっちり	adv	1	가득				u	b	
+ぎゅうぎゅう	ぎゅうぎゅう	adv	1	꽉꽉				u	b	
+ぎゅっ	ぎゅっ	adv	1	질끈	next=と			u	w	
+ぎゅっ	ぎゅっ	adv	2	꽉	next=と			u	b	
+ぎょっと	ぎょっと	adv	1	깜짝				u	wl	
+ぎょっと	ぎょっと	adv	2	오싹				u	b	
+ぎょろぎょろ	ぎょろぎょろ	adv	1	멀뚱멀뚱				u	b	
+ぎらぎら	ぎらぎら	adv	1	쨍쨍				u	b	
+ぎらぎら	ぎらぎら	adv	2	반짝반짝				u	b	
+ぎらり	ぎらり	adv	1	번쩍				u	b	
+ぎりぎり	ぎりぎり	adv	1	아슬아슬하게				u	wl	
+ぎりぎり	ぎりぎり	adv	2	빠듯이				u	b	
+ぎりぎり	ぎりぎり	adv	3	최대한의	next=の			u	b	
+ぎりぎり	ぎりぎり	adv	4	빠듯한	next=の			u	b	
+くう	くう	adv	1	먹다				u	b	
+くいくい	くいくい	adv	1	질질				u	b	
+くさくさ	くさくさ	adv	1	울적				u	b	
+奇しくも	くしくも	adv	1	기이하게도				u	b	
+くすくす	くすくす	adv	1	킥킥				u	b	
+くすくす	くすくす	adv	2	낄낄	next=と			u	b	
+くだくだ	くだくだ	adv	1	장황하게				u	b	
+くちゃくちゃ	くちゃくちゃ	adv	1	꾸깃꾸깃				u	b	
+くちゃくちゃ	くちゃくちゃ	adv	2	꼬깃해진	next=の			u	b	
+くちゅー	くちゅー	adv	1	고충				u	b	
+くちゅー	くちゅー	adv	2	구충				u	b	
+くっきり	くっきり	adv	1	선명하게				u	b	
+くくく	くくく	intj	1	킥킥	next=と			u	b	
+くどくど	くどくど	adv	1	지루하게				u	b	
+くねくね	くねくね	adv	1	구불구불				u	b	
+隈無く	くまなく	adv	1	샅샅이				u	wl	
+隈無く	くまなく	adv	2	환하게				u	wl	
+隈無く	くまなく	adv	3	빠짐없이				u	b	
+隈無く	くまなく	adv	4	구석구석까지				u	b	
+くよくよ	くよくよ	adv	1	끙끙				u	b	
+くらくら	くらくら	adv	1	어찔어찔				u	b	
+くらくら	くらくら	adv	2	어질 어질				u	b	
+くりくり	くりくり	adv	1	동글동글				u	b	
+くるくる	くるくる	adv	1	빙글빙글				u	b	
+くるくる	くるくる	adv	2	돌돌				u	b	
+くるりくるり	くるりくるり	adv	1	빙빙				u	b	
+くるり	くるり	adv	1	휙	next=と			u	b	
+呉々	くれぐれ	adv	1	아무쪼록				u	b	
+くんくん	くんくん	adv	1	킁킁				u	b	
+くんだり	くんだり	suf	1	변두리				u	b	
+ぐいぐい	ぐいぐい	adv	1	벌컥벌컥				u	b	
+ぐうぐう	ぐうぐう	adv	1	쿨쿨				u	b	
+ぐうぐう	ぐうぐう	adv	2	꼬르륵				u	b	
+ぐしゃ	ぐしゃ	adv	1	바보				u	b	
+ぐしゃ	ぐしゃ	adv	2	아싹	next=と			u	b	
+ぐすぐす	ぐすぐす	adv	1	훌쩍 훌쩍				u	b	
+ぐずぐず	ぐずぐず	adv	1	우물쭈물				u	b	
+ぐずぐず	ぐずぐず	adv	2	중얼중얼				u	b	
+ぐっしょり	ぐっしょり	adv	1	흠뻑				u	b	
+ぐっすり	ぐっすり	adv	1	푹				u	b	
+ぐったり	ぐったり	adv	1	축				u	b	
+ぐつぐつ	ぐつぐつ	adv	1	부글부글				u	b	
+ぐどぐど	ぐどぐど	adv	1	투덜투덜				u	b	
+ぐにゃぐにゃ	ぐにゃぐにゃ	adv	1	누글누글				u	b	
+ぐにゃぐにゃ	ぐにゃぐにゃ	adv	2	비실비실				u	b	
+ぐびぐび	ぐびぐび	adv	1	꿀꺽꿀꺽				u	b	
+ぐびりぐびり	ぐびりぐびり	adv	1	꿀꺽꿀꺽				u	b	
+ぐらぐら	ぐらぐら	adv	1	흔들흔들				u	b	
+ぐらぐら	ぐらぐら	adv	2	부글부글				u	b	
+ぐら	ぐら	adv	1	기우뚱	next=と			u	b	
+ぐりぐり	ぐりぐり	adv	1	때굴때굴				u	b	
+ぐるぐる	ぐるぐる	adv	1	빙빙				u	b	
+ぐるぐる	ぐるぐる	adv	2	친친				u	b	
+ぐるぐる	ぐるぐる	adv	3	빙글빙글	next=と			u	b	
+ぐるり	ぐるり	adv	1	둘레				u	b	
+ぐんぐん	ぐんぐん	adv	1	쑥쑥				u	wl	
+ぐんぐん	ぐんぐん	adv	2	부쩍부쩍				u	b	
+ぐんと	ぐんと	adv	1	뚝				u	w	
+ぐんと	ぐんと	adv	2	훨씬				u	b	
+ぐんなり	ぐんなり	adv	1	맥없이				u	b	
+けしからん	けしからん	intj	1	괘씸하다				u	b	
+けたけた	けたけた	adv	1	낄낄				u	b	
+蓋し	けだし	adv	1	일반적으로				u	b	
+けちけち	けちけち	adv	1	째째하게				u	b	
+けらけら	けらけら	adv	1	깔깔				u	b	
+けろり	けろり	adv	1	천연덕스럽게	next=と			u	b	
+けろり	けろり	adv	2	싹	next=と			u	b	
+けんけん	けんけん	adv	1	무뚝뚝하게				u	b	
+けんけん	けんけん	adv	2	왁자지껄				u	b	
+げえげえ	げえげえ	adv	1	웩웩				u	b	
+げそげそ	げそげそ	adv	1	핼쑥하게				u	b	
+げっそり	げっそり	adv	1	홀쭉				u	b	
+げらげら	げらげら	adv	1	껄껄				u	b	
+げんなり	げんなり	adv	1	맥없이				u	b	
+現に	げんに	adv	1	실제로				u	b	
+こくり	こくり	adv	1	국익				u	b	
+小ぢんまり	こぢんまり	adv	1	조촐하고 아담				u	b	
+小ぢんまり	こぢんまり	adv	2	아담하게				u	b	
+こせこせ	こせこせ	adv	1	좀스럽게				u	b	
+こそこそ	こそこそ	adv	1	소곤소곤				u	b	
+こそこそ	こそこそ	adv	2	살금살금				u	b	
+こっくり	こっくり	adv	1	끄덕끄덕				u	b	
+こっそり	こっそり	adv	1	몰래				u	w	
+こっそり	こっそり	adv	2	남몰래	next=と			u	b	
+こってり	こってり	adv	1	몹시				u	b	
+こつこつ	こつこつ	adv	1	꾸준히				u	wl	
+こつこつ	こつこつ	adv	2	뚜벅뚜벅				u	b	
+こつこつ	こつこつ	adv	3	부지런히				u	b	
+こつこつ	こつこつ	adv	4	똑똑	next=と			u	b	
+ことこと	ことこと	adv	1	탁탁				u	b	
+ことこと	ことこと	adv	2	보글보글	next=と			u	b	
+悉く	ことごとく	adv	1	죄다				u	b	
+殊更	ことさら	adv	1	새삼스럽게				u	b	
+殊更	ことさら	adv	2	고의로				u	b	
+殊更	ことさら	adv	3	일부러	next=に			u	b	
+殊更	ことさら	adv	4	고의의	next=の			u	b	
+細々	こまごま	adv	1	상세하게				u	b	
+交々	こもごも	adv	1	교대로				u	w	
+こよなく	こよなく	adv	1	각별히				u	b	
+ころころ	ころころ	adv	1	대굴대굴				u	b	
+ころころ	ころころ	adv	2	잇달아	next=と			u	b	
+ころり	ころり	adv	1	대구르르				u	b	
+ころり	ころり	adv	2	맥없이	next=と			u	b	
+怖々	こわごわ	adv	1	조심조심				u	w	
+こんがり	こんがり	adv	1	노르스름하게				u	b	
+こんこん	こんこん	adv	1	펑펑				u	b	
+こんこん	こんこん	adv	2	안녕 안녕				u	b	rule:1941 +unmapped
+こんこん	こんこん	adv	3	간곡히	next=と			u	b	
+こんこん	こんこん	adv	4	정신없이	next=と			u	b	
+こんこんこん	こんこんこん	adv	1	안녕 안녕 안녕				u	b	
+今晩は	こんばんは	intj	1	안녕하세요				u	b	
+こんもり	こんもり	adv	1	울창한				u	b	
+ごす	ごす	adv	1	기대하다				u	b	
+ごす	ごす	adv	2	잿물				u	b	
+ごうごう	ごうごう	adv	1	굉굉				u	b	
+ごうごう	ごうごう	adv	2	요란한				u	b	
+極く	ごく	adv	1	매우				u	b	
+極く極く	ごくごく	adv	1	꿀꺽꿀꺽				u	b	
+ごくり	ごくり	adv	1	꿀꺽				u	b	
+ごしゃ	ごしゃ	adv	1	귀사				u	b	
+ごしゃごしゃ	ごしゃごしゃ	adv	1	뒤죽박죽이다				u	b	
+ごそごそ	ごそごそ	adv	1	바스락바스락				u	b	
+ごたごた	ごたごた	adv	1	너저분				u	b	
+ごちゃごちゃ	ごちゃごちゃ	adv	1	뒤죽박죽				u	b	
+ごっそり	ごっそり	adv	1	몽땅				u	b	
+ごつごつ	ごつごつ	adv	1	울퉁불퉁				u	wl	
+ごつごつ	ごつごつ	adv	2	꾸준히				u	b	
+ごつごつ	ごつごつ	adv	3	뚜벅뚜벅				u	b	
+毎	ごと	suf	1	매				u	b	
+毎	ごと	suf	2	마다				u	b	rule:1134 +unmapped
+毎	ごと	suf	3	마다의	next=の			u	b	
+毎	ごと	suf	4	매일	next=あさ			u	b	rule:3576
+毎	ごと	suf	5	매일	next=おひる			u	b	rule:3576
+毎	ごと	suf	6	매일	next=ばん			u	b	rule:3576
+毎	ごと	suf	7	매일	next=朝			u	b	rule:3576
+毎	ごと	suf	8	매일	next=夜			u	b	rule:3576
+毎	ごと	suf	9	매일	next=R昼			u	b	rule:3576
+ごりごり	ごりごり	adv	1	삐걱삐걱				u	b	
+ごろごろ	ごろごろ	adv	1	데굴데굴				u	b	
+ごろごろ	ごろごろ	adv	2	덜그럭덜그럭				u	b	
+ごろごろ	ごろごろ	adv	3	빈둥빈둥				u	b	
+ごろごろ	ごろごろ	adv	4	우르릉우르릉				u	b	
+ごろり	ごろり	adv	1	벌렁	next=と			u	b	
+然る	さる	adn	1	떠나다				u	b	
+然る	さる	adn	2	가다				u	b	
+然る	さる	adn	3	멀리하다				u	b	
+然る	さる	adn	4	죽다				u	b	
+然る	さる	adn	5	지난				u	b	
+然る	さる	adn	6	어떤				u	b	
+然る	さる	adn	7	사라지다				u	b	rule:1411 +unmapped
+さいさい	さいさい	intj	1	여러번				u	b	
+冴え冴え	さえざえ	adv	1	초롱초롱				u	b	
+差詰	さしずめ	adv	1	막바지				u	b	
+差詰	さしずめ	adv	2	막판				u	b	
+差詰	さしずめ	adv	3	결국				u	b	
+然したる	さしたる	adn	1	이렇다할				u	b	
+嘸	さぞ	adv	1	필시				u	b	
+嘸	さぞ	adv	2	틀림없이				u	b	
+嘸かし	さぞかし	adv	1	필시				u	b	
+嘸かし	さぞかし	adv	2	틀림없이				u	b	
+定めし	さだめし	adv	1	필시				u	b	
+定めし	さだめし	adv	2	틀림없이				u	b	
+宛ら	さながら	adv	1	마치				u	b	
+さばさば	さばさば	adv	1	후련히				u	b	
+さばさば	さばさば	adv	2	후련한				u	b	
+然程	さほど	adv	1	그다지				u	b	
+寒々	さむざむ	adv	1	으스스				u	b	
+寒々	さむざむ	adv	2	몹시추움				u	b	
+さめざめ	さめざめ	adv	1	하염없이				u	b	
+さらさら	さらさら	adv	1	찰랑찰랑				u	wl	
+さらさら	さらさら	adv	2	졸졸				u	b	
+さらさら	さらさら	adv	3	전혀				u	b	
+さらさら	さらさら	adv	4	결코	next=と			u	b	
+更なる	さらなる	adn	1	새로운				u	b	
+更なる	さらなる	adn	2	그러한				u	b	
+更なる	さらなる	adn	3	한층 더				u	b	
+さらば	さらば	intj	1	안녕히				u	b	
+さらり	さらり	adv	1	봉급				u	b	
+さらり	さらり	adv	2	가볍게	next=と			u	b	
+然りとて	さりとて	conj	1	그렇다고 해서				u	b	
+散々	さんざん	adv	1	실컷				u	wl	
+散々	さんざん	adv	2	호되게				u	wl	
+三千	さんぜん	num	1	산전				u	b	
+ざあざあ	ざあざあ	adv	1	좍좍				u	b	
+ざあざあ	ざあざあ	adv	2	콸콸				u	b	
+ざくざく	ざくざく	adv	1	저벅저벅				u	b	
+ざくざく	ざくざく	adv	2	수북수북				u	b	
+ざっ	ざっ	adv	1	대충	next=と			u	b	
+ざぶざぶ	ざぶざぶ	adv	1	첨벙첨벙				u	b	
+ざぶん	ざぶん	adv	1	첨벙	next=と			u	b	
+ざらざら	ざらざら	adv	1	거슬거슬				u	b	
+ざらざら	ざらざら	adv	2	까칠까칠				u	b	
+ざわざわ	ざわざわ	adv	1	와글와글				u	b	
+ざわざわ	ざわざわ	adv	2	웅성웅성				u	b	
+ざわざわ	ざわざわ	adv	3	바삭바삭	next=と			u	b	
+強いて	しいて	adv	1	굳이				u	wl	
+強いて	しいて	adv	2	억지로				u	b	
+しいん	しいん	adv	1	사인				u	b	
+しいん	しいん	adv	2	자음				u	b	
+しいん	しいん	adv	3	개인 도장				u	b	
+しいん	しいん	adv	4	시음				u	b	
+しいん	しいん	adv	5	시운				u	b	
+しんと	しんと	adv	1	쥐죽은듯이				u	b	
+しおしお	しおしお	adv	1	맥없이				u	b	
+頻り	しきり	adv	1	구분				u	b	
+頻り	しきり	adv	2	자꾸	next=に			u	w	
+頻り	しきり	adv	3	끊임없이	next=と			u	b	
+頻り	しきり	adv	4	끊임없이	next=に			u	b	
+頻り	しきり	adv	5	줄곧	next=に			u	b	
+頻り	しきり	adv	6	무성	after=R声			u	b	rule:4237 +unmapped
+頻り	しきり	adv	7	무성	after=噂			u	b	rule:4237 +unmapped
+頻り	しきり	adv	8	무성	after=うわさ			u	b	rule:4237 +unmapped
+しくしく	しくしく	adv	1	훌쩍훌쩍				u	b	
+繁々	しげしげ	adv	1	빈번하게				u	w	
+繁々	しげしげ	adv	2	빈번히				u	b	
+繁々	しげしげ	adv	3	찬찬히				u	b	
+而して	しこうして	conj	1	그리하여				u	b	
+しこしこ	しこしこ	adv	1	쫄깃쫄깃				u	b	
+しこたま	しこたま	adv	1	많이				u	b	
+至極	しごく	adv	1	훑어 내다				u	b	
+至極	しごく	adv	2	잡아당가다				u	b	
+至極	しごく	adv	3	아주				u	b	
+至極	しごく	adv	4	호되게 훈련하다				u	b	rule:4854 +unmapped
+至極	しごく	adv	5	지극히	next=に			u	b	
+至極	しごく	adv	6	더없는	next=の			u	b	
+静々	しずしず	adv	1	조용조용				u	w	
+強か	したたか	adv	1	많이				u	b	
+強か	したたか	adv	2	심하게				u	b	
+強か	したたか	adv	3	대단한				u	b	rule:3793 +unmapped
+七	しち	num	1	위험한곳				u	b	
+七	しち	num	2	전당물				u	b	
+しかと	しかと	adv	1	꽉				u	b	
+しかと	しかと	adv	2	분명히				u	b	
+しっくり	しっくり	adv	1	딱				u	wl	
+しっくり	しっくり	adv	2	잘				u	b	
+しっとり	しっとり	adv	1	촉촉이				u	b	
+しっとり	しっとり	adv	2	촉촉하게	next=と			u	b	
+しっぽり	しっぽり	adv	1	촉촉이				u	b	
+しとしと	しとしと	adv	1	부슬부슬				u	b	
+暫し	しばし	adv	1	잠깐				u	b	
+屡	しばしば	adv	1	자주				u	b	
+屡	しばしば	adv	2	자주 있다				u	b	
+渋々	しぶしぶ	adv	1	마지못해				u	b	
+染み染み	しみじみ	adv	1	절실히				u	b	
+染み染み	しみじみ	adv	2	차근차근				u	b	
+染み染み	しみじみ	adv	3	가슴 속 깊이	next=と			u	b	
+しゃきしゃき	しゃきしゃき	adv	1	척척				u	b	
+しゃきん	しゃきん	adv	1	사금				u	b	
+しゃっきり	しゃっきり	adv	1	똑바로				u	b	
+遮二無二	しゃにむに	adv	1	무턱대고				u	b	
+遮二無二	しゃにむに	adv	2	마구				u	b	
+しゃらしゃら	しゃらしゃら	adv	1	짤랑짤랑				u	b	
+しゃり	しゃり	adv	1	선뜩	next=と			u	b	
+しゅう	しゅう	adv	1	소나기				u	b	
+しゅう	しゅう	adv	2	가을비				u	b	
+しゅうしゅう	しゅうしゅう	adv	1	수집				u	b	
+しゅうしゅう	しゅうしゅう	adv	2	수습				u	b	
+しゅうしゅう	しゅうしゅう	adv	3	연수				u	b	
+しゅわん	しゅわん	adv	1	수완				u	b	
+所詮	しょせん	adv	1	어차피				u	b	
+所詮	しょせん	adv	2	결국				u	b	
+所詮	しょせん	adv	3	서전				u	b	
+しょっちゅう	しょっちゅう	adv	1	언제나				u	b	
+しょぼしょぼ	しょぼしょぼ	adv	1	보슬보슬				u	b	
+しょぼん	しょぼん	adv	1	시무룩하게				u	wl	
+しょぼん	しょぼん	adv	2	쓸쓸히				u	b	
+しょんぼり	しょんぼり	adv	1	쓸쓸히				u	b	
+しょんぼり	しょんぼり	adv	2	멍하니	next=と			u	b	
+シライ	しらい	pn	1	흰 실	next=と			u	b	
+白々	しらじら	adv	1	훤하게				u	b	
+しんみり	しんみり	adv	1	차분히				u	b	
+しんみり	しんみり	adv	2	숙연하게	next=と			u	b	
+じんと	じんと	adv	1	찡하게				u	wl	
+じんと	じんと	adv	2	찌릿찌릿				u	wl	
+じんと	じんと	adv	3	찌르르				u	b	
+じんと	じんと	adv	4	뭉클함				u	b	
+じくじく	じくじく	adv	1	질척질척				u	b	
+じたばた	じたばた	adv	1	바동바동				u	b	
+じっくり	じっくり	adv	1	차분히				u	b	
+じっと	じっと	adv	1	가만히				u	b	
+じっと	じっと	adv	2	곰곰이				u	b	
+じっと	じっと	adv	3	꼭				u	b	
+じっとり	じっとり	adv	1	축축히				u	b	
+じとじと	じとじと	adv	1	축축하게				u	b	
+染みる	じみる	suf	1	같아 보이다				u	b	rule:1313 +unmapped
+じめじめ	じめじめ	adv	1	눅눅한				u	b	
+じゃぶじゃぶ	じゃぶじゃぶ	adv	1	첨벙첨벙				u	b	
+じゃぶじゃぶ	じゃぶじゃぶ	adv	2	점벙점벙				u	b	
+じゃぶじゃぶ	じゃぶじゃぶ	adv	3	철벅철벅	next=と			u	b	
+じゃんじゃん	じゃんじゃん	adv	1	척척				u	b	
+十	じゅう	num	1	총				u	b	
+十	じゅう	num	2	십				u	b	
+十	じゅう	num	3	중				u	b	rule:2329 +unmapped
+順々	じゅんじゅん	adv	1	차례차례				u	w	
+順々	じゅんじゅん	adv	2	차례차례로	next=に			u	b	
+じりじり	じりじり	adv	1	조금씩				u	b	
+じろじろ	じろじろ	adv	1	빤히				u	b	
+じろり	じろり	adv	1	힐끗	next=と			u	b	
+じわじわ	じわじわ	adv	1	서서히				u	b	
+じわじわ	じわじわ	adv	2	천천히	next=と			u	b	
+じんじん	じんじん	adv	1	인자				u	b	
+すう	すう	adv	1	들이마시다				u	b	
+すう	すう	adv	2	피우다				u	b	rule:3962 +unmapped
+すう	すう	adv	3	쓱	next=と			u	w	
+すう	すう	adv	4	사르르	next=と			u	w	
+すいすい	すいすい	adv	1	휙휙				u	b	
+すうすう	すうすう	adv	1	색색				u	b	
+すうすう	すうすう	adv	2	솔솔				u	b	
+すかさず	すかさず	adv	1	재빠르게				u	b	
+すがら	すがら	suf	1	내내				u	b	
+すくすく	すくすく	adv	1	무럭무럭				u	x	
+直様	すぐさま	adv	1	곧 바로				u	b	
+頗る	すこぶる	adv	1	대단히				u	b	
+すごすご	すごすご	adv	1	맥없이				u	b	
+すたすた	すたすた	adv	1	부리나케				u	b	
+すっきり	すっきり	adv	1	개운하게				u	wl	
+すっきり	すっきり	adv	2	깨끗이				u	b	
+擦った揉んだ	すったもんだ	adv	1	옥신각신				u	b	
+すっぽり	すっぽり	adv	1	푹				u	b	
+すとん	すとん	adv	1	쿵	next=と			u	b	
+即ち	すなわち	conj	1	즉				u	b	
+すぱすぱ	すぱすぱ	adv	1	뻐끔뻐끔				u	b	
+すぱすぱ	すぱすぱ	adv	2	싹둑싹둑				u	b	
+須らく	すべからく	adv	1	모름지기				u	w	
+すべすべ	すべすべ	adv	1	매끈매끈				u	b	
+すやすや	すやすや	adv	1	새근새근				u	b	
+すらすら	すらすら	adv	1	술술				u	b	
+すらり	すらり	adv	1	날씬함				u	b	
+すらり	すらり	adv	2	술술	next=と			u	b	
+するする	するする	adv	1	슬슬				u	b	
+するする	するする	adv	2	스르르	next=と			u	wl	
+すんなり	すんなり	adv	1	순조롭게				u	b	
+ずる	ずる	adv	1	질질 끄다				u	b	
+ずかずか	ずかずか	adv	1	서슴없이				u	b	
+ずきずき	ずきずき	adv	1	욱신욱신				u	b	
+ずきんずきん	ずきんずきん	adv	1	욱신욱신	next=と			u	b	
+ずく	ずく	suf	1	부엉이				u	b	
+尽くめ	ずくめ	suf	1	투성이				u	b	
+ずけずけ	ずけずけ	adv	1	거침없이	next=と			u	b	
+ずず	ずず	adv	1	염주				u	b	
+ずっしり	ずっしり	adv	1	묵직	next=と			u	b	
+ずっしり	ずっしり	adv	2	묵직하게	next=と			u	b	
+ずっぷり	ずっぷり	adv	1	푹				u	b	
+ずばずば	ずばずば	adv	1	거침없이				u	b	
+ずらり	ずらり	adv	1	즐비하게				u	b	
+ずらり	ずらり	adv	2	죽	next=と			u	b	
+ずらり	ずらり	adv	3	줄줄이	next=と			u	b	rule:3079 +unmapped
+ずらー	ずらー	adv	1	쭉	next=と			u	b	
+ずりずり	ずりずり	adv	1	질질	next=と			u	b	
+ずるずる	ずるずる	adv	1	질질				u	b	
+ずるずる	ずるずる	adv	2	어물어물				u	b	
+ずんぐりむっくり	ずんぐりむっくり	adv	1	땅딸막				u	b	
+ずんずん	ずんずん	adv	1	척척				u	b	
+ずんずん	ずんずん	adv	2	쑥쑥				u	b	
+精々	せいぜい	adv	1	기껏해야				u	wl	
+精々	せいぜい	adv	2	겨우				u	b	
+精々	せいぜい	adv	3	힘껏				u	b	rule:17 +unmapped
+せかせか	せかせか	adv	1	성급히				u	b	
+せかせか	せかせか	adv	2	성큼성큼				u	b	
+せっせと	せっせと	adv	1	부지런히				u	wl	
+せっせと	せっせと	adv	2	빨리				u	b	
+そうこう	そうこう	adv	1	이럭저럭				u	wl	
+そうこう	そうこう	adv	2	이것저것				u	b	
+そうこう	そうこう	adv	3	장갑				u	b	
+そうこう	そうこう	adv	4	초고				u	b	
+そうこう	そうこう	adv	5	장행				u	b	
+そうこう	そうこう	adv	6	주행				u	b	
+そうこう	そうこう	adv	7	성공				u	b	
+相当	そうとう	adv	1	상당히				u	b	
+そうらん	そうらん	intj	1	소란				u	b	
+そうらん	そうらん	intj	2	총람				u	b	
+そこそこ	そこそこ	adv	1	안밖				u	b	rule:1425 +unmapped
+そこそこ	そこそこ	adv	2	하는 둥 마는 둥	next=に			u	b	
+そこそこ	そこそこ	adv	3	적당히	next=こなせ			u	b	rule:2419 +unmapped
+そこそこ	そこそこ	adv	4	적당히	next=す			u	b	rule:2419 +unmapped
+そ知らぬ	そしらぬ	adn	1	모르는 척하는				u	wl	
+そ知らぬ	そしらぬ	adn	2	모르는 체하는				u	b	
+そそくさ	そそくさ	adv	1	허둥지둥				u	b	
+そっくり	そっくり	adv	1	전부				u	b	rule:2317
+そっと	そっと	adv	1	살며시				u	b	
+そよそよ	そよそよ	adv	1	산들산들				u	b	
+そろり	そろり	adv	1	살짝	next=と			u	b	
+そわそわ	そわそわ	adv	1	안절부절				u	b	
+そわそわ	そわそわ	adv	2	조마조마	next=と			u	b	
+沿い	そい	suf	1	주변				u	b	
+沿い	そい	suf	2	가				u	b	
+ぞくぞく	ぞくぞく	adv	1	오싹오싹				u	b	
+ぞくぞく	ぞくぞく	adv	2	잇따라				u	b	
+ぞくぞく	ぞくぞく	adv	3	속속	next=と			u	b	
+ぞくり	ぞくり	adv	1	속리				u	b	
+ぞっこん	ぞっこん	adv	1	홀딱				u	b	
+ぞっと	ぞっと	adv	1	오싹				u	wl	
+ぞろぞろ	ぞろぞろ	adv	1	우르르				u	b	
+ぞろり	ぞろり	adv	1	주렁주렁	next=と			u	b	
+大して	たいして	adv	1	그다지				u	b	
+大して	たいして	adv	2	대해				u	b	rule:3193 +unmapped assigns-neighbour
+大して	たいして	adv	3	별로				u	b	rule:3194 +unmapped
+高々	たかだか	adv	1	기껏해야				u	w	
+高々	たかだか	adv	2	고작				u	b	
+高々	たかだか	adv	3	드높이	next=と			u	w	
+たじたじ	たじたじ	adv	1	비틀비틀				u	b	
+直ちに	ただちに	adv	1	즉시				u	b	
+忽ち	たちまち	adv	1	금세				u	wl	
+仮令	たとえ	adv	1	설령				u	x	
+仮令	たとえ	adv	2	비록				u	b	
+度々	たびたび	adv	1	자주				u	w	
+度々	たびたび	adv	2	가끔				u	b	
+度々	たびたび	adv	3	종종				u	b	
+度々	たびたび	adv	4	여러 번				u	b	
+度々	たびたび	adv	5	언제나				u	b	rule:4931 +unmapped
+偶々	たまたま	adv	1	우연히				u	wl	
+偶々	たまたま	adv	2	가끔				u	b	
+偶々	たまたま	adv	3	가끔이다				u	b	
+たらふく	たらふく	adv	1	배불리				u	b	
+たらり	たらり	adv	1	축	next=と			u	b	
+単なる	たんなる	adn	1	단순한				u	b	
+たんまり	たんまり	adv	1	많이				u	b	
+大それた	だいそれた	adn	1	엉뚱한				u	b	
+大それた	だいそれた	adn	2	도리에 벗어난				u	b	
+大それた	だいそれた	adn	3	엄청난				u	b	
+だくだく	だくだく	adv	1	줄줄				u	b	
+だぶだぶ	だぶだぶ	adv	1	헐렁헐렁				u	b	
+だらだら	だらだら	adv	1	줄줄				u	b	
+だらだら	だらだら	adv	2	질질				u	b	
+だらり	だらり	adv	1	축	next=と			u	b	
+段々	だんだん	adv	1	점점				u	w	
+段々	だんだん	adv	2	점차				u	b	
+ちかちか	ちかちか	adv	1	반짝반짝				u	b	
+ちかちか	ちかちか	adv	2	깜박깜박	next=と			u	b	
+ちくちく	ちくちく	adv	1	따끔따끔				u	b	
+ちくちく	ちくちく	adv	2	쿡쿡				u	b	
+ちくり	ちくり	adv	1	조금	next=と			u	b	
+些とも	ちっとも	adv	1	조금도				u	b	
+ちびちび	ちびちび	adv	1	홀짝홀짝				u	b	
+ちゃっかり	ちゃっかり	adv	1	약삭빠르게				u	b	
+ちゃらちゃら	ちゃらちゃら	adv	1	짤랑짤랑				u	b	
+ちゅうちゅう	ちゅうちゅう	adv	1	찍찍				u	b	
+ちょい	ちょい	adv	1	조금				u	b	
+ちょいちょい	ちょいちょい	adv	1	가끔				u	b	
+ちょくちょく	ちょくちょく	adv	1	가끔				u	b	
+ちょこちょこ	ちょこちょこ	adv	1	종종걸음으로				u	b	
+ちょこちょこ	ちょこちょこ	adv	2	아장아장				u	b	
+ちょこちょこ	ちょこちょこ	adv	3	이따금				u	b	
+ちょこちょこ	ちょこちょこ	adv	4	조금씩 조금씩	next=と			u	b	
+ちょこちょこ	ちょこちょこ	adv	5	조금조금씩	next=と			u	b	
+ちょっぴり	ちょっぴり	adv	1	조금				u	b	
+ちょび	ちょび	adv	1	조금	next=と			u	w	
+ちょろちょろ	ちょろちょろ	adv	1	졸졸				u	b	
+ちょろちょろ	ちょろちょろ	adv	2	홀홀				u	b	
+ちょろり	ちょろり	adv	1	조르르	next=と			u	b	
+ちらちら	ちらちら	adv	1	팔랑팔랑				u	b	
+ちらちら	ちらちら	adv	2	슬쩍슬쩍				u	b	
+ちらちら	ちらちら	adv	3	힐끔힐끔	next=と			u	wl	
+ちらちら	ちらちら	adv	4	반짝반짝	next=と			u	b	
+ちら	ちら	adv	1	슬쩍	next=と			u	w	
+ちら	ちら	adv	2	힐끗	next=と			u	b	
+ちら	ちら	adv	3	살짝	next=と			u	b	
+ちらほら	ちらほら	adv	1	하나둘씩				u	b	
+ちらりちらり	ちらりちらり	adv	1	언뜻언뜻				u	b	
+ちらり	ちらり	adv	1	힐끗				u	wl	
+ちらり	ちらり	adv	2	살짝	next=と			u	b	
+ちりちり	ちりちり	adv	1	오글오글				u	b	
+ちんと	ちんと	adv	1	침착하게				u	b	
+ついつい	ついつい	adv	1	그만				u	b	
+次いで	ついで	adv	1	잇따라서				u	b	
+次いで	ついで	adv	2	그 다음에				u	b	
+次いで	ついで	adv	3	이어서				u	b	
+次いで	ついで	adv	4	겸				u	b	rule:4225 +unmapped assigns-neighbour
+ついと	ついと	adv	1	갑자기				u	b	
+つかつか	つかつか	adv	1	성큼성큼				u	b	
+次々	つぎつぎ	adv	1	차례차례				u	b	
+次々	つぎつぎ	adv	2	차례차례로	next=と			u	b	
+次々	つぎつぎ	adv	3	계속해서	next=に			u	b	
+次々	つぎつぎ	adv	4	차례차례로	next=に			u	b	
+熟	つくづく	adv	1	곰곰이	next=と			u	b	
+熟	つくづく	adv	2	절실히	next=感じ			u	b	rule:1321 +unmapped
+つくねん	つくねん	adv	1	멍하니	next=と			u	b	
+つけつけ	つけつけ	adv	1	거침없이				u	b	
+夙に	つとに	adv	1	일찍				u	b	
+常々	つねづね	adv	1	늘				u	wl	
+常々	つねづね	adv	2	항상				u	b	
+常々	つねづね	adv	3	평소				u	b	
+具に	つぶさに	adv	1	자세히				u	b	
+つべこべ	つべこべ	adv	1	이러쿵저러쿵				u	b	
+つやつや	つやつや	adv	1	반질반질				u	wl	
+つやつや	つやつや	adv	2	반들반들				u	b	
+つらつら	つらつら	adv	1	곰곰이				u	b	
+つるつる	つるつる	adv	1	반들반들				u	b	
+つるつる	つるつる	adv	2	매끈매끈				u	b	
+つるつる	つるつる	adv	3	반질반질	next=と			u	b	
+つるり	つるり	adv	1	찍	next=と			u	b	
+つんけん	つんけん	adv	1	뾰루퉁				u	b	
+つんつん	つんつん	adv	1	콕콕	next=と			u	b	
+っ子	っこ	suf	1	쌍둥이				u	b	rule:4373 +unmapped
+辛い	づらい	suf	1	힘들다				u	b	
+てかてか	てかてか	adv	1	번들번들				u	b	
+てきぱき	てきぱき	adv	1	척척				u	wl	
+てきぱき	てきぱき	adv	2	빨랑빨랑				u	w	
+てくてく	てくてく	adv	1	터벅터벅				u	b	
+てらてら	てらてら	adv	1	번들번들				u	b	
+でかでか	でかでか	adv	1	커다랗게				u	b	
+でかでか	でかでか	adv	2	큼직큼직하게	next=と			u	b	
+とある	とある	adn	1	어떤				u	b	
+到底	とうてい	adv	1	도저히				u	b	
+到頭	とうとう	adv	1	드디어				u	b	
+到頭	とうとう	adv	2	이윽고				u	b	
+到頭	とうとう	adv	3	결국				u	b	
+到頭	とうとう	adv	4	도도히	next=と			u	b	
+兎角	とかく	adv	1	이러니저러니 하는				u	wl	
+兎角	とかく	adv	2	대체로				u	b	
+兎角	とかく	adv	3	이럭저럭				u	b	rule:3670 +unmapped
+時折	ときおり	adv	1	간간이				u	w	
+時折	ときおり	adv	2	때때로				u	b	
+とくとく	とくとく	adv	1	쪼로록				u	b	
+とことこ	とことこ	adv	1	종종걸음으로	next=と			u	b	
+とっくり	とっくり	adv	1	차분히				u	b	
+とっとと	とっとと	adv	1	냉큼				u	b	
+とっぷり	とっぷり	adv	1	완전히				u	b	
+とつおいつ	とつおいつ	adv	1	이리저리				u	b	
+とにもかくにも	とにもかくにも	adv	1	어쨌든				u	b	
+飛び飛び	とびとび	adv	1	띄엄띄엄	next=に			u	b	
+とぼとぼ	とぼとぼ	adv	1	터벅터벅				u	b	
+頓に	とみに	adv	1	갑자기				u	b	
+ともあれ	ともあれ	adv	1	여하튼				u	b	
+兎も角	ともかく	adv	1	어쨌든				u	b	
+兎も角	ともかく	adv	2	차치하고	after=は			u	b	rule:5056
+共々	ともども	adv	1	다 같이				u	w	
+共々	ともども	adv	2	함께	next=に			u	w	
+とやかく	とやかく	adv	1	이러쿵저러쿵				u	b	
+取り分け	とりわけ	adv	1	특히				u	b	
+取り分け	とりわけ	adv	2	구분				u	b	
+とろとろ	とろとろ	adv	1	눅진눅진				u	b	
+とろとろ	とろとろ	adv	2	깜빡				u	b	
+とろーり	とろーり	adv	1	걸쭉걸쭉				u	b	
+とんだ	とんだ	adn	1	뜻하지 않은				u	b	
+とんとん	とんとん	adv	1	똑똑				u	b	
+とんとん	とんとん	adv	2	척척				u	b	
+とんとん	とんとん	adv	3	엇비슷하다				u	b	
+どうこう	どうこう	adv	1	이러쿵저러쿵				u	wl	
+どかどか	どかどか	adv	1	우르르				u	b	
+どき	どき	adv	1	움찔				u	b	
+どき	どき	adv	2	깜짝	next=と			u	wl	
+どき	どき	adv	3	철렁	next=と			u	wl	
+どきどき	どきどき	adv	1	두근두근				u	b	
+どきり	どきり	adv	1	덜컥	next=と			u	b	
+どぎまぎ	どぎまぎ	adv	1	허둥지둥				u	b	
+どぎまぎ	どぎまぎ	adv	2	당황				u	b	
+どくどく	どくどく	adv	1	철철				u	b	
+どさどさ	どさどさ	adv	1	털석털석				u	b	
+どさり	どさり	adv	1	털석	next=と			u	b	
+どしどし	どしどし	adv	1	척척				u	b	
+どしり	どしり	adv	1	쿵	next=と			u	b	
+どしん	どしん	adv	1	쿵	next=と			u	b	
+どたばた	どたばた	adv	1	우당탕탕				u	wl	
+どたばた	どたばた	adv	2	우당탕				u	b	
+どたばた	どたばた	adv	3	허둥지둥				u	b	
+どたり	どたり	adv	1	털썩	next=と			u	b	
+土台	どだい	adv	1	애당초				u	b	
+どっかり	どっかり	adv	1	털썩				u	b	
+どっさり	どっさり	adv	1	듬뿍				u	b	
+どっさり	どっさり	adv	2	털썩	next=と			u	b	
+どっしり	どっしり	adv	1	묵직한				u	b	
+どっしり	どっしり	adv	2	묵직이	next=と			u	b	
+どっち道	どっちみち	adv	1	어차피				u	wl	
+どっち道	どっちみち	adv	2	결국은				u	b	
+どっぷり	どっぷり	adv	1	듬뿍				u	b	
+どの道	どのみち	adv	1	어차피				u	w	
+どの道	どのみち	adv	2	어쨌든				u	b	
+どぶん	どぶん	adv	1	풍덩	next=と			u	b	
+どやどや	どやどや	adv	1	우르르				u	b	
+どろどろ	どろどろ	adv	1	질척질척				u	b	
+どろり	どろり	adv	1	물렁물렁				u	b	
+どんぶり	どんぶり	adv	1	풍덩				u	b	
+尚且つ	なおかつ	adv	1	더욱이				u	w	
+尚且つ	なおかつ	adv	2	또한				u	w	
+尚且つ	なおかつ	adv	3	게다가				u	b	
+尚更	なおさら	adv	1	더욱 더				u	w	
+尚更	なおさら	adv	2	더욱더				u	wl	
+尚更	なおさら	adv	3	한층				u	w	
+尚更	なおさら	adv	4	더더욱				u	wl	
+尚更	なおさら	adv	5	더욱더 그러하다				u	b	
+なかんずく	なかんずく	adv	1	특히				u	b	
+何しろ	なにしろ	adv	1	어쨌든				u	b	
+何せ	なにせ	adv	1	여하튼				u	b	
+何とぞ	なにとぞ	adv	1	부디				u	b	
+何とぞ	なにとぞ	adv	2	아무쪼록				u	b	
+なまじ	なまじ	adv	1	어설프다				u	b	
+なまじ	なまじ	adv	2	섣불리				u	b	
+なまじ	なまじ	adv	3	어설픈	next=の			u	b	
+なみなみ	なみなみ	adv	1	찰랑찰랑				u	b	
+なみなみ	なみなみ	adv	2	찰랑찰랑하다				u	b	
+なよなよ	なよなよ	adv	1	나긋나긋				u	b	
+成る丈	なるたけ	adv	1	되도록				u	b	
+成る可く	なるべく	adv	1	되도록				u	w	
+成る可く	なるべく	adv	2	가능한 한				u	b	
+成る可く	なるべく	adv	3	되어야 할				u	b	rule:1283 +unmapped
+何のその	なんのその	adv	1	아랑곳없이	next=と			u	b	
+にこにこ	にこにこ	adv	1	싱글벙글				u	b	
+にこにこ	にこにこ	adv	2	방글방글	next=と			u	b	
+にたにた	にたにた	adv	1	히죽히죽				u	b	
+にっこり	にっこり	adv	1	방긋				u	wl	
+にっこり	にっこり	adv	2	활짝				u	w	
+にっこり	にっこり	adv	3	생긋				u	b	
+にやにや	にやにや	adv	1	히죽히죽				u	wl	
+にやにや	にやにや	adv	2	능글능글				u	b	
+にやり	にやり	adv	1	씩				u	wl	
+にやり	にやり	adv	2	힐쭉	next=と			u	b	
+にゅう	にゅう	adv	1	불쑥	next=と			u	b	
+にゅっ	にゅっ	adv	1	불쑥	next=と			u	w	
+にゅっ	にゅっ	adv	2	쑥	next=と			u	b	
+にょきにょき	にょきにょき	adv	1	쑥쑥				u	b	
+にょっきり	にょっきり	adv	1	쑥				u	b	
+にょろにょろ	にょろにょろ	adv	1	꿈틀꿈틀				u	b	
+にんまり	にんまり	adv	1	빙그레				u	b	
+ぬる	ぬる	adv	1	칠하다				u	b	
+ぬう	ぬう	adv	1	쭉	next=と			u	b	
+ぬくぬく	ぬくぬく	adv	1	편안히				u	b	
+抜け抜け	ぬけぬけ	adv	1	태연히				u	b	
+ぬめぬめ	ぬめぬめ	adv	1	번들번들				u	b	
+ぬらぬら	ぬらぬら	adv	1	끈적끈적				u	b	
+ぬらりくらり	ぬらりくらり	adv	1	뺀들뺀들				u	b	
+ぬるぬる	ぬるぬる	adv	1	미끈미끈				u	b	
+ぬるり	ぬるり	adv	1	미끈미끈	next=と			u	b	
+ねちねち	ねちねち	adv	1	치근치근				u	b	
+ねっちり	ねっちり	adv	1	깐족깐족				u	b	
+ねとねと	ねとねと	adv	1	끈적끈적				u	b	
+のうのう	のうのう	adv	1	편히				u	b	
+のこのこ	のこのこ	adv	1	어슬렁어슬렁				u	b	
+のそのそ	のそのそ	adv	1	느릿느릿				u	b	
+のたりのたり	のたりのたり	adv	1	너울너울				u	b	
+のっしのっし	のっしのっし	adv	1	육중하게				u	b	
+のっそり	のっそり	adv	1	느릿느릿				u	b	
+伸び伸び	のびのび	adv	1	자유롭게				u	wl	
+伸び伸び	のびのび	adv	2	쑥쑥				u	wl	
+伸び伸び	のびのび	adv	3	구김살없이				u	b	
+伸び伸び	のびのび	adv	4	느긋느긋				u	b	
+伸び伸び	のびのび	adv	5	느긋하게	next=と			u	b	
+のべたら	のべたら	adv	1	장황하게				u	b	
+のほほん	のほほん	adv	1	유유자적				u	b	
+のほほん	のほほん	adv	2	빈둥빈둥	next=と			u	b	
+のらくら	のらくら	adv	1	빈둥빈둥				u	b	
+のろのろ	のろのろ	adv	1	느릿느릿				u	b	
+のろのろ	のろのろ	adv	2	슬슬	next=と			u	b	
+のんびり	のんびり	adv	1	한가로이				u	b	
+のんびり	のんびり	adv	2	편하게				u	b	rule:4795 +unmapped
+のんびり	のんびり	adv	3	느긋하게	next=と			u	wl	
+のんびり	のんびり	adv	4	한가롭게	next=と			u	b	
+はあはあ	はあはあ	adv	1	헐레벌떡				u	b	
+はきはき	はきはき	adv	1	시원시원				u	b	
+はきはき	はきはき	adv	2	또렷또렷				u	b	
+はきはき	はきはき	adv	3	또박또박	next=と			u	b	
+はくしょん	はくしょん	intj	1	에취				u	b	
+果たして	はたして	adv	1	과연				u	b	
+果たして	はたして	adv	2	이루어				u	b	rule:4458 +unmapped
+果たして	はたして	adv	3	완수해	next=任務			u	b	rule:4459 +unmapped
+果たして	はたして	adv	4	완수해	next=責任			u	b	rule:4459 +unmapped
+将又	はたまた	adv	1	아니면				u	wl	
+将又	はたまた	adv	2	혹은 또				u	b	
+八	はち	num	1	흠칫				u	wl	
+八	はち	num	2	하				u	b	
+はっしと	はっしと	adv	1	딱				u	b	
+はてさて	はてさて	intj	1	그것 참				u	b	
+甚だ	はなはだ	adv	1	매우				u	b	
+早々	はやばや	adv	1	일찍	next=と			u	b	
+はらはら	はらはら	adv	1	조마조마				u	b	
+遥々	はるばる	adv	1	아득히				u	w	
+遥々	はるばる	adv	2	멀리				u	b	
+ばたばた	ばたばた	adv	1	푸드득푸드득				u	b	
+ばたばた	ばたばた	adv	2	픽픽				u	b	
+ばたばた	ばたばた	adv	3	덜커덩				u	b	
+ばたばた	ばたばた	adv	4	우당탕	next=と			u	wl	
+ばたばた	ばたばた	adv	5	푸드득	next=と			u	b	
+ばっさり	ばっさり	adv	1	싹독				u	b	
+ばったり	ばったり	adv	1	우연히	next=会			u	b	rule:36 +unmapped
+ばっちり	ばっちり	adv	1	완벽하다				u	x	
+ばっちり	ばっちり	adv	2	완벽하게				u	wl	
+ばっちり	ばっちり	adv	3	딱				u	w	
+ばっちり	ばっちり	adv	4	짭짤하게				u	b	
+ばらり	ばらり	adv	1	드문드문	next=と			u	b	
+ばり	ばり	adv	1	짝	next=と			u	w	
+ばり	ばり	adv	2	북	next=と			u	b	
+ばりばり	ばりばり	adv	1	힘껏				u	b	
+ばりばり	ばりばり	adv	2	북북				u	b	
+ばりばり	ばりばり	adv	3	열심히				u	b	
+ばりばり	ばりばり	adv	4	열심인	next=の			u	b	
+ばんばん	ばんばん	adv	1	세상에				u	b	
+ぱくぱく	ぱくぱく	adv	1	빠끔빠끔				u	b	
+ぱくぱく	ぱくぱく	adv	2	덥석덥석				u	b	
+ぱくり	ぱくり	adv	1	덥석	next=と			u	b	
+ぱくり	ぱくり	adv	2	뻐끔히	next=と			u	b	
+ぱさぱさ	ぱさぱさ	adv	1	바삭바삭				u	b	
+ぱた	ぱた	adv	1	파닥	next=と			u	w	
+ぱた	ぱた	adv	2	딱	next=と			u	w	
+ぱたぱた	ぱたぱた	adv	1	톡톡				u	b	
+ぱたぱた	ぱたぱた	adv	2	팔랑				u	b	
+ぱたり	ぱたり	adv	1	탁	next=と			u	b	
+ぱちくり	ぱちくり	adv	1	끔뻑				u	b	
+ぱちぱち	ぱちぱち	adv	1	깜박깜박				u	b	
+ぱちぱち	ぱちぱち	adv	2	짝짝				u	b	
+ぱちぱち	ぱちぱち	adv	3	탁탁	next=と			u	b	
+ぱちり	ぱちり	adv	1	끔뻑	next=と			u	b	
+ぱちん	ぱちん	adv	1	딱				u	wl	
+ぱちん	ぱちん	adv	2	찰싹	next=と			u	b	
+ぱっくり	ぱっくり	adv	1	빠끔히				u	b	
+ぱっちり	ぱっちり	adv	1	또렷하게				u	b	
+ぱっ	ぱっ	adv	1	확	next=と			u	wl	
+ぱっ	ぱっ	adv	2	화려하게	next=と			u	wl	
+ぱっ	ぱっ	adv	3	쫙	next=と			u	b	
+ぱっ	ぱっ	adv	4	신통	next=と			u	b	
+ぱっぱ	ぱっぱ	adv	1	척척	next=と			u	b	
+ぱらぱら	ぱらぱら	adv	1	훌훌				u	b	
+ぱらぱら	ぱらぱら	adv	2	호도독호도독				u	b	
+ぱらぱら	ぱらぱら	adv	3	후두둑	next=L降 next=と			u	b	rule:3200 +unmapped
+ぱらり	ぱらり	adv	1	팔랑	next=と			u	b	
+ぱり	ぱり	adv	1	짝	next=と			u	w	
+ぱりぱり	ぱりぱり	adv	1	파삭파삭				u	b	
+ぱりぱり	ぱりぱり	adv	2	팔팔하게				u	b	
+ぱりぱり	ぱりぱり	adv	3	빳빳한	next=の			u	b	
+延いては	ひいては	adv	1	나아가서는				u	b	
+ひいひい	ひいひい	adv	1	낑낑거리며				u	b	
+ひくひく	ひくひく	adv	1	실룩실룩				u	b	
+ひしひし	ひしひし	adv	1	바싹바싹				u	b	
+ひしひし	ひしひし	adv	2	오싹오싹				u	b	
+ひそひそ	ひそひそ	adv	1	소곤소곤				u	wl	
+只管	ひたすら	adv	1	오로지				u	wl	
+ひたひた	ひたひた	adv	1	바특이				u	b	
+ひたひた	ひたひた	adv	2	철썩철썩	next=と			u	b	
+ひっそり	ひっそり	adv	1	고요히				u	b	
+ひっそり	ひっそり	adv	2	조용히				u	b	
+ひっそり	ひっそり	adv	3	적막하게	next=と			u	b	
+偏に	ひとえに	adv	1	전적으로				u	b	
+偏に	ひとえに	adv	2	오로지				u	b	
+一際	ひときわ	adv	1	한층 더				u	w	
+一際	ひときわ	adv	2	한층				u	b	
+一入	ひとしお	adv	1	한층 더 하다				u	b	
+一入	ひとしお	adv	2	한층 더				u	b	
+一頻り	ひとしきり	adv	1	바탕				u	w	
+一頻り	ひとしきり	adv	2	한바탕				u	w	
+一頻り	ひとしきり	adv	3	한 바탕				u	b	
+一頻り	ひとしきり	adv	4	한 차례				u	b	
+一肌	ひとはだ	adv	1	피부				u	w	
+一先ず	ひとまず	adv	1	우선				u	w	
+一先ず	ひとまず	adv	2	그런대로				u	wl	
+一先ず	ひとまず	adv	3	일단				u	b	
+冷や冷や	ひやひや	adv	1	조마조마				u	b	
+冷や冷や	ひやひや	adv	2	써늘하게				u	b	
+ひやり	ひやり	adv	1	섬뜩	next=と			u	b	
+ひょい	ひょい	adv	1	갑자기	next=と			u	b	
+ひょいひょい	ひょいひょい	adv	1	깡총깡총				u	b	
+ひょろ	ひょろ	adv	1	호리호리하게	next=と			u	b	
+ひょろひょろ	ひょろひょろ	adv	1	가늘게				u	b	
+ひょろひょろ	ひょろひょろ	adv	2	비틀비틀				u	b	
+ひょろり	ひょろり	adv	1	가냘프게	next=と			u	b	
+ひょんな	ひょんな	adn	1	엉뚱한				u	b	
+ひらひら	ひらひら	adv	1	팔랑팔랑				u	b	
+ひらり	ひらり	adv	1	훌쩍	next=と			u	b	
+ひりひり	ひりひり	adv	1	얼얼				u	b	
+ひりひり	ひりひり	adv	2	따끔따끔				u	b	
+ひりり	ひりり	adv	1	얼얼하게	next=と			u	b	
+ひんやり	ひんやり	adv	1	서늘하게				u	wl	
+ひんやり	ひんやり	adv	2	서늘				u	b	
+びくびく	びくびく	adv	1	벌벌				u	b	
+びくり	びくり	adv	1	움찔				u	wl	
+びくり	びくり	adv	2	움찍	next=と			u	b	
+びしびし	びしびし	adv	1	가차없이				u	b	
+びしょびしょ	びしょびしょ	adv	1	흠뻑				u	b	
+びちゃびちゃ	びちゃびちゃ	adv	1	첨벙첨벙				u	b	
+びっしょり	びっしょり	adv	1	흠뻑				u	b	
+びっしり	びっしり	adv	1	빽빽이				u	b	
+びっちり	びっちり	adv	1	꽉				u	b	
+びゅんびゅん	びゅんびゅん	adv	1	휙휙				u	b	
+びょう	びょう	adv	1	초				u	b	
+びりびり	びりびり	adv	1	찌르르				u	b	
+ぴいぴい	ぴいぴい	adv	1	빽빽				u	b	
+ぴかぴか	ぴかぴか	adv	1	반짝반짝				u	b	
+ぴかぴか	ぴかぴか	adv	2	번쩍번쩍				u	b	
+ぴかぴか	ぴかぴか	adv	3	반짝이는	next=の			u	b	
+ぴかぴか	ぴかぴか	adv	4	반짝반짝 빛나는	next=の			u	b	
+ぴかり	ぴかり	adv	1	번쩍	next=と			u	b	
+ぴくぴく	ぴくぴく	adv	1	실룩실룩				u	b	
+ぴくぴく	ぴくぴく	adv	2	쫑긋쫑긋				u	b	
+ぴくん	ぴくん	adv	1	꿈틀하고	next=と			u	b	
+ぴしぴし	ぴしぴし	adv	1	가차없이				u	b	
+ぴしゃり	ぴしゃり	adv	1	탁	next=と			u	b	
+ぴしり	ぴしり	adv	1	단호히	next=と			u	b	
+ぴた	ぴた	adv	1	딱	next=と			u	w	
+ぴた	ぴた	adv	2	탁	next=と			u	b	
+ぴたり	ぴたり	adv	1	꼭				u	b	
+ぴたり	ぴたり	adv	2	딱	next=と			u	b	
+ぴたり	ぴたり	adv	3	착	next=と			u	b	
+ぴちぴち	ぴちぴち	adv	1	팔팔				u	b	
+ぴちぴち	ぴちぴち	adv	2	펄떡펄떡				u	b	
+ぴちぴち	ぴちぴち	adv	3	팔딱팔딱	next=と			u	b	
+ぴちゃぴちゃ	ぴちゃぴちゃ	adv	1	철벅철벅				u	b	
+ぴちゃぴちゃ	ぴちゃぴちゃ	adv	2	철썩철썩				u	b	
+ぴちゃぴちゃ	ぴちゃぴちゃ	adv	3	할짝할짝				u	b	
+ぴったり	ぴったり	adv	1	딱				u	b	
+ぴっちり	ぴっちり	adv	1	딱				u	b	
+ぴっぴっ	ぴっぴっ	adv	1	싹싹	next=と			u	b	
+ぴゅうぴゅう	ぴゅうぴゅう	adv	1	우우				u	w	
+ぴゅうぴゅう	ぴゅうぴゅう	adv	2	씽씽				u	b	
+ぴょこぴょこ	ぴょこぴょこ	adv	1	굽실굽실				u	b	
+ぴょん	ぴょん	adv	1	폴짝	next=と			u	b	
+ぴよぴよ	ぴよぴよ	adv	1	삐악삐악				u	b	
+ぴり	ぴり	adv	1	톡	next=と			u	w	
+ぴり	ぴり	adv	2	짜릿	next=と			u	b	
+ぴりぴり	ぴりぴり	adv	1	얼얼				u	b	
+ぴん	ぴん	adv	1	꼿꼿이	next=と			u	wl	
+ぴん	ぴん	adv	2	딱	next=と			u	wl	
+ぴん	ぴん	adv	3	팽팽히	next=と			u	w	
+ぴん	ぴん	adv	4	쑥	next=と			u	w	
+ぴん	ぴん	adv	5	즉각	next=と			u	b	
+ぴんぴん	ぴんぴん	adv	1	팔팔				u	b	
+ぴんぴん	ぴんぴん	adv	2	펄떡펄떡				u	b	
+ふい	ふい	adv	1	갑자기	next=と			u	b	
+ふうふう	ふうふう	adv	1	후				u	w	
+ふうふう	ふうふう	adv	2	허덕허덕				u	b	
+ふかふか	ふかふか	adv	1	폭신폭신				u	b	
+ふかふか	ふかふか	adv	2	말랑말랑				u	b	
+ふさふさ	ふさふさ	adv	1	주렁주렁				u	b	
+ふさふさ	ふさふさ	adv	2	더부룩하게				u	b	
+ふっくら	ふっくら	adv	1	포동포동한	next=と			u	b	
+ふっつり	ふっつり	adv	1	뚝				u	b	
+ふつふつ	ふつふつ	adv	1	부글부글				u	b	
+ふと	ふと	adv	1	문득				u	b	
+ふらふら	ふらふら	adv	1	휘청휘청				u	wl	
+ふらふら	ふらふら	adv	2	흔들흔들				u	b	
+ふらふら	ふらふら	adv	3	빙빙				u	b	
+ふらり	ふらり	adv	1	훌쩍	next=と			u	wl	
+ふらり	ふらり	adv	2	홱	next=と			u	b	
+ふわ	ふわ	adv	1	둥실	next=と			u	wl	
+ふわ	ふわ	adv	2	부드럽게	next=と			u	wl	
+ふわ	ふわ	adv	3	불안하게	next=と			u	wl	
+ふわ	ふわ	adv	4	가볍게	next=と			u	b	
+ふわふわ	ふわふわ	adv	1	푹신푹신				u	wl	
+ふわふわ	ふわふわ	adv	2	폭신폭신				u	wl	
+ふわふわ	ふわふわ	adv	3	두리둥실				u	w	
+ふわふわ	ふわふわ	adv	4	들썩들썩				u	wl	
+ふわふわ	ふわふわ	adv	5	뽀송뽀송하다				u	w	
+ふわふわ	ふわふわ	adv	6	둥실둥실				u	b	
+ふわり	ふわり	adv	1	살짝	next=と			u	b	
+ふんわり	ふんわり	adv	1	사뿐				u	b	
+ぶうぶう	ぶうぶう	adv	1	꿀꿀				u	w	
+ぶうぶう	ぶうぶう	adv	2	투덜투덜				u	b	
+ぶくぶく	ぶくぶく	adv	1	뒤룩뒤룩				u	b	
+ぶくぶく	ぶくぶく	adv	2	부글부글				u	b	
+ぶすぶす	ぶすぶす	adv	1	투덜투덜				u	b	
+ぶつぶつ	ぶつぶつ	adv	1	중얼중얼				u	wl	
+ぶつぶつ	ぶつぶつ	adv	2	투덜투덜				u	b	
+ぶよぶよ	ぶよぶよ	adv	1	포동포동				u	b	
+ぶよぶよ	ぶよぶよ	adv	2	말랑말랑				u	b	
+ぶらぶら	ぶらぶら	adv	1	흔들흔들				u	b	
+ぶらぶら	ぶらぶら	adv	2	어슬렁어슬렁				u	b	
+ぶらぶら	ぶらぶら	adv	3	빈둥빈둥				u	b	
+ぶらり	ぶらり	adv	1	훌쩍				u	b	
+ぶるぶる	ぶるぶる	adv	1	부들부들				u	b	
+ぶんぶん	ぶんぶん	adv	1	윙윙				u	b	
+ぶんぶん	ぶんぶん	adv	2	빙빙				u	b	
+ぷーん	ぷーん	adv	1	물씬	next=と			u	b	
+ぷかぷか	ぷかぷか	adv	1	뻐끔뻐끔				u	b	
+ぷかぷか	ぷかぷか	adv	2	둥실둥실				u	b	
+ぷかぷか	ぷかぷか	adv	3	둥둥	next=と			u	b	
+ぷかり	ぷかり	adv	1	뻐끔	next=と			u	b	
+ぷっつり	ぷっつり	adv	1	딱				u	b	
+ぷっ	ぷっ	adv	1	푸우	next=と			u	b	
+ぷっ	ぷっ	adv	2	픽	next=と			u	b	
+ぷつぷつ	ぷつぷつ	adv	1	쿡쿡				u	b	
+ぷぷぷ	ぷぷぷ	adv	1	부부부				u	b	
+ぷりぷり	ぷりぷり	adv	1	살찐				u	b	
+ぷりぷり	ぷりぷり	adv	2	탱탱하다				u	b	
+ぷりぷり	ぷりぷり	adv	3	탱탱한	next=の			u	b	
+ぷん	ぷん	adv	1	물컥	next=と			u	b	
+ぷんぷん	ぷんぷん	adv	1	푹푹				u	b	
+ぷんぷん	ぷんぷん	adv	2	투덜투덜				u	b	
+へたへた	へたへた	adv	1	털썩				u	b	
+へなへな	へなへな	adv	1	휘청휘청				u	b	
+へらへら	へらへら	adv	1	실실				u	wl	
+へらへら	へらへら	adv	2	해롱해롱				u	w	
+へらへら	へらへら	adv	3	히죽히죽				u	b	
+べたべた	べたべた	adv	1	끈적끈적				u	b	
+べたべた	べたべた	adv	2	처덕처덕				u	b	
+べたべた	べたべた	adv	3	찰딱				u	b	
+べたべた	べたべた	adv	4	철떡				u	b	
+べちゃくちゃ	べちゃくちゃ	adv	1	재잘재잘				u	b	
+べったり	べったり	adv	1	찰삭				u	b	
+べったり	べったり	adv	2	찰싹	next=と			u	b	
+べっとり	べっとり	adv	1	흠뻑				u	b	
+別段	べつだん	adv	1	특별히				u	b	
+べとべと	べとべと	adv	1	끈적끈적				u	b	
+べらべら	べらべら	adv	1	쫑알쫑알				u	b	
+べろべろ	べろべろ	adv	1	할짝할짝				u	b	
+ぺこぺこ	ぺこぺこ	adv	1	몹시 고픔				u	b	
+ぺこぺこ	ぺこぺこ	adv	2	굽실굽실				u	b	
+ぺこり	ぺこり	adv	1	움푹	next=と			u	b	
+ぺたり	ぺたり	adv	1	딱	next=と			u	b	
+ぺったり	ぺったり	adv	1	찰싹				u	b	
+ぺとぺと	ぺとぺと	adv	1	끈적끈적				u	b	
+ぺらぺら	ぺらぺら	adv	1	유창하게				u	wl	
+ぺらぺら	ぺらぺら	adv	2	줄줄				u	b	
+ぺらぺら	ぺらぺら	adv	3	흐르르				u	b	
+ぺろぺろ	ぺろぺろ	adv	1	날름날름				u	b	
+ほくほく	ほくほく	adv	1	희희락락				u	b	
+ほっそり	ほっそり	adv	1	호리호리한	next=と			u	b	
+ほとほと	ほとほと	adv	1	몹시				u	b	
+仄々	ほのぼの	adv	1	훈훈하게				u	wl	
+仄々	ほのぼの	adv	2	따끈따끈				u	b	
+ほろほろ	ほろほろ	adv	1	나폴나폴				u	b	
+ほろほろ	ほろほろ	adv	2	폴폴				u	b	
+ぼうっと	ぼうっと	adv	1	뿌옇게				u	b	
+ぼけっと	ぼけっと	adv	1	멍하게				u	b	
+ぼさぼさ	ぼさぼさ	adv	1	부스스				u	wl	
+ぼさぼさ	ぼさぼさ	adv	2	빈둥빈둥				u	wl	
+ぼさぼさ	ぼさぼさ	adv	3	더부룩이				u	b	
+ぼそぼそ	ぼそぼそ	adv	1	소곤소곤				u	wl	
+ぼたぼた	ぼたぼた	adv	1	뚝뚝				u	b	
+ぼちぼち	ぼちぼち	adv	1	슬슬				u	wl	
+ぼちぼち	ぼちぼち	adv	2	서서히				u	b	
+ぼつぼつ	ぼつぼつ	adv	1	조금씩				u	b	
+ぼとぼと	ぼとぼと	adv	1	뚝뚝				u	b	
+ぼやぼや	ぼやぼや	adv	1	멍청히				u	b	
+ぼろぼろ	ぼろぼろ	adv	1	너덜너덜				u	b	
+ぼろぼろ	ぼろぼろ	adv	2	투두둑				u	b	
+ぼんぼん	ぼんぼん	adv	1	땡땡				u	b	
+ぼんぼん	ぼんぼん	adv	2	평범하다				u	b	
+ぼんやり	ぼんやり	adv	1	멍하니				u	b	
+ぼんやり	ぼんやり	adv	2	희미하게				u	b	
+ぽかぽか	ぽかぽか	adv	1	따끈따끈				u	b	
+ぽかぽか	ぽかぽか	adv	2	후끈후끈				u	b	
+ぽかぽか	ぽかぽか	adv	3	딱딱				u	b	
+ぽかん	ぽかん	adv	1	멍하니	next=と			u	wl	
+ぽかん	ぽかん	adv	2	딱	next=と			u	b	
+ぽたぽた	ぽたぽた	adv	1	뚝뚝				u	b	
+ぽたり	ぽたり	adv	1	똑				u	b	
+ぽちゃぽちゃ	ぽちゃぽちゃ	adv	1	포동포동				u	b	
+ぽっかぽか	ぽっかぽか	adv	1	따끈따끈				u	b	
+ぽっかり	ぽっかり	adv	1	짝				u	b	
+ぽっかり	ぽっかり	adv	2	뻥				u	b	rule:2998 +unmapped
+ぽっきり	ぽっきり	adv	1	똑				u	b	
+ぽっちり	ぽっちり	adv	1	조금				u	b	
+ぽっつり	ぽっつり	adv	1	톡				u	b	
+ぽっぽ	ぽっぽ	adv	1	활활	next=と			u	b	
+ぽつねん	ぽつねん	adv	1	오도카니	next=と			u	b	
+ぽつぽつ	ぽつぽつ	adv	1	서서히				u	b	
+ぽつぽつ	ぽつぽつ	adv	2	뚝뚝				u	b	
+ぽつり	ぽつり	adv	1	덩그러니				u	wl	
+ぽつり	ぽつり	adv	2	뚝				u	b	
+ぽつり	ぽつり	adv	3	툭하고	next=と			u	b	
+ぽつり	ぽつり	adv	4	불쑥	next=と			u	b	
+ぽとぽと	ぽとぽと	adv	1	똑똑				u	b	
+ぽろぽろ	ぽろぽろ	adv	1	뚝뚝				u	b	
+ぽろり	ぽろり	adv	1	똑	next=と			u	b	
+ぽん	ぽん	adv	1	개				u	b	
+ぽん	ぽん	adv	2	톡	next=と			u	w	
+ぽん	ぽん	adv	3	펑	next=と			u	wl	
+ぽん	ぽん	adv	4	툭	next=と			u	wl	
+ぽん	ぽん	adv	5	선뜻	next=と			u	wl	
+ぽん	ぽん	adv	6	탁	next=と			u	b	
+ぽんぽん	ぽんぽん	adv	1	토닥토닥				u	wl	
+ぽんぽん	ぽんぽん	adv	2	펑펑				u	b	
+ぽんぽん	ぽんぽん	adv	3	땅땅				u	b	
+紛い	まがい	suf	1	비슷한	next=の			u	b	
+まごまご	まごまご	adv	1	우물쭈물				u	b	
+正しく	まさしく	adv	1	그야말로				u	wl	
+正しく	まさしく	adv	2	바야흐로				u	b	
+まじまじ	まじまじ	adv	1	물끄러미	next=と			u	b	
+交じり	まじり	suf	1	섞임				u	wl	
+交じり	まじり	suf	2	섞인	next=の			u	b	
+まずまず	まずまず	adv	1	그런대로				u	b	
+又々	またまた	adv	1	또 다시				u	b	
+又もや	またもや	adv	1	또다시				u	b	
+真っ直ぐ	まっすぐ	adv	1	똑바로				u	wl	
+真っ直ぐ	まっすぐ	adv	2	곧바로				u	b	
+真っ平	まっぴら	adv	1	딱 질색이다				u	b	
+真っ平	まっぴら	adv	2	전적으로				u	b	
+塗れ	まみれ	suf	1	투성이				u	wl	
+丸々	まるまる	adv	1	웅크리다				u	wl	
+丸々	まるまる	adv	2	꼬박				u	w	
+丸々	まるまる	adv	3	포동포동				u	b	
+丸々	まるまる	adv	4	둥글게 되다				u	b	
+丸々	まるまる	adv	5	전부				u	b	
+丸々	まるまる	adv	6	통통하게	next=と			u	w	
+満更	まんざら	adv	1	반드시				u	b	
+みっしり	みっしり	adv	1	충실히				u	b	
+見る見る	みるみる	adv	1	순식간에				u	b	
+むく	むく	adv	1	벗기다				u	b	
+むく	むく	adv	2	적합하다				u	b	rule:5013 +unmapped
+むく	むく	adv	3	오뚝	next=と			u	w	
+むか	むか	adv	1	욱				u	js	
+むか	むか	adv	2	울컷	next=と			u	b	
+むかむか	むかむか	adv	1	메슥메슥				u	b	
+むくむく	むくむく	adv	1	뭉게뭉게				u	b	
+むくむく	むくむく	adv	2	포동포동				u	b	
+むくむく	むくむく	adv	3	부스스				u	b	
+むざむざ	むざむざ	adv	1	쉽사리				u	b	
+むざむざ	むざむざ	adv	2	호락호락				u	b	
+むしむし	むしむし	adv	1	후텁지근하게				u	wl	
+むしむし	むしむし	adv	2	푹푹				u	b	
+むしゃむしゃ	むしゃむしゃ	adv	1	우걱우걱				u	b	
+むずむず	むずむず	adv	1	근질근질				u	b	
+無茶苦茶	むちゃくちゃ	adv	1	터무니없다				u	b	
+無茶苦茶	むちゃくちゃ	adv	2	지독하게				u	b	
+むっくと	むっくと	adv	1	벌떡				u	b	
+むっつり	むっつり	adv	1	무뚝뚝하게				u	b	
+むっと	むっと	adv	1	발끈				u	wl	
+むっと	むっと	adv	2	불끈				u	b	
+むらむら	むらむら	adv	1	불끈불끈				u	b	
+無理矢理	むりやり	adv	1	억지로				u	b	
+無理矢理	むりやり	adv	2	무리하게				u	b	
+無論	むろん	adv	1	물론				u	b	
+むんむん	むんむん	adv	1	후텁지근				u	b	
+めく	めく	suf	1	인 듯하다				u	b	rule:1299 +unmapped
+めきめき	めきめき	adv	1	눈에 띄게				u	b	
+めきめき	めきめき	adv	2	무럭무럭	next=と			u	b	
+目眩く	めくるめく	adn	1	가면 갈수록				u	b	
+めそめそ	めそめそ	adv	1	훌쩍훌쩍				u	b	
+目茶目茶	めちゃめちゃ	adv	1	엄청				u	wl	
+めっきり	めっきり	adv	1	제법				u	b	
+滅法	めっぽう	adv	1	터무니없다				u	b	
+滅法	めっぽう	adv	2	굉장히	next=に			u	b	
+めらめら	めらめら	adv	1	활활				u	b	
+めりめり	めりめり	adv	1	와르르				u	b	
+もくもく	もくもく	adv	1	뭉게뭉게				u	b	
+もくもく	もくもく	adv	2	묵묵히				u	b	
+もぐもぐ	もぐもぐ	adv	1	우물우물				u	b	
+もごもご	もごもご	adv	1	우물우물				u	w	
+もごもご	もごもご	adv	2	우물쭈물				u	b	
+若しくは	もしくは	conj	1	혹은				u	b	
+もじもじ	もじもじ	adv	1	머뭇머뭇				u	b	
+もじゃもじゃ	もじゃもじゃ	adv	1	더부룩이				u	b	
+もぞもぞ	もぞもぞ	adv	1	스멀스멀				u	b	
+もたもた	もたもた	adv	1	우물쭈물				u	b	
+もっさり	もっさり	adv	1	우둔한				u	b	
+専ら	もっぱら	adv	1	오로지				u	b	
+専ら	もっぱら	adv	2	전혀				u	b	
+専ら	もっぱら	adv	3	한결같다				u	b	
+もとい	もとい	intj	1	토대				u	b	
+固より	もとより	adv	1	물론				u	w	
+固より	もとより	adv	2	원래				u	b	
+最早	もはや	adv	1	이제				u	w	
+最早	もはや	adv	2	더 이상				u	wl	
+最早	もはや	adv	3	이미				u	b	
+もやもや	もやもや	adv	1	찜찜하게				u	wl	
+もやもや	もやもや	adv	2	뿌옇게				u	wl	
+もやもや	もやもや	adv	3	답답함				u	wl	
+もやもや	もやもや	adv	4	뭉게뭉게				u	b	
+もりもり	もりもり	adv	1	와작와작				u	b	
+もりもり	もりもり	adv	2	많이				u	b	
+約	やく	pref	1	태우다				u	b	
+約	やく	pref	2	굽다				u	b	
+やおら	やおら	adv	1	천천히				u	b	
+軈て	やがて	adv	1	이윽고				u	b	
+やきもき	やきもき	adv	1	안달복달				u	b	
+易々	やすやす	adv	1	편안히				u	w	
+易々	やすやす	adv	2	거뜬히				u	b	
+やや	やや	adv	1	약간				u	b	
+やわか	やわか	adv	1	설마				u	b	
+やわか	やわか	adv	2	어찌				u	b	
+やんわり	やんわり	adv	1	부드럽게				u	b	
+やんわり	やんわり	adv	2	넌지시	next=と			u	b	
+優に	ゆうに	adv	1	족히				u	wl	
+優に	ゆうに	adv	2	우아하게				u	b	
+行く行く	ゆくゆく	adv	1	장래				u	b	
+ゆさゆさ	ゆさゆさ	adv	1	흔들흔들				u	b	
+ゆったり	ゆったり	adv	1	낙낙하게				u	b	
+ゆったり	ゆったり	adv	2	느긋하게				u	b	
+ゆらゆら	ゆらゆら	adv	1	하늘하늘				u	b	
+ゆらゆら	ゆらゆら	adv	2	흔들흔들				u	b	
+ゆらり	ゆらり	adv	1	출렁하고	next=と			u	b	
+良く良く	よくよく	adv	1	자세히				u	wl	
+良く良く	よくよく	adv	2	차근차근				u	b	
+余計	よけい	adv	1	쓸데 없이				u	b	
+縦しんば	よしんば	adv	1	설령				u	b	
+よたよた	よたよた	adv	1	비틀비틀				u	b	
+よちよち	よちよち	adv	1	아장아장				u	b	
+余程	よほど	adv	1	상당히				u	b	
+余程	よほど	adv	2	상당한	next=の			u	b	
+よぼよぼ	よぼよぼ	adv	1	비틀비틀				u	b	
+よもや	よもや	adv	1	설마				u	b	
+よろよろ	よろよろ	adv	1	비틀비틀				u	b	
+よろよろ	よろよろ	adv	2	비틀비틀거리며	next=と			u	b	
+楽々	らくらく	adv	1	손쉽게				u	w	
+楽々	らくらく	adv	2	편안하게				u	b	
+楽々	らくらく	adv	3	편안히	next=と			u	w	
+りんりん	りんりん	adv	1	따르릉				u	b	
+六	ろく	num	1	여섯				u	b	
+ろくすっぽ	ろくすっぽ	adv	1	변변히				u	b	
+碌な	ろくな	adn	1	변변한				u	w	
+碌な	ろくな	adn	2	충분한				u	b	
+ろくろく	ろくろく	adv	1	변변히				u	b	
+わあわあ	わあわあ	adv	1	엉엉				u	b	
+わいわい	わいわい	adv	1	와글와글				u	b	
+わくわく	わくわく	adv	1	두근두근				u	wl	
+態と	わざと	adv	1	일부러				u	b	
+わなわな	わなわな	adv	1	후들후들				u	b	
+わんわん	わんわん	adv	1	멍멍				u	b	
+うぉん	うぉん	adv	1	원				u	b	
+かあかあ	かあかあ	adv	1	까악까악				u	b	
+がしゃん	がしゃん	adv	1	와장창				u	b	
+がつん	がつん	adv	1	확실히	next=と			u	b	
+がぶ	がぶ	adv	1	덥석				u	b	
+があがあ	があがあ	adv	1	꽥꽥				u	w	
+ぐにゃ	ぐにゃ	adv	1	비실비실				u	b	
+ぐにゃ	ぐにゃ	adv	2	비실비실하게	next=と			u	b	
+げげげ	げげげ	adv	1	웃음 소리				u	b	
+こけこっこ	こけこっこ	adv	1	꼬끼오				u	b	
+こっこっ	こっこっ	adv	1	꼬꼬				u	b	
+五	ご	num	1	전진				u	b	
+ごくごく	ごくごく	adv	1	꿀꺽꿀꺽				u	b	
+ごしごし	ごしごし	adv	1	쓱쓱				u	b	
+ごつん	ごつん	adv	1	퉁 하는	next=と			u	b	
+ごつん	ごつん	adv	2	퉁 하고	next=と			u	b	
+さくさく	さくさく	adv	1	바삭바삭				u	wl	
+さくさく	さくさく	adv	2	척척	next=と			u	b	
+さっぱり	さっぱり	adv	1	전혀				u	b	
+ざあ	ざあ	adv	1	쏴아하고	next=と			u	b	
+しゃき	しゃき	adv	1	꼿꼿이	next=と			u	w	
+しゃき	しゃき	adv	2	싱싱	next=と			u	b	
+ずばり	ずばり	adv	1	정통으로	next=と			u	b	
+ゼロ	ぜろ	num	1	제로				u	b	
+ちゅんちゅん	ちゅんちゅん	adv	1	짹짹				u	b	
+はたと	はたと	adv	1	번뜩				u	b	
+二十	はつ	num	1	동물 심장				u	b	
+バタン	ばたん	pn	1	쾅	next=と			u	b	
+ばらばら	ばらばら	adv	1	뿔뿔이				u	b	
+ひひーん	ひひーん	adv	1	히잉				u	b	
+ぴか	ぴか	adv	1	피카				u	b	
+ぴか	ぴか	adv	2	번쩍	next=と			u	b	
+ほっと	ほっと	adv	1	턱				u	w	
+ほっと	ほっと	adv	2	후				u	wl	
+ほっと	ほっと	adv	3	후유				u	b	
+ぼん	ぼん	adv	1	본				u	b	
+みんみん	みんみん	adv	1	맴맴				u	b	
+めえめえ	めえめえ	adv	1	맴맴				u	w	
+一千	いっせん	num	1	천				u	b	
+万	まん	num	1	만				u	b	rule:1135 +unmapped
+万々	ばんばん	adv	1	충분히				u	b	
+不日	ふじつ	adv	1	부일내				u	b	
+乃至	ないし	conj	1	내지				u	b	
+五十	ごじゅう	num	1	오십				u	b	
+付け	つけ	suf	1	첨부				u	b	
+付け	つけ	suf	2	부				u	b	
+代わり代わり	かわりがわり	adv	1	차례로				u	w	
+休み休み	やすみやすみ	adv	1	쉬엄쉬엄				u	b	
+何がなし	なにがなし	adv	1	어쩐지				u	b	
+何たる	なんたる	adn	1	이 무슨				u	b	
+何ぼ	なんぼ	adv	1	얼마나				u	b	
+何ぼ	なんぼ	adv	2	아무리				u	x	rule:2140 +unmapped
+何ぼ	なんぼ	adv	3	얼마	next=くらい			u	x	rule:5 +unmapped
+何ぼ	なんぼ	adv	4	얼마	next=掛			u	x	rule:5 +unmapped
+何ぼ	なんぼ	adv	5	얼마	next=かか			u	x	rule:5 +unmapped
+何十	なんじゅう	num	1	몇십				u	b	
+何千	なんぜん	num	1	몇천				u	b	
+何百	なんびゃく	num	1	몇백				u	b	
+偶然	ぐうぜん	adv	1	우연히	next=と			u	b	
+億	おく	num	1	억				u	b	
+十分	じゅうぶん	adv	1	충분히				u	b	
+冊	さつ	suf	1	권				u	b	
+冊	さつ	suf	2	책				u	b	
+冷え冷え	ひえびえ	adv	1	쌀쌀하게	next=と			u	b	
+初めまして	はじめまして	intj	1	처음 뵙겠습니다				u	b	
+刻々	こっこく	adv	1	시시 각각				u	w	
+刻々	こっこく	adv	2	시시각각	next=と			u	w	
+副	ふく	pref	1	부				u	b	
+匹	ひき	suf	1	마리				u	b	
+匹	ひき	suf	2	필				u	b	
+千	せん	num	1	천				u	b	
+協	きょう	suf	1	협				u	b	
+単に	たんに	adv	1	단지				u	b	
+即	そく	adv	1	바로	next=に			u	b	
+厳に	げんに	adv	1	엄하게				u	b	
+口ずから	くちずから	adv	1	자기 입으로				u	b	
+あたら	あたら	adv	1	아깝게도				u	b	
+史	し	suf	1	사				u	b	
+名だたる	なだたる	adn	1	유명한				u	b	
+向き	むき	suf	1	향				u	b	
+向け	むけ	suf	1	전용으로	next=に			u	b	
+営	えい	suf	1	영				u	b	
+在	ざい	pref	1	재				u	b	
+多々	たた	adv	1	많이				u	b	
+多々	たた	adv	2	매우 많이				u	b	
+夜な夜な	よなよな	adv	1	밤마다				u	b	
+夜もすがら	よもすがら	adv	1	밤새도록				u	b	
+大きに	おおきに	intj	1	정말				u	b	
+オオイタ	おおいた	pn	1	상당한	next=の			u	b	
+大層	たいそう	adv	1	매우				u	b	
+大抵	たいてい	adv	1	대체로				u	b	
+大抵	たいてい	adv	2	대개				u	b	
+密々	みつみつ	adv	1	은밀한	next=の			u	w	
+尽くし	づくし	suf	1	모음				u	wl	
+尽くし	づくし	suf	2	다함				u	b	
+差し向き	さしむき	adv	1	당장				u	b	
+差し当たり	さしあたり	adv	1	당장				u	b	
+年来	ねんらい	adv	1	년간				u	b	
+幸い	さいわい	adv	1	다행히				u	wl	
+幸い	さいわい	adv	2	되다				u	b	
+幸い	さいわい	adv	3	다행이다				u	b	
+幸い	さいわい	adv	4	다행	next=Lと			u	b	rule:508
+幸い	さいわい	adv	5	좋다	after=いただけ			u	b	rule:3167 +unmapped assigns-neighbour
+幸い	さいわい	adv	6	좋다	after=頂			u	b	rule:3167 +unmapped assigns-neighbour
+幾	いく	num	1	얼마				u	b	
+幾	いく	num	2	기				u	b	
+広々	ひろびろ	adv	1	널찍함				u	b	
+広々	ひろびろ	adv	2	널찍이	next=と			u	b	
+廃	はい	pref	1	폐				u	b	
+延々	えんえん	adv	1	장장				u	w	
+延々	えんえん	adv	2	끝없이	next=と			u	b	
+建て	だて	suf	1	건				u	b	
+建て	だて	suf	2	건물				u	b	
+張り	ばり	suf	1	의욕				u	b	
+張り	ばり	suf	2	붙은	next=の			u	b	
+当たり	あたり	suf	1	해당하고				u	b	
+当たり	あたり	suf	2	당				u	b	rule:9600 +unmapped
+当たり	あたり	suf	3	정답				u	b	rule:4818 +unmapped
+当分	とうぶん	adv	1	당분간				u	b	
+忽然	こつぜん	adv	1	홀연				u	b	
+忽然	こつぜん	adv	2	홀연히				u	b	
+思いの外	おもいのほか	adv	1	의외로				u	w	
+思う様	おもうさま	adv	1	마음껏				u	w	
+急遽	きゅうきょ	adv	1	서둘러				u	b	
+急遽	きゅうきょ	adv	2	급거				u	b	
+懇々	こんこん	adv	1	간곡히	next=と			u	w	
+手ずから	てずから	adv	1	몸소				u	b	
+敢然	かんぜん	adv	1	과단성이 있고 용감함				u	b	
+敢然	かんぜん	adv	2	감연히				u	b	
+数十	すうじゅう	num	1	수십				u	b	
+数千	すうせん	num	1	수천				u	b	
+数多く	かずおおく	adv	1	많이				u	b	
+数多く	かずおおく	adv	2	수많은	next=の			u	b	
+数百	すうひゃく	num	1	수백				u	b	
+料	りょう	suf	1	료				u	b	
+断固	だんこ	adv	1	단호				u	b	
+断固	だんこ	adv	2	단호히				u	b	
+断然	だんぜん	adv	1	단연				u	b	
+斯かる	かかる	adn	1	이러한				u	b	
+早晩	そうばん	adv	1	조만간에				u	b	
+昏々	こんこん	adv	1	정신없이	next=と			u	w	
+昨	さく	pref	1	작				u	b	
+昨	さく	pref	2	전				u	b	rule:4578 +unmapped
+時たま	ときたま	adv	1	가끔				u	b	
+晴々	はればれ	adv	1	상쾌				u	b	
+暗に	あんに	adv	1	은근히				u	b	
+更々	さらさら	adv	1	조금도				u	wl	
+有余	ゆうよ	suf	1	남짓				u	wl	
+有余	ゆうよ	suf	2	유여				u	b	
+朝な朝な	あさなあさな	adv	1	매일 아침				u	b	
+来	らい	suf	1	이래의	next=の			u	b	
+果然	かぜん	adv	1	과연				u	b	
+校	こう	suf	1	교				u	b	
+根刮ぎ	ねこそぎ	adv	1	모조리				u	wl	
+根刮ぎ	ねこそぎ	adv	2	전부				u	b	
+格別	かくべつ	adv	1	각별히				u	b	
+案外	あんがい	adv	1	뜻밖이다				u	b	
+案外	あんがい	adv	2	의외로				u	b	
+極力	きょくりょく	adv	1	극력				u	b	
+楽	がく	pref	1	편하다				u	b	
+概して	がいして	adv	1	대체로				u	b	
+殊に	ことに	adv	1	특히				u	b	
+殊の外	ことのほか	adv	1	의외로				u	w	
+長らく	ながらく	adv	1	오랫동안				u	b	
+決然	けつぜん	adv	1	결연히	next=と			u	b	
+況して	まして	adv	1	더구나				u	b	
+泣く泣く	なくなく	adv	1	마지못해				u	wl	
+泣く泣く	なくなく	adv	2	울면서				u	b	
+深々	ふかぶか	adv	1	깊이	next=と			u	wl	
+深々	ふかぶか	adv	2	조용히	next=と			u	b	
+済み	ずみ	suf	1	끝난	next=の			u	b	
+滾々	こんこん	adv	1	뚝뚝	next=と			u	w	
+漸次	ぜんじ	adv	1	점차				u	b	
+ぬれぬれ	ぬれぬれ	adv	1	축축하게				u	b	
+無慮	むりょ	adv	1	무려				u	b	
+無理からぬ	むりからぬ	adn	1	당연한				u	b	
+然しも	さしも	adv	1	그렇게도				u	b	
+焼き	やき	suf	1	구이				u	b	
+爾来	じらい	adv	1	그 이후				u	b	
+状	じょう	suf	1	장				u	b	
+状	じょう	suf	2	상태				u	b	
+独りでに	ひとりでに	adv	1	저절로				u	b	
+猛然	もうぜん	adv	1	사납게	next=と			u	b	
+症	しょう	suf	1	증				u	b	
+百	ひゃく	num	1	백				u	b	
+益々	ますます	adv	1	점점				u	w	
+益々	ますます	adv	2	더욱 더				u	b	
+益々	ますます	adv	3	더욱더				u	b	
+着々	ちゃくちゃく	adv	1	착착				u	w	
+着々	ちゃくちゃく	adv	2	순조롭게	next=と			u	b	
+碌に	ろくに	adv	1	변변히				u	w	
+碌に	ろくに	adv	2	제대로				u	wl	
+確たる	かくたる	adn	1	확실한				u	b	
+秋毫	しゅうごう	adv	1	추호				u	b	
+穣	じょう	num	1	양				u	b	
+突如	とつじょ	adv	1	갑자기				u	b	
+等々	とうとう	suf	1	등등				u	b	
+篤と	とくと	adv	1	신중히				u	b	
+素	そ	pref	1	순수하다				u	b	
+細々	ほそぼそ	adv	1	세세하게	next=と			u	wl	
+細々	ほそぼそ	adv	2	가느다랗게	next=と			u	b	
+終始	しゅうし	adv	1	시종				u	b	rule:49 +unmapped assigns-neighbour
+続々	ぞくぞく	adv	1	속속				u	w	
+続々	ぞくぞく	adv	2	잇달아				u	b	
+総	そう	pref	1	총				u	b	
+総じて	そうじて	adv	1	대체로				u	b	
+纏い	まとい	suf	1	표치				u	b	
+翌	よく	pref	1	다음				u	b	
+翌々	よくよく	pref	1	다음다음				u	w	
+見事	みごと	adv	1	훌륭히				u	b	rule:75 +unmapped
+視	し	suf	1	시				u	b	
+警	けい	suf	1	경찰				u	b	
+警	けい	suf	2	경				u	b	
+費	ひ	suf	1	비				u	b	
+赤々	あかあか	adv	1	새빨갛게	next=と			u	w	
+転々	てんてん	adv	1	전전				u	wl	
+転々	てんてん	adv	2	데굴데굴				u	wl	
+転々	てんてん	adv	3	여기저기	next=と			u	w	
+追い追い	おいおい	adv	1	계속해서				u	b	
+追い追い	おいおい	adv	2	차차				u	b	
+追い追い	おいおい	adv	3	머지않아	next=に			u	w	
+逐一	ちくいち	adv	1	일일이 상세하게				u	b	
+遥か	はるか	adv	1	아득히				u	b	
+遺	い	pref	1	유				u	b	
+那由他	なゆた	num	1	나유타				u	b	
+重重	おもおも	adv	1	거듭거듭				u	b	
+長々	ながなが	adv	1	오랫동안				u	w	
+長々	ながなが	adv	2	장황하게	next=と			u	wl	
+長々	ながなが	adv	3	길게	next=と			u	b	
+閣	かく	suf	1	각				u	b	
+除	じょ	pref	1	제				u	b	
+難なく	なんなく	adv	1	쉽게				u	b	
+零	れい	num	1	영				u	b	
+零	れい	num	2	령				u	b	
+青々	あおあお	adv	1	청청하게	next=と			u	w	
+順次	じゅんじ	adv	1	차례차례				u	b	
+順次	じゅんじ	adv	2	순차				u	b	
+麗々	れいれい	adv	1	번지르르하게	next=と			u	w	
+何故	なにゆえ	adv	1	어째서				u	x	
+何故	なにゆえ	adv	2	왜				u	wl	
+キンキン	きんきん	pn	1	시원하게	next=に			u	x	
+おいっす	おいっす	intj	1	어이				u	x	
+おす	おす	intj	1	여어				u	x	
+ひょっこり	ひょっこり	adv	1	불쑥				u	x	
+ちんたら	ちんたら	adv	1	느릿느릿	next=と			u	x	
+わたわた	わたわた	adv	1	허둥지둥				u	x	
+擬き	もどき	suf	1	비슷한 것				u	x	
+凛と	りんと	adv	1	늠름하게				u	x	
+唯々	ただただ	adv	1	그저				u	x	
+まったり	まったり	adv	1	느긋하게	next=と			u	x	
+かちこち	かちこち	adv	1	톡톡				u	w	
+かちこち	かちこち	adv	2	딱딱하다				u	w	
+がちん	がちん	adv	1	쨍그랑				u	w	
+てっかてか	てっかてか	adv	1	번들번들				u	w	
+どきんどきん	どきんどきん	adv	1	두근두근				u	w	
+ぴっかぴか	ぴっかぴか	adv	1	반짝반짝				u	w	
+ぴっかぴか	ぴっかぴか	adv	2	번쩍번쩍				u	w	
+びかびか	びかびか	adv	1	반짝반짝				u	w	
+びかびか	びかびか	adv	2	번쩍번쩍				u	w	
+ぴっちぴち	ぴっちぴち	adv	1	팔팔				u	w	
+ぴっちぴち	ぴっちぴち	adv	2	펄떡펄떡				u	w	
+ほこほこ	ほこほこ	adv	1	후끈후끈				u	w	
+ほこほこ	ほこほこ	adv	2	따끈따끈				u	w	
+ぱちゃぱちゃ	ぱちゃぱちゃ	adv	1	철벅철벅				u	w	
+ぱちゃぱちゃ	ぱちゃぱちゃ	adv	2	철썩철썩				u	w	
+ぱちゃぱちゃ	ぱちゃぱちゃ	adv	3	할짝할짝				u	w	
+ちゃぽちゃぽ	ちゃぽちゃぽ	adv	1	철벅철벅				u	w	
+ちゃぽちゃぽ	ちゃぽちゃぽ	adv	2	철썩철썩				u	w	
+ちゃぽちゃぽ	ちゃぽちゃぽ	adv	3	할짝할짝				u	w	
+わっくわく	わっくわく	adv	1	두근두근				u	wl	
+重々	じゅうじゅう	adv	1	거듭거듭				u	w	
+荒々	あらあら	adv	1	대강				u	w	
+がしゃーん	がしゃーん	adv	1	와장창				u	w	
+がっしゃん	がっしゃん	adv	1	와장창				u	w	
+ひゅうひゅう	ひゅうひゅう	adv	1	우우				u	w	
+ごほん	ごほん	adv	1	흠흠				u	wl	
+ごほん	ごほん	adv	2	콜록				u	wl	
+然々	しかじか	adv	1	이러이러해서				u	w	
+あわあわ	あわあわ	intj	1	허둥지둥				u	wl	
+ちまちま	ちまちま	adv	1	자잘하게				u	wl	
+ひくり	ひくり	adv	1	움찔				u	wl	
+ひっそり閑	ひっそりかん	adv	1	호젓이				u	w	
+ぷるぷる	ぷるぷる	adv	1	부들부들				u	wl	
+ぷるぷる	ぷるぷる	adv	2	출렁출렁				u	wl	
+丸切り	まるきり	adv	1	통				u	w	
+丸切り	まるきり	adv	2	전혀				u	wl	
+もそもそ	もそもそ	adv	1	곰지락곰지락				u	w	
+もそもそ	もそもそ	adv	2	꼼지락꼼지락				u	wl	
+もそもそ	もそもそ	adv	3	푸석푸석				u	wl	
+がっ	がっ	adv	1	확	next=と			u	wl	
+がっつり	がっつり	adv	1	잔뜩				u	wl	
+がっつり	がっつり	adv	2	제대로				u	wl	
+がら	がら	adv	1	벌컥	next=と			u	w	
+がり	がり	adv	1	아드득	next=と			u	w	
+さら	さら	adv	1	아무렇지 않게	next=と			u	wl	
+しゃんと	しゃんと	adv	1	꼿꼿이				u	wl	
+つう	つう	adv	1	쓱	next=と			u	w	
+どっと	どっと	adv	1	덜컥				u	w	
+どっと	どっと	adv	2	우르르				u	wl	
+どくん	どくん	adv	1	두근				u	wl	
+にこ	にこ	adv	1	씩	next=と			u	w	
+にこり	にこり	adv	1	방긋				u	wl	
+にこり	にこり	adv	2	활짝				u	w	
+にたり	にたり	adv	1	히죽				u	wl	
+ばた	ばた	adv	1	털썩	next=と			u	w	
+ひゅっ	ひゅっ	adv	1	픽	next=と			u	w	
+ひゅん	ひゅん	adv	1	픽	next=と			u	w	
+びゅうびゅう	びゅうびゅう	adv	1	우우				u	w	
+ぴくり	ぴくり	adv	1	움찔				u	wl	
+ぴい	ぴい	adv	1	삐익				u	wl	
+ぼそ	ぼそ	adv	1	나직이	next=と			u	w	
+ぽきり	ぽきり	adv	1	똑				u	wl	
+ぽち	ぽち	adv	1	꾹				u	wl	
+ぽつん	ぽつん	adv	1	덩그러니				u	wl	
+もふもふ	もふもふ	adv	1	복슬복슬				u	wl	
+伝い	つたい	suf	1	따라				u	wl	
+割合	わりあい	adv	1	비교적				u	wl	
+割合	わりあい	adv	2	의외로				u	wl	
+夜通し	よどおし	adv	1	밤새				u	wl	
+如何な	いかな	adn	1	어떤				u	wl	
+如何な	いかな	adn	2	아무리				u	wl	
+掛かり	がかり	suf	1	걸림				u	wl	
+掛かり	がかり	suf	2	비용				u	wl	
+掛かり	がかり	suf	3	미늘				u	wl	
+掛かり	がかり	suf	4	담당				u	wl	
+放し	はなし	suf	1	이야기				u	w	
+放し	はなし	suf	2	계속				u	wl	
+艘	そう	suf	1	척				u	wl	
+薄ぼんやり	うすぼんやり	adv	1	어슴푸레				u	w	
+見す見す	みすみす	adv	1	뻔히				u	wl	
+越し	ごし	suf	1	너머				u	wl	
+越し	ごし	suf	2	동안				u	wl	
+１０		num	1	십				u	w	
+１００００００		num	1	백만				u	w	
+１１		num	1	십일				u	w	
+１２		num	1	십이				u	w	
+１３		num	1	십삼				u	w	
+三百	さんびゃく	num	1	삼백				u	w	
+３００		num	1	삼백				u	w	
+ざっくり	ざっくり	adv	1	대충				u	w	
+すっぱり	すっぱり	adv	1	깨끗이				u	w	
+ようやっと	ようやっと	adv	1	드디어				u	w	
+ついぞ	ついぞ	adv	1	끝내				u	w	
+っち	っち	suf	1	치				u	w	
+耳	じ	pref	1	귀	next=塞ぐ			u	x	senses
+鼻	び	pref	1	콧방귀	next=鳴らす			u	x	senses
+振る	ぶる	suf	1	매기다	after=番号|ルビ			u	x	senses
+振る	ぶる	suf	2	흔들다	after=手|旗|帽子|尻尾|ハンカチ|ペンライト			u	x	senses
+振る	ぶる	suf	3	휘두르다	after=剣|刀|杖|バット|拳|斧|槍|鞭|木刀|竹刀|ハンマー|太刀|鍬|鎌|釜|鉈|鶴嘴|大剣|棍棒|メイス|農具			u	x	senses
+振る	ぶる	suf	4	젓다	after=首|頭			u	x	senses
+振る	ぶる	suf	5	던지다	after=賽子|賽			u	x	senses
+振る	ぶる	suf	6	굴리다	after=ダイス|賽子|賽			u	x	senses

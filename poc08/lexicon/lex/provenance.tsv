@@ -1,0 +1,21 @@
+#! provenance
+# Provenance codes of the rows (prov column, joined with + when a row has several). ship: yes, by-sa (only in by-sa/ files), review (only as st=r/m), no (never imported). A trailing ? marks a code traced by key only.
+code	ship
+b	review
+x	yes
+w	review
+wl	yes
+ji	by-sa
+js	by-sa
+ps	no
+nw	yes
+nl	yes
+nj	by-sa
+nt	yes
+nq	yes
+nn	no
+np	no
+nu	no
+c	row
+r	yes
+u	yes

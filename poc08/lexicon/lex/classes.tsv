@@ -1,0 +1,78 @@
+#! classes
+# Named semantic classes for cues (obj=@headwear) and noun features (cls=@person). codes: 0.7 meaning codes whose rows seed the class.
+class	parent	codes	members (examples)
+@entity			(root of concrete things)
+@abstract			(root of abstract things)
+@person	@entity	UAq UQf	人, 男, 女, 子, 彼, 先生, 兵士, 友達
+@person.kin	@person	UQf	父, 母, 兄, 姉, 弟, 妹, 娘, 息子, 夫, 妻
+@person.role	@person	UAq	医者, 店員, 騎士, 魔法使い, 社長, 王
+@person.higher	@person		先生, 先輩, 社長, 王, 陛下, 殿下, 姫, 様
+@group	@entity	VGt	家族, 軍, 騎士団, パーティー, クラス, 部隊, チーム
+@organization	@group	QID QMS KNa	会社, 学校, ギルド, 政府, 警察, 組合
+@animal	@entity	QAA QAB QAC QAD QAE QAF QAG	犬, 猫, 鳥, 馬, 魚, 虫, 狼
+@monster	@animal		魔物, 竜, ドラゴン, ゴブリン, スライム, 悪魔
+@plant	@entity	QAL QAN QAO QAM	木, 花, 草, 薔薇, 桜, 森
+@body	@entity	QHP	手, 足, 頭, 顔, 目, 口, 胸, 背中, 指
+@illness	@abstract	UTi QHp	病気, 風邪, 怪我, 熱, 傷
+@food	@entity		ご飯, パン, 肉, 料理, 弁当, 菓子, ケーキ
+@drink	@food		水, 茶, お茶, コーヒー, 酒, ジュース
+@meal	@event		朝食, 昼食, 夕食, 夕飯, ご飯, 食事
+@clothing	@entity		服, 制服, 上着, 着物, ドレス, シャツ, スカート
+@headwear	@clothing		帽子, ヘルメット, 冠, フード, 兜
+@eyewear	@clothing		眼鏡, サングラス, ゴーグル
+@footwear	@clothing		靴, 靴下, ブーツ, 下駄
+@accessory	@clothing		指輪, ネックレス, 腕輪, ピアス, 時計
+@tool	@entity	UTt	道具, 鍵, 鋏, 箒, ペン, 鉛筆
+@weapon	@tool		剣, 刀, 槍, 弓, 銃, ナイフ, 盾
+@machine	@tool		機械, ロボット, エンジン, 装置
+@device	@machine		スマホ, 携帯, 電話, パソコン, テレビ, カメラ, ラジオ
+@vehicle	@entity	VTp UTp	車, 電車, 船, 馬車, 自転車, バス, 飛行機
+@furniture	@entity		机, 椅子, ベッド, 棚, テーブル, ソファ
+@seat	@furniture		椅子, ソファ, ベンチ, 席, 座席
+@bedding	@furniture		布団, 毛布, 枕, シーツ
+@container	@entity		箱, 袋, 瓶, 鞄, カップ, 皿, 籠
+@document	@entity		手紙, 本, 書類, 資料, 日記, 地図, 契約書
+@picture	@document		写真, 絵, 画像, 映像, 動画
+@music	@abstract	QMU QMu USo	音楽, 曲, 歌, レコード, CD
+@sound	@abstract	USo UHr	音, 声, 悲鳴, 歓声, 足音
+@shout	@sound		悲鳴, 歓声, 叫び, 大声, 声
+@language	@abstract	QLG	日本語, 英語, 言葉, 方言
+@money	@abstract	QMM	金, お金, 円, 代金, 給料, 料金
+@time	@abstract	UMe	時, 時間, 日, 朝, 夜, 今日, 明日, 年, 季節
+@period	@time	KSt	期間, 間, 頃, 時代, 春, 夏, 秋, 冬
+@event	@abstract		事件, 祭り, 試合, 戦い, 会議, 式, パーティー
+@task	@event		宿題, 仕事, 課題, 作業, 任務, 依頼
+@activity	@event		勉強, 運動, 料理, 掃除, 練習, 訓練
+@sport	@activity	SPt	野球, サッカー, テニス, 水泳, 試合
+@skill	@abstract	UTt	技, 技術, 魔法, 剣術, 才能, 能力
+@magic	@skill		魔法, 魔術, 呪文, 結界, 呪い
+@subject.school	@abstract	USu	数学, 英語, 歴史, 国語, 科学
+@qualification	@abstract		資格, 免許, 学位, 単位
+@rule	@abstract	ULw UMN ULm	法, 規則, 法律, 校則, 約束, ルール
+@info	@abstract		話, 情報, 噂, 名前, 住所, 理由, 意見, 結果, 答え
+@question	@info		質問, 問題, 疑問, 謎
+@topic	@info		話題, 件, 問題, 点, 事情
+@idea	@abstract	UTh USm	考え, 意見, 思想, 計画, 予定
+@speech	@abstract	UTs USe	言葉, 話, 返事, 挨拶, 嘘, 冗談, 文句
+@emotion	@abstract	UFl SFl	気持ち, 感情, 怒り, 喜び, 悲しみ, 不安
+@mood	@emotion		気分, 機嫌, 雰囲気, 疑い, 誤解
+@relation	@abstract	UXm	関係, 縁, 仲, 友情, 恋
+@place	@entity	QCT	所, 場所, 町, 村, 国, 部屋, 家, 学校, 店, 外
+@place.upper	@place		屋上, 二階, 上, 山, 丘, 塔
+@building	@place		家, 城, 店, 学校, 病院, 教会, 塔, ビル
+@room	@place		部屋, 教室, 台所, 寝室, 廊下, 玄関
+@facility	@building		店, 病院, 駅, 図書館, 銀行, ホテル
+@house	@building		家, 実家, 屋敷, 部屋, 住まい
+@nature	@place		山, 川, 海, 森, 空, 湖
+@weather	@abstract		天気, 雨, 雪, 雲, 風, 霧, 嵐
+@direction	@abstract	UDr UXg	前, 後ろ, 上, 下, 右, 左, 北, 南, 方向
+@color	@abstract	UCr	色, 赤, 青, 白, 黒, 緑
+@material	@entity	UGs	石, 木, 鉄, 金, 布, 紙, 水
+@light	@abstract	UXl	光, 明かり, 火, 炎, 煙
+@quantity	@abstract	UXf UXb UXd UXw UXt UXs	数, 量, 重さ, 長さ, 速さ, 温度, 距離
+@number	@quantity		一, 二, 三, 数字
+@shape	@abstract		形, 丸, 線, 点, 角
+@thing.made	@entity		作品, 料理, 建物, 道具, 店
+@object.long	@entity		剣, 棒, 槍, 指, 舌, ペン, 髪, 糸
+@game	@activity		ゲーム, 遊び, 将棋, トランプ, パズル
+@crime	@event	HGu UGu UPp	犯罪, 罪, 盗み, 殺人, 罰
