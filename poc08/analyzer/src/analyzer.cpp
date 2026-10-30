@@ -323,7 +323,7 @@ uint8_t ClassCode(const Model& m, uint16_t cls) {
 
 }  // namespace
 
-void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) const {
+void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, float slackNats) const {
   WorkspacePtr own;
   Workspace* ws = wsIn;
   if (!ws) {
@@ -340,7 +340,11 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) cons
   Options opt;
   opt.margins = false;
   BuildLattice(m, ws, opt);
-  RunViterbi(m, ws, false);
+  RunViterbi(m, ws, true);
+  const int32_t slack = static_cast<int32_t>(slackNats * 100.0f);
+  auto through = [&](const Arc& a) {
+    return a.fwd >= kInf || a.bwd >= kInf ? kInf : a.fwd + a.bwd - ws->best;
+  };
   // short-unit path: long units are replaced by their parts
   std::vector<uint32_t> path, parts;
   for (size_t pi = 0; pi < ws->path.size(); ++pi) {
@@ -387,18 +391,31 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) cons
       if (rest && out->ends[byteB(y.e)] == 0) out->ends[byteB(y.e)] = 'i';
     }
   }
+  // derived spoken words may be cut anywhere inside (か|ぁ, た|ぁ～)
+  for (uint32_t ai : path) {
+    const Arc& x = ws->arcs[ai];
+    if (x.rule < 0) continue;
+    for (uint32_t k = x.b + 1; k < x.e; ++k)
+      if (out->ends[byteB(k)] == 0) out->ends[byteB(k)] = 'i';
+  }
+  // cuts made by a path close to the best one
+  for (const Arc& a : ws->arcs) {
+    if (a.removedBy >= 0 || a.e >= n || boundary[a.e]) continue;
+    if (through(a) < slack && out->ends[byteB(a.e)] == 0) out->ends[byteB(a.e)] = 'i';
+  }
   for (const Arc& a : ws->arcs) {
     if (a.kind != ArcKind::lex || a.rule >= 0 || a.removedBy >= 0 || !boundary[a.b] || !boundary[a.e]) continue;
     if (tokenAt[a.b] != UINT32_MAX && ws->arcs[tokenAt[a.b]].e >= a.e) continue;  // one analyzer word or less
     uint8_t c = ClassCode(m, m.pforms[a.form].cls);
     if (c == 'p' || c == 'x' || c == 's' || c == 'u') continue;
-    // only a word that would swallow a particle or an auxiliary the analyzer reads (しか + し)
+    // only a word that loses clearly and would swallow a particle the analyzer reads (しか + し)
+    if (through(a) < slack) continue;
     bool swallows = false;
     for (uint32_t k = a.b; k < a.e && !swallows; ++k) {
       if (tokenAt[k] == UINT32_MAX) continue;
       const Arc& t = ws->arcs[tokenAt[k]];
       uint8_t tc = ClassCode(m, t.kind == ArcKind::lex ? m.pforms[t.form].cls : t.lcls);
-      swallows = tc == 'p' || tc == 'x';
+      swallows = tc == 'p';
     }
     if (swallows) out->rejected.push_back({{byteB(a.b), byteE(a.e)}, c});
   }
