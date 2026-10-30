@@ -37,3 +37,4 @@ lookup:幹細胞	しかし 培養した幹細胞を使って	하지만 배양한
 lookup:幹細胞	肝臓には肝臓の幹細胞があって	간에는 간의 줄기세포가 있어	fix	lookup
 lookup:冠王	ホームラン、打点の２冠王 栗原。	홈런, 타점의 2관왕 쿠리하라.	fix	lookup
 lookup:現地入り	日本の専門家が現地入りです。	일본의 전문가가 현지 도착입니다.	fix	lookup
+dict:lexical-broadcast-terms	ワンアウト一三塁	원 아웃 1루와 3루	fix	lookup
