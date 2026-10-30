@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+G20	マリーレヒート・ルイヒェン・ファリナー：王階級の傭兵。美女。	has:왕 계급의 용병	fix	global-stem
+G20	タルガス・エルガイワ：王階級の傭兵。髭面の壮年男性。	has:왕 계급의 용병	fix	global-stem
+G20	アルベルト・サークルート：王階級の傭兵。イケメン。	has:왕 계급의 용병	fix	global-stem
+G50	⟨これが森の王ヘラジカ⟩	has:숲의 왕	fix	global-stem
+G50	黒羽の王ゆかりの神聖な場所と聞いている	has:의 왕 유카리	fix	global-stem
+G50	冥界の王 ハデスが絶対に負けるわけねえ	has:명계의 왕 하데스	fix	global-stem
+G10	王さん、こんにちは	has:왕 씨	fix	global-stem
+G20	ここは王立学院の学生食堂	has:왕립 학원	keep	global-stem
+G20	なるほど、王命ならば逆らえません	has:왕명이라면	keep	global-stem
+G20	倭の五王が登場する直前	has:오왕이	keep	global-stem
+G20	薄暗い部屋の中、王の御前でこの報告をする	has:왕의 어전	keep	global-stem
+G20	最高の王になっておくれ	has:최고의 왕이	keep	global-stem
+G20	王は惑わず…	has:왕은	keep	global-stem
