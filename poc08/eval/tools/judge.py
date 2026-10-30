@@ -17,7 +17,9 @@ What is judged:
 - pairwise preference per (line, output X, output Y) for each compared pair: every system against
   each baseline, and the baselines among themselves. X/Y order is balanced by a hash.
 Judge 1 sees every item; judge 2 (a different model tier) sees the lines whose id hash falls in
---frac2 (and all anchors). Items are cached by (judge, rubric, context, source, reference, output(s))
+--frac2 (and all anchors). Judge 3 (--model3) sees the double-judged items where judges 1 and 2
+disagree, and the report adds the 2-of-3 majority on the double-judged lines (--frac2 1 for a verdict
+run gives the majority on every line). Items are cached by (judge, rubric, context, source, reference, output(s))
 in CACHE, so identical outputs and re-runs cost nothing. Batches mix systems and are balanced by
 source length. Context = up to 3 previous source rows of the document (and the speaker if known).
 
@@ -309,6 +311,113 @@ def summarize_mqm(v):
             "cats": [e[0] for e in v["errors"] if e[1] in ("critical", "major")]}
 
 
+def majority(a1, a2, a3):
+    """Pairwise verdicts in {-1, 0, 1}: the value two of three judges give, else 0."""
+    for v in (a1, a2, a3):
+        if [a1, a2, a3].count(v) >= 2:
+            return v
+    return 0
+
+
+def third(a, rep, lines, names, pairs, systems, mq, base_item, caches, anchors, m1, m2, log):
+    """Judge 3 sees the double-judged items where judges 1 and 2 disagree (has critical/major for MQM,
+    the verdict for pairs); report the 2-of-3 majority on the double-judged lines."""
+    m3, e3 = a.model3, a.effort3
+    caches[m3] = caches.get(m3) or api.Cache(os.path.join(CACHE, f"judge.{m3}.jsonl"))
+    c3 = caches[m3]
+    li_of = {L["id"]: li for li, L in enumerate(lines)}
+    dis_m = [(s, li) for s in names for li in range(len(lines))
+             if (0, s, li) in mq and (1, s, li) in mq and mq[(0, s, li)]["cm"] != mq[(1, s, li)]["cm"]]
+    dis_p = []
+    for x, y in pairs:
+        d = rep["pairs"].get(f"{x} vs {y}", {})
+        if m1 in d and m2 in d:
+            for lid, r2 in d[m2]["lines"].items():
+                if lid in d[m1]["lines"] and d[m1]["lines"][lid] != r2:
+                    dis_p.append((x, y, li_of[lid]))
+    todo_m, todo_p, seen = [], [], set()
+    for s, li in dis_m:
+        it = dict(base_item(li, [systems[s][li]]), ko=systems[s][li])
+        it["key"] = mqm_key(m3, e3, it)
+        if it["key"] not in seen and c3.get(it["key"]) is None:
+            seen.add(it["key"])
+            todo_m.append(it)
+    for x, y, li in dis_p:
+        ox, oy = systems[x][li], systems[y][li]
+        it = base_item(li, [ox, oy])
+        k = pair_key(m3, e3, it, ox, oy)
+        if k not in seen and c3.get(k) is None:
+            seen.add(k)
+            first = int(k, 16) % 2 == 0
+            todo_p.append(dict(it, key=k, a=ox if first else oy, b=oy if first else ox))
+    log(f"{rep['set']} {m3} (third): {len(dis_m)} MQM and {len(dis_p)} pair disagreements, "
+        f"{len(todo_m) + len(todo_p)} to judge")
+    run_batches("mqm", m3, e3, todo_m, c3, anchors, a.jobs, a.batch, log)
+    run_batches("pair", m3, e3, todo_p, c3, anchors, a.jobs, a.batch, log)
+    out = {"model": m3, "effort": e3, "mqm": {}, "pairs": {}, "mqm_disagreements": len(dis_m),
+           "pair_disagreements": len(dis_p)}
+    sided = [0, 0]
+    for s in names:
+        rows = []
+        for li in range(len(lines)):
+            if (0, s, li) not in mq or (1, s, li) not in mq:
+                continue
+            v1, v2 = mq[(0, s, li)]["cm"], mq[(1, s, li)]["cm"]
+            if v1 == v2:
+                rows.append((v1, v1))
+                continue
+            it = dict(base_item(li, [systems[s][li]]), ko=systems[s][li])
+            v = c3.get(mqm_key(m3, e3, it))
+            if v is None:
+                continue
+            v3 = summarize_mqm(v)["cm"]
+            sided[0] += v3 == v1
+            sided[1] += 1
+            rows.append((v3, v1))
+        if rows:
+            n = len(rows)
+            out["mqm"][s] = {"n": n, "cm_majority_pct": 100 * sum(r[0] for r in rows) / n,
+                             "cm_majority_ci": boot(lambda ix: 100 * sum(rows[i][0] for i in ix) / n, n),
+                             "cm_judge1_pct": 100 * sum(r[1] for r in rows) / n}
+    out["mqm_third_sides_with_judge1"] = None if not sided[1] else sided[0] / sided[1]
+    sided = [0, 0]
+    for x, y in pairs:
+        pname = f"{x} vs {y}"
+        d = rep["pairs"].get(pname, {})
+        if m1 not in d or m2 not in d:
+            continue
+        vals = []
+        for lid, r2 in d[m2]["lines"].items():
+            if lid not in d[m1]["lines"]:
+                continue
+            r1 = d[m1]["lines"][lid]
+            if r1 == r2:
+                vals.append(r1)
+                continue
+            li = li_of[lid]
+            ox, oy = systems[x][li], systems[y][li]
+            v = c3.get(pair_key(m3, e3, base_item(li, [ox, oy]), ox, oy))
+            if v is None:
+                continue
+            r3 = 0 if v["win"] == "same" else (1 if v["win"] == h(ox) else -1)
+            sided[0] += r3 == r1
+            sided[1] += 1
+            vals.append(majority(r1, r2, r3))
+        w, l_ = sum(v == 1 for v in vals), sum(v == -1 for v in vals)
+
+        def wr(ix, vals=vals):
+            ww = sum(vals[i] == 1 for i in ix)
+            ll = sum(vals[i] == -1 for i in ix)
+            return None if ww + ll == 0 else 100 * ww / (ww + ll)
+        out["pairs"][pname] = {"n": len(vals), "win": w, "tie": len(vals) - w - l_, "loss": l_,
+                               "win_rate": None if w + l_ == 0 else 100 * w / (w + l_),
+                               "win_rate_ci": boot(wr, len(vals)), "worse_by_majority": l_}
+        if "policy_2to1" in rep["pairs"][pname]:
+            rep["pairs"][pname]["policy_2to1"]["worse_by_majority_on_double_judged"] = l_
+    out["pair_third_sides_with_judge1"] = None if not sided[1] else sided[0] / sided[1]
+    rep["third"] = out
+
+
 # ---------------------------------------------------------------- main
 
 def main(argv=None):
@@ -328,6 +437,9 @@ def main(argv=None):
     ap.add_argument("--no-pairs", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--anchors", default=ANCHORS)
+    ap.add_argument("--model3", default="claude-opus-4-8",
+                    help="third judge on the double-judged items where judges 1 and 2 disagree; '' = none")
+    ap.add_argument("--effort3", default="medium")
     a = ap.parse_args(argv)
     log = lambda m: print(m, file=sys.stderr, flush=True)  # noqa: E731
 
@@ -506,6 +618,8 @@ def main(argv=None):
                 "better": j1["win"], "worse": j1["loss"],
                 "worse_by_both": rep["agreement"]["pairs"][pname]["x_worse_by_both"],
                 "pass": j1["win"] >= 2 * j1["loss"] and rep["agreement"]["pairs"][pname]["x_worse_by_both"] == 0}
+    if a.model3 and not a.dry_run:
+        third(a, rep, lines, names, pairs, systems, mq, base_item, caches, anchors, m1, m2, log)
     # anchors
     for m, eff, _ in judges:
         fl = [0, 0]
@@ -597,6 +711,22 @@ def render(rep):
             sg = "–" if d["sign_where_both_decisive"] is None else f"{d['sign_where_both_decisive']:.2f}"
             out.append(f"- {p}: exact {d['exact']:.2f}, sign where both decisive {sg} (n={d['n_decisive']}), "
                        f"worse by both {d['x_worse_by_both']}, better by both {d['x_better_by_both']}")
+    t3 = rep.get("third")
+    if t3:
+        sw = lambda x: "–" if x is None else f"{100 * x:.0f}%"  # noqa: E731
+        out.append(f"\nThird judge {t3['model']} on {t3['mqm_disagreements']} MQM and {t3['pair_disagreements']} "
+                   f"pair disagreements (sides with judge 1: MQM {sw(t3['mqm_third_sides_with_judge1'])}, pairs "
+                   f"{sw(t3['pair_third_sides_with_judge1'])}); 2-of-3 majority on the double-judged lines:\n")
+        out.append("| system | n | crit/major lines, majority | judge 1 on the same lines |")
+        out.append("|---|---|---|---|")
+        for s, d in t3["mqm"].items():
+            out.append(f"| {s} | {d['n']} | {d['cm_majority_pct']:.1f}%{fmt_ci(d['cm_majority_ci'])} | "
+                       f"{d['cm_judge1_pct']:.1f}% |")
+        out.append("\n| pair | n | win | tie | loss | win rate, majority |")
+        out.append("|---|---|---|---|---|---|")
+        for p, d in t3["pairs"].items():
+            wr = "–" if d["win_rate"] is None else f"{d['win_rate']:.1f}%{fmt_ci(d['win_rate_ci'])}"
+            out.append(f"| {p} | {d['n']} | {d['win']} | {d['tie']} | {d['loss']} | {wr} |")
     for m, d in rep["anchors"].items():
         pos = rep["position"].get(m, {})
         fs = "–" if pos.get("first_shown_wins_pct") is None else f"{pos['first_shown_wins_pct']:.0f}%"
@@ -616,6 +746,7 @@ def self_test():
     b = batches([{"ja": "あ" * i, "key": str(i)} for i in range(25)], 10, "s")
     assert len(b) == 3 and sorted(len(x) for x in b) == [8, 8, 9]
     assert {len(x["ja"]) for x in b[0]} != {len(x["ja"]) for x in b[1]}
+    assert majority(1, -1, 1) == 1 and majority(1, -1, 0) == 0 and majority(0, -1, -1) == -1
     v = summarize_mqm({"errors": [["accuracy", "critical", "x"], ["fluency", "minor", "y"]], "score": 40})
     assert v["pen"] == 26 and v["cm"] and v["cats"] == ["accuracy"]
     print("judge self-test OK")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render scoreboard tables from judge.py run files (one JSON per set).
 
-  scoreboard.py RUN.json... [--systems a,b,c] [--judge MODEL]
+  scoreboard.py RUN.json... [--systems a,b,c] [--judge MODEL] [--groups 'NAME=set,set;...']
 Prints markdown: per domain and pooled (all lines, equal weight per line) MQM-lite rates, pairwise
 win rates (wins/(wins+losses), ties apart) with bootstrap CIs, chrF where references exist, judge
 agreement and anchor calibration.
@@ -33,63 +33,72 @@ def main():
     ap.add_argument("runs", nargs="+")
     ap.add_argument("--systems", default="")
     ap.add_argument("--judge", default="")
+    ap.add_argument("--groups", default="", help="extra pooled columns, e.g. 'work-split=fiction,web;line-split=game,broadcast'")
     a = ap.parse_args()
     reps = [json.load(open(p, encoding="utf-8")) for p in a.runs]
     judge = a.judge or reps[0]["judges"][0]["model"]
     systems = [s for s in a.systems.split(",") if s] or list(dict.fromkeys(s for r in reps for s in r["systems"]))
     sets = [r["set"] for r in reps]
+    groups = [("all", sets)]
+    for g in [g for g in a.groups.split(";") if g]:
+        name, members = g.split("=", 1)
+        groups.append((name, [m for m in members.split(",") if m in sets]))
+    gh = " | ".join(f"{n} ({'+'.join(m)})" if n != "all" else "all" for n, m in groups)
     out = [f"MQM-lite by judge {judge}: lines with a critical or major error, % [95% CI] · critical errors "
            f"per 100 lines · penalty per line (minor 1, major 5, critical 25)\n"]
-    out.append("| system | " + " | ".join(sets) + " | all |")
-    out.append("|---|" + "---|" * (len(sets) + 1))
-    pooled = {}
+    out.append("| system | " + " | ".join(sets) + " | " + gh + " |")
+    out.append("|---|" + "---|" * (len(sets) + len(groups)))
     for s in systems:
-        cells = []
-        rows = []
+        cells, rows = [], {}
         for r in reps:
             d = r["mqm"].get(judge, {}).get(s)
             if not d:
                 cells.append("–")
                 continue
-            rows += list(d["lines"].values())
+            rows[r["set"]] = list(d["lines"].values())
             cells.append(f"{d['cm_lines_pct']:.1f}%{ci(d['cm_lines_ci'])} · {d['crit_per100']:.1f} · {d['pen']:.2f}")
-        if rows:
-            n = len(rows)
-            cm = 100 * sum(1 for x in rows if x[0] or x[1]) / n
-            cmc = boot(lambda ix: 100 * sum(1 for i in ix if rows[i][0] or rows[i][1]) / n, n)
-            cr = 100 * sum(x[0] for x in rows) / n
-            pen = sum(x[3] for x in rows) / n
-            pooled[s] = (cm, cr, pen)
-            cells.append(f"**{cm:.1f}%{ci(cmc)} · {cr:.1f} · {pen:.2f}** (n={n})")
-        else:
-            cells.append("–")
+        for gname, members in groups:
+            rr = [x for m in members for x in rows.get(m, [])]
+            if not rr or any(m not in rows for m in members):
+                cells.append("–")
+                continue
+            n = len(rr)
+            cm = 100 * sum(1 for x in rr if x[0] or x[1]) / n
+            cmc = boot(lambda ix: 100 * sum(1 for i in ix if rr[i][0] or rr[i][1]) / n, n)
+            cells.append(f"**{cm:.1f}%{ci(cmc)} · {100 * sum(x[0] for x in rr) / n:.1f} · "
+                         f"{sum(x[3] for x in rr) / n:.2f}** (n={n})")
         out.append(f"| {s} | " + " | ".join(cells) + " |")
     # pairwise
     pair_names = list(dict.fromkeys(p for r in reps for p in r["pairs"]))
     pair_names = [p for p in pair_names if all(x in systems for x in p.split(" vs "))]
     out.append(f"\nPairwise by judge {judge}: win rate of the first system = wins/(wins+losses) % [95% CI] "
                f"(wins:ties:losses)\n")
-    out.append("| pair | " + " | ".join(sets) + " | all |")
-    out.append("|---|" + "---|" * (len(sets) + 1))
+    out.append("| pair | " + " | ".join(sets) + " | " + gh + " |")
+    out.append("|---|" + "---|" * (len(sets) + len(groups)))
     for p in pair_names:
-        cells, allv = [], []
+        cells, vals = [], {}
         for r in reps:
             d = r["pairs"].get(p, {}).get(judge)
             if not d:
                 cells.append("–")
                 continue
-            allv += list(d["lines"].values())
+            vals[r["set"]] = list(d["lines"].values())
             wr = "–" if d["win_rate"] is None else f"{d['win_rate']:.1f}%{ci(d['win_rate_ci'])}"
             cells.append(f"{wr} ({d['win']}:{d['tie']}:{d['loss']})")
-        w = sum(v == 1 for v in allv)
-        l_ = sum(v == -1 for v in allv)
+        for gname, members in groups:
+            allv = [x for m in members for x in vals.get(m, [])]
+            if not allv or any(m not in vals for m in members):
+                cells.append("–")
+                continue
+            w = sum(v == 1 for v in allv)
+            l_ = sum(v == -1 for v in allv)
 
-        def wr(ix):
-            ww = sum(allv[i] == 1 for i in ix)
-            ll = sum(allv[i] == -1 for i in ix)
-            return None if ww + ll == 0 else 100 * ww / (ww + ll)
-        cells.append(f"**{100 * w / max(1, w + l_):.1f}%{ci(boot(wr, len(allv)))}** "
-                     f"({w}:{len(allv) - w - l_}:{l_})" if allv else "–")
+            def wr(ix, allv=allv):
+                ww = sum(allv[i] == 1 for i in ix)
+                ll = sum(allv[i] == -1 for i in ix)
+                return None if ww + ll == 0 else 100 * ww / (ww + ll)
+            cells.append(f"**{100 * w / max(1, w + l_):.1f}%{ci(boot(wr, len(allv)))}** "
+                         f"({w}:{len(allv) - w - l_}:{l_})")
         out.append(f"| {p} | " + " | ".join(cells) + " |")
     # chrF
     chr_rows = [(r["set"], s, d) for r in reps for s, d in r.get("chrf", {}).items() if s in systems]
