@@ -36,20 +36,6 @@ bool NameEndsAt(std::string_view rest, int last) {
 
 }  // namespace
 
-// The person rows of the dictionaries whose key ends in a 郎 core (恭一郎, 佐竹宗一郎) written
-// without their long vowels ou and uu, as LEX-29 writes names; the oo of a dictionary row stays
-// (쿄우이치로우 쿄이치로, 오오시마 사부로우 오오시마 사부로).
-void Worker::ShortenRoNames(Record* records) {
-    for (Record* r = records; r != nullptr; r = r->child) {
-        // A user's row is written as the user wrote it.
-        if (r->user != nullptr && !r->user->nameLayer) continue;
-        if (!r->partCode.starts_with("N") || !Has(r->semantic, "QPN")) continue;
-        const bool ro = std::any_of(names::RoCores().begin(), names::RoCores().end(),
-                                    [&](const names::RoCore& c) { return r->source.ends_with(c.kanji); });
-        if (ro) r->target = text::WithoutNameLongVowels(r->target, false);
-    }
-}
-
 // Text path, mode 0. A run that starts at query and is one kanji and a 郎 core (凶一郎), or a
 // katakana or hiragana spelling of such a name (キョウイチロウ, きょういちろう), is one given name:
 // where the dictionaries lack it, a name made from its reading (names::RoGivenName; katakana

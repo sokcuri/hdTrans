@@ -246,7 +246,6 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         last = r;
     }
     if (mode == kModeGeneral && settings.text) {
-        ShortenRoNames(l.records);
         DropBoundUtterances(l, query);
         DropNegatedAdverbs(l, query);
         DropFinalAdnominals(l, query);

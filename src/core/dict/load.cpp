@@ -15,9 +15,11 @@
 #include "core/dict/names.h"
 #include "core/dict/snapshot.h"
 #include "core/dict/snapshot_file.h"
+#include "core/names/given.h"
 #include "core/output/inflect.h"
 #include "core/rules/rules.h"
 #include "core/text/hangul.h"
+#include "core/text/kana.h"
 #include "core/text/utf8.h"
 #include "core/userdict/userdict.h"
 
@@ -431,10 +433,24 @@ bool ReadColumnFile(const File& f, CodeTable& codes, RuleBodyTable& bodies, inte
         if (s.rule > 0) bodies.named++;
         if (sourceEntries) sourceEntries->push_back({std::string(s.key), std::string(s.ko), std::string(s.pos), {}});
         if (acceptedCount) ++*acceptedCount;
+        // A shipped person row whose key ends in a 郎 core (恭一郎, 佐竹宗一郎) is written without
+        // its long vowels ou and uu, as LEX-29 writes names; the oo of the row stays (쿄우이치로우
+        // 쿄이치로, 오오시마 사부로우 오오시마 사부로). A user's row is written as the user wrote it.
+        std::string shortened;
+        std::string_view ko = s.ko;
+        const Codes* rowCodes = codes.At(code);
+        if (!f.user && rowCodes != nullptr && rowCodes->partText.starts_with("N") && rowCodes->sem.HasCode("QPN")) {
+            for (const names::RoCore& c : names::RoCores()) {
+                if (!s.key.ends_with(c.kanji)) continue;
+                shortened = text::WithoutNameLongVowels(s.ko, false);
+                ko = shortened;
+                break;
+            }
+        }
         for (const std::string_view key : {s.key, s.reading}) {
             if (key.empty()) continue;
             if (s.replace && replacing) replacing->push_back(static_cast<uint32_t>(layer.Rows().size()));
-            layer.Add(key, s.ko, code, s.prio, s.rule, s.id);
+            layer.Add(key, ko, code, s.prio, s.rule, s.id);
         }
     }
     if (senses.Errors().empty() || f.user) errors.insert(errors.end(), notices.begin(), notices.end());
