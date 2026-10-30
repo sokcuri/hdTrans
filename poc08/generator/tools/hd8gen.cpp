@@ -4,12 +4,17 @@
 //   hd8gen [--data DIR] gold FILE.tsv               gold paradigm set: id lemma pos cls forms expected
 //   hd8gen [--data DIR] gen FILE.jsonl              IR lines (kir2 + reg + lev [+ out]) → text
 #include <cstdio>
+#include <cstdlib>
+#include <map>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "hd8gen/generator.h"
+#include "hd8gen/register.h"
+#include "hd8gen/rewrite.h"
+#include "../src/kir_text.h"
 #include "../src/ir_json.h"
 #include "../src/json.h"
 #include "../src/tables.h"
@@ -114,6 +119,69 @@ int Gen(const Tables& t, const std::string& path, const GenOptions& opt) {
     return same == withExp ? 0 : 1;
 }
 
+// Speech-level agreement on game lines: JSON lines {doc, work, ja, speaker, dialogue, ref_level[, scored]}.
+// Lines of one work form one document; doc changes are scene boundaries.
+int LevelEval(const RegisterTables& rt, const std::string& path, const RegOptions& ro, bool scoredOnly, bool dump) {
+    std::ifstream in(path);
+    if (!in) return 1;
+    std::vector<json::Value> rows;
+    std::string line;
+    while (std::getline(in, line)) {
+        json::Value v;
+        std::string err;
+        if (!json::Parse(line, v, err)) {
+            std::fprintf(stderr, "json: %s\n", err.c_str());
+            return 1;
+        }
+        rows.push_back(std::move(v));
+    }
+    std::map<std::pair<std::string, std::string>, size_t> cm;
+    size_t n = 0, ok = 0, i = 0;
+    while (i < rows.size()) {
+        size_t j = i;
+        const std::string work = rows[i].Str("work");
+        while (j < rows.size() && rows[j].Str("work") == work) ++j;
+        std::vector<RegLine> lines;
+        uint32_t scene = 0;
+        std::string lastDoc;
+        for (size_t k = i; k < j; ++k) {
+            RegLine l;
+            l.ja = rows[k].Str("ja");
+            l.speaker = rows[k].Str("speaker");
+            l.dialogue = rows[k].Bool("dialogue");
+            if (rows[k].Str("doc") != lastDoc) {
+                ++scene;
+                lastDoc = rows[k].Str("doc");
+            }
+            l.scene = scene;
+            lines.push_back(l);
+        }
+        const std::vector<RegDecision> ds = DecideLevels(rt, lines, ro);
+        for (size_t k = i; k < j; ++k) {
+            const json::Value& r = rows[k];
+            const std::string ref = r.Str("ref_level");
+            if (!r.Bool("dialogue") || ref.empty() || ref == "none") continue;
+            if (scoredOnly && r.Get("scored") && !r.Bool("scored")) continue;
+            const std::string pred = Name(ds[k - i].level);
+            ++n;
+            if (pred == ref) ++ok;
+            ++cm[{pred, ref}];
+            if (dump) std::printf("%s\t%s\t%s\t%s\t%s\n", pred.c_str(), ref.c_str(), ds[k - i].key.c_str(),
+                                  r.Str("speaker").c_str(), r.Str("ja").c_str());
+        }
+        i = j;
+    }
+    std::fprintf(stderr, "lines %zu agree %zu (%.2f%%)\n", n, ok, n ? 100.0 * static_cast<double>(ok) / static_cast<double>(n) : 0.0);
+    const char* L[] = {"haera", "hae", "haeyo", "hapsyo"};
+    std::fprintf(stderr, "pred\\ref haera hae haeyo hapsyo\n");
+    for (const char* a : L) {
+        std::fprintf(stderr, "%-7s", a);
+        for (const char* b : L) std::fprintf(stderr, " %6zu", cm[{a, b}]);
+        std::fprintf(stderr, "\n");
+    }
+    return 0;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -152,5 +220,52 @@ int main(int argc, char** argv) {
     }
     if (args[0] == "gold" && args.size() == 2) return Gold(*tables, args[1], verbose);
     if (args[0] == "gen" && args.size() == 2) return Gen(*tables, args[1], opt);
+    if (args[0] == "lint" || args[0] == "rw") {
+        auto rs = LoadRules(data + "/ko/rewrite", err);
+        if (!rs) {
+            std::fprintf(stderr, "%s\n", err.c_str());
+            return 1;
+        }
+        if (args[0] == "lint") {
+            const LintReport rep = Lint(*rs, *tables);
+            size_t pass = 0;
+            for (const auto& c : rep.cases) pass += c.pass;
+            for (const auto& p : rep.problems) std::printf("PROBLEM\t%s\n", p.c_str());
+            std::printf("rules %zu, cases %zu, cases passing %zu, problems %zu\n", RuleIds(*rs).size(), rep.cases.size(), pass,
+                        rep.problems.size());
+            return rep.problems.empty() ? 0 : 1;
+        }
+        if (args.size() < 3) return Usage();
+        std::vector<Node> nodes;
+        if (!ParseKirText(args[2], nodes, err)) {
+            std::fprintf(stderr, "%s\n", err.c_str());
+            return 1;
+        }
+        UttLevel u;
+        u.narration = args[1] == "narr";
+        if (!u.narration) ParseLevel(args[1], u.level);
+        else u.level = Level::haera;
+        const RewriteResult rr = Rewrite(*rs, *tables, nodes, {}, {u});
+        for (const auto& f : rr.fired) std::printf("fired %s at %u\n", f.rule.c_str(), f.node);
+        std::printf("%s\n%s\n", KirText(rr.kir2).c_str(), Generate(*tables, rr.kir2, rr.reg, {u}, opt).out.c_str());
+        return 0;
+    }
+    if (args[0] == "level" && args.size() >= 2) {
+        auto rt = LoadRegisterTables(data + "/register", err);
+        if (!rt) {
+            std::fprintf(stderr, "%s\n", err.c_str());
+            return 1;
+        }
+        RegOptions ro;
+        bool scored = false, dump = false;
+        for (size_t k = 2; k < args.size(); ++k) {
+            if (args[k] == "--scored") scored = true;
+            else if (args[k] == "--dump") dump = true;
+            else if (args[k] == "--no-profile") ro.profiles = false;
+            else if (args[k].rfind("--decay=", 0) == 0) ro.decay = std::atof(args[k].c_str() + 8);
+            else if (args[k].rfind("--threshold=", 0) == 0) ro.threshold = std::atof(args[k].c_str() + 12);
+        }
+        return LevelEval(*rt, args[1], ro, scored, dump);
+    }
     return Usage();
 }

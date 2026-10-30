@@ -485,8 +485,10 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
             case Kind::N: {
                 std::string text = n.lemma;
                 bool consumeNext = false;
-                if (x.spoken) {
-                    if (const SpokenRow* sr = SpokenFor(t, n.lemma, next, nextCls)) {
+                {
+                    const SpokenRow* sr = SpokenFor(t, n.lemma, next, nextCls);
+                    if (sr && !x.spoken && sr->mode != "always") sr = nullptr;
+                    if (sr) {
                         text = sr->result;
                         if (sr->mode == "fuse") fusePending = true;
                         else if (next && next->kind == Kind::P && sr->next != "-") consumeNext = true;

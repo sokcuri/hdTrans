@@ -1,0 +1,26 @@
+#! rewrite
+# Korean rewrite rules (W) over kir nodes. They edit nodes and features, never text. Phases run disc then ko;
+# inside a phase rules run in id order, each at most once per site. Cases: rules.cases.tsv (fix and keep).
+#
+# Columns
+#   id         family.name-n
+#   phase      disc | ko
+#   scope      any | quote (utterance) | narr (narration)
+#   pattern    node matchers [Kind lemma|lemma {feat=v|w,feat!=v}]:name, `?` optional, `...` gap inside the
+#              clause, `^` clause start (line start or after 「 。 ！ ？), `$` clause end
+#   condition  `-` or atoms joined by &: x.feat=v|w, x.feat!=v, x.clauselen<=n, x.prev.feat=v, x.next.feat=v,
+#              utt.level=v, utt.narration, utt.quote; `!` negates an atom
+#   action     `;`-joined: set x.feat=v | copy x.feat=y.feat | del x | replace x [Kind lemma {feats}] |
+#              insert-after x [Kind lemma {feats}]
+id	phase	scope	pattern	condition	action	note
+aspect.fold-1	ko	any	[V {ctype=conn,eomi=-고}]:v [V 있다 {aux}]:a	v.aux=0	copy v.tense=a.tense; copy v.mood=a.mood; copy v.ctype=a.ctype; copy v.rel=a.rel; copy v.eomi=a.eomi; copy v.neg=a.neg; copy v.modal=a.modal; set v.aspect=prog; del a	-고 있다 is the progressive aspect of the verb (D §2.1): rules and G see one predicate
+comma.conj-1	ko	any	^ [* 하지만|그래도|그러니까|그래서|그런데|그럼|그러면|그리고|그러나|게다가|근데|하긴|역시|결국|일단|우선|사실|확실히|분명|혹시|정말|진짜|솔직히|아니|응|어|아|저기|저|그래|뭐|좋아|자|음|흠|네|예|에|오|와|으음|아아|어머|헤에|후우|하아|글쎄]:a [Punct comma]:c	-	del c	K1: no comma after a line-initial conjunction or interjection (하지만, 문제도 → 하지만 문제도)
+comma.conn-1	ko	any	[V {ctype=conn}]:v [Punct comma]:c	v.clauselen<=2 & v.aux=0	del c	K1: no comma after a connective clause of one or two words (그렇게 생각해서, → 그렇게 생각해서)
+comma.nosrc-1	ko	any	[Punct comma {jaMark=}]:c	-	del c	a comma the source does not have
+comma.topic-1	ko	any	[N]:n [P top]:t [Punct comma]:c	n.clauselen<=2	del c	K1: no comma after a short topic (나는, → 나는)
+from.robuteo-1	ko	any	[N]:n [P 로부터]:p	-	set p.kase=src	로부터 → 에서 / 에게서 (G chooses by animacy; 34× overuse)
+gen.chain-1	ko	any	[N]:a [P gen]:g [N]:b [P gen]:h [N]:c	a.sem!=person & a.dep=0 & b.dep=0 & a.lemma!=나|너|저|우리|저희|그|그녀|당신|자네|그대|이|그것|이것|저것	del g	의-chains: A의 B의 C → A B의 C when A is not a person
+pron.anata-1	ko	quote	[N 당신]:n	utt.level=hae|haera	set n.lemma=너	casual speech says 너, not 당신 (6.2 vs 2.0 per 1,000 lines)
+pron.anata-2	ko	quote	[N 당신]:n [P subj|top]:p	utt.level=haeyo|hapsyo	del n; del p	polite speech drops the addressee pronoun
+pron.kanojo-1	ko	quote	[N 그녀]:n	utt.level=hae|haera	set n.lemma=걔	casual speech says 걔 for 彼女 (그녀 is written style)
+prog.state-1	ko	any	[V {aspect=prog,tense=nonpast}]:v	v.lemma=알다|모르다|기억하다|믿다|원하다|바라다|사랑하다|좋아하다|싫어하다|닮다	set v.aspect=simple	K5: state verbs do not take -고 있다 in the present (알고 있어 → 알아)
