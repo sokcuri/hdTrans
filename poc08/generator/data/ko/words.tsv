@@ -1,0 +1,96 @@
+#! words
+# Spacing classes of Korean words (한글 맞춤법 제41–50항). G spaces every word except where a row says
+# it attaches. Particles (P nodes) and the copula always attach to the word before them.
+#
+# Columns
+#   lemma   the word (N or V lemma)
+#   kind    dep (의존 명사) | counter (단위 명사) | suffix (접미사) | aux (보조 용언) | prefix
+#   attach  never: always spaced (제42항 의존 명사, 제47항 보조 용언 원칙)
+#           after-noun: attached after a noun, spaced after an adnominal (뿐, 만큼, 대로: 너뿐, 할 뿐)
+#           after-digit: attached after a digit, spaced after a word (3개, 세 개; 제43항 붙임)
+#           always: always attached (접미사; -어지다, -어하다 are one word)
+#           next: a prefix attached to the next word
+lemma	kind	attach	note
+것	dep	never	할 것, 그런 것
+거	dep	never	할 거야
+수	dep	never	할 수 있다
+줄	dep	never	할 줄 알다
+데	dep	never	갈 데가 없다
+때	dep	never	갈 때
+때문	dep	never	그 때문에, 하기 때문에
+뿐	dep	after-noun	너뿐, 할 뿐
+만큼	dep	after-noun	너만큼, 할 만큼
+대로	dep	after-noun	약속대로, 하는 대로
+듯	dep	never	하는 듯하다
+척	dep	never	아는 척
+체	dep	never	아는 체
+채	dep	never	앉은 채
+적	dep	never	간 적이 있다
+바	dep	never	아는 바
+리	dep	never	그럴 리가
+지	dep	never	온 지 사흘
+터	dep	never	갈 터이다
+김	dep	never	온 김에
+중	dep	never	회의 중
+따위	dep	never	그런 따위
+등	dep	never	사과, 배 등
+뻔	dep	never	죽을 뻔했다
+양	dep	never	모르는 양
+녀석	n	never	그 녀석
+번	counter	after-digit	3번, 세 번
+개	counter	after-digit	3개, 세 개
+명	counter	after-digit	3명, 세 명
+마리	counter	after-digit	3마리, 세 마리
+권	counter	after-digit	3권
+대	counter	after-digit	3대, 세 대
+살	counter	after-digit	3살, 세 살
+시	counter	after-digit	3시, 세 시
+분	counter	after-digit	3분, 삼 분
+초	counter	after-digit	3초
+년	counter	after-digit	3년, 삼 년
+월	counter	after-digit	3월
+일	counter	after-digit	3일, 사흘
+층	counter	after-digit	3층
+장	counter	after-digit	3장
+배	counter	after-digit	2배, 두 배
+기	counter	after-digit	1기
+엔	counter	after-digit	100엔
+원	counter	after-digit	100원
+킬로	counter	after-digit	3킬로
+미터	counter	after-digit	3미터
+센티	counter	after-digit	3센티
+퍼센트	counter	after-digit	3퍼센트
+위	counter	after-digit	1위
+학년	counter	after-digit	2학년
+들	suffix	always	사람들
+님	suffix	always	선생님
+쯤	suffix	always	세 시쯤
+째	suffix	always	두 번째
+짜리	suffix	always	천 원짜리
+끼리	suffix	always	우리끼리
+씩	suffix	always	하나씩
+씨	dep	never	김 씨
+군	dep	never	김 군
+제	prefix	next	제1장
+있다	aux	never	하고 있다, 앉아 있다
+주다	aux	never	해 주다
+보다	aux	never	해 보다
+버리다	aux	never	해 버리다
+가다	aux	never	해 가다
+오다	aux	never	해 오다
+놓다	aux	never	해 놓다
+두다	aux	never	해 두다
+내다	aux	never	해 내다
+대다	aux	never	떠들어 대다
+싶다	aux	never	하고 싶다
+않다	aux	never	하지 않다
+못하다	aux	never	하지 못하다
+말다	aux	never	하지 마
+하다	aux	never	해야 하다, 하게 하다
+되다	aux	never	하게 되다
+계시다	aux	never	하고 계시다
+드리다	aux	never	해 드리다
+지다	aux	always	만들어지다
+척하다	aux	never	아는 척하다
+듯하다	aux	never	하는 듯하다
+뻔하다	aux	never	죽을 뻔하다

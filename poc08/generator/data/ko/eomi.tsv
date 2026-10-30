@@ -1,0 +1,330 @@
+#! eomi
+# Abstract endings. A row realizes one ending for one predicate class; G owns the phonology.
+#
+# Columns
+#   id      ending id (eomi:<id> in --why). Rows with the same id differ by pos.
+#   slot    hon | tense | modal | final | conn | adn | nom | quote
+#   family  final: the ending family (plain, ne, ji, ...); conn: the relations it serves (rel=...);
+#           adn: nonpast | past | fut | retro; nom: m | gi; quote: the mood it quotes
+#   mood    decl | q | imp | prop | excl | - (any)
+#   level   haera | hae | haeyo | hapsyo | hao | hage | - (any)
+#   pos     V verb | A adjective | X 있다/없다 | C copula 이다 | N 아니다 | P after 었/겠 | * any.
+#           Lookup falls back P → X → *, X → *, N → C → A → *, C → A → *, V → *, A → *.
+#   form    notation: 어… = harmonic vowel (아/어/여); (으)… = 으 after a consonant; A/B = after a
+#           consonant / after a vowel or ㄹ; a leading jamo (ㄴ ㄹ ㅁ ㅂ) becomes the final of the stem;
+#           ~ = no ending (bare stem).
+#   flags   hon-incl: the form already holds -시- (no second 시); words: the form spans words
+#
+id	slot	family	mood	level	pos	form	flags	note
+# ---------------------------------------------------------------- prefinal
+-시-	hon	-	-	-	*	(으)시		가시다, 읽으시다, 아시다
+-었-	tense	past	-	-	*	었		갔다, 먹었다, 했다
+-겠-	modal	gess	-	-	*	겠		가겠다
+# ---------------------------------------------------------------- final: plain family
+-다	final	plain	decl	haera	V	는다/ㄴ다		먹는다, 간다, 산다
+-다	final	plain	decl	haera	*	다		좋다, 있다, 갔다, 학생이다
+-어	final	plain	decl	hae	*	어		가, 먹어, 좋아
+-어	final	plain	decl	hae	C	야		학생이야, 친구야
+-어요	final	plain	decl	haeyo	*	어요		가요, 먹어요
+-어요	final	plain	decl	haeyo	C	에요		학생이에요, 친구예요
+-습니다	final	plain	decl	hapsyo	*	습니다/ㅂ니다		먹습니다, 갑니다, 삽니다
+-소	final	plain	decl	hao	*	소/오		먹소, 가오
+-소	final	plain	decl	hao	C	오		학생이오
+-네	final	plain	decl	hage	*	네		가네, 좋네
+-냐	final	plain	q	haera	*	냐		가냐, 먹냐, 좋냐
+-어?	final	plain	q	hae	*	어		가?, 먹어?
+-어?	final	plain	q	hae	C	야		학생이야?
+-어요?	final	plain	q	haeyo	*	어요		가요?
+-어요?	final	plain	q	haeyo	C	에요		학생이에요?
+-습니까	final	plain	q	hapsyo	*	습니까/ㅂ니까		먹습니까, 갑니까
+-소?	final	plain	q	hao	*	소/오		먹소?, 가오?
+-소?	final	plain	q	hao	C	오		학생이오?
+-는가	final	plain	q	hage	V	는가		가는가
+-는가	final	plain	q	hage	X	는가		있는가, 갔는가
+-는가	final	plain	q	hage	*	(으)ㄴ가		좋은가, 학생인가
+-어라	final	plain	imp	haera	*	어라		가라, 먹어라
+-어!	final	plain	imp	hae	*	어		가!, 먹어!
+-세요	final	plain	imp	haeyo	*	(으)세요	hon-incl	가세요, 읽으세요
+-십시오	final	plain	imp	hapsyo	*	(으)십시오	hon-incl	가십시오
+-오!	final	plain	imp	hao	*	(으)오		가오, 먹으오
+-게	final	plain	imp	hage	*	게		가게
+-자	final	plain	prop	haera	*	자		가자
+-어!	final	plain	prop	hae	*	어		가
+-어요!	final	plain	prop	haeyo	*	어요		가요
+-ㅂ시다	final	plain	prop	hapsyo	*	(으)ㅂ시다		갑시다, 먹읍시다
+-ㅂ시다	final	plain	prop	hao	*	(으)ㅂ시다		갑시다
+-세	final	plain	prop	hage	*	세		가세
+-는구나	final	plain	excl	haera	V	는구나		가는구나
+-는구나	final	plain	excl	haera	*	구나		좋구나, 있구나, 학생이구나
+-는군	final	plain	excl	hae	V	는군		가는군
+-는군	final	plain	excl	hae	*	군		좋군
+-는군요	final	plain	excl	haeyo	V	는군요		가는군요
+-는군요	final	plain	excl	haeyo	*	군요		좋군요
+-는군요	final	plain	excl	hapsyo	V	는군요		가는군요
+-는군요	final	plain	excl	hapsyo	*	군요		좋군요
+-는구려	final	plain	excl	hao	V	는구려		가는구려
+-는구려	final	plain	excl	hao	*	구려		좋구려
+-는군	final	plain	excl	hage	V	는군		가는군
+-는군	final	plain	excl	hage	*	군		좋군
+# ---------------------------------------------------------------- final: other families
+-네	final	ne	decl	haera	*	네		좋네
+-네	final	ne	decl	hae	*	네		좋네
+-네요	final	ne	decl	haeyo	*	네요		좋네요
+-습니다	final	ne	decl	hapsyo	*	습니다/ㅂ니다		좋습니다
+-소	final	ne	decl	hao	*	소/오		좋소
+-네	final	ne	decl	hage	*	네		좋네
+-지	final	ji	-	haera	*	지		가지, 좋지
+-지	final	ji	-	hae	*	지		가지, 좋지
+-죠	final	ji	-	haeyo	*	죠		가죠, 좋죠
+-습니다	final	ji	decl	hapsyo	*	습니다/ㅂ니다		갑니다
+-습니까	final	ji	q	hapsyo	*	습니까/ㅂ니까		갑니까
+-지	final	ji	-	hao	*	지		가지
+-지	final	ji	-	hage	*	지		가지
+-거든	final	geodeun	-	haera	*	거든		가거든
+-거든	final	geodeun	-	hae	*	거든		가거든
+-거든요	final	geodeun	-	haeyo	*	거든요		가거든요
+-습니다	final	geodeun	-	hapsyo	*	습니다/ㅂ니다		갑니다
+-거든	final	geodeun	-	hao	*	거든		가거든
+-거든	final	geodeun	-	hage	*	거든		가거든
+-는데	final	neunde	-	haera	V	는데		가는데
+-는데	final	neunde	-	haera	X	는데		있는데, 갔는데
+-는데	final	neunde	-	haera	*	(으)ㄴ데		좋은데, 학생인데
+-는데	final	neunde	-	hae	V	는데		가는데
+-는데	final	neunde	-	hae	X	는데		있는데
+-는데	final	neunde	-	hae	*	(으)ㄴ데		좋은데
+-는데요	final	neunde	-	haeyo	V	는데요		가는데요
+-는데요	final	neunde	-	haeyo	X	는데요		있는데요
+-는데요	final	neunde	-	haeyo	*	(으)ㄴ데요		좋은데요
+-습니다	final	neunde	-	hapsyo	*	습니다/ㅂ니다		갑니다
+-는데	final	neunde	-	hao	V	는데		가는데
+-는데	final	neunde	-	hao	X	는데		있는데
+-는데	final	neunde	-	hao	*	(으)ㄴ데		좋은데
+-는데	final	neunde	-	hage	V	는데		가는데
+-는데	final	neunde	-	hage	X	는데		있는데
+-는데	final	neunde	-	hage	*	(으)ㄴ데		좋은데
+-잖아	final	jana	-	haera	*	잖아		가잖아
+-잖아	final	jana	-	hae	*	잖아		가잖아
+-잖아요	final	jana	-	haeyo	*	잖아요		가잖아요
+-지 않습니까	final	jana	-	hapsyo	*	지 않습니까	words	가지 않습니까
+-잖소	final	jana	-	hao	*	잖소		가잖소
+-잖나	final	jana	-	hage	*	잖나		가잖나
+-ㄹ까	final	lkka	-	haera	*	(으)ㄹ까		갈까, 먹을까
+-ㄹ까	final	lkka	-	hae	*	(으)ㄹ까		갈까
+-ㄹ까요	final	lkka	-	haeyo	*	(으)ㄹ까요		갈까요
+-ㄹ까요	final	lkka	-	hapsyo	*	(으)ㄹ까요		갈까요
+-ㄹ까	final	lkka	-	hao	*	(으)ㄹ까		갈까
+-ㄹ까	final	lkka	-	hage	*	(으)ㄹ까		갈까
+-ㄹ게	final	lge	-	haera	*	(으)ㄹ게		갈게, 먹을게
+-ㄹ게	final	lge	-	hae	*	(으)ㄹ게		갈게
+-ㄹ게요	final	lge	-	haeyo	*	(으)ㄹ게요		갈게요
+-겠습니다	final	lge	-	hapsyo	*	겠습니다		가겠습니다
+-리다	final	lge	-	hao	*	(으)리다		가리다
+-ㄹ세	final	lge	-	hage	*	(으)ㄹ세		갈세
+-ㄹ래	final	lrae	-	haera	*	(으)ㄹ래		갈래
+-ㄹ래	final	lrae	-	hae	*	(으)ㄹ래		갈래
+-ㄹ래요	final	lrae	-	haeyo	*	(으)ㄹ래요		갈래요
+-겠습니다	final	lrae	decl	hapsyo	*	겠습니다		가겠습니다
+-시겠습니까	final	lrae	q	hapsyo	*	(으)시겠습니까	hon-incl	가시겠습니까
+-ㄹ래	final	lrae	-	hao	*	(으)ㄹ래		갈래
+-ㄹ래	final	lrae	-	hage	*	(으)ㄹ래		갈래
+-나	final	na	-	haera	*	나		가나, 좋나
+-나	final	na	-	hae	*	나		가나
+-나요	final	na	-	haeyo	*	나요		가나요
+-습니까	final	na	-	hapsyo	*	습니까/ㅂ니까		갑니까
+-나	final	na	-	hao	*	나		가나
+-나	final	na	-	hage	*	나		가나
+-는가	final	ga	-	haera	V	는가		가는가
+-는가	final	ga	-	haera	X	는가		있는가
+-는가	final	ga	-	haera	*	(으)ㄴ가		좋은가
+-는가	final	ga	-	hae	V	는가		가는가
+-는가	final	ga	-	hae	X	는가		있는가
+-는가	final	ga	-	hae	*	(으)ㄴ가		좋은가
+-는가요	final	ga	-	haeyo	V	는가요		가는가요
+-는가요	final	ga	-	haeyo	X	는가요		있는가요
+-는가요	final	ga	-	haeyo	*	(으)ㄴ가요		좋은가요
+-습니까	final	ga	-	hapsyo	*	습니까/ㅂ니까		갑니까
+-는가	final	ga	-	hao	V	는가		가는가
+-는가	final	ga	-	hao	X	는가		있는가
+-는가	final	ga	-	hao	*	(으)ㄴ가		좋은가
+-는가	final	ga	-	hage	V	는가		가는가
+-는가	final	ga	-	hage	X	는가		있는가
+-는가	final	ga	-	hage	*	(으)ㄴ가		좋은가
+-대	final	dae	-	haera	V	는대/ㄴ대		간대, 먹는대
+-대	final	dae	-	haera	*	대		좋대, 갔대
+-대	final	dae	-	haera	C	래		학생이래
+-대	final	dae	-	hae	V	는대/ㄴ대		간대
+-대	final	dae	-	hae	*	대		좋대
+-대	final	dae	-	hae	C	래		학생이래
+-대요	final	dae	-	haeyo	V	는대요/ㄴ대요		간대요
+-대요	final	dae	-	haeyo	*	대요		좋대요
+-대요	final	dae	-	haeyo	C	래요		학생이래요
+-답니다	final	dae	-	hapsyo	V	는답니다/ㄴ답니다		간답니다
+-답니다	final	dae	-	hapsyo	*	답니다		좋답니다
+-답니다	final	dae	-	hapsyo	C	랍니다		학생이랍니다
+-대	final	dae	-	hao	V	는대/ㄴ대		간대
+-대	final	dae	-	hao	*	대		좋대
+-대	final	dae	-	hage	V	는대/ㄴ대		간대
+-대	final	dae	-	hage	*	대		좋대
+-ㄹ걸	final	lgeol	-	haera	*	(으)ㄹ걸		갈걸
+-ㄹ걸	final	lgeol	-	hae	*	(으)ㄹ걸		갈걸
+-ㄹ걸요	final	lgeol	-	haeyo	*	(으)ㄹ걸요		갈걸요
+-ㄹ걸요	final	lgeol	-	hapsyo	*	(으)ㄹ걸요		갈걸요
+-ㄹ걸	final	lgeol	-	hao	*	(으)ㄹ걸		갈걸
+-ㄹ걸	final	lgeol	-	hage	*	(으)ㄹ걸		갈걸
+-다고	final	dago	-	haera	V	는다고/ㄴ다고		간다고
+-다고	final	dago	-	haera	*	다고		좋다고
+-다고	final	dago	-	haera	C	라고		학생이라고
+-다고	final	dago	-	haera	N	라고		아니라고
+-다고	final	dago	-	hae	V	는다고/ㄴ다고		간다고
+-다고	final	dago	-	hae	*	다고		좋다고
+-다고	final	dago	-	hae	C	라고		학생이라고
+-다고	final	dago	-	hae	N	라고		아니라고
+-다고요	final	dago	-	haeyo	V	는다고요/ㄴ다고요		간다고요
+-다고요	final	dago	-	haeyo	*	다고요		좋다고요
+-다고요	final	dago	-	haeyo	C	라고요		학생이라고요
+-다고요	final	dago	-	haeyo	N	라고요		아니라고요
+-다고요	final	dago	-	hapsyo	V	는다고요/ㄴ다고요		간다고요
+-다고요	final	dago	-	hapsyo	*	다고요		좋다고요
+-다고요	final	dago	-	hapsyo	C	라고요		학생이라고요
+-다고요	final	dago	-	hapsyo	N	라고요		아니라고요
+-다고	final	dago	-	hao	*	다고		좋다고
+-다고	final	dago	-	hage	*	다고		좋다고
+-더라	final	deora	-	haera	*	더라		가더라
+-더라	final	deora	-	hae	*	더라		가더라
+-더라고요	final	deora	-	haeyo	*	더라고요		가더라고요
+-더군요	final	deora	-	hapsyo	*	더군요		가더군요
+-더구려	final	deora	-	hao	*	더구려		가더구려
+-더군	final	deora	-	hage	*	더군		가더군
+-어라!	final	eora	excl	haera	*	어라		좋아라
+-어라!	final	eora	excl	hae	*	어라		좋아라
+-어라!	final	eora	excl	haeyo	*	어라		좋아라
+-어라!	final	eora	excl	hapsyo	*	어라		좋아라
+-어라!	final	eora	excl	hao	*	어라		좋아라
+-어라!	final	eora	excl	hage	*	어라		좋아라
+-다니	final	dani	-	haera	V	는다니/ㄴ다니		간다니
+-다니	final	dani	-	haera	*	다니		좋다니
+-다니	final	dani	-	haera	C	라니		학생이라니
+-다니	final	dani	-	haera	N	라니		아니라니
+-다니	final	dani	-	hae	V	는다니/ㄴ다니		간다니
+-다니	final	dani	-	hae	*	다니		좋다니
+-다니	final	dani	-	hae	C	라니		학생이라니
+-다니요	final	dani	-	haeyo	V	는다니요/ㄴ다니요		간다니요
+-다니요	final	dani	-	haeyo	*	다니요		좋다니요
+-다니요	final	dani	-	haeyo	C	라니요		학생이라니요
+-다니요	final	dani	-	hapsyo	V	는다니요/ㄴ다니요		간다니요
+-다니요	final	dani	-	hapsyo	*	다니요		좋다니요
+-다니요	final	dani	-	hapsyo	C	라니요		학생이라니요
+-다니	final	dani	-	hao	*	다니		좋다니
+-다니	final	dani	-	hage	*	다니		좋다니
+-ㄴ걸	final	ngeol	-	haera	V	는걸		가는걸
+-ㄴ걸	final	ngeol	-	haera	X	는걸		있는걸
+-ㄴ걸	final	ngeol	-	haera	*	(으)ㄴ걸		좋은걸
+-ㄴ걸	final	ngeol	-	hae	V	는걸		가는걸
+-ㄴ걸	final	ngeol	-	hae	X	는걸		있는걸
+-ㄴ걸	final	ngeol	-	hae	*	(으)ㄴ걸		좋은걸
+-ㄴ걸요	final	ngeol	-	haeyo	V	는걸요		가는걸요
+-ㄴ걸요	final	ngeol	-	haeyo	X	는걸요		있는걸요
+-ㄴ걸요	final	ngeol	-	haeyo	*	(으)ㄴ걸요		좋은걸요
+-ㄴ걸요	final	ngeol	-	hapsyo	V	는걸요		가는걸요
+-ㄴ걸요	final	ngeol	-	hapsyo	X	는걸요		있는걸요
+-ㄴ걸요	final	ngeol	-	hapsyo	*	(으)ㄴ걸요		좋은걸요
+-ㄴ걸	final	ngeol	-	hao	*	(으)ㄴ걸		좋은걸
+-ㄴ걸	final	ngeol	-	hage	*	(으)ㄴ걸		좋은걸
+-니	final	ni	q	haera	*	니		가니, 좋니
+-니	final	ni	q	hae	*	니		가니
+-나요	final	ni	q	haeyo	*	나요		가나요
+-습니까	final	ni	q	hapsyo	*	습니까/ㅂ니까		갑니까
+-니	final	ni	q	hao	*	니		가니
+-니	final	ni	q	hage	*	니		가니
+-지 마	final	jima	imp	hae	*	지 마	words	가지 마
+-지 마라	final	jima	imp	haera	*	지 마라	words	가지 마라
+-지 마세요	final	jima	imp	haeyo	*	지 마세요	words	가지 마세요
+-지 마십시오	final	jima	imp	hapsyo	*	지 마십시오	words	가지 마십시오
+-지 마오	final	jima	imp	hao	*	지 마오	words	가지 마오
+-지 말게	final	jima	imp	hage	*	지 말게	words	가지 말게
+# ---------------------------------------------------------------- persona variants (ko/persona.tsv picks them)
+-구먼	final	gumeon	-	haera	V	는구먼		가는구먼
+-구먼	final	gumeon	-	haera	*	구먼		좋구먼
+-구먼	final	gumeon	-	hae	V	는구먼		가는구먼
+-구먼	final	gumeon	-	hae	*	구먼		좋구먼
+-구먼	final	gumeon	-	hage	V	는구먼		가는구먼
+-구먼	final	gumeon	-	hage	*	구먼		좋구먼
+-구먼요	final	gumeon	-	haeyo	V	는구먼요		가는구먼요
+-구먼요	final	gumeon	-	haeyo	*	구먼요		좋구먼요
+-습니다요	final	sseumnidayo	decl	hapsyo	*	습니다요/ㅂ니다요		갑니다요
+-습니까요	final	sseumnidayo	q	hapsyo	*	습니까요/ㅂ니까요		갑니까요
+-답니다	final	damnida	decl	haeyo	V	는답니다/ㄴ답니다		간답니다
+-답니다	final	damnida	decl	haeyo	*	답니다		좋답니다
+-답니다	final	damnida	decl	haeyo	C	랍니다		학생이랍니다
+# ---------------------------------------------------------------- connectives
+-고	conn	seq,and	-	-	*	고		가고, 먹고
+-어	conn	te,manner	-	-	*	어		가, 먹어 (들어 가다)
+-어서	conn	cause,seq-tight	-	-	*	어서		가서, 먹어서
+-어서	conn	cause,seq-tight	-	-	C	라서		학생이라서
+-어서	conn	cause,seq-tight	-	-	N	라서		아니라서
+-면	conn	cond	-	-	*	(으)면		가면, 먹으면
+-니까	conn	reason	-	-	*	(으)니까		가니까, 먹으니까
+-지만	conn	concess	-	-	*	지만		가지만
+-는데	conn	bg	-	-	V	는데		가는데
+-는데	conn	bg	-	-	X	는데		있는데, 갔는데
+-는데	conn	bg	-	-	*	(으)ㄴ데		좋은데, 학생인데
+-면서	conn	while	-	-	*	(으)면서		가면서
+-며	conn	while-lit	-	-	*	(으)며		가며
+-려고	conn	purpose	-	-	*	(으)려고		가려고
+-러	conn	purpose-motion	-	-	*	(으)러		가러, 먹으러
+-다가	conn	switch	-	-	*	다가		가다가
+-도록	conn	until	-	-	*	도록		가도록
+-게	conn	result	-	-	*	게		가게, 좋게
+-지	conn	neg	-	-	*	지		가지 (않다)
+-기에	conn	cause-lit	-	-	*	기에		가기에
+-어도	conn	concess-cond	-	-	*	어도		가도, 먹어도
+-어도	conn	concess-cond	-	-	C	어도		학생이어도
+-어야	conn	must	-	-	*	어야		가야, 먹어야
+-거나	conn	or	-	-	*	거나		가거나
+-든지	conn	or-any	-	-	*	든지		가든지
+-자	conn	as-soon	-	-	*	자		가자 (가자마자)
+-자마자	conn	as-soon-2	-	-	*	자마자		가자마자
+-더니	conn	retro	-	-	*	더니		가더니
+-었더니	conn	retro-1	-	-	*	었더니		갔더니
+-는지	conn	whether	-	-	V	는지		가는지
+-는지	conn	whether	-	-	X	는지		있는지, 갔는지
+-는지	conn	whether	-	-	*	(으)ㄴ지		좋은지, 학생인지
+-ㄹ지	conn	whether-fut	-	-	*	(으)ㄹ지		갈지
+-니	conn	reason-lit	-	-	*	(으)니		가니, 먹으니
+-므로	conn	cause-formal	-	-	*	(으)므로		가므로
+-고서	conn	after	-	-	*	고서		가고서
+-어서는	conn	cond-neg	-	-	*	어서는		가서는
+-ㄹ수록	conn	the-more	-	-	*	(으)ㄹ수록		갈수록
+-느라	conn	because-busy	-	-	*	느라		가느라
+-더라도	conn	even-if	-	-	*	더라도		가더라도
+-고도	conn	despite	-	-	*	고도		가고도
+-나	conn	but-lit	-	-	*	(으)나		가나
+-듯이	conn	as-if	-	-	*	듯이		가듯이
+-다시피	conn	as-you	-	-	*	다시피		알다시피
+# ---------------------------------------------------------------- quote connectives (-다고 하다)
+-다고	quote	decl	-	-	V	는다고/ㄴ다고		간다고
+-다고	quote	decl	-	-	*	다고		좋다고, 갔다고
+-다고	quote	decl	-	-	C	라고		학생이라고
+-다고	quote	decl	-	-	N	라고		아니라고
+-냐고	quote	q	-	-	*	냐고		가냐고
+-라고	quote	imp	-	-	*	(으)라고		가라고, 먹으라고
+-자고	quote	prop	-	-	*	자고		가자고
+-다는	quote	adn	-	-	V	는다는/ㄴ다는		간다는
+-다는	quote	adn	-	-	*	다는		좋다는
+-다는	quote	adn	-	-	C	라는		학생이라는
+-다는	quote	adn	-	-	N	라는		아니라는
+# ---------------------------------------------------------------- adnominal
+-는	adn	nonpast	-	-	V	는		가는, 먹는, 사는
+-는	adn	nonpast	-	-	X	는		있는
+-는	adn	nonpast	-	-	*	(으)ㄴ		좋은, 큰, 학생인
+-ㄴ	adn	past	-	-	V	(으)ㄴ		간, 먹은
+-ㄴ	adn	past	-	-	X	었던		있었던
+-ㄴ	adn	past	-	-	*	었던		좋았던, 학생이었던
+-ㄹ	adn	fut	-	-	*	(으)ㄹ		갈, 먹을, 좋을
+-던	adn	retro	-	-	*	던		가던, 좋던
+-었던	adn	past-retro	-	-	*	었던		갔던
+# ---------------------------------------------------------------- nominal
+-ㅁ	nom	m	-	-	*	(으)ㅁ		감, 먹음, 삶
+-기	nom	gi	-	-	*	기		가기
+# ---------------------------------------------------------------- bare stem (compound stems, 어간)
+-	stem	-	-	-	*	~		가 (가-보다)
