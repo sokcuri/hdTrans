@@ -1,0 +1,11 @@
+# decoder weights (tune.py writes tuned ones into the model folder)
+lm	1.0
+pef	0.2
+pfe	0.2
+lef	0.2
+lfe	0.2
+phrase	-0.3
+word	0.0
+oov	-5.0
+lat	0.5
+gloss	5.0

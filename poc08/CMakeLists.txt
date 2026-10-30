@@ -9,7 +9,7 @@ set(HD08_STUB_SOURCES)
 set(HD08_STUB_DEFS)
 # Libraries without a stage of their own (the rule language, lexicon tables, learned weights);
 # the stage components link the ones they use.
-foreach(library rules lexicon learned)
+foreach(library rules lexicon learned smt)
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${library}/CMakeLists.txt")
         add_subdirectory(${library})
     endif()
