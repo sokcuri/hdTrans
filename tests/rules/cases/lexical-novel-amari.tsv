@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+dict:jisjk:104154	「んー、あまり関係ないと思うけど。」	has:그다지 관계없다고	fix	local
+dict:jisjk:104154	ことはあまり関係ないのよ	has:그다지 관계없	fix	local
+dict:jisjk:104154	まぁ、わたし達にはあまり関係ないところね	has:그다지 관계없는	fix	local
+dict:jisjk:104154	私はあまり関係ないと思っていますが……	has:그다지 관계없다고	fix	local
+dict:jisjk:104154	他であまり見たことがない作品と出会えます	has:그다지 본 적이	fix	local
+dict:jisjk:104154	あったかくならないとあまり役に立たないんで	has:그다지 쓸모없어서	fix	local
+dict:jisjk:104154	あまり大したことはないな	has:그다지 큰일은	fix	local
+dict:jisjk:104154	あまりにも遅い。	has:너무 늦다	keep	local
+dict:jisjk:104154	あまり遅いと怒る。	has:너무 늦다고	keep	local
+dict:novel-amari:1	クロードは心配のあまり毎日マクミラン公爵家へ通った	has:걱정이 너무 커서 매일	fix	local
+dict:novel-amari:1	旦那の長次郎さんは 心配のあまり	has:걱정이 너무 커서	fix	local
+dict:novel-amari:1	親分 大旦那は乱心のあまり	has:난심이 너무 커서	fix	local
+dict:novel-amari:1	興奮のあまり、つまらないことを口走っている。	has:흥분이 너무 커서,	fix	local
+dict:novel-amari:1	ショックのあまり池に落ちて	has:쇼크가 너무 커서	fix	local
+dict:novel-amari:1	ショックのあまり倒れた。	has:쇼크가 너무 커서	fix	local
+dict:novel-amari:1	嫉妬のあまり…	has:질투가 너무 커서	fix	local
+dict:novel-amari:1	お菓子のあまりを食べた。	!rule:dict:novel-amari:1	keep	local
+dict:novel-amari:1	図書館のあまりの広大さに	!rule:dict:novel-amari:1	keep	local
+dict:novel-amari:1	あまり食べない。	!rule:dict:novel-amari:1	keep	local
