@@ -7,3 +7,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ビタリとも	꼼짝도	E300			GN							novel-modifiers:5
 ピタリとも	꼼짝도	E300			GN							novel-modifiers:6
 ぴたりとも	꼼짝도	E300			GN							novel-modifiers:7
+真面に	제대로	E300			GN							novel-modifiers:12
+まとも	제대로 %D5@	G8U0			GN	9201	||1 P+1== "1**"	まとも가 바로 뒤 명사를 꾸미면 ‘제대로 된’으로 고른다.				novel-modifiers:8
+真面	제대로 %D5@	G8U0			GN	9201	||1 P+1== "1**"	まとも가 바로 뒤 명사를 꾸미면 ‘제대로 된’으로 고른다.				novel-modifiers:9
