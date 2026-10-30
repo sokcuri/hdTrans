@@ -1,0 +1,33 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+analysis:noun-before-copula	今日は晴れだ。	오늘은 맑음이다.	fix	analysis
+analysis:noun-before-copula	晴れです	맑음입니다	fix	analysis
+analysis:noun-before-copula	晴れだった	맑음이었다	fix	analysis
+analysis:noun-before-copula	明日は晴れだね	내일은 맑음이구나	fix	analysis
+analysis:noun-before-copula	明日は晴れでしょう	내일은 맑음이겠지요	fix	analysis
+analysis:noun-before-copula	予報では　午後からは晴れですけどね。	예보에서는 오후부터는 맑음이지만요.	fix	analysis
+analysis:noun-before-copula	一点晴れです。	has:맑음입니다	fix	analysis
+analysis:noun-before-copula	巻雲姉さん…食べ過ぎです	has:과식입니다	fix	analysis
+analysis:noun-before-copula	食べ過ぎだよ！ 本当に｡	과식이야! 정말.	fix	analysis
+analysis:noun-before-copula	それ 食べ過ぎだな さすがにな	그것 과식이다 아무래도	fix	analysis
+analysis:noun-before-copula	じゃがいも炒めです！召し上がれ！	감자 볶음입니다! 드세요!	fix	analysis
+analysis:noun-before-copula	なすとお肉の梅肉炒めだったりとか…。	has:볶음이었거나	fix	analysis
+analysis:noun-before-copula	さあ　出来だ。	자 성과다.	fix	analysis
+analysis:noun-before-copula	いや やっぱ 今日の出来でしょ	아니 역시 오늘의 성과지	fix	analysis
+analysis:noun-before-copula	近年で一番の出来だった	근년에 제일의 성과였다	fix	analysis
+analysis:noun-before-copula	いつでも　死と隣り合わせだ	언제라도 죽음과 이웃이다	fix	analysis
+analysis:noun-before-copula	｢逆上だ 非常識だ｣と決めつけられて	has:흥분이다	fix	analysis
+analysis:noun-before-copula	曇りです	흐림입니다	keep	analysis
+analysis:noun-before-copula	曇りだった	흐림이었다	keep	analysis
+analysis:noun-before-copula	晴れの舞台	화려한 무대	keep	analysis
+analysis:noun-before-copula	晴れて合格	정식으로 합격	keep	analysis
+analysis:noun-before-copula	晴れた空	맑은 하늘	keep	analysis
+analysis:noun-before-copula	明日は晴れる	내일은 개인다	keep	analysis
+analysis:noun-before-copula	よく晴れたこと｡	has:개인	keep	analysis
+analysis:noun-before-copula	食べ過ぎて動けない。	과식해 움직일 수 없다.	keep	analysis
+analysis:noun-before-copula	爆発しただと	has:폭발했다	keep	analysis
+analysis:noun-before-copula	甲21号作戦は失敗しただの	has:실패했다	keep	analysis
+analysis:noun-before-copula	今 改心させてお寺へ放り込んできただ　へっ	lacks:북	keep	analysis
+analysis:noun-before-copula	スープにも味が染みだしていていいでしょ？	lacks:얼룩	keep	analysis
+analysis:noun-before-copula	まずは一安心というところだが	lacks:곳	keep	analysis
+analysis:noun-before-copula	山の手から おいでですかい？	lacks:와요	keep	analysis
