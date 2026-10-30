@@ -6,7 +6,7 @@ protect:conjunctions	それにもかかわらず、彼は来た。	그럼에도 
 protect:conjunctions	なら行こう。	그렇다면 가자.	keep	protect
 dict:nimo-kakawarazu:1	父に恋人が居たにも関わらずお酒に酔った。	아버지에게 애인이 있었음에도 불구하고 술에 취했다.	fix	local
 dict:nimo-kakawarazu:1	バックステップで避けたにも関わらず射程外に出た。	백스텝으로 피했음에도 불구하고 사정외에 나왔다.	fix	local
-dict:nimo-kakawarazu:1	『早退１』を……たった１なのにも関わらず塗りつぶした。	『조퇴 1』을……끊은 1인데도 불구하고 전부 칠했다.	fix	local
+dict:nimo-kakawarazu:1	『早退１』を……たった１なのにも関わらず塗りつぶした。	『조퇴 1』을……단 1인데도 불구하고 전부 칠했다.	fix	local
 dict:nimo-kakawarazu:1	一目で分かるのにも拘わらずに、彼女は全部見た。	한눈에 아는데도 불구하고, 그녀는 전부 보았다.	fix	local
 dict:nimo-kakawarazu:2	体を余す所無く見られているのにも拘わらず、微笑みながら	몸을 남김없이 보여지고 있는데도 불구하고, 미소 지으면서	fix	local
 dict:nimo-kakawarazu:3	喉に詰まったにも拘らず、頭を撫でた。	목에 막혔음에도 불구하고, 머리를 쓰다듬었다.	fix	local

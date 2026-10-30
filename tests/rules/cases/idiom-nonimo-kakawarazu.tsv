@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:nimo-kakawarazu:2	彼女はその裸体を見られているのにも拘わらず、微笑んでいる。	그녀는 그 나체를 보여지고 있는데도 불구하고, 미소 짓고 있다.	fix	local
 dict:nimo-kakawarazu:2	一目で分かるのにも拘わらずに、彼女は全く動揺せず近付いてくる。	한눈에 아는데도 불구하고, 그녀는 전혀 동요하지 않고 가까워져 온다.	fix	local
-dict:nimo-kakawarazu:1	たった１なのにも関わらず塗りつぶしたのか。	끊은 1인데도 불구하고 전부 칠한 건가.	fix	local
+dict:nimo-kakawarazu:1	たった１なのにも関わらず塗りつぶしたのか。	단 1인데도 불구하고 전부 칠한 건가.	fix	local
 dict:jisjk:116564	認識できなかった？ 自分で書いたのにもかかわらず？	인식할 수 없었어? 스스로 썼는데도 불구하고?	fix	local
 dict:nimo-kakawarazu:3	約束したのにも拘らず、彼は来なかった。	약속했는데도 불구하고, 그는 오지 않았다.	fix	local
 dict:nimo-kakawarazu:1	雨なのにも関わらず出かけた。	비인데도 불구하고 나갔다.	fix	local

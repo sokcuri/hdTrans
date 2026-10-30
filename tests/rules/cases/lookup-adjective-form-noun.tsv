@@ -1,6 +1,6 @@
 # 한자 어간 형용사의 기본형과 같은 명사 행(臭い 냄새)은 を, も, は 앞과 꾸밈말 뒤에서 명사다. もの, もん, はず 앞과 서술어 자리는 형용사로 둔다.
 rule	input	expected	kind	layer
-lookup:adjective-form-noun	これで臭いも減り、蠅も湧きませぬ	이것으로 냄새도 줄어들어, 승도 솟아나지 않사옵니다	fix	lookup
+lookup:adjective-form-noun	これで臭いも減り、蠅も湧きませぬ	이것으로 냄새도 줄어들어, 파리도 솟아나지 않사옵니다	fix	lookup
 lookup:adjective-form-noun	布からは変な臭いもするし	천에서는 이상한 냄새도 하고	fix	lookup
 lookup:adjective-form-noun	ついでに、臭いを遮り	하는 김에, 냄새를 가로막아	fix	lookup
 lookup:adjective-form-noun	人間の臭いを付けるな！	인간의 냄새를 붙이지 마!	fix	lookup
