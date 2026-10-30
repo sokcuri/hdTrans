@@ -1,7 +1,7 @@
 # 규칙: GRM-28
 rule	input	expected	kind	layer
 compose:copula-after-vowel	「いや、無理だ。流石に死ぬ」	「아니, 무리다. 역시 죽는다」	fix	compose
-compose:copula-after-vowel	だが、――実家の事となれば話は別だ。	하지만, ――친가의 일이 되면 이야기는 별도다.	fix	compose
+compose:copula-after-vowel	だが、――実家の事となれば話は別だ。	하지만, ――본가의 일이 되면 이야기는 별도다.	fix	compose
 compose:copula-after-vowel	信じる信じないはお前らの自由だ	믿는 믿지 않는은 너희들의 자유다	fix	compose
 compose:copula-after-vowel	それは無理だろ…ｗ	그것은 무리지…ㅋ	fix	compose
 compose:copula-after-vowel	こんな姿じゃ…レイテ突入は無理ね…	이런 모습은…레이테 돌입은 무리네…	fix	compose
