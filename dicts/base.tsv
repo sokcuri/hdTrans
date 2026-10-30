@@ -7234,7 +7234,8 @@ ttt	ttt	K110			GN				jisjk:201744
 おサケ	술	I110			GN				jisjk:106823		
 おサラ	접시	I110			GN				jisjk:40536		
 おススメ	권장	N110			GN				jisjk:166466		
-おトク	저렴%A1@	G8U0			GN				jisjk:2144		
+おトク	이득%D4@	G8U0			GN				jisjk:2144		
+おトク	이득	N110			GN				caption-words:1		
 おトクな	이득이 되는	E0H0			GN				jisjk:149788		
 おニャンコ	고양이 클럽 	N110			GN				jisjk:264578		
 おニャン子クラブ	오냥코 클럽	N130			GN				jisjk:341594		

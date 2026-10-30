@@ -1,0 +1,36 @@
+rule	input	expected	kind	layer
+dict:lexical-caption-words	自分で湯切りしましたか？	스스로 물 빼기 했습니까?	fix	lookup
+dict:lexical-caption-words	誰でもめちゃ安!LINEMOで検索!	누구라도 엄청 저렴! LINEMO로 검색!	fix	lookup
+dict:lexical-caption-words	めちゃ安かった	엄청 쌌다	keep	lookup
+dict:lexical-caption-words	激アツ！	대박!	fix	lookup
+dict:lexical-caption-words	カタクチイワシが　激アツなんです	멸치가 대박입니다	fix	lookup
+dict:lexical-caption-words	車内は冷房でキンキンに冷やし	차내는 냉방에서 시원하게 차게 해	fix	lookup
+dict:lexical-caption-words	俺の遠当てが まともに入らなかったというのか？	내 원격 타격이 제대로 들어가지 않았다고 하는 건가?	fix	lookup
+dict:lexical-caption-words	服の血は返り血だと。	옷의 피는 튄 피라고.	fix	lookup
+dict:lexical-caption-words	絵付けはしないほうがいいと思います。	채색은 하지 않는 편이 좋다고 생각합니다.	fix	lookup
+dict:lexical-caption-words	繊細な藍色の絵付けが特徴です。	섬세한 남색 채색이 특징입니다.	fix	lookup
+dict:lexical-caption-words	汚れをふやかすから→	더러움을 불리니까→	fix	lookup
+dict:lexical-caption-words	研究データもくすねてくれよ。	연구 데이터도 슬쩍해 줘.	fix	lookup
+dict:lexical-caption-words	あたくしが くすねた金より 高いじゃ	제가 슬쩍한 돈보다 비싸지	fix	lookup
+dict:lexical-caption-words	濃ゆいタレを受け止める	진한 소스를 받아 들인다	fix	lookup
+dict:caption-words:1	テイガク無制限は こんなにおトク	정액 무제한은 이렇게 이득	fix	lookup
+dict:caption-words:1	地下鉄おトク情報	지하철 이득 정보	fix	lookup
+dict:caption-words:1	お得です	이득입니다	keep	lookup
+dict:lexical-caption-words	もずくよりも細いと思いますね。	큰실말보다 가늘다고 생각하네요.	fix	lookup
+dict:lexical-caption-words	まだ 全然 縦長！	아직 전혀 세로형!	fix	lookup
+dict:lexical-caption-words	ワンセットマッチ！	원 세트 매치!	fix	lookup
+dict:lexical-caption-words	あ… な 何奴!?	아… 인 웬 놈!?	fix	lookup
+dict:lexical-caption-words	な、なにやつ！	웨, 웬 놈!	fix	lookup
+dict:lexical-caption-words	ほけんの窓口	보험의 창구	fix	lookup
+dict:lexical-caption-words	秘密がある？ こん中に。	비밀이 있어? 이 안에.	fix	lookup
+dict:lexical-caption-words	こん中から選ぶってことか？	이 중에서 선택한다는 건가?	fix	lookup
+dict:lexical-caption-words	この中から選ぶ	이 중에서 선택한다	keep	lookup
+dict:lexical-caption-words	何合 炊いた？	몇 홉 밥했어?	fix	lookup
+dict:lexical-caption-words	新橋の立ち食いそば店です	신바시의 서서 먹는 소바점입니다	fix	lookup
+dict:lexical-caption-words	「餅巾着」…。	「떡 유부 주머니」….	fix	lookup
+dict:lexical-caption-words	あんた 警察？ けったくそ悪い。	너경찰? 재수 없다.	fix	lookup
+dict:lexical-caption-words	250円を 飛びっ切りのごちそうみたいに食べる。	250엔을 최고의 맛좋은 음식같이 먹는다.	fix	lookup
+dict:lexical-caption-words	跡形もなくなる程度だ。	흔적도 없이 사라지는 정도다.	fix	lookup
+dict:lexical-caption-words	一つの村が　跡形もなく消えた	하나의 마을이 흔적도 없이 사라졌다	fix	lookup
+dict:lexical-caption-words	こん中で将来的にいちばんモテそうなのは関根だよな｡	이 중에서 장래에 가장 인기를 끌 것 같은 것은 세키네지.	fix	lookup
+dict:lexical-caption-words	こん中に　宝物　入れたんだよ。	이 안에 보물 넣었어.	fix	lookup
