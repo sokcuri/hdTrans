@@ -1,0 +1,18 @@
+#! hon
+# Addressee -시- (hon.addressee): predicates that do not take it although the clause has no subject, because
+# their subject is rarely the addressee (되다: 자리면 돼요?, not 되세요?).
+type	lemma	note
+exclude	되다	the subject is a thing: 이걸로 돼요?
+exclude	보이다	보여요? (it is visible)
+exclude	들리다	들려요?
+exclude	생기다
+exclude	나다	소리가 나요?
+exclude	걸리다	시간이 걸려요?
+exclude	남다
+exclude	끝나다
+exclude	시작되다
+exclude	괜찮다
+exclude	맞다	맞아요?
+exclude	좋다
+exclude	싫다
+exclude	suffix:시다	a lemma that already carries -시- (하시다, 계시다): no second 시

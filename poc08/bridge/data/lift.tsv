@@ -9,3 +9,613 @@ word	1	-	{"kind":"N"}
 word	3	-	{"kind":"Adv"}
 word	6	-	{"kind":"Raw"}
 word	9	-	{"kind":"Raw"}
+# families and particles (W5): generated from the 0.7.x marker families and the retrofit particle table
+family	$A1@	기다	{"kind": "V"}
+family	$A2@	나다	{"kind": "V"}
+family	$A3@	니다	{"kind": "V"}
+family	$A4@	리다	{"kind": "V"}
+family	$A5@	쁘다	{"kind": "V", "kcls": "EU"}
+family	$A6@	시다	{"kind": "V"}
+family	$A7@	짜다	{"kind": "V"}
+family	$A8@	차다	{"kind": "V"}
+family	$A9@	크다	{"kind": "V", "kcls": "EU"}
+family	$AA@	프다	{"kind": "V", "kcls": "EU"}
+family	$AB@	하다	{"kind": "V", "kcls": "HA"}
+family	$AC@	싸다	{"kind": "V"}
+family	$AD@	희다	{"kind": "V"}
+family	$AE@	되다	{"kind": "V"}
+family	$AF@	되다	{"kind": "V"}
+family	$AG@	쁘다	{"kind": "V", "kcls": "EU"}
+family	$AH@	이다	{"kind": "V", "kcls": "COP"}
+family	$AK@	세다	{"kind": "V"}
+family	$C1@	빠르다	{"kind": "V", "kcls": "REU"}
+family	$C2@	푸르다	{"kind": "V", "kcls": "REO"}
+family	$C3@	노랗다	{"kind": "V", "kcls": "H"}
+family	$C4@	모르다	{"kind": "V", "kcls": "REU"}
+family	$C5@	무르다	{"kind": "V", "kcls": "REU"}
+family	$C6@	이르다	{"kind": "V", "kcls": "REU"}
+family	$D1@	낡다	{"kind": "V"}
+family	$D2@	낮다	{"kind": "V"}
+family	$D3@	높다	{"kind": "V"}
+family	$D4@	많다	{"kind": "V"}
+family	$D5@	맑다	{"kind": "V"}
+family	$D6@	밝다	{"kind": "V"}
+family	$D7@	않다	{"kind": "V"}
+family	$D8@	얇다	{"kind": "V"}
+family	$D9@	얕다	{"kind": "V"}
+family	$DA@	작다	{"kind": "V"}
+family	$DB@	짧다	{"kind": "V"}
+family	$DC@	찮다	{"kind": "V"}
+family	$DD@	옳다	{"kind": "V"}
+family	$DE@	좋다	{"kind": "V"}
+family	$DF@	같다	{"kind": "V"}
+family	$DG@	좁다	{"kind": "V"}
+family	$DH@	않다	{"kind": "V"}
+family	$F1@	검다	{"kind": "V"}
+family	$F2@	굳다	{"kind": "V"}
+family	$F3@	궂다	{"kind": "V"}
+family	$F4@	깊다	{"kind": "V"}
+family	$F5@	넓다	{"kind": "V"}
+family	$F6@	늦다	{"kind": "V"}
+family	$F7@	붉다	{"kind": "V"}
+family	$F8@	석다	{"kind": "V"}
+family	$F9@	싶다	{"kind": "V"}
+family	$FA@	없다	{"kind": "V", "kcls": "EXIST"}
+family	$FB@	있다	{"kind": "V", "kcls": "EXIST"}
+family	$FC@	적다	{"kind": "V"}
+family	$FD@	젊다	{"kind": "V"}
+family	$FE@	짙다	{"kind": "V"}
+family	$FF@	굵다	{"kind": "V"}
+family	$FH@	싫다	{"kind": "V"}
+family	$FI@	묽다	{"kind": "V"}
+family	$G1@	깝다	{"kind": "V", "kcls": "B"}
+family	$G2@	껍다	{"kind": "V", "kcls": "B"}
+family	$G3@	납다	{"kind": "V", "kcls": "B"}
+family	$G4@	답다	{"kind": "V", "kcls": "B"}
+family	$G5@	덥다	{"kind": "V", "kcls": "B"}
+family	$G6@	둡다	{"kind": "V", "kcls": "B"}
+family	$G7@	럽다	{"kind": "V", "kcls": "B"}
+family	$G8@	렵다	{"kind": "V", "kcls": "B"}
+family	$G9@	롭다	{"kind": "V", "kcls": "B"}
+family	$GA@	립다	{"kind": "V", "kcls": "B"}
+family	$GB@	맙다	{"kind": "V", "kcls": "B"}
+family	$GC@	밉다	{"kind": "V", "kcls": "B"}
+family	$GD@	볍다	{"kind": "V", "kcls": "B"}
+family	$GE@	섭다	{"kind": "V", "kcls": "B"}
+family	$GF@	쉽다	{"kind": "V", "kcls": "B"}
+family	$GG@	습다	{"kind": "V", "kcls": "B"}
+family	$GH@	겁다	{"kind": "V", "kcls": "B"}
+family	$GI@	춥다	{"kind": "V", "kcls": "B"}
+family	$GJ@	엽다	{"kind": "V", "kcls": "B"}
+family	$GK@	텁다	{"kind": "V", "kcls": "B"}
+family	$GL@	맵다	{"kind": "V", "kcls": "B"}
+family	$GM@	꼽다	{"kind": "V", "kcls": "B"}
+family	$GN@	묽다	{"kind": "V"}
+family	$I1@	달다	{"kind": "V", "kcls": "L"}
+family	$J1@	설다	{"kind": "V", "kcls": "L"}
+family	$J2@	늘다	{"kind": "V", "kcls": "L"}
+family	$J3@	길다	{"kind": "V", "kcls": "L"}
+family	$J4@	멀다	{"kind": "V", "kcls": "L"}
+family	$J5@	물다	{"kind": "V", "kcls": "L"}
+family	$J6@	글다	{"kind": "V", "kcls": "L"}
+family	$J7@	칠다	{"kind": "V", "kcls": "L"}
+family	$J8@	끼다	{"kind": "V"}
+family	$J9@	나다	{"kind": "V"}
+family	$KA@	히다	{"kind": "V"}
+family	$KB@	갑다	{"kind": "V", "kcls": "BWA"}
+family	$KC@	오다	{"kind": "V"}
+family	$KD@	속다	{"kind": "V"}
+family	$KE@	뜨다	{"kind": "V", "kcls": "EU"}
+family	$KF@	내다	{"kind": "V"}
+family	$KG@	니다	{"kind": "V"}
+family	$KH@	들다	{"kind": "V", "kcls": "L"}
+family	$KI@	넘다	{"kind": "V"}
+family	$KJ@	내다	{"kind": "V"}
+family	$KK@	나다	{"kind": "V"}
+family	$KL@	지다	{"kind": "V"}
+family	$KM@	들다	{"kind": "V", "kcls": "L"}
+family	$KN@	엷다	{"kind": "V"}
+family	$KO@	떫다	{"kind": "V"}
+family	$KP@	르다	{"kind": "V", "kcls": "EU"}
+family	$KQ@	끼다	{"kind": "V"}
+family	$KR@	르다	{"kind": "V", "kcls": "EU"}
+family	$KS@	맞다	{"kind": "V"}
+family	$KT@	라다	{"kind": "V"}
+family	$KU@	쓰다	{"kind": "V", "kcls": "EU"}
+family	$KV@	서다	{"kind": "V"}
+family	$KW@	디다	{"kind": "V"}
+family	$KX@	가다	{"kind": "V"}
+family	$KY@	일다	{"kind": "V", "kcls": "L"}
+family	$KZ@	떼다	{"kind": "V"}
+family	$Ka@	쩍다	{"kind": "V"}
+family	$Kb@	겹다	{"kind": "V", "kcls": "B"}
+family	$Kc@	서다	{"kind": "V"}
+family	$Kd@	치다	{"kind": "V"}
+family	$Ke@	추다	{"kind": "V"}
+family	$Kf@	익다	{"kind": "V"}
+family	$Kg@	떨다	{"kind": "V", "kcls": "L"}
+family	$Kh@	밀다	{"kind": "V", "kcls": "L"}
+family	$Ki@	바르다	{"kind": "V", "kcls": "REU"}
+family	$Kj@	깨다	{"kind": "V"}
+family	$Kk@	받다	{"kind": "V"}
+family	$Kl@	돌다	{"kind": "V", "kcls": "L"}
+family	$Km@	녹다	{"kind": "V"}
+family	$Kn@	쏘다	{"kind": "V"}
+family	$Ko@	먹다	{"kind": "V"}
+family	$Kp@	깨닫다	{"kind": "V", "kcls": "D"}
+family	$Kq@	말다	{"kind": "V", "kcls": "L"}
+family	$Kr@	랗다	{"kind": "V", "kcls": "H"}
+family	$Ks@	말다	{"kind": "V", "kcls": "L"}
+family	$Kt@	프다	{"kind": "V", "kcls": "EU"}
+family	$Ku@	잖다	{"kind": "V"}
+family	$Ky@	늦는다	{"kind": "V"}
+family	$Kz@	하다	{"kind": "V", "kcls": "HA"}
+family	$La@	이다	{"kind": "V", "kcls": "COP"}
+family	$Lb@	바라다	{"kind": "V"}
+family	$Lc@	롭다	{"kind": "V", "kcls": "B"}
+family	%A1@	하다	{"kind": "V", "kcls": "HA"}
+family	%A2@	스럽다	{"kind": "V", "kcls": "B"}
+family	%A3@	롭다	{"kind": "V", "kcls": "B"}
+family	%A4@	럽다	{"kind": "V", "kcls": "B"}
+family	%B1@	크다	{"kind": "V", "kcls": "EU"}
+family	%B2@	작다	{"kind": "V"}
+family	%B3@	같다	{"kind": "V"}
+family	%B4@	없다	{"kind": "V", "kcls": "EXIST"}
+family	%B5@	않다	{"kind": "V"}
+family	%B6@	아니다	{"kind": "V"}
+family	%B7@	있다	{"kind": "V", "kcls": "EXIST"}
+family	%B8@	좋다	{"kind": "V"}
+family	%B9@	쉽다	{"kind": "V", "kcls": "B"}
+family	%BA@	싫다	{"kind": "V"}
+family	%BC@	드물다	{"kind": "V", "kcls": "L"}
+family	%BD@	사납다	{"kind": "V", "kcls": "B"}
+family	%BE@	밝다	{"kind": "V"}
+family	%BF@	곧다	{"kind": "V"}
+family	%C1@	지다	{"kind": "V"}
+family	%C2@	투르다	{"kind": "V", "kcls": "REU"}
+family	%C3@	석다	{"kind": "V"}
+family	%C4@	찮다	{"kind": "V"}
+family	%C5@	렇다	{"kind": "V", "kcls": "H"}
+family	%C6@	궂다	{"kind": "V"}
+family	%C7@	으르다	{"kind": "V", "kcls": "REU"}
+family	%C8@	쁘다	{"kind": "V", "kcls": "EU"}
+family	%C9@	쁘다	{"kind": "V", "kcls": "EU"}
+family	%CA@	빨갛다	{"kind": "V", "kcls": "H"}
+family	%CB@	까맣다	{"kind": "V", "kcls": "H"}
+family	%CC@	하얗다	{"kind": "V", "kcls": "H"}
+family	%D1@	하다	{"kind": "V", "kcls": "HA"}
+family	%D2@	기다	{"kind": "V"}
+family	%D3@	나다	{"kind": "V"}
+family	%D4@	이다	{"kind": "V", "kcls": "COP"}
+family	%D5@	되다	{"kind": "V"}
+family	%D6@	끼다	{"kind": "V"}
+family	%D7@	나다	{"kind": "V"}
+family	%D8@	젖다	{"kind": "V"}
+family	%D9@	서다	{"kind": "V"}
+family	%DA@	껍다	{"kind": "V", "kcls": "B"}
+family	%DB@	프다	{"kind": "V", "kcls": "EU"}
+family	%DC@	칠다	{"kind": "V", "kcls": "L"}
+family	%DD@	싸다	{"kind": "V"}
+family	%DE@	엽다	{"kind": "V", "kcls": "B"}
+family	%DF@	둡다	{"kind": "V", "kcls": "B"}
+family	%DG@	엷다	{"kind": "V"}
+family	%DH@	많다	{"kind": "V"}
+family	%DI@	르다	{"kind": "V", "kcls": "EU"}
+family	%DJ@	비다	{"kind": "V"}
+family	%DK@	엾다	{"kind": "V"}
+family	%DL@	늦다	{"kind": "V"}
+family	%DM@	여기다	{"kind": "V"}
+family	%DN@	꼽다	{"kind": "V"}
+family	%DO@	시다	{"kind": "V"}
+family	%DP@	거리다	{"kind": "V"}
+family	%DQ@	볍다	{"kind": "V", "kcls": "B"}
+family	%DR@	걸다	{"kind": "V", "kcls": "L"}
+family	%DS@	넓다	{"kind": "V"}
+family	%DT@	빠르다	{"kind": "V", "kcls": "REU"}
+family	%DU@	밀다	{"kind": "V", "kcls": "L"}
+family	%DV@	오다	{"kind": "V"}
+family	%DW@	렵다	{"kind": "V", "kcls": "B"}
+family	%DX@	닮다	{"kind": "V"}
+family	%DY@	답다	{"kind": "V", "kcls": "BWA"}
+family	%DZ@	적다	{"kind": "V"}
+family	%Da@	굼뜨다	{"kind": "V", "kcls": "EU"}
+family	%Db@	치다	{"kind": "V"}
+family	%Dc@	높다	{"kind": "V"}
+family	%Dd@	느리다	{"kind": "V"}
+family	%De@	뼈저리다	{"kind": "V"}
+family	%Df@	둥글다	{"kind": "V", "kcls": "L"}
+family	%Dg@	깨다	{"kind": "V"}
+family	%Dh@	곱다	{"kind": "V", "kcls": "BWA"}
+family	%Di@	세다	{"kind": "V"}
+family	%Dj@	리다	{"kind": "V"}
+family	%Dk@	드물다	{"kind": "V", "kcls": "L"}
+family	%Dl@	좁다	{"kind": "V"}
+family	%Dm@	대다	{"kind": "V"}
+family	%Dn@	맞다	{"kind": "V"}
+family	%Do@	사납다	{"kind": "V", "kcls": "BWA"}
+family	%Dp@	낮다	{"kind": "V"}
+family	%Dq@	익다	{"kind": "V"}
+family	%Dr@	밉다	{"kind": "V", "kcls": "B"}
+family	%Ds@	자다	{"kind": "V"}
+family	%Dt@	받다	{"kind": "V"}
+family	%Du@	다르다	{"kind": "V", "kcls": "REU"}
+family	%Dv@	괴롭히다	{"kind": "V"}
+family	%Dw@	비꼬다	{"kind": "V"}
+family	%Dx@	모자라다	{"kind": "V"}
+family	%Dy@	생기다	{"kind": "V"}
+family	%Dz@	모르다	{"kind": "V", "kcls": "REU"}
+family	%E1@	다랗다	{"kind": "V", "kcls": "H"}
+family	%E2@	힘들다	{"kind": "V", "kcls": "L"}
+family	%E3@	하다	{"kind": "V", "kcls": "HA"}
+family	%E4@	깨닫다	{"kind": "V", "kcls": "D"}
+family	%EA@	들다	{"kind": "V", "kcls": "L"}
+family	%EB@	싶다	{"kind": "V"}
+family	%EC@	라다	{"kind": "V"}
+family	%ED@	겹다	{"kind": "V", "kcls": "B"}
+family	%EE@	부르다	{"kind": "V", "kcls": "REU"}
+family	%EF@	알다	{"kind": "V", "kcls": "L"}
+family	%EG@	않다	{"kind": "V"}
+family	%EI@	되다	{"kind": "V"}
+family	&A1@	가다	{"kind": "V"}
+family	&A2@	기다	{"kind": "V"}
+family	&A3@	끄다	{"kind": "V", "kcls": "EU"}
+family	&A4@	끼다	{"kind": "V"}
+family	&A5@	나다	{"kind": "V"}
+family	&A6@	내다	{"kind": "V"}
+family	&A7@	니다	{"kind": "V"}
+family	&A8@	뜨다	{"kind": "V", "kcls": "EU"}
+family	&A9@	라다	{"kind": "V"}
+family	&AA@	리다	{"kind": "V"}
+family	&AB@	미다	{"kind": "V"}
+family	&AC@	빼다	{"kind": "V"}
+family	&AD@	서다	{"kind": "V"}
+family	&AE@	시다	{"kind": "V"}
+family	&AF@	쓰다	{"kind": "V", "kcls": "EU"}
+family	&AG@	애다	{"kind": "V"}
+family	&AH@	오다	{"kind": "V"}
+family	&AI@	우다	{"kind": "V"}
+family	&AJ@	이다	{"kind": "V"}
+family	&AK@	자다	{"kind": "V"}
+family	&AL@	지다	{"kind": "V"}
+family	&AM@	짜다	{"kind": "V"}
+family	&AN@	차다	{"kind": "V"}
+family	&AO@	치다	{"kind": "V"}
+family	&AP@	켜다	{"kind": "V"}
+family	&AQ@	키다	{"kind": "V"}
+family	&AR@	타다	{"kind": "V"}
+family	&AS@	트다	{"kind": "V", "kcls": "EU"}
+family	&AT@	파다	{"kind": "V"}
+family	&AU@	펴다	{"kind": "V"}
+family	&AV@	하다	{"kind": "V", "kcls": "HA"}
+family	&AW@	히다	{"kind": "V"}
+family	&AX@	사다	{"kind": "V"}
+family	&AY@	보다	{"kind": "V"}
+family	&AZ@	싸다	{"kind": "V"}
+family	&Aa@	프다	{"kind": "V", "kcls": "EU"}
+family	&Ab@	너다	{"kind": "V"}
+family	&Ac@	이다	{"kind": "V", "kcls": "COP"}
+family	&Ad@	비다	{"kind": "V"}
+family	&Ae@	디다	{"kind": "V"}
+family	&Af@	티다	{"kind": "V"}
+family	&Ag@	새다	{"kind": "V"}
+family	&Ah@	찌다	{"kind": "V"}
+family	&Ai@	래다	{"kind": "V"}
+family	&Aj@	타다	{"kind": "V"}
+family	&C1@	귀다	{"kind": "V"}
+family	&C2@	깨다	{"kind": "V"}
+family	&C3@	꾸다	{"kind": "V"}
+family	&C4@	누다	{"kind": "V"}
+family	&C5@	대다	{"kind": "V"}
+family	&C6@	되다	{"kind": "V"}
+family	&C7@	두다	{"kind": "V"}
+family	&C8@	떼다	{"kind": "V"}
+family	&C9@	뛰다	{"kind": "V"}
+family	&CA@	띠다	{"kind": "V"}
+family	&CB@	루다	{"kind": "V"}
+family	&CC@	매다	{"kind": "V"}
+family	&CD@	띄다	{"kind": "V"}
+family	&CE@	세다	{"kind": "V"}
+family	&CF@	수다	{"kind": "V"}
+family	&CG@	쉬다	{"kind": "V"}
+family	&CH@	위다	{"kind": "V"}
+family	&CI@	재다	{"kind": "V"}
+family	&CJ@	주다	{"kind": "V"}
+family	&CK@	쥐다	{"kind": "V"}
+family	&CL@	추다	{"kind": "V"}
+family	&CM@	피다	{"kind": "V"}
+family	&CN@	배다	{"kind": "V"}
+family	&CO@	튀다	{"kind": "V"}
+family	&CP@	휘다	{"kind": "V"}
+family	&CQ@	비다	{"kind": "V"}
+family	&CR@	투다	{"kind": "V"}
+family	&CS@	굽다	{"kind": "V", "kcls": "B"}
+family	&CT@	베다	{"kind": "V"}
+family	&CU@	새다	{"kind": "V"}
+family	&CV@	그다	{"kind": "V", "kcls": "EU"}
+family	&CW@	뀌다	{"kind": "V"}
+family	&CX@	쬐다	{"kind": "V"}
+family	&CY@	메다	{"kind": "V"}
+family	&CZ@	꼬다	{"kind": "V"}
+family	&Ca@	채다	{"kind": "V"}
+family	&E1@	두르다	{"kind": "V", "kcls": "REU"}
+family	&E2@	들르다	{"kind": "V", "kcls": "EU"}
+family	&E3@	따르다	{"kind": "V", "kcls": "EU"}
+family	&E4@	마르다	{"kind": "V", "kcls": "REU"}
+family	&E5@	모으다	{"kind": "V", "kcls": "EU"}
+family	&E6@	오르다	{"kind": "V", "kcls": "REU"}
+family	&E7@	지르다	{"kind": "V", "kcls": "REU"}
+family	&E8@	기르다	{"kind": "V", "kcls": "REU"}
+family	&E9@	찌르다	{"kind": "V", "kcls": "REU"}
+family	&EA@	흐르다	{"kind": "V", "kcls": "REU"}
+family	&EB@	누르다	{"kind": "V", "kcls": "REU"}
+family	&EC@	조르다	{"kind": "V", "kcls": "REU"}
+family	&ED@	구르다	{"kind": "V", "kcls": "REU"}
+family	&EE@	부르다	{"kind": "V", "kcls": "REU"}
+family	&EF@	다르다	{"kind": "V", "kcls": "REU"}
+family	&EG@	자르다	{"kind": "V", "kcls": "REU"}
+family	&EH@	바르다	{"kind": "V", "kcls": "REU"}
+family	&F1@	감다	{"kind": "V"}
+family	&F2@	갚다	{"kind": "V"}
+family	&F3@	깎다	{"kind": "V"}
+family	&F4@	남다	{"kind": "V"}
+family	&F5@	녹다	{"kind": "V"}
+family	&F6@	놓다	{"kind": "V"}
+family	&F7@	닦다	{"kind": "V"}
+family	&F8@	닮다	{"kind": "V"}
+family	&F9@	닿다	{"kind": "V"}
+family	&FA@	막다	{"kind": "V"}
+family	&FB@	맞다	{"kind": "V"}
+family	&FC@	맡다	{"kind": "V"}
+family	&FD@	받다	{"kind": "V"}
+family	&FE@	밟다	{"kind": "V"}
+family	&FF@	뽑다	{"kind": "V"}
+family	&FG@	솟다	{"kind": "V"}
+family	&FH@	안다	{"kind": "V"}
+family	&FI@	앉다	{"kind": "V"}
+family	&FJ@	앗다	{"kind": "V"}
+family	&FK@	잡다	{"kind": "V"}
+family	&FL@	쫓다	{"kind": "V"}
+family	&FM@	참다	{"kind": "V"}
+family	&FN@	찾다	{"kind": "V"}
+family	&FO@	낳다	{"kind": "V"}
+family	&FP@	쌓다	{"kind": "V"}
+family	&FQ@	닫다	{"kind": "V"}
+family	&FR@	낚다	{"kind": "V"}
+family	&FS@	삼다	{"kind": "V"}
+family	&FT@	쏟다	{"kind": "V"}
+family	&FU@	꽂다	{"kind": "V"}
+family	&FV@	맺다	{"kind": "V"}
+family	&FW@	앓다	{"kind": "V"}
+family	&FX@	핥다	{"kind": "V"}
+family	&H1@	굶다	{"kind": "V"}
+family	&H2@	꺾다	{"kind": "V"}
+family	&H3@	끓다	{"kind": "V"}
+family	&H4@	넘다	{"kind": "V"}
+family	&H5@	넣다	{"kind": "V"}
+family	&H6@	늙다	{"kind": "V"}
+family	&H7@	듬다	{"kind": "V"}
+family	&H8@	묵다	{"kind": "V"}
+family	&H9@	묻다	{"kind": "V"}
+family	&HA@	믿다	{"kind": "V"}
+family	&HB@	벗다	{"kind": "V"}
+family	&HC@	붙다	{"kind": "V"}
+family	&HD@	숨다	{"kind": "V"}
+family	&HE@	심다	{"kind": "V"}
+family	&HF@	썩다	{"kind": "V"}
+family	&HG@	씻다	{"kind": "V"}
+family	&HH@	얻다	{"kind": "V"}
+family	&HI@	업다	{"kind": "V"}
+family	&HJ@	웃다	{"kind": "V"}
+family	&HK@	읽다	{"kind": "V"}
+family	&HL@	잃다	{"kind": "V"}
+family	&HM@	입다	{"kind": "V"}
+family	&HN@	있다	{"kind": "V"}
+family	&HO@	잊다	{"kind": "V"}
+family	&HP@	짖다	{"kind": "V"}
+family	&HQ@	짚다	{"kind": "V"}
+family	&HR@	찍다	{"kind": "V"}
+family	&HS@	접다	{"kind": "V"}
+family	&HT@	죽다	{"kind": "V"}
+family	&HU@	먹다	{"kind": "V"}
+family	&HV@	젖다	{"kind": "V"}
+family	&HW@	찢다	{"kind": "V"}
+family	&HX@	신다	{"kind": "V"}
+family	&HY@	적다	{"kind": "V"}
+family	&HZ@	뿜다	{"kind": "V"}
+family	&Ha@	묶다	{"kind": "V"}
+family	&Hb@	집다	{"kind": "V"}
+family	&Hc@	빚다	{"kind": "V"}
+family	&Hd@	뜯다	{"kind": "V"}
+family	&He@	익다	{"kind": "V"}
+family	&Hf@	뚫다	{"kind": "V"}
+family	&Hg@	찧다	{"kind": "V"}
+family	&Hh@	긁다	{"kind": "V"}
+family	&Hi@	읊다	{"kind": "V"}
+family	&Hj@	덮다	{"kind": "V"}
+family	&Hk@	끊다	{"kind": "V"}
+family	&Hl@	섞다	{"kind": "V"}
+family	&Hm@	겪다	{"kind": "V"}
+family	&Hn@	식다	{"kind": "V"}
+family	&Ho@	뻗다	{"kind": "V"}
+family	&J1@	걷다	{"kind": "V", "kcls": "D"}
+family	&J2@	굽다	{"kind": "V", "kcls": "B"}
+family	&J3@	긋다	{"kind": "V", "kcls": "S"}
+family	&J4@	눕다	{"kind": "V", "kcls": "B"}
+family	&J5@	돕다	{"kind": "V", "kcls": "BWA"}
+family	&J6@	듣다	{"kind": "V", "kcls": "D"}
+family	&J7@	묻다	{"kind": "V", "kcls": "D"}
+family	&J8@	뵙다	{"kind": "V"}
+family	&J9@	줍다	{"kind": "V", "kcls": "B"}
+family	&JA@	짓다	{"kind": "V", "kcls": "S"}
+family	&JC@	싣다	{"kind": "V", "kcls": "D"}
+family	&JE@	젓다	{"kind": "V", "kcls": "S"}
+family	&JF@	닫다	{"kind": "V"}
+family	&JG@	붓다	{"kind": "V", "kcls": "S"}
+family	&JH@	잇다	{"kind": "V", "kcls": "S"}
+family	&K1@	깔다	{"kind": "V", "kcls": "L"}
+family	&K2@	날다	{"kind": "V", "kcls": "L"}
+family	&K3@	놀다	{"kind": "V", "kcls": "L"}
+family	&K4@	달다	{"kind": "V", "kcls": "L"}
+family	&K5@	살다	{"kind": "V", "kcls": "L"}
+family	&K6@	알다	{"kind": "V", "kcls": "L"}
+family	&K7@	졸다	{"kind": "V", "kcls": "L"}
+family	&K8@	팔다	{"kind": "V", "kcls": "L"}
+family	&K9@	돌다	{"kind": "V", "kcls": "L"}
+family	&KA@	몰다	{"kind": "V", "kcls": "L"}
+family	&KB@	갈다	{"kind": "V", "kcls": "L"}
+family	&KC@	골다	{"kind": "V", "kcls": "L"}
+family	&L1@	걸다	{"kind": "V", "kcls": "L"}
+family	&L2@	끌다	{"kind": "V", "kcls": "L"}
+family	&L3@	빨다	{"kind": "V", "kcls": "L"}
+family	&L4@	들다	{"kind": "V", "kcls": "L"}
+family	&L5@	물다	{"kind": "V", "kcls": "L"}
+family	&L6@	벌다	{"kind": "V", "kcls": "L"}
+family	&L7@	불다	{"kind": "V", "kcls": "L"}
+family	&L8@	빌다	{"kind": "V", "kcls": "L"}
+family	&L9@	쓸다	{"kind": "V", "kcls": "L"}
+family	&LA@	얼다	{"kind": "V", "kcls": "L"}
+family	&LB@	열다	{"kind": "V", "kcls": "L"}
+family	&LC@	울다	{"kind": "V", "kcls": "L"}
+family	&LD@	일다	{"kind": "V", "kcls": "L"}
+family	&LE@	틀다	{"kind": "V", "kcls": "L"}
+family	&LF@	풀다	{"kind": "V", "kcls": "L"}
+family	&LG@	떨다	{"kind": "V", "kcls": "L"}
+family	&LH@	헐다	{"kind": "V", "kcls": "L"}
+family	&LI@	썰다	{"kind": "V", "kcls": "L"}
+family	&LJ@	슬다	{"kind": "V", "kcls": "L"}
+family	&LK@	털다	{"kind": "V", "kcls": "L"}
+family	&LL@	굴다	{"kind": "V", "kcls": "L"}
+family	&LM@	늘다	{"kind": "V", "kcls": "L"}
+family	&LN@	밀다	{"kind": "V", "kcls": "L"}
+family	&LO@	씹다	{"kind": "V"}
+family	&LP@	삶다	{"kind": "V"}
+family	&LQ@	늦다	{"kind": "V"}
+family	&LR@	담다	{"kind": "V"}
+family	&LS@	모르다	{"kind": "V", "kcls": "REU"}
+family	&LT@	빠르다	{"kind": "V", "kcls": "EU"}
+family	&LU@	멀다	{"kind": "V", "kcls": "L"}
+family	&LV@	싫다	{"kind": "V"}
+family	&LW@	않다	{"kind": "V"}
+family	&LX@	럽다	{"kind": "V", "kcls": "B"}
+family	&LY@	겹다	{"kind": "V", "kcls": "B"}
+family	&LZ@	얹다	{"kind": "V"}
+family	&M1@	속다	{"kind": "V"}
+family	&M2@	레다	{"kind": "V"}
+family	&M3@	품다	{"kind": "V"}
+family	&M4@	빗다	{"kind": "V"}
+family	&M5@	이다	{"kind": "V"}
+family	&M6@	담다	{"kind": "V"}
+family	&M7@	맑다	{"kind": "V"}
+family	&M8@	거스르다	{"kind": "V", "kcls": "REU"}
+family	&M9@	없다	{"kind": "V"}
+family	&MA@	피우다	{"kind": "V"}
+family	&MB@	바쁘다	{"kind": "V", "kcls": "EU"}
+family	&MC@	서두르다	{"kind": "V", "kcls": "REU"}
+family	&MD@	볶다	{"kind": "V"}
+family	&ME@	이르다	{"kind": "V", "kcls": "REO"}
+family	&MF@	주무르다	{"kind": "V", "kcls": "REU"}
+family	&MG@	이르다	{"kind": "V", "kcls": "REU"}
+family	&MH@	쏘다	{"kind": "V"}
+family	&MI@	타이르다	{"kind": "V", "kcls": "REU"}
+family	&MJ@	어르다	{"kind": "V", "kcls": "REU"}
+family	&MK@	박다	{"kind": "V"}
+family	&ML@	곪다	{"kind": "V"}
+family	&MM@	패다	{"kind": "V"}
+family	&MN@	고르다	{"kind": "V", "kcls": "REU"}
+family	&MO@	개다	{"kind": "V"}
+family	&MP@	치르다	{"kind": "V", "kcls": "EU"}
+family	&MQ@	같다	{"kind": "V"}
+family	&MR@	쉽다	{"kind": "V", "kcls": "B"}
+family	&MS@	갖다	{"kind": "V"}
+family	&MT@	개다	{"kind": "V"}
+family	&MU@	머금다	{"kind": "V"}
+family	&MV@	일다	{"kind": "V", "kcls": "L"}
+family	&MW@	렵다	{"kind": "V", "kcls": "B"}
+family	&MX@	헐다	{"kind": "V", "kcls": "L"}
+family	&MY@	타이르다	{"kind": "V", "kcls": "REU"}
+family	&MZ@	훑다	{"kind": "V"}
+family	&Ma@	얇다	{"kind": "V"}
+family	&Mb@	줄다	{"kind": "V", "kcls": "L"}
+family	&Mc@	거르다	{"kind": "V", "kcls": "REU"}
+family	&Md@	따다	{"kind": "V"}
+family	&Me@	좋다	{"kind": "V"}
+family	&Mf@	하다	{"kind": "V", "kcls": "HA"}
+family	&Mg@	깨닫다	{"kind": "V", "kcls": "D"}
+family	&Mh@	말다	{"kind": "V", "kcls": "L"}
+family	&Mi@	덜고다	{"kind": "V"}
+family	&Mj@	쁘고다	{"kind": "V"}
+family	&Mk@	건네다	{"kind": "V"}
+family	&Ml@	아니다	{"kind": "V"}
+family	&Mm@	삐다	{"kind": "V"}
+family	&Mo@	낫다	{"kind": "V", "kcls": "S"}
+family	&Mp@	수줍다	{"kind": "V"}
+family	&Mq@	되다	{"kind": "V"}
+family	&Mr@	나다	{"kind": "V"}
+family	&Ms@	지다	{"kind": "V"}
+family	&Mt@	치다	{"kind": "V"}
+family	&Mu@	차다	{"kind": "V"}
+family	&Mv@	무르다	{"kind": "V", "kcls": "REU"}
+family	&Mx@	무르다	{"kind": "V", "kcls": "REU"}
+family	&My@	바라다	{"kind": "V"}
+family	&Mz@	이다	{"kind": "V", "kcls": "COP"}
+family	&NA@	나뉘다	{"kind": "V"}
+family	&NB@	엮다	{"kind": "V"}
+family	&NC@	했다	{"kind": "V"}
+family	&ND@	붇다	{"kind": "V", "kcls": "D"}
+family	&NE@	꿇다	{"kind": "V"}
+family	&NF@	않다	{"kind": "V"}
+family	&NG@	구다	{"kind": "V"}
+particle	(이)가	-	{"kind": "P", "kase": "subj"}
+particle	(은)는	-	{"kind": "P", "kase": "top"}
+particle	(을)를	-	{"kind": "P", "kase": "obj"}
+particle	의	-	{"kind": "P", "kase": "gen"}
+particle	(와)과	-	{"kind": "P", "kase": "com"}
+particle	(으)로	-	{"kind": "P", "kase": "instr"}
+particle	에서	-	{"kind": "P", "kase": "loc"}
+particle	(이)라고	-	{"kind": "P", "kase": "quot"}
+particle	(아)야	-	{"kind": "P", "kase": "voc"}
+particle	로부터	-	{"kind": "P", "kase": "LEX", "lemma": "로부터"}
+particle	(이)나	-	{"kind": "P", "kase": "LEX", "lemma": "(이)나"}
+particle	(이)랑	-	{"kind": "P", "kase": "LEX", "lemma": "(이)랑"}
+particle	(이)라도	-	{"kind": "P", "kase": "LEX", "lemma": "(이)라도"}
+particle	(이)야	-	{"kind": "P", "kase": "LEX", "lemma": "(이)야"}
+particle	(이)든지	-	{"kind": "P", "kase": "LEX", "lemma": "(이)든지"}
+particle	(이)든	-	{"kind": "P", "kase": "LEX", "lemma": "(이)든"}
+particle	(이)여	-	{"kind": "P", "kase": "LEX", "lemma": "(이)여"}
+particle	(이)라는	-	{"kind": "P", "kase": "LEX", "lemma": "(이)라는"}
+particle	(이)란	-	{"kind": "P", "kase": "LEX", "lemma": "(이)란"}
+particle	(이)며	-	{"kind": "P", "kase": "LEX", "lemma": "(이)며"}
+particle	(으)로서	-	{"kind": "P", "kase": "LEX", "lemma": "(으)로서"}
+particle	(으)로써	-	{"kind": "P", "kase": "LEX", "lemma": "(으)로써"}
+particle	(으)로는	-	{"kind": "P", "kase": "LEX", "lemma": "(으)로는"}
+particle	(으)로도	-	{"kind": "P", "kase": "LEX", "lemma": "(으)로도"}
+particle	가	-	{"kind": "P", "kase": "subj"}
+particle	이	-	{"kind": "P", "kase": "subj"}
+particle	는	-	{"kind": "P", "kase": "top"}
+particle	은	-	{"kind": "P", "kase": "top"}
+particle	를	-	{"kind": "P", "kase": "obj"}
+particle	을	-	{"kind": "P", "kase": "obj"}
+particle	에	-	{"kind": "P", "kase": "LEX", "lemma": "에"}
+particle	로	-	{"kind": "P", "kase": "instr"}
+particle	으로	-	{"kind": "P", "kase": "instr"}
+particle	도	-	{"kind": "P", "kase": "LEX", "lemma": "도"}
+particle	만	-	{"kind": "P", "kase": "LEX", "lemma": "만"}
+particle	까지	-	{"kind": "P", "kase": "LEX", "lemma": "까지"}
+particle	부터	-	{"kind": "P", "kase": "LEX", "lemma": "부터"}
+particle	처럼	-	{"kind": "P", "kase": "LEX", "lemma": "처럼"}
+particle	보다	-	{"kind": "P", "kase": "LEX", "lemma": "보다"}
+particle	이나	-	{"kind": "P", "kase": "LEX", "lemma": "(이)나"}
+particle	나	-	{"kind": "P", "kase": "LEX", "lemma": "(이)나"}
+particle	이라도	-	{"kind": "P", "kase": "LEX", "lemma": "(이)라도"}
+particle	라도	-	{"kind": "P", "kase": "LEX", "lemma": "(이)라도"}
+particle	에는	-	{"kind": "P", "kase": "LEX", "lemma": "에는"}
+particle	에도	-	{"kind": "P", "kase": "LEX", "lemma": "에도"}
+particle	에서는	-	{"kind": "P", "kase": "LEX", "lemma": "에서는"}
+particle	으로는	-	{"kind": "P", "kase": "LEX", "lemma": "(으)로는"}
+particle	로는	-	{"kind": "P", "kase": "LEX", "lemma": "(으)로는"}
+particle	뿐	-	{"kind": "P", "kase": "LEX", "lemma": "뿐"}
+particle	만이	-	{"kind": "P", "kase": "LEX", "lemma": "만이"}
+particle	만은	-	{"kind": "P", "kase": "LEX", "lemma": "만은"}
+particle	마저	-	{"kind": "P", "kase": "LEX", "lemma": "마저"}
+particle	조차	-	{"kind": "P", "kase": "LEX", "lemma": "조차"}
+particle	이라든가	-	{"kind": "P", "kase": "LEX", "lemma": "(이)라든가"}

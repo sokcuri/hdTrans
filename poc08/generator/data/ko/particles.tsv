@@ -1,0 +1,29 @@
+#! particles
+# Abstract case → particle. G picks the first row whose case and condition hold, then the allomorph
+# from the last sound of the word before it (vowel, consonant, ㄹ). Lexical particles (kase=lex) are
+# written in the same notation in the node lemma: 이/가, 과/와 (after a consonant/after a vowel), (으)로, (이)나, or one form.
+#
+# Columns
+#   kase    subj top obj gen dat src loc goal instr com quot voc
+#   when    - | anim | hon | spoken | a comma-joined AND of these
+#   form    notation as above: A/B = after a consonant / after a vowel
+id	kase	when	form	note
+pt:subj#2	subj	hon	께서	선생님께서
+pt:subj#1	subj	-	이/가	학생이, 친구가
+pt:top#1	top	-	은/는	학생은, 친구는
+pt:obj#1	obj	-	을/를	학생을, 친구를
+pt:gen#1	gen	-	의	친구의
+pt:dat#3	dat	anim,hon	께	선생님께
+pt:dat#2	dat	anim,spoken	한테	친구한테
+pt:dat#1	dat	anim	에게	친구에게
+pt:dat#0	dat	-	에	학교에
+pt:goal#1	goal	-	에	학교에
+pt:src#2	src	anim,spoken	한테서	친구한테서
+pt:src#1	src	anim	에게서	친구에게서
+pt:src#0	src	-	에서	냉장고에서
+pt:loc#1	loc	-	에서	학교에서
+pt:instr#1	instr	-	(으)로	칼로, 연필로, 손으로, 길로
+pt:com#2	com	spoken	(이)랑	친구랑, 학생이랑
+pt:com#1	com	-	과/와	학생과, 친구와
+pt:quot#1	quot	-	(이)라고	친구라고, 학생이라고
+pt:voc#1	voc	-	아/야	철수야, 민준아

@@ -1,0 +1,42 @@
+#! irregular
+# Stem alternation of each conjugation class, by the start of the ending that follows.
+# G applies the general phonology (으-insertion, harmony, contraction, ㄹ-deletion) after these rows.
+#
+# Columns
+#   class   REG HA D B BWA S H REU REO U EU L COP EXIST NC
+#   before  A   the ending starts with the harmonic vowel 아/어 (어, 어서, 었)
+#           EU  the ending starts with (으) (으면, 은, 을, 으니까, 으시)
+#           ㄴ ㅂ ㅅ ㄹ ㅁ  the ending starts with this consonant, as a syllable initial or as a jamo
+#           오  the ending starts with the syllable 오 (하오체 -오)
+#   stem    actions on the last stem syllable, comma-joined:
+#             final=X     set the final consonant (X a jamo, 0 = none)
+#             append=X    add the syllable X to the stem
+#             vowel=hieuh map the vowel for ㅎ stems: ㅏ→ㅐ ㅑ→ㅒ ㅓ→ㅔ ㅕ→ㅖ (그렇/어떻 etc.: ㅐ, flag `ae` in stems.tsv)
+#             vowel=X     set the vowel to the jamo X
+#             reu         르 → ㄹ on the syllable before it, the ending vowel becomes 라/러
+#             drop-vowel  drop the stem's last vowel (으 stems): the ending vowel joins the consonant
+#   ending  actions on the ending: drop-eu (no 으), keep-eu (으 even though the stem now ends in ㄹ),
+#           harmony=dark|bright, contract=must, absorb (the harmonic vowel merges into the stem syllable),
+#           vowel=X (the harmonic syllable becomes X), no-contract
+class	before	stem	ending	example
+D	A	final=ㄹ	-	듣+어 → 들어
+D	EU	final=ㄹ	keep-eu	듣+으면 → 들으면
+B	A	final=0,append=우	harmony=dark,contract=must	고맙+어 → 고마워
+B	EU	final=0,append=우	drop-eu	고맙+으면 → 고마우면
+BWA	A	final=0,append=오	harmony=bright,contract=must	돕+아 → 도와
+BWA	EU	final=0,append=우	drop-eu	돕+으면 → 도우면
+S	A	final=0	no-contract	짓+어 → 지어, 낫+아 → 나아
+S	EU	final=0	keep-eu	짓+으면 → 지으면
+H	A	final=0,vowel=hieuh	absorb	파랗+아 → 파래, 그렇+어 → 그래
+H	EU	final=0	drop-eu	파랗+은 → 파란, 그렇+으면 → 그러면
+REU	A	reu	-	부르+어 → 불러, 모르+아 → 몰라
+REO	A	-	vowel=러	이르+어 → 이르러, 푸르+어 → 푸르러
+U	A	vowel=ㅓ	absorb	푸+어 → 퍼
+EU	A	drop-vowel	-	쓰+어 → 써, 바쁘+아 → 바빠
+HA	A	-	vowel=여	하+어 → 하여 (→ 해 by contraction)
+L	EU	-	drop-eu	살+으면 → 살면, 살+은 → 산
+L	ㄴ	final=0	-	살+는 → 사는, 살+네 → 사네
+L	ㅂ	final=0	-	살+ㅂ니다 → 삽니다
+L	ㅅ	final=0	-	살+시 → 사시, 살+세요 → 사세요
+L	오	final=0	-	살+오 → 사오
+NC	A	-	no-contract	아니+어 → 아니어

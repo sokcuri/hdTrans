@@ -1,0 +1,38 @@
+#! voices
+# Character voice (persona) cues and name suffixes, read by S and R. A speaker's persona is the voice of the
+# most frequent cue among its lines in the scene; R passes it to G, which picks ending variants from
+# data/ko/persona.tsv (old-male: 좋구먼). Levels are not changed by a voice here: the dev games show 해 for
+# 84% of old-speech lines.
+#
+# Columns
+#   type   first (a first-person pronoun), final (a sentence-final form), suffix (an honorific name suffix: the word
+#          before it is a name, S's scene registry)
+#   key    the Japanese string
+#   value  persona: none rough old-male lady formal pompous archaic grand
+type	key	value	note
+first	わし	old-male
+first	ワシ	old-male
+first	儂	old-male
+first	わたくし	formal
+first	拙者	archaic
+first	それがし	archaic
+first	俺様	grand
+first	朕	grand
+first	俺	rough
+first	オレ	rough
+final	ですわ	lady
+final	ですの	lady
+final	ですぞ	pompous
+final	であります	pompous
+final	のう	old-male
+final	じゃよ	old-male
+final	ござる	archaic
+suffix	さん	-
+suffix	くん	-
+suffix	君	-
+suffix	ちゃん	-
+suffix	様	-
+suffix	さま	-
+suffix	先輩	-
+suffix	先生	-
+suffix	殿	-

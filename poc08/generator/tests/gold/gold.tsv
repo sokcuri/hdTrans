@@ -1,0 +1,2736 @@
+id	lemma	pos	cls	forms	expected	host	source
+p-가다-hae	가다	V	-	-어	가	-	paradigm
+p-가다-past	가다	V	-	-었- -다	갔다	-	paradigm
+p-가다-cond	가다	V	-	-면	가면	-	paradigm
+p-가다-reason	가다	V	-	-니까	가니까	-	paradigm
+p-가다-hapsyo	가다	V	-	-습니다	갑니다	-	paradigm
+p-가다-adn	가다	V	-	-는	가는	-	paradigm
+p-가다-adnpast	가다	V	-	-ㄴ	간	-	paradigm
+p-가다-adnfut	가다	V	-	-ㄹ	갈	-	paradigm
+p-가다-haera	가다	V	-	-다	간다	-	paradigm
+p-가다-hon	가다	V	-	-시- -어요	가세요|가셔요	-	paradigm
+p-가다-seq	가다	V	-	-어서	가서	-	paradigm
+p-가다-nom	가다	V	-	-ㅁ	감	-	paradigm
+p-오다-hae	오다	V	-	-어	와	-	paradigm
+p-오다-past	오다	V	-	-었- -다	왔다	-	paradigm
+p-오다-cond	오다	V	-	-면	오면	-	paradigm
+p-오다-reason	오다	V	-	-니까	오니까	-	paradigm
+p-오다-hapsyo	오다	V	-	-습니다	옵니다	-	paradigm
+p-오다-adn	오다	V	-	-는	오는	-	paradigm
+p-오다-adnpast	오다	V	-	-ㄴ	온	-	paradigm
+p-오다-adnfut	오다	V	-	-ㄹ	올	-	paradigm
+p-오다-haera	오다	V	-	-다	온다	-	paradigm
+p-오다-hon	오다	V	-	-시- -어요	오세요|오셔요	-	paradigm
+p-오다-seq	오다	V	-	-어서	와서	-	paradigm
+p-오다-nom	오다	V	-	-ㅁ	옴	-	paradigm
+p-보다-hae	보다	V	-	-어	봐	-	paradigm
+p-보다-past	보다	V	-	-었- -다	봤다	-	paradigm
+p-보다-cond	보다	V	-	-면	보면	-	paradigm
+p-보다-reason	보다	V	-	-니까	보니까	-	paradigm
+p-보다-hapsyo	보다	V	-	-습니다	봅니다	-	paradigm
+p-보다-adn	보다	V	-	-는	보는	-	paradigm
+p-보다-adnpast	보다	V	-	-ㄴ	본	-	paradigm
+p-보다-adnfut	보다	V	-	-ㄹ	볼	-	paradigm
+p-보다-haera	보다	V	-	-다	본다	-	paradigm
+p-보다-hon	보다	V	-	-시- -어요	보세요|보셔요	-	paradigm
+p-보다-seq	보다	V	-	-어서	봐서	-	paradigm
+p-보다-nom	보다	V	-	-ㅁ	봄	-	paradigm
+p-주다-hae	주다	V	-	-어	줘	-	paradigm
+p-주다-past	주다	V	-	-었- -다	줬다	-	paradigm
+p-주다-cond	주다	V	-	-면	주면	-	paradigm
+p-주다-reason	주다	V	-	-니까	주니까	-	paradigm
+p-주다-hapsyo	주다	V	-	-습니다	줍니다	-	paradigm
+p-주다-adn	주다	V	-	-는	주는	-	paradigm
+p-주다-adnpast	주다	V	-	-ㄴ	준	-	paradigm
+p-주다-adnfut	주다	V	-	-ㄹ	줄	-	paradigm
+p-주다-haera	주다	V	-	-다	준다	-	paradigm
+p-주다-hon	주다	V	-	-시- -어요	주세요|주셔요	-	paradigm
+p-주다-seq	주다	V	-	-어서	줘서	-	paradigm
+p-주다-nom	주다	V	-	-ㅁ	줌	-	paradigm
+p-두다-hae	두다	V	-	-어	둬	-	paradigm
+p-두다-past	두다	V	-	-었- -다	뒀다	-	paradigm
+p-두다-cond	두다	V	-	-면	두면	-	paradigm
+p-두다-reason	두다	V	-	-니까	두니까	-	paradigm
+p-두다-hapsyo	두다	V	-	-습니다	둡니다	-	paradigm
+p-두다-adn	두다	V	-	-는	두는	-	paradigm
+p-두다-adnpast	두다	V	-	-ㄴ	둔	-	paradigm
+p-두다-adnfut	두다	V	-	-ㄹ	둘	-	paradigm
+p-두다-haera	두다	V	-	-다	둔다	-	paradigm
+p-두다-hon	두다	V	-	-시- -어요	두세요|두셔요	-	paradigm
+p-두다-seq	두다	V	-	-어서	둬서	-	paradigm
+p-두다-nom	두다	V	-	-ㅁ	둠	-	paradigm
+p-되다-hae	되다	V	-	-어	돼	-	paradigm
+p-되다-past	되다	V	-	-었- -다	됐다	-	paradigm
+p-되다-cond	되다	V	-	-면	되면	-	paradigm
+p-되다-reason	되다	V	-	-니까	되니까	-	paradigm
+p-되다-hapsyo	되다	V	-	-습니다	됩니다	-	paradigm
+p-되다-adn	되다	V	-	-는	되는	-	paradigm
+p-되다-adnpast	되다	V	-	-ㄴ	된	-	paradigm
+p-되다-adnfut	되다	V	-	-ㄹ	될	-	paradigm
+p-되다-haera	되다	V	-	-다	된다	-	paradigm
+p-되다-hon	되다	V	-	-시- -어요	되세요|되셔요	-	paradigm
+p-되다-seq	되다	V	-	-어서	돼서	-	paradigm
+p-되다-nom	되다	V	-	-ㅁ	됨	-	paradigm
+p-쉬다-hae	쉬다	V	-	-어	쉬어	-	paradigm
+p-쉬다-past	쉬다	V	-	-었- -다	쉬었다	-	paradigm
+p-쉬다-cond	쉬다	V	-	-면	쉬면	-	paradigm
+p-쉬다-reason	쉬다	V	-	-니까	쉬니까	-	paradigm
+p-쉬다-hapsyo	쉬다	V	-	-습니다	쉽니다	-	paradigm
+p-쉬다-adn	쉬다	V	-	-는	쉬는	-	paradigm
+p-쉬다-adnpast	쉬다	V	-	-ㄴ	쉰	-	paradigm
+p-쉬다-adnfut	쉬다	V	-	-ㄹ	쉴	-	paradigm
+p-쉬다-haera	쉬다	V	-	-다	쉰다	-	paradigm
+p-쉬다-hon	쉬다	V	-	-시- -어요	쉬세요|쉬셔요	-	paradigm
+p-쉬다-seq	쉬다	V	-	-어서	쉬어서	-	paradigm
+p-쉬다-nom	쉬다	V	-	-ㅁ	쉼	-	paradigm
+p-뛰다-hae	뛰다	V	-	-어	뛰어	-	paradigm
+p-뛰다-past	뛰다	V	-	-었- -다	뛰었다	-	paradigm
+p-뛰다-cond	뛰다	V	-	-면	뛰면	-	paradigm
+p-뛰다-reason	뛰다	V	-	-니까	뛰니까	-	paradigm
+p-뛰다-hapsyo	뛰다	V	-	-습니다	뜁니다	-	paradigm
+p-뛰다-adn	뛰다	V	-	-는	뛰는	-	paradigm
+p-뛰다-adnpast	뛰다	V	-	-ㄴ	뛴	-	paradigm
+p-뛰다-adnfut	뛰다	V	-	-ㄹ	뛸	-	paradigm
+p-뛰다-haera	뛰다	V	-	-다	뛴다	-	paradigm
+p-뛰다-hon	뛰다	V	-	-시- -어요	뛰세요|뛰셔요	-	paradigm
+p-뛰다-seq	뛰다	V	-	-어서	뛰어서	-	paradigm
+p-뛰다-nom	뛰다	V	-	-ㅁ	뜀	-	paradigm
+p-마시다-hae	마시다	V	-	-어	마셔	-	paradigm
+p-마시다-past	마시다	V	-	-었- -다	마셨다	-	paradigm
+p-마시다-cond	마시다	V	-	-면	마시면	-	paradigm
+p-마시다-reason	마시다	V	-	-니까	마시니까	-	paradigm
+p-마시다-hapsyo	마시다	V	-	-습니다	마십니다	-	paradigm
+p-마시다-adn	마시다	V	-	-는	마시는	-	paradigm
+p-마시다-adnpast	마시다	V	-	-ㄴ	마신	-	paradigm
+p-마시다-adnfut	마시다	V	-	-ㄹ	마실	-	paradigm
+p-마시다-haera	마시다	V	-	-다	마신다	-	paradigm
+p-마시다-hon	마시다	V	-	-시- -어요	마시세요|마시셔요	-	paradigm
+p-마시다-seq	마시다	V	-	-어서	마셔서	-	paradigm
+p-마시다-nom	마시다	V	-	-ㅁ	마심	-	paradigm
+p-기다리다-hae	기다리다	V	-	-어	기다려	-	paradigm
+p-기다리다-past	기다리다	V	-	-었- -다	기다렸다	-	paradigm
+p-기다리다-cond	기다리다	V	-	-면	기다리면	-	paradigm
+p-기다리다-reason	기다리다	V	-	-니까	기다리니까	-	paradigm
+p-기다리다-hapsyo	기다리다	V	-	-습니다	기다립니다	-	paradigm
+p-기다리다-adn	기다리다	V	-	-는	기다리는	-	paradigm
+p-기다리다-adnpast	기다리다	V	-	-ㄴ	기다린	-	paradigm
+p-기다리다-adnfut	기다리다	V	-	-ㄹ	기다릴	-	paradigm
+p-기다리다-haera	기다리다	V	-	-다	기다린다	-	paradigm
+p-기다리다-hon	기다리다	V	-	-시- -어요	기다리세요|기다리셔요	-	paradigm
+p-기다리다-seq	기다리다	V	-	-어서	기다려서	-	paradigm
+p-기다리다-nom	기다리다	V	-	-ㅁ	기다림	-	paradigm
+p-서다-hae	서다	V	-	-어	서	-	paradigm
+p-서다-past	서다	V	-	-었- -다	섰다	-	paradigm
+p-서다-cond	서다	V	-	-면	서면	-	paradigm
+p-서다-reason	서다	V	-	-니까	서니까	-	paradigm
+p-서다-hapsyo	서다	V	-	-습니다	섭니다	-	paradigm
+p-서다-adn	서다	V	-	-는	서는	-	paradigm
+p-서다-adnpast	서다	V	-	-ㄴ	선	-	paradigm
+p-서다-adnfut	서다	V	-	-ㄹ	설	-	paradigm
+p-서다-haera	서다	V	-	-다	선다	-	paradigm
+p-서다-hon	서다	V	-	-시- -어요	서세요|서셔요	-	paradigm
+p-서다-seq	서다	V	-	-어서	서서	-	paradigm
+p-서다-nom	서다	V	-	-ㅁ	섬	-	paradigm
+p-켜다-hae	켜다	V	-	-어	켜	-	paradigm
+p-켜다-past	켜다	V	-	-었- -다	켰다	-	paradigm
+p-켜다-cond	켜다	V	-	-면	켜면	-	paradigm
+p-켜다-reason	켜다	V	-	-니까	켜니까	-	paradigm
+p-켜다-hapsyo	켜다	V	-	-습니다	켭니다	-	paradigm
+p-켜다-adn	켜다	V	-	-는	켜는	-	paradigm
+p-켜다-adnpast	켜다	V	-	-ㄴ	켠	-	paradigm
+p-켜다-adnfut	켜다	V	-	-ㄹ	켤	-	paradigm
+p-켜다-haera	켜다	V	-	-다	켠다	-	paradigm
+p-켜다-hon	켜다	V	-	-시- -어요	켜세요|켜셔요	-	paradigm
+p-켜다-seq	켜다	V	-	-어서	켜서	-	paradigm
+p-켜다-nom	켜다	V	-	-ㅁ	켬	-	paradigm
+p-보내다-hae	보내다	V	-	-어	보내	-	paradigm
+p-보내다-past	보내다	V	-	-었- -다	보냈다	-	paradigm
+p-보내다-cond	보내다	V	-	-면	보내면	-	paradigm
+p-보내다-reason	보내다	V	-	-니까	보내니까	-	paradigm
+p-보내다-hapsyo	보내다	V	-	-습니다	보냅니다	-	paradigm
+p-보내다-adn	보내다	V	-	-는	보내는	-	paradigm
+p-보내다-adnpast	보내다	V	-	-ㄴ	보낸	-	paradigm
+p-보내다-adnfut	보내다	V	-	-ㄹ	보낼	-	paradigm
+p-보내다-haera	보내다	V	-	-다	보낸다	-	paradigm
+p-보내다-hon	보내다	V	-	-시- -어요	보내세요|보내셔요	-	paradigm
+p-보내다-seq	보내다	V	-	-어서	보내서	-	paradigm
+p-보내다-nom	보내다	V	-	-ㅁ	보냄	-	paradigm
+p-세다-hae	세다	V	-	-어	세	-	paradigm
+p-세다-past	세다	V	-	-었- -다	셌다	-	paradigm
+p-세다-cond	세다	V	-	-면	세면	-	paradigm
+p-세다-reason	세다	V	-	-니까	세니까	-	paradigm
+p-세다-hapsyo	세다	V	-	-습니다	셉니다	-	paradigm
+p-세다-adn	세다	V	-	-는	세는	-	paradigm
+p-세다-adnpast	세다	V	-	-ㄴ	센	-	paradigm
+p-세다-adnfut	세다	V	-	-ㄹ	셀	-	paradigm
+p-세다-haera	세다	V	-	-다	센다	-	paradigm
+p-세다-hon	세다	V	-	-시- -어요	세세요|세셔요	-	paradigm
+p-세다-seq	세다	V	-	-어서	세서	-	paradigm
+p-세다-nom	세다	V	-	-ㅁ	셈	-	paradigm
+p-먹다-hae	먹다	V	-	-어	먹어	-	paradigm
+p-먹다-past	먹다	V	-	-었- -다	먹었다	-	paradigm
+p-먹다-cond	먹다	V	-	-면	먹으면	-	paradigm
+p-먹다-reason	먹다	V	-	-니까	먹으니까	-	paradigm
+p-먹다-hapsyo	먹다	V	-	-습니다	먹습니다	-	paradigm
+p-먹다-adn	먹다	V	-	-는	먹는	-	paradigm
+p-먹다-adnpast	먹다	V	-	-ㄴ	먹은	-	paradigm
+p-먹다-adnfut	먹다	V	-	-ㄹ	먹을	-	paradigm
+p-먹다-haera	먹다	V	-	-다	먹는다	-	paradigm
+p-먹다-hon	먹다	V	-	-시- -어요	먹으세요|먹으셔요	-	paradigm
+p-먹다-seq	먹다	V	-	-어서	먹어서	-	paradigm
+p-먹다-nom	먹다	V	-	-ㅁ	먹음	-	paradigm
+p-잡다-hae	잡다	V	-	-어	잡아	-	paradigm
+p-잡다-past	잡다	V	-	-었- -다	잡았다	-	paradigm
+p-잡다-cond	잡다	V	-	-면	잡으면	-	paradigm
+p-잡다-reason	잡다	V	-	-니까	잡으니까	-	paradigm
+p-잡다-hapsyo	잡다	V	-	-습니다	잡습니다	-	paradigm
+p-잡다-adn	잡다	V	-	-는	잡는	-	paradigm
+p-잡다-adnpast	잡다	V	-	-ㄴ	잡은	-	paradigm
+p-잡다-adnfut	잡다	V	-	-ㄹ	잡을	-	paradigm
+p-잡다-haera	잡다	V	-	-다	잡는다	-	paradigm
+p-잡다-hon	잡다	V	-	-시- -어요	잡으세요|잡으셔요	-	paradigm
+p-잡다-seq	잡다	V	-	-어서	잡아서	-	paradigm
+p-잡다-nom	잡다	V	-	-ㅁ	잡음	-	paradigm
+p-입다-hae	입다	V	-	-어	입어	-	paradigm
+p-입다-past	입다	V	-	-었- -다	입었다	-	paradigm
+p-입다-cond	입다	V	-	-면	입으면	-	paradigm
+p-입다-reason	입다	V	-	-니까	입으니까	-	paradigm
+p-입다-hapsyo	입다	V	-	-습니다	입습니다	-	paradigm
+p-입다-adn	입다	V	-	-는	입는	-	paradigm
+p-입다-adnpast	입다	V	-	-ㄴ	입은	-	paradigm
+p-입다-adnfut	입다	V	-	-ㄹ	입을	-	paradigm
+p-입다-haera	입다	V	-	-다	입는다	-	paradigm
+p-입다-hon	입다	V	-	-시- -어요	입으세요|입으셔요	-	paradigm
+p-입다-seq	입다	V	-	-어서	입어서	-	paradigm
+p-입다-nom	입다	V	-	-ㅁ	입음	-	paradigm
+p-받다-hae	받다	V	-	-어	받아	-	paradigm
+p-받다-past	받다	V	-	-었- -다	받았다	-	paradigm
+p-받다-cond	받다	V	-	-면	받으면	-	paradigm
+p-받다-reason	받다	V	-	-니까	받으니까	-	paradigm
+p-받다-hapsyo	받다	V	-	-습니다	받습니다	-	paradigm
+p-받다-adn	받다	V	-	-는	받는	-	paradigm
+p-받다-adnpast	받다	V	-	-ㄴ	받은	-	paradigm
+p-받다-adnfut	받다	V	-	-ㄹ	받을	-	paradigm
+p-받다-haera	받다	V	-	-다	받는다	-	paradigm
+p-받다-hon	받다	V	-	-시- -어요	받으세요|받으셔요	-	paradigm
+p-받다-seq	받다	V	-	-어서	받아서	-	paradigm
+p-받다-nom	받다	V	-	-ㅁ	받음	-	paradigm
+p-웃다-hae	웃다	V	-	-어	웃어	-	paradigm
+p-웃다-past	웃다	V	-	-었- -다	웃었다	-	paradigm
+p-웃다-cond	웃다	V	-	-면	웃으면	-	paradigm
+p-웃다-reason	웃다	V	-	-니까	웃으니까	-	paradigm
+p-웃다-hapsyo	웃다	V	-	-습니다	웃습니다	-	paradigm
+p-웃다-adn	웃다	V	-	-는	웃는	-	paradigm
+p-웃다-adnpast	웃다	V	-	-ㄴ	웃은	-	paradigm
+p-웃다-adnfut	웃다	V	-	-ㄹ	웃을	-	paradigm
+p-웃다-haera	웃다	V	-	-다	웃는다	-	paradigm
+p-웃다-hon	웃다	V	-	-시- -어요	웃으세요|웃으셔요	-	paradigm
+p-웃다-seq	웃다	V	-	-어서	웃어서	-	paradigm
+p-웃다-nom	웃다	V	-	-ㅁ	웃음	-	paradigm
+p-씻다-hae	씻다	V	-	-어	씻어	-	paradigm
+p-씻다-past	씻다	V	-	-었- -다	씻었다	-	paradigm
+p-씻다-cond	씻다	V	-	-면	씻으면	-	paradigm
+p-씻다-reason	씻다	V	-	-니까	씻으니까	-	paradigm
+p-씻다-hapsyo	씻다	V	-	-습니다	씻습니다	-	paradigm
+p-씻다-adn	씻다	V	-	-는	씻는	-	paradigm
+p-씻다-adnpast	씻다	V	-	-ㄴ	씻은	-	paradigm
+p-씻다-adnfut	씻다	V	-	-ㄹ	씻을	-	paradigm
+p-씻다-haera	씻다	V	-	-다	씻는다	-	paradigm
+p-씻다-hon	씻다	V	-	-시- -어요	씻으세요|씻으셔요	-	paradigm
+p-씻다-seq	씻다	V	-	-어서	씻어서	-	paradigm
+p-씻다-nom	씻다	V	-	-ㅁ	씻음	-	paradigm
+p-놓다-hae	놓다	V	-	-어	놔|놓아	-	paradigm
+p-놓다-past	놓다	V	-	-었- -다	놨다|놓았다	-	paradigm
+p-놓다-cond	놓다	V	-	-면	놓으면	-	paradigm
+p-놓다-reason	놓다	V	-	-니까	놓으니까	-	paradigm
+p-놓다-hapsyo	놓다	V	-	-습니다	놓습니다	-	paradigm
+p-놓다-adn	놓다	V	-	-는	놓는	-	paradigm
+p-놓다-adnpast	놓다	V	-	-ㄴ	놓은	-	paradigm
+p-놓다-adnfut	놓다	V	-	-ㄹ	놓을	-	paradigm
+p-놓다-haera	놓다	V	-	-다	놓는다	-	paradigm
+p-놓다-hon	놓다	V	-	-시- -어요	놓으세요|놓으셔요	-	paradigm
+p-놓다-seq	놓다	V	-	-어서	놔서|놓아서	-	paradigm
+p-놓다-nom	놓다	V	-	-ㅁ	놓음	-	paradigm
+p-넣다-hae	넣다	V	-	-어	넣어	-	paradigm
+p-넣다-past	넣다	V	-	-었- -다	넣었다	-	paradigm
+p-넣다-cond	넣다	V	-	-면	넣으면	-	paradigm
+p-넣다-reason	넣다	V	-	-니까	넣으니까	-	paradigm
+p-넣다-hapsyo	넣다	V	-	-습니다	넣습니다	-	paradigm
+p-넣다-adn	넣다	V	-	-는	넣는	-	paradigm
+p-넣다-adnpast	넣다	V	-	-ㄴ	넣은	-	paradigm
+p-넣다-adnfut	넣다	V	-	-ㄹ	넣을	-	paradigm
+p-넣다-haera	넣다	V	-	-다	넣는다	-	paradigm
+p-넣다-hon	넣다	V	-	-시- -어요	넣으세요|넣으셔요	-	paradigm
+p-넣다-seq	넣다	V	-	-어서	넣어서	-	paradigm
+p-넣다-nom	넣다	V	-	-ㅁ	넣음	-	paradigm
+p-배우다-hae	배우다	V	-	-어	배워	-	paradigm
+p-배우다-past	배우다	V	-	-었- -다	배웠다	-	paradigm
+p-배우다-cond	배우다	V	-	-면	배우면	-	paradigm
+p-배우다-reason	배우다	V	-	-니까	배우니까	-	paradigm
+p-배우다-hapsyo	배우다	V	-	-습니다	배웁니다	-	paradigm
+p-배우다-adn	배우다	V	-	-는	배우는	-	paradigm
+p-배우다-adnpast	배우다	V	-	-ㄴ	배운	-	paradigm
+p-배우다-adnfut	배우다	V	-	-ㄹ	배울	-	paradigm
+p-배우다-haera	배우다	V	-	-다	배운다	-	paradigm
+p-배우다-hon	배우다	V	-	-시- -어요	배우세요|배우셔요	-	paradigm
+p-배우다-seq	배우다	V	-	-어서	배워서	-	paradigm
+p-배우다-nom	배우다	V	-	-ㅁ	배움	-	paradigm
+p-바꾸다-hae	바꾸다	V	-	-어	바꿔	-	paradigm
+p-바꾸다-past	바꾸다	V	-	-었- -다	바꿨다	-	paradigm
+p-바꾸다-cond	바꾸다	V	-	-면	바꾸면	-	paradigm
+p-바꾸다-reason	바꾸다	V	-	-니까	바꾸니까	-	paradigm
+p-바꾸다-hapsyo	바꾸다	V	-	-습니다	바꿉니다	-	paradigm
+p-바꾸다-adn	바꾸다	V	-	-는	바꾸는	-	paradigm
+p-바꾸다-adnpast	바꾸다	V	-	-ㄴ	바꾼	-	paradigm
+p-바꾸다-adnfut	바꾸다	V	-	-ㄹ	바꿀	-	paradigm
+p-바꾸다-haera	바꾸다	V	-	-다	바꾼다	-	paradigm
+p-바꾸다-hon	바꾸다	V	-	-시- -어요	바꾸세요|바꾸셔요	-	paradigm
+p-바꾸다-seq	바꾸다	V	-	-어서	바꿔서	-	paradigm
+p-바꾸다-nom	바꾸다	V	-	-ㅁ	바꿈	-	paradigm
+p-띄다-hae	띄다	V	-	-어	띄어	-	paradigm
+p-띄다-past	띄다	V	-	-었- -다	띄었다	-	paradigm
+p-띄다-cond	띄다	V	-	-면	띄면	-	paradigm
+p-띄다-reason	띄다	V	-	-니까	띄니까	-	paradigm
+p-띄다-hapsyo	띄다	V	-	-습니다	띕니다	-	paradigm
+p-띄다-adn	띄다	V	-	-는	띄는	-	paradigm
+p-띄다-adnpast	띄다	V	-	-ㄴ	띈	-	paradigm
+p-띄다-adnfut	띄다	V	-	-ㄹ	띌	-	paradigm
+p-띄다-haera	띄다	V	-	-다	띈다	-	paradigm
+p-띄다-hon	띄다	V	-	-시- -어요	띄세요|띄셔요	-	paradigm
+p-띄다-seq	띄다	V	-	-어서	띄어서	-	paradigm
+p-띄다-nom	띄다	V	-	-ㅁ	띔	-	paradigm
+p-사귀다-hae	사귀다	V	-	-어	사귀어	-	paradigm
+p-사귀다-past	사귀다	V	-	-었- -다	사귀었다	-	paradigm
+p-사귀다-cond	사귀다	V	-	-면	사귀면	-	paradigm
+p-사귀다-reason	사귀다	V	-	-니까	사귀니까	-	paradigm
+p-사귀다-hapsyo	사귀다	V	-	-습니다	사귑니다	-	paradigm
+p-사귀다-adn	사귀다	V	-	-는	사귀는	-	paradigm
+p-사귀다-adnpast	사귀다	V	-	-ㄴ	사귄	-	paradigm
+p-사귀다-adnfut	사귀다	V	-	-ㄹ	사귈	-	paradigm
+p-사귀다-haera	사귀다	V	-	-다	사귄다	-	paradigm
+p-사귀다-hon	사귀다	V	-	-시- -어요	사귀세요|사귀셔요	-	paradigm
+p-사귀다-seq	사귀다	V	-	-어서	사귀어서	-	paradigm
+p-사귀다-nom	사귀다	V	-	-ㅁ	사귐	-	paradigm
+p-치다-hae	치다	V	-	-어	쳐	-	paradigm
+p-치다-past	치다	V	-	-었- -다	쳤다	-	paradigm
+p-치다-cond	치다	V	-	-면	치면	-	paradigm
+p-치다-reason	치다	V	-	-니까	치니까	-	paradigm
+p-치다-hapsyo	치다	V	-	-습니다	칩니다	-	paradigm
+p-치다-adn	치다	V	-	-는	치는	-	paradigm
+p-치다-adnpast	치다	V	-	-ㄴ	친	-	paradigm
+p-치다-adnfut	치다	V	-	-ㄹ	칠	-	paradigm
+p-치다-haera	치다	V	-	-다	친다	-	paradigm
+p-치다-hon	치다	V	-	-시- -어요	치세요|치셔요	-	paradigm
+p-치다-seq	치다	V	-	-어서	쳐서	-	paradigm
+p-치다-nom	치다	V	-	-ㅁ	침	-	paradigm
+p-좋다-hae	좋다	A	-	-어	좋아	-	paradigm
+p-좋다-past	좋다	A	-	-었- -다	좋았다	-	paradigm
+p-좋다-cond	좋다	A	-	-면	좋으면	-	paradigm
+p-좋다-reason	좋다	A	-	-니까	좋으니까	-	paradigm
+p-좋다-hapsyo	좋다	A	-	-습니다	좋습니다	-	paradigm
+p-좋다-adn	좋다	A	-	-는	좋은	-	paradigm
+p-좋다-adnfut	좋다	A	-	-ㄹ	좋을	-	paradigm
+p-좋다-haera	좋다	A	-	-다	좋다	-	paradigm
+p-좋다-ne	좋다	A	-	-네	좋네	-	paradigm
+p-좋다-seq	좋다	A	-	-어서	좋아서	-	paradigm
+p-좋다-nom	좋다	A	-	-ㅁ	좋음	-	paradigm
+p-좋다-haeyo	좋다	A	-	-어요	좋아요	-	paradigm
+p-작다-hae	작다	A	-	-어	작아	-	paradigm
+p-작다-past	작다	A	-	-었- -다	작았다	-	paradigm
+p-작다-cond	작다	A	-	-면	작으면	-	paradigm
+p-작다-reason	작다	A	-	-니까	작으니까	-	paradigm
+p-작다-hapsyo	작다	A	-	-습니다	작습니다	-	paradigm
+p-작다-adn	작다	A	-	-는	작은	-	paradigm
+p-작다-adnfut	작다	A	-	-ㄹ	작을	-	paradigm
+p-작다-haera	작다	A	-	-다	작다	-	paradigm
+p-작다-ne	작다	A	-	-네	작네	-	paradigm
+p-작다-seq	작다	A	-	-어서	작아서	-	paradigm
+p-작다-nom	작다	A	-	-ㅁ	작음	-	paradigm
+p-작다-haeyo	작다	A	-	-어요	작아요	-	paradigm
+p-많다-hae	많다	A	-	-어	많아	-	paradigm
+p-많다-past	많다	A	-	-었- -다	많았다	-	paradigm
+p-많다-cond	많다	A	-	-면	많으면	-	paradigm
+p-많다-reason	많다	A	-	-니까	많으니까	-	paradigm
+p-많다-hapsyo	많다	A	-	-습니다	많습니다	-	paradigm
+p-많다-adn	많다	A	-	-는	많은	-	paradigm
+p-많다-adnfut	많다	A	-	-ㄹ	많을	-	paradigm
+p-많다-haera	많다	A	-	-다	많다	-	paradigm
+p-많다-ne	많다	A	-	-네	많네	-	paradigm
+p-많다-seq	많다	A	-	-어서	많아서	-	paradigm
+p-많다-nom	많다	A	-	-ㅁ	많음	-	paradigm
+p-많다-haeyo	많다	A	-	-어요	많아요	-	paradigm
+p-괜찮다-hae	괜찮다	A	-	-어	괜찮아	-	paradigm
+p-괜찮다-past	괜찮다	A	-	-었- -다	괜찮았다	-	paradigm
+p-괜찮다-cond	괜찮다	A	-	-면	괜찮으면	-	paradigm
+p-괜찮다-reason	괜찮다	A	-	-니까	괜찮으니까	-	paradigm
+p-괜찮다-hapsyo	괜찮다	A	-	-습니다	괜찮습니다	-	paradigm
+p-괜찮다-adn	괜찮다	A	-	-는	괜찮은	-	paradigm
+p-괜찮다-adnfut	괜찮다	A	-	-ㄹ	괜찮을	-	paradigm
+p-괜찮다-haera	괜찮다	A	-	-다	괜찮다	-	paradigm
+p-괜찮다-ne	괜찮다	A	-	-네	괜찮네	-	paradigm
+p-괜찮다-seq	괜찮다	A	-	-어서	괜찮아서	-	paradigm
+p-괜찮다-nom	괜찮다	A	-	-ㅁ	괜찮음	-	paradigm
+p-괜찮다-haeyo	괜찮다	A	-	-어요	괜찮아요	-	paradigm
+p-싫다-hae	싫다	A	-	-어	싫어	-	paradigm
+p-싫다-past	싫다	A	-	-었- -다	싫었다	-	paradigm
+p-싫다-cond	싫다	A	-	-면	싫으면	-	paradigm
+p-싫다-reason	싫다	A	-	-니까	싫으니까	-	paradigm
+p-싫다-hapsyo	싫다	A	-	-습니다	싫습니다	-	paradigm
+p-싫다-adn	싫다	A	-	-는	싫은	-	paradigm
+p-싫다-adnfut	싫다	A	-	-ㄹ	싫을	-	paradigm
+p-싫다-haera	싫다	A	-	-다	싫다	-	paradigm
+p-싫다-ne	싫다	A	-	-네	싫네	-	paradigm
+p-싫다-seq	싫다	A	-	-어서	싫어서	-	paradigm
+p-싫다-nom	싫다	A	-	-ㅁ	싫음	-	paradigm
+p-싫다-haeyo	싫다	A	-	-어요	싫어요	-	paradigm
+p-같다-hae	같다	A	-	-어	같아	-	paradigm
+p-같다-past	같다	A	-	-었- -다	같았다	-	paradigm
+p-같다-cond	같다	A	-	-면	같으면	-	paradigm
+p-같다-reason	같다	A	-	-니까	같으니까	-	paradigm
+p-같다-hapsyo	같다	A	-	-습니다	같습니다	-	paradigm
+p-같다-adn	같다	A	-	-는	같은	-	paradigm
+p-같다-adnfut	같다	A	-	-ㄹ	같을	-	paradigm
+p-같다-haera	같다	A	-	-다	같다	-	paradigm
+p-같다-ne	같다	A	-	-네	같네	-	paradigm
+p-같다-seq	같다	A	-	-어서	같아서	-	paradigm
+p-같다-nom	같다	A	-	-ㅁ	같음	-	paradigm
+p-같다-haeyo	같다	A	-	-어요	같아요	-	paradigm
+p-희다-hae	희다	A	-	-어	희어	-	paradigm
+p-희다-past	희다	A	-	-었- -다	희었다	-	paradigm
+p-희다-cond	희다	A	-	-면	희면	-	paradigm
+p-희다-reason	희다	A	-	-니까	희니까	-	paradigm
+p-희다-hapsyo	희다	A	-	-습니다	흽니다	-	paradigm
+p-희다-adn	희다	A	-	-는	흰	-	paradigm
+p-희다-adnfut	희다	A	-	-ㄹ	흴	-	paradigm
+p-희다-haera	희다	A	-	-다	희다	-	paradigm
+p-희다-ne	희다	A	-	-네	희네	-	paradigm
+p-희다-seq	희다	A	-	-어서	희어서	-	paradigm
+p-희다-nom	희다	A	-	-ㅁ	흼	-	paradigm
+p-희다-haeyo	희다	A	-	-어요	희어요	-	paradigm
+p-좁다-hae	좁다	A	-	-어	좁아	-	paradigm
+p-좁다-past	좁다	A	-	-었- -다	좁았다	-	paradigm
+p-좁다-cond	좁다	A	-	-면	좁으면	-	paradigm
+p-좁다-reason	좁다	A	-	-니까	좁으니까	-	paradigm
+p-좁다-hapsyo	좁다	A	-	-습니다	좁습니다	-	paradigm
+p-좁다-adn	좁다	A	-	-는	좁은	-	paradigm
+p-좁다-adnfut	좁다	A	-	-ㄹ	좁을	-	paradigm
+p-좁다-haera	좁다	A	-	-다	좁다	-	paradigm
+p-좁다-ne	좁다	A	-	-네	좁네	-	paradigm
+p-좁다-seq	좁다	A	-	-어서	좁아서	-	paradigm
+p-좁다-nom	좁다	A	-	-ㅁ	좁음	-	paradigm
+p-좁다-haeyo	좁다	A	-	-어요	좁아요	-	paradigm
+p-넓다-hae	넓다	A	-	-어	넓어	-	paradigm
+p-넓다-past	넓다	A	-	-었- -다	넓었다	-	paradigm
+p-넓다-cond	넓다	A	-	-면	넓으면	-	paradigm
+p-넓다-reason	넓다	A	-	-니까	넓으니까	-	paradigm
+p-넓다-hapsyo	넓다	A	-	-습니다	넓습니다	-	paradigm
+p-넓다-adn	넓다	A	-	-는	넓은	-	paradigm
+p-넓다-adnfut	넓다	A	-	-ㄹ	넓을	-	paradigm
+p-넓다-haera	넓다	A	-	-다	넓다	-	paradigm
+p-넓다-ne	넓다	A	-	-네	넓네	-	paradigm
+p-넓다-seq	넓다	A	-	-어서	넓어서	-	paradigm
+p-넓다-nom	넓다	A	-	-ㅁ	넓음	-	paradigm
+p-넓다-haeyo	넓다	A	-	-어요	넓어요	-	paradigm
+p-하다-hae	하다	V	-	-어	해	-	paradigm
+p-하다-past	하다	V	-	-었- -다	했다	-	paradigm
+p-하다-cond	하다	V	-	-면	하면	-	paradigm
+p-하다-reason	하다	V	-	-니까	하니까	-	paradigm
+p-하다-hapsyo	하다	V	-	-습니다	합니다	-	paradigm
+p-하다-adn	하다	V	-	-는	하는	-	paradigm
+p-하다-adnpast	하다	V	-	-ㄴ	한	-	paradigm
+p-하다-adnfut	하다	V	-	-ㄹ	할	-	paradigm
+p-하다-haera	하다	V	-	-다	한다	-	paradigm
+p-하다-hon	하다	V	-	-시- -어요	하세요|하셔요	-	paradigm
+p-하다-seq	하다	V	-	-어서	해서	-	paradigm
+p-하다-nom	하다	V	-	-ㅁ	함	-	paradigm
+p-공부하다-hae	공부하다	V	-	-어	공부해	-	paradigm
+p-공부하다-past	공부하다	V	-	-었- -다	공부했다	-	paradigm
+p-공부하다-cond	공부하다	V	-	-면	공부하면	-	paradigm
+p-공부하다-reason	공부하다	V	-	-니까	공부하니까	-	paradigm
+p-공부하다-hapsyo	공부하다	V	-	-습니다	공부합니다	-	paradigm
+p-공부하다-adn	공부하다	V	-	-는	공부하는	-	paradigm
+p-공부하다-adnpast	공부하다	V	-	-ㄴ	공부한	-	paradigm
+p-공부하다-adnfut	공부하다	V	-	-ㄹ	공부할	-	paradigm
+p-공부하다-haera	공부하다	V	-	-다	공부한다	-	paradigm
+p-공부하다-hon	공부하다	V	-	-시- -어요	공부하세요|공부하셔요	-	paradigm
+p-공부하다-seq	공부하다	V	-	-어서	공부해서	-	paradigm
+p-공부하다-nom	공부하다	V	-	-ㅁ	공부함	-	paradigm
+p-조용하다-hae	조용하다	A	-	-어	조용해	-	paradigm
+p-조용하다-past	조용하다	A	-	-었- -다	조용했다	-	paradigm
+p-조용하다-cond	조용하다	A	-	-면	조용하면	-	paradigm
+p-조용하다-reason	조용하다	A	-	-니까	조용하니까	-	paradigm
+p-조용하다-hapsyo	조용하다	A	-	-습니다	조용합니다	-	paradigm
+p-조용하다-adn	조용하다	A	-	-는	조용한	-	paradigm
+p-조용하다-adnfut	조용하다	A	-	-ㄹ	조용할	-	paradigm
+p-조용하다-haera	조용하다	A	-	-다	조용하다	-	paradigm
+p-조용하다-ne	조용하다	A	-	-네	조용하네	-	paradigm
+p-조용하다-seq	조용하다	A	-	-어서	조용해서	-	paradigm
+p-조용하다-nom	조용하다	A	-	-ㅁ	조용함	-	paradigm
+p-조용하다-haeyo	조용하다	A	-	-어요	조용해요	-	paradigm
+p-깨끗하다-hae	깨끗하다	A	-	-어	깨끗해	-	paradigm
+p-깨끗하다-past	깨끗하다	A	-	-었- -다	깨끗했다	-	paradigm
+p-깨끗하다-cond	깨끗하다	A	-	-면	깨끗하면	-	paradigm
+p-깨끗하다-reason	깨끗하다	A	-	-니까	깨끗하니까	-	paradigm
+p-깨끗하다-hapsyo	깨끗하다	A	-	-습니다	깨끗합니다	-	paradigm
+p-깨끗하다-adn	깨끗하다	A	-	-는	깨끗한	-	paradigm
+p-깨끗하다-adnfut	깨끗하다	A	-	-ㄹ	깨끗할	-	paradigm
+p-깨끗하다-haera	깨끗하다	A	-	-다	깨끗하다	-	paradigm
+p-깨끗하다-ne	깨끗하다	A	-	-네	깨끗하네	-	paradigm
+p-깨끗하다-seq	깨끗하다	A	-	-어서	깨끗해서	-	paradigm
+p-깨끗하다-nom	깨끗하다	A	-	-ㅁ	깨끗함	-	paradigm
+p-깨끗하다-haeyo	깨끗하다	A	-	-어요	깨끗해요	-	paradigm
+p-듣다-hae	듣다	V	-	-어	들어	-	paradigm
+p-듣다-past	듣다	V	-	-었- -다	들었다	-	paradigm
+p-듣다-cond	듣다	V	-	-면	들으면	-	paradigm
+p-듣다-reason	듣다	V	-	-니까	들으니까	-	paradigm
+p-듣다-hapsyo	듣다	V	-	-습니다	듣습니다	-	paradigm
+p-듣다-adn	듣다	V	-	-는	듣는	-	paradigm
+p-듣다-adnpast	듣다	V	-	-ㄴ	들은	-	paradigm
+p-듣다-adnfut	듣다	V	-	-ㄹ	들을	-	paradigm
+p-듣다-haera	듣다	V	-	-다	듣는다	-	paradigm
+p-듣다-hon	듣다	V	-	-시- -어요	들으세요|들으셔요	-	paradigm
+p-듣다-seq	듣다	V	-	-어서	들어서	-	paradigm
+p-듣다-nom	듣다	V	-	-ㅁ	들음	-	paradigm
+p-걷다-hae	걷다	V	-	-어	걸어	-	paradigm
+p-걷다-past	걷다	V	-	-었- -다	걸었다	-	paradigm
+p-걷다-cond	걷다	V	-	-면	걸으면	-	paradigm
+p-걷다-reason	걷다	V	-	-니까	걸으니까	-	paradigm
+p-걷다-hapsyo	걷다	V	-	-습니다	걷습니다	-	paradigm
+p-걷다-adn	걷다	V	-	-는	걷는	-	paradigm
+p-걷다-adnpast	걷다	V	-	-ㄴ	걸은	-	paradigm
+p-걷다-adnfut	걷다	V	-	-ㄹ	걸을	-	paradigm
+p-걷다-haera	걷다	V	-	-다	걷는다	-	paradigm
+p-걷다-hon	걷다	V	-	-시- -어요	걸으세요|걸으셔요	-	paradigm
+p-걷다-seq	걷다	V	-	-어서	걸어서	-	paradigm
+p-걷다-nom	걷다	V	-	-ㅁ	걸음	-	paradigm
+p-묻다-hae	묻다	V	-	-어	물어	-	paradigm
+p-묻다-past	묻다	V	-	-었- -다	물었다	-	paradigm
+p-묻다-cond	묻다	V	-	-면	물으면	-	paradigm
+p-묻다-reason	묻다	V	-	-니까	물으니까	-	paradigm
+p-묻다-hapsyo	묻다	V	-	-습니다	묻습니다	-	paradigm
+p-묻다-adn	묻다	V	-	-는	묻는	-	paradigm
+p-묻다-adnpast	묻다	V	-	-ㄴ	물은	-	paradigm
+p-묻다-adnfut	묻다	V	-	-ㄹ	물을	-	paradigm
+p-묻다-haera	묻다	V	-	-다	묻는다	-	paradigm
+p-묻다-hon	묻다	V	-	-시- -어요	물으세요|물으셔요	-	paradigm
+p-묻다-seq	묻다	V	-	-어서	물어서	-	paradigm
+p-묻다-nom	묻다	V	-	-ㅁ	물음	-	paradigm
+p-싣다-hae	싣다	V	-	-어	실어	-	paradigm
+p-싣다-past	싣다	V	-	-었- -다	실었다	-	paradigm
+p-싣다-cond	싣다	V	-	-면	실으면	-	paradigm
+p-싣다-reason	싣다	V	-	-니까	실으니까	-	paradigm
+p-싣다-hapsyo	싣다	V	-	-습니다	싣습니다	-	paradigm
+p-싣다-adn	싣다	V	-	-는	싣는	-	paradigm
+p-싣다-adnpast	싣다	V	-	-ㄴ	실은	-	paradigm
+p-싣다-adnfut	싣다	V	-	-ㄹ	실을	-	paradigm
+p-싣다-haera	싣다	V	-	-다	싣는다	-	paradigm
+p-싣다-hon	싣다	V	-	-시- -어요	실으세요|실으셔요	-	paradigm
+p-싣다-seq	싣다	V	-	-어서	실어서	-	paradigm
+p-싣다-nom	싣다	V	-	-ㅁ	실음	-	paradigm
+p-깨닫다-hae	깨닫다	V	-	-어	깨달아	-	paradigm
+p-깨닫다-past	깨닫다	V	-	-었- -다	깨달았다	-	paradigm
+p-깨닫다-cond	깨닫다	V	-	-면	깨달으면	-	paradigm
+p-깨닫다-reason	깨닫다	V	-	-니까	깨달으니까	-	paradigm
+p-깨닫다-hapsyo	깨닫다	V	-	-습니다	깨닫습니다	-	paradigm
+p-깨닫다-adn	깨닫다	V	-	-는	깨닫는	-	paradigm
+p-깨닫다-adnpast	깨닫다	V	-	-ㄴ	깨달은	-	paradigm
+p-깨닫다-adnfut	깨닫다	V	-	-ㄹ	깨달을	-	paradigm
+p-깨닫다-haera	깨닫다	V	-	-다	깨닫는다	-	paradigm
+p-깨닫다-hon	깨닫다	V	-	-시- -어요	깨달으세요|깨달으셔요	-	paradigm
+p-깨닫다-seq	깨닫다	V	-	-어서	깨달아서	-	paradigm
+p-깨닫다-nom	깨닫다	V	-	-ㅁ	깨달음	-	paradigm
+p-돕다-hae	돕다	V	-	-어	도와	-	paradigm
+p-돕다-past	돕다	V	-	-었- -다	도왔다	-	paradigm
+p-돕다-cond	돕다	V	-	-면	도우면	-	paradigm
+p-돕다-reason	돕다	V	-	-니까	도우니까	-	paradigm
+p-돕다-hapsyo	돕다	V	-	-습니다	돕습니다	-	paradigm
+p-돕다-adn	돕다	V	-	-는	돕는	-	paradigm
+p-돕다-adnpast	돕다	V	-	-ㄴ	도운	-	paradigm
+p-돕다-adnfut	돕다	V	-	-ㄹ	도울	-	paradigm
+p-돕다-haera	돕다	V	-	-다	돕는다	-	paradigm
+p-돕다-hon	돕다	V	-	-시- -어요	도우세요|도우셔요	-	paradigm
+p-돕다-seq	돕다	V	-	-어서	도와서	-	paradigm
+p-돕다-nom	돕다	V	-	-ㅁ	도움	-	paradigm
+p-곱다-hae	곱다	A	-	-어	고와	-	paradigm
+p-곱다-past	곱다	A	-	-었- -다	고왔다	-	paradigm
+p-곱다-cond	곱다	A	-	-면	고우면	-	paradigm
+p-곱다-reason	곱다	A	-	-니까	고우니까	-	paradigm
+p-곱다-hapsyo	곱다	A	-	-습니다	곱습니다	-	paradigm
+p-곱다-adn	곱다	A	-	-는	고운	-	paradigm
+p-곱다-adnfut	곱다	A	-	-ㄹ	고울	-	paradigm
+p-곱다-haera	곱다	A	-	-다	곱다	-	paradigm
+p-곱다-ne	곱다	A	-	-네	곱네	-	paradigm
+p-곱다-seq	곱다	A	-	-어서	고와서	-	paradigm
+p-곱다-nom	곱다	A	-	-ㅁ	고움	-	paradigm
+p-곱다-haeyo	곱다	A	-	-어요	고와요	-	paradigm
+p-눕다-hae	눕다	V	-	-어	누워	-	paradigm
+p-눕다-past	눕다	V	-	-었- -다	누웠다	-	paradigm
+p-눕다-cond	눕다	V	-	-면	누우면	-	paradigm
+p-눕다-reason	눕다	V	-	-니까	누우니까	-	paradigm
+p-눕다-hapsyo	눕다	V	-	-습니다	눕습니다	-	paradigm
+p-눕다-adn	눕다	V	-	-는	눕는	-	paradigm
+p-눕다-adnpast	눕다	V	-	-ㄴ	누운	-	paradigm
+p-눕다-adnfut	눕다	V	-	-ㄹ	누울	-	paradigm
+p-눕다-haera	눕다	V	-	-다	눕는다	-	paradigm
+p-눕다-hon	눕다	V	-	-시- -어요	누우세요|누우셔요	-	paradigm
+p-눕다-seq	눕다	V	-	-어서	누워서	-	paradigm
+p-눕다-nom	눕다	V	-	-ㅁ	누움	-	paradigm
+p-줍다-hae	줍다	V	-	-어	주워	-	paradigm
+p-줍다-past	줍다	V	-	-었- -다	주웠다	-	paradigm
+p-줍다-cond	줍다	V	-	-면	주우면	-	paradigm
+p-줍다-reason	줍다	V	-	-니까	주우니까	-	paradigm
+p-줍다-hapsyo	줍다	V	-	-습니다	줍습니다	-	paradigm
+p-줍다-adn	줍다	V	-	-는	줍는	-	paradigm
+p-줍다-adnpast	줍다	V	-	-ㄴ	주운	-	paradigm
+p-줍다-adnfut	줍다	V	-	-ㄹ	주울	-	paradigm
+p-줍다-haera	줍다	V	-	-다	줍는다	-	paradigm
+p-줍다-hon	줍다	V	-	-시- -어요	주우세요|주우셔요	-	paradigm
+p-줍다-seq	줍다	V	-	-어서	주워서	-	paradigm
+p-줍다-nom	줍다	V	-	-ㅁ	주움	-	paradigm
+p-덥다-hae	덥다	A	-	-어	더워	-	paradigm
+p-덥다-past	덥다	A	-	-었- -다	더웠다	-	paradigm
+p-덥다-cond	덥다	A	-	-면	더우면	-	paradigm
+p-덥다-reason	덥다	A	-	-니까	더우니까	-	paradigm
+p-덥다-hapsyo	덥다	A	-	-습니다	덥습니다	-	paradigm
+p-덥다-adn	덥다	A	-	-는	더운	-	paradigm
+p-덥다-adnfut	덥다	A	-	-ㄹ	더울	-	paradigm
+p-덥다-haera	덥다	A	-	-다	덥다	-	paradigm
+p-덥다-ne	덥다	A	-	-네	덥네	-	paradigm
+p-덥다-seq	덥다	A	-	-어서	더워서	-	paradigm
+p-덥다-nom	덥다	A	-	-ㅁ	더움	-	paradigm
+p-덥다-haeyo	덥다	A	-	-어요	더워요	-	paradigm
+p-춥다-hae	춥다	A	-	-어	추워	-	paradigm
+p-춥다-past	춥다	A	-	-었- -다	추웠다	-	paradigm
+p-춥다-cond	춥다	A	-	-면	추우면	-	paradigm
+p-춥다-reason	춥다	A	-	-니까	추우니까	-	paradigm
+p-춥다-hapsyo	춥다	A	-	-습니다	춥습니다	-	paradigm
+p-춥다-adn	춥다	A	-	-는	추운	-	paradigm
+p-춥다-adnfut	춥다	A	-	-ㄹ	추울	-	paradigm
+p-춥다-haera	춥다	A	-	-다	춥다	-	paradigm
+p-춥다-ne	춥다	A	-	-네	춥네	-	paradigm
+p-춥다-seq	춥다	A	-	-어서	추워서	-	paradigm
+p-춥다-nom	춥다	A	-	-ㅁ	추움	-	paradigm
+p-춥다-haeyo	춥다	A	-	-어요	추워요	-	paradigm
+p-고맙다-hae	고맙다	A	-	-어	고마워	-	paradigm
+p-고맙다-past	고맙다	A	-	-었- -다	고마웠다	-	paradigm
+p-고맙다-cond	고맙다	A	-	-면	고마우면	-	paradigm
+p-고맙다-reason	고맙다	A	-	-니까	고마우니까	-	paradigm
+p-고맙다-hapsyo	고맙다	A	-	-습니다	고맙습니다	-	paradigm
+p-고맙다-adn	고맙다	A	-	-는	고마운	-	paradigm
+p-고맙다-adnfut	고맙다	A	-	-ㄹ	고마울	-	paradigm
+p-고맙다-haera	고맙다	A	-	-다	고맙다	-	paradigm
+p-고맙다-ne	고맙다	A	-	-네	고맙네	-	paradigm
+p-고맙다-seq	고맙다	A	-	-어서	고마워서	-	paradigm
+p-고맙다-nom	고맙다	A	-	-ㅁ	고마움	-	paradigm
+p-고맙다-haeyo	고맙다	A	-	-어요	고마워요	-	paradigm
+p-아름답다-hae	아름답다	A	-	-어	아름다워	-	paradigm
+p-아름답다-past	아름답다	A	-	-었- -다	아름다웠다	-	paradigm
+p-아름답다-cond	아름답다	A	-	-면	아름다우면	-	paradigm
+p-아름답다-reason	아름답다	A	-	-니까	아름다우니까	-	paradigm
+p-아름답다-hapsyo	아름답다	A	-	-습니다	아름답습니다	-	paradigm
+p-아름답다-adn	아름답다	A	-	-는	아름다운	-	paradigm
+p-아름답다-adnfut	아름답다	A	-	-ㄹ	아름다울	-	paradigm
+p-아름답다-haera	아름답다	A	-	-다	아름답다	-	paradigm
+p-아름답다-ne	아름답다	A	-	-네	아름답네	-	paradigm
+p-아름답다-seq	아름답다	A	-	-어서	아름다워서	-	paradigm
+p-아름답다-nom	아름답다	A	-	-ㅁ	아름다움	-	paradigm
+p-아름답다-haeyo	아름답다	A	-	-어요	아름다워요	-	paradigm
+p-가깝다-hae	가깝다	A	-	-어	가까워	-	paradigm
+p-가깝다-past	가깝다	A	-	-었- -다	가까웠다	-	paradigm
+p-가깝다-cond	가깝다	A	-	-면	가까우면	-	paradigm
+p-가깝다-reason	가깝다	A	-	-니까	가까우니까	-	paradigm
+p-가깝다-hapsyo	가깝다	A	-	-습니다	가깝습니다	-	paradigm
+p-가깝다-adn	가깝다	A	-	-는	가까운	-	paradigm
+p-가깝다-adnfut	가깝다	A	-	-ㄹ	가까울	-	paradigm
+p-가깝다-haera	가깝다	A	-	-다	가깝다	-	paradigm
+p-가깝다-ne	가깝다	A	-	-네	가깝네	-	paradigm
+p-가깝다-seq	가깝다	A	-	-어서	가까워서	-	paradigm
+p-가깝다-nom	가깝다	A	-	-ㅁ	가까움	-	paradigm
+p-가깝다-haeyo	가깝다	A	-	-어요	가까워요	-	paradigm
+p-어렵다-hae	어렵다	A	-	-어	어려워	-	paradigm
+p-어렵다-past	어렵다	A	-	-었- -다	어려웠다	-	paradigm
+p-어렵다-cond	어렵다	A	-	-면	어려우면	-	paradigm
+p-어렵다-reason	어렵다	A	-	-니까	어려우니까	-	paradigm
+p-어렵다-hapsyo	어렵다	A	-	-습니다	어렵습니다	-	paradigm
+p-어렵다-adn	어렵다	A	-	-는	어려운	-	paradigm
+p-어렵다-adnfut	어렵다	A	-	-ㄹ	어려울	-	paradigm
+p-어렵다-haera	어렵다	A	-	-다	어렵다	-	paradigm
+p-어렵다-ne	어렵다	A	-	-네	어렵네	-	paradigm
+p-어렵다-seq	어렵다	A	-	-어서	어려워서	-	paradigm
+p-어렵다-nom	어렵다	A	-	-ㅁ	어려움	-	paradigm
+p-어렵다-haeyo	어렵다	A	-	-어요	어려워요	-	paradigm
+p-귀엽다-hae	귀엽다	A	-	-어	귀여워	-	paradigm
+p-귀엽다-past	귀엽다	A	-	-었- -다	귀여웠다	-	paradigm
+p-귀엽다-cond	귀엽다	A	-	-면	귀여우면	-	paradigm
+p-귀엽다-reason	귀엽다	A	-	-니까	귀여우니까	-	paradigm
+p-귀엽다-hapsyo	귀엽다	A	-	-습니다	귀엽습니다	-	paradigm
+p-귀엽다-adn	귀엽다	A	-	-는	귀여운	-	paradigm
+p-귀엽다-adnfut	귀엽다	A	-	-ㄹ	귀여울	-	paradigm
+p-귀엽다-haera	귀엽다	A	-	-다	귀엽다	-	paradigm
+p-귀엽다-ne	귀엽다	A	-	-네	귀엽네	-	paradigm
+p-귀엽다-seq	귀엽다	A	-	-어서	귀여워서	-	paradigm
+p-귀엽다-nom	귀엽다	A	-	-ㅁ	귀여움	-	paradigm
+p-귀엽다-haeyo	귀엽다	A	-	-어요	귀여워요	-	paradigm
+p-자연스럽다-hae	자연스럽다	A	-	-어	자연스러워	-	paradigm
+p-자연스럽다-past	자연스럽다	A	-	-었- -다	자연스러웠다	-	paradigm
+p-자연스럽다-cond	자연스럽다	A	-	-면	자연스러우면	-	paradigm
+p-자연스럽다-reason	자연스럽다	A	-	-니까	자연스러우니까	-	paradigm
+p-자연스럽다-hapsyo	자연스럽다	A	-	-습니다	자연스럽습니다	-	paradigm
+p-자연스럽다-adn	자연스럽다	A	-	-는	자연스러운	-	paradigm
+p-자연스럽다-adnfut	자연스럽다	A	-	-ㄹ	자연스러울	-	paradigm
+p-자연스럽다-haera	자연스럽다	A	-	-다	자연스럽다	-	paradigm
+p-자연스럽다-ne	자연스럽다	A	-	-네	자연스럽네	-	paradigm
+p-자연스럽다-seq	자연스럽다	A	-	-어서	자연스러워서	-	paradigm
+p-자연스럽다-nom	자연스럽다	A	-	-ㅁ	자연스러움	-	paradigm
+p-자연스럽다-haeyo	자연스럽다	A	-	-어요	자연스러워요	-	paradigm
+p-새롭다-hae	새롭다	A	-	-어	새로워	-	paradigm
+p-새롭다-past	새롭다	A	-	-었- -다	새로웠다	-	paradigm
+p-새롭다-cond	새롭다	A	-	-면	새로우면	-	paradigm
+p-새롭다-reason	새롭다	A	-	-니까	새로우니까	-	paradigm
+p-새롭다-hapsyo	새롭다	A	-	-습니다	새롭습니다	-	paradigm
+p-새롭다-adn	새롭다	A	-	-는	새로운	-	paradigm
+p-새롭다-adnfut	새롭다	A	-	-ㄹ	새로울	-	paradigm
+p-새롭다-haera	새롭다	A	-	-다	새롭다	-	paradigm
+p-새롭다-ne	새롭다	A	-	-네	새롭네	-	paradigm
+p-새롭다-seq	새롭다	A	-	-어서	새로워서	-	paradigm
+p-새롭다-nom	새롭다	A	-	-ㅁ	새로움	-	paradigm
+p-새롭다-haeyo	새롭다	A	-	-어요	새로워요	-	paradigm
+p-짓다-hae	짓다	V	-	-어	지어	-	paradigm
+p-짓다-past	짓다	V	-	-었- -다	지었다	-	paradigm
+p-짓다-cond	짓다	V	-	-면	지으면	-	paradigm
+p-짓다-reason	짓다	V	-	-니까	지으니까	-	paradigm
+p-짓다-hapsyo	짓다	V	-	-습니다	짓습니다	-	paradigm
+p-짓다-adn	짓다	V	-	-는	짓는	-	paradigm
+p-짓다-adnpast	짓다	V	-	-ㄴ	지은	-	paradigm
+p-짓다-adnfut	짓다	V	-	-ㄹ	지을	-	paradigm
+p-짓다-haera	짓다	V	-	-다	짓는다	-	paradigm
+p-짓다-hon	짓다	V	-	-시- -어요	지으세요|지으셔요	-	paradigm
+p-짓다-seq	짓다	V	-	-어서	지어서	-	paradigm
+p-짓다-nom	짓다	V	-	-ㅁ	지음	-	paradigm
+p-낫다-hae	낫다	V	-	-어	나아	-	paradigm
+p-낫다-past	낫다	V	-	-었- -다	나았다	-	paradigm
+p-낫다-cond	낫다	V	-	-면	나으면	-	paradigm
+p-낫다-reason	낫다	V	-	-니까	나으니까	-	paradigm
+p-낫다-hapsyo	낫다	V	-	-습니다	낫습니다	-	paradigm
+p-낫다-adn	낫다	V	-	-는	낫는	-	paradigm
+p-낫다-adnpast	낫다	V	-	-ㄴ	나은	-	paradigm
+p-낫다-adnfut	낫다	V	-	-ㄹ	나을	-	paradigm
+p-낫다-haera	낫다	V	-	-다	낫는다	-	paradigm
+p-낫다-hon	낫다	V	-	-시- -어요	나으세요|나으셔요	-	paradigm
+p-낫다-seq	낫다	V	-	-어서	나아서	-	paradigm
+p-낫다-nom	낫다	V	-	-ㅁ	나음	-	paradigm
+p-붓다-hae	붓다	V	-	-어	부어	-	paradigm
+p-붓다-past	붓다	V	-	-었- -다	부었다	-	paradigm
+p-붓다-cond	붓다	V	-	-면	부으면	-	paradigm
+p-붓다-reason	붓다	V	-	-니까	부으니까	-	paradigm
+p-붓다-hapsyo	붓다	V	-	-습니다	붓습니다	-	paradigm
+p-붓다-adn	붓다	V	-	-는	붓는	-	paradigm
+p-붓다-adnpast	붓다	V	-	-ㄴ	부은	-	paradigm
+p-붓다-adnfut	붓다	V	-	-ㄹ	부을	-	paradigm
+p-붓다-haera	붓다	V	-	-다	붓는다	-	paradigm
+p-붓다-hon	붓다	V	-	-시- -어요	부으세요|부으셔요	-	paradigm
+p-붓다-seq	붓다	V	-	-어서	부어서	-	paradigm
+p-붓다-nom	붓다	V	-	-ㅁ	부음	-	paradigm
+p-잇다-hae	잇다	V	-	-어	이어	-	paradigm
+p-잇다-past	잇다	V	-	-었- -다	이었다	-	paradigm
+p-잇다-cond	잇다	V	-	-면	이으면	-	paradigm
+p-잇다-reason	잇다	V	-	-니까	이으니까	-	paradigm
+p-잇다-hapsyo	잇다	V	-	-습니다	잇습니다	-	paradigm
+p-잇다-adn	잇다	V	-	-는	잇는	-	paradigm
+p-잇다-adnpast	잇다	V	-	-ㄴ	이은	-	paradigm
+p-잇다-adnfut	잇다	V	-	-ㄹ	이을	-	paradigm
+p-잇다-haera	잇다	V	-	-다	잇는다	-	paradigm
+p-잇다-hon	잇다	V	-	-시- -어요	이으세요|이으셔요	-	paradigm
+p-잇다-seq	잇다	V	-	-어서	이어서	-	paradigm
+p-잇다-nom	잇다	V	-	-ㅁ	이음	-	paradigm
+p-긋다-hae	긋다	V	-	-어	그어	-	paradigm
+p-긋다-past	긋다	V	-	-었- -다	그었다	-	paradigm
+p-긋다-cond	긋다	V	-	-면	그으면	-	paradigm
+p-긋다-reason	긋다	V	-	-니까	그으니까	-	paradigm
+p-긋다-hapsyo	긋다	V	-	-습니다	긋습니다	-	paradigm
+p-긋다-adn	긋다	V	-	-는	긋는	-	paradigm
+p-긋다-adnpast	긋다	V	-	-ㄴ	그은	-	paradigm
+p-긋다-adnfut	긋다	V	-	-ㄹ	그을	-	paradigm
+p-긋다-haera	긋다	V	-	-다	긋는다	-	paradigm
+p-긋다-hon	긋다	V	-	-시- -어요	그으세요|그으셔요	-	paradigm
+p-긋다-seq	긋다	V	-	-어서	그어서	-	paradigm
+p-긋다-nom	긋다	V	-	-ㅁ	그음	-	paradigm
+p-젓다-hae	젓다	V	-	-어	저어	-	paradigm
+p-젓다-past	젓다	V	-	-었- -다	저었다	-	paradigm
+p-젓다-cond	젓다	V	-	-면	저으면	-	paradigm
+p-젓다-reason	젓다	V	-	-니까	저으니까	-	paradigm
+p-젓다-hapsyo	젓다	V	-	-습니다	젓습니다	-	paradigm
+p-젓다-adn	젓다	V	-	-는	젓는	-	paradigm
+p-젓다-adnpast	젓다	V	-	-ㄴ	저은	-	paradigm
+p-젓다-adnfut	젓다	V	-	-ㄹ	저을	-	paradigm
+p-젓다-haera	젓다	V	-	-다	젓는다	-	paradigm
+p-젓다-hon	젓다	V	-	-시- -어요	저으세요|저으셔요	-	paradigm
+p-젓다-seq	젓다	V	-	-어서	저어서	-	paradigm
+p-젓다-nom	젓다	V	-	-ㅁ	저음	-	paradigm
+p-그렇다-hae	그렇다	A	-	-어	그래	-	paradigm
+p-그렇다-past	그렇다	A	-	-었- -다	그랬다	-	paradigm
+p-그렇다-cond	그렇다	A	-	-면	그러면	-	paradigm
+p-그렇다-reason	그렇다	A	-	-니까	그러니까	-	paradigm
+p-그렇다-hapsyo	그렇다	A	-	-습니다	그렇습니다	-	paradigm
+p-그렇다-adn	그렇다	A	-	-는	그런	-	paradigm
+p-그렇다-adnfut	그렇다	A	-	-ㄹ	그럴	-	paradigm
+p-그렇다-haera	그렇다	A	-	-다	그렇다	-	paradigm
+p-그렇다-ne	그렇다	A	-	-네	그렇네|그러네	-	paradigm
+p-그렇다-seq	그렇다	A	-	-어서	그래서	-	paradigm
+p-그렇다-nom	그렇다	A	-	-ㅁ	그럼	-	paradigm
+p-그렇다-haeyo	그렇다	A	-	-어요	그래요	-	paradigm
+p-어떻다-hae	어떻다	A	-	-어	어때	-	paradigm
+p-어떻다-past	어떻다	A	-	-었- -다	어땠다	-	paradigm
+p-어떻다-cond	어떻다	A	-	-면	어떠면	-	paradigm
+p-어떻다-reason	어떻다	A	-	-니까	어떠니까	-	paradigm
+p-어떻다-hapsyo	어떻다	A	-	-습니다	어떻습니다	-	paradigm
+p-어떻다-adn	어떻다	A	-	-는	어떤	-	paradigm
+p-어떻다-adnfut	어떻다	A	-	-ㄹ	어떨	-	paradigm
+p-어떻다-haera	어떻다	A	-	-다	어떻다	-	paradigm
+p-어떻다-ne	어떻다	A	-	-네	어떻네|어떠네	-	paradigm
+p-어떻다-seq	어떻다	A	-	-어서	어때서	-	paradigm
+p-어떻다-nom	어떻다	A	-	-ㅁ	어떰	-	paradigm
+p-어떻다-haeyo	어떻다	A	-	-어요	어때요	-	paradigm
+p-노랗다-hae	노랗다	A	-	-어	노래	-	paradigm
+p-노랗다-past	노랗다	A	-	-었- -다	노랬다	-	paradigm
+p-노랗다-cond	노랗다	A	-	-면	노라면	-	paradigm
+p-노랗다-reason	노랗다	A	-	-니까	노라니까	-	paradigm
+p-노랗다-hapsyo	노랗다	A	-	-습니다	노랗습니다	-	paradigm
+p-노랗다-adn	노랗다	A	-	-는	노란	-	paradigm
+p-노랗다-adnfut	노랗다	A	-	-ㄹ	노랄	-	paradigm
+p-노랗다-haera	노랗다	A	-	-다	노랗다	-	paradigm
+p-노랗다-ne	노랗다	A	-	-네	노랗네|노라네	-	paradigm
+p-노랗다-seq	노랗다	A	-	-어서	노래서	-	paradigm
+p-노랗다-nom	노랗다	A	-	-ㅁ	노람	-	paradigm
+p-노랗다-haeyo	노랗다	A	-	-어요	노래요	-	paradigm
+p-파랗다-hae	파랗다	A	-	-어	파래	-	paradigm
+p-파랗다-past	파랗다	A	-	-었- -다	파랬다	-	paradigm
+p-파랗다-cond	파랗다	A	-	-면	파라면	-	paradigm
+p-파랗다-reason	파랗다	A	-	-니까	파라니까	-	paradigm
+p-파랗다-hapsyo	파랗다	A	-	-습니다	파랗습니다	-	paradigm
+p-파랗다-adn	파랗다	A	-	-는	파란	-	paradigm
+p-파랗다-adnfut	파랗다	A	-	-ㄹ	파랄	-	paradigm
+p-파랗다-haera	파랗다	A	-	-다	파랗다	-	paradigm
+p-파랗다-ne	파랗다	A	-	-네	파랗네|파라네	-	paradigm
+p-파랗다-seq	파랗다	A	-	-어서	파래서	-	paradigm
+p-파랗다-nom	파랗다	A	-	-ㅁ	파람	-	paradigm
+p-파랗다-haeyo	파랗다	A	-	-어요	파래요	-	paradigm
+p-빨갛다-hae	빨갛다	A	-	-어	빨개	-	paradigm
+p-빨갛다-past	빨갛다	A	-	-었- -다	빨갰다	-	paradigm
+p-빨갛다-cond	빨갛다	A	-	-면	빨가면	-	paradigm
+p-빨갛다-reason	빨갛다	A	-	-니까	빨가니까	-	paradigm
+p-빨갛다-hapsyo	빨갛다	A	-	-습니다	빨갛습니다	-	paradigm
+p-빨갛다-adn	빨갛다	A	-	-는	빨간	-	paradigm
+p-빨갛다-adnfut	빨갛다	A	-	-ㄹ	빨갈	-	paradigm
+p-빨갛다-haera	빨갛다	A	-	-다	빨갛다	-	paradigm
+p-빨갛다-ne	빨갛다	A	-	-네	빨갛네|빨가네	-	paradigm
+p-빨갛다-seq	빨갛다	A	-	-어서	빨개서	-	paradigm
+p-빨갛다-nom	빨갛다	A	-	-ㅁ	빨감	-	paradigm
+p-빨갛다-haeyo	빨갛다	A	-	-어요	빨개요	-	paradigm
+p-하얗다-hae	하얗다	A	-	-어	하얘	-	paradigm
+p-하얗다-past	하얗다	A	-	-었- -다	하얬다	-	paradigm
+p-하얗다-cond	하얗다	A	-	-면	하야면	-	paradigm
+p-하얗다-reason	하얗다	A	-	-니까	하야니까	-	paradigm
+p-하얗다-hapsyo	하얗다	A	-	-습니다	하얗습니다	-	paradigm
+p-하얗다-adn	하얗다	A	-	-는	하얀	-	paradigm
+p-하얗다-adnfut	하얗다	A	-	-ㄹ	하얄	-	paradigm
+p-하얗다-haera	하얗다	A	-	-다	하얗다	-	paradigm
+p-하얗다-ne	하얗다	A	-	-네	하얗네|하야네	-	paradigm
+p-하얗다-seq	하얗다	A	-	-어서	하얘서	-	paradigm
+p-하얗다-nom	하얗다	A	-	-ㅁ	하얌	-	paradigm
+p-하얗다-haeyo	하얗다	A	-	-어요	하얘요	-	paradigm
+p-까맣다-hae	까맣다	A	-	-어	까매	-	paradigm
+p-까맣다-past	까맣다	A	-	-었- -다	까맸다	-	paradigm
+p-까맣다-cond	까맣다	A	-	-면	까마면	-	paradigm
+p-까맣다-reason	까맣다	A	-	-니까	까마니까	-	paradigm
+p-까맣다-hapsyo	까맣다	A	-	-습니다	까맣습니다	-	paradigm
+p-까맣다-adn	까맣다	A	-	-는	까만	-	paradigm
+p-까맣다-adnfut	까맣다	A	-	-ㄹ	까말	-	paradigm
+p-까맣다-haera	까맣다	A	-	-다	까맣다	-	paradigm
+p-까맣다-ne	까맣다	A	-	-네	까맣네|까마네	-	paradigm
+p-까맣다-seq	까맣다	A	-	-어서	까매서	-	paradigm
+p-까맣다-nom	까맣다	A	-	-ㅁ	까맘	-	paradigm
+p-까맣다-haeyo	까맣다	A	-	-어요	까매요	-	paradigm
+p-동그랗다-hae	동그랗다	A	-	-어	동그래	-	paradigm
+p-동그랗다-past	동그랗다	A	-	-었- -다	동그랬다	-	paradigm
+p-동그랗다-cond	동그랗다	A	-	-면	동그라면	-	paradigm
+p-동그랗다-reason	동그랗다	A	-	-니까	동그라니까	-	paradigm
+p-동그랗다-hapsyo	동그랗다	A	-	-습니다	동그랗습니다	-	paradigm
+p-동그랗다-adn	동그랗다	A	-	-는	동그란	-	paradigm
+p-동그랗다-adnfut	동그랗다	A	-	-ㄹ	동그랄	-	paradigm
+p-동그랗다-haera	동그랗다	A	-	-다	동그랗다	-	paradigm
+p-동그랗다-ne	동그랗다	A	-	-네	동그랗네|동그라네	-	paradigm
+p-동그랗다-seq	동그랗다	A	-	-어서	동그래서	-	paradigm
+p-동그랗다-nom	동그랗다	A	-	-ㅁ	동그람	-	paradigm
+p-동그랗다-haeyo	동그랗다	A	-	-어요	동그래요	-	paradigm
+p-누렇다-hae	누렇다	A	-	-어	누레	-	paradigm
+p-누렇다-past	누렇다	A	-	-었- -다	누렜다	-	paradigm
+p-누렇다-cond	누렇다	A	-	-면	누러면	-	paradigm
+p-누렇다-reason	누렇다	A	-	-니까	누러니까	-	paradigm
+p-누렇다-hapsyo	누렇다	A	-	-습니다	누렇습니다	-	paradigm
+p-누렇다-adn	누렇다	A	-	-는	누런	-	paradigm
+p-누렇다-adnfut	누렇다	A	-	-ㄹ	누럴	-	paradigm
+p-누렇다-haera	누렇다	A	-	-다	누렇다	-	paradigm
+p-누렇다-ne	누렇다	A	-	-네	누렇네|누러네	-	paradigm
+p-누렇다-seq	누렇다	A	-	-어서	누레서	-	paradigm
+p-누렇다-nom	누렇다	A	-	-ㅁ	누럼	-	paradigm
+p-누렇다-haeyo	누렇다	A	-	-어요	누레요	-	paradigm
+p-모르다-hae	모르다	V	-	-어	몰라	-	paradigm
+p-모르다-past	모르다	V	-	-었- -다	몰랐다	-	paradigm
+p-모르다-cond	모르다	V	-	-면	모르면	-	paradigm
+p-모르다-reason	모르다	V	-	-니까	모르니까	-	paradigm
+p-모르다-hapsyo	모르다	V	-	-습니다	모릅니다	-	paradigm
+p-모르다-adn	모르다	V	-	-는	모르는	-	paradigm
+p-모르다-adnpast	모르다	V	-	-ㄴ	모른	-	paradigm
+p-모르다-adnfut	모르다	V	-	-ㄹ	모를	-	paradigm
+p-모르다-haera	모르다	V	-	-다	모른다	-	paradigm
+p-모르다-hon	모르다	V	-	-시- -어요	모르세요|모르셔요	-	paradigm
+p-모르다-seq	모르다	V	-	-어서	몰라서	-	paradigm
+p-모르다-nom	모르다	V	-	-ㅁ	모름	-	paradigm
+p-부르다-hae	부르다	V	-	-어	불러	-	paradigm
+p-부르다-past	부르다	V	-	-었- -다	불렀다	-	paradigm
+p-부르다-cond	부르다	V	-	-면	부르면	-	paradigm
+p-부르다-reason	부르다	V	-	-니까	부르니까	-	paradigm
+p-부르다-hapsyo	부르다	V	-	-습니다	부릅니다	-	paradigm
+p-부르다-adn	부르다	V	-	-는	부르는	-	paradigm
+p-부르다-adnpast	부르다	V	-	-ㄴ	부른	-	paradigm
+p-부르다-adnfut	부르다	V	-	-ㄹ	부를	-	paradigm
+p-부르다-haera	부르다	V	-	-다	부른다	-	paradigm
+p-부르다-hon	부르다	V	-	-시- -어요	부르세요|부르셔요	-	paradigm
+p-부르다-seq	부르다	V	-	-어서	불러서	-	paradigm
+p-부르다-nom	부르다	V	-	-ㅁ	부름	-	paradigm
+p-고르다-hae	고르다	V	-	-어	골라	-	paradigm
+p-고르다-past	고르다	V	-	-었- -다	골랐다	-	paradigm
+p-고르다-cond	고르다	V	-	-면	고르면	-	paradigm
+p-고르다-reason	고르다	V	-	-니까	고르니까	-	paradigm
+p-고르다-hapsyo	고르다	V	-	-습니다	고릅니다	-	paradigm
+p-고르다-adn	고르다	V	-	-는	고르는	-	paradigm
+p-고르다-adnpast	고르다	V	-	-ㄴ	고른	-	paradigm
+p-고르다-adnfut	고르다	V	-	-ㄹ	고를	-	paradigm
+p-고르다-haera	고르다	V	-	-다	고른다	-	paradigm
+p-고르다-hon	고르다	V	-	-시- -어요	고르세요|고르셔요	-	paradigm
+p-고르다-seq	고르다	V	-	-어서	골라서	-	paradigm
+p-고르다-nom	고르다	V	-	-ㅁ	고름	-	paradigm
+p-다르다-hae	다르다	A	-	-어	달라	-	paradigm
+p-다르다-past	다르다	A	-	-었- -다	달랐다	-	paradigm
+p-다르다-cond	다르다	A	-	-면	다르면	-	paradigm
+p-다르다-reason	다르다	A	-	-니까	다르니까	-	paradigm
+p-다르다-hapsyo	다르다	A	-	-습니다	다릅니다	-	paradigm
+p-다르다-adn	다르다	A	-	-는	다른	-	paradigm
+p-다르다-adnfut	다르다	A	-	-ㄹ	다를	-	paradigm
+p-다르다-haera	다르다	A	-	-다	다르다	-	paradigm
+p-다르다-ne	다르다	A	-	-네	다르네	-	paradigm
+p-다르다-seq	다르다	A	-	-어서	달라서	-	paradigm
+p-다르다-nom	다르다	A	-	-ㅁ	다름	-	paradigm
+p-다르다-haeyo	다르다	A	-	-어요	달라요	-	paradigm
+p-빠르다-hae	빠르다	A	-	-어	빨라	-	paradigm
+p-빠르다-past	빠르다	A	-	-었- -다	빨랐다	-	paradigm
+p-빠르다-cond	빠르다	A	-	-면	빠르면	-	paradigm
+p-빠르다-reason	빠르다	A	-	-니까	빠르니까	-	paradigm
+p-빠르다-hapsyo	빠르다	A	-	-습니다	빠릅니다	-	paradigm
+p-빠르다-adn	빠르다	A	-	-는	빠른	-	paradigm
+p-빠르다-adnfut	빠르다	A	-	-ㄹ	빠를	-	paradigm
+p-빠르다-haera	빠르다	A	-	-다	빠르다	-	paradigm
+p-빠르다-ne	빠르다	A	-	-네	빠르네	-	paradigm
+p-빠르다-seq	빠르다	A	-	-어서	빨라서	-	paradigm
+p-빠르다-nom	빠르다	A	-	-ㅁ	빠름	-	paradigm
+p-빠르다-haeyo	빠르다	A	-	-어요	빨라요	-	paradigm
+p-흐르다-hae	흐르다	V	-	-어	흘러	-	paradigm
+p-흐르다-past	흐르다	V	-	-었- -다	흘렀다	-	paradigm
+p-흐르다-cond	흐르다	V	-	-면	흐르면	-	paradigm
+p-흐르다-reason	흐르다	V	-	-니까	흐르니까	-	paradigm
+p-흐르다-hapsyo	흐르다	V	-	-습니다	흐릅니다	-	paradigm
+p-흐르다-adn	흐르다	V	-	-는	흐르는	-	paradigm
+p-흐르다-adnpast	흐르다	V	-	-ㄴ	흐른	-	paradigm
+p-흐르다-adnfut	흐르다	V	-	-ㄹ	흐를	-	paradigm
+p-흐르다-haera	흐르다	V	-	-다	흐른다	-	paradigm
+p-흐르다-hon	흐르다	V	-	-시- -어요	흐르세요|흐르셔요	-	paradigm
+p-흐르다-seq	흐르다	V	-	-어서	흘러서	-	paradigm
+p-흐르다-nom	흐르다	V	-	-ㅁ	흐름	-	paradigm
+p-자르다-hae	자르다	V	-	-어	잘라	-	paradigm
+p-자르다-past	자르다	V	-	-었- -다	잘랐다	-	paradigm
+p-자르다-cond	자르다	V	-	-면	자르면	-	paradigm
+p-자르다-reason	자르다	V	-	-니까	자르니까	-	paradigm
+p-자르다-hapsyo	자르다	V	-	-습니다	자릅니다	-	paradigm
+p-자르다-adn	자르다	V	-	-는	자르는	-	paradigm
+p-자르다-adnpast	자르다	V	-	-ㄴ	자른	-	paradigm
+p-자르다-adnfut	자르다	V	-	-ㄹ	자를	-	paradigm
+p-자르다-haera	자르다	V	-	-다	자른다	-	paradigm
+p-자르다-hon	자르다	V	-	-시- -어요	자르세요|자르셔요	-	paradigm
+p-자르다-seq	자르다	V	-	-어서	잘라서	-	paradigm
+p-자르다-nom	자르다	V	-	-ㅁ	자름	-	paradigm
+p-서두르다-hae	서두르다	V	-	-어	서둘러	-	paradigm
+p-서두르다-past	서두르다	V	-	-었- -다	서둘렀다	-	paradigm
+p-서두르다-cond	서두르다	V	-	-면	서두르면	-	paradigm
+p-서두르다-reason	서두르다	V	-	-니까	서두르니까	-	paradigm
+p-서두르다-hapsyo	서두르다	V	-	-습니다	서두릅니다	-	paradigm
+p-서두르다-adn	서두르다	V	-	-는	서두르는	-	paradigm
+p-서두르다-adnpast	서두르다	V	-	-ㄴ	서두른	-	paradigm
+p-서두르다-adnfut	서두르다	V	-	-ㄹ	서두를	-	paradigm
+p-서두르다-haera	서두르다	V	-	-다	서두른다	-	paradigm
+p-서두르다-hon	서두르다	V	-	-시- -어요	서두르세요|서두르셔요	-	paradigm
+p-서두르다-seq	서두르다	V	-	-어서	서둘러서	-	paradigm
+p-서두르다-nom	서두르다	V	-	-ㅁ	서두름	-	paradigm
+p-마르다-hae	마르다	V	-	-어	말라	-	paradigm
+p-마르다-past	마르다	V	-	-었- -다	말랐다	-	paradigm
+p-마르다-cond	마르다	V	-	-면	마르면	-	paradigm
+p-마르다-reason	마르다	V	-	-니까	마르니까	-	paradigm
+p-마르다-hapsyo	마르다	V	-	-습니다	마릅니다	-	paradigm
+p-마르다-adn	마르다	V	-	-는	마르는	-	paradigm
+p-마르다-adnpast	마르다	V	-	-ㄴ	마른	-	paradigm
+p-마르다-adnfut	마르다	V	-	-ㄹ	마를	-	paradigm
+p-마르다-haera	마르다	V	-	-다	마른다	-	paradigm
+p-마르다-hon	마르다	V	-	-시- -어요	마르세요|마르셔요	-	paradigm
+p-마르다-seq	마르다	V	-	-어서	말라서	-	paradigm
+p-마르다-nom	마르다	V	-	-ㅁ	마름	-	paradigm
+p-푸르다-hae	푸르다	A	-	-어	푸르러	-	paradigm
+p-푸르다-past	푸르다	A	-	-었- -다	푸르렀다	-	paradigm
+p-푸르다-cond	푸르다	A	-	-면	푸르면	-	paradigm
+p-푸르다-reason	푸르다	A	-	-니까	푸르니까	-	paradigm
+p-푸르다-hapsyo	푸르다	A	-	-습니다	푸릅니다	-	paradigm
+p-푸르다-adn	푸르다	A	-	-는	푸른	-	paradigm
+p-푸르다-adnfut	푸르다	A	-	-ㄹ	푸를	-	paradigm
+p-푸르다-haera	푸르다	A	-	-다	푸르다	-	paradigm
+p-푸르다-ne	푸르다	A	-	-네	푸르네	-	paradigm
+p-푸르다-seq	푸르다	A	-	-어서	푸르러서	-	paradigm
+p-푸르다-nom	푸르다	A	-	-ㅁ	푸름	-	paradigm
+p-푸르다-haeyo	푸르다	A	-	-어요	푸르러요	-	paradigm
+p-이르다-hae	이르다:REO	V	-	-어	이르러	-	paradigm
+p-이르다-past	이르다:REO	V	-	-었- -다	이르렀다	-	paradigm
+p-이르다-cond	이르다:REO	V	-	-면	이르면	-	paradigm
+p-이르다-reason	이르다:REO	V	-	-니까	이르니까	-	paradigm
+p-이르다-hapsyo	이르다:REO	V	-	-습니다	이릅니다	-	paradigm
+p-이르다-adn	이르다:REO	V	-	-는	이르는	-	paradigm
+p-이르다-adnpast	이르다:REO	V	-	-ㄴ	이른	-	paradigm
+p-이르다-adnfut	이르다:REO	V	-	-ㄹ	이를	-	paradigm
+p-이르다-haera	이르다:REO	V	-	-다	이른다	-	paradigm
+p-이르다-hon	이르다:REO	V	-	-시- -어요	이르세요|이르셔요	-	paradigm
+p-이르다-seq	이르다:REO	V	-	-어서	이르러서	-	paradigm
+p-이르다-nom	이르다:REO	V	-	-ㅁ	이름	-	paradigm
+p-푸다-hae	푸다	V	-	-어	퍼	-	paradigm
+p-푸다-past	푸다	V	-	-었- -다	펐다	-	paradigm
+p-푸다-cond	푸다	V	-	-면	푸면	-	paradigm
+p-푸다-reason	푸다	V	-	-니까	푸니까	-	paradigm
+p-푸다-hapsyo	푸다	V	-	-습니다	풉니다	-	paradigm
+p-푸다-adn	푸다	V	-	-는	푸는	-	paradigm
+p-푸다-adnpast	푸다	V	-	-ㄴ	푼	-	paradigm
+p-푸다-adnfut	푸다	V	-	-ㄹ	풀	-	paradigm
+p-푸다-haera	푸다	V	-	-다	푼다	-	paradigm
+p-푸다-hon	푸다	V	-	-시- -어요	푸세요|푸셔요	-	paradigm
+p-푸다-seq	푸다	V	-	-어서	퍼서	-	paradigm
+p-푸다-nom	푸다	V	-	-ㅁ	품	-	paradigm
+p-쓰다-hae	쓰다	V	-	-어	써	-	paradigm
+p-쓰다-past	쓰다	V	-	-었- -다	썼다	-	paradigm
+p-쓰다-cond	쓰다	V	-	-면	쓰면	-	paradigm
+p-쓰다-reason	쓰다	V	-	-니까	쓰니까	-	paradigm
+p-쓰다-hapsyo	쓰다	V	-	-습니다	씁니다	-	paradigm
+p-쓰다-adn	쓰다	V	-	-는	쓰는	-	paradigm
+p-쓰다-adnpast	쓰다	V	-	-ㄴ	쓴	-	paradigm
+p-쓰다-adnfut	쓰다	V	-	-ㄹ	쓸	-	paradigm
+p-쓰다-haera	쓰다	V	-	-다	쓴다	-	paradigm
+p-쓰다-hon	쓰다	V	-	-시- -어요	쓰세요|쓰셔요	-	paradigm
+p-쓰다-seq	쓰다	V	-	-어서	써서	-	paradigm
+p-쓰다-nom	쓰다	V	-	-ㅁ	씀	-	paradigm
+p-크다-hae	크다	A	-	-어	커	-	paradigm
+p-크다-past	크다	A	-	-었- -다	컸다	-	paradigm
+p-크다-cond	크다	A	-	-면	크면	-	paradigm
+p-크다-reason	크다	A	-	-니까	크니까	-	paradigm
+p-크다-hapsyo	크다	A	-	-습니다	큽니다	-	paradigm
+p-크다-adn	크다	A	-	-는	큰	-	paradigm
+p-크다-adnfut	크다	A	-	-ㄹ	클	-	paradigm
+p-크다-haera	크다	A	-	-다	크다	-	paradigm
+p-크다-ne	크다	A	-	-네	크네	-	paradigm
+p-크다-seq	크다	A	-	-어서	커서	-	paradigm
+p-크다-nom	크다	A	-	-ㅁ	큼	-	paradigm
+p-크다-haeyo	크다	A	-	-어요	커요	-	paradigm
+p-끄다-hae	끄다	V	-	-어	꺼	-	paradigm
+p-끄다-past	끄다	V	-	-었- -다	껐다	-	paradigm
+p-끄다-cond	끄다	V	-	-면	끄면	-	paradigm
+p-끄다-reason	끄다	V	-	-니까	끄니까	-	paradigm
+p-끄다-hapsyo	끄다	V	-	-습니다	끕니다	-	paradigm
+p-끄다-adn	끄다	V	-	-는	끄는	-	paradigm
+p-끄다-adnpast	끄다	V	-	-ㄴ	끈	-	paradigm
+p-끄다-adnfut	끄다	V	-	-ㄹ	끌	-	paradigm
+p-끄다-haera	끄다	V	-	-다	끈다	-	paradigm
+p-끄다-hon	끄다	V	-	-시- -어요	끄세요|끄셔요	-	paradigm
+p-끄다-seq	끄다	V	-	-어서	꺼서	-	paradigm
+p-끄다-nom	끄다	V	-	-ㅁ	끔	-	paradigm
+p-바쁘다-hae	바쁘다	A	-	-어	바빠	-	paradigm
+p-바쁘다-past	바쁘다	A	-	-었- -다	바빴다	-	paradigm
+p-바쁘다-cond	바쁘다	A	-	-면	바쁘면	-	paradigm
+p-바쁘다-reason	바쁘다	A	-	-니까	바쁘니까	-	paradigm
+p-바쁘다-hapsyo	바쁘다	A	-	-습니다	바쁩니다	-	paradigm
+p-바쁘다-adn	바쁘다	A	-	-는	바쁜	-	paradigm
+p-바쁘다-adnfut	바쁘다	A	-	-ㄹ	바쁠	-	paradigm
+p-바쁘다-haera	바쁘다	A	-	-다	바쁘다	-	paradigm
+p-바쁘다-ne	바쁘다	A	-	-네	바쁘네	-	paradigm
+p-바쁘다-seq	바쁘다	A	-	-어서	바빠서	-	paradigm
+p-바쁘다-nom	바쁘다	A	-	-ㅁ	바쁨	-	paradigm
+p-바쁘다-haeyo	바쁘다	A	-	-어요	바빠요	-	paradigm
+p-슬프다-hae	슬프다	A	-	-어	슬퍼	-	paradigm
+p-슬프다-past	슬프다	A	-	-었- -다	슬펐다	-	paradigm
+p-슬프다-cond	슬프다	A	-	-면	슬프면	-	paradigm
+p-슬프다-reason	슬프다	A	-	-니까	슬프니까	-	paradigm
+p-슬프다-hapsyo	슬프다	A	-	-습니다	슬픕니다	-	paradigm
+p-슬프다-adn	슬프다	A	-	-는	슬픈	-	paradigm
+p-슬프다-adnfut	슬프다	A	-	-ㄹ	슬플	-	paradigm
+p-슬프다-haera	슬프다	A	-	-다	슬프다	-	paradigm
+p-슬프다-ne	슬프다	A	-	-네	슬프네	-	paradigm
+p-슬프다-seq	슬프다	A	-	-어서	슬퍼서	-	paradigm
+p-슬프다-nom	슬프다	A	-	-ㅁ	슬픔	-	paradigm
+p-슬프다-haeyo	슬프다	A	-	-어요	슬퍼요	-	paradigm
+p-아프다-hae	아프다	A	-	-어	아파	-	paradigm
+p-아프다-past	아프다	A	-	-었- -다	아팠다	-	paradigm
+p-아프다-cond	아프다	A	-	-면	아프면	-	paradigm
+p-아프다-reason	아프다	A	-	-니까	아프니까	-	paradigm
+p-아프다-hapsyo	아프다	A	-	-습니다	아픕니다	-	paradigm
+p-아프다-adn	아프다	A	-	-는	아픈	-	paradigm
+p-아프다-adnfut	아프다	A	-	-ㄹ	아플	-	paradigm
+p-아프다-haera	아프다	A	-	-다	아프다	-	paradigm
+p-아프다-ne	아프다	A	-	-네	아프네	-	paradigm
+p-아프다-seq	아프다	A	-	-어서	아파서	-	paradigm
+p-아프다-nom	아프다	A	-	-ㅁ	아픔	-	paradigm
+p-아프다-haeyo	아프다	A	-	-어요	아파요	-	paradigm
+p-기쁘다-hae	기쁘다	A	-	-어	기뻐	-	paradigm
+p-기쁘다-past	기쁘다	A	-	-었- -다	기뻤다	-	paradigm
+p-기쁘다-cond	기쁘다	A	-	-면	기쁘면	-	paradigm
+p-기쁘다-reason	기쁘다	A	-	-니까	기쁘니까	-	paradigm
+p-기쁘다-hapsyo	기쁘다	A	-	-습니다	기쁩니다	-	paradigm
+p-기쁘다-adn	기쁘다	A	-	-는	기쁜	-	paradigm
+p-기쁘다-adnfut	기쁘다	A	-	-ㄹ	기쁠	-	paradigm
+p-기쁘다-haera	기쁘다	A	-	-다	기쁘다	-	paradigm
+p-기쁘다-ne	기쁘다	A	-	-네	기쁘네	-	paradigm
+p-기쁘다-seq	기쁘다	A	-	-어서	기뻐서	-	paradigm
+p-기쁘다-nom	기쁘다	A	-	-ㅁ	기쁨	-	paradigm
+p-기쁘다-haeyo	기쁘다	A	-	-어요	기뻐요	-	paradigm
+p-따르다-hae	따르다	V	-	-어	따라	-	paradigm
+p-따르다-past	따르다	V	-	-었- -다	따랐다	-	paradigm
+p-따르다-cond	따르다	V	-	-면	따르면	-	paradigm
+p-따르다-reason	따르다	V	-	-니까	따르니까	-	paradigm
+p-따르다-hapsyo	따르다	V	-	-습니다	따릅니다	-	paradigm
+p-따르다-adn	따르다	V	-	-는	따르는	-	paradigm
+p-따르다-adnpast	따르다	V	-	-ㄴ	따른	-	paradigm
+p-따르다-adnfut	따르다	V	-	-ㄹ	따를	-	paradigm
+p-따르다-haera	따르다	V	-	-다	따른다	-	paradigm
+p-따르다-hon	따르다	V	-	-시- -어요	따르세요|따르셔요	-	paradigm
+p-따르다-seq	따르다	V	-	-어서	따라서	-	paradigm
+p-따르다-nom	따르다	V	-	-ㅁ	따름	-	paradigm
+p-치르다-hae	치르다	V	-	-어	치러	-	paradigm
+p-치르다-past	치르다	V	-	-었- -다	치렀다	-	paradigm
+p-치르다-cond	치르다	V	-	-면	치르면	-	paradigm
+p-치르다-reason	치르다	V	-	-니까	치르니까	-	paradigm
+p-치르다-hapsyo	치르다	V	-	-습니다	치릅니다	-	paradigm
+p-치르다-adn	치르다	V	-	-는	치르는	-	paradigm
+p-치르다-adnpast	치르다	V	-	-ㄴ	치른	-	paradigm
+p-치르다-adnfut	치르다	V	-	-ㄹ	치를	-	paradigm
+p-치르다-haera	치르다	V	-	-다	치른다	-	paradigm
+p-치르다-hon	치르다	V	-	-시- -어요	치르세요|치르셔요	-	paradigm
+p-치르다-seq	치르다	V	-	-어서	치러서	-	paradigm
+p-치르다-nom	치르다	V	-	-ㅁ	치름	-	paradigm
+p-들르다-hae	들르다	V	-	-어	들러	-	paradigm
+p-들르다-past	들르다	V	-	-었- -다	들렀다	-	paradigm
+p-들르다-cond	들르다	V	-	-면	들르면	-	paradigm
+p-들르다-reason	들르다	V	-	-니까	들르니까	-	paradigm
+p-들르다-hapsyo	들르다	V	-	-습니다	들릅니다	-	paradigm
+p-들르다-adn	들르다	V	-	-는	들르는	-	paradigm
+p-들르다-adnpast	들르다	V	-	-ㄴ	들른	-	paradigm
+p-들르다-adnfut	들르다	V	-	-ㄹ	들를	-	paradigm
+p-들르다-haera	들르다	V	-	-다	들른다	-	paradigm
+p-들르다-hon	들르다	V	-	-시- -어요	들르세요|들르셔요	-	paradigm
+p-들르다-seq	들르다	V	-	-어서	들러서	-	paradigm
+p-들르다-nom	들르다	V	-	-ㅁ	들름	-	paradigm
+p-잠그다-hae	잠그다	V	-	-어	잠가	-	paradigm
+p-잠그다-past	잠그다	V	-	-었- -다	잠갔다	-	paradigm
+p-잠그다-cond	잠그다	V	-	-면	잠그면	-	paradigm
+p-잠그다-reason	잠그다	V	-	-니까	잠그니까	-	paradigm
+p-잠그다-hapsyo	잠그다	V	-	-습니다	잠급니다	-	paradigm
+p-잠그다-adn	잠그다	V	-	-는	잠그는	-	paradigm
+p-잠그다-adnpast	잠그다	V	-	-ㄴ	잠근	-	paradigm
+p-잠그다-adnfut	잠그다	V	-	-ㄹ	잠글	-	paradigm
+p-잠그다-haera	잠그다	V	-	-다	잠근다	-	paradigm
+p-잠그다-hon	잠그다	V	-	-시- -어요	잠그세요|잠그셔요	-	paradigm
+p-잠그다-seq	잠그다	V	-	-어서	잠가서	-	paradigm
+p-잠그다-nom	잠그다	V	-	-ㅁ	잠금	-	paradigm
+p-모으다-hae	모으다	V	-	-어	모아	-	paradigm
+p-모으다-past	모으다	V	-	-었- -다	모았다	-	paradigm
+p-모으다-cond	모으다	V	-	-면	모으면	-	paradigm
+p-모으다-reason	모으다	V	-	-니까	모으니까	-	paradigm
+p-모으다-hapsyo	모으다	V	-	-습니다	모읍니다	-	paradigm
+p-모으다-adn	모으다	V	-	-는	모으는	-	paradigm
+p-모으다-adnpast	모으다	V	-	-ㄴ	모은	-	paradigm
+p-모으다-adnfut	모으다	V	-	-ㄹ	모을	-	paradigm
+p-모으다-haera	모으다	V	-	-다	모은다	-	paradigm
+p-모으다-hon	모으다	V	-	-시- -어요	모으세요|모으셔요	-	paradigm
+p-모으다-seq	모으다	V	-	-어서	모아서	-	paradigm
+p-모으다-nom	모으다	V	-	-ㅁ	모음	-	paradigm
+p-살다-hae	살다	V	-	-어	살아	-	paradigm
+p-살다-past	살다	V	-	-었- -다	살았다	-	paradigm
+p-살다-cond	살다	V	-	-면	살면	-	paradigm
+p-살다-reason	살다	V	-	-니까	사니까	-	paradigm
+p-살다-hapsyo	살다	V	-	-습니다	삽니다	-	paradigm
+p-살다-adn	살다	V	-	-는	사는	-	paradigm
+p-살다-adnpast	살다	V	-	-ㄴ	산	-	paradigm
+p-살다-adnfut	살다	V	-	-ㄹ	살	-	paradigm
+p-살다-haera	살다	V	-	-다	산다	-	paradigm
+p-살다-hon	살다	V	-	-시- -어요	사세요|사셔요	-	paradigm
+p-살다-seq	살다	V	-	-어서	살아서	-	paradigm
+p-살다-nom	살다	V	-	-ㅁ	삶	-	paradigm
+p-알다-hae	알다	V	-	-어	알아	-	paradigm
+p-알다-past	알다	V	-	-었- -다	알았다	-	paradigm
+p-알다-cond	알다	V	-	-면	알면	-	paradigm
+p-알다-reason	알다	V	-	-니까	아니까	-	paradigm
+p-알다-hapsyo	알다	V	-	-습니다	압니다	-	paradigm
+p-알다-adn	알다	V	-	-는	아는	-	paradigm
+p-알다-adnpast	알다	V	-	-ㄴ	안	-	paradigm
+p-알다-adnfut	알다	V	-	-ㄹ	알	-	paradigm
+p-알다-haera	알다	V	-	-다	안다	-	paradigm
+p-알다-hon	알다	V	-	-시- -어요	아세요|아셔요	-	paradigm
+p-알다-seq	알다	V	-	-어서	알아서	-	paradigm
+p-알다-nom	알다	V	-	-ㅁ	앎	-	paradigm
+p-만들다-hae	만들다	V	-	-어	만들어	-	paradigm
+p-만들다-past	만들다	V	-	-었- -다	만들었다	-	paradigm
+p-만들다-cond	만들다	V	-	-면	만들면	-	paradigm
+p-만들다-reason	만들다	V	-	-니까	만드니까	-	paradigm
+p-만들다-hapsyo	만들다	V	-	-습니다	만듭니다	-	paradigm
+p-만들다-adn	만들다	V	-	-는	만드는	-	paradigm
+p-만들다-adnpast	만들다	V	-	-ㄴ	만든	-	paradigm
+p-만들다-adnfut	만들다	V	-	-ㄹ	만들	-	paradigm
+p-만들다-haera	만들다	V	-	-다	만든다	-	paradigm
+p-만들다-hon	만들다	V	-	-시- -어요	만드세요|만드셔요	-	paradigm
+p-만들다-seq	만들다	V	-	-어서	만들어서	-	paradigm
+p-만들다-nom	만들다	V	-	-ㅁ	만듦	-	paradigm
+p-놀다-hae	놀다	V	-	-어	놀아	-	paradigm
+p-놀다-past	놀다	V	-	-었- -다	놀았다	-	paradigm
+p-놀다-cond	놀다	V	-	-면	놀면	-	paradigm
+p-놀다-reason	놀다	V	-	-니까	노니까	-	paradigm
+p-놀다-hapsyo	놀다	V	-	-습니다	놉니다	-	paradigm
+p-놀다-adn	놀다	V	-	-는	노는	-	paradigm
+p-놀다-adnpast	놀다	V	-	-ㄴ	논	-	paradigm
+p-놀다-adnfut	놀다	V	-	-ㄹ	놀	-	paradigm
+p-놀다-haera	놀다	V	-	-다	논다	-	paradigm
+p-놀다-hon	놀다	V	-	-시- -어요	노세요|노셔요	-	paradigm
+p-놀다-seq	놀다	V	-	-어서	놀아서	-	paradigm
+p-놀다-nom	놀다	V	-	-ㅁ	놂	-	paradigm
+p-열다-hae	열다	V	-	-어	열어	-	paradigm
+p-열다-past	열다	V	-	-었- -다	열었다	-	paradigm
+p-열다-cond	열다	V	-	-면	열면	-	paradigm
+p-열다-reason	열다	V	-	-니까	여니까	-	paradigm
+p-열다-hapsyo	열다	V	-	-습니다	엽니다	-	paradigm
+p-열다-adn	열다	V	-	-는	여는	-	paradigm
+p-열다-adnpast	열다	V	-	-ㄴ	연	-	paradigm
+p-열다-adnfut	열다	V	-	-ㄹ	열	-	paradigm
+p-열다-haera	열다	V	-	-다	연다	-	paradigm
+p-열다-hon	열다	V	-	-시- -어요	여세요|여셔요	-	paradigm
+p-열다-seq	열다	V	-	-어서	열어서	-	paradigm
+p-열다-nom	열다	V	-	-ㅁ	엶	-	paradigm
+p-팔다-hae	팔다	V	-	-어	팔아	-	paradigm
+p-팔다-past	팔다	V	-	-었- -다	팔았다	-	paradigm
+p-팔다-cond	팔다	V	-	-면	팔면	-	paradigm
+p-팔다-reason	팔다	V	-	-니까	파니까	-	paradigm
+p-팔다-hapsyo	팔다	V	-	-습니다	팝니다	-	paradigm
+p-팔다-adn	팔다	V	-	-는	파는	-	paradigm
+p-팔다-adnpast	팔다	V	-	-ㄴ	판	-	paradigm
+p-팔다-adnfut	팔다	V	-	-ㄹ	팔	-	paradigm
+p-팔다-haera	팔다	V	-	-다	판다	-	paradigm
+p-팔다-hon	팔다	V	-	-시- -어요	파세요|파셔요	-	paradigm
+p-팔다-seq	팔다	V	-	-어서	팔아서	-	paradigm
+p-팔다-nom	팔다	V	-	-ㅁ	팖	-	paradigm
+p-길다-hae	길다	A	-	-어	길어	-	paradigm
+p-길다-past	길다	A	-	-었- -다	길었다	-	paradigm
+p-길다-cond	길다	A	-	-면	길면	-	paradigm
+p-길다-reason	길다	A	-	-니까	기니까	-	paradigm
+p-길다-hapsyo	길다	A	-	-습니다	깁니다	-	paradigm
+p-길다-adn	길다	A	-	-는	긴	-	paradigm
+p-길다-adnfut	길다	A	-	-ㄹ	길	-	paradigm
+p-길다-haera	길다	A	-	-다	길다	-	paradigm
+p-길다-ne	길다	A	-	-네	기네	-	paradigm
+p-길다-seq	길다	A	-	-어서	길어서	-	paradigm
+p-길다-nom	길다	A	-	-ㅁ	긺	-	paradigm
+p-길다-haeyo	길다	A	-	-어요	길어요	-	paradigm
+p-멀다-hae	멀다	A	-	-어	멀어	-	paradigm
+p-멀다-past	멀다	A	-	-었- -다	멀었다	-	paradigm
+p-멀다-cond	멀다	A	-	-면	멀면	-	paradigm
+p-멀다-reason	멀다	A	-	-니까	머니까	-	paradigm
+p-멀다-hapsyo	멀다	A	-	-습니다	멉니다	-	paradigm
+p-멀다-adn	멀다	A	-	-는	먼	-	paradigm
+p-멀다-adnfut	멀다	A	-	-ㄹ	멀	-	paradigm
+p-멀다-haera	멀다	A	-	-다	멀다	-	paradigm
+p-멀다-ne	멀다	A	-	-네	머네	-	paradigm
+p-멀다-seq	멀다	A	-	-어서	멀어서	-	paradigm
+p-멀다-nom	멀다	A	-	-ㅁ	멂	-	paradigm
+p-멀다-haeyo	멀다	A	-	-어요	멀어요	-	paradigm
+p-힘들다-hae	힘들다	A	-	-어	힘들어	-	paradigm
+p-힘들다-past	힘들다	A	-	-었- -다	힘들었다	-	paradigm
+p-힘들다-cond	힘들다	A	-	-면	힘들면	-	paradigm
+p-힘들다-reason	힘들다	A	-	-니까	힘드니까	-	paradigm
+p-힘들다-hapsyo	힘들다	A	-	-습니다	힘듭니다	-	paradigm
+p-힘들다-adn	힘들다	A	-	-는	힘든	-	paradigm
+p-힘들다-adnfut	힘들다	A	-	-ㄹ	힘들	-	paradigm
+p-힘들다-haera	힘들다	A	-	-다	힘들다	-	paradigm
+p-힘들다-ne	힘들다	A	-	-네	힘드네	-	paradigm
+p-힘들다-seq	힘들다	A	-	-어서	힘들어서	-	paradigm
+p-힘들다-nom	힘들다	A	-	-ㅁ	힘듦	-	paradigm
+p-힘들다-haeyo	힘들다	A	-	-어요	힘들어요	-	paradigm
+p-둥글다-hae	둥글다	A	-	-어	둥글어	-	paradigm
+p-둥글다-past	둥글다	A	-	-었- -다	둥글었다	-	paradigm
+p-둥글다-cond	둥글다	A	-	-면	둥글면	-	paradigm
+p-둥글다-reason	둥글다	A	-	-니까	둥그니까	-	paradigm
+p-둥글다-hapsyo	둥글다	A	-	-습니다	둥급니다	-	paradigm
+p-둥글다-adn	둥글다	A	-	-는	둥근	-	paradigm
+p-둥글다-adnfut	둥글다	A	-	-ㄹ	둥글	-	paradigm
+p-둥글다-haera	둥글다	A	-	-다	둥글다	-	paradigm
+p-둥글다-ne	둥글다	A	-	-네	둥그네	-	paradigm
+p-둥글다-seq	둥글다	A	-	-어서	둥글어서	-	paradigm
+p-둥글다-nom	둥글다	A	-	-ㅁ	둥긂	-	paradigm
+p-둥글다-haeyo	둥글다	A	-	-어요	둥글어요	-	paradigm
+p-있다-hae	있다	X	-	-어	있어	-	paradigm
+p-있다-past	있다	X	-	-었- -다	있었다	-	paradigm
+p-있다-cond	있다	X	-	-면	있으면	-	paradigm
+p-있다-reason	있다	X	-	-니까	있으니까	-	paradigm
+p-있다-hapsyo	있다	X	-	-습니다	있습니다	-	paradigm
+p-있다-adn	있다	X	-	-는	있는	-	paradigm
+p-있다-adnfut	있다	X	-	-ㄹ	있을	-	paradigm
+p-있다-haera	있다	X	-	-다	있다	-	paradigm
+p-있다-ne	있다	X	-	-네	있네	-	paradigm
+p-있다-seq	있다	X	-	-어서	있어서	-	paradigm
+p-있다-nom	있다	X	-	-ㅁ	있음	-	paradigm
+p-있다-haeyo	있다	X	-	-어요	있어요	-	paradigm
+p-없다-hae	없다	X	-	-어	없어	-	paradigm
+p-없다-past	없다	X	-	-었- -다	없었다	-	paradigm
+p-없다-cond	없다	X	-	-면	없으면	-	paradigm
+p-없다-reason	없다	X	-	-니까	없으니까	-	paradigm
+p-없다-hapsyo	없다	X	-	-습니다	없습니다	-	paradigm
+p-없다-adn	없다	X	-	-는	없는	-	paradigm
+p-없다-adnfut	없다	X	-	-ㄹ	없을	-	paradigm
+p-없다-haera	없다	X	-	-다	없다	-	paradigm
+p-없다-ne	없다	X	-	-네	없네	-	paradigm
+p-없다-seq	없다	X	-	-어서	없어서	-	paradigm
+p-없다-nom	없다	X	-	-ㅁ	없음	-	paradigm
+p-없다-haeyo	없다	X	-	-어요	없어요	-	paradigm
+p-재미있다-hae	재미있다	X	-	-어	재미있어	-	paradigm
+p-재미있다-past	재미있다	X	-	-었- -다	재미있었다	-	paradigm
+p-재미있다-cond	재미있다	X	-	-면	재미있으면	-	paradigm
+p-재미있다-reason	재미있다	X	-	-니까	재미있으니까	-	paradigm
+p-재미있다-hapsyo	재미있다	X	-	-습니다	재미있습니다	-	paradigm
+p-재미있다-adn	재미있다	X	-	-는	재미있는	-	paradigm
+p-재미있다-adnfut	재미있다	X	-	-ㄹ	재미있을	-	paradigm
+p-재미있다-haera	재미있다	X	-	-다	재미있다	-	paradigm
+p-재미있다-ne	재미있다	X	-	-네	재미있네	-	paradigm
+p-재미있다-seq	재미있다	X	-	-어서	재미있어서	-	paradigm
+p-재미있다-nom	재미있다	X	-	-ㅁ	재미있음	-	paradigm
+p-재미있다-haeyo	재미있다	X	-	-어요	재미있어요	-	paradigm
+p-맛없다-hae	맛없다	X	-	-어	맛없어	-	paradigm
+p-맛없다-past	맛없다	X	-	-었- -다	맛없었다	-	paradigm
+p-맛없다-cond	맛없다	X	-	-면	맛없으면	-	paradigm
+p-맛없다-reason	맛없다	X	-	-니까	맛없으니까	-	paradigm
+p-맛없다-hapsyo	맛없다	X	-	-습니다	맛없습니다	-	paradigm
+p-맛없다-adn	맛없다	X	-	-는	맛없는	-	paradigm
+p-맛없다-adnfut	맛없다	X	-	-ㄹ	맛없을	-	paradigm
+p-맛없다-haera	맛없다	X	-	-다	맛없다	-	paradigm
+p-맛없다-ne	맛없다	X	-	-네	맛없네	-	paradigm
+p-맛없다-seq	맛없다	X	-	-어서	맛없어서	-	paradigm
+p-맛없다-nom	맛없다	X	-	-ㅁ	맛없음	-	paradigm
+p-맛없다-haeyo	맛없다	X	-	-어요	맛없어요	-	paradigm
+p-이다-학생-hae	이다	C	COP	-어	학생이야	학생	paradigm
+p-이다-학생-past	이다	C	COP	-었- -다	학생이었다	학생	paradigm
+p-이다-학생-cond	이다	C	COP	-면	학생이면	학생	paradigm
+p-이다-학생-hapsyo	이다	C	COP	-습니다	학생입니다	학생	paradigm
+p-이다-학생-adn	이다	C	COP	-는	학생인	학생	paradigm
+p-이다-학생-adnfut	이다	C	COP	-ㄹ	학생일	학생	paradigm
+p-이다-학생-haera	이다	C	COP	-다	학생이다	학생	paradigm
+p-이다-학생-haeyo	이다	C	COP	-어요	학생이에요	학생	paradigm
+p-이다-학생-go	이다	C	COP	-고	학생이고	학생	paradigm
+p-이다-학생-seq	이다	C	COP	-어서	학생이라서	학생	paradigm
+p-이다-학생-reason	이다	C	COP	-니까	학생이니까	학생	paradigm
+p-이다-학생-quote	이다	C	COP	-다고	학생이라고	학생	paradigm
+p-이다-친구-hae	이다	C	COP	-어	친구야	친구	paradigm
+p-이다-친구-past	이다	C	COP	-었- -다	친구였다|친구이었다	친구	paradigm
+p-이다-친구-cond	이다	C	COP	-면	친구면|친구이면	친구	paradigm
+p-이다-친구-hapsyo	이다	C	COP	-습니다	친구입니다	친구	paradigm
+p-이다-친구-adn	이다	C	COP	-는	친구인	친구	paradigm
+p-이다-친구-adnfut	이다	C	COP	-ㄹ	친구일	친구	paradigm
+p-이다-친구-haera	이다	C	COP	-다	친구다|친구이다	친구	paradigm
+p-이다-친구-haeyo	이다	C	COP	-어요	친구예요	친구	paradigm
+p-이다-친구-go	이다	C	COP	-고	친구고|친구이고	친구	paradigm
+p-이다-친구-seq	이다	C	COP	-어서	친구라서	친구	paradigm
+p-이다-친구-reason	이다	C	COP	-니까	친구니까|친구이니까	친구	paradigm
+p-이다-친구-quote	이다	C	COP	-다고	친구라고	친구	paradigm
+p-이다-사과-hae	이다	C	COP	-어	사과야	사과	paradigm
+p-이다-사과-past	이다	C	COP	-었- -다	사과였다|사과이었다	사과	paradigm
+p-이다-사과-cond	이다	C	COP	-면	사과면|사과이면	사과	paradigm
+p-이다-사과-hapsyo	이다	C	COP	-습니다	사과입니다	사과	paradigm
+p-이다-사과-adn	이다	C	COP	-는	사과인	사과	paradigm
+p-이다-사과-adnfut	이다	C	COP	-ㄹ	사과일	사과	paradigm
+p-이다-사과-haera	이다	C	COP	-다	사과다|사과이다	사과	paradigm
+p-이다-사과-haeyo	이다	C	COP	-어요	사과예요	사과	paradigm
+p-이다-사과-go	이다	C	COP	-고	사과고|사과이고	사과	paradigm
+p-이다-사과-seq	이다	C	COP	-어서	사과라서	사과	paradigm
+p-이다-사과-reason	이다	C	COP	-니까	사과니까|사과이니까	사과	paradigm
+p-이다-사과-quote	이다	C	COP	-다고	사과라고	사과	paradigm
+p-이다-책-hae	이다	C	COP	-어	책이야	책	paradigm
+p-이다-책-past	이다	C	COP	-었- -다	책이었다	책	paradigm
+p-이다-책-cond	이다	C	COP	-면	책이면	책	paradigm
+p-이다-책-hapsyo	이다	C	COP	-습니다	책입니다	책	paradigm
+p-이다-책-adn	이다	C	COP	-는	책인	책	paradigm
+p-이다-책-adnfut	이다	C	COP	-ㄹ	책일	책	paradigm
+p-이다-책-haera	이다	C	COP	-다	책이다	책	paradigm
+p-이다-책-haeyo	이다	C	COP	-어요	책이에요	책	paradigm
+p-이다-책-go	이다	C	COP	-고	책이고	책	paradigm
+p-이다-책-seq	이다	C	COP	-어서	책이라서	책	paradigm
+p-이다-책-reason	이다	C	COP	-니까	책이니까	책	paradigm
+p-이다-책-quote	이다	C	COP	-다고	책이라고	책	paradigm
+p-이다-물-hae	이다	C	COP	-어	물이야	물	paradigm
+p-이다-물-past	이다	C	COP	-었- -다	물이었다	물	paradigm
+p-이다-물-cond	이다	C	COP	-면	물이면	물	paradigm
+p-이다-물-hapsyo	이다	C	COP	-습니다	물입니다	물	paradigm
+p-이다-물-adn	이다	C	COP	-는	물인	물	paradigm
+p-이다-물-adnfut	이다	C	COP	-ㄹ	물일	물	paradigm
+p-이다-물-haera	이다	C	COP	-다	물이다	물	paradigm
+p-이다-물-haeyo	이다	C	COP	-어요	물이에요	물	paradigm
+p-이다-물-go	이다	C	COP	-고	물이고	물	paradigm
+p-이다-물-seq	이다	C	COP	-어서	물이라서	물	paradigm
+p-이다-물-reason	이다	C	COP	-니까	물이니까	물	paradigm
+p-이다-물-quote	이다	C	COP	-다고	물이라고	물	paradigm
+p-이다-1-hae	이다	C	COP	-어	1이야	1	paradigm
+p-이다-1-past	이다	C	COP	-었- -다	1이었다	1	paradigm
+p-이다-1-cond	이다	C	COP	-면	1이면	1	paradigm
+p-이다-1-hapsyo	이다	C	COP	-습니다	1입니다	1	paradigm
+p-이다-1-adn	이다	C	COP	-는	1인	1	paradigm
+p-이다-1-adnfut	이다	C	COP	-ㄹ	1일	1	paradigm
+p-이다-1-haera	이다	C	COP	-다	1이다	1	paradigm
+p-이다-1-haeyo	이다	C	COP	-어요	1이에요	1	paradigm
+p-이다-1-go	이다	C	COP	-고	1이고	1	paradigm
+p-이다-1-seq	이다	C	COP	-어서	1이라서	1	paradigm
+p-이다-1-reason	이다	C	COP	-니까	1이니까	1	paradigm
+p-이다-1-quote	이다	C	COP	-다고	1이라고	1	paradigm
+p-이다-2-hae	이다	C	COP	-어	2야	2	paradigm
+p-이다-2-past	이다	C	COP	-었- -다	2였다|2이었다	2	paradigm
+p-이다-2-cond	이다	C	COP	-면	2면|2이면	2	paradigm
+p-이다-2-hapsyo	이다	C	COP	-습니다	2입니다	2	paradigm
+p-이다-2-adn	이다	C	COP	-는	2인	2	paradigm
+p-이다-2-adnfut	이다	C	COP	-ㄹ	2일	2	paradigm
+p-이다-2-haera	이다	C	COP	-다	2다|2이다	2	paradigm
+p-이다-2-haeyo	이다	C	COP	-어요	2예요	2	paradigm
+p-이다-2-go	이다	C	COP	-고	2고|2이고	2	paradigm
+p-이다-2-seq	이다	C	COP	-어서	2라서	2	paradigm
+p-이다-2-reason	이다	C	COP	-니까	2니까|2이니까	2	paradigm
+p-이다-2-quote	이다	C	COP	-다고	2라고	2	paradigm
+p-이다-PC-hae	이다	C	COP	-어	PC야	PC	paradigm
+p-이다-PC-past	이다	C	COP	-었- -다	PC였다|PC이었다	PC	paradigm
+p-이다-PC-cond	이다	C	COP	-면	PC면|PC이면	PC	paradigm
+p-이다-PC-hapsyo	이다	C	COP	-습니다	PC입니다	PC	paradigm
+p-이다-PC-adn	이다	C	COP	-는	PC인	PC	paradigm
+p-이다-PC-adnfut	이다	C	COP	-ㄹ	PC일	PC	paradigm
+p-이다-PC-haera	이다	C	COP	-다	PC다|PC이다	PC	paradigm
+p-이다-PC-haeyo	이다	C	COP	-어요	PC예요	PC	paradigm
+p-이다-PC-go	이다	C	COP	-고	PC고|PC이고	PC	paradigm
+p-이다-PC-seq	이다	C	COP	-어서	PC라서	PC	paradigm
+p-이다-PC-reason	이다	C	COP	-니까	PC니까|PC이니까	PC	paradigm
+p-이다-PC-quote	이다	C	COP	-다고	PC라고	PC	paradigm
+p-아니다-hae	아니다	N	NC	-어	아니야	-	paradigm
+p-아니다-past	아니다	N	NC	-었- -다	아니었다	-	paradigm
+p-아니다-haeyo	아니다	N	NC	-어요	아니에요	-	paradigm
+p-아니다-hapsyo	아니다	N	NC	-습니다	아닙니다	-	paradigm
+p-아니다-adn	아니다	N	NC	-는	아닌	-	paradigm
+p-아니다-haera	아니다	N	NC	-다	아니다	-	paradigm
+p-아니다-cond	아니다	N	NC	-면	아니면	-	paradigm
+p-아니다-go	아니다	N	NC	-고	아니고	-	paradigm
+p-아니다-quote	아니다	N	NC	-다고	아니라고	-	paradigm
+p-아니다-seq	아니다	N	NC	-어서	아니라서	-	paradigm
+r-0001	뛰다	V	-	잖아	뛰잖아	-	ref-dev
+r-0002	증명하다	V	-	어	증명해	-	ref-dev
+r-0003	이다	C	COP	네	적중이네	적중	ref-dev
+r-0004	빨다	V	-	는다/ㄴ다	빤다	-	ref-dev
+r-0005	포기하다	V	-	(으)ㄹ	포기할	-	ref-dev
+r-0006	평가하다	V	-	(으)ㄹ	평가할	-	ref-dev
+r-0007	울다	V	-	-었- 다	울었다	-	ref-dev
+r-0008	이다	C	COP	라	의뢰라	의뢰	ref-dev
+r-0009	남다	V	-	-었- 고	남았고	-	ref-dev
+r-0010	거칠다	A	-	게	거칠게	-	ref-dev
+r-0011	몰리다	V	-	고	몰리고	-	ref-dev
+r-0012	기재되다	V	-	(으)ㄴ	기재된	-	ref-dev
+r-0013	졸다	V	-	(으)면	졸면	-	ref-dev
+r-0014	경영하다	V	-	는	경영하는	-	ref-dev
+r-0015	이다	C	COP	-었- 다	컵이었다	컵	ref-dev
+r-0016	노리다	V	-	고	노리고	-	ref-dev
+r-0017	이다	C	COP	잖아	특기잖아	특기	ref-dev
+r-0018	막히다	V	-	네	막히네	-	ref-dev
+r-0019	떨어지다	V	-	-겠- 어	떨어지겠어	-	ref-dev
+r-0020	뒤척이다	V	-	-었- 다	뒤척였다	-	ref-dev
+r-0021	이다	C	COP	네	수치네	수치	ref-dev
+r-0022	이다	C	COP	다	부족이다	부족	ref-dev
+r-0023	이다	C	COP	라며	나무아미타불이라며	나무아미타불	ref-dev
+r-0024	이다	C	COP	고	수수께끼고	수수께끼	ref-dev
+r-0025	기묘하다	A	-	(으)ㄴ	기묘한	-	ref-dev
+r-0026	지우다	V	-	-었- 어	지웠어	-	ref-dev
+r-0027	헤아리다	V	-	어	헤아려	-	ref-dev
+r-0028	있다	X	-	나	있나	-	ref-dev
+r-0029	경련하다	V	-	-었- 다	경련했다	-	ref-dev
+r-0030	달아나다	V	-	-었- 다	달아났다	-	ref-dev
+r-0031	흘려듣다	V	-	듯	흘려듣듯	-	ref-dev
+r-0032	파헤치다	V	-	려	파헤치려	-	ref-dev
+r-0033	하다	V	-	-었- 더니	했더니	-	ref-dev
+r-0034	익숙하다	A	-	어서	익숙해서	-	ref-dev
+r-0035	주다	-	-	-겠- 다는	주겠다는	-	ref-dev
+r-0036	유린하다	V	-	고	유린하고	-	ref-dev
+r-0037	기다리다	V	-	(으)ㄹ게요	기다릴게요	-	ref-dev
+r-0038	흘리다	V	-	(으)ㄹ	흘릴	-	ref-dev
+r-0039	붙이다	V	-	-었- 다	붙였다	-	ref-dev
+r-0040	이다	C	COP	군	과자군	과자	ref-dev
+r-0041	이다	C	COP	라고	걱정이라고	걱정	ref-dev
+r-0042	달리다	V	-	는다/ㄴ다	달린다	-	ref-dev
+r-0043	떨치다	V	-	(으)ㄹ	떨칠	-	ref-dev
+r-0044	이다	C	COP	라고	불가라고	불가	ref-dev
+r-0045	저릿하다	A	-	(으)ㄴ	저릿한	-	ref-dev
+r-0046	달아나다	V	-	(으)ㄴ	달아난	-	ref-dev
+r-0047	파랗다	A	-	다	파랗다	-	ref-dev
+r-0048	이다	C	COP	(으)ㄴ데	레임덕인데	레임덕	ref-dev
+r-0049	남다	V	-	(으)ㄹ	남을	-	ref-dev
+r-0050	해석하다	V	-	는구나	해석하는구나	-	ref-dev
+r-0051	괜찮다	A	-	나요	괜찮나요	-	ref-dev
+r-0052	파악하다	V	-	-었- 는지	파악했는지	-	ref-dev
+r-0053	내다	V	-	(으)면	내면	-	ref-dev
+r-0054	이다	C	COP	네	실격이네	실격	ref-dev
+r-0055	쿠키답다	A	-	(으)ㄴ	쿠키다운	-	ref-dev
+r-0056	하다	V	-	(으)ㄹ게요	할게요	-	ref-dev
+r-0057	떨리다	V	-	는다/ㄴ다	떨린다	-	ref-dev
+r-0058	내뱉다	V	-	고	내뱉고	-	ref-dev
+r-0059	죽다	V	-	게	죽게	-	ref-dev
+r-0060	좋아하다	V	-	(으)면서	좋아하면서	-	ref-dev
+r-0061	나다	V	-	지만	나지만	-	ref-dev
+r-0062	이다	C	COP	-었- 네	거였네	거	ref-dev
+r-0063	비싸다	A	-	어요	비싸요	-	ref-dev
+r-0064	시작하다	V	-	-었- 어	시작했어	-	ref-dev
+r-0065	몰아쉬다	V	-	(으)며	몰아쉬며	-	ref-dev
+r-0066	괜찮다	A	-	다면	괜찮다면	-	ref-dev
+r-0067	피곤하다	A	-	-겠- 지	피곤하겠지	-	ref-dev
+r-0068	먹다	V	-	-었- (으)니까	먹었으니까	-	ref-dev
+r-0069	이다	C	COP	니	내신이니	내신	ref-dev
+r-0070	이다	C	COP	잖아	때문이잖아	때문	ref-dev
+r-0071	스며들다	V	-	-었- 다	스며들었다	-	ref-dev
+r-0072	감사하다	A	-	게	감사하게	-	ref-dev
+r-0073	듣다	V	-	-었- 구나	들었구나	-	ref-dev
+r-0074	있다	X	-	거든	있거든	-	ref-dev
+r-0075	이다	C	COP	-었- 어	검도였어	검도	ref-dev
+r-0076	이다	C	COP	든지	뭐든지	뭐	ref-dev
+r-0077	이다	C	COP	지	힘이지	힘	ref-dev
+r-0078	소속되다	V	-	(으)ㄴ	소속된	-	ref-dev
+r-0079	이다	C	COP	(으)니까	얘기니까	얘기	ref-dev
+r-0080	훑다	V	-	-었- 다	훑었다	-	ref-dev
+r-0081	자랑하다	V	-	지	자랑하지	-	ref-dev
+r-0082	쉬다	V	-	지	쉬지	-	ref-dev
+r-0083	성실하다	A	-	고	성실하고	-	ref-dev
+r-0084	부추기다	V	-	(으)ㄴ	부추긴	-	ref-dev
+r-0085	찾아다니다	V	-	-었- 잖아	찾아다녔잖아	-	ref-dev
+r-0086	간지럽히다	V	-	어	간지럽혀	-	ref-dev
+r-0087	해설하다	V	-	지	해설하지	-	ref-dev
+r-0088	대단하다	A	-	지	대단하지	-	ref-dev
+r-0089	걸어오다	V	-	-었- 다	걸어왔다	-	ref-dev
+r-0090	이다	C	COP	(으)ㄹ	한계일	한계	ref-dev
+r-0091	높다	A	-	어서	높아서	-	ref-dev
+r-0092	이다	C	COP	니까요	녀석이니까요	녀석	ref-dev
+r-0093	괜찮다	A	-	나	괜찮나	-	ref-dev
+r-0094	좋다	A	-	고	좋고	-	ref-dev
+r-0095	이다	C	COP	라도	불꽃놀이라도	불꽃놀이	ref-dev
+r-0096	싶다	-	-	다면	싶다면	-	ref-dev
+r-0097	헐뜯다	V	-	는	헐뜯는	-	ref-dev
+r-0098	지내다	V	-	는지	지내는지	-	ref-dev
+r-0099	정하다	V	-	어야	정해야	-	ref-dev
+r-0100	판정되다	V	-	-었- (으)ㄹ	판정됐을	-	ref-dev
+r-0101	막다	V	-	기	막기	-	ref-dev
+r-0102	진행하다	V	-	(으)ㄹ	진행할	-	ref-dev
+r-0103	가라앉다	V	-	는다고/ㄴ다고	가라앉는다고	-	ref-dev
+r-0104	이다	C	COP	라고	해킹이라고	해킹	ref-dev
+r-0105	그렇다	A	-	어	그래	-	ref-dev
+r-0106	같다	A	-	거든	같거든	-	ref-dev
+r-0107	밟히다	V	-	어	밟혀	-	ref-dev
+r-0108	이다	C	COP	라는	생활이라는	생활	ref-dev
+r-0109	잃다	V	-	고	잃고	-	ref-dev
+r-0110	원하다	V	-	거나	원하거나	-	ref-dev
+r-0111	예쁘다	A	-	-었- (으)니까	예뻤으니까	-	ref-dev
+r-0112	황홀하다	A	-	(으)ㄴ	황홀한	-	ref-dev
+r-0113	잇다	V	-	지	잇지	-	ref-dev
+r-0114	이다	C	COP	라도	꿈이라도	꿈	ref-dev
+r-0115	혼란스럽다	A	-	-었- 다	혼란스러웠다	-	ref-dev
+r-0116	이다	C	COP	-었- 네	걱정이었네	걱정	ref-dev
+r-0117	약하다	A	-	고	약하고	-	ref-dev
+r-0118	시작하다	V	-	(으)ㄹ게요	시작할게요	-	ref-dev
+r-0119	대단하다	A	-	지만	대단하지만	-	ref-dev
+r-0120	지다	V	-	게	지게	-	ref-dev
+r-0121	오다	V	-	자	오자	-	ref-dev
+r-0122	실례하다	V	-	습니다/ㅂ니다	실례합니다	-	ref-dev
+r-0123	이다	C	COP	-었- 어	블랙이었어	블랙	ref-dev
+r-0124	바뀌다	V	-	려나	바뀌려나	-	ref-dev
+r-0125	신기하다	A	-	어	신기해	-	ref-dev
+r-0126	이다	C	COP	(으)ㄴ데	정도인데	정도	ref-dev
+r-0127	올리다	V	-	어도	올려도	-	ref-dev
+r-0128	돌리다	V	-	는	돌리는	-	ref-dev
+r-0129	말씀하다	V	-	지	말씀하지	-	ref-dev
+r-0130	이다	C	COP	(으)면	길이면	길	ref-dev
+r-0131	있다	X	-	(으)ㄹ	있을	-	ref-dev
+r-0132	숨기다	V	-	는	숨기는	-	ref-dev
+r-0133	돌아가다	V	-	어서	돌아가서	-	ref-dev
+r-0134	빼다	V	-	는	빼는	-	ref-dev
+r-0135	가능하다	A	-	(으)면	가능하면	-	ref-dev
+r-0136	만나다	V	-	는	만나는	-	ref-dev
+r-0137	알아보다	V	-	-었- 어	알아봤어	-	ref-dev
+r-0138	맞다	V	-	는다/ㄴ다	맞는다	-	ref-dev
+r-0139	뻔하다	A	-	(으)니까	뻔하니까	-	ref-dev
+r-0140	미끄러뜨리다	V	-	는다/ㄴ다	미끄러뜨린다	-	ref-dev
+r-0141	이다	C	COP	라니까	포케라이스라니까	포케라이스	ref-dev
+r-0142	그만두다	V	-	게	그만두게	-	ref-dev
+r-0143	시작되다	V	-	기	시작되기	-	ref-dev
+r-0144	생각하다	V	-	는지	생각하는지	-	ref-dev
+r-0145	고맙다	A	-	게	고맙게	-	ref-dev
+r-0146	가져오다	V	-	(으)ㄹ까요	가져올까요	-	ref-dev
+r-0147	치켜들다	V	-	는다/ㄴ다	치켜든다	-	ref-dev
+r-0148	있다	X	-	구나	있구나	-	ref-dev
+r-0149	없다	X	-	(으)ㅁ	없음	-	ref-dev
+r-0151	적다	V	-	-었- 다	적었다	-	ref-dev
+r-0152	이다	C	COP	라	학원장이라	학원장	ref-dev
+r-0153	이다	C	COP	(으)ㄹ	부분일	부분	ref-dev
+r-0154	있다	X	-	-었- (으)니	있었으니	-	ref-dev
+r-0155	핥다	V	-	기	핥기	-	ref-dev
+r-0156	부끄럽다	A	-	어	부끄러워	-	ref-dev
+r-0157	사납다	A	-	(으)ㄴ	사나운	-	ref-dev
+r-0158	묻어나다	V	-	는	묻어나는	-	ref-dev
+r-0159	엿듣다	V	-	-었- 나	엿들었나	-	ref-dev
+r-0160	얻어맞다	V	-	고	얻어맞고	-	ref-dev
+r-0161	마시다	V	-	(으)ㄹ게요	마실게요	-	ref-dev
+r-0162	뒤집어쓰다	V	-	어도	뒤집어써도	-	ref-dev
+r-0163	이다	C	COP	라는	스즈키라는	스즈키	ref-dev
+r-0164	번거롭다	A	-	(으)ㄴ	번거로운	-	ref-dev
+r-0165	이다	C	COP	(으)니까	역할이니까	역할	ref-dev
+r-0166	불쾌하다	A	-	(으)ㄴ	불쾌한	-	ref-dev
+r-0167	그러다	V	-	(으)니까	그러니까	-	ref-dev
+r-0168	이다	C	COP	(으)ㄴ가요	제로인가요	제로	ref-dev
+r-0169	내리다	V	-	어서	내려서	-	ref-dev
+r-0170	이다	C	COP	지	때문이지	때문	ref-dev
+r-0171	이다	C	COP	야	직전이야	직전	ref-dev
+r-0172	파다	V	-	는	파는	-	ref-dev
+r-0173	관람하다	V	-	는	관람하는	-	ref-dev
+r-0174	찌르다	V	-	-겠- 습니다/ㅂ니다	찌르겠습니다	-	ref-dev
+r-0175	이다	C	COP	든	위선이든	위선	ref-dev
+r-0176	이다	C	COP	잖아	현실이잖아	현실	ref-dev
+r-0177	놀라다	V	-	-었- 는지	놀랐는지	-	ref-dev
+r-0178	이다	C	COP	(으)ㄴ	한계인	한계	ref-dev
+r-0179	쌓이다	V	-	어	쌓여	-	ref-dev
+r-0180	지껄이다	V	-	는다/ㄴ다	지껄인다	-	ref-dev
+r-0181	들다	V	-	(으)ㄴ단	든단	-	ref-dev
+r-0182	돌다	V	-	(으)ㄹ	돌	-	ref-dev
+r-0183	그렇다	A	-	지만요	그렇지만요	-	ref-dev
+r-0184	이다	C	COP	(으)ㄴ가	고장인가	고장	ref-dev
+r-0185	존재하다	V	-	는	존재하는	-	ref-dev
+r-0186	이다	C	COP	(으)ㄹ	일일	일	ref-dev
+r-0187	지나다	V	-	-겠- 어요	지나겠어요	-	ref-dev
+r-0188	이다	C	COP	다	이벤트다	이벤트	ref-dev
+r-0189	세다	A	-	네	세네	-	ref-dev
+r-0190	먹다	V	-	(으)려고	먹으려고	-	ref-dev
+r-0191	끌어들이다	V	-	-었- 다	끌어들였다	-	ref-dev
+r-0192	대전하다	V	-	(으)ㄹ	대전할	-	ref-dev
+r-0193	제거하다	V	-	-겠- 습니다/ㅂ니다	제거하겠습니다	-	ref-dev
+r-0194	전하다	V	-	지만	전하지만	-	ref-dev
+r-0195	같다	A	-	-겠- 지	같겠지	-	ref-dev
+r-0196	기대다	V	-	도록	기대도록	-	ref-dev
+r-0197	이다	C	COP	에요	이거예요	이거	ref-dev
+r-0198	나가다	-	-	-겠- 다고	나가겠다고	-	ref-dev
+r-0199	이다	C	COP	(으)ㄹ	사례일	사례	ref-dev
+r-0200	우려하다	V	-	고	우려하고	-	ref-dev
+r-0201	시작하다	V	-	(으)ㄴ	시작한	-	ref-dev
+r-0202	거짓말하다	V	-	-었- 어	거짓말했어	-	ref-dev
+r-0203	이다	C	COP	라니	평화라니	평화	ref-dev
+r-0204	씻다	V	-	-겠- 나	씻겠나	-	ref-dev
+r-0205	꾸다	V	-	(으)ㄹ	꿀	-	ref-dev
+r-0206	진입하다	V	-	어	진입해	-	ref-dev
+r-0207	선택하다	V	-	-었- 느냐는	선택했느냐는	-	ref-dev
+r-0208	어떻다	A	-	(으)ㄴ가요	어떤가요	-	ref-dev
+r-0209	사무치다	V	-	는다/ㄴ다	사무친다	-	ref-dev
+r-0210	노력하다	V	-	(으)ㄹ게	노력할게	-	ref-dev
+r-0211	굉장하다	A	-	다	굉장하다	-	ref-dev
+r-0212	손꼽히다	V	-	는	손꼽히는	-	ref-dev
+r-0213	냉혹하다	A	-	(으)ㄴ	냉혹한	-	ref-dev
+r-0214	가다	V	-	-었- 습니다/ㅂ니다	갔습니다	-	ref-dev
+r-0215	그렇다	A	-	어서	그래서	-	ref-dev
+r-0216	바람직하다	A	-	(으)ㄴ	바람직한	-	ref-dev
+r-0217	이다	C	COP	습니다/ㅂ니다	눈입니다	눈	ref-dev
+r-0218	쓰다	V	-	느라	쓰느라	-	ref-dev
+r-0219	쓰다	V	-	-었- 다는	썼다는	-	ref-dev
+r-0220	따르다	V	-	(으)ㄹ게	따를게	-	ref-dev
+r-0221	기특하다	A	-	(으)ㄴ	기특한	-	ref-dev
+r-0222	들려오다	V	-	(으)ㄹ	들려올	-	ref-dev
+r-0223	돌아오다	V	-	-었- 다는	돌아왔다는	-	ref-dev
+r-0224	이루어지다	V	-	지	이루어지지	-	ref-dev
+r-0225	쌓다	V	-	는	쌓는	-	ref-dev
+r-0226	겁먹다	V	-	(으)ㄴ	겁먹은	-	ref-dev
+r-0227	가다	V	-	-었- 나	갔나	-	ref-dev
+r-0228	오다	V	-	-었었- 나	왔었나	-	ref-dev
+r-0229	참다	V	-	-겠- 어요	참겠어요	-	ref-dev
+r-0230	이다	C	COP	든	무엇이든	무엇	ref-dev
+r-0231	이다	C	COP	라도	조금이라도	조금	ref-dev
+r-0232	엎드리다	V	-	(으)ㅁ	엎드림	-	ref-dev
+r-0233	차오르다	V	-	-었- 다	차올랐다	-	ref-dev
+r-0234	전하다	V	-	(으)ㄹ까	전할까	-	ref-dev
+r-0235	뜻하다	V	-	는지	뜻하는지	-	ref-dev
+r-0236	모르다	V	-	-었- -겠- 네요	몰랐겠네요	-	ref-dev
+r-0237	이다	C	COP	야	제정신이야	제정신	ref-dev
+r-0238	엄격하다	A	-	-었- 다	엄격했다	-	ref-dev
+r-0239	파괴하다	V	-	-었- 고	파괴했고	-	ref-dev
+r-0240	이다	C	COP	(으)니까	겨울이니까	겨울	ref-dev
+r-0241	젖다	V	-	어	젖어	-	ref-dev
+r-0242	빠져나가다	V	-	는	빠져나가는	-	ref-dev
+r-0243	내려오다	V	-	(으)ㄹ	내려올	-	ref-dev
+r-0244	이다	C	COP	라	주인공이라	주인공	ref-dev
+r-0245	넘겨주다	V	-	(으)ㄹ	넘겨줄	-	ref-dev
+r-0246	열다	V	-	(으)면	열면	-	ref-dev
+r-0247	명령하다	V	-	(으)ㄹ	명령할	-	ref-dev
+r-0248	짓누르다	V	-	는	짓누르는	-	ref-dev
+r-0249	깨다	V	-	는	깨는	-	ref-dev
+r-0250	오다	V	-	-었- 던	왔던	-	ref-dev
+r-0251	버티다	V	-	고	버티고	-	ref-dev
+r-0252	되찾다	V	-	-었- 다	되찾았다	-	ref-dev
+r-0253	즐겁다	A	-	-었- 지만	즐거웠지만	-	ref-dev
+r-0254	일어서다	V	-	려는	일어서려는	-	ref-dev
+r-0255	되다	V	-	(으)ㄴ다면	된다면	-	ref-dev
+r-0256	싱겁다	A	-	(으)ㄴ	싱거운	-	ref-dev
+r-0257	차지하다	V	-	(으)ㄴ	차지한	-	ref-dev
+r-0258	기대하다	V	-	는다는/ㄴ다는	기대한다는	-	ref-dev
+r-0259	빌어먹다	V	-	(으)ㄹ	빌어먹을	-	ref-dev
+r-0260	되다	V	-	-겠- 네	되겠네	-	ref-dev
+r-0261	이다	C	COP	지	엄마지	엄마	ref-dev
+r-0262	서먹하다	A	-	-었- 던	서먹했던	-	ref-dev
+r-0263	귀엽다	A	-	다니까	귀엽다니까	-	ref-dev
+r-0264	물려받다	V	-	(으)ㄹ	물려받을	-	ref-dev
+r-0265	하다	V	-	고요	하고요	-	ref-dev
+r-0266	불러내다	V	-	어서	불러내서	-	ref-dev
+r-0267	시도하다	V	-	-었- 고	시도했고	-	ref-dev
+r-0268	옳다	A	-	지	옳지	-	ref-dev
+r-0269	손대다	V	-	는	손대는	-	ref-dev
+r-0270	귀찮다	A	-	네	귀찮네	-	ref-dev
+r-0271	곤란하다	A	-	군	곤란하군	-	ref-dev
+r-0272	이다	C	COP	(으)ㄴ	문제인	문제	ref-dev
+r-0273	연주하다	V	-	는다/ㄴ다	연주한다	-	ref-dev
+r-0274	둘러보다	V	-	-었- 다	둘러봤다	-	ref-dev
+r-0275	단순하다	A	-	(으)ㄴ	단순한	-	ref-dev
+r-0276	뛰다	V	-	어서	뛰어서	-	ref-dev
+r-0277	이다	C	COP	-었- 다	기우였다	기우	ref-dev
+r-0278	보충하다	V	-	는	보충하는	-	ref-dev
+r-0279	잊다	V	-	기	잊기	-	ref-dev
+r-0280	아프다	A	-	-었- 지만	아팠지만	-	ref-dev
+r-0281	궁금하다	A	-	-었- 지만	궁금했지만	-	ref-dev
+r-0282	이다	C	COP	(으)ㄴ지	모습인지	모습	ref-dev
+r-0283	되다	V	-	는대/ㄴ대	된대	-	ref-dev
+r-0284	이다	C	COP	라고	소리라고	소리	ref-dev
+r-0285	쓰다	V	-	(으)러	쓰러	-	ref-dev
+r-0286	흔들리다	V	-	어	흔들려	-	ref-dev
+r-0287	지당하다	A	-	(으)ㄴ	지당한	-	ref-dev
+r-0288	소리치다	V	-	고	소리치고	-	ref-dev
+r-0289	손상하다	V	-	지	손상하지	-	ref-dev
+r-0290	공부하다	V	-	는	공부하는	-	ref-dev
+r-0291	곁들이다	V	-	(으)ㄴ	곁들인	-	ref-dev
+r-0292	이다	C	COP	(으)니까	나니까	나	ref-dev
+r-0293	보다	-	-	(으)ㄴ데	본데	-	ref-dev
+r-0294	날뛰다	V	-	는	날뛰는	-	ref-dev
+r-0295	하다	V	-	(으)ㄹ래	할래	-	ref-dev
+r-0296	닿다	V	-	고	닿고	-	ref-dev
+r-0297	유명하다	A	-	잖아	유명하잖아	-	ref-dev
+r-0298	이다	C	COP	습니다/ㅂ니다	작별입니다	작별	ref-dev
+r-0299	이다	C	COP	구먼	커플이구먼	커플	ref-dev
+r-0300	작다	A	-	(으)면	작으면	-	ref-dev
+r-0301	뻗다	V	-	-었- 다가	뻗었다가	-	ref-dev
+r-0302	무섭다	A	-	(으)니까	무서우니까	-	ref-dev
+r-0303	준비하다	V	-	려면	준비하려면	-	ref-dev
+r-0304	주다	-	-	-었- 지	줬지	-	ref-dev
+r-0305	이다	C	COP	야	자매야	자매	ref-dev
+r-0306	무르다	V	-	어	물러	-	ref-dev
+r-0307	녹아들다	V	-	고	녹아들고	-	ref-dev
+r-0308	기다리다	V	-	-었- 다가	기다렸다가	-	ref-dev
+r-0309	시작하다	V	-	(으)ㄹ게	시작할게	-	ref-dev
+r-0310	이다	C	COP	(으)ㄴ가	사람인가	사람	ref-dev
+r-0311	이다	C	COP	-었- 다	어릿광대였다	어릿광대	ref-dev
+r-0312	들다	V	-	-었- (으)면	들었으면	-	ref-dev
+r-0313	건너오다	V	-	(으)ㄴ	건너온	-	ref-dev
+r-0314	부수다	V	-	는	부수는	-	ref-dev
+r-0315	개혁하다	V	-	(으)ㄹ	개혁할	-	ref-dev
+r-0316	이다	C	COP	니	입시니	입시	ref-dev
+r-0317	비교하다	V	-	어도	비교해도	-	ref-dev
+r-0318	찍다	V	-	(으)ㄴ	찍은	-	ref-dev
+r-0319	이다	C	COP	야	것이야	것	ref-dev
+r-0320	그러다	V	-	(으)ㄴ	그런	-	ref-dev
+r-0321	늘어뜨리다	V	-	고	늘어뜨리고	-	ref-dev
+r-0322	건드리다	V	-	(으)ㄹ	건드릴	-	ref-dev
+r-0323	이다	C	COP	-었- 지만	알이었지만	알	ref-dev
+r-0324	요청하다	V	-	어	요청해	-	ref-dev
+r-0325	지적하다	V	-	(으)면	지적하면	-	ref-dev
+r-0326	샤워하다	V	-	어야 -겠- 군	샤워해야겠군	-	ref-dev
+r-0327	꼬다	V	-	고	꼬고	-	ref-dev
+r-0328	이다	C	COP	-겠- 지	인연이겠지	인연	ref-dev
+r-0329	오다	V	-	(으)ㄴ다면	온다면	-	ref-dev
+r-0331	바라보다	V	-	(으)며	바라보며	-	ref-dev
+r-0332	희망하다	V	-	(으)ㄹ	희망할	-	ref-dev
+r-0333	모르다	V	-	는구나	모르는구나	-	ref-dev
+r-0334	시작하다	V	-	어도	시작해도	-	ref-dev
+r-0335	공부하다	V	-	어	공부해	-	ref-dev
+r-0336	이다	C	COP	(으)ㄴ가	이야기인가	이야기	ref-dev
+r-0337	이다	C	COP	-었- (으)니까	취재였으니까	취재	ref-dev
+r-0338	말하다	V	-	려	말하려	-	ref-dev
+r-0339	기쁘다	A	-	-었- 지만	기뻤지만	-	ref-dev
+r-0340	않다	-	-	-었- 습니다/ㅂ니다	않았습니다	-	ref-dev
+r-0341	미지근하다	A	-	-었- 다	미지근했다	-	ref-dev
+r-0342	태우다	V	-	고	태우고	-	ref-dev
+r-0343	알다	V	-	-었- 냐고	알았냐고	-	ref-dev
+r-0344	이다	C	COP	(으)ㄴ가	명인가	명	ref-dev
+r-0345	이다	C	COP	든	실험이든	실험	ref-dev
+r-0346	체념하다	V	-	(으)ㄴ	체념한	-	ref-dev
+r-0347	젖혀지다	V	-	고	젖혀지고	-	ref-dev
+r-0348	해치우다	V	-	(으)ㄹ	해치울	-	ref-dev
+r-0349	방해하다	V	-	어서	방해해서	-	ref-dev
+r-0350	주다	-	-	듯	주듯	-	ref-dev
+r-0351	치유되다	V	-	(으)면	치유되면	-	ref-dev
+r-0352	부정하다	V	-	는	부정하는	-	ref-dev
+r-0353	이다	C	COP	라면	저격수라면	저격수	ref-dev
+r-0354	고르다	V	-	는	고르는	-	ref-dev
+r-0355	이다	C	COP	다	저격수다	저격수	ref-dev
+r-0356	이다	C	COP	-었- (으)면	선배였으면	선배	ref-dev
+r-0357	얻어먹다	V	-	(으)ㄴ	얻어먹은	-	ref-dev
+r-0358	노출되다	V	-	(으)ㄴ	노출된	-	ref-dev
+r-0359	바쁘다	A	-	고	바쁘고	-	ref-dev
+r-0360	주다	-	-	(으)며	주며	-	ref-dev
+r-0361	아름답다	A	-	(으)ㄴ	아름다운	-	ref-dev
+r-0362	쳐다보다	V	-	고	쳐다보고	-	ref-dev
+r-0363	묻다	V	-	-었- 더니	물었더니	-	ref-dev
+r-0364	받다	V	-	-었- 는걸	받았는걸	-	ref-dev
+r-0365	관리하다	V	-	는	관리하는	-	ref-dev
+r-0366	있다	X	-	어야 -겠- 다	있어야겠다	-	ref-dev
+r-0367	이다	C	COP	(으)ㄹ지라도	하나일지라도	하나	ref-dev
+r-0368	이다	C	COP	야	때야	때	ref-dev
+r-0369	성스럽다	A	-	어서	성스러워서	-	ref-dev
+r-0370	상의하다	V	-	-었- 구나	상의했구나	-	ref-dev
+r-0371	이다	C	COP	-었- 는지	계기였는지	계기	ref-dev
+r-0372	만나다	V	-	(으)면	만나면	-	ref-dev
+r-0373	말리다	V	-	는	말리는	-	ref-dev
+r-0374	시작되다	V	-	어도	시작돼도	-	ref-dev
+r-0375	삽입하다	V	-	는다/ㄴ다	삽입한다	-	ref-dev
+r-0376	호소하다	V	-	(으)면	호소하면	-	ref-dev
+r-0377	잠기다	V	-	(으)ㄴ	잠긴	-	ref-dev
+r-0378	초마이너하다	A	-	(으)ㄴ	초마이너한	-	ref-dev
+r-0379	떫다	A	-	(으)ㄴ	떫은	-	ref-dev
+r-0380	이다	C	COP	니까요	승부니까요	승부	ref-dev
+r-0381	부럽다	A	-	잖아	부럽잖아	-	ref-dev
+r-0382	준비하다	V	-	-었- 나	준비했나	-	ref-dev
+r-0383	리필하다	V	-	(으)ㄴ	리필한	-	ref-dev
+r-0384	잡다	V	-	(으)며	잡으며	-	ref-dev
+r-0385	받다	V	-	(으)며	받으며	-	ref-dev
+r-0386	판매하다	V	-	는다/ㄴ다	판매한다	-	ref-dev
+r-0387	들다	V	-	는다/ㄴ다	든다	-	ref-dev
+r-0388	깨우다	V	-	(으)ㄴ	깨운	-	ref-dev
+r-0389	어른답다	A	-	지	어른답지	-	ref-dev
+r-0390	기특하다	A	-	다는	기특하다는	-	ref-dev
+r-0391	되다	V	-	-었- 나	됐나	-	ref-dev
+r-0392	다녀오다	V	-	어	다녀와	-	ref-dev
+r-0393	많다	A	-	어도	많아도	-	ref-dev
+r-0394	놓다	-	-	더라도	놓더라도	-	ref-dev
+r-0395	깨지다	V	-	-었- 냐	깨졌냐	-	ref-dev
+r-0396	이다	C	COP	다	부실이다	부실	ref-dev
+r-0397	사양하다	V	-	-었- 지만	사양했지만	-	ref-dev
+r-0398	내다	V	-	-었- 다고	냈다고	-	ref-dev
+r-0399	실례하다	V	-	-겠- 습니다/ㅂ니다	실례하겠습니다	-	ref-dev
+r-0400	그리다	V	-	-었- 다는	그렸다는	-	ref-dev
+r-0401	숱하다	A	-	게	숱하게	-	ref-dev
+r-0402	하다	V	-	(으)세요	하세요	-	ref-dev
+r-0403	생각하다	V	-	(으)며	생각하며	-	ref-dev
+r-0404	이다	C	COP	-었- 고	팬이었고	팬	ref-dev
+r-0405	두르다	V	-	-었- 다	둘렀다	-	ref-dev
+r-0406	퍼붓다	V	-	어	퍼부어	-	ref-dev
+r-0407	이다	C	COP	잖아	꿈이잖아	꿈	ref-dev
+r-0408	만족하다	A	-	-(으)시- (으)ㄹ	만족하실	-	ref-dev
+r-0409	그렇다	A	-	기에	그렇기에	-	ref-dev
+r-0410	섹스하다	V	-	(으)ㄹ	섹스할	-	ref-dev
+r-0411	조이다	V	-	(으)ㅁ	조임	-	ref-dev
+r-0412	쓰다	V	-	-었- 지	썼지	-	ref-dev
+r-0413	이다	C	COP	(으)ㄴ	소속인	소속	ref-dev
+r-0414	체포하다	V	-	어	체포해	-	ref-dev
+r-0415	고르다	V	-	(으)ㄴ	고른	-	ref-dev
+r-0416	조심하다	V	-	-었- (으)면	조심했으면	-	ref-dev
+r-0417	발견하다	V	-	(으)ㄴ	발견한	-	ref-dev
+r-0418	처리하다	V	-	(으)ㄹ	처리할	-	ref-dev
+r-0419	깨어나다	V	-	(으)ㄹ	깨어날	-	ref-dev
+r-0420	이다	C	COP	다	가격이다	가격	ref-dev
+r-0421	이다	C	COP	습니다/ㅂ니다	시민입니다	시민	ref-dev
+r-0422	돌리다	V	-	(으)ㄴ다면	돌린다면	-	ref-dev
+r-0423	두다	-	-	는	두는	-	ref-dev
+r-0424	지지하다	V	-	어	지지해	-	ref-dev
+r-0425	이다	C	COP	(으)ㄴ	현실인	현실	ref-dev
+r-0426	쓰다	V	-	기	쓰기	-	ref-dev
+r-0427	이다	C	COP	야	금지야	금지	ref-dev
+r-0428	불안하다	A	-	-었- 어	불안했어	-	ref-dev
+r-0429	올려다보다	V	-	는	올려다보는	-	ref-dev
+r-0430	보다	-	-	(으)ㄹ게	볼게	-	ref-dev
+r-0431	이다	C	COP	고	큰일이고	큰일	ref-dev
+r-0432	넘다	V	-	기	넘기	-	ref-dev
+r-0433	않다	-	-	는데	않는데	-	ref-dev
+r-0434	감추다	V	-	듯	감추듯	-	ref-dev
+r-0435	부르다	V	-	-(으)시- -었- 어요	부르셨어요	-	ref-dev
+r-0436	이다	C	COP	라	기라	기	ref-dev
+r-0437	더듬다	V	-	자	더듬자	-	ref-dev
+r-0438	단련되다	V	-	-었- 는지	단련됐는지	-	ref-dev
+r-0439	치솟다	V	-	(으)ㄴ	치솟은	-	ref-dev
+r-0440	비추다	V	-	-었- 지만	비췄지만	-	ref-dev
+r-0441	상의하다	V	-	어	상의해	-	ref-dev
+r-0442	물러나다	V	-	(으)며	물러나며	-	ref-dev
+r-0443	지나가다	V	-	는데	지나가는데	-	ref-dev
+r-0444	들어가다	V	-	(으)ㄹ	들어갈	-	ref-dev
+r-0445	관리하다	V	-	고	관리하고	-	ref-dev
+r-0446	풀리다	V	-	는	풀리는	-	ref-dev
+r-0447	당하다	V	-	어	당해	-	ref-dev
+r-0448	과격하다	A	-	(으)ㄴ	과격한	-	ref-dev
+r-0449	떠넘기다	V	-	(으)니까	떠넘기니까	-	ref-dev
+r-0450	들어오다	V	-	어	들어와	-	ref-dev
+r-0451	닿다	V	-	지	닿지	-	ref-dev
+r-0452	싣다	V	-	(으)ㄹ	실을	-	ref-dev
+r-0453	개척하다	V	-	(으)ㄹ	개척할	-	ref-dev
+r-0454	찌르다	V	-	려는	찌르려는	-	ref-dev
+r-0455	멸망시키다	V	-	려는	멸망시키려는	-	ref-dev
+r-0456	이다	C	COP	습니다/ㅂ니다	박사입니다	박사	ref-dev
+r-0457	이다	C	COP	(으)ㄴ데요	궁금증인데요	궁금증	ref-dev
+r-0458	이다	C	COP	야	열세야	열세	ref-dev
+r-0459	빼앗기다	V	-	-었- 나	빼앗겼나	-	ref-dev
+r-0460	오가다	V	-	고	오가고	-	ref-dev
+r-0461	도망치다	V	-	고	도망치고	-	ref-dev
+r-0462	한결같다	A	-	(으)ㄴ	한결같은	-	ref-dev
+r-0463	싶다	-	-	어요	싶어요	-	ref-dev
+r-0464	더듬다	V	-	는다/ㄴ다	더듬는다	-	ref-dev
+r-0465	당연하다	A	-	-었- 는데	당연했는데	-	ref-dev
+r-0466	눕다	V	-	는다/ㄴ다	눕는다	-	ref-dev
+r-0467	강렬하다	A	-	게	강렬하게	-	ref-dev
+r-0468	부리다	V	-	(으)ㄹ	부릴	-	ref-dev
+r-0469	얼리다	V	-	고	얼리고	-	ref-dev
+r-0470	되다	V	-	(으)면	되면	-	ref-dev
+r-0471	맺히다	V	-	-었- 고	맺혔고	-	ref-dev
+r-0472	내다	V	-	-었- (으)니	냈으니	-	ref-dev
+r-0473	듯하다	A	-	-었- 고	듯했고	-	ref-dev
+r-0474	한가하다	A	-	지	한가하지	-	ref-dev
+r-0475	가다	V	-	어야 -겠- 네	가야겠네	-	ref-dev
+r-0476	넣다	V	-	(으)ㄴ	넣은	-	ref-dev
+r-0477	양호하다	A	-	대요	양호하대요	-	ref-dev
+r-0478	열다	V	-	-었- 는데	열었는데	-	ref-dev
+r-0479	이다	C	COP	(으)세요	말씀이세요	말씀	ref-dev
+r-0480	넣다	V	-	(으)며	넣으며	-	ref-dev
+r-0481	부수다	V	-	어	부숴	-	ref-dev
+r-0482	오다	V	-	-겠- 다는	오겠다는	-	ref-dev
+r-0483	갱신되다	V	-	어서	갱신돼서	-	ref-dev
+r-0484	쏠리다	V	-	-었- 다	쏠렸다	-	ref-dev
+r-0485	무뚝뚝하다	A	-	(으)ㄴ	무뚝뚝한	-	ref-dev
+r-0486	돌아보다	V	-	어	돌아봐	-	ref-dev
+r-0487	아니다	N	-	구나	아니구나	-	ref-dev
+r-0488	집다	V	-	는다/ㄴ다	집는다	-	ref-dev
+r-0489	맛있다	A	-	-었- (으)니까	맛있었으니까	-	ref-dev
+r-0490	위험하다	A	-	지	위험하지	-	ref-dev
+r-0491	잡다	V	-	는다/ㄴ다	잡는다	-	ref-dev
+r-0492	긴장하다	V	-	-었었- 지	긴장했었지	-	ref-dev
+r-0493	괴롭다	A	-	다	괴롭다	-	ref-dev
+r-0494	이다	C	COP	네	취향이네	취향	ref-dev
+r-0495	창백하다	A	-	(으)ㄴ	창백한	-	ref-dev
+r-0496	많다	A	-	더라	많더라	-	ref-dev
+r-0497	기쁘다	A	-	어서	기뻐서	-	ref-dev
+r-0498	뜻하다	V	-	습니다/ㅂ니다	뜻합니다	-	ref-dev
+r-0499	이다	C	COP	(으)ㄴ	미후유인	미후유	ref-dev
+r-0500	괜찮다	A	-	다고	괜찮다고	-	ref-dev
+r-0501	예쁘다	A	-	고	예쁘고	-	ref-dev
+r-0502	허무하다	A	-	(으)ㄴ	허무한	-	ref-dev
+r-0503	불쌍하다	A	-	(으)ㄴ	불쌍한	-	ref-dev
+r-0504	신기하다	A	-	네요	신기하네요	-	ref-dev
+r-0505	있다	X	-	-었- 는데	있었는데	-	ref-dev
+r-0506	지껄이다	V	-	지	지껄이지	-	ref-dev
+r-0507	지다	V	-	-었- 잖아	졌잖아	-	ref-dev
+r-0508	이다	C	COP	야	상태야	상태	ref-dev
+r-0509	이다	C	COP	라도	닌자라도	닌자	ref-dev
+r-0510	이다	C	COP	야	명령이야	명령	ref-dev
+r-0511	커지다	V	-	-었- 어	커졌어	-	ref-dev
+r-0512	깨닫다	V	-	-었- 어	깨달았어	-	ref-dev
+r-0513	들어오다	V	-	(으)ㄹ	들어올	-	ref-dev
+r-0514	내려가다	V	-	는다/ㄴ다	내려간다	-	ref-dev
+r-0515	좋아하다	V	-	게	좋아하게	-	ref-dev
+r-0516	멈추다	V	-	어서	멈춰서	-	ref-dev
+r-0517	이다	C	COP	-었- 어요	길이었어요	길	ref-dev
+r-0518	갇히다	V	-	(으)ㄴ	갇힌	-	ref-dev
+r-0519	선택하다	V	-	-었- 고	선택했고	-	ref-dev
+r-0520	지휘하다	V	-	어	지휘해	-	ref-dev
+r-0521	가능하다	A	-	어요	가능해요	-	ref-dev
+r-0522	입다	V	-	어	입어	-	ref-dev
+r-0523	시작하다	V	-	는데	시작하는데	-	ref-dev
+r-0524	갈기다	V	-	고	갈기고	-	ref-dev
+r-0525	싸우다	V	-	어	싸워	-	ref-dev
+r-0526	정리하다	V	-	는다/ㄴ다	정리한다	-	ref-dev
+r-0527	읽다	V	-	(으)ㄹ까	읽을까	-	ref-dev
+r-0528	이다	C	COP	고	규칙이고	규칙	ref-dev
+r-0529	죄송하다	A	-	네요	죄송하네요	-	ref-dev
+r-0530	않다	-	-	어요	않아요	-	ref-dev
+r-0531	당황하다	V	-	어서	당황해서	-	ref-dev
+r-0532	이다	C	COP	(으)면	내일이면	내일	ref-dev
+r-0533	묻다	V	-	-(으)시- 어도	물으셔도	-	ref-dev
+r-0534	안다	V	-	는다/ㄴ다	안는다	-	ref-dev
+r-0535	말하다	V	-	(으)니까	말하니까	-	ref-dev
+r-0536	피곤하다	A	-	-(으)시- (으)ㄹ	피곤하실	-	ref-dev
+r-0537	되갚다	V	-	어	되갚아	-	ref-dev
+r-0538	무능하다	A	-	다고	무능하다고	-	ref-dev
+r-0539	나가다	V	-	라며	나가라며	-	ref-dev
+r-0540	소녀답다	A	-	네	소녀답네	-	ref-dev
+r-0541	찾아내다	V	-	-었- 다	찾아냈다	-	ref-dev
+r-0542	젖혀지다	V	-	는다/ㄴ다	젖혀진다	-	ref-dev
+r-0543	억울하다	A	-	니	억울하니	-	ref-dev
+r-0544	접다	V	-	-었- 다	접었다	-	ref-dev
+r-0545	보이다	V	-	어서	보여서	-	ref-dev
+r-0546	이어지다	V	-	는	이어지는	-	ref-dev
+r-0547	돋우다	V	-	는	돋우는	-	ref-dev
+r-0548	관찰하다	V	-	자	관찰하자	-	ref-dev
+r-0549	교전하다	V	-	려면	교전하려면	-	ref-dev
+r-0550	어떡하다	V	-	(으)ㄹ까	어떡할까	-	ref-dev
+r-0551	가다	V	-	자	가자	-	ref-dev
+r-0552	이다	C	COP	야	꿈이야	꿈	ref-dev
+r-0553	짙어지다	V	-	는	짙어지는	-	ref-dev
+r-0554	임하다	V	-	(으)ㄹ지	임할지	-	ref-dev
+r-0555	받다	V	-	-었- 지만	받았지만	-	ref-dev
+r-0556	구조하다	V	-	(으)러	구조하러	-	ref-dev
+r-0557	이다	C	COP	라서	참가라서	참가	ref-dev
+r-0558	이다	C	COP	(으)ㄹ	조각일	조각	ref-dev
+r-0559	바쁘다	A	-	다고요	바쁘다고요	-	ref-dev
+r-0560	화나다	V	-	-었- 나	화났나	-	ref-dev
+r-0561	이다	C	COP	야	새야	새	ref-dev
+r-0562	물들다	V	-	-었- 고	물들었고	-	ref-dev
+r-0563	택하다	V	-	어	택해	-	ref-dev
+r-0564	꾸물거리다	V	-	(으)ㄴ	꾸물거린	-	ref-dev
+r-0565	실리다	V	-	-었- 는데	실렸는데	-	ref-dev
+r-0566	이다	C	COP	다	미인이다	미인	ref-dev
+r-0567	이다	C	COP	라고	말이라고	말	ref-dev
+r-0568	늘리다	V	-	(으)면	늘리면	-	ref-dev
+r-0569	지원하다	V	-	(으)ㄹ	지원할	-	ref-dev
+r-0570	개운하다	A	-	어	개운해	-	ref-dev
+r-0571	부딪히다	V	-	(으)ㄴ	부딪힌	-	ref-dev
+r-0572	있다	X	-	는데	있는데	-	ref-dev
+r-0573	벌리다	V	-	어	벌려	-	ref-dev
+r-0574	만지다	V	-	-었- (으)ㄹ	만졌을	-	ref-dev
+r-0575	찾다	V	-	(으)ㄹ	찾을	-	ref-dev
+r-0576	괜찮다	A	-	(으)면	괜찮으면	-	ref-dev
+r-0577	모르다	V	-	-었었- 죠	몰랐었죠	-	ref-dev
+r-0578	훔치다	V	-	는	훔치는	-	ref-dev
+r-0579	금지되다	V	-	(으)ㄴ	금지된	-	ref-dev
+r-0580	떨어지다	V	-	(으)ㄹ	떨어질	-	ref-dev
+r-0581	관찰하다	V	-	는다/ㄴ다	관찰한다	-	ref-dev
+r-0582	가다	V	-	니	가니	-	ref-dev
+r-0583	하다	V	-	려면	하려면	-	ref-dev
+r-0584	관통하다	V	-	어	관통해	-	ref-dev
+r-0585	해결하다	V	-	어야	해결해야	-	ref-dev
+r-0586	지나가다	V	-	다	지나가다	-	ref-dev
+r-0587	이다	C	COP	라니	탁점이라니	탁점	ref-dev
+r-0588	덮다	V	-	고	덮고	-	ref-dev
+r-0589	잠들다	V	-	(으)ㄴ	잠든	-	ref-dev
+r-0590	그렇다	A	-	(으)ㄹ까요	그럴까요	-	ref-dev
+r-0591	일어나다	V	-	-겠- 지	일어나겠지	-	ref-dev
+r-0592	말조심하다	V	-	어	말조심해	-	ref-dev
+r-0593	이다	C	COP	라도	탈취제라도	탈취제	ref-dev
+r-0594	이다	C	COP	(으)니까	참관인이니까	참관인	ref-dev
+r-0595	하다	-	-	는다/ㄴ다	한다	-	ref-dev
+r-0596	쥐다	V	-	려	쥐려	-	ref-dev
+r-0597	해결하다	V	-	-겠- 습니다/ㅂ니다	해결하겠습니다	-	ref-dev
+r-0598	말하다	V	-	어야지	말해야지	-	ref-dev
+r-0599	날리다	V	-	(으)ㄹ	날릴	-	ref-dev
+r-0600	계속하다	V	-	(으)며	계속하며	-	ref-dev
+r-0601	이다	C	COP	-었- 다	모양이었다	모양	ref-dev
+r-0602	끌리다	V	-	고	끌리고	-	ref-dev
+r-0603	이다	C	COP	(으)ㄴ	정석인	정석	ref-dev
+r-0604	쏘다	V	-	습니다/ㅂ니다	쏩니다	-	ref-dev
+r-0605	단조롭다	A	-	어	단조로워	-	ref-dev
+r-0606	좋다	A	-	다느니	좋다느니	-	ref-dev
+r-0607	뚱하다	A	-	(으)ㄴ	뚱한	-	ref-dev
+r-0608	격렬하다	A	-	게	격렬하게	-	ref-dev
+r-0609	보이다	V	-	-었- 는데	보였는데	-	ref-dev
+r-0610	먹다	V	-	고	먹고	-	ref-dev
+r-0611	권하다	V	-	-었- (으)ㄹ	권했을	-	ref-dev
+r-0612	내다	-	-	-었- 지	냈지	-	ref-dev
+r-0613	받다	V	-	지	받지	-	ref-dev
+r-0614	이다	C	COP	-었- 어	사람이었어	사람	ref-dev
+r-0615	떠나다	V	-	는	떠나는	-	ref-dev
+r-0616	올라타다	V	-	-었- 다	올라탔다	-	ref-dev
+r-0617	밀어내다	V	-	(으)ㄹ	밀어낼	-	ref-dev
+r-0618	위험하다	A	-	려나	위험하려나	-	ref-dev
+r-0619	놓치다	V	-	(으)ㄴ	놓친	-	ref-dev
+r-0620	그렇다	A	-	-었- 죠	그랬죠	-	ref-dev
+r-0621	놀라다	V	-	고	놀라고	-	ref-dev
+r-0622	뻗다	V	-	어	뻗어	-	ref-dev
+r-0623	이다	C	COP	(으)ㄴ가	의뢰인가	의뢰	ref-dev
+r-0624	사다	V	-	-었- (으)ㄹ	샀을	-	ref-dev
+r-0625	이다	C	COP	라도	생각이라도	생각	ref-dev
+r-0626	이다	C	COP	다	후다	후	ref-dev
+r-0627	이다	C	COP	다	연구자다	연구자	ref-dev
+r-0628	이다	C	COP	(으)세요	일이세요	일	ref-dev
+r-0629	결탁하다	V	-	어	결탁해	-	ref-dev
+r-0630	이다	C	COP	(으)ㄴ가	천재인가	천재	ref-dev
+r-0631	떨어지다	V	-	고	떨어지고	-	ref-dev
+r-0632	이다	C	COP	(으)ㄴ가	증원인가	증원	ref-dev
+r-0633	떠올리다	V	-	어	떠올려	-	ref-dev
+r-0634	보다	V	-	자마자	보자마자	-	ref-dev
+r-0635	이다	C	COP	라고	시뮬레이션이라고	시뮬레이션	ref-dev
+r-0636	힘들다	A	-	어도	힘들어도	-	ref-dev
+r-0637	감탄하다	V	-	(으)ㄴ	감탄한	-	ref-dev
+r-0638	어떻다	A	-	-었- 는데	어땠는데	-	ref-dev
+r-0639	태연하다	A	-	(으)ㄴ	태연한	-	ref-dev
+r-0640	개방되다	V	-	(으)ㄴ	개방된	-	ref-dev
+r-0641	양보하다	V	-	(으)면	양보하면	-	ref-dev
+r-0642	듣다	V	-	(으)세요	들으세요	-	ref-dev
+r-0643	이다	C	COP	-었- 다	기분이었다	기분	ref-dev
+r-0644	다녀오다	V	-	어도	다녀와도	-	ref-dev
+r-0645	재미있다	A	-	-었- 어요	재미있었어요	-	ref-dev
+r-0646	놓이다	V	-	는다/ㄴ다	놓인다	-	ref-dev
+r-0647	상대하다	V	-	는	상대하는	-	ref-dev
+r-0648	싸우다	V	-	게	싸우게	-	ref-dev
+r-0649	이다	C	COP	네	얼굴이네	얼굴	ref-dev
+r-0650	중요하다	A	-	지	중요하지	-	ref-dev
+r-0651	듣다	V	-	-었- 어요	들었어요	-	ref-dev
+r-0652	결정하다	V	-	지	결정하지	-	ref-dev
+r-0653	멍청하다	A	-	다고	멍청하다고	-	ref-dev
+r-0654	괜찮다	A	-	다니까	괜찮다니까	-	ref-dev
+r-0655	젖다	V	-	(으)ㄴ	젖은	-	ref-dev
+r-0656	이다	C	COP	다	호평이다	호평	ref-dev
+r-0657	이다	C	COP	(으)ㄴ가	유형인가	유형	ref-dev
+r-0658	이다	C	COP	-겠- 네	실례겠네	실례	ref-dev
+r-0659	낫다	V	-	-었- (으)면	나았으면	-	ref-dev
+r-0660	우스꽝스럽다	A	-	(으)ㄴ	우스꽝스러운	-	ref-dev
+r-0661	신뢰하다	V	-	는	신뢰하는	-	ref-dev
+r-0662	물어보다	V	-	어	물어봐	-	ref-dev
+r-0663	받다	V	-	-었- 고	받았고	-	ref-dev
+r-0664	맞부딪치다	V	-	(으)며	맞부딪치며	-	ref-dev
+r-0665	의식하다	V	-	(으)면서	의식하면서	-	ref-dev
+r-0666	궤멸시키다	V	-	(으)ㄴ	궤멸시킨	-	ref-dev
+r-0667	오르다	V	-	자	오르자	-	ref-dev
+r-0668	이다	C	COP	다	물건이다	물건	ref-dev
+r-0669	부끄럽다	A	-	고	부끄럽고	-	ref-dev
+r-0670	감시하다	V	-	는	감시하는	-	ref-dev
+r-0671	기대하다	V	-	-었- 지만	기대했지만	-	ref-dev
+r-0672	이다	C	COP	(으)ㄴ지	최강인지	최강	ref-dev
+r-0673	항의하다	V	-	는	항의하는	-	ref-dev
+r-0674	이다	C	COP	습니다/ㅂ니다	생각입니다	생각	ref-dev
+r-0675	이다	C	COP	-었- (으)ㄹ	일부였을	일부	ref-dev
+r-0676	빽빽하다	A	-	게	빽빽하게	-	ref-dev
+r-0677	이다	C	COP	(으)ㄴ	갸루인	갸루	ref-dev
+r-0678	가로채다	V	-	-었- 나	가로챘나	-	ref-dev
+r-0679	수상하다	A	-	잖아	수상하잖아	-	ref-dev
+r-0680	순조롭다	A	-	(으)ㄴ	순조로운	-	ref-dev
+r-0681	나아가다	V	-	는	나아가는	-	ref-dev
+r-0683	속이다	V	-	는	속이는	-	ref-dev
+r-0684	살아나다	V	-	(으)ㄴ	살아난	-	ref-dev
+r-0685	엄습하다	V	-	는다/ㄴ다	엄습한다	-	ref-dev
+r-0686	읽다	V	-	-었- 다고	읽었다고	-	ref-dev
+r-0687	이탈하다	V	-	어	이탈해	-	ref-dev
+r-0688	적절하다	A	-	(으)ㄴ	적절한	-	ref-dev
+r-0689	없다	X	-	-었- 지	없었지	-	ref-dev
+r-0690	이다	C	COP	라는	섀도라는	섀도	ref-dev
+r-0691	얌전하다	A	-	(으)ㄴ	얌전한	-	ref-dev
+r-0692	이다	C	COP	다	충격이다	충격	ref-dev
+r-0693	처치하다	V	-	(으)ㄹ	처치할	-	ref-dev
+r-0694	끊다	V	-	듯	끊듯	-	ref-dev
+r-0695	참가하다	V	-	어	참가해	-	ref-dev
+r-0696	깨물다	V	-	어	깨물어	-	ref-dev
+r-0697	기쁘다	A	-	다	기쁘다	-	ref-dev
+r-0698	돕다	V	-	(으)ㄹ까요	도울까요	-	ref-dev
+r-0699	연기하다	V	-	어	연기해	-	ref-dev
+r-0700	해결하다	V	-	는	해결하는	-	ref-dev
+t-0001	떨리다	V	-	기	떨리기	-	ref-test
+t-0002	비일비재하다	A	-	거든요	비일비재하거든요	-	ref-test
+t-0003	싸우다	V	-	-었- 다면	싸웠다면	-	ref-test
+t-0004	지나치다	V	-	(으)ㄹ	지나칠	-	ref-test
+t-0005	들리다	V	-	는데	들리는데	-	ref-test
+t-0006	내키다	V	-	(으)면	내키면	-	ref-test
+t-0007	사용하다	V	-	어	사용해	-	ref-test
+t-0008	눈부시다	A	-	(으)ㄴ	눈부신	-	ref-test
+t-0009	신속하다	A	-	게	신속하게	-	ref-test
+t-0010	붙잡다	V	-	(으)려는	붙잡으려는	-	ref-test
+t-0011	존경하다	V	-	는	존경하는	-	ref-test
+t-0012	찾다	V	-	-었- 네요	찾았네요	-	ref-test
+t-0013	어떡하다	V	-	냐고	어떡하냐고	-	ref-test
+t-0014	취하다	V	-	고	취하고	-	ref-test
+t-0015	이다	C	COP	니까요	도서부원이니까요	도서부원	ref-test
+t-0016	지켜보다	V	-	(으)ㄴ	지켜본	-	ref-test
+t-0017	이다	C	COP	습니까/ㅂ니까	말입니까	말	ref-test
+t-0018	제시하다	V	-	는	제시하는	-	ref-test
+t-0019	재촉하다	V	-	어서	재촉해서	-	ref-test
+t-0020	끝내다	V	-	는	끝내는	-	ref-test
+t-0021	이다	C	COP	라는	현실이라는	현실	ref-test
+t-0022	옳다	A	-	고	옳고	-	ref-test
+t-0023	이다	C	COP	니	얘기니	얘기	ref-test
+t-0024	머무르다	V	-	는	머무르는	-	ref-test
+t-0025	추궁당하다	V	-	지	추궁당하지	-	ref-test
+t-0026	보답받다	V	-	(으)ㄹ까	보답받을까	-	ref-test
+t-0027	찾아보다	V	-	(으)ㄹ까	찾아볼까	-	ref-test
+t-0028	어둡다	A	-	다	어둡다	-	ref-test
+t-0029	되다	V	-	-었- 네요	됐네요	-	ref-test
+t-0030	이다	C	COP	야	최고야	최고	ref-test
+t-0031	이다	C	COP	야	이야	이	ref-test
+t-0032	이다	C	COP	라면	러브호텔이라면	러브호텔	ref-test
+t-0033	푸념하다	V	-	더군	푸념하더군	-	ref-test
+t-0034	서투르다	A	-	어도	서툴러도	-	ref-test
+t-0035	괜찮다	A	-	-(으)시- (으)ㄴ가요	괜찮으신가요	-	ref-test
+t-0036	않다	V	-	고	않고	-	ref-test
+t-0037	이다	C	COP	라고요	이름이라고요	이름	ref-test
+t-0038	내려가다	V	-	습니다/ㅂ니다	내려갑니다	-	ref-test
+t-0039	답장하다	V	-	는다/ㄴ다	답장한다	-	ref-test
+t-0040	말하다	V	-	냐	말하냐	-	ref-test
+t-0041	압도되다	V	-	는다/ㄴ다	압도된다	-	ref-test
+t-0042	삼키다	V	-	어	삼켜	-	ref-test
+t-0043	이다	C	COP	(으)ㄴ	화제인	화제	ref-test
+t-0044	잠들다	V	-	어서	잠들어서	-	ref-test
+t-0045	그치다	V	-	(으)ㄴ	그친	-	ref-test
+t-0046	대단하다	A	-	(으)ㄴ데	대단한데	-	ref-test
+t-0047	여유롭다	A	-	게	여유롭게	-	ref-test
+t-0048	오작동하다	V	-	는	오작동하는	-	ref-test
+t-0049	그렇다	A	-	슴다	그렇슴다	-	ref-test
+t-0050	두다	V	-	고	두고	-	ref-test
+t-0051	사양하다	V	-	-겠- 습니다/ㅂ니다	사양하겠습니다	-	ref-test
+t-0052	이다	C	COP	(으)ㄴ	부류인	부류	ref-test
+t-0053	깊다	A	-	고	깊고	-	ref-test
+t-0054	설레다	V	-	(으)ㄹ	설렐	-	ref-test
+t-0055	좋아하다	V	-	(으)니까	좋아하니까	-	ref-test
+t-0056	추적하다	V	-	(으)ㄴ	추적한	-	ref-test
+t-0057	이다	C	COP	(으)ㄴ	온인	온	ref-test
+t-0058	드시다	V	-	어	드셔	-	ref-test
+t-0059	반듯하다	A	-	(으)ㄴ	반듯한	-	ref-test
+t-0060	완벽하다	A	-	다고	완벽하다고	-	ref-test
+t-0061	알다	V	-	-었- 고	알았고	-	ref-test
+t-0062	만들다	V	-	-었- 는데	만들었는데	-	ref-test
+t-0063	바라보다	V	-	는다/ㄴ다	바라본다	-	ref-test
+t-0064	이다	C	COP	죠	거기죠	거기	ref-test
+t-0065	데이트하다	V	-	는	데이트하는	-	ref-test
+t-0066	알다	V	-	-었- 어	알았어	-	ref-test
+t-0067	견디다	V	-	(으)ㄴ	견딘	-	ref-test
+t-0068	덮치다	V	-	어	덮쳐	-	ref-test
+t-0069	흘겨보다	V	-	(으)며	흘겨보며	-	ref-test
+t-0070	급하다	A	-	(으)ㄹ	급할	-	ref-test
+t-0071	들통나다	V	-	어	들통나	-	ref-test
+t-0072	올바르다	A	-	게	올바르게	-	ref-test
+t-0073	도와주다	V	-	지	도와주지	-	ref-test
+t-0074	듯하다	A	-	다는	듯하다는	-	ref-test
+t-0075	밀치다	V	-	어	밀쳐	-	ref-test
+t-0076	뒤잇다	V	-	어	뒤이어	-	ref-test
+t-0077	띠다	V	-	는	띠는	-	ref-test
+t-0078	망설이다	V	-	-었- 다	망설였다	-	ref-test
+t-0079	무섭다	A	-	다	무섭다	-	ref-test
+t-0080	고통스럽다	A	-	(으)ㄴ	고통스러운	-	ref-test
+t-0081	형편없다	A	-	는	형편없는	-	ref-test
+t-0082	알아채다	V	-	-었- 군	알아챘군	-	ref-test
+t-0083	가다	V	-	어요	가요	-	ref-test
+t-0084	이다	C	COP	야	자폭이야	자폭	ref-test
+t-0085	이다	C	COP	(으)ㄴ가	퀸인가	퀸	ref-test
+t-0086	놀다	V	-	-었- 던	놀았던	-	ref-test
+t-0087	쥐어짜다	V	-	는다/ㄴ다	쥐어짠다	-	ref-test
+t-0088	이다	C	COP	-었- 나	상황이었나	상황	ref-test
+t-0089	안도하다	V	-	(으)면서	안도하면서	-	ref-test
+t-0090	사귀다	V	-	(으)ㄴ	사귄	-	ref-test
+t-0091	거역하다	V	-	(으)ㄴ	거역한	-	ref-test
+t-0092	합치다	V	-	(으)면	합치면	-	ref-test
+t-0093	걷다	V	-	어야	걸어야	-	ref-test
+t-0094	대담하다	A	-	다	대담하다	-	ref-test
+t-0095	늘어나다	V	-	어	늘어나	-	ref-test
+t-0096	빠져나오다	V	-	고	빠져나오고	-	ref-test
+t-0097	바라보다	V	-	고	바라보고	-	ref-test
+t-0098	넣다	V	-	(으)려면	넣으려면	-	ref-test
+t-0099	힘내다	V	-	라	힘내라	-	ref-test
+t-0100	나다	V	-	는	나는	-	ref-test
+t-0101	인정하다	V	-	(으)ㄹ게	인정할게	-	ref-test
+t-0102	하다	-	-	는다고/ㄴ다고	한다고	-	ref-test
+t-0103	사양하다	V	-	(으)ㄹ게요	사양할게요	-	ref-test
+t-0104	보이다	V	-	-었- 던	보였던	-	ref-test
+t-0105	두다	V	-	지	두지	-	ref-test
+t-0106	정하다	V	-	-었- 다고	정했다고	-	ref-test
+t-0107	떠들다	V	-	고	떠들고	-	ref-test
+t-0108	매달다	V	-	(으)ㄹ	매달	-	ref-test
+t-0109	두다	-	-	(으)ㄹ게요	둘게요	-	ref-test
+t-0110	있다	X	-	(으)라는	있으라는	-	ref-test
+t-0111	연락하다	V	-	는다/ㄴ다	연락한다	-	ref-test
+t-0112	이다	C	COP	다	마찬가지다	마찬가지	ref-test
+t-0113	기대하다	V	-	(으)ㄹ게요	기대할게요	-	ref-test
+t-0114	힘들다	A	-	(으)ㄹ	힘들	-	ref-test
+t-0115	자진하다	V	-	어서	자진해서	-	ref-test
+t-0116	죽이다	V	-	-었- (으)ㄹ	죽였을	-	ref-test
+t-0117	정체되다	V	-	(으)ㄴ	정체된	-	ref-test
+t-0118	들키다	V	-	-었- (으)니	들켰으니	-	ref-test
+t-0119	멍하다	A	-	다	멍하다	-	ref-test
+t-0120	목욕하다	V	-	는다는/ㄴ다는	목욕한다는	-	ref-test
+t-0121	촬영하다	V	-	죠	촬영하죠	-	ref-test
+t-0122	주저하다	V	-	던	주저하던	-	ref-test
+t-0123	따다	V	-	(으)ㄹ	딸	-	ref-test
+t-0124	나다	-	-	(으)면	나면	-	ref-test
+t-0125	사라지다	V	-	나요	사라지나요	-	ref-test
+t-0126	애쓰다	V	-	어야	애써야	-	ref-test
+t-0127	변하다	V	-	(으)ㄹ	변할	-	ref-test
+t-0128	이다	C	COP	(으)니까	허리니까	허리	ref-test
+t-0129	궁금하다	A	-	네	궁금하네	-	ref-test
+t-0130	받아들이다	V	-	는	받아들이는	-	ref-test
+t-0131	이상하다	A	-	(으)ㄴ	이상한	-	ref-test
+t-0132	없다	X	-	든	없든	-	ref-test
+t-0133	먹다	V	-	는구나	먹는구나	-	ref-test
+t-0134	먹다	V	-	느라	먹느라	-	ref-test
+t-0135	이다	C	COP	-었- 어	상태였어	상태	ref-test
+t-0136	이다	C	COP	-었- 습니다/ㅂ니다	조건이었습니다	조건	ref-test
+t-0137	틀어막다	V	-	는다/ㄴ다	틀어막는다	-	ref-test
+t-0138	싶다	-	-	지	싶지	-	ref-test
+t-0139	밑지다	V	-	어야	밑져야	-	ref-test
+t-0140	시키다	V	-	(으)ㄹ까	시킬까	-	ref-test
+t-0141	죄송하다	A	-	어서요	죄송해서요	-	ref-test
+t-0142	알다	V	-	기에	알기에	-	ref-test
+t-0143	교환하다	V	-	는	교환하는	-	ref-test
+t-0144	들어가다	V	-	니	들어가니	-	ref-test
+t-0145	내려가다	V	-	-었- 다	내려갔다	-	ref-test
+t-0146	모르다	V	-	-겠- 더라	모르겠더라	-	ref-test
+t-0147	이다	C	COP	라서	누나라서	누나	ref-test
+t-0148	설득하다	V	-	(으)려고	설득하려고	-	ref-test
+t-0149	후려치다	V	-	고	후려치고	-	ref-test
+t-0150	박다	V	-	어	박아	-	ref-test
+t-0151	이다	C	COP	에요	뭐예요	뭐	ref-test
+t-0152	돌아가다	V	-	(으)며	돌아가며	-	ref-test
+t-0153	상냥하다	A	-	게	상냥하게	-	ref-test
+t-0154	이다	C	COP	(으)ㄹ	이름일	이름	ref-test
+t-0155	사과하다	V	-	-었- 어	사과했어	-	ref-test
+t-0156	이야기하다	V	-	-었- 다	이야기했다	-	ref-test
+t-0157	굳다	V	-	는다/ㄴ다	굳는다	-	ref-test
+t-0158	바쁘다	A	-	(으)ㄴ	바쁜	-	ref-test
+t-0159	사라지다	V	-	는	사라지는	-	ref-test
+t-0160	바꾸다	V	-	(으)며	바꾸며	-	ref-test
+t-0161	서툴다	A	-	다	서툴다	-	ref-test
+t-0162	놓다	-	-	어	놔	-	ref-test
+t-0163	지내다	V	-	-었- 던	지냈던	-	ref-test
+t-0164	이다	C	COP	냐	물건이냐	물건	ref-test
+t-0165	서리다	V	-	(으)ㄴ	서린	-	ref-test
+t-0166	투표하다	V	-	어	투표해	-	ref-test
+t-0167	이다	C	COP	라	천재라	천재	ref-test
+t-0168	이다	C	COP	네요	특기네요	특기	ref-test
+t-0169	넘치다	V	-	(으)ㄹ	넘칠	-	ref-test
+t-0170	남기다	V	-	(으)며	남기며	-	ref-test
+t-0171	살다	V	-	-겠- 어	살겠어	-	ref-test
+t-0172	이다	C	COP	든	뭐든	뭐	ref-test
+t-0173	옳다	A	-	-었- 고	옳았고	-	ref-test
+t-0174	이다	C	COP	니까요	거니까요	거	ref-test
+t-0175	묵인하다	V	-	고	묵인하고	-	ref-test
+t-0176	다지다	V	-	(으)ㄴ	다진	-	ref-test
+t-0177	버리다	V	-	(으)ㄴ다니까	버린다니까	-	ref-test
+t-0178	꿈틀거리다	V	-	고	꿈틀거리고	-	ref-test
+t-0179	데려가다	V	-	라고	데려가라고	-	ref-test
+t-0180	풀리다	V	-	-었- 습니다/ㅂ니다	풀렸습니다	-	ref-test
+t-0181	아프다	A	-	-었- (으)ㄹ	아팠을	-	ref-test
+t-0182	제외하다	V	-	(으)ㄴ	제외한	-	ref-test
+t-0183	몰려오다	V	-	어도	몰려와도	-	ref-test
+t-0184	변명하다	V	-	지	변명하지	-	ref-test
+t-0185	이다	C	COP	-었- 다	체온이었다	체온	ref-test
+t-0186	집요하다	A	-	게	집요하게	-	ref-test
+t-0187	뽑아내다	V	-	는다/ㄴ다	뽑아낸다	-	ref-test
+t-0188	적당하다	A	-	어요	적당해요	-	ref-test
+t-0189	요구하다	V	-	어	요구해	-	ref-test
+t-0190	놓다	V	-	지	놓지	-	ref-test
+t-0191	읽히다	V	-	-었- 다	읽혔다	-	ref-test
+t-0192	기리다	V	-	는	기리는	-	ref-test
+t-0193	먹다	V	-	기	먹기	-	ref-test
+t-0194	좋아하다	V	-	-(으)시- 나	좋아하시나	-	ref-test
+t-0195	벌어지다	V	-	어도	벌어져도	-	ref-test
+t-0196	이다	C	COP	라도	발이라도	발	ref-test
+t-0197	무섭다	A	-	-었- 던	무서웠던	-	ref-test
+t-0198	빠져나가다	V	-	지	빠져나가지	-	ref-test
+t-0199	지나다	V	-	-었- 어요	지났어요	-	ref-test
+t-0200	달리다	V	-	어도	달려도	-	ref-test
+t-0201	이다	C	COP	(으)ㄴ가	씨인가	씨	ref-test
+t-0202	활동하다	V	-	어	활동해	-	ref-test
+t-0203	헤어지다	V	-	어	헤어져	-	ref-test
+t-0204	표시하다	V	-	-었- 다	표시했다	-	ref-test
+t-0205	먹다	V	-	게	먹게	-	ref-test
+t-0206	끝나다	V	-	어	끝나	-	ref-test
+t-0207	이다	C	COP	니까요	처음이니까요	처음	ref-test
+t-0208	계산되다	V	-	어	계산돼	-	ref-test
+t-0209	못하다	-	-	는다/ㄴ다	못한다	-	ref-test
+t-0210	이다	C	COP	-었- 다	감각이었다	감각	ref-test
+t-0211	홀리다	V	-	-었- 구나	홀렸구나	-	ref-test
+t-0212	치유하다	V	-	어	치유해	-	ref-test
+t-0213	되다	V	-	리라는	되리라는	-	ref-test
+t-0214	끝나다	V	-	-었- 어요	끝났어요	-	ref-test
+t-0215	이다	C	COP	습니다/ㅂ니다	물론입니다	물론	ref-test
+t-0216	정예답다	A	-	게	정예답게	-	ref-test
+t-0217	가다	V	-	네	가네	-	ref-test
+t-0218	이다	C	COP	(으)ㅂ니다요	주소입니다요	주소	ref-test
+t-0219	건방지다	A	-	(으)ㄴ	건방진	-	ref-test
+t-0220	달하다	V	-	는다/ㄴ다	달한다	-	ref-test
+t-0221	들어가다	V	-	지	들어가지	-	ref-test
+t-0222	이다	C	COP	(으)ㄴ	정반대인	정반대	ref-test
+t-0223	꺾이다	V	-	(으)ㄹ	꺾일	-	ref-test
+t-0224	이다	C	COP	다	넷사다	넷사	ref-test
+t-0225	방치하다	V	-	고	방치하고	-	ref-test
+t-0226	파랗다	A	-	어	파래	-	ref-test
+t-0227	남다	V	-	(으)면	남으면	-	ref-test
+t-0228	몰다	V	-	-었- 다	몰았다	-	ref-test
+t-0229	들어가다	V	-	는다/ㄴ다	들어간다	-	ref-test
+t-0230	돌아다니다	V	-	고	돌아다니고	-	ref-test
+t-0231	두다	-	-	라니까	두라니까	-	ref-test
+t-0232	아깝다	A	-	-었- 네요	아까웠네요	-	ref-test
+t-0233	트다	V	-	어	터	-	ref-test
+t-0234	괜찮다	A	-	-었- 던	괜찮았던	-	ref-test
+t-0235	이다	C	COP	지만	옆이지만	옆	ref-test
+t-0236	이다	C	COP	로군	돌팔이로군	돌팔이	ref-test
+t-0237	싶다	-	-	다니	싶다니	-	ref-test
+t-0238	빠르다	A	-	어야	빨라야	-	ref-test
+t-0239	놀라다	V	-	-었- 네	놀랐네	-	ref-test
+t-0240	빠르다	A	-	어도	빨라도	-	ref-test
+t-0241	붙잡히다	V	-	(으)ㄴ	붙잡힌	-	ref-test
+t-0242	멀다	A	-	어요	멀어요	-	ref-test
+t-0243	드리다	-	-	자는	드리자는	-	ref-test
+t-0244	견디다	V	-	어야	견뎌야	-	ref-test
+t-0245	회복되다	V	-	는다는/ㄴ다는	회복된다는	-	ref-test
+t-0246	이다	C	COP	네	방이네	방	ref-test
+t-0247	실리다	V	-	어	실려	-	ref-test
+t-0248	듯하다	A	-	(으)ㄹ	듯할	-	ref-test
+t-0249	두다	-	-	려고요	두려고요	-	ref-test
+t-0250	이다	C	COP	(으)면	다음이면	다음	ref-test
+t-0251	이다	C	COP	에요	참이에요	참	ref-test
+t-0252	이다	C	COP	(으)ㄹ까요	가족일까요	가족	ref-test
+t-0253	만지다	V	-	-었- 다	만졌다	-	ref-test
+t-0254	대답하다	V	-	-었- 지	대답했지	-	ref-test
+t-0255	옮기다	V	-	-었- 다	옮겼다	-	ref-test
+t-0256	이다	C	COP	고	뿐이고	뿐	ref-test
+t-0257	이다	C	COP	라는	연하라는	연하	ref-test
+t-0258	받아들이다	V	-	-었- 네	받아들였네	-	ref-test
+t-0259	이다	C	COP	에요	장소예요	장소	ref-test
+t-0260	나서다	V	-	(으)면	나서면	-	ref-test
+t-0261	평평하다	A	-	(으)ㄴ	평평한	-	ref-test
+t-0262	떠올리다	V	-	듯	떠올리듯	-	ref-test
+t-0263	이다	C	COP	라도	어지럼증이라도	어지럼증	ref-test
+t-0264	이다	C	COP	라고	이쪽이라고	이쪽	ref-test
+t-0265	나가다	V	-	어야	나가야	-	ref-test
+t-0266	이다	C	COP	든	이성이든	이성	ref-test
+t-0267	데우다	V	-	는	데우는	-	ref-test
+t-0268	이다	C	COP	다	자세다	자세	ref-test
+t-0269	또렷하다	A	-	고	또렷하고	-	ref-test
+t-0270	이다	C	COP	라	빠라리라	빠라리	ref-test
+t-0271	이다	C	COP	(으)ㄴ	장점인	장점	ref-test
+t-0272	준비하다	V	-	-었- 다	준비했다	-	ref-test
+t-0273	소리치다	V	-	(으)ㄹ	소리칠	-	ref-test
+t-0274	되다	V	-	(으)ㄹ지	될지	-	ref-test
+t-0275	연결하다	V	-	-었- 다	연결했다	-	ref-test
+t-0276	태어나다	V	-	고	태어나고	-	ref-test
+t-0277	이다	C	COP	-었- 군요	선배였군요	선배	ref-test
+t-0278	웃다	V	-	(으)ㄴ	웃은	-	ref-test
+t-0279	참다	V	-	(으)ㄹ	참을	-	ref-test
+t-0280	흥분하다	V	-	어	흥분해	-	ref-test
+t-0281	가로막다	V	-	(으)려는	가로막으려는	-	ref-test
+t-0282	오가다	V	-	기	오가기	-	ref-test
+t-0283	먹이다	V	-	-었- 다는	먹였다는	-	ref-test
+t-0284	가입하다	V	-	기	가입하기	-	ref-test
+t-0285	사과하다	V	-	는다는/ㄴ다는	사과한다는	-	ref-test
+t-0286	졸리다	V	-	지	졸리지	-	ref-test
+t-0287	불안하다	A	-	어서	불안해서	-	ref-test
+t-0288	묻다	V	-	기	묻기	-	ref-test
+t-0289	늦다	A	-	(으)ㄴ	늦은	-	ref-test
+t-0290	가리다	V	-	(으)면서	가리면서	-	ref-test
+t-0291	받다	V	-	(으)ㄴ	받은	-	ref-test
+t-0292	뛰다	V	-	-었- 네	뛰었네	-	ref-test
+t-0293	이다	C	COP	-었- 다	광경이었다	광경	ref-test
+t-0294	찢기다	V	-	어	찢겨	-	ref-test
+t-0295	번갈다	V	-	어	번갈아	-	ref-test
+t-0296	꽂히다	V	-	는다/ㄴ다	꽂힌다	-	ref-test
+t-0297	이다	C	COP	기	절친이기	절친	ref-test
+t-0298	처리하다	V	-	(으)면	처리하면	-	ref-test
+t-0299	들뜨다	V	-	고	들뜨고	-	ref-test
+t-0300	맞다	V	-	어도	맞아도	-	ref-test
+t-0301	놀라다	V	-	-었- 어요	놀랐어요	-	ref-test
+t-0302	귀찮다	A	-	고	귀찮고	-	ref-test
+t-0303	녹다	V	-	지	녹지	-	ref-test
+t-0304	다르다	A	-	(으)니까	다르니까	-	ref-test
+t-0305	이다	C	COP	(으)ㄴ데	번째인데	번째	ref-test
+t-0306	튀어나오다	V	-	어	튀어나와	-	ref-test
+t-0307	고맙다	A	-	다는	고맙다는	-	ref-test
+t-0308	이다	C	COP	라면	분이라면	분	ref-test
+t-0309	이다	C	COP	라니	여름이라니	여름	ref-test
+t-0310	느리다	A	-	어서	느려서	-	ref-test
+t-0311	이다	C	COP	다	뒤다	뒤	ref-test
+t-0312	이다	C	COP	든	시간이든	시간	ref-test
+t-0313	겸연쩍다	A	-	(으)ㄴ	겸연쩍은	-	ref-test
+t-0314	시작하다	V	-	려는	시작하려는	-	ref-test
+t-0315	청소하다	V	-	어야지	청소해야지	-	ref-test
+t-0316	사랑하다	V	-	-었- 고	사랑했고	-	ref-test
+t-0317	놓다	-	-	-었- -겠- 지	놨겠지	-	ref-test
+t-0318	좋다	A	-	-었- 고	좋았고	-	ref-test
+t-0319	이다	C	COP	-(으)시- 니까요	바보시니까요	바보	ref-test
+t-0320	설명하다	V	-	어	설명해	-	ref-test
+t-0321	만하다	A	-	네	만하네	-	ref-test
+t-0322	여전하다	A	-	네	여전하네	-	ref-test
+t-0323	오다	V	-	-었- 지	왔지	-	ref-test
+t-0324	이다	C	COP	-었- 어	차였어	차	ref-test
+t-0325	이다	C	COP	라도	방이라도	방	ref-test
+t-0326	택하다	V	-	-겠- 어요	택하겠어요	-	ref-test
+t-0327	든든하다	A	-	지	든든하지	-	ref-test
+t-0328	행동하다	V	-	고	행동하고	-	ref-test
+t-0329	넘기다	V	-	느냐	넘기느냐	-	ref-test
+t-0330	사귀다	V	-	(으)ㄴ다거나	사귄다거나	-	ref-test
+t-0331	살피다	V	-	는다는/ㄴ다는	살핀다는	-	ref-test
+t-0332	갈라지다	V	-	(으)ㄴ	갈라진	-	ref-test
+t-0333	이다	C	COP	(으)ㄴ가	인물인가	인물	ref-test
+t-0334	이다	C	COP	라서요	예정이라서요	예정	ref-test
+t-0335	퇴소하다	V	-	-었- 다는	퇴소했다는	-	ref-test
+t-0336	이다	C	COP	라니	내기라니	내기	ref-test
+t-0337	절묘하다	A	-	-었- 다	절묘했다	-	ref-test
+t-0338	견디다	V	-	-겠- 어	견디겠어	-	ref-test
+t-0339	오다	V	-	-었- 지만	왔지만	-	ref-test
+t-0340	봉사하다	V	-	어	봉사해	-	ref-test
+t-0341	물러서다	V	-	지	물러서지	-	ref-test
+t-0342	꺼내다	V	-	지	꺼내지	-	ref-test
+t-0343	묻다	V	-	-었- 다고	물었다고	-	ref-test
+t-0344	끝나다	V	-	-겠- 지	끝나겠지	-	ref-test
+t-0345	내오다	V	-	지만	내오지만	-	ref-test
+t-0346	이다	C	COP	(으)ㄴ	소리인	소리	ref-test
+t-0347	대하다	V	-	라고	대하라고	-	ref-test
+t-0348	삼가다	V	-	어	삼가	-	ref-test
+t-0349	이다	C	COP	네	변태네	변태	ref-test
+t-0350	이다	C	COP	라면	잠재의식이라면	잠재의식	ref-test
+t-0351	때리다	V	-	자	때리자	-	ref-test
+t-0352	어색하다	A	-	(으)ㄴ	어색한	-	ref-test
+t-0353	이다	C	COP	지	당근이지	당근	ref-test
+t-0354	이다	C	COP	라구요	커플이라구요	커플	ref-test
+t-0355	어리석다	A	-	(으)ㄴ	어리석은	-	ref-test
+t-0356	느끼다	V	-	어	느껴	-	ref-test
+t-0357	바르다	V	-	-었- 다	발랐다	-	ref-test
+t-0358	붙이다	V	-	(으)ㄴ	붙인	-	ref-test
+t-0359	행복하다	A	-	어서	행복해서	-	ref-test
+t-0360	틀리다	V	-	-었- 어	틀렸어	-	ref-test
+t-0361	거스르다	V	-	(으)ㄹ	거스를	-	ref-test
+t-0362	벗다	V	-	기	벗기	-	ref-test
+t-0363	굳다	A	-	게	굳게	-	ref-test
+t-0364	훈련하다	V	-	어	훈련해	-	ref-test
+t-0365	감추다	V	-	려	감추려	-	ref-test
+t-0366	냉담하다	A	-	고	냉담하고	-	ref-test
+t-0367	뛰어넘다	V	-	어	뛰어넘어	-	ref-test
+t-0368	받다	V	-	거나	받거나	-	ref-test
+t-0369	기억하다	V	-	니	기억하니	-	ref-test
+t-0370	짓다	V	-	(으)ㄹ	지을	-	ref-test
+t-0371	요구하다	V	-	는	요구하는	-	ref-test
+t-0372	지내다	V	-	-었- (으)ㄹ	지냈을	-	ref-test
+t-0373	하다	-	-	(으)ㄴ가	한가	-	ref-test
+t-0374	주다	-	-	-겠- 어	주겠어	-	ref-test
+t-0375	약하다	A	-	네	약하네	-	ref-test
+t-0376	심다	V	-	어	심어	-	ref-test
+t-0377	잘나다	A	-	(으)ㄴ	잘난	-	ref-test
+t-0378	이다	C	COP	(으)ㄴ데	모양인데	모양	ref-test
+t-0379	남다	V	-	-었었- 죠	남았었죠	-	ref-test
+t-0380	내리다	V	-	어야	내려야	-	ref-test
+t-0381	되다	V	-	려면	되려면	-	ref-test
+t-0382	거절하다	V	-	-었- (으)ㄹ	거절했을	-	ref-test
+t-0383	이다	C	COP	-겠- 지	바람이겠지	바람	ref-test
+t-0384	넘치다	V	-	는다고/ㄴ다고	넘친다고	-	ref-test
+t-0385	생기다	V	-	-었- 습니다/ㅂ니다	생겼습니다	-	ref-test
+t-0386	바라보다	V	-	다	바라보다	-	ref-test
+t-0387	말다	-	-	고	말고	-	ref-test
+t-0388	부딪히다	V	-	-었- 다	부딪혔다	-	ref-test
+t-0389	짜릿하다	A	-	(으)ㄴ	짜릿한	-	ref-test
+t-0390	낡다	A	-	(으)ㄴ	낡은	-	ref-test
+t-0391	모르다	V	-	-겠- 니	모르겠니	-	ref-test
+t-0392	치료하다	V	-	-었- 다	치료했다	-	ref-test
+t-0393	듣다	V	-	어라	들어라	-	ref-test
+t-0394	돌아가다	V	-	(으)려고	돌아가려고	-	ref-test
+t-0395	노려보다	V	-	(으)며	노려보며	-	ref-test
+t-0396	놀리다	V	-	(으)ㄴ	놀린	-	ref-test
+t-0397	길다	A	-	-었- 던	길었던	-	ref-test
+t-0398	이다	C	COP	다	사치다	사치	ref-test
+t-0399	소개하다	V	-	(으)ㄹ	소개할	-	ref-test
+t-0400	이다	C	COP	니까요	소관이니까요	소관	ref-test
+t-0401	내다	V	-	-었- 어	냈어	-	ref-test
+t-0402	이다	C	COP	(으)ㅁ	책임	책	ref-test
+t-0403	틀림없다	A	-	지	틀림없지	-	ref-test
+t-0404	서명하다	V	-	어	서명해	-	ref-test
+t-0405	괜찮다	A	-	-었- 어	괜찮았어	-	ref-test
+t-0406	떠올리다	V	-	(으)ㄴ	떠올린	-	ref-test
+t-0407	정리되다	V	-	(으)ㄹ	정리될	-	ref-test
+t-0408	있다	X	-	어라	있어라	-	ref-test
+t-0409	이다	C	COP	다	나다	나	ref-test
+t-0410	피로하다	A	-	(으)ㄴ	피로한	-	ref-test
+t-0411	만지다	V	-	(으)ㄹ	만질	-	ref-test
+t-0412	이다	C	COP	라	앞이라	앞	ref-test
+t-0413	이다	C	COP	다	돈이다	돈	ref-test
+t-0414	놀다	V	-	(으)ㄹ까	놀까	-	ref-test
+t-0415	주고받다	V	-	(으)며	주고받으며	-	ref-test
+t-0416	닿다	V	-	(으)려고	닿으려고	-	ref-test
+t-0417	상상하다	V	-	자	상상하자	-	ref-test
+t-0418	이다	C	COP	습니다/ㅂ니다	수치입니다	수치	ref-test
+t-0419	받아들이다	V	-	어야	받아들여야	-	ref-test
+t-0420	싶다	-	-	군	싶군	-	ref-test
+t-0421	침입하다	V	-	-었- 다	침입했다	-	ref-test
+t-0422	평온하다	A	-	게	평온하게	-	ref-test
+t-0423	정성스럽다	A	-	게	정성스럽게	-	ref-test
+t-0424	가리키다	V	-	는	가리키는	-	ref-test
+t-0425	이다	C	COP	든	수든	수	ref-test
+t-0426	뚫다	V	-	어야	뚫어야	-	ref-test
+t-0427	꾸밈없다	A	-	는	꾸밈없는	-	ref-test
+t-0428	쏘다	V	-	-었- 다	쐈다	-	ref-test
+t-0429	이다	C	COP	잖아	거잖아	거	ref-test
+t-0430	않다	-	-	는	않는	-	ref-test
+t-0431	되다	V	-	-었- 든	됐든	-	ref-test
+t-0432	쌓다	V	-	(으)ㄴ	쌓은	-	ref-test
+t-0433	이다	C	COP	네	방학이네	방학	ref-test
+t-0434	사용하다	V	-	(으)ㄴ	사용한	-	ref-test
+t-0435	부드럽다	A	-	(으)면	부드러우면	-	ref-test
+t-0436	두르다	V	-	고	두르고	-	ref-test
+t-0437	발휘하다	V	-	게	발휘하게	-	ref-test
+t-0438	생각하다	V	-	(으)세요	생각하세요	-	ref-test
+t-0439	이입하다	V	-	고	이입하고	-	ref-test
+t-0440	팔리다	V	-	는다/ㄴ다	팔린다	-	ref-test
+t-0441	이다	C	COP	라도	권유라도	권유	ref-test
+t-0442	않다	-	-	게	않게	-	ref-test
+t-0443	단련하다	V	-	-었- (으)니까	단련했으니까	-	ref-test
+t-0444	이다	C	COP	-었- 지	논짱이었지	논짱	ref-test
+t-0445	구하다	V	-	는다는/ㄴ다는	구한다는	-	ref-test
+t-0446	삼다	V	-	(으)ㄴ	삼은	-	ref-test
+t-0447	크다	V	-	어서	커서	-	ref-test
+t-0448	그러다	V	-	고도	그러고도	-	ref-test
+t-0449	낫다	A	-	다	낫다	-	ref-test
+t-0450	기쁘다	A	-	네	기쁘네	-	ref-test
+t-0451	썩다	V	-	나	썩나	-	ref-test
+t-0452	발설하다	V	-	(으)ㄹ	발설할	-	ref-test
+t-0453	이다	C	COP	에요	비밀이에요	비밀	ref-test
+t-0454	옅다	A	-	어야	옅어야	-	ref-test
+t-0455	같다	A	-	(으)면	같으면	-	ref-test
+t-0456	되다	V	-	(으)ㄹ까요	될까요	-	ref-test
+t-0457	있다	X	-	게	있게	-	ref-test
+t-0458	되살아나다	V	-	-었- 나	되살아났나	-	ref-test
+t-0459	깊다	A	-	구먼	깊구먼	-	ref-test
+t-0460	수고하다	V	-	(으)세요	수고하세요	-	ref-test
+t-0461	이다	C	COP	지	어디지	어디	ref-test
+t-0462	괜찮다	A	-	-었- 는지	괜찮았는지	-	ref-test
+t-0463	말다	-	-	(으)ㄴ	만	-	ref-test
+t-0464	고요하다	A	-	-었- 다	고요했다	-	ref-test
+t-0465	않다	-	-	-었- 다고	않았다고	-	ref-test
+t-0466	생각하다	V	-	-었- 거든요	생각했거든요	-	ref-test
+t-0467	반응하다	V	-	고	반응하고	-	ref-test
+t-0468	출발하다	V	-	어	출발해	-	ref-test
+t-0469	들어오다	V	-	는다는/ㄴ다는	들어온다는	-	ref-test
+t-0470	준비하다	V	-	고	준비하고	-	ref-test
+t-0471	당하다	V	-	-었- 던	당했던	-	ref-test
+t-0472	동화하다	V	-	(으)ㄹ	동화할	-	ref-test
+t-0473	찾아오다	V	-	어도	찾아와도	-	ref-test
+t-0474	휘두르다	V	-	는	휘두르는	-	ref-test
+t-0475	도망치다	V	-	지	도망치지	-	ref-test
+t-0476	가져가다	V	-	는	가져가는	-	ref-test
+t-0477	줍다	V	-	는다/ㄴ다	줍는다	-	ref-test
+t-0478	걸리다	V	-	네요	걸리네요	-	ref-test
+t-0479	판단하다	V	-	(으)ㄹ	판단할	-	ref-test
+t-0480	하다	V	-	죠	하죠	-	ref-test
+t-0481	이다	C	COP	습니다/ㅂ니다	상품입니다	상품	ref-test
+t-0482	이다	C	COP	(으)면	감기약이면	감기약	ref-test
+t-0483	부적절하다	A	-	지	부적절하지	-	ref-test
+t-0484	축하하다	V	-	(으)ㄹ	축하할	-	ref-test
+t-0485	있다	X	-	-었- 습니다요	있었습니다요	-	ref-test
+t-0486	죽다	V	-	네요	죽네요	-	ref-test
+t-0487	붐비다	V	-	기	붐비기	-	ref-test
+t-0488	그렇다	A	-	-었- (으)면서	그랬으면서	-	ref-test
+t-0489	연결되다	V	-	지	연결되지	-	ref-test
+t-0490	극복하다	V	-	-었- 다고	극복했다고	-	ref-test
+t-0491	사과하다	V	-	지	사과하지	-	ref-test
+t-0492	대다	V	-	자마자	대자마자	-	ref-test
+t-0493	좋아하다	V	-	-었- 던	좋아했던	-	ref-test
+t-0494	무수하다	A	-	(으)ㄴ	무수한	-	ref-test
+t-0495	걱정되다	V	-	(으)니까	걱정되니까	-	ref-test
+t-0496	깨어나다	V	-	(으)ㄴ	깨어난	-	ref-test
+t-0497	날다	V	-	는다/ㄴ다	난다	-	ref-test
+t-0498	노래하다	V	-	지	노래하지	-	ref-test
+t-0499	마비되다	V	-	는	마비되는	-	ref-test
+t-0500	의지하다	V	-	어야	의지해야	-	ref-test
+t-0501	익숙하다	A	-	어	익숙해	-	ref-test
+t-0502	단호하다	A	-	게	단호하게	-	ref-test
+t-0503	있다	X	-	노	있노	-	ref-test
+t-0504	희생시키다	V	-	(으)ㄴ	희생시킨	-	ref-test
+t-0505	새롭다	A	-	다는	새롭다는	-	ref-test
+t-0506	있다	X	-	-었- 거든	있었거든	-	ref-test
+t-0507	생각하다	V	-	(으)면	생각하면	-	ref-test
+t-0508	지나다	V	-	어도	지나도	-	ref-test
+t-0509	고르다	V	-	-었- 네	골랐네	-	ref-test
+t-0510	경계하다	V	-	게	경계하게	-	ref-test
+t-0511	응대하다	V	-	고	응대하고	-	ref-test
+t-0512	계속하다	V	-	는다/ㄴ다	계속한다	-	ref-test
+t-0513	있다	X	-	단	있단	-	ref-test
+t-0514	끄다	V	-	(으)ㄹ	끌	-	ref-test
+t-0515	보다	V	-	(으)며	보며	-	ref-test
+t-0516	들다	V	-	어요	들어요	-	ref-test
+t-0517	들어오다	V	-	는	들어오는	-	ref-test
+t-0518	기다리다	V	-	-겠- 어	기다리겠어	-	ref-test
+t-0519	활용하다	V	-	(으)ㄴ	활용한	-	ref-test
+t-0520	방황하다	V	-	는다/ㄴ다	방황한다	-	ref-test
+t-0521	노리다	V	-	어	노려	-	ref-test
+t-0522	이다	C	COP	(으)면서	외톨이면서	외톨이	ref-test
+t-0523	대신하다	V	-	(으)ㄹ	대신할	-	ref-test
+t-0524	깨어나다	V	-	-었- (으)ㄹ	깨어났을	-	ref-test
+t-0525	박히다	V	-	지	박히지	-	ref-test
+t-0526	웃다	V	-	(으)니	웃으니	-	ref-test
+t-0527	바뀌다	V	-	(으)ㄹ	바뀔	-	ref-test
+t-0528	사라지다	V	-	(으)려고	사라지려고	-	ref-test
+t-0529	찍다	V	-	지	찍지	-	ref-test
+t-0530	돌아가다	V	-	-었- 지만	돌아갔지만	-	ref-test
+t-0531	주다	-	-	-(으)시- 지	주시지	-	ref-test
+t-0532	불순하다	A	-	어요	불순해요	-	ref-test
+t-0533	가리키다	V	-	(으)ㄴ	가리킨	-	ref-test
+t-0534	이다	C	COP	지만	처음이지만	처음	ref-test
+t-0535	즐기다	V	-	거나	즐기거나	-	ref-test
+t-0536	빨개지다	V	-	어	빨개져	-	ref-test
+t-0537	기억하다	V	-	고	기억하고	-	ref-test
+t-0538	이다	C	COP	어도	둘이어도	둘	ref-test
+t-0539	묘하다	A	-	다는	묘하다는	-	ref-test
+t-0540	뛰다	V	-	-었- 다	뛰었다	-	ref-test
+t-0541	해킹하다	V	-	고	해킹하고	-	ref-test
+t-0542	넘어가다	V	-	어도	넘어가도	-	ref-test
+t-0543	농락하다	V	-	는	농락하는	-	ref-test
+t-0544	좇다	V	-	-었- 다	좇았다	-	ref-test
+t-0545	단정하다	A	-	고	단정하고	-	ref-test
+t-0546	되다	V	-	-겠- 다	되겠다	-	ref-test
+t-0547	간지럽다	A	-	어요	간지러워요	-	ref-test
+t-0548	하다	V	-	더군요	하더군요	-	ref-test
+t-0549	물다	V	-	는	무는	-	ref-test
+t-0550	이다	C	COP	-었- 던	마음이었던	마음	ref-test
+t-0551	집중하다	V	-	어서	집중해서	-	ref-test
+t-0552	말다	-	-	어	마|말아	-	ref-test
+t-0553	이다	C	COP	-었- 다	방식이었다	방식	ref-test
+t-0554	들어가다	V	-	-었- (으)ㄹ	들어갔을	-	ref-test
+t-0555	그리다	V	-	어	그려	-	ref-test
+t-0556	세우다	V	-	(으)ㄹ	세울	-	ref-test
+t-0557	걸리다	V	-	-었- 다는	걸렸다는	-	ref-test
+t-0558	돌아보다	V	-	는다/ㄴ다	돌아본다	-	ref-test
+t-0559	연락하다	V	-	-었- 더니	연락했더니	-	ref-test
+t-0560	끄다	V	-	-었- 다	껐다	-	ref-test
+t-0561	끓어오르다	V	-	고	끓어오르고	-	ref-test
+t-0562	꺾이다	V	-	지	꺾이지	-	ref-test
+t-0563	이루다	V	-	는	이루는	-	ref-test
+t-0564	능글맞다	A	-	게	능글맞게	-	ref-test
+t-0565	이다	C	COP	라	씨라	씨	ref-test
+t-0566	이다	C	COP	(으)ㄴ가요	셈인가요	셈	ref-test
+t-0567	모르다	V	-	는다는/ㄴ다는	모른다는	-	ref-test
+t-0568	단언하다	V	-	(으)ㄹ	단언할	-	ref-test
+t-0569	겸손하다	A	-	게	겸손하게	-	ref-test
+t-0570	결석하다	V	-	(으)면	결석하면	-	ref-test
+t-0571	듣다	V	-	-었- 는데요	들었는데요	-	ref-test
+t-0572	의심하다	V	-	어서	의심해서	-	ref-test
+t-0573	중요하다	A	-	다	중요하다	-	ref-test
+t-0574	강요당하다	V	-	고	강요당하고	-	ref-test
+t-0575	행동하다	V	-	라고	행동하라고	-	ref-test
+t-0576	잊어버리다	V	-	(으)ㄹ	잊어버릴	-	ref-test
+t-0577	이다	C	COP	습니까/ㅂ니까	조난입니까	조난	ref-test
+t-0578	가라앉다	V	-	어서	가라앉아서	-	ref-test
+t-0579	허용하다	V	-	지	허용하지	-	ref-test
+t-0580	이다	C	COP	군요	중이군요	중	ref-test
+t-0581	놓다	-	-	-었- 어	놨어	-	ref-test
+t-0582	재미있다	A	-	(으)ㄹ까	재미있을까	-	ref-test
+t-0583	이다	C	COP	(으)ㄴ데	OK인데	OK	ref-test
+t-0584	올라가다	V	-	어	올라가	-	ref-test
+t-0585	오발되다	V	-	(으)면	오발되면	-	ref-test
+t-0586	이다	C	COP	라는	최악이라는	최악	ref-test
+t-0587	내보이다	V	-	-었- 다	내보였다	-	ref-test
+t-0588	일으키다	V	-	(으)며	일으키며	-	ref-test
+t-0589	두다	-	-	-었- 어요	뒀어요	-	ref-test
+t-0590	얽다	V	-	는다/ㄴ다	얽는다	-	ref-test
+t-0591	받다	V	-	(으)ㄹ	받을	-	ref-test
+t-0592	이다	C	COP	습니다/ㅂ니다	쿄타로입니다	쿄타로	ref-test
+t-0593	겨누다	V	-	(으)ㄴ	겨눈	-	ref-test
+t-0594	투입하다	V	-	(으)ㄹ	투입할	-	ref-test
+t-0595	사귀다	V	-	는	사귀는	-	ref-test
+t-0596	좋아하다	V	-	는	좋아하는	-	ref-test
+t-0597	섬세하다	A	-	(으)ㄴ	섬세한	-	ref-test
+t-0598	막다	V	-	(으)려고	막으려고	-	ref-test
+t-0599	흘리다	V	-	-었- 다	흘렸다	-	ref-test
+t-0600	타이르다	V	-	어서	타일러서	-	ref-test
