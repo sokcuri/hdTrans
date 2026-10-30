@@ -7,6 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { buildGate, releaseBot, releaseFiles, testedRun, testedTreeArtifact, versionCommit } from './build-gate.mjs';
+import { allPresets } from './ci-scope.mjs';
 import { npmAssetName } from './publication.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -75,7 +76,7 @@ test('tag publication owns the only tag trigger and calls Build without dispatch
   assert.match(publisher, /dry_run: \$\{\{ github.event_name == 'workflow_dispatch' && inputs.dry_run \}\}/);
   assert.doesNotMatch(build.slice(0, build.indexOf('\npermissions:')), /tags:/);
   assert.match(build, /  workflow_call:/);
-  assert.match(build, /group: build-\$\{\{ github.workflow \}\}-\$\{\{ github.ref \}\}/);
+  assert.match(build, /group: build-\$\{\{ github.workflow \}\}-\$\{\{ github\.event_name == 'schedule' && 'schedule' \|\| github.ref \}\}/);
 });
 
 test('manual recovery requires a stable tag before any reusable build', () => {
@@ -379,25 +380,48 @@ test('the gate runs first and only a definite no skips the release tools and the
   const script = gate.slice(gate.indexOf('script: |'));
   assert.ok(script.indexOf('core.summary') < script.indexOf("core.setOutput('run'"));
   const steps = gate.split('\n      - ').slice(1);
-  assert.equal(steps.length, 2);
+  assert.equal(steps.length, 3);
   const startsWith = (a, b) => a.startsWith(b);
-  for (const step of steps) {
+  const stepIf = step => {
+    const folded = step.match(/\n        if: >-\n((?:          .*\n)+)/);
+    return folded ? folded[1].trim().replace(/\n\s*/g, ' ') : step.match(/\n        if: (.*)\n/)[1];
+  };
+  const events = [
+    ['pull_request', 'refs/pull/1/merge'], ['push', 'refs/heads/main'], ['push', 'refs/heads/develop'],
+    ['push', 'refs/tags/v1.2.3'], ['workflow_dispatch', 'refs/tags/v1.2.3'], ['workflow_dispatch', 'refs/heads/main'],
+    ['schedule', 'refs/heads/develop'],
+  ];
+  const expected = {
+    checkout: ['pull_request', 'push refs/heads/main', 'push refs/heads/develop', 'schedule'],
+    gate: ['pull_request', 'push refs/heads/main', 'push refs/heads/develop'],
+    scope: ['pull_request', 'schedule'],
+  };
+  for (const [step, name] of steps.map((step, i) => [step, Object.keys(expected)[i]])) {
     assert.match(step, /\n        continue-on-error: true\n/);
-    const runs = new Function('github', 'startsWith', `return (${step.match(/\n        if: (.*)\n/)[1]});`);
-    assert.equal(runs({ event_name: 'pull_request', ref: 'refs/pull/1/merge' }, startsWith), true);
-    assert.equal(runs({ event_name: 'push', ref: 'refs/heads/main' }, startsWith), true);
-    assert.equal(runs({ event_name: 'push', ref: 'refs/heads/develop' }, startsWith), true);
-    assert.equal(runs({ event_name: 'push', ref: 'refs/tags/v1.2.3' }, startsWith), false);
-    assert.equal(runs({ event_name: 'workflow_dispatch', ref: 'refs/tags/v1.2.3' }, startsWith), false);
-    assert.equal(runs({ event_name: 'workflow_dispatch', ref: 'refs/heads/main' }, startsWith), false);
+    const runs = new Function('github', 'startsWith', `return (${stepIf(step)});`);
+    for (const [event_name, ref] of events) {
+      const want = expected[name].includes(event_name) || expected[name].includes(`${event_name} ${ref}`);
+      assert.equal(runs({ event_name, ref }, startsWith), want, `${name}: ${event_name} ${ref}`);
+    }
   }
-  for (const job of ['release-tools', 'build']) {
-    const body = build.slice(build.indexOf(`\n  ${job}:\n`));
-    assert.match(body, /^    needs: gate\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' \}\}$/m, job);
+  assert.match(steps[2], /ciScope\(\{ context \}\)/);
+  assert.ok(steps[2].indexOf('core.summary') < steps[2].indexOf("core.setOutput('presets'"));
+  const releaseTools = build.slice(build.indexOf('\n  release-tools:\n'));
+  assert.match(releaseTools, /^    needs: gate\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' \}\}$/m);
+  const buildJob = build.slice(build.indexOf('\n  build:\n'));
+  assert.match(buildJob,
+    /^    needs: gate\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' && needs\.gate\.outputs\.presets != '\[\]' \}\}$/m);
+  for (const body of [releaseTools, buildJob]) {
     const runs = new Function('needs', 'cancelled', `return (${body.match(/^    if: \$\{\{ (.*) \}\}$/m)[1]});`);
-    for (const run of ['true', '', undefined]) assert.equal(runs({ gate: { outputs: { run } } }, () => false), true, `${job} ${run}`);
-    assert.equal(runs({ gate: { outputs: { run: 'false' } } }, () => false), false);
+    for (const run of ['true', '', undefined]) {
+      for (const presets of ['["linux"]', '', undefined]) {
+        assert.equal(runs({ gate: { outputs: { run, presets } } }, () => false), true, `${run} ${presets}`);
+      }
+    }
+    assert.equal(runs({ gate: { outputs: { run: 'false', presets: '["linux"]' } } }, () => false), false);
   }
+  assert.equal(new Function('needs', 'cancelled', `return (${buildJob.match(/^    if: \$\{\{ (.*) \}\}$/m)[1]});`)(
+    { gate: { outputs: { run: 'true', presets: '[]' } } }, () => false), false);
   assert.doesNotMatch(build + publisher, /skip ci/);
 });
 
@@ -679,7 +703,30 @@ test('the record job runs only after a passing matrix or a matched release-files
 test('branch pushes build only main and develop; superseded pull request runs are cancelled', () => {
   const triggers = build.slice(build.indexOf('\non:\n'), build.indexOf('\npermissions:'));
   assert.match(triggers, /  push:\n    branches: \[main, develop\]\n  pull_request:\n/);
-  assert.match(build, /concurrency:\n  group: build-\$\{\{ github\.workflow \}\}-\$\{\{ github\.ref \}\}\n  cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}\n/);
+  assert.match(build, /concurrency:\n  group: build-\$\{\{ github\.workflow \}\}-\$\{\{ github\.event_name == 'schedule' && 'schedule' \|\| github\.ref \}\}\n  cancel-in-progress: \$\{\{ github\.event_name == 'pull_request' \}\}\n/);
+});
+
+test('the scheduled run tests only the sanitizer and the fuzzer and never packages', () => {
+  const triggers = build.slice(build.indexOf('\non:\n'), build.indexOf('\npermissions:'));
+  assert.match(triggers, /\n  schedule:\n    - cron: '[0-9]+ [0-9]+ \* \* \*'\n/);
+  const schedule = { event_name: 'schedule', ref: 'refs/heads/develop' };
+  assert.equal(canPackage(schedule, (a, b) => a.startsWith(b)), false);
+  for (const job of ['sanitize', 'fuzz']) {
+    const body = build.slice(build.indexOf(`\n  ${job}:\n`));
+    const runs = new Function('github', 'needs', 'cancelled', `return (${foldedCondition(body)});`);
+    const needs = native => ({ gate: { outputs: { run: '', native } } });
+    for (const event_name of ['schedule', 'push', 'pull_request']) {
+      assert.equal(runs({ event_name }, needs(''), () => false), true, `${job} ${event_name}`);
+      assert.equal(runs({ event_name }, needs('true'), () => false), true, `${job} ${event_name}`);
+      assert.equal(runs({ event_name }, needs('false'), () => false), false, `${job} ${event_name}`);
+    }
+    assert.equal(runs({ event_name: 'workflow_dispatch' }, needs(''), () => false), false, job);
+  }
+});
+
+test('the matrix falls back to every preset when the gate chose none', () => {
+  const fallback = build.match(/^        preset: \$\{\{ fromJSON\(needs\.gate\.outputs\.presets \|\| '(.*)'\) \}\}$/m)[1];
+  assert.deepEqual(JSON.parse(fallback), allPresets);
 });
 
 const fuzzJob = build.slice(build.indexOf('\n  fuzz:\n'), build.indexOf('\n  release:\n'));
@@ -697,13 +744,18 @@ test('the random fuzz run fails develop pushes and only warns on pull requests, 
   // Publish npm calls Build on the tag push, so a tag build has the push event and the tag ref.
   for (const [event_name, ref, blocking] of [
     ['push', 'refs/heads/develop', true],
+    ['schedule', 'refs/heads/develop', true],
     ['push', 'refs/heads/main', false],
     ['pull_request', 'refs/pull/7/merge', false],
     ['push', 'refs/tags/v1.2.3', false],
   ]) {
     assert.equal(fuzzBlocking({ event_name, ref }, startsWith), blocking, `${event_name} ${ref}`);
   }
-  assert.match(fuzzJob, /\n    if: \$\{\{ !cancelled\(\) && needs\.gate\.outputs\.run != 'false' && \(github\.event_name == 'push' \|\| github\.event_name == 'pull_request'\) \}\}\n/);
+  const seconds = new Function('github', `return (${fuzzJob.match(/^      FUZZ_SECONDS: \$\{\{ (.*) \}\}$/m)[1]});`);
+  assert.equal(seconds({ event_name: 'pull_request' }), 60);
+  assert.equal(seconds({ event_name: 'push' }), 150);
+  assert.ok(seconds({ event_name: 'schedule' }) >= 1200);
+  assert.match(fuzzStep('Fuzz'), /--seconds "\$FUZZ_SECONDS"/);
   assert.match(fuzzStep('Fuzz'), /\n        continue-on-error: \$\{\{ env\.FUZZ_BLOCKING != 'true' \}\}\n/);
   assert.doesNotMatch(fuzzStep('Replay the seeds and regression inputs'), /continue-on-error/);
   assert.match(fuzzStep('Upload the failing inputs and fuzzer logs'), /steps\.fuzz\.outcome == 'failure'/);
@@ -728,7 +780,7 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
       cwd: dir,
       env: {
         ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, RUNNER_TEMP: dir, GITHUB_STEP_SUMMARY: summary,
-        GITHUB_RUN_NUMBER: '5', FUZZ_BLOCKING: blocking, FIXTURE_STATUS: String(status),
+        GITHUB_RUN_NUMBER: '5', FUZZ_BLOCKING: blocking, FUZZ_SECONDS: '60', FIXTURE_STATUS: String(status),
       },
       encoding: 'utf8',
     });
@@ -744,7 +796,20 @@ const perfStep = build.slice(build.indexOf('      - name: Performance budget\n')
   build.indexOf('\n      - name:', build.indexOf('      - name: Performance budget\n') + 1));
 
 test('the performance budget measures pull requests only and never fails the job', () => {
-  assert.match(perfStep, /\n        if: matrix\.preset == 'linux' && github\.event_name == 'pull_request'\n/);
+  const job = build.slice(build.indexOf('\n  perf:\n'), build.indexOf('\n  release:\n'));
+  const runs = new Function('github', 'needs', 'cancelled', `return (${foldedCondition(job)});`);
+  const needs = (run, native) => ({ gate: { outputs: { run, native } } });
+  assert.equal(runs({ event_name: 'pull_request' }, needs('true', 'true'), () => false), true);
+  assert.equal(runs({ event_name: 'pull_request' }, needs('', ''), () => false), true);
+  assert.equal(runs({ event_name: 'pull_request' }, needs('true', 'false'), () => false), false);
+  assert.equal(runs({ event_name: 'pull_request' }, needs('false', 'true'), () => false), false);
+  for (const event_name of ['push', 'schedule', 'workflow_dispatch']) {
+    assert.equal(runs({ event_name }, needs('true', 'true'), () => false), false, event_name);
+  }
+  assert.match(job, /^    needs: \[gate, build\]$/m);
+  assert.match(job, /^    continue-on-error: true$/m);
+  assert.match(job, /name: hdtrans-linux\n          path: build\/linux\n/);
+  assert.match(perfStep, /\n        if: steps\.download\.outcome == 'success'\n/);
   assert.match(perfStep, /\n        continue-on-error: true\n/);
   assert.doesNotMatch(build, /Perf-Budget|perf-budget\.tsv|name: perf-budget\n/);
   assert.equal(existsSync(join(root, 'tools/perf-budget.tsv')), false);
@@ -801,22 +866,30 @@ sys.exit(int(os.environ["FIXTURE_STATUS"]))
   });
 }
 
-test('the sanitizer job runs every unit test shard and keeps the stack checks', () => {
+test('the sanitizer job runs every unit test shard on pushes and all but the megabyte one on pull requests', () => {
   const job = build.slice(build.indexOf('\n  sanitize:\n'), build.indexOf('\n  fuzz:\n'));
   assert.match(job, /^      ASAN_OPTIONS: detect_stack_use_after_return=1$/m);
-  const selected = new RegExp(job.match(/ctest --preset linux-asan --parallel "\$\(getconf _NPROCESSORS_ONLN\)" -R '([^']+)'/)[1]);
+  const all = new Function('github', `return (${job.match(/^      SANITIZE_ALL: \$\{\{ (.*) \}\}$/m)[1]});`);
+  for (const event_name of ['push', 'schedule']) assert.equal(all({ event_name }), true, event_name);
+  assert.equal(all({ event_name: 'pull_request' }), false);
+  const [full, quick] = [...job.matchAll(/select=\((.*)\)$/gm)].map(match => match[1]);
+  const pattern = (args, flag) => new RegExp(args.match(new RegExp(`${flag} '([^']+)'`))?.[1] ?? '(?!)');
+  const runs = (args, name) => pattern(args, '-R').test(name) && !pattern(args, '-E').test(name);
   const shards = readFileSync(join(root, 'tests/unit/shards.txt'), 'utf8').split('\n')
     .filter(line => line.trim() && !line.startsWith('#')).map(line => `unit.${line.split(/\s+/)[0]}`);
-  assert.ok(shards.length > 1);
+  assert.ok(shards.length > 1 && shards.includes('unit.engine.megabyte'));
   for (const name of ['unit.shards', ...shards, 'rules.critical', 'rules.cases.themes', 'examples']) {
-    assert.match(name, selected, name);
+    assert.ok(runs(full, name), name);
+    assert.equal(runs(quick, name), !['unit.engine.megabyte', 'rules.cases.themes'].includes(name), name);
   }
-  assert.doesNotMatch('units', selected);
+  assert.ok(!runs(full, 'units') && !runs(quick, 'units'));
+  assert.match(job, /if \[\[ "\$SANITIZE_ALL" != true \]\]; then targets=\(--target hdtrans_tests hdtrans_cli\); fi/);
 });
 
 const ciOkJob = build.slice(build.indexOf('\n  ci-ok:\n'));
-// Jobs of Build that test nothing: the tested-tree record and the packaging of pushes.
-const notTestJobs = ['tested', 'release'];
+// Jobs of Build that ci-ok does not wait for: the tested-tree record, the packaging of pushes and
+// the performance budget, which only reports.
+const notTestJobs = ['tested', 'release', 'perf'];
 
 test('ci-ok needs every job of Build that tests code', () => {
   const jobs = [...build.slice(build.indexOf('\njobs:\n')).matchAll(/^  ([\w-]+):$/gm)].map(match => match[1]);
