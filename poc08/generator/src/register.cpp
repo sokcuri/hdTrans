@@ -377,7 +377,9 @@ std::vector<Reg> AssignRegister(const RegisterTables& rt, const std::vector<Node
             }
             bool excluded = false;
             for (const auto& x : rt.honExclude)
-                if (x == n.lemma) excluded = true;
+                if (x == n.lemma || (x.rfind("suffix:", 0) == 0 && n.lemma.size() > x.size() - 7 &&
+                                     n.lemma.compare(n.lemma.size() - (x.size() - 7), x.size() - 7, x, 7, std::string::npos) == 0))
+                    excluded = true;
             if (pos == "V" && cls != "COP" && cls != "EXIST" && !excluded) r.hon = true;
         }
         if (n.ctype == CType::final_) subjectSeen = false;

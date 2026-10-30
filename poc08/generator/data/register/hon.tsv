@@ -15,3 +15,4 @@ exclude	괜찮다
 exclude	맞다	맞아요?
 exclude	좋다
 exclude	싫다
+exclude	suffix:시다	a lemma that already carries -시- (하시다, 계시다): no second 시

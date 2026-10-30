@@ -550,8 +550,17 @@ RewriteResult Run(const RuleSet& rs, const Tables& t, const std::vector<Node>& k
         uint32_t id = MaxId(nodes);
         std::sort(inserts.begin(), inserts.end(), [](const auto& a, const auto& b2) { return a.first < b2.first; });
         size_t ins = 0;
+        bool clearGlue = false;
         for (size_t k = 0; k < nodes.size(); ++k) {
-            if (!dead[k]) next.push_back(nodes[k]);
+            if (dead[k]) {
+                // the word after a deleted mark was attached to the mark, not to the word before it
+                if (nodes[k].kind == Kind::Punct) clearGlue = true;
+            } else {
+                Node keep = nodes[k];
+                if (clearGlue && keep.kind != Kind::P && keep.kind != Kind::Punct) keep.glue = false;
+                clearGlue = false;
+                next.push_back(keep);
+            }
             while (ins < inserts.size() && inserts[ins].first == k) {
                 for (auto n : inserts[ins].second) {
                     n.id = ++id;

@@ -567,7 +567,10 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
                 }
                 bool attach = n.glue;
                 auto wr = t.words.find("N:" + n.lemma);
-                if (wr != t.words.end() && !n.glue) {
+                // dependent nouns and counters are spaced by 한글 맞춤법, whatever the input's spacing (하는 대로)
+                const bool spacingClass = wr != t.words.end() && (wr->second.kind == "dep" || wr->second.kind == "counter");
+                if (wr != t.words.end() && (!n.glue || spacingClass)) {
+                    if (spacingClass) attach = false;
                     const std::string& a = wr->second.attach;
                     if (a == "always") attach = true;
                     else if (a == "after-digit") attach = !w.word.empty() && w.word.back() >= U'0' && w.word.back() <= U'9';
