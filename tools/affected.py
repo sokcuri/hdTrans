@@ -17,7 +17,9 @@ one body. An ending row (pos S5.., T5.., U5..) is matched after a stem, also und
 key (V, I, D), so it reaches every line, and so does a rule that an ending row names. A verb or
 adjective row of a plain file gives its stem (the key without its last kana, or without する or
 来る). A kanji key also gives the kana spellings that the kana layer maps to it. Needles and lines
-are compared folded (fold()).
+are compared folded (fold()); a kanji run of a needle that also holds kana matches a short run of
+hiragana too (pattern()), since the engine reads hiragana as a kanji spelling. A needle of kanji
+alone is matched as it stands: its kana spellings outside the kana layer are not covered.
 
 Lines that hold none of the needles keep their translation in each-line mode (one session per
 line): the engine looks a row up only where its key stands in the text. In document mode a name or
@@ -35,6 +37,9 @@ from pathlib import Path
 NO_EFFECT = re.compile(r"^(tests|docs|spec|tools|skills|examples|web|\.github|\.claude)/|\.md$|^LICENSE|"
                        r"^src/core/rules/program\.hash$|^\.gitignore$|^\.gitattributes$")
 STRIP = str.maketrans("", "", "ーｰ～〜~・ \t　")
+KANJI = "\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff々〆ヵヶ"
+RUBY = re.compile(f"([{KANJI}])[(（《][\u3041-\u30ff]+[)）》]")
+KANJI_RUN = re.compile(f"[{KANJI}]+")
 
 
 def fail(message):
@@ -43,13 +48,28 @@ def fail(message):
 
 
 def fold(text):
-    """Lowers what the engine may read as the same text to one form: NFKC, lower case, hiragana for
-    katakana, no long-vowel or wave marks, middle dots or spaces, a doubled kanji for 々. Folding
-    both sides keeps every substring a substring."""
-    text = unicodedata.normalize("NFKC", text).lower()
+    """Lowers what the engine may read as the same text to one form: no ruby reading in brackets
+    after a kanji, NFKC, lower case, hiragana for katakana, no long-vowel or wave marks, middle dots
+    or spaces, a doubled kanji for 々. Folding both sides keeps every substring a substring."""
+    text = unicodedata.normalize("NFKC", RUBY.sub(r"\1", text)).lower()
     text = "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヶ" else c for c in text)
     text = re.sub(r"(.)々", r"\1\1", text)
     return text.translate(STRIP)
+
+
+def pattern(needle):
+    """A regular expression for a folded needle. The engine reads a run of hiragana as a kanji
+    spelling (どんなときも as どんな時も), so each kanji run of a needle that also holds kana matches
+    up to two hiragana per kanji, plus two, in its place."""
+    runs = list(KANJI_RUN.finditer(needle))
+    if not runs or all(m.group() == needle for m in runs):
+        return re.escape(needle)
+    out, last = [], 0
+    for m in runs:
+        k = m.group()
+        out += [re.escape(needle[last:m.start()]), f"(?:{re.escape(k)}|[\u3041-\u3096]{{1,{2 * len(k) + 2}}})"]
+        last = m.end()
+    return "".join(out + [re.escape(needle[last:])])
 
 
 def kana(c):
@@ -199,7 +219,9 @@ HEADER = "#! layer=words\n# test\nkey\tko\tpos\tsem\tgram\tdict\trule\tctx\tnote
 
 def self_test():
     assert fold("アテツケ") == "あてつけ" and fold("すごーい") == "すごい" and fold("時々") == "時時"
-    assert fold("ｶﾞｷ") == "がき" and fold("ＡＢＣ") == "abc"
+    assert fold("ｶﾞｷ") == "がき" and fold("ＡＢＣ") == "abc" and fold("逢(あ)いたくて") == "逢いたくて"
+    assert re.search(pattern(fold("どんな時も")), fold("でも どんなときも")) and re.search(pattern("聖"), "聖さん")
+    assert not re.search(pattern("聖"), "せい") and not re.search(pattern("どんな時も"), "どんなとき")
     assert stem("這い上がる", "v5") == "這い上が" and stem("コケにする", "v") == "コケに"
     assert stem("冷たい", "adj") == "冷た" and stem("静か", "na") == "静か" and stem("書く", "v5") == "書"
     base = {"dicts/w.tsv": HEADER + "当て\t맞힘\tN110\t\t\tGN\t\t\t\t\t\t\tw:1\n"

@@ -20,7 +20,8 @@ pinned base build is measured once for every fix made on it.
 
 --base RUN --needles FILE translates only the lines that hold a needle (tools/affected.py; lines are
 folded by its fold()) and the documents or blocks that hold such a line, and copies the rest from
-RUN, the base run of the same sets. A needle file holding `*` translates everything. --canary N
+RUN, the base run of the same sets. A needle file holding `*` or more than 1000 needles translates
+everything. --canary N
 also translates N seeded distinct lines without a needle per each-line set and fails when one of
 them differs from RUN, which means the needles missed a way the change reaches the text.
 
@@ -49,7 +50,8 @@ HERE = Path(__file__).resolve().parent.parent
 _spec = importlib.util.spec_from_file_location("affected", HERE / "tools" / "affected.py")
 _affected = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_affected)
-fold = _affected.fold
+fold, needle_pattern = _affected.fold, _affected.pattern
+MANY = 1000  # needles beyond which matching costs more than translating every line
 
 
 def fail(message, code=2):
@@ -260,8 +262,8 @@ def run(argv):
     pattern = None
     if needles_path:
         needles = [n for n in needles_path.read_text(encoding="utf-8").split("\n") if n]
-        if "*" not in needles:
-            alternatives = "|".join(map(re.escape, sorted(set(needles), key=len, reverse=True)))
+        if "*" not in needles and len(needles) <= MANY:
+            alternatives = "|".join(map(needle_pattern, sorted(set(needles), key=len, reverse=True)))
             pattern = re.compile(alternatives or "(?!)")
     cli_sha, dicts_sha = sha(cli.read_bytes()), dicts_hash(dicts)
     start = time.time()
