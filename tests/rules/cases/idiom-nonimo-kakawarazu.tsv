@@ -9,7 +9,7 @@ dict:lexical-novel-idioms	それにも関わらず私の家族に手を出しま
 dict:lexical-novel-idioms	それにも拘わらず、彼女は笑った。	그럼에도 불구하고, 그녀는 웃었다.	fix	lookup
 dict:lexical-novel-idioms	それにもかかわらず私の家族に手を出しました。	그럼에도 불구하고 제 가족에게 손을 대었습니다.	keep	lookup
 dict:novel-idioms:1	何に刺激されたのか、その男の子は突然、自習中にも関わらずバケツを持ち出した。	무엇에 자극되었는지, 그 남자아이는 갑자기, 자습 중에도 불구하고 양동이를 꺼냈다.	keep	local
-dict:novel-idioms:1	汚れているにも関わらず、レナは嬉しそうに頬擦りをしている。	더러워져 있는 것에도 불구하고, 레나는 기쁜 듯이 뺨스침을 하고 있다.	keep	local
+dict:novel-idioms:1	汚れているにも関わらず、レナは嬉しそうに頬擦りをしている。	더러워져 있음에도 불구하고, 레나는 기쁜 듯이 뺨스침을 하고 있다.	keep	local
 dict:novel-idioms:3	なぜ犯罪を犯したにもかかわらず	왜 범죄를 범했음에도 불구하고	keep	local
 dict:novel-idioms:3	と きつく言われていたにもかかわらず	라고 힘들게 듣고 있었음에도 불구하고	keep	local
 dict:novel-idioms:3	無実にもかかわらず自白し逮捕されてしまった。	결백에도 불구하고 자백해 체포되어버렸다.	keep	local

@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 compose:repeated-verb	ありますかあります	있습니까 있습니다	fix	compose
-compose:repeated-verb	大阪の八軒屋じゃさあ 乗らんか 乗らんか～	오사카의 하치켄야는 자 타지 않아인가 타지 않아인가~	keep	compose
+compose:repeated-verb	大阪の八軒屋じゃさあ 乗らんか 乗らんか～	오사카의 하치켄야는 자 타지 않는가 타지 않는가~	keep	compose
 compose:repeated-verb	行くのか行かないのか	가는지 가지 않는 건가	keep	compose
 compose:repeated-verb	疑いもした	의심하기도 했다	keep	compose
 compose:repeated-verb	言いかけた	말을 꺼냈다	keep	compose
