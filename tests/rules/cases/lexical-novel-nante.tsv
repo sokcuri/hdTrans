@@ -1,0 +1,19 @@
+rule	input	expected	kind	layer
+dict:jisjk:264445	「なんて書いたの？」	has:「뭐라고 썼어	fix	local
+dict:jisjk:264445	でもなんて説明しよう。	has:뭐라고 설명	fix	local
+dict:jisjk:264445	「なんて書いてあるの！？」	has:「뭐라고 써	fix	local
+dict:jisjk:264445	教えて　これ　なんていうの？	has:뭐라는	fix	local
+dict:jisjk:264445	「お父さんの名前はなんて言うの？」	has:이름은 뭐라고	fix	local
+dict:jisjk:264445	ここからはなんて伝えればいいのかな？	has:뭐라고 전하면	fix	local
+dict:jisjk:264445	アリサってなんて呼ぶの？	has:뭐라고 부르는	fix	local
+dict:jisjk:264445	で 当の船越さんはなんて言ってるんですか？	has:뭐라고 말합니까	fix	local
+dict:jisjk:264445	で こいつは なんて言ってんだ？	has:뭐라고 말하는	fix	local
+dict:jisjk:264445	(柳沢)なんて読むんだ？ これ｡	has:뭐라고 읽는	fix	local
+dict:jisjk:264445	タカーオシスターズ、意外とやる。なんて言うの？	has:뭐라고 말하는	fix	local
+dict:jisjk:264445	…なんて言えばいいのかなぁ…うん！	has:뭐라고 말하면	fix	local
+dict:jisjk:264445	なんて言われたらたぶん失神するな…。	has:라고 하면	keep	local
+dict:jisjk:264445	おいし～い卵焼きがあるよ～　なんて言われたら私だったら	has:라고 하면	keep	local
+dict:jisjk:264445	学校で真昼に渡した、なんて言える筈もなく	!rule:dict:jisjk:264445	keep	local
+dict:jisjk:264445	…なんて会話しちゃうのかもしんねえよな	!rule:dict:jisjk:264445	keep	local
+dict:jisjk:264445	なんて綺麗なんだ。	has:정말 예쁘	keep	local
+dict:jisjk:264445	勉強なんて嫌いだ。	has:같은 건	keep	local
