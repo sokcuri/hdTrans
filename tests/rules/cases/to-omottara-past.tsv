@@ -1,0 +1,14 @@
+# 규칙: GRM-24
+rule	input	expected	kind	layer
+dict:novel-to-omottara:1	やっとポールを掴んだと思ったら俺に突っ込んでくる人影がある。	has:잡았다고 생각했더니 나에게	fix	local-ending
+dict:novel-to-omottara:1	正直この五日間は熱にうなされ、やっと落ち着いたと思ったら王子のご訪問……	has:침착했다고 생각했더니 왕자의	fix	local-ending
+dict:novel-to-omottara:1	「久しぶりに会ったと思ったらいきなり勧誘？」	「오랜만에 만났다고 생각했더니 갑자기 권유?」	fix	local-ending
+dict:novel-to-omottara:1	お見送りに行ったと思ったら今度はお迎えですよ。	has:갔다고 생각했더니 이번에는 마중이에요.	fix	local-ending
+dict:novel-to-omottara:1	やっと寝たと思ったらまた起きて泣いて。	has:잤다고 생각했더니 또	fix	local-ending
+dict:novel-to-omottara:1	いきなり呼び出されたと思ったら	has:불려 갔다고 생각하면	current	local-ending
+dict:novel-to-omottara:1	腹が減ったと思ったら、もう昼みたいだ。	has:생각했더니	fix	local-ending
+dict:novel-to-omottara:1	これで済んだと思うたらちょろすぎるで	has:끝났다고 생각하면	keep	local-ending
+dict:novel-to-omottara:1	うるさいと思ったら耳栓をしてください	has:생각하면	keep	local-ending
+dict:novel-to-omottara:1	ヤバいと思ったら任意にキャンセルできないとダメです。	has:위험하다고 생각하면	keep	local-ending
+dict:novel-to-omottara:1	この迷宮、攻略しようと思ったら地図は必須じゃん。	has:공략하려고 하면	keep	local-ending
+dict:novel-to-omottara:1	扉を開けたら誰もいなかった	문을 열면 아무도 없었다	current	local-ending
