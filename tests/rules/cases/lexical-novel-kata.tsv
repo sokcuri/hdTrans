@@ -33,3 +33,10 @@ dict:novel-kata:1	あの方、大森さんという方ですが、みなさん�
 dict:novel-kata:1	(署長)さっきね栄さんという方から電話があって	has:씨라는 분으로부터	fix	local-ending
 dict:novel-kata:1	チャーリー・クリスチャンさんという方。	has:씨라는 분.	fix	local-ending
 dict:novel-kata:1	生クリームが苦手という方	has:분	fix	local-ending
+dict:novel-kata:4	ゲーム初心者の方、レベル上げなんて嫌いだよという方に大人気のモードです。	has:분에게	fix	local
+dict:novel-kata:4	いらっしゃる方に聞いて何かご本人につながるヒントが	has:계시는 분에게	fix	local
+dict:novel-kata:4	自分の望む品物を持ってきてくださった方に嫁ぐと申しております	has:주신 분에게	fix	local
+dict:novel-kata:5	また スタジオに遊びに来て頂いた方には	has:주신 분에게는	fix	local
+dict:novel-kata:5	ご協力くださった方には こちらの記念シールを差し上げています｡	has:주신 분에게는	fix	local
+dict:novel-kata:4	夢見心地にさせる。	!rule:dict:novel-kata:4	keep	local
+dict:novel-kata:4	食べる方に回る。	!rule:dict:novel-kata:4	keep	local
