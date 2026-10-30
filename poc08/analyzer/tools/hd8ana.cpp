@@ -588,6 +588,15 @@ int CmdLongUnits(const Args& a) {
     *cost = inner;
     return ws.path.size();
   };
+  // A unit starts and ends with a content word: keys that open or close on a particle, an auxiliary
+  // or a symbol (の死に, に困ら, 早口に, あるから) are contextual rows of the translation dictionary.
+  auto function = [&](const Arc& x) {
+    if (x.kind != ArcKind::lex && x.kind != ArcKind::unk) return false;
+    Pos p = m.classPos[x.lcls];
+    return p == Pos::aux || p == Pos::sym || p == Pos::p_case || p == Pos::p_topic || p == Pos::p_conj ||
+           p == Pos::p_final || p == Pos::p_adv;
+  };
+  size_t edgeFunction = 0;
   auto udOf = [](const std::string& kind) -> std::string {
     if (kind == "n") return "名詞-普通名詞-一般";
     if (kind == "pn") return "名詞-固有名詞-一般";
@@ -642,6 +651,13 @@ int CmdLongUnits(const Args& a) {
             return;
           }
           std::string prefix = internal::ToUtf8(k32.substr(0, k32.size() - stemLen));
+          {
+            int32_t ignored = 0;
+            if (analyze(prefix, &ignored) == 0 || function(ws.arcs[ws.path.front()])) {
+              ++edgeFunction;
+              return;
+            }
+          }
           const auto& g = m.groups[static_cast<size_t>(bestG)];
           const auto& p = m.paradigms[g.paradigm];
           ++multi[kind];
@@ -659,9 +675,13 @@ int CmdLongUnits(const Args& a) {
             ++single[kind];
             return;
           }
-          ++multi[kind];
           const Arc& first = ws.arcs[ws.path.front()];
           const Arc& last = ws.arcs[ws.path.back()];
+          if (function(first) || function(last)) {
+            ++edgeFunction;
+            return;
+          }
+          ++multi[kind];
           const auto& lc = m.classes[last.rcls];
           std::string ud = udOf(kind), ct = "*", cf = "*";
           std::string pos = kind == "phrase" ? std::string(Analyzer::PosName(m.classPos[last.rcls])) : kind;
@@ -680,6 +700,7 @@ int CmdLongUnits(const Args& a) {
   std::ofstream o(a.pos[2], std::ios::binary);
   o << "#! analyzer-long\nkey\tpos\tlcls\trcls\tcost\tud\tctype\tcform\tlemma\treading\tparadigm\n";
   for (auto& r : rows) o << r.line << '\n';
+  std::fprintf(stderr, "dropped: open or close on a function word %zu\n", edgeFunction);
   for (auto& [kind, n] : total)
     std::fprintf(stderr, "%-6s keys %7zu: one token %7zu, long units %7zu, unusable %6zu\n", kind.c_str(), n,
                  single[kind], multi[kind], bad[kind]);
