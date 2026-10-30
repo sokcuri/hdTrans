@@ -1,0 +1,10 @@
+# 규칙: LEX-3, LEX-13
+rule	input	expected	kind	layer
+dict:novel-modifiers:11	男勝りのガサツ女。	남자 못지않는 거친 여자.	fix	defaults
+dict:novel-modifiers:10	ガサツだと思ったけれど	거칠다고 생각했지만	fix	defaults
+dict:novel-modifiers:10	ガサツな女	거친 여자	fix	defaults
+dict:jisjk:2152	あなたみたいながさつな人には	당신 같은 거친 사람에게는	fix	defaults
+dict:jisjk:2152	がさつな男	거친 남자	fix	defaults
+dict:novel-modifiers:10	性格がガサツだ。	성격이 거칠다.	fix	defaults
+dict:novel-modifiers:10	がさつ者	덜렁이	keep	defaults
+dict:novel-modifiers:10	荒っぽい男	난폭한 남자	keep	defaults
