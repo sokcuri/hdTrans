@@ -67,10 +67,12 @@ namespace hd08 {
 #define HD08_CTYPE(X) X(final, "final") X(conn, "conn") X(adn_nonpast, "adn:nonpast") X(adn_past, "adn:past") \
     X(adn_fut, "adn:fut") X(nom_m, "nom:m") X(nom_gi, "nom:gi") X(nom_geot, "nom:geot")
 #define HD08_REL(X) X(seq, "seq") X(and_, "and") X(cause, "cause") X(cond, "cond") X(concess, "concess") \
-    X(purpose, "purpose") X(while_, "while") X(when, "when") X(quote, "quote")
+    X(purpose, "purpose") X(while_, "while") X(when, "when") X(quote, "quote") X(like, "like") X(sothat, "sothat") \
+    X(even_try, "even-try")
 #define HD08_KNEG(X) X(none, "none") X(an, "an") X(ji_anh, "ji-anh") X(mot, "mot") X(ji_mot, "ji-mot") \
     X(ji_ma, "ji-ma")
-#define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq")
+#define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq") \
+    X(sonkei, "sonkei")
 #define HD08_KASE(X) X(subj, "subj") X(top, "top") X(obj, "obj") X(gen, "gen") X(dat, "dat") X(src, "src") \
     X(loc, "loc") X(instr, "instr") X(com, "com") X(quot, "quot") X(voc, "voc") X(LEX, "LEX")
 #define HD08_PUNCT(X) X(comma, "comma") X(pause, "pause") X(end, "end") X(q, "q") X(excl, "excl") X(qopen, "qopen") \
@@ -258,6 +260,7 @@ struct KNode {
     uint32_t sem = 0;
     uint8_t tense = 0, aspect = 0, mood = 0, ctype = 0, rel = 0, neg = 0;
     uint8_t aux : 1 = 0, dep : 1 = 0, passive : 1 = 0, causative : 1 = 0;
+    uint8_t potential : 1 = 0, spont : 1 = 0;  // v2e: -ㄹ 수 있다; -어지다 (spontaneous)
     uint16_t ja = 0;
     uint8_t kase = 0;
     uint8_t punct = 0; uint32_t jaMark = 0;

@@ -1,7 +1,10 @@
 #include "lift.h"
 
+#include <algorithm>
+
 #include "core/word/item.h"
 #include "ir/file.h"
+#include "ir/utf8.h"
 #include "ir/ir_json.h"
 
 namespace hd08::bridge {
@@ -17,6 +20,19 @@ size_t MarkerAt(std::string_view t) {
         if (alnum(t[i + 1]) && alnum(t[i + 2]) && t[i + 3] == '@') return i;
     }
     return std::string_view::npos;
+}
+
+// 0.7.x's reading of (ら)れ, as the voice decider's class names.
+const char* VoiceName(hdTrans::word::Voice v) {
+    using V = hdTrans::word::Voice;
+    switch (v) {
+    case V::Passive: return "PASSIVE";
+    case V::Potential: return "POTENTIAL";
+    case V::Respectful: return "HONORIFIC";
+    case V::Spontaneous: return "SPONTANEOUS";
+    case V::None: break;
+    }
+    return "NONE";
 }
 
 hd08::Ev EvidenceOf(hdTrans::word::Provenance p) {
@@ -79,17 +95,20 @@ bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
 bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, Line& line, uint32_t& from,
           std::vector<LiftMiss>& misses) {
     bool whole = true;
+    size_t composedAt = 0;  // where the search for the next item's stem in the composed text goes on
     const hdTrans::word::Item* chainItem = s.chain ? s.chain->head : nullptr;
     for (const hdTrans::output::ResolvedItem& it : s.items) {
         const hdTrans::word::Item* ci = chainItem;
         if (chainItem) chainItem = chainItem->next;
 
-        // The item's source text in the line, searched forward.
+        // The item's source text in the line, searched forward: its key, then the ending it read
+        // (length counts both).
         Span src{from, from};
         if (!it.surface.empty()) {
             const size_t at = line.src.find(it.surface, from);
             if (at != std::string::npos) {
-                src = {static_cast<uint32_t>(at), static_cast<uint32_t>(at + it.surface.size())};
+                const size_t length = std::max(it.surface.size(), static_cast<size_t>(std::max(it.length, 0)));
+                src = {static_cast<uint32_t>(at), static_cast<uint32_t>(std::min(at + length, line.src.size()))};
                 from = src.end;
             }
         }
@@ -105,6 +124,32 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             d.rule = doc.I("075:item");
         }
         const std::string_view target = it.entry.text;
+        // What 0.7.x decided here, for the deciders stacked on it (StageD reads these facts).
+        if (ci != nullptr && ci->detail != nullptr && ci->detail->Yougo())
+            d.because.push_back(doc.I(std::string("t075.voice=") + VoiceName(ci->detail->voice)));
+        d.because.push_back(doc.I("t075.ko=" + std::string(target) + "|" + it.ending.text));
+        // How 0.7.x wrote the word: its marker family, and the composed word that starts with its
+        // stem (to the next space, at most 8 syllables after the stem).
+        {
+            const size_t m = MarkerAt(target);
+            if (m != std::string_view::npos) d.because.push_back(doc.I("t075.marker=" + std::string(target.substr(m, 4))));
+            std::string_view stem = target.substr(0, std::min(target.size(), m));
+            while (!stem.empty() && stem.back() == ' ') stem.remove_suffix(1);
+            if (!stem.empty()) {
+                const size_t at = s.composed.find(stem, composedAt);
+                if (at != std::string_view::npos) {
+                    composedAt = at + stem.size();
+                    const std::string_view rest = s.composed.substr(composedAt);
+                    size_t end = 0;
+                    for (int k = 0; k < 8 && end < rest.size(); k++) {
+                        size_t next = end;
+                        if (NextCodePoint(rest, next) == ' ' && k > 0) break;
+                        end = next;
+                    }
+                    d.because.push_back(doc.I("t075.real=" + std::string(stem) + std::string(rest.substr(0, end))));
+                }
+            }
+        }
         if (target.empty() && it.ending.text.empty()) {
             line.Decide(d);  // 0.7.x writes nothing for this word
             continue;
