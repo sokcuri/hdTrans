@@ -1,0 +1,12 @@
+#! cx
+# The particle の and nominalizers: genitive kept or dropped, apposition, の as a clause subject, の/こと as
+# a nominalizer.
+id	match	when	set	ko	pol	prio	spec	note
+np.no.gen	{N} の/p_case	next.pos=n|pn|num|pref	-	{N} P:gen	keep	0	XFR-70	国王の玉座 → 국왕의 옥좌
+np.no.drop.rel	{N} の/p_case	next.cls=@rel	-	{N}	keep	1	XFR-70	机の上 → 책상 위
+np.no.drop.time	{N:@time} の/p_case	next.pos=n|pref	-	{N}	keep	1	XFR-70	今日の天気 → 오늘 날씨
+np.no.drop.place	{N:@place} の/p_case	next.pos=n|pref N.cls=@place	-	{N}	keep	1	XFR-70	東京の大学 → 도쿄 대학
+np.no.appos	{N:@person} の/p_case	next.pos=pn next.cls=@person	-	{N} V:이다[ctype=adn]	keep	2	XFR-70	友人の田中 → 친구인 다나카
+np.no.subj	{N} の/p_case {V:adn}	V.link=adn	-	{N} P:subj	keep	1	GRM-37	彼の書いた本 → 그가 쓴 책
+np.no.nominal	{X:adn} @nom.no が|を|は|も/p_case|p_topic	-	-	{V ctype=adn} N:것[dep]	keep	0	XFR-71	走るのが好き → 달리는 것을 좋아한다
+np.koto.nominal	{X:adn} 事 が|を|は|も	-	-	{V ctype=adn} N:것[dep]	keep	-1	XFR-71	歌うことが好き → 노래하는 걸 좋아한다

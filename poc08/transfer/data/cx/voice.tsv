@@ -1,0 +1,33 @@
+#! cx
+# Voice and giving/receiving: (ら)れる and (さ)せる read with their arguments; てもらう/てくれる/てあげる
+# with the giver as the Korean subject.
+id	match	when	set	ko	pol	prio	spec	note
+voice.passive	{V} @pass	-	voice=passive	{V passive=1}	keep	0	GRM-10	先生に叱られた → 선생님에게 혼났다
+voice.passive.agent	{V} @pass	dat.cls=@person obj=+	voice=active dat.kase=subj	{V}	keep	1	GRM-2	弟に手紙を破られた → 남동생이 편지를 찢었다
+voice.honorific	{V} @pass	subj.cls=@person.higher dat=-	voice=honorific	{V hon=1}	keep	1	SPC-2	先生が来られた → 선생님이 오셨다
+voice.honorific	{V} @pass	topic.cls=@person.higher dat=-	voice=honorific	{V hon=1}	keep	1	SPC-2	先生は来られた → 선생님은 오셨다
+voice.potential	{V} @pass	next.@neg=+ dat=-	voice=potential	{V ctype=adn,adn=fut} N:수[dep] V:있다^	keep	1	GRM-10	食べられない → 먹을 수 없다
+voice.potential	{V} @pass	next.lemma=様	voice=potential	{V ctype=adn,adn=fut} N:수[dep] V:있다^	keep	1	GRM-10	食べられるように → 먹을 수 있도록
+voice.potential	{V} @pass	host.force=q dat=-	voice=potential	{V ctype=adn,adn=fut} N:수[dep] V:있다^	keep	1	GRM-10	食べられる? → 먹을 수 있어?
+voice.potential	{V:pot}	-	voice=potential	{V ctype=adn,adn=fut} N:수[dep] V:있다^	keep	0	GRM-9	英語が話せる → 영어를 할 수 있다
+voice.spont	{V} @pass	Vtok.lemma=思う|感じる|考える|思い出す|案じる|偲ぶ|見做す	voice=spontaneous	{V spont=1}	keep	2	XFR-50	不思議に思われる → 이상하게 여겨진다
+voice.causative	{V} @caus	-	voice=causative	{V ctype=conn,rel=sothat} V:하다[aux]^	keep	0	XFR-51	子供に野菜を食べさせる → 아이에게 야채를 먹게 한다
+voice.caus.pass	{V} @caus @pass	-	voice=caus-pass	{V ctype=conn,rel=sothat} V:되다[aux]^	keep	1	GRM-1	待たされた → 기다리게 되었다
+voice.caus.pass	{V} @caus @pass	dat.cls=@person	voice=caus-pass dat.kase=cause	Adv:억지로 {V}	keep	2	GRM-1	母に野菜を食べさせられた → 어머니 때문에 억지로 야채를 먹었다
+voice.sasete.morau	{V} @caus て/p_conj @morau|@itadaku	-	-	{V mod=will-humble}	keep	2	GRM-44	休ませてもらいます → 쉬겠습니다
+voice.sasete.morau	{V} @caus て/p_conj @morau.pot|@kureru|@kudasaru	-	-	{V ctype=conn,rel=sothat} V:하다[aux,ctype=conn,rel=tight] V:주다[aux]^	keep	3	GRM-44	休ませてください → 쉬게 해 주세요
+bene.temorau.giver	{V:te} @morau|@itadaku	dat.cls=@person	dat.kase=subj	{V ctype=conn,rel=tight} V:주다[aux]^	keep	1	GRM-3	友達に手伝ってもらった → 친구가 도와줬다
+bene.temorau	{V:te} @morau|@itadaku	-	-	{V ctype=conn,rel=tight} V:주다[aux]^	keep	0	GRM-3	手伝ってもらった → 도움을 받았다 / 도와줬다
+bene.temorau.req	{V:te} @morau.pot	-	-	{V ctype=conn,rel=tight} V:주다[aux,mood=q]^	keep	1	GRM-3	手伝ってもらえる? → 도와줄래?
+bene.temorau.req	{V:te} @morau|@itadaku たい/aux	-	-	{V ctype=conn,rel=tight} V:주다[aux,tense=past,ctype=conn,rel=cond] V:하다^	keep	2	GRM-3	手伝ってもらいたい → 도와줬으면 한다
+bene.tekureru	{V:te} @kureru|@kudasaru	-	-	{V ctype=conn,rel=tight} V:주다[aux]^	keep	0	GRM-3	教えてくれた → 가르쳐 줬다
+bene.tekure.req	{V:te} @kureru.imp @fin	-	-	{V ctype=conn,rel=tight} V:주다[aux,mood=imp]^	keep	1	GRM-3	待ってくれ → 기다려 줘
+bene.tekure.req	{V:te} @kureru|@kudasaru @neg か|？|?	-	-	{V ctype=conn,rel=tight} V:주다[aux,mood=q]^	absorb	2	GRM-3	手伝ってくれない? → 도와줄래?
+bene.tekure.req	{V:te} @kureru.imp @fin	-	-	{V ctype=conn,rel=tight} V:주다[aux,mood=imp,hon=1]^	keep	1	GRM-3	待ってください → 기다려 주세요
+bene.teageru	{V:te} @ageru	-	-	{V ctype=conn,rel=tight} V:주다[aux]^	keep	0	GRM-3	貸してあげる → 빌려줄게
+bene.teitadaku	{V:te} @itadaku	subj=-	-	{V ctype=conn,rel=tight} V:주다[aux,hon=1]^	keep	1	GRM-3	来ていただいた → 와 주셨다
+voice.honorific	{V} @pass	sent.@polite=+ dat=- inq=+ Vtok.vol=+	voice=honorific	{V hon=1}	keep	1	SPC-2	別邸で過ごされる事になりました → 별저에서 지내시게 되었습니다
+voice.honorific	お|御/pref {V:renyou} に @naru	-	voice=honorific	{V hon=1}^	keep	2	SPC-2	お嘆きになる → 한탄하시다
+voice.honorific	お|御/pref {V:renyou} に @naru @pass	-	voice=honorific	{V hon=1}^	keep	3	SPC-2	お嘆きになられます → 한탄하실 거예요
+voice.honorific	{X} で 有る @caus @pass	-	voice=honorific	{V hon=1,cop=1}^	keep	3	SPC-8	御当主であらせられる → 당주이신
+voice.honorific	お|御/pref {N} に @naru [@pass]	-	voice=honorific	{N hon=1,verb=1}^	keep	2	SPC-2	お嘆きになられます → 한탄하실 거예요
