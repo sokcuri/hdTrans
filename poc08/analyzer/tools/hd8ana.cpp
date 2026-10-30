@@ -731,6 +731,7 @@ int CmdHints(const Args& a) {
     std::cout << o;
     for (auto& r : h.rejected)
       std::cout << "  rej:" << line.substr(r.span.begin, r.span.end - r.span.begin) << '/' << static_cast<char>(r.cls);
+    for (auto& r : h.respell) std::cout << "  respell:" << line.substr(r.span.begin, r.span.end - r.span.begin) << "→" << r.kanji;
     std::cout << '\n';
   }
   return 0;
