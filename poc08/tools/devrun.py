@@ -76,6 +76,8 @@ def main():
     ap.add_argument("--out", default=None)
     ap.add_argument("--mode", default="each", choices=["each", "doc"])
     ap.add_argument("--threads", type=int, default=1)
+    ap.add_argument("--determinism", action="store_true",
+                    help="also run each file 3 times with 1 and 2 threads (--each) and compare outputs (G11)")
     ap.add_argument("files", nargs="+")
     a = ap.parse_args()
     outdir = Path(a.out or tempfile.mkdtemp(prefix="hd08-dev-"))
@@ -98,6 +100,16 @@ def main():
     for k, v in sorted(total_flags.items()):
         print(f"  {k}\t{v}")
     print("evidence:", dict(total_ev))
+    if a.determinism:
+        for f in a.files:
+            seen = set()
+            for threads in (1, 2):
+                for _ in range(3):
+                    env = dict(os.environ, HOME=tempfile.mkdtemp(), HDTRANS_CACHE_DIR="off")
+                    out = subprocess.run([a.bin, "--each", "--threads", str(threads), "--json", "--in", f],
+                                         capture_output=True, env=env, check=True).stdout
+                    seen.add(out)
+            print(f"determinism {Path(f).name}: {'same' if len(seen) == 1 else f'{len(seen)} different outputs'}")
     print(f"stubs: {data.get('stubs') or 'none'}")
 
 

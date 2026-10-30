@@ -2,11 +2,12 @@
 """Counts the Japanese and Korean text written into the engine sources: an optional report for
 release reviews, not a check.
 
-  tools/surface-budget.py [--report]   totals, the surface:code condition ratio and the files with
-                                       the most literals
+  tools/surface-budget.py [--report] [--tree DIR]
+                                       totals, the surface:code condition ratio and the files with
+                                       the most literals; DIR (default src/core) is relative to the root
   tools/surface-budget.py --self-test
 
-Sources are the .cpp and .h files under src/core, except generated files (a first line
+Sources are the .cpp and .h files under src/core (or --tree), except generated files (a first line
 `// Generated ...; do not edit`). Counts per file:
   lit_ja, lit_ko, lit_punct  string literals holding kana or kanji, else Hangul, else full-width
                              punctuation (any prefix, raw strings included)
@@ -222,10 +223,10 @@ def measure(src, shared, own=frozenset()):
     return r
 
 
-def sources(root):
-    """Hand-written sources under src/core: path relative to root -> text."""
+def sources(root, tree="src/core"):
+    """Hand-written sources under tree: path relative to root -> text."""
     files = {}
-    for p in sorted((Path(root) / "src" / "core").rglob("*")):
+    for p in sorted((Path(root) / tree).rglob("*")):
         if p.suffix in (".cpp", ".h"):
             text = p.read_text(encoding="utf-8")
             if not GENERATED.match(text):
@@ -233,15 +234,15 @@ def sources(root):
     return files
 
 
-def measure_tree(root):
-    files = sources(root)
+def measure_tree(root, tree="src/core"):
+    files = sources(root, tree)
     defined = {f: surface_constants(lex(s)[1]) for f, s in files.items() if f.endswith(".h")}
     shared = set().union(*defined.values()) if defined else set()
     return {f: measure(s, shared, defined.get(f, frozenset())) for f, s in files.items()}
 
 
-def report(root):
-    counts = measure_tree(root)
+def report(root, tree="src/core"):
+    counts = measure_tree(root, tree)
     total = {k: sum(r[k] for r in counts.values()) for k in COLUMNS}
     print(f"files\t{len(counts)}")
     for k in COLUMNS:
@@ -294,8 +295,12 @@ bool G(std::string_view s, char32_t c, unsigned m) {
 def main(argv):
     if argv == ["--self-test"]:
         return self_test()
+    tree = "src/core"
+    if len(argv) >= 2 and argv[-2] == "--tree":
+        tree = argv[-1]
+        argv = argv[:-2]
     if argv in ([], ["--report"]):
-        return report(ROOT)
+        return report(ROOT, tree)
     print(__doc__.strip(), file=sys.stderr)
     return 2
 
