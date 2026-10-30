@@ -397,8 +397,17 @@
 | 連絡先を交換しましょう | 연락처를 교환합시다 | 유지 |
 | 彼が先に行く。 | 그가 먼저 간다. | 유지 |
 
+가타카나 명사 뒤의 状은 모양이나 상태라서 `모양`이다. 편지의 `장`(招待状 초대장)은 한자 명사 뒤에만 쓴다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| このパウダー状の おがくずの販売も してるんです | 이 파우더 모양의 톱밥 판매도 하고 있습니다 | 고침 |
+| ポール状のベンチが備え付けられており | 폴 모양의 벤치가 비치되어 있어 | 고침 |
+| 招待状が届いた。 | 초대장이 도착했다. | 유지 |
+
 사례: `tests/rules/cases/suffix-after-hangul.tsv`, `tests/rules/cases/suffix-after-pause.tsv`,
-`tests/rules/cases/winter-not-affix.tsv`, `tests/rules/cases/lexical-saki-destination.tsv`
+`tests/rules/cases/winter-not-affix.tsv`, `tests/rules/cases/lexical-saki-destination.tsv`,
+`tests/rules/cases/shape-suffix.tsv`
 
 ## LEX-17 말머리의 と、와 そうだ는 감탄사다
 
