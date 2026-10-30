@@ -4508,7 +4508,6 @@ ttt	ttt	K110			GN				jisjk:201744
 うけと	수취&AV@	M448			GN				jisjk:141290		
 うけとめ	막아&A6@	M437			GN				jisjk:90464		
 うけとめ	받아들&AJ@	M447			GN				jisjk:145456		
-うけとめていただ	받아들&AJ@	M421			GN				jisjk:145444		
 うけとめられ	받아들여&AL@	M427			GN				jisjk:145448		
 うけとられ	받아들여&AL@	M427			GN				jisjk:145464		
 うけとられない	받아들일 수 없다	N110			GN				jisjk:150568		
@@ -43913,7 +43912,6 @@ ttt	ttt	K110			GN				jisjk:201744
 よをわた	살아&A1@	M428			GN				jisjk:147645		
 よん	4	N110			GN				jisjk:267687		
 よんかげつ	4개월	N110			GN				jisjk:161476		
-よんでいただ	읽으&AE@	M421			GN				jisjk:147649		
 よんでん杯	욘덴배	N130			GN				jisjk:370461		
 よんとうごらく	사당오락	N110			GN				jisjk:156247		
 よんどころな	부득이$AB@	H7M0			GN				jisjk:5308		
@@ -148722,7 +148720,6 @@ ttt	ttt	K110			GN				jisjk:201744
 参列	참례	N110		HdHi	GN				jisjk:35273		
 参列者	참석자	N110	VHn		GN				jisjk:186229		
 参加	참가	N110		HdHi	GN				jisjk:35268		
-参加して頂	참가하&AE@	M421			GN				jisjk:120790		
 参加しやすく	참가하기 쉽게 &AV@	M429			GN				jisjk:120808		
 参加できなくな	참가할 수 없게 &C6@	M428			GN				jisjk:120809		
 参加人	참가인	N110	VHn		GN				jisjk:160187		
@@ -148755,7 +148752,6 @@ ttt	ttt	K110			GN				jisjk:201744
 参戦	참전	N110		Hd	GN				jisjk:35288		
 参拜	참배	N110		Hd	GN				jisjk:35276		
 参拝	참배	N110	UCl	Hd	GN				jisjk:186088		
-参拝していただ	참배하&AE@	M421			GN				jisjk:120821		
 参拝客	참배객	N110	VHn		GN				jisjk:186090		
 参政	참정	N110			GN				jisjk:35289		
 参政権	참정권	N110	ULw		GN				jisjk:185945		
@@ -150123,7 +150119,6 @@ ttt	ttt	K110			GN				jisjk:201744
 受けと	&FD@	M438			GN				jisjk:93660		
 受けとめ	받아들&AJ@	M447			GN				jisjk:145452		
 受けとめ	막아&A6@	M447			GN				jisjk:263793		
-受けとめて頂	받아들&AJ@	M421			GN				jisjk:145441		
 受けないでい	받지 않아도 $DE@	H7N0			GN				jisjk:121907		
 受けなが	받아넘&A2@	M443			GN				jisjk:141292		
 受けにくくな	받기 어려워&AL@	M428			GN				jisjk:148677		
@@ -303585,7 +303580,6 @@ ttt	ttt	K110			GN				jisjk:201744
 習学所	학교	I110			GN				jisjk:101312		
 習崎	나라사키	N130	QCT		GN				jisjk:27611		
 習得	습득	N110		Hd	GN				jisjk:27612		
-習得していただ	습득시&AQ@	M441			GN				jisjk:122124		
 習志野	나라시노	N130	QCT	Qq	GN				jisjk:76142		
 習志野	나라시노	N130	QPN	Wa	GN				jisjk:344616		
 習志野台	나라시노다이	I130	QCTVPl		GN				jisjk:315556		
@@ -335294,7 +335288,6 @@ ttt	ttt	K110			GN				jisjk:201744
 送って	배웅하고 &AH@	V41;			GN				jisjk:262057		
 送って	배웅하고 &AH@	M41;			GN				jisjk:262058		
 送って	보내 &AH@	M41;			GN	4420	||1 &&3 P-1== "2**" P-2== "1**" A-2== "VSw"	送って 앞에 정보 의미의 명사와 조사가 오면 보내오다라는 번역을 고른다. (미발동: rare-context)	jisjk:364334		
-送っていただ	배웅해 주&AE@	M421			GN				jisjk:341987		
 送ってほし	보냈으면 $Kz@	H7N0		Av	GN				jisjk:122000		
 送ってもい	보내도 $DE@	H7N0			GN				jisjk:122001		
 送られ	보내&AL@	M427			GN	3047	||1 &&2 ||2 S+1== "来る" S+1== "くる" P+1== "4**"	送られ를 동사 来る·くる 앞에서 보내지다로 고른다. (미발동: rare-context)	jisjk:341251		
@@ -354811,7 +354804,6 @@ ttt	ttt	K110			GN				jisjk:201744
 預か	&FC@	M438			GN				jisjk:94178		
 預か	보관&AV@	M438	VMo		GN				jisjk:94179		
 預か	담보로 &FK@	M448	VMoVMy		GN				jisjk:140065		
-預かっていただ	맡&A2@	M441			GN				jisjk:263744		
 預かってくれませんか	맡아 주시지 않겠습니까	A9D0			GN				jisjk:115036		
 預かり所	보관소	K110			GN				jisjk:115034		
 預かり残高	예금 잔고	N110	VMo		GN				jisjk:124439		

@@ -1,0 +1,19 @@
+# て형과 いただく를 한 행으로 묶어 주고받음을 잃던 행을 지움
+rule	input	expected	kind	layer
+lookup:benefactive-compound	質問を送っていただきたいのですが	질문을 보내주셨으면 합니다만	fix	lookup
+lookup:benefactive-compound	時間が許すかぎり送っていただいたメールを	시간이 용서하는 한 보내 주신 메일을	fix	lookup
+lookup:benefactive-compound	弟子として預かっていただいた	제자로서 맡아 주셨다	fix	lookup
+lookup:benefactive-compound	荷物を預かっていただけますか。	짐을 맡아 주시겠습니까.	fix	lookup
+lookup:benefactive-compound	貴方にバトリングに参加して頂きたいのです。	당신에게 배틀링에 참가해 주셨으면 합니다.	fix	lookup
+lookup:benefactive-compound	……参加して頂けますか？	……참가해 주실 수 있습니까?	fix	lookup
+lookup:benefactive-compound	この本をよんでいただきたい。	이 책을 읽어 주셨으면 한다.	fix	lookup
+lookup:benefactive-compound	受けとめて頂きたい。	받아들여 주셨으면 한다.	fix	lookup
+lookup:benefactive-compound	楽しんでいただけましたか？	즐기실 수 있었습니까?	keep	lookup
+lookup:benefactive-compound	手伝っていただいてありがとう。	도움받아서 고마워.	keep	lookup
+lookup:benefactive-compound	楽しい時間を過していただきました。	즐거운 시간을 보내셨습니다.	keep	lookup
+lookup:benefactive-compound	楽しんでいただけるように歌いたいと思います。	즐기실 수 있도록 노래하고 싶다고 생각합니다.	keep	lookup
+lookup:benefactive-compound	大会に参加して頂きありがとうございます。	대회에 참가해 주셔서 감사합니다.	fix	lookup
+lookup:benefactive-compound	神社に参拝していただきました。	신사에 참배해 주셨습니다.	fix	lookup
+lookup:benefactive-compound	参拝していただきたい。	참배해 주시길 바란다.	fix	lookup
+lookup:benefactive-compound	日本語を習得していただきたい。	일본어를 습득해 주시길 바란다.	fix	lookup
+lookup:benefactive-compound	受けとめていただけますか。	받아들여 주시겠습니까.	keep	lookup
