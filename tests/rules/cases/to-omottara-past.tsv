@@ -12,3 +12,5 @@ dict:novel-to-omottara:1	うるさいと思ったら耳栓をしてください	
 dict:novel-to-omottara:1	ヤバいと思ったら任意にキャンセルできないとダメです。	has:위험하다고 생각하면	keep	local-ending
 dict:novel-to-omottara:1	この迷宮、攻略しようと思ったら地図は必須じゃん。	has:공략하려고 하면	keep	local-ending
 dict:novel-to-omottara:1	扉を開けたら誰もいなかった	문을 열면 아무도 없었다	current	local-ending
+dict:novel-to-omottara:1	できたと思ったら教えて	!rule:dict:novel-to-omottara:1	keep	local-ending
+dict:novel-to-omottara:1	できたと思ったら壊れた	has:생각했더니	keep	local-ending
