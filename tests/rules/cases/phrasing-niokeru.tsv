@@ -1,0 +1,26 @@
+# 명사 뒤 において는 에서(때의 명사 뒤는 에)
+rule	input	expected	kind	layer
+dict:jisjk:361956	アメリカにおいて、宗教と政治を切り離すことはできません。	미국에서, 종교와 정치를 떼어낼 수 없습니다.	fix	local
+dict:jisjk:361956	闘技場内において、公開処刑を執り行う。	투기 장내에서, 공개 처형을 거행한다.	fix	local
+dict:jisjk:361956	人の一生において、その個人が驚嘆するイベント	사람의 일생에, 그 개인이 경탄하는 이벤트	fix	local
+dict:jisjk:361956	銭蔵においても伝説とうたわれた古酒	전장에서도 전설이라고 강조된 오래 된 술	fix	local
+dict:jisjk:361956	存在においても人形に敵わない	존재에서도 인형에게 이길 수 없다	fix	local
+dict:jisjk:361956	スポーツの世界においては仲間などいない。	스포츠의 세계에서는 동료 같은 건 없다.	fix	local
+dict:jisjk:361956	日本においては珍しい。	일본에서는 드물다.	fix	local
+dict:jisjk:361956	期間限定海域において、海外からの親善艦を招いて	기간 한정 해역에서, 해외에서의 친선함을 불러	fix	local
+dict:jisjk:361956	駅構内において撮影などをされるお客様	역 구내에서 촬영 등을 하시는 손님	fix	local
+dict:jisjk:361956	ベルリンにおいて調印を終わり	베를린에서 조인을 끝마쳐	fix	local
+dict:jisjk:361956	現段階において　私の研究テーマである弦理論は	현단계에서 내 연구테마인 현이론은	fix	local
+dict:jisjk:361956	浮田道場においては 近ごろ	우키타 도장에서는 요즈음	fix	local
+dict:jisjk:361956	過去においてその職にありし者は	과거에 그 일자리에 있던 자는	fix	local
+dict:jisjk:361956	この非常時においてはショウも劇場も不要不急である。	이 비상시에는 쇼도 극장도 불요불급이다.	fix	local
+dict:jisjk:361956	夏季においては…。	하계에는….	fix	local
+dict:jisjk:361956	将来において問題になる。	장래에 문제가 된다.	fix	local
+dict:jisjk:361956	当時においても珍しい。	당시에도 드물다.	fix	local
+dict:jisjk:361956	ホームページにおいてお知らせいたします。	홈페이지에서 알려 드리겠습니다.	keep	local
+dict:jisjk:361956	横浜軍事法廷においていわゆる事件の判決	요코하마 군사법정에서 이른바 사건의 판결	keep	local
+dict:jisjk:361956	帝国軍人が 将軍の名において	제국군인이 장군의 이름에서	keep	local
+dict:jisjk:361956	机においてある。	책상에 두었다.	fix	local
+dict:jisjk:361956	花がにおう。	꽃이 향기난다.	keep	local
+dict:jisjk:361956	変なにおいもする。	이상한 향기나기도 한다.	keep	local
+dict:jisjk:361956	会議において発表した。	회의에서 발표했다.	keep	local
