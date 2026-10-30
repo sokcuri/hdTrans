@@ -89,3 +89,4 @@ int ShortestTargetScore(const Item& it, int candidate, const SelectContext&) {
 }
 
 }  // namespace hdTrans::word
+// probe
