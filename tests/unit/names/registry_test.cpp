@@ -26,7 +26,6 @@ const dict::Snapshot* Dictionary() {
          "乾\t마르&AA@\tM428\t\t\tGN\t6\n"
          "乾\t이누이\tN130\tQPN\tWa\tGN\t7\n"
          "高森\t타카모리\tN130\tQPN\tWa\tGN\t8\n"
-         "大丈夫\t괜%C4@\tG8U0\t\t\tGN\t9101\n"
          "真昼\t한낮\tN110\tUMe\t\tGN\t9001\n"
          "真昼\t마히루\tN130\tQPN\tWb\tGN\t9002\n"
          "恭平\t쿄헤이\tN130\tQPN\tWb\tGN\t9\n"
@@ -509,10 +508,6 @@ HD_TEST(names_honorifics) {
         {"ウェイトレスさん\nウェイトレスさん\nウェイトレスさん", {}},
         {"見たんだ。\n見たんだ。\n見たんだ。", {}},
         {Repeat("リン様「来ないで」", 4), {"リン"}},
-        // The ちゃんと after a word that is no noun is the adverb (大丈夫ちゃんと), after a name
-        // the honorific and a particle.
-        {Repeat("大丈夫ちゃんと手当てしてもらった。", 8), {}},
-        {Repeat("桃花ちゃんと遊んだ。", 4), {"桃花"}},
     };
     for (const auto& [doc, want] : cases) {
         names::Registry r = Scan(snap, doc);

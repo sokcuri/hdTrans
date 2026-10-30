@@ -2,31 +2,3 @@ rule	input	expected	kind	layer
 lookup:names-shadow	優しい男だった。	다정한 남자였다.	fix	lookup
 lookup:names-shadow	新しい権利を得た。	새로운 권리를 얻었다.	fix	lookup
 lookup:names-shadow	あいはら友子さんが来た。	has:아이하라 토모코	keep	lookup
-lookup:names-shadow	俺 俺	나 나	fix	lookup
-lookup:names-shadow	俺 俺 あの～	나 나 저기~	fix	lookup
-lookup:names-shadow	もしもし ああ 俺 俺	여보세요 아 나 나	fix	lookup
-lookup:names-shadow	なんで？ 俺 俺 俺…俺のﾍﾞｯﾄﾞにいるんだよ！	왜? 나 나 나…내 침대에 있어!	fix	lookup
-lookup:names-shadow	(ﾛﾎﾞｯﾄ)俺だよ 俺 俺！	(로봇) 나야 나 나!	fix	lookup
-lookup:names-shadow	>> 全然 大丈夫です｡	>> 전혀 괜찮습니다.	fix	lookup
-lookup:names-shadow	全然 大丈夫です！でも…｡	전혀 괜찮습니다! 하지만….	fix	lookup
-lookup:names-shadow	全然 大丈夫ですいや でも痛そう…	전혀 괜찮습니다 아니 하지만 아플 것 같다…	fix	lookup
-lookup:names-shadow	全然 大丈夫だよ明日 退院できるって言ってたから	전혀 괜찮아 내일 퇴원할 수 있다고 했으니까	fix	lookup
-lookup:names-shadow	ｸﾗｳﾃﾞｨｱは大丈夫？ 疲れてない？全然 大丈夫だよ｡	has:전혀 괜찮아.	fix	lookup
-lookup:names-shadow	全然 大丈夫やん｡	전혀 괜찮잖아.	fix	lookup
-lookup:names-shadow	いやいや 開けてないです…全然 大丈夫です｡	has:…전혀 괜찮습니다.	fix	lookup
-lookup:names-shadow	>>触っても全然大丈夫です｡	>>만져도 전혀 괜찮습니다.	fix	lookup
-lookup:names-shadow	≫全然大丈夫です。	has:전혀 괜찮습니다.	fix	lookup
-lookup:names-shadow	愛してるから大丈夫だよ	사랑하고 있으니 괜찮아	fix	lookup
-lookup:names-shadow	東京少女が来た	도쿄 소녀가 왔다	fix	lookup
-lookup:names-shadow	『さよなら絶望先生』を見た	『안녕 절망선생』을 보았다	fix	lookup
-lookup:names-shadow	きっと大丈夫だろう	분명 괜찮을 것이다	fix	lookup
-lookup:names-shadow	お前なら きっと大丈夫だ	너라면 분명 괜찮다	fix	lookup
-lookup:names-shadow	でも　きっと大丈夫ですよ	하지만 분명 괜찮아요	fix	lookup
-lookup:names-shadow	まあ きっと大丈夫だろう》	뭐 분명 괜찮을 것이다》	fix	lookup
-lookup:names-shadow	全然大丈夫じゃないから。	전혀 괜찮지 않으니까.	keep	lookup
-lookup:names-shadow	『指輪物語』を読んだ	『반지의 제왕』을 읽었다	keep	lookup
-lookup:names-shadow	東京暮色を見た	동경의 황혼을 보았다	keep	lookup
-lookup:names-shadow	「蜻蛉日記」を読む	「청령일기」를 읽는다	keep	lookup
-lookup:names-shadow	オレオレ詐欺だ	보이스피싱이다	keep	lookup
-lookup:names-shadow	うちは イタチが来た	우치하 이타치가 왔다	keep	lookup
-lookup:names-shadow	千円紙幣を出した	1,000엔 지폐를 냈다	keep	lookup

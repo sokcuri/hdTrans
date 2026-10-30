@@ -46702,6 +46702,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 空想樹	공상수	N110			GN							names.673824
 空想樹海紀行オルト・シバルバー	공상수해기행 오르트 시발바	N110			GN							names.673825
 空想法律読本	공상법률독본	N110			GN						くうそうほうりつどくほん	names.673826
+空想特撮映画	신 울트라맨	N130	QWK		GN							names.673827
 空想的	공상적	N110			GN						くうそうてき	names.673828
 空想科学X	공상과학X	N130	QWK		GN						くうそうかがくえっくす	names.673829
 空想科学世界ガリバーボーイ	공상세계의 걸리버보이	N130	QWK		GN							names.673830
@@ -55911,6 +55912,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 結婚はビジネスだ	결혼은 비지니스다	N130	QWK		GN							names.683166
 結婚アフロ田中	결혼 아프로 다나카	N130	QPNVHn		GN						けっこんあふろたなか	names.683168
 結婚作詞 離婚作曲	결혼작사 이혼작곡	N130	QWK		GN							names.683171
+結婚双紙	이혼녀	N130	QWK		GN							names.683173
 結婚同窓会 ～SEASIDE LOVE～	결혼 동창회 ~SEASIDE LOVE~	N130	QWK		GN							names.683174
 結婚契約	결혼계약	N130	QWK		GN							names.683175
 結婚式のメンバー	결혼식 멤버	N130	QWK		GN							names.683176
@@ -66128,6 +66130,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 花林	카린	N130	QPNVHn	Wb	GN						かりん	names.693611
 花果	하나카	N130	QPNVHn	Wb	GN						はなか	names.693612
 花果山	화과산	N110			GN							names.693613
+花柱夕陽	이세계 소환은 두 번째입니다	N130	QWK		GN							names.693614
 花柳	하나야기	N130	QPNVHn	Wa	GN							names.693615
 花柳のぞみ	하나야기 노조미	N130	QPNVHn		GN							names.693616
 花柳はるみ	하나야기 하루미	N130	QPNVHn		GN							names.693617
@@ -84285,6 +84288,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 誘拐	유괴	N110			GN							names.711987
 誘拐の掟	툼스톤	N130	QWK		GN							names.711988
 誘拐ラプソディー	유괴 랩소디	N130	QWK		GN							names.711989
+誘拐捜査	세이빙 미스터 우	N130	QWK		GN							names.711990
 誘爆	유폭	N110			GN						ゆうばく	names.711991
 誘発	유발	N110			GN							names.711992
 誘致	유치	N110			GN							names.711993
@@ -87836,6 +87840,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 賭ケグルイ	카케구루이	N130	QWK		GN							names.715598
 賭ケグルイ ALL IN	카케구루이 ALL IN	N130	QWK		GN							names.715599
 賭博	도박	N110			GN							names.715600
+賭博偏執病者	도박중독자와 함께 있는 여자	N130	QWK		GN							names.715601
 賭博堕天録カイジ	도박타천록 카이지	N130	QPNVHn		GN							names.715602
 賭博師ボブ	도박사 봅	N130	QWK		GN							names.715603
 賭博破戒録カイジ	도박묵시록 카이지	N130	QPNVHn		GN							names.715604
@@ -106747,6 +106752,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鉄板のパッチ	철판의 패치	N110			GN							names.734738
 鉄板少女アカネ!!	철판 소녀 아카네 !!	N130	QWK		GN							names.734741
 鉄板屋ふじの	철판집 후지노	N110			GN						てっぱんやふじの	names.734742
+鉄板英雄伝説	에픽 무비	N130	QWK		GN							names.734743
 鉄柵	철책	N110			GN							names.734744
 鉄格子の彼方	말라파가의 성벽	N130	QWK		GN							names.734745
 鉄棒	철봉	N110			GN							names.734746
