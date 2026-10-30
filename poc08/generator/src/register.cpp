@@ -24,8 +24,9 @@ struct LevelRow {
 };
 struct RegisterTables {
     std::vector<CueRow> cues;
-    std::vector<std::u32string> tails, quotatives;
+    std::vector<std::u32string> tails, strongTails, quotatives;
     std::map<std::string, LevelRow> levels;
+    std::vector<std::string> honExclude;
 };
 
 std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir, std::string& err) {
@@ -38,7 +39,10 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
         return nullptr;
     }
     for (const auto& r : c.rows) {
-        if (r[cc] == "tail") t->tails.push_back(ToU32(r[ct]));
+        if (r[cc] == "tail") {
+            t->tails.push_back(ToU32(r[ct]));
+            if (r[cm] == "strong") t->strongTails.push_back(ToU32(r[ct]));
+        }
         else if (r[cc] == "quotative") t->quotatives.push_back(ToU32(r[ct]));
         else t->cues.push_back({r[cc], r[cm], ToU32(r[ct])});
     }
@@ -49,6 +53,10 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
         err = "levels.tsv: missing column";
         return nullptr;
     }
+    TsvTable hx;
+    if (!ReadTsv(dir + "/hon.tsv", hx, err)) return nullptr;
+    for (const auto& r : hx.rows)
+        if (r[0] == "exclude") t->honExclude.push_back(r[1]);
     for (const auto& r : l.rows) {
         LevelRow row;
         row.key = r[lk];
@@ -135,6 +143,7 @@ std::u32string LastSentence(const std::u32string& u) {
 }
 
 struct Cues {
+    bool strongTail = false;  // the line ends in よ, ね, ぞ …
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
          cend = false;
     std::string first;
@@ -165,6 +174,9 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         tailStripped = true;
     }
     bool casualEnd = tailStripped;
+    if (tailStripped)
+        for (const auto& st : t.strongTails)
+            if (EndsWith(stages[0], st) && stages[0].size() > st.size()) c.strongTail = true;
     for (const auto& r : t.cues) {
         bool hit = false;
         if (r.mode == "end") {
@@ -247,9 +259,20 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         for (size_t k = i; k < j; ++k) {
             RegDecision& d = out[k];
             if (!lines[k].dialogue) {
-                d.level = Level::haera;
-                d.narration = true;
-                d.key = "narration";
+                // an unbracketed line is narration unless it ends like speech (inner monologue: …だよ, …です)
+                const Cues c = Scan(t, lines[k].ja);
+                const std::string key = Key(c);
+                if (key == "pend" || key == "keigo-pend") {
+                    d.level = key == "pend" ? Level::haeyo : Level::hapsyo;
+                    d.key = "unbracketed-" + key;
+                } else if (key == "casual" && c.strongTail) {
+                    d.level = Level::hae;
+                    d.key = "unbracketed-casual";
+                } else {
+                    d.level = Level::haera;
+                    d.narration = true;
+                    d.key = "narration";
+                }
                 continue;
             }
             const std::string& key = keys[k - i];
@@ -277,8 +300,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
     return out;
 }
 
-std::vector<Reg> AssignRegister(const std::vector<Node>& kir, const RegDecision& d, bool firstPersonInSource,
-                                const Tables* gen) {
+std::vector<Reg> AssignRegister(const RegisterTables& rt, const std::vector<Node>& kir, const RegDecision& d,
+                                bool firstPersonInSource, const Tables* gen) {
     std::vector<Reg> out;
     const bool polite = d.level == Level::haeyo || d.level == Level::hapsyo;
     bool subjectSeen = false;
@@ -299,7 +322,10 @@ std::vector<Reg> AssignRegister(const std::vector<Node>& kir, const RegDecision&
                 if (pos.empty()) pos = info.pos;
                 if (cls.empty()) cls = info.cls;
             }
-            if (pos == "V" && cls != "COP" && cls != "EXIST") r.hon = true;
+            bool excluded = false;
+            for (const auto& x : rt.honExclude)
+                if (x == n.lemma) excluded = true;
+            if (pos == "V" && cls != "COP" && cls != "EXIST" && !excluded) r.hon = true;
         }
         if (n.ctype == CType::final_) subjectSeen = false;
         out.push_back(r);

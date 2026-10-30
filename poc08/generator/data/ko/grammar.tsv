@@ -35,3 +35,4 @@ voice.doe	되다
 caus.ha	시키다	causative of a 하다 verb: 공부하다 → 공부시키다
 caus.aux	하다	causative: -게 하다
 conn.caus	-게
+lit.ends	다요까죠	last syllables of a word that 0.7.x wrote literally and the retrofit reads as a predicate

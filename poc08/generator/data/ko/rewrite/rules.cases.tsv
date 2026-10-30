@@ -7,15 +7,17 @@ aspect.fold-1	fix	narr	V:보다{ctype=conn,eomi=-고} V:있다{aux=1,ctype=adn}	
 aspect.fold-1	keep	narr	V:먹다{ctype=conn,eomi=-어} V:있다{aux=1}	먹어 있다
 aspect.fold-1	keep	narr	V:먹다{ctype=conn,eomi=-고} V:가다	먹고 간다
 comma.conj-1	fix	narr	N:하지만 Punct:comma{jaMark=、} N:문제 P:lex=도 V:있다{tense=past}	하지만 문제도 있었다
-comma.conj-1	fix	hae	Punct:qopen{jaMark=「} N:응 Punct:comma{jaMark=、} V:알다{tense=past} Punct:qclose{jaMark=」}	「응 알았어」
+comma.conj-1	fix	hae	Punct:qopen{jaMark=「} N:그럼 Punct:comma{jaMark=、} V:가다{mood=prop} Punct:qclose{jaMark=」}	「그럼 가자」
+comma.conj-1	keep	hae	Punct:qopen{jaMark=「} N:응 Punct:comma{jaMark=、} V:알다{tense=past} Punct:qclose{jaMark=」}	「응, 알았어」
 comma.conj-1	keep	narr	N:사과 Punct:comma{jaMark=、} N:배 Punct:comma{jaMark=、} N:감 P:lex=을 V:사다{tense=past}	사과, 배, 감을 샀다
 comma.conj-1	keep	narr	N:나 P:top N:하지만 Punct:comma{jaMark=、} V:가다	나는 하지만, 간다
 comma.conn-1	fix	narr	V:생각하다{ctype=conn,eomi=-어서} Punct:comma{jaMark=、} N:나 P:top N:방 P:obj V:나오다{tense=past}	생각해서 나는 방을 나왔다
-comma.conn-1	keep	narr	N:문 P:obj N:조용히 V:닫다{ctype=conn,eomi=-고} Punct:comma{jaMark=、} N:나 P:top V:나가다{tense=past}	문을 조용히 닫고, 나는 나갔다
+comma.conn-1	fix	narr	N:문 P:obj N:조용히 V:닫다{ctype=conn,eomi=-고} Punct:comma{jaMark=、} N:나 P:top V:나가다{tense=past}	문을 조용히 닫고 나는 나갔다
+comma.conn-1	keep	narr	V:크다{ctype=adn} Punct:comma{jaMark=、} V:붉다{ctype=adn} N:꽃	큰, 붉은 꽃
 comma.nosrc-1	fix	narr	N:그 Punct:comma N:사람 P:subj V:오다{tense=past}	그 사람이 왔다
 comma.nosrc-1	keep	narr	N:그 Punct:comma{jaMark=、} N:사람 P:subj V:오다{tense=past}	그, 사람이 왔다
 comma.topic-1	fix	narr	N:나 P:top Punct:comma{jaMark=、} V:싫다	나는 싫다
-comma.topic-1	keep	narr	N:어제 N:만나다 N:그 N:사람 P:top Punct:comma{jaMark=、} V:싫다	어제 만나다 그 사람은, 싫다
+comma.topic-1	keep	narr	N:사과 P:lex=도 Punct:comma{jaMark=、} N:배 P:lex=도 V:좋다	사과도, 배도 좋다
 from.robuteo-1	fix	narr	N:냉장고 P:lex=로부터 N:우유 P:obj V:꺼내다{tense=past}	냉장고에서 우유를 꺼냈다
 from.robuteo-1	fix	narr	N:친구{sem=person} P:lex=로부터 N:편지 P:obj V:받다{tense=past}	친구에게서 편지를 받았다
 from.robuteo-1	keep	narr	N:냉장고 P:lex=에서 N:우유 P:obj V:꺼내다{tense=past}	냉장고에서 우유를 꺼냈다

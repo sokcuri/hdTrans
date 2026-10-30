@@ -8,7 +8,9 @@
 #           set (formal set phrases), archaic (old speech), stiff (stiff plain speech), casual (plain endings),
 #           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows),
 #           quotative (a string after which an any-not-quoted match does not count)
-#   mode    end: the last sentence ends in text, after any number of tail particles and closing marks;
+#   mode    tail rows: strong marks a particle that makes an unbracketed line speech (inner monologue ending
+#           in よ/ね/ぞ is 해, not narration -다: 82% of 294 dev lines); other rows:
+#           end: the last sentence ends in text, after any number of tail particles and closing marks;
 #           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
 #   text    the Japanese string
 cue	mode	text	note
@@ -18,11 +20,11 @@ quotative	-	と思
 quotative	-	など
 quotative	-	なんて
 tail	-	か
-tail	-	よ
-tail	-	ね
-tail	-	わ
-tail	-	の
-tail	-	な
+tail	strong	よ
+tail	strong	ね
+tail	strong	わ
+tail	strong	の
+tail	strong	な
 tail	-	って
 tail	-	けど
 tail	-	が
@@ -30,11 +32,11 @@ tail	-	から
 tail	-	し
 tail	-	もの
 tail	-	もん
-tail	-	ねえ
+tail	strong	ねえ
 tail	-	よお
-tail	-	ぞ
-tail	-	ぜ
-tail	-	さ
+tail	strong	ぞ
+tail	strong	ぜ
+tail	strong	さ
 polite	end	です
 polite	end	ます
 polite	end	ました

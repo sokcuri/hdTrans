@@ -49,7 +49,7 @@ id	slot	family	mood	level	pos	form	flags	note
 -오!	final	plain	imp	hao	*	(으)오		가오, 먹으오
 -게	final	plain	imp	hage	*	게		가게
 -자	final	plain	prop	haera	*	자		가자
--어!	final	plain	prop	hae	*	어		가
+-자	final	plain	prop	hae	*	자		가자 (반말 propositive: 가자, not 가)
 -어요!	final	plain	prop	haeyo	*	어요		가요
 -ㅂ시다	final	plain	prop	hapsyo	*	(으)ㅂ시다		갑시다, 먹읍시다
 -ㅂ시다	final	plain	prop	hao	*	(으)ㅂ시다		갑시다
@@ -136,9 +136,8 @@ id	slot	family	mood	level	pos	form	flags	note
 -는가	final	ga	-	haera	V	는가		가는가
 -는가	final	ga	-	haera	X	는가		있는가
 -는가	final	ga	-	haera	*	(으)ㄴ가		좋은가
--는가	final	ga	-	hae	V	는가		가는가
--는가	final	ga	-	hae	X	는가		있는가
--는가	final	ga	-	hae	*	(으)ㄴ가		좋은가
+-어?	final	ga	-	hae	*	어		(the stiff -는가 is -어? in 반말: 타고 싶어?)
+-어?	final	ga	-	hae	C	야		트레저야?
 -는가요	final	ga	-	haeyo	V	는가요		가는가요
 -는가요	final	ga	-	haeyo	X	는가요		있는가요
 -는가요	final	ga	-	haeyo	*	(으)ㄴ가요		좋은가요
@@ -234,8 +233,8 @@ id	slot	family	mood	level	pos	form	flags	note
 -니	final	ni	q	hage	*	니		가니
 -지 마	final	jima	imp	hae	*	지 마	words	가지 마
 -지 마라	final	jima	imp	haera	*	지 마라	words	가지 마라
--지 마세요	final	jima	imp	haeyo	*	지 마세요	words	가지 마세요
--지 마십시오	final	jima	imp	hapsyo	*	지 마십시오	words	가지 마십시오
+-지 마세요	final	jima	imp	haeyo	*	지 마세요	words,hon-incl	가지 마세요
+-지 마십시오	final	jima	imp	hapsyo	*	지 마십시오	words,hon-incl	가지 마십시오
 -지 마오	final	jima	imp	hao	*	지 마오	words	가지 마오
 -지 말게	final	jima	imp	hage	*	지 말게	words	가지 말게
 -기를	final	wish	-	haera	*	기를		가기를 (ように wish)

@@ -45,7 +45,7 @@ std::string CueKey(const RegisterTables&, const std::string& ja);
 // Addressee honorific: V nodes of a polite utterance whose subject is the addressee get hon. Without clause
 // arguments (no L yet) the subject is approximated: a question or request with no explicit subject or topic
 // in its clause, a verb (not an adjective, 이다 or 있다), and no first person in the source.
-std::vector<Reg> AssignRegister(const std::vector<Node>& kir, const RegDecision& d, bool firstPersonInSource,
-                                const struct Tables* gen = nullptr);
+std::vector<Reg> AssignRegister(const RegisterTables&, const std::vector<Node>& kir, const RegDecision& d,
+                                bool firstPersonInSource, const struct Tables* gen = nullptr);
 
 }  // namespace hd8gen

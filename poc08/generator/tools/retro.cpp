@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "../src/conj.h"
 #include "../src/hangul.h"
 #include "../src/ir_json.h"
 #include "../src/json.h"
@@ -45,7 +46,8 @@ struct Retro {
     std::map<std::string, std::string> jima;          // 마, 마라 … → level
     std::map<std::string, std::string> fused;         // 건 걸 게 겁 → what fused onto 거
     std::unordered_map<std::string, std::unordered_multimap<std::string, Bundle>> paradigms;
-    size_t words = 0, fallbacks = 0, literal = 0;
+    size_t words = 0, fallbacks = 0, literal = 0, recovered = 0;
+    std::unordered_map<char32_t, std::vector<std::string>> lemmasByFirst;  // lemma index for literal predicates
     bool debug = false;
 
     const std::unordered_multimap<std::string, Bundle>& Para(const std::string& lemma, const std::string& pos,
@@ -114,7 +116,7 @@ Node MakeNode(Kind k, const std::string& lemma) {
 }
 
 // A word of a 0.7.x ending row after the first: a dependent noun (+ particle or copula) or a predicate.
-bool ReadRestWord(Retro& r, const std::string& w, Want wantLast, Mood mood, std::vector<Node>& out) {
+bool ReadRestWord(Retro& r, const std::string& w, Want wantLast, Mood mood, std::vector<Node>& out, const std::string& mainPos = "") {
     {
         // 건 걸 게 겁…: 거 fused with a particle or the copula (written 것 in the IR; G fuses it again in speech)
         const std::u32string u = U(w);
@@ -190,7 +192,9 @@ bool ReadRestWord(Retro& r, const std::string& w, Want wantLast, Mood mood, std:
         AnalyzeHints h;
         h.want = wantLast;
         h.mood = mood;
-        auto bs = r.Find(lemma, "", "", w, h);
+        const bool negAux = lemma == r.t.G("aux.neg") || lemma == r.t.G("aux.neg-mot");
+        auto bs = r.Find(lemma, negAux && !mainPos.empty() ? (mainPos == "V" ? "V" : "A") : "", "", w, h);
+        if (bs.empty() && negAux) bs = r.Find(lemma, "", "", w, h);
         if (bs.empty()) continue;
         Node v = bs[0].node;
         v.aux = true;
@@ -317,7 +321,7 @@ bool ReadPredicate(Retro& r, const json::Value& it, Want want, Mood mood, const 
         }
         const Want wk = k + 1 < chunks.size() ? Want::conn : want;
         std::vector<Node> ns;
-        if (!ReadRestWord(r, chunks[k], wk, mood, ns)) {
+        if (!ReadRestWord(r, chunks[k], wk, mood, ns, pos)) {
             if (IsHangulWord(chunks[k]) && k + 1 < chunks.size()) {
                 ++r.literal;
                 out.push_back(MakeNode(Kind::N, chunks[k]));
@@ -358,6 +362,354 @@ bool ReadPredicate(Retro& r, const json::Value& it, Want want, Mood mood, const 
     return true;
 }
 
+// A word 0.7.x wrote literally (입니다 after a noun, 부탁드립니다): read it as the copula or as a known lemma when
+// it ends like a sentence (다, 요, 까, 죠).
+bool ReadLiteral(Retro& r, const std::string& text, const std::string& host, Want want, Mood mood, Node& out) {
+    const std::u32string u = U(text);
+    if (u.size() < 2) return false;
+    const char32_t last = u.back();
+    const std::u32string ends = U(r.t.G("lit.ends"));
+    if (ends.find(last) == std::u32string::npos) return false;
+    AnalyzeHints h;
+    h.want = want;
+    h.mood = mood;
+    if (!host.empty()) {
+        h.host = host;
+        auto bs = r.Find(r.t.G("lemma.cop"), "C", "COP", text, h);
+        if (!bs.empty()) {
+            out = bs[0].node;
+            out.glue = true;
+            out.decision = static_cast<uint32_t>(bs[0].level);
+            return true;
+        }
+        h.host.clear();
+    }
+    auto it = r.lemmasByFirst.find(u[0]);
+    if (it == r.lemmasByFirst.end()) return false;
+    for (const auto& lemma : it->second) {
+        const std::u32string lu = U(lemma);
+        const std::u32string stem = lu.substr(0, lu.size() - 1);
+        if (stem.size() > u.size() || stem.size() + 4 < u.size()) continue;
+        if (u.compare(0, stem.size() - 1, stem, 0, stem.size() - 1) != 0) continue;
+        auto bs = r.Find(lemma, "", "", text, h);
+        if (bs.empty()) continue;
+        out = bs[0].node;
+        out.decision = static_cast<uint32_t>(bs[0].level);
+        return true;
+    }
+    return false;
+}
+
+
+// ---------------------------------------------------------------- alignment with 0.7.x's final output
+// The line is rebuilt on 0.7.x's own output: every item that can be found there in order becomes IR
+// (and is regenerated); every stretch between found items stays 0.7.x text (Raw nodes, marks as Punct).
+// So nothing 0.7.x did after composition is lost where the reader cannot follow it.
+
+bool IsSpace(char32_t c) { return c == U' ' || c == 0x3000 || c == U'\t'; }
+bool IsMarkChar(char32_t c) {
+    switch (c) {
+        case U',': case U'.': case U'?': case U'!': case 0x2026: case 0x300C: case 0x300D: case 0x300E: case 0x300F:
+        case U'(': case U')': case U'~': case 0x2015: case 0x2500: case 0x00B7: case 0xFF5E: case 0x2014:
+            return true;
+        default: return false;
+    }
+}
+Punct PunctOfChar(char32_t c) {
+    switch (c) {
+        case U',': return Punct::comma;
+        case U'.': return Punct::end;
+        case U'?': return Punct::q;
+        case U'!': return Punct::excl;
+        case 0x2026: return Punct::ellipsis;
+        case 0x300C: case 0x300E: case U'(': return Punct::qopen;
+        case 0x300D: case 0x300F: case U')': return Punct::qclose;
+        case 0x2015: case 0x2500: case 0x2014: return Punct::dash;
+        case 0x00B7: return Punct::pause;
+        default: return Punct::mark;
+    }
+}
+
+// Appends the 0.7.x text of a gap as Raw words and Punct marks (the marks keep their own character).
+void GapNodes(const std::u32string& g, bool glueFirst, std::vector<Node>& out) {
+    size_t i = 0;
+    bool spaceBefore = !glueFirst;
+    while (i < g.size()) {
+        if (IsSpace(g[i])) {
+            spaceBefore = true;
+            ++i;
+            continue;
+        }
+        if (IsMarkChar(g[i])) {
+            size_t j = i;
+            while (j < g.size() && g[j] == g[i]) ++j;
+            Node p = MakeNode(Kind::Punct, "");
+            p.punct = PunctOfChar(g[i]);
+            p.jaMark = hangul::ToU8(g.substr(i, j - i));  // the 0.7.x mark itself (never empty: not a comma the source lacks)
+            p.glue = !spaceBefore;
+            out.push_back(p);
+            spaceBefore = false;
+            i = j;
+            continue;
+        }
+        size_t j = i;
+        while (j < g.size() && !IsSpace(g[j]) && !IsMarkChar(g[j])) ++j;
+        Node n = MakeNode(Kind::Raw, hangul::ToU8(g.substr(i, j - i)));
+        n.glue = !spaceBefore;
+        out.push_back(n);
+        spaceBefore = false;
+        i = j;
+    }
+}
+
+size_t WordEnd(const std::u32string& o, size_t p) {
+    size_t e = p;
+    while (e < o.size() && hangul::IsSyllable(o[e])) ++e;
+    return e;
+}
+
+struct Aligner {
+    Retro& r;
+    const std::u32string& o;
+    size_t c = 0;          // cursor in o
+    std::vector<Node>& nodes;
+    size_t aligned = 0, skipped = 0;
+    static constexpr size_t kWindow = 40;
+
+    void Gap(size_t to) {
+        if (to > c) {
+            const bool glue = c > 0 && !IsSpace(o[c - 1]);
+            GapNodes(o.substr(c, to - c), glue && !nodes.empty(), nodes);
+        }
+        c = to;
+    }
+    bool SpaceBefore(size_t p) const { return p == 0 || IsSpace(o[p - 1]); }
+
+    bool Text(const std::string& t, Kind k, bool attachOnly) {
+        const std::u32string u = U(t);
+        if (u.empty()) return false;
+        const size_t p = o.find(u, c);
+        if (p == std::u32string::npos || p - c > (attachOnly ? 0 : kWindow)) return false;
+        Gap(p);
+        Node n = MakeNode(k, t);
+        n.glue = !SpaceBefore(p);
+        nodes.push_back(n);
+        c = p + u.size();
+        ++aligned;
+        return true;
+    }
+};
+
+// Finds the predicate of a 0.7.x item in its final output and reads it (and the words of its ending row).
+bool AlignPredicate(Retro& r, Aligner& a, const json::Value& it, Want want, Mood mood) {
+    std::string lemma = it.Str("lemma");
+    std::string pos = it.Str("pos"), cls = it.Str("cls");
+    const PredicateInfo info = LookupPredicate(r.t, lemma);
+    const bool known = r.t.lemmaPos.count(lemma) || r.t.stems.count(lemma);
+    if (known || pos.empty()) pos = info.pos;
+    if (cls.empty() || known) cls = info.cls;
+    const bool cop = cls == "COP";
+    std::string rest = it.Str("rest");
+    for (size_t open = rest.find('('); open != std::string::npos; open = rest.find('(')) {
+        const size_t close = rest.find(')', open);
+        if (close == std::string::npos) break;
+        rest.erase(open, close - open + 1);
+    }
+    const std::vector<std::string> chunks = Split(rest, ' ');
+    size_t extra = 0;
+    for (size_t k = 1; k < chunks.size(); ++k)
+        if (!chunks[k].empty()) ++extra;
+    std::string host;
+    if (cop && !a.nodes.empty() && (a.nodes.back().kind == Kind::N || a.nodes.back().kind == Kind::Raw)) host = a.nodes.back().lemma;
+    const size_t limit = std::min(a.o.size(), a.c + (cop ? 1 : Aligner::kWindow));
+    for (size_t p = a.c; p < limit; ++p) {
+        if (!hangul::IsSyllable(a.o[p])) continue;
+        if (!cop && p > a.c && hangul::IsSyllable(a.o[p - 1]) && a.nodes.size() && a.nodes.back().kind != Kind::N) continue;
+        const size_t e = WordEnd(a.o, p);
+        const std::string w = hangul::ToU8(a.o.substr(p, e - p));
+        AnalyzeHints h;
+        h.want = extra ? Want::conn : want;
+        h.mood = (e < a.o.size() && a.o[e] == U'?') ? Mood::q : mood;
+        std::vector<Node> got;
+        std::vector<Bundle> bs;
+        if (cop) {
+            h.host = host.empty() ? "3" : host;
+            bs = r.Find(r.t.G("lemma.cop"), "C", "COP", w, h);
+        } else {
+            bs = r.Find(lemma, pos, cls, w, h);
+            if (bs.empty() && pos == "V") bs = r.Find(lemma, "A", cls, w, h);
+            if (bs.empty() && pos == "A") bs = r.Find(lemma, "V", cls, w, h);
+        }
+        if (!bs.empty()) {
+            Node v = bs[0].node;
+            if (cop) {
+                v.lemma = r.t.G("lemma.cop");
+                v.kcls = "COP";
+                v.vpos = "C";
+            }
+            v.decision = static_cast<uint32_t>(bs[0].level);
+            got.push_back(v);
+        } else if (!cop) {
+            // an auxiliary written onto the -어 form (가버렸다, 만들어졌다)
+            const std::string av = ConjugateForms(r.t, lemma, pos, cls, {r.t.G("conn.aux")});
+            if (!av.empty() && w.rfind(av, 0) == 0 && w.size() > av.size()) {
+                std::vector<Node> tail;
+                if (ReadRestWord(r, w.substr(av.size()), extra ? Want::conn : want, mood, tail, pos) && !tail.empty() &&
+                    tail[0].kind == Kind::V) {
+                    Node v = MakeNode(Kind::V, lemma);
+                    v.vpos = pos;
+                    v.kcls = cls;
+                    v.ctype = CType::conn;
+                    v.eomi = r.t.G("conn.aux");
+                    got.push_back(v);
+                    tail[0].glue = tail[0].lemma == r.t.G("voice.aux");
+                    for (auto& n : tail) got.push_back(n);
+                }
+            }
+        }
+        if (got.empty()) continue;
+        a.Gap(p);
+        got[0].glue = got[0].glue || (!a.SpaceBefore(p) && !cop);
+        for (auto& n : got) a.nodes.push_back(n);
+        a.c = e;
+        ++a.aligned;
+        // the other words of the ending row, as 0.7.x finally wrote them
+        for (size_t k = 0; k < extra; ++k) {
+            size_t q = a.c;
+            while (q < a.o.size() && IsSpace(a.o[q])) ++q;
+            const size_t qe = WordEnd(a.o, q);
+            if (qe == q) break;
+            std::vector<Node> ns;
+            const Want wk = k + 1 < extra ? Want::conn : want;
+            const std::string ww = hangul::ToU8(a.o.substr(q, qe - q));
+            auto jm = r.jima.find(ww);
+            if (jm != r.jima.end() && !a.nodes.empty() && a.nodes.back().kind == Kind::V && a.nodes.back().eomi == r.t.G("conn.neg")) {
+                Node& v = a.nodes.back();
+                v.neg = Neg::jiMa;
+                v.mood = Mood::imp;
+                v.ctype = CType::final_;
+                v.eomi.clear();
+                Level lv = Level::hae;
+                ParseLevel(jm->second, lv);
+                v.decision = static_cast<uint32_t>(lv);
+                a.c = qe;
+                continue;
+            }
+            if (!ReadRestWord(r, ww, wk, (qe < a.o.size() && a.o[qe] == U'?') ? Mood::q : mood, ns, pos)) break;
+            for (auto& n : ns) a.nodes.push_back(n);
+            a.c = qe;
+        }
+        // fold -지 않다 / -지 못하다 / -지 말다 into the predicate
+        for (size_t k = 0; k + 1 < a.nodes.size(); ++k) {
+            Node& v = a.nodes[k];
+            Node& x = a.nodes[k + 1];
+            if (v.kind != Kind::V || x.kind != Kind::V || v.ctype != CType::conn || v.eomi != r.t.G("conn.neg")) continue;
+            Neg neg = Neg::none;
+            if (x.lemma == r.t.G("aux.neg")) neg = Neg::jiAnh;
+            else if (x.lemma == r.t.G("aux.neg-mot")) neg = Neg::jiMot;
+            else if (x.lemma == r.t.G("aux.prohib")) neg = Neg::jiMa;
+            if (neg == Neg::none) continue;
+            const std::string lem = v.lemma, vp = v.vpos, kc = v.kcls;
+            const bool vaux = v.aux, vglue = v.glue;
+            v = x;
+            v.lemma = lem;
+            v.vpos = vp;
+            v.kcls = kc;
+            v.aux = vaux;
+            v.glue = vglue;
+            v.neg = neg;
+            if (neg == Neg::jiMa) {
+                v.mood = Mood::imp;
+                v.ctype = CType::final_;
+                v.eomi.clear();
+            }
+            a.nodes.erase(a.nodes.begin() + static_cast<long>(k) + 1);
+        }
+        return true;
+    }
+    ++a.skipped;
+    return false;
+}
+
+// Builds a line from 0.7.x's items aligned with its final output. Returns false when nothing aligned.
+bool BuildAligned(Retro& r, const json::Value& v, std::vector<Node>& nodes, size_t& alignedOut, size_t& skippedOut) {
+    const std::u32string o = U(v.Str("out075"));
+    Aligner a{r, o, 0, nodes, 0, 0};
+    const json::Value* items = v.Get("items");
+    if (!items) return false;
+    for (size_t k = 0; k < items->arr.size(); ++k) {
+        const json::Value& it = items->arr[k];
+        if (it.Bool("gap")) continue;
+        const std::string kind = it.Str("k");
+        Want want = Want::final_;
+        Mood mood = Mood::decl;
+        for (size_t j = k + 1; j < items->arr.size(); ++j) {
+            if (items->arr[j].Bool("gap") && items->arr[j].Str("k") != "Punct") continue;
+            const std::string nk = items->arr[j].Str("k");
+            if (nk == "Punct") {
+                const std::string p = items->arr[j].Str("p");
+                if (p == "q") mood = Mood::q;
+                if (p == "comma") want = Want::conn;
+                if (p == "qclose" || p == "ellipsis" || p == "mark" || p == "dash") continue;
+                break;
+            }
+            if (nk == "N" || nk == "Raw") want = Want::adn;
+            else if (nk == "V") want = Want::conn;
+            else if (nk == "P") want = Want::nom;
+            break;
+        }
+        if (kind == "N" || kind == "Raw") {
+            const std::string t = it.Str("t");
+            const Kind nk = kind == "N" && IsHangulWord(t) ? Kind::N : Kind::Raw;
+            if (!a.Text(t, nk, false)) ++a.skipped;
+            else if (nk == Kind::N) {
+                // a word 0.7.x wrote whole (입니다, 부탁드립니다) may be a predicate
+                Node lit;
+                std::string host;
+                if (nodes.size() >= 2 && nodes.back().glue) host = nodes[nodes.size() - 2].lemma;
+                if (ReadLiteral(r, t, host, want, mood, lit)) {
+                    lit.glue = nodes.back().glue;
+                    nodes.back() = lit;
+                    ++r.recovered;
+                }
+            }
+        } else if (kind == "P") {
+            const std::string t = it.Str("t");
+            auto pk = r.particleKase.find(t);
+            std::string form = t;
+            Node p = MakeNode(Kind::P, "");
+            if (pk != r.particleKase.end() && pk->second.rfind("lex:", 0) != 0) {
+                p.kase = pk->second;
+                for (const auto& row : r.t.particles)
+                    if (row.kase == p.kase && row.when.empty()) form = row.form;
+            } else {
+                p.kase = "lex";
+                p.lemma = pk != r.particleKase.end() ? pk->second.substr(4) : t;
+                form = p.lemma;
+            }
+            // the particle as 0.7.x realised it after the word before it
+            const std::u32string prev = nodes.empty() ? std::u32string() : U(nodes.back().lemma);
+            const std::string realised = RealizeParticle(form, prev);
+            const std::u32string ru = U(realised);
+            if (!ru.empty() && o.compare(a.c, ru.size(), ru) == 0) {
+                nodes.push_back(p);
+                a.c += ru.size();
+                ++a.aligned;
+            } else {
+                ++a.skipped;
+            }
+        } else if (kind == "Punct") {
+            ++a.skipped;  // marks come from 0.7.x's output text (gaps)
+        } else if (kind == "V") {
+            AlignPredicate(r, a, it, want, mood);
+        }
+    }
+    a.Gap(o.size());
+    alignedOut = a.aligned;
+    skippedOut = a.skipped;
+    return a.aligned > 0;
+}
+
 Punct PunctOf(const std::string& p) {
     const char* names[] = {"none", "comma", "pause", "end", "q", "excl", "qopen", "qclose", "ellipsis", "dash", "mark"};
     for (int i = 0; i < 11; ++i)
@@ -371,6 +723,8 @@ int main(int argc, char** argv) {
     std::string data = HD8GEN_DATA_DIR, levelMode = "auto", rulesArg = "all", skipArg;
     std::string input;
     bool debugFlag = false;
+    bool alignMode = true;  // build lines on 0.7.x's final output (default); --rebuild: from the items alone
+    size_t totalAligned = 0, totalSkipped = 0;
     for (int i = 1; i < argc; ++i) {
         const std::string a = argv[i];
         if (a == "--data" && i + 1 < argc) data = argv[++i];
@@ -378,6 +732,7 @@ int main(int argc, char** argv) {
         else if (a == "--rules" && i + 1 < argc) rulesArg = argv[++i];
         else if (a == "--skip" && i + 1 < argc) skipArg = argv[++i];
         else if (a == "--debug") debugFlag = true;
+        else if (a == "--rebuild") alignMode = false;
         else input = a;
     }
     std::string err;
@@ -388,7 +743,7 @@ int main(int argc, char** argv) {
         std::fprintf(stderr, "%s\n", err.c_str());
         return 1;
     }
-    Retro r{*tables, {}, {}, {}, {}, {}, {}, {}, 0, 0, debugFlag};
+    Retro r{*tables, {}, {}, {}, {}, {}, {}, {}, 0, 0, 0, 0, {}, debugFlag};
     {
         TsvTable rt;
         if (!ReadTsv(data + "/retro/rows.tsv", rt, err)) {
@@ -409,6 +764,12 @@ int main(int argc, char** argv) {
             else if (row[0] == "fused") r.fused[row[1]] = row[2];
         }
         std::stable_sort(r.deps.begin(), r.deps.end(), [](const std::string& a, const std::string& b) { return a.size() > b.size(); });
+        for (const auto& kv : tables->lemmaPos) {
+            const std::u32string lu = U(kv.first);
+            if (lu.size() >= 2) r.lemmasByFirst[lu[0]].push_back(kv.first);
+        }
+        for (auto& kv : r.lemmasByFirst)  // longest stems first
+            std::stable_sort(kv.second.begin(), kv.second.end(), [](const std::string& a, const std::string& b) { return a.size() > b.size(); });
     }
     std::vector<std::string> only, skip;
     if (rulesArg == "none") only = {"-none-"};
@@ -450,6 +811,13 @@ int main(int argc, char** argv) {
         const json::Value* items = v.Get("items");
         std::vector<Node> nodes;
         bool lineOk = items && !items->arr.empty();
+        if (alignMode) {
+            size_t al = 0, sk = 0;
+            lineOk = BuildAligned(r, v, nodes, al, sk);
+            totalAligned += al;
+            totalSkipped += sk;
+            items = nullptr;
+        }
         if (items) {
             for (size_t k = 0; k < items->arr.size(); ++k) {
                 const json::Value& it = items->arr[k];
@@ -474,6 +842,15 @@ int main(int argc, char** argv) {
                 if (kind == "N" || kind == "Raw") {
                     Node n = MakeNode(kind == "N" && IsHangulWord(it.Str("t")) ? Kind::N : Kind::Raw, it.Str("t"));
                     n.glue = it.Bool("glue");
+                    std::string host;
+                    if (n.glue && !nodes.empty() && (nodes.back().kind == Kind::N || nodes.back().kind == Kind::Raw)) host = nodes.back().lemma;
+                    Node lit;
+                    if (n.kind == Kind::N && ReadLiteral(r, n.lemma, host, want, mood, lit)) {
+                        ++r.recovered;
+                        lit.glue = lit.glue || n.glue;
+                        nodes.push_back(lit);
+                        continue;
+                    }
                     nodes.push_back(n);
                 } else if (kind == "P") {
                     const std::string t = it.Str("t");
@@ -507,12 +884,12 @@ int main(int argc, char** argv) {
         std::vector<Reg> reg;
         UttLevel u;
         u.utt = 0;
-        u.narration = d.narration || !rl[li].dialogue;
+        u.narration = d.narration;
         if (levelMode == "auto") {
             const bool first = d.firstPerson;
             u.level = u.narration ? Level::haera : d.level;
             u.persona = d.persona;
-            reg = AssignRegister(nodes, d, first, tables.get());
+            reg = AssignRegister(*rtab, nodes, d, first, tables.get());
             if (u.narration)
                 for (auto& g : reg) g.level = Level::haera;
         } else {
@@ -540,7 +917,7 @@ int main(int argc, char** argv) {
             }
             g.out.replace(pos, 1, syl);
         }
-        g.out = v.Str("lead") + g.out;
+        if (!alignMode) g.out = v.Str("lead") + g.out;
         if (lineOk) ++linesOk;
         json::Value o;
         o.t = json::Value::T::Obj;
@@ -559,8 +936,10 @@ int main(int argc, char** argv) {
         o.Set("kir", json::S(KirText(rw.kir2)));
         std::printf("%s\n", json::Write(o).c_str());
     }
-    std::fprintf(stderr, "lines %zu, read fully %zu (%.1f%%); predicate words %zu, unread %zu (%.1f%%), nouns kept literally %zu\n", rows.size(), linesOk,
+    if (alignMode) std::fprintf(stderr, "aligned items %zu, items kept as 0.7.x text %zu (%.1f%%)\n", totalAligned, totalSkipped,
+                                100.0 * static_cast<double>(totalSkipped) / static_cast<double>(totalAligned + totalSkipped + 1));
+    std::fprintf(stderr, "lines %zu, read fully %zu (%.1f%%); predicate words %zu, unread %zu (%.1f%%), nouns kept literally %zu, literal predicates read %zu\n", rows.size(), linesOk,
                  rows.empty() ? 0.0 : 100.0 * static_cast<double>(linesOk) / static_cast<double>(rows.size()), r.words, r.fallbacks,
-                 r.words ? 100.0 * static_cast<double>(r.fallbacks) / static_cast<double>(r.words) : 0.0, r.literal);
+                 r.words ? 100.0 * static_cast<double>(r.fallbacks) / static_cast<double>(r.words) : 0.0, r.literal, r.recovered);
     return 0;
 }

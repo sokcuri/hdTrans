@@ -141,6 +141,7 @@ XNode SplitAux(const Tables& t, XNode& from, const std::string& auxLemma, const 
     a.n.aux = true;
     a.n.aspect = Aspect::simple;
     a.n.passive = a.n.spont = a.n.potential = a.n.causative = false;
+    a.n.glue = false;  // an auxiliary is its own word (지다 attaches by words.tsv)
     from.n.ctype = CType::conn;
     from.n.eomi = conn;
     from.n.rel.clear();
@@ -566,7 +567,7 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
                 }
                 bool attach = n.glue;
                 auto wr = t.words.find("N:" + n.lemma);
-                if (wr != t.words.end()) {
+                if (wr != t.words.end() && !n.glue) {
                     const std::string& a = wr->second.attach;
                     if (a == "always") attach = true;
                     else if (a == "after-digit") attach = !w.word.empty() && w.word.back() >= U'0' && w.word.back() <= U'9';
@@ -623,6 +624,17 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
                         }
                 std::string text = pr ? pr->ko : n.jaMark;
                 if (text == "-") text = n.jaMark;
+                if (pr && pr->jaMark == "-" && !n.jaMark.empty()) {
+                    // a run of one mark (……, ―――, !!) keeps its length
+                    const std::u32string m = ToU32(n.jaMark);
+                    bool same = m.size() > 1;
+                    for (char32_t ch : m) same = same && ch == m[0];
+                    if (same && ToU32(text).size() == 1) {
+                        std::string run;
+                        for (size_t k = 0; k < m.size(); ++k) run += text;
+                        text = run;
+                    }
+                }
                 const std::string attachMode = pr ? pr->attach : "left";
                 w.Emit(text, attachMode == "left" || attachMode == "both" || n.glue, n.origin);
                 if (attachMode == "right" || attachMode == "both") w.noSpace = true;
