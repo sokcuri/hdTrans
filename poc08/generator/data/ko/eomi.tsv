@@ -201,17 +201,13 @@ id	slot	family	mood	level	pos	form	flags	note
 -어라!	final	eora	excl	hapsyo	*	어라		좋아라
 -어라!	final	eora	excl	hao	*	어라		좋아라
 -어라!	final	eora	excl	hage	*	어라		좋아라
--다니	final	dani	-	haera	V	는다니/ㄴ다니		간다니
--다니	final	dani	-	haera	*	다니		좋다니
+-다니	final	dani	-	haera	*	다니		가다니, 좋다니 (exclamation: the stem, not 는다니)
 -다니	final	dani	-	haera	C	라니		학생이라니
 -다니	final	dani	-	haera	N	라니		아니라니
--다니	final	dani	-	hae	V	는다니/ㄴ다니		간다니
 -다니	final	dani	-	hae	*	다니		좋다니
 -다니	final	dani	-	hae	C	라니		학생이라니
--다니요	final	dani	-	haeyo	V	는다니요/ㄴ다니요		간다니요
 -다니요	final	dani	-	haeyo	*	다니요		좋다니요
 -다니요	final	dani	-	haeyo	C	라니요		학생이라니요
--다니요	final	dani	-	hapsyo	V	는다니요/ㄴ다니요		간다니요
 -다니요	final	dani	-	hapsyo	*	다니요		좋다니요
 -다니요	final	dani	-	hapsyo	C	라니요		학생이라니요
 -다니	final	dani	-	hao	*	다니		좋다니
@@ -242,6 +238,18 @@ id	slot	family	mood	level	pos	form	flags	note
 -지 마십시오	final	jima	imp	hapsyo	*	지 마십시오	words	가지 마십시오
 -지 마오	final	jima	imp	hao	*	지 마오	words	가지 마오
 -지 말게	final	jima	imp	hage	*	지 말게	words	가지 말게
+-기를	final	wish	-	haera	*	기를		가기를 (ように wish)
+-기를	final	wish	-	hae	*	기를		가기를
+-기를	final	wish	-	haeyo	*	기를		가기를
+-기를	final	wish	-	hapsyo	*	기를		가기를
+-기를	final	wish	-	hao	*	기를		가기를
+-기를	final	wish	-	hage	*	기를		가기를
+-지	final	jiyo	-	haera	*	지		가지
+-지	final	jiyo	-	hae	*	지		가지
+-습니다	final	jiyo	decl	hapsyo	*	습니다/ㅂ니다		갑니다
+-습니까	final	jiyo	q	hapsyo	*	습니까/ㅂ니까		갑니까
+-지	final	jiyo	-	hao	*	지		가지
+-지	final	jiyo	-	hage	*	지		가지
 # ---------------------------------------------------------------- persona variants (ko/persona.tsv picks them)
 -구먼	final	gumeon	-	haera	V	는구먼		가는구먼
 -구먼	final	gumeon	-	haera	*	구먼		좋구먼
@@ -273,7 +281,7 @@ id	slot	family	mood	level	pos	form	flags	note
 -려고	conn	purpose	-	-	*	(으)려고		가려고
 -러	conn	purpose-motion	-	-	*	(으)러		가러, 먹으러
 -다가	conn	switch	-	-	*	다가		가다가
--도록	conn	until	-	-	*	도록		가도록
+-도록	conn	until,sothat	-	-	*	도록		가도록 (ように purpose: sothat)
 -게	conn	result	-	-	*	게		가게, 좋게
 -지	conn	neg	-	-	*	지		가지 (않다)
 -기에	conn	cause-lit	-	-	*	기에		가기에
@@ -299,8 +307,18 @@ id	slot	family	mood	level	pos	form	flags	note
 -더라도	conn	even-if	-	-	*	더라도		가더라도
 -고도	conn	despite	-	-	*	고도		가고도
 -나	conn	but-lit	-	-	*	(으)나		가나
--듯이	conn	as-if	-	-	*	듯이		가듯이
+-듯이	conn	as-if,like	-	-	*	듯이		가듯이 (ように likeness: like)
 -다시피	conn	as-you	-	-	*	다시피		알다시피
+-어 봤자	conn	even-try	-	-	*	어 봤자	words	가 봤자 (ところで concession)
+-기 때문에	conn	cause-gi	-	-	*	기 때문에	words	가기 때문에 (ため cause)
+-다면	conn	if-quote	-	-	V	는다면/ㄴ다면		간다면
+-다면	conn	if-quote	-	-	*	다면		좋다면, 갔다면
+-다면	conn	if-quote	-	-	C	라면		학생이라면
+-다면	conn	if-quote	-	-	N	라면		아니라면
+-다든가	conn	or-quote	-	-	V	는다든가/ㄴ다든가		간다든가
+-다든가	conn	or-quote	-	-	*	다든가		좋다든가
+-습니다만	conn	but-formal	-	-	*	습니다만/ㅂ니다만		갑니다만
+-지요	final	jiyo	-	haeyo	*	지요		가지요 (uncontracted 죠)
 # ---------------------------------------------------------------- quote connectives (-다고 하다)
 -다고	quote	decl	-	-	V	는다고/ㄴ다고		간다고
 -다고	quote	decl	-	-	*	다고		좋다고, 갔다고

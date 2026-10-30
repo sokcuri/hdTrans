@@ -27,6 +27,7 @@ struct RegDecision {
     bool narration = false;   // the line is narration (or ends in narration after a quote)
     std::string key;          // cue key that decided it, for --why
     bool byProfile = false;   // the speaker profile changed the level
+    bool firstPerson = false; // the source names the speaker (私, 俺 …): the subject is not the addressee
 };
 
 struct RegOptions {

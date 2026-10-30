@@ -47,6 +47,10 @@ bool SetFeature(Node& n, const std::string& k, const std::string& v) {
     else if (k == "aux") n.aux = Flag(v);
     else if (k == "dep") n.dep = Flag(v);
     else if (k == "glue") n.glue = Flag(v);
+    else if (k == "passive") n.passive = Flag(v);
+    else if (k == "causative") n.causative = Flag(v);
+    else if (k == "potential") n.potential = Flag(v);
+    else if (k == "spont") n.spont = Flag(v);
     else if (k == "vpos") n.vpos = v;
     else if (k == "kcls") n.kcls = v;
     else if (k == "jaMark") n.jaMark = v;
@@ -77,6 +81,10 @@ std::string GetFeature(const Node& n, const std::string& k) {
     if (k == "aux") return n.aux ? "1" : "0";
     if (k == "dep") return n.dep ? "1" : "0";
     if (k == "glue") return n.glue ? "1" : "0";
+    if (k == "passive") return n.passive ? "1" : "0";
+    if (k == "causative") return n.causative ? "1" : "0";
+    if (k == "potential") return n.potential ? "1" : "0";
+    if (k == "spont") return n.spont ? "1" : "0";
     if (k == "vpos") return n.vpos;
     if (k == "kcls") return n.kcls;
     if (k == "jaMark") return n.jaMark;
@@ -176,6 +184,10 @@ std::string KirText(const std::vector<Node>& nodes) {
             if (!n.modal.empty()) add("modal", n.modal);
             if (n.neg != Neg::none) add("neg", kNegs[static_cast<int>(n.neg)]);
             if (n.aux) add("aux", "1");
+            if (n.passive) add("passive", "1");
+            if (n.causative) add("causative", "1");
+            if (n.potential) add("potential", "1");
+            if (n.spont) add("spont", "1");
             if (!n.vpos.empty()) add("vpos", n.vpos);
             if (!n.kcls.empty()) add("kcls", n.kcls);
         }

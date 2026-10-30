@@ -22,6 +22,7 @@ add_library(hd8gen STATIC
     src/register.cpp
     src/kir_text.cpp
     src/rewrite.cpp
+    src/analyze.cpp
 )
 target_include_directories(hd8gen PUBLIC include PRIVATE src)
 target_compile_features(hd8gen PUBLIC cxx_std_20)
@@ -30,6 +31,9 @@ add_executable(hd8gen_cli tools/hd8gen.cpp)
 set_target_properties(hd8gen_cli PROPERTIES OUTPUT_NAME hd8gen)
 target_link_libraries(hd8gen_cli PRIVATE hd8gen)
 target_compile_definitions(hd8gen_cli PRIVATE HD8GEN_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
+add_executable(hd8retro tools/retro.cpp)
+target_link_libraries(hd8retro PRIVATE hd8gen)
+target_compile_definitions(hd8retro PRIVATE HD8GEN_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     enable_testing()

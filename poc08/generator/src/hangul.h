@@ -19,6 +19,17 @@ constexpr int kInitIeung = 11;
 constexpr int kFinNone = 0, kFinNieun = 4, kFinRieul = 8, kFinRieulMieum = 10, kFinMieum = 16, kFinBieup = 17,
               kFinSiot = 19, kFinSsangSiot = 20, kFinHieuh = 27;
 
+// Syllables the phonology names (computed, so the sources hold no Hangul literals).
+constexpr char32_t Syl(int initial, int medial, int final = 0) {
+    return kBase + static_cast<char32_t>((initial * 21 + medial) * 28 + final);
+}
+constexpr int kInitRieul = 5;
+constexpr char32_t kEu = Syl(kInitIeung, EU), kI = Syl(kInitIeung, I), kO = Syl(kInitIeung, O), kE = Syl(kInitIeung, E),
+                   kYe = Syl(kInitIeung, YE), kYo = Syl(kInitIeung, YO), kYeo = Syl(kInitIeung, YEO), kReo = Syl(kInitRieul, EO);
+// "(으)" and "(이)" of the ending and particle notation
+inline std::u32string EuMark() { return std::u32string{U'(', kEu, U')'}; }
+inline std::u32string IMark() { return std::u32string{U'(', kI, U')'}; }
+
 bool IsSyllable(char32_t c);
 int Initial(char32_t c);  // -1 when not a syllable
 int Medial(char32_t c);

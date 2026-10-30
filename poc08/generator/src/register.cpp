@@ -24,7 +24,7 @@ struct LevelRow {
 };
 struct RegisterTables {
     std::vector<CueRow> cues;
-    std::vector<std::u32string> tails;
+    std::vector<std::u32string> tails, quotatives;
     std::map<std::string, LevelRow> levels;
 };
 
@@ -39,6 +39,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     }
     for (const auto& r : c.rows) {
         if (r[cc] == "tail") t->tails.push_back(ToU32(r[ct]));
+        else if (r[cc] == "quotative") t->quotatives.push_back(ToU32(r[ct]));
         else t->cues.push_back({r[cc], r[cm], ToU32(r[ct])});
     }
     TsvTable l;
@@ -173,9 +174,10 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             for (size_t i = u.text.find(r.text); i != std::u32string::npos; i = u.text.find(r.text, i + 1)) {
                 if (r.mode == "any-not-quoted") {
                     const size_t j = i + r.text.size();
-                    if (StartsAt(u.text, j, U"って") || StartsAt(u.text, j, U"と言") || StartsAt(u.text, j, U"と思") ||
-                        StartsAt(u.text, j, U"など") || StartsAt(u.text, j, U"なんて"))
-                        continue;
+                    bool quoted = false;
+                    for (const auto& q : t.quotatives)
+                        if (StartsAt(u.text, j, q)) quoted = true;
+                    if (quoted) continue;
                 }
                 hit = true;
                 break;
@@ -252,6 +254,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             }
             const std::string& key = keys[k - i];
             d.key = key;
+            d.firstPerson = !cues[k - i].first.empty();
             d.narration = key == "narr";
             auto row = t.levels.find(key);
             d.level = row != t.levels.end() ? row->second.level : Level::hae;

@@ -6,11 +6,17 @@
 # Columns
 #   cue     polite (desu/masu at a sentence end), polite-any (desu/masu anywhere), keigo (尊敬語/謙譲語),
 #           set (formal set phrases), archaic (old speech), stiff (stiff plain speech), casual (plain endings),
-#           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows)
+#           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows),
+#           quotative (a string after which an any-not-quoted match does not count)
 #   mode    end: the last sentence ends in text, after any number of tail particles and closing marks;
 #           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
 #   text    the Japanese string
 cue	mode	text	note
+quotative	-	って	a polite form followed by these is quoted, not spoken (any-not-quoted)
+quotative	-	と言
+quotative	-	と思
+quotative	-	など
+quotative	-	なんて
 tail	-	か
 tail	-	よ
 tail	-	ね

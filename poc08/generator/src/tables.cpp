@@ -124,7 +124,7 @@ std::shared_ptr<const Tables> LoadTables(const std::string& dir, std::string& er
             row.mode = r[c[3]];
             for (const auto& cond : Split(r[c[4]], ',')) {
                 if (cond == "init=ㅇ") row.initIeung = true;
-                else if (cond == "next=요") row.nextYo = true;
+                else if (cond == "next=yo") row.nextYo = true;
                 else if (cond == "prefinal") row.prefinal = true;
                 else if (cond != "-") {
                     err = p + ":" + std::to_string(tsv.lines[i]) + ": unknown cond " + cond;
@@ -209,7 +209,28 @@ std::shared_ptr<const Tables> LoadTables(const std::string& dir, std::string& er
         if (!ReadTsv(p, tsv, err) || !Need(tsv, {"persona", "level", "mood", "family"}, c, p, err)) return nullptr;
         for (const auto& r : tsv.rows) t->persona.push_back({r[c[0]], r[c[1]], r[c[2]], r[c[3]]});
     }
+    {
+        const std::string p = dir + "/grammar.tsv";
+        TsvTable tsv;
+        if (!ReadTsv(p, tsv, err) || !Need(tsv, {"name", "value"}, c, p, err)) return nullptr;
+        for (const auto& r : tsv.rows) t->grammar[r[c[0]]] = r[c[1]];
+        for (const char* need : {"aux.prog", "conn.prog", "aux.result", "aux.compl", "aux.dir-come", "aux.dir-go", "aux.try",
+                                 "aux.give", "conn.aux", "aux.prog.hon", "neg.an", "neg.mot", "aux.neg", "aux.neg-mot", "conn.neg",
+                                 "family.jima", "nom.geot", "conn.default", "final.fallback", "pre.hon", "pre.past", "pre.gess",
+                                 "lemma.cop", "lemma.negcop", "pot.noun", "pot.exist", "pot.neg", "voice.aux", "voice.ha",
+                                 "voice.doe", "caus.ha", "caus.aux", "conn.caus"})
+            if (!t->grammar.count(need)) {
+                err = p + ": missing " + need;
+                return nullptr;
+            }
+    }
     return t;
+}
+
+const std::string& Tables::G(const std::string& name) const {
+    static const std::string empty;
+    auto it = grammar.find(name);
+    return it == grammar.end() ? empty : it->second;
 }
 
 }  // namespace hd8gen

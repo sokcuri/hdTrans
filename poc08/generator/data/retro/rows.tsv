@@ -1,0 +1,28 @@
+#! retro-rows
+# 0.7.x ending row codes (the first character of an ending row) → the ending they stand for, in eomi.tsv notation.
+# Used only by the retrofit reader of 0.7.x --why output. marker & = verb families, $ % = adjective families.
+#   form   the notation put before the rest of the row: (으) 으-insertion, 어 harmonic, ~ bare stem
+#   mode   - | v4 (the 4 row of verbs: 는다/ㄴ다 before 다, 대, 단, 답; 는 before anything else)
+#          | sup (습/ㅂ alternation: 습니다/ㅂ니다) | bare-a (the A row with nothing after it: the ㄹ-dropped stem)
+marker	code	form	mode	note
+&	0	는	-	adnominal 는
+&	1	~	-	bare stem
+&	2	(으)	-	(으)면, (으)니
+&	3	(으)ㄹ	-	(으)ㄹ까, (으)ㄹ 것
+&	4	-	v4	ㄴ다, 는 것
+&	5	었	-	었다
+&	6	어	-	어, 어서, 어요
+&	7	-	sup	습니다
+&	8	(으)ㄴ	-	(으)ㄴ 것
+&	9	(으)ㅂ	-	(으)ㅂ시다
+&	A	(으)	bare-a	(으)러; alone: 사 (살다)
+&	B	(으)ㅁ	-	(으)ㅁ
+&	C	어	-	어
+$	1	~	-	bare stem
+$	2	(으)	-	(으)면
+$	3	(으)ㄹ	-	(으)ㄹ
+$	4	(으)ㄴ	-	(으)ㄴ adnominal
+$	5	었	-	었
+$	6	어	-	어
+$	7	-	sup	습니다
+$	8	(으)ㅁ	-	(으)ㅁ

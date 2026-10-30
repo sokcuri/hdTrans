@@ -74,6 +74,8 @@ bool NodeFromJson(const json::Value& v, Node& n, std::string& err) {
     n.dep = v.Bool("dep");
     n.passive = v.Bool("passive");
     n.causative = v.Bool("causative");
+    n.potential = v.Bool("potential");
+    n.spont = v.Bool("spont");
     n.glue = v.Bool("glue");
     n.kase = v.Str("kase");
     if (v.Get("punct") && !FromName(v.Str("punct"), kPuncts, n.punct)) {
@@ -116,6 +118,10 @@ json::Value NodeToJson(const Node& n) {
         if (!n.modal.empty()) v.Set("modal", json::S(n.modal));
         if (n.neg != Neg::none) v.Set("neg", json::S(NegName(n.neg)));
         if (n.aux) v.Set("aux", json::B(true));
+        if (n.passive) v.Set("passive", json::B(true));
+        if (n.causative) v.Set("causative", json::B(true));
+        if (n.potential) v.Set("potential", json::B(true));
+        if (n.spont) v.Set("spont", json::B(true));
     }
     if (n.dep) v.Set("dep", json::B(true));
     if (n.glue) v.Set("glue", json::B(true));

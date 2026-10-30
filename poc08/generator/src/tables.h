@@ -72,6 +72,8 @@ struct Tables {
     std::vector<SpokenRow> spoken;
     std::vector<PunctRow> punct;
     std::vector<PersonaRow> persona;
+    std::unordered_map<std::string, std::string> grammar;
+    const std::string& G(const std::string& name) const;
 };
 
 }  // namespace hd8gen

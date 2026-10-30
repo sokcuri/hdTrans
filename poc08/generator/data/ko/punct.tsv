@@ -5,7 +5,7 @@
 #   kind    comma pause end q excl qopen qclose ellipsis dash mark
 #   jaMark  the source mark or - (any)
 #   ko      the Korean mark (- = drop)
-#   attach  left | right | none
+#   attach  left | right | both (no space on either side: ……큰일이야) | none
 kind	jaMark	ko	attach	note
 comma	、	,	left
 comma	，	,	left
@@ -34,8 +34,8 @@ qclose	)	)	left
 qclose	】	】	left
 qclose	”	”	left
 qclose	-	」	left
-ellipsis	…	…	left
-ellipsis	-	…	left
+ellipsis	…	…	both
+ellipsis	-	…	both
 pause	・	·	none
 pause	-	·	none
 dash	―	―	left

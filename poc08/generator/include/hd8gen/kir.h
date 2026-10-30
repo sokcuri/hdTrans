@@ -40,6 +40,7 @@ struct Node {
     std::string modal;    // additive: "" | gess (-겠-)
     Neg neg = Neg::none;
     bool aux = false, dep = false, passive = false, causative = false;
+    bool potential = false, spont = false;  // additive (W4): -ㄹ 수 있다 and -어지다 voices
     bool glue = false;    // additive: written without a space after the previous word
     uint16_t ja = 0;
     std::string kase;     // P: subj top obj gen dat goal src loc instr com quot voc | lex

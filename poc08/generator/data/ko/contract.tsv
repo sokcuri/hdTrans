@@ -9,7 +9,7 @@
 #   result  the vowel of the merged syllable, or `-` to keep both syllables
 #   mode    must: always (written and spoken); default: the standard short form, used unless
 #           G runs in the uncontracted style; never: no contraction
-#   cond    - | init=ㅇ (the stem syllable has no initial consonant: 오+아 → 와) | next=요 (요 follows) | prefinal (the honorific -시-, not a lexical 시)
+#   cond    - | init=ㅇ (the stem syllable has no initial consonant: 오+아 → 와) | next=yo (요 follows) | prefinal (the honorific -시-, not a lexical 시)
 stem	ending	result	mode	cond	example
 ㅏ	ㅏ	ㅏ	must	-	가+아 → 가
 ㅓ	ㅓ	ㅓ	must	-	서+어 → 서
@@ -24,7 +24,7 @@ stem	ending	result	mode	cond	example
 놓	ㅏ	ㅘ	default	-	놓+아 → 놔, 놓+았 → 놨 (the ㅎ drops; 놓아 stays standard)
 ㅜ	ㅓ	ㅝ	default	-	주+어 → 줘, 배우+어 → 배워
 ㅚ	ㅓ	ㅙ	default	-	되+어 → 돼
-시	ㅓ	ㅔ	default	next=요,prefinal	가시+어요 → 가세요 (honorific 시 only: 마셔요)
+시	ㅓ	ㅔ	default	next=yo,prefinal	가시+어요 → 가세요 (honorific 시 only: 마셔요)
 ㅣ	ㅓ	ㅕ	default	-	마시+어 → 마셔, 시+어 → 셔
 하	ㅕ	ㅐ	default	-	하+여 → 해
 ㅟ	ㅓ	-	never	-	쉬+어 → 쉬어

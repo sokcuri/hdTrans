@@ -115,18 +115,42 @@ struct XNode {  // expanded node with its register
     bool chainMain = false;  // a main verb followed by its auxiliary (-어 + aux): 47항 붙임 candidate
 };
 
-const char* AspectAux(Aspect a, const char** conn) {
-    *conn = "-어";
+const char* AspectAuxName(Aspect a) {
     switch (a) {
-        case Aspect::prog: *conn = "-고"; return "있다";
-        case Aspect::result: return "있다";
-        case Aspect::compl_: return "버리다";
-        case Aspect::dirCome: return "오다";
-        case Aspect::dirGo: return "가다";
-        case Aspect::try_: return "보다";
-        case Aspect::give: return "주다";
+        case Aspect::prog: return "aux.prog";
+        case Aspect::result: return "aux.result";
+        case Aspect::compl_: return "aux.compl";
+        case Aspect::dirCome: return "aux.dir-come";
+        case Aspect::dirGo: return "aux.dir-go";
+        case Aspect::try_: return "aux.try";
+        case Aspect::give: return "aux.give";
         default: return nullptr;
     }
+}
+
+bool EndsWith(const std::string& s, const std::string& e) {
+    return !e.empty() && s.size() >= e.size() && s.compare(s.size() - e.size(), e.size(), e) == 0;
+}
+
+// Moves the final features of `from` onto a new auxiliary node and leaves `from` a connective (-어, -고, -지, -게).
+XNode SplitAux(const Tables& t, XNode& from, const std::string& auxLemma, const std::string& conn, const std::string& auxPos) {
+    XNode a = from;
+    a.n.lemma = auxLemma;
+    a.n.kcls.clear();
+    a.n.vpos = auxPos;
+    a.n.aux = true;
+    a.n.aspect = Aspect::simple;
+    a.n.passive = a.n.spont = a.n.potential = a.n.causative = false;
+    from.n.ctype = CType::conn;
+    from.n.eomi = conn;
+    from.n.rel.clear();
+    from.n.tense = Tense::nonpast;
+    from.n.modal.clear();
+    from.n.neg = Neg::none;
+    from.n.mood = Mood::decl;
+    from.hon = false;
+    from.chainMain = conn == t.G("conn.aux");
+    return a;
 }
 
 std::vector<XNode> Expand(const Tables& t, const std::vector<Node>& in, const std::vector<Reg>& reg,
@@ -159,81 +183,125 @@ std::vector<XNode> Expand(const Tables& t, const std::vector<Node>& in, const st
         }
         const PredicateInfo info = LookupPredicate(t, n.lemma);
         const std::string pos = !n.vpos.empty() ? n.vpos : info.pos;
+        const std::string auxPos = (pos == "A" || pos == "C" || pos == "N") ? "A" : "V";
         if (n.neg == Neg::an || n.neg == Neg::mot) {
             XNode adv = x;
             adv.n = Node{};
             adv.n.kind = Kind::Adv;
-            adv.n.lemma = n.neg == Neg::an ? "안" : "못";
+            adv.n.lemma = t.G(n.neg == Neg::an ? "neg.an" : "neg.mot");
             adv.n.id = adv.n.origin = x.n.origin;
             adv.n.utt = n.utt;
             out.push_back(adv);
             x.n.neg = Neg::none;
         }
         std::vector<XNode> chain{x};
-        const char* conn = nullptr;
-        if (const char* aux = AspectAux(n.aspect, &conn)) {
-            XNode a = x;
-            a.n.lemma = aux;
-            a.n.kcls.clear();
-            a.n.vpos.clear();
-            a.n.aux = true;
-            a.n.aspect = Aspect::simple;
-            if (std::string(aux) == "있다" && x.hon) {
-                a.n.lemma = "계시다";
+        // voice: 하다 verbs swap their light verb (사용되다, 공부시키다); others take -어지다 / -게 하다
+        if (x.n.passive || x.n.spont) {
+            XNode& m = chain.back();
+            if (x.n.passive && EndsWith(m.n.lemma, t.G("voice.ha"))) {
+                m.n.lemma = m.n.lemma.substr(0, m.n.lemma.size() - t.G("voice.ha").size()) + t.G("voice.doe");
+                m.n.kcls.clear();
+                m.n.vpos = "V";
+            } else {
+                XNode a = SplitAux(t, m, t.G("voice.aux"), t.G("conn.aux"), "V");
+                chain.push_back(a);
+            }
+            chain.back().n.passive = chain.back().n.spont = false;
+        }
+        if (x.n.causative) {
+            XNode& m = chain.back();
+            if (EndsWith(m.n.lemma, t.G("voice.ha"))) {
+                m.n.lemma = m.n.lemma.substr(0, m.n.lemma.size() - t.G("voice.ha").size()) + t.G("caus.ha");
+                m.n.kcls.clear();
+                m.n.vpos = "V";
+            } else {
+                XNode a = SplitAux(t, m, t.G("caus.aux"), t.G("conn.caus"), "V");
+                chain.push_back(a);
+            }
+            chain.back().n.causative = false;
+        }
+        if (const char* auxName = AspectAuxName(x.n.aspect)) {
+            XNode& m = chain.back();
+            const bool prog = x.n.aspect == Aspect::prog;
+            XNode a = SplitAux(t, m, t.G(auxName), t.G(prog ? "conn.prog" : "conn.aux"), "");
+            if (a.n.lemma == t.G("aux.prog") && a.hon) {
+                a.n.lemma = t.G("aux.prog.hon");
                 a.hon = false;
                 a.n.vpos = "V";
             }
+            chain.push_back(a);
+        }
+        // potential: -ㄹ 수 있다 (없다 when negated)
+        bool potNoun = false;
+        if (x.n.potential) {
             XNode& m = chain.back();
-            m.n.aspect = Aspect::simple;
-            m.n.ctype = CType::conn;
-            m.n.eomi = conn;
+            const bool neg = m.n.neg == Neg::an || m.n.neg == Neg::jiAnh || m.n.neg == Neg::mot || m.n.neg == Neg::jiMot ||
+                             x.n.neg == Neg::an || x.n.neg == Neg::mot;
+            XNode a = m;
+            a.n.lemma = t.G(neg ? "pot.neg" : "pot.exist");
+            a.n.kcls.clear();
+            a.n.vpos.clear();
+            a.n.aux = true;
+            a.n.potential = false;
+            a.n.neg = Neg::none;
+            m.n.ctype = CType::adn;
+            m.n.rel = "fut";
+            m.n.eomi.clear();
             m.n.tense = Tense::nonpast;
             m.n.modal.clear();
             m.n.neg = Neg::none;
+            m.n.potential = false;
             m.hon = false;
-            m.chainMain = std::string(conn) == "-어";
+            if (neg && !out.empty() && out.back().n.kind == Kind::Adv && out.back().n.origin == x.n.origin) out.pop_back();
             chain.push_back(a);
+            potNoun = true;
         }
         XNode& last = chain.back();
         if (last.n.neg == Neg::jiAnh || last.n.neg == Neg::jiMot) {
-            XNode a = last;
             const std::string lpos = last.n.aux ? LookupPredicate(t, last.n.lemma).pos : pos;
-            a.n.lemma = last.n.neg == Neg::jiAnh ? "않다" : "못하다";
-            a.n.vpos = (lpos == "A" || lpos == "C" || lpos == "N") ? "A" : "V";
-            if (a.n.lemma == "못하다") a.n.vpos = lpos == "A" ? "A" : "V";
-            a.n.kcls.clear();
-            a.n.aux = true;
+            const std::string apos = (lpos == "A" || lpos == "C" || lpos == "N" || lpos == "X") ? "A" : "V";
+            XNode a = SplitAux(t, last, t.G(last.n.neg == Neg::jiAnh ? "aux.neg" : "aux.neg-mot"), t.G("conn.neg"),
+                               last.n.neg == Neg::jiMot ? (lpos == "A" ? "A" : "V") : apos);
             a.n.neg = Neg::none;
-            last.n.ctype = CType::conn;
-            last.n.eomi = "-지";
-            last.n.tense = Tense::nonpast;
-            last.n.modal.clear();
-            last.n.neg = Neg::none;
-            last.hon = false;
             chain.push_back(a);
         } else if (last.n.neg == Neg::jiMa) {
-            last.n.eomi = "jima";
+            last.n.eomi = t.G("family.jima");
             last.n.mood = Mood::imp;
             last.n.ctype = CType::final_;
             last.n.neg = Neg::none;
         }
+        (void)auxPos;
         XNode& tail = chain.back();
-        if (tail.n.ctype == CType::nom && tail.n.rel == "geot") {
+        const bool geot = tail.n.ctype == CType::nom && tail.n.rel == "geot";
+        if (geot) {
             tail.n.ctype = CType::adn;
             tail.n.rel = tail.n.tense == Tense::past ? "past" : "nonpast";
             tail.n.tense = Tense::nonpast;
-            for (auto& c : chain) out.push_back(c);
+        }
+        for (size_t k = 0; k < chain.size(); ++k) {
+            out.push_back(chain[k]);
+            // the dependent noun of -ㄹ 수 있다 sits after the adnominal predicate
+            if (potNoun && k + 2 == chain.size()) {
+                XNode s2 = x;
+                s2.n = Node{};
+                s2.n.kind = Kind::N;
+                s2.n.lemma = t.G("pot.noun");
+                s2.n.dep = true;
+                s2.n.id = s2.n.origin = x.n.origin;
+                s2.n.utt = n.utt;
+                out.push_back(s2);
+            }
+        }
+        if (geot) {
             XNode g = x;
             g.n = Node{};
             g.n.kind = Kind::N;
-            g.n.lemma = "것";
+            g.n.lemma = t.G("nom.geot");
             g.n.dep = true;
             g.n.id = g.n.origin = x.n.origin;
             g.n.utt = n.utt;
             out.push_back(g);
-            continue;
         }
-        for (auto& c : chain) out.push_back(c);
     }
     return out;
 }
@@ -339,7 +407,7 @@ std::string ConjugateForms(const Tables& t, const std::string& lemma, const std:
         // 학생이다 / -적이다: the noun before 이다 is the host
         std::u32string u = ToU32(lemma.substr(0, lemma.find(':')));
         if (u.size() > 2) hostText += u.substr(0, u.size() - 2);
-        s.text = U"이";
+        s.text = std::u32string(1, kI);
     }
     std::u32string prefix = cop ? hostText : std::u32string();
     for (size_t i = 0; i < forms.size(); ++i) {
@@ -358,7 +426,7 @@ std::string ConjugateForms(const Tables& t, const std::string& lemma, const std:
                 f.pop_back();
             }
             if (!f.empty() && f[0] == '-') f = f.substr(1);
-            hon = f == "(으)시";
+            hon = f == ToU8(EuMark() + std::u32string(1, Syl(9, I)));  // (으)시
         }
         std::u32string r;
         if (cop && i == 0) r = CopulaAfter(t, hostText, ToU32(f), opt);
@@ -411,7 +479,7 @@ std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, 
         case CType::conn:
             if (!n.eomi.empty()) row = FindEomiById(t, n.eomi, p, "");
             if (!row && !n.rel.empty()) row = FindEomi(t, "conn", n.rel, "", "", p);
-            if (!row) row = FindEomiById(t, "-고", p, "");
+            if (!row) row = FindEomiById(t, t.G("conn.default"), p, "");
             break;
         case CType::adn: {
             std::string rel = n.rel;
@@ -435,11 +503,11 @@ std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, 
     } else if (finalForm.empty()) {
         notes.push_back("no ending row for " + n.lemma + " ctype " + std::to_string(static_cast<int>(n.ctype)) + " " +
                         n.eomi + " " + level + " " + mood);
-        finalForm = "다";
+        finalForm = t.G("final.fallback");
     }
-    if (x.hon && !honIncl) forms.push_back("-시-");
-    if (n.tense == Tense::past && n.ctype != CType::adn && n.ctype != CType::stem) forms.push_back("-었-");
-    if (n.modal == "gess") forms.push_back("-겠-");
+    if (x.hon && !honIncl) forms.push_back(t.G("pre.hon"));
+    if (n.tense == Tense::past && n.ctype != CType::adn && n.ctype != CType::stem) forms.push_back(t.G("pre.past"));
+    if (n.modal == "gess") forms.push_back(t.G("pre.gess"));
     forms.push_back(finalForm);
     std::string hostArg;
     if (cls == "COP") hostArg = ToU8(host);
@@ -512,7 +580,9 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
             case Kind::P: {
                 const bool anim = (n.sem & kAnimate) != 0 || (i > 0 && (xs[i - 1].n.sem & (kPerson | kAnimate)) != 0);
                 const bool hon = x.hon;
-                w.Emit(ParticleText(t, n, w.word, anim, hon, x.spoken), true, n.origin);
+                // a particle after a comma keeps its space (부수입이다, 라고): it cannot attach to a mark
+                const bool afterComma = i > 0 && xs[i - 1].n.kind == Kind::Punct && xs[i - 1].n.punct == Punct::comma;
+                w.Emit(ParticleText(t, n, w.word, anim, hon, x.spoken), !afterComma, n.origin);
                 prevKind = Kind::P;
                 break;
             }
@@ -552,8 +622,8 @@ GenResult Generate(const Tables& t, const std::vector<Node>& kir2, const std::ve
                 std::string text = pr ? pr->ko : n.jaMark;
                 if (text == "-") text = n.jaMark;
                 const std::string attachMode = pr ? pr->attach : "left";
-                w.Emit(text, attachMode == "left" || n.glue, n.origin);
-                if (attachMode == "right") w.noSpace = true;
+                w.Emit(text, attachMode == "left" || attachMode == "both" || n.glue, n.origin);
+                if (attachMode == "right" || attachMode == "both") w.noSpace = true;
                 prevKind = Kind::Punct;
                 break;
             }

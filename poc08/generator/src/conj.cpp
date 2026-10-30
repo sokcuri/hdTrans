@@ -22,7 +22,7 @@ std::string CtxOf(const std::u32string& form) {
     const char32_t c = form[0];
     if (IsHarmonic(c)) return "A";
     if (IsConsonantJamo(c)) return ToU8(std::u32string(1, c));
-    if (c == U'오') return "오";
+    if (c == kO) return ToU8(std::u32string(1, kO));
     if (IsSyllable(c)) return ToU8(std::u32string(1, JamoOfInitial(Initial(c))));
     return "";
 }
@@ -84,7 +84,7 @@ std::u32string Attach(const Tables& t, const Stem& s, std::u32string form, const
         form = cons ? form.substr(0, slash) : form.substr(slash + 1);
     }
     EndingFx fx;
-    if (form.rfind(U"(으)", 0) == 0) {
+    if (form.rfind(EuMark(), 0) == 0) {
         form = form.substr(3);
         ApplyRows(t, s, "EU", text, fx);
         const bool vowelFinal = IsSyllable(text.back()) && Final(text.back()) == 0;
@@ -96,7 +96,7 @@ std::u32string Attach(const Tables& t, const Stem& s, std::u32string form, const
                 text.push_back(Join(kInitIeung, EU, FinalOfJamo(form[0])));
                 form = form.substr(1);
             } else {
-                text.push_back(U'으');
+                text.push_back(kEu);
             }
             return text + form;
         }
@@ -129,7 +129,7 @@ std::u32string Attach(const Tables& t, const Stem& s, std::u32string form, const
     const int hFinal = Final(h);
     const std::u32string rest = form.substr(1);
     int vowel = EO;
-    if (fx.vowelSyl == U'여') {
+    if (fx.vowelSyl == kYeo) {
         vowel = YEO;
     } else if (fx.harmony == 1) {
         vowel = A;
@@ -141,7 +141,7 @@ std::u32string Attach(const Tables& t, const Stem& s, std::u32string form, const
         else vowel = Bright(Medial(text.back())) ? A : EO;
     }
     char32_t& last = text.back();
-    if (fx.vowelSyl == U'러') {
+    if (fx.vowelSyl == kReo) {
         text.push_back(Join(5, EO, hFinal));  // ㄹ initial = 5
         return text + rest;
     }
@@ -166,7 +166,7 @@ std::u32string Attach(const Tables& t, const Stem& s, std::u32string form, const
                                                  : (Final(last) == 0 && Medial(last) == row.stemVowel);
             if (!stemOk || row.endVowel != vowel) continue;
             if (row.initIeung && Initial(last) != kInitIeung) continue;
-            if (row.nextYo && (rest.empty() || rest[0] != U'요')) continue;
+            if (row.nextYo && (rest.empty() || rest[0] != kYo)) continue;
             if (row.prefinal && !s.honPrefinal) continue;
             if (row.result < 0) break;
             const bool apply = row.mode == "must" || fx.contractMust || (row.mode == "default" && !opt.uncontracted);
@@ -183,21 +183,21 @@ std::u32string Attach(const Tables& t, const Stem& s, std::u32string form, const
 
 std::u32string CopulaAfter(const Tables& t, std::u32string_view host, const std::u32string& form, const GenOptions& opt) {
     Stem s;
-    s.text = U"이";
+    s.text = std::u32string(1, kI);
     s.pos = 'C';
     s.cls = "NC";
     std::u32string r = Attach(t, s, form, opt);
-    if (EndSound(host) != 'V' || r.size() < 2 || r[0] != U'이') return r;
+    if (EndSound(host) != 'V' || r.size() < 2 || r[0] != kI) return r;
     if (IsHarmonic(r[1])) return std::u32string(1, Join(kInitIeung, YEO, Final(r[1]))) + r.substr(2);  // 였, 여도
-    if (r[1] == U'에') return U"예" + r.substr(2);                                                   // 예요
-    if (r[1] == U'오') return r;                                                                        // 이오
+    if (r[1] == kE) return std::u32string(1, kYe) + r.substr(2);                                                   // 예요
+    if (r[1] == kO) return r;                                                                        // 이오
     return r.substr(1);                                                                                 // 다, 야, 고, 면
 }
 
 Stem StemOf(const Tables& t, const std::string& lemma, const std::string& pos, const std::string& cls) {
     Stem s;
     std::u32string u = ToU32(lemma);
-    if (!u.empty() && u.back() == U'다') u.pop_back();
+    if (!u.empty() && u.back() == Syl(3, A)) u.pop_back();  // 다
     s.text = u;
     s.pos = pos.empty() ? 'V' : pos[0];
     s.cls = cls.empty() ? "REG" : cls;
@@ -212,8 +212,9 @@ std::string RealizeParticle(const std::string& form, std::u32string_view prev) {
     const bool cons = snd == 'C' || snd == 'L';
     const size_t slash = form.find('/');
     if (slash != std::string::npos) return cons ? form.substr(0, slash) : form.substr(slash + 1);
-    if (form.rfind("(으)", 0) == 0) return (snd == 'C' ? "으" : "") + form.substr(5);
-    if (form.rfind("(이)", 0) == 0) return (cons ? "이" : "") + form.substr(5);
+    const std::string eu = ToU8(EuMark()), im = ToU8(IMark());
+    if (form.rfind(eu, 0) == 0) return (snd == 'C' ? ToU8(std::u32string(1, kEu)) : "") + form.substr(eu.size());
+    if (form.rfind(im, 0) == 0) return (cons ? ToU8(std::u32string(1, kI)) : "") + form.substr(im.size());
     return form;
 }
 
@@ -250,7 +251,7 @@ PredicateInfo LookupPredicate(const Tables& t, const std::string& lemmaIn) {
         }
     }
     if (info.pos.empty()) {
-        if (lemma == "이다") info.pos = "C";
+        if (lemma == t.G("lemma.cop")) info.pos = "C";
         else info.pos = "V";
     }
     if (info.cls.empty() && u.size() >= 2) {
@@ -271,9 +272,9 @@ PredicateInfo LookupPredicate(const Tables& t, const std::string& lemmaIn) {
             }
         }
     }
-    if (info.cls == "COP" && lemma != "이다" && info.pos != "C") info.pos = "C";
+    if (info.cls == "COP" && info.pos != "C") info.pos = "C";
     if (info.cls == "EXIST") info.pos = "X";
-    if (lemma == "아니다") info.pos = "N";
+    if (lemma == t.G("lemma.negcop")) info.pos = "N";
     return info;
 }
 
