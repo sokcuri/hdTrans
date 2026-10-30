@@ -81,6 +81,13 @@ struct SegHints {
     uint8_t cls = 0;
   };
   std::vector<Rejected> rejected;
+  // Verb and adjective forms written in kana whose lemma is a kanji word, with that word's kanji
+  // spelling of the same form (たっ → 経っ): a host dictionary keyed by kanji finds the analyzer's word.
+  struct Respell {
+    Span span;
+    std::string kanji;
+  };
+  std::vector<Respell> respell;
 };
 
 struct Model;

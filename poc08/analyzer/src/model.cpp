@@ -231,6 +231,14 @@ void Finalize(Model* m) {
         break;
       }
   }
+  m->kanjiGroups.clear();
+  for (uint32_t g = 0; g < m->groups.size(); ++g) {
+    const auto& x = m->groups[g];
+    if (x.ctype == 0) continue;
+    bool kanji = false;
+    for (char32_t c : m->C(x.stem, x.stemLen)) kanji = kanji || internal::IsKanji(c);
+    if (kanji) m->kanjiGroups[m->S(x.lemma)].push_back(g);
+  }
   m->stutterRule = -1;
   for (size_t i = 0; i < m->rules.size(); ++i)
     if (m->rules[i].kind == 2) m->stutterRule = static_cast<int16_t>(i);

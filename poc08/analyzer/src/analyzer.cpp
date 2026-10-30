@@ -332,6 +332,7 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, floa
   }
   out->ends.assign(text.size() + 1, 0);
   out->rejected.clear();
+  out->respell.clear();
   out->ends[0] = 'u';
   out->ends[text.size()] = 'e';
   if (!model_) return;
@@ -402,6 +403,44 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, floa
   for (const Arc& a : ws->arcs) {
     if (a.removedBy >= 0 || a.e >= n || boundary[a.e]) continue;
     if (through(a) < slack && out->ends[byteB(a.e)] == 0) out->ends[byteB(a.e)] = 'i';
+  }
+  // kana verb and adjective forms of a kanji lemma, spelled in kanji when the analyzer is sure of the word
+  for (uint32_t ai : path) {
+    const Arc& x = ws->arcs[ai];
+    if (x.kind != ArcKind::lex || x.rule >= 0) continue;
+    uint8_t c = ClassCode(m, m.pforms[x.form].cls);
+    if (c != 'v' && c != 'a') continue;
+    std::string_view xud = m.udNames[m.groups[x.ref].ud];
+    if (xud.size() < 6 || xud.substr(xud.size() - 6) != "一般") continue;  // not する, いる, なる
+    bool kana = true;
+    for (uint32_t k = x.b; k < x.e; ++k) kana = kana && internal::IsHiragana(ws->core[k]);
+    if (!kana) continue;
+    // the word must win clearly over every other reading of the same span
+    bool sure = true;
+    for (uint32_t k = ws->beginStart[x.b]; k < ws->beginStart[x.b + 1] && sure; ++k) {
+      const Arc& y = ws->arcs[ws->byBegin[k]];
+      if (&y == &x || y.e != x.e || y.kind != ArcKind::lex) continue;
+      if (m.S(m.groups[y.ref].lemma) != m.S(m.groups[x.ref].lemma) && through(y) < slack) sure = false;
+    }
+    if (!sure) continue;
+    auto it = m.kanjiGroups.find(m.S(m.groups[x.ref].lemma));
+    if (it == m.kanjiGroups.end()) continue;
+    uint16_t cls = m.pforms[x.form].cls;
+    std::string best;
+    int32_t bestCost = kInf;
+    for (uint32_t g : it->second) {
+      const auto& gr = m.groups[g];
+      if (gr.ud != m.groups[x.ref].ud || gr.ctype != m.groups[x.ref].ctype) continue;
+      const auto& p = m.paradigms[gr.paradigm];
+      for (uint32_t f = p.first; f < p.first + p.count; ++f) {
+        if (m.pforms[f].cls != cls || gr.cost >= bestCost) continue;
+        best.clear();
+        for (char32_t ch : m.C(gr.stem, gr.stemLen)) AppendUtf8(best, ch);
+        for (char32_t ch : m.C(m.pforms[f].suf, m.pforms[f].sufLen)) AppendUtf8(best, ch);
+        bestCost = gr.cost;
+      }
+    }
+    if (!best.empty()) out->respell.push_back({{byteB(x.b), byteE(x.e)}, best});
   }
   for (const Arc& a : ws->arcs) {
     if (a.kind != ArcKind::lex || a.rule >= 0 || a.removedBy >= 0 || !boundary[a.b] || !boundary[a.e]) continue;

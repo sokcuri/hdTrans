@@ -140,6 +140,8 @@ struct Model {
   std::vector<Long> longs;  // sorted by key
 
   // ---- derived at Finalize ----
+  // Inflecting groups whose stem holds a kanji, by lemma: the kanji spelling of a kana verb form.
+  std::unordered_map<std::string_view, std::vector<uint32_t>> kanjiGroups;
   struct Node {
     uint32_t child = 0, nChild = 0;
     uint32_t first = 0, count = 0;  // groups (or longs) whose key ends here
