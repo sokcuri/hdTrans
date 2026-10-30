@@ -1273,6 +1273,10 @@ HD_TEST(pipeline_contracted_n) {
         {"止まんぞ", "止まんぞ"},
         {"練習になんない", "練習にならない"},  // なん is no word before ない
         {"みんないい", "みんないい"},          // a word past the ん
+        {"やんない", "やらない"},              // a lone kana where a clause starts, before ない
+        {"これ　やんなきゃ", "これ　やらなきゃ"},
+        {"やんなっちゃう", "やんなっちゃう"},  // 嫌になっちゃう
+        {"やんなよ", "やんなよ"},              // no prohibition from a lone kana there
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }

@@ -3020,9 +3020,12 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
                 break;
             }
             // A stem of one kana only after a particle or the て of a て form (気にすんな, してくんない,
-            // 俺がやっから), and す of する after a noun (邪魔すんな); a kana after kanji is the end of
-            // another word there (怖いんです).
-            if (i - from == 1 && !IsKanjiRune(rs[from]) &&
+            // 俺がやっから), where a clause starts before ない or ねえ (やんないと, これ　やんなきゃ), and す
+            // of する after a noun (邪魔すんな); a kana after kanji is the end of another word there
+            // (怖いんです).
+            const bool clauseStart = from == 0 || !(IsHiraganaRune(rs[from - 1]) || IsKatakanaRune(rs[from - 1]) ||
+                                                    IsKanjiRune(rs[from - 1]) || text::IsLetter(rs[from - 1]));
+            if (i - from == 1 && !IsKanjiRune(rs[from]) && !(says == Says::Nai && clauseStart) &&
                 !(from > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-kana-stem-after"), std::string_view(s).substr(byte[from - 1])) > 0) &&
                 !(rs[from] == U'す' && from > 0 && (IsKanjiRune(rs[from - 1]) || IsKatakanaRune(rs[from - 1])))) {
                 continue;
