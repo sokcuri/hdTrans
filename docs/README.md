@@ -54,3 +54,4 @@
 | `tests/host/` | C API와 J2K DLL 호스트 테스트 |
 | `examples/` | 번역 입력과 출력 예제 |
 | `tools/` | 빌드, 배포, 번역 진단과 테스트 도구 |
+
