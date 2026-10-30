@@ -55,6 +55,8 @@ polite	end	すね
 polite	end	すよ
 polite	end	ございます
 polite	end	ございません
+polite	end	ごめんなさい
+polite	end	すみません
 polite-any	any-not-quoted	です
 polite-any	any-not-quoted	ます
 polite-any	any-not-quoted	ました

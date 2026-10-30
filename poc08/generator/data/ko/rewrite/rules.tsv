@@ -22,5 +22,4 @@ from.robuteo-1	ko	any	[N]:n [P 로부터]:p	-	set p.kase=src	로부터 → 에�
 gen.chain-1	ko	any	[N]:a [P gen]:g [N]:b [P gen]:h [N]:c	a.sem!=person & a.dep=0 & b.dep=0 & a.lemma!=나|너|저|우리|저희|그|그녀|당신|자네|그대|이|그것|이것|저것	del g	의-chains: A의 B의 C → A B의 C when A is not a person
 pron.anata-1	ko	quote	[N 당신]:n	utt.level=hae|haera	set n.lemma=너	casual speech says 너, not 당신 (6.2 vs 2.0 per 1,000 lines)
 pron.anata-2	ko	quote	[N 당신]:n [P subj|top]:p	utt.level=haeyo|hapsyo	del n; del p	polite speech drops the addressee pronoun
-pron.kanojo-1	ko	quote	[N 그녀]:n	utt.level=hae|haera	set n.lemma=걔	casual speech says 걔 for 彼女 (그녀 is written style)
 prog.state-1	ko	any	[V {aspect=prog,tense=nonpast}]:v	v.lemma=알다|모르다|기억하다|믿다|원하다|바라다|사랑하다|좋아하다|싫어하다|닮다	set v.aspect=simple	K5: state verbs do not take -고 있다 in the present (알고 있어 → 알아)

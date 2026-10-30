@@ -28,8 +28,6 @@ pron.anata-1	fix	hae	N:당신 P:subj V:하다{tense=past,mood=q}	네가 했어
 pron.anata-1	keep	narr	N:당신 P:subj V:하다{tense=past}	당신이 했다
 pron.anata-2	fix	haeyo	N:당신 P:top N:누구 V:이다{mood=q}	누구예요
 pron.anata-2	keep	haeyo	N:당신 P:gen N:이름 P:top	당신의 이름은
-pron.kanojo-1	fix	hae	N:그녀 P:top N:어디 P:goal V:가다{tense=past,mood=q}	걔는 어디에 갔어
-pron.kanojo-1	keep	narr	N:그녀 P:top N:어디 P:goal V:가다{tense=past}	그녀는 어디에 갔다
 prog.state-1	fix	hae	V:알다{aspect=prog}	알아
 prog.state-1	fix	haeyo	N:그거 P:top V:기억하다{aspect=prog}	그건 기억해요
 prog.state-1	keep	narr	V:알다{aspect=prog,tense=past}	알고 있었다

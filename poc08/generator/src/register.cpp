@@ -101,7 +101,7 @@ Utt Utterance(const std::u32string& ja) {
     Utt u;
     size_t open = std::u32string::npos;
     for (size_t i = 0; i < ja.size(); ++i)
-        if (ja[i] == U'「' || ja[i] == U'『') {
+        if (ja[i] == U'「' || ja[i] == U'『' || ja[i] == U'≪') {
             open = i;
             break;
         }
@@ -109,7 +109,7 @@ Utt Utterance(const std::u32string& ja) {
         u.text = ja;
         return u;
     }
-    const char32_t closeCh = ja[open] == U'「' ? U'」' : U'』';
+    const char32_t closeCh = ja[open] == U'「' ? U'」' : (ja[open] == U'≪' ? U'≫' : U'』');
     const size_t close = ja.rfind(closeCh);
     if (close == std::u32string::npos || close < open) {
         u.text = ja.substr(open + 1);
@@ -160,6 +160,13 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     // stages of the last sentence: closing marks stripped, then 0..n tail particles stripped
     std::u32string last = LastSentence(u.text);
     while (!last.empty() && IsMark(last.back())) last.pop_back();
+    // an elongation mark between kana is not part of the word (でーす, ますぅ): drop it for matching
+    for (size_t k = 1; k + 1 < last.size();) {
+        const bool kanaL = last[k - 1] >= U'ぁ' && last[k - 1] <= U'ヺ';
+        const bool kanaR = last[k + 1] >= U'ぁ' && last[k + 1] <= U'ヺ';
+        if ((last[k] == U'ー' || last[k] == U'〜' || last[k] == U'～') && kanaL && kanaR) last.erase(k, 1);
+        else ++k;
+    }
     std::vector<std::u32string> stages{last};
     bool tailStripped = false;
     for (int guard = 0; guard < 6; ++guard) {

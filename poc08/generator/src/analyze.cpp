@@ -122,7 +122,7 @@ void RankBundles(std::vector<Bundle>& bs, const AnalyzeHints& h) {
             if (b.level == Level::hao || b.level == Level::hage) s -= 8;
             if (b.level == Level::hae) s += 1;
         }
-        if (b.hon) s -= 3;
+        if (b.hon) s -= 6;  // -시- only when no row without it gives the word (주세요 is the imperative, not decl + 시)
         if (v.ctype == CType::stem) s -= 10;
         return s;
     };

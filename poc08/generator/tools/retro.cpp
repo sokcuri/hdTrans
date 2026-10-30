@@ -688,7 +688,17 @@ bool BuildAligned(Retro& r, const json::Value& v, std::vector<Node>& nodes, size
                 form = p.lemma;
             }
             // the particle as 0.7.x realised it after the word before it
-            const std::u32string prev = nodes.empty() ? std::u32string() : U(nodes.back().lemma);
+            std::u32string prev;
+            for (size_t q = nodes.size(); q-- > 0;) {
+                if (nodes[q].kind == Kind::Punct) continue;
+                const std::u32string lu = U(nodes[q].lemma);
+                bool word = false;
+                for (char32_t ch : lu) word = word || hangul::IsSyllable(ch) || (ch >= U'0' && ch <= U'9') || (ch >= U'A' && ch <= U'z');
+                if (word) {
+                    prev = lu;
+                    break;
+                }
+            }
             const std::string realised = RealizeParticle(form, prev);
             const std::u32string ru = U(realised);
             if (!ru.empty() && o.compare(a.c, ru.size(), ru) == 0) {
@@ -892,6 +902,26 @@ int main(int argc, char** argv) {
             reg = AssignRegister(*rtab, nodes, d, first, tables.get());
             if (u.narration)
                 for (auto& g : reg) g.level = Level::haera;
+            // a word 0.7.x wrote with a level the reader could not take apart: changing the others would mix levels
+            bool mixed = false;
+            for (const auto& n : nodes) {
+                if (n.kind != Kind::Raw) continue;
+                for (const char* key : {"mixed.hapsyo", "mixed.haeyo"})
+                    for (const auto& e : Split(tables->G(key), '|'))
+                        if (n.lemma.size() >= e.size() && n.lemma.compare(n.lemma.size() - e.size(), e.size(), e) == 0) mixed = true;
+            }
+            for (size_t q = 0; q < nodes.size(); ++q) {
+                if (nodes[q].kind != Kind::V) continue;
+                // a final ending inside the sentence (놀다니, 저희들…) keeps 0.7.x's level: no 요 mid-sentence
+                const bool inner = nodes[q].ctype == CType::final_ && q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct &&
+                                   nodes[q + 1].punct == Punct::comma;
+                if (!mixed && !inner) continue;
+                for (auto& g : reg)
+                    if (g.node == nodes[q].id && nodes[q].decision) {
+                        g.level = static_cast<Level>(nodes[q].decision);
+                        g.hon = false;
+                    }
+            }
         } else {
             // keep: the level 0.7.x's own ending had; strict: same (0.7.x strict output is what it wrote)
             for (const auto& n : nodes)
@@ -917,7 +947,16 @@ int main(int argc, char** argv) {
             }
             g.out.replace(pos, 1, syl);
         }
-        if (!alignMode) g.out = v.Str("lead") + g.out;
+        {
+            std::string lead = v.Str("lead");
+            if (alignMode) {
+                const std::string o = v.Str("out075");
+                size_t k = 0;
+                while (k < o.size() && o[k] == ' ') ++k;
+                lead = o.substr(0, k);
+            }
+            g.out = lead + g.out;
+        }
         if (lineOk) ++linesOk;
         json::Value o;
         o.t = json::Value::T::Obj;

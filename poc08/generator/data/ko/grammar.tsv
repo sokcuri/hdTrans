@@ -36,3 +36,5 @@ caus.ha	시키다	causative of a 하다 verb: 공부하다 → 공부시키다
 caus.aux	하다	causative: -게 하다
 conn.caus	-게
 lit.ends	다요까죠	last syllables of a word that 0.7.x wrote literally and the retrofit reads as a predicate
+mixed.hapsyo	니다|니까	0.7.x words the retrofit could not read that carry 합쇼체; the line then keeps 0.7.x's levels
+mixed.haeyo	요|죠	same for 해요체

@@ -31,7 +31,10 @@ id	slot	family	mood	level	pos	form	flags	note
 -소	final	plain	decl	hao	*	소/오		먹소, 가오
 -소	final	plain	decl	hao	C	오		학생이오
 -네	final	plain	decl	hage	*	네		가네, 좋네
--냐	final	plain	q	haera	*	냐		가냐, 먹냐, 좋냐
+-어?	final	plain	q	haera	*	어		뭐야?, 있어? (a question in narration keeps the 해 form; -냐 is rough)
+-어?	final	plain	q	haera	C	야		뭐야?
+-냐	final	nya	q	haera	*	냐		가냐 (rough question, family nya)
+-냐	final	nya	q	hae	*	냐		가냐
 -어?	final	plain	q	hae	*	어		가?, 먹어?
 -어?	final	plain	q	hae	C	야		학생이야?
 -어요?	final	plain	q	haeyo	*	어요		가요?
@@ -50,14 +53,14 @@ id	slot	family	mood	level	pos	form	flags	note
 -게	final	plain	imp	hage	*	게		가게
 -자	final	plain	prop	haera	*	자		가자
 -자	final	plain	prop	hae	*	자		가자 (반말 propositive: 가자, not 가)
--어요!	final	plain	prop	haeyo	*	어요		가요
+-죠	final	plain	prop	haeyo	*	죠		가죠 (가요 reads as a statement)
 -ㅂ시다	final	plain	prop	hapsyo	*	(으)ㅂ시다		갑시다, 먹읍시다
 -ㅂ시다	final	plain	prop	hao	*	(으)ㅂ시다		갑시다
 -세	final	plain	prop	hage	*	세		가세
 -는구나	final	plain	excl	haera	V	는구나		가는구나
 -는구나	final	plain	excl	haera	*	구나		좋구나, 있구나, 학생이구나
--는군	final	plain	excl	hae	V	는군		가는군
--는군	final	plain	excl	hae	*	군		좋군
+-는구나	final	plain	excl	hae	V	는구나		가는구나 (반말 uses -구나)
+-는구나	final	plain	excl	hae	*	구나		좋구나
 -는군요	final	plain	excl	haeyo	V	는군요		가는군요
 -는군요	final	plain	excl	haeyo	*	군요		좋군요
 -는군요	final	plain	excl	hapsyo	V	는군요		가는군요
@@ -127,27 +130,28 @@ id	slot	family	mood	level	pos	form	flags	note
 -시겠습니까	final	lrae	q	hapsyo	*	(으)시겠습니까	hon-incl	가시겠습니까
 -ㄹ래	final	lrae	-	hao	*	(으)ㄹ래		갈래
 -ㄹ래	final	lrae	-	hage	*	(으)ㄹ래		갈래
--나	final	na	-	haera	*	나		가나, 좋나
--나	final	na	-	hae	*	나		가나
--나요	final	na	-	haeyo	*	나요		가나요
--습니까	final	na	-	hapsyo	*	습니까/ㅂ니까		갑니까
--나	final	na	-	hao	*	나		가나
--나	final	na	-	hage	*	나		가나
--는가	final	ga	-	haera	V	는가		가는가
--는가	final	ga	-	haera	X	는가		있는가
--는가	final	ga	-	haera	*	(으)ㄴ가		좋은가
--어?	final	ga	-	hae	*	어		(the stiff -는가 is -어? in 반말: 타고 싶어?)
--어?	final	ga	-	hae	C	야		트레저야?
--는가요	final	ga	-	haeyo	V	는가요		가는가요
--는가요	final	ga	-	haeyo	X	는가요		있는가요
--는가요	final	ga	-	haeyo	*	(으)ㄴ가요		좋은가요
--습니까	final	ga	-	hapsyo	*	습니까/ㅂ니까		갑니까
--는가	final	ga	-	hao	V	는가		가는가
--는가	final	ga	-	hao	X	는가		있는가
--는가	final	ga	-	hao	*	(으)ㄴ가		좋은가
--는가	final	ga	-	hage	V	는가		가는가
--는가	final	ga	-	hage	X	는가		있는가
--는가	final	ga	-	hage	*	(으)ㄴ가		좋은가
+-나	final	na	q	haera	*	나		가나, 좋나
+-나	final	na	q	hae	*	나		가나
+-나요	final	na	q	haeyo	*	나요		가나요
+-습니까	final	na	q	hapsyo	*	습니까/ㅂ니까		갑니까
+-나	final	na	q	hao	*	나		가나
+-나	final	na	q	hage	*	나		가나
+-는가	final	ga	q	haera	V	는가		가는가
+-는가	final	ga	q	haera	X	는가		있는가
+-는가	final	ga	q	haera	*	(으)ㄴ가		좋은가
+-는가	final	ga	q	hae	V	는가		가는가 (그런가: judges keep the musing -ㄴ가 in 반말)
+-는가	final	ga	q	hae	X	는가		있는가
+-는가	final	ga	q	hae	*	(으)ㄴ가		좋은가, 그런가
+-는가요	final	ga	q	haeyo	V	는가요		가는가요
+-는가요	final	ga	q	haeyo	X	는가요		있는가요
+-는가요	final	ga	q	haeyo	*	(으)ㄴ가요		좋은가요
+-습니까	final	ga	q	hapsyo	*	습니까/ㅂ니까		갑니까
+-는가	final	ga	q	hao	V	는가		가는가
+-는가	final	ga	q	hao	X	는가		있는가
+-는가	final	ga	q	hao	*	(으)ㄴ가		좋은가
+-는가	final	ga	q	hage	V	는가		가는가
+-는가	final	ga	q	hage	X	는가		있는가
+-는가	final	ga	q	hage	*	(으)ㄴ가		좋은가
 -대	final	dae	-	haera	V	는대/ㄴ대		간대, 먹는대
 -대	final	dae	-	haera	*	대		좋대, 갔대
 -대	final	dae	-	haera	C	래		학생이래
