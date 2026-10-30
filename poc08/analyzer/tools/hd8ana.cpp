@@ -721,7 +721,7 @@ int CmdHints(const Args& a) {
   std::string line;
   SegHints h;
   while (std::getline(std::cin, line)) {
-    an.Hints(line, &h);
+    an.Hints(line, &h, nullptr, static_cast<float>(std::atof(a.Get("--slack", "2.0").c_str())));
     std::string o;
     for (size_t i = 0; i < line.size(); ++i) {
       if (h.ends[i]) o += std::string("|") + static_cast<char>(h.ends[i]);
@@ -755,7 +755,7 @@ int CmdNorm() {
 int main(int argc, char** argv) {
   if (argc < 2) return Die("usage: hd8ana pack|pack-long|run|eval|bench|train|longunits ...");
   std::string cmd = argv[1];
-  std::set<std::string> valued{"-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff"};
+  std::set<std::string> valued{"--slack", "-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff"};
   Args a = Parse(argc, argv, valued);
   if (cmd == "pack") return CmdPack(a);
   if (cmd == "pack-long") return CmdPackLong(a);

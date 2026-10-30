@@ -69,11 +69,12 @@ struct SegHints {
   // Per byte offset 0..text.size(): 0 where no word ends; else the class of the analyzer word that
   // starts there: 'n' noun, 'v' verb, 'a' adjective, 'k' adjectival noun, 'd' adverb, conjunction or
   // interjection, 'm' adnominal, 'p' particle, 'x' auxiliary (also auxiliary stems such as よう),
-  // 'f' prefix, 'z' suffix, 's' symbol, 'u' other; 'e' where a word only ends; 'i' inside a verb where
-  // a compound verb may be cut (言い|かけた).
+  // 'f' prefix, 'z' suffix, 's' symbol, 'u' other; 'e' where a word only ends; 'i' inside a word where
+  // a cut is still plausible: a compound verb (言い|かけた), a derived spoken word (か|ぁ), or a cut
+  // that a path close to the best one makes.
   std::vector<uint8_t> ends;
   // Spans of one content word of the lexicon that cover two or more analyzer words, one of them a
-  // particle or an auxiliary (しかし over しか + し), with that word's class letter: a host word of that class over exactly that span is a
+  // particle (しかし over しか + し), and lose clearly, with that word's class letter: a host word of that class over exactly that span is a
   // reading the analyzer rejected.
   struct Rejected {
     Span span;
@@ -100,7 +101,9 @@ class Analyzer {
   // Thread-safe on one loaded analyzer. A workspace may be reused by one thread to avoid allocations.
   void Analyze(std::string_view src, const Options& opt, Analysis* out, Workspace* ws = nullptr) const;
 
-  void Hints(std::string_view text, SegHints* out, Workspace* ws = nullptr) const;
+  // A cut the analyzer does not make is still allowed ('i') where a path with that cut costs less than
+  // `slack` nats more than the best path; a rejected word must lose by at least `slack`.
+  void Hints(std::string_view text, SegHints* out, Workspace* ws = nullptr, float slack = 2.0f) const;
 
   std::string_view UdName(uint16_t ud) const;
   std::string_view CtypeName(uint8_t ctype) const;
