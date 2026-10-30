@@ -463,6 +463,26 @@ std::string TakeWhy(Bridge* b) {
 
 std::shared_ptr<const RuleData> RuleDataOf(const Bridge* b) { return b->rule; }
 
+std::vector<SourceToken> AnalyzeSource(const Bridge* b, std::string_view text) {
+    std::vector<SourceToken> out;
+    if (b == nullptr || !b->engine.analyzer || !b->analyzerReal || text.size() > kMaxStructureBytes) return out;
+    Doc d;
+    Line l;
+    l.src = text;
+    StageN(*b->engine.analyzer, b->engine.cfg, d, l);
+    StageA(*b->engine.analyzer, b->engine.cfg, d, l, {});
+    for (const Token& t : l.toks) {
+        SourceToken s;
+        s.lemma = d.S(t.lemma);
+        s.reading = d.S(t.reading);
+        s.cform = d.cforms.Str(t.cform);
+        s.verb = t.pos == Pos::v1 || t.pos == Pos::v5 || t.pos == Pos::vs || t.pos == Pos::vk || t.pos == Pos::vz;
+        s.prefix = t.pos == Pos::pref;
+        out.push_back(std::move(s));
+    }
+    return out;
+}
+
 std::string TakeReselections(Bridge* b) {
     std::lock_guard<std::mutex> lock(b->mu);
     return std::exchange(b->reselections, {});

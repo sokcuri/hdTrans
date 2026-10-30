@@ -90,6 +90,19 @@ std::string RowNotation(const Retro& r, char marker, char code, const std::strin
     return f.form + first;
 }
 
+// The pos and class a 0.7.x predicate item is read with. The tables decide, except between verb and adjective:
+// there the marker family 0.7.x conjugated this very word with decides, since lemmas.tsv takes a majority over
+// dictionary rows (우수하다 is written with a verb family in most rows, so the table says V and the retrofit
+// would turn 우수하다고 into 우수한다고). Reading the word as 0.7.x built it keeps its class unchanged.
+void ItemPosClass(const Tables& t, const std::string& lemma, std::string& pos, std::string& cls) {
+    const std::string itemPos = pos;
+    const PredicateInfo info = LookupPredicate(t, lemma);
+    const bool known = t.lemmaPos.count(lemma) || t.stems.count(lemma);
+    if (known || pos.empty()) pos = info.pos;
+    if (cls.empty() || known) cls = info.cls;
+    if ((itemPos == "V" || itemPos == "A") && (pos == "V" || pos == "A")) pos = itemPos;
+}
+
 bool IsHangulWord(const std::string& s) {
     const std::u32string u = U(s);
     if (u.empty()) return false;
@@ -199,10 +212,7 @@ bool ReadRestWord(Retro& r, const std::string& w, Want wantLast, Mood mood, std:
 bool ReadPredicate(Retro& r, const json::Value& it, Want want, Mood mood, const std::string& host, std::vector<Node>& out) {
     std::string lemma = it.Str("lemma");
     std::string pos = it.Str("pos"), cls = it.Str("cls");
-    const PredicateInfo info = LookupPredicate(r.t, lemma);
-    const bool known = r.t.lemmaPos.count(lemma) || r.t.stems.count(lemma);
-    if (known || pos.empty()) pos = info.pos;
-    if (cls.empty() || known) cls = info.cls;
+    ItemPosClass(r.t, lemma, pos, cls);
     const std::string marker = it.Str("marker", "&");
     const std::string row = it.Str("row", "1");
     std::string rest = it.Str("rest");
@@ -494,10 +504,7 @@ struct Aligner {
 bool AlignPredicate(Retro& r, Aligner& a, const json::Value& it, Want want, Mood mood) {
     std::string lemma = it.Str("lemma");
     std::string pos = it.Str("pos"), cls = it.Str("cls");
-    const PredicateInfo info = LookupPredicate(r.t, lemma);
-    const bool known = r.t.lemmaPos.count(lemma) || r.t.stems.count(lemma);
-    if (known || pos.empty()) pos = info.pos;
-    if (cls.empty() || known) cls = info.cls;
+    ItemPosClass(r.t, lemma, pos, cls);
     const bool cop = cls == "COP";
     std::string rest = it.Str("rest");
     for (size_t open = rest.find('('); open != std::string::npos; open = rest.find('(')) {
@@ -899,7 +906,22 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                                    nodes[q + 1].punct == Punct::comma;
                 // in a caption scene a plain command 0.7.x wrote as -어라 (来い → 와라) stays one
                 const bool command = nodes[q].mood == Mood::imp && static_cast<Level>(nodes[q].decision) == Level::haera;
-                if (!mixed && !inner && !d.keep && !(command && d.key.rfind("scene-speech", 0) == 0)) continue;
+                // honorific or humble source (いらっしゃる, 申す, おります, ご覧になって): 0.7.x's polite level
+                // (합쇼체, or 해요체 for ご覧になって → 보세요) stays; R would lower it from the sentence end alone
+                const Level was = static_cast<Level>(nodes[q].decision);
+                const bool keigo = v.Bool("keigo") && (was == Level::hapsyo || was == Level::haeyo);
+                // a question 0.7.x asked by its ending alone (아닙니까. 가십니까): no ? follows, and the 해요체 or
+                // 해체 question is the statement's form (아니에요. 가세요), so another level would stop asking
+                bool askedByEnding = false;
+                if (nodes[q].mood == Mood::q && nodes[q].ctype == CType::final_) {
+                    askedByEnding = true;
+                    for (size_t k = q + 1; k < nodes.size(); ++k) {
+                        if (nodes[k].kind != Kind::Punct) break;
+                        if (nodes[k].punct == Punct::q) askedByEnding = false;
+                    }
+                }
+                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !(command && d.key.rfind("scene-speech", 0) == 0))
+                    continue;
                 for (auto& g : reg)
                     if (g.node == nodes[q].id && nodes[q].decision) {
                         g.level = static_cast<Level>(nodes[q].decision);
@@ -916,6 +938,33 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                     reg.push_back(g);
                 }
             u.level = Level::haera;
+        }
+        // the speech level of each sentence end, before and after: whether the line changes level, and whether
+        // its sentences would end at different levels (a polite end inside the line counts too: 모릅니다, …어요)
+        bool levelChanged = false, mixedLevels = false;
+        {
+            Level end = Level::none;
+            std::vector<Level> innerPolite;
+            for (size_t q = 0; q < nodes.size(); ++q) {
+                const Node& n = nodes[q];
+                if (n.kind != Kind::V || n.ctype != CType::final_) continue;
+                Level now = Level::none;
+                for (const auto& g : reg)
+                    if (g.node == n.id) now = g.level;
+                if (now == Level::none) continue;
+                const Level was = static_cast<Level>(n.decision);
+                if (was != Level::none && was != now) levelChanged = true;
+                const bool inner = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
+                if (inner) {
+                    if (now == Level::haeyo || now == Level::hapsyo) innerPolite.push_back(now);
+                } else if (end == Level::none) {
+                    end = now;
+                } else if (end != now) {
+                    mixedLevels = true;
+                }
+            }
+            for (Level l : innerPolite)
+                if (end != Level::none && l != end) mixedLevels = true;
         }
         for (auto& n : nodes) n.decision = 0;
         const RewriteResult rw = Rewrite(*rules, *tablesPtr, nodes, reg, {u}, only, skip);
@@ -946,6 +995,8 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         o.out = lineOk ? g.out : v.Str("out075");
         o.gen = g.out;
         o.ok = lineOk;
+        o.levelChanged = levelChanged;
+        o.mixedLevels = mixedLevels;
         o.level = Name(u.level);
         o.key = d.key;
         for (const auto& f : rw.fired) o.fired.push_back(f.rule);

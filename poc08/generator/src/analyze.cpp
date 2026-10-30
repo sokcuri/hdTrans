@@ -112,8 +112,12 @@ void RankBundles(std::vector<Bundle>& bs, const AnalyzeHints& h) {
         switch (h.want) {
             case Want::final_: s += isFinal ? 20 : 0; break;
             case Want::conn: s += v.ctype == CType::conn ? 20 : (v.ctype == CType::quote ? 10 : 0); break;
-            case Want::adn: s += v.ctype == CType::adn ? 20 : (v.ctype == CType::conn ? 15 : 0); break;
-            case Want::nom: s += v.ctype == CType::nom ? 20 : (v.ctype == CType::conn ? 10 : (v.ctype == CType::adn ? 5 : 0)); break;
+            // a word inside the sentence that reads both as a final ending and as a quote (파기한다고 선언,
+            // 있다고 말하면서) is the quote: the final reading would put a sentence end (and 요) mid-sentence
+            case Want::adn: s += v.ctype == CType::adn ? 20 : (v.ctype == CType::conn ? 15 : (v.ctype == CType::quote ? 10 : 0)); break;
+            case Want::nom:
+                s += v.ctype == CType::nom ? 20 : (v.ctype == CType::conn || v.ctype == CType::quote ? 10 : (v.ctype == CType::adn ? 5 : 0));
+                break;
             default: break;
         }
         if (isFinal) {

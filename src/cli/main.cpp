@@ -763,10 +763,13 @@ int RunMain(int argc, char** argv) {
         ok = write(poc08Reselections, hd08::bridge::TakeReselections(poc08.bridge)) && ok;
         ok = write(poc08RulePre, rulePre) && ok;
         if (poc08Stats && ruleData)
-            std::fprintf(stderr, "hdtrans08 rule: lines=%llu caption_docs=%llu dialogue=%llu read=%llu replaced=%llu\n",
+            std::fprintf(stderr,
+                         "hdtrans08 rule: lines=%llu caption_docs=%llu dialogue=%llu keigo=%llu read=%llu replaced=%llu "
+                         "same_level=%llu mixed=%llu\n",
                          static_cast<unsigned long long>(ruleCounts.lines), static_cast<unsigned long long>(ruleCounts.captionDocs),
-                         static_cast<unsigned long long>(ruleCounts.dialogue), static_cast<unsigned long long>(ruleCounts.read),
-                         static_cast<unsigned long long>(ruleCounts.replaced));
+                         static_cast<unsigned long long>(ruleCounts.dialogue), static_cast<unsigned long long>(ruleCounts.keigo),
+                         static_cast<unsigned long long>(ruleCounts.read), static_cast<unsigned long long>(ruleCounts.replaced),
+                         static_cast<unsigned long long>(ruleCounts.sameLevel), static_cast<unsigned long long>(ruleCounts.mixed));
         if (poc08Stats) {
             const hd08::bridge::Counts c = hd08::bridge::CountsOf(poc08.bridge);
             const std::string parts = hd08::bridge::ActiveParts(poc08.bridge);
@@ -891,7 +894,8 @@ int RunMain(int argc, char** argv) {
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
         if (ruleData) {
             const std::vector<std::string> source(lines.begin() + static_cast<std::ptrdiff_t>(contextLines), lines.end());
-            hd08::bridge::RuleRewrite(*ruleData, source, ruleWatch.capture, translated, ruleCounts, rulePreOut);
+            hd08::bridge::RuleRewrite(*ruleData, source, ruleWatch.capture, translated, ruleCounts, rulePreOut,
+                                     poc08.bridge);
         }
 #else
         const std::vector<std::string> translated =
@@ -924,7 +928,8 @@ int RunMain(int argc, char** argv) {
 #ifdef HDTRANS_POC08_HOOKS
             if (ruleData) {
                 std::vector<std::string> one{out};
-                hd08::bridge::RuleRewrite(*ruleData, {std::string(line)}, ruleWatch.capture, one, ruleCounts, rulePreOut);
+                hd08::bridge::RuleRewrite(*ruleData, {std::string(line)}, ruleWatch.capture, one, ruleCounts, rulePreOut,
+                                         poc08.bridge);
                 out = one.front();
             }
 #endif

@@ -16,9 +16,11 @@
 #include <string>
 #include <memory>
 #include <string_view>
+#include <vector>
 
 #include "core/engine/hooks.h"
 #include "ir/stages.h"
+#include "rule.h"
 
 namespace hd08::bridge {
 
@@ -66,5 +68,7 @@ std::string TakeReselections(Bridge* bridge);
 std::string LiftMisses(const Bridge* bridge, size_t limit);
 // The 0.8-rule tables (bridge/rule.h) when the rule part is on, else null.
 std::shared_ptr<const RuleData> RuleDataOf(const Bridge* bridge);
+// The analyzer's tokens of one source text (UniDic lemma, reading, conjugation form; empty without an analyzer).
+std::vector<SourceToken> AnalyzeSource(const Bridge* bridge, std::string_view text);
 
 }  // namespace hd08::bridge

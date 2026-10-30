@@ -345,6 +345,9 @@ const SpokenRow* SpokenFor(const Tables& t, const std::string& host, const Node*
     std::string key = "-";
     if (next && next->kind == Kind::P) key = next->kase;
     else if (next && next->kind == Kind::V && nextCls == "COP") key = "COP";
+    // text written onto the noun that G does not realize itself (the retrofit's 0.7.x text: 것 + 이다, 것 + 이):
+    // the bare form would leave 거이다, 거이
+    if (key == "-" && next && next->glue && (next->kind == Kind::Raw || next->kind == Kind::N)) return nullptr;
     for (const auto& r : t.spoken) {
         if (r.host != host) continue;
         if (r.next == key) return &r;

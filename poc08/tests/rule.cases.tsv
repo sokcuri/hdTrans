@@ -1,0 +1,21 @@
+#! rule-cases
+# Fix and keep cases of --poc08 rule (tests/rule.sh). kind out: the output of the one-line document; kind retro:
+# the retrofit's own text for the line (before the speech-level gate) contains expected.
+kind	input	expected	note
+retro	「醜聞なんてものじゃないと思うんだが」	건 게 아니라고	(이)가 in a 0.7.x target is a particle, not a gloss (was 거이 아니라고)
+retro	「添い遂げるのがせめてもの誠意というものじゃないのか？」	성의라는 게 아닌	(이)가 before 아니다 (was 거이 아닌)
+retro	「黙れっ。お前がさっさと聖女をものにしていれば良かったのだ。ここで聖女に去られたら、我が国は世界に覇を唱えるどころではない！」	성녀를 걸로 하고	(으)로 in a 0.7.x target is a particle (was 거으로)
+retro	「お前が聖女をものにしていれば良かったのだ」	좋았던 것이다	text glued onto 것 that G does not realize keeps 것 (was 거이다)
+retro	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	파기한다고 선언	a quote before a noun is not a sentence end (was 파기한다고요 선언)
+retro	「クロード様に感謝していると言いながら、どうしてそのようなことを……！！」	있다고 말하면서	a quote before a verb is not a sentence end (was 있다고요 말하면서)
+out	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	the adjective family 0.7.x used decides the class (was 우수한다고); 해라 → 해
+out	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keigo (いらっしゃる) keeps 합쇼체
+out	「……あら、ご覧になって」	「……어머나, 보세요」	keigo (ご覧) keeps 0.7.x's 해요체
+out	「娘を買っていただきました。そのことによって金銭を得たのでございます」	「딸을 사 주셨습니다. 그것에 의해 금전을 얻은 것입니다」	keigo; same level: 0.7.x text
+out	「醜聞なんてものじゃないと思うんだが」	「추문 같은 건 것이 아니라고 생각하는데」	same level: 0.7.x text, no other rewrite
+out	「わたくしはそんな話知りません、聞いてません！　絶対認めませんから！」	「저는 그런 이야기 모릅니다, 듣지 않았습니다! 절대 인정하지 않으니까요!」	sentences would end at different levels: 0.7.x text
+out	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	「약혼을 파기한다고 선언하는 등, 저까지 깎아내리려 하고 있다고밖에 생각되지 않아요」	no keigo: です/ます → 해요체
+out	「年の差なんて！　たかだか十六歳差ではありませんか。」	「나이 차이 따위! 고작 16세차가 아닙니까.」	a question asked by its ending alone keeps its level (아니에요. would state the negation)
+out	「どこへ行かれますか」	「어디에 가십니까」	a question without ? keeps its level
+out	「どこへ行かれますか？」	「어디에 가세요?」	with ? the level changes; 가시다 is 가다 + honorific 시 (was 가셔요)
+out	「しかし、陛下もご多忙の身であらせられます」	「하지만, 폐하도 다망의 몸이십니다」	keigo (あらせられる) keeps 합쇼체

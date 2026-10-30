@@ -5,6 +5,7 @@
 #include <set>
 
 #include "core/output/inflect.h"
+#include "bridge.h"
 #include "core/word/item.h"
 #include "hd8gen/retro.h"
 #include "ir/file.h"
@@ -71,8 +72,45 @@ struct RuleData {
     std::u32string copulaAlt, copulaLemma, lemmaEnd;
     std::vector<std::pair<char32_t, char32_t>> quotes, tags;
     std::set<char32_t> captionMarks;  // half-width marks of broadcast captions (｡ ｢)
+    struct Keigo {
+        std::string lemma, reading, next, notForm;  // reading: prefix; next: the lemmas that must follow; "" any
+    };
+    std::vector<Keigo> keigo;
+    std::vector<std::pair<std::string, std::string>> keigoPrefix;  // 御 + verb (+ に) + 成る / 為る / 致す
     std::shared_ptr<const hd8gen::RetroSystem> retro;
 };
+
+bool KeigoSource(const RuleData& d, const std::vector<SourceToken>& toks) {
+    for (size_t i = 0; i < toks.size(); i++) {
+        const SourceToken& t = toks[i];
+        for (const auto& k : d.keigo) {
+            if (t.lemma != k.lemma) continue;
+            if (!k.reading.empty() && t.reading.rfind(k.reading, 0) != 0) continue;
+            if (!k.next.empty()) {  // one lemma, or several in a row separated by spaces (せる られる)
+                size_t j = i + 1, a = 0;
+                bool ok = true;
+                while (ok && a <= k.next.size()) {
+                    const size_t sp = k.next.find(' ', a);
+                    const std::string want = k.next.substr(a, sp == std::string::npos ? std::string::npos : sp - a);
+                    ok = j < toks.size() && toks[j].lemma == want;
+                    j++;
+                    if (sp == std::string::npos) break;
+                    a = sp + 1;
+                }
+                if (!ok) continue;
+            }
+            if (!k.notForm.empty() && t.cform.find(k.notForm) != std::string::npos) continue;
+            return true;
+        }
+        // prefix + verb stem, then に (お待ちになる) or not (お伺いする), then the row's verb
+        if (!t.prefix || i + 2 >= toks.size() || !toks[i + 1].verb) continue;
+        size_t v = i + 2;
+        if (toks[v].lemma == "に" && v + 1 < toks.size()) v++;
+        for (const auto& [pre, verb] : d.keigoPrefix)
+            if (t.lemma == pre && toks[v].lemma == verb) return true;
+    }
+    return false;
+}
 
 namespace {
 
@@ -109,7 +147,10 @@ void PlainWords(const RuleData& d, std::u32string t, std::vector<PreItem>& out) 
         }
         const bool before = i > 0 && Hangul(t[i - 1]);
         const bool after = close + 1 < t.size() && Hangul(t[close + 1]);
-        if (before || after) t.erase(i, close - i + 1);
+        // (이)가, (으)로 opening a word is a particle notation, not a gloss: dropping it left 가/로 as nouns
+        // (것이 아니다 → 거이 아니다, 것으로 → 거으로)
+        const bool particle = after && !before && d.partAlts.count(t.substr(i + 1, close - i - 1));
+        if ((before || after) && !particle) t.erase(i, close - i + 1);
         else i++;
     }
     size_t start = 0;
@@ -521,6 +562,10 @@ std::shared_ptr<const RuleData> LoadRule(const std::string& dataRoot, std::strin
         else if (kind == "quote" && c.size() >= 3) d->quotes.push_back({c[1][0], c[2][0]});
         else if (kind == "tag" && c.size() >= 3) d->tags.push_back({c[1][0], c[2][0]});
         else if (kind == "caption-mark") d->captionMarks.insert(c[1][0]);
+        else if (kind == "keigo") {
+            auto col = [&](size_t k) { return k < c.size() && c[k] != U"-" ? U8(c[k]) : std::string(); };
+            d->keigo.push_back({U8(c[1]), col(2), col(3), col(4)});
+        } else if (kind == "keigo-prefix" && c.size() >= 3) d->keigoPrefix.push_back({U8(c[1]), U8(c[2])});
         else {
             err = path + ": unknown row kind " + kind;
             return nullptr;
@@ -611,7 +656,7 @@ bool CaptionDocument(const RuleData& d, const std::vector<std::string>& ja) {
 }
 
 std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const std::string& out075, const RuleCapture& cap,
-                    bool dialogue) {
+                    bool dialogue, bool keigo) {
     std::vector<Row> rows;
     if (i < cap.items.size()) {
         for (const auto& x : cap.items[i]) {
@@ -644,12 +689,13 @@ std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const st
     Field(o, "scene", "doc");
     Field(o, "work", "doc");
     o += std::string(",\"dialogue\":") + (dialogue ? "true" : "false");
+    if (keigo) o += ",\"keigo\":true";
     o += '}';
     return o;
 }
 
 void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const RuleCapture& cap, std::vector<std::string>& out,
-                 RuleCounts& counts, std::string* preOut) {
+                 RuleCounts& counts, std::string* preOut, const Bridge* bridge) {
     counts.lines += ja.size();
     if (CaptionDocument(d, ja)) {
         counts.captionDocs++;
@@ -660,19 +706,34 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
     for (size_t i = 0; i < ja.size(); i++) {
         dialogue[i] = DialogueLine(d, ja[i]);
         counts.dialogue += dialogue[i];
+        const bool keigo = dialogue[i] && bridge != nullptr && KeigoSource(d, AnalyzeSource(bridge, ja[i]));
+        counts.keigo += keigo;
         std::string o = i < out.size() ? out[i] : std::string();
         if (!o.empty() && o.back() == '\r') o.pop_back();
-        pre.push_back(PreLine(d, i, ja[i], o, cap, dialogue[i]));
+        pre.push_back(PreLine(d, i, ja[i], o, cap, dialogue[i], keigo));
     }
     if (preOut)
         for (const std::string& l : pre) *preOut += l + "\n";
     std::vector<hd8gen::RetroLine> lines;
     std::string err;
-    if (!hd8gen::RunRetro(*d.retro, pre, hd8gen::RetroOptions{}, lines, nullptr, err)) return;
+    // the retrofit changes speech levels only: its rewrite rules (comma removal, aspect folding …) are off
+    hd8gen::RetroOptions opt;
+    opt.only = {"-none-"};
+    if (!hd8gen::RunRetro(*d.retro, pre, opt, lines, nullptr, err)) return;
     for (size_t i = 0; i < lines.size() && i < out.size(); i++) {
         if (!lines[i].ok) continue;
         counts.read++;
         if (!dialogue[i]) continue;
+        // only a change of speech level is worth the rewrite: a line at the same level keeps 0.7.x's text, and
+        // so does a line whose sentences would end at different levels
+        if (lines[i].mixedLevels) {
+            counts.mixed++;
+            continue;
+        }
+        if (!lines[i].levelChanged) {
+            counts.sameLevel += lines[i].out != out[i];
+            continue;
+        }
         const bool cr = !out[i].empty() && out[i].back() == '\r';
         if (lines[i].out != out[i]) counts.replaced++;
         out[i] = lines[i].out + (cr ? "\r" : "");

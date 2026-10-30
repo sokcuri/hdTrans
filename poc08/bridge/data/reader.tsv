@@ -186,3 +186,31 @@ caption-mark	｡
 caption-mark	｢
 caption-mark	｣
 caption-mark	､
+# keigo: an honorific or humble form in the source, read from the analyzer's tokens (UniDic lemmas). A line
+# of speech with one keeps 0.7.x's polite level (합쇼체 or 해요체) under the retrofit. Columns: lemma, reading
+# prefix, the lemmas that must follow in order (あらせられる: 有る せる られる), a conjugation form that does
+# not count ("-" none). 参る and ござる count before ます only (参った! is a casual groan, でござる period
+# speech); おる counts as おります (ておる is old speech); ください alone is the plain polite request.
+keigo	いらっしゃる	-	-	-
+keigo	仰る	-	-	-
+keigo	為さる	-	-	-
+keigo	召し上がる	-	-	-
+keigo	御覧	-	-	-
+keigo	下さる	-	-	命令形
+keigo	申す	-	-	-
+keigo	申し上げる	-	-	-
+keigo	参る	-	ます	-
+keigo	致す	-	-	-
+keigo	伺う	-	-	-
+keigo	頂く	-	-	-
+keigo	頂戴	-	-	-
+keigo	存ずる	-	-	-
+keigo	差し上げる	-	-	-
+keigo	拝見	-	-	-
+keigo	御座る	-	ます	-
+keigo	居る	オ	ます	-
+keigo	有る	-	せる られる	-
+# keigo-prefix: お/ご + verb stem (+ に) + verb: お待ちになる (尊敬), お伺いする, お持ちいたす (謙譲)
+keigo-prefix	御	成る
+keigo-prefix	御	為る
+keigo-prefix	御	致す

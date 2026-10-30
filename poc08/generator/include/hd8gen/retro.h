@@ -1,6 +1,6 @@
 #pragma once
 // The retrofit: 0.7.x's output read as pre-IR lines (one JSON object per line: line, ja, out075, speaker,
-// scene, work, dialogue, imp, lead, items), rebuilt as kir nodes by analysis by synthesis, then R (speech
+// scene, work, dialogue, imp, lead, items, keigo), rebuilt as kir nodes by analysis by synthesis, then R (speech
 // level), W (rewrite rules) and G. Lines whose words could not all be read keep 0.7.x's output.
 #include <memory>
 #include <string>
@@ -22,6 +22,8 @@ struct RetroOptions {
 struct RetroLine {
     std::string out, gen, level, key, kir;
     bool ok = false;
+    bool levelChanged = false;  // a sentence-final predicate ends at another speech level than 0.7.x's
+    bool mixedLevels = false;   // the sentences of the line would end at different speech levels
     std::vector<std::string> fired;
 };
 

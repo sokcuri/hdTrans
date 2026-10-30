@@ -275,6 +275,13 @@ PredicateInfo LookupPredicate(const Tables& t, const std::string& lemmaIn) {
     if (info.cls == "COP" && info.pos != "C") info.pos = "C";
     if (info.cls == "EXIST") info.pos = "X";
     if (lemma == t.G("lemma.negcop")) info.pos = "N";
+    // an honorific form taken for a lemma (가시다 = 가다 + -시-, 이시다 = 이다 + -시-: 0.7.x writes honorific
+    // verbs with a 시 family, and lemmas.tsv lists them): its 시 is the honorific prefinal, so 가시+어요 is
+    // 가세요, not 가셔요. Lemmas whose 시 is part of the stem (마시다, 꼬시다) are stems.tsv rows.
+    if (whole == t.stems.end() && u.size() > 2 && u[u.size() - 2] == U'시' && u.back() == U'다') {
+        const std::string base = ToU8(u.substr(0, u.size() - 2) + U"다");
+        if (t.lemmaPos.count(base) || t.stems.count(base) || base == t.G("lemma.cop")) info.honSi = true;
+    }
     return info;
 }
 
