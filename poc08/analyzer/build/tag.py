@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Tag training corpora with MeCab + UniDic (the teacher) into the silver format.
 
-usage: tag.py [--norm HD8ANA] OUT EXCLUDE_LIST... -- CORPUS...
+usage: tag.py [--norm HD8ANA] [--lead] OUT EXCLUDE_LIST... -- CORPUS...
+  --lead: tag 。 + line and drop that first token, so the teacher reads every line as a sentence that
+          follows another one (MeCab with UniDic misreads some line-initial words: ずっと as ず + っと).
   --norm: pass every line through `HD8ANA norm` (layout normalization) before tagging, so the teacher
           sees the same text as the analyzer.
   CORPUS: a text file (one line per sentence) or a .jsonl.gz file whose rows have `source_ja`.
@@ -26,14 +28,26 @@ def _f(x):
     return x if x not in (None, '') else '*'
 
 
-def tag_line(line):
+LEAD = '。'
+
+
+def tag_line(line, lead=False):
     toks = []
-    for w in TAGGER(line):
+    words = list(TAGGER(LEAD + line)) if lead else list(TAGGER(line))
+    if lead:
+        if not words or words[0].surface != LEAD or words[0].white_space:
+            return None
+        words = words[1:]
+    for w in words:
         f = w.feature
         toks.append('\x1e'.join([w.white_space, w.surface, _f(f.pos1), _f(f.pos2), _f(f.pos3), _f(f.pos4),
                                  _f(f.cType), _f(f.cForm), _f(f.lForm), _f(f.lemma), _f(f.kana),
                                  '1' if w.is_unk else '']))
     return '\x1f'.join(toks)
+
+
+def _tag_lead(line):
+    return tag_line(line, True)
 
 
 def read_corpus(path):
@@ -70,9 +84,16 @@ def read_exclude(path):
 def main():
     argv = sys.argv[1:]
     norm = None
-    if argv[0] == '--norm':
-        norm = argv[1]
-        argv = argv[2:]
+    lead = False
+    while argv and argv[0].startswith('--'):
+        if argv[0] == '--norm':
+            norm = argv[1]
+            argv = argv[2:]
+        elif argv[0] == '--lead':
+            lead = True
+            argv = argv[1:]
+        else:
+            break
     out = argv[0]
     sep = argv.index('--')
     excl = set()
@@ -99,8 +120,14 @@ def main():
                 dedup.append(l)
         lines = dedup
     with mp.Pool(min(24, os.cpu_count() or 1), initializer=_init) as pool, open(out, 'w', encoding='utf-8') as o:
-        for t in pool.imap(tag_line, lines, chunksize=2000):
+        dropped = 0
+        for t in pool.imap(_tag_lead if lead else tag_line, lines, chunksize=2000):
+            if t is None:
+                dropped += 1
+                continue
             o.write(t + '\n')
+        if dropped:
+            print(dropped, 'lines dropped: the lead merged with them', file=sys.stderr)
     print(len(lines), 'lines;', len(excl), 'excluded keys', file=sys.stderr)
 
 
