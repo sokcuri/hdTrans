@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+dict:lexical-novel-idioms	いきなり話を振られたビリー様は、ちょっとあわあわしてから、	갑자기 말을 건네받은 비리님은, 조금 허둥지둥 하고 나서,	fix	lookup
+dict:lexical-novel-idioms	突然話を振られたヤルドは慌てて振り向き、口を開く。	갑자기 말을 건네받은 야르드는 황급히 뒤돌아 봐, 입을 연다.	fix	lookup
+dict:lexical-novel-idioms	思わぬタイミングで話を振られたらしく、レナは赤面する。	생각하지 않는 타이밍에 말을 건네받은 것 같고, 레나는 빨간 얼굴한다.	fix	lookup
+dict:lexical-novel-idioms	「……今までお心を砕いて頂いた事、全てを無駄にして申し訳ございませんでした」	「……지금까지 마음을 써 주신 일, 모든 걸 쓸데없게 해서 죄송했습니다」	fix	lookup
+dict:lexical-novel-idioms	上様方にはどうか政にお心を砕いて頂きたく。	귀하편에게는 제발 정에 마음을 써 주셨으면 하고.	fix	lookup
+dict:lexical-novel-idioms	「ゲームの椿とは似ても似つかないけど」と呟いていた。	「게임의 츠바키와는 딴판인데」라고 중얼거리고 있었다.	fix	lookup
+dict:lexical-novel-idioms	本物とは似ても似つかない偽物だ。	진짜와는 딴판인 가짜다.	fix	lookup
+dict:lexical-novel-idioms	二人は似ても似つかなかった。	두 사람은 딴판이었다.	fix	lookup
+dict:lexical-novel-idioms	ただ少し死の国に旅立つ方のお手伝いができるだけなのです	다만 조금 죽음의 나라에 여행을 떠나는 편의 조력이 가능한 한인 것입니다	fix	lookup
+dict:lexical-novel-idioms	この花があれば、死の国への道も暗くはなく、迷うこともないでしょう	이 꽃이 있으면, 죽음의 나라로의 길도 어둡지는 않고, 헤맬 것도 없을 거예요	fix	lookup
+dict:lexical-novel-idioms	父は頷き、セストに話を振った。	아버지는 끄덕여, 세스트에 말을 걸었다.	keep	lookup
+dict:lexical-novel-idioms	「もう何時だ？」と、白木が話を振る。	「이제 몇시야?」라고, 동나무가 말을 건다.	keep	lookup
+dict:lexical-novel-idioms	心を砕いているのだが…	마음을 쓰고 있지만…	keep	lookup
+dict:lexical-novel-idioms	似ても似つかぬ姿だ。	전혀 닮지 않은 모습이다.	keep	lookup
+dict:lexical-novel-idioms	死の恐怖に震える。	죽음의 공포에 떨린다.	keep	lookup
+dict:lexical-novel-idioms	この国の王だ。	이 나라의 왕이다.	keep	lookup

@@ -26,7 +26,7 @@ dict:benefactive:4	聞いていただき、ありがとうございます！	들
 dict:benefactive:4	わざわざ、このような所まで足を運んでいただき申し訳ありません。	일부러, 이러한 곳까지 발길을 옮겨 주셔서 죄송합니다.	fix	local
 dict:benefactive:4	貴社に訪問させていただきます。	귀사에 방문하겠습니다.	keep	local
 dict:benefactive:3	ハンカチを拾って頂きありがとうございました。	손수건을 주워 주셔서 감사합니다.	fix	local
-dict:benefactive:3	お心を砕いて頂いた事	마음을 부수어 주신 일	fix	local
+dict:benefactive:3	お心を砕いて頂いた事	마음을 써 주신 일	fix	local
 dict:benefactive:3	イニシアティブを取らせて頂きます。	이니셔티브를 받게 해 받습니다.	keep	local
 dict:benefactive:7	是非とも教えて頂きたいです	부디 가르쳐 주셨으면 합니다	fix	local
 dict:morae-request:1	撮影したデータを消してもらおうか。	촬영한 데이터를 지워 달라고 할까.	fix	local
