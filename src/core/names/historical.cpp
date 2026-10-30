@@ -111,7 +111,7 @@ bool CommonWord(const dict::Snapshot& snap, const std::string& s) {
         if (c.codes == nullptr || c.source != s) continue;
         const std::string_view sem = c.codes->sem.Text(), part = c.codes->partText;
         if (Contains(sem, "QPN") || Contains(sem, "QCT") || Contains(c.codes->gram.Text(), "On") || part.starts_with("M4") ||
-            part.starts_with("H7") || part.substr(1).starts_with("13")) {
+            part.starts_with("H7") || (part.size() > 1 && part.substr(1).starts_with("13"))) {
             continue;
         }
         return true;
