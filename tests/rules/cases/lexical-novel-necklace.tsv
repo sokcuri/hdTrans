@@ -1,0 +1,13 @@
+# 규칙: LEX-13
+rule	input	expected	kind	layer
+G90	　その時、ネックレスを外したサンドラがエリノアに近づくと、その手に押しつけた。	 그 때, 목걸이를 벗은 산드라가 엘리노어에게 다가가니, 그 손에 강요했다.	fix	global-stem
+G90	ピンポン球のネックレスを掛けて侮辱した。	탁구공의 목걸이를 걸쳐 모욕했다.	fix	global-stem
+G90	ネックレスを外した。	목걸이를 벗었다.	fix	global-stem
+G90	ネックレースを外す	목걸이를 벗는다	fix	global-stem
+G90	　サンドラは震える指で胸元に光るネックレスに触れた。	 산드라는 떨리는 손가락으로 가슴 팍에 빛나는 목걸이에 접했다.	keep	global-stem
+G90	「……わたしが買ってやった、あのサファイアのネックレスは……」	「……내가 사 준, 그 사파이어의 목걸이는……」	keep	global-stem
+G90	《１･母から もらった真珠のネックレス》	《1·어머니에게서 받은 진주의 목걸이》	keep	global-stem
+G90	(紗英)エエー見てみたいな そのネックレス	(사에) 에에 보고 싶다 그 목걸이	keep	global-stem
+G90	ネックレスを着けた。	목걸이를 착용했다.	keep	global-stem
+G90	指輪を外した。	반지를 뺐다.	keep	global-stem
+G90	ピアスを外した。	귀걸이를 뺐다.	keep	global-stem

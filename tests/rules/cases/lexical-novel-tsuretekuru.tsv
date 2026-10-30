@@ -1,0 +1,28 @@
+# 규칙: LEX-27, LEX-35
+rule	input	expected	kind	layer
+dict:novel-verbs:14	捜し出して連れてくるんだ	찾아 내 데려오는 거야	fix	defaults
+dict:novel-verbs:12	いつか連れて来い	언젠가 데려와라	fix	defaults
+dict:novel-verbs:12	殺さずに連れて来い	죽이지 않고 데려와라	fix	defaults
+dict:novel-verbs:14	新しい友達を連れてきたみたい	새로운 친구를 데려온 것 같다	fix	defaults
+dict:novel-verbs:14	お前なんでこんな奴連れてきた	너 왜 이런 놈 데려왔다	fix	defaults
+dict:novel-verbs:14	ここに連れてくるつもりでした	여기에 데려올 생각이었습니다	fix	defaults
+dict:novel-verbs:14	絶対に妹だけは連れてこいって言ったのに	절대로 여동생만은 데려오라고 했는데	fix	defaults
+dict:novel-verbs:14	娘を連れてくるので	딸을 데려오므로	fix	defaults
+dict:novel-verbs:14	助っ人を連れてこなかったら詰んでいた。	돕는 사람을 데려오지 않았으면 망하고 있었다.	fix	defaults
+dict:novel-verbs:12	家に連れて来るように言っておいて	집에 데려오도록 말해 두어	fix	defaults
+dict:novel-verbs:12	娘を連れて来たそうだ。	딸을 데려왔다고 한다.	fix	defaults
+dict:novel-verbs:14	連れてくるってさ	데려온대	fix	defaults
+dict:novel-verbs:12	連れて行く	데려간다	keep	defaults
+dict:novel-verbs:12	犬を連れて散歩する。	개를 데려 산책한다.	keep	defaults
+dict:novel-verbs:12	時がたつにつれて	때가 지날수록	keep	defaults
+dict:novel-verbs:12	年をとるにつれて変わる。	나이를 먹을수록 바뀐다.	keep	defaults
+dict:novel-verbs:12	連れていかれた。	끌려갔다.	keep	defaults
+dict:novel-verbs:16	小さいころ親父に連れてこられて以来で	어린 무렵 아버지에게 끌려온 이래로	fix	defaults
+dict:novel-verbs:16	調査兵団に連れてこられたって聞いたわ	조사병단에게 끌려왔다고 들었어	fix	defaults
+dict:novel-verbs:16	建物の前に連れてこられた時。	건물 앞에 끌려왔을 때.	fix	defaults
+dict:novel-verbs:16	馬車に乗せられて戦場に連れてこられた。	마차에 태워져 전장에 끌려왔다.	fix	defaults
+dict:novel-verbs:17	下界から連れて来られた異端の生物か	하계에서 끌려온 이단의 생물인가	fix	defaults
+dict:novel-verbs:16	なんでこんなとこに連れてこられたのか…	왜 이런 곳에 끌려온 건가…	fix	defaults
+dict:novel-verbs:19	足が悪いから連れてこれなくて	다리가 안 좋으니까 데려올 수 없어서	fix	defaults
+dict:novel-verbs:21	一人じゃここまで連れてこれません	한 사람은 여기까지 데려올 수 없습니다	fix	defaults
+dict:novel-verbs:24	連れて来られませんでした。	데려올 수 없었습니다.	fix	defaults

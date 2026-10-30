@@ -1,0 +1,22 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:28136	ご実家は？	본가는?	fix	defaults
+dict:jisjk:28136	実家に住んでんだよ	본가에 사는 거야	fix	defaults
+dict:jisjk:28136	｢実家に戻りました。	｢본가로 돌아갔습니다.	fix	defaults
+dict:jisjk:28136	私は実家が葬儀社だったから	나는 본가가 장의사였으니까	fix	defaults
+dict:jisjk:28136	あのお店　私の実家なんです。	그 가게 제 본가입니다.	fix	defaults
+dict:jisjk:28136	何だか　実家の母を思い出します。	왠지 본가의 어머니를 생각해 냅니다.	fix	defaults
+dict:jisjk:28136	「実家が移動式のサーカス団だから」	「본가가 이동식의 서커스단이니까」	fix	defaults
+dict:jisjk:28136	「うわ、もしかして、実家お金持ち？」	「우와, 혹시, 본가 부자?」	fix	defaults
+dict:jisjk:28136	　それともフィーナの実家に恨みがあったのか。	 그렇지 않으면 피나의 본가에 원한이 있던 건가.	fix	defaults
+dict:jisjk:28136	私の名前とお願い事と実家の住所が書いてあって｡	내 이름과 부탁일과 본가의 주소가 써 있어.	fix	defaults
+dict:jisjk:28136	実家からの荷物 そのまんまだけど	본가에서의 짐 그대로이지만	fix	defaults
+dict:jisjk:28136	実家は 吉祥寺にある老舗の和菓子屋です｡	본가는 기치조지에 있는 노포의 화과자 가게입니다.	fix	defaults
+dict:jisjk:28136	えっ？いや 実家に帰るだけ 夏休みだし	어? 아니 본가에 돌아갈 뿐 여름 방학이고	fix	defaults
+dict:jisjk:28136	普通 戻ってきたら 実家に泊まるでしょ｡	보통 돌아오면 본가에 묵겠지.	fix	defaults
+dict:jisjk:28136	(内村)私の母の実家が隣の造り酒屋｡	(우치무라) 내 어머니의 본가가 옆의 양조장.	fix	defaults
+dict:jisjk:28136	本家と分家	본가와 분가	keep	defaults
+dict:jisjk:28136	本家に挨拶に行く。	본가에 인사에 간다.	keep	defaults
+dict:jisjk:28136	生家を訪ねた。	생가를 방문했다.	keep	defaults
+dict:jisjk:28136	母の生家は古い。	어머니의 생가는 낡다.	keep	defaults
+dict:jisjk:28136	家に帰る。	집에 돌아간다.	keep	defaults

@@ -1,0 +1,14 @@
+# 규칙: LEX-3, LEX-35
+rule	input	expected	kind	layer
+dict:novel-verbs:30	赤いマントを羽織ったソードマン風の男	붉은 망토를 걸친 소드맨풍의 남자	fix	defaults
+dict:novel-verbs:30	ざっくりと羽織った毛皮のロングコート	썩둑 걸친 모피의 롱코트	fix	defaults
+dict:novel-verbs:30	憲兵の外套を羽織る	헌병의 외투를 걸친다	fix	defaults
+dict:novel-verbs:30	羽織ってみたりしますか？	걸쳐 보거나 할까요?	fix	defaults
+dict:novel-verbs:30	何か羽織ってれば？	뭔가 걸치고 있으면?	fix	defaults
+dict:novel-verbs:30	服ですね羽織るものですね。	옷이군요 걸치는 것이군요.	fix	defaults
+dict:jisjk:142133	一人だけ引っ張りだすことに成功していたから	한 사람만 끄집어내는 것에 성공하고 있었으니까	fix	defaults
+dict:jisjk:142133	箱から引っ張りだした。	상자에서 끄집어냈다.	fix	defaults
+dict:novel-verbs:30	羽織袴の男	하오리하카마의 남자	keep	defaults
+dict:novel-verbs:30	羽織を着る。	하오리를 입는다.	keep	defaults
+dict:jisjk:142133	引っ張りだこになった。	인기물이 되었다.	keep	defaults
+dict:jisjk:142133	引っ張り出す。	끄집어낸다.	keep	defaults

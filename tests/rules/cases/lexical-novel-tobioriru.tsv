@@ -1,0 +1,12 @@
+# 규칙: LEX-27
+rule	input	expected	kind	layer
+dict:jisjk:93219	窓から飛び降りた。	창에서 뛰어내렸다.	fix	defaults
+dict:jisjk:93219	城壁の上から飛び降り、捕獲する。	성벽 위에서 뛰어내려 포획한다.	fix	defaults
+dict:jisjk:93219	バルコニーから飛び降りた後の	발코니에서 뛰어내린 후의	fix	defaults
+dict:jisjk:93219	飛び降りるつもりか？	뛰어내릴 생각인가?	fix	defaults
+dict:jisjk:93219	自転車から飛び降りて	자전거에서 뛰어내려	fix	defaults
+dict:jisjk:93219	屋根から飛び降りるのも	지붕에서 뛰어내리는 것도	fix	defaults
+dict:jisjk:93219	橋から跳び降りた。	다리에서 뛰어내렸다.	fix	defaults
+dict:jisjk:153766	自殺だって。飛び降り自殺。	자살이래. 투신자살.	fix	defaults
+dict:jisjk:145516	飛降りる	뛰어내린다	keep	defaults
+dict:jisjk:145513	とびおりた。	뛰어내렸다.	keep	defaults

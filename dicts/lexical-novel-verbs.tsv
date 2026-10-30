@@ -1,0 +1,34 @@
+#! layer=words
+# 소설에서 틀리게 읽던 동사: 앞말 구 행에 먹히던 복합동사, 틀린 뜻풀이, 붙여 쓰는 합성 동사
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+拳を握りしめ	주먹을 움켜&CK@	M427		Pn	GN							novel-verbs:1
+拳を握り締め	주먹을 움켜&CK@	M427		Pn	GN							novel-verbs:2
+手を握りしめ	손을 움켜&CK@	M427		Pn	GN							novel-verbs:3
+手を握り締め	손을 움켜&CK@	M427		Pn	GN							novel-verbs:4
+摑みしめ	움켜&CK@	M427			GN							novel-verbs:5
+掴みしめ	움켜&CK@	M427			GN							novel-verbs:6
+つかみしめ	움켜&CK@	M427			GN							novel-verbs:7
+引きつらせ	굳&AW@	M427			GN							novel-verbs:8
+引き攣らせ	굳&AW@	M427			GN							novel-verbs:9
+噴き上が	솟구&AO@	M428			GN							novel-verbs:10
+噴	분출&AV@	M411			GN	9200	||1 &&3 S-1== "が" P-2== "1**" A-2!= "VHn"	噴く는 사람이 아닌 명사와 が가 바로 앞에 오면 ‘분출하다’로 고른다.				novel-verbs:11
+連れて	데려&AH@	M41=	VHnQAA		GN							novel-verbs:12
+つれて	데려&AH@	M41=	VHnQAA		GN							novel-verbs:13
+連れて	데려&AH@	M41;	VHnQAA		GN							novel-verbs:14
+つれて	데려&AH@	M41;	VHnQAA		GN							novel-verbs:15
+連れてこられ	끌려&AH@	M427			GN							novel-verbs:16
+連れて来られ	끌려&AH@	M427			GN							novel-verbs:17
+つれてこられ	끌려&AH@	M427			GN							novel-verbs:18
+連れてこられな	데려올 수 $FA@	H7U0			GN							novel-verbs:19
+連れて来られな	데려올 수 $FA@	H7U0			GN							novel-verbs:20
+連れてこられません	데려올 수 없습니다	E300			GN							novel-verbs:21
+連れて来られません	데려올 수 없습니다	E300			GN							novel-verbs:22
+連れてこられませんでした	데려올 수 없었습니다	E300			GN							novel-verbs:23
+連れて来られませんでした	데려올 수 없었습니다	E300			GN							novel-verbs:24
+切り付け	&CT@	M437			GN							novel-verbs:25
+斬りつけ	&CT@	M437			GN							novel-verbs:26
+斬り付け	&CT@	M437			GN							novel-verbs:27
+使い潰	혹사&AV@	M443			GN							novel-verbs:28
+使いつぶ	혹사&AV@	M443			GN							novel-verbs:29
+羽織	걸&AO@	M428			GN							novel-verbs:30
+晒	노출&AV@	M443			GN	9202	||1 S-1== "に"	晒す는 바로 앞이 に이면 ‘노출하다’로 고른다.				novel-verbs:31

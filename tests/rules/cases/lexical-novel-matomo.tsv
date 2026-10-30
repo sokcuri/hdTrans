@@ -1,0 +1,17 @@
+# 규칙: LEX-3, LEX-6
+rule	input	expected	kind	layer
+dict:novel-modifiers:9	真面な防具すら着用していない	제대로 된 방어구조차 착용하고 있지 않다	fix	local
+dict:novel-modifiers:9	真面な訓練も受けていない	제대로 된 훈련도 받고 있지 않다	fix	local
+dict:novel-modifiers:9	真面なハンターを名乗れる実力	제대로 된 헌터를 자칭할 수 있는 실력	fix	local
+dict:novel-modifiers:8	まともな食事が何日も取れないかもしれませんよ？	제대로 된 식사가 며칠도 잡히지 않을지도 몰라요?	fix	local
+dict:novel-modifiers:8	まともな親のすることじゃないわね。	제대로 된 부모가 하는 것이 아니네.	fix	local
+dict:novel-modifiers:8	まともな男なら奥方に行き先くらい告げるだろう。	제대로 된 남자라면 부인에게 행선지 정도 고할 것이다.	fix	local
+dict:novel-modifiers:8	まともな常識があれば考えもしない	제대로 된 상식이 있으면 생각하지도 않는다	fix	local
+dict:novel-modifiers:8	少しはまともな運転はできないのか！	조금은 제대로 된 운전은 할 수 없는 건가!	fix	local
+dict:novel-modifiers:8	乳母と姉のおかげでまともな常識を持っている	유모와 언니 덕분에 제대로 된 상식을 가지고 있다	fix	local
+dict:novel-modifiers:8	ようやくまともな表情になりましたね。	드디어 제대로 된 표정이 됐어요.	fix	local
+dict:novel-modifiers:12	真面に戦えない	제대로 싸울 수 없다	fix	defaults
+dict:novel-modifiers:8	まともに話せない。	제대로 이야기할 수 없다.	keep	local
+dict:novel-modifiers:8	あいつはまともじゃない。	!rule:dict:novel-modifiers:8	keep	local
+dict:novel-modifiers:8	まともだった。	!rule:dict:novel-modifiers:8	keep	local
+dict:novel-modifiers:8	真面目な人だ。	성실한 사람이다.	keep	local

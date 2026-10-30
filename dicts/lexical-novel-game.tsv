@@ -1,0 +1,7 @@
+#! layer=words
+# 게임과 웹 소설의 게임 용어
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+トップランカー	톱 랭커	N110	VHn		GN							novel-game:1
+狩場	사냥터	N110	VPl		GN				replace			novel-game:2
+放置ゲー	방치형 게임	N110			GN							novel-game:3
+壁役	탱커	N110	VHn		GN							novel-game:4

@@ -1,0 +1,20 @@
+# 규칙: LEX-22
+rule	input	expected	kind	layer
+dict:novel-game:1	ソロアサシンはトップランカーに呼び出される	소로아사신은 톱 랭커에게 불려 간다	fix	defaults
+dict:novel-game:1	運良くトップランカーが毒有効ボスの共同討伐なんて言ってくるとは	운 좋게 톱 랭커가 독유효 보스의 공동 토벌 같은 건 말해 오다니	fix	defaults
+dict:novel-game:1	トップランカーギルドのリーダー	톱 랭커 길드의 리더	fix	defaults
+dict:novel-game:2	強者による狩場の独占	강자에 의한 사냥터의 독점	fix	defaults
+dict:novel-game:2	「あ、適正狩場は、その……」	「아, 적성 사냥터는, 그……」	fix	defaults
+dict:novel-game:3	これではヌルゲーではなく、もはや放置ゲーだ	이것으로는 쉬운 게임이 아니고, 이미 방치형 게임이다	fix	defaults
+dict:novel-game:4	味方に壁役をやってもらって敵を受けてもらう	아군이 탱커를 해 주어 적을 받아 준다	fix	defaults
+dict:names.212593	ソードマンの方が私に気づいて、やあと手を挙げる	소드맨이 나를 눈치채, 야 하고 손을 든다	fix	defaults
+dict:names.212593	リーダーがソードマンで剣を持って突っ込んで物理攻撃	리더가 소드맨으로 검을 들고 돌진해 물리 공격	fix	defaults
+dict:names.212593	ソードマン、ソルジャー、アルケミスト、クレリック、ファーマーだった	소드맨, 솔저, 알키미스트, 클레릭, 파머였다	fix	defaults
+dict:jisjk:162784	ギャルゲーの主人公	미소녀 게임의 주인공	fix	defaults
+dict:novel-game:1	ランカーの一人	랭커의 한 사람	keep	defaults
+dict:novel-game:1	上位ランカー	상위 랭커	keep	defaults
+dict:novel-game:1	トップに立った。	정상에 섰다.	keep	defaults
+dict:novel-game:2	狩り場に向かう	사냥터로 향한다	keep	defaults
+dict:novel-game:3	ヌルゲー	쉬운 게임	keep	defaults
+dict:novel-game:3	無理ゲーだ	불가능한 도전이다	keep	defaults
+dict:novel-game:4	壁を壊す。	벽을 부순다.	keep	defaults

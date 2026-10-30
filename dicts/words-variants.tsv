@@ -2090,7 +2090,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ネガチィブ	네가티브	N110	SFl	Dd	GN							jisjk:132037
 ネガチィブ	네거티브	N110			GN				xxx llm	1		w:6787
 ネスト・テーブル	네스트 테이블	N110			GN							jisjk:132049
-ネックレース	넥크리스	N110	VJwVAc		GN							jisjk:52729
+ネックレース	목걸이	N110	VJwVAc		GN							jisjk:52729
 ネックレース	목걸이	N110			GN				xxx llm	1		w:6807
 ネット・イン	네트 인	N110			GN							jisjk:132061
 ネット・プライス	순가격	N110	VMy		GN							jisjk:132064
@@ -6278,7 +6278,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 吊し上げ	매달기	N110			GN							jisjk:6537
 吊し上げ	매달아 올&AA@	M437			GN							jisjk:6538
 釣書き	계보	I110	VSw		GN							jisjk:83758
-釣書	계보	I110	VSw		GN							jisjk:83758
+釣書	혼담 서류	I110	VSw		GN							jisjk:83758
 吊り書き	계보	I110	VSw		GN							jisjk:83758
 吊書き	계보	I110	VSw		GN							jisjk:83758
 吊書	계보	I110	VSw		GN							jisjk:83758
@@ -8431,11 +8431,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 となり合	서로 이웃이 &C6@	M410			GN							jisjk:92633
 となり合	서로 이웃&AV@	M420			GN							jisjk:142790
 となり合	나란히 &AV@	M420			GN							jisjk:145436
-跳び降り	뛰어 내&AA@	M417			GN							jisjk:93219
+跳び降り	뛰어내&AA@	M417			GN							jisjk:93219
 とび降り	뛰어 내&AA@	M417			GN							jisjk:93219
 とび下り	뛰어 내&AA@	M417			GN							jisjk:93219
 飛下り	뛰어 내&AA@	M417			GN							jisjk:93219
-跳びおり	뛰어 내&AA@	M417			GN							jisjk:93219
+跳びおり	뛰어내&AA@	M417			GN							jisjk:93219
 飛びきり	월등히	E311			GN							jisjk:1663
 飛びきり	최상	N110			GN							jisjk:153767
 とめ金	이음쇠	I110			GN							jisjk:67980
@@ -13488,8 +13488,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 からくり人形	태엽 인형	I110			GN							jisjk:67568
 輪を掛け	한 술 더 &A8@	M447			GN							jisjk:117103
 バター臭	서양티가 $A2@	H7U0			GN							jisjk:5315
-飛降り自殺	투신 자살	N110		Hd	GN							jisjk:153766
-飛降自殺	투신 자살	N110		Hd	GN							jisjk:153766
+飛降り自殺	투신자살	N110		Hd	GN							jisjk:153766
+飛降自殺	투신자살	N110		Hd	GN							jisjk:153766
 目を付け	주목&AV@	M427		Pn	GN							jisjk:117832
 蔭間	남창	N110	VHn		GN							jisjk:167957
 外そう	외부 삽입	N110			GN							jisjk:29846
@@ -19738,7 +19738,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 にらみ鯛	장식용 도미	N110	VAm		GN							jisjk:248304
 睨鯛	장식용 도미	N110	VAm		GN							jisjk:248304
 ひも状	끈 모양	N110			GN							jisjk:162677
-噴きあが	날아&E6@	M418			GN							jisjk:95518
+噴きあが	솟구&AO@	M418			GN							jisjk:95518
 吹きあが	날아&E6@	M418			GN							jisjk:95518
 噴き上	날아&E6@	M418			GN							jisjk:95518
 噴上	날아&E6@	M418			GN							jisjk:95518

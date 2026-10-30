@@ -1,0 +1,18 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:w:15935	口の端が引きつっている。	입가가 굳어져 있다.	fix	defaults
+dict:w:15935	顔が引きつってる。	얼굴이 굳어져 있다.	fix	defaults
+dict:w:15935	さらに顔が引きつった。	더욱 얼굴이 굳어졌다.	fix	defaults
+dict:w:15948	喉は引き攣ったように	목은 굳어진 것처럼	fix	defaults
+dict:w:15948	頬が引き攣るのを感じた。	뺨이 굳어지는 것을 느꼈다.	fix	defaults
+dict:w:15935	引きつった笑みを浮かべた。	굳어진 미소를 지었다.	fix	defaults
+dict:w:15935	顔が引きつるのを止められなかった。	얼굴이 굳어지는 것을 멈출 수 없었다.	fix	defaults
+dict:w:15935	彼の顔が引きつった。	그의 얼굴이 굳어졌다.	fix	defaults
+dict:w:15935	顔が引きつっていて。	얼굴이 굳어져 있어.	fix	defaults
+dict:w:15948	自分の頬が引き攣るのを感じながら	자신의 뺨이 굳어지는 것을 느끼면서	fix	defaults
+dict:w:15935	口元が引きつっている気がする。	입가가 굳어져 있는 것 같다.	fix	defaults
+dict:novel-verbs:9	口元を引き攣らせながら	입가를 굳히면서	fix	defaults
+dict:novel-verbs:8	顔を引きつらせた。	얼굴을 굳혔다.	fix	defaults
+dict:novel-verbs:8	頬を引きつらせて笑う。	뺨을 굳혀 웃는다.	fix	defaults
+dict:w:15935	顔が固まっている。	얼굴이 굳어져 있다.	keep	defaults
+dict:w:15935	部下を引き連れて	부하를 거느려	keep	defaults

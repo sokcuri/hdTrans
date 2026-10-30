@@ -107,7 +107,7 @@ restore:laughter	100Wの電球	100W의 전구	keep	restore
 restore:laughter	5Whのバッテリー	5Wh의 배터리	keep	restore
 restore:laughter	60w電球を買った	60w전구를 샀다	keep	restore
 restore:laughter	出力は1.5kWだ	출력은 1.5kW다	keep	restore
-restore:laughter	ＧＷは実家に帰る	GW는 친가에 돌아간다	keep	restore
+restore:laughter	ＧＷは実家に帰る	GW는 본가에 돌아간다	keep	restore
 restore:laughter	Weigh anchor! 私、先頭でいい？	has:Weigh anchor!	keep	restore
 restore:laughter	New York cheesecake!	New York cheesecake!	keep	restore
 restore:laughter	Wow! パスタの屋台出してる！	has:Wow!	keep	restore
