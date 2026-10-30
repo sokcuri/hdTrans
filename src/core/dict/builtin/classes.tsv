@@ -27,8 +27,8 @@
 //= contraction.n-ru-final	The same before no kana, kanji or letter (こっち見んな 見るな, 邪魔すんな); not ごめんな or こんな, words that span the ん.
 //= contraction.n-nai	Starts of the text after a ん that says the ら of a godan verb's negative stem, the られ of a potential or the れ that ends an ichidan stem (分かんない 分からない, 信じらんない 信じられない, してくんない してくれない).
 //= contraction.n-nee	The same with ねえ for ない, which is written as ない (変わんねえ 変わらない, やってらんねえ やってられない).
-//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 許せんから 許せないから, 食べんか 食べないか).
-//= contraction.n-negative-not	Starts of contraction.n-negative after which the ん is no such ない (食べんかった, the past said with ん).
+//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 許せんから 許せないから, 食べんか 食べないか), and but for ぞ, わ and かて after the negative stem of a godan verb with a kanji (待たんか 待たないか, 分からんし 分からないし).
+//= contraction.n-negative-not	Starts of contraction.n-negative after which the ん is no such ない (食べんかった, the past said with ん; 食べんしゃい, the しゃい of a request; 負けんしゅ, a lisped す).
 //= contraction.n-kana-stem-after	The kana after which a verb stem of one kana starts a contracted form (気にすんな, してくんない, かもしんない, 俺がやっから); elsewhere a lone kana is no stem.
 //= contraction.tsu-ru	Starts of the text after a っ that says the る of a verb's dictionary form (やっから やるから, すっから するから).
 //= contraction.te-oru	Starts of the text after the と or ど that a て form says for its て or で and the お of おる (聞いとる 聞いておる, 読んどった 読んでおった, 聞いとらん 聞いておらん).
@@ -643,8 +643,12 @@ contraction.n-negative	から
 contraction.n-negative	か
 contraction.n-negative	けど
 contraction.n-negative	けれど
+contraction.n-negative	し
 
 contraction.n-negative-not	かっ
+contraction.n-negative-not	しゃ
+contraction.n-negative-not	しょ
+contraction.n-negative-not	しゅ
 
 contraction.n-kana-stem-after	て
 contraction.n-kana-stem-after	も

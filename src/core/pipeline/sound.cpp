@@ -2868,7 +2868,7 @@ namespace {
 // The verb kinds and form branches of word::Conjugation that a contracted ん or っ stands in.
 constexpr int kIchidan = 7, kRaGodan = 8, kSuru = 9, kKuru = 11, kKuruKanji = 13;
 constexpr int kPrefixSuru = 50, kPrefixKuru = 100, kPrefixKuruKanji = 150;  // the groups of word::PrefixForm
-constexpr int kDictionaryForm = 0, kPassive = 1, kPotential = 4, kNegativeStem = 8, kStemForm = 10;
+constexpr int kDictionaryForm = 0, kPassive = 1, kPotential = 4, kPastBranch = 6, kNegativeStem = 8, kStemForm = 10;
 
 // Filters of the verbs that VerbFormIs counts, by kind and codes (none for する and くる).
 bool Godan(int kind, const dict::Codes*) { return kind >= 0 && kind <= kRaGodan && kind != kIchidan; }
@@ -3014,9 +3014,26 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             const std::string_view stem = std::string_view(s).substr(byte[from], byte[i] - byte[from]);
             // The ん after a dictionary form is the の said ん (書くんなら); the ん after the negative
             // stem of a godan verb is its negative (いかんな, 知らんぞ), read as such, but for one
-            // before a written ない, which no negative takes (止まんない is 止まらない, not 止む).
-            if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) ||
-                         (!nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap)))) {
+            // before a written ない, which no negative takes (止まんない is 止まらない, not 止む). After a
+            // stem with a kanji and before か, から, けど or し that negative is written ない, which the
+            // word stage reads there (待たんか 待たないか, 分からんし 分からないし; not the かて of ても
+            // in 喜ばんかて); and the ん after the past of a verb with a kanji before か is the の of a
+            // question (来たんかい 来たのかい). Neither where a word in kanji that starts before the stem
+            // goes on into it (the name or noun before the honorific さん of 主任さんから, 井出さんか).
+            const bool kanji = std::any_of(rs.begin() + static_cast<std::ptrdiff_t>(from),
+                                           rs.begin() + static_cast<std::ptrdiff_t>(i), IsKanjiRune);
+            const bool inWord = from > 0 && IsKanjiRune(rs[from - 1]) && InsideWord(s, byte, start, from, ctx, snap);
+            const bool godanNegative = !nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap);
+            if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) || godanNegative)) {
+                if (godanNegative && kanji && !inWord && says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") &&
+                    !rest.starts_with("かて")) {
+                    kana = kNai;
+                }
+                break;
+            }
+            if (!tsu && kanji && !inWord && says == Says::Negative && rest.starts_with("か") &&
+                VerbFormIs(stem, kPastBranch, AnyKind, ctx, snap)) {
+                kana = "の";
                 break;
             }
             // A stem of one kana only after a particle or the て of a て form (気にすんな, してくんない,

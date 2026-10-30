@@ -733,10 +733,13 @@ bool OiTsu(std::string_view s, size_t pos, Match& m) {
 // ([いるたうくすつぬぶむぐ])んか(?=[？?」』。…‥！!]|ね|い|よ|$): the question のか with
 // の contracted after a predicate (いいんか, あるんか, 信じるんかい). A く that follows
 // katakana, two kanji, う, ん, ー or a small kana, or starts the text, is the honorific くん
-// (田中くんか, ユウくんかい, ゆうくんか), not the end of a verb (書くんか, いくんか).
+// (田中くんか, ユウくんかい, ゆうくんか), not the end of a verb (書くんか, いくんか). A た after a
+// kanji is left to RewriteContractedN, which tells a past (来たんかい) from the negative stem of a
+// godan verb (待たんか).
 bool NnKa(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"いるたうくすつぬぶむぐ")) return false;
+    if (Span(s, pos, p) == "た" && IsKanjiClass(Before(s, pos))) return false;
     if (Span(s, pos, p) == "く") {
         const text::Rune b = LastRune(s.substr(0, pos));
         if (pos == 0 || IsKatakanaRune(b.cp) || In(b.cp, U"うんーぁぃぅぇぉゃゅょゎ") ||

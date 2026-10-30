@@ -618,6 +618,8 @@ HD_TEST(pipeline_rewrite_casual) {
         {"そっスよねー！"sv, "そっすよねー！"sv},
         {"うぃっす！"sv, "うぃっす！"sv},
         {"まっすぐ行く"sv, "まっすぐ行く"sv},
+        {"待たんかい！"sv, "待たんかい！"sv},  // after a kanji left to RewriteContractedN
+        {"書いたんか"sv, "書いたのか"sv},
     };
     Check([](std::string_view text) { return RewriteCasual(text); }, cases);
 }
