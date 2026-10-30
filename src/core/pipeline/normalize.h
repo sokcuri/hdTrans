@@ -180,8 +180,9 @@ std::string RewriteMilitaryTime(std::string_view text);
 
 // The elder-sibling words of line in a woman's Korean (お兄様 오빠, お姉ちゃん 언니) when
 // female is set and the line shows no man's speech, or when the line itself shows a
-// woman's speech.
-std::string WriteKinTerms(std::string_view line, bool female);
+// woman's speech. A word that holds a kanji before the kin term and the term's first character
+// (holds, when given: 義姉様, 従兄様) is left as written.
+std::string WriteKinTerms(std::string_view line, bool female, WordHoldsRun holds = nullptr, const void* context = nullptr);
 
 // A document whose utterances (「」 and 『』 text) show a woman's speech and whose lines
 // with a kin term never show a man's speech in an utterance holding the kin term.

@@ -424,6 +424,21 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
     return std::string(line.substr(0, at)) + name + std::string(line.substr(at + t.size()));
 }
 
+// Whether a word of the snapshot starts at line[at] or at a kanji of the run before it and
+// reaches end (WriteKinTerms).
+bool KanjiWordHolds(const void* context, std::string_view line, std::size_t at, std::size_t end) {
+    const auto& snap = *static_cast<const dict::Snapshot*>(context);
+    for (std::size_t start = at;;) {
+        for (const dict::Candidate& c : snap.GetWordInfo(line.substr(start), dict::LookupMode::General, {}).list) {
+            if (start + c.source.size() >= end) return true;
+        }
+        if (start == 0) return false;
+        const text::Rune last = names::internal::RuneBefore(line, start);
+        if (!names::internal::IsKanji(last.cp)) return false;
+        start -= last.size;
+    }
+}
+
 }  // namespace
 
 LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
@@ -436,7 +451,7 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     }
     names::Registry& r = *doc.registry;
     std::string cueText;
-    const std::string kin = pipeline::internal::WriteKinTerms(line, doc.female);
+    const std::string kin = pipeline::internal::WriteKinTerms(line, doc.female, KanjiWordHolds, doc.snap);
     facts.text = r.DropReadings(names::StripRuby(kin), &cueText, &facts.cued);
     const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
