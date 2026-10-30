@@ -19,6 +19,7 @@ struct BoundaryHints {
         uint8_t cls = 0;  // class letter of the rejected word
     };
     std::vector<Rejected> rejected;
+    bool blockParticleReading = true;  // no content item reads one analyzer particle (のみ is no 飲み)
 };
 // Returns false when it has no opinion on this text.
 using BoundaryFn = bool (*)(void* ctx, std::string_view text, BoundaryHints* out);

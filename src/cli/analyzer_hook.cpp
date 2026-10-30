@@ -24,10 +24,16 @@ bool ReadAll(const char* path, std::string* out) {
 bool Ends(void*, std::string_view text, hdTrans::word::BoundaryHints* out) {
     thread_local hd8::ana::WorkspacePtr ws = hd8::ana::NewWorkspace();
     hd8::ana::SegHints h;
-    analyzer->Hints(text, &h, ws.get());
+    static const char* slackEnv = std::getenv("HDTRANS_ANALYZER_SLACK");
+    // measured: rejected words and the particle reading cost more rule cases than they win lines
+    static const bool noRejected = std::getenv("HDTRANS_ANALYZER_REJECT") == nullptr;
+    static const bool noParticle = std::getenv("HDTRANS_ANALYZER_PARTICLE") == nullptr;
+    analyzer->Hints(text, &h, ws.get(), slackEnv ? static_cast<float>(std::atof(slackEnv)) : 2.0f);
     out->ends = std::move(h.ends);
     out->rejected.clear();
-    for (auto& r : h.rejected) out->rejected.push_back({r.span.begin, r.span.end, r.cls});
+    if (!noRejected)
+        for (auto& r : h.rejected) out->rejected.push_back({r.span.begin, r.span.end, r.cls});
+    out->blockParticleReading = !noParticle;
     return true;
 }
 

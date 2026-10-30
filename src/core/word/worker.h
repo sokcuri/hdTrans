@@ -114,7 +114,7 @@ public:
         };
         for (const auto& r : hints.rejected)
             if (static_cast<int>(r.begin) == start && static_cast<int>(r.end) == end && sameKind(r.cls)) return false;
-        if (e[static_cast<std::size_t>(start)] == 'p') {
+        if (hints.blockParticleReading && e[static_cast<std::size_t>(start)] == 'p') {
             bool one = true;
             for (int i = start + 1; i < end && one; i++) one = e[static_cast<std::size_t>(i)] == 0;
             if (one) return false;
