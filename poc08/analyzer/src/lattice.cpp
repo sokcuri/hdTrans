@@ -326,20 +326,16 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
         if (near.empty()) continue;
         std::vector<size_t> elongs, lits;
         for (size_t s : near) (sites[s].elong ? elongs : lits).push_back(s);
-        // views: all elongations alone; each literal alone; each literal with all elongations
+        // views: one elongation; one literal; one literal with one elongation (みてえええ). A derived
+        // word holds one lengthening at most (まーまー is no まま).
         std::vector<std::vector<size_t>> views;
-        if (!elongs.empty()) views.push_back(elongs);
+        for (size_t e : elongs) views.push_back({e});
         for (size_t s : lits) {
           views.push_back({s});
-          if (!elongs.empty()) {
-            std::vector<size_t> v = elongs;
-            bool overlap = false;
-            for (size_t e : elongs)
-              if (sites[e].p < sites[s].p + sites[s].len && sites[s].p < sites[e].p + sites[e].len) overlap = true;
-            if (overlap) continue;
-            v.push_back(s);
-            std::sort(v.begin(), v.end(), [&](size_t x, size_t y) { return sites[x].p < sites[y].p; });
-            views.push_back(v);
+          for (size_t e : elongs) {
+            if (sites[e].p < sites[s].p + sites[s].len && sites[s].p < sites[e].p + sites[e].len) continue;
+            if (sites[e].p < sites[s].p) views.push_back({e, s});
+            else views.push_back({s, e});
           }
         }
         size_t limit = std::min(n, i + 24);
