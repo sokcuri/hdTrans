@@ -702,3 +702,5 @@ cx:ending-presumptive-rare:10	GRM-10	&&6 F+0== "conjugating" U+0== "よう" Y+0=
 //= doumo-greeting	after Select 75	The どうも of a greeting: before thanks or an apology it is 정말 (どうもありがとう 정말 고마워, どうもすみません 정말 죄송합니다); before 初めまして it is the greeting 안녕하세요 (どうも初めまして 안녕하세요 처음 뵙겠습니다).
 cx:doumo-greeting:10	LEX-73	&&2 S+0== "どうも" ||5 S+1== "ありがとう" S+1== "ありがとうございます" S+1== "ありがと" S+1== "すみません" S+1== "失礼"	set-target "정말"	どうもありがとう 정말 고마워
 cx:doumo-greeting:20	LEX-73	&&2 S+0== "どうも" ||2 S+1== "初めまして" S+1== "はじめまして"	set-target "안녕하세요"	どうも初めまして 안녕하세요 처음 뵙겠습니다
+//= chinyu-narration	after Select 115	The 親友 read 절친 in a dialogue is 친한 친구 in the narration of a document that writes its dialogue in 「」 (house style: 절친 is a spoken word).
+cx:chinyu-narration:10	LEX-3	&&3 S+0== "親友" D+0== "절친" F+0== "narration"	set-target "친한 친구"	親友の家に行った。 친한 친구의 집에 갔다.

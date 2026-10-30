@@ -1,0 +1,4 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+cx:chinyu-narration:10	「親友だろ？」\n俺は親友の家に行った。	「절친이지?」\n나는 친한 친구의 집에 갔다.	fix	rewrites
+cx:chinyu-narration:10	親友だろ？\n俺は親友の家に行った。	절친이지?\n나는 절친의 집에 갔다.	keep	rewrites
