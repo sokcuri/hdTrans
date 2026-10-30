@@ -1,0 +1,7 @@
+#! layer=words
+# 명사 뒤 であらせられる: 높임 계사 이시다. しておられる: 하고 계시다
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+であらせられ	이&AE@	M427		PjTu	GN	9410	||3 &&2 P+1== "1**" Y+0= "8" &&3 U+0== "る" G+0== "Ow" Y+0= "1다" &&2 U+0== "ますか" Y+0= "7니까"	であらせられる는 명사 앞에서 '이신', 문장 끝에서 '이시다', ますか는 '이십니까'로 활용한다.				novel-honorific-copula:1
+であらせられ	이&AE@	M427	XXX	PjTu	GN							novel-honorific-copula:2
+をしておられ	(을)를 하고 계&AE@	M427		TuPj	GN							novel-honorific-copula:3
+しておられ	하고 계&AE@	C427		Sk	GN							novel-honorific-copula:4
