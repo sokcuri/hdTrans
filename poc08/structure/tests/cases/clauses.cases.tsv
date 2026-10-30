@@ -65,3 +65,13 @@ quote-link	「行く」と言った。	行く	link=quote
 adn-link	昨日読んだ本は面白い。	読ん	link=adn tense=past arg=head:本
 tame-link	健康のために走る。	$	pol=pos
 tame-v	勝つために練習する。	勝つ	link=tame
+te-trailing-neg	「信じられなくて」	$	link=te pol=neg force=decl
+te-trailing-adj	「優しくて……」	$	link=te force=decl
+te-request	「待って！」	$	force=request link=final
+na-after-copula	「残念だなぁ……」	$	force=decl pol=pos
+obligation-chau	「行かなくちゃ」	$	negFn=obligation pol=pos
+node-link	疲れたので寝た。	疲れ	link=node
+to-cond	行かないと困る。	行か	link=to
+to-quote	彼は来ると言った。	来る	link=quote
+nominal-tame	元々は平民のため罵られる。	ため	link=tame
+particle-yotte	ナイフによって刺された。	$	voice=rare arg=dat:ナイフ

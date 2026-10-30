@@ -1,7 +1,9 @@
 #pragma once
 // C (bunsetsu and heads) and L (clauses, features, arguments) over one analysis path.
+#include <array>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <vector>
 
 #include "ir_view.h"
@@ -53,6 +55,8 @@ struct StructureData {
     std::vector<std::pair<std::string, Wc>> ud;      // longest prefix wins
     std::vector<std::pair<std::string, Form>> forms; // longest prefix wins
     std::vector<std::pair<std::string, float>> headWeights;  // sorted by feature name
+    std::unordered_map<std::string, std::string> persons;     // data/persons.tsv: lemma → speaker|addressee|third
+    std::unordered_map<std::string, std::array<float, 6>> zeroWeights;  // data/zero.tsv: feature → weight per class
 };
 
 // Per-token facts shared by C and L.
@@ -91,7 +95,8 @@ struct HeadFacts {
     int depthIn = 0, depthOut = 0, sentEnd = 0;
     std::string last, form, cwc, clemma;
 };
-std::vector<HeadFacts> ComputeHeadFacts(const Strings& strings, const std::vector<TokInfo>& info, const Path& path);
+std::vector<HeadFacts> ComputeHeadFacts(const StructureData& data, const Strings& strings, const std::vector<TokInfo>& info,
+                                        const Path& path);
 
 // The named features of the dependency of bunsetsu dep on candidate head cand (also used to train weights).
 void HeadFeatures(const std::vector<HeadFacts>& facts, const std::vector<int>& heads, int dep, int cand,
@@ -101,7 +106,28 @@ void HeadFeatures(const std::vector<HeadFacts>& facts, const std::vector<int>& h
 void BuildClauses(const StructureData& data, Strings& strings, const std::vector<TokInfo>& info, Path& path,
                   std::vector<Decision>& decisions);
 
+// The class of an omitted subject (Referent.kind values: none overt speaker addressee third generic).
+struct ZeroContext {
+    bool dialogue = false;              // the line is speech (S's utterance), beyond any bracket in it
+    bool firstPersonNarration = false;  // the scene's narration is in the first person
+    std::string previousSubject;        // LineSubjectClass of the previous line in scope
+};
+struct ZeroResult {
+    uint8_t kind = 0, runnerUp = 0;
+    float score = 0, margin = 0;
+};
+void LoadPersons(std::string_view tsv, StructureData& out);
+void LoadZeroWeights(std::string_view tsv, StructureData& out);
+// The class of the last overt person-like subject or topic of a line ("" when none).
+std::string LineSubjectClass(const StructureData& d, const Strings& st, const std::vector<TokInfo>& info, const Path& path);
+void ZeroFeatures(const StructureData& d, const Strings& st, const std::vector<TokInfo>& info, const Path& path, int ci,
+                  const ZeroContext& ctx, std::vector<std::string>& out);
+ZeroResult ClassifyZero(const StructureData& d, const std::vector<std::string>& feats);
+const char* ZeroName(uint8_t kind);
+bool ParseZeroClass(std::string_view s, uint8_t& kind);
+
 // Names of enum values as written in JSON (IR.md §7).
+const char* Name(Wc v);
 const char* Name(Link v);
 const char* Name(LinkSub v);
 const char* Name(Tense v);

@@ -202,7 +202,7 @@ TokStr Str(const Strings& st, const Token& t) {
     return {st.Get(t.surf), st.Get(t.lemma), st.Get(t.ud), st.Get(t.cform), st.Get(t.ctype)};
 }
 
-bool AfterOk(const AuxRow& r, const TokStr* prev, R prevRole) {
+bool AfterOk(const AuxRow& r, const TokStr* prev, R prevRole, Wc prevWc) {
     if (r.afters.empty()) return true;
     if (prev == nullptr) return false;
     for (const auto& [k, v] : r.afters) {
@@ -210,18 +210,19 @@ bool AfterOk(const AuxRow& r, const TokStr* prev, R prevRole) {
         if (k == "prevsurf" && prev->surf == v) return true;
         if (k == "prevud" && StartsWith(prev->ud, v)) return true;
         if (k == "prevform" && StartsWith(prev->cform, v)) return true;
+        if (k == "prevverb" && (prevWc == Wc::verb || prevWc == Wc::verb_dep) && StartsWith(prev->cform, v)) return true;
         if (k == "prevrole" && v == kRNames[static_cast<int>(prevRole)]) return true;
     }
     return false;
 }
 
-const AuxRow* Best(const StructureData& d, const TokStr& t, const TokStr* prev, R prevRole, bool formRows) {
+const AuxRow* Best(const StructureData& d, const TokStr& t, const TokStr* prev, R prevRole, Wc prevWc, bool formRows) {
     const AuxRow* best = nullptr;
     for (const auto& r : d.aux) {
         if ((r.kind == AuxKind::form) != formRows) continue;
         if (!LemmaOk(r, t.lemma) || !SurfOk(r, t.surf, t.lemma)) continue;
         if (!AnyPrefix(r.uds, t.ud) || !AnyPrefix(r.forms, t.cform) || !AnyPrefix(r.ctypes, t.ctype)) continue;
-        if (!AfterOk(r, prev, prevRole)) continue;
+        if (!AfterOk(r, prev, prevRole, prevWc)) continue;
         if (best == nullptr || r.spec > best->spec) best = &r;
     }
     return best;
@@ -309,6 +310,20 @@ bool LoadStructureData(std::string_view auxTsv, std::string_view udTsv, std::str
     return ok;
 }
 
+void LoadPersons(std::string_view tsv, StructureData& out) {
+    Rows(tsv, [&](const std::vector<std::string_view>& f) {
+        if (f.size() >= 2) out.persons[std::string(f[0])] = std::string(f[1]);
+    });
+}
+
+void LoadZeroWeights(std::string_view tsv, StructureData& out) {
+    Rows(tsv, [&](const std::vector<std::string_view>& f) {
+        uint8_t k = 0;
+        if (f.size() < 3 || !ParseZeroClass(f[1], k)) return;
+        out.zeroWeights[std::string(f[0])][k] = std::strtof(std::string(f[2]).c_str(), nullptr);
+    });
+}
+
 std::vector<TokInfo> Annotate(const StructureData& d, const Strings& st, const std::vector<Token>& toks) {
     std::vector<TokInfo> out(toks.size());
     R prevRole = R::none;
@@ -323,8 +338,9 @@ std::vector<TokInfo> Annotate(const StructureData& d, const Strings& st, const s
         TokInfo& ti = out[i];
         ti.wc = LongestPrefix(d.ud, t.ud, Wc::none);
         ti.form = LongestPrefix(d.forms, t.cform, Form::none);
-        ti.row = Best(d, t, prev, prevRole, false);
-        if (!t.cform.empty()) ti.frow = Best(d, t, prev, prevRole, true);
+        Wc prevWc = i > 0 ? out[i - 1].wc : Wc::none;
+        ti.row = Best(d, t, prev, prevRole, prevWc, false);
+        if (!t.cform.empty()) ti.frow = Best(d, t, prev, prevRole, prevWc, true);
         // A morpheme row passes its role on; an inflected word without one passes its form's role.
         if (ti.row != nullptr && ti.row->sets.role != R::none && ti.row->kind != AuxKind::voice)
             ti.role = ti.row->sets.role;
@@ -337,6 +353,7 @@ std::vector<TokInfo> Annotate(const StructureData& d, const Strings& st, const s
     return out;
 }
 
+const char* Name(Wc v) { return kWcNames[static_cast<int>(v)]; }
 const char* Name(Link v) { return kLinkNames[static_cast<int>(v)]; }
 const char* Name(LinkSub v) { return kLinkSubNames[static_cast<int>(v)]; }
 const char* Name(Tense v) { return kTenseNames[static_cast<int>(v)]; }

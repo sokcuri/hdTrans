@@ -147,6 +147,26 @@ struct Fold {
 
 Case BunCase(const Bunsetsu& b) { return b.kase; }
 
+// The clause ends in の+で (ので), which is a cause link, not an explanatory のだ.
+bool linkTokIsNode(const std::vector<TokInfo>& info, const Bunsetsu& lb, int content) {
+    for (int k = lb.last; k > content; --k) {
+        if (IsPunct(info[k].wc)) continue;
+        return RowRole(info[k]) == R::cop_te && RowRole(info[k - 1]) == R::nomi;
+    }
+    return false;
+}
+
+// The lemma of a bunsetsu's noun: the lemmas of the noun compound that ends at the content token (同級+生).
+uint32_t NounLemma(Strings& st, const std::vector<TokInfo>& info, const Path& path, const Bunsetsu& b) {
+    int c = b.content;
+    int k = c;
+    while (k > b.first && (IsNounLike(info[k - 1].wc) || info[k - 1].wc == Wc::pref) && IsNounLike(info[c].wc)) --k;
+    if (k == c) return path.toks[c].lemma;
+    std::string s;
+    for (int i = k; i <= c; ++i) s += st.Get(path.toks[i].lemma);
+    return st.Intern(s);
+}
+
 Role RoleOf(Case k, bool& ok, uint8_t& how) {
     ok = true;
     how = static_cast<uint8_t>(ArgHow::marked);
@@ -318,7 +338,8 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
         if (f.honPrefix && f.sawNaru) c.polite = std::max(c.polite, Polite::sonkei);
         if (f.honPrefix && f.sawLight) c.polite = std::max(c.polite, Polite::kenjo);
         // Explanatory のだ, わけだ.
-        if (f.sawNomi && (f.sawCopJa || std::any_of(c.consumed.begin(), c.consumed.end(), [&](uint16_t k) {
+        bool nodeLink = linkTokIsNode(info, lb, content);
+        if (!nodeLink && f.sawNomi && (f.sawCopJa || std::any_of(c.consumed.begin(), c.consumed.end(), [&](uint16_t k) {
                               R r = RowRole(info[k]);
                               return r == R::cop || r == R::daro;
                           })))
@@ -335,8 +356,20 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
         R lastRole = linkTok >= 0 ? RowRole(info[linkTok]) : R::none;
         Link link = Link::final;
         if (f.lastLink >= 0) link = static_cast<Link>(f.lastLink);
-        if (lastRole == R::quote || (lastRole == R::to && linkTok >= 0 && info[linkTok].wc == Wc::p_case))
+        if (lastRole == R::quote || (lastRole == R::to && linkTok >= 0 && info[linkTok].wc == Wc::p_case)) {
             link = Link::quote;
+            // と before a predicate that takes no quote is the condition (行かないと困る).
+            int hb = lb.head;
+            if (lastRole == R::to && hb >= 0) {
+                bool sayHead = false;
+                const Bunsetsu& hbu = path.buns[hb];
+                for (int k = hbu.first; k <= hbu.last; ++k)
+                    if (RowRole(info[k]) == R::say) sayHead = true;
+                if (!sayHead) link = Link::to;
+            }
+        }
+        else if (lastRole == R::cop_te && linkTok > 0 && RowRole(info[linkTok - 1]) == R::nomi)
+            link = Link::node;  // の+で: ので
         else if (lastRole == R::ni && f.sawZu) link = Link::zu;
         else if (lastRole == R::ni && linkTok > 0 && RowRole(info[linkTok - 1]) == R::nomi) link = Link::noni;
         else if (lastRole == R::mo && f.lastLink == static_cast<int>(Link::te)) link = Link::temo;
@@ -364,13 +397,22 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
         }
         // A te-link that ends a sentence is a request (待って！); in narration it stays te.
         bool finalClause = sentenceEnd || lb.head < 0;
+        // Only an action verb, not negated and not trailing off (…), makes such a request.
+        bool trailing = false;
+        for (int k = lastTok + 1; k < static_cast<int>(toks.size()) && IsPunct(info[k].wc); ++k)
+            if (info[k].wc == Wc::sym || (info[k].row != nullptr && info[k].row->sets.role == R::end &&
+                                          info[k].row->sets.force < 0 && info[k].wc != Wc::period))
+                trailing = true;
+        bool actionVerb = (info[content].wc == Wc::verb || info[content].wc == Wc::verb_dep) && !f.pot && !f.rare;
         if (finalClause && (link == Link::te || link == Link::renyo) && depth[lastTok] > 0 &&
-            static_cast<int>(lastRole) != static_cast<int>(R::wa)) {
+            static_cast<int>(lastRole) != static_cast<int>(R::wa) && actionVerb && !trailing &&
+            (f.negs == 0 || f.negTe)) {
             link = Link::final;
             if (f.lastForce < 0) f.lastForce = static_cast<int>(Force::request);
         }
         if (finalClause && (link == Link::ba || link == Link::to || link == Link::nara || link == Link::tara ||
-                            link == Link::te) && f.negs > 0 && f.negBeforeCond > 0 && !f.sawEval) {
+                            (link == Link::te && f.sawTeWa)) &&
+            f.negs > 0 && f.negBeforeCond > 0 && !f.sawEval) {
             // 行かなきゃ / 行かないと / 行かなくちゃ at the end of a sentence: obligation.
             link = Link::final;
             c.negFn = NegFn::obligation;
@@ -539,7 +581,7 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
         Arg a;
         a.role = role;
         a.bun = static_cast<uint16_t>(b);
-        a.lemma = toks[bu.content].lemma;
+        a.lemma = NounLemma(st, info, path, bu);
         a.cls = info[bu.content].wc == Wc::person ? st.Intern("@person") : 0;
         a.how = how;
         path.clauses[ci].args.push_back(a);
@@ -552,7 +594,7 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
                 Arg a;
                 a.role = Role::head;
                 a.bun = static_cast<uint16_t>(h);
-                a.lemma = toks[path.buns[h].content].lemma;
+                a.lemma = NounLemma(st, info, path, path.buns[h]);
                 a.cls = info[path.buns[h].content].wc == Wc::person ? st.Intern("@person") : 0;
                 a.how = static_cast<uint8_t>(ArgHow::relhead);
                 c.args.push_back(a);
@@ -570,7 +612,7 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
                 Arg a;
                 a.role = Role::subj;
                 a.bun = static_cast<uint16_t>(b);
-                a.lemma = toks[path.buns[b].content].lemma;
+                a.lemma = NounLemma(st, info, path, path.buns[b]);
                 a.cls = info[path.buns[b].content].wc == Wc::person ? st.Intern("@person") : 0;
                 a.how = static_cast<uint8_t>(ArgHow::marked);
                 c.args.push_back(a);

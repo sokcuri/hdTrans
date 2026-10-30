@@ -140,22 +140,8 @@ void StageL(const StructureData& s, const Config&, Doc& doc, Line& line, int pat
         o.firstBun = c.firstBun;
         o.lastBun = c.lastBun;
         o.parent = c.parent;
-        unsigned v = 0;
-        if (Parse(F::link, hd8::Name(c.link), v)) {
-            o.link = static_cast<uint8_t>(v);
-        } else {
-            // A link value that IR v2c lacks: kept as a fact until the enum has it.
-            hd8::Decision d;
-            d.stage = 'L';
-            d.kind = hd8::Ev::Lexical;
-            d.rule = l.st.Intern("code:BuildClauses");
-            d.src = hd8::Span{l.path.toks[l.path.buns[c.pred].first].src.begin,
-                              l.path.toks[l.path.buns[c.lastBun].last].src.end};
-            std::string fact = std::string("link=") + hd8::Name(c.link);
-            if (c.linkSub != hd8::LinkSub::none) fact += std::string(":") + hd8::Name(c.linkSub);
-            d.because.push_back(l.st.Intern(fact));
-            l.decisions.push_back(std::move(d));
-        }
+        o.link = Value(F::link, hd8::Name(c.link));
+        if (c.linkSub != hd8::LinkSub::none) o.linkSub = Value(F::timesub, hd8::Name(c.linkSub));
         o.tense = Value(F::tense, hd8::Name(c.tense));
         o.aspect = Value(F::jaspect, hd8::Name(c.aspect));
         o.pol = Value(F::pol, hd8::Name(c.pol));
@@ -167,6 +153,7 @@ void StageL(const StructureData& s, const Config&, Doc& doc, Line& line, int pat
         o.polite = Value(F::polite, hd8::Name(c.polite));
         o.jreg = c.jreg;  // same bit order as HD08_JREG
         for (const auto& a : c.args) {
+            if (a.how == static_cast<uint8_t>(hd8::ArgHow::omitted)) continue;  // Z is not a stage yet
             Arg x;
             x.role = static_cast<Role>(a.role);
             x.bun = a.bun;

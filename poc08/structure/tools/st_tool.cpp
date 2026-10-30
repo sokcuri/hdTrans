@@ -90,7 +90,7 @@ std::map<std::pair<std::string, int>, std::vector<int>> ReadGold(const std::stri
 int main(int argc, char** argv) {
     std::string dataDir, trainGold, evalGold, outPath;
     int iters = 10;
-    bool noHeads = false, annotate = false;
+    bool noHeads = false, annotate = false, zeroFeatures = false;
     for (int i = 1; i < argc; ++i) {
         std::string a = argv[i];
         auto next = [&]() { return i + 1 < argc ? std::string(argv[++i]) : std::string(); };
@@ -101,6 +101,7 @@ int main(int argc, char** argv) {
         else if (a == "--iters") iters = std::atoi(next().c_str());
         else if (a == "--no-heads") noHeads = true;
         else if (a == "--annotate") annotate = true;
+        else if (a == "--zero-features") zeroFeatures = true;
         else {
             std::fprintf(stderr, "unknown flag %s\n", a.c_str());
             return 2;
@@ -119,6 +120,8 @@ int main(int argc, char** argv) {
         std::fprintf(stderr, "data: %s\n", err.c_str());
         return 1;
     }
+    hd8::LoadPersons(ReadFile(dataDir + "/persons.tsv"), data);
+    hd8::LoadZeroWeights(ReadFile(dataDir + "/zero.tsv"), data);
     std::ios::sync_with_stdio(false);
     std::string s;
     if (!trainGold.empty() || !evalGold.empty()) {
@@ -156,7 +159,7 @@ int main(int argc, char** argv) {
         std::unordered_map<std::string, long> last;
         long t = 1;
         std::vector<std::vector<hd8::HeadFacts>> facts(exs.size());
-        for (size_t e = 0; e < exs.size(); ++e) facts[e] = hd8::ComputeHeadFacts(st, exs[e].info, exs[e].line.path);
+        for (size_t e = 0; e < exs.size(); ++e) facts[e] = hd8::ComputeHeadFacts(data, st, exs[e].info, exs[e].line.path);
         std::vector<std::string> feats;
         for (int it = 0; it < iters; ++it) {
             long ok = 0, tot = 0;
@@ -217,7 +220,33 @@ int main(int argc, char** argv) {
         hd8::Chunk(data, st, info, line.path);
         hd8::AttachHeads(data, st, info, line.path, line.decisions, st);
         hd8::BuildClauses(data, st, info, line.path, line.decisions);
-        WriteIr(line, st, std::cout);
+        if (zeroFeatures || !data.zeroWeights.empty()) {
+            hd8::ZeroContext zc;
+            if (const Value* z = v.Get("zctx")) {
+                zc.dialogue = z->N("dialogue") != 0;
+                zc.firstPersonNarration = z->N("docfp") != 0;
+                zc.previousSubject = std::string(z->S("prev"));
+            }
+            std::cout << "{\"zero\":{\"doc\":" << hd8json::Quote(line.doc) << ",\"line\":" << line.id
+                      << ",\"lineSubj\":" << hd8json::Quote(hd8::LineSubjectClass(data, st, info, line.path))
+                      << ",\"clauses\":[";
+            std::vector<std::string> feats;
+            for (size_t ci = 0; ci < line.path.clauses.size(); ++ci) {
+                hd8::ZeroFeatures(data, st, info, line.path, static_cast<int>(ci), zc, feats);
+                auto r = hd8::ClassifyZero(data, feats);
+                const auto& pb = line.path.buns[line.path.clauses[ci].pred];
+                std::cout << (ci ? "," : "") << "{\"predBegin\":" << line.path.toks[pb.content].src.begin
+                          << ",\"class\":\"" << hd8::ZeroName(r.kind) << "\",\"margin\":" << r.margin;
+                if (zeroFeatures) {
+                    std::cout << ",\"feats\":[";
+                    for (size_t k = 0; k < feats.size(); ++k) std::cout << (k ? "," : "") << hd8json::Quote(feats[k]);
+                    std::cout << "]";
+                }
+                std::cout << "}";
+            }
+            std::cout << "]}}\n";
+        }
+        WriteIr(line, st, std::cout, &info);
     }
     return 0;
 }
