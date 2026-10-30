@@ -1,0 +1,32 @@
+rule	input	expected	kind	layer
+dict:novel-tame:1	両親に報告するため、実家へとひとり旅をしていた。	has:보고하기 위해	fix	local-ending
+dict:novel-tame:1	決勝に進む2組を選ぶため、2周目に突入することになった。	has:선택하기 위해	fix	local-ending
+dict:novel-tame:1	文字を覚えるため、家の本を読み漁った。	has:배우기 위해	fix	local-ending
+dict:novel-tame:1	私はあなたを護るため、どんどん強くなってあげる！	has:지키기 위해	fix	local-ending
+dict:novel-tame:1	船団の被害を減らすため……敵潜水艦と戦いました。	has:줄이기 위해	fix	local-ending
+dict:novel-tame:1	夢をかなえるため お力をお貸しいただけないでしょうか	has:이루기 위해	fix	local-ending
+dict:novel-tame:1	家族を支えるため新たなビジネスを始めた	has:지탱하기 위해	fix	local-ending
+dict:novel-tame:1	親戚の結婚式に出るため 娘を連れてきたという。	has:나오기 위해	fix	local-ending
+dict:novel-tame:1	浪江で働くため 大学院で公衆衛生を学び直した	has:일하기 위해	fix	local-ending
+dict:novel-tame:1	100人の胃袋を満たすためフライパンも２つ同時に	has:채우기 위해	fix	local-ending
+dict:novel-tame:1	さらに可能性を高めるため置き竿を何本も仕掛けていく	has:높이기 위해	fix	local-ending
+dict:novel-tame:1	甘さを保つため 急いで	has:유지하기 위해	fix	local-ending
+dict:novel-tame:1	情報を素早く伝えるため東京放送局を設立。	has:전하기 위해	fix	local-ending
+dict:novel-tame:1	大会の会場から迷い込んだヤツを追い出すためだろ。	has:내쫓기 위해	fix	local-ending
+dict:novel-tame:1	本を手に入れるためならば、大した障害ではない。	has:넣기 위해	fix	local-ending
+dict:novel-tame:1	しかも小声で超早口だったため、聞き取れなかった。	has:빨랐기 때문에	keep	local-ending
+dict:novel-tame:1	続く3組もすべて泥水に入ったため、2周目になった。	has:들어갔기 때문에	keep	local-ending
+dict:novel-tame:1	魔術演算領域というPCがあるため、エルは疑問に思わない。	has:있기 때문에	keep	local-ending
+dict:novel-tame:1	特定の業種もあるため、独特の商習慣がある。	has:있기 때문에	keep	local-ending
+dict:novel-tame:1	その周辺の瘴気は薄くなるため、濃くなることは防げる。	has:옅어지기 때문에	keep	local-ending
+dict:novel-tame:1	テイマーにとっては中盤以降必須になるため、取得しておいた。	has:되기 때문에	keep	local-ending
+dict:novel-tame:1	美少女であるため、羨望の眼差しで見られている。	has:미소녀이기 때문에	keep	local-ending
+dict:novel-tame:1	彼は優しい男だ。優しすぎるため、エルを殺せなかった。	has:다정하기 때문에	keep	local-ending
+dict:novel-tame:1	常に火炎弾の驚異にさらされ続けるため、精神力が持たない。	has:노출되기 때문에	keep	local-ending
+dict:novel-tame:1	純血生のみで構成される為、途中入学生は入る事ができない。	has:구성되기 때문에	keep	local-ending
+dict:novel-tame:1	もとより興味などないため、断った。	has:없기 때문에	keep	local-ending
+dict:jisjk:343171	ゲートの幅が狭いために全開で通り抜けるのは怖い	has:좁기 때문에	fix	local-ending
+dict:jisjk:343171	ドロップ率が低いために略奪が起きる。	has:낮기 때문에	fix	local-ending
+dict:jisjk:343171	正しい情報がないために１０万人が犠牲になりました。	has:없기 때문에	fix	local-ending
+dict:jisjk:343171	それをさせないために	has:않기 위해	keep	local-ending
+dict:jisjk:343171	決して後悔させないためには	has:않기 위해	keep	local-ending
