@@ -3,6 +3,7 @@
 
   llm_translate.py --set EVALDIR/SET --out OUT.ko.txt [--model claude-opus-5-5] [--chunk 60]
                    [--cache DIR/llm-translate.jsonl] [--jobs 4]
+  llm_translate.py --lines JA.txt --out OUT.ko.txt [...]   independent lines (e.g. the flip suite)
 
 Each document is translated from its first line through its last scored line, in chunks of up to
 --chunk non-empty lines. Every chunk sees the previous chunk's source lines and their translations as
@@ -83,7 +84,8 @@ def translate_doc(model, cache, domain, lines, last, chunk, effort):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--set", required=True)
+    ap.add_argument("--set")
+    ap.add_argument("--lines")
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default="claude-opus-5-5")
     ap.add_argument("--effort", default="medium")
@@ -91,8 +93,23 @@ def main():
     ap.add_argument("--cache", default="/Users/sokcuri/hdwork/v08/eval-runs/cache/llm-translate.jsonl")
     ap.add_argument("--jobs", type=int, default=4)
     a = ap.parse_args()
-    name = os.path.basename(os.path.normpath(a.set))
     cache = api.Cache(a.cache)
+    if a.lines:
+        with open(a.lines, encoding="utf-8") as f:
+            src = f.read().rstrip("\n").split("\n")
+        parts = [src[i:i + a.chunk] for i in range(0, len(src), a.chunk)]
+        dom = "a list of unrelated short lines from novels, games and captions; each line stands alone"
+
+        def one(part):
+            res = translate_doc(a.model, cache, dom, part, len(part), a.chunk, a.effort)
+            return [res.get(i, "") for i in range(len(part))]
+        with ThreadPoolExecutor(a.jobs) as ex:
+            out = [x for r in ex.map(one, parts) for x in r]
+        with open(a.out, "w", encoding="utf-8") as f:
+            f.write("\n".join(out) + "\n")
+        print(f"{a.out}: {len(out)} lines ({a.model})")
+        return
+    name = os.path.basename(os.path.normpath(a.set))
     scored = [r for r in read_rows(a.set) if r["scored"] == "1"]
     last = {}
     for r in scored:
