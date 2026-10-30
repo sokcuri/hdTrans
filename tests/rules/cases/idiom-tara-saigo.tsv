@@ -16,3 +16,4 @@ dict:novel-idioms:12	最後に笑うのは私だ。	마지막으로 웃는 것�
 dict:novel-idioms:12	ここに来たら最後に会おう。	여기에 오면 마지막으로 만나자.	keep	local
 dict:novel-idioms:12	伊達ちゃん、もう最後	다테짱, 이제 마지막	keep	local
 dict:novel-idioms:12	これが最後だ。	이것이 마지막이다.	keep	local
+dict:novel-idioms:12	勝ったら最後は泣いた	!rule:dict:novel-idioms:12	keep	local
