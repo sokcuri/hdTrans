@@ -1,0 +1,16 @@
+#! layer=words
+# ちゃう, ちまう의 과거 뒤 のかよ, のかしら, かな(-아 버린 거냐, -아 버렸을까), 명령 ちゃいな(-아 버려)와 ては를 줄인 ちゃいない(-지는 않는다)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ったのかよ	6버린 거냐	S5A0			GN							novel-chatta-noka:3
+ったかな	6버렸을까	S5A0			GN							novel-chatta-noka:4
+いな	6버려	S5A0			GN							novel-chatta-noka:5
+いなさい	6버려라	S5A0			GN							novel-chatta-noka:6
+いなよ	6버려	S5A0			GN							novel-chatta-noka:7
+いない	1지는 않는다	S5A0			GN							novel-chatta-noka:8
+いません	1지는 않습니다	S5A0			GN							novel-chatta-noka:9
+いなかった	1지는 않았다	S5A0			GN							novel-chatta-noka:10
+いませんが	1지는 않습니다만	S5A0			GN							novel-chatta-noka:11
+いないから	1지는 않으니까	S5A0			GN							novel-chatta-noka:12
+ったのかしら	6버린 걸까	S5A0			GN							novel-chatta-noka:13
+ったのかい	6버린 거야	S5A0			GN							novel-chatta-noka:14
+ったのかと	6버린 건가 하고	S5A0			GN							novel-chatta-noka:15
