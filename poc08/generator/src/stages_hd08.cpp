@@ -43,8 +43,17 @@ hd8gen::Node FromIr(const Doc& doc, const KNode& k) {
         hd8gen::SetFeature(n, "tense", N(F::tense, k.tense));
         hd8gen::SetFeature(n, "aspect", N(F::kaspect, k.aspect));
         hd8gen::SetFeature(n, "mood", N(F::mood, k.mood));
-        hd8gen::SetFeature(n, "ctype", N(F::ctype, k.ctype));
-        if (k.ctype == ctype::conn) n.rel = N(F::rel, k.rel);
+        // ctype adn:<rel>, nom:<rel>, quote:<rel> carry their relation in the name (IR.md §6).
+        std::string ct = N(F::ctype, k.ctype);
+        if (const size_t colon = ct.find(':'); colon != std::string::npos) {
+            n.rel = ct.substr(colon + 1);
+            ct.resize(colon);
+        }
+        hd8gen::SetFeature(n, "ctype", ct);
+        if (k.ctype == ctype::conn && k.rel) n.rel = N(F::rel, k.rel);
+        if (k.vpos) n.vpos = N(F::vpos, k.vpos);
+        if (k.modal) n.modal = N(F::modal, k.modal);
+        if (k.eomi) n.eomi = std::string(doc.S(k.eomi));
         hd8gen::SetFeature(n, "neg", N(F::kneg, k.neg));
         n.aux = k.aux;
         n.passive = k.passive;
@@ -53,6 +62,7 @@ hd8gen::Node FromIr(const Doc& doc, const KNode& k) {
         n.spont = k.spont;
     }
     n.dep = k.dep;
+    n.glue = k.glue;
     n.sem = k.sem;
     if (k.kind == KK::P) {
         const std::string kase = N(F::kase, k.kase);
@@ -82,10 +92,13 @@ KNode ToIr(Doc& doc, const hd8gen::Node& n) {
         if (Parse(F::kaspect, hd8gen::GetFeature(n, "aspect"), v)) k.aspect = static_cast<uint8_t>(v);
         if (Parse(F::mood, hd8gen::GetFeature(n, "mood"), v)) k.mood = static_cast<uint8_t>(v);
         std::string ct = hd8gen::GetFeature(n, "ctype");
-        if ((ct == "adn" || ct == "nom") && !n.rel.empty()) ct += ":" + n.rel;
+        if ((ct == "adn" || ct == "nom" || ct == "quote") && !n.rel.empty()) ct += ":" + n.rel;
         if (Parse(F::ctype, ct, v)) k.ctype = static_cast<uint8_t>(v);
         if (n.ctype == hd8gen::CType::conn && Parse(F::rel, n.rel, v)) k.rel = static_cast<uint8_t>(v);
         if (Parse(F::kneg, hd8gen::GetFeature(n, "neg"), v)) k.neg = static_cast<uint8_t>(v);
+        if (!n.vpos.empty() && Parse(F::vpos, n.vpos, v)) k.vpos = static_cast<uint8_t>(v);
+        if (!n.modal.empty() && Parse(F::modal, n.modal, v)) k.modal = static_cast<uint8_t>(v);
+        if (!n.eomi.empty()) k.eomi = doc.I(n.eomi);
         k.aux = n.aux;
         k.passive = n.passive;
         k.causative = n.causative;
@@ -93,6 +106,7 @@ KNode ToIr(Doc& doc, const hd8gen::Node& n) {
         k.spont = n.spont;
     }
     k.dep = n.dep;
+    k.glue = n.glue;
     k.sem = n.sem;
     if (n.kind == hd8gen::Kind::P && Parse(F::kase, n.kase == "lex" ? "LEX" : n.kase, v)) k.kase = static_cast<uint8_t>(v);
     if (n.kind == hd8gen::Kind::Punct) {

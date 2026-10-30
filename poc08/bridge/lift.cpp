@@ -53,8 +53,8 @@ bool Apply(const Json& object, Doc& doc, KNode& node) {
 
 }  // namespace
 
-bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
-    const std::string path = dataRoot + "/bridge/data/lift.tsv";
+namespace {
+bool LoadLiftFile(const std::string& path, LiftTable& out, std::string& err) {
     std::string text;
     if (!ReadWholeFile(path, text)) return true;
     size_t start = 0;
@@ -82,6 +82,16 @@ bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
         Json node;
         std::string jsonErr;
         if (!ParseJson(col[3], node, jsonErr)) return fail(jsonErr);
+        // Every node must read as IR (names, ranges), so that a bad row fails here, not on some line.
+        {
+            Doc scratch;
+            KNode k;
+            const auto check = [&](const Json& o) { return o.type == Json::Obj && ReadNode(o, scratch, k, jsonErr); };
+            bool ok = node.type == Json::Arr ? !node.a.empty() : check(node);
+            if (node.type == Json::Arr)
+                for (const Json& o : node.a) ok = ok && check(o);
+            if (!ok) return fail("not an IR node: " + jsonErr);
+        }
         const std::string key(col[1]), key2(col[2]);
         if (col[0] == "family") out.families[key] = {key2 == "-" ? std::string() : key2, node};
         else if (col[0] == "ending") out.endings[key + '\t' + key2] = node;
@@ -91,13 +101,27 @@ bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
     }
     return true;
 }
+}  // namespace
+
+bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
+    for (const char* name : {"lift.tsv", "lift-endings.tsv"})
+        if (!LoadLiftFile(dataRoot + "/bridge/data/" + name, out, err)) return false;
+    return true;
+}
 
 bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, Line& line, uint32_t& from,
           std::vector<LiftMiss>& misses) {
     bool whole = true;
-    size_t composedAt = 0;  // where the search for the next item's stem in the composed text goes on
+    size_t composedAt = 0;
+    // The last item that conjugates: a final ending belongs there only (anywhere else it is a reading the
+    // lift cannot place).
+    size_t lastPredicate = s.items.size();
+    for (size_t k = 0; k < s.items.size(); k++)
+        if (s.items[k].directIndex >= 0 && !s.items[k].ending.text.empty()) lastPredicate = k;
+    size_t itemIndex = 0;  // where the search for the next item's stem in the composed text goes on
     const hdTrans::word::Item* chainItem = s.chain ? s.chain->head : nullptr;
     for (const hdTrans::output::ResolvedItem& it : s.items) {
+        const bool lastConjugating = itemIndex++ == lastPredicate;
         const hdTrans::word::Item* ci = chainItem;
         if (chainItem) chainItem = chainItem->next;
 
@@ -195,7 +219,20 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
                 misses.push_back({"ending", it.endingSurface + '\t' + it.ending.text});
                 lifted = false;
             } else if (e->second.type == Json::Arr) {
-                for (size_t k = 0; k < e->second.a.size(); k++) {
+                // The first object sets the word's own node (a verb or adjective); a noun takes the ending as
+                // the nodes that follow (a copula and what it carries) and no features of its own.
+                if (node.kind != KK::V && !e->second.a.empty() && !e->second.a[0].o.empty()) {
+                    misses.push_back({"ending-host", it.endingSurface + '\t' + it.ending.text});
+                    lifted = false;
+                }
+                bool final = false;
+                for (const Json& o : e->second.a)
+                    if (const Json* ct = o.Get("ctype"); ct && ct->type == Json::Str && ct->s == "final") final = true;
+                if (lifted && final && !lastConjugating) {
+                    misses.push_back({"ending-final-mid", it.endingSurface + '\t' + it.ending.text});
+                    lifted = false;
+                }
+                for (size_t k = 0; lifted && k < e->second.a.size(); k++) {
                     if (k == 0) {
                         Apply(e->second.a[0], doc, node);
                         continue;

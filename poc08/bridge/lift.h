@@ -1,10 +1,11 @@
 #pragma once
 // The lift: a sentence 0.7.x resolved (its items, each a selected Korean target with a marker
 // family and a selected ending) as Korean morpheme IR nodes. The mapping is data,
-// <data>/bridge/data/lift.tsv, one row per key:
+// <data>/bridge/data/lift.tsv and the generated lift-endings.tsv, one row per key:
 //   family   <marker>  <suffix>  <node>   a target "stem<marker>" is a node with lemma stem+suffix
-//   ending   <ja|*>    <ko>      <nodes>  the selected ending (Japanese key, Korean target) sets
-//                                         fields of the word's node; more objects add nodes after it
+//   ending   <ja|*>    <ko>      <nodes>  the selected ending (Japanese key, Korean target): an array whose
+//                                         first object sets fields of the word's verb node ({} for a
+//                                         noun) and whose other objects are nodes added after it
 //   particle <ko>      -         <node>   a particle target
 //   word     <digit>   -         <node>   a target without marker, by the class digit of its code
 // <node> is a KNode JSON object (IR.md §7), <nodes> one object or an array of them. An item whose

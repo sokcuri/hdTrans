@@ -479,7 +479,12 @@ template <class V> void Fields(V& v, KNode& x) {
     v.Enum("rel", x.rel, F::rel);
     v.Enum("neg", x.neg, F::kneg);
     bool aux = x.aux, dep = x.dep, passive = x.passive, causative = x.causative, potential = x.potential,
-         spont = x.spont;
+         spont = x.spont, glue = x.glue;
+    v.Bool("glue", glue);
+    x.glue = glue;
+    v.Enum("vpos", x.vpos, F::vpos);
+    v.Enum("modal", x.modal, F::modal);
+    v.Interned("eomi", x.eomi);
     v.Bool("aux", aux);
     v.Bool("dep", dep);
     v.Bool("passive", passive);
