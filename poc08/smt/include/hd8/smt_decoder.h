@@ -3,6 +3,7 @@
 // Every score is a fixed-point integer (features: log10 × 10^4; weights × 10^3), summed in int64; ties
 // break on hypothesis creation order, which is deterministic, so output is bit-identical across builds.
 #include <cstdint>
+#include <functional>
 #include <memory>
 #include <string>
 #include <vector>
@@ -25,6 +26,8 @@ struct DecodeOptions {
   int maxOpts = 20;     // options per source span
   std::string level = "haera";       // speech level of final endings (from the caller's discourse state)
   std::string quoteLevel = "";       // level inside quotation brackets; "" = level
+  // Rule-engine translation of one unknown noun-like token (names, terms): "" = keep the passthrough.
+  std::function<std::string(const std::string&)> oov;
 };
 
 struct DecoderImpl;

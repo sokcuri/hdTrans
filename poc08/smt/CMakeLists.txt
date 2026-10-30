@@ -11,7 +11,8 @@ else()
 endif()
 
 add_executable(hd8smt tools/hd8smt.cpp)
-target_link_libraries(hd8smt PRIVATE hd08_smt)
+target_link_libraries(hd8smt PRIVATE hd08_smt hdtrans)
+target_include_directories(hd8smt PRIVATE "${CMAKE_SOURCE_DIR}/include")
 target_compile_definitions(hd8smt PRIVATE "HD8SMT_GEN_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}/../generator/data/ko\""
     "HD8SMT_REG_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}/../generator/data/register\"")
 if(EMSCRIPTEN)

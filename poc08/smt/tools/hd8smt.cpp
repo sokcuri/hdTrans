@@ -13,6 +13,10 @@
 #include "hd8/smt_decoder.h"
 #include "hd8/smt_ko.h"
 #include "hd8gen/register.h"
+#ifndef HD8SMT_NO_RULE
+#include "core/engine.h"
+#endif
+#include <unordered_map>
 
 #ifndef HD8SMT_GEN_DATA
 #define HD8SMT_GEN_DATA "data/ko"
@@ -37,7 +41,8 @@ int Usage() {
                "usage: hd8smt ko-query|ko-join [--gen DIR] [--level L]\n"
                "       hd8smt decode --model DIR [--analyzer CORE.bin] [--gen DIR] [--weights W.tsv] [--level L]\n"
                "              [--beam N] [--why] [--nbest N] [--glossary G.tsv] [--tokens] [--no-lattice]\n"
-               "              [--level-tab] [--lat-tau T] [--max-opts N] [--speech auto|strict]\n");
+               "              [--level-tab] [--lat-tau T] [--max-opts N] [--speech auto|strict]\n"
+               "              [--each] [--rule-dicts DIR]\n");
   return 2;
 }
 
@@ -50,6 +55,7 @@ int main(int argc, char** argv) {
   hd8::smt::DecodeOptions dopt;
   std::string model, analyzer, weights, glossary;
   bool levelTab = false;
+  std::string ruleDicts;  // 0.7.x dictionaries: unknown nouns and names go through the rule engine
   bool each = false;   // with --speech: every line is its own scene
   std::string speech;  // "" (use --level), auto, strict: decide levels with the W5 register model
   for (int i = 2; i < argc; ++i) {
@@ -70,6 +76,7 @@ int main(int argc, char** argv) {
     else if (a == "--level-tab") levelTab = true;
     else if (a == "--speech") speech = val();
     else if (a == "--each") each = true;
+    else if (a == "--rule-dicts") ruleDicts = val();
     else if (a == "--lat-tau") dopt.latTau = static_cast<float>(std::atof(val().c_str()));
     else if (a == "--max-opts") dopt.maxOpts = std::atoi(val().c_str());
     else return Usage();
@@ -108,6 +115,33 @@ int main(int argc, char** argv) {
       return 1;
     }
     dopt.level = level;
+#ifndef HD8SMT_NO_RULE
+    std::unique_ptr<hdTrans::Engine> eng;
+    std::unique_ptr<hdTrans::Session> ses;
+    std::unordered_map<std::string, std::string> oovCache;
+    if (!ruleDicts.empty()) {
+      eng = std::make_unique<hdTrans::Engine>(false, hdTrans::CacheWrite::Off);
+      if (!eng->Open({ruleDicts})) {
+        std::fprintf(stderr, "hd8smt: cannot open rule dictionaries %s\n", ruleDicts.c_str());
+        return 1;
+      }
+      ses = std::make_unique<hdTrans::Session>(*eng);
+      dopt.oov = [&](const std::string& w) -> std::string {
+        auto it = oovCache.find(w);
+        if (it != oovCache.end()) return it->second;
+        std::string kt = ses->Translate(w);
+        ses->Reset();
+        while (!kt.empty() && (kt.back() == '\n' || kt.back() == ' ')) kt.pop_back();
+        oovCache.emplace(w, kt);
+        return kt;
+      };
+    }
+#else
+    if (!ruleDicts.empty()) {
+      std::fprintf(stderr, "hd8smt: built without the rule engine\n");
+      return 1;
+    }
+#endif
     if (!speech.empty()) {
       // document mode: the whole input is one document, blank lines cut scenes; R decides each line's level
       std::shared_ptr<const hd8gen::RegisterTables> reg = hd8gen::LoadRegisterTables(HD8SMT_REG_DATA, err);

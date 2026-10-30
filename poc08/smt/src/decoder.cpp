@@ -106,7 +106,13 @@ struct Edge {
   std::string surf;
   int32_t lat;  // -margin × 10^4
   bool best;
+  ana::Pos pos;
 };
+
+bool NounLike(ana::Pos p) {
+  return p == ana::Pos::n || p == ana::Pos::pn || p == ana::Pos::unk || p == ana::Pos::na || p == ana::Pos::num ||
+         p == ana::Pos::suf || p == ana::Pos::pref;
+}
 
 struct Option {
   size_t start, end;  // node indices
@@ -114,6 +120,7 @@ struct Option {
   int32_t lat;
   bool gloss, oov;
   std::string src;
+  bool rule = false;
 };
 
 struct Hyp {
@@ -189,26 +196,26 @@ std::string Decoder::Translate(const std::string& line, const KoText& ko, const 
   m.analyzer.Analyze(line, ao, &an, ws.get());
   std::vector<Edge> edges;
   size_t prevEnd = Canon(line, 0);
-  auto addEdge = [&](size_t b, size_t e, const std::string& surf, int32_t lat, bool best) {
+  auto addEdge = [&](size_t b, size_t e, const std::string& surf, int32_t lat, bool best, ana::Pos pos) {
     if (surf.empty() || AllSpace(surf)) return;
     b = Canon(line, b);
     e = Canon(line, e);
     if (b >= e) return;
     for (const Edge& x : edges)
       if (x.b == b && x.e == e && x.surf == surf) return;
-    edges.push_back({b, e, SpaceToIdeo(surf), lat, best});
+    edges.push_back({b, e, SpaceToIdeo(surf), lat, best, pos});
   };
   for (const auto& t : an.toks) {
     const size_t b = Canon(line, t.src.begin);
-    if (b > prevEnd) addEdge(prevEnd, b, line.substr(prevEnd, b - prevEnd), 0, true);  // text the analyzer skipped
-    addEdge(t.src.begin, t.src.end, t.surf, 0, true);
+    if (b > prevEnd) addEdge(prevEnd, b, line.substr(prevEnd, b - prevEnd), 0, true, ana::Pos::unk);  // text the analyzer skipped
+    addEdge(t.src.begin, t.src.end, t.surf, 0, true, t.pos);
     if (Canon(line, t.src.end) > prevEnd) prevEnd = Canon(line, t.src.end);
   }
-  if (prevEnd < line.size()) addEdge(prevEnd, line.size(), line.substr(prevEnd), 0, true);
+  if (prevEnd < line.size()) addEdge(prevEnd, line.size(), line.substr(prevEnd), 0, true, ana::Pos::unk);
   if (opt.lattice)
     for (const auto& t : an.alts) {
       const float mg = std::max(0.0f, t.margin);
-      addEdge(t.src.begin, t.src.end, t.surf, -static_cast<int32_t>(std::lround(mg * 1000.0f)) * 10, false);
+      addEdge(t.src.begin, t.src.end, t.surf, -static_cast<int32_t>(std::lround(mg * 1000.0f)) * 10, false, t.pos);
     }
   std::vector<size_t> pos;
   pos.push_back(Canon(line, 0));
@@ -294,11 +301,24 @@ std::string Decoder::Translate(const std::string& line, const KoText& ko, const 
     const size_t s = nodeOf(e.b), t = nodeOf(e.e);
     if (blocked(s, t) || m.pt.Find(e.surf)) continue;
     PhraseOpt p;
-    p.tgt = Escape(e.surf);
-    p.ids.push_back(m.lm.Id(p.tgt));
-    p.ntok = 1;
+    bool rule = false;
+    if (opt.oov && HasJapanese(e.surf) && NounLike(e.pos)) {
+      const std::string kw = opt.oov(e.surf);
+      if (!kw.empty() && !HasJapanese(kw)) {
+        for (const std::string& t2 : SplitTokens(kw)) {
+          p.tgt += (p.tgt.empty() ? "" : " ") + Escape(t2);
+          p.ids.push_back(m.lm.Id(Escape(t2)));
+        }
+        rule = !p.ids.empty();
+      }
+    }
+    if (!rule) {
+      p.tgt = Escape(e.surf);
+      p.ids.assign(1, m.lm.Id(p.tgt));
+    }
+    p.ntok = static_cast<uint16_t>(p.ids.size());
     owned.push_back(std::move(p));
-    opts.push_back({s, t, &owned.back(), e.lat, false, HasJapanese(e.surf), e.surf});
+    opts.push_back({s, t, &owned.back(), e.lat, false, !rule && HasJapanese(e.surf), e.surf, rule});
   }
   std::vector<std::vector<size_t>> optAt(nNodes);
   for (size_t i = 0; i < opts.size(); ++i) optAt[opts[i].start].push_back(i);
@@ -405,7 +425,7 @@ std::string Decoder::Translate(const std::string& line, const KoText& ko, const 
       const Option& o = opts[arena[x].opt];
       w << "\n#   " << o.src << " => " << o.p->tgt << "  [pef " << o.p->pef << " pfe " << o.p->pfe << " lef "
         << o.p->lef << " lfe " << o.p->lfe << " n " << o.p->count << " lat " << o.lat << "] "
-        << (o.gloss ? "user:glossary" : o.oov ? "passthrough:oov" : o.p->count == 0 ? "passthrough" : m.pt.Prov(o.p->prov));
+        << (o.gloss ? "user:glossary" : o.rule ? "rule:oov" : o.oov ? "passthrough:oov" : o.p->count == 0 ? "passthrough" : m.pt.Prov(o.p->prov));
     }
     for (const auto& n : notes) w << "\n# note " << n;
     res += w.str();
