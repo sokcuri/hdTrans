@@ -66,6 +66,7 @@ void AddRows(Lexicon& lex, std::string_view file, bool phrases, bool extra) {
                 row.final = row.final || opts.substr(0, sp) == "final";
                 row.cry = row.cry || opts.substr(0, sp) == "cry";
                 row.haeyo = row.haeyo || opts.substr(0, sp) == "haeyo";
+                row.acts = row.acts || opts.substr(0, sp) == "acts";
                 if (const std::string_view opt = opts.substr(0, sp); opt.starts_with("polite=")) {
                     row.polite = std::string(opt.substr(std::string_view("polite=").size()));
                 } else if (opt.starts_with("alone=")) {

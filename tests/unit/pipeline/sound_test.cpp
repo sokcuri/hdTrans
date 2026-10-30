@@ -1044,6 +1044,25 @@ HD_TEST(pipeline_sound_interjection_before_verb) {
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+// An acts row keeps its own reading before a する that describes a noun after it and writes its
+// lemma before other forms of する (ぷるぷるさせる 부들부들, ぷるぷるした身 탱글탱글).
+HD_TEST(pipeline_sound_acts_row) {
+    bool flagged = false;
+    for (const internal::SoundRow& r : internal::SoundRows(U'プ')) flagged = flagged || (r.key == U"プルプル" && r.acts && !r.root.empty());
+    HD_CHECK(flagged);
+    const auto& loaded = SoundDictionary();
+    HD_REQUIRE(loaded.errors.empty());
+    const auto& snap = loaded.snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &snap->TextPlain();
+    const Case cases[] = {
+        {"肩をぷるぷるさせていた", "肩を부들부들させていた"},
+        {"ぷるぷるした身", "탱글탱글した身"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
+}
+
 // An exclaim row (よかった 다행이다) as written is no sound before a question mark, after
 // an ellipsis or not: the question asks for the words themselves. Drawn out it stays.
 HD_TEST(pipeline_sound_exclaim_before_question) {

@@ -890,7 +890,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                     korean = EncodeText(ko);
                 }
             }
-            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, open, spaceAfter, s.phrase,
+            // An acts row describing a noun keeps its own reading before する (ぷるぷるした身).
+            const bool describes = s.acts && end + 2 < rs_.size() && In(rs_[end], U"しす") && In(rs_[end + 1], U"たる") &&
+                                   (IsKanjiRune(rs_[end + 2]) || IsKatakanaRune(rs_[end + 2]));
+            const std::string_view root = describes ? std::string_view() : std::string_view(s.root);
+            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), root, s.intj, s.lead, open, spaceAfter, s.phrase,
                               end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone};
             chosen = &s;
         }

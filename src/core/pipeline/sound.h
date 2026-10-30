@@ -331,6 +331,9 @@ struct SoundRow {
     // The lemma of a KR/lemma row without a final 하다, written before する; empty for
     // rows without a lemma.
     std::string root;
+    // The lemma only before a する that describes no noun after it (fourth column acts:
+    // ぷるぷるさせる 부들부들, but ぷるぷるした身 탱글탱글한).
+    bool acts = false;
     bool intj = false;    // an intj or lead row; the other rows are ono rows
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause
