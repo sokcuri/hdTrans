@@ -15,3 +15,7 @@ dict:novel-tsuretekorare:11	誰が首絞められたの？	has:목을 졸렸어?
 dict:jisjk:121713	首をひも状のもので絞められたようです	has:졸린 것 같습니다	fix	defaults
 dict:jisjk:121713	それに 首には強く絞められた痕が残ってた	has:강하게 졸린 자국	fix	defaults
 dict:jisjk:121713	首を絞める	목을 조른다	keep	defaults
+dict:novel-tsuretekorare:20	妹を連れてこられた	여동생을 데려오셨다	fix	local
+dict:novel-tsuretekorare:21	先生が生徒を連れて来られた。	선생님이 학생을 데려오셨다.	fix	local
+dict:novel-tsuretekorare:20	娘を一緒に連れてこられたのですか	딸을 함께 데려오셨습니까	fix	local
+dict:novel-tsuretekorare:20	彼は戦場に連れてこられた。	!rule:dict:novel-tsuretekorare:20	keep	local

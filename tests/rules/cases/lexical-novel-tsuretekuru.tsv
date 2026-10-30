@@ -17,12 +17,12 @@ dict:novel-verbs:12	犬を連れて散歩する。	개를 데려 산책한다.	k
 dict:novel-verbs:12	時がたつにつれて	때가 지날수록	keep	defaults
 dict:novel-verbs:12	年をとるにつれて変わる。	나이를 먹을수록 바뀐다.	keep	defaults
 dict:novel-verbs:12	連れていかれた。	끌려갔다.	keep	defaults
-dict:novel-verbs:16	小さいころ親父に連れてこられて以来で	어린 무렵 아버지에게 끌려온 이래로	fix	defaults
-dict:novel-verbs:16	調査兵団に連れてこられたって聞いたわ	조사병단에게 끌려왔다고 들었어	fix	defaults
-dict:novel-verbs:16	建物の前に連れてこられた時。	건물 앞에 끌려왔을 때.	fix	defaults
-dict:novel-verbs:16	馬車に乗せられて戦場に連れてこられた。	마차에 태워져 전장에 끌려왔다.	fix	defaults
-dict:novel-verbs:17	下界から連れて来られた異端の生物か	하계에서 끌려온 이단의 생물인가	fix	defaults
-dict:novel-verbs:16	なんでこんなとこに連れてこられたのか…	왜 이런 곳에 끌려온 건가…	fix	defaults
+dict:novel-tsuretekorare:3	小さいころ親父に連れてこられて以来で	어린 무렵 아버지에게 끌려온 이래로	fix	defaults
+dict:novel-tsuretekorare:3	調査兵団に連れてこられたって聞いたわ	조사병단에게 끌려왔다고 들었어	fix	defaults
+dict:novel-tsuretekorare:3	建物の前に連れてこられた時。	건물 앞에 끌려왔을 때.	fix	defaults
+dict:novel-tsuretekorare:3	馬車に乗せられて戦場に連れてこられた。	마차에 태워져 전장에 끌려왔다.	fix	defaults
+dict:novel-tsuretekorare:6	下界から連れて来られた異端の生物か	하계에서 끌려온 이단의 생물인가	fix	defaults
+dict:novel-tsuretekorare:3	なんでこんなとこに連れてこられたのか…	왜 이런 곳에 끌려온 건가…	fix	defaults
 dict:novel-verbs:19	足が悪いから連れてこれなくて	다리가 안 좋으니까 데려올 수 없어서	fix	defaults
 dict:novel-verbs:21	一人じゃここまで連れてこれません	한 사람은 여기까지 데려올 수 없습니다	fix	defaults
 dict:novel-verbs:24	連れて来られませんでした。	데려올 수 없었습니다.	fix	defaults
