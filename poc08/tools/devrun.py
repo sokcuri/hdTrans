@@ -11,7 +11,6 @@ import argparse
 import collections
 import json
 import os
-import resource
 import subprocess
 import sys
 import tempfile
@@ -29,10 +28,14 @@ def run(binary, path, mode, threads, outdir):
             args[1:1] = ["--threads", str(threads)]
     env = dict(os.environ, HOME=tempfile.mkdtemp(), HDTRANS_CACHE_DIR="off")
     start = time.monotonic()
-    proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env)
-    out, err = proc.communicate()
-    wall = time.monotonic() - start
-    usage = resource.getrusage(resource.RUSAGE_CHILDREN)
+    with tempfile.TemporaryFile() as fo, tempfile.TemporaryFile() as fe:
+        proc = subprocess.Popen(args, stdout=fo, stderr=fe, env=env)
+        _, status, usage = os.wait4(proc.pid, 0)  # this child's own peak RSS
+        proc.returncode = os.waitstatus_to_exitcode(status)
+        wall = time.monotonic() - start
+        fo.seek(0)
+        fe.seek(0)
+        out, err = fo.read(), fe.read()
     if proc.returncode != 0:
         sys.exit(f"{binary} failed on {path}: {err.decode(errors='replace')}")
     data = json.loads(out)

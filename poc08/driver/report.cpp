@@ -9,17 +9,24 @@ namespace hd08 {
 
 namespace {
 
+// An evidence kind as an index of the per-kind tables; an out-of-range kind counts as fallback.
+unsigned EvIndex(Ev kind) {
+    const auto k = static_cast<unsigned>(kind);
+    return k < Count(F::ev) ? k : static_cast<unsigned>(Ev::Fallback);
+}
+
 bool SameFlag(const Flag& a, const Flag& b) {
     return a.kind == b.kind && a.inv == b.inv && a.src.begin == b.src.begin && a.src.end == b.src.end;
 }
 
-// The decision behind a kir2 node: its own (a W rewrite), else its origin's in kir.
-const Decision* NodeDecision(const Line& line, const KNode& n, const Decision** rewrite) {
-    *rewrite = nullptr;
+// The decision behind a kir2 node: its origin's in kir, else its own. *other is the node's own
+// decision when it differs from the one returned (a W rewrite or a later stage's).
+const Decision* NodeDecision(const Line& line, const KNode& n, const Decision** other) {
+    *other = nullptr;
     const KNode* origin = FindNode(line.kir, n.origin);
     const Decision* own = line.DecisionOf(n.decision);
     const Decision* from = origin ? line.DecisionOf(origin->decision) : nullptr;
-    if (own && own->stage == 'W') *rewrite = own;
+    if (from && own && own != from) *other = own;
     return from ? from : own;
 }
 
@@ -74,13 +81,13 @@ LineReport Report(const Engine& e, const Doc& doc, const Line& line) {
             r.flags.push_back(f);
 
     for (const Decision& d : line.decisions) {
-        r.evidence[static_cast<unsigned>(d.kind)]++;
+        r.evidence[EvIndex(d.kind)]++;
         if (d.stage == 'T' && d.st == st::u) r.stU++;
         if (d.nAlt > 1) {
             r.multi++;
             r.multiContrib += !d.contrib.empty();
         }
-        const float risk = e.risk[static_cast<unsigned>(d.kind)];
+        const float risk = e.risk[EvIndex(d.kind)];
         if (risk > r.risk) {
             r.risk = risk;
             r.top = &d;
@@ -169,11 +176,11 @@ std::string WhyRecords(const Engine& e, const Doc& doc, const Line& line, const 
                 AppendJsonString(o, Name(F::st, d->st));
             }
             Key(o, "risk");
-            AppendJsonNumber(o, e.risk[static_cast<unsigned>(d->kind)]);
+            AppendJsonNumber(o, e.risk[EvIndex(d->kind)]);
         }
         if (rw) {
             used[static_cast<size_t>(rw - line.decisions.data()) + 1] = true;
-            Key(o, "rw");
+            Key(o, rw->stage == 'W' ? "rw" : "also");
             AppendJsonString(o, doc.S(rw->rule));
         }
         if (n) {
@@ -237,7 +244,7 @@ std::string WhyRecords(const Engine& e, const Doc& doc, const Line& line, const 
             o += ']';
         }
         Key(o, "risk");
-        AppendJsonNumber(o, e.risk[static_cast<unsigned>(d.kind)]);
+        AppendJsonNumber(o, e.risk[EvIndex(d.kind)]);
         o += "}\n";
         all += o;
     }
@@ -294,7 +301,7 @@ std::string LineSummaryJson(const Doc& doc, const Line& line, const LineReport& 
     Key(o, "evidence");
     o += '{';
     bool first = true;
-    for (unsigned k = 0; k < 9; k++) {
+    for (unsigned k = 0; k < Count(F::ev); k++) {
         if (!r.evidence[k]) continue;
         if (!first) o += ',';
         first = false;

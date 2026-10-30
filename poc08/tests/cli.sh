@@ -13,7 +13,10 @@ check "unknown flag exits 2" '"$cli" --bogus </dev/null 2>/dev/null; test $? -eq
 check "bad speech exits 2" '"$cli" --speech loud </dev/null 2>/dev/null; test $? -eq 2'
 printf 'あ\nい\n' > "$tmp/in.txt"
 check "each writes one line per line" 'test "$("$cli" --each --in "$tmp/in.txt" | wc -l | tr -d " ")" = 2'
-check "document mode keeps the line count" 'test "$("$cli" --in "$tmp/in.txt" | wc -l | tr -d " ")" = 1'
+check "document mode keeps the line count" 'test "$("$cli" --in "$tmp/in.txt" | wc -l | tr -d " ")" = 2'
+printf 'あ\nい' > "$tmp/open.txt"
+check "document mode without a final newline adds none" 'test "$("$cli" --in "$tmp/open.txt" | wc -l | tr -d " ")" = 1'
+check "toks with each keeps norm" '"$cli" --each --stages "$tmp" --in "$tmp/in.txt" >/dev/null && test "$("$cli" --each --toks "$tmp/ir.jsonl")" = "$("$cli" --each --in "$tmp/in.txt")"'
 check "threads give the same output" 'test "$("$cli" --each --threads 2 --in "$tmp/in.txt")" = "$("$cli" --each --in "$tmp/in.txt")"'
 check "json is one object" '"$cli" --json --in "$tmp/in.txt" | head -1 | grep -q "^{\"text\":"'
 check "why writes a record per morpheme" '"$cli" --why --in "$tmp/in.txt" 2>&1 >/dev/null | grep -q "\"ko\":"'

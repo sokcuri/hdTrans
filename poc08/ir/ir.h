@@ -147,6 +147,9 @@ struct Strings {
     Strings();
     Strings(const Strings& other);
     Strings& operator=(const Strings& other);
+    // Moving a deque keeps its elements in place, so the index keys stay valid.
+    Strings(Strings&&) noexcept = default;
+    Strings& operator=(Strings&&) noexcept = default;
 
 private:
     std::deque<std::string> all;  // stable addresses for the index keys
@@ -206,7 +209,8 @@ struct Speaker {
     uint8_t persona = 0;
 };
 struct Scene { uint32_t firstLine = 0, lastLine = 0; uint32_t decision = 0; };  // line indexes in Doc.lines
-// A name span S hands back to A for one line (the single feedback loop).
+// A name span S hands back to A for one line (the single feedback loop). line is the 0-based index
+// in Doc.lines, context lines included (not Line.id).
 struct ForcedSpan { uint32_t line = 0; Span src; uint32_t entity = 0; };
 
 // §5 structure
@@ -309,6 +313,15 @@ struct Doc {
 struct PathRef { std::vector<Token>& toks; std::vector<Bunsetsu>& buns; std::vector<Clause>& clauses; };
 inline PathRef PathOf(Line& line, int path) {
     if (path == 0) return {line.toks, line.buns, line.clauses};
+    return {line.alt.toks, line.alt.buns, line.alt.clauses};
+}
+struct ConstPathRef {
+    const std::vector<Token>& toks;
+    const std::vector<Bunsetsu>& buns;
+    const std::vector<Clause>& clauses;
+};
+inline ConstPathRef PathOf(const Line& line, int path) {
+    if (path == 0 || line.alt.toks.empty()) return {line.toks, line.buns, line.clauses};
     return {line.alt.toks, line.alt.buns, line.alt.clauses};
 }
 

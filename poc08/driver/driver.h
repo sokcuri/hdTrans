@@ -11,6 +11,8 @@
 
 namespace hd08 {
 
+static_assert(static_cast<unsigned>(Ev::Example) + 1 == 9, "per-Ev tables have 9 entries");
+
 struct Engine {
     Config cfg;
     AnalyzerData* analyzer = nullptr;

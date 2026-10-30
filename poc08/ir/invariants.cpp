@@ -1,5 +1,6 @@
 #include "invariants.h"
 
+#include "file.h"
 #include "utf8.h"
 
 #include <algorithm>
@@ -22,7 +23,7 @@ char Alnum(uint32_t cp) {
 
 struct Item { std::string text; Span at; };
 
-// Maximal runs of Latin letters and digits, width-folded.
+// Maximal runs of Latin letters or of digits, width-folded.
 std::vector<Item> Carried(std::string_view s) {
     std::vector<Item> items;
     size_t i = 0;
@@ -30,7 +31,9 @@ std::vector<Item> Carried(std::string_view s) {
         const size_t at = i;
         const char c = Alnum(Next(s, i));
         if (!c) continue;
-        if (!items.empty() && items.back().at.end == at) {
+        // Letters and digits are separate items: G may space 'HP100' as 'HP 100'.
+        const auto digit = [](char x) { return x >= '0' && x <= '9'; };
+        if (!items.empty() && items.back().at.end == at && digit(items.back().text.back()) == digit(c)) {
             items.back().text += c;
             items.back().at.end = static_cast<uint32_t>(i);
         } else {
@@ -62,7 +65,7 @@ bool HasFact(const Doc& doc, const Decision& d, std::string_view prefix) {
     return false;
 }
 
-Span ClauseSpan(const Line& line, const Clause& c) {
+Span ClauseSpan(const ConstPathRef& line, const Clause& c) {
     Span s{UINT32_MAX, 0};
     for (uint32_t b = c.firstBun; b <= c.lastBun && b < line.buns.size(); b++) {
         const Bunsetsu& bun = line.buns[b];
@@ -107,13 +110,8 @@ void Add(std::vector<Flag>& out, uint8_t kind, uint8_t inv, Span src, uint32_t n
 
 bool LoadInvariantData(const std::string& dataRoot, InvariantData& out, std::string& err) {
     const std::string path = dataRoot + "/ir/data/invariants.tsv";
-    std::FILE* f = std::fopen(path.c_str(), "rb");
-    if (!f) return true;
     std::string text;
-    char buf[4096];
-    size_t n;
-    while ((n = std::fread(buf, 1, sizeof buf, f)) > 0) text.append(buf, n);
-    std::fclose(f);
+    if (!ReadWholeFile(path, text)) return true;
     size_t start = 0;
     int lineNo = 0;
     while (start < text.size()) {
@@ -141,15 +139,16 @@ bool LoadInvariantData(const std::string& dataRoot, InvariantData& out, std::str
 }
 
 void CheckInvariants(const Doc& doc, const Line& line, const InvariantData& data, std::vector<Flag>& out) {
+    const ConstPathRef path = PathOf(line, line.chosen.path);  // the analysis T used
     auto isLexNeg = [&](uint32_t lemma) {
         const std::string_view s = doc.S(lemma);
         return std::find(data.lexicalNegatives.begin(), data.lexicalNegatives.end(), s) != data.lexicalNegatives.end();
     };
 
     // I1–I4 per clause.
-    for (size_t ci = 0; ci < line.clauses.size(); ci++) {
-        const Clause& c = line.clauses[ci];
-        const Span span = ClauseSpan(line, c);
+    for (size_t ci = 0; ci < path.clauses.size(); ci++) {
+        const Clause& c = path.clauses[ci];
+        const Span span = ClauseSpan(path, c);
         int negs = 0, gramNegs = 0, verbs = 0, past = 0, q = 0, imp = 0, passive = 0, causative = 0;
         uint32_t firstV = 0;
         for (const KNode& n : line.kir2) {
@@ -241,22 +240,22 @@ void CheckInvariants(const Doc& doc, const Line& line, const InvariantData& data
             if (Overlaps(NodeSrc(line, n), s)) return true;
         return false;
     };
-    for (const Clause& c : line.clauses) {
+    for (const Clause& c : path.clauses) {
         for (uint16_t t : c.unfolded) {
-            if (t >= line.toks.size()) continue;
-            const Span s = line.toks[t].src;
+            if (t >= path.toks.size()) continue;
+            const Span s = path.toks[t].src;
             bool consumed = coveredBy(s, line.kir);
             for (const Decision& d : line.decisions)
                 if (d.stage == 'T' && Overlaps(d.src, s) && d.kind != Ev::UnmatchedForm) consumed = true;
             if (!consumed) Add(out, flag::unmatched_form, 8, s, 0);
         }
     }
-    std::vector<bool> folded(line.toks.size(), false);
-    for (const Clause& c : line.clauses)
+    std::vector<bool> folded(path.toks.size(), false);
+    for (const Clause& c : path.clauses)
         for (uint16_t t : c.consumed)
             if (t < folded.size()) folded[t] = true;
-    for (size_t t = 0; t < line.toks.size(); t++) {
-        const Token& tok = line.toks[t];
+    for (size_t t = 0; t < path.toks.size(); t++) {
+        const Token& tok = path.toks[t];
         if (folded[t] || !IsContent(tok.pos)) continue;
         if (!coveredBy(tok.src, line.kir2)) Add(out, flag::dropped, 8, tok.src, 0);
     }

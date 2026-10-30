@@ -81,12 +81,15 @@ struct Parser {
             case 'u': {
                 unsigned cp = 0;
                 if (!Hex4(cp)) return false;
-                if (cp >= 0xD800 && cp < 0xDC00 && i + 1 < t.size() && t[i] == '\\' && t[i + 1] == 'u') {
+                if (cp >= 0xD800 && cp < 0xDC00 && i + 5 < t.size() && t[i] == '\\' && t[i + 1] == 'u') {
+                    const size_t back = i;
                     i += 2;
                     unsigned lo = 0;
                     if (!Hex4(lo)) return false;
-                    cp = 0x10000 + ((cp - 0xD800) << 10) + (lo - 0xDC00);
+                    if (lo >= 0xDC00 && lo < 0xE000) cp = 0x10000 + ((cp - 0xD800) << 10) + (lo - 0xDC00);
+                    else i = back;  // a lone high surrogate; the next escape is read on its own
                 }
+                if (cp >= 0xD800 && cp < 0xE000) cp = 0xFFFD;  // lone surrogates
                 PutUtf8(s, cp);
                 break;
             }
@@ -207,9 +210,9 @@ void AppendJsonNumber(std::string& out, double value) {
         out += std::to_string(static_cast<long long>(value));
         return;
     }
-    // Floats in the IR are float; 6 significant digits keep the output short and stable.
+    // The IR's numbers are floats: 9 significant digits read back to the same float.
     char buf[32];
-    std::snprintf(buf, sizeof buf, "%.6g", value);
+    std::snprintf(buf, sizeof buf, "%.9g", value);
     out += buf;
 }
 
