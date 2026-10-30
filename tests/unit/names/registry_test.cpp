@@ -127,7 +127,13 @@ const dict::Snapshot* Dictionary() {
          "一存\t독단\tN110\t\t\tGN\t126\n"
          "十河\t소고\tN130\tQPN\tWa\tGN\t127\n"
          "六角\t육각\tN110\t\t\tGN\t128\n"
-         "六角\t롯카쿠\tN130\tQPN\tWa\tGN\t129\n"},
+         "六角\t롯카쿠\tN130\tQPN\tWa\tGN\t129\n"
+         "上\t우에\tN130\tQPN\tWa\tGN\t130\n"
+         "田\t다\tN130\tQPN\tWb\tGN\t131\n"
+         "上田\t우에다\tN130\tQPN\tWa\tGN\t132\n"
+         "京\t쿄\tN130\tQPN\tWb\tGN\t133\n"
+         "東\t아즈마\tN130\tQPN\tWa\tGN\t134\n"
+         "東京\t도쿄\tN130\tQCT\t\tGN\t135\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -511,6 +517,13 @@ HD_TEST(names_labels) {
     // A numeral is no surname before a name (二美咲).
     const std::vector<std::string> misaki = Scan(snap, Repeat("美咲さん、おはよう。", 3) + Repeat("二美咲が来た。", 3)).Names();
     HD_CHECK(std::find(misaki.begin(), misaki.end(), "二") == misaki.end());
+    // A surname the dictionaries know is one name, not a surname and an accepted given name
+    // (上田 우에다, not 우에 다), and a place is no full name (東京).
+    names::Registry known = Scan(snap, Repeat("田さん、おはよう。", 3) + Repeat("上田が来た。", 2) +
+                                           Repeat("京さん、またね。", 3) + Repeat("東京に行く。", 2));
+    HD_CHECK_EQ(known.Render("上田"), std::string("우에다"));
+    const std::vector<std::string> tokyo = known.Names();
+    HD_CHECK(std::find(tokyo.begin(), tokyo.end(), "東京") == tokyo.end());
 }
 
 HD_TEST(names_honorifics) {
