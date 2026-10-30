@@ -920,7 +920,7 @@ int main(int argc, char** argv) {
                 // a final ending inside the sentence (놀다니, 저희들…) keeps 0.7.x's level: no 요 mid-sentence
                 const bool inner = nodes[q].ctype == CType::final_ && q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct &&
                                    nodes[q + 1].punct == Punct::comma;
-                if (!mixed && !inner) continue;
+                if (!mixed && !inner && !d.keep) continue;
                 for (auto& g : reg)
                     if (g.node == nodes[q].id && nodes[q].decision) {
                         g.level = static_cast<Level>(nodes[q].decision);

@@ -28,6 +28,7 @@ struct RegDecision {
     std::string key;          // cue key that decided it, for --why
     bool byProfile = false;   // the speaker profile changed the level
     bool firstPerson = false; // the source names the speaker (私, 俺 …): the subject is not the addressee
+    bool keep = false;        // levels.tsv says keep: the level the input already has (0.7.x's own), haera otherwise
 };
 
 struct RegOptions {

@@ -22,6 +22,7 @@ struct LevelRow {
     std::string key;
     Level level = Level::hae;
     bool profile = false;
+    bool keep = false;  // keep the level the input already has (RegDecision.keep)
 };
 struct VoiceRow {
     std::string type;
@@ -55,7 +56,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     }
     TsvTable l;
     if (!ReadTsv(dir + "/levels.tsv", l, err)) return nullptr;
-    const int lk = l.Col("key"), ll = l.Col("level"), lp = l.Col("profile");
+    const int lk = l.Col("key"), ll = l.Col("level"), lp = l.Col("profile"), lkeep = l.Col("keep");
     if (lk < 0 || ll < 0 || lp < 0) {
         err = "levels.tsv: missing column";
         return nullptr;
@@ -79,6 +80,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     for (const auto& r : l.rows) {
         LevelRow row;
         row.key = r[lk];
+        row.keep = lkeep >= 0 && r[lkeep] == "yes";
         if (!ParseLevel(r[ll], row.level)) {
             err = "levels.tsv: bad level " + r[ll];
             return nullptr;
@@ -347,6 +349,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                     // a scene without quote lines whose lines read as speech (captions): every line is an utterance
                     auto row = t.levels.find(key);
                     d.level = row != t.levels.end() ? row->second.level : Level::hae;
+                    d.keep = row != t.levels.end() && row->second.keep;
                     d.key = "scene-speech-" + key;
                 } else if (key == "pend" || key == "keigo-pend" || key == "polite-any") {
                     d.level = key == "keigo-pend" ? Level::hapsyo : Level::haeyo;
@@ -367,6 +370,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             d.narration = key == "narr";
             auto row = t.levels.find(key);
             d.level = row != t.levels.end() ? row->second.level : Level::hae;
+            if (row != t.levels.end() && row->second.keep) d.keep = true;
             if (opt.profiles && row != t.levels.end() && row->second.profile && !lines[k].speaker.empty()) {
                 auto p = prof.find(lines[k].speaker);
                 if (p != prof.end() && p->second.pol + p->second.cas > 0) {

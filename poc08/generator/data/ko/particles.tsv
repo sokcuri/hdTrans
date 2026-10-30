@@ -23,7 +23,6 @@ pt:src#1	src	anim	에게서	친구에게서
 pt:src#0	src	-	에서	냉장고에서
 pt:loc#1	loc	-	에서	학교에서
 pt:instr#1	instr	-	(으)로	칼로, 연필로, 손으로, 길로
-pt:com#2	com	spoken	(이)랑	친구랑, 학생이랑
 pt:com#1	com	-	과/와	학생과, 친구와
 pt:quot#1	quot	-	(이)라고	친구라고, 학생이라고
 pt:voc#1	voc	-	아/야	철수야, 민준아
