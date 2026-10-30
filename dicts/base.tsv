@@ -95604,7 +95604,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一等兵	일등병	I110	UQfVHn		GN				jisjk:80303		
 一等国	일등국	I110	QNN		GN				jisjk:80302		
 一等星	일등성	I110	VSs		GN				jisjk:80304		
-一等親	일촌	I110			GN				jisjk:80305		
+一等親	1촌	I110			GN				jisjk:80305		
 一等鯛	얼게돔	N110	VAm		GN				jisjk:228538		
 一筋	외곬	N110	VHn		GN				jisjk:31445		
 一筋	한줄기	N110			GN				jisjk:31446		
@@ -95875,7 +95875,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一覧払為替手形	일람불 환어음	N110	VMo		BZ				jisjk:362009		
 一覧払約束手形	일람불 약속어음	N110			BZ				jisjk:350036		
 一覧表	일람표	I110	VSp		GN				jisjk:80308		
-一親等	일촌	N110	VHnULw		GN				jisjk:125877		
+一親等	1촌	N110	VHnULw		GN				jisjk:125877		
 一観客	한 관객	N110	VHn		GN				jisjk:162797		
 一観客	한 관객	N110	VHn		GN				jisjk:162798		
 一観音町	이치칸논쵸	I130	QCTVPl		GN				jisjk:272748		
@@ -99050,7 +99050,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三笹町	미사사쵸	N130	QCTVPl		GN				jisjk:330449		
 三筆	삼필	N110	VHn		GN				jisjk:233181		
 三等	삼등	N110			GN				jisjk:25554		
-三等親	삼등친	I110			GN				jisjk:72691		
+三等親	3촌	I110			GN				jisjk:72691		
 三等重役	삼등 중역	N110	VHn		GN				jisjk:233138	000000000000000000000000000000000000000000000000000000000000000044104a11df3e204055d744184007405e4352df3e2040553f33df4a38df44004e3131300056486e004d6f00436c00466400436c000000000000006400710071006800000000000000000000000000474e0000000000000000000000000e2c0c3c	
 三筋	샤미센	N110	VPeUSoQMU		GN				jisjk:252261		
 三筋	미스지	N130	QCTVPl		GN				jisjk:330509		
@@ -99282,7 +99282,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三要	삼요	N110			GN				jisjk:365558		
 三要	산요	N130	QPN		GN				jisjk:365559		
 三見	삼미	N130	QCTVPl		GN				jisjk:296866		
-三親等	삼촌간	N110	ULwVHn		GN				jisjk:185868		
+三親等	3촌	N110	ULwVHn		GN				jisjk:185868		
 三親電材	산신 전재	I130	QIDVGt		GN				jisjk:73099		
 三角	삼각	N110			GN				jisjk:25529		
 三角	미스미	N130	QCTVPl		GN				jisjk:333358		
@@ -114744,7 +114744,7 @@ ttt	ttt	K110			GN				jisjk:201744
 二窓	후타마도	N130	VPl		GN				jisjk:220853		
 二等兵	이등병	I110	UQfVHn		GN				jisjk:79800		
 二等分	이등분	I110			GN				jisjk:79801		
-二等親	2촌간	N110	ULw		GN				jisjk:248020		
+二等親	2촌	N110	ULw		GN				jisjk:248020		
 二等辺三角形	이등변 삼각형	I110			GN				jisjk:79799		
 二筋	두 줄기	N110			GN				jisjk:31125		
 二筋目	후타스지메	N130	QCTVPl		GN				jisjk:326567		
@@ -131737,7 +131737,7 @@ ttt	ttt	K110			GN				jisjk:201744
 六菱ゴム	무쓰비시고무	I110	VGt		GN				jisjk:68018		
 六衛府	육위부	N110	VBl		GN				jisjk:255650		
 六親	육친	N110			GN				jisjk:20908		
-六親等	육신등	N110			GN				jisjk:256668		
+六親等	6촌	N110			GN				jisjk:256668		
 六観音	육관음	I110			GN				jisjk:68012		
 六観音御地	로쿠칸논오이케	N130	VPl		GN				jisjk:223682		
 六観音御地	로쿠칸논오이케	N130	VPl		GN				jisjk:223683		
@@ -159198,7 +159198,7 @@ ttt	ttt	K110			GN				jisjk:201744
 四街亭	사가정	N130	QST		GN				jisjk:374329		
 四街道	요츠카이도	N130	QCT	Qq	GN				jisjk:71814		
 四街道市	요츠카이도우시	I130	QCTVPl	Qq	GN				jisjk:338002		
-四親等	사촌	N110	VHnVHnULw		GN				jisjk:187327		
+四親等	4촌	N110	VHnVHnULw		GN				jisjk:187327		
 四角	사각	N110			GN				jisjk:25021		
 四角	네모$KL@	H7N0			GN				jisjk:120910		
 四角きり	네모송곳	N110	VPe		GN				jisjk:204614		

@@ -1,0 +1,5 @@
+#! layer=words
+# 친족 호칭과 촌수
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+親等	촌	N110		Ct	GN	9100	||1 G-1== "NjNd"	수 뒤의 親等, 等親은 촌				novel-kinship:1
+等親	촌	N110		Ct	GN	9100	||1 G-1== "NjNd"	수 뒤의 親等, 等親은 촌				novel-kinship:2

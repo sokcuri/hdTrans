@@ -11508,7 +11508,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二等	이등	N110			GN						にとう	w:11500
 二等分線	이등분선	N110			GN						にとうぶんせん	w:11501
 二胡	얼후	N110			GN						にこ	w:11502
-二親等	이촌	N110			GN				llm			w:11503
+二親等	2촌	N110			GN				llm			w:11503
 二角形	이각형	N110			GN						にかくけい	w:11504
 二返事	흔쾌한 승낙	N110	UTs		GN				llm		ふたつへんじ	w:11505
 二通り	두 가지	N110			GN				llm		ふたとおり	w:11506
