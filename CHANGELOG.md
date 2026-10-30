@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.7.5](https://github.com/sokcuri/hdTrans/compare/v0.7.4...v0.7.5) (2026-10-31)
+
+
+### Bug Fixes
+
+* **dict:** read broadcast terms, word senses and spoken phrasing of captions ([#304](https://github.com/sokcuri/hdTrans/issues/304)) ([e3894ea](https://github.com/sokcuri/hdTrans/commit/e3894eafe6eb3dc1e527bb2e81374562b16b2d9d))
+* **dict:** read idioms, archaic and spoken endings, and context senses in fiction prose ([#306](https://github.com/sokcuri/hdTrans/issues/306)) ([8c0de6a](https://github.com/sokcuri/hdTrans/commit/8c0de6a2ae02654d29ce557e6a83b8de64d58af1))
+* **dict:** read nouns and verbs of fiction prose by their Korean words ([#305](https://github.com/sokcuri/hdTrans/issues/305)) ([cadea27](https://github.com/sokcuri/hdTrans/commit/cadea271d48dc3ba7478774a3b9016a6b6c7a9ea))
+* **names:** keep common words from becoming document-wide names ([#307](https://github.com/sokcuri/hdTrans/issues/307)) ([6570437](https://github.com/sokcuri/hdTrans/commit/65704374ad74ad8f9afbf17b4efe162c63c005fe))
+* **names:** read person names, readings and honorifics consistently ([#302](https://github.com/sokcuri/hdTrans/issues/302)) ([4d59ff9](https://github.com/sokcuri/hdTrans/commit/4d59ff92b92c5d0b7b78f766cd503821eb554c8b))
+* read spoken forms, Korean spelling and sound words at their cause ([#308](https://github.com/sokcuri/hdTrans/issues/308)) ([654e762](https://github.com/sokcuri/hdTrans/commit/654e7629a87b512b55d5f39c04e5df3ea384e9be))
+* **release:** read fiction and caption text better and keep common words out of names ([a9d2139](https://github.com/sokcuri/hdTrans/commit/a9d21391b040b382e56c53cee989731cf4858eb2))
+
 ## [0.7.4](https://github.com/sokcuri/hdTrans/compare/v0.7.3...v0.7.4) (2026-10-29)
 
 
