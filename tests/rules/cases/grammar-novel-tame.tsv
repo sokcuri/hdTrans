@@ -1,8 +1,8 @@
 rule	input	expected	kind	layer
 dict:novel-tame:1	両親に報告するため、実家へとひとり旅をしていた。	부모님에게 보고하기 때문에, 본가로 혼자 여행을 하고 있었다.	current	local-ending
-dict:novel-tame:1	決勝に進む2組を選ぶため、2周目に突入することになった。	has:선택하기 위해	fix	local-ending
-dict:novel-tame:1	文字を覚えるため、家の本を読み漁った。	has:배우기 위해	fix	local-ending
-dict:novel-tame:1	私はあなたを護るため、どんどん強くなってあげる！	has:지키기 위해	fix	local-ending
+dict:novel-tame:1	決勝に進む2組を選ぶため、2周目に突入することになった。	결승에 진출하는 2조를 선택하기 때문에, 2주째에 돌입하게 되었다.	current	local-ending
+dict:novel-tame:1	文字を覚えるため、家の本を読み漁った。	문자를 배우기 때문에, 집의 책을 닥치는 대로 읽었다.	current	local-ending
+dict:novel-tame:1	私はあなたを護るため、どんどん強くなってあげる！	나는 당신을 지키기 때문에, 점점 강해져 줄게!	current	local-ending
 dict:novel-tame:1	船団の被害を減らすため……敵潜水艦と戦いました。	선단의 피해를 줄이기 때문에……적잠수함과 싸웠습니다.	current	local-ending
 dict:novel-tame:1	夢をかなえるため お力をお貸しいただけないでしょうか	꿈을 이루기 때문에 력을 빌려 주어 주실 수 없을까요	current	local-ending
 dict:novel-tame:1	家族を支えるため新たなビジネスを始めた	가족을 지탱하기 때문에 새로운 비즈니스를 시작했다	current	local-ending
@@ -41,3 +41,5 @@ dict:novel-tame:1	犯行を隠すためですよ。	has:숨기기 위해	fix	loc
 dict:novel-tame:1	抗体を作るため？	has:만들기 위해	fix	local-ending
 dict:novel-tame:1	その男子に会うためならここで働くしかない	has:만나기 위해라면	fix	local-ending
 dict:novel-tame:1	お前の身を守るためなんだよ。	has:지키기 위해	fix	local-ending
+dict:novel-tame:1	点検を行うため、運休します	has:실시하기 때문에	keep	local-ending
+dict:novel-tame:1	会議を開くため、部屋を使えない	has:열기 때문에	keep	local-ending
