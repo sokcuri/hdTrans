@@ -1,0 +1,95 @@
+#! cx
+# Clause links: what a subordinate predicate's connective means, read with the main clause it attaches to.
+id	match	when	set	ko	pol	prio	spec	note
+link.te.seq	{V:te}	main.exists=+	-	{V ctype=conn,rel=seq}	keep	0	XFR-1	起きて顔を洗った → 일어나고 세수했다
+link.te.manner	{V:te}	V.pclass=motion main.exists=+	-	{V ctype=conn,rel=tight}	keep	0	XFR-1	座って話した → 앉아서 이야기했다
+link.te.cause	{V:te}	V.vol=- main.exists=+	-	{V ctype=conn,rel=cause}	keep	0	XFR-1	疲れて眠れない → 피곤해서 잠이 안 온다
+link.te.cause	{V:te,adj}	main.exists=+	-	{V ctype=conn,rel=cause}	keep	0	XFR-1	嬉しくて泣いた → 기뻐서 울었다
+link.te.final	{V:te,nopolite} @fin	-	-	{V ctype=final,mood=imp}	keep	0	XFR-1	ちょっと待って → 잠깐 기다려
+link.renyou	{V:renyou,bare} 、	-	-	{V ctype=conn,rel=seq}	keep	0	XFR-1	剣を抜き、構えた → 검을 뽑고 자세를 잡았다
+link.tara.cond	{V} @tara	-	-	{V ctype=conn,rel=cond}	keep	0	XFR-2	雨が降ったら中止だ → 비가 오면 중지다
+link.tara.discovery	{V} @tara	main.tense=past main.vol=- main.force=decl	-	{V ctype=conn,rel=discover}	keep	0	XFR-2	ドアを開けたら猫がいた → 문을 열었더니 고양이가 있었다
+link.tara.discovery	{V} @tara	main.tense=past main.aspect=te-iru	-	{V ctype=conn,rel=discover}	keep	0	XFR-2	外を見たら雪が降っていた → 밖을 봤더니 눈이 내리고 있었다
+link.tara.suggest	{V} @tara どう|如何	-	-	{V ctype=nom,nom=geot} P:subj Adv:어떻다^	keep	0	XFR-2	休んだらどう → 쉬는 게 어때
+link.tara.suggest	{V} @tara 良い|いい @fin	inq=+	-	{V ctype=conn,rel=cond} V:되다^	keep	0	XFR-2	聞いたらいい → 물어보면 돼
+link.to.cond	{V:dict} と	main.@speech=- main.@thought=-	-	{V ctype=conn,rel=cond}	keep	0	XFR-3	春になると花が咲く → 봄이 되면 꽃이 핀다
+link.to.when	{V:dict} と	main.tense=past main.@speech=- main.@thought=-	-	{V ctype=conn,rel=whenpast}	keep	0	GRM-40	ドアを開けると猫がいた → 문을 열자 고양이가 있었다
+link.ba.cond	{V} ば/p_conj	-	-	{V ctype=conn,rel=cond}	keep	0	XFR-4	急げば間に合う → 서두르면 늦지 않는다
+link.ba.hodo	{V} ば/p_conj {V:dict} ほど|程	-	-	{V ctype=conn,rel=cond} {V ctype=adn,adn=fut} N:수록[dep]	keep	0	XFR-4	考えれば考えるほど → 생각하면 생각할수록
+link.ba.yokatta	{V} ば/p_conj 良い|いい @past	-	-	{V ctype=conn,rel=cond,tense=past} V:좋다[aux,adn=fut] N:텐데[dep]^	keep	0	XFR-4	言えばよかった → 말했으면 좋았을 텐데
+link.ba.ii	{V} ば/p_conj 良い|いい	-	-	{V ctype=conn,rel=cond} V:되다^	keep	0	XFR-4	聞けばいい → 물으면 된다
+link.nara	{X} @nara	-	-	{V ctype=conn,rel=cond,cop=1}	keep	0	XFR-5	君なら大丈夫 → 너라면 괜찮아
+link.node	{X} @nom.no @de.cop !は	-	-	{V ctype=conn,rel=cause}	keep	0	XFR-6	寒いので窓を閉めた → 추워서 창문을 닫았다
+link.node	{X} ので/p_conj	-	-	{V ctype=conn,rel=cause}	keep	0	XFR-6	寒いので窓を閉めた → 추워서 창문을 닫았다
+link.kara.cause	{X} から/p_conj	main.exists=+	-	{V ctype=conn,rel=causeq}	keep	0	GRM-23	危ないから下がれ → 위험하니까 물러서
+link.kara.final	{X} から/p_conj @fin	-	-	{V ctype=final,fin=causeq}	keep	0	GRM-23	すぐ戻るから → 금방 돌아올 테니까
+link.kedo.contrast	{X} けれど|けど|が/p_conj	main.exists=+	-	{V ctype=conn,rel=concess}	keep	0	GRM-29	高いけど買う → 비싸지만 산다
+link.kedo.bg	{X} けれど|けど|が/p_conj	main.force=q|imp|request	-	{V ctype=conn,rel=bg}	keep	0	XFR-7	悪いけど手伝って → 미안한데 도와줘
+link.kedo.final	{X} けれど|けど|が/p_conj @fin	-	-	{V ctype=final,fin=bg}	keep	0	XFR-7	そうだけど → 그런데
+link.noni.concess	{X} @nom.no に/p_case	main.exists=+	-	{V ctype=conn,rel=concess-even}	keep	0	XFR-8	呼んだのに来ない → 불렀는데도 안 온다
+link.noni.concess	{X} のに/p_conj	-	-	{V ctype=conn,rel=concess-even}	keep	0	XFR-8	呼んだのに来ない → 불렀는데도 안 온다
+link.noni.final	{X} @nom.no に/p_case @fin	-	-	{V ctype=final,fin=regret}	keep	0	XFR-8	言えばよかったのに → 말하면 좋았을 텐데
+link.noni.final	{X} のに/p_conj @fin	-	-	{V ctype=final,fin=regret}	keep	0	XFR-8	言えばよかったのに → 말하면 좋았을 텐데
+link.noni.purpose	{V:dict} @nom.no に/p_case	main.lemma=掛かる|必要|使う|十分|便利|役立つ|向く|適する|要る|大変|困る|苦労	-	{V ctype=adn,adn=nonpast} N:데[dep]	keep	1	XFR-8	作るのに三日かかる → 만드는 데 사흘 걸린다
+link.tame.purpose	{V:dict,pos} 為 [に/p_case]	main.vol=+	-	{V ctype=nom,nom=gi} V:위하다[conn=tight]	keep	0	XFR-9	勝つために練習する → 이기기 위해 연습한다
+link.tame.cause	{V} 為 [に/p_case]	-	-	{V ctype=nom,nom=gi} N:때문[dep] P:에	keep	-1	XFR-9	(default for a predicate before ため)
+link.tame.cause	{V:ta} 為 [に/p_case]	-	-	{V ctype=nom,nom=gi} N:때문[dep] P:에	keep	0	XFR-9	遅れたため中止 → 늦었기 때문에 중지
+link.tame.cause	{V:dict} 為 [に/p_case]	main.vol=-	-	{V ctype=nom,nom=gi} N:때문[dep] P:에	keep	0	XFR-9	雨が降るため中止 → 비가 오기 때문에 중지
+link.tame.purpose	{N} の/p_case 為 [に/p_case]	main.vol=+	-	{N} P:obj V:위하다[conn=tight]	keep	0	XFR-9	健康のために走る → 건강을 위해 달린다
+link.tame.cause	{N} の/p_case 為 [に/p_case]	main.vol=-	-	{N} N:때문[dep] P:에	keep	0	XFR-9	雨のため中止 → 비 때문에 중지
+link.tame.benefit	{N:@person} の/p_case 為 [に/p_case]	-	-	{N} P:obj V:위하다[conn=tight]	keep	1	XFR-9	君のために → 너를 위해
+link.youni.purpose	{V:dict} 様 @ni.cop	main.exists=+	-	{V ctype=conn,rel=sothat}	keep	0	XFR-10	聞こえるように話す → 들리도록 말한다
+link.youni.like	{V:dict} 様 @ni.cop	V.vol=+ V.pol=pos main.lemma!=為る|成る	-	{V ctype=conn,rel=like}	keep	0	GRM-33	歌うように話す → 노래하듯이 말한다
+link.youni.like	{V:ta} 様 @ni.cop|だ/aux	-	-	{V ctype=adn,adn=past} N:것[dep] P:처럼	keep	0	GRM-33	何もなかったように → 아무 일도 없었던 것처럼
+link.youni.like	{N} の/p_case 様 @ni.cop|だ/aux|な	-	-	{N} P:처럼	keep	0	GRM-33	鳥のように飛ぶ → 새처럼 난다
+link.youni.like	{N} の/p_case 様 な	-	-	{N} P:처럼	keep	0	GRM-33	夢のような話 → 꿈같은 이야기
+link.youni.purpose	{V:pot} 様 @ni.cop	main.exists=+	-	{V ctype=conn,rel=sothat}	keep	1	XFR-10	話せるように練習する → 말할 수 있도록 연습한다
+link.youni.purpose	{V:neg} 様 @ni.cop	main.exists=+	-	{V ctype=conn,rel=sothat}	keep	1	XFR-10	忘れないようにメモする → 잊지 않도록 메모한다
+link.youni.request	{V} 様 @ni.cop	main.pclass=speech	-	{V ctype=quote,mood=imp}	keep	1	XFR-10	来るように言った → 오라고 했다
+link.youni.request	{V} 様 @ni.cop @request	-	-	{V ctype=quote,mood=imp}	keep	2	XFR-10	来るように言った → 오라고 했다
+link.youni.wish	{V:polite} 様 @ni.cop @fin	-	-	{V ctype=final,fin=wish}	keep	1	XFR-10	晴れますように → 맑기를
+link.youni.naru	{V} 様 @ni.cop @naru	-	-	{V ctype=conn,rel=sothat} V:되다[aux]^	keep	2	XFR-10	話せるようになった → 말할 수 있게 됐다
+link.youni.suru	{V} 様 @ni.cop @suru.v	-	-	{V ctype=conn,rel=sothat} V:하다[aux]^	keep	2	XFR-10	忘れないようにする → 잊지 않도록 하다
+link.nagara.simul	{V:renyou} ながら	-	-	{V ctype=conn,rel=while}	keep	0	XFR-11	歩きながら話す → 걸으면서 이야기한다
+link.nagara.concess	{X} ながら	V.vol=-	-	{V ctype=conn,rel=concess}	keep	0	XFR-11	残念ながら → 유감스럽게도
+link.nagara.concess	{V:ta|neg} ながら	-	-	{V ctype=conn,rel=concess}	keep	1	XFR-11	知っていながら → 알면서도
+link.tari	{V} たり|だり	-	-	{V ctype=conn,rel=alt}	keep	0	XFR-12	泣いたり笑ったりする → 울기도 하고 웃기도 한다
+link.temo	{V:te} も/p_topic	main.exists=+	-	{V ctype=conn,rel=even}	keep	0	XFR-13	雨が降っても行く → 비가 와도 간다
+link.temo	{V} たって|だって/p_conj	-	-	{V ctype=conn,rel=even}	keep	0	XFR-13	言ったって無駄だ → 말해 봤자 소용없다
+link.temo.wh	@wh ... {V:te} も/p_topic	-	-	{V ctype=conn,rel=even}	keep	1	XFR-13	何度言っても → 몇 번을 말해도
+link.tokorode.concess	{V:ta} 所 で/p_case	main.tense=nonpast	-	{V ctype=conn,rel=even-try}	keep	0	XFR-14	謝ったところで許さない → 사과해 봤자 용서 안 한다
+link.tokorode.when	{V:ta} 所 で/p_case	main.tense=past	-	{V ctype=adn,adn=past} N:참[dep] P:에	keep	0	XFR-14	話し終えたところで → 이야기를 마친 참에
+link.tokoro.nearly	{V:dict} 所 だ/aux @past	-	-	{V ctype=adn,adn=fut} V:뻔하다[aux]^	keep	2	GRM-5	死ぬところだった → 죽을 뻔했다
+link.tokoro.about	{V:dict} 所 @cop	-	-	{V ctype=conn,rel=intent} V:하다[adn=past] N:참[dep] V:이다^	keep	1	XFR-14	出かけるところだ → 나가려던 참이다
+link.tokoro.just	{V:ta} 所 @cop	-	-	Adv:막 {V tense=past}^	keep	1	XFR-14	今着いたところだ → 지금 막 도착했다
+link.tokoro.prog	{V} @teiru 所 @cop	-	-	{V ctype=adn,adn=nonpast} N:중[dep] V:이다^	keep	2	XFR-14	考えているところだ → 생각하는 중이다
+link.to.omottara	{X} と 思う @tara	-	-	{V ctype=conn,rel=no-sooner}	keep	2	XFR-15	来たと思ったら帰った → 왔나 싶더니 돌아갔다
+link.to.omottara	{X} と 思う ば/p_conj	-	-	{V ctype=conn,rel=no-sooner}	keep	2	XFR-15	泣いたかと思えば笑う → 우는가 싶더니 웃는다
+link.to.omottara	{X} か と 思う @tara|ば	-	-	{V ctype=conn,rel=no-sooner}	keep	3	XFR-15	来たかと思ったら → 왔나 싶더니
+link.monono	{V:ta} 物 の/p_case	-	-	{V ctype=nom,nom=gi} P:는 V:하다[aux,tense=past,ctype=conn,rel=concess]^	keep	0	XFR-16	買ったものの → 사기는 했지만
+link.monono	{V:ta} ものの/p_conj	-	-	{V ctype=nom,nom=gi} P:는 V:하다[aux,tense=past,ctype=conn,rel=concess]^	keep	0	XFR-16	買ったものの → 사기는 했지만
+link.naide	{V} @neg.te て/p_conj	main.exists=+	-	{V ctype=conn,rel=seq,neg=ji-anh}	absorb	0	XFR-17	寝ないで待つ → 자지 않고 기다린다
+link.naide.req	{V} @neg.te て/p_conj @fin	-	-	{V ctype=final,mood=imp,neg=ji-ma}	absorb	1	XFR-17	行かないで → 가지 마
+link.zuni	{V} ず/aux [に]	-	-	{V ctype=conn,rel=seq,neg=ji-anh}	absorb	0	XFR-17	何も言わずに → 아무 말도 하지 않고
+link.nakute	{V} @neg.ku て/p_conj	main.exists=+	-	{V ctype=conn,rel=cause,neg=ji-anh}	absorb	0	XFR-17	来なくて困った → 안 와서 곤란했다
+link.nai.to	{V:neg} と @fin	-	-	{V ctype=conn,rel=must} V:되다[aux]^	absorb	1	XFR-18	急がないと → 서둘러야지
+link.nai.to	{V:neg} と	main.lemma=駄目|行ける|困る|成る	-	{V ctype=conn,rel=cond,neg=ji-anh}	keep	1	XFR-18	急がないとだめだ → 서두르지 않으면 안 된다
+link.adn.rel	{V:adn}	V.link=adn	-	{V ctype=adn}	keep	-2	GRM-18	昨日買った本 → 어제 산 책
+link.comma.final	{V:dict} 、	V.link!=adn next.pos!=n	-	{V ctype=final}	keep	0	GRM-32	日本の幸運は続く、 → 일본의 행운은 계속된다,
+link.ni.mo.kakawarazu	{X} に/p_case も/p_topic 関わる|かかわる @neg	-	-	{V ctype=conn,rel=concess-even} N:불구[dep] P:하고	absorb	0	XFR-19	雨にもかかわらず → 비에도 불구하고
+link.uchini	{V:dict,pos} 内 [に]	-	-	{V ctype=adn} N:사이[dep] P:에	keep	0	XFR-19	話しているうちに → 이야기하는 사이에
+link.uchini.neg	{V:neg} 内 [に]	-	-	{V ctype=nom,nom=gi,neg=none} N:전[dep] P:에	absorb	1	XFR-19	暗くならないうちに → 어두워지기 전에
+link.mae	{V:dict} 前 [に]	-	-	{V ctype=nom,nom=gi} N:전[dep] P:에	keep	0	XFR-19	寝る前に → 자기 전에
+link.ato	{V:ta} 後 [で|に|は]	-	-	{V ctype=adn,adn=past} N:후[dep] P:에	keep	0	XFR-19	食べた後で → 먹은 후에
+link.totan	{V:ta} 途端 [に]	-	-	{V ctype=conn,rel=as-soon}	keep	0	XFR-19	座ったとたん → 앉자마자
+link.made	{V:dict} まで	main.exists=+	-	{V ctype=adn,adn=fut} N:때[dep] P:까지	keep	0	XFR-19	帰るまで待つ → 돌아올 때까지 기다린다
+link.kuseni	{V} 癖 [に]	-	-	{V ctype=conn,rel=while}	keep	0	GRM-6	知らないくせに → 모르면서
+link.kuseni	{N} の 癖 [に]	-	-	{N} N:주제[dep] P:에	keep	1	GRM-6	子供のくせに → 아이 주제에
+link.sei	{N} の 所為	-	-	{N} N:탓[dep]	keep	0	XFR-19	君のせいだ → 네 탓이다
+link.sei	{V} 所為	-	-	{V ctype=adn} N:탓[dep]	keep	0	XFR-19	寝坊したせいで → 늦잠을 잔 탓에
+link.kara.koso	{X} から こそ	-	-	{V ctype=nom,nom=gi} N:때문[dep] P:에	keep	1	XFR-6	好きだからこそ → 좋아하기 때문에
+link.ijou	{V} 以上 [は]	main.exists=+	-	{V ctype=adn} N:이상[dep]	keep	0	XFR-19	約束した以上 → 약속한 이상
+link.dokoroka	{X} どころ か	-	-	{V ctype=nom,nom=gi} P:는커녕	keep	0	XFR-19	休むどころか → 쉬기는커녕
+link.shi	{X} し/p_conj	main.exists=+	-	{V ctype=conn,rel=and}	keep	0	GRM-23	安いし美味しい → 싸고 맛있다
+link.to.bakari.ni	{X} と ばかり に	-	-	{V ctype=conn,rel=as-if}	keep	1	XFR-19	当然だとばかりに → 당연하다는 듯이
+link.youni.like	{V:dict} 様 @ni.cop @fin	-	-	{V ctype=conn,rel=like}	keep	0	GRM-33	かき分けるように → 헤치듯이

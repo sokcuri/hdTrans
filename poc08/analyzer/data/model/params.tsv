@@ -1,0 +1,5 @@
+#! analyzer-params
+key	value
+join_cost	1.5
+stutter_cost	6
+stutter_ud	感動詞-フィラー

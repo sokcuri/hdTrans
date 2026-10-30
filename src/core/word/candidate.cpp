@@ -1905,6 +1905,34 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         from = remaining;
         candidate = InsertLateCandidate(full, cursor, token, remaining);
     }
+#ifdef HDTRANS_POC08_HOOKS
+    // The segmentation of the hooks: a word that ends inside one of its words gives way to the next
+    // shorter candidate here that ends on a boundary; when none does, the first stays.
+    if (settings.hookFits != nullptr && candidate != nullptr) {
+        const tokenizer::Token& t = tokens[static_cast<std::size_t>(token)];
+        const auto fits = [&](const Item* c) {
+            const uint32_t begin = std::min(t.sourceBegin + static_cast<uint32_t>(cursor), t.sourceEnd);
+            const uint32_t end = std::min(begin + static_cast<uint32_t>(c->length), t.sourceEnd);
+            return settings.hookFits(settings.hookChunk, begin, end, At(c->Code(0), 0));
+        };
+        if (!fits(candidate)) {
+            Item* const first = candidate;
+            Record* const firstRest = first->group->records;
+            Record* const firstFrom = from;
+            while (candidate != nullptr && !fits(candidate) && candidate->group->records != nullptr) {
+                Record* remaining = candidate->group->records;
+                candidate->group->records = nullptr;
+                from = remaining;
+                candidate = InsertLateCandidate(full, cursor, token, remaining);
+            }
+            if (candidate == nullptr || !fits(candidate)) {
+                first->group->records = firstRest;
+                candidate = first;
+                from = firstFrom;
+            }
+        }
+    }
+#endif
     if (candidate == nullptr) {
         const std::string_view pair = PairText(text);
         if (FindHonorificPrefix(pair) != -1) {

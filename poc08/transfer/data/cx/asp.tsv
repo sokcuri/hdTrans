@@ -1,0 +1,25 @@
+#! cx
+# Aspect auxiliaries after て and compound verbs: what the Korean predicate shows of ている, てしまう, てくる …
+id	match	when	set	ko	pol	prio	spec	note
+asp.teiru.prog	{V} @teiru	-	-	{V ctype=conn,rel=seq} V:있다[aux]^	keep	0	XFR-40	本を読んでいる → 책을 읽고 있다
+asp.teiru.result	{V} @teiru	V.asp=change	-	{V ctype=conn,rel=tight} V:있다[aux]^	keep	0	GRM-21	座っている → 앉아 있다
+asp.teiru.state	{V} @teiru	V.asp=state	-	{V}^	keep	0	GRM-21	知っている → 안다
+asp.teiru.state	{V} @teiru	V.asp=change-past	-	{V tense=past}^	keep	0	GRM-21	結婚している → 결혼했다
+asp.teiru.habit	{V} @teiru	clause.@freq=+ V.asp=activity	-	{V}^	keep	1	XFR-40	毎朝走っている → 매일 아침 달린다
+asp.tearu	{V} @tearu	-	-	{V passive=1,ctype=conn,rel=tight} V:있다[aux]^	keep	0	XFR-41	書いてある → 쓰여 있다
+asp.teshimau.compl	{V} @teshimau	-	-	{V ctype=conn,rel=tight} V:버리다[aux]^	keep	0	XFR-42	食べてしまった → 먹어 버렸다
+asp.teshimau.unwanted	{V} @teshimau	V.vol=-	-	{V}^	keep	0	XFR-42	寝てしまった → 잠들었다
+asp.teoku	{V} @teoku	-	-	{V ctype=conn,rel=tight} V:두다[aux]^	keep	0	XFR-43	準備しておく → 준비해 둔다
+asp.temiru	{V} @temiru	-	-	{V ctype=conn,rel=tight} V:보다[aux]^	keep	0	XFR-43	食べてみる → 먹어 본다
+asp.tekuru.dir	{V} @tekuru	V.pclass=motion	-	{V ctype=conn,rel=tight} V:오다[aux]^	keep	1	XFR-44	走ってくる → 달려온다
+asp.tekuru.change	{V} @tekuru	V.vol=-	-	{V ctype=conn,rel=tight} V:지다[aux]^	keep	1	XFR-44	寒くなってきた → 추워졌다
+asp.tekuru.go.and	{V} @tekuru	-	-	{V ctype=conn,rel=seq-tight} V:오다[aux]^	keep	0	XFR-44	買ってくる → 사 온다
+asp.teiku	{V} @teiku	-	-	{V ctype=conn,rel=tight} V:가다[aux]^	keep	0	XFR-44	消えていく → 사라져 간다
+asp.sugiru	{V:renyou} 過ぎる	-	-	Adv:너무 {V}^	keep	0	XFR-45	食べすぎた → 너무 많이 먹었다
+asp.sugiru	{A} 過ぎる	-	-	Adv:너무 {V}^	keep	0	XFR-45	高すぎる → 너무 비싸다
+asp.hajimeru	{V:renyou} 始める|出す	-	-	{V ctype=nom,nom=gi} V:시작하다^	keep	0	XFR-46	走り出す → 달리기 시작한다
+asp.tabakari	{V:ta} ばかり	-	-	Adv:막 {V tense=past}^	keep	0	XFR-47	来たばかり → 막 왔다
+asp.mama	{V:ta} 侭	-	-	{V ctype=adn,adn=past} N:채[dep]	keep	0	XFR-47	座ったまま → 앉은 채
+asp.tsuzukeru	{V:renyou} 続ける	-	-	Adv:계속 {V}^	keep	0	XFR-46	待ち続ける → 계속 기다린다
+asp.yasui	{V:renyou} 易い|やすい|難い|にくい|づらい|辛い	-	-	{V ctype=nom,nom=gi} V:쉽다^	keep	0	XFR-46	読みやすい → 읽기 쉽다
+asp.kakeru	{V:renyou} 掛ける	-	-	{V ctype=adn,adn=fut} V:뻔하다^	keep	0	GRM-27	死にかけた → 죽을 뻔했다

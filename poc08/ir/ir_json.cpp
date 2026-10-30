@@ -442,6 +442,7 @@ template <class V> void Fields(V& v, Clause& x) {
     v.Int("lastBun", x.lastBun);
     v.Int("parent", x.parent, -1);
     v.Enum("link", x.link, F::link);
+    v.Enum("linkSub", x.linkSub, F::timesub);
     v.Enum("tense", x.tense, F::tense);
     v.Enum("aspect", x.aspect, F::jaspect);
     v.Enum("pol", x.pol, F::pol);
@@ -477,15 +478,20 @@ template <class V> void Fields(V& v, KNode& x) {
     v.Enum("ctype", x.ctype, F::ctype);
     v.Enum("rel", x.rel, F::rel);
     v.Enum("neg", x.neg, F::kneg);
-    bool aux = x.aux, dep = x.dep, passive = x.passive, causative = x.causative;
+    bool aux = x.aux, dep = x.dep, passive = x.passive, causative = x.causative, potential = x.potential,
+         spont = x.spont;
     v.Bool("aux", aux);
     v.Bool("dep", dep);
     v.Bool("passive", passive);
     v.Bool("causative", causative);
+    v.Bool("potential", potential);
+    v.Bool("spont", spont);
     x.aux = aux;
     x.dep = dep;
     x.passive = passive;
     x.causative = causative;
+    x.potential = potential;
+    x.spont = spont;
     v.Bits("ja", x.ja, F::jafact);
     v.Enum("kase", x.kase, F::kase);
     v.Enum("punct", x.punct, F::punct);

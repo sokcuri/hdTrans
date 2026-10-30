@@ -54,7 +54,7 @@ struct Timer {
 }  // namespace
 
 const char* StageName(int stage) {
-    static const char* const kNames[kStages] = {"N", "A", "S", "A2", "C", "L", "Z", "T", "R", "W", "G"};
+    static const char* const kNames[kStages] = {"N", "A", "S", "A2", "C", "L", "Z", "T", "D", "R", "W", "G"};
     return stage >= 0 && stage < kStages ? kNames[stage] : "?";
 }
 
@@ -166,9 +166,13 @@ void RunDoc(const Engine& e, Doc& doc, const RunOptions& o) {
         Timer t(o.times, kT);
         StageT(*e.transfer, cfg, doc, line);
     }
-    {
+    for (Line& line : doc.lines) {
+        {
+            Timer t(o.times, kD);
+            StageD(*e.transfer, cfg, doc, line);
+        }
         Timer t(o.times, kR);
-        StageR(*e.discourse, cfg, doc);
+        StageR(*e.discourse, cfg, doc, line);
     }
     for (Line& line : doc.lines) {
         {

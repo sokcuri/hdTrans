@@ -33,7 +33,10 @@ namespace hd08 {
 #define HD08_HOW(X) X(marked, "marked") X(topic, "topic") X(relhead, "relhead") X(omitted, "omitted")
 #define HD08_LINK(X) X(final, "final") X(te, "te") X(tara, "tara") X(to, "to") X(ba, "ba") X(nara, "nara") \
     X(node, "node") X(kara, "kara") X(noni, "noni") X(tame, "tame") X(you_ni, "you-ni") X(nagara, "nagara")  \
-    X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote")
+    X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote") X(ga, "ga") X(temo, "temo") X(shi, "shi") \
+    X(zu, "zu") X(renyo, "renyo") X(time, "time")
+// v2d: the kind of a `time` link (Clause.linkSub).
+#define HD08_TIMESUB(X) X(none, "none") X(uchi, "uchi") X(toki, "toki") X(mae, "mae") X(ato, "ato") X(mama, "mama")
 #define HD08_TENSE(X) X(nonpast, "nonpast") X(past, "past")
 #define HD08_JASPECT(X) X(none, "none") X(te_iru, "te-iru") X(te_aru, "te-aru") X(te_shimau, "te-shimau") \
     X(te_oku, "te-oku") X(te_kuru, "te-kuru") X(te_iku, "te-iku") X(te_miru, "te-miru")
@@ -64,10 +67,12 @@ namespace hd08 {
 #define HD08_CTYPE(X) X(final, "final") X(conn, "conn") X(adn_nonpast, "adn:nonpast") X(adn_past, "adn:past") \
     X(adn_fut, "adn:fut") X(nom_m, "nom:m") X(nom_gi, "nom:gi") X(nom_geot, "nom:geot")
 #define HD08_REL(X) X(seq, "seq") X(and_, "and") X(cause, "cause") X(cond, "cond") X(concess, "concess") \
-    X(purpose, "purpose") X(while_, "while") X(when, "when") X(quote, "quote")
+    X(purpose, "purpose") X(while_, "while") X(when, "when") X(quote, "quote") X(like, "like") X(sothat, "sothat") \
+    X(even_try, "even-try")
 #define HD08_KNEG(X) X(none, "none") X(an, "an") X(ji_anh, "ji-anh") X(mot, "mot") X(ji_mot, "ji-mot") \
     X(ji_ma, "ji-ma")
-#define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq")
+#define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq") \
+    X(sonkei, "sonkei")
 #define HD08_KASE(X) X(subj, "subj") X(top, "top") X(obj, "obj") X(gen, "gen") X(dat, "dat") X(src, "src") \
     X(loc, "loc") X(instr, "instr") X(com, "com") X(quot, "quot") X(voc, "voc") X(LEX, "LEX")
 #define HD08_PUNCT(X) X(comma, "comma") X(pause, "pause") X(end, "end") X(q, "q") X(excl, "excl") X(qopen, "qopen") \
@@ -102,6 +107,7 @@ HD08_ENUM(buntype, HD08_BUNTYPE)
 HD08_BITS(bunflag, HD08_BUNFLAG)
 HD08_ENUM(how, HD08_HOW)
 HD08_ENUM(link, HD08_LINK)
+HD08_ENUM(timesub, HD08_TIMESUB)
 HD08_ENUM(tense, HD08_TENSE)
 HD08_ENUM(jaspect, HD08_JASPECT)
 HD08_ENUM(pol, HD08_POL)
@@ -132,7 +138,7 @@ HD08_ENUM(refkind, HD08_REFKIND)
 enum class F : uint8_t {
     ev, pos, tokflag, edit, srclevel, kase_ja, buntype, bunflag, role, how, link, tense, jaspect, pol, negfn, voice,
     bene, modality, force, polite, jreg, kk, kcls, sem, kaspect, mood, ctype, rel, kneg, jafact, kase, punct, level,
-    persona, flag, st, refkind
+    persona, flag, st, refkind, timesub
 };
 std::string_view Name(F field, unsigned value);  // empty when out of range
 bool Parse(F field, std::string_view name, unsigned& value);
@@ -231,7 +237,9 @@ struct Referent {                 // v2, writer Z
 };
 struct Clause {
     uint16_t pred = 0, firstBun = 0, lastBun = 0; int16_t parent = -1;
-    uint8_t link = 0, tense = 0, aspect = 0, pol = 0, negFn = 0, voice = 0, bene = 0;
+    uint8_t link = 0;
+    uint8_t linkSub = 0;  // v2d: timesub value when link is time
+    uint8_t tense = 0, aspect = 0, pol = 0, negFn = 0, voice = 0, bene = 0;
     uint32_t modality = 0;
     uint8_t force = 0, polite = 0;
     uint16_t jreg = 0;
@@ -252,6 +260,7 @@ struct KNode {
     uint32_t sem = 0;
     uint8_t tense = 0, aspect = 0, mood = 0, ctype = 0, rel = 0, neg = 0;
     uint8_t aux : 1 = 0, dep : 1 = 0, passive : 1 = 0, causative : 1 = 0;
+    uint8_t potential : 1 = 0, spont : 1 = 0;  // v2e: -ㄹ 수 있다; -어지다 (spontaneous)
     uint16_t ja = 0;
     uint8_t kase = 0;
     uint8_t punct = 0; uint32_t jaMark = 0;

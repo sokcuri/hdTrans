@@ -18,6 +18,9 @@
 #include "core/tokenizer/token.h"
 #include "core/word/analyze.h"
 #include "core/word/document_senses.h"
+#ifdef HDTRANS_POC08_HOOKS
+#include "core/engine/hooks.h"
+#endif
 
 namespace hdTrans {
 class Session;
@@ -113,6 +116,12 @@ struct TranslationOptions {
     // The characters the pre-filter writes before kana (filter::Filters::Written) that none of the
     // call's lines held before it; TranslateDocument sets them.
     std::span<const char32_t> filterWritten;
+#ifdef HDTRANS_POC08_HOOKS
+    // The stages the 0.8 proof of concept replaces (core/engine/hooks.h); null for none.
+    const hooks::Hooks* hooks = nullptr;
+    // Set by TranslateDocument for the stages of its call.
+    hooks::Run* hookRun = nullptr;
+#endif
 };
 
 // Translates the lines of one call as one document. Nothing is kept from one call to the

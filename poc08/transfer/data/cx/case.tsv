@@ -1,0 +1,42 @@
+#! cx
+# Case roles of particles that Korean marks by the argument's class or the verb's frame, and focus
+# particles. (The case table of DESIGN §3.3 is these rows; G picks the particle form.)
+id	match	when	set	ko	pol	prio	spec	note
+case.ni.loc	{N} に/p_case	-	-	{N} P:loc	keep	-1	XFR-80	机に置く → 책상에 놓다
+case.ni.dat	{N:@person} に/p_case	main.pclass!=motion	-	{N} P:dat	keep	0	GRM-16	友達に言う → 친구에게 말한다
+case.ni.result	{N} に/p_case @naru	-	-	{N} P:subj	keep	1	XFR-80	医者になる → 의사가 된다
+case.ni.result	{N} に/p_case @suru.v	-	-	{N} P:instr	keep	1	XFR-80	赤にする → 빨강으로 하다
+case.ni.frame	{N} に/p_case	main.lemma=乗る|会う|似る|勝つ|反対|逆らう|従う|続く|甘える|憧れる|触る|触れる|頼る|気付く|参加|出席|挑む|負ける|打ち勝つ|感謝|向かう|祈る|勝る|劣る|手伝う|賛成	-	{N} P:obj	keep	1	XFR-81	バスに乗る → 버스를 탄다
+case.ni.yotte	{N} に/p_case 因る て/p_conj	main.voice=rare|passive	-	{N} P:에 V:의하다[conn=tight]	keep	1	XFR-82	彼によって書かれた → 그에 의해 쓰였다
+case.ni.yotte	{N} に/p_case 因る て/p_conj	-	-	{N} P:에 V:따르다[conn=tight]	keep	0	XFR-82	人によって違う → 사람에 따라 다르다
+case.ni.yotte	{N} に/p_case 因る	-	-	{N} P:에 V:의하다[ctype=adn]	keep	-1	XFR-82	風による被害 → 바람에 의한 피해
+case.ni.tsuite	{N} に/p_case 付く|就く|つく て/p_conj	-	-	{N} P:에 V:대하다[conn=tight]	keep	0	XFR-83	彼について話す → 그에 대해 이야기한다
+case.de.loc	{N:@place} で/p_case	-	-	{N} P:loc	keep	1	GRM-15	公園で遊ぶ → 공원에서 논다
+case.de.instr	{N} で/p_case	-	-	{N} P:instr	keep	0	GRM-15	ペンで書く → 펜으로 쓴다
+case.de.cause	{N:@illness} で/p_case	main.vol=-	-	{N} P:instr	keep	1	XFR-84	病気で休む → 병으로 쉰다
+case.de.loc	{N} で/p_case	main.pclass!=motion N.cls!=@tool|@vehicle|@illness|@time	-	{N} P:loc	keep	-1	GRM-15	(place by default when the noun is no means)
+case.kara.src	{N} から/p_case	-	-	{N} P:src	keep	0	XFR-85	冷蔵庫から出す → 냉장고에서 꺼낸다
+case.kara.src	{N:@person} から/p_case	-	-	{N} P:src	keep	1	XFR-85	友達から聞いた → 친구에게서 들었다
+case.ga.frame	{N} が/p_case 好き|嫌い|大好き|大嫌い	-	-	{N} P:obj	keep	1	XFR-86	猫が好き → 고양이를 좋아한다
+case.ga.frame	{N} が/p_case	main.lemma=欲しい|分かる|出来る|上手|苦手|得意|怖い|羨ましい|恋しい	-	{N} P:obj	keep	1	XFR-86	英語が分かる → 영어를 안다
+case.dake.n	{N} だけ/p_adv	-	-	{N} P:만	keep	0	XFR-87	一人だけ → 혼자만
+case.dake.v	{V:adn} だけ/p_adv	-	-	{V ctype=adn,adn=fut} N:뿐[dep]	keep	0	XFR-87	見ているだけ → 보고 있을 뿐
+case.dake.janaku	{X} だけ/p_adv @de.cop|だ [は] @neg	-	-	{V} P:뿐만 V:아니라[conn=tight]	absorb	1	XFR-87	彼だけじゃなく → 그뿐만 아니라
+case.hodo	{N} ほど|程	-	-	{N} P:만큼	keep	0	XFR-88	死ぬほど → 죽을 만큼
+case.hodo	{V:adn} ほど|程	-	-	{V ctype=adn,adn=fut} N:만큼[dep]	keep	0	XFR-88	死ぬほど痛い → 죽을 만큼 아프다
+case.demo	{N} で/p_case も/p_topic	main.force=imp|request|prop	-	{N} P:이라도	keep	1	XFR-89	お茶でも飲もう → 차라도 마시자
+case.demo	{N} でも/p_adv	-	-	{N} P:이라도	keep	0	XFR-89	誰でもいい → 누구라도 좋다
+case.nado	{N} など/p_adv	-	-	{N} V:같다[ctype=adn] N:것[dep]	keep	0	LEX-8	俺など → 나 같은 것
+case.sae	{N} さえ|すら|でさえ/p_adv	-	-	{N} P:조차	keep	0	XFR-89	名前さえ → 이름조차
+case.yori	{N} より/p_case	-	-	{N} P:보다	keep	0	XFR-85	兄より高い → 형보다 크다
+pol.amari.neg	余り	host.pol=neg	-	Adv:별로	keep	0	XFR-90	あまり好きじゃない → 별로 좋아하지 않는다
+pol.zenzen.neg	全然|全く|少しも|ちっとも|些とも|一向|決して|到底|全然	host.pol=neg	-	Adv:전혀	keep	0	XFR-90	全然分からない → 전혀 모르겠다
+pol.kanarazushimo	必ず しも	host.pol=neg	-	Adv:반드시 N:것[dep] P:top V:아니다^	absorb	1	XFR-90	必ずしも正しくない → 반드시 옳은 것은 아니다
+pol.mattaku.pos	全然	host.pol=pos	-	Adv:완전	keep	0	XFR-90	全然大丈夫 → 완전 괜찮아
+case.ni.taishite	{N} に 対する [て]	-	-	{N} P:에 V:대하다[conn=tight]	keep	0	XFR-83	彼に対して → 그에 대해
+case.made.ni	{N} まで に	-	-	{N} P:까지	keep	1	XFR-85	五時までに → 다섯 시까지
+case.shika.nai	{N} しか	host.pol=neg	-	{N} P:밖에	keep	0	XFR-87	一人しかいない → 한 명밖에 없다
+case.bakari	{N} ばかり	-	-	{N} P:만	keep	0	XFR-87	文句ばかり → 불평만
+case.koso	{N} こそ	-	-	{N} P:야말로	keep	0	XFR-89	今度こそ → 이번에야말로
+case.wo.frame	{N} を	main.lemma=出る|離れる|卒業|去る|降りる|発つ	-	{N} P:loc	keep	1	XFR-81	部屋を出る → 방에서 나간다
+case.ni.result	{N} に	main.lemma=据える|選ぶ|任命|変える|着替える|変わる|変身|指名|迎える|嫁ぐ|生まれる|選ばれる|化ける|育つ	-	{N} P:instr	keep	1	XFR-80	愛人に据える → 애인으로 삼다

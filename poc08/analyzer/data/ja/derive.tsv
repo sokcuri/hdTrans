@@ -1,0 +1,84 @@
+#! derive
+# Spoken and lengthened forms as penalised derived arcs.
+# kind: lit (replace from by to; - = empty) | elong (a ー run after hiragana, or a run of one vowel letter,
+# collapses to its first letter; a vowel run needs three letters) | stutter (a kana followed by っ, 、 or … repeating the first mora of the
+# next word). A replacement or deletion other than elongation lies inside the arc; a derived word has
+# at least two letters. cost in nats. cond: conditions on the replaced span, as in constraints.tsv.
+id	kind	from	to	cost	cond	prov	note
+dv.stutter	stutter	-	-	3	-	own	べっ別に, わ、私
+dv.elong	elong	-	-	0.5	-	own	みてえええ, すごーい
+dv.ee-ai.k	lit	けえ	かい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.k	lit	けえ	こい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.ks	lit	けぇ	かい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.ks	lit	けぇ	こい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.k	lit	きい	くい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.g	lit	げえ	がい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.g	lit	げえ	ごい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.gs	lit	げぇ	がい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.gs	lit	げぇ	ごい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.g	lit	ぎい	ぐい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.s	lit	せえ	さい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.s	lit	せえ	そい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.ss	lit	せぇ	さい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.ss	lit	せぇ	そい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.s	lit	しい	すい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.z	lit	ぜえ	ざい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.z	lit	ぜえ	ぞい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.zs	lit	ぜぇ	ざい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.zs	lit	ぜぇ	ぞい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.z	lit	じい	ずい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.t	lit	てえ	たい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.t	lit	てえ	とい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.ts	lit	てぇ	たい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.ts	lit	てぇ	とい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.t	lit	ちい	つい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.d	lit	でえ	だい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.d	lit	でえ	どい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.ds	lit	でぇ	だい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.ds	lit	でぇ	どい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.d	lit	ぢい	づい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.n	lit	ねえ	ない	0.8	prev.cc=hira|kata|kanji & !prev=い|よ|ね|な|わ|か|さ|の|ぞ|ぜ|ん	own	
+dv.ee-oi.n	lit	ねえ	のい	0.8	prev.cc=hira|kata|kanji & !prev=い|よ|ね|な|わ|か|さ|の|ぞ|ぜ|ん	own	
+dv.ee-ai.ns	lit	ねぇ	ない	0.8	prev.cc=hira|kata|kanji & !prev=い|よ|ね|な|わ|か|さ|の|ぞ|ぜ|ん	own	
+dv.ee-oi.ns	lit	ねぇ	のい	0.8	prev.cc=hira|kata|kanji & !prev=い|よ|ね|な|わ|か|さ|の|ぞ|ぜ|ん	own	
+dv.ii-ui.n	lit	にい	ぬい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.h	lit	へえ	はい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.h	lit	へえ	ほい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.hs	lit	へぇ	はい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.hs	lit	へぇ	ほい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.h	lit	ひい	ふい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.b	lit	べえ	ばい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.b	lit	べえ	ぼい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.bs	lit	べぇ	ばい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.bs	lit	べぇ	ぼい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.b	lit	びい	ぶい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.p	lit	ぺえ	ぱい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.p	lit	ぺえ	ぽい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.ps	lit	ぺぇ	ぱい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.ps	lit	ぺぇ	ぽい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.p	lit	ぴい	ぷい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.m	lit	めえ	まい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.m	lit	めえ	もい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.ms	lit	めぇ	まい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.ms	lit	めぇ	もい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.m	lit	みい	むい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.r	lit	れえ	らい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.r	lit	れえ	ろい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.rs	lit	れぇ	らい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.rs	lit	れぇ	ろい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ii-ui.r	lit	りい	るい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.v	lit	ええ	あい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.v	lit	ええ	おい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-ai.vs	lit	えぇ	あい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ee-oi.vs	lit	えぇ	おい	0.8	prev.cc=hira|kata|kanji	own	
+dv.ssu	lit	っす	です	0.5	-	own	
+dv.n-ru	lit	ん	る	1.0	prev.cc=hira|kanji & next=の|な|だ|で|じゃ|です|ね|よ|か|ぞ|ぜ|わ|から|けど|し	own	できんの, すぎんの
+dv.n-ra	lit	ん	ら	1.0	prev.cc=hira|kanji & next=な|ね	own	わかんない, やんない
+dv.n-re	lit	ん	れ	1.0	prev.cc=hira|kanji & next=な|ね|ば	own	くんない, かもしんない
+dv.small.あ	lit	ぁ	あ	0.5	prev.cc=hira|kata	own	
+dv.small.い	lit	ぃ	い	0.5	prev.cc=hira|kata	own	
+dv.small.う	lit	ぅ	う	0.5	prev.cc=hira|kata	own	
+dv.small.え	lit	ぇ	え	0.5	prev.cc=hira|kata	own	
+dv.small.お	lit	ぉ	お	0.5	prev.cc=hira|kata	own	
+dv.comma-join	lit	、	-	2.0	prev.cc=kanji & next.cc=hira|kanji	own	勿体、ない; 申し訳、ありません
+dv.sokuon-mimetic	lit	っ	-	2.0	prev.cc=hira & next.cc=hira & !next=け	own	ふっかふか, すっごい

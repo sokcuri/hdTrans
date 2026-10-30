@@ -480,8 +480,22 @@ else()
     target_link_libraries(hdtrans_shared PRIVATE hdtrans ${CMAKE_DL_LIBS})
 endif()
 
-# The 0.8 proof of concept (poc08/): the hdtrans08 CLI next to hdtrans.
+# The 0.8 proof of concept (poc08/): the hdtrans08 CLI next to hdtrans. hdtrans08 is the 0.7.x
+# engine built a second time with its hook points (src/core/engine/hooks.h) compiled in; the
+# hdtrans library above has none of them.
 option(HDTRANS_POC08 "Build the 0.8 proof of concept (hdtrans08)" ON)
 if(HDTRANS_POC08 AND NOT EMSCRIPTEN)
+    add_library(hdtrans_hooked STATIC ${HDTRANS_SOURCES}
+        "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
+        "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
+    target_compile_definitions(hdtrans_hooked PUBLIC HDTRANS_POC08_HOOKS)
+    if(HDTRANS_INTERPRET_RULES)
+        target_compile_definitions(hdtrans_hooked PRIVATE HDTRANS_INTERPRET_RULES)
+    endif()
+    target_link_libraries(hdtrans_hooked PRIVATE pcre2-16 yaml PUBLIC Threads::Threads)
+    target_include_directories(hdtrans_hooked PUBLIC include src PRIVATE "${CMAKE_CURRENT_BINARY_DIR}")
+    set_target_properties(hdtrans_hooked PROPERTIES OUTPUT_NAME hdTransCoreHooked COMPILE_PDB_NAME hdTransCoreHooked)
+    set(HDTRANS_CLI_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/cli/main.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/frontend/dictionary_version.cpp")
     add_subdirectory(poc08)
 endif()
