@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.7.6](https://github.com/sokcuri/hdTrans/compare/v0.7.5...v0.7.6) (2026-10-31)
+
+
+### Bug Fixes
+
+* **analysis:** read a kanji verb continuative before the copula as its noun (311) ([2abcc3a](https://github.com/sokcuri/hdTrans/commit/2abcc3a12db2c0135409020a1266cdffb32b86ce))
+* **release:** read 晴れ and other kanji continuatives before the copula as nouns ([85fc186](https://github.com/sokcuri/hdTrans/commit/85fc18690f8ff5031e2c2fbf030c3a7c3ccd1cdc))
+
 ## [0.7.5](https://github.com/sokcuri/hdTrans/compare/v0.7.4...v0.7.5) (2026-10-31)
 
 
