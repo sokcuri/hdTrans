@@ -184,11 +184,11 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   |---|---|
   | `CMakeLists.txt`, `CMakePresets.json`, `cmake/`, `third_party/`, `build.yml` | 모든 프리셋과 네이티브 테스트 |
   | 그 밖의 코드(`src/`, `tests/unit/`, `tools/` 등) | `linux`, `wasm`, 네이티브 테스트 |
-  | `src/cshared/`, `src/j2kengine/`, `src/gui/`, `src/frontend/`, `tests/host/`, `include/`, `tools/build.ps1`, 어느 한쪽 커밋에 `_WIN32`, `_WIN64`, `_MSC_VER`이 있는 C/C++ 파일 | `linux`, `windows-x64`, `windows-x86`, 네이티브 테스트 |
-  | `dicts/`, `tests/rules/`, `tests/variants/`, `tests/fuzz/regressions/`, `examples/`, `ehnd/`, `user/`, `web/examples*`, `hdtrans.config.example.yaml` | `linux`, 네이티브 테스트 |
+  | `src/cshared/`, `src/j2kengine/`, `src/gui/`, `tests/host/`, `tools/build.ps1`, 어느 한쪽 커밋에 `_WIN32`, `_WIN64`, `_MSC_VER`이 있는 C/C++ 파일 | `linux`, `windows-x64`, `windows-x86`, 네이티브 테스트 |
+  | `dicts/`, `tests/rules/`, `tests/variants/`, `tests/fuzz/regressions/`, `examples/`, `ehnd/`, `user/`, `web/examples*`, `hdtrans.config.example.yaml`, 단위 테스트가 읽는 `docs/pipeline-layers.md` | `linux`, 네이티브 테스트 |
   | 그 밖의 `web/` | `wasm` |
   | `.github/`(`build.yml` 제외), `tools/release/` | 릴리스 도구 테스트만 |
-  | `docs/`, `spec/`, `skills/`, 최상위 `README.md`, `AGENTS.md`, `CLAUDE.md`, `SECURITY.md`, `CHANGELOG.md` | 없음 |
+  | 그 밖의 `docs/`, `spec/`, `skills/`, 최상위 `README.md`, `AGENTS.md`, `CLAUDE.md`, `SECURITY.md`, `CHANGELOG.md` | 없음 |
 
   릴리스 도구 테스트(`release-tools`)는 늘 돕니다. 여러 줄에 걸치면 고른 것을 합칩니다.
 - 컴파일 캐시는 `develop` push와 풀 리퀘스트, `develop`에서의 수동 실행만 저장합니다. `main` push, 태그, 그 밖의

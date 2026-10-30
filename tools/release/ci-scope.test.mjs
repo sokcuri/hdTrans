@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 import { allPresets, ciScope, pathClass, scopeOf } from './ci-scope.mjs';
 
@@ -40,7 +41,7 @@ test('every path has one class', () => {
     ['CMakeLists.txt', 'build'], ['CMakePresets.json', 'build'], ['cmake/version.cmake', 'build'],
     ['third_party/pcre2/src/pcre2_compile.c', 'build'], ['.github/workflows/build.yml', 'build'],
     ['src/cshared/hdtrans_c.cpp', 'windows'], ['src/j2kengine/j2kengine.cpp', 'windows'], ['src/gui/main.cpp', 'windows'],
-    ['src/frontend/module_dir.cpp', 'windows'], ['tests/host/admin_priority.cpp', 'windows'], ['include/hdtrans.h', 'windows'],
+    ['tests/host/admin_priority.cpp', 'windows'],
     ['tools/build.ps1', 'windows'],
     ['dicts/base.tsv', 'data'], ['tests/rules/cases/greetings.tsv', 'data'], ['tests/variants/x.tsv', 'data'],
     ['tests/fuzz/regressions/a.txt', 'data'], ['examples/a.ja.txt', 'data'], ['ehnd/a.txt', 'data'],
@@ -49,7 +50,9 @@ test('every path has one class', () => {
     ['.github/workflows/deploy-web.yml', 'release'], ['tools/release/release.mjs', 'release'],
     ['docs/build.md', 'docs'], ['spec/words.md', 'docs'], ['skills/a/SKILL.md', 'docs'], ['README.md', 'docs'],
     ['AGENTS.md', 'docs'], ['CHANGELOG.md', 'docs'],
-    ['src/core/word/select.cpp', 'code'], ['tests/unit/word/select_test.cpp', 'code'], ['tests/long_line.sh', 'code'],
+    ['docs/pipeline-layers.md', 'data'],
+    ['include/core/engine.h', 'code'], ['include/core/hdtrans.h', 'code'], ['src/frontend/dictionary_version.cpp', 'code'],
+    ['src/frontend/module_dir.cpp', 'code'], ['src/core/word/select.cpp', 'code'], ['tests/unit/word/select_test.cpp', 'code'], ['tests/long_line.sh', 'code'],
     ['tools/rule-cases.sh', 'code'], ['tools/wasm_smoke.mjs', 'code'], ['src/wasm/main.cpp', 'code'],
     ['npm/package.json', 'code'], ['README.txt', 'code'], ['third-party.md', 'code'], ['LICENSE', 'code'],
   ]) {
@@ -130,5 +133,29 @@ test('a changed source with a Windows-only section at either commit runs the Win
     assert.equal(scope.presets.includes('windows-x64') && scope.presets.includes('windows-x86'), expected,
       `${JSON.stringify(after)}: ${scope.reason}`);
     if (expected) assert.match(scope.reason, /Windows sections in /);
+  }
+});
+
+test('a docs, spec or skills file that a test reads is not classed as docs', () => {
+  const root = fileURLToPath(new URL('../../', import.meta.url));
+  const files = [join(root, 'CMakeLists.txt')];
+  const walk = dir => {
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) walk(path);
+      else if (/\.(cpp|h|sh|cmake|py|mjs)$/.test(entry.name)) files.push(path);
+    }
+  };
+  walk(join(root, 'tests'));
+  const read = new Set();
+  for (const file of files) {
+    for (const [, path] of readFileSync(file, 'utf8').matchAll(/["'`/}]((?:docs|spec|skills)\/[\w./-]+\.\w+)["'`]/g)) {
+      read.add(path);
+    }
+  }
+  assert.ok(read.has('docs/pipeline-layers.md'), [...read].join());
+  for (const path of read) {
+    if (!existsSync(join(root, path))) continue;  // a scratch file a test writes
+    assert.notEqual(pathClass(path), 'docs', `${path} (read by a test)`);
   }
 });

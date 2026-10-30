@@ -8,7 +8,7 @@ export const allPresets = ['linux', 'windows-x64', 'windows-x86', 'mac', 'wasm']
 const defaultGit = (...args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }).trim();
 
 // Platform code that only the Windows presets compile, or sources with sections only they compile.
-const windowsDirs = ['src/cshared/', 'src/j2kengine/', 'src/gui/', 'src/frontend/', 'tests/host/', 'include/'];
+const windowsDirs = ['src/cshared/', 'src/j2kengine/', 'src/gui/', 'tests/host/'];
 const windowsFiles = ['tools/build.ps1'];
 const windowsMacro = '_WIN32|_WIN64|_MSC_VER';
 const compiled = /\.(c|cc|cpp|h|hpp|def|rc|manifest)$/;
@@ -19,7 +19,8 @@ const buildDirs = ['cmake/', 'third_party/'];
 // Read by the native tests at run time, compiled by nothing.
 const dataDirs = ['dicts/', 'tests/rules/', 'tests/variants/', 'tests/fuzz/regressions/', 'examples/', 'ehnd/', 'user/',
   'web/examples/'];
-const dataFiles = ['web/examples.tsv', 'hdtrans.config.example.yaml'];
+// docs/pipeline-layers.md: its table is checked against the code by tests/unit/rules/layers_test.cpp.
+const dataFiles = ['web/examples.tsv', 'hdtrans.config.example.yaml', 'docs/pipeline-layers.md'];
 // Tested by the release tools job only.
 const releaseDirs = ['.github/', 'tools/release/'];
 // Read by no build or test.
