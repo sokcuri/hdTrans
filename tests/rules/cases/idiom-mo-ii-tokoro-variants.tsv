@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:novel-idioms:27	王族として見れば落第も良い所である。	왕족으로서 보면 낙제도 이만저만이 아니다.	fix	local
+dict:novel-idioms:25	そんな俺にとって、彼女はブスもいい所だった。	그런 나에게는, 그녀는 추녀도 이만저만이 아니었다.	fix	local
+dict:novel-idioms:31	さっき生まれたばっかの小蜘蛛に無茶振りもいいとこだね。	조금 전 태어났다뿐의 소거미에게 덤터기도 이만저만이 아니네.	fix	local
+dict:novel-idioms:31	他の稼ぎなんてクズもいいとこだ。	다른 돈벌이는 쓰레기도 이만저만이 아니다.	fix	local
+dict:novel-idioms:31	「いじられキャラが嫌いじゃないなんて、大嘘もいいとこでしょ」	「만져지고 캐릭터가 싫지 않다니, 대거짓말도 이만저만이 아니지」	fix	local
+dict:novel-idioms:29	勘違いも良いところだ。	착각도 이만저만이 아니다.	fix	local
+dict:novel-idioms:25	見当違いもいい所です。	예상이 어긋남도 이만저만이 아닙니다.	fix	local
+dict:novel-idioms:25	ここもいい所さ	여기도 좋은 곳이야	keep	local
+dict:novel-idioms:31	長一郎もいいとこあるじゃないねえ	쵸우이치로우도 좋은 데 있는이 아니구나	keep	local
+dict:novel-idioms:31	兄さん浄二はねとってもいいとこがあるんだから	형님정2는 말이야 매우 좋은 데가 있으니까	keep	local
+dict:novel-idioms:25	この島もいい所がたくさんありますよ	이 섬도 좋은 곳이 많이 있어요	keep	local
+dict:novel-idioms:25	あの町もいい所だよ。	그 마을도 좋은 곳이야.	keep	local
+dict:novel-idioms:31	いつもいいとこでズッコケてばっかりだ	언제나 좋은 데로 벗겨져뿐이다	keep	local
