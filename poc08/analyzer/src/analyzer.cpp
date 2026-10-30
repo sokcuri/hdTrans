@@ -369,17 +369,17 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) cons
   }
   for (uint32_t ai : path) {
     const Arc& x = ws->arcs[ai];
-    if (x.kind != ArcKind::lex || ClassCode(m, m.pforms[x.form].cls) != 'v' || x.e - x.b < 2) continue;
-    // a compound verb: a continuative verb form, then a word to the end of the token
+    if (x.kind != ArcKind::lex || ClassCode(m, m.pforms[x.form].cls) != 'v' || x.e - x.b < 4) continue;
+    // a compound verb: a continuative verb form of two letters or more, then a verb to the end
     for (uint32_t k = ws->beginStart[x.b]; k < ws->beginStart[x.b + 1]; ++k) {
       const Arc& y = ws->arcs[ws->byBegin[k]];
-      if (y.kind != ArcKind::lex || y.e >= x.e || y.rule >= 0) continue;
+      if (y.kind != ArcKind::lex || y.e >= x.e || y.e - y.b < 2 || y.rule >= 0) continue;
       const auto& yc = m.classes[m.pforms[y.form].cls];
       if (ClassCode(m, m.pforms[y.form].cls) != 'v' || m.cformNames[yc.cform].rfind("連用形", 0) != 0) continue;
       bool rest = false;
       for (uint32_t j = ws->beginStart[y.e]; j < ws->beginStart[y.e + 1] && !rest; ++j) {
         const Arc& z = ws->arcs[ws->byBegin[j]];
-        rest = z.kind == ArcKind::lex && z.e == x.e && z.rule < 0;
+        rest = z.kind == ArcKind::lex && z.e == x.e && z.rule < 0 && ClassCode(m, m.pforms[z.form].cls) == 'v';
       }
       if (rest && out->ends[byteB(y.e)] == 0) out->ends[byteB(y.e)] = 'i';
     }
@@ -389,10 +389,8 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) cons
     if (tokenAt[a.b] != UINT32_MAX && ws->arcs[tokenAt[a.b]].e >= a.e) continue;  // one analyzer word or less
     uint8_t c = ClassCode(m, m.pforms[a.form].cls);
     if (c == 'p' || c == 'x' || c == 's' || c == 'u') continue;
-    out->rejected.push_back({byteB(a.b), byteE(a.e)});
+    out->rejected.push_back({{byteB(a.b), byteE(a.e)}, c});
   }
-  std::sort(out->rejected.begin(), out->rejected.end(),
-            [](const Span& x, const Span& y) { return x.begin != y.begin ? x.begin < y.begin : x.end < y.end; });
 }
 
 // ---- JSON ---------------------------------------------------------------------------------------

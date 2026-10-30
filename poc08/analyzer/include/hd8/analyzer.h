@@ -73,8 +73,13 @@ struct SegHints {
   // a compound verb may be cut (言い|かけた).
   std::vector<uint8_t> ends;
   // Spans of one content word of the lexicon that cover two or more analyzer words (しかし over
-  // しか + し): a host word over exactly that span is a reading the analyzer rejected.
-  std::vector<Span> rejected;
+  // しか + し), with that word's class letter: a host word of that class over exactly that span is a
+  // reading the analyzer rejected.
+  struct Rejected {
+    Span span;
+    uint8_t cls = 0;
+  };
+  std::vector<Rejected> rejected;
 };
 
 struct Model;
