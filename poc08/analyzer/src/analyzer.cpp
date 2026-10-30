@@ -415,14 +415,17 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, floa
     bool kana = true;
     for (uint32_t k = x.b; k < x.e; ++k) kana = kana && internal::IsHiragana(ws->core[k]);
     if (!kana) continue;
-    // the word must win clearly over every other reading of the same span
-    bool sure = true;
+    // only a kana spelling of several words (たつ: 立つ, 経つ, 断つ), where the analyzer's word wins clearly
+    bool sure = true, homograph = false;
     for (uint32_t k = ws->beginStart[x.b]; k < ws->beginStart[x.b + 1] && sure; ++k) {
       const Arc& y = ws->arcs[ws->byBegin[k]];
       if (&y == &x || y.e != x.e || y.kind != ArcKind::lex) continue;
-      if (m.S(m.groups[y.ref].lemma) != m.S(m.groups[x.ref].lemma) && through(y) < slack) sure = false;
+      uint8_t yc = ClassCode(m, m.pforms[y.form].cls);
+      if ((yc != 'v' && yc != 'a') || m.S(m.groups[y.ref].lemma) == m.S(m.groups[x.ref].lemma)) continue;
+      homograph = true;
+      if (through(y) < slack) sure = false;
     }
-    if (!sure) continue;
+    if (!sure || !homograph) continue;
     auto it = m.kanjiGroups.find(m.S(m.groups[x.ref].lemma));
     if (it == m.kanjiGroups.end()) continue;
     uint16_t cls = m.pforms[x.form].cls;
