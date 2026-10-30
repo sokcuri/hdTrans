@@ -1,0 +1,1080 @@
+key	pos	old	new	lemma	why	layer	audit
+解け	v1	풀 수 있다	풀리다	解ける/とける/v1	wrong	dict	audit:246 p2:4:new
+ロック	n	락	록	ロック/ろっく/n	wrong	dict	audit:273 p2:5:new
+バンザイ	n	반자이	만세	万歳/ばんざい/n	translit	dict	audit:281 p2:6:new
+今頃	n	지금 쯤	지금쯤	今頃/いまごろ/n	wrong	dict	audit:317 p2:7:new
+兵装	n	공격	무장	兵装/へいそう/n	wrong	dict	audit:356 p2:8:new
+咬	v5	관여하다	물다	噛む/かむ/v5	wrong	dict	audit:362 p2:9:new
+争い	n	분쟁	다툼	争い/あらそい/n	stiff	dict	audit:381 p2:10:new
+直	v5	회복되다	고쳐지다	直る/なおる/v5	wrong	dict	audit:403 p2:11:new
+近所	n	이웃	근처	近所/きんじょ/n	unnatural	dict	audit:439 p2:12:new
+どなた	n	어떤 분	누구	何方/どなた/n	unnatural	dict	audit:471 p2:13:new
+のぞ	v5	엿보이다	엿보다	覗く/のぞく/v5	wrong	dict	audit:513 p2:14:new
+覗	v5	들여다 보다	들여다보다	覗く/のぞく/v5	wrong	dict	audit:515 p2:16:new
+止	v5	중지하다	그만두다	止す/よす/v5	stiff	dict	audit:554 p2:17:new
+援護	n	원호	엄호	援護/えんご/n	wrong	dict	audit:561 p2:18:new
+エリア	n	에리어	에어리어	エリア/えりあ/n	translit	dict	audit:611 p2:19:new
+おいら	n	저	나	己等/おいら/n	unnatural	dict	audit:669 p2:20:new
+来週	n	다음주	다음 주	来週/らいしゅう/n	unnatural	dict	audit:671 p2:21:new
+警部	n	경부	경감	警部/けいぶ/n	wrong	dict	audit:676 p2:22:new
+何れ	adv	어느 쪽	언젠가	何れ/いずれ/adv	wrong	dict	audit:681 p2:23:new
+ふさわし	adj	적격이다	어울리다	相応しい/ふさわしい/adj	stiff	dict	audit:706 p2:24:new
+ざま	n	모습	꼴	様/さま/n	wrong	dict	audit:746 p2:25:new
+誇り	n	자랑	긍지	誇り/ほこり/n	unnatural	dict	audit:771 p2:26:new
+ワル	n	왈	악당	悪/わる/n	wrong	dict	audit:801 p2:27:new
+ムチャ	n	무챠	무리	無茶/むちゃ/n	translit	dict	audit:901 p2:28:new
+朝ご飯	n	아침 밥	아침밥	朝御飯/あさごはん/n	wrong	dict	audit:922 p2:29:new
+スープ	n	스프	수프	スープ/すーぷ/n	wrong	dict	audit:938 p2:31:new
+友軍	n	우군	아군	友軍/ゆうぐん/n	unnatural	dict	audit:943 p2:32:new
+役人	n	공무원	관리	役人/やくにん/n	unnatural	dict	audit:992 p2:33:new
+プリーズ	n	프리즈	플리즈	プリーズ/ぷりーず/n	translit	dict	audit:1054 p2:35:new
+気配	n	기색	기척	気配/けはい/n	unnatural	dict	audit:1196 p2:39:new
+叶	v5	실현되다	이루어지다	叶う/かなう/v5	unnatural	dict	audit:1285 p2:41:new
+虎	n	범	호랑이	虎/とら/n	archaic	dict	audit:1331 p2:42:new
+無理矢理	adv	무리하게	억지로	無理矢理/むりやり/adv	unnatural	dict	audit:1374 p2:43:new
+交わ	v5	주고 받다	주고받다	交わす/かわす/v5	unnatural	dict	audit:1380 p2:44:new
+周	n	주	바퀴	周/しゅう/n	wrong	dict	audit:1458 p2:47:new
+転	v5	구르다	넘어지다	転ぶ/ころぶ/v5	wrong	dict	audit:1470 p2:48:new
+人殺し	n	살인	살인자	人殺し/ひとごろし/n	wrong	dict	audit:1497 p2:49:new
+話し合	v5	서로 이야기하다	의논하다	話し合う/はなしあう/v5	unnatural	dict	audit:1581 p2:54:new
+いびき	n	코골기	코골이	鼾/いびき/n	unnatural	dict	audit:1601 p2:55:new
+出来事	n	사건	일	出来事/できごと/n	unnatural	dict	audit:1615 p2:56:new
+芸能	n	예능	연예	芸能/げいのう/n	wrong	dict	audit:1643 p2:57:new
+半端	n	우수리	어중간	半端/はんぱ/n	wrong	dict	audit:1678 p2:58:new
+うまみ	n	좋은 맛	감칠맛	旨み/うまみ/n	unnatural	dict	audit:1746 p2:59:new
+腐ら	v5	썩이다	썩히다	腐る/くさる/v5	wrong	dict	audit:1782 p2:60:new
+夕暮れ	n	황혼	해질녘	夕暮れ/ゆうぐれ/n	stiff	dict	audit:1874 p2:62:new
+だるま	n	오뚝이	달마	達磨/だるま/n	wrong	dict	audit:1917 p2:63:new
+今月	n	이번달	이번 달	今月/こんげつ/n	wrong	dict	audit:1982 p2:65:new
+ほれ	intj	어머	자	ほれ/ほれ/intj	wrong	dict	audit:2030 p2:66:new
+交替	n	교체	교대	交代/こうたい/n	wrong	dict	audit:2041 p2:67:new
+つき止め	v1	밝혀 내다	밝혀내다	突き止める/つきとめる/v1	unnatural	dict	audit:2110 p2:68:new
+指先	n	손가락끝	손끝	指先/ゆびさき/n	unnatural	dict	audit:2115 p2:69:new
+証し	n	증명	증거	証し/あかし/n	wrong	dict	audit:2244 p2:71:new
+ビビ	v5	위축되다	겁먹다	びびる/びびる/v5	unnatural	dict	audit:2407 p2:73:new
+汽笛	n	고동	기적	汽笛/きてき/n	archaic	dict	audit:2457 p2:75:new
+振り向	v5	뒤돌아 보다	뒤돌아보다	振り向く/ふりむく/v5	unnatural	dict	audit:2466 p2:76:new
+ディア	n	디아	디어	ディアー/でぃあー/n	translit	names	audit:2482 p2:77:new
+朝メシ	n	아침	아침밥	朝飯/あさめし/n	unnatural	dict	audit:2520 p2:78:new
+策	n	책	계책	策/さく/n	wrong	dict	audit:2568 p2:79:new
+くっつ	v5	들러붙다	붙다	くっ付く/くっつく/v5	unnatural	dict	audit:2596 p2:80:new
+ますます	adv	더욱 더	더욱더	益々/ますます/adv	unnatural	dict	audit:2617 p2:81:new
+気の毒	na	안되다	딱하다	気の毒/きのどく/na	unnatural	dict	audit:2634 p2:82:new
+浪人	n	재수생	낭인	浪人/ろうにん/n	wrong	dict	audit:2641 p2:83:new
+受け止め	v1	받아 들이다	받아들이다	受け止める/うけとめる/v1	unnatural	dict	audit:2721 p2:86:new
+是非	n	부디	꼭	是非/ぜひ/n	unnatural	dict	audit:2893 p2:89:new
+滅ぼ	v5	멸하다	멸망시키다	滅ぼす/ほろぼす/v5	stiff	dict	audit:2905 p2:90:new
+モメ	v1	안절부절못하다	옥신각신하다	揉める/もめる/v1	wrong	dict	audit:2928 p2:91:new
+酔っ払	v5	몹시 취하다	취하다	酔っ払う/よっぱらう/v5	wrong	dict	audit:2948 p2:92:new
+痩せ	v1	야위다	마르다	痩せる/やせる/v1	unnatural	dict	audit:3072 p2:93:new
+儲か	v5	득을 보다	돈을 벌다	儲かる/もうかる/v5	unnatural	dict	audit:3091 p2:94:new
+晩ごはん	n	석식	저녁밥	晩御飯/ばんごはん/n	stiff	dict	audit:3162 p2:96:new
+狭霧	n	안개	사기리	狭霧/さぎり/n	word	dict	audit:3173 p2:97:new
+榧	n	비	카야	榧/かや/n	word	dict	audit:3178 p2:98:new
+長波	n	장파	나가나미	長波/ちょうは/n	word	dict	audit:3245 p2:100:new
+ウーロン	n	오룡	우롱	ウーロン/うーろん/n	translit	names	audit:3250 p2:101:new
+銭	n	전	돈	銭/せん/n	wrong	dict	audit:3252 p2:102:new
+退避	n	퇴피	대피	退避/たいひ/n	unnatural	dict	audit:3328 p2:106:new
+やかまし	adj	까다롭다	시끄럽다	喧しい/やかましい/adj	wrong	dict	audit:3391 p2:108:new
+企	v5	기도하다	꾀하다	企む/たくらむ/v5	unnatural	dict	audit:3409 p2:109:new
+とらわれ	v1	얽매이다	사로잡히다	捕らわれる/とらわれる/v1	wrong	dict	audit:3436 p2:110:new
+ジャパニーズ	n	재패니스	재패니즈	ジャパニーズ/じゃぱにーず/n	wrong	dict	audit:3460 p2:111:new
+カーネル	n	커넬	커널	カーネル/かーねる/n	wrong	dict	audit:3487 p2:112:new
+オーダー	n	오더	주문	オーダー/おーだー/n	unnatural	dict	audit:3567 p2:113:new
+そち	n	소치	그대	其方/そち/n	translit	dict	audit:3575 p2:114:new
+粽	n	종	치마키	粽/ちまき/n	wrong	dict	audit:3578 p2:115:new
+砂浜	n	모래 사장	모래사장	砂浜/すなはま/n	wrong	dict	audit:3651 p2:117:new
+着任	n	착임	부임	着任/ちゃくにん/n	wrong	dict	audit:3748 p2:119:new
+生き返	v5	소생하다	되살아나다	生き返る/いきかえる/v5	unnatural	dict	audit:3774 p2:121:new
+鍬	n	초	괭이	鍬/くわ/n	wrong	dict	audit:3799 p2:122:new
+抱きつ	v5	달라붙다	껴안다	抱き付く/だきつく/v5	wrong	dict	audit:3810 p2:124:new
+洗い物	n	빨랫감	설거지	洗い物/あらいもの/n	wrong	dict	audit:3817 p2:125:new
+手柄	n	공훈	공로	手柄/てがら/n	stiff	dict	audit:3833 p2:126:new
+シールド	n	쉴드	실드	シールド/しーるど/n	translit	dict	audit:3845 p2:127:new
+後ほど	n	잠시 후에	나중에	後程/のちほど/n	wrong	dict	audit:3854 p2:129:new
+スポット	n	스포트	스폿	スポット/すぽっと/n	translit	dict	audit:3860 p2:130:new
+総菜	n	부식물	반찬	総菜/そうざい/n	stiff	dict	audit:3877 p2:131:new
+はかな	adj	무상하다	덧없다	儚い/はかない/adj	stiff	dict	audit:3902 p2:132:new
+とどめ	n	일곡	결정타	止め/とどめ/n	wrong	dict	audit:3904 p2:133:new
+感心	n	감심	감탄	感心/かんしん/n	wrong	dict	audit:3932 p2:135:new
+捜し出	v5	찾아 내다	찾아내다	捜し出す/さがしだす/v5	wrong	dict	audit:3973 p2:138:new
+しとめ	v1	쏘아 죽이다	잡다	仕留める/しとめる/v1	unnatural	dict	audit:3974 p2:139:new
+住まい	n	거주지	집	住まい/すまい/n	stiff	dict	audit:4002 p2:141:new
+メディカル	n	메디칼	메디컬	メディカル/めでぃかる/n	wrong	dict	audit:4014 p2:142:new
+引き継	v5	계승하다	이어받다	引き継ぐ/ひきつぐ/v5	unnatural	dict	audit:4034 p2:143:new
+括	v5	얕보다	묶다	括る/くくる/v5	wrong	dict	audit:4041 p2:144:new
+都内	n	도내	도쿄 시내	都内/とない/n	unnatural	dict	audit:4043 p2:145:new
+テイラー	n	테이러	테일러	テーラー/てーらー/n	translit	dict	audit:4148 p2:146:new
+セキュリティー	n	시큐러티	보안	セキュリティー/せきゅりてぃー/n	unnatural	dict	audit:4200 p2:148:new
+先週	n	지난 주	지난주	先週/せんしゅう/n	wrong	dict	audit:4220 p2:149:new
+修復	n	수복	복구	修復/しゅうふく/n	unnatural	dict	audit:4278 p2:152:new
+ファイト	n	투지	파이팅	ファイト/ふぁいと/n	wrong	dict	audit:4335 p2:156:new
+ダイヤ	n	다이어	다이아	ダイヤ/だいや/n	translit	dict	audit:4338 p2:157:new
+拝	v5	비다	빌다	拝む/おがむ/v5	wrong	dict	audit:4376 p2:159:new
+体勢	n	몸의 자세	자세	体勢/たいせい/n	stiff	dict	audit:4400 p2:160:new
+見とれ	v1	정신없이 보다	넋을 잃다	見惚れる/みとれる/v1	unnatural	dict	audit:4411 p2:161:new
+キリシタン	n	크리스찬	기리시탄	キリシタン/きりしたん/n	wrong	dict	audit:4466 p2:165:new
+煮込	v5	삶다	푹 끓이다	煮込む/にこむ/v5	unnatural	dict	audit:4521 p2:166:new
+ひきつけ	v1	끌어 당기다	끌어당기다	引き付ける/ひきつける/v1	unnatural	dict	audit:4538 p2:167:new
+祟り	n	재앙	저주	祟り/たたり/n	unnatural	dict	audit:4571 p2:169:new
+カンパニー	n	컨퍼니	컴퍼니	カンパニー/かんぱにー/n	translit	dict	audit:4590 p2:171:new
+力士	n	씨름꾼	스모 선수	力士/りきし/n	wrong	dict	audit:4595 p2:172:new
+駆け上が	v5	뛰어 오르다	달려 올라가다	駆け上がる/かけあがる/v5	wrong	dict	audit:4664 p2:173:new
+かわ	v5	주고 받다	피하다	躱す/かわす/v5	wrong	dict	audit:4673 p2:174:new
+臍	n	제	배꼽	臍/へそ/n	wrong	dict	audit:4730 p2:175:new
+つつし	v5	삼가하다	삼가다	慎む/つつしむ/v5	wrong	dict	audit:4750 p2:176:new
+慎	v5	조심하다	삼가다	慎む/つつしむ/v5	wrong	dict	audit:4752 p2:177:new
+シフト	n	쉬프트	시프트	シフト/しふと/n	wrong	dict	audit:4771 p2:178:new
+ドール	n	실업 수당	돌	ドール/どーる/n	wrong	dict	audit:4776 p2:179:new
+輩	n	배	무리	輩/やから/n	wrong	dict	audit:4791 p2:180:new
+好物	n	좋아하는 것	좋아하는 음식	好物/こうぶつ/n	unnatural	dict	audit:4815 p2:181:new
+かすり傷	n	찰상	찰과상	掠り傷/かすりきず/n	stiff	dict	audit:4825 p2:182:new
+うなだれ	v1	떨굴다	고개 숙이다	項垂れる/うなだれる/v1	wrong	dict	audit:4888 p2:184:new
+しょっちゅう	adv	언제나	자주	しょっちゅう/しょっちゅう/adv	wrong	dict	audit:4916 p2:185:new
+うっとうし	adj	음울하다	성가시다	鬱陶しい/うっとうしい/adj	wrong	dict	audit:4959 p2:186:new
+ごっこ	n	짓거리	놀이	ごっこ/ごっこ/n	wrong	dict	audit:4963 p2:187:new
+機材	n	기재	장비	機材/きざい/n	unnatural	dict	audit:4965 p2:188:new
+運休	n	운전 휴지	운행 중단	運休/うんきゅう/n	stiff	dict	audit:4997 p2:189:new
+余計	adv	여분	더욱	余計/よけい/adv	wrong	dict	audit:4999 p2:190:new
+音大	n	음악대학	음대	音大/おんだい/n	stiff	dict	audit:5017 p2:191:new
+吸い込	v5	들이 마시다	들이마시다	吸い込む/すいこむ/v5	wrong	dict	audit:5031 p2:192:new
+スナック	n	스넥	스낵	スナック/すなっく/n	unnatural	dict	audit:5043 p2:193:new
+マヌケ	n	마누케	멍청이	間抜け/まぬけ/n	translit	dict	audit:5044 p2:194:new
+薩長	n	호우쵸	삿초	薩長/さっちょう/n	wrong	dict	audit:5149 p2:196:new
+ささやか	na	자그마하다	소박하다	細やか/ささやか/na	unnatural	dict	audit:5151 p2:197:new
+保持	n	보유	유지	保持/ほじ/n	wrong	dict	audit:5227 p2:198:new
+本題	n	주제	본론	本題/ほんだい/n	wrong	dict	audit:5231 p2:199:new
+端末	n	단말	단말기	端末/たんまつ/n	unnatural	dict	audit:5250 p2:200:new
+付きまと	v5	항상 따라다니다	따라다니다	付き纏う/つきまとう/v5	unnatural	dict	audit:5251 p2:201:new
+つきまと	v5	항상 따라다니다	따라다니다	付き纏う/つきまとう/v5	unnatural	dict	audit:5253 p2:202:new
+次	v5	뒤잇다	버금가다	次ぐ/つぐ/v5	wrong	dict	audit:5281 p2:203:new
+鰻	n	뱀장어	장어	鰻/うなぎ/n	unnatural	dict	audit:5311 p2:204:new
+幼少	n	유소	어린 시절	幼少/ようしょう/n	stiff	dict	audit:5359 p2:205:new
+右側	n	우측	오른쪽	右側/みぎがわ/n	stiff	dict	audit:5372 p2:206:new
+揺ら	v5	요동하다	흔들리다	揺らぐ/ゆらぐ/v5	unnatural	dict	audit:5399 p2:207:new
+積み荷	n	적하	짐	積み荷/つみに/n	unnatural	dict	audit:5421 p2:208:new
+大盛り	n	수북이 담음	곱빼기	大盛り/おおもり/n	unnatural	dict	audit:5446 p2:209:new
+ターゲット	n	타겟	타깃	ターゲット/たーげっと/n	wrong	dict	audit:5465 p2:210:new
+ドーナツ	n	도너츠	도넛	ドーナツ/どーなつ/n	wrong	dict	audit:5468 p2:211:new
+和牛	n	일본소	와규	和牛/わぎゅう/n	unnatural	dict	audit:5485 p2:212:new
+すぐさま	adv	곧 바로	곧바로	直様/すぐさま/adv	wrong	dict	audit:5546 p2:214:new
+マッサージ	n	맛사지	마사지	マッサージ/まっさーじ/n	wrong	dict	audit:5554 p2:215:new
+よそ見	n	곁눈질	한눈	余所見/よそみ/n	unnatural	dict	audit:5565 p2:216:new
+退け	v1	물리치다	비키다	退ける/しりぞける/v1	wrong	dict	audit:5568 p2:217:new
+全裸	n	전라	알몸	全裸/ぜんら/n	stiff	dict	audit:5576 p2:218:new
+侮	v5	경시하다	얕보다	侮る/あなどる/v5	stiff	dict	audit:5600 p2:219:new
+よそ者	n	타관 사람	외지인	余所者/よそもの/n	stiff	dict	audit:5641 p2:220:new
+くすぐった	adj	낯간지럽다	간지럽다	擽ったい/くすぐったい/adj	wrong	dict	audit:5647 p2:221:new
+脂	n	지방	기름	脂/あぶら/n	unnatural	dict	audit:5649 p2:222:new
+コンクール	n	콩쿨	콩쿠르	コンクール/こんくーる/n	wrong	dict	audit:5668 p2:223:new
+首相	n	수상	총리	首相/しゅしょう/n	unnatural	dict	audit:5731 p2:225:new
+打ち明け	v1	털어 놓다	털어놓다	打ち明ける/うちあける/v1	wrong	dict	audit:5739 p2:226:new
+不服	n	불복	불만	不服/ふふく/n	wrong	dict	audit:5745 p2:227:new
+ルーツ	n	루트	뿌리	ルーツ/るーつ/n	wrong	dict	audit:5756 p2:228:new
+散らか	v5	흩어지다	어질러지다	散らかる/ちらかる/v5	wrong	dict	audit:5766 p2:229:new
+勝ち取	v5	차지하다	쟁취하다	勝ち取る/かちとる/v5	wrong	dict	audit:5773 p2:230:new
+貸し	n	대여	빚	貸し/かし/n	wrong	dict	audit:5787 p2:231:new
+プール	n	풀	수영장	プール/ぷーる/n	wrong	dict	audit:5804 p2:232:new
+タレント	n	탤런트	연예인	タレント/たれんと/n	wrong	dict	audit:5819 p2:233:new
+ウェイトレス	n	웨이트레스	웨이트리스	ウエートレス/うえーとれす/n	translit	dict	audit:5831 p2:234:new
+ケチャップ	n	케찹	케첩	ケチャップ/けちゃっぷ/n	translit	dict	audit:5834 p2:235:new
+コク	n	코쿠	깊은 맛	こく/こく/n	translit	dict	audit:5835 p2:236:new
+へり	n	헤리	가장자리	縁/へり/n	translit	dict	audit:5837 p2:237:new
+収録	n	수록	녹화	収録/しゅうろく/n	wrong	dict	audit:5841 p2:238:new
+昂	v5	날카로워지다	흥분되다	高ぶる/たかぶる/v5	wrong	dict	audit:5844 p2:239:new
+アドリブ	n	애들립	애드리브	アドリブ/あどりぶ/n	translit	dict	audit:5846 p2:240:new
+シール	n	씰	스티커	シール/しーる/n	wrong	dict	audit:5851 p2:242:new
+焼き肉	n	불고기	야키니쿠	焼き肉/やきにく/n	wrong	dict	audit:5862 p2:243:new
+焼肉	n	불고기	야키니쿠	焼き肉/やきにく/n	wrong	dict	audit:5863 p2:244:new
+急用	n	급용	급한 용무	急用/きゅうよう/n	wrong	dict	audit:5867 p2:245:new
+人だかり	n	사람들 무리	인파	人だかり/ひとだかり/n	unnatural	dict	audit:5900 p2:249:new
+住み着	v5	정착하다	눌러살다	住み着く/すみつく/v5	unnatural	dict	audit:5910 p2:250:new
+リラックス	n	릴렉스	릴랙스	リラックス/りらっくす/n	translit	dict	audit:5955 p2:251:new
+年始	n	연시	연초	年始/ねんし/n	unnatural	dict	audit:5958 p2:252:new
+ぶち込	v5	쳐넣다	처넣다	打ち込む/ぶちこむ/v5	wrong	dict	audit:5975 p2:253:new
+係員	n	관계자	직원	係員/かかりいん/n	unnatural	dict	audit:5978 p2:254:new
+戦局	n	전국	전황	戦局/せんきょく/n	unnatural	dict	audit:6023 p2:255:new
+心中	n	심중	동반 자살	心中/しんじゅう/n	wrong	dict	audit:6038 p2:256:new
+バリア	n	바리어	배리어	バリア/ばりあ/n	translit	dict	audit:6042 p2:257:new
+倅	n	졸	아들	倅/せがれ/n	wrong	dict	audit:6069 p2:258:new
+言い争	v5	말다툼 하다	말다툼하다	言い争う/いいあらそう/v5	unnatural	dict	audit:6123 p2:261:new
+基づ	v5	기초를 두다	기반하다	基づく/もとづく/v5	unnatural	dict	audit:6124 p2:262:new
+たびたび	adv	가끔	자주	度々/たびたび/adv	wrong	dict	audit:6128 p2:263:new
+いにしえ	n	과거	옛날	古/いにしえ/n	unnatural	dict	audit:6130 p2:264:new
+ブツ	n	부츠	물건	物/ぶつ/n	wrong	dict	audit:6192 p2:266:new
+手ごわ	adj	벅차다	만만치 않다	手強い/てごわい/adj	wrong	dict	audit:6200 p2:267:new
+初春	n	초봄	하츠하루	初春/しょしゅん/n	word	dict	audit:6205 p2:268:new
+雲龍	n	운류우	운류	雲竜/うんりゅう/n	wrong	names	audit:6212 p2:269:new
+どのみち	adv	어쨌든	어차피	どの道/どのみち/adv	wrong	dict	audit:6300 p2:271:new
+マニア	n	매니아	마니아	マニア/まにあ/n	wrong	dict	audit:6340 p2:273:new
+早朝	n	아침 일찍	이른 아침	早朝/そうちょう/n	unnatural	dict	audit:6424 p2:275:new
+フグ	n	후그	복어	河豚/ふぐ/n	translit	dict	audit:6481 p2:278:new
+泊め	v1	묵게 하다	재우다	泊める/とめる/v1	unnatural	dict	audit:6494 p2:279:new
+敗退	n	패퇴	탈락	敗退/はいたい/n	wrong	dict	audit:6503 p2:280:new
+値打	n	값	가치	値打ち/ねうち/n	wrong	dict	audit:6506 p2:281:new
+値打ち	n	값	가치	値打ち/ねうち/n	wrong	dict	audit:6507 p2:282:new
+補欠	n	보결	후보	補欠/ほけつ/n	unnatural	dict	audit:6508 p2:283:new
+公儀	n	공공	막부	公儀/こうぎ/n	wrong	dict	audit:6515 p2:284:new
+振り込	v5	불입하다	입금하다	振り込む/ふりこむ/v5	wrong	dict	audit:6596 p2:287:new
+結びつ	v5	결합되다	연결되다	結び付く/むすびつく/v5	unnatural	dict	audit:6614 p2:288:new
+プレゼン	n	프리젠테이션	프레젠테이션	プレゼン/ぷれぜん/n	translit	dict	audit:6684 p2:290:new
+ビリ	n	비리	꼴찌	びり/びり/n	wrong	dict	audit:6697 p2:292:new
+一手	n	한 방법	한 수	一手/いって/n	wrong	dict	audit:6698 p2:293:new
+バカバカし	adj	우스꽝스럽다	어처구니없다	馬鹿馬鹿しい/ばかばかしい/adj	wrong	dict	audit:6743 p2:294:new
+それがし	n	아무게	소생	某/それがし/n	wrong	dict	audit:6758 p2:295:new
+ダウンヒル	n	활강	다운힐	ダウンヒル/だうんひる/n	unnatural	dict	audit:6769 p2:296:new
+乗り物	n	탈 것	탈것	乗り物/のりもの/n	unnatural	dict	audit:6798 p2:298:new
+チラシ	n	광고지	전단지	散らし/ちらし/n	unnatural	dict	audit:6812 p2:300:new
+ちらし	n	광고지	전단지	散らし/ちらし/n	unnatural	dict	audit:6813 p2:301:new
+申しつけ	v1	말하다	분부하다	申し付ける/もうしつける/v1	wrong	dict	audit:6817 p2:302:new
+税	n	세	세금	税/ぜい/n	unnatural	dict	audit:6821 p2:304:new
+通りかか	v5	우연히 지나가다	지나가다	通り掛かる/とおりかかる/v5	unnatural	dict	audit:6838 p2:305:new
+緩め	v1	느슨하게하다	늦추다	緩める/ゆるめる/v1	unnatural	dict	audit:6849 p2:306:new
+実質	n	실질	사실상	実質/じっしつ/n	stiff	dict	audit:6872 p2:311:new
+着ぐるみ	n	인형	인형탈	着ぐるみ/きぐるみ/n	unnatural	dict	audit:6884 p2:312:new
+勝	v5	우수하다	능가하다	勝る/まさる/v5	wrong	dict	audit:6888 p2:313:new
+吾輩	n	나자신	나	我が輩/わがはい/n	wrong	dict	audit:6927 p2:314:new
+さらば	intj	안녕히	안녕	さらば/さらば/intj	unnatural	dict	audit:6953 p2:315:new
+ナース	n	널스	간호사	ナース/なーす/n	translit	dict	audit:7020 p2:316:new
+パチンコ	n	파칭코	파친코	ぱちんこ/ぱちんこ/n	unnatural	dict	audit:7030 p2:317:new
+番頭	n	점장	지배인	番頭/ばんとう/n	wrong	dict	audit:7038 p2:318:new
+組員	n	회원	조직원	組員/くみいん/n	wrong	dict	audit:7048 p2:319:new
+サッパ	n	샅바	밴댕이	拶双魚/さっぱ/n	wrong	dict	audit:7054 p2:320:new
+ハーレム	n	할렘	하렘	ハレム/はれむ/n	wrong	dict	audit:7060 p2:322:new
+コネ	n	커넥션	연줄	コネ/こね/n	unnatural	dict	audit:7092 p2:324:new
+こさえ	v1	혹이 나다	만들다	拵える/こしらえる/v1	wrong	dict	audit:7128 p2:325:new
+粘	v5	달라붙다	버티다	粘る/ねばる/v5	wrong	dict	audit:7149 p2:326:new
+一覧	n	일람	목록	一覧/いちらん/n	stiff	dict	audit:7150 p2:327:new
+形跡	n	형적	흔적	形跡/けいせき/n	stiff	dict	audit:7202 p2:328:new
+さびつ	v5	잔뜩 녹슬다	녹슬다	錆び付く/さびつく/v5	wrong	dict	audit:7215 p2:329:new
+ベッピン	n	벱핀	미인	別嬪/べっぴん/n	translit	dict	audit:7247 p2:330:new
+盛りつけ	v1	수북이 담다	담다	盛り付ける/もりつける/v1	wrong	dict	audit:7266 p2:332:new
+レジ	n	레지	계산대	レジ/れじ/n	translit	dict	audit:7272 p2:333:new
+稲荷	n	곡신 신	이나리	稲荷/いなり/n	wrong	dict	audit:7289 p2:334:new
+ユニット	n	유니트	유닛	ユニット/ゆにっと/n	translit	dict	audit:7292 p2:335:new
+真夏	n	한 여름	한여름	真夏/まなつ/n	unnatural	dict	audit:7309 p2:336:new
+屁	n	비	방귀	屁/へ/n	wrong	dict	audit:7321 p2:339:new
+ミシン	n	미싱	재봉틀	ミシン/みしん/n	stiff	dict	audit:7348 p2:341:new
+エリカ	n	애리카	에리카	エリカ/えりか/n	wrong	names	audit:7353 p2:342:new
+残業	n	잔업	야근	残業/ざんぎょう/n	stiff	dict	audit:7355 p2:343:new
+所員	n	소원	직원	所員/しょいん/n	wrong	dict	audit:7362 p2:344:new
+追いや	v5	쫓아버리다	내몰다	追い遣る/おいやる/v5	wrong	dict	audit:7406 p2:345:new
+宿	v5	머무르다	깃들다	宿る/やどる/v5	wrong	dict	audit:7415 p2:346:new
+べったり	adv	찰삭	찰싹	べったり/べったり/adv	wrong	dict	audit:7428 p2:347:new
+歩き回	v5	걸어 다니다	돌아다니다	歩き回る/あるきまわる/v5	stiff	dict	audit:7429 p2:348:new
+流し込	v5	흘려 넣다	붓다	流し込む/ながしこむ/v5	unnatural	dict	audit:7430 p2:349:new
+急きょ	adv	서둘러	급히	急遽/きゅうきょ/adv	unnatural	dict	audit:7472 p2:350:new
+見立て	v1	진단하다	빗대다	見立てる/みたてる/v1	wrong	dict	audit:7539 p2:351:new
+追々	adv	계속해서	차차	追い追い/おいおい/adv	unnatural	dict	audit:7570 p2:352:new
+アザ	n	아자	멍	痣/あざ/n	translit	dict	audit:7583 p2:353:new
+あゆみ	n	걸음	발자취	歩み/あゆみ/n	unnatural	dict	audit:7585 p2:354:new
+くじ	n	복권	제비뽑기	籤/くじ/n	wrong	dict	audit:7604 p2:355:new
+取り返	v5	만회하다	되찾다	取り返す/とりかえす/v5	wrong	dict	audit:7608 p2:356:new
+助っ人	n	돕는 사람	조력자	助っ人/すけっと/n	stiff	dict	audit:7619 p2:358:new
+買い出し	n	직매	장보기	買い出し/かいだし/n	wrong	dict	audit:7653 p2:359:new
+士官	n	사관	장교	士官/しかん/n	stiff	dict	audit:7658 p2:360:new
+ウインナー	n	위너	비엔나소시지	ウィンナ/うぃんな/n	wrong	dict	audit:7676 p2:362:new
+公道	n	공도	공공도로	公道/こうどう/n	unnatural	dict	audit:7688 p2:363:new
+ウホ	intj	우호	우홋	うほ/うほ/intj	wrong	dict	audit:7706 p2:365:new
+松竹	n	마츠타케	쇼치쿠	松竹/しょうちく/n	wrong	dict	audit:7717 p2:366:new
+閉じこも	v5	두문불출하다	틀어박히다	閉じ籠もる/とじこもる/v5	stiff	dict	audit:7769 p2:367:new
+ひととき	n	한 때	한때	一時/ひととき/n	wrong	dict	audit:7798 p2:368:new
+こき使	v5	혹사하다	부려먹다	扱き使う/こきつかう/v5	unnatural	dict	audit:7835 p2:370:new
+仰	v5	들이키다	우러러보다	仰ぐ/あおぐ/v5	wrong	dict	audit:7844 p2:371:new
+降格	n	격하	강등	降格/こうかく/n	unnatural	dict	audit:7861 p2:372:new
+住処	n	주택	거처	住処/すみか/n	wrong	dict	audit:7868 p2:373:new
+見放	v5	단념하다	버리다	見放す/みはなす/v5	wrong	dict	audit:7884 p2:375:new
+頃合い	n	기회	적당한 때	頃合い/ころあい/n	wrong	dict	audit:7904 p2:378:new
+つまず	v5	채이다	걸려 넘어지다	躓く/つまずく/v5	wrong	dict	audit:7911 p2:379:new
+小豆	n	빨간콩	팥	小豆/あずき/n	wrong	dict	audit:7950 p2:381:new
+うすうす	adv	희미하게	어렴풋이	薄々/うすうす/adv	unnatural	dict	audit:7953 p2:382:new
+きゃつ	n	그 놈	그놈	彼奴/きゃつ/n	unnatural	dict	audit:7969 p2:383:new
+詮索	n	잔소리	캐묻기	詮索/せんさく/n	wrong	dict	audit:8013 p2:384:new
+雑魚	n	잡졸	잔챙이	雑魚/ざこ/n	unnatural	dict	audit:8031 p2:386:new
+勾配	n	구배	경사	勾配/こうばい/n	unnatural	dict	audit:8083 p2:387:new
+教祖	n	교조	교주	教祖/きょうそ/n	wrong	dict	audit:8093 p2:388:new
+差し伸べ	v1	뻗치다	내밀다	差し伸べる/さしのべる/v1	unnatural	dict	audit:8106 p2:389:new
+コンセプト	n	컨셉	콘셉트	コンセプト/こんせぷと/n	wrong	dict	audit:8118 p2:390:new
+右足	n	오른쪽 다리	오른발	右足/みぎあし/n	unnatural	dict	audit:8121 p2:391:new
+なでしこ	n	패랭이 꽃	패랭이꽃	撫子/なでしこ/n	wrong	dict	audit:8128 p2:392:new
+自負	n	자부	자부심	自負/じふ/n	unnatural	dict	audit:8206 p2:394:new
+鈍	v5	무디어지다	무뎌지다	鈍る/にぶる/v5	unnatural	dict	audit:8211 p2:395:new
+やんちゃ	n	응석	개구쟁이	やんちゃ/やんちゃ/n	wrong	dict	audit:8229 p2:396:new
+ありふれ	v1	흔히 있다	흔하다	有り触れる/ありふれる/v1	unnatural	dict	audit:8235 p2:397:new
+入れ代わ	v5	교체하다	바뀌다	入れ替わる/いれかわる/v5	wrong	dict	audit:8246 p2:398:new
+ほおば	v5	베어 물다	볼이 미어지게 먹다	頬張る/ほおばる/v5	wrong	dict	audit:8261 p2:400:new
+目つき	n	눈초리	눈빛	目付き/めつき/n	unnatural	dict	audit:8268 p2:401:new
+分際	n	분수	주제	分際/ぶんざい/n	wrong	dict	audit:8315 p2:402:new
+容体	n	용태	상태	容態/ようだい/n	stiff	dict	audit:8323 p2:403:new
+足腰	n	사지	하체	足腰/あしこし/n	wrong	dict	audit:8324 p2:404:new
+ジョーカー	n	조우커	조커	ジョーカー/じょーかー/n	translit	dict	audit:8333 p2:405:new
+見かけ	n	외관	겉모습	見掛け/みかけ/n	stiff	dict	audit:8343 p2:406:new
+コレクション	n	콜렉션	컬렉션	コレクション/これくしょん/n	wrong	dict	audit:8350 p2:407:new
+伊呂波	n	초보	이로하	伊呂波/いろは/n	word	dict	audit:8398 p2:408:new
+カルテ	n	진료기록카드	진료기록부	カルテ/かるて/n	unnatural	dict	audit:8399 p2:409:new
+ジューシー	na	쥬시하다	육즙이 풍부하다	ジューシー/じゅーしー/na	translit	dict	audit:8411 p2:410:new
+長引	v5	오래 끌다	길어지다	長引く/ながびく/v5	unnatural	dict	audit:8418 p2:411:new
+藩主	n	지방 영주	번주	藩主/はんしゅ/n	stiff	dict	audit:8450 p2:413:new
+潮時	n	물때	적당한 때	潮時/しおどき/n	wrong	dict	audit:8454 p2:414:new
+歌舞伎	n	가부끼	가부키	歌舞伎/かぶき/n	translit	dict	audit:8463 p2:415:new
+ホステス	n	호스테스	호스티스	ホステス/ほすてす/n	translit	dict	audit:8464 p2:416:new
+レギュレーション	n	규제	규정	レギュレーション/れぎゅれーしょん/n	wrong	dict	audit:8478 p2:417:new
+おとしめ	v1	얕보다	깎아내리다	貶める/おとしめる/v1	wrong	dict	audit:8489 p2:419:new
+あでやか	na	요염하다	화사하다	艶やか/あでやか/na	wrong	dict	audit:8508 p2:420:new
+双眸	n	두 눈동자	눈	双眸/そうぼう/n	unnatural	dict	audit:8512 p2:421:new
+貪	v5	탐내다	탐하다	貪る/むさぼる/v5	wrong	dict	audit:8514 p2:422:new
+丸っきり	adv	통	완전히	丸切り/まるきり/adv	unnatural	dict	audit:8535 p2:423:new
+まるっきり	adv	통	완전히	丸切り/まるきり/adv	unnatural	dict	audit:8536 p2:424:new
+リサイクル	n	리사이클	재활용	リサイクル/りさいくる/n	unnatural	dict	audit:8609 p2:427:new
+胸元	n	가슴 팍	가슴팍	胸元/むなもと/n	unnatural	dict	audit:8623 p2:428:new
+日替わり	n	일일	오늘의	日替わり/ひがわり/n	unnatural	dict	audit:8646 p2:429:new
+足踏み	n	제자리 걸음	제자리걸음	足踏み/あしぶみ/n	unnatural	dict	audit:8656 p2:431:new
+こけ	v1	구르다	넘어지다	転ける/こける/v1	wrong	dict	audit:8657 p2:432:new
+綿	n	면	솜	綿/わた/n	wrong	dict	audit:8687 p2:433:new
+出向	v5	나가다	찾아가다	出向く/でむく/v5	wrong	dict	audit:8699 p2:434:new
+浦風	n	갯바람	우라카제	浦風/うらかぜ/n	word	names	audit:8719 p2:435:new
+菜っ葉	n	푸성귀 잎	푸성귀	菜っ葉/なっぱ/n	unnatural	dict	audit:8735 p2:436:new
+通	v1	통과하다	지나가다	通る/とおる/v1	unnatural	dict	audit:8755 p2:438:new
+極上	n	극상	최상	極上/ごくじょう/n	stiff	dict	audit:8761 p2:439:new
+詞	n	사	가사	詞/し/n	unnatural	dict	audit:8764 p2:440:new
+羽音	n	날개소리	날갯소리	羽音/はおと/n	wrong	dict	audit:8795 p2:441:new
+ホッケー	n	핫키	하키	ホッケー/ほっけー/n	wrong	dict	audit:8848 p2:442:new
+天蚕	n	천잠아	천잠	天蚕/てんさん/n	wrong	dict	audit:8867 p2:443:new
+差し置	v5	그대로 두다	제쳐 두다	差し置く/さしおく/v5	wrong	dict	audit:8891 p2:444:new
+流れ着	v5	표류하다	흘러들다	流れ着く/ながれつく/v5	wrong	dict	audit:8938 p2:448:new
+寝返	v5	돌아눕다	배신하다	寝返る/ねがえる/v5	wrong	dict	audit:8969 p2:449:new
+扱	v1	취급하다	다루다	扱う/あつかう/v1	unnatural	dict	audit:8981 p2:450:new
+股間	n	가랑이	사타구니	股間/こかん/n	wrong	dict	audit:9013 p2:451:new
+射程	n	사정	사정거리	射程/しゃてい/n	unnatural	dict	audit:9031 p2:452:new
+辛み	n	매움	매운맛	辛み/からみ/n	unnatural	dict	audit:9042 p2:455:new
+間合い	n	틈	간격	間合い/まあい/n	wrong	dict	audit:9043 p2:456:new
+うっとり	adv	넋을 잃다	황홀하게	うっとり/うっとり/adv	unnatural	dict	audit:9068 p2:457:new
+障子	n	미닫이	장지문	障子/しょうじ/n	wrong	dict	audit:9079 p2:458:new
+抹茶	n	가루차	말차	抹茶/まっちゃ/n	unnatural	dict	audit:9080 p2:459:new
+生き生き	adv	생기있게	생기 있게	生き生き/いきいき/adv	unnatural	dict	audit:9090 p2:460:new
+あやまれ	v1	그릇되다	사과하다	謝る/あやまる/v1	wrong	dict	audit:9099 p2:461:new
+機雷	n	기계수뢰	기뢰	機雷/きらい/n	wrong	dict	audit:9140 p2:462:new
+邪険	na	몰인정하다	매정하다	邪険/じゃけん/na	unnatural	dict	audit:9153 p2:463:new
+絵描き	n	그림장이	화가	絵書き/えかき/n	unnatural	dict	audit:9171 p2:465:new
+近年	n	근년	최근	近年/きんねん/n	stiff	dict	audit:9193 p2:466:new
+深み	n	깊은 곳	깊이	深み/ふかみ/n	wrong	dict	audit:9216 p2:467:new
+さる	adn	지난	어떤	然る/さる/adn	wrong	dict	audit:9222 p2:468:new
+隅っこ	n	한 귀퉁이	구석	隅っこ/すみっこ/n	unnatural	dict	audit:9243 p2:469:new
+内儀	n	마누라	안주인	内儀/ないぎ/n	unnatural	dict	audit:9263 p2:470:new
+特需	n	특수 수요	특수	特需/とくじゅ/n	unnatural	dict	audit:9267 p2:471:new
+討幕	n	막부를 토벌함	막부 토벌	討幕/とうばく/n	unnatural	dict	audit:9271 p2:472:new
+ひと握り	n	약간	한 줌	一握り/ひとにぎり/n	wrong	dict	audit:9322 p2:474:new
+居座	v5	눌러 앉다	눌러앉다	居座る/いすわる/v5	unnatural	dict	audit:9368 p2:475:new
+声音	n	음성	목소리	声音/こわね/n	stiff	dict	audit:9387 p2:476:new
+大通り	n	큰 길	큰길	大通り/おおどおり/n	unnatural	dict	audit:9409 p2:477:new
+イッツ	n	이츠	잇츠	イッツ/いっつ/n	translit	dict	audit:9415 p2:478:new
+生き残り	n	생존	생존자	生き残り/いきのこり/n	wrong	dict	audit:9418 p2:479:new
+石ころ	n	자갈	돌멩이	石ころ/いしころ/n	wrong	dict	audit:9514 p2:481:new
+インカム	n	인 컴	인컴	インカム/いんかむ/n	translit	dict	audit:9517 p2:482:new
+勘づ	v5	차리다	눈치채다	感付く/かんづく/v5	wrong	dict	audit:9523 p2:483:new
+感づ	v5	차리다	눈치채다	感付く/かんづく/v5	wrong	dict	audit:9524 p2:484:new
+岬	n	미사키	곶	岬/みさき/n	name	dict	audit:9535 p2:485:new
+ちょくちょく	adv	가끔	자주	ちょくちょく/ちょくちょく/adv	wrong	dict	audit:9537 p2:486:new
+こたつ	n	난로	코타츠	火燵/こたつ/n	wrong	dict	audit:9574 p2:488:new
+カモン	n	카몬	컴온	カモン/かもん/n	translit	dict	audit:9589 p2:489:new
+空き家	n	빈 집	빈집	空き家/あきや/n	unnatural	dict	audit:9622 p2:490:new
+年中	n	연중	일년 내내	年中/ねんじゅう/n	stiff	dict	audit:9636 p2:491:new
+パスポート	n	패스포트	여권	パスポート/ぱすぽーと/n	translit	dict	audit:9638 p2:492:new
+私情	n	사정	사사로운 감정	私情/しじょう/n	wrong	dict	audit:9665 p2:493:new
+落ち合	v5	합류하다	만나다	落ち合う/おちあう/v5	unnatural	dict	audit:9675 p2:494:new
+辛苦	n	신고	고생	辛苦/しんく/n	stiff	dict	audit:9719 p2:495:new
+鉄くず	n	철조각	고철	鉄屑/てつくず/n	unnatural	dict	audit:9749 p2:496:new
+縁結び	n	결연	인연 맺기	縁結び/えんむすび/n	unnatural	dict	audit:9766 p2:497:new
+満ちあふれ	v1	충만되다	가득 차다	満ち溢れる/みちあふれる/v1	unnatural	dict	audit:9790 p2:498:new
+負け犬	n	싸움에 진 개	패배자	負け犬/まけいぬ/n	unnatural	dict	audit:9792 p2:499:new
+受け流	v5	받아 넘기다	받아넘기다	受け流す/うけながす/v5	unnatural	dict	audit:9805 p2:502:new
+幼子	n	어린 아이	어린아이	幼子/おさなご/n	unnatural	dict	audit:9806 p2:503:new
+ひっそり	adv	고요히	조용히	ひっそり/ひっそり/adv	unnatural	dict	audit:9811 p2:504:new
+素行	n	소행	품행	素行/そこう/n	wrong	dict	audit:9825 p2:506:new
+ならわし	n	습관	관습	習わし/ならわし/n	wrong	dict	audit:9830 p2:507:new
+習わし	n	습관	관습	習わし/ならわし/n	wrong	dict	audit:9831 p2:508:new
+延々	adv	장장	끝없이	延々/えんえん/adv	unnatural	dict	audit:9857 p2:510:new
+引き込	v5	끌어 들이다	끌어들이다	引き込む/ひきこむ/v5	unnatural	dict	audit:9859 p2:511:new
+擦り抜け	v1	비집고 빠져나나다	빠져나가다	擦り抜ける/すりぬける/v1	wrong	dict	audit:9885 p2:512:new
+ゲンコ	n	겐코	주먹	拳骨/げんこつ/n	translit	dict	audit:9903 p2:513:new
+がれき	n	기왓조각과 돌	잔해	瓦礫/がれき/n	unnatural	dict	audit:9926 p2:515:new
+差配	n	대리인	지휘	差配/さはい/n	wrong	dict	audit:9942 p2:516:new
+下品	na	천하다	저속하다	下品/げひん/na	unnatural	dict	audit:9947 p2:517:new
+何分	n	몇분	몇 분	何分/なにぶん/n	unnatural	dict	audit:10009 p2:519:new
+駆け回	v5	이리저리 다니다	뛰어다니다	駆け回る/かけまわる/v5	unnatural	dict	audit:10011 p2:520:new
+イヤホン	n	이어 폰	이어폰	イヤホン/いやほん/n	translit	dict	audit:10022 p2:522:new
+山頂	n	산정	정상	山頂/さんちょう/n	stiff	dict	audit:10028 p2:523:new
+成り行き	n	형편	흐름	成り行き/なりゆき/n	unnatural	dict	audit:10056 p2:525:new
+リミット	n	리밋트	리미트	リミット/りみっと/n	unnatural	dict	audit:10067 p2:526:new
+一転	n	일전	일변	一転/いってん/n	wrong	dict	audit:10076 p2:527:new
+気色	n	기색	기분	気色/けしき/n	wrong	dict	audit:10084 p2:528:new
+晩飯	n	저녁 밥	저녁밥	晩飯/ばんめし/n	unnatural	dict	audit:10095 p2:529:new
+艦影	n	함영	함선	艦影/かんえい/n	wrong	dict	audit:10125 p2:531:new
+温存	n	온존	보존	温存/おんぞん/n	unnatural	dict	audit:10133 p2:532:new
+キラッキラ	n	키락키라	반짝반짝	キラッキラ//n	translit	dict	audit:10137 p2:533:new
+シッ	n	싯	쉿	シッ//n	translit	dict	audit:10142 p2:534:new
+ゴンドラ	n	곤도라	곤돌라	ゴンドラ/ごんどら/n	unnatural	dict	audit:10148 p2:535:new
+さだめ	n	규정	운명	定め/さだめ/n	wrong	dict	audit:10157 p2:536:new
+定め	n	규정	운명	定め/さだめ/n	wrong	dict	audit:10158 p2:537:new
+水手	n	선두	선원	水手/すいしゅ/n	wrong	dict	audit:10172 p2:538:new
+ひき肉	n	다진고기	다진 고기	挽き肉/ひきにく/n	unnatural	dict	audit:10196 p2:539:new
+怒声	n	노성	고함	怒声/どせい/n	stiff	dict	audit:10204 p2:541:new
+悲願	n	비원	숙원	悲願/ひがん/n	stiff	dict	audit:10208 p2:543:new
+マニフェスト	n	마니페스트	매니페스토	マニフェスト/まにふぇすと/n	translit	dict	audit:10217 p2:545:new
+道のり	n	도정	여정	道程/みちのり/n	unnatural	dict	audit:10226 p2:547:new
+せん越	n	참월	외람됨	僭越/せんえつ/n	unnatural	dict	audit:10244 p2:548:new
+僭越	n	건방짐	외람됨	僭越/せんえつ/n	wrong	dict	audit:10245 p2:549:new
+ファイナリスト	n	결승 출전자	결승 진출자	ファイナリスト/ふぁいなりすと/n	unnatural	dict	audit:10256 p2:550:new
+呼び立て	v1	불러내다	부르다	呼び立てる/よびたてる/v1	unnatural	dict	audit:10273 p2:552:new
+閣議	n	내각회의	각의	閣議/かくぎ/n	unnatural	dict	audit:10290 p2:553:new
+ケイリナ	n	리아데일의 대지에서	케이리나	ケイリナ//n	word	names	audit:10295 p2:554:new
+毛針	n	제물 낚시	제물낚시	毛針/けばり/n	unnatural	dict	audit:10297 p2:555:new
+毛ばり	n	제물 낚시	제물낚시	毛針/けばり/n	unnatural	dict	audit:10298 p2:556:new
+みずみずし	adj	신선하다	싱그럽다	瑞々しい/みずみずしい/adj	unnatural	dict	audit:10317 p2:558:new
+敷き詰め	v1	전면에 깔다	빈틈없이 깔다	敷き詰める/しきつめる/v1	unnatural	dict	audit:10325 p2:559:new
+すっぽか	v5	내팽게 치다	내팽개치다	すっぽかす/すっぽかす/v5	wrong	dict	audit:10386 p2:561:new
+おこがまし	adj	우습다	주제넘다	烏滸がましい/おこがましい/adj	wrong	dict	audit:10389 p2:562:new
+引き立	v5	두드러지다	돋보이다	引き立つ/ひきたつ/v5	unnatural	dict	audit:10412 p2:563:new
+へばりつ	v5	달라 붙다	달라붙다	へばり付く/へばりつく/v5	wrong	dict	audit:10431 p2:564:new
+改行	n	개행	줄바꿈	改行/かいぎょう/n	stiff	dict	audit:10468 p2:565:new
+インパクト	n	임펙트	임팩트	インパクト/いんぱくと/n	translit	dict	audit:10543 p2:566:new
+つる	v5	교미하다	어울리다	交尾む/つるむ/v5	wrong	dict	audit:10556 p2:567:new
+スパム	n	스팸메일	스팸	スパム/すぱむ/n	wrong	dict	audit:10561 p2:568:new
+えず	v5	게우다	구역질하다	嘔く/えずく/v5	wrong	dict	audit:10582 p2:569:new
+うぬ	n	이놈	네놈	うぬ/うぬ/n	wrong	dict	audit:10599 p2:570:new
+威勢	n	위세	기세	威勢/いせい/n	wrong	dict	audit:10618 p2:571:new
+ゴング	n	징	공	ゴング/ごんぐ/n	wrong	dict	audit:10621 p2:572:new
+取り立て	n	징수	추심	取り立て/とりたて/n	wrong	dict	audit:10628 p2:574:new
+初月	n	처음달	하츠즈키	初月/しょげつ/n	name	dict	audit:10670 p2:575:new
+けなげ	na	씩씩하다	갸륵하다	健気/けなげ/na	wrong	dict	audit:10705 p2:576:new
+あが	v5	긴장하다	발버둥치다	足掻く/あがく/v5	wrong	dict	audit:10717 p2:578:new
+小指	n	새끼 손가락	새끼손가락	小指/こゆび/n	wrong	dict	audit:10732 p2:579:new
+道草	n	시간낭비	딴짓	道草/みちくさ/n	wrong	dict	audit:10737 p2:580:new
+ガイドライン	n	가이드 라인	가이드라인	ガイドライン/がいどらいん/n	wrong	dict	audit:10739 p2:581:new
+掛け合	v5	흥정하다	교섭하다	掛け合う/かけあう/v5	wrong	dict	audit:10748 p2:582:new
+かけあ	v5	흥정하다	교섭하다	掛け合う/かけあう/v5	wrong	dict	audit:10749 p2:583:new
+合鍵	n	여벌쇠	여벌 열쇠	合鍵/あいかぎ/n	unnatural	dict	audit:10753 p2:584:new
+大男	n	큰 남자	거한	大男/おおおとこ/n	unnatural	dict	audit:10758 p2:585:new
+羽ばた	v5	홰치다	날갯짓하다	羽ばたく/はばたく/v5	unnatural	dict	audit:10762 p2:586:new
+刃向か	v5	거슬리다	대들다	刃向かう/はむかう/v5	wrong	dict	audit:10772 p2:587:new
+心残り	n	유감	아쉬움	心残り/こころのこり/n	wrong	dict	audit:10777 p2:589:new
+当店	n	당점	저희 가게	当店/とうてん/n	stiff	dict	audit:10801 p2:592:new
+泡盛	n	쌀소주	아와모리	泡盛/あわもり/n	unnatural	dict	audit:10815 p2:593:new
+いっとき	n	동시	한때	一時/いっとき/n	wrong	dict	audit:10831 p2:595:new
+在留	n	재류	체류	在留/ざいりゅう/n	unnatural	dict	audit:10861 p2:597:new
+ヨード	n	요드	요오드	ヨード/よーど/n	unnatural	dict	audit:10878 p2:598:new
+ガセ	n	가세	헛소문	がせ/がせ/n	translit	names	audit:10896 p2:599:new
+着火	n	발화	점화	着火/ちゃっか/n	unnatural	dict	audit:10897 p2:600:new
+オクテ	n	오크테	숙맥	奥手/おくて/n	translit	dict	audit:10926 p2:601:new
+息女	n	딸	따님	息女/そくじょ/n	unnatural	dict	audit:10929 p2:602:new
+行き交	v5	왕래하다	오가다	行き交う/いきかう/v5	stiff	dict	audit:10956 p2:604:new
+聞きつけ	v1	우연히 듣다	듣다	聞き付ける/ききつける/v1	wrong	dict	audit:11005 p2:605:new
+思い立	v5	생각나다	마음먹다	思い立つ/おもいたつ/v5	wrong	dict	audit:11037 p2:606:new
+土日	n	토일요일	주말	土日/どにち/n	unnatural	dict	audit:11073 p2:608:new
+しゃが	v5	주저앉다	쪼그려 앉다	しゃがむ/しゃがむ/v5	wrong	dict	audit:11076 p2:609:new
+嫁ぎ先	n	시집갈 곳	시집간 곳	嫁ぎ先/とつぎさき/n	wrong	dict	audit:11088 p2:610:new
+いけにえ	n	희생	제물	生け贄/いけにえ/n	wrong	dict	audit:11091 p2:611:new
+生っ粋	n	순수	토박이	生っ粋/きっすい/n	wrong	dict	audit:11104 p2:612:new
+めど	n	목표	전망	目処/めど/n	wrong	dict	audit:11110 p2:613:new
+かす	v1	퇴색하다	스치다	掠める/かすめる/v1	wrong	dict	audit:11128 p2:614:new
+外周	n	외주	외곽	外周/がいしゅう/n	unnatural	dict	audit:11129 p2:615:new
+聚楽	n	쥬라쿠	주라쿠	聚楽/じゅらく/n	wrong	dict	audit:11142 p2:616:new
+古来	n	고래	예로부터	古来/こらい/n	stiff	dict	audit:11151 p2:617:new
+財宝	n	재보	보물	財宝/ざいほう/n	stiff	dict	audit:11180 p2:620:new
+宿屋	n	여인숙	여관	宿屋/やどや/n	unnatural	dict	audit:11181 p2:621:new
+交互	n	교호	번갈아	交互/こうご/n	unnatural	dict	audit:11214 p2:623:new
+ダジャレ	n	다자레	말장난	駄洒落/だじゃれ/n	translit	dict	audit:11231 p2:624:new
+焦ら	v5	초조하게 하다	애태우다	焦らす/じらす/v5	unnatural	dict	audit:11244 p2:625:new
+出歩	v5	돌아 다니다	돌아다니다	出歩く/であるく/v5	unnatural	dict	audit:11251 p2:626:new
+舞	n	무용	춤	舞/まい/n	unnatural	dict	audit:11256 p2:627:new
+夕餉	n	석식	저녁	夕食/ゆうげ/n	stiff	dict	audit:11269 p2:628:new
+目隠し	n	눈 가림	눈가리개	目隠し/めかくし/n	unnatural	dict	audit:11279 p2:629:new
+自腹	n	자기부담	사비	自腹/じばら/n	unnatural	dict	audit:11296 p2:631:new
+抜かり	n	실수	빈틈	抜かり/ぬかり/n	unnatural	dict	audit:11307 p2:632:new
+実り	n	소득	결실	実り/みのり/n	wrong	dict	audit:11332 p2:633:new
+仮眠	n	선잠	쪽잠	仮眠/かみん/n	wrong	dict	audit:11338 p2:634:new
+力添え	n	원조	도움	力添え/ちからぞえ/n	stiff	dict	audit:11345 p2:635:new
+魚介	n	어개	해산물	魚介/ぎょかい/n	stiff	dict	audit:11370 p2:636:new
+しぶと	adj	완고하다	끈질기다	しぶとい/しぶとい/adj	wrong	dict	audit:11374 p2:637:new
+ヘマ	n	헤마	실수	へま/へま/n	translit	dict	audit:11386 p2:638:new
+フィッシュ	n	피쉬	피시	フィッシュ/ふぃっしゅ/n	unnatural	dict	audit:11389 p2:639:new
+究明	n	구명	규명	究明/きゅうめい/n	wrong	dict	audit:11418 p2:640:new
+暖簾	n	커튼	포렴	暖簾/のれん/n	wrong	dict	audit:11422 p2:642:new
+差し金	n	곱자	사주	差し金/さしがね/n	wrong	dict	audit:11466 p2:644:new
+野原	n	들	들판	野原/のはら/n	unnatural	dict	audit:11515 p2:646:new
+ワイナリー	n	와이나리	와이너리	ワイナリー/わいなりー/n	translit	dict	audit:11517 p2:647:new
+笹	n	세	조릿대	笹/ささ/n	wrong	dict	audit:11526 p2:648:new
+製法	n	제법	제조법	製法/せいほう/n	unnatural	dict	audit:11528 p2:649:new
+デカ	n	십	형사	でか/でか/n	wrong	dict	audit:11533 p2:650:new
+ゆんべ	n	윰베	어젯밤	夕べ/ゆうべ/n	translit	dict	audit:11541 p2:651:new
+全土	n	전 국토	전역	全土/ぜんど/n	unnatural	dict	audit:11562 p2:652:new
+ワッパ	n	와트당 성능	수갑	輪っぱ/わっぱ/n	wrong	dict	audit:11574 p2:653:new
+未明	n	미명	새벽	未明/みめい/n	stiff	dict	audit:11577 p2:654:new
+サツ	n	사츠	경찰	察/さつ/n	translit	dict	audit:11578 p2:655:new
+スナイドル	n	스나이돌	스나이더	スナイドル/すないどる/n	translit	dict	audit:11618 p2:656:new
+かきわけ	v1	나누어 쓰다	헤치다	掻き分ける/かきわける/v1	wrong	dict	audit:11650 p2:657:new
+かき分け	v1	밀어 헤치다	헤치다	掻き分ける/かきわける/v1	unnatural	dict	audit:11651 p2:658:new
+掻き分け	v1	밀어 헤치다	헤치다	掻き分ける/かきわける/v1	unnatural	dict	audit:11652 p2:659:new
+取ら	v5	받아들이게 하다	주다	取らす/とらす/v5	wrong	dict	audit:11661 p2:660:new
+とら	v5	받아들이게 하다	주다	取らす/とらす/v5	wrong	dict	audit:11662 p2:661:new
+聞き取	v1	알아 듣다	알아듣다	聞き取る/ききとる/v1	unnatural	dict	audit:11667 p2:662:new
+どっちみち	adv	결국은	어차피	どっち道/どっちみち/adv	wrong	dict	audit:11672 p2:663:new
+こじれ	v1	악화되다	꼬이다	拗れる/こじれる/v1	wrong	dict	audit:11676 p2:664:new
+かすれ	v1	칼칼하다	갈라지다	掠れる/かすれる/v1	wrong	dict	audit:11685 p2:665:new
+聞き届け	v1	받아 들이다	들어주다	聞き届ける/ききとどける/v1	wrong	dict	audit:11688 p2:666:new
+かき集め	v1	모으다	긁어모으다	掻き集める/かきあつめる/v1	unnatural	dict	audit:11712 p2:668:new
+酔っ払い	n	술주정꾼	취객	酔っ払い/よっぱらい/n	unnatural	dict	audit:11718 p2:669:new
+酔っぱらい	n	술주정꾼	취객	酔っ払い/よっぱらい/n	unnatural	dict	audit:11719 p2:670:new
+厚意	n	후의	호의	厚意/こうい/n	stiff	dict	audit:11737 p2:671:new
+そっけな	adj	무정하다	쌀쌀맞다	素っ気ない/そっけない/adj	unnatural	dict	audit:11767 p2:672:new
+街並み	n	거리풍경	거리 풍경	町並み/まちなみ/n	unnatural	dict	audit:11803 p2:673:new
+意匠	n	생각	디자인	意匠/いしょう/n	wrong	dict	audit:11841 p2:675:new
+しむけ	v1	작용하다	유도하다	仕向ける/しむける/v1	wrong	dict	audit:11852 p2:676:new
+仕向け	v1	대하다	유도하다	仕向ける/しむける/v1	wrong	dict	audit:11853 p2:677:new
+くすぐり	n	간질임	간지럼	擽り/くすぐり/n	unnatural	dict	audit:11876 p2:678:new
+よだれ	n	군침	침	涎/よだれ/n	wrong	dict	audit:11880 p2:679:new
+カツ丼	n	가쓰돈	가쓰동	カツ丼/かつどん/n	translit	dict	audit:11890 p2:680:new
+旅立ち	n	여행	출발	旅立ち/たびだち/n	wrong	dict	audit:11895 p2:681:new
+吹き出	v1	불거져 나오다	뿜어 나오다	吹き出る/ふきでる/v1	wrong	dict	audit:11923 p2:682:new
+サバ	n	사바	고등어	鯖/さば/n	translit	dict	audit:11951 p2:683:new
+取り壊	v5	무너뜨리다	철거하다	取り壊す/とりこわす/v5	wrong	dict	audit:11959 p2:684:new
+掬	v5	떠올리다	뜨다	掬う/すくう/v5	wrong	dict	audit:11984 p2:687:new
+今朝方	n	오늘 아침께	오늘 아침	今朝方/けさがた/n	stiff	dict	audit:11994 p2:688:new
+個室	n	독실	개인실	個室/こしつ/n	wrong	dict	audit:12006 p2:689:new
+町内	n	동내	동네	町内/ちょうない/n	wrong	dict	audit:12021 p2:690:new
+隠れ家	n	은둔지	은신처	隠れ家/かくれが/n	unnatural	dict	audit:12036 p2:691:new
+タンス	n	장	장롱	箪笥/たんす/n	unnatural	dict	audit:12073 p2:693:new
+切り上げ	v1	끝맺다	끝내다	切り上げる/きりあげる/v1	unnatural	dict	audit:12076 p2:694:new
+持ちこたえ	v1	유지하다	버티다	持ち堪える/もちこたえる/v1	wrong	dict	audit:12077 p2:695:new
+キャラメル	n	카라멜	캐러멜	キャラメル/きゃらめる/n	translit	dict	audit:12082 p2:696:new
+酒臭	adj	술내가 나다	술 냄새가 나다	酒臭い/さけくさい/adj	unnatural	dict	audit:12090 p2:697:new
+切れ端	n	토막	조각	切れ端/きれはし/n	unnatural	dict	audit:12105 p2:699:new
+つり橋	n	적교	흔들다리	吊り橋/つりばし/n	unnatural	dict	audit:12119 p2:700:new
+イカれ	v1	고장 나다	맛이 가다	いかれる/いかれる/v1	unnatural	dict	audit:12122 p2:701:new
+ツナギ	n	츠나기	작업복	繋ぎ/つなぎ/n	translit	dict	audit:12149 p2:704:new
+善人	n	선인	착한 사람	善人/ぜんにん/n	stiff	dict	audit:12179 p2:705:new
+うつつ	n	제 정신	현실	現/うつつ/n	wrong	dict	audit:12225 p2:707:new
+ヤマザクラ	n	야마자크라	산벚나무	山桜/やまざくら/n	translit	dict	audit:12243 p2:709:new
+臭み	n	악취	잡내	臭み/くさみ/n	wrong	dict	audit:12249 p2:710:new
+くさみ	n	악취	잡내	臭み/くさみ/n	wrong	dict	audit:12250 p2:711:new
+あらが	v5	논쟁하다	저항하다	抗う/あらがう/v5	wrong	dict	audit:12260 p2:712:new
+大店	n	대점	큰 가게	大店/おおだな/n	wrong	dict	audit:12281 p2:715:new
+黒船	n	외국 함선	흑선	黒船/くろふね/n	unnatural	dict	audit:12291 p2:716:new
+家来	n	하인	가신	家来/けらい/n	wrong	dict	audit:12293 p2:717:new
+年収	n	연수입	연봉	年収/ねんしゅう/n	unnatural	dict	audit:12302 p2:718:new
+死骸	n	송장	시체	死骸/しがい/n	unnatural	dict	audit:12306 p2:719:new
+虫けら	n	벌거지	벌레	虫螻/むしけら/n	unnatural	dict	audit:12318 p2:720:new
+ソーメン	n	소멘	소면	素麺/そうめん/n	translit	dict	audit:12321 p2:721:new
+砂場	n	모래 밭	모래놀이터	砂場/すなば/n	wrong	dict	audit:12328 p2:722:new
+コンテンツ	n	컨텐츠	콘텐츠	コンテンツ/こんてんつ/n	translit	dict	audit:12377 p2:724:new
+レンタル	n	렌탈	렌털	レンタル/れんたる/n	translit	dict	audit:12393 p2:725:new
+泣きわめ	v5	울며 아우성치다	울부짖다	泣き喚く/なきわめく/v5	unnatural	dict	audit:12411 p2:726:new
+狼狽	n	낭패	당황	狼狽/ろうばい/n	wrong	dict	audit:12472 p2:727:new
+忌み嫌	v5	피하다	꺼리다	忌み嫌う/いみきらう/v5	wrong	dict	audit:12496 p2:728:new
+シャレ	n	장난	농담	洒落/しゃれ/n	wrong	dict	audit:12522 p2:729:new
+聞き捨て	v1	흘려버리다	흘려듣다	聞き捨てる/ききすてる/v1	wrong	dict	audit:12523 p2:730:new
+妬まし	adj	부럽다	샘나다	妬ましい/ねたましい/adj	wrong	dict	audit:12541 p2:732:new
+両足	n	양 다리	양발	両足/りょうあし/n	unnatural	dict	audit:12551 p2:733:new
+苦み	n	쓴 맛	쓴맛	苦味/にがみ/n	unnatural	dict	audit:12598 p2:736:new
+チャラ	n	차라	없던 일	ちゃら/ちゃら/n	translit	names	audit:12629 p2:737:new
+呼び込	v5	불러 들이다	불러들이다	呼び込む/よびこむ/v5	unnatural	dict	audit:12677 p2:738:new
+あさ	v5	찾아다니다	뒤지다	漁る/あさる/v5	unnatural	dict	audit:12690 p2:739:new
+眷属	n	친족	권속	眷属/けんぞく/n	wrong	dict	audit:12724 p2:740:new
+じゃれ	v1	장난하다	장난치다	戯れる/じゃれる/v1	unnatural	dict	audit:12732 p2:741:new
+朝焼け	n	아침 놀	아침노을	朝焼け/あさやけ/n	unnatural	dict	audit:12797 p2:742:new
+上達	n	능숙	향상	上達/じょうたつ/n	wrong	dict	audit:12801 p2:743:new
+恩義	n	은의	은혜	恩義/おんぎ/n	stiff	dict	audit:12821 p2:746:new
+セオリー	n	시어리	정석	セオリー/せおりー/n	translit	dict	audit:12822 p2:747:new
+おおかた	adv	대충	거의	大方/おおかた/adv	wrong	dict	audit:12833 p2:748:new
+半数	n	반수	절반	半数/はんすう/n	unnatural	dict	audit:12834 p2:749:new
+重々	adv	거듭거듭	충분히	重々/じゅうじゅう/adv	wrong	dict	audit:12839 p2:750:new
+落し物	n	흘린 물건	분실물	落とし物/おとしもの/n	unnatural	dict	audit:12871 p2:752:new
+絵の具	n	그림도구	물감	絵の具/えのぐ/n	wrong	dict	audit:12886 p2:753:new
+ひずみ	n	폐해	뒤틀림	歪み/ひずみ/n	wrong	dict	audit:12899 p2:754:new
+うがい	n	양치질	가글	嗽/うがい/n	wrong	dict	audit:12906 p2:755:new
+もくろ	v5	계획하다	꾀하다	目論む/もくろむ/v5	unnatural	dict	audit:12922 p2:757:new
+殺りく	n	살륙	살육	殺戮/さつりく/n	wrong	dict	audit:12935 p2:758:new
+ハグ	n	하그	허그	ハグ/はぐ/n	translit	dict	audit:12962 p2:759:new
+ホットケーキ	n	핫키	핫케이크	ホットケーキ/ほっとけーき/n	translit	dict	audit:12968 p2:760:new
+神輿	n	신여	미코시	御輿/みこし/n	unnatural	dict	audit:12982 p2:761:new
+竹林	n	타케바야시	대나무 숲	竹林/ちくりん/n	name	dict	audit:12995 p2:762:new
+けん玉	n	죽방울	켄다마	剣玉/けんだま/n	wrong	dict	audit:12998 p2:763:new
+いぶ	v5	그슬리다	그을리다	燻す/いぶす/v5	wrong	dict	audit:13014 p2:766:new
+ニガリ	n	니가리	간수	苦汁/にがり/n	translit	dict	audit:13015 p2:767:new
+パワハラ	n	파워하라	직장 내 괴롭힘	パワハラ/ぱわはら/n	translit	names	audit:13018 p2:768:new
+盆踊り	n	윤무	본오도리	盆踊り/ぼんおどり/n	wrong	dict	audit:13026 p2:769:new
+付箋	n	찌	포스트잇	付箋/ふせん/n	unnatural	dict	audit:13052 p2:771:new
+葛	n	덩굴	칡	葛/くず/n	wrong	dict	audit:13060 p2:772:new
+宛先	n	행선지	수신처	宛て先/あてさき/n	wrong	dict	audit:13079 p2:773:new
+密通	n	밀통	간통	密通/みっつう/n	unnatural	dict	audit:13082 p2:774:new
+刺し子	n	누비옷	사시코	刺し子/さしこ/n	wrong	dict	audit:13158 p2:777:new
+訪れ	n	방문	도래	訪れ/おとずれ/n	unnatural	dict	audit:13166 p2:778:new
+店先	n	점포 앞	가게 앞	店先/みせさき/n	stiff	dict	audit:13208 p2:780:new
+豚骨	n	돼지뼈	돈코츠	豚骨/とんこつ/n	wrong	dict	audit:13215 p2:781:new
+割り出	v5	산출하다	알아내다	割り出す/わりだす/v5	wrong	dict	audit:13225 p2:782:new
+擦り切れ	v1	닳아 떨어지다	해지다	擦り切れる/すりきれる/v1	unnatural	dict	audit:13239 p2:783:new
+緩慢	na	완만하다	느리다	緩慢/かんまん/na	wrong	dict	audit:13240 p2:784:new
+初頭	n	초두	초	初頭/しょとう/n	unnatural	dict	audit:13253 p2:785:new
+明言	n	명언	확언	明言/めいげん/n	wrong	dict	audit:13330 p2:787:new
+断裂	n	단열	균열	断裂/だんれつ/n	wrong	dict	audit:13348 p2:789:new
+傍目	n	곁눈질	남의 눈	傍目/はため/n	wrong	dict	audit:13352 p2:790:new
+享受	n	향수	향유	享受/きょうじゅ/n	wrong	dict	audit:13365 p2:791:new
+へそくり	n	사천	비상금	臍繰り/へそくり/n	wrong	dict	audit:13379 p2:793:new
+冑	n	주	투구	兜/かぶと/n	wrong	dict	audit:13384 p2:794:new
+山分け	n	똑같이 나눔	나눠 갖기	山分け/やまわけ/n	unnatural	dict	audit:13398 p2:795:new
+つかの間	n	잠시동안	잠시	束の間/つかのま/n	unnatural	dict	audit:13403 p2:796:new
+持ち去	v5	가지고 사라지다	가져가다	持ち去る/もちさる/v5	unnatural	dict	audit:13408 p2:797:new
+押し当て	v1	꽉 누르다	갖다 대다	押し当てる/おしあてる/v1	wrong	dict	audit:13410 p2:798:new
+マジシャン	n	매지션	마술사	マジシャン/まじしゃん/n	unnatural	dict	audit:13443 p2:799:new
+ノーム	n	놈	노움	ノーム/のーむ/n	wrong	dict	audit:13444 p2:800:new
+さしずめ	adv	막바지	말하자면	差詰/さしずめ/adv	wrong	dict	audit:13466 p2:803:new
+しなやか	na	날씬하다	유연하다	しなやか/しなやか/na	wrong	dict	audit:13479 p2:804:new
+ツキ	n	츠키	운	付き/つき/n	name	dict	audit:13509 p2:805:new
+買い替え	v1	사서 바꾸다	바꿔 사다	買い換える/かいかえる/v1	wrong	dict	audit:13511 p2:807:new
+建前	n	표면	겉치레	建て前/たてまえ/n	wrong	dict	audit:13513 p2:808:new
+屈託	n	근심	구김살	屈託/くったく/n	wrong	dict	audit:13518 p2:809:new
+事象	n	사상	현상	事象/じしょう/n	wrong	dict	audit:13523 p2:810:new
+子細	n	자세	사정	子細/しさい/n	wrong	dict	audit:13559 p2:811:new
+系	n	계	계열	系/けい/n	unnatural	dict	audit:13561 p2:812:new
+ジプシー	n	짚시	집시	ジプシー/じぷしー/n	wrong	dict	audit:13565 p2:813:new
+嫁入り	n	시집가기	시집	嫁入り/よめいり/n	stiff	dict	audit:13566 p2:814:new
+いびつ	na	찌그러지다	일그러지다	歪/いびつ/na	unnatural	dict	audit:13577 p2:815:new
+逆ギレ	n	분노	적반하장	逆切れ/ぎゃくぎれ/n	wrong	dict	audit:13615 p2:816:new
+蜜	n	시럽	꿀	蜜/みつ/n	wrong	dict	audit:13622 p2:817:new
+ほて	v5	화끈대다	달아오르다	火照る/ほてる/v5	unnatural	dict	audit:13630 p2:819:new
+築き上げ	v1	구축하다	쌓아 올리다	築き上げる/きずきあげる/v1	unnatural	dict	audit:13635 p2:820:new
+淵	n	후치	못	淵/ふち/n	name	dict	audit:13636 p2:821:new
+激闘	n	격투	격전	激闘/げきとう/n	unnatural	dict	audit:13637 p2:822:new
+ボトム	n	보텀	바텀	ボトム/ぼとむ/n	translit	dict	audit:13644 p2:823:new
+休養	n	휴양	휴식	休養/きゅうよう/n	wrong	dict	audit:13647 p2:824:new
+進攻	n	진공	진격	進攻/しんこう/n	wrong	dict	audit:13653 p2:826:new
+潜行	n	잠입	잠항	潜行/せんこう/n	wrong	dict	audit:13657 p2:827:new
+出来立て	n	갓 만들어낸	갓 만든	出来立て/できたて/n	unnatural	dict	audit:13659 p2:828:new
+特種	n	특종	특수	特種/とくしゅ/n	wrong	dict	audit:13661 p2:829:new
+ほうじ茶	n	엽차	호지차	焙じ茶/ほうじちゃ/n	wrong	dict	audit:13678 p2:830:new
+ピアス	n	귀걸이	피어싱	ピアス/ぴあす/n	wrong	dict	audit:13691 p2:831:new
+マスタード	n	마스타드	머스터드	マスタード/ますたーど/n	translit	dict	audit:13703 p2:832:new
+スクラップ	n	스크랩	고철	スクラップ/すくらっぷ/n	wrong	dict	audit:13716 p2:833:new
+ピー	adv	피	삐	ぴい/ぴい/adv	unnatural	names	audit:13724 p2:835:new
+万引き	n	도둑	도둑질	万引き/まんびき/n	wrong	dict	audit:13732 p2:836:new
+色彩	n	색깔	색채	色彩/しきさい/n	stiff	dict	audit:13755 p2:838:new
+ムービー	n	무비	영상	ムービー/むーびー/n	unnatural	dict	audit:13756 p2:839:new
+取組	n	대전	노력	取り組み/とりくみ/n	wrong	dict	audit:13761 p2:840:new
+取組み	n	대적	노력	取り組み/とりくみ/n	wrong	dict	audit:13762 p2:841:new
+ポストカード	n	우편 엽서	엽서	ポストカード/ぽすとかーど/n	stiff	dict	audit:13769 p2:842:new
+飛車	n	장기의 차	비차	飛車/ひしゃ/n	wrong	dict	audit:13775 p2:843:new
+難問	n	난문	난제	難問/なんもん/n	unnatural	dict	audit:13780 p2:844:new
+煮詰ま	v5	마무리 되다	막히다	煮詰まる/につまる/v5	wrong	dict	audit:13799 p2:845:new
+埋め込	v5	묻다	박아 넣다	埋め込む/うめこむ/v5	wrong	dict	audit:13816 p2:846:new
+半生	n	반생	반평생	半生/はんせい/n	unnatural	dict	audit:13820 p2:847:new
+スコア	n	스코아	스코어	スコア/すこあ/n	translit	dict	audit:13824 p2:848:new
+手ぶら	n	맨손	빈손	手ぶら/てぶら/n	wrong	dict	audit:13826 p2:849:new
+ざる	n	바구니	소쿠리	笊/ざる/n	wrong	dict	audit:13832 p2:850:new
+ポリネシアン	n	포리네시안	폴리네시안	ポリネシアン/ぽりねしあん/n	translit	dict	audit:13871 p2:852:new
+目星	n	목표	짐작	目星/めぼし/n	wrong	dict	audit:13877 p2:853:new
+レントゲン	n	X레이	엑스레이	レントゲン/れんとげん/n	translit	dict	audit:13884 p2:854:new
+バイト先	n	아르바이트 장소	아르바이트하는 곳	バイト先/ばいとさき/n	unnatural	dict	audit:13886 p2:855:new
+見送り	n	전송	배웅	見送り/みおくり/n	archaic	dict	audit:13905 p2:856:new
+落ちぶれ	v1	영락하다	몰락하다	落ちぶれる/おちぶれる/v1	stiff	dict	audit:13937 p2:859:new
+界隈	n	업계	일대	界隈/かいわい/n	wrong	dict	audit:13944 p2:860:new
+シャバ	n	바깥 세상	바깥세상	娑婆/しゃば/n	unnatural	dict	audit:13957 p2:861:new
+出戻り	n	복귀	이혼녀	出戻り/でもどり/n	wrong	dict	audit:13975 p2:862:new
+見返り	n	보답	대가	見返り/みかえり/n	wrong	dict	audit:13984 p2:863:new
+ただ者	n	보통 사람	보통내기	只者/ただもの/n	unnatural	dict	audit:13988 p2:866:new
+霊力	n	신비스러운 힘	영력	霊力/れいりょく/n	wrong	dict	audit:14003 p2:867:new
+リラーックス	n	리락스	릴랙스	リラーックス//n	translit	dict	audit:14039 p2:870:new
+食	v5	받다	먹다	食む/はむ/v5	wrong	dict	audit:14047 p2:871:new
+チバリヨ	n	치바리요	힘내라	チバリヨ//n	translit	dict	audit:14062 p2:872:new
+折檻	n	엄하게 꾸짖음	체벌	折檻/せっかん/n	wrong	dict	audit:14069 p2:873:new
+氷室	n	빙실	얼음 창고	氷室/ひむろ/n	wrong	dict	audit:14077 p2:874:new
+米兵	n	미국 병사	미군	米兵/べいへい/n	unnatural	dict	audit:14080 p2:875:new
+バイブ	n	바이브래이터	진동	バイブ/ばいぶ/n	unnatural	dict	audit:14094 p2:876:new
+水煙	n	물안개	물보라	水煙/すいえん/n	wrong	dict	audit:14098 p2:877:new
+私案	n	사안	개인안	私案/しあん/n	unnatural	dict	audit:14107 p2:879:new
+しもべ	n	머슴	하인	僕/しもべ/n	wrong	dict	audit:14110 p2:880:new
+のうのう	adv	편히	뻔뻔하게	のうのう/のうのう/adv	wrong	dict	audit:14111 p2:881:new
+金輪際	n	절대로	다시는	金輪際/こんりんざい/n	wrong	dict	audit:14135 p2:884:new
+胴体	n	동체	몸통	胴体/どうたい/n	unnatural	dict	audit:14143 p2:885:new
+引っ掴	v5	낚다	움켜쥐다	引っ掴む/ひっつかむ/v5	wrong	dict	audit:14146 p2:886:new
+サボリ	n	농뗑이	땡땡이	サボり/さぼり/n	wrong	dict	audit:14148 p2:887:new
+炊飯	n	밥솥	밥 짓기	炊飯/すいはん/n	wrong	dict	audit:14169 p2:889:new
+エイ	n	에이	가오리	えい/えい/n	wrong	names	audit:14183 p2:892:new
+苦笑い	n	쓴 웃음	쓴웃음	苦笑い/にがわらい/n	unnatural	dict	audit:14193 p2:894:new
+敵性	n	적대성	적성	敵性/てきせい/n	wrong	dict	audit:14196 p2:895:new
+ルックス	n	룩스	외모	ルックス/るっくす/n	wrong	dict	audit:14217 p2:900:new
+貢	v5	헌상하다	갖다 바치다	貢ぐ/みつぐ/v5	wrong	dict	audit:14222 p2:901:new
+短パン	n	짧은 팬츠	반바지	短パン/たんぱん/n	unnatural	dict	audit:14243 p2:902:new
+不興	n	불흥	노여움	不興/ふきょう/n	wrong	dict	audit:14251 p2:903:new
+懲らしめ	v1	벌주다	혼내다	懲らしめる/こらしめる/v1	unnatural	dict	audit:14257 p2:904:new
+突っ走	v5	폭주하다	질주하다	突っ走る/つっぱしる/v5	unnatural	dict	audit:14267 p2:905:new
+眼下	n	눈아래	눈 아래	眼下/がんか/n	unnatural	dict	audit:14283 p2:910:new
+置き換え	v1	옮겨놓다	바꾸다	置き換える/おきかえる/v1	wrong	dict	audit:14300 p2:913:new
+年がい	n	나이값	나잇값	年甲斐/としがい/n	unnatural	dict	audit:14319 p2:914:new
+ひとしきり	adv	한 바탕	한참	一頻り/ひとしきり/adv	wrong	dict	audit:14333 p2:915:new
+粗	adj	엉성하다	거칠다	粗い/あらい/adj	wrong	dict	audit:14341 p2:917:new
+買い求め	v1	입수하다	구입하다	買い求める/かいもとめる/v1	wrong	dict	audit:14347 p2:918:new
+送りつけ	v1	보내버리다	일방적으로 보내다	送り付ける/おくりつける/v1	unnatural	dict	audit:14357 p2:920:new
+送り付け	v1	보내버리다	일방적으로 보내다	送り付ける/おくりつける/v1	unnatural	dict	audit:14359 p2:921:new
+良縁	n	좋은 연분	좋은 인연	良縁/りょうえん/n	unnatural	dict	audit:14360 p2:922:new
+さばき	n	다루기	솜씨	捌き/さばき/n	unnatural	dict	audit:14370 p2:923:new
+茶葉	n	차잎	찻잎	茶葉/ちゃば/n	unnatural	dict	audit:14386 p2:924:new
+至福	n	지복	더없는 행복	至福/しふく/n	stiff	dict	audit:14398 p2:925:new
+ブレザー	n	블레이저 코트	블레이저	ブレザー/ぶれざー/n	translit	dict	audit:14423 p2:926:new
+コンシェルジュ	n	콘시에르주	컨시어지	コンシェルジュ/こんしぇるじゅ/n	translit	dict	audit:14424 p2:927:new
+テロップ	n	텔롭	자막	テロップ/てろっぷ/n	unnatural	dict	audit:14433 p2:928:new
+リモコン	n	리모콘	리모컨	リモコン/りもこん/n	translit	dict	audit:14435 p2:929:new
+廃屋	n	폐옥	폐가	廃屋/はいおく/n	unnatural	dict	audit:14460 p2:930:new
+上申	n	진언	상신	上申/じょうしん/n	wrong	dict	audit:14463 p2:931:new
+テンパ	v5	텐파	당황하다	テンパる/てんぱる/v5	translit	dict	audit:14489 p2:934:new
+オツ	na	오츠	묘하다	乙/おつ/na	translit	dict	audit:14499 p2:935:new
+たか	v5	모여들다	뜯어내다	集る/たかる/v5	wrong	dict	audit:14503 p2:936:new
+得策	n	유리한 계책	상책	得策/とくさく/n	stiff	dict	audit:14512 p2:937:new
+年長	n	연장	연장자	年長/ねんちょう/n	wrong	names	audit:14528 p2:938:new
+抱え込	v5	안다	떠안다	抱え込む/かかえこむ/v5	wrong	dict	audit:14530 p2:939:new
+含み	n	함축	속뜻	含み/ふくみ/n	unnatural	dict	audit:14537 p2:940:new
+とくと	adv	신중히	잘	篤と/とくと/adv	wrong	dict	audit:14567 p2:942:new
+深入り	n	관계	깊이 관여	深入り/ふかいり/n	wrong	dict	audit:14574 p2:943:new
+物知り	n	박식	박식한 사람	物知り/ものしり/n	unnatural	dict	audit:14575 p2:944:new
+しらふ	n	제정신	맨정신	素面/しらふ/n	unnatural	dict	audit:14585 p2:945:new
+シラフ	n	시라후	맨정신	素面/しらふ/n	translit	dict	audit:14587 p2:946:new
+命取り	n	생명 위기	치명타	命取り/いのちとり/n	wrong	dict	audit:14589 p2:947:new
+雛祭り	n	히나마쯔리	히나마쓰리	雛祭り/ひなまつり/n	translit	dict	audit:14594 p2:949:new
+ひな祭り	n	히나마쯔리	히나마쓰리	雛祭り/ひなまつり/n	translit	dict	audit:14595 p2:950:new
+巻雲	n	권운	마키구모	巻き雲/まきぐも/n	word	dict	audit:14599 p2:951:new
+年の瀬	n	새해	연말	年の瀬/としのせ/n	wrong	dict	audit:14603 p2:952:new
+グラーチェ	n	그라체	그라치에	グラッチェ/ぐらっちぇ/n	translit	dict	audit:14616 p2:954:new
+朝風	n	아침 바람	아사카제	朝風/あさかぜ/n	word	dict	audit:14618 p2:955:new
+オコーシ	n	오코시	기상	オコーシ//n	wrong	dict	audit:14620 p2:956:new
+身だしなみ	n	몸가짐	몸단장	身嗜み/みだしなみ/n	wrong	dict	audit:14632 p2:957:new
+トンビ	n	톤비	솔개	鳶/とび/n	translit	dict	audit:14639 p2:958:new
+潤	v5	촉촉하다	윤택해지다	潤う/うるおう/v5	wrong	dict	audit:14644 p2:959:new
+味気な	adj	따분하다	밋밋하다	味気無い/あじきない/adj	unnatural	dict	audit:14650 p2:960:new
+心がけ	n	배려	마음가짐	心掛け/こころがけ/n	wrong	dict	audit:14662 p2:961:new
+特注	n	특별 주문	주문 제작	特注/とくちゅう/n	unnatural	dict	audit:14672 p2:962:new
+ほっつき歩	v5	싸지르다	쏘다니다	ほっつき歩く/ほっつきあるく/v5	wrong	dict	audit:14675 p2:963:new
+競り合い	n	경쟁	접전	競り合い/せりあい/n	unnatural	dict	audit:14679 p2:964:new
+必定	n	반드시	필연	必定/ひつじょう/n	wrong	dict	audit:14689 p2:967:new
+重んじ	v1	존중하다	중시하다	重んずる/おもんずる/v1	unnatural	dict	audit:14695 p2:968:new
+ろくでなし	n	쓸모없는 사람	인간쓰레기	陸でなし/ろくでなし/n	unnatural	dict	audit:14699 p2:969:new
+辱め	v1	손상시키다	욕보이다	辱しめる/はずかしめる/v1	wrong	dict	audit:14705 p2:971:new
+老いぼれ	n	노쇠함	늙은이	老耄/おいぼれ/n	wrong	dict	audit:14714 p2:972:new
+すご腕	n	놀라운 솜씨	실력자	凄腕/すごうで/n	unnatural	dict	audit:14716 p2:973:new
+むくろ	n	몸	시체	骸/むくろ/n	wrong	dict	audit:14720 p2:974:new
+折り返	v5	되풀이하다	되돌아가다	折り返す/おりかえす/v5	wrong	dict	audit:14749 p2:975:new
+名産	n	명산	특산품	名産/めいさん/n	wrong	dict	audit:14750 p2:976:new
+朝一	n	아사이치	아침 일찍	朝一/あさいち/n	wrong	names	audit:14759 p2:977:new
+ほめ言葉	n	칭찬말	칭찬	誉め言葉/ほめことば/n	unnatural	dict	audit:14789 p2:980:new
+削	v1	깎다	깎이다	削れる/けずれる/v1	wrong	dict	audit:14792 p2:981:new
+倒壊	n	도괴	붕괴	倒壊/とうかい/n	unnatural	dict	audit:14815 p2:984:new
+挟み撃ち	n	협격	협공	挟み打ち/はさみうち/n	unnatural	dict	audit:14832 p2:986:new
+ひもじ	adj	시장하다	배고프다	ひもじい/ひもじい/adj	stiff	dict	audit:14833 p2:987:new
+フェイント	n	페인트	페이크	フェイント/ふぇいんと/n	translit	dict	audit:14838 p2:988:new
+はぐらか	v5	따돌리다	얼버무리다	はぐらかす/はぐらかす/v5	wrong	dict	audit:14842 p2:989:new
+打ち出	v5	밝히다	내놓다	打ち出す/うちだす/v5	wrong	dict	audit:14851 p2:990:new
+マシュマロ	n	마시마로	마시멜로	マシュマロ/ましゅまろ/n	translit	dict	audit:14854 p2:991:new
+土俵	n	무대	씨름판	土俵/どひょう/n	unnatural	dict	audit:14860 p2:993:new
+蓑	n	사	도롱이	蓑/みの/n	wrong	dict	audit:14870 p2:994:new
+海中	n	해중	바닷속	海中/かいちゅう/n	unnatural	dict	audit:14876 p2:995:new
+悩め	v1	고뇌하다	고민하다	悩む/なやむ/v1	stiff	dict	audit:14884 p2:996:new
+大葉	n	오오바	차조기잎	大葉/おおば/n	word	dict	audit:14897 p2:998:new
+生みの親	n	친부모	창시자	生みの親/うみのおや/n	wrong	dict	audit:14898 p2:999:new
+譜面	n	보면	악보	譜面/ふめん/n	wrong	dict	audit:14920 p2:1000:new
+ピック	n	픽	피크	ピック/ぴっく/n	wrong	dict	audit:14921 p2:1001:new
+出だし	n	맨처음	시작	出出し/でだし/n	unnatural	dict	audit:14933 p2:1002:new
+店番	n	가게를 보는 사람	가게 보기	店番/みせばん/n	wrong	dict	audit:14948 p2:1004:new
+見くび	v5	업신여기다	얕보다	見縊る/みくびる/v5	stiff	dict	audit:14949 p2:1005:new
+トロ	n	다랑어	참치 뱃살	とろ/とろ/n	wrong	dict	audit:14955 p2:1006:new
+くさや	n	초가집	쿠사야	くさや/くさや/n	word	dict	audit:15002 p2:1009:new
+簪	n	잠	비녀	簪/かんざし/n	wrong	dict	audit:15004 p2:1010:new
+ソーラー	n	솔러	솔라	ソーラー/そーらー/n	translit	dict	audit:15025 p2:1012:new
+見違え	v1	몰라 보다	몰라보다	見違える/みちがえる/v1	unnatural	dict	audit:15029 p2:1013:new
+入れ込	v5	넣다	몰두하다	入れ込む/いれこむ/v5	wrong	dict	audit:15032 p2:1014:new
+ミョウバン	n	묘우반	백반	明礬/みょうばん/n	translit	dict	audit:15048 p2:1015:new
+かっぱら	v5	날치기하다	훔치다	掻っ払う/かっぱらう/v5	unnatural	dict	audit:15054 p2:1016:new
+汚職	n	오직	부정부패	汚職/おしょく/n	wrong	dict	audit:15058 p2:1017:new
+そこもと	n	그 곳	그대	其処許/そこもと/n	wrong	dict	audit:15061 p2:1018:new
+救い出	v5	구조해 내다	구출하다	救い出す/すくいだす/v5	unnatural	dict	audit:15070 p2:1020:new
+当て逃げ	n	뺑소니치기	뺑소니	当て逃げ/あてにげ/n	unnatural	dict	audit:15075 p2:1021:new
+ハンコ	n	한코	도장	判子/はんこ/n	translit	dict	audit:15077 p2:1022:new
+凍え	v5	얼어붙다	얼어 죽다	凍え死ぬ/こごえしぬ/v5	wrong	dict	audit:15087 p2:1024:new
+借り主	n	차주	임차인	借主/かりぬし/n	wrong	dict	audit:15098 p2:1025:new
+ゲジゲジ	n	게지게지	그리마	げじげじ/げじげじ/n	translit	dict	audit:15120 p2:1027:new
+蓬莱	n	호라이	봉래	蓬莱/ほうらい/n	translit	dict	audit:15129 p2:1028:new
+奏上	n	주상	상주	奏上/そうじょう/n	wrong	dict	audit:15140 p2:1029:new
+右近	n	우근위부	우콘	右近/うこん/n	name	dict	audit:15148 p2:1030:new
+帯刀	n	대도	타테와키	帯刀/たてはき/n	name	dict	audit:15151 p2:1031:new
+ゴーシュ	n	고시	고슈	ゴーシュ/ごーしゅ/n	name	names	audit:15161 p2:1032:new
+ハロウィーン	n	할로윈	핼러윈	ハロウィーン/はろうぃーん/n	translit	dict	audit:15169 p2:1033:new
+ハロウィン	n	할로윈	핼러윈	ハロウィーン/はろうぃーん/n	translit	dict	audit:15170 p2:1034:new
+ディ・モールト	n	디 모르트	디 몰토	ディ・モールト//n	translit	names	audit:15182 p2:1035:new
+猛暑	n	무더위	폭염	猛暑/もうしょ/n	unnatural	dict	audit:15188 p2:1036:new
+豪商	n	호상	거상	豪商/ごうしょう/n	wrong	dict	audit:15222 p2:1037:new
+しっかり者	n	착실한 사람	야무진 사람	確り者/しっかりもの/n	wrong	dict	audit:15237 p2:1038:new
+静養	n	정양	요양	静養/せいよう/n	unnatural	dict	audit:15278 p2:1041:new
+打ち解け	v1	막역하다	마음을 터놓다	打ち解ける/うちとける/v1	unnatural	dict	audit:15309 p2:1042:new
+目下	n	아랫 사람	현재	目下/もっか/n	wrong	dict	audit:15344 p2:1043:new
+駆り立て	v1	몰아내다	내몰다	駆り立てる/かりたてる/v1	wrong	dict	audit:15351 p2:1044:new
+心もとな	adj	초조하다	불안하다	心許ない/こころもとない/adj	wrong	dict	audit:15363 p2:1045:new
+末恐ろし	adj	장래가 염려되다	장래가 무섭다	末恐ろしい/すえおそろしい/adj	unnatural	dict	audit:15369 p2:1046:new
+かちどき	n	개가	승리의 함성	勝鬨/かちどき/n	wrong	dict	audit:15374 p2:1047:new
+勝ちどき	n	개가	승리의 함성	勝鬨/かちどき/n	wrong	dict	audit:15375 p2:1048:new
+親王	n	황태자	친왕	親王/しんのう/n	wrong	dict	audit:15444 p2:1050:new
+出仕	n	출근	출사	出仕/しゅっし/n	unnatural	dict	audit:15445 p2:1051:new
+敵視	n	적시	적대시	敵視/てきし/n	wrong	dict	audit:15452 p2:1052:new
+入れあげ	v1	돈을 처들이다	돈을 쏟아붓다	入れ上げる/いれあげる/v1	unnatural	dict	audit:15476 p2:1053:new
+入れ揚げ	v1	돈을 처들이다	돈을 쏟아붓다	入れ上げる/いれあげる/v1	unnatural	dict	audit:15477 p2:1054:new
+人当たり	n	인당	붙임성	人当たり/ひとあたり/n	wrong	dict	audit:15481 p2:1055:new
+元手	n	자본	밑천	元手/もとで/n	stiff	dict	audit:15483 p2:1056:new
+下ごしらえ	n	사전 준비	밑준비	下拵え/したごしらえ/n	unnatural	dict	audit:15490 p2:1057:new
+豚カツ	n	돈까스	돈가스	豚カツ/とんかつ/n	wrong	dict	audit:15499 p2:1059:new
+とんかつ	n	돈까스	돈가스	豚カツ/とんかつ/n	wrong	dict	audit:15500 p2:1060:new
+学長	n	학장	총장	学長/がくちょう/n	wrong	dict	audit:15505 p2:1061:new
+手ほどき	n	초보	가르침	手解き/てほどき/n	wrong	dict	audit:15511 p2:1062:new
+御曹子	n	후계자	도련님	御曹司/おんぞうし/n	wrong	dict	audit:15534 p2:1063:new
+うつろ	na	속이 비어 있다	멍하다	虚ろ/うつろ/na	unnatural	dict	audit:15550 p2:1064:new
+起業	n	기업	창업	起業/きぎょう/n	wrong	dict	audit:15558 p2:1065:new
+織り込	v5	포함시키다	짜 넣다	織り込む/おりこむ/v5	unnatural	dict	audit:15592 p2:1068:new
+駅名	n	정거장	역 이름	駅名/えきめい/n	wrong	names	audit:15604 p2:1070:new
+急病	n	응급	급환	急病/きゅうびょう/n	wrong	dict	audit:15613 p2:1071:new
+自害	n	자해	자결	自害/じがい/n	wrong	dict	audit:15633 p2:1072:new
+人助け	n	남 돕기	남을 돕는 일	人助け/ひとだすけ/n	unnatural	dict	audit:15641 p2:1073:new
+言い当て	v1	알아 맞추다	알아맞히다	言い当てる/いいあてる/v1	wrong	dict	audit:15642 p2:1074:new
+大蛇	n	큰뱀	큰 뱀	大蛇/おろち/n	wrong	dict	audit:15649 p2:1075:new
+後戻り	n	퇴보	되돌아가기	後戻り/あともどり/n	wrong	dict	audit:15657 p2:1076:new
+飛び上が	v5	뛰어넘다	뛰어오르다	飛び上がる/とびあがる/v5	wrong	dict	audit:15673 p2:1078:new
+跳びあが	v5	뛰어넘다	뛰어오르다	飛び上がる/とびあがる/v5	wrong	dict	audit:15674 p2:1079:new
+せんべい	n	센배이	센베이	煎餅/せんべい/n	translit	dict	audit:15675 p2:1080:new
+ふてくされ	v1	삐치다	부루퉁하다	不貞腐れる/ふてくされる/v1	unnatural	dict	audit:15684 p2:1081:new
+報い	n	보답	대가	報い/むくい/n	wrong	dict	audit:15686 p2:1083:new
+絵巻	n	그림 두루마기	두루마리 그림	絵巻/えまき/n	wrong	dict	audit:15693 p2:1085:new
+大の字	n	큰댓자	큰대자	大の字/だいのじ/n	wrong	dict	audit:15707 p2:1086:new
+舞いこ	v5	날아 들다	날아들다	舞い込む/まいこむ/v5	wrong	dict	audit:15738 p2:1088:new
+真打ち	n	인기 배우	주역	真打ち/しんうち/n	wrong	dict	audit:15774 p2:1089:new
+移り変わ	v5	변천하다	변해 가다	移り変わる/うつりかわる/v5	stiff	dict	audit:15781 p2:1090:new
+采配	n	지휘봉	지휘	采配/さいはい/n	wrong	dict	audit:15784 p2:1091:new
+直衛	n	나오에	호위	直衛/ちょくえい/n	wrong	names	audit:15787 p2:1092:new
+慢心	n	자만심	자만	慢心/まんしん/n	unnatural	dict	audit:15789 p2:1094:new
+顔向け	n	대면	면목	顔向け/かおむけ/n	wrong	dict	audit:15810 p2:1095:new
+つかみ取	v5	싸잡다	쟁취하다	掴み取る/つかみとる/v5	wrong	dict	audit:15815 p2:1096:new
+鈴虫	n	방울 벌레	방울벌레	鈴虫/すずむし/n	unnatural	dict	audit:15835 p2:1098:new
+めっきり	adv	제법	부쩍	めっきり/めっきり/adv	unnatural	dict	audit:15840 p2:1099:new
+休ま	v1	편안해지다	쉬다	休まる/やすまる/v1	wrong	dict	audit:15848 p2:1100:new
+湾内	n	만내	만 안	湾内/わんない/n	unnatural	dict	audit:15850 p2:1101:new
+おかか	n	다랭이 포	가쓰오부시	御かか/おかか/n	wrong	dict	audit:15856 p2:1102:new
+竜巻	n	맹렬한 회오리	토네이도	竜巻/たつまき/n	unnatural	dict	audit:15869 p2:1103:new
+デリバリー	n	딜리버리	배달	デリバリー/でりばりー/n	unnatural	dict	audit:15871 p2:1104:new
+なすりつけ	v1	문질러 바르다	뒤집어씌우다	擦り付ける/なすりつける/v1	wrong	dict	audit:15882 p2:1105:new
+なすり付け	v1	문질러 바르다	뒤집어씌우다	擦り付ける/なすりつける/v1	wrong	dict	audit:15883 p2:1106:new
+ユーゲント	n	청년	유겐트	ユーゲント/ゆーげんと/n	name	dict	audit:15884 p2:1107:new
+手厳し	adj	매우 엄하다	매섭다	手厳しい/てきびしい/adj	wrong	dict	audit:15909 p2:1110:new
+セントラル	n	센츄럴	센트럴	セントラル/せんとらる/n	translit	dict	audit:15917 p2:1111:new
+ロックンロール	n	록큰롤	로큰롤	ロックンロール/ろっくんろーる/n	translit	dict	audit:15943 p2:1112:new
+回遊	n	유람	회유	回遊/かいゆう/n	wrong	dict	audit:15946 p2:1113:new
+イチャつ	v5	시시덕거리다	꽁냥거리다	いちゃつく/いちゃつく/v5	unnatural	names	audit:15988 p2:1115:new
+いちゃつ	v5	시시덕거리다	꽁냥거리다	いちゃつく/いちゃつく/v5	unnatural	names	audit:15989 p2:1116:new
+奥の手	n	최후의 수단	비장의 수	奥の手/おくのて/n	unnatural	dict	audit:15992 p2:1117:new
+言いふら	v5	퍼뜨리다	소문내다	言い触らす/いいふらす/v5	unnatural	dict	audit:16010 p2:1118:new
+言い触ら	v5	말을 퍼뜨리다	소문내다	言い触らす/いいふらす/v5	unnatural	dict	audit:16011 p2:1119:new
+脇役	n	조역	조연	脇役/わきやく/n	stiff	dict	audit:16021 p2:1120:new
+うわべ	n	외관	겉모습	上辺/うわべ/n	unnatural	dict	audit:16023 p2:1121:new
+先延ばし	n	연장	미루기	先延ばし/さきのばし/n	wrong	dict	audit:16041 p2:1124:new
+吹き返	v5	되살리다	되살아나다	吹き返す/ふきかえす/v5	wrong	dict	audit:16048 p2:1125:new
+体当たり	n	전력투구	몸으로 부딪치기	体当たり/たいあたり/n	wrong	dict	audit:16050 p2:1126:new
+力仕事	n	육체 노동	힘쓰는 일	力仕事/ちからしごと/n	stiff	dict	audit:16104 p2:1127:new
+湯船	n	목욕통	욕조	湯船/ゆぶね/n	unnatural	dict	audit:16111 p2:1129:new
+斬り込	v5	깊이 베다	쳐들어가다	切り込む/きりこむ/v5	wrong	dict	audit:16116 p2:1130:new
+追究	n	추구	규명	追究/ついきゅう/n	wrong	dict	audit:16122 p2:1131:new
+習字	n	습자	서예	習字/しゅうじ/n	unnatural	dict	audit:16125 p2:1132:new
+県民	n	현민	현 주민	県民/けんみん/n	wrong	dict	audit:16137 p2:1134:new
+ヴィラ	n	비라	빌라	ビラ/びら/n	translit	dict	audit:16146 p2:1135:new
+ブレンド	n	브렌드	블렌드	ブレンド/ぶれんど/n	translit	dict	audit:16165 p2:1137:new
+パンサー	n	판사	팬서	パンサー/ぱんさー/n	translit	dict	audit:16170 p2:1138:new
+土蔵	n	토장	흙벽 창고	土蔵/どぞう/n	wrong	dict	audit:16195 p2:1139:new
+カンペ	n	칸페	커닝 페이퍼	カンペ/かんぺ/n	translit	dict	audit:16198 p2:1140:new
+ホープ	n	호프	유망주	ホープ/ほーぷ/n	wrong	dict	audit:16201 p2:1141:new
+遺影	n	생전의 초상화	영정	遺影/いえい/n	unnatural	dict	audit:16226 p2:1144:new
+水気	n	수증기	물기	水気/みずけ/n	wrong	dict	audit:16240 p2:1145:new
+音信	n	통신	소식	音信/おんしん/n	wrong	dict	audit:16253 p2:1147:new
+喚声	n	환성	함성	喚声/かんせい/n	wrong	dict	audit:16269 p2:1148:new
+見せ物	n	흥행	구경거리	見世物/みせもの/n	wrong	dict	audit:16284 p2:1149:new
+芸子	n	기생	게이샤	芸妓/げいこ/n	wrong	dict	audit:16305 p2:1150:new
+受け渡し	n	수수	전달	受け渡し/うけわたし/n	stiff	dict	audit:16308 p2:1151:new
+咎め	n	비난	문책	咎め/とがめ/n	wrong	dict	audit:16310 p2:1152:new
+とがめ	n	비난	문책	咎め/とがめ/n	wrong	dict	audit:16311 p2:1153:new
+再来	n	재래	재림	再来/さいらい/n	wrong	dict	audit:16314 p2:1154:new
+ロジスティクス	n	로지스틱	로지스틱스	ロジスティック/ろじすてぃっく/n	translit	dict	audit:16315 p2:1155:new
+願かけ	n	신불에게 발원 함	소원 빌기	願掛け/がんかけ/n	unnatural	dict	audit:16318 p2:1156:new
+願掛け	n	신불에게 발원 함	소원 빌기	願掛け/がんかけ/n	unnatural	dict	audit:16319 p2:1157:new
+キナ臭	adj	어쩐지 수상하다	수상쩍다	きな臭い/きなくさい/adj	unnatural	dict	audit:16320 p2:1158:new
+きな臭	adj	어쩐지 수상하다	수상쩍다	きな臭い/きなくさい/adj	unnatural	dict	audit:16322 p2:1159:new
+社	n	회사	사당	社/やしろ/n	wrong	dict	audit:16331 p2:1160:new
+脱毛	n	탈모	제모	脱毛/だつもう/n	wrong	dict	audit:16334 p2:1161:new
+駆け引き	n	술책	흥정	駆け引き/かけひき/n	wrong	dict	audit:16339 p2:1162:new
+ポイ捨て	n	함부로 버리기 	무단 투기	ぽい捨て/ぽいすて/n	unnatural	dict	audit:16343 p2:1163:new
+大雪	n	대설	폭설	大雪/おおゆき/n	wrong	dict	audit:16344 p2:1164:new
+やすやす	adv	거뜬히	쉽사리	易々/やすやす/adv	unnatural	dict	audit:16357 p2:1165:new
+シャッフル	n	샷훌	셔플	シャッフル/しゃっふる/n	translit	names	audit:16360 p2:1166:new
+両眼	n	양눈	두 눈	両目/りょうめ/n	unnatural	dict	audit:16364 p2:1167:new
+長唄	n	긴 민요	나가우타	長唄/ながうた/n	wrong	dict	audit:16388 p2:1169:new
+細君	n	처	아내	細君/さいくん/n	stiff	dict	audit:16393 p2:1170:new
+逢い引き	n	랑데부	밀회	逢い引き/あいびき/n	unnatural	dict	audit:16397 p2:1172:new
+跡地	n	철거지	터	跡地/あとち/n	wrong	dict	audit:16403 p2:1173:new
+祭り囃子	n	페스티발 뮤직	축제 음악	祭り囃子/まつりばやし/n	unnatural	dict	audit:16408 p2:1174:new
+決まり手	n	승부수	결정기	決まり手/きまりて/n	wrong	dict	audit:16468 p2:1175:new
+グラスフェッドミルク	n	그라스펫드미르크	그래스페드 밀크	グラスフェッドミルク//n	translit	dict	audit:16470 p2:1176:new
+邪推	n	의혹	억측	邪推/じゃすい/n	wrong	dict	audit:16479 p2:1177:new
+絵面	n	모양새	비주얼	絵面/えづら/n	unnatural	dict	audit:16498 p2:1178:new
+勝ち誇	v5	우쭐거리다	의기양양하다	勝ち誇る/かちほこる/v5	wrong	dict	audit:16501 p2:1179:new
+そっちのけ	n	무시	뒷전	そっち退け/そっちのけ/n	unnatural	dict	audit:16504 p2:1180:new
+うっちゃ	v5	내던지다	내버려 두다	打っちゃる/うっちゃる/v5	wrong	dict	audit:16546 p2:1181:new
+えてして	adv	자칫하면	흔히	得てして/えてして/adv	wrong	dict	audit:16560 p2:1182:new
+得てして	adv	자칫하면	흔히	得てして/えてして/adv	wrong	dict	audit:16561 p2:1183:new
+懐中	n	회중	품속	懐中/かいちゅう/n	stiff	dict	audit:16626 p2:1185:new
+高望み	n	허황된 소망	과욕	高望み/たかのぞみ/n	unnatural	dict	audit:16641 p2:1186:new
+甘んじ	v1	만족하다	안주하다	甘んずる/あまんずる/v1	wrong	dict	audit:16644 p2:1187:new
+他意	n	타의	딴마음	他意/たい/n	wrong	dict	audit:16655 p2:1188:new
+魅せ	v1	매료 시키다	매료시키다	魅せる/みせる/v1	unnatural	dict	audit:16659 p2:1189:new
+研鑽	n	연구	연마	研鑽/けんさん/n	wrong	dict	audit:16664 p2:1190:new
+補填	n	보충	보전	補填/ほてん/n	wrong	dict	audit:16673 p2:1191:new
+刻み付け	v1	조각하다	새기다	刻み付ける/きざみつける/v1	wrong	dict	audit:16677 p2:1193:new
+否	v1	거절하다	부정하다	否む/いなむ/v1	wrong	dict	audit:16683 p2:1194:new
+はね飛ば	v5	나가떨어지게 하다	튕겨 내다	跳ね飛ばす/はねとばす/v5	wrong	dict	audit:16719 p2:1196:new
+物覚え	n	기억	기억력	物覚え/ものおぼえ/n	wrong	dict	audit:16721 p2:1197:new
+シェルター	n	쉘터	셸터	シェルター/しぇるたー/n	translit	dict	audit:16749 p2:1198:new
+訳知り	n	한량	아는 체	訳知り/わけしり/n	wrong	dict	audit:16752 p2:1199:new
+揺らめ	v5	흔들거리다	일렁이다	揺らめく/ゆらめく/v5	unnatural	dict	audit:16767 p2:1200:new
+ヤケクソ	n	야케크소	자포자기	自棄糞/やけくそ/n	translit	dict	audit:16772 p2:1201:new
+高給	n	고급	고액 급여	高給/こうきゅう/n	wrong	dict	audit:16792 p2:1202:new
+のし上が	v5	오르다	치고 올라가다	伸し上がる/のしあがる/v5	unnatural	dict	audit:16795 p2:1203:new
+まがい物	n	유사품	가짜	紛い物/まがいもの/n	unnatural	dict	audit:16797 p2:1204:new
+駆け巡	v5	내달리다	누비다	駆け巡る/かけめぐる/v5	unnatural	dict	audit:16823 p2:1206:new
+おんぼろ	n	매우 남루함	고물	おんぼろ/おんぼろ/n	unnatural	dict	audit:16852 p2:1209:new
+書き写	v5	베껴쓰다	베껴 쓰다	書き写す/かきうつす/v5	unnatural	dict	audit:16874 p2:1210:new
+奔走	n	분주	동분서주	奔走/ほんそう/n	wrong	dict	audit:16875 p2:1211:new
+どよめ	v5	울려 퍼지다	술렁이다	響動めく/どよめく/v5	wrong	dict	audit:16890 p2:1212:new
+すっ飛	v5	힘차게 날다	날아가다	素っ飛ぶ/すっとぶ/v5	unnatural	dict	audit:16892 p2:1213:new
+崇め	v1	우러러보다	숭배하다	崇める/あがめる/v1	unnatural	dict	audit:16897 p2:1214:new
+急須	n	오차 주전자	찻주전자	急須/きゅうす/n	unnatural	dict	audit:16903 p2:1215:new
+ドンパチ	n	돈파치	총격전	どんぱち/どんぱち/n	translit	dict	audit:16916 p2:1216:new
+削り取	v5	지워내다	깎아 내다	削り取る/けずりとる/v5	wrong	dict	audit:16925 p2:1217:new
+自販	n	자동판매	자판기	自販/じはん/n	unnatural	dict	audit:16926 p2:1218:new
+神業	n	신의 조화	신기	神業/かみわざ/n	unnatural	dict	audit:16931 p2:1219:new
+逐一	adv	일일이 상세하게	일일이	逐一/ちくいち/adv	unnatural	dict	audit:16934 p2:1220:new
+ラッシュ	n	러쉬	러시	ラッシュ/らっしゅ/n	translit	dict	audit:16940 p2:1221:new
+日にち	n	날	날짜	日日/ひにち/n	wrong	dict	audit:16947 p2:1222:new
+始発	n	시발	첫차	始発/しはつ/n	wrong	dict	audit:16950 p2:1223:new
+仰せつか	v5	지시를 받다	맡게 되다	仰せ付かる/おおせつかる/v5	wrong	dict	audit:16951 p2:1224:new
+振りかざ	v5	내세우다	치켜들다	振り翳す/ふりかざす/v5	wrong	dict	audit:16957 p2:1226:new
+むしり取	v5	잡아뜯다	뜯어내다	毟り取る/むしりとる/v5	unnatural	dict	audit:16958 p2:1227:new
+もの悲し	adj	왠지 슬프다	서글프다	物悲しい/ものがなしい/adj	unnatural	dict	audit:16964 p2:1228:new
+ブレード	n	브레이드	블레이드	ブレード/ぶれーど/n	translit	dict	audit:17004 p2:1232:new
+山盛り	n	수북함	수북이	山盛り/やまもり/n	unnatural	dict	audit:17006 p2:1233:new
+ケダモノ	n	케다모노	짐승	獣/けだもの/n	translit	dict	audit:17012 p2:1234:new
+風体	n	풍채	행색	風体/ふうてい/n	wrong	dict	audit:17019 p2:1235:new
+自ずと	adv	스스로	저절로	自ずと/おのずと/adv	wrong	dict	audit:17023 p2:1236:new
+終えん	n	종연	종언	終焉/しゅうえん/n	wrong	dict	audit:17044 p2:1238:new
+初っぱな	n	애당초	처음	初っ端/しょっぱな/n	wrong	dict	audit:17047 p2:1239:new
+文面	n	문면	문구	文面/ぶんめん/n	stiff	dict	audit:17050 p2:1240:new
+じっとり	adv	축축히	축축이	じっとり/じっとり/adv	unnatural	dict	audit:17063 p2:1241:new
+逆さ	n	반대	거꾸로	逆さ/さかさ/n	wrong	dict	audit:17067 p2:1242:new
+カチューシャ	n	카튜샤	머리띠	カチューシャ/かちゅーしゃ/n	translit	dict	audit:17069 p2:1243:new
+インスピレーション	n	인스피레이션	영감	インスピレーション/いんすぴれーしょん/n	translit	dict	audit:17070 p2:1244:new
+威張	v1	잘난체 하다	으스대다	威張る/いばる/v1	unnatural	dict	audit:17085 p2:1245:new
+日柄	n	일수	길일	日柄/ひがら/n	wrong	dict	audit:17087 p2:1246:new
+豆まき	n	콩 심기	콩 뿌리기	豆撒き/まめまき/n	wrong	dict	audit:17088 p2:1247:new
+薄着	n	엷게 입기	얇게 입기	薄着/うすぎ/n	unnatural	dict	audit:17091 p2:1248:new
+つまみ食い	n	군것질	집어 먹기	摘み食い/つまみぐい/n	unnatural	dict	audit:17094 p2:1249:new
+雑炊	n	잡탕죽	죽	雑炊/ぞうすい/n	unnatural	dict	audit:17124 p2:1251:new
+メキメキ	adv	메키메키	눈에 띄게	めきめき/めきめき/adv	translit	dict	audit:17136 p2:1252:new
+撃ち合い	n	역공격	총격전	打ち合い/うちあい/n	wrong	dict	audit:17146 p2:1253:new
+イカダ	n	이카다	뗏목	筏/いかだ/n	name	dict	audit:17159 p2:1254:new
+機影	n	기영	기체	機影/きえい/n	wrong	dict	audit:17161 p2:1255:new
+壮健	n	장건	건강	壮健/そうけん/n	wrong	dict	audit:17162 p2:1256:new
+ストレッチ	n	스트렛치	스트레칭	ストレッチ/すとれっち/n	translit	dict	audit:17186 p2:1257:new
+一足	n	한 걸음	한 켤레	一足/いっそく/n	wrong	dict	audit:17213 p2:1258:new
+買い上げ	n	수매	구매	買い上げ/かいあげ/n	wrong	dict	audit:17231 p2:1259:new
+ハッタリ	n	핫타리	허세	はったり/はったり/n	translit	dict	audit:17238 p2:1260:new
+野放し	n	방목	방치	野放し/のばなし/n	wrong	dict	audit:17245 p2:1261:new
+御の字	n	특급	감지덕지	御の字/おんのじ/n	wrong	dict	audit:17248 p2:1262:new
+きざ	na	마음에 들지 않다	느끼하다	きざ/きざ/na	wrong	dict	audit:17270 p2:1263:new
+キザ	na	키자	느끼하다	きざ/きざ/na	translit	dict	audit:17271 p2:1264:new
+言い合い	n	말시비	말다툼	言い合い/いいあい/n	unnatural	dict	audit:17326 p2:1265:new
+粒々	n	알맹이	알갱이	粒々/つぶつぶ/n	wrong	dict	audit:17393 p2:1267:new
+お古	n	고물	헌것	御古/おふる/n	wrong	dict	audit:17397 p2:1268:new
+補習	n	보습	보충수업	補習/ほしゅう/n	unnatural	dict	audit:17398 p2:1269:new
+亀甲	n	키코우	귀갑	亀甲/きっこう/n	translit	dict	audit:17399 p2:1270:new
+ランニング	n	런닝	러닝	ランニング/らんにんぐ/n	translit	dict	audit:17404 p2:1271:new
+サッシ	n	샷시	새시	サッシ/さっし/n	translit	dict	audit:17408 p2:1272:new
+当座	n	당좌	당장	当座/とうざ/n	wrong	dict	audit:17426 p2:1273:new
+目論み	n	도모	계획	目論見/もくろみ/n	wrong	dict	audit:17435 p2:1274:new
+かみ切	v5	물어 뜯다	물어뜯다	噛み切る/かみきる/v5	unnatural	dict	audit:17440 p2:1275:new
+下見	n	예비 조사	사전 답사	下見/したみ/n	unnatural	dict	audit:17441 p2:1276:new
+ほころび	n	호코로비	허점	綻び/ほころび/n	translit	dict	audit:17443 p2:1277:new
+精査	n	정밀히 조사	정밀 조사	精査/せいさ/n	unnatural	dict	audit:17451 p2:1278:new
+地割れ	n	땅이 갈라짐	땅 갈라짐	地割れ/じわれ/n	unnatural	dict	audit:17467 p2:1279:new
+人混み	n	혼잡	인파	人込み/ひとごみ/n	unnatural	dict	audit:17481 p2:1280:new
+下ネタ	n	외설적인 유머	야한 농담	下ねた/しもねた/n	stiff	dict	audit:17483 p2:1281:new
+一人っ子	n	독자	외동	一人っ子/ひとりっこ/n	wrong	dict	audit:17496 p2:1282:new
+大福	n	큰 복	다이후쿠	大福/だいふく/n	wrong	dict	audit:17509 p2:1283:new
+ビンタ	n	뺨치기	따귀	びんた/びんた/n	unnatural	dict	audit:17512 p2:1284:new
+さかさま	n	역	거꾸로	逆様/さかさま/n	wrong	dict	audit:17523 p2:1285:new
+草の根	n	민간	풀뿌리	草の根/くさのね/n	wrong	dict	audit:17527 p2:1286:new
+パッション	n	패션	열정	パッション/ぱっしょん/n	wrong	dict	audit:17540 p2:1287:new
+ヤキモキ	adv	야키모키	안달복달	やきもき/やきもき/adv	translit	dict	audit:17552 p2:1288:new
+ピクルス	n	피클즈	피클	ピクルス/ぴくるす/n	translit	dict	audit:17569 p2:1289:new
+締めくくり	n	결말	마무리	締め括り/しめくくり/n	wrong	dict	audit:17570 p2:1290:new
+朝晩	n	조석	아침저녁	朝晩/あさばん/n	stiff	dict	audit:17583 p2:1291:new
+くだり	n	내려감	대목	件/くだり/n	wrong	dict	audit:17591 p2:1292:new
+クボミ	n	쿠보미	움푹 팬 곳	窪み/くぼみ/n	translit	dict	audit:17604 p2:1293:new
+アクシデント	n	엑시던트	사고	アクシデント/あくしでんと/n	unnatural	dict	audit:17613 p2:1295:new
+天丼	n	덴돈	텐동	天丼/てんどん/n	translit	dict	audit:17618 p2:1296:new
+バレーボール	n	발리볼	배구	バレーボール/ばれーぼーる/n	unnatural	dict	audit:17644 p2:1297:new
+薄型	n	엷은 틀	슬림형	薄型/うすがた/n	unnatural	dict	audit:17658 p2:1298:new
+算段	n	변통	방도	算段/さんだん/n	wrong	dict	audit:17692 p2:1300:new
+明日葉	n	미나리과 다년초	신선초	明日葉/あしたば/n	wrong	dict	audit:17748 p2:1303:new
+立ち行	v5	그럭저럭 되다	돌아가다	立ち行く/たちゆく/v5	wrong	dict	audit:17753 p2:1304:new
+政道	n	마사미치	정치	政道/せいどう/n	word	dict	audit:17809 p2:1307:new
+入れ物	n	용기	그릇	入れ物/いれもの/n	unnatural	dict	audit:17822 p2:1308:new
+裃	n	농	가미시모	上下/かみしも/n	wrong	dict	audit:17831 p2:1310:new
+在所	n	거처	고향	在所/ざいしょ/n	wrong	dict	audit:17839 p2:1311:new
+ガードレール	n	가드 레일	가드레일	ガードレール/がーどれーる/n	translit	dict	audit:17854 p2:1313:new
+ちょっきん	adv	최근	싹둑	ちょっきん/ちょっきん/adv	wrong	dict	audit:17863 p2:1314:new
+チョッキン	adv	촉킨	싹둑	ちょっきん/ちょっきん/adv	translit	dict	audit:17864 p2:1315:new
+ミラクル	n	미러클	미라클	ミラクル/みらくる/n	translit	dict	audit:17865 p2:1316:new
+すり潰	v5	뭉개다	으깨다	磨り潰す/すりつぶす/v5	unnatural	dict	audit:17880 p2:1317:new
+じゃんじゃん	adv	척척	마구	じゃんじゃん/じゃんじゃん/adv	wrong	dict	audit:17881 p2:1318:new
+絞め殺	v5	졸라 죽이다	목 졸라 죽이다	締め殺す/しめころす/v5	unnatural	dict	audit:17888 p2:1319:new
+耳鳴り	n	귀 울림	이명	耳鳴り/みみなり/n	unnatural	dict	audit:17896 p2:1320:new
+あばら家	n	황폐한 집	허름한 집	あばら屋/あばらや/n	unnatural	dict	audit:17913 p2:1323:new
+荒屋	n	누옥	허름한 집	あばら屋/あばらや/n	stiff	dict	audit:17914 p2:1324:new
+船旅	n	뱃여행	배 여행	船旅/ふなたび/n	unnatural	dict	audit:17931 p2:1325:new
+葬具	n	장비	장례용품	葬具/そうぐ/n	wrong	dict	audit:17934 p2:1326:new
+目まぐるし	adj	어지럽다	정신없다	目まぐるしい/めまぐるしい/adj	wrong	dict	audit:17942 p2:1327:new
+めまぐるし	adj	어지럽다	정신없다	目まぐるしい/めまぐるしい/adj	wrong	dict	audit:17943 p2:1328:new
+猿まね	n	흉내를 냄	원숭이 흉내	猿真似/さるまね/n	wrong	dict	audit:17944 p2:1329:new
+ゾッコン	adv	족콘	홀딱	ぞっこん/ぞっこん/adv	translit	dict	audit:17946 p2:1330:new
+鼻緒	n	짚신의 갱기	끈	鼻緒/はなお/n	wrong	dict	audit:17949 p2:1331:new
+藩内	n	번내	번 안	藩内/はんない/n	unnatural	dict	audit:17953 p2:1332:new
+褌	n	곤	훈도시	褌/ふんどし/n	wrong	dict	audit:17961 p2:1333:new
+ふんどし	n	들보	훈도시	褌/ふんどし/n	wrong	dict	audit:17962 p2:1334:new
+フレー	n	프레이	힘내라	フレー/ふれー/n	wrong	dict	audit:17998 p2:1335:new
+鈍色	n	엷은 먹색	잿빛	鈍色/にびいろ/n	unnatural	dict	audit:18019 p2:1337:new
+コマセ	n	코마세	밑밥	こませ/こませ/n	translit	dict	audit:18025 p2:1338:new
+常世	n	츠네요	도코요	常世/とこよ/n	wrong	dict	audit:18026 p2:1339:new
+氏子	n	타미코	우지코	氏子/うじこ/n	wrong	dict	audit:18036 p2:1340:new
+涼	v5	식히다	더위를 식히다	涼む/すずむ/v5	unnatural	dict	audit:18040 p2:1341:new
+四股	n	발	시코	四股/しこ/n	wrong	dict	audit:18046 p2:1342:new
+今年	n	금년	올해	今年/ことし/n	stiff	dict	audit2:63 p2:1343:new
+小っちゃ	adj	아담하다	작다	小さい/ちいさい/adj	wrong	dict	audit2:97 p2:1344:new
+空母	n	항공 모함	항공모함	空母/くうぼ/n	unnatural	dict	audit2:713 p2:1348:new
+だいぶ	adv	많이	꽤	大分/だいぶ/adv	unnatural	dict	audit2:846 p2:1350:new
+スタッフ	n	스탭	스태프	スタッフ/すたっふ/n	unnatural	dict	audit2:939 p2:1353:new
+そろ	v5	모이다	갖추어지다	揃う/そろう/v5	unnatural	dict	audit2:1060 p2:1354:new
+今後	n	금후	앞으로	今後/こんご/n	stiff	dict	audit2:1145 p2:1358:new
+凛	n	늠	린	凛/りん/n	word	names	audit2:1178 p2:1359:new
+呼び出	v5	호출하다	불러내다	呼び出す/よびだす/v5	stiff	dict	audit2:1252 p2:1361:new
+靴	n	구두	신발	靴/くつ/n	unnatural	dict	audit2:1364 p2:1363:new
+寄	v5	다가가다	들르다	寄る/よる/v5	wrong	dict	audit2:1411 p2:1365:new
+ものすご	adj	아주 대단하다	엄청나다	物凄い/ものすごい/adj	unnatural	dict	audit2:1452 p2:1367:new
+花火	n	불꽃	불꽃놀이	花火/はなび/n	wrong	dict	audit2:1455 p2:1368:new
+漫才	n	만담	만자이	漫才/まんざい/n	wrong	dict	audit2:1495 p2:1370:new

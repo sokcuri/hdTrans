@@ -1,0 +1,1298 @@
+#! layer=base
+# Audited glosses: copies of the rows of a key's class, the chosen row with new Korean.
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+解け	&F5@	M427			GN	864	||1 ||4 S-2== "R氷" S-2== "R雪" S-2== "こおり" S-2== "ゆき"	解け의 두 단어 앞말이 얼음·눈 표현이면 녹다를 고른다. (미발동: rare-context)				audit:jisjk:95887
+解け	풀&AA@	M417			GN	865	||4 &&4 U+0== "Lません" S-1== "が" P-2== "1**" A-2!= "VHn" &&3 S-1== "が" P-2== "1**" A-2!= "VHn" S+1== "い" S+1== "いな"	解け는 비인간 명사와 が 뒤나 い·いな 앞에서 풀리다로 고른다.				audit:jisjk:95888
+解け	풀&AA@	M437	XXX	Ma	GN	1521	||1 &&2 U+0== "Lません" D+0= "풀 수 &M9@"	어미가 ません으로 시작하면 解け를 풀 수 없다로 바꾼다. (미발동: rare-context)				audit:jisjk:145217
+解け	풀어&AL@	M428			GN							audit:jisjk:368959
+ロック	록	N110			GN							audit:jisjk:59841
+バンザイ	만세	N130			GN							audit:jisjk:53596
+今頃	이맘때	N110			GN	440	||1 &&2 S-1== "の" A-2== "UMe"	今頃 앞에 시간 명사와 の가 차례로 오면 이맘때라는 번역을 고른다. (미발동: rare-context)				audit:jisjk:17419
+今頃	지금쯤	N110	XXXUMe		GN							audit:jisjk:341791
+兵装	무장	K110		Hd	MI							audit:jisjk:345931
+咬	&L5@	M425			GN						かむ	audit:w:13831
+争い	다툼	N110			GN							audit:jisjk:10915
+直	고&AO@	M443			GN							audit:jisjk:95057
+直	고쳐&AL@	M428			GN	812	||1 A-2== "VFrUFlQHP"	直의 두 단어 앞말이 기상·감정·병원 의미이면 회복되다를 고른다. (미발동: rare-context)				audit:jisjk:95058
+直	고쳐&AL@	M428			GN	1547	||1 A-2== "VEl"	直의 두 단어 앞에 전기 관련 의미의 말이 있으면 고쳐지다를 고른다. (미발동: rare-context)				audit:jisjk:146789
+近所	부근	N110	VPl		GN	439	||2 &&2 P-1== "1**" A-1== "VPl" &&3 S-1== "の" P-2== "1**" A-2== "VPl"	近所는 앞에 장소 명사가 직접 또는 の를 사이에 두고 있으면 부근으로 고른다.				audit:jisjk:17397
+近所	근처	N110	XXXVPl		GN							audit:jisjk:341432
+近所	근처	N110	VPl		GN				xxx	1		audit:w:24296
+どなた	누구	K120	VHn		GN							audit:jisjk:41370
+のぞ	엿&AY@	M421			GN	601	||1 &&2 S-1== "が" A-2== "UTh"	のぞ가 생각 의미 명사의 が 뒤에 오면 엿보다를 고른다. (미발동: rare-context)				audit:jisjk:91303
+のぞ	&My@	M435			GN							audit:jisjk:263550
+のぞ	제외&AV@	M441			GN	2462	||1 &&3 S-1== "を" P-2== "1**" A-2== "UMeVHn"	のぞ 앞의 を 너머 명사가 시간이나 사람 의미이면 제외하다를 고른다. (미발동: rare-context)				audit:jisjk:266088
+のぞ	들여다 &AY@	M441			GN	3118	||1 &&3 P-1== "2**" ||2 S-2== "R顔" S-2== "R目" P-2== "1**"	のぞ를 顔·目로 끝나는 명사와 조사 뒤에서 들여다 보다로 고른다. (미발동: rare-context)				audit:jisjk:341647
+覗	들여다&AY@	M431			GN							audit:jisjk:115007
+覗	엿&AY@	M431			GN							audit:jisjk:342189
+止	그&AO@	M415			GN							audit:jisjk:95036
+止	그만&C7@	M433			GN							audit:jisjk:95037
+援護	엄호	N110		Hd	GN							audit:jisjk:30452
+エリア	에어리어	N110	VPl		GN							audit:jisjk:44496
+おいら	나	N110			GN							audit:jisjk:259392
+来週	다음 주	K110	UMe		GN							audit:jisjk:20070
+警部	경감	N110			BZ							audit:jisjk:15508
+何れ	언젠가	N110			GN							audit:jisjk:161145
+ふさわし	어울$A4@	H7U0			GN							audit:jisjk:5265
+ふさわし	적합$AB@	H7N0			GN							audit:jisjk:122669
+ざま	꼴	N110			GN							audit:jisjk:186487
+誇り	긍지	N110			GN							audit:jisjk:6961
+朝ご飯	아침밥	I110	VFdVFd	Om	GN							audit:jisjk:83599
+スープ	수프	N110	VFd		GN							audit:jisjk:14006
+友軍	아군	N110	VHn		GN							audit:jisjk:30140
+役人	관리	N110	UAqUAqVHn		GN							audit:jisjk:29220
+気配	기척	N110	UFl		GN							audit:jisjk:17801
+叶	이루어&AL@	M420		Dx	GN							audit:jisjk:268388
+虎	호랑이	N110	QAA		GN							audit:jisjk:115690
+虎	호	N110		On	GN							audit:jisjk:258775
+無理矢理	억지로	I110		Nn	GN							audit:jisjk:260787
+交わ	사&C1@	M418	VHn		GN							audit:jisjk:92020
+交わ	주고&FD@	M443			GN							audit:jisjk:118629
+周	슈	N130	QPN	Wb	GN					-1		audit:jisjk:257771
+周	아마네	N130	VHnQPN	Wb	GN							audit:jisjk:259747
+周	바퀴	N110	XXX	On	GN							audit:jisjk:339701
+転	넘어&AL@	M416			GN							audit:jisjk:94712
+転	바&C3@	M43:			GN							audit:jisjk:94713
+転	바&CW@	M41:			GN							audit:jisjk:94714
+転	넘어뜨&AA@	M443			GN							audit:jisjk:119667
+転	넘어&AL@	M426	VRw		GN							audit:jisjk:120378
+転	바&C3@	M449			GN							audit:jisjk:144532
+人殺し	살인자	I110	HGu	Hd	GN							audit:jisjk:80105
+話し合	의논&AV@	M410	UTs		GN							audit:jisjk:96037
+いびき	코골이	N110	UYh		GN							audit:jisjk:260389
+出来事	일	I110			GN							audit:jisjk:86689
+芸能	연예	N110			GN							audit:jisjk:29530
+半端	어중간	N110			GN							audit:jisjk:22712
+うまみ	감칠맛	I110			GN							audit:jisjk:97791
+腐ら	썩&AW@	M413			GN							audit:jisjk:93137
+夕暮れ	해질녘	I110	VFr		GN							audit:jisjk:74117
+だるま	달마	I110	VHnVRw		GN							audit:jisjk:41279
+今月	이번 달	N110	UMe		GN							audit:jisjk:17439
+ほれ	자	Q110			GN							audit:jisjk:341194
+交替	교대	N110		Hd	GN							audit:jisjk:16578
+つき止め	밝혀&A6@	M447			GN							audit:jisjk:142539
+指先	손끝	N110	VBp		GN							audit:jisjk:34656
+証し	증거	N110			GN							audit:jisjk:105184
+ビビ	겁&HU@	M418			GN							audit:jisjk:365927
+汽笛	기적	N110	UHr		GN							audit:jisjk:17840
+汽笛	기적	N110			GN				xxx	1	きてき	audit:w:18857
+振り向	뒤돌아&AY@	M411			GN							audit:jisjk:95097
+朝メシ	아침밥	N110			GN						あさめし	audit:w:18021
+策	계략	N110			GN							audit:jisjk:115752
+策	계책	N110	XXX	Z7	GN							audit:jisjk:115753
+策	책	N110		On	GN							audit:jisjk:258864
+くっつ	&HC@	M411		Dx	GN							audit:jisjk:90693
+くっつ	달라&HC@	M411			GN							audit:jisjk:90693
+ますます	더욱더	E311			GN							audit:jisjk:1253
+気の毒	딱%A1@	G8U0			GN	77	||2 &&2 U+0== "です" Y+0= "5습니다" &&3 U+0== "だ" D+0= "안    " Y+0= " 됐다"	気の毒는 です로 활용되면 어미를 '-었습니다'로 바꾸고 だ로 활용되면 전체를 '안 됐다'로 바꾼다.				audit:jisjk:2577
+気の毒	불쌍%A1@	G8U0			GN	5042	||2 &&2 P+1== "4**" ||2 G+1== "Ka" G+1== "Ke" &&2 U+0== "で" Y+0= "6서"	뒤에 가능 문법 코드의 동사가 있거나 자체 어미가 で이면 気の毒를 불쌍하다로 고르고 연결 어미를 서로 맞춘다. (미발동: rare-context)				audit:jisjk:375264
+浪人	낭인	N110	VHn		GN							audit:jisjk:20040
+受け止め	받아들&AJ@	M437	UTh		GN							audit:jisjk:93666
+受け止め	받아 &A6@	M447	VRw		GN							audit:jisjk:126646
+受け止め	막아&A6@	M437			GN							audit:jisjk:141287
+是非	시비	E110			GN	470	||1 &&2 ||7 S+1== "を" S+1== "が" S+1== "は" S+1== "の" S+1== "など" S+1== "などについて" S+1== "に" P+1== "2**"	是非는 다음 말이 조사 を·が·は·の·など·などについて·に이면 명사 ‘시비’를 고른다.				audit:jisjk:27739
+是非	꼭	E110	XXX		GN							audit:jisjk:264107
+滅ぼ	멸망시&AQ@	M433			GN							audit:jisjk:92725
+モメ	옥신각신&AV@	M427			GN							audit:jisjk:343005
+酔っ払	취&AV@	M420			GN							audit:jisjk:95535
+痩せ	&E4@	M417			GN							audit:jisjk:9658
+痩せ	여&CH@	M427			GN							audit:jisjk:119814
+儲か	돈을 &L6@	M428			GN							audit:jisjk:341952
+晩ごはん	저녁밥	N110		Om	GN						ばんごはん	audit:w:17823
+狭霧	사기리	N110	VSs		GN							audit:jisjk:232340
+長波	나가나미	N110			GN						ちょうは	audit:w:25020
+銭	돈	N110	VMo	Ct	GN							audit:jisjk:199558
+銭	전	N110		On	GN							audit:jisjk:259736
+退避	대피	N110		Hd	GN							audit:jisjk:37167
+やかまし	시끄$G7@	H7U0			GN							audit:jisjk:5287
+やかまし	시끄$G7@	H7U0			GN							audit:jisjk:5288
+企	꾀&AV@	M445			GN							audit:jisjk:139313
+とらわれ	사로잡&AW@	M417			GN							audit:jisjk:91144
+とらわれ	구애&C6@	M427			GN							audit:jisjk:145886
+とらわれ	붙잡&AW@	M427			GN							audit:jisjk:145890
+ジャパニーズ	재패니즈	N110			GN							audit:jisjk:48456
+カーネル	커널	N110			GN							audit:jisjk:45285
+オーダー	주문	N110			GN							audit:jisjk:44698
+砂浜	모래사장	N110	VPl		GN							audit:jisjk:25186
+砂浜	스나하마	N130	QCTVPl		GN							audit:jisjk:303536
+着任	부임	N110			GN							audit:jisjk:102786
+着任	부임	N110			GN							audit:jisjk:267005
+生き返	되살아&A5@	M418	QHP		GN							audit:jisjk:93443
+抱きつ	껴&FH@	M421			GN							audit:jisjk:140969
+洗い物	설거지	I110	VCp		GN							audit:jisjk:74622
+手柄	공로	N110			GN							audit:jisjk:27218
+手柄	테가라	N130	QCTVPl		GN							audit:jisjk:310228
+シールド	실드	N110			GN							audit:jisjk:47953
+後ほど	나중에	E300			GN							audit:jisjk:149451
+スポット	스폿	N110	 		GN							audit:jisjk:130108
+総菜	반찬	N110	VFd		GN							audit:jisjk:36054
+はかな	덧$FA@	H7U0			GN							audit:jisjk:5253
+はかな	덧$FA@	H7N0	SFl		GN							audit:jisjk:122346
+はかな	입지 $D7@	H7U0			GN							audit:jisjk:263741
+はかな	입지 $D7@	H7U0			GN	2113	||1 &&3 P-1== "2**" P-2== "1**" A-2-= "VCp"	はかな 앞에 옷 의미 계열의 명사와 조사가 오면 입지 않다라는 번역을 고른다. (미발동: rare-word)				audit:jisjk:263742
+とどめ	결정타	N110			GN							audit:jisjk:6540
+感心	감탄	N110	UFl	Hi	GN							audit:jisjk:2433
+捜し出	찾아&A6@	M443			GN							audit:jisjk:120657
+しとめ	&FK@	M447	VTwQHP		GN							audit:jisjk:122439
+住まい	집	I110	VPlVSwUTs		GN							audit:jisjk:84051
+住まい	살림살이	I110	VCk		GN							audit:jisjk:84052
+引き継	이어&FD@	M442			GN							audit:jisjk:94437
+括	&Ha@	M428			GN						くくる	audit:w:16986
+都内	도쿄 시내	N110	VPl		GN							audit:jisjk:19422
+テイラー	테일러	N130	QPN		GN							audit:jisjk:369260
+セキュリティー	보안	N110			GN							audit:jisjk:104306
+セキュリティー	시큐리티	N110			BZ							audit:jisjk:362633
+先週	지난주	N110	UMe		GN							audit:jisjk:26274
+修復	복구	N110	VBl	Hd	GN							audit:jisjk:189520
+ファイト	파이팅	N110			GN							audit:jisjk:54513
+ダイヤ	다이아	N110			GN							audit:jisjk:50305
+ダイヤ	다이어그램	N110	VSpUMe		GN							audit:jisjk:368858
+ダイヤ	다이아몬드	N110	VJw		GN							audit:jisjk:368859
+拝	&L8@	M445	UCl		GN							audit:jisjk:145574
+体勢	자세	N110			GN							audit:jisjk:35830
+見とれ	넋을 &HL@	M417			GN							audit:jisjk:91783
+キリシタン	기리시탄	N110	VHn		GN							audit:jisjk:46109
+煮込	푹 끓&AJ@	M465			GN							audit:jisjk:351050
+ひきつけ	끌어당&A2@	M447			GN							audit:jisjk:360113
+祟り	저주	N110			GN							audit:w:26782
+カンパニー	컴퍼니	N110	VBlVGt		GN							audit:jisjk:45708
+力士	스모 선수	N110	VHn		GN							audit:jisjk:20291
+力士	역사	N110	UAq		GN							audit:jisjk:20292
+駆け上が	달려 올라&A1@	M428			GN							audit:jisjk:373282
+かわ	대신&AV@	M448			GN	567	||3 &&5 P-1== "2**" S+1== "ご用命" S+2== "を" S+3== "承" P+3== "4**" &&3 S-1== "に" P-2== "1**" S+1== "物" &&3 M+0== "5:0" S-1== "な" U-1== "い"	ご用命を承る·명사に物 또는 な의 부정 활용 문맥이면 かわ를 대신하다로 고른다. (미발동: rare-context)				audit:jisjk:90632
+かわ	변&AV@	M428	XXX		GN							audit:jisjk:202008
+かわ	피&AV@	M433			GN							audit:jisjk:267771
+かわ	&E4@	M421			GN							audit:jisjk:341461
+かわ	피&AV@	M433			GN							audit:jisjk:363574
+つつし	삼&A1@	M445			GN							audit:jisjk:143135
+つつし	조심&AV@	M445			GN							audit:jisjk:143139
+慎	삼&A1@	M435			GN							audit:jisjk:143138
+シフト	시프트	N110			BZ							audit:jisjk:48108
+ドール	돌	N110	VMy		GN							audit:jisjk:131723
+好物	좋아하는 음식	N110	UFl		GN							audit:jisjk:39213
+かすり傷	찰과상	I110			GN							audit:jisjk:112216
+うなだれ	고개 숙&AJ@	M427			GN							audit:jisjk:144336
+しょっちゅう	자주	E300			GN							audit:jisjk:257548
+うっとうし	성가$A6@	H7U0			GN							audit:jisjk:4900
+うっとうし	찌뿌둥$AB@	H7N0	VSsSFl		GN							audit:jisjk:119918
+ごっこ	놀이	N110			GN							audit:jisjk:260439
+機材	장비	N110			GN							audit:jisjk:17775
+運休	운행 중단	N110		Hd	GN							audit:jisjk:30287
+余計	더욱	N110			GN							audit:jisjk:3373
+音大	음대	N110	VGt		GN							audit:jisjk:30951
+吸い込	들이마&AE@	M445			GN							audit:jisjk:137067
+吸い込	흡입&AV@	M445	VFd		GN							audit:jisjk:344065
+スナック	스낵	N110			GN							audit:jisjk:49187
+薩長	삿초	N130			GN							audit:jisjk:100708
+ささやか	소박%A1@	G8U0			GN							audit:jisjk:2182
+保持	보관 유지	N110		Hd	GN							audit:jisjk:23742
+保持	유지	N110			GN				xxx	1		audit:w:12081
+本題	본론	N110		Or	GN							audit:jisjk:24047
+端末	단말기	N110			GN							audit:jisjk:18640
+付きまと	따라다&A7@	M410			GN							audit:jisjk:93098
+付きまと	따라다&A7@	M420			GN							audit:jisjk:142596
+つきまと	따라다&A7@	M410			GN							audit:jisjk:91067
+つきまと	따라다&A7@	M420			GN							audit:jisjk:142597
+次	버금&A1@	M412			GN							audit:jisjk:13786
+次	잇&E3@	M422			GN							audit:jisjk:142844
+鰻	장어	N110	QAAQACQAC		GN							audit:jisjk:115465
+鰻	만	N110		On	GN							audit:jisjk:258350
+幼少	어린 시절	N110		Dd	GN							audit:jisjk:156117
+右側	오른쪽	N110	VPlVTpUDr		GN							audit:jisjk:30162
+揺ら	흔들&AA@	M412			GN							audit:jisjk:94226
+揺ら	흔&L4@	M433			GN							audit:jisjk:94227
+積み荷	짐	I110			GN							audit:jisjk:106126
+大盛り	곱빼기	N110	VFd		GN							audit:jisjk:164897
+ターゲット	타깃	N110			GN							audit:jisjk:49922
+ドーナツ	도넛	N110	VFd		GN							audit:jisjk:51970
+和牛	와규	N110	QAA		GN							audit:jisjk:39436
+すぐさま	곧바로	E311			GN							audit:jisjk:528
+マッサージ	마사지	N110			GN							audit:jisjk:57265
+よそ見	한눈	I110	VBp		GN							audit:jisjk:41820
+退け	치&AI@	M437			GN							audit:jisjk:95693
+退け	배척&AV@	M447	VTw		GN							audit:jisjk:136680
+退け	파&AV@	M427			GN	3355	||1 ||2 S-1== "学校" S-1== "会社"	退け를 学校·会社 뒤에서 파하다로 고른다. (미발동: rare-context)				audit:jisjk:342896
+退け	파&AV@	M427			GN	3356	||2 ||2 S-1== "学校" S-1== "会社" ||2 S-2== "学校" S-2== "会社"	退け의 앞 한두 단어 위치에 学校·会社가 있으면 파하다를 고른다. (미발동: rare-context)				audit:jisjk:342897
+退け	비&AQ@	M427			GN				xxx	1		audit:w:24355
+全裸	알몸	N110	VBp		GN							audit:jisjk:32649
+侮	얕&AY@	M438			GN							audit:jisjk:92761
+侮	깔&AY@	M448			GN							audit:jisjk:138299
+よそ者	외지인	I110	VHn		GN							audit:jisjk:41823
+くすぐった	간지$G7@	H7U0			GN							audit:jisjk:5011
+くすぐった	간지$G7@	H7N0	SFl		GN							audit:jisjk:120399
+脂	기름	N110			GN							audit:jisjk:115778
+脂	지	N110		On	GN							audit:jisjk:258884
+コンクール	콩쿠르	N110	VGt		GN							audit:jisjk:47208
+首相	총리	N110	UAqVHn		GN							audit:jisjk:27491
+打ち明け	털어&F6@	M437			GN							audit:jisjk:95611
+不服	불만	N110			GN							audit:jisjk:24601
+ルーツ	뿌리	N110			GN							audit:jisjk:59386
+散らか	어&E7@	M433			GN							audit:jisjk:93365
+散らか	어질러&AL@	M418		Dx	GN							audit:jisjk:93366
+勝ち取	쟁취&AV@	M438			GN							audit:jisjk:93771
+貸し	빚	N110			GN							audit:jisjk:7380
+プール	수영장	N110	VPl		GN							audit:jisjk:55882
+タレント	연예인	N110	VHnUAq		GN							audit:jisjk:50148
+ウェイトレス	웨이트리스	N110	VHn		GN							audit:jisjk:162786
+ケチャップ	케첩	N110	VLqVFd		GN							audit:jisjk:46811
+コク	깊은 맛	N130	QPN		GN							audit:jisjk:366639
+収録	녹화	N110		Hd	GN							audit:jisjk:27279
+昂	흥분&C6@	M428			GN							audit:jisjk:139241
+アドリブ	애드리브	N110			GN							audit:jisjk:42702
+シール	스티커	N110			GN							audit:jisjk:47951
+焼き肉	야키니쿠	I110	VFd		GN							audit:jisjk:75364
+焼肉	야키니쿠	N110	VFd		GN							audit:jisjk:26911
+急用	급한 볼일	N110			GN							audit:jisjk:17585
+急用	급한 용무	N110			GN				xxx	1	きゅうよう	audit:w:16426
+人だかり	인산인해	I110	VPl		GN							audit:jisjk:80050
+人だかり	인파	I110			GN				xxx	1		audit:w:11588
+住み着	눌러&K5@	M411			GN							audit:jisjk:94958
+リラックス	릴랙스	N110			GN							audit:jisjk:59308
+年始	연초	N110	UMe		GN							audit:jisjk:18270
+ぶち込	처&H5@	M425			GN							audit:jisjk:374782
+係員	계원	N110	VHn		GN	428	||2 P-1== "1**" P+1== "1**"	앞이나 뒤에 명사가 있는 係員을 '계원'으로 고른다. (미발동: rare-context)				audit:jisjk:15564
+係員	직원	N110	XXXVHn		GN	3978	||1 P+1== "2**"	조사 앞의 係員을 관계자로 고른다.				audit:jisjk:354389
+戦局	전황	N110	UMe		GN							audit:jisjk:32792
+心中	동반 자살	N110	VPl	Hd	GN							audit:jisjk:28231
+心中	동반자살	N110		Hd	GN	1291	||2 ||2 S-1== "一家" S-1== "二人で" ||3 S+1== "す" S+1== "でき" S+1== "出来"	앞말이 一家나 二人で이거나 뒤말이 す·でき·出来이면 心中을 동반자살로 고른다. (미발동: rare-context)				audit:jisjk:116939
+バリア	배리어	N110			GN							audit:jisjk:106898
+言い争	말다툼&AV@	M420	UTs		GN							audit:jisjk:94091
+基づ	기반&AV@	M411			GN							audit:jisjk:92186
+基づ	&E3@	M421			GN							audit:jisjk:364218
+たびたび	자주	E311			GN							audit:jisjk:691
+たびたび	언제나	E300			GN	4931	||1 &&3 D+1== "," ||2 S+2== "申し訳あ" S+2== "申し訳ござ" P+2== "4**"	たびたび를 쉼표와 申し訳あ·申し訳ござ 동사 앞에서 언제나로 고른다. (미발동: rare-context)				audit:jisjk:374757
+いにしえ	옛날	N110	UMe		GN							audit:jisjk:126069
+ブツ	물건	N110	VCp		GN							audit:jisjk:268300
+手ごわ	만만치 $D7@	H7U0			GN							audit:jisjk:5691
+手ごわ	만만치 $D7@	H7N0			GN							audit:jisjk:121686
+初春	하츠하루	N110	UMe		GN							audit:jisjk:35897
+どのみち	어차피	E311			GN							audit:jisjk:892
+マニア	마니아	N110	VHn		GN							audit:jisjk:57347
+早朝	이른 아침	N110	UMe		GN							audit:jisjk:33547
+早朝	조조	N110	UMe		GN	3632	||2 P+1== "1**" S+1== "は"	早朝는 뒤에 명사나 は가 오면 조조로 고른다.				audit:jisjk:344784
+早朝	조조	N110	UMe		BZ					-1		audit:jisjk:362179
+泊め	재&AI@	M437			GN							audit:jisjk:92940
+泊め	숙박시&AQ@	M447			GN							audit:jisjk:145826
+泊め	정박시&AQ@	M447	VTpVPe		GN							audit:jisjk:145829
+敗退	탈락	N110		Hd	GN							audit:jisjk:37466
+値打	가치	N110			GN							audit:jisjk:36499
+値打	가치	N110			GN				xxx	1	ねうち	audit:w:12121
+値打ち	가치	I110	VMo		GN							audit:jisjk:86891
+補欠	후보	N110		Hd	GN							audit:jisjk:23801
+公儀	막부	N110			GN							audit:jisjk:180027
+振り込	입금&AV@	M445			GN							audit:jisjk:262079
+結びつ	연결&C6@	M411			GN							audit:jisjk:91866
+結びつ	결부&C6@	M411			GN							audit:jisjk:118944
+プレゼン	프레젠테이션	N110			GN							audit:jisjk:260762
+ビリ	꼴찌	N130	QPN		GN							audit:jisjk:369869
+一手	한 수	N110			GN							audit:jisjk:31503
+一手	독점	N110			BZ					-1		audit:jisjk:31504
+バカバカし	어처구니$FA@	H7U0			GN						バカバカしい	audit:w:7150
+それがし	소생	N120	VBp		GN					-1		audit:jisjk:201059
+ダウンヒル	다운힐	N110	VRw		GN							audit:jisjk:130818
+乗り物	탈것	I110	VTp		GN							audit:jisjk:76151
+チラシ	전단지	N110			GN							audit:jisjk:103673
+ちらし	전단지	N110	VSw		GN							audit:jisjk:370888
+申しつけ	분부&AV@	M447			GN							audit:jisjk:267395
+税	세금	N110		Z7	GN							audit:jisjk:115937
+税	세	N110		On	GN							audit:jisjk:258976
+通りかか	지나&A1@	M418			GN							audit:jisjk:95681
+通りかか	지나&A1@	M428			GN							audit:jisjk:145027
+緩め	늦&CL@	M437			GN							audit:jisjk:94196
+実質	사실상	N110			GN							audit:jisjk:28184
+着ぐるみ	인형탈	N110			GN							audit:jisjk:343869
+勝	이&A2@	M434			GN	736	||4 &&2 S-1== "に" A-2== "VQmVQwVHn" &&4 M+0== "57*" P+1== "4**" A+1== "UMv" Y+0= "6" &&2 S-1== "で" S-2== "R戦" &&3 S-1== "で" G-2== "NjNd" D-1= "(으)로"	사람과의 승부·경기·점수 등 지정 문맥의 勝를 '이기다'로 고르고 이동 동사 앞의 연결형은 '-아/어'로 바꾼다.				audit:jisjk:93766
+勝	능가&AV@	M418		VaNa	GN	737	||1 &&2 S-1== "で" U+0== "る"	で 뒤의 勝는 어미가 る인 勝る에서만 우수하다를 고른다. 勝つ의 동형 과거형은 이기다로 남긴다.				audit:jisjk:93767
+勝	좋게 생각&C6@	M418			GN							audit:jisjk:117442
+吾輩	나	N110	VHn		GN							audit:jisjk:29600
+さらば	안녕	A9D0			GN							audit:jisjk:264840
+ナース	간호사	N110	VHn		GN							audit:jisjk:14064
+パチンコ	파친코	N110	VPlVRw		GN							audit:jisjk:53738
+番頭	지배인	N110	VHn		GN							audit:jisjk:23358
+組員	조직원	N110			GN							audit:jisjk:105080
+サッパ	밴댕이	N130			GN							audit:jisjk:365557
+ハーレム	하렘	N110	VPl		GN							audit:jisjk:52980
+コネ	연줄	N110			GN							audit:jisjk:100392
+こさえ	만&L4@	M417			GN							audit:jisjk:90767
+こさえ	만&L4@	M447			GN							audit:jisjk:119890
+粘	버&Af@	M428			GN							audit:jisjk:5899
+粘	반죽&AV@	M433			GN							audit:jisjk:5900
+粘	정련&AV@	M433	VSn		GN							audit:jisjk:5901
+一覧	목록	N110		Hd	GN							audit:jisjk:31465
+形跡	흔적	N110			GN							audit:jisjk:39164
+さびつ	녹&LJ@	M421	VPeVBl		GN							audit:jisjk:121485
+盛りつけ	&M6@	M447			GN							audit:jisjk:202339
+レジ	계산대	N130	VPl		GN							audit:jisjk:104449
+レジ	레지	N130	QPN		GN							audit:jisjk:366706
+稲荷	이나리	N110			GN							audit:jisjk:19370
+稲荷	이나리	N130	QCTVPl		GN	2866	||1 P-1== "13*"	고유 명사 바로 뒤의 稲荷를 고유명 '이나리'로 고른다. (미발동: rare-word)				audit:jisjk:273434
+ユニット	유닛	N110			GN							audit:jisjk:58587
+真夏	한여름	N110	UMe		GN							audit:jisjk:34973
+真夏	마나츠	N130	QPN	Wa	GN							audit:jisjk:340504
+ミシン	재봉틀	N110			GN							audit:jisjk:57694
+残業	야근	N110		Hd	GN							audit:jisjk:32063
+所員	직원	N110	VHn		GN							audit:jisjk:26858
+追いや	내&KA@	M438			GN							audit:jisjk:95346
+追いや	쫓아 보&A6@	M448	VTw		GN							audit:jisjk:145401
+宿	깃&L4@	M428			GN							audit:jisjk:13729
+宿	임신&AV@	M433			GN							audit:jisjk:13730
+宿	&H8@	M423			GN							audit:jisjk:136413
+べったり	찰싹	E301			GN							audit:jisjk:1195
+歩き回	돌아다&A7@	M428			GN							audit:jisjk:143331
+流し込	&JG@	M445			GN							audit:jisjk:144066
+急きょ	급히	E300			GN							audit:jisjk:118886
+急きょ	급거	E300			GN							audit:jisjk:123001
+見立て	빗&C5@	M437			GN							audit:jisjk:6780
+追々	차차	E300			GN							audit:jisjk:343410
+あゆみ	발자취	I110			GN							audit:jisjk:97510
+あゆみ	아유미	I110	QPN	Wb	GN							audit:jisjk:268242
+くじ	제비뽑기	N110	VMo		GN							audit:jisjk:13883
+くじ	제비	N110			GN	4615	||1 &&3 S+1== "を" ||2 S+2== "ひ" S+2== "引" P+2== "4**"	くじ 뒤에 を와 ひ·引 동사가 차례로 오면 제비를 고른다. (미발동: rare-context)				audit:jisjk:367938
+取り返	되&FN@	M443			GN							audit:jisjk:95450
+取り返	되&FN@	M443			GN							audit:jisjk:145993
+助っ人	조력자	I110	VHn		GN							audit:jisjk:83546
+買い出し	장보기	I110		Hd	GN							audit:jisjk:68496
+士官	장교	N110	VHnUQf		GN							audit:jisjk:25042
+ウインナー	비엔나소시지	N110	VHn		GN							audit:jisjk:43809
+ウインナー	빈	N110	QCT	Qq	GN							audit:jisjk:43810
+公道	공공도로	N110			GN							audit:jisjk:15985
+松竹	쇼치쿠	N130	QPN	Wa	GN							audit:jisjk:27067
+閉じこも	틀어박&AW@	M418			GN							audit:jisjk:95757
+ひととき	한때	I110	UMe		GN							audit:jisjk:41536
+こき使	부려&HU@	M430			GN							audit:jisjk:90758
+仰	우러러&AY@	M432	VFd		GN							audit:jisjk:93996
+仰	말씀하&AE@	M418	UTs		GN							audit:jisjk:93997
+仰	우러러&AY@	M432			GN							audit:jisjk:93998
+仰	위를 향&AV@	M411			GN							audit:jisjk:93999
+仰	받&L4@	M442			GN							audit:jisjk:267200
+仰	받&L4@	M442			GN	2674	||1 &&2 S-1== "を" ||2 S-2== "批判" S-2== "批評"	「批判・批評を」 뒤에서 「仰」를 ‘받들다’로 고른다. (미발동: rare-context)				audit:jisjk:267202
+降格	강등	N110		Hd	GN							audit:jisjk:115132
+住処	거처	N110			GN				xxx		すみか	audit:w:11887
+住処	주가	N110			GN						すみか	audit:w:11888
+見放	버&AA@	M433			GN							audit:jisjk:91806
+頃合い	적당한 때	I110			GN							audit:jisjk:61178
+つまず	걸려 넘어&AL@	M411			GN							audit:jisjk:91103
+つまず	실패&AV@	M421			GN							audit:jisjk:143444
+小豆	팥	N110	VFd		GN							audit:jisjk:26723
+小豆	쇼즈	N130	QCT		GN							audit:jisjk:26724
+小豆	팥	N110	QALVFd		GN							audit:jisjk:26725
+うすうす	어렴풋이	E301			GN							audit:jisjk:123
+きゃつ	그놈	N110	VHn		GN							audit:jisjk:172879
+詮索	캐묻기	N110	UTs	Hd	GN							audit:jisjk:32869
+詮索	탐색	N110		Hd	GN							audit:jisjk:32870
+雑魚	잡어	N110	QAAQACQAC		GN							audit:jisjk:32119
+雑魚	잔챙이	N110			GN				xxx	1		audit:w:25267
+勾配	경사	N110			GN							audit:jisjk:16715
+教祖	교주	N110			GN							audit:jisjk:16624
+差し伸べ	내&LN@	M437			GN							audit:jisjk:95168
+差し伸べ	내 뻗&AO@	M447			GN							audit:jisjk:121256
+コンセプト	콘셉트	N110			GN							audit:jisjk:47236
+右足	오른발	N110			GN							audit:jisjk:104633
+なでしこ	패랭이꽃	I110			GN							audit:jisjk:112954
+自負	자부심	N110		Hd	GN							audit:jisjk:31910
+鈍	무뎌&AL@	M418			GN							audit:jisjk:2701
+鈍	둔해&AL@	M429	SFl		GN							audit:jisjk:146738
+やんちゃ	개구쟁이	I110			GN							audit:jisjk:41801
+ありふれ	흔&AV@	M417		Ma	GN	552	||1 &&2 U+0== "Lません" D+0= "흔히 &M9@"	ありふれ의 어미가 ません으로 시작하면 번역을 흔히 없다로 바꾼다. (미발동: rare-context)				audit:jisjk:90396
+ありふれ	흔&AV@	M427			GN							audit:jisjk:138744
+入れ代わ	바&CW@	M418			GN							audit:jisjk:94562
+ほおば	볼이 미어지게 &HU@	M448			GN							audit:jisjk:264982
+目つき	눈빛	I110	VBp		GN							audit:jisjk:68949
+分際	주제	N110			GN							audit:jisjk:24476
+分際	신분	N110	UQf		GN							audit:jisjk:24477
+容体	상태	N110			GN							audit:jisjk:30046
+容体	병세	N110	UTi		GN							audit:jisjk:30047
+足腰	하체	N110	VBp		GN							audit:jisjk:33776
+ジョーカー	조커	N110			GN							audit:jisjk:48523
+見かけ	겉모습	N110			GN							audit:jisjk:6771
+コレクション	컬렉션	N110			GN							audit:jisjk:47178
+伊呂波	이로하	N110			GN							audit:jisjk:126339
+カルテ	진료기록부	N110	VSw		GN							audit:jisjk:45588
+ジューシー	육즙이 풍부%A1@	G8U0			GN							audit:jisjk:266123
+長引	길어&AL@	M411			GN							audit:jisjk:94635
+長引	길어&AL@	M421	UMe		GN							audit:jisjk:146855
+藩主	번주	N110	VHn		GN							audit:jisjk:23378
+潮時	적당한 때	N110	UMe		GN							audit:jisjk:33614
+歌舞伎	가부키	I130	UAr		GN							audit:jisjk:60283
+ホステス	호스티스	N110	UAq		GN							audit:jisjk:56538
+レギュレーション	규정	N110			GN							audit:jisjk:107620
+レギュレーション	레귤레이션	N110			GN							audit:jisjk:107621
+おとしめ	깎아내&AA@	M447	SFl		GN							audit:jisjk:146462
+あでやか	화사%A1@	G8L0			GN							audit:jisjk:2096
+双眸	눈	N110	VBp		GN							audit:jisjk:240225
+貪	탐&AV@	M438			GN							audit:jisjk:95666
+丸っきり	완전히	E300			GN						まるっきり	audit:w:11255
+まるっきり	완전히	E300			GN						まるっきり	audit:w:1167
+リサイクル	재활용	N110		Hd	GN							audit:jisjk:103259
+胸元	가슴팍	K110	VBp		GN							audit:jisjk:202326
+日替わり	오늘의	I110			GN							audit:jisjk:81830
+足踏み	제자리걸음	I110	VBp	Hd	GN							audit:jisjk:83817
+こけ	넘어&AL@	M417			GN							audit:jisjk:90763
+こけ	여&CH@	M427			GN							audit:jisjk:119816
+綿	솜	N110		MoOn	GN							audit:jisjk:116289
+綿	솜	N110	VLtVCp		GN							audit:jisjk:259264
+出向	찾아&A1@	M411			GN							audit:jisjk:95400
+菜っ葉	푸성귀	I110	QAL		GN							audit:jisjk:85682
+通	다&A7@	M430	UMv		GN	407	||1 &&3 P-1== "2**" P-2== "1**" A-2-= "VHn"	사람을 나타내는 명사와 조사 뒤의 通을 다니다로 고른다.				audit:jisjk:13797
+通	통과시&AQ@	M443			GN	408	||1 &&2 S-1== "を" S-2== "法案"	앞에 法案を가 오면 通를 통과시키다로 고른다. (미발동: rare-context)				audit:jisjk:13798
+通	통&AV@	M443	XXX		GN							audit:jisjk:13799
+通	지나&A1@	M448			GN	1518	||1 ||3 S-2== "R検定" S-2== "R試" S-2== "R試験"	두 단어 앞의 말이 検定·試·試験으로 끝나면 通를 통과하다로 고른다. (미발동: rare-context)				audit:jisjk:144999
+通	통&AV@	M468			GN							audit:jisjk:145001
+通	가설&AV@	M443			GN							audit:jisjk:145050
+通	개통&C6@	M428	VEl		GN							audit:jisjk:265682
+通	지&A5@	M448	UMv		GN	2767	||1 A-2== "VPl"	通는 두 단어 앞이 장소 의미이면 이동 동사 ‘지나다’로 고른다.				audit:jisjk:267663
+通	통&AV@	M4U0			GN							audit:jisjk:341378
+通	대로&AJ@	M428			GN	3732	||1 &&4 S-1== "の" S-2== "以上" Y+0= "" D-1= ""	以上の 바로 뒤에서 동사 通를 고르며 자신의 어미와 앞 の의 번역을 지운다. (미발동: rare-context)				audit:jisjk:346333
+極上	최상	N110	VPl		GN							audit:jisjk:17320
+羽音	날갯소리	N110			GN							audit:jisjk:104667
+ホッケー	하키	N110	VRw		GN							audit:jisjk:56552
+天蚕	천잠	N110	VAm		GN							audit:jisjk:244464
+天蚕	참나무산누에	N110	VAm		GN							audit:jisjk:244693
+差し置	제쳐 &C7@	M431			GN							audit:jisjk:95182
+差し置	내버려 &C7@	M441			GN							audit:jisjk:120986
+流れ着	흘러&L4@	M421			GN							audit:jisjk:346893
+寝返	배신&AV@	M428			GN						ねがえる	audit:w:15210
+扱	다&CB@	M430			GN							audit:jisjk:92179
+扱	잡아당&A2@	M441			GN							audit:jisjk:122130
+扱	대우&AV@	M440			GN							audit:jisjk:140218
+股間	사타구니	N110			GN							audit:jisjk:15768
+射程	사정거리	N110			GN							audit:jisjk:25074
+辛み	매운맛	N110			GN							audit:jisjk:10326
+間合い	간격	I110	UMeVPl		GN							audit:jisjk:60400
+うっとり	황홀하게	N311			GN							audit:jisjk:128
+障子	장지문	N110	VPl		GN							audit:jisjk:32310
+抹茶	말차	N110			GN							audit:jisjk:21378
+生き生き	생기 있게	E300			GN							audit:jisjk:122789
+あやまれ	사과&AV@	M417			GN							audit:jisjk:90384
+機雷	기뢰	N110			GN							audit:jisjk:104561
+邪険	매정%A1@	G8U0			GN							audit:jisjk:136822
+絵描き	화가	I110			GN							audit:jisjk:105517
+近年	최근	N110	UMe		GN							audit:jisjk:17384
+深み	깊이	N110	VPl		GN							audit:jisjk:10385
+深み	깊이	N110			GN							audit:jisjk:10386
+さる	어떤	E0H0	UMe		GN							audit:jisjk:123487
+さる	어떤	E0H0			GN							audit:jisjk:123489
+隅っこ	구석	I110	VPl		GN							audit:jisjk:79019
+内儀	안주인	N110	VHn		GN							audit:jisjk:18148
+特需	특수	N110			GN							audit:jisjk:37250
+討幕	막부 토벌	N110			GN							audit:jisjk:245548
+ひと握り	한 줌	N110			GN							audit:jisjk:154381
+居座	눌러&FI@	M428			GN							audit:jisjk:140742
+声音	목소리	N110	USoQMUVBp		GN							audit:jisjk:183174
+声音	성음	N110	USoQMU		GN							audit:jisjk:197149
+大通り	큰길	I110	VPl		GN							audit:jisjk:65623
+大通り	오도리	N130	QCTVPl		GN							audit:jisjk:278360
+生き残り	생존자	N110			GN							audit:jisjk:8401
+石ころ	돌멩이	I110			GN							audit:jisjk:74129
+インカム	인컴	N110			GN							audit:jisjk:43516
+勘づ	눈치&Ca@	M421			GN						かんづく	audit:w:13013
+感づ	눈치&Ca@	M421			GN						かんづく	audit:w:16590
+岬	곶	N130	QCTXXXVPl	Qq	GN							audit:jisjk:330390
+岬	갑	N110		On	GN							audit:jisjk:340700
+岬	미사키	N130	QPN	Wb	GN							audit:jisjk:369363
+ちょくちょく	자주	E300			GN							audit:jisjk:364211
+こたつ	코타츠	I110	VPeUXl		GN							audit:jisjk:40958
+空き家	빈집	I110	VBl		GN							audit:jisjk:61899
+年中	일년 내내	N110	UMe		GN							audit:jisjk:18278
+年中	년중	N110		Ct	GN							audit:jisjk:201515
+パスポート	여권	N110			GN							audit:jisjk:53726
+私情	사사로운 감정	N110			GN							audit:jisjk:25268
+落ち合	만&A5@	M410			GN							audit:jisjk:92516
+落ち合	만&A5@	M420	UMe		GN							audit:jisjk:146279
+辛苦	고생	N110		Hd	GN							audit:jisjk:28086
+鉄くず	고철	N110			GN							audit:jisjk:35666
+縁結び	인연 맺기	I110			GN							audit:jisjk:78258
+満ちあふれ	가득 &AN@	M427			GN							audit:w:19335
+負け犬	패배자	N110	VAm		GN							audit:jisjk:251654
+受け流	받아넘&A2@	M433			GN							audit:jisjk:93663
+幼子	어린아이	N110	VHn		GN							audit:jisjk:30653
+ひっそり	조용히	E301			GN							audit:jisjk:1100
+ひっそり	조용히	E301			GN							audit:jisjk:1101
+素行	품행	N110			GN							audit:jisjk:26952
+ならわし	관습	I110			GN							audit:jisjk:41409
+習わし	관습	N110			GN							audit:jisjk:9786
+延々	끝없이	E301			GN							audit:jisjk:1794
+引き込	끌어들&AJ@	M445			GN							audit:jisjk:116954
+擦り抜け	빠져나&A1@	M427			GN							audit:jisjk:139716
+がれき	잔해	I110			GN							audit:jisjk:106358
+がれき	와륵	I110			GN							audit:jisjk:373255
+差配	지휘	N110	VHnUQf		GN							audit:jisjk:35125
+下品	저속%A1@	G8U0			GN							audit:jisjk:121009
+何分	다소	N311			GN							audit:jisjk:2057
+何分	몇 분	N310	XXXUMe	Ct	GN							audit:jisjk:340907
+駆け回	뛰어다&A7@	M418			GN							audit:jisjk:92084
+イヤホン	이어폰	N110			GN							audit:jisjk:43483
+山頂	정상	N110	VPl		GN							audit:jisjk:25431
+成り行き	흐름	I110			GN							audit:jisjk:74484
+リミット	리미트	N110			GN							audit:jisjk:59268
+一転	일변	N110		Hd	GN							audit:jisjk:31533
+気色	기분	N110			GN							audit:jisjk:17805
+晩飯	저녁밥	N110	VFd		GN							audit:jisjk:21298
+艦影	함선	N110			GN							audit:jisjk:229735
+温存	보존	N110			GN							audit:jisjk:29707
+ゴンドラ	곤돌라	N110	VTp		GN							audit:jisjk:47452
+さだめ	운명	I110			GN							audit:jisjk:106439
+定め	운명	N110	ULw		GN							audit:jisjk:185273
+水手	선원	N110			GN							audit:jisjk:237747
+ひき肉	다진 고기	N110	VFd		GN							audit:jisjk:154291
+怒声	고함	N110	UHr		GN							audit:jisjk:20573
+悲願	숙원	N110	UTs	Hd	GN							audit:jisjk:24733
+マニフェスト	매니페스토	N110			GN							audit:jisjk:57358
+道のり	여정	I110	VPl		GN							audit:jisjk:66121
+せん越	외람됨	I110			GN							audit:jisjk:106494
+僭越	외람됨	N110			GN							audit:jisjk:35267
+ファイナリスト	결승 진출자	N110	VHn		GN							audit:jisjk:133220
+呼び立て	&EE@	M447			GN							audit:jisjk:374524
+閣議	각의	N110	QMS		BZ							audit:jisjk:14496
+閣議	각료회의	N110			MI							audit:jisjk:345736
+毛針	제물낚시	N110	VRw		GN							audit:jisjk:178077
+毛ばり	제물낚시	N110	VRw		GN							audit:jisjk:178077
+みずみずし	싱그$G7@	H7N0	SFlVSs		GN							audit:jisjk:136468
+敷き詰め	빈틈없이 &K1@	M437			GN							audit:jisjk:93120
+敷き詰め	&K1@	M447			GN							audit:jisjk:121953
+すっぽか	내팽개&AO@	M443			GN							audit:jisjk:137605
+おこがまし	주제$KI@	H7U0			GN							audit:jisjk:4930
+おこがまし	주제$KI@	H7N0	SFl		GN							audit:jisjk:120822
+引き立	돋보&AJ@	M414		Dx	GN							audit:jisjk:94450
+へばりつ	달라&HC@	M421		Dx	GN							audit:jisjk:263144
+改行	줄바꿈	N110		Hd	GN							audit:jisjk:14897
+インパクト	임팩트	N110			GN							audit:jisjk:264074
+つる	매&K4@	M433			GN							audit:jisjk:91110
+つる	어울&AA@	M415	VAm		GN							audit:jisjk:143978
+スパム	스팸	N110			GN							audit:jisjk:102329
+えず	구역질&AV@	M441	VFdVTp		GN							audit:jisjk:145007
+うぬ	네놈	N120	VHn		GN							audit:jisjk:127002
+威勢	기세	N110	URt		GN							audit:jisjk:30574
+ゴング	공	N110	VRy		GN							audit:jisjk:47450
+ゴング	징	N110	VRw		GN							audit:jisjk:47451
+取り立て	추심	N110		Hd	GN							audit:jisjk:13065
+初月	하츠즈키	N110			GN							audit:jisjk:191649
+けなげ	갸륵%A1@	G8U0			GN							audit:jisjk:120861
+あが	&E6@	M418	XXX		GN							audit:jisjk:90340
+あが	끝&A5@	M428			GN							audit:jisjk:116601
+あが	발버둥&AO@	M420	VHn		GN							audit:jisjk:116603
+あが	그&AO@	M428			GN	1183	||1 &&2 S-1== "が" ||2 S-2== "あめ" S-2== "雨"	あが를 あめ·雨와 が 뒤에서 그치다로 고른다. (미발동: rare-context)				audit:jisjk:116608
+あが	드&AE@	M448			GN							audit:jisjk:267068
+あが	드&AE@	M448			GN	2648	||2 &&4 P-1== "2**" S-2== "何" D-2== "무엇" P-2== "1**" &&3 P-1== "2**" P-2== "1**" A-2-= "VFd"	あが를 何와 조사 뒤나 음식 계열 명사와 조사 뒤에서 드시다로 고른다. (미발동: rare-context)				audit:jisjk:267069
+あが	&A1@	M428			GN							audit:jisjk:267122
+あが	&A1@	M428	UMv		GN	3999	||3 &&4 S-1== "に" P-1== "2**" P-2== "1**" A-2-= "VPl" &&3 S-1== "に" P-1== "2**" ||3 P-2== "4**" S-3== "お" S-3== "ご" &&4 S-1== "へ" P-1== "2**" P-2== "1**" A-2-= "VPl"	장소 명사 뒤의 に·へ, 또는 동사 연용형·お·ご 명사 뒤의 목적 に(お迎えにあがる 같은 겸양의 방문)에서 あが를 가다로 고른다.				audit:jisjk:354975
+小指	새끼손가락	N110	VBp		GN							audit:jisjk:26804
+道草	딴짓	N110			GN							audit:jisjk:19416
+ガイドライン	가이드라인	N110			EC							audit:jisjk:45759
+掛け合	교섭&AV@	M430			GN							audit:jisjk:92007
+掛け合	서로 &JG@	M430			GN							audit:jisjk:92008
+かけあ	교섭&AV@	M440			GN							audit:jisjk:344019
+合鍵	여벌 열쇠	N110			GN							audit:jisjk:38539
+大男	거한	N110	VHn		GN							audit:jisjk:18890
+羽ばた	날갯짓&AV@	M411			GN							audit:jisjk:94274
+刃向か	대&L4@	M410			GN							audit:jisjk:94418
+心残り	아쉬움	I110			GN							audit:jisjk:77062
+当店	저희 가게	N110	VPl		GN							audit:jisjk:18759
+泡盛	아와모리	N110	VFd		GN							audit:jisjk:125010
+いっとき	한때	N110	UMe		GN							audit:jisjk:125922
+在留	체류	N110		Hd	GN							audit:jisjk:186358
+ヨード	요오드	N110			GN							audit:jisjk:113471
+着火	점화	N110		Hd	GN							audit:jisjk:35238
+息女	따님	N110	VHn		GN							audit:jisjk:27868
+行き交	오&A1@	M420			GN							audit:jisjk:95899
+行き交	왕래&AV@	M450	VTpUDr		GN							audit:jisjk:95900
+行き交	오고 &A1@	M420			GN							audit:jisjk:140509
+聞きつけ	&J6@	M437			GN							audit:jisjk:92857
+思い立	마음&HU@	M454			GN							audit:jisjk:93304
+思い立	생각해&A6@	M434			GN							audit:jisjk:93305
+思い立	결심&AV@	M444	SFl		GN							audit:jisjk:146797
+土日	주말	N110	UMe		GN							audit:jisjk:201562
+土日	토일	N110			GN							audit:jisjk:201563
+しゃが	쪼그려 &FI@	M415			GN							audit:jisjk:90923
+嫁ぎ先	시집간 곳	N110			GN				xxx			audit:w:14919
+嫁ぎ先	시가	N110			GN						とつぎさき	audit:w:14920
+いけにえ	제물	N110	UCl		GN							audit:jisjk:125342
+生っ粋	토박이	N110	SFl		GN							audit:jisjk:172472
+めど	전망	N110			GN							audit:jisjk:13645
+かす	스&AO@	M425			GN							audit:jisjk:117259
+かす	희미해&AL@	M425			GN							audit:jisjk:365645
+外周	외곽	N110			GN							audit:jisjk:29887
+聚楽	주라쿠	N130	QCT		GN							audit:jisjk:36454
+聚楽	쥬라쿠	N130	QID		GN							audit:jisjk:359701
+古来	예로부터	N110	UMe		GN							audit:jisjk:15652
+古来	후루쿠	N130	QCTVPl		GN							audit:jisjk:327045
+財宝	보물	N110			GN							audit:jisjk:32405
+宿屋	여관	N110	VBl		GN							audit:jisjk:27509
+宿屋	시쿠야	N130	QCTVPl		GN							audit:jisjk:297351
+交互	번갈아	N110			GN							audit:jisjk:16582
+焦ら	애태&AI@	M433			GN							audit:jisjk:95319
+焦ら	애태&AI@	M443	SFl		GN							audit:jisjk:137033
+出歩	돌아다&A7@	M411			GN							audit:jisjk:95393
+出歩	나다&A7@	M421			GN							audit:jisjk:144570
+舞	마이	N130	QCTVPl		GN							audit:jisjk:116206
+舞	춤	N110	XXX		GN							audit:jisjk:116207
+舞	무	N110		On	GN							audit:jisjk:328690
+夕餉	저녁	N110		Om	GN						ゆうげ	audit:w:14379
+目隠し	눈가리개	I110		Hd	GN							audit:jisjk:68983
+目隠し	눈가리개	I110	VCp		GN							audit:jisjk:68984
+自腹	사비	N110			GN							audit:jisjk:194014
+抜かり	빈틈	N110			GN							audit:jisjk:7593
+実り	결실	N110	VMo		GN							audit:jisjk:10358
+仮眠	쪽잠	N110		Hd	GN							audit:jisjk:104493
+力添え	도움	N110			GN							audit:jisjk:153345
+魚介	해산물	N110			GN							audit:jisjk:29044
+しぶと	끈질$A1@	H7U0			GN							audit:jisjk:5104
+フィッシュ	피시	N110	QAAQACQAC		GN							audit:jisjk:54773
+フィッシュ	피쉬	N130	QPN		GN							audit:jisjk:369943
+究明	규명	N110		Hd	GN							audit:jisjk:16840
+暖簾	포렴	N110	VCp		GN							audit:jisjk:17953
+暖簾	영업권	N110	URt		BZ					-1		audit:jisjk:364052
+差し金	사주	I110			GN							audit:jisjk:85533
+野原	들판	N110	VPl		GN							audit:jisjk:28747
+野原	노하라	N130	QCTVPl		GN							audit:jisjk:319512
+野原	노하루	N130	QCTVPl		GN							audit:jisjk:319514
+野原	노바라	N130	QCTVPl		GN							audit:jisjk:319527
+野原	노바루	N130	QCTVPl		GN							audit:jisjk:319529
+野原	노와라	N130	QCTVPl		GN							audit:jisjk:319684
+野原	들판	N110			GN				xxx	1	のはら	audit:w:24765
+ワイナリー	와이너리	N130			GN							audit:jisjk:103932
+笹	사사	N130	QCTVPl		GN							audit:jisjk:295904
+笹	조릿대	N110	XXX	On	GN							audit:jisjk:340692
+製法	제조법	N110			GN							audit:jisjk:33421
+デカ	형사	N110		Ct	GN							audit:jisjk:14045
+全土	전역	N110	VPl		GN							audit:jisjk:32686
+ワッパ	수갑	N110			GN							audit:s:9222
+未明	새벽	N110	UMeVFr		GN							audit:jisjk:22408
+未明	호노카	N130	QCTVPl		GN							audit:jisjk:328129
+かきわけ	헤&AO@	M437	VSwVSw		GN							audit:jisjk:90559
+かきわけ	밀어 헤&AO@	M437			GN							audit:jisjk:90560
+かき分け	헤&AO@	M437			GN							audit:jisjk:90566
+掻き分け	헤&AO@	M437			GN							audit:jisjk:93590
+取ら	&CJ@	M433			GN							audit:jisjk:374760
+とら	&CJ@	M443			GN							audit:jisjk:145873
+聞き取	알아&J6@	M448	UHr		GN							audit:jisjk:92882
+どっちみち	어차피	E311			GN							audit:jisjk:889
+こじれ	꼬&AJ@	M417			GN							audit:jisjk:90770
+こじれ	더&AO@	M427	QHPVBp		GN							audit:jisjk:119939
+かすれ	갈라&AL@	M427			GN				xxx		かすれる	audit:w:354
+かすれ	스&AO@	M427			GN				llm		かすれる	audit:w:355
+聞き届け	들어&CJ@	M437			GN							audit:jisjk:267761
+かき集め	긁어&E5@	M437			GN							audit:jisjk:90568
+酔っ払い	취객	N110	VHn		GN							audit:jisjk:13138
+酔っ払い	술주정꾼	N110	VHn		GN							audit:jisjk:13139
+酔っぱらい	취객	N110	VHn		GN							audit:jisjk:86868
+厚意	호의	N110			GN							audit:jisjk:39960
+そっけな	쌀쌀$KS@	H7U0			GN							audit:jisjk:5156
+そっけな	매정$AB@	H7N0	SFl		GN							audit:jisjk:121278
+街並み	거리 풍경	N110			GN							audit:jisjk:365713
+意匠	디자인	N110			GN							audit:jisjk:31038
+意匠	디자인	N110			IT							audit:jisjk:262494
+しむけ	유도&AV@	M447			GN							audit:jisjk:136177
+仕向け	유도&AV@	M447			GN							audit:jisjk:7712
+仕向け	작용&AV@	M447			GN							audit:jisjk:136176
+くすぐり	간지럼	N110			GN							audit:jisjk:175945
+よだれ	침	N110	VBp		GN							audit:jisjk:41827
+カツ丼	가쓰동	N110			GN							audit:s:1045
+旅立ち	출발	N110			GN							audit:jisjk:153151
+吹き出	불기 시작&AV@	M453			GN							audit:jisjk:95520
+吹き出	터트&AA@	M443			GN	1289	||1 &&2 P-1== "2**" ||2 S-2== "笑い" S-2== "不満"	앞 조사 앞에 笑い 또는 不満이 있으면 吹き出를 터트리다로 고른다. (미발동: rare-context)				audit:jisjk:116931
+吹き出	분출&AV@	M443			GN							audit:jisjk:142993
+吹き出	뿜어 나&AH@	M427			GN							audit:jisjk:340873
+吹き出	터트&AA@	M423			GN				xxx llm	1		audit:w:13711
+取り壊	철거&AV@	M433			GN							audit:jisjk:95439
+取り壊	해체&AV@	M423			GN							audit:jisjk:143767
+取り壊	&LH@	M443			GN							audit:jisjk:146070
+掬	&A8@	M440			GN							audit:jisjk:117453
+掬	떠&A6@	M440			GN							audit:jisjk:137337
+今朝方	오늘 아침	N110	UMe		GN							audit:jisjk:177771
+個室	개인실	N110	VPl		GN							audit:jisjk:14862
+町内	동네	N110			GN							audit:jisjk:104962
+隠れ家	은신처	N110	VPl		GN							audit:jisjk:79655
+タンス	장롱	N110			GN							audit:jisjk:106993
+切り上げ	끝&A6@	M437			GN							audit:jisjk:11019
+切り上げ	올림&AV@	M437		Ct	GN							audit:jisjk:11020
+切り上げ	절상&AV@	M437	VMo		GN							audit:jisjk:11021
+持ちこたえ	버&Af@	M437			GN							audit:jisjk:95012
+キャラメル	캐러멜	N110			GN							audit:jisjk:99246
+酒臭	술 냄새가 $A2@	H7N0	SFlVFd		GN							audit:jisjk:120890
+切れ端	자투리	I110	VCp		GN							audit:jisjk:83032
+切れ端	조각	I110			GN				xxx	1	きれはし	audit:w:12725
+つり橋	흔들다리	I110			GN							audit:jisjk:106318
+イカれ	맛이 &A1@	M427			GN				xxx		イカれる	audit:w:2000
+イカれ	미&AO@	M427			GN				llm		イカれる	audit:w:2001
+イカれ	반&AV@	M427			GN				llm		イカれる	audit:w:2002
+イカれ	&AL@	M427			GN				llm		イカれる	audit:w:2003
+善人	착한 사람	N110	VHn		GN							audit:jisjk:26298
+うつつ	현실	I110			GN							audit:jisjk:106593
+臭み	잡내	N110			GN							audit:jisjk:36458
+あらが	저항&AV@	M430	UTs		GN							audit:jisjk:90386
+あらが	저항&AV@	M420			GN							audit:jisjk:138605
+大店	큰 가게	N110	VBl		GN							audit:jisjk:7379
+黒船	흑선	N110	VPe		GN							audit:jisjk:176733
+家来	가신	N110	UAq		GN							audit:jisjk:14327
+年収	연봉	N110			GN							audit:jisjk:98079
+死骸	시체	N110	VBp		GN							audit:jisjk:25168
+死骸	시체	N110			GN				xxx	1	しがい	audit:w:18611
+虫けら	벌레	I110	QAAQAE		GN							audit:jisjk:86781
+砂場	모래놀이터	N110	VPl		GN							audit:jisjk:25191
+砂場	스나바	N130	QCTVPl		GN							audit:jisjk:303541
+コンテンツ	콘텐츠	N110			BZ							audit:jisjk:47264
+レンタル	렌털	N110		Hd	GN							audit:jisjk:116676
+泣きわめ	울부&HP@	M421			GN							audit:jisjk:373313
+狼狽	당황	N110		Hd	GN							audit:jisjk:20043
+忌み嫌	꺼&AA@	M440	SFl		GN							audit:jisjk:141028
+シャレ	농담	N110			GN							audit:jisjk:102025
+聞き捨て	흘려&J6@	M437			GN							audit:jisjk:92873
+妬まし	샘$A2@	H7U0			GN							audit:jisjk:5999
+妬まし	샘이 $A2@	H7N0	SFl	Av	GN							audit:jisjk:122238
+両足	양발	N110	VBp		GN							audit:jisjk:255979
+苦み	쓴맛	N110			GN							audit:jisjk:6853
+呼び込	불러들&AJ@	M445			GN							audit:jisjk:362315
+あさ	뒤&AL@	M438			GN							audit:jisjk:90351
+眷属	권속	N110	VHnVHn		GN							audit:jisjk:178498
+じゃれ	장난&AO@	M417			GN							audit:jisjk:90940
+じゃれ	재롱부&AA@	M427	VAm		GN							audit:jisjk:136945
+朝焼け	아침노을	I110			GN							audit:jisjk:105922
+上達	향상	N110			GN							audit:jisjk:116841
+上達	카미타테	N130	QCTVPl		GN							audit:jisjk:284817
+恩義	은혜	N110			GN							audit:jisjk:30887
+セオリー	정석	N110			GN							audit:jisjk:49509
+おおかた	거의	E311			GN							audit:jisjk:147
+半数	절반	N110			GN							audit:jisjk:22723
+重々	충분히	E300			GN							audit:jisjk:123231
+落し物	분실물	I110			GN							audit:jisjk:67570
+絵の具	물감	N110	VPeVSp		GN							audit:jisjk:89811
+ひずみ	뒤틀림	N110			GN							audit:jisjk:359375
+うがい	가글	I110			GN							audit:jisjk:40413
+もくろ	꾀&AV@	M445			GN							audit:jisjk:373311
+殺りく	살육	I110			GN							audit:jisjk:105813
+ホットケーキ	핫케이크	N110	VRw		GN							audit:jisjk:56562
+神輿	신위 가마	N110			GN							audit:jisjk:101428
+神輿	미코시	N110			GN				xxx	1	みこし	audit:w:20981
+竹林	대나무 숲	N130	QCTVPl		GN							audit:jisjk:306484
+けん玉	켄다마	N110			GN							audit:jisjk:15149
+いぶ	그을&AA@	M443	VPeVPe		GN							audit:jisjk:141012
+いぶ	연기가 &A5@	M428			GN							audit:jisjk:141014
+いぶ	연기를 &MA@	M443			GN							audit:jisjk:143567
+盆踊り	본오도리	I110			GN							audit:jisjk:71298
+付箋	포스트잇	N110			GN						ふせん	audit:w:11744
+葛	칡	N110	XXXQAL		GN							audit:jisjk:115547
+葛	츠즈라	N130	QCTVPl		GN							audit:jisjk:258506
+葛	카즈라	N130	QCTVPl		GN							audit:jisjk:282152
+葛	쿠즈	N130	QCTVPl		GN							audit:jisjk:290549
+葛	갈	N110	XXX	On	GN							audit:jisjk:309688
+宛先	수신처	N110	VPl		GN							audit:jisjk:29742
+密通	간통	N110		Hd	GN							audit:jisjk:22621
+刺し子	사시코	I110	VCp		GN							audit:jisjk:82011
+訪れ	도래	N110			GN							audit:jisjk:114989
+店先	가게 앞	N110			GN							audit:jisjk:103889
+豚骨	돈코츠	N110	VMaVFd		GN							audit:jisjk:98395
+割り出	알아&A6@	M433			GN							audit:jisjk:95863
+擦り切れ	해&AL@	M417			GN							audit:jisjk:95220
+緩慢	%Dd@	G8U0			GN							audit:jisjk:119661
+初頭	초	N110			GN							audit:jisjk:35863
+明言	확언	N110	UTs	Hd	GN							audit:jisjk:21738
+断裂	균열	N110		Hd	GN							audit:jisjk:98152
+傍目	남의 눈	N110			GN							audit:jisjk:156846
+享受	향유	N110		Hd	GN							audit:jisjk:38839
+へそくり	비상금	I110			GN							audit:jisjk:112629
+山分け	절반	I110			GN							audit:jisjk:72208
+山分け	나눠 갖기	I110			GN				xxx	1		audit:w:15470
+つかの間	잠시	I110	VPl		GN							audit:jisjk:41298
+持ち去	가져&A1@	M448			GN							audit:jisjk:259458
+押し当て	갖다 &C5@	M437			GN							audit:jisjk:93977
+押し当て	눌러&C5@	M447			GN							audit:jisjk:145874
+マジシャン	마술사	N110	UAqVHn		GN							audit:jisjk:57152
+ノーム	노움	N110			GN							audit:s:3063
+さしずめ	말하자면	N110			GN							audit:jisjk:185167
+さしずめ	막판	N110			GN							audit:jisjk:185169
+しなやか	유연%A1@	G8U0			GN							audit:jisjk:2187
+買い替え	바꿔 &AX@	M437			GN							audit:jisjk:263657
+建前	겉치레	N110			GN							audit:jisjk:15124
+屈託	구김살	N110		Hd	GN							audit:jisjk:17106
+事象	현상	N110			GN							audit:jisjk:24961
+子細	사정	N110			GN							audit:jisjk:31816
+系	계열	Q110		Z7Zs	GN							audit:jisjk:266644
+系	계열	Q110			GN	4695	||1 &&3 P-1== "13*" A-1== "QID" P+1== "2**"	앞에 회사 의미 코드의 고유명사가 있고 뒤에 조사가 오면 系를 계열로 고른다. (미발동: rare-context)				audit:jisjk:371561
+ジプシー	집시	N110	VHn		GN							audit:jisjk:48419
+嫁入り	시집	I110		Hd	GN							audit:jisjk:60255
+いびつ	일그러%C1@	G8L0			GN							audit:jisjk:2120
+逆ギレ	적반하장	N110		Hd	GN							audit:jisjk:344732
+蜜	꿀	N110	VFd		GN						みつ	audit:w:23018
+築き上げ	쌓아 올&AA@	M417			GN							audit:jisjk:95369
+淵	못	N130	QCTVPl		GN							audit:jisjk:326671
+淵	연	N110		On	GN							audit:jisjk:375868
+激闘	격전	N110		Hd	GN							audit:jisjk:15225
+ボトム	바텀	N110			GN							audit:jisjk:106980
+休養	휴식	N110		Hd	GN							audit:jisjk:40088
+進攻	진격	N110		Hd	GN							audit:jisjk:34987
+潜行	잠항	N110		Hd	GN							audit:jisjk:32087
+出来立て	갓 만든	K110			GN							audit:jisjk:117728
+特種	특수	N110			GN							audit:jisjk:37261
+ほうじ茶	호지차	N110			GN							audit:jisjk:250621
+ピアス	피어싱	N110			GN							audit:jisjk:106927
+マスタード	머스터드	N110	VLqVFd		GN							audit:jisjk:57183
+スクラップ	고철	N110	VSw		GN							audit:jisjk:48814
+万引き	도둑질	I110	UAqHGu	Hd	GN							audit:jisjk:68411
+色彩	색채	N110	UCl		GN							audit:jisjk:25956
+色彩	색채	N110			GN				xxx	1	しきさい	audit:w:22520
+ムービー	영상	N110			GN							audit:jisjk:57860
+取組	노력	N110			GN							audit:jisjk:36433
+取組み	노력	N110			GN							audit:jisjk:86833
+ポストカード	엽서	N110			GN							audit:jisjk:134462
+飛車	비차	N110	VRw		GN							audit:jisjk:24859
+難問	난제	N110			GN							audit:jisjk:17969
+煮詰ま	바짝 졸아&L4@	M418			GN	787	||2 A-2== "VFd" A+1== "VFd"	煮詰ま는 두 단어 앞이나 바로 뒤에 음식 의미 코드 VFd가 있으면 바짝 졸아들다로 고른다. (미발동: rare-word)				audit:jisjk:94584
+煮詰ま	막&AW@	M428	XXX	Dx	GN							audit:jisjk:265453
+埋め込	박아 &H5@	M445			GN							audit:jisjk:144572
+半生	반평생	N110			GN							audit:jisjk:114518
+スコア	스코어	N110		Ct	GN							audit:jisjk:48882
+手ぶら	빈손	I110	VBp		GN							audit:jisjk:75709
+ざる	소쿠리	N110			GN							audit:jisjk:186502
+目星	짐작	N110			GN							audit:jisjk:21952
+レントゲン	엑스레이	N110		Ct	GN							audit:jisjk:59668
+バイト先	아르바이트하는 곳	N110	VPl		GN							audit:jisjk:132489
+見送り	배웅	N110	VCm	Hd	GN							audit:jisjk:6784
+見送り	보류	N110		Hd	BZ	995	||4 &&2 ||2 S-1== "R件" S-1== "R事業" P-1== "1**" ||2 S-2== "R件" S-2== "R事業" &&2 S+1== "へ" G+1== "Ow" &&2 P-1== "1**" A-1!= "VHn"	안건·사업 문맥이나 끝의 へ 앞 또는 사람 일반 의미코드가 없는 명사 뒤에서 見送り를 보류로 고른다. (미발동: rare-word) [의심] 마지막 대안의 A-1!= "VHn"은 QPN 같은 다른 사람 코드를 배제하지 않아 사람의 배웅을 보류로 고를 수 있다.		-1		audit:jisjk:115032
+落ちぶれ	몰락&AV@	M417			GN							audit:jisjk:92510
+界隈	근처	N110			GN							audit:jisjk:167237
+界隈	일대	N110			GN				xxx	1		audit:w:20245
+シャバ	바깥세상	N110	VPl		GN							audit:jisjk:129304
+出戻り	이혼녀	K110		Hd	GN							audit:jisjk:103543
+見返り	담보	I110	VMo		GN							audit:jisjk:60872
+見返り	대가	I110			GN				xxx	1		audit:w:23381
+ただ者	보통내기	N110	VHn		GN							audit:jisjk:153047
+霊力	영력	N110			GN							audit:jisjk:20458
+食	&HU@	M435	VMo		GN							audit:jisjk:13733
+食	&HU@	M430	VFdVFd		GN	397	||1 &&2 P-1== "3**" A-1== "VFd"	음식 의미 코드가 있는 부사 뒤의 食을 '먹다'로 고른다. (미발동: rare-context)				audit:jisjk:13734
+食	&HU@	M435	VFdVFd		GN							audit:jisjk:13735
+食	깔&AY@	M430			GN	8644	||1 &&3 S-1== "を" P-2== "1**" A-2-= "VHn"	食う는 사람을 가리키는 명사가 を로 받는 목적어일 때만 '깔보다'로 고른다(人を食う).				audit:jisjk:13736
+食	해&AO@	M435	VBp		GN							audit:jisjk:13737
+折檻	체벌	N110		Hd	GN							audit:jisjk:239089
+氷室	얼음 창고	N110	VPl		GN							audit:jisjk:24935
+米兵	미군	N110	VHn		GN							audit:jisjk:22447
+バイブ	진동	N110			GN							audit:jisjk:115060
+水煙	물보라	N110	VFr		GN							audit:jisjk:27384
+私案	개인안	N110			GN							audit:jisjk:25257
+しもべ	하인	I110	VHn		GN							audit:jisjk:41128
+のうのう	뻔뻔하게	E311			GN							audit:jisjk:1032
+金輪際	다시는	E300			GN							audit:jisjk:123109
+胴体	몸통	N110	VBp		GN							audit:jisjk:19745
+引っ掴	움켜&CK@	M425			GN						ひっつかむ	audit:w:15973
+サボリ	땡땡이	K110			GN							audit:jisjk:257571
+炊飯	밥 짓기	N110	VCk		GN							audit:jisjk:36452
+苦笑い	쓴웃음	I110	VBpUHr		GN							audit:jisjk:61369
+敵性	적성	N110			GN						てきせい	audit:w:17466
+ルックス	외모	N110			GN							audit:jisjk:59432
+貢	갖다 바&AO@	M432			GN							audit:jisjk:91967
+短パン	반바지	N110	VCp		GN							audit:jisjk:153236
+不興	노여움	N110			GN							audit:jisjk:24662
+懲らしめ	혼&A6@	M437			GN							audit:jisjk:120285
+突っ走	힘차게 달&AA@	M418			GN							audit:jisjk:92466
+突っ走	질주&AV@	M428			GN							audit:jisjk:143072
+突っ走	질주&AV@	M428			GN				xxx	1		audit:w:21134
+眼下	눈 아래	N110	VBp		GN							audit:jisjk:28478
+置き換え	바&C3@	M437			GN							audit:jisjk:13153
+年がい	나잇값	I110			GN							audit:jisjk:64306
+ひとしきり	한참	N110			GN							audit:jisjk:365840
+粗	거$J7@	H7U0			GN							audit:jisjk:5916
+買い求め	구입&AV@	M437			GN							audit:jisjk:92693
+送りつけ	일방적으로 보&A6@	M447			GN							audit:jisjk:115293
+送りつけ	보&A6@	M447			GN							audit:jisjk:145661
+送り付け	일방적으로 보&A6@	M437			GN							audit:jisjk:93646
+送り付け	보&A6@	M447			GN							audit:jisjk:145659
+良縁	좋은 인연	N110			GN							audit:jisjk:20226
+さばき	솜씨	N110			GN							audit:jisjk:185398
+茶葉	찻잎	N110			GN							audit:jisjk:98137
+至福	더없는 행복	N110			GN							audit:jisjk:34785
+ブレザー	블레이저	N110	VCp		GN							audit:jisjk:103279
+コンシェルジュ	컨시어지	N110			GN						コンシェルジュ	audit:w:4128
+テロップ	자막	N110	QID		GN							audit:jisjk:131258
+リモコン	리모컨	N110	VPeVEl		GN							audit:jisjk:135767
+廃屋	폐가	N110			GN							audit:jisjk:37663
+上申	상신	N110	UTs	Hd	GN							audit:jisjk:25726
+たか	뜯어&A6@	M428	VAmVBp		GN							audit:jisjk:139250
+得策	상책	N110			GN							audit:jisjk:98491
+抱え込	떠&FH@	M445			GN							audit:jisjk:103632
+含み	속뜻	N110			GN							audit:jisjk:13305
+とくと	잘	E311			GN							audit:jisjk:799
+深入り	깊이 관여	I110			GN							audit:jisjk:77090
+物知り	박식한 사람	I110			GN							audit:jisjk:69329
+しらふ	맨정신	I110			GN							audit:jisjk:106480
+命取り	치명타	I110			GN							audit:jisjk:68711
+雛祭り	히나마쓰리	I110			GN							audit:jisjk:86590
+ひな祭り	히나마쓰리	I110	VPl		GN							audit:jisjk:41548
+巻雲	마키구모	N110	VFr		GN							audit:jisjk:17163
+年の瀬	연말	I110			GN							audit:jisjk:262502
+朝風	아사카제	N110	UMeVSs		GN							audit:jisjk:124248
+身だしなみ	몸단장	I110			GN							audit:jisjk:114802
+潤	물기를 &CA@	M415			GN							audit:jisjk:94335
+潤	적&AE@	M433			GN							audit:jisjk:94336
+潤	풍부&Mf@	M420		Va	GN							audit:jisjk:94337
+潤	윤택해&AL@	M420	XXXVSs	VaDx	GN							audit:jisjk:144724
+潤	축&AJ@	M443	VSsVFd		GN							audit:jisjk:144727
+潤	윤택하게 &AV@	M443	VMo		GN							audit:jisjk:144731
+潤	뿌옇게 &C6@	M425	VSs		GN							audit:jisjk:144733
+味気な	밋밋%A1@	H7U0			GN							audit:jisjk:5573
+心がけ	마음가짐	N110			GN							audit:jisjk:373911
+特注	특주	N110			GN							audit:jisjk:245764
+特注	주문 제작	N110			GN				xxx	1		audit:w:19846
+ほっつき歩	쏘다&A7@	M421			GN							audit:s:7425
+競り合い	접전	N110		Hd	GN							audit:jisjk:6814
+必定	필연	E311			GN							audit:jisjk:2036
+重んじ	중시&AV@	M447	SFl		GN							audit:jisjk:146922
+ろくでなし	인간쓰레기	I110	VHn		GN							audit:jisjk:41857
+辱め	욕보&AJ@	M437			GN							audit:jisjk:10607
+老いぼれ	늙은이	N110	QHPVBp		GN							audit:jisjk:127845
+すご腕	실력자	N110			GN							audit:jisjk:102838
+折り返	되돌아&A1@	M433			GN							audit:jisjk:94792
+折り返	되돌&AA@	M423	VRw		GN							audit:jisjk:146988
+折り返	되&HS@	M423	VRwVCp		GN							audit:jisjk:146995
+名産	특산품	N110			GN							audit:jisjk:21658
+ほめ言葉	칭찬	N110			GN							audit:jisjk:160163
+削	깎&AJ@	M448	VMoVMy		GN							audit:jisjk:93351
+削	없&AG@	M442			BZ					-1		audit:jisjk:347350
+倒壊	붕괴	N110	VBl	Hd	GN							audit:jisjk:151463
+挟み撃ち	협공	I110			GN							audit:jisjk:108587
+ひもじ	배고$AA@	H7N0	VFd		GN							audit:jisjk:122598
+フェイント	페이크	N110	VPa		GN							audit:jisjk:54881
+はぐらか	얼버무&AA@	M433	VHn		GN	603	||1 &&3 P-1== "2**" P-2== "1**" ||2 A-2-= "VHn" A-2-= "QPN"	はぐらか 앞에 사람이나 인명 계열 명사와 조사가 오면 따돌리다라는 번역을 고른다. (미발동: rare-word)				audit:jisjk:91326
+はぐらか	얼버무&AA@	M433	UTs		GN							audit:jisjk:91327
+打ち出	내세&AI@	M433	VTpVSwUTsUDr		GN	850	||2 &&2 P-1== "8**" S-1== "明確" &&3 P-1== "2**" P-2== "1**" A-2== "UMnULw"	打ち出는 앞이 明確 형용동사이거나 방식·법률 의미 명사와 조사이면 내세우다로 고른다. (미발동: rare-word)				audit:jisjk:95626
+打ち出	내&F6@	M433	XXX		GN							audit:jisjk:95627
+打ち出	쳐서 &A6@	M433			GN							audit:jisjk:95628
+マシュマロ	마시멜로	N110			GN							audit:jisjk:57145
+土俵	씨름판	N110	QCT		GN							audit:jisjk:37042
+土俵	씨름판	N110			GN				xxx	1		audit:w:14151
+海中	바닷속	N110	VPl		GN							audit:jisjk:38725
+悩め	고민&AV@	M427			GN							audit:jisjk:266756
+悩め	괴로워&AV@	M427			GN							audit:jisjk:266759
+大葉	차조기잎	N130	QPN	Wa	GN							audit:jisjk:340385
+生みの親	창시자	I110	VHn		GN							audit:jisjk:73734
+譜面	악보	N110			GN							audit:jisjk:23831
+ピック	피크	N110			GN							audit:jisjk:54394
+出だし	시작	I110			GN							audit:jisjk:86669
+店番	가게 보기	N110	VHn		GN							audit:jisjk:252363
+見くび	얕&AY@	M438			GN							audit:jisjk:91769
+トロ	참치 뱃살	N110	VFd		GN							audit:jisjk:358480
+くさや	쿠사야	I110			GN							audit:jisjk:106537
+ソーラー	솔라	N110			GN							audit:jisjk:130473
+見違え	몰라&AY@	M437			GN							audit:jisjk:91824
+入れ込	몰두&AV@	M445			GN							audit:jisjk:142777
+かっぱら	훔&AO@	M430			GN							audit:jisjk:90597
+汚職	부정부패	N110			GN							audit:jisjk:29629
+そこもと	그대	N120	VPl		GN					-1		audit:jisjk:200715
+救い出	구출&AV@	M443			GN							audit:jisjk:137317
+当て逃げ	뺑소니	I110	HGu	Hd	GN							audit:jisjk:64820
+凍え	&LA@	M427	VSs		GN							audit:jisjk:119885
+凍え	얼어 &HT@	M427			GN				xxx	1		audit:w:12593
+借り主	임차인	I110	VHn		GN							audit:jisjk:85511
+蓬莱	봉래	N130	QIDVGt		GN							audit:jisjk:24109
+蓬莱	호우라이	N130	QCTVPl		GN							audit:jisjk:327777
+奏上	상주	N110			GN							audit:jisjk:200250
+右近	우콘	N110	VBl		GN							audit:jisjk:126664
+帯刀	타테와키	N110		Hd	GN							audit:jisjk:240956
+帯刀	중고시대 황태자 경호원	N110	VHn		GN							audit:jisjk:241514
+帯刀	타테와키	N130	QCTVPl		GN							audit:jisjk:307064
+ハロウィーン	핼러윈	N110	UMe		GN							audit:jisjk:53191
+ハロウィン	핼러윈	N110	UMe		GN							audit:jisjk:132346
+猛暑	폭염	N110			GN							audit:jisjk:21545
+豪商	거상	N110	VHn		GN							audit:jisjk:39308
+しっかり者	야무진 사람	E110	VHn		GN							audit:jisjk:187775
+静養	요양	N110	QHP	HdHi	GN							audit:jisjk:198101
+打ち解け	마음을 터&F6@	M417			GN							audit:jisjk:95630
+打ち解け	터&F6@	M427	SFl		GN							audit:jisjk:143510
+目下	현재	N110	VHnUQf		GN							audit:jisjk:21972
+目下	지금	N110	UMe		GN	454	||1 &&2 P+1== "1**" P+2== "2**"	目下는 뒤에 명사와 조사가 이어지면 시간 부사 ‘지금’을 고른다.				audit:jisjk:21973
+駆り立て	내&KA@	M437			GN							audit:jisjk:7044
+心もとな	불안%A1@	H7U0			GN							audit:jisjk:5731
+末恐ろし	장래가 무$GE@	H7N0	SFlUMe		GN							audit:jisjk:121060
+かちどき	승리의 함성	N110	VRw		GN					-1		audit:jisjk:168751
+勝ちどき	승리의 함성	I110			GN							audit:jisjk:76181
+親王	친왕	N110	UAqURtVHn		GN							audit:jisjk:36590
+出仕	출사	N110		Hd	GN							audit:jisjk:190074
+敵視	적대시	N110		Hd	GN							audit:jisjk:362338
+敵視	적대시	N110		Hd	GN				xxx	1	てきし	audit:w:17469
+入れあげ	돈을 쏟아&JG@	M447	VMy		GN							audit:jisjk:141133
+入れ揚げ	돈을 쏟아&JG@	M447	VMy		GN							audit:jisjk:141133
+人当たり	붙임성	N110			GN							audit:jisjk:80084
+元手	밑천	N110	VMo		GN							audit:jisjk:30355
+下ごしらえ	밑준비	I110			GN							audit:jisjk:88253
+豚カツ	돈가스	I130	VFd		GN							audit:jisjk:66259
+とんかつ	돈가스	N130	VFd		GN							audit:jisjk:373465
+学長	총장	N110	UAq		GN							audit:jisjk:38414
+手ほどき	가르침	I110			GN							audit:jisjk:75710
+御曹子	도련님	I110	VHn		GN							audit:jisjk:78030
+うつろ	멍%A1@	G8L0			GN							audit:jisjk:2125
+うつろ	얼빠%C1@	G8U0			GN							audit:jisjk:2126
+起業	창업	N110		Hd	GN							audit:jisjk:17882
+織り込	짜 &H5@	M445			GN							audit:jisjk:147022
+織り込	짜 &H5@	M445	VCp		GN							audit:jisjk:147027
+急病	급환	N110	UTi		GN							audit:jisjk:17575
+自害	자결	N110		Hd	GN							audit:jisjk:31969
+人助け	사람 돕기	I110			GN							audit:jisjk:80129
+人助け	남을 돕는 일	I110			GN				xxx	1		audit:w:11596
+言い当て	알아맞&AW@	M437	UTs		GN							audit:jisjk:94069
+大蛇	큰 뱀	N110	QAA		GN							audit:jisjk:18942
+後戻り	되돌아가기	I110			GN							audit:jisjk:89966
+飛び上が	뛰어&E6@	M438			GN							audit:jisjk:93227
+飛び上が	날아&E6@	M428			GN							audit:jisjk:145482
+跳びあが	뛰어&E6@	M438			GN							audit:jisjk:93227
+跳びあが	날아&E6@	M428			GN							audit:jisjk:145482
+せんべい	센베이	I110			GN							audit:jisjk:111884
+ふてくされ	부루퉁&AV@	M427			GN							audit:w:1078
+報い	대가	N110			GN							audit:jisjk:7622
+絵巻	두루마리 그림	N110			GN							audit:jisjk:127638
+大の字	큰대자	I110			GN							audit:jisjk:64890
+舞いこ	날아&L4@	M415			GN							audit:jisjk:92829
+真打ち	주역	I110	VHn		GN							audit:jisjk:85407
+移り変わ	변해 &A1@	M428			GN							audit:jisjk:94393
+采配	지휘	N110	VPe		GN							audit:jisjk:35381
+慢心	자만	N110			GN							audit:jisjk:99402
+顔向け	면목	I110			GN							audit:jisjk:77480
+つかみ取	쟁취&AV@	M428			GN						つかみとる	audit:w:798
+鈴虫	방울벌레	N110	QAAQAE		GN							audit:jisjk:15187
+めっきり	부쩍	E301			GN							audit:jisjk:1293
+休ま	&CG@	M418			GN							audit:jisjk:96099
+湾内	만 안	N110	VPl		GN							audit:jisjk:21351
+おかか	가쓰오부시	N110	VFd		GN							audit:jisjk:164946
+竜巻	토네이도	N110	VFr		GN							audit:jisjk:30100
+デリバリー	배달	N110			GN							audit:jisjk:51435
+なすりつけ	뒤집어씌&AI@	M447	QHP		GN							audit:jisjk:119962
+なすりつけ	덮어씌&AI@	M447	ULwVHn		GN							audit:jisjk:119965
+なすり付け	뒤집어씌&AI@	M447	QHP		GN							audit:jisjk:119962
+なすり付け	덮어씌&AI@	M447	ULwVHn		GN							audit:jisjk:119965
+ユーゲント	유겐트	N110	VHn		GN							audit:jisjk:135269
+手厳し	매$GE@	H7U0			GN							audit:jisjk:5702
+手厳し	호$AE@	H7N0			GN							audit:jisjk:121683
+セントラル	센트럴	N130	QIDVGt		GN							audit:jisjk:49697
+ロックンロール	로큰롤	N110	USo		GN							audit:jisjk:59858
+回遊	회유	N110		Hd	GN							audit:jisjk:104394
+奥の手	비장의 수	I110			GN							audit:jisjk:78568
+言いふら	소문&A6@	M443			GN							audit:jisjk:343154
+言い触ら	소문&A6@	M443	UTs		GN							audit:jisjk:140273
+脇役	조연	N110	VHn		GN							audit:jisjk:39126
+うわべ	겉모습	I110			GN							audit:jisjk:97815
+先延ばし	미루기	N110			GN							audit:jisjk:184813
+吹き返	되살아&A5@	M433	VBp		GN							audit:jisjk:95509
+吹き返	되날&AA@	M453			GN							audit:jisjk:95510
+吹き返	반대로 &L7@	M413			GN							audit:jisjk:95511
+体当たり	몸으로 부딪치기	N110	VRw		GN							audit:jisjk:201417
+力仕事	힘쓰는 일	I110			GN							audit:jisjk:67730
+湯船	욕조	N110			GN							audit:jisjk:36900
+湯船	유부네	N130	QCTVPl		GN							audit:jisjk:337145
+斬り込	쳐들어&A1@	M425			GN				xxx		きりこむ	audit:w:17533
+斬り込	쳐들어&A1@	M425			GN				llm		きりこむ	audit:w:17534
+斬り込	파고&L4@	M425			GN				llm		きりこむ	audit:w:17535
+追究	규명	N110		Hd	GN							audit:jisjk:36174
+習字	서예	N110			GN							audit:jisjk:27617
+県民	현 주민	N110	VHn		GN							audit:jisjk:178701
+ヴィラ	빌라	N110			GN							audit:jisjk:97685
+ブレンド	블렌드	N110	VFd		GN							audit:jisjk:55840
+パンサー	팬서	N130			GN							audit:jisjk:53945
+土蔵	흙벽 창고	N110	QCT		GN							audit:jisjk:37029
+ホープ	유망주	N110			GN							audit:jisjk:56455
+遺影	영정	N110			GN							audit:jisjk:125147
+水気	물기	N110	UGs		GN							audit:jisjk:27335
+音信	소식	N110	VCm		GN							audit:jisjk:30965
+喚声	함성	N110			GN							audit:jisjk:39675
+見せ物	구경거리	I110			GN							audit:jisjk:60858
+芸子	게이샤	N110	VHn		GN							audit:jisjk:178782
+受け渡し	전달	N110		Hd	BZ							audit:jisjk:126659
+咎め	문책	N110	UTs		GN							audit:jisjk:7022
+とがめ	문책	N110			GN							audit:jisjk:106820
+再来	재림	N110	UMe	Hd	GN							audit:jisjk:184619
+再来	다음 다음	N110	UMe		GN							audit:jisjk:185487
+ロジスティクス	로지스틱스	N110			GN							audit:jisjk:107489
+ロジスティクス	로지스틱스	N110			BZ							audit:jisjk:362573
+願かけ	소원 빌기	N110	UCl		GN							audit:jisjk:230363
+願掛け	소원 빌기	N110	UCl		GN							audit:jisjk:230363
+キナ臭	수상$Ka@	H7U0			GN							audit:jisjk:4995
+キナ臭	탄내가 $A2@	H7N0			GN							audit:jisjk:120838
+きな臭	수상$Ka@	H7U0			GN							audit:jisjk:4995
+きな臭	탄내가 $A2@	H7N0			GN							audit:jisjk:120838
+社	사	N110		Z7CtOn	GN							audit:jisjk:115806
+社	사당	N110	VPlXXX		GN							audit:jisjk:115807
+社	야시로	N130	QCTVPl		GN							audit:jisjk:335451
+脱毛	제모	N110		Hd	GN							audit:jisjk:36846
+駆け引き	흥정	I110		Hd	GN							audit:jisjk:62867
+ポイ捨て	무단 투기	N110			GN							audit:jisjk:365499
+大雪	폭설	N110	VFr		GN							audit:jisjk:18958
+大雪	폭설	N110			GN				xxx	1	おおゆき	audit:w:14645
+やすやす	쉽사리	E311			GN							audit:jisjk:1338
+両眼	두 눈	N110	VBp		GN							audit:jisjk:20166
+長唄	나가우타	N110			GN							audit:jisjk:32301
+細君	아내	N110	VQwVHnUQf		GN							audit:jisjk:26672
+逢い引き	밀회	N110		Hd	GN						あいびき	audit:w:24483
+跡地	터	N110	VPl		GN							audit:jisjk:32578
+祭り囃子	축제 음악	N110	USoQMU		GN							audit:jisjk:251884
+決まり手	결정기	N110	VRw		GN							audit:jisjk:172769
+邪推	억측	N110		Hd	GN							audit:jisjk:25340
+絵面	비주얼	N110			GN							audit:novel-common-nouns:9
+勝ち誇	의기양양&AV@	M418			GN							audit:jisjk:93768
+そっちのけ	뒷전	N110			GN							audit:jisjk:200829
+うっちゃ	내버려 &C7@	M438			GN							audit:jisjk:90477
+うっちゃ	던져버&AA@	M448	VRw		GN							audit:jisjk:144035
+えてして	흔히	E300			GN							audit:jisjk:122878
+得てして	흔히	E311			GN							audit:jisjk:1581
+懐中	품속	N110			GN							audit:jisjk:39837
+高望み	과욕	N110			GN							audit:jisjk:152987
+甘んじ	안주&AV@	M417			GN							audit:jisjk:91686
+他意	딴마음	N110			GN							audit:jisjk:36725
+魅せ	매료시&AQ@	M447			GN							audit:jisjk:266768
+研鑽	연마	N110	UTh	Hd	GN							audit:jisjk:178325
+補填	보전	N110		Hd	GN							audit:jisjk:23819
+刻み付け	새&A2@	M437			GN							audit:jisjk:91635
+否	부정&AV@	M435			GN							audit:jisjk:93114
+はね飛ば	튕겨 &A6@	M443			GN							audit:jisjk:369425
+物覚え	기억력	I110			GN							audit:jisjk:69298
+シェルター	셸터	N110	VPl		GN							audit:jisjk:47993
+訳知り	아는 체	I110			GN							audit:jisjk:78200
+揺らめ	일렁&AJ@	M411			GN							audit:jisjk:94228
+高給	고액 급여	N110			GN							audit:jisjk:15821
+のし上が	치고 올라&A1@	M418	VPl		GN							audit:jisjk:91302
+のし上が	껑충 뛰어&E6@	M428			GN							audit:jisjk:147808
+まがい物	가짜	I110			GN							audit:jisjk:41637
+駆け巡	뛰어 돌아다&A7@	M418			GN							audit:jisjk:92082
+駆け巡	누&Ad@	M428			GN				xxx	1		audit:w:25810
+おんぼろ	고물	N110			GN							audit:jisjk:99035
+書き写	베껴 &AF@	M443			GN							audit:jisjk:363444
+奔走	동분서주	N110		Hd	GN							audit:jisjk:24511
+どよめ	술렁&AJ@	M411	UHrUTs		GN							audit:jisjk:91168
+どよめ	술렁거&AA@	M421			GN							audit:jisjk:146720
+すっ飛	날아&A1@	M416			GN							audit:jisjk:93623
+崇め	숭배&AV@	M437			GN							audit:jisjk:93723
+崇め	숭배&AV@	M447	SFl		GN							audit:jisjk:137800
+急須	찻주전자	N110			GN							audit:jisjk:17582
+削り取	깎아 &A6@	M448			GN							audit:jisjk:262775
+自販	자판기	N110			GN				xxx		じはん	audit:w:22424
+自販	자동차 판매	N110			GN				llm		じはん	audit:w:22425
+神業	신기	N110			GN							audit:jisjk:28045
+逐一	일일이	E300			GN							audit:jisjk:123377
+ラッシュ	러시	N110			GN							audit:jisjk:58834
+日にち	날짜	I110	UMe		GN							audit:jisjk:80482
+始発	첫차	N110		Hd	GN							audit:jisjk:27697
+仰せつか	맡게 &C6@	M418			GN							audit:jisjk:94001
+振りかざ	치켜&L4@	M433	UTs		GN							audit:jisjk:95069
+振りかざ	쳐&L4@	M433			GN							audit:jisjk:95070
+むしり取	뜯어&A6@	M428			GN						むしりとる	audit:w:1200
+もの悲し	서글$AA@	H7N0	SFl		GN							audit:jisjk:136809
+ブレード	블레이드	N110			GN							audit:jisjk:133679
+山盛り	수북이	I110			GN							audit:jisjk:72221
+風体	행색	N110			GN							audit:jisjk:38056
+自ずと	저절로	E311			GN							audit:jisjk:1902
+終えん	종언	I110			GN							audit:jisjk:83866
+初っぱな	처음	I110	UMe		GN							audit:jisjk:86313
+文面	문구	N110	VSw		GN						ぶんめん	audit:w:17500
+じっとり	축축이	E301			GN							audit:jisjk:515
+逆さ	거꾸로	N110			GN							audit:jisjk:29244
+カチューシャ	머리띠	N110			GN				xxx		カチューシャ	audit:w:2940
+カチューシャ	카추샤	N110			GN				llm		カチューシャ	audit:w:2941
+インスピレーション	영감	N110			GN							audit:jisjk:43587
+インスピレーション	영감	N110			GN							audit:jisjk:43588
+威張	으스&C5@	M418			GN							audit:jisjk:94302
+威張	뽐&A6@	M428	SFl		GN							audit:jisjk:140996
+日柄	길일	N110			GN							audit:jisjk:31613
+豆まき	콩 뿌리기	N110		Hd	GN				xxx		まめまき	audit:w:23796
+豆まき	콩 뿌리기	N110	UCl	Hd	GN				llm		まめまき	audit:w:23797
+薄着	얇게 입기	N110			GN							audit:jisjk:22681
+つまみ食い	집어 먹기	I110		Hd	GN							audit:jisjk:264142
+雑炊	죽	N110	VFd		GN							audit:jisjk:32134
+撃ち合い	총격전	N110		Hd	GN							audit:jisjk:115372
+機影	기체	N110			GN							audit:jisjk:230471
+壮健	건강	N110			GN							audit:jisjk:3580
+ストレッチ	스트레칭	N110			GN							audit:jisjk:49169
+一足	한 켤레	N110			GN							audit:jisjk:31539
+一足	한켤레	N110		Ct	GN	3711	||2 S+1== "いくらですか" G+1== "NjNd"	一足는 다음 표기가 いくらですか이거나 다음 단어에 수사 문법 코드가 있으면 한켤레로 고른다. (미발동: rare-word)				audit:jisjk:346248
+買い上げ	구매	N110			GN							audit:jisjk:166485
+野放し	방치	I110			GN							audit:jisjk:77744
+御の字	감지덕지	I110			GN							audit:jisjk:77904
+きざ	느끼%A1@	G8U0			GN							audit:jisjk:2162
+言い合い	말다툼	N110			GN							audit:jisjk:108699
+粒々	알갱이	N110			GN							audit:jisjk:153539
+お古	헌것	N110			GN							audit:jisjk:13842
+補習	보충수업	N110		Hd	GN							audit:jisjk:23812
+亀甲	귀갑	N130	QPN		GN							audit:jisjk:97352
+亀甲	카메코우	N130	QCTVPl		GN							audit:jisjk:286041
+亀甲	카메노코우	N130	QCTVPl		GN							audit:jisjk:286096
+ランニング	러닝	N110			GN							audit:jisjk:58932
+サッシ	새시	N110			GN							audit:jisjk:106696
+当座	당장	N110	VPl		GN							audit:jisjk:18760
+当座	당좌예금	N110	VMo		GN							audit:jisjk:18761
+目論み	계획	N110			GN						もくろみ	audit:w:20605
+かみ切	물어&Hd@	M438			GN							audit:jisjk:90618
+下見	사전 답사	K110		Hd	GN							audit:jisjk:38154
+下見	시타미	N130	QCTVPl		GN							audit:jisjk:297585
+下見	시모미	N130	QCTVPl		GN							audit:jisjk:300209
+精査	정밀 조사	N110			GN							audit:jisjk:104953
+地割れ	땅 갈라짐	N110	VPl		GN							audit:jisjk:195819
+人混み	인파	I110			GN							audit:jisjk:80139
+下ネタ	야한 농담	N110			GN							audit:s:4710
+一人っ子	외동	I110	VHn		GN							audit:jisjk:80393
+大福	다이후쿠	N110			GN							audit:jisjk:18934
+大福	오후쿠	N130	QCTVPl		GN							audit:jisjk:278660
+大福	다이후쿠	N130	QCTVPl		GN							audit:jisjk:308239
+ビンタ	따귀	N110			GN							audit:s:3438
+さかさま	거꾸로	N110			GN					-1		audit:jisjk:184701
+草の根	풀뿌리	N110			GN							audit:jisjk:175857
+草の根	무명	N110			GN							audit:jisjk:362381
+草の根	민중	N110			GN							audit:jisjk:362382
+パッション	열정	N110			GN							audit:jisjk:53754
+ピクルス	피클	N110			GN							audit:jisjk:54383
+締めくくり	마무리	N110		Hd	GN							audit:jisjk:12761
+朝晩	아침저녁	N110	UMe		GN							audit:jisjk:11413
+くだり	대목	N110			GN							audit:jisjk:6469
+アクシデント	사고	N110			GN							audit:jisjk:42328
+天丼	텐동	N110	VFd		GN				xxx		てんどん	audit:w:14656
+天丼	반복 개그	N110			GN				llm		てんどん	audit:w:14657
+バレーボール	배구	N110	VRw		GN							audit:jisjk:53567
+薄型	슬림형	N110			GN							audit:jisjk:22686
+算段	방도	N110		Hd	GN							audit:jisjk:25494
+明日葉	신선초	N110	VPt		GN							audit:jisjk:124354
+立ち行	돌아&A1@	M42?	VMo		GN							audit:jisjk:140455
+立ち行	흘러&A1@	M42?	UMe		GN							audit:jisjk:140459
+政道	정치	N130	QPN	Wb	GN							audit:jisjk:11099
+政道	정도	N110			GN							audit:jisjk:11100
+入れ物	그릇	I110			GN							audit:jisjk:81961
+在所	고향	N110	VPl	Hd	GN							audit:jisjk:32346
+在所	자이쇼	N130	QCTVPl		GN							audit:jisjk:296908
+ガードレール	가드레일	N130			GN							audit:jisjk:45745
+ミラクル	미라클	N110			GN							audit:jisjk:57832
+すり潰	으&C2@	M423			GN						すりつぶす	audit:w:664
+じゃんじゃん	마구	E300			GN							audit:jisjk:123230
+絞め殺	목 졸라 죽&AJ@	M433			GN							audit:jisjk:92030
+耳鳴り	이명	I110			GN							audit:jisjk:80029
+あばら家	허름한 집	I110	VBl		GN							audit:jisjk:40317
+荒屋	허름한 집	N110	VBl		GN							audit:jisjk:124672
+荒屋	아라야	N130	QCTVPl		GN							audit:jisjk:270917
+船旅	배 여행	N110		Hd	GN							audit:jisjk:104929
+葬具	장례용품	N110	VPe		GN							audit:jisjk:32207
+目まぐるし	정신$FA@	H7N0	SFl		GN							audit:jisjk:136726
+めまぐるし	정신$FA@	H7N0	SFl		GN							audit:jisjk:136729
+猿まね	원숭이 흉내	N110			GN							audit:jisjk:185540
+鼻緒	끈	N110			GN							audit:jisjk:24871
+藩内	번 안	N110			GN							audit:jisjk:99883
+ふんどし	훈도시	I110			GN							audit:jisjk:112548
+フレー	힘내라	N110			GN							audit:jisjk:55423
+鈍色	잿빛	N110	UCl		GN							audit:jisjk:98490
+常世	도코요	N130	QPN	Wb	GN							audit:jisjk:8291
+常世	토코요	N130	QCTVPl		GN							audit:jisjk:311535
+氏子	우지코	N130	QPN	Wb	GN							audit:jisjk:10431
+涼	더위를 식&AW@	M425			GN							audit:jisjk:137581
+四股	시코	N110	VBp		GN							audit:jisjk:187089
+今年	올해	N110	UMe		GN							audit:jisjk:17422
+小っちゃ	$DA@	H7N0			GN							audit:s:7048
+空母	항공모함	N110	VTp		GN							audit:jisjk:16184
+だいぶ	꽤	E300			GN							audit:jisjk:700
+だいぶ	상당히	E311			GN							audit:jisjk:341112
+だいぶ	꽤	E300			GN	3649	||1 S+1== "L昔"	다음 표기가 「昔」로 시작하면 「だいぶ」를 ‘꽤’로 고른다. (미발동: rare-context)				audit:jisjk:345041
+スタッフ	스태프	N110	VHn		GN							audit:jisjk:48976
+スタッフ	스태프	N110			GN							audit:jisjk:48977
+そろ	갖추어&AL@	M410	VHn		GN							audit:jisjk:91002
+そろ	갖추어&AL@	M410			GN							audit:jisjk:91003
+今後	앞으로	N110	UMe		GN							audit:jisjk:183224
+呼び出	불러&A6@	M443	UTs		GN							audit:jisjk:95990
+靴	신발	N110	VCpVAc		GN	1058	||2 &&6 ||2 S+1== "は" S+1== "が" P+1== "2**" P+2== "4**7**8**" S-1== "の" ||3 S-2== "運動用" S-2== "登山用" S-2== "ランニング用" D+0= "신발" &&3 ||2 S+1== "は" S+1== "が" P+1== "2**" P+2== "4**7**8**"	주격 조사와 술어 앞의 靴는 구두로 고르되, 運動用·登山用·ランニング用の 뒤에서는 신발로 옮긴다.				audit:jisjk:115635
+靴	화	N110		On	GN							audit:jisjk:258725
+寄	모&AJ@	M418	VHn		GN							audit:jisjk:92188
+寄	&E2@	M418			GN	3024	||1 &&2 P-1== "2**" A-2-= "VPl"	寄는 장소 의미 계열의 앞말과 조사 뒤에서 들르다로 고른다. (미발동: rare-context)				audit:jisjk:341138
+寄	&E2@	M428			GN				xxx	1		audit:w:15146
+ものすご	엄청$A2@	H7U0			GN							audit:jisjk:202078
+花火	불꽃놀이	N110	VTw		GN							audit:jisjk:39584
+花火	불꽃놀이	N110			GN	4718	||2 &&2 S+1== "する" P+1== "4**" &&2 S+2== "する" P+2== "4**"	花火의 뒤 한두 단어 위치에 する 동사가 있으면 불꽃놀이를 고른다. (미발동: rare-context)				audit:jisjk:373268
+漫才	만자이	N110		Hd	GN							audit:jisjk:99411
