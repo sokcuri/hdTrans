@@ -50,6 +50,9 @@ constexpr char32_t Join(int initial, int vowel, int final) {
     return static_cast<char32_t>(static_cast<int>(kBase) + (initial * 21 + vowel) * kFinalsCount + final);
 }
 
+// Whether s is one Hangul syllable or more and nothing else (no space or mark).
+bool AllSyllables(std::string_view s);
+
 // The final index of r, -1 when r is not a syllable.
 constexpr int Final(char32_t r) {
     if (r < kBase || r > kLast) return -1;

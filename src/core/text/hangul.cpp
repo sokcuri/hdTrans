@@ -72,4 +72,14 @@ bool JapaneseSpelling(std::string_view s) {
     return true;
 }
 
+bool AllSyllables(std::string_view s) {
+    if (s.empty()) return false;
+    for (std::size_t i = 0; i < s.size();) {
+        const Rune r = DecodeRune(s.substr(i));
+        if (r.cp < kBase || r.cp > kLast) return false;
+        i += r.size;
+    }
+    return true;
+}
+
 }  // namespace hdTrans::text

@@ -1,0 +1,19 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:reading	（後藤輝基(ごとうてるもと)）言うてますやん	has:(고토	fix	normalize
+names:reading	（佐藤哲夫(さとうてつお)）何言うてるんすか	has:(사토 테츠오)	fix	normalize
+names:reading	（島田）ねえ 鴻上(こうがみ)さんも	has:코가미 씨도	fix	normalize
+names:reading	（黒羽(こくう)）カザン…	has:(코쿠)	fix	normalize
+names:reading	（斉藤 司(つかさ)）斎藤(さいとう)さんだぞ	has:사이토 씨다	fix	normalize
+names:reading	（加藤(かとう)）はい こちらは敗者復活戦が行われました	has:(카토)	keep	normalize
+names:reading	（近藤(こんどう)）どうも！ハリセンボンです	has:(콘도)	keep	normalize
+names:reading	（今田耕司(いまだこうじ)）さあ いよいよ始まりました	has:(이마다 코지)	keep	normalize
+names:reading	（須藤(すどう)）大奥は男子禁制	has:(스도)	keep	normalize
+names:reading	（大上(おおうえ)）うるさい？　ホントにごめんね	has:(오우에)	keep	normalize
+names:reading	（大村(おおむら)）聞いてほしいんだけどさ	has:(오무라)	keep	normalize
+names:reading	（木村祐一(ゆういち)）盛り上がっておりますが	has:(키무라 유이치)	keep	normalize
+names:reading	（小杉竜一(こすぎりゅういち)）どこまで転がって…	has:(코스기 류이치)	keep	normalize
+names:reading	島田洋七(ようしち)さんです	시마다 요시치 씨입니다	keep	normalize
+names:reading	（澤部(さわべ) 佑(ゆう)）そうですね手応えは…	has:(사와베 유)	keep	normalize
+names:reading	（今田）はい すごい怒濤(どとう)の…	has:노도의	keep	normalize
+names:reading	｜灰狼（ハイロウ）が立つ。	하이로우가 선다.	keep	normalize

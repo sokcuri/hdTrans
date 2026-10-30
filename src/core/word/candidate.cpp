@@ -300,22 +300,30 @@ bool NounEnd(std::string_view text) {
 
 // Whether before, the word ahead of a suffix, is a name or a noun of the dictionary with a sense
 // of persons or animals among its candidates, those of its group or the other records of its surface
-// (モモ 복숭아 beside the name モモ); not itself a suffix written attached (ら, たち).
-bool SuffixHost(const Item* before) {
+// (モモ 복숭아 beside the name モモ), or a proper noun of no common sense that the name layer
+// reads as a person (ふたば, not さくら 벚꽃); not itself a suffix written attached (ら, たち).
+bool SuffixHost(const Item* before, const dict::Snapshot& snapshot) {
     if (before == nullptr) return false;
     if (before->IsNameItem()) return true;
     auto person = [](std::string_view code, std::string_view sem, std::string_view gram) {
         return code.starts_with('1') && (Has(sem, "VHn") || Has(sem, "QPN") || Has(sem, "QAA")) && !Has(gram, "Tu");
     };
+    bool proper = false, common = false;
     for (const Entry* e : before->group->entries) {
         if (person(e->code, e->attr, e->gattr)) return true;
+        const bool properCode = dict::PartCode(std::string(1, e->cls) + std::string(e->code)).ProperNoun();
+        if (!properCode) common = true;
+        proper = proper || properCode;
     }
     for (const Record* r = before->group->records; r != nullptr; r = r->child) {
-        if (r->source == before->group->surface && person(From(r->partCode, 1), r->semantic, r->attr)) {
-            return true;
-        }
+        if (r->source != before->group->surface) continue;
+        if (person(From(r->partCode, 1), r->semantic, r->attr)) return true;
+        const bool properCode = dict::PartCode(r->partCode).ProperNoun();
+        if (!properCode) common = true;
+        proper = proper || properCode;
     }
-    return false;
+    if (!proper || common) return false;
+    return snapshot.NamePerson(before->group->surface);
 }
 
 }  // namespace
@@ -347,7 +355,7 @@ Record* Worker::DropStraySuffixes(Record* records, std::string_view full, int cu
             covered = covered || static_cast<int>(c.source.size()) > cursor - before->start;
         }
     }
-    const bool hosted = !covered && SuffixHost(before);
+    const bool hosted = !covered && SuffixHost(before, snapshot);
     const auto overSuffix = [&](const Record* r) {
         if (!hosted || From(r->partCode, 1).starts_with('1')) return false;
         for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("honorific.after-person"))) {
@@ -1878,7 +1886,21 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     const std::string_view text = From(full, cursor);
     // The nickname すけ also follows a person name of the base dictionary (里奈すけ).
     const bool person = !name->group->entries.empty() && std::string_view(name->group->entries[0]->attr).starts_with("QPN");
-    if (!name->IsNameItem() && !(person && NicknameSuke(text))) return nullptr;
+    // A katakana name of the name layer takes ちゃん as the honorific before と too (アリスちゃんと
+    // 앨리스짱과, not the adverb ちゃんと), unless a dictionary gives it a common sense other than a
+    // person or its sound as names are written (マスクちゃんと 마스크 제대로).
+    const auto katakanaPerson = [&] {
+        const std::string_view surface = name->group->surface;
+        if (!text.starts_with("ちゃん") || NameClassOf(LastChar(surface)) != kClassKatakana) return false;
+        if (!snapshot.NamePerson(surface)) return false;
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(surface, dict::LookupMode::General)) {
+            if (c.codes == nullptr || c.source != surface || c.user != nullptr) continue;
+            if (c.codes->sem.HasCode("QPN") || c.codes->sem.HasCode("VHn") || c.codes->part.ProperNoun()) continue;
+            if (!text::SpellsSound(surface, c.target, false)) return false;
+        }
+        return true;
+    };
+    if (!name->IsNameItem() && !(person && NicknameSuke(text)) && !katakanaPerson()) return nullptr;
     const bool titleWord = dict::StartsWithMember(HDTRANS_CLASS("noun.title-word"), text) > 0;
     std::string_view key, kr;
     bool space = false;

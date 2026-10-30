@@ -1,0 +1,4 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:ro-long-vowels	竜一郎\n「竜一郎くん」\n「竜一郎くん、行こう」\n竜一郎\n竜一郎は笑った。	류이치로\n「류이치로 군」\n「류이치로 군, 가자」\n류이치로\n류이치로는 웃었다.	fix	names
+names:ro-long-vowels	宗一郎\n「宗一郎くん」\n宗一郎は笑った。	소이치로\n「소이치로 군」\n소이치로는 웃었다.	fix	names

@@ -220,7 +220,10 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
         arena.names[arena.namesUsed++].swap(found.names);
     }
-    if (mode == kModeGeneral && settings.text) ApplyConstraints(found, query);
+    if (mode == kModeGeneral && settings.text) {
+        ApplyConstraints(found, query);
+        ReadGivenNames(found, query);
+    }
     Lookup l;
     l.count = found.count;
     Record* last = nullptr;

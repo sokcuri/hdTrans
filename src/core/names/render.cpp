@@ -138,19 +138,24 @@ std::string Registry::RenderName(std::string_view t, const Name& n) {
     return out;
 }
 
+std::string Registry::Written(std::string_view kana) const {
+    if (preset == text::Preset::FanShort && AllRunes(kana, IsKatakana)) return text::FromKana(kana, text::Preset::Fan);
+    return text::FromKana(kana, preset, preset == text::Preset::FanShort);
+}
+
 std::string Registry::RenderPart(std::string_view t, bool whole) {
     const std::string key(t);
     if (const auto f = tables_->fixed.find(key); f != tables_->fixed.end() && !f->second.empty()) return f->second;
     if (const auto r = reading_.find(key); r != reading_.end() && !r->second.empty()) {
-        return text::FromKana(r->second, preset);
+        return Written(r->second);
     }
     if (const auto v = tables_->readings.find(key); v != tables_->readings.end() && !v->second.empty()) {
-        if (IsKanaText(v->second)) return text::FromKana(v->second, preset);
+        if (IsKanaText(v->second)) return Written(v->second);
         return v->second;
     }
     if (const auto x = numbered_.find(key); x != numbered_.end()) {
         const std::string head = RenderPart(x->second, true);
-        const std::string number = text::FromKana(std::string_view(key).substr(x->second.size()), preset);
+        const std::string number = Written(std::string_view(key).substr(x->second.size()));
         if (!head.empty() && IsHangulText(number)) return head + number;
     }
     if (const std::string kr = ChainPart(t); !kr.empty()) return kr;
@@ -181,8 +186,9 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
         std::string tr;
         if (word::TransliterateName(t, tr) && IsHangulText(tr)) return tr;
     }
+    // A name written in hiragana is written as it is spelled, long vowels too (ううっ).
     if (AllRunes(t, IsHiragana)) {
-        if (std::string kr = text::FromKana(t, preset); IsHangulText(kr)) return kr;
+        if (std::string kr = text::FromKana(t, text::Preset::Fan); IsHangulText(kr)) return kr;
     }
     return "";
 }

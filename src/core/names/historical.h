@@ -32,4 +32,8 @@ std::string HistoricalRows(const dict::Snapshot& snap, std::span<const Historica
 // in lines. Among the readings of a surface found in several runs, the longest run wins.
 std::string HistoricalNames(const dict::Snapshot& snap, std::span<const std::string> lines);
 
+// The kana reading of prefix as the prefix of a common name (新 しん, 孫 まご, 鶴 つる), ""
+// for none.
+std::string_view CommonNamePrefix(std::string_view prefix);
+
 }  // namespace hdTrans::names

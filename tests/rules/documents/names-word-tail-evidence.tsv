@@ -1,0 +1,8 @@
+# 규칙: LEX-4
+rule	input	expected	kind	layer
+names:honorific-evidence	はい　笑(わら)い飯(めし)さんに勝ってほしいなと思って今日は来ました\nブラックマヨネーズさんそして 麒麟さん 笑い飯さんの３組が 決勝進出ということです\n飯 食うとるらしいわ知らんけどな	lacks:메시 식	fix	fixed
+names:honorific-evidence	笑い飯さんだ。\n笑い飯さんの漫才\n笑い飯さんが来た。\n笑い飯さんだ。\n笑い飯さんの漫才\n笑い飯さんが来た。\n飯を食う。	has:밥을 먹는다	keep	fixed
+names:honorific-evidence	飯（めし）を食う。\n飯（めし）を炊く。\n飯 食うとるらしいわ	lacks:메시	fix	fixed
+names:honorific-evidence	つい先日、笑い袋さんの騒動が\n笑い袋さんだ。\n笑い袋さんが来た。\n袋に入れた。	has:봉투에 넣었다	keep	fixed
+names:honorific-evidence	桃花ちゃん、おはよう。\n桃花ちゃん、おはよう。\n桃花ちゃん、おはよう。\n桃花ちゃん、おはよう。\n桃花が来た。	lacks:복숭아꽃이 왔다	keep	fixed
+names:honorific-evidence	じゃあ行くんか？\nどこ行くんや\n行くんや\nもう行くんか\n早よ行くんや\n行くんや\n明日行くんスか\nいつ行くんや\n行くんや\n誰と行くんか？\nもう５時だよ！う～ん 会社行かなきゃ…\nあっ 俺1回 飯行った	lacks:이쿠	fix	fixed

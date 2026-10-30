@@ -1,0 +1,17 @@
+# 규칙: LEX-30
+rule	input	expected	kind	layer
+lookup:suffix-after-person	ふたばっちが来た。	후타바치가 왔다.	fix	lookup
+lookup:suffix-after-person	ふたばっち、待って。	후타바치, 기다려.	fix	lookup
+lookup:suffix-after-person	ふたばたんが来た。	후타바짱이 왔다.	fix	lookup
+names:katakana-honorific	ふたばチャンが来た。	후타바짱이 왔다.	fix	lookup
+names:katakana-honorific	フタバチャンが来た。	후타바짱이 왔다.	fix	lookup
+names:katakana-honorific	オウ！毛利サン！ 私 チンヨ	has:모우리 씨!	fix	lookup
+names:katakana-honorific	ユイチャンが来た。	유이짱이 왔다.	keep	lookup
+names:katakana-honorific	ワンチャンある。	가능성 있다.	keep	lookup
+names:katakana-honorific	セバスチャン　すぐに調査を	has:세바스찬	keep	lookup
+names:katakana-honorific	２日も連チャンで来やがって	has:연속으로	keep	lookup
+names:katakana-honorific	あっしはすぐそこのチャンそば屋でね	lacks:짱	keep	lookup
+lookup:suffix-after-person	たまごっちを買った	다마고치를 샀다	keep	lookup
+lookup:suffix-after-person	こっち来て！	여기 와!	keep	lookup
+names:katakana-honorific	ハッチャン？	핫짱?	keep	lookup
+lookup:suffix-after-person	さくらたんは放課後が大好き。	lacks:벚꽃	keep	lookup

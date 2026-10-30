@@ -227,6 +227,9 @@ if(NOT EMSCRIPTEN)
             # Every noun row that does not read as a bare noun has gram Nn or an allowance (tools/nn-allowance.tsv).
             add_test(NAME dicts.nn-rows COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/nn-rows.py" --check)
+            # The name heads table (builtin/extra/name_heads.tsv) is the one the name dictionaries give.
+            add_test(NAME dicts.name-heads COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/name-heads.py" --check "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
             # Every row of the construction table has a fix and a keep rule case.
             add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)

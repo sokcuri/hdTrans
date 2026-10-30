@@ -1,0 +1,42 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+lookup:ro-given-name	凶一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	凶一郎兄さん、待って。	쿄이치로 형님, 기다려.	fix	lookup
+lookup:ro-given-name	響一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	杏一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	強一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	助五郎！	스케고로!	fix	lookup
+lookup:ro-given-name	(仙十郎)追え！	(센쥬로) 쫓아라!	fix	lookup
+lookup:ro-given-name	（治五郎）次。	(지고로) 다음.	fix	lookup
+lookup:ro-given-name	(瓦屋の陣八郎)ただし！	has:진하치로	fix	lookup
+lookup:ro-given-name	玄太郎は私の実の兄にあたります	has:겐타로는	fix	lookup
+lookup:ro-given-name	丑五郎か？	우시고로인가?	fix	lookup
+lookup:ro-given-name	長五郎は お前か	초고로는 너인가	fix	lookup
+lookup:ro-given-name	(余四郎)あん兄ちゃん 引いてる 引いてるよ！	has:(요시로)	fix	lookup
+lookup:ro-given-name	（矢三郎）何をやってんだよ　叔父さん	has:(야사부로)	fix	lookup
+lookup:ro-given-name	（矢二郎）切ないね	(야지로) 안타깝네	fix	lookup
+lookup:ro-given-name	矢三郎ちゃんだけなの？	야사부로짱뿐이야?	fix	lookup
+lookup:ro-given-name	夷川の呉一郎さんね	has:쿠레이치로 씨	fix	lookup
+lookup:ro-given-name	矢二郎兄さん…	야지로 형님…	fix	lookup
+lookup:ro-given-name	（矢四郎・矢三郎）わあ！	has:야사부로) 와아!	fix	lookup
+lookup:ro-given-name	呉一郎？	쿠레이치로?	fix	lookup
+lookup:ro-given-name	こちらこそ矢四郎君には教えられることが多いのです	has:야시로 군에게는	fix	lookup
+lookup:ro-given-name	華丸≫鶴太郎さん以来のね。	has:츠루타로 씨	fix	lookup
+lookup:ro-given-name	(錮太郎)来たっ！	(코타로) 왔어!	fix	lookup
+lookup:ro-given-name	恭一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	京一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	享一郎が来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	　ゲラゲラと大笑いをする宗一郎。	has:소이치로	fix	lookup
+lookup:ro-given-name	かかったな　承太郎	걸렸군 죠타로	fix	lookup
+lookup:ro-given-name	三太郎だ。	멍청이다.	keep	lookup
+lookup:ro-given-name	桃太郎が鬼退治に行った。	모모타로가 오니 퇴치에 갔다.	keep	lookup
+lookup:ro-given-name	金太郎飴を買った。	킨타로 엿을 샀다.	keep	lookup
+lookup:ro-given-name	一郎が来た。	이치로가 왔다.	keep	lookup
+lookup:ro-given-name	京太郎が来た。	교타로가 왔다.	keep	lookup
+lookup:ro-given-name	下鴨矢三郎	시모가모 야사부로	keep	lookup
+lookup:ro-given-name	冠 二郎	lacks:칸지로	keep	lookup
+lookup:ro-given-name	塩二郎さんは　塩の味そのものにもこだわっています。	has:시오지로 씨는	fix	lookup
+lookup:ro-given-name	井上一郎が来た。	이노우에 이치로가 왔다.	keep	lookup
+lookup:ro-given-name	竜一郎	류이치로	fix	lookup
+lookup:ro-given-name	竜一郎さん	류이치로 씨	fix	lookup
+lookup:ro-given-name	大島三郎が来た。	오오시마 사부로가 왔다.	keep	lookup
