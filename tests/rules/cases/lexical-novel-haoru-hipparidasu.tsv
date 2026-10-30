@@ -1,6 +1,6 @@
 # 규칙: LEX-3, LEX-35
 rule	input	expected	kind	layer
-dict:novel-verbs:30	赤いマントを羽織ったソードマン風の男	붉은 망토를 걸친 소즈맨풍의 남자	fix	defaults
+dict:novel-verbs:30	赤いマントを羽織ったソードマン風の男	붉은 망토를 걸친 소드맨풍의 남자	fix	defaults
 dict:novel-verbs:30	ざっくりと羽織った毛皮のロングコート	썩둑 걸친 모피의 롱코트	fix	defaults
 dict:novel-verbs:30	憲兵の外套を羽織る	헌병의 외투를 걸친다	fix	defaults
 dict:novel-verbs:30	羽織ってみたりしますか？	걸쳐 보거나 할까요?	fix	defaults
