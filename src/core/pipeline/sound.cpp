@@ -489,6 +489,8 @@ private:
     mutable size_t drawnFrom_ = 0, drawnEnd_ = 0;
     mutable bool drawn_ = false;
     bool WordAt(size_t p, size_t n) const;
+    bool WordAfterCry(size_t p, size_t n) const;
+    bool CryBeforeWord(const SoundMatch& m) const;
     bool NounAt(size_t p, size_t n) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false, bool afterParticle = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
@@ -593,6 +595,21 @@ void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, 
             base = std::max(base, n);
         }
     }
+}
+
+// Whether a dictionary word of n or more characters, and two at least, starts at character p: no
+// kana spelling, name, particle, ending or suffix that joins the word before it (すいません; not ても,
+// nor the ちゃん of はっちゃん).
+bool SoundText::WordAfterCry(size_t p, size_t n) const {
+    const size_t end = std::min(rs_.size(), p + 24);
+    bool word = false;
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup).list) {
+        if (c.codes == nullptr || (c.user != nullptr && (c.user->kana || c.user->nameLayer || c.user->end))) continue;
+        if (text::RuneCount(c.source) < std::max<size_t>(n, 2)) continue;
+        if (c.codes->part.TagIn("PSTU") || c.codes->gram.HasCode("Tu")) return false;
+        word = true;
+    }
+    return word;
 }
 
 // Whether a dictionary word other than a kana spelling or a name is exactly the n
@@ -1117,7 +1134,27 @@ bool SoundText::Stopped(const SoundMatch& m) const {
         VerbStemAt(m.start, m.end - 1 - m.start)) {
         return false;
     }
-    return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start];
+    return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start] || CryBeforeWord(m);
+}
+
+// Whether the interjection m, a vowel and っ (あっ, えっ, おっ), opens an utterance (also after the
+// speaker's name in brackets of a caption) right before a word
+// in hiragana that a key starting with its っ would cut (あっすいません 앗 죄송합니다, not 아 + っす +
+// いません): no word goes on from the cry, no て, た or ち of a verb form follows it (あって, あった,
+// うっちゃう), and the word after it, no particle, ending or suffix, reaches further than the keys at
+// the っ.
+bool SoundText::CryBeforeWord(const SoundMatch& m) const {
+    if (!m.intj || m.end != m.start + 2 || m.end >= rs_.size() || !In(rs_[m.start], U"あいうえお") || rs_[m.end - 1] != U'っ' ||
+        !IsHiraganaRune(rs_[m.end]) || In(rs_[m.end], U"てたちつでだ") ||
+        !(UtteranceStart(m.start) || In(rs_[m.start - 1], U"）)⟨"))) {
+        return false;
+    }
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(m.start, base, user, name, true);
+    if (std::max(base, user) > m.end - m.start) return false;
+    LongestKeys(m.end - 1, base, user, name, true);
+    const size_t tsu = std::max(base, user);
+    return tsu >= 2 && WordAfterCry(m.end, tsu);
 }
 
 // Whether the n characters at p are in the dictionary as the stem of a verb (ビビ of ビビる),
@@ -1208,9 +1245,11 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         SoundMatch& last = chain.back();
         size_t end = last.end;
         if (!last.intj) end += Adverbial(end);
+        const bool cry = CryBeforeWord(last);
         if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") ||
-            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end]))) {
+            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
+            if (cry) last.spaceAfter = true;
             last.end = end;
             if (loose && chain.size() < 2) return {};
             return chain;
