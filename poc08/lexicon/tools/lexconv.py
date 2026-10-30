@@ -240,7 +240,10 @@ def split_name(r, toks):
     reading = lexlib.hira(r.get('reading', '')) if r.get('reading') else ''.join(x[8] for x in toks)
     katakana = all('ァ' <= c <= 'ヺ' or c in 'ー・' for c in key)
     if katakana:
-        return 'common'
+        # one known loanword is a term; a compound of katakana words is a coined name (キュアブライト)
+        return 'common' if len(toks) == 1 else 'name'
+    if len(toks) > 1 and toks[-1][5] in ('人名',) or (len(toks) > 1 and toks[-1][3] == 'suf'):
+        return 'name'
     if kana.similar(ko, reading) >= 0.7:
         return 'name'
     return 'common'
