@@ -23,7 +23,7 @@ struct RetroOptions {
 struct RetroLine {
     std::string out, gen, level, key, kir;
     bool ok = false;
-    bool levelChanged = false;  // a sentence-final predicate ends at another speech level than 0.7.x's
+    bool levelChanged = false;  // the line's last sentence end changes speech level (inner sentences alone do not count)
     bool mixedLevels = false;   // the sentences of the line would end at different speech levels
     std::vector<std::string> fired;
 };

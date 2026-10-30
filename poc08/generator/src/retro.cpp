@@ -946,6 +946,7 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         bool levelChanged = false, mixedLevels = false;
         {
             Level end = Level::none;
+            bool lastChanged = false;  // the line's last sentence end (a V node, not a Raw word) changes level
             std::vector<Level> innerPolite;
             for (size_t q = 0; q < nodes.size(); ++q) {
                 const Node& n = nodes[q];
@@ -955,8 +956,8 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                     if (g.node == n.id) now = g.level;
                 if (now == Level::none) continue;
                 const Level was = static_cast<Level>(n.decision);
-                if (was != Level::none && was != now) levelChanged = true;
                 const bool inner = q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct && nodes[q + 1].punct == Punct::comma;
+                if (!inner) lastChanged = was != Level::none && was != now;
                 if (inner) {
                     if (now == Level::haeyo || now == Level::hapsyo) innerPolite.push_back(now);
                 } else if (end == Level::none) {
@@ -967,6 +968,13 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             }
             for (Level l : innerPolite)
                 if (end != Level::none && l != end) mixedLevels = true;
+            // a later word the reader could not take apart ends the line: its level is 0.7.x's, not known here
+            for (size_t q = nodes.size(); q-- > 0;) {
+                if (nodes[q].kind == Kind::Punct) continue;
+                if (nodes[q].kind != Kind::V) lastChanged = lastChanged && nodes[q].kind != Kind::Raw;
+                break;
+            }
+            levelChanged = lastChanged;
         }
         for (auto& n : nodes) n.decision = 0;
         const RewriteResult rw = Rewrite(*rules, *tablesPtr, nodes, reg, {u}, only, skip);

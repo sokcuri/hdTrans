@@ -20,3 +20,5 @@ out	「どこへ行かれますか」	「어디에 가십니까」	a question wi
 out	「どこへ行かれますか？」	「어디에 가십니까?」	합쇼체 is never lowered
 retro	「どこへ行かれますか？」	가세요?	가시다 is 가다 + honorific 시 in 해요체 (was 가셔요)
 out	「しかし、陛下もご多忙の身であらせられます」	「하지만, 폐하도 다망의 몸이십니다」	keigo (あらせられる) keeps 합쇼체
+out	「奇天烈な名じゃ。まぁよい、用は済んだ。行ってよいぞ」	「괴상한 이름이야. 뭐 좋은, 용무는 끝났다. 가도 좋아」	the last sentence end keeps its level: inner sentences stay as 0.7.x wrote them (was 끝났어)
+out	「この場を以て宣言する。私はユフィリア・マゼンタとの婚約を破棄すると！」	「이 자리에서 선언한다. 나는 유필리아 마젠타와의 약혼을 파기한다고!」	the line ends in a quote, not at another level: 0.7.x text (was 선언해. 난)
