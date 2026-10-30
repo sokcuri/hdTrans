@@ -89,7 +89,8 @@ std::vector<int> SentenceEnds(const std::vector<TokInfo>& info, const Path& path
     return ends;
 }
 
-std::vector<HeadFacts> ComputeHeadFacts(const Strings& st, const std::vector<TokInfo>& info, const Path& path) {
+std::vector<HeadFacts> ComputeHeadFacts(const StructureData&, const Strings& st, const std::vector<TokInfo>& info,
+                                        const Path& path) {
     const int n = static_cast<int>(path.buns.size());
     std::vector<HeadFacts> out(n);
     std::vector<int> ends = SentenceEnds(info, path);
@@ -233,7 +234,7 @@ void AttachHeads(const StructureData& data, const Strings& st, const std::vector
                  std::vector<Decision>& decisions, Strings& interned) {
     const int total = static_cast<int>(path.buns.size());
     if (total == 0) return;
-    std::vector<HeadFacts> facts = ComputeHeadFacts(st, info, path);
+    std::vector<HeadFacts> facts = ComputeHeadFacts(data, st, info, path);
     for (int i = 0; i < total; ++i)
         if (facts[i].sentEnd == i) {
             path.buns[i].head = -1;

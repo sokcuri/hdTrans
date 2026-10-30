@@ -55,7 +55,8 @@ inline std::string Text(const hd8::Line& line, const hd8::Path& p, int first, in
     return line.src.substr(b, e - b);
 }
 
-inline void WriteIr(const hd8::Line& line, const hd8::Strings& st, std::ostream& out) {
+inline void WriteIr(const hd8::Line& line, const hd8::Strings& st, std::ostream& out,
+                    const std::vector<hd8::TokInfo>* info = nullptr) {
     const hd8::Path& p = line.path;
     out << "{\"doc\":" << Quote(line.doc) << ",\"line\":" << line.id << ",\"src\":" << Quote(line.src) << ",\"buns\":[";
     for (size_t i = 0; i < p.buns.size(); ++i) {
@@ -73,7 +74,9 @@ inline void WriteIr(const hd8::Line& line, const hd8::Strings& st, std::ostream&
         flag(hd8::Topic, "topic");
         flag(hd8::CommaAfter, "commaAfter");
         flag(hd8::QuoteClose, "quoteClose");
-        out << "],\"clemma\":" << Quote(st.Get(p.toks[b.content].lemma)) << ",\"csurf\":"
+        if (info != nullptr) out << "],\"cwc\":\"" << hd8::Name((*info)[b.content].wc) << "\"";
+        else out << "]";
+        out << ",\"clemma\":" << Quote(st.Get(p.toks[b.content].lemma)) << ",\"csurf\":"
             << Quote(st.Get(p.toks[b.content].surf)) << ",\"contentSrc\":[" << p.toks[b.content].src.begin << ',' << p.toks[b.content].src.end
             << "],\"src\":[" << p.toks[b.first].src.begin << ',' << p.toks[b.last].src.end
             << "],\"text\":" << Quote(Text(line, p, b.first, b.last)) << '}';

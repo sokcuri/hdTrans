@@ -149,7 +149,7 @@ aux.n.no	の	*	助詞-準体助詞	*	*	*	nom	role=nomi	own	のだ: explanatory (
 aux.f.ka	か	*	助詞-終助詞	*	*	*	final	force=q;role=q	own
 aux.f.kashira	かしら|かな|かね|っけ|け	*	助詞-終助詞	*	*	*	final	force=q;role=q	own	wondering, recall
 aux.f.no	の	*	助詞-終助詞	*	*	*	final	role=fin-no	own	statement or question by the mark
-aux.f.na	な|なあ|なぁ	*	助詞-終助詞	*	*	prevform=終止形	final	force=prohib;role=na-prohib	own	行くな; after a verb 終止形 only
+aux.f.na	な	*	助詞-終助詞	*	*	prevverb=終止形	final	force=prohib;role=na-prohib	own	行くな; after a verb 終止形 only
 aux.f.na.excl	な|なあ|なぁ|のう|わい	*	助詞-終助詞	*	*	*	final	jreg+=casual-final	own
 aux.f.yo	よ|ね|ねえ|ねぇ|さ|ぞ|ぜ|わ|い|や|ってば|もん|もの|じゃん|ねん|で|がな|べ|ばい|たい|ちゃ|っしょ|ずら|け|のよ|かい|よね|わね|こと	*	助詞-終助詞	*	*	*	final	jreg+=casual-final	own
 aux.f.wa	わ	*	助詞-終助詞	*	*	prevrole=cop|prevud=助動詞	final	jreg+=desuwa	own	ですわ
@@ -174,6 +174,7 @@ aux.fn.mitai	見たい	*	形状詞-一般	*	*	*	fn	mod+=likeness	own
 aux.fn.ka	か	*	助詞-副助詞	*	*	*	fn	role=ka	own
 aux.fn.dou	どう|如何	*	副詞	*	*	prev=か	fn	role=ka	own	かどうか
 aux.fn.nani	何	*	代名詞	*	*	prev=か|prev=と	fn	-	own	とかなんとか, かなにか
+aux.qverb	言う|思う|考える|叫ぶ|呟く|尋ねる|聞く|答える|告げる|話す|感じる|信じる|願う|書く|頼む|命じる|伝える|述べる|怒鳴る|囁く|返す|名乗る|呼ぶ|思える|決める|約束|祈る|疑う|主張|説明|報告|返事|断る|笑う|泣く|知る|分かる|聞こえる|見える|思い込む|言い出す|言い返す|申す|仰る|存じる|ぼやく|喚く|促す|答え|誓う|宣言|判断|記す	*	動詞|名詞-普通名詞-サ変可能	*	*	*	quote	role=say	own	verbs that take a quote with と
 aux.fn.iu	言う	*	動詞-一般	*	*	prev=と|prev=って|prevrole=quote	quote	role=say	own	という, っていう, とか言って
 aux.fn.omou	思う	*	動詞-一般	*	*	prev=と|prevrole=quote	quote	role=say	own	と思う
 aux.fn.yoshi	由	*	名詞-普通名詞-一般	*	*	*	fn	mod+=hearsay	own	との由: I hear

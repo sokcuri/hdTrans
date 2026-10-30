@@ -19,7 +19,7 @@ if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     enable_testing()
 endif()
 
-add_library(hd8_structure STATIC aux_table.cpp chunk.cpp heads.cpp clause.cpp)
+add_library(hd8_structure STATIC aux_table.cpp chunk.cpp heads.cpp clause.cpp zero.cpp)
 target_include_directories(hd8_structure PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 if(TARGET hd08_ir)
