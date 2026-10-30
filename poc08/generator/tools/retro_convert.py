@@ -209,7 +209,7 @@ def main():
     for i in range(n):
         rec = {'line': i + 1, 'ja': ja[i], 'out075': out[i] if i < len(out) else '', 'items': convert_line(ja[i], why.get(i + 1, []))}
         if ctexts is not None: glue(rec['items'], ctexts.get(i + 1, ''))
-        rec['imp'] = bool(re.search(r'(て|で|ろ|れ|なさい|ください|下さい|くれ|てよ|ないで|ちょうだい)[！!。…～〜ー\s]*[」』）]?\s*$', ja[i].strip()))
+        rec['imp'] = bool(re.search(r'(て|で|ろ|れ|なさい|ください|下さい|くれ|てよ|ないで|ちょうだい)[！!。｡…～〜ー\s]*[」』）]?\s*$', ja[i].strip()))
         rec['lead'] = re.match(r'^[ \u3000]*', rec['out075']).group(0)
         if meta:
             m = meta[i]

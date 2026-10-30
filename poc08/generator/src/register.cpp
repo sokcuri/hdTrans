@@ -1,5 +1,6 @@
 #include "hd8gen/register.h"
 
+#include <algorithm>
 #include <cstdlib>
 #include <map>
 #include <unordered_map>
@@ -311,13 +312,18 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         bool sceneSpeech = false;
         {
             size_t quoted = 0, speechy = 0;
+            std::vector<size_t> lens;
             for (size_t k = i; k < j; ++k) {
                 if (lines[k].dialogue) ++quoted;
                 const Cues c = Scan(t, lines[k].ja);
                 const std::string key = Key(c);
                 if (key == "pend" || key == "keigo-pend" || key == "set" || key == "polite-any" || c.strongTail) ++speechy;
+                lens.push_back(ToU32(lines[k].ja).size());
             }
-            sceneSpeech = quoted == 0 && j > i && speechy * 10 >= (j - i) * 3;
+            // captions and hooked game text: short lines; narration: long sentences
+            std::sort(lens.begin(), lens.end());
+            const bool shortLines = !lens.empty() && lens[lens.size() / 2] <= 20;
+            sceneSpeech = quoted * 10 < (j - i) && j > i && (speechy * 10 >= (j - i) * 3 || shortLines);
         }
         for (size_t k = i; k < j; ++k) {
             if (!lines[k].dialogue) continue;
