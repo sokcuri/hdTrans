@@ -1,3 +1,4 @@
+# 규칙: LEX-88
 rule	input	expected	kind	layer
 dict:jisjk:104154	「んー、あまり関係ないと思うけど。」	has:그다지 관계없다고	fix	local
 dict:jisjk:104154	ことはあまり関係ないのよ	has:그다지 관계없	fix	local

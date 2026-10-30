@@ -1,3 +1,4 @@
+# 규칙: LEX-88
 rule	input	expected	kind	layer
 dict:novel-idioms:22	クロードは心配のあまり毎日公爵家へ通った。	클로드는 걱정한 나머지 매일 공작가에 다녔다.	fix	local
 dict:novel-idioms:22	旦那の長次郎さんは心配のあまり	남편의 쵸지로 씨는 걱정한 나머지	fix	local
