@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+dict:jisjk:267722	そして準備を整えたところで、扉を開く。	그리고 준비를 갖추자, 문을 연다.	fix	defaults
+dict:jisjk:267722	「そうです〜、駅を降りたところでユメくんがいました」	「그렇습니다~, 역을 내리자 유메 군이 있었습니다」	fix	defaults
+dict:jisjk:267722	途中まで進んだところで、何か嫌な感じがした。	도중까지 나아가자, 뭔가 싫은 느낌이 들었다.	fix	defaults
+dict:jisjk:267722	俺がジッパーに手をかけたところで、レナが慌てふためきながらまくし立てた。	내가 지퍼에 손을 대자, 레나가 당황하면서 쏘아붙였다.	fix	defaults
+dict:jisjk:267722	学生寮が林立するエリアに入ったところで、望月さんは建物の陰に身を隠した。	기숙사가 하야시다치하는 에리어에 들어가자, 모치즈키 씨는 건물의 그늘에 은신했다.	fix	defaults
+dict:jisjk:267722	ご主人様がぱったり気を失ったところで、ＣＭに入った。	주인님이 뚝 정신을 잃자, CM에 들어갔다.	fix	defaults
+dict:jisjk:267722	「さあ、議論が盛り上がってきたところで、一旦ＣＭです！」	「자, 논의가 고조돼 오자, 일단 CM입니다!」	fix	defaults
+dict:novel-idioms:35	その似顔絵をマジマジと眺めていたところで、パッと顔を上げたアーリャと目が合った。	그 캐리커쳐를 빤히 바라보고 있던 참에, 확 고개를 든 아랴와 시선이 마주쳤다.	fix	local-ending
+dict:novel-idioms:35	判断がつかず困っていたところで、そのメニューに気づく。	판단이 서지 않고 곤란해하던 참에, 그 메뉴를 눈치챈다.	fix	local-ending
+dict:novel-idioms:35	中に黒い液体が入っているのを確認していたところで、男が戻って来て、尋ねる。	안에 검은 액체가 들어가 있는 것을 확인하고 있던 참에, 남자가 돌아와, 묻는다.	fix	local-ending
+dict:novel-idioms:23	いくら嘆いたところであの子は戻らん	아무리 한탄해 봤자 그 아이는 돌아가지 않는다	fix	local-ending
+dict:novel-idioms:23	俺が何をしたところで、学校に連絡を取られれば意味がなくなる。	내가 무엇을 해 봤자, 학교에 연락을 해지면 의미가 없어진다.	fix	local-ending
+dict:novel-idioms:23	だから俺がなんと言ったところで、なにも変わりはしない。	그러니까 내가 뭐라고 말해 봤자, 아무것도 변함은 하지 않는다.	fix	local-ending
+dict:novel-idioms:23	まあ、別に言ったところで怒りはしないのだろうが。	뭐, 따로 말해 봤자 분노는 하지 않겠지만.	fix	local-ending
+dict:novel-idioms:23	でも何をしたところで意味がなかった。	하지만 무엇을 해 봤자 의미가 없었다.	fix	local-ending
+dict:novel-idioms:23	今更わかったところで遅い。	이제 와서 알아 봤자 늦다.	fix	local-ending
+dict:novel-idioms:24	自分が聞いたところでは、相当なやり手だと……。	자신이 들은 바로는, 상당한 수완가라면…….	fix	defaults
+dict:jisjk:267722	立ち去ろうとしたところで、佳奈すけが大袈裟に声を上げた。	떠나려던 참에, 카나스케가 과장하여 소리를 냈다.	keep	defaults
+dict:jisjk:267722	押し倒そうとしたところで、外から音がした。	밀어 넘어뜨리려던 참에, 밖에서 소리가 났다.	keep	defaults
+dict:jisjk:267722	ところで、話は変わるが。	그런데, 이야기는 바뀌지만.	keep	defaults
+dict:jisjk:267722	意外なところで会った。	뜻밖의 곳에서 만났다.	keep	defaults
+dict:novel-idioms:23	何度か往復したところで、苦痛の色が消えた。	몇 번이나 왕복하자, 고통의 색이 사라졌다.	keep	local-ending
+dict:jisjk:267722	今ちょうど食べているところです。	지금 막 먹고 있는 중입니다.	keep	defaults
+dict:novel-idioms:36	千里のおかしな理論に流されかけたところで、ツッコミが入った。	천리의 이상한 이론에 떠밀릴 뻔했더니, 태클이 들어갔다.	keep	local-ending
