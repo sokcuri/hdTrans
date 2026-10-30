@@ -11,6 +11,7 @@ Baselines are judged from the cache: hd076 (0.7.6) and ssnmt.
 """
 import argparse
 import json
+import re
 import os
 import shlex
 import subprocess
@@ -26,6 +27,10 @@ V08 = "/Users/sokcuri/hdwork/v08"
 R = f"{V08}/eval-runs/smt"
 T = "/Users/sokcuri/hdwork/wt/poc08-eval/poc08/eval/tools"
 HD8SMT = os.environ.get("HD8SMT", os.path.join(smtlib.ROOT, "build", "mac", "poc08", "smt", "hd8smt"))
+JUDGE = {  # fixed 200-line judged sample: 100 gc lines of gate, 100 fiction lines of fic150
+    "j100gc": {"dir": f"{R}/devsets/j100gc", "from": "gate", "idx": f"{R}/devsets/j100gc/idx.txt"},
+    "j100fic": {"dir": f"{R}/devsets/j100fic", "from": "fic150", "idx": f"{R}/devsets/j100fic/idx.txt"},
+}
 SETS = {
     "gate": {"dir": f"{V08}/nmt/data/gateset", "ja": f"{V08}/nmt/data/gate.ja", "ref": f"{V08}/nmt/data/gate.ko",
              "base": {"hd076": f"{V08}/nmt/runs/gate.hd076.ko", "ssnmt": f"{V08}/nmt/runs/gate.ssnmt.ko"}},
@@ -39,6 +44,43 @@ def lines(p):
     if t and t[-1] == "":
         t.pop()
     return t
+
+
+def pooled_judge(paths, judge="claude-sonnet-5-5", seed=7):
+    """Pooled 200-line numbers from judge.py JSONs: crit/major line share per system and win rates of smt."""
+    import random
+    mqm, pairs = {}, {}
+    for p in paths:
+        d = json.load(open(p))
+        for sysname, v in d["mqm"].get(judge, {}).items():
+            for lid, x in v["lines"].items():
+                mqm.setdefault(sysname, {})[lid] = 1 if (x[0] + x[1]) > 0 else 0
+        for pn, v in d["pairs"].items():
+            if judge in v:
+                for lid, x in v[judge]["lines"].items():
+                    pairs.setdefault(pn, {})[lid] = x
+    rnd = random.Random(seed)
+
+    def ci(vals, f):
+        bs = sorted(f([vals[rnd.randrange(len(vals))] for _ in vals]) for _ in range(1000))
+        return [round(bs[25], 1), round(bs[974], 1)]
+
+    out = {}
+    for sysname, d in mqm.items():
+        v = list(d.values())
+        out[f"cm.{sysname}"] = round(100 * sum(v) / len(v), 1)
+        out[f"cm.{sysname}.ci"] = ci(v, lambda x: 100 * sum(x) / len(x))
+        out[f"cm.{sysname}.n"] = len(v)
+    for pn, d in pairs.items():
+        if not pn.startswith("smt vs"):
+            continue
+        v = list(d.values())
+        w, l, t = v.count(1), v.count(-1), v.count(0)
+        wr = lambda x: 100 * x.count(1) / max(1, x.count(1) + x.count(-1))
+        out[f"win.{pn.split(' vs ')[1]}"] = round(wr(v), 1)
+        out[f"win.{pn.split(' vs ')[1]}.ci"] = ci(v, wr)
+        out[f"win.{pn.split(' vs ')[1]}.wtl"] = [w, t, l]
+    return out
 
 
 def main():
@@ -76,13 +118,39 @@ def main():
             res[f"{s}.chrf_stripped"] = round(chrf_total([chrf_stats(h, r) for h, r in zip(hyp, ref)]), 2)
             for b, bp in S["base"].items():
                 res[f"{s}.chrf_stripped.{b}"] = round(chrf_total([chrf_stats(h, r) for h, r in zip(lines(bp), ref)]), 2)
-        if a.judge:
-            j = [sys.executable, "-I", f"{T}/judge.py", "--set", S["dir"], "--sys", f"smt={ko}"]
-            for b, bp in S["base"].items():
-                j += ["--sys", f"{b}={bp}"]
-            j += ["--baselines", ",".join(S["base"]), "--out", f"{out}/{s}.judge.json"]
-            with open(f"{out}/{s}.judge.md", "w") as fo:
-                subprocess.run(j, stdout=fo, stderr=open(f"{out}/{s}.judge.log", "w"), check=True)
+    # coverage: share of source tokens translated by phrase-table or memory options (1-best, --why)
+    p = subprocess.run(cmd + ["--each", "--why"], input="\n".join(lines(SETS["gate"]["ja"])) + "\n",
+                       capture_output=True, text=True, check=True)
+    cov = {"phrase": 0, "tm": 0, "rule": 0, "passthrough": 0, "oov": 0, "gloss": 0}
+    for l in p.stdout.split("\n"):
+        if not l.startswith("#   "):
+            continue
+        m = re.search(r" k (\d+)\] (\S+)$", l)
+        if not m:
+            continue
+        k, prov = int(m.group(1)), m.group(2)
+        key = ("oov" if prov == "passthrough:oov" else "passthrough" if prov == "passthrough" else
+               "rule" if prov == "rule:oov" else "gloss" if prov == "user:glossary" else
+               "tm" if prov.startswith("tm:") else "phrase")
+        cov[key] += k
+    tot = sum(cov.values()) or 1
+    res["gate.tokens"] = cov
+    res["gate.coverage_phrase"] = round((cov["phrase"] + cov["tm"]) / tot, 4)
+    res["gate.oov_rate"] = round(cov["oov"] / tot, 4)
+    res["gate.rule_rate"] = round(cov["rule"] / tot, 4)
+    if a.judge:
+        for js, J in JUDGE.items():
+            idx = [int(x) for x in lines(J["idx"])]
+            src = lines(f"{out}/{J['from']}.ko")
+            ko = f"{out}/{js}.ko"
+            open(ko, "w", encoding="utf-8").write("".join(src[i] + "\n" for i in idx))
+            j = [sys.executable, "-I", f"{T}/judge.py", "--set", J["dir"], "--sys", f"smt={ko}"]
+            for b in ("hd076", "ssnmt"):
+                j += ["--sys", f"{b}={R}/base/{js}.{b}.ko"]
+            j += ["--baselines", "hd076,ssnmt", "--out", f"{out}/{js}.judge.json"]
+            with open(f"{out}/{js}.judge.md", "w") as fo:
+                subprocess.run(j, stdout=fo, stderr=open(f"{out}/{js}.judge.log", "w"), check=True)
+        res.update(pooled_judge([f"{out}/{js}.judge.json" for js in JUDGE]))
     if a.flip:
         p = subprocess.run([sys.executable, "-I", f"{T}/flip.py", "run", "--cmd",
                             " ".join(shlex.quote(c) for c in cmd + ["--each"]), "--save", f"{out}/flip.ko"],

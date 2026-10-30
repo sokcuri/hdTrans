@@ -12,7 +12,7 @@ namespace hd8::smt {
 
 class KoText;
 
-enum Feature : int { kLm, kPef, kPfe, kLef, kLfe, kPhrase, kWord, kOov, kLat, kGloss, kNumFeatures };
+enum Feature : int { kLm, kPef, kPfe, kLef, kLfe, kPhrase, kWord, kOov, kLat, kGloss, kTm, kRule, kNumFeatures };
 const char* FeatureName(int f);
 
 struct DecodeOptions {
@@ -36,7 +36,8 @@ class Decoder {
  public:
   Decoder();
   ~Decoder();
-  // model: folder with phrases.tsv, lm.bin and weights.tsv. analyzer: W1 core snapshot.
+  // model: folder with phrases.tsv, lm.bin, weights.tsv and optionally tm.tsv (whole-sentence memory).
+  // analyzer: W1 core snapshot.
   bool Load(const std::string& model, const std::string& analyzer, const std::string& weights,
             const std::string& glossary, std::string* err);
   std::string Translate(const std::string& line, const KoText& ko, const DecodeOptions& opt) const;

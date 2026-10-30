@@ -18,7 +18,7 @@
 namespace hd8::smt {
 
 const char* FeatureName(int f) {
-  static const char* names[] = {"lm", "pef", "pfe", "lef", "lfe", "phrase", "word", "oov", "lat", "gloss"};
+  static const char* names[] = {"lm", "pef", "pfe", "lef", "lfe", "phrase", "word", "oov", "lat", "gloss", "tm", "rule"};
   return f >= 0 && f < kNumFeatures ? names[f] : "?";
 }
 
@@ -28,7 +28,8 @@ struct Gloss {
 
 struct DecoderImpl {
   Lm lm;
-  PhraseTable pt;
+  PhraseTable pt, tm;
+  bool hasTm = false;
   ana::Analyzer analyzer;
   int64_t w[kNumFeatures] = {};
   std::vector<Gloss> gloss;
@@ -121,6 +122,8 @@ struct Option {
   bool gloss, oov;
   std::string src;
   bool rule = false;
+  bool tm = false;
+  int len = 1;  // lattice edges (source tokens) covered
 };
 
 struct Hyp {
@@ -141,6 +144,13 @@ bool Decoder::Load(const std::string& model, const std::string& analyzer, const 
   DecoderImpl& m = *impl_;
   if (!m.lm.Load(model + "/lm.bin", err)) return false;
   if (!m.pt.Load(model + "/phrases.tsv", m.lm, err)) return false;
+  {
+    std::ifstream probe(model + "/tm.tsv");
+    if (probe) {
+      if (!m.tm.Load(model + "/tm.tsv", m.lm, err)) return false;
+      m.hasTm = true;
+    }
+  }
   std::string snap;
   const std::string ap = analyzer.empty() ? model + "/analyzer.bin" : analyzer;
   if (!ReadFile(ap, &snap)) {
@@ -149,7 +159,7 @@ bool Decoder::Load(const std::string& model, const std::string& analyzer, const 
   }
   if (!m.analyzer.Load(snap, err)) return false;
   // defaults, overridden by weights.tsv (name value)
-  const double def[kNumFeatures] = {1.0, 0.2, 0.2, 0.2, 0.2, -0.5, 0.0, -10.0, 0.5, 5.0};
+  const double def[kNumFeatures] = {1.0, 0.2, 0.2, 0.2, 0.2, -0.5, 0.0, -10.0, 0.5, 5.0, 0.5, 0.0};
   for (int i = 0; i < kNumFeatures; ++i) m.w[i] = ToFixedWeight(def[i]);
   const std::string wp = weights.empty() ? model + "/weights.tsv" : weights;
   std::ifstream wi(wp);
@@ -278,21 +288,31 @@ std::string Decoder::Translate(const std::string& line, const KoText& ko, const 
     while (!stack.empty()) {
       Frame fr = stack.back();
       stack.pop_back();
-      if (fr.len >= m.pt.maxLen()) continue;
+      const bool inPt = fr.len < m.pt.maxLen();
+      const bool inTm = m.hasTm && (fr.len == 0 || m.tm.HasPrefix(fr.key));
+      if (!inPt && !inTm) continue;
       for (size_t ei : out[fr.node]) {
         const Edge& e = edges[ei];
         Frame nx{nodeOf(e.e), fr.key.empty() ? e.surf : fr.key + " " + e.surf, fr.src + e.surf, fr.len + 1, fr.lat + e.lat};
-        const auto* found = m.pt.Find(nx.key);
-        if (found && !blocked(s, nx.node)) {
-          int& cnt = perSpan[{s, nx.node}];
-          for (const PhraseOpt& p : *found) {
-            if (cnt >= opt.maxOpts) break;
-            opts.push_back({s, nx.node, &p, nx.lat, false, false, nx.src});
-            ++cnt;
+        if (inPt)
+          if (const auto* found = m.pt.Find(nx.key); found && !blocked(s, nx.node)) {
+            int& cnt = perSpan[{s, nx.node}];
+            for (const PhraseOpt& p : *found) {
+              if (cnt >= opt.maxOpts) break;
+              opts.push_back({s, nx.node, &p, nx.lat, false, false, nx.src});
+              opts.back().len = nx.len;
+              ++cnt;
+            }
           }
-        }
-        if (found || nx.len == 1) stack.push_back(nx);  // keep extending (prefixes of longer phrases)
-        else if (nx.len < m.pt.maxLen()) stack.push_back(nx);
+        if (inTm && nx.len > m.pt.maxLen())  // whole sentences longer than any phrase: the memory
+          if (const auto* found = m.tm.Find(nx.key); found && !blocked(s, nx.node))
+            for (const PhraseOpt& p : *found) {
+              Option o{s, nx.node, &p, nx.lat, false, false, nx.src};
+              o.tm = true;
+              o.len = nx.len;
+              opts.push_back(o);
+            }
+        stack.push_back(nx);
       }
     }
   }
@@ -334,6 +354,8 @@ std::string Decoder::Translate(const std::string& line, const KoText& ko, const 
     f[kOov] = o.oov ? -10000 : 0;
     f[kLat] = o.lat;
     f[kGloss] = o.gloss ? 10000 : 0;
+    f[kTm] = o.tm ? 10000 : 0;
+    f[kRule] = o.rule ? 10000 : 0;
   };
 
   // ---- search
@@ -424,8 +446,8 @@ std::string Decoder::Translate(const std::string& line, const KoText& ko, const 
     for (int32_t x : backtrack(fin[0])) {
       const Option& o = opts[arena[x].opt];
       w << "\n#   " << o.src << " => " << o.p->tgt << "  [pef " << o.p->pef << " pfe " << o.p->pfe << " lef "
-        << o.p->lef << " lfe " << o.p->lfe << " n " << o.p->count << " lat " << o.lat << "] "
-        << (o.gloss ? "user:glossary" : o.rule ? "rule:oov" : o.oov ? "passthrough:oov" : o.p->count == 0 ? "passthrough" : m.pt.Prov(o.p->prov));
+        << o.p->lef << " lfe " << o.p->lfe << " n " << o.p->count << " lat " << o.lat << " k " << o.len << "] "
+        << (o.gloss ? "user:glossary" : o.tm ? m.tm.Prov(o.p->prov) : o.rule ? "rule:oov" : o.oov ? "passthrough:oov" : o.p->count == 0 ? "passthrough" : m.pt.Prov(o.p->prov));
     }
     for (const auto& n : notes) w << "\n# note " << n;
     res += w.str();

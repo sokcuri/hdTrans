@@ -22,7 +22,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import smtlib
 
-FEATS = ["lm", "pef", "pfe", "lef", "lfe", "phrase", "word", "oov", "lat", "gloss"]
+FEATS = ["lm", "pef", "pfe", "lef", "lfe", "phrase", "word", "oov", "lat", "gloss", "tm", "rule"]
 HD8SMT = os.environ.get("HD8SMT", os.path.join(smtlib.ROOT, "build", "mac", "poc08", "smt", "hd8smt"))
 
 
@@ -175,6 +175,7 @@ def main():
     ap.add_argument("--jobs", type=int, default=16)
     ap.add_argument("--out")
     ap.add_argument("--init")
+    ap.add_argument("--extra", default="", help="more decoder arguments, e.g. --rule-dicts DIR")
     a = ap.parse_args()
     out = a.out or os.path.join(a.model, "weights.tsv")
     ja = [l for l in open(a.ja, encoding="utf-8").read().split("\n")]
@@ -192,7 +193,7 @@ def main():
     for it in range(a.iters):
         wp = os.path.join(tmp, f"w{it}.tsv")
         write_weights(wp, w)
-        res = decode(a.model, ja, levels, wp, a.nbest, a.jobs)
+        res = decode(a.model, ja, levels, wp, a.nbest, a.jobs, a.extra.split())
         score = chrf_total([chrf_stats(b, r) for (b, _), r in zip(res, ko)])
         print(f"iter {it} chrF {score:.2f} weights " + " ".join(f"{k}={v:.3f}" for k, v in zip(FEATS, w)),
               file=sys.stderr, flush=True)

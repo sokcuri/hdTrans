@@ -6,6 +6,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace hd8::smt {
@@ -26,6 +27,7 @@ class PhraseTable {
   bool Load(const std::string& path, const Lm& lm, std::string* err);
   // Options of one source phrase, or null.
   const std::vector<PhraseOpt>* Find(const std::string& src) const;
+  bool HasPrefix(const std::string& src) const { return prefixes_.count(src) != 0; }
   const std::string& Prov(uint16_t id) const { return provs_[id]; }
   size_t sources() const { return map_.size(); }
   size_t rows() const { return rows_; }
@@ -33,6 +35,7 @@ class PhraseTable {
 
  private:
   std::unordered_map<std::string, std::vector<PhraseOpt>> map_;
+  std::unordered_set<std::string> prefixes_;  // every proper token prefix of a source phrase
   std::vector<std::string> provs_;
   size_t rows_ = 0;
   int maxLen_ = 1;

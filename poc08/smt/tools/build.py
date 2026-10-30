@@ -147,6 +147,8 @@ def main():
     if start <= 4:
         subprocess.run([PY, "-I", f"{HERE}/phrases.py", f"{W}/a.surf", f"{W}/a.tok", f"{W}/sym.al",
                         f"{a.out}/phrases.tsv", "--sig", a.sig, "--prov", a.prov, "--jobs", str(a.jobs)], check=True)
+        subprocess.run([PY, "-I", f"{HERE}/tm.py", f"{W}/a.surf", f"{W}/a.tok", f"{a.out}/tm.tsv", "--prov",
+                        a.prov.replace("smt:", "tm:")], check=True)
         log("phrases")
     if start <= 5:
         subprocess.run([PY, "-I", f"{HERE}/lm.py", f"{W}/a.tok", f"{a.out}/lm.bin", "--order", str(a.order),

@@ -59,6 +59,7 @@ bool PhraseTable::Load(const std::string& path, const Lm& lm, std::string* err) 
     int len = 1;
     for (char c : src) len += c == ' ';
     if (len > maxLen_) maxLen_ = len;
+    for (size_t sp = src.find(' '); sp != std::string::npos; sp = src.find(' ', sp + 1)) prefixes_.insert(src.substr(0, sp));
     map_[src].push_back(std::move(o));
     ++rows_;
   }
