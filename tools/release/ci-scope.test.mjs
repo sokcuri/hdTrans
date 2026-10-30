@@ -52,7 +52,8 @@ test('every path has one class', () => {
     ['AGENTS.md', 'docs'], ['CHANGELOG.md', 'docs'],
     ['docs/pipeline-layers.md', 'data'],
     ['include/core/engine.h', 'code'], ['include/core/hdtrans.h', 'code'], ['src/frontend/dictionary_version.cpp', 'code'],
-    ['src/frontend/module_dir.cpp', 'code'], ['src/core/word/select.cpp', 'code'], ['tests/unit/word/select_test.cpp', 'code'], ['tests/long_line.sh', 'code'],
+    ['src/frontend/module_dir.cpp', 'code'], ['src/core/word/select.cpp', 'core'], ['src/rulec/emit.cpp', 'core'],
+    ['tests/unit/word/select_test.cpp', 'core'], ['src/core/dict/builtin/classes.tsv', 'core'], ['tests/long_line.sh', 'code'],
     ['tools/rule-cases.sh', 'code'], ['tools/wasm_smoke.mjs', 'code'], ['src/wasm/main.cpp', 'code'],
     ['npm/package.json', 'code'], ['README.txt', 'code'], ['third-party.md', 'code'], ['LICENSE', 'code'],
   ]) {
@@ -68,6 +69,9 @@ test('the classes of a pull request choose its presets', () => {
     [['data', 'docs', 'release'], ['linux'], true],
     [['code'], ['linux', 'wasm'], true],
     [['code', 'data', 'web'], ['linux', 'wasm'], true],
+    [['core'], ['linux', 'windows-x86', 'wasm'], true],
+    [['core', 'code', 'data'], ['linux', 'windows-x86', 'wasm'], true],
+    [['core', 'windows'], ['linux', 'windows-x64', 'windows-x86', 'wasm'], true],
     [['windows'], ['linux', 'windows-x64', 'windows-x86'], true],
     [['windows', 'code'], ['linux', 'windows-x64', 'windows-x86', 'wasm'], true],
     [['docs'], [], false],
@@ -107,7 +111,8 @@ test('a pull request is scoped by the paths its merge commit changes', t => {
   for (const [after, presets, native] of [
     [{ 'web/src/page.ts': 'page\n', 'docs/web.md': 'web\n' }, ['wasm'], false],
     [{ 'dicts/base.tsv': 'a\tb\n', 'tests/rules/cases/a.tsv': 'a\tb\n' }, ['linux'], true],
-    [{ 'src/core/word/select.cpp': 'int f();\n' }, ['linux', 'wasm'], true],
+    [{ 'src/core/word/select.cpp': 'int f();\n' }, ['linux', 'windows-x86', 'wasm'], true],
+    [{ 'src/cli/main.cpp': 'int f();\n' }, ['linux', 'wasm'], true],
     [{ 'docs/build.md': 'build\n' }, [], false],
     [{ 'CMakeLists.txt': 'project(x)\n' }, allPresets, true],
   ]) {

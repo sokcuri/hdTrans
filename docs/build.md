@@ -183,7 +183,8 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   | 바뀐 경로 | 도는 것 |
   |---|---|
   | `CMakeLists.txt`, `CMakePresets.json`, `cmake/`, `third_party/`, `build.yml` | 모든 프리셋과 네이티브 테스트 |
-  | 그 밖의 코드(`src/`, `tests/unit/`, `tools/` 등) | `linux`, `wasm`, 네이티브 테스트 |
+  | `src/core/`, `src/rulec/`, `tests/unit/` | `linux`, `windows-x86`, `wasm`, 네이티브 테스트 |
+  | 그 밖의 코드(`src/cli/`, `src/frontend/`, `include/`, `tools/` 등) | `linux`, `wasm`, 네이티브 테스트 |
   | `src/cshared/`, `src/j2kengine/`, `src/gui/`, `tests/host/`, `tools/build.ps1`, 어느 한쪽 커밋에 `_WIN32`, `_WIN64`, `_MSC_VER`이 있는 C/C++ 파일 | `linux`, `windows-x64`, `windows-x86`, 네이티브 테스트 |
   | `dicts/`, `tests/rules/`, `tests/variants/`, `tests/fuzz/regressions/`, `examples/`, `ehnd/`, `user/`, `web/examples*`, `hdtrans.config.example.yaml`, 단위 테스트가 읽는 `docs/pipeline-layers.md` | `linux`, 네이티브 테스트 |
   | 그 밖의 `web/` | `wasm` |

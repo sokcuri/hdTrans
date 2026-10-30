@@ -11,6 +11,8 @@ const defaultGit = (...args) => execFileSync('git', args, { encoding: 'utf8', ma
 const windowsDirs = ['src/cshared/', 'src/j2kengine/', 'src/gui/', 'tests/host/'];
 const windowsFiles = ['tools/build.ps1'];
 const windowsMacro = '_WIN32|_WIN64|_MSC_VER';
+// The engine, the rule compiler and the unit tests: windows-x86 builds them on pull requests too.
+const coreDirs = ['src/core/', 'src/rulec/', 'tests/unit/'];
 const compiled = /\.(c|cc|cpp|h|hpp|def|rc|manifest)$/;
 
 // Inputs of every preset: the build itself.
@@ -29,7 +31,7 @@ const docsFiles = ['README.md', 'AGENTS.md', 'CLAUDE.md', 'SECURITY.md', 'CHANGE
 
 const under = (path, dirs) => dirs.some(dir => path.startsWith(dir));
 
-// One of build, windows, data, web, release, docs or code.
+// One of build, windows, data, web, release, docs, core or code.
 export function pathClass(path) {
   if (buildFiles.includes(path) || under(path, buildDirs)) return 'build';
   if (windowsFiles.includes(path) || under(path, windowsDirs)) return 'windows';
@@ -37,24 +39,27 @@ export function pathClass(path) {
   if (path.startsWith('web/')) return 'web';
   if (under(path, releaseDirs)) return 'release';
   if (docsFiles.includes(path) || under(path, docsDirs)) return 'docs';
+  if (under(path, coreDirs)) return 'core';
   return 'code';
 }
 
 export const fullScope = reason => ({ presets: [...allPresets], native: true, reason });
 
 // The jobs for the classes of the changed paths: the linux build and the sanitizer and fuzz jobs
-// for any change the native tests read, wasm for compiled code and the web page, Windows for
-// Windows code; mac only in full runs.
+// for any change the native tests read, wasm for compiled code and the web page, both Windows
+// presets for Windows code and windows-x86 for core code; mac only in full runs.
 export function scopeOf(classes) {
   if (classes.size === 0) return fullScope('no changed paths found; every job runs');
   if (classes.has('build')) return fullScope('the build changed; every job runs');
-  const code = classes.has('code');
+  const core = classes.has('core');
+  const code = core || classes.has('code');
   const windows = classes.has('windows');
   const native = code || windows || classes.has('data');
   const presets = allPresets.filter(preset =>
     (preset === 'linux' && native) ||
     (preset === 'wasm' && (code || classes.has('web'))) ||
-    (preset.startsWith('windows-') && windows));
+    (preset === 'windows-x86' && (windows || core)) ||
+    (preset === 'windows-x64' && windows));
   const reason = `changed: ${[...classes].sort().join(', ')}; presets: ${presets.join(', ') || 'none'}` +
     `${native ? '' : '; no native tests'}`;
   return { presets, native, reason };
@@ -92,7 +97,7 @@ export function ciScope({ context, git = defaultGit }) {
     const base = git('rev-parse', '--verify', 'HEAD^1');
     const paths = git('diff', '--no-renames', '--name-only', base, 'HEAD').split('\n').filter(Boolean);
     const classes = new Set(paths.map(pathClass));
-    const windows = windowsSections(git, base, paths.filter(path => pathClass(path) === 'code'));
+    const windows = windowsSections(git, base, paths.filter(path => ['code', 'core'].includes(pathClass(path))));
     if (windows.length) classes.add('windows');
     const scope = scopeOf(classes);
     if (windows.length) scope.reason += `; Windows sections in ${windows.join(', ')}`;
