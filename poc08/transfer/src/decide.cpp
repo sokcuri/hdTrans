@@ -172,9 +172,91 @@ std::vector<DecisionPoint> FindPoints(const Table& t, const LineIR& v) {
     else if (x.In(i, "dp.youni") && x.In(i + 1, "ni.cop")) out.push_back({i, "youni"});
     else if (x.In(i, "dp.tokoro") && x.In(i + 1, "dp.de") && !(i + 2 < x.n && x.Verb(i + 2)))
       out.push_back({i, "tokorode"});
+    else if (x.In(i, "neg")) out.push_back({i, "neg"});
   }
   return out;
 }
+
+namespace {
+
+// The last characters of a token's surface (a potential verb ends in え-row kana: 書け, 繋げ, 見られ).
+std::string Tail(const std::string& s, size_t chars) {
+  size_t at = s.size(), n = 0;
+  while (at > 0 && n < chars) {
+    --at;
+    while (at > 0 && (static_cast<unsigned char>(s[at]) & 0xC0) == 0x80) --at;
+    ++n;
+  }
+  return s.substr(at);
+}
+
+// Features of a negation point: its own form, the words around it, what closes the sentence after it
+// (particles, question, punctuation), the predicate it negates and the clause's IR fields (W2: force,
+// negFn, polite, link).
+void NegFeatures(const V& x, int i, std::vector<std::string>& f) {
+  const Tok& self = x.T(i);
+  f.push_back("self=" + self.lemma + "/" + self.pos);
+  f.push_back("selfform=" + x.Form(i));
+  f.push_back("selfsurf=" + self.surf);
+  Window(x, i, -3, 3, f);
+  // the words before the point, as one key (の+だ, て+は, なけれ+ば …)
+  std::string before;
+  for (int k = std::max(0, i - 2); k < i; ++k) before += x.T(k).lemma + "+";
+  f.push_back("before=" + before);
+  // what follows up to the end of the sentence (at most four words)
+  std::string after;
+  int k = i + 1, words = 0;
+  bool q = false, sym = false;
+  for (; k < x.n && words < 4; ++k) {
+    if (x.In(k, "q")) q = true;
+    if (x.In(k, "sentend")) {
+      f.push_back("end=" + x.T(k).surf);
+      sym = true;
+      break;
+    }
+    after += x.T(k).lemma + "+";
+    ++words;
+  }
+  f.push_back("after=" + after);
+  if (k >= x.n && !sym) f.push_back("end=#");
+  if (q) f.push_back("q");
+  if (words == 0) f.push_back("last");
+  // the negated predicate: the nearest content word before the point
+  int p = i - 1;
+  while (p >= 0 && (x.T(p).pos == "aux" || x.T(p).pos.rfind("p_", 0) == 0)) --p;
+  if (p >= 0) {
+    const Tok& h = x.T(p);
+    f.push_back("hpos=" + h.pos);
+    f.push_back("hlem=" + h.lemma);
+    f.push_back("hform=" + x.Form(p));
+    f.push_back("htail=" + Tail(h.surf, 1));
+    f.push_back("htail2=" + Tail(h.surf, 2));
+    if (x.Verb(p)) f.push_back("hvol=" + x.Vol(p));
+    f.push_back("hdist=" + std::to_string(std::min(i - p, 4)));
+  } else {
+    f.push_back("hpos=#");
+  }
+  if (i > 0) f.push_back("p1form=" + x.Form(i - 1));
+  if (i > 0 && x.In(i - 1, "pass")) f.push_back("p1pass");
+  if (i > 0 && x.In(i - 1, "neg")) f.push_back("p1neg");
+  if (x.In(i + 1, "neg") || x.In(i + 2, "neg")) f.push_back("nextneg");
+  const int cl = x.ClauseOf(i);
+  if (cl >= 0) {
+    const Clause& c = x.v.clauses[static_cast<size_t>(cl)];
+    f.push_back("negfn=" + c.negFn);
+    f.push_back("force=" + c.force);
+    f.push_back("link=" + c.link);
+    if (!c.polite.empty()) f.push_back("cpolite=" + c.polite);
+    if (c.tense == "past") f.push_back("cpast");
+    if (c.voice != "active") f.push_back("cvoice=" + c.voice);
+    if (!c.bene.empty() && c.bene != "none") f.push_back("cbene=" + c.bene);
+    for (const auto& m : c.modality) f.push_back("cmod=" + m);
+  } else {
+    f.push_back("noclause");
+  }
+}
+
+}  // namespace
 
 std::vector<std::string> Features(const Table& t, const LineIR& v, const DecisionPoint& p) {
   V x{t, v, static_cast<int>(v.toks.size())};
@@ -183,6 +265,10 @@ std::vector<std::string> Features(const Table& t, const LineIR& v, const Decisio
   if (i < 0 || i >= x.n) return f;
   if (InQuote(x, i)) f.push_back("inq");
   if (SentenceHas(x, i, "polite")) f.push_back("polite");
+  if (p.family == "neg") {
+    NegFeatures(x, i, f);
+    return f;
+  }
   if (p.family == "voice") {
     int vb = i - 1;
     f.push_back("aux=" + x.T(i).lemma);

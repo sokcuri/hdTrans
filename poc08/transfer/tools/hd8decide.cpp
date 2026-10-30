@@ -3,6 +3,8 @@
 //   hd8decide --data DIR --dump < ir.jsonl
 //       one line per decision point: case, token, family, src byte begin, features (space-separated)
 //   hd8decide --data DIR --decide BASE.tsv < ir.jsonl
+//   --docs: case keys are <document index>:<case> (for files of many documents, e.g. hdtrans08 --each)
+//   --deciders DIR2: also load the decider tables of DIR2/decide (e.g. the QE gate's negation classifier)
 //       BASE.tsv: case<TAB>src-begin<TAB>0.7.5 class; one JSON line per decision point with the class,
 //       the 0.7.5 class it kept or overrode, the margin and each feature's contribution
 // DIR is the transfer data folder. Exit: 0 ok, 2 usage or load error.
@@ -18,12 +20,14 @@
 #include "ir/json.h"
 
 int main(int argc, char** argv) {
-  std::string data, baseFile;
-  bool dump = false;
+  std::string data, baseFile, extra;
+  bool dump = false, docKeys = false;
   for (int i = 1; i < argc; ++i) {
     std::string a = argv[i];
     if (a == "--data" && i + 1 < argc) data = argv[++i];
     else if (a == "--dump") dump = true;
+    else if (a == "--docs") docKeys = true;
+    else if (a == "--deciders" && i + 1 < argc) extra = argv[++i];
     else if (a == "--decide" && i + 1 < argc) baseFile = argv[++i];
     else {
       std::cerr << "usage: hd8decide --data DIR (--dump | --decide BASE.tsv) < ir.jsonl\n";
@@ -39,6 +43,7 @@ int main(int argc, char** argv) {
   hd08::xfer::DecideData dd;
   if (!dump) {
     hd08::xfer::LoadDeciders(data, dd);
+    if (!extra.empty()) hd08::xfer::LoadDeciders(extra, dd);
     for (const auto& e : dd.errors) std::cerr << e << "\n";
   }
   std::map<std::string, std::string> base;
@@ -61,9 +66,11 @@ int main(int argc, char** argv) {
     std::cerr << "hd8decide: " << err << "\n";
     return 2;
   }
-  for (const auto& doc : docs)
-    for (const auto& line : doc.lines) {
+  for (size_t di = 0; di < docs.size(); ++di)
+    for (const auto& line : docs[di].lines) {
+      const auto& doc = docs[di];
       auto v = hd08::xfer::MakeView(doc, line, t);
+      if (docKeys) v.key = std::to_string(di) + ":" + v.key;
       for (const auto& p : hd08::xfer::FindPoints(t, v)) {
         auto f = hd08::xfer::Features(t, v, p);
         std::string begin = std::to_string(v.toks[static_cast<size_t>(p.tok)].src.begin);
