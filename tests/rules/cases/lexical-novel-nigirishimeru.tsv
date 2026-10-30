@@ -1,0 +1,22 @@
+# 규칙: LEX-3, LEX-12
+rule	input	expected	kind	layer
+dict:novel-verbs:3	強く手を握りしめた。	강하게 손을 움켜쥐었다.	fix	defaults
+dict:novel-verbs:5	玉座を摑みしめた。	옥좌를 움켜쥐었다.	fix	defaults
+dict:novel-verbs:1	力強く拳を握りしめる彼女を見つめた。	힘차게 주먹을 움켜쥐는 그녀를 바라보았다.	fix	defaults
+dict:novel-verbs:3	私の手を握りしめた。	내 손을 움켜쥐었다.	fix	defaults
+dict:novel-verbs:1	拳を握りしめ、扉を叩いた。	주먹을 움켜쥐어 문을 두드렸다.	fix	defaults
+dict:novel-verbs:2	グッと拳を握り締めながら思った。	꾹 주먹을 움켜쥐면서 생각했다.	fix	defaults
+dict:novel-verbs:1	拳を握りしめながら決意を新たにする。	주먹을 움켜쥐면서 결의를 새롭게 한다.	fix	defaults
+dict:novel-verbs:3	その人の手を握りしめたまま泣いた。	그 사람의 손을 움켜쥔 채로 울었다.	fix	defaults
+dict:novel-verbs:2	拳を握り締めて立ち上がった。	주먹을 움켜쥐어 일어섰다.	fix	defaults
+dict:novel-verbs:4	彼の手を握り締めた。	그의 손을 움켜쥐었다.	fix	defaults
+dict:novel-verbs:6	剣の柄を掴みしめた。	검의 자루를 움켜쥐었다.	fix	defaults
+dict:novel-verbs:7	袖をつかみしめた。	소매를 움켜쥐었다.	fix	defaults
+dict:novel-verbs:1	膝の上で握りしめた拳	무릎 위에서 움켜쥔 주먹	keep	defaults
+dict:novel-verbs:1	拳を強く握りしめた。	주먹을 강하게 움켜쥐었다.	keep	defaults
+dict:novel-verbs:2	右手一本で握り締めた。	오른손 한 개로 꽉 쥐었다.	keep	defaults
+dict:novel-verbs:1	スマホを握りしめたまま	스마트폰을 움켜쥔 채로	keep	defaults
+dict:novel-verbs:1	拳を握る。	주먹을 쥔다.	keep	defaults
+dict:novel-verbs:3	手を握った。	손을 잡았다.	keep	defaults
+dict:novel-verbs:1	拳を握って耐えた。	주먹을 쥐어 참았다.	keep	defaults
+dict:novel-verbs:3	彼女の手を握る。	그녀의 손을 잡는다.	keep	defaults
