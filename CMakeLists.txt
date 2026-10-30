@@ -479,3 +479,9 @@ else()
     target_include_directories(hdtrans_shared PRIVATE src)
     target_link_libraries(hdtrans_shared PRIVATE hdtrans ${CMAKE_DL_LIBS})
 endif()
+
+# The 0.8 proof of concept (poc08/): the hdtrans08 CLI next to hdtrans.
+option(HDTRANS_POC08 "Build the 0.8 proof of concept (hdtrans08)" ON)
+if(HDTRANS_POC08 AND NOT EMSCRIPTEN)
+    add_subdirectory(poc08)
+endif()

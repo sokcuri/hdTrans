@@ -1,0 +1,11 @@
+#! risk
+# evidence kind	prior P(wrong) until the calibration fit on dev replaces it (DESIGN §6)
+lexical	0.05
+cued	0.06
+default	0.20
+unmatched-form	0.50
+fallback	0.50
+dropped	0.50
+name-guess	0.30
+user	0.02
+example	0.10

@@ -1,0 +1,8 @@
+#! invariants
+# kind	value: neg = a Korean lemma that carries a negation by itself (I1)
+neg	없다
+neg	모르다
+neg	아니다
+neg	싫다
+neg	못하다
+neg	않다
