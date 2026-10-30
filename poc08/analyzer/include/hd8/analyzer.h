@@ -60,7 +60,7 @@ struct Options {
   bool margins = true;      // compute margins and alternatives (backward pass)
   float altTau = 0.5f;      // keep alternatives within this cost of the best path
   bool longUnits = true;    // use overlay arcs
-  bool splitLongUnits = false;  // emit the short-unit parts of a long unit instead of the unit
+  bool splitLongUnits = true;   // emit the short-unit parts of a long unit (false: the unit as one token)
 };
 
 // Segmentation hints for a host segmenter (the 0.7.x word search): where words may end, and which

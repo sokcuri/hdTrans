@@ -1,8 +1,8 @@
 // hd8ana: build, run, evaluate and train the 0.8 analyzer.
 //   hd8ana pack DATA_DIR OUT.bin
 //   hd8ana pack-long CORE.bin LONG.tsv OUT.bin
-//   hd8ana run CORE.bin [-l LONG.bin] [--split] [--format json|wakati|tsv]   (stdin → stdout)
-//   hd8ana eval CORE.bin [-l LONG.bin] [--split] [--no-derive] GOLD...        (tag.py format)
+//   hd8ana run CORE.bin [-l LONG.bin] [--units] [--format json|wakati|tsv]   (stdin → stdout; --units keeps long units whole)
+//   hd8ana eval CORE.bin [-l LONG.bin] [--units] [--no-derive] GOLD...        (tag.py format)
 //   hd8ana bench CORE.bin FILE [-l LONG.bin] [--no-margins]
 //   hd8ana train DATA_DIR SILVER OUT_DATA_DIR [--epochs N] [--step S] [--limit L]
 //   hd8ana longunits CORE.bin KEYS.tsv OUT.tsv [--bonus NATS]
@@ -166,7 +166,7 @@ int CmdPackLong(const Args& a) {
 
 Options OptsFrom(const Args& a) {
   Options o;
-  o.splitLongUnits = a.Has("--split");
+  o.splitLongUnits = !a.Has("--units");
   o.margins = !a.Has("--no-margins");
   o.longUnits = !a.Has("--no-long");
   return o;
@@ -178,6 +178,10 @@ int CmdRun(const Args& a) {
   Analyzer an;
   if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
   Options opt = OptsFrom(a);
+  if (a.Has("--no-derive")) {
+    an.mutableModel()->rules.clear();
+    an.mutableModel()->stutterRule = -1;
+  }
   std::string fmt = a.Get("--format", "json");
   auto ws = NewWorkspace();
   std::string line;
@@ -269,7 +273,10 @@ int CmdEval(const Args& a) {
   Analyzer an;
   if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
   Options opt = OptsFrom(a);
-  if (a.Has("--no-derive")) an.mutableModel()->rules.clear();
+  if (a.Has("--no-derive")) {
+    an.mutableModel()->rules.clear();
+    an.mutableModel()->stutterRule = -1;
+  }
   opt.margins = false;
   std::FILE* diff = nullptr;
   if (a.Has("--diff")) diff = std::fopen(a.Get("--diff").c_str(), "w");
