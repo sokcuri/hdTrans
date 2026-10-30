@@ -656,7 +656,9 @@ soft에서 「」를 쓰지 않는 글(한 줄씩 번역하는 게임 대사가 
 되고(うるさい うるせえ, すごい すげー, でかい でけえ, こわい こええ, 危ない 危ねえ, ありがたい ありがてえ), u단 뒤의 い는 i단과 い, ぃ,
 ー가 된다(寒い さみい, 悪い わりぃ, だるい だりい). 한자 어간은 뒤에 え, ぇ를 바로 붙이거나(若え, 痛ぇ, 面白え, 汚え) 줄인 가나를
 적는다(汚ねえ, 痛てえ). 동사, 명사 뒤의 ない를 ねえ로 말한 꼴도 같다(分からねえ, 間違いねえ, 足りねえ). 바람의 たい를 てえ로 말한
-꼴은 연용형이 て형과 다른 동사 뒤에서만 たい로 읽는다(行きてえ, 食いてぇ, やりてー; て형을 늘인 것일 수 있는 見てえ, 話してぇ는 그대로).
+꼴은 연용형이 て형과 다른 동사 뒤에서만 たい로 읽는다(行きてえ, 食いてぇ, やりてー; て형을 늘인 것일 수 있는 見てえ, 話してぇ는 그대로). 낱말 뒤의 みてえ는
+みたい로 읽는다(経営者だったみてえ, 水みてぇに, 会ってみてえ). 말머리, を, が, は, に, へ, も 뒤와 て형 뒤에 장음 부호로만 늘인
+みてー는 て형을 늘인 것으로 둔다(みてー！, これをみてえ, みてみてー). みてえ 뒤에는 아래에 적은 말 말고 に, だ, で, ね도 온다.
 형용사 어간 뒤에 っ를 붙여 끊은 외침도 그 형용사다(寒っ, 浅っ, 面白っ！, 말머리의 くさっ！, はやっ！). e단을 ー, ～, ぇ로 늘인
 꼴이 い로 끝나는 낱말이면 그 낱말이다(きれー きれい). 가타카나로 쓴 낱말은 e단일 때 낱말 전체가 그 꼴이어야 한다(スゲェ,
 ヤベー).
@@ -695,5 +697,6 @@ soft에서 「」를 쓰지 않는 글(한 줄씩 번역하는 게임 대사가 
 사례: `tests/rules/cases/colloquial-fused-adjective.tsv`, `tests/rules/cases/colloquial-fused-kanji-adjective.tsv`,
 `tests/rules/cases/colloquial-fused-ui-adjective.tsv`, `tests/rules/cases/colloquial-fused-negative.tsv`,
 `tests/rules/cases/colloquial-fused-keep.tsv`, `tests/rules/cases/colloquial-fused-wish.tsv`,
+`tests/rules/cases/colloquial-likeness-mitee.tsv`,
 `tests/rules/cases/colloquial-clipped-adjective.tsv`,
 `tests/rules/speech-strict/casual-markers.tsv`, `tests/rules/speech-soft/compose-speech-unquoted.tsv`

@@ -915,6 +915,15 @@ HD_TEST(pipeline_rewrite_casual_adjectives) {
         {"最浅っ！", "最浅っ！"},  // inside a word
         {"もっと浅っす", "もっと浅っす"},
         {"おめぇ、何してんだ", "おめぇ、何してんだ"},  // a word spelled with the small vowel
+        // みてえ after a word is みたい; みて drawn out where a clause starts, after を or as a て form
+        // drawn with dashes stays.
+        {"経営者だったみてえだな", "経営者だったみたいだな"},
+        {"水みてぇに飲む", "水みたいに飲む"},
+        {"会ってみてえええ！", "会ってみたい！"},
+        {"手紙みてーな話", "手紙みたいな話"},
+        {"みてえ！", "みてえ！"},
+        {"これをみてえ", "これをみてえ"},
+        {"あ、みてみてー", "あ、みてみてー"},
     };
     for (const auto& c : cases) {
         HD_CHECK_EQ(internal::RewriteCasualAdjectives(c.in, ctx, *snap), std::string(c.want));
