@@ -17007,7 +17007,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 拐引	납치&AV@	M429			GN						かいいん	w:16963
 拓植	개척	N110		Hd	GN				llm		たくしょく	w:16964
 拓植	개척&AV@	M429			GN				llm		たくしょく	w:16965
-拘らず	관계없이	A9D0			GN				llm		かかわらず	w:16966
+拘らず	관계없이	A9D0	XXX		GN				llm		かかわらず	w:16966
 拘束時間	구속 시간	N110	UMe	Tm	GN				llm		こうそくじかん	w:16967
 招かれざる客	불청객	N110			GN						まねかれざるきゃく	w:16968
 招待券	초대권	N110			GN						しょうたいけん	w:16969
@@ -25134,7 +25134,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 閘門	갑문	N110			GN						こうもん	w:25083
 関らず	에도 불구하고	A9D0			GN				xxx llm		かかわらず	w:25084
 関らず	에 관계없이	A9D0			GN				llm		かかわらず	w:25085
-関わらず	관계없이	A9D0			GN				llm		かかわらず	w:25086
+関わらず	관계없이	A9D0	XXX		GN				llm		かかわらず	w:25086
 関わり合	얽&AW@	M420			GN				llm		かかわりあう	w:25087
 関係代数	관계대수	N110			GN						かんけいだいすう	w:25088
 関係演算子	관계연산자	N110	UTt		GN						かんけいえんざんし	w:25089

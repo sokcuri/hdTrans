@@ -1,0 +1,14 @@
+#! layer=words
+# 양보의 にも関わらず: 한자로 쓴 関わらず, 拘わらず, 拘らず도 にも 뒤에서는 `불구하고`
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+関わらず	불구하고	A9D0			GN	1172	||2 &&3 P-1== "4**" U-1== "にも" M-1== "56*" &&2 S-1== "も" ||2 U-2== "Rのに" S-2== "Rのに"	동사의 'にも' 어미 뒤나 のに와 も 뒤에 오는 '関わらず'를 양보 표현 '불구하고'로 고른다.			かかわらず	nimo-kakawarazu:1
+拘わらず	불구하고	E300			GN	1172	||2 &&3 P-1== "4**" U-1== "にも" M-1== "56*" &&2 S-1== "も" ||2 U-2== "Rのに" S-2== "Rのに"	동사의 'にも' 어미 뒤나 のに와 も 뒤에 오는 '拘わらず'를 양보 표현 '불구하고'로 고른다.			かかわらず	nimo-kakawarazu:2
+拘らず	불구하고	A9D0			GN	1172	||2 &&3 P-1== "4**" U-1== "にも" M-1== "56*" &&2 S-1== "も" ||2 U-2== "Rのに" S-2== "Rのに"	동사의 'にも' 어미 뒤나 のに와 も 뒤에 오는 '拘らず'를 양보 표현 '불구하고'로 고른다.			かかわらず	nimo-kakawarazu:3
+にも拘わらず	B에도 불구하고	S500			GN							nimo-kakawarazu:4
+にも拘らず	B에도 불구하고	S500			GN							nimo-kakawarazu:5
+いにも関わらず	8에도 불구하고	T500			GN							nimo-kakawarazu:6
+いにも拘わらず	8에도 불구하고	T500			GN							nimo-kakawarazu:7
+いにも拘らず	8에도 불구하고	T500			GN							nimo-kakawarazu:8
+それにも関わらず	그럼에도 불구하고	C300			GN							nimo-kakawarazu:9
+それにも拘わらず	그럼에도 불구하고	C300			GN							nimo-kakawarazu:10
+それにも拘らず	그럼에도 불구하고	C300			GN							nimo-kakawarazu:11
