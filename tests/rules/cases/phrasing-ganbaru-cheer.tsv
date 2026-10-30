@@ -1,4 +1,5 @@
 # 권유, 의지, 부탁의 頑張る는 힘내다
+# 규칙: LEX-87
 rule	input	expected	kind	layer
 dict:jisjk:94209	頑張りましょう！	힘냅시다!	fix	local
 dict:jisjk:94209	明日も頑張りましょう！	내일도 힘냅시다!	fix	local
@@ -29,3 +30,5 @@ dict:jisjk:94209	頑張ってよ！	힘내!	fix	local
 dict:jisjk:94209	頑張って。	힘내.	keep	local
 dict:jisjk:344525	がんばろうと思う。	열심히 하려고 한다.	fix	local
 dict:jisjk:344525	がんばってる。	열심히 하고 있다.	fix	local
+dict:jisjk:94209	さ　お務めを頑張りましょう	자 의무를 노력합시다	keep	local
+dict:jisjk:94209	「私達は、ビラ配りを頑張ろう」	「저희들은, 전단지 배포를 노력하자」	keep	local
