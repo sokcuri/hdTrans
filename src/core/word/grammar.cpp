@@ -1,11 +1,14 @@
 // Grammar passes of the text path: the readings of a verb's られ, and the conjugating
 // targets of passive verbs that have no static family.
 #include <algorithm>
+#include <optional>
 #include <span>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
+#include "core/dict/char_readings.h"
 #include "core/dict/classes.h"
 #include "core/output/compose.h"
 #include "core/output/korean.h"
@@ -2530,13 +2533,71 @@ std::string InitialSound(std::string_view s) {
     return out;
 }
 
+// For a one-kanji item whose reading is 렬 or 률 (列, 烈, 裂, 劣, 率, 律) and that is read as
+// that syllable in either spelling, the pair {열, 렬} or {율, 률}; none for another item.
+std::optional<std::pair<std::string_view, std::string_view>> LiquidReading(const Item* it) {
+    if (it->selected < 0) return std::nullopt;
+    const std::string_view s = it->group->surface;
+    const text::Rune r = text::DecodeRune(s);
+    if (r.size != s.size()) return std::nullopt;
+    const auto reading = dict::Written(r.cp);
+    if (!reading) return std::nullopt;
+    std::pair<std::string_view, std::string_view> pair;
+    if (*reading == U'렬') pair = {"열", "렬"};
+    else if (*reading == U'률') pair = {"율", "률"};
+    else return std::nullopt;
+    const std::string_view target = it->EntryText(it->selected);
+    if (target != pair.first && target != pair.second) return std::nullopt;
+    return pair;
+}
+
+// Whether the surface s ends in a kanji other than a numeral or in katakana: a word a Sino-Korean
+// reading joins as the next part of a compound (進行率, ドロップ率; not 二列, 律 after kana).
+bool SinoOrLoanEnd(std::string_view s) {
+    if (s.empty() || NumberSurface(s)) return false;
+    const char32_t r = DecodeLastRune(s).cp;
+    if (r == U'ー' || (r >= U'ァ' && r <= U'ヺ') || (r >= 0xFF66 && r <= 0xFF9F)) return true;
+    return text::IsKanji(r) && std::u32string_view(U"一二三四五六七八九十百千万億〇両").find(r) == std::u32string_view::npos;
+}
+
+// The Hangul syllable that ends the Korean of the word p, 0 when it ends in something else.
+char32_t LastSyllable(Flusher& f, const Item* p) {
+    if (p->selected < 0) return 0;
+    const std::string lemma = ItemLemma(f, p, p->selected);
+    if (lemma.empty()) return 0;
+    const char32_t last = DecodeLastRune(lemma).cp;
+    return text::Final(last) >= 0 ? last : 0;
+}
+
 }  // namespace
 
 // The Sino-Korean reading that starts a word follows the initial sound rule (隆書 륭서 →
 // 융서, 林道 림도 → 임도); one that follows another Sino-Korean reading, a letter, a digit or a
-// mask stays (興隆 흥륭, ○年 ○년).
+// mask stays (興隆 흥륭, ○年 ○년). A reading 렬 or 률 joined to the end of a word is written 열,
+// 율 after a vowel or ㄴ and 렬, 률 after another final (陳列 진열, 進行率 진행률, ドロップ率 드롭률).
 void InitialSoundRule(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (const auto liquid = LiquidReading(it)) {
+            const Item* p = it->prev;
+            // A count (二列 이 열) is not a word the reading joins.
+            const bool joined = p != nullptr && p->selected >= 0 && At(p->Code(p->selected), 0) == '1' &&
+                                SinoOrLoanEnd(p->group->surface) &&
+                                ((p->tokenIndex == it->tokenIndex && p->start + p->length == it->start) ||
+                                 (p->tokenIndex + 1 == it->tokenIndex && it->start == 0 &&
+                                  p->start + p->length == static_cast<int>(p->text.size())));
+            if (joined) {
+                if (const char32_t last = LastSyllable(f, p); last != 0) {
+                    const int final = text::Final(last);
+                    const std::string_view target =
+                        final == text::kFinalNone || final == text::kFinalNieun ? liquid->first : liquid->second;
+                    if (target != it->EntryText(it->selected)) {
+                        it->AssignEntrySurface(it->selected, target, {Provenance::Rewrite});
+                        it->choice = {Provenance::Rewrite};
+                    }
+                }
+                continue;
+            }
+        }
         if (!OnReading(it)) continue;
         // A word starts after punctuation, a particle or the start of its token, but not
         // after the ・ of a word spelled out (謹・賀・新・年).

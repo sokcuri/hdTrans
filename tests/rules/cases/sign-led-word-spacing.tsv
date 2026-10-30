@@ -6,7 +6,7 @@ compose:sign-number-noun	回復速度+1	회복 속도+1	fix	compose
 compose:sign-number-noun	防御+1、魔力+2	방어+1, 마력+2	fix	compose
 compose:sign-number-noun	装備+3	장비+3	fix	compose
 compose:sign-number-noun	攻撃力+10%	공격력+10%	fix	compose
-compose:sign-number-noun	命中率+5%	명중율+5%	fix	compose
+compose:sign-number-noun	命中率+5%	명중률+5%	fix	compose
 compose:sign-number-noun	経験値+20%	경험치+20%	fix	compose
 compose:sign-number-noun	移動速度+1	이동 속도+1	fix	compose
 compose:sign-number-noun	鋼の鎧+5を装備した	강철의 갑옷+5를 장비했다	fix	compose
