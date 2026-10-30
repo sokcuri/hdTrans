@@ -1,0 +1,24 @@
+rule	input	expected	kind	layer
+sense:明かり	明かり消して。	has:불 꺼	fix	senses
+sense:明かり	明かりがついた。	has:불이 켜졌다	fix	senses
+sense:明かり	明かりをつけろ！うわっ！	has:불을 켜라	fix	senses
+sense:明かり	明かりを消して、ベッドに入る	has:불을 끄고	fix	senses
+sense:明かり	その時、会場の明かりが消えた。	has:불이 꺼졌다	fix	senses
+sense:明かり	夜になると、町の明かりが一つずつ消えていった	has:불이 하나씩	fix	senses
+sense:明かり	２階の部屋の明かりだけつけるわ	has:불만 켤게	fix	senses
+sense:明かり	「いまから、会場の明かりを消します。」	has:불을 끕니다	fix	senses
+sense:明かり	明かりも消えていましたし毛布	has:불도 꺼져	fix	senses
+sense:明かり	さ、明かりをつけて。	has:불을 켜	fix	senses
+sense:明かり	｢対象者は 明かりがついた部屋の窓を閉め	has:불이 켜진	fix	senses
+sense:明かり	書いているはずなのに 部屋の明かりは消えていた＞	has:불은 꺼져	fix	senses
+sense:明かり	兵士)侵入者だ 電源を入れろ明かりをつけるんだ！	has:불을 켜는	fix	senses
+sense:灯り	例えば五階は一切灯りがつかないので夜は真っ暗	has:불이 켜지지	fix	senses
+sense:電気	空気が汚れてるし夜も電気がついてるし	has:불이 켜져	fix	senses
+sense:電気	(電気がつく音)	has:불이 켜지는	fix	senses
+sense:電気	当然のように、部屋の電気は消えていた。	has:불은 꺼져	keep	senses
+sense:明かり	明かりが見える。	has:빛이 보인다	keep	senses
+sense:明かり	星明りがあれば視界には困らない	has:빛이 있으면	keep	senses
+dict:novel-light:1	電気が消えて？今はパニクって	has:불이 꺼져	fix	global-stem
+dict:novel-light:1	(テレビが消える音)	has:꺼지는	fix	global-stem
+dict:novel-light:1	姿が消えた。	has:사라졌다	keep	global-stem
+dict:novel-light:1	魔物の気配が消えた。	has:사라졌다	keep	global-stem

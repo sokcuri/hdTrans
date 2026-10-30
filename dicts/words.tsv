@@ -19508,7 +19508,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 火車	화차	N110			GN						かしゃ	w:19460
 灯し	등불	N110	VPe		GN				llm		あかし	w:19461
 灯し火	불빛	N110			GN						ともしび	w:19462
-灯り	등불	N110			GN				xxx llm			w:19463
+灯り	등불	N110	VEl		GN				xxx llm			w:19463
 灯り	전등불	N110			GN						あかり	w:19464
 灯台	등대	N110			GN				xxx		とうだい	w:19465
 灯台	등잔대	N110	VPe		GN				llm		とうだい	w:19466
