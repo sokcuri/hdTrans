@@ -1,7 +1,7 @@
 # 규칙: SPC-8
 rule	input	expected	kind	layer
 dict:novel-archaic-copula:4	「木下松之助にございます。」	「키노시타 마쓰노스케입니다.」	fix	defaults
-dict:novel-archaic-copula:4	「三つ目。厠にございます」	「세 번째. 측입니다」	fix	defaults
+dict:novel-archaic-copula:4	「三つ目。厠にございます」	「세 번째. 뒷간입니다」	fix	defaults
 dict:novel-archaic-copula:4	提督様、新造艦、完成にございます。	제독님, 신조함, 완성입니다.	fix	defaults
 dict:novel-archaic-copula:4	「ありがたき幸せにございます、陛下」	「더없는 영광입니다, 폐하」	fix	defaults
 dict:novel-archaic-copula:4	「仰る通りにございます。」	「말씀하신 대로입니다.」	fix	defaults
