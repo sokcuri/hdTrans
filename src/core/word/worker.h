@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "core/word/analyze.h"
+#include "core/word/boundaries.h"
 #include "core/word/item.h"
 #include "core/word/journal.h"
 #include "core/word/util.h"
@@ -66,25 +67,59 @@ public:
     // the verbs that a shorter ending let it read.
     bool shorterEndings = false;
     std::vector<const Item*> shortenedVerbs;
-    // Ends the external analyzer allows in transformSurface (empty: no constraint).
-    std::vector<uint8_t> allowedEnds;
-    std::string_view allowedText;
-    bool EndAllowed(std::string_view full, int end) const {
-        if (allowedEnds.empty() || full.data() != allowedText.data() || full.size() != allowedText.size()) return true;
-        return end >= 0 && static_cast<std::size_t>(end) < allowedEnds.size() && allowedEnds[static_cast<std::size_t>(end)] != 0;
+    // What the external analyzer says about transformSurface (empty: nothing).
+    BoundaryHints hints;
+    std::string_view hintText;
+    bool Hinted(std::string_view full) const {
+        return !hints.ends.empty() && full.data() == hintText.data() && full.size() == hintText.size();
     }
-    // Whether an item of the class digit `part` may start at `start`, where the analyzer reads a
-    // word of the class the oracle gave: no noun, adverb or adjectival noun starts at a particle the
-    // analyzer reads (verb keys such as に会う do).
-    bool StartAllowed(std::string_view full, int start, char part) const {
-        if (allowedEnds.empty() || full.data() != allowedText.data() || full.size() != allowedText.size()) return true;
-        if (start < 0 || static_cast<std::size_t>(start) >= allowedEnds.size()) return true;
-        const uint8_t c = allowedEnds[static_cast<std::size_t>(start)];
-        switch (part) {
-        case '1': case '3': return c != 'p';
-        case '8': return c != 'p' && c != 'x';
-        default: return true;
+    // Whether an item of class digit `part` over full[start, end) agrees with the analyzer: it ends where
+    // an analyzer word ends; a content word is no reading of the same kind the analyzer rejected
+    // (しか + し is no しかし) and is not one particle of the analyzer (のみ is no 飲み).
+    // Inside a run of nouns, suffixes and prefixes the compound's inner cuts are the dictionary's to
+    // choose (日本国|人, not 日本|国人).
+    bool InsideNounRun(int pos) const {
+        const auto& e = hints.ends;
+        auto noun = [](uint8_t c) { return c == 'n' || c == 'z' || c == 'f'; };
+        int b = pos;
+        while (b > 0 && e[static_cast<std::size_t>(b)] == 0) b--;
+        if (!noun(e[static_cast<std::size_t>(b)])) return false;
+        int f = pos;
+        while (f < static_cast<int>(e.size()) - 1 && e[static_cast<std::size_t>(f)] == 0) f++;
+        // the token holding pos is a noun; it must have a noun neighbour on either side
+        bool prevNoun = false;
+        if (b > 0) {
+            int pb = b - 1;
+            while (pb > 0 && e[static_cast<std::size_t>(pb)] == 0) pb--;
+            prevNoun = noun(e[static_cast<std::size_t>(pb)]);
         }
+        return prevNoun || noun(e[static_cast<std::size_t>(f)]);
+    }
+    bool HintsAllow(std::string_view full, int start, int end, char part) const {
+        if (!Hinted(full)) return true;
+        const auto& e = hints.ends;
+        if (end < 0 || static_cast<std::size_t>(end) >= e.size() || start < 0 || start >= end) return true;
+        if (e[static_cast<std::size_t>(end)] == 0 && !InsideNounRun(end)) return false;
+        const bool content = part == '1' || part == '3' || part == '4' || part == '7' || part == '8';
+        if (!content) return true;
+        auto sameKind = [part](uint8_t c) {
+            switch (part) {
+            case '1': return c == 'n' || c == 'z' || c == 'f';
+            case '3': return c == 'd';
+            case '4': return c == 'v';
+            case '7': return c == 'a';
+            case '8': return c == 'k' || c == 'n';
+            default: return false;
+            }
+        };
+        for (const auto& r : hints.rejected)
+            if (static_cast<int>(r.begin) == start && static_cast<int>(r.end) == end && sameKind(r.cls)) return false;
+        if (e[static_cast<std::size_t>(start)] == 'p') {
+            bool one = true;
+            for (int i = start + 1; i < end && one; i++) one = e[static_cast<std::size_t>(i)] == 0;
+            if (one) return false;
+        }
+        return true;
     }
     // The word search of a token recurses once per word. At kMaxWordDepth levels it stops
     // with the words found so far, and BuildSurfaceTransform goes on at resumeCursor

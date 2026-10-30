@@ -12,8 +12,8 @@ void SetBoundaryOracle(BoundaryFn fn, void* ctx) {
     oracleCtx = ctx;
 }
 
-bool QueryBoundaries(std::string_view text, std::vector<uint8_t>* ends) {
-    return oracleFn != nullptr && oracleFn(oracleCtx, text, ends);
+bool QueryBoundaries(std::string_view text, BoundaryHints* out) {
+    return oracleFn != nullptr && oracleFn(oracleCtx, text, out);
 }
 
 }  // namespace hdTrans::word

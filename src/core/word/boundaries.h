@@ -8,12 +8,21 @@
 
 namespace hdTrans::word {
 
-// Fills ends[i] for the byte offsets i of text (0..size): 0 where no word may end, else the class of
-// the analyzer word that starts there ('n' noun, 'v' verb, 'a' adjective, 'k' adjectival noun,
-// 'd' adverb, conjunction or interjection, 'm' adnominal, 'p' particle, 'x' auxiliary, 'f' prefix,
-// 'z' suffix, 's' symbol, 'u' other) or 'e' at the end. Returns false when it has no opinion.
-using BoundaryFn = bool (*)(void* ctx, std::string_view text, std::vector<uint8_t>* ends);
+// What the external analyzer says about a token text: ends[i] for each byte offset 0..size is 0
+// where no word ends, else the class letter of the analyzer word starting there ('p' particle, 'x'
+// auxiliary, 'v' verb, ...), 'e' for an end only, 'i' for a cut inside a compound verb. rejected
+// holds byte spans and class letters of single dictionary words the analyzer considered and split.
+struct BoundaryHints {
+    std::vector<uint8_t> ends;
+    struct Rejected {
+        uint32_t begin = 0, end = 0;
+        uint8_t cls = 0;  // class letter of the rejected word
+    };
+    std::vector<Rejected> rejected;
+};
+// Returns false when it has no opinion on this text.
+using BoundaryFn = bool (*)(void* ctx, std::string_view text, BoundaryHints* out);
 void SetBoundaryOracle(BoundaryFn fn, void* ctx);
-bool QueryBoundaries(std::string_view text, std::vector<uint8_t>* ends);
+bool QueryBoundaries(std::string_view text, BoundaryHints* out);
 
 }  // namespace hdTrans::word

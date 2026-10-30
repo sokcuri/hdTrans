@@ -21,38 +21,13 @@ bool ReadAll(const char* path, std::string* out) {
     return true;
 }
 
-bool Ends(void*, std::string_view text, std::vector<uint8_t>* ends) {
+bool Ends(void*, std::string_view text, hdTrans::word::BoundaryHints* out) {
     thread_local hd8::ana::WorkspacePtr ws = hd8::ana::NewWorkspace();
-    hd8::ana::Options opt;
-    opt.margins = false;
-    opt.splitLongUnits = true;
-    hd8::ana::Analysis r;
-    analyzer->Analyze(text, opt, &r, ws.get());
-    using P = hd8::ana::Pos;
-    auto code = [](P p) -> uint8_t {
-        switch (p) {
-        case P::n: case P::pn: case P::num: return 'n';
-        case P::v1: case P::v5: case P::vs: case P::vk: case P::vz: return 'v';
-        case P::adj: return 'a';
-        case P::na: return 'k';
-        case P::adv: case P::conj: case P::intj: return 'd';
-        case P::adn: return 'm';
-        case P::aux: return 'x';
-        case P::p_case: case P::p_topic: case P::p_conj: case P::p_final: case P::p_adv: return 'p';
-        case P::pref: return 'f';
-        case P::suf: return 'z';
-        case P::sym: return 's';
-        default: return 'u';
-        }
-    };
-    ends->assign(text.size() + 1, 0);
-    (*ends)[text.size()] = 'e';
-    for (auto& t : r.toks) {
-        if (t.src.end <= text.size() && (*ends)[t.src.end] == 0) (*ends)[t.src.end] = 'e';
-    }
-    for (auto& t : r.toks)
-        if (t.src.begin <= text.size()) (*ends)[t.src.begin] = code(t.pos);
-    if ((*ends)[0] == 0) (*ends)[0] = 'u';
+    hd8::ana::SegHints h;
+    analyzer->Hints(text, &h, ws.get());
+    out->ends = std::move(h.ends);
+    out->rejected.clear();
+    for (auto& r : h.rejected) out->rejected.push_back({r.span.begin, r.span.end, r.cls});
     return true;
 }
 

@@ -1240,9 +1240,10 @@ bool Unread(const Item* it) {
 // reading replaces the first when it reads the whole token and a verb with a shorter ending
 // reads a character the first left unread.
 void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
-    allowedEnds.clear();
-    allowedText = surface;
-    if (settings.text && !QueryBoundaries(surface, &allowedEnds)) allowedEnds.clear();
+    hints.ends.clear();
+    hints.rejected.clear();
+    hintText = surface;
+    if (settings.text && !QueryBoundaries(surface, &hints)) hints.ends.clear();
     transformSurface = surface;
     resumeCursor = -1;
     Item* const mark = chain.tail;
@@ -1912,7 +1913,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     // The analyzer's word ends: take the next group while this one ends inside an analyzer word;
     // when no group ends at one, keep the first.
     auto fits = [&](const Item* it) {
-        return EndAllowed(full, cursor + it->length) && StartAllowed(full, cursor, At(it->Code(0), 0));
+        return HintsAllow(full, cursor, cursor + it->length, At(it->Code(0), 0));
     };
     if (candidate != nullptr && !fits(candidate)) {
         Item* first = candidate;
