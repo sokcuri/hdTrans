@@ -27,3 +27,9 @@ dict:novel-kata:1	手の鳴る方はこっちだよっ！	has:울리는 편은	k
 dict:novel-kata:1	奥州の藤原殿のもとへお戻りになった方が…。	has:돌아오신 편이	keep	local-ending
 dict:novel-kata:1	お休みになる方がよろしいかと。	has:쉬시는 편이	keep	local-ending
 dict:novel-kata:1	その亡くなられた方が妻であるはずはない	has:돌아가신 분이	fix	local-ending
+dict:novel-kata:1	その……、キングという方は？	has:킹이라는 분은	fix	local-ending
+dict:novel-kata:1	ゲーム初心者の方、レベル上げなんて嫌いだよという方に大人気のモードです。	has:분에	fix	local-ending
+dict:novel-kata:1	あの方、大森さんという方ですが、みなさんもＣＭで御存じの	has:씨라는 분입니다만	fix	local-ending
+dict:novel-kata:1	(署長)さっきね栄さんという方から電話があって	has:씨라는 분으로부터	fix	local-ending
+dict:novel-kata:1	チャーリー・クリスチャンさんという方。	has:씨라는 분.	fix	local-ending
+dict:novel-kata:1	生クリームが苦手という方	has:분	fix	local-ending
