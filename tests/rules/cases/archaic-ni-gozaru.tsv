@@ -1,0 +1,25 @@
+# 규칙: SPC-8
+rule	input	expected	kind	layer
+dict:novel-archaic-copula:4	「木下松之助にございます。」	「키노시타 마쓰노스케입니다.」	fix	defaults
+dict:novel-archaic-copula:4	「三つ目。厠にございます」	「세 번째. 측입니다」	fix	defaults
+dict:novel-archaic-copula:4	提督様、新造艦、完成にございます。	제독님, 신조함, 완성입니다.	fix	defaults
+dict:novel-archaic-copula:4	「ありがたき幸せにございます、陛下」	「더없는 영광입니다, 폐하」	fix	defaults
+dict:novel-archaic-copula:4	「仰る通りにございます。」	「말씀하신 대로입니다.」	fix	defaults
+dict:novel-archaic-copula:4	飛騨ヒノキは逸品にござります	히다 편백나무는 일품입니다	fix	defaults
+dict:novel-archaic-copula:4	天主にござりまする	천주이옵니다	fix	defaults
+dict:novel-archaic-copula:4	国王陛下！　火急の報せにございます！	국왕 폐하! 화급의 소식입니다!	fix	defaults
+dict:novel-archaic-copula:2	書式は この目録にございます	서식은 이 목록에 있습니다	keep	local
+dict:novel-archaic-copula:3	お貸しできるものにございません	rule:dict:novel-archaic-copula:3=(이)가 &Ml@	fix	local
+dict:novel-archaic-copula:3	お貸しできるものにございません	빌려 드릴 수 있는 것이 아닙니다	fix	local
+dict:novel-archaic-copula:5	「父親というものでございましょう」	「아버지라는 것이겠죠」	fix	local-ending
+dict:novel-archaic-copula:5	「…………何を、でございましょう」	「…………뭘, 이겠죠」	fix	local-ending
+dict:novel-archaic-copula:5	問題もございましょう	문제도 있겠지요	fix	local-ending
+dict:novel-archaic-copula:6	「さぁて圭一さんはどこでございましょう？！」	has:어디서 있을까요?!	fix	local-ending
+dict:novel-archaic-copula:2	はい こちらにございます	네 이쪽에 있습니다	keep	local
+dict:novel-archaic-copula:2	蔵は館の裏手にございます。	창고는 관의 뒤쪽에 있습니다.	keep	local
+dict:novel-archaic-copula:2	ご本宅は別にございます	본댁은 따로 있습니다	keep	local
+dict:novel-archaic-copula:2	机の上にございます	rule:dict:novel-archaic-copula:2=에 &HN@	keep	local
+dict:novel-archaic-copula:1	全く記憶にございません。	전혀 기억에 없습니다.	keep	local
+dict:novel-archaic-copula:1	岩木忠太兵衛殿はこれにござらぬか	has:이것에 없는가	keep	local
+dict:novel-archaic-copula:4	それは確かにございましたが	그것은 확실히 있었습니다만	keep	defaults
+dict:novel-archaic-copula:4	こちらでございます	이쪽입니다	keep	defaults
