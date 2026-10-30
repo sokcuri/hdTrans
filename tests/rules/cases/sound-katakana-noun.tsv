@@ -1,0 +1,27 @@
+# 소리 행과 일반 명사 행이 함께 있는 가타카나 낱말은 조사 앞, 한자 낱말 뒤에서 명사다. 되풀이한 의태어, と로 끝나는 소리, 고유 명사뿐인 말은 소리로 둔다.
+rule	input	expected	kind	layer
+sound:katakana-noun	通常スキルを１つガチャで引くことができます。	통상 스킬을 1개 가챠로 뽑을 수가 있습니다.	fix	sound
+sound:katakana-noun	階級はガチャで決まるのか。	계급은 가챠로 정해지는 건가.	fix	sound
+sound:katakana-noun	平民からガチャによる確率で決まるようだ。	평민에게서 가챠에 의한 확률로 정해지는 것 같다.	fix	sound
+sound:katakana-noun	ガチャの確率も表示されており	가챠의 확률도 표시되어 있어	fix	sound
+sound:katakana-noun	ガチャは引けませんので	has:가챠는	fix	sound
+sound:katakana-noun	人生ガチャSSRでも死ぬ時は死ぬんだな	has:인생 가챠	fix	sound
+sound:katakana-noun	給与をガチャやら課金アイテムにつぎ込んできた	has:가챠든지	fix	sound
+sound:katakana-noun	落ち着いたトーンに変わっている。	침착한 톤으로 변해있다.	fix	sound
+sound:katakana-noun	監禁されてるみたいなトーンで話すのやめろ。	has:톤으로 이야기하는	fix	sound
+sound:katakana-noun	ウグイスのフンはよく聞く。	has:휘파람새의 분은	fix	sound
+sound:katakana-noun	猫のフンの実を	고양이의 분의 열매를	fix	sound
+sound:katakana-noun	完全に格闘技のパクりですけどもね	lacks:덥석	fix	sound
+sound:katakana-noun	ピンポンあんだからピンポンで呼べよ	has:딩동으로	fix	sound
+sound:katakana-noun	ガチャを回した。	가챠를 돌렸다.	keep	sound
+sound:katakana-noun	ガチャリと鍵を回した。	철컥 열쇠를 돌렸다.	keep	sound
+sound:katakana-noun	ガチャと開く	철컥 연다	keep	sound
+sound:katakana-noun	ガチャ…バタン！	철컥…쾅!	keep	sound
+sound:katakana-noun	（山内）ガチャ	(야마노우치) 철컥	keep	sound
+sound:katakana-noun	ドアがガチャガチャという音を立てた	문이 달그락달그락하는 소리를 냈다	keep	sound
+sound:katakana-noun	お肌がツルツルでびっくり	has:매끈매끈	keep	sound
+sound:katakana-noun	提督シャキっとしてください。	제독 꼿꼿해 주세요.	keep	sound
+sound:katakana-noun	いきなりバターンは怖い	has:콰앙은	keep	sound
+sound:katakana-noun	ピンポン鳴らしても開けへんかった	has:딩동 울려도	keep	sound
+sound:katakana-noun	みんなでワイワイやるのもたまには楽しいでしょ	has:와글와글	keep	sound
+sound:katakana-noun	腹パンパンさぁ。	has:팡팡	keep	sound

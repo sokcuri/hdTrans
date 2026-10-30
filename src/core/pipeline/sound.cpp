@@ -491,7 +491,7 @@ private:
     bool WordAt(size_t p, size_t n) const;
     bool WordAfterCry(size_t p, size_t n) const;
     bool CryBeforeWord(const SoundMatch& m) const;
-    bool NounAt(size_t p, size_t n) const;
+    bool NounAt(size_t p, size_t n, bool common) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false, bool afterParticle = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PoliteAt(size_t p) const;
@@ -928,8 +928,21 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         return false;
     }
     // Right before を or が the sound is a noun when the dictionary reads it only as one
-    // (ガチャを回す 가챠를, トーンを落とす 톤을; but モヤモヤが, also an adverb).
-    if (base == surface && best.end < rs_.size() && In(rs_[best.end], U"をが") && NounAt(p, surface)) return false;
+    // (ガチャを回す 가챠를, トーンを落とす 톤을; but モヤモヤが, also an adverb), and so is a
+    // word in katakana said once that the dictionary reads only as a common noun before
+    // another case or topic particle or right after a word in kanji (ガチャで引く, ガチャの確率,
+    // 人生ガチャ; but ガチャと, the quoted sound, シャキっと and the mimetic ツルツルの).
+    if (base == surface) {
+        const std::u32string_view word = std::u32string_view(f_).substr(p, surface);
+        const bool doubled = surface % 2 == 0 && word.substr(0, surface / 2) == word.substr(surface / 2);
+        const bool more = best.end < rs_.size();
+        if ((more && In(rs_[best.end], U"をが") && NounAt(p, surface, false)) ||
+            (IsKatakanaRune(rs_[p]) && !doubled && chosen->key.back() != U'ト' &&
+             ((more && In(rs_[best.end], U"はでのにへもや")) || (p > 0 && IsKanjiRune(rs_[p - 1]))) &&
+             NounAt(p, surface, true))) {
+            return false;
+        }
+    }
     return !(base > surface || (base == surface && surface > best.keyLen) || user >= keyLen);
 }
 
@@ -947,13 +960,14 @@ bool SoundText::EndsInsideKatakana(size_t p, size_t end) const {
 }
 
 // Whether the dictionary reads the n characters at p as a noun and as nothing else (kana
-// spellings and names aside).
-bool SoundText::NounAt(size_t p, size_t n) const {
+// spellings and names aside); with common, as a common noun, proper nouns aside.
+bool SoundText::NounAt(size_t p, size_t n, bool common) const {
     const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + n), dict::LookupMode::General, ctx_.lookup);
     bool noun = false;
     for (const dict::Candidate& c : rd.list) {
         if ((c.user != nullptr && (c.user->kana || c.user->nameLayer)) || text::RuneCount(c.source) != n) continue;
-        if (!c.codes->partText.starts_with("N1")) return false;
+        if (common && c.codes->partText.starts_with("N13")) continue;
+        if (!c.codes->partText.starts_with(common ? "N11" : "N1")) return false;
         noun = true;
     }
     return noun;

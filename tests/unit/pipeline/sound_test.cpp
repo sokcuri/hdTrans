@@ -992,8 +992,9 @@ HD_TEST(pipeline_sound_before_pause_over_end_row) {
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *snap), std::string(c.want));
 }
 
-// A name-layer key that runs on from a sound into kanji, and a word the dictionary reads only
-// as a noun right before を or が, rule the sound out.
+// A name-layer key that runs on from a sound into kanji, a word the dictionary reads only as a
+// noun right before を or が, and a katakana word it reads only as a common noun before another
+// particle or after kanji, rule the sound out.
 HD_TEST(pipeline_sound_name_and_noun) {
     const auto loaded = dict::Load({{0, "base.tsv",
                                      "key\tko\tpos\tid\n"
@@ -1013,7 +1014,10 @@ HD_TEST(pipeline_sound_name_and_noun) {
         {"ニコニコ動画で見た", "ニコニコ動画で見た"},
         {"ニコニコ笑う", "싱글벙글 笑う"},
         {"ガチャを回す", "ガチャを回す"},
+        {"ガチャで引く", "ガチャで引く"},
+        {"人生ガチャ", "人生ガチャ"},
         {"ガチャと開く", "철컥 開く"},
+        {"ガチャ…", "철컥…"},
         {"モヤモヤが残る", "찜찜が残る"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
