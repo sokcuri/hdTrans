@@ -15,7 +15,7 @@ using hangul::ToU8;
 
 struct CueRow {
     std::string cue, mode;
-    std::u32string text;
+    std::u32string text, notAfter;
 };
 struct LevelRow {
     std::string key;
@@ -39,7 +39,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     auto t = std::make_shared<RegisterTables>();
     TsvTable c;
     if (!ReadTsv(dir + "/cues.tsv", c, err)) return nullptr;
-    const int cc = c.Col("cue"), cm = c.Col("mode"), ct = c.Col("text");
+    const int cc = c.Col("cue"), cm = c.Col("mode"), ct = c.Col("text"), cn = c.Col("notafter");
     if (cc < 0 || cm < 0 || ct < 0) {
         err = "cues.tsv: missing column";
         return nullptr;
@@ -50,7 +50,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
             if (r[cm] == "strong") t->strongTails.push_back(ToU32(r[ct]));
         }
         else if (r[cc] == "quotative") t->quotatives.push_back(ToU32(r[ct]));
-        else t->cues.push_back({r[cc], r[cm], ToU32(r[ct])});
+        else t->cues.push_back({r[cc], r[cm], ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string()});
     }
     TsvTable l;
     if (!ReadTsv(dir + "/levels.tsv", l, err)) return nullptr;
@@ -94,13 +94,13 @@ bool IsMark(char32_t c) {
     switch (c) {
         case U'。': case U'．': case U'！': case U'？': case U'!': case U'?': case U'…': case U'‥': case U'ー':
         case U'〜': case U'～': case U'っ': case U'ッ': case U'・': case U'♪': case U'♥': case U' ': case U'　':
-        case U'」': case U'』': case U'）': case U')': case U']': case U'＞': case U'>': case U'、': case U'，':
+        case U'」': case U'』': case U'）': case U')': case U']': case U'＞': case U'>': case U'、': case U'，': case 0xFF61: case 0xFF64:
             return true;
         default:
             return false;
     }
 }
-bool IsSentenceEnd(char32_t c) { return c == U'。' || c == U'！' || c == U'？' || c == U'!' || c == U'?'; }
+bool IsSentenceEnd(char32_t c) { return c == U'。' || c == U'！' || c == U'？' || c == U'!' || c == U'?' || c == 0xFF61; }
 bool IsWordChar(char32_t c) {
     return (c >= U'ぁ' && c <= U'ゖ') || (c >= U'ァ' && c <= U'ヺ') || (c >= 0x4E00 && c <= 0x9FFF) || (c >= U'a' && c <= U'z') ||
            (c >= U'A' && c <= U'Z') || (c >= U'ａ' && c <= U'ｚ') || (c >= U'Ａ' && c <= U'Ｚ') || (c >= U'0' && c <= U'9');
@@ -199,16 +199,35 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         tailStripped = true;
     }
     bool casualEnd = tailStripped;
-    if (tailStripped)
-        for (const auto& st : t.strongTails)
-            if (EndsWith(stages[0], st) && stages[0].size() > st.size()) c.strongTail = true;
+    {
+        // a strong sentence-final particle at the end of any sentence of the utterance (…だよ。…しろ。)
+        std::u32string sent;
+        auto check = [&](std::u32string x) {
+            while (!x.empty() && IsMark(x.back())) x.pop_back();
+            for (const auto& st : t.strongTails)
+                if (EndsWith(x, st) && x.size() > st.size()) c.strongTail = true;
+        };
+        for (char32_t ch : u.text) {
+            if (IsSentenceEnd(ch)) {
+                check(sent);
+                sent.clear();
+            } else {
+                sent.push_back(ch);
+            }
+        }
+        check(sent);
+    }
     for (const auto& r : t.cues) {
         bool hit = false;
+        auto before = [&](const std::u32string& str, size_t at) {
+            return at > 0 && !r.notAfter.empty() && r.notAfter.find(str[at - 1]) != std::u32string::npos;
+        };
         if (r.mode == "end") {
             for (const auto& s : stages)
-                if (EndsWith(s, r.text)) hit = true;
+                if (EndsWith(s, r.text) && !before(s, s.size() - r.text.size())) hit = true;
         } else {
             for (size_t i = u.text.find(r.text); i != std::u32string::npos; i = u.text.find(r.text, i + 1)) {
+                if (before(u.text, i)) continue;
                 if (r.mode == "any-not-quoted") {
                     const size_t j = i + r.text.size();
                     bool quoted = false;
@@ -288,6 +307,18 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         }
         std::vector<Cues> cues(j - i);
         std::vector<std::string> keys(j - i);
+        // per-scene narration flag: no quote line in the scene and ≥30% of its lines end like speech → all speech
+        bool sceneSpeech = false;
+        {
+            size_t quoted = 0, speechy = 0;
+            for (size_t k = i; k < j; ++k) {
+                if (lines[k].dialogue) ++quoted;
+                const Cues c = Scan(t, lines[k].ja);
+                const std::string key = Key(c);
+                if (key == "pend" || key == "keigo-pend" || key == "set" || key == "polite-any" || c.strongTail) ++speechy;
+            }
+            sceneSpeech = quoted == 0 && j > i && speechy * 10 >= (j - i) * 3;
+        }
         for (size_t k = i; k < j; ++k) {
             if (!lines[k].dialogue) continue;
             cues[k - i] = Scan(t, lines[k].ja);
@@ -306,8 +337,13 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 // an unbracketed line is narration unless it ends like speech (inner monologue: …だよ, …です)
                 const Cues c = Scan(t, lines[k].ja);
                 const std::string key = Key(c);
-                if (key == "pend" || key == "keigo-pend") {
-                    d.level = key == "pend" ? Level::haeyo : Level::hapsyo;
+                if (sceneSpeech) {
+                    // a scene without quote lines whose lines read as speech (captions): every line is an utterance
+                    auto row = t.levels.find(key);
+                    d.level = row != t.levels.end() ? row->second.level : Level::hae;
+                    d.key = "scene-speech-" + key;
+                } else if (key == "pend" || key == "keigo-pend" || key == "polite-any") {
+                    d.level = key == "keigo-pend" ? Level::hapsyo : Level::haeyo;
                     d.key = "unbracketed-" + key;
                 } else if (key == "casual" && c.strongTail) {
                     d.level = Level::hae;

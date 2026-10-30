@@ -711,6 +711,11 @@ bool BuildAligned(Retro& r, const json::Value& v, std::vector<Node>& nodes, size
         } else if (kind == "Punct") {
             ++a.skipped;  // marks come from 0.7.x's output text (gaps)
         } else if (kind == "V") {
+            // the source asks (逃げて！, 忘れてください): its last predicate is an imperative, not a statement
+            bool lastV = true;
+            for (size_t j = k + 1; j < items->arr.size(); ++j)
+                if (items->arr[j].Str("k") == "V") lastV = false;
+            if (lastV && want == Want::final_ && v.Bool("imp")) mood = Mood::imp;
             AlignPredicate(r, a, it, want, mood);
         }
     }
