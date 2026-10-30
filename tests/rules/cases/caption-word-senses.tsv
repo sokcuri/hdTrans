@@ -49,3 +49,7 @@ dict:lexical-caption-senses	あっどうもわざわざお越しくださいま�
 dict:lexical-caption-senses	彼は 金の卵を産むガチョウを殺してしまった。	그는 황금알을 낳는 거위를 죽여버렸다.	fix	lookup
 dict:lexical-caption-senses	本当に親身になって考えてるんですね。	정말 자기 일처럼 생각하고 있어요.	fix	lookup
 dict:lexical-caption-senses	一方の列車に	한편의 열차에	keep	lookup
+lookup:横取り	仲間を横取りした	동료를 가로챘다	fix	defaults
+lookup:横取り	手柄を横取りして	공훈을 가로채	fix	defaults
+lookup:横取り	獲物を横取りされる	사냥감을 빼앗긴다	fix	defaults
+lookup:横取り	横取りは許さない	가로채기는 용서하지 않는다	keep	defaults

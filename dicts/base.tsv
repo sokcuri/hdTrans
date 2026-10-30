@@ -247929,7 +247929,9 @@ ttt	ttt	K110			GN				jisjk:201744
 横割本町	요코와리혼쵸	I130	QCTVPl		GN				jisjk:337680		
 横北町	요코기타마치	N130	QCTVPl		GN				jisjk:337485		
 横十間川	요코짓켄가와	I110	QCT		GN				jisjk:89874		
-横取り	가로채기	I110	HGu	Hd	GN				jisjk:89881		
+横取り	가로채기	N110	HGu		GN				jisjk:89881		
+横取り	가로&Ca@	M469			GN				caption-senses:16		
+横取りされ	빼앗&A2@	M427			GN				caption-senses:17		
 横合い	측면	I110	VPl		GN				jisjk:89905		
 横向き	옆쪽	I110	VPlVTpUDr		GN				jisjk:89906		
 横向温泉	요코무키온센	I110	QCT		GN				jisjk:89907		
