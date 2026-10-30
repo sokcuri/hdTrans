@@ -1,0 +1,10 @@
+#! layer=words
+# 진행형, 형용동사 뒤 んだが, んだけど와 そうなんだけど: 사정을 깔고 잇는 -고 있는데, -ㄴ데
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+るんだが	1고 있는데	S570			GN							novel-ndaga:12
+なんだが	4데	U500			GN							novel-ndaga:13
+そうなんだけど	그렇긴 한데	A9D0			GN							novel-ndaga:14
+そうなんだが	그렇긴 한데	A9D0			GN							novel-ndaga:15
+そうなんだけどさ	그렇긴 한데 말이야	A9D0			GN							novel-ndaga:16
+そうなんだけどさぁ	그렇긴 한데 말이야	A9D0			GN							novel-ndaga:17
+るんだけど	1고 있는데	S570	XXX		GN							novel-ndaga:18
