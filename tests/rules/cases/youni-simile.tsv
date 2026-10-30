@@ -52,3 +52,5 @@ cx:youni-simile:35	肌は透き通るように白く、目鼻のバランスも�
 cx:youni-simile:35	自分に好かれるように気を使うべきではないか。	!rule:cx:youni-simile:35	keep	rewrites
 cx:youni-simile:35	言葉を止めるように子爵を呼ぶが、子爵は口を閉じない。	!rule:cx:youni-simile:35	keep	rewrites
 cx:youni-simile:35	みんなが分かるように説明する。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	武器を捨てるように叫んだ	has:버리도록 외쳤다	keep	rewrites
+cx:youni-simile:35	早く来るように尋ねた	has:오도록 물었다	keep	rewrites
