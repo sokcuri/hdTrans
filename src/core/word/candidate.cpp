@@ -292,6 +292,56 @@ Record* SuffixAfterNoun(const Item& parent, Record* records) {
     return records;
 }
 
+bool SuffixHost(const Item* before, const dict::Snapshot& snapshot);
+
+// After a name or a noun of persons or animals (SuffixHost) read as a noun, the noun records of an
+// honorific (honorific.candidate) move ahead of a longer hiragana noun that starts with it
+// (田中さんまで 다나카 씨까지, not さんま 꽁치 + で; 敵さんかい 적 씨야, not さんかい 산회; but
+// 大小さまざま, 進みさまざま), unless a particle row spells the honorific with what follows
+// (節子さんや 씨랑). Plain-dictionary records stay in front.
+Record* HonorificAfterNoun(const Item& parent, Record* records, const dict::Snapshot& snapshot) {
+    if (At(parent.Code(0), 0) != '1' || !SuffixHost(&parent, snapshot)) return records;
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    std::string_view honorific;
+    for (Record* r = first; r != nullptr && honorific.empty(); r = r->child) {
+        if (At(r->partCode, 1) == '1' && dict::InClass(HDTRANS_CLASS("honorific.candidate"), r->source)) honorific = r->source;
+    }
+    bool longer = false;
+    for (Record* r = first; r != nullptr && !honorific.empty(); r = r->child) {
+        if (r->source.size() <= honorific.size() || !r->source.starts_with(honorific)) continue;
+        // A row that spells the honorific with a particle (さんや 씨랑) reads it already.
+        if (FirstChar(r->partCode) == "P") return records;
+        longer = longer || (At(r->partCode, 0) == 'N' && At(r->partCode, 1) == '1' && AllHiragana(r->source));
+    }
+    if (!longer) return records;
+    Record* nouns = nullptr;
+    Record* rest = nullptr;
+    Record** nounTail = &nouns;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (At(r->partCode, 1) == '1' && r->source == honorific) {
+            *nounTail = r;
+            nounTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *nounTail = rest;
+    if (owned == nullptr) return nouns;
+    owned->child = nouns;
+    return records;
+}
+
 // Text that starts with a particle or punctuation, or is empty.
 bool NounEnd(std::string_view text) {
     if (text.empty()) return true;
@@ -1844,6 +1894,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
+        if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
