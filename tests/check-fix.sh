@@ -37,6 +37,10 @@ HDTRANS_SETS="c=$tmp/corpus.txt" sh "$repo/tools/check-fix.sh" -n -B "$cli" t > 
 grep -F 'c: 120 lines from the cache' "$tmp/second.log" > /dev/null
 [ ! -e "$tmp/work/t/d.pairs.tsv" ]
 grep -F '40 lines, 1 distinct changes' "$tmp/second.log" > /dev/null
+# -f translates every line of the head side; the changed lines stay the same.
+sh "$repo/tools/check-fix.sh" -n -f -B "$cli" f > "$tmp/full.log" 2>&1 || { cat "$tmp/full.log"; exit 1; }
+grep -E '^c: 3 distinct lines translated, [0-9.]+ s$' "$tmp/full.log" > /dev/null
+grep -F 'c: 40 changed lines' "$tmp/full.log" > /dev/null
 # A file outside dicts/ that reaches the engine translates everything again.
 mkdir "$repo/src"
 echo '// x' > "$repo/src/a.cpp"

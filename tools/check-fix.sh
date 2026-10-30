@@ -1,7 +1,7 @@
 #!/bin/sh
 # One command from an edited tree to a judging packet: gate, base and head translations of the
 # measurement sets, the changed lines, and the few of them to judge.
-#   tools/check-fix.sh [-b BASE_REF] [-B BASE_CLI] [-c CLI] [-n] NAME
+#   tools/check-fix.sh [-b BASE_REF] [-B BASE_CLI] [-c CLI] [-f] [-n] NAME
 # BASE_REF (default: the merge base of HEAD with develop) is built once in
 # ${HDTRANS_WORK:-build/work}/bases/<commit> (a detached worktree; -B gives a built CLI instead) and
 # its sets are translated once into the cache of tools/sets.py, so every later fix on the same base
@@ -9,8 +9,9 @@
 # not reach the engine) changed, it runs the base CLI on this tree's dicts/, so no build is needed;
 # otherwise it builds the preset (or uses -c CLI). tools/affected.py lists the text the change can
 # reach, and only lines that hold it are translated again, with a canary of
-# ${HDTRANS_CANARY:-200} other lines per each-line set (tools/sets.py). tools/gate.sh runs at the
-# same time; -n leaves it out.
+# ${HDTRANS_CANARY:-1000} other lines per each-line set (tools/sets.py); -f translates every line of
+# the head side, as the measurement before a pull request does. tools/gate.sh runs at the same time;
+# -n leaves it out.
 # Sets: HDTRANS_SETS, specs of tools/sets.py separated by spaces (NAME=FILE[@doc|@blocks=N]); by
 # default corpus=$HDTRANS_CORPUS and sample=$HDTRANS_REF_SAMPLE/ja.txt, each line its own session.
 # Output in ${HDTRANS_WORK:-build/work}/NAME: needles.txt, base/ (the base run), <set>.txt,
@@ -21,13 +22,14 @@ set -eu
 here=$(cd "$(dirname "$0")/.." && pwd)
 cd "$here"
 case $(uname -s) in Darwin) preset=${HDTRANS_PRESET:-mac} ;; *) preset=${HDTRANS_PRESET:-linux} ;; esac
-base_ref= base_cli= cli= gate=1
-usage() { echo "usage: tools/check-fix.sh [-b BASE_REF] [-B BASE_CLI] [-c CLI] [-n] NAME" >&2; exit 2; }
-while getopts b:B:c:n opt; do
+base_ref= base_cli= cli= gate=1 full=
+usage() { echo "usage: tools/check-fix.sh [-b BASE_REF] [-B BASE_CLI] [-c CLI] [-f] [-n] NAME" >&2; exit 2; }
+while getopts b:B:c:fn opt; do
     case $opt in
         b) base_ref=$OPTARG ;;
         B) base_cli=$OPTARG ;;
         c) cli=$OPTARG ;;
+        f) full=1 ;;
         n) gate= ;;
         *) usage ;;
     esac
@@ -83,8 +85,10 @@ fi
 echo "base $sha: $base_cli ($(elapsed "$start") s)"
 
 python3 -I tools/affected.py "$sha" > "$out/needles.txt"
+engine=
+! grep -qx '\*' "$out/needles.txt" || engine=1
 if [ -z "$cli" ]; then
-    if grep -qx '\*' "$out/needles.txt"; then
+    if [ -n "$engine" ]; then
         cmake --build --preset "$preset" --parallel > "$out/build.log" 2>&1 ||
             { tail -n 20 "$out/build.log"; echo "build failed ($out/build.log)" >&2; exit 2; }
         cp "build/$preset/hdtrans" "$out/hdtrans"
@@ -93,7 +97,8 @@ if [ -z "$cli" ]; then
         cli=$base_cli
     fi
 fi
-echo "head: $cli, $(grep -cv '^\*$' "$out/needles.txt" || :) needles$(grep -qx '\*' "$out/needles.txt" && echo ', every line' || :)"
+echo "head: $cli, $(grep -cv '^\*$' "$out/needles.txt" || :) needles$([ -z "$engine" ] || echo ', every line')"
+[ -z "$full" ] || { mv "$out/needles.txt" "$out/needles.change.txt"; echo '*' > "$out/needles.txt"; }
 
 # The gate runs while the sets translate.
 status=0 gate_pid=
@@ -108,7 +113,7 @@ python3 -I tools/sets.py run --cache "$work/sets-cache" -c "$base_cli" -d "$base
 echo "head sets:"
 # shellcheck disable=SC2086
 python3 -I tools/sets.py run -c "$cli" -d "$here/dicts" --base "$out/base" --needles "$out/needles.txt" \
-    --canary "${HDTRANS_CANARY:-200}" "$out" $sets || { [ $? -eq 1 ] && status=1 || exit 2; }
+    --canary "${HDTRANS_CANARY:-1000}" "$out" $sets || { [ $? -eq 1 ] && status=1 || exit 2; }
 python3 -I tools/sets.py pairs "$out/base" "$out"
 cat /dev/null "$out"/*.pairs.tsv > "$out/changed.tsv"
 python3 -I tools/judge-packet.py make "$out/packet" "$out/changed.tsv"
