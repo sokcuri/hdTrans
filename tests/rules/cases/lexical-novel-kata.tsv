@@ -1,0 +1,29 @@
+rule	input	expected	kind	layer
+dict:novel-kata:1	いずれきっと、シンシア様の魅力をお分かりになる方が現れますわ！	has:아시는 분이	fix	local-ending
+dict:novel-kata:1	既に報道などでご覧になられた方もいらっしゃると思いますが	has:보신 분	fix	local-ending
+dict:novel-kata:1	この大がかりなゲームを企画してくださった方をご紹介させていただきます。	has:주신 분	fix	local-ending
+dict:novel-kata:1	はい、色々おっしゃる方もいますが、私は尊敬しています。	has:말씀하시는 분	fix	local-ending
+dict:novel-kata:1	あの方はああ見えて大変気配りをされる方。	has:하시는 분.	fix	local-ending
+dict:novel-kata:1	お客さまは、この街を救ってくださった方ですので	has:주신 분	fix	local-ending
+dict:novel-kata:1	いらっしゃる方に聞いて何かご本人につながるヒントが	has:계시는 분	fix	local-ending
+dict:novel-kata:1	また スタジオに遊びに来て頂いた方には	has:주신 분	fix	local-ending
+dict:novel-kata:1	だけどものすごく考えていらっしゃる方だし	has:계시는 분	fix	local-ending
+dict:novel-kata:1	住所変更とか きちんと なさる方なのに	has:하시는 분	fix	local-ending
+dict:novel-kata:1	今回の事件の捜査指揮を執っておられる方です	has:계시는 분	fix	local-ending
+dict:novel-kata:1	社会復帰をサポートしてくださる方です。	has:주시는 분	fix	local-ending
+dict:novel-kata:1	大切に扱ってくださる方が きっといらっしゃいます	has:주시는 분	fix	local-ending
+dict:novel-kata:1	ご協力くださった方には こちらの記念シールを差し上げています｡	has:주신 분	fix	local-ending
+dict:novel-kata:1	神田さん そういう冗談をおっしゃる方だったんですね｡	has:말씀하시는 분	fix	local-ending
+dict:novel-kata:1	田代様はやがて御城代になられる方だ	has:되시는 분	fix	local-ending
+dict:novel-kata:1	ゆうべ助けてくださった方のことですが。	has:주신 분	fix	local-ending
+dict:novel-kata:1	書く方はさっぱりだが……リスニングはほぼ完璧。	has:쓰는 편은	keep	local-ending
+dict:novel-kata:1	医者にかかる方がお金はかかるはず。	has:진찰받는 편이	keep	local-ending
+dict:novel-kata:1	お勝手とか炊事場と言う方がしっくりくる場所だ。	has:말하는 편이	keep	local-ending
+dict:novel-kata:1	男の子ってきっと外で遊ぶ方が好きだと思ってたから	has:노는 편을	keep	local-ending
+dict:novel-kata:1	穏便に済ます方が有利じゃないのか？	has:끝내는 편이	keep	local-ending
+dict:novel-kata:1	なんとなく身体は丈夫な方で、月に二、三	has:튼튼한 편으로,	keep	local-ending
+dict:novel-kata:1	そろそろお休みになった方がいいのでは？	has:쉬시는 것이	keep	local-ending
+dict:novel-kata:1	手の鳴る方はこっちだよっ！	has:울리는 편은	keep	local-ending
+dict:novel-kata:1	奥州の藤原殿のもとへお戻りになった方が…。	has:돌아오신 편이	keep	local-ending
+dict:novel-kata:1	お休みになる方がよろしいかと。	has:쉬시는 편이	keep	local-ending
+dict:novel-kata:1	その亡くなられた方が妻であるはずはない	has:돌아가신 분이	fix	local-ending
