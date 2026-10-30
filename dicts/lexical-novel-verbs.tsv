@@ -25,3 +25,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 連れて来られません	데려올 수 없습니다	E300			GN							novel-verbs:22
 連れてこられませんでした	데려올 수 없었습니다	E300			GN							novel-verbs:23
 連れて来られませんでした	데려올 수 없었습니다	E300			GN							novel-verbs:24
+切り付け	&CT@	M437			GN							novel-verbs:25
+斬りつけ	&CT@	M437			GN							novel-verbs:26
+斬り付け	&CT@	M437			GN							novel-verbs:27
