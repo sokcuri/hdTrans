@@ -1,0 +1,31 @@
+# 권유, 의지, 부탁의 頑張る는 힘내다
+rule	input	expected	kind	layer
+dict:jisjk:94209	頑張りましょう！	힘냅시다!	fix	local
+dict:jisjk:94209	明日も頑張りましょう！	내일도 힘냅시다!	fix	local
+dict:jisjk:94209	じゃあ もう１テイクだけ頑張りましょう	그럼 이제 1테이크만 힘냅시다	fix	local
+dict:jisjk:94209	頑張ろう｡	힘내자.	fix	local
+dict:jisjk:94209	次 頑張ろう｡	다음 힘내자.	fix	local
+dict:jisjk:94209	お互い頑張ろうね としくん｡	서로 힘내자 토시 군.	fix	local
+dict:jisjk:94209	宮本≫エブリバディー！頑張ろうぜ！	미야모토≫에브리바디! 힘내자구!	fix	local
+dict:jisjk:94209	（山内）頑張ってね	(야마노우치) 힘내	fix	local
+dict:jisjk:94209	頑張ってよ～応援するからさ｡	힘내~응원하니까.	fix	local
+dict:jisjk:94209	頑張ってね 来週の追試	힘내 다음주의 추가시험	fix	local
+dict:jisjk:344525	がんばろう！	힘내자!	keep	local
+dict:jisjk:344525	がんばってね。	힘내.	keep	local
+dict:jisjk:94209	頑張ってる。	노력하고 있다.	keep	local
+dict:jisjk:94209	頑張ってるね。	노력하고 있네.	keep	local
+dict:jisjk:94209	頑張ってたよ。	노력했어.	keep	local
+dict:jisjk:94209	頑張ります。	노력하겠습니다.	keep	local
+dict:jisjk:94209	精一杯頑張ります！	힘껏 노력하겠습니다!	keep	local
+dict:jisjk:94209	頑張ろうと思う。	노력하려고 한다.	keep	local
+dict:jisjk:94209	頑張っても無駄だ。	노력해도 쓸데없다.	keep	local
+dict:jisjk:94209	頑張ってよかった。	노력해서 좋았다.	keep	local
+dict:jisjk:94209	頑張った。	노력했다.	keep	local
+dict:jisjk:94209	頑張って参りましょう。	힘내 갑시다.	keep	local
+dict:jisjk:94209	頑張ってください。	힘내 주세요.	keep	local
+dict:jisjk:94209	みんな　今日も頑張ろう。	모두 오늘도 힘내자.	fix	local
+dict:jisjk:94209	一緒に頑張ろうね。	함께 힘내자.	fix	local
+dict:jisjk:94209	頑張ってよ！	힘내!	fix	local
+dict:jisjk:94209	頑張って。	힘내.	keep	local
+dict:jisjk:344525	がんばろうと思う。	열심히 하려고 한다.	fix	local
+dict:jisjk:344525	がんばってる。	열심히 하고 있다.	fix	local
