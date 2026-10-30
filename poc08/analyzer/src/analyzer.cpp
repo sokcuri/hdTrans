@@ -172,9 +172,11 @@ struct Emitter {
   }
 
   // Path → tokens with spaces; joined arcs record a join edit.
+  // tokPath (optional) receives the path index of each token.
   void Emit(const std::vector<uint32_t>& path, std::vector<Token>* toks, bool edits,
-            const Options& opt, Workspace* mws) const {
+            const Options& opt, Workspace* mws, std::vector<uint32_t>* tokPath = nullptr) const {
     toks->clear();
+    if (tokPath) tokPath->clear();
     for (size_t pi = 0; pi < path.size(); ++pi) {
       const Arc& a = ws.arcs[path[pi]];
       bool spaced = a.b > 0 && ws.spaceBefore[a.b];
@@ -188,6 +190,7 @@ struct Emitter {
           Token t = Make(p);
           if (k == 0 && spaced) t.flags |= SpaceBefore;
           toks->push_back(std::move(t));
+          if (tokPath) tokPath->push_back(static_cast<uint32_t>(pi));
         }
       } else {
         Token t = Make(a);
@@ -201,6 +204,7 @@ struct Emitter {
           out->edits.push_back(std::move(e));
         }
         toks->push_back(std::move(t));
+        if (tokPath) tokPath->push_back(static_cast<uint32_t>(pi));
       }
     }
   }
@@ -235,8 +239,9 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
   BuildLattice(m, ws, opt);
   RunViterbi(m, ws, opt.margins);
   Emitter em{m, *ws, out};
-  em.Emit(ws->path, &out->toks, true, opt, ws);
-  if (!opt.margins || opt.splitLongUnits || ws->path.empty()) return;
+  std::vector<uint32_t> tokPath;
+  em.Emit(ws->path, &out->toks, true, opt, ws, &tokPath);
+  if (!opt.margins || ws->path.empty()) return;
 
   // margins, same-span alternatives and path 1
   const auto& A = ws->arcs;
@@ -247,7 +252,8 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
   for (size_t pi = 0; pi < ws->path.size(); ++pi) {
     const Arc& x = A[ws->path[pi]];
     int32_t margin = kInf, arg = -1;
-    Token* tok = ti < out->toks.size() ? &out->toks[ti] : nullptr;
+    while (ti < tokPath.size() && tokPath[ti] < pi) ++ti;
+    Token* tok = ti < tokPath.size() && tokPath[ti] == pi ? &out->toks[ti] : nullptr;
     uint16_t altFirst = static_cast<uint16_t>(out->alts.size());
     for (uint32_t yi = 0; yi < A.size(); ++yi) {
       const Arc& y = A[yi];
@@ -272,14 +278,11 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
         out->alts.push_back(std::move(t));
       }
     }
-    if (tok && x.kind != ArcKind::longUnit) {
-      tok->margin = margin >= kInf ? 99.0f : static_cast<float>(margin) / 100.0f;
+    if (tok) {
       tok->alt = altFirst;
       tok->nAlt = static_cast<uint16_t>(out->alts.size() - altFirst);
-      ++ti;
-    } else if (tok) {
-      tok->margin = margin >= kInf ? 99.0f : static_cast<float>(margin) / 100.0f;
-      ++ti;
+      for (size_t k = ti; k < tokPath.size() && tokPath[k] == pi; ++k)
+        out->toks[k].margin = margin >= kInf ? 99.0f : static_cast<float>(margin) / 100.0f;
     }
     if (margin < minMargin) {
       minMargin = margin;
