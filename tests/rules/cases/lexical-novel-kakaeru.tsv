@@ -1,0 +1,18 @@
+rule	input	expected	kind	layer
+dict:novel-kakaeru:1	で泣きじゃくりそうな顔して、俺を抱えようとする田村。	has:나를 안으려고	fix	local
+dict:novel-kakaeru:1	しかも 倒れた私を抱えてだ｡	has:나를 안아	fix	local
+dict:novel-kakaeru:1	笑みを浮かべて、ユフィリア嬢を抱えながら窓に向かった	has:안으면서	fix	local
+dict:novel-kakaeru:1	ユフィリア嬢を抱えながら戻ってきたのは	has:안으면서	fix	local
+dict:novel-kakaeru:1	彼女を抱えて走った。	has:그녀를 안아	fix	local
+dict:novel-kakaeru:1	アキラを抱えて走る。	has:안아	fix	local
+dict:novel-kakaeru:1	あいつを抱えて逃げろ。	has:안아	fix	local
+dict:novel-kakaeru:1	部下を抱えている。	!rule:dict:novel-kakaeru:1	keep	local
+dict:novel-kakaeru:1	多くの社員を抱える会社だ。	!rule:dict:novel-kakaeru:1	keep	local
+dict:novel-kakaeru:1	問題を抱えている。	!rule:dict:novel-kakaeru:1	keep	local
+dict:novel-kakaeru:1	借金を抱えている。	!rule:dict:novel-kakaeru:1	keep	local
+dict:novel-kakaeru:1	頭を抱えた。	!rule:dict:novel-kakaeru:1	keep	local
+sense:抱える	アニスフィアはユフィリアの体を抱えて、お姫様抱きにする	has:몸을 안고	fix	senses
+sense:抱える	机に腰かけ、佳奈の身体を抱える。	has:몸을 안는다	fix	senses
+sense:抱える	俺は、皐月の身体をしっかり抱えながら	has:안으면서	fix	senses
+sense:抱える	お腹を抱えて笑った。	has:움켜 쥐어	keep	senses
+sense:抱える	膝を抱えて座る。	has:감싸안아	keep	senses
