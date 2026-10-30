@@ -1,0 +1,28 @@
+rule	input	expected	kind	layer
+dict:novel-dekiru:1	運よく金融機関か何かで金を借りることが出来て、服を新調して	has:빌릴 수가 있어서	fix	local
+dict:novel-dekiru:1	強くなって、皆を護ることが出来て、平和になったら	has:지킬 수가 있어서	fix	local
+dict:novel-dekiru:1	幻晶騎士であれば勝つことは出来ても	has:이길 수가 있어서도	fix	local
+dict:novel-dekiru:1	よく出来ている。	has:잘 되어	keep	local
+dict:novel-dekiru:4	父が帰宅する頃には夕飯の準備はできたようだ。	has:준비는 된	fix	local
+dict:novel-dekiru:4	準備が出来ましたら別邸に向かいましょう	has:준비가 되면	fix	local
+dict:novel-dekiru:3	夕食の用意ができました。	has:준비가 되었습니다	fix	local
+dict:novel-dekiru:3	朝食の支度ができた。	has:준비가 되었다	fix	local
+dict:novel-dekiru:3	準備はできてる？	has:준비는 되고	fix	local
+dict:novel-dekiru:4	用意は出来ましたか？	has:준비는 되었습니까	fix	local
+dict:novel-dekiru:3	こちらの準備ができるまでいろいろ時間がかかった	has:준비가 될 때까지	fix	local
+dict:novel-dekiru:3	夕食の支度もできると思いますよ。	has:준비도 된다고	fix	local
+dict:novel-dekiru:3	準備ができない。	has:준비를 할 수 없다	keep	local
+dict:novel-dekiru:2	「新世界技術流出防止法」と呼ばれる法律が出来たため	has:법률이 생겼기	fix	local
+dict:novel-dekiru:2	あんたのご主人と石山の奥さんに 動機が出来ました	has:동기가 생겼습니다	fix	local
+dict:novel-dekiru:2	いい暮らしが出来るっす！	has:생활을 할 수 있	keep	local
+dict:novel-dekiru:2	安定した戦いが出来ますから	has:싸움을 할 수 있	keep	local
+dict:novel-dekiru:2	受け答えが出来る程度には冷静さを取り戻した	has:대답을 할 수 있는	keep	local
+dict:jisjk:341217	今のおれが出来ることってそれくらいだから	has:내가 할 수 있는	fix	local
+dict:jisjk:341217	今は私が出来ることをしないと。	has:내가 할 수 있는	fix	local
+dict:jisjk:341217	日本語が出来る。	has:일본어를 할 수 있다	keep	local
+dict:novel-dekiru:5	俺には何かができたはずなんだ。	has:뭔가를 할 수	fix	local
+dict:jisjk:375087	あと 彼女ができたら 真っ先にお母さんに報告するんだよ	has:그녀가 생기면	fix	local
+dict:jisjk:375087	彼女ができましたって話	has:그녀가 생겼	fix	local
+dict:novel-dekiru:2	新しいアバターが出来ました～！	has:아바타가 생겼습니다	fix	local
+dict:novel-dekiru:2	次の芝居の脚本が出来ました。	has:각본이 생겼습니다	fix	local
+dict:novel-dekiru:2	いい思い出が出来ました。	has:추억이 생겼습니다	fix	local
