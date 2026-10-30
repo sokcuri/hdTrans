@@ -101,6 +101,9 @@ def main():
             miss = [m for k, m in enumerate(a['morphs']) if rs[off + k] is None]
             formok = (not a['inner']) or auxmatch.form_folds(table, a['hostform'])
             fam_pref = 0 if (host, lemma) in HOSTS.get(fam, []) else 1
+            # a host whose own word changes class with the key (書け+る → 書ける) is a misreading
+            if a['hosttok'][4] and lemma.endswith(('く', 'む')) and a['hosttok'][4].startswith('下一段'):
+                fam_pref += 2
             score = (len(miss) + (0 if formok else 1), fam_pref, len(a['morphs']))
             if '--strict' in sys.argv:
                 score = (fam_pref, len(a['morphs']), len(miss))

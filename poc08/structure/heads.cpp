@@ -98,6 +98,7 @@ std::vector<HeadFacts> ComputeHeadFacts(const Strings& st, const std::vector<Tok
         const Bunsetsu& bu = path.buns[b];
         HeadFacts& f = out[b];
         f.sentEnd = ends[b];
+        f.kase = bu.kase;
         f.cwc = WcName(info[bu.content].wc);
         Wc cw = info[bu.content].wc;
         if (cw == Wc::verb || cw == Wc::verb_dep || cw == Wc::adj || cw == Wc::adj_dep)
@@ -115,7 +116,9 @@ std::vector<HeadFacts> ComputeHeadFacts(const Strings& st, const std::vector<Tok
                 f.closes = true;
             }
             if (IsNounLike(w)) f.hasNoun = true;
-            if (w == Wc::verb || w == Wc::verb_dep || w == Wc::adj || w == Wc::adj_dep || w == Wc::aux) f.hasPred = true;
+            if ((w == Wc::verb || w == Wc::verb_dep || w == Wc::adj || w == Wc::adj_dep || w == Wc::aux) &&
+                !IsParticleVerb(info[i]))
+                f.hasPred = true;
             if (w == Wc::comma) f.comma = true;
             if (w == Wc::period) f.endsSentence = true;
             if (!IsPunct(w)) lastTok = i;
@@ -138,6 +141,7 @@ std::vector<HeadFacts> ComputeHeadFacts(const Strings& st, const std::vector<Tok
         else if (bu.type == 'I') f.dt = Dt::topic;
         else if (k == Case::no || cw == Wc::adn) f.dt = Dt::adn;
         else if (k == Case::wa || k == Case::mo) f.dt = Dt::topic;
+        else if ((bu.flags & Topic) && k != Case::none) f.dt = Dt::kase, f.kaseTopic = true;
         else if (f.hasPred || bu.type == 'P' || bu.type == 'Q') {
             bool adn = lt.form == Form::rentai && (lw == Wc::verb || lw == Wc::verb_dep || lw == Wc::adj ||
                                                     lw == Wc::adj_dep || lw == Wc::aux);
@@ -152,8 +156,18 @@ std::vector<HeadFacts> ComputeHeadFacts(const Strings& st, const std::vector<Tok
     return out;
 }
 
-void HeadFeatures(const std::vector<HeadFacts>& facts, int dep, int cand, std::vector<std::string>& out) {
+void HeadFeatures(const std::vector<HeadFacts>& facts, const std::vector<int>& heads, int dep, int cand,
+                  std::vector<std::string>& out) {
     out.clear();
+    // Whether cand already governs a bunsetsu with the same case (two を on one verb are rare).
+    bool sameCase = false;
+    int kids = 0;
+    for (int k = dep + 1; k < cand; ++k)
+        if (heads[k] == cand) {
+            ++kids;
+            if (facts[k].kase == facts[dep].kase && facts[dep].kase != Case::none && facts[dep].kase != Case::no)
+                sameCase = true;
+        }
     const HeadFacts& d = facts[dep];
     const HeadFacts& c = facts[cand];
     const int n = d.sentEnd + 1;
@@ -206,6 +220,9 @@ void HeadFeatures(const std::vector<HeadFacts>& facts, int dep, int cand, std::v
     out.push_back("dcomma=" + std::string(d.comma ? "1" : "0") + "|dt=" + dt + "|preds=" + pb);
     out.push_back("df=" + d.form + "|cf=" + c.form + "|dist=" + dist);
     out.push_back("between=" + std::to_string(std::min(between, 6)) + "|dt=" + dt + "|last=" + last);
+    out.push_back("samecase=" + std::string(sameCase ? "1" : "0") + "|dl=" + d.last);
+    out.push_back("kids=" + std::string(Count(kids)) + "|dt=" + dt + "|cp=" + cpred);
+    out.push_back("dtop=" + std::string(d.kaseTopic ? "1" : "0") + "|dl=" + d.last + "|last=" + last);
     if (!c.clemma.empty()) {
         out.push_back("dl=" + d.last + "|clem=" + c.clemma);
         out.push_back("dt=" + dt + "|clem=" + c.clemma + "|near=" + near);
@@ -234,12 +251,13 @@ void AttachHeads(const StructureData& data, const Strings& st, const std::vector
     }
     // Right to left; a candidate must lie on the head chain from i+1, so the tree stays projective.
     std::vector<std::string> feats;
+    std::vector<int> heads(total, -1);
     for (int i = total - 1; i >= 0; --i) {
         if (facts[i].sentEnd == i) continue;
         float best = -1e30f, second = -1e30f;
         int bestJ = i + 1, secondJ = -1;
         for (int j = i + 1; j != -1 && j <= facts[i].sentEnd; j = path.buns[j].head) {
-            HeadFeatures(facts, i, j, feats);
+            HeadFeatures(facts, heads, i, j, feats);
             float s = 0;
             for (const auto& f : feats) s += Weight(data, f);
             if (s > best) {
@@ -256,6 +274,7 @@ void AttachHeads(const StructureData& data, const Strings& st, const std::vector
         }
         Bunsetsu& b = path.buns[i];
         b.head = static_cast<int16_t>(bestJ);
+        heads[i] = bestJ;
         b.headMargin = secondJ < 0 ? 99.0f : best - second;
         b.head2 = secondJ >= 0 && b.headMargin < kHeadTau ? static_cast<int16_t>(secondJ) : -1;
         if (b.head2 >= 0) {

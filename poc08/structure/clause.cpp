@@ -27,6 +27,7 @@ bool HasPredToken(const std::vector<TokInfo>& info, const Bunsetsu& b) {
         if (w == Wc::aux && RowRole(info[i]) == R::cop_ni && i > b.first &&
             (info[i - 1].wc == Wc::na || IsNounLike(info[i - 1].wc)))
             continue;  // 密かに, 静かに: adverbial
+        if (IsParticleVerb(info[i])) continue;
         if (IsVerbal(w) || w == Wc::aux || w == Wc::na_aux || w == Wc::suf_adj || w == Wc::suf_v) return true;
     }
     return false;
@@ -205,7 +206,11 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
         const Bunsetsu& bu = path.buns[b];
         bool pred = HasPredToken(info, bu);
         bool last = b == nb - 1;
-        if (!pred && !(last && bu.type == 'N' && IsNounLike(info[bu.content].wc))) continue;
+        // N の ため / N の うちに: a formal noun with a clause link heads a predicate-less clause.
+        const TokInfo& ct = info[bu.content];
+        bool fnLink = !pred && ct.row != nullptr && ct.row->kind == AuxKind::fn && HasLinkRow(info, bu) && b > 0 &&
+                      path.buns[b - 1].kase == Case::no && clauseOf[b] < 0;
+        if (!pred && !fnLink && !(last && bu.type == 'N' && IsNounLike(info[bu.content].wc))) continue;
         if (!path.clauses.empty() && clauseOf[b] < 0) {
             Clause& prev = path.clauses.back();
             if (prev.lastBun == b - 1 || (prev.lastBun == b - 2 && clauseOf[b - 1] < 0 && false)) {
@@ -259,7 +264,8 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
             const AuxRow* applied = nullptr;
             if (isContent) {
                 if (t.row != nullptr && (t.row->kind == AuxKind::voice || t.row->kind == AuxKind::neg ||
-                                         IsAuxPredicateRole(t.row->sets.role)))
+                                         IsAuxPredicateRole(t.row->sets.role) ||
+                                         (t.row->kind == AuxKind::fn && t.row->sets.link >= 0)))
                     applied = t.row;
             } else if (t.row != nullptr && !(IsNounLike(t.wc) && t.row->kind != AuxKind::fn)) {
                 applied = t.row;
@@ -284,7 +290,7 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
                 AuxSets only;
                 only.link = fs.link;
                 only.force = applied != nullptr && applied->sets.force >= 0 ? -1 : fs.force;
-                only.mod = fs.mod;
+                only.mod = applied != nullptr && applied->sets.mod != 0 ? 0 : fs.mod;
                 f.Apply(only, k, fs.role);
             }
         }
@@ -351,7 +357,8 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
                     link = Link::adn;
             }
         }
-        if (link == Link::final && lb.head >= 0 && !sentenceEnd) {
+        bool commaAfter = (lb.flags & CommaAfter) != 0;
+        if (link == Link::final && lb.head >= 0 && !sentenceEnd && !commaAfter) {
             if (lastForm == Form::rentai || (lastWc == Wc::aux && info[lastTok].form == Form::rentai))
                 if (IsNounLike(info[path.buns[lb.head].content].wc)) link = Link::adn;
         }
@@ -515,6 +522,12 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
         bool ok = false;
         uint8_t how = 0;
         Role role = RoleOf(BunCase(bu), ok, how);
+        if (ok && (bu.flags & Topic)) how = static_cast<uint8_t>(ArgHow::topic);
+        if (!ok && bu.kase == Case::no && !HasPredToken(info, path.buns[path.clauses[ci].pred])) {
+            role = Role::subj;  // 平民のため: the noun of a formal-noun link
+            ok = true;
+        }
+
         if (!ok) {
             if ((bu.flags & CommaAfter) && IsNounLike(info[bu.content].wc) && bu.type == 'N') {
                 role = Role::topic;
@@ -542,6 +555,24 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
                 a.lemma = toks[path.buns[h].content].lemma;
                 a.cls = info[path.buns[h].content].wc == Wc::person ? st.Intern("@person") : 0;
                 a.how = static_cast<uint8_t>(ArgHow::relhead);
+                c.args.push_back(a);
+            }
+        }
+        // の marks the subject inside an adnominal clause (私の書いた本): a の-phrase right before the clause
+        // that depends on the clause or on the noun the clause modifies.
+        if (c.link == Link::adn && c.pred > 0) {
+            int h = path.buns[c.lastBun].head;
+            int b = c.pred - 1;
+            while (b >= 0 && owner[b] == ci && path.buns[b].kase != Case::no) --b;
+            bool haveSubj = std::any_of(c.args.begin(), c.args.end(), [](const Arg& a) { return a.role == Role::subj; });
+            if (b >= 0 && !haveSubj && path.buns[b].kase == Case::no &&
+                (path.buns[b].head == h || owner[b] == ci) && clauseOf[b] < 0) {
+                Arg a;
+                a.role = Role::subj;
+                a.bun = static_cast<uint16_t>(b);
+                a.lemma = toks[path.buns[b].content].lemma;
+                a.cls = info[path.buns[b].content].wc == Wc::person ? st.Intern("@person") : 0;
+                a.how = static_cast<uint8_t>(ArgHow::marked);
                 c.args.push_back(a);
             }
         }

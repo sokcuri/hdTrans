@@ -31,12 +31,14 @@ bool JoinsPrevious(const std::vector<TokInfo>& info, size_t i) {
     const TokInfo& t = info[i];
     const TokInfo& p = info[i - 1];
     if (p.wc == Wc::pref) return true;
-    if (IsNounLike(t.wc) && (IsNounLike(p.wc) || p.wc == Wc::suf_n) && t.wc != Wc::pron && p.wc != Wc::pron)
+    // Compound nouns, but not across a formal noun (ため|費用, こと|自体).
+    if (IsNounLike(t.wc) && (IsNounLike(p.wc) || p.wc == Wc::suf_n) && t.wc != Wc::pron && p.wc != Wc::pron &&
+        !(p.row != nullptr && p.row->kind == AuxKind::fn) && !(t.row != nullptr && t.row->kind == AuxKind::fn))
         return true;
     if (t.row != nullptr && !t.row->afters.empty()) {
         switch (t.row->kind) {
             case AuxKind::aspect: case AuxKind::bene: case AuxKind::light: case AuxKind::neg: case AuxKind::cop:
-            case AuxKind::polite: case AuxKind::force: case AuxKind::suffix: case AuxKind::modal:
+            case AuxKind::polite: case AuxKind::force: case AuxKind::suffix: case AuxKind::modal: case AuxKind::kase:
                 if (t.row->sets.role == R::eval || t.row->sets.role == R::eval_neg || t.row->sets.role == R::eval_ok ||
                     t.row->sets.role == R::absorb_neg || t.row->sets.role == R::sumu ||
                     t.row->sets.role == R::irareru)
@@ -52,11 +54,26 @@ bool JoinsPrevious(const std::vector<TokInfo>& info, size_t i) {
     return false;
 }
 
-Case LastCase(const std::vector<TokInfo>& info, int first, int last) {
+// The case of a bunsetsu: its last case particle; under は/も the case particle before it (には → ni,
+// topic). topic is set for は/も.
+Case LastCase(const std::vector<TokInfo>& info, int first, int last, bool& topic) {
+    topic = false;
     for (int i = last; i >= first; --i) {
         if (IsPunct(info[i].wc)) continue;
         const AuxRow* r = info[i].row;
-        if (r != nullptr && r->sets.kase >= 0) return static_cast<Case>(r->sets.kase);
+        if (r != nullptr && r->sets.role == R::te && i > first && IsParticleVerb(info[i - 1])) continue;
+        if (r != nullptr && r->sets.kase >= 0) {
+            Case k = static_cast<Case>(r->sets.kase);
+            if ((k == Case::wa || k == Case::mo) && i > first) {
+                topic = true;
+                const AuxRow* p = info[i - 1].row;
+                if (p != nullptr && p->sets.kase >= 0) {
+                    Case pk = static_cast<Case>(p->sets.kase);
+                    if (pk != Case::wa && pk != Case::mo && pk != Case::no && pk != Case::quote) return pk;
+                }
+            }
+            return k;
+        }
         if (r == nullptr || (r->kind != AuxKind::focus && r->kind != AuxKind::final)) break;
     }
     return Case::none;
@@ -117,9 +134,10 @@ void Chunk(const StructureData&, const Strings&, const std::vector<TokInfo>& inf
             c = std::max(k, static_cast<int>(b.content));
         }
         b.content = static_cast<uint16_t>(c);
-        b.kase = LastCase(info, b.first, b.last);
+        bool topic = false;
+        b.kase = LastCase(info, b.first, b.last, topic);
         uint8_t flags = 0;
-        if (b.kase == Case::wa || b.kase == Case::mo) flags |= Topic;
+        if (topic) flags |= Topic;
         for (int i = b.first; i <= b.last; ++i) {
             if (info[i].wc == Wc::comma) flags |= CommaAfter;
             if (info[i].wc == Wc::close) flags |= QuoteClose;
@@ -130,8 +148,8 @@ void Chunk(const StructureData&, const Strings&, const std::vector<TokInfo>& inf
         bool pred = false;
         for (int i = b.first; i <= b.last; ++i) {
             Wc w = info[i].wc;
-            if (w == Wc::verb || w == Wc::verb_dep || w == Wc::adj || w == Wc::adj_dep || w == Wc::aux ||
-                w == Wc::na_aux || w == Wc::suf_adj || w == Wc::suf_v)
+            if ((w == Wc::verb || w == Wc::verb_dep || w == Wc::adj || w == Wc::adj_dep || w == Wc::aux ||
+                 w == Wc::na_aux || w == Wc::suf_adj || w == Wc::suf_v) && !IsParticleVerb(info[i]))
                 pred = true;
         }
         Wc cw = info[b.content].wc;

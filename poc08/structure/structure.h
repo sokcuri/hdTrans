@@ -64,6 +64,9 @@ struct TokInfo {
     R role = R::none;              // role passed on to the next token
 };
 
+// A verb that is part of a compound particle (によって, について): a case, not a predicate.
+inline bool IsParticleVerb(const TokInfo& t) { return t.row != nullptr && t.row->kind == AuxKind::kase && !t.row->afters.empty(); }
+
 // Loads the tables from their TSV text. Returns false and sets err on a malformed row.
 bool LoadStructureData(std::string_view auxTsv, std::string_view udTsv, std::string_view formsTsv,
                        std::string_view headTsv, Strings& strings, StructureData& out, std::string& err);
@@ -83,13 +86,16 @@ enum class Dt : uint8_t { adn, topic, pred, kase, adv, conj, other };
 struct HeadFacts {
     Dt dt = Dt::other;
     bool hasNoun = false, hasPred = false, endsSentence = false, comma = false, opens = false, closes = false;
+    bool kaseTopic = false;
+    Case kase = Case::none;
     int depthIn = 0, depthOut = 0, sentEnd = 0;
     std::string last, form, cwc, clemma;
 };
 std::vector<HeadFacts> ComputeHeadFacts(const Strings& strings, const std::vector<TokInfo>& info, const Path& path);
 
 // The named features of the dependency of bunsetsu dep on candidate head cand (also used to train weights).
-void HeadFeatures(const std::vector<HeadFacts>& facts, int dep, int cand, std::vector<std::string>& out);
+void HeadFeatures(const std::vector<HeadFacts>& facts, const std::vector<int>& heads, int dep, int cand,
+                  std::vector<std::string>& out);
 
 // L: clauses with features and arguments.
 void BuildClauses(const StructureData& data, Strings& strings, const std::vector<TokInfo>& info, Path& path,

@@ -53,7 +53,7 @@ std::vector<int> Decode(const std::unordered_map<std::string, double>& w, const 
         double best = -1e300;
         int bestJ = i + 1;
         for (int j = i + 1; j != -1 && j <= facts[i].sentEnd; j = head[j]) {
-            hd8::HeadFeatures(facts, i, j, feats);
+            hd8::HeadFeatures(facts, head, i, j, feats);
             double s = 0;
             for (const auto& f : feats) {
                 auto it = w.find(f);
@@ -173,7 +173,7 @@ int main(int argc, char** argv) {
                         continue;
                     }
                     auto upd = [&](int j, double delta) {
-                        hd8::HeadFeatures(facts[e], i, j, feats);
+                        hd8::HeadFeatures(facts[e], pred, i, j, feats);
                         for (const auto& f : feats) {
                             // lazy averaging: acc holds the sum of weights over steps
                             auto& wl = last[f];

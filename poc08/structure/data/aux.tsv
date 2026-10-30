@@ -103,6 +103,13 @@ aux.sumu	済む	*	動詞-一般	*	*	prevrole=zu-ni|prev=で	modal	role=sumu	own	
 aux.irareru	居る	*	動詞-非自立可能	未然形	*	prev=は|prevrole=zu-ni	modal	role=irareru	own	ずにはいられない
 aux.naru.become	成る	*	動詞-非自立可能	*	*	prev=に|prevrole=cop-ni|prevrole=adj-ku	aux	role=naru	own	ようになる, 高くなる: change of state, the verb is the head
 aux.suru.light	為る|致す|為さる|遊ばす	*	動詞-非自立可能	*	*	prevud=名詞|prevud=接尾辞-名詞的|prevud=形状詞|prevrole=cop-ni|prevrole=adj-ku|prevrole=vol	light	role=light	own	勉強する, 静かにする, 高くする, 行こうとする
+aux.cp.yotte	因る	*	動詞	連用形	*	prev=に	case	kase=ni	own	によって: the agent of a passive, the means
+aux.cp.yoru	因る	*	動詞	連体形	*	prev=に	case	kase=no	own	による (adnominal)
+aux.cp.taishite	対する	*	動詞	連用形	*	prev=に	case	kase=ni	own	に対して
+aux.cp.tsuite	つく|付く|就く	*	動詞	連用形	*	prev=に	case	kase=ni	own	について
+aux.cp.oite	於く|置く	*	動詞	連用形	*	prev=に	case	kase=de	own	において
+aux.cp.toshite	為る	*	動詞	連用形	*	prev=と	case	kase=to	own	として
+aux.cp.mukete	向ける	*	動詞	連用形	*	prev=に	case	kase=ni	own	に向けて
 aux.p.ga	が	*	助詞-格助詞	*	*	*	case	kase=ga	own
 aux.p.wo	を	*	助詞-格助詞	*	*	*	case	kase=wo	own
 aux.p.ni	に	*	助詞-格助詞	*	*	*	case	kase=ni;role=ni	own	after ず: ずに (link zu)
