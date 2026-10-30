@@ -1,0 +1,10 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:novel-verbs:28	あなたの可愛さは使い潰されるためにあるのではないの。	당신의 귀여움은 혹사되기 위해 있는 것은 아니야.	fix	defaults
+dict:novel-verbs:28	家で使い潰すつもりなのです	집에서 혹사할 생각인 것입니다	fix	defaults
+dict:novel-verbs:28	利用するから、使い潰されないように。	이용하니까, 혹사되지 않도록.	fix	defaults
+dict:novel-verbs:28	存分に使い潰してください	마음껏 혹사해 주세요	fix	defaults
+dict:novel-verbs:29	部下を使いつぶす。	부하를 혹사한다.	fix	defaults
+dict:novel-verbs:28	道具を使い切る。	도구를 다 사용한다.	keep	defaults
+dict:novel-verbs:28	時間を潰す。	시간을 보낸다.	keep	defaults
+dict:novel-verbs:28	お金を使い込む。	돈을 유용한다.	keep	defaults
