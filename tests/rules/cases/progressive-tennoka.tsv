@@ -1,0 +1,19 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+dict:novel-tennoka:1	やいてんのか？	태우고 있는 거야?	fix	local-ending
+dict:novel-tennoka:1	からかってんのか？	놀리고 있는 거야?	fix	local-ending
+dict:novel-tennoka:1	泣いてんのか?	울고 있는 거야?	fix	local-ending
+dict:novel-tennoka:1	壊れてんのか？　これ。	망가져 있는 거야? 이것.	fix	local-ending
+dict:novel-tennoka:1	(ガロ） 悩んでんのか	(가로) 고민하고 있는 거야	fix	local-ending
+dict:novel-tennoka:1	(濱家) 出資してんのか！	(하마야) 출자하고 있는 거야!	fix	local-ending
+dict:novel-tennoka:1	30過ぎて何考えてんのか	30 지나 무엇 생각하고 있는 거야	fix	local-ending
+dict:novel-tennoka:2	お前、何考えてんのか分かってるのか	has:생각하고 있는지	fix	defaults
+dict:novel-tennoka:3	迷ってんのかよ！	헤매고 있는 거냐!	fix	defaults
+dict:novel-tennoka:4	質問してんのはこっちなんだから	has:질문하고 있는 것은	fix	local-ending
+dict:novel-tennoka:5	そんな理屈が通る相手だと思ってんのかい？	has:생각하는 거야?	fix	defaults
+dict:novel-tennoka:6	おい 君たちは本気で 事件が未解決だと思ってんのかね	has:생각하는 건가	fix	defaults
+dict:novel-tennoka:8	この雷様に敵うとでも思ってんのかしら。	has:생각하는 걸까.	fix	defaults
+dict:novel-tennoka:9	まだ酔ってんのかな？	아직 취하고 있을까?	fix	defaults
+dict:novel-tennoka:1	泣いてんの?	울고 있어?	keep	defaults
+dict:novel-tennoka:1	泣いてるのか?	울고 있는 거야?	keep	local-ending
+dict:novel-tennoka:1	知らんのか	모르는가	keep	defaults
