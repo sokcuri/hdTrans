@@ -2,3 +2,8 @@
 # 소설에서 틀리게 읽던 형용사, 부사, 의성어와 의태어
 key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 儚げ美人	가녀린 미인	N110			GN							novel-modifiers:1
+カラカラに	바싹	E300			GN							novel-modifiers:2
+ビタリと	딱	E311			GN							novel-modifiers:4
+ビタリとも	꼼짝도	E300			GN							novel-modifiers:5
+ピタリとも	꼼짝도	E300			GN							novel-modifiers:6
+ぴたりとも	꼼짝도	E300			GN							novel-modifiers:7

@@ -1,0 +1,10 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:novel-modifiers:2	口の中がカラカラに乾くのを感じる。	입속이 바싹 마르는 것을 느낀다.	fix	defaults
+dict:jisjk:265624	口の中がからからに乾いたように	입속이 바싹 마른 것처럼	fix	defaults
+dict:novel-modifiers:5	溶接でもされたかのように、ビタリとも動かなかった。	용접이라도 된 것처럼, 꼼짝도 움직이지 않았다.	fix	defaults
+dict:novel-modifiers:6	ピタリとも動かない。	꼼짝도 움직이지 않는다.	fix	defaults
+dict:novel-modifiers:4	ビタリと止まった。	딱 멈추었다.	fix	defaults
+dict:novel-modifiers:4	ピタリと動きを止めた。	딱 움직임을 멈추었다.	keep	defaults
+dict:novel-modifiers:4	ピタリ当たりました。	딱 맞았습니다.	keep	defaults
+dict:novel-modifiers:4	ぴたりと止まる。	딱 멈춘다.	keep	defaults
