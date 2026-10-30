@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+word:class3-negative	ショックのあまり誰とも会いたがらなかった	lacks:그다지	fix	class3
+word:class3-negative	昨日の晩は興奮のあまり朝までほとんど寝つけなかったよ。	lacks:그다지	fix	class3
+word:class3-negative	心配のあまり眠れない。	lacks:그다지	fix	class3
+word:class3-negative	恐怖のあまり声も出ない。	lacks:그다지	keep	class3
+word:class3-negative	緊張のあまり何も言えなかった。	lacks:그다지	keep	class3
+word:class3-negative	シア様の言葉にはあまり同意できない	has:그다지 동의할 수 없다	keep	class3
+word:class3-negative	父ともあまり交流がないまま育ち	has:그다지 교류가 없는	keep	class3
+word:class3-negative	情報はあまりありませんが	has:그다지 없습니다	keep	class3
+word:class3-negative	最近はあまり本を読んでいない	has:그다지 책을 읽지 않았다	keep	class3
+word:class3-negative	話はあんまり上手くない	has:별로 능숙하지 않다	keep	class3
+word:class3-negative	あんまり早くないけどね	has:별로 빠르지 않지만	keep	class3
+word:class3-negative	御園はあんまり会えてないって言ってた	has:별로 만나지 못한다고	keep	class3
+word:class3-negative	あまり感じない	has:그다지 느끼지 않는다	keep	class3
+word:class3-negative	驚きのあまりアヤメの言葉使いが素に戻った	has:놀란 나머지	keep	class3
+word:class3-negative	忙しさのあまりこだわる事もなく一纏めにした	has:바쁜 나머지	keep	class3
+word:class3-negative	俺の顔をあまり見てくれないし	has:그다지 봐 주지 않고	keep	class3
