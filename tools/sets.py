@@ -20,7 +20,7 @@ pinned base build is measured once for every fix made on it.
 
 --base RUN --needles FILE translates only the lines that hold a needle (tools/affected.py; lines are
 folded by its fold()) and the documents or blocks that hold such a line, and copies the rest from
-RUN, the base run of the same sets. A needle file holding `*` or more than 1000 needles translates
+RUN, the base run of the same sets. A needle file holding `*` or more than 200 needles translates
 everything. --canary N
 also translates N seeded distinct lines without a needle per each-line set and fails when one of
 them differs from RUN, which means the needles missed a way the change reaches the text.
@@ -51,7 +51,7 @@ _spec = importlib.util.spec_from_file_location("affected", HERE / "tools" / "aff
 _affected = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_affected)
 fold, needle_pattern = _affected.fold, _affected.pattern
-MANY = 1000  # needles beyond which matching costs more than translating every line
+MANY = 200  # needles beyond which matching costs more than translating every line
 
 
 def fail(message, code=2):
