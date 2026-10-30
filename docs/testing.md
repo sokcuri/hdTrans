@@ -12,7 +12,7 @@
 | `dicts.ids` | `dicts/`의 열 파일마다 키가 다른 두 행이 같은 `id`를 갖지 않는지 확인. 다른 표기를 모은 `words-variants.tsv`는 제외 (Unix) |
 | `dicts.nn-rows` | `base`, `words` 층의 명사 행 가운데 맨 명사로 읽지 않는 꼴(조사로 끝나는 구, 부사로 옮기는 행)에 문법 코드 `Nn`이 있거나 `tools/nn-allowance.tsv`에 올라 있는지, 허용 목록에 필요 없거나 두 번 적힌 줄이 없는지 확인 (`tools/nn-rows.py --check`, Unix, Python 3) |
 | `dicts.classes` | `src/core`가 부르는 낱말 부류마다 `classes.tsv`에 설명 줄과 행이 있고, 표의 부류마다 부르는 코드가 있는지 확인 |
-| `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`와 `tools/pick.sh`를 작은 저장소에서 돌리는 `tests/pick.sh` (Unix, Python 3) |
+| `tools.<이름>` | `tools/`의 Python 작업 도구의 `--self-test`, `tools/pick.sh`와 `tools/check-fix.sh`를 작은 저장소에서 돌리는 `tests/pick.sh`, `tests/check-fix.sh` (Unix, Python 3) |
 | `examples` | `examples/` 번역 확인. `HDTRANS_DICTS`가 없으면 건너뜀 |
 | `rules.critical` | 뜻이 뒤집히는 오역의 사례 `tests/rules/critical/<갈래>.tsv`. 한 행도 실패하지 않아야 하고 `current` 행을 받지 않음 ([번역 규칙 MNG](../spec/meaning.md)) |
 | `rules.cases.themes` | `tests/rules/cases/<주제>.tsv`의 규칙 사례를 `dicts/`로 번역해 확인 ([아래](#규칙-사례-testsrulescases)) |
@@ -400,6 +400,29 @@ python3 tools/attribute.py --verdicts "$RUN/spans/sample.verdicts.tsv" \
 맞추므로 정규화, 합성된 단어는 빠질 수 있고, `-why`가 기록하지 않는 층은 [pipeline-layers.md](pipeline-layers.md#누가-정했는지--why)와
 단계 기록으로 확인합니다. 표준 오류에는 분석, 출력 변화, 구간 누락 개수가 나옵니다.
 
+## 빠른 측정 (check-fix.sh)
+
+고치는 동안 되풀이하는 측정을 줄입니다. PR 전의 판정은 위 [변경 판정](#변경-판정-e2e--모델-판정)대로 합니다.
+
+```sh
+export HDTRANS_SETS="corpus=$HDTRANS_CORPUS sample=$HDTRANS_REF_SAMPLE/ja.txt corpus-doc=$HDTRANS_CORPUS@blocks=200"
+tools/check-fix.sh my-fix          # gate, 기준과 지금의 세트 번역, 바뀐 줄, 판정 묶음
+```
+
+- 기준 커밋(기본 develop과의 merge base)은 `$HDTRANS_WORK/bases/<커밋>/`에 한 번만 빌드하고, 그 세트 번역은
+  `$HDTRANS_WORK/sets-cache/`에 둡니다. 같은 기준에서 고치는 다음 수정은 자기 쪽만 번역합니다.
+- `dicts/`만 바뀌었으면 기준 CLI에 이 트리의 사전을 주므로 빌드하지 않습니다. 엔진에 닿는 다른 파일이 바뀌면 빌드하고 모든 줄을 다시 번역합니다.
+- `tools/affected.py BASE [HEAD]`가 바뀐 행의 키(동사, 형용사는 어간, 한자 키의 가나 표기, 같은 지역 규칙을 부르는 행의 키)를
+  씁니다. 그 말이 든 줄만 다시 번역하고, 문서와 블록은 그런 줄이 든 것만 다시 번역합니다. `end`, `pat` 행이나 엔진에 닿는 다른 파일은
+  `*`(모든 줄)입니다.
+- 세트마다 말이 없는 줄 `HDTRANS_CANARY`(기본 200)개도 번역해 기준과 다르면 1로 끝납니다. 말 목록이 변경이 닿는 길을 놓친 것입니다.
+- gate는 세트 번역과 함께 돕니다(`-n`은 뺌).
+- `tools/sets.py run`은 줄마다 번역하는 세트의 서로 다른 줄을 한 번씩, CPU 수만큼 나눠 번역합니다. 출력은 한 프로세스로 `--each` 번역한 것과
+  바이트까지 같습니다. `NAME=FILE@blocks=N`은 N줄씩 끊은 문서이며, 한 파일 전체를 한 문서로 번역한 것(`@doc`)과는 블록 경계의 문맥만큼 다릅니다.
+- `tools/judge-packet.py make DIR PAIRS...`는 일본어, 이전, 이후가 같은 줄을 하나로 묶고, 바뀐 낱말이 같은 변경끼리 묶어 묶음마다
+  몇 줄만(`--reps`, 기본 3) `reps.pairs.tsv`에 씁니다. 판정한 뒤 `expand DIR VERDICTS`는 묶음의 판정이 모두 `improved`나 `same`으로 같을 때만
+  나머지 줄에 그 판정을 주고, 나빠짐이나 갈린 묶음은 `next.pairs.tsv`로 모두 다시 판정하게 합니다.
+
 ## 오류율 감사 (audit.py)
 
 변경 판정은 바뀐 줄만 봅니다. 감사는 릴리스마다 같은 줄을 뽑아 현재 출력에 등급을 매겨, 릴리스끼리 비교할 수 있는
@@ -514,11 +537,12 @@ tools/detect-bad.sh -c --source A.ja.txt A.ko.txt B.ja.txt B.ko.txt             
 | `HDTRANS_DATA`, `HDTRANS_INPUTS`, `HDTRANS_RUNS`, `HDTRANS_BIN` | `snapshot.sh`, `compare.sh` | 입력, 기록 위치와 CLI |
 | `HDTRANS_TESTDATA` | `e2e.sh`, `fetch-syosetu.sh`, `measure.sh`, `audit.py`, `drops.py`, ctest `testdata`, `sets.drops` | 테스트 데이터 폴더 |
 | `HDTRANS_EXAMPLES` | `measure.sh`, `audit.py`, `drops.py` | `web/examples/`에 없는 웹 예제 텍스트 폴더 (웹 빌드의 `HDTRANS_WEB_EXAMPLES`와 같은 폴더, 비공개) |
-| `HDTRANS_JOBS` | `measure.sh` | 한꺼번에 번역할 문서 수 (기본 CPU 수) |
+| `HDTRANS_JOBS` | `measure.sh`, `gate.sh` | 한꺼번에 번역할 문서 수, 동시에 돌릴 ctest 테스트 수 (기본 CPU 수) |
+| `HDTRANS_SETS`, `HDTRANS_CANARY` | `check-fix.sh` | `sets.py`의 세트 목록(공백 구분), 세트마다 확인할 말 없는 줄 수 |
 | `HDTRANS_DICTS_A` | `e2e.sh` | A 쪽 사전 |
 | `HDTRANS_DRIVER_DUMP` | CLI | `-stages`와 같음 |
 | `HDTRANS_CACHE_DIR`, `HDTRANS_SNAPSHOT`, `HDTRANS_VERIFY_DICTS` | 엔진 | 사전 캐시 ([dictionary-files.md](dictionary-files.md#캐시)) |
-| `HDTRANS_WORK` | `gate.sh`, `measure.sh` | 작업 출력 폴더 (기본 `build/work`) |
+| `HDTRANS_WORK` | `gate.sh`, `measure.sh`, `check-fix.sh` | 작업 출력 폴더 (기본 `build/work`) |
 | `HDTRANS_CORPUS`, `HDTRANS_REF_SAMPLE` | `measure.sh`, `audit.py`, `count-class.py`, `drops.py` | 줄 단위 회귀 문장 파일, `ja.txt`와 줄이 맞는 사람 번역 `ref.txt`가 든 폴더 (비공개) |
 | `HDTRANS_PRESET` | `gate.sh`, `measure.sh`, `regen-rules.sh`, `shadow.py` | 프리셋 (기본 macOS `mac`, 그 밖 `linux`) |
 | `HDTRANS_TIMEOUT` | `gate.sh`, `measure.sh`, `pick.sh` | 오래 걸릴 수 있는 단계의 시간 제한(초, 기본 1800) |

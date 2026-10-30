@@ -225,6 +225,8 @@ if(NOT EMSCRIPTEN)
             add_test(NAME tools.pick COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/pick.sh")
             add_test(NAME tools.measure COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/measure.sh"
                 "$<TARGET_FILE:hdtrans_cli>")
+            add_test(NAME tools.check-fix COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/check-fix.sh"
+                "$<TARGET_FILE:hdtrans_cli>")
             # Every noun row that does not read as a bare noun has gram Nn or an allowance (tools/nn-allowance.tsv).
             add_test(NAME dicts.nn-rows COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/nn-rows.py" --check)
