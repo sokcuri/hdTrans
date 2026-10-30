@@ -1,0 +1,13 @@
+# 규칙: SPC-4
+rule	input	expected	kind	layer
+dict:novel-chatta-noka:4	ビックリさせちゃったかな	깜짝 시켜버렸을까	fix	defaults
+dict:novel-chatta-noka:4	「うぅ…寝ちゃったかな」	has:자버렸을까	fix	defaults
+dict:novel-chatta-noka:5	じゃあ なんだ？ 言っちまいな	has:말해버려	fix	defaults
+dict:novel-chatta-noka:6	ほら 早く食べちゃいなさい。	has:먹어버려라.	fix	defaults
+dict:novel-chatta-noka:8	「裏切っちゃいない」	「배반하지는 않는다」	fix	defaults
+dict:novel-chatta-noka:8	誰も憎んじゃいない	아무도 미워하지는 않는다	fix	defaults
+dict:novel-chatta-noka:8	何をしたかは全然覚えちゃいない。	has:기억하지는 않는다.	fix	defaults
+dict:novel-chatta-noka:13	忘れちゃったのかしら？	잊어버린 걸까?	fix	defaults
+dict:novel-chatta-noka:15	部屋に帰っちゃったのかと思いました。	has:돌아가버린 줄 알았습니다.	fix	defaults
+dict:novel-chatta-noka:5	(男性)やっちまえ！	(남성) 해 치워라!	keep	defaults
+dict:novel-chatta-noka:4	食べちゃったの？	has:먹어버렸어?	keep	defaults

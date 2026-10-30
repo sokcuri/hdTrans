@@ -1,0 +1,10 @@
+rule	input	expected	kind	layer
+dict:lexical-novel-idioms	なんでかと言うと、俺の父方のじいちゃんがロシアかぶれだったから。	왜냐하면, 내 아버지 쪽의 할아버지가 러시아나 치우침이었으니까.	fix	lookup
+dict:lexical-novel-idioms	なんでかというとサンドウィッチマンが先輩でしょう？	왜냐하면 샌드위치맨이 선배죠?	fix	lookup
+dict:lexical-novel-idioms	何故かと言えば、それは魔法を発動させるためだ。	has:왜냐하면, 그것은 마법을 발동시키기 위해	fix	lookup
+dict:lexical-novel-idioms	なぜかと言うと、それが自分達の給料になるからだ。	왜냐하면, 그것이 자신들의 급료가 되기 때문이다.	fix	lookup
+dict:lexical-novel-idioms	そうか？うん、なんでかっていうと…	그런가? 응, 왜냐하면…	fix	lookup
+dict:lexical-novel-idioms	どうしてかというと、雨が降ったからだ。	왜냐하면, 비가 왔기 때문이다.	fix	lookup
+dict:lexical-novel-idioms	なぜかというとガチンコだけにね	왜냐하면 가틴코인 만큼	keep	lookup
+dict:lexical-novel-idioms	なぜか彼は笑った。	왠지 그는 웃었다.	keep	lookup
+dict:lexical-novel-idioms	何故か分からない。	어째서인지 모른다.	keep	lookup

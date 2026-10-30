@@ -9,7 +9,7 @@ dict:novel-period:4	上杉家の名跡を継ぎ関東管領に就任する	우�
 dict:novel-period:5	飛鳥井雅教　　　　　　　権中納言　飛鳥井雅綱の息子	아스카이 마사노리　　　　　　　곤추나곤 아스카이아강의 아들	fix	defaults
 dict:novel-period:6	一条家の当主。権大納言　妻は	이치조가의 당주. 곤다이나곤 아내는	fix	defaults
 dict:novel-period:7	典侍の娘、父親は正親町天皇	나이시노스케의 딸, 아버지는 오기마치 천황	fix	defaults
-dict:novel-period:7	典侍までしていた あの ホホッ上玉がおりまするが	나이시노스케까지 하고 있던 그 호홋 상등품이 우리하지만	fix	defaults
+dict:novel-period:7	典侍までしていた あの ホホッ上玉がおりまするが	has:나이시노스케까지 하고 있던	fix	defaults
 dict:novel-period:8	七里三河守頼周　　　　　本願寺の坊官	시치리 미카와노카미 요리치카　　　　　혼간지의 보칸	fix	defaults
 dict:novel-period:9	公事奉行守山弥兵衛重義の息子	구지 부교 모리야마 야베에 시게요시의 아들	fix	defaults
 dict:novel-period:10	新当流の剣客	신토류의 검객	fix	defaults

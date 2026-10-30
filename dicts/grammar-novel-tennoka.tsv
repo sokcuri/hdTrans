@@ -1,0 +1,12 @@
+#! layer=words
+# て형 뒤 てんのか, てんのは: てるのか, てるのは를 ん으로 말한 진행형
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+んのか	1고 있는 거야	S570			GN	9420	||2 D+1== "?" G+0== "Ow"	물음표 앞이나 문장 끝의 진행형 어미 てんのか를 '-고 있는 거야'로 고른다.				novel-tennoka:1
+んのか	1고 있는지	S570	XXX		GN							novel-tennoka:2
+んのかよ	1고 있는 거냐	S570			GN							novel-tennoka:3
+んの	1고 있는 것	S570			GN	9421	||1 ||2 S+1== "が" S+1== "は"	진행형 어미 てんの 뒤에 が나 は가 오면 '-고 있는 것'을 고른다.				novel-tennoka:4
+んのかい	1고 있는 거야	S570			GN							novel-tennoka:5
+んのかね	1고 있는 건가	S570			GN							novel-tennoka:6
+んのかいな	1고 있는 건가	S570			GN							novel-tennoka:7
+んのかしら	1고 있는 걸까	S570			GN							novel-tennoka:8
+んのかな	1고 있을까	S570			GN							novel-tennoka:9

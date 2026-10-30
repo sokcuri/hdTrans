@@ -1,0 +1,26 @@
+# 규칙: SPC-4, SPC-15
+rule	input	expected	kind	layer
+dict:novel-negative-ka	覚まさんか	깨지 않는가	fix	lookup
+dict:novel-negative-ka	すばらしいことじゃて。そうは思わんか？	has:그렇게는 생각하지 않는가?	fix	lookup
+dict:novel-negative-ka	真理ちゃん　休まんかね？	마리짱 쉬지 않는가?	fix	lookup
+dict:novel-negative-ka	御免｡ 誰か おらんか｡	has:누군가 있지 않는가.	fix	lookup
+dict:novel-negative-ka	(盤嶽)元気を出さんか！	has:힘내지 못해!	fix	lookup
+dict:novel-negative-ka	(村長)巴さん やめんか！	has:그만두지 못해!	fix	lookup
+dict:novel-negative-ka	助けてはくれぬか？	도와 주지 않는가?	fix	lookup
+dict:novel-negative-ka	呼んできてはくれぬか	불러 와 주지 않는가	fix	lookup
+dict:novel-negative-ka	もう１つ 敷いてはくれぬか	또 하나 깔아 주지 않는가	fix	lookup
+dict:novel-negative-ka	兼続はおらぬか！	카네츠구는 있지 않는가!	fix	lookup
+dict:novel-negative-ka	殿のお知恵を拝借できぬか	has:빌릴 수 없는가	fix	lookup
+dict:novel-negative-ka	「お見合いを受けてはくれんかのぉ？」	「맞선을 받아 주지 않겠는가?」	fix	lookup
+dict:novel-negative-ka	もうすっかり準備ができとるのお。早く始まらんかのう。	has:빨리 시작되지 않겠는가.	fix	lookup
+dict:novel-negative-ka	伏見の酒 要らんか～い	후시미의 술 필요 없나~	fix	lookup
+dict:novel-negative-ka	(男性)要らんか～い	(남성) 필요 없나~	fix	lookup
+dict:novel-negative-ka	行ってもらわなくちゃならんかもしれませんよ	has:되지 않아일지도	keep	lookup
+dict:novel-negative-ka	弓で射ぬかれた	has:활로	keep	lookup
+dict:novel-negative-ka	知らぬ間に	어느새	keep	lookup
+dict:novel-negative-ka	本を読みませんか？	책을 읽지 않습니까?	keep	lookup
+dict:novel-negative-ka	黙らんか！	입을 다물지 못해!	fix	lookup
+dict:novel-negative-ka	やめんか！	그만두지 못해!	fix	lookup
+cx:reproach-nka:10	(刑事)こら やめんか！	has:그만두지 못해!	fix	rewrites
+cx:reproach-nka:10	兼続はおらぬか！	!rule:cx:reproach-nka:10	keep	rewrites
+cx:reproach-nka:10	笑わんのか!?	!rule:cx:reproach-nka:10	keep	rewrites

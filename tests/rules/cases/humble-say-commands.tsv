@@ -1,9 +1,9 @@
 # 규칙: SPC-11
 rule	input	expected	kind	layer
 dict:w:28451	「申し上げよ」	「말씀드려라」	keep	local
-dict:w:28451	「申すがいい」	「말하는 게 좋다」	fix	local
+dict:w:28451	「申すがいい」	「말하도록 해라」	fix	local
 dict:w:28451	「何でも申せ」	「뭐든 말해라」	fix	local
-dict:w:28451	「では、申してみるがよい」	「그럼, 말해 보는 것이 좋다」	fix	local
+dict:w:28451	「では、申してみるがよい」	「그럼, 말해 보도록 해라」	fix	local
 dict:w:28451	「余に申してみよ」	「짐에게 말해 봐라」	fix	local
 dict:w:28451	「我に申してみろ」	「나에게 말해 봐라」	fix	local
 dict:w:28451	「遠慮なく申せ」	「거리낌 없이 말해라」	fix	local
@@ -21,7 +21,7 @@ dict:w:28451	「申せません」	「말할 수 없습니다」	keep	local
 dict:w:28451	「失礼を申すが、それは違います」	「실례를 말씀드리지만, 그건 다릅니다」	keep	local
 dict:w:28451	「何も申さぬ」	「아무것도 말씀드리지 않는다」	keep	local
 dict:w:28451	「申してみなさい」	「말해 봐」	fix	local
-dict:w:28451	「では申してみるがよい」	「그럼 말해 보는 것이 좋다」	fix	local
+dict:w:28451	「では申してみるがよい」	「그럼 말해 보도록 해라」	fix	local
 dict:w:28451	「陛下に申し上げよ」	!rule:dict:w:28451	keep	local
 dict:w:28451	「拙者が申す」	「졸자가 말씀드린다」	keep	local
 dict:w:28451	「ほう。申してみよ」	「호오. 말해 봐라」	fix	local

@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+dict:novel-idioms:20	ざっと見渡した限り、『イヌミミ』と『ネコミミ』は発見した。	대충 둘러본 한, 『개 귀』와 『고양이귀』는 발견했다.	fix	local
+dict:novel-idioms:20	おばさんから聞いた限り、事故に千里は一切関係ない。	아줌마에게서 들은 한, 사고에 천리는 일절 관계없다.	fix	local
+dict:novel-idioms:20	こうして思い出した限りの情報を紙に書き写した。	이렇게 하고 생각해 낸 한의 정보를 종이에 베껴썼다.	fix	local
+dict:novel-idioms:20	えっと、一応読んだ限り…。	음, 일단 읽은 한….	fix	local
+dict:novel-idioms:20	調べた限り、前例はない。	조사한 한, 전례는 없다.	fix	local
+dict:novel-idioms:20	そのときに見た限りでは、通貨は金貨らしい。	그 때에 내가 본 바로는, 통화는 금화인 것 같다.	keep	local
+dict:novel-idioms:20	私が知る限りは前例がない。	내가 아는 한은 전례가 없다.	keep	local
+dict:novel-idioms:20	富竹さんが嘘をついていない限り。	토미타케 씨가 거짓말을 하고 있지 않는 한.	keep	local
+dict:novel-idioms:20	この戦いが続く限り、平和はない。	이 싸움이 계속되는 한, 평화는 없다.	keep	local
+dict:novel-idioms:20	今日限りで辞める。	오늘 마지막으로 그만둔다.	keep	local
+dict:novel-idioms:20	力の限り戦った。	힘껏 싸웠다.	keep	local
+dict:novel-idioms:20	表情を見る限り、苦戦しているようだ。	표정을 보는 한, 고전하고 있는 것 같다.	keep	local

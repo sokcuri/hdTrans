@@ -1,0 +1,31 @@
+# 규칙: SPC-9
+rule	input	expected	kind	layer
+dict:novel-archaic-masuru:1	「たいていのお方は、御殿の金瓦か、庭園に目を奪われまするが」	has:빼앗기옵니다만」	fix	lookup
+dict:novel-archaic-masuru:1	ヒノキを求めるにあたり遣わされる者が番匠であるは当然のことと考えまするが	has:당연한 일이라고 생각하옵니다만	fix	lookup
+dict:novel-archaic-masuru:1	ぜひとも殿へとお目通りを願っておりまするが	has:알현을 바라고 있으옵니다만	fix	lookup
+dict:novel-archaic-masuru:1	確かに　古今東西の銘刀稀刀を集めておられまするが「病」とは　ちと大げさかと。	has:모으고 계시옵니다만 「병」	fix	lookup
+dict:novel-archaic-masuru:1	やっかいなことではございまするが	귀찮은 일이옵니다만	fix	lookup
+dict:novel-archaic-masuru:2	承服できませぬ！家中は離散いたしまするぞ！	has:집안은 이산하옵니다!	fix	lookup
+dict:novel-archaic-masuru:3	(すすり泣き)泣いておられまするな	(흐느낌) 울고 계시옵니다	fix	lookup
+dict:novel-archaic-masuru:3	伊賀の弓削新三郎殿でござりまするな	이가의 유게 신사부로님이시옵니다	fix	lookup
+dict:novel-archaic-masuru:5	これからの事で 私に何か命じておきたい事などがありますれば	has:일 등이 있으면	fix	lookup
+dict:novel-archaic-masuru:5	ええ まあ 薬石効なくそのまま身まかりますれば	has:그대로 세상을 떠나면	fix	lookup
+dict:novel-archaic-masuru:5	持っておりまするところから見ますれば	has:곳으로부터 보면	fix	lookup
+dict:novel-archaic-masuru:5	明日雨が降りますれば、中止いたします	내일 비가 오면, 중지하겠습니다	fix	lookup
+dict:novel-archaic-masuru:6	本は読みませぬが、	책은 읽지 않사옵니다만,	fix	lookup
+dict:novel-archaic-masuru:7	ただ残りの片方のありかを未だ吐きませぬで。	has:아직도 토하지 않아서.	fix	lookup
+dict:novel-archaic-negatives	市之進殿の妻敵になるほどの度胸はございませぬが	has:담력은 없사옵니다만	fix	lookup
+dict:novel-archaic-negatives	男児か女子かは分かりませぬが	has:모르옵니다만	fix	lookup
+dict:novel-archaic-negatives	そのためにはお家を抜けねばなりませぬが…。	has:아니 되옵니다만….	fix	lookup
+dict:novel-archaic-negatives	誠に申し訳ございませぬが	정말로 죄송하옵니다만	fix	lookup
+dict:novel-archaic-negatives	(吾作)間違いはござりませぬ	(고사쿠) 실수는 없사옵니다	fix	lookup
+dict:novel-archaic-negatives	徳川の行く末を考えるならば戦以外の道などござりませぬ	has:싸움 이외의 길 등 없사옵니다	fix	lookup
+dict:novel-archaic-negatives	あっ… ５重の天主などいまだ見たことも聞いたこともござりませぬが	has:들은 것도 없사옵니다만	fix	lookup
+dict:novel-archaic-negatives	《申し訳ござりませぬ》	《죄송하옵니다》	fix	lookup
+dict:novel-archaic-negatives	(萬)礼を取って仲人をするような奥方様ではございませぬが	has:마님이 아니옵니다만	fix	lookup
+dict:novel-archaic-negatives	名乗るほどの者ではござりませぬ	자칭할 정도의 사람이 아니옵니다	fix	lookup
+dict:novel-archaic-negatives	（横山）この書状　見覚えがおありでは　ござりませぬか？	has:있지 않사옵니까?	keep	lookup
+dict:novel-archaic-masuru:1	夏には湿気がこもり、蚊も蠅も湧きまする。	has:솟아나옵니다.	keep	lookup
+dict:novel-archaic-masuru:6	おじじ様を　一生許しませぬっ	has:용서하지 않사옵니다	keep	lookup
+dict:novel-archaic-masuru:1	本を読みますが、	책을 읽습니다만,	keep	lookup
+dict:novel-archaic-masuru:5	明日になれば分かる	내일이 되면 안다	keep	lookup

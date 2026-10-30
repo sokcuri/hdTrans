@@ -1,0 +1,29 @@
+rule	input	expected	kind	layer
+cx:ask-person:10	「俺に聞くなよ……」	has:나에게 묻지	fix	rewrites
+cx:ask-person:10	だったら　いちいち俺に聞かないでよ。	has:나에게 묻지	fix	rewrites
+cx:ask-person:10	……だがその前にお前に聞きたい事がある。	has:너에게 묻고	fix	rewrites
+cx:ask-person:10	困ったら、この俺に聞け！！	has:나에게 물어라	fix	rewrites
+cx:ask-person:10	他の人に聞いてください！	has:사람에게 물어	fix	rewrites
+cx:ask-person:10	それについては隣の娘に聞いてね。	has:물어	fix	rewrites
+cx:ask-person:10	何が起こっているのか私たち姉妹はわからず、ママに聞くこともできなかった。	has:엄마에게 묻는	fix	rewrites
+cx:ask-person:10	私に聞いてんの？	has:나에게 묻고	fix	rewrites
+cx:ask-person:10	お母さんに聞きなさい｡	has:엄마에게 물어	fix	rewrites
+cx:ask-person:10	本人に聞けばいい｡	has:본인에게 물으면	fix	rewrites
+cx:ask-person:10	いや 何で俺に聞くんですか？	has:나에게 묻습니까	fix	rewrites
+cx:ask-person:10	ちょっと おふくろに 聞きたいことがあってね。	has:어머니에게 묻고	fix	rewrites
+cx:ask-person:10	目の前の顔が俺に聞く。	has:나에게 묻는다	fix	rewrites
+cx:ask-person:10	「えーと、今のグレイス伯爵って確か、先代の従兄弟の孫だって親に聞いたぞ」	has:부모에게 들었어	keep	rewrites
+cx:ask-person:10	ハヤト君。麻衣子先生に聞いたんだよ。	has:선생님에게 들었어	keep	rewrites
+cx:ask-person:10	城西メディカルの同僚に 聞きました｡	has:동료에게 들었습니다	keep	rewrites
+cx:ask-person:10	色んな親父越えの話を色んな人に聞いてきましたけども	has:사람에게 들어	keep	rewrites
+cx:ask-person:10	こいつ 診てくれた医者に聞いて分かったよ	has:의사에게 듣고	keep	rewrites
+cx:ask-person:10	だから小宮さんに聞いてほしかったの	has:씨에게 들어	keep	rewrites
+cx:ask-person:10	是非 裁判官に聞いていただきたかったので。	has:재판관에게 들어	keep	rewrites
+cx:ask-person:10	あなたに聞かせてあげたかった。	has:당신에게 들려주고	keep	rewrites
+cx:ask-quoted-question:10	「隣に行っていいかと聞いているんだ」	has:묻고 있는	fix	rewrites
+cx:ask-quoted-question:10	何かあったのかと聞いても、何でもないの一点張り。	has:물어도	fix	rewrites
+cx:ask-quoted-question:10	「だから、どこに所属しているのかと聞いている！」	has:묻고 있어	fix	rewrites
+cx:ask-quoted-question:10	あなたは　どう思うかと聞いてるんです。	has:묻고 있습니다	fix	rewrites
+cx:ask-quoted-question:10	彼に何をしているのかと聞いた。	has:물었다	fix	rewrites
+cx:ask-quoted-question:10	先代の従兄弟の孫だって親に聞いたぞ	has:들었어	keep	rewrites
+cx:ask-quoted-question:10	明日は雨だと聞いた。	has:들었다	keep	rewrites

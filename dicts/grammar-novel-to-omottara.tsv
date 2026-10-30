@@ -1,0 +1,4 @@
+#! layer=words
+# 지난 일을 인용한 と思ったら: 그 뒤에 벌어진 일을 잇는 -다고 생각했더니
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ら	5더니	S560			GN	9440	||1 &&5 S+0== "思" ||2 Y-1== "L5" D-1== "L(이었)" P+1!= "7**" S+1!= "L大間違い" ||2 P+1!= "4**" &&6 U+1!= "て" U+1!= "Lてくだ" U+1!= "Lてね" U+1!= "Lてよ" U+1!= "Lなさい" U+1!= "Lろ"	지난 일을 인용한 思ったら는 그 뒤에 벌어진 일을 잇는 '-었더니'를 고른다.				novel-to-omottara:1

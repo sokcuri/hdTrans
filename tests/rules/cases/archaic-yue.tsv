@@ -1,0 +1,21 @@
+# 규칙: SPC-8
+rule	input	expected	kind	layer
+dict:novel-yue	「見事な石垣にございましたゆえ、つい見惚れておりました」	has:돌담이었으니,	fix	lookup
+dict:novel-yue	「某は無風流者ゆえ、堅いものにばかり目が行きまする」	has:무풍류자라서,	fix	lookup
+dict:novel-yue	まぁ、死者が相手ゆえに身元がバレるのは	has:상대이기에 신원이	fix	lookup
+dict:novel-yue	騎士様はその名声ゆえに、死体でも価値は	has:명성이기에,	fix	lookup
+dict:novel-yue	そろそろ、火急の用事があるゆえ失礼するが	has:용무가 있으니 실례하지만	fix	lookup
+dict:novel-yue	私は一介の牢人にすぎませぬゆえ。	has:지나지 않으니.	fix	lookup
+dict:novel-yue	何か面倒なことになるゆえ。	has:되니.	fix	lookup
+dict:novel-yue	この私がしかと面倒を見るゆえ心おきなく行ってまいれ	has:돌보니 거리낌없이	fix	lookup
+dict:novel-yue	新参ゆえ　勝手がわからず	has:신참이라서	fix	lookup
+dict:novel-yue	〈経験値ゼロゆえの 時々刑事	has:제로로 인한	fix	lookup
+dict:novel-yue	「愛ゆえの決断」…	「사랑으로 인한 결단」…	fix	lookup
+dict:novel-yue	それは間違いなく果たすゆえ付け回すのはやめろ	has:완수하니 따라다니는	fix	lookup
+dict:novel-yue	めでたく本復となりましたゆえ甲府に戻り	has:되었으니 고후로	fix	lookup
+dict:novel-yue	明智様が織田を討ったゆえじゃっ	has:토벌했기 때문이다	fix	lookup
+dict:novel-yue	何ゆえですか？	어째서입니까?	fix	lookup
+dict:novel-yue	褒めるゆえんです	칭찬하는 근거입니다	keep	lookup
+dict:novel-yue	エレベーター故障中	엘리베이터 고장 중	keep	lookup
+dict:novel-yue	故人様のお宅	고인님의 댁	keep	lookup
+dict:novel-yue	それゆえ逆転劇	그러므로 역전극	keep	lookup

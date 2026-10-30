@@ -1,0 +1,13 @@
+#! layer=words
+# 명사 뒤 なく, 無く로 굳은 부사(망설임 없이, 잊지 말고)와 조사 뒤 足らず(부족하고)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+迷いなく	망설임 없이	E300			GN							novel-naku:1
+迷い無く	망설임 없이	E300			GN							novel-naku:2
+ためらいなく	망설임 없이	E300			GN							novel-naku:3
+躊躇なく	주저 없이	E300			GN							novel-naku:4
+区別なく	구별 없이	E300			GN							novel-naku:5
+区別無く	구별 없이	E300			GN							novel-naku:6
+お忘れ無く	잊지 말고 	E300			GN							novel-naku:7
+お忘れ無く	잊지 마세요	E300			GN	3875	||1 G+0== "Ow"	お忘れなく는 문장 오른쪽 경계에서 요청 표현 ‘잊지 마세요’로 고른다.				novel-naku:8
+足らず	부족하고	I110			GN	9430	||3 S-1== "も" S-1== "が" S-1== "は"	조사 も, が, は 뒤의 足らず는 수량의 '미만'이 아니라 '부족하고'를 고른다.				novel-naku:9
+飽き足らず	만족하지 못하고	E300			GN							novel-naku:10
