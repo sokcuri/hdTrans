@@ -24,3 +24,4 @@ ending:space-before-mark	そうっすね いやだから息子さんからした
 ending:space-before-mark	（ 男性 ） そうっすね 。	(남성 ) 그렇네요 .	keep	builtin-ending
 ending:space-before-mark	命の恩人だっけ ?	생명의 은인이었나 ?	fix	builtin-ending
 ending:space-before-mark	命の恩人だっけ？	생명의 은인이었나?	keep	builtin-ending
+ending:space-before-mark	で ここの中で 封書があったじゃないですか , それで	그리고 여기 중에서 봉서가 있었지 않습니까, 그래서	keep	builtin-ending
