@@ -16,7 +16,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 争	손꼽&AW@	M440			GN	9307	||1 &&8 S-1== "を" S-2== "2" ||2 S-3== "・" S-3== "、" S-4== "1" D-4= "" D-3= "" D-2= "" D-1= ""	숫자로 쓴 1・2を争う는 손꼽히다로 읽고 앞의 1・2を는 읽지 않는다(軍内部でも1・2を争う人物 군 내부에서도 손꼽히는 인물).		-1		novel-idioms:13
 につきもの	에 으레 따르는 것	N110		Tu	GN							novel-idioms:14
 につきものの	에 으레 따르는	E0H0		Tu	GN							novel-idioms:15
-に付き物	에 으레 따르는 것	N110		Tu	GN							novel-idioms:16
 に付き物の	에 으레 따르는	E0H0		Tu	GN							novel-idioms:17
 に付きもの	에 으레 따르는 것	N110		Tu	GN							novel-idioms:18
 に付きものの	에 으레 따르는	E0H0		Tu	GN							novel-idioms:19
