@@ -1,7 +1,7 @@
 # 규칙: LEX-4
 rule	input	expected	kind	layer
 G90	王子と会った時の私はまだ子供だった。	왕자와 만났을 때의 나는 아직 아이였다.	fix	global-stem
-G90	森に入ってしばらくしたところで	숲에 들어와 한동안 하자	fix	global-stem
+G90	森に入ってしばらくしたところで	숲에 들어와 한동안 했더니	fix	global-stem
 G90	充分に店で休息を取り、	충분히 가게에서 휴식을 잡고,	fix	global-stem
 G90	鞄の中に入っている。	가방 안에 들어가 있다.	fix	global-stem
 G90	宮内に入る前は	궁내에 들어오기 전은	fix	global-stem

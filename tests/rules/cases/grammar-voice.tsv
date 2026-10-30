@@ -54,7 +54,7 @@ voice:listener	十時までに来られますか。	10시까지 올 수 있습�
 voice:listener	可燃物は投棄されましたか？	가연물은 투기되었습니까?	keep	voice
 voice:listener	刺身を食べられますか？	생선회를 먹을 수 있습니까?	keep	voice
 voice:shorter	リビングを出ようとすると、腕を掴まれた。	거실을 나오려고 하니, 팔을 잡혔다.	fix	voice
-voice:shorter	歩き出したところで腕を掴まれる。	걷기 시작하자 팔을 잡힌다.	fix	voice
+voice:shorter	歩き出したところで腕を掴まれる。	걷기 시작했더니 팔을 잡힌다.	fix	voice
 voice:shorter	男に肩を掴まれた。	남자가 어깨를 잡았다.	fix	voice
 voice:shorter	口を塞がれた。	입을 막혔다.	fix	voice
 voice:shorter	佐藤さんと繋がれたから……	사토 씨와 연결될 수 있었으니까……	keep	voice
