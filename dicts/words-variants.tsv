@@ -8431,11 +8431,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 となり合	서로 이웃이 &C6@	M410			GN							jisjk:92633
 となり合	서로 이웃&AV@	M420			GN							jisjk:142790
 となり合	나란히 &AV@	M420			GN							jisjk:145436
-跳び降り	뛰어 내&AA@	M417			GN							jisjk:93219
+跳び降り	뛰어내&AA@	M417			GN							jisjk:93219
 とび降り	뛰어 내&AA@	M417			GN							jisjk:93219
 とび下り	뛰어 내&AA@	M417			GN							jisjk:93219
 飛下り	뛰어 내&AA@	M417			GN							jisjk:93219
-跳びおり	뛰어 내&AA@	M417			GN							jisjk:93219
+跳びおり	뛰어내&AA@	M417			GN							jisjk:93219
 飛びきり	월등히	E311			GN							jisjk:1663
 飛びきり	최상	N110			GN							jisjk:153767
 とめ金	이음쇠	I110			GN							jisjk:67980
@@ -13488,8 +13488,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 からくり人形	태엽 인형	I110			GN							jisjk:67568
 輪を掛け	한 술 더 &A8@	M447			GN							jisjk:117103
 バター臭	서양티가 $A2@	H7U0			GN							jisjk:5315
-飛降り自殺	투신 자살	N110		Hd	GN							jisjk:153766
-飛降自殺	투신 자살	N110		Hd	GN							jisjk:153766
+飛降り自殺	투신자살	N110		Hd	GN							jisjk:153766
+飛降自殺	투신자살	N110		Hd	GN							jisjk:153766
 目を付け	주목&AV@	M427		Pn	GN							jisjk:117832
 蔭間	남창	N110	VHn		GN							jisjk:167957
 外そう	외부 삽입	N110			GN							jisjk:29846
