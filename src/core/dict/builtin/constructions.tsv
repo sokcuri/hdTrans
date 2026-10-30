@@ -695,7 +695,7 @@ cx:prohibit-particle:20	LEX-61	&&4 S+0== "しな" P+0== "7**" ||3 U+0== "いで�
 cx:prohibit-request:10	LEX-61	&&4 :prohibit-please F-1== "verb" U-1== "ないで" Y-1== "1지 말아"	set-ending@-1 "1지 마세요" set-target ""	食べないでください 먹지 마세요
 cx:prohibit-request:20	LEX-61	&&4 :prohibit-please S-1== "しな" P-1== "7**" U-1== "いで"	set-target@-1 "$Kz@" set-ending@-1 "1지 마세요" set-target ""	勘違いしないでください 착각하지 마세요
 //= reproach-nka	after OfferPromise 655	A negative ending read 지 않는가 right before ！ is a reproach, not a question: 지 못해 (黙らんか！ 입 다물지 못해!, やめんか！ 그만두지 못해!); not 있다 or 없다, whose ぬか calls for someone (おらぬか！ 있지 않는가!), a のか that asks (笑わんのか!?) or a polite ませんか.
-cx:reproach-nka:10	SPC-4	&&4 Y+0== "R지 않는가" F+0== "exclaim-after" !1 F+0== "ko-state" !1 ||3 F+0== "question-after" I+0== "Rのか" I+0== "Rせんか"	replace-ending-tail "지 않는가" "지 못해"	やめんか！ 그만두지 못해!
+cx:reproach-nka:10	SPC-15	&&4 Y+0== "R지 않는가" F+0== "exclaim-after" !1 F+0== "ko-state" !1 ||3 F+0== "question-after" I+0== "Rのか" I+0== "Rせんか"	replace-ending-tail "지 않는가" "지 못해"	やめんか！ 그만두지 못해!
 //= voice-out	after OfferPromise 650	The 声 read 목소리 right before 出る with no particle between is a sound that escapes: 소리 (声出ちゃう 소리 나와 버린다). Not before に (声に出す says it aloud) nor が (声が出ない 목소리가 나오지 않는다).
 cx:voice-out:10	LEX-61	&&3 S+0== "声" D+0== "목소리" S+1== "L出"	set-target "소리"	声出ちゃう 소리 나와 버린다
 

@@ -1,4 +1,4 @@
-# 규칙: SPC-4
+# 규칙: SPC-4, SPC-15
 rule	input	expected	kind	layer
 dict:novel-negative-ka	覚まさんか	깨지 않는가	fix	lookup
 dict:novel-negative-ka	すばらしいことじゃて。そうは思わんか？	has:그렇게는 생각하지 않는가?	fix	lookup
