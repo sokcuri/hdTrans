@@ -31,4 +31,12 @@ PY
 for want in '"line":2,' '"line":3,'; do
     grep '"case"' "$tmp/long.jsonl" | grep -q "$want" || { echo "FAIL: no side IR for $want after a long line"; fail=1; }
 done
+# 0.8-rule leaves caption documents as 0.7.x writes them, and rewrites a quoted line of a story.
+printf '(太郎)行くぞ｡\n｢待って｣\n(花子)うん｡\n' > "$tmp/cap.txt"
+"$a" --dicts "$dicts" --in "$tmp/cap.txt" > "$tmp/cap.a" || fail=1
+"$b" --dicts "$dicts" --poc08 rule --in "$tmp/cap.txt" > "$tmp/cap.b" || fail=1
+cmp -s "$tmp/cap.a" "$tmp/cap.b" || { echo "FAIL: --poc08 rule changed a caption document"; fail=1; }
+printf '彼は窓の外を見た。\n「明日も来てくださいね」\n' > "$tmp/story.txt"
+"$b" --dicts "$dicts" --poc08 rule --poc08-stats --in "$tmp/story.txt" > /dev/null 2> "$tmp/story.err" || fail=1
+grep -q 'hdtrans08 rule: .*dialogue=1 ' "$tmp/story.err" || { echo "FAIL: the quoted line is not dialogue"; fail=1; }
 exit $fail

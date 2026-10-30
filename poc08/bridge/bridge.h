@@ -7,6 +7,7 @@
 //   generate   0.7.x's resolved sentence is lifted to kir (lift.h), the deciders (D) overwrite
 //              voice and connective slots, and R, W and G write the sentence;
 //   decide     D runs (otherwise kir keeps 0.7.x's choices);
+//   rule       0.8-rule: segment, and the generator's retrofit on dialogue lines (bridge/rule.h);
 //   reselect   D inside 0.7.x: where a decider overrides 0.7.x (voice, ように, ところで), the item takes
 //              the ending candidate 0.7.x already had whose class is the decided one, and the
 //              sentence is composed again (no generator).
@@ -23,6 +24,7 @@ namespace hd08::bridge {
 struct Options {
     Config cfg;
     bool normalize = false, segment = false, generate = false, decide = false, reselect = false;
+    bool rule = false;    // 0.8-rule: segment plus the retrofit on dialogue (bridge/rule.h; run by the CLI)
     bool sideIr = false;  // keep the side IR records (--why, --stages); costs time
     bool lift = false;    // lift every sentence even when no part needs it (to count the misses)
 };

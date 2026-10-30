@@ -349,7 +349,7 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
 }  // namespace
 
 bool ParseParts(std::string_view list, Options& out, std::string& err) {
-    out.normalize = out.segment = out.generate = out.decide = out.reselect = false;
+    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = false;
     if (list == "none") return true;
     if (list == "all") {
         out.normalize = out.segment = out.generate = out.decide = true;
@@ -365,8 +365,9 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
         else if (part == "generate") out.generate = true;
         else if (part == "decide") out.decide = true;
         else if (part == "reselect") out.reselect = true;
+        else if (part == "rule") out.rule = out.segment = true;
         else {
-            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, all, none)";
+            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, all, none)";
             return false;
         }
         at = comma + 1;
@@ -377,13 +378,21 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
 Bridge* Create(const Options& options, std::string& err) {
     auto b = std::make_unique<Bridge>();
     b->opt = options;
-    if (!LoadEngine(options.cfg, b->engine, err)) return nullptr;
+    // Only the components a part needs are loaded: segment and normalize need the analyzer alone, so 0.8-rule
+    // loads no structure, discourse or transfer table.
+    const bool full = options.generate || options.decide || options.reselect || options.sideIr || options.lift;
+    if (full) {
+        if (!LoadEngine(options.cfg, b->engine, err)) return nullptr;
+    } else {
+        b->engine.cfg = options.cfg;
+        if (!(b->engine.analyzer = LoadAnalyzer(options.cfg, err))) return nullptr;
+    }
     if (!LoadLift(options.cfg.data, b->lift, err)) return nullptr;
     const std::string stubs = StubComponents();
     auto stub = [&](const char* name) { return (',' + stubs + ',').find(',' + std::string(name) + ',') != std::string::npos; };
     b->analyzerReal = !stub("analyzer");
-    b->generatorReal = !stub("generator");
-    b->transferReal = !stub("transfer");
+    b->generatorReal = full && !stub("generator");
+    b->transferReal = full && !stub("transfer");
     b->opt.normalize = options.normalize && b->analyzerReal;
     b->opt.segment = options.segment && b->analyzerReal;
     b->opt.generate = options.generate && b->generatorReal;
@@ -422,6 +431,7 @@ std::string ActiveParts(const Bridge* b) {
     add(b->opt.generate, "generate");
     add(b->opt.decide, "decide");
     add(b->opt.reselect, "reselect");
+    add(b->opt.rule, "rule");
     return s;
 }
 

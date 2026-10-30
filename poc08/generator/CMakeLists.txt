@@ -23,6 +23,7 @@ add_library(hd8gen STATIC
     src/kir_text.cpp
     src/rewrite.cpp
     src/analyze.cpp
+    src/retro.cpp
 )
 target_include_directories(hd8gen PUBLIC include PRIVATE src)
 target_compile_features(hd8gen PUBLIC cxx_std_20)

@@ -1,0 +1,188 @@
+#! reader
+# The 0.7.x output reader of the 0.8-rule retrofit (bridge/rule.cpp): marks, particles, dependent nouns and
+# verbalizers it knows, and the quote and speaker-tag marks of the dialogue detector. kind<TAB>value[<TAB>…]
+punct-ja	、	comma
+punct-ja	，	comma
+punct-ja	。	end
+punct-ja	．	end
+punct-ja	！	excl
+punct-ja	!	excl
+punct-ja	？	q
+punct-ja	?	q
+punct-ja	「	qopen
+punct-ja	」	qclose
+punct-ja	『	qopen
+punct-ja	』	qclose
+punct-ja	（	qopen
+punct-ja	）	qclose
+punct-ja	(	qopen
+punct-ja	)	qclose
+punct-ja	…	ellipsis
+punct-ja	‥	ellipsis
+punct-ja	―	dash
+punct-ja	─	dash
+punct-ja	～	mark
+punct-ja	〜	mark
+punct-ja	♪	mark
+punct-ja	・	pause
+punct-ja	【	qopen
+punct-ja	】	qclose
+punct-ja	“	qopen
+punct-ja	”	qclose
+punct-ko	,	comma	-
+punct-ko	.	end	-
+punct-ko	?	q	-
+punct-ko	!	excl	-
+punct-ko	…	ellipsis	-
+punct-ko	「	qopen	「
+punct-ko	」	qclose	」
+punct-ko	『	qopen	『
+punct-ko	』	qclose	』
+punct-ko	~	mark	～
+sym	≪
+sym	≫
+sym	〈
+sym	〉
+sym	《
+sym	》
+sym	〔
+sym	〕
+sym	［
+sym	］
+sym	｛
+sym	｝
+sym	{
+sym	}
+sym	<
+sym	>
+sym	＜
+sym	＞
+ja-particle	の
+ja-particle	に
+ja-particle	で
+ja-particle	と
+ja-particle	も
+ja-particle	へ
+ja-particle	から
+ja-particle	まで
+ja-particle	より
+ja-particle	や
+ja-particle	は
+ja-particle	が
+ja-particle	を
+ja-particle	には
+ja-particle	では
+ja-particle	とは
+ja-particle	にも
+ja-particle	でも
+ja-particle	へと
+ja-particle	だけ
+ja-particle	しか
+ja-particle	ばかり
+ja-particle	など
+ja-particle	こそ
+ja-particle	さえ
+ja-particle	すら
+ja-particle	とか
+ja-particle	って
+ja-particle	ほど
+ja-particle	くらい
+ja-particle	ぐらい
+ja-particle	ずつ
+ja-particle	について
+ja-particle	によって
+ja-particle	として
+ja-particle	にとって
+copula-not	(이)가
+copula-not	(이)나
+copula-not	(이)랑
+copula-not	(이)라도
+copula-not	(이)라고
+copula-not	(이)야말로
+copula-not	(이)든지
+copula-not	(이)든
+copula-not	(이)여
+copula-not	(이)며
+copula-not	(이)란
+copula-not	(이)라든가
+copula-not	(이)라든지
+copula-not	(이)나마
+copula-not	(이)고
+dep	것
+dep	거
+dep	수
+dep	줄
+dep	데
+dep	때
+dep	뿐
+dep	만큼
+dep	대로
+dep	듯
+dep	척
+dep	체
+dep	채
+dep	적
+dep	바
+dep	리
+dep	지
+dep	터
+dep	김
+dep	중
+dep	뻔
+dep	동안
+glue-lemma	하다
+glue-lemma	되다
+glue-lemma	시키다
+glue-lemma	당하다
+glue-lemma	드리다
+glue-lemma	받다
+glue-lemma	스럽다
+glue-lemma	답다
+glue-lemma	롭다
+glue-lemma	이다
+imp-end	て
+imp-end	で
+imp-end	ろ
+imp-end	れ
+imp-end	なさい
+imp-end	ください
+imp-end	下さい
+imp-end	くれ
+imp-end	てよ
+imp-end	ないで
+imp-end	ちょうだい
+imp-tail	！
+imp-tail	!
+imp-tail	。
+imp-tail	｡
+imp-tail	…
+imp-tail	～
+imp-tail	〜
+imp-tail	ー
+imp-close	」
+imp-close	』
+imp-close	）
+part-alt	이
+part-alt	을
+part-alt	은
+part-alt	와
+part-alt	으
+part-alt	이어
+part-alt	아
+stutter-mark	、
+copula-alt	이
+copula-lemma	이다
+lemma-end	다
+quote	「	」
+quote	『	』
+quote	≪	≫
+tag	(	)
+tag	（	）
+tag	【	】
+tag	［	］
+tag	[	]
+quote	｢	｣
+caption-mark	｡
+caption-mark	｢
+caption-mark	｣
+caption-mark	､

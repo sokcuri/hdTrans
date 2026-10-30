@@ -37,11 +37,65 @@
 #include "frontend/dictionary_version.h"
 #ifdef HDTRANS_POC08_HOOKS
 #include "bridge/bridge.h"
+#include "bridge/rule.h"
 #endif
 
 namespace {
 
 namespace stagerecords = hdTrans::cli::stagerecords;
+
+#ifdef HDTRANS_POC08_HOOKS
+// The observer of --poc08 rule: it records what 0.7.x resolved and cleaned per line for the retrofit, and
+// passes every stage on to the observer the other options set up.
+struct RuleWatch {
+    hdTrans::internal::StageObserver inner;
+    hd08::bridge::RuleCapture capture;
+};
+RuleWatch& Watch(void* c) { return *static_cast<RuleWatch*>(c); }
+hdTrans::internal::StageObserver RuleObserver(RuleWatch& w, const hdTrans::internal::StageObserver& inner) {
+    using hdTrans::internal::StageObserver;
+    w.inner = inner;
+    StageObserver o;
+    o.context = &w;
+    o.line = [](void* c, int line) {
+        Watch(c).capture.Line(line);
+        if (Watch(c).inner.line) Watch(c).inner.line(Watch(c).inner.context, line);
+    };
+    o.resolved = [](void* c, int chunk, int sentence, const hdTrans::word::Chain& chain) {
+        Watch(c).capture.Resolved(chunk, sentence, chain);
+        if (Watch(c).inner.resolved) Watch(c).inner.resolved(Watch(c).inner.context, chunk, sentence, chain);
+    };
+    o.cleaned = [](void* c, const hdTrans::output::Pieces& pieces) {
+        Watch(c).capture.Cleaned(pieces);
+        if (Watch(c).inner.cleaned) Watch(c).inner.cleaned(Watch(c).inner.context, pieces);
+    };
+    if (inner.text)
+        o.text = [](void* c, std::string_view tag, std::string_view text) { Watch(c).inner.text(Watch(c).inner.context, tag, text); };
+    if (inner.pieces)
+        o.pieces = [](void* c, std::string_view tag, int chunk, const hdTrans::output::Pieces& pieces) {
+            Watch(c).inner.pieces(Watch(c).inner.context, tag, chunk, pieces);
+        };
+    if (inner.tokens)
+        o.tokens = [](void* c, int chunk, const hdTrans::tokenizer::Tokens& tokens) {
+            Watch(c).inner.tokens(Watch(c).inner.context, chunk, tokens);
+        };
+    if (inner.analysis)
+        o.analysis = [](void* c, int chunk, const hdTrans::tokenizer::Tokens& tokens, const hdTrans::word::Analysis& a) {
+            Watch(c).inner.analysis(Watch(c).inner.context, chunk, tokens, a);
+        };
+    if (inner.composed)
+        o.composed = [](void* c, int chunk, int sentence, const hdTrans::output::Pieces& pieces) {
+            Watch(c).inner.composed(Watch(c).inner.context, chunk, sentence, pieces);
+        };
+    if (inner.restored)
+        o.restored = [](void* c, const hdTrans::pipeline::RestoreSteps& steps) {
+            Watch(c).inner.restored(Watch(c).inner.context, steps);
+        };
+    if (inner.filterLog)
+        o.filterLog = [](void* c, std::string_view message) { Watch(c).inner.filterLog(Watch(c).inner.context, message); };
+    return o;
+}
+#endif
 
 std::vector<std::string> SplitComma(const std::string& s) {
     std::vector<std::string> out;
@@ -122,6 +176,7 @@ void Usage(std::FILE* file) {
                "  --poc08-stages FILE    the side IR as JSON Lines (IR.md)\n"
                "  --poc08-misses FILE    the lift's missing table keys, most frequent first\n"
                "  --poc08-reselections FILE  the overrides of --poc08 reselect, realised or not\n"
+               "  --poc08-rule-pre FILE  the retrofit's input lines of --poc08 rule (JSON Lines)\n"
                "  --poc08-stats          counts of the replaced stages to stderr\n", file);
 #endif
 }
@@ -325,7 +380,7 @@ int RunMain(int argc, char** argv) {
     bool compileDicts = false;
     bool noCache = false;
 #ifdef HDTRANS_POC08_HOOKS
-    std::string poc08Parts = "none", poc08Data, poc08Why, poc08Stages, poc08Misses, poc08Reselections;
+    std::string poc08Parts = "none", poc08Data, poc08Why, poc08Stages, poc08Misses, poc08Reselections, poc08RulePre;
     bool poc08Stats = false;
 #endif
     for (int i = 1; i < argc; i++) {
@@ -359,7 +414,7 @@ int RunMain(int argc, char** argv) {
             || option == "-dump-rules" || option == "-speech" || option == "-context"
 #ifdef HDTRANS_POC08_HOOKS
             || option == "-poc08" || option == "-poc08-data" || option == "-poc08-why" || option == "-poc08-stages"
-            || option == "-poc08-misses" || option == "-poc08-reselections"
+            || option == "-poc08-misses" || option == "-poc08-reselections" || option == "-poc08-rule-pre"
 #endif
             ;
         if (takesValue && !value) {
@@ -411,6 +466,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-poc08-stages") poc08Stages = *value;
         else if (option == "-poc08-misses") poc08Misses = *value;
         else if (option == "-poc08-reselections") poc08Reselections = *value;
+        else if (option == "-poc08-rule-pre") poc08RulePre = *value;
         else if (option == "-poc08-stats") poc08Stats = true;
 #endif
         else {
@@ -686,6 +742,11 @@ int RunMain(int argc, char** argv) {
         std::fputs("hdtrans: warning: this --speech level is written only by the 0.8 generator, which is off\n",
                    stderr);
     }
+    RuleWatch ruleWatch;
+    std::shared_ptr<const hd08::bridge::RuleData> ruleData;
+    hd08::bridge::RuleCounts ruleCounts;
+    std::string rulePre;
+    std::string* const rulePreOut = poc08RulePre.empty() ? nullptr : &rulePre;
     const auto finish08 = [&]() -> bool {
         if (poc08.bridge == nullptr) return true;
         auto write = [](const std::string& path, const std::string& text) {
@@ -700,6 +761,12 @@ int RunMain(int argc, char** argv) {
         ok = write(poc08Stages, hd08::bridge::TakeStages(poc08.bridge)) && ok;
         ok = write(poc08Misses, hd08::bridge::LiftMisses(poc08.bridge, 100000)) && ok;
         ok = write(poc08Reselections, hd08::bridge::TakeReselections(poc08.bridge)) && ok;
+        ok = write(poc08RulePre, rulePre) && ok;
+        if (poc08Stats && ruleData)
+            std::fprintf(stderr, "hdtrans08 rule: lines=%llu caption_docs=%llu dialogue=%llu read=%llu replaced=%llu\n",
+                         static_cast<unsigned long long>(ruleCounts.lines), static_cast<unsigned long long>(ruleCounts.captionDocs),
+                         static_cast<unsigned long long>(ruleCounts.dialogue), static_cast<unsigned long long>(ruleCounts.read),
+                         static_cast<unsigned long long>(ruleCounts.replaced));
         if (poc08Stats) {
             const hd08::bridge::Counts c = hd08::bridge::CountsOf(poc08.bridge);
             const std::string parts = hd08::bridge::ActiveParts(poc08.bridge);
@@ -755,6 +822,17 @@ int RunMain(int argc, char** argv) {
     const bool stages = !stagesDir.empty();
     collector.families = &generated->families;
     if (stages) observer = stagerecords::ObserverFor(collector, observer);
+#ifdef HDTRANS_POC08_HOOKS
+    if (poc08Options.rule) {
+        std::string error;
+        ruleData = hd08::bridge::LoadRule(poc08Options.cfg.data, error);
+        if (!ruleData) {
+            std::fprintf(stderr, "hdtrans: cannot load the 0.8-rule data: %s\n", error.c_str());
+            return 1;
+        }
+        observer = RuleObserver(ruleWatch, observer);
+    }
+#endif
     // The local rules are the dictionary rows' bodies, so the tally counts them only
     // against the program the dictionary assembled.
     const hdTrans::rules::Program& program =
@@ -816,8 +894,17 @@ int RunMain(int argc, char** argv) {
         if (!context.empty()) addLines(context);
         const size_t contextLines = lines.size();
         addLines(input);
+#ifdef HDTRANS_POC08_HOOKS
+        std::vector<std::string> translated =
+            hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
+        if (ruleData) {
+            const std::vector<std::string> source(lines.begin() + static_cast<std::ptrdiff_t>(contextLines), lines.end());
+            hd08::bridge::RuleRewrite(*ruleData, source, ruleWatch.capture, translated, ruleCounts, rulePreOut);
+        }
+#else
         const std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
+#endif
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");
@@ -838,7 +925,17 @@ int RunMain(int argc, char** argv) {
             out = hdTrans::internal::TranslateRawLine(*snapshot, *generated, line, observer, options);
         } else {
             const std::string lines[] = {std::string(line)};
+#ifdef HDTRANS_POC08_HOOKS
+            if (ruleData) ruleWatch.capture.Clear();
+#endif
             out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options).front();
+#ifdef HDTRANS_POC08_HOOKS
+            if (ruleData) {
+                std::vector<std::string> one{out};
+                hd08::bridge::RuleRewrite(*ruleData, {std::string(line)}, ruleWatch.capture, one, ruleCounts, rulePreOut);
+                out = one.front();
+            }
+#endif
         }
         if (stages) {
             stagerecords::AddOutput(collector, collector.caseBase + 1, out);
