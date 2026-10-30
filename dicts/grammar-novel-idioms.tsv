@@ -21,3 +21,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 に付きもの	에 으레 따르는 것	N110		Tu	GN							novel-idioms:18
 に付きものの	에 으레 따르는	E0H0		Tu	GN							novel-idioms:19
 限り	한	N110			GN	9308	||1 &&2 P-1== "4**" ||2 U-1== "Rた" U-1== "Rだ"	과거형 동사 뒤의 限り는 범위를 나타내는 한으로 고른다(見渡した限り 둘러본 한).		-1		novel-idioms:20
+あまり	나머지	E300			GN	9309	||1 &&5 S-1== "の" P-2== "1**" G-2== "Hd" ||2 G+0== "Ow" P+1!= "2**" D-1= "한"	する 명사와 の 뒤의 あまり는 그 감정이 지나쳐서라는 한 나머지로 고른다(心配のあまり 걱정한 나머지).		1		novel-idioms:22
