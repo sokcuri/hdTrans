@@ -314,6 +314,39 @@ bool Nsu(std::string_view s, size_t pos, Match& m) {
     return CharOrEnd(s, p, U"かけよねわ」』！？!?。…‥ー〜～ぉぇ、", m, 2);
 }
 
+// The っす of です where the sentence goes on after it or ends in a particle pair that the end rows
+// of っす do not read: before よね, かね, けど, けれど, が, し, ので or のに (怖いっすよね, 事っすかね,
+// 大丈夫っすけど), and after a verb before から. As group 1 the です to write: んです after a verb's
+// terminal or past form (思うっすよね 思うんですよね, 首つったっすけど, あるっすから), です after a noun, an
+// adjective or そう, どう, こう, よう. っす after one kana that starts a word, as in a greeting or そっす,
+// stays.
+bool SsuMidSentence(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "っす")) return false;
+    bool goesOn = false;
+    for (const std::string_view w : {"よね", "かね", "けど", "けれど", "が", "し", "ので", "のに"}) {
+        if (s.substr(p).starts_with(w)) goesOn = true;
+    }
+    const bool kara = s.substr(p).starts_with("から");
+    if ((!goesOn && !kara) || s.substr(p).starts_with("しょ")) return false;
+    const char32_t c = Before(s, pos);
+    if (c == 0 || !(IsHiraganaClass(c) || IsKanjiClass(c) || IsKatakanaRune(c))) return false;
+    const std::string_view head = s.substr(0, pos);
+    const char32_t c2 = Before(head, head.size() - LastRune(head).size);
+    if (IsHiraganaClass(c) && !(IsHiraganaClass(c2) || IsKanjiClass(c2) || IsKatakanaRune(c2))) return false;
+    bool verb = In(c, U"るくぐすつぬぶむ");
+    if (c == U'う') {
+        verb = !(head.ends_with("そう") || head.ends_with("どう") || head.ends_with("こう") || head.ends_with("よう") ||
+                 head.ends_with("とう"));
+    }
+    if (c == U'た') verb = IsKanjiClass(c2) || In(c2, U"っいしきぎちにひびみりえけげせぜてでねへべめれ");
+    if (c == U'だ') verb = In(c2, U"んい");
+    if (kara && !verb) return false;
+    m.group[1] = verb ? "んです" : "です";
+    m.end = p;
+    return true;
+}
+
 // A literal pattern.
 template <const char* kText>
 bool Literal(std::string_view s, size_t pos, Match& m) {
@@ -963,6 +996,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, Literal<kUssai>, [](const Match&) { return std::string("うるさい"); });
     text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
     text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
+    text = ReplaceAll(text, SsuMidSentence, [](const Match& m) { return std::string(m.group[1]); });
     // てんす and でんす are the contracted ている before it (言ってんすか 言ってるんですか).
     text = ReplaceAll(text, contracted ? Nsu<true> : Nsu<false>, [contracted](const Match& m) {
         const bool te = contracted && (m.group[1] == "て" || m.group[1] == "で");
