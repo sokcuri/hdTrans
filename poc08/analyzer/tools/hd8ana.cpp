@@ -1,0 +1,643 @@
+// hd8ana: build, run, evaluate and train the 0.8 analyzer.
+//   hd8ana pack DATA_DIR OUT.bin
+//   hd8ana pack-long CORE.bin LONG.tsv OUT.bin
+//   hd8ana run CORE.bin [-l LONG.bin] [--split] [--format json|wakati|tsv]   (stdin → stdout)
+//   hd8ana eval CORE.bin [-l LONG.bin] [--split] [--no-derive] GOLD...        (tag.py format)
+//   hd8ana bench CORE.bin FILE [-l LONG.bin] [--no-margins]
+//   hd8ana train DATA_DIR SILVER OUT_DATA_DIR [--epochs N] [--step S] [--limit L]
+//   hd8ana longunits CORE.bin KEYS.tsv OUT.tsv [--bonus NATS]
+//   hd8ana norm < in > out          (layout-normalized lines, the teacher's input for fair gold)
+#include <algorithm>
+#include <chrono>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <random>
+#include <set>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+#include "hd8/analyzer.h"
+#include "lattice.h"
+#include "model.h"
+#include "normalize.h"
+#include "tsv.h"
+#include "utf8.h"
+
+using namespace hd8::ana;
+namespace fs = std::filesystem;
+
+namespace {
+
+bool ReadFile(const std::string& path, std::string* out) {
+  std::ifstream in(path, std::ios::binary);
+  if (!in) return false;
+  std::ostringstream ss;
+  ss << in.rdbuf();
+  *out = ss.str();
+  return true;
+}
+
+bool WriteFile(const std::string& path, const std::string& data) {
+  std::ofstream o(path, std::ios::binary);
+  o << data;
+  return static_cast<bool>(o);
+}
+
+int Die(const std::string& msg) {
+  std::fprintf(stderr, "hd8ana: %s\n", msg.c_str());
+  return 1;
+}
+
+struct Args {
+  std::vector<std::string> pos;
+  std::map<std::string, std::string> opt;
+  bool Has(const std::string& k) const { return opt.count(k) != 0; }
+  std::string Get(const std::string& k, const std::string& d = "") const {
+    auto it = opt.find(k);
+    return it == opt.end() ? d : it->second;
+  }
+};
+
+Args Parse(int argc, char** argv, std::set<std::string> valued) {
+  Args a;
+  for (int i = 2; i < argc; ++i) {
+    std::string s = argv[i];
+    if (s.size() > 1 && s[0] == '-') {
+      if (valued.count(s) && i + 1 < argc) a.opt[s] = argv[++i];
+      else a.opt[s] = "1";
+    } else {
+      a.pos.push_back(s);
+    }
+  }
+  return a;
+}
+
+bool LoadAnalyzer(Analyzer* an, const std::string& core, const std::string& longPath, double* ms) {
+  std::string bytes, err;
+  if (!ReadFile(core, &bytes)) return Die("cannot read " + core), false;
+  auto t0 = std::chrono::steady_clock::now();
+  if (!an->Load(bytes, &err)) return Die(err), false;
+  if (!longPath.empty()) {
+    std::string lb;
+    if (!ReadFile(longPath, &lb)) return Die("cannot read " + longPath), false;
+    if (!an->LoadOverlay(lb, &err)) return Die(err), false;
+  }
+  if (ms) *ms = std::chrono::duration<double, std::milli>(std::chrono::steady_clock::now() - t0).count();
+  return true;
+}
+
+// ---- gold (tag.py format) -------------------------------------------------------------------------
+struct GoldTok {
+  uint32_t b, e;  // src bytes
+  std::string surf, ud, ctype, cform, lemma, kana;
+  bool unk;
+};
+struct GoldLine {
+  std::string src;
+  std::vector<GoldTok> toks;
+};
+
+std::string UdName(const std::vector<std::string>& f) {
+  std::string s;
+  for (int i = 2; i <= 5; ++i) {
+    if (f[static_cast<size_t>(i)] == "*") continue;
+    if (!s.empty()) s += '-';
+    s += f[static_cast<size_t>(i)];
+  }
+  return s;
+}
+
+bool ReadGold(const std::string& path, std::vector<GoldLine>* out, size_t limit = SIZE_MAX) {
+  std::ifstream in(path, std::ios::binary);
+  if (!in) return false;
+  std::string line;
+  while (out->size() < limit && std::getline(in, line)) {
+    GoldLine g;
+    for (auto& t : SplitOn(line, '\x1f')) {
+      auto f = SplitOn(t, '\x1e');
+      if (f.size() < 12) continue;
+      g.src += f[0];
+      auto b = static_cast<uint32_t>(g.src.size());
+      g.src += f[1];
+      if (f[2] == "空白") continue;
+      g.toks.push_back({b, static_cast<uint32_t>(g.src.size()), f[1], UdName(f), f[6] == "*" ? "" : f[6],
+                        f[7] == "*" ? "" : f[7], f[9], f[10] == "*" ? "" : f[10], !f[11].empty()});
+    }
+    out->push_back(std::move(g));
+  }
+  return true;
+}
+
+// ---- pack ------------------------------------------------------------------------------------------
+int CmdPack(const Args& a) {
+  if (a.pos.size() < 2) return Die("pack DATA_DIR OUT.bin");
+  Model m;
+  std::string err;
+  if (!LoadTsvDir(a.pos[0], &m, &err)) return Die(err);
+  Finalize(&m);
+  std::string bin = Serialize(m);
+  if (!WriteFile(a.pos[1], bin)) return Die("cannot write " + a.pos[1]);
+  std::fprintf(stderr, "classes %zu groups %zu paradigms %zu pairs %zu rules %zu constraints %zu: %zu bytes\n",
+               m.classes.size(), m.groups.size(), m.paradigms.size(), m.pairs.size(), m.rules.size(),
+               m.constraints.size(), bin.size());
+  return 0;
+}
+
+int CmdPackLong(const Args& a) {
+  if (a.pos.size() < 3) return Die("pack-long CORE.bin LONG.tsv OUT.bin");
+  std::string bytes, err;
+  if (!ReadFile(a.pos[0], &bytes)) return Die("cannot read core");
+  Model m;
+  if (!Deserialize(bytes, &m, &err)) return Die(err);
+  if (!LoadLongTsv(a.pos[1], &m, &err)) return Die(err);
+  std::string bin = SerializeLongs(m);
+  if (!WriteFile(a.pos[2], bin)) return Die("cannot write " + a.pos[2]);
+  std::fprintf(stderr, "long units %zu: %zu bytes\n", m.longs.size(), bin.size());
+  return 0;
+}
+
+Options OptsFrom(const Args& a) {
+  Options o;
+  o.splitLongUnits = a.Has("--split");
+  o.margins = !a.Has("--no-margins");
+  o.longUnits = !a.Has("--no-long");
+  return o;
+}
+
+// ---- run -------------------------------------------------------------------------------------------
+int CmdRun(const Args& a) {
+  if (a.pos.empty()) return Die("run CORE.bin");
+  Analyzer an;
+  if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
+  Options opt = OptsFrom(a);
+  std::string fmt = a.Get("--format", "json");
+  auto ws = NewWorkspace();
+  std::string line;
+  Analysis r;
+  int n = 0;
+  while (std::getline(std::cin, line)) {
+    if (!line.empty() && line.back() == '\r') line.pop_back();
+    an.Analyze(line, opt, &r, ws.get());
+    ++n;
+    if (fmt == "json") {
+      std::cout << ToJson(an, line, r, a.Get("--doc"), n) << '\n';
+    } else if (fmt == "wakati") {
+      for (size_t i = 0; i < r.toks.size(); ++i) std::cout << (i ? " " : "") << r.toks[i].surf;
+      std::cout << '\n';
+    } else {
+      for (auto& t : r.toks)
+        std::cout << t.surf << '\t' << t.lemma << '\t' << t.reading << '\t' << Analyzer::PosName(t.pos) << '\t'
+                  << an.UdName(t.ud) << '\t' << an.CtypeName(t.ctype) << '\t' << an.CformName(t.cform) << '\t'
+                  << t.margin << (t.derive.empty() ? "" : "\t") << t.derive << '\n';
+      std::cout << "EOS\n";
+    }
+  }
+  return 0;
+}
+
+// ---- eval ------------------------------------------------------------------------------------------
+struct Score {
+  size_t gold = 0, pred = 0, bound = 0, lemma = 0, full = 0, read = 0, lines = 0, exact = 0;
+  void Add(const Score& o) {
+    gold += o.gold; pred += o.pred; bound += o.bound; lemma += o.lemma; full += o.full; read += o.read;
+    lines += o.lines; exact += o.exact;
+  }
+  void Print(const char* name) const {
+    double p = pred ? static_cast<double>(bound) / static_cast<double>(pred) : 0;
+    double r = gold ? static_cast<double>(bound) / static_cast<double>(gold) : 0;
+    double f = p + r > 0 ? 2 * p * r / (p + r) : 0;
+    std::printf("%-28s lines %6zu tokens %7zu  boundaryF1 %.4f (P %.4f R %.4f)  +lemma %.4f  +pos %.4f  "
+                "+reading %.4f  exact-lines %.4f\n",
+                name, lines, gold, f, p, r, gold ? double(lemma) / double(gold) : 0,
+                gold ? double(full) / double(gold) : 0, gold ? double(read) / double(gold) : 0,
+                lines ? double(exact) / double(lines) : 0);
+  }
+};
+
+Score EvalOne(const Analyzer& an, const GoldLine& g, const Options& opt, Analysis* r, Workspace* ws,
+              std::FILE* diff) {
+  Score s;
+  an.Analyze(g.src, opt, r, ws);
+  s.lines = 1;
+  s.gold = g.toks.size();
+  std::map<std::pair<uint32_t, uint32_t>, const Token*> pred;
+  for (auto& t : r->toks) {
+    if (t.surf.empty()) continue;
+    pred[{t.src.begin, t.src.end}] = &t;
+  }
+  s.pred = pred.size();
+  bool all = pred.size() == g.toks.size();
+  for (auto& gt : g.toks) {
+    auto it = pred.find({gt.b, gt.e});
+    if (it == pred.end()) {
+      all = false;
+      continue;
+    }
+    ++s.bound;
+    const Token& t = *it->second;
+    bool lemmaOk = t.lemma == gt.lemma || (gt.unk && (t.flags & Unknown));
+    if (lemmaOk) ++s.lemma;
+    if (lemmaOk && an.UdName(t.ud) == gt.ud && an.CtypeName(t.ctype) == gt.ctype && an.CformName(t.cform) == gt.cform)
+      ++s.full;
+    else
+      all = false;
+    if (t.reading == gt.kana || (gt.unk && t.reading.empty())) ++s.read;
+  }
+  if (all) s.exact = 1;
+  if (diff && !all) {
+    std::fprintf(diff, "%s\n  G:", g.src.c_str());
+    for (auto& gt : g.toks) std::fprintf(diff, " %s[%s/%s/%s]", gt.surf.c_str(), gt.lemma.c_str(), gt.ud.c_str(), gt.cform.c_str());
+    std::fprintf(diff, "\n  P:");
+    for (auto& t : r->toks)
+      std::fprintf(diff, " %s[%s/%s/%s]%s", t.surf.c_str(), t.lemma.c_str(), std::string(an.UdName(t.ud)).c_str(),
+                   std::string(an.CformName(t.cform)).c_str(), t.derive.empty() ? "" : ("{" + t.derive + "}").c_str());
+    std::fprintf(diff, "\n");
+  }
+  return s;
+}
+
+int CmdEval(const Args& a) {
+  if (a.pos.size() < 2) return Die("eval CORE.bin GOLD...");
+  Analyzer an;
+  if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
+  Options opt = OptsFrom(a);
+  if (a.Has("--no-derive")) an.mutableModel()->rules.clear();
+  opt.margins = false;
+  std::FILE* diff = nullptr;
+  if (a.Has("--diff")) diff = std::fopen(a.Get("--diff").c_str(), "w");
+  auto ws = NewWorkspace();
+  Analysis r;
+  Score total;
+  for (size_t i = 1; i < a.pos.size(); ++i) {
+    std::vector<GoldLine> gold;
+    if (!ReadGold(a.pos[i], &gold)) return Die("cannot read " + a.pos[i]);
+    Score s;
+    for (auto& g : gold) s.Add(EvalOne(an, g, opt, &r, ws.get(), diff));
+    s.Print(fs::path(a.pos[i]).filename().string().c_str());
+    total.Add(s);
+  }
+  if (a.pos.size() > 2) total.Print("pooled");
+  if (diff) std::fclose(diff);
+  return 0;
+}
+
+// ---- bench -----------------------------------------------------------------------------------------
+int CmdBench(const Args& a) {
+  if (a.pos.size() < 2) return Die("bench CORE.bin FILE");
+  Analyzer an;
+  double loadMs = 0;
+  if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), &loadMs)) return 1;
+  std::ifstream in(a.pos[1], std::ios::binary);
+  std::vector<std::string> lines;
+  std::string line;
+  while (std::getline(in, line)) lines.push_back(line);
+  Options opt = OptsFrom(a);
+  auto ws = NewWorkspace();
+  Analysis r;
+  size_t toks = 0;
+  int reps = std::atoi(a.Get("--reps", "3").c_str());
+  auto t0 = std::chrono::steady_clock::now();
+  for (int k = 0; k < reps; ++k)
+    for (auto& l : lines) {
+      an.Analyze(l, opt, &r, ws.get());
+      toks += r.toks.size();
+    }
+  double s = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
+  std::printf("load %.1f ms; %zu lines x %d in %.3f s: %.0f lines/s, %.0f tokens/s\n", loadMs, lines.size(), reps, s,
+              double(lines.size()) * reps / s, double(toks) / s);
+  return 0;
+}
+
+// ---- train (averaged structured perceptron) ---------------------------------------------------------
+struct TrainSent {
+  std::string src;
+  std::vector<GoldTok> toks;
+  std::vector<int> cls;
+};
+
+int CmdTrain(const Args& a) {
+  if (a.pos.size() < 3) return Die("train DATA_DIR SILVER OUT_DATA_DIR");
+  std::string dataDir = a.pos[0], outDir = a.pos[2];
+  Model m;
+  std::string err;
+  if (!LoadTsvDir(dataDir, &m, &err)) return Die(err);
+  Finalize(&m);
+  m.rules.clear();        // derived arcs are hand-set, not learned from the teacher
+  m.stutterRule = -1;
+  m.constraints.clear();
+  size_t limit = static_cast<size_t>(std::atoll(a.Get("--limit", "100000000").c_str()));
+  int epochs = std::atoi(a.Get("--epochs", "3").c_str());
+  int step = std::atoi(a.Get("--step", "30").c_str());
+  std::unordered_map<std::string, int> classKey;
+  for (size_t i = 0; i < m.classes.size(); ++i) {
+    const auto& c = m.classes[i];
+    classKey[m.udNames[c.ud] + '\t' + m.ctypeNames[c.ctype] + '\t' + m.cformNames[c.cform] + '\t' +
+             std::string(m.S(c.lemma))] = static_cast<int>(i);
+  }
+  auto findCls = [&](const GoldTok& t) {
+    auto it = classKey.find(t.ud + '\t' + t.ctype + '\t' + t.cform + '\t' + t.lemma);
+    if (it != classKey.end()) return it->second;
+    it = classKey.find(t.ud + '\t' + t.ctype + '\t' + t.cform + '\t');
+    return it == classKey.end() ? -1 : it->second;
+  };
+  std::vector<GoldLine> gold;
+  if (!ReadGold(a.pos[1], &gold, limit)) return Die("cannot read silver");
+  std::vector<TrainSent> sents;
+  size_t noClass = 0;
+  for (auto& g : gold) {
+    TrainSent s{std::move(g.src), std::move(g.toks), {}};
+    bool ok = !s.toks.empty();
+    for (auto& t : s.toks) {
+      int c = findCls(t);
+      if (c < 0) ok = false;
+      s.cls.push_back(c);
+    }
+    if (ok) sents.push_back(std::move(s));
+    else ++noClass;
+  }
+  gold.clear();
+  std::fprintf(stderr, "sentences %zu (skipped %zu without a class)\n", sents.size(), noClass);
+
+  size_t n = m.nClass;
+  // parameters: conn cells, group costs, unknown-word costs; averaged with the lazy trick
+  std::vector<double> connU(n * n, 0.0), groupU(m.groups.size(), 0.0);
+  std::vector<std::vector<double>> unkU(m.cats.size()), unkPU(m.cats.size());
+  for (size_t c = 0; c < m.cats.size(); ++c) {
+    unkU[c].assign(m.cats[c].arcs.size(), 0.0);
+    unkPU[c].assign(m.cats[c].arcs.size(), 0.0);
+  }
+  std::vector<uint8_t> touched(n * n, 0);
+  std::vector<int32_t> connW(m.conn.begin(), m.conn.end());
+  double t = 1;
+  Options opt;
+  opt.longUnits = false;
+  opt.margins = false;
+  Workspace ws;
+  std::mt19937 rng(7);
+  std::vector<size_t> order(sents.size());
+  for (size_t i = 0; i < order.size(); ++i) order[i] = i;
+
+  auto updConn = [&](uint16_t p, uint16_t q, int d) {
+    size_t k = static_cast<size_t>(p) * n + q;
+    connW[k] += d;
+    m.conn[k] = static_cast<int16_t>(std::clamp(connW[k], -32000, 32000));
+    connU[k] += t * d;
+    touched[k] = 1;
+  };
+  auto updArc = [&](const Arc& x, int d) {
+    if (x.kind == ArcKind::lex) {
+      m.groups[x.ref].cost += d;
+      groupU[x.ref] += t * d;
+    } else if (x.kind == ArcKind::unk) {
+      size_t c = x.ref >> 8, k = x.ref & 0xFF;
+      m.cats[c].arcs[k].cost += d;
+      unkU[c][k] += t * d;
+      int dl = d * (x.e - x.b);
+      m.cats[c].arcs[k].perChar += dl;
+      unkPU[c][k] += t * dl;
+    }
+  };
+  std::vector<uint32_t> goldPath;
+  std::vector<int32_t> byteToCore;
+  for (int ep = 0; ep < epochs; ++ep) {
+    std::shuffle(order.begin(), order.end(), rng);
+    size_t wrong = 0, skipped = 0, done = 0;
+    for (size_t oi : order) {
+      const TrainSent& s = sents[oi];
+      internal::Normalize(s.src, &ws.nchars, &ws.edits);
+      BuildLattice(m, &ws, opt);
+      // gold arcs
+      byteToCore.assign(s.src.size() + 1, -1);
+      std::vector<int32_t> endToCore(s.src.size() + 1, -1);
+      for (size_t k = 0; k < ws.core.size(); ++k) {
+        byteToCore[ws.nchars[ws.coreN[k]].sb] = static_cast<int32_t>(k);
+        endToCore[ws.nchars[ws.coreN[k]].se] = static_cast<int32_t>(k + 1);
+      }
+      goldPath.clear();
+      bool ok = true;
+      for (size_t ti = 0; ti < s.toks.size() && ok; ++ti) {
+        const auto& gt = s.toks[ti];
+        int32_t b = byteToCore[gt.b], e = endToCore[gt.e];
+        if (b < 0 || e <= b) {
+          ok = false;
+          break;
+        }
+        int32_t found = -1;
+        for (uint32_t k = ws.beginStart[static_cast<size_t>(b)]; k < ws.beginStart[static_cast<size_t>(b) + 1]; ++k) {
+          const Arc& x = ws.arcs[ws.byBegin[k]];
+          if (x.e != e) continue;
+          if (gt.unk) {
+            if (x.kind == ArcKind::unk && x.lcls == s.cls[ti]) found = static_cast<int32_t>(ws.byBegin[k]);
+          } else if (x.kind == ArcKind::lex && m.pforms[x.form].cls == s.cls[ti] &&
+                     m.S(m.groups[x.ref].lemma) == gt.lemma) {
+            if (found < 0) found = static_cast<int32_t>(ws.byBegin[k]);
+            const auto& g = m.groups[x.ref];
+            std::string rd;
+            if (g.readKind == 0) {
+              for (char32_t c : m.C(g.stem, g.stemLen)) internal::AppendUtf8(rd, internal::ToKatakana(c));
+            } else if (g.readKind == 1) {
+              rd = std::string(m.S(g.read));
+            }
+            rd += m.S(m.pforms[x.form].read);
+            if (rd == gt.kana) found = static_cast<int32_t>(ws.byBegin[k]);
+          }
+          if (found >= 0 && gt.unk) break;
+        }
+        if (found < 0) ok = false;
+        else goldPath.push_back(static_cast<uint32_t>(found));
+      }
+      if (!ok) {
+        ++skipped;
+        continue;
+      }
+      RunViterbi(m, &ws, false);
+      ++done;
+      if (ws.path != goldPath) {
+        ++wrong;
+        uint16_t prev = 0;
+        for (uint32_t ai : goldPath) {
+          updConn(prev, ws.arcs[ai].lcls, -step);
+          updArc(ws.arcs[ai], -step);
+          prev = ws.arcs[ai].rcls;
+        }
+        updConn(prev, 0, -step);
+        prev = 0;
+        for (uint32_t ai : ws.path) {
+          updConn(prev, ws.arcs[ai].lcls, step);
+          updArc(ws.arcs[ai], step);
+          prev = ws.arcs[ai].rcls;
+        }
+        updConn(prev, 0, step);
+      }
+      t += 1;
+    }
+    std::fprintf(stderr, "epoch %d: %zu sentences, %zu wrong (%.2f%%), %zu skipped\n", ep + 1, done, wrong,
+                 done ? 100.0 * double(wrong) / double(done) : 0.0, skipped);
+  }
+  // averaged weights
+  auto avg = [&](double w, double u) { return static_cast<int32_t>(std::lround(w - u / t)); };
+  for (size_t g = 0; g < m.groups.size(); ++g) m.groups[g].cost = avg(m.groups[g].cost, groupU[g]);
+  for (size_t c = 0; c < m.cats.size(); ++c)
+    for (size_t k = 0; k < m.cats[c].arcs.size(); ++k) {
+      m.cats[c].arcs[k].cost = avg(m.cats[c].arcs[k].cost, unkU[c][k]);
+      m.cats[c].arcs[k].perChar = avg(m.cats[c].arcs[k].perChar, unkPU[c][k]);
+    }
+  // write the output data dir: copy everything, then rewrite the learned columns
+  fs::create_directories(outDir + "/model");
+  fs::create_directories(outDir + "/ja");
+  for (auto& f : fs::recursive_directory_iterator(dataDir)) {
+    if (!f.is_regular_file()) continue;
+    auto rel = fs::relative(f.path(), dataDir);
+    fs::create_directories((fs::path(outDir) / rel).parent_path());
+    fs::copy_file(f.path(), fs::path(outDir) / rel, fs::copy_options::overwrite_existing);
+  }
+  {
+    std::set<std::pair<uint16_t, uint16_t>> observed;
+    for (auto& p : m.pairs) observed.insert({p.l, p.r});
+    std::ofstream o(outDir + "/model/conn.tsv", std::ios::binary);
+    o << "#! analyzer-conn\nleft\tright\tcost\n";
+    size_t written = 0;
+    for (size_t p = 0; p < n; ++p)
+      for (size_t q = 0; q < n; ++q) {
+        size_t k = p * n + q;
+        bool obs = observed.count({static_cast<uint16_t>(p), static_cast<uint16_t>(q)}) != 0;
+        if (!obs && !touched[k]) continue;
+        int32_t v = std::clamp(avg(connW[k], connU[k]), -32000, 32000);
+        if (!obs && v == m.boLeft[p] + m.uniRight[q]) continue;
+        o << p << '\t' << q << '\t' << v << '\n';
+        ++written;
+      }
+    std::fprintf(stderr, "conn pairs written %zu (observed %zu)\n", written, observed.size());
+  }
+  {
+    std::ifstream in(dataDir + "/model/lexicon.tsv", std::ios::binary);
+    std::ofstream o(outDir + "/model/lexicon.tsv", std::ios::binary);
+    std::string line;
+    size_t row = 0;
+    bool header = false;
+    while (std::getline(in, line)) {
+      if (line.empty() || line[0] == '#' || !header) {
+        if (!line.empty() && line[0] != '#') header = true;
+        o << line << '\n';
+        continue;
+      }
+      auto f = SplitOn(line, '\t');
+      if (f.size() >= 7 && row < m.groups.size()) f[6] = std::to_string(m.groups[row].cost);
+      ++row;
+      for (size_t i = 0; i < f.size(); ++i) o << (i ? "\t" : "") << f[i];
+      o << '\n';
+    }
+  }
+  {
+    std::ofstream o(outDir + "/model/unk.tsv", std::ios::binary);
+    o << "#! analyzer-unk\ncategory\tclass\tcost\tperchar\n";
+    for (auto& c : m.cats)
+      for (auto& u : c.arcs) o << c.name << '\t' << u.cls << '\t' << u.cost << '\t' << u.perChar << '\n';
+  }
+  return 0;
+}
+
+// ---- long units -------------------------------------------------------------------------------------
+// KEYS.tsv: key, pos (IR name), lemma or *, reading or *. Keys the core reads as one token are dropped;
+// the rest become long-unit arcs entered and left through the classes of their first and last token,
+// costing their own best path minus the bonus.
+int CmdNorm() {
+  std::string line, out;
+  std::vector<internal::NChar> nc;
+  std::vector<NormEdit> edits;
+  while (std::getline(std::cin, line)) {
+    if (!line.empty() && line.back() == '\r') line.pop_back();
+    internal::Normalize(line, &nc, &edits);
+    out.clear();
+    for (auto& c : nc) internal::AppendUtf8(out, c.c);
+    std::cout << out << '\n';
+  }
+  return 0;
+}
+
+int CmdLongUnits(const Args& a) {
+  if (a.pos.size() < 3) return Die("longunits CORE.bin KEYS.tsv OUT.tsv");
+  Analyzer an;
+  if (!LoadAnalyzer(&an, a.pos[0], "", nullptr)) return 1;
+  const Model& m = *an.model();
+  int32_t bonus = static_cast<int32_t>(std::lround(std::atof(a.Get("--bonus", "1.0").c_str()) * 100));
+  struct Row {
+    std::u32string key;
+    std::string line;
+  };
+  std::vector<Row> rows;
+  std::string err;
+  Workspace ws;
+  Options opt;
+  opt.longUnits = false;
+  opt.margins = false;
+  size_t total = 0, single = 0, multi = 0, bad = 0;
+  std::set<std::u32string> seen;
+  if (!ReadTsv(a.pos[1], [&](const std::vector<std::string>& f) {
+        if (f.size() < 2) return;
+        ++total;
+        internal::Normalize(f[0], &ws.nchars, &ws.edits);
+        BuildLattice(m, &ws, opt);
+        RunViterbi(m, &ws, false);
+        if (ws.path.empty() || ws.core.size() != internal::ToU32(f[0]).size()) {
+          ++bad;
+          return;
+        }
+        if (ws.path.size() == 1) {
+          ++single;
+          return;
+        }
+        std::u32string key(ws.core.begin(), ws.core.end());
+        if (!seen.insert(key).second) return;
+        ++multi;
+        const Arc& first = ws.arcs[ws.path.front()];
+        const Arc& last = ws.arcs[ws.path.back()];
+        int32_t inner = 0;
+        for (size_t k = 0; k < ws.path.size(); ++k) {
+          const Arc& x = ws.arcs[ws.path[k]];
+          inner += x.cost;
+          if (k) inner += m.Conn(ws.arcs[ws.path[k - 1]].rcls, x.lcls);
+        }
+        // the unit's own POS: the last token's ud/ctype/cform for inflecting units, else the row's
+        const auto& lc = m.classes[last.lcls];
+        std::string ud = m.udNames[lc.ud], ct = m.ctypeNames[lc.ctype], cf = m.cformNames[lc.cform];
+        std::ostringstream o;
+        o << f[0] << '\t' << f[1] << '\t' << first.lcls << '\t' << last.rcls << '\t' << (inner - bonus) << '\t' << ud
+          << '\t' << (ct.empty() ? "*" : ct) << '\t' << (cf.empty() ? "*" : cf) << '\t'
+          << (f.size() > 2 ? f[2] : "*") << '\t' << (f.size() > 3 ? f[3] : "*");
+        rows.push_back({key, o.str()});
+      }, &err))
+    return Die(err);
+  std::sort(rows.begin(), rows.end(), [](const Row& x, const Row& y) { return x.key < y.key; });
+  std::ofstream o(a.pos[2], std::ios::binary);
+  o << "#! analyzer-long\nkey\tpos\tlcls\trcls\tcost\tud\tctype\tcform\tlemma\treading\n";
+  for (auto& r : rows) o << r.line << '\n';
+  std::fprintf(stderr, "keys %zu: one token %zu, long units %zu, unusable %zu\n", total, single, multi, bad);
+  return 0;
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+  if (argc < 2) return Die("usage: hd8ana pack|pack-long|run|eval|bench|train|longunits ...");
+  std::string cmd = argv[1];
+  std::set<std::string> valued{"-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff"};
+  Args a = Parse(argc, argv, valued);
+  if (cmd == "pack") return CmdPack(a);
+  if (cmd == "pack-long") return CmdPackLong(a);
+  if (cmd == "run") return CmdRun(a);
+  if (cmd == "eval") return CmdEval(a);
+  if (cmd == "bench") return CmdBench(a);
+  if (cmd == "train") return CmdTrain(a);
+  if (cmd == "longunits") return CmdLongUnits(a);
+  if (cmd == "norm") return CmdNorm();
+  return Die("unknown command " + cmd);
+}

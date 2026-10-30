@@ -1,0 +1,4 @@
+#! constraints
+# Arcs removed before scoring. remove: LEMMA[key=value,...] (keys pos cform ud surf; * = any lemma).
+# when/unless: conditions joined by &: prev=A|B (text before), next=A|B, prev.cc=, next.cc= (char classes); ! negates.
+id	remove	when	unless	prov	note
