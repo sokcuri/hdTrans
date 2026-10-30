@@ -161097,7 +161097,7 @@ ttt	ttt	K110			GN				jisjk:201744
 土地利用規制	토지 이용 규제	N110	ULw		GN				jisjk:245974		
 土地利用規制条例	토지이용규제 조례	N110	ULw		BZ				jisjk:359317		
 土地制度	토지 제도	N110			GN				jisjk:245965		
-土地勘	토지감	I110			GN				jisjk:87352		
+土地勘	지리 감각	I110			GN				jisjk:87352		
 土地区画整理	토지구획 정리	N110			GN				jisjk:245958		
 土地区画整理法	토지구획 정리법	N110	ULw		BZ				jisjk:361983		
 土地区画整理組合	토지구획 정리조합	N110	VGt		BZ				jisjk:361985		
@@ -168772,8 +168772,8 @@ ttt	ttt	K110			GN				jisjk:201744
 大友貞載	오오토모 사다토시	N110	VHn		GN				jisjk:212282		
 大友黒主	오오토모노 구로누시	N110	VHn		GN				jisjk:212295		
 大双嶺	오조우레이	N130	QCTVPl		GN				jisjk:277978		
-大叔母	대숙모	N110	VHnVHn		GN				jisjk:127979		
-大叔父	대숙부	N110	VHnVHn		GN				jisjk:127977		
+大叔母	종조모	N110	VHnVHn		GN				jisjk:127979		
+大叔父	종조부	N110	VHnVHn		GN				jisjk:127977		
 大取引	대거래	N110		Hd	GN				jisjk:164813		
 大受け	대호평	I110	UHrUTs	Hd	GN				jisjk:65300		
 大叙事詩	대서사시	K110			GN				jisjk:118951		
@@ -175614,7 +175614,7 @@ ttt	ttt	K110			GN				jisjk:201744
 奥戸	오쿠도	N130	QCTVPl		GN				jisjk:279637		
 奥戸	오콧뻬	N130	QCTVPl		GN				jisjk:279775		
 奥戸町	오쿠도쵸	N130	QCTVPl		GN				jisjk:279639		
-奥手	늦됨	N110			GN				jisjk:29609		
+奥手	숙맥	N110			GN				jisjk:29609		
 奥新保町	오쿠심보마치	I130	QCTVPl		GN				jisjk:279567		
 奥方	영부인	N110	VHn		GN				jisjk:29607		
 奥方さま	영부인	I110	VHn		GN				jisjk:78577		
@@ -343415,7 +343415,7 @@ ttt	ttt	K110			GN				jisjk:201744
 釣り床	해먹	I110			GN				jisjk:83757		
 釣り戸	내물림문	N110	VBl		GN				jisjk:244166		
 釣り手	낚시꾼	I110	UAq		GN				jisjk:83760		
-釣り書き	계보	I110	VSw		GN				jisjk:83758		
+釣り書き	혼담 서류	I110	VSw		GN				jisjk:83758		
 釣り橋	조교	I110			GN				jisjk:105960		
 釣り殿	쓰리도노	N110	VBl		GN				jisjk:244168	000000000000000000000000000000000000000000000000000000000000000045464a4a4c4d3d354c5e3f38df405347074f5e405edf43434011df4f3846004e3131300056426c004d5500426c00466400436c000000000000006400710071006800000000000000000000000000474e0000000000000000000000008f2c0c3c	
 釣り漁業	낚시 어업	N110			GN				jisjk:244160		
@@ -352557,7 +352557,7 @@ ttt	ttt	K110			GN				jisjk:201744
 霧島	키리시마	N130	QPN	Wa	GN				jisjk:358888		
 霧島町	키리시마쵸	N130	QCTVPl		GN				jisjk:289984		
 霧散	무산	N110			GN				jisjk:22176		
-霧氷	무빙	N110			GN				jisjk:99592		
+霧氷	상고대	N110			GN				jisjk:99592		
 霧消	무소	N110		Hd	GN				jisjk:253088		
 霧生	키류우	N130	QCTVPl		GN				jisjk:290024		
 霧社事件	무샤 사건	N110			GN				jisjk:253076		

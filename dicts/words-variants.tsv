@@ -6278,7 +6278,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 吊し上げ	매달기	N110			GN							jisjk:6537
 吊し上げ	매달아 올&AA@	M437			GN							jisjk:6538
 釣書き	계보	I110	VSw		GN							jisjk:83758
-釣書	계보	I110	VSw		GN							jisjk:83758
+釣書	혼담 서류	I110	VSw		GN							jisjk:83758
 吊り書き	계보	I110	VSw		GN							jisjk:83758
 吊書き	계보	I110	VSw		GN							jisjk:83758
 吊書	계보	I110	VSw		GN							jisjk:83758

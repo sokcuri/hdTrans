@@ -1,0 +1,18 @@
+#! layer=words
+# 소설에 나오는 일반 명사
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+蠅	파리	N110			GN							novel-common-nouns:1
+同年代	또래	N110	VHn		GN				replace			novel-common-nouns:2
+閨	잠자리	N110	VPl		GN				replace			novel-common-nouns:3
+厠	뒷간	N110	VPl		GN							novel-common-nouns:4
+犯罪歴	범죄 경력	N110			GN							novel-common-nouns:5
+木箱	나무 상자	N110			GN							novel-common-nouns:6
+友人宅	친구 집	N110	VPl		GN							novel-common-nouns:7
+髭面	수염투성이 얼굴	N110			GN							novel-common-nouns:8
+絵面	모양새	N110			GN							novel-common-nouns:9
+霊現象	심령 현상	N110			GN							novel-common-nouns:10
+襲爵	작위 계승	N110			GN							novel-common-nouns:11
+貸馬車	삯마차	N110			GN							novel-common-nouns:12
+席表	좌석표	N110			GN							novel-common-nouns:13
+栗毛色	밤색	N110			GN							novel-common-nouns:14
+蠅頭	승두	N110			GN							novel-common-nouns:16
