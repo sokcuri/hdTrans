@@ -16,6 +16,10 @@ check "each writes one line per line" 'test "$("$cli" --each --in "$tmp/in.txt" 
 check "document mode keeps the line count" 'test "$("$cli" --in "$tmp/in.txt" | wc -l | tr -d " ")" = 2'
 printf 'あ\nい' > "$tmp/open.txt"
 check "document mode without a final newline adds none" 'test "$("$cli" --in "$tmp/open.txt" | wc -l | tr -d " ")" = 1'
+printf 'x\n' > "$tmp/one.txt"
+check "document json has one record per input line" 'test "$("$cli" --json --in "$tmp/one.txt" | grep -c "^{\"line\":")" = 1'
+check "document output ends with exactly one newline" 'test "$("$cli" --in "$tmp/one.txt" | od -An -c | tr -d " ")" = "x\\n"'
+check "document stages round trip keeps one line" '"$cli" --stages "$tmp" --in "$tmp/one.txt" >/dev/null && test "$("$cli" --each --toks "$tmp/ir.jsonl" | wc -l | tr -d " ")" = 1'
 check "toks with each keeps norm" '"$cli" --each --stages "$tmp" --in "$tmp/in.txt" >/dev/null && test "$("$cli" --each --toks "$tmp/ir.jsonl")" = "$("$cli" --each --in "$tmp/in.txt")"'
 check "threads give the same output" 'test "$("$cli" --each --threads 2 --in "$tmp/in.txt")" = "$("$cli" --each --in "$tmp/in.txt")"'
 check "json is one object" '"$cli" --json --in "$tmp/in.txt" | head -1 | grep -q "^{\"text\":"'

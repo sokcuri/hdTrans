@@ -60,9 +60,9 @@ bool ReadFile(const std::string& path, std::string& out) {
     return std::ferror(stdin) == 0;
 }
 
-// Lines split at '\n' ('\r' before it dropped). Like 0.7.x, a document keeps the empty line after a
-// final newline (its output ends with one too); --each and --context drop it.
-std::vector<std::string> SplitLines(const std::string& text, bool keepFinalEmpty) {
+// Lines split at '\n' ('\r' before it dropped). A final newline ends the last line; it does not
+// start an empty one.
+std::vector<std::string> SplitLines(const std::string& text) {
     std::vector<std::string> lines;
     size_t start = 0;
     while (start <= text.size()) {
@@ -74,7 +74,7 @@ std::vector<std::string> SplitLines(const std::string& text, bool keepFinalEmpty
         if (end == text.size()) break;
         start = end + 1;
     }
-    if (!keepFinalEmpty && !text.empty() && text.back() == '\n') lines.pop_back();
+    if (!text.empty() && text.back() == '\n') lines.pop_back();
     return lines;
 }
 
@@ -290,6 +290,7 @@ int Run(int argc, char** argv) {
 
     // Build the documents.
     std::vector<Doc> docs;
+    bool finalNewline = false;
     std::vector<std::string> eachLines;  // --each text input: one Doc per line, built when translated
     const bool fromToks = !toksPath.empty();
     if (fromToks) {
@@ -359,9 +360,11 @@ int Run(int argc, char** argv) {
                 FreeEngine(engine);
                 return 1;
             }
-            context = SplitLines(c, false);
+            context = SplitLines(c);
         }
-        std::vector<std::string> lines = SplitLines(input, !each);
+        // Like 0.7.x, document output ends with a newline when the input did.
+        finalNewline = !each && !input.empty() && input.back() == '\n';
+        std::vector<std::string> lines = SplitLines(input);
         if (each) {
             eachLines = std::move(lines);
         } else {
@@ -433,6 +436,7 @@ int Run(int argc, char** argv) {
         }
     }
     const auto tEnd = std::chrono::steady_clock::now();
+    if (finalNewline) out.text += '\n';
 
     int status = 0;
     if (why) std::fwrite(out.why.data(), 1, out.why.size(), stderr);
