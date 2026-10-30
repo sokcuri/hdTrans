@@ -1,0 +1,39 @@
+# 규칙: LEX-25
+rule	input	expected	kind	layer
+sense:続投	ネタニヤフ首相が続投。	네타냐후 수상이 유임.	fix	senses
+sense:続投	続投に意欲を見せていました。	유임에 의욕을 보이고 있었습니다.	fix	senses
+sense:続投	多岐川さんは去年からの続投だ。	타키가와 씨는 작년부터의 유임이다.	fix	senses
+sense:続投	あと１点で茂野は続投できるんだ。	그리고 1점으로써 시게노는 연속 투구할 수 있는 거야.	keep	senses
+sense:続投	続投だ！　茂野。	연속 투구야! 시게노.	keep	senses
+sense:抑え	マウンドには抑えの杉山投手。	마운드에는 마무리의 스기야마 투수.	fix	senses
+sense:抑え	抑えが効かない。	억제가 효과가 없다.	keep	senses
+sense:死者	今回の地震による死者は３８人で	이번 지진에 의한 사망자는 38명이	fix	senses
+sense:死者	これまでに死者は１９人…。	지금까지 사망자는 19명….	fix	senses
+sense:死者	現状は把握した限り 死者６名です｡	현 상황은 파악한 한계 사망자 6명입니다.	fix	senses
+sense:死者	累計死者 行方不明者	누계 사망자 행방불명자	fix	senses
+sense:死者	死者の庭なのか！？	죽은 자의 뜰인가!?	keep	senses
+sense:死者	貴方は死者だと。	당신은 죽은 자라고.	keep	senses
+sense:死者	それはアールが何度も見てきた、死者の顔だった。	그것은 아르가 몇 번이나 봐 온, 죽은 자의 얼굴이었다.	keep	senses
+dict:lexical-broadcast-terms	最後はまさかのオウンゴール。	마지막은 뜻밖의 자책골.	fix	lookup
+dict:lexical-broadcast-terms	実況≫一二塁間も広く開いています。	실황≫1루와 2루 사이도 넓게 열려 있습니다.	fix	lookup
+dict:lexical-broadcast-terms	ここは一塁ランナーの	여기는 1루 주자의	fix	lookup
+dict:lexical-broadcast-terms	ツーアウト、ランナーは一塁三塁。	투 아웃, 러너는 1루 3루.	fix	lookup
+dict:lexical-broadcast-terms	打席には左バッターの近藤。	타석에는 좌타자의 콘도.	fix	lookup
+dict:lexical-broadcast-terms	特に右バッターは	특히 우타자는	fix	lookup
+dict:lexical-broadcast-terms	１番、度会選手を見逃し三振。	1번, 와타라이 선수를 루킹 삼진.	fix	lookup
+dict:lexical-broadcast-terms	空振り三振！	헛스윙 삼진!	fix	lookup
+dict:lexical-broadcast-terms	栗原選手は申告敬遠で	쿠리하라 선수는 자동 고의사구로	fix	lookup
+dict:lexical-broadcast-terms	これでスリーボール ワンストライクです。	이것으로 쓰리 볼 원 스트라이크입니다.	fix	lookup
+dict:lexical-broadcast-terms	タイムリーツーベースヒットが出ました。	적시 2루타가 나왔습니다.	fix	lookup
+dict:lexical-broadcast-terms	タイムリースリーベースで	적시 3루타로	fix	lookup
+dict:lexical-broadcast-terms	飛ばし屋ナンバーワンの称号を	장타자 넘버원의 칭호를	fix	lookup
+dict:lexical-broadcast-terms	おおむね 自己負担額は53万円ほど	대개 본인 부담액은 53만엔 정도	fix	lookup
+dict:lexical-broadcast-terms	ランナーが走った。	러너가 달렸다.	keep	lookup
+dict:lexical-broadcast-terms	ボールを投げた。	공을 던졌다.	keep	lookup
+lookup:一塁	４‐６、一塁はセーフです。	4‐6, 1루는 세이프입니다.	fix	lookup
+lookup:三塁	デルーカは三塁へ行きます。	데루카는 3루에 갑니다.	fix	lookup
+lookup:二塁	そして俊足シンプソンは二塁へ！	그리고 빠른 발 심슨은 2루에!	fix	lookup
+lookup:幹細胞	しかし 培養した幹細胞を使って	하지만 배양한 줄기세포를 써	fix	lookup
+lookup:幹細胞	肝臓には肝臓の幹細胞があって	간에는 간의 줄기세포가 있어	fix	lookup
+lookup:冠王	ホームラン、打点の２冠王 栗原。	홈런, 타점의 2관왕 쿠리하라.	fix	lookup
+lookup:現地入り	日本の専門家が現地入りです。	일본의 전문가가 현지 도착입니다.	fix	lookup

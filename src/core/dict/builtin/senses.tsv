@@ -1042,6 +1042,11 @@
 歳	세	十六,十,二十,三十,四十,五十,六十,七十,八十,九十,百,数十	before	n
 // 腕が立つ, 腕も立つ: skilled.
 立つ	뛰어나다	腕	before	v5
+// 続投 of an office holder is 유임; 抑え in a sentence about pitching is the closer; 死者 counted in a report is 사망자.
+続投	유임	首相,総理,大統領,社長,会長,総裁,知事,市長,町長,村長,代表,理事長,委員長,議長,体制,意欲,意向,任期,去年,来季,政権	sentence	n
+抑え	마무리	投手,マウンド,登板,セーブ	sentence	n
+死者	사망자	人,名,数,出る,行方不明,行方不明者,負傷者,けが人,怪我人,増える,確認	after	n
+死者	사망자	地震,事故,災害,火災,台風,豪雨,津波,空爆,攻撃,テロ,感染	before	n
 // Context senses of frequent keys (build/words/defaults.py)
 家	가	侯爵,公爵,伯爵,子爵,男爵,貴族,王,辺境伯,騎士	before	n
 名	명	一,二,三,四,五,六,七,八,九,十,数,百,千,何	before	n

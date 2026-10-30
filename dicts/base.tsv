@@ -94693,8 +94693,8 @@ ttt	ttt	K110			GN				jisjk:201744
 一場	이치바	N130	QCTVPl		GN				jisjk:273007		
 一場合	한 경우	N110			GN				jisjk:160457		
 一場面	한 장면	N110	VPl		GN				jisjk:160846		
-一塁	일루	N110	VPl		GN				jisjk:31473		
-一塁手	일루수	N110	VHn		GN				jisjk:228455		
+一塁	1루	N110	VPl		GN				jisjk:31473		
+一塁手	1루수	N110	VHn		GN				jisjk:228455		
 一塊	한 덩어리	N110			GN				jisjk:125792		
 一塊り	한 덩어리	I110			GN				jisjk:80280		
 一塚町	이치즈카마치	N130	QCTVPl		GN				jisjk:272869		
@@ -97830,8 +97830,8 @@ ttt	ttt	K110			GN				jisjk:201744
 三基計装	산키케이소	I110	VGt		GN				jisjk:72561		
 三堀	미호리	N130	QPN	Wa	GN				jisjk:8010		
 三報ゴム	산뽀고무	I110	VGt		GN				jisjk:72747		
-三塁	삼루	N110	VPl		GN				jisjk:25559		
-三塁打	삼루타	N110	UTt		GN				jisjk:186223		
+三塁	3루	N110	VPl		GN				jisjk:25559		
+三塁打	3루타	N110	UTt		GN				jisjk:186223		
 三塚	미츠카	N130	QPN	Wa	GN				jisjk:8045		
 三塚	미치즈카	N130	QCTVPl		GN				jisjk:330953		
 三塚	미츠즈카	N130	VHnQPN	Wa	GN				jisjk:339537		
@@ -114430,7 +114430,7 @@ ttt	ttt	K110			GN				jisjk:201744
 二四	24	N110			GN				jisjk:159748		
 二回	2회	N110		NjNdCt	GN				jisjk:160052		
 二国間主義	2국간주의	N110	USm		BZ				jisjk:359695		
-二塁打	이루타	I110	VRw		GN				jisjk:79806		
+二塁打	2루타	I110	VRw		GN				jisjk:79806		
 二塚	후타츠카	N130	QCTVPl		GN				jisjk:326576		
 二塚	후타즈카	N130	QCTVPl		GN				jisjk:326608		
 二塩基酸	이염기산	N110			GN				jisjk:247671		
@@ -133765,7 +133765,7 @@ ttt	ttt	K110			GN				jisjk:201744
 冠海雀	뿔쇠오리	N110	VAm		GN				jisjk:230235		
 冠状	관상	N110	VBp		GN				jisjk:16314		
 冠状動脈	관상 동맥	N110	VBp		GN				jisjk:170448		
-冠王	우승자	N110			GN				jisjk:96904		
+冠王	관왕	N110			GN				jisjk:96904		
 冠着	씌워 붙이기	N110			GN				jisjk:16315		
 冠着山	가무리키산	I110	QCT		GN				jisjk:62047		
 冠石下	캄무리시시타	N130	QCTVPl		GN				jisjk:287371		
@@ -273367,7 +273367,7 @@ ttt	ttt	K110			GN				jisjk:201744
 現在時制	현재시제	I110			GN				jisjk:108345		
 現在高	현재액	N110	VMy		GN				jisjk:179255		
 現地	현지	N110	VPl		GN				jisjk:38990		
-現地入り	현지 잠입	I110		Hd	GN				jisjk:108390		
+現地入り	현지 도착	I110		Hd	GN				jisjk:108390		
 現地報告	현지보고	I110		Hd	GN				jisjk:108391		
 現地妻	현지처	N110	VHn		GN				jisjk:179454		
 現地時間	현지시간	N110	UMe		BZ				jisjk:355524		

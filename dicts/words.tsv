@@ -10960,7 +10960,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三半規管	세반고리관	N110			GN				xxx llm	1		w:10952
 三合会	삼합회	N110			GN						さんごうかい	w:10953
 三回	세 번	N110			GN				xxx llm	1		w:10954
-三塁手	삼루	N110			GN						さんるいしゅ	w:10955
+三塁手	3루수	N110			GN						さんるいしゅ	w:10955
 三審制	삼심제	N110	ULw		GN						さんしんせい	w:10956
 三尖弁	삼첨판	N110			GN				xxx llm	1		w:10957
 三差路	삼거리	N110			GN						さんさろ	w:10958
@@ -11483,8 +11483,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二四日	이십사일	N110	UMe	Tm	GN				xxx llm		にじゅうよっか	w:11476
 二四日	이십사 일	N110	UMe	Tm	GN				llm		にじゅうよっか	w:11477
 二回	두 번	N110			GN				xxx llm	1		w:11478
-二塁	이루	N110			GN						にるい	w:11479
-二塁手	이루	N110			GN						にるいしゅ	w:11480
+二塁	2루	N110			GN						にるい	w:11479
+二塁手	2루수	N110			GN						にるいしゅ	w:11480
 二天一流	이천일류	N110			GN						にてんいちりゅう	w:11481
 二子	쌍둥이	N110			GN				xxx	1	ふたご	w:11482
 二年もの	이 년 묵은 것	N110			GN				llm			w:11483
@@ -15843,7 +15843,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 幸福追求権	행복추구권	N110			GN						こうふくついきゅうけん	w:15799
 幹理	감리	N110		Hd	GN				llm		かんり	w:15800
 幹理	감리&AV@	M429			GN				llm		かんり	w:15801
-幹細胞	간세포	N110			GN						かんさいぼう	w:15802
+幹細胞	줄기세포	N110			GN						かんさいぼう	w:15802
 幻日	환일	N110			GN						げんじつ	w:15803
 幻灯機	환등기	N110			GN						げんとうき	w:15804
 幼けな	어$A4@	H7U0			GN				llm		いとけない	w:15805
@@ -22444,8 +22444,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 自己管理	자기 관리&AV@	M429			GN				llm		じこかんり	w:22392
 自己解凍ファイル	자동 압축 해제 파일	N110			GN				xxx llm	1		w:22393
 自己言及	자기언급	N110			GN						じこげんきゅう	w:22394
-自己負担	자담	N110		Hd	GN						じこふたん	w:22395
-自己負担	자담&AV@	M429			GN						じこふたん	w:22396
+自己負担	본인 부담	N110		Hd	GN						じこふたん	w:22395
+自己負担	본인 부담&AV@	M429			GN						じこふたん	w:22396
 自己陶酔	자기도취	N110		Hd	GN						じことうすい	w:22397
 自己陶酔	자기도취&AV@	M429			GN						じことうすい	w:22398
 自己顕示	자기 과시	N110	UYi		GN				llm		じこけんじ	w:22399
