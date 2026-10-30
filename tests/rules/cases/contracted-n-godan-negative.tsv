@@ -1,16 +1,16 @@
 # 규칙: SPC-4
 rule	input	expected	kind	layer
-sound:contracted-n	おい！ 待たんか！	어이! 기다리지 않는가!	fix	sound
+sound:contracted-n	おい！ 待たんか！	어이! 기다리지 못해!	fix	sound
 sound:contracted-n	こら！　待たんかい！	이봐! 기다리지 않을래!	fix	sound
 sound:contracted-n	ほらほら 立たんかい！	자 자 서지 않을래!	fix	sound
-sound:contracted-n	(ﾁﾝﾋﾟﾗ)オラァ！ 立たんか！	(똘마니) 오라! 서지 않는가!	fix	sound
+sound:contracted-n	(ﾁﾝﾋﾟﾗ)オラァ！ 立たんか！	(똘마니) 오라! 서지 못해!	fix	sound
 sound:contracted-n	あんま変わらんか。	별로 변함없는가.	fix	sound
 sound:contracted-n	機会があるかは分からんけどｗ	기회가 있을까는 모르는데 ㅋ	fix	sound
 sound:contracted-n	すばらしいことじゃて。そうは思わんか？	훌륭한 일은이라고. 그렇게는 생각하지 않는가?	fix	sound
 sound:contracted-n	真理ちゃん　休まんかね？	마리짱 쉬지 않는가?	fix	sound
 sound:contracted-n	華丸≫分からんから。	꽃환≫모르니까.	fix	sound
 sound:contracted-n	まだ分からんか お前は！	아직 모를까 너는!	fix	sound
-sound:contracted-n	(盤嶽)元気を出さんか！	(반악) 힘내지 않는가!	fix	sound
+sound:contracted-n	(盤嶽)元気を出さんか！	(반악) 힘내지 못해!	fix	sound
 sound:contracted-n	(女性)あぶり餅 要らんか～？	(여성) 구워 떡 필요하지 않은가~?	fix	sound
 sound:contracted-n	伏見の酒 要らんか～い	후시미의 술 필요 없나~	keep	sound
 sound:contracted-n	(警官)入らんかい！	(경관) 들어가지 않을래!	fix	sound

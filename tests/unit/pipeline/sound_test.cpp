@@ -1282,7 +1282,8 @@ HD_TEST(pipeline_contracted_n) {
         {"これ　やんなきゃ", "これ　やらなきゃ"},
         {"やんなっちゃう", "やんなっちゃう"},  // 嫌になっちゃう
         {"やんなよ", "やんなよ"},              // no prohibition from a lone kana there
-        {"待たんか！", "待たないか！"},        // a godan negative stem with a kanji before か
+        {"待たんか？", "待たないか？"},        // a godan negative stem with a kanji before か
+        {"待たんか！", "待たんか！"},          // the reproach, left to the end rows of んか
         {"知らんし", "知らないし"},
         {"知らんけど", "知らないけど"},
         {"知らんわ", "知らんわ"},
