@@ -20,3 +20,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 に付き物の	에 으레 따르는	E0H0		Tu	GN							novel-idioms:17
 に付きもの	에 으레 따르는 것	N110		Tu	GN							novel-idioms:18
 に付きものの	에 으레 따르는	E0H0		Tu	GN							novel-idioms:19
+限り	한	N110			GN	9308	||1 &&2 P-1== "4**" ||2 U-1== "Rた" U-1== "Rだ"	과거형 동사 뒤의 限り는 범위를 나타내는 한으로 고른다(見渡した限り 둘러본 한).		-1		novel-idioms:20
