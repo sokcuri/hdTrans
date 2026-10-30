@@ -12,3 +12,6 @@ dict:novel-idioms:31	兄さん浄二はねとってもいいとこがあるん�
 dict:novel-idioms:25	この島もいい所がたくさんありますよ	이 섬도 좋은 곳이 많이 있어요	keep	local
 dict:novel-idioms:25	あの町もいい所だよ。	그 마을도 좋은 곳이야.	keep	local
 dict:novel-idioms:31	いつもいいとこでズッコケてばっかりだ	언제나 좋은 데로 벗겨져뿐이다	keep	local
+dict:jisjk:342777	バカもいいとこだ	바보도 이만저만이 아니다	fix	local
+dict:jisjk:342777	あいつはバカもいいところだ	저 녀석은 바보도 이만저만이 아니다	fix	local
+dict:jisjk:342777	バカ高い	터무니없이 높다	keep	local
