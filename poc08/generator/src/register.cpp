@@ -311,7 +311,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         std::vector<Cues> cues(j - i);
         std::vector<std::string> keys(j - i);
         // per-scene narration flag: no quote line in the scene and ≥30% of its lines end like speech → all speech
-        bool sceneSpeech = false;
+        bool sceneSpeech = false, sceneArchaic = false;  // sceneArchaic: period speech in the scene keeps the input's levels
         {
             size_t quoted = 0, speechy = 0;
             std::vector<size_t> lens;
@@ -326,6 +326,10 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             std::sort(lens.begin(), lens.end());
             const bool shortLines = !lens.empty() && lens[lens.size() / 2] <= 20;
             sceneSpeech = quoted * 10 < (j - i) && j > i && (speechy * 10 >= (j - i) * 3 || shortLines);
+            size_t archaic = 0;
+            for (size_t k = i; k < j; ++k)
+                if (Scan(t, lines[k].ja).arch) ++archaic;
+            sceneArchaic = sceneSpeech && archaic >= 2;  // period drama captions; games keep the table (hae)
         }
         for (size_t k = i; k < j; ++k) {
             if (!lines[k].dialogue) continue;
@@ -349,7 +353,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                     // a scene without quote lines whose lines read as speech (captions): every line is an utterance
                     auto row = t.levels.find(key);
                     d.level = row != t.levels.end() ? row->second.level : Level::hae;
-                    d.keep = row != t.levels.end() && row->second.keep;
+                    d.keep = (row != t.levels.end() && row->second.keep) || (sceneArchaic && (key == "casual" || key == "bare"));
                     d.key = "scene-speech-" + key;
                 } else if (key == "pend" || key == "keigo-pend" || key == "polite-any") {
                     d.level = key == "keigo-pend" ? Level::hapsyo : Level::haeyo;

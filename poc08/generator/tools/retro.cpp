@@ -920,7 +920,9 @@ int main(int argc, char** argv) {
                 // a final ending inside the sentence (놀다니, 저희들…) keeps 0.7.x's level: no 요 mid-sentence
                 const bool inner = nodes[q].ctype == CType::final_ && q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct &&
                                    nodes[q + 1].punct == Punct::comma;
-                if (!mixed && !inner && !d.keep) continue;
+                // in a caption scene a plain command 0.7.x wrote as -어라 (来い → 와라) stays one
+                const bool command = nodes[q].mood == Mood::imp && static_cast<Level>(nodes[q].decision) == Level::haera;
+                if (!mixed && !inner && !d.keep && !(command && d.key.rfind("scene-speech", 0) == 0)) continue;
                 for (auto& g : reg)
                     if (g.node == nodes[q].id && nodes[q].decision) {
                         g.level = static_cast<Level>(nodes[q].decision);
