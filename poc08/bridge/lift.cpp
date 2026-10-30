@@ -2,6 +2,7 @@
 
 #include <algorithm>
 
+#include "core/tokenizer/token.h"
 #include "core/word/item.h"
 #include "ir/file.h"
 #include "ir/utf8.h"
@@ -20,6 +21,12 @@ size_t MarkerAt(std::string_view t) {
         if (alnum(t[i + 1]) && alnum(t[i + 2]) && t[i + 3] == '@') return i;
     }
     return std::string_view::npos;
+}
+
+std::string FirstChar(std::string_view s) {
+    size_t i = 0;
+    if (!s.empty()) NextCodePoint(s, i);
+    return std::string(s.substr(0, i));
 }
 
 // 0.7.x's reading of (ら)れ, as the voice decider's class names.
@@ -97,6 +104,7 @@ bool LoadLiftFile(const std::string& path, LiftTable& out, std::string& err) {
         else if (col[0] == "ending") out.endings[key + '\t' + key2] = node;
         else if (col[0] == "particle") out.particles[key] = node;
         else if (col[0] == "word" && key.size() == 1) out.words[key[0]] = node;
+        else if (col[0] == "attach") out.attach.insert(key);
         else return fail("unknown kind " + std::string(col[0]));
     }
     return true;
@@ -106,22 +114,114 @@ bool LoadLiftFile(const std::string& path, LiftTable& out, std::string& err) {
 bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
     for (const char* name : {"lift.tsv", "lift-endings.tsv"})
         if (!LoadLiftFile(dataRoot + "/bridge/data/" + name, out, err)) return false;
+    // The marks the generator knows, by kind (its punct.tsv: kind, source mark, Korean mark, attach).
+    std::string text;
+    if (ReadWholeFile(dataRoot + "/generator/data/ko/punct.tsv", text)) {
+        size_t start = 0;
+        while (start < text.size()) {
+            size_t end = text.find('\n', start);
+            if (end == std::string::npos) end = text.size();
+            const std::string_view row(text.data() + start, end - start);
+            start = end + 1;
+            if (row.empty() || row[0] == '#') continue;
+            const size_t t1 = row.find('\t');
+            if (t1 == std::string_view::npos) continue;
+            const size_t t2 = row.find('\t', t1 + 1);
+            const std::string_view kind = row.substr(0, t1), mark = row.substr(t1 + 1, t2 - t1 - 1);
+            unsigned v = 0;
+            if (mark != "-" && Parse(F::punct, kind, v)) out.marks.emplace(std::string(mark), static_cast<uint8_t>(v));
+        }
+    }
     return true;
 }
 
 bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, Line& line, uint32_t& from,
           std::vector<LiftMiss>& misses) {
     bool whole = true;
-    size_t composedAt = 0;
+    size_t composedAt = 0;  // where the search for the next item's stem in the composed text goes on
+
+    // The tokens of the sentence that no item reads (marks, symbols, white space): 0.7.x writes them from
+    // the token text, so the lift writes them as Punct nodes (marks the generator knows, runs of one mark
+    // kept together) and Raw nodes (anything else), in source order between the items. A token that items
+    // read is theirs (the word stage may have read it as a text other than its canonical form).
+    int curTok = s.firstToken;
+    bool spaced = false;
+    std::vector<bool> read(s.tokens ? s.tokens->size() : 0, false);
+    for (const hdTrans::output::ResolvedItem& it : s.items)
+        if (it.tokenIndex >= 0 && static_cast<size_t>(it.tokenIndex) < read.size()) read[static_cast<size_t>(it.tokenIndex)] = true;
+    const auto addNode = [&](KNode n) {
+        n.id = static_cast<uint32_t>(line.kir.size() + 1);
+        n.src = {from, from};
+        line.kir.push_back(n);
+    };
+    const auto gap = [&](std::string_view text) {
+        size_t i = 0;
+        std::string raw;
+        const auto flushRaw = [&] {
+            if (raw.empty()) return;
+            KNode n;
+            n.kind = KK::Raw;
+            n.lemma = doc.I(raw);
+            n.glue = !spaced;
+            addNode(n);
+            raw.clear();
+            spaced = false;
+        };
+        while (i < text.size()) {
+            const size_t at = i;
+            const uint32_t cp = NextCodePoint(text, i);
+            const std::string ch(text.substr(at, i - at));
+            if (cp == ' ' || cp == 0x3000 || cp == '\t') {
+                flushRaw();
+                spaced = true;
+                continue;
+            }
+            const auto m = table.marks.find(ch);
+            if (m == table.marks.end()) {
+                raw += ch;
+                continue;
+            }
+            flushRaw();
+            size_t end = i;  // a run of the same mark is one node (……)
+            while (end < text.size() && text.substr(end, ch.size()) == ch) end += ch.size();
+            KNode n;
+            n.kind = KK::Punct;
+            n.punct = m->second;
+            n.jaMark = doc.I(text.substr(at, end - at));
+            n.glue = !spaced;
+            addNode(n);
+            spaced = false;
+            i = end;
+        }
+        flushRaw();
+    };
+    // The unread tokens before token tok (and tok itself when through).
+    const auto gapsUntil = [&](int tok, bool through) {
+        if (s.tokens == nullptr) return;
+        for (; curTok < tok || (through && curTok == tok); curTok++) {
+            if (curTok > s.lastToken || static_cast<size_t>(curTok) >= s.tokens->size()) break;
+            // Marks, brackets and symbols only: words (Japanese runs, numbers, letters, spans) are always
+            // read by items, also where an item's token index names the token its reading started in.
+            using namespace hdTrans::tokenizer;
+            const int type = s.tokens->TypeAfter(static_cast<size_t>(curTok));
+            const bool mark = type == kTypeAsciiPunct || type == kTypeAsciiClose || type == kTypeAsciiOpen ||
+                              type == kTypeAsciiSymbol || type == kTypeSentenceEnd || type == kTypeBracket ||
+                              type == kTypeSymbol || type == kTypeAsciiSpace || type == kTypeWideSpace;
+            if (read[static_cast<size_t>(curTok)] || !mark) continue;
+            gap(s.tokens->Canonical(static_cast<size_t>(curTok)));
+        }
+    };
     // The last item that conjugates: a final ending belongs there only (anywhere else it is a reading the
     // lift cannot place).
     size_t lastPredicate = s.items.size();
     for (size_t k = 0; k < s.items.size(); k++)
         if (s.items[k].directIndex >= 0 && !s.items[k].ending.text.empty()) lastPredicate = k;
-    size_t itemIndex = 0;  // where the search for the next item's stem in the composed text goes on
+    size_t itemIndex = 0;
     const hdTrans::word::Item* chainItem = s.chain ? s.chain->head : nullptr;
     for (const hdTrans::output::ResolvedItem& it : s.items) {
         const bool lastConjugating = itemIndex++ == lastPredicate;
+        gapsUntil(it.tokenIndex, false);
+        spaced = false;
         const hdTrans::word::Item* ci = chainItem;
         if (chainItem) chainItem = chainItem->next;
 
@@ -185,11 +285,19 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
         node.src = src;
         bool lifted = true;
         const char digit = it.entry.code.empty() ? '1' : it.entry.code[0];
-        if (const size_t m = MarkerAt(target); m != std::string_view::npos) {
+        const auto mk = table.marks.find(FirstChar(it.surface));
+        if (mk != table.marks.end() && FirstChar(it.surface).size() == it.surface.size()) {
+            node.kind = KK::Punct;
+            node.punct = mk->second;
+            node.jaMark = doc.I(it.surface);
+        } else if (const size_t m = MarkerAt(target); m != std::string_view::npos) {
             const std::string marker(target.substr(m, 4));
             const auto f = table.families.find(marker);
             if (f != table.families.end() && Apply(f->second.second, doc, node)) {
                 node.lemma = doc.I(std::string(target.substr(0, m)) + f->second.first);
+                // A target that is only the marker of a verbalizing family (attach rows: 하다, 되다…)
+                // conjugates the noun before it (整理 + する: 정리하다), which 0.7.x writes without a space.
+                if (m == 0 && table.attach.count(f->second.first)) node.glue = true;
             } else {
                 misses.push_back({"family", marker});
                 lifted = false;
@@ -269,6 +377,7 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             line.kir.push_back(x);
         }
     }
+    gapsUntil(s.lastToken, true);
     return whole;
 }
 

@@ -242,7 +242,13 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     StageW(*b.engine.generator, cfg, ds.doc, sent);
     StageG(*b.engine.generator, cfg, ds.doc, sent);
     const bool use = b.opt.generate && lifted && !sent.out.empty();
-    if (use) out = sent.out;
+    if (use) {
+        // The white space 0.7.x composed around the sentence (between sentences of a line) stays.
+        const size_t lead = s.composed.find_first_not_of(' ');
+        const size_t trail = s.composed.find_last_not_of(' ');
+        out = (lead == std::string_view::npos ? std::string() : std::string(s.composed.substr(0, lead))) + sent.out +
+              (trail == std::string_view::npos ? std::string() : std::string(s.composed.substr(trail + 1)));
+    }
     SentenceRecord& r = ds.records[lineIndex][{s.chunk, s.index}];
     r = SentenceRecord{};
     r.generated = use;

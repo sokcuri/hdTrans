@@ -64,7 +64,7 @@ def main():
         seen.add(key)
         out.append(f"ending\t{d['key']}\t{d['ko']}\t{json.dumps(value, ensure_ascii=False, separators=(',', ':'))}")
     # Rows by the Korean target alone (key *): the bundle most rows with that target share, when at least
-    # 3 rows and 60% of them do. 0.7.x's own reading already chose the target; these cover the endings of
+    # 5 rows and 70% of them do (nominal readings excluded: they depend on the key). 0.7.x's own reading already chose the target; these cover the endings of
     # its built-in conjugation tables, which have no row of their own.
     by_ko = {}
     for r in rows:
@@ -86,7 +86,7 @@ def main():
     for ko, sigs in sorted(by_ko.items()):
         total = sum(sigs.values())
         sig, n = max(sigs.items(), key=lambda kv: (kv[1], kv[0]))
-        if total >= 3 and n / total >= 0.6 and ("*", ko) not in seen:
+        if total >= 5 and n / total >= 0.7 and '"nom:' not in sig and ("*", ko) not in seen:
             out.append(f"ending\t*\t{ko}\t{sig}")
             fallback += 1
     with open(a.out, "w", encoding="utf-8") as f:

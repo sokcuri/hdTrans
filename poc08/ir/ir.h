@@ -80,7 +80,7 @@ namespace hd08 {
 #define HD08_KASE(X) X(subj, "subj") X(top, "top") X(obj, "obj") X(gen, "gen") X(dat, "dat") X(src, "src") \
     X(loc, "loc") X(instr, "instr") X(com, "com") X(quot, "quot") X(voc, "voc") X(LEX, "LEX")
 #define HD08_PUNCT(X) X(comma, "comma") X(pause, "pause") X(end, "end") X(q, "q") X(excl, "excl") X(qopen, "qopen") \
-    X(qclose, "qclose") X(ellipsis, "ellipsis") X(dash, "dash")
+    X(qclose, "qclose") X(ellipsis, "ellipsis") X(dash, "dash") X(mark, "mark")
 #define HD08_LEVEL(X) X(haera, "haera") X(hae, "hae") X(haeyo, "haeyo") X(hapsyo, "hapsyo") X(hao, "hao") \
     X(hage, "hage")
 #define HD08_PERSONA(X) X(none, "none") X(rough, "rough") X(old_male, "old-male") X(lady, "lady") X(formal, "formal") \

@@ -9,6 +9,11 @@ word	1	-	{"kind":"N"}
 word	3	-	{"kind":"Adv"}
 word	6	-	{"kind":"Raw"}
 word	9	-	{"kind":"Raw"}
+attach	하다	-	{}
+attach	되다	-	{}
+attach	시키다	-	{}
+attach	당하다	-	{}
+attach	받다	-	{}
 # families and particles (W5): generated from the 0.7.x marker families and the retrofit particle table
 family	$A1@	기다	{"kind": "V"}
 family	$A2@	나다	{"kind": "V"}
