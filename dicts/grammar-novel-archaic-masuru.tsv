@@ -1,0 +1,10 @@
+#! layer=words
+# 연용형 뒤 まする, ますれば: 옛 높임 ます가 문장 가운데나 조사 앞에 올 때
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+まするが	2옵니다만	S5:0			GN							novel-archaic-masuru:1
+まするぞ	2옵니다	S5:0			GN							novel-archaic-masuru:2
+まするな	2옵니다	S5:0			GN							novel-archaic-masuru:3
+まするか	2옵니까	S5:0			GN							novel-archaic-masuru:4
+ますれば	2면	S5:0			GN							novel-archaic-masuru:5
+ませぬが	1지 않사옵니다만	S5:0			GN							novel-archaic-masuru:6
+ませぬで	1지 않아서	S5:0			GN							novel-archaic-masuru:7
