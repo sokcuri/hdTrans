@@ -69,7 +69,7 @@ def tokenize(line):
         lemma = f.lemma if f.lemma else surf
         if lemma and '-' in lemma and not lemma.startswith('-'):
             lemma = lemma.split('-')[0]  # ドア-door, そう-様態 → ドア, そう (UniDic sub-lemma tag)
-            if f.lemma.endswith('-伝聞'):
+            if (f.lemma or '').endswith('-伝聞'):
                 lemma = 'そう伝聞'
         flags = []
         if space_before:

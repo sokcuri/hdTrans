@@ -70,3 +70,9 @@ kureru.imp	*	動詞-非自立可能	命令形	-	呉れる|くれる|下さる|�
 darou	*	動詞-非自立可能	意志推量形	-	有る	あろう of であろう
 hon.suffix.higher	suf	-	-	-	様|さま|殿|殿下|陛下|閣下|先生|氏|公|卿|猊下	honorific suffixes that make the noun a higher person
 hon.suffix	suf	-	-	-	さん|君|くん|ちゃん|たん|氏	name suffixes that make the noun a person
+dp.tame	n	-	-	-	為	ため (decision point of the ため decider)
+dp.youni	na	形状詞-助動詞語幹	-	-	様	よう before に (decision point of the ように decider)
+dp.tokoro	n	-	-	-	所	ところ before で (decision point of the ところで decider)
+dp.de	p_case	-	-	-	で	で after ところ
+dp.ni	p_case	-	-	-	に	に after ため
+hon.prefix	pref	-	-	-	御	お, ご before a verb (お〜になる)
