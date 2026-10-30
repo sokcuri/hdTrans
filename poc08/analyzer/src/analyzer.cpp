@@ -392,7 +392,15 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) cons
     if (tokenAt[a.b] != UINT32_MAX && ws->arcs[tokenAt[a.b]].e >= a.e) continue;  // one analyzer word or less
     uint8_t c = ClassCode(m, m.pforms[a.form].cls);
     if (c == 'p' || c == 'x' || c == 's' || c == 'u') continue;
-    out->rejected.push_back({{byteB(a.b), byteE(a.e)}, c});
+    // only a word that would swallow a particle or an auxiliary the analyzer reads (しか + し)
+    bool swallows = false;
+    for (uint32_t k = a.b; k < a.e && !swallows; ++k) {
+      if (tokenAt[k] == UINT32_MAX) continue;
+      const Arc& t = ws->arcs[tokenAt[k]];
+      uint8_t tc = ClassCode(m, t.kind == ArcKind::lex ? m.pforms[t.form].cls : t.lcls);
+      swallows = tc == 'p' || tc == 'x';
+    }
+    if (swallows) out->rejected.push_back({{byteB(a.b), byteE(a.e)}, c});
   }
 }
 
