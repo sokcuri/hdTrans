@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:jisjk:202288	与那原親方異存はございませぬか？	rule:dict:jisjk:202288=오야카타	fix	local
+dict:jisjk:202288	与那原親方ただちに　僉議にかけて表決を取って頂けますか？	rule:dict:jisjk:202288=오야카타	fix	local
+dict:jisjk:202288	全ては　与那原親方のご才覚にかかっておりまする。	rule:dict:jisjk:202288=오야카타	fix	local
+dict:jisjk:202288	(西原親方)	rule:dict:jisjk:202288=오야카타	fix	local
+dict:jisjk:202288	奥書院に行って　孫親方をすぐに呼んでちょうだい。	rule:dict:jisjk:202288=오야카타	fix	local
+dict:jisjk:202288	清十郎親方萩の花を詠んだ句がありますか？	rule:dict:jisjk:202288=오야카타	fix	local
+dict:jisjk:202288	親方にも　よろしく。	!rule:dict:jisjk:202288	keep	local
+dict:jisjk:202288	捜しやしたぜ 親方	!rule:dict:jisjk:202288	keep	local
+dict:jisjk:202288	誰も逆らえない、そういう親方。	!rule:dict:jisjk:202288	keep	local
+dict:jisjk:202288	強いて言えば、機嫌のいい親方だ。	!rule:dict:jisjk:202288	keep	local
+dict:jisjk:202288	一度 親方にお引き合わせしたく	!rule:dict:jisjk:202288	keep	local
+dict:jisjk:202288	渡辺の親方	!rule:dict:jisjk:202288	keep	local
+dict:jisjk:202288	宜野湾親方が…。	!rule:dict:jisjk:202288	keep	local

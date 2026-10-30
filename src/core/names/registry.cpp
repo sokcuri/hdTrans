@@ -32,6 +32,13 @@ constexpr double kThreshold = 2.0;
 constexpr double kSingleThreshold = 3.0;  // single-kanji surfaces without a label
 constexpr int kHonorificCap = 4;          // honorific occurrences counted per surface
 
+// Whether the dictionaries read t as one surname or given name (上田, 中山, 林太郎), which is no
+// surname and given name of its own. A given name of the name layer counts up to three
+// characters; a longer one is a full name there too (小林芳雄).
+bool OneName(const DictFlags& f, std::string_view t) {
+    return f.surname || f.given || f.layerSurname || (f.layerGiven && text::RuneCount(t) <= 3);
+}
+
 // The byte offsets of the code point starts of s, in order.
 std::vector<std::size_t> RuneStarts(std::string_view s) {
     std::vector<std::size_t> out;
@@ -750,9 +757,11 @@ const std::map<std::string, Name>& Registry::Accepted() {
                (f.surname || f.layerSurname || (f.records == 0 && k >= 2));
     };
     auto full = [&](const std::string& x, const std::string& y, const std::string& joined, int c) {
-        // A common word is no full name (沢山 is 沢 + 山 only as a name).
+        // A common word or a place of the dictionaries is no full name (沢山 is 沢 + 山 only as a
+        // name, 東京), and a surname or given name they know is one name (上田 우에다, not 우에 다).
         const DictFlags fj = Flags(joined);
-        if (fj.common && !fj.person) return;
+        if (fj.common || (fj.records > 0 && !fj.person && fj.layerName.empty())) return;
+        const bool one = OneName(fj, joined);
         // The surname stands for the person alone too, but a common word (北, 上) reads as
         // that word wherever the full name is not written; a kanji whose only common reading is
         // the kanji's own (牧 목) is no such word.
@@ -765,6 +774,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         Name& j = all[joined];
         j.score += kThreshold;
         j.person = true;
+        if (one) return;
         j.hasParts = true;
         j.parts = {x, y};
     };
@@ -961,8 +971,9 @@ bool Registry::Crossed(std::string_view t, std::size_t i) {
 
 // The surname and given name of a full name t: at the boundary between its kanji and
 // katakana, or before or after another accepted name when the other part has two
-// characters or more. A katakana word is not split.
+// characters or more. A katakana word is not split, nor a word the dictionaries read whole.
 bool Registry::Split(std::string_view t, std::vector<std::string>& parts) {
+    if (const DictFlags f = Flags(t); (f.records > 0 && !f.person && f.layerName.empty()) || OneName(f, t)) return false;
     for (const Run& rn : RunsOf(t)) {
         if (rn.start > 0 && rn.end == t.size()) {
             parts = {std::string(t.substr(0, rn.start)), std::string(t.substr(rn.start))};

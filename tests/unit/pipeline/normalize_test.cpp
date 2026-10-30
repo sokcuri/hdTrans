@@ -842,6 +842,18 @@ HD_TEST(pipeline_write_kin_terms) {
         {"お兄ちゃん、早く"sv, "お兄ちゃん、早く"sv},   // no cue: the dictionary's 오빠
     };
     for (const Case& c : male) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
+    // A word that holds the kanji before the term and its first character (義姉) is left as written.
+    const auto holds = [](const void*, std::string_view line, size_t at, size_t end) {
+        const std::string_view word = line.substr(at, end - at);
+        return word == "義姉" || word == "義兄";
+    };
+    const Case compound[] = {
+        {"お義姉様、こちらへ"sv, "お義姉様、こちらへ"sv},
+        {"義兄様！"sv, "義兄様！"sv},
+        {"千夏姉様、こちらへ"sv, "千夏언니、こちらへ"sv},  // a name before the term
+        {"お姉様とお義姉様"sv, "언니とお義姉様"sv},
+    };
+    for (const Case& c : compound) HD_CHECK_EQ(WriteKinTerms(c.in, true, holds, nullptr), std::string(c.want));
 }
 
 HD_TEST(pipeline_female_speech) {
