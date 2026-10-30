@@ -215,3 +215,4 @@ table.grid { min-width: 26rem; }
 @media (pointer: coarse) {
   .dictbar button, .gridbar button, .dictlist .acts button, .dictlist .name, .grid button.del, .files button { min-height: 2.75rem; }
 }
+/* probe */
