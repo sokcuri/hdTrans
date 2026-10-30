@@ -17,7 +17,7 @@ analysis:adnominal-na-word	仕方なく座った	어쩔 수 없이 앉았다	kee
 analysis:adnominal-na-word	問題なくて安心した	문제없어서 안심했다	keep	analysis
 analysis:adnominal-na-word	間違いなく本物だ	틀림없이 진짜다	keep	analysis
 analysis:adnominal-na-word	元気なくて	기운이 없어서	keep	analysis
-analysis:adnominal-na-word	元気なく笑った	has:없게	keep	analysis
+analysis:adnominal-na-word	元気なく笑った	has:없이	keep	analysis
 analysis:adnominal-na-word	ような臭い台詞	같은 구린 대사	keep	analysis
 analysis:adnominal-na-word	そんなクサい台詞	has:냄새가	keep	analysis
 analysis:adnominal-na-word	普段は従順なくせに	평소는 온순한 주제에	fix	analysis

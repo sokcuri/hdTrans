@@ -1,0 +1,24 @@
+# 규칙: GRM-34, GRM-36
+rule	input	expected	kind	layer
+L2669	しかたなく行くことになったのよ｡	어쩔 수 없이 가게 됐어.	fix	local-ending
+L2669	採用試験は問題なく進んだ	has:문제없이 나아갔다	fix	local-ending
+L2669	お互いを小さい頃から知っていたから、気兼ねなく話せていた。	has:거리낌없이 이야기할 수 있었다.	fix	local-ending
+L2669	グラスを持つ手が、力なく上がる。	has:힘없이 오른다.	fix	local-ending
+L2669	これだけ動けば問題なく歩けるようになりますよ。	has:문제없이 걸을 수 있게	fix	local-ending
+L2669	♬「きっといつか儚く散る花」	has:덧없이 지는 꽃	fix	local-ending
+L2669	俺は腕を無くして一度死んだも同然だ。	has:팔을 없게 해	keep	local-ending
+L2669	力が無く倒れた	has:힘이 없게	keep	local-ending
+L2669	お金がなくなった。	돈이 없어졌다.	keep	local-ending
+L808	名も知らぬ誰かが時間を稼いでくれた	has:이름도 모르는 누군가가	fix	local
+L808	何も知らぬ子供	아무것도 모르는 아이	fix	local
+L808	知らぬ間に	어느새	keep	local
+L808	知らぬが仏	모르는게 약	keep	local
+L808	知りません	모릅니다	keep	local
+dict:novel-naku:1	迷いなく進む	망설임 없이 나아간다	fix	lookup
+dict:novel-naku:3	ためらいなく引き金を引いた	has:망설임 없이	fix	lookup
+dict:novel-naku:6	それらは生物や機械の区別無く、東部に住む人々から	has:구별 없이,	fix	lookup
+dict:novel-naku:7	その約束も、お忘れ無く、くっくっく	has:잊지 말고,	fix	lookup
+dict:novel-naku:8	お忘れ無く	잊지 마세요	fix	lookup
+dict:novel-naku:9	金も無く、食事も足らず、いつ死んでも不思議は無く	has:식사도 부족하고,	fix	local
+dict:novel-naku:9	１か月足らずで	1개월 미만으로	keep	local
+dict:novel-naku:10	伝統的な石の加工に飽き足らず独自の造形を	has:만족하지 못하고	fix	lookup
