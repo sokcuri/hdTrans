@@ -22,7 +22,13 @@ struct LevelRow {
     Level level = Level::hae;
     bool profile = false;
 };
+struct VoiceRow {
+    std::string type;
+    std::u32string key;
+    Persona persona = Persona::none;
+};
 struct RegisterTables {
+    std::vector<VoiceRow> voices;
     std::vector<CueRow> cues;
     std::vector<std::u32string> tails, strongTails, quotatives;
     std::map<std::string, LevelRow> levels;
@@ -52,6 +58,18 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     if (lk < 0 || ll < 0 || lp < 0) {
         err = "levels.tsv: missing column";
         return nullptr;
+    }
+    TsvTable vx;
+    if (!ReadTsv(dir + "/voices.tsv", vx, err)) return nullptr;
+    for (const auto& r : vx.rows) {
+        VoiceRow v;
+        v.type = r[0];
+        v.key = ToU32(r[1]);
+        if (v.type != "suffix" && !ParsePersona(r[2], v.persona)) {
+            err = "voices.tsv: bad persona " + r[2];
+            return nullptr;
+        }
+        t->voices.push_back(v);
     }
     TsvTable hx;
     if (!ReadTsv(dir + "/hon.tsv", hx, err)) return nullptr;
@@ -234,9 +252,27 @@ std::string Key(const Cues& c) {
 
 std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(Scan(t, ja)); }
 
+bool IsHonorificSuffix(const RegisterTables& t, const std::string& word) {
+    const std::u32string u = ToU32(word);
+    for (const auto& v : t.voices)
+        if (v.type == "suffix" && v.key == u) return true;
+    return false;
+}
+
+Persona VoiceOf(const RegisterTables& t, const std::string& ja) {
+    const Utt u = Utterance(ToU32(ja));
+    std::u32string last = LastSentence(u.text);
+    while (!last.empty() && IsMark(last.back())) last.pop_back();
+    for (const auto& v : t.voices) {
+        if (v.type == "final" && EndsWith(last, v.key)) return v.persona;
+        if (v.type == "first" && u.text.find(v.key) != std::u32string::npos) return v.persona;
+    }
+    return Persona::none;
+}
+
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines, const RegOptions& opt) {
     std::vector<RegDecision> out(lines.size());
-    struct Prof { double pol = 0, cas = 0; int washi = 0; };
+    struct Prof { double pol = 0, cas = 0; std::map<int, int> voice; };
     std::unordered_map<std::string, Prof> carry;  // decayed evidence from earlier scenes
     size_t i = 0;
     while (i < lines.size()) {
@@ -261,7 +297,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             const std::string& key = keys[k - i];
             if (key == "pend" || key == "keigo-pend" || key == "set") p.pol += 1;
             if (key == "casual" || key == "stiff") p.cas += 1;
-            if (cues[k - i].first == "washi") p.washi += 1;
+            const Persona v = VoiceOf(t, lines[k].ja);
+            if (v != Persona::none) p.voice[static_cast<int>(v)] += 1;
         }
         for (size_t k = i; k < j; ++k) {
             RegDecision& d = out[k];
@@ -298,8 +335,17 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                     d.byProfile = d.level != was;
                 }
             }
+            d.persona = VoiceOf(t, lines[k].ja);
             auto p = prof.find(lines[k].speaker);
-            if (p != prof.end() && p->second.washi > 0 && (key == "archaic" || cues[k - i].arch)) d.persona = Persona::oldMale;
+            if (d.persona == Persona::none && p != prof.end() && !lines[k].speaker.empty() && !p->second.voice.empty()) {
+                int best = 0, bestN = 0;
+                for (const auto& [vv, n] : p->second.voice)
+                    if (n > bestN) {
+                        best = vv;
+                        bestN = n;
+                    }
+                d.persona = static_cast<Persona>(best);
+            }
         }
         carry = prof;
         i = j;

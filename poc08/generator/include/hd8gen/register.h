@@ -42,6 +42,10 @@ std::vector<RegDecision> DecideLevels(const RegisterTables&, const std::vector<R
 // The cue key of one line alone (for tests and --why).
 std::string CueKey(const RegisterTables&, const std::string& ja);
 
+// voices.tsv: whether a Japanese word is an honorific name suffix (さん, 様), and the voice of a line ("" none).
+bool IsHonorificSuffix(const RegisterTables&, const std::string& word);
+Persona VoiceOf(const RegisterTables&, const std::string& ja);
+
 // Addressee honorific: V nodes of a polite utterance whose subject is the addressee get hon. Without clause
 // arguments (no L yet) the subject is approximated: a question or request with no explicit subject or topic
 // in its clause, a verb (not an adjective, 이다 or 있다), and no first person in the source.
