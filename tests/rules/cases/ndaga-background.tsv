@@ -1,0 +1,19 @@
+# 규칙: GRM-29
+rule	input	expected	kind	layer
+dict:novel-ndaga:12	内偵を進めてるんだがね	내사를 진행시키고 있는데	fix	lookup
+dict:novel-ndaga:12	「もう趣旨がずれてるんだが」	「이제 취지가 어긋나 있는데」	fix	lookup
+dict:novel-ndaga:12	気にして 心配してるんだが…｡	신경 써 걱정하고 있는데….	fix	lookup
+dict:novel-ndaga:12	財布から現金がなくなってるんだが。	has:없어져 있는데.	fix	lookup
+dict:novel-ndaga:13	色々あるというか、複雑なんだが	has:복잡한데	fix	lookup
+dict:novel-ndaga:13	それが当たり前なんだが	has:당연한데	fix	lookup
+dict:novel-ndaga:14	そうなんだけどね	그렇긴 한데	fix	lookup
+dict:novel-ndaga:14	「そうなんだけど……」	「그렇긴 한데……」	fix	lookup
+dict:novel-ndaga:14	まあまあ　そうなんだけど	자자 그렇긴 한데	fix	lookup
+dict:novel-ndaga:14	ああ そうなんだけど	아 그렇긴 한데	fix	lookup
+dict:novel-ndaga:15	「それはそうなんだが……」	「그건 그렇긴 한데……」	fix	lookup
+dict:novel-ndaga:16	まあ そうなんだけどさ…｡	뭐 그렇긴 한데 말이야….	fix	lookup
+dict:novel-ndaga:18	知ってるんだけど	알고 있는데	fix	lookup
+dict:novel-ndaga:18	う～ん　メールは来てるんだけどね。	으음~ 메일은 오고 있는데.	fix	lookup
+dict:novel-ndaga:18	私、もう完璧にマスターしてるんだけど	나, 이제 완벽하게 마스터하고 있는데	fix	lookup
+dict:novel-ndaga:13	静かなんだけど	조용한데	keep	lookup
+dict:novel-ndaga:14	そうなんだ	그렇구나	keep	lookup

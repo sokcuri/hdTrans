@@ -58,7 +58,7 @@ cx:copies:30	「いいよいいよ、半分食べるの？」	!rule:cx:copies:30
 cx:copies:40	「さ、入って入って」	「자, 들어가 들어가」	fix	rewrites
 cx:copies:40	「わっ、見せて見せてっ」	「왓, 보여 줘 보여 줘」	fix	rewrites
 cx:copies:30	「逃げて逃げて、どんな窮地にあっても」	「도망치고 또 도망쳐, 어떤 궁지에 있어도」	fix	rewrites
-sound:doubled-call	「ねえねえ、さっきから見てるんだけど」	「있잖아, 조금 전부터 보고 있었지만」	fix	sound
+sound:doubled-call	「ねえねえ、さっきから見てるんだけど」	「있잖아, 조금 전부터 보고 있는데」	fix	sound
 cx:copies:40	「それでそれで、何か分かった？」	「그래서 그래서, 뭔가 알았어?」	keep	rewrites
 cx:copies:50	「早く、早くーっ！！」	「빨리, 빨리~!!」	keep	rewrites
 cx:copies:50	「許して、許して……」	「용서해, 용서해……」	keep	rewrites

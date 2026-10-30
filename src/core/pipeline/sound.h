@@ -32,7 +32,7 @@
 //   - katakana that only draw out the vowel of the hiragana before them are no sound of
 //     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
-//     (はわわユウキ), and an exclaim row (よかった 다행이다) in hiragana as written, without
+//     (はわわユウキ) and a katakana one by a hiragana verb (ハイハイわかりました), and an exclaim row (よかった 다행이다) in hiragana as written, without
 //     elongation, not by a question mark, after an ellipsis or not (よかった？ is the
 //     question 좋았어?, but よかったぁ? the exclamation 다행이다~?), nor, a predicate row, after a noun in
 //     kanji or katakana with は or が and a comma (あの頃は、よかった 좋았다); an ono row may be followed by anything, and と or the て of って
@@ -331,6 +331,9 @@ struct SoundRow {
     // The lemma of a KR/lemma row without a final 하다, written before する; empty for
     // rows without a lemma.
     std::string root;
+    // The lemma only before a する that describes no noun after it (fourth column acts:
+    // ぷるぷるさせる 부들부들, but ぷるぷるした身 탱글탱글한).
+    bool acts = false;
     bool intj = false;    // an intj or lead row; the other rows are ono rows
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause

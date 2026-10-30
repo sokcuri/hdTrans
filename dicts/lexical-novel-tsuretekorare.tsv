@@ -1,0 +1,17 @@
+#! layer=words
+# 당한 일을 말하는 수동: 連れてこられる 끌려오다(連れていかれる 끌려가다와 짝), 首を絞められる 목을 졸리다
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+連れてこられ	데려올 수 &M9@	M427		Ma	GN							novel-tsuretekorare:1
+連れてこられ	데려올 수 &HN@	M427		Ke	GN	9451	||1 S+1== "な"	뒤에 ない가 오는 連れてこられ는 가능 '데려 올 수 있다'를 고른다.				novel-tsuretekorare:2
+連れてこられ	끌려&AH@	M427	XXX		GN							novel-tsuretekorare:3
+連れてこられ	데려오&AE@	M427			GN	9452	||2 S-1== "を" &&2 S-2== "を" P-1== "3**"	を 목적어를 받은 連れてこられ는 당한 일이 아니라 높여 말한 데려오시다다(妹を連れてこられた 여동생을 데려오셨다).				novel-tsuretekorare:20
+連れて来られ	데려올 수 &M9@	M427		Ma	GN							novel-tsuretekorare:4
+連れて来られ	데려올 수 &HN@	M427		Ke	GN	9451	||1 S+1== "な"	뒤에 ない가 오는 連れてこられ는 가능 '데려 올 수 있다'를 고른다.				novel-tsuretekorare:5
+連れて来られ	끌려&AH@	M427	XXX		GN							novel-tsuretekorare:6
+連れて来られ	데려오&AE@	M427			GN	9452	||2 S-1== "を" &&2 S-2== "を" P-1== "3**"	を 목적어를 받은 連れてこられ는 당한 일이 아니라 높여 말한 데려오시다다(妹を連れてこられた 여동생을 데려오셨다).				novel-tsuretekorare:21
+つれてこられ	데려올 수 &M9@	M427		Ma	GN							novel-tsuretekorare:7
+つれてこられ	데려올 수 &HN@	M427		Ke	GN	9451	||1 S+1== "な"	뒤에 ない가 오는 連れてこられ는 가능 '데려 올 수 있다'를 고른다.				novel-tsuretekorare:8
+つれてこられ	끌려&AH@	M427	XXX		GN							novel-tsuretekorare:9
+つれてこられ	데려오&AE@	M427			GN	9452	||2 S-1== "を" &&2 S-2== "を" P-1== "3**"	を 목적어를 받은 連れてこられ는 당한 일이 아니라 높여 말한 데려오시다다(妹を連れてこられた 여동생을 데려오셨다).				novel-tsuretekorare:22
+首を絞められ	목을 졸&AA@	M427			GN							novel-tsuretekorare:10
+首絞められ	목을 졸&AA@	M427			GN							novel-tsuretekorare:11

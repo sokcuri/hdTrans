@@ -47,7 +47,7 @@ dict:jisjk:260730	「聞く耳持たないよ」	has:들으려고도 하지 않�
 dict:jisjk:260847	超嬉しい。	has:기쁘다	keep	analysis
 dict:jisjk:260847	超嬉しかった。	has:기뻤다	keep	analysis
 dict:jisjk:120362	窮りない喜びだ。	has:끝이 없는 기쁨	fix	analysis
-dict:jisjk:120362	窮りなく続く。	has:끝이 없게	fix	analysis
+dict:jisjk:120362	窮りなく続く。	has:끝이 없이	fix	analysis
 dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	fix	analysis
 dict:jisjk:147415	ようなしとされた。	has:쓸모없다고 여겨졌다	fix	analysis
 dict:jisjk:267367	俺は黙って電話を切った。	has:전화를 끊었다	keep	analysis

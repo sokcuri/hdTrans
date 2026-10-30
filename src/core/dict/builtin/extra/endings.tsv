@@ -461,6 +461,25 @@
 書いたっすね	썼네요	end	prio=-1
 書いてくださいっす	써 주세요	end	prio=-1
 書いて下さいっす	써 주세요	end	prio=-1
+静かっすか	조용한가요	end	prio=-1
+学生っすね	학생이네요	end	prio=-1
+学生っすよね	학생이죠	end	prio=-1
+高いっすよね	높죠	end	prio=-1
+静かっすよね	조용하죠	end	prio=-1
+書くっすよね	쓰죠	end	prio=-1
+書いたっすよね	썼죠	end	prio=-1
+学生っすかね	학생일까요	end	prio=-1
+高いっすかね	높을까요	end	prio=-1
+静かっすかね	조용할까요	end	prio=-1
+書くっすかね	쓸까요	end	prio=-1
+学生っすけど	학생인데요	end	prio=-1
+高いっすけど	높은데요	end	prio=-1
+静かっすけど	조용한데요	end	prio=-1
+書くっすけど	쓰는데요	end	prio=-1
+書いたっすけど	썼는데요	end	prio=-1
+書かないっすけど	쓰지 않는데요	end	prio=-1
+高かったっすけど	높았는데요	end	prio=-1
+書かなかったっすけど	쓰지 않았는데요	end	prio=-1
 // 〜ていきますね, 〜かったんだよね: endings that otherwise come out doubled.
 書いていきますね	써 갈게요	end	prio=-1
 書きたかったんだよね	쓰고 싶었거든	end	prio=-1

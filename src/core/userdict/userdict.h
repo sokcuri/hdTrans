@@ -64,6 +64,8 @@ struct Context {
     // Resolves る-verbs whose class the lemma does not show, by the verb senses of
     // the stem; null to resolve none.
     const dict::Dict* base = nullptr;
+    // The builtin sound table, whose ono rows may hold acts; a user's file may not.
+    bool soundTable = false;
 };
 
 // A line that does not compile.

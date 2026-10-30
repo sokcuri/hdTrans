@@ -1,0 +1,22 @@
+# 감탄사 뒤나 첫머리의 ということで는 그래서
+rule	input	expected	kind	layer
+dict:jisjk:344271	さあ ということで	자 그래서	fix	local
+dict:jisjk:344271	さあ ということで ４位に落ちてしまったハリセンボンは	자 그래서 4위에 떨어져버린 가시복은	fix	local
+dict:jisjk:344271	はい！　ということで　じゃ！	네! 그래서 그러면!	fix	local
+dict:jisjk:344271	ということで今後は塔の近くの村に住むから	그래서 향후는 탑 근처 마을에 사니까	fix	local
+dict:jisjk:344271	ということで代わりを連れてきました｡	그래서 대역을 데려왔습니다.	fix	local
+dict:jisjk:344271	ということで、今日は休みです。	그래서, 오늘은 휴일입니다.	keep	local
+dict:jisjk:344271	（松本）…ということでね	(마츠모토) …그래서	fix	local
+dict:jisjk:344271	まあ ということで	뭐 그래서	fix	local
+dict:jisjk:344271	被害はなかったということです｡	피해는 없었다는 것입니다.	keep	local
+dict:jisjk:344271	今日は体験ということで…。	오늘은 체험이라는 것으로….	keep	local
+dict:jisjk:344271	千鳥のノブさんということで	물떼새의 노브 씨라는 것으로	keep	local
+dict:jisjk:344271	真相を知りたいということで	진상을 알고 싶다는 것으로	keep	local
+dict:jisjk:344271	（今田）さあ ということで	(이마다) 자 그래서	fix	local
+dict:jisjk:344271	さあ ということで現在 第４位です	자 그래서 현재 제4위입니다	fix	local
+dict:jisjk:344271	うわ～　さあということで和牛決勝進出で～す！	우와아~ 자 그래서 일본소 결승 진출이에요!	fix	local
+dict:jisjk:344271	ということで まいりましょう！	그래서 갑시다!	fix	local
+dict:jisjk:344271	<ということで第6位は>	<그래서 제6위는>	fix	local
+dict:jisjk:344271	ということで今夜 第3話が いよいよ完結します	그래서 오늘 밤 제3화가 드디어 완결합니다	fix	local
+dict:jisjk:344271	…ということで｡	…그래서.	fix	local
+dict:jisjk:344271	っつうことで 練習 おしまい！	그래서 연습 끝!	fix	local

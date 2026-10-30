@@ -74,3 +74,11 @@ HD_TEST(hangul_same_sound_vowel_pairs) {
         HD_CHECK_EQ(SameSound(c.b, c.a), c.same);
     }
 }
+
+HD_TEST(hangul_all_syllables) {
+    HD_CHECK(AllSyllables("쿄이치로"));
+    HD_CHECK(!AllSyllables("쿄 이치로"));
+    HD_CHECK(!AllSyllables("쿄 이치로"));
+    HD_CHECK(!AllSyllables("ㄱ"));
+    HD_CHECK(!AllSyllables(""));
+}

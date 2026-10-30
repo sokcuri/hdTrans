@@ -1,0 +1,28 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:reading	（二刃(ふたば)）待って	(후타바) 기다려	fix	normalize
+names:reading	二刃《ふたば》ちゃんと遊ぶ。	후타바짱과 논다.	fix	normalize
+names:reading	二刃(ふたば)ちゃんが来た。	후타바짱이 왔다.	fix	normalize
+names:reading	（龍生(たつき)）待って	(타츠키) 기다려	fix	normalize
+names:reading	龍生《たつき》が来た。	타츠키가 왔다.	fix	normalize
+names:reading	（七悪(ななお)）どうした	(나나오) 무슨 일이야	keep	normalize
+names:reading	（嫌五(けんご)）やめろ	(켄고) 그만두어라	keep	normalize
+names:reading	（青子(あおこ)）はい	(아오코) 네	keep	normalize
+names:reading	（吉高(よしたか)）行くぞ	(요시타카) 가겠어	keep	normalize
+names:reading	（本木(もとき)）なるほど	(모토키) 그렇구나	keep	normalize
+names:reading	（東海林(しょうじ)）ええ	(쇼지) 네	keep	normalize
+names:reading	（颯(はやて)）待て	(하야테) 기다려	keep	normalize
+names:reading	（小日向(こひなた)）うん	(코히나타) 응	keep	normalize
+names:reading	組織の家族(そしき)を守る	조직의 가족을 지킨다	keep	normalize
+names:reading	各艦（ふね）が出る	각 함이 나온다	keep	normalize
+names:reading	すごい怒濤(どとう)の…	대단한 노도의…	keep	normalize
+names:reading	魔物の咆哮(ほうこう)	has:마물의 포효	keep	normalize
+names:reading	身柄を確保(かくほ)した	신병을 확보했다	keep	normalize
+names:reading	朝日(あさひ)が昇る。	아침해가 뜬다.	keep	normalize
+names:reading	（チェリー）水馬(あめんぼ)が 水面(みなも)に残す 波紋かな	lacks:아멘보	keep	normalize
+names:reading	松竹(しょうちく)芸能の ますだおかだ…	has:쇼치쿠 예능의	fix	normalize
+names:reading	龍生《たつき》	타츠키	fix	normalize
+names:reading	家族(そしき)	가족	keep	normalize
+names:reading	真(まこと)	마코토	fix	normalize
+names:reading	上沼恵美子(かみぬまえみこ)	카미누마 에미코	keep	normalize
+names:reading	春風亭小朝(しゅんぷうていこあさ)	순푸테이 코아사	keep	normalize

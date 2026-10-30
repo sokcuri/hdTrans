@@ -1,0 +1,32 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:novel-common-nouns:1	夏には湿気がこもり、蚊も蠅も湧きまする。	여름에는 습기가 가득차, 모기도 파리도 솟아나옵니다.	fix	defaults
+dict:novel-common-nouns:1	これで臭いも減り、蠅も湧きませぬ	이것으로 냄새도 줄어들어, 파리도 솟아나지 않사옵니다	fix	defaults
+dict:novel-common-nouns:1	笑ワセル！蠅ドモメ…ッ！	소와셀! 파리 드모메…!	fix	defaults
+dict:novel-common-nouns:16	今 高専には蠅頭があふれている	지금 고등전문학교에는 승두가 넘치고 있다	keep	defaults
+dict:novel-common-nouns:2	ただ 元 教師で 同年代の人で	다만 전 교사로 또래의 사람으로	fix	defaults
+dict:novel-common-nouns:2	椿と同年代の女の子が立っており	츠바키와 또래의 여자아이가 서 있어	fix	defaults
+dict:novel-common-nouns:2	俺と同年代で日本国籍の子だ。	나와 또래로 일본국적의 아이다.	fix	defaults
+dict:novel-common-nouns:3	彼らが閨を共にしていないことを私は聞かされていた。	그들이 잠자리를 모두 하고 있지 않는 것을 나는 듣고 있었다.	fix	defaults
+dict:novel-common-nouns:4	　厠を貸してくれ	 뒷간을 빌려 줘	fix	defaults
+dict:novel-common-nouns:4	厠へお連れしようと	뒷간에 따르려고	fix	defaults
+dict:novel-common-nouns:5	 （小川）犯罪歴が あるか	 (오가와) 범죄 경력이 있을까	fix	defaults
+dict:novel-common-nouns:6	木箱入り	나무 상자 포장	fix	defaults
+dict:novel-common-nouns:7	高校時代の友人宅へ転がり込んだのが発端である	고교시절의 친구 집에 굴러 들어왔던 것이 발단이다	fix	defaults
+dict:novel-common-nouns:8	髭面の壮年男性	수염투성이 얼굴의 장년 남성	fix	defaults
+dict:novel-common-nouns:9	「つーかさ、この絵面、やっつけすぎだろ」	「그보다, 이 모양새, 너무 해치우지」	fix	defaults
+dict:novel-common-nouns:12	貸馬車を呼ぶ	삯마차를 부른다	fix	defaults
+dict:novel-common-nouns:13	昨日みんなに配布している席表の通りに座ってくれ。	어제 모두에게 배포하고 있는 좌석표대로 앉아 줘.	fix	defaults
+dict:novel-common-nouns:14	栗毛色の髪	밤색 머리카락	fix	defaults
+dict:jisjk:99592	木の枝に降りた霧氷の結晶	나뭇가지에 내린 상고대의 결정	fix	defaults
+dict:w:20870	「破談になんてしませんっ」	「파혼에는 하지 않습니다」	fix	defaults
+dict:jisjk:83758	お姉様は釣書の量に驚いていたけれど	누님은 혼담 서류의 양에 놀라고 있었지만	fix	defaults
+dict:jisjk:127977	大叔父の家に行く。	종조부의 집에 간다.	fix	defaults
+dict:jisjk:87352	つまり、土地勘ならば男達の誰にも負けない。	즉, 지리 감각이라면 남자들의 누구에게도 지지 않는다.	fix	defaults
+dict:jisjk:29609	付き合ってわかったことだが、葵はかなり奥手だった。	사귀고 안 것이지만, 아오이는 꽤 숙맥이었다.	fix	defaults
+dict:novel-common-nouns:2	年代物のワイン	연대물의 와인	keep	defaults
+dict:novel-common-nouns:5	職歴を書く。	직업 경력을 쓴다.	keep	defaults
+dict:novel-common-nouns:6	箱を開けた。	상자를 열었다.	keep	defaults
+dict:novel-common-nouns:7	自宅に戻る。	자택으로 돌아간다.	keep	defaults
+dict:novel-common-nouns:13	時刻表を見る。	시각표를 본다.	keep	defaults
+dict:jisjk:127977	叔父に会った。	숙부를 만났다.	keep	defaults

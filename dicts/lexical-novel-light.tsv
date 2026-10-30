@@ -1,0 +1,4 @@
+#! layer=words
+# 불이 꺼지다: 전기, 불빛 뒤의 消える
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+消え	꺼&AL@	M417	VEl	Dx	GN			전기, 불빛(VEl) 명사의 消える는 `꺼지다`다(明かりが消えた 불이 꺼졌다). 전역 규칙이 앞 명사의 의미 계열로 고른다.				novel-light:1

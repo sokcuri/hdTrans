@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 spans:brace-tag	　そう言うと、彼女は静かに微笑んだ{k=-5.0}―――{/k}	 그렇게 말하면, 그녀는 조용하게 미소 지었다{k=-5.0}―――{/k}	fix	protect
-spans:brace-tag	　俺は、ひたすら醜態を晒し続けた{k=-5.0}―――{/k}	 나는, 오로지 추태를 계속 쬐었다{k=-5.0}―――{/k}	fix	protect
+spans:brace-tag	　俺は、ひたすら醜態を晒し続けた{k=-5.0}―――{/k}	 나는, 오로지 추태를 계속 드러냈다{k=-5.0}―――{/k}	fix	protect
 spans:brace-tag	　{k=-5.0}―――{/k} でも、大丈夫。	 {k=-5.0}―――{/k} 하지만, 괜찮아.	fix	protect
 spans:brace-tag	{k=-5.0}―――{/k}そこは海だった。	{k=-5.0}―――{/k}거기는 바다였다.	keep	protect
 spans:brace-tag	彼は[b]悔やんでも[/b]仕方ない。	그는 [b]후회해도[/b] 어쩔 수 없다.	keep	protect

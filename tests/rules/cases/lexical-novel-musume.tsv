@@ -1,0 +1,22 @@
+rule	input	expected	kind	layer
+dict:novel-musume:1	この娘のことが大事なんだろ？	has:이 아이	fix	local
+dict:novel-musume:1	この娘の笑顔は、本当にかわいい	has:이 아이의 웃는 얼굴	fix	local
+dict:novel-musume:1	やはり誰が何と言おうとこの娘は美しいのだ。	has:이 아이는	fix	local
+dict:novel-musume:1	この娘から南蛮の技術を手に入れ	has:이 아이로부터	fix	local
+dict:novel-musume:1	貴様 この娘を…｡	has:이 아이를	fix	local
+dict:novel-musume:1	今回の品評会で お前がこの娘にも劣るようなら	has:이 아이에게도	fix	local
+dict:novel-musume:1	はぁ… 相当 金遣い荒いな この娘	has:이 아이	fix	local
+dict:novel-musume:1	｢この娘には緊急手術が必要です	has:이 아이에게는	fix	local
+dict:novel-musume:1	与一　おめえんとこの娘っこ　何じゃだ？	!rule:dict:novel-musume:1	keep	local
+dict:novel-musume:1	そんな娘に対し、父親は抗議の声を上げる。	!rule:dict:novel-musume:1	keep	local
+dict:novel-musume:1	うちは息子だけだからこんな娘が欲しかったのかもね。	!rule:dict:novel-musume:1	keep	local
+dict:novel-musume:1	この家の娘だ。	!rule:dict:novel-musume:1	keep	local
+dict:novel-musume:2	でも、敵兵が攻めてきた時、若い娘は足止めに使えるだろう	has:젊은 아가씨는	fix	local
+dict:novel-musume:2	確かに、気に入った若い娘を愛人に据える貴族男性も	has:젊은 아가씨를	fix	local
+dict:novel-musume:2	なぜか得意そうにこちらを見る若い娘を見て	has:젊은 아가씨를	fix	local
+dict:novel-musume:2	帰還した連隊は５番街を行進し若い娘たちは	has:젊은 아가씨들은	fix	local
+dict:novel-musume:2	もっと 若い娘の気持ちの裏が分からなく	has:젊은 아가씨	fix	local
+dict:novel-musume:2	どんな事情にしろ 若い娘が深夜 １人で喫茶店にい	has:젊은 아가씨가	fix	local
+dict:novel-musume:2	「あなたは17の若い娘なのよ？」	has:젊은 아가씨	fix	local
+dict:novel-musume:2	私の娘です。	!rule:dict:novel-musume:2	keep	local
+dict:novel-musume:2	若い頃の娘の写真だ。	!rule:dict:novel-musume:2	keep	local

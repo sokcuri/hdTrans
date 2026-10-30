@@ -37,8 +37,8 @@ normalize:canonical-kana	バス	버스	keep	normalize
 normalize:canonical-kana	バス	버스	fix	normalize
 normalize:canonical-kana	ヴァイオリン	바이올린	keep	normalize
 normalize:canonical-kana	ヴァイオリン	바이올린	fix	normalize
-normalize:canonical-kana	神頭有右生（こうずゆうせい）に出会います。	has:코우즈유우세이	keep	normalize
-normalize:canonical-kana	神頭有右生（こうずゆうせい）に出会います。	has:코우즈유우세이	fix	normalize
+normalize:canonical-kana	神頭有右生（こうずゆうせい）に出会います。	has:코즈유세이	keep	normalize
+normalize:canonical-kana	神頭有右生（こうずゆうせい）に出会います。	has:코즈유세이	fix	normalize
 normalize:canonical-kana	佐殿（すけどの）をお助けするのです。	has:스케도노	keep	normalize
 normalize:canonical-kana	佐殿（すけどの）をお助けするのです。	has:스케도노	fix	normalize
 normalize:canonical-kana	ヴヴー	브브	keep	normalize

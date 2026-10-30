@@ -1,0 +1,20 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:142115	華奢な肩を支える。	가녀린 어깨를 지탱한다.	fix	defaults
+dict:jisjk:142115	両手は支えるだけのつもりで	양손은 지탱할 뿐인 생각으로	fix	defaults
+dict:jisjk:142115	傷ついて折れた翼支えてくれる	상처받아 부러진 날개 지탱해 준다	fix	defaults
+dict:jisjk:142115	彼の肩を支えた。	그의 어깨를 지탱했다.	fix	defaults
+dict:jisjk:142115	背中を支えて立たせる。	등을 지탱해 서게 한다.	fix	defaults
+dict:jisjk:142115	腕を支えてやる。	팔을 지탱해 준다.	fix	defaults
+dict:jisjk:120907	体重を支え続ける。	체중을 계속 지탱한다.	fix	defaults
+dict:jisjk:120907	腕だけで支え続けるのは至難だ。	팔만으로 계속 지탱하는 것은 지난하다.	fix	defaults
+dict:jisjk:120907	人々の命を支え続けていた。	사람들의 생명을 계속 지탱하고 있었다.	fix	defaults
+dict:jisjk:120458	憲法によって支えられている。	헌법에 따라 지탱되고 있다.	fix	defaults
+dict:jisjk:120458	支えられてたのは私の方だった。	지탱되고 있던 것은 제 쪽이었다.	fix	defaults
+dict:jisjk:120458	誰かに支えられることで	누군가에게 지탱됨으로써	fix	defaults
+dict:jisjk:142115	腕で体を支えながら	팔로 몸을 지탱하면서	keep	defaults
+dict:jisjk:142115	頭を支えてもらう。	머리를 지탱해 준다.	keep	defaults
+dict:jisjk:142115	家族を支えるために働く。	가족을 지탱하기 위해 일한다.	keep	defaults
+dict:jisjk:142115	戦線を支えました。	전선을 지탱했습니다.	keep	defaults
+dict:jisjk:142115	組織の基盤を支えている。	조직의 기반을 지탱하고 있다.	keep	defaults
+dict:jisjk:120458	皆さんに支えられて最後までやれた。	여러분에 의지해 끝까지 할 수 있었다.	keep	defaults

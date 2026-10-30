@@ -1,0 +1,10 @@
+# 규칙: LEX-13, LEX-27
+rule	input	expected	kind	layer
+dict:w:18707	わたくしを気づかって	저를 신경 써	fix	defaults
+dict:w:18707	私も彼女を気づかっていたじゃないか！	나도 그녀를 신경 쓰고 있었잖아!	fix	defaults
+dict:w:18707	体を気づかう。	몸을 신경 쓴다.	fix	defaults
+dict:w:18707	気づかってくれてありがとう。	신경 써 주어서 고마워.	fix	defaults
+dict:w:18708	その気づかいが嬉しかった。	그 배려가 기뻤다.	fix	defaults
+dict:w:18707	母を気遣う。	어머니를 신경 쓴다.	keep	defaults
+dict:w:18707	気遣いが嬉しい。	배려가 기쁘다.	keep	defaults
+dict:w:18707	気づかなかった。	눈치채지 못했다.	keep	defaults

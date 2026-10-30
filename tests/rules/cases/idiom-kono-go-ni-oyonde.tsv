@@ -1,0 +1,14 @@
+rule	input	expected	kind	layer
+dict:lexical-novel-idioms	この期に及んでも国王は自らの欲望を滾らせていた。	이 마당에도 국왕은 스스로의 욕망을 들끓게 하고 있었다.	fix	lookup
+dict:lexical-novel-idioms	取り繕う余裕も、この期に及んで何かを守ろうとする理性も、もうどこにもなかった。	꾸밀 여유도, 이 마당에 뭔가를 지키려고 하는 이성도, 벌써 어디에도 없었다.	fix	lookup
+dict:lexical-novel-idioms	しかし、大森はこの期に及んで柏木にこんな話をしだした。	하지만, 오오모리는 이 마당에 카시와기에 이런 이야기를 하기 시작했다.	fix	lookup
+dict:lexical-novel-idioms	この期に及んで逃げるとは卑怯だ。	이 마당에 도망친다고는 비겁하다.	fix	lookup
+dict:lexical-novel-idioms	この期に及んでまだウソをつくか	이 마당에 아직 거짓말을 할까	fix	lookup
+dict:lexical-novel-idioms	お待ちを、この期に及んで命乞いですか！	대기를, 이 마당에 목숨 구걸입니까!	fix	lookup
+dict:lexical-novel-idioms	このガキ、この期に及んでまだ…	이 녀석, 이 마당에 아직…	fix	lookup
+dict:lexical-novel-idioms	この期に及んで言い訳はやめてくれ！	이 마당에 변명은 그만해 줘!	fix	lookup
+dict:lexical-novel-idioms	この期に及んでも、彼は黙っていた。	이 마당에도, 그는 입을 다물고 있었다.	fix	lookup
+dict:lexical-novel-idioms	この期間に及ぶ工事は長い。	이 기간에 이르는 공사는 길다.	keep	lookup
+dict:lexical-novel-idioms	被害は町全体に及んだ。	피해는 마을 전체에 이르렀다.	keep	lookup
+dict:lexical-novel-idioms	話は深夜に及んでいた。	이야기는 심야에 이르고 있었다.	keep	lookup
+dict:lexical-novel-idioms	この時期に及んで雪が降った。	이 시기에 이르러 눈이 내렸다.	keep	lookup

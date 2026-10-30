@@ -26,7 +26,9 @@ HD_TEST(word_person_suffix_after_person_only) {
              "の\t의\tP200\t\t\tGN\t0\t6\t\n"
              "と\t(와)과\tP200\t\t\tGN\t0\t10\t\n"
              "たんと\t듬뿍\tE300\t\t\tGN\t0\t11\t\n"
-             "猫\t고양이\tN110\tQAA\t\tGN\t0\t12\t\n"},
+             "猫\t고양이\tN110\tQAA\t\tGN\t0\t12\t\n"
+             "ふたば\t후타바\tI130\t\t\tGN\t0\t13\t\n"},
+        {0, "names.tsv", "#! layer=names\n" + header + "ふたば\t후타바\tN130\tQPNVHn\tWb\tGN\t0\t14\t\n"},
         {0, "words.tsv",
          "#! layer=words\n" + header + "たん\t짱\tN110\tVHn\tTu\tGN\t0\tw1\t\n" + "っち\t치\tN110\tVHn\tTu\tGN\t0\tw2\t\n"},
     };
@@ -47,6 +49,8 @@ HD_TEST(word_person_suffix_after_person_only) {
         {"先生たんと", "선생님짱과"},
         {"猫たんと", "고양이짱과"},
         {"机がたんと", "책상이 듬뿍"},
+        // A proper noun that the name layer reads as a person.
+        {"ふたばっちが", "후타바치가"},
     };
     for (const Case& c : cases) {
         const std::string input = c.input;

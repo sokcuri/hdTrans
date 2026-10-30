@@ -5,3 +5,33 @@ rewrite:initial-sound	良書を読む。	양서를 읽는다.	keep	rewrites
 rewrite:initial-sound	興隆を極めた。	융성을 다했다.	keep	rewrites
 rewrite:initial-sound	二〇二六年の春。	2026년 봄.	keep	rewrites
 rewrite:initial-sound	謹・賀・新・年。	근·하·신·년.	keep	rewrites
+rewrite:initial-sound	筋トレすれば命中率が上がるんですか？	근력 운동 하면 명중률이 오릅니까?	fix	rewrites
+rewrite:initial-sound	出席率があんまり悪いんで。	출석률이 너무 나빠서.	fix	rewrites
+rewrite:initial-sound	黒色火薬の配合率ぐらいか。	흑색 화약 배합률 정도인가.	fix	rewrites
+rewrite:initial-sound	中途退学率をご存じですか？	중도 퇴학률을 아시는 바입니까?	fix	rewrites
+rewrite:initial-sound	技の修得率が一向に上がらない。	기술 습득률이 전혀 오르지 않는다.	fix	rewrites
+rewrite:initial-sound	合格率の高い幼稚園だった。	합격률이 높은 유치원이었다.	fix	rewrites
+rewrite:initial-sound	車列が２つに分かれて行きます。	차열이 2개로 나누어져 갑니다.	fix	rewrites
+rewrite:initial-sound	アイテムのドロップ率が低い。	아이템의 드롭률이 낮다.	fix	rewrites
+rewrite:initial-sound	正解率が変わりそうだな。	정답률이 바뀔 것 같네.	fix	rewrites
+rewrite:initial-sound	達成率は60％程だ。	달성률은 60% 정도다.	fix	rewrites
+rewrite:initial-sound	着用率ってことね。	착용률이라는 것.	fix	rewrites
+rewrite:initial-sound	クリティカル率が高い。	크리티컬률이 높다.	fix	rewrites
+rewrite:initial-sound	この先の艦列を越えたら旗艦だ。	이 앞의 함렬을 넘으면 기함이다.	fix	rewrites
+rewrite:initial-sound	黒井さんの生存率が下がるようなら…	쿠로이 씨의 생존율이 내려가는 것 같으면…	keep	rewrites
+rewrite:initial-sound	ただでさえ低い投票率が過去最低に…	그렇지 않아도 낮은 투표율이 과거 최악으로…	keep	rewrites
+rewrite:initial-sound	部隊損耗率７％。	부대 손모율 7%.	keep	rewrites
+rewrite:initial-sound	驚異のシンクロ率を誇る。	경이의 싱크로율을 자랑한다.	keep	rewrites
+rewrite:initial-sound	荷電粒子砲充填率 80	하전입자포 충전율 80	keep	rewrites
+rewrite:initial-sound	回避率を70%まで積んだ。	회피율을 70%까지 쌓았다.	keep	rewrites
+rewrite:initial-sound	隊列が安定してきたようです。	대열이 안정되어 온 것 같습니다.	keep	rewrites
+rewrite:initial-sound	そのような序列は大奥の中だけのことですよ	그러한 서열은 오오쿠 안만의 일이에요	keep	rewrites
+rewrite:initial-sound	同列に語るなっ！	동렬에 말하지 마!	keep	rewrites
+rewrite:initial-sound	藩論は四分五裂	번론은 사분오열	keep	rewrites
+rewrite:initial-sound	何が化石の陳列だ！	무엇이 화석 진열이야!	keep	rewrites
+rewrite:initial-sound	熱烈なジャズファン。	열렬한 재즈 팬.	keep	rewrites
+rewrite:initial-sound	最大倍率の選手が先制だ！	최대 배율의 선수가 선제야!	keep	rewrites
+rewrite:initial-sound	自由律 ご存じない？	자유율 아시는 바 없어?	keep	rewrites
+rewrite:initial-sound	（峰月律）うん…。	(미네츠키 리츠) 응….	keep	rewrites
+rewrite:initial-sound	今の日本の法律には問題がある。	지금의 일본의 법률에는 문제가 있다.	keep	rewrites
+rewrite:initial-sound	もっと確率は高い	좀 더 확률은 높다	keep	rewrites

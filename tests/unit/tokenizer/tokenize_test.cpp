@@ -521,7 +521,7 @@ HD_TEST(tokenize_space_parts_words) {
         const std::string text = std::string(before) + std::string(after);
         switch (word) {
         case SpaceWord::Any:
-            for (const std::string_view w : {"あご"sv, "山田太郎"sv, "展開"sv}) {
+            for (const std::string_view w : {"あご"sv, "山田太郎"sv, "展開"sv, "先行"sv}) {
                 if (text.find(w) != std::string::npos) return true;
             }
             return false;
@@ -531,6 +531,7 @@ HD_TEST(tokenize_space_parts_words) {
         case SpaceWord::Phrase: return before == "何だ" && after.starts_with("あれ");
         case SpaceWord::Ending: return after == "ね";
         case SpaceWord::Filler: return before == "あ" || before == "いや";
+        case SpaceWord::Spelled: return text.find("展開") != std::string::npos;
         }
         return false;
     };
@@ -558,6 +559,8 @@ HD_TEST(tokenize_space_parts_words) {
     HD_CHECK_EQ(scan("こ の 展 開 は"), std::string("24:この展開は 9:"));
     HD_CHECK_EQ(scan("ね え さ ん"), std::string("24:ねえさん 9:"));
     HD_CHECK_EQ(scan("あ れ が"), std::string("24:あれが 9:"));
+    HD_CHECK_EQ(scan("私 先 行くね"), std::string("24:私 +24:先 +24:行くね 9:"));
+    HD_CHECK_EQ(scan("通 知 展 開は"), std::string("24:通知展開は 9:"));
     HD_CHECK_EQ(scan("あ な た"), std::string("24:あなた 9:"));
     HD_CHECK_EQ(scan("あ の 人"), std::string("24:あの人 9:"));
     HD_CHECK_EQ(scan("あ い"), std::string("24:あ +24:い 9:"));

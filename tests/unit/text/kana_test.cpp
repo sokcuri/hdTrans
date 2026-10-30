@@ -3,12 +3,14 @@
 #include "hdtest.h"
 
 using hdTrans::text::FromKana;
+using hdTrans::text::NameLongVowel;
 using hdTrans::text::Preset;
 
 HD_TEST(kana_caption_single_long_pair) {
     const struct { const char* reading; const char* want; } cases[] = {
         {"おおうえ", "오우에"}, {"おおうち", "오우치"}, {"こうう", "코우"},
         {"さとう", "사토"}, {"おおの", "오노"}, {"ゆうき", "유키"}, {"きょう", "쿄"},
+        {"いのうえ", "이노우에"}, {"ほうおうじ", "호오지"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(FromKana(c.reading, Preset::FanShort, true), std::string(c.want));
     HD_CHECK_EQ(FromKana("おおうえ", Preset::Fan), "오오우에");
@@ -44,4 +46,29 @@ HD_TEST(kana_from_kana) {
     for (const auto& c : cases) {
         for (int p = 0; p < 3; p++) HD_CHECK_EQ(FromKana(c.reading, presets[p]), std::string(c.want[p]));
     }
+}
+
+HD_TEST(kana_name_long_vowel) {
+    HD_CHECK(NameLongVowel("o", "u", ""));
+    HD_CHECK(NameLongVowel("yo", "u", "i"));
+    HD_CHECK(NameLongVowel("o", "o", ""));
+    HD_CHECK(NameLongVowel("u", "u", ""));
+    HD_CHECK(NameLongVowel("yu", "u", "a"));
+    // A u before e starts 上 (いのうえ).
+    HD_CHECK(!NameLongVowel("o", "u", "e"));
+    HD_CHECK(!NameLongVowel("e", "i", ""));
+    HD_CHECK(!NameLongVowel("a", "u", ""));
+}
+
+HD_TEST(kana_spells_sound) {
+    using hdTrans::text::SpellsSound;
+    HD_CHECK(SpellsSound("パラパラ", "파라 파라", false));
+    HD_CHECK(SpellsSound("フタバ", "후타바", false));
+    HD_CHECK(SpellsSound("しょうちく", "쇼치쿠", false));
+    // The loanword spelling counts only for a loanword (ツリ 쓰리 beside the name spelling 츠리).
+    HD_CHECK(!SpellsSound("ツリ", "쓰리", false));
+    HD_CHECK(SpellsSound("ツリ", "쓰리", true));
+    HD_CHECK(!SpellsSound("マスク", "마스크", true));
+    HD_CHECK(!SpellsSound("あめんぼ", "소금쟁이", true));
+    HD_CHECK(!SpellsSound("フタバ", "", true));
 }

@@ -1,0 +1,12 @@
+rule	input	expected	kind	layer
+dict:lexical-novel-idioms	（今回の事で、愛想を尽かされてしまったでしょうか……）	(이번 일로, 버림받아버렸을까요……)	fix	lookup
+dict:lexical-novel-idioms	妻や子供に愛想を尽かされながらも懲りずにだ	아내나 아이에게 버림받으면서도 질리지 않고 다	fix	lookup
+dict:lexical-novel-idioms	このままぼたんに愛想を尽かされればいいんです。	이대로 모란에 버림받으면 됩니다.	fix	lookup
+dict:lexical-novel-idioms	とうとう彼女に愛想をつかされた。	드디어 그녀에게 버림받았다.	fix	lookup
+dict:jisjk:139655	女房のヤツは愛想を尽かして子供を連れて田舎へ行ってしまった	부인의 녀석은 정나미가 떨어져 아이를 데려 시골에 가버렸다	fix	lookup
+dict:jisjk:139655	神の力を失った私に愛想を尽かしたのかもしれんな。	신의 힘을 잃은 나에게 정나미가 떨어졌을지도 모르네.	fix	lookup
+dict:jisjk:139655	何があっても岡崎君に愛想をつかすなんてことはありません	무엇이 있어도 아카자키 군에게 정나미가 떨어지는 것은 없습니다	fix	lookup
+dict:jisjk:139655	彼にはもう愛想を尽かした。	그에게는 벌써 정나미가 떨어졌다.	fix	lookup
+dict:jisjk:139641	あいつには愛想が尽きた。	저 녀석에게는 정나미가 떨어졌다.	keep	lookup
+dict:jisjk:139655	愛想を振りまく。	애교를 부린다.	keep	lookup
+dict:jisjk:139655	彼女は愛想がいい。	그녀는 애교가 있다.	keep	lookup

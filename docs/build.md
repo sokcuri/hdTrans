@@ -131,27 +131,35 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
 
 `.github/workflows/`의 워크플로가 GitHub Actions에서 돌아갑니다.
 
-- **build.yml**(Build): 풀 리퀘스트, `main`과 `develop` push, 수동 실행에서 돌고, 태그에서는 **Publish npm**이
-  불러 씁니다. `linux`, `windows-x64`, `windows-x86`, `mac`, `wasm` 프리셋을 각 OS 러너에서
-  빌드합니다. 모든 플랫폼에서 Ninja를 쓰고, 컴파일 캐시는 네이티브 빌드가 sccache, `wasm`이 ccache입니다
+- **build.yml**(Build): 풀 리퀘스트, `main`과 `develop` push, 수동 실행, 매일 한 번의 예약 실행(18:00 UTC,
+  03:00 KST)에서 돌고, 태그에서는 **Publish npm**이 불러 씁니다. `linux`, `windows-x64`, `windows-x86`, `mac`,
+  `wasm` 프리셋을 각 OS 러너에서 빌드합니다(풀 리퀘스트에서 도는 프리셋은 아래 gate 항목의 표). 모든
+  플랫폼에서 Ninja를 쓰고, 컴파일 캐시는 네이티브 빌드가 sccache, `wasm`이 ccache입니다
   (sccache는 Emscripten의 `-Xclang` 인자를 캐시하지 못합니다). Windows는 프리셋에 `-G Ninja`를 덧붙이고
   `vcvarsall`로 MSVC 환경을 설정합니다. 네이티브 프리셋은 `HDTRANS_DICTS=dicts`로 `ctest`를 실행하고, `wasm`은
   Node로 `tools/wasm_smoke.mjs`를 실행해 작은 사전으로 한 번 번역해 봅니다(셋째 인자로 그 사전을
   컴파일한 `.hdsnap`을 주면 그것으로도 불러 봅니다). `linux`는 비공개 테스트 데이터의 기대 출력과도 비교합니다
-  ([testing.md](testing.md#ci)). `linux`는 [성능 예산](#성능-예산)도 잽니다. 결과물은 `hdtrans-<프리셋>`
-  아티팩트로 올라갑니다.
+  ([testing.md](testing.md#ci)). 결과물은 `hdtrans-<프리셋>` 아티팩트로 올라갑니다.
 - Build의 `linux-asan` 작업은 sanitizer 빌드로 단위 테스트, 예문, 규칙 사례를 돌리고, `linux-fuzz` 작업은
-  [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트와 push에서 matrix와 함께 돕니다.
+  [퍼저](#퍼징)를 돌립니다. 두 작업은 풀 리퀘스트, push, 예약 실행에서 matrix와 함께 돕니다. 풀 리퀘스트의
+  `linux-asan`은 `hdtrans_tests`와 CLI만 빌드하고 단위 테스트(`unit.engine.megabyte` 제외), `rules.critical`,
+  예문만 돌립니다. 규칙 사례는 `linux`가 sanitizer 없이 돌리고, 나머지는 push와 예약 실행이 sanitizer로 돌립니다.
+- Build의 `linux-perf` 작업은 풀 리퀘스트에서 `linux` 빌드의 [성능 예산](#성능-예산)을 잽니다. 알리기만 하고
+  run을 실패시키지 않으며 `ci-ok`가 기다리지 않습니다.
+- 예약 실행은 `develop`에서 `linux-asan` 전체와 긴 무작위 퍼징만 돌리고, 패키지나 릴리스를 만들지 않습니다.
+  push와 다른 동시 실행 그룹이라 `develop` push를 막거나 취소하지 않습니다.
 - Build의 `ci-ok` 작업은 풀 리퀘스트와 push에서 항상 돌고, `gate`가 성공하지 않았거나 테스트 작업 하나가
   실패, 취소되면 실패합니다. 건너뛴 작업은 통과로 칩니다. 테스트 작업을 새로 만들면 `ci-ok`의 `needs`에 넣습니다
-  (`tools/release/ci-workflow.test.mjs`가 검사합니다).
+  (`tools/release/ci-workflow.test.mjs`가 검사합니다). `develop`의 필수 검사는 `ci-ok`와 PR 제목(`title`)입니다.
 - 성능 예산과 퍼징이 실패로 치는 것과 알리기만 하는 것:
 
   | 단계 | 실패 | 경고만(작업은 통과) |
   |---|---|---|
-  | `linux`의 Performance budget | - | 기준 커밋의 빌드보다 1% 넘게 많은 행, valgrind를 설치하지 못하거나 측정이 실패하거나 끝나지 않을 때, 기준 빌드를 찾지도 빌드하지도 못했을 때 |
+  | `linux-perf`의 Performance budget | - | 기준 커밋의 빌드보다 1% 넘게 많은 행, valgrind를 설치하지 못하거나 측정이 실패하거나 끝나지 않을 때, 기준 빌드를 찾지도 빌드하지도 못했을 때 |
   | `linux-fuzz`의 Replay | 시드나 `tests/fuzz/regressions/`의 입력 하나가 멈추거나 sanitizer 보고, 메모리 초과를 낼 때 | - |
-  | `linux-fuzz`의 Fuzz | `develop` push에서 무작위 퍼징이 찾은 입력이 있을 때 | PR, `main` push, 태그 빌드(**Publish npm**)에서 찾은 입력(요약과 `fuzz-findings` 아티팩트), 퍼저 빌드 실패(같은 소스는 다른 작업이 컴파일합니다) |
+  | `linux-fuzz`의 Fuzz | `develop` push와 예약 실행에서 무작위 퍼징이 찾은 입력이 있을 때 | PR, `main` push, 태그 빌드(**Publish npm**)에서 찾은 입력(요약과 `fuzz-findings` 아티팩트), 퍼저 빌드 실패(같은 소스는 다른 작업이 컴파일합니다) |
+
+  무작위 퍼징은 풀 리퀘스트에서 60초, push와 태그 빌드에서 150초, 예약 실행에서 30분 돕니다. 재생은 모든 실행에서 같습니다.
 
   경고는 작업 요약과 주석(annotation)에 남습니다. 인프라 문제로 보이면 그 작업만 다시 실행합니다(**Re-run
   failed jobs** 또는 `gh run rerun <run> --failed`).
@@ -168,6 +176,22 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
 
   기록은 `tested-tree-<트리 해시>` 아티팩트(30일)입니다. matrix가 통과한 `develop` push의 Build와 이 저장소의
   `develop`→`main` PR Build(셋째 경우 포함)만 남기고, gate도 이 저장소의 성공한 그 두 종류 run의 기록만 씁니다.
+- 풀 리퀘스트에서는 gate가 병합 커밋이 바꾼 경로로 프리셋과 네이티브 테스트(`linux-asan`, `linux-fuzz`,
+  `linux-perf`)를 고릅니다(`tools/release/ci-scope.mjs`). 고르지 않은 프리셋과 늘 빠지는 `mac`은 `develop` push가
+  돌립니다. `develop`→`main`과 `main`→`develop` PR, push, 태그, 수동 실행, 판단 중 오류는 모든 프리셋을 돌립니다.
+
+  | 바뀐 경로 | 도는 것 |
+  |---|---|
+  | `CMakeLists.txt`, `CMakePresets.json`, `cmake/`, `third_party/`, `build.yml` | 모든 프리셋과 네이티브 테스트 |
+  | `src/core/`, `src/rulec/`, `tests/unit/` | `linux`, `windows-x86`, `wasm`, 네이티브 테스트 |
+  | 그 밖의 코드(`src/cli/`, `src/frontend/`, `include/`, `tools/` 등) | `linux`, `wasm`, 네이티브 테스트 |
+  | `src/cshared/`, `src/j2kengine/`, `src/gui/`, `tests/host/`, `tools/build.ps1`, 어느 한쪽 커밋에 `_WIN32`, `_WIN64`, `_MSC_VER`이 있는 C/C++ 파일 | `linux`, `windows-x64`, `windows-x86`, 네이티브 테스트 |
+  | `dicts/`, `tests/rules/`, `tests/variants/`, `tests/fuzz/regressions/`, `examples/`, `ehnd/`, `user/`, `web/examples*`, `hdtrans.config.example.yaml`, 단위 테스트가 읽는 `docs/pipeline-layers.md` | `linux`, 네이티브 테스트 |
+  | 그 밖의 `web/` | `wasm` |
+  | `.github/`(`build.yml` 제외), `tools/release/` | 릴리스 도구 테스트만 |
+  | 그 밖의 `docs/`, `spec/`, `skills/`, 최상위 `README.md`, `AGENTS.md`, `CLAUDE.md`, `SECURITY.md`, `CHANGELOG.md` | 없음 |
+
+  릴리스 도구 테스트(`release-tools`)는 늘 돕니다. 여러 줄에 걸치면 고른 것을 합칩니다.
 - 컴파일 캐시는 `develop` push와 풀 리퀘스트, `develop`에서의 수동 실행만 저장합니다. `main` push, 태그, 그 밖의
   수동 실행은 읽기만 하므로 `develop`의 최신 캐시를 씁니다. Emscripten(`EMSDK_VERSION`)은 버전과 러너마다 캐시
   한 벌을 모든 워크플로가 함께 쓰고, ccache는 컴파일러를 그 버전으로 식별합니다.
@@ -201,9 +225,10 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   많은 행은 `over:`, 1% 넘게 적은 행은 `under:`로 시작하는 줄을 더합니다. 기준 빌드를 재지 못하면 이 빌드의 수만
   적습니다. 종료 코드는 잰 경우 늘 0이고, 이 빌드를 재지 못하면(멈춤 포함) 2입니다. `--measure CLI DICTS`는 한
   빌드의 수만 출력합니다. `--base`를 주지 않으면 develop과의 병합 기준 커밋을 씁니다.
-- 성능 예산은 재고 알리기만 하고 빌드를 실패시키지 않습니다. CI의 `linux` 작업은 PR에서 기준 커밋(PR 빌드가
-  병합한 기준 브랜치의 커밋, 곧 병합 커밋의 첫 부모)의 linux 빌드를 같은 러너에서 함께 재고, 표를 작업 요약에
-  적습니다. 1% 넘게 많은 행과 인프라 문제는 경고가 됩니다. 단계가 시간을 넘겨도 작업은 통과합니다.
+- 성능 예산은 재고 알리기만 하고 빌드를 실패시키지 않습니다. CI의 `linux-perf` 작업은 PR에서 같은 run의 `linux`
+  빌드와 기준 커밋(PR 빌드가 병합한 기준 브랜치의 커밋, 곧 병합 커밋의 첫 부모)의 linux 빌드를 같은 러너에서 함께
+  재고, 표를 작업 요약에 적습니다. 1% 넘게 많은 행과 인프라 문제는 경고가 됩니다. 시간을 넘기거나 실패해도
+  run은 통과하고, `ci-ok`는 이 작업을 기다리지 않습니다.
   `tools/perf-base.py`가 기준 빌드를 찾습니다.
   - 그 커밋의 push Build가 올린 `hdtrans-linux` 아티팩트(`linux` 작업의 테스트가 통과하면 run이 끝나기 전에도
     올라갑니다), 없으면 같은 트리를 기록한 `tested-tree-<트리>` run의 아티팩트를 씁니다.
@@ -211,7 +236,7 @@ gcc는 `-Wshadow=local`, clang은 `-Wshadow -Wshadow-uncaptured-local`이며, cl
   - 그래도 없거나 컴파일러가 다르면 그 커밋을 작업 안에서 빌드합니다. 빌드도 실패하면 이 빌드의 수만 적고 경고합니다.
 - push에서는 재지 않습니다. develop → main 승격 PR의 표가 릴리스 주기 전체의 변화이고, 크게 늘었으면 릴리스
   리뷰에서 살펴봅니다.
-- 로컬에서 따로 잴 필요는 없습니다. 경고를 다시 보려면 `linux` 작업만 다시 실행합니다. 같은 빌드의 수는 다시
+- 로컬에서 따로 잴 필요는 없습니다. 경고를 다시 보려면 `linux-perf` 작업만 다시 실행합니다. 같은 빌드의 수는 다시
   재도 같습니다.
 
 ## 퍼징
@@ -241,7 +266,7 @@ python3 -I tools/fuzz.py build/linux-fuzz/hdtrans_fuzz build/linux-fuzz/dicts.hd
   `--seed <실행 번호> --jobs <작업 수>`(요약의 `fuzz:` 줄)로 같은 변이를 되풀이합니다. 찾는 입력은 기계 속도에 따라 다를 수 있습니다.
 - 실패한 입력은 `--out`(기본 `build/fuzz`)에 남고 이스케이프한 글과 16진수로 출력됩니다. CI에서는 작업 요약과
   `fuzz-findings` 아티팩트에 있습니다. 고친 뒤 그 입력을 `tests/fuzz/regressions/`에 넣고 번역을 규칙 사례로
-  더합니다. 그러면 PR마다 재생 단계와 sanitizer 작업의 규칙 사례가 같은 오류를 막습니다.
+  더합니다. 그러면 PR마다 재생 단계가, push마다 sanitizer 작업의 규칙 사례가 같은 오류를 막습니다.
 - `HDTRANS_FUZZ`는 Clang과 `HDTRANS_SANITIZE`가 있어야 합니다. 커버리지 계측의 기본 함수가 sanitizer 런타임에
   있어서 같은 빌드의 CLI도 링크됩니다.
 

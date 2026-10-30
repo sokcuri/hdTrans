@@ -1,0 +1,20 @@
+rule	input	expected	kind	layer
+dict:novel-idioms:5	でもお前、まだ十五だろ？気が早いにもほどがあるなぁ。	하지만 너, 아직 15지? 성질이 급해도 정도가 있구나.	fix	local
+dict:novel-idioms:5	懐かしいにもほどがあるって……	그리워도 정도가 있다고……	fix	local
+dict:novel-idioms:5	鈍いにも程があるわ。	둔해도 정도가 있어.	fix	local
+dict:novel-idioms:5	ついて無いにも程があると泣きたくなった。	붙어 없어도 정도가 있으면 울고 싶어졌다.	fix	local
+dict:novel-idioms:5	お人好しにもほどがある！	호인도 정도가 있어!	fix	local
+dict:novel-idioms:5	失礼にも程がある！	실례도 정도가 있어!	fix	local
+dict:novel-idioms:5	鉄面皮にも程がある！	철면피도 정도가 있어!	fix	local
+dict:novel-idioms:7	いくら何でもあれはねえだろ、下品にも程があるぞ！	아무리 그래도 그건 아니지, 천해도 정도가 있겠어!	fix	local-ending
+dict:novel-idioms:7	年頃のご令嬢にそれは、無礼にも程があるな。	적령기의 영애에게 그것은, 무례해도 정도가 있구나.	fix	local-ending
+dict:novel-idioms:7	不公平にも程があるわ！	불공평해도 정도가 있어!	fix	local-ending
+dict:novel-idioms:6	人を疑うにも程がある！	사람을 의심해도 정도가 있어!	fix	local-ending
+dict:novel-idioms:6	ふざけたことを言うにも程がある！	장난친 것을 말해도 정도가 있어!	fix	local-ending
+dict:novel-idioms:5	何事にも程度がある。	무슨 일에도 정도가 있다.	keep	local
+dict:novel-idioms:5	先生にも相談した。	선생님에게도 상담했다.	keep	local
+dict:novel-idioms:7	静かにも見える。	조용하게도 보인다.	keep	local-ending
+dict:novel-idioms:5	私にも責任がある。	나에게도 책임이 있다.	keep	local
+dict:novel-idioms:5	誰にも言わない。	누구에게도 말하지 않는다.	keep	local
+dict:novel-idioms:5	この話は彼女にもした。	이 이야기는 그녀에게도 했다.	keep	local
+dict:novel-idioms:5	限度にも程度がある。	한도에도 정도가 있다.	keep	local

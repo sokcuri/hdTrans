@@ -1,0 +1,18 @@
+rule	input	expected	kind	layer
+dict:jisjk:263984	想像してたよりずっと田舎なんだよ｡	has:훨씬	fix	local
+dict:jisjk:263984	日本に持ち帰るよりずっと安全だと思った。	has:훨씬 안전	fix	local
+dict:jisjk:263984	ソーニャのほうがずっとクールでスマート	has:훨씬	fix	local
+dict:jisjk:263984	彼女は　先輩が思ってるよりもずっと若いです。	has:훨씬 젊	fix	local
+dict:jisjk:263984	ロンドンにいたときのほうがずっとマシだった｡	has:훨씬 나았다	fix	local
+dict:jisjk:263984	でも、数字で考えるより、ずっと大勢の聴衆がいる	has:훨씬 많은	fix	local
+dict:jisjk:263984	な、なんだとぉ。僕の方がずっときれいなんだ。	has:훨씬 예쁘	fix	local
+dict:jisjk:263984	向こうは　日本よりもずっと厳しい。	has:훨씬 어렵	fix	local
+dict:jisjk:263984	これから悩むだろう問題よりもずっと大事なことが。	has:훨씬 소중한	fix	local
+dict:jisjk:263984	庭園を含めればそこいらの町よりもずっと広いのだ。	has:훨씬 넓은	fix	local
+dict:jisjk:263984	そのほうが ずっといいはずだ	has:훨씬 좋을	fix	local
+dict:jisjk:263984	自分が思っていたよりずっと 私は欲深だった	has:훨씬	fix	local
+dict:jisjk:263984	はっきり言ってお父さんよりも ずっと…	has:훨씬	fix	local
+dict:jisjk:263984	私の方がずっと待っていた。	!rule:dict:jisjk:263984	keep	local
+dict:jisjk:263984	ずっと前から好きだった。	!rule:dict:jisjk:263984	keep	local
+dict:jisjk:263984	ずっと大事にしてきた。	!rule:dict:jisjk:263984	keep	local
+dict:jisjk:263984	彼はずっと強い。	!rule:dict:jisjk:263984	keep	local

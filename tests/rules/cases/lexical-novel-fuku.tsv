@@ -1,0 +1,22 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:93153	思わず噴いた。	나도 모르게 뿜었다.	fix	defaults
+dict:jisjk:93153	誰かが噴いた音がした。	누군가가 뿜은 소리가 났다.	fix	defaults
+dict:jisjk:93153	また誰かが噴いた。	또 누군가가 뿜었다.	fix	defaults
+dict:jisjk:93153	盛大に噴いた。	성대하게 뿜었다.	fix	defaults
+dict:jisjk:93153	噴水みたいにそれを噴いて咳き込んだ。	분수같이 그것을 뿜어 기침했다.	fix	defaults
+dict:jisjk:93153	湯気でも噴きそう。	김이라도 뿜을 것 같다.	fix	defaults
+dict:jisjk:93153	泡を噴いて床に転がっている。	거품을 뿜어 바닥에 널려 있다.	fix	defaults
+dict:jisjk:93153	噴いた拍子に椅子から転げ落ちた。	뿜은 바람에 의자에서 구르고 떨어졌다.	fix	defaults
+dict:jisjk:93153	お茶を噴いた。	차를 뿜었다.	fix	defaults
+dict:jisjk:93153	熱を噴いて倒れそうだ。	열을 뿜어 쓰러질 것 같다.	fix	defaults
+dict:jisjk:93153	じゅうじゅう噴いたら火を引いて	지글지글 뿜으면 불을 당겨	fix	defaults
+dict:jisjk:93153	機銃が火を噴くわ	기관총이 불을 뿜어	keep	defaults
+dict:jisjk:93153	火を噴きました	불을 뿜었습니다	keep	defaults
+dict:novel-verbs:10	噴水が噴き上がる。	분수가 솟구친다.	fix	defaults
+dict:novel-verbs:10	小さな噴水が噴き上がった。	작은 분수가 솟구쳤다.	fix	defaults
+dict:jisjk:95518	噴きあがる炎	솟구치는 불길	fix	defaults
+dict:novel-verbs:11	(火が噴く音)	(불이 분출하는 소리)	fix	local
+dict:novel-verbs:11	マグマが噴く。	마그마가 분출한다.	fix	local
+dict:novel-verbs:11	誰かが噴いた。	!rule:dict:novel-verbs:11	keep	local
+dict:novel-verbs:11	みんなが噴いた。	!rule:dict:novel-verbs:11	keep	local

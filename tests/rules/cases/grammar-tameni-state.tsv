@@ -1,0 +1,17 @@
+rule	input	expected	kind	layer
+dict:tameni-state:1	コレを知っているために、話のネタにしなかった。	이것을 알고 있어서, 이야기의 소재로 하지 않았다.	fix	local-ending
+dict:tameni-state:1	年の離れた兄弟がいるために、慣れている。	나이 차이가 나는 형제가 있어서, 익숙해져 있다.	fix	local-ending
+dict:tameni-state:1	ガチで作り込んでいるためにちゃんと急所がある。	진짜로 만들고 있어서 제대로 급소가 있다.	fix	local-ending
+dict:tameni-state:1	兄弟がいるために喧嘩する。	형제가 있어서 싸움한다.	fix	local-ending
+dict:tameni-state:1	お金があるために困らない。	돈이 있어서 곤란하지 않다.	fix	local-ending
+dict:tameni-state:1	彼女が家にいるために出られない。	그녀가 집에 있어서 나올 수 없다.	fix	local-ending
+dict:tameni-state:1	勉強しているために忙しい。	공부하고 있어서 바쁘다.	fix	local-ending
+dict:tameni-state:1	卒業後だって一緒にいるために。	졸업 후도 함께 있기 위해.	keep	local-ending
+dict:tameni-state:1	ここにいるためには努力が要る。	여기에 있기 위해서는 노력이 필요하다.	keep	local-ending
+dict:tameni-state:1	夢を叶えるために努力する。	꿈을 실현하기 위해 노력한다.	keep	local-ending
+dict:tameni-state:1	報告するために来た。	보고하기 위해 왔다.	keep	local-ending
+dict:tameni-state:1	生きていくために金になる魔法を取得する。	살아가기 위해 돈이 되는 마법을 취득한다.	keep	local-ending
+dict:tameni-state:1	見つめあうために	서로 바라보기 위해	keep	local-ending
+dict:tameni-state:1	彼を守るために戦う。	그를 지키기 위해 싸운다.	keep	local-ending
+dict:tameni-state:1	司令部施設入れるために武装を取った。	!rule:dict:tameni-state:1	keep	local-ending
+dict:tameni-state:1	かなり力をもった貴族であるために	꽤 힘을 가진 귀족이기 때문에	keep	local-ending

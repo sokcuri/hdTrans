@@ -1,0 +1,8 @@
+rule	input	expected	kind	layer
+names:known-whole	田さん、おはよう。\n田さん、元気？\n田さん、またね。\n(上田)本人です｡	has:(우에다) 본인입니다.	fix	names
+names:known-whole	一さん、おはよう。\n一さん、元気？\n一さん、またね。\n(金田一)本人です｡	has:(킨다이치) 본인입니다.	fix	names
+names:known-whole	知さん、おはよう。\n知さん、元気？\n知さん、またね。\n(伊地知) 本人です｡	has:(이지치) 본인입니다.	fix	names
+names:known-whole	山さん、おはよう。\n山さん、元気？\n山さん、またね。\n(中山)本人です｡	has:(나카야마) 본인입니다.	fix	names
+names:known-whole	田さん、おはよう。\n田さん、元気？\n田さん、またね。\n浜田さんが来た。	has:하마다 씨가 왔다.	fix	names
+names:known-whole	真昼さん、おはよう。\n椎名真昼が来た。\n椎名真昼が笑った。	has:시이나 마히루가 웃었다.	keep	names
+names:known-whole	芳雄さん、おはよう。\n芳雄さん、元気？\n(小林芳雄)こっちをお願いします｡	has:(코바야시 요시오) 여기를	keep	names

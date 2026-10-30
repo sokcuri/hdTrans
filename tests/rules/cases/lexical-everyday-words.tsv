@@ -3,7 +3,7 @@ dict:jisjk:115735	庭で砂を取った。	뜰에서 모래를 취했다.	fix	lo
 dict:jisjk:115735	砂で山を作る。	모래로 산을 만든다.	keep	lookup
 dict:jisjk:115995	パンを袋に入れた。	빵을 봉투에 넣었다.	fix	lookup
 dict:jisjk:115995	紙の袋を開けた。	종이의 봉투를 열었다.	keep	lookup
-dict:w:7491	パンや卵を買った。	빵이나 알을 샀다.	fix	lookup
+dict:w:7491	パンや卵を買った。	빵이나 계란을 샀다.	fix	lookup
 dict:w:7491	パン屋で買った。	빵가게에서 샀다.	keep	lookup
 dict:w:15782	いつもの年より寒い。	평소의 해보다 춥다.	fix	lookup
 dict:w:15782	お年寄りに席をゆずった。	노인에게 자리를 양보했다.	keep	lookup

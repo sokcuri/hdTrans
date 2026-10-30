@@ -6,7 +6,7 @@ compose:sign-number-noun	回復速度+1	회복 속도+1	fix	compose
 compose:sign-number-noun	防御+1、魔力+2	방어+1, 마력+2	fix	compose
 compose:sign-number-noun	装備+3	장비+3	fix	compose
 compose:sign-number-noun	攻撃力+10%	공격력+10%	fix	compose
-compose:sign-number-noun	命中率+5%	명중율+5%	fix	compose
+compose:sign-number-noun	命中率+5%	명중률+5%	fix	compose
 compose:sign-number-noun	経験値+20%	경험치+20%	fix	compose
 compose:sign-number-noun	移動速度+1	이동 속도+1	fix	compose
 compose:sign-number-noun	鋼の鎧+5を装備した	강철의 갑옷+5를 장비했다	fix	compose
@@ -66,7 +66,7 @@ compose:sign-word-apart	俺病院の前に30%くらいでそっから	나 병원
 compose:sign-word-apart	回避率を70%まで積んだ	회피율을 70%까지 쌓았다	keep	compose
 compose:sign-word-apart	身長は190㎝以上でしょうか	키는 190㎝ 이상입니까	keep	compose
 compose:sign-word-apart	(★+3以上)	(★+3 이상)	keep	compose
-compose:sign-word-apart	1~6の番号のついたゼッケン	1~6의 번호가 붙은 제킨	keep	compose
+compose:sign-word-apart	1~6の番号のついたゼッケン	1~6의 번호가 붙은 번호표	keep	compose
 compose:sign-word-apart	予算の５０％カットですぞ！	예산의 50% 컷이지!	keep	compose
 compose:sign-word-apart	相棒とのシンクロ率１２％。	파트너와의 싱크로율 12%.	keep	compose
 compose:sign-word-apart	30℃以上の熱	30℃ 이상의 열	keep	compose

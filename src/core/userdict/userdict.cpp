@@ -335,6 +335,10 @@ std::string ParseLine(std::string_view line, Context& ctx, std::vector<dict::Use
         } else if ((opt == "exclaim" || opt == "predicate" || opt == "cry" || opt == "haeyo") && pos == "intj") {
             // Read by the sound stage (an exclamation is no sound before a question mark, a Korean in
             // 해요 speech is no half of copies said apart).
+        } else if (opt == "acts" && pos == "ono" && ctx.soundTable) {
+            // Read by the sound stage (the lemma only before a する that describes no noun).
+        } else if (opt == "acts") {
+            return "option " + Quote(opt) + ": acts is only for the built-in sound table";
         } else if (opt == "final" && pos == "intj") {
             utteranceEnd = true;
         } else if ((key == "polite" || key == "alone") && hasValue && pos == "intj") {

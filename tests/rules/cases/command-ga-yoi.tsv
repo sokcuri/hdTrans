@@ -1,0 +1,18 @@
+# 규칙: SPC-15
+rule	input	expected	kind	layer
+dict:novel-ga-yoi	「姫だろうが、この馬鹿娘が！　さっさと席に着くが良い。ユフィリアもな」	has:빨리 자리에 앉도록 해라.	fix	lookup
+dict:novel-ga-yoi	この主砲の本当の力、味わうが良い！	이 주포의 진정한 힘, 맛보도록 해라!	fix	lookup
+dict:novel-ga-yoi	ああ、貴様もな。ゆっくり休むがよい。	has:천천히 쉬도록 해라.	fix	lookup
+dict:novel-ga-yoi	「ならば、拙者と勝負するがよい。」	「그러면, 졸자와 승부하도록 해라.」	fix	lookup
+dict:novel-ga-yoi	「ウム！　頑張るがよい！」	「음! 노력하도록 해라!」	fix	lookup
+dict:novel-ga-yoi	処分は　皆で決めるがよい。	처분은 모두가 결정하도록 해라.	fix	lookup
+dict:novel-ga-yoi	さっさと持っていくがよい！	빨리 가져가도록 해라!	fix	lookup
+dict:novel-ga-yoi	とくと確認するがよいぞ。	has:확인하도록 해라.	fix	lookup
+dict:novel-ga-yoi	やりたい奴がやるがいい	has:하도록 해라	fix	lookup
+dict:novel-ga-yoi	ならば　そのじいさんの弟子にでもなるがよかろう！	has:되는 게 좋을 것이다!	fix	lookup
+dict:novel-ga-yoi	提督も、少し修理したほうが良いみたいですね。	has:수리하는 편이 좋은 것 같네요.	keep	lookup
+dict:novel-ga-yoi	仲がよい	사이가 좋다	keep	lookup
+dict:novel-ga-yoi	頭がいい	머리가 좋아	keep	lookup
+dict:novel-ga-yoi	天気がいいので	날씨가 좋기 때문에	keep	lookup
+dict:novel-ga-yoi	気の済むまでゆっくりしていくがいいよ	has:쉬어 가는 게 좋아	fix	lookup
+dict:novel-ga-yoi	金はあるがいい家は買えない	돈은 있지만 좋은 집은 살 수 없다	fix	builtin-phrase

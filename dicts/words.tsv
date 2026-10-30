@@ -3434,7 +3434,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ギムナジウム	김나지움	N110			GN				xxx llm	1		w:3425
 ギャスケット	개스킷	N110			GN						ギャスケット	w:3426
 ギャル	갸루	N110			GN				xxx llm	1		w:3427
-ギャルゲ	갸루게	N110			GN						ギャルゲ	w:3428
+ギャルゲ	미소녀 게임	N110			GN						ギャルゲ	w:3428
 ギャロッピングインフレ	갤로핑 인플레이션	N110			GN				llm		ギャロッピングインフレ	w:3429
 ギャロッピング・インフレ	갤로핑 인플레이션	N110			GN				llm		ギャロッピング・インフレ	w:3430
 ギャンブル	도박	N110			GN				xxx llm	1		w:3431
@@ -10960,7 +10960,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 三半規管	세반고리관	N110			GN				xxx llm	1		w:10952
 三合会	삼합회	N110			GN						さんごうかい	w:10953
 三回	세 번	N110			GN				xxx llm	1		w:10954
-三塁手	삼루	N110			GN						さんるいしゅ	w:10955
+三塁手	3루수	N110			GN						さんるいしゅ	w:10955
 三審制	삼심제	N110	ULw		GN						さんしんせい	w:10956
 三尖弁	삼첨판	N110			GN				xxx llm	1		w:10957
 三差路	삼거리	N110			GN						さんさろ	w:10958
@@ -11483,8 +11483,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二四日	이십사일	N110	UMe	Tm	GN				xxx llm		にじゅうよっか	w:11476
 二四日	이십사 일	N110	UMe	Tm	GN				llm		にじゅうよっか	w:11477
 二回	두 번	N110			GN				xxx llm	1		w:11478
-二塁	이루	N110			GN						にるい	w:11479
-二塁手	이루	N110			GN						にるいしゅ	w:11480
+二塁	2루	N110			GN						にるい	w:11479
+二塁手	2루수	N110			GN						にるいしゅ	w:11480
 二天一流	이천일류	N110			GN						にてんいちりゅう	w:11481
 二子	쌍둥이	N110			GN				xxx	1	ふたご	w:11482
 二年もの	이 년 묵은 것	N110			GN				llm			w:11483
@@ -11508,7 +11508,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 二等	이등	N110			GN						にとう	w:11500
 二等分線	이등분선	N110			GN						にとうぶんせん	w:11501
 二胡	얼후	N110			GN						にこ	w:11502
-二親等	이촌	N110			GN				llm			w:11503
+二親等	2촌	N110			GN				llm			w:11503
 二角形	이각형	N110			GN						にかくけい	w:11504
 二返事	흔쾌한 승낙	N110	UTs		GN				llm		ふたつへんじ	w:11505
 二通り	두 가지	N110			GN				llm		ふたとおり	w:11506
@@ -12205,7 +12205,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 儂	나	N110			GN				xxx llm			w:12199
 儂	나	N120			GN						わし	w:12200
 儂等	우리	N120	VHn		GN				llm		わしら	w:12201
-儚げ	덧없어 보%D4@	G8U0			GN				llm			w:12202
+儚げ	덧없는 듯%A1@	G8U0			GN				llm			w:12202
 償金	배상금	N110			GN				xxx llm	1		w:12203
 優しそう	상냥해 보%D4@	G8U0			GN				xxx llm	1		w:12204
 優に	족히	E300			GN				xxx llm	1		w:12205
@@ -15843,7 +15843,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 幸福追求権	행복추구권	N110			GN						こうふくついきゅうけん	w:15799
 幹理	감리	N110		Hd	GN				llm		かんり	w:15800
 幹理	감리&AV@	M429			GN				llm		かんり	w:15801
-幹細胞	간세포	N110			GN						かんさいぼう	w:15802
+幹細胞	줄기세포	N110			GN						かんさいぼう	w:15802
 幻日	환일	N110			GN						げんじつ	w:15803
 幻灯機	환등기	N110			GN						げんとうき	w:15804
 幼けな	어$A4@	H7U0			GN				llm		いとけない	w:15805
@@ -15976,7 +15976,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 弓騎兵	궁기병	N110			GN						きゅうきへい	w:15932
 引きこもり	히키코모리	N110			GN				xxx		ひきこもり	w:15933
 引きこもり	은둔	N110			GN				llm		ひきこもり	w:15934
-引きつ	쥐가 &A5@	M428			GN				xxx llm		ひきつる	w:15935
+引きつ	굳어&AL@	M428		Dx	GN				xxx llm		ひきつる	w:15935
 引きつ	땅&A2@	M428			GN				llm		ひきつる	w:15936
 引きも切らな	끊이지 $D7@	H7U0			GN				llm			w:15937
 引き出	끌어 &A6@	M423			GN				xxx llm	1		w:15938
@@ -15989,7 +15989,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 引き換え券	교환권	N110			GN						ひきかえけん	w:15945
 引き摺られ	끌려&A1@	M427			GN				llm		ひきずられる	w:15946
 引き摺り込	끌어들&AJ@	M425			GN				llm			w:15947
-引き攣	쥐가 &A5@	M428			GN				xxx llm		ひきつる	w:15948
+引き攣	굳어&AL@	M428		Dx	GN				xxx llm		ひきつる	w:15948
 引き攣	땅&A2@	M428			GN				llm		ひきつる	w:15949
 引き汐	썰물	N110			GN						ひきしお	w:15950
 引き篭もり	히키코모리	N110			GN				xxx		ひきこもり	w:15951
@@ -17007,7 +17007,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 拐引	납치&AV@	M429			GN						かいいん	w:16963
 拓植	개척	N110		Hd	GN				llm		たくしょく	w:16964
 拓植	개척&AV@	M429			GN				llm		たくしょく	w:16965
-拘らず	관계없이	A9D0			GN				llm		かかわらず	w:16966
+拘らず	관계없이	A9D0	XXX		GN				llm		かかわらず	w:16966
 拘束時間	구속 시간	N110	UMe	Tm	GN				llm		こうそくじかん	w:16967
 招かれざる客	불청객	N110			GN						まねかれざるきゃく	w:16968
 招待券	초대권	N110			GN						しょうたいけん	w:16969
@@ -18751,8 +18751,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 気が違	미&AO@	M420			GN						きがちがう	w:18704
 気さく	싹싹%A1@	G8U0			GN				xxx llm	1		w:18705
 気っ風	표	N110			GN						きっぷ	w:18706
-気づか	념려&AV@	M420			GN						きづかう	w:18707
-気づかい	심려	N110			GN						きづかい	w:18708
+気づか	신경 &AF@	M420			GN						きづかう	w:18707
+気づかい	배려	N110			GN						きづかい	w:18708
 気づかされ	깨닫게 &C6@	M427			GN				llm			w:18709
 気づかれ	정신적 피로	N110	UFl	Hd	GN				llm		きづかれ	w:18710
 気づかわし	궁금$AB@	H7U0			GN						きづかわしい	w:18711
@@ -19508,7 +19508,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 火車	화차	N110			GN						かしゃ	w:19460
 灯し	등불	N110	VPe		GN				llm		あかし	w:19461
 灯し火	불빛	N110			GN						ともしび	w:19462
-灯り	등불	N110			GN				xxx llm			w:19463
+灯り	등불	N110	VEl		GN				xxx llm			w:19463
 灯り	전등불	N110			GN						あかり	w:19464
 灯台	등대	N110			GN				xxx		とうだい	w:19465
 灯台	등잔대	N110	VPe		GN				llm		とうだい	w:19466
@@ -20916,7 +20916,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 破砕	파쇄	N110		Hd	GN						はさい	w:20867
 破砕	파쇄&AV@	M429			GN						はさい	w:20868
 破落戸	어깨	N110			GN						ごろつき	w:20869
-破談	파담	N110			GN						はだん	w:20870
+破談	파혼	N110			GN						はだん	w:20870
 破風	박공	N110			GN				xxx llm	1		w:20871
 破魔弓	파마궁	N110			GN				xxx llm	1		w:20872
 硅砂	규사	N110			GN						けいしゃ	w:20873
@@ -22444,8 +22444,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 自己管理	자기 관리&AV@	M429			GN				llm		じこかんり	w:22392
 自己解凍ファイル	자동 압축 해제 파일	N110			GN				xxx llm	1		w:22393
 自己言及	자기언급	N110			GN						じこげんきゅう	w:22394
-自己負担	자담	N110		Hd	GN						じこふたん	w:22395
-自己負担	자담&AV@	M429			GN						じこふたん	w:22396
+自己負担	본인 부담	N110		Hd	GN						じこふたん	w:22395
+自己負担	본인 부담&AV@	M429			GN						じこふたん	w:22396
 自己陶酔	자기도취	N110		Hd	GN						じことうすい	w:22397
 自己陶酔	자기도취&AV@	M429			GN						じことうすい	w:22398
 自己顕示	자기 과시	N110	UYi		GN				llm		じこけんじ	w:22399
@@ -25134,7 +25134,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 閘門	갑문	N110			GN						こうもん	w:25083
 関らず	에도 불구하고	A9D0			GN				xxx llm		かかわらず	w:25084
 関らず	에 관계없이	A9D0			GN				llm		かかわらず	w:25085
-関わらず	관계없이	A9D0			GN				llm		かかわらず	w:25086
+関わらず	관계없이	A9D0	XXX		GN				llm		かかわらず	w:25086
 関わり合	얽&AW@	M420			GN				llm		かかわりあう	w:25087
 関係代数	관계대수	N110			GN						かんけいだいすう	w:25088
 関係演算子	관계연산자	N110	UTt		GN						かんけいえんざんし	w:25089
@@ -27079,7 +27079,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 痛って	아파	E320		J1	GN							w:28612
 痛ってぇ	아파	E320		J1	GN							w:28613
 のよ	0 거야	S500			GN	7690	||1 &&2 G+0== "Qc" D+0!= "어떻게 &AV@"	같은 마디에 의문사가 있는 のよ는 설명을 따지는 반말 '-는 거야'를 고른다(何するのよ 뭐 하는 거야). 앞으로 할 일을 묻는 どうするのよ는 고르지 않는다.				w:28450
-申	말&AV@	M433	UTs		GN	7691	||4 U+0== "せ" &&3 U+0== "して" S+1== "み" ||5 U+1== "よ" U+1== "ろ" U+1== "なさい" U+1== "Lがよ" U+1== "Lがい" ||2 U+0== "Lがよ" U+0== "Lがい" &&2 ||2 U+0== "ぬ" U+0== "ん" S+1== "か"	申す를 듣는 사람에게 시키는 말(申せ, 申してみよ, 申すがよい, 申さぬか)이면 낮추는 말씀드리다가 아니라 말하다를 고른다.				w:28451
+申	말&AV@	M433	UTs		GN	7691	||6 U+0== "せ" &&3 U+0== "して" S+1== "み" ||5 U+1== "よ" U+1== "ろ" U+1== "なさい" U+1== "Lがよ" U+1== "Lがい" ||2 U+0== "Lがよ" U+0== "Lがい" &&2 ||2 U+0== "ぬ" U+0== "ん" S+1== "か" ||2 U+0== "ぬか" U+0== "んか" &&3 U+0== "さ" S+1== "な" U+1== "Lいか"	申す를 듣는 사람에게 시키는 말(申せ, 申してみよ, 申すがよい, 申さぬか, 申さんか, 申さないか)이면 낮추는 말씀드리다가 아니라 말하다를 고른다.				w:28451
 微笑みかけ	미소 지어 보&AJ@	M427			GN							w:28615
 ほほえみかけ	미소 지어 보&AJ@	M427			GN							w:28616
 痛みだ	아프기 시작&AV@	M423			GN							w:28618
@@ -27153,3 +27153,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 その道半ばで	그 도중에	E300			GN							w:28965
 半ばかり	반 정도	N110		Tu	GN	8643	||2 &&2 G-1== "Ct" G-2== "NjNdCt" &&2 S-1== "R年" G-1== "NjNd"	수량 뒤의 半ばかり는 그 수량에 붙여 쓰는 ‘반 정도’로 고른다(三年半ばかり 3년반 정도).				w:28966
 半ばかり	반 정도	N110	XXX		GN							w:28967
+承太郎	죠타로	N130	QPNVHn	Wb	GN							w:28974

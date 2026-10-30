@@ -26,3 +26,31 @@ cx:youni-simile:40	まるで子供かのように泣いた。	마치 아이인 �
 cx:youni-simile:40	まるで夢のように美しい。	마치 꿈처럼 아름답다.	keep	rewrites
 cx:youni-simile:45	夢かのような光景だった。	꿈인 것 같은 광경이었다.	fix	rewrites
 cx:youni-simile:45	夢のような光景だった。	꿈과 같은 광경이었다.	keep	rewrites
+cx:youni-simile:35	自分に言いきかすように青年は呟く。	has:타이르듯이	fix	rewrites
+cx:youni-simile:35	子爵は国王を見定めるように見上げた。	has:확정하듯이	fix	rewrites
+cx:youni-simile:35	樹はからかうように笑った。	has:놀리듯이	fix	rewrites
+cx:youni-simile:35	そして嘆くように言い切ったイリアは続ける。	has:한탄하듯이	fix	rewrites
+cx:youni-simile:35	大森は感心するように唸る。	has:감탄하듯이	fix	rewrites
+cx:youni-simile:35	衝撃がＩＳＳ全体を揺さぶるように襲い掛かる。	has:흔들듯이	fix	rewrites
+cx:youni-simile:35	沙都子と俺は争うように弁当箱に飛びかかった。	has:싸우듯이	fix	rewrites
+cx:youni-simile:35	富竹さんは夕闇へ溶けこむように去って行った。	has:녹아들듯이	fix	rewrites
+cx:youni-simile:35	懇願するように俺を見つめる。	has:간청하듯이	fix	rewrites
+cx:youni-simile:35	東雲さんをにらむように見据える。	has:노려보듯이	fix	rewrites
+cx:youni-simile:35	エルが俺の胸に飛び込むように抱きついてきた。	has:뛰어들듯이	fix	rewrites
+cx:youni-simile:35	ナナイさんは、出来の悪い彫刻でも眺めるように俺たちを見ている。	has:바라보듯이	fix	rewrites
+cx:youni-simile:35	（つぶやくように歌う声）	has:(중얼거리듯이	fix	rewrites
+cx:youni-simile:35	笛や太鼓を鳴らすようにカラオケを歌った	has:울리듯이	fix	rewrites
+cx:youni-simile:35	イリアが私と目線を合わせるようにしゃがむ。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	アルガルドの横に並ぶように男達が並んだ。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	ここで待っているように言った。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	忘れないように書く。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	後ろからもよく見えるように話す。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	脱いだ服を ちゃんと片づけるようにしなさい｡	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	なるべく早く戻るように致します。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	一応すぐに逃げられるようにワープアイテムを入れて。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	肌は透き通るように白く、目鼻のバランスも整っている。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	自分に好かれるように気を使うべきではないか。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	言葉を止めるように子爵を呼ぶが、子爵は口を閉じない。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	みんなが分かるように説明する。	!rule:cx:youni-simile:35	keep	rewrites
+cx:youni-simile:35	武器を捨てるように叫んだ	has:버리도록 외쳤다	keep	rewrites
+cx:youni-simile:35	早く来るように尋ねた	has:오도록 물었다	keep	rewrites

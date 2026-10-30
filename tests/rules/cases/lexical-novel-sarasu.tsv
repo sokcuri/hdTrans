@@ -1,0 +1,16 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:375235	隠しきれないニヤケ顔を晒す彼女。	숨기지 못할 니야케얼굴을 드러내는 그녀.	fix	defaults
+dict:jisjk:375235	ぼうっとマヌケ面を晒していると	멍하니 마누케면을 드러내고 있다고	fix	defaults
+dict:jisjk:375235	ひたすら醜態を晒し続けた。	오로지 추태를 계속 드러냈다.	fix	defaults
+dict:jisjk:375235	ただ裸を晒すのとは	다만 알몸을 드러내는 것이란	fix	defaults
+dict:jisjk:375235	素顔を晒しての半裸プレイ	맨얼굴을 드러낸 반나체 플레이	fix	defaults
+dict:jisjk:375235	病院の場所晒してほしい	병원의 장소 드러내 줬으면 좋겠다	fix	defaults
+dict:novel-verbs:31	美しい体を余すところなく周囲に晒していた。	아름다운 몸을 남김없이 주위에 노출하고 있었다.	fix	local
+dict:novel-verbs:31	彼女を退学の危機に晒しておいて	그녀를 퇴학의 위기에 노출해 두어	fix	local
+dict:novel-verbs:31	個人情報を全部ネットに晒します。	개인정보를 전부 넷에 노출합니다.	fix	local
+dict:jisjk:375235	斬られて晒されて	베어져 노출되어	keep	defaults
+dict:jisjk:375235	好奇の目に晒される。	호기의 눈에 노출된다.	keep	defaults
+dict:jisjk:375235	無防備に晒された白い肌	무방비에 노출된 흰 피부	keep	defaults
+dict:jisjk:375235	醜態を晒す	추태를 드러낸다	keep	defaults
+dict:novel-verbs:31	醜態を晒す	!rule:dict:novel-verbs:31	keep	local

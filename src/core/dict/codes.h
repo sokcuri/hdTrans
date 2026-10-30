@@ -63,6 +63,8 @@ public:
 
     // Whether the tag is one of the bytes of set ("NIK").
     bool TagIn(std::string_view set) const { return !Empty() && set.find(Tag()) != std::string_view::npos; }
+    // Whether the class is that of a proper noun (N130, I130).
+    constexpr bool ProperNoun() const { return ClassDigit() == '1' && Sub() == '3'; }
     // Whether the tag is an upper-case ASCII letter, the tags of the lookup buckets.
     constexpr bool LetterTag() const { return Tag() >= 'A' && Tag() <= 'Z'; }
     WordClass Class() const;

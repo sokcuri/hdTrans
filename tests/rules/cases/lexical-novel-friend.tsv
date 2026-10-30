@@ -1,0 +1,20 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:novel-common-nouns:15	彼と私とは親友だった	그와 나와는 절친이었다	fix	defaults
+dict:novel-common-nouns:15	近藤≫同期で親友という	콘도≫동기에 절친이라고 한다	fix	defaults
+dict:novel-common-nouns:15	ただ親友が言い残すんですよ。	다만 절친이 말을 남기는 거예요.	fix	defaults
+dict:novel-common-nouns:15	２　再会した親友と意外なお願い	2 재회한 절친과 뜻밖의 부탁	fix	defaults
+dict:novel-common-nouns:15	親友の美紅と出会ったのも児童劇団｡	절친 미쿠와 만났던 것도 아동극단.	fix	defaults
+dict:novel-common-nouns:15	老後になって初めてできた親友でした。	노후가 되어 처음으로 온 절친이었습니다.	fix	defaults
+dict:novel-common-nouns:15	「知り合いっていうか……親友だよね！」	「아는 사람이라고 할까……절친이지!」	fix	defaults
+dict:novel-common-nouns:15	離れても 親友です	떨어져도 절친입니다	fix	defaults
+dict:novel-common-nouns:15	ありがとな｡俺たち 親友だろ｡	고마워. 우리 절친이지.	fix	defaults
+dict:novel-common-nouns:15	う～ん｡恋に悩む 我が親友のために	으음~. 사랑에 고민하는 우리 절친을 위해	fix	defaults
+dict:novel-common-nouns:15	分け合おう｡親友じゃないか｡ ﾊﾊ…｡	나누자. 절친이잖아. 하하….	fix	defaults
+dict:novel-common-nouns:15	(上田)浪人時代の親友の須藤さん｡	(우에다) 재수생 시대의 절친 스도우 씨.	fix	defaults
+dict:novel-common-nouns:15	かつての親友	한 때의 절친	fix	defaults
+dict:novel-common-nouns:15	「さっすが、話がわかるぜ親友！」	「역시, 이해한다 절친!」	fix	defaults
+dict:novel-common-nouns:15	友人と会った。	친구와 만났다.	keep	defaults
+dict:novel-common-nouns:15	友達の家に行く。	친구의 집에 간다.	keep	defaults
+dict:novel-common-nouns:15	大親友なんだ。	절친한 친구야.	keep	defaults
+dict:novel-common-nouns:15	旧友に会う。	옛 친구를 만난다.	keep	defaults

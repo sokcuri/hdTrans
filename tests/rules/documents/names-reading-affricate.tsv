@@ -1,0 +1,3 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+names:reading-line	中也《ちゅうや》\n中也は笑った。	츄야\n츄야는 웃었다.	fix	names

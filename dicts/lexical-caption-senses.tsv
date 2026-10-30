@@ -1,0 +1,18 @@
+#! layer=words
+# 뜻을 잘못 고르던 낱말의 굳은 꼴: 다른 한쪽, 와 주세요, 오신, 황금알, 자기 일처럼
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+もう一方の	다른 한쪽	E0H0			GN						もういっぽうの	caption-senses:1
+もう片方の	다른 한쪽	E0H0			GN						もうかたほうの	caption-senses:2
+お越しください	와 주세요	A9D0			GN						おこしください	caption-senses:3
+お越しくださいませ	와 주십시오	A9D0			GN						おこしくださいませ	caption-senses:4
+お越しの	오신	E0H0			GN						おこしの	caption-senses:5
+お越しの際	오실 때	E300			GN						おこしのさい	caption-senses:6
+金の卵	황금알	N110			GN						きんのたまご	caption-senses:7
+親身になって	자기 일처럼	E300			GN						しんみになって	caption-senses:8
+お越しくださいまして	와 주셔서	A9D0			GN						おこしくださいまして	caption-senses:9
+お越し下さいまして	와 주셔서	A9D0			GN						おこしくださいまして	caption-senses:10
+お越しくださいました	와 주셨습니다	A9D0			GN						おこしくださいました	caption-senses:11
+お越し下さいました	와 주셨습니다	A9D0			GN						おこしくださいました	caption-senses:12
+お越しいただきました	와 주셨습니다	A9D0			GN						おこしいただきました	caption-senses:13
+お越し頂きました	와 주셨습니다	A9D0			GN						おこしいただきました	caption-senses:14
+お越しくださいまし	와 주세요	A9D0			GN						おこしくださいまし	caption-senses:15

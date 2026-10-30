@@ -10,15 +10,19 @@
 #include <vector>
 
 #include "core/names/chars.h"
+#include "core/names/given.h"
 #include "core/names/historical.h"
 #include "core/names/labels.h"
 #include "core/names/name_cues.h"
 #include "core/names/readings.h"
 #include "core/names/registry.h"
+#include "core/names/ruby.h"
 #include "core/pipeline/normalize.h"
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
 #include "core/dict/char_readings.h"
+#include "core/text/hangul.h"
+#include "core/text/kana.h"
 #include "core/text/utf8.h"
 #include "core/text/lines.h"
 #include "core/tokenizer/classify.h"
@@ -298,6 +302,41 @@ std::string WrittenMarks(std::string_view marks) {
 
 std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view line, bool marked = false);
 
+// Whether a dictionary's name spells written, a reading as the registry writes it, but for the
+// conventions of SameSound and spaces, and し, じ and ち with a glide written without it
+// (순푸테이 코아사 for しゅんぷうていこあさ, 주 for じゅ). A name that writes ㅈ where the reading has
+// ㅊ, or ㅊ for ㅈ, spells another sound (주야 for 츄야 of ちゅうや).
+bool SpellsReading(std::string_view written, std::string_view name) {
+    auto affricates = [](std::string_view s) {
+        std::string out;
+        while (!s.empty()) {
+            const text::Rune ru = text::DecodeRune(s);
+            s.remove_prefix(ru.size == 0 ? 1 : ru.size);
+            if (const auto syl = text::Split(ru.cp); syl && (syl->initial == 12 || syl->initial == 14)) {
+                out += syl->initial == 12 ? 'j' : 'c';
+            }
+        }
+        return out;
+    };
+    auto key = [](std::string_view s) {
+        std::string out;
+        while (!s.empty()) {
+            const text::Rune ru = text::DecodeRune(s);
+            s.remove_prefix(ru.size == 0 ? 1 : ru.size);
+            if (ru.cp == U' ') continue;
+            char32_t cp = ru.cp;
+            if (const auto syl = text::Split(cp);
+                syl && (syl->initial == 9 || syl->initial == 10 || syl->initial == 12 || syl->initial == 14)) {
+                const int v = syl->vowel == 2 ? 0 : syl->vowel == 6 ? 4 : syl->vowel == 12 ? 8 : syl->vowel == 17 ? 13 : syl->vowel;
+                cp = text::Join(syl->initial, v, syl->final);
+            }
+            text::AppendRune(out, cp);
+        }
+        return out;
+    };
+    return text::SameSound(key(written), key(name)) && affricates(written) == affricates(name);
+}
+
 // A lone kanji in brackets or before sentence marks, read like the bare line ((望) (노조미),
 // 恵？ 메구미?, 勝！ 카츠!) unless it is a word (NameLine with marked).
 std::optional<std::string> MarkedKanjiNameLine(const dict::Snapshot& snap, std::string_view t) {
@@ -366,8 +405,12 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
         noun(c.codes, c.target);
     }
     for (const dict::Record& rec : snap.NameRecords(t)) person(rec.codes, rec.target);
+    // A user's name row is written as the user wrote it (the shipped 郎 rows lose their long vowels).
+    std::string userName;
     for (const dict::UserEntry* e : snap.TextPlain().Search(t, dict::LookupMode::General)) {
-        if (e->key == t && !e->nameLayer) noun(e->codes, e->target);
+        if (e->key != t || e->nameLayer) continue;
+        noun(e->codes, e->target);
+        if (e->name && userName.empty()) userName = e->target;
     }
     // A surname of two kanji or more names the speaker though it is a word too (高峰
     // 타카미네); a given name or a single kanji only where it is no word (朔夜, 慶; 未来,
@@ -376,8 +419,24 @@ std::optional<std::string> NameLine(const dict::Snapshot& snap, std::string_view
     if (!surname.empty() && (runes > 1 || !word)) name = surname;
     else if (!given.empty() && !word) name = given;
     if (name.empty()) return std::nullopt;
+    if (!userName.empty()) name = userName;
     const std::size_t at = line.find(t);
     return std::string(line.substr(0, at)) + name + std::string(line.substr(at + t.size()));
+}
+
+// Whether a word of the snapshot starts at line[at] or at a kanji of the run before it and
+// reaches end (WriteKinTerms).
+bool KanjiWordHolds(const void* context, std::string_view line, std::size_t at, std::size_t end) {
+    const auto& snap = *static_cast<const dict::Snapshot*>(context);
+    for (std::size_t start = at;;) {
+        for (const dict::Candidate& c : snap.GetWordInfo(line.substr(start), dict::LookupMode::General, {}).list) {
+            if (start + c.source.size() >= end) return true;
+        }
+        if (start == 0) return false;
+        const text::Rune last = names::internal::RuneBefore(line, start);
+        if (!names::internal::IsKanji(last.cp)) return false;
+        start -= last.size;
+    }
 }
 
 }  // namespace
@@ -392,7 +451,8 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     }
     names::Registry& r = *doc.registry;
     std::string cueText;
-    facts.text = r.DropReadings(names::StripRuby(pipeline::internal::WriteKinTerms(line, doc.female)), &cueText, &facts.cued);
+    const std::string kin = pipeline::internal::WriteKinTerms(line, doc.female, KanjiWordHolds, doc.snap);
+    facts.text = r.DropReadings(names::StripRuby(kin), &cueText, &facts.cued);
     const std::string_view cues = cueText.empty() ? std::string_view(facts.text) : std::string_view(cueText);
     dict::KeySet plain, guarded;
     for (const names::Occurrence& o : r.Occurrences(facts.text)) {
@@ -414,6 +474,22 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
+    // A name alone on its line is read by a reading written over it where the dictionary's name
+    // spells another (龍生《たつき》 타츠키, not 타츠오).
+    if (facts.wholeLine && facts.text != kin) {
+        const std::string_view t = names::internal::TrimLineSpace(facts.text);
+        names::internal::RubyMatch m;
+        if ((names::internal::FindRuby(kin, 0, m) || names::internal::FindReading(kin, 0, m) ||
+             names::internal::FindGloss(kin, 0, m)) && m.base == t) {
+            const std::size_t at = facts.text.find(t);
+            const std::size_t tail = facts.text.size() - at - t.size();
+            const std::string name = facts.wholeLine->substr(at, facts.wholeLine->size() - at - tail);
+            const std::string written = r.Written(m.reading);
+            if (!written.empty() && !SpellsReading(written, name)) {
+                facts.wholeLine = facts.text.substr(0, at) + written + facts.text.substr(at + t.size());
+            }
+        }
+    }
     // A reading in the line ((恭(きょう)）) is read, not the name.
     if (!facts.wholeLine && names::internal::TrimLineSpace(facts.text) == names::internal::TrimLineSpace(line)) {
         facts.wholeLine = MarkedKanjiNameLine(*doc.snap, names::internal::TrimLineSpace(facts.text));

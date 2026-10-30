@@ -31,7 +31,7 @@ voice:ability	価値なんか自分で見つけられる。	가치는 스스로 
 voice:ability	誰でも着られる。	누구라도 입을 수 있다.	keep	voice
 voice:ability	いつでも寝られる。	언제라도 잘 수 있다.	keep	voice
 voice:ability	誰だってそんなこと言われたら……	누구라도 그런 말 들으면……	keep	voice
-voice:ability	子どもでも生まれれば実家は左うちわだ。	아이라도 태어나면 친가는 편안한 생활이다.	keep	voice
+voice:ability	子どもでも生まれれば実家は左うちわだ。	아이라도 태어나면 본가는 편안한 생활이다.	keep	voice
 voice:adverse	見られたら困る。	보여지면 곤란하다.	fix	voice
 voice:adverse	食べられたら困る。	먹히면 곤란하다.	fix	voice
 voice:adverse	見つめられたら照れる。	응시당하면 쑥스러워한다.	fix	voice

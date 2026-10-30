@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:novel-idioms:15	異世界ファンタジーにつきものの『魔法』が存在する場合、	이세계 판타지에 으레 따르는 『마법』이 존재하는 경우,	fix	lookup
+dict:novel-idioms:15	デパートの屋上につきものの空飛ぶゾウさんまでッ！！	백화점의 옥상에 으레 따르는 하늘을 나는 조우 씨까지!!	fix	lookup
+dict:novel-idioms:14	トラブルは冒険につきものだ。	트러블은 모험에 으레 따르는 것이다.	fix	lookup
+dict:novel-idioms:17	戦争に付き物の犠牲。	전쟁에 으레 따르는 희생.	fix	lookup
+dict:novel-idioms:14	旅に危険はつきものだ。	여행에 위험은 으레 따르는 것이다.	keep	lookup
+dict:novel-idioms:14	戦争に犠牲は付き物だ。	전쟁에 희생은 따르기 마련인 것이다.	keep	lookup
+dict:novel-idioms:14	一人につき一つです。	한 사람에 대해 하나입니다.	keep	lookup
+dict:jisjk:151593	戦いに付き物だ	싸움에 으레 따르는 것이다	fix	defaults

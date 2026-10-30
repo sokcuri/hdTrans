@@ -32,6 +32,13 @@ constexpr double kThreshold = 2.0;
 constexpr double kSingleThreshold = 3.0;  // single-kanji surfaces without a label
 constexpr int kHonorificCap = 4;          // honorific occurrences counted per surface
 
+// Whether the dictionaries read t as one surname or given name (上田, 中山, 林太郎), which is no
+// surname and given name of its own. A given name of the name layer counts up to three
+// characters; a longer one is a full name there too (小林芳雄).
+bool OneName(const DictFlags& f, std::string_view t) {
+    return f.surname || f.given || f.layerSurname || (f.layerGiven && text::RuneCount(t) <= 3);
+}
+
 // The byte offsets of the code point starts of s, in order.
 std::vector<std::size_t> RuneStarts(std::string_view s) {
     std::vector<std::size_t> out;
@@ -134,13 +141,30 @@ void Registry::SetActor(const std::string& key, const std::string& value) {
 // word, or ends in one, and the reading is one too: its own reading (私（わたくし）,
 // 夾叉（きょうさ）) or another word read in its place (提督（あなた）, 各艦（ふね）). A
 // reading that is no word still names (三日（みか）, 千里（ちさと）), unless it is in no
-// dictionary at all and the base is only a word (用途（ようと）); and so does one that is
-// also a name, unless a word of it has the base's Korean (秋刀魚（さんま）: 꽁치).
+// dictionary at all and the base is only a word, or a word that also names a place
+// (用途（ようと）, 飯（めし）); and so does one that is also a name, unless a word of it has the
+// base's Korean (秋刀魚（さんま）: 꽁치). A reading over a name, or one that is only a name, is none.
 bool Registry::Gikun(std::string_view base, std::string_view reading) {
     const DictFlags r = Flags(reading);
+    // A reading over a name of no common sense names it when the reading is a name too or no
+    // word of its own meaning (龍生《たつき》; not 水馬（あめんぼ）), and a reading that is a name
+    // of the name layer and no common word names a base that is no word (二刃《ふたば》; not
+    // 朝日（あさひ）).
+    bool proper = true, sound = true;
+    if (snap_ != nullptr) {
+        for (const dict::Candidate& rec : snap_->RetrieveRecords(reading, dict::LookupMode::General)) {
+            if (rec.codes == nullptr || rec.source != reading || rec.codes->sem.HasCode("QPN")) continue;
+            proper = proper && rec.codes->part.ProperNoun();
+            sound = sound && text::SpellsSound(reading, rec.target, false);
+        }
+    }
+    const DictFlags named = Flags(base);
+    const bool readingName = r.person || r.layerGiven || r.layerSurname;
+    if ((named.person || named.layerGiven || named.layerSurname) && !named.common && (readingName || sound)) return false;
+    if ((r.layerGiven || r.layerSurname) && proper && !named.common) return false;
     if (r.records == 0 && !r.layerSurname && !r.layerGiven) {
         const DictFlags b = Flags(base);
-        return b.common && !b.person && !b.city && !b.layerSurname && !b.layerGiven;
+        return b.common && !b.person && (!b.city || b.word) && !b.layerSurname && !b.layerGiven;
     }
     if (!r.common) return false;
     if (r.person) {
@@ -292,6 +316,8 @@ bool Registry::NamedWithSound(std::string_view base, std::string_view reading) {
     if (snap_ == nullptr) return false;
     const std::string sound = text::FromKana(reading, text::Preset::Fan);
     if (sound.empty()) return false;
+    // The names this registry writes drop the long vowels (Written).
+    const std::string written = Written(reading);
     auto named = [&](const dict::Codes* codes, std::string_view target) {
         if (codes == nullptr || target.empty()) return false;
         const dict::SemCodes& sem = codes->sem;
@@ -299,7 +325,7 @@ bool Registry::NamedWithSound(std::string_view base, std::string_view reading) {
         if (!sem.HasPrefix("QPN") && !sem.HasPrefix("QCT") && !attr.starts_with("Wa") && !attr.starts_with("Wb")) {
             return false;
         }
-        return text::SameSound(target, sound);
+        return text::SameSound(target, sound) || text::SameSound(target, written);
     };
     for (const dict::Candidate& rec : snap_->RetrieveRecords(base, dict::LookupMode::General)) {
         if (rec.source == base && named(rec.codes, rec.target)) return true;
@@ -731,9 +757,11 @@ const std::map<std::string, Name>& Registry::Accepted() {
                (f.surname || f.layerSurname || (f.records == 0 && k >= 2));
     };
     auto full = [&](const std::string& x, const std::string& y, const std::string& joined, int c) {
-        // A common word is no full name (沢山 is 沢 + 山 only as a name).
+        // A common word or a place of the dictionaries is no full name (沢山 is 沢 + 山 only as a
+        // name, 東京), and a surname or given name they know is one name (上田 우에다, not 우에 다).
         const DictFlags fj = Flags(joined);
-        if (fj.common && !fj.person) return;
+        if (fj.common || (fj.records > 0 && !fj.person && fj.layerName.empty())) return;
+        const bool one = OneName(fj, joined);
         // The surname stands for the person alone too, but a common word (北, 上) reads as
         // that word wherever the full name is not written; a kanji whose only common reading is
         // the kanji's own (牧 목) is no such word.
@@ -746,6 +774,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         Name& j = all[joined];
         j.score += kThreshold;
         j.person = true;
+        if (one) return;
         j.hasParts = true;
         j.parts = {x, y};
     };
@@ -942,8 +971,9 @@ bool Registry::Crossed(std::string_view t, std::size_t i) {
 
 // The surname and given name of a full name t: at the boundary between its kanji and
 // katakana, or before or after another accepted name when the other part has two
-// characters or more. A katakana word is not split.
+// characters or more. A katakana word is not split, nor a word the dictionaries read whole.
 bool Registry::Split(std::string_view t, std::vector<std::string>& parts) {
+    if (const DictFlags f = Flags(t); (f.records > 0 && !f.person && f.layerName.empty()) || OneName(f, t)) return false;
     for (const Run& rn : RunsOf(t)) {
         if (rn.start > 0 && rn.end == t.size()) {
             parts = {std::string(t.substr(0, rn.start)), std::string(t.substr(rn.start))};
@@ -968,13 +998,13 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     if (!reading_[x].empty() && !reading_[y].empty()) return;
     auto known = [&](const std::string& part) -> std::string {
         const auto r = reading_.find(part);
-        if (r != reading_.end() && !r->second.empty()) return text::FromKana(r->second, preset);
+        if (r != reading_.end() && !r->second.empty()) return Written(r->second);
         const auto v = tables_->readings.find(part);
         if (v != tables_->readings.end() && !v->second.empty()) {
-            if (IsKanaText(v->second)) return text::FromKana(v->second, preset);
+            if (IsKanaText(v->second)) return Written(v->second);
             return v->second;
         }
-        if (!AllRunes(part, IsKanji)) return text::FromKana(part, preset);
+        if (!AllRunes(part, IsKanji)) return Written(part);
         return "";
     };
     // The longest tail that renders as the known given name, else the longest head that
@@ -987,7 +1017,7 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     if (!h.empty() && reading_[x].empty()) {
         for (std::size_t idx = 1; idx + 1 < at.size(); idx++) {
             for (const text::Preset p : presets) {
-                if (text::FromKana(rs.substr(at[idx]), p) == h) {
+                if (text::FromKana(rs.substr(at[idx]), p) == h || Written(rs.substr(at[idx])) == h) {
                     reading_[x] = std::string(rs.substr(0, at[idx]));
                     return;
                 }
@@ -998,7 +1028,7 @@ void Registry::SplitReading(const std::string& x, const std::string& y, const st
     if (!sh.empty() && reading_[y].empty()) {
         for (std::size_t idx = at.size() - 1; idx-- > 1;) {
             for (const text::Preset p : presets) {
-                if (text::FromKana(rs.substr(0, at[idx]), p) == sh) {
+                if (text::FromKana(rs.substr(0, at[idx]), p) == sh || Written(rs.substr(0, at[idx])) == sh) {
                     reading_[y] = std::string(rs.substr(at[idx]));
                     return;
                 }

@@ -1,0 +1,24 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+dict:novel-period:1	本願寺の武将、伊勢長島一向一揆に参加	혼간지의 무장, 이세 나가시마 잇코잇키에 참가	fix	defaults
+dict:novel-period:1	一向一揆が起きた。	잇코잇키가 일어났다.	fix	defaults
+dict:novel-period:1	加賀の一向一揆	가가의 잇코잇키	fix	defaults
+dict:novel-period:3	田沢又兵衛張満　　　　　朽木家家臣　譜代	다자와 마타베에 하루미츠　　　　　쿠츠키 가문 가신 후다이	fix	defaults
+dict:novel-period:3	譜代の家臣	후다이의 가신	fix	defaults
+dict:novel-period:4	上杉家の名跡を継ぎ関東管領に就任する	우에스기 가문의 유명한 고적을 이어 간토 간레이로 취임한다	fix	defaults
+dict:novel-period:5	飛鳥井雅教　　　　　　　権中納言　飛鳥井雅綱の息子	아스카이 마사노리　　　　　　　곤추나곤 아스카이아강의 아들	fix	defaults
+dict:novel-period:6	一条家の当主。権大納言　妻は	이치조가의 당주. 곤다이나곤 아내는	fix	defaults
+dict:novel-period:7	典侍の娘、父親は正親町天皇	나이시노스케의 딸, 아버지는 오기마치 천황	fix	defaults
+dict:novel-period:7	典侍までしていた あの ホホッ上玉がおりまするが	has:나이시노스케까지 하고 있던	fix	defaults
+dict:novel-period:8	七里三河守頼周　　　　　本願寺の坊官	시치리 미카와노카미 요리치카　　　　　혼간지의 보칸	fix	defaults
+dict:novel-period:9	公事奉行守山弥兵衛重義の息子	구지 부교 모리야마 야베에 시게요시의 아들	fix	defaults
+dict:novel-period:10	新当流の剣客	신토류의 검객	fix	defaults
+dict:novel-period:2	関東の後北条は、小田原に総構えを回しておる。	관동의 고호조는, 오다와라에 총자세를 돌리고 있다.	fix	defaults
+dict:names.475489	北条の堅城をいかに崩すか	호조의 견고한 성을 얼마나 무너뜨릴까	fix	defaults
+dict:names.475489	北条家の次男坊。野心もなく	호조가의 차남방. 야심도 없고	fix	defaults
+dict:names.475489	北条氏直の強固な守りを前に苦戦を強いられた。	호조 우지나오의 강고한 방비를 앞에 두고 고전을 강요당했다.	keep	defaults
+dict:novel-period:1	一向に構わない	전혀 상관없다	keep	defaults
+dict:novel-period:1	一向に進まない。	전혀 나아가지 않는다.	keep	defaults
+dict:novel-period:3	譜代衆	후다이 가신단	keep	defaults
+dict:novel-period:5	中納言	주나곤	keep	defaults
+dict:novel-period:6	大納言の娘	다이나곤의 딸	keep	defaults

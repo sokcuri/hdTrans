@@ -1,0 +1,7 @@
+#! layer=words
+# 구어 っす로 끝나는 맞장구: そうっすけど, そーっすね
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+そーっすけど	그렇긴 한데요	C0H0			GN							ssu-sou:1
+そうっすけど	그렇긴 한데요	C0H0			GN							ssu-sou:2
+そーっすね	그렇네요	C0H0			GN							ssu-sou:3
+そーっすか	그래요	C0H0			GN							ssu-sou:4

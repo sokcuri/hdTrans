@@ -1,0 +1,9 @@
+rule	input	expected	kind	layer
+dict:jisjk:116252	車でお越しの方	차로 오신 분	fix	local
+dict:jisjk:116252	お越しの方は受付へどうぞ。	오신 분은 접수에 오세요.	fix	local
+dict:jisjk:116252	お越しの方には粗品を差し上げます。	오신 분에게는 조품을 드립니다.	fix	local
+dict:jisjk:116252	遠方からお越しの方もいる。	먼 곳에서 오신 분도 있다.	fix	local
+dict:jisjk:152828	ご覧の方はこちらへ。	보실 분은 이쪽으로.	keep	lookup
+dict:jisjk:116252	明日お越しになる。	내일 오신다.	keep	lookup
+dict:jisjk:116252	ご来場の方は	입장하신 분은	keep	lookup
+dict:jisjk:116252	ご希望の方は	희망하시는 분은	keep	lookup

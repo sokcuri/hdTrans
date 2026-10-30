@@ -22,6 +22,9 @@ struct HistoricalReading {
 struct HistoricalLine {
     std::map<std::string, HistoricalReading> found;
     std::set<std::string> surnames;
+    // The surnames and common names of names that start in a surname of the dictionary, which are
+    // read as names even where they are common words.
+    std::set<std::string> strong;
     std::vector<std::vector<char32_t>> listed;
 };
 
@@ -31,5 +34,9 @@ std::string HistoricalRows(const dict::Snapshot& snap, std::span<const Historica
 // The rows JP TAB KR TAB name, one per line and sorted by JP, of the premodern names
 // in lines. Among the readings of a surface found in several runs, the longest run wins.
 std::string HistoricalNames(const dict::Snapshot& snap, std::span<const std::string> lines);
+
+// The kana reading of prefix as the prefix of a common name (新 しん, 孫 まご, 鶴 つる), ""
+// for none.
+std::string_view CommonNamePrefix(std::string_view prefix);
 
 }  // namespace hdTrans::names

@@ -543,3 +543,14 @@ HD_TEST(GramCodesPunctuationDigits) {
     };
     for (const auto& c : cases) HD_CHECK_EQ(static_cast<int>(GramCodes(c.attrs).PunctDigit()), c.digit);
 }
+
+HD_TEST(PartCodeProperNoun) {
+    using hdTrans::dict::PartCode;
+    HD_CHECK(PartCode("N130").ProperNoun());
+    HD_CHECK(PartCode("I130").ProperNoun());
+    HD_CHECK(PartCode("K130").ProperNoun());
+    HD_CHECK(!PartCode("N110").ProperNoun());
+    HD_CHECK(!PartCode("M430").ProperNoun());
+    HD_CHECK(!PartCode("N1").ProperNoun());
+    HD_CHECK(!PartCode("").ProperNoun());
+}

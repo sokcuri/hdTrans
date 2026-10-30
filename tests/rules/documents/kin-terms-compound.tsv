@@ -1,0 +1,6 @@
+rule	input	expected	kind	layer
+normalize:kin-terms	「あたしも行くわよ」\n「お義姉さま、パーティーに出るなんてズルいズルい！」	「나도 갈 거야」\n「언니, 파티에 나오다니 치사해 치사해!」	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\nお義姉様としては白い結婚は大歓迎だし、気持ち悪すぎて無理だという気持ちがよくわかる。	「나도 갈 거야」\n언니로서는 백색 결혼은 대환영이고, 너무 기분 나빠 무리라는 마음을 잘 안다.	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n「義兄様、こちらへ」	「나도 갈 거야」\n「의형님, 이쪽으로」	fix	normalize
+normalize:kin-terms	「あたしも行くわよ」\n「千夏姉様、こちらへ」	「나도 갈 거야」\n「치나츠 언니, 이쪽으로」	keep	normalize
+normalize:kin-terms	「あたしも行くわよ」\n「お姉様、こちらへ」	「나도 갈 거야」\n「언니, 이쪽으로」	keep	normalize

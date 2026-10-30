@@ -77,6 +77,14 @@ const dict::Snapshot* Dictionary() {
          "ウチ\t우리\tN110\t\t\tGN\t59\n"
          "フトン\t이불\tN110\t\t\tGN\t60\n"
          "ふとん\t이부자리\tN110\t\t\tGN\t61\n"
+         "行\t가&AE@\tM421\t\t\tGN\t9104\n"
+         "笑い飯\t와라이메시\tN110\t\t\tGN\t9101\n"
+         "刃\t칼날\tN110\t\t\tGN\t9107\n"
+         "生\t날것\tN110\t\t\tGN\t9108\n"
+         "たつき\t생계\tN110\t\t\tGN\t9109\n"
+         "ふたば\t후타바\tI130\t\t\tGN\t9110\n"
+         "飯\t밥\tN110\tVFd\t\tGN\t9102\n"
+         "飯\t이\tN130\tQCTVPl\t\tGN\t9103\n"
          "猫\t고양이\tN110\t\t\tGN\t68\n"
          "猫\t네코\tN130\tQPN\tWb\tGN\t69\n"
          "たま\t구슬\tN110\t\t\tGN\t70\n"
@@ -109,7 +117,23 @@ const dict::Snapshot* Dictionary() {
          "ゲート\t게이트\tN110\t\t\tGN\t107\n"
          "セット\t세트\tN110\t\t\tGN\t108\n"
          "スキル\t스킬\tN110\t\t\tGN\t109\n"
-         "スケルトン\t스켈레톤\tN110\t\t\tGN\t110\n"},
+         "スケルトン\t스켈레톤\tN110\t\t\tGN\t110\n"
+         "今日\t오늘\tN110\tUMe\t\tGN\t120\n"
+         "今\t콘\tN130\tQPN\tWa\tGN\t121\n"
+         "社長\t사장\tN110\tVHn\t\tGN\t122\n"
+         "社\t야시로\tN130\tQPN\tWa\tGN\t123\n"
+         "修理\t수리\tN110\t\tHd\tGN\t124\n"
+         "依頼\t의뢰\tN110\t\tHd\tGN\t125\n"
+         "一存\t독단\tN110\t\t\tGN\t126\n"
+         "十河\t소고\tN130\tQPN\tWa\tGN\t127\n"
+         "六角\t육각\tN110\t\t\tGN\t128\n"
+         "六角\t롯카쿠\tN130\tQPN\tWa\tGN\t129\n"
+         "上\t우에\tN130\tQPN\tWa\tGN\t130\n"
+         "田\t다\tN130\tQPN\tWb\tGN\t131\n"
+         "上田\t우에다\tN130\tQPN\tWa\tGN\t132\n"
+         "京\t쿄\tN130\tQPN\tWb\tGN\t133\n"
+         "東\t아즈마\tN130\tQPN\tWa\tGN\t134\n"
+         "東京\t도쿄\tN130\tQCT\t\tGN\t135\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -133,7 +157,10 @@ const dict::Snapshot* Dictionary() {
          "セリーヌ・アルドルフェン\t셀린 알돌펜\tN130\tQPNVHn\t\tGN\t89\n"
          "ミレイユ・ベルクロア\t미레유 베르크로아\tN130\tQPNVHn\t\tGN\t90\n"
          "ニーナ・ルーナ\t니나루나\tN130\tQPNVHn\t\tGN\t91\n"
-         "大上\t오오카미\tN130\tQPNVHn\tWb\tGN\t105\n"},
+         "大上\t오오카미\tN130\tQPNVHn\tWb\tGN\t105\n"
+         "龍生\t타츠오\tN130\tQPNVHn\tWb\tGN\t9105\n"
+         "ふたば\t후타바\tN130\tQPNVHn\tWb\tGN\t9106\n"
+         "たつき\t다쓰키\tN130\tQPNVHn\tWb\tGN\t9111\n"},
     });
     return loaded.snapshot.get();
 }
@@ -490,6 +517,13 @@ HD_TEST(names_labels) {
     // A numeral is no surname before a name (二美咲).
     const std::vector<std::string> misaki = Scan(snap, Repeat("美咲さん、おはよう。", 3) + Repeat("二美咲が来た。", 3)).Names();
     HD_CHECK(std::find(misaki.begin(), misaki.end(), "二") == misaki.end());
+    // A surname the dictionaries know is one name, not a surname and an accepted given name
+    // (上田 우에다, not 우에 다), and a place is no full name (東京).
+    names::Registry known = Scan(snap, Repeat("田さん、おはよう。", 3) + Repeat("上田が来た。", 2) +
+                                           Repeat("京さん、またね。", 3) + Repeat("東京に行く。", 2));
+    HD_CHECK_EQ(known.Render("上田"), std::string("우에다"));
+    const std::vector<std::string> tokyo = known.Names();
+    HD_CHECK(std::find(tokyo.begin(), tokyo.end(), "東京") == tokyo.end());
 }
 
 HD_TEST(names_honorifics) {
@@ -518,6 +552,18 @@ HD_TEST(names_honorifics) {
         names::Registry r = Scan(snap, doc);
         HD_CHECK(r.Names() == want);
     }
+    // The honorific after a word that ends in the run is the word's (笑い飯さん), and the
+    // word's own reading over a word that also names a place is no gloss (飯（めし）).
+    HD_CHECK(Scan(snap, Repeat("笑い飯さんだ。", 6)).Names().empty());
+    const std::vector<std::string> glossed = Scan(snap, Repeat("笑(わら)い飯さんだ。", 6)).Names();
+    HD_CHECK(std::find(glossed.begin(), glossed.end(), "飯") == glossed.end());
+    HD_CHECK(Scan(snap, Repeat("飯（めし）を食べた。", 2)).Names().empty());
+    // A reading over a name that is a name too, or one that is only a name, names the kanji over
+    // every other reading (龍生《たつき》 타츠키, 二刃《ふたば》 후타바).
+    HD_CHECK_EQ(Scan(snap, "龍生《たつき》が来た。").Render("龍生"), std::string("타츠키"));
+    HD_CHECK_EQ(Scan(snap, "（二刃(ふたば)）待って").Render("二刃"), std::string("후타바"));
+    // The kana of a verb's conjugation are no honorific (行くんか 行く).
+    HD_CHECK(Scan(snap, Repeat("行くんか？", 8)).Names().empty());
     // A common word that honorifics show to be a person reads as the person of the name layer.
     HD_CHECK_EQ(Scan(snap, Repeat("桃花ちゃん、おはよう。", 4)).Render("桃花"), std::string("모모카"));
     names::Registry r = Scan(snap, Repeat("リン様", 4));
@@ -584,7 +630,7 @@ HD_TEST(names_dict_rows) {
     HD_REQUIRE(snap != nullptr);
     names::Registry r = Scan(snap, "宝生ミナ（ほうしょうみな）\n" + Repeat("高森恭平「おはよう」", 3) + Repeat("恭平くん", 2));
     HD_CHECK_EQ(r.Dict(),
-                std::string("宝生ミナ\t호우쇼우 미나\tname\n恭平\t쿄헤이\tname\n"
+                std::string("宝生ミナ\t호쇼 미나\tname\n恭平\t쿄헤이\tname\n"
                             "高森\t타카모리\tsurname\n高森恭平\t타카모리 쿄헤이\tname\nちゃん\t짱\thon\n"));
     r.chan = "쨩";
     const std::string dict = r.Dict();
@@ -778,6 +824,24 @@ HD_TEST(names_historical_honorific_not_given) {
         HD_CHECK(rows.find("君") == std::string::npos && rows.find("殿") == std::string::npos &&
                  rows.find("様") == std::string::npos);
     }
+}
+
+// A common word is no listed name nor a given name read kanji by kanji, but it is a given name
+// after a surname and a title (十河讃岐守一存), and a surname before a title stays one (六角).
+HD_TEST(names_historical_common_words) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    auto rows = [&](const char* jp) {
+        const std::string line = jp;
+        return names::HistoricalNames(*snap, {&line, 1});
+    };
+    for (const char* jp : {"今日 キキに会ってさ", "社長　結婚してたんですか？", "今日一日 最高だったな｡", "修理依頼が来ると"}) {
+        HD_CHECK_EQ(rows(jp), std::string());
+    }
+    const std::string given = rows("十河讃岐守一存　三好家家臣");
+    HD_CHECK(given.find("十河讃岐守一存\t") != std::string::npos);
+    HD_CHECK(given.find("\n一存\t") == std::string::npos && !given.starts_with("一存\t"));
+    HD_CHECK(rows("六角左京大夫義賢　六角家前々当主").find("六角\t") != std::string::npos);
 }
 
 HD_TEST(names_prose_katakana) {

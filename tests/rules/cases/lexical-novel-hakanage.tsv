@@ -1,0 +1,16 @@
+# 규칙: LEX-3, LEX-6
+rule	input	expected	kind	layer
+dict:w:12202	儚げにほろほろ泣き続けている	덧없는 듯하게 계속 나폴나폴 울고 있다	fix	defaults
+dict:w:12202	儚げな美貌がこちらを窺っている。	덧없는 듯한 미모가 이쪽을 살피고 있다.	fix	defaults
+dict:w:12202	儚げに微笑んだ。	덧없는 듯하게 미소 지었다.	fix	defaults
+dict:w:12202	儚げな少女だった。	덧없는 듯한 소녀였다.	fix	defaults
+dict:w:12202	儚げで美しい。	덧없는 듯하고 아름답다.	fix	defaults
+dict:w:12202	その横顔は儚げだった。	그 옆 얼굴은 덧없는 듯했다.	fix	defaults
+dict:w:12202	儚げな目をする。	덧없는 듯한 눈을 한다.	fix	defaults
+dict:w:12202	儚げなあの輝き	덧없는 듯한 그 빛	fix	defaults
+dict:novel-modifiers:1	線の薄い儚げ美人だから	선의 얇은 가녀린 미인이니까	fix	defaults
+dict:novel-modifiers:1	あの儚げ美人な母親が	그 가녀린 미인인 어머니가	fix	defaults
+dict:w:12202	悲しげに笑う。	슬픈 듯하게 웃는다.	keep	defaults
+dict:w:12202	寂しげな顔をした。	쓸쓸한 듯한 얼굴을 했다.	keep	defaults
+dict:w:12202	儚い夢だった。	덧없는 꿈이었다.	keep	defaults
+dict:w:12202	美人な母親が	미인인 어머니가	keep	defaults

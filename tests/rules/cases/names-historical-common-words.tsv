@@ -1,0 +1,35 @@
+rule	input	expected	kind	layer
+names:historical-common-word	今日 その息子さんは…	has:오늘 그 아들은	fix	names
+names:historical-common-word	今日 キキに会ってさ	has:오늘 키키를	fix	names
+names:historical-common-word	今年 僕53になったんですよ	has:금년 저	fix	names
+names:historical-common-word	近年　箸墓古墳の出土物などから年代測定が行われ	has:근년 하시하카	fix	names
+names:historical-common-word	社長　結婚してたんですか？	has:사장 결혼	fix	names
+names:historical-common-word	長年 日記を書いているという文芸評論家で	has:오랜 세월 일기를	fix	names
+names:historical-common-word	園長　連れてきました。	has:원장 데려	fix	names
+names:historical-common-word	所長 八嶋薫子｡	has:소장 하치시마	fix	names
+names:historical-common-word	季節 気温 湿度によって調合を変えている｡	has:계절 기온	fix	names
+names:historical-common-word	神経 使いますよ？	has:신경 써요	fix	names
+names:historical-common-word	今朝　生理が来て…。	has:오늘 아침	fix	names
+names:historical-common-word	内定　もらったんでしょ？	has:내정 받은	fix	names
+names:historical-common-word	今更 何 言ってるんですか｡	has:이제 와서	fix	names
+names:historical-common-word	太平洋　グアム沖。	has:태평양	fix	names
+names:historical-common-word	今夜 お風呂入っちゃダメだようん	has:오늘 밤	fix	names
+names:historical-common-word	今朝方 連絡したらしいんです	has:오늘 아침께	fix	names
+names:historical-common-word	宗教家　桐生慧海さんです。	has:종교가	fix	names
+names:historical-common-word	今宵 茶室へお越しなさいませ	has:오늘 밤 다실	fix	names
+names:historical-common-word	所詮 人は単独旅行者だ	has:결국 사람은	fix	names
+names:historical-common-word	今日一日 最高だったな｡	has:오늘 하루	fix	names
+names:historical-common-word	紅茶 私がいれるねうん ああ なあ	has:홍차	fix	names
+names:historical-common-word	英雄 運命の詩	has:영웅	fix	names
+names:historical-common-word	メーカーへの修理依頼が ありました｡	has:수리 의뢰가	fix	names
+names:historical-common-word	このペースで修理依頼が来ると今の工房の処理能力じゃ対応できなくなるのは確実だ。	has:수리 의뢰가	fix	names
+names:historical-common-word	「わたくしの一存ではお返事できませんので」	lacks:카즈마사	fix	names
+names:historical-common-word	荒川平九郎長道　　　　　朽木家家臣　譜代　御倉奉行	has:아라카와 헤이쿠로 나가미치	keep	names
+names:historical-common-word	安養寺三郎左衛門尉経世  朽木家家臣　評定衆　旧浅井家臣	has:안요우지 사부로자에몬노죠 츠네요	keep	names
+names:historical-common-word	高野瀬備前守秀隆　　　　朽木家家臣　近江の国人	has:타카노세 비젠노카미 히데타카	keep	names
+names:historical-common-word	後藤但馬守賢豊　　　　　六角家家臣　六角六人衆の一人	has:고토 타지마노카미 카타토요	keep	names
+names:historical-common-word	六角左京大夫義賢　　　　六角家前々当主	has:롯카쿠 사쿄노다이부 요시카타	keep	names
+names:historical-common-word	主人公の名前は　仙石権兵衛。	has:센고쿠 곤베에	keep	names
+names:historical-common-word	榎村遥華 あなただから｡	has:에노키무라 하루카 당신	keep	names
+names:historical-common-word	白銀武 ここで何をしている？えっ｡	has:시로가네 다케시 여기서	keep	names
+names:historical-common-word	南原竜太　異常空間にようこそ	has:난바라 류타 이상	keep	names

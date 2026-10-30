@@ -1,0 +1,21 @@
+# 규칙: GRM-10
+rule	input	expected	kind	layer
+dict:novel-tsuretekorare:3	私も強制的に馬車に乗せられて戦場に連れてこられた。	has:전장에 끌려왔다.	fix	defaults
+dict:novel-tsuretekorare:3	いきなり連れてこられて	갑자기 끌려와	fix	defaults
+dict:novel-tsuretekorare:3	こんなところに連れてこられたのか…	has:끌려온	fix	defaults
+dict:novel-tsuretekorare:3	幼い頃に父に連れてこられて以来	has:끌려온	fix	defaults
+dict:novel-tsuretekorare:3	調査兵団に連れてこられたって聞いたよ	has:끌려왔다고	fix	defaults
+dict:novel-tsuretekorare:6	無理やり連れて来られた	억지로 끌려왔다	fix	defaults
+voice:kuru-word	吉岡さん もし けがしてたら一人じゃここまで連れてこれません	has:데려올 수 없습니다	keep	defaults
+dict:novel-tsuretekorare:2	なかなか 足が悪いから連れてこれなくて	has:데려올 수 없어서	keep	local
+dict:novel-tsuretekorare:10	死因は首を絞められた窒息死	사인은 목을 졸린 질식사	fix	defaults
+dict:novel-tsuretekorare:10	オルファンスに首を絞められたアニスフィアは	has:목을 졸린	fix	defaults
+dict:novel-tsuretekorare:10	もう１人は首を絞められ殺されていて	has:목을 졸리고	fix	defaults
+dict:novel-tsuretekorare:11	誰が首絞められたの？	has:목을 졸렸어?	fix	defaults
+dict:jisjk:121713	首をひも状のもので絞められたようです	has:졸린 것 같습니다	fix	defaults
+dict:jisjk:121713	それに 首には強く絞められた痕が残ってた	has:강하게 졸린 자국	fix	defaults
+dict:jisjk:121713	首を絞める	목을 조른다	keep	defaults
+dict:novel-tsuretekorare:20	妹を連れてこられた	여동생을 데려오셨다	fix	local
+dict:novel-tsuretekorare:21	先生が生徒を連れて来られた。	선생님이 학생을 데려오셨다.	fix	local
+dict:novel-tsuretekorare:20	娘を一緒に連れてこられたのですか	딸을 함께 데려오셨습니까	fix	local
+dict:novel-tsuretekorare:20	彼は戦場に連れてこられた。	!rule:dict:novel-tsuretekorare:20	keep	local

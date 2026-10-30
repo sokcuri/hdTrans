@@ -1,0 +1,27 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:cry-before-word	あっすいませんありがとうございます｡	앗 미안해요 감사합니다.	fix	sound
+sound:cry-before-word	(小日向)⟨あっすいませ～ん⟩	(코히나타) ⟨앗 미안해요 ⟩	fix	sound
+sound:cry-before-word	(慎太郎)あっすいませんこんにちは｡	(신타로) 앗 미안해요 안녕하세요.	fix	sound
+sound:cry-before-word	(髙地)あっすげぇ｡	(고지) 앗 대단해.	fix	sound
+sound:cry-before-word	(城島)あっすごい｡	(죠우지마) 앗 대단해.	fix	sound
+sound:cry-before-word	(城島)あっすごいすごいすごい｡	(죠우지마) 앗 대단해 대단해 대단해.	fix	sound
+sound:cry-before-word	(もぐら)あっすいません｡	(두더지) 앗 미안해요.	fix	sound
+sound:cry-before-word	あっすみません、遅れました。	앗 죄송합니다, 늦었습니다.	fix	sound
+sound:cry-before-word	(髙地)えっすごい何か…｡	(고지) 어 대단한 뭔가….	keep	sound
+sound:cry-before-word	(上田)えっすご～い！	(우에다) 어 대단해~!	keep	sound
+sound:cry-before-word	「あったなそんな話」	「있었군 그런 이야기」	keep	sound
+sound:cry-before-word	あったっけ？そんなこと忘れましたな	lacks:앗	keep	sound
+sound:cry-before-word	［そんな人生経験 あってこその言葉に	[그런 인생 경험 있어야만의 말에	keep	sound
+sound:cry-before-word	わっかりました！休むわよ。	알겠습니다! 쉴 거야.	keep	sound
+sound:cry-before-word	まっかせてよ！司令官！	맡겨! 사령관!	keep	sound
+sound:cry-before-word	はっちゃん、出撃しますね	핫짱, 출격할게요	keep	sound
+sound:cry-before-word	おっそーい。でも、頑張ったね！	늦어~. 하지만, 노력했네!	keep	sound
+sound:cry-before-word	おっかしいなぁ。本当にいらないんすか？	이상한데. 정말 필요하지 않나요?	keep	sound
+sound:cry-before-word	あっさり負けた	간단히 졌다	keep	sound
+sound:cry-before-word	あっという間に終わった	순식간에 끝났다	keep	sound
+sound:cry-before-word	あっ違う	앗 다르다	keep	sound
+sound:cry-before-word	あっ、すいません	앗, 미안해요	keep	sound
+sound:cry-before-word	(一同)おっす！	(일동) 여어!	keep	sound
+sound:cry-before-word	うっすらと涙を浮かべ	희미하게 눈물을 머금고	keep	sound
+sound:cry-before-word	お風呂は好きですよ。あったまりますー！	lacks:앗	keep	sound

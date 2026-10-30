@@ -1,0 +1,17 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+lookup:ro-given-name	キョウイチロウが来た。	쿄우이치로우가 왔다.	fix	lookup
+lookup:ro-given-name	きょういちろうが来た。	쿄이치로가 왔다.	fix	lookup
+lookup:ro-given-name	コウイチロウ	코우이치로우	fix	lookup
+lookup:ro-given-name	ヤサブロウ	야사부로우	fix	lookup
+lookup:ro-given-name	こういちろうくん	코이치로 군	fix	lookup
+lookup:ro-given-name	黙れ！ケンジロウにかかれば　お前らなんか…。	has:켄지로우에게	fix	lookup
+lookup:ro-given-name	ジュンイチロウ	준이치로우	keep	lookup
+lookup:ro-given-name	ケンジロウ！	켄지로우!	keep	lookup
+lookup:ro-given-name	(ケンシロウ)｢何で｣	(켄시로) ｢왜｣	keep	lookup
+lookup:ro-given-name	タツゴロウ	타츠고로우	keep	lookup
+lookup:ro-given-name	フクロウの次でございます	has:후쿠로우의	keep	lookup
+lookup:ro-given-name	いちろうした。	재수 했다.	keep	lookup
+lookup:ro-given-name	言ったろう？	말했지?	keep	lookup
+lookup:ro-given-name	地下水道の警護ごくろう。	지하 수로 경호 수고.	keep	lookup
+lookup:ro-given-name	今日は私がおごろう。	오늘은 내가 한턱 내자.	keep	lookup

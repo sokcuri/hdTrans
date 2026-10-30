@@ -35,9 +35,9 @@ cx:ttae-adnominal:10	今は喧嘩してる時じゃないよ！！	지금은 싸
 cx:ttae-adnominal:10	カタリナの記憶しかなかった時は、	카타리나의 기억밖에 없었을 때는,	fix	rewrites
 cx:ttae-adnominal:10	上級職にクラスチェンジした時の感動	!rule:cx:ttae-adnominal:10	keep	rewrites
 cx:ttae-adnominal:10	知っている人がいる。	!rule:cx:ttae-adnominal:10	keep	rewrites
-dict:jisjk:265559	下品にもほどがあるぞ！	천하게도 정도가 있겠어!	fix	local
-dict:jisjk:265559	お人好しにもほどがある！	호인에게도 정도가 있어!	fix	local
-dict:jisjk:265559	無礼にも程があるな。	무례하게도 정도가 있구나.	keep	local
+dict:jisjk:265559	下品にもほどがあるぞ！	천해도 정도가 있겠어!	fix	local
+dict:jisjk:265559	お人好しにもほどがある！	호인도 정도가 있어!	fix	local
+dict:jisjk:265559	無礼にも程があるな。	무례해도 정도가 있구나.	keep	local
 dict:jisjk:265559	三日ほど休んだ。	3일 정도 쉬었다.	keep	local
 dict:jisjk:265559	彼ほど強い人はいない。	!rule:dict:jisjk:265559	keep	local
 dict:jisjk:4198	声が出るほど面白い。	목소리가 나올 정도로 재미있다.	fix	local-ending

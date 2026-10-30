@@ -699,11 +699,46 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
         const char32_t prev = RuneBefore(line, start).cp;
         if (prev == U'お' || prev == U'ご') return "";
     }
+    // A dictionary word that starts before the run and ends with it takes the honorific
+    // (笑い飯さん, 笑(わら)い飯さん: 笑い飯, not 飯); a kana reading in parentheses inside it is
+    // passed over.
+    std::string word(line.substr(start, end - start));
+    for (std::size_t from = start, n = 0; from > 0 && n < 6; n++) {
+        text::Rune r = RuneBefore(line, from);
+        if (r.cp == U')' || r.cp == U'）') {
+            std::size_t open = from - r.size;
+            while (open > 0 && (IsHiragana(RuneBefore(line, open).cp) || IsKatakana(RuneBefore(line, open).cp))) open -= RuneBefore(line, open).size;
+            const text::Rune o = open > 0 ? RuneBefore(line, open) : text::Rune{};
+            if (open == from - r.size || (o.cp != U'(' && o.cp != U'（')) break;
+            from = open - o.size;
+            r = from > 0 ? RuneBefore(line, from) : text::Rune{};
+        }
+        if (r.size == 0 || r.size > from || !IsNameRune(r.cp)) break;
+        from -= r.size;
+        std::string head;
+        text::AppendRune(head, r.cp);
+        word = head + word;
+        if (Flags(word).records > 0) return "";
+    }
     const char32_t next = FirstRune(rest.substr(h.size())).cp;
     if (next == U'ゃ' || next == U'ゅ' || next == U'ょ') return "";
     // After a word that is no noun, name or place (大丈夫 G8U0), the ちゃんと is the adverb, not
     // the honorific and a particle: an honorific follows a noun (猫ちゃんと, 連装砲ちゃんと).
     if (h == "ちゃん" && next == U'と' && NoNounWord(t)) return "";
+    // A verb stem whose conjugation the kana of the honorific start is the verb (行くんか 行く,
+    // 出さんか 出さない), unless a particle or a comma after the honorific makes it one (歩くんが).
+    if (run.kanji && snap_ != nullptr && !InRunes(next, "がはをにのともへ、")) {
+        dict::LookupContext ctx;
+        ctx.plain = &snap_->Plain();
+        const std::string text = t + std::string(rest);
+        for (const dict::Candidate& c : snap_->GetWordInfo(text, dict::LookupMode::General, ctx).list) {
+            if (c.source != t || c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
+            for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+                const std::string_view conj = word::Conjugation(c.codes->partText[3] - '0', branch);
+                if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && rest.starts_with(conj)) return "";
+            }
+        }
+    }
     const std::string th = t + std::string(h);
     if (AllRunes(th, IsKanji) && Flags(th).records > 0) return "";
     const bool single = RuneCount(t) == 1 && AllRunes(t, IsKanji);

@@ -39067,7 +39067,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 破虜湖	파로호	N130	QCTVPl		GN							names.665999
 破裂	파열	N110			GN						はれつ	names.666000
 破裂寸前	파열 직전	N110			GN							names.666001
-破談	파담	N110			GN							names.666003
+破談	파혼	N110			GN							names.666003
 破走ギンコ	하소 긴코	N130	QPNVHn		GN						はそう ぎんこ	names.666004
 破足ジョー	하소쿠 조	N130	QPNVHn		GN						はそく じょー	names.666005
 破邪の刻印	파사의 각인	N130	QCTVPl		GN						はじゃのこくいん	names.666007
@@ -109065,7 +109065,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長島	나가시마	N130	QPNVHn	Wa	GN							names.737093
 長島☆自演乙☆雄一郎	나가시마 유이치로	N110			GN						ながしま ゆういちろう	names.737094
 長島ナオト	나가시마 나오토	N130	QPNVHn		GN							names.737095
-長島一向一揆	나가시마의 포위 공격	N130	VGt		GN							names.737096
+長島一向一揆	나가시마 잇코잇키	N130	VGt		GN							names.737096
 長島一由	나가시마 카즈요시	N130	QPNVHn		GN							names.737097
 長島三奈	나가시마미나	N130	QPNVHn	Wb	GN						ながしまみな	names.737098
 長島伸子	나가시마 노부코	N130	QPNVHn		GN							names.737099
@@ -129062,7 +129062,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 高石タケル	리키	N130	QPNVHn	Wb	GN							names.757350
 高石勝男	타카이시 카츠오	N130	QPNVHn		GN						たかいし かつお	names.757351
 高石太	다카이시 후토시	N130	QPNVHn		GN							names.757352
-高石岳	리키	N130	QPNVHn	Wb	GN							names.757353
 高石幸三郎	타카이시 코자부로	N130	QPNVHn		GN							names.757354
 高石恭子	다카이시 교코	N130	QPNVHn		GN							names.757355
 高石村	다카이시촌	N130	QCTVPl		GN							names.757356

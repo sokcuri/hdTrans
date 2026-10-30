@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/text/kana.h"
 #include "core/text/unicode.h"
 #include "core/word/conjugation.h"
 #include "core/word/constructions.h"
@@ -285,9 +286,15 @@ Phrase FindPhrase(Flusher& f) {
 
 // cleanupClass3Item: for a class-3 word with a Zn candidate, look right for the word
 // it attaches to and select the Zn candidate (or, before an Sp ending, move away from
-// it).
+// it). A word after a noun and の is a noun, no adverb of the predicate: it keeps its
+// candidate (ショックのあまり誰とも会わない, the excess, not 그다지; そんなのあんまり is the adverb).
 void CleanupClass3Item(Item* it) {
     const int count = static_cast<int>(it->group->entries.size());
+    if (const Item* p = it->prev; p != nullptr && p->group->surface == "の" && p->selected >= 0 &&
+                                  At(p->Code(p->selected), 0) == '2' && p->prev != nullptr &&
+                                  p->prev->selected >= 0 && At(p->prev->Code(p->prev->selected), 0) == '1') {
+        return;
+    }
     for (int index = 0; index < count; index++) {
         if (!Has(it->GAttr(index), "Zn")) continue;
         bool accepted = false;
@@ -339,7 +346,8 @@ void CleanupClass3Item(Item* it) {
 }
 
 // insertParenthesized finds a proper noun (code 13...) followed by a parenthesised
-// hiragana reading of its target and makes one word of the noun and the reading.
+// hiragana reading of its target, with or without its long vowels, and makes one word of
+// the noun and the reading.
 // The parenthesis and the reading are in the noun's token: the new word replaces the
 // reading there, so the same noun does not match again.
 Item* InsertParenthesized(Flusher& f) {
@@ -378,7 +386,11 @@ Item* InsertParenthesized(Flusher& f) {
             closing = cursorNext();
         }
         if (raw.empty() || innerTranslation == spaced) continue;
-        if (TransliterateHiragana(raw) != translated || innerTranslation == translated) continue;
+        // Names are written without the long vowels (LEX-29): 카이류 is かいりゅう too.
+        if ((TransliterateHiragana(raw) != translated && text::FromKana(raw, text::Preset::FanShort, true) != translated) ||
+            innerTranslation == translated) {
+            continue;
+        }
         int recordToken = index;
         if (closing != nullptr) recordToken = closing->tokenIndex;
         Record* record = w.CreateSyntheticRecord(recordToken, w.arena.Keep(raw), false);

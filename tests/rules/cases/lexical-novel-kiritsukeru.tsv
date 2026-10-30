@@ -1,0 +1,11 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+dict:jisjk:94728	抜け際に短剣で切りつけた。	누락때에 단검으로 베었다.	fix	defaults
+dict:jisjk:94728	左に抜けて切りつける。	왼쪽으로 빠져 벤다.	fix	defaults
+dict:jisjk:94728	こちらからも短剣を切りつけていく。	이쪽에서도 단검을 베어 간다.	fix	defaults
+dict:jisjk:94728	カーッとなって切りつけた！	화악 되어 베었다!	fix	defaults
+dict:jisjk:94728	(切りつける音)	(베는 소리)	fix	defaults
+dict:novel-verbs:26	（斬りつける音）	(베는 소리)	fix	defaults
+dict:novel-verbs:26	鋭利な刃物で斬りつけられた事による出血死。	예리한 칼로 베어진 일에 의한 출혈사.	fix	defaults
+dict:novel-verbs:25	ナイフで切り付けた。	나이프로 베었다.	fix	defaults
+dict:jisjk:94729	ナイフで切りつけた。	나이프로 베었다.	keep	defaults

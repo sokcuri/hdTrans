@@ -147,6 +147,9 @@ HD_TEST(pipeline_rewrite_conjunctions) {
         {"なら", "なら"},            // nothing after it
         {"ならば\n", "ならば\n"},  // なら before the hiragana ば
         {"であれば\nなら行く", "であれば\nそれなら行く"},
+        {"にも関わらず、彼は", "それにもかかわらず、彼は"},
+        {"「にも拘わらず彼女は」", "「それにもかかわらず彼女は」"},
+        {"雨にも関わらず", "雨にも関わらず"},  // after a noun
     };
     for (const auto& c : cases) HD_CHECK_EQ(Show(internal::RewriteConjunctions(Text(c.in))), std::string(c.want));
 

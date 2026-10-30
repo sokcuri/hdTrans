@@ -1,0 +1,20 @@
+# 규칙: NUM-1
+rule	input	expected	kind	layer
+dict:novel-kinship:1	今では当主から五親等以内の血族でないと	지금은 당주에게서 5촌 이내의 혈족이 아니면	fix	local
+dict:novel-kinship:1	五親等以内の血縁者から夫を迎えて	5촌 이내의 혈연자에게서 남편을 맞이해	fix	local
+dict:novel-kinship:1	ギリで五親等か？	아슬아슬하게 5촌인가?	fix	local
+dict:novel-kinship:1	七親等の親族	7촌의 친족	fix	local
+dict:novel-kinship:1	5親等まで	5촌까지	fix	local
+dict:jisjk:72691	三等親の叔父	3촌의 숙부	fix	defaults
+dict:jisjk:256668	先代から数えると六親等だね	선대부터 세면 6촌이구나	fix	defaults
+dict:w:11503	兄弟は本人から見て二親等だから	형제는 본인에게서 봐 2촌이니까	fix	defaults
+dict:jisjk:187327	従兄弟は四親等	사촌은 4촌	fix	defaults
+dict:jisjk:125877	先代の親兄弟が一親等で	선대의 부모 형제가 1촌으로	fix	defaults
+dict:jisjk:185868	三親等の傍系血族	3촌의 방계혈족	fix	defaults
+dict:jisjk:80305	一等親の家族	1촌의 가족	fix	defaults
+dict:novel-kinship:1	親等が近い	촌수가 가깝다	keep	local
+dict:novel-kinship:1	親等の数え方	촌수의 세는 방법	keep	local
+dict:novel-kinship:1	六親の縁	육친의 인연	keep	local
+dict:novel-kinship:1	一等賞を取った。	일등 상을 탔다.	keep	local
+dict:novel-kinship:1	二親と死別した。	부모와 사별했다.	keep	local
+dict:novel-kinship:2	四等親以内	4촌 이내	fix	local

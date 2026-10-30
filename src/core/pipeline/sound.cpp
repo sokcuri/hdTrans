@@ -489,7 +489,9 @@ private:
     mutable size_t drawnFrom_ = 0, drawnEnd_ = 0;
     mutable bool drawn_ = false;
     bool WordAt(size_t p, size_t n) const;
-    bool NounAt(size_t p, size_t n) const;
+    bool WordAfterCry(size_t p, size_t n) const;
+    bool CryBeforeWord(const SoundMatch& m) const;
+    bool NounAt(size_t p, size_t n, bool common) const;
     bool MatchAt(size_t p, SoundMatch& best, bool inChain = false, bool afterParticle = false) const;
     std::string Reading(const SoundRow& s, size_t p, size_t end) const;
     bool PoliteAt(size_t p) const;
@@ -508,6 +510,7 @@ private:
     bool Stopped(const SoundMatch& m) const;
     bool VerbStemAt(size_t p, size_t n) const;
     bool MimeticAfterWord(const SoundMatch& m) const;
+    bool PredicateStartsAt(size_t start, size_t p) const;
     bool WordStartsSound(size_t p, const SoundMatch& last, size_t end) const;
     bool StemAt(size_t p, size_t n) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
@@ -593,6 +596,21 @@ void SoundText::LongestKeys(size_t p, size_t& base, size_t& user, size_t& name, 
             base = std::max(base, n);
         }
     }
+}
+
+// Whether a dictionary word of n or more characters, and two at least, starts at character p: no
+// kana spelling, name, particle, ending or suffix that joins the word before it (すいません; not ても,
+// nor the ちゃん of はっちゃん).
+bool SoundText::WordAfterCry(size_t p, size_t n) const {
+    const size_t end = std::min(rs_.size(), p + 24);
+    bool word = false;
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup).list) {
+        if (c.codes == nullptr || (c.user != nullptr && (c.user->kana || c.user->nameLayer || c.user->end))) continue;
+        if (text::RuneCount(c.source) < std::max<size_t>(n, 2)) continue;
+        if (c.codes->part.TagIn("PSTU") || c.codes->gram.HasCode("Tu")) return false;
+        word = true;
+    }
+    return word;
 }
 
 // Whether a dictionary word other than a kana spelling or a name is exactly the n
@@ -872,7 +890,11 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                     korean = EncodeText(ko);
                 }
             }
-            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), s.root, s.intj, s.lead, open, spaceAfter, s.phrase,
+            // An acts row describing a noun keeps its own reading before する (ぷるぷるした身).
+            const bool describes = s.acts && end + 2 < rs_.size() && In(rs_[end], U"しす") && In(rs_[end + 1], U"たる") &&
+                                   (IsKanjiRune(rs_[end + 2]) || IsKatakanaRune(rs_[end + 2]));
+            const std::string_view root = describes ? std::string_view() : std::string_view(s.root);
+            best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), root, s.intj, s.lead, open, spaceAfter, s.phrase,
                               end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone};
             chosen = &s;
         }
@@ -911,8 +933,21 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
         return false;
     }
     // Right before を or が the sound is a noun when the dictionary reads it only as one
-    // (ガチャを回す 가챠를, トーンを落とす 톤을; but モヤモヤが, also an adverb).
-    if (base == surface && best.end < rs_.size() && In(rs_[best.end], U"をが") && NounAt(p, surface)) return false;
+    // (ガチャを回す 가챠를, トーンを落とす 톤을; but モヤモヤが, also an adverb), and so is a
+    // word in katakana said once that the dictionary reads only as a common noun before
+    // another case or topic particle or right after a word in kanji (ガチャで引く, ガチャの確率,
+    // 人生ガチャ; but ガチャと, the quoted sound, シャキっと and the mimetic ツルツルの).
+    if (base == surface) {
+        const std::u32string_view word = std::u32string_view(f_).substr(p, surface);
+        const bool doubled = surface % 2 == 0 && word.substr(0, surface / 2) == word.substr(surface / 2);
+        const bool more = best.end < rs_.size();
+        if ((more && In(rs_[best.end], U"をが") && NounAt(p, surface, false)) ||
+            (IsKatakanaRune(rs_[p]) && !doubled && chosen->key.back() != U'ト' &&
+             ((more && In(rs_[best.end], U"はでのにへもや")) || (p > 0 && IsKanjiRune(rs_[p - 1]))) &&
+             NounAt(p, surface, true))) {
+            return false;
+        }
+    }
     return !(base > surface || (base == surface && surface > best.keyLen) || user >= keyLen);
 }
 
@@ -930,13 +965,14 @@ bool SoundText::EndsInsideKatakana(size_t p, size_t end) const {
 }
 
 // Whether the dictionary reads the n characters at p as a noun and as nothing else (kana
-// spellings and names aside).
-bool SoundText::NounAt(size_t p, size_t n) const {
+// spellings and names aside); with common, as a common noun, proper nouns aside.
+bool SoundText::NounAt(size_t p, size_t n, bool common) const {
     const dict::Candidates rd = snap_.GetWordInfo(Bytes(p, p + n), dict::LookupMode::General, ctx_.lookup);
     bool noun = false;
     for (const dict::Candidate& c : rd.list) {
         if ((c.user != nullptr && (c.user->kana || c.user->nameLayer)) || text::RuneCount(c.source) != n) continue;
-        if (!c.codes->partText.starts_with("N1")) return false;
+        if (common && c.codes->partText.starts_with("N13")) continue;
+        if (!c.codes->partText.starts_with(common ? "N11" : "N1")) return false;
         noun = true;
     }
     return noun;
@@ -1117,7 +1153,27 @@ bool SoundText::Stopped(const SoundMatch& m) const {
         VerbStemAt(m.start, m.end - 1 - m.start)) {
         return false;
     }
-    return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start];
+    return !IsKana(r) || In(r, U"トテー～ダデ") || r == f_[m.start] || CryBeforeWord(m);
+}
+
+// Whether the interjection m, a vowel and っ (あっ, えっ, おっ), opens an utterance (also after the
+// speaker's name in brackets of a caption) right before a word
+// in hiragana that a key starting with its っ would cut (あっすいません 앗 죄송합니다, not 아 + っす +
+// いません): no word goes on from the cry, no て, た or ち of a verb form follows it (あって, あった,
+// うっちゃう), and the word after it, no particle, ending or suffix, reaches further than the keys at
+// the っ.
+bool SoundText::CryBeforeWord(const SoundMatch& m) const {
+    if (!m.intj || m.end != m.start + 2 || m.end >= rs_.size() || !In(rs_[m.start], U"あいうえお") || rs_[m.end - 1] != U'っ' ||
+        !IsHiraganaRune(rs_[m.end]) || In(rs_[m.end], U"てたちつでだ") ||
+        !(UtteranceStart(m.start) || In(rs_[m.start - 1], U"）)⟨"))) {
+        return false;
+    }
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(m.start, base, user, name, true);
+    if (std::max(base, user) > m.end - m.start) return false;
+    LongestKeys(m.end - 1, base, user, name, true);
+    const size_t tsu = std::max(base, user);
+    return tsu >= 2 && WordAfterCry(m.end, tsu);
 }
 
 // Whether the n characters at p are in the dictionary as the stem of a verb (ビビ of ビビる),
@@ -1127,6 +1183,49 @@ bool SoundText::VerbStemAt(size_t p, size_t n) const {
         if (text::RuneCount(c.source) == n && c.codes != nullptr && c.codes->part.Tag() == 'M') return true;
     }
     return false;
+}
+
+// Whether the hiragana at p, after katakana sounds from start, start a verb: every longest
+// dictionary key there, of two or more characters, is a verb or adjective stem and not a light
+// verb that a katakana noun takes; and the katakana are no adjective stem and no dictionary word
+// runs on from start past p (ハイハイわかりました: わかる; but ハイハイして, ハイハイできた,
+// アカンやつ, ヤバいな, グッてやる, キャえらさん).
+bool SoundText::PredicateStartsAt(size_t start, size_t p) const {
+    const std::string_view rest = Bytes(p, rs_.size());
+    if (f_[p - 1] == U'ッ' || dict::StartsWithMember(HDTRANS_CLASS("follower.verbal-noun"), rest) > 0) return false;
+    // A particle or suffix of two or more kana that a katakana noun takes (だけ, たち, から); one of one
+    // kana is shorter than the verb (ヤダやめて: やめる, not や).
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("follower.kata-noun"))) {
+        if (text::RuneCount(m) > 1 && rest.starts_with(m)) return false;
+    }
+    size_t end = p;
+    while (end < rs_.size() && IsHiraganaRune(rs_[end])) end++;
+    size_t longest = 0;
+    bool verb = false;
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup).list) {
+        if ((c.user != nullptr && (c.user->kana || c.user->nameLayer)) || c.codes == nullptr) continue;
+        const size_t n = text::RuneCount(c.source);
+        const bool stem = (c.codes->part.Tag() == 'M' && c.codes->part.At(1) == '4') ||
+                          (c.codes->part.Tag() == 'H' && c.codes->part.At(1) == '7');
+        if (n > longest) {
+            longest = n;
+            verb = stem;
+        } else if (n == longest) {
+            verb = verb && stem;
+        }
+    }
+    // Nor a stem that an honorific follows: the kana spell a name (キャえらさん).
+    if (!verb || longest < 2 ||
+        dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), Bytes(p + longest, rs_.size())) > 0) {
+        return false;
+    }
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(start, end), dict::LookupMode::General, ctx_.lookup).list) {
+        const size_t n = text::RuneCount(c.source);
+        if (n > p - start || (n == p - start && c.codes != nullptr && c.codes->part.Tag() == 'H' && c.codes->part.At(1) == '7')) {
+            return false;
+        }
+    }
+    return true;
 }
 
 // Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):
@@ -1208,9 +1307,12 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         SoundMatch& last = chain.back();
         size_t end = last.end;
         if (!last.intj) end += Adverbial(end);
+        const bool cry = CryBeforeWord(last);
         if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") ||
-            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end]))) {
+            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry ||
+            (katakana && IsKatakanaRune(rs[end - 1]) && IsHiraganaRune(rs[end]) && PredicateStartsAt(p, end))) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
+            if (cry) last.spaceAfter = true;
             last.end = end;
             if (loose && chain.size() < 2) return {};
             return chain;
@@ -2868,7 +2970,7 @@ namespace {
 // The verb kinds and form branches of word::Conjugation that a contracted ん or っ stands in.
 constexpr int kIchidan = 7, kRaGodan = 8, kSuru = 9, kKuru = 11, kKuruKanji = 13;
 constexpr int kPrefixSuru = 50, kPrefixKuru = 100, kPrefixKuruKanji = 150;  // the groups of word::PrefixForm
-constexpr int kDictionaryForm = 0, kPassive = 1, kPotential = 4, kNegativeStem = 8, kStemForm = 10;
+constexpr int kDictionaryForm = 0, kPassive = 1, kPotential = 4, kPastBranch = 6, kNegativeStem = 8, kStemForm = 10;
 
 // Filters of the verbs that VerbFormIs counts, by kind and codes (none for する and くる).
 bool Godan(int kind, const dict::Codes*) { return kind >= 0 && kind <= kRaGodan && kind != kIchidan; }
@@ -3014,15 +3116,38 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             const std::string_view stem = std::string_view(s).substr(byte[from], byte[i] - byte[from]);
             // The ん after a dictionary form is the の said ん (書くんなら); the ん after the negative
             // stem of a godan verb is its negative (いかんな, 知らんぞ), read as such, but for one
-            // before a written ない, which no negative takes (止まんない is 止まらない, not 止む).
-            if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) ||
-                         (!nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap)))) {
+            // before a written ない, which no negative takes (止まんない is 止まらない, not 止む). After a
+            // stem with a kanji and before か, から, けど or し that negative is written ない, which the
+            // word stage reads there (待たんか 待たないか, 分からんし 分からないし; not the かて of ても
+            // in 喜ばんかて); and the ん after the past of a verb with a kanji before か is the の of a
+            // question (来たんかい 来たのかい). Neither where a word in kanji that starts before the stem
+            // goes on into it (the name or noun before the honorific さん of 主任さんから, 井出さんか).
+            const bool kanji = std::any_of(rs.begin() + static_cast<std::ptrdiff_t>(from),
+                                           rs.begin() + static_cast<std::ptrdiff_t>(i), IsKanjiRune);
+            const bool inWord = from > 0 && IsKanjiRune(rs[from - 1]) && InsideWord(s, byte, start, from, ctx, snap);
+            const bool godanNegative = !nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap);
+            if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) || godanNegative)) {
+                // The question of an old speaker and the reproach before ！ keep their ん for the end
+                // rows of んか (始まらんかのう, 黙らんか！).
+                const bool endRow = rest.starts_with("かの") || rest.starts_with("か！") || rest.starts_with("か!");
+                if (godanNegative && kanji && !inWord && says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") &&
+                    !rest.starts_with("かて") && !endRow) {
+                    kana = kNai;
+                }
+                break;
+            }
+            if (!tsu && kanji && !inWord && says == Says::Negative && rest.starts_with("か") &&
+                VerbFormIs(stem, kPastBranch, AnyKind, ctx, snap)) {
+                kana = "の";
                 break;
             }
             // A stem of one kana only after a particle or the て of a て form (気にすんな, してくんない,
-            // 俺がやっから), and す of する after a noun (邪魔すんな); a kana after kanji is the end of
-            // another word there (怖いんです).
-            if (i - from == 1 && !IsKanjiRune(rs[from]) &&
+            // 俺がやっから), where a clause starts before ない or ねえ (やんないと, これ　やんなきゃ), and す
+            // of する after a noun (邪魔すんな); a kana after kanji is the end of another word there
+            // (怖いんです).
+            const bool clauseStart = from == 0 || !(IsHiraganaRune(rs[from - 1]) || IsKatakanaRune(rs[from - 1]) ||
+                                                    IsKanjiRune(rs[from - 1]) || text::IsLetter(rs[from - 1]));
+            if (i - from == 1 && !IsKanjiRune(rs[from]) && !(says == Says::Nai && clauseStart) &&
                 !(from > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-kana-stem-after"), std::string_view(s).substr(byte[from - 1])) > 0) &&
                 !(rs[from] == U'す' && from > 0 && (IsKanjiRune(rs[from - 1]) || IsKatakanaRune(rs[from - 1])))) {
                 continue;

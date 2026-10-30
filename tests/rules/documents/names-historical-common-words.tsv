@@ -1,0 +1,3 @@
+rule	input	expected	kind	layer
+names:historical-common-word	今日 キキに会ってさ\n今日はいい天気だ	오늘 키키를 만나\n오늘은 좋은 날씨다	fix	names
+names:historical-common-word	主人公の名前は　仙石権兵衛。\n権兵衛は　その男に勝負を挑む。	주인공의 이름은 센고쿠 곤베에.\n곤베에는 그 남자에게 승부를 도전한다.	keep	names

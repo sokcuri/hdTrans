@@ -3,6 +3,8 @@
 
 #include "core/dict/classes.h"
 #include "core/pipeline/normalize.h"
+#include "core/text/unicode.h"
+#include "core/text/utf8.h"
 
 namespace hdTrans::pipeline::internal {
 
@@ -60,12 +62,28 @@ std::vector<std::string_view> Utterances(std::string_view line) {
     return out;
 }
 
-std::string ReplaceString(std::string_view s, std::string_view from, std::string_view to) {
+// The start of the kanji before s[i], or npos when s[i] follows no kanji.
+size_t KanjiBefore(std::string_view s, size_t i) {
+    size_t start = i;
+    while (start > 0 && (static_cast<unsigned char>(s[start - 1]) & 0xC0) == 0x80) start--;
+    if (start == 0) return std::string_view::npos;
+    start--;
+    return text::IsKanji(text::DecodeRune(s.substr(start, i - start)).cp) ? start : std::string_view::npos;
+}
+
+// s with each from replaced by to, but not where a dictionary word holds the kanji before it and
+// its first character (義姉様, 従兄様): that word is read as the dictionary has it.
+std::string ReplaceWord(std::string_view s, std::string_view from, std::string_view to, WordHoldsRun holds,
+                        const void* context) {
     std::string out;
     size_t at = 0;
-    for (size_t i; (i = s.find(from, at)) != std::string_view::npos; at = i + from.size()) {
+    const size_t first = text::DecodeRune(from).size;
+    for (size_t i = s.find(from); i != std::string_view::npos; i = s.find(from, i + from.size())) {
+        const size_t before = KanjiBefore(s, i);
+        if (holds != nullptr && before != std::string_view::npos && holds(context, s, before, i + first)) continue;
         out.append(s.substr(at, i - at));
         out.append(to);
+        at = i + from.size();
     }
     out.append(s.substr(at));
     return out;
@@ -97,14 +115,14 @@ bool FemaleSpeech(std::span<const std::string> lines) {
     return female;
 }
 
-std::string WriteKinTerms(std::string_view line, bool female) {
+std::string WriteKinTerms(std::string_view line, bool female, WordHoldsRun holds, const void* context) {
     const bool male = HasAny(line, dict::ClassMembers(HDTRANS_CLASS("speech.male")));
     const bool woman = HasAny(line, dict::ClassMembers(HDTRANS_CLASS("speech.female")));
     std::string out(line);
     if ((female && !male) || woman) {
-        for (const KinTerm& k : kKinTerms) out = ReplaceString(out, k.ja, k.ko);
+        for (const KinTerm& k : kKinTerms) out = ReplaceWord(out, k.ja, k.ko, holds, context);
     } else if (male) {
-        for (const KinTerm& k : kMaleKinTerms) out = ReplaceString(out, k.ja, k.ko);
+        for (const KinTerm& k : kMaleKinTerms) out = ReplaceWord(out, k.ja, k.ko, holds, context);
     }
     return out;
 }

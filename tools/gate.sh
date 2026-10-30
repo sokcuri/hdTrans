@@ -7,9 +7,10 @@
 #   tools/gate.sh [NAME]
 # The dictionary cache is per user, so worktrees built in parallel would share it: the build runs
 # with HDTRANS_CACHE_DIR=off and each ctest test sets its own cache folder in the build tree.
-# HDTRANS_PRESET picks the Ninja preset (default mac on macOS, linux elsewhere). ctest runs under
-# tools/with-timeout.sh ${HDTRANS_TIMEOUT:-1800}. Logs go to ${HDTRANS_WORK:-build/work}/NAME
-# (default: the branch name with / as -). Prints GATE OK on success.
+# HDTRANS_PRESET picks the Ninja preset (default mac on macOS, linux elsewhere). ctest runs
+# ${HDTRANS_JOBS:-<CPU count>} tests at a time under tools/with-timeout.sh ${HDTRANS_TIMEOUT:-1800}.
+# Logs go to ${HDTRANS_WORK:-build/work}/NAME (default: the branch name with / as -). Prints GATE OK
+# on success.
 # Exit: 0 passed, 1 failed.
 set -eu
 here=$(cd "$(dirname "$0")/.." && pwd)
@@ -26,7 +27,8 @@ export HDTRANS_CACHE_DIR=off
 cmake --build --preset "$preset" --parallel > "$out/build.log" 2>&1 ||
     { tail -n 20 "$out/build.log"; echo "GATE FAIL: build ($out/build.log)"; exit 1; }
 HOME=$home HDTRANS_DICTS=$here/dicts "$here/tools/with-timeout.sh" "${HDTRANS_TIMEOUT:-1800}" \
-    ctest --preset "$preset" -E '^testdata$' > "$out/ctest.log" 2>&1 ||
+    ctest --preset "$preset" -E '^testdata$' --parallel "${HDTRANS_JOBS:-$(getconf _NPROCESSORS_ONLN)}" \
+    > "$out/ctest.log" 2>&1 ||
     { grep -E '\*\*\*|tests passed' "$out/ctest.log"; echo "GATE FAIL: ctest ($out/ctest.log)"; exit 1; }
 shards=$(awk '!/^#/ && NF { printf "unit.%s ", $1 }' "$here/tests/unit/shards.txt")
 for t in unit.shards $shards examples rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict; do
