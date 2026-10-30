@@ -15976,7 +15976,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 弓騎兵	궁기병	N110			GN						きゅうきへい	w:15932
 引きこもり	히키코모리	N110			GN				xxx		ひきこもり	w:15933
 引きこもり	은둔	N110			GN				llm		ひきこもり	w:15934
-引きつ	쥐가 &A5@	M428			GN				xxx llm		ひきつる	w:15935
+引きつ	굳어&AL@	M428		Dx	GN				xxx llm		ひきつる	w:15935
 引きつ	땅&A2@	M428			GN				llm		ひきつる	w:15936
 引きも切らな	끊이지 $D7@	H7U0			GN				llm			w:15937
 引き出	끌어 &A6@	M423			GN				xxx llm	1		w:15938
@@ -15989,7 +15989,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 引き換え券	교환권	N110			GN						ひきかえけん	w:15945
 引き摺られ	끌려&A1@	M427			GN				llm		ひきずられる	w:15946
 引き摺り込	끌어들&AJ@	M425			GN				llm			w:15947
-引き攣	쥐가 &A5@	M428			GN				xxx llm		ひきつる	w:15948
+引き攣	굳어&AL@	M428		Dx	GN				xxx llm		ひきつる	w:15948
 引き攣	땅&A2@	M428			GN				llm		ひきつる	w:15949
 引き汐	썰물	N110			GN						ひきしお	w:15950
 引き篭もり	히키코모리	N110			GN				xxx		ひきこもり	w:15951
