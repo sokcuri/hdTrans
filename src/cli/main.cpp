@@ -756,7 +756,10 @@ int wmain(int argc, wchar_t** argv) {
     return ReportUnexpanded(RunMain(argc, arguments.data()));
 }
 #else
+void InstallAnalyzerHook();
+
 int main(int argc, char** argv) {
+    InstallAnalyzerHook();
     return ReportUnexpanded(RunMain(argc, argv));
 }
 #endif

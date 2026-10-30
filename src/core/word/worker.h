@@ -66,6 +66,26 @@ public:
     // the verbs that a shorter ending let it read.
     bool shorterEndings = false;
     std::vector<const Item*> shortenedVerbs;
+    // Ends the external analyzer allows in transformSurface (empty: no constraint).
+    std::vector<uint8_t> allowedEnds;
+    std::string_view allowedText;
+    bool EndAllowed(std::string_view full, int end) const {
+        if (allowedEnds.empty() || full.data() != allowedText.data() || full.size() != allowedText.size()) return true;
+        return end >= 0 && static_cast<std::size_t>(end) < allowedEnds.size() && allowedEnds[static_cast<std::size_t>(end)] != 0;
+    }
+    // Whether an item of the class digit `part` may start at `start`, where the analyzer reads a
+    // word of the class the oracle gave: no noun, adverb or adjectival noun starts at a particle the
+    // analyzer reads (verb keys such as に会う do).
+    bool StartAllowed(std::string_view full, int start, char part) const {
+        if (allowedEnds.empty() || full.data() != allowedText.data() || full.size() != allowedText.size()) return true;
+        if (start < 0 || static_cast<std::size_t>(start) >= allowedEnds.size()) return true;
+        const uint8_t c = allowedEnds[static_cast<std::size_t>(start)];
+        switch (part) {
+        case '1': case '3': return c != 'p';
+        case '8': return c != 'p' && c != 'x';
+        default: return true;
+        }
+    }
     // The word search of a token recurses once per word. At kMaxWordDepth levels it stops
     // with the words found so far, and BuildSurfaceTransform goes on at resumeCursor
     // (-1 for none) with resumeParent as the word before and resumeRetries retries used.

@@ -14,6 +14,7 @@
 #include "core/tokenizer/canonical.h"
 #include "core/tokenizer/charsets.h"
 #include "core/tokenizer/classify.h"
+#include "core/word/boundaries.h"
 #include "core/word/conjugation.h"
 #include "core/word/kana.h"
 #include "core/word/strings.h"
@@ -1239,6 +1240,9 @@ bool Unread(const Item* it) {
 // reading replaces the first when it reads the whole token and a verb with a shorter ending
 // reads a character the first left unread.
 void Worker::BuildSurfaceTransform(int token, std::string_view surface) {
+    allowedEnds.clear();
+    allowedText = surface;
+    if (settings.text && !QueryBoundaries(surface, &allowedEnds)) allowedEnds.clear();
     transformSurface = surface;
     resumeCursor = -1;
     Item* const mark = chain.tail;
@@ -1904,6 +1908,30 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         candidate->group->records = nullptr;
         from = remaining;
         candidate = InsertLateCandidate(full, cursor, token, remaining);
+    }
+    // The analyzer's word ends: take the next group while this one ends inside an analyzer word;
+    // when no group ends at one, keep the first.
+    auto fits = [&](const Item* it) {
+        return EndAllowed(full, cursor + it->length) && StartAllowed(full, cursor, At(it->Code(0), 0));
+    };
+    if (candidate != nullptr && !fits(candidate)) {
+        Item* first = candidate;
+        Record* firstRest = candidate->group->records;
+        Record* firstFrom = from;
+        Item* next = candidate;
+        while (next != nullptr && !fits(next)) {
+            Record* remaining = next->group->records;
+            next->group->records = nullptr;
+            from = remaining;
+            next = remaining != nullptr ? InsertLateCandidate(full, cursor, token, remaining) : nullptr;
+        }
+        if (next != nullptr) {
+            candidate = next;
+        } else {
+            candidate = first;
+            candidate->group->records = firstRest;
+            from = firstFrom;
+        }
     }
     if (candidate == nullptr) {
         const std::string_view pair = PairText(text);
