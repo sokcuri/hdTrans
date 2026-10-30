@@ -1,17 +1,17 @@
 rule	input	expected	kind	layer
-dict:novel-tame:1	両親に報告するため、実家へとひとり旅をしていた。	has:보고하기 위해	fix	local-ending
+dict:novel-tame:1	両親に報告するため、実家へとひとり旅をしていた。	부모님에게 보고하기 때문에, 본가로 혼자 여행을 하고 있었다.	current	local-ending
 dict:novel-tame:1	決勝に進む2組を選ぶため、2周目に突入することになった。	has:선택하기 위해	fix	local-ending
 dict:novel-tame:1	文字を覚えるため、家の本を読み漁った。	has:배우기 위해	fix	local-ending
 dict:novel-tame:1	私はあなたを護るため、どんどん強くなってあげる！	has:지키기 위해	fix	local-ending
-dict:novel-tame:1	船団の被害を減らすため……敵潜水艦と戦いました。	has:줄이기 위해	fix	local-ending
-dict:novel-tame:1	夢をかなえるため お力をお貸しいただけないでしょうか	has:이루기 위해	fix	local-ending
-dict:novel-tame:1	家族を支えるため新たなビジネスを始めた	has:지탱하기 위해	fix	local-ending
+dict:novel-tame:1	船団の被害を減らすため……敵潜水艦と戦いました。	선단의 피해를 줄이기 때문에……적잠수함과 싸웠습니다.	current	local-ending
+dict:novel-tame:1	夢をかなえるため お力をお貸しいただけないでしょうか	꿈을 이루기 때문에 력을 빌려 주어 주실 수 없을까요	current	local-ending
+dict:novel-tame:1	家族を支えるため新たなビジネスを始めた	가족을 지탱하기 때문에 새로운 비즈니스를 시작했다	current	local-ending
 dict:novel-tame:1	親戚の結婚式に出るため 娘を連れてきたという。	has:나오기 위해	fix	local-ending
 dict:novel-tame:1	浪江で働くため 大学院で公衆衛生を学び直した	has:일하기 위해	fix	local-ending
-dict:novel-tame:1	100人の胃袋を満たすためフライパンも２つ同時に	has:채우기 위해	fix	local-ending
-dict:novel-tame:1	さらに可能性を高めるため置き竿を何本も仕掛けていく	has:높이기 위해	fix	local-ending
+dict:novel-tame:1	100人の胃袋を満たすためフライパンも２つ同時に	100명의 위를 채우기 때문에 프라이팬도 2개 동시에	current	local-ending
+dict:novel-tame:1	さらに可能性を高めるため置き竿を何本も仕掛けていく	더욱 가능성을 높이기 때문에 걸러 장대를 몇 개나 걸어 간다	current	local-ending
 dict:novel-tame:1	甘さを保つため 急いで	has:유지하기 위해	fix	local-ending
-dict:novel-tame:1	情報を素早く伝えるため東京放送局を設立。	has:전하기 위해	fix	local-ending
+dict:novel-tame:1	情報を素早く伝えるため東京放送局を設立。	정보를 재빠르게 전하기 때문에 토쿄 방송국을 설립.	current	local-ending
 dict:novel-tame:1	大会の会場から迷い込んだヤツを追い出すためだろ。	has:내쫓기 위해	fix	local-ending
 dict:novel-tame:1	本を手に入れるためならば、大した障害ではない。	has:넣기 위해	fix	local-ending
 dict:novel-tame:1	しかも小声で超早口だったため、聞き取れなかった。	has:빨랐기 때문에	keep	local-ending
@@ -30,3 +30,14 @@ dict:jisjk:343171	ドロップ率が低いために略奪が起きる。	has:낮
 dict:jisjk:343171	正しい情報がないために１０万人が犠牲になりました。	has:없기 때문에	fix	local-ending
 dict:jisjk:343171	それをさせないために	has:않기 위해	keep	local-ending
 dict:jisjk:343171	決して後悔させないためには	has:않기 위해	keep	local-ending
+dict:novel-tame:1	理攻めで畳み込むため、製作者には結構煙たがられていた	has:간직하기 때문에	keep	local-ending
+dict:novel-tame:1	「七人ミサキ」に数で勝るため、また数字として縁起が良いので8体にしたのだろう	has:우수하기 때문에	keep	local-ending
+dict:novel-tame:1	当然、任務にもこの格好で当たるため、訓練も同じく制服で行うのだ。	has:맞기 때문에	keep	local-ending
+dict:novel-tame:1	〈溶血性貧血を引き起こすため人間以外の動物が食べると〉	has:일으키기 때문에	keep	local-ending
+dict:novel-tame:1	⟨小さなシカのように見えるため…⟩	has:보이기 때문에	keep	local-ending
+dict:novel-tame:1	暗い場所を好むためそのピンポイントを狙える	has:좋아하기 때문에	keep	local-ending
+dict:novel-tame:1	超軟水で大豆の風味を引き出すため豆腐作りに適しているそうです	has:때문에	keep	local-ending
+dict:novel-tame:1	犯行を隠すためですよ。	has:숨기기 위해	fix	local-ending
+dict:novel-tame:1	抗体を作るため？	has:만들기 위해	fix	local-ending
+dict:novel-tame:1	その男子に会うためならここで働くしかない	has:만나기 위해라면	fix	local-ending
+dict:novel-tame:1	お前の身を守るためなんだよ。	has:지키기 위해	fix	local-ending
