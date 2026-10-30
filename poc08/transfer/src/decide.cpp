@@ -279,7 +279,9 @@ bool LoadDeciders(const std::string& dirName, DecideData& d) {
       }
       size_t k = static_cast<size_t>(ci - dec.classes.begin());
       float wv = std::strtof(c[2].c_str(), nullptr);
-      if (c[0] == "bias") dec.bias[k] = wv;
+      // the intercept and the weight of the always-on feature "bias" (Features) are both written as bias rows:
+      // they add up (assigning made the second overwrite the first: youni CHANGE −2.59 became −0.16)
+      if (c[0] == "bias") dec.bias[k] += wv;
       else {
         auto& row = dec.w[c[0]];
         if (row.empty()) row.assign(dec.classes.size(), 0.0f);

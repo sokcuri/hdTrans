@@ -7,3 +7,12 @@ out=$("$1" --data "$2" --decide "$3/decide.base.tsv" < "$3/decide.ir.jsonl" |
 expect=$(cat "$3/decide.expect")
 [ "$out" = "$expect" ] || { echo "got:"; echo "$out"; echo "expected:"; echo "$expect"; exit 1; }
 echo "deciders: 4/4"
+# Two bias rows of one class (the intercept and the always-on feature "bias") add up: 2.5 − 2.0 = 0.5 > 0 → CHANGE.
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT
+cp -R "$2/." "$tmp/"
+printf '#! decider family=youni tau=0.0 id=youni@bias\nclasses\tCHANGE\tLIKE\nbias\tCHANGE\t2.5\nbias\tLIKE\t0\nbias\tCHANGE\t-2.0\n' \
+  > "$tmp/decide/youni.tsv"
+"$1" --data "$tmp" --decide "$3/decide.base.tsv" < "$3/decide.ir.jsonl" | grep -q '"case":"y1".*"class":"CHANGE"' ||
+  { echo "bias rows do not add up"; exit 1; }
+echo "bias rows: ok"
