@@ -1,0 +1,13 @@
+rule	input	expected	kind	layer
+dict:liquid-spelling	ドライブレコーダーの普及率はまだ４９．３％って聞きました。	블랙박스의 보급률은 아직 49.3%라고 들었습니다.	fix	lookup
+dict:liquid-spelling	水道普及率は県内最低の５２％ほど。	수도 보급률은 현내 최저의 52%만큼.	fix	lookup
+dict:liquid-spelling	テレビの普及率は９割に迫り	텔레비전의 보급률은 9할에 다가와	fix	lookup
+dict:liquid-spelling	頑張っても伸び率が悪いとも。	노력해도 신장률이 나쁘다고.	fix	lookup
+dict:liquid-spelling	離職率が高い職場だ。	이직률이 높은 직장이다.	fix	lookup
+dict:liquid-spelling	収益率が下がった。	수익률이 내려갔다.	fix	lookup
+dict:liquid-spelling	変動率を見る。	변동률을 본다.	fix	lookup
+dict:liquid-spelling	圧縮率が高い。	압축률이 높다.	fix	lookup
+dict:liquid-spelling	黒井さんの生存率が下がるようなら…	쿠로이 씨의 생존율이 내려가는 것 같으면…	keep	lookup
+dict:liquid-spelling	ただでさえ低い投票率が過去最低に…	그렇지 않아도 낮은 투표율이 과거 최악으로…	keep	lookup
+dict:liquid-spelling	利率がいいから	이율이 좋으니까	keep	lookup
+dict:liquid-spelling	もっと確率は高い	좀 더 확률은 높다	keep	lookup

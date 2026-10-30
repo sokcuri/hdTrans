@@ -644,7 +644,20 @@
 | 「朧改」で出撃するよ！ | 「오보로 개」로 출격할게! | 고침 |
 | 原貫太さんが来た。 | 하라 간타 씨가 왔다. | 고침 |
 
-사례: `tests/rules/cases/lexical-korean-spelling.tsv`, `tests/rules/cases/lexical-japanese-targets.tsv`
+한자 읽기 렬, 률(列, 烈, 裂, 劣, 率, 律)이 명사 뒤에 붙으면 앞말이 모음이나 ㄴ 받침으로 끝날 때 열, 율로, 그 밖의 받침
+뒤에서는 렬, 률로 쓴다. 사전에 없는 복합어(達成率, ドロップ率)도 같다. 수 뒤의 列은 수량이라 따르지 않는다.
+
+| 원문 | 출력 | 구분 |
+|---|---|---|
+| 筋トレすれば命中率が上がるんですか？ | 근력 운동 하면 명중률이 오릅니까? | 고침 |
+| アイテムのドロップ率が低い。 | 아이템의 드롭률이 낮다. | 고침 |
+| 車列が２つに分かれて行きます。 | 차열이 2개로 나누어져 갑니다. | 고침 |
+| テレビの普及率は９割に迫り | 텔레비전의 보급률은 9할에 다가와 | 고침 |
+| 驚異のシンクロ率を誇る。 | 경이의 싱크로율을 자랑한다. | 유지 |
+| 隊列が安定してきたようです。 | 대열이 안정되어 온 것 같습니다. | 유지 |
+
+사례: `tests/rules/cases/lexical-korean-spelling.tsv`, `tests/rules/cases/lexical-japanese-targets.tsv`,
+`tests/rules/cases/initial-sound-rule.tsv`, `tests/rules/cases/lexical-liquid-spelling.tsv`
 
 ## LEX-28 수량 앞의 もう는 `더`를 수량 뒤에 둔다
 
