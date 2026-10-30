@@ -106,7 +106,7 @@ struct Settings {
     // The segmentation of the chunk (hooks::Hooks::fits); a word whose source bytes do not fit gives
     // way to a shorter candidate that does. Null for none.
     const void* hookChunk = nullptr;
-    bool (*hookFits)(const void* chunk, uint32_t begin, uint32_t end) = nullptr;
+    bool (*hookFits)(const void* chunk, uint32_t begin, uint32_t end, char part) = nullptr;
 #endif
 };
 

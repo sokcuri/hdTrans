@@ -136,7 +136,7 @@ void* BeginChunk(void* context, void*, int, int, std::string_view text) {
 
 void EndChunk(void*, void* chunk) { delete static_cast<ChunkState*>(chunk); }
 
-bool Fits(const void* chunk, uint32_t, uint32_t end) {
+bool Fits(const void* chunk, uint32_t, uint32_t end, char) {
     const auto& cs = *static_cast<const ChunkState*>(chunk);
     if (cs.ends.empty() || end >= cs.ends.back()) return true;
     const bool fits = std::binary_search(cs.ends.begin(), cs.ends.end(), end);

@@ -1913,7 +1913,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         const auto fits = [&](const Item* c) {
             const uint32_t begin = std::min(t.sourceBegin + static_cast<uint32_t>(cursor), t.sourceEnd);
             const uint32_t end = std::min(begin + static_cast<uint32_t>(c->length), t.sourceEnd);
-            return settings.hookFits(settings.hookChunk, begin, end);
+            return settings.hookFits(settings.hookChunk, begin, end, At(c->Code(0), 0));
         };
         if (!fits(candidate)) {
             Item* const first = candidate;

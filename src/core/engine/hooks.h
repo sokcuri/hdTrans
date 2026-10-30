@@ -46,10 +46,10 @@ struct Hooks {
     // endChunk (null for none).
     void* (*beginChunk)(void* context, void* doc, int line, int chunk, std::string_view text) = nullptr;
     void (*endChunk)(void* context, void* chunk) = nullptr;
-    // A: whether a word over [begin, end) of the chunk text keeps to the segmentation. A word that
-    // does not gives way to the next shorter candidate at the same place that does; when none does,
-    // the first candidate stays.
-    bool (*fits)(const void* chunk, uint32_t begin, uint32_t end) = nullptr;
+    // A: whether a word over [begin, end) of the chunk text, of the part-code class digit part
+    // ('1' noun, '4' verb, …), keeps to the segmentation. A word that does not gives way to the next
+    // shorter candidate at the same place that does; when none does, the first candidate stays.
+    bool (*fits)(const void* chunk, uint32_t begin, uint32_t end, char part) = nullptr;
     // G: the output of a sentence; false keeps what the compose stage wrote.
     bool (*generate)(void* context, void* doc, void* chunk, const Sentence& sentence, std::string& out) = nullptr;
 };

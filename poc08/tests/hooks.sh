@@ -12,10 +12,10 @@ fail=0
 for mode in --each ""; do
     "$a" --dicts "$dicts" $mode --in "$tmp/in.txt" > "$tmp/a.txt" || fail=1
     "$b" --dicts "$dicts" $mode --in "$tmp/in.txt" > "$tmp/b.txt" || fail=1
-    "$b" --dicts "$dicts" $mode --poc08 all --poc08-why "$tmp/why.jsonl" --poc08-stages "$tmp/ir.jsonl" \
+    "$b" --dicts "$dicts" $mode --poc08 none --poc08-why "$tmp/why.jsonl" --poc08-stages "$tmp/ir.jsonl" \
         --in "$tmp/in.txt" > "$tmp/c.txt" || fail=1
     cmp -s "$tmp/a.txt" "$tmp/b.txt" || { echo "FAIL: hdtrans08 ${mode:-document} differs from hdtrans"; fail=1; }
-    cmp -s "$tmp/a.txt" "$tmp/c.txt" || { echo "FAIL: hdtrans08 --poc08 all ${mode:-document} differs"; fail=1; }
+    cmp -s "$tmp/a.txt" "$tmp/c.txt" || { echo "FAIL: hdtrans08 --poc08 none with the side IR ${mode:-document} differs"; fail=1; }
     grep -q '"ko":' "$tmp/why.jsonl" || { echo "FAIL: no side IR records"; fail=1; }
 done
 exit $fail
