@@ -1,0 +1,21 @@
+# 굳은 말: 상상이 가다, 이대로라면, 왜냐하면, 경청, 전망이 서다
+rule	input	expected	kind	layer
+lookup:caption-idioms	この分なら 朝には完全に回復する。	이대로라면 아침에는 완전히 회복한다.	fix	lookup
+lookup:caption-idioms	この分じゃ あしたの日曜いいお天気でございましょう	이대로라면 내일 일요일 좋은 날씨겠지요	fix	lookup
+lookup:caption-idioms	(船長)この分だと 予定どおり	(선장) 이대로라면 예정대로	fix	lookup
+lookup:caption-idioms	ご清聴ありがとうございました。	경청 감사합니다.	fix	lookup
+lookup:caption-idioms	なぜかっていうと それが 自分たちのお給料	왜냐하면 그것이 자신들의 급료	fix	lookup
+lookup:caption-idioms	なぜかといいますと	왜냐하면	fix	lookup
+lookup:caption-idioms	なぜかって？	왜냐고?	fix	lookup
+lookup:caption-idioms	だいたい 想像つくよ｡	대체로 상상이 가.	fix	lookup
+lookup:caption-idioms	想像つかないから	상상이 가지 않으니까	fix	lookup
+lookup:caption-idioms	この番組への悪口 全部想像つきます	이 프로그램에 대한 욕 전부 상상이 갑니다	fix	lookup
+lookup:caption-idioms	想像がつかない。	상상이 가지 않는다.	keep	lookup
+lookup:caption-idioms	復旧の見通しが立っていない	복구가 전망이 서지 않았다	fix	lookup
+lookup:caption-idioms	いくらなんでも｡	아무리 그래도.	fix	lookup
+lookup:caption-idioms	ん？　なぜかって？	응? 왜냐고?	fix	lookup
+lookup:caption-idioms	誰も想像つかないよね。	아무도 상상이 가지 않지.	fix	lookup
+lookup:caption-idioms	ちょっと想像つかなかったけど｡	조금 상상이 가지 않았지만.	fix	lookup
+lookup:caption-idioms	この分では無理だ。	이 상태로는 무리다.	keep	lookup
+lookup:caption-idioms	大将 いくらなんでもこりゃ やり過ぎでしょう｡	대장 아무리 그래도 이건 너무 하겠죠.	fix	lookup
+lookup:caption-idioms	公演成功の見通しが立ったわけだ。	공연 성공이 전망이 선 셈이다.	fix	lookup
