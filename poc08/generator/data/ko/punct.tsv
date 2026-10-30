@@ -34,8 +34,8 @@ qclose	)	)	left
 qclose	】	】	left
 qclose	”	”	left
 qclose	-	」	left
-ellipsis	…	…	both
-ellipsis	-	…	both
+ellipsis	…	…	left
+ellipsis	-	…	left
 pause	・	·	none
 pause	-	·	none
 dash	―	―	left

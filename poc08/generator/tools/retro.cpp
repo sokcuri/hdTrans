@@ -711,6 +711,11 @@ bool BuildAligned(Retro& r, const json::Value& v, std::vector<Node>& nodes, size
         } else if (kind == "Punct") {
             ++a.skipped;  // marks come from 0.7.x's output text (gaps)
         } else if (kind == "V") {
+            // the source asks (逃げて！, 忘れてください): its last predicate is an imperative, not a statement
+            bool lastV = true;
+            for (size_t j = k + 1; j < items->arr.size(); ++j)
+                if (items->arr[j].Str("k") == "V") lastV = false;
+            if (lastV && want == Want::final_ && v.Bool("imp")) mood = Mood::imp;
             AlignPredicate(r, a, it, want, mood);
         }
     }
@@ -915,7 +920,9 @@ int main(int argc, char** argv) {
                 // a final ending inside the sentence (놀다니, 저희들…) keeps 0.7.x's level: no 요 mid-sentence
                 const bool inner = nodes[q].ctype == CType::final_ && q + 2 < nodes.size() && nodes[q + 1].kind == Kind::Punct &&
                                    nodes[q + 1].punct == Punct::comma;
-                if (!mixed && !inner) continue;
+                // in a caption scene a plain command 0.7.x wrote as -어라 (来い → 와라) stays one
+                const bool command = nodes[q].mood == Mood::imp && static_cast<Level>(nodes[q].decision) == Level::haera;
+                if (!mixed && !inner && !d.keep && !(command && d.key.rfind("scene-speech", 0) == 0)) continue;
                 for (auto& g : reg)
                     if (g.node == nodes[q].id && nodes[q].decision) {
                         g.level = static_cast<Level>(nodes[q].decision);

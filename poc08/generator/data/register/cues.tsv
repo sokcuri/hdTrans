@@ -13,7 +13,8 @@
 #           end: the last sentence ends in text, after any number of tail particles and closing marks;
 #           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
 #   text    the Japanese string
-cue	mode	text	note
+#   notafter  characters that must not come right before text (the ます of ぶちかます is not polite)
+cue	mode	text	notafter	note
 quotative	-	って	a polite form followed by these is quoted, not spoken (any-not-quoted)
 quotative	-	と言
 quotative	-	と思
@@ -38,7 +39,7 @@ tail	strong	ぞ
 tail	strong	ぜ
 tail	strong	さ
 polite	end	です
-polite	end	ます
+polite	end	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ	ぶちかます, 済ます are not polite
 polite	end	ました
 polite	end	でした
 polite	end	ません
@@ -48,17 +49,15 @@ polite	end	ください
 polite	end	下さい
 polite	end	ませ
 polite	end	っす
+polite	end	んす	だったんすか (っす after ん)
 polite	end	ッス
 polite	end	っス
-polite	end	すか
-polite	end	すね
-polite	end	すよ
 polite	end	ございます
 polite	end	ございません
 polite	end	ごめんなさい
 polite	end	すみません
 polite-any	any-not-quoted	です
-polite-any	any-not-quoted	ます
+polite-any	any-not-quoted	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ
 polite-any	any-not-quoted	ました
 polite-any	any-not-quoted	でした
 polite-any	any-not-quoted	ません
@@ -127,6 +126,12 @@ archaic	any	じゃて
 archaic	any	わしは
 archaic	any	わしが
 archaic	any	わしの
+archaic	end	ぬ	(知らぬ, いかぬ, 許さぬ)
+archaic	any	お主
+archaic	any	そなた
+archaic	any	其方
+archaic	any	拙者
+archaic	any	参った
 stiff	any	である
 stiff	any	のである
 stiff	any	たまえ

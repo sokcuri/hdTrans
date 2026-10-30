@@ -118,6 +118,7 @@ void RankBundles(std::vector<Bundle>& bs, const AnalyzeHints& h) {
         }
         if (isFinal) {
             if (v.mood == h.mood) s += 4;
+            if (v.mood == Mood::q && h.mood != Mood::q) s -= 5;  // a question ending needs a question
             if (v.eomi.empty()) s += 3;
             if (b.level == Level::hao || b.level == Level::hage) s -= 8;
             if (b.level == Level::hae) s += 1;
