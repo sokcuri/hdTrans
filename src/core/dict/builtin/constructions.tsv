@@ -242,6 +242,8 @@ cx:chau-final:20	LEX-69	&&4 Y+0== "6버린다" ||4 I+0== "Rちゃう" I+0== "R�
 cx:regards:10	LEX-50	&&3 :regards-to ||3 F+0== "sentence-end" F+0== "quote-end" F+0== "utterance-end" !1 F+0== "narration"	set-target "안부 전해 줘" select-lemma@-1 "에게" select-lemma@-1 "에게도"	乙姫さまによろしくな 용녀님에게 안부 전해 줘
 cx:regards:20	LEX-50	&&4 :regards-to ||2 S+0== "よろしく" S+0== "宜しく" S+1== "と" S+2== "L伝え"	set-target "안부" set-target@+1 " " select-lemma@-1 "에게" select-lemma@-1 "에게도"	彼によろしくと伝えて 그에게 안부 전해
 cx:regards:30	LEX-50	&&3 :regards-to ||2 S+0== "よろしく" S+0== "宜しく" S+1== "L伝え"	set-target "안부" select-lemma@-1 "에게" select-lemma@-1 "에게도"	先生によろしく伝えてください 선생님에게 안부 전해 주세요
+//= ganbatte-adverb	after Select 105	The 頑張って read 힘내 right before a verb that is no auxiliary of a て form (aux.te-start) is the way the act is done, 열심히, and so before a noun of する and its verb (頑張って走る 열심히 달린다, 頑張って練習した 열심히 연습했다); before いく, ください, まいる and the like, or standing alone, it stays 힘내.
+cx:ganbatte-adverb:10	LEX-87	&&3 ||2 S+0== "頑張って" S+0== "がんばって" D+0== "힘내" ||2 &&3 F+1== "verb" !1 S+1== @Laux.te-start !1 ||2 S+1== "L参" S+1== "Lまい" &&2 G+1== "Hd" F+2== "verb"	set-target "열심히"	頑張って走る 열심히 달린다
 //= mimetic-echo	after Select 70	A doubled mimetic whose half starts the Korean of a verb after it in its clause says the sound again: the verb alone says it (ギシギシとベッドが軋む 침대가 삐걱거린다, not 삐걱삐걱 침대가 삐걱거린다).
 cx:mimetic-echo:10	SND-1	&&2 F+0== "fixed" F+0== "echoed-by-verb"	set-target ""	ギシギシとベッドが軋む 침대가 삐걱거린다
 //~ ni-than	에=보다 하게=보다	The noun or adjectival root of a word read with に as 에 or 하게, with 보다 (건강에 건강보다, 안전하게 안전보다).

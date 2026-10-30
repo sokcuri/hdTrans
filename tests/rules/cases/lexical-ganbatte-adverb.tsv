@@ -1,0 +1,30 @@
+# 규칙: LEX-87
+rule	input	expected	kind	layer
+cx:ganbatte-adverb:10	「頑張って乗ったのにこの扱いですか」	「열심히 탔는데 이 취급입니까」	fix	rewrites
+cx:ganbatte-adverb:10	「頑張って乗り越えて、解放されて」	「열심히 극복해, 해방돼」	fix	rewrites
+cx:ganbatte-adverb:10	めちゃくちゃ頑張って声を張り上げるクラリス様。	엄청 열심히 소리를 지르는 클라리스님.	fix	rewrites
+cx:ganbatte-adverb:10	もうちょっと頑張って待ってる	좀 더 열심히 기다리고 있다	fix	rewrites
+cx:ganbatte-adverb:10	頑張って鍛えても、魔力総量には限界値がある	열심히 단련해도, 마력 총량에는 한계치가 있다	fix	rewrites
+cx:ganbatte-adverb:10	睦月型も頑張って参加するにゃし！	무쓰키급도 열심히 참가한다냥!	fix	rewrites
+cx:ganbatte-adverb:10	夕立、結構頑張って作ったっぽい。	소나기, 상당히 열심히 만든 것 같아.	fix	rewrites
+cx:ganbatte-adverb:10	頑張って働いているドックのクレーン。	열심히 일하고 있는 도크의 크레인.	fix	rewrites
+cx:ganbatte-adverb:10	明日も頑張って働きますっ、はいっ！	내일도 열심히 일합니다, 네!	fix	rewrites
+cx:ganbatte-adverb:10	頑張って探しましょうよし やりましょう	열심히 찾읍시다 좋아 합시다	fix	rewrites
+cx:ganbatte-adverb:10	めっちゃ頑張って覚えて…｡	굉장히 열심히 기억해….	fix	rewrites
+cx:ganbatte-adverb:10	（西野）頑張って生きろや お前が	(니시노) 열심히 살아라나 네가	fix	rewrites
+cx:ganbatte-adverb:10	そうよ。　頑張って捜してあげて。	그래. 열심히 찾아 줘.	fix	rewrites
+cx:ganbatte-adverb:10	頑張って作ったのに。	열심히 만들었는데.	fix	rewrites
+cx:ganbatte-adverb:10	定年まで頑張って働いたのに金がない	정년까지 열심히 일했는데 돈이 없다	fix	rewrites
+cx:ganbatte-adverb:10	ねえ もし頑張って勉強したら…	저기 만약 열심히 공부하면…	fix	rewrites
+cx:ganbatte-adverb:10	それでも 頑張って仕事して冷えた飯 食って	그래도 열심히 일해 차가워진 밥 먹어	fix	rewrites
+cx:ganbatte-adverb:10	頑張って準備してるからね	열심히 준비하고 있으니까	fix	rewrites
+cx:ganbatte-adverb:10	そこまで 頑張って歩くんだ	거기까지 열심히 걷는 거야	fix	rewrites
+cx:ganbatte-adverb:10	もっと頑張って逃げないと死んじまうぞ	좀 더 열심히 도망치지 않으면 죽어버릴 거야	fix	rewrites
+cx:ganbatte-adverb:10	今から頑張って変わろうとしてるんです。	지금부터 열심히 바뀌려 하고 있습니다.	fix	rewrites
+cx:ganbatte-adverb:10	頑張ってください	lacks:열심히	keep	rewrites
+cx:ganbatte-adverb:10	頑張って！	lacks:열심히	keep	rewrites
+cx:ganbatte-adverb:10	頑張っていこう	lacks:열심히	keep	rewrites
+cx:ganbatte-adverb:10	明日も、頑張って参りましょう。	lacks:열심히	keep	rewrites
+cx:ganbatte-adverb:10	頑張ってね	lacks:열심히	keep	rewrites
+cx:ganbatte-adverb:10	頑張って下さい	lacks:열심히	keep	rewrites
+cx:ganbatte-adverb:10	みんな頑張ってるね	lacks:열심히	keep	rewrites
