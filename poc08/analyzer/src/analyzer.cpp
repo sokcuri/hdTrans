@@ -297,6 +297,104 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
   }
 }
 
+// ---- segmentation hints ----------------------------------------------------------------------------
+namespace {
+
+uint8_t ClassCode(const Model& m, uint16_t cls) {
+  if (m.udNames[m.classes[cls].ud].find("助動詞語幹") != std::string::npos) return 'x';
+  switch (m.classPos[cls]) {
+    case Pos::n: case Pos::pn: case Pos::num: return 'n';
+    case Pos::v1: case Pos::v5: case Pos::vs: case Pos::vk: case Pos::vz: return 'v';
+    case Pos::adj: return 'a';
+    case Pos::na: return 'k';
+    case Pos::adv: case Pos::conj: case Pos::intj: return 'd';
+    case Pos::adn: return 'm';
+    case Pos::aux: return 'x';
+    case Pos::p_case: case Pos::p_topic: case Pos::p_conj: case Pos::p_final: case Pos::p_adv: return 'p';
+    case Pos::pref: return 'f';
+    case Pos::suf: return 'z';
+    case Pos::sym: return 's';
+    default: return 'u';
+  }
+}
+
+}  // namespace
+
+void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn) const {
+  WorkspacePtr own;
+  Workspace* ws = wsIn;
+  if (!ws) {
+    own = NewWorkspace();
+    ws = own.get();
+  }
+  out->ends.assign(text.size() + 1, 0);
+  out->rejected.clear();
+  out->ends[0] = 'u';
+  out->ends[text.size()] = 'e';
+  if (!model_) return;
+  const Model& m = *model_;
+  internal::Normalize(text, &ws->nchars, &ws->edits);
+  Options opt;
+  opt.margins = false;
+  BuildLattice(m, ws, opt);
+  RunViterbi(m, ws, false);
+  // short-unit path: long units are replaced by their parts
+  std::vector<uint32_t> path, parts;
+  for (size_t pi = 0; pi < ws->path.size(); ++pi) {
+    const Arc& a = ws->arcs[ws->path[pi]];
+    if (a.kind != ArcKind::longUnit) {
+      path.push_back(ws->path[pi]);
+      continue;
+    }
+    uint16_t sc = pi == 0 ? 0 : ws->arcs[ws->path[pi - 1]].rcls;
+    uint16_t ec = pi + 1 < ws->path.size() ? ws->arcs[ws->path[pi + 1]].lcls : 0;
+    SubPath(m, *ws, a.b, a.e, sc, ec, &parts);
+    path.insert(path.end(), parts.begin(), parts.end());
+  }
+  size_t n = ws->core.size();
+  auto byteB = [&](uint32_t b) { return ws->nchars[ws->coreN[b]].sb; };
+  auto byteE = [&](uint32_t e) { return ws->nchars[ws->coreN[e - 1]].se; };
+  std::vector<uint8_t> boundary(n + 1, 0);
+  std::vector<uint32_t> tokenAt(n + 1, UINT32_MAX);
+  for (uint32_t ai : path) {
+    const Arc& a = ws->arcs[ai];
+    boundary[a.b] = boundary[a.e] = 1;
+    tokenAt[a.b] = ai;
+    if (byteE(a.e) <= text.size() && out->ends[byteE(a.e)] == 0) out->ends[byteE(a.e)] = 'e';
+  }
+  for (uint32_t ai : path) {
+    const Arc& a = ws->arcs[ai];
+    uint16_t cls = a.kind == ArcKind::lex ? m.pforms[a.form].cls : a.lcls;
+    if (byteB(a.b) <= text.size()) out->ends[byteB(a.b)] = ClassCode(m, cls);
+  }
+  for (uint32_t ai : path) {
+    const Arc& x = ws->arcs[ai];
+    if (x.kind != ArcKind::lex || ClassCode(m, m.pforms[x.form].cls) != 'v' || x.e - x.b < 2) continue;
+    // a compound verb: a continuative verb form, then a word to the end of the token
+    for (uint32_t k = ws->beginStart[x.b]; k < ws->beginStart[x.b + 1]; ++k) {
+      const Arc& y = ws->arcs[ws->byBegin[k]];
+      if (y.kind != ArcKind::lex || y.e >= x.e || y.rule >= 0) continue;
+      const auto& yc = m.classes[m.pforms[y.form].cls];
+      if (ClassCode(m, m.pforms[y.form].cls) != 'v' || m.cformNames[yc.cform].rfind("連用形", 0) != 0) continue;
+      bool rest = false;
+      for (uint32_t j = ws->beginStart[y.e]; j < ws->beginStart[y.e + 1] && !rest; ++j) {
+        const Arc& z = ws->arcs[ws->byBegin[j]];
+        rest = z.kind == ArcKind::lex && z.e == x.e && z.rule < 0;
+      }
+      if (rest && out->ends[byteB(y.e)] == 0) out->ends[byteB(y.e)] = 'i';
+    }
+  }
+  for (const Arc& a : ws->arcs) {
+    if (a.kind != ArcKind::lex || a.rule >= 0 || a.removedBy >= 0 || !boundary[a.b] || !boundary[a.e]) continue;
+    if (tokenAt[a.b] != UINT32_MAX && ws->arcs[tokenAt[a.b]].e >= a.e) continue;  // one analyzer word or less
+    uint8_t c = ClassCode(m, m.pforms[a.form].cls);
+    if (c == 'p' || c == 'x' || c == 's' || c == 'u') continue;
+    out->rejected.push_back({byteB(a.b), byteE(a.e)});
+  }
+  std::sort(out->rejected.begin(), out->rejected.end(),
+            [](const Span& x, const Span& y) { return x.begin != y.begin ? x.begin < y.begin : x.end < y.end; });
+}
+
 // ---- JSON ---------------------------------------------------------------------------------------
 namespace {
 
