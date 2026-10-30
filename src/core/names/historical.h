@@ -22,6 +22,9 @@ struct HistoricalReading {
 struct HistoricalLine {
     std::map<std::string, HistoricalReading> found;
     std::set<std::string> surnames;
+    // The surnames and common names of names that start in a surname of the dictionary, which are
+    // read as names even where they are common words.
+    std::set<std::string> strong;
     std::vector<std::vector<char32_t>> listed;
 };
 

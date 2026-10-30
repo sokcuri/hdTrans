@@ -102,6 +102,34 @@ bool KnownPerson(const dict::Snapshot& snap, const std::string& s) {
     return false;
 }
 
+// Whether the dictionaries read s as a word of its own and not as a person: a record that is no
+// person, place or other proper noun (N130), no reading of a kanji standing alone (gram On) and no
+// verb or adjective stem, and no person record (明智小五郎 is a name).
+bool CommonWord(const dict::Snapshot& snap, const std::string& s) {
+    if (KnownPerson(snap, s)) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != s) continue;
+        const std::string_view sem = c.codes->sem.Text(), part = c.codes->partText;
+        if (Contains(sem, "QPN") || Contains(sem, "QCT") || Contains(c.codes->gram.Text(), "On") || part.starts_with("M4") ||
+            part.starts_with("H7") || part.substr(1).starts_with("13")) {
+            continue;
+        }
+        return true;
+    }
+    return false;
+}
+
+// Whether a common word starts in rs[0:at] and goes on past at (今日一日 at 1: 今日), so that
+// rs[0:at] and the rest are no surname and given name.
+bool WordCrosses(const dict::Snapshot& snap, const Runes& rs, std::size_t at) {
+    for (std::size_t j = 0; j < at; j++) {
+        for (std::size_t k = at + 1; k <= rs.size(); k++) {
+            if (CommonWord(snap, Sub(rs, j, k))) return true;
+        }
+    }
+    return false;
+}
+
 // Readings of kanji in surnames.
 const std::map<char32_t, std::string>& SurnameKun() {
     static const std::map<char32_t, std::string> table = {
@@ -182,9 +210,9 @@ const std::map<char32_t, std::string>& Nanori() {
 }
 
 // The given name of one to three kanji: the dictionary's given-name sense, else its kanji
-// read one by one in their name readings; "" when a kanji has none and for an honorific
-// alone (太郎君 is 太郎 with 君).
-std::string GivenName(const dict::Snapshot& snap, const std::string& s) {
+// read one by one in their name readings, which a common word (一人, 依頼) takes only with
+// word set; "" when a kanji has none and for an honorific alone (太郎君 is 太郎 with 君).
+std::string GivenName(const dict::Snapshot& snap, const std::string& s, bool word = false) {
     const std::size_t n = text::RuneCount(s);
     if (n == 0 || n > 3 || s == "君" || s == "殿" || s == "様" || s == "氏") return "";
     for (const dict::Record& r : Records(snap, s)) {
@@ -193,6 +221,7 @@ std::string GivenName(const dict::Snapshot& snap, const std::string& s) {
             return std::string(r.target);
         }
     }
+    if (!word && CommonWord(snap, s)) return "";
     std::string kana;
     for (const char32_t c : ToRunes(s)) {
         const auto it = Nanori().find(c);
@@ -512,9 +541,11 @@ std::string JoinTitle(const std::vector<TitlePiece>& pieces) {
 // The entries of the name with a title that the kanji run rs ends with, and its surname
 // ("" for none). Of the readings with a surname, the one whose surname starts the run,
 // then whose surname the dictionary knows best, then whose surname is longest wins; without
-// a surname, the title and given name that start first make the entries.
-Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string& surnameOut) {
+// a surname, the title and given name that start first make the entries. strong receives the keys
+// of HistoricalLine::strong.
+Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string& surnameOut, std::set<std::string>& strong) {
     Entries best, fallback;
+    std::set<std::string> bestStrong;
     std::string bestSurname;
     int bestScore = 0;
     bool haveBest = false, haveFallback = false;
@@ -522,12 +553,17 @@ Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string&
         std::size_t end = 0;
         const std::vector<TitlePiece> pieces = TitleAt(rs, t, end);
         if (pieces.empty()) continue;
-        std::string given;
+        // given takes a common word only after a surname of two kanji or more of the dictionary
+        // (十河讃岐守一存), not after a title alone (修理依頼, 新三郎一人).
+        std::string plainGiven, wordGiven;
         std::size_t stop = rs.size();
         if (end < rs.size()) {
             // A given name has at most three kanji.
-            if (rs.size() - end <= 3) given = GivenName(snap, Sub(rs, end, rs.size()));
-            if (given.empty()) {
+            if (rs.size() - end <= 3) {
+                plainGiven = GivenName(snap, Sub(rs, end, rs.size()));
+                wordGiven = plainGiven.empty() ? GivenName(snap, Sub(rs, end, rs.size()), true) : plainGiven;
+            }
+            if (wordGiven.empty()) {
                 if (!FullTitle(pieces) || rs.size() - end > 3) continue;
                 stop = end;
             }
@@ -535,21 +571,28 @@ Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string&
             continue;
         }
         const std::string title = JoinTitle(pieces);
-        const std::string named = given.empty() ? std::string() : Sub(rs, t, rs.size());
+        const std::string named = wordGiven.empty() ? std::string() : Sub(rs, t, rs.size());
         for (std::size_t s = t >= 4 ? t - 4 : 0; s < t; s++) {
             const std::string sur = Sub(rs, s, t);
             int rank = 0;
             std::string surname = SurnameOf(snap, sur, rank);
-            if (surname.empty() && s == 0 && t >= 2) surname = KunSurname(sur);
+            if (surname.empty() && s == 0 && t >= 2 && !CommonWord(snap, sur)) surname = KunSurname(sur);
+            const std::string& given = rank > 0 && t - s >= 2 ? wordGiven : plainGiven;
+            if (given.empty() && !wordGiven.empty()) continue;
             int score = rank * 8 + static_cast<int>(t - s);
             if (s == 0) score += 32;
             if (surname.empty() || score <= bestScore || (given.empty() && t - s < 2)) continue;
             Entries out;
+            std::set<std::string> outStrong;
             out[Sub(rs, s, stop)] = Join({surname, title, given});
-            if (t - s >= 2 && rank > 0) out[sur] = surname;
+            if (t - s >= 2 && rank > 0) {
+                out[sur] = surname;
+                outStrong.insert(sur);
+            }
             if (stop == rs.size() && ((given.empty() && rs.size() - t >= 3) ||
                                       (pieces.size() == 1 && pieces[0].common && end - t >= 2 && !IsCore(Sub(rs, t, end))))) {
                 out[Sub(rs, t, end)] = title;
+                if (rank > 0) outStrong.insert(Sub(rs, t, end));
             }
             if (!given.empty()) {
                 out[sur + Sub(rs, end, rs.size())] = surname + " " + given;
@@ -557,18 +600,20 @@ Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string&
                 if (rs.size() - end >= 2) out[Sub(rs, end, rs.size())] = given;
             }
             best = out;
+            bestStrong = outStrong;
             haveBest = true;
             bestSurname = sur;
             bestScore = score;
         }
-        if (!haveFallback && !given.empty()) {
-            fallback[named] = title + " " + given;
+        if (!haveFallback && !plainGiven.empty()) {
+            fallback[named] = title + " " + plainGiven;
             haveFallback = true;
-            if (rs.size() - end >= 2) fallback[Sub(rs, end, rs.size())] = given;
+            if (rs.size() - end >= 2) fallback[Sub(rs, end, rs.size())] = plainGiven;
         }
     }
     if (haveBest) {
         surnameOut = bestSurname;
+        strong.insert(bestStrong.begin(), bestStrong.end());
         return best;
     }
     surnameOut.clear();
@@ -579,13 +624,15 @@ Entries HistoricalName(const dict::Snapshot& snap, const Runes& rs, std::string&
 // dictionary (or one of surnames, found with titles in the document) and a given name of
 // one to three kanji.
 Entries ListedName(const dict::Snapshot& snap, const Runes& rs, const std::set<std::string>& surnames) {
+    // A person the dictionaries know reads as they have it (弥生 야요이).
+    if (KnownPerson(snap, Sub(rs, 0, rs.size()))) return {};
     for (std::size_t t = 1; t < rs.size() && t <= 4; t++) {
         if (rs.size() - t > 3) continue;
         const std::string head = Sub(rs, 0, t);
         int rank = 0;
         const std::string surname = SurnameOf(snap, head, rank);
         if (surname.empty() || (rank != 3 && surnames.count(head) == 0)) continue;
-        if (rs.size() - t >= 2 && KnownPerson(snap, Sub(rs, t, rs.size()))) continue;
+        if ((rs.size() - t >= 2 && KnownPerson(snap, Sub(rs, t, rs.size()))) || WordCrosses(snap, rs, t)) continue;
         const std::string given = GivenName(snap, Sub(rs, t, rs.size()));
         if (!given.empty()) return Entries{{Sub(rs, 0, rs.size()), surname + " " + given}};
     }
@@ -614,7 +661,7 @@ HistoricalLine ReadHistoricalLine(const dict::Snapshot& snap, std::string_view l
         while (j < rs.size() && IsNameKanji(rs[j])) j++;
         const Runes run(rs.begin() + static_cast<std::ptrdiff_t>(i), rs.begin() + static_cast<std::ptrdiff_t>(j));
         std::string surname;
-        const Entries entries = HistoricalName(snap, run, surname);
+        const Entries entries = HistoricalName(snap, run, surname, out.strong);
         for (const auto& [key, value] : entries) {
             if (j - i > out.found[key].run) out.found[key] = {value, j - i};
         }
@@ -631,12 +678,13 @@ HistoricalLine ReadHistoricalLine(const dict::Snapshot& snap, std::string_view l
 
 std::string HistoricalRows(const dict::Snapshot& snap, std::span<const HistoricalLine* const> lines) {
     std::map<std::string, HistoricalReading> found;
-    std::set<std::string> surnames;
+    std::set<std::string> surnames, strong;
     for (const HistoricalLine* line : lines) {
         for (const auto& [key, reading] : line->found) {
             if (reading.run > found[key].run) found[key] = reading;
         }
         surnames.insert(line->surnames.begin(), line->surnames.end());
+        strong.insert(line->strong.begin(), line->strong.end());
     }
     for (const HistoricalLine* line : lines) {
         for (const Runes& run : line->listed) {
@@ -645,8 +693,13 @@ std::string HistoricalRows(const dict::Snapshot& snap, std::span<const Historica
             }
         }
     }
+    // A common word stays the word everywhere in the document, but for the surname and the common
+    // name of a name that starts in a surname of the dictionary (六角左京大夫義賢: 六角, 仙石権兵衛:
+    // 権兵衛).
     std::string out;
-    for (const auto& [key, reading] : found) out += key + "\t" + reading.text + "\tname\n";
+    for (const auto& [key, reading] : found) {
+        if (strong.count(key) > 0 || !CommonWord(snap, key)) out += key + "\t" + reading.text + "\tname\n";
+    }
     return out;
 }
 

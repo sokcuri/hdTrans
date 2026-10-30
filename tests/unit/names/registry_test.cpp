@@ -117,7 +117,17 @@ const dict::Snapshot* Dictionary() {
          "ゲート\t게이트\tN110\t\t\tGN\t107\n"
          "セット\t세트\tN110\t\t\tGN\t108\n"
          "スキル\t스킬\tN110\t\t\tGN\t109\n"
-         "スケルトン\t스켈레톤\tN110\t\t\tGN\t110\n"},
+         "スケルトン\t스켈레톤\tN110\t\t\tGN\t110\n"
+         "今日\t오늘\tN110\tUMe\t\tGN\t120\n"
+         "今\t콘\tN130\tQPN\tWa\tGN\t121\n"
+         "社長\t사장\tN110\tVHn\t\tGN\t122\n"
+         "社\t야시로\tN130\tQPN\tWa\tGN\t123\n"
+         "修理\t수리\tN110\t\tHd\tGN\t124\n"
+         "依頼\t의뢰\tN110\t\tHd\tGN\t125\n"
+         "一存\t독단\tN110\t\t\tGN\t126\n"
+         "十河\t소고\tN130\tQPN\tWa\tGN\t127\n"
+         "六角\t육각\tN110\t\t\tGN\t128\n"
+         "六角\t롯카쿠\tN130\tQPN\tWa\tGN\t129\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -801,6 +811,24 @@ HD_TEST(names_historical_honorific_not_given) {
         HD_CHECK(rows.find("君") == std::string::npos && rows.find("殿") == std::string::npos &&
                  rows.find("様") == std::string::npos);
     }
+}
+
+// A common word is no listed name nor a given name read kanji by kanji, but it is a given name
+// after a surname and a title (十河讃岐守一存), and a surname before a title stays one (六角).
+HD_TEST(names_historical_common_words) {
+    const dict::Snapshot* snap = Dictionary();
+    HD_REQUIRE(snap != nullptr);
+    auto rows = [&](const char* jp) {
+        const std::string line = jp;
+        return names::HistoricalNames(*snap, {&line, 1});
+    };
+    for (const char* jp : {"今日 キキに会ってさ", "社長　結婚してたんですか？", "今日一日 最高だったな｡", "修理依頼が来ると"}) {
+        HD_CHECK_EQ(rows(jp), std::string());
+    }
+    const std::string given = rows("十河讃岐守一存　三好家家臣");
+    HD_CHECK(given.find("十河讃岐守一存\t") != std::string::npos);
+    HD_CHECK(given.find("\n一存\t") == std::string::npos && !given.starts_with("一存\t"));
+    HD_CHECK(rows("六角左京大夫義賢　六角家前々当主").find("六角\t") != std::string::npos);
 }
 
 HD_TEST(names_prose_katakana) {
