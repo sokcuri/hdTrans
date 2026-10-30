@@ -16,3 +16,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 席表	좌석표	N110			GN							novel-common-nouns:13
 栗毛色	밤색	N110			GN							novel-common-nouns:14
 蠅頭	승두	N110			GN							novel-common-nouns:16
+親友	절친	N110	VHn		GN				replace			novel-common-nouns:15
