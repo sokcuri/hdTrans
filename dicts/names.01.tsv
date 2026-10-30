@@ -141847,6 +141847,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 久慈ありす	쿠지 아리수	N130	QPNVHn		GN						くじ ありす	names.441417
 久慈マサムネ	구지 마사무네	N130	QPNVHn		GN							names.441418
 久慈一	구지 하지메	N130	QPNVHn		GN						くじはじめ	names.441419
+久慈兄弟	사라잔마이	N130	QWK		GN							names.441420
 久慈光久	구지 미쓰히사	N130	QPNVHn		GN							names.441421
 久慈川	쿠지가와	N110			GN						くじがわ	names.441422
 久慈川	쿠지카와	N130	QPNVHn	Wa	GN							names.441423
@@ -159436,6 +159437,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 俺アリス	오레 앨리스	N130	QWK		GN							names.459179
 俺タワー	오레 타워	N110			GN						おれたわー	names.459180
 俺レベ	나 혼자만 레벨업	N130	QPNVHn		GN							names.459181
+俺俺	나야, 나	N130	QWK		GN							names.459182
 俺司	오레시	N130	QPNVHn	Wb	GN						おれし	names.459183
 俺女	오레온나	N130	QPNVHn	Wb	GN						おれおんな	names.459184
 俺好き	오레스키	N110			GN						おれすき	names.459185
@@ -163405,6 +163407,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 全炳極	전병극	N130	QPNVHn	Wb	GN							names.463276
 全烋相	전휴상	N130	QPNVHn	Wb	GN							names.463277
 全然	전혀	N110			GN							names.463278
+全然大丈夫	괜찮아, 정말 괜찮아	N130	QWK		GN							names.463279
 全焼	전소	N110			GN							names.463280
 全熙正	전희정	N130	QPNVHn	Wb	GN							names.463281
 全玉鉉	전옥현	N130	QPNVHn	Wb	GN							names.463282
@@ -189243,6 +189246,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 告白実行委員会～恋愛シリーズ～	고백실행위원회 ~연애 시리즈~	N130	QWK		GN							names.489509
 告白心拍数	고백심박수	N130	QWK		GN							names.489511
 告白教会	고백교회	N130	VGt		GN							names.489512
+告白日和	고백하기 좋은 날	N130	QWK		GN							names.489513
 告知	고지	N110			GN							names.489514
 呑口	노미구치	N110			GN						のみぐち	names.489515
 呑山	노미야마	N130	QPNVHn	Wa	GN							names.489516
@@ -251596,6 +251600,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 広州李氏	광주 이씨	N130	VGt		GN							names.552762
 広州東站	광저우동역	N130	QCTVPl		GN							names.552763
 広州東駅	광저우 동역	N130	QCTVPl		GN							names.552764
+広州殺人事件	구품지마관	N130	QWK		GN							names.552765
 広州毛氏	광주 모씨	N130	VGt		GN							names.552766
 広州汽車集団	GAC 그룹	N130	VGt		GN							names.552767
 広州海珠環島新型有軌電車	광저우 하이주 환도 신형 노면전차	N130	QCTVPl		GN							names.552768
@@ -261909,8 +261914,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 愛していると言ってくれ	사랑한다고 말해줘	N130	QWK		GN							names.563529
 愛しているなら	사랑한다면	N130	QWK		GN							names.563530
 愛してもいいかい?	사랑해도 될까?	N130	QWK		GN							names.563531
+愛しても大丈夫	사랑해도 괜찮아	N130	QWK		GN							names.563533
 愛してる、マルスンさん	사랑해, 말순씨	N130	QWK		GN							names.563535
 愛してる、愛してない	사랑한다, 사랑하지 않는다	N130	QWK		GN							names.563536
+愛してるから大丈夫	사랑하니까, 괜찮아	N130	QWK		GN							names.563539
 愛してるぜベイベ★★	사랑해 Baby★★	N130	QWK		GN							names.563540
 愛してると云って	사랑한다 말해줘	N130	QWK		GN							names.563542
 愛してるばんざーい!	사랑해 만세!	N130	QWK		GN							names.563543
@@ -282847,6 +282854,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 有頂天マゾヒスティック	유정천 마조히스틱	N130	QWK		GN							names.585115
 有頂天家族	유정천 가족	N130	QWK		GN							names.585116
 有頂天家族2	유정천 가족 2	N130	QWK		GN							names.585117
+有頂天時代	스윙 타임	N130	QWK		GN							names.585118
 有香	유카	N130	QPNVHn	Wb	GN							names.585119
 有馬	아리마	N130	QPNVHn	Wa	GN							names.585120
 有馬 たくや	아리마 타쿠야	N130	QPNVHn		GN						ありま たくや	names.585121
@@ -286091,6 +286099,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 未来羽	미라우	N130	QPNVHn	Wb	GN							names.588391
 未来融合-フューチャー・フュージョン	미래융합-퓨처 퓨전	N130	QPNVHn		GN							names.588392
 未来視	미래시	N110			GN						みらいし	names.588393
+未来警察	런어웨이	N130	QWK		GN							names.588394
 未来警察ウラシマン	출동! 러쉬맨	N130	QWK		GN							names.588396
 未来運動	미래운동	N130	VGt		GN							names.588397
 未来都市	미래 도시	N130	QCTVPl		GN							names.588398
@@ -293902,6 +293911,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東京学芸大学	도쿄 학예 대학	N130	VGt		GN							names.596239
 東京学芸大学附属高等学校	도쿄학예대학 부속고등학교	N130	VGt		GN							names.596240
 東京宝塚劇場	도쿄 다카라즈카 극장	N130	QCTVPl		GN							names.596241
+東京少女	미래를 걷는 소녀	N130	QWK		GN							names.596242
 東京少年	도쿄 소년	N130	QWK		GN							names.596243
 東京島	도쿄 섬	N130	QWK		GN							names.596244
 東京工業大学	도쿄 공업대학	N130	VGt		GN							names.596245
@@ -306691,6 +306701,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 梨泉洞	이천동	N130	QCTVPl		GN							names.609056
 梨泰院	이태원	N110			GN						いてうぉん	names.609057
 梨泰院クラス	이태원 클라쓰	N130	QWK		GN							names.609058
+梨泰院中毒	이태원 클라쓰	N130	QWK		GN							names.609059
 梨泰院洞	이태원동	N130	QCTVPl		GN							names.609060
 梨泰院駅	이태원역	N130	QCTVPl		GN							names.609061
 梨湖洞	이호동	N130	QCTVPl		GN							names.609062

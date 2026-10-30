@@ -658,26 +658,6 @@ DictFlags Registry::Flags(std::string_view s) {
     return f;
 }
 
-// Whether the dictionaries have t only as words that are no noun: base records whose part is
-// none of the noun parts (N, I), no person, place or name-layer person record, and no plain
-// entry (大丈夫, but not 昨日, 猫 or 愛).
-bool Registry::NoNounWord(std::string_view t) {
-    if (snap_ == nullptr) return false;
-    const DictFlags f = Flags(t);
-    if (!f.common || f.person || f.city || f.layerSurname || f.layerGiven) return false;
-    bool any = false;
-    for (const dict::Candidate& rec : snap_->RetrieveRecords(t, dict::LookupMode::General)) {
-        if (rec.codes == nullptr) continue;
-        const std::string_view part = rec.codes->partText;
-        if (part.empty() || part[0] == 'N' || part[0] == 'I') return false;
-        any = true;
-    }
-    for (const dict::UserEntry* e : snap_->TextPlain().Search(t, dict::LookupMode::General)) {
-        if (e->key == t && !e->kana) return false;
-    }
-    return any;
-}
-
 std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     std::string t(run.text);
     std::size_t start = run.start, end = run.end;
@@ -701,9 +681,6 @@ std::string Registry::HonorificRun(std::string_view line, const Run& run) {
     }
     const char32_t next = FirstRune(rest.substr(h.size())).cp;
     if (next == U'ゃ' || next == U'ゅ' || next == U'ょ') return "";
-    // After a word that is no noun, name or place (大丈夫 G8U0), the ちゃんと is the adverb, not
-    // the honorific and a particle: an honorific follows a noun (猫ちゃんと, 連装砲ちゃんと).
-    if (h == "ちゃん" && next == U'と' && NoNounWord(t)) return "";
     const std::string th = t + std::string(h);
     if (AllRunes(th, IsKanji) && Flags(th).records > 0) return "";
     const bool single = RuneCount(t) == 1 && AllRunes(t, IsKanji);
