@@ -1,0 +1,42 @@
+#! ud
+# UniDic POS (pos1-pos4) → the word classes the chunker and clause folder read. The longest matching prefix wins.
+ud	class	note
+名詞	noun
+名詞-普通名詞-副詞可能	noun-adv	今日, 時: also adverbial
+名詞-固有名詞	propn
+名詞-固有名詞-人名	person
+名詞-数詞	num
+名詞-助動詞語幹	na-aux	そう (hearsay)
+代名詞	pron
+動詞	verb
+動詞-非自立可能	verb-dep	いる, しまう, する: auxiliary after て or a noun
+形容詞	adj
+形容詞-非自立可能	adj-dep	ない, いい, ほしい
+形状詞	na
+形状詞-助動詞語幹	na-aux	よう, みたい, そう
+形状詞-タリ	na
+副詞	adv
+連体詞	adn
+接続詞	conj
+感動詞	intj
+感動詞-フィラー	filler
+助動詞	aux
+助詞-格助詞	p-case
+助詞-係助詞	p-topic
+助詞-副助詞	p-adv
+助詞-接続助詞	p-conj
+助詞-終助詞	p-final
+助詞-準体助詞	p-nom
+接頭辞	pref
+接尾辞-名詞的	suf-n
+接尾辞-名詞的-助数詞	suf-count
+接尾辞-動詞的	suf-v
+接尾辞-形容詞的	suf-adj
+接尾辞-形状詞的	suf-na
+補助記号-読点	comma
+補助記号-句点	period
+補助記号-括弧開	open
+補助記号-括弧閉	close
+補助記号	sym
+記号	sym
+空白	space

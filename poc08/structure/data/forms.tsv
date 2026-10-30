@@ -1,0 +1,20 @@
+#! forms
+# UniDic cForm → inflection class. The longest matching prefix wins.
+cform	class	note
+未然形	mizen
+連用形	renyo
+連用形-促音便	renyo-onbin	before た/て
+連用形-撥音便	renyo-onbin
+連用形-イ音便	renyo-onbin
+連用形-ウ音便	renyo-onbin
+連用形-融合	renyo-fused	じゃ
+連用形-ニ	renyo-ni	ように
+終止形	shushi
+連体形	rentai
+仮定形	katei
+仮定形-融合	katei-fused	なきゃ
+命令形	meirei
+意志推量形	ishi
+語幹	gokan
+已然形	izen
+ク語法	gokan
