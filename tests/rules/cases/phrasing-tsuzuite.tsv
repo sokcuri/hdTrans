@@ -1,0 +1,22 @@
+# 문장 첫머리의 続いて는 이어서, 続いての는 다음, 명사와 に 뒤의 続き는 이어
+rule	input	expected	kind	layer
+dict:jisjk:268354	続いてのニュースです。	다음 뉴스입니다.	fix	local
+dict:jisjk:268354	続いての話題は、若者に大人気のサービスです。	다음 화제는, 젊은이에게 대인기의 서비스입니다.	fix	local
+dict:jisjk:268354	≫続いてはお天気です。	≫이어서 날씨입니다.	fix	local
+dict:jisjk:268354	続いては こちらです｡	이어서 이쪽입니다.	fix	local
+dict:jisjk:268354	続いて関東の天気です。	이어서 관동의 날씨입니다.	fix	local
+dict:jisjk:268354	(司会) 続いて ブース運営です。	(사회) 이어서 부스 운영입니다.	fix	local
+dict:jisjk:268354	続きまして福浦漁火オーケストラの皆さんです	이어서 후쿠우라 어화 오케스트라의 여러분입니다	fix	local
+dict:jisjk:268354	続きましては、こちらも佳境を迎えました	이어서, 이쪽도 가경을 맞이했습니다	fix	local
+dict:jisjk:268354	少女は左を見る。続いて右を見る。	소녀는 왼쪽을 본다. 이어서 오른쪽을 본다.	fix	local
+dict:jisjk:268354	続いて、青海さんが手を振りはじめる。	이어서, 아오미 씨가 손을 흔들기 시작한다.	fix	local
+dict:jisjk:268354	昨日に続き、今日もＤｅＮＡは	어제에 이어, 오늘도 DeNA는	fix	local
+dict:jisjk:268354	主演の失踪に続き 今度はＳＬが借りられませんでした	주연의 실종에 이어 이번에는 SL을 빌릴 수 없었습니다	fix	local
+dict:jisjk:268354	開幕戦に続き　破竹の２連勝！	개막전에 이어 파죽의 2연승!	fix	local
+dict:jisjk:268354	雨が続いている。	비가 계속되고 있다.	keep	local
+dict:jisjk:268354	雨が続いて、困った。	비가 계속되어, 곤란했다.	keep	local
+dict:jisjk:268354	営業休止が続いています。	영업 휴지가 계속되고 있습니다.	keep	local
+dict:jisjk:268354	こうして パーティーも続いてる。	이렇게 해 파티도 계속되고 있다.	keep	local
+dict:jisjk:268354	続いてください。	따라와 주세요.	keep	local
+dict:jisjk:268354	話は次回に続きます。	이야기는 다음번에 계속됩니다.	keep	local
+dict:jisjk:268354	雨が続き、川が溢れた。	비가 계속되어, 강이 흘러넘쳤다.	keep	local

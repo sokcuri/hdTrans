@@ -134,6 +134,6 @@ dict:jisjk:140186	ありがたく頂戴するわね。	has:고맙게 받을게	k
 builtin:phrases	提督、午後も頑張ろ！	제독, 오후도 힘내자!	fix	builtin-phrase
 builtin:phrases	サラももっと頑張ろ！	has:좀 더 힘내자!	fix	builtin-phrase
 builtin:phrases	一緒に頑張ろ？	has:힘내자?	fix	builtin-phrase
-builtin:phrases	明日も頑張ろう。	내일도 노력하자.	keep	builtin-phrase
-builtin:phrases	頑張ろうね	lacks:힘내자	keep	builtin-phrase
+builtin:phrases	明日も頑張ろう。	내일도 힘내자.	keep	builtin-phrase
+builtin:phrases	頑張ろうね	힘내자	keep	builtin-phrase
 dict:jisjk:40671	「お風呂、電気付いてなかったよ」	「목욕, 전기 붙지 않았어」	current	lookup

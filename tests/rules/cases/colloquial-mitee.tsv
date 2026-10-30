@@ -1,0 +1,23 @@
+# みてえ는 みたい: 명사 뒤 같다, 활용 뒤 것 같다, て형 뒤 보고 싶다
+rule	input	expected	kind	layer
+dict:mitee:1	おぉ 通じたみてえだ。	오오 통한 것 같다.	fix	local
+dict:mitee:1	さすがに けがしてるみてえで…	아무래도 다치고 있는 것 같아…	fix	local
+lookup:mitee	ヘッ まるで猿みてえな野郎だ	헷 마치 원숭이 같은 놈이다	fix	lookup
+lookup:mitee	あんたみてえな人が娘の婿だったらな	너 같은 사람이 딸의 사위라면	fix	lookup
+lookup:mitee	てめえらみてえに弱い者いじめするやつ	네 녀석들같이 약한 사람 괴롭히고 하는 녀석	fix	lookup
+lookup:mitee	勝先生 噂は本当みてえですね	승선생님 소문은 사실 같네요	fix	lookup
+dict:mitee:1	派手にやったみてえだな	화려하게 한 것 같네	fix	local
+dict:mitee:1	ふーん ちょっとはマシになったみてえだな	흐응 조금은 낫게 된 것 같네	fix	local
+lookup:mitee	家族みてえなもんだからよ	가족 같은 것이니까	fix	lookup
+lookup:mitee	つくだ煮みてえに集まってんだ	쓰쿠다니같이 모이는 거야	fix	lookup
+dict:mitee:1	口が悪くて無礼な振る舞いも多いみてえだ。	입이 거칠고 무례한 행동도 많은 것 같다.	fix	local
+dict:mitee:1	けど 気持ちと体がうまく かみ合わなかったみてえだ	지만 기분과 몸이 잘 맞물리지 않았던 것 같다	fix	local
+lookup:mitee	あんた新入りみてえだから	너신입 같으니까	fix	lookup
+lookup:mitee	俺も 産めるもんなら産んでみてえよ	나도 낳을 수 있는 것이라면 낳아 보고 싶어	fix	lookup
+lookup:colloquial-tee	行きてえ。	가고 싶다.	keep	lookup
+lookup:mitee	メイドの檻って何かエロＤＶＤのタイトルみてえな名前だな	메이드의 우리는 뭔가 에로 DVD의 타이틀 같은 이름이네	fix	lookup
+lookup:mitee	溶接みてえな根気のいる仕事は性に合わなかったんでな	용접 같은 끈기가 있는 일은 성미에 맞지 않아서	fix	lookup
+lookup:mitee	この店の支店みてえなもんだ	이 가게의 지점 같은 것이다	fix	lookup
+dict:mitee:1	何か まるでサンダーと俺たち見てるみてえだな	뭔가 마치 천둥과 우리 보고 있는 것 같네	fix	local
+dict:mitee:1	未来ってのは いろいろな物が進歩してるみてえだな	미래라는 것은 여러 가지 물건이 진보하고 있는 것 같네	fix	local
+dict:mitee:1	寒かったみてえだ。	추웠던 것 같다.	fix	local

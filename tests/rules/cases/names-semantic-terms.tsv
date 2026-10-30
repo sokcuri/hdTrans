@@ -19,4 +19,4 @@ names:sumo-bouts	大相撲・幕内の全取組を録画した。	스모, 마쿠
 names:sumo-bouts	大相撲	스모 대회	keep	lookup
 names:sumo-bouts	幕内	마쿠우치	keep	lookup
 names:sumo-bouts	取組	대전	keep	lookup
-names:sumo-bouts	取り組み	대처	keep	lookup
+names:sumo-bouts	取り組み	노력	keep	lookup
