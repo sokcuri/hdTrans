@@ -131,6 +131,26 @@ bool CoversVerb(const Worker& w, const Item* verb, std::string_view noun) {
     return !w.settings.text || static_cast<int>(noun.size()) == verb->length;
 }
 
+bool KanjiIn(std::string_view s) {
+    for (std::string_view t = s; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (text::IsKanji(r.cp)) return true;
+        t.remove_prefix(r.size);
+    }
+    return false;
+}
+
+// Whether next is the copula as a particle item: だ, です and their forms (だった, でしょう, じゃない).
+bool CopulaAfter(const Item* next) {
+    if (next == nullptr || At(next->Code(0), 0) != '2') return false;
+    const std::string_view s = next->group->surface;
+    if (s.starts_with("だし")) return false;  // 染みだして: the verb 出す
+    for (const std::string_view c : {"だ", "です", "でし", "じゃ"}) {
+        if (s.starts_with(c)) return true;
+    }
+    return false;
+}
+
 struct Phrase {
     std::string_view text;
     int start = 0;
@@ -188,7 +208,14 @@ Phrase FindPhrase(Flusher& f) {
                     const char sub = At(it->Code(static_cast<int>(slot)), 1);
                     if (sub == '1' || sub == '3' || sub == '5') break;
                 }
-                if (slot == g->entries.size()) continue;
+                // A verb of the other groups (晴れ 개다, M427) gives way to the noun it spells only as a
+                // bare continuative with kanji before the copula (晴れだ 맑음이다, 炒めでした); kana forms
+                // (した, おいで) and other particles keep the verb.
+                const bool copulaOnly = slot == g->entries.size();
+                if (copulaOnly && (At(it->Code(0), 0) != '4' || (it->detail->kind != 8 && it->detail->kind != 10) ||
+                                   !KanjiIn(it->group->surface) || !CopulaAfter(it->After()))) {
+                    continue;
+                }
                 Record* record = g->records;
                 g->records = nullptr;
                 const std::string_view raw = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(it->length));
@@ -201,7 +228,9 @@ Phrase FindPhrase(Flusher& f) {
                         if (prev != nullptr && prev->group->surface.ends_with(kJaNo) && At(prev->Code(0), 0) == '2') {
                             accepted = true;
                         } else if (next != nullptr) {
-                            if (At(next->Code(0), 0) == '2' || Has(next->GAttr(0), "Pj")) {
+                            if (copulaOnly) {
+                                accepted = true;
+                            } else if (At(next->Code(0), 0) == '2' || Has(next->GAttr(0), "Pj")) {
                                 accepted = true;
                             } else if (At(next->Code(0), 0) == '1' && At(it->Code(0), 2) == '7') {
                                 for (int direct = 0; direct < it->DirectCount(); direct++) {
