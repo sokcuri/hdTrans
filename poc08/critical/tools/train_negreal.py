@@ -9,7 +9,7 @@ import collections, json, os, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', 'qe'))
-sys.path.insert(0, '/Users/sokcuri/hdwork/v08/X')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import ja, ko, negfn  # noqa: E402
 from lr import SparseLR  # noqa: E402
 

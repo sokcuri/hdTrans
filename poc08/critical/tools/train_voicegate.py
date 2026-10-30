@@ -4,8 +4,8 @@ features only (the W4 decider is stacked on 0.7.x's own reading, which a gate ov
 Silver: the W4 game/fiction items (re-read on this IR) plus two blind passes over dev voice points, agreed kept.
 
   train_voicegate.py W4ROWS.json W4FEATS.tsv ITEMS.jsonl GOLD_A.jsonl GOLD_B.jsonl POOLFEATS.json OUT.tsv"""
-import collections, json, sys
-sys.path.insert(0, '/Users/sokcuri/hdwork/v08/X')
+import collections, json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lr import SparseLR  # noqa: E402
 
 w4rows_f, w4feats_f, items_f, A_f, B_f, poolf_f, out_f = sys.argv[1:8]

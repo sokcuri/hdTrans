@@ -6,9 +6,9 @@ extractor (hd8decide --dump on hdtrans08-ir side IR), so training and use read t
   train_negfn.py ITEMS.jsonl GOLD_A.jsonl GOLD_B.jsonl FEATS.json OUT.tsv [L1]
 CV: leave one work out over the game works and caption blocks; test: fiction (other works, out of domain).
 Prints accuracy and per-class precision/recall against the W2 rule (clause negFn) on the same items."""
-import collections, json, random, sys
+import collections, json, os, random, sys
 import numpy as np
-sys.path.insert(0, '/Users/sokcuri/hdwork/v08/X')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lr import SparseLR  # noqa: E402
 
 MERGE = {'INVITE': 'ASK', 'REQUEST': 'ASK', 'CMD': 'ASK', 'VOLIT': 'NOTNEG'}
