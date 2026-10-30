@@ -1,0 +1,13 @@
+#! layer=words
+# 일본 역사물의 시대 용어와 관직
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+一向一揆	잇코잇키	E110			GN							novel-period:1
+後北条	고호조	N110	QPN		GN							novel-period:2
+譜代	후다이	N110			GN				replace			novel-period:3
+関東管領	간토 간레이	N110	VHn		GN				replace			novel-period:4
+権中納言	곤추나곤	N110	VHn		GN							novel-period:5
+権大納言	곤다이나곤	N110	VHn		GN							novel-period:6
+典侍	나이시노스케	N110	VHn		GN				replace			novel-period:7
+坊官	보칸	N110	VHn		GN				replace			novel-period:8
+公事奉行	구지 부교	N110	VHn		GN							novel-period:9
+新当流	신토류	N110			GN							novel-period:10
