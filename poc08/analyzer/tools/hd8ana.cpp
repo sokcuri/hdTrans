@@ -707,6 +707,28 @@ int CmdLongUnits(const Args& a) {
   return 0;
 }
 
+int CmdHints(const Args& a) {
+  if (a.pos.empty()) return Die("hints CORE.bin");
+  Analyzer an;
+  if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
+  std::string line;
+  SegHints h;
+  while (std::getline(std::cin, line)) {
+    an.Hints(line, &h);
+    std::string o;
+    for (size_t i = 0; i < line.size(); ++i) {
+      if (h.ends[i]) o += std::string("|") + static_cast<char>(h.ends[i]);
+      o += line[i];
+    }
+    o += "|e";
+    std::cout << o;
+    for (auto& r : h.rejected)
+      std::cout << "  rej:" << line.substr(r.span.begin, r.span.end - r.span.begin) << '/' << static_cast<char>(r.cls);
+    std::cout << '\n';
+  }
+  return 0;
+}
+
 int CmdNorm() {
   std::string line, out;
   std::vector<internal::NChar> nc;
@@ -736,5 +758,6 @@ int main(int argc, char** argv) {
   if (cmd == "train") return CmdTrain(a);
   if (cmd == "longunits") return CmdLongUnits(a);
   if (cmd == "norm") return CmdNorm();
+  if (cmd == "hints") return CmdHints(a);
   return Die("unknown command " + cmd);
 }
