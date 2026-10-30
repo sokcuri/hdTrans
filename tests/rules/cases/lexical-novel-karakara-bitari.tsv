@@ -8,3 +8,8 @@ dict:novel-modifiers:4	ビタリと止まった。	딱 멈추었다.	fix	default
 dict:novel-modifiers:4	ピタリと動きを止めた。	딱 움직임을 멈추었다.	keep	defaults
 dict:novel-modifiers:4	ピタリ当たりました。	딱 맞았습니다.	keep	defaults
 dict:novel-modifiers:4	ぴたりと止まる。	딱 멈춘다.	keep	defaults
+dict:jisjk:265624	あまりの衝撃に口の中が干上がったようにからからになっていく。	지나친 충격에 입속이 바싹 마른 것처럼 바싹 말라 간다.	fix	local
+dict:jisjk:265624	喉がからからになる。	목이 바싹 마른다.	fix	local
+dict:jisjk:265624	喉がからからになって、水を飲んだ。	목이 바싹 말라, 물을 마셨다.	fix	local
+dict:novel-modifiers:2	喉がカラカラになった。	목이 바싹 말랐다.	fix	local
+dict:novel-modifiers:2	喉がカラカラになっている。	목이 바싹 말라 있다.	fix	local
