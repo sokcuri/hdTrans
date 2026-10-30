@@ -11,6 +11,7 @@
 #include "ir/ir_json.h"
 #include "core/word/item.h"
 #include "lift.h"
+#include "rule.h"
 
 namespace hd08::bridge {
 
@@ -33,6 +34,7 @@ struct DocState {
     std::vector<std::map<std::pair<int, int>, SentenceRecord>> records;  // per line, by (chunk, sentence)
     std::vector<uint32_t> fromSel;  // per line: the lift cursor of reselect
     std::vector<std::pair<int, int>> lastSel;
+    bool caption = false;  // 0.8-rule: the document reads as captions, so no part changes it
 };
 
 constexpr size_t kMaxStructureBytes = 4096;
@@ -48,6 +50,7 @@ struct Bridge {
     Options opt;
     Engine engine;
     LiftTable lift;
+    std::shared_ptr<const RuleData> rule;
     hdTrans::hooks::Hooks hooks;
     bool analyzerReal = false, generatorReal = false, transferReal = false;
     std::atomic<uint64_t> sentences{0}, generated{0}, kept{0}, liftedItems{0}, failedItems{0}, normalized{0},
@@ -73,6 +76,7 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
     ds->last.assign(lines.size(), {-1, -1});
     ds->records.resize(lines.size());
     ds->fromSel.assign(lines.size(), 0);
+    if (b.rule) ds->caption = CaptionDocument(*b.rule, std::vector<std::string>(lines.begin(), lines.end()));
     ds->lastSel.assign(lines.size(), {-1, -1});
     if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
@@ -134,9 +138,9 @@ bool Normalize(void* context, void*, int, std::string_view text, std::string& ou
     return true;
 }
 
-void* BeginChunk(void* context, void*, int, int, std::string_view text) {
+void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
     auto& b = *static_cast<Bridge*>(context);
-    if (!b.opt.segment) return nullptr;
+    if (!b.opt.segment || (doc != nullptr && static_cast<DocState*>(doc)->caption)) return nullptr;
     Doc d;
     Line l;
     l.src = text;
@@ -388,6 +392,7 @@ Bridge* Create(const Options& options, std::string& err) {
         if (!(b->engine.analyzer = LoadAnalyzer(options.cfg, err))) return nullptr;
     }
     if (!LoadLift(options.cfg.data, b->lift, err)) return nullptr;
+    if (options.rule && !(b->rule = LoadRule(options.cfg.data, err))) return nullptr;
     const std::string stubs = StubComponents();
     auto stub = [&](const char* name) { return (',' + stubs + ',').find(',' + std::string(name) + ',') != std::string::npos; };
     b->analyzerReal = !stub("analyzer");
@@ -455,6 +460,8 @@ std::string TakeWhy(Bridge* b) {
     std::lock_guard<std::mutex> lock(b->mu);
     return std::exchange(b->why, {});
 }
+
+std::shared_ptr<const RuleData> RuleDataOf(const Bridge* b) { return b->rule; }
 
 std::string TakeReselections(Bridge* b) {
     std::lock_guard<std::mutex> lock(b->mu);

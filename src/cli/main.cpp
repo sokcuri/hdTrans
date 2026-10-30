@@ -823,15 +823,7 @@ int RunMain(int argc, char** argv) {
     collector.families = &generated->families;
     if (stages) observer = stagerecords::ObserverFor(collector, observer);
 #ifdef HDTRANS_POC08_HOOKS
-    if (poc08Options.rule) {
-        std::string error;
-        ruleData = hd08::bridge::LoadRule(poc08Options.cfg.data, error);
-        if (!ruleData) {
-            std::fprintf(stderr, "hdtrans: cannot load the 0.8-rule data: %s\n", error.c_str());
-            return 1;
-        }
-        observer = RuleObserver(ruleWatch, observer);
-    }
+    if (poc08.bridge != nullptr && (ruleData = hd08::bridge::RuleDataOf(poc08.bridge))) observer = RuleObserver(ruleWatch, observer);
 #endif
     // The local rules are the dictionary rows' bodies, so the tally counts them only
     // against the program the dictionary assembled.

@@ -14,6 +14,7 @@
 // A part whose component is a stub is off whatever is asked.
 #include <cstdint>
 #include <string>
+#include <memory>
 #include <string_view>
 
 #include "core/engine/hooks.h"
@@ -48,6 +49,7 @@ struct Counts {
 
 
 struct Bridge;
+struct RuleData;
 Bridge* Create(const Options& options, std::string& err);
 void Destroy(Bridge* bridge);
 const hdTrans::hooks::Hooks* HooksOf(const Bridge* bridge);
@@ -62,5 +64,7 @@ std::string TakeStages(Bridge* bridge);
 std::string TakeReselections(Bridge* bridge);
 // The lift misses by key, most frequent first, as TSV (kind, key, count), at most limit rows.
 std::string LiftMisses(const Bridge* bridge, size_t limit);
+// The 0.8-rule tables (bridge/rule.h) when the rule part is on, else null.
+std::shared_ptr<const RuleData> RuleDataOf(const Bridge* bridge);
 
 }  // namespace hd08::bridge
