@@ -325,7 +325,15 @@ bool SsuMidSentence(std::string_view s, size_t pos, Match& m) {
     if (!Lit(s, p, "っす")) return false;
     bool goesOn = false;
     for (const std::string_view w : {"よね", "かね", "けど", "けれど", "が", "し", "ので", "のに"}) {
-        if (s.substr(p).starts_with(w)) goesOn = true;
+        if (!s.substr(p).starts_with(w)) continue;
+        goesOn = true;
+        // けど, けれど, よね and かね that end the sentence are read by the end rows of っす (怖いっすよね。
+        // 무섭죠, 自信ないっすけど。 없는데요); よね and かね before ？ stay here.
+        const std::string_view after = s.substr(p + w.size());
+        const char32_t next = after.empty() ? 0 : text::DecodeRune(after).cp;
+        const bool end = next == 0 || In(next, U"\n。｡…‥」』ーぇ〜～");
+        if ((w == "けど" || w == "けれど") && (end || In(next, U"！？!?"))) return false;
+        if ((w == "よね" || w == "かね") && end) return false;
     }
     const bool kara = s.substr(p).starts_with("から");
     if ((!goesOn && !kara) || s.substr(p).starts_with("しょ")) return false;

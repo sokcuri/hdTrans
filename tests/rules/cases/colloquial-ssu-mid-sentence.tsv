@@ -2,11 +2,11 @@
 rule	input	expected	kind	layer
 normalize:ssu	「それ２年の女子っすね」	「그거 2년의 여자네요」	fix	normalize
 normalize:ssu	「ってことは確定っすね！？」	「라는 건 확정이네요!?」	fix	normalize
-normalize:ssu	「今は一緒にいてくれるからいいかもしれないっすけど」	「지금은 함께 있어 주니까 좋을지도 모르지만」	fix	normalize
+normalize:ssu	「今は一緒にいてくれるからいいかもしれないっすけど」	「지금은 함께 있어 주니까 좋을지도 모르는데요」	fix	normalize
 normalize:ssu	「そりゃそーっすけど、ほら」	「그야 그렇지만, 자」	fix	normalize
-normalize:ssu	「入ってないっすけど」	「들어 있지 않지만」	fix	normalize
+normalize:ssu	「入ってないっすけど」	「들어 있지 않는데요」	fix	normalize
 normalize:ssu	あっ、情報っすね。待つっす！	앗, 정보네요. 기다려요!	fix	normalize
-normalize:ssu	これも、兄貴のお陰っすかねぇ。	이것도, 형 덕분입니까.	fix	normalize
+normalize:ssu	これも、兄貴のお陰っすかねぇ。	이것도, 형 덕분일까요.	fix	normalize
 normalize:ssu	と言いたいっすが兄貴	이렇게 말하고 싶습니다만 형	fix	normalize
 normalize:ssu	一つ言い忘れてたっすがこの爆弾首輪を外す方法	하나 말하는 것을 잊었습니다만 이 폭탄 목걸이를 푸는 방법	fix	normalize
 normalize:ssu	そりゃ、外見は全然違うっすけど。	그야, 외모는 전혀 어긋나는데요.	fix	normalize
@@ -19,7 +19,7 @@ normalize:ssu	ホント忙しいっすよね｡	진짜 바쁘죠.	fix	normalize
 normalize:ssu	それに首つったっすけど 死ねなくて 。	게다가 목 매달았는데요 죽을 수 없어서 .	fix	normalize
 normalize:ssu	大丈夫っすけど　いいんすか？	괜찮지만 좋습니까?	fix	normalize
 normalize:ssu	犯人が伝えたい メッセージか何かっすかね？	범인이 전하고 싶은 메시지나 뭔가입니까?	fix	normalize
-normalize:ssu	どうっすかねぇ｡	어떻습니까.	fix	normalize
+normalize:ssu	どうっすかねぇ｡	어때요.	fix	normalize
 normalize:ssu	あれっすよね　男前っすよね。	저것이죠 미남자이죠.	fix	normalize
 normalize:ssu	数学はあまり自信ないっすけど はい	수학은 그다지 자신 없지만 네	fix	normalize
 normalize:ssu	彼氏じゃないっすけど寮母なんで…！	남자친구가 아니지만 요모이니까…!	fix	normalize

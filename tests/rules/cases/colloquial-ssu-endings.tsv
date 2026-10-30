@@ -9,8 +9,8 @@ ending:っす	彼氏じゃないっすけど。	남자친구가 아닌데요.	fi
 ending:っす	いいっすけど。	좋은데요.	fix	builtin-ending
 ending:っす	怖いっすよね｡	무섭죠.	fix	builtin-ending
 ending:っす	このハサミ 結構 大きいっすよね。	이 가위 상당히 크죠.	fix	builtin-ending
-ending:っす	結構な集中力と精神力が必要っすよね？	좋은 집중력과 정신력이 필요하죠?	fix	builtin-ending
-ending:っす	どっちがいいっすかね？	어느 쪽이 좋을까요?	fix	builtin-ending
+ending:っす	結構な集中力と精神力が必要っすよね？	좋은 집중력과 정신력이 필요하네요?	fix	builtin-ending
+ending:っす	どっちがいいっすかね？	어느 쪽이 좋습니까?	fix	builtin-ending
 ending:っす	これも、兄貴のお陰っすかねぇ。	이것도, 형 덕분일까요.	fix	builtin-ending
 ending:っす	確定っすね	확정이네요	fix	builtin-ending
 ending:っす	煙突掃除っすね	굴뚝 청소네요	fix	builtin-ending
@@ -18,7 +18,6 @@ ending:っす	めちゃくちゃいい写真っすね～。	엄청 좋은 사진
 builtin:phrases	そうっすよね… う〜ん。	그렇죠… 으음~.	fix	builtin-phrase
 builtin:phrases	どうっすか？	어때요?	fix	builtin-phrase
 builtin:phrases	冷たいスポーツドリンク いかがっすか？	차가운 스포츠 음료 어떠세요?	fix	builtin-phrase
-lookup:ssu-sou	「そりゃそーっすけど、ほら」	「그야 그렇긴 한데요, 자」	fix	lookup
 lookup:ssu-sou	そーっすね。	그렇네요.	fix	lookup
 ending:っす	良かったっす。	좋았어요.	keep	builtin-ending
 ending:っす	すぐそこっすよ｡	바로 거기예요.	keep	builtin-ending
@@ -26,4 +25,5 @@ ending:っす	いいっすよ｡	좋아요.	keep	builtin-ending
 builtin:phrases	そうっすね。	그렇네요.	keep	builtin-phrase
 ending:っす	本当っすか！	사실인가요!	keep	builtin-ending
 ending:っす	マジっすか｡	진짜인가요.	keep	builtin-ending
-ending:っす	いや…　大丈夫っすけど　いいんすか？	아니… 괜찮은데요 좋습니까?	fix	builtin-ending
+ending:っす	いや…　大丈夫っすけど　いいんすか？	아니… 괜찮지만 좋습니까?	fix	builtin-ending
+lookup:ssu-sou	そりゃそーっすけど。	그야 그렇긴 한데요.	keep	lookup

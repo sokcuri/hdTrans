@@ -12,7 +12,7 @@ sound:contracted-n	華丸≫分からんから。	꽃환≫모르니까.	fix	sou
 sound:contracted-n	まだ分からんか お前は！	아직 모를까 너는!	fix	sound
 sound:contracted-n	(盤嶽)元気を出さんか！	(반악) 힘내지 않는가!	fix	sound
 sound:contracted-n	(女性)あぶり餅 要らんか～？	(여성) 구워 떡 필요하지 않은가~?	fix	sound
-sound:contracted-n	伏見の酒 要らんか～い	후시미의 술 필요하지 않을래~	fix	sound
+sound:contracted-n	伏見の酒 要らんか～い	후시미의 술 필요 없나~	keep	sound
 sound:contracted-n	(警官)入らんかい！	(경관) 들어가지 않을래!	fix	sound
 sound:contracted-n	おい　こら！　返さんかい！　おい…。	이봐 이봐! 돌려주지 않을래! 이봐….	fix	sound
 sound:contracted-n	いや でも このまま待っててもいつ来るか分からんし 行ってくる｡	아니 하지만 이대로 기다려도 언제 오는지 모르고 다녀올게.	fix	sound
@@ -27,3 +27,4 @@ sound:contracted-n	知らんぞ	몰라	keep	sound
 sound:contracted-n	井出さんから指示殺人では	이데 씨에게서 지시 살인에서는	keep	sound
 sound:contracted-n	うん…　清治さんから？	응… 세이지 씨에게서?	keep	sound
 sound:contracted-n	そうか　文治さんか。	그런가 분지 씨인가.	keep	sound
+sound:contracted-n	待たんか～い！	기다리지 않을래~!	fix	sound

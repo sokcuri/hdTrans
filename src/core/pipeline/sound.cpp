@@ -3064,8 +3064,10 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             const bool inWord = from > 0 && IsKanjiRune(rs[from - 1]) && InsideWord(s, byte, start, from, ctx, snap);
             const bool godanNegative = !nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap);
             if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) || godanNegative)) {
+                // The question of an old speaker keeps its ん for the end rows of んかのう (始まらんかのう).
+                const bool endRow = rest.starts_with("かの");
                 if (godanNegative && kanji && !inWord && says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") &&
-                    !rest.starts_with("かて")) {
+                    !rest.starts_with("かて") && !endRow) {
                     kana = kNai;
                 }
                 break;
