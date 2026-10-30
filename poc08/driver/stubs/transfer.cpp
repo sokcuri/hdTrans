@@ -9,6 +9,8 @@ struct TransferData {};
 TransferData* LoadTransfer(const Config&, std::string&) { return new TransferData; }
 void FreeTransfer(TransferData* data) { delete data; }
 
+void StageD(const TransferData&, const Config&, Doc&, Line&) {}
+
 void StageT(const TransferData&, const Config&, Doc& doc, Line& line) {
     line.kir.clear();
     const uint32_t rule = doc.I("code:stub-transfer");

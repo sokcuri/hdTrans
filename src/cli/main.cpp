@@ -35,6 +35,9 @@
 #include "stage_records.h"
 #include "trace_json.h"
 #include "frontend/dictionary_version.h"
+#ifdef HDTRANS_POC08_HOOKS
+#include "bridge/bridge.h"
+#endif
 
 namespace {
 
@@ -108,6 +111,17 @@ void Usage(std::FILE* file) {
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
                "Legacy single-hyphen options are also accepted, except --verbose. Use -- before literal text starting with '-'.\n", file);
+#ifdef HDTRANS_POC08_HOOKS
+    std::fputs("\n0.8 proof of concept (hdtrans08):\n"
+               "  --poc08 PARTS          stages the 0.8 components replace: normalize, segment, generate, decide,\n"
+               "                         all or none (default); a part whose component is not built stays 0.7.x\n"
+               "  --speech auto|haera|hae|haeyo|hapsyo  speech level of the 0.8 generator\n"
+               "  --poc08-data DIR       data root of the 0.8 components (default: the poc08 source folder)\n"
+               "  --poc08-why FILE       --why records of the side IR (one per Korean morpheme)\n"
+               "  --poc08-stages FILE    the side IR as JSON Lines (IR.md)\n"
+               "  --poc08-misses FILE    the lift's missing table keys, most frequent first\n"
+               "  --poc08-stats          counts of the replaced stages to stderr\n", file);
+#endif
 }
 
 std::FILE* OpenFile(const std::string& path, bool write) {
@@ -308,6 +322,10 @@ int RunMain(int argc, char** argv) {
     bool verifyDicts = false;
     bool compileDicts = false;
     bool noCache = false;
+#ifdef HDTRANS_POC08_HOOKS
+    std::string poc08Parts = "none", poc08Data, poc08Why, poc08Stages, poc08Misses;
+    bool poc08Stats = false;
+#endif
     for (int i = 1; i < argc; i++) {
         std::string option = argv[i];
         if (!literal && option == "--") {
@@ -336,7 +354,12 @@ int RunMain(int argc, char** argv) {
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
-            || option == "-dump-rules" || option == "-speech" || option == "-context";
+            || option == "-dump-rules" || option == "-speech" || option == "-context"
+#ifdef HDTRANS_POC08_HOOKS
+            || option == "-poc08" || option == "-poc08-data" || option == "-poc08-why" || option == "-poc08-stages"
+            || option == "-poc08-misses"
+#endif
+            ;
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -379,6 +402,14 @@ int RunMain(int argc, char** argv) {
         else if (option == "-context") contextPath = *value;
         else if (option == "-no-cg") noCg = true;
         else if (option == "-cg-learned") cgLearned = true;
+#ifdef HDTRANS_POC08_HOOKS
+        else if (option == "-poc08") poc08Parts = *value;
+        else if (option == "-poc08-data") poc08Data = *value;
+        else if (option == "-poc08-why") poc08Why = *value;
+        else if (option == "-poc08-stages") poc08Stages = *value;
+        else if (option == "-poc08-misses") poc08Misses = *value;
+        else if (option == "-poc08-stats") poc08Stats = true;
+#endif
         else {
             std::fprintf(stderr, "hdtrans: unknown option %s\n", argv[i]);
             Usage(stderr);
@@ -412,6 +443,28 @@ int RunMain(int argc, char** argv) {
     misread = misread || config.settings.misread;
     wrapped = wrapped || config.settings.wrapped;
     hdTrans::Speech speech = config.settings.speech;
+#ifdef HDTRANS_POC08_HOOKS
+    // The levels only the 0.8 generator writes; 0.7.x composes with its default.
+    hd08::Speech speech08 = hd08::Speech::Strict;
+    if (speechArg) {
+        static const std::pair<const char*, hd08::Speech> kLevels[] = {
+            {"strict", hd08::Speech::Strict}, {"soft", hd08::Speech::Soft}, {"auto", hd08::Speech::Auto},
+            {"haera", hd08::Speech::Haera}, {"hae", hd08::Speech::Hae}, {"haeyo", hd08::Speech::Haeyo},
+            {"hapsyo", hd08::Speech::Hapsyo}};
+        for (const auto& [name, level] : kLevels) {
+            if (*speechArg == name) speech08 = level;
+        }
+        if (*speechArg != "strict" && *speechArg != "soft") {
+            bool known = false;
+            for (const auto& [name, level] : kLevels) known = known || *speechArg == name;
+            if (!known) {
+                std::fprintf(stderr, "hdtrans: --speech takes soft, strict, auto, haera, hae, haeyo or hapsyo\n");
+                return 2;
+            }
+            speechArg.reset();
+        }
+    }
+#endif
     if (speechArg && !hdTrans::internal::SpeechOf(*speechArg, speech)) {
         std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
         return 2;
@@ -593,6 +646,64 @@ int RunMain(int argc, char** argv) {
     options.wordImprovements.misreadFilter = misread;
     options.speech = speech;
     options.wrapped = wrapped;
+#ifdef HDTRANS_POC08_HOOKS
+    hd08::bridge::Options poc08Options;
+    poc08Options.cfg.data = poc08Data.empty() ? std::string(HD08_DEFAULT_DATA) : poc08Data;
+    poc08Options.cfg.speech = speech08;
+    poc08Options.cfg.wrapped = wrapped;
+    poc08Options.cfg.document = !each;
+    if (userPathsArg) poc08Options.cfg.userdicts = *userPathsArg;
+    poc08Options.sideIr = !poc08Why.empty() || !poc08Stages.empty();
+    poc08Options.lift = !poc08Misses.empty() || poc08Stats;
+    {
+        std::string error;
+        if (!hd08::bridge::ParseParts(poc08Parts, poc08Options, error)) {
+            std::fprintf(stderr, "hdtrans: --poc08: %s\n", error.c_str());
+            return 2;
+        }
+    }
+    struct BridgeCloser {
+        hd08::bridge::Bridge* bridge = nullptr;
+        ~BridgeCloser() { hd08::bridge::Destroy(bridge); }
+    } poc08;
+    const bool poc08On = poc08Parts != "none" || poc08Options.sideIr || !poc08Misses.empty();
+    if (poc08On) {
+        std::string error;
+        poc08.bridge = hd08::bridge::Create(poc08Options, error);
+        if (poc08.bridge == nullptr) {
+            std::fprintf(stderr, "hdtrans: cannot load the 0.8 components: %s\n", error.c_str());
+            return 1;
+        }
+        options.hooks = hd08::bridge::HooksOf(poc08.bridge);
+    }
+    const auto finish08 = [&]() -> bool {
+        if (poc08.bridge == nullptr) return true;
+        auto write = [](const std::string& path, const std::string& text) {
+            if (path.empty()) return true;
+            std::FILE* f = OpenFile(path, true);
+            const bool ok = f && std::fwrite(text.data(), 1, text.size(), f) == text.size();
+            const bool closed = f && std::fclose(f) == 0;
+            if (!ok || !closed) std::fprintf(stderr, "hdtrans: cannot write %s\n", path.c_str());
+            return ok && closed;
+        };
+        bool ok = write(poc08Why, hd08::bridge::TakeWhy(poc08.bridge));
+        ok = write(poc08Stages, hd08::bridge::TakeStages(poc08.bridge)) && ok;
+        ok = write(poc08Misses, hd08::bridge::LiftMisses(poc08.bridge, 100000)) && ok;
+        if (poc08Stats) {
+            const hd08::bridge::Counts c = hd08::bridge::CountsOf(poc08.bridge);
+            const std::string parts = hd08::bridge::ActiveParts(poc08.bridge);
+            std::fprintf(stderr,
+                         "hdtrans08 poc08: parts=%s sentences=%llu generated=%llu kept=%llu lifted_items=%llu "
+                         "failed_items=%llu normalized_lines=%llu segmented_chunks=%llu refits=%llu\n",
+                         parts.empty() ? "none" : parts.c_str(), static_cast<unsigned long long>(c.sentences),
+                         static_cast<unsigned long long>(c.generated), static_cast<unsigned long long>(c.kept),
+                         static_cast<unsigned long long>(c.liftedItems), static_cast<unsigned long long>(c.failedItems),
+                         static_cast<unsigned long long>(c.normalized), static_cast<unsigned long long>(c.segmentedChunks),
+                         static_cast<unsigned long long>(c.refits));
+        }
+        return ok;
+    };
+#endif
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
@@ -699,6 +810,9 @@ int RunMain(int argc, char** argv) {
             if (i > 0) emit("\n");
             emit(translated[i]);
         }
+#ifdef HDTRANS_POC08_HOOKS
+        if (!finish08()) return 1;
+#endif
         return finish();
     }
     size_t start = 0;
@@ -724,6 +838,9 @@ int RunMain(int argc, char** argv) {
         trace.line = trace.lineBase;
         start = end + 1;
     }
+#ifdef HDTRANS_POC08_HOOKS
+    if (!finish08()) return 1;
+#endif
     return finish();
 }
 

@@ -1,0 +1,11 @@
+#! lift
+# How a sentence 0.7.x resolved becomes Korean morpheme IR nodes (poc08/bridge/lift.h).
+# kind	key	key2	node
+# The family, ending and particle rows come from the generator's paradigm tables and the
+# decomposition of the ending rows into aux features; `hdtrans08 --poc08-misses FILE` lists the
+# keys still missing, most frequent first.
+word	0	-	{"kind":"Det"}
+word	1	-	{"kind":"N"}
+word	3	-	{"kind":"Adv"}
+word	6	-	{"kind":"Raw"}
+word	9	-	{"kind":"Raw"}

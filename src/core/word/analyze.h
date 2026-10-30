@@ -102,6 +102,12 @@ struct Settings {
     // The characters the loaded pre-filter writes before kana (filter::Filters::Written), sorted:
     // kana right after one is text the pre-filter wrote, not an unknown stem to read by sound.
     std::span<const char32_t> filterWritten;
+#ifdef HDTRANS_POC08_HOOKS
+    // The segmentation of the chunk (hooks::Hooks::fits); a word whose source bytes do not fit gives
+    // way to a shorter candidate that does. Null for none.
+    const void* hookChunk = nullptr;
+    bool (*hookFits)(const void* chunk, uint32_t begin, uint32_t end) = nullptr;
+#endif
 };
 
 // Called after every dictionary lookup with the token being processed (-1 before the
