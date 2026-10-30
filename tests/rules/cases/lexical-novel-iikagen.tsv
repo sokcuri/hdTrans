@@ -1,0 +1,19 @@
+rule	input	expected	kind	layer
+dict:novel-iikagen:2	「小太刀、いい加減仕事に戻れ」	has:이제 좀 일로	fix	local
+dict:novel-iikagen:2	いい加減この不毛なやり取りにはうんざりなんだが	has:이제 좀	fix	local
+dict:novel-iikagen:2	なぁ いい加減 ルルって呼べよぉ	has:이제 좀	fix	local
+dict:novel-iikagen:2	つーか、いい加減、からかうのはやめ	has:이제 좀,	fix	local
+dict:novel-iikagen:2	「いい加減その呼び方はやめて」	has:이제 좀 그	fix	local
+dict:novel-iikagen:2	あなたいい加減忘れ物多過ぎない？	has:이제 좀	fix	local
+dict:novel-iikagen:2	……え、いい加減直せ？	has:이제 좀	fix	local
+dict:novel-iikagen:2	いい加減 慣れろよ｡	has:이제 좀 익숙해져	fix	local
+dict:novel-iikagen:2	「もう、いい加減学んだんだよ。」	has:이제 좀 배웠어	fix	local
+dict:novel-iikagen:1	いい加減しつこいわね。	has:정말 끈질기네	fix	local
+dict:novel-iikagen:1	いい加減うるさいぞ。	has:정말	fix	local
+dict:novel-iikagen:2	いい加減にしろよ	!rule:dict:novel-iikagen:2	keep	local
+dict:novel-iikagen:2	何それ？ いい加減なこと言わないで！	!rule:dict:novel-iikagen:2	keep	local
+dict:novel-iikagen:2	かなりいい加減だと思います。	!rule:dict:novel-iikagen:2	keep	local
+dict:novel-iikagen:2	記憶がいい加減になりますな。	!rule:dict:novel-iikagen:2	keep	local
+dict:novel-iikagen:1	聞いてたけどいい加減な男ね」	!rule:dict:novel-iikagen:1	keep	local
+dict:novel-iikagen:1	いいかげんにせんか！	!rule:dict:novel-iikagen:1	keep	local
+dict:novel-iikagen:2	♬「なんていい加減　軽い男はきらい」	!rule:dict:novel-iikagen:2	keep	local
