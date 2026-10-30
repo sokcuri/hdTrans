@@ -1,0 +1,4 @@
+#! layer=words
+# 한자로 쓴 致す: する 명사 뒤에서 붙여 쓰는 보조 하다 (가나 いたす와 같이)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+致	&AV@	M433		Tu	GN	555	||1 &&2 P-1== "1**" G-1== "Hd"	致는 앞말이 する와 결합하는 명사이면 붙여 쓰는 보조 '하다'를 고른다.				novel-itasu:1

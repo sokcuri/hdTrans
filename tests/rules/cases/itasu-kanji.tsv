@@ -1,0 +1,15 @@
+rule	input	expected	kind	layer
+dict:novel-itasu:1	失礼致します	실례합니다	fix	local
+dict:novel-itasu:1	失礼致しました	실례했습니다	fix	local
+dict:novel-itasu:1	鳳翔、出撃致します。	호우쇼우, 출격합니다.	fix	local
+dict:novel-itasu:1	装備換装、感謝致します。	장비 환장, 감사합니다.	fix	local
+dict:novel-itasu:1	補給助かります、感謝致します	보급 도움이 됩니다, 감사합니다	fix	local
+dict:novel-itasu:1	歓迎致す｡	환영한다.	fix	local
+dict:novel-itasu:1	はっ！説明致します。	has:설명합니다.	fix	local
+dict:novel-itasu:1	そこまで娘を評価していただき、感謝致します	has:감사합니다	fix	local
+dict:novel-itasu:1	わたくしなりに努力致しましたのに	has:노력했는데	fix	local
+dict:novel-itasu:1	ご案内致します	안내해 드리겠습니다	fix	local
+dict:novel-itasu:1	致し方ない	어쩔 수 없다	keep	local
+dict:novel-itasu:1	致命傷	치명상	keep	local
+dict:novel-itasu:1	何を致す	무엇을 한다	keep	local
+dict:novel-itasu:1	お願い致します	부탁드립니다	keep	local
