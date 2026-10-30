@@ -1164,6 +1164,12 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
+    // A dictionary word in the られ of くる (連れてこられ, 出てこられ) before a negative is the potential, as
+    // the analysed られ of くる is (連れてこられない 데려올 수 없다, 連れてこれません).
+    if (form == VoiceForm::Lexical && ichidan && (surface.ends_with("こられ") || surface.ends_with("来られ")) &&
+        dict::StartsWithMember(HDTRANS_CLASS("ending.rare-negative"), rest) > 0) {
+        return Voice::Potential;
+    }
     return Voice::None;
 }
 
