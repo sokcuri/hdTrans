@@ -16,6 +16,7 @@ struct RetroOptions {
     std::string level = "auto";          // auto | keep | strict
     std::vector<std::string> only, skip;  // rewrite rules: only these ("-none-" for none), skip these
     bool align = true;                    // build lines on 0.7.x's final output; false: from the items alone
+    bool keepHapsyo = false;              // a predicate 0.7.x wrote in 합쇼체 keeps it (never lowered)
     bool debug = false;
 };
 

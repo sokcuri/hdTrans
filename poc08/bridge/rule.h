@@ -65,7 +65,8 @@ std::string PreLine(const RuleData& data, size_t i, const std::string& ja, const
 
 // Rewrites out (the final lines of the call, one per ja line) in place.
 // pre, when given, gets the retrofit's input lines (for the reader check).
-// bridge, when given, analyzes the dialogue lines for keigo: there 0.7.x's polite level is kept.
+// 0.7.x's 합쇼체 is never lowered. bridge, when given, analyzes the dialogue lines for keigo: there 0.7.x's
+// polite level (해요체 too) is kept.
 // Only lines whose speech level the retrofit changes are replaced.
 void RuleRewrite(const RuleData& data, const std::vector<std::string>& ja, const RuleCapture& capture,
                  std::vector<std::string>& out, RuleCounts& counts, std::string* pre = nullptr,

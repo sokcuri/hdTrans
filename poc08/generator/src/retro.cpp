@@ -920,7 +920,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                         if (nodes[k].punct == Punct::q) askedByEnding = false;
                     }
                 }
-                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !(command && d.key.rfind("scene-speech", 0) == 0))
+                const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;
+                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !hapsyo &&
+                    !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
                 for (auto& g : reg)
                     if (g.node == nodes[q].id && nodes[q].decision) {

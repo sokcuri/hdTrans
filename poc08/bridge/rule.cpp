@@ -719,6 +719,8 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
     // the retrofit changes speech levels only: its rewrite rules (comma removal, aspect folding …) are off
     hd8gen::RetroOptions opt;
     opt.only = {"-none-"};
+    // 합쇼체 is never lowered: 합쇼 → 해요 tied in game and lost in fiction on two dev slices; 해라 → 해 is the gain
+    opt.keepHapsyo = true;
     if (!hd8gen::RunRetro(*d.retro, pre, opt, lines, nullptr, err)) return;
     for (size_t i = 0; i < lines.size() && i < out.size(); i++) {
         if (!lines[i].ok) continue;
