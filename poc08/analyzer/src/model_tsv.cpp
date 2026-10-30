@@ -340,18 +340,23 @@ bool LoadTsvDir(const std::string& dir, Model* m, std::string* err) {
 
   // ja/: derived arcs and constraints
   if (!ReadTsv(dir + "/ja/derive.tsv", [&](const std::vector<std::string>& f) {
-        if (f.size() < 7) return;
+        if (!ok || f.size() < 6) return;
         Model::Rule r;
         r.id = f[0];
         r.kind = f[1] == "elong" ? 1 : f[1] == "stutter" ? 2 : 0;
         r.from = ToU32(f[2] == "-" ? "" : f[2]);
         r.to = ToU32(f[3] == "-" ? "" : f[3]);
         r.cost = Nats(f[4]);
-        r.prev = ParseMask(f[5]);
-        r.next = ParseMask(f[6]);
+        std::string ce;
+        if (!ParseConds(f[5], &r.cond, &ce)) {
+          ok = false;
+          bad = r.id + ": " + ce;
+          return;
+        }
         m->rules.push_back(r);
       }, &e))
     return fail(e);
+  if (!ok) return fail("derive.tsv: " + bad);
   if (!ReadTsv(dir + "/ja/constraints.tsv", [&](const std::vector<std::string>& f) {
         if (!ok || f.size() < 4) return;
         Model::Constraint c;
@@ -446,6 +451,14 @@ bool LoadLongTsv(const std::string& path, Model* m, std::string* err) {
         l.cform = static_cast<uint8_t>(cf);
         l.lemma = m->Intern(f[8] == "*" ? f[0] : f[8]);
         l.read = m->Intern(f[9] == "*" ? "" : f[9]);
+        if (f.size() > 10 && f[10] != "*") {
+          l.paradigm = static_cast<uint32_t>(std::atoi(f[10].c_str()));
+          if (l.paradigm >= m->paradigms.size()) {
+            ok = false;
+            bad = "bad paradigm " + f[0];
+            return;
+          }
+        }
         m->longs.push_back(l);
       }, &e))
     return (*err = e, false);

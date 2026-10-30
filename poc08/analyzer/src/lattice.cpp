@@ -64,7 +64,22 @@ void LookupLong(const Model& m, const char32_t* s, size_t n, Fn fn) {
     node = m.longTrie.Child(node, s[k]);
     if (!node) return;
     const auto& nd = m.longTrie.nodes[node];
-    for (uint32_t i = nd.first; i < nd.first + nd.count; ++i) fn(k + 1, i);
+    for (uint32_t i = nd.first; i < nd.first + nd.count; ++i) {
+      const auto& l = m.longs[i];
+      if (l.paradigm == UINT32_MAX) {
+        fn(k + 1, i, UINT32_MAX);
+        continue;
+      }
+      const auto& p = m.paradigms[l.paradigm];
+      for (uint32_t f = p.first; f < p.first + p.count; ++f) {
+        const auto& pf = m.pforms[f];
+        size_t end = k + 1 + pf.sufLen;
+        if (end > n) continue;
+        bool ok = true;
+        for (uint32_t j = 0; j < pf.sufLen && ok; ++j) ok = m.cps[pf.suf + j] == s[k + 1 + j];
+        if (ok) fn(end, i, f);
+      }
+    }
   }
 }
 
@@ -82,6 +97,16 @@ char32_t FirstReading(const Model& m, const Arc& a, const Workspace& ws) {
   return 0;
 }
 
+bool CondHolds(const Model::Cond& c, const Workspace& ws, const Arc& a);
+bool CondAll(const std::vector<Model::Cond>& cs, const Workspace& ws, uint32_t b, uint32_t e) {
+  Arc a;
+  a.b = static_cast<uint16_t>(b);
+  a.e = static_cast<uint16_t>(e);
+  for (auto& c : cs)
+    if (!CondHolds(c, ws, a)) return false;
+  return true;
+}
+
 bool CondHolds(const Model::Cond& c, const Workspace& ws, const Arc& a) {
   size_t n = ws.core.size();
   bool r = false;
@@ -92,9 +117,9 @@ bool CondHolds(const Model::Cond& c, const Workspace& ws, const Arc& a) {
     for (auto& alt : c.alts)
       if (a.e + alt.size() <= n && std::equal(alt.begin(), alt.end(), ws.core.begin() + a.e)) r = true;
   } else if (c.what == 2) {
-    r = (a.b == 0 ? ccEnd : ws.cc[a.b - 1]) & c.mask;
+    r = (a.b == 0 || ws.spaceBefore[a.b] ? ccEnd : ws.cc[a.b - 1]) & c.mask;
   } else {
-    r = (a.e >= n ? ccEnd : ws.cc[a.e]) & c.mask;
+    r = (a.e >= n || ws.spaceBefore[a.e] ? ccEnd : ws.cc[a.e]) & c.mask;
   }
   return c.neg ? !r : r;
 }
@@ -175,10 +200,12 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
   // spaced runs: single spaces between single kanji or kana (通 知 表)
   for (size_t i = 1; i < n; ++i) {
     if (sp[i] != 1) continue;
+    // the character before the space stands alone, and so does the one after it or the one before that
     bool leftSingle = i == 1 || sp[i - 1] != 0;
     bool rightSingle = i + 1 >= n || sp[i + 1] != 0;
+    bool runBefore = leftSingle && i >= 2 && sp[i - 1] == 1 && (i == 2 || sp[i - 2] != 0);
     auto jp = [&](size_t k) { return IsKanji(core[k]) || IsKana(core[k]); };
-    if (leftSingle && rightSingle && jp(i - 1) && jp(i)) ws->joinable[i] = 1;
+    if (leftSingle && (rightSingle || runBefore) && jp(i - 1) && jp(i)) ws->joinable[i] = 1;
   }
   ws->nextSpace.assign(n + 1, static_cast<uint32_t>(n + 1));
   for (size_t i = n; i-- > 0;) ws->nextSpace[i] = ws->spaceBefore[i + 1] ? static_cast<uint32_t>(i + 1) : ws->nextSpace[i + 1];
@@ -210,13 +237,14 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
       ws->arcs.push_back(a);
     });
     if (opt.longUnits)
-      LookupLong(m, core.data() + i, n - i, [&](size_t len, uint32_t li) {
+      LookupLong(m, core.data() + i, n - i, [&](size_t len, uint32_t li, uint32_t f) {
         const auto& l = m.longs[li];
         Arc a;
         a.b = static_cast<uint16_t>(i);
         a.e = static_cast<uint16_t>(i + len);
         a.lcls = l.lcls;
-        a.rcls = l.rcls;
+        a.rcls = f == UINT32_MAX ? l.rcls : m.pforms[f].cls;
+        a.form = f;
         a.cost = l.cost;
         a.kind = ArcKind::longUnit;
         a.ref = li;
@@ -268,9 +296,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
         for (size_t p = 0; p + r.from.size() <= n; ++p) {
           if (!std::equal(r.from.begin(), r.from.end(), core.begin() + p)) continue;
           if (ws->nextSpace[p] < p + r.from.size()) continue;
-          uint32_t pc = p == 0 ? ccEnd : ws->cc[p - 1];
-          uint32_t nc = p + r.from.size() >= n ? ccEnd : ws->cc[p + r.from.size()];
-          if ((r.prev && !(r.prev & pc)) || (r.next && !(r.next & nc))) continue;
+          if (!CondAll(r.cond, *ws, static_cast<uint32_t>(p), static_cast<uint32_t>(p + r.from.size()))) continue;
           sites.push_back({static_cast<uint32_t>(p), static_cast<uint32_t>(r.from.size()), r.to, ri, false});
         }
       } else {
@@ -283,7 +309,9 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
           } else if (VowelChar(core[p]) && VowelChar(core[p]) == VowelChar(core[p - 1]) &&
                      (p < 2 || VowelChar(core[p - 2]) != VowelChar(core[p]))) {
             while (q < n && VowelChar(core[q]) == VowelChar(core[p]) && !ws->spaceBefore[q]) ++q;
+            if (q - p < 2) q = p;  // three or more letters: いい and ええ are words
           }
+          if (q > p && !CondAll(r.cond, *ws, static_cast<uint32_t>(p), static_cast<uint32_t>(q))) q = p;
           if (q > p) sites.push_back({static_cast<uint32_t>(p), static_cast<uint32_t>(q - p), {}, ri, true});
         }
       }
@@ -294,7 +322,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
         // sites usable from start i
         std::vector<size_t> near;
         for (size_t s = 0; s < nSites; ++s)
-          if (sites[s].p >= i + (sites[s].elong ? 1 : 0) && sites[s].p < i + 10) near.push_back(s);
+          if (sites[s].p >= i + (sites[s].elong || sites[s].to.empty() ? 1 : 0) && sites[s].p < i + 10) near.push_back(s);
         if (near.empty()) continue;
         std::vector<size_t> elongs, lits;
         for (size_t s : near) (sites[s].elong ? elongs : lits).push_back(s);
@@ -327,7 +355,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
           int16_t lastRule = -1;
           bool anyElong = false, anyLit = false;
           size_t firstMod = SIZE_MAX;
-          bool firstIsDeletion = false;
+          bool firstIsDeletion = false, firstIsElong = false;
           for (size_t s : v) {
             const auto& st = sites[s];
             if (st.p < pos) continue;
@@ -339,6 +367,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
             if (buf.size() < firstMod) {
               firstMod = buf.size();
               firstIsDeletion = st.to.empty();
+              firstIsElong = st.elong;
             }
             for (char32_t c : st.to) {
               buf.push_back(c);
@@ -357,8 +386,10 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
           }
           map.push_back(static_cast<uint32_t>(pos));
           LookupLex(m, buf.data(), buf.size(), [&](size_t len, uint32_t g, uint32_t f) {
-            if (len < firstMod || (len == firstMod && !firstIsDeletion)) return;  // uses no derivation
+            // an elongation may end the arc; any other derivation must lie inside it
+            if (len < firstMod || (len == firstMod && !(firstIsDeletion && firstIsElong))) return;
             if (len < buf.size() && der[len] && der[len - 1]) return;  // ends inside a replacement
+            if (len < 2) return;  // a one-letter result is never a derived word
             Arc a;
             a.b = static_cast<uint16_t>(i);
             a.e = static_cast<uint16_t>(map[len]);
@@ -504,8 +535,9 @@ void RunViterbi(const Model& m, Workspace* ws, bool backward) {
   }
 }
 
-void SubPath(const Model& m, Workspace* ws, uint16_t s, uint16_t t, uint16_t startCls, uint16_t endCls,
+void SubPath(const Model& m, const Workspace& wsr, uint16_t s, uint16_t t, uint16_t startCls, uint16_t endCls,
              std::vector<uint32_t>* out) {
+  const Workspace* ws = &wsr;
   auto& A = ws->arcs;
   out->clear();
   std::vector<int32_t> f(A.size(), kInf), bp(A.size(), -1);

@@ -325,16 +325,6 @@ std::string Serialize(const Model& m) {
     w.U(r.mask);
     w.U(r.primary);
   }
-  w.U(m.rules.size());
-  for (auto& r : m.rules) {
-    w.U(r.kind);
-    w.U32(r.from);
-    w.U32(r.to);
-    w.I(r.cost);
-    w.U(r.prev);
-    w.U(r.next);
-    w.Bytes(r.id);
-  }
   auto writeConds = [&w](const std::vector<Model::Cond>& cs) {
     w.U(cs.size());
     for (auto& c : cs) {
@@ -345,6 +335,15 @@ std::string Serialize(const Model& m) {
       for (auto& a : c.alts) w.U32(a);
     }
   };
+  w.U(m.rules.size());
+  for (auto& r : m.rules) {
+    w.U(r.kind);
+    w.U32(r.from);
+    w.U32(r.to);
+    w.I(r.cost);
+    writeConds(r.cond);
+    w.Bytes(r.id);
+  }
   w.U(m.constraints.size());
   for (auto& c : m.constraints) {
     w.Bytes(c.id);
@@ -480,18 +479,6 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
     cr.primary = static_cast<uint8_t>(r.U());
     m->ranges.push_back(cr);
   }
-  n = r.U();
-  for (uint64_t i = 0; i < n && r.ok; ++i) {
-    Model::Rule ru;
-    ru.kind = static_cast<uint8_t>(r.U());
-    ru.from = internal::ToU32(r.Bytes());
-    ru.to = internal::ToU32(r.Bytes());
-    ru.cost = static_cast<int32_t>(r.I());
-    ru.prev = static_cast<uint32_t>(r.U());
-    ru.next = static_cast<uint32_t>(r.U());
-    ru.id = std::string(r.Bytes());
-    m->rules.push_back(ru);
-  }
   auto readConds = [&r](std::vector<Model::Cond>* cs) {
     uint64_t k = r.U();
     for (uint64_t i = 0; i < k && r.ok; ++i) {
@@ -504,6 +491,17 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
       cs->push_back(std::move(c));
     }
   };
+  n = r.U();
+  for (uint64_t i = 0; i < n && r.ok; ++i) {
+    Model::Rule ru;
+    ru.kind = static_cast<uint8_t>(r.U());
+    ru.from = internal::ToU32(r.Bytes());
+    ru.to = internal::ToU32(r.Bytes());
+    ru.cost = static_cast<int32_t>(r.I());
+    readConds(&ru.cond);
+    ru.id = std::string(r.Bytes());
+    m->rules.push_back(ru);
+  }
   n = r.U();
   for (uint64_t i = 0; i < n && r.ok; ++i) {
     Model::Constraint c;
@@ -568,6 +566,7 @@ std::string SerializeLongs(const Model& m) {
   w.b.append(kMagicLong, 4);
   w.U(kVersion);
   w.U(m.classes.size());
+  w.U(m.paradigms.size());
   w.U(m.longs.size());
   std::u32string_view prev;
   for (auto& x : m.longs) {
@@ -585,6 +584,7 @@ std::string SerializeLongs(const Model& m) {
   for (auto& x : m.longs) w.U(x.cform);
   for (auto& x : m.longs) w.U(static_cast<uint8_t>(x.pos));
   for (auto& x : m.longs) w.I(x.cost);
+  for (auto& x : m.longs) w.U(x.paradigm == UINT32_MAX ? 0 : x.paradigm + 1);
   for (auto& x : m.longs) w.Bytes(m.S(x.lemma));
   for (auto& x : m.longs) w.Bytes(m.S(x.read));
   return w.b;
@@ -597,7 +597,7 @@ bool DeserializeLongs(std::string_view bytes, Model* m, std::string* err) {
     return false;
   }
   r.p = 4;
-  if (r.U() != kVersion || r.U() != m->classes.size()) {
+  if (r.U() != kVersion || r.U() != m->classes.size() || r.U() != m->paradigms.size()) {
     *err = "overlay does not match this snapshot";
     return false;
   }
@@ -627,6 +627,10 @@ bool DeserializeLongs(std::string_view bytes, Model* m, std::string* err) {
   for (auto& x : m->longs) x.cform = static_cast<uint8_t>(r.U());
   for (auto& x : m->longs) x.pos = static_cast<Pos>(r.U());
   for (auto& x : m->longs) x.cost = static_cast<int32_t>(r.I());
+  for (auto& x : m->longs) {
+    uint64_t p = r.U();
+    x.paradigm = p == 0 ? UINT32_MAX : static_cast<uint32_t>(p - 1);
+  }
   for (auto& x : m->longs) x.lemma = Append(m, r.Bytes());
   for (auto& x : m->longs) x.read = Append(m, r.Bytes());
   if (!r.ok) {
@@ -635,7 +639,8 @@ bool DeserializeLongs(std::string_view bytes, Model* m, std::string* err) {
   }
   for (auto& x : m->longs)
     if (x.lcls >= m->classes.size() || x.rcls >= m->classes.size() || x.ud >= m->udNames.size() ||
-        x.ctype >= m->ctypeNames.size() || x.cform >= m->cformNames.size() || x.keyLen == 0) {
+        x.ctype >= m->ctypeNames.size() || x.cform >= m->cformNames.size() || x.keyLen == 0 ||
+        (x.paradigm != UINT32_MAX && x.paradigm >= m->paradigms.size())) {
       *err = "overlay entry out of range";
       return false;
     }

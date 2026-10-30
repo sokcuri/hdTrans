@@ -546,23 +546,9 @@ int CmdTrain(const Args& a) {
 }
 
 // ---- long units -------------------------------------------------------------------------------------
-// KEYS.tsv: key, pos (IR name), lemma or *, reading or *. Keys the core reads as one token are dropped;
-// the rest become long-unit arcs entered and left through the classes of their first and last token,
-// costing their own best path minus the bonus.
-int CmdNorm() {
-  std::string line, out;
-  std::vector<internal::NChar> nc;
-  std::vector<NormEdit> edits;
-  while (std::getline(std::cin, line)) {
-    if (!line.empty() && line.back() == '\r') line.pop_back();
-    internal::Normalize(line, &nc, &edits);
-    out.clear();
-    for (auto& c : nc) internal::AppendUtf8(out, c.c);
-    std::cout << out << '\n';
-  }
-  return 0;
-}
-
+// KEYS.tsv: key, kind (n pn adn adv na phrase v adj). Keys the core reads as one token are dropped. The rest
+// become long-unit arcs entered through the class of their first token and costing their own best path minus
+// the bonus. A v/adj key is a stem: it takes the paradigm of the verb or adjective whose stem ends it.
 int CmdLongUnits(const Args& a) {
   if (a.pos.size() < 3) return Die("longunits CORE.bin KEYS.tsv OUT.tsv");
   Analyzer an;
@@ -579,48 +565,138 @@ int CmdLongUnits(const Args& a) {
   Options opt;
   opt.longUnits = false;
   opt.margins = false;
-  size_t total = 0, single = 0, multi = 0, bad = 0;
+  std::map<std::string, size_t> total, single, multi, bad;
   std::set<std::u32string> seen;
+  // stem → inflecting groups (verbs, adjectives)
+  std::unordered_map<std::u32string, std::vector<uint32_t>> stems;
+  for (uint32_t g = 0; g < m.groups.size(); ++g) {
+    const auto& gr = m.groups[g];
+    std::string_view ud = m.udNames[gr.ud];
+    if (gr.ctype == 0 || !(ud.substr(0, 6) == "動詞" || ud.substr(0, 9) == "形容詞")) continue;
+    stems[std::u32string(m.C(gr.stem, gr.stemLen))].push_back(g);
+  }
+  auto analyze = [&](const std::string& s, int32_t* cost) {
+    internal::Normalize(s, &ws.nchars, &ws.edits);
+    BuildLattice(m, &ws, opt);
+    RunViterbi(m, &ws, false);
+    int32_t inner = 0;
+    for (size_t k = 0; k < ws.path.size(); ++k) {
+      const Arc& x = ws.arcs[ws.path[k]];
+      inner += x.cost;
+      if (k) inner += m.Conn(ws.arcs[ws.path[k - 1]].rcls, x.lcls);
+    }
+    *cost = inner;
+    return ws.path.size();
+  };
+  auto udOf = [](const std::string& kind) -> std::string {
+    if (kind == "n") return "名詞-普通名詞-一般";
+    if (kind == "pn") return "名詞-固有名詞-一般";
+    if (kind == "adn") return "連体詞";
+    if (kind == "adv") return "副詞";
+    if (kind == "na") return "形状詞-一般";
+    return "";
+  };
   if (!ReadTsv(a.pos[1], [&](const std::vector<std::string>& f) {
         if (f.size() < 2) return;
-        ++total;
-        internal::Normalize(f[0], &ws.nchars, &ws.edits);
-        BuildLattice(m, &ws, opt);
-        RunViterbi(m, &ws, false);
-        if (ws.path.empty() || ws.core.size() != internal::ToU32(f[0]).size()) {
-          ++bad;
-          return;
-        }
-        if (ws.path.size() == 1) {
-          ++single;
-          return;
-        }
-        std::u32string key(ws.core.begin(), ws.core.end());
-        if (!seen.insert(key).second) return;
-        ++multi;
-        const Arc& first = ws.arcs[ws.path.front()];
-        const Arc& last = ws.arcs[ws.path.back()];
-        int32_t inner = 0;
-        for (size_t k = 0; k < ws.path.size(); ++k) {
-          const Arc& x = ws.arcs[ws.path[k]];
-          inner += x.cost;
-          if (k) inner += m.Conn(ws.arcs[ws.path[k - 1]].rcls, x.lcls);
-        }
-        // the unit's own POS: the last token's ud/ctype/cform for inflecting units, else the row's
-        const auto& lc = m.classes[last.lcls];
-        std::string ud = m.udNames[lc.ud], ct = m.ctypeNames[lc.ctype], cf = m.cformNames[lc.cform];
+        const std::string& key = f[0];
+        const std::string& kind = f[1];
+        ++total[kind];
+        std::u32string k32 = internal::ToU32(key);
+        if (k32.empty() || !seen.insert(k32).second) return;
         std::ostringstream o;
-        o << f[0] << '\t' << f[1] << '\t' << first.lcls << '\t' << last.rcls << '\t' << (inner - bonus) << '\t' << ud
-          << '\t' << (ct.empty() ? "*" : ct) << '\t' << (cf.empty() ? "*" : cf) << '\t'
-          << (f.size() > 2 ? f[2] : "*") << '\t' << (f.size() > 3 ? f[3] : "*");
-        rows.push_back({key, o.str()});
+        if (kind == "v" || kind == "adj") {
+          // stems of inflecting groups that end the key; the one whose dictionary form reads best wins
+          int32_t bestG = -1, bestCost = 0;
+          size_t stemLen = 0;
+          uint16_t firstCls = 0;
+          for (size_t len = k32.size(); len >= 1; --len) {
+            auto it = stems.find(k32.substr(k32.size() - len));
+            if (it == stems.end()) continue;
+            for (uint32_t g : it->second) {
+              std::string_view ud = m.udNames[m.groups[g].ud];
+              if ((kind == "v") != (ud.substr(0, 6) == "動詞")) continue;
+              const auto& p = m.paradigms[m.groups[g].paradigm];
+              const Model::PForm* dict = nullptr;
+              for (uint32_t fi = p.first; fi < p.first + p.count; ++fi)
+                if (m.cformNames[m.classes[m.pforms[fi].cls].cform] == "終止形-一般") dict = &m.pforms[fi];
+              if (!dict) continue;
+              std::string full = key + internal::ToUtf8(m.C(dict->suf, dict->sufLen));
+              int32_t c = 0;
+              if (analyze(full, &c) == 0) continue;
+              const Arc& last = ws.arcs[ws.path.back()];
+              if (last.kind != ArcKind::lex || last.ref != g) continue;  // the form must read as this verb
+              if (bestG < 0 || c < bestCost) {
+                bestG = static_cast<int32_t>(g);
+                bestCost = c;
+                stemLen = len;
+                firstCls = ws.arcs[ws.path.front()].lcls;
+              }
+            }
+          }
+          if (bestG < 0) {
+            ++bad[kind];
+            return;
+          }
+          if (stemLen == k32.size()) {
+            ++single[kind];
+            return;
+          }
+          std::string prefix = internal::ToUtf8(k32.substr(0, k32.size() - stemLen));
+          const auto& g = m.groups[static_cast<size_t>(bestG)];
+          const auto& p = m.paradigms[g.paradigm];
+          ++multi[kind];
+          o << key << '\t' << Analyzer::PosName(m.classPos[m.pforms[p.first].cls]) << '\t' << firstCls << '\t'
+            << m.pforms[p.first].cls << '\t' << (bestCost - bonus) << '\t' << m.udNames[g.ud] << "\t*\t*\t" << prefix
+            << m.S(g.lemma) << "\t*\t" << g.paradigm;
+        } else {
+          int32_t inner = 0;
+          size_t ntok = analyze(key, &inner);
+          if (ntok == 0 || ws.core.size() != k32.size()) {
+            ++bad[kind];
+            return;
+          }
+          if (ntok == 1) {
+            ++single[kind];
+            return;
+          }
+          ++multi[kind];
+          const Arc& first = ws.arcs[ws.path.front()];
+          const Arc& last = ws.arcs[ws.path.back()];
+          const auto& lc = m.classes[last.rcls];
+          std::string ud = udOf(kind), ct = "*", cf = "*";
+          std::string pos = kind == "phrase" ? std::string(Analyzer::PosName(m.classPos[last.rcls])) : kind;
+          if (ud.empty()) {
+            ud = m.udNames[lc.ud];
+            ct = m.ctypeNames[lc.ctype].empty() ? "*" : m.ctypeNames[lc.ctype];
+            cf = m.cformNames[lc.cform].empty() ? "*" : m.cformNames[lc.cform];
+          }
+          o << key << '\t' << pos << '\t' << first.lcls << '\t' << last.rcls << '\t' << (inner - bonus) << '\t' << ud
+            << '\t' << ct << '\t' << cf << "\t*\t*\t*";
+        }
+        rows.push_back({k32, o.str()});
       }, &err))
     return Die(err);
   std::sort(rows.begin(), rows.end(), [](const Row& x, const Row& y) { return x.key < y.key; });
   std::ofstream o(a.pos[2], std::ios::binary);
-  o << "#! analyzer-long\nkey\tpos\tlcls\trcls\tcost\tud\tctype\tcform\tlemma\treading\n";
+  o << "#! analyzer-long\nkey\tpos\tlcls\trcls\tcost\tud\tctype\tcform\tlemma\treading\tparadigm\n";
   for (auto& r : rows) o << r.line << '\n';
-  std::fprintf(stderr, "keys %zu: one token %zu, long units %zu, unusable %zu\n", total, single, multi, bad);
+  for (auto& [kind, n] : total)
+    std::fprintf(stderr, "%-6s keys %7zu: one token %7zu, long units %7zu, unusable %6zu\n", kind.c_str(), n,
+                 single[kind], multi[kind], bad[kind]);
+  return 0;
+}
+
+int CmdNorm() {
+  std::string line, out;
+  std::vector<internal::NChar> nc;
+  std::vector<NormEdit> edits;
+  while (std::getline(std::cin, line)) {
+    if (!line.empty() && line.back() == '\r') line.pop_back();
+    internal::Normalize(line, &nc, &edits);
+    out.clear();
+    for (auto& c : nc) internal::AppendUtf8(out, c.c);
+    std::cout << out << '\n';
+  }
   return 0;
 }
 

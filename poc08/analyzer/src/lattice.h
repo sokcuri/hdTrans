@@ -51,7 +51,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt);
 // Forward pass over the whole line; also the backward pass when `backward`. Sets ws->best and ws->path.
 void RunViterbi(const Model& m, Workspace* ws, bool backward);
 // Best path over core [s, t) using only short-unit arcs, entered from class `startCls` and left into `endCls`.
-void SubPath(const Model& m, Workspace* ws, uint16_t s, uint16_t t, uint16_t startCls, uint16_t endCls,
+void SubPath(const Model& m, const Workspace& ws, uint16_t s, uint16_t t, uint16_t startCls, uint16_t endCls,
              std::vector<uint32_t>* out);
 
 }  // namespace hd8::ana

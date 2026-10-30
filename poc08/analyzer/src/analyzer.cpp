@@ -137,6 +137,20 @@ struct Emitter {
         t.cls = a.rcls;
         t.lemma = std::string(m.S(l.lemma));
         t.reading = std::string(m.S(l.read));
+        if (t.reading.empty()) {
+          std::vector<uint32_t> parts;
+          SubPath(m, ws, a.b, a.e, 0, 0, &parts);
+          for (uint32_t pi : parts)
+            if (ws.arcs[pi].kind != ArcKind::longUnit) t.reading += Make(ws.arcs[pi]).reading;
+        }
+        if (l.paradigm != UINT32_MAX) {
+          const auto& c = m.classes[a.rcls];
+          t.ud = c.ud;
+          t.ctype = c.ctype;
+          t.cform = c.cform;
+          t.pos = m.classPos[a.rcls];
+          return t;
+        }
         t.ud = l.ud;
         t.ctype = l.ctype;
         t.cform = l.cform;
@@ -168,7 +182,7 @@ struct Emitter {
         uint16_t sc = pi == 0 ? 0 : ws.arcs[path[pi - 1]].rcls;
         uint16_t ec = pi + 1 < path.size() ? ws.arcs[path[pi + 1]].lcls : 0;
         std::vector<uint32_t> parts;
-        SubPath(m, mws, a.b, a.e, sc, ec, &parts);
+        SubPath(m, *mws, a.b, a.e, sc, ec, &parts);
         for (size_t k = 0; k < parts.size(); ++k) {
           const Arc& p = ws.arcs[parts[k]];
           Token t = Make(p);

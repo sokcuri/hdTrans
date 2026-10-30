@@ -125,7 +125,7 @@ HD_TEST(analyze_spoken_derived) {
   const Analyzer* a = Shared();
   if (!a) HD_SKIP("no analyzer data");
   Analysis r;
-  a->Analyze("酒が飲みてえ", Options{}, &r);
+  a->Analyze("静かに飲みてえってときに", Options{}, &r);
   const Token* t = Find(r, "てえ");
   HD_REQUIRE(t != nullptr);
   HD_CHECK_EQ(t->lemma, std::string("たい"));

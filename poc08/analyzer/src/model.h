@@ -92,18 +92,7 @@ struct Model {
   };
   std::vector<CharRange> ranges;
 
-  // ja/derive.tsv: spoken and lengthened forms, tried as penalised derived arcs.
-  struct Rule {
-    uint8_t kind = 0;  // 0: replace `from` by `to`; 1: elongation (a vowel run or ー run after a mora
-                       // collapses); 2: stutter (a kana repeating the next word's first mora)
-    std::u32string from, to;
-    int32_t cost = 0;
-    uint32_t prev = 0, next = 0;  // CharClass sets the neighbours must be in; 0 = any
-    std::string id;
-  };
-  std::vector<Rule> rules;
-
-  // ja/constraints.tsv: arcs removed before scoring.
+  // Conditions on the text around a span (constraints and derive rules).
   struct Cond {
     uint8_t what = 0;  // 0: text before the arc ends with one of `alts`; 1: text after starts with one;
                        // 2: char before is in `mask`; 3: char after is in `mask`
@@ -111,6 +100,18 @@ struct Model {
     std::vector<std::u32string> alts;
     uint32_t mask = 0;
   };
+  // ja/derive.tsv: spoken and lengthened forms, tried as penalised derived arcs.
+  struct Rule {
+    uint8_t kind = 0;  // 0: replace `from` by `to`; 1: elongation (a vowel run or ー run after a mora
+                       // collapses); 2: stutter (a kana repeating the next word's first mora)
+    std::u32string from, to;
+    int32_t cost = 0;
+    std::vector<Cond> cond;  // on the replaced span, as in constraints
+    std::string id;
+  };
+  std::vector<Rule> rules;
+
+  // ja/constraints.tsv: arcs removed before scoring.
   struct Constraint {
     std::string id;
     std::string lemma, surf, cform, ud;  // empty = any; ud and cform are prefixes
@@ -133,6 +134,7 @@ struct Model {
     uint8_t ctype = 0, cform = 0;
     Pos pos = Pos::n;
     int32_t cost = 0;
+    uint32_t paradigm = UINT32_MAX;  // inflecting unit: key is the stem, forms and right classes from here
     Str lemma, read;
   };
   std::vector<Long> longs;  // sorted by key
@@ -169,7 +171,7 @@ uint32_t CharClassOf(char32_t c);
 
 // data/ TSV files → model. Long units are not part of the core.
 bool LoadTsvDir(const std::string& dir, Model* m, std::string* err);
-// Long-unit TSV (key, pos, lcls, rcls, cost, ud, ctype, cform, lemma, reading) → model longs.
+// Long-unit TSV (key, pos, lcls, rcls, cost, ud, ctype, cform, lemma, reading, paradigm) → model longs.
 bool LoadLongTsv(const std::string& path, Model* m, std::string* err);
 void Finalize(Model* m);
 void FinalizeLongs(Model* m);
