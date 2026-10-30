@@ -1,0 +1,26 @@
+# 규칙: SPC-1
+rule	input	expected	kind	layer
+ending:space-before-mark	で ここの中で 封書があったじゃないですか 。	그리고 여기 중에서 봉서가 있었잖아요 .	fix	builtin-ending
+ending:space-before-mark	ゴムだから チューブ伸びるじゃないですか 。	고무니까 튜브 자라잖아요 .	fix	builtin-ending
+ending:space-before-mark	（ 鴇田 ） マジ 感動しちゃったよ 。	(토키타 ) 진짜 감동해버렸어 .	fix	builtin-ending
+ending:space-before-mark	楽しんでるな !	즐기고 있구나 !	fix	builtin-ending
+ending:space-before-mark	本当にそんなことを信じているのか ?	정말 그런 일을 믿고 있는 건가 ?	fix	builtin-ending
+ending:space-before-mark	お前の発明も金にならないのか ?	네 발명도 돈이 되지 않는 건가 ?	fix	builtin-ending
+ending:space-before-mark	入らねえべ 。 だから 今日は減らそうと… 。	들어가지 않지 . 그러니까 오늘은 줄이려고… .	fix	builtin-ending
+ending:space-before-mark	自分一人じゃ 。	자신 한 사람이야 .	fix	builtin-ending
+ending:space-before-mark	（ ママ友 ） 買ったね 色々ね 。	(맘친구 ) 샀네 다양하네 .	fix	builtin-ending
+ending:space-before-mark	（ ケンタ ） 近いっちゃ 近いっすね 。	(켄타 ) 근 말하면 가깝네요 .	fix	builtin-ending
+ending:space-before-mark	何か そんなん言ってた気がする 。	뭔가 그런 말한 것 같다 .	fix	builtin-ending
+ending:space-before-mark	(避 難者男B）って どこまで行くんだ ?	(피난자남 B)는 어디까지 가는 거야 ?	fix	builtin-ending
+ending:space-before-mark	やるわよ !	할 거야 !	fix	builtin-ending
+ending:space-before-mark	今日は何を書いたっすか 。	오늘은 무엇을 썼나요 .	fix	builtin-ending
+ending:space-before-mark	楽しんでるな!	즐기고 있구나!	keep	builtin-ending
+ending:space-before-mark	本当にそんなことを信じているのか?	정말 그런 일을 믿고 있는 건가?	keep	builtin-ending
+ending:space-before-mark	ゴムだから チューブ伸びるじゃないですか。	고무니까 튜브 자라잖아요.	keep	builtin-ending
+ending:space-before-mark	（ 男性 ） 今のところ 大丈夫っす 。	(남성 ) 지금으로선 괜찮아요 .	fix	builtin-ending
+ending:space-before-mark	（ アキ ） 大丈夫です 。	(아키 ) 괜찮습니다 .	keep	builtin-ending
+ending:space-before-mark	（スタッフ） なるほど 。 やっぱり すごいっすね 。	(스탭) 그렇구나 . 역시 대단하네요 .	keep	builtin-ending
+ending:space-before-mark	そうっすね いやだから息子さんからしたら	그렇네요 싫으니까 아들에게서 하면	keep	builtin-ending
+ending:space-before-mark	（ 男性 ） そうっすね 。	(남성 ) 그렇네요 .	keep	builtin-ending
+ending:space-before-mark	命の恩人だっけ ?	생명의 은인이었나 ?	fix	builtin-ending
+ending:space-before-mark	命の恩人だっけ？	생명의 은인이었나?	keep	builtin-ending

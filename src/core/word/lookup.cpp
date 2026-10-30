@@ -892,6 +892,11 @@ bool Worker::SentenceFinal(std::string_view rest, int token, bool comma) const {
     tokenizer::TokenView next = Tok(token + 1);
     next.text = NextText(token + 1);
     if (comma && (next.text.starts_with(kJaComma) || next.text.starts_with(kJaFullComma))) return true;
+    // A space before the mark that ends the sentence, as captions write it (そうっすね 。).
+    if ((next.type == tokenizer::kTypeAsciiSpace || next.type == tokenizer::kTypeWideSpace) && token + 2 < TokenCount()) {
+        const int type = Tok(token + 2).type;
+        if (type == tokenizer::kTypeSentenceEnd || type == tokenizer::kTypeAsciiPunct) return true;
+    }
     switch (next.type) {
     case tokenizer::kTypeAsciiPunct:
     case tokenizer::kTypeAsciiClose:
