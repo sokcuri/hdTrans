@@ -146,6 +146,7 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
     // read is theirs (the word stage may have read it as a text other than its canonical form).
     int curTok = s.firstToken;
     bool spaced = false;
+    bool glueNext = false;  // text the generator does not know (：, ＠) keeps the source's spacing after it
     std::vector<bool> read(s.tokens ? s.tokens->size() : 0, false);
     for (const hdTrans::output::ResolvedItem& it : s.items)
         if (it.tokenIndex >= 0 && static_cast<size_t>(it.tokenIndex) < read.size()) read[static_cast<size_t>(it.tokenIndex)] = true;
@@ -166,6 +167,7 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             addNode(n);
             raw.clear();
             spaced = false;
+            glueNext = true;
         };
         while (i < text.size()) {
             const size_t at = i;
@@ -174,6 +176,7 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             if (cp == ' ' || cp == 0x3000 || cp == '\t') {
                 flushRaw();
                 spaced = true;
+                glueNext = false;
                 continue;
             }
             const auto m = table.marks.find(ch);
@@ -191,6 +194,7 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             n.glue = !spaced;
             addNode(n);
             spaced = false;
+            glueNext = false;
             i = end;
         }
         flushRaw();
@@ -293,7 +297,11 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
         } else if (const size_t m = MarkerAt(target); m != std::string_view::npos) {
             const std::string marker(target.substr(m, 4));
             const auto f = table.families.find(marker);
-            if (f != table.families.end() && Apply(f->second.second, doc, node)) {
+            // A stem that still holds a particle alternation ((이)가 아니다) is a phrase, not one word.
+            if (target.substr(0, m).find('(') != std::string_view::npos) {
+                misses.push_back({"phrase", std::string(target)});
+                lifted = false;
+            } else if (f != table.families.end() && Apply(f->second.second, doc, node)) {
                 node.lemma = doc.I(std::string(target.substr(0, m)) + f->second.first);
                 // A target that is only the marker of a verbalizing family (attach rows: 하다, 되다…)
                 // conjugates the noun before it (整理 + する: 정리하다), which 0.7.x writes without a space.
@@ -340,7 +348,27 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
                     misses.push_back({"ending-final-mid", it.endingSurface + '\t' + it.ending.text});
                     lifted = false;
                 }
-                for (size_t k = 0; lifted && k < e->second.a.size(); k++) {
+                // A row decomposed on a noun host (a copula carries the ending) read on a verb: the copula's
+                // features are the verb's own.
+                size_t skip = 0;
+                if (node.kind == KK::V && e->second.a.size() >= 2 && e->second.a[0].o.empty()) {
+                    const Json& cop = e->second.a[1];
+                    const Json* glue = cop.Get("glue");
+                    if (glue && glue->type == Json::Bool && glue->b) {
+                        KNode features;
+                        Apply(cop, doc, features);
+                        node.tense = features.tense;
+                        node.aspect = features.aspect;
+                        node.mood = features.mood;
+                        node.ctype = features.ctype;
+                        node.rel = features.rel;
+                        node.neg = features.neg;
+                        node.modal = features.modal;
+                        node.eomi = features.eomi;
+                        skip = 2;
+                    }
+                }
+                for (size_t k = skip; lifted && k < e->second.a.size(); k++) {
                     if (k == 0) {
                         Apply(e->second.a[0], doc, node);
                         continue;
@@ -368,6 +396,8 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
             d.rule = doc.I("code:lift");
         }
         const uint32_t decision = line.Decide(d);
+        if (glueNext) node.glue = true;
+        glueNext = false;
         node.id = static_cast<uint32_t>(line.kir.size() + 1);
         node.decision = decision;
         line.kir.push_back(node);
