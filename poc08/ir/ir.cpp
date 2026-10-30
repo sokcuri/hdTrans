@@ -46,6 +46,7 @@ HD08_TABLE(kPersona, HD08_PERSONA)
 HD08_TABLE(kFlag, HD08_FLAG)
 HD08_TABLE(kSt, HD08_ST)
 HD08_TABLE(kRefKind, HD08_REFKIND)
+HD08_TABLE(kTimeSub, HD08_TIMESUB)
 
 std::span<const std::string_view> Table(F field) {
     switch (field) {
@@ -86,6 +87,7 @@ std::span<const std::string_view> Table(F field) {
     case F::flag: return kFlag;
     case F::st: return kSt;
     case F::refkind: return kRefKind;
+    case F::timesub: return kTimeSub;
     }
     return {};
 }

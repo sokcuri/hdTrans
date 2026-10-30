@@ -442,6 +442,7 @@ template <class V> void Fields(V& v, Clause& x) {
     v.Int("lastBun", x.lastBun);
     v.Int("parent", x.parent, -1);
     v.Enum("link", x.link, F::link);
+    v.Enum("linkSub", x.linkSub, F::timesub);
     v.Enum("tense", x.tense, F::tense);
     v.Enum("aspect", x.aspect, F::jaspect);
     v.Enum("pol", x.pol, F::pol);

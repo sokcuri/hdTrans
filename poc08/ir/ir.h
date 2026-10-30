@@ -33,7 +33,10 @@ namespace hd08 {
 #define HD08_HOW(X) X(marked, "marked") X(topic, "topic") X(relhead, "relhead") X(omitted, "omitted")
 #define HD08_LINK(X) X(final, "final") X(te, "te") X(tara, "tara") X(to, "to") X(ba, "ba") X(nara, "nara") \
     X(node, "node") X(kara, "kara") X(noni, "noni") X(tame, "tame") X(you_ni, "you-ni") X(nagara, "nagara")  \
-    X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote")
+    X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote") X(ga, "ga") X(temo, "temo") X(shi, "shi") \
+    X(zu, "zu") X(renyo, "renyo") X(time, "time")
+// v2d: the kind of a `time` link (Clause.linkSub).
+#define HD08_TIMESUB(X) X(none, "none") X(uchi, "uchi") X(toki, "toki") X(mae, "mae") X(ato, "ato") X(mama, "mama")
 #define HD08_TENSE(X) X(nonpast, "nonpast") X(past, "past")
 #define HD08_JASPECT(X) X(none, "none") X(te_iru, "te-iru") X(te_aru, "te-aru") X(te_shimau, "te-shimau") \
     X(te_oku, "te-oku") X(te_kuru, "te-kuru") X(te_iku, "te-iku") X(te_miru, "te-miru")
@@ -102,6 +105,7 @@ HD08_ENUM(buntype, HD08_BUNTYPE)
 HD08_BITS(bunflag, HD08_BUNFLAG)
 HD08_ENUM(how, HD08_HOW)
 HD08_ENUM(link, HD08_LINK)
+HD08_ENUM(timesub, HD08_TIMESUB)
 HD08_ENUM(tense, HD08_TENSE)
 HD08_ENUM(jaspect, HD08_JASPECT)
 HD08_ENUM(pol, HD08_POL)
@@ -132,7 +136,7 @@ HD08_ENUM(refkind, HD08_REFKIND)
 enum class F : uint8_t {
     ev, pos, tokflag, edit, srclevel, kase_ja, buntype, bunflag, role, how, link, tense, jaspect, pol, negfn, voice,
     bene, modality, force, polite, jreg, kk, kcls, sem, kaspect, mood, ctype, rel, kneg, jafact, kase, punct, level,
-    persona, flag, st, refkind
+    persona, flag, st, refkind, timesub
 };
 std::string_view Name(F field, unsigned value);  // empty when out of range
 bool Parse(F field, std::string_view name, unsigned& value);
@@ -231,7 +235,9 @@ struct Referent {                 // v2, writer Z
 };
 struct Clause {
     uint16_t pred = 0, firstBun = 0, lastBun = 0; int16_t parent = -1;
-    uint8_t link = 0, tense = 0, aspect = 0, pol = 0, negFn = 0, voice = 0, bene = 0;
+    uint8_t link = 0;
+    uint8_t linkSub = 0;  // v2d: timesub value when link is time
+    uint8_t tense = 0, aspect = 0, pol = 0, negFn = 0, voice = 0, bene = 0;
     uint32_t modality = 0;
     uint8_t force = 0, polite = 0;
     uint16_t jreg = 0;
