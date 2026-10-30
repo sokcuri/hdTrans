@@ -47,20 +47,15 @@ bool LoadBase(const std::string& path, std::vector<BaseRow>& out) {
   return !out.empty();
 }
 
-// 0.7.x's class at a point: the facts of the T decisions whose span overlaps the point's token.
-// jlem is the lemma of the token before the point (the verb of a voice point).
-std::string Base075(const TransferData& t, const Doc& doc, const Line& line, const std::string& family, Span at,
+// The class base075.tsv reads from facts ("t075.<kind>=<value>").
+std::string ClassOf(const TransferData& t, const std::string& family, const std::vector<std::string_view>& facts,
                     std::string_view jlem) {
   std::vector<std::string_view> voices, kos, reals, markers;
-  for (const Decision& d : line.decisions) {
-    if (d.stage != 'T' || !Overlaps(d.src, at)) continue;
-    for (uint32_t f : d.because) {
-      const std::string_view s = doc.S(f);
-      if (s.starts_with("t075.voice=")) voices.push_back(s.substr(11));
-      else if (s.starts_with("t075.ko=")) kos.push_back(s.substr(8));
-      else if (s.starts_with("t075.real=")) reals.push_back(s.substr(10));
-      else if (s.starts_with("t075.marker=")) markers.push_back(s.substr(12));
-    }
+  for (const std::string_view s : facts) {
+    if (s.starts_with("t075.voice=")) voices.push_back(s.substr(11));
+    else if (s.starts_with("t075.ko=")) kos.push_back(s.substr(8));
+    else if (s.starts_with("t075.real=")) reals.push_back(s.substr(10));
+    else if (s.starts_with("t075.marker=")) markers.push_back(s.substr(12));
   }
   if (voices.empty() && kos.empty()) return "";
   for (const BaseRow& r : t.base) {
@@ -85,6 +80,18 @@ std::string Base075(const TransferData& t, const Doc& doc, const Line& line, con
     }
   }
   return "";
+}
+
+// 0.7.x's class at a point: the facts of the T decisions whose span overlaps the point's token.
+// jlem is the lemma of the token before the point (the verb of a voice point).
+std::string Base075(const TransferData& t, const Doc& doc, const Line& line, const std::string& family, Span at,
+                    std::string_view jlem) {
+  std::vector<std::string_view> facts;
+  for (const Decision& d : line.decisions) {
+    if (d.stage != 'T' || !Overlaps(d.src, at)) continue;
+    for (uint32_t f : d.because) facts.push_back(doc.S(f));
+  }
+  return ClassOf(t, family, facts, jlem);
 }
 
 // Writes a decider's class into the slots of the predicate nodes over the point; returns how many nodes
@@ -184,8 +191,9 @@ void StageT(const TransferData& t, const Config&, Doc& doc, Line& line) {
 
 // D: the deciders over the lifted kir (stages.h). One Decision per point: rule dec:<family>@<version>,
 // Cued when it overrode 0.7.x, Default when it kept it; runnerUp t075:<0.7.x class>.
-void StageD(const TransferData& t, const Config&, Doc& doc, Line& line) {
-  if (t.deciders.byFamily.empty()) return;
+std::vector<PointDecision> DecidePoints(const TransferData& t, const Config&, Doc& doc, Line& line) {
+  std::vector<PointDecision> out;
+  if (t.deciders.byFamily.empty()) return out;
   const xfer::LineIR view = xfer::MakeView(doc, line, t.table);
   for (const xfer::DecisionPoint& p : xfer::FindPoints(t.table, view)) {
     const auto dec = t.deciders.byFamily.find(p.family);
@@ -197,14 +205,12 @@ void StageD(const TransferData& t, const Config&, Doc& doc, Line& line) {
     for (const Decision& x : line.decisions)
       if (x.stage == 'T' && Overlaps(x.src, at) && !doc.S(x.rule).starts_with("dec:")) covered = true;
     if (!covered) continue;
-    const std::string base =
-        Base075(t, doc, line, p.family, at, p.tok > 0 ? std::string_view(view.toks[static_cast<size_t>(p.tok - 1)].lemma) : "");
+    const std::string_view jlem = p.tok > 0 ? std::string_view(view.toks[static_cast<size_t>(p.tok - 1)].lemma) : "";
+    const std::string base = Base075(t, doc, line, p.family, at, jlem);
     const xfer::DeciderResult r = xfer::Decide(dec->second, xfer::Features(t.table, view, p), base);
-    // An override no predicate node can take stays a decision only (the class has no slot yet).
-    const int taken = r.overridden ? Apply(p.family, r.chosen, line, at) : 0;
     Decision d;
     d.stage = 'T';
-    d.kind = taken > 0 ? Ev::Cued : Ev::Default;
+    d.kind = r.overridden ? Ev::Cued : Ev::Default;
     d.rule = doc.I("dec:" + dec->second.id);
     d.src = at;
     d.margin = r.margin;
@@ -212,10 +218,39 @@ void StageD(const TransferData& t, const Config&, Doc& doc, Line& line) {
     d.nAlt = static_cast<uint8_t>(std::min<size_t>(dec->second.classes.size(), 255));
     d.runnerUp = doc.I("t075:" + (base.empty() ? std::string("NONE") : base));
     d.because.push_back(doc.I("class=" + r.chosen));
-    if (taken > 0) d.because.push_back(doc.I("overrode=" + (base.empty() ? std::string("NONE") : base)));
-    else if (r.overridden) d.because.push_back(doc.I("unrealised=" + r.chosen));
+    d.because.push_back(doc.I("jlem=" + std::string(jlem)));
     for (const xfer::Contribution& c : r.because) d.contrib.emplace_back(doc.I(c.feature), c.weight);
-    line.Decide(std::move(d));
+    PointDecision pd;
+    pd.family = p.family;
+    pd.cls = r.chosen;
+    pd.base = base.empty() ? "NONE" : base;
+    pd.at = at;
+    pd.overridden = r.overridden;
+    pd.decision = line.Decide(std::move(d));
+    out.push_back(pd);
+  }
+  return out;
+}
+
+std::string ClassOfFacts(const TransferData& t, const std::string& family, const std::vector<std::string>& facts,
+                         std::string_view jlem) {
+  std::vector<std::string_view> views(facts.begin(), facts.end());
+  return ClassOf(t, family, views, jlem);
+}
+
+// D: the deciders over the lifted kir (stages.h): an override a predicate node can take is written into its
+// slots, and its decision says so (overrode=<0.7.x class>, Cued); otherwise the decision stays Default
+// (unrealised=<class> when the decider overrode but no node took it).
+void StageD(const TransferData& t, const Config& cfg, Doc& doc, Line& line) {
+  for (const PointDecision& p : DecidePoints(t, cfg, doc, line)) {
+    if (!p.overridden) continue;
+    Decision& d = line.decisions[p.decision - 1];
+    if (Apply(p.family, p.cls, line, p.at) > 0) {
+      d.because.push_back(doc.I("overrode=" + p.base));
+    } else {
+      d.kind = Ev::Default;
+      d.because.push_back(doc.I("unrealised=" + p.cls));
+    }
   }
 }
 

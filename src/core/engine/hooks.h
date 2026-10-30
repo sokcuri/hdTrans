@@ -51,6 +51,9 @@ struct Hooks {
     // ('1' noun, '4' verb, …), keeps to the segmentation. A word that does not gives way to the next
     // shorter candidate at the same place that does; when none does, the first candidate stays.
     bool (*fits)(const void* chunk, uint32_t begin, uint32_t end, char part) = nullptr;
+    // D inside 0.7.x: may change which candidate an item of the chain selects (for example the ending
+    // 0.7.x already had for the word); true when it did, and the sentence is composed again.
+    bool (*reselect)(void* context, void* doc, void* chunk, const Sentence& sentence, word::Chain& chain) = nullptr;
     // G: the output of a sentence; false keeps what the compose stage wrote.
     bool (*generate)(void* context, void* doc, void* chunk, const Sentence& sentence, std::string& out) = nullptr;
 };

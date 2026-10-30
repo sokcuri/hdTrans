@@ -10,6 +10,10 @@ TransferData* LoadTransfer(const Config&, std::string&) { return new TransferDat
 void FreeTransfer(TransferData* data) { delete data; }
 
 void StageD(const TransferData&, const Config&, Doc&, Line&) {}
+std::vector<PointDecision> DecidePoints(const TransferData&, const Config&, Doc&, Line&) { return {}; }
+std::string ClassOfFacts(const TransferData&, const std::string&, const std::vector<std::string>&, std::string_view) {
+    return "";
+}
 
 void StageT(const TransferData&, const Config&, Doc& doc, Line& line) {
     line.kir.clear();

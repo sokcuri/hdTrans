@@ -136,7 +136,7 @@ bool LoadLift(const std::string& dataRoot, LiftTable& out, std::string& err) {
 }
 
 bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, Line& line, uint32_t& from,
-          std::vector<LiftMiss>& misses) {
+          std::vector<LiftMiss>& misses, std::vector<Span>* itemSpans) {
     bool whole = true;
     size_t composedAt = 0;  // where the search for the next item's stem in the composed text goes on
 
@@ -243,6 +243,7 @@ bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& s, Doc& doc, L
                 from = src.end;
             }
         }
+        if (itemSpans) itemSpans->push_back(src);
         Decision d;
         d.stage = 'T';
         d.src = src;

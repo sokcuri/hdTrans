@@ -60,6 +60,20 @@ void StageT(const TransferData& t, const Config& cfg, Doc& doc, Line& line);
 // decider beats the 0.7.x choice by its margin, and appends a Decision (with contrib) for each
 // override. It never adds or removes nodes.
 void StageD(const TransferData& t, const Config& cfg, Doc& doc, Line& line);
+
+// The deciders' points of a lifted line (as StageD reads it), each with the decided class, 0.7.x's class
+// and whether the decider overrode it. Appends one Decision per point and changes no node.
+struct PointDecision {
+    std::string family, cls, base;
+    Span at;
+    bool overridden = false;
+    uint32_t decision = 0;
+};
+std::vector<PointDecision> DecidePoints(const TransferData& t, const Config& cfg, Doc& doc, Line& line);
+// R1 on one 0.7.x candidate: the class it realises, from facts as the bridge records them
+// ("t075.voice=…", "t075.marker=…", "t075.ko=…", "t075.real=…") and the verb lemma before the point.
+std::string ClassOfFacts(const TransferData& t, const std::string& family, const std::vector<std::string>& facts,
+                         std::string_view jlem);
 // R: one line → reg, lev. The document state of S (Doc.scenes, Doc.speakers, utts) is read-only
 // here, so R runs per line, in line order, also on a line made of one sentence (the 0.7.x bridge).
 void StageR(const DiscourseData& d, const Config& cfg, Doc& doc, Line& line);

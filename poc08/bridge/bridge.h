@@ -6,7 +6,10 @@
 //   segment    the analyzer's tokens decide where 0.7.x words may end;
 //   generate   0.7.x's resolved sentence is lifted to kir (lift.h), the deciders (D) overwrite
 //              voice and connective slots, and R, W and G write the sentence;
-//   decide     D runs (otherwise kir keeps 0.7.x's choices).
+//   decide     D runs (otherwise kir keeps 0.7.x's choices);
+//   reselect   D inside 0.7.x: where a decider overrides 0.7.x (voice, ように, ところで), the item takes
+//              the ending candidate 0.7.x already had whose class is the decided one, and the
+//              sentence is composed again (no generator).
 // A part whose component is a stub is off whatever is asked.
 #include <cstdint>
 #include <string>
@@ -19,7 +22,7 @@ namespace hd08::bridge {
 
 struct Options {
     Config cfg;
-    bool normalize = false, segment = false, generate = false, decide = false;
+    bool normalize = false, segment = false, generate = false, decide = false, reselect = false;
     bool sideIr = false;  // keep the side IR records (--why, --stages); costs time
     bool lift = false;    // lift every sentence even when no part needs it (to count the misses)
 };
@@ -36,7 +39,11 @@ struct Counts {
     uint64_t normalized = 0;     // lines the analyzer normalised differently from the input
     uint64_t segmentedChunks = 0;
     uint64_t refits = 0;         // 0.7.x words that gave way to the segmentation (counted by fits)
+    uint64_t points = 0;         // reselect: decider points read
+    uint64_t overrides = 0;      // reselect: points where the decider overrode 0.7.x
+    uint64_t reselected = 0;     // reselect: overrides an ending candidate of 0.7.x realised
 };
+
 
 struct Bridge;
 Bridge* Create(const Options& options, std::string& err);
@@ -48,6 +55,9 @@ Counts CountsOf(const Bridge* bridge);
 // The side IR collected so far, and cleared: --why records and ir.jsonl lines.
 std::string TakeWhy(Bridge* bridge);
 std::string TakeStages(Bridge* bridge);
+// The overrides reselect made or could not make, as TSV (line, family, 0.7.x class, decided class,
+// realised, the old and the new ending), one per sentence pass (the last pass per sentence counts).
+std::string TakeReselections(Bridge* bridge);
 // The lift misses by key, most frequent first, as TSV (kind, key, count), at most limit rows.
 std::string LiftMisses(const Bridge* bridge, size_t limit);
 

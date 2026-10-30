@@ -869,8 +869,9 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             // generator writes text only.
             const bool plain = std::all_of(done.pieces.begin(), done.pieces.end(),
                                            [](const output::Piece& p) { return p.span == output::SpanText; });
-            if (run != nullptr && run->hooks->generate != nullptr && plain) {
-                const std::string composed = output::String(done.pieces);
+            std::string composed;
+            const auto sentenceView = [&] {
+                composed = output::String(done.pieces);
                 hooks::Sentence hs;
                 hs.line = run->line;
                 hs.chunk = index;
@@ -887,6 +888,28 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                 hs.narrated = composeSettings.narrated;
                 hs.spoken = composeSettings.spoken;
                 hs.quoteDepth = composeSettings.quotes.depth;
+                return hs;
+            };
+            // Re-selection: the hook may change the selections of the chain (an ending candidate 0.7.x
+            // already had); the sentence is then composed again from them.
+            if (run != nullptr && run->hooks->reselect != nullptr && plain &&
+                run->hooks->reselect(run->hooks->context, run->doc, hookChunk, sentenceView(),
+                                     analysis.sentences[k].chain)) {
+                ResolvedItems(sentence.chain, s.items);
+                MarkCopySpaces(snap, lookup, s.tokens, s.items);
+                s.texts.clear();
+                BuildTexts(s.tokens, analysis, sentence.first, sentence.last, s.texts);
+                s.markers.assign(s.tokens.markers.begin() + sentence.markerBegin,
+                                 s.tokens.markers.begin() + sentence.markerEnd);
+                last = sentence.last;
+                const bool joinedAgain = JoinAfterSpace(s.tokens, sentence.first, last, s.texts, s.items, s.markers);
+                done.pieces.clear();
+                s.composer.Compose(s.items, s.texts, sentence.first, last, s.markers, composeSettings,
+                                   generated.families, done.pieces);
+                if (joinedAgain) s.texts.clear();
+            }
+            if (run != nullptr && run->hooks->generate != nullptr && plain) {
+                const hooks::Sentence hs = sentenceView();
                 std::string replaced;
                 if (run->hooks->generate(run->hooks->context, run->doc, hookChunk, hs, replaced)) {
                     done.pieces.clear();

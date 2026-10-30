@@ -42,7 +42,8 @@ struct LiftMiss {
 // Appends the nodes of the sentence's items to line.kir (ids go on from the last node) with one
 // T decision each carrying the 0.7.x provenance ("075:<layer>:<id>"). from is where the search for
 // the items' source text in line.src goes on. False when some item had no row (then misses names it).
+// itemSpans, when given, gets each item's source span in line.src, in item order.
 bool Lift(const LiftTable& table, const hdTrans::hooks::Sentence& sentence, Doc& doc, Line& line, uint32_t& from,
-          std::vector<LiftMiss>& misses);
+          std::vector<LiftMiss>& misses, std::vector<Span>* itemSpans = nullptr);
 
 }  // namespace hd08::bridge

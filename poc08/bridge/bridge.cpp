@@ -9,6 +9,7 @@
 #include "driver/driver.h"
 #include "driver/report.h"
 #include "ir/ir_json.h"
+#include "core/word/item.h"
 #include "lift.h"
 
 namespace hd08::bridge {
@@ -18,7 +19,8 @@ namespace {
 // One sentence as last written: the compose stage may run a line more than once (trial passes),
 // and only the last pass counts.
 struct SentenceRecord {
-    std::string why, stages;
+    std::string why, stages, reselections;
+    uint64_t points = 0, overrides = 0, reselected = 0;
     bool generated = false;
     uint64_t lifted = 0;
     std::vector<LiftMiss> misses;
@@ -29,6 +31,8 @@ struct DocState {
     std::vector<uint32_t> from;  // per line: where the lift's source search goes on
     std::vector<std::pair<int, int>> last;  // per line: the (chunk, sentence) lifted last; an earlier one starts a pass
     std::vector<std::map<std::pair<int, int>, SentenceRecord>> records;  // per line, by (chunk, sentence)
+    std::vector<uint32_t> fromSel;  // per line: the lift cursor of reselect
+    std::vector<std::pair<int, int>> lastSel;
 };
 
 constexpr size_t kMaxStructureBytes = 4096;
@@ -47,9 +51,9 @@ struct Bridge {
     hdTrans::hooks::Hooks hooks;
     bool analyzerReal = false, generatorReal = false, transferReal = false;
     std::atomic<uint64_t> sentences{0}, generated{0}, kept{0}, liftedItems{0}, failedItems{0}, normalized{0},
-        segmentedChunks{0}, refits{0};
+        segmentedChunks{0}, refits{0}, points{0}, overrides{0}, reselected{0};
     std::mutex mu;  // guards the fields below
-    std::string why, stages;
+    std::string why, stages, reselections;
     std::map<std::pair<std::string, std::string>, uint64_t> misses;
 };
 
@@ -68,7 +72,9 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
     ds->from.assign(lines.size(), 0);
     ds->last.assign(lines.size(), {-1, -1});
     ds->records.resize(lines.size());
-    if (b.opt.sideIr || b.opt.decide || b.opt.generate) {
+    ds->fromSel.assign(lines.size(), 0);
+    ds->lastSel.assign(lines.size(), {-1, -1});
+    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
         const Config& cfg = b.engine.cfg;
         const std::vector<ForcedSpan> none;
@@ -106,6 +112,10 @@ void EndDocument(void* context, void* doc) {
             for (const LiftMiss& m : r.misses) b.misses[{m.kind, m.key}]++;
             why += r.why;
             stages += r.stages;
+            b.points += r.points;
+            b.overrides += r.overrides;
+            b.reselected += r.reselected;
+            b.reselections += r.reselections;
         }
     }
     b.why += why;
@@ -208,6 +218,94 @@ void CopyAnalysis(const Line& whole, Span span, Line& sent) {
         if (Overlaps(m.src, span)) sent.mentions.push_back(m);
 }
 
+// The sentence as a side line: the line's source and scope, the sentence's lifted nodes, the line's
+// analysis within them.
+bool SentenceLine(Bridge& b, DocState& ds, const hdTrans::hooks::Sentence& s, uint32_t& from, Line& sent,
+                  std::vector<LiftMiss>& misses, std::vector<Span>* itemSpans) {
+    const Line& whole = ds.doc.lines[static_cast<size_t>(s.line)];
+    sent.id = whole.id;
+    sent.name = std::to_string(s.line + 1) + "." + std::to_string(s.chunk) + "." + std::to_string(s.index);
+    sent.src = whole.src;
+    sent.norm = whole.norm;
+    sent.map = whole.map;
+    sent.utts = whole.utts;
+    const bool lifted = Lift(b.lift, s, ds.doc, sent, from, misses, itemSpans);
+    Span span{UINT32_MAX, 0};
+    for (const KNode& n : sent.kir) {
+        if (n.src.end <= n.src.begin) continue;
+        span.begin = std::min(span.begin, n.src.begin);
+        span.end = std::max(span.end, n.src.end);
+    }
+    if (span.begin < span.end) CopyAnalysis(whole, span, sent);
+    return lifted;
+}
+
+// 0.7.x's own facts for one ending candidate of an item, as the lift records them for the selected one.
+std::vector<std::string> CandidateFacts(const hdTrans::word::Item& it, std::string_view ending) {
+    const std::string_view target = it.EntryText(it.selected);
+    std::vector<std::string> facts{"t075.ko=" + std::string(target) + "|" + std::string(ending)};
+    size_t m = target.find_first_of("&%$");
+    std::string_view stem = target.substr(0, m == std::string_view::npos ? target.size() : m);
+    while (!stem.empty() && stem.back() == ' ') stem.remove_suffix(1);
+    if (m != std::string_view::npos && m + 4 <= target.size()) facts.push_back("t075.marker=" + std::string(target.substr(m, 4)));
+    std::string_view tail = ending;
+    while (!tail.empty() && (tail.front() >= '0' && tail.front() <= '9')) tail.remove_prefix(1);
+    if (!stem.empty()) facts.push_back("t075.real=" + std::string(stem) + std::string(tail));
+    return facts;
+}
+
+bool Reselect(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s, hdTrans::word::Chain& chain) {
+    auto& b = *static_cast<Bridge*>(context);
+    auto& ds = *static_cast<DocState*>(doc);
+    if (s.line < 0 || static_cast<size_t>(s.line) >= ds.doc.lines.size()) return false;
+    const auto lineIndex = static_cast<size_t>(s.line);
+    const std::pair<int, int> here{s.chunk, s.index};
+    if (here <= ds.lastSel[lineIndex]) ds.fromSel[lineIndex] = 0;
+    ds.lastSel[lineIndex] = here;
+    Line sent;
+    std::vector<LiftMiss> misses;
+    std::vector<Span> spans;
+    SentenceLine(b, ds, s, ds.fromSel[lineIndex], sent, misses, &spans);
+    std::vector<hdTrans::word::Item*> items;
+    for (hdTrans::word::Item* it = chain.head; it != nullptr; it = it->next) items.push_back(it);
+    SentenceRecord rec;
+    bool changed = false;
+    for (const PointDecision& p : DecidePoints(*b.engine.transfer, b.engine.cfg, ds.doc, sent)) {
+        rec.points++;
+        if (!p.overridden || p.family == "tame") continue;
+        rec.overrides++;
+        std::string jlem;
+        for (uint32_t f : sent.decisions[p.decision - 1].because)
+            if (ds.doc.S(f).starts_with("jlem=")) jlem = std::string(ds.doc.S(f).substr(5));
+        std::string from, to;
+        bool done = false;
+        for (size_t k = 0; k < items.size() && k < spans.size() && !done; k++) {
+            hdTrans::word::Item& it = *items[k];
+            if (!Overlaps(spans[k], p.at) || it.DirectCount() == 0) continue;
+            from = std::string(it.DirectText(it.DirectIndex()));
+            for (int i = 0; i < it.DirectCount(); i++) {
+                if (i == it.DirectIndex() || !it.DirectEnabled(i)) continue;
+                const std::string_view text = it.DirectText(i);
+                if (text.empty() || ClassOfFacts(*b.engine.transfer, p.family, CandidateFacts(it, text), jlem) != p.cls)
+                    continue;
+                it.SetDirectIndex(i, {hdTrans::word::Provenance::Scorer, -1});
+                to = std::string(text);
+                done = changed = true;
+                break;
+            }
+        }
+        rec.reselected += done;
+        rec.reselections += std::to_string(s.line + 1) + "\t" + p.family + "\t" + p.base + "\t" + p.cls + "\t" +
+                            (done ? "realised" : "unrealised") + "\t" + from + "\t" + to + "\n";
+    }
+    SentenceRecord& r = ds.records[lineIndex][{s.chunk, s.index}];
+    r.points = rec.points;
+    r.overrides = rec.overrides;
+    r.reselected = rec.reselected;
+    r.reselections = std::move(rec.reselections);
+    return changed;
+}
+
 bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s, std::string& out) {
     auto& b = *static_cast<Bridge*>(context);
     auto& ds = *static_cast<DocState*>(doc);
@@ -217,25 +315,10 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     const std::pair<int, int> here{s.chunk, s.index};
     if (here <= ds.last[lineIndex]) ds.from[lineIndex] = 0;
     ds.last[lineIndex] = here;
-    const Line& whole = ds.doc.lines[static_cast<size_t>(s.line)];
     // The sentence as a line of its own: the line's analysis and scope, the sentence's nodes.
     Line sent;
-    sent.id = whole.id;
-    sent.name = std::to_string(s.line + 1) + "." + std::to_string(s.chunk) + "." + std::to_string(s.index);
-    sent.src = whole.src;
-    sent.norm = whole.norm;
-    sent.map = whole.map;
-    sent.utts = whole.utts;
     std::vector<LiftMiss> misses;
-    const bool lifted = Lift(b.lift, s, ds.doc, sent, ds.from[lineIndex], misses);
-    // The line's analysis within the sentence's words, so that D, R and the canary see this sentence only.
-    Span span{UINT32_MAX, 0};
-    for (const KNode& n : sent.kir) {
-        if (n.src.end <= n.src.begin) continue;
-        span.begin = std::min(span.begin, n.src.begin);
-        span.end = std::max(span.end, n.src.end);
-    }
-    if (span.begin < span.end) CopyAnalysis(whole, span, sent);
+    const bool lifted = SentenceLine(b, ds, s, ds.from[lineIndex], sent, misses, nullptr);
     const Config& cfg = b.engine.cfg;
     if (b.opt.decide) StageD(*b.engine.transfer, cfg, ds.doc, sent);
     StageR(*b.engine.discourse, cfg, ds.doc, sent);
@@ -250,7 +333,8 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
               (trail == std::string_view::npos ? std::string() : std::string(s.composed.substr(trail + 1)));
     }
     SentenceRecord& r = ds.records[lineIndex][{s.chunk, s.index}];
-    r = SentenceRecord{};
+    r.why.clear();
+    r.stages.clear();
     r.generated = use;
     r.lifted = sent.kir.size() - misses.size();
     r.misses = std::move(misses);
@@ -265,7 +349,7 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
 }  // namespace
 
 bool ParseParts(std::string_view list, Options& out, std::string& err) {
-    out.normalize = out.segment = out.generate = out.decide = false;
+    out.normalize = out.segment = out.generate = out.decide = out.reselect = false;
     if (list == "none") return true;
     if (list == "all") {
         out.normalize = out.segment = out.generate = out.decide = true;
@@ -280,8 +364,9 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
         else if (part == "segment") out.segment = true;
         else if (part == "generate") out.generate = true;
         else if (part == "decide") out.decide = true;
+        else if (part == "reselect") out.reselect = true;
         else {
-            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, all, none)";
+            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, all, none)";
             return false;
         }
         at = comma + 1;
@@ -303,6 +388,7 @@ Bridge* Create(const Options& options, std::string& err) {
     b->opt.segment = options.segment && b->analyzerReal;
     b->opt.generate = options.generate && b->generatorReal;
     b->opt.decide = options.decide && b->transferReal;
+    b->opt.reselect = options.reselect && b->transferReal;
     b->hooks.context = b.get();
     b->hooks.beginDocument = BeginDocument;
     b->hooks.endDocument = EndDocument;
@@ -314,6 +400,7 @@ Bridge* Create(const Options& options, std::string& err) {
     }
     // The lift and the side IR run whenever a part, --why or --stages needs them.
     if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift) b->hooks.generate = Generate;
+    if (b->opt.reselect) b->hooks.reselect = Reselect;
     return b.release();
 }
 
@@ -334,6 +421,7 @@ std::string ActiveParts(const Bridge* b) {
     add(b->opt.segment, "segment");
     add(b->opt.generate, "generate");
     add(b->opt.decide, "decide");
+    add(b->opt.reselect, "reselect");
     return s;
 }
 
@@ -347,12 +435,20 @@ Counts CountsOf(const Bridge* b) {
     c.normalized = b->normalized;
     c.segmentedChunks = b->segmentedChunks;
     c.refits = b->refits;
+    c.points = b->points;
+    c.overrides = b->overrides;
+    c.reselected = b->reselected;
     return c;
 }
 
 std::string TakeWhy(Bridge* b) {
     std::lock_guard<std::mutex> lock(b->mu);
     return std::exchange(b->why, {});
+}
+
+std::string TakeReselections(Bridge* b) {
+    std::lock_guard<std::mutex> lock(b->mu);
+    return std::exchange(b->reselections, {});
 }
 
 std::string TakeStages(Bridge* b) {
