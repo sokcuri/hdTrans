@@ -32,7 +32,7 @@
 //   - katakana that only draw out the vowel of the hiragana before them are no sound of
 //     their own (ひぃやアアア);
 //   - an intj row must not be followed by kana, except a hiragana one by katakana
-//     (はわわユウキ), and an exclaim row (よかった 다행이다) in hiragana as written, without
+//     (はわわユウキ) and a katakana one by a hiragana verb (ハイハイわかりました), and an exclaim row (よかった 다행이다) in hiragana as written, without
 //     elongation, not by a question mark, after an ellipsis or not (よかった？ is the
 //     question 좋았어?, but よかったぁ? the exclamation 다행이다~?), nor, a predicate row, after a noun in
 //     kanji or katakana with は or が and a comma (あの頃は、よかった 좋았다); an ono row may be followed by anything, and と or the て of って

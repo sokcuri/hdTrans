@@ -510,6 +510,7 @@ private:
     bool Stopped(const SoundMatch& m) const;
     bool VerbStemAt(size_t p, size_t n) const;
     bool MimeticAfterWord(const SoundMatch& m) const;
+    bool PredicateStartsAt(size_t start, size_t p) const;
     bool WordStartsSound(size_t p, const SoundMatch& last, size_t end) const;
     bool StemAt(size_t p, size_t n) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
@@ -1180,6 +1181,49 @@ bool SoundText::VerbStemAt(size_t p, size_t n) const {
     return false;
 }
 
+// Whether the hiragana at p, after katakana sounds from start, start a verb: every longest
+// dictionary key there, of two or more characters, is a verb or adjective stem and not a light
+// verb that a katakana noun takes; and the katakana are no adjective stem and no dictionary word
+// runs on from start past p (ハイハイわかりました: わかる; but ハイハイして, ハイハイできた,
+// アカンやつ, ヤバいな, グッてやる, キャえらさん).
+bool SoundText::PredicateStartsAt(size_t start, size_t p) const {
+    const std::string_view rest = Bytes(p, rs_.size());
+    if (f_[p - 1] == U'ッ' || dict::StartsWithMember(HDTRANS_CLASS("follower.verbal-noun"), rest) > 0) return false;
+    // A particle or suffix of two or more kana that a katakana noun takes (だけ, たち, から); one of one
+    // kana is shorter than the verb (ヤダやめて: やめる, not や).
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("follower.kata-noun"))) {
+        if (text::RuneCount(m) > 1 && rest.starts_with(m)) return false;
+    }
+    size_t end = p;
+    while (end < rs_.size() && IsHiraganaRune(rs_[end])) end++;
+    size_t longest = 0;
+    bool verb = false;
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(p, end), dict::LookupMode::General, ctx_.lookup).list) {
+        if ((c.user != nullptr && (c.user->kana || c.user->nameLayer)) || c.codes == nullptr) continue;
+        const size_t n = text::RuneCount(c.source);
+        const bool stem = (c.codes->part.Tag() == 'M' && c.codes->part.At(1) == '4') ||
+                          (c.codes->part.Tag() == 'H' && c.codes->part.At(1) == '7');
+        if (n > longest) {
+            longest = n;
+            verb = stem;
+        } else if (n == longest) {
+            verb = verb && stem;
+        }
+    }
+    // Nor a stem that an honorific follows: the kana spell a name (キャえらさん).
+    if (!verb || longest < 2 ||
+        dict::StartsWithMember(HDTRANS_CLASS("honorific.candidate"), Bytes(p + longest, rs_.size())) > 0) {
+        return false;
+    }
+    for (const dict::Candidate& c : snap_.GetWordInfo(Bytes(start, end), dict::LookupMode::General, ctx_.lookup).list) {
+        const size_t n = text::RuneCount(c.source);
+        if (n > p - start || (n == p - start && c.codes != nullptr && c.codes->part.Tag() == 'H' && c.codes->part.At(1) == '7')) {
+            return false;
+        }
+    }
+    return true;
+}
+
 // Whether the ono sound m is one or two syllables and ッ followed by と (時折ぶるっと, 一瞬ぞっと):
 // kana of that shape never continue the word before them, so the sound stands after a
 // kanji word too. A long vowel in it may be a volitional ending (治そーっと, 休もうっと).
@@ -1261,7 +1305,8 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         if (!last.intj) end += Adverbial(end);
         const bool cry = CryBeforeWord(last);
         if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") ||
-            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry) {
+            (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry ||
+            (katakana && IsKatakanaRune(rs[end - 1]) && IsHiraganaRune(rs[end]) && PredicateStartsAt(p, end))) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
             if (cry) last.spaceAfter = true;
             last.end = end;

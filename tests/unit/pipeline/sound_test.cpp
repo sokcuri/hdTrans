@@ -1023,6 +1023,27 @@ HD_TEST(pipeline_sound_name_and_noun) {
     for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+// A katakana interjection right before a hiragana verb is the interjection (ハイハイわかりました);
+// before する, a noun's particle or an adjective ending it stays with the dictionary word.
+HD_TEST(pipeline_sound_interjection_before_verb) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "ハイハイ\t기어 다니기\tN110\t1\n"
+                                     "わか\t&K6@\tM418\t2\n"
+                                     "し\t&AV@\tM429\t3\n"
+                                     "だけ\t만\tP211\t4\n"}});
+    HD_REQUIRE(loaded.errors.empty());
+    HD_REQUIRE(loaded.snapshot != nullptr);
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"ハイハイわかりました", "네네 わかりました"},
+        {"ハイハイして", "ハイハイして"},
+        {"ハイハイだけ", "ハイハイだけ"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(Sound(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // An exclaim row (よかった 다행이다) as written is no sound before a question mark, after
 // an ellipsis or not: the question asks for the words themselves. Drawn out it stays.
 HD_TEST(pipeline_sound_exclaim_before_question) {
