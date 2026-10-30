@@ -1,6 +1,6 @@
 #pragma once
 // The retrofit: 0.7.x's output read as pre-IR lines (one JSON object per line: line, ja, out075, speaker,
-// scene, work, dialogue, imp, lead, items, keigo), rebuilt as kir nodes by analysis by synthesis, then R (speech
+// scene, work, dialogue, imp, lead, items, keigo, command), rebuilt as kir nodes by analysis by synthesis, then R (speech
 // level), W (rewrite rules) and G. Lines whose words could not all be read keep 0.7.x's output.
 #include <memory>
 #include <string>

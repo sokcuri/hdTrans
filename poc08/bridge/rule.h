@@ -61,7 +61,8 @@ bool CaptionDocument(const RuleData& data, const std::vector<std::string>& ja);
 
 // The retrofit's input line (JSON) for line i, from the capture: exposed for tests and the reader check.
 std::string PreLine(const RuleData& data, size_t i, const std::string& ja, const std::string& out075,
-                    const RuleCapture& capture, bool dialogue, bool keigo = false);
+                    const RuleCapture& capture, bool dialogue, bool keigo = false,
+                    bool command = false);
 
 // Rewrites out (the final lines of the call, one per ja line) in place.
 // pre, when given, gets the retrofit's input lines (for the reader check).

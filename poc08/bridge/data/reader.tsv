@@ -214,3 +214,6 @@ keigo	有る	-	せる られる	-
 keigo-prefix	御	成る
 keigo-prefix	御	為る
 keigo-prefix	御	致す
+# command-form: the analyzer's conjugation form of a command (見ろ, 追え, 黙ってろ). A line of speech with a
+# word in it keeps 0.7.x's 해라체 commands (봐라, 쫓아라): orders from kings and officers read naturally in 해라.
+command-form	命令形

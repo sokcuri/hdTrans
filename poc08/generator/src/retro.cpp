@@ -921,7 +921,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                     }
                 }
                 const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;
-                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !hapsyo &&
+                // the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
+                const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
+                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
                 for (auto& g : reg)

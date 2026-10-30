@@ -77,6 +77,7 @@ struct RuleData {
     };
     std::vector<Keigo> keigo;
     std::vector<std::pair<std::string, std::string>> keigoPrefix;  // 御 + verb (+ に) + 成る / 為る / 致す
+    std::vector<std::string> commandForms;  // conjugation forms of a command (命令形: 見ろ, 追え, 捕らえろ)
     std::shared_ptr<const hd8gen::RetroSystem> retro;
 };
 
@@ -566,6 +567,7 @@ std::shared_ptr<const RuleData> LoadRule(const std::string& dataRoot, std::strin
             auto col = [&](size_t k) { return k < c.size() && c[k] != U"-" ? U8(c[k]) : std::string(); };
             d->keigo.push_back({U8(c[1]), col(2), col(3), col(4)});
         } else if (kind == "keigo-prefix" && c.size() >= 3) d->keigoPrefix.push_back({U8(c[1]), U8(c[2])});
+        else if (kind == "command-form") d->commandForms.push_back(U8(c[1]));
         else {
             err = path + ": unknown row kind " + kind;
             return nullptr;
@@ -656,7 +658,7 @@ bool CaptionDocument(const RuleData& d, const std::vector<std::string>& ja) {
 }
 
 std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const std::string& out075, const RuleCapture& cap,
-                    bool dialogue, bool keigo) {
+                    bool dialogue, bool keigo, bool command) {
     std::vector<Row> rows;
     if (i < cap.items.size()) {
         for (const auto& x : cap.items[i]) {
@@ -690,6 +692,7 @@ std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const st
     Field(o, "work", "doc");
     o += std::string(",\"dialogue\":") + (dialogue ? "true" : "false");
     if (keigo) o += ",\"keigo\":true";
+    if (command) o += ",\"command\":true";
     o += '}';
     return o;
 }
@@ -706,11 +709,18 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
     for (size_t i = 0; i < ja.size(); i++) {
         dialogue[i] = DialogueLine(d, ja[i]);
         counts.dialogue += dialogue[i];
-        const bool keigo = dialogue[i] && bridge != nullptr && KeigoSource(d, AnalyzeSource(bridge, ja[i]));
+        std::vector<SourceToken> toks;
+        if (dialogue[i] && bridge != nullptr) toks = AnalyzeSource(bridge, ja[i]);
+        const bool keigo = KeigoSource(d, toks);
         counts.keigo += keigo;
+        // a word in the imperative form (見ろ, 追え, 黙ってろ): 0.7.x's 해라체 commands stay (봐라, 쫓아라)
+        bool command = false;
+        for (const SourceToken& t : toks)
+            for (const std::string& f : d.commandForms)
+                if (t.cform.rfind(f, 0) == 0) command = true;
         std::string o = i < out.size() ? out[i] : std::string();
         if (!o.empty() && o.back() == '\r') o.pop_back();
-        pre.push_back(PreLine(d, i, ja[i], o, cap, dialogue[i], keigo));
+        pre.push_back(PreLine(d, i, ja[i], o, cap, dialogue[i], keigo, command));
     }
     if (preOut)
         for (const std::string& l : pre) *preOut += l + "\n";
