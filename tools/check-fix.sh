@@ -19,6 +19,7 @@
 # (tools/judge-packet.py: judge packet/reps.pairs.tsv, then `expand`).
 # Exit: 0 done, 1 gate failed or a canary line changed, 2 invalid arguments or failed step.
 set -eu
+trap 'exit 2' HUP INT TERM
 here=$(cd "$(dirname "$0")/.." && pwd)
 cd "$here"
 case $(uname -s) in Darwin) preset=${HDTRANS_PRESET:-mac} ;; *) preset=${HDTRANS_PRESET:-linux} ;; esac
@@ -37,6 +38,9 @@ done
 shift $((OPTIND - 1))
 [ $# -eq 1 ] || usage
 name=$(printf '%s' "$1" | tr / -)
+case $name in
+    '' | . | .. | *[!A-Za-z0-9._-]*) echo "invalid NAME $1: letters, digits, '.', '_', '-' and '/' only" >&2; exit 2 ;;
+esac
 work=${HDTRANS_WORK:-$here/build/work}
 out=$work/$name
 if [ -z "$base_ref" ]; then
@@ -103,9 +107,12 @@ echo "head: $cli, $(grep -cv '^\*$' "$out/needles.txt" || :) needles$([ -z "$eng
 # The gate runs while the sets translate.
 status=0 gate_pid=
 if [ -n "$gate" ]; then
+    # In its own process group, so that stopping it stops its build and ctest too.
+    set -m
     tools/gate.sh "$name-gate" > "$out/gate.log" 2>&1 &
     gate_pid=$!
-    trap 'kill "$gate_pid" 2> /dev/null || :' EXIT
+    set +m
+    trap 'kill -TERM -- "-$gate_pid" 2> /dev/null || kill "$gate_pid" 2> /dev/null || :' EXIT
 fi
 echo "base sets:"
 # shellcheck disable=SC2086

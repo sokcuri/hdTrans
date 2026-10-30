@@ -111,9 +111,9 @@ class Runner:
         self.count, self.lock = 0, threading.Lock()
         home = tmp / "home"
         home.mkdir()
-        self.env = dict(os.environ, HOME=str(home), HDTRANS_CACHE_DIR=str(tmp / "cache"))
-        for var in ("HDTRANS_SNAPSHOT", "HDTRANS_VERIFY_DICTS", "HDTRANS_DRIVER_DUMP"):
-            self.env.pop(var, None)
+        # No HDTRANS_* setting of the caller (snapshot, pass experiments, dumps) reaches the CLI.
+        self.env = {k: v for k, v in os.environ.items() if not k.startswith("HDTRANS_")}
+        self.env.update(HOME=str(home), HDTRANS_CACHE_DIR=str(tmp / "cache"))
         (tmp / "empty.txt").write_bytes(b"")
         self.call([], tmp / "empty.txt")  # compiles the dictionaries into the shared cache
 
@@ -436,4 +436,7 @@ def main(argv):
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv[1:]))
+    try:
+        sys.exit(main(sys.argv[1:]))
+    except Exception as e:  # a failed CLI or file is exit 2, apart from the 1 of a changed canary line
+        fail(f"sets.py: {e}")
