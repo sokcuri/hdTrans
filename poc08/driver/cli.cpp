@@ -294,6 +294,7 @@ int Run(int argc, char** argv) {
     std::vector<std::string> eachLines;  // --each text input: one Doc per line, built when translated
     const bool fromToks = !toksPath.empty();
     if (fromToks) {
+        finalNewline = !each;  // a toks file has no final-newline bit; end like --each does
         std::string jsonl;
         if (!ReadFile(toksPath, jsonl)) {
             std::fprintf(stderr, "hdtrans08: cannot read %s\n", toksPath.c_str());
