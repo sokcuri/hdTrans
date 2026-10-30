@@ -224,6 +224,23 @@ void HeadFeatures(const std::vector<HeadFacts>& facts, const std::vector<int>& h
     out.push_back("samecase=" + std::string(sameCase ? "1" : "0") + "|dl=" + d.last);
     out.push_back("kids=" + std::string(Count(kids)) + "|dt=" + dt + "|cp=" + cpred);
     out.push_back("dtop=" + std::string(d.kaseTopic ? "1" : "0") + "|dl=" + d.last + "|last=" + last);
+    // Rank of the candidate among the predicates (or nouns) to the right, and richer conjunctions.
+    int predRank = 0, nounRank = 0;
+    for (int k = dep + 1; k <= cand; ++k) {
+        predRank += facts[k].hasPred;
+        nounRank += facts[k].hasNoun;
+    }
+    std::string pr = c.hasPred ? std::to_string(std::min(predRank, 4)) : "-";
+    std::string nr = c.hasNoun ? std::to_string(std::min(nounRank, 4)) : "-";
+    out.push_back("dl=" + d.last + "|prank=" + pr + "|last=" + last);
+    out.push_back("dt=" + dt + "|nrank=" + nr + "|prank=" + pr);
+    out.push_back("dl=" + d.last + "|cl=" + c.last + "|dist=" + dist);
+    out.push_back("dl=" + d.last + "|cwc=" + c.cwc + "|near=" + near);
+    out.push_back("dl=" + d.last + "|ct=" + ct + "|commas=" + Count(commas));
+    out.push_back("df=" + d.form + "|cl=" + c.last + "|prank=" + pr);
+    out.push_back("dwc=" + d.cwc + "|dl=" + d.last + "|cp=" + cpred + "|prank=" + pr);
+    out.push_back("dl=" + d.last + "|kids=" + Count(kids) + "|cp=" + cpred);
+    out.push_back("dl=" + d.last + "|quote=" + quote + "|cp=" + cpred);
     if (!c.clemma.empty()) {
         out.push_back("dl=" + d.last + "|clem=" + c.clemma);
         out.push_back("dt=" + dt + "|clem=" + c.clemma + "|near=" + near);
