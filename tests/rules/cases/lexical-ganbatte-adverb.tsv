@@ -1,4 +1,4 @@
-# 규칙: LEX-87
+# 규칙: LEX-89
 rule	input	expected	kind	layer
 cx:ganbatte-adverb:10	「頑張って乗ったのにこの扱いですか」	「열심히 탔는데 이 취급입니까」	fix	rewrites
 cx:ganbatte-adverb:10	「頑張って乗り越えて、解放されて」	「열심히 극복해, 해방돼」	fix	rewrites
