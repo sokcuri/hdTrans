@@ -12205,7 +12205,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 儂	나	N110			GN				xxx llm			w:12199
 儂	나	N120			GN						わし	w:12200
 儂等	우리	N120	VHn		GN				llm		わしら	w:12201
-儚げ	덧없어 보%D4@	G8U0			GN				llm			w:12202
+儚げ	덧없는 듯%A1@	G8U0			GN				llm			w:12202
 償金	배상금	N110			GN				xxx llm	1		w:12203
 優しそう	상냥해 보%D4@	G8U0			GN				xxx llm	1		w:12204
 優に	족히	E300			GN				xxx llm	1		w:12205
