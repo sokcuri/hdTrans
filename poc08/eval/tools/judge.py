@@ -474,7 +474,7 @@ def main(argv=None):
     def base_item(li, out_texts):
         L = lines[li]
         it = {"ja": L["ja"], "ctx": L["ctx"], "speaker": L["speaker"]}
-        if has_ref and L["ref"] not in out_texts:
+        if L["ref"] and L["ref"] not in out_texts:
             it["anchor"] = L["ref"]
         return it
 
