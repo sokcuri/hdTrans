@@ -62,6 +62,31 @@ HD_TEST(gui_translation_defaults) {
     HD_CHECK(!cancelled.load());
 }
 
+// The speech level of a dialogue line follows options.speechLevels (speech_levels of the settings).
+HD_TEST(gui_translation_speech_levels) {
+    FilterFolder fixture("");
+    HD_REQUIRE(!fixture.path.empty());
+    {
+        std::ofstream dictionary(fixture.path / "base.tsv", std::ios::binary);
+        dictionary << "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+                      "綺麗\t예%C9@\tG8U0\t\t\tGN\t0\t1\n"
+                      "花\t꽃\tN110\t\t\tGN\t0\t2\n"
+                      "が\t이\tP200\t\t\tGN\t0\t3\n";
+        HD_REQUIRE(dictionary.good());
+    }
+    hdTrans::Engine engine(false, hdTrans::CacheWrite::Off);
+    HD_REQUIRE(engine.Open({fixture.path.string()}));
+    const std::atomic<bool> cancelled{false};
+    for (const bool wholeDocument : {false, true}) {
+        TranslationOptions options;
+        options.wholeDocument = wholeDocument;
+        HD_CHECK(options.speechLevels == hdTrans::SpeechLevels::Auto);
+        HD_CHECK_EQ(TranslateText(engine, "「花が綺麗」", options, cancelled), "「꽃이 예뻐」");
+        options.speechLevels = hdTrans::SpeechLevels::Keep;
+        HD_CHECK_EQ(TranslateText(engine, "「花が綺麗」", options, cancelled), "「꽃이 예쁘다」");
+    }
+}
+
 HD_TEST(gui_translation_session_flags) {
     FilterFolder fixture("");
     HD_REQUIRE(!fixture.path.empty());

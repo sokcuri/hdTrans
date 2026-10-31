@@ -561,6 +561,7 @@ void CommitSettings(App& app, const hdTrans::internal::Config& settings) {
     if (app.settings.misread != settings.misread) app.settings.misread = settings.misread;
     if (app.settings.reference != settings.reference) app.settings.reference = settings.reference;
     if (app.settings.speech != settings.speech) app.settings.speech = settings.speech;
+    if (app.settings.speechLevels != settings.speechLevels) app.settings.speechLevels = settings.speechLevels;
     if (app.settings.wrapped != settings.wrapped) app.settings.wrapped = settings.wrapped;
     if (app.settings.predicateVariants != settings.predicateVariants) {
         app.settings.predicateVariants = settings.predicateVariants;
@@ -716,6 +717,7 @@ gui::TranslationOptions ConfiguredOptions(const App& app, gui::TranslationOption
     options.cg = app.settings.cg;
     options.misread = app.settings.misread;
     options.speech = app.settings.speech;
+    options.speechLevels = app.settings.speechLevels;
     options.wrapped = app.settings.wrapped;
     options.predicateVariants = app.settings.predicateVariants;
     return options;
@@ -2683,7 +2685,7 @@ bool SelfTestReload(App& app, const fs::path& folder) {
     const auto uiOptions = Options(app.text, false);
     // Reference mode keeps no space after 学生.
     const std::string nextConfig = "dicts: ../replacement-dicts\nuserdict: [custom-live.txt]\nehnd: ../replacement-ehnd\n"
-        "strict_dict: false\ncg: false\nmisread: true\nreference: true\nspeech: soft\nwrapped: true\n";
+        "strict_dict: false\ncg: false\nmisread: true\nreference: true\nspeech: soft\nspeech_levels: keep\nwrapped: true\n";
     if (!Check(WriteFixture(config, nextConfig), "change dictionary, filter and session settings together")) return false;
     ok = Check(!ReadyEngine(app) && app.engine->Dictionaries() == priorStack && app.engine->Filters() == priorFilters &&
                app.engineDictDirs == priorDicts && app.engineUserPaths == priorUsers && app.engineEhndDir == priorEhnd &&
@@ -2693,7 +2695,8 @@ bool SelfTestReload(App& app, const fs::path& folder) {
                "failed config candidate keeps settings and whole source context and restores the cache") && ok;
     if (!Check(WriteFixture(nextDicts / L"base.tsv", base), "repair config replacement dictionary")) return false;
     ok = Check(ReadyEngine(app) && app.error.empty() && !app.settings.cg && app.settings.misread && app.settings.reference &&
-               app.settings.speech == hdTrans::Speech::Soft && app.settings.wrapped && !app.settings.cache &&
+               app.settings.speech == hdTrans::Speech::Soft && app.settings.speechLevels == hdTrans::SpeechLevels::Keep &&
+               app.settings.wrapped && !app.settings.cache &&
                app.engineDictDirs == std::vector<std::string>{Utf8(nextDicts.native())} &&
                app.engineUserPaths == std::vector<std::string>{Utf8(nextUser.native())} && app.engineEhndDir == Utf8(nextEhnd.native()) &&
                translate() == "USER_LIVEBASE_CAT LIVE_DOG", "successful config candidate commits all requested settings and sources") && ok;
