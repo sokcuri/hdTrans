@@ -56,9 +56,10 @@ void ApplyNegatives(Flusher& f);
 
 // Packs (packs.cpp, docs/packs.md). PackVoice sets v from the voice row that decides verb item
 // it (keyed by its surface, else by stem, the verb a dictionary word in (ら)れ is made from; its
-// cue reads v as the voice the chain decided) and returns the row, null for none; ApplyPacks
-// applies the sense, name, polarity and tense rows.
-const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voice& v);
+// cue reads v as the voice the chain decided) and returns the row, null for none; a row that reads
+// the passive does not apply when atLast (an adverb of adverb.at-last in the clause, where the (ら)れ may
+// be the potential). ApplyPacks applies the sense, name, polarity and tense rows.
+const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voice& v, bool atLast);
 void ApplyPacks(Flusher& f);
 
 // Helpers of the text-path passes. TakeTarget (sense.cpp) selects the candidate of class

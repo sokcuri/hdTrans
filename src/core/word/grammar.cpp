@@ -934,6 +934,15 @@ bool AbilityCondition(const Item* it) {
     return false;
 }
 
+// Whether an adverb of adverb.at-last (やっと, ようやく) stands before item it in its clause, after which
+// a (ら)れ may say what one at last managed to do (やっと彼女に話しかけられた).
+bool AtLastBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (dict::InClass(HDTRANS_CLASS("adverb.at-last"), p->group->surface)) return true;
+    }
+    return false;
+}
+
 bool AbilityScope(const Item* it, std::string_view rest) {
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0) return false;
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
@@ -1416,7 +1425,7 @@ void DecideVoice(Flusher& f) {
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
         Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
-        const dict::PackRow* packed = PackVoice(f, it, stem, v);
+        const dict::PackRow* packed = PackVoice(f, it, stem, v, AtLastBefore(it));
         if (packed != nullptr && !packed->agent.empty()) {
             // The agent phrase of the row's reading: the animate agent the voice step found (に, によって,
             // により), else the nearest から after an animate noun in the verb's clause, not a quote's.

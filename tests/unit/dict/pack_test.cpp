@@ -97,6 +97,13 @@ HD_TEST(dict_pack_errors) {
     Families families;
     PackTable t;
     std::vector<PackError> errors;
+    // an agent particle may name the form that follows the final consonant
+    PackTable a;
+    ParsePackRows("a.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\tagent\nx\tvoice\t読む\tv5\t\tpassive\t(이)가\n", nullptr,
+                  families, a, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_REQUIRE(a.rows.size() == 1);
+    HD_CHECK_EQ(a.rows[0].agent, std::string("(이)가"));
     ParsePackRows("p.tsv", "id\tlemma\tpos\ttarget\n", nullptr, families, t, errors);
     HD_CHECK_EQ(Errors(errors), std::string("1: the header has no column cond"));
 }
