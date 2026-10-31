@@ -74,3 +74,8 @@ register:REG-22	「明日は雨が降りそうだ」	「내일은 비가 올 것
 register:REG-22	「痛かった痛かった」	「아팠어 아팠어」	fix	register
 register:REG-22	「しかし、概要くらいは話してほしいものだ」	「하지만, 개요 정도는 이야기해 줬으면 하는 것이다」	keep	register
 register:REG-22	「流石だエル君。本当に君は強くなった」	「역시다 엘 군. 정말 너는 강해졌다」	keep	register
+register:REG-2	「犯人はAだ」	「범인은 A야」	fix	register
+register:REG-2	「次はＭだ」	「다음은 M이야」	fix	register
+register:REG-2	「答えは1だ」	「대답은 1이야」	fix	register
+register:REG-2	「答えは10だ」	「대답은 10이야」	fix	register
+register:REG-2	「彼の名前はミクだ」	「그의 이름은 미쿠야」	fix	register

@@ -902,8 +902,8 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
 // Whether observer takes any stage of a line.
 bool Observes(const StageObserver& o) {
-    return o.text || o.pieces || o.tokens || o.analysis || o.resolved || o.composed || o.cleaned || o.restored ||
-           o.filterLog;
+    return !o.levelsOnly && (o.text || o.pieces || o.tokens || o.analysis || o.resolved || o.composed || o.cleaned || o.restored ||
+                             o.filterLog);
 }
 
 // One line through every stage of the text path; the line's trailing "\r" is written
@@ -1015,6 +1015,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const auto compose = [&](LineSpeech pass, const StageObserver& watch, const TranslationOptions& opts) {
         std::vector<output::Sentence> sentences;
         std::string before;
+        if (watch.pass) watch.pass(watch.context);
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
             if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
@@ -1040,7 +1041,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     if (!options.reference && PoliteTalkAsked(facts.text, speech.styles)) {
         TranslationOptions trial = options;
         trial.ruleTally = nullptr;
-        const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);
+        const std::vector<bool> polite =
+            output::PoliteQuotes(compose(speech, observer.levelsOnly ? observer : StageObserver{}, trial), carry.depth);
         for (std::size_t k = 0; k < speech.styles.size() && k < polite.size(); k++) {
             const bool casualMark = k < casual.size() && casual[k];
             if ((speech.styles[k] & output::kPoliteStyle) != 0 && polite[k] && !casualMark) {
@@ -1064,7 +1066,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     // The first pass counts no rules either; the line is composed again when they are counted.
     TranslationOptions trial = options;
     trial.ruleTally = nullptr;
-    const std::string first = compose(speech, StageObserver{}, trial);
+    const std::string first = compose(speech, observer.levelsOnly ? observer : StageObserver{}, trial);
     const std::vector<bool> polite = output::PoliteQuotes(first, carry.depth);
     bool again = Observes(observer) || options.ruleTally != nullptr;
     for (std::size_t k = 0; k < speech.styles.size(); k++) {
@@ -1093,12 +1095,21 @@ std::string TranslateRubyBody(const dict::Snapshot& snap, pipeline::DocumentCont
 struct EdgeWatch {
     std::vector<output::ResolvedItem> items;
     WrapEdges edges;
+    // The speech-level stage, which reads the line's chains from this pass too; nullptr when it does not.
+    const StageObserver* levels = nullptr;
 };
 
-void WatchEdges(void* context, int, int, const word::Chain& chain) {
+void WatchEdges(void* context, int chunk, int sentence, const word::Chain& chain) {
     auto* watch = static_cast<EdgeWatch*>(context);
     ResolvedItems(chain, watch->items);
     AddWrapEdges(watch->items, watch->edges);
+    if (watch->levels != nullptr && watch->levels->resolved)
+        watch->levels->resolved(watch->levels->context, chunk, sentence, chain);
+}
+
+void WatchEdgePass(void* context) {
+    const StageObserver* levels = static_cast<EdgeWatch*>(context)->levels;
+    if (levels != nullptr && levels->pass) levels->pass(levels->context);
 }
 
 // Watches two joined lines (MayCutWord) for a word read across their break: a word the dictionary
@@ -1213,6 +1224,12 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
         use(i, i);
+        // a line translated on its own keeps this translation: the speech-level stage reads it here
+        if (observer.levelsOnly && i >= context) {
+            watch.levels = &observer;
+            edgeObserver.pass = WatchEdgePass;
+            if (observer.line) observer.line(observer.context, static_cast<int>(i - context));
+        }
         alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
@@ -1286,6 +1303,13 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         for (std::size_t k = i; k <= j; k++) {
             if (k < context) continue;
             if (!pieces.empty()) {
+                // the joined translation is read under its first line: the lines after it have no reading of
+                // their own. The continuation lines of a joined group are read without items; before the
+                // stage read each line from the pass that keeps its translation, they were read with the
+                // items of their alone pass.
+                // TODO: when pieceLine is set and pieces k-1 and k belong to one cut long line, the items of
+                // k are not cleared.
+                if (observer.levelsOnly && k > i && observer.line) observer.line(observer.context, static_cast<int>(k - context));
                 const LineParts& p = parts[k - i];
                 std::string piece = pieces[k - i];
                 if (!arrows[k].empty()) piece = WithArrow(piece, arrows[k]);
@@ -1295,7 +1319,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             }
             if (Observes(observer)) {
                 // The stages of the line on its own, for the observer; the translation stays the one made
-                // before the joined lines.
+                // before the joined lines (the speech-level stage alone read them then).
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
                 use(k, k);
                 TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
@@ -1491,6 +1515,7 @@ StageObserver WatchLevels(LevelWatch& w, const StageObserver& inner) {
     w.inner = inner;
     StageObserver o = inner;
     o.context = &w;
+    o.levelsOnly = !Observes(inner) && !inner.line;
     o.line = [](void* c, int line) {
         LevelWatch& lw = Watched(c);
         lw.capture.Line(line);
@@ -1505,6 +1530,11 @@ StageObserver WatchLevels(LevelWatch& w, const StageObserver& inner) {
         o.text = [](void* c, std::string_view tag, std::string_view text) {
             Watched(c).inner.text(Watched(c).inner.context, tag, text);
         };
+    o.pass = [](void* c) {
+        LevelWatch& lw = Watched(c);
+        lw.capture.Pass();
+        if (lw.inner.pass) lw.inner.pass(lw.inner.context);
+    };
     if (inner.pieces)
         o.pieces = [](void* c, std::string_view tag, int chunk, const output::Pieces& pieces) {
             Watched(c).inner.pieces(Watched(c).inner.context, tag, chunk, pieces);
@@ -1553,10 +1583,11 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     // The filter log of the lines translated: the context lines are read only.
     const auto logged = [&](std::size_t i) { return i >= context && !lines[i].empty() && lines[i] != "\r"; };
     // The speech-level stage, after the translation of the call and before the post-filter.
-    const bool levels = !options.reference && options.speechLevels == SpeechLevels::Auto;
+    const bool levelsAsked = !options.reference && options.speechLevels == SpeechLevels::Auto;
     LevelWatch levelWatch;
-    if (levels && !options.filters) levelWatch.capture.pieceLine = PieceLines(lines, context);
-    const StageObserver watched = levels ? WatchLevels(levelWatch, observer) : observer;
+    bool levels = levelsAsked && !options.filters && reg::Prepare(lines.subspan(context), levelWatch.capture);
+    if (levels) levelWatch.capture.pieceLine = PieceLines(lines, context);
+    StageObserver watched = levels ? WatchLevels(levelWatch, observer) : observer;
     const auto translated = [&](std::span<std::string> out) {
         return out.size() >= context ? out.subspan(context) : std::span<std::string>();
     };
@@ -1604,10 +1635,12 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     }
     TranslationOptions writtenOptions = options;
     writtenOptions.filterWritten = written;
+    levels = levelsAsked && reg::Prepare(std::span<const std::string>(filtered).subspan(context), levelWatch.capture);
     const reg::SourceDecisions decided =
         levels ? reg::DecideSource(std::span<const std::string>(filtered).subspan(context)) : reg::SourceDecisions{};
     writtenOptions.sourceDecisions = &decided;
     if (levels) levelWatch.capture.pieceLine = PieceLines(filtered, context);
+    watched = levels ? WatchLevels(levelWatch, observer) : observer;
     std::vector<std::string> out =
         TranslateDocumentPieces(snap, generated, filtered, watched, writtenOptions, filtered, context);
     if (levels)

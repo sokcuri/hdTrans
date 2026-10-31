@@ -29,8 +29,10 @@ std::string CtxOf(const std::u32string& form) {
 }
 
 void ApplyRows(const Tables& t, const Stem& s, const std::string& ctx, std::u32string& text, EndingFx& fx) {
-    for (const auto& row : t.irregular) {
-        if (row.cls != s.cls || row.before != ctx) continue;
+    const auto rows = t.irregularBy.find(s.cls + "|" + ctx);
+    if (rows == t.irregularBy.end()) return;
+    for (const std::size_t r : rows->second) {
+        const IrrRow& row = t.irregular[r];
         for (const auto& a : row.stem) {
             if (text.empty() || !IsSyllable(text.back())) break;
             char32_t& last = text.back();
@@ -194,14 +196,13 @@ std::u32string CopulaAfter(const Tables& t, std::u32string_view host, const std:
     return r.substr(1);                                                                                // 다, 야, 고, 면
 }
 
-Stem StemOf(const Tables& t, const std::string& lemma, const std::string& pos, const std::string& cls) {
+Stem StemOf(const std::string& lemma, const std::string& pos, const std::string& cls, const PredicateInfo& info) {
     Stem s;
     std::u32string u = ToU32(lemma);
     if (!u.empty() && u.back() == Syl(3, A)) u.pop_back();  // 다
     s.text = u;
     s.pos = pos.empty() ? 'V' : pos[0];
     s.cls = cls.empty() ? "REG" : cls;
-    const PredicateInfo info = LookupPredicate(t, lemma);
     s.ae = info.ae;
     s.honPrefinal = info.honSi;
     return s;

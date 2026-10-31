@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <map>
+#include <optional>
 #include <unordered_map>
 
 #include "core/register/generate.h"
@@ -608,6 +609,12 @@ std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(
 
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines) {
     std::vector<RegDecision> out(lines.size());
+    // the cues of each line, read once
+    std::vector<std::optional<Cues>> scanned(lines.size());
+    const auto cuesOf = [&](std::size_t k) -> const Cues& {
+        if (!scanned[k]) scanned[k] = Scan(t, lines[k].ja);
+        return *scanned[k];
+    };
     // REG-20: prose fiction: paragraphs separated by blank lines (one line in 20 or more blank, 10 lines or more), no
     // speaker tags; game scripts have no blank lines or name their speakers
     bool prose = false;
@@ -639,7 +646,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 narration * 10 >= (lines.size() - blanks) * 3;
         if (prose)
             for (std::size_t k = 0; k < lines.size(); ++k)
-                if (lines[k].dialogue) casualAt[k] = Scan(t, lines[k].ja).casualMark;
+                if (lines[k].dialogue) casualAt[k] = cuesOf(k).casualMark;
     }
     // the line right before or after line k (blank lines skipped) is dialogue that speaks casually: an exchange
     const auto casualNeighbour = [&](std::size_t k) {
@@ -680,7 +687,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             std::vector<std::size_t> lens;
             for (std::size_t k = i; k < j; ++k) {
                 if (lines[k].dialogue) ++quoted;
-                const Cues c = Scan(t, lines[k].ja);
+                const Cues& c = cuesOf(k);
                 const std::string key = Key(c);
                 if (key == "pend" || key == "keigo-pend" || key == "set" || key == "polite-any" || c.strongTail) ++speechy;
                 if (c.arch) ++archaic;
@@ -693,7 +700,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         }
         for (std::size_t k = i; k < j; ++k) {
             if (!lines[k].dialogue && lines[k].speaker.empty()) continue;
-            cues[k - i] = Scan(t, lines[k].ja);
+            cues[k - i] = cuesOf(k);
             keys[k - i] = Key(cues[k - i]);
             if (lines[k].speaker.empty()) continue;
             Prof& p = prof[lines[k].speaker];
@@ -712,7 +719,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         for (std::size_t k = i; k < j; ++k) {
             RegDecision& d = out[k];
             {
-                const Cues hc = Scan(t, lines[k].ja);
+                const Cues& hc = cuesOf(k);
                 d.honSonkei = hc.honSonkei;
                 d.honGive = hc.honGive;
                 d.exclaimNe = hc.exclaimNe && Key(hc) == "exclaim-ne";
@@ -720,7 +727,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 d.giveDecl = hc.giveDecl && Key(hc) == "casual";
             }
             if (!lines[k].dialogue && lines[k].speaker.empty()) {
-                const Cues c = Scan(t, lines[k].ja);
+                const Cues& c = cuesOf(k);
                 const std::string key = Key(c);
                 const auto row = t.levels.find(key);
                 if (sceneSpeech) {

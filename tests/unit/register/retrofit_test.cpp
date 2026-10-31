@@ -1,7 +1,9 @@
 // The stage on lines the word stage translated (regen.cases.tsv: the line, its translation and what the word
 // stage resolved): the regenerated text, the lines the stage replaces, and the detectors of dialogue lines,
 // caption documents, keigo and commands.
+#include <cstdint>
 #include <cstdio>
+#include <memory>
 #include <span>
 #include <string>
 #include <vector>
@@ -49,7 +51,7 @@ std::vector<Case> Cases() {
         const std::vector<std::string> c = reg::Split(line, '\t');
         if (c.size() < 4) continue;
         Case k{c[0], c[1], c[2], c[3], {}};
-        k.capture.items.emplace_back();
+        k.capture.Line(0);
         for (std::size_t i = 4; i < c.size(); i++) {
             const std::vector<std::string> f = reg::Split(c[i], '|');
             if (f.size() < 8) continue;
@@ -62,7 +64,7 @@ std::vector<Case> Cases() {
             it.verb = f[5] == "1";
             it.kind = std::stoi(f[6]);
             it.sourceEnding = f[7];
-            k.capture.items[0].push_back(it);
+            k.capture.Add(0, it);
         }
         out.push_back(std::move(k));
     }
@@ -86,10 +88,40 @@ HD_TEST(register_regenerated_lines) {
         } else {
             const std::string source[] = {c.ja};
             std::string out[] = {c.out};
-            reg::Retrofit(source, c.capture, out);
+            reg::Capture capture = c.capture;
+            reg::Retrofit(source, capture, out);
             if (out[0] != c.expected) hdtest::Fail(__FILE__, __LINE__, c.ja + ": " + out[0] + " vs " + c.expected);
         }
     }
+}
+
+// Tables loaded again after the first ones are let go (they may take the same address): the readings a thread
+// keeps between calls belong to the first tables and are not used for the second.
+HD_TEST(register_tables_loaded_again) {
+    const std::vector<Case> cases = Cases();
+    HD_REQUIRE(!cases.empty());
+    const auto regenerate = [&](const reg::Data& d) {
+        std::vector<std::string> out;
+        for (const Case& c : cases) {
+            if (c.kind != "gen") continue;
+            const bool dialogue = reg::DialogueLine(d.reader, c.ja);
+            const std::vector<reg::PreLine> lines = {reg::ReadLine(d, 0, c.ja, c.out, c.capture, dialogue, 0)};
+            const auto regen = reg::Regenerate(d, lines, {true}, {});
+            out.push_back(regen.empty() ? "" : regen[0].gen);
+        }
+        return out;
+    };
+    std::unique_ptr<reg::Data> first = reg::LoadData();
+    HD_REQUIRE(first != nullptr);
+    const std::uint64_t firstLoad = first->loadId;
+    const std::vector<std::string> before = regenerate(*first);
+    first.reset();
+    const std::unique_ptr<reg::Data> second = reg::LoadData();
+    HD_REQUIRE(second != nullptr);
+    HD_CHECK(second->loadId != firstLoad);
+    HD_CHECK(second->loadId != 0);
+    HD_CHECK(regenerate(*second) == before);
+    HD_CHECK(regenerate(*reg::LoadedData()) == before);
 }
 
 HD_TEST(register_off_keeps_the_translation) {
@@ -97,7 +129,8 @@ HD_TEST(register_off_keeps_the_translation) {
     for (const Case& c : cases) {
         const std::string source[] = {c.ja};
         std::string out[] = {c.out};
-        reg::Retrofit(source, c.capture, out, {false});
+        reg::Capture capture = c.capture;
+        reg::Retrofit(source, capture, out, {false});
         HD_CHECK_EQ(out[0], c.out);
     }
 }
@@ -141,7 +174,7 @@ HD_TEST(register_keigo_and_command) {
     };
     for (const Row& r : rows) {
         reg::Capture capture;
-        capture.items.emplace_back();
+        capture.Line(0);
         const reg::PreLine line = reg::ReadLine(*d, 0, r.ja, "", capture, true, 0);
         if (line.keigo != r.keigo || line.command != r.command)
             hdtest::Fail(__FILE__, __LINE__, std::string(r.ja) + ": keigo " + (line.keigo ? "yes" : "no") + ", command " +
@@ -154,15 +187,18 @@ HD_TEST(register_keigo_and_command) {
     verb.verb = true;
     verb.kind = 4;
     verb.sourceEnding = "ぇ";
-    capture.items.push_back({verb});
+    capture.Add(0, verb);
     HD_CHECK(reg::ReadLine(*d, 0, "「追い込めぇ！」", "", capture, true, 0).command);
-    capture.items[0][0].sourceEnding = "";
+    capture.Drop(0);
+    verb.sourceEnding = "";
+    capture.Add(0, verb);
     reg::Capture::Item next;
     next.surface = "ない";
-    capture.items[0].push_back(next);
+    capture.Add(0, next);
     HD_CHECK(!reg::ReadLine(*d, 0, "「追い込めない」", "", capture, true, 0).command);
-    capture.items[0] = {verb};
-    capture.items[0][0].kind = 11;
-    capture.items[0][0].sourceEnding = "ろ";
+    capture.Drop(0);
+    verb.kind = 11;
+    verb.sourceEnding = "ろ";
+    capture.Add(0, verb);
     HD_CHECK(reg::ReadLine(*d, 0, "「見ろ」", "", capture, true, 0).command);
 }

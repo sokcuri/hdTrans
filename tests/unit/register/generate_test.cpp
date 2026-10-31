@@ -110,9 +110,41 @@ HD_TEST(register_readings_by_surface) {
         reg::ParadigmIndex found(d->ko, l.lemma, "", "", l.host);
         for (const auto& [surface, keys] : bySurface) {
             std::vector<std::string> got;
-            for (const reg::Bundle& b : found.Find(surface)) got.push_back(Key(b));
+            for (const uint32_t r : found.Find(surface)) got.push_back(Key(found.At(r)));
             if (got != keys) hdtest::Fail(__FILE__, __LINE__, std::string(l.lemma) + " " + surface + ": other readings");
         }
         HD_CHECK(found.Find("없는말").empty());
+    }
+}
+
+// Find (the forms of a reading conjugated once per form list) and All (each reading generated whole) agree
+// on every reading, over the paradigm tables: every stems.tsv lemma, one lemma.tsv lemma of each pos and
+// class, and the copula after hosts that end in a vowel, a consonant, ㄹ, a Latin letter, a digit, kana or
+// nothing.
+HD_TEST(register_readings_agree_over_the_tables) {
+    const reg::Data* d = reg::LoadedData();
+    HD_REQUIRE(d != nullptr);
+    std::map<std::string, std::string> lemmas;  // lemma → host, in order
+    for (const auto& [lemma, row] : d->ko.stems) lemmas.emplace(row.lemma.empty() ? lemma : row.lemma, "");
+    std::map<std::string, std::string> byClass;  // "pos|class" → the first lemma of it
+    for (const auto& [lemma, pos] : d->ko.lemmaPos) {
+        const reg::LemmaInfo info = reg::LemmaOf(d->ko, lemma);
+        const std::string key = info.info.pos + "|" + info.info.cls;
+        auto at = byClass.find(key);
+        if (at == byClass.end() || lemma < at->second) byClass[key] = lemma;
+    }
+    for (const auto& [key, lemma] : byClass) lemmas.emplace(lemma, "");
+    std::vector<std::pair<std::string, std::string>> cases(lemmas.begin(), lemmas.end());
+    for (const char* host : {"학생", "친구", "물", "A", "M", "1", "10", "ミク", ""}) cases.emplace_back("이다", host);
+    for (const auto& [lemma, host] : cases) {
+        reg::ParadigmIndex all(d->ko, lemma, "", "", host);
+        std::map<std::string, std::vector<std::string>> bySurface;
+        for (const auto& [surface, b] : all.All()) bySurface[surface].push_back(Key(b));
+        reg::ParadigmIndex found(d->ko, lemma, "", "", host);
+        for (const auto& [surface, keys] : bySurface) {
+            std::vector<std::string> got;
+            for (const uint32_t r : found.Find(surface)) got.push_back(Key(found.At(r)));
+            if (got != keys) hdtest::Fail(__FILE__, __LINE__, lemma + " after " + host + " " + surface + ": other readings");
+        }
     }
 }

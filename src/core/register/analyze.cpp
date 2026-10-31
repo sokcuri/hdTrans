@@ -152,6 +152,10 @@ ParadigmShape MakeShape(const Tables& t, const std::string& pos, bool copula) {
                     bool honIncl = false;
                     const Level level = b.level == Level::none ? Level::haera : b.level;
                     const std::string form = EndingForm(t, b.node, level, Persona::none, honIncl);
+                    std::vector<std::string> forms = FormsOf(t, b.node, form, honIncl, b.hon);
+                    const auto f = std::find(shape.formLists.begin(), shape.formLists.end(), forms);
+                    c.forms = static_cast<uint32_t>(f - shape.formLists.begin());
+                    if (f == shape.formLists.end()) shape.formLists.push_back(std::move(forms));
                     auto at = tailOfForm.find(form);
                     if (at == tailOfForm.end()) {
                         const std::u32string tail = FixedTail(form, copula);
@@ -182,36 +186,52 @@ const ParadigmShape& ShapeOf(const Tables& t, const std::string& pos, bool copul
 ParadigmIndex::ParadigmIndex(const Tables& t, const std::string& lemma, const std::string& posIn, const std::string& clsIn,
                              const std::string& host)
     : t_(t), lemma_(lemma), host_(host) {
-    const PredicateInfo info = LookupPredicate(t, lemma);
-    pos_ = posIn.empty() ? info.pos : posIn;
-    cls_ = clsIn.empty() ? info.cls : clsIn;
+    info_ = LemmaOf(t, lemma);
+    pos_ = posIn.empty() ? info_.info.pos : posIn;
+    cls_ = clsIn.empty() ? info_.info.cls : clsIn;
     shape_ = &ShapeOf(t, pos_, cls_ == "COP");
 }
 
 Bundle ParadigmIndex::BundleOf(const ParadigmShape::Reading& r) const { return MakeBundle(t_, r, lemma_, pos_, cls_); }
 
 const std::string& ParadigmIndex::SurfaceOf(std::size_t i) {
-    auto it = surfaces_.find(i);
-    if (it == surfaces_.end()) it = surfaces_.emplace(i, Realize(t_, BundleOf(shape_->readings[i]), host_)).first;
+    const ParadigmShape::Reading& r = shape_->readings[i];
+    if (r.tail == ParadigmShape::kAnyTail) {  // the -것 nominal: written whole
+        scratch_ = Realize(t_, BundleOf(r), host_);
+        return scratch_;
+    }
+    auto it = surfaces_.find(r.forms);
+    if (it == surfaces_.end()) {
+        // the word alone, as Realize writes it after the host (WriteV without its ending lookup)
+        const bool cop = cls_ == "COP";
+        const std::string hostArg = cop ? host_ : std::string();
+        std::string text = ConjugateForms(t_, info_, pos_, cls_, shape_->formLists[r.forms], hostArg);
+        if (cop && text.starts_with(hostArg)) text = text.substr(hostArg.size());
+        it = surfaces_.emplace(r.forms, std::move(text)).first;
+    }
     return it->second;
 }
 
-std::vector<Bundle> ParadigmIndex::Find(const std::string& surface) {
+std::vector<uint32_t> ParadigmIndex::Find(const std::string& surface) {
     const std::u32string word = hangul::ToU32(surface);
     std::vector<bool> fits(shape_->tails.size());
     for (std::size_t k = 0; k < fits.size(); k++) fits[k] = word.ends_with(shape_->tails[k]);
-    std::vector<Bundle> out;
+    std::vector<uint32_t> out;
     for (std::size_t i = 0; i < shape_->readings.size(); i++) {
         const ParadigmShape::Reading& r = shape_->readings[i];
         if (r.tail != ParadigmShape::kAnyTail && !fits[r.tail]) continue;
-        if (SurfaceOf(i) == surface) out.push_back(BundleOf(r));
+        if (SurfaceOf(i) == surface) out.push_back(static_cast<uint32_t>(i));
     }
     return out;
 }
 
 std::vector<std::pair<std::string, Bundle>> ParadigmIndex::All() {
     std::vector<std::pair<std::string, Bundle>> out;
-    for (std::size_t i = 0; i < shape_->readings.size(); i++) out.emplace_back(SurfaceOf(i), BundleOf(shape_->readings[i]));
+    for (const ParadigmShape::Reading& r : shape_->readings) {
+        Bundle b = BundleOf(r);
+        std::string s = Realize(t_, b, host_);
+        out.emplace_back(std::move(s), std::move(b));
+    }
     return out;
 }
 

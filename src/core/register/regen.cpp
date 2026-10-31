@@ -15,27 +15,43 @@ namespace {
 using hangul::ToU32;
 using hangul::ToU8;
 
+// A host that ends in the same sound as host: the copula reads only that (학생이야, 친구야, A야, 1이야). A host
+// whose last sound is not known (a kana word) stays itself.
+std::string SoundOf(const std::string& host) {
+    switch (hangul::EndSound(ToU32(host))) {
+        case 'V': return "가";
+        case 'C': return "각";
+        case 'L': return "갈";
+        default: return host;
+    }
+}
+
 // The readings of the words of one call, by lemma, pos, class, host and surface.
 struct Words {
     static constexpr std::size_t kKeptLemmas = 1024, kKeptWords = 32768;
     const Tables& t;
     const RetroWords& rw;
     std::unordered_map<std::string, std::unique_ptr<ParadigmIndex>> paradigms;
-    std::unordered_map<std::string, std::vector<Bundle>> found;
+    std::unordered_map<std::string, std::pair<ParadigmIndex*, std::vector<uint32_t>>> found;
 
     std::vector<Bundle> Find(const std::string& lemma, const std::string& pos, const std::string& cls,
                              const std::string& surface, const AnalyzeHints& h) {
-        const std::string key = lemma + "|" + pos + "|" + cls + "|" + h.host;
+        // the copula's forms depend on its host only through the host's last sound (학생이야, 친구야)
+        const std::string host = cls == "COP" ? SoundOf(h.host) : h.host;
+        const std::string key = lemma + "|" + pos + "|" + cls + "|" + host;
         auto f = found.find(key + "|" + surface);
         if (f == found.end()) {
             // the readings are kept for the lemmas of a few hundred lines, so that a long document's memory stays bounded
-            if (paradigms.size() >= kKeptLemmas) paradigms.clear();
-            if (found.size() >= kKeptWords) found.clear();
+            if (paradigms.size() >= kKeptLemmas || found.size() >= kKeptWords) {
+                found.clear();
+                paradigms.clear();
+            }
             auto& index = paradigms[key];
-            if (!index) index = std::make_unique<ParadigmIndex>(t, lemma, pos, cls, h.host);
-            f = found.emplace(key + "|" + surface, index->Find(surface)).first;
+            if (!index) index = std::make_unique<ParadigmIndex>(t, lemma, pos, cls, host);
+            f = found.emplace(key + "|" + surface, std::make_pair(index.get(), index->Find(surface))).first;
         }
-        std::vector<Bundle> out = f->second;
+        std::vector<Bundle> out;
+        for (const uint32_t r : f->second.second) out.push_back(f->second.first->At(r));
         RankBundles(out, h);
         return out;
     }
@@ -723,25 +739,47 @@ std::string Splice(const Tables& t, const std::string& before, const std::vector
     return ToU8(result);
 }
 
+// The readings of a thread's calls, kept between calls (as bounded as within one), so that a caller sending
+// one line per call (a text hook) does not conjugate the same lemmas again for each line. They are kept by
+// the load of the tables, not by their address alone: tables loaded again may take the address of tables let
+// go, which the readings kept point into. Tables of no load (loadId 0) get new readings for each call.
+Words& ThreadWords(const Data& d) {
+    thread_local std::unique_ptr<Words> words;
+    thread_local std::uint64_t load = 0;
+    if (!words || d.loadId == 0 || load != d.loadId || &words->t != &d.ko || &words->rw != &d.retro) {
+        words = std::make_unique<Words>(Words{d.ko, d.retro, {}, {}});
+        load = d.loadId;
+    }
+    return *words;
+}
+
 }  // namespace
 
-std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lines, const std::vector<bool>& build,
-                                  const RegenOptions& options) {
-    const Tables& t = d.ko;
-    Words r{t, d.retro, {}, {}};
-    std::vector<RegDecision> decided;
-    const std::vector<RegDecision>* given = options.decisions;
-    if (given == nullptr || given->size() != lines.size()) {
-        std::vector<RegLine> rl;
-        for (const PreLine& l : lines) rl.push_back({l.ja, l.speaker, l.scene, l.dialogue});
-        decided = DecideLevels(d.levels, rl);
-        given = &decided;
+struct Regenerator::State {
+    Words& r;
+    std::vector<RegDecision> decided;  // the decisions made here, when the options give none for the lines
+    const std::vector<RegDecision>* decisions = nullptr;
+};
+
+Regenerator::Regenerator(const Data& d, const std::vector<RegLine>& lines, const RegenOptions& options)
+    : d_(d), options_(options), state_(std::make_unique<State>(State{ThreadWords(d), {}, nullptr})) {
+    state_->decisions = options.decisions;
+    if (state_->decisions == nullptr || state_->decisions->size() != lines.size()) {
+        state_->decided = DecideLevels(d.levels, lines);
+        state_->decisions = &state_->decided;
     }
-    const std::vector<RegDecision>& decisions = *given;
-    std::vector<RegenLine> out(lines.size());
-    for (std::size_t li = 0; li < lines.size(); ++li) {
-        if (li >= build.size() || !build[li]) continue;
-        const PreLine& line = lines[li];
+}
+
+Regenerator::~Regenerator() = default;
+
+RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
+    const Data& d = d_;
+    const RegenOptions& options = options_;
+    const Tables& t = d.ko;
+    Words& r = state_->r;
+    const std::vector<RegDecision>& decisions = *state_->decisions;
+    RegenLine out;
+    {
         std::vector<Node> nodes;
         bool lineOk = BuildAligned(r, line, nodes);
         SplitNounCopula(t, nodes);
@@ -981,7 +1019,7 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         std::size_t lead = 0;
         while (lead < line.out.size() && line.out[lead] == ' ') ++lead;
         g = line.out.substr(0, lead) + g;
-        RegenLine& o = out[li];
+        RegenLine& o = out;
         o.out = lineOk ? spliced : line.out;
         o.gen = g;
         o.ok = lineOk;
@@ -990,6 +1028,17 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         o.spec = dec.spec;
         o.key = dec.key;
     }
+    return out;
+}
+
+std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lines, const std::vector<bool>& build,
+                                  const RegenOptions& options) {
+    std::vector<RegLine> rl;
+    for (const PreLine& l : lines) rl.push_back({l.ja, l.speaker, l.scene, l.dialogue});
+    Regenerator regen(d, rl, options);
+    std::vector<RegenLine> out(lines.size());
+    for (std::size_t li = 0; li < lines.size(); ++li)
+        if (li < build.size() && build[li]) out[li] = regen.Line(li, lines[li]);
     return out;
 }
 

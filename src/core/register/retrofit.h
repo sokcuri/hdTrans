@@ -34,9 +34,14 @@ struct SourceDecisions {
 };
 SourceDecisions DecideSource(std::span<const std::string> source);
 
+// Whether the stage would rewrite any line of source (a dialogue line in a document that is no caption
+// document); sets the lines the capture keeps.
+bool Prepare(std::span<const std::string> source, Capture& capture);
+
 // Rewrites out (the translation of source, one line each, each with its "\r" when the source has one).
-// changes, when given, gets the lines written again. decided, when given, holds DecideSource(source).
-void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
+// changes, when given, gets the lines written again. decided, when given, holds DecideSource(source). The
+// items of capture are let go as their lines are read.
+void Retrofit(std::span<const std::string> source, Capture& capture, std::span<std::string> out,
               const Switches& switches = {}, std::vector<Change>* changes = nullptr,
               const SourceDecisions* decided = nullptr);
 

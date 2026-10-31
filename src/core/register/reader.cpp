@@ -393,15 +393,81 @@ void Capture::Line(int piece) {
         l = piece >= 0 && static_cast<std::size_t>(piece) < pieceLine.size() ? pieceLine[static_cast<std::size_t>(piece)] : -1;
         first = piece <= 0 || pieceLine[static_cast<std::size_t>(piece) - 1] != l;
     }
+    // the line left keeps only the room its items take
+    if (line_ >= 0 && line_ != l && static_cast<std::size_t>(line_) < lines_.size()) {
+        LineItems& left = lines_[static_cast<std::size_t>(line_)];
+        left.items.shrink_to_fit();
+        left.text.shrink_to_fit();
+    }
     line_ = l;
     if (l < 0) return;
-    if (items.size() <= static_cast<std::size_t>(l)) items.resize(static_cast<std::size_t>(l) + 1);
-    if (first) items[static_cast<std::size_t>(l)].clear();  // a pass over the line starts again
+    LineItems& now = At(static_cast<std::size_t>(l));
+    if (first) {  // a pass over the line starts again
+        now.items.clear();
+        now.text.clear();
+    }
+    passStart_ = now.items.size();
+    passText_ = now.text.size();
+}
+
+void Capture::Pass() {
+    if (line_ < 0 || static_cast<std::size_t>(line_) >= lines_.size()) return;
+    LineItems& now = lines_[static_cast<std::size_t>(line_)];
+    now.items.resize(passStart_);
+    now.text.resize(passText_);
+}
+
+Capture::LineItems& Capture::At(std::size_t l) {
+    if (lines_.size() <= l) lines_.resize(l + 1);
+    return lines_[l];
+}
+
+void Capture::Add(std::size_t l, const Item& item) {
+    LineItems& line = At(l);
+    Packed p;
+    p.sentence = item.sentence;
+    p.token = item.token;
+    p.at = static_cast<uint32_t>(line.text.size());
+    p.kind = static_cast<int16_t>(item.kind);
+    p.verb = item.verb;
+    for (const auto& [text, length] : {std::pair{&item.surface, &p.surface}, {&item.target, &p.target},
+                                       {&item.ending, &p.ending}, {&item.sourceEnding, &p.sourceEnding}}) {
+        line.text += *text;
+        *length = static_cast<uint32_t>(text->size());
+    }
+    line.items.push_back(p);
+}
+
+std::vector<Capture::Item> Capture::Items(std::size_t l) const {
+    std::vector<Item> out;
+    if (l >= lines_.size()) return out;
+    const LineItems& line = lines_[l];
+    out.reserve(line.items.size());
+    for (const Packed& p : line.items) {
+        Item x;
+        x.sentence = p.sentence;
+        x.token = p.token;
+        x.kind = p.kind;
+        x.verb = p.verb;
+        std::size_t at = p.at;
+        for (const auto& [text, length] : {std::pair{&x.surface, p.surface}, {&x.target, p.target},
+                                           {&x.ending, p.ending}, {&x.sourceEnding, p.sourceEnding}}) {
+            *text = line.text.substr(at, length);
+            at += length;
+        }
+        out.push_back(std::move(x));
+    }
+    return out;
+}
+
+void Capture::Drop(std::size_t l) {
+    if (l < lines_.size()) lines_[l] = LineItems{};
 }
 
 void Capture::Resolved(int sentence, const word::Chain& chain) {
     if (line_ < 0) return;
-    auto& v = items[static_cast<std::size_t>(line_)];
+    if (!wanted.empty() && (static_cast<std::size_t>(line_) >= wanted.size() || !wanted[static_cast<std::size_t>(line_)]))
+        return;
     for (const word::Item* it = chain.head; it != nullptr; it = it->next) {
         Item x;
         x.sentence = sentence;
@@ -415,7 +481,7 @@ void Capture::Resolved(int sentence, const word::Chain& chain) {
             x.kind = it->DetailKind();
             x.sourceEnding = std::string(it->DirectSurface());
         }
-        v.push_back(std::move(x));
+        Add(static_cast<std::size_t>(line_), x);
     }
 }
 
@@ -459,6 +525,8 @@ bool CaptionDocument(const Reader& r, const std::vector<std::string>& ja) {
     return shortLines * 2 >= lines && quoted * 10 <= lines;
 }
 
+std::string LineSpeaker(const Reader& r, const std::string& ja) { return SpeakerTag(r, ToU32(ja)); }
+
 PreLine ReadLine(const Data& data, std::size_t i, const std::string& ja, const std::string& out, const Capture& capture,
                  bool dialogue, uint32_t scene) {
     const Reader& d = data.reader;
@@ -471,9 +539,10 @@ PreLine ReadLine(const Data& data, std::size_t i, const std::string& ja, const s
     line.speaker = SpeakerTag(d, ja32);  // a tagged line without a quote is dialogue too
     if (!dialogue) return line;  // only dialogue lines are written again
     std::vector<Row> rows;
-    if (i < capture.items.size()) {
-        for (const auto& x : capture.items[i]) rows.push_back({x.sentence, x.token, ToU32(x.surface), ToU32(x.target), ToU32(x.ending)});
-        KeigoAndCommand(data, ja32, capture.items[i], line.keigo, line.command);
+    if (i < capture.Lines()) {
+        const std::vector<Capture::Item> items = capture.Items(i);
+        for (const auto& x : items) rows.push_back({x.sentence, x.token, ToU32(x.surface), ToU32(x.target), ToU32(x.ending)});
+        KeigoAndCommand(data, ja32, items, line.keigo, line.command);
     }
     line.items = ConvertLine(d, ja32, rows);
     line.imp = Imperative(d, ja32);
