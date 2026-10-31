@@ -1,0 +1,25 @@
+# 규칙: LEX-94
+rule	input	expected	kind	layer
+lookup:kana-copula	「うん……じゃあ、ゆびきりだ」	「응……그럼, 약속이다」	fix	lookup
+lookup:kana-copula	「しんでしまうとはなにごとだ！」	「죽어버린다고는 무슨 일이야!」	fix	lookup
+lookup:kana-copula	“ここはへいわだ”って	“여기는 평화롭다”는	fix	lookup
+lookup:kana-copula	……ソシテワタシノ…ハカバダッ！	has:묘지야	fix	lookup
+lookup:kana-copula	コレカラガソノモンノ ジゴクダヨ！	has:지옥이야	fix	lookup
+lookup:kana-copula	ゆらいだ心を正せる気がして。	흔들린 마음을 바로잡을 수 있을 것 같아.	fix	lookup
+lookup:kana-copula	どうして俺はこうまでも、夢の中でさえ……	왜 나는 이렇게까지도, 꿈속조차……	keep	lookup
+lookup:kana-copula	「おお、ゆうきよ！」	lacks:용기	keep	lookup
+lookup:kana-copula	「にしし、ヒミツです。楽しみにしててね」	「니시시, 비밀입니다. 기대하고 있어」	keep	lookup
+lookup:kana-copula	「ほんと、バケモノですよ」	「정말, 괴물이에요」	keep	lookup
+lookup:kana-copula	あの物々しさから見て、カタギじゃなさそうだけど	has:일반인	keep	lookup
+lookup:kana-copula	何を隠そう、ニンジャです	솔직히 말하자면, 닌자입니다	keep	lookup
+lookup:kana-copula	「あの人は、凄いけど……いいひとじゃないわね」	「그 사람은, 굉장하지만……좋은 사람이 아니네」	keep	lookup
+lookup:kana-copula	ブレイダブリクの様子は？	브레이다브리크의 모습은?	keep	lookup
+lookup:kana-copula	「はい、ブライダルフェアでは」	「네, 브라이덜 페어에서는」	keep	lookup
+lookup:kana-copula	カレンダーなど、字が書かれているものはいくらでもある	has:캘린더 등	keep	lookup
+lookup:kana-copula	「けど、オトモダチのキミのことは蔑ろにしているようよ？」	has:친구의	keep	lookup
+lookup:kana-copula	それは、ゆうめいだ	그것은, 유명하다	fix	lookup
+lookup:kana-copula	ここは、きけんだ	여기는, 위험하다	fix	lookup
+lookup:kana-copula	それは、しぜんだ	그것은, 자연스럽다	fix	lookup
+lookup:kana-copula	それは、こばんだ	그것은, 거절했다	keep	lookup
+lookup:kana-copula	もう、こばんじゃった	이제, 거절해버렸다	keep	lookup
+lookup:kana-copula	あれは、れいのです	lacks:예의	keep	lookup

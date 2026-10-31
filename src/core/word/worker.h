@@ -187,6 +187,7 @@ private:
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
     void ReadGivenNames(dict::Candidates& found, std::string_view query);
     // Whether the text head that a word follows in its token ends in something other than a noun
