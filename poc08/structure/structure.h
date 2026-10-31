@@ -69,6 +69,13 @@ struct StructureData {
         std::string head;  // noun | pred | pred>=A|B|C|D | next | final | level=A|B|C|D
     };
     std::vector<HeadRule> headRules;
+    // data/zero.tsv: constraint rules for the class of an omitted subject (Z). when atoms test clause facts; the
+    // most specific matching row gives the class (speaker addressee third generic none).
+    struct ZeroRule {
+        std::string id, cls;
+        std::vector<HeadAtom> when;
+    };
+    std::vector<ZeroRule> zeroRules;
     std::unordered_map<std::string, std::string> persons;     // data/persons.tsv: lemma → speaker|addressee|third
     std::unordered_map<std::string, std::array<float, 6>> zeroWeights;  // data/zero.tsv: feature → weight per class
     std::unordered_set<std::string> noBareObject;  // data/bareobj.tsv: verbs a bare noun before them is not the object of
@@ -144,6 +151,12 @@ struct ZeroResult {
 };
 void LoadPersons(std::string_view tsv, StructureData& out);
 void LoadZeroWeights(std::string_view tsv, StructureData& out);
+// data/zero.tsv rule rows into out.zeroRules; false and err on a malformed row.
+bool LoadZeroRules(std::string_view tsv, StructureData& out, std::string& err);
+// The omitted-subject class of clause ci by data/zero.tsv: "overt" when the clause has a subject argument, else
+// the class of the most specific matching row ("" when none matches); rule gets the row id.
+std::string ZeroByRules(const StructureData& d, const Strings& st, const std::vector<TokInfo>& info, const Path& path,
+                        int ci, bool dialogue, std::string& rule);
 // The class of the last overt person-like subject or topic of a line ("" when none).
 std::string LineSubjectClass(const StructureData& d, const Strings& st, const std::vector<TokInfo>& info, const Path& path);
 void ZeroFeatures(const StructureData& d, const Strings& st, const std::vector<TokInfo>& info, const Path& path, int ci,

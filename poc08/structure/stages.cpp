@@ -82,6 +82,11 @@ StructureData* LoadStructure(const Config& cfg, std::string& err) {
         return nullptr;
     }
     hd8::LoadBareObject(ReadFile(dir + "bareobj.tsv"), data->tables);
+    hd8::LoadPersons(ReadFile(dir + "persons.tsv"), data->tables);
+    if (!hd8::LoadZeroRules(ReadFile(dir + "zero.tsv"), data->tables, err)) {
+        delete data;
+        return nullptr;
+    }
     if (!hd8::LoadHeadRules(ReadFile(dir + "heads.tsv"), data->tables, err)) {
         delete data;
         return nullptr;
@@ -169,6 +174,21 @@ void StageL(const StructureData& s, const Config&, Doc& doc, Line& line, int pat
         }
         o.consumed = c.consumed;
         o.unfolded = c.unfolded;
+        // Z constraint rules (data/zero.tsv); a clause no row covers keeps kind none (Default)
+        std::string zrule;
+        const std::string zcls = hd8::ZeroByRules(s.tables, l.st, l.info, l.path,
+                                                  static_cast<int>(&c - l.path.clauses.data()), false, zrule);
+        if (!zcls.empty()) {
+            o.subj.kind = Value(F::refkind, zcls.c_str());
+            Decision zd;
+            zd.stage = 'Z';
+            zd.kind = Ev::Cued;
+            zd.rule = doc.I(zrule);
+            const auto& pb = l.path.buns[c.pred];
+            zd.src = Span{l.path.toks[pb.first].src.begin, l.path.toks[pb.last].src.end};
+            zd.nAlt = 1;
+            o.subj.decision = line.Decide(std::move(zd));
+        }
         p.clauses.push_back(std::move(o));
     }
     AddDecisions(doc, line, l, path);
