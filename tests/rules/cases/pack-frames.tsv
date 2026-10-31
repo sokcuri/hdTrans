@@ -4,13 +4,6 @@ pack:止める/とめる/v1#3	「……どうして、俺を止めたの？」	r
 pack:止める/とめる/v1#3	イスカはエルを追って、ここまできた。彼女を止めるためではない。	rule:pack:止める/とめる/v1#3=막다	fix	packs
 pack:止める/とめる/v1#3	千莉が動きを止める。	!rule:pack:止める/とめる/v1#3	keep	packs
 pack:止める/とめる/v1#3	「私は止めたのですよ？　いい実験台になるからと」	!rule:pack:止める/とめる/v1#3	keep	packs
-pack:止める/とめる/v1#4	救護テントを回るのを、グランツ王子は何度も止めてきましたわね	rule:pack:止める/とめる/v1#4=말리다	fix	packs
-pack:止める/とめる/v1#4	「私は止めたのですよ？　いい実験台になるからと」	rule:pack:止める/とめる/v1#4=말리다	fix	packs
-pack:止める/とめる/v1#4	御園さんが足を止める。	!rule:pack:止める/とめる/v1#4	keep	packs
-pack:止める/とめる/v1#4	中央広場まで来たとき、鈴木さんが足を止めた。	!rule:pack:止める/とめる/v1#4	keep	packs
-pack:止める/とめる/v1#5	警備が止めてそのまま退場させていた。	rule:pack:止める/とめる/v1#5=제지하다	fix	packs
-pack:止める/とめる/v1#5	議事録を作っていた桜庭が手を止めた。	!rule:pack:止める/とめる/v1#5	keep	packs
-pack:止める/とめる/v1#5	玄関に向ったが、ぴたりと足を止めた。	!rule:pack:止める/とめる/v1#5	keep	packs
 pack:止める/とめる/v1#6	レナは恐らく、逃げるワゴンを確実に止めるため、多少のリスクを冒したんだろう。	rule:pack:止める/とめる/v1#6=세우다	fix	packs
 pack:止める/とめる/v1#6	急にハンドル操作を失ったワゴンは、再びフェンスに激突して動きを止めた。	!rule:pack:止める/とめる/v1#6	keep	packs
 pack:止める/とめる/v1#6	「機体の動きを止めて、そこにミサイルが撃ち込まれるのか……。	!rule:pack:止める/とめる/v1#6	keep	packs
@@ -30,7 +23,6 @@ pack:閉じる#5	桜庭が開いていた扇子をパチリと閉じる。	rule:
 pack:閉じる#5	桜庭が、閉じた扇子の先に顎を載せる。	rule:pack:閉じる#5=접다	fix	packs
 pack:閉じる#5	閉じたドアを見て、ふと思う。	!rule:pack:閉じる#5	keep	packs
 pack:閉じる#5	御園がパズルの本を閉じる。	!rule:pack:閉じる#5	keep	packs
-pack:閉じる#7	「佳奈すけ……足を閉じたら、中が締まる」	rule:pack:閉じる#7=오므리다	fix	packs
 pack:閉じる#7	俺は紗弓実が脚を閉じないように、両手でがっちり押さえた	rule:pack:閉じる#7=오므리다	fix	packs
 pack:閉じる#7	言葉を整理するように、ナナイさんが目を閉じた。	!rule:pack:閉じる#7	keep	packs
 pack:閉じる#7	そう言って、桜庭が扇子を閉じた。	!rule:pack:閉じる#7	keep	packs
@@ -52,9 +44,7 @@ pack:絡む#1	ああ、酔っぱらって兵士に絡んで、士気を下げる
 pack:絡む#1	なんかあの記者、俺に昨日絡んできたやつとソックリだったな。	rule:pack:絡む#1=시비를 걸다	fix	packs
 pack:絡む#1	しつこく会長に絡んでいる記者を遠巻きに見て	rule:pack:絡む#1=시비를 걸다	fix	packs
 pack:絡む#1	選挙に絡んだ文言は、そこに一切含まれていない。	!rule:pack:絡む#1	keep	packs
-pack:絡む#1	舌が絡む度に、下の締め付けは増していく。	!rule:pack:絡む#1	keep	packs
 pack:絡む#1	２週間ぶりに顔を出した友人と絡んでいるだけだ。	!rule:pack:絡む#1	keep	packs
-pack:絡む#3	舌が絡む度に、下の締め付けは増していく。	rule:pack:絡む#3=얽히다	fix	packs
 pack:絡む#3	絡んだ指に、ハッとする。	rule:pack:絡む#3=얽히다	fix	packs
 pack:絡む#3	俺の腕を掴んでいた千里の手が絡んでくる。	rule:pack:絡む#3=얽히다	fix	packs
 pack:絡む#3	しつこく会長に絡んでいる記者を遠巻きに見て	!rule:pack:絡む#3	keep	packs
@@ -67,22 +57,15 @@ pack:絡む#5	２週間ぶりに顔を出した友人と絡んでいるだけだ
 pack:絡む#5	俺の腕を掴んでいた千里の手が絡んでくる。	!rule:pack:絡む#5	keep	packs
 pack:絡む#5	なんかあの記者、俺に昨日絡んできたやつとソックリだったな。	!rule:pack:絡む#5	keep	packs
 pack:取る#3	紙切れを一枚取ってみる。	rule:pack:取る#3=집다	fix	packs
-pack:取る#3	ティッシュを取り、白崎の秘部にあてがう。	rule:pack:取る#3=집다	fix	packs
 pack:取る#3	顔にかけられた帽子を取る。	!rule:pack:取る#3	keep	packs
 pack:取る#3	芹沢さんは昼食を取らずにぶっ続けで練習していたらしい。	!rule:pack:取る#3	keep	packs
 pack:作る#2	木の幹に作った寝床は、本当に穴だしな。	rule:pack:作る#2=만들다	fix	packs
 pack:作る#2	「みんなで明るい学園を作りましょー」	rule:pack:作る#2=만들다	fix	packs
 pack:作る#2	一呼吸置いて、真剣な顔を作る。	!rule:pack:作る#2	keep	packs
 pack:作る#2	微笑みを作って言う。	!rule:pack:作る#2	keep	packs
-pack:作る#4	一呼吸置いて、真剣な顔を作る。	rule:pack:作る#4=하다	fix	packs
-pack:作る#4	健気な笑顔を作りながら	!rule:pack:作る#4	keep	packs
-pack:作る#4	桜庭の作った夕食を取り、一息つく。	!rule:pack:作る#4	keep	packs
 pack:作る#5	白崎がぐっと握り拳を作る。	rule:pack:作る#5=쥐다	fix	packs
 pack:作る#5	親指を立ててグッドマークを作り、オーブンの扉を閉める。	!rule:pack:作る#5	keep	packs
 pack:作る#5	小太刀アルバムを作り、とにかく毎日見ることにしたのだ。	!rule:pack:作る#5	keep	packs
-pack:作る#6	ガッツポーズを作って言った。	rule:pack:作る#6=취하다	fix	packs
-pack:作る#6	白崎がぐっと握り拳を作る。	!rule:pack:作る#6	keep	packs
-pack:作る#6	「その代わり、また作ってあげる」	!rule:pack:作る#6	keep	packs
 pack:作る#7	一週間前に原稿を作って練習してきたのに	rule:pack:作る#7=쓰다	fix	packs
 pack:作る#7	「へえ、鈴木さんがお話を作るんですか。楽しみですね～」	!rule:pack:作る#7	keep	packs
 pack:作る#7	回答マニュアルを作って御園や佳奈すけも協力しているが	!rule:pack:作る#7	keep	packs

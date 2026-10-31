@@ -104,6 +104,6 @@ class	parent
 @trouble	@abstract
 @vehicle	@entity
 @water.body	@nature
-@weapon	@tool
+@weapon	@thing
 @writing	@document
 @writing.tool	@tool

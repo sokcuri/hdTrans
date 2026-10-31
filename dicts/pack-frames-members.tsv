@@ -48,7 +48,6 @@ lemma	classes
 カップ	@tableware
 カメラ	@device
 ガソリン	@liquid
-ガッツポーズ	@fist
 キス	@activity
 キャプテン	@post
 ギター	@instrument
@@ -305,7 +304,7 @@ lemma	classes
 偵察	@duty
 傍ら	@position
 傘	@tool
-傷	@harm|@illness
+傷	@harm
 僕	@person
 優勝	@result
 元気	@strength
@@ -634,7 +633,6 @@ lemma	classes
 怒声	@shout
 急行	@vehicle
 性器	@body
-怪我	@illness
 恋人	@person|@person.close
 息	@body.output|@breath
 息子	@person.kin
@@ -790,7 +788,6 @@ lemma	classes
 条例	@rule
 枕	@bedding
 染み	@dirt
-染みる	@dirt
 栄養学	@subject.school
 校則	@rule
 校長	@person.role
@@ -1123,7 +1120,7 @@ lemma	classes
 茶渋	@dirt
 茶碗	@container|@tableware
 葉書	@message
-蓋	@container|@opening
+蓋	@opening
 薬局	@shop
 虫	@animal
 蚊	@animal
