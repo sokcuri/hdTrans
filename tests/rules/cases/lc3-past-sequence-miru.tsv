@@ -1,0 +1,24 @@
+# 규칙: GRM-178
+rule	input	expected	kind	layer
+rewrite:past-sequence	そう思えるが、しかし、触ってみるとほんのりと暖かかった。	has:만져 보니	fix	rewrites
+rewrite:past-sequence	何度かブラウザの更新ボタンを押してみると、新着小説のラインナップが更新された。	has:눌러 보니	fix	rewrites
+rewrite:past-sequence	試しにベビーベッドの柵を手で思い切り叩いてみると現実の様に痛かった。	has:두드려 보니	fix	rewrites
+rewrite:past-sequence	そっと自分の手を持ち上げ目視で確認してみると、自分の目に映ったのは小さな手だった。	has:확인해 보니	fix	rewrites
+rewrite:past-sequence	触ってみると、暖かく脈打っていた。	has:만져 보니	fix	rewrites
+rewrite:past-sequence	アプリを開いてみると、１年の頃に入れられたグループチャットだった。	has:열어 보니	fix	rewrites
+rewrite:past-sequence	開けてみると、扉は結構重たかった。	has:열어 보니	fix	rewrites
+rewrite:past-sequence	ふと気になって机の引き出しを開けてみると、そこには新品のカッターナイフが仕舞われていた。	has:열어 보니	fix	rewrites
+rewrite:past-sequence	会長の視線を追ってみると、森下さんがこちらに向かって歩いてくるのが見えた。	has:쫓아 보니	fix	rewrites
+rewrite:past-sequence	なんだろうと思いながら口を付けてみると、さっぱりとした甘味が口いっぱいに広がった。	has:대어 보니	fix	rewrites
+rewrite:past-sequence	縛るついでに股間を触ってみると……小さいながらしっかり付いている感触があった。	has:만져 보니	fix	rewrites
+rewrite:past-sequence	僕が思い出せる感覚を頼りに考えてみると、どうやら僕は追い詰められているようだった。	has:생각해 보니	fix	rewrites
+rewrite:past-sequence	開いてみると、赤い点がある地図のような画像と一緒にこう書かれてあった。	has:열어 보니	fix	rewrites
+rewrite:past-sequence	ラピスに手を引かれてリビングへ来てみると、アールがソファに横になっていた。	has:와 보니	fix	rewrites
+rewrite:past-sequence	「えぇ、ネットで調べたらホテルも満室でね、帰宅難民になっちゃった」	has:조사했더니	fix	rewrites
+rewrite:past-sequence	「わっはっはっは！！ まぁいいや。バカな話してたら目が覚めた。」	has:이야기했더니	fix	rewrites
+rewrite:past-sequence	「あはは……安心したら腰が抜けちゃった……」	has:안심했더니	fix	rewrites
+rewrite:past-sequence	「なんか立て込んでるみたいで、荷物を渡したらすんなり帰れたわ」	has:건네줬더니	fix	rewrites
+rewrite:past-sequence	「うん。朝起きたら、もういなかったわ」	has:일어났더니	fix	rewrites
+rewrite:past-sequence	「気づくと、時間が経っちゃってるわよね……」	has:눈치채면	keep	rewrites
+rewrite:past-sequence	「選挙期間中は、誰かに見られると誤解を受けるから控えるって話じゃなかったっけ？」	has:보이면	keep	rewrites
+rewrite:past-sequence	「基本的にはＯＫだけど、はがれてしまうと誤解を受けるので、しっかりと接着することが必要……だってさ」	has:벗겨져버리면	keep	rewrites

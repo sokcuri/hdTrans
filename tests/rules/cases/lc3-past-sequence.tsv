@@ -1,0 +1,35 @@
+# 규칙: GRM-175
+rule	input	expected	kind	layer
+rewrite:past-sequence	しずかが振り返ると天をつくような建造物が北の方に見えた。	has:돌아보니	fix	rewrites
+rewrite:past-sequence	ラナイが考え事をしていると三人が帰ってきた。	has:하고 있으니	fix	rewrites
+rewrite:past-sequence	近づく斗輝に気付くと立ち上がり、頭を下げると出かけて行った。	has:알아차리니	fix	rewrites
+rewrite:past-sequence	洞窟を出るとそこには三人の男たちが待っていた。	has:나오니	fix	rewrites
+rewrite:past-sequence	坑道は、３００ｍ位入ると大きな広場になっていた。	has:들어가니	fix	rewrites
+rewrite:past-sequence	むくれるセトをあやしているとドアがノックされた。	has:어르고 있으니	fix	rewrites
+rewrite:past-sequence	トリプティクの声がしたので開けるとトリプティクが部屋に入ってきた。	has:열자	fix	rewrites
+rewrite:past-sequence	顔を上げるとカトレア様が呆れた顔で立っていた。	has:고개를 들자	fix	rewrites
+rewrite:past-sequence	演武場の中央を見ると男がひとり空中に浮かんでいた。	has:보니	keep	rewrites
+rewrite:past-sequence	部屋の前までやってくると麻の袋がドアノブに引っ掛けてあった。	has:오니	keep	rewrites
+rewrite:past-sequence	扉が開くとそこには人の良さそうな中年の男が立っていた。	has:열리니	fix	rewrites
+rewrite:past-sequence	そう思うと俺はニヤリと不敵に笑うのだった。	has:생각하니	fix	rewrites
+rewrite:past-sequence	神様はそう言うと部室のドアから帰っていった。	has:말하니	fix	rewrites
+rewrite:past-sequence	夕食の準備をしているとロスウェが起きてきた。	has:하고 있으니	fix	rewrites
+rewrite:past-sequence	後ろから大きな声がしたので振り向くと走ってくるリナの姿が見えた。	has:뒤돌아 보니	fix	rewrites
+rewrite:past-sequence	ボッチな事情を話すと先輩は顔色を変えて俺に謝ってきた。	has:이야기하니	fix	rewrites
+rewrite:past-sequence	教室を出るとすごく綺麗な先輩が驚いて立っていた。	has:나오니	fix	rewrites
+rewrite:past-sequence	彼女は浅瀬に入ると足があっという間に鰭に変わった。	has:들어가니	fix	rewrites
+rewrite:past-sequence	朝飯を食っていると元気な声が外から聞こえてきた。	has:먹고 있으니	fix	rewrites
+rewrite:past-sequence	そこまで話すとお爺さんがお茶を持って部屋に入ってきた。	has:이야기하니	fix	rewrites
+rewrite:past-sequence	白木に呼び止められたスタッフは、そう言うと走り去ってしまった。	has:말하니	fix	rewrites
+rewrite:past-sequence	役所を出ると執事の瀬川が立っていた。	has:나오니	fix	rewrites
+rewrite:past-sequence	イリスを救うと決めた。	has:구한다고	keep	rewrites
+rewrite:past-sequence	この景色は見覚えがあると気が付いた智深は、辺りを見回した。	has:익는다고	fix	rewrites
+rewrite:past-sequence	さらなる快感を求めていると自覚していた。	has:있다고	fix	rewrites
+rewrite:past-sequence	なんとなく触れるとこちらがダメージを喰らいそうであった。	has:접하면	keep	rewrites
+rewrite:past-sequence	加えると三千の大所帯だった。	has:더하면	keep	rewrites
+rewrite:past-sequence	ボタンを押すと壊れてしまいそうだった。	has:누르면	keep	rewrites
+rewrite:past-sequence	離れすぎると信号が拾えないという欠点があった。	has:떨어지면	keep	rewrites
+rewrite:past-sequence	夕暮れになると子どもたちは必ずその前を通って家に帰った。	has:되면	keep	rewrites
+rewrite:past-sequence	人間が食べると病気になるとさえされていた。	lacks:걸리니	fix	rewrites
+rewrite:past-sequence	結果、先輩たちは俺を見かけるとウザ絡みしてくるようになった。	has:보면	keep	rewrites
+rewrite:past-sequence	出席日数が足りなくなると留年しかねないのに、休み続けた。	has:되면	keep	rewrites

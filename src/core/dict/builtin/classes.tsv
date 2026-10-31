@@ -6,11 +6,13 @@
 //= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
+//= adverb.habit-clause	Adverbs of habit in the clause of a と or たら or after it that make it what used to happen, a condition (いつも彼と話していると 이야기하면, 夕暮れになると子どもたちは必ず通った 되면).
 //= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.habit	Adverbs of habit and frequency: a ますか question with one of them asks what someone usually does, not an offer (毎日勉強しますか 매일 공부합니까).
 //= adverb.negative-polarity	Adverbs that need a negative after them (二度と, 決して, 到底): with an affirmative verb in a quotation before a sentence-final 思うな the な is the negative, a prohibition (二度と会えると思うな 두 번 다시 만날 수 있다고 생각하지 마).
 //= adverb.fact-question	Adverbs before a sentence-final negative question that ask whether something is so, not for an act (まだ来ない？ 아직 오지 않아?, 全然食べないの？): no invitation (spec MNG-7).
 //= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
+//= adverb.suppose	Words of supposition that make a と or たら in their sentence a condition, not a step that followed (もしあの時断っていたら 거절했다면, 仮に負けたとしたら).
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
 //= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
@@ -356,6 +358,7 @@
 //= verb.kakeru-directed	Continuatives of verbs that aim an act at someone or something before かける (話しかける, 微笑みかける, 呼びかける, 追いかける, 振りかける): that かける is part of the verb, not a half-done act.
 //= verb.kakeru-unwilled	Continuatives of verbs of a change that befalls the subject rather than an act it does on purpose (なり, 忘れ, 落ち, 転び): with かける after them the change nearly happened or is going on (なりかけた 될 뻔했다, 忘れかけている 잊어 가고 있다).
 //= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
+//= verb.framing	Verb stems whose と or たら frames what follows, a comparison or a rewording, and is never a step of a story (去年に比べると 비하면, 言い換えると, まとめると).
 //= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
 //= verb.store	Verbs and verbal nouns of storing, putting away or hiding a thing (収納, しまう, 隠す, 収める): a 出す after one in its sentence takes the thing out again, 꺼내다 (収納し、出してみる 수납했다가 꺼내 본다).
 //= verb.stay	Stems of the verbs of staying, waiting and watching, whose て form with a final な tells the listener to keep doing it, ていな (待ってな 기다리고 있어, 見てな 보고 있어), not a reason (思ってな).
@@ -433,6 +436,7 @@
 //= word.supposing	Verbs and verbal nouns of supposing or describing that take what they suppose with と (仮定, 見なす).
 //= word.toha-define	Starts of the words right after a とは that ask or tell what or who it names, so it defines, (이)란, even after a person (先生とは誰ですか, メイドとは一体何).
 //= word.toha-partner	Starts of the words of difference, comparison and relationship that take what とは names as their partner, (와)과는 (それとは違う 그것과는 다르다, 答えとは裏腹に, あいつとは仲がいい); without one later in its clause とは defines, (이)란.
+//= word.turn-manner	Words of manner before なる that make its と or たら a turn things may take, a condition (こうなったら 이렇게 되면, そうなると, いざとなったら).
 //= word.yori-compare	Words after これより that make it a comparison, not the start of an action now (これより前, これより先, これよりまし).
 //= word.yori-degree	Adverbs of degree after which より compares, 보다 (よりずっと, よりもっと).
 //= word.soreni-follow	Starts of the words after which それに is the thing taken up, 거기에, not the conjunction 게다가 (それによって, それに伴って, それに比例して).
@@ -2487,6 +2491,48 @@ mark.supposed	って
 mark.supposed	べき
 mark.supposed	もの
 mark.supposed	こと
+mark.supposed	かね
+adverb.suppose	もし
+adverb.suppose	もしも
+adverb.suppose	万一
+adverb.suppose	万が一
+adverb.suppose	仮に
+word.turn-manner	こう
+word.turn-manner	そう
+word.turn-manner	ああ
+word.turn-manner	どう
+word.turn-manner	いざと
+adverb.habit-clause	いつも
+adverb.habit-clause	毎日
+adverb.habit-clause	毎晩
+adverb.habit-clause	毎朝
+adverb.habit-clause	毎週
+adverb.habit-clause	毎年
+adverb.habit-clause	毎回
+adverb.habit-clause	毎度
+adverb.habit-clause	必ず
+adverb.habit-clause	決まって
+adverb.habit-clause	大抵
+adverb.habit-clause	たいてい
+adverb.habit-clause	常に
+adverb.habit-clause	しょっちゅう
+adverb.habit-clause	いつだって
+adverb.habit-clause	時々
+adverb.habit-clause	ときどき
+adverb.habit-clause	たまに
+adverb.habit-clause	しばしば
+adverb.habit-clause	度々
+adverb.habit-clause	たびたび
+adverb.habit-clause	普段
+adverb.habit-clause	ふだん
+verb.framing	比べ
+verb.framing	較べ
+verb.framing	くらべ
+verb.framing	言い換え
+verb.framing	言いかえ
+verb.framing	まとめ
+verb.framing	例え
+verb.framing	たとえ
 
 mark.voice-end	。
 mark.voice-end	！
@@ -5797,6 +5843,21 @@ verb.quote-start	感じ
 verb.quote-start	聞か	GRM-83
 verb.quote-start	聞い	GRM-83
 verb.quote-start	聞き	GRM-83
+verb.quote-start	気付
+verb.quote-start	気づ
+verb.quote-start	気が付
+verb.quote-start	気がつ
+verb.quote-start	自覚
+verb.quote-start	悟
+verb.quote-start	察
+verb.quote-start	仰
+verb.quote-start	想像
+verb.quote-start	妄想
+verb.quote-start	予想
+verb.quote-start	ぼや
+verb.quote-start	決め
+verb.quote-start	決ま
+verb.quote-start	勘違い
 
 verb.receiver-passive	許
 verb.receiver-passive	任
