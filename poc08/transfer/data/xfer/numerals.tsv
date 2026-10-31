@@ -1,0 +1,24 @@
+#! numerals
+# Korean numerals (N5-55, N5-56). native: the counting word; adn: its form before a counter; sino: Sino-Korean.
+# A counter's num feature (lexicon) picks native or sino; native numerals stop at 99, higher numbers are Sino-Korean.
+value	native	adn	sino
+1	하나	한	일
+2	둘	두	이
+3	셋	세	삼
+4	넷	네	사
+5	다섯	다섯	오
+6	여섯	여섯	육
+7	일곱	일곱	칠
+8	여덟	여덟	팔
+9	아홉	아홉	구
+10	열	열	십
+20	스물	스무	이십
+30	서른	서른	삼십
+40	마흔	마흔	사십
+50	쉰	쉰	오십
+60	예순	예순	육십
+70	일흔	일흔	칠십
+80	여든	여든	팔십
+90	아흔	아흔	구십
+100	-	-	백
+1000	-	-	천

@@ -12,10 +12,11 @@
 //                                       kind=punct, form.role=adn); consumed
 //            a trailing ? makes an atom optional
 //   when   conditions joined by spaces, each path=v|v or path!=v ("absent", "present" test for a value):
-//            utt (dialogue | narration); cl.<feature> and main.<feature> (tense pol negFn force polite link linkSub
-//            aspect voice bene mod; has = a lemma of the clause's tokens; endform = the form its predicate ends in);
+//            utt (dialogue | narration), utt.level (S's source level); cl.<feature> and main.<feature> (tense pol negFn force polite link linkSub
+//            aspect voice bene mod; args = the roles of its overt arguments; has = a lemma of the clause's tokens;
+//            endform = the form its predicate ends in); mainpred.<key> the main clause's predicate word;
 //            <slot>.<key> and pred.<key>, head.<key>, next.<key>, prev.<key> with key
-//            lemma pos form ko cls kcls vpos or a lexicon feature (vol asp pclass frame …)
+//            lemma pos form ko cls kcls vpos trans (+ when its frame takes an object) or a lexicon feature
 //   then   assignments target.field=value joined by ";" (target: a slot, or pred = the clause's last predicate node);
 //          line.route=fallback holds the line for 0.7.x (a shape the native rows do not translate yet)
 //   ko     node templates joined by spaces, inserted at the row's first consumed token: Kind:lemma{field=value,flag};
@@ -78,9 +79,11 @@ struct Sense {
     std::string ko, cue, frame, st, prov;
     std::map<std::string, std::string> feat;
     int sense = 1;
+    bool stand = false;  // sense 1 of a level list, replaced by the lemma's sense rows
 };
 struct Entry {
     std::string ja, yomi, pos, file;
+    std::map<std::string, std::string> feat;  // features of the lemma (level lists): vol asp te cls anim …
     std::vector<Sense> senses;
 };
 
@@ -90,6 +93,7 @@ struct Data {
     std::vector<Entry> entries;
     std::unordered_map<std::string, std::vector<size_t>> byLemma;   // ja → entries
     std::unordered_map<std::string, std::string> classParent;      // @class → parent ("" root)
+    std::map<int, std::array<std::string, 3>> numerals;            // value → native, adnominal, Sino-Korean
     std::vector<std::string> errors;
     const StructureData* structure = nullptr;  // aux.tsv reading of tokens (owned by TransferData)
 
@@ -97,8 +101,8 @@ struct Data {
     bool IsA(const std::string& cls, const std::string& ancestor) const;
 };
 
-// Reads data/xfer/*.tsv under transferDir, the level lexicons (lexicon/lex/levels/*.tsv) and the classes
-// (lexicon/lex/classes.tsv) under dataRoot. Errors go to d.errors (a row with an error does not load).
+// Reads data/xfer/*.tsv under transferDir, the level lexicons (lexicon/lex/levels/*.tsv, then the sense rows of
+// lexicon/lex/lexicon/curriculum.tsv) and the classes (lexicon/lex/classes.tsv) under dataRoot. Errors go to d.errors (a row with an error does not load).
 void Load(const std::string& dataRoot, Data& d);
 
 // Spec ids defined in the markdown files under specDir (headings and table cells of the form AREA-N, N5-H3).

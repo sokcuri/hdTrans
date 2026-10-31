@@ -19,3 +19,5 @@ pred.naru.adj	N5-43	{A} 成る	-	A.ctype=conn;A.eomi=-어	V:지다{aux}	m	own	�
 pred.naru.na	N5-43	{Na} [role=cop-ni] [role=naru]	-	Na.ctype=conn;Na.eomi=-어	V:지다{aux}	m	own	静かになる → 조용해지다
 pred.naru.n	N5-43	{N} [kase=ni] [role=naru]	-	-	P:subj V:되다	m	own	先生になる → 선생님이 되다
 pred.nominal	N5-57	{V} [role=nomi]	-	V.ctype=adn:nonpast	N:것{dep}	m	own	読むのが好き → 읽는 것을 좋아하다
+pred.na.ja.aru	N5-05	{Na} [role=cop-ja] 有る	-	-	-	m	own	静かじゃありません → 안 조용해요
+pred.na.dewa.aru	N5-05	{Na} [role=cop-te] [kase=wa] 有る	-	-	-	m	own	静かではありません → 조용하지 않습니다

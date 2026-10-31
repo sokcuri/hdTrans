@@ -4,5 +4,5 @@ supp.issda	fix	「先生がいない。」	「선생님이 없어.」	inv
 supp.issda	keep	「先生がいる。」	「선생님이 있어.」	inv
 supp.alda	fix	「私は分からない。」	「난 몰라.」	inv
 supp.alda	keep	「私は分かる。」	「난 알아.」	inv
-supp.anida	fix	「私は学生じゃありません。」	「난 학생이 아니에요.」	inv
-supp.anida	keep	「私は学生です。」	「난 학생이에요.」	inv
+supp.anida	fix	「私は学生じゃありません。」	「저는 학생이 아니에요.」	inv
+supp.anida	keep	「私は学生です。」	「저는 학생이에요.」	inv

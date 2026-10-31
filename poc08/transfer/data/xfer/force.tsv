@@ -6,7 +6,7 @@ force.kudasai	N5-26	[link=te] 下さる	-	pred.aspect=give;pred.mood=imp	-	m	own
 force.naide	N5-27	[pol=neg] [link=te] 下さる	-	pred.neg=ji-ma;pred.mood=imp	-	m	own	食べないでください → 먹지 마세요
 force.mashou	N5-28	[aux.masu.mashou]	-	pred.mood=prop	-	m	own	行きましょう → 가죠
 force.mashouka	N5-29	[aux.masu.mashou] [aux.f.ka]	-	pred.mood=prop;pred.eomi=lkka	-	m	own	行きましょうか → 갈까요
-force.masenka	N5-30	[polite=desu-masu] [pol=neg] [aux.f.ka]	-	pred.neg=ji-anh;pred.mood=q;pred.eomi=lrae	-	m	own	行きませんか → 가지 않을래요
+force.masenka	N5-30	[polite=desu-masu] [pol=neg] [aux.f.ka]	prev.kind!=aspect pred.vol!=-	pred.neg=ji-anh;pred.mood=q;pred.eomi=lrae	-	m	own	行きませんか → 가지 않을래요
 force.te.final	N5-26	[link=te]	next.role=end|q|excl|close	pred.mood=imp	-	m	own	読んで。 → 읽어.
 force.naide.final	N5-27	[pol=neg] [link=te]	next.role=end|q|excl|close	pred.neg=ji-ma;pred.mood=imp	-	m	own	買わないで。 → 사지 마.
 force.te.final.eol	N5-26	[link=te]	next.pos=absent	pred.mood=imp	-	m	own	読んで → 읽어 (line end)

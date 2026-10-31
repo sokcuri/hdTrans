@@ -2,6 +2,7 @@
 # Development seed of the N5 vocabulary for the native route; superseded by the N5 lexicon rows.
 ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 私-代名詞	わたし	n	1	나			cls=@person pron=1	m	own	
+私-代名詞	わたし	n	2	저	register=polite		cls=@person pron=1	m	own	
 彼	かれ	n	1	그			cls=@person	m	own	
 学生	がくせい	n	1	학생			cls=@person.role	m	own	
 先生	せんせい	n	1	선생님			cls=@person.higher	m	own	
@@ -20,7 +21,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 今日	きょう	n	1	오늘			cls=@time	m	own	
 毎日	まいにち	n	1	매일			cls=@time	m	own	
 勉強	べんきょう	n	1	공부				m	own	
-食べる	たべる	v1	1	먹다			vol=+ asp=activity	m	own	
+食べる	たべる	v1	1	먹다			vol=+ asp=activity args=o=@food	m	own	
 飲む	のむ	v5	1	마시다			vol=+ asp=activity	m	own	
 読む	よむ	v5	1	읽다			vol=+ asp=activity	m	own	
 書く	かく	v5	1	쓰다			vol=+ asp=activity	m	own	
@@ -39,7 +40,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 為る	する	vs	1	하다			vol=+ asp=activity	m	own	
 有る	ある	v5	1	있다			vol=- asp=state	m	own	
 居る	いる	v1	1	있다			vol=- asp=state	m	own	
-分かる	わかる	v5	1	알다			vol=- asp=state	m	own	
+分かる	わかる	v5	1	알다		が=을	vol=- asp=state	m	own	
 知る	しる	v5	1	알다			vol=- asp=state	m	own	
 高い	たかい	adj	1	비싸다				m	own	
 安い	やすい	adj	1	싸다				m	own	
@@ -47,7 +48,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 良い	よい	adj	1	좋다				m	own	
 静か	しずか	na	1	조용하다				m	own	
 有名	ゆうめい	na	1	유명하다				m	own	
-好き	すき	na	1	좋아하다		ga:obj	vpos=V	m	own	
+好き	すき	na	1	좋아하다		が=을	vpos=V	m	own	
 余り	あまり	adv	1	별로			npi=neg	m	own	
 結婚	けっこん	n	1	결혼			asp=change-past	m	own	
 ペン-pen	ぺん	n	1	펜			cls=@writing.tool	m	own	
@@ -61,3 +62,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 此れ	これ	n	1	이것				m	own	
 何	なに	n	1	무엇			wh=+	m	own	
 此処	ここ	n	1	여기			cls=@place	m	own	
+会う	あう	v5	1	만나다		に=을	vol=+ asp=activity	m	own	
+君	きみ	n	1	너			cls=@person	m	own	
+車	くるま	n	1	차			cls=@vehicle	m	own	
+日本語	にほんご	n	1	일본어			cls=@language	m	own	

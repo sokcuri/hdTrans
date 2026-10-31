@@ -6,18 +6,14 @@ mod.tai.neg	fix	「パンを食べたくない。」	「빵을 먹고 싶지 않
 mod.tai.neg	keep	「パンを食べない。」	「빵을 안 먹어.」	inv
 mod.hoshii	fix	「本がほしい。」	「책을 갖고 싶어.」	inv
 mod.hoshii	keep	「本が高い。」	「책이 비싸.」	inv
-mod.desho.v	fix	「明日は雨が降るでしょう。」	「내일은 비가 올 거예요.」	inv
-mod.desho.v	keep	「明日は雨が降ります。」	「내일은 비가 와요.」	inv
-mod.desho.a	fix	「本は高いでしょう。」	「책은 비쌀 거예요.」	inv
-mod.desho.a	keep	「本は高いです。」	「책은 비싸요.」	inv
+mod.desho	fix	「明日は雨が降るでしょう。」	「내일은 비가 올 거예요.」	inv
+mod.desho	keep	「明日は雨が降ります。」	「내일은 비가 와요.」	inv
 mod.desho.na	fix	「部屋は静かでしょう。」	「방은 조용할 거예요.」	inv
 mod.desho.na	keep	「部屋は静かです。」	「방은 조용해요.」	inv
 mod.desho.n	fix	「明日は雨でしょう。」	「내일은 비일 거예요.」	inv
 mod.desho.n	keep	「明日は雨です。」	「내일은 비예요.」	inv
-mod.daro.v	fix	雨が降るだろう。	비가 올 것이다.	inv
-mod.daro.v	keep	雨が降る。	비가 온다.	inv
-mod.daro.a	fix	本は高いだろう。	책은 비쌀 것이다.	inv
-mod.daro.a	keep	本は高い。	책은 비싸다.	inv
+mod.daro	fix	雨が降るだろう。	비가 올 것이다.	inv
+mod.daro	keep	雨が降る。	비가 온다.	inv
 mod.daro.na	fix	部屋は静かだろう。	방은 조용할 것이다.	inv
 mod.daro.na	keep	部屋は静かだ。	방은 조용하다.	inv
 mod.daro.n	fix	明日は雨だろう。	내일은 비일 것이다.	inv
@@ -40,3 +36,12 @@ mod.koto.nai	fix	学校に行ったことがない。	학교에 간 적이 없�
 mod.koto.nai	keep	学校に行ったことがある。	학교에 간 적이 있다.	inv
 mod.daro.wh	fix	「何だろう？」	「뭘까?」	inv
 mod.daro.wh	keep	「雨だろう。」	「비일 거야.」	inv
+mod.tewaikenai.masu	fix	「学校に行ってはいけません。」	「학교에 가면 안 돼요.」	inv
+mod.tewaikenai.masu	keep	「学校に行ってもいいです。」	「학교에 가도 돼요.」	inv
+mod.chaikenai.masu	fix	「パンを食べちゃいけません。」	「빵을 먹으면 안 돼요.」	inv
+mod.chaikenai.masu	keep	「パンを食べてもいいです。」	「빵을 먹어도 돼요.」	inv
+mod.tai	fix	毎日、勉強したい。	매일, 공부하고 싶다.	inv
+mod.daro	fix	学校に行かないだろう。	학교에 가지 않을 것이다.	inv
+mod.tsumori	fix	学校に行かないつもりだ。	학교에 가지 않을 생각이다.	inv
+mod.hoshii.neg	fix	「本がほしくない。」	「책을 갖고 싶지 않아.」	inv
+mod.hoshii.neg	keep	「本がほしい。」	「책을 갖고 싶어.」	inv

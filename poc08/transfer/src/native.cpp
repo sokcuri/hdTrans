@@ -124,10 +124,11 @@ bool ParseCond(const std::string& t, Cond& c, std::string& err) {
     c.target = path.substr(0, dot);
     if (dot != std::string::npos) c.key = path.substr(dot + 1);
     c.values = Split(t.substr(vat), '|');
-    static const std::set<std::string> targets{"utt", "cl", "main", "pred", "head", "next", "prev",
+    static const std::set<std::string> targets{"utt", "cl", "main", "mainpred", "pred", "head", "next", "prev",
                                                "N", "NP", "V", "A", "Na", "X", "C"};
     if (!targets.count(c.target)) return err = "unknown condition target " + c.target, false;
     if (c.target != "utt" && c.key.empty()) return err = "condition without a key: " + t, false;
+    if (c.target == "utt" && !c.key.empty() && c.key != "level") return err = "utt has only the key level: " + t, false;
     return true;
 }
 
@@ -165,6 +166,12 @@ void LoadRows(const std::string& path, Data& d) {
         return;
     }
     const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
+    if (text.starts_with("#! numerals")) {
+        Rows(text, [&](const std::vector<std::string>& f, size_t) {
+            if (f.size() >= 4) d.numerals[std::atoi(f[0].c_str())] = {f[1], f[2], f[3]};
+        });
+        return;
+    }
     if (text.starts_with("#! supp")) {
         Rows(text, [&](const std::vector<std::string>& f, size_t lineNo) {
             if (f.size() < 4) {
@@ -256,45 +263,76 @@ void LoadCases(const std::string& path, Data& d) {
     });
 }
 
+// A lexicon file, by its header: sense rows (ja yomi pos sense ko cue frame feat st prov note) or a level list
+// (ja yomi pos … ko …: one row per lemma, ko = sense 1, the other named columns are features of the entry). Sense
+// rows replace the sense-1 stand-in a level list gave.
 void LoadLexicon(const std::string& path, Data& d) {
     std::string text;
     if (!ReadWholeFile(path, text)) return;
     const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
-    // ja yomi pos sense ko cue frame feat st prov note
-    Rows(text, [&](const std::vector<std::string>& f, size_t lineNo) {
-        if (f.size() < 5 || f[0].empty() || f[4].empty()) {
-            d.errors.push_back(file + ":" + std::to_string(lineNo) + ": a lexicon row needs ja yomi pos sense ko");
-            return;
+    std::vector<std::string> head;
+    size_t at = 0, lineNo = 0;
+    static const std::set<std::string> plain{"ja", "yomi", "pos", "sense", "ko", "cue", "frame", "feat", "st",
+                                             "prov", "note", "orth", "field", "grid", "ctype", "senses",
+                                             "gcls", "write", "gframe", "gflags"};
+    while (at < text.size()) {
+        size_t e = text.find('\n', at);
+        if (e == std::string::npos) e = text.size();
+        std::string row = text.substr(at, e - at);
+        at = e + 1;
+        lineNo++;
+        if (!row.empty() && row.back() == '\r') row.pop_back();
+        if (row.empty() || row[0] == '#') continue;
+        const std::vector<std::string> f = Split(row, '\t');
+        if (head.empty()) {
+            head = f;
+            continue;
         }
+        std::map<std::string, std::string> c;
+        for (size_t i = 0; i < f.size() && i < head.size(); i++) c[head[i]] = f[i];
+        if (c["ja"].empty() || c["ko"].empty()) {
+            d.errors.push_back(file + ":" + std::to_string(lineNo) + ": a lexicon row needs ja and ko");
+            continue;
+        }
+        const bool senseRow = c.count("sense") > 0;
         Sense s;
-        s.ko = f[4];
-        s.sense = std::atoi(f[3].c_str());
-        if (f.size() > 5) s.cue = f[5];
-        if (f.size() > 6) s.frame = f[6];
-        if (f.size() > 7)
-            for (const std::string& kv : Words(f[7])) {
-                const size_t eq = kv.find('=');
-                if (eq != std::string::npos) s.feat[kv.substr(0, eq)] = kv.substr(eq + 1);
-            }
-        if (f.size() > 8) s.st = f[8];
-        if (f.size() > 9) s.prov = f[9];
-        auto& list = d.byLemma[f[0]];
-        for (size_t i : list) {
-            Entry& e = d.entries[i];
-            if (e.yomi == f[1] && e.pos == f[2]) {
-                e.senses.push_back(std::move(s));
-                return;
-            }
+        s.ko = c["ko"];
+        s.sense = senseRow ? std::atoi(c["sense"].c_str()) : 1;
+        s.cue = c["cue"];
+        s.frame = c["frame"];
+        s.st = c["st"];
+        s.prov = c["prov"];
+        s.stand = !senseRow;
+        for (const std::string& kv : Words(c["feat"])) {
+            const size_t eq = kv.find('=');
+            if (eq != std::string::npos) s.feat[kv.substr(0, eq)] = kv.substr(eq + 1);
         }
-        Entry e;
-        e.ja = f[0];
-        e.yomi = f[1];
-        e.pos = f[2];
-        e.file = file;
-        e.senses.push_back(std::move(s));
-        list.push_back(d.entries.size());
-        d.entries.push_back(std::move(e));
-    });
+        std::map<std::string, std::string> entryFeat;
+        if (!senseRow)
+            for (const auto& [k, v] : c)
+                if (!plain.count(k) && !v.empty() && v != "-") entryFeat[k] = v;
+        auto& list = d.byLemma[c["ja"]];
+        Entry* found = nullptr;
+        for (size_t i : list)
+            if (d.entries[i].yomi == c["yomi"] && d.entries[i].pos == c["pos"]) found = &d.entries[i];
+        if (!found) {
+            Entry ne;
+            ne.ja = c["ja"];
+            ne.yomi = c["yomi"];
+            ne.pos = c["pos"];
+            ne.file = file;
+            list.push_back(d.entries.size());
+            d.entries.push_back(std::move(ne));
+            found = &d.entries.back();
+        }
+        for (const auto& [k, v] : entryFeat) found->feat[k] = v;
+        if (senseRow) {
+            std::erase_if(found->senses, [](const Sense& x) { return x.stand; });
+            found->senses.push_back(std::move(s));
+        } else if (found->senses.empty()) {
+            found->senses.push_back(std::move(s));
+        }
+    }
 }
 
 void LoadClasses(const std::string& path, Data& d) {
@@ -318,7 +356,7 @@ void SetSpecificity(const Data& d, Row& r) {
     for (const Cond& c : r.conds) {
         if (c.negate) {
             facts++;
-        } else if (c.key == "lemma" || c.key == "ko" || c.key == "has") {
+        } else if (c.key == "lemma" || c.key == "ko" || c.key == "has" || c.key == "frame") {  // a frame belongs to one lemma
             lemmas++;
         } else if (c.key == "cls") {
             int best = 0;
@@ -366,6 +404,7 @@ void Load(const std::string& root, Data& d) {
     }
     LoadClasses(root + "/lexicon/lex/classes.tsv", d);
     for (const std::string& f : ListFiles(root + "/lexicon/lex/levels", ".tsv")) LoadLexicon(f, d);
+    LoadLexicon(root + "/lexicon/lex/lexicon/curriculum.tsv", d);
     for (Row& r : d.rows) SetSpecificity(d, r);
     std::set<std::string> ids;
     for (const Row& r : d.rows)
@@ -408,12 +447,19 @@ std::string PosName(Pos p) { return std::string(Name(F::pos, static_cast<unsigne
 
 // One analysed token as the matcher reads it.
 struct Tk {
-    const Token* t = nullptr;
+    const Token* t = nullptr;    // the first analyser token of the unit
+    int first = 0, last = 0;     // analyser tokens of the unit (a lexicon long unit joins several)
+    Span src;
+    Pos epos = Pos::unk;         // the part of speech the unit is read as (the lexicon's, when it names one)
     std::string lemma, surf, pos, form;
     const TokAux* aux = nullptr;
     bool content = false;  // a content word that no function row names
     const Entry* entry = nullptr;
     const Sense* sense = nullptr;
+    std::string senseWhy;        // the cue that chose the sense ("" = sense 1 by default)
+    int number = -1;             // a numeral unit: its value (-1 none); digits = written in digits
+    bool digits = false;
+    const Entry* counter = nullptr;  // the counter word joined to the numeral
     int bun = -1, clause = -1;
     uint16_t utt = 0;
     bool dialogue = false;
@@ -436,6 +482,7 @@ struct Ctx {
     Doc& doc;
     Line& line;
     std::vector<Tk> tk;
+    std::vector<int> tkOf;       // analyser token → unit
     std::vector<TokAux> aux;
 
     int ClauseOfBun(int b) const {
@@ -461,7 +508,7 @@ struct Ctx {
         if (a.slot == "NP" && std::find(k.aux->facts.begin(), k.aux->facts.end(), "role=nomi") != k.aux->facts.end())
             return true;
         if (!k.content) return false;
-        const Pos p = k.t->pos;
+        const Pos p = k.epos;
         bool ok = false;
         if (a.slot == "N" || a.slot == "NP") ok = IsNounPos(p);
         else if (a.slot == "V") ok = IsVerbPos(p);
@@ -471,8 +518,10 @@ struct Ctx {
         else if (a.slot == "C") ok = true;
         if (!ok) return false;
         if (!a.cls.empty()) {
-            const std::string cls = k.sense ? Get(k.sense->feat, "cls") : "";
-            if (cls.empty() || !d.IsA(cls, a.cls)) return false;
+            bool isA = false;
+            for (const std::string& one : Split(TokKey(i, "cls"), ' '))
+                isA = isA || (!one.empty() && d.IsA(one, a.cls));
+            if (!isA) return false;
         }
         return true;
     }
@@ -531,12 +580,24 @@ struct Ctx {
         if (key == "surf") return k.surf;
         if (key == "ko") return k.sense ? k.sense->ko : "";
         if (key == "frame") return k.sense ? k.sense->frame : "";
+        if (key == "cls" && k.sense) {
+            const std::string c = Get(k.sense->feat, "cls");
+            return c.empty() && k.entry ? Get(k.entry->feat, "cls") : c;
+        }
         if (key == "kind" || key == "role" || key == "kase" || key == "link") {
             for (const std::string& f : k.aux->facts)
                 if (f.starts_with(key + "=")) return f.substr(key.size() + 1);
             return "";
         }
-        return k.sense ? Get(k.sense->feat, key) : "";
+        if (!k.sense) return "";
+        if (key == "trans") {
+            // a verb that takes an object: its case frame (args) names o=
+            std::string a = Get(k.sense->feat, "args");
+            if (a.empty() && k.entry) a = Get(k.entry->feat, "args");
+            return (' ' + a).find(" o=") != std::string::npos ? "+" : "";
+        }
+        const std::string v = Get(k.sense->feat, key);
+        return v.empty() && k.entry ? Get(k.entry->feat, key) : v;
     }
 
     std::string ClauseKey(int c, const std::string& key) const {
@@ -562,17 +623,152 @@ struct Ctx {
         return "";
     }
 
+    // Sense choice by cue rules (DESIGN-v3 §5): a sense applies when every atom of its cue holds; among those the
+    // most specific wins (lemma atoms, class depth, form and neighbour atoms, register, atom count); none → the
+    // lowest sense without a cue. Atoms: subj obj dat loc with from to arg (the clause's arguments when the word is
+    // its predicate), head (the noun an adnominal clause modifies), pred (the predicate a noun belongs to), next and
+    // after (neighbouring lemmas), mod, form (adv: a 連用形 adjective before a predicate), register (polite), main.vol.
+    const Sense* Choose(size_t i, std::string& why) const {
+        const Tk& k = tk[i];
+        const Entry& e = *k.entry;
+        auto classesOf = [&](const std::string& lemma) {
+            std::vector<std::string> out;
+            auto it = d.byLemma.find(lemma);
+            if (it == d.byLemma.end()) return out;
+            for (size_t ei : it->second) {
+                const Entry& en = d.entries[ei];
+                std::string c = Get(en.feat, "cls");
+                for (const Sense& s : en.senses)
+                    if (s.sense == 1 && c.empty()) c = Get(s.feat, "cls");
+                for (const std::string& one : Split(c, '|'))
+                    for (const std::string& two : Split(one, ' '))
+                        if (!two.empty()) out.push_back(two);
+            }
+            return out;
+        };
+        // the context
+        std::map<std::string, std::vector<std::string>> args;
+        std::vector<std::string> heads, preds, nexts, afters;
+        std::set<std::string> forms{k.form};
+        const int cl = k.clause;
+        if (cl >= 0) {
+            const Clause& c = line.clauses[static_cast<size_t>(cl)];
+            if (PredTok(cl) == static_cast<int>(i))
+                for (const Arg& a : c.args) {
+                    std::string role(Name(F::role, static_cast<unsigned>(a.role)));
+                    if (role == "topic") role = "subj";
+                    if (role == "head") heads.emplace_back(doc.S(a.lemma));
+                    else args[role].emplace_back(doc.S(a.lemma));
+                }
+        }
+        if (k.bun >= 0 && line.buns[static_cast<size_t>(k.bun)].head >= 0) {
+            const int h = tkOf[line.buns[static_cast<size_t>(line.buns[static_cast<size_t>(k.bun)].head)].content];
+            if (h >= 0 && tk[static_cast<size_t>(h)].content) preds.push_back(tk[static_cast<size_t>(h)].lemma);
+        }
+        if (i + 1 < tk.size()) nexts.push_back(tk[i + 1].lemma);
+        if (i > 0) afters.push_back(tk[i - 1].lemma);
+        if (k.epos == Pos::adj && k.form == "renyo" && i + 1 < tk.size() && tk[i + 1].content) forms.insert("adv");
+        const Utterance* u = k.utt < line.utts.size() ? &line.utts[k.utt] : nullptr;
+        const bool polite = (u && (u->sourceLevel == srclevel::desu_masu || u->sourceLevel == srclevel::keigo)) ||
+                            (cl >= 0 && line.clauses[static_cast<size_t>(cl)].polite != polite::plain);
+        const std::string mainVol = [&] {
+            if (cl < 0 || line.clauses[static_cast<size_t>(cl)].parent < 0) return std::string();
+            return TokKey(PredTok(line.clauses[static_cast<size_t>(cl)].parent), "vol");
+        }();
+        auto nounsMatch = [&](const std::vector<std::string>& nouns, const std::vector<std::string>& vals,
+                              int& lemmaHit, int& depth) {
+            bool any = false;
+            for (const std::string& nn : nouns)
+                for (const std::string& v : vals) {
+                    if (v.starts_with("@")) {
+                        for (const std::string& c : classesOf(nn))
+                            if (d.IsA(c, v)) {
+                                any = true;
+                                depth = std::max(depth, d.ClassDepth(v));
+                            }
+                    } else if (v == nn) {
+                        any = true;
+                        lemmaHit = 1;
+                    }
+                }
+            return any;
+        };
+        static const std::set<std::string> argSlots{"subj", "obj", "dat", "loc", "with", "from", "to"};
+        std::array<int, 5> best{};
+        const Sense* chosen = nullptr;
+        for (const Sense& s : e.senses) {
+            if (s.cue.empty()) continue;
+            std::array<int, 5> t{};
+            bool holds = true;
+            for (const std::string& atom : Words(s.cue)) {
+                const size_t eq = atom.find('=');
+                const std::string slot = atom.substr(0, eq);
+                const std::vector<std::string> vals = Split(eq == std::string::npos ? "" : atom.substr(eq + 1), '|');
+                const bool none = vals.size() == 1 && vals[0] == "-";
+                int lemmaHit = 0, depth = 0;
+                bool ok = false;
+                int kind = 2;
+                if (argSlots.count(slot) || slot == "arg") {
+                    std::vector<std::string> nouns;
+                    for (const auto& [role, list] : args)
+                        if (slot == "arg" ? argSlots.count(role) > 0 : role == slot) nouns.insert(nouns.end(), list.begin(), list.end());
+                    ok = none ? nouns.empty() : nounsMatch(nouns, vals, lemmaHit, depth);
+                    kind = none ? 2 : lemmaHit ? 0 : 1;
+                } else if (slot == "head") {
+                    ok = none ? heads.empty() : nounsMatch(heads, vals, lemmaHit, depth);
+                    kind = none ? 2 : lemmaHit ? 0 : 1;
+                } else if (slot == "pred" || slot == "next" || slot == "after" || slot == "mod") {
+                    const std::vector<std::string>& pool = slot == "pred" ? preds : slot == "next" ? nexts
+                                                         : slot == "after" ? afters : std::vector<std::string>{};
+                    ok = none ? pool.empty() : nounsMatch(pool, vals, lemmaHit, depth);
+                } else if (slot == "form") {
+                    for (const std::string& v : vals) ok = ok || forms.count(v) > 0;
+                } else if (slot == "main.vol") {
+                    for (const std::string& v : vals) ok = ok || v == mainVol;
+                } else if (slot == "register") {
+                    for (const std::string& v : vals) ok = ok || (v == "polite" && polite);
+                    kind = 3;
+                }
+                if (!ok) {
+                    holds = false;
+                    break;
+                }
+                if (kind == 0) t[0]++;
+                else if (kind == 1) t[1] += depth;
+                else if (kind == 2) t[2]++;
+                else t[3]++;
+                t[4]++;
+            }
+            if (holds && (!chosen || t > best)) {
+                best = t;
+                chosen = &s;
+            }
+        }
+        if (chosen) {
+            why = chosen->cue;
+            return chosen;
+        }
+        const Sense* first = nullptr;
+        for (const Sense& s : e.senses)
+            if (!first || s.sense < first->sense) first = &s;
+        return first;
+    }
+
     int PredTok(int c) const {
         if (c < 0 || c >= static_cast<int>(line.clauses.size())) return -1;
         const Clause& cl = line.clauses[static_cast<size_t>(c)];
-        if (cl.pred >= line.buns.size()) return -1;
-        return line.buns[cl.pred].content;
+        if (cl.pred >= line.buns.size() || line.buns[cl.pred].content >= tkOf.size()) return -1;
+        return tkOf[line.buns[cl.pred].content];
     }
 
     bool CondOk(const Cond& cd, const Cand& c, std::string& fact) const {
         std::string v;
         bool multi = false;  // mod holds several values
-        if (cd.target == "utt") {
+        if (cd.target == "utt" && cd.key == "level") {
+            // the source level S read for the utterance: plain desu-masu keigo archaic casual
+            const Tk* a = c.anchor >= 0 ? &tk[static_cast<size_t>(c.anchor)] : nullptr;
+            if (a && a->utt < line.utts.size()) v = std::string(Name(F::srclevel, line.utts[a->utt].sourceLevel));
+        } else if (cd.target == "utt") {
             v = c.anchor >= 0 && tk[static_cast<size_t>(c.anchor)].dialogue ? "dialogue" : "narration";
         } else if (cd.target == "cl" && cd.key == "has") {
             // the lemmas of the clause's tokens
@@ -587,18 +783,29 @@ struct Ctx {
             if (c.clause >= 0 && line.clauses[static_cast<size_t>(c.clause)].pred < line.buns.size()) {
                 const Bunsetsu& b = line.buns[line.clauses[static_cast<size_t>(c.clause)].pred];
                 for (int i = b.last; i >= b.first; i--)
-                    if (tk[static_cast<size_t>(i)].t->pos != Pos::sym) {
-                        v = tk[static_cast<size_t>(i)].form;
+                    if (static_cast<size_t>(i) < tkOf.size() && tk[static_cast<size_t>(tkOf[static_cast<size_t>(i)])].t->pos != Pos::sym) {
+                        v = tk[static_cast<size_t>(tkOf[static_cast<size_t>(i)])].form;
                         break;
                     }
             }
-        } else if (cd.target == "cl") {
-            v = ClauseKey(c.clause, cd.key);
-            multi = cd.key == "mod";
-        } else if (cd.target == "main") {
+        } else if (cd.target == "cl" || cd.target == "main") {
+            int cl = c.clause;
+            if (cd.target == "main") cl = cl >= 0 ? line.clauses[static_cast<size_t>(cl)].parent : -1;
+            if (cd.key == "args") {
+                // the roles of the clause's overt arguments
+                multi = true;
+                if (cl >= 0)
+                    for (const Arg& ag : line.clauses[static_cast<size_t>(cl)].args)
+                        if (ag.how != how::omitted)
+                            v += (v.empty() ? "" : ",") + std::string(Name(F::role, static_cast<unsigned>(ag.role)));
+            } else {
+                v = ClauseKey(cl, cd.key);
+                multi = cd.key == "mod";
+            }
+        } else if (cd.target == "mainpred") {
+            // the predicate word of the main clause, as a lexicon word (main.vol in the sense cues)
             const int p = c.clause >= 0 ? line.clauses[static_cast<size_t>(c.clause)].parent : -1;
-            v = ClauseKey(p, cd.key);
-            multi = cd.key == "mod";
+            v = TokKey(PredTok(p), cd.key);
         } else if (cd.target == "pred") {
             v = TokKey(PredTok(c.clause), cd.key);
         } else if (cd.target == "head") {
@@ -606,7 +813,7 @@ struct Ctx {
             if (c.anchor >= 0) {
                 const int b = tk[static_cast<size_t>(c.anchor)].bun;
                 if (b >= 0 && line.buns[static_cast<size_t>(b)].head >= 0)
-                    h = line.buns[static_cast<size_t>(line.buns[static_cast<size_t>(b)].head)].content;
+                    h = tkOf[line.buns[static_cast<size_t>(line.buns[static_cast<size_t>(b)].head)].content];
             }
             v = TokKey(h, cd.key);
         } else if (cd.target == "next") {
@@ -617,11 +824,18 @@ struct Ctx {
             auto it = c.slots.find(cd.target);
             v = it == c.slots.end() ? "" : TokKey(it->second, cd.key);
         }
+        if (cd.key == "frame" || cd.key == "cls") {
+            std::replace(v.begin(), v.end(), ' ', ',');
+            multi = true;
+        }
         bool hit = false;
         for (const std::string& want : cd.values) {
             if (want == "absent") hit = hit || v.empty();
             else if (want == "present") hit = hit || !v.empty();
-            else if (cd.key == "cls") hit = hit || (!v.empty() && d.IsA(v, want));
+            else if (cd.key == "cls") {
+                for (const std::string& one : Split(v, ','))
+                    hit = hit || (!one.empty() && d.IsA(one, want));
+            }
             else if (multi) hit = hit || (',' + v + ',').find(',' + want + ',') != std::string::npos;
             else hit = hit || v == want;
         }
@@ -650,36 +864,130 @@ std::string Hiragana(std::string_view s) {
     return out;
 }
 
-// The lexicon entry of a token: same lemma and pos (verb classes and noun kinds match each other when no exact
-// pos exists); among several, the one whose reading is the token's reading.
-const Entry* FindEntry(const Data& d, const Doc& doc, const Token& t) {
-    auto it = d.byLemma.find(std::string(doc.S(t.lemma)));
-    if (it == d.byLemma.end()) return nullptr;
-    const std::string pos = PosName(t.pos);
-    const Entry* loose = nullptr;
-    const Entry* exact = nullptr;
-    int exactCount = 0;
-    for (size_t i : it->second) {
-        const Entry& e = d.entries[i];
-        Pos ep = Pos::unk;
-        unsigned v = 0;
-        if (Parse(F::pos, e.pos, v)) ep = static_cast<Pos>(v);
-        if (e.pos == pos) {
-            if (!exact || Hiragana(doc.S(t.reading)) == e.yomi) exact = &e;
-            exactCount++;
-        } else if (!loose && ((IsVerbPos(ep) && IsVerbPos(t.pos)) || (IsNounPos(ep) && IsNounPos(t.pos)))) {
-            loose = &e;
+// The value of a numeral written in digits or in kanji (三, 二十, 百五十), -1 when it is neither.
+int NumberValue(std::string_view s, bool& digits) {
+    digits = false;
+    if (s.empty()) return -1;
+    std::u32string u;
+    for (size_t i = 0; i < s.size();) {
+        const unsigned char c = static_cast<unsigned char>(s[i]);
+        char32_t cp;
+        int len = c < 0x80 ? 1 : c < 0xE0 ? 2 : c < 0xF0 ? 3 : 4;
+        cp = len == 1 ? c : len == 2 ? (c & 0x1F) : len == 3 ? (c & 0x0F) : (c & 0x07);
+        for (int k = 1; k < len && i + static_cast<size_t>(k) < s.size(); k++) cp = (cp << 6) | (static_cast<unsigned char>(s[i + static_cast<size_t>(k)]) & 0x3F);
+        u += cp;
+        i += static_cast<size_t>(len);
+    }
+    long v = 0;
+    bool allDigits = true;
+    for (char32_t c : u) {
+        if (c >= U'0' && c <= U'9') v = v * 10 + (c - U'0');
+        else if (c >= 0xFF10 && c <= 0xFF19) v = v * 10 + (c - 0xFF10);
+        else allDigits = false;
+    }
+    if (allDigits) {
+        digits = true;
+        return v > 1000000 ? -1 : static_cast<int>(v);
+    }
+    static const std::u32string kDigit = U"〇一二三四五六七八九";
+    long total = 0, part = 0;
+    for (char32_t c : u) {
+        const size_t dpos = kDigit.find(c);
+        if (dpos != std::u32string::npos) part = part * 10 + static_cast<long>(dpos);
+        else if (c == U'十' || c == U'百' || c == U'千') {
+            const long unit = c == U'十' ? 10 : c == U'百' ? 100 : 1000;
+            total += (part == 0 ? 1 : part) * unit;
+            part = 0;
+        } else {
+            return -1;
         }
     }
-    (void)exactCount;
-    return exact ? exact : loose;
+    return static_cast<int>(total + part);
 }
 
-const Sense* FirstSense(const Entry& e) {
-    const Sense* best = nullptr;
-    for (const Sense& s : e.senses)
-        if (s.cue.empty() && (!best || s.sense < best->sense)) best = &s;
-    return best ? best : &e.senses.front();
+// The counter entry of a token (a lexicon word with a num feature: つ 人 枚 円), by its lemma without origin tag.
+const Entry* FindCounter(const Data& d, std::string lemma) {
+    if (const size_t dash = lemma.find('-'); dash != std::string::npos && dash > 0) lemma = lemma.substr(0, dash);
+    auto it = d.byLemma.find(lemma);
+    if (it == d.byLemma.end()) return nullptr;
+    for (size_t i : it->second) {
+        const Entry& e = d.entries[i];
+        if (e.pos != "suf" && e.pos != "n") continue;
+        for (const Sense& s : e.senses)
+            if (s.feat.count("num")) return &e;
+        if (e.feat.count("num")) return &e;
+    }
+    return nullptr;
+}
+
+// The Korean numeral of a value: native (adnominal before a counter) up to 99, else Sino-Korean.
+std::string Numeral(const Data& d, int v, bool native, bool adn) {
+    auto get = [&](int k, int col) -> std::string {
+        auto it = d.numerals.find(k);
+        if (it == d.numerals.end()) return "";
+        const std::string& w = col == 0 ? it->second[0] : col == 1 ? it->second[1] : it->second[2];
+        return w == "-" ? "" : w;
+    };
+    if (native && v >= 1 && v <= 99) {
+        const int tens = v / 10 * 10, ones = v % 10;
+        if (ones == 0) return get(tens, adn ? 1 : 0);
+        return (tens ? get(tens, 0) : "") + get(ones, adn ? 1 : 0);
+    }
+    if (v <= 0) return "";
+    std::string out;
+    int rest = v;
+    for (int unit : {1000, 100, 10}) {
+        const int q = rest / unit;
+        rest %= unit;
+        if (q == 0) continue;
+        out += (q > 1 ? get(q, 2) : "") + get(unit, 2);
+    }
+    if (rest) out += get(rest, 2);
+    return out;
+}
+
+// The entry of a spelling read as a noun (n, pn or na), for joined units.
+const Entry* FindSpelling(const Data& d, const std::string& ja, const char*) {
+    auto it = d.byLemma.find(ja);
+    if (it == d.byLemma.end()) return nullptr;
+    for (size_t i : it->second) {
+        const std::string& p = d.entries[i].pos;
+        if (p == "n" || p == "pn" || p == "na") return &d.entries[i];
+    }
+    return nullptr;
+}
+
+// The lexicon entry of a token: by its lemma, then by the lemma without UniDic's origin tag (パン-pao, 私-代名詞),
+// then by its spelling (proper nouns, whose lemma is a reading). The pos must agree: verb classes match each
+// other, and nouns match nouns, proper nouns and な-adjectives (UniDic's 形状詞可能 nouns are な-adjectives too).
+const Entry* FindEntry(const Data& d, const Doc& doc, const Line& line, const Token& t) {
+    const std::string pos = PosName(t.pos);
+    auto pick = [&](const std::string& key) -> const Entry* {
+        auto it = d.byLemma.find(key);
+        if (it == d.byLemma.end()) return nullptr;
+        const Entry* exact = nullptr;
+        const Entry* loose = nullptr;
+        for (size_t i : it->second) {
+            const Entry& e = d.entries[i];
+            Pos ep = Pos::unk;
+            unsigned v = 0;
+            if (Parse(F::pos, e.pos, v)) ep = static_cast<Pos>(v);
+            if (e.pos == pos) {
+                if (!exact || Hiragana(doc.S(t.reading)) == e.yomi) exact = &e;
+            } else if (!loose && ((IsVerbPos(ep) && IsVerbPos(t.pos)) ||
+                                  ((IsNounPos(ep) || ep == Pos::na) && (IsNounPos(t.pos) || t.pos == Pos::na)))) {
+                loose = &e;
+            }
+        }
+        return exact ? exact : loose;
+    };
+    const std::string lemma(doc.S(t.lemma));
+    if (const Entry* e = pick(lemma)) return e;
+    if (const size_t dash = lemma.find('-'); dash != std::string::npos && dash > 0)
+        if (const Entry* e = pick(lemma.substr(0, dash))) return e;
+    if (t.pos == Pos::pn)
+        if (const Entry* e = pick(std::string(line.Src(t.src)))) return e;
+    return nullptr;
 }
 
 bool SetField(KNode& n, Doc& doc, const std::string& field, const std::string& value) {
@@ -713,15 +1021,15 @@ bool SetField(KNode& n, Doc& doc, const std::string& field, const std::string& v
     return false;
 }
 
-uint32_t SemOf(const Data& d, const Sense* s) {
-    if (!s) return 0;
-    auto it = s->feat.find("cls");
-    if (it == s->feat.end()) return 0;
+uint32_t SemOf(const Data& d, const std::string& classes) {
     uint32_t m = 0;
-    if (d.IsA(it->second, "@person")) m |= sem::person | sem::animate;
-    if (d.IsA(it->second, "@animal")) m |= sem::animate;
-    if (d.IsA(it->second, "@place")) m |= sem::place;
-    if (d.IsA(it->second, "@time")) m |= sem::time;
+    for (const std::string& c : Split(classes, ' ')) {
+        if (c.empty()) continue;
+        if (d.IsA(c, "@person")) m |= sem::person | sem::animate;
+        if (d.IsA(c, "@animal")) m |= sem::animate;
+        if (d.IsA(c, "@place")) m |= sem::place;
+        if (d.IsA(c, "@time")) m |= sem::time;
+    }
     return m;
 }
 
@@ -736,46 +1044,122 @@ struct Placed {
 void Transfer(const Data& d, Doc& doc, Line& line) {
     line.kir.clear();
     line.unmatched.clear();
-    Ctx x{d, doc, line, {}, {}};
+    Ctx x{d, doc, line, {}, {}, {}};
     x.aux = d.structure ? AuxOf(*d.structure, doc, line.toks) : std::vector<TokAux>(line.toks.size());
     x.aux.resize(line.toks.size());
-    const size_t n = line.toks.size();
-    x.tk.resize(n);
-    for (size_t i = 0; i < n; i++) {
-        Tk& k = x.tk[i];
+    // Units: analyser tokens, with runs of noun parts joined where the joined spelling is a lexicon entry
+    // (日本 + 語 → 日本語), longest first.
+    const size_t nt = line.toks.size();
+    x.tkOf.assign(nt, 0);
+    auto nounPart = [&](size_t i) {
+        const Pos p = line.toks[i].pos;
+        return (IsNounPos(p) || p == Pos::suf || p == Pos::pref) && x.aux[i].row.empty();
+    };
+    for (size_t i = 0; i < nt;) {
+        size_t last = i;
+        const Entry* joined = nullptr;
+        // a numeral (三, 二十, 100) and the counter after it (つ, 人, 円) are one unit
+        if (line.toks[i].pos == Pos::num) {
+            std::string spell(line.Src(line.toks[i].src));
+            size_t j = i;
+            while (j + 1 < nt && line.toks[j + 1].pos == Pos::num) spell += line.Src(line.toks[++j].src);
+            bool digits = false;
+            const int value = NumberValue(spell, digits);
+            if (value >= 0) {
+                Tk k;
+                const Token& t = line.toks[i];
+                k.t = &t;
+                k.first = static_cast<int>(i);
+                const Entry* counter = j + 1 < nt ? FindCounter(d, std::string(doc.S(line.toks[j + 1].lemma))) : nullptr;
+                if (counter) j++;
+                k.last = static_cast<int>(j);
+                k.src = {t.src.begin, line.toks[j].src.end};
+                k.surf = std::string(line.Src(k.src));
+                k.lemma = spell;
+                k.pos = "num";
+                k.epos = Pos::n;
+                k.content = true;
+                k.aux = &x.aux[j];
+                k.number = value;
+                k.digits = digits;
+                k.counter = counter;
+                for (size_t u = 0; u < line.utts.size(); u++)
+                    if (Contains(line.utts[u].span, k.src)) {
+                        k.utt = static_cast<uint16_t>(u);
+                        k.dialogue = line.utts[u].depth > 0 || !line.utts[u].narration;
+                    }
+                for (size_t m = i; m <= j; m++) x.tkOf[m] = static_cast<int>(x.tk.size());
+                x.tk.push_back(std::move(k));
+                i = j + 1;
+                continue;
+            }
+        }
+        if (nounPart(i)) {
+            std::string spell(line.Src(line.toks[i].src));
+            for (size_t j = i + 1; j < nt && j < i + 6 && nounPart(j); j++) {
+                spell += line.Src(line.toks[j].src);
+                if (const Entry* e = FindSpelling(d, spell, "n")) {
+                    joined = e;
+                    last = j;
+                }
+            }
+        }
+        Tk k;
         const Token& t = line.toks[i];
         k.t = &t;
-        k.lemma = std::string(doc.S(t.lemma));
-        k.surf = std::string(line.Src(t.src));
-        k.pos = PosName(t.pos);
-        k.aux = &x.aux[i];
-        k.form = Strip(Strip(x.aux[i].form, "aux:"), "aux.form.");
-        // a content word: a content part of speech that no function row of aux.tsv names (quote rows name
-        // verbs that may take a quote; they stay content)
-        k.content = IsContentPos(t.pos) &&
-                    (x.aux[i].row.empty() ||
-                     std::find(x.aux[i].facts.begin(), x.aux[i].facts.end(), "kind=quote") != x.aux[i].facts.end());
-        if (IsContentPos(t.pos)) {
-            k.entry = FindEntry(d, doc, t);
-            if (k.entry) k.sense = FirstSense(*k.entry);
+        k.first = static_cast<int>(i);
+        k.last = static_cast<int>(last);
+        k.src = {t.src.begin, line.toks[last].src.end};
+        k.surf = std::string(line.Src(k.src));
+        k.aux = &x.aux[last];
+        k.form = Strip(Strip(x.aux[last].form, "aux:"), "aux.form.");
+        if (joined) {
+            k.lemma = joined->ja;
+            k.pos = joined->pos;
+            k.content = true;
+            k.entry = joined;
+        } else {
+            k.lemma = std::string(doc.S(t.lemma));
+            k.pos = PosName(t.pos);
+            // a content word: a content part of speech that no function row of aux.tsv names (quote rows name
+            // verbs that may take a quote; they stay content)
+            k.content = IsContentPos(t.pos) &&
+                        (x.aux[i].row.empty() ||
+                         std::find(x.aux[i].facts.begin(), x.aux[i].facts.end(), "kind=quote") != x.aux[i].facts.end());
+            if (IsContentPos(t.pos)) k.entry = FindEntry(d, doc, line, t);
         }
-        // utterance: the innermost one around the token
+        k.epos = t.pos;
+        if (k.entry) {
+            unsigned v = 0;
+            if (Parse(F::pos, k.entry->pos, v)) k.epos = static_cast<Pos>(v);
+        }
+        // utterance: the innermost one around the unit
         int depth = -1;
         for (size_t u = 0; u < line.utts.size(); u++) {
             const Utterance& ut = line.utts[u];
-            if (!Contains(ut.span, t.src) || static_cast<int>(ut.depth) < depth) continue;
+            if (!Contains(ut.span, k.src) || static_cast<int>(ut.depth) < depth) continue;
             depth = ut.depth;
             k.utt = static_cast<uint16_t>(u);
             k.dialogue = ut.depth > 0 || !ut.narration;
         }
+        for (size_t j = i; j <= last; j++) x.tkOf[j] = static_cast<int>(x.tk.size());
+        x.tk.push_back(std::move(k));
+        i = last + 1;
     }
+    const size_t n = x.tk.size();
     for (size_t b = 0; b < line.buns.size(); b++) {
         const int c = x.ClauseOfBun(static_cast<int>(b));
-        for (int i = line.buns[b].first; i <= line.buns[b].last && i < static_cast<int>(n); i++) {
-            x.tk[static_cast<size_t>(i)].bun = static_cast<int>(b);
-            x.tk[static_cast<size_t>(i)].clause = c;
+        for (int i = line.buns[b].first; i <= line.buns[b].last && i < static_cast<int>(nt); i++) {
+            Tk& k = x.tk[static_cast<size_t>(x.tkOf[static_cast<size_t>(i)])];
+            if (k.bun < 0) {
+                k.bun = static_cast<int>(b);
+                k.clause = c;
+            }
         }
     }
+
+    for (size_t i = 0; i < n; i++)
+        if (x.tk[i].entry) x.tk[i].sense = x.Choose(i, x.tk[i].senseWhy);
 
     // Candidates: every match of every row whose conditions hold.
     std::vector<Cand> cands;
@@ -897,6 +1281,52 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
     for (size_t i = 0; i < n; i++) {
         Tk& k = x.tk[i];
         if (owner[i] >= 0) continue;
+        if (k.number >= 0) {
+            // N5-55, N5-56: a numeral with its counter; native numerals before native counters (세 개, 한 명),
+            // Sino-Korean otherwise (백 엔); digits stay digits and the counter attaches (3명, 100엔); つ with 1 alone
+            // is 하나
+            const Sense* cs = k.counter ? &k.counter->senses.front() : nullptr;
+            std::string numFeat = cs ? Ctx::Get(cs->feat, "num") : "";
+            if (numFeat.empty() && k.counter) numFeat = Ctx::Get(k.counter->feat, "num");
+            const bool native = numFeat == "native";
+            const bool tsu = cs && k.counter->ja == "つ";
+            Decision dec;
+            dec.stage = 'T';
+            dec.kind = Ev::Cued;
+            dec.rule = doc.I(k.counter ? (native ? "xfer:num.native" : "xfer:num.sino") : "xfer:num.bare");
+            dec.spec = doc.I(k.counter ? "N5-56" : "N5-55");
+            dec.src = k.src;
+            const uint32_t did = line.Decide(std::move(dec));
+            auto push = [&](KK kind, const std::string& lemma, bool glue, int sub) {
+                Placed p;
+                p.tok = p.ptok = static_cast<int>(i);
+                p.sub = sub;
+                p.n.kind = kind;
+                p.n.lemma = doc.I(lemma);
+                p.n.glue = glue;
+                p.n.sem = sem::num;
+                p.n.src = k.src;
+                p.n.decision = did;
+                placed.push_back(std::move(p));
+            };
+            const std::string digitText = k.digits ? std::string(line.Src({k.t->src.begin, line.toks[static_cast<size_t>(k.counter ? k.last - 1 : k.last)].src.end})) : "";
+            if (tsu && k.number == 1 && !k.digits) {
+                push(KK::N, Numeral(d, 1, true, false), false, 0);
+            } else if (k.digits) {
+                push(KK::Raw, digitText, false, 0);
+                if (cs) push(KK::N, cs->ko, true, 1);
+            } else {
+                const std::string word = Numeral(d, k.number, native, cs != nullptr);
+                if (word.empty()) {
+                    line.unmatched.push_back(doc.I(k.surf + "/number"));
+                    continue;
+                }
+                push(KK::N, word, false, 0);
+                if (cs) push(KK::N, cs->ko, false, 1);
+            }
+            wordNode[i] = static_cast<int>(placed.size()) - 1;
+            continue;
+        }
         if (!k.content || !k.sense) {
             // not consumed: the source text stays as a Raw node, so --why and the native-only output show it
             const bool word = k.content;
@@ -905,13 +1335,13 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             dec.stage = 'T';
             dec.kind = word ? Ev::Fallback : Ev::UnmatchedForm;
             dec.rule = doc.I(word ? "code:native-no-lexicon" : "code:native-unmatched");
-            dec.src = k.t->src;
+            dec.src = k.src;
             if (!k.aux->row.empty()) dec.because.push_back(doc.I("aux=" + k.aux->row));
             Placed p;
             p.tok = p.ptok = static_cast<int>(i);
             p.n.kind = KK::Raw;
             p.n.lemma = doc.I(k.surf);
-            p.n.src = k.t->src;
+            p.n.src = k.src;
             p.n.decision = line.Decide(std::move(dec));
             placed.push_back(std::move(p));
             continue;
@@ -922,26 +1352,32 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         for (const Sense& s : k.entry->senses) alts += s.cue.empty() ? 1 : 0;
         dec.kind = alts > 1 ? Ev::Default : Ev::Lexical;
         dec.rule = doc.I("lex:" + k.entry->ja + "/" + k.entry->yomi + "/" + k.entry->pos + "#" + std::to_string(k.sense->sense));
-        dec.src = k.t->src;
+        if (!k.senseWhy.empty()) {
+            dec.kind = Ev::Cued;
+            dec.because.push_back(doc.I("cue=" + k.senseWhy));
+        }
+        dec.src = k.src;
         dec.nAlt = static_cast<uint8_t>(std::min<size_t>(k.entry->senses.size(), 255));
         unsigned stv = 0;
         if (!k.sense->st.empty() && Parse(F::st, k.sense->st, stv)) dec.st = static_cast<uint8_t>(stv);
         Placed p;
         p.tok = p.ptok = static_cast<int>(i);
         KNode& nd = p.n;
-        const Pos pos = k.t->pos;
+        const Pos pos = k.epos;
         nd.kind = IsNounPos(pos) || pos == Pos::suf || pos == Pos::pref ? KK::N
                   : pos == Pos::adv || pos == Pos::conj                   ? KK::Adv
                   : pos == Pos::adn                                       ? KK::Det
                   : pos == Pos::intj                                      ? KK::Intj
                                                                           : KK::V;
         nd.lemma = doc.I(k.sense->ko);
-        if (pos == Pos::adj || pos == Pos::na) nd.vpos = vpos::A;
-        if (const std::string kc = Ctx::Get(k.sense->feat, "kcls"); !kc.empty()) SetField(nd, doc, "kcls", kc);
-        if (const std::string vp = Ctx::Get(k.sense->feat, "vpos"); !vp.empty()) SetField(nd, doc, "vpos", vp);
+        // a sense chosen by form=adv is an adverb (早く → 빨리)
+        if (nd.kind == KK::V && k.senseWhy.find("form=adv") != std::string::npos) nd.kind = KK::Adv;
+        if (pos == Pos::adj) nd.vpos = vpos::A;
+        if (const std::string kc = x.TokKey(static_cast<int>(i), "kcls"); !kc.empty()) SetField(nd, doc, "kcls", kc);
+        if (const std::string vp = x.TokKey(static_cast<int>(i), "vpos"); !vp.empty()) SetField(nd, doc, "vpos", vp);
         if (pos == Pos::suf) nd.glue = true;
-        nd.sem = SemOf(d, k.sense);
-        nd.src = k.t->src;
+        nd.sem = SemOf(d, x.TokKey(static_cast<int>(i), "cls"));
+        nd.src = k.src;
         nd.decision = line.Decide(std::move(dec));
         wordNode[i] = static_cast<int>(placed.size());
         placed.push_back(std::move(p));
@@ -958,10 +1394,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         dec.spec = doc.I(r.spec);
         Span src{UINT32_MAX, 0};
         for (int t : c.consumed) {
-            src.begin = std::min(src.begin, line.toks[static_cast<size_t>(t)].src.begin);
-            src.end = std::max(src.end, line.toks[static_cast<size_t>(t)].src.end);
+            src.begin = std::min(src.begin, x.tk[static_cast<size_t>(t)].src.begin);
+            src.end = std::max(src.end, x.tk[static_cast<size_t>(t)].src.end);
         }
-        if (src.begin > src.end) src = line.toks[static_cast<size_t>(c.anchor)].src;
+        if (src.begin > src.end) src = x.tk[static_cast<size_t>(c.anchor)].src;
         dec.src = src;
         for (const std::string& b : c.because) dec.because.push_back(doc.I(b));
         const auto& beaten = lost[a];
@@ -1027,13 +1463,25 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         if (clause < 0 || clause >= static_cast<int>(line.clauses.size())) return -1;
         const Clause& cl = line.clauses[static_cast<size_t>(clause)];
         if (cl.pred >= line.buns.size()) return -1;
-        const Bunsetsu& b = line.buns[cl.pred];
-        const int clauseFirst = cl.firstBun < line.buns.size() ? line.buns[cl.firstBun].first : b.first;
+        const Bunsetsu& bo = line.buns[cl.pred];
+        struct { int first, last; } b{x.tkOf[bo.first], x.tkOf[bo.last]};
+        const int clauseFirst = cl.firstBun < line.buns.size() ? x.tkOf[line.buns[cl.firstBun].first] : b.first;
         int best = -1, before = -1;
+        if (limit != std::numeric_limits<int>::max()) {
+            // a row that consumes a morpheme marks the predicate right before it: the last predicate node placed
+            // before the morpheme, in its bunsetsu or the one before (読まない|だろう, 食べる|前に)
+            const int bun = x.tk[static_cast<size_t>(limit)].bun;
+            const int from = bun > 0 ? x.tkOf[line.buns[static_cast<size_t>(bun - 1)].first]
+                                     : bun == 0 ? x.tkOf[line.buns[0].first] : limit;
+            for (size_t oi = 0; oi < order.size(); oi++) {
+                const Placed& p = placed[order[oi]];
+                if (p.n.kind == KK::V && p.ptok < limit && p.ptok >= from) best = static_cast<int>(order[oi]);
+            }
+            return best;
+        }
         for (size_t oi = 0; oi < order.size(); oi++) {
             const Placed& p = placed[order[oi]];
-            // the predicate comes before the morpheme that marks it
-            if (p.n.kind != KK::V || p.ptok > limit) continue;
+            if (p.n.kind != KK::V) continue;
             if (p.ptok >= b.first && p.ptok <= b.last) best = static_cast<int>(order[oi]);
             if (p.ptok >= clauseFirst && p.ptok <= b.last) before = static_cast<int>(order[oi]);
         }

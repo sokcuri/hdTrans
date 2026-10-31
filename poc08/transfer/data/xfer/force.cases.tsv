@@ -20,3 +20,5 @@ force.te.final.eol	fix	本を読んで	책을 읽어라	inv
 force.te.final.eol	keep	本を読んで寝る。	책을 읽고 잔다.	inv
 force.naide.final.eol	fix	本を買わないで	책을 사지 마라	inv
 force.naide.final.eol	keep	本を買わないで寝る。	책을 사지 않고 잔다.	inv
+force.masenka	keep	「友達は本を読んでいませんか。」	「친구는 책을 안 읽고 있어요?」	inv
+force.masenka	keep	「友達は日本語が分かりませんか。」	「친구는 일본어를 몰라요?」	inv

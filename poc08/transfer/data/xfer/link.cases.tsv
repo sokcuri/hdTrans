@@ -36,3 +36,5 @@ link.ga	fix	本は高いけど買う。	책은 비싸지만 산다.	inv
 link.ga	keep	「本は高いけど買う？」	「책은 비싼데 사?」	inv
 link.ga.ask	fix	「本は高いけど買う？」	「책은 비싼데 사?」	inv
 link.ga.ask	keep	本は高いけど買う。	책은 비싸지만 산다.	inv
+link.te.shared	fix	パンを買って食べる。	빵을 사서 먹는다.	inv
+link.te.shared	keep	パンを食べて寝る。	빵을 먹고 잔다.	inv
