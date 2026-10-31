@@ -125837,7 +125837,7 @@ ttt	ttt	K110			GN				jisjk:201744
 俸禄	녹봉	N110			GN				jisjk:99985		
 俸給	봉급	N110	VMo		GN				jisjk:24075		
 俺	나	N120	VHn		GN	1041	||2 &&4 S+1== "の" D+1== "의" P+1== "2**" ||3 P+2== "1**" P+2== "7**" P+2== "8**" &&2 ||3 S+1== "と" S+1== "は" S+1== "も" P+1== "2**"	'俺' 뒤에 소유격 'の'와 명사·형용사가 오거나 조사 'と·は·も'가 오면 '나'를 고른다.	jisjk:115492		
-俺	암	N110		On	GN				jisjk:258383		
+俺	엄	N110		On	GN				jisjk:258383		
 俺	내	N120	VHn		GN	2001	||1 &&2 S+1== "が" P+1== "2**"	조사 が 앞의 俺를 내로 고른다.	jisjk:261785		
 俺たち	우리	N110	VHn		GN				jisjk:166234		
 俺ら	우리	N110	VHn		GN				jisjk:166237		
@@ -127184,7 +127184,7 @@ ttt	ttt	K110			GN				jisjk:201744
 僑胞	교포	N110	VHn		GN				jisjk:158859		
 僑胞	교포	N110	VHn		GN				jisjk:158861		
 僕	내	N120	VHn		GN	1133	||6 &&2 S+1== "が" P+1== "2**" &&4 S+1== "の" D+1== "(이)가" P+1== "2**" ||2 P+2== "4**" P+2== "8**" &&2 S+1== "の好き" P+1== "8**" S+1== "が好き" &&6 S+1== "に" P+1== "2**" P+2== "4**" M+2== "57*" ||2 S+3== "欲し" S+3== "ほし" P+3== "7**" &&2 S+1== "じゃな" P+1== "7**"	僕는 が·が好き·の好き·じゃな 앞, 주격으로 번역되는 の 앞 및 상대에게 동작을 바라는 に…て欲しい 문맥에서 ‘내’를 고른다.	jisjk:116263		
-僕	박	N110		On	GN				jisjk:259242		
+僕	복	N110		On	GN				jisjk:259242		
 僕	나	N120	XXXVHn		GN	2004	||1 &&4 S+1== "の" D+1== "의" P+1== "2**" P+2== "1**7**"	僕는 뒤에 소유격 の와 명사·형용사가 오면 일인칭 ‘나’로 고른다.	jisjk:261818		
 僕たち	우리	I110	VHn		GN				jisjk:70297		
 僕のこと	나	N120	VHn		GN	4468	||1 &&3 S+1== "が" D+1== "(을)를" S+2== "L好き"	僕のこと 뒤에 목적격으로 번역된 が와 好き로 시작하는 말이 오면 나를 고른다. (미발동: rare-context)	jisjk:364674		
@@ -210638,7 +210638,7 @@ ttt	ttt	K110			GN				jisjk:201744
 懺法	참법	N110	UCl		GN				jisjk:239603		
 懿徳天皇	이토쿠 천황	N110	VHn		GN				jisjk:228632		
 戈之神	사이노카미	N130	QCTVPl		GN				jisjk:295164		
-戊	보	N130	QCTVPl	On	GN				jisjk:328599		
+戊	무	N130	QCTVPl	On	GN				jisjk:328599		
 戊午燕行録	무오연행록	N130	QWK		GN				jisjk:205352		
 戊戌の変法	백일유신	N110			GN				jisjk:251414		
 戊戌夢物語	보주쓰유메이야기	N110	VBkVSw		GN				jisjk:251415		
@@ -259603,7 +259603,7 @@ ttt	ttt	K110			GN				jisjk:201744
 活量	활동도	N110			GN				jisjk:228974		
 活魚	활어	N110	QAAQACQAC		GN				jisjk:39728		
 洽	히로시	N130	QPNXXXVHn	Wb	GN				jisjk:339865		
-洽	습	N110		On	GN				jisjk:340659		
+洽	흡	N110		On	GN				jisjk:340659		
 洽一郎	코우이치로우	N130	QPN	Wb	GN				jisjk:356794		
 派	파견&AV@	M439			GN				jisjk:13800		
 派	파	N110	XXXVGtUAq	Z7	GN				jisjk:116134		
@@ -261854,7 +261854,7 @@ ttt	ttt	K110			GN				jisjk:201744
 涕涙	체루	N110			GN				jisjk:35798		
 涙	&LC@	M419			GN				jisjk:13684		
 涙	눈물	N110	VBp		GN				jisjk:116364		
-涙	우	N110		On	GN				jisjk:259319		
+涙	루	N110		On	GN				jisjk:259319		
 涙が出るほど	눈물이 나올 정도로	A9D1			GN				jisjk:114724		
 涙が滲	눈물이 어&AA@	M425	SFl		GN				jisjk:144580		
 涙ぐ	눈물&JA@	M415			GN				jisjk:92595		
@@ -269506,7 +269506,7 @@ ttt	ttt	K110			GN				jisjk:201744
 熔解	용해	N110		Hd	GN				jisjk:164504		
 熕	시끄$G7@	H7N0			GN				jisjk:119938		
 熟	&He@	M413			GN	731	||1 &&2 S-1== "よく" D-1= "잘"	よく 바로 뒤에서 熟를 익다로 고르고 よく를 잘로 바꾼다. (미발동: rare-word)	jisjk:93714		
-熟	열	N110		On	GN				jisjk:259702		
+熟	숙	N110		On	GN				jisjk:259702		
 熟	&He@	M419			GN				jisjk:263758		
 熟し	소화	N110	QHP		GN				jisjk:231316		
 熟れ	&He@	M417			GN				jisjk:93715		
@@ -277720,7 +277720,7 @@ ttt	ttt	K110			GN				jisjk:201744
 畜養録	축양록	I110			GN				jisjk:103084		
 畝	우네	N130	QPN	Wa	GN				jisjk:115918		
 畝	밭두둑	N110	XXXVPl		GN				jisjk:258966		
-畝	민	N110		On	GN				jisjk:340835		
+畝	무	N110		On	GN				jisjk:340835		
 畝傍町	우네비쵸	N130	QCTVPl		GN				jisjk:275725		
 畝刈町	아제카리마치	N130	QCTVPl		GN				jisjk:270054		
 畝原町	우네하라쵸	N130	QCTVPl		GN				jisjk:275724		
@@ -308368,7 +308368,7 @@ ttt	ttt	K110			GN				jisjk:201744
 舳艫	축로	N110	VTpVPl		GN				jisjk:193445		
 舳越町	헤고시쵸	N130	QCTVPl		GN				jisjk:327397		
 舵	키	N110	VPe		GN				jisjk:115988		
-舵	사	N110		On	GN				jisjk:259015		
+舵	타	N110		On	GN				jisjk:259015		
 舵とり	키잡이	I110		Hd	GN				jisjk:106057		
 舵取り	키잡이	I110	VPe		GN				jisjk:87071		
 舵手	타수	N110	VHn		GN				jisjk:36769		
@@ -316499,7 +316499,7 @@ ttt	ttt	K110			GN				jisjk:201744
 虜囚	포로	N130	QCT		GN				jisjk:20631		
 虜泰愚	노 태우	N110	VHn		GN				jisjk:132130		
 虞	우려	N110	UFl		GN				jisjk:115629		
-虞	려	N110		On	GN				jisjk:258719		
+虞	우	N110		On	GN				jisjk:258719		
 虞れ	우려	N110	UFl		GN				jisjk:10609		
 虞れさえないとはいえな	우려조차 없다고는 할 수 $FA@	H7N0			GN				jisjk:138514		
 虞美人草	양귀비	I110	QAL		GN				jisjk:79003		
@@ -316605,7 +316605,7 @@ ttt	ttt	K110			GN				jisjk:201744
 虹貝	니지카이	N130	QCTVPl		GN				jisjk:318404		
 虹鱒	무지개송어	N110	VAm		GN				jisjk:247857		
 虻	등에	N110	VAm		GN				jisjk:124678		
-虻	홍	N110		On	GN				jisjk:259446		
+虻	맹	N110		On	GN				jisjk:259446		
 虻田	아부타	N130	QCT		GN				jisjk:115417		
 虻田町	아부타쵸	N130	QCTVPl		GN				jisjk:270374		
 虻田郡	아부타군	N130	QCTVPl		GN				jisjk:270373		
@@ -318411,7 +318411,7 @@ ttt	ttt	K110			GN				jisjk:201744
 袰綿	호로와타	N130	QCTVPl		GN				jisjk:328323		
 袰野	호로노	N130	QCTVPl		GN				jisjk:328302		
 袴	하카마	N110	VCp		GN				jisjk:115688		
-袴	과	N110		On	GN				jisjk:258773		
+袴	고	N110		On	GN				jisjk:258773		
 袴垂保輔	하카마다레 야스스케	N130	VHn		GN				jisjk:219525		
 袴塚	하카마츠카	N130	QPN		GN				jisjk:96767		
 袴岳	하카마다케	N130	QCT		GN				jisjk:15801		
@@ -339633,7 +339633,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鄭順朋	정순붕	N130	QPN		GN				jisjk:209623		
 鄭飛石	정비석	N110	VHn		GN				jisjk:244392		
 酉	토리	N130	QCTVPl		GN				jisjk:312485		
-酉	서	N110	XXX	On	GN				jisjk:340765		
+酉	유	N110	XXX	On	GN				jisjk:340765		
 酉の市	도리노이치	N110			GN				jisjk:246232		
 酉島	토리시마	N130	QCTVPl		GN				jisjk:312548		
 酉島製作所	토리지마 제작소	I130	VGt		PN				jisjk:79600		
