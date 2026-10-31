@@ -62040,7 +62040,7 @@ ttt	ttt	K110			GN				jisjk:201744
 シムラ	시뮬레이션 렝귀지	N110			GN				jisjk:106543		
 シムランド	시뮤랜드	N130	VBlVPl		GN				jisjk:119122		
 シム・ジェウォン	심재원	N130	QPN		GN				jisjk:368817		
-シメ	콩새	N110			GN				jisjk:101958		
+シメ	마무리	N110			GN			LEX-2937	jisjk:101958		
 シメオネ	시메오네	N130	QPN		GN				jisjk:365313		
 シメオノフ	시메노오프	N130	QPN		GN				jisjk:370558		
 シメオン	시메온	N130	QPN		GN				jisjk:101959		
@@ -149618,11 +149618,11 @@ ttt	ttt	K110			GN				jisjk:201744
 取り回	둘러&AZ@	M443	VBl		GN				jisjk:146419		
 取り回し	처리	N110		Hd	GN				jisjk:13103		
 取り囲	둘러&AZ@	M435			GN				jisjk:95467		
-取り壊	무너뜨&AA@	M433			GN				jisjk:95439		
-取り壊	해체&AV@	M423			GN				jisjk:143767		
+取り壊	철거&AV@	M433			GN			LEX-2935	jisjk:95439		
+取り壊	철거&AV@	M423			GN			LEX-2935	jisjk:143767		
 取り壊	&LH@	M443			GN				jisjk:146070		
-取り壊され	해체&C6@	M427			GN				jisjk:143766		
-取り壊し	해체함	N110			GN				jisjk:246219		
+取り壊され	철거&C6@	M427			GN			LEX-2935	jisjk:143766		
+取り壊し	철거	N110			GN			LEX-2935	jisjk:246219		
 取り外	놓&AO@	M433	UMe		GN				jisjk:95464		
 取り外	떼어&A6@	D443			GN				jisjk:146326		
 取り外し	제외	I110		Hd	GN				jisjk:13081		

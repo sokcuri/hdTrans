@@ -1,0 +1,7 @@
+#! layer=words
+# 의미 코드나 활용 부류를 적어야 하는 낱말(사위, 며느리, シメる, よつば)
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+義理の息子	사위	N110	VHn		GN			LEX-2934				lex2934:1
+義理の娘	의붓딸	N110	VHn		GN			LEX-2934				lex2934:2
+シメ	혼내 &CJ@	M417			GN			LEX-2937				lex2937:1
+よつば	요츠바	N130	QPN	Wb	GN			LEX-2941				lex2941:1
