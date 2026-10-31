@@ -1,0 +1,57 @@
+# 규칙: GRM-72
+rule	input	expected	kind	layer
+cx:darou-concessive:20	大変だろうけど 頑張ってね	has:힘들 테지만 힘내	fix	rewrites
+cx:darou-concessive:20	佳奈はそうだろうけど。	has:그럴 테지만.	fix	rewrites
+cx:darou-concessive:20	追い抜いてったんでしょうけど	has:앞질러 갔겠지만	fix	rewrites
+cx:darou-concessive:30	まぁ……だからこそ夢なんだろうけど	has:꿈이겠지만	fix	rewrites
+cx:darou-concessive:30	その原因は、昨日のアレなんだろうけど……	has:그것이겠지만……	fix	rewrites
+cx:darou-concessive:20	彼はそのことに気付いていなかっただろうけど。	has:알아차리지 못했을 테지만.	fix	rewrites
+cx:darou-concessive:20	かなり接近しないと場所の特定は無理でしょうけど	has:무리겠지만	fix	rewrites
+cx:darou-concessive:40	下と言う事はないだろうが、そう年上にも見えない。	has:없을 테지만,	fix	rewrites
+cx:darou-concessive:20	持って生まれた麗華の資質も、もちろんあっただろうけど。	has:있었을 테지만.	fix	rewrites
+cx:darou-concessive:40	自分の腕では完璧ではないだろうが、似た感じの像ができた。	has:완벽하지 않을 테지만,	fix	rewrites
+cx:darou-concessive:30	彼等としては不服でしょうけど。	has:불복이겠지만.	fix	rewrites
+cx:darou-concessive:40	あなた方には靴しか見えないだろうが、あれには中身が入っている。	has:안 보일 테지만,	fix	rewrites
+cx:darou-concessive:40	池の中から言っても説得力はないだろうが、野生動物はむしろ神経質だ	has:설득력은 없을 테지만,	fix	rewrites
+cx:darou-concessive:20	それはそれで幸せなんでしょうけど……、でもね	has:행복한 것이겠지만……,	fix	rewrites
+cx:darou-concessive:11	一姫のことだから何か考えがあるんだろうけど、それは流石に危なくない？	has:생각이 있을 테지만,	fix	rewrites
+cx:darou-concessive:11	たぶん真面目な話をしようとしてるんだろうけど、何を言ってるかサッパリだよ	has:하려고 하고 있을 테지만,	fix	rewrites
+cx:darou-concessive:11	財務に精通してる人ばっかだから、いろいろ考える手立てがあるんだろうけど、俺たちは所詮素人だからなぁ……	has:수단이 있을 테지만,	fix	rewrites
+cx:darou-concessive:34	もっと本能的な衝動だったのでしょうけど……	has:충동이었을 테지만……	fix	rewrites
+cx:darou-concessive:21	うろうろしてる確率はさがっただろうけど、ゼロじゃないし……	has:내려갔을 테지만,	fix	rewrites
+cx:darou-concessive:12	そこまで到達する挑戦者は多くはないから腕はあるんだろうけれど≫	has:팔은 있을 테지만	fix	rewrites
+cx:darou-concessive:21	大変でしょうけど、頑張ってください。	has:힘들겠지만, 힘내	fix	rewrites
+cx:darou-concessive:20	事情はあったんだろうが、ドタキャンは困るな。	has:사정은 있었을 테지만,	fix	rewrites
+cx:darou-concessive:20	手加減はしてくれたんだろうが、ハルトの一撃は鋭く重い。	has:해 주었을 테지만,	fix	rewrites
+cx:darou-concessive:21	みんなわかってただろうけど、立候補してくれた心意気をむげにはできない。	has:알고 있었을 테지만,	fix	rewrites
+cx:darou-concessive:20	別の展開もあったんでしょうけど……	has:있었겠지만……	fix	rewrites
+cx:darou-concessive:20	商業施設にするんでしょうが、いまさらそんなことできませんって	has:하겠지만,	fix	rewrites
+cx:darou-concessive:22	私と比較すればお姉様は地味だろうけれど、十分に綺麗な顔	has:수수할 테지만,	fix	rewrites
+cx:darou-concessive:22	お前の国にも親御さんは いるだろうけれど	has:있을 테지만	fix	rewrites
+cx:darou-concessive:31	彼等としては不服でしょうけど、仕方ない。	has:불복이겠지만,	fix	rewrites
+cx:darou-concessive:10	攫うならお姫様抱っこなんかが良いんだろうけど	!rule:cx:darou-concessive:10	keep	rewrites
+cx:darou-concessive:10	それがあんたの仕事でしょうが」	!rule:cx:darou-concessive:10	keep	rewrites
+cx:darou-concessive:20	それがあんたの仕事でしょうが」	!rule:cx:darou-concessive:20	keep	rewrites
+cx:darou-concessive:20	勝負しねえって言ってんだろうが」	!rule:cx:darou-concessive:20	keep	rewrites
+cx:darou-concessive:30	あんた反射で撃っちゃうでしょうが」	!rule:cx:darou-concessive:30	keep	rewrites
+cx:darou-concessive:40	美人だから今まで通用したんだろうが」	!rule:cx:darou-concessive:40	keep	rewrites
+cx:darou-concessive:40	まあ、別に言ったところで怒りはしないのだろうが。	!rule:cx:darou-concessive:40	keep	rewrites
+cx:darou-concessive:20	平に扱って、ヘイト管理もきちんとしてこそだろうが！	!rule:cx:darou-concessive:20	keep	rewrites
+cx:darou-concessive:40	「手伝うな！訓練にならないだろうが！！！」	!rule:cx:darou-concessive:40	keep	rewrites
+cx:darou-concessive:20	気になるだろうが、後で説明する。	has:신경 쓰이겠지만,	keep	rewrites
+cx:darou-concessive:20	今の思考を口にしたら、確実にそう言われるだろうけど。	has:듣겠지만.	keep	rewrites
+cx:darou-concessive:20	多分、明日は雨だろう。	!rule:cx:darou-concessive:20	keep	rewrites
+cx:darou-concessive:30	まあ、何年生だろうと、来る者拒まずのクラブだけどね。	!rule:cx:darou-concessive:30	keep	rewrites
+cx:darou-concessive:11	偶然だろうが奇跡だろうが、青海さんが来てくれたのは嬉しい。	!rule:cx:darou-concessive:11	keep	rewrites
+cx:darou-concessive:12	一番力を入れるんだろうけどね」	!rule:cx:darou-concessive:12	keep	rewrites
+cx:darou-concessive:21	ゆえに身元がバレることは今までなかったのだろうが」	!rule:cx:darou-concessive:21	keep	rewrites
+cx:darou-concessive:22	言っても、滑稽な取り合わせになるでしょうけれど。	!rule:cx:darou-concessive:22	keep	rewrites
+cx:darou-concessive:31	それがあんたの仕事でしょうが」	!rule:cx:darou-concessive:31	keep	rewrites
+cx:darou-concessive:34	もっと本能的な衝動だったのでしょう。	!rule:cx:darou-concessive:34	keep	rewrites
+cx:darou-concessive:10	俺が触りやすいように、脱ごうとしているんだろうけど……	has:벗으려 하고 있을 테지만……	fix	rewrites
+cx:darou-concessive:10	痛みを感じているんだろうけど……でも、それだけじゃない。	has:느끼고 있을 테지만……	fix	rewrites
+cx:darou-concessive:31	病気の影響なんだろうけど、線が細くて、触ったら壊れてしまいそうな感じ……	has:영향이겠지만, 선이	fix	rewrites
+cx:darou-concessive:20	うまくはやってるだろうが……何か連絡は？	has:있을 테지만……	fix	rewrites
+cx:darou-concessive:20	精鋭部隊を罠にはめ、性能テストを行ったんだろうが……唯一の生き残りがアラタ先生なのは偶然なのか……？	has:실시했을 테지만……	fix	rewrites
+cx:darou-concessive:20	美人だから今まで通用したんだろうが……	!rule:cx:darou-concessive:20	keep	rewrites
+cx:darou-concessive:40	それじゃ気合いはいンねーだろうがッッ！	!rule:cx:darou-concessive:40	keep	rewrites

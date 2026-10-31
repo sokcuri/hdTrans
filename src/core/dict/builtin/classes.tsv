@@ -7886,3 +7886,30 @@ noun.casual-lacked	愛
 noun.casual-lacked	欲
 noun.casual-lacked	土地勘
 noun.casual-lacked	物
+
+//= verb.tame-state	Verbs of a state, of what happens to something or of what something brings about, after which a ため is the cause, not an aim (数で勝るため 수로 우수하기 때문에, 時間がかかるため 시간이 걸리기 때문에, 貧血を引き起こすため 빈혈을 일으키기 때문에); as the predicate after a ため they are no act aimed at (豆腐作りに適している).
+verb.tame-state	勝る
+verb.tame-state	優る
+verb.tame-state	要る
+verb.tame-state	違う
+verb.tame-state	異なる
+verb.tame-state	起こる
+verb.tame-state	起きる
+verb.tame-state	生じる
+verb.tame-state	降る
+verb.tame-state	困る
+verb.tame-state	足りる
+verb.tame-state	かかる
+verb.tame-state	掛かる
+verb.tame-state	含む
+verb.tame-state	続く
+verb.tame-state	増える
+verb.tame-state	減る
+verb.tame-state	消える
+verb.tame-state	残る
+verb.tame-state	存在する
+verb.tame-state	属する
+verb.tame-state	当たる
+verb.tame-state	引き起こす
+verb.tame-state	もたらす
+verb.tame-state	適する

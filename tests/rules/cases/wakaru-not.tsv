@@ -1,0 +1,26 @@
+# 규칙: GRM-71
+rule	input	expected	kind	layer
+cx:wakaru-object:10	要領がわかっていない。	has:요령을 모른다.	fix	rewrites
+cx:wakaru-object:10	まだ要領が分かってないんでいろいろ迷惑をかけますが	has:요령을 몰라서	fix	rewrites
+cx:wakaru-object:10	あいつが分かってないのね。	!rule:cx:wakaru-object:10	keep	rewrites
+cx:wakaru-object:10	彼女の気持ちが分かってないのね。	has:기분을 모르는구나.	fix	rewrites
+cx:wakaru-object:10	状況がわかっているのか	!rule:cx:wakaru-object:10	keep	rewrites
+cx:wakaru-object:10	俺が分かってないとでも思ったか	!rule:cx:wakaru-object:10	keep	rewrites
+dict:variant:wakaru-neg:3	アイツは何もわかってない。	has:아무것도 모른다.	fix	lookup
+dict:variant:wakaru-neg:3	アキラは女心をわかってないわね	has:마음을 모르네	fix	lookup
+dict:variant:wakaru-neg:1	……この時の悠弦はまだ、分かっていなかった。	has:아직, 몰랐다.	fix	lookup
+dict:variant:wakaru-neg:1	何も分かっていない段階で陰謀論を始めるのは早い	has:아무것도 모르는 단계	fix	lookup
+dict:variant:wakaru-neg:1	いつどこから現れたのか何も分かっていない	has:아무것도 모른다	fix	lookup
+dict:variant:wakaru-neg:3	わたしは、段取りとかよくわかってないんですけど……	has:잘 모르는데요……	fix	lookup
+dict:variant:wakaru-neg:3	ごめん、私もよくわかってないんだけど……	has:잘 모르는데……	fix	lookup
+dict:variant:wakaru-neg:3	どうやら、わかってないみたいだ。	has:모르는 것 같다.	fix	lookup
+dict:variant:wakaru-neg:3	貴方は梅昆布茶の凄さをわかってない	has:모른다	fix	lookup
+dict:variant:wakaru-neg:3	わかってないわね	has:모르네	fix	lookup
+dict:variant:wakaru-neg:3	わかってないのは、見えてないのはあなたのほうよ	has:모르는 것은,	fix	lookup
+dict:variant:wakaru-neg:3	どんな相手かわかってなかったって？	has:몰랐다고?	fix	lookup
+dict:variant:wakaru-neg:3	正直、実はよくわかってない。	has:잘 모른다.	fix	lookup
+dict:variant:wakaru-neg:3	ちゃんと分かってるよ	has:알고 있어	keep	lookup
+dict:variant:wakaru-neg:3	もう分かってたことだ	has:알고 있던 것이다	keep	lookup
+dict:variant:wakaru-neg:3	状況はわかっているのか	has:알고 있는 건가	keep	lookup
+dict:variant:wakaru-neg:3	相手が誰かわかりきっているため、お互い名前も確認しない。	has:다 알고 있기 때문에,	keep	lookup
+dict:variant:wakaru-neg:2	あんた まだ 俺という人間が分かってないようだな	has:모르는 것 같네	fix	lookup
