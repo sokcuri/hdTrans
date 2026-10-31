@@ -7,7 +7,9 @@ Korean value), the fixed gloss of each controlled lemma (vocab.tsv), the Korean 
 (ko/spoken.tsv fusions, ko/particles.tsv person particles; STYLE §7: the generator tables are the house style).
 Each lemma's Korean, its Korean class and its ている realization (te) come from the N5 lexicon (levels/n5.tsv and
 the sense rows of lexicon/curriculum.tsv), the sense picked by the lexicon's own reference rule (tools/senses.py)
-from the grid's context; disputes.tsv keeps the house form where the grid and the lexicon disagree. It reads
+from the grid's context, and its reviewed phrases (phrases-curriculum.tsv, st=r, no cue, no slot) where the
+clause's text matches one (顔を洗う → 세수하다); disputes.tsv keeps the house form where the grid and the lexicon
+disagree. It reads
 nothing of the engine's transfer data.
 
 A cell spec (made by grid.py) holds the block, the predicate lemma, the argument slots and the dimension values d.
@@ -91,6 +93,10 @@ class Oracle:
         self.classes, self.sense_rows = senses.load(lexdir, reader)
         self.lex = {(r['ja'], r['pos']): r for r in read_tsv(os.path.join(lexdir, 'levels'), 'n5.tsv')}
         self.disputes = read_tsv(here, 'disputes.tsv')
+        # reviewed phrases without a cue or a slot, matched on the source text (the last word in its dictionary form)
+        self.phrases = {r['pattern']: r['ko'] for r in read_tsv(lexdir, 'phrases-curriculum.tsv')
+                        if r['st'] == 'r' and not r['cue'] and '{' not in r['pattern']}
+        self.phrase = None  # (pred, Korean) of the phrase matched in the current clause
         self.cc = None  # the clause being composed: pred, args, forms, register
         self.used = {}  # (ja, ko, source) → count
         self.spoken = read_tsv(gendata, 'spoken.tsv')
@@ -253,6 +259,24 @@ class Oracle:
         if d['stype'].startswith('invite'):
             f.add('vol')
         return f
+
+    def match_phrase(self, pred, slots):
+        """A phrase whose text is the last slots before the predicate plus the predicate in its dictionary form
+        (顔を洗う → 세수하다). Returns (slots left, Korean) or (slots, None)."""
+        if not isinstance(pred, str):
+            return slots, None
+        r = self.row(pred)
+        tail = r['write'] + ('する' if r['gcls'] == 'sahen' else '')
+        text = tail
+        for k in range(len(slots), -1, -1):
+            if k < len(slots):
+                role, jpart, np = slots[k]
+                if np[0] != 'n' or role in ('adv', 'advadj', 'qty'):
+                    break
+                text = self.row(np[1])['write'] + (jpart if jpart != '-' else '') + text
+            if text in self.phrases and text != tail:
+                return slots[:k], self.phrases[text]
+        return slots, None
 
     def lexrow(self, r):
         return self.lex.get((r['ja'], r['pos']))
@@ -457,6 +481,10 @@ class Oracle:
             return lit + [PW(last, 'A')]
         if g in ('aru', 'iru'):
             return [PW('있다', 'X', neg=neg)]
+        if self.phrase and self.phrase[0] == pred:
+            *lit, last = self.phrase[1].split(' ')
+            split = last[:-2] if last.endswith('하다') and len(last) > 2 and not lit else ''
+            return lit + [PW(last, 'V', split=split, neg=neg)]
         ko = self.kverb(r, self.gloss(pred))
         split = ''
         lr = self.lexrow(r)
@@ -604,6 +632,8 @@ class Oracle:
         else:
             pred, slots = spec['pred'], spec['slots']
             self.clause(pred, slots, self.pred_forms(pred, d), d)
+            slots, pko = self.match_phrase(pred, slots)
+            self.phrase = (pred, pko) if pko else None
             frame = self.frame_map(pred)
             clause = {'pol': d['pol'], 'tense': d['tense'], 'aspect': d['aspect']}
             words = [self.slot(s, level, frame, clause) for s in slots]
@@ -636,7 +666,9 @@ class Oracle:
         frame1, frame2 = self.frame_map(p['pred1']), self.frame_map(p['pred2'])
         clause = {'pol': 'pos', 'tense': d['tense'], 'aspect': 'simple'}
         self.clause(p['pred1'], spec['slots1'], self.pred_forms(p['pred1'], d, link, d['v1tense']), d)
-        w1 = [self.slot(s, level, frame1, clause) for s in spec['slots1']]
+        slots1, pko = self.match_phrase(p['pred1'], spec['slots1'])
+        self.phrase = (p['pred1'], pko) if pko else None
+        w1 = [self.slot(s, level, frame1, clause) for s in slots1]
         items1 = self.base(p['pred1'], level)
         self.steps(items1, row['steps'])
         first = ' '.join(w1 + [self.render(items1)])
@@ -645,7 +677,9 @@ class Oracle:
         clause2 = {'pol': d['pol'], 'tense': d['tense'], 'aspect': 'simple'}
         shared = {'obj': self.cc['args'].get('obj', [])} if p['shared'] == '1' else None
         self.clause(p['pred2'], spec['slots2'], self.pred_forms(p['pred2'], d), d, shared)
-        w2 = [self.slot(s, level, frame2, clause2) for s in spec['slots2']]
+        slots2, pko = self.match_phrase(p['pred2'], spec['slots2'])
+        self.phrase = (p['pred2'], pko) if pko else None
+        w2 = [self.slot(s, level, frame2, clause2) for s in slots2]
         if link == 'tari':
             items, punct = self.predicate('為る', d, level, [], items=self.base(p['pred2'], level),
                                           steps_first=None)
