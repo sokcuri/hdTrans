@@ -20,10 +20,10 @@ namespace {
 // ---- table ------------------------------------------------------------------------------------------
 enum Field : uint8_t { fUd, fCtype, fCform, fLemma, fSurf, fPos, fArc, fDerive, fScript, fLemmaScript, fLen,
                        fElong, fPrevCc, fNextCc, fSpace, fTriple, fSokuon, fFold, fFirstKata, fLastKata, fWordRun,
-                       fLead, fSame, fCount };
+                       fLead, fRepeat, fSame, fCount };
 constexpr std::string_view kFields[] = {"ud",  "ctype", "cform",  "lemma",       "surf", "pos",
                                         "arc", "derive", "script", "lemmascript", "len",  "elong",
-                                        "prevcc", "nextcc", "space", "triple", "sokuon", "fold", "firstkata", "lastkata", "wordrun", "lead",
+                                        "prevcc", "nextcc", "space", "triple", "sokuon", "fold", "firstkata", "lastkata", "wordrun", "lead", "repeat",
                                         "same"};
 constexpr std::string_view kOps[] = {"kata-fold", "small-big", "elong", "stutter", "space", "dakuten", "swap", "edit1"};
 
@@ -150,6 +150,7 @@ struct Info {
   bool space = false;
   bool triple = false;   // keeps a letter written three times in running text (実実実力, だだだよ)
   bool sokuon = false;   // keeps a っ before a letter that never follows it (じっゃ, 奪いっに, うっい)
+  bool repeat = false;   // keeps a repeated comma or an unpartnered repeated bracket (、、、, 「「「なんで…」)
   std::string_view fold = "none";  // katakana letters of the span read as hiragana: none, part, all
   bool firstKata = false, lastKata = false;  // the span's first and last letters are katakana as written
   bool lead = false;     // two letters come right before the span (or before its run of marks)
@@ -293,7 +294,8 @@ struct Facts {
         if (ra)
           for (auto& e : ra->edits) dropped = dropped || (!e.spaceOnly && e.pos <= k && k < e.pos + e.len);
         if (dropped) continue;
-        ((*triple)[k] == 1 ? x.triple : x.sokuon) = true;
+        uint8_t kind = (*triple)[k];
+        (kind == 1 ? x.triple : kind == 2 ? x.sokuon : x.repeat) = true;
       }
     switch (a.kind) {
       case ArcKind::lex: {
@@ -364,6 +366,7 @@ std::string_view FieldOf(const Info& x, uint8_t f, std::string& buf) {
     case fLastKata: return x.lastKata ? "1" : "0";
     case fWordRun: return x.wordRun ? "1" : "0";
     case fLead: return x.lead ? "1" : "0";
+    case fRepeat: return x.repeat ? "1" : "0";
     default: return {};
   }
 }
@@ -447,6 +450,7 @@ struct Gen {
   const std::vector<uint32_t>* wordRun = nullptr; // begin << 16 | end of the katakana word run over core k
   const std::vector<uint8_t>* longKata = nullptr; // letters of a katakana run of three letters or more
   const std::vector<uint8_t>* unknown = nullptr;  // letters of an unknown word of the current reading
+  const std::vector<uint8_t>* dup = nullptr;      // repeated letters inside a katakana word (may drop)
   bool Unknown(uint32_t j) const { return unknown && j < unknown->size() && (*unknown)[j]; }
 
   uint32_t start = 0;
@@ -526,7 +530,8 @@ struct Gen {
     } else if (IsHiragana(c) && IsVowelLetter(c) && Vowel(c) == Vowel(prod.back())) {
       try1(RepairOp::elong);
     }
-    if (j > 0 && c == core[j - 1] && !inLong && (IsKana(c) || IsKanji(c) || R.repeatMarks.find(c) != std::u32string::npos))
+    bool dropOk = !inLong || (dup && (*dup)[j]);
+    if (j > 0 && c == core[j - 1] && dropOk && (IsKana(c) || IsKanji(c) || R.repeatMarks.find(c) != std::u32string::npos))
       try1(RepairOp::stutter);
   }
 
@@ -916,32 +921,62 @@ class Reader {
     // っ (ああああ, んんっ) and laughs after a vowel or at the start (あははは, ふふふ); katakana runs are
     // sound words (ドドド)
     triple_.assign(core.size() + 1, 0);
+    dup_.assign(core.size() + 1, 0);
     for (size_t p = 0; p + 2 < core.size(); ++p) {
       char32_t c = core[p];
       if (core[p + 1] != c || core[p + 2] != c || ws_->spaceBefore[p + 1] || ws_->spaceBefore[p + 2]) continue;
       if (p > 0 && core[p - 1] == c) continue;  // counted from the run's first letter
       bool kana = IsHiragana(c);
-      if (!kana && !IsKanji(c)) continue;
-      if (kana && R_.tripleFree.find(c) != std::u32string::npos) continue;
-      bool laugh = R_.laughs.find(c) != std::u32string::npos;
+      // a katakana letter tripled inside a katakana word (インターホホホン); a run that opens the word is a
+      // sound or a laugh (ドドド, フフフ)
+      bool kataIn = IsKataLetter(c) && !IsSmall(c) && p > 0 && !ws_->spaceBefore[p] && IsKatakana(core[p - 1]) &&
+                    core[p - 1] != U'ー';
+      if (!kana && !IsKanji(c) && !kataIn) continue;
+      if ((kana || kataIn) && R_.tripleFree.find(Fold(c)) != std::u32string::npos) continue;
+      bool laugh = R_.laughs.find(Fold(c)) != std::u32string::npos;
+      if (laugh && p > 0 && IsKana(core[p - 1])) continue;  // あははは, キャハハハ, ぶっははは
       bool atStart = p == 0 || ws_->spaceBefore[p] || !(IsHiragana(core[p - 1]) || IsKanji(core[p - 1]) || IsKatakana(core[p - 1]));
       if (laugh && (atStart || IsVowelLetter(core[p - 1]) || IsSokuon(core[p - 1]))) continue;  // ぶっははは
       if (atStart && kana) continue;  // す、すすすみません; ななな なんで; だだだ、駄目: a stutter that opens a phrase
       size_t q = p;
       while (q < core.size() && core[q] == c) ++q;
-      // before punctuation or the end it is a cry (いたたたた！, うぬぬぬ……)
-      if (q >= core.size() || ws_->spaceBefore[q] || !(IsHiragana(core[q]) || IsKatakana(core[q]) || IsKanji(core[q])))
-        continue;
-      if (q < core.size() && (IsSokuon(core[q]) || IsLongMark(core[q]) || R_.soundEnd.find(core[q]) != std::u32string::npos)) continue;  // いたたたたっ, とてててと
+      // before a cry mark or the end it is a cry (いたたたた！, うぬぬぬ……); before 、 or 。 it is noise
+      if (q >= core.size() || ws_->spaceBefore[q] || R_.cryMarks.find(core[q]) != std::u32string::npos) continue;
+      // a cry that ends in っ or ー (いたたたたっ！) or a sound word before the quoting と (とてててと)
+      size_t r = q;
+      while (r < core.size() && (IsSokuon(core[r]) || IsLongMark(core[r]))) ++r;
+      if (r > q && (r >= core.size() || ws_->spaceBefore[r] || R_.cryMarks.find(core[r]) != std::u32string::npos)) continue;
+      if (kana && R_.soundEnd.find(core[q]) != std::u32string::npos) continue;
+      if (kataIn)
+        for (size_t x = p + 1; x < q; ++x) dup_[x] = 1;
       triple_[p + 2] = 1;
+    }
+    // a comma written twice or more (、、、), and brackets repeated past their partners (「「「なんで…」)
+    for (size_t p = 1; p < core.size(); ++p)
+      if (core[p] == core[p - 1] && R_.repeatMarks.find(core[p]) != std::u32string::npos && !ws_->spaceBefore[p] &&
+          R_.brackets.find(core[p]) == std::u32string::npos)
+        triple_[p] = 3;
+    for (size_t b = 0; b + 1 < R_.brackets.size(); b += 2) {
+      char32_t open = R_.brackets[b], close = R_.brackets[b + 1];
+      long opens = std::count(core.begin(), core.end(), open), closes = std::count(core.begin(), core.end(), close);
+      char32_t extra = opens > closes ? open : close;
+      long excess = opens > closes ? opens - closes : closes - opens;
+      for (size_t p = 1; p < core.size() && excess > 0; ++p)
+        if (core[p] == extra && core[p - 1] == extra && !ws_->spaceBefore[p]) {
+          triple_[p] = 3;
+          --excess;
+        }
     }
     // っ before a vowel, a small kana, ん, ー, っ or a letter of the な, ま, や, ら and わ rows: no word is
     // spelt so (じっゃ, うっい, 奪いっに, わかっった)
     for (size_t p = 1; p + 1 < core.size(); ++p) {
       if (!IsSokuon(core[p]) || ws_->spaceBefore[p + 1] || !IsKana(core[p - 1]) || ws_->spaceBefore[p]) continue;
-      if (R_.notAfterSokuon.find(core[p + 1]) == std::u32string::npos) continue;
-      if (IsSokuon(core[p + 1]) && (p + 2 >= core.size() || !IsKana(core[p + 2]))) continue;  // っっ before a mark
-      if (!triple_[p]) triple_[p] = 2;
+      if (IsSokuon(core[p - 1])) continue;  // a run of っ is judged from its first
+      size_t q = p;
+      while (q < core.size() && IsSokuon(core[q]) && (q == p || !ws_->spaceBefore[q])) ++q;
+      if (q >= core.size() || ws_->spaceBefore[q] || !IsKana(core[q])) continue;  // っっ before a mark: a cry
+      if (q - p >= 2) continue;  // おっっっはよ: a run of っ is emphasis
+      if (R_.notAfterSokuon.find(core[p + 1]) != std::u32string::npos && !triple_[p]) triple_[p] = 2;
     }
     FindCrossable();
   }
@@ -999,7 +1034,7 @@ class Reader {
   }
 
   // The best reading of window w over `core` (the line's text, or with one swap at swapAt).
-  void Read(const Window& w, const std::vector<char32_t>& core, int32_t swapAt, Best* best) {
+  void Read(const Window& w, const std::vector<char32_t>& core, int32_t swapAt, Best* best, std::string* trace = nullptr) {
     std::vector<LArc> arcs;
     std::vector<RepairArc> rarcs;
     Facts facts{m_, R_, *ws_, core, layout_, &single_, &wordRun_, &triple_};
@@ -1022,6 +1057,7 @@ class Reader {
     gen.wordRun = &wordRun_;
     gen.longKata = &longKata_;
     gen.unknown = &unknown_;
+    gen.dup = &dup_;
     for (uint32_t i = w.b; i < w.e; ++i) gen.From(i);
     for (auto& la : arcs) {
       la.info = facts.Of(la.arc, la.rarc >= 0 ? &rarcs[static_cast<size_t>(la.rarc)] : nullptr);
@@ -1081,6 +1117,18 @@ class Reader {
         fin = k;
         last = static_cast<int32_t>(y);
       }
+    }
+    if (trace) {
+      // --why at level 2: the best reading of this variant and the repaired words tried
+      *trace += "    read" + (swapAt >= 0 ? " swap@" + std::to_string(swapAt) : std::string()) + ": bad " +
+                std::to_string(fin.bad) + " cost " + std::to_string(fin.rep) + " |";
+      for (int32_t x = last; x >= 0; x = bp[static_cast<size_t>(x)]) *trace += " " + arcs[static_cast<size_t>(x)].info.surf;
+      *trace += " (right to left)\n";
+      size_t shown = 0;
+      for (auto& la : arcs)
+        if (la.rarc >= 0 && shown++ < 40)
+          *trace += "      try " + std::to_string(la.arc.b) + "-" + std::to_string(la.arc.e) + " " + la.info.surf + " [" +
+                    std::string(la.info.ud) + "] cost " + std::to_string(la.rep) + " bad " + std::to_string(la.bad) + "\n";
     }
     if (last < 0 || !(fin < best->key)) return;
     if (swapAt >= 0 && fin.bad > 0) return;  // a transposition must make the span a valid reading
@@ -1172,7 +1220,7 @@ class Reader {
   const RepairRules& R_;
   Workspace* ws_;
   Options opt_;
-  std::vector<uint8_t> cross_, single_, triple_;
+  std::vector<uint8_t> cross_, single_, triple_, dup_;
   std::vector<uint32_t> wordRun_;
   std::vector<uint8_t> longKata_, unknown_;
   bool layout_ = false;
@@ -1219,6 +1267,8 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
       else if (name == "censor-marks") out->censor = letters;
       else if (name == "sound-end") out->soundEnd = letters;
       else if (name == "voiced-words") out->voicedWords = letters;
+      else if (name == "brackets") out->brackets = letters;
+      else if (name == "cry-marks") out->cryMarks = letters;
       else if (name == "soft-vowels") out->softVowels = letters;
       else if (name == "repeat-marks") out->repeatMarks = letters;
       else if (name == "triple-free") out->tripleFree = letters;
@@ -1303,6 +1353,11 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
     size_t s = i, t = i + 1;
     for (int k = 0; k < 2 && s > 0 && !HardSymbol(m, R, ws->arcs[P[s - 1]]); ++k) --s;
     for (int k = 0; k < 2 && t < P.size() && !HardSymbol(m, R, ws->arcs[P[t]]); ++k) ++t;
+    // a repeated mark (、、、, 」」」) is read together with the marks next to it
+    if (HardSymbol(m, R, ws->arcs[P[i]])) {
+      if (s == i && s > 0) --s;
+      if (t == i + 1 && t < P.size()) ++t;
+    }
     if (!spans.empty() && spans.back().second >= s) spans.back().second = std::max(spans.back().second, t);
     else spans.push_back({s, t});
   }
@@ -1329,7 +1384,9 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
     Best best;
     best.key = now;
     best.key.rep = 0;
-    reader.Read(w, ws->core, -1, &best);
+    std::string trace;
+    std::string* tr = why && opt.whyLevel >= 2 ? &trace : nullptr;
+    reader.Read(w, ws->core, -1, &best, tr);
     if (R.ops[static_cast<size_t>(RepairOp::swap)].on && best.key.bad > 0) {
       std::vector<char32_t> sw = ws->core;
       for (uint32_t p = w.b; p + 1 < w.e; ++p) {
@@ -1338,7 +1395,7 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
         if (IsHiragana(sw[p]) != IsHiragana(sw[p + 1]) || reader.LongKata(p) || reader.LongKata(p + 1)) continue;
         if (!hot[p] && !hot[p + 1]) continue;
         std::swap(sw[p], sw[p + 1]);
-        reader.Read(w, sw, static_cast<int32_t>(p), &best);
+        reader.Read(w, sw, static_cast<int32_t>(p), &best, tr);
         std::swap(sw[p], sw[p + 1]);
       }
     }
@@ -1349,7 +1406,7 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
     if (why) {
       std::string text;
       for (uint32_t k = w.b; k < w.e; ++k) AppendUtf8(text, ws->core[k]);
-      *why += "check " + text + ":" + checks + (take ? " -> repaired\n" : " -> kept\n");
+      *why += "check " + text + ":" + checks + (take ? " -> repaired\n" : " -> kept\n") + trace;
     }
     if (!take) {
       for (; done < t; ++done) newPath.push_back(P[done]);

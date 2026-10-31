@@ -54,6 +54,8 @@ struct RepairRules {
   std::u32string laughs;                // the same after a vowel or at the start (あははは)
   std::u32string notAfterSokuon;        // letters that never follow っ
   std::u32string censor;                // marks that hide letters (ポケ〇ン): the katakana next to them stays
+  std::u32string brackets;              // opening and closing brackets in pairs (「」『』…)
+  std::u32string cryMarks;              // a repeated letter before these is a cry (いたたた！)
   std::u32string softVowels;            // small vowels that make a foreign sound with the letter before (ふぉ)
   std::u32string voicedWords;           // one-letter words a restored dakuten may make (が だ で ぞ ど ぜ)
   std::u32string soundEnd;              // letters after a repeated letter that make it a sound word (とてててと)

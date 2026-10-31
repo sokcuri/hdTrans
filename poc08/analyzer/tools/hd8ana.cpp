@@ -169,7 +169,8 @@ int CmdPackLong(const Args& a) {
 Options OptsFrom(const Args& a) {
   Options o;
   o.repair = a.Has("--repair");
-  o.why = a.Has("--why");
+  o.why = a.Has("--why") || a.Has("--why2");
+  o.whyLevel = a.Has("--why2") ? 2 : 1;
   o.splitLongUnits = !a.Has("--units");
   o.margins = !a.Has("--no-margins");
   o.longUnits = !a.Has("--no-long");

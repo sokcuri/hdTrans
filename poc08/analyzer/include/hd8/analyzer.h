@@ -76,6 +76,7 @@ struct Options {
   bool splitLongUnits = true;   // emit the short-unit parts of a long unit (false: the unit as one token)
   bool repair = false;      // read noisy spans again with ja/repair.tsv (needs LoadRepair)
   bool why = false;         // fill Analysis::checks
+  int whyLevel = 1;         // 2: also the readings tried for each span
 };
 
 // Segmentation hints for a host segmenter (the 0.7.x word search): where words may end, and which
