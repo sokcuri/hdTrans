@@ -1,0 +1,47 @@
+# 규칙: GRM-175, GRM-177, GRM-178, GRM-179
+rule	input	expected	kind	layer
+rewrite:past-sequence	しかし中に入ると想像以上に広くて驚いた。	has:들어오니	fix	rewrites
+rewrite:past-sequence	食べてみると想像以上に美味しかった。	has:먹어 보니	fix	rewrites
+rewrite:past-sequence	やってみると予想以上に難しかった。	has:해 보니	fix	rewrites
+rewrite:past-sequence	やってみると予想外に簡単だった。	has:해 보니	fix	rewrites
+rewrite:past-sequence	家に着くと仰天した。	has:도착하니	fix	rewrites
+rewrite:past-sequence	空を見上げると仰向けに倒れた。	has:올려다보니	fix	rewrites
+rewrite:past-sequence	振り返るとぼやけた影が見えた。	has:돌아보니	fix	rewrites
+rewrite:past-sequence	彼女が笑うと察しがついた。	has:웃으니	fix	rewrites
+rewrite:past-sequence	振り返ると想像を絶する光景が広がっていた。	has:돌아보니	fix	rewrites
+rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨니	fix	rewrites
+rewrite:past-sequence	目を覚ますと決まって彼がいた。	has:뜨면	fix	rewrites
+rewrite:past-sequence	あいつって決まって遅刻するんだよ。	lacks:녀석이라고	fix	rewrites
+rewrite:past-sequence	「振り返ると、彼女がいた」と彼は語った。	has:돌아보니	fix	rewrites
+rewrite:past-sequence	「ドアを開けたら彼がいた」と彼は言った。	has:열었더니	fix	rewrites
+rewrite:past-sequence	「ドアを開けたら、彼がいた」と彼は言った。	has:열었더니	fix	rewrites
+rewrite:past-sequence	もし雨なら行かないと決めていたが、朝起きると晴れていた。	has:일어나니	fix	rewrites
+rewrite:past-sequence	もし彼が来たらどうしようと悩んでいたが、ドアを開けると誰もいなかった。	has:문을 열자	fix	rewrites
+rewrite:past-sequence	戦いが始まると彼は逃げ出した。	has:시작되니	fix	rewrites
+rewrite:past-sequence	荷物をまとめると部屋を出た。	has:정리하니	fix	rewrites
+rewrite:past-sequence	荷物をまとめると、部屋を出た。	has:정리하니	fix	rewrites
+rewrite:past-sequence	扉を開けると彼がいるので驚いた。	has:열자	fix	rewrites
+rewrite:past-sequence	振り返ると素晴らしい景色が広がっていた。	has:돌아보니	fix	rewrites
+rewrite:past-sequence	扉を開けるといやらしい笑みを浮かべた男がいた。	has:열자	fix	rewrites
+rewrite:past-sequence	部屋に入ると普段は無口な彼が笑っていた。	has:들어가니	fix	rewrites
+rewrite:past-sequence	振り返ると、時々見かける猫がいた。	has:돌아보니	fix	rewrites
+rewrite:past-sequence	敵がトラブルに慣れていたら騙されなかった。	has:있으면	fix	rewrites
+rewrite:past-sequence	このボタンを押したら爆発する爆弾を作った。	has:누르면	fix	rewrites
+rewrite:past-sequence	雨が降ったら試合は中止になった。	has:오자	fix	rewrites
+rewrite:past-sequence	彼が窓を開けたら風が入ってきた。	has:열자	fix	rewrites
+rewrite:past-sequence	富竹さんは陽気に手を振るとひぐらしの声の中に消えて行った。	has:흔들자	fix	rewrites
+rewrite:past-sequence	軍隊に行ってた男たちが帰ってきたら息子も私も肩身が狭くなってしまったよ。	has:돌아오자	fix	rewrites
+rewrite:past-sequence	カムイがさっと動いたら、護衛二人の剣が鞘ごと切断されて床に落ちた。	has:움직이자	fix	rewrites
+rewrite:past-sequence	私が窓を開けたら風が入ってきた。	has:열었더니	keep	rewrites
+rewrite:past-sequence	振り向いたら走ってくるリナの姿が見えた。	has:뒤돌아 보았더니	keep	rewrites
+rewrite:past-sequence	ダンディーなお店にはダンディーなマスターがいると決まっている。	has:있다고	keep	rewrites
+rewrite:past-sequence	ドアを開けると気付いた。	has:연다고	keep	rewrites
+rewrite:past-sequence	そしてレイチェルが勘違いをしていると察した。	has:있다고	keep	rewrites
+rewrite:past-sequence	お互いがそう感じていると気付いたことがあった。	has:있다고	keep	rewrites
+rewrite:past-sequence	からかわれていると気付いたのは後々になってからだ。	has:있다고	keep	rewrites
+rewrite:past-sequence	信じられないけれど、眠ると必ず見る嫌な夢は見なかった。	has:자면	keep	rewrites
+rewrite:past-sequence	微妙に最初の間が気になるけど、つっこんだら話が長引くのでやめた。	has:찔러 넣으면	keep	rewrites
+rewrite:past-sequence	一度、口頭で北が一回、西が四回と教えたら、しっかりと覚えてくれた。	has:가르쳤더니	keep	rewrites
+rewrite:past-sequence	子供の頃は雨が降ると外で遊んだ。	has:오면	keep	rewrites
+rewrite:past-sequence	道を歩いていたら声をかけられた。	has:있었더니	keep	rewrites
+rewrite:past-sequence	家に帰ったら母が泣いていた。	has:돌아갔더니	keep	rewrites

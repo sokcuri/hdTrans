@@ -14,6 +14,14 @@
 //= adverb.fact-question	Adverbs before a sentence-final negative question that ask whether something is so, not for an act (まだ来ない？ 아직 오지 않아?, 全然食べないの？): no invitation (spec MNG-7).
 //= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
 //= adverb.suppose	Words of supposition that make a と or たら in their sentence a condition, not a step that followed (もしあの時断っていたら 거절했다면, 仮に負けたとしたら).
+//= ending.told-past	Ends of a sentence that tell what happened in a nominalised past (笑うのだった, 連絡が入るのであった): the past copula there is no state.
+//= ko-ending.quote	Korean endings of a quotation (다고, 라고, 다는): a って at the start of the ending that reads one quotes, it is no て form (気を付けろって).
+//= mark.clause-link	Ends of a predicate that link its clause to the next (けど, のに, ので, から, が): after a present one the と or たら before it joins that clause (来ると騒がしいから 오면), and a word of supposition before the link stays in its clause.
+//= particle.after-quote-to	Particles right after a と that make it a quotation, not a condition or a step (病気になるとさえされていた, 行くとも言った).
+//= particle.final-after-past	Final particles that may stand alone in the ending of a past whose た is in the conjugation (立っていたよ, ぼやいてたぞ).
+//= particle.quoting-after	Words that quote or frame the clause before them after a predicate or a mark (捨てられるぞと脅された, 半分になる﹀という掟, 使えるか分からなかった), so a と or たら inside it is no step of the sentence.
+//= verb.quote-word	Whole words of saying, thinking or noticing that take a quotation before them only as a verb, or a verbal noun before its verb or a comma (と気付いた, と予想していた, と察し、); not as a noun or an adverb (予想以上, 想像を絶する, 決まって, 察しがつく).
+//= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
@@ -363,7 +371,7 @@
 //= verb.kakeru-directed	Continuatives of verbs that aim an act at someone or something before かける (話しかける, 微笑みかける, 呼びかける, 追いかける, 振りかける): that かける is part of the verb, not a half-done act.
 //= verb.kakeru-unwilled	Continuatives of verbs of a change that befalls the subject rather than an act it does on purpose (なり, 忘れ, 落ち, 転び): with かける after them the change nearly happened or is going on (なりかけた 될 뻔했다, 忘れかけている 잊어 가고 있다).
 //= verb.filling	Verbs of filling, loading and holding, in kanji and kana spellings, and the idioms of tears filling the eyes, before which 一杯 and いっぱい read 가득 (箱にいっぱい詰めた 가득 채워 넣었다, 涙をいっぱいためて); written as words of a senses.tsv trigger.
-//= verb.framing	Verb stems whose と or たら frames what follows, a comparison or a rewording, and is never a step of a story (去年に比べると 비하면, 言い換えると, まとめると).
+//= verb.framing	Verb stems whose と or たら frames what follows, a comparison or a rewording, and is never a step of a story (去年に比べると 비하면, 言い換えると, 例えると).
 //= verb.putting-in	Verbs of putting in, before which いっぱい or 一杯 right after a container and its に reads 가득 (箱にいっぱい入れた 상자에 가득 넣었다; お砂糖、いっぱい入れて 많이).
 //= verb.store	Verbs and verbal nouns of storing, putting away or hiding a thing (収納, しまう, 隠す, 収める): a 出す after one in its sentence takes the thing out again, 꺼내다 (収納し、出してみる 수납했다가 꺼내 본다).
 //= verb.stay	Stems of the verbs of staying, waiting and watching, whose て form with a final な tells the listener to keep doing it, ていな (待ってな 기다리고 있어, 見てな 보고 있어), not a reason (思ってな).
@@ -2531,12 +2539,74 @@ adverb.habit-clause	度々
 adverb.habit-clause	たびたび
 adverb.habit-clause	普段
 adverb.habit-clause	ふだん
+verb.quote-word	気付
+verb.quote-word	気づ
+verb.quote-word	気が付
+verb.quote-word	気がつ
+verb.quote-word	自覚
+verb.quote-word	悟
+verb.quote-word	察
+verb.quote-word	仰
+verb.quote-word	想像
+verb.quote-word	妄想
+verb.quote-word	予想
+verb.quote-word	ぼや
+verb.quote-word	決め
+verb.quote-word	決ま
+verb.quote-word	勘違い
+verb.quote-word	察し
+verb.quote-word	決め込
+verb.quote-word	決まってい
+verb.te-state-aux	い
+verb.te-state-aux	居
+verb.te-state-aux	お
+verb.te-state-aux	おり
+verb.te-state-aux	しま
+verb.te-state-aux	あ
+mark.clause-link	けど
+mark.clause-link	けれど
+mark.clause-link	けれども
+mark.clause-link	のに
+mark.clause-link	ので
+mark.clause-link	から
+mark.clause-link	が
+particle.after-quote-to	さえ
+particle.after-quote-to	すら
+particle.after-quote-to	も
+particle.after-quote-to	は
+particle.after-quote-to	まで
+particle.quoting-after	と
+particle.quoting-after	って
+particle.quoting-after	だと
+particle.quoting-after	とか
+particle.quoting-after	とい
+particle.quoting-after	という
+particle.quoting-after	か
+ending.told-past	のだった
+ending.told-past	のであった
+ending.told-past	のでした
+ending.told-past	んだった
+ending.told-past	んでした
+particle.final-after-past	よ
+particle.final-after-past	ね
+particle.final-after-past	ぞ
+particle.final-after-past	ぜ
+particle.final-after-past	わ
+particle.final-after-past	さ
+particle.final-after-past	な
+ko-ending.quote	다고
+ko-ending.quote	라고
+ko-ending.quote	냐고
+ko-ending.quote	자고
+ko-ending.quote	다는
+ko-ending.quote	라는
+ko-ending.quote	냐는
+ko-ending.quote	자는
 verb.framing	比べ
 verb.framing	較べ
 verb.framing	くらべ
 verb.framing	言い換え
 verb.framing	言いかえ
-verb.framing	まとめ
 verb.framing	例え
 verb.framing	たとえ
 
@@ -5849,21 +5919,6 @@ verb.quote-start	感じ
 verb.quote-start	聞か	GRM-83
 verb.quote-start	聞い	GRM-83
 verb.quote-start	聞き	GRM-83
-verb.quote-start	気付
-verb.quote-start	気づ
-verb.quote-start	気が付
-verb.quote-start	気がつ
-verb.quote-start	自覚
-verb.quote-start	悟
-verb.quote-start	察
-verb.quote-start	仰
-verb.quote-start	想像
-verb.quote-start	妄想
-verb.quote-start	予想
-verb.quote-start	ぼや
-verb.quote-start	決め
-verb.quote-start	決ま
-verb.quote-start	勘違い
 
 verb.receiver-passive	許
 verb.receiver-passive	任
