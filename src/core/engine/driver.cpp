@@ -1015,6 +1015,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const auto compose = [&](LineSpeech pass, const StageObserver& watch, const TranslationOptions& opts) {
         std::vector<output::Sentence> sentences;
         std::string before;
+        if (watch.pass) watch.pass(watch.context);
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
             if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
@@ -1094,12 +1095,21 @@ std::string TranslateRubyBody(const dict::Snapshot& snap, pipeline::DocumentCont
 struct EdgeWatch {
     std::vector<output::ResolvedItem> items;
     WrapEdges edges;
+    // The speech-level stage, which reads the line's chains from this pass too; nullptr when it does not.
+    const StageObserver* levels = nullptr;
 };
 
-void WatchEdges(void* context, int, int, const word::Chain& chain) {
+void WatchEdges(void* context, int chunk, int sentence, const word::Chain& chain) {
     auto* watch = static_cast<EdgeWatch*>(context);
     ResolvedItems(chain, watch->items);
     AddWrapEdges(watch->items, watch->edges);
+    if (watch->levels != nullptr && watch->levels->resolved)
+        watch->levels->resolved(watch->levels->context, chunk, sentence, chain);
+}
+
+void WatchEdgePass(void* context) {
+    const StageObserver* levels = static_cast<EdgeWatch*>(context)->levels;
+    if (levels != nullptr && levels->pass) levels->pass(levels->context);
 }
 
 // Watches two joined lines (MayCutWord) for a word read across their break: a word the dictionary
@@ -1214,6 +1224,12 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
         use(i, i);
+        // a line translated on its own keeps this translation: the speech-level stage reads it here
+        if (observer.levelsOnly && i >= context) {
+            watch.levels = &observer;
+            edgeObserver.pass = WatchEdgePass;
+            if (observer.line) observer.line(observer.context, static_cast<int>(i - context));
+        }
         alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
@@ -1287,6 +1303,9 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         for (std::size_t k = i; k <= j; k++) {
             if (k < context) continue;
             if (!pieces.empty()) {
+                // the joined translation is read under its first line: the lines after it have no reading of
+                // their own
+                if (observer.levelsOnly && k > i && observer.line) observer.line(observer.context, static_cast<int>(k - context));
                 const LineParts& p = parts[k - i];
                 std::string piece = pieces[k - i];
                 if (!arrows[k].empty()) piece = WithArrow(piece, arrows[k]);
@@ -1294,9 +1313,9 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 if (p.cr) out[k] += '\r';
                 continue;
             }
-            if (Observes(observer) || observer.levelsOnly) {
+            if (Observes(observer)) {
                 // The stages of the line on its own, for the observer; the translation stays the one made
-                // before the joined lines.
+                // before the joined lines (the speech-level stage alone read them then).
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
                 use(k, k);
                 TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
@@ -1507,11 +1526,15 @@ StageObserver WatchLevels(LevelWatch& w, const StageObserver& inner) {
         o.text = [](void* c, std::string_view tag, std::string_view text) {
             Watched(c).inner.text(Watched(c).inner.context, tag, text);
         };
-    o.pieces = [](void* c, std::string_view tag, int chunk, const output::Pieces& pieces) {
+    o.pass = [](void* c) {
         LevelWatch& lw = Watched(c);
-        if (tag == "CH" && chunk == 0) lw.capture.Pass();
-        if (lw.inner.pieces) lw.inner.pieces(lw.inner.context, tag, chunk, pieces);
+        lw.capture.Pass();
+        if (lw.inner.pass) lw.inner.pass(lw.inner.context);
     };
+    if (inner.pieces)
+        o.pieces = [](void* c, std::string_view tag, int chunk, const output::Pieces& pieces) {
+            Watched(c).inner.pieces(Watched(c).inner.context, tag, chunk, pieces);
+        };
     if (inner.tokens)
         o.tokens = [](void* c, int chunk, const tokenizer::Tokens& tokens) {
             Watched(c).inner.tokens(Watched(c).inner.context, chunk, tokens);

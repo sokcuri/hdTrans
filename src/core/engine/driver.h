@@ -57,8 +57,11 @@ struct StageObserver {
     void (*restored)(void* context, const pipeline::RestoreSteps& steps) = nullptr;
     // Ehnd-style stage snapshots and fired filter rules, including trailing newlines.
     void (*filterLog)(void* context, std::string_view message) = nullptr;
+    // A pass of the compose stage over the line begins: the chains resolved after it replace those of the
+    // line's earlier passes (a line is composed again after a trial pass).
+    void (*pass)(void* context) = nullptr;
     // Only the speech-level stage listens: no stage runs again for the observer, and the trial passes
-    // of a line report to it too (each pass starts with the CH pieces of chunk 0).
+    // of a line report to it too (each starts with pass).
     bool levelsOnly = false;
 };
 

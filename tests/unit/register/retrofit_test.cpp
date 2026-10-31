@@ -49,7 +49,7 @@ std::vector<Case> Cases() {
         const std::vector<std::string> c = reg::Split(line, '\t');
         if (c.size() < 4) continue;
         Case k{c[0], c[1], c[2], c[3], {}};
-        k.capture.items.emplace_back();
+        k.capture.Line(0);
         for (std::size_t i = 4; i < c.size(); i++) {
             const std::vector<std::string> f = reg::Split(c[i], '|');
             if (f.size() < 8) continue;
@@ -62,7 +62,7 @@ std::vector<Case> Cases() {
             it.verb = f[5] == "1";
             it.kind = std::stoi(f[6]);
             it.sourceEnding = f[7];
-            k.capture.items[0].push_back(it);
+            k.capture.Add(0, it);
         }
         out.push_back(std::move(k));
     }
@@ -143,7 +143,7 @@ HD_TEST(register_keigo_and_command) {
     };
     for (const Row& r : rows) {
         reg::Capture capture;
-        capture.items.emplace_back();
+        capture.Line(0);
         const reg::PreLine line = reg::ReadLine(*d, 0, r.ja, "", capture, true, 0);
         if (line.keigo != r.keigo || line.command != r.command)
             hdtest::Fail(__FILE__, __LINE__, std::string(r.ja) + ": keigo " + (line.keigo ? "yes" : "no") + ", command " +
@@ -156,15 +156,18 @@ HD_TEST(register_keigo_and_command) {
     verb.verb = true;
     verb.kind = 4;
     verb.sourceEnding = "ぇ";
-    capture.items.push_back({verb});
+    capture.Add(0, verb);
     HD_CHECK(reg::ReadLine(*d, 0, "「追い込めぇ！」", "", capture, true, 0).command);
-    capture.items[0][0].sourceEnding = "";
+    capture.Drop(0);
+    verb.sourceEnding = "";
+    capture.Add(0, verb);
     reg::Capture::Item next;
     next.surface = "ない";
-    capture.items[0].push_back(next);
+    capture.Add(0, next);
     HD_CHECK(!reg::ReadLine(*d, 0, "「追い込めない」", "", capture, true, 0).command);
-    capture.items[0] = {verb};
-    capture.items[0][0].kind = 11;
-    capture.items[0][0].sourceEnding = "ろ";
+    capture.Drop(0);
+    verb.kind = 11;
+    verb.sourceEnding = "ろ";
+    capture.Add(0, verb);
     HD_CHECK(reg::ReadLine(*d, 0, "「見ろ」", "", capture, true, 0).command);
 }

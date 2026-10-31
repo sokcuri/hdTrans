@@ -25,7 +25,13 @@ struct Capture {
         int kind = -1;
         std::string sourceEnding;
     };
-    std::vector<std::vector<Item>> items;  // per line
+    // The items of line l, in order; none for a line without items.
+    std::vector<Item> Items(std::size_t l) const;
+    // Adds an item to line l; lets line l's items go.
+    void Add(std::size_t l, const Item& item);
+    void Drop(std::size_t l);
+    // The lines seen so far (a line past them was never reported).
+    std::size_t Lines() const { return lines_.size(); }
     // When the call's long lines were cut into pieces: the line of each piece; empty otherwise.
     std::vector<int> pieceLine;
     // The lines whose items are kept (the dialogue lines); empty keeps every line.
@@ -37,8 +43,22 @@ struct Capture {
     void Resolved(int sentence, const word::Chain& chain);
 
 private:
+    // A line's items packed: their strings in one text, each as an offset and a length.
+    struct Packed {
+        int32_t sentence = 0, token = 0;
+        uint32_t at = 0;
+        uint32_t surface = 0, target = 0, ending = 0, sourceEnding = 0;  // lengths, in this order from at
+        int16_t kind = -1;
+        bool verb = false;
+    };
+    struct LineItems {
+        std::string text;
+        std::vector<Packed> items;
+    };
+    LineItems& At(std::size_t l);
+    std::vector<LineItems> lines_;
     int line_ = -1;
-    std::size_t passStart_ = 0;  // where the items of the current piece start
+    std::size_t passStart_ = 0, passText_ = 0;  // where the items of the current piece start
 };
 
 // One item of a line of the translation.

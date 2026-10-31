@@ -113,10 +113,9 @@ private:
     const Tables& t_;
     std::string lemma_, pos_, cls_, host_;
     LemmaInfo info_;
-    std::u32string hostText_;
     const ParadigmShape* shape_ = nullptr;
     std::unordered_map<uint32_t, std::string> surfaces_;  // by form list, those written so far
-    std::string scratch_;
+    std::string scratch_;  // the surface SurfaceOf wrote last for a -것 nominal; valid until its next call
 };
 
 // Orders readings that share one surface, best first.

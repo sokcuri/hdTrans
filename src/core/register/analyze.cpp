@@ -187,7 +187,6 @@ ParadigmIndex::ParadigmIndex(const Tables& t, const std::string& lemma, const st
                              const std::string& host)
     : t_(t), lemma_(lemma), host_(host) {
     info_ = LemmaOf(t, lemma);
-    hostText_ = hangul::ToU32(host);
     pos_ = posIn.empty() ? info_.info.pos : posIn;
     cls_ = clsIn.empty() ? info_.info.cls : clsIn;
     shape_ = &ShapeOf(t, pos_, cls_ == "COP");

@@ -83,7 +83,7 @@ void Retrofit(std::span<const std::string> source, Capture& capture, std::span<s
     for (std::size_t i = 0; i < lines.size(); i++) {
         if (!lines[i].dialogue) continue;
         const RegenLine r = regen.Line(i, ReadLine(*d, i, lines[i].ja, WithoutCr(out[i]), capture, true, lines[i].scene));
-        if (i < capture.items.size()) std::vector<Capture::Item>().swap(capture.items[i]);
+        capture.Drop(i);
         // only a change of speech level is worth the rewrite: a line at the same level keeps its text, and so
         // does a line whose sentences would end at different levels
         if (!r.ok || r.mixedLevels || !r.levelChanged) continue;

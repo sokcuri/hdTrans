@@ -15,13 +15,14 @@ namespace {
 using hangul::ToU32;
 using hangul::ToU8;
 
-// A host that ends in the same sound as host: the copula reads only that.
+// A host that ends in the same sound as host: the copula reads only that (학생이야, 친구야, A야, 1이야). A host
+// whose last sound is not known (a kana word) stays itself.
 std::string SoundOf(const std::string& host) {
     switch (hangul::EndSound(ToU32(host))) {
         case 'V': return "가";
         case 'C': return "각";
         case 'L': return "갈";
-        default: return "";
+        default: return host;
     }
 }
 
@@ -738,16 +739,24 @@ std::string Splice(const Tables& t, const std::string& before, const std::vector
     return ToU8(result);
 }
 
+// The readings of a thread's calls, kept between calls (as bounded as within one), so that a caller sending
+// one line per call (a text hook) does not conjugate the same lemmas again for each line.
+Words& ThreadWords(const Data& d) {
+    thread_local std::unique_ptr<Words> words;
+    if (!words || &words->t != &d.ko || &words->rw != &d.retro) words = std::make_unique<Words>(Words{d.ko, d.retro, {}, {}});
+    return *words;
+}
+
 }  // namespace
 
 struct Regenerator::State {
-    Words r;
+    Words& r;
     std::vector<RegDecision> decided;  // the decisions made here, when the options give none for the lines
     const std::vector<RegDecision>* decisions = nullptr;
 };
 
 Regenerator::Regenerator(const Data& d, const std::vector<RegLine>& lines, const RegenOptions& options)
-    : d_(d), options_(options), state_(std::make_unique<State>(State{Words{d.ko, d.retro, {}, {}}, {}, nullptr})) {
+    : d_(d), options_(options), state_(std::make_unique<State>(State{ThreadWords(d), {}, nullptr})) {
     state_->decisions = options.decisions;
     if (state_->decisions == nullptr || state_->decisions->size() != lines.size()) {
         state_->decided = DecideLevels(d.levels, lines);
