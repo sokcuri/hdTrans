@@ -102,13 +102,13 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--no-cache` | 사전 캐시를 끔 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음). `.hdsnap`은 그대로 읽음 |
 | `--why` | 단어와 어미 선택, shadow 점수, 처리 단계와 Ehnd 필터 실행 로그를 표준 오류에 씀 |
 | `--select-shadow` | 번역은 바꾸지 않고 가장 짧은 대상(`shortest-target`)으로 점수를 매김. `--why`에 나타남 |
-| `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 ([misread-classifier.md](misread-classifier.md)) |
+| `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 |
 | `--no-cg` | CG-lite 손 규칙(`cgRules`, 기본 켬)을 끔: 오독 결정의 후보를 지우거나 고르는 규칙표 |
 | `--no-predicate-variants` | 서술어 뒤 기능어의 한자 표기(様)를 가나 표기(よう)로 읽지 않고 쓴 그대로 읽음(spec LEX-1050, 설정 `predicate_variants`) |
 | `--cg-learned` | 학습 규칙(`cgLearned`, 기본 끔)도 켬 |
 | `--speech LEVEL` | 대사의 말투. `strict`(기본): 번역의 `-다`를 그대로 두되, 일본어가 반말 표지(문장 끝 よ, ね, わ, じゃん, さ, もん, って, かな, かしら, 축약 ちゃう, てる, とく, ねえ)를 가진 「」 대사는 상태와 과거, 판단(다르다 → 달라, 했다 → 했어, 학생이다 → 학생이야)과 것, 무엇(것은 → 건, 무엇을 → 뭘)만 해체로 씀. ！, ？, 문장 끝 말줄임 앞의 서술어는 「」 밖에서도 해체(暑い！ → 더워!). `soft`: 「」 안(앞 줄에서 열린 「」 포함)의 `-다`를 해체로 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야). 「」를 쓰지 않는 글의 줄도 대사로 보이면 해체로 씀: 반말 문장 끝 조사가 있거나, 。, ！, ？, 말줄임, 쉼표, 줄표로 끝나지 않는 줄(それは違う → 그건 달라). 。로 끝나고 조사가 없는 줄, 전각 공백으로 들여쓴 줄, `이름：설명` 같은 줄은 `-다`로 두고, 끝으로만 대사로 본 줄의 동작 현재형도 그대로 둠(もう帰る → 이제 돌아간다). 두 값 모두 평서형 의문문은 해체로 묻고(大丈夫か？ → 괜찮아?, 行っただろう？ → 갔지?), 공손체(です, ます)와 고풍 말투(ておる, じゃ), 『』 안, 인용한 말(「…」という)은 그대로 둠. 「」로 시작하는 대사 줄은 두 값 모두 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙이 말투를 다시 정함(soft면 soft의 말투가 들어온 말투). `--reference`에서는 `strict`이고 그 규칙도 돌지 않음 |
-| `--speech-levels MODE` | 대사 줄의 말투 수준. `auto`(기본): 「」로 시작하는 대사 줄을 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙으로 다시 씀. `keep`: 번역의 말투를 그대로 둠(그 단계가 돌지 않음). 대소문자는 가리지 않음. 설정 파일의 `speech_levels`, 환경 변수 `HDTRANS_SPEECH_LEVELS`보다 앞섬 |
-| `--speech-report FILE` | `auto`가 바꾼 줄을 TSV로 씀: 입력의 줄 번호(1부터, `--context` 줄은 세지 않음), 규칙(REG), 단서, 원문, 바꾸기 전, 바꾼 뒤. `keep`이나 `--reference`이면 빈 파일을 쓰고 stderr에 그 까닭을 적음 |
+| `--speech-levels MODE` | 대사 줄의 말투 수준. `auto`(기본): 「」로 시작하는 대사 줄을 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙으로 다시 씀. `keep`: 번역의 말투를 그대로 둠(그 단계가 돌지 않음). `--raw`와 `--reference`에서는 돌지 않음. 대소문자는 가리지 않음. 설정 파일의 `speech_levels`, 환경 변수 `HDTRANS_SPEECH_LEVELS`보다 앞섬 |
+| `--speech-report FILE` | `auto`가 바꾼 줄을 TSV로 씀: 입력의 줄 번호(1부터, `--context` 줄은 세지 않음), 규칙(REG), 단서, 원문, 바꾸기 전, 바꾼 뒤. `keep`이나 `--reference`이면 빈 파일을 쓰고 stderr에 그 까닭을 적음. `--raw`이면 빈 파일 |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
 | `--rule-counts FILE` | 선택 규칙과 구문 표의 행마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G, cx), `index`(전역 규칙은 PRIO, 구문 표는 행 id), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
 
@@ -129,6 +129,7 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `HDTRANS_SNAPSHOT=off` | 캐시를 끔 |
 | `HDTRANS_VERIFY_DICTS=1` | `--verify-dicts`와 같음 |
 | `HDTRANS_DRIVER_DUMP=DIR` | `--stages DIR`과 같음 |
+| `HDTRANS_SPEECH_LEVELS` | `auto` 또는 `keep`. 설정 파일의 `speech_levels`보다 앞서고 `--speech-levels`보다 뒤짐. 잘못된 값은 환경 변수 오류로 알리고 무시 |
 
 ### 설정 파일
 
@@ -167,6 +168,7 @@ WebAssembly의 `HdTrans` 클래스는 YAML 대신 초기화 옵션과 사용자 
 
 창 하나에 **단문 번역**, **문서 번역**, **사전**, **로그** 탭이 있습니다. 실행 파일 옆의 `hdtrans-data/`에서 사전, 사용자 사전,
 설정을 엔진을 처음 불러올 때 읽습니다. 설정 파일 변경은 다음 사전 다시 읽기가 성공하면 함께 반영합니다.
+말투(`speech`, `speech_levels`)와 `wrapped`도 설정 파일의 값을 씁니다.
 문서 번역은 Shift-JIS, UTF-8(BOM 유무 무관), UTF-16LE(BOM)를 읽고
 UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF 또는 CR)을 따릅니다. 파일마다 문서 전체를 한 번에 번역하므로 문맥이 그 파일 안에서 이어집니다.
 

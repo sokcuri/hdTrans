@@ -50,7 +50,7 @@ try {
 }
 ```
 
-`init()` also takes `speech` (`'strict'` or `'soft'`) and `wrapped`; `translate(text, { speech, wrapped, context })` applies them to one call, where `context` lists the lines before `text` in the same document, read only for their cues and not returned. Nothing is kept from one call to the next. These are the shared engine options and results, not a separate npm translation mode. Ehnd files are UTF-8 strings keyed by their original `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt` or `UserDict*.txt` names. No external Ehnd dictionary is included or enabled by default. `setEhnd(files)` replaces an instance's files; `clearEhnd()` removes them.
+`init()` also takes `speech` (`'strict'` or `'soft'`), `speechLevels` (`'auto'` or `'keep'`) and `wrapped`; `translate(text, { speech, speechLevels, wrapped, context })` applies them to one call, where `context` lists the lines before `text` in the same document, read only for their cues and not returned. `setSpeech()`, `setSpeechLevels()` and `setWrapped()` set them for later calls. With `speechLevels: 'auto'` (the default) a dialogue line that 「」 or 『』 opens has its sentence end rewritten to the speech level of the dialogue rules (「白崎、俺が手伝うから大丈夫だ」 → 「시라사키, 내가 도우니까 괜찮아」); `'keep'` leaves the translation's own level (「시라사키, 내가 도우니까 괜찮다」). Nothing is kept from one call to the next. These are the shared engine options and results, not a separate npm translation mode. Ehnd files are UTF-8 strings keyed by their original `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt` or `UserDict*.txt` names. No external Ehnd dictionary is included or enabled by default. `setEhnd(files)` replaces an instance's files; `clearEhnd()` removes them.
 
 ## User dictionary
 

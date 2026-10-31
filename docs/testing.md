@@ -21,7 +21,7 @@
 | `rules.drops` | 규칙 사례와 `tests/rules/drops/`의 입력에서 낱말이 번역에서 사라지지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). `tools.drops`는 도구 자체 시험 |
 | `sets.drops` | 측정 세트에서 글이 빠지는 입력 수와 자리를 정하지 못한 가나가 남은 입력 수가 `tools/drops-budget.tsv`를 넘지 않는지 확인 ([아래](#낱말-빠짐-dropspy)). 세트 변수가 없으면 건너뜀 |
 | `rules.variants` | `tests/variants/`의 구문 가족마다 바꿔 넣은 문장의 통과율이 그 가족의 하한 이상인지 확인 ([아래](#구문-변형-testsvariants)) |
-| `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터-비공개-저장소)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
+| `testdata` | 테스트 데이터의 기대 출력과 비교 ([테스트 데이터](#테스트-데이터)). `HDTRANS_TESTDATA`가 없으면 건너뜀 |
 | `host.admin_priority` | C API에서 초기화, 다시 읽기, 종료가 대기 중인 번역보다 먼저 처리되는지 확인 |
 | `host.j2k` | `J2KEngine.dll`과 `hdTransEngine.dll`의 초기화, 종료와 동시 번역 확인 (Windows) |
 
@@ -191,7 +191,7 @@ printf '%s' '学生です。' | build/mac/hdtrans -dicts dicts -stages stages
 오독 필터의 기록은 문장의 선택이 끝난 뒤(S와 같은 시점)에 남습니다. `MI`는 체인의 단어마다 위치, 표면형,
 앞뒤 글자, 줄 첫머리 여부, 선택과 출처, `MC`는 단어의 후보(W)와 어미 후보(E)마다 품사, 의미, 문법 코드,
 사용 가능 여부, 한국어와 사전형, `MS`는 소리 읽기, `MF`는 결정의 후보마다 내장 모델 점수와 특징입니다.
-`tools/misread/check.py`는 MI, MC, MS로 같은 특징을 다시 만들어 MF와 비교합니다([misread-classifier.md](misread-classifier.md)).
+`tools/misread/check.py`는 MI, MC, MS로 같은 특징을 다시 만들어 MF와 비교합니다.
 
 ## 자체 기준선
 
@@ -275,7 +275,7 @@ matrix를 건너뛴 run(이미 테스트한 트리의 `main` push 등)에는 이
 
 ## 변경 판정 (e2e + 모델 판정)
 
-챕터 본문은 위 [비공개 테스트 데이터 저장소](#테스트-데이터-비공개-저장소)에 있습니다. 본문, 번역, 판정 파일은
+챕터 본문은 위 [비공개 테스트 데이터 저장소](#테스트-데이터)에 있습니다. 본문, 번역, 판정 파일은
 이 저장소에 커밋하지 않습니다. 아래 도구는 Python 3 표준 라이브러리만 씁니다.
 
 1. 비교할 **커밋을 먼저 고정**하고 별도 git worktree에서 base를 빌드합니다. 움직이는 `main`과 비교하지 않습니다.

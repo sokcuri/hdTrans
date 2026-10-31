@@ -27,7 +27,7 @@
 | `kana-equivalents.tsv` | `kana` | 사전에 없던 가나 표기를 한자 단어에 잇는 손으로 적은 행(LEX-93). 넷째 열은 행 id, 규칙, 출처 |
 
 `pos`, `sem`, `gram` 열의 코드 뜻과 예는 [dictionary-codes.md](dictionary-codes.md), 사전 행을 고쳐 오역을 바로잡는 방법은
-[fixing-translations.md](fixing-translations.md#사전-행)에 있습니다.
+[fixing-translations.md](fixing-translations.md#사전-행-고치기)에 있습니다.
 
 이 밖에 어미(`endings.tsv`), 구(`phrases.tsv`), 문형(`patterns.tsv`), 의미(`senses.tsv`) 표는 엔진에
 내장되어 있어 따로 둘 필요가 없습니다.

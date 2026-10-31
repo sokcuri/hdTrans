@@ -82,6 +82,10 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 | 그 문맥에서 후보를 빼야 함 | `src/core/word/constraints.cpp`의 `kRules` | なる 앞 こう |
 | 인용, 연결이 틀리게 조립됨 | `src/core/word/`의 rewrites 패스 | たらと思う `-면 하고` |
 | 의성어, 감탄사, 문형 | `builtin/sound.tsv`, `phrases.tsv`, `patterns.tsv` | |
+| 끝맺음, 조동사, 절 연결의 사슬이 틀림 | `src/core/dict/builtin/constructions.tsv`의 구문 표 행([rule-language.md](rule-language.md#구문-표-constructionstsv)) | ところだった, かのよう |
+| 여러 단어가 한 덩어리로 뜻이 되는 연어, 관용구 | 팩의 연어 행(`dicts/pack-collocs.tsv`, [packs.md](packs.md#연어-행-colloc)) | 目をやる `눈을 돌리다` |
+| 조건이 맞는 한 단어의 뜻, 태, 부정, 시제 | 팩 행([packs.md](packs.md#팩-쓰기-안내)) | |
+| 대사 줄의 말투만 틀림 | `src/core/register/data/register/`의 표([아래](#대사의-말투-수준-고치기)) | 「…ですから」 해요체 |
 
 같은 원인이면 데이터(사전 행과 코드)로 고칠 수 있을 때 데이터를, 안 될 때 규칙을, 그래도 안 될 때 엔진 코드를 고칩니다.
 어느 층을 고칠지는 아래 [원인에서 고치기](#원인에서-고치기)로 먼저 정합니다.
@@ -89,6 +93,7 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 - 기본 번역을 바꾸면 그 단어가 나오는 모든 문장이 바뀝니다. 다른 쓰임을 먼저 찾아 봅니다.
 - 틀렸거나 애매한 번역만 고칩니다. 외래어를 소리대로 옮긴 것은 틀린 것으로 보지 않습니다.
 - 꿀도르 같은 외부 사용자 사전은 `dicts/`에 합치지 않습니다([ehnd-compat.md](ehnd-compat.md)).
+- 한 작품의 등장인물과 지명은 `dicts/`에 넣지 않고 그 작품의 이름 목록으로 줍니다([dictionary-files.md](dictionary-files.md#문서-이름-목록)).
 
 ## 원인에서 고치기
 
@@ -132,6 +137,17 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 | 呆然と, 凛と → 보연과, 늠과 | 낱말마다 `〜と` 행 추가 | タリ 형용사에 부류 코드를 붙이고 그 코드 뒤 と, として, たる를 고르는 규칙 |
 | 王子と会った → 오지와 | 王子 지명 행 삭제 | 전역 규칙이 뒤 동사의 의미 계열만 보고 고유 명사 후보를 고르던 조건을 고침 |
 
+## 대사의 말투 수준 고치기
+
+「」로 시작하는 줄의 문장 끝 말투(해라체, 해체, 해요체, 합쇼체)는 단어 단계 뒤의 `register` 층이 정합니다([spec/register.md](../spec/register.md)).
+
+1. `hdtrans -dicts dicts -speech-report report.tsv -in in.txt`로 그 줄을 바꾼 규칙(REG)과 단서를 봅니다. `-why`에는 이 층이 나오지 않습니다.
+2. `-speech-levels keep`으로 다시 번역합니다. `keep`에서도 틀리면 단어 단계(사전, 규칙, 구문 표)를 고치고, `keep`에서 맞으면 이 층을
+   고칩니다. `keep`은 구문 표의 행이 읽는 줄의 말투 수준 결정도 끄므로, 바뀐 줄이 보고서에 없으면 그 행(`-why`의 `cx:`)을 봅니다.
+3. 단서는 `cues.tsv`, `voices.tsv`, `hon.tsv`, 단서마다 정하는 말투는 `levels.tsv`(열 `spec`)에 있습니다. 규칙과 어긋나면
+   `spec/register.md`의 규칙과 사례를 같은 변경에서 고칩니다.
+4. 사례는 줄마다 정한 말투를 `tests/unit/register/levels.cases.tsv`에, 출력을 `tests/rules/cases/register-retrofit.tsv`에 둡니다.
+
 ## 사전 행 고치기
 
 열 이름은 각 파일 머리줄에 있습니다. 코드의 뜻과 예는 [dictionary-codes.md](dictionary-codes.md)에 있습니다.
@@ -169,6 +185,9 @@ dict:jisjk:114690  力で勝る。     힘으로 우수하다.  keep  local
 | `examples/` | 문서 단위 결과. 출력이 바뀌면 `.ko.txt`를 고치되 첫 줄 주석은 그대로 |
 | `tests/rules/critical/<갈래>.tsv` | 뜻이 뒤집히는 오역(부정, 시제, 금지와 허락, 하는 사람, 빠진 낱말)의 사례. 기대값은 번역 전체나 뜻을 지는 말(`has:생각하지 마`, `lacks:내가 이길`)이고, 한 행도 실패하지 않아야 합니다. 행을 지우거나 약하게 바꾸지 않습니다([MNG](../spec/meaning.md)) |
 | `tests/rules/drops/` | 낱말이 번역에서 사라지면 안 되는 입력(활용형 격자 등). ctest `rules.drops`(`tools/drops.py`)가 이 입력과 규칙 사례의 입력에서 한 글자씩 읽혀 번역이 빈 글자 두 개 이상을 찾고, `known-gaps.txt`의 입력만 봐줍니다. 측정 세트의 빠짐 수는 ctest `sets.drops`가 `tools/drops-budget.tsv`로 봅니다([testing.md](testing.md#낱말-빠짐-dropspy)) |
+
+사례 파일의 첫 줄에는 그 파일이 지키게 하는 규칙의 id를 `# 규칙: REG-3, SPC-20`처럼 적습니다. 지킬 규칙이 [spec/](../spec/README.md)에
+없으면 규칙과 id를 먼저 적고, 규칙과 어긋나는 변경은 같은 변경에서 그 규칙과 사례를 고칩니다.
 
 예문은 실제 글에서 짧게 발췌한 것(한 줄이나 그 일부)을 기본으로 합니다. 데이터에 없는 모양이나 조건 하나만 다른 짝이 필요할 때는 직접 지은 문장을 더하되, 사례의 대부분은 발췌입니다. 출처, 제목, 작품 이름은 적지 않고, 긴 대목을 통째로 옮기지 않습니다.
 
