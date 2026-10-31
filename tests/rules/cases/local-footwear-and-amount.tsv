@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:354007	確かに、額の一センチ程度の傷が結婚に影響することはないだろう。	확실히, 이마의 1센티 정도의 상처가 결혼에 영향을 줄 것은 없을 것이다.	fix	local
+dict:jisjk:354007	確かに、額の一センチ程度の傷が結婚に影響することはないだろう。	확실히, 이마의 1센티 정도의 상처가 결혼에 영향을 줄 일은 없을 것이다.	fix	local
 dict:jisjk:354007	額は100万円だ。	액수는 100만엔이다.	keep	local
 dict:jisjk:114665	ぺったんこの靴だけをはくようにした。	납작의 구두만을 신도록 했다.	fix	local
 dict:jisjk:114665	スニーカーをはいた。	스니커즈를 신었다.	fix	local

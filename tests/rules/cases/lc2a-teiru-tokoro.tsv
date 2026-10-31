@@ -1,0 +1,49 @@
+# 규칙: GRM-100
+rule	input	expected	kind	layer
+cx:lc2a-teiru-tokoro:10	老夫婦が経営しているところだった。	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:10	唯はおかしいと考えているところだった。	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:20	袖を通しているところでした。	has:있던 참이었습니다	fix	rewrites
+cx:lc2a-teiru-tokoro:20	いまは後始末をしているところでした。	has:있던 참이었습니다	fix	rewrites
+cx:lc2a-teiru-tokoro:30	遊園地のご飯を頼み食べている所だった。	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:30	境内では無知乃が箒で掃除をしている所だった。	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:33	今は婚約破棄をされているところだったわね…ってあら？	has:있던 참이었네	fix	rewrites
+cx:lc2a-teiru-tokoro:40	休憩しているところだったんだ	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:40	今仲良くなろうとしてるところだったのにさ。	has:있던 참이었는데	fix	rewrites
+cx:lc2a-teiru-tokoro:50	眠ってるところだったのかもね	has:있던 참이었던 걸지도	fix	rewrites
+cx:lc2a-teiru-tokoro:50	おやつ食べてるところだったのね。	has:있던 참이었구나	fix	rewrites
+cx:lc2a-teiru-tokoro:55	忘れるところだったわ	has:잊을 뻔했어	fix	rewrites
+cx:lc2a-teiru-tokoro:55	忘れるところだったわ。	has:잊을 뻔했어	fix	rewrites
+cx:lc2a-teiru-tokoro:60	決められるところだったのに	has:결정될 뻔했는데	fix	rewrites
+cx:lc2a-teiru-tokoro:60	が塗られるところだったのですよ！	has:칠해질 뻔했던 것이에요	fix	rewrites
+cx:lc2a-teiru-tokoro:65	またこいつのせいで話題が逸れるところだったわ	has:벗어나려던 참이었어	fix	rewrites
+cx:lc2a-teiru-tokoro:65	少し遅れれば此方の損害が大きくなるところだったわ。	has:커지려던 참이었어	fix	rewrites
+cx:lc2a-teiru-tokoro:70	寝るところだったんだ。	has:자려던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:70	なるところだったんだよ。	has:되려던 참이었던	fix	rewrites
+cx:lc2a-teiru-tokoro:35	今まさに着替えているところだったわ。	has:있던 참이었어	fix	rewrites
+cx:lc2a-teiru-tokoro:53	危うく忘れるところだったわね。	has:잊을 뻔했네	fix	rewrites
+cx:lc2a-teiru-tokoro:10	ダウンに目を向けると、サザが身体を震わせているところだった。	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:30	宿に戻ると悠里は昼食を食べている所だった。	has:있던 참이었다	fix	rewrites
+cx:lc2a-teiru-tokoro:60	あやうく畳まれるところだったとかｗ	has:접어질 뻔했다든가	fix	rewrites
+cx:lc2a-teiru-tokoro:70	「もう帰るところだったのに、長々と引き留めてごめんね」	has:돌아가려던 참이었는데	fix	rewrites
+cx:lc2a-teiru-tokoro:63	そうか、送るところだったわね。	has:보내려던 참이었네	fix	rewrites
+cx:lc2a-teiru-tokoro:55	もう少しで喰われるところだったわ。	has:뻔했어	fix	rewrites
+cx:lc2a-teiru-tokoro:53	危なかった、もう少しで落ちるところだったわね	has:뻔했네	fix	rewrites
+cx:lc2a-teiru-tokoro:60	もう少しで喰われるところだったのに。	has:뻔했는데	fix	rewrites
+cx:lc2a-teiru-tokoro:10	さっきまで状況の説明をしていたところだった。	!rule:cx:lc2a-teiru-tokoro:10	keep	rewrites
+cx:lc2a-teiru-tokoro:20	彼女はちょうど部屋を出ていくところでした。	!rule:cx:lc2a-teiru-tokoro:20	keep	rewrites
+cx:lc2a-teiru-tokoro:30	ここは私が住んでいる所だ。	!rule:cx:lc2a-teiru-tokoro:30	keep	rewrites
+cx:lc2a-teiru-tokoro:30	皆が暮らしている所に戻る。	!rule:cx:lc2a-teiru-tokoro:30	keep	rewrites
+cx:lc2a-teiru-tokoro:33	昔はいい所だったわね。	!rule:cx:lc2a-teiru-tokoro:33	keep	rewrites
+cx:lc2a-teiru-tokoro:35	綺麗な所だったわ。	!rule:cx:lc2a-teiru-tokoro:35	keep	rewrites
+cx:lc2a-teiru-tokoro:40	今この子に話を聞いていたところだ。	!rule:cx:lc2a-teiru-tokoro:40	keep	rewrites
+cx:lc2a-teiru-tokoro:50	遊んでるところを邪魔された。	!rule:cx:lc2a-teiru-tokoro:50	keep	rewrites
+cx:lc2a-teiru-tokoro:50	朝食を作っているところを見られた。	!rule:cx:lc2a-teiru-tokoro:50	keep	rewrites
+cx:lc2a-teiru-tokoro:53	学生だったわ。	!rule:cx:lc2a-teiru-tokoro:53	keep	rewrites
+cx:lc2a-teiru-tokoro:55	ちょうど帰るところだったよ。	!rule:cx:lc2a-teiru-tokoro:55	keep	rewrites
+cx:lc2a-teiru-tokoro:60	もうすぐ来るところだったのに。	!rule:cx:lc2a-teiru-tokoro:60	keep	rewrites
+cx:lc2a-teiru-tokoro:63	昔はいい所だったわね。	!rule:cx:lc2a-teiru-tokoro:63	keep	rewrites
+cx:lc2a-teiru-tokoro:65	危うく忘れるところだったのに。	!rule:cx:lc2a-teiru-tokoro:65	keep	rewrites
+cx:lc2a-teiru-tokoro:70	危うく忘れるところだったのに。	!rule:cx:lc2a-teiru-tokoro:70	keep	rewrites
+cx:lc2a-teiru-tokoro:70	絶頂へといけるところだったのに。	!rule:cx:lc2a-teiru-tokoro:70	keep	rewrites
+cx:lc2a-teiru-tokoro:40	手に入れることができるところだったのに。	!rule:cx:lc2a-teiru-tokoro:40	keep	rewrites
+cx:lc2a-teiru-tokoro:10	ちょうど白崎がやってくるところだった。	!rule:cx:lc2a-teiru-tokoro:10	keep	rewrites

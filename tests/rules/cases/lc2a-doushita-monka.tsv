@@ -1,0 +1,36 @@
+# 규칙: GRM-109
+rule	input	expected	kind	layer
+cx:lc2a-doushita-monoka-to:10	どうしたものかと…。	has:하나 하고	fix	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたものかとアイリスは眉をひそめた。	has:하나 하고 아이리스는	fix	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたものかと結論が出せない状態でいた。	has:하나 하고 결론을	fix	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたもんかと思考を回転させ術を考える。	has:해야 하나 하고	fix	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたものかとナオミは少し頭を悩ませていた。	has:하나 하고 나오미는	fix	lookup
+cx:lc2a-doushita-monoka-to:10	疑問符を浮かべるミュウに、どうしたものかと困るルシア。	has:하나 하고 곤란한	fix	lookup
+cx:lc2a-doushita-monoka-to:10	それで君藤先輩は、どうしたものかと少し大きなため息を吐いた。	has:하나 하고 조금	fix	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたものかと思い悩んでいると、︽幸運︾の囁きが聞こえる。	has:하나 하고 고민하고	fix	lookup
+phrase:どうしたもんか	どうしたもんか	has:해야 하나	fix	lookup
+phrase:どうしたもんか	どうしたもんか。	has:해야 하나	fix	lookup
+phrase:どうしたもんか	ん〜…どうしたもんか	has:해야 하나	fix	lookup
+phrase:どうしたもんか	さて、どうしたもんか	has:해야 하나	fix	lookup
+phrase:どうしたもんか	はてどうしたもんか。	has:해야 하나	fix	lookup
+phrase:どうしたもんか	さて…どうしたもんか？	has:해야 하나	fix	lookup
+phrase:どうしたもんか	はて……どうしたもんか。	has:해야 하나	fix	lookup
+phrase:どうしたもんか	ふーむ、どうしたもんか。	has:해야 하나	fix	lookup
+phrase:どうしたもんかな	どうしたもんかな	has:해야 하나	fix	lookup
+phrase:どうしたもんかな	どうしたもんかなあ	has:해야 하나	fix	lookup
+phrase:どうしたもんかな	どうしたもんかな……	has:해야 하나	fix	lookup
+phrase:どうしたもんかな	どうしたもんかなぁ……	has:해야 하나	fix	lookup
+phrase:どうしたもんかな	どうしたもんかなー……。	has:해야 하나~	fix	lookup
+phrase:どうしたもんかな	さて、どうしたもんかな……	has:해야 하나	fix	lookup
+phrase:どうしたもんかな	あぁーどうしたもんかなーー	has:해야 하나~	fix	lookup
+phrase:どうしたもんかな	とはいえ、どうしたもんかな	has:해야 하나	fix	lookup
+phrase:どうしたもんかね	どうしたもんかね。	has:해야 하나	fix	lookup
+phrase:どうしたもんかね	さて、どうしたもんかねぇ）	has:해야 하나)	fix	lookup
+phrase:どうしたもんかね	はぁ・・・・・どうしたもんかね・・・・・	has:해야 하나·····	fix	lookup
+phrase:どうしたもんかのぅ	はてさて、どうしたもんかのぅ……。	has:해야 할까	fix	lookup
+phrase:如何したものか	それを見て俺は如何したものかと悩む。	has:어떻게 해야 하나	fix	lookup
+phrase:どうしたもんか	さて、この花はどうしたもんか。	has:해야 하나	fix	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたものか。	!rule:cx:lc2a-doushita-monoka-to:10	keep	lookup
+cx:lc2a-doushita-monoka-to:10	どうしたものかな……	!rule:cx:lc2a-doushita-monoka-to:10	keep	lookup
+phrase:どうしたもんか	どうしたの？	lacks:해야 하나	keep	lookup
+phrase:どうしたもんかな	どうしたんだ、もう。	lacks:해야 하나	keep	lookup
