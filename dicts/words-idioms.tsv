@@ -7490,7 +7490,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 立ち入り禁止区域	출입 금지 구역	N110			GN				llm			i:7488
 立入禁止区域	출입 금지 구역	N110			GN				llm			i:7489
 繁栄の福音	번영의 복음	N110			GN				llm			i:7490
-ダメージを与え	타격&AV@	M427		Pn	GN							i:7491
+ダメージを与え	데미지를 &CJ@	M427		Pn	GN							i:7491
 眉をしかめ	눈살을 찌푸&AA@	M427		Pn	GN				llm			i:7492
 予定は未定	예정은 미정	A9D0			GN				llm			i:7493
 稽古をつけ	가르침을 &CJ@	M427		Pn	GN				llm			i:7494

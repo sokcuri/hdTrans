@@ -1,0 +1,8 @@
+#! layer=pack
+# 뜻풀이를 고친 낱말의 옛 뜻이 맞는 쓰임과 수동의 읽기: 漬物, ご飯 옆의 ノリ 김, 奢られる 얻어먹다
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri	cue
+misread-glosses:p1	ノリ	n	sense	pred=漬物|味わう|食べる|食う|巻く|ご飯|ごはん|御飯|白米|醤油|佃煮|おにぎり|握り飯|生卵|卵|納豆|味噌汁|弁当|焼く|炙る|ちぎる|散らす|乗せる|載せる|のせる|ふりかけ|せんべい|煎餅|餅|ラーメン|蕎麦|そば|うどん|寿司|手巻き|巻き寿司|おかず|焼き鮭|鮭|漬け物|お茶漬け|茶漬け	김	LEX-3474		ノリに漬物 김에 채소 절임			
+misread-glosses:p2	奢る	v5	voice	*	passive:얻어먹다	LEX-3474		奢られる者 얻어먹는 사람			
+misread-glosses:p3	ベット	n	sense	next=する|す|すべき|すれ|し|しろ|しよう|せ|させ|でき|できる|できない	베팅	LEX-3474		ベットしますか 베팅합니까			
+misread-glosses:p4	バカな	n	sense	そんなバカな|んなバカな	말도 안돼	LEX-3474		そんなバカな 말도 안돼	colloc		final=-|！|？|。|、
+misread-glosses:p5	バカな	n	sense	next=ん|んだ|んです|んじゃ	바보	LEX-3474		バカなんだから 바보니까			

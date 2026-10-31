@@ -1,7 +1,7 @@
 # 규칙: SPC-12
 rule	input	expected	kind	layer
 cx:tte-quote:30	2時です。丑三つ時ってやつだよ。	has:오밤중시라는 녀석이야	fix	rewrites
-cx:tte-quote:30	肝試しってヤツ？	has:간시험이라는 녀석	fix	rewrites
+cx:tte-quote:30	肝試しってヤツ？	has:담력 시험이라는 녀석	fix	rewrites
 cx:tte-quote:30	お前って奴は、どうしていつもそうなんだ。	has:너라는 놈은	fix	rewrites
 cx:tte-quote:30	ミドリさんって人が霊能力者だよ！	has:씨라는 사람이	fix	rewrites
 cx:tte-quote:30	…本当に梨花ちゃんって子は…。	has:리카짱이라는 아이는	fix	rewrites
