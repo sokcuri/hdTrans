@@ -109,7 +109,7 @@
 //= honorific.kanji-reading	Kanji honorifics of honorific.drawn-after with their kana reading, KANJI=KANA, whose last vowel the speaker draws them out with (様=さま: 姫様ぁ 공주님~).
 //= honorific.copula-honour	Suffixes that honour the person they end, matched at the end of a word: a でございます after such a word, or after a topic or subject that ends in one, takes the honorific 시 (信長様でございます 노부나가님이십니다), which a plain person noun does not (学生でございます 학생입니다).
 //= honorific.honoured-person	Titles and suffixes of a person the speaker honours (陛下, 王子, 先生, シンシア様), matched at the end of a word.
-//= honorific.kana-name	Honorifics found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生).
+//= honorific.kana-name	Honorifics and kinship terms found at the start of the kana after a name, the longest winning (さくらちゃん, みなみ先生, かれんおねえさん); one drawn out before its last ん counts (さくらさ〜ん).
 //= honorific.kanji-name	Honorifics that fuse with a kanji name into one run (市松殿).
 //= honorific.katakana-name	The katakana honorifics a katakana name may end in (ヨウタサン).
 //= honorific.name	Person suffixes that follow a name (さん, 様, 先生), with their drawn-out spellings (さぁん, ちゃーん); a label or run that ends in one is the name before it.
@@ -1519,6 +1519,30 @@ honorific.kana-name	様
 honorific.kana-name	さま
 honorific.kana-name	先輩
 honorific.kana-name	先生
+honorific.kana-name	お姉さん
+honorific.kana-name	お姉ちゃん
+honorific.kana-name	お姉さま
+honorific.kana-name	お姉様
+honorific.kana-name	お兄さん
+honorific.kana-name	お兄ちゃん
+honorific.kana-name	お兄さま
+honorific.kana-name	お兄様
+honorific.kana-name	おねえさん
+honorific.kana-name	おねえちゃん
+honorific.kana-name	おねえさま
+honorific.kana-name	おねーさん
+honorific.kana-name	おねーちゃん
+honorific.kana-name	おねぇさん
+honorific.kana-name	おねぇちゃん
+honorific.kana-name	おねいさん
+honorific.kana-name	おねいちゃん
+honorific.kana-name	おねいさま
+honorific.kana-name	おにいさん
+honorific.kana-name	おにいちゃん
+honorific.kana-name	おにいさま
+honorific.kana-name	おにーさん
+honorific.kana-name	おにーちゃん
+honorific.kana-name	おにぃちゃん
 
 honorific.kanji-name	先生
 honorific.kanji-name	先輩

@@ -27155,3 +27155,11 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 承太郎	죠타로	N130	QPNVHn	Wb	GN							w:28974
 ゆら	흔들&AA@	M442			GN			LEX-94: 가나로 쓴 揺らぐ의 어간(ゆらいだ 흔들렸다)			ゆらぐ	w:28975
 舐め	얕&AY@	M427			GN			LEX-147 얕보다: 舐める of a person or in a scolding question				word:cue:nameru
+おねいさん	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29101
+おねいちゃん	언니	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29102
+おねいさま	언니	I110			GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29103
+おねーさん	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29104
+おねーちゃん	언니	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29105
+おねーさま	언니	I110			GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29106
+おにーさん	오빠	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29107
+おにーちゃん	오빠	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29108

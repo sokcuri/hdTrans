@@ -463,6 +463,12 @@ HD_TEST(names_labels) {
         HD_CHECK_EQ(Occurrences(once, "妹のつぐみちゃん。"), std::string("つぐみ"));
         HD_CHECK_EQ(Occurrences(once, "ねえつぐみちゃん"), std::string("つぐみ"));
         HD_CHECK(Scan(snap, "「ねえつぐみちゃん」\n").HonorificOnlyNames().empty());
+        // The honorific drawn out before its ん, and a kinship term after the name, are cues too.
+        HD_CHECK(Scan(snap, "「つぐみさ〜ん、待って」\n").Names() == tsugumi);
+        HD_CHECK(Scan(snap, "「つぐみちゃぁん」\n").Names() == tsugumi);
+        HD_CHECK(Scan(snap, "「つぐみおねえさん」\n").Names() == tsugumi);
+        HD_CHECK(Scan(snap, "「つぐみおねいさ〜ん」\n").Names() == tsugumi);
+        HD_CHECK(Scan(snap, "「つぐみさ〜」\n").Names().empty());
         names::Registry twice = Scan(snap, "「つぐみちゃん的にはどう？」\n妹のつぐみちゃん。\n");
         HD_CHECK(twice.Names() == tsugumi);
         HD_CHECK(twice.HonorificOnlyNames().empty());

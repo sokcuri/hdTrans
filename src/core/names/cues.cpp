@@ -782,10 +782,44 @@ bool Registry::PredicateForm(std::string_view run) {
 // The honorific of KanaHonorificNames that starts s, the longest; "" for none. Not the ちゃん
 // of the adverb ちゃんと before a verb that conjugates there (いつかちゃんと話そう; but
 // さよりちゃんと初めて, ちゃんと話を).
+namespace {
+
+// The vowel row (0..4) of a hiragana, -1 for none.
+int KanaVowel(char32_t r) {
+    constexpr std::u32string_view kRows[5] = {
+        U"あぁかがさざただなはばぱまやゃらわ", U"いぃきぎしじちぢにひびぴみり", U"うぅくぐすずつづぬふぶぷむゆゅる",
+        U"えぇけげせぜてでねへべぺめれ", U"おぉこごそぞとどのほぼぽもよょろを"};
+    for (int v = 0; v < 5; v++) {
+        if (kRows[v].find(r) != std::u32string_view::npos) return v;
+    }
+    return -1;
+}
+
+// Whether s starts with the honorific x drawn out before its final ん by ー, ～ or the small or
+// plain vowel kana of the kana before it (さ〜ん, さぁん, ちゃーん, おねいさ〜ん).
+bool StartsDrawn(std::string_view s, std::string_view x) {
+    if (x.size() < 2 * std::string_view("ん").size() || !x.ends_with("ん")) return false;
+    const std::string_view stem = x.substr(0, x.size() - std::string_view("ん").size());
+    if (!s.starts_with(stem)) return false;
+    const int v = KanaVowel(RuneBefore(stem, stem.size()).cp);
+    std::size_t p = stem.size();
+    bool drawn = false;
+    while (p < s.size()) {
+        const text::Rune r = RuneAt(s, p);
+        const bool vowel = InRunes(r.cp, "あいうえおぁぃぅぇぉ") && KanaVowel(r.cp) == v;
+        if (r.cp != U'ー' && r.cp != U'～' && r.cp != U'〜' && !vowel) break;
+        drawn = true;
+        p += r.size;
+    }
+    return drawn && s.substr(p).starts_with("ん");
+}
+
+}  // namespace
+
 std::string_view Registry::KanaHonorificAt(std::string_view s) {
     std::string_view h;
     for (const std::string_view x : dict::ClassMembers(HDTRANS_CLASS("honorific.kana-name"))) {
-        if (s.starts_with(x) && x.size() > h.size()) h = x;
+        if ((s.starts_with(x) || StartsDrawn(s, x)) && x.size() > h.size()) h = x;
     }
     constexpr std::string_view kChanto = "ちゃんと";
     if (h != "ちゃん" || !s.starts_with(kChanto) || snap_ == nullptr) return h;
@@ -803,13 +837,14 @@ std::string_view Registry::KanaHonorificAt(std::string_view s) {
     return h;
 }
 
-// The hiragana names before さん, ちゃん, くん, 君, 様, さま, 先輩 or 先生 in line (not たん or
-// っち, which also end words: こっち): the hiragana run before it, or, after a kanji or
-// katakana, the run less the one-kana particle that starts it (妹のさよりちゃん), of three or
-// four kana, or the last four or three kana of a longer run (ねえあおいさん), that the name
-// layer reads as a person and no dictionary as a person or animal noun (うさぎさん) or as a
-// creature, fruit or food noun or an adverb (ひよこさん, いちごちゃん, いつか), that starts
-// with no お or ご and that joins the honorific into no dictionary word (みなさん, たくさん).
+// The hiragana names before an honorific or kinship term of honorific.kana-name in line, also
+// drawn out before its ん (not たん or っち, which also end words: こっち): the hiragana run
+// before it, or, after a kanji or katakana, the run less the one-kana particle that starts it
+// (妹のさよりちゃん), of three or four kana, or the last four or three kana of a longer run
+// (ねえあおいさん), that the name layer reads as a person and no dictionary as a person or
+// animal noun (うさぎさん) or as a creature, fruit or food noun or an adverb (ひよこさん,
+// いちごちゃん, いつか), that starts with no お or ご and that joins the honorific into no
+// dictionary word (みなさん, たくさん).
 std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
     std::vector<std::string> out;
     for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {

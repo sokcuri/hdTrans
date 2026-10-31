@@ -755,6 +755,11 @@
   단서가 아니고, 날씨,
   하늘, 때를 뜻하는 한 글자(霞, 雷, 暁)는 자기소개로 이름이 되지 않는다(「春は？」「霞です」 `안개입니다`). 한 글자는
   출격하는 말 앞에서도 이름이 되지 않는다(松、了解).
+- 이름 층이 사람으로 읽는 서너 글자 히라가나 이름 뒤의 경칭과 친족 호칭(さん, ちゃん, くん, 先生, お姉さん, おねえさん,
+  おにいちゃん …)은 그 이름의 단서다(かれんおねえさん `카렌 언니`, ゆうまおにいちゃん `유마 오빠`). 경칭을 끝의 ん 앞에서 ー, 〜,
+  작은 모음이나 같은 모음으로 늘여도 같다(さくらさ〜ん `사쿠라 씨~`, かえでさぁん `카에데 씨~`). お姉さん, お兄さん을 입말로
+  적은 おねいさん, おねいちゃん, おねーさん, おにーちゃん은 그 낱말이다(LEX-13; ななこおねいさ〜ん `나나코 언니~`). 이름 층의 사람이
+  아닌 앞말(知らないおねえさん, そうだおにーちゃん)은 이름이 아니다.
 - 동사나 형용사로 시작하는 히라가나 이름(つむぎ, つぐみ)은 발화 첫머리에서 쉼표 앞에 부른 이름(つむぎ、こっちに来て)이나
   です, よ 앞의 자기소개(쉼표 뒤도: わたし、つむぎです)일 때만 그 줄에서 이름으로 읽는다. 히라가나 이름은 이 두 단서로
   읽고, 사전 낱말(いつか、)이나 낱말 또는 기본형 서술어에 끝 조사가 붙은 말(ここね、, いくよ、)은 단서가 되지 않는다.
@@ -845,7 +850,7 @@
 `tests/rules/cases/names-given-from-full-name.tsv`, `tests/rules/cases/names-caption-labels.tsv`,
 `tests/rules/cases/names-caption-inline-reading.tsv`, `tests/rules/cases/names-caption-reading-parts.tsv`,
 `tests/rules/cases/names-ro-given.tsv`, `tests/rules/cases/names-ro-given-kana.tsv`,
-`tests/rules/cases/names-inline-reading-wins.tsv`
+`tests/rules/cases/names-inline-reading-wins.tsv`, `tests/rules/cases/names-kana-kinship.tsv`
 
 
 ## LEX-30 이름 뒤의 애칭 ちゃん, たん, っち는 붙여 쓴 짱, 치다
