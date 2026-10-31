@@ -1,0 +1,6 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+dict:w:28975	「しょうちしました」	「알았습니다」	fix	local
+dict:w:28975	「しょうちしています」	「알고 있습니다」	fix	local
+dict:w:28975	承知しました	알았습니다	keep	local
+dict:w:28975	しょ、しょうちしました	아, 알았습니다	fix	local
