@@ -43,6 +43,7 @@ struct RegisterTables {
     struct AuthRow {
         std::vector<std::vector<std::u32string>> parts;  // each part (alternatives split by |) must occur (in the line, or for a speaker row across the speaker's lines)
         bool speaker = false;               // marks the speaker in the scene, not only the line
+        std::u32string notAfter;            // characters that must not come right before a part (お嬢, 令嬢)
     };
     std::vector<AuthRow> auth;  // voices.tsv auth: an authoritative voice (REG-14)
     std::map<std::string, LevelRow> levels;
@@ -90,6 +91,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
                 return nullptr;
             }
             a.speaker = r[2] == "speaker";
+            if (vx.Col("notafter") >= 0) a.notAfter = ToU32(r[static_cast<size_t>(vx.Col("notafter"))]);
             t->auth.push_back(a);
             continue;
         }
@@ -332,9 +334,9 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             // な on a verb's dictionary form forbids (行くな); on い, た, だ it exclaims
             // ... but not after a wish (ほしいな, 行きたいな: 갖고 싶은데)
             // the desire たい follows a verb stem (行きたい, 見たい), not the adjectives 冷たい, 重たい, 眠たい, めでたい
-            static const std::u32string kStem = U"いきぎしじちにひびみりえけげせぜてでねべめれ見来寝出";
+            static const std::u32string kStem = U"いきぎしじちにひびみりえけげせぜてでねべめれ見来寝出着居似煮";
             static const std::vector<std::u32string> kTaiAdj = {U"冷たい", U"重たい", U"眠たい", U"めでたい", U"ありがたい",
-                                                                U"つめたい", U"おもたい", U"ねむたい"};
+                                                                U"つめたい", U"おもたい", U"ねむたい", U"後ろめたい", U"うしろめたい"};
             bool taiAdj = false;
             for (const auto& a : kTaiAdj)
                 if (EndsWith(rest, a)) taiAdj = true;
@@ -567,7 +569,8 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         for (size_t p = 0; p < t.auth[a].parts.size(); ++p) {
             bool found = false;
             for (const auto& alt : t.auth[a].parts[p])
-                if (u.text.find(alt) != std::u32string::npos) found = true;
+                for (size_t at = u.text.find(alt); at != std::u32string::npos && !found; at = u.text.find(alt, at + 1))
+                    if (at == 0 || t.auth[a].notAfter.find(u.text[at - 1]) == std::u32string::npos) found = true;
             if (!found) all = false;
             else if (t.auth[a].speaker) c.authParts.push_back({a, p});
         }
