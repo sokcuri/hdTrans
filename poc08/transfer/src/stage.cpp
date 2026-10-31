@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "decide.h"
+#include "native.h"
 #include "ir/file.h"
 #include "ir/stages.h"
 #include "transfer.h"
@@ -24,6 +25,9 @@ struct TransferData {
   xfer::Table table;
   xfer::DecideData deciders;
   std::vector<BaseRow> base;
+  nat::Data native;               // native T (data/xfer, level lexicons)
+  StructureData* structure = nullptr;  // aux.tsv reading for native rows
+  ~TransferData() { FreeStructure(structure); }
 };
 
 namespace {
@@ -143,51 +147,21 @@ TransferData* LoadTransfer(const Config& cfg, std::string& err) {
     delete d;
     return nullptr;
   }
+  nat::Load(cfg.data, d->native);
+  if (!d->native.errors.empty()) {
+    err = "transfer: " + d->native.errors.front();
+    delete d;
+    return nullptr;
+  }
+  std::string serr;
+  d->structure = LoadStructure(cfg, serr);
+  d->native.structure = d->structure;
   return d;
 }
 
 void FreeTransfer(TransferData* data) { delete data; }
 
-void StageT(const TransferData& t, const Config&, Doc& doc, Line& line) {
-  line.kir.clear();
-  xfer::LineIR view = xfer::MakeView(doc, line, t.table);
-  xfer::Result r = xfer::Transfer(t.table, view);
-  for (size_t i = 0; i < r.chosen.size(); ++i) {
-    const xfer::Match& m = r.chosen[i];
-    const xfer::Row& row = t.table.rows[m.row];
-    const xfer::Decision& x = r.decisions[i];
-    Decision d;
-    d.stage = 'T';
-    d.kind = x.kind == "default" ? Ev::Default : Ev::Cued;
-    d.rule = doc.I(x.rule);
-    d.src.begin = x.src.begin;
-    d.src.end = x.src.end;
-    d.score = static_cast<float>(x.score);
-    d.margin = static_cast<float>(x.margin);
-    d.nAlt = static_cast<uint8_t>(x.nAlt > 255 ? 255 : x.nAlt);
-    if (!x.runnerUp.empty()) d.runnerUp = doc.I(x.runnerUp);
-    for (const auto& b : x.because) d.because.push_back(doc.I(b));
-    d.because.push_back(doc.I("ko=" + row.ko));
-    if (row.pol != "keep") d.because.push_back(doc.I("pol=" + row.pol));
-    if (x.nAlt > 1) d.contrib.emplace_back(doc.I("specificity"), static_cast<float>(x.score));
-    line.Decide(std::move(d));
-  }
-  const uint32_t rule = doc.I("code:stub-transfer");
-  for (const Token& tok : line.toks) {
-    Decision d;
-    d.stage = 'T';
-    d.kind = Ev::Fallback;
-    d.rule = rule;
-    d.src = tok.src;
-    KNode n;
-    n.id = static_cast<uint32_t>(line.kir.size() + 1);
-    n.kind = KK::Raw;
-    n.lemma = doc.I(line.Src(tok.src));
-    n.src = tok.src;
-    n.decision = line.Decide(d);
-    line.kir.push_back(n);
-  }
-}
+void StageT(const TransferData& t, const Config&, Doc& doc, Line& line) { nat::Transfer(t.native, doc, line); }
 
 // D: the deciders over the lifted kir (stages.h). One Decision per point: rule dec:<family>@<version>,
 // Cued when it overrode 0.7.x, Default when it kept it; runnerUp t075:<0.7.x class>.

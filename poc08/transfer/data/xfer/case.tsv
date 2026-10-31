@@ -1,0 +1,27 @@
+#! xfer
+# Particles after nouns: abstract cases (the generator picks the form by the noun's last sound).
+id	spec	match	when	then	ko	st	prov	note
+case.wa	N5-11	{NP} [kase=wa]	-	-	P:top	m	own	私は → 나는
+case.ga	N5-12	{NP} [kase=ga]	-	-	P:subj	m	own	雨が → 비가
+case.ga.frame	N5-12	{NP} [kase=ga]	head.frame=ga:obj	-	P:obj	m	own	猫が好き → 고양이를 좋아하다
+case.wo	N5-13	{NP} [kase=wo]	-	-	P:obj	m	own	本を → 책을
+case.ni.goal	N5-14	{NP} [kase=ni]	-	-	P:goal	m	own	学校に行く → 학교에 가다
+case.ni.dat	N5-14	{N:@person} [kase=ni]	-	-	P:dat	m	own	友達に → 친구에게
+case.he	N5-15	{NP} [kase=he]	-	-	P:goal	m	own	学校へ → 학교에
+case.de.loc	N5-16	{NP} [kase=de]	-	-	P:loc	m	own	公園で → 공원에서
+case.de.instr	N5-16	{N:@tool} [kase=de]	-	-	P:instr	m	own	ペンで → 펜으로
+case.to.narr	N5-17	{NP} [kase=to]	utt=narration	-	P:com	m	own	友達と → 친구와
+case.to.polite	N5-17	{NP} [kase=to]	utt=dialogue cl.polite=desu-masu	-	P:=하고	m	own	友達と(です/ます) → 친구하고
+case.to.plain	N5-17	{NP} [kase=to]	utt=dialogue cl.polite=plain	-	P:=(이)랑	m	own	友達と(plain) → 친구랑
+case.mo	N5-18	{NP} [kase=mo]	-	-	P:=도	m	own	私も → 나도
+case.no	N5-19	{NP} [kase=no]	-	-	-	m	own	日本語の本 → 일본어 책 (N5-H9)
+case.kara.src	N5-20	{NP} [kase=kara]	-	-	P:src	m	own	家から → 집에서
+case.kara.time	N5-20	{N:@time} [kase=kara]	-	-	P:=부터	m	own	明日から → 내일부터
+case.kara.person	N5-20	{N:@person} [kase=kara]	-	-	P:=에게서	m	own	友達から → 친구에게서
+case.made	N5-21	{NP} [kase=made]	-	-	P:=까지	m	own	駅まで → 역까지
+case.yori	N5-23	{NP} [kase=yori]	-	-	P:=보다	m	own	私より → 나보다
+case.dake	N5-58	{NP} だけ	-	-	P:=만	m	own	一人だけ → 혼자만
+case.ya	N5-22	{NP} や	-	-	P:=(이)나	m	own	本やペン → 책이나 펜
+case.mo.nani.neg	N5-54	{NP} [kase=mo]	NP.lemma=何 cl.pol=neg	NP.lemma=아무것	P:=도	m	own	何もしない → 아무것도 하지 않는다
+case.de.nani	N5-54	何 [kase=de]	-	-	Adv:왜	m	own	何で → 왜
+case.to.nani	N5-54	何 [kase=to]	-	line.route=fallback	-	m	own	何と (exclamation or listing): held for 0.7.x

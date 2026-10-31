@@ -1,0 +1,38 @@
+#! cases
+id	kind	ja	ko	src
+link.te.seq	fix	パンを食べて寝る。	빵을 먹고 잔다.	inv
+link.te.seq	keep	学校に行って本を読む。	학교에 가서 책을 읽는다.	inv
+link.te.motion	fix	学校に行って本を読む。	학교에 가서 책을 읽는다.	inv
+link.te.motion	keep	パンを食べて寝る。	빵을 먹고 잔다.	inv
+link.te.cause	fix	雨が降って、学校に行かない。	비가 와서, 학교에 가지 않는다.	inv
+link.te.cause	keep	パンを食べて寝る。	빵을 먹고 잔다.	inv
+link.te.adj	fix	本が高くて買わない。	책이 비싸서 사지 않는다.	inv
+link.te.adj	keep	本を読んで寝る。	책을 읽고 잔다.	inv
+link.tekara	fix	パンを食べてから寝る。	빵을 먹고 나서 잔다.	inv
+link.tekara	keep	パンを食べて寝る。	빵을 먹고 잔다.	inv
+link.mae	fix	寝る前に本を読む。	자기 전에 책을 읽는다.	inv
+link.mae	keep	寝る時に本を読む。	잘 때 책을 읽는다.	inv
+link.ato	fix	パンを食べた後で寝る。	빵을 먹은 후에 잔다.	inv
+link.ato	keep	寝る前に本を読む。	자기 전에 책을 읽는다.	inv
+link.toki	fix	寝る時に本を読む。	잘 때 책을 읽는다.	inv
+link.toki	keep	寝る前に本を読む。	자기 전에 책을 읽는다.	inv
+link.toki.past	fix	学校に行った時、先生がいた。	학교에 갔을 때, 선생님이 있었다.	inv
+link.toki.past	keep	学校に行く時、本を読む。	학교에 갈 때, 책을 읽는다.	inv
+link.tari	fix	本を読んだり水を飲んだりする。	책을 읽거나 물을 마시거나 한다.	inv
+link.tari	keep	本を読んで水を飲む。	책을 읽고 물을 마신다.	inv
+link.nagara	fix	水を飲みながら本を読む。	물을 마시면서 책을 읽는다.	inv
+link.nagara	keep	水を飲んで本を読む。	물을 마시고 책을 읽는다.	inv
+link.kara	fix	本が高いから買わない。	책이 비싸서 사지 않는다.	inv
+link.kara	keep	「本が高いから買わないで。」	「책이 비싸니까 사지 마.」	inv
+link.kara.ask	fix	「雨が降るから学校に行きましょう。」	「비가 오니까 학교에 가죠.」	inv
+link.kara.ask	keep	本が高いから買わない。	책이 비싸서 사지 않는다.	inv
+link.kara.past	fix	雨が降ったから学校に行かなかった。	비가 왔으니까 학교에 가지 않았다.	inv
+link.kara.past	keep	雨が降るから学校に行かない。	비가 와서 학교에 가지 않는다.	inv
+link.node	fix	雨が降るので学校に行かない。	비가 와서 학교에 가지 않는다.	inv
+link.node	keep	「雨が降るので学校に行きましょう。」	「비가 오니까 학교에 가죠.」	inv
+link.node.ask	fix	「雨が降るので学校に行きましょう。」	「비가 오니까 학교에 가죠.」	inv
+link.node.ask	keep	雨が降るので学校に行かない。	비가 와서 학교에 가지 않는다.	inv
+link.ga	fix	本は高いけど買う。	책은 비싸지만 산다.	inv
+link.ga	keep	「本は高いけど買う？」	「책은 비싼데 사?」	inv
+link.ga.ask	fix	「本は高いけど買う？」	「책은 비싼데 사?」	inv
+link.ga.ask	keep	本は高いけど買う。	책은 비싸지만 산다.	inv

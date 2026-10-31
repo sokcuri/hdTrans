@@ -1,0 +1,4 @@
+#! xfer
+# です/ます: consumed here; the speech level is R's (N5-H5).
+id	spec	match	when	then	ko	st	prov	note
+polite.masu	N5-H5	[polite=desu-masu]	-	-	-	m	own	食べます → 먹어요 (level by R)

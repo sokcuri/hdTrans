@@ -1,0 +1,5 @@
+#! xfer
+# Sentence-final particles (N5-24, N5-H11).
+id	spec	match	when	then	ko	st	prov	note
+final.yo	N5-H11	よ/p_final	-	-	-	m	own	行くよ → 가
+final.ne	N5-H11	ね/p_final	-	pred.eomi=ne	-	m	own	いいね → 좋네

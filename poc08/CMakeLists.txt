@@ -29,6 +29,15 @@ add_library(hd08_driver STATIC driver/driver.cpp driver/report.cpp ${HD08_STUB_S
 target_compile_definitions(hd08_driver PUBLIC ${HD08_STUB_DEFS})
 target_link_libraries(hd08_driver PUBLIC ${HD08_STAGE_LIBS} hd08_ir)
 
+# The native route alone: lint and cases of the native rows, level grids.
+if(TARGET hd08_transfer)
+    add_executable(hd8native transfer/tools/hd8native.cpp)
+    target_compile_definitions(hd8native PRIVATE "HD08_DEFAULT_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}\"")
+    target_link_libraries(hd8native PRIVATE hd08_driver)
+    add_test(NAME poc08.native.lint COMMAND hd8native lint)
+    add_test(NAME poc08.native.cases COMMAND hd8native cases)
+endif()
+
 # The side-IR driver: the stages of IR.md alone, on stubs where a component is missing.
 add_executable(hdtrans08_ir driver/cli.cpp)
 target_compile_definitions(hdtrans08_ir PRIVATE "HD08_DEFAULT_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}\"")

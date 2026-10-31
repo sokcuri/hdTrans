@@ -184,4 +184,36 @@ void RunDoc(const Engine& e, Doc& doc, const RunOptions& o) {
     }
 }
 
+void Analyse(const Engine& e, Doc& doc, size_t maxStructureBytes) {
+    const Config& cfg = e.cfg;
+    const std::vector<ForcedSpan> none;
+    for (Line& l : doc.lines) {
+        StageN(*e.analyzer, cfg, doc, l);
+        StageA(*e.analyzer, cfg, doc, l, none);
+    }
+    std::vector<ForcedSpan> forced;
+    StageS(*e.discourse, cfg, doc, forced);
+    for (Line& l : doc.lines) {
+        if (l.src.size() > maxStructureBytes) continue;
+        const int paths = l.alt.toks.empty() ? 1 : 2;
+        for (int p = 0; p < paths; p++) {
+            StageC(*e.structure, cfg, doc, l, p);
+            StageL(*e.structure, cfg, doc, l, p);
+            StageZ(*e.discourse, cfg, doc, l, p);
+        }
+    }
+}
+
+bool RunNative(const Engine& e, Doc& doc, Line& line) {
+    StageT(*e.transfer, e.cfg, doc, line);
+    if (line.route != 1 || line.buns.empty()) return false;
+    Config rc = e.cfg;
+    if (rc.speech == Speech::Strict || rc.speech == Speech::Soft) rc.speech = Speech::Auto;
+    StageR(*e.discourse, rc, doc, line);
+    line.kir2 = line.kir;
+    for (KNode& n : line.kir2) n.origin = n.id;
+    StageG(*e.generator, e.cfg, doc, line);
+    return !line.out.empty();
+}
+
 }  // namespace hd08

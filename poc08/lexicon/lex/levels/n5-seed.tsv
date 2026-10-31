@@ -1,0 +1,63 @@
+#! lexicon
+# Development seed of the N5 vocabulary for the native route; superseded by the N5 lexicon rows.
+ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
+私-代名詞	わたし	n	1	나			cls=@person pron=1	m	own	
+彼	かれ	n	1	그			cls=@person	m	own	
+学生	がくせい	n	1	학생			cls=@person.role	m	own	
+先生	せんせい	n	1	선생님			cls=@person.higher	m	own	
+友達	ともだち	n	1	친구			cls=@person.close	m	own	
+医者	いしゃ	n	1	의사			cls=@person.role	m	own	
+本	ほん	n	1	책			cls=@document	m	own	
+学校	がっこう	n	1	학교			cls=@organization	m	own	
+公園	こうえん	n	1	공원			cls=@place	m	own	
+部屋	へや	n	1	방			cls=@place	m	own	
+御飯	ごはん	n	1	밥			cls=@food	m	own	
+パン-pao	ぱん	n	1	빵			cls=@food	m	own	
+水	みず	n	1	물			cls=@drink	m	own	
+雨	あめ	n	1	비			cls=@weather	m	own	
+昨日	きのう	n	1	어제			cls=@time	m	own	
+明日	あした	n	1	내일			cls=@time	m	own	
+今日	きょう	n	1	오늘			cls=@time	m	own	
+毎日	まいにち	n	1	매일			cls=@time	m	own	
+勉強	べんきょう	n	1	공부				m	own	
+食べる	たべる	v1	1	먹다			vol=+ asp=activity	m	own	
+飲む	のむ	v5	1	마시다			vol=+ asp=activity	m	own	
+読む	よむ	v5	1	읽다			vol=+ asp=activity	m	own	
+書く	かく	v5	1	쓰다			vol=+ asp=activity	m	own	
+行く	いく	v5	1	가다			vol=+ asp=change pclass=motion	m	own	
+来る	くる	vk	1	오다			vol=+ asp=change pclass=motion	m	own	
+見る	みる	v1	1	보다			vol=+ asp=activity	m	own	
+寝る	ねる	v1	1	자다			vol=+ asp=activity	m	own	
+起きる	おきる	v1	1	일어나다			vol=+ asp=change	m	own	
+遊ぶ	あそぶ	v5	1	놀다			vol=+ asp=activity	m	own	
+買う	かう	v5	1	사다			vol=+ asp=activity	m	own	
+待つ	まつ	v5	1	기다리다			vol=+ asp=activity	m	own	
+話す	はなす	v5	1	이야기하다			vol=+ asp=activity	m	own	
+聞く	きく	v5	1	듣다			vol=+ asp=activity	m	own	
+座る	すわる	v5	1	앉다			vol=+ asp=change pclass=posture	m	own	
+降る	ふる	v5	1	오다			vol=- asp=activity	m	own	
+為る	する	vs	1	하다			vol=+ asp=activity	m	own	
+有る	ある	v5	1	있다			vol=- asp=state	m	own	
+居る	いる	v1	1	있다			vol=- asp=state	m	own	
+分かる	わかる	v5	1	알다			vol=- asp=state	m	own	
+知る	しる	v5	1	알다			vol=- asp=state	m	own	
+高い	たかい	adj	1	비싸다				m	own	
+安い	やすい	adj	1	싸다				m	own	
+大きい	おおきい	adj	1	크다				m	own	
+良い	よい	adj	1	좋다				m	own	
+静か	しずか	na	1	조용하다				m	own	
+有名	ゆうめい	na	1	유명하다				m	own	
+好き	すき	na	1	좋아하다		ga:obj	vpos=V	m	own	
+余り	あまり	adv	1	별로			npi=neg	m	own	
+結婚	けっこん	n	1	결혼			asp=change-past	m	own	
+ペン-pen	ぺん	n	1	펜			cls=@writing.tool	m	own	
+寒い	さむい	adj	1	춥다				m	own	
+窓	まど	n	1	창문			cls=@thing	m	own	
+締める	しめる	v1	1	닫다			vol=+ asp=activity	m	own	
+未だ	まだ	adv	1	아직				m	own	
+もう	もう	adv	1	벌써				m	own	
+早い	はやい	adj	1	빠르다				m	own	
+欲しい	ほしい	adj	1	갖고 싶다				m	own	
+此れ	これ	n	1	이것				m	own	
+何	なに	n	1	무엇			wh=+	m	own	
+此処	ここ	n	1	여기			cls=@place	m	own	

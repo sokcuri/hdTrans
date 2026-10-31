@@ -1,0 +1,4 @@
+#! cases
+id	kind	ja	ko	src
+tense.past	fix	昨日、本を読んだ。	어제, 책을 읽었다.	inv
+tense.past	keep	毎日、本を読む。	매일, 책을 읽는다.	inv

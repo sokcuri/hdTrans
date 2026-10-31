@@ -1,0 +1,50 @@
+#! cases
+id	kind	ja	ko	src
+case.wa	fix	私は学生だ。	나는 학생이다.	inv
+case.wa	keep	私が学生だ。	내가 학생이다.	inv
+case.ga	fix	雨が降る。	비가 온다.	inv
+case.ga	keep	雨は降る。	비는 온다.	inv
+case.ga.frame	fix	私は本が好きだ。	나는 책을 좋아한다.	inv
+case.ga.frame	keep	本が高い。	책이 비싸다.	inv
+case.wo	fix	本を読む。	책을 읽는다.	inv
+case.wo	keep	本が高い。	책이 비싸다.	inv
+case.ni.goal	fix	学校に行く。	학교에 간다.	inv
+case.ni.goal	keep	友達に話す。	친구에게 이야기한다.	inv
+case.ni.dat	fix	友達に話す。	친구에게 이야기한다.	inv
+case.ni.dat	keep	学校に行く。	학교에 간다.	inv
+case.he	fix	学校へ行く。	학교에 간다.	inv
+case.he	keep	学校で遊ぶ。	학교에서 논다.	inv
+case.de.loc	fix	公園で遊ぶ。	공원에서 논다.	inv
+case.de.loc	keep	公園に行く。	공원에 간다.	inv
+case.de.instr	fix	ペンで書く。	펜으로 쓴다.	inv
+case.de.instr	keep	部屋で書く。	방에서 쓴다.	inv
+case.to.narr	fix	友達と遊ぶ。	친구와 논다.	inv
+case.to.narr	keep	「友達と遊ぶ。」	「친구랑 놀아.」	inv
+case.to.polite	fix	「友達と遊びます。」	「친구하고 놀아요.」	inv
+case.to.polite	keep	友達と遊ぶ。	친구와 논다.	inv
+case.to.plain	fix	「友達と遊ぶ。」	「친구랑 놀아.」	inv
+case.to.plain	keep	「友達と遊びます。」	「친구하고 놀아요.」	inv
+case.mo	fix	私も学生だ。	나도 학생이다.	inv
+case.mo	keep	私は学生だ。	나는 학생이다.	inv
+case.no	fix	先生の本を読む。	선생님 책을 읽는다.	inv
+case.no	keep	先生と本を読む。	선생님과 책을 읽는다.	inv
+case.kara.src	fix	学校から来る。	학교에서 온다.	inv
+case.kara.src	keep	明日から読む。	내일부터 읽는다.	inv
+case.kara.time	fix	明日から読む。	내일부터 읽는다.	inv
+case.kara.time	keep	学校から来る。	학교에서 온다.	inv
+case.kara.person	fix	友達から聞いた。	친구에게서 들었다.	inv
+case.kara.person	keep	学校から来た。	학교에서 왔다.	inv
+case.made	fix	学校まで行く。	학교까지 간다.	inv
+case.made	keep	学校に行く。	학교에 간다.	inv
+case.yori	fix	本は水より高い。	책은 물보다 비싸다.	inv
+case.yori	keep	本は高い。	책은 비싸다.	inv
+case.dake	fix	水だけ飲む。	물만 마신다.	inv
+case.dake	keep	水を飲む。	물을 마신다.	inv
+case.ya	fix	本やペンを買う。	책이나 펜을 산다.	inv
+case.ya	keep	本とペンを買う。	책과 펜을 산다.	inv
+case.mo.nani.neg	fix	何も食べない。	아무것도 먹지 않는다.	inv
+case.mo.nani.neg	keep	パンも食べない。	빵도 먹지 않는다.	inv
+case.de.nani	fix	「何で行かない？」	「왜 안 가?」	inv
+case.de.nani	keep	「公園で遊ぶ。」	「공원에서 놀아.」	inv
+case.to.nani	fix	「何と……」	-	inv
+case.to.nani	keep	「友達と遊ぶ。」	「친구랑 놀아.」	inv

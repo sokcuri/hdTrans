@@ -1,0 +1,20 @@
+#! cases
+id	kind	ja	ko	src
+punct.end	fix	本を読む。	책을 읽는다.	inv
+punct.end	keep	本を読む	책을 읽는다	inv
+punct.comma	fix	昨日、本を読んだ。	어제, 책을 읽었다.	inv
+punct.comma	keep	昨日学校に行った。	어제 학교에 갔다.	inv
+punct.open	fix	「本を読む。」	「책을 읽어.」	inv
+punct.open	keep	本を読む。	책을 읽는다.	inv
+punct.close	fix	「本を読む。」	「책을 읽어.」	inv
+punct.close	keep	本を読む。	책을 읽는다.	inv
+punct.q	fix	「本を読む？」	「책을 읽어?」	inv
+punct.q	keep	「本を読む。」	「책을 읽어.」	inv
+punct.excl	fix	「本を読む！」	「책을 읽어!」	inv
+punct.excl	keep	「本を読む。」	「책을 읽어.」	inv
+punct.end.ka	fix	「学校に行きませんか。」	「학교에 가지 않으실래요?」	inv
+punct.end.ka	keep	「学校に行きません。」	「학교에 안 가요.」	inv
+punct.ellipsis	fix	「……本がある。」	「……책이 있어.」	inv
+punct.ellipsis	keep	「本がある。」	「책이 있어.」	inv
+punct.dash	fix	「本が――ある。」	「책이――있어.」	inv
+punct.dash	keep	「本がある。」	「책이 있어.」	inv

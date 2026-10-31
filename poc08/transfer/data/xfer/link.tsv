@@ -1,0 +1,21 @@
+#! xfer
+# Clause links (N5-31, N5-34…N5-41).
+id	spec	match	when	then	ko	st	prov	note
+link.te.seq	N5-H2	[link=te]	-	pred.ctype=conn;pred.rel=seq	-	m	own	食べて寝る → 먹고 자다
+link.te.motion	N5-H2	[link=te]	pred.pclass=motion|posture	pred.ctype=conn;pred.rel=cause	-	m	own	行って買う → 가서 사다
+link.te.cause	N5-H2	[link=te]	pred.vol=-	pred.ctype=conn;pred.rel=cause	-	m	own	雨が降って → 비가 와서
+link.te.adj	N5-H2	[link=te]	pred.pos=adj|na	pred.ctype=conn;pred.rel=cause	-	m	own	高くて → 비싸서
+link.tekara	N5-34	{V} [link=te] から/p_case	-	V.ctype=conn;V.eomi=-고	V:나다{aux,ctype=conn,rel=cause}	m	own	食べてから → 먹고 나서
+link.mae	N5-35	{V} [link=time:mae] [kase=ni]	-	V.ctype=nom:gi	N:전{dep} P:goal	m	own	食べる前に → 먹기 전에
+link.ato	N5-36	{V} [tense=past] [link=time:ato] [kase=de]	-	V.ctype=adn:past	N:후{dep} P:goal	m	own	食べた後で → 먹은 후에
+link.toki	N5-37	{V} [link=time:toki] [kase=ni]?	-	V.ctype=adn:fut	N:때{dep}	m	own	食べるとき → 먹을 때
+link.toki.past	N5-37	{V} [tense=past] [link=time:toki] [kase=ni]?	-	V.ctype=adn:fut;V.tense=past	N:때{dep}	m	own	食べたとき → 먹었을 때
+link.tari	N5-H13	[link=tari]	-	pred.ctype=conn;pred.rel=or	-	m	own	読んだり → 읽거나
+link.nagara	N5-39	[link=nagara]	-	pred.ctype=conn;pred.rel=while	-	m	own	見ながら → 보면서
+link.kara	N5-H3	[link=kara]	-	pred.ctype=conn;pred.rel=cause	-	m	own	雨だから行かない → 비가 와서 안 간다
+link.kara.ask	N5-H3	[link=kara]	main.force=imp|request|prop|q	pred.ctype=conn;pred.rel=reason	-	m	own	危ないから下がって → 위험하니까 물러서
+link.kara.past	N5-H3	[link=kara]	cl.tense=past	pred.ctype=conn;pred.rel=reason	-	m	own	降ったから → 왔으니까
+link.ga	N5-41	[link=ga]	-	pred.ctype=conn;pred.rel=concess	-	m	own	高いけど買う → 비싸지만 산다
+link.ga.ask	N5-41	[link=ga]	main.force=imp|request|prop|q	pred.ctype=conn;pred.rel=bg	-	m	own	高いけど買う？ → 비싼데 사?
+link.node	N5-H3	[role=nomi] [role=cop-te]	-	pred.ctype=conn;pred.rel=cause	-	m	own	降るので → 와서
+link.node.ask	N5-H3	[role=nomi] [role=cop-te]	main.force=imp|request|prop|q	pred.ctype=conn;pred.rel=reason	-	m	own	降るので行きましょう → 오니까 가죠

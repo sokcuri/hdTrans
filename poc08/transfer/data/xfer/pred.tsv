@@ -1,0 +1,21 @@
+#! xfer
+# Predicate types: the copula after a noun, な-adjectives, サ変 nouns with する, ない of ある.
+id	spec	match	when	then	ko	st	prov	note
+pred.cop	N5-01	{N} [role=cop]	-	-	V:이다{glue}	m	own	学生だ → 학생이다
+pred.cop.neg	N5-02	{N} [role=cop-ja] [pol=neg]	-	-	P:subj V:아니다	m	own	学生じゃない → 학생이 아니다
+pred.cop.neg.dewa	N5-02	{N} [kase=de] [kase=wa] [pol=neg]	-	-	P:subj V:아니다	m	own	学生ではない → 학생이 아니다
+pred.cop.neg.dewa.aru	N5-02	{N} [kase=de] [kase=wa] 有る	-	-	P:subj V:아니다	m	own	学生ではありません → 학생이 아니에요
+pred.cop.neg.aru	N5-02	{N} [role=cop-ja] 有る	-	-	P:subj V:아니다	m	own	学生じゃありません → 학생이 아니에요
+pred.na	N5-05	{Na} [role=cop]	-	-	-	m	own	静かだ → 조용하다
+pred.na.ja	N5-05	{Na} [role=cop-ja]	-	-	-	m	own	静かじゃない → 안 조용해
+pred.na.dewa	N5-05	{Na} [role=cop-te] [kase=wa]	-	-	-	m	own	静かではない → 조용하지 않다
+pred.suru	N5-10	{N} [role=light]	-	-	V:하다{glue}	m	own	勉強する → 공부하다
+pred.nai.exist	N5-07	[aux.nai.exist]	-	-	V:없다	m	own	本がない → 책이 없다
+pred.adn	N5-06	-	cl.link=adn cl.tense=nonpast cl.endform=rentai	pred.ctype=adn:nonpast	-	m	own	高い本 → 비싼 책
+pred.adn.past	N5-06	-	cl.link=adn cl.tense=past cl.endform=rentai	pred.ctype=adn:past;pred.tense=nonpast	-	m	own	読んだ本 → 읽은 책
+pred.adv.adj	N5-42	{A}	A.form=renyo next.pos=v1|v5|vs|vk|vz	A.ctype=conn;A.rel=result	-	m	own	早く書く → 빠르게 쓰다
+pred.adv.na	N5-42	{Na} [role=cop-ni]	-	Na.ctype=conn;Na.rel=result	-	m	own	静かに書く → 조용하게 쓰다
+pred.naru.adj	N5-43	{A} 成る	-	A.ctype=conn;A.eomi=-어	V:지다{aux}	m	own	高くなる → 비싸지다
+pred.naru.na	N5-43	{Na} [role=cop-ni] [role=naru]	-	Na.ctype=conn;Na.eomi=-어	V:지다{aux}	m	own	静かになる → 조용해지다
+pred.naru.n	N5-43	{N} [kase=ni] [role=naru]	-	-	P:subj V:되다	m	own	先生になる → 선생님이 되다
+pred.nominal	N5-57	{V} [role=nomi]	-	V.ctype=adn:nonpast	N:것{dep}	m	own	読むのが好き → 읽는 것을 좋아하다

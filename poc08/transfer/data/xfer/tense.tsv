@@ -1,0 +1,4 @@
+#! xfer
+# Tense: た marks the past of its predicate.
+id	spec	match	when	then	ko	st	prov	note
+tense.past	N5-09	[tense=past]	-	pred.tense=past	-	m	own	食べた → 먹었다

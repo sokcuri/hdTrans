@@ -1,0 +1,8 @@
+#! xfer
+# Negation (N5-H1): short 안 in dialogue, long -지 않다 in narration.
+id	spec	match	when	then	ko	st	prov	note
+pol.neg.short	N5-H1	[pol=neg]	utt=dialogue	pred.neg=an	-	m	own	食べない(「」) → 안 먹어
+pol.neg.long	N5-H1	[pol=neg]	utt=narration	pred.neg=ji-anh	-	m	own	食べない → 먹지 않는다
+pol.mou.neg	N5-52	もう	cl.pol=neg	-	Adv:더_이상	m	own	もう食べない → 더 이상 먹지 않는다
+adv.mou.nonpast	N5-52	{C}	C.lemma=もう cl.tense=nonpast	C.lemma=이제	-	m	own	もう寝る → 이제 잔다
+adv.mou.ii	N5-52	もう 良い	cl.tense=nonpast	-	Adv:이제 V:되다{tense=past}	m	own	もういい → 이제 됐어

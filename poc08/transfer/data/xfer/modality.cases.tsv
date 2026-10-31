@@ -1,0 +1,42 @@
+#! cases
+id	kind	ja	ko	src
+mod.tai	fix	パンを食べたい。	빵을 먹고 싶다.	inv
+mod.tai	keep	パンを食べる。	빵을 먹는다.	inv
+mod.tai.neg	fix	「パンを食べたくない。」	「빵을 먹고 싶지 않아.」	inv
+mod.tai.neg	keep	「パンを食べない。」	「빵을 안 먹어.」	inv
+mod.hoshii	fix	「本がほしい。」	「책을 갖고 싶어.」	inv
+mod.hoshii	keep	「本が高い。」	「책이 비싸.」	inv
+mod.desho.v	fix	「明日は雨が降るでしょう。」	「내일은 비가 올 거예요.」	inv
+mod.desho.v	keep	「明日は雨が降ります。」	「내일은 비가 와요.」	inv
+mod.desho.a	fix	「本は高いでしょう。」	「책은 비쌀 거예요.」	inv
+mod.desho.a	keep	「本は高いです。」	「책은 비싸요.」	inv
+mod.desho.na	fix	「部屋は静かでしょう。」	「방은 조용할 거예요.」	inv
+mod.desho.na	keep	「部屋は静かです。」	「방은 조용해요.」	inv
+mod.desho.n	fix	「明日は雨でしょう。」	「내일은 비일 거예요.」	inv
+mod.desho.n	keep	「明日は雨です。」	「내일은 비예요.」	inv
+mod.daro.v	fix	雨が降るだろう。	비가 올 것이다.	inv
+mod.daro.v	keep	雨が降る。	비가 온다.	inv
+mod.daro.a	fix	本は高いだろう。	책은 비쌀 것이다.	inv
+mod.daro.a	keep	本は高い。	책은 비싸다.	inv
+mod.daro.na	fix	部屋は静かだろう。	방은 조용할 것이다.	inv
+mod.daro.na	keep	部屋は静かだ。	방은 조용하다.	inv
+mod.daro.n	fix	明日は雨だろう。	내일은 비일 것이다.	inv
+mod.daro.n	keep	明日は雨だ。	내일은 비다.	inv
+mod.tsumori	fix	学校に行くつもりだ。	학교에 갈 생각이다.	inv
+mod.tsumori	keep	学校に行く。	학교에 간다.	inv
+mod.hou	fix	「学校に行った方がいい。」	「학교에 가는 게 좋아.」	inv
+mod.hou	keep	「学校に行かない方がいい。」	「학교에 가지 않는 게 좋아.」	inv
+mod.hou.neg	fix	「学校に行かない方がいい。」	「학교에 가지 않는 게 좋아.」	inv
+mod.hou.neg	keep	「学校に行った方がいい。」	「학교에 가는 게 좋아.」	inv
+mod.temoii	fix	「学校に行ってもいい。」	「학교에 가도 돼.」	inv
+mod.temoii	keep	「学校に行ってはいけない。」	「학교에 가면 안 돼.」	inv
+mod.tewaikenai	fix	「学校に行ってはいけない。」	「학교에 가면 안 돼.」	inv
+mod.tewaikenai	keep	「学校に行ってもいい。」	「학교에 가도 돼.」	inv
+mod.chaikenai	fix	「パンを食べちゃいけない。」	「빵을 먹으면 안 돼.」	inv
+mod.chaikenai	keep	「パンを食べてもいい。」	「빵을 먹어도 돼.」	inv
+mod.koto.aru	fix	学校に行ったことがある。	학교에 간 적이 있다.	inv
+mod.koto.aru	keep	学校に行ったことがない。	학교에 간 적이 없다.	inv
+mod.koto.nai	fix	学校に行ったことがない。	학교에 간 적이 없다.	inv
+mod.koto.nai	keep	学校に行ったことがある。	학교에 간 적이 있다.	inv
+mod.daro.wh	fix	「何だろう？」	「뭘까?」	inv
+mod.daro.wh	keep	「雨だろう。」	「비일 거야.」	inv

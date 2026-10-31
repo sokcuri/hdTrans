@@ -1,0 +1,22 @@
+#! cases
+id	kind	ja	ko	src
+force.ka	fix	「明日学校に行きますか？」	「내일 학교에 가세요?」	inv
+force.ka	keep	「明日学校に行きます。」	「내일 학교에 가요.」	inv
+force.kudasai	fix	「本を読んでください。」	「책을 읽어 주세요.」	inv
+force.kudasai	keep	「本を読まないでください。」	「책을 읽지 마세요.」	inv
+force.naide	fix	「本を読まないでください。」	「책을 읽지 마세요.」	inv
+force.naide	keep	「本を読んでください。」	「책을 읽어 주세요.」	inv
+force.mashou	fix	「学校に行きましょう。」	「학교에 가죠.」	inv
+force.mashou	keep	「学校に行きます。」	「학교에 가요.」	inv
+force.mashouka	fix	「学校に行きましょうか。」	「학교에 갈까요?」	inv
+force.mashouka	keep	「学校に行きましょう。」	「학교에 가죠.」	inv
+force.masenka	fix	「学校に行きませんか。」	「학교에 가지 않으실래요?」	inv
+force.masenka	keep	「学校に行きません。」	「학교에 안 가요.」	inv
+force.te.final	fix	「本を読んで。」	「책을 읽어.」	inv
+force.te.final	keep	「本を読んで寝る。」	「책을 읽고 자.」	inv
+force.naide.final	fix	「本を買わないで。」	「책을 사지 마.」	inv
+force.naide.final	keep	「本を買わないでください。」	「책을 사지 마세요.」	inv
+force.te.final.eol	fix	本を読んで	책을 읽어라	inv
+force.te.final.eol	keep	本を読んで寝る。	책을 읽고 잔다.	inv
+force.naide.final.eol	fix	本を買わないで	책을 사지 마라	inv
+force.naide.final.eol	keep	本を買わないで寝る。	책을 사지 않고 잔다.	inv

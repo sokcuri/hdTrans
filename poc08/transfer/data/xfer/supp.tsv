@@ -1,0 +1,6 @@
+#! supp
+# Korean predicates whose negative is its own word (N5-H1): the negation is absorbed.
+id	spec	ko	neg	st	prov
+supp.issda	N5-H1	있다	없다	m	own
+supp.alda	N5-H1	알다	모르다	m	own
+supp.anida	N5-02	아니다	아니다	m	own

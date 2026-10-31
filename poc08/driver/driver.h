@@ -43,4 +43,10 @@ struct RunOptions {
 // Runs N…G over every line of doc.
 void RunDoc(const Engine& engine, Doc& doc, const RunOptions& options);
 
+// N, A, S, C, L and Z over every line of doc (lines longer than maxStructureBytes keep their tokens only).
+void Analyse(const Engine& engine, Doc& doc, size_t maxStructureBytes = 4096);
+// The native route of one analysed line of doc: native T, R at the house speech levels (auto unless a level is
+// forced), G on T's nodes (no W). True when T consumed every token (line.route == 1) and G wrote text.
+bool RunNative(const Engine& engine, Doc& doc, Line& line);
+
 }  // namespace hd08

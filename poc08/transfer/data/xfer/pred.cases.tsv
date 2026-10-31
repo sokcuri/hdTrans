@@ -1,0 +1,39 @@
+#! cases
+id	kind	ja	ko	src
+pred.cop	fix	私は学生だ。	나는 학생이다.	inv
+pred.cop	keep	私は学生じゃない。	나는 학생이 아니다.	inv
+pred.cop.neg	fix	私は学生じゃない。	나는 학생이 아니다.	inv
+pred.cop.neg	keep	私は学生だ。	나는 학생이다.	inv
+pred.cop.neg.aru	fix	「私は学生じゃありません。」	「난 학생이 아니에요.」	inv
+pred.cop.neg.aru	keep	「私は学生です。」	「난 학생이에요.」	inv
+pred.cop.neg.dewa	fix	彼は先生ではない。	그는 선생님이 아니다.	inv
+pred.cop.neg.dewa	keep	彼は先生だ。	그는 선생님이다.	inv
+pred.cop.neg.dewa.aru	fix	「彼は先生ではありません。」	「그는 선생님이 아니에요.」	inv
+pred.cop.neg.dewa.aru	keep	「彼は先生です。」	「그는 선생님이에요.」	inv
+pred.na	fix	部屋は静かだ。	방은 조용하다.	inv
+pred.na	keep	部屋は静かじゃない。	방은 조용하지 않다.	inv
+pred.na.ja	fix	部屋は静かじゃない。	방은 조용하지 않다.	inv
+pred.na.ja	keep	部屋は静かだ。	방은 조용하다.	inv
+pred.na.dewa	fix	部屋は静かではない。	방은 조용하지 않다.	inv
+pred.na.dewa	keep	部屋は静かだ。	방은 조용하다.	inv
+pred.suru	fix	毎日勉強する。	매일 공부한다.	inv
+pred.suru	keep	毎日、本を読む。	매일, 책을 읽는다.	inv
+pred.nai.exist	fix	本がない。	책이 없다.	inv
+pred.nai.exist	keep	本がある。	책이 있다.	inv
+pred.adn	fix	高い本を買う。	비싼 책을 산다.	inv
+pred.adn	keep	本は高い。	책은 비싸다.	inv
+pred.adn.past	fix	昨日読んだ本は高い。	어제 읽은 책은 비싸다.	inv
+pred.adn.past	keep	昨日、本を読んだ。	어제, 책을 읽었다.	inv
+pred.adv.adj	fix	早く書く。	빠르게 쓴다.	inv
+pred.adv.adj	keep	本が高くない。	책이 비싸지 않다.	inv
+pred.adv.na	fix	静かに書く。	조용하게 쓴다.	inv
+pred.adv.na	keep	部屋が静かになる。	방이 조용해진다.	inv
+pred.naru.adj	fix	本が高くなる。	책이 비싸진다.	inv
+pred.naru.adj	keep	本が高くない。	책이 비싸지 않다.	inv
+pred.naru.na	fix	部屋が静かになる。	방이 조용해진다.	inv
+pred.naru.na	keep	静かに書く。	조용하게 쓴다.	inv
+pred.naru.n	fix	私は先生になる。	나는 선생님이 된다.	inv
+pred.naru.n	keep	私は友達に話す。	나는 친구에게 이야기한다.	inv
+pred.nominal	fix	本を読むのが好きだ。	책을 읽는 것을 좋아한다.	inv
+pred.nominal	keep	本が好きだ。	책을 좋아한다.	inv
+pred.adn	keep	「何だ、ここ……」	「뭐야, 여기……」	inv

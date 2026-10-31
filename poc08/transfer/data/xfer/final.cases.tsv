@@ -1,0 +1,6 @@
+#! cases
+id	kind	ja	ko	src
+final.yo	fix	「学校に行くよ。」	「학교에 가.」	inv
+final.yo	keep	「学校に行く。」	「학교에 가.」	inv
+final.ne	fix	「本が高いね。」	「책이 비싸네.」	inv
+final.ne	keep	「本が高い。」	「책이 비싸.」	inv

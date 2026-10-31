@@ -1,0 +1,4 @@
+#! cases
+id	kind	ja	ko	src
+polite.masu	fix	「本を読みます。」	「책을 읽어요.」	inv
+polite.masu	keep	「本を読む。」	「책을 읽어.」	inv

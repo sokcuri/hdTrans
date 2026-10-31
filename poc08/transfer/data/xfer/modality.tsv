@@ -1,0 +1,23 @@
+#! xfer
+# Modality (N5-44…N5-51).
+id	spec	match	when	then	ko	st	prov	note
+mod.tai	N5-44	{V} [aux.tai]	-	V.ctype=conn;V.eomi=-고	V:싶다{aux,vpos=A}	m	own	食べたい → 먹고 싶다
+mod.tai.neg	N5-44	{V} [aux.tai] [pol=neg]	-	V.ctype=conn;V.eomi=-고	V:싶다{aux,vpos=A,neg=ji-anh}	m	own	食べたくない → 먹고 싶지 않다
+mod.hoshii	N5-45	{N} [kase=ga] 欲しい	-	-	P:obj V:갖다{ctype=conn,eomi=-고} V:싶다{aux,vpos=A}	m	own	本がほしい → 책을 갖고 싶다
+mod.desho.v	N5-H14	{V} [aux.desu.desho]	-	V.ctype=adn:fut	N:것{dep} V:이다{glue}	m	own	降るでしょう → 올 거예요
+mod.desho.a	N5-H14	{A} [aux.desu.desho]	-	A.ctype=adn:fut	N:것{dep} V:이다{glue}	m	own	高いでしょう → 비쌀 거예요
+mod.desho.na	N5-H14	{Na} [aux.desu.desho]	-	Na.ctype=adn:fut	N:것{dep} V:이다{glue}	m	own	静かでしょう → 조용할 거예요
+mod.desho.n	N5-H14	{N} [aux.desu.desho]	-	-	V:이다{glue,ctype=adn:fut} N:것{dep} V:이다{glue}	m	own	雨でしょう → 비일 거예요
+mod.daro.v	N5-H14	{V} [aux.da.daro]	-	V.ctype=adn:fut	N:것{dep} V:이다{glue}	m	own	降るだろう → 올 것이다
+mod.daro.a	N5-H14	{A} [aux.da.daro]	-	A.ctype=adn:fut	N:것{dep} V:이다{glue}	m	own	高いだろう → 비쌀 것이다
+mod.daro.na	N5-H14	{Na} [aux.da.daro]	-	Na.ctype=adn:fut	N:것{dep} V:이다{glue}	m	own	静かだろう → 조용할 것이다
+mod.daro.n	N5-H14	{N} [aux.da.daro]	-	-	V:이다{glue,ctype=adn:fut} N:것{dep} V:이다{glue}	m	own	雨だろう → 비일 것이다
+mod.tsumori	N5-47	{V} [aux.fn.tsumori] [role=cop]	-	V.ctype=adn:fut	N:생각{dep} V:이다{glue}	m	own	行くつもりだ → 갈 생각이다
+mod.hou	N5-48	{V} [tense=past] [aux.fn.hou] [kase=ga] 良い	-	V.ctype=adn:nonpast	N:것{dep} P:subj V:좋다{vpos=A}	m	own	行った方がいい → 가는 게 좋다
+mod.hou.neg	N5-48	{V} [pol=neg] [aux.fn.hou] [kase=ga] 良い	-	V.ctype=adn:nonpast;V.neg=ji-anh	N:것{dep} P:subj V:좋다{vpos=A}	m	own	行かない方がいい → 가지 않는 게 좋다
+mod.temoii	N5-49	[link=te] [kase=mo] [aux.ii.eval]	-	pred.ctype=conn;pred.eomi=-어도	V:되다	m	own	行ってもいい → 가도 되다
+mod.tewaikenai	N5-50	[link=te] [kase=wa] [aux.iku.eval] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	行ってはいけない → 가면 안 되다
+mod.chaikenai	N5-50	[aux.c.cha] [aux.iku.eval] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	食べちゃいけない → 먹으면 안 되다
+mod.koto.aru	N5-51	{V} [tense=past] [aux.fn.koto] [kase=ga] 有る	-	V.ctype=adn:past	N:적{dep} P:subj V:있다	m	own	行ったことがある → 간 적이 있다
+mod.koto.nai	N5-51	{V} [tense=past] [aux.fn.koto] [kase=ga] [aux.nai.exist]	-	V.ctype=adn:past	N:적{dep} P:subj V:없다	m	own	行ったことがない → 간 적이 없다
+mod.daro.wh	N5-54	{N} [aux.da.daro]	N.wh=+	-	V:이다{glue,eomi=lkka,mood=q}	m	own	何だろう → 뭘까
