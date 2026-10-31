@@ -65,7 +65,7 @@ const char* const kPoliteNames[] = {"plain", "desu-masu", "sonkei", "kenjo", "go
 const char* const kCaseNames[] = {"none", "ga", "wo", "ni", "de", "to", "kara", "made", "yori", "he", "no", "wa", "mo",
                                   "nado", "quote"};
 const char* const kRoleNames[] = {"subj", "obj", "dat", "loc", "from", "with", "to", "cmp", "topic", "head"};
-const char* const kHowNames[] = {"marked", "topic", "relhead", "omitted"};
+const char* const kHowNames[] = {"marked", "topic", "relhead", "omitted", "bare"};
 const char* const kModNames[] = {"explanatory", "conjecture", "likeness", "hearsay", "want", "must", "may",
                                  "volitional", "advice", "exclam", "try", "cannot"};
 const char* const kJregNames[] = {"casual-final", "old", "ssu", "desuwa", "archaic", "rough"};
