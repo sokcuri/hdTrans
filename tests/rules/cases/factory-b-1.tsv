@@ -1,0 +1,33 @@
+# 규칙: LEX-650, LEX-651, LEX-652, LEX-653, LEX-654
+rule	input	expected	kind	layer
+lexical:不足により	情報不足により実行不能。	has:정보 부족으로 인해	fix	lookup
+lexical:不足により	好感度不足により気絶するところを、私が手を出してしまった。	has:호감도 부족으로 인해	fix	lookup
+lexical:不足により	燃料不足により国内では満足にトラックを走らせることもできない。	has:연료 부족으로 인해	fix	lookup
+lexical:不足により	人手不足による事故が起きた。	has:일손부족에 의한 사고	keep	lookup
+lexical:不足により	人手不足によります。	has:일손부족에 의합니다	keep	lookup
+lexical:不足により	事故により渋滞。	has:사고에 의해	keep	lookup
+lexical:ようなないような	確かに聞いたことがあるようなないような。	has:들은 적이 있는 듯도 하고 아닌 듯도	fix	lookup
+lexical:ようなないような	視界に映る天井は見たことあるようなないような、城の中にあるありふれた天井。	has:본 적 있는 듯도 하고 아닌 듯도,	fix	lookup
+lexical:ようなないような	なんかぐるぐる回っているようなないような……。	has:돌고 있는 듯도 하고 아닌 듯도	fix	lookup
+lexical:ようなないような	どこかで見たような気がする。	has:본 것 같다	keep	lookup
+lexical:いとも容易く	その時の写メは、いとも容易く学校中にバラまかれた。	has:아주 손쉽게 학교	fix	lookup
+lexical:いともたやすく	男たちのバイクはいともたやすく石壁を突き破っていった	has:아주 손쉽게 석벽을	fix	lookup
+lexical:いともたやすく	モラルや尊厳をいともたやすく踏みにじるようになっていくのだろう。	has:아주 손쉽게 유린	fix	lookup
+lexical:いとも容易く	いとも簡単に倒された。	has:아주 간단하게	keep	lookup
+lexical:いとも容易く	これを防ぐのは容易くないだろう。	has:손쉽지 않을	keep	lookup
+lexical:御用達	王家御用達の焼き菓子は、その名誉のごとく美味しかった。	has:왕가 애용의 구운 과자	fix	lookup
+lexical:御用達	到着した所は貴族御用達の喫茶店らしく、内装も華美だ。	has:귀족 애용의 찻집	fix	lookup
+lexical:御用達	メインヒロイン御用達のニーソ。	has:히로인 애용의 니삭스	fix	lookup
+pack:fac:b:語らい:noun	昨日は一晩中兄様の愛の語らいを聞かされ続けた。	has:사랑의 대화를	fix	packs
+pack:fac:b:語らい:noun	来る客はみんなニケとの語らいが根本的な目的だ。	has:니케와의 대화가	fix	packs
+pack:fac:b:語らい:noun	老夫婦の語らいも向日葵のライトに照らされて	has:노부부의 대화도	fix	packs
+pack:fac:b:語らい:noun	久々の語らいで盛り上がっていたが、談笑を切り上げる。	has:오래간만의 대화로	fix	packs
+pack:fac:b:語らい:noun	僕がお菓子を渡している間に家族の語らいが始まって終わった。	has:가족의 대화가	fix	packs
+pack:fac:b:語らい:noun	せめて婚約者同士でのひと時の語らい時間を与えて、	has:대화 시간을	fix	packs
+pack:fac:b:語らい:noun	これで、今日の武器選びの際のラブラブな語らいは終了みたいだ。	has:대화는	fix	packs
+pack:fac:b:語らい:noun	「私が、ご兄弟の語らいを邪魔してしまったことがキッカケでしたし」	has:형제의 대화를	fix	packs
+pack:fac:b:語らい:noun	私のことを心配した師匠が妻と語らい、全ての準備を引き受けてくれたのだ。	!rule:pack:fac:b:語らい:noun	keep	packs
+pack:fac:b:語らい:noun	二人は流行りの漫画について熱く語らいながら、道を進めていく。	!rule:pack:fac:b:語らい:noun	keep	packs
+pack:fac:b:語らい:noun	「ゆっくり語らいましょ」	!rule:pack:fac:b:語らい:noun	keep	packs
+pack:fac:b:語らい:noun	夜遅くまで三人で語らい、夜更かしをした。	!rule:pack:fac:b:語らい:noun	keep	packs
+pack:fac:b:語らい:noun	傍目には愛を語らいつつ、恋人同士のように見える。	!rule:pack:fac:b:語らい:noun	keep	packs
