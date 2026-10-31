@@ -15,6 +15,7 @@
 
 #include "core/dict/classes.h"
 #include "core/dict/codes.h"
+#include "core/word/attach.h"
 #include "core/userdict/compile.h"
 #include "core/dict/pack.h"
 #include "core/dict/snapshot.h"
@@ -80,9 +81,17 @@ bool NegatedStem(std::string_view pre) {
     return false;
 }
 
+// An argument of a predicate as the cue atoms read it: its item, or for an omitted one (with an
+// attachment) its lemma and class.
+struct Arg {
+    std::string_view slot;
+    const Item* item = nullptr;
+    std::string_view lemma, cls, how;
+};
+
 // What the cue atoms of a row read about one word (the context of the lexicon's cue DSL).
 struct Context {
-    std::vector<std::pair<std::string_view, const Item*>> args;  // slot, noun of a case phrase of the predicate
+    std::vector<Arg> args;       // the arguments of the predicate
     const Item* head = nullptr;  // the noun a predicate stands right before (its adnominal head)
     const Item* mod = nullptr;   // the word right before a noun that modifies it
     const Item* pred = nullptr;  // the word the word's phrase depends on
@@ -92,9 +101,67 @@ struct Context {
     std::string final;  // the sentence particles and the mark that end the sentence after the word (final=)
     bool polite = false;
     std::string_view voice;  // voice rows: the reading of (ら)れ the chain decided
+    // With an attachment: the word's own how as an argument, its clause and its main clause.
+    bool attached = false;
+    std::string_view how;
+    const AttachClause* clause = nullptr;
+    const AttachClause* main = nullptr;
 };
 
-Context ContextOf(const Flusher& f, const Item* it) {
+// The attachment of the chain, asked once per pass; null without a provider or when it gives none.
+const Flusher::Attached* AttachedOf(Flusher& f) {
+    Flusher::Attached& a = f.attached;
+    if (!a.asked) {
+        a.asked = true;
+        const AttachProvider* p = f.w.settings.attach;
+        a.items.clear();
+        a.attachment = {};
+        for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) a.items.push_back(it);
+        a.held = p != nullptr && p->attach != nullptr && p->attach(p->context, f.w.tokens, f.w.chain, a.attachment) &&
+                 a.attachment.items.size() == a.items.size();
+    }
+    return a.held ? &a : nullptr;
+}
+
+// The context from an attachment: the arguments, head, pred and mod the analysis gave the word.
+void AttachedContext(const Flusher::Attached& a, const Item* it, Context& c) {
+    const auto at = std::find(a.items.begin(), a.items.end(), it);
+    if (at == a.items.end()) return;
+    const std::size_t k = static_cast<std::size_t>(at - a.items.begin());
+    const Attachment& att = a.attachment;
+    const AttachItem& ai = att.items[k];
+    auto item = [&](int i) -> const Item* {
+        const Item* x = i >= 0 && static_cast<std::size_t>(i) < a.items.size() ? a.items[static_cast<std::size_t>(i)] : nullptr;
+        return x != nullptr && x->group != nullptr ? x : nullptr;
+    };
+    auto clause = [&](int i) -> const AttachClause* {
+        return i >= 0 && static_cast<std::size_t>(i) < att.clauses.size() ? &att.clauses[static_cast<std::size_t>(i)] : nullptr;
+    };
+    c.attached = true;
+    c.args.clear();
+    c.head = c.mod = c.pred = nullptr;
+    c.clause = clause(ai.clause);
+    c.main = c.clause;
+    for (int guard = 0; guard < 64 && c.main != nullptr && c.main->parent >= 0; guard++) c.main = clause(c.main->parent);
+    if (c.main != nullptr && c.main->parent >= 0) c.main = nullptr;  // a loop of parents: no main clause
+    if (ai.argOf >= 0) {
+        c.how = ai.how;
+        c.pred = item(ai.headItem);
+    }
+    if (ai.modifies >= 0) {
+        if (ai.modKind == 2) c.head = item(ai.modifies);
+        if (c.pred == nullptr) c.pred = item(ai.modifies);
+    }
+    for (std::size_t j = 0; j < att.items.size(); j++)
+        if (att.items[j].modifies == static_cast<int>(k) && j < k) c.mod = a.items[j];
+    if (ai.pred && c.clause != nullptr)
+        for (const AttachArg& g : c.clause->args) {
+            const std::string_view role = g.role == "topic" ? std::string_view("subj") : std::string_view(g.role);
+            c.args.push_back({role, item(g.item), g.lemma, g.cls, g.how});
+        }
+}
+
+Context ContextOf(Flusher& f, const Item* it) {
     Context c;
     const char cls = ClassOf(it);
     c.next = it->After();
@@ -111,7 +178,8 @@ Context ContextOf(const Flusher& f, const Item* it) {
         for (const Item* q = it->prev; q != nullptr && q->group != nullptr; q = q->prev) {
             if (SentenceEnd(q) || q->group->surface == "「" || q->group->surface == "『" || Predicate(ClassOf(q))) break;
             if (ClassOf(q) == '2' && q->prev != nullptr && ClassOf(q->prev) == '1') {
-                if (const std::string_view slot = ArgSlot(q->group->surface); !slot.empty()) c.args.emplace_back(slot, q->prev);
+                if (const std::string_view slot = ArgSlot(q->group->surface); !slot.empty())
+                    c.args.push_back({slot, q->prev, {}, {}, "marked"});
                 q = q->prev;
             }
         }
@@ -260,7 +328,27 @@ Context ContextOf(const Flusher& f, const Item* it) {
             break;
         }
     }
+    if (const Flusher::Attached* a = AttachedOf(f)) AttachedContext(*a, it, c);
     return c;
+}
+
+// Whether class cls is v or below it.
+bool ClassUnder(const dict::PackTable& t, std::string_view cls, std::string_view v) {
+    for (int guard = 0; guard < 32 && !cls.empty(); guard++) {
+        if (cls == v) return true;
+        const auto p = t.parent.find(cls);
+        if (p == t.parent.end()) return false;
+        cls = p->second;
+    }
+    return false;
+}
+
+// The value of feature key of a clause, "" for none.
+std::string_view Feature(const AttachClause* c, std::string_view key) {
+    if (c == nullptr) return {};
+    for (const auto& [k, v] : c->features)
+        if (k == key) return v;
+    return {};
 }
 
 // Whether every atom of the row holds for the word, and its specificity: lexical atoms, class
@@ -270,20 +358,49 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
     for (const dict::PackAtom& a : r.atoms) {
         const bool none = a.values.size() == 1 && a.values[0] == "-";
         const bool filled = a.values.size() == 1 && a.values[0] == "*";
-        std::vector<const Item*> pool;
+        std::vector<Arg> pool;
         bool nouns = true;  // the atom reads nouns: a value matches by lemma or class (LEMMA/CLASS kinds)
-        if (a.slot == "arg" || a.slot == "subj" || a.slot == "obj" || a.slot == "dat" || a.slot == "loc" ||
-            a.slot == "with" || a.slot == "from" || a.slot == "to") {
-            for (const auto& [slot, noun] : c.args)
-                if (a.slot == "arg" || slot == a.slot) pool.push_back(noun);
+        static constexpr std::string_view kArgSlots[] = {"arg", "subj", "obj", "dat", "loc", "with", "from", "to"};
+        const std::size_t dot = a.slot.find('.');
+        const std::string_view base = std::string_view(a.slot).substr(0, dot);
+        if (dot != std::string_view::npos && base != "cl" && base != "main") {
+            // <slot>.how: how an argument of that slot is written (bare, omitted …), with an attachment
+            if (!c.attached) return false;
+            bool held = false;
+            for (const Arg& g : c.args)
+                if ((base == "arg" || g.slot == base) && std::find(a.values.begin(), a.values.end(), g.how) != a.values.end())
+                    held = true;
+            if (!held) return false;
+            spec[2]++;
+            continue;
+        }
+        if (base == "cl" || base == "main") {
+            // cl.<feature>, main.<feature>: the word's clause or its main clause, with an attachment
+            const std::string_view key = std::string_view(a.slot).substr(dot + 1);
+            const std::string_view v = Feature(base == "cl" ? c.clause : c.main, key);
+            if (v.empty() || std::find(a.values.begin(), a.values.end(), v) == a.values.end()) return false;
+            spec[2]++;
+            continue;
+        }
+        if (a.slot == "how") {
+            if (!c.attached || c.how.empty() || std::find(a.values.begin(), a.values.end(), c.how) == a.values.end())
+                return false;
+            spec[2]++;
+            continue;
+        }
+        if (std::find(std::begin(kArgSlots), std::end(kArgSlots), a.slot) != std::end(kArgSlots)) {
+            for (const Arg& g : c.args)
+                if (a.slot == "arg" || g.slot == a.slot) pool.push_back(g);
             // the noun an adnominal predicate modifies fills its empty subject or object
-            if (pool.empty() && (a.slot == "subj" || a.slot == "obj") && c.head != nullptr) pool.push_back(c.head);
+            // (an attachment says itself which argument the head is)
+            if (pool.empty() && !c.attached && (a.slot == "subj" || a.slot == "obj") && c.head != nullptr)
+                pool.push_back({a.slot, c.head, {}, {}, {}});
         } else if (a.slot == "head") {
-            if (c.head != nullptr) pool.push_back(c.head);
+            if (c.head != nullptr) pool.push_back({a.slot, c.head, {}, {}, {}});
         } else if (a.slot == "mod" || a.slot == "pred" || a.slot == "next" || a.slot == "after") {
             nouns = false;
             const Item* x = a.slot == "mod" ? c.mod : a.slot == "pred" ? c.pred : a.slot == "next" ? c.next : c.after;
-            if (x != nullptr && x->group != nullptr) pool.push_back(x);
+            if (x != nullptr && x->group != nullptr) pool.push_back({a.slot, x, {}, {}, {}});
         } else if (a.slot == "form") {
             if (std::none_of(a.values.begin(), a.values.end(), [&](const std::string& v) { return c.forms.count(v) > 0; }))
                 return false;
@@ -307,7 +424,7 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             spec[3]++;
             continue;
         } else {
-            return false;  // domain, main.vol: the chain has no such feature
+            return false;  // domain: the chain has no such feature
         }
         if (none || filled) {
             if (pool.empty() != none) return false;
@@ -316,14 +433,16 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
         }
         bool lexical = false, held = false;
         int depth = 0;
-        for (const Item* x : pool) {
+        for (const Arg& g : pool) {
+            const Item* x = g.item;
             for (const std::string& v : a.values) {
                 if (v.starts_with("@")) {
-                    if (t.Member(x->group->surface, v)) {
+                    // by the pack-classes files, or by the class the attachment gives the argument
+                    if ((x != nullptr && t.Member(x->group->surface, v)) || (!g.cls.empty() && ClassUnder(t, g.cls, v))) {
                         held = true;
                         depth = std::max(depth, t.Depth(v));
                     }
-                } else if (IsWord(x, v, std::max(x->selected, 0))) {
+                } else if ((x != nullptr && IsWord(x, v, std::max(x->selected, 0))) || (x == nullptr && g.lemma == v)) {
                     held = lexical = true;
                 }
             }
@@ -349,7 +468,7 @@ bool OpenRowNames(const dict::PackRow& r, const Item* it, int& named) {
 }
 
 // The row of slot that decides the word, or -1.
-int BestRow(const Flusher& f, const dict::PackTable& t, const Item* it, std::string_view key, dict::PackSlot slot,
+int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_view key, dict::PackSlot slot,
             std::string_view voice = {}) {
     const auto keyed = t.byKey.find(key);
     const char cls = ClassOf(it);
@@ -651,6 +770,7 @@ const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voic
 void ApplyPacks(Flusher& f) {
     const dict::PackTable& t = f.w.snapshot.Packs();
     if (t.Empty()) return;
+    f.attached.asked = false;  // the chain may have changed since the voice layer asked
     std::set<const Item*> taken;
     if (!t.collocs.empty()) ApplyCollocs(f, t, taken);
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {

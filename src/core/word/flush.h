@@ -25,6 +25,12 @@ struct Flusher {
     Worker& w;
     const rules::Program& program;
     output::Families& families;
+    // The packs layer's attachment of the chain (packs.cpp), asked of Settings::attach once per pass.
+    struct Attached {
+        bool asked = false, held = false;
+        Attachment attachment;
+        std::vector<const Item*> items;  // the chain's items, in the attachment's order
+    } attached{};
 };
 
 // Runs the sentence passes over w.chain (the chain of one sentence after the token loop).
