@@ -1,0 +1,20 @@
+# 규칙: GRM-132
+rule	input	expected	kind	layer
+cx:lc2c-tsutsuaru:10	なりつつある。	has:되고 있다.	fix	rewrites
+cx:lc2c-tsutsuaru:10	街に広がりつつある恐怖。	has:퍼지고 있는	fix	rewrites
+cx:lc2c-tsutsuaru:10	漸く視覚が戻りつつある。	has:돌아오고 있다.	fix	rewrites
+cx:lc2c-tsutsuaru:10	逞しくなりつつあるしな〜。	has:다부져지고 있고~.	fix	rewrites
+cx:lc2c-tsutsuaru:10	弓の射程に入りつつあった。	has:들어가고 있었다.	fix	rewrites
+cx:lc2c-tsutsuaru:10	アズに染まりつつあるシャル	has:물들고 있는	fix	rewrites
+cx:lc2c-tsutsuaru:20	だが男の出現で、劣勢が徐々に覆されつつある。	has:뒤집어지고 있다.	fix	rewrites
+cx:lc2c-tsutsuaru:30	まだ現在も集まりつつあり既に周囲はアンデッドの壁が出来ている。	has:모이고 있고	fix	rewrites
+cx:lc2c-tsutsuaru:30	帰るころには日が傾きつつあり、喪服に身を包んでいると少し汗ばむ陽気であった。	has:기울고 있고,	fix	rewrites
+cx:lc2c-tsutsuaru:30	焼け野原と化した多良木は生き物が戻りつつあり自然も少しづつ回復しだしている。	has:돌아오고 있고	fix	rewrites
+cx:lc2c-tsutsuaru:10	書きつつも手が止まる。	!rule:cx:lc2c-tsutsuaru:10	keep	rewrites
+cx:lc2c-tsutsuaru:10	考えつつ歩く。	!rule:cx:lc2c-tsutsuaru:10	keep	rewrites
+cx:lc2c-tsutsuaru:10	時計を見ると、もう夜に近い時間になりつつある。	!rule:cx:lc2c-tsutsuaru:10	keep	rewrites
+cx:lc2c-tsutsuaru:10	まだ現在も集まりつつあり既に周囲は壁だ。	!rule:cx:lc2c-tsutsuaru:10	keep	rewrites
+cx:lc2c-tsutsuaru:20	赤く染まりつつある室内と、外から聞こえてくる声。	!rule:cx:lc2c-tsutsuaru:20	keep	rewrites
+cx:lc2c-tsutsuaru:20	考えつつ歩く。	!rule:cx:lc2c-tsutsuaru:20	keep	rewrites
+cx:lc2c-tsutsuaru:30	赤く染まりつつある室内と、外から聞こえてくる声。	!rule:cx:lc2c-tsutsuaru:30	keep	rewrites
+cx:lc2c-tsutsuaru:30	劣勢が徐々に覆されつつある。	!rule:cx:lc2c-tsutsuaru:30	keep	rewrites

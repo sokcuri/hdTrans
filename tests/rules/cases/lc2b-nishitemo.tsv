@@ -1,0 +1,41 @@
+# 규칙: GRM-125
+rule	input	expected	kind	layer
+cx:lc2b-nishitemo:10	「にしてもあの掴み方はねえだろ！」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	にしても……蒸すな………」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても、遅刻多いよなお前」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	にしても、主上とやらの“力”、か。	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても何カップあるの？」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても、花火――花火か。うーん」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても、そこまで怒る事ですか？	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても……」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	にしても、寿命というのは厄介だった。	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	にしても、僕は不思議と落ち着いている。	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても珍しい組み合わせだな」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	にしても１本で５サラルか。	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:10	「にしても、ねぇ……お姉ちゃん」	has:그나저나	fix	rewrites
+cx:lc2b-nishitemo:40	周りが真剣に（一部はそうでないにしても）	has:않다고 해도	fix	rewrites
+cx:lc2b-nishitemo:40	そうじゃないにしても、	has:않다고 해도	fix	rewrites
+cx:lc2b-nishitemo:20	神ではないにしても、偉い人らしい。	has:아니라고 해도	fix	rewrites
+cx:lc2b-nishitemo:40	期待など、到底出来ないにしても、だ。	has:없다고 해도	fix	rewrites
+cx:lc2b-nishitemo:40	仕方ないにしても、	has:없다고 해도	fix	rewrites
+cx:lc2b-nishitemo:20	初対面ではないにしても、それはないだろう。	has:아니라고 해도	fix	rewrites
+cx:lc2b-nishitemo:40	「少ないにしても、ある程度はいるのだがな」	has:적다고 해도	fix	rewrites
+cx:lc2b-nishitemo:20	誇るほどではないにしても嬉しがっていい功績だ。	has:아니라고 해도	fix	rewrites
+cx:lc2b-nishitemo:40	彼女自身、わからせるつもりはないにしても。	has:없다고 해도	fix	rewrites
+cx:lc2b-nishitemo:35	実際に手を下してないにしても、	has:않는다고 해도	fix	rewrites
+cx:lc2b-nishitemo:40	（もちろん、十分にあるとは言えないにしても）	has:없다고 해도	fix	rewrites
+cx:lc2b-nishitemo:10	「単純計算で４分の３……にしても、ＭＳ玉の方がずいぶん安いわね」	!rule:cx:lc2b-nishitemo:10	keep	rewrites
+cx:lc2b-nishitemo:10	それにしてもまた懐かしい話を。	!rule:cx:lc2b-nishitemo:10	keep	rewrites
+cx:lc2b-nishitemo:10	どれにしても、家族だった。	!rule:cx:lc2b-nishitemo:10	keep	rewrites
+cx:lc2b-nishitemo:10	仲間外れにしてもメンドクサイ。	!rule:cx:lc2b-nishitemo:10	keep	rewrites
+cx:lc2b-nishitemo:10	にしてもらえなくなっちゃう……っ！」	!rule:cx:lc2b-nishitemo:10	keep	rewrites
+cx:lc2b-nishitemo:30	本当のことは言わないにしても。	has:않는다고 해도	fix	rewrites
+cx:lc2b-nishitemo:30	まだ実感がわかないにしても、だ。	has:않는다고 해도	fix	rewrites
+cx:lc2b-nishitemo:20	「一石三鳥で狙われるにしても、ここが一番安全ですわ。」	!rule:cx:lc2b-nishitemo:20	keep	rewrites
+cx:lc2b-nishitemo:20	美樹にしても、不釣り合いすぎるのが分かったのだろうと思う。	!rule:cx:lc2b-nishitemo:20	keep	rewrites
+cx:lc2b-nishitemo:30	「一石三鳥で狙われるにしても、ここが一番安全ですわ。」	!rule:cx:lc2b-nishitemo:30	keep	rewrites
+cx:lc2b-nishitemo:30	美樹にしても、不釣り合いすぎるのが分かったのだろうと思う。	!rule:cx:lc2b-nishitemo:30	keep	rewrites
+cx:lc2b-nishitemo:35	「一石三鳥で狙われるにしても、ここが一番安全ですわ。」	!rule:cx:lc2b-nishitemo:35	keep	rewrites
+cx:lc2b-nishitemo:35	美樹にしても、不釣り合いすぎるのが分かったのだろうと思う。	!rule:cx:lc2b-nishitemo:35	keep	rewrites
+cx:lc2b-nishitemo:40	「一石三鳥で狙われるにしても、ここが一番安全ですわ。」	!rule:cx:lc2b-nishitemo:40	keep	rewrites
+cx:lc2b-nishitemo:40	美樹にしても、不釣り合いすぎるのが分かったのだろうと思う。	!rule:cx:lc2b-nishitemo:40	keep	rewrites

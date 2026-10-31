@@ -1,0 +1,23 @@
+# 규칙: GRM-138
+rule	input	expected	kind	layer
+cx:lc3h-kkonai:10	絶対に当てられっこない。	has:있을 리가 없다	fix	rewrites
+cx:lc3h-kkonai:12	このドレスを着たままじゃ何も測れっこないって。	has:있을 리가 없다고	fix	rewrites
+cx:lc3h-kkonai:15	いまはハンバーガーなんて作れっこないので、海岸で獲れる獲物を狙うことになる。	has:있을 리가 없기	fix	rewrites
+cx:lc3h-kkonai:20	『このまま』なんて、いられっこない。	has:있을 리가 없다	fix	rewrites
+cx:lc3h-kkonai:25	「到底足りっこないわね……。ああ、クソ、どうしたらいいのよ……！」	has:충분할 리가 없네	fix	rewrites
+cx:lc3h-kkonai:30	入りっこない。	has:들어갈 리가 없다	fix	rewrites
+cx:lc3h-kkonai:35	うまく行きっこないんだよね。	has:될 리가 없어	fix	rewrites
+cx:lc3h-kkonai:10	そりゃあ重いよ、絡みついたままだったら浮き上がれっこない。	has:있을 리가 없다	fix	rewrites
+cx:lc3h-kkonai:20	でなければこんなモノ、到底耐えられっこない。	has:있을 리가 없다	fix	rewrites
+cx:lc3h-kkonai:25	「どうして？私なんか相手にされっこないわよ。そんなのみんなわかるでしょう？」	has:될 리가 없어	fix	rewrites
+cx:lc3h-kkonai:30	今までの桜の弱さでは上手く行きっこない。	has:될 리가 없다	fix	rewrites
+cx:lc3h-kkonai:20	「坊ちゃんの言うとおりだよ。意地を張っても出られっこない」	has:있을 리가 없어	fix	rewrites
+cx:lc3h-kkonai:30	しかし、いくら青島でも分かる事がある……そんな計画が上手くいきっこない。	has:될 리가 없다	fix	rewrites
+cx:lc3h-kkonai:10	なのに帰ってこない。	!rule:cx:lc3h-kkonai:10	keep	rewrites
+cx:lc3h-kkonai:12	だが返事は帰ってこない。	!rule:cx:lc3h-kkonai:12	keep	rewrites
+cx:lc3h-kkonai:15	早く戻ってこないかと。	!rule:cx:lc3h-kkonai:15	keep	rewrites
+cx:lc3h-kkonai:20	真百合は何も言ってこない。	!rule:cx:lc3h-kkonai:20	keep	rewrites
+cx:lc3h-kkonai:25	母も妹も帰ってこない。	!rule:cx:lc3h-kkonai:25	keep	rewrites
+cx:lc3h-kkonai:30	マシロはまだ戻ってこない。	!rule:cx:lc3h-kkonai:30	keep	rewrites
+cx:lc3h-kkonai:35	で、夜は遅くまで帰ってこない。	!rule:cx:lc3h-kkonai:35	keep	rewrites
+cx:lc3h-kkonai:10	無論、教師も何も言ってこない。	!rule:cx:lc3h-kkonai:10	keep	rewrites

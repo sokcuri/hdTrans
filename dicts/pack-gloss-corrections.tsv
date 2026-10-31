@@ -1,0 +1,4 @@
+#! layer=pack
+# 가나로 쓴 取りつける가 약속이나 동의를 받으면 얻어내다
+id	lemma	pos	slot	kind	cond	target	agent	pri	spec	prov	note
+gloss-corrections:1	取りつける	v1	sense	frame	obj=約束|見合い|同意|承諾|契約|許可|了承|言質|面会|協力|合意|確約|支持|アポ|デート|予約|終了|理解|了解|承認|賛同|支援|援助|許し|確認|約定	얻어내다		50	LEX-3182	audit	約束を取りつける → 약속을 얻어내다

@@ -327,6 +327,17 @@ HD_TEST(pipeline_spoken_forms) {
         {"見てんじゃねぇよ！"sv, "見てるなよ！"sv},
         {"邪魔すんじゃねえ！"sv, "邪魔するなよ！"sv},
         {"言ってるんじゃない"sv, "言ってるんじゃない"sv},  // what is not so
+        {"気を抜くんじゃないぞ！"sv, "気を抜くなよ！"sv},
+        {"ビビってんじゃねぇぞ！"sv, "ビビってるなよ！"sv},
+        {"口をきいているんじゃないわよ"sv, "口をきいているなよ"sv},
+        {"笑ってんじゃねぇーーーー！！"sv, "笑ってるなよ！！"sv},
+        {"触るんじゃないっ！"sv, "触るなよ！"sv},
+        {"言い方するんじゃない。"sv, "言い方するなよ。"sv},
+        {"言ってるんじゃない。"sv, "言ってるんじゃない。"sv},
+        {"興味あるんじゃない"sv, "興味あるんじゃない"sv},  // ある forbids nothing
+        {"分かるんじゃない"sv, "分かるんじゃない"sv},
+        {"つれないって言うんじゃない。"sv, "つれないって言うんじゃない。"sv},
+        {"そういうこと言ってるんじゃないわよっ！"sv, "そういうこと言ってるんじゃないわよっ！"sv},
         {"言ってるんじゃないよ"sv, "言ってるんじゃないよ"sv},
         {"田中くんじゃない！"sv, "田中くんじゃない！"sv},
         {"ノコノコ出てくんじゃねえ！"sv, "ノコノコ出てくんじゃねえ！"sv},  // 出てくる said short
@@ -361,6 +372,16 @@ HD_TEST(pipeline_spoken_forms) {
         {"毎日どっかしらでイベント"sv, "毎日どっかしらでイベント"sv},
     };
     Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
+}
+
+// SpokenForms asks the lookup whether a verb ends before んじゃない: no rebuke without one (the name and
+// honorific of おーしまくんじゃない).
+HD_TEST(pipeline_spoken_forms_rebuke_verb) {
+    RunLookup runs;
+    runs.verb = [](const void*, std::string_view text) { return !text.ends_with("おーしまく"); };
+    HD_CHECK_EQ(SpokenForms("あら、おーしまくんじゃない。", false, false, runs), std::string("あら、おーしまくんじゃない。"));
+    HD_CHECK_EQ(SpokenForms("気を抜くんじゃないぞ！", false, false, runs), std::string("気を抜くなよ！"));
+    HD_CHECK_EQ(SpokenForms("邪魔すんじゃねえ！", false, false, runs), std::string("邪魔するなよ！"));  // する, no lookup
 }
 
 HD_TEST(pipeline_rewrite_interjections) {

@@ -1,0 +1,55 @@
+# 규칙: LEX-3300
+# 규칙: LEX-3301
+rule	input	expected	kind	layer
+dict:katakana-term-spellings:2	背に仕込んでいたペンチを開き、血壁に突き立てる。	has:펜치를	fix	lookup
+dict:katakana-term-spellings:2	いとも容易くペンチで有刺鉄線を切り落とした。	has:펜치로	fix	lookup
+dict:katakana-term-spellings:2	待ちはペンチャンの７ソー。	has:펜짱	keep	lookup
+dict:katakana-term-spellings:2	先細のラジオペンチの先端を爪の間に突き刺す。	has:롱노즈 플라이어	keep	lookup
+dict:katakana-term-spellings:3	野球のヘルメットに救命胴衣、ホッケーのスティック。	has:하키의 스틱	fix	lookup
+dict:katakana-term-spellings:3	ホッケーやモグラ叩きのような反射神経のゲーム。	has:하키나	fix	lookup
+dict:katakana-term-spellings:3	茜はアイスホッケーをやっていたのか。	has:아이스하키를	keep	lookup
+dict:katakana-term-spellings:3	早速エアホッケーの台についてコインを投入する。	has:에어 하키	keep	lookup
+dict:katakana-term-spellings:4	テーブルにはベルガモットの良い香りが広がった。	has:베르가모트	fix	lookup
+dict:katakana-term-spellings:4	「ああ。ベルガモットの香りだな」	has:베르가모트의 향기	fix	lookup
+dict:katakana-term-spellings:1	グレープフルーツはブレンダーでジュースにした。	has:블렌더로	fix	lookup
+dict:katakana-term-spellings:1	ブレンダーは火花をあげて壊れた。	has:블렌더는	fix	lookup
+dict:katakana-term-spellings:1	レモンバームとカモミールをブレンドしたハーブティー。	lacks:블렌더	keep	lookup
+dict:katakana-term-spellings:5	ワインを、大急ぎでボトリングして箱詰めする。	has:보틀링해	fix	lookup
+dict:katakana-term-spellings:5	壷にボトリングしたらラベルを貼付する。	has:보틀링하면	fix	lookup
+dict:katakana-term-spellings:6	背後で黒いボンデージファッションの女がいた。	has:본디지 패션의	fix	lookup
+dict:katakana-term-spellings:7	街路地を歩けば、２ブロック目には声を掛けられる。	has:2블록째에는	fix	lookup
+dict:katakana-term-spellings:7	ここが紅井の２ブロック目だから。	has:2블록째	fix	lookup
+dict:katakana-term-spellings:7	犯人のバンが４ブロック先で発見されました。	lacks:블록째	keep	lookup
+dict:katakana-term-spellings:8	破損させる場合があるため、プーラーが望ましい。	has:풀러가	fix	lookup
+dict:katakana-term-spellings:23	通信機の設置も、こうしたリスク・ヘッジの一環だ。	has:리스크 헤지의	fix	lookup
+dict:katakana-term-spellings:23	「リスク・ヘッジは大切だからね」	has:리스크 헤지는	fix	lookup
+dict:katakana-term-spellings:23	リスクヘッジは大切だ。	has:리스크 헤지는	keep	lookup
+dict:katakana-term-spellings:23	ヘッジファンドを経営していまして。	has:헤지펀드를	keep	lookup
+dict:katakana-term-spellings:25	この国には、まだボール盤という便利な工作機械は存在しない。	has:드릴링 머신이라는	fix	lookup
+dict:katakana-term-spellings:25	旋盤やボール盤、そして溶接機がある。	has:선반이나 드릴링 머신	fix	lookup
+dict:katakana-term-spellings:25	ＮＣフライスに卓上ボール盤、３Ｄプリンターか。	has:탁상 드릴링 머신	fix	lookup
+dict:katakana-term-spellings:25	旋盤が火花を散らし、プレス機が響く。	has:선반이	keep	lookup
+dict:katakana-term-spellings:26	彼は優秀なプロパガンディストだった。	has:선전가였다	fix	lookup
+dict:katakana-term-spellings:26	その記事は政府のプロパガンダだった。	lacks:선전가	keep	lookup
+dict:katakana-term-spellings:9	ブロックタックルで相手を止めた。	has:블록 태클	fix	lookup
+dict:katakana-term-spellings:10	プラスミノーゲンが活性化される。	has:플라스미노겐	fix	lookup
+dict:katakana-term-spellings:11	業界のプロフェッショナル化が進んだ。	has:프로페셔널화	fix	lookup
+dict:katakana-term-spellings:12	手首をプロネートする。	has:프로네이트	fix	lookup
+dict:katakana-term-spellings:13	ホトマスクを交換した。	has:포토마스크	fix	lookup
+dict:katakana-term-spellings:14	ホストスクリプトのファイルを開いた。	has:포스트스크립트의	fix	lookup
+dict:katakana-term-spellings:15	ホストスクリプトプリンタで印刷した。	has:포스트스크립트 프린터	fix	lookup
+dict:katakana-term-spellings:16	ヘッジ債を買った。	has:헤지 채권	fix	lookup
+dict:katakana-term-spellings:17	ヘッジ取引で損失を抑えた。	has:헤지 거래	fix	lookup
+dict:katakana-term-spellings:18	ヘッジ操作が必要だ。	has:헤지 조작	fix	lookup
+dict:katakana-term-spellings:19	ブルーチップスタンプを集めた。	has:블루칩 스탬프	fix	lookup
+dict:katakana-term-spellings:20	かいけいねんどの終わりだ。	has:회계 연도	fix	lookup
+dict:katakana-term-spellings:21	インフレヘッジの手段を考える。	has:인플레이션 헤지	fix	lookup
+dict:katakana-term-spellings:24	コーラボトリングの工場。	has:콜라 보틀링	fix	lookup
+dict:katakana-term-spellings:27	ブレーンフィットネスを始めた。	has:브레인 피트니스	fix	lookup
+dict:katakana-term-spellings:28	プロジェクションテレビを買った。	has:프로젝션 텔레비전	fix	lookup
+dict:katakana-term-spellings:29	ベータがたインターフェロンを投与した。	has:베타형 인터페론	fix	lookup
+dict:katakana-term-spellings:30	プロップファンエンジンの音がした。	has:프롭팬 엔진	fix	lookup
+dict:katakana-term-spellings:31	プル技術を使う。	has:풀 기술	fix	lookup
+dict:katakana-term-spellings:32	プット・オプション付きの債券。	has:풋옵션부	fix	lookup
+dict:katakana-term-spellings:23	ヘッジの役割を果たす。	has:헤지의	keep	lookup
+dict:katakana-term-spellings:7	ブロックを積み上げた。	lacks:블록째	keep	lookup

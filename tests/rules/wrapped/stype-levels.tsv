@@ -1,0 +1,5 @@
+# 규칙: SPC-20
+rule	input	expected	kind	layer
+cx:stype-noka:20	「本当に行くのか？」	「정말 가는 거야?」	fix	driver
+cx:stype-noka:20	「行くのか？」「行きますか？」	「가는 거야?」「갑니까?」	fix	driver
+cx:stype-noka:20	「行きますか？」「行くのか？」	「갑니까?」「가는 거야?」	fix	driver

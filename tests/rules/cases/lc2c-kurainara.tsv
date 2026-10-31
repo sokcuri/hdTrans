@@ -1,0 +1,24 @@
+# 규칙: GRM-134
+rule	input	expected	kind	layer
+cx:lc2c-kurainara:10	嫌われてしまうくらいなら	has:미움받아버릴 바에야	fix	rewrites
+cx:lc2c-kurainara:10	逃すくらいなら殺すんだ！	has:놓칠 바에야	fix	rewrites
+cx:lc2c-kurainara:10	なことをするくらいなら、オ	has:할 바에야	fix	rewrites
+cx:lc2c-kurainara:10	戦うくらいなら、金を稼げよ。	has:싸울 바에야	fix	rewrites
+cx:lc2c-kurainara:10	我らが女王を穢されるくらいなら	has:더럽혀질 바에야	fix	rewrites
+cx:lc2c-kurainara:10	「悩むくらいなら来いよ、ほら」	has:「고민할 바에야	fix	rewrites
+cx:lc2c-kurainara:10	逃げるくらいならば立ち向かいます。	has:도망칠 바에야	fix	rewrites
+cx:lc2c-kurainara:10	「俺は触るくらいなら電マあてるぞ」	has:만질 바에야	fix	rewrites
+cx:lc2c-kurainara:20	腐ってしまうぐらいなら甘やかすな。	has:썩어버릴 바에야	fix	rewrites
+cx:lc2c-kurainara:20	﹇喋るぐらいなら羊になった方がマシ﹈	has:﹇말할 바에야	fix	rewrites
+cx:lc2c-kurainara:20	“協賛費払うぐらいならゲームにもっと金遣え！	has:지불할 바에야	fix	rewrites
+cx:lc2c-kurainara:20	バケモノになって人々を、私達を傷つけるぐらいなら、と。	has:입힐 바에야	fix	rewrites
+cx:lc2c-kurainara:20	「そうです。シャルさんに行かせるぐらいなら私が行きます」	has:할 바에야	fix	rewrites
+cx:lc2c-kurainara:20	「兜太様、私は兜太様が危ない目に合うぐらいなら、この話を」	has:맞을 바에야	fix	rewrites
+cx:lc2c-kurainara:20	「マリーいいんだよ。――教会に利用されるぐらいなら……ね。」	has:이용될 바에야	fix	rewrites
+cx:lc2c-kurainara:20	あんな物を穿くぐらいなら、アリスの黒ブルマの方がまだマシだ。	has:입을 바에야	fix	rewrites
+cx:lc2c-kurainara:10	「それくらいならいいよ。何が読みたい？	!rule:cx:lc2c-kurainara:10	keep	rewrites
+cx:lc2c-kurainara:20	部屋から出ない予定ではあったのだが、飯を食いに外に出るくらいなら問題あるまい。	!rule:cx:lc2c-kurainara:20	keep	rewrites
+cx:lc2c-kurainara:10	確かに体積を減らされると力は落ちるが、四肢を切断するくらいなら簡単だった。	!rule:cx:lc2c-kurainara:10	keep	rewrites
+cx:lc2c-kurainara:20	「でも……少し見ていくくらいなら……」	!rule:cx:lc2c-kurainara:20	keep	rewrites
+cx:lc2c-kurainara:10	それが効くくらいなら、既にやっています。	!rule:cx:lc2c-kurainara:10	keep	rewrites
+cx:lc2c-kurainara:20	「逆立ちって、１分くらいなら……」	!rule:cx:lc2c-kurainara:20	keep	rewrites

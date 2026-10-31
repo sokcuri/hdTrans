@@ -1,0 +1,25 @@
+# 규칙: GRM-162
+rule	input	expected	kind	layer
+cx:lc2e-hazu:10	なかったはずだが。	has:없었을 텐데	fix	rewrites
+cx:lc2e-hazu:10	もう近いはずなんだが。	has:가까울 텐데	fix	rewrites
+cx:lc2e-hazu:10	そう聞いたはずなのに。	has:들었을 텐데	fix	rewrites
+cx:lc2e-hazu:10	本当はあったはずなのに。	has:있었을 텐데	fix	rewrites
+cx:lc2e-hazu:10	旅は楽なものではないはずだ。	!rule:cx:lc2e-hazu:10	keep	rewrites
+cx:lc2e-hazu:10	森を抜ければすぐにたどり着くはずだ。	!rule:cx:lc2e-hazu:10	keep	rewrites
+cx:lc2e-hazu:15	言ったはずですが。	has:말했을 텐데요	fix	rewrites
+cx:lc2e-hazu:15	顔は見られていないはずなのですが。	has:않을 텐데요	fix	rewrites
+cx:lc2e-hazu:15	文句を言われる筋合いはないはずですが」	has:없을 텐데요	fix	rewrites
+cx:lc2e-hazu:15	「えぇ、それなりの作戦行動は出来るはずですが…」	has:있을 텐데요	fix	rewrites
+cx:lc2e-hazu:15	そんな事、信じられるはずがない。	!rule:cx:lc2e-hazu:15	keep	rewrites
+cx:lc2e-hazu:15	慕ってくれる彼らを裏切れるはずもない。	!rule:cx:lc2e-hazu:15	keep	rewrites
+cx:lc2e-hazu:20	これで完璧のはずなんだけど。	has:완벽일 텐데	fix	rewrites
+cx:lc2e-hazu:20	「そうだよなぁ。教わるのは２年のはずなんだけど…」	has:2년일 텐데	fix	rewrites
+cx:lc2e-hazu:20	いまさらに考えてみれば、ぼくと遊ぼうと用意してくれた物のはずだけど。	has:것일 텐데	fix	rewrites
+cx:lc2e-hazu:20	現在光輝は三十路手前のはずなのだが、見た目は１０代後半と言ったところだ。	has:앞일 텐데	fix	rewrites
+cx:lc2e-hazu:20	その能力が有れば、何とでもなるはずだ。	!rule:cx:lc2e-hazu:20	keep	rewrites
+cx:lc2e-hazu:25	「あれは私の記憶によれば超級のはずですが……」	has:초급일 텐데요	fix	rewrites
+cx:lc2e-hazu:25	そんなのあり得るはずがない！	!rule:cx:lc2e-hazu:25	keep	rewrites
+cx:lc2e-hazu:30	「僕の偽名は教えたはずだけど？	has:가르쳤을 텐데	fix	rewrites
+cx:lc2e-hazu:30	えっと、まだ伝える事があったはずだけど、何だったかな。	has:있었을 텐데	fix	rewrites
+cx:lc2e-hazu:30	「久しぶり…で正しいのか？夢で何度も会ったはずだけど？」	has:만났을 텐데	fix	rewrites
+cx:lc2e-hazu:30	そこには何もない、何もないはずだ。	!rule:cx:lc2e-hazu:30	keep	rewrites

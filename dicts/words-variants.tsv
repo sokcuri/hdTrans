@@ -5449,7 +5449,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 消しごむ	지우개	I110	VSw		GN							jisjk:75319
 消しと	날아가버&AA@	M416			GN							jisjk:93604
 焼豚	돼지고기구이	I110	VFd		GN							jisjk:75352
-焼付	인상 지어&AL@	M421			GN							jisjk:344441
+焼付	새겨&AL@	M421			GN			LEX-227				jisjk:344441
 焼けこげ	탄 자국	I110	VPl		GN							jisjk:75382
 焼けこげ	그을&AA@	M427			GN				llm			w:19690
 燒賣	샤오마이	N110			GN							jisjk:26904
@@ -8211,8 +8211,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 し向け	대&AV@	M447			GN							jisjk:7712
 し向け	작용&AV@	M447			GN							jisjk:136176
 乄切り	마감	N110	UMe		GN							jisjk:188604
-乄切り	굳게 닫혀진 상태	N110			GN							jisjk:266343
-乄切り	굳게 닫혀진 상태	N110			GN	2525	||1 &&3 P-1== "2**" ||2 S-2== "ドア" S-2== "門" P-2== "1**"	締め切り를 ドア·門과 조사 뒤에서 굳게 닫혀진 상태로 고른다. (미발동: rare-context)				jisjk:266344
+乄切り	굳게 닫힌 상태	N110			GN			GRM-700				jisjk:266343
+乄切り	굳게 닫힌 상태	N110			GN	2525	||1 &&3 P-1== "2**" ||2 S-2== "ドア" S-2== "門" P-2== "1**"	GRM-700 締め切り를 ドア, 門과 조사 뒤에서 굳게 닫힌 상태로 고른다. (미발동: rare-context)				jisjk:266344
 しめ出	내&FL@	M433			GN							jisjk:95302
 しめ出	따돌&AA@	M443			GN							jisjk:136245
 〆縄	금줄	N110			GN							jisjk:188623
@@ -12402,7 +12402,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 手をひ	손을 &C8@	M421	QCTQHPQIDQMSVGt	Pn	GN	2386	||3 &&2 S-1== "から" P-1== "2**" &&2 S-1== "は" S-2== "から" S-1== "に関しては"	手を引는 から·からは·に関しては 뒤에서 관용 표현 ‘손을 떼다’로 고른다.				jisjk:265724
 電話を掛け	전화를 &L1@	M427			GN							jisjk:142639
 問いを掛け	질문&AV@	M447			GN							jisjk:142671
-とどめを刺	급소를 &E9@	M413			GN							jisjk:95039
+とどめを刺	결정타를 날&AA@	M413			GN			LEX-120				jisjk:95039
 共布	같은 천	N110	VCp		GN							jisjk:246115
 ど真中	한가운데	N110	VPl		GN							jisjk:153839
 ド真中	한가운데	N110	VPl		GN							jisjk:153839
@@ -20638,3 +20638,26 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お兄たん	오빠	N110	VHn		GN						おにいたん	variant:babytalk:oniitan
 お姉たん	언니	N110	VHn		GN						おねえたん	variant:babytalk:oneetan
 まっしろ	새%CC@	G8U0			GN							jisjk:3709
+しょうち	&K6@	M469			GN							w:28975
+トドメを刺	결정타를 날&AA@	M413			GN			LEX-120				variant:todome:katakana
+今の内に	지금	E311			GN			LEX-100 今のうちに의 한자 표기			いまのうちに	variant:lc-cx:imanouchini
+分かっていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:1
+分かってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:2
+わかってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:3
+判っていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:4
+判ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:5
+解っていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:6
+解ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:7
+分っていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:8
+分ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:9
+よく分かっていな	잘 $C4@	H7U0		XnAv	GN			GRM-71 よく分からな처럼: 알다의 ている 부정은 모르다				variant:wakaru-neg:10
+よく分かってな	잘 $C4@	H7U0		XnAv	GN			GRM-71 よく分からな처럼: 알다의 ている 부정은 모르다				variant:wakaru-neg:11
+元はといえば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:1
+もとはといえば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:2
+もとはと言えば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:3
+あとちょっとで	곧	E300			GN			LEX-211 あと少しで의 다른 꼴				variant:lc3g:atochotto:1
+もうちょっとで	곧	E300			GN			LEX-211 あと少しで와 같은 곧				variant:lc3g:atochotto:2
+あとちょっとでも	조금이라도 더	E300			GN			LEX-211 あとちょっとで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:3
+もうちょっとでも	조금이라도 더	E300			GN			LEX-211 もうちょっとで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:4
+あと少しでも	조금이라도 더	E300			GN			LEX-211 あと少しで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:5
+もう少しでも	조금이라도 더	E300			GN			LEX-211 もう少しで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:6

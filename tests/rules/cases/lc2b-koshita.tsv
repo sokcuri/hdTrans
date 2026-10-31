@@ -1,0 +1,42 @@
+# 규칙: GRM-122
+rule	input	expected	kind	layer
+cx:lc2b-koshita-end:30	「ええ。思い過ごしならそれに越したことはないのだけど、念の為ね」	has:그보다 좋은 건 없는 거지만,	fix	rewrites
+cx:lc2b-koshita-end:10	まあそれでも、恐くないに越したことはないけど。	has:게 제일이지만.	fix	rewrites
+cx:lc2b-koshita:30	予備は多いに越したことはない。	has:많은 게 제일이다.	fix	rewrites
+cx:lc2b-koshita:40	早く出るに越したことはないわね」	has:나오는 게 제일이다	fix	rewrites
+cx:lc2b-koshita:30	でも、味方が多いに越したことはない。	has:많은 게 제일이다.	fix	rewrites
+cx:lc2b-koshita-end:30	何かあった時に王族とのパイプは確保しておくに越したことはないのだ。	has:두는 게 제일인 것이다.	fix	rewrites
+cx:lc2b-koshita:10	これが可能ならそれに越したことはないからな。	has:그보다 좋은 건 없다	fix	rewrites
+cx:lc2b-koshita:40	警戒するに越したことはないよ」	has:경계하는 게 제일이다	fix	rewrites
+cx:lc2b-koshita:10	妊娠していなければそれに越したことはない。	has:그보다 좋은 건 없다.	fix	rewrites
+cx:lc2b-koshita-end:30	両親としては少年の未来を案じて勉強ができるに越したことはないのだ。	has:잘하는 게 제일인 것이다.	fix	rewrites
+cx:lc2b-koshita:30	使える人間は多いに越したことはない。	has:많은 게 제일이다.	fix	rewrites
+cx:lc2b-koshita-end:30	「いや、使わないで済むならそれに越したことはないのだけれどね」	has:그보다 좋은 건 없는 거지만	fix	rewrites
+cx:lc2b-koshita-end:10	「それでも依頼は早い者勝ちだろ。早く来るに越したことはないだろ」	has:오는 게 제일이지	fix	rewrites
+cx:lc2b-koshita-end:10	そんな恐ろしげなものは、除去するに越したことはないだろう。	has:제거하는 게 제일일	fix	rewrites
+cx:lc2b-koshita:10	戦わないならそれに越したことはない。	has:그보다 좋은 건 없다.	fix	rewrites
+cx:lc2b-koshita-end:20	「ま、早く退院するに越したことはないけれどな。」	has:퇴원하는 게 제일이지만.	fix	rewrites
+cx:lc2b-koshita-end:35	瞬殺できるわけだし、固まっておくに越したことはないんじゃないか？」	has:두는 게 제일인	fix	rewrites
+cx:lc2b-koshita:30	情報は多いに越したことはない。	has:많은 게 제일이다.	fix	rewrites
+cx:lc2b-koshita:10	何事もなければそれに越したことはない。	has:그보다 좋은 건 없다.	fix	rewrites
+cx:lc2b-koshita:40	用心に越したことはない。	has:조심보다 좋은 건 없다.	keep	rewrites
+cx:lc2b-koshita:40	健康に越したことはない。	has:건강보다 좋은 건 없다.	keep	rewrites
+cx:lc2b-koshita-end:15	わかるはずもないのだが、ここは用心に越したことはないだろう。	has:알 리도 없는데, 여기는 조심보다 좋은 건 없을 것이다.	fix	rewrites
+cx:lc2b-koshita-end:16	「だが、用心に越したことはないだろ」	has:「하지만, 조심보다 좋은 건 없지」	fix	rewrites
+cx:lc2b-koshita-end:16	（まぁ用心に越したことはないだろ。）	has:(뭐 조심보다 좋은 건 없지.)	fix	rewrites
+cx:lc2b-koshita:10	用心に越したことはない。	!rule:cx:lc2b-koshita:10	keep	rewrites
+cx:lc2b-koshita:10	これに越したことはない。	!rule:cx:lc2b-koshita:10	keep	rewrites
+cx:lc2b-koshita:30	用心に越したことはない。	!rule:cx:lc2b-koshita:30	keep	rewrites
+cx:lc2b-koshita:30	これに越したことはない。	!rule:cx:lc2b-koshita:30	keep	rewrites
+cx:lc2b-koshita-end:10	用心に越したことはない。	!rule:cx:lc2b-koshita-end:10	keep	rewrites
+cx:lc2b-koshita-end:10	これに越したことはない。	!rule:cx:lc2b-koshita-end:10	keep	rewrites
+cx:lc2b-koshita-end:15	用心に越したことはない。	!rule:cx:lc2b-koshita-end:15	keep	rewrites
+cx:lc2b-koshita-end:15	これに越したことはない。	!rule:cx:lc2b-koshita-end:15	keep	rewrites
+cx:lc2b-koshita-end:16	用心に越したことはない。	!rule:cx:lc2b-koshita-end:16	keep	rewrites
+cx:lc2b-koshita-end:16	これに越したことはない。	!rule:cx:lc2b-koshita-end:16	keep	rewrites
+cx:lc2b-koshita-end:20	用心に越したことはない。	!rule:cx:lc2b-koshita-end:20	keep	rewrites
+cx:lc2b-koshita-end:20	これに越したことはない。	!rule:cx:lc2b-koshita-end:20	keep	rewrites
+cx:lc2b-koshita-end:30	用心に越したことはない。	!rule:cx:lc2b-koshita-end:30	keep	rewrites
+cx:lc2b-koshita-end:30	これに越したことはない。	!rule:cx:lc2b-koshita-end:30	keep	rewrites
+cx:lc2b-koshita-end:35	用心に越したことはない。	!rule:cx:lc2b-koshita-end:35	keep	rewrites
+cx:lc2b-koshita-end:35	これに越したことはない。	!rule:cx:lc2b-koshita-end:35	keep	rewrites

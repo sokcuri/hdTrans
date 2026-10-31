@@ -2,4 +2,4 @@ rule	input	expected	kind	layer
 dict:jisjk:373541	なんかお菓子ある？	뭔가 과자 있어?	fix	local
 dict:jisjk:373541	なんか飲み物買ってきて。	rule:dict:jisjk:373541=뭔가	fix	local
 dict:jisjk:341464	なんか変だな。	rule:dict:jisjk:341464=왠지	keep	local
-dict:jisjk:341464	なんか、嫌な予感がする。	왠지, 불길한 예감이 한다.	keep	local
+dict:jisjk:341464	なんか、嫌な予感がする。	왠지, 불길한 예감이 든다.	keep	local

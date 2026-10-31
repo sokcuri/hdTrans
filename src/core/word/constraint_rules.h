@@ -57,11 +57,16 @@ enum class ConstraintContext : uint8_t {
     BeforeAru,          // ある, あり, あっ, あれ or あろ follows and every sense of the word is a noun
                         // (歳であり: the copula である; not まである)
     BeforeRai,          // らい follows, so the word's last く starts くらい (したくらい, きたくらい)
+    BeforeShii,         // しい, しく, しかっ or しき (not しきり, しきた) follows, so the word's last ら starts
+                        // らしい (気付いたらしい, 気づいたらしき; not そしたら + しきりに, しきたり)
     NounSlot,           // not right after を, に, へ or で, and punctuation, the end, a particle, a copula,
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)
     BeforeNasai,        // なさい or なさいませ follows (お待ちなさい)
     AfterWordBeforeTe,  // a word right before and て after (感じはしていた; not はしで食べる)
+    BeforeRa,           // ら follows (気にするなら: the なら of a condition, not the prohibition な)
+    AfterWordBeforeNegative,  // a word right before and ない, なかっ, なく, なけれ or ません after (予感しかしない,
+                              // 味しかしません; not いや、しかしなあ, まあしかしねえ, まあしかしずいぶん)
     BeforeRassharu,     // らっしゃ follows (座っていらっしゃる: the い starts いらっしゃる)
     BeforeCopula,       // だ, で, じゃ, に, の, か or なん follows, or no letter, which no verb stem
                         // takes (いただけだ, いただけなんです, いただけ〜)

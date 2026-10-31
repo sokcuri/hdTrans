@@ -50,7 +50,7 @@ try {
 }
 ```
 
-`init()` also takes `speech` (`'strict'` or `'soft'`) and `wrapped`; `translate(text, { speech, wrapped, context })` applies them to one call, where `context` lists the lines before `text` in the same document, read only for their cues and not returned. Nothing is kept from one call to the next. These are the shared engine options and results, not a separate npm translation mode. Ehnd files are UTF-8 strings keyed by their original `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt` or `UserDict*.txt` names. No external Ehnd dictionary is included or enabled by default. `setEhnd(files)` replaces an instance's files; `clearEhnd()` removes them.
+`init()` also takes `speech` (`'strict'` or `'soft'`), `speechLevels` (`'auto'` or `'keep'`) and `wrapped`; `translate(text, { speech, speechLevels, wrapped, context })` applies them to one call, where `context` lists the lines before `text` in the same document, read only for their cues and not returned. `setSpeech()`, `setSpeechLevels()` and `setWrapped()` set them for later calls. With `speechLevels: 'auto'` (the default) a dialogue line that 「」 or 『』 opens has its sentence end rewritten to the speech level of the dialogue rules (「白崎、俺が手伝うから大丈夫だ」 → 「시라사키, 내가 도우니까 괜찮아」); `'keep'` leaves the translation's own level (「시라사키, 내가 도우니까 괜찮다」). Nothing is kept from one call to the next. These are the shared engine options and results, not a separate npm translation mode. Ehnd files are UTF-8 strings keyed by their original `PreFilter*.txt`, `PostFilter*.txt`, `SkipLayer*.txt` or `UserDict*.txt` names. No external Ehnd dictionary is included or enabled by default. `setEhnd(files)` replaces an instance's files; `clearEhnd()` removes them.
 
 ## User dictionary
 
@@ -77,6 +77,16 @@ try {
 ```
 
 `getUserDict()` returns registered source rows as an independent copy. A malformed raw update keeps the active dictionary and reports `userDictError`; inspect it after updating. `filterErrors` reports rejected filter rows. `reset()` clears translation context. `close()` releases the translator and can be called more than once. Instances have independent user dictionaries, filters and context.
+
+## Name list
+
+```js
+const translator = await HdTrans.init({ names: '衣更\t이사라\n' });
+translator.translate('衣更は今日も元気だ。'); // 이사라는 오늘도 건강하다.
+translator.setNames('');                       // drops the list
+```
+
+A name list gives the names of one work, one per line: `JA<TAB>KO[<TAB>KIND[<TAB>hon]]`, in the format of the native `--names` (kinds `given`, `family`, `full`, `nick`, `place`, `org`, `title`). It applies to each call's document and does not change the dictionaries. `init({ names })` and `setNames(text)` set it for later calls; `translate(text, { names })` for one call. `setNames` compiles the list, so give it once per document, not per line. A malformed line or a name that does not compile throws after the other lines are applied; `getNames()` returns the last text given.
 
 ## CLI
 

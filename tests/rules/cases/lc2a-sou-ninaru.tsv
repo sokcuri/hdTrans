@@ -1,0 +1,52 @@
+# 규칙: GRM-102
+rule	input	expected	kind	layer
+cx:lc2a-sou-ninaru:10	と叫びそうになった時。	has:뻔했을 때	fix	rewrites
+cx:lc2a-sou-ninaru:10	と叫びそうになったが堪えた。	has:뻔했지만 참았다	fix	rewrites
+cx:lc2a-sou-ninaru:10	突き出した腕が、触れそうになった時、	has:뻔했을 때	fix	rewrites
+cx:lc2a-sou-ninaru:20	バレそうになったら口封じ……	has:같아지면 입막음이라고	fix	rewrites
+cx:lc2a-sou-ninaru:20	……死にそうになったら逃げろ。	has:같아지면 도망쳐라	fix	rewrites
+cx:lc2a-sou-ninaru:20	イキそうになったら教えなさい。	has:같아지면 가르쳐	fix	rewrites
+cx:lc2a-sou-ninaru:30	声が出そうになるが、堪える。	has:같아지지만	fix	rewrites
+cx:lc2a-sou-ninaru:30	怒りそうになるがなんとか思い止める	has:같아지지만 어떻게든	fix	rewrites
+cx:lc2a-sou-ninaru:30	だからもし当たりそうになったら止める	has:같아지면 멈춘다	fix	rewrites
+cx:lc2a-sou-ninaru:35	義嗣は葛藤に押しつぶされそうになっている。	has:뻔하다	fix	rewrites
+cx:lc2a-sou-ninaru:35	普通にドンドンで思わず吹き飛ばされそうになってしまった。	has:뻔했다	fix	rewrites
+cx:lc2a-sou-ninaru:35	学校からバイト先に向かう途中で、一匹の白猫ちゃんが車に轢かれそうになっていた。	has:뻔했다	fix	rewrites
+cx:lc2a-sou-ninaru:40	お世話係の人に着ているものを脱がされそうになり中までついてこられそうになったのでお断りした。	has:뻔해 안까지 따라	fix	rewrites
+cx:lc2a-sou-ninaru:40	クトゥナは俯き真っ赤になった顔から湯気立ち昇りそうになり、今にも卒倒しそうになっていたのだった。	has:뻔해	fix	rewrites
+cx:lc2a-sou-ninaru:40	第１王子と第２王子が、奴隷商に売られそうになり、王子と気付かれ、殺されそうになっている会話が聞こえてきたと、私に訴えた。	has:뻔해	fix	rewrites
+cx:lc2a-sou-ninaru:45	などと、ムシヒメの誘惑に負けそうになっている者もいた。	has:뻔한 사람도 있었다	fix	rewrites
+cx:lc2a-sou-ninaru:45	その場にしゃがみ込みそうになっている俺に、タクミが近づいてきた。	has:뻔한 나에게	fix	rewrites
+cx:lc2a-sou-ninaru:45	それよりも、寝かしつけられそうになっている現状の方が問題である。	has:뻔한 현 상황이	fix	rewrites
+cx:lc2a-sou-ninaru:46	どうしたのかと思いサーシャ嬢の方を見ると、泣きそうになっているのである。	has:뻔한 것이다	fix	rewrites
+cx:lc2a-sou-ninaru:46	自分が泣きそうになっていることを自覚すると、顔が羞恥でカッと熱くなった。	has:뻔한 것을 자각하니	fix	rewrites
+cx:lc2a-sou-ninaru:46	今も油断するとそのオーラで震えそうになっているのを、必死で我慢しているくらいだった。	has:뻔한 것을	fix	rewrites
+cx:lc2a-sou-ninaru:47	眼鏡越しから私を見つめているその瞳に泣きそうになっているのが、自分でもよくわかった。	has:뻔한 것이	fix	rewrites
+cx:lc2a-sou-ninaru:5	一瞬回れ右して外に出そうになったがそれを堪えて、近づいてくる人物にため息をついた。	has:나올 뻔했지만 그것을	fix	rewrites
+cx:lc2a-sou-ninaru:50	俺も流石に足が震えそうになっている。	has:뻔하다	fix	rewrites
+cx:lc2a-sou-ninaru:50	……思わず、こけそうになってしまった。	has:뻔했다	fix	rewrites
+cx:lc2a-sou-ninaru:50	おっと、口に出しそうになってしまった。	has:뻔했다	fix	rewrites
+cx:lc2a-sou-ninaru:6	と、心の声が出そうになっていた時、白浜とココがキャッキャと女子トークを展開しだした。	has:나올 뻔했을 때	fix	rewrites
+cx:lc2a-sou-ninaru:5	涙が出そうになった。	has:나올 뻔했다	fix	rewrites
+cx:lc2a-sou-ninaru:5	思わず涙が出そうになった時、	has:나올 뻔했을 때	fix	rewrites
+cx:lc2a-sou-ninaru:6	涙が出そうになっている。	has:나올 뻔하다	fix	rewrites
+cx:lc2a-sou-ninaru:7	涙が出そうになる。	has:나올 것 같아진다	fix	rewrites
+cx:lc2a-sou-ninaru:10	表情が崩れそうになったが、俺は口もとをきつく結んだ。	has:뻔했지만	fix	rewrites
+cx:lc2a-sou-ninaru:10	会長に食ってかかりそうになった青海さんを、俺は視線で制止した。	has:뻔한 아오미 씨를	fix	rewrites
+cx:lc2a-sou-ninaru:30	ずるずると崩れ落ちそうになる真帆の身体を支えてやる。	has:같아지는 마호의	fix	rewrites
+cx:lc2a-sou-ninaru:20	部屋に戻りそうになったら引き留めておいてくれ。	has:같아지면 만류해	fix	rewrites
+cx:lc2a-sou-ninaru:50	俺はそれだけで涙が零れそうになってしまった。	has:뻔했다	fix	rewrites
+cx:lc2a-sou-ninaru:5	お金を出そうになった。	!rule:cx:lc2a-sou-ninaru:5	keep	rewrites
+cx:lc2a-sou-ninaru:6	涙が出そうな顔をしている。	!rule:cx:lc2a-sou-ninaru:6	keep	rewrites
+cx:lc2a-sou-ninaru:7	手紙を出そうと思う。	!rule:cx:lc2a-sou-ninaru:7	keep	rewrites
+cx:lc2a-sou-ninaru:10	この仕事は終わりそうにない。	!rule:cx:lc2a-sou-ninaru:10	keep	rewrites
+cx:lc2a-sou-ninaru:10	嬉しそうになった。	!rule:cx:lc2a-sou-ninaru:10	keep	rewrites
+cx:lc2a-sou-ninaru:20	今にも泣きそうな顔。	!rule:cx:lc2a-sou-ninaru:20	keep	rewrites
+cx:lc2a-sou-ninaru:30	思わず笑いそうになる。	!rule:cx:lc2a-sou-ninaru:30	keep	rewrites
+cx:lc2a-sou-ninaru:35	死にそうな顔で首を振る。	!rule:cx:lc2a-sou-ninaru:35	keep	rewrites
+cx:lc2a-sou-ninaru:40	凍りつきそうになった。	!rule:cx:lc2a-sou-ninaru:40	keep	rewrites
+cx:lc2a-sou-ninaru:45	シュールなピースサインで吹き出しそうになった。	!rule:cx:lc2a-sou-ninaru:45	keep	rewrites
+cx:lc2a-sou-ninaru:46	そうになっていることを知る。	!rule:cx:lc2a-sou-ninaru:46	keep	rewrites
+cx:lc2a-sou-ninaru:47	大きくなっているのがわかる。	!rule:cx:lc2a-sou-ninaru:47	keep	rewrites
+cx:lc2a-sou-ninaru:50	彼は眠っている。	!rule:cx:lc2a-sou-ninaru:50	keep	rewrites
+cx:lc2a-sou-ninaru:50	泣いてしまった。	!rule:cx:lc2a-sou-ninaru:50	keep	rewrites

@@ -1,0 +1,39 @@
+# 규칙: GRM-101
+rule	input	expected	kind	layer
+pattern:書いたかのようだ	真綿で締められたかのようだ。	has:조여진 것 같다	fix	lookup
+pattern:書いたかのようだ	体重が百倍になったかのようだ。	has:된 것 같다	fix	lookup
+pattern:書いたかのようだ	まるで羽根でも生えたかのようだ。	has:난 것 같다	fix	lookup
+pattern:書いたかのようだ	まるで殺意が具現したかのようだ。	has:구현한 것 같다	fix	lookup
+pattern:書いているかのようだ	何か……そう、何か、変な力でも作用しているかのようだ	has:있는 것 같다	fix	lookup
+pattern:書いているかのようだ	見えなくなったサーシャ一行を、まだ追っているかのようだ。	has:쫓고 있는 것 같다	fix	lookup
+pattern:書いているかのようだ	その様子はまるで、空に穴が空き始めているかのようだった。	has:시작하고 있는 것	fix	lookup
+pattern:書いているかのようだ	キラキラとライトが光って、まるでジオラマを見ているかのようだ。	has:보고 있는 것 같다	fix	lookup
+pattern:書いているかのような	例えるならば鋭利の刃物を突き付けられているかのような。	has:들이대어지고 있는 것	fix	lookup
+pattern:書いているかのような	魔法杖が笑っているかのような…そんな幻聴が聞こえてきそうだ。	has:웃고 있는 것 같은	fix	lookup
+pattern:書いているかのような	わたし以上にわたしのことを知っているかのような、確信に満ちた言葉。	has:알고 있는 것 같은	fix	lookup
+pattern:書いているかのような	戦いを楽しんでいるかのような、それに高揚しているかのような、愉悦の表情を浮かべていた。	has:즐기고 있는 것	fix	lookup
+pattern:書いているかのように	あっちにいます、と言っているかのように。	has:말하는 것처럼	fix	lookup
+pattern:書いているかのように	寒いいや、全身が刺されているかのように痛い。	has:찔리고 있는 것처럼	fix	lookup
+pattern:書いているかのように	スが翼を閉じて獲物を狙っているかのようにも見えた。	has:노리고 있는 것처럼도	fix	lookup
+pattern:書いているかのように	酷く硬く、まるで固定されているかのように動かないのだ。	has:전혀 고정되어 있는 것처럼	fix	lookup
+pattern:書かなかったかのように	お兄さんもマリとの会話がなかったかのように歩き出す。	has:없었던 것처럼 걷기	fix	lookup
+pattern:書かなかったかのように	王妃をはじめ、側室の存在などまるではじめからなかったかのように、ジャックス王はセシルだけを寵愛した。	has:등 전혀 처음부터 없었던 것처럼	fix	lookup
+pattern:書かなかったかのように	もう二度と会社に行かなくていいというだけで、これまでの睡眠障害がなかったかのように、ぐっすりと眠れるようになったのだ。	has:없었던 것처럼	fix	lookup
+pattern:高かったかのような	そして明日からはまた、なにごともなかったかのような日常に戻るのだ。	has:없었던 것 같은	fix	lookup
+pattern:高かったかのような	空の様子も、戦場として使っていたこの島も、まるで何事もなかったかのような日常。	has:없었던 것 같은	fix	lookup
+pattern:高かったかのような	ぽっかりとスペースが空いており、まるで始めから時計台がなかったかのような錯覚すら感じた。	has:없었던 것 같은	fix	lookup
+pattern:高かったかのような	そうこうしているうちに人影は瓦礫の奥へ消え、その存在が初めからなかったかのような風景へと変わる。	has:없었던 것 같은	fix	lookup
+pattern:高かったかのように	何もなかったかのように普通に	has:없었던 것처럼 보통으로	fix	lookup
+pattern:高かったかのように	そんな何事もなかったかのようにっ！	has:없었던 것처럼	fix	lookup
+pattern:高かったかのように	まるで、俺たちは敵ではなかったかのように。	has:아니었던 것처럼	fix	lookup
+pattern:高かったかのように	何事もなかったかのように、マリーは澄まし顔。	has:없었던 것처럼	fix	lookup
+cx:lc2a-kanoyou-iru:10	子猫を撫でているかのように笑う。	has:있는 것 같이 웃는다	fix	lookup
+cx:lc2a-kanoyou-iru:20	まるで子猫を撫でているかのようだ。	has:있는 것 같다	fix	lookup
+cx:lc2a-kanoyou-iru:20	子猫を撫でているかのような顔。	has:있는 것 같은 얼굴	fix	lookup
+pattern:書いているかのような	頭に何か突き刺さっているかのような痛み。	has:것 같은 아픔	fix	lookup
+pattern:書いているかのように	死んでいるかのように眠る。	has:것처럼 잔다	fix	lookup
+pattern:高かったかのように	まるで最初からそこに何もなかったかのように、犬の死体が忽然と姿を消していた。	has:없었던 것처럼	fix	lookup
+cx:lc2a-kanoyou-iru:10	全てを見ているかのように話す。	!rule:cx:lc2a-kanoyou-iru:10	keep	lookup
+cx:lc2a-kanoyou-iru:20	窓が開いているかのようだ。	!rule:cx:lc2a-kanoyou-iru:20	keep	lookup
+pattern:書いたかのようだ	まるで固まったかのように動かない。	has:굳어진 것처럼	keep	lookup
+pattern:書いたかのようだ	彼は夢を見ているようだ。	has:꾸고 있는 것 같다	keep	lookup

@@ -1,0 +1,41 @@
+# 규칙: GRM-700
+rule	input	expected	kind	layer
+dict:jisjk:261773	『ブルーマウンテン・ナンバー１』と書かれている。	has:이라고 쓰여 있다	fix	defaults
+dict:jisjk:261773	彼女のそばに寄ると、砂に『架子』と書かれていた。	has:라고 쓰여 있었다	fix	defaults
+dict:jisjk:261773	袖に『選管』と書かれた腕章を付けた人に尋ねられた。	has:라고 쓰인 완장	fix	defaults
+dict:jisjk:261773	本には“禁書庫”と書かれたシールが貼られていた。	has:라고 쓰인 씰	fix	defaults
+dict:jisjk:95558	そこには大きな段ボール箱が一つ、置かれていた。	has:하나, 놓여 있었다	fix	defaults
+dict:jisjk:95558	コンロにフライパンが置かれる。	has:프라이팬이 놓인다	fix	defaults
+dict:jisjk:95558	鈴木に見つめられ、御園は自分の置かれた状況に思い至る。	has:자신이 놓인 상황	fix	defaults
+dict:jisjk:95558	「市立ということは……国の管轄下に置かれたということ？」	has:관할하에 놓였다는	fix	defaults
+dict:jisjk:95558	店の中に置かれたテーブルと、椅子。	has:가게 안에 놓인 테이블	fix	defaults
+dict:jisjk:95558	ある時期から、妹のクラスの机に靴が置かれるようになった。	has:구두가 놓이게 되었다	fix	defaults
+dict:jisjk:148313	目の前で無慈悲にドアが閉じられた。	has:문이 닫혔다	fix	defaults
+dict:jisjk:148313	全てのカーテンが閉じられると、開始を宣言した。	has:커튼이 닫히니	fix	defaults
+dict:jisjk:355867	そのままプリンターの上に通知表を置き、誰にも見られていないことを横目で確認する。	has:누구에게도 보이지 않는	fix	defaults
+dict:jisjk:355867	誰にも見られていないにも関わらず、がっくりと肩を落とした。	has:누구에게도 보이지 않음에도	fix	defaults
+dict:jisjk:118878	彼は部屋に閉じこめられた。	has:방에 갇혔다	fix	defaults
+dict:jisjk:365795	名前が読み上げられた。	has:이름이 불렸다	fix	defaults
+dict:jisjk:267577	その鈴に強力な魔力が込められているのを嗅ぎ取った。	has:마력이 담겨 있는	fix	defaults
+dict:jisjk:266172	忘れていたが、セリカには風呂でエナを抱きかかえているのを見られていた。	잊고 있었지만, 세리카에게는 목욕으로 태를 껴안고 있는 것을 보여지고 있었다.	current	defaults
+dict:jisjk:266172	みいちゃんは俺にあの文章を見られたこと、知らないんだし……	lacks:문장을 보인	keep	defaults
+dict:jisjk:94599	教室に一人だけ残された。	has:남겨졌다	keep	defaults
+dict:jisjk:147085	運命は神にゆだねられた。	has:맡겨졌다	keep	defaults
+dict:jisjk:95471	彼は一人取り残された。	has:남겨졌다	keep	defaults
+dict:jisjk:260892	あんな文章見せられて、いつもどおりの顔なんか、なかなかできない。	has:보여져	keep	defaults
+dict:jisjk:118878	魂自体が氷の檻に閉じこめられたように、身動きできず震え上がっている。	has:갇힌 것처럼	fix	defaults
+dict:jisjk:145308	しわの刻まれたその青白い顔には深い苦悩がうかがわれる。	has:고뇌가 엿보인다	fix	defaults
+dict:jisjk:260611	ファイランドのものと一致する点が多く見受けられる。	has:많이 보인다	fix	defaults
+dict:jisjk:267577	いや、それ以上の威力が込められている。	has:위력이 담겨 있다	fix	defaults
+dict:jisjk:95558	コトリと小気味いい音と共に目の前に小瓶が置かれた。	has:소병이 놓였다	fix	defaults
+dict:jisjk:140463	父に傘を使われた。	has:아버지가 우산을 썼다	keep	defaults
+dict:jisjk:93277	レオナルドが実験に使われた可能性が高い。	has:실험에 사용된	keep	defaults
+dict:jisjk:93277	もう百年は使われていない称号だが	has:사용되지 않은 칭호	keep	defaults
+dict:jisjk:118878	アイリーンさんは、お城の塔にでも閉じ込められていたのでしょうか？	has:갇혀 있었을까요	keep	defaults
+dict:jisjk:148641	包帯が巻かれた腕をさすりながら、私は言い切る。	has:붕대가 감긴 팔	keep	defaults
+dict:jisjk:147550	おお、考えを読まれた。	has:생각을 읽혔다	keep	defaults
+dict:jisjk:147550	不特定多数に読まれるための小説でもありません。	has:읽히기 위한	keep	defaults
+dict:jisjk:147550	心中を完全に読まれ、動悸がさらに激しくなる。	has:심중을 완전히 읽혀	keep	defaults
+dict:jisjk:145308	明らかにほっとした様子がうかがわれた。	has:모습이 엿보였다	fix	defaults
+dict:jisjk:142188	先生が本を書かれた。	has:책을 쓰셨다	keep	defaults
+dict:jisjk:118878	部屋に閉じ込められた。	has:방에 갇혔다	keep	defaults

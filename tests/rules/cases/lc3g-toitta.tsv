@@ -1,0 +1,38 @@
+# 규칙: GRM-180
+rule	input	expected	kind	layer
+cx:lc3g-toitta:10	といったところか。	has:할까	fix	rewrites
+cx:lc3g-toitta:10	さすがと言ったところか。	has:할까	fix	rewrites
+cx:lc3g-toitta:15	といったところでしょうか。	has:할까요	fix	rewrites
+cx:lc3g-toitta:15	説明回と言ったところでしょうか。	has:할까요	fix	rewrites
+cx:lc3g-toitta:20	一安心といったところだろう。	has:할 수 있을	fix	rewrites
+cx:lc3g-toitta:20	流石は傭兵といったところだろう。	has:할 수 있을	fix	rewrites
+cx:lc3g-toitta:25	し、もって数日といったところでしょう」	has:할 수 있겠죠	fix	rewrites
+cx:lc3g-toitta:25	「まあ、おあいこといったところでしょう」	has:할 수 있겠죠	fix	rewrites
+cx:lc3g-toitta:30	といったところだ。	has:할 수 있다	fix	rewrites
+cx:lc3g-toitta:30	友人、といったところだ」	has:할 수 있다	fix	rewrites
+cx:lc3g-toitta:31	まずまずといったところである。	has:할 수 있다	fix	rewrites
+cx:lc3g-toitta:31	まあ、おあいこといったところである。	has:할 수 있다	fix	rewrites
+cx:lc3g-toitta:35	それは安堵の表情といったところだった	has:할 수 있었다	fix	rewrites
+cx:lc3g-toitta:35	まあ、おあいこといったところだった。	has:할 수 있었다	fix	rewrites
+cx:lc3g-toitta:40	相性はまずまずと言ったところだね。	has:할 수 있겠네	fix	rewrites
+cx:lc3g-toitta:40	「まあ、おあいこといったところだな」	has:할 수 있겠네	fix	rewrites
+cx:lc3g-toitta:45	お手上げといったところです。	has:할 수 있습니다	fix	rewrites
+cx:lc3g-toitta:45	平たい浮き輪、といったところです。	has:할 수 있습니다	fix	rewrites
+cx:lc3g-toitta:46	その意気や良し、と言ったところですね	has:할 수 있겠네요	fix	rewrites
+cx:lc3g-toitta:46	まずは作戦成功と言ったところですね。	has:할 수 있겠네요	fix	rewrites
+cx:lc3g-toitta:50	仕方なしにといったところだが。	has:할 수 있지만	fix	rewrites
+cx:lc3g-toitta:50	まあ、おあいこといったところだが、悪くない。	has:할 수 있지만	fix	rewrites
+cx:lc3g-toitta:55	といったところ	has:할 수 있다	fix	rewrites
+cx:lc3g-toitta:55	……といったところ。	has:할 수 있다	fix	rewrites
+cx:lc3g-toitta:10	実力は５０歩１００歩といったところであるし	!rule:cx:lc3g-toitta:10	keep	rewrites
+cx:lc3g-toitta:15	――といったところで車は止まった。	!rule:cx:lc3g-toitta:15	keep	rewrites
+cx:lc3g-toitta:20	は残り僅かといったところまで減っている。	!rule:cx:lc3g-toitta:20	keep	rewrites
+cx:lc3g-toitta:25	もお開きになる、といったところに	!rule:cx:lc3g-toitta:25	keep	rewrites
+cx:lc3g-toitta:30	といったところに、毎回お決まりパターンの敵登場。	!rule:cx:lc3g-toitta:30	keep	rewrites
+cx:lc3g-toitta:31	「平常時の七割といったところになります」	!rule:cx:lc3g-toitta:31	keep	rewrites
+cx:lc3g-toitta:35	二人はまだまだ入って二、三年といったところに見える。	!rule:cx:lc3g-toitta:35	keep	rewrites
+cx:lc3g-toitta:40	最後の一仕事、といったところになるかのう。	!rule:cx:lc3g-toitta:40	keep	rewrites
+cx:lc3g-toitta:45	入場までは……あと十分程度といったところか。	!rule:cx:lc3g-toitta:45	keep	rewrites
+cx:lc3g-toitta:46	数は……二十匹程度といったところだろうか。	!rule:cx:lc3g-toitta:46	keep	rewrites
+cx:lc3g-toitta:50	前回召喚された者達の半分程度といったところだろうか。	!rule:cx:lc3g-toitta:50	keep	rewrites
+cx:lc3g-toitta:55	客入りは七割程度といったところか。	!rule:cx:lc3g-toitta:55	keep	rewrites

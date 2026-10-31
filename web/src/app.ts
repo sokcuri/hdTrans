@@ -272,7 +272,7 @@ const userdict = grid($('userdict'), heads.hdtrans[0], heads.hdtrans[1], 'userdi
   editing.entries = text;
   edited(editing);
 });
-const names = grid($('names'), ['일본어', '한국어', '품사', '옵션'], ['春香', '하루카', 'name', ''], 'names.tsv', (text) => {
+const names = grid($('names'), ['일본어', '한국어', '종류', '옵션'], ['春香', '하루카', 'full', ''], 'names.tsv', (text) => {
   if (!editing) return;
   editing.names = text;
   edited(editing);
@@ -432,7 +432,7 @@ fileInput.addEventListener('change', async () => {
 $('dict-export').addEventListener('click', async () => {
   const d = overlay(dicts);
   const out = [
-    { name: 'userdict.txt', text: d.userdict },
+    { name: 'userdict.txt', text: d.userdictFile },
     { name: 'UserDict.txt', text: d.ehnd },
   ].filter((f) => f.text !== '');
   if (out.length === 1) save(out[0].name, utf8(out[0].text + '\n'), textType);
@@ -504,14 +504,22 @@ example.addEventListener('change', async () => {
 
 const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
 let seq = 0;
-type Reply = { lines?: string[]; message?: string; warning?: string; ehndWarning?: string[]; ms: number; memory: number };
+type Reply = {
+  lines?: string[];
+  message?: string;
+  warning?: string;
+  ehndWarning?: string[];
+  namesWarning?: string[];
+  ms: number;
+  memory: number;
+};
 const pending = new Map<number, (m: Reply) => void>();
 
-function request(mode: string, lines: string[], d: { userdict: string; ehnd: string }): Promise<Reply> {
+function request(mode: string, lines: string[], d: { userdict: string; ehnd: string; names: string }): Promise<Reply> {
   const id = ++seq;
   return new Promise<Reply>((resolve) => {
     pending.set(id, resolve);
-    worker.postMessage({ type: 'translate', id, mode, speech: speech.value, lines, userdict: d.userdict, ehnd: d.ehnd });
+    worker.postMessage({ type: 'translate', id, mode, speech: speech.value, lines, userdict: d.userdict, ehnd: d.ehnd, names: d.names });
   });
 }
 worker.onmessage = (ev) => {
@@ -535,10 +543,12 @@ worker.onmessage = (ev) => {
 };
 
 /** The engine's load errors ("LINE: message", Ehnd "UserDict.txt:LINE: message") with the dictionary and row of each line. */
-function warningText(warning: string, ehnd: string[], where: (ehnd: boolean, line: number) => string): string {
-  const user = warning === '' ? [] : warning.split('\n').map((w) => w.replace(/^(\d+): /, (_, n) => where(false, Number(n)) + ': '));
-  const e = ehnd.map((w) => w.replace(/^(?:.*\/)?UserDict\.txt:(\d+): /, (_, n) => where(true, Number(n)) + ': '));
-  return [...user, ...e].join(' / ');
+function warningText(m: Reply, d: ReturnType<typeof overlay>): string {
+  const warning = m.warning ?? '';
+  const user = warning === '' ? [] : warning.split('\n').map((w) => w.replace(/^(\d+): /, (_, n) => d.where(false, Number(n)) + ': '));
+  const e = (m.ehndWarning ?? []).map((w) => w.replace(/^(?:.*\/)?UserDict\.txt:(\d+): /, (_, n) => d.where(true, Number(n)) + ': '));
+  const names = (m.namesWarning ?? []).map((w) => w.replace(/^(\d+): /, (_, n) => d.namesWhere(Number(n)) + ': '));
+  return [...user, ...e, ...names].join(' / ');
 }
 
 // The output shows the last translation in the output mode, source lines muted;
@@ -608,7 +618,7 @@ async function translate() {
     if (m.lines === undefined) throw new Error(m.message);
     document.body.dataset.memory = String(m.memory);
     text = `${Math.round(performance.now() - t0)} ms`;
-    const w = warningText(m.warning ?? '', m.ehndWarning ?? [], d.where);
+    const w = warningText(m, d);
     if (w) problem = '사전 오류: ' + w;
     if (g === generation) {
       shownSource = lines.join('\n');
@@ -738,7 +748,7 @@ async function runDocs() {
       if (m.lines === undefined) throw new Error(m.message);
       if (docsCancel) break;
       d.translated = m.lines.join('\n');
-      const w = warningText(m.warning ?? '', m.ehndWarning ?? [], dictionaries.where);
+      const w = warningText(m, dictionaries);
       warning.textContent = w ? '사전 오류: ' + w : '';
       setState(d, `완료 · ${Math.round(performance.now() - t0)} ms`);
     } catch (err) {

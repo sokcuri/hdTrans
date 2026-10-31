@@ -1,0 +1,24 @@
+# 규칙: LEX-93
+rule	input	expected	kind	layer
+lookup:kana-spelling	「みな成長が早いです」	has:모두 성장이	fix	lookup
+lookup:kana-spelling	ロシアの女性はみな実に美しい！！	has:여성은 모두 실로 아름	fix	lookup
+lookup:kana-spelling	みな怖くて動けない。	모두 무서워서 움직일 수 없다.	fix	lookup
+lookup:kana-spelling	私どもは、みな元気でやっております	has:모두 잘 지내	fix	lookup
+lookup:kana-spelling	驚くことはない 人間はみな死ぬ	has:인간은 모두 죽는다	fix	lookup
+lookup:kana-spelling	人はみな強くなる	사람은 모두 강해진다	fix	lookup
+lookup:kana-spelling	「僕はみなに誓おう。」	「나는 모두에게 맹세하자.」	fix	lookup
+lookup:kana-spelling	みなの期待を背負っての出馬ですな	has:모두의 기대를	fix	lookup
+lookup:kana-spelling	みなが笑った。	모두가 웃었다.	fix	lookup
+lookup:kana-spelling	みなは知らない。	모두는 모른다.	fix	lookup
+lookup:kana-spelling	みなを守る。	모두를 지킨다.	fix	lookup
+lookup:kana-spelling	テレビをみながら食べた。	텔레비전을 보면서 먹었다.	keep	lookup
+lookup:kana-spelling	「少し……前に進んでみない……？」	「조금……앞으로 나아가 보지 않을래……?」	keep	lookup
+lookup:kana-spelling	思ってもみない申し出だっただけに	has:보지 않는	keep	lookup
+lookup:kana-spelling	考えてもみなかったことだ	has:보지 않았던	keep	lookup
+lookup:kana-spelling	そんなの産んでみなきゃ分かんないよ	has:낳아 보지 않으면	keep	lookup
+lookup:kana-spelling	うん これ 読んでみな	lacks:모두	keep	lookup
+lookup:kana-spelling	よくみなさい。	잘 봐.	keep	lookup
+lookup:kana-spelling	みなさん、こんにちは。	여러분, 안녕하세요.	keep	lookup
+lookup:kana-spelling	みなとに着いた。	lacks:모두	keep	lookup
+lookup:kana-spelling	力がみなぎる。	힘이 넘친다.	keep	lookup
+lookup:kana-spelling	敵とみなす。	적으로 간주한다.	keep	lookup

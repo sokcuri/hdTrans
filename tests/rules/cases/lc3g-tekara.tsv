@@ -1,0 +1,23 @@
+# 규칙: GRM-189
+rule	input	expected	kind	layer
+lookup:tekaradenaito	休んでからでないと動けない。	has:쉬고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	段階を踏んでからでないと…ね。	has:밟고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	必ずスタッフを呼んでからでないと	has:부르고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	必ず調べてからでないと、動かない。	has:조사하고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	許可を得てからでなければ入れない。	has:얻고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	しっかりと証拠を掴んでからでないと。	has:잡고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	死んでからでないとコレは出来ないな。	has:죽고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	せめて、もう少し耐えてからでなければ。	has:참고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	私が面会してからでないと会わせられません	has:면회하고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	これも客が帰ってからでなければ出来ない。	has:돌아가고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	「駄目だよ。まずは休んでからでないと……」	has:쉬고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	それを確認してからでなければ作戦も何もない。	has:확인하고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	穴を掘ってからでないと、花見が始まらないのだ。	has:파고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	警察は人が死んでからでないと動いてくれません。	has:죽고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	ちゃんと脱いでからでないと正確に計れないのか。	has:벗고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	もう少し体が出来上がってからでないと逆効果だ。	has:완성되고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	もう少し休んでからでないと、歩けそうになかった。	has:쉬고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	に帰ってお父様に相談してからでないと契約は……」	has:상담하고 나서가 아니면	fix	lookup
+lookup:tekaradenaito	「ギフトを貰ってからじゃないとな！！」	has:받고 나서가 아니면	keep	lookup
+lookup:tekaradenaito	もっと、ほぐしてからじゃないと駄目だ。	has:풀고 나서가 아니면	keep	lookup
+lookup:tekaradenaito	全部終わってからじゃないと直しても仕方ないな。	has:끝나고 나서가 아니면	keep	lookup

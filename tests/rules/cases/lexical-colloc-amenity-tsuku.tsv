@@ -1,0 +1,27 @@
+# 규칙: LEX-225
+rule	input	expected	kind	layer
+cx:colloc-verb-partner:310	露天風呂もついています	has:노천탕도 딸려 있습니다	fix	rewrites
+cx:colloc-verb-partner:310	壁に傷がついた。	has:상처가 났다	keep	rewrites
+cx:colloc-verb-partner:315	ただシャワーとトイレもついているし、値段の割には悪くないと思う。	has:화장실도 딸려 있고	fix	rewrites
+cx:colloc-verb-partner:315	風呂に入る。	has:목욕한다	keep	rewrites
+cx:colloc-verb-partner:318	が、左右に居た２体程オマケが付いてきた。	has:덤이 딸려 왔다	fix	rewrites
+cx:colloc-verb-partner:318	おまけが付いてくる	has:덤이 딸려 온다	fix	rewrites
+cx:colloc-verb-partner:318	服に汚れがついた。	has:더러움이 묻었다	keep	rewrites
+cx:colloc-verb-partner:320	十畳ほどの広さにシングルベッドと、お風呂がついた角部屋だ。	lacks:딸린	keep	rewrites
+cx:colloc-verb-partner:320	冒険者ギルドのサービスを利用する時に特典が付く。	lacks:딸린다	keep	rewrites
+cx:colloc-verb-partner:320	部屋ごとにお風呂が付いているの？	lacks:딸려	keep	rewrites
+cx:colloc-verb-partner:320	その本には名前がついている。	has:이름이 붙어 있다	keep	rewrites
+cx:colloc-verb-partner:320	料理に味がついている。	has:맛이 붙어 있다	keep	rewrites
+cx:colloc-verb-partner:320	ふと気がついた。	has:깨달았다	keep	rewrites
+cx:colloc-verb-partner:320	やっと駅に着いた。	has:역에 도착했다	keep	rewrites
+cx:colloc-verb-partner:330	朝食がついています。	has:아침 식사가 포함되어 있습니다	fix	rewrites
+cx:colloc-verb-partner:330	夕食もついている宿。	has:저녁식사도 포함되어 있는	fix	rewrites
+cx:colloc-verb-partner:330	宿泊料金になりますと、朝食と夕食が付いておよそ１５０カルほどが平均となるかと思います。	has:저녁식사가 포함되어	fix	rewrites
+cx:colloc-verb-partner:330	食事はついてませんが、部屋単位の宿泊料で格安で泊まれます。	has:식사는 포함되지 않았	fix	rewrites
+cx:colloc-verb-partner:340	朝食がつく。	has:아침 식사가 포함된다	fix	rewrites
+cx:colloc-verb-partner:340	王宮は住み込みで食事もついてますし、悪くない仕事だと思っていたんです。	has:식사도 포함되어 있고	fix	rewrites
+cx:colloc-verb-partner:340	夕食がついてて安い。	has:저녁식사가 포함되어	fix	rewrites
+cx:colloc-verb-partner:330	夕食に間に合った。	lacks:포함	keep	rewrites
+cx:colloc-verb-partner:340	食事中に気がついた。	lacks:포함	keep	rewrites
+cx:colloc-verb-partner:320	温泉がついた部屋	has:온천이 딸린 방	fix	rewrites
+cx:colloc-verb-partner:320	トイレがついてる部屋	lacks:딸리고 있	keep	rewrites

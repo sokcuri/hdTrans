@@ -5,8 +5,8 @@ dict:jisjk:116128	同じ年の友達だ。	같은 나이의 친구다.	fix	local
 dict:jisjk:116128	同じ年の末の息子だ。	rule:dict:jisjk:116128=나이	keep	local
 dict:jisjk:116128	同じ年に生まれた。	같은 해에 태어났다.	fix	local
 cx:benefactive-provider:10	だれに話してもらいますか。	누가 이야기해 줍니까.	fix	rewrites
-cx:subject-before-ga:40	だれが走った。	누가 달렸다.	fix	rewrites
-cx:benefactive-provider:10	だれに読んでもらう。	누가 읽어 준다.	fix	rewrites
+cx:subject-before-ga:40	だれが走った。	누가 달렸나.	fix	rewrites
+cx:benefactive-provider:10	だれに読んでもらう。	누가 읽어 주나.	fix	rewrites
 dict:jisjk:118110	はるかさんが来た。	!rule:dict:jisjk:118110	keep	local
 dict:jisjk:118110	はるか上空を飛ぶ。	rule:dict:jisjk:118110=아득한	keep	local
 dict:jisjk:345596	水に不足はない。	!rule:dict:jisjk:345596	keep	local

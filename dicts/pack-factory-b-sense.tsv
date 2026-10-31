@@ -1,0 +1,4 @@
+#! layer=pack
+# 공장에서 만든 팩 행
+id	lemma	pos	slot	kind	cond	target	agent	pri	spec	prov	note
+fac:b:語らい:noun	語らい	n	sense	frame	next=が|を|は|も|で|に|と|の|だけ|時間	대화		50	LEX-654	factory	名詞 語らい + 조사 → 대화

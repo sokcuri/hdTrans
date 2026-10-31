@@ -18,6 +18,14 @@ namespace filter {
 class Filters;
 }
 
+namespace names {
+struct List;
+}
+
+namespace pipeline {
+struct DocumentNames;
+}
+
 namespace internal {
 struct Access;
 struct Generated;
@@ -41,6 +49,10 @@ enum class Speech {
     Strict,  // the sentence ends of the translation (간다, 학생이다); a plain question still asks in
              // 해체 (大丈夫か？ 괜찮아?)
 };
+
+// The speech levels of dialogue lines (spec/register.md): Auto writes a line that a quote opens again
+// at the level its cues give after the translation; Keep keeps the translation's own levels.
+enum class SpeechLevels { Auto, Keep };
 
 // Dictionary parsing at load time; explicit strictDict takes precedence over the config.
 struct EngineOptions {
@@ -177,23 +189,48 @@ public:
     // writes Speech::Strict.
     void SetSpeech(Speech speech) { speech_ = speech; }
 
+    // The speech levels of the dialogue lines of later translations; SpeechLevels::Auto until set.
+    // Reference mode keeps the translation's levels.
+    void SetSpeechLevels(SpeechLevels levels) { speechLevels_ = levels; }
+
     // Whether the lines of later translations may break in the middle of a sentence
     // (captions, hooked text); false until set. Wrapped, a line that ends where a sentence
     // cannot end is translated as one sentence with the lines after it, and the translation
     // is split back at the breaks, one line out for each line in.
     void SetWrapped(bool wrapped) { wrapped_ = wrapped; }
 
+    // Whether later translations read a kanji spelling of a grammatical word after a predicate as
+    // its kana (慌てた様に as 慌てたように, spec LEX-1050); true until set.
+    void SetPredicateVariants(bool on) { predicateVariants_ = on; }
+
+    // The names of the documents of later translations, as the lines of a name list
+    // (docs/api.md): JA <TAB> KO [<TAB> KIND [<TAB> OPTIONS]]. The list applies to each call
+    // on its own, beside the names the call's lines show, over the name files the engine
+    // loaded with its user dictionaries; empty text drops it. Returns false when a line is
+    // malformed or its name does not compile, each reported in errors as "LINE: message"; the
+    // other lines are kept. The list is compiled here and again when the session takes new
+    // dictionaries.
+    bool SetNames(std::string_view text, std::vector<std::string>* errors = nullptr);
+
 private:
     friend struct internal::Access;
     std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer,
                                   std::string_view context = {});
+    bool CompileNames(std::vector<std::string>* errors = nullptr);
 
     const Engine& engine_;
     const bool reference_;
     const bool cg_;
     const bool misread_;
     Speech speech_ = Speech::Strict;
+    SpeechLevels speechLevels_ = SpeechLevels::Auto;
     bool wrapped_ = false;
+    bool predicateVariants_ = true;
+    std::shared_ptr<const names::List> nameList_;
+    // The name files of generated_ and nameList_ over them, compiled for namesSnapshot_;
+    // rebuilt when snapshot_ is another.
+    std::shared_ptr<const pipeline::DocumentNames> names_;
+    std::shared_ptr<const dict::Snapshot> namesSnapshot_;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

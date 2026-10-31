@@ -1,0 +1,16 @@
+# 규칙: LEX-180
+rule	input	expected	kind	layer
+lookup:sarukotonagara	さることながら	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	さることながらの生命線は	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	その情報量はさることながら	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	覚えることもさることながら	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	足元の技術もさることながら	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	タレント自身もさることながら	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	素材もさることながら、そん２．	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	買った口紅は色もさることながら	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	威力もさることながらそのスピード	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	ただ、店の出す味もさることながら。	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	由衣は容姿もさることながら頭もいい。	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	声量もさることながら、バケモノ発言。	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	……というか、人数もさることながら。	has:물론이거니와	fix	lookup
+lookup:sarukotonagara	ストーリーはさることながら、この画力！	has:물론이거니와	fix	lookup

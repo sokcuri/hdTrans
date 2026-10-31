@@ -19,13 +19,13 @@ cx:habitual-mono:20	人のそういう所に注目して稼いでいたもので
 cx:habitual-mono:20	昔は慌てて出て行ったものだから靴を忘れた。	옛날은 황급히 나간 것이니까 구두를 잊었다.	keep	rewrites
 cx:habitual-mono:24	昔はよく遊んだもんだ。	옛날은 자주 놀곤 했다.	fix	rewrites
 cx:habitual-mono:24	しょっちゅう喧嘩したもんだ。	언제나 싸움하곤 했다.	fix	rewrites
-cx:habitual-mono:24	困ったもんだ。	곤란한 것이다.	keep	rewrites
+cx:habitual-mono:24	困ったもんだ。	곤란하다.	keep	rewrites
 cx:habitual-mono:26	昔はよく遊んだもんだった。	옛날은 자주 놀곤 했었다.	fix	rewrites
 cx:habitual-mono:26	昔はよく遊んだもんだったと思う。	옛날은 잘 논 것이었다고 생각한다.	keep	rewrites
 cx:habitual-mono:30	昔はよく遊んだもんです。	옛날은 자주 놀곤 했습니다.	fix	rewrites
 cx:habitual-mono:30	昔はよく遊んだもんだよ。	옛날은 자주 놀곤 했어.	fix	rewrites
 cx:habitual-mono:30	時々来たもんだから、慣れている。	가끔 온 것이니까, 익숙해져 있다.	keep	rewrites
-cx:habitual-mono:10	「よく昔の学生は、こんなものを着ていたものだ」	「잘 옛 학생은, 이런 걸 입고 있던 것이다」	keep	rewrites
+cx:habitual-mono:10	「よく昔の学生は、こんなものを着ていたものだ」	「잘 옛 학생은, 이런 걸 입고 있던 거야」	keep	rewrites
 cx:habitual-mono:14	この写真は昔撮ったものだ。	!rule:cx:habitual-mono:14	keep	rewrites
 cx:habitual-mono:14	これは昔、母が作ったものだ。	!rule:cx:habitual-mono:14	keep	rewrites
 cx:habitual-mono:20	昔はよく遊んだものだね。	!rule:cx:habitual-mono:20	keep	rewrites

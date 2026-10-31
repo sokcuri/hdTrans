@@ -1,0 +1,28 @@
+# 규칙: GRM-148
+rule	input	expected	kind	layer
+cx:lc2d-kotoni:10	「ありがたいことに、そう言われますね」	has:고맙게도	fix	rewrites
+cx:lc2d-kotoni:10	運の悪いことに、結美に限界がやって来た。	has:나쁘게도	fix	rewrites
+cx:lc2d-kotoni:10	悲しいことに、私の読みが当たってしまった。	has:슬프게도	fix	rewrites
+cx:lc2d-kotoni:10	恥ずかしいことに、ぼくの手足は震えていた。	has:부끄럽게도	fix	rewrites
+cx:lc2d-kotoni:10	悲しいことに、彼の警戒に意味はまったくない。	has:슬프게도	fix	rewrites
+cx:lc2d-kotoni:20	さらに不思議なことに、	has:이상하게도	fix	rewrites
+cx:lc2d-kotoni:20	不幸なことに、そうだった。	has:불행하게도	fix	rewrites
+cx:lc2d-kotoni:20	不思議なことに、萎えはしなかった。	has:이상하게도	fix	rewrites
+cx:lc2d-kotoni:20	不思議なことに、分かんないらしいんだよね。	has:이상하게도	fix	rewrites
+cx:lc2d-kotoni:20	だが、不思議なことに、居心地は悪くなかった。	has:이상하게도	fix	rewrites
+cx:lc2d-kotoni:30	意外なことに、リコラに驚きはなかった。	has:뜻밖에도	fix	rewrites
+cx:lc2d-kotoni:30	意外なことに、国道は渋滞はしていなかった。	has:뜻밖에도	fix	rewrites
+cx:lc2d-kotoni:30	意外なことに、娘はお花見が大好きだったりする。	has:뜻밖에도	fix	rewrites
+cx:lc2d-kotoni:30	意外なことに、その質問をしたのはマスターだった。	has:뜻밖에도	fix	rewrites
+cx:lc2d-kotoni:30	意外なことに、ルーティもそこまで手を抜いていないようだ。	has:뜻밖에도	fix	rewrites
+cx:lc2d-kotoni:31	幸運なことに、後ろの席はメイだった。	has:운 좋게도	fix	rewrites
+cx:lc2d-kotoni:31	しかし、幸運なことに、霧矢はある電話番号を手に入れていた。	has:운 좋게도	fix	rewrites
+cx:lc2d-kotoni:31	幸運なことに、全てのパンが焼きたてであったので、クーリアは嬉嬉として好きなパンを選んだ。	has:운 좋게도	fix	rewrites
+cx:lc2d-kotoni:10	当たらないことに、安堵した。	!rule:cx:lc2d-kotoni:10	keep	rewrites
+cx:lc2d-kotoni:10	私はユリのために祈ることにした。	!rule:cx:lc2d-kotoni:10	keep	rewrites
+cx:lc2d-kotoni:20	……大変なことに、なってしまった。	!rule:cx:lc2d-kotoni:20	keep	rewrites
+cx:lc2d-kotoni:20	嬉しいことに、食欲が戻ってきたみたいだ。	!rule:cx:lc2d-kotoni:20	keep	rewrites
+cx:lc2d-kotoni:30	ノートは諦めて遊んでやることにする。	!rule:cx:lc2d-kotoni:30	keep	rewrites
+cx:lc2d-kotoni:30	頼れる大人がいないことに、ジオはちょっと泣けてきた。	!rule:cx:lc2d-kotoni:30	keep	rewrites
+cx:lc2d-kotoni:31	何も得られないことに、苛立ちが募ってるのかも。	!rule:cx:lc2d-kotoni:31	keep	rewrites
+cx:lc2d-kotoni:31	こんな大事なことに、どうして今まで気づかなかったんだろうか？	!rule:cx:lc2d-kotoni:31	keep	rewrites

@@ -1,0 +1,26 @@
+# 규칙: GRM-169
+rule	input	expected	kind	layer
+cx:lc2e-douka:10	それもどうかと思う	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:10	アレはどうかと思う。	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:10	最後のはどうかと思う。	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:10	「俺もどうかと思う。」	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:10	ボクをどうか助けて・・・下さ	!rule:cx:lc2e-douka:10	keep	rewrites
+cx:lc2e-douka:10	だがどうか許してくれ。	!rule:cx:lc2e-douka:10	keep	rewrites
+cx:lc2e-douka:20	︽お主の主人愛も、どうかと思うときがあるのう。	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:20	僕なんかが偉そうに言うのも、どうかと思うけど・・。	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:20	それで強くないって発言はちょっと、どうかと思うけどね」	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:20	「レースと麻雀を一緒にするのは、どうかと思いますけどね」	has:어떨까 하고	fix	rewrites
+cx:lc2e-douka:20	どうかお願いですから。	!rule:cx:lc2e-douka:20	keep	rewrites
+cx:lc2e-douka:20	喜びすぎて死者が出るかと思うほどだ。	!rule:cx:lc2e-douka:20	keep	rewrites
+cx:lc2e-douka:30	世界が反転したかと思うほど、ぐらりと揺れた。	has:반전했나 하고 생각할 정도로,	fix	rewrites
+cx:lc2e-douka:30	絵は、兄の魂がそこに乗り移ったかと思うほど、温かかった。	has:갈아탔나 하고 생각할 정도로,	fix	rewrites
+cx:lc2e-douka:30	何処からそんな声を出してるのかと思うほど二人の声は大きい。	has:있나 하고 생각할 정도로	fix	rewrites
+cx:lc2e-douka:30	木箱の中身は夜の風景を切り取ったかと思うほど、真っ暗で何も無かった。	has:잘라냈나 하고 생각할 정도로,	fix	rewrites
+cx:lc2e-douka:30	「ど、どうか……どうかお願いします」	!rule:cx:lc2e-douka:30	keep	rewrites
+cx:lc2e-douka:40	山の民の視力は鷹かと思うほどだからな。	has:생각할 정도니까	fix	rewrites
+cx:lc2e-douka:40	僕は、本当、どうかしてる。	!rule:cx:lc2e-douka:40	keep	rewrites
+cx:lc2e-douka:45	一周回ってダサいと思うほど。	has:생각할 정도로.	fix	rewrites
+cx:lc2e-douka:45	死ぬかと思うほど体育館が寒い。	has:죽을까 하고 생각할 정도로	fix	rewrites
+cx:lc2e-douka:45	死ぬかと思う程腹が苦しかった。	has:죽을까 하고 생각할 정도로	fix	rewrites
+cx:lc2e-douka:45	心臓が止まるかと思うほど驚いた。	has:멈출까 하고 생각할 정도로	fix	rewrites
+cx:lc2e-douka:45	央がいるのに……どうかしてる。	!rule:cx:lc2e-douka:45	keep	rewrites

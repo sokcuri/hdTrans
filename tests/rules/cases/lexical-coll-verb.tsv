@@ -1,0 +1,24 @@
+# 규칙: LEX-150
+rule	input	expected	kind	layer
+lexical:coll-verb	「どうしたんだ、由弦。急にため息などついて」	has:한숨 등 쉬어	fix	senses
+lexical:coll-verb	「どうしたの？　ため息なんかついちゃって」	has:쉬어	fix	senses
+lexical:coll-verb	スバルはもう何度目になるかわからないため息をついた。	has:한숨을 쉬었다	keep	lookup
+cx:coll-verb:80	「けじめ、つけたいから……」	「매듭, 짓고 싶으니까……」	fix	rewrites
+cx:coll-verb:80	「でも……けじめ、つけないと……」	has:매듭, 짓지 않으면	fix	rewrites
+lexical:coll-verb	ただ……最低限のケジメはつけたい。	has:매듭은 짓고 싶다	fix	senses
+lexical:coll-verb	悪いことは確かだから、ちゃんとけじめをつけなきゃ。	has:매듭을 지어야	fix	senses
+lexical:coll-verb	「だから、けじめとか言われて」	lacks:매듭	keep	senses
+lexical:coll-verb	気をつけないと危険だぞ。	has:조심하지 않으면	keep	lookup
+cx:coll-verb:20	文明の波に揉まれてきた俺にはちょっと……	has:물결에 휩쓸려 온	fix	rewrites
+cx:coll-verb:20	絶頂の荒波に揉まれて、	has:파도에 휩쓸려	fix	rewrites
+cx:coll-verb:20	「もももも揉まれてないですっ！」	!rule:cx:coll-verb:20	keep	rewrites
+cx:coll-verb:20	肩を揉まれて眠くなった。	!rule:cx:coll-verb:20	keep	rewrites
+cx:coll-verb:60	夢ばかり見ていたのだから、	has:꿈만 꾸고 있었	fix	rewrites
+cx:coll-verb:60	眠ると必ず見る嫌な夢は見なかった。	has:꿈은 꾸지 않았다	fix	rewrites
+cx:coll-verb:60	逆に楽しい夢も見なかったけれど、	has:꿈도 꾸지 않았	fix	rewrites
+cx:coll-verb:60	「死に際に変な夢でも見てるってこと？」	has:꿈이라도 꾸고 있다	fix	rewrites
+cx:coll-verb:60	夢にまで見た、オールヌード……	!rule:cx:coll-verb:60	keep	rewrites
+cx:coll-verb:60	毎日この光景を夢で見る。	!rule:cx:coll-verb:60	keep	rewrites
+cx:coll-verb:60	「それに、みいちゃんにしてもらえるなんて、夢みたいで……」	has:꿈 같	keep	rewrites
+cx:coll-verb:80	けじめとして、テレビをつけた	has:텔레비전을 켰다	keep	rewrites
+cx:coll-verb:80	最低限のケジメはつけたい。	!rule:cx:coll-verb:80	keep	rewrites

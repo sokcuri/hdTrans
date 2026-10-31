@@ -1,0 +1,16 @@
+#! layer=pack
+# 주어, 목적어, 꾸밈 대상에 따라 고르는 동사와 형용사의 뜻
+id	lemma	pos	slot	kind	cond	target	agent	pri	spec	prov	note
+fall-verbs:1	伸びる	v1	sense	frame	subj=悲鳴|叫び声	퍼지다		50	LEX-501	audit	伸びる subj=悲鳴|叫び声 → 퍼지다
+fall-verbs:12	伸びる	v1	sense	frame	subj=声|歌声	뻗다		50	LEX-501	audit	伸びる subj=声|歌声 → 뻗다
+fall-verbs:2	なくなる	v5	sense	frame	subj=婚約	깨지다		50	LEX-502	audit	なくなる subj=婚約 → 깨지다
+fall-verbs:13	なくなる	v5	sense	frame	subj=縁談|約束|契約|予定	없어지다		50	LEX-502	audit	なくなる subj=縁談|約束|契約|予定 → 없어지다
+fall-verbs:3	進む	v5	sense	frame	subj=ビール|酒|お酒|ワイン|日本酒|焼酎	잘 들어가다		50	LEX-503	audit	進む subj=ビール|酒|お酒|ワイン|日本酒|焼酎 → 잘 들어가다
+fall-verbs:4	騒がせる	v1	sense	frame	obj=社交界|世間|世の中|巷	떠들썩하게 하다		50	LEX-505	audit	騒がせる obj=社交界|世間|世の中|巷 → 떠들썩하게 하다
+fall-verbs:5	通る	v5	sense	frame	head=声	들리다		50	LEX-506	audit	通る head=声 → 들리다
+fall-verbs:6	通る	v5	sense	frame	subj=声	들리다		50	LEX-506	audit	通る subj=声 → 들리다
+fall-verbs:7	絞られる	v1	sense	frame	dat=陛下|上司|父さん|父|先生|親|王様|母|母さん|師匠 obj=-	혼나다		50	LEX-508	audit	絞られる dat=陛下|上司|父さん|父|先生|親|王様|母|母さん|師匠 obj=- → 혼나다
+fall-verbs:8	甘い	adj	sense	frame	head=疼き|快感|刺激	달콤하다		50	LEX-509	audit	甘い head=疼き|快感|刺激 → 달콤하다
+fall-verbs:9	火蓋が切られる	v1	sense	colloc	{X}の火蓋が切られる	{X}의 막이 오르다		60	LEX-510	audit	{X}の火蓋が切られる → {X}의 막이 오르다
+fall-verbs:10	火蓋を切る	v5	sense	colloc	{X}の火蓋を切る	{X}의 포문을 열다		60	LEX-510	audit	{X}の火蓋を切る → {X}의 포문을 열다
+fall-verbs:11	気取る	v5	sense	frame	obj=リーダー|チームリーダー|天才|主人公|ヒーロー|ヒロイン|正義の味方|英雄|紳士|探偵|一匹狼|傍観者|保護者	자처하다		50	LEX-511	audit	気取る obj=リーダー|チームリーダー|天才|主人公|ヒーロー|ヒロイン|正義の味方|英雄|紳士|探偵|一匹狼|傍観者|保護者 → 자처하다

@@ -1,0 +1,30 @@
+# 규칙: LEX-92
+rule	input	expected	kind	layer
+cx:nado-dismissive:50	「大丈夫ですよ、あんなのタダの脅しです。退学になんかならないですよ」	rule:cx:nado-dismissive:50= 따위	fix	rewrites
+cx:nado-dismissive:55	「真面目な子なんだから、不良になんかならないよ！」	rule:cx:nado-dismissive:55= 따위	fix	rewrites
+cx:nado-dismissive:55	これでワクワクしないやつはニートになんかならない。	rule:cx:nado-dismissive:55= 따위	fix	rewrites
+cx:nado-dismissive:55	「……おまえたちの餌になんかならないぞ。」	rule:cx:nado-dismissive:55= 따위	fix	rewrites
+cx:nado-dismissive:55	「おまえは悪魔になんかならないって。」	rule:cx:nado-dismissive:55= 따위	fix	rewrites
+cx:nado-dismissive:50	「邪魔になんかなるはずないよっ！」	「방해 따위가 될 리가 없어!」	fix	rewrites
+cx:nado-dismissive:50	ただ、個を殺してまで王になんてなりたくない。	rule:cx:nado-dismissive:50= 따위	fix	rewrites
+cx:nado-dismissive:60	部室になんか行く暇なんてない。	rule:cx:nado-dismissive:60= 따위	fix	rewrites
+cx:nado-dismissive:60	「おまえの下着の色になんか興味はない。好きにしろ」	has:색 따위에 흥미는 없다	fix	rewrites
+cx:nado-dismissive:60	「こんな所で諦めるくらいなら、最初から救出になんか来てないもん！」	rule:cx:nado-dismissive:60= 따위	fix	rewrites
+cx:nado-dismissive:60	「最初から救出になんて来てないもん」	rule:cx:nado-dismissive:60= 따위	fix	rewrites
+cx:nado-dismissive:60	「そんな痛みになんか負けてられない！」	rule:cx:nado-dismissive:60= 따위	fix	rewrites
+cx:nado-dismissive:60	絶対、脅しになんか屈しない――	rule:cx:nado-dismissive:60= 따위	fix	rewrites
+cx:nado-dismissive:60	「……で？　俺になんか話があるんだろ？」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	「……あと……他になんかあった？」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	「もしも、そんなことになったら、あんたは彼女になんて言うつもり？」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	「先生になんて言った！？」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	それに死ぬ前になんて言わないで。	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	「破談になんてしませんっ」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	「……絶対……退学になんかさせないから」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:50	ライブが延期になんてなったら、どれほど落胆するか。	!rule:cx:nado-dismissive:50	keep	rewrites
+cx:nado-dismissive:60	「例えばさ、工事中になんかあったとか。事故とか。」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	どうもあの人、図書部になんかやってほしいみたいなんだ	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	「危ない目になんか、遭わせるはずないだろっ」	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:60	部室になんか行かない人もいる。	!rule:cx:nado-dismissive:60	keep	rewrites
+cx:nado-dismissive:50	退学になんかならないように気をつけて。	!rule:cx:nado-dismissive:50	keep	rewrites
+cx:nado-dismissive:55	「不良になんかならないよね？」	!rule:cx:nado-dismissive:55	keep	rewrites
+cx:nado-dismissive:55	そこで遊んでいてはならない。	!rule:cx:nado-dismissive:55	keep	rewrites

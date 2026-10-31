@@ -21,6 +21,7 @@
 #include "core/engine/user_watch.h"
 #include "core/filter/ehnd.h"
 #include "core/filter/filter.h"
+#include "core/names/list.h"
 #include "core/output/families.h"
 #include "core/userdict/conjugating.h"
 #include "core/text/lines.h"
@@ -42,6 +43,7 @@ struct MemoryInput {
     bool strictEhndOverride = false;
     std::optional<bool> usersStrictOverride;
     std::optional<bool> folderStrictOverride;
+    std::vector<filter::Source> host;  // SetHostUserDicts
 };
 
 // The filters of the prefilter and postfilter files of a snapshot and of an Ehnd folder.
@@ -89,13 +91,15 @@ dict::LoadFileKind FilterFileKind(const filter::Source& source, bool memory) {
     case Kind::SkipLayer:
         return memory ? FileKind::MemoryEhndSkipLayer : FileKind::EhndSkipLayer;
     case Kind::UserDict:
-        return memory ? FileKind::MemoryEhndUserDict : FileKind::EhndUserDict;
+        return source.host ? FileKind::HostUserDict : memory ? FileKind::MemoryEhndUserDict : FileKind::EhndUserDict;
     }
     return FileKind::Shipped;
 }
 
-// The filters of snap and of one Ehnd input (none when empty).
+// The filters of snap, of the host program's user dictionaries and of one Ehnd input (none
+// when empty).
 FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool strict,
+                       const std::vector<filter::Source>& host,
                        const std::optional<std::vector<EhndFile>>& memory = {}, bool memoryStrict = true,
                        bool explicitPath = true, const std::optional<dict::UserSource>& known = {}) {
     FilterLoad out;
@@ -110,6 +114,7 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool 
         sources.push_back({kind, f.name, std::string(dict::internal::WithoutHeader(f.text)), true});
         if (f.user) userFilters.insert_or_assign(f.name, f.strict);
     }
+    sources.insert(sources.end(), host.begin(), host.end());
     if (memory) {
         std::vector<filter::Source> added;
         for (const EhndFile& file : *memory) {
@@ -166,6 +171,7 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool 
         remember(rows);
         std::unordered_set<std::string> failed;
         for (const auto& source : sources) {
+            if (source.host) continue;
             if (source.native) {
                 const auto policy = userFilters.find(source.name);
                 if (policy == userFilters.end() || !policy->second) continue;
@@ -182,7 +188,7 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool 
             out.filters = std::move(built);
             for (std::size_t i = 0; i < sources.size(); ++i) {
                 std::string path = sources[i].name;
-                if (!sources[i].native && !memory) {
+                if (!sources[i].native && !sources[i].host && !memory) {
                     const auto folder = std::filesystem::path(std::u8string(
                         reinterpret_cast<const char8_t*>(dir.data()), dir.size()));
                     const auto name = std::filesystem::path(std::u8string(
@@ -256,6 +262,61 @@ std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {
     return generated;
 }
 
+namespace {
+
+// The name lists of version, read and compiled for snap; null when they hold no name. A file that
+// cannot be read, a malformed line and a name that does not compile are reported in errors and
+// left out.
+std::shared_ptr<const pipeline::DocumentNames> LoadNameFiles(const dict::Snapshot& snap, const UserVersion& version,
+                                                 std::vector<dict::LoadError>& errors) {
+    if (version.names.empty()) return nullptr;
+    const auto lineError = [&errors](const std::string& file, std::string_view text) {
+        // text is "LINE: message".
+        int line = 0;
+        std::size_t i = 0;
+        while (i < text.size() && text[i] >= '0' && text[i] <= '9') line = line * 10 + (text[i++] - '0');
+        if (text.substr(i).starts_with(": ")) i += 2;
+        errors.push_back({file, dict::LoadErrorKind::UserRow, line, dict::TsvErrorKind::Read, std::string(text.substr(i))});
+    };
+    names::List all;
+    for (const auto& [path, stamp] : version.names) {
+        std::string text;
+        if (!stamp.present || !dict::ReadUserFile(path, text)) {
+            errors.push_back({path, dict::LoadErrorKind::UserRow, 0, dict::TsvErrorKind::Read, "cannot read the name list"});
+            continue;
+        }
+        if (!dict::internal::ValidUtf8(text)) {
+            errors.push_back({path, dict::LoadErrorKind::UserRow, 0, dict::TsvErrorKind::Read, "invalid UTF-8"});
+            continue;
+        }
+        names::List list;
+        std::vector<std::string> parseErrors;
+        names::ParseList(text, list, &parseErrors, path);
+        for (const std::string& error : parseErrors) lineError(path, error);
+        names::Merge(all, list);
+    }
+    if (all.names.empty()) return nullptr;
+    std::unique_ptr<pipeline::DocumentNames> compiled;
+    std::vector<std::string> compileErrors;
+    if (!pipeline::CompileNames(snap, all, compiled, &compileErrors)) {
+        // The names that compiled, without the rows that failed.
+        all = compiled->list;
+        pipeline::CompileNames(snap, all, compiled);
+    }
+    for (const std::string& error : compileErrors) {
+        // error is "FILE:LINE: message".
+        const auto file = std::find_if(version.names.begin(), version.names.end(), [&](const auto& f) {
+            return error.starts_with(f.first + ":");
+        });
+        if (file == version.names.end()) continue;
+        lineError(file->first, std::string_view(error).substr(file->first.size() + 1));
+    }
+    if (compiled->list.names.empty()) return nullptr;
+    return compiled;
+}
+
+}  // namespace
+
 struct Access {
     static bool Reference(const Engine& e) { return e.reference_; }
     static std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
@@ -267,7 +328,8 @@ struct Access {
     static bool Finish(Engine& e, std::uint64_t ticket, const UserVersion& version, dict::LoadResult r,
                        std::vector<dict::LoadError> userErrors, FilterLoad filters, bool keepFailed,
                        MemoryInput memory, const dict::UserSource& ehndSource,
-                       const std::vector<dict::UserSource>& requested) {
+                       const std::vector<dict::UserSource>& requested,
+                       std::shared_ptr<const pipeline::DocumentNames> nameFiles) {
         if (ticket < e.current_) return Loaded(r);
         UserWatch& w = *e.watch_;
         const bool filterFailed = !filters.read || !filters.valid;
@@ -334,6 +396,7 @@ struct Access {
         e.current_ = ticket;
         e.snapshot_ = std::move(r.snapshot);
         e.generated_ = NewGenerated(*e.snapshot_);
+        e.generated_->nameFiles = std::move(nameFiles);
         e.filters_ = std::move(filters.filters);
         e.filterErrors_ = std::move(filters.errors);
         w.ehnd.loaded = std::move(filters.version);
@@ -417,7 +480,8 @@ struct Access {
             failed.version = FolderVersionOf(dir);
             return failed;
         }
-        return LoadFilters(r.snapshot.get(), dir, strict, memory.ehnd, verify || memory.strictEhnd, source.explicitPath, known);
+        return LoadFilters(r.snapshot.get(), dir, strict, memory.host, memory.ehnd, verify || memory.strictEhnd,
+                           source.explicitPath, known);
     }
 
     static bool Load(Engine& e, const std::vector<std::string>& dirs, bool verify,
@@ -444,7 +508,8 @@ struct Access {
             revision = e.watch_->optionsRevision;
             accepted = e.watch_->acceptedSources;
             memory = {e.watch_->memoryUser, e.watch_->memoryEhnd, e.watch_->memoryEhndStrict,
-                      e.watch_->memoryEhndStrictOverride, e.watch_->userStrictOverride, e.watch_->ehndStrictOverride};
+                      e.watch_->memoryEhndStrictOverride, e.watch_->userStrictOverride, e.watch_->ehndStrictOverride,
+                      e.watch_->hostUserDicts};
         }
         const UserVersion version = UserVersionOf(requested, options.configPath, revision);
         const ConfigResult config = suppliedConfig ? *suppliedConfig :
@@ -481,6 +546,7 @@ struct Access {
         const bool cacheWrite = e.cacheWrite_ == CacheWrite::Sync;
         std::vector<dict::LoadError> userErrors;
         dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
+        auto nameFiles = Loaded(r) ? LoadNameFiles(*r.snapshot, version, userErrors) : nullptr;
         FilterLoad filters = FiltersOf(r, ehnd, ehndStrict, memory, knownEhnd, verify);
         if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
             UserVersionOf(requested, options.configPath, revision) != version) {
@@ -490,7 +556,7 @@ struct Access {
         }
         std::lock_guard<std::mutex> lock(e.mu_);
         if (!Finish(e, ticket, version, std::move(r), std::move(userErrors), std::move(filters), active || !open,
-                    std::move(memory), ehnd, requested)) return false;
+                    std::move(memory), ehnd, requested, std::move(nameFiles))) return false;
         if (open && ticket == e.current_) {
             e.dirs_ = dirs;
             e.verifyDicts_ = verify;
@@ -527,7 +593,8 @@ struct Access {
                                     knownEhnd = w.acceptedEhnd, options = w.options,
                                     revision = w.optionsRevision, accepted = w.acceptedSources,
                                     memory = MemoryInput{w.memoryUser, w.memoryEhnd, w.memoryEhndStrict,
-                                        w.memoryEhndStrictOverride, w.userStrictOverride, w.ehndStrictOverride},
+                                        w.memoryEhndStrictOverride, w.userStrictOverride, w.ehndStrictOverride,
+                                        w.hostUserDicts},
                                     cacheWrite = e.cacheWrite_ == CacheWrite::Sync]() mutable {
             const UserVersion version = UserVersionOf(paths, options.configPath, revision);
             const ConfigResult config = options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
@@ -537,6 +604,7 @@ struct Access {
             const bool ehndStrict = verify || memory.folderStrictOverride.value_or(baseStrict);
             std::vector<dict::LoadError> userErrors;
             dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
+            auto nameFiles = Loaded(r) ? LoadNameFiles(*r.snapshot, version, userErrors) : nullptr;
             FilterLoad filters = FiltersOf(r, ehndSource, ehndStrict, memory, knownEhnd, verify);
             if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
                 UserVersionOf(paths, options.configPath, revision) != version) {
@@ -549,7 +617,7 @@ struct Access {
             Engine& engine = *target->engine;
             std::lock_guard<std::mutex> lock(engine.mu_);
             Finish(engine, ticket, version, std::move(r), std::move(userErrors), std::move(filters), true,
-                   std::move(memory), ehndSource, paths);
+                   std::move(memory), ehndSource, paths, std::move(nameFiles));
             engine.watch_->running = false;
             engine.watch_->done.notify_all();
         });
@@ -610,6 +678,11 @@ struct Access {
         return e.watch_->acceptedSources;
     }
 
+    static void SetHost(Engine& e, std::vector<filter::Source> sources) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        e.watch_->hostUserDicts = std::move(sources);
+    }
+
     static void SeedSources(Engine& e, std::vector<dict::UserSource> sources,
                             std::optional<dict::UserSource> ehnd = {}) {
         std::lock_guard<std::mutex> lock(e.mu_);
@@ -657,6 +730,7 @@ struct Access {
             std::shared_ptr<const dict::Snapshot> snap;
             EngineOptions options;
             std::optional<dict::UserSource> known;
+            std::vector<filter::Source> host;
             bool verify;
             std::uint64_t ticket;
             {
@@ -672,13 +746,14 @@ struct Access {
                 snap = e.snapshot_;
                 options = e.watch_->options;
                 known = e.watch_->acceptedEhnd;
+                host = e.watch_->hostUserDicts;
                 verify = e.verifyDicts_;
             }
             const FileVersion version = VersionOf(options.configPath);
             const ConfigResult config = suppliedConfig ? *suppliedConfig :
                 options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
             const bool strict = verify || local.strict.value_or(StrictDict(options, verify, config));
-            FilterLoad filters = LoadFilters(snap.get(), dir, strict, {}, true, explicitPath, known);
+            FilterLoad filters = LoadFilters(snap.get(), dir, strict, host, {}, true, explicitPath, known);
             if ((!options.configPath.empty() && !ConfigMatches(config, version)) ||
                 VersionOf(options.configPath) != version) {
                 filters.read = false;
@@ -739,6 +814,14 @@ std::vector<dict::UserSource> AcceptedUserSources(const Engine& e, std::optional
 
 void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources, std::optional<dict::UserSource> ehnd) {
     Access::SeedSources(e, std::move(sources), std::move(ehnd));
+}
+
+void SetHostUserDicts(Engine& e, std::vector<filter::Source> sources) {
+    for (auto& source : sources) {
+        source.kind = filter::Source::Kind::UserDict;
+        source.host = true;
+    }
+    Access::SetHost(e, std::move(sources));
 }
 
 bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,
@@ -924,6 +1007,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
                                        std::string_view context) {
     if (engine_.watch_->automatic) internal::Access::Refresh(engine_, snapshot_, generated_, filters_);
     if (!snapshot_) return {};
+    if (namesSnapshot_ != snapshot_) static_cast<void>(CompileNames());
     std::vector<std::string> lines;
     std::size_t contextLines = 0;
     // One "\n" that ends the context ends its last line.
@@ -938,7 +1022,10 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     options.wordImprovements.cgRules = cg_;
     options.wordImprovements.misreadFilter = misread_;
     options.speech = speech_;
+    options.speechLevels = speechLevels_;
     options.wrapped = wrapped_;
+    options.wordImprovements.predicateVariants = predicateVariants_;
+    options.names = names_.get();
     options.filters = filters_.get();
     const std::vector<std::string> translated =
         internal::TranslateDocument(*snapshot_, *generated_, lines, observer, options, contextLines);
@@ -948,6 +1035,34 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
         out += translated[i];
     }
     return out;
+}
+
+bool Session::SetNames(std::string_view text, std::vector<std::string>* errors) {
+    auto list = std::make_shared<names::List>();
+    const bool ok = names::ParseList(text, *list, errors);
+    names_.reset();
+    namesSnapshot_.reset();
+    nameList_.reset();
+    if (!list->names.empty()) nameList_ = std::move(list);
+    return CompileNames(errors) && ok;
+}
+
+bool Session::CompileNames(std::vector<std::string>* errors) {
+    if (!snapshot_) return true;
+    namesSnapshot_ = snapshot_;
+    names_.reset();
+    const auto& files = generated_ ? generated_->nameFiles : nullptr;
+    if (!nameList_) {
+        names_ = files;
+        return true;
+    }
+    names::List merged;
+    if (files) merged = files->list;
+    names::Merge(merged, *nameList_);
+    std::unique_ptr<pipeline::DocumentNames> compiled;
+    const bool ok = pipeline::CompileNames(*snapshot_, merged, compiled, errors);
+    names_ = std::move(compiled);
+    return ok;
 }
 
 void Session::Reset() {
@@ -962,6 +1077,14 @@ namespace internal {
 std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
                               std::string_view context) {
     return Access::TranslateObserved(session, text, observer, context);
+}
+
+std::shared_ptr<const pipeline::DocumentNames> NameFiles(const Engine& e) {
+    std::shared_ptr<const dict::Snapshot> snap;
+    std::shared_ptr<Generated> generated;
+    std::shared_ptr<const filter::Filters> filters;
+    Access::Current(e, snap, generated, filters);
+    return generated ? generated->nameFiles : nullptr;
 }
 
 std::string TranslateRaw(const Engine& e, std::string_view line) {

@@ -81,6 +81,16 @@ HD_TEST(kana_katakana_cases) {
     HD_CHECK_EQ(Katakana("シングル"), std::string("싱글"));
     HD_CHECK_EQ(Katakana("シャングリラ"), std::string("샹그리라"));
     HD_CHECK_EQ(Katakana("ロングソード"), std::string("롱소드"));
+    // ッ before ク, グ, プ or ブ and a ル that ends the word adds no final (LEX-1); ルー, a sound said
+    // again and a ル before a vowel or ン keep the ッ.
+    HD_CHECK_EQ(Katakana("ピックル"), std::string("피클"));
+    HD_CHECK_EQ(Katakana("ピックルボール"), std::string("피클볼"));
+    HD_CHECK_EQ(Katakana("ブレイジングナックルッ"), std::string("브레이징나클"));
+    HD_CHECK_EQ(Katakana("ストラッグル"), std::string("스트라글"));
+    HD_CHECK_EQ(Katakana("バックルーム"), std::string("박크루무"));
+    HD_CHECK_EQ(Katakana("ブルッブル"), std::string("브룹블"));
+    HD_CHECK_EQ(Katakana("グッグルル"), std::string("국룰"));
+    HD_CHECK_EQ(Katakana("アップルン"), std::string("압룬"));
 }
 
 HD_TEST(kana_hiragana_cases) {

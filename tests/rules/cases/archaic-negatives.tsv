@@ -23,7 +23,7 @@ ending:書きませぬぞ	「百姓どもにも、いつまでも家を離れて
 ending:書かぬぞ	まだまだ…この程度では沈まぬぞ！	아직도…이 정도로는 가라앉지 않는다!	fix	builtin-ending
 ending:書かぬぞ	「今でも構わぬぞ」	「지금도 상관하지 않는다」	fix	builtin-ending
 ending:書かぬぞ	「愛という概念か。なおさら、理解はできぬ」	「사랑이라는 개념인가. 더욱더, 이해는 할 수 없다」	keep	builtin-ending
-ending:書くべし	「魔王を倒すべし！」	「마왕을 쓰러뜨려야 한다!」	fix	builtin-ending
+ending:書くべし	「魔王を倒すべし！」	「마왕을 쓰러뜨려야 해!」	fix	builtin-ending
 ending:書くべし	罪人は罰せられるべし。	죄인은 죄받아야 한다.	fix	builtin-ending
 ending:書くべし	行くべし。	가야 한다.	fix	builtin-ending
 ending:書くべし	戦うべきだ。	싸워야 한다.	keep	builtin-ending

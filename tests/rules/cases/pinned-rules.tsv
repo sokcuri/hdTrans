@@ -17,7 +17,7 @@ sense:高い	その服は高くないですよ。	그 옷은 비싸지 않아요
 sense:話す	私は日本語を話すことができます。	저는 일본어를 할 수가 있습니다.	current	senses
 dict:jisjk:202389	台風による被害が大きかった。	태풍에 의한 피해가 컸다.	current	local-ending
 dict:jisjk:257566	ひが昇る。	rule:dict:jisjk:257566=히	current	local
-dict:jisjk:260433	大変なことになった。	rule:dict:jisjk:260433=것이 &C6@	current	local
+dict:jisjk:260433	大事なことになった。	rule:dict:jisjk:260433=것이 &C6@	current	local
 sense:入れる	お茶を入れます？	차를 끓입니까?	current	senses
 dict:jisjk:342916	彼がそんなことを言うなんてあり得ない。	그가 그런 말을 한다고 있을 수 없다.	current	local-ending
 dict:jisjk:263220	学生として、ルールは守ります。	rule:dict:jisjk:263220=(으)로서	current	local
@@ -26,7 +26,7 @@ dict:jisjk:265691	それって本物じゃねえ？	그거 진짜가 아니야?	
 dict:jisjk:264467	って、それ本当なの？	rule:dict:jisjk:264467=라고	current	local
 dict:jisjk:264720	寿司を自分で握ったこともあるんだ。	스시를 스스로 만든 적도 있는 거야.	current	local-ending
 dict:jisjk:265190	彼に助けてもらえない。	rule:dict:jisjk:265190=주지 $DH@	current	local
-dict:jisjk:375124	明日は晴れるのか気になる。	rule:dict:jisjk:375124=마음이 생&A2@	current	local
+dict:jisjk:375124	一緒に行く気になった。	rule:dict:jisjk:375124=마음이 생&A2@	current	local
 dict:jisjk:116695	ここでは写真を撮ってはいけません。	rule:dict:jisjk:116695=안 &C6@	current	local
 dict:jisjk:268431	試験に向けて毎日頑張ります。	rule:dict:jisjk:268431=(을)를 향&AV@	current	local
 dict:jisjk:266938	私も彼がするようにできる。	나도 그가 하도록 할 수 있다.	current	local-ending
@@ -75,7 +75,7 @@ sense:見かける	駅で先生をお見かけしました。	역에서 선생�
 dict:jisjk:3829	裏の通りを歩く。	뒤의 거리를 걷는다.	fix	local
 dict:jisjk:4904	料理をうまい方法で作った。	요리를 능숙한 방법으로 만들었다.	fix	local
 dict:jisjk:5289	子供にやさしい先生です。	아이에게 다정한 선생님입니다.	fix	local
-cx:benefactive-provider:10	だれに話してもらう。	누가 이야기해 준다.	fix	rewrites
+cx:benefactive-provider:10	だれに話してもらう。	누가 이야기해 주나.	fix	rewrites
 dict:jisjk:80454	基本は一通り学んだ。	기본은 한 차례 배웠다.	fix	local
 dict:jisjk:92227	彼はいつも気をつけます。	그는 언제나 조심합니다.	fix	local
 dict:jisjk:115623	これは金と言う金属です。	이것은 금이라는 금속입니다.	fix	local

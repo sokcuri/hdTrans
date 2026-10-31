@@ -14,6 +14,7 @@
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/constraint_rules.h"
+#include "core/word/conjugation.h"
 #include "core/word/worker.h"
 
 namespace hdTrans::word {
@@ -87,6 +88,12 @@ constexpr ConstraintRule kRules[] = {
      "て, で 바로 뒤에서 た가 이어지는 い는 いい의 어간이 아니라 いる (待っていたって 기다려도 좋아도 → 기다리고 있어도)", {}},
     {"hashi-before-te", ConstraintWord::Source, "はし", ConstraintContext::AfterWordBeforeTe, ConstraintReject::Word,
      "앞에 말이 있고 て가 바로 이어지는 はし는 箸나 橋가 아니라 は와 する의 て형 (感じはしていた 느낌 젓가락이라고 있었다 → 느낌은 하고 있었다)", {}},
+    {"tara-before-shii", ConstraintWord::EndsInSource, "たら", ConstraintContext::BeforeShii, ConstraintReject::Word,
+     "しい, しく, しかっ 앞에서 たら로 끝나는 말은 쓰지 않음: 그 ら는 らしい의 첫 글자 (気付いたらしい 정신을 차려 보니 해 있고 → 눈치챈 것 같다, 気がついたらしく)", {}},
+    {"runa-before-ra", ConstraintWord::EndsInSource, "るな", ConstraintContext::BeforeRa, ConstraintReject::Word,
+     "ら 앞에서 るな로 끝나는 말은 금지가 아니라 동사와 조건 なら (気にするなら 신경 쓰지 마들 → 신경 쓴다면)", {}},
+    {"shika-before-negative", ConstraintWord::Source, "しかし", ConstraintContext::AfterWordBeforeNegative, ConstraintReject::Word,
+     "앞에 말이 있고 부정 어미가 바로 이어지는 しかし는 접속사 하지만이 아니라 しか와 する의 부정 (予感しかしない 예감 하지만 없다 → 예감밖에 안 든다)", {}},
     {"teiru-before-irassharu", ConstraintWord::EndsInSource, "てい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
      "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
     {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
@@ -193,13 +200,31 @@ bool HiraganaHonorificAt(std::string_view s) {
     return false;
 }
 
+// Whether after starts with a conjugation of the verb c (行 of 行くんだ, 許 of 許さん) or with the っ
+// that spoken emphasis puts inside a verb (落っちろ, 行っちゃう).
+bool ConjugatedAfter(const dict::Candidate& c, std::string_view after) {
+    const std::string_view part = c.codes->partText;
+    if (part.size() != 4 || after.starts_with("っ")) return true;
+    for (int branch = 0; branch < kConjugationBranches; branch++) {
+        const std::string_view conj = Conjugation(part[3] - '0', branch);
+        if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && after.starts_with(conj)) return true;
+    }
+    return false;
+}
+
 // Whether c is a verb or adjective as long as source, or longer, that reads the word
-// rather than a name before an honorific: not an adjective stem before くん that a particle,
-// a break or the end follows (碧くんが: not the 碧く of 碧い).
+// rather than a name before an honorific: not a verb stem that the honorific's kana do not
+// conjugate (空ちゃん, 祭ちゃん), nor an adjective stem before an honorific other than く or さま, or
+// before くん that a particle, a break or the end follows (幸さん, 碧くんが: not the 碧く of 碧い; the
+// さ of 安さまで is the noun of the adjective).
 bool PredicateBlocks(const dict::Candidate& c, std::string_view source, std::string_view after) {
     if (c.codes == nullptr || !AnyOf("478", c.codes->part.ClassDigit()) || c.source.size() < source.size()) return false;
-    return !(c.codes->part.Tag() == 'H' && c.source.size() == source.size() && after.starts_with("くん") &&
-             HiraganaHonorificAt(after));
+    if (c.source.size() > source.size()) return true;
+    if (c.codes->part.Tag() == 'M') return ConjugatedAfter(c, after);
+    if (c.codes->part.Tag() == 'H' && HonorificAt(after, false)) {
+        return after.starts_with("さま") || (after.starts_with("く") && !HiraganaHonorificAt(after));
+    }
+    return true;
 }
 
 bool NameSense(const dict::Codes& c) {
@@ -338,6 +363,12 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         // The word before may be Korean already and spaced off (ソワソワ written 안절부절 by the sound stage).
         return after.starts_with("て") &&
                (NameClassOf(adjacent) != kClassOther || HangulText(adjacent) || adjacent == " ");
+    case ConstraintContext::BeforeRa:
+        return after.starts_with("ら");
+    case ConstraintContext::AfterWordBeforeNegative: {
+        static constexpr std::string_view kNegative[] = {"ない", "なかっ", "なく", "なけれ", "ません"};
+        return StartsWithAny(after, kNegative) && NameClassOf(adjacent) != kClassOther;
+    }
     case ConstraintContext::BeforeRassharu:
         return after.starts_with("らっしゃ");
     case ConstraintContext::BeforeNasai:
@@ -367,6 +398,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return source.ends_with("ち") && after.starts_with("ゃん") && !after.starts_with("ゃんと");
     case ConstraintContext::BeforeRai:
         return after.starts_with("らい");
+    case ConstraintContext::BeforeShii: {
+        static constexpr std::string_view kShii[] = {"しい", "しく", "しかっ"};
+        return StartsWithAny(after, kShii) || (after.starts_with("しき") && !after.starts_with("しきり") && !after.starts_with("しきた"));
+    }
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
                            [&](std::string_view e) { return lead.ends_with(e); });
@@ -491,7 +526,9 @@ std::vector<std::size_t>::const_iterator NameAmong(const ConstraintRule& rule, c
     });
     const bool blocked =
         std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
-        std::any_of(same.begin(), same.end(), [&](std::size_t k) { return PersonNoun(codes(k)) || list[k].user != nullptr; }) ||
+        std::any_of(same.begin(), same.end(), [&](std::size_t k) {
+            return (PersonNoun(codes(k)) && !NameSense(codes(k))) || list[k].user != nullptr;
+        }) ||
         std::all_of(same.begin(), same.end(), [&](std::size_t k) { return NameSense(codes(k)); }) ||
         (rule.reject == ConstraintReject::NonNameBesidePlace && !std::all_of(same.begin(), same.end(), [&](std::size_t k) {
              return NameSense(codes(k)) || codes(k).sem.HasCode("QCT") || codes(k).sem.HasCode("QNN");
@@ -734,7 +771,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     if (blocked) break;
                     records = snapshot.NameRecords(source);
                     for (const dict::Record& r : records) {
-                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target) ||
+                        if (r.codes == nullptr || !r.codes->sem.HasCode("QPN") || !HangulText(r.target) ||
                             TranslatedName(list, same, source, r.target)) {
                             continue;
                         }

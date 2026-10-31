@@ -18,9 +18,9 @@ cx:yatta-achieve:10	やったぜ！ 提督、あたいの活躍見てたかい�
 cx:yatta-achieve:10	ついにやった！	마침내 해냈다!	fix	rewrites
 cx:yatta-achieve:10	四十年くらいは滞在できるぞ、やったぜ。	40년 정도는 체재할 수 있겠어, 해냈다.	fix	rewrites
 cx:yatta-achieve:20	カケル、よくやった	카케루, 잘했다	fix	rewrites
-cx:yatta-achieve:20	「よくやったな」	「잘했군」	fix	rewrites
+cx:yatta-achieve:20	「よくやったな」	「잘했구나」	fix	rewrites
 cx:yatta-achieve:10	宿題をやった。	숙제를 했다.	keep	rewrites
-cx:yatta-achieve:10	「お前がやったのか？」	「네가 한 건가?」	keep	rewrites
+cx:yatta-achieve:10	「お前がやったのか？」	「네가 한 거야?」	keep	rewrites
 cx:yatta-achieve:10	やるだけ…やったよね…？ さよなら…	할 뿐…했지…? 안녕…	keep	rewrites
 cx:yatta-achieve:10	やったよう	한 듯	keep	rewrites
 cx:yatta-achieve:20	宿題はよくやった。	숙제는 잘 했다.	keep	rewrites

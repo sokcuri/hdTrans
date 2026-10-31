@@ -1,0 +1,20 @@
+# 규칙: GRM-177
+rule	input	expected	kind	layer
+rewrite:past-sequence	マリエッタは現状に比べたら、なんて贅沢な悩みなんだと密かに憤慨した。	has:비하면	fix	rewrites
+rewrite:past-sequence	ヒブラムに誤算があったとしたら、魔王はこのとき、本当に炎を撃ちかねなかった。	has:있었다고 하면	fix	rewrites
+rewrite:past-sequence	もしも隕石が目の前に落ちてきたとしたら、きっとこんな感じなのだろうかとシロは直感した。	has:떨어져 내렸다고 하면	fix	rewrites
+rewrite:past-sequence	もしも私を選んでくれたら、と言わないけど思っていた。	has:선택해 주면	fix	rewrites
+rewrite:past-sequence	万が一ダルクスが襲い掛かろうとしたら、刀を抜いて待つことにした。	has:덤벼들려고 하면	fix	rewrites
+rewrite:past-sequence	姉も妹も欲しいとなったら、どっちにもなれると思う双子のように似せてみた。	has:갖고 싶다면	fix	rewrites
+rewrite:past-sequence	ただ、一言「夏実が帰ってきたら、少し話そうか」と、父さんは言った。	has:돌아오면	fix	rewrites
+rewrite:past-sequence	下で歩いているだけの誰かが巻き込まれたりしたら、と思うだけで足が止まった。	has:하면, 이라고	fix	rewrites
+rewrite:past-sequence	もし、事前情報を見てレア職を狙っていたりしたら、2時間では足りない可能性が高かった。	has:노리고 있거나 하면	fix	rewrites
+rewrite:past-sequence	もしあの時断っていたら、私は死んでいた。	lacks:있었더니	fix	rewrites
+rewrite:past-sequence	コーヒーを淹れた私がリビングに運ぼうとすると、すぐに宗一郎さんがやってきた。	has:옮기려고 하자	keep	rewrites
+rewrite:past-sequence	しかし、どれほどの狂気にさらされて来たのだろうと思うと、背筋が立つのを覚えるヤナだった。	has:생각하니	keep	rewrites
+rewrite:past-sequence	その素敵すぎる笑みを脳裏に焼き付けると、いつか必ずそれよりも大きな笑みを目にしようと努力を決めた。	has:새기니	keep	rewrites
+rewrite:past-sequence	俺が声をかけると、ナミタロウは「待ってました！」とばかりに手招きした。	has:걸자	keep	rewrites
+rewrite:past-sequence	毎日部室で顔を合わせているくせに、ここに来ると桜庭の胸は切ない音を立てた。	has:오니	keep	rewrites
+rewrite:past-sequence	砂埃を避けながら転移門のこちら側から振り返ると、そこには瓦礫の更地が広がるだけだった。	has:돌아보니	keep	rewrites
+rewrite:past-sequence	輸送艦で、リンダ少尉に試作機を海戦に出したいと言ったら、とても凄い剣幕で反対された。	has:했더니	keep	rewrites
+rewrite:past-sequence	俺からしたら一生続くのではないかと思うほどの苦痛だった。	has:보면	keep	rewrites

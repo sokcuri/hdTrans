@@ -919,9 +919,6 @@ Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
     return nullptr;
 }
 
-// Whether a word of word.ability-scope (誰でも, 自分で), or a particle of particle.even-person after a
-// person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
-// condition.
 // Whether a word of noun.ability-condition with なら stands before item it in its clause: the
 // situation that makes the act possible (これなら, ここなら).
 bool AbilityCondition(const Item* it) {
@@ -934,6 +931,18 @@ bool AbilityCondition(const Item* it) {
     return false;
 }
 
+// Whether an adverb of adverb.at-last (やっと, ようやく) stands before item it in its clause, after which
+// the られ of an ichidan verb may say what one at last managed to do (やっと彼女に話しかけられた).
+bool AtLastBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        if (dict::InClass(HDTRANS_CLASS("adverb.at-last"), p->group->surface)) return true;
+    }
+    return false;
+}
+
+// Whether a word of word.ability-scope (誰でも, 自分で), or a particle of particle.even-person after a
+// person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
+// condition.
 bool AbilityScope(const Item* it, std::string_view rest) {
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0) return false;
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
@@ -1019,6 +1028,16 @@ Voice CandidateVoice(Flusher& f, const Item* it, int slot) {
     const std::string lemma = ItemLemma(f, it, slot);
     if (GrammarCode(it->GAttr(slot), "Ke") || Has(lemma, kKoCan) || Has(lemma, kKoCannot)) return Voice::Potential;
     return Voice::None;
+}
+
+// Whether the dictionary word item it has a candidate in the potential that carries no marker of the
+// older negative rules (gram Ma: 決められ 결정할 수, whose negative those rules wrote), which then
+// reads it as it stands (耐えられ 견딜 수).
+bool PlainPotentialCandidate(Flusher& f, const Item* it) {
+    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+        if (CandidateVoice(f, it, slot) == Voice::Potential && !GrammarCode(it->GAttr(slot), "Ma")) return true;
+    }
+    return false;
 }
 
 // Keeps the candidates of item it that read voice v (the passive and the spontaneous form: neither
@@ -1123,6 +1142,63 @@ bool CausativePotentialEnding(std::string_view rest) {
            !rest.starts_with("たら") && !rest.starts_with("たり") && !rest.starts_with("ます") && !rest.starts_with("よう");
 }
 
+// Whether the nearest subject before verb item it in its clause (a noun before が) names no person; an
+// object of を before it comes first and makes it none. A topic in は may be the object (要望は決められない).
+bool ThingSubjectBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s == "を") return false;
+        if (s == "が" && p->prev != nullptr && !p->prev->detail->Yougo()) {
+            return !Person(p->prev->Attr(std::max(p->prev->selected, 0)));
+        }
+    }
+    return false;
+}
+
+// Whether the dictionary word item it in the られ of the ichidan or くる verb stem, followed by rest, is
+// the potential as the analysed られ before a negative is (決められない 결정할 수 없다, 連れてこられない
+// 데려올 수 없다; spec GRM-50): not when its subject in が is no person (食事が与えられず), a verb whose られ is
+// the passive whatever its object or of what is taken away (求められ, 取り上げられ), one of acts done to
+// someone after its object or しか in a narrative form (食事を与えられず 식사가 주어지지 않고), a passive of something
+// wished for (褒められない, GRM-36), a feeling (感じられない), a person or 誰 before に, にも, には or から
+// (誰にも見られない), or ないように and ないうちに.
+bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem, std::string_view rest) {
+    const std::string_view surface = it->group->surface;
+    // The ん of くる's られ is its negative (連れてこられん); after another verb it may be the る said
+    // short (考えられんの), and な starts ながら or なさい as well.
+    if (surface.ends_with("こられ") || surface.ends_with("来られ")) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-negative"), rest) == 0) return false;
+    } else {
+        if (dict::StartsWithMember(HDTRANS_CLASS("ending.lexical-potential-negative"), rest) == 0) return false;
+        // られ also ends the passive of a godan verb in る (守られ), which has no potential of this form.
+        std::string_view base;
+        const std::vector<const Record*> verbs = BaseVerbRecords(f, surface, base);
+        if (verbs.empty() || At(DefaultRecord(verbs)->partCode, 3) != '7') return false;
+    }
+    if (dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), stem) || dict::InClass(HDTRANS_CLASS("verb.receiver-passive"), stem) ||
+        dict::InClass(HDTRANS_CLASS("verb.spontaneous"), stem) || dict::EndsWithMember(HDTRANS_CLASS("verb.unattained"), surface) > 0) {
+        return false;
+    }
+    if (dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), stem) &&
+        (rest.starts_with("なかっ") || rest.starts_with("ず") || rest.starts_with("ぬ"))) {
+        for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+            if (p->group->surface == "を" || p->group->surface == "しか") return false;
+        }
+    }
+    // Not doing it so that, or before, someone does it to one is the passive (誰にも見られないように).
+    if (rest.starts_with("ないよう") || rest.starts_with("ないうち")) return false;
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s != "に" && s != "にも" && s != "には" && s != "から") continue;
+        const Item* a = p->prev;
+        if (a != nullptr && !a->detail->Yougo() &&
+            (Person(a->Attr(std::max(a->selected, 0))) || a->group->surface.starts_with("誰"))) {
+            return false;
+        }
+    }
+    return !ThingSubjectBefore(it);
+}
+
 // The voice of the (ら)れ of verb item it, first signal first (spec GRM-10): an agent that is a
 // person or an animal makes the passive; then the respectful form; a godan passive, and たい after
 // it, the passive; a word of ability the potential; a trouble after its condition the passive; a
@@ -1167,12 +1243,7 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
-    // A dictionary word in the られ of くる (連れてこられ, 出てこられ) before a negative is the potential, as
-    // the analysed られ of くる is (連れてこられない 데려올 수 없다, 連れてこれません).
-    if (form == VoiceForm::Lexical && ichidan && (surface.ends_with("こられ") || surface.ends_with("来られ")) &&
-        dict::StartsWithMember(HDTRANS_CLASS("ending.rare-negative"), rest) > 0) {
-        return Voice::Potential;
-    }
+    if (form == VoiceForm::Lexical && ichidan && LexicalNegativePotential(f, it, stem, rest)) return Voice::Potential;
     return Voice::None;
 }
 
@@ -1239,6 +1310,34 @@ void SpelledPotential(Flusher& f, Item* it) {
     it->group = potential->group;
     it->detail = potential->detail;
     it->detail->voice = Voice::Potential;
+}
+
+// Reads the dictionary word item it in the られ of the ichidan or くる verb stem as the potential of that
+// verb, analysed at its place as the analysis reads an ichidan potential (続けられ 계속할 수); false, with
+// nothing changed, when the analysis reads no such verb of the same length.
+bool ReadAsBasePotential(Flusher& f, Item* it, std::string_view stem) {
+    if (stem.empty()) return false;
+    const std::string_view base = f.w.arena.Keep(std::string(stem));
+    const Lookup found = f.w.DoLookup(base, kModeGeneral);
+    Item* potential = f.w.InsertLateCandidate(it->text, it->start, it->tokenIndex, found.records);
+    if (potential == nullptr || (potential->detail->record != 0 && potential->detail->record != 4) ||
+        potential->length != it->length || potential->group->surface != base) {
+        return false;
+    }
+    // The analysis reads an ichidan られ in record 0 with the endings of its forms; it is the potential
+    // only with an ending of the potential (class 54, 3 수) among them.
+    if (potential->detail->record == 0) {
+        const Group* endings = potential->detail->group;
+        if (endings == nullptr ||
+            std::ranges::none_of(endings->entries, [](const Entry* e) { return At(e->code, 1) == '4'; })) {
+            return false;
+        }
+    }
+    // The voice step runs before selection, so no candidate of the old group is selected yet.
+    it->group = potential->group;
+    it->detail = potential->detail;
+    it->detail->voice = Voice::Potential;
+    return true;
 }
 
 // Whether surface is a dictionary word in (ら)れ made from a godan verb (知られ 知る), whose (ら)れ
@@ -1325,7 +1424,47 @@ void DecideVoice(Flusher& f) {
         const bool passive = form == VoiceForm::Godan || (form == VoiceForm::Rare && PassiveReading(f.w, it, rest));
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
-        const Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
+        Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
+        const dict::PackRow* packed = PackVoice(f, it, stem, v, ichidan && AtLastBefore(it));
+        if (packed != nullptr && !packed->agent.empty()) {
+            // The agent phrase of the row's reading: the animate agent the voice step found (に, によって,
+            // により), else the nearest から after an animate noun in the verb's clause, not a quote's.
+            Item* p = agent;
+            for (Item* q = it->prev; p == nullptr && q != nullptr && !ClauseBreak(q); q = q->prev) {
+                const Item* a = q->prev;
+                const Item* n = q->next;
+                if (q->group->surface == "から" && a != nullptr && !a->detail->Yougo() &&
+                    Animate(a->Attr(std::max(a->selected, 0))) &&
+                    (n == nullptr || !dict::InClass(HDTRANS_CLASS("particle.quote"), n->group->surface)))
+                    p = q;
+            }
+            if (p != nullptr && !p->Fixed()) {
+                it->packAgent = p;
+                it->packAgentText = packed->agent;
+            }
+        }
+        if (packed != nullptr && (v == Voice::None || !packed->lexeme.empty())) {
+            // A pack row reads the verb in the active, or as the Korean verb it names (docs/packs.md):
+            // the verb it is made from, no passive, potential or respectful form written.
+            if (form == VoiceForm::Lexical || form == VoiceForm::Shorter) ReadAsBaseVerb(f, it, spelled);
+            it->detail->record = 0;
+            it->detail->voice = v;
+            for (Entry* e : it->group->entries) {
+                if (e->gattr.ends_with("Pi") || e->gattr.ends_with("Ka")) e->gattr.resize(e->gattr.size() - 2);
+            }
+            if (!packed->lexeme.empty()) {
+                it->lexical = true;
+                it->packLexeme = packed->lexeme;
+                // A respectful reading writes its Korean verb with -시- (respectful:오다 오셨다).
+                if (v == Voice::Respectful) {
+                    if (std::string honorific = HonorificTarget(f, packed->lexeme); !honorific.empty()) it->packLexeme = honorific;
+                }
+                for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+                    if (At(it->Code(slot), 0) == '4') it->AssignEntrySurface(slot, it->packLexeme, {Provenance::Pack, packed->global});
+                }
+            }
+            continue;
+        }
         if (it->detail->record == 5 && it->detail->syntheticCausative) {
             it->detail->voice = v == Voice::Potential ? Voice::Potential : Voice::Passive;
             if (CausativeEnding(it, v == Voice::Potential)) it->detail->record = 2;
@@ -1345,8 +1484,11 @@ void DecideVoice(Flusher& f) {
         it->detail->doerLeftOut = doerLeftOut;
         if (form == VoiceForm::Lexical) {
             // A word whose candidates all read the potential is read as the passive of the verb it is
-            // made from when that verb takes an object (調べられた 조사되었다).
-            if (!own && v != Voice::None && !KeepVoiceCandidates(f, it, v) && passiveVoice &&
+            // made from when that verb takes an object (調べられた 조사되었다); one with no candidate in
+            // the potential is read as the potential of that verb (続けられなかった 계속할 수 없었다).
+            if (!own && v == Voice::Potential) {
+                if (PlainPotentialCandidate(f, it) || !ReadAsBasePotential(f, it, stem)) KeepVoiceCandidates(f, it, v);
+            } else if (!own && v != Voice::None && !KeepVoiceCandidates(f, it, v) && passiveVoice &&
                 BaseTakesObject(f, spelled) && ReadAsBaseVerb(f, it, spelled)) {
                 WriteLexicalPassive(f, it);
             } else if (doerLeftOut && WordlessPassive(f, it)) {
@@ -2013,40 +2155,357 @@ bool RieulStem(std::string_view lemma) {
     return text::Final(DecodeLastRune(lemma).cp) == text::kFinalRieul;
 }
 
-// Whether the と of item it, with no pause after it, joins an event that followed it in the
-// past sentence ending at last (振り返ると彼女がいた): the verb before it is no state of
-// いる or ある, nor 言う after か or から or quoting (というと, から言うと), and no word of saying or
-// thinking, no other と and no mark of supposition stands between it and the end
-// (可能性があると深く理解していた, 離れすぎると信号が拾えないという欠点), and a past copula
-// at the end follows only seeing or noticing.
+// Whether item x holds the mark m of supposition: as its own word or in its ending (らしく,
+// ようだった, かねない, 触れそうな距離), at the end of its word only for そう, ほど and よう
+// (しまいそうだった), not inside a longer word (楽しそうに, あっという間に, 素晴らしい, あかね),
+// not as the て form of a verb (待っていた, 入ってきた; 気を付けろって quotes), and not as a
+// likeness that makes a modifier (ような建造物, らしき羊皮紙, 目をそらすように, 人の良さそうな男).
+bool SupposedMark(const Item* x, std::string_view m) {
+    const std::string_view g = x->group->surface;
+    const std::string_view d = x->DirectIndex() >= 0 ? x->DirectSurface() : std::string_view();
+    const std::size_t inEnding = d.find(m);
+    const Entry* e = x->DirectIndex() >= 0 ? x->DirectEntry(x->DirectIndex()) : nullptr;
+    bool quoted = false;
+    for (const std::string_view q : dict::ClassMembers(HDTRANS_CLASS("ko-ending.quote"))) {
+        quoted = quoted || (e != nullptr && Has(e->dst, q));
+    }
+    const bool edge = m == "そう" || m == "ほど" || m == "よう";
+    const bool found = m == "って" ? g.starts_with(m) || (inEnding != std::string_view::npos && (inEnding > 0 || quoted))
+                                   : g.starts_with(m) || (edge && g.ends_with(m)) || inEnding != std::string_view::npos;
+    if (!found) return false;
+    // ようになる and ようにする are a habit or an aim, not a likeness (見かけると絡んでくるようになった).
+    const bool habit = m == "よう" && x->next != nullptr &&
+                       (x->next->group->surface.starts_with("な") || x->next->group->surface.starts_with("し") ||
+                        x->next->group->surface.starts_with("す"));
+    const bool likeness = (m == "よう" && !habit) || m == "らし" || (m == "そう" && g.size() > m.size() && g.ends_with(m));
+    const std::string whole = std::string(g) + std::string(d);
+    for (const std::string_view tail : {std::string_view("な"), std::string_view("に"), std::string_view("き")}) {
+        if (likeness && whole.ends_with(std::string(m) + std::string(tail))) return false;
+    }
+    return true;
+}
+
+// Whether item x quotes or frames the clause before it (particle.quoting-after after a predicate
+// or a mark: 捨てられるぞと脅された, 半分になる﹀という掟), or ends a question in か (使えるか
+// 分からなかった).
+bool QuotingAfter(const Item* x) {
+    const Item* p = x->prev;
+    const bool afterClause = p != nullptr && (p->detail->Yougo() || p->selected < 0 ||
+                                              At(p->Code(p->selected), 0) != '1');
+    if (afterClause && dict::InClass(HDTRANS_CLASS("particle.quoting-after"), x->group->surface)) return true;
+    return x->detail->Yougo() && x->DirectIndex() >= 0 && x->DirectSurface().ends_with("か");
+}
+
+// The text of the predicate that item x ends with a clause link (mark.clause-link: けど, のに, ので,
+// から, が), its predicate in pred, or nothing when x ends none. のが is a subject (飛んでいくのが
+// 見えた) and てから a step after (見てから), no link.
+std::string LinkText(const Item* x, const Item*& pred) {
+    const std::string_view g = x->group->surface;
+    pred = x;
+    std::string text;
+    if (x->detail->Yougo()) {
+        if (x->DirectIndex() >= 0) text = x->DirectSurface();
+    } else if (g.starts_with("だ") || g.starts_with("です")) {
+        text = g;
+    } else if (dict::InClass(HDTRANS_CLASS("mark.clause-link"), g) && x->prev != nullptr && x->prev->detail->Yougo()) {
+        pred = x->prev;
+        if (pred->DirectIndex() >= 0) text = pred->DirectSurface();
+        text += g;
+    } else {
+        return {};
+    }
+    bool link = false;
+    for (const std::string_view l : dict::ClassMembers(HDTRANS_CLASS("mark.clause-link"))) link = link || text.ends_with(l);
+    if (!link || text.ends_with("のが") || text.ends_with("んが") || text.ends_with("てから") || text.ends_with("でから")) {
+        return {};
+    }
+    return text;
+}
+
+// Whether item x ends a clause in a link after a predicate that is not past (お終いだけど,
+// 変わってしまうけど, 来ると騒がしすぎるから), so the と or たら before it joins that clause.
+bool PresentLink(const Item* x) {
+    const Item* pred = nullptr;
+    const std::string text = LinkText(x, pred);
+    if (text.empty()) return false;
+    const bool past = (pred->detail->Yougo() && pred->detail->kind == 6) || Has(text, "た") ||
+                      text.starts_with("んだ") || text.starts_with("いだ") || Has(text, "だっ");
+    return !past;
+}
+
+// Whether predicate item y ends right before a noun in an attributive form (見かける猫, 見ていた
+// 景色, 無口な彼; not 通って家に, 崩し小瓶が).
+bool BeforeNoun(const Item* y) {
+    if (y == nullptr || !y->detail->Yougo() || y->next == nullptr || y->next->detail->Yougo() || y->next->selected < 0 ||
+        At(y->next->Code(y->next->selected), 0) != '1') {
+        return false;
+    }
+    const std::string_view d = y->DirectIndex() >= 0 ? y->DirectSurface() : std::string_view();
+    if (Has(d, "」") || Has(d, "』") || y->next->InQuote() != y->InQuote()) return false;
+    const std::string text = std::string(y->group->surface) + std::string(d);
+    return std::u32string_view(U"うくぐすつぬぶむるたいなだ").find(DecodeLastRune(text).cp) != std::u32string_view::npos;
+}
+
+// The first predicate after item x, before a comma.
+const Item* NextPredicate(const Item* x) {
+    for (const Item* y = x->next; y != nullptr && !InSet(kCommaItems, y->group->surface); y = y->next) {
+        if (y->detail->Yougo()) return y;
+    }
+    return nullptr;
+}
+
+// Whether the first predicate after item x is a verb that modifies a noun in a form that is not
+// past (爆発する爆弾).
+bool PresentModifierAfter(const Item* x) {
+    const Item* y = NextPredicate(x);
+    if (!BeforeNoun(y) || y->detail->cls != kDetailVerb ||
+        dict::InClass(HDTRANS_CLASS("particle.quoting-after"), y->group->surface)) {
+        return false;
+    }
+    const std::string_view d = y->DirectIndex() >= 0 ? y->DirectSurface() : std::string_view();
+    const Entry* e = y->DirectIndex() >= 0 ? y->DirectEntry(y->DirectIndex()) : nullptr;
+    const bool past = Has(d, "た") || Has(d, "だ") || (e != nullptr && (e->dst.starts_with("5") || e->dst.starts_with("8")));
+    return !past;
+}
+
+// Whether the predicates after item x, taken together, modify a noun (時々見かける猫, 毎日見ていた
+// 景色, 普段は無口な彼).
+bool ModifierAfter(const Item* x) {
+    const Item* y = NextPredicate(x);
+    if (y == nullptr) return false;
+    while (y->next != nullptr && y->next->detail->Yougo()) y = y->next;
+    return BeforeNoun(y);
+}
+
+// Whether item x is a bare する, which says or thinks nothing of its own (返事をした).
+bool BareSuru(Flusher& f, const Item* x) {
+    return x->detail->Yougo() && output::Lemma(x->EntryText(x->selected), f.families) == "하다";
+}
+
+// Whether item x is a noun before が, は or の, a subject or a modifier that says nothing
+// (説明が終わった, 答えが返ってきた).
+bool Subject(const Item* x) {
+    if (x->detail->Yougo() || x->next == nullptr) return false;
+    const std::string_view p = x->next->group->surface;
+    return p == "が" || p == "は" || p == "の";
+}
+
+// Whether the と of item x was read as a step of the story (頭を下げると出かけて行った).
+bool Step(const Item* x) {
+    const Entry* e = x->DirectEntry(x->DirectIndex());
+    return e != nullptr && (e->dst == "2니" || e->dst == "1자");
+}
+
+// Whether the sentence ending at last tells what happened in a nominalised past (ending.told-past:
+// 笑うのだった, 連絡が入るのであった), not a state the clause leads to.
+bool ToldPast(const Item* last) {
+    std::string tail;
+    if (last->prev != nullptr) {
+        tail = last->prev->group->surface;
+        if (last->prev->DirectIndex() >= 0) tail += std::string(last->prev->DirectSurface());
+    }
+    tail += last->group->surface;
+    if (last->DirectIndex() >= 0) tail += std::string(last->DirectSurface());
+    for (const std::string_view e : dict::ClassMembers(HDTRANS_CLASS("ending.told-past"))) {
+        if (tail.ends_with(e)) return true;
+    }
+    return false;
+}
+
+// The last word of a Korean lemma (돌아보다 of 고개를 돌아보다, 되다 of (이)가 되다).
+std::string_view LastLemmaWord(std::string_view lemma) {
+    if (const std::size_t space = lemma.rfind(' '); space != std::string_view::npos) lemma.remove_prefix(space + 1);
+    return lemma;
+}
+
+// Whether the と or たら of item it, with no pause after it, joins an event that followed it in
+// the past sentence ending at last (振り返ると彼女がいた, 見に行ったら彼がいた): the verb before
+// it is no state of いる or ある (the いる of ている goes on: 考え事をしていると) and no なる
+// (秋になると), nor 言う after か or から or quoting (というと, から言うと); no other と but a step,
+// no quoting word, no link after a present (来ると騒がしいから, 押すと音が鳴るので) and no mark of supposition stands between it and the end
+// (離れすぎると信号が拾えないという欠点), nor a word of saying or thinking before any other verb,
+// which takes the clause as its quotation (可能性があると深く理解していた, 行くと涙ながらに訴えた;
+// 話すと先輩は顔色を変えて謝ってきた goes on); and a past copula at the end follows only seeing or
+// noticing, or tells a nominalised past (笑うのだった).
 bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
     const std::string full = output::Lemma(it->EntryText(it->selected), f.families);
-    std::string_view lemma = full;
-    if (const std::size_t space = lemma.rfind(' '); space != std::string_view::npos) lemma.remove_prefix(space + 1);
-    if (lemma.starts_with("있") || lemma.starts_with("없")) return false;
+    const std::string_view lemma = LastLemmaWord(full);
+    const bool progressive = AfterTeForm(it) || full.ends_with("고 있다") || full.ends_with("어 있다") ||
+                             full.ends_with("아 있다");
+    if ((lemma.starts_with("있") && !progressive) || lemma.starts_with("없")) return false;
+    // A なる with no pause is a time that comes round (秋になると芳香を放った 되면).
+    if (lemma == "되다") return false;
     // A past copula ends a state the clause leads to (加えると三千の大所帯だった 더하면); only
     // seeing or noticing finds it (見ると十七時すぎだった 보니).
     std::string end(last->group->surface);
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
-    if ((end.ends_with("だった") || end.ends_with("であった") || end.ends_with("でした")) && !lemma.ends_with("보다") &&
-        lemma != "눈치채다" && lemma != "깨닫다" && lemma != "알아차리다") {
+    if ((end.ends_with("だった") || end.ends_with("であった") || end.ends_with("でした")) && !ToldPast(last) &&
+        !lemma.ends_with("보다") && lemma != "눈치채다" && lemma != "깨닫다" && lemma != "알아차리다") {
         return false;
     }
     if (it->group->surface.starts_with("と") ||
         (it->prev != nullptr && (it->prev->group->surface == "から" || it->prev->group->surface == "か"))) {
         return false;
     }
+    bool verbSeen = false;
     for (const Item* x = it->After(); x != nullptr; x = x->next) {
-        if (x->selected < 0 || QuoteVerbFollows(x) || Has(x->Attr(x->selected), "UTh") || Has(x->Attr(x->selected), "UTs")) {
+        if (x->selected < 0) return false;
+        if (!verbSeen && !BareSuru(f, x) && !Subject(x) &&
+            (QuoteVerbFollows(x) || Has(x->Attr(x->selected), "UTh") || Has(x->Attr(x->selected), "UTs"))) {
             return false;
         }
-        if (x->DirectIndex() >= 0 && x->DirectSurface().ends_with("と")) return false;
+        if (x->detail->cls == kDetailVerb) verbSeen = true;
+        if (x != last && (QuotingAfter(x) || PresentLink(x))) return false;
+        if (x != last && x->DirectIndex() >= 0 && x->DirectSurface().ends_with("と") && !Step(x)) return false;
         for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.supposed"))) {
-            if (Has(x->group->surface, m) || (x->DirectIndex() >= 0 && Has(x->DirectSurface(), m))) return false;
+            if (SupposedMark(x, m)) return false;
         }
         if (x == last) break;
     }
     return true;
+}
+
+// Whether a word of habit at item x tells how the clause of its predicate goes, not a modifier of a
+// noun after it (時々見かける猫, 毎日見ていた景色, 普段は無口な彼).
+bool HabitOfClause(const Item* x) {
+    const std::string whole = std::string(x->group->surface) + std::string(x->DirectIndex() >= 0 ? x->DirectSurface() : "");
+    const bool auxiliary = x->next != nullptr && AfterTeForm(x->next) &&
+                           dict::InClass(HDTRANS_CLASS("verb.te-state-aux"), x->next->group->surface);
+    if (!dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), x->group->surface) &&
+        (auxiliary || !dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), whole))) {
+        return false;
+    }
+    return (x->next == nullptr || x->next->group->surface != "の") && !ModifierAfter(x);
+}
+
+// Whether the sentence around item it, up to last, makes its と or たら a condition rather than
+// a step: a word of supposition before it in its sentence, up to a clause link (もしあの時、
+// 断っていたら死んでいた), a word of habit in its clause or after it (いつも彼と話していると、
+// 時間を忘れた, 夕暮れになると子どもたちは必ず通った), a verb that frames what follows (比べると,
+// 言い換えると) or a point of view (私からすると, 俺からしたら), a なる after a word of manner
+// (こうなったら), a と before it (としたら), a particle after its と (なるとさえ), or a quoting と
+// right after it (巻き込まれたら、と思う).
+bool ConditionAround(Flusher& f, const Item* it, const Item* last) {
+    if (dict::EndsWithMember(HDTRANS_CLASS("verb.framing"), it->group->surface) > 0) return true;
+    // とする and となる after a clause suppose (あったとしたら, 欲しいとなったら); ようとする tries
+    // (運ぼうとすると) and a と of manner acts (小ざっぱりとすると).
+    const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+    if ((lemma == "하다" || lemma == "되다") && !QuoteVerbFollows(it) && it->prev != nullptr) {
+        const Item* p = it->prev;
+        const Entry* pe = p->DirectIndex() >= 0 ? p->DirectEntry(p->DirectIndex()) : nullptr;
+        if ((p->group->surface == "と" && p->prev != nullptr && p->prev->detail->Yougo()) ||
+            (pe != nullptr && p->DirectSurface().ends_with("と") && pe->dst.ends_with("고") && !pe->dst.starts_with("2려고"))) {
+            return true;
+        }
+    }
+    if (it->prev != nullptr && it->prev->group->surface == "から" && lemma == "하다") return true;
+    // A なる after a word of manner is a turn things may take (こうなったら, いざとなったら).
+    if (lemma == "되다") {
+        for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("word.turn-manner"))) {
+            if (it->group->surface == std::string(m) + "な" || (it->prev != nullptr && it->prev->group->surface == m)) {
+                return true;
+            }
+        }
+    }
+    // A と followed by a particle quotes (病気になるとさえされていた, 行くとも言った).
+    const Item* next = it->After();
+    if (it->DirectSurface() == "と" && next != nullptr &&
+        dict::InClass(HDTRANS_CLASS("particle.after-quote-to"), next->group->surface)) {
+        return true;
+    }
+    if (next != nullptr && next->group->surface == kJaComma) next = next->next;
+    if (next != nullptr && (next->group->surface == "と" || next->group->surface == "って")) return true;
+    // Back to the start of the sentence, the last clause link (行かないと決めていたが、) or a quotation
+    // that closes before it (なかったら……と想像すると): a word of
+    // supposition there counts across commas (もしあの時、開けたら), a word of habit only before the
+    // first comma.
+    bool clause = true;
+    for (const Item* x = it->prev; x != nullptr && x->group->surface != "。" && !InSet(kSentenceEndItems, x->group->surface);
+         x = x->prev) {
+        if (InSet(kCommaItems, x->group->surface)) {
+            clause = false;
+            continue;
+        }
+        const Item* pred = nullptr;
+        if (!LinkText(x, pred).empty() || x->group->surface == "と" || QuotingAfter(x)) break;
+        if (dict::InClass(HDTRANS_CLASS("adverb.suppose"), x->group->surface) || (clause && HabitOfClause(x))) return true;
+    }
+    // Right after it, a word of habit in a modifier takes it into that modifier (眠ると必ず見る夢).
+    if (const Item* x = it->After(); x != nullptr && dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), x->group->surface) &&
+                                     x->next != nullptr && x->next->detail->Yougo() && ModifierAfter(x)) {
+        return true;
+    }
+    bool habit = false;
+    for (const Item* x = it->After(); x != nullptr && x != last; x = x->next) {
+        if (HabitOfClause(x)) habit = true;
+        if (x->group->surface == "と" || (x->DirectIndex() >= 0 && x->DirectSurface().ends_with("と"))) habit = false;
+    }
+    return habit;
+}
+
+// Whether the たら of item it leaves its event unsaid rather than tells what followed: a ていたら
+// before a negative past or a potential (慣れていたら騙されなかった), or a verb right after it that
+// modifies a noun and is not past, which the たら belongs to (押したら爆発する爆弾).
+bool UnsaidTara(const Item* it, const Item* end) {
+    std::string tail(end->group->surface);
+    if (end->DirectIndex() >= 0) tail += std::string(end->DirectSurface());
+    if (AfterTeForm(it) && (tail.ends_with("なかった") || end->DetailRecord() == 4)) return true;
+    return PresentModifierAfter(it);
+}
+
+// Whether a subject in が that is not the speaker stands before item it with no other predicate
+// between, or the verb holds its own (雨が降ったら, 彼が窓を開けたら; not 気が付いたら): -었더니
+// tells what the speaker did, another's act takes -자.
+bool OtherSubject(Flusher& f, const Item* it) {
+    const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+    if (Has(it->group->surface, "が") && (Has(lemma, "이 ") || Has(lemma, "가 "))) return true;
+    for (const Item* x = it->prev; x != nullptr && !x->detail->Yougo() && !InSet(kCommaItems, x->group->surface) &&
+                                   x->group->surface != "。" && !InSet(kSentenceEndItems, x->group->surface);
+         x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (s == "と" || QuotingAfter(x)) return false;
+        if (s == "が" && x->prev != nullptr && !x->prev->detail->Yougo() &&
+            !dict::InClass(HDTRANS_CLASS("pronoun.first-person"), x->prev->group->surface) &&
+            !dict::InClass(HDTRANS_CLASS("pronoun.speaker"), x->prev->group->surface)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// The item the clause of a と or たら at item it ends with: last, or for an item in a quotation
+// that last is outside of, the last predicate before the quotation closes (「振り返ると、彼女が
+// いた」と彼は語った).
+const Item* EndFor(const Item* it, const Item* last) {
+    if (!it->InQuote() || last->InQuote()) return last;
+    const Item* end = nullptr;
+    for (const Item* x = it->next; x != nullptr && x->InQuote(); x = x->next) {
+        if (x->detail->Yougo()) end = x;
+    }
+    return end;
+}
+
+// Whether the sentence or quotation ending at item end ends in a past, not よかった: in た, or a
+// verb whose た is in its conjugation (噴火した: する + た), also with only final particles in its
+// ending when its Korean ending is past (立っていたよ, ぼやいてたぞ).
+bool PastEnd(const Item* end) {
+    std::string_view tail = end->DirectIndex() >= 0 ? end->DirectSurface() : std::string_view();
+    // An ending that closes a quotation ends the quoted sentence at the bracket (いた」と).
+    if (const std::size_t close = std::min(tail.find("」"), tail.find("』")); close != std::string_view::npos) {
+        tail = tail.substr(0, close);
+    }
+    const std::string text = std::string(end->group->surface) + std::string(tail);
+    if (text.ends_with("よかった") || text.ends_with("良かった")) return false;
+    if (text.ends_with("た")) return true;
+    if (end->detail->cls != kDetailVerb || end->detail->kind != 6) return false;
+    if (tail.empty()) return true;
+    for (std::size_t k = 0; k < tail.size();) {
+        const text::Rune r = text::DecodeRune(tail.substr(k));
+        if (!dict::InClass(HDTRANS_CLASS("particle.final-after-past"), tail.substr(k, r.size))) return false;
+        k += r.size;
+    }
+    const Entry* e = end->DirectEntry(end->DirectIndex());
+    return e != nullptr && e->dst.starts_with("5");
 }
 
 // Whether the sentence ending at last, in narration, ends in a plain present verb of an act
@@ -2081,8 +2540,10 @@ bool NarratedPresentAct(Flusher& f, const Item* last, std::string_view end) {
 // or sentence mark (籠を置くと), not a happening (名前を入れると, 気に入られてしまうと) or a する.
 bool ActsOnObject(Flusher& f, const Item* it) {
     if (it->group->surface.starts_with("しま") || it->group->surface.starts_with("ちゃ")) return false;
-    // An attempt (選ぼうとすると) or the bare する of a noun (咳払いをすると) is no step of its own.
-    if (output::Lemma(it->EntryText(it->selected), f.families) == "하다") return false;
+    // An attempt (選ぼうとすると) or the bare する of a noun (咳払いをすると) is no step of its own,
+    // and a change in the present is a condition (十五歳になると集められる).
+    const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+    if (lemma == "하다" || LastLemmaWord(lemma) == "되다") return false;
     for (const Item* x = it->prev; x != nullptr; x = x->prev) {
         const std::string_view s = x->group->surface;
         if (s == "を") return true;
@@ -2115,25 +2576,34 @@ void PastSequence(Flusher& f) {
     if (last == nullptr) return;
     std::string end(last->group->surface);
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
-    // A verb whose past た is in its conjugation, not in its ending (噴火した: する + た).
-    const bool pastForm = last->detail->cls == kDetailVerb && last->detail->kind == 6 && last->DirectSurface().empty();
     // Narration in the present tells its steps as the past does (籠を置くと、籠を見る 바구니를 두니, 바구니를
     // 본다), a と only, of an act on an object by the subject that goes on.
-    const bool present = (!end.ends_with("た") && !pastForm) && NarratedPresentAct(f, last, end);
-    if (!present && ((!end.ends_with("た") && !pastForm) || end.ends_with("よかった") || end.ends_with("良かった"))) return;
-    for (Item* it = f.w.chain.head; it != nullptr && it != last; it = it->next) {
+    const bool past = PastEnd(last);
+    const bool present = !end.ends_with("た") && !past && NarratedPresentAct(f, last, end);
+    // From the end back, so that a later と already read as a step lets an earlier one join too
+    // (気付くと立ち上がり、頭を下げると出かけて行った).
+    for (Item* it = last->prev; it != nullptr; it = it->prev) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0) continue;
         Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr) continue;
-        if (present && (it->DirectSurface() != "と" || e->dst != "2면(자)" || !SameSubjectAfter(it, last) ||
-                        !ActsOnObject(f, it))) {
+        const Item* close = EndFor(it, last);
+        if (close == nullptr) continue;
+        const bool steps = close == last ? past || present : PastEnd(close);
+        if (!steps) continue;
+        const bool told = close == last && present;
+        if (told && (it->DirectSurface() != "と" || e->dst != "2면(자)" || !SameSubjectAfter(it, last) ||
+                     !ActsOnObject(f, it))) {
             continue;
         }
         const std::string_view d = it->DirectSurface();
-        const bool seeing = e->dst == "2면" && d.ends_with("ば") &&
+        const bool to = d == "と";
+        const bool tara = d.ends_with("ら") && it->detail->cls == kDetailVerb;
+        const bool seeing = e->dst == "2면" && (d.ends_with("ば") || to || tara) &&
                             output::Lemma(it->EntryText(it->selected), f.families).ends_with("보다");
+        if ((to || tara) && ConditionAround(f, it, close)) continue;
+        if (tara && UnsaidTara(it, close)) continue;
         // てみれば before a past is what one found on trying, also without a comma (出かけてみれば
-        // 出会ったのは 나가 보니 만난 것은).
+        // 出会ったのは 나가 보니 만난 것은); てみると and てみたら are, when they join an event.
         const std::string_view stem = it->group->surface;
         const bool tried = seeing && (stem.ends_with("てみ") || stem.ends_with("でみ") ||
                                       (stem == "み" && AfterTeForm(it)));
@@ -2141,20 +2611,23 @@ void PastSequence(Flusher& f) {
         const bool viewpoint = it->prev != nullptr && (it->prev->group->surface.ends_with("的に") ||
                                                       it->prev->group->surface.ends_with("目で") ||
                                                       it->prev->group->surface.ends_with("から"));
-        if (tried) {
+        const bool paused = it->After() != nullptr && it->After()->group->surface == kJaComma;
+        const bool joined = (to || tara) && (e->dst == "2면(자)" || seeing) && FollowedEvent(f, it, close);
+        if (tried && !tara && (d.ends_with("ば") || paused || joined)) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
-        } else if (it->After() == nullptr ||
-                   (it->After()->group->surface != kJaComma && (d != "と" || e->dst != "2면(자)" || !FollowedEvent(f, it, last)))) {
+        } else if (it->After() == nullptr || (!paused && !joined)) {
             continue;
-        } else if (seeing && !viewpoint) {
+        } else if (seeing && !viewpoint && !tara) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
-        } else if (e->dst != "2면(자)") {
+        } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
-        } else if (d == "と" && RieulStem(output::Lemma(it->EntryText(it->selected), f.families))) {
+        } else if (to && RieulStem(output::Lemma(it->EntryText(it->selected), f.families))) {
             it->AssignDirectSlot(it->DirectIndex(), "1자");
-        } else if (d == "と") {
+        } else if (to) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
-        } else if (d.ends_with("ら")) {
+        } else if (tara && OtherSubject(f, it)) {
+            it->AssignDirectSlot(it->DirectIndex(), "1자");
+        } else if (tara) {
             it->AssignDirectSlot(it->DirectIndex(), "5더니");
         }
     }
@@ -2179,7 +2652,22 @@ bool QuoteEnd(const Worker& w, const Item* it) {
 bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
     if (it->group->surface == "聞") return true;
-    return dict::StartsWithMember(HDTRANS_CLASS("verb.quote-start"), it->group->surface) > 0;
+    if (dict::StartsWithMember(HDTRANS_CLASS("verb.quote-start"), it->group->surface) > 0) return true;
+    if (dict::StartsWithMember(HDTRANS_CLASS("verb.quote-stem"), it->group->surface) == 0) return false;
+    // Another word that starts like one, read with its ending and the two words after it
+    // (想像以上, 想像を絶する, 仰天, 決まりきった, 気付かないうちに), quotes nothing, nor the adverb
+    // 決まって (決まっている is the verb).
+    std::string span;
+    const Item* x = it;
+    for (int n = 0; n < 3 && x != nullptr; n++, x = x->next) {
+        span += x->group->surface;
+        if (x->DirectIndex() >= 0) span += std::string(x->DirectSurface());
+    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("word.quote-stem-other"), span) > 0) return false;
+    const std::string whole = std::string(it->group->surface) + std::string(it->DirectIndex() >= 0 ? it->DirectSurface() : "");
+    const bool auxiliary = it->next != nullptr && AfterTeForm(it->next) &&
+                           dict::InClass(HDTRANS_CLASS("verb.te-state-aux"), it->next->group->surface);
+    return auxiliary || !dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), whole);
 }
 
 namespace {

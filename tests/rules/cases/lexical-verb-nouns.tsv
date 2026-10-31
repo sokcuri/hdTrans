@@ -1,0 +1,92 @@
+# 규칙: LEX-167
+rule	input	expected	kind	layer
+lexical:verb-nouns	彼女自身も内心動揺を覚えた。	has:동요를 느꼈다	fix	senses
+lexical:verb-nouns	新しい魔法の名前を覚えた	has:이름을 기억했다	keep	lookup
+lexical:verb-nouns	僕が林君の顔を覚えていなかった	has:얼굴을 기억하지 못했다	keep	lookup
+lexical:verb-nouns	ロシアが前向きな対応を取るよう改めて求めました。	has:다시 요구했습니다	fix	senses
+lexical:verb-nouns	日本人記者の即時解放を強く求めました。	has:강하게 요구했습니다	fix	senses
+lexical:verb-nouns	元会長が俺に説明を求める。	has:설명을 요구한다	fix	senses
+lexical:verb-nouns	そんな時にお二人は現れ、私の事を強く求めてくださった。	has:강하게 구해 주셨다	keep	senses
+lexical:verb-nouns	汚れた金が、居場所を求め彷徨う。	has:있을 곳을 찾고	keep	senses
+lexical:verb-nouns	これはハサミで粗く刻んでおきました。	has:가위로 굵게 썰어 두었습니다	fix	senses
+lexical:verb-nouns	玉ねぎを細かく刻む	has:양파를 잘게 썬다	fix	senses
+lexical:verb-nouns	パセリを刻む。	파슬리를 잘게 썬다.	keep	defaults
+lexical:verb-nouns	リズムすら刻んでいるように見える。	has:리듬조차 새기고	keep	lookup
+lexical:verb-nouns	秒針は正確に時を刻んでいった。	has:시간을 새겨 갔다	keep	lookup
+lexical:verb-nouns	スペインの場合ってデモ起きてますけど	has:데모 일어나고 있는데요	fix	senses
+lexical:verb-nouns	当日は朝早く起きて、お弁当を作る	has:아침 일찍 일어나	keep	lookup
+lexical:verb-nouns	窓から差し込む日の光が暖かな雰囲気を作っている。	has:비쳐 드는 햇빛이	fix	senses
+lexical:verb-nouns	差し込む月光は淡く青い。	has:비쳐 드는 달빛은	fix	senses
+lexical:verb-nouns	鍵を鍵穴に差し込む	lacks:비쳐	keep	lookup
+lexical:verb-nouns	螺鈿の細工を日に透かして見る。	has:햇빛에 비추어 본다	fix	senses
+lexical:verb-nouns	それを光に透かして眺めたりする。	has:빛에 비추어 바라보거나	fix	senses
+lexical:verb-nouns	日に日に強くなる	lacks:햇빛	keep	lookup
+lexical:verb-nouns	スンスンと匂いを嗅いでは少し離して	has:냄새를 맡아	fix	senses
+lexical:verb-nouns	この匂いを嗅ぐと、海に来ていることを実感	has:이 냄새를 맡으면	fix	senses
+lexical:verb-nouns	確か、木を燃やしてその香りを嗅ぎ分ける	has:냄새로 구별한다	keep	lookup
+lexical:verb-nouns	工事をしている奴らは紙袋を被ったふんどし姿で	has:종이봉투를 쓴	fix	senses
+lexical:verb-nouns	頭には麦わら帽子を被っている。	has:밀짚모자를 쓰고 있다	fix	senses
+lexical:verb-nouns	自分も、その影響を被ったから	has:영향을 감쌌으니까	keep	lookup
+lexical:verb-nouns	ベンチに座っている僕の頭におっぱいを上からのせる。	has:위에서 올린다	fix	senses
+lexical:verb-nouns	ゆっくりジャックは近づくと、肩に手をのせる。	has:어깨에 손을 올린다	fix	senses
+lexical:verb-nouns	この歌詞にのせて歌う	has:가사에 태워 노래한다	keep	lookup
+lexical:verb-nouns	気分が晴れない	has:기분이 풀리지 않는다	fix	senses
+lexical:verb-nouns	嫌疑が晴れたというのは、嘘だろう。	has:혐의가 풀렸다	fix	senses
+lexical:verb-nouns	しかし、煙が晴れた時には二人は目を疑った。	has:연기가 걷혔을 때	keep	senses
+lexical:verb-nouns	空が晴れた	has:하늘이 개었다	keep	lookup
+lexical:verb-nouns	六層とは偉い違いである、	has:엄청난 차이이다	fix	senses
+lexical:verb-nouns	普段のつんけんした表情とはえらい違いだ。	has:엄청난 차이다	fix	senses
+lexical:verb-nouns	「ギルドはえらい騒ぎになってたから」	has:대단한 소동	keep	lookup
+lexical:verb-nouns	マルフィラ＝ナハムは視線を泳がせながら、	has:시선을 이리저리 굴리면서	fix	senses
+lexical:verb-nouns	目線を泳がせていた怠惰の言葉を	has:시선을 이리저리 굴리던	fix	senses
+lexical:verb-nouns	わざとユウ達を泳がせて偽の情報を掴ませている	has:자유롭게 행동하게 해	keep	lookup
+lexical:verb-nouns	「日が明けたら一緒にどっかに逃げよう。	has:날이 밝으면	fix	senses
+lexical:verb-nouns	夜が明けるまで、動画編集作業に追われ	has:날이 샐 때까지	keep	lookup
+lexical:verb-nouns	エルサは地面に手を付く、すると魔法陣が浮かび上がる。	has:땅에 손을 짚는다	fix	senses
+lexical:verb-nouns	壁に手を付きながらぐったりと	has:벽에 손을 짚으면서	fix	senses
+lexical:verb-nouns	血が付いた	has:피가 묻었다	keep	senses
+lexical:verb-nouns	リアムは隊から外してリンの警護に当ててくれ	has:경호에 배치해 줘	fix	senses
+lexical:verb-nouns	を王城の警備に当てるって、	has:경비에 배치한다고	fix	senses
+lexical:verb-nouns	もう片方の手を腰に当てた。	has:허리에 대었다	keep	senses
+lexical:verb-nouns	ギムコの顔を自らの胸に押し付ける。	has:가슴에 누른다	fix	senses
+lexical:verb-nouns	僕に全部押し付けて消えちゃったんだ。	has:전부 강요해	keep	lookup
+lexical:verb-nouns	責任を押し付ける	has:책임을 전가한다	keep	senses
+cx:verb-pair:10	俺達が学園を離れた日、	has:학원을 떠난 날	fix	rewrites
+cx:verb-pair:10	右手を離れ、振り抜かれた大鎌は	has:오른손을 떠나	fix	rewrites
+cx:verb-pair:10	早くディンの独特な空気から離れたいくらいだ。	!rule:cx:verb-pair:10	keep	rewrites
+cx:verb-pair:10	少し離れた場所	!rule:cx:verb-pair:10	keep	rewrites
+cx:verb-pair:20	そして両手を触れてお参りします	has:양손을 대어	fix	rewrites
+cx:verb-pair:20	指を触れてみる	has:손가락을 대어 본다	fix	rewrites
+cx:verb-pair:20	差しのべられた手を見つめてその手に触れた。	!rule:cx:verb-pair:20	keep	rewrites
+cx:verb-pair:20	森の守り神の怒りに触れてしまい、	!rule:cx:verb-pair:20	keep	rewrites
+cx:verb-pair:30	そして、お互いの得物が敵に向く。	has:무기가 적에게 향한다	fix	rewrites
+cx:verb-pair:30	彼は教師に向いている	!rule:cx:verb-pair:30	keep	rewrites
+cx:verb-pair:30	敵に向かって走る	!rule:cx:verb-pair:30	keep	rewrites
+cx:verb-pair:40	ああ 街の警らに当たってもらう。	has:순찰에 임해	fix	rewrites
+cx:verb-pair:40	警備に当たる	경비에 임한다	fix	rewrites
+cx:verb-pair:40	それは失礼に当たる	!rule:cx:verb-pair:40	keep	rewrites
+cx:verb-pair:40	ボールが壁に当たった	!rule:cx:verb-pair:40	keep	rewrites
+cx:verb-pair:50	奥様の新居に下見がてら挨拶に伺った夜。	has:인사하러 찾아뵌 밤	fix	rewrites
+cx:verb-pair:50	ご挨拶に伺いました	has:인사하러 찾아뵈었습니다	fix	rewrites
+cx:verb-pair:50	お話を伺いました	!rule:cx:verb-pair:50	keep	rewrites
+cx:verb-pair:60	明日、お宅に伺います	has:댁에 찾아뵙겠습니다	fix	rewrites
+cx:verb-pair:60	先生に伺ってみます	!rule:cx:verb-pair:60	keep	rewrites
+cx:verb-pair:60	お話を伺いました	!rule:cx:verb-pair:60	keep	rewrites
+cx:verb-pair:70	光景を花壇の裏からこっそりと伺っていた。	has:엿보고 있었다	fix	rewrites
+cx:verb-pair:70	そっと伺う	has:살며시 엿본다	fix	rewrites
+cx:verb-pair:70	お話を伺いました	!rule:cx:verb-pair:70	keep	rewrites
+cx:verb-pair:70	様子を伺っていた	!rule:cx:verb-pair:70	keep	rewrites
+cx:verb-pair:80	「その血を、ゴブレットの中に注げ。	has:부어라	fix	rewrites
+cx:verb-pair:80	コップに水を注いだ	!rule:cx:verb-pair:80	keep	rewrites
+cx:verb-pair:80	川が海に注ぐ	!rule:cx:verb-pair:80	keep	rewrites
+cx:verb-pair:90	を抱えて、顔を突っ伏してしまった。	has:얼굴을 파묻어버렸다	fix	rewrites
+cx:verb-pair:90	泥に顔から突っ伏してるよ。	!rule:cx:verb-pair:90	keep	rewrites
+cx:verb-pair:90	教室の隅の机に突っ伏している。	!rule:cx:verb-pair:90	keep	rewrites
+cx:verb-pair:100	上級組合員でも相手に出来るかどうかという所だ。	has:상대를 할 수 있을지	fix	rewrites
+cx:verb-pair:100	ならば相手に出来るだけ近づき	!rule:cx:verb-pair:100	keep	rewrites
+cx:verb-pair:100	あんな奴、相手にできない	!rule:cx:verb-pair:100	keep	rewrites
+cx:verb-pair:100	「くっ、この全軍を相手に出来ると思うな！	!rule:cx:verb-pair:100	keep	rewrites
+cx:verb-pair:110	膝をつき、頭を垂れ、自分の拳を心臓の位置へと押し付けた。	has:심장 위치로 눌렀다	fix	rewrites
+cx:verb-pair:110	顔を壁に押し付けた	has:얼굴을 벽에 눌렀다	fix	rewrites
+cx:verb-pair:110	正しく言えば押し付けた周は、彼女の唇が動く前に背を向けた。	!rule:cx:verb-pair:110	keep	rewrites
+cx:verb-pair:110	責任を押し付ける	!rule:cx:verb-pair:110	keep	rewrites

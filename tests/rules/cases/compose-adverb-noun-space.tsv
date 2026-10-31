@@ -1,0 +1,36 @@
+rule	input	expected	kind	layer
+compose:adverb-noun-space	結局昼までゆっくりとか寝てることは出来ずじまい。	has:결국 낮까지	fix	compose
+compose:adverb-noun-space	突然影になったわ。	has:갑자기 그림자가	fix	compose
+compose:adverb-noun-space	結局要は一睡もしないまま、	has:결국 요점은	fix	compose
+compose:adverb-noun-space	はじめて目が青いのに気がついた。	has:처음 눈이	fix	compose
+compose:adverb-noun-space	誰か息のある方はいませんかー？	has:누군가 숨이	fix	compose
+compose:adverb-noun-space	僕は正直頭がおかしいと思ったね。	has:솔직히 머리가	fix	compose
+compose:adverb-noun-space	さすがに毎日家に入り浸りとか無理だろ、	has:매일 집에	fix	compose
+compose:adverb-noun-space	一旦車の後ろにまわった。	has:일단 차	fix	compose
+compose:adverb-noun-space	そんなオレが日々体を鍛えているのだ。	has:날마다 몸을	fix	compose
+compose:adverb-noun-space	シオンちゃんがいるなら何かしら話を聞いてるはず。	has:무엇인가 이야기를	fix	compose
+compose:adverb-noun-space	結局手は繋いだ。	has:결국 손은	fix	compose
+compose:adverb-noun-space	表面上はそのまま話が進むようなので、	has:그대로 이야기가	fix	compose
+compose:adverb-noun-space	どっか夜を過ごせそうな所無いか？	has:어딘가 밤을	fix	compose
+compose:adverb-noun-space	最初夢かと思ったが、	has:처음 꿈인	fix	compose
+compose:adverb-noun-space	そのまま腕の中に収めた。	has:그대로 팔	fix	compose
+compose:adverb-noun-space	そのまま街を出ると、	has:그대로 거리를	fix	compose
+compose:adverb-noun-space	俺が突然声を発したので瞬は驚いたようだ。	has:갑자기 목소리를	fix	compose
+compose:adverb-noun-space	時々村を出入りする人間がいるので、	has:가끔 마을을	fix	compose
+compose:adverb-noun-space	自分は結局何がしたいのだろう。	has:결국 무엇을	fix	compose
+compose:adverb-noun-space	そのまま頬に軽いキスをしてから耳元で囁いた。	has:그대로 뺨에	fix	compose
+compose:adverb-noun-space	一旦手を止める。	has:일단 손을	fix	compose
+compose:adverb-noun-space	誰か手をかしてくれ！	has:누군가 손을	fix	compose
+compose:adverb-noun-space	そのまま手を放してしまう。	has:그대로 손을	fix	compose
+compose:adverb-noun-space	(彫金師)見てみろ	(조금사) 봐라	keep	compose
+compose:adverb-noun-space	東京駅に着いた。	도쿄역에 도착했다.	keep	compose
+compose:adverb-noun-space	子供達が遊ぶ。	아이들이 논다.	keep	compose
+compose:adverb-noun-space	「会議中ですぞ！」	「회의 중이죠!」	keep	compose
+compose:adverb-noun-space	「毎日新聞」	「매일신문」	keep	compose
+compose:adverb-noun-space	結局は来なかった。	결국은 오지 않았다.	keep	compose
+compose:adverb-noun-space	当然倉庫は無傷だ。	당연히 창고는 멀쩡하다.	keep	compose
+compose:adverb-noun-space	結局彼女は来なかった。	결국 그녀는 오지 않았다.	keep	compose
+compose:adverb-noun-space	沙希が突然声を上げた。	사키가 갑자기 소리를 냈다.	keep	compose
+compose:adverb-noun-space	あの…ハインリヒ隊長	그…하인리히 대장	keep	compose
+compose:adverb-noun-space	ディートリヒ殿下にそのようなお言葉	디트리히 전하에게 그러한 말씀	keep	compose
+compose:adverb-noun-space	神様的などっかの誰か様。	신적인 어딘가의 누군가님.	keep	compose

@@ -33,7 +33,7 @@ sound:contracted-auxiliaries	うーん……１時間も待ってられないし
 sound:contracted-auxiliaries	そこまで思ったら、もうジッとしてられなかった。	거기까지 생각했더니, 벌써 가만히 하고 있을 수 없었다.	fix	sound
 sound:contracted-auxiliaries	でないとやってられない。	그렇지 않으면 할 수 없다.	fix	sound
 sound:contracted-auxiliaries	まあ、あるいはそうでも思わないとやってられなかったのかもしれないが。	뭐, 혹은 그래도 생각하지 않으면 할 수 없었던 걸지도 모르겠지만.	fix	sound
-sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔에무슨 지고 있을 수 없어!	fix	sound
+sound:contracted-auxiliaries	そんな痛みになんか負けてられない！	그런 아픔 따위에 지고 있을 수 없어!	fix	sound
 sound:contracted-auxiliaries	そんなこと言ってられないよ。	그런 말 하고 있을 수 없어.	fix	sound
 sound:contracted-auxiliaries	飲まないとやってられないぃ！	마시지 않으면 할 수 없어!	fix	sound
 sound:contracted-auxiliaries	さぁ、戦果を上げてらっしゃい！	자, 전과를 올리고 와!	keep	sound
@@ -49,7 +49,7 @@ sound:contracted-auxiliaries	…あ、本当に寝ちゃってる。	…아, 정
 sound:contracted-auxiliaries	……オージマに、持ってて、もらいたいの……	……오지마에, 가지고 있어, 받고 싶어……	keep	sound
 sound:contracted-auxiliaries	……言ってて、恥ずかしくなってきた……	……말해, 부끄러워졌다……	keep	sound
 sound:contracted-auxiliaries	……負けた理由を理解してれば次からはどう戦えばいいのかわかってるはずよ、がんばってね！	……진 이유를 이해하고 있으면 다음부터는 어떻게 싸우면 되는 건지 알고 있을 것, 힘내!	keep	sound
-sound:contracted-auxiliaries	慌てて、みいちゃんたちも俺たちの元に駆けつけた。	당황해, 미이짱들도 우리의 바탕으로 달려왔다.	keep	sound
+sound:contracted-auxiliaries	慌てて、みいちゃんたちも俺たちの元に駆けつけた。	당황해, 미이짱들도 우리의 곁으로 달려왔다.	keep	sound
 sound:contracted-auxiliaries	ちゃんと勝てれば、レナにだっておいしいチャンスなのに！	제대로 이길 수 있으면, 레나에게라도 맛있는 찬스인데!	keep	sound
 sound:contracted-auxiliaries	見てて～	보고 있어~	keep	sound
 sound:contracted-auxiliaries	住んでたところ	has:살고 있던	fix	sound

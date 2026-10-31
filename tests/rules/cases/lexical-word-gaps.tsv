@@ -1,0 +1,352 @@
+# 규칙: LEX-2930
+# 규칙: LEX-2931
+# 규칙: LEX-2932
+# 규칙: LEX-2933
+# 규칙: LEX-2934
+# 규칙: LEX-2935
+# 규칙: LEX-2936
+# 규칙: LEX-2937
+# 규칙: LEX-2938
+# 규칙: LEX-2939
+# 규칙: LEX-2940
+# 규칙: LEX-2941
+# 규칙: LEX-2942
+# 규칙: LEX-2943
+rule	input	expected	kind	layer
+lexical:nurutsuku	体中がぬめっています。	has:미끈거리	fix	fixed
+lexical:nurutsuku	ぬるつく血が手元を狂わせた。	has:미끈거리는	fix	fixed
+lexical:nurutsuku	二種類のぬめり気を帯びた刺激が私を責め立てる。	has:미끈거림	fix	fixed
+lexical:nurutsuku	すると途端、ずるんとぬめった感触が滑りこんできた。	has:미끈거린	fix	fixed
+lexical:nurutsuku	ぬめる舌の立てる水音が、いやらしく脳に響いてくる。	has:미끈거리는	fix	fixed
+lexical:nurutsuku	「じゃあ、いいよ。来てよっ♡！もうぬめっているから	has:미끈거리	fix	fixed
+lexical:nurutsuku	汗で濡れた肌は心地良くぬめり、甘い匂いを放っていた。	has:미끈거려	fix	fixed
+lexical:nurutsuku	ぬめり気のある液体が太腿の付け根全体にまで広がっている。	has:미끈거림	fix	fixed
+lexical:nurutsuku	ぬめった舌が上顎をなぞり、背筋にぞくりとしたものが走る。	has:미끈거린	fix	fixed
+lexical:nurutsuku	毒のぬめる短刀を構え、待ちの姿勢になった相手を見て狙いを悟る。	has:미끈거리는	fix	fixed
+lexical:nurutsuku	ぬるついたモノの下には、床の一定の平坦さを乱すいくつかの傷があった。	has:미끈거린	fix	fixed
+lexical:nurutsuku	手がぬるつく。	has:미끈거린다	fix	fixed
+lexical:nurutsuku	ぬめる床に足を取られた。	has:미끈거리는 바닥	fix	fixed
+lexical:nurutsuku	ぬるぬるした手で触った。	has:미끌미끌한 손	keep	fixed
+lexical:nurutsuku	ぬめりとした生温い液体と共に、何かの破片が飛び散っていた。	has:미끈한 미지근한	keep	fixed
+lexical:nurutsuku	組んだ腕は汗でぬめり、シャツも肌に張り付く。	lacks:미끈거림	keep	fixed
+lexical:nurutsuku	ぬるい風が吹く。	lacks:미끈	keep	fixed
+lexical:nurutsuku	ぬるま湯に浸かる。	has:미온수	keep	fixed
+lexical:nurutsuku	手がぬるぬるする。	has:미끌미끌	keep	fixed
+lexical:hatan	もう夫婦仲は破綻している。	has:파탄 나	fix	fixed
+lexical:hatan	むしろ破綻していると言っていい。	has:파탄 나	fix	fixed
+lexical:hatan	「僕達の給料じゃ破綻しちゃうよ。」	has:파탄 나	fix	fixed
+lexical:hatan	しかしその目論見はすでに破綻した。	has:파탄 났	fix	fixed
+lexical:hatan	「彼女の論理は色々破綻しているわ。	has:파탄 나	fix	fixed
+lexical:hatan	一度目の結婚は一年経たないうちに破綻し、	has:파탄 나	fix	fixed
+lexical:hatan	一千億という賞金だけで大会は破綻している。	has:파탄 나	fix	fixed
+lexical:hatan	すでに矛盾も多く、キャラ設定が破綻している。	has:파탄 나	fix	fixed
+lexical:hatan	おねえプレイはきっと破綻するのでやっぱ男だな。	has:파탄 나	fix	fixed
+lexical:hatan	だが、生きていると言うには、姿が破綻しすぎている。	has:파탄 나	fix	fixed
+lexical:hatan	いつか何処かで致命的な損害を負って破綻してしまうだろう。	has:파탄 나	fix	fixed
+lexical:hatan	計画が破綻した。	has:파탄 났다	fix	fixed
+lexical:hatan	財政が破綻している。	has:파탄 나 있다	fix	fixed
+lexical:hatan	破綻の危機だ。	has:파탄의 위기	keep	fixed
+lexical:hatan	経済を破綻させる。	has:파탄시킨다	keep	fixed
+lexical:hatan	自分が楽しむ為だけに人を殺す人格破綻者。	has:인격 파탄자	keep	fixed
+lexical:hatan	わずかな結婚生活と、その先に待っていた破綻。	has:기다리던 파탄	keep	fixed
+lexical:hatan	つまり結果として俺のせいで、飛鳥の結婚が破綻になったのだ。	has:파탄이 되었다	keep	fixed
+lexical:hatan	その後、すぐに経営破綻で店を閉めた。	has:경영파탄	keep	fixed
+lexical:hatan	れば、外交関係に致命的な亀裂をもたらし、諸国に様々の制裁を受け、国の破綻を来す恐れがある。	has:파탄	keep	fixed
+lexical:hatan	その破綻が、今、やって来たのだと竜児は悟った。	has:파탄	keep	fixed
+lexical:hatan	「はい。５年前同じような事故で亡くなっていました。その後、すぐに経営破綻で【料亭	has:파탄	keep	fixed
+lexical:hatan	コロナによる経営の破綻や縮小はすでに多くあっただろうし、	has:파탄	keep	fixed
+lexical:kaku-kana	冷や汗をかいた二人。	has:흘린	fix	senses
+lexical:kaku-kana	変な汗もかいてるな。	has:흘리	fix	senses
+lexical:kaku-kana	猫戸は冷や汗をかいた。	has:흘렸	fix	senses
+lexical:kaku-kana	冷や汗だか脂汗もかいたしね。	has:흘렸	fix	senses
+lexical:kaku-kana	すでに手に冷や汗をかいて少し震えている。	has:흘려	fix	senses
+lexical:kaku-kana	降り注ぐ太陽の熱線すら忘れ、冷や汗をかいた。	has:흘렸	fix	senses
+lexical:kaku-kana	汗もかいた。	has:땀도 흘렸다	fix	senses
+lexical:kaku-kana	あぐらをかいて座る。	has:책상다리를 해	fix	senses
+lexical:kaku-kana	あぐらもかいた。	has:책상다리도 했다	fix	senses
+lexical:kaku-kana	手紙をかいた。	has:편지를 썼다	fix	senses
+lexical:kaku-kana	背中をかいた。	has:등을 긁었다	fix	senses
+lexical:kaku-kana	絵をかいた。	has:그림을 그렸다	fix	senses
+lexical:kaku-kana	恥もかいた。	has:창피도 당했다	fix	senses
+lexical:kaku-kana	赤っ恥をかいた。	has:큰 망신을 당했다	fix	senses
+lexical:kaku-kana	大汗をかいて走る。	has:비지땀을 흘려	fix	senses
+lexical:kaku-kana	脂汗をかいた。	has:비지땀을 흘렸다	fix	senses
+lexical:kaku-kana	背中をかいてもらう。	has:등을 긁어	fix	senses
+lexical:kaku-kana	恥をかいた。	has:창피를 당했다	keep	senses
+lexical:kaku-kana	いびきをかいている。	has:코를 골고	keep	senses
+lexical:kaku-kana	頭をかいた。	has:머리를 긁적였다	keep	senses
+lexical:kaku-kana	べそをかいていた。	has:울상을	keep	senses
+lexical:kaku-kana	誰かいた？	has:누군가 있었어	keep	senses
+lexical:kaku-kana	何匹かいた。	has:몇 마리인가 있었다	keep	senses
+lexical:kaku-kana	猫か犬かいた	has:개인가 있었다	keep	senses
+lexical:kaku-kana	敵の裏をかいた。	has:허를 찔렀다	keep	senses
+lexical:kaku-kana	胡座をかいて座る。	has:양반다리를 해	keep	senses
+lexical:kaku-kana	汗をかいている。	has:땀을 흘리고	keep	senses
+lexical:kaku-kana	大恥をかいた。	has:크게 망신을 당했다	keep	senses
+lexical:kaku-kana	そこにも誰かいた。	has:누군가 있었다	keep	senses
+lexical:kaku-kana	頭がいたい。	has:머리가 아프다	keep	senses
+lexical:kaku-kana	「汗をかいたのでシャワーを浴びたいのですが」	has:땀을 흘렸으므로	keep	senses
+lexical:kaku-kana	ノーランはパイヤドの両手を掴み力の競い合いをしながら汗をかいていた。	has:땀을 흘	keep	senses
+lexical:kaku-kana	俺は焦りと不安で嫌な汗をかいていた。	has:땀을 흘	keep	senses
+lexical:kaku-kana	朝から運動をして汗をかいてしまうと、	has:땀을 흘	keep	senses
+lexical:kaku-kana	背中にじんわりと汗をかく。	has:땀을 흘	keep	senses
+lexical:kaku-kana	俺が汗をかいてたから、急がせないように言わなかったのか？	has:땀을 흘	keep	senses
+lexical:kaku-kana	でもすぐに見飽きて、いまは隣でクロストレーナーで汗をかいてる。	has:땀을 흘	keep	senses
+lexical:kaku-kana	その二人だけ少し汗をかいている。	has:땀을 흘	keep	senses
+lexical:kaku-kana	酷く汗をかいたらしく寝間着がべちょべちょだった。	has:땀을 흘	keep	senses
+lexical:horo	た幌付きの荷馬車だ。	has:덮개	fix	fixed
+lexical:horo	フレアが荷馬車の幌の中で寝て、	has:덮개	fix	fixed
+lexical:horo	近くの幌馬車の周りに人影があった	has:포장마차	fix	fixed
+lexical:horo	めずらしく幌の中の巨人が喋った。	has:덮개	fix	fixed
+lexical:horo	教会前の広場で、幌付きの馬そりに乗る。	has:덮개	fix	fixed
+lexical:horo	それは背後の幌から顔を出した風であった。	has:덮개	fix	fixed
+lexical:horo	魔王が御者台から幌の前のカーテンを開いた。	has:덮개	fix	fixed
+lexical:horo	オレは双眼鏡を手にし、幌から首を伸ばし出した。	has:덮개	fix	fixed
+lexical:horo	幌付きの荷台に身を置いておよそ半時の帰路だった。	has:덮개	fix	fixed
+lexical:horo	先頭の荷車から幌の中や荷台の下をのぞき込んだり、	has:덮개	fix	fixed
+lexical:horo	そのうえ、着付けの女の人と着替用の幌馬車まで……。	has:포장마차	fix	fixed
+lexical:horo	幌をはがしたことを責めたりはしない。	has:덮개를	fix	fixed
+lexical:horo	幌馬車が走る。	has:포장마차가	fix	fixed
+lexical:horo	札幌、仙台、大阪、鹿児島にそれぞれある。	has:삿포로	keep	fixed
+lexical:horo	北海道札幌市にある会社に勤めている。	has:삿포로시	keep	fixed
+lexical:horo	札幌テレビ塔をここに建てたら、	has:삿포로 텔레비전	keep	fixed
+lexical:horo	地元の高校を卒業し札幌の教育大に通ってました	has:삿포로의	keep	fixed
+lexical:horo	北海道札幌市にある道都中央警備保障会社に勤めている。	has:삿포로	keep	fixed
+lexical:horo	目の前にいるのは札幌の大通にあるテレビ塔と同じくらいの巨人だった。	has:삿포로	keep	fixed
+lexical:horo	「北海道札幌ｊｒの遠藤真広です。背番号は１を付けています！二日間よろしく！」	has:삿포로	keep	fixed
+lexical:horo	しっかりと髪をセットし、服も姉からのレクチャーを受け、女子受けする服を着て一人札幌駅で待っている。	has:삿포로	keep	fixed
+lexical:giri-no-ko	義理の息子はククク、と笑った。	has:사위	fix	senses
+lexical:giri-no-ko	私は彼女を義理の娘にすることで、	has:의붓딸	fix	senses
+lexical:giri-no-ko	宿屋によく昼食を食べにくる老人の、義理の娘である。	has:의붓딸	fix	senses
+lexical:giri-no-ko	義理の娘と次席家老の濁った本性に気づけなかったこと。	has:의붓딸	fix	senses
+lexical:giri-no-ko	その時後ろにいつの間にか義理の息子の黒野勇気がいた。	has:사위	fix	senses
+lexical:giri-no-ko	「いやなに、義理の息子になるやつと腹を割って話そうかと」	has:사위	fix	senses
+lexical:giri-no-ko	右京は自分が女にした義理の娘の愛らしい笑顔を思い浮かべる。	has:의붓딸	fix	senses
+lexical:giri-no-ko	武王の未来の義理の息子と、キャニスターの元息子が降りてきた。	has:사위	fix	senses
+lexical:giri-no-ko	成さぬ中でお互いによそよそしい義母と義理の娘であったけれど、	has:의붓딸	fix	senses
+lexical:giri-no-ko	「あ〜〜。そう、だな。アルマが義理の娘って事は話したよな？」	has:의붓딸	fix	senses
+lexical:giri-no-ko	奮闘する義理の息子に大声で発破をかける。	has:사위에게	fix	senses
+lexical:giri-no-ko	義理の娘に会う。	has:의붓딸을	fix	senses
+lexical:giri-no-ko	息子の結婚式で義理の娘ができた。	has:며느리가	fix	senses
+lexical:giri-no-ko	再婚した妻の連れ子が義理の息子になった。	has:의붓아들	fix	senses
+lexical:giri-no-ko	義理の息子の連れ子が来た。	lacks:의붓아들	keep	senses
+lexical:giri-no-ko	義理の兄が来た。	lacks:사위	keep	senses
+lexical:giri-no-ko	義理堅い男だ。	lacks:사위	keep	senses
+lexical:giri-no-ko	義理チョコをもらった。	lacks:사위	keep	senses
+lexical:giri-no-ko	息子の嫁が来た。	lacks:며느리를	keep	senses
+lexical:giri-no-ko	娘婿が来た。	lacks:의붓	keep	senses
+dict:jisjk:95439	「じゃあ、取り壊してくださいよ」	has:철거	fix	defaults
+dict:jisjk:95439	「建物を取り壊しても構わないか？」	has:철거	fix	defaults
+dict:jisjk:95439	ねぇなんでこれ取り壊されてないわけ。	has:철거	fix	defaults
+dict:jisjk:95439	誰の許可もなくいつの間にか取り壊され、	has:철거	fix	defaults
+dict:jisjk:95439	「ついにあの裏街が取り壊されるらしいぜ」	has:철거	fix	defaults
+dict:jisjk:95439	もう取り壊してしまった実家の古家の前で、	has:철거	fix	defaults
+dict:jisjk:95439	もしかしたら取り壊されている可能性もある。	has:철거	fix	defaults
+dict:jisjk:95439	リックの家は後で徹底的に調べ、取り壊しかの。	has:철거	fix	defaults
+dict:jisjk:95439	銅像は取り壊され代わりにたいまつが飾られている。	has:철거	fix	defaults
+dict:jisjk:95439	どこか違う施設に移転するとかで、取り壊されるのだ。	has:철거	fix	defaults
+dict:jisjk:95439	ただ、景観の問題から申しますと、あれらを取り壊し、	has:철거	fix	defaults
+dict:jisjk:95439	取り壊しが決まって以来	has:철거가	fix	defaults
+dict:jisjk:95439	家を取り壊す。	has:철거한다	fix	defaults
+dict:jisjk:95439	校舎が取り壊された。	has:철거되었다	fix	defaults
+dict:jisjk:95439	取り壊し予定の研究施設を調査しに来ている。	has:철거 예정	fix	defaults
+dict:jisjk:95439	家を壊す。	lacks:철거	keep	defaults
+dict:jisjk:95439	部品を取り外す。	has:떼어	keep	defaults
+dict:jisjk:95439	壁を打ち壊す。	lacks:철거	keep	defaults
+dict:jisjk:95439	ゴミを取り除く。	lacks:철거	keep	defaults
+dict:jisjk:95439	しかし、この施設は取り壊されるのが確定してる物件なので、	has:철거되는	keep	defaults
+lexical:kainarasu	そのまま飼いならされて。。	has:길들여	fix	fixed
+lexical:kainarasu	（飼いならされていたとばかり思っていたのですが……）	has:길들여	fix	fixed
+lexical:kainarasu	「気にしないで。あの小鳥は私が飼いならしていたわけじゃないの」	has:길들이	fix	fixed
+lexical:kainarasu	傭兵とは言え、まだ駆け出しの少女に不安を飼いならす事など無理だ。	has:길들이	fix	fixed
+lexical:kainarasu	とても二輪車に着けるモンじゃねえ。このじゃじゃ馬を飼いならす為に、	has:길들이	fix	fixed
+lexical:kainarasu	しかも力の弱い。私の仕事は神を調教すること。飼いならすことなのよ。	has:길들이	fix	fixed
+lexical:kainarasu	ああ、殺しはしないよ。あんた、使えそうだし。なんとかして飼いならすさ。	has:길들이	fix	fixed
+lexical:kainarasu	飼いならされた地竜や騎乗竜の数倍あるようにみえる――もその姿かたちも、	has:길들여	fix	fixed
+lexical:kainarasu	だからルールやモラル、法律で自由を押えこめて、なんとか飼いならしている。	has:길들이	fix	fixed
+lexical:kainarasu	英雄に対する優遇措置とは、理性のある獣を飼いならすために必要な餌に他ならない。	has:길들이	fix	fixed
+lexical:kainarasu	それを管理することを選んだ。そして、子供たちはそれに気づかずに飼いならされている。	has:길들여	fix	fixed
+lexical:kainarasu	そんな飼いならされたスポーツ中継なんて	has:길들여진	fix	fixed
+lexical:kainarasu	犬を飼う。	has:기른다	keep	fixed
+lexical:kainarasu	犬を飼い慣らす。	has:길들인다	keep	fixed
+lexical:kainarasu	猫の飼い主を探す。	has:주인	keep	fixed
+lexical:kainarasu	飼い犬に手を噛まれる。	lacks:길들	keep	fixed
+lexical:kainarasu	こちとら平和に飼い慣らされた日本人ですよ。	has:길들여진	keep	fixed
+lexical:kainarasu	になるんだが飼い慣らしている様でなんか違うなと思った。	has:길들	keep	fixed
+lexical:kainarasu	この子達は元々野生だった鳥から私達が飼い慣らして乗り物として育てているのさ。	has:길들	keep	fixed
+lexical:kainarasu	現実維持派にならなければいけないし、飼い慣らされてる気もする。	has:길들	keep	fixed
+lexical:kainarasu	「渡り鳥を呼ぶらしい。奴は野鳥を何羽か飼い慣らしてるんだ」	has:길들	keep	fixed
+lexical:shimeru	いつか必ずシメるが。	has:혼내 주	fix	senses
+lexical:shimeru	うん、後でシメよう。	has:혼내 주	fix	senses
+lexical:shimeru	シメ用のおうどんセット	has:마무리	fix	senses
+lexical:shimeru	正常化したら、シメてやる！	has:혼내 준	fix	senses
+lexical:shimeru	「あのやろう、後でシメる。」	has:혼내 준	fix	senses
+lexical:shimeru	帰る前にいっぺんシメておこう。	has:혼내 주	fix	senses
+lexical:shimeru	暇つぶしに悪党を探してシメていくか？	has:혼내 주	fix	senses
+lexical:shimeru	ボケ「やっぱりシメはパフェですかねえ」	has:마무리	fix	senses
+lexical:shimeru	「うー……アイツ、いつかぜってぇシメる」	has:혼내 준	fix	senses
+lexical:shimeru	「――さあ、シメじゃ！やったれ、クレリア！」	has:마무리	fix	senses
+lexical:shimeru	まさか調子に乗った教師をシメに行ったはずなのに、	has:혼내 주	fix	senses
+lexical:shimeru	やっぱハワイで ここでシメないと。	has:마무리하지	fix	senses
+lexical:shimeru	シメのラーメンを食べよう。	has:마무리	fix	senses
+lexical:shimeru	あいつをシメる。	has:혼내 준다	fix	senses
+lexical:shimeru	白菜にシメジ。	has:만가닥버섯	keep	senses
+lexical:shimeru	タマネギとシイタケとシメジ、ベーコンを炒め、	has:만가닥버섯	keep	senses
+lexical:shimeru	「黙って食べなさい。オシメ買ってあげないわよ。」	lacks:혼내	keep	senses
+lexical:shimeru	ネクタイを締める。	lacks:혼내	keep	senses
+lexical:shimeru	ミシミシメキメキッ	lacks:혼내	keep	senses
+lexical:garu	ベルが鬱陶しがる理由が少しわかる。	has:귀찮아하	fix	fixed
+lexical:garu	逆に文化系教師からは鬱陶しがられる。	has:귀찮게 여겨진다	fix	fixed
+lexical:garu	ユユ姫はなぜ彼を嫌うのかと不思議がった。	has:이상하게 여	fix	fixed
+lexical:garu	「ウルオッサ、面倒臭がっている場合では無いわ」	has:귀찮아하	fix	fixed
+lexical:garu	親をうっとうしがる息子に、マスターズは苦笑いだ。	has:귀찮아하	fix	fixed
+lexical:garu	お年寄りは姿にありがたがりながら手を合わせている。	has:고마워하면서	fix	fixed
+lexical:garu	不思議がる。	has:이상하게 여긴다	fix	fixed
+lexical:garu	煩わしがる。	has:귀찮아한다	fix	fixed
+lexical:garu	彼は不思議がりながら首をかしげた。	has:이상하게 여기면서	fix	fixed
+lexical:garu	子供たちが珍しがって集まってきた。	has:신기해해	fix	fixed
+lexical:garu	昔を懐かしがる。	has:그리워한다	fix	fixed
+lexical:garu	得意がって胸を張る。	has:우쭐해해	fix	fixed
+lexical:garu	鬱陶しがっていた。	has:귀찮아하고	fix	fixed
+lexical:garu	面倒くさがっていた。	has:귀찮아하고	fix	fixed
+lexical:garu	めんどくさがっていた。	has:귀찮아하고	fix	fixed
+lexical:garu	淋しがるなよ？	has:쓸쓸해하지	fix	fixed
+lexical:garu	子供が怖がる。	has:무서워한다	keep	fixed
+lexical:garu	嫌がる猫。	has:싫어하는	keep	fixed
+lexical:garu	痛がる。	has:아파한다	keep	fixed
+lexical:garu	恥ずかしがる。	has:부끄러워한다	keep	fixed
+lexical:garu	欲しがる。	has:갖고 싶어한다	keep	fixed
+lexical:garu	寂しがっていた。	has:쓸쓸해	keep	fixed
+lexical:garu	寂しがり屋だ。	has:외로움을 잘 타는	keep	fixed
+lexical:garu	ありがたがっていた。	has:고마워하고	fix	fixed
+lexical:garu	不安がっていた。	has:불안해하고	keep	fixed
+lexical:garu	可愛がっていた。	has:귀여워하고	keep	fixed
+lexical:garu	誰にもありがたがられない。	has:고맙게 여겨지지 않는다	fix	fixed
+lexical:garu	ありがたがられる。	has:고맙게 여겨진다	fix	fixed
+lexical:garu	有難がられている。	has:고맙게 여겨지고 있다	fix	fixed
+lexical:garu	皆に珍しがられた。	has:신기하게 여겨졌다	fix	fixed
+lexical:garu	煩わしがられる。	has:귀찮게 여겨진다	fix	fixed
+lexical:garu	わずらわしがられていた。	has:귀찮게 여겨지고 있었다	fix	fixed
+lexical:garu	うっとうしがられた。	has:귀찮게 여겨졌다	fix	fixed
+lexical:garu	面倒くさがられる。	has:귀찮게 여겨진다	fix	fixed
+lexical:garu	懐かしがられる。	has:그립게 여겨진다	fix	fixed
+lexical:garu	ありがたく思われる。	has:고맙게 생각된다	keep	fixed
+lexical:garu	珍しいものだ。	has:희귀한 것이다	keep	fixed
+lexical:garu	煩わしい手続きだ。	has:번거로운 수속이다	keep	fixed
+lexical:garu	誰からも嫌がられる。	has:미움	keep	fixed
+lexical:garu	嘆くように、寂しがるように、アグラカトラは柔和に呟いた。	has:쓸쓸해	keep	fixed
+lexical:garu	一二三が寂しがる子犬のようにこちらを見つめた。	has:쓸쓸해	keep	fixed
+lexical:garu	「キャロも寂しがっているようなので、今日は川の字で寝ましょう。あなたは真ん中ですよ。」	has:쓸쓸해	keep	fixed
+lexical:garu	他人を避けながらも、寂しがる僕の性格はもうどうしようもないな、と心の中で嘲笑してしまった。	has:쓸쓸해	keep	fixed
+lexical:tatakiwaru	皇女は鏡を叩き割った。	has:깨부수	fix	fixed
+lexical:tatakiwaru	苛ついて机を叩き割る。	has:깨부순	fix	fixed
+lexical:tatakiwaru	あ、叩き割ってみようかな。	has:깨부수	fix	fixed
+lexical:tatakiwaru	バロスは、映し鏡を叩き割る。	has:깨부순	fix	fixed
+lexical:tatakiwaru	あの宝玉を叩き割ってからだ。	has:깨부수	fix	fixed
+lexical:tatakiwaru	「……何で窓ガラス叩き割ってるの？」	has:깨부숴	fix	fixed
+lexical:tatakiwaru	に簡単に脳天をたたき割られ、昇天した。	has:깨부수	fix	fixed
+lexical:tatakiwaru	叩き割らんばかりの力を入れて、『返信』	has:깨부수	fix	fixed
+lexical:tatakiwaru	リーグは近くにあった金の机を叩き割る。	has:깨부순	fix	fixed
+lexical:tatakiwaru	叩き割るような音と共に、薄く目を開ける。	has:깨부수	fix	fixed
+lexical:tatakiwaru	次の瞬間には、自らの頭を叩き割っていた。	has:깨부수	fix	fixed
+lexical:tatakiwaru	彼らはガラスを叩き割りながら近づいてくる。	has:깨부수면서	fix	fixed
+lexical:tatakiwaru	窓をぶち割る。	has:깬다	keep	fixed
+lexical:tatakiwaru	氷をかち割る。	has:깨부순다	keep	fixed
+lexical:tatakiwaru	ドアを叩く。	lacks:깨부	keep	fixed
+lexical:tatakiwaru	皿を割った。	lacks:깨부	keep	fixed
+lexical:tatakiwaru	薪を割る。	lacks:깨부	keep	fixed
+lexical:biri	今回は私がビリだった。	has:꼴찌	fix	fixed
+lexical:biri	ああ、またビリだ・・・	has:꼴찌	fix	fixed
+lexical:biri	ビリには絶対ならない」	has:꼴찌	fix	fixed
+lexical:biri	「ビリにならないでよね」	has:꼴찌	fix	fixed
+lexical:biri	結果として、ビリはハル。	has:꼴찌	fix	fixed
+lexical:biri	また温井くんがビリだね」	has:꼴찌	fix	fixed
+lexical:biri	なんと俺はその学年のビリだ。	has:꼴찌	fix	fixed
+lexical:biri	稀にビリになることもあった。	has:꼴찌	fix	fixed
+lexical:biri	マラソンではいつもビリでした。	has:꼴찌	fix	fixed
+lexical:biri	「それなぁ、どうせビリだしね笑笑」	has:꼴찌	fix	fixed
+lexical:biri	……今まで万年ビリだったあたしが？	has:꼴찌	fix	fixed
+lexical:biri	俺のビリは確定した。	has:꼴찌는	fix	fixed
+lexical:biri	ビリになった。	has:꼴찌가	fix	fixed
+lexical:biri	ビリっけつだ。	has:꼴찌다	fix	fixed
+lexical:biri	ビリビリする。	has:찌릿찌릿	keep	fixed
+lexical:biri	リハビリの専門家も何人も尋ねた。	has:재활	keep	fixed
+lexical:biri	此処なら人の目もないし、ノンビリできるし。	lacks:꼴찌	keep	fixed
+lexical:biri	「新人イビリだよー？」	lacks:꼴찌	keep	fixed
+lexical:biri	どいつもこいつもビビリやがって……！」	lacks:꼴찌	keep	fixed
+lexical:biri	「わー！エールとバルトありがとうっ！！あのビリビリ治って良かったねっ！！」	lacks:꼴찌	keep	fixed
+lexical:biri	この為体で、そのうえ帝国本軍が来るまで男爵軍が安全な土地でノンビリ待機していたらどう思われるか。	lacks:꼴찌	keep	fixed
+lexical:biri	拡声器で大きくされたジェッツの声が、機体をビリビリと震わせてエーミールの耳にまで届いた。	lacks:꼴찌	keep	fixed
+lexical:biri	だが、校内の敷地に足を踏み入れた瞬間、ビリビリとした邪悪な何か、急にヤバそうな空気になってない？」	lacks:꼴찌	keep	fixed
+lexical:biri	こんな場所でノンビリはしてるわけにはいかない。	lacks:꼴찌	keep	fixed
+lexical:biri	絶対こいつら俺達をイビリだすまで、コキ使う心算だ。	lacks:꼴찌	keep	fixed
+lexical:biri	みんなは屋根に乗って海岸線を見学しながらワイワイとやってるので中は静かで一人ノンビリである。	lacks:꼴찌	keep	fixed
+lexical:biri	鮫洲の指が、包皮から露出してヒクヒクと痙攣している蕾をとらえ、イビリだした。	lacks:꼴찌	keep	fixed
+lexical:yotsuba	四つ葉のクローバー――３つ	has:네잎클로버	fix	fixed
+lexical:yotsuba	四つ葉のクローバー偏終わり！	has:네잎클로버	fix	fixed
+lexical:yotsuba	ピンク色の四つ葉のクローバー。	has:네잎클로버	fix	fixed
+lexical:yotsuba	中には四つ葉のクローバーを模したのか、	has:네잎클로버	fix	fixed
+lexical:yotsuba	幼い頃の僕は、指輪の代わり四つ葉のクローバーを	has:네잎클로버	fix	fixed
+lexical:yotsuba	人形とか入れていたのね。あら四つ葉のクローバー、	has:네잎클로버	fix	fixed
+lexical:yotsuba	上から見ればまさしく四つ葉のクローバーのような形になっている。	has:네잎클로버	fix	fixed
+lexical:yotsuba	四つ葉のクローバーみたいに見れたら幸運になるという噂もあるしね。	has:네잎클로버	fix	fixed
+lexical:yotsuba	袋を開けて中身を取り出してみると、それは四つ葉のクローバーのレディ	has:네잎클로버	fix	fixed
+lexical:yotsuba	僕は四つ葉のクローバーを地面から切断すると、また月牙さんに捕まれて移動をした。	has:네잎클로버	fix	fixed
+lexical:yotsuba	四つ葉のクローバーを見つけた。	has:네잎클로버를	fix	fixed
+lexical:yotsuba	双葉が四つ葉に増え。	has:네 잎	fix	fixed
+lexical:yotsuba	四つ葉のクローバのモチーフ。	has:네잎클로버의 모티프	fix	fixed
+lexical:yotsuba	よつばに願を掛けると、けっこう叶うんですよ	has:네잎클로버에 소원을	fix	fixed
+lexical:yotsuba	「私、速水よつばは無実であります！」	lacks:네잎클로버	keep	fixed
+lexical:yotsuba	よつ葉「お願いします」	has:요츠바	keep	fixed
+lexical:yotsuba	よつば	has:요츠바	keep	fixed
+lexical:yotsuba	四つ角を曲がる。	lacks:네잎클로버	keep	fixed
+lexical:yotsuba	必死に思いふたばよつば	lacks:네잎클로버	keep	fixed
+lexical:yotsuba	刃の部分はため息が出そうな美しさで、まるで清んだ湖を覗くよつば	lacks:네잎클로버	keep	fixed
+lexical:yotsuba	記録用紙に記入しながら言うよつ葉ちゃんに、悪あがきで言ってみる。	lacks:네잎클로버	keep	fixed
+lexical:mottomorashii	もっともらしいことをね」	has:그럴듯한	fix	fixed
+lexical:mottomorashii	なかなかに『もっともらしい』	has:그럴듯하	fix	fixed
+lexical:mottomorashii	志茂田は、もっともらしい顔をした。	has:그럴듯한	fix	fixed
+lexical:mottomorashii	志望動機はもっともらしいものだった。	has:그럴듯한	fix	fixed
+lexical:mottomorashii	タキトがもっともらしく言い訳をして、	has:그럴듯하게	fix	fixed
+lexical:mottomorashii	セシールがもっともらしいことを言う。	has:그럴듯한	fix	fixed
+lexical:mottomorashii	腕を組んだ私はもっともらしく深く頷いた。	has:그럴듯하	fix	fixed
+lexical:mottomorashii	などともっともらしいようなことを言っていた。	has:그럴듯한	fix	fixed
+lexical:mottomorashii	エリオルド会長はもっともらしいことを言った。	has:그럴듯한	fix	fixed
+lexical:mottomorashii	後付けの何かもっともらしい根拠を用意したとして、	has:그럴듯한	fix	fixed
+lexical:mottomorashii	もっともらしい言葉を述べているが、目は笑っていた。	has:그럴듯한	fix	fixed
+lexical:mottomorashii	もっともらしいことを言う。	has:그럴듯한 말	fix	fixed
+lexical:mottomorashii	尤もらしい理由だ。	has:그럴듯한 이유	keep	fixed
+lexical:mottomorashii	尤もらしく近付いて。	has:그럴듯하게	keep	fixed
+lexical:mottomorashii	それらを駆使して尤もらしい理由を並び立てる。	has:그럴듯한 이유	keep	fixed
+lexical:mottomorashii	それはもっともな意見だ。	lacks:그럴듯	keep	fixed
+lexical:mottomorashii	子供らしい顔だ。	lacks:그럴듯	keep	fixed
+lexical:mottomorashii	近くまで来たのでスエカさんはお元気だろうかと立ち寄ってみたんです、と俺は尤もらしい事を言った。	has:그럴듯	keep	fixed
+lexical:mottomorashii	この身体となってから出会った者達に何度も語った尤もらしい理由を言うと、	has:그럴듯	keep	fixed
+lexical:mottomorashii	なにか尤もらしい理由をつけて貰って。	has:그럴듯	keep	fixed
+lexical:mottomorashii	様々な意見具申に尤もらしく頷き、聞き入る振りをする。	has:그럴듯	keep	fixed
+lexical:kurushimagire	苦し紛れに全力で放った。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	僕は苦し紛れに言い訳をする。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	この期に及んでの苦し紛れの抗弁。	has:궁여지책	fix	fixed
+lexical:kurushimagire	オレは苦し紛れにみんなを指差す。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	それでも男は苦し紛れに腕を伸ばす。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	フェリオスが苦し紛れに言葉を漏らす。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	苦し紛れに吐くセリフにも覇気がない。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	僕がロビングで逃げたのは苦し紛れだ。	has:궁여지책	fix	fixed
+lexical:kurushimagire	苦し紛れに魔法への防御を試みる木人部隊。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	キングスノーマンが苦し紛れに腕を振るう。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	苦し紛れのフラッシュアイディアともいう。	has:궁여지책	fix	fixed
+lexical:kurushimagire	苦し紛れに言った。	has:궁한 나머지	fix	fixed
+lexical:kurushimagire	苦し紛れの言い訳だ。	has:궁여지책의 변명	fix	fixed
+lexical:kurushimagire	苦し紛れのように言う。	has:궁여지책처럼	fix	fixed
+lexical:kurushimagire	苦しい言い訳だ。	lacks:궁여지책	keep	fixed
+lexical:kurushimagire	胸が苦しい。	lacks:궁	keep	fixed
+lexical:kurushimagire	人込みに紛れ込む。	lacks:궁	keep	fixed
+lexical:kurushimagire	気が紛れる。	lacks:궁	keep	fixed
+lexical:kaku-kana	汗を拭いてから手紙をかいた。	lacks:흘렸	keep	senses
+lexical:kaku-kana	インクが乾く前に名前をかいた。	has:이름을 썼다	keep	senses
+lexical:shimeru	最後にあいつをシメてやる。	has:혼내	fix	senses
+lexical:yotsuba	よつばが花を探している。	has:요츠바	fix	senses
+lexical:horo	幌馬車の旅が続く。	has:포장마차	fix	fixed
+lexical:horo	はい、幌筵は寒いですよ。	has:파라무시르	fix	fixed
+lexical:giri-no-ko	アルムが義理の孫なら、お主は義理の息子だな！	has:의붓아들	fix	senses
+lexical:hatan	いくら関係性が破綻しても、離縁は許されなかった。	has:파탄 나더라도	fix	fixed

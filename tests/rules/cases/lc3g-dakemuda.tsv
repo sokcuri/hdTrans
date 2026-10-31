@@ -1,0 +1,32 @@
+# 규칙: GRM-182
+rule	input	expected	kind	layer
+cx:lc3g-dakemuda:10	聞くだけ損だ。	has:들어 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	するだけ無駄だ。	has:해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	やるだけ無駄だ。	has:해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	構うだけ無意味。	has:상관해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	探すだけ無意味だ。	has:찾아 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	考えるだけ無駄か。	has:생각해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	追うだけ無駄だな。	has:쫓아 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	「やるだけ無駄よ。」	has:해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	反抗するだけ無駄だ。	has:반항해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	断るだけ無駄だろう。	has:거절해 봤자	fix	rewrites
+cx:lc3g-dakemuda:10	期待するだけ無駄か。	has:기대해 봤자	fix	rewrites
+cx:lc3g-dakemuda:20	「お前の話は聞くだけ無駄」	has:들어 봤자 헛수고	fix	rewrites
+cx:lc3g-dakemuda:20	「そんなの考えるだけ無駄」	has:생각해 봤자 헛수고	fix	rewrites
+cx:lc3g-dakemuda:20	気にするだけ無駄なのだろう。	has:써 봤자 헛수고일	fix	rewrites
+cx:lc3g-dakemuda:20	こんなやつ、話をするだけ無駄。	has:해 봤자 헛수고	fix	rewrites
+cx:lc3g-dakemuda:20	「神族の視力と張り合うだけ無駄」	has:겨루어 봤자 헛수고	fix	rewrites
+cx:lc3g-dakemuda:20	鬼業への直撃は、考えるだけ無駄。	has:생각해 봤자 헛수고	fix	rewrites
+cx:lc3g-dakemuda:20	だったら聞くだけ無駄というものだ。	has:들어 봤자 헛수고라는	fix	rewrites
+cx:lc3g-dakemuda:20	店も客がいないのでは開いているだけ無駄。	has:있어 봤자 헛수고	fix	rewrites
+cx:lc3g-dakemuda:20	ならば方法を推し量るだけ無駄というものだ。	has:헤아려 봤자 헛수고라는	fix	rewrites
+cx:lc3g-dakemuda:20	他人の空似なら見続けるだけ無駄と言うものだ…	has:봐 봤자 헛수고라는	fix	rewrites
+cx:lc3g-dakemuda:20	「ニンゲン如き下等生物の名など、記憶するだけ無駄ダ」	has:기억해 봤자 헛수고다	fix	rewrites
+cx:lc3g-dakemuda:10	ならば蹂躙するだけだ。	!rule:cx:lc3g-dakemuda:10	keep	rewrites
+cx:lc3g-dakemuda:20	さぁあとは自宅に帰ってゆっくりするだけだ	!rule:cx:lc3g-dakemuda:20	keep	rewrites
+cx:lc3g-dakemuda:10	起こってしまったことを後悔するだけだ。	!rule:cx:lc3g-dakemuda:10	keep	rewrites
+cx:lc3g-dakemuda:20	「無用な詮索はするな、ただ一泊するだけだ」	!rule:cx:lc3g-dakemuda:20	keep	rewrites
+cx:lc3g-dakemuda:10	そう言われても、ますます混乱するだけだが。	!rule:cx:lc3g-dakemuda:10	keep	rewrites
+cx:lc3g-dakemuda:20	微かに身もだえするだけだ。	!rule:cx:lc3g-dakemuda:20	keep	rewrites
+cx:lc3g-dakemuda:10	私も私で自分の仕事をするだけだ。	!rule:cx:lc3g-dakemuda:10	keep	rewrites
+cx:lc3g-dakemuda:20	お金を取られて、色恋するだけだ。	!rule:cx:lc3g-dakemuda:20	keep	rewrites

@@ -1,0 +1,39 @@
+# 규칙: LEX-169
+rule	input	expected	kind	layer
+cx:threat-yaru:10	「誰がそんなこと言ったの？ぶっ飛ばしてやるわ」	has:날려 버릴 거야	fix	rewrites
+cx:threat-yaru:10	「とんでもねぇ糞野郎だ！会ったらぶっ飛ばしてやる！！」	has:만나면 날려 버릴 거야	fix	rewrites
+cx:threat-yaru:10	なら教えてやるよ。	!rule:cx:threat-yaru:10	keep	rewrites
+cx:threat-yaru:12	すぐにぶっ飛ばしてやるからな！	has:날려 버릴 테니까	fix	rewrites
+cx:threat-yaru:12	ぶっ飛ばしてやるから。	has:날려 버릴 테니까	fix	rewrites
+cx:threat-yaru:12	「横山、手伝ってやる――」	!rule:cx:threat-yaru:12	keep	rewrites
+cx:threat-yaru:20	「チッ、さっきみたいに潰してやるよ！」	has:부수어 버릴 거야	fix	rewrites
+cx:threat-yaru:20	「お前終わったらぶん殴ってやる」	has:후려쳐 버릴 거야	fix	rewrites
+cx:threat-yaru:20	「こんな世界、俺が壊してやる」	has:부수어 버릴 거야	fix	rewrites
+cx:threat-yaru:20	なら教えてやるよ。	그렇다면 가르쳐 줄게.	keep	rewrites
+cx:threat-yaru:20	「教えてやるぞシェイ！	!rule:cx:threat-yaru:20	keep	rewrites
+cx:threat-yaru:22	全力でぶん殴ってやるから！	has:후려쳐 버릴 테니까	fix	rewrites
+cx:threat-yaru:22	一発はぶん殴ってやるからさ！	has:후려쳐 버릴 테니까	fix	rewrites
+cx:threat-yaru:22	上体を起こすのを手伝ってやる。	!rule:cx:threat-yaru:22	keep	rewrites
+cx:threat-yaru:30	俺が殴ってやる。	내가 때리겠다.	fix	rewrites
+cx:threat-yaru:30	絶対にぶん殴ってやる。	절대로 후려치겠다.	fix	rewrites
+cx:threat-yaru:30	ここから先は俺も本気だ、叩きのめしてやる。	has:때려 눕히겠다	fix	rewrites
+cx:threat-yaru:30	上体を起こすのを手伝ってやる。	상체를 일으키는 것을 도와 준다.	keep	rewrites
+cx:threat-yaru:30	「横山、手伝ってやる――」	!rule:cx:threat-yaru:30	keep	rewrites
+cx:threat-yaru:40	てめぇの攻撃が全て無駄だったと思い知らせてやる！	has:깨닫게 하겠다	fix	rewrites
+cx:threat-yaru:40	「偉そうに言ったくせに、その様か。俺に逆らったことを後悔させてやる」	has:후회시키겠어	fix	rewrites
+cx:threat-yaru:40	「教えてやるぞシェイ！	!rule:cx:threat-yaru:40	keep	rewrites
+cx:threat-yaru:40	上体を起こすのを手伝ってやる。	!rule:cx:threat-yaru:40	keep	rewrites
+cx:threat-yaru:44	絶対に後悔させてやるからな。	has:후회시킬 테니까	fix	rewrites
+cx:threat-yaru:44	「絶対後悔させてやるからな…」	has:후회시킬 테니까	fix	rewrites
+cx:threat-yaru:44	一発はぶん殴ってやるからさ！	!rule:cx:threat-yaru:44	keep	rewrites
+cx:threat-yaru:44	「横山、手伝ってやる――」	!rule:cx:threat-yaru:44	keep	rewrites
+cx:threat-yaru:50	「殺してやる」	「죽여 버릴 거야」	fix	rewrites
+cx:threat-yaru:50	「ここで自殺してやるからな！」	!rule:cx:threat-yaru:50	keep	rewrites
+cx:threat-yaru:50	なら教えてやるよ。	!rule:cx:threat-yaru:50	keep	rewrites
+cx:threat-yaru:52	絶対に殺してやるからな。	절대로 죽여 버릴 테니까.	fix	rewrites
+cx:threat-yaru:52	すぐに焼き殺してやるからな。	has:죽여 버릴 테니까	fix	rewrites
+cx:threat-yaru:52	「横山、手伝ってやる――」	!rule:cx:threat-yaru:52	keep	rewrites
+cx:threat-yaru:54	後で、殺してやる。	나중에, 죽이겠다.	fix	rewrites
+cx:threat-yaru:54	だが、お前なんか殺してやる！！	has:죽이겠다	fix	rewrites
+cx:threat-yaru:54	上体を起こすのを手伝ってやる。	!rule:cx:threat-yaru:54	keep	rewrites
+cx:threat-yaru:54	「ここで自殺してやるからな！」	!rule:cx:threat-yaru:54	keep	rewrites

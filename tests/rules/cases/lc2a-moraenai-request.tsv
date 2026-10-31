@@ -1,0 +1,30 @@
+# 규칙: GRM-106
+rule	input	expected	kind	layer
+cx:lc2a-moraenai-request:10	俺も加えてもらえないでしょうか	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:10	受け取ってもらえないでしょうか？	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:10	み、聞いてもらえないでしょうか。	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:10	ここは去ってもらえないでしょうか？	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:10	１００ＢＰで譲ってもらえないでしょうか？	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:10	…ではそこに案内してもらえないでしょうか？	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:20	瓶に戻してもらえないか。	has:줄 수 없는가	fix	rewrites
+cx:lc2a-moraenai-request:20	信じてもらえないかなあ？	has:줄 수 없을까	fix	rewrites
+cx:lc2a-moraenai-request:20	離してもらえないかしら。	has:줄 수 없을까	fix	rewrites
+cx:lc2a-moraenai-request:20	一から話してもらえないかな	has:줄 수 없을까	fix	rewrites
+cx:lc2a-moraenai-request:20	勉強、教えてもらえないかなって	has:줄 수 없을까 하고	fix	rewrites
+cx:lc2a-moraenai-request:20	その間に、目的を教えてもらえないか？	has:줄 수 없겠어	fix	rewrites
+cx:lc2a-moraenai-request:30	描いてもらえない？	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:30	聞いてもらえない？	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:30	……出て来てもらえない？	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:30	か―――教えてもらえない？	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:30	これ渡しといてもらえない？	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:30	今からでも変えてもらえない？	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:10	すいませんが 外から開けてもらえないでしょうか？	has:주실 수 없을까요	fix	rewrites
+cx:lc2a-moraenai-request:20	「とりあえず、みんな一旦、部室の外に出てもらえないか？」	has:줄 수 없겠어	fix	rewrites
+cx:lc2a-moraenai-request:30	「あなたの部屋に飾ってもらえない？」	has:줄 수 없어	fix	rewrites
+cx:lc2a-moraenai-request:20	どうかわたしの願いを叶えてもらえないだろうか？	has:줄 수 없을까	fix	rewrites
+cx:lc2a-moraenai-request:10	「えと、信じてもらえないかもしれないけど」	!rule:cx:lc2a-moraenai-request:10	keep	rewrites
+cx:lc2a-moraenai-request:20	素材も出所も一切教えてもらえないが味は確かである。	!rule:cx:lc2a-moraenai-request:20	keep	rewrites
+cx:lc2a-moraenai-request:20	受け入れてもらえないかと思っていた。	!rule:cx:lc2a-moraenai-request:20	keep	rewrites
+cx:lc2a-moraenai-request:30	このような反応をする時は大抵教えてもらえないので、諦めた。	!rule:cx:lc2a-moraenai-request:30	keep	rewrites
+cx:lc2a-moraenai-request:30	手伝ってもらえませんか？	!rule:cx:lc2a-moraenai-request:30	keep	rewrites
+cx:lc2a-moraenai-request:10	話を聞いてもらえなかった。	!rule:cx:lc2a-moraenai-request:10	keep	rewrites

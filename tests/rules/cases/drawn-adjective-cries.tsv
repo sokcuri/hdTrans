@@ -37,8 +37,8 @@ cx:copies:36	「熱いぃ、熱いぃ！」	「뜨거워, 뜨거워!」	fix	rewr
 cx:copies:36	「痛いぃ、痛いぃ、痛いぃ」	「아파, 아파, 아파」	fix	rewrites
 cx:clipped-copies:10	「怖いいいっ、怖いいいっ！」	「무서웟, 무서웟!」	fix	rewrites
 cx:copies:36	「痛いいいい、痛いいいい」	「아파아아아, 아파아아아」	fix	rewrites
-cx:drawn-cry:10	「痛いぃ……でも我慢する」	「아파……하지만 참는다」	fix	rewrites
-cx:drawn-cry:10	「怖いぃ……でも行く」	「무서워……하지만 간다」	fix	rewrites
+cx:drawn-cry:10	「痛いぃ……でも我慢する」	「아파……하지만 참아」	fix	rewrites
+cx:drawn-cry:10	「怖いぃ……でも行く」	「무서워……하지만 가」	fix	rewrites
 cx:drawn-cry:10	「暑いー！」	「더워~!」	fix	rewrites
 cx:drawn-cry:10	「痛い～」	「아파~」	fix	rewrites
 cx:drawn-cry:10	寒い～。	추워~.	fix	rewrites
@@ -74,8 +74,8 @@ cx:drawn-cry:10	「口ほどにも無いぃ…Zzz」	has:없어…Zzz	fix	local
 cx:drawn-cry:10	「痛い……いや」	!rule:cx:drawn-cry:10	keep	local
 cx:drawn-cry:10	「怖い……夢」	「무서운……꿈」	keep	local
 cx:drawn-cry:10	「痛いぃ……でも、まだ！」	「아파……하지만, 아직!」	fix	local
-cx:drawn-cry:10	「暑いぃ……溶ける」	「더워……녹는다」	fix	local
-cx:drawn-cry:10	「眠いぃ……もう寝る」	「졸려……이제 잔다」	fix	local
+cx:drawn-cry:10	「暑いぃ……溶ける」	「더워……녹아」	fix	local
+cx:drawn-cry:10	「眠いぃ……もう寝る」	「졸려……이제 자」	fix	local
 cx:drawn-cry:10	（む、難しい〜〜〜〜〜〜〜〜〜〜！！）	(어, 어려워~~~~~~~~~~!!)	keep	rewrites
 cx:drawn-cry:10	（痛いー）	(아프다~)	keep	rewrites
 cx:drawn-cry:10	逃・が・さ・な・いー！	has:다―!	keep	rewrites

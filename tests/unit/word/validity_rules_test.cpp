@@ -24,8 +24,8 @@ HD_TEST(validity_rules_fingerprint) {
         h.Byte(static_cast<uint8_t>(r.followClass));
         h.Str(r.first);
     }
-    HD_CHECK_EQ(h.h, uint64_t{0x31e362851d459f5bull});
-    HD_CHECK_EQ(rules.size(), size_t{755});
+    HD_CHECK_EQ(h.h, uint64_t{0xb469db027b5f3235ull});
+    HD_CHECK_EQ(rules.size(), size_t{758});
     HD_REQUIRE(!rules.empty());
     HD_CHECK_EQ(std::string(rules[0].source), std::string("でも"));
     HD_CHECK_EQ(rules[0].sourceClass, '2');
@@ -62,6 +62,12 @@ HD_TEST(validity_match_dictionary) {
         // The adjectival noun 急 does not take the か of the verb stem 急か (急かした: 急かす, not 急 + か + した).
         {"かした。", "急", '8', 'X', false}, {"かされて", "急", '8', 'X', false}, {"な話", "急", '8', 'X', true},
         {"ある。", "ところで", '5', '4', false}, {"あろう", "ところで", '3', 'X', false}, {"、", "ところで", '5', '4', true},
+        // The とも of a volitional does not run into もがく (逃げようともがく: ようと + もがく); とも before が stays.
+        {"がいた", "とも", '5', '4', false}, {"がく", "とも", '5', '4', false}, {"が来た", "とも", '5', '4', true},
+        // The verb なら (習う, 倣う) does not take いい, いつ, いら, いく ... (ならいいんだ: なら + いい, ならいつでも),
+        // nor ないな the ら of なら (見てないならいい: ない + なら).
+        {"いいんだ", "なら", '4', 'X', false}, {"いつでも", "なら", '4', 'X', false}, {"います", "なら", '4', 'X', true}, {"いいよ", "になら", '4', 'X', false}, {"、", "になら", '4', 'X', true},
+        {"らいい", "ないな", '5', '4', false}, {"。", "ないな", '5', '4', true},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(worker.MatchDictionary(c.following, c.source, c.first, c.second), c.ok);

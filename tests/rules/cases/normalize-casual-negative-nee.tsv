@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 normalize:casual-negative-nee	そんな仕事、俺はやらねぇよ。	그런 일, 나는 하지 않아.	fix	normalize
-normalize:casual-negative-nee	もう宿題なんかやらねーよ！	이제 숙제는 하지 않아!	fix	normalize
+normalize:casual-negative-nee	もう宿題なんかやらねーよ！	이제 숙제 같은 건 하지 않아!	fix	normalize
 normalize:casual-negative-nee	この店はもう二度とやらねぇ。	이 가게는 이제 두 번 다시 하지 않는다.	fix	normalize
 normalize:casual-negative-nee	今すぐ行かなきゃならねえんだ。	당장 가야 한다.	fix	normalize
 normalize:casual-negative-nee	知らねぇよ。	몰라.	keep	normalize
@@ -46,3 +46,24 @@ normalize:casual-negative-nee	季節は秋ねー。	계절은 가을이네―.	k
 normalize:casual-negative-nee	ねぇ、長波ねぇ！	저기, 장파네!	keep	normalize
 normalize:casual-negative-nee	仕方ねぇな	어쩔 수 없네	keep	normalize
 normalize:casual-negative-nee	でもねー、それは	그런데―, 그것은	keep	normalize
+normalize:casual-negative-nee	血は一滴も流れてねえもん。	has:흐르지 않은 걸	fix	normalize
+normalize:casual-negative-nee	見てねえもん	has:보지 않은 걸	fix	normalize
+normalize:casual-negative-nee	ノーマルENDでも救いがねぇ！	has:구원이 없	fix	normalize
+normalize:casual-negative-nee	時間がねぇし	has:시간이 없고	fix	normalize
+normalize:casual-negative-nee	ここには何もねえぞ	has:없어	keep	normalize
+normalize:casual-negative-nee	あの望月さんがねえ」	lacks:없	keep	normalize
+normalize:casual-negative-nee	大きなお世話だっつの	has:참견이라니까	fix	normalize
+normalize:casual-negative-nee	違うっつの！	has:아니라니까	fix	normalize
+normalize:casual-negative-nee	「見てねっつの！」	has:보지 않다니까	fix	normalize
+normalize:casual-negative-nee	「見てね！」	lacks:않	keep	normalize
+normalize:casual-negative-nee	待っててねえもう	lacks:않	keep	normalize
+normalize:casual-negative-nee	気をつけてねえもう遅いし	lacks:않	keep	normalize
+normalize:casual-negative-nee	また来てねえもう帰るの？	lacks:않	keep	normalize
+normalize:casual-negative-nee	見てねえもの	has:보지 않	fix	normalize
+normalize:casual-negative-nee	こいつがねぇ！	lacks:없	keep	normalize
+normalize:casual-negative-nee	そいつがねえよ	lacks:없	keep	normalize
+normalize:casual-negative-nee	ママがねえ！	lacks:없	keep	normalize
+normalize:casual-negative-nee	これがねえ！すごいの	lacks:없	keep	normalize
+normalize:casual-negative-nee	それがねぇ！聞いてよ	lacks:없	keep	normalize
+normalize:casual-negative-nee	金がねえよ	has:없어	fix	normalize
+normalize:casual-negative-nee	見てねっつのは	lacks:않다니까	keep	normalize

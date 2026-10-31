@@ -11,7 +11,7 @@ void ResolveSentence(const rules::Program& program, output::Families& families, 
     w.chain = s.chain;
     w.current = s.current;
     w.transformSurface = s.transformSurface;
-    word::Flusher f{w, program, families};
+    word::Flusher f{w, program, families, {}};
     word::Flush(f);
     s.chain = w.chain;
 }

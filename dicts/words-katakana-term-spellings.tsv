@@ -1,0 +1,35 @@
+#! layer=base
+# 사전 기본 행의 틀린 외래어 표기와 뜻, 두음 법칙: ブレンダー 블렌더, ペンチ 펜치, ホッケー 하키, ボール盤 드릴링 머신, かいけいねんど 회계 연도
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+ブレンダー	블렌더	N110			GN			LEX-3300	katakana-term-spellings:1
+ペンチ	펜치	N110	VPe		GN			LEX-3300	katakana-term-spellings:2
+ホッケー	하키	N110	VRw		GN			LEX-3300	katakana-term-spellings:3
+ベルガモット	베르가모트	K130	QAL		GN			LEX-3300	katakana-term-spellings:4
+ボトリング	보틀링	N110			GN			LEX-3300	katakana-term-spellings:5
+ボンデージファッション	본디지 패션	N110	VCp		GN			LEX-3300	katakana-term-spellings:6
+ブロック目	블록째	N110			GN			LEX-3300	katakana-term-spellings:7
+プーラー	풀러	N110			GN			LEX-3300	katakana-term-spellings:8
+ブロックタックル	블록 태클	N110			GN			LEX-3300	katakana-term-spellings:9
+プラスミノーゲン	플라스미노겐	N110			GN			LEX-3300	katakana-term-spellings:10
+プロフェッショナル化	프로페셔널화	N110			GN			LEX-3300	katakana-term-spellings:11
+プロネート	프로네이트	N110			GN			LEX-3300	katakana-term-spellings:12
+ホトマスク	포토마스크	N110			GN			LEX-3300	katakana-term-spellings:13
+ホストスクリプト	포스트스크립트	N110			GN			LEX-3300	katakana-term-spellings:14
+ホストスクリプトプリンタ	포스트스크립트 프린터	N110			GN			LEX-3300	katakana-term-spellings:15
+ヘッジ債	헤지 채권	N110	VMo		GN			LEX-3300	katakana-term-spellings:16
+ヘッジ取引	헤지 거래	N110			GN			LEX-3300	katakana-term-spellings:17
+ヘッジ操作	헤지 조작	N110			GN			LEX-3300	katakana-term-spellings:18
+ブルーチップスタンプ	블루칩 스탬프	N130	VMy		GN			LEX-3300	katakana-term-spellings:19
+かいけいねんど	회계 연도	N110	VMo		GN			LEX-3300	katakana-term-spellings:20
+インフレヘッジ	인플레이션 헤지	N110			GN			LEX-3300	katakana-term-spellings:21
+クロスヘッジ	크로스 헤지	N110			GN			LEX-3300	katakana-term-spellings:22
+リスク・ヘッジ	리스크 헤지	N110			GN			LEX-3300	katakana-term-spellings:23
+コーラボトリング	콜라 보틀링	N110			GN			LEX-3300	katakana-term-spellings:24
+ボール盤	드릴링 머신	N110	VPe		GN			LEX-3301	katakana-term-spellings:25
+プロパガンディスト	선전가	N110	VHn		GN			LEX-3301	katakana-term-spellings:26
+ブレーンフィットネス	브레인 피트니스	N110	QHP		GN			LEX-3301	katakana-term-spellings:27
+プロジェクションテレビ	프로젝션 텔레비전	N110	VPe		GN			LEX-3301	katakana-term-spellings:28
+ベータがたインターフェロン	베타형 인터페론	N110	QHP		GN			LEX-3301	katakana-term-spellings:29
+プロップファンエンジン	프롭팬 엔진	N110	VPe		GN			LEX-3301	katakana-term-spellings:30
+プル技術	풀 기술	N110			GN			LEX-3301	katakana-term-spellings:31
+プット・オプション付き	풋옵션부	N110			GN			LEX-3301	katakana-term-spellings:32

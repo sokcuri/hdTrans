@@ -1,0 +1,74 @@
+# 규칙: LEX-220
+# 규칙: LEX-221
+# 규칙: LEX-224
+# 규칙: LEX-227
+# 규칙: LEX-228
+rule	input	expected	kind	layer
+lexical:namae-wo-ageru	他にもアイオワ級の同型艦の名前を挙げたが	has:이름을 거론했	fix	lookup
+lexical:namae-wo-ageru	好きなメンバーを訊かれた時、誰の名前を挙げるか	has:이름을 거론할까	fix	lookup
+lexical:namae-wo-ageru	好きなキャラにおいて、数々の名前を挙げてきたお前	has:이름을 거론해	fix	lookup
+lexical:namae-wo-ageru	名前を挙げられた二人は顔を見合わせ、首を傾げた。	has:이름이 거론된	fix	lookup
+lexical:namae-wo-ageru	突然、ブルーの名前を挙げられてぎくりとした。	has:이름이 거론되어	fix	lookup
+lexical:namae-wo-ageru	彼女は作家の名前を挙げて、俺に尋ねる。	has:이름을 거론해	fix	lookup
+lexical:namae-wo-ageru	敢えて特定の人物の名前を挙げる事はしなかった。	has:이름을 거론하는	fix	lookup
+lexical:namae-wo-ageru	と一人の名前を挙げた。	has:이름을 거론했다	fix	lookup
+lexical:namae-wo-ageru	ミミちゃんが名前を挙げると、彼女の後ろの背景が切り替わり	has:이름을 거론하면	fix	lookup
+lexical:namae-wo-ageru	とか……いくつか名前を挙げてたな。	has:거론하고	fix	lookup
+lexical:namae-wo-ageru	名前を上げるために必死に働いた。	lacks:거론	keep	lookup
+lexical:namae-wo-ageru	例を挙げる必要がある。	lacks:거론	keep	lookup
+lexical:namae-wo-ageru	彼は手を挙げて質問した。	lacks:거론	keep	lookup
+lexical:namae-wo-ageru	大きな声で名前を呼ぶ。	lacks:거론	keep	lookup
+lexical:namae-wo-ageru	理由を三つ挙げてください。	lacks:거론	keep	lookup
+lexical:namae-wo-ageru	証拠を挙げて説明した。	lacks:거론	keep	lookup
+lexical:temae	まあ、快復草の方が効果は高いけど作るのに手間が掛かるし	has:손이 많이 가고	fix	lookup
+lexical:temae	まったく手間のかかる。	has:손이 많이 간다	fix	lookup
+lexical:temae	後期型に比べると、果てしなく手間の掛かる仕様なんだ	has:손이 많이 가는	fix	lookup
+lexical:temae	子供ってこんなに手間が掛かるんだな…	has:손이 많이 가는구나	fix	lookup
+lexical:temae	不要な空間が多くなるが作り直すより手間が掛からない。	has:손이 많이 가지 않는다	fix	lookup
+lexical:temae	余計な手間を掛けさせるよりは明日の午後に来訪して	has:수고를 끼치	fix	lookup
+lexical:temae	手間が省けて助かった。	lacks:손이 많이	keep	lookup
+lexical:temae	この手間を省く方法はないか。	lacks:손이 많이	keep	lookup
+lexical:temae	手間暇かけて作った料理だ。	lacks:손이 많이	keep	lookup
+lexical:temae	この作業は手間だ。	has:수고다	keep	lookup
+lexical:temae	手間はいらない。	has:수고는	keep	lookup
+lexical:temae	手間取って遅れた。	lacks:손이 많이	keep	lookup
+cx:colloc-verb-partner:210	食事を終えたテッドが空になった皿を脇にやり	has:제쳐 둬	fix	rewrites
+cx:colloc-verb-partner:210	カップを皿に置いて脇にやると、メイドが下げにくる。	has:제쳐 두	fix	rewrites
+cx:colloc-verb-partner:210	重箱を脇にやり、お互い、すぐ近くに座り直す。	has:제쳐 두	fix	rewrites
+cx:colloc-verb-partner:210	幼馴染のお憤りはひとまず脇へやって、浅陽が	has:제쳐 두	fix	rewrites
+cx:colloc-verb-partner:210	沙子があきれをとりあえず脇にやって話を進める。	has:제쳐 두	fix	rewrites
+cx:colloc-verb-partner:210	ベッドの脇にやって来ると、ようやくマリー姫の姿が見えた。	lacks:제쳐	keep	rewrites
+cx:colloc-verb-partner:210	本を脇に置いた。	lacks:제쳐	keep	rewrites
+cx:colloc-verb-partner:210	脇へ寄って道を空けた。	lacks:제쳐	keep	rewrites
+lexical:waki-ni-oiyaru	泥棒疑惑は一旦脇へ追いやって、クロウは	has:한쪽으로 밀어내	fix	lookup
+lexical:waki-ni-oiyaru	余計なマイナス思考は脇に追いやって素直に好リードに甘えておこう。	has:한쪽으로 밀어내	fix	lookup
+lexical:waki-ni-oiyaru	脇に追いやられたテーブルの上にある	has:한쪽으로 밀려난	fix	lookup
+lexical:waki-ni-oiyaru	暗黒メイドがその小さな身体を丁重にヒョイと持ち上げ、脇に追いやられる。	has:밀려난다	fix	lookup
+lexical:waki-ni-oiyaru	自慢の耳当て付き毛皮帽もお役御免と脇に追いやられている。	has:밀려나고	fix	lookup
+lexical:waki-ni-oiyaru	彼を脇に抱えた。	lacks:밀어	keep	lookup
+dict:jisjk:344441	コルネさんの真剣な表情が脳に焼きついて離れない。	has:새겨져	fix	lookup
+dict:jisjk:344441	人魚の姿は、ロクサムの頭の中に強く焼き付いてしまっていた。	has:새겨	fix	lookup
+dict:jisjk:344441	閏は瞼を閉じ、網膜に焼き付いた恋人の姿を	has:새겨진	fix	lookup
+dict:jisjk:344441	写真の焼き付けを頼んだ。	has:인화	keep	lookup
+dict:jisjk:344441	肉を焼くのは父の役目だ。	has:굽는	keep	lookup
+dict:jisjk:344441	魚を焼いて食べた。	has:구워	keep	lookup
+lexical:yakitsuku	確に焼き付いているものを忘れたいと願うだけで	has:새겨져 있	fix	lookup
+lexical:yakitsuku	驚きに見開かれた特徴的な銀朱の瞳が、この目に焼き付いている。	has:눈에 선하다	keep	lookup
+lexical:yakitsuku	瞼に焼き付いている光景が消えない。	has:눈에 새겨져 있	fix	lookup
+lexical:yakitsuku	肉を焼く匂いが漂う。	lacks:새겨	keep	lookup
+lexical:tasukebune	困り果てている晴紀を見かね、助け船を出すお郷の方。	has:도움의 손길을 내미	fix	lookup
+lexical:tasukebune	困ったようなキャスリンに、意外にも暁龍が助け舟を出す。	has:도움의 손길을 내민다	fix	lookup
+lexical:tasukebune	けれどもその時、助け舟を出すようにガルド・ルルウが口を開いた。	has:도움의 손길을 내밀	fix	lookup
+lexical:tasukebune	俺がゴーレムの行動に疑念を抱いていると、ファイリアが助け舟を出してくれた。	has:내밀어 주었다	fix	lookup
+lexical:tasukebune	俺からも助け船を出してやるか。	has:내밀어 줄까	fix	lookup
+lexical:tasukebune	船を出す準備をした。	lacks:도움	keep	lookup
+lexical:tasukebune	漁師が船を出した。	has:배를 냈다	keep	lookup
+dict:w:12980	揺れ始めた俺をママは呆れた顔で見るだけで、助け舟はない。	has:구원의 손길은 없다	fix	lookup
+dict:w:12980	聞き覚えのある声は助け舟だった。	has:구원의 손길이었다	fix	lookup
+dict:w:12980	救命ボートに乗り込んだ。	has:구명보트	keep	lookup
+dict:jisjk:83545	サラマーロの助け船に頷ずくと、２人はなるほど	has:구원의 손길에	fix	lookup
+dict:jisjk:83545	それを上手く説明出来ずに口をもごもごさせていると助け舟が出される。	has:구원의 손길이	fix	lookup
+dict:jisjk:83545	彼を助けるために走った。	has:돕기	keep	lookup
+cx:colloc-verb-partner:210	視線を脇にやった。	lacks:제쳐	keep	rewrites
+lexical:temae	手間を取らせて悪いね	has:시간이 걸리게 해	keep	lookup
+lexical:temae	手間がかかる。	has:시간이 든다	keep	lookup

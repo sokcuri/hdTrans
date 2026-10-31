@@ -1,0 +1,97 @@
+# 규칙: LEX-3200
+# 규칙: LEX-3201
+# 규칙: LEX-3202
+# 규칙: LEX-3203
+rule	input	expected	kind	layer
+lexical:sino-word-readings	「ご明察です。	has:정답입니다	fix	lookup
+lexical:sino-word-readings	「ご明察。その通りだ」	has:정답	fix	lookup
+lexical:sino-word-readings	今日一日の疲れを癒していると更衣場の方から	has:탈의장	fix	lookup
+lexical:sino-word-readings	自分の疑問の正否を確認した。	has:옳고 그름	fix	lookup
+lexical:sino-word-readings	全ての問いの正否を知る事が出来る。	has:옳고 그름	fix	lookup
+lexical:sino-word-readings	白髪まじりの髪の毛を手櫛で整えた。	has:손으로 빗어	fix	lookup
+lexical:sino-word-readings	斎藤から受け取った棘鞭で少女の背中を打つ	has:가시 채찍	fix	lookup
+lexical:sino-word-readings	細長く小さな棘がついているおなじみのキュウリだった	has:가시	fix	lookup
+lexical:sino-word-readings	チーム打率もチーム本塁打数も底辺です。	has:홈런 수	fix	lookup
+lexical:sino-word-readings	丑の刻までは１時間余りだよ」	has:1시간 남짓	fix	lookup
+lexical:sino-word-readings	それは３時間余り前の会議に遡らなければならない	has:3시간 남짓	fix	lookup
+lexical:sino-word-readings	俺が金髪少女に召喚された日から３日余り。	has:3일 남짓	fix	lookup
+lexical:sino-word-readings	もちろんちゃんとスヌーズ機能付き。	has:기능 탑재	fix	lookup
+lexical:sino-word-readings	人生指南機能付ヘキサゴン型バンブーニードル射出機	has:기능 탑재	fix	lookup
+lexical:sino-word-readings	開栓して一口呑みながら部屋に戻った	has:개봉해	fix	lookup
+lexical:sino-word-readings	ゴム管が注水口から入ってる水槽	has:주입구	fix	lookup
+lexical:sino-word-readings	この大陸の二大勢力と言えば	has:2대 세력	fix	lookup
+lexical:sino-word-readings	コリント式の柱頭が巨大な屋根を支えている。	has:주두	fix	lookup
+lexical:sino-word-readings	飛鳥井さんの前に校章入りの封筒を差し出す。	has:교표가 들어간 봉투	fix	lookup
+lexical:sino-word-readings	繋がりのある議員、汚職議員を探っていたんだよ	has:비리 의원	fix	lookup
+lexical:sino-word-readings	わたしは彼女の枕辺に座る。	has:머리맡	fix	lookup
+lexical:sino-word-readings	達成感が、胸中を横溢していてやまなかった。	has:넘쳐흐르	fix	lookup
+lexical:sino-word-readings	お粥を口に入れたあと油條にかじりつく。	has:유탸오	fix	lookup
+lexical:sino-word-readings	更衣室で着替える	has:탈의실	keep	lookup
+lexical:sino-word-readings	校長先生に挨拶する	has:교장	keep	lookup
+lexical:sino-word-readings	一時間余りが過ぎた	has:1시간 남짓	keep	lookup
+lexical:sino-word-readings	枕元に置いた	has:머리맡	keep	lookup
+lexical:sino-word-readings	消火栓の前に車を停めるな	lacks:마개	keep	lookup
+lexical:sino-word-readings	有意義な時間だった。	has:가치가 있는 시간	keep	lookup
+lexical:sino-word-readings	この御時勢で	has:시국에	fix	lookup
+lexical:sino-word-readings	逃げ場のない一本道。	has:외길	fix	lookup
+lexical:sino-word-readings	この界隈では札付きのワルとかそう言う奴か。	has:악명 높은	fix	lookup
+lexical:sino-word-readings	駐車場から楽屋裏まで運転してもらう。	has:무대 뒤	fix	lookup
+lexical:sino-word-readings	総予算は横ばいか微増に留まっております	has:제자리걸음	fix	lookup
+lexical:sino-word-readings	横殴りの吹雪が視界を奪う。	has:옆으로 몰아치는 눈보라	fix	lookup
+lexical:sino-word-readings	横殴りに降る雨	has:옆으로 세차게	fix	lookup
+lexical:sino-word-readings	止まり木に止まる立ち姿	has:횃대	fix	lookup
+lexical:sino-word-readings	彼女は死に体の全力を叩き出した。	has:빈사 상태	fix	lookup
+lexical:sino-word-readings	起きたか、死に損ない。	has:죽다 만 놈	fix	lookup
+lexical:sino-word-readings	フン、死にぞこないがいたのか。	has:죽다 만 놈	fix	lookup
+lexical:sino-word-readings	我母たる女神の子	has:어머니인 여신	fix	lookup
+lexical:sino-word-readings	清治は実家の援助で自由気まま。	has:자유분방	fix	lookup
+lexical:sino-word-readings	自由気ままに旅をしているのだろう	has:자유분방하게	fix	lookup
+lexical:sino-word-readings	こいつは気楽そうでいいな。	has:태평스럽고	fix	lookup
+lexical:sino-word-readings	気楽そうに手を振ってくる。	has:태평스럽게	fix	lookup
+lexical:sino-word-readings	夫婦水入らずで世界中を回る旅をしている	has:오붓하게	fix	lookup
+lexical:sino-word-readings	夫婦水入らずの旅	has:오붓한 여행	fix	lookup
+lexical:sino-word-readings	エクレの最もな質問に答えながら	has:지당한 질문	fix	lookup
+lexical:sino-word-readings	最もな意見です。	has:지당한 의견	fix	lookup
+lexical:sino-word-readings	しんしんと、雪が降ってくる。	has:소리 없이	fix	lookup
+lexical:sino-word-readings	その日は雪がしんしんと降り続いていました。	has:소리 없이	fix	lookup
+lexical:sino-word-readings	しんしんと冷える冬の夜	has:뼛속까지 차가워지는	fix	lookup
+lexical:sino-word-readings	文机で書き物をしていると	has:글을 쓰고	fix	lookup
+lexical:sino-word-readings	書類入れから紙を取り出した。	has:서류철	fix	lookup
+lexical:sino-word-readings	観客席全体から万雷の拍手が送られる。	has:우레 같은 박수	fix	lookup
+lexical:sino-word-readings	万来の拍手が鳴り響くなか	has:열렬한 박수	fix	lookup
+lexical:sino-word-readings	四国の南岸を進む	has:남해안	keep	lookup
+lexical:sino-word-readings	気楽に行こう	has:편하게	keep	lookup
+lexical:sino-word-readings	最も大切なものだ	has:가장 중요한	keep	lookup
+lexical:sino-word-readings	時間が余りに短い	lacks:남짓	keep	lookup
+lexical:sino-word-readings	ランクは星一つから始まり星五つまであって	has:별 하나	fix	lookup
+lexical:sino-word-readings	あの星一つ一つがまるで小さな現人神	has:별 하나	fix	lookup
+lexical:sino-word-readings	鳴き声を森中に響き渡らせる	has:온 숲	fix	lookup
+lexical:sino-word-readings	歓喜が、森中に広がっていった。	has:온 숲	fix	lookup
+lexical:sino-word-readings	ゆっくりと檀上から降りる。	has:단상	fix	lookup
+lexical:sino-word-readings	学園長が檀上に上がった。	has:단상	fix	lookup
+lexical:sino-word-readings	横手からニマニマしながら見てる。	has:옆에서	fix	lookup
+lexical:sino-word-readings	北方剣武大会で優勝するほどの騎士	has:검술 대회	fix	lookup
+lexical:sino-word-readings	次の天空神殿に行くか。	has:천공 신전	fix	lookup
+lexical:sino-word-readings	秋田県横手市に行き	has:요코테	keep	lookup
+lexical:sino-word-readings	星が一つ流れた	lacks:호시	keep	lookup
+lexical:sino-word-readings	ひときわ大きな絶頂を極め失神する早苗。	has:절정에 달하	fix	lookup
+lexical:sino-word-readings	発展途上の脳は冥利の念波に書き加えられたのです。	has:추가되었	fix	lookup
+lexical:sino-word-readings	ところどころ書き加えた自分の字を見ながら	has:덧붙여 쓴	fix	lookup
+lexical:sino-word-readings	頂点を極める	lacks:절정	keep	lookup
+lexical:sino-word-readings	時勢に乗る	has:시류	fix	lookup
+lexical:sino-word-readings	家屋の横手に荷車を置かせていただき	has:옆에	fix	lookup
+lexical:sino-word-readings	後年、序が書き加えられた可能性がある。	has:추가된	fix	lookup
+lexical:sino-word-readings	アラーム機能付きの時計	has:기능이 달린 시계	fix	lookup
+lexical:sino-word-readings	森中さんが来た	has:모리나카	keep	lookup
+lexical:sino-word-readings	横手さんに会った	has:요코테	keep	lookup
+lexical:sino-word-readings	第二大隊が進む	has:제2대대	keep	lookup
+lexical:sino-word-readings	学問の本道を行けよ	has:정도	keep	lookup
+lexical:sino-word-readings	雲が長くたなびいていた。	has:뻗	keep	lookup
+lexical:sino-word-readings	水道局への開栓手続き	lacks:마개	keep	lookup
+lexical:sino-word-readings	神殿に祈りを捧げる	has:신전	keep	lookup
+lexical:sino-word-readings	大会で優勝した	has:대회	keep	lookup
+lexical:sino-word-readings	楽屋で待っていてくれ	has:분장실	keep	lookup
+lexical:sino-word-readings	母の日に花を贈った	has:어버이날	keep	lookup
+lexical:sino-word-readings	絶頂に達した	has:절정에 이르렀	keep	lookup
+lexical:sino-word-readings	森の奥へ進む	has:숲속	keep	lookup
+lexical:sino-word-readings	星を見上げる	has:별을	keep	lookup

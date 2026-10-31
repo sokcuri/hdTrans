@@ -11,10 +11,11 @@ export type {
   EhndFiles,
   HdTransInfo,
   Speech,
+  SpeechLevels,
   TranslateOptions,
 } from './runtime.js';
 
-export type InitOptions = Pick<RuntimeInitOptions, 'ehnd' | 'speech' | 'wrapped' | 'strictDict'>;
+export type InitOptions = Pick<RuntimeInitOptions, 'ehnd' | 'speech' | 'speechLevels' | 'wrapped' | 'names' | 'strictDict'>;
 export type HdTrans = RuntimeHdTrans;
 
 let modulePromise: Promise<EngineModule> | undefined;
@@ -50,7 +51,9 @@ export const HdTrans = Object.freeze({
       directories: ['/dicts.hdsnap'],
       ehnd: options.ehnd,
       speech: options.speech,
+      speechLevels: options.speechLevels,
       wrapped: options.wrapped,
+      names: options.names,
       strictDict: options.strictDict,
     });
   },

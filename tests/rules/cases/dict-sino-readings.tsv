@@ -1,0 +1,22 @@
+# 규칙: LEX-26
+rule	input	expected	kind	layer
+lookup:sino-reading	「超熟」	「초숙」	fix	lookup
+lookup:sino-reading	「ファター・ルウの涙川」の話。	「파타 루우의 누천」의 이야기.	fix	lookup
+lookup:sino-reading	「虞卿とはどんな人物なのか」	「우경이란 어떤 인물인가」	fix	lookup
+lookup:sino-reading	犬耳系半涙、だけどちょっぴり乳デカな美少女	has:반루	fix	lookup
+lookup:sino-reading	けぇ、警戒ーッ！！　転舵ぁ！	케에, 경계~!! 전타!	fix	lookup
+lookup:sino-reading	旗艦「赤城改二(改二戊)」	기함 「아카기 개2(개2무)」	fix	lookup
+lookup:sino-reading	旗艦に「龍鳳改二(改二戊含む)」	has:(개2무	fix	lookup
+lookup:sino-reading	旗艦「龍鳳改二/戊」	기함 「류호우 개2/무」	fix	lookup
+lookup:sino-reading	白装束に緋袴。	has:비고	fix	lookup
+lookup:sino-reading	涙が輝き	눈물이 빛나	keep	lookup
+lookup:sino-reading	「取舵だ！	「좌현이야!	keep	lookup
+lookup:sino-reading	感涙の騎士。	감격의 눈물의 기사.	keep	lookup
+lookup:sino-reading	涙があふれた。	눈물이 넘쳤다.	keep	lookup
+lookup:sino-reading	目から涙が出る。	눈에서 눈물이 나온다.	keep	lookup
+lookup:sino-reading	涙目の京子が頷く。	눈물 어린 눈의 쿄오코가 끄덕인다.	keep	lookup
+lookup:sino-reading	４話 その涙を拭け。	4화 그 눈물을 닦아라.	keep	lookup
+lookup:sino-reading	「面舵、進路Ａ０８	「우현, 진로 A08	keep	lookup
+lookup:sino-reading	シャンテは、老僕を睨んだ。	has:노복을	keep	lookup
+lookup:sino-reading	全て俺のせいだ。	모두 내 탓이다.	keep	lookup
+lookup:sino-reading	完熟トマトの出来上がりだ。	has:완숙 토마토	keep	lookup

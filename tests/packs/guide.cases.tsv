@@ -1,0 +1,21 @@
+# docs/packs.md 「팩 쓰기 안내」의 예제가 그대로 맞는지
+rule	input	expected	kind	layer
+pack:g.takai.price	この本は高い。	이 책은 비싸다.	fix	packs
+pack:g.takai.price	山が高い。	!rule:pack:g.takai.price	keep	packs
+pack:g.takai.adv	この本は高く売れた。	!rule:pack:g.takai.price	keep	packs
+pack:g.ciel	シエルが来た。	씨엘이 왔다.	fix	packs
+pack:g.yomu.active	手紙を読まれた。	편지를 읽었다.	fix	packs
+pack:g.tomeru.parked	多くの車が止められた駐車場。	많은 차가 세워진 주차장.	fix	packs
+pack:g.mairu	何用で参られたのです？	무슨 일로 오셨습니까?	fix	packs
+pack:g.naguru	兄から殴られた。	형한테 맞았다.	fix	packs
+pack:g.naguru	後ろから殴られた。	뒤에서 맞았다.	keep	packs
+pack:g.wakaru.ack	分かった！	알겠어!	fix	packs
+pack:g.wakaru.ack	分かったか？	!rule:pack:g.wakaru.ack	keep	packs
+pack:g.wakaru.ack2	うん、分かった。	응, 알겠어.	fix	packs
+pack:g.tenitoru	試作品を手に取った。	시제품을 집어 들었다.	fix	packs
+pack:g.tenitoru	御園の手を取ってみる。	!rule:pack:g.tenitoru	keep	packs
+pack:negf:iinja-suggest	慎んだ方がいいんじゃない。	조심하는 것이 좋지 않아.	keep	packs
+pack:g.modosu	話を元に戻そう。	이야기를 원래대로 되돌리자.	fix	packs
+pack:g.soba	母の元に向かった。	어머니의 곁으로 향했다.	keep	packs
+pack:g.betsuni	別にいいじゃない。	괜찮잖아.	fix	packs
+pack:g.betsuni	それでいいじゃない。	!rule:pack:g.betsuni	keep	packs

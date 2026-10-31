@@ -1,0 +1,49 @@
+# 규칙: GRM-204, LEX-230
+rule	input	expected	kind	layer
+cx:lc3i-nandarou:10	改めて、…なんだろう。	has:무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	だって、――なんだろう。	has:무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	このゆとりはいったいなんだろう。	has:도대체 무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	――恋とは、いったいなんだろう？	has:도대체 무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	２人が仲良くしている姿は嬉しいけれど、なんだろう。	has:무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	外は暑いけどなんだろう、体を動かさないとって思ったから。	has:덥지만 무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	頭から血を流した自分が言うのも変な感じがしたが、なんだろう社交辞令的な。	has:무엇일까	fix	rewrites
+cx:lc3i-nandarou:10	いまだにその輝きで目を開けずにいる私ですが、なんだろう、猿の鳴き声がします。	has:무엇일까	fix	rewrites
+cx:lc3i-nandarou:20	一体なんだろうか？	has:도대체 뭘까	fix	rewrites
+cx:lc3i-nandarou:20	するとこの箱は一体なんだろうか。	has:도대체 뭘까	fix	rewrites
+lookup:nani-nandarou	何なんだろう	has:무엇일까	fix	lookup
+lookup:nani-nandarou	何なんだろう、この人達	has:무엇일까	fix	lookup
+lookup:nani-nandarou	こ、この人は何なんだろう…？	has:무엇일까	fix	lookup
+lookup:nani-nandarou	││俺って一体、何なんだろうか。	has:무엇일까	fix	lookup
+lookup:nani-nandarou	さっきから一体、何なんだろう……。	has:무엇일까	fix	lookup
+lookup:nani-nandarou	そういや、面白い事って何なんだろうな	has:무엇일까	fix	lookup
+lookup:nani-nandarou	こういう時の具体的な対処法って、何なんだろう。	has:무엇일까	fix	lookup
+lookup:nani-nandarou	何かが絶対に変なんだけど、何なんだろ、この違和感。	has:뭘까	fix	lookup
+lookup:nani-nandarou	最初からある程度信用されてたけど、俺って一体何なんだろう。	has:무엇일까	fix	lookup
+lookup:adjective-nandarouka	わがままなんだろうか？	has:멋대로일까	fix	lookup
+lookup:adjective-nandarouka	……馬鹿なんだろうか。	has:바보같을까	fix	lookup
+lookup:adjective-nandarouka	どうして自分はこうなんだろうか	has:이러할까	fix	lookup
+lookup:adjective-nandarouka	休まなくても平気なんだろうか？	has:괜찮을까	fix	lookup
+lookup:adjective-nandarouka	僕は…メイフェアのことが好きなんだろうか…？	has:좋아할까	fix	lookup
+lookup:adjective-nandarouka	母親はこんな説明を聞いていて大丈夫なんだろうか？	has:괜찮을까	fix	lookup
+lookup:adjective-nandarouka	自分の身体を見ても、先輩はこういうのが好きなんだろうかとか、考えてしまう。	has:좋아할까라든지	fix	lookup
+cx:lc3i-nandarou:10	彼は暗殺者なんだろう。	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	ほんとに最後なんだろうな	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	嗚呼、なんて綺麗なんだろう。	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	しかし、君は族の長なんだろう？	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	それでも年頃の女なんだろう？！	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	根は優しい奴なんだろう、きっと。	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	心の紙……どういう意味なんだろう？	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	やっぱり私は考えるの苦手なんだろうな。	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	なんで駿太はこんなに素直なんだろうね。	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:10	男どもはゲーム感覚なんだろうな、、可哀想に、、	!rule:cx:lc3i-nandarou:10	keep	rewrites
+cx:lc3i-nandarou:20	これは夢なんだろうか。	!rule:cx:lc3i-nandarou:20	keep	rewrites
+cx:lc3i-nandarou:20	何て綺麗な身体なんだろうか。	!rule:cx:lc3i-nandarou:20	keep	rewrites
+cx:lc3i-nandarou:20	彼はここの常連なんだろうか。	!rule:cx:lc3i-nandarou:20	keep	rewrites
+cx:lc3i-nandarou:20	その人は俺の家族なんだろうか。	!rule:cx:lc3i-nandarou:20	keep	rewrites
+cx:lc3i-nandarou:20	なんて、情けない言葉なんだろうか。	!rule:cx:lc3i-nandarou:20	keep	rewrites
+lookup:adjective-nandarouka	彼は暗殺者なんだろう。	has:암살자겠지	keep	lookup
+lookup:adjective-nandarouka	ほんとに最後なんだろうな	has:마지막이겠지	keep	lookup
+lookup:adjective-nandarouka	根は優しい奴なんだろう、きっと。	has:놈이겠지	keep	lookup
+lookup:adjective-nandarouka	これは夢なんだろうか。	has:꿈일까	keep	lookup
+lookup:adjective-nandarouka	彼はここの常連なんだろうか。	has:단골일까	keep	lookup
+lookup:adjective-nandarouka	その人は俺の家族なんだろうか。	has:가족일까	keep	lookup

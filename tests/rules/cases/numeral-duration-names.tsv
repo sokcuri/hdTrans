@@ -5,5 +5,5 @@ dict:names.1825	3ヶ月たった。	3개월 지났다.	fix	names
 dict:names.1036	１ヶ月ほど前に会った。	1개월 정도 전에 만났다.	fix	lookup
 dict:names.2230	行動ポイントは、3ポイントしかありません。	행동 포인트는, 3포인트밖에 없습니다.	fix	lookup
 dict:names.1899	前方に２人組の姿があった。	전방으로 2인조의 모습이 있었다.	fix	lookup
-dict:names.1043	「で、１位は彼だったのか？」	「그래서, 1위는 그였는가?」	fix	lookup
+dict:names.1043	「で、１位は彼だったのか？」	「그래서, 1위는 그였던 거야?」	fix	lookup
 dict:names.477837	千葉に行った。	치바에 갔다.	keep	lookup

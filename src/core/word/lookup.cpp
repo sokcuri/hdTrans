@@ -205,8 +205,7 @@ std::size_t Worker::CopyUnit(std::string_view text) const {
     return tokens.CopyUnitAt(static_cast<std::size_t>(current), static_cast<std::size_t>(text.data() - own.data()));
 }
 
-Lookup Worker::DoLookup(std::string_view query, int mode) {
-    if (fault) return {};
+dict::Candidates Worker::WordInfo(std::string_view query, int mode) const {
     dict::LookupContext ctx = lookupContext;
     SkipContext sc{this, query};
     ctx.skip.fn = [](const void* c, const dict::UserEntry& e) {
@@ -215,7 +214,12 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     };
     ctx.skip.context = &sc;
     if (current + 1 < TokenCount()) ctx.after = Tok(current + 1).text;
-    dict::Candidates found = snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
+    return snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
+}
+
+Lookup Worker::DoLookup(std::string_view query, int mode) {
+    if (fault) return {};
+    dict::Candidates found = WordInfo(query, mode);
     if (!found.names.empty()) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
         arena.names[arena.namesUsed++].swap(found.names);
@@ -496,14 +500,54 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     }
     const std::string_view pc = u.codes->partText;
     if (pc.size() > 1 && (pc[1] == '4' || pc[1] == '7')) return true;
-    const std::string_view next = FirstChar(query.substr(std::min(u.key.size(), query.size())));
+    const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    const std::string_view next = FirstChar(rest);
     switch (NameClassOf(next)) {
     case kClassHiragana:
-        return Has(kKanaAfter, next);
+        // な and がら after it are the ながら of a verb stem (みながら 보면서).
+        if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
+        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query);
     case kClassKanji:
-        return false;
+        return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
     }
     return text::RuneCount(u.key) >= 3;
+}
+
+// Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name
+// layer does not hold as a person, is followed by the copula だ, です, でした, でしょ or じゃ (LEX-94).
+// だ and the じゃ of じゃう, じゃった, じゃえ after a key ending in い or ん are the past and the
+// contracted てしまう of a godan verb when the key without that kana is the stem of a verb of the
+// matching row in the dictionary: が after い (ゆらいだ), ま, ば, な after ん (こばんだ, 飲んじゃった).
+bool Worker::KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const {
+    const std::string_view pc = u.codes->partText;
+    if (text::RuneCount(u.key) < 3 || pc.size() < 2 || (pc[1] != '1' && pc[1] != '8') ||
+        snapshot.NamePerson(u.key)) {
+        return false;
+    }
+    const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    for (const std::string_view c : {"です", "でした", "でしょ"}) {
+        if (rest.starts_with(c)) return true;
+    }
+    bool verbShape = false;
+    if (rest.starts_with("だ")) {
+        verbShape = true;
+    } else if (rest.starts_with("じゃ")) {
+        const std::string_view after = FirstChar(rest.substr(std::string_view("じゃ").size()));
+        verbShape = after == "う" || after == "っ" || after == "え";
+    } else {
+        return false;
+    }
+    if (!verbShape) return true;
+    const std::string_view last = LastChar(u.key);
+    const std::string_view rows = last == "い" ? "2" : last == "ん" ? "56<" : "";
+    if (rows.empty()) return true;
+    const std::string_view stem = std::string_view(u.key).substr(0, u.key.size() - last.size());
+    const std::vector<dict::Candidate> records = snapshot.RetrieveRecords(stem, dict::LookupMode::General);
+    for (const dict::Candidate& c : records) {
+        const std::string_view vp = c.codes->partText;
+        if (vp.size() == 4 && vp[1] == '4' && Has(rows, vp.substr(3, 1))) return false;
+    }
+    return true;
 }
 
 // Text path, mode 0: the base interjections and set phrases that are a verb form ending

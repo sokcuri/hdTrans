@@ -1,0 +1,60 @@
+# 규칙: GRM-206
+rule	input	expected	kind	layer
+phrase:kigatsuitara	気づいたら	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気が付いたらコレだ。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたら私は泣いていた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたら机で寝ていた・・。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたらすぐちかくにきていた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたらそう綾菜は口にしていた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	俺は気が付いたら闇の中を漂っていた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたら胸に手が伸び、掴まれている。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気が付いたら森の大きな樹の側に居たこと。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたらチャラ男２人組はうずくまっていた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気が付いたらムクムク元気にパオ〜ン（↑象さん）	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたら武者小路たちは広間から逃げ出していた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	……分かりません…気づいたら……ここに…いました……	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	それはとても早く感じ、気づいたら昼休みが始まっていた。	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	中二になって、気づいたらオタク友達とつるむようになってた	has:정신을 차려 보니	fix	phrases
+phrase:kigatsuitara	気づいたら、知らない部屋にぐるぐるロープで巻かれているとか	has:정신을 차려 보니	fix	phrases
+constraint:tara-before-shii	なにやら気付いたらしい。	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	どうやら全員気付いたらしい。	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	端っこにいる人も気付いたらしい。	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	それに気付いたらしいラオスが指さした。	has:깨달은 것 같은	fix	lookup
+constraint:tara-before-shii	下にして寝ているのに気がついたらしい。	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	男の１人がうすきひの動きに気がついたらしい	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	素に戻っていることにようやく気付いたらしい。	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	隠しきれていない素人の感情に邪道も気がついたらしい	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	あの…、正確には、南人さんが真っ先に気がついたらしくって	has:깨달은 것 같아서	fix	lookup
+constraint:tara-before-shii	菖蒲は彼女の態度で気付いたらしく布の上から下腹部を押さえた。	has:깨달은 것 같게	fix	lookup
+constraint:tara-before-shii	男が転がった音で周囲も何事かが起こっているのに気付いたらしい。	has:깨달은 것 같다	fix	lookup
+constraint:tara-before-shii	ユリは割烹着を脱いだ皆が、色々なブラウスな事に気がついたらしい。	has:깨달은 것 같다	fix	lookup
+phrase:kigatsuitara	本当に気がついたらここにいた。	has:정신을 차려 보니	keep	phrases
+phrase:kigatsuitara	気がついたら１時間ほどが経っていた	has:정신을 차려 보니	keep	phrases
+phrase:kigatsuitara	視界が真っ白になって、気付いたら森の中。	has:정신을 차려 보니	keep	phrases
+phrase:kigatsuitara	気がついたら一人で小野坂宅への道を歩いていた。	has:정신을 차려 보니	keep	phrases
+phrase:kigatsuitara	気がついたら両手をついて壁に追い詰めちゃっていたよ。	has:정신을 차려 보니	keep	phrases
+constraint:tara-before-shii	視線に気づいたらしい。	has:눈치챈 것 같다	keep	lookup
+constraint:tara-before-shii	モカも私と同じ事に気づいたらしい。	has:눈치챈 것 같다	keep	lookup
+constraint:tara-before-shii	そのことに、アイゼルはようやく気が付いたらしい。	has:깨달은 것 같다	keep	lookup
+constraint:tara-before-shii	さっき自分が言ったことが変態発言だと気が付いたらしい。	has:깨달은 것 같다	keep	lookup
+constraint:tara-before-shii	父さんの言葉に、おじさんはようやく私の存在に気づいたらしい。	has:눈치챈 것 같다	keep	lookup
+cx:lc3i-kigatsuku:10	気が付いたら連絡して	has:깨달으면 연락해	fix	rewrites
+cx:lc3i-kigatsuku:10	気付いたら教えてくれ	has:깨달으면 가르쳐 줘	fix	rewrites
+cx:lc3i-kigatsuku:10	千歳が気付いたらこれを渡してください	has:깨달으면 이것을	fix	rewrites
+cx:lc3i-kigatsuku:10	気付いたら、そこから離れなさい	has:깨달으면, 거기에서	fix	rewrites
+cx:lc3i-kigatsuku:10	気がついたら教えてね	has:깨달으면 가르쳐	fix	rewrites
+cx:lc3i-kigatsuku:10	気づいたら、自然とハグをして、キスをして。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気がついたら突き飛ばされて、頭がグワングワンして。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気が付いたら着てて…ごめんなさい！	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気付いたら時間がたりなくなったのごめんなさい！	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気づいたらいなくなっておりまして	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	私も分からない……気が付いたら此処に居て	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気が付いたら其処にいたとしか言いようが無い。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気がついたら履かされてたというか、そんな感じで。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+constraint:tara-before-shii	そしたらしきりに頷いた。	has:그랬더니 끊임없이	keep	lookup
+constraint:tara-before-shii	そしたらしきたりに反する。	has:그랬더니 관례에	keep	lookup
+constraint:tara-before-shii	予備も併せて大目に買ったらしきりに恐縮していた。	has:끊임없이 황송해하고	keep	lookup
+constraint:tara-before-shii	これも北原のおかげだなと言ったらしきりに照れていた。	has:끊임없이 수줍어하고	keep	lookup
+cx:lc3i-kigatsuku:10	頭重くて、何も考えられなくて、気づいたら何時間も経ってたりして。	has:정신을 차려 보니 몇 시간이나	keep	rewrites
+cx:lc3i-kigatsuku:10	「気づいたら朝だった」って笑って	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気がついたら眠ってしまって。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites

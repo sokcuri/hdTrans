@@ -1,0 +1,50 @@
+# 규칙: LEX-165
+rule	input	expected	kind	layer
+lexical:word-rows	(柳原)すてき。	has:멋지다	fix	lookup
+lexical:word-rows	すてき！	has:멋져	fix	lookup
+lexical:word-rows	すてきな人	has:멋진 사람	keep	lookup
+lexical:word-rows	そこね わしが書き足したところ。	has:덧붙여 썼	fix	phrases
+lexical:word-rows	ゴンはまたノートに書き足していく。	has:덧붙여 써 간다	fix	phrases
+lexical:word-rows	何度も書き直したり、書き足したりと、	has:고쳐 쓰거나 덧붙여 쓰거나	fix	phrases
+lexical:word-rows	コモンズ投信の投資哲学を更に深掘りする。	has:깊이 파고든다	fix	phrases
+lexical:word-rows	これ以上は深掘りできない。	has:깊이 파고들 수 없다	fix	phrases
+lexical:word-rows	フォートＭＦの主な水源は昔ながらの深掘りの井戸である。	has:깊이 파기의 우물	keep	lookup
+lexical:word-rows	竹本が仕向けたわけじゃなさそうだ。	has:유도한	fix	phrases
+lexical:word-rows	「相手が最強の武器を使えないように仕向けるのは、戦いの基本だからな」	has:쓸 수 없도록 유도하는	fix	phrases
+lexical:word-rows	人と人とが相食むように仕向けられたこの呪われし世界で	has:유도된	fix	phrases
+lexical:word-rows	痩せ衰えた紅梅久が、病衣の裾を割り開いて駆け込んでくる。	has:옷자락을 벌려	fix	phrases
+lexical:word-rows	割り開かれた唇に舌が滑り込み、	has:벌려진 입술	fix	phrases
+lexical:word-rows	肛門が７割開き、実が少しでてきた。	lacks:벌려	keep	lookup
+lexical:word-rows	しばしの沈黙ののち、再びエデンの顔を振り仰ぐ。	has:얼굴을 올려다본다	fix	phrases
+lexical:word-rows	デイジーは集中を解いて、運河の向こうの空港を振り仰いだ。	has:공항을 올려다보았다	fix	phrases
+lexical:word-rows	ハヤトさんはそう吐き捨てると、	has:그렇게 내뱉	fix	phrases
+lexical:word-rows	侍たちが吐き捨てる。	사무라이들이 내뱉는다.	fix	phrases
+lexical:word-rows	言葉を吐き捨てて未憐は夕河を突き放す。	has:말을 내뱉어 버려	keep	lookup
+lexical:word-rows	マイムとバルシャの笑顔をひとしきり見比べてから、	has:번갈아 보고 나서	fix	phrases
+lexical:word-rows	礼が不思議そうに俺を見返し由香里と見比べた。	has:유카리와 번갈아 보았다	fix	phrases
+lexical:word-rows	だとしたら俺の人生もう下り坂に入りかかってるじゃん。	has:내리막길에 접어들고 있잖아	fix	phrases
+lexical:word-rows	奇妙なやり取りが３週目に入りかかった頃、	has:3주째에 접어들었을 무렵	fix	phrases
+lexical:word-rows	いったんお気に入り作家さんを一人お気に入りから外して	lacks:접어들	keep	lookup
+lexical:word-rows	選び抜かれた人間しか王族の部屋に入ることは許されない。	has:엄선된 인간밖에	fix	phrases
+lexical:word-rows	賞金稼ぎだけではなくて王家が選び抜いた精鋭の討伐部隊まで	has:왕가가 엄선한 정예	fix	phrases
+lexical:word-rows	お兄様はフィーアが煎れたお茶を飲んでいた。	has:피아가 탄 차	fix	phrases
+lexical:word-rows	シェヘラザードはテーブルを出し茶を煎れた。	has:차를 탔다	fix	phrases
+lexical:word-rows	お茶を淹れてくれた	has:차를 끓여	keep	lookup
+lexical:word-rows	Ｃ・コロンは桁外れな力を持つようだ。	has:어마어마한 힘을	fix	phrases
+lexical:word-rows	ミルコフのように魔力量が桁外れなのか？	has:마력량이 어마어마한가	fix	phrases
+lexical:word-rows	「まぁ、あの桁外れの戦力を手放すのも……	has:월등함의 전력	keep	lookup
+lexical:word-rows	こんなにウザいものなんだなって、よくわかった	has:이렇게 짜증스러운 것	fix	phrases
+lexical:word-rows	ドヤ顔がうざい！	has:얼굴이 짜증스러워	fix	phrases
+lexical:word-rows	ウザ絡みしてくる	has:짜증나게 달라붙기	keep	lookup
+lexical:word-rows	何かを言いかけた俺を遮るように、	has:말하려 한 나를	fix	phrases
+lexical:word-rows	言いかけた言葉を遮り、僕は大きな声で	has:말하려 한 말을	fix	phrases
+lexical:word-rows	そう言いかけた時、セルドルに注意を促され	has:말하려고 했을 때	keep	lookup
+lexical:word-rows	彼女は銀色の髪をなびかせながら一人でそこにたたずんでいた。	has:혼자서 거기에 우두커니 서 있었다	fix	lookup
+lexical:word-rows	ただ一人そこに佇んでいた。	has:우두커니 서 있었다	keep	local
+lexical:word-rows	「そして、火を灯せ」	has:불을 켜라	fix	lookup
+lexical:word-rows	ランプを灯した	램프를 켰다	fix	lookup
+lexical:word-rows	明かりが灯った	빛이 켜졌다	keep	lookup
+lexical:word-rows	イチ・ニ イチ・ニの足を出す…。	has:발을 내민다	fix	phrases
+lexical:word-rows	雨が上がって晴れてきた	has:비가 그쳐	fix	phrases
+lexical:word-rows	雨が上がるまで待とう	has:비가 그칠 때까지	fix	phrases
+lexical:word-rows	秘密の部分が丸曝しになっている。	has:훤히 드러나 있다	fix	phrases

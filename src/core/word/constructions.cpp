@@ -312,6 +312,41 @@ bool Narrated(Flusher& f, const Item* it) {
     return !mark.empty() && text::IsPunct(text::DecodeRune(mark).cp) && f.w.tokens.tokens[j].type == tokenizer::kTypeSymbol;
 }
 
+// The quote state at the start of the word, counted from the start of the line (output::QuotesAfter).
+output::QuoteState QuoteAt(Flusher& f, const Item* it) {
+    const Settings& s = f.w.settings;
+    output::QuoteState q{s.quoteDepth, s.quoteCount};
+    for (int j = 0; j < it->tokenIndex; j++) q = output::QuotesAfter(q, f.w.tokens.Raw(static_cast<std::size_t>(j)));
+    return output::QuotesAfter(q, Slice(it->text, 0, it->start));
+}
+
+// Whether the word stands in a quote whose text has no polite, old, written, reading or cited style
+// (pipeline::QuoteStyles), as the compose stage gives questions their spoken form there. False without
+// the styles (the reference path).
+bool PlainQuote(Flusher& f, const Item* it) {
+    const Settings& s = f.w.settings;
+    if (s.quoteStyles.empty() || it->tokenIndex < 0) return false;
+    const output::QuoteState q = QuoteAt(f, it);
+    if (q.depth == 0) return false;
+    const auto k = static_cast<std::size_t>(q.count);
+    return k < s.quoteStyles.size() && (s.quoteStyles[k] & ~output::kCasualSpeech) == 0;
+}
+
+// Whether the questions of the word's speech are 해체: on a line the speech-level stage writes, its level
+// for the line, or for the word's quote on a line of several quotes (spec REG-15), is 해체 (REG-2) and the
+// line does not speak in an authoritative voice (REG-14); on other lines the word stands in a plain quote
+// (PlainQuote), whose questions the compose stage writes in 해체 (spec SPC-1).
+bool CasualLevel(Flusher& f, const Item* it) {
+    const Settings& s = f.w.settings;
+    if (s.lineLevel == Settings::LineLevel::none) return PlainQuote(f, it);
+    Settings::LineLevel level = s.lineLevel;
+    if (s.quoteLevels.size() >= 2 && it->tokenIndex >= 0) {
+        const output::QuoteState q = QuoteAt(f, it);
+        if (q.depth > 0 && q.count >= 1) level = s.quoteLevels[std::min(static_cast<std::size_t>(q.count), s.quoteLevels.size()) - 1];
+    }
+    return level == Settings::LineLevel::casual && !s.authoritative;
+}
+
 struct NamedFeature {
     std::string_view name;
     CxFeature test;
@@ -446,6 +481,10 @@ constexpr NamedFeature kFeatures[] = {
     {"narration", [](Flusher& f, const Item* it) { return f.w.settings.narrated && !it->InQuote(); }},
     // The word stands inside 「」 or 『』 (Item::InQuote).
     {"quoted", [](Flusher&, const Item* it) { return it->InQuote(); }},
+    // The questions of the word's speech are 해체 (CasualLevel).
+    {"casual-level", CasualLevel},
+    // The line is a line of prose fiction that the speech-level stage writes (spec REG-20).
+    {"prose", [](Flusher& f, const Item*) { return f.w.settings.lineLevel != Settings::LineLevel::none && f.w.settings.prose; }},
     // A digit ends the text before the word in its token (3から).
     {"after-digit", [](Flusher&, const Item* it) { return text::IsDigit(DecodeLastRune(Slice(it->text, 0, it->start)).cp); }},
     // The selected candidate has a sem code of a person, an animal or a god (Person).
@@ -515,6 +554,15 @@ constexpr NamedFeature kFeatures[] = {
     // The item ends the utterance or the quote (QuoteEnd); UtteranceEnd also passes over a comma,
     // a dash or a small つ.
     {"quote-end", [](Flusher& f, const Item* it) { return QuoteEnd(f.w, it); }},
+    // A full stop (。, ．, . as the canonical token) follows the word right after it, in its token or as the
+    // next token.
+    {"period-after",
+     [](Flusher& f, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         const auto next = static_cast<std::size_t>(it->tokenIndex + 1);
+         if (rest.empty() && it->tokenIndex >= 0 && next < f.w.tokens.size()) rest = f.w.tokens.Canonical(next);
+         return !rest.empty() && RuneIn(text::DecodeRune(rest).cp, "。．.");
+     }},
     {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
     // More words follow on the line past the end of the sentence (SpeechGoesOn).
     {"speech-goes-on", [](Flusher& f, const Item* it) { return SpeechGoesOn(f.w, it); }},
@@ -881,6 +929,41 @@ void IndexFamily(const ConstructionTable& t, CxFamily& c) {
     }
 }
 
+// Adds to out the atoms the condition at node i needs to hold: itself, or the operands of an &&
+// or &&n, nested ones too.
+void NeededAtoms(const ConstructionTable& t, uint32_t i, std::vector<uint32_t>& out) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) {
+        out.push_back(n.count);
+        return;
+    }
+    if (n.kind != rules::BodyKind::And && n.kind != rules::BodyKind::AndAll) return;
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) NeededAtoms(t, child, out);
+}
+
+bool SameAtom(const CxAtom& a, const CxAtom& b) {
+    return a.field == b.field && a.match == b.match && a.delta == b.delta && a.negated == b.negated && a.value == b.value &&
+           a.set == b.set && a.feature == b.feature;
+}
+
+// Fills the atoms all rows of family c need, in the order of its first row.
+void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
+    if (c.rows.empty()) return;
+    std::vector<uint32_t> shared, needed;
+    NeededAtoms(t, t.rows[static_cast<std::size_t>(c.rows.front())].root, shared);
+    const auto in = [&](const std::vector<uint32_t>& atoms, uint32_t a) {
+        return std::ranges::any_of(atoms, [&](uint32_t b) { return SameAtom(t.atoms[a], t.atoms[b]); });
+    };
+    for (std::size_t k = 1; k < c.rows.size() && !shared.empty(); k++) {
+        needed.clear();
+        NeededAtoms(t, t.rows[static_cast<std::size_t>(c.rows[k])].root, needed);
+        std::erase_if(shared, [&](uint32_t a) { return !in(needed, a); });
+    }
+    for (const uint32_t a : shared)
+        if (!in(c.shared, a)) c.shared.push_back(a);
+}
+
 }  // namespace
 
 namespace {
@@ -1073,6 +1156,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
         IndexFamily(t, c);
+        ShareAtoms(t, c);
         const auto pass = std::ranges::find(passes, c.after);
         if (pass == passes.end()) {
             fail(c.line, "the family " + c.name + " runs after " + c.after + ", which is no pass");
@@ -1508,7 +1592,12 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
             if (family.indexed && tally == nullptr) {
                 const auto found = family.bySurface.find(std::string_view(it->group->surface));
                 rows = found != family.bySurface.end() ? &found->second : &family.open;
+                if (rows->empty()) continue;
             }
+            // An atom all rows need that is false here: none fires (rule counts try every row).
+            if (tally == nullptr &&
+                !std::ranges::all_of(family.shared, [&](uint32_t a) { return Holds(f, it, t.atoms[a]); }))
+                continue;
             for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
                 if (skip != nullptr && skip(row.id)) continue;

@@ -24,16 +24,16 @@ compose:speech-quoted	「ありがとうございます。それは違う」	「
 compose:speech-quoted	『雨が降る』	『비가 온다』	keep	compose
 compose:speech-quoted	彼は「雨が降る」ということを知った。	그는 「비가 온다」라는 것을 알았다.	keep	compose
 compose:speech-quoted	「すぐ消える」魔法を使った。	「바로 사라진다」마법을 썼다.	keep	compose
-compose:speech-quoted	「ここに婚約の破棄を宣言する」	「여기에 약혼의 파기를 선언한다」	keep	compose
+compose:speech-quoted	「ここに婚約の破棄を宣言する」	「여기에 약혼의 파기를 선언해」	keep	compose
 compose:speech-quoted	「お前もだ！」	「너도다!」	keep	compose
 compose:speech-quoted	「しかし、だ。それは違う」	「하지만, 이다. 그건 달라」	fix	compose
 compose:speech-quoted	彼女は窓の外を見た。	그녀는 창 밖을 보았다.	keep	compose
 compose:speech-quoted	彼のモットーは「従う」だ。	그의 모토는 「따른다」다.	keep	compose
 compose:speech-quoted	想「おも」い出	추억	keep	compose
-compose:speech-quoted	「やらねばならない」	「해야 한다」	keep	compose
+compose:speech-quoted	「やらねばならない」	「해야 해」	keep	compose
 compose:speech-quoted	「俺が行く」	「내가 갈게」	fix	compose
 compose:speech-quoted	「私は断る」	「나는 거절할게」	fix	compose
 compose:speech-quoted	「あの人は来る」	「그 사람은 올 거야」	keep	compose
 compose:speech-quoted	「あの子は来ない、と言ってた」	「그 아이는 오지 않는다, 라고 말했어」	fix	compose
 compose:speech-quoted	「『走らない』『騒がない』を守ってる」	「『달리지 않는다』 『떠들지 않는다』를 지키고 있어」	fix	compose
-compose:speech-quoted	「父が待っておってな。もう帰った」	「아버지가 기다리고 있어서 말이야. 벌써 돌아갔다」	fix	compose
+compose:speech-quoted	「父が待っておってな。もう帰った」	「아버지가 기다리고 있어서 말이야. 벌써 돌아갔어」	fix	compose

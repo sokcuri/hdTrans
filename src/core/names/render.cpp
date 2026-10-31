@@ -101,6 +101,11 @@ std::string Registry::Dict() {
         const Name n = Accepted().at(t);
         const std::string kr = RenderName(t, n);
         if (kr.empty()) continue;
+        // A listed name, a family name too, takes the spacing and particles of a person name.
+        if (listed_.count(t) > 0) {
+            b += t + "\t" + kr + "\tname\n";
+            continue;
+        }
         const DictFlags f = Flags(t);
         std::string pos = "n";
         // A place of the dictionaries that only a gloss names (五村（ごのむら）) stays a place.
@@ -126,7 +131,28 @@ std::string Registry::Render(std::string_view t) {
     return RenderName(t, n);
 }
 
+std::vector<Listed> Registry::Proposed() {
+    std::vector<Listed> out;
+    for (const auto& [t, n] : Accepted()) {
+        if (listed_.count(t) > 0) continue;
+        std::string kr = RenderName(t, n);
+        if (kr.empty()) continue;
+        const DictFlags f = Flags(t);
+        ListKind kind = ListKind::Given;
+        if (n.hasParts) {
+            kind = ListKind::Full;
+        } else if (n.surname || (f.surname && !f.given)) {
+            kind = ListKind::Family;
+        } else if (f.city && !f.person && !n.label && hon_.count(t) == 0 && kanaHon_.count(t) == 0) {
+            kind = ListKind::Place;
+        }
+        out.push_back(Listed{t, std::move(kr), kind, n.honorificOnly});
+    }
+    return out;
+}
+
 std::string Registry::RenderName(std::string_view t, const Name& n) {
+    if (const auto l = listed_.find(std::string(t)); l != listed_.end()) return l->second.ko;
     if (!n.hasParts) return RenderPart(t, true);
     std::string out;
     for (std::size_t i = 0; i < n.parts.size(); i++) {
@@ -145,6 +171,7 @@ std::string Registry::Written(std::string_view kana) const {
 
 std::string Registry::RenderPart(std::string_view t, bool whole) {
     const std::string key(t);
+    if (const auto l = listed_.find(key); l != listed_.end()) return l->second.ko;
     if (const auto f = tables_->fixed.find(key); f != tables_->fixed.end() && !f->second.empty()) return f->second;
     if (const auto r = reading_.find(key); r != reading_.end() && !r->second.empty()) {
         return Written(r->second);

@@ -1,0 +1,26 @@
+# 규칙: LEX-212
+rule	input	expected	kind	layer
+lookup:sobireru	聞きそびれた。	has:물어볼 기회를 놓쳤다	fix	lookup
+lookup:sobireru	聞きそびれてしまったな。	has:물어볼 기회를 놓쳐버렸군	fix	lookup
+lookup:sobireru	昨日、謝りそびれていた。	has:사과할 기회를 놓치고 있었다	fix	lookup
+lookup:sobireru	驚きで髪飾りを断りそびれた。	has:거절할 기회를 놓쳤다	fix	lookup
+lookup:sobireru	朝食を食べそびれてしまった。	has:먹을 기회를 놓쳐버렸다	fix	lookup
+lookup:sobireru	（聞きそびれたのはわざとだ……）	has:물어볼 기회를 놓친 것은	fix	lookup
+lookup:sobireru	「それで、聞きそびれたんだけど」	has:물어볼 기회를 놓쳤는데	fix	lookup
+lookup:sobireru	そして、先程聞きそびれた質問をした。	has:물어볼 기회를 놓친 질문	fix	lookup
+lookup:sobireru	結局提出しそびれたままの”婚姻届”。	has:제출할 기회를 놓친 채로	fix	lookup
+lookup:sobireru	「まあ、冬眠しそびれている蛙ですわ」	has:겨울잠할 기회를 놓치고 있는	fix	lookup
+lookup:sobireru	「うーん、朝の漁に出そびれましたね」	has:나갈 기회를 놓쳤어요	fix	lookup
+lookup:sobireru	物珍しさか、本職の店で買いそびれたか。	has:살 기회를 놓쳤나	fix	lookup
+lookup:sobireru	「これを柏葉先輩に渡しそびれてました」	has:건넬 기회를 놓치고 있었습니다	fix	lookup
+lookup:sobireru	しかし、ラナの返事を聞きそびれていた。	has:물어볼 기회를 놓치고 있었다	fix	lookup
+lookup:sobireru	あの時に、帰りそびれていたのだとしたら。	has:돌아갈 기회를 놓치고 있었던	fix	lookup
+lookup:sobireru	多分あいつらは朝食を食いそびれるだろう。	has:먹을 기회를 놓칠 것이다	fix	lookup
+lookup:sobireru	おかげで表彰台に立ちそびれてしまった。	has:설 기회를 놓쳐버렸다	fix	lookup
+lookup:sobireru	大事なことを思い出しそびれたんだ。	has:떠올릴 기회를 놓친 거야	fix	lookup
+lookup:sobireru	逃げそびれたカーちゃんは、リルの下でバタバタ暴れる。	has:도망칠 기회를 놓친	fix	lookup
+lookup:sobireru	俺は家に帰って、食いそびれた昼飯を温めなおして食べる。	has:먹을 기회를 놓친 점심	fix	lookup
+lookup:sobireru	言いそびれた	has:말할 기회를 놓쳤다	keep	lookup
+lookup:sobireru	大事なことを言いそびれていた。	has:말할 기회를 놓치고 있었다	keep	lookup
+lookup:sobireru	考え事だけが尽きず、寝そびれてしまったのだ。	has:잠을 설쳐버렸	keep	lookup
+lookup:sobireru	結局、先輩の家へは行きそびれてしまった。	has:갈 기회를 잃어버렸다	keep	lookup

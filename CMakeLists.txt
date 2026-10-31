@@ -85,6 +85,22 @@ endfunction()
 hdtrans_builtin_source(builtin_gen.cpp "${HDTRANS_BUILTIN_DIR}" kTables BuiltinTables HDTRANS_BUILTIN_TSV)
 hdtrans_builtin_source(builtin_extra_gen.cpp "${HDTRANS_BUILTIN_DIR}/extra" kFiles ExtraBuiltinFiles
     HDTRANS_BUILTIN_EXTRA_TSV)
+# The tables of the speech-level stage, src/core/register/data/*.tsv and its folders, compiled in.
+set(HDTRANS_REGISTER_DATA "${CMAKE_CURRENT_SOURCE_DIR}/src/core/register/data")
+file(GLOB HDTRANS_REGISTER_READER_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/*.tsv")
+file(GLOB HDTRANS_REGISTER_KO_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/ko/*.tsv")
+file(GLOB HDTRANS_REGISTER_LEVEL_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/register/*.tsv")
+file(GLOB HDTRANS_REGISTER_RETRO_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/retro/*.tsv")
+hdtrans_builtin_source(register_reader_gen.cpp "${HDTRANS_REGISTER_DATA}" kReaderFiles RegisterReaderTables
+    HDTRANS_REGISTER_READER_TSV)
+hdtrans_builtin_source(register_ko_gen.cpp "${HDTRANS_REGISTER_DATA}/ko" kKoFiles RegisterKoTables HDTRANS_REGISTER_KO_TSV)
+hdtrans_builtin_source(register_levels_gen.cpp "${HDTRANS_REGISTER_DATA}/register" kLevelFiles RegisterLevelTables
+    HDTRANS_REGISTER_LEVEL_TSV)
+hdtrans_builtin_source(register_retro_gen.cpp "${HDTRANS_REGISTER_DATA}/retro" kRetroFiles RegisterRetroTables
+    HDTRANS_REGISTER_RETRO_TSV)
+set(HDTRANS_REGISTER_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/register_reader_gen.cpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/register_ko_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/register_levels_gen.cpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/register_retro_gen.cpp")
 # The set names of the word classes, checked when a source names a class.
 add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h"
     COMMAND "${CMAKE_COMMAND}" "-DCLASSES=${HDTRANS_BUILTIN_DIR}/classes.tsv"
@@ -109,7 +125,7 @@ add_subdirectory(third_party/libyaml)
 file(GLOB_RECURSE HDTRANS_SOURCES CONFIGURE_DEPENDS src/core/*.cpp)
 add_library(hdtrans STATIC ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
-    "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
+    ${HDTRANS_REGISTER_SOURCES} "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
 set_source_files_properties(src/cli/main.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION_TEXT="${HDTRANS_VERSION_TEXT}")
@@ -159,6 +175,8 @@ if(NOT EMSCRIPTEN)
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${HDTRANS_USER_STAGE}"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/user/userdict.example.txt"
             "${HDTRANS_USER_STAGE}/userdict.example.txt"
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/user/names.example.txt"
+            "${HDTRANS_USER_STAGE}/names.example.txt"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/hdtrans.config.example.yaml"
             "${HDTRANS_USER_STAGE}/hdtrans.config.example.yaml"
         COMMAND "${CMAKE_COMMAND}" -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/ehnd"
@@ -183,6 +201,11 @@ if(NOT EMSCRIPTEN)
         -DFIXTURE=${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder
         -DWORK=${CMAKE_CURRENT_BINARY_DIR}/cli-options -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli_options.cmake")
     string(REGEX REPLACE "([][+.*()^$?|\\])" "\\\\\\1" versionPattern "${HDTRANS_VERSION_TEXT}")
+    # The speech report of the CLI, with the dictionaries of dicts/.
+    add_test(NAME cli.speech-report COMMAND "${CMAKE_COMMAND}" -DCLI=$<TARGET_FILE:hdtrans_cli>
+        -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts -DWORK=${CMAKE_CURRENT_BINARY_DIR}/speech-report
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/speech_report.cmake")
+    set_tests_properties(cli.speech-report PROPERTIES TIMEOUT 300)
     set_tests_properties(cli.version PROPERTIES
         PASS_REGULAR_EXPRESSION "^hdTrans v${versionPattern} \\(native\\) / dict "
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
@@ -271,8 +294,16 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.cases.documents COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts" "${CMAKE_CURRENT_SOURCE_DIR}/tests/rules/documents"
             --documents)
+        # The sample pack loaded after the dictionaries (docs/packs.md): its fix and keep cases.
+        add_test(NAME rules.packs COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts,${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/sample"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/sample.cases.tsv" --no-current)
+        # The worked examples of docs/packs.md (팩 쓰기 안내), loaded with the shipped dictionaries.
+        add_test(NAME rules.packs.guide COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts,${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/guide"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/guide.cases.tsv" --no-current)
         set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
-            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents
+            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents rules.packs rules.packs.guide
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).
@@ -442,6 +473,15 @@ elseif(WIN32)
         add_test(NAME host.${tool} COMMAND tool_compat ${tool} $<TARGET_FILE:j2kengine>)
         set_tests_properties(host.${tool} PROPERTIES WORKING_DIRECTORY "${toolCompatDir}"
             LABELS tool-compat TIMEOUT 120)
+    endforeach()
+    # Copies of the host in their own folders, which the tests give an anedic.txt.
+    foreach(tool anemone-dict anemone-late anemone-nowindow)
+        set(toolDir "${CMAKE_CURRENT_BINARY_DIR}/tool-compat-${tool}")
+        file(MAKE_DIRECTORY "${toolDir}")
+        add_custom_command(TARGET tool_compat POST_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E copy_if_different $<TARGET_FILE:tool_compat> "${toolDir}/tool_compat.exe" VERBATIM)
+        add_test(NAME host.${tool} COMMAND "${toolDir}/tool_compat.exe" ${tool} $<TARGET_FILE:j2kengine>)
+        set_tests_properties(host.${tool} PROPERTIES WORKING_DIRECTORY "${toolDir}" LABELS tool-compat TIMEOUT 120)
     endforeach()
     add_test(NAME host.eztransweb COMMAND tool_compat eztransweb $<TARGET_FILE_DIR:j2kengine>/J2KEngineH.dll)
     set_tests_properties(host.eztransweb PROPERTIES WORKING_DIRECTORY "${toolCompatDir}"

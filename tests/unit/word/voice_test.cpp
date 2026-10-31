@@ -79,6 +79,29 @@ HD_TEST(word_voice_kuru_word_before_a_negative) {
     HD_CHECK_EQ(Translate("連れてこられた。"), "끌려왔다.");
 }
 
+HD_TEST(word_voice_lexical_ichidan_word_before_a_negative) {
+    // A dictionary word in the られ of another ichidan verb before a negative is that verb's
+    // potential, read as the analysis reads one (GRM-50); not with a subject that is no person, and
+    // not without a negative.
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     std::string(kRows) +
+                                         "V\t3 수\tS540\t\t\tGN\t0\t100\n"
+                                         "決められ\t결정&C6@\tM427\tXXX\t\tGN\t0\t101\n"
+                                         "決め\t결정&AV@\tM437\tXXX\t\tGN\t0\t102\n"
+                                         "食事\t식사\tN110\t\t\tGN\t0\t103\n"}});
+    HD_CHECK(loaded.errors.empty());
+    if (loaded.snapshot == nullptr) return;
+    const auto generated = internal::NewGenerated(*loaded.snapshot);
+    auto translate = [&](std::string_view input) {
+        const std::string line(input);
+        const auto out = internal::TranslateDocument(*loaded.snapshot, *generated, {&line, 1}, {}, {});
+        return out.empty() ? std::string() : out[0];
+    };
+    HD_CHECK_EQ(translate("決められない。"), "결정할 수 없다.");
+    HD_CHECK_EQ(translate("決められた。"), "결정되었다.");
+    HD_CHECK(translate("食事が決められない。").find("할 수") == std::string::npos);
+}
+
 HD_TEST(word_voice_no_passive_for_a_verb_without_object) {
     // An ichidan verb that takes no object has no passive a trouble could ask for, and なれ (なれる)
     // is no word in れ.

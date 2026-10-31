@@ -21,8 +21,9 @@ const buildDirs = ['cmake/', 'third_party/'];
 // Read by the native tests at run time, compiled by nothing.
 const dataDirs = ['dicts/', 'tests/rules/', 'tests/variants/', 'tests/fuzz/regressions/', 'examples/', 'ehnd/', 'user/',
   'web/examples/'];
-// docs/pipeline-layers.md: its table is checked against the code by tests/unit/rules/layers_test.cpp.
-const dataFiles = ['web/examples.tsv', 'hdtrans.config.example.yaml', 'docs/pipeline-layers.md'];
+// docs/pipeline-layers.md: its table is checked against the code by tests/unit/rules/layers_test.cpp;
+// spec/register.md: its headings name the rules of the level cases (tests/unit/register/levels_test.cpp).
+const dataFiles = ['web/examples.tsv', 'hdtrans.config.example.yaml', 'docs/pipeline-layers.md', 'spec/register.md'];
 // Tested by the release tools job only.
 const releaseDirs = ['.github/', 'tools/release/'];
 // Read by no build or test.

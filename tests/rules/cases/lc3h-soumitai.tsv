@@ -1,0 +1,23 @@
+# 규칙: GRM-198
+rule	input	expected	kind	layer
+cx:lc3h-soumitai:10	「そうみたい	has:그런 것	fix	rewrites
+cx:lc3h-soumitai:10	『そうみたいね』	has:그런 것	fix	rewrites
+cx:lc3h-soumitai:10	【そうみたいだね。	has:그런 것	fix	rewrites
+cx:lc3h-soumitai:10	「ん・・・そうみたい」	has:응···그런 것	fix	rewrites
+cx:lc3h-soumitai:10	「・・・・・・そうみたいだね。殺るか！」	has:······그런 것	fix	rewrites
+cx:lc3h-soumitai:10	ジン「・・・そうみたいだな・・・お前そんなに力があるのか？」	has:···그런 것	fix	rewrites
+cx:lc3h-soumitai:10	「そうみたい、襲撃する魔獣はそんなに強くないから、そしてあの影も気になります。」	has:그런 것	fix	rewrites
+cx:lc3h-soumitai:10	「そうみたいだよ。ロバートのお父上のほうがえらく乗り気だって結構な噂になってる」	has:그런 것	fix	rewrites
+cx:lc3h-soumitai:10	人狼族に限らず他の獣人もそうみたいで見た目はみんな若いまま歳を重ねるそうなのだ。	has:그런 것	fix	rewrites
+cx:lc3h-soumitai:10	「大丈夫そうみたいですね」	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	「大丈夫そうみたいね」	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	まだ大丈夫そうみたい。	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	「もう、大丈夫そうみたいね。」	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	大丈夫そうみたい。	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	（あ、何か大丈夫そうみたい。	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	「びっくりして……夢みたい」	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	「夢みたいだ、ミリー」	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	まるで夢みたい……」	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	本当に夢みたいだ。	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	もらえて……夢みたい！	!rule:cx:lc3h-soumitai:10	keep	rewrites
+cx:lc3h-soumitai:10	ぜんぶぜんぶ、夢みたいだ。	!rule:cx:lc3h-soumitai:10	keep	rewrites

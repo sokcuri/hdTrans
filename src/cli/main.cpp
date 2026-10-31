@@ -1,4 +1,5 @@
 // UTF-8 CLI. The whole input is one session unless --each or --raw is given.
+#include <cctype>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -23,8 +24,11 @@
 #include "core/config/cache.h"
 #include "core/engine.h"
 #include "core/dict/folders.h"
+#include "core/dict/pack.h"
+#include "core/dict/runes.h"
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
+#include "core/register/retrofit.h"
 #include "core/engine/rules.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
@@ -102,8 +106,14 @@ void Usage(std::FILE* file) {
                "  --each, --raw          each line on its own (as text hooks send it), or word-pipeline-only lines\n"
                "  --speech LEVEL         strict (default): keep -다 but where the Japanese marks casual speech;\n"
                "                         soft: 해체 in 「」 and on bare lines that read as speech\n"
+               "  --speech-levels MODE   auto (default): dialogue lines take the speech level of spec/register.md;\n"
+               "                         keep: the translation's own levels\n"
+               "  --speech-report FILE   the lines the speech levels changed (TSV: line, rule, cue, source, before, after)\n"
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
+               "  --names FILE           names of the input document: JA<TAB>KO[<TAB>KIND[<TAB>hon]] per line\n"
+               "  --propose-names        print the names the input document shows, in the --names format\n"
+               "  --no-predicate-variants  keep kanji spellings of grammatical words as written (様 after a predicate)\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
@@ -188,6 +198,7 @@ std::string Decided(const hdTrans::word::Selection& s, bool ending) {
     case Provenance::Scorer: return "scorers\t";
     case Provenance::Misread: return "misread\t";
     case Provenance::Cg: return "cg-lite\t";
+    case Provenance::Pack: return "packs\tpack:" + hdTrans::dict::PackRowById(s.id).id;
     }
     return "\t";
 }
@@ -225,6 +236,17 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
                 std::fprintf(why.trace, "\t%d\t%s\t%s\n", e.ruleId,
                              e.fixed ? "fixed" : "", e.field.empty() ? "" : std::string(e.field).c_str());
             }
+        }
+        // The pack rows that decided a slot of the word: id, slot and target (docs/packs.md).
+        for (const int row : it->packRows) {
+            const hdTrans::dict::PackRowLabel label = hdTrans::dict::PackRowById(row);
+            std::fprintf(stderr, "WHY-PACK\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex, it->start);
+            PrintEscaped(it->group ? std::string_view(it->group->surface) : std::string_view{});
+            std::fputc('\t', stderr);
+            PrintEscaped(label.id);
+            std::fprintf(stderr, "\t%s\t", label.slot.c_str());
+            PrintEscaped(label.target);
+            std::fputc('\n', stderr);
         }
         for (const hdTrans::word::ShadowChoice& shadow : it->shadowChoices) {
             std::fprintf(stderr, "SHADOW\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex,
@@ -300,9 +322,14 @@ int RunMain(int argc, char** argv) {
     bool selectShadow = false;
     bool misread = false;
     std::optional<std::string> speechArg;
+    std::optional<std::string> speechLevelsArg;
+    std::string speechReportPath;
     bool wrapped = false;
     std::string contextPath;
+    std::string namesPath;
+    bool proposeNames = false;
     bool noCg = false;
+    bool noPredicateVariants = false;
     bool cgLearned = false;
     bool reference = false;
     bool verifyDicts = false;
@@ -336,7 +363,8 @@ int RunMain(int argc, char** argv) {
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
-            || option == "-dump-rules" || option == "-speech" || option == "-context";
+            || option == "-dump-rules" || option == "-speech" || option == "-context"
+            || option == "-speech-levels" || option == "-speech-report" || option == "-names";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -375,9 +403,14 @@ int RunMain(int argc, char** argv) {
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
         else if (option == "-speech") speechArg = *value;
+        else if (option == "-speech-levels") speechLevelsArg = *value;
+        else if (option == "-speech-report") speechReportPath = *value;
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
+        else if (option == "-names") namesPath = *value;
+        else if (option == "-propose-names") proposeNames = true;
         else if (option == "-no-cg") noCg = true;
+        else if (option == "-no-predicate-variants") noPredicateVariants = true;
         else if (option == "-cg-learned") cgLearned = true;
         else {
             std::fprintf(stderr, "hdtrans: unknown option %s\n", argv[i]);
@@ -393,6 +426,10 @@ int RunMain(int argc, char** argv) {
         std::fputs("hdtrans: --wrapped and --context cannot be combined with --each or --raw\n", stderr);
         return 2;
     }
+    if ((!namesPath.empty() && raw) || (proposeNames && (each || raw))) {
+        std::fputs("hdtrans: --names cannot be combined with --raw, --propose-names with --each or --raw\n", stderr);
+        return 2;
+    }
 
     const std::string programDir = ExecutableDir();
     for (const auto& warning : hdTrans::dict::FolderWarnings(programDir))
@@ -404,7 +441,8 @@ int RunMain(int argc, char** argv) {
         return 1;
     }
     for (const auto& diagnostic : config.diagnostics) {
-        std::fprintf(stderr, "hdtrans: %s:%zu: %s\n", configPath.c_str(), diagnostic.line, diagnostic.message.c_str());
+        if (diagnostic.environment) std::fprintf(stderr, "hdtrans: %s\n", diagnostic.message.c_str());
+        else std::fprintf(stderr, "hdtrans: %s:%zu: %s\n", configPath.c_str(), diagnostic.line, diagnostic.message.c_str());
     }
     if (!userPathsArg && config.settings.userdict) userPathsArg = config.settings.userdict;
     if (!ehndArg && config.settings.ehnd) ehndArg = config.settings.ehnd;
@@ -416,7 +454,16 @@ int RunMain(int argc, char** argv) {
         std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
         return 2;
     }
+    hdTrans::SpeechLevels speechLevels = config.settings.speechLevels;
+    if (speechLevelsArg) {
+        for (char& ch : *speechLevelsArg) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    }
+    if (speechLevelsArg && !hdTrans::internal::SpeechLevelsOf(*speechLevelsArg, speechLevels)) {
+        std::fprintf(stderr, "hdtrans: --speech-levels takes auto or keep\n");
+        return 2;
+    }
     noCg = noCg || !config.settings.cg;
+    noPredicateVariants = noPredicateVariants || !config.settings.predicateVariants;
     hdTrans::internal::ConfigCache configCache;
     if (!configCache.Apply(config.settings.cache)) {
         std::fprintf(stderr, "hdtrans: cannot set cache directory\n");
@@ -583,7 +630,43 @@ int RunMain(int argc, char** argv) {
         if (context.ends_with('\n')) context.pop_back();
     }
 
+    hdTrans::names::List names;
+    const auto nameFiles = hdTrans::internal::NameFiles(engine);
+    if (nameFiles) names = nameFiles->list;
+    if (!namesPath.empty()) {
+        hdTrans::names::List listed;
+        std::string text;
+        std::FILE* f = OpenFile(namesPath, false);
+        const bool read = f && ReadAll(f, text);
+        if (f) std::fclose(f);
+        if (!read) {
+            std::fprintf(stderr, "hdtrans: cannot read %s\n", namesPath.c_str());
+            return 1;
+        }
+        std::vector<std::string> errors;
+        if (!hdTrans::dict::internal::ValidUtf8(text)) {
+            std::fprintf(stderr, "hdtrans: error: %s: invalid UTF-8\n", namesPath.c_str());
+            text.clear();
+        }
+        hdTrans::names::ParseList(text, listed, &errors);
+        for (const std::string& error : errors)
+            std::fprintf(stderr, "hdtrans: warning: %s:%s\n", namesPath.c_str(), error.c_str());
+        hdTrans::names::Merge(names, listed);
+    }
+
     const auto snapshot = engine.Dictionaries();
+    std::shared_ptr<const hdTrans::pipeline::DocumentNames> documentNames;
+    if (namesPath.empty()) {
+        documentNames = nameFiles;
+    } else if (!names.names.empty()) {
+        std::unique_ptr<hdTrans::pipeline::DocumentNames> compiled;
+        std::vector<std::string> errors;
+        hdTrans::pipeline::CompileNames(*snapshot, names, compiled, &errors);
+        // The names of the user folders compiled when they loaded, so the errors are of --names.
+        for (const std::string& error : errors)
+            std::fprintf(stderr, "hdtrans: error: %s:%s\n", namesPath.c_str(), error.c_str());
+        documentNames = std::move(compiled);
+    }
     const auto generated = hdTrans::internal::NewGenerated(*snapshot);
     const hdTrans::word::Scorer diagnosticScorers[] = {{"shortest-target", hdTrans::word::ShortestTargetScore}};
     const auto filters = engine.Filters();
@@ -592,8 +675,32 @@ int RunMain(int argc, char** argv) {
     options.filters = filters.get();
     options.wordImprovements.misreadFilter = misread;
     options.speech = speech;
+    options.speechLevels = speechLevels;
     options.wrapped = wrapped;
+    std::vector<hdTrans::reg::Change> levelChanges;
+    std::string speechReport;
+    if (!speechReportPath.empty()) options.levelChanges = &levelChanges;
+    if (!speechReportPath.empty() && (reference || speechLevels == hdTrans::SpeechLevels::Keep))
+        std::fprintf(stderr, "hdtrans: speech levels are off (%s); the speech report is empty\n",
+                     reference ? "--reference" : "keep");
+    // The changed lines of one call, numbered from base.
+    const auto reportChanges = [&](size_t base) {
+        for (const hdTrans::reg::Change& c : levelChanges) {
+            speechReport += std::to_string(base + c.line + 1) + "\t" + c.spec + "\t" + c.key;
+            for (const std::string* text : {&c.source, &c.before, &c.after}) {
+                speechReport += '\t';
+                for (const char ch : *text) {
+                    if (ch == '\r') continue;
+                    speechReport += ch == '\t' || ch == '\n' ? ' ' : ch;
+                }
+            }
+            speechReport += '\n';
+        }
+        levelChanges.clear();
+    };
+    options.names = documentNames.get();
     if (noCg) options.wordImprovements.cgRules = false;
+    if (noPredicateVariants) options.wordImprovements.predicateVariants = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
         options.shadowScorers = diagnosticScorers;
@@ -644,6 +751,10 @@ int RunMain(int argc, char** argv) {
     };
     auto finish = [&] {
         if (stages && !stagerecords::Dump(stagesDir, collector)) return 1;
+        if (!speechReportPath.empty() && !WriteText(speechReportPath, speechReport)) {
+            std::fprintf(stderr, "hdtrans: cannot write %s\n", speechReportPath.c_str());
+            return 1;
+        }
         if (!dumpRulesPath.empty()) {
             const std::string rules = hdTrans::internal::RuleProgramText(*snapshot);
             if (rules.empty() || !WriteText(dumpRulesPath, rules)) {
@@ -692,8 +803,13 @@ int RunMain(int argc, char** argv) {
         if (!context.empty()) addLines(context);
         const size_t contextLines = lines.size();
         addLines(input);
+        if (proposeNames) {
+            emit(hdTrans::pipeline::ProposeNames(*snapshot, lines, options.names));
+            return finish();
+        }
         const std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
+        reportChanges(0);
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");
@@ -712,6 +828,7 @@ int RunMain(int argc, char** argv) {
         } else {
             const std::string lines[] = {std::string(line)};
             out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options).front();
+            reportChanges(static_cast<size_t>(whyContext.lineBase));
         }
         if (stages) {
             stagerecords::AddOutput(collector, collector.caseBase + 1, out);

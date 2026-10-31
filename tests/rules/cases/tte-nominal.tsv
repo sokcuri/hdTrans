@@ -1,0 +1,34 @@
+# 규칙: GRM-73
+rule	input	expected	kind	layer
+cx:tte-nominal:10	どこが違うってのよ？	has:다르다는 것?	fix	rewrites
+cx:tte-nominal:10	嬉しいってのは本当だから	has:기쁘다는 것은	fix	rewrites
+cx:tte-nominal:10	命があるってのはいいものさ。	has:있다는 것은	fix	rewrites
+cx:tte-nominal:10	文字がおかしいってのが気になる	has:이상하다는 것이	fix	rewrites
+cx:tte-nominal:10	まあ、支持率が高いってのは頷けるよな	has:높다는 것은	fix	rewrites
+cx:tte-nominal:10	氷をゴロゴロ入れて冷たくするってのは？	has:차갑게 한다는 것은?	fix	rewrites
+cx:tte-nominal:10	勝った方のいうことをきくってのはどうだ？	has:묻는다는 것은	fix	rewrites
+cx:tte-nominal:10	そうそう、一緒にいて楽しいってのが重要よ。	has:즐겁다는 것이	fix	rewrites
+cx:tte-nominal:10	でも、物怖じしないってのは、いいことだと思うよ	has:주눅 들지 않는다는 것은,	fix	rewrites
+cx:tte-nominal:10	彼女が家に来ないと別れるってのは、初めて聞いたが	has:헤어진다는 것은,	fix	rewrites
+cx:tte-nominal:10	人前で食事をしないってのがニンジャのたしなみなのか？	has:하지 않는다는 것이	fix	rewrites
+cx:tte-nominal:10	魔法が万能なもんじゃないってのもある種のお約束か。	has:아니라는 것도	fix	rewrites
+cx:tte-nominal:10	みんなで何枚かメモに書いて敗者に引かせるってのはどうかな。	has:끌게 한다는 것은	fix	rewrites
+cx:tte-nominal:10	治療法の一環に、音楽を聴かせるってのがありますよね？	has:듣게 한다는 것이	fix	rewrites
+cx:tte-nominal:10	当選するわけないからイヤだってのは、話がとおらなくなりますけど	has:싫다는 것은,	fix	rewrites
+cx:tte-nominal:10	お酒が回るってのは、ホントに回るんですね	has:돈다는 것은,	fix	rewrites
+cx:tte-nominal:10	今度は軍艦じゃないってのもいいかもね。	has:군함이 아니라는 것도	fix	rewrites
+cx:tte-nominal:10	わざと見たわけじゃないってのも、理解してくれたよね？	has:아니라는 것도,	fix	rewrites
+cx:tte-nominal:10	ネット検索の方が早いってのは分かりやすいｗｗｗ	has:빠르다는 것은	fix	rewrites
+cx:tte-nominal:10	ここまで笑えないってのは、ちょっとした才能かも	has:웃을 수 없다는 것은,	fix	rewrites
+cx:tte-nominal:10	ふたりがとりあえず先に乗るってのは、ベターな選択かも	has:탄다는 것은,	fix	rewrites
+cx:tte-nominal:5	チッ、こっちはこっちで手が離せないってのに！	has:없다는데!	fix	rewrites
+cx:tte-nominal:5	膝関節の流体パイプの駒合がやばくなりかけてるってのによ。	has:있다는데.	fix	rewrites
+cx:tte-nominal:10	男ってのは	!rule:cx:tte-nominal:10	keep	rewrites
+cx:tte-nominal:10	話ってのは？	!rule:cx:tte-nominal:10	keep	rewrites
+cx:tte-nominal:10	女ってのは男で変わるもの	has:여자라는 것은	keep	rewrites
+cx:tte-nominal:10	UFOってのはさ、未来人が乗ってるんだよ	!rule:cx:tte-nominal:10	keep	rewrites
+cx:tte-nominal:10	行くって言った	!rule:cx:tte-nominal:10	keep	rewrites
+cx:tte-nominal:10	彼が来るって聞いた	has:온다고 들었다	keep	rewrites
+cx:tte-nominal:5	演説は午後だってのに、もう緊張してる	!rule:cx:tte-nominal:5	keep	rewrites
+cx:tte-nominal:5	嬉しいってのは本当だから	!rule:cx:tte-nominal:5	keep	rewrites
+cx:tte-nominal:5	せっかく稼いだってのに今度は新しい装備だ	!rule:cx:tte-nominal:5	keep	rewrites

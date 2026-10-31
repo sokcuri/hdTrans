@@ -4,7 +4,7 @@ cx:ne-promise:10	「違うね」	「아니네」	fix	rewrites
 cx:ne-promise:10	「静かだね」	!rule:cx:ne-promise:10	keep	rewrites
 cx:ne-promise:20	「感じるね」	「느끼네」	fix	rewrites
 cx:ne-promise:20	「燃えるねぇ」	「불타네」	fix	rewrites
-cx:ne-promise:20	「頼りになるね」	「의지가 되네」	fix	rewrites
+cx:ne-promise:20	「頼りになるね」	「믿음직하네」	fix	rewrites
 cx:ne-promise:20	「ここにあるね」	「여기에 있네」	fix	rewrites
 cx:ne-promise:20	「潜れるね！」	「잠수할 수 있네!」	fix	rewrites
 cx:ne-promise:20	「冷えるねぇ」	「차가워지네」	fix	rewrites
@@ -29,8 +29,8 @@ phrase:leave-taking	「じゃあ、また明日ね」	「그럼, 내일 보자�
 phrase:leave-taking	「うん……また明日」	「응……내일 보자」	fix	sound
 phrase:leave-taking	「また来週ね」	「다음 주에 보자」	fix	sound
 phrase:leave-taking	「では、また後で」	「그럼, 나중에 보자」	fix	sound
-phrase:leave-taking	「また明日来る」	「또 내일 온다」	keep	sound
-phrase:leave-taking	「また明日 来る」	「또 내일 온다」	keep	sound
+phrase:leave-taking	「また明日来る」	「또 내일 와」	keep	sound
+phrase:leave-taking	「また明日 来る」	「또 내일 와」	keep	sound
 phrase:leave-taking	「また今度、買いに来るね」	「다음에 또, 사러 올게」	keep	sound
 cx:ne-promise:17	ぐあぁ！やるね！	크아아! 제법이네!	fix	rewrites
 cx:ne-promise:17	「私がやるね」	「내가 할게」	keep	rewrites
@@ -152,7 +152,7 @@ phrase:leave-taking	「また後でな」	「나중에 보자」	fix	sound
 phrase:leave-taking	「じゃあ、また来週ね」	「그럼, 다음 주에 보자」	fix	sound
 phrase:leave-taking	「うん、またな」	「응, 또 보자」	fix	sound
 phrase:leave-taking	「危ないからまた後で」	「위험하니까 또 나중에」	keep	sound
-phrase:leave-taking	「明日また来る」	「내일 또 온다」	keep	sound
+phrase:leave-taking	「明日また来る」	「내일 또 와」	keep	sound
 phrase:leave-taking	「それじゃ、また明日」	「그럼, 내일 보자」	fix	sound
 phrase:leave-taking	「おやすみ、太郎。また明日ね」	「잘 자, 타로. 내일 보자」	fix	sound
 phrase:leave-taking	「ああ、また明日」	「아, 내일 보자」	fix	sound

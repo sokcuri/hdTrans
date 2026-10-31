@@ -3,15 +3,15 @@ rule	input	expected	kind	layer
 cx:receive-potential:5	健康な体にしてもらえて、しかも若返らせてもらったら何も文句はありませんよ」	건강한 몸으로 해 주고, 게다가 젊어지게 해 주면 아무것도 불만은 없어요」	fix	rewrites
 cx:receive-potential:10	自分の娘を気に入ってもらえれば、あわよくば婚約者にということなのだろう。	자신의 딸을 마음에 들어 주면, 잘 되면 약혼자에게라는 것일 것이다.	fix	rewrites
 cx:receive-potential:10	良い家族がいて、こういう人に出会えて、助けてもらえたってことが僕の幸運だった。	좋은 가족이 있어, 이런 사람을 만날 수 있어, 도와 주었다는 것이 내 행운이었다.	fix	rewrites
-cx:receive-potential:10	様を信じてもらえれば良しとするみたいです	모양을 믿어 주면 좋다로 하는 것 같습니다	fix	rewrites
+cx:receive-potential:10	様を信じてもらえれば良しとするみたいです	모양을 믿어 주면 좋다고 여기는 것 같습니다	fix	rewrites
 cx:receive-potential:10	信じてもらえたらよしって…	믿어 주면 좋아는…	fix	rewrites
 cx:receive-potential:10	そう言ってもらえるとやっぱり、うれしいわいなあ。	그렇게 말해 주면 역시, 기뻐 좋은.	fix	rewrites
-cx:receive-potential:10	「謝ることじゃない。聞いてきてもらえて助かった」	「사과하는 게 아니다. 들어 와 줘서 살았다」	fix	rewrites
+cx:receive-potential:10	「謝ることじゃない。聞いてきてもらえて助かった」	「사과하는 게 아니야. 들어 와 줘서 살았어」	fix	rewrites
 cx:receive-potential:10	「いえ、お話を聞いてもらえただけで十分です」	「아뇨, 이야기를 들어 준 것만으로 충분합니다」	fix	rewrites
 cx:receive-potential:10	「そう言ってもらえてよかったです」	「그렇게 말해 줘서 좋았습니다」	fix	rewrites
 cx:receive-potential:10	「あはっ、そう言ってもらえると、わたしもうれしいです……と、そうだ」	「아핫, 그렇게 말해 주면, 나도 기쁩니다……아, 맞다」	fix	rewrites
 cx:receive-potential:10	今日はとってもゆっくりさせてもらえて、ありがとうございました。	오늘은 매우 천천히 하게 해 주어서, 감사합니다.	fix	rewrites
-cx:receive-potential:10	「……私がお姉ちゃんのフリをして、あの子に好きになってもらえれば……」	「……내가 언니의 척해, 그 아이에게 좋아하게 돼 주면……」	fix	rewrites
+cx:receive-potential:10	「……私がお姉ちゃんのフリをして、あの子に好きになってもらえれば……」	「……내가 언니인 척해, 그 아이에게 좋아하게 돼 주면……」	fix	rewrites
 cx:receive-potential:10	教えてもらえたら嬉しい	가르쳐 주면 기쁘다	fix	rewrites
 cx:receive-potential:5	手伝ってもらえますか？	도움을 받을 수 있습니까?	keep	rewrites
 cx:receive-potential:5	手伝ってもらえない？	도움을 받을 수 없어?	keep	rewrites

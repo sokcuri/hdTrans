@@ -1,0 +1,26 @@
+# 규칙: GRM-107
+rule	input	expected	kind	layer
+cx:lc2a-tai-tokoro:10	それは避けたいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	ない、と思いたいところだな	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	私も知りたいところですね。	has:싶군요	fix	rewrites
+cx:lc2a-tai-tokoro:10	を目標としたいところです！	has:싶습니다	fix	rewrites
+cx:lc2a-tai-tokoro:10	たのち結論を出したいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	確実に引き入れたいところだな。	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	ここで２０点は詰めたいところだな	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	情報を少しでも知りたいところだな。	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	ここはユーリルに探らせたいところだな	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	その前に何とかしてやりたいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	このクロムさんに伺いたいところです。	has:싶습니다	fix	rewrites
+cx:lc2a-tai-tokoro:10	もう少しペースを上げたいところだな。	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	できれば直接お礼を言いたいところだな	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	大事に食べて記憶に残したいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	助けられるなら早く助けたいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	さすがにもう終わりにしたいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	スコット家も商売はと喜びたいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	でもパンツは毎日替えたいところだな……	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	日本人の俺としては、そろそろ米が食べたいところだ。	has:싶다	fix	rewrites
+cx:lc2a-tai-tokoro:10	「それは俺も知りたいところだな」	has:싶네	fix	rewrites
+cx:lc2a-tai-tokoro:10	「着陸して話を聞きたいところだが」	!rule:cx:lc2a-tai-tokoro:10	keep	rewrites
+cx:lc2a-tai-tokoro:10	時間があればもっと話したいところだったんだが、予定が詰まっていてね。	!rule:cx:lc2a-tai-tokoro:10	keep	rewrites
+cx:lc2a-tai-tokoro:10	行きたいところがある。	!rule:cx:lc2a-tai-tokoro:10	keep	rewrites
+cx:lc2a-tai-tokoro:10	と言いたいところだけど、無理だった。	!rule:cx:lc2a-tai-tokoro:10	keep	rewrites

@@ -43,6 +43,8 @@ enum class SpaceWord {
     Ending,  // after is the text after the space up to a mark or the end, which ends what is before
     Filler,  // the whole piece before is an interjection, which must stay a separate word
     Spelled, // a word that starts in the text before and goes on past it to no hiragana but a particle or copula
+    Compound, // a noun of two kanji or more that is the text before and goes on past it to no kanji, no
+              // katakana and no hiragana but a particle, a copula or って
 };
 using SpaceJoins = std::function<bool(std::string_view before, std::string_view after, SpaceWord word)>;
 void TokenizeSpans(std::span<const Piece> pieces, bool dashes, Tokens& out, const SpaceJoins* joins = nullptr);

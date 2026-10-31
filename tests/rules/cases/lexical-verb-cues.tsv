@@ -1,0 +1,31 @@
+# 규칙: LEX-163
+rule	input	expected	kind	layer
+cx:verb-cue:10	いるとお伺いしたんですが！！	있다고 들었습니다만!!	fix	rewrites
+cx:verb-cue:10	「ちょっとお伺いしてもいいですか？」	!rule:cx:verb-cue:10	keep	rewrites
+cx:verb-cue:20	「観劇とお伺いしましたが」	「연극 관람이라고 들었습니다만」	fix	rewrites
+cx:verb-cue:20	りの使い手とお伺いしております。	has:사용자라고 듣고 있습니다	fix	rewrites
+cx:verb-cue:20	店員へとお伺いし、	!rule:cx:verb-cue:20	keep	rewrites
+cx:verb-cue:20	では夜に、旅館に伺いますね！	has:여관에 방문할게요	keep	rewrites
+cx:verb-cue:25	仰ってくださったと伺いました。	has:주셨다고 들었습니다	fix	rewrites
+cx:verb-cue:25	したいと伺いましたが？」	has:하고 싶다고 들었습니다만	fix	rewrites
+cx:verb-cue:25	敬われるのが余程嫌いなのだと伺い知れる。	!rule:cx:verb-cue:25	keep	rewrites
+cx:verb-cue:25	沙織が心配そうに伺う。	has:걱정스러운 듯이 묻는다	keep	rewrites
+cx:verb-cue:30	口にした瞬間吹きそうになった。	has:말한 순간 뿜을 뻔했다	fix	rewrites
+cx:verb-cue:30	一瞬、紅茶を吹きそうになった。	has:홍차를 뿜을 뻔했다	fix	rewrites
+cx:verb-cue:30	雨が吹きすさぶ窓の外を見る。	!rule:cx:verb-cue:30	keep	rewrites
+cx:verb-cue:30	暴風雨が吹き荒れながら……。	!rule:cx:verb-cue:30	keep	rewrites
+cx:verb-cue:40	手紙を大切に仕舞う。	편지를 소중히 간직한다.	fix	rewrites
+cx:verb-cue:40	と大きな声を出して仕舞います。	!rule:cx:verb-cue:40	keep	rewrites
+cx:verb-cue:40	これで話は一度お仕舞い。	has:한 번 끝	keep	rewrites
+cx:verb-cue:50	レイモンドが荒々しく無線を切り、几帳面にポーチに仕舞う。	has:꼼꼼하게 포우치에 넣는다	fix	rewrites
+cx:verb-cue:50	金貨をアイテムボックスに仕舞いギルドを後にする。	has:아이템 박스에 넣어	fix	rewrites
+cx:verb-cue:50	と大きな声を出して仕舞います。	!rule:cx:verb-cue:50	keep	rewrites
+cx:verb-cue:50	「お仕舞い、礼」	!rule:cx:verb-cue:50	keep	rewrites
+cx:verb-cue:60	暗い闇に潜む巨大な体形のクモ。	has:어둠에 숨어 있는 거대한	fix	rewrites
+cx:verb-cue:60	原因はその中に潜むもの。	원인은 그 중에 숨어 있는 것.	fix	rewrites
+cx:verb-cue:60	間髪いれず、オルナは懐に潜む。	!rule:cx:verb-cue:60	keep	rewrites
+cx:verb-cue:60	西の広場に敵が潜んでいた！	!rule:cx:verb-cue:60	keep	rewrites
+cx:verb-cue:70	だが、放ってもおけない。	하지만, 내버려도 둘 수 없다.	fix	rewrites
+cx:verb-cue:70	けど、放っても置けなかった。	has:내버려도 둘 수 없었다	fix	rewrites
+cx:verb-cue:70	新品同然な鈍い光を放っていた。	!rule:cx:verb-cue:70	keep	rewrites
+cx:verb-cue:70	このまま放ってはおけない。	이대로 내버려 둘 수 없다.	keep	rewrites

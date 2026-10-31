@@ -1,0 +1,277 @@
+#! cues
+# Japanese cues of an utterance, read by the register model (R). Stand-in for the cue summary that S and L
+# will provide (Utterance.sourceLevel, Clause.polite, Clause.jreg): until then R scans the source text with
+# these rows. A cue fires when one of its rows matches.
+#
+# Columns
+#   cue     polite (desu/masu at a sentence end), polite-any (desu/masu anywhere), keigo (尊敬語/謙譲語),
+#           set (formal set phrases), archaic (old speech), stiff (stiff plain speech), casual (plain endings),
+#           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows),
+#           quotative (a string after which an any-not-quoted match does not count),
+#           casual-mark (REG-20: a contraction, casual pronoun or address that marks casual speech),
+#           exclaim (a whole sentence that exclaims a discovery although it is not a た or い form, REG-13)
+#   mode    tail rows: strong marks a particle that makes an unbracketed line speech (inner monologue ending
+#           in よ/ね/ぞ is 해, not narration -다: spec/register.md REG-7); notafter as below; other rows:
+#           end: the last sentence ends in text, after any number of tail particles and closing marks;
+#           end-after: as end, with a word before text in the sentence (お先にどうぞ, not どうぞ alone);
+#           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
+#   text    the Japanese string
+#   notbefore  any rows: strings that must not follow text, | separated (男ですまない is 男で + すまない)
+#   notafter  characters that must not come right before text (the ます of ぶちかます is not polite); in tail
+#             rows, words separated by | (どう|: the ぞ of どうぞ)
+cue	mode	text	notafter	note	notbefore
+quotative	-	って		a polite form followed by these is quoted, not spoken (any-not-quoted)
+quotative	-	と言
+quotative	-	と思
+quotative	-	など
+quotative	-	なんて
+tail	-	か
+tail	strong	よ
+tail	strong	ね
+tail	strong	わ
+tail	strong	の
+tail	strong	な
+tail	-	って
+tail	-	けど
+tail	-	が
+tail	-	から
+tail	-	し
+tail	-	もの
+tail	-	もん
+tail	strong	ねえ
+tail	-	よお
+tail	strong	ぞ	どう|	どうぞ is a word, not どう + ぞ (参ろうぞ keeps its ぞ)
+tail	strong	ぜ
+tail	strong	さ
+tail	strong	なあ		the lengthened な (寒いなあ)
+tail	strong	かしら		a casual sentence-final particle (偵察かしら)
+tail	-	のに		頑張って来たのに……: a casual end
+polite	end	です
+polite	end	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩、	ぶちかます, 済ます are not polite
+polite	end	ました	覚醒冷済澄励悩	目を覚ました, 済ました are the plain past of 覚ます, 済ます
+polite	end	でした
+polite	end	ません
+polite	end	ましょう
+polite	end	でしょう
+polite	end	ください
+polite	end	下さい
+polite	end	ませ
+polite	end	っす
+polite	end	んす		だったんすか (っす after ん)
+polite	end	ッス
+polite	end	っス
+polite	end	ございます
+polite	end	かしこま		clipped かしこまりました, still a polite reply
+polite	end	ございません
+polite	end	ごめんなさい
+polite	end	すみません
+polite-any	any-not-quoted	です		です inside the line; not で + すまない, すみません	まな|まん|まね|みま|みな
+polite-any	any-not-quoted	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩、
+polite-any	any-not-quoted	ました	覚醒冷済澄励悩
+polite-any	any-not-quoted	でした
+polite-any	any-not-quoted	でしょう。		a stated でしょう。 inside the line is polite; でしょう？ is the casual tag question (= でしょ)
+polite-any	any-not-quoted	ません
+polite-any	any-not-quoted	ましょう
+polite-any	any-not-quoted	ください
+polite-any	any-not-quoted	下さい
+polite-any	any-not-quoted	っす
+keigo	any	いらっしゃ
+keigo	any	おっしゃい
+keigo	any	おっしゃっ
+keigo	any	おっしゃら
+keigo	any	おっしゃる
+keigo	any	おっしゃれ
+keigo	any	申し上げ
+keigo	any	申します
+keigo	any	申しま
+keigo	any	参ります
+keigo	any	参りま
+keigo	any	致しま
+keigo	any	いたしま
+keigo	any	存じ
+keigo	any	ござい
+keigo	any	伺い
+keigo	any	伺っ
+keigo	any	召し上が
+keigo	any	おります
+keigo	any	おりま
+keigo	any	おられ
+keigo	any	なさいませ
+keigo	any	くださいませ
+keigo	any	拝見
+keigo	any	頂戴
+keigo	any	でございま
+keigo	any	であります
+keigo	any	なさいます
+set	any	失礼しま
+set	any	失礼いたしま
+set	any	申し訳
+set	any	よろしくお願い
+set	any	お疲れ様でし
+set	any	お疲れさまでし
+set	any	ありがとうございま
+set	any	おはようございま
+set	any	いらっしゃいませ
+set	any	かしこまりました
+set	any	承知しまし
+set	any	承知いたしまし
+set	any	お待たせしまし
+set	any	ご苦労様
+set	any	ご苦労さま
+archaic	end	のじゃ		at the end only: ものじゃない is not old speech
+archaic	any	じゃろ
+archaic	any	じゃよ
+archaic	any	じゃのう
+archaic	any	ておる
+archaic	any	でおる
+archaic	any	おるのか
+archaic	any	おらん
+archaic	any	おらぬ
+archaic	any	せぬ
+archaic	any	ござる
+archaic	end	候		～に候: at the end only (not 立候補)
+archaic	any	であろう
+archaic	end	のう
+archaic	end	わい	かこ	かわい, こわい are adjectives
+archaic	any	ぞよ	う	どうぞよろしく
+archaic	end	なのじゃ
+archaic	any	じゃが	肉	肉じゃが is a dish
+archaic	any	じゃて
+archaic	any	わしは
+archaic	any	わしが
+archaic	any	わしの
+archaic	end	ぬ	死	(知らぬ, いかぬ, 許さぬ); 死ぬ is a verb
+archaic	any	お主
+archaic	any	そなた
+archaic	any	其方
+archaic	any	拙者
+archaic	any	参った
+stiff	end	である		at the end only: an adnominal である (発起人であるところ) is not stiff
+stiff	end	のである
+stiff	any	たまえ
+stiff	any	諸君
+stiff	end	ではないか		at the end only: ではないから is not rhetorical
+stiff	any	貴様
+stiff	any	せよ	に	にせよ is an idiom (何にせよ), not a command
+stiff	any	ねばならん
+stiff	any	ねばならぬ
+stiff	any	というのか
+casual	end	だ
+casual	end	じゃん
+casual	end	じゃない
+casual	end	じゃねえ
+casual	end	じゃね
+casual	end	かな
+casual	end	かよ
+casual	end	っけ
+casual	end	でしょ
+casual	end	だろ
+casual	end	ろ
+casual	end	れ
+casual	end	け
+casual	end	い
+casual	end	う
+casual	end	る
+casual	end	た
+casual	end	て
+casual	end	で
+casual	end	ん
+first:watakushi	any	わたくし
+first:watakushi	any	私め
+first:washi	any	わし
+first:washi	any	ワシ
+first:washi	any	儂
+first:sessha	any	拙者
+first:sessha	any	それがし
+first:atashi	any	あたし
+first:atashi	any	アタシ
+first:atashi	any	あたい
+first:boku	any	僕
+first:boku	any	ボク
+first:boku	any	ぼく
+first:ore	any	俺
+first:ore	any	オレ
+first:ore	any	おれ
+first:watashi	any	私
+first:watashi	any	わたし
+exclaim	-	みっけ		見つけた, clipped (ー removed before matching)
+exclaim	-	見っけ
+exclaim	-	めっけ
+archaic	end	なり	かきと	the old copula なり (騎士団なり); not かなり, いきなり, となり
+stiff	end	てみよ		the old imperative of みる (申してみよ)
+# a polite form before と + a verb of saying is quoted (許してくださいと詫びる); not ですとも, ですとか, ますと
+quotative	-	と詫
+quotative	-	と謝
+quotative	-	と頼
+quotative	-	と叫
+quotative	-	と答
+quotative	-	と聞
+quotative	-	と呟
+quotative	-	と囁
+quotative	-	と告
+quotative	-	と命
+quotative	-	と怒鳴
+quotative	-	と泣
+quotative	-	と懇願
+quotative	-	と訴
+quotative	-	と懇
+quotative	-	と言わ
+quotative	-	と申
+casual	end	く	しよかたらすき早遅強弱高低深浅長短広狭多少近遠暗明熱冷寒暑重軽固細太新古若薄厚濃全	a verb in its dictionary form (頂く); not an adverb (早く, よく, まったく, しばらく)
+casual	end	す		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	つ		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	ぶ		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	む		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	ぐ	す	a verb in its dictionary form (急ぐ); not すぐ
+casual-mark	any	ちゃう
+casual-mark	any	ちゃっ
+casual-mark	any	じゃう
+casual-mark	any	じゃっ
+casual-mark	any	ちまう
+casual-mark	any	ちまっ
+casual-mark	any	ってる
+casual-mark	any	ってた
+casual-mark	any	んでる
+casual-mark	any	んでた
+casual-mark	any	いてる
+casual-mark	any	いてた
+casual-mark	any	してる
+casual-mark	any	してた
+casual-mark	any	えてる
+casual-mark	any	えてた
+casual-mark	any	るんだ
+casual-mark	any	いんだ
+casual-mark	any	たんだ
+casual-mark	any	なんだ			か
+casual-mark	any	くんだ
+casual-mark	any	うんだ
+casual-mark	any	すんだ
+casual-mark	any	つんだ
+casual-mark	any	ってんだ
+casual-mark	any	じゃん
+casual-mark	any	じゃねえ
+casual-mark	any	じゃねー
+casual-mark	any	ねえ
+casual-mark	any	ねー
+casual-mark	any	俺
+casual-mark	any	オレ
+casual-mark	any	おれ
+casual-mark	any	僕
+casual-mark	any	ボク
+casual-mark	any	お前
+casual-mark	any	おまえ
+casual-mark	any	あんた
+casual-mark	any	てめえ
+casual-mark	any	ちゃん
+casual-mark	any	くん
+casual-mark	any	君は
+casual-mark	any	君が
+casual-mark	any	君の
+casual-mark	any	君に
+casual-mark	any	君を
+polite	end	んス		(katakana ス after ん: 一緒じゃないんスか)
+polite	end	ンス
+polite	end	デス		デース (ー between kana is dropped)
+polite	end	マス
+polite	end-after	どうぞ		お先にどうぞ, これどうぞ: a polite offer (먼저 하세요); どうぞ alone is any level
+polite	end	ごゆっくり		ごゆっくりどうぞ, ごゆっくり: a polite wish

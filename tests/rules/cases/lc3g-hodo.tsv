@@ -1,0 +1,31 @@
+# 규칙: GRM-185
+rule	input	expected	kind	layer
+cx:lc3g-hodo:10	それほどではない。	has:그 정도는	fix	rewrites
+cx:lc3g-hodo:10	「それほどでもない」	has:그 정도는	fix	rewrites
+cx:lc3g-hodo:10	「それほどでもないよ」	has:그 정도는	fix	rewrites
+cx:lc3g-hodo:10	「それほどでもないわ」	has:그 정도는	fix	rewrites
+cx:lc3g-hodo:10	それほどじゃなかった。	has:그 정도는	fix	rewrites
+cx:lc3g-hodo:12	表の世界の和真の家はそんなによくは無かったがこれほどでもない。	has:정도는	fix	rewrites
+cx:lc3g-hodo:20	激痛ってほどじゃない。	has:격통이라고 할 정도는	fix	rewrites
+cx:lc3g-hodo:20	「久し振りってほどじゃないだろ」	has:오래간만이라고 할 정도는	fix	rewrites
+cx:lc3g-hodo:20	「えっ？仲がイイってほどでもないけど」	has:이이라고 할 정도도	fix	rewrites
+cx:lc3g-hodo:20	「だから――喧嘩ってほどじゃないって。」	has:싸움이라고 할 정도는	fix	rewrites
+cx:lc3g-hodo:20	多少感情的だけど、悪意ってほどじゃない。	has:악의라고 할 정도는	fix	rewrites
+cx:lc3g-hodo:30	「戦うってほどじゃない。」	has:싸운다고 할 정도는	fix	rewrites
+cx:lc3g-hodo:30	苦しくはあるけど、無理だってほどじゃない。	has:무리라고 할 정도는	fix	rewrites
+cx:lc3g-hodo:30	「特別気になるってほどでもないけど、一応は気になる……くらい？」	has:쓰인다고 할 정도도	fix	rewrites
+cx:lc3g-hodo:30	わずかに厳しい表情を浮かべているけど、怒ってるってほどでもないような……	has:있다고 할 정도도	fix	rewrites
+cx:lc3g-hodo:30	「注意深くアンテナ張ってないと、わからないレベルだから、別段にぶいってほどじゃないわよ」	has:둔하다고 할 정도는	fix	rewrites
+cx:lc3g-hodo:40	「リリィほどじゃない」	has:릴리만큼은	fix	rewrites
+cx:lc3g-hodo:40	歩けないほどじゃないよ	has:정도는	fix	rewrites
+cx:lc3g-hodo:40	「あなたほどじゃないわ」	has:당신만큼은	fix	rewrites
+cx:lc3g-hodo:40	勇吾ほどじゃないけどね…	has:용오만큼은	fix	rewrites
+cx:lc3g-hodo:40	彼ほどじゃなかったけど。	has:그만큼은	fix	rewrites
+cx:lc3g-hodo:10	霊子も少し驚いている様子だが、俺ほどではない。	!rule:cx:lc3g-hodo:10	keep	rewrites
+cx:lc3g-hodo:12	俺の蛭魔術の腕は伯父貴ほどではない。	!rule:cx:lc3g-hodo:12	keep	rewrites
+cx:lc3g-hodo:20	ベリーほどではないが、エムルも敏感だ。	!rule:cx:lc3g-hodo:20	keep	rewrites
+cx:lc3g-hodo:30	フォルケルも父親は嫌いだが、兄ほどではない。	!rule:cx:lc3g-hodo:30	keep	rewrites
+cx:lc3g-hodo:40	あの夢ほどではないけれど、視界がぼやけてきた。	!rule:cx:lc3g-hodo:40	keep	rewrites
+cx:lc3g-hodo:10	ひかるほどではないが、けっこう泥がついてる。	!rule:cx:lc3g-hodo:10	keep	rewrites
+cx:lc3g-hodo:12	リンほどではないにしても、ユアンも五感は鋭い。	!rule:cx:lc3g-hodo:12	keep	rewrites
+cx:lc3g-hodo:20	思考が停止するほどではない。	!rule:cx:lc3g-hodo:20	keep	rewrites

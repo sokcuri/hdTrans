@@ -1,0 +1,40 @@
+# 규칙: GRM-133
+rule	input	expected	kind	layer
+cx:lc2c-bayokatta:10	アキは売ればよかったと後悔した。	has:팔았더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:10	……止めておけばよかったと後悔した。	has:두었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:10	あのウサギ頑張って全部運べばよかったと、少し後悔。	has:옮겼더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:20	「私も何か買っておけばよかったかなー」	has:뒀더라면 좋았을까~」	fix	rewrites
+cx:lc2c-bayokatta:20	「……時間かかるし、先にこっちやればよかったかな」	has:했더라면 좋았을까」	fix	rewrites
+cx:lc2c-bayokatta:20	カメラを持ってくればよかったかなと沙姫は苦笑いした。	has:가져왔더라면 좋았을까	fix	rewrites
+cx:lc2c-bayokatta:30	――グールを突き出せばよかったのだ	has:넘겼더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:30	僕自身が、この世から消え去ればよかったのだ。	has:사라졌더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:30	ただ、ルカラの全てを一度受け入れればよかったのだ。	has:받아들였더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:35	かければよかったかも」	has:걸었더라면 좋았을지도」	fix	rewrites
+cx:lc2c-bayokatta:35	ああ、パリはやめればよかったかも…	has:그만두었더라면 좋았을지도…	fix	rewrites
+cx:lc2c-bayokatta:35	「……最初からこうすればよかったのかもしれないな……」	has:했더라면 좋았을지도	fix	rewrites
+cx:lc2c-bayokatta:40	自殺すればよかったんだ。	has:자살했더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:40	逆にガマン出来たらどうするか聞けばよかったんだ。	has:들었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:40	だけど本当は、ほんの少し勇気を出して、誰かに頼ればよかったんだ。	has:의지했더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:45	「香油があればよかったな」	has:있었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:45	『ハイエンドじゃなければよかった』	has:아니었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:45	最初からこうすればよかったな・・・。	has:했더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:50	こんなことなら前から来ていればよかったですね。	has:있었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:50	こんなことならもっと前から来ていればよかったですね。	has:있었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:55	彼の目につかない場所にしまっておけばよかったものを。	has:두었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:55	豚は豚らしく養豚場で大人しくしていればよかったものを…。	has:있었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:55	帰ってすぐ、彼の目につかない場所にしまっておけばよかったものを。	has:두었더라면 좋았을	fix	rewrites
+cx:lc2c-bayokatta:60	始まったらよかったんだけどｗｗｗ	has:시작되었더라면 좋았겠지만	fix	rewrites
+cx:lc2c-bayokatta:60	そうだったらよかったけど――じゃなくて！	has:그랬더라면 좋았겠지만――이	fix	rewrites
+cx:lc2c-bayokatta:90	「なら好きだって言えばよかったのに」	has:말했더라면 좋았을텐데」	fix	rewrites
+cx:lc2c-bayokatta:90	「んー、別に９番も１０番指摘すればよかったのにねー」	has:지적했더라면 좋았을텐데―」	fix	rewrites
+cx:lc2c-bayokatta:90	もっと他の案にすればよかったのになんでこんなことに……	has:했더라면 좋았을텐데	fix	rewrites
+cx:lc2c-bayokatta:10	「ならどう返したらよかったんだい？」	!rule:cx:lc2c-bayokatta:10	keep	rewrites
+cx:lc2c-bayokatta:20	「……じゃあさ、すぐに俺が出ていって入ればよかった？	!rule:cx:lc2c-bayokatta:20	keep	rewrites
+cx:lc2c-bayokatta:30	「効率よく、楽に生きていければいいのに」	!rule:cx:lc2c-bayokatta:30	keep	rewrites
+cx:lc2c-bayokatta:35	来てくれてよかった。	!rule:cx:lc2c-bayokatta:35	keep	rewrites
+cx:lc2c-bayokatta:40	あ、ＦＦ持ってくればよかった。	!rule:cx:lc2c-bayokatta:40	keep	rewrites
+cx:lc2c-bayokatta:45	「ならどう返したらよかったんだい？」	!rule:cx:lc2c-bayokatta:45	keep	rewrites
+cx:lc2c-bayokatta:50	「……じゃあさ、すぐに俺が出ていって入ればよかった？	!rule:cx:lc2c-bayokatta:50	keep	rewrites
+cx:lc2c-bayokatta:55	「効率よく、楽に生きていければいいのに」	!rule:cx:lc2c-bayokatta:55	keep	rewrites
+cx:lc2c-bayokatta:60	来てくれてよかった。	!rule:cx:lc2c-bayokatta:60	keep	rewrites
+cx:lc2c-bayokatta:90	あ、ＦＦ持ってくればよかった。	!rule:cx:lc2c-bayokatta:90	keep	rewrites

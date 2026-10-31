@@ -32,9 +32,9 @@ dict:jisjk:342502	何を言えばいいの？	무슨 말을 하면 되는 거야
 dict:jisjk:342502	行けばいいの。	가면 돼.	fix	local
 dict:jisjk:342502	行けばいいのか？	가면 되는 건가?	fix	local
 dict:jisjk:342502	来ればいいのよ。	오면 돼.	fix	local
-dict:jisjk:342502	晴れればいいのに。	개이면 좋을 텐데.	keep	local
+dict:jisjk:342502	晴れればいいのに。	개면 좋을 텐데.	keep	local
 dict:jisjk:342502	早く帰ればいいのにね	빨리 돌아가면 좋을 텐데	keep	local
 dict:jisjk:342502	これでいいの？	!rule:dict:jisjk:342502	keep	local
 dict:jisjk:342502	お口に合えばいいのですが。	입맛에 맞으면 좋겠습니다만.	keep	local
-dict:jisjk:342502	手伝えればいいのだが	도울 수 있으면 좋지만	keep	local
+dict:jisjk:342502	手伝えればいいのだが	도울 수 있으면 좋은데	keep	local
 dict:jisjk:342502	わかればいいのです。	알면 됩니다.	fix	local

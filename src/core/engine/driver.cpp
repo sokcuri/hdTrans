@@ -26,6 +26,7 @@
 #include "core/pipeline/segment.h"
 #include "core/pipeline/sound.h"
 #include "core/pipeline/speech.h"
+#include "core/register/retrofit.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/text/hangul.h"
 #include "core/text/lines.h"
@@ -166,6 +167,8 @@ pipeline::BaseReading ReadBase(const void* context, std::string_view base, std::
 struct RespellLookup {
     const dict::Snapshot& snap;
     const dict::LookupContext& lookup;
+    const pipeline::LineContext* line = nullptr;  // for EndsInVerb
+    bool predicateVariants = true;                // word::Improvements::predicateVariants
 };
 
 dict::Candidates Find(const RespellLookup& d, std::string_view text) {
@@ -184,6 +187,78 @@ bool Grammar(const dict::Candidate& c) { return c.codes != nullptr && c.codes->p
 // looked up with this many bytes after it; a longer key around a variant is not seen.
 constexpr int kLookBackRunes = 4;
 constexpr size_t kLookAheadBytes = 192;
+constexpr int kPredicateRunes = 48;
+
+// Whether the kanji variant at line[at] of spelling.variant-after-predicate is the grammatical word
+// (様 read as よう, spec LEX-1050): a word of the class's next starts follows it (not 様子, 様々), no
+// dictionary word that starts before it holds it whose respelled text is no key (あなた様, お互い様),
+// and the analysis of the text before it ends in an adjective or a verb in an adnominal form (慌てた,
+// 静かな, 失ってる) or the particle の; a phrase of spelling.variant-after-predicate-phrase (その様な)
+// is the grammatical word too. After a noun or a name (ひなた様, 王様) or a word of
+// spelling.variant-after-predicate-kept-after (そんな様) it stays.
+bool StandsAfterPredicate(const RespellLookup& d, std::string_view line, size_t at, std::string_view variant,
+                          std::string_view spelling) {
+    const size_t end = at + variant.size();
+    const std::string_view rest = line.substr(end);
+    if (dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-next"), rest) == 0) return false;
+    if (dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-kept-after"), line.substr(0, at)) > 0) {
+        return false;
+    }
+    for (const std::string_view phrase : dict::ClassMembers(HDTRANS_CLASS("spelling.variant-after-predicate-phrase"))) {
+        const size_t k = phrase.find(variant);
+        if (k != std::string_view::npos && k <= at && line.substr(at - k).starts_with(phrase)) return true;
+    }
+    const auto respelledKey = [&](size_t start, std::string_view source) {
+        std::string respelled(source.substr(0, at - start));
+        respelled += spelling;
+        respelled += source.substr(end - start);
+        return HasKey(d, respelled) || EndingKey(d.snap, respelled);
+    };
+    size_t start = at;
+    for (int back = 0; back < kLookBackRunes && start > 0; back++) {
+        start -= pipeline::internal::LastRune(line.substr(0, start)).size;
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
+            if (start + c.source.size() >= end && !respelledKey(start, c.source)) return false;
+        }
+    }
+    // The text of the clause before the variant, as the word stage reads it (at most kPredicateRunes
+    // runes, so a long line costs no more than a short one).
+    size_t from = at;
+    for (int runes = 0; from > 0 && runes < kPredicateRunes; runes++) {
+        const text::Rune last = pipeline::internal::LastRune(line.substr(0, from));
+        if (std::u32string_view(U"。！？!?「」『』、，,\n").find(last.cp) != std::u32string_view::npos) break;
+        from -= last.size;
+    }
+    if (from == at) return false;
+    tokenizer::Tokens tokens;
+    tokenizer::Tokenize(line.substr(from, at - from), tokens);
+    word::Settings settings;
+    settings.text = true;
+    word::Arena arena;
+    word::Analysis analysis;
+    word::Analyze(tokens, d.snap, d.lookup, settings, arena, analysis);
+    if (analysis.sentences.empty()) return false;
+    const word::Item* last = analysis.sentences.back().chain.head;
+    while (last != nullptr && last->next != nullptr) last = last->next;
+    if (last == nullptr || last->IsNameItem()) return false;
+    // A verb in an adnominal form (慌てた, 言う, 寝ている, 行かない), not its stem (すれ違い様, 振り向き様).
+    // Before に only the past form or なる follows: the present form there reads 것처럼 as written
+    // (踊る様に 춤추는 것처럼), where its kana form takes the purpose 도록.
+    // An adjective follows the same rule before に (痛い様に言う 아프게 말하다, not 아프도록).
+    const std::string_view written =
+        last->text.substr(static_cast<size_t>(last->start), static_cast<size_t>(last->length));
+    const bool past = dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-past"), written) > 0;
+    const bool beforeNi = rest.starts_with("に") &&
+                          dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-naru"), rest) == 0;
+    if (last->detail->cls == word::kDetailVerb) {
+        if (past) return true;
+        if (beforeNi) return false;
+        return dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-end"), written) > 0;
+    }
+    if (last->detail->Yougo()) return past || !beforeNi;
+    const std::string_view surface = last->group->surface;
+    return surface == "の" && last->Code(last->selected < 0 ? 0 : last->selected).starts_with("2");
+}
 
 // Whether a dictionary word cuts across line[at, end) or holds it (pipeline::RespellVariants): a word
 // that starts before it and ends inside it, one that starts inside it and ends past it, or one that
@@ -193,6 +268,9 @@ constexpr size_t kLookAheadBytes = 192;
 bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std::string_view variant,
                       std::string_view spelling) {
     const auto& d = *static_cast<const RespellLookup*>(context);
+    if (dict::InClass(HDTRANS_CLASS("spelling.variant-after-predicate"), variant)) {
+        return !d.predicateVariants || !StandsAfterPredicate(d, line, at, variant, spelling);
+    }
     const size_t end = at + variant.size();
     const bool toKana = !text::IsKanji(text::DecodeRune(spelling).cp);
     const auto keeps = [&](size_t start) {
@@ -296,6 +374,12 @@ bool KanjiNoun(const void* context, std::string_view line, size_t at, size_t end
     return false;
 }
 
+// Whether text ends with a verb (pipeline::RunLookup::verb, the rebuke of SpokenForms).
+bool EndsInVerb(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::EndsInDictionaryVerb(text, *d.line, d.snap);
+}
+
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
 // past it, as written or with the っ dropped (あったりまえ as あたりまえ): the earliest that starts up
 // to kRunLookBackRunes Japanese runes before it, npos for none (pipeline::CollapseTsuRuns).
@@ -332,7 +416,41 @@ struct Scratch {
     std::vector<tokenizer::ControlMarker> markers;
     output::Composer composer;
     word::SessionSenses* sessionSenses = nullptr;
+    // The decision of the speech-level stage for the line being translated when the stage writes it
+    // (UseDecision), and the levels of its quotes.
+    const reg::RegDecision* decision = nullptr;
+    std::vector<word::Settings::LineLevel> quoteLevels;
 };
+
+word::Settings::LineLevel LineLevelOf(reg::Level level) {
+    using L = word::Settings::LineLevel;
+    switch (level) {
+        case reg::Level::none: return L::none;
+        case reg::Level::haera: return L::plain;
+        case reg::Level::hae: return L::casual;
+        case reg::Level::haeyo: return L::polite;
+        case reg::Level::hapsyo: return L::formal;
+        default: return L::other;
+    }
+}
+
+// Sets the decision of the stage for lines [first, last] after the context: that of the line, for a run of
+// lines the one they all share, none where the stage does not write them.
+void UseDecision(Scratch& s, const reg::SourceDecisions* d, std::size_t first, std::size_t last) {
+    s.decision = nullptr;
+    s.quoteLevels.clear();
+    if (d == nullptr || last >= d->lines.size() || last >= d->dialogue.size()) return;
+    const reg::RegDecision& one = d->lines[first];
+    for (std::size_t k = first; k <= last; k++) {
+        const reg::RegDecision& x = d->lines[k];
+        if (!d->dialogue[k] || x.narration || x.level != one.level || x.authoritative != one.authoritative ||
+            x.prose != one.prose || (first != last && !x.quotes.empty())) {
+            return;
+        }
+    }
+    s.decision = &one;
+    for (const reg::RegDecision::Quote& q : one.quotes) s.quoteLevels.push_back(LineLevelOf(q.level));
+}
 
 // The pieces of the output as the tokenizer reads them (the span kinds are the same numbers).
 std::vector<tokenizer::Piece> TokenizerPieces(const output::Pieces& pieces) {
@@ -594,6 +712,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
         s.misreadModel = options.misreadModel;
     }
     s.sessionSenses = text ? sessionSenses : nullptr;
+    s.documentPacks = text ? options.documentPacks : nullptr;
     s.ruleTally = options.ruleTally;
     if (options.filters != nullptr) s.filterMarks = options.filters->Marks();
     s.filterWritten = options.filterWritten;
@@ -726,6 +845,25 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after, tokenizer::SpaceWord word) {
         using tokenizer::SpaceWord;
         if (word == SpaceWord::Ending) return dict::InClass(HDTRANS_CLASS("particle.after-space"), after);
+        if (word == SpaceWord::Compound) {
+            // The kanji before the space is no word of its own (a pronoun, an adverb, a row read not
+            // as a bare noun: 私 学校, 今 風が), and the piece after it starts with no conjugated verb
+            // (先 行って, 右 上がり).
+            for (const dict::Candidate& c : snap.GetWordInfo(head, dict::LookupMode::General, lookup).list) {
+                if (c.source == head && c.codes != nullptr &&
+                    (ClassOf(c) == '3' || (ClassOf(c) == '1' && c.codes->part.Sub() == '2') || c.codes->gram.HasCode("Nn"))) {
+                    return false;
+                }
+            }
+            for (const dict::Candidate& c : snap.GetWordInfo(after, dict::LookupMode::General, lookup).list) {
+                if (ClassOf(c) != '4' || !after.starts_with(c.source)) continue;
+                const std::string_view rest = after.substr(c.source.size());
+                for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+                    const std::string_view form = word::Conjugation(c.codes->part.VerbKind(), branch);
+                    if (!form.empty() && rest.starts_with(form)) return false;
+                }
+            }
+        }
         if (word == SpaceWord::Filler) {
             if (dict::InClass(HDTRANS_CLASS("word.pause-filler"), head)) return true;
             const dict::Candidates found = snap.GetWordInfo(head, dict::LookupMode::General, lookup);
@@ -784,7 +922,28 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
                     spelled = !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"がをはもでとへのにやかだじ").find(next) != std::u32string_view::npos;
                 }
-                const bool fits = word == SpaceWord::Any || spelled || (word == SpaceWord::Binding && (name || bound)) || phrase;
+                bool compound = false;
+                if (word == SpaceWord::Compound && start == 0 && ClassOf(c) == '1') {
+                    // A word of kanji read in Sino-Korean, each kanji by its own syllable (紅白 홍백, 人間 인간).
+                    std::string_view key = c.source;
+                    std::string sino;
+                    bool kanji = true;
+                    while (!key.empty() && kanji) {
+                        const text::Rune r = text::DecodeRune(key);
+                        const auto written = dict::Written(r.cp);
+                        kanji = text::IsKanji(r.cp) && written.has_value();
+                        if (kanji) text::AppendRune(sino, *written);
+                        key.remove_prefix(r.size);
+                    }
+                    kanji = kanji && c.target == sino && !after.starts_with(head);
+                    const std::string_view rest = std::string_view(query).substr(c.source.size());
+                    const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+                    const bool japanese = text::IsKanji(next) || (next >= U'ぁ' && next <= U'ヿ');
+                    compound = kanji && (!japanese || rest.starts_with("って") || rest.starts_with("じゃ") ||
+                                         std::u32string_view(U"がをはもでとへのにやかだ").find(next) != std::u32string_view::npos);
+                }
+                const bool fits = word == SpaceWord::Any || spelled || compound ||
+                                  (word == SpaceWord::Binding && (name || bound)) || phrase;
                 if (fits) return true;
             }
             start += std::max<std::size_t>(1, text::DecodeRune(left).size);
@@ -801,6 +960,14 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
     settings.before = before;
     settings.quoteDepth = speech.quotes.depth;
+    settings.quoteCount = speech.quotes.count;
+    settings.quoteStyles = speech.styles;
+    if (s.decision != nullptr) {
+        settings.lineLevel = LineLevelOf(s.decision->level);
+        settings.authoritative = s.decision->authoritative;
+        settings.prose = s.decision->prose;
+        settings.quoteLevels = s.quoteLevels;
+    }
     settings.poiTic = speech.poiTic;
     settings.narrated = speech.narrated;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
@@ -851,8 +1018,8 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
 // Whether observer takes any stage of a line.
 bool Observes(const StageObserver& o) {
-    return o.text || o.pieces || o.tokens || o.analysis || o.resolved || o.composed || o.cleaned || o.restored ||
-           o.filterLog;
+    return !o.levelsOnly && (o.text || o.pieces || o.tokens || o.analysis || o.resolved || o.composed || o.cleaned || o.restored ||
+                             o.filterLog);
 }
 
 // One line through every stage of the text path; the line's trailing "\r" is written
@@ -874,10 +1041,12 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    const RespellLookup respell{snap, ctx.lookup};
+    const RespellLookup respell{snap, ctx.lookup, &ctx, options.wordImprovements.predicateVariants};
     const auto normalize = [&](std::string_view text) {
         std::string normalized = pipeline::JoinBraceRuby(
-            pipeline::Normalize(text, ctx, {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell}),
+            pipeline::Normalize(text, ctx,
+                                {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
+                                 options.reference ? nullptr : EndsInVerb}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
@@ -962,6 +1131,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const auto compose = [&](LineSpeech pass, const StageObserver& watch, const TranslationOptions& opts) {
         std::vector<output::Sentence> sentences;
         std::string before;
+        if (watch.pass) watch.pass(watch.context);
         for (std::size_t i = 0; i < chunks.size(); i++) {
             if (watch.pieces) watch.pieces(watch.context, "CH", static_cast<int>(i), chunks[i]);
             if (!gaps[i].empty() && gaps[i] != output::kPhraseGap) before.clear();  // a column starts as a line does
@@ -987,7 +1157,8 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     if (!options.reference && PoliteTalkAsked(facts.text, speech.styles)) {
         TranslationOptions trial = options;
         trial.ruleTally = nullptr;
-        const std::vector<bool> polite = output::PoliteQuotes(compose(speech, StageObserver{}, trial), carry.depth);
+        const std::vector<bool> polite =
+            output::PoliteQuotes(compose(speech, observer.levelsOnly ? observer : StageObserver{}, trial), carry.depth);
         for (std::size_t k = 0; k < speech.styles.size() && k < polite.size(); k++) {
             const bool casualMark = k < casual.size() && casual[k];
             if ((speech.styles[k] & output::kPoliteStyle) != 0 && polite[k] && !casualMark) {
@@ -1011,7 +1182,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     // The first pass counts no rules either; the line is composed again when they are counted.
     TranslationOptions trial = options;
     trial.ruleTally = nullptr;
-    const std::string first = compose(speech, StageObserver{}, trial);
+    const std::string first = compose(speech, observer.levelsOnly ? observer : StageObserver{}, trial);
     const std::vector<bool> polite = output::PoliteQuotes(first, carry.depth);
     bool again = Observes(observer) || options.ruleTally != nullptr;
     for (std::size_t k = 0; k < speech.styles.size(); k++) {
@@ -1040,12 +1211,21 @@ std::string TranslateRubyBody(const dict::Snapshot& snap, pipeline::DocumentCont
 struct EdgeWatch {
     std::vector<output::ResolvedItem> items;
     WrapEdges edges;
+    // The speech-level stage, which reads the line's chains from this pass too; nullptr when it does not.
+    const StageObserver* levels = nullptr;
 };
 
-void WatchEdges(void* context, int, int, const word::Chain& chain) {
+void WatchEdges(void* context, int chunk, int sentence, const word::Chain& chain) {
     auto* watch = static_cast<EdgeWatch*>(context);
     ResolvedItems(chain, watch->items);
     AddWrapEdges(watch->items, watch->edges);
+    if (watch->levels != nullptr && watch->levels->resolved)
+        watch->levels->resolved(watch->levels->context, chunk, sentence, chain);
+}
+
+void WatchEdgePass(void* context) {
+    const StageObserver* levels = static_cast<EdgeWatch*>(context)->levels;
+    if (levels != nullptr && levels->pass) levels->pass(levels->context);
 }
 
 // Watches two joined lines (MayCutWord) for a word read across their break: a word the dictionary
@@ -1139,6 +1319,10 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                                           Scratch& s, Generated& generated, const StageObserver& observer,
                                           const TranslationOptions& options, std::size_t context) {
     const auto narratedOf = [](std::string_view text) { return text.find("「") != std::string_view::npos; };
+    // The decision of the speech-level stage for lines [first, last] of the call.
+    const auto use = [&](std::size_t first, std::size_t last) {
+        UseDecision(s, first >= context ? options.sourceDecisions : nullptr, first - context, last - context);
+    };
     // The lines are translated as AloneText; their translations keep the arrows they end with.
     std::vector<std::string> bare(lines.size()), alone(lines.size());
     std::vector<std::string_view> arrows(lines.size());
@@ -1155,6 +1339,13 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
+        use(i, i);
+        // a line translated on its own keeps this translation: the speech-level stage reads it here
+        if (observer.levelsOnly && i >= context) {
+            watch.levels = &observer;
+            edgeObserver.pass = WatchEdgePass;
+            if (observer.line) observer.line(observer.context, static_cast<int>(i - context));
+        }
         alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
@@ -1182,6 +1373,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         joinedOptions.ruleTally = nullptr;
         word::SessionSenses* const senses = s.sessionSenses;
         s.sessionSenses = nullptr;
+        use(k, k + 1);
         TranslateRubyBody(snap, doc, texts[0] + texts[1], used[k], s, generated, cutObserver, joinedOptions,
                           narratedOf(lines[k]) || narratedOf(lines[k + 1]), texts);
         s.sessionSenses = senses;
@@ -1218,6 +1410,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             joinedOptions.joinedLines = true;
             joinedOptions.cutBreaks = cuts;
             if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
+            use(i, j);
             pieces = SplitAtBreaks(
                 TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
                 j - i + 1);
@@ -1226,6 +1419,13 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         for (std::size_t k = i; k <= j; k++) {
             if (k < context) continue;
             if (!pieces.empty()) {
+                // the joined translation is read under its first line: the lines after it have no reading of
+                // their own. The continuation lines of a joined group are read without items; before the
+                // stage read each line from the pass that keeps its translation, they were read with the
+                // items of their alone pass.
+                // TODO: when pieceLine is set and pieces k-1 and k belong to one cut long line, the items of
+                // k are not cleared.
+                if (observer.levelsOnly && k > i && observer.line) observer.line(observer.context, static_cast<int>(k - context));
                 const LineParts& p = parts[k - i];
                 std::string piece = pieces[k - i];
                 if (!arrows[k].empty()) piece = WithArrow(piece, arrows[k]);
@@ -1235,8 +1435,9 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             }
             if (Observes(observer)) {
                 // The stages of the line on its own, for the observer; the translation stays the one made
-                // before the joined lines.
+                // before the joined lines (the speech-level stage alone read them then).
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
+                use(k, k);
                 TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
                               narratedOf(lines[k]));
             }
@@ -1248,6 +1449,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 out[k] = WithArrow(alone[k], arrows[k]);
             } else {
                 // The stages did not keep kGoesOn at the end: the line without it.
+                use(k, k);
                 out[k] = WithArrow(
                     TranslateRubyBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
                     arrows[k]);
@@ -1282,6 +1484,17 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         TranslationOptions unwrapped = options;
         unwrapped.wrapped = false;
         const std::size_t boundedContext = context > 0 ? ends[context - 1] : 0;
+        // Each piece of a line takes the line's decision.
+        reg::SourceDecisions pieceDecisions;
+        if (const reg::SourceDecisions* d = options.sourceDecisions; d != nullptr && !d->lines.empty()) {
+            for (std::size_t i = context; i < lines.size() && i - context < d->lines.size(); i++) {
+                for (std::size_t piece = i > 0 ? ends[i - 1] : 0; piece < ends[i]; piece++) {
+                    pieceDecisions.lines.push_back(d->lines[i - context]);
+                    pieceDecisions.dialogue.push_back(d->dialogue[i - context]);
+                }
+            }
+        }
+        unwrapped.sourceDecisions = &pieceDecisions;
         const auto translated =
             TranslateDocumentPieces(snap, generated, bounded, observer, unwrapped, sourceLines, boundedContext);
         if (translated.size() != bounded.size()) return std::vector<std::string>(lines.begin(), lines.end());
@@ -1292,7 +1505,9 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         return joined;
     }
     const std::unique_ptr<pipeline::DocumentContext> doc = pipeline::BuildDocument(
-        snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin);
+        snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin, options.names);
+    TranslationOptions named = options;
+    named.documentPacks = doc->packs;
 
     Scratch s;
     word::SessionSenses senses;
@@ -1302,9 +1517,10 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     QuoteCarry carry;
     const std::vector<bool> closed = ClosedCarries(lines, carry);
     if (options.wrapped) {
-        out = TranslateWrapped(snap, *doc, lines, closed, s, generated, observer, options, context);
+        out = TranslateWrapped(snap, *doc, lines, closed, s, generated, observer, named, context);
     } else {
         for (std::size_t i = 0; i < lines.size(); i++) {
+            UseDecision(s, i >= context ? options.sourceDecisions : nullptr, i - context, i - context);
             const StageObserver& watch = i < context ? StageObserver{} : observer;
             if (watch.line) watch.line(watch.context, static_cast<int>(i - context));
             // ReadLine takes the line without its one trailing "\r"; the "\r" is written back.
@@ -1312,13 +1528,14 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             // A quote left open counts on a line only when the line or a later one closes it.
             const LineQuotes quotes = QuotesOf(lines[i], carry);
             const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
-            std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, options);
+            std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, named);
             carry = quotes.end;
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             if (cr) translated += '\r';
             out.push_back(std::move(translated));
         }
     }
+    UseDecision(s, nullptr, 0, 0);
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);
         if (!fallback) return std::vector<std::string>(lines.begin(), lines.end());
@@ -1399,6 +1616,81 @@ void Filter(const filter::Filters& f, filter::Stage stage, std::string& line, fi
 
 }  // namespace
 
+namespace {
+
+// What the speech-level stage reads of a call: the resolved chains of the lines after the context,
+// taken ahead of the caller's observer.
+struct LevelWatch {
+    reg::Capture capture;
+    StageObserver inner;
+};
+
+LevelWatch& Watched(void* context) { return *static_cast<LevelWatch*>(context); }
+
+StageObserver WatchLevels(LevelWatch& w, const StageObserver& inner) {
+    w.inner = inner;
+    StageObserver o = inner;
+    o.context = &w;
+    o.levelsOnly = !Observes(inner) && !inner.line;
+    o.line = [](void* c, int line) {
+        LevelWatch& lw = Watched(c);
+        lw.capture.Line(line);
+        if (lw.inner.line) lw.inner.line(lw.inner.context, line);
+    };
+    o.resolved = [](void* c, int chunk, int sentence, const word::Chain& chain) {
+        LevelWatch& lw = Watched(c);
+        lw.capture.Resolved(sentence, chain);
+        if (lw.inner.resolved) lw.inner.resolved(lw.inner.context, chunk, sentence, chain);
+    };
+    if (inner.text)
+        o.text = [](void* c, std::string_view tag, std::string_view text) {
+            Watched(c).inner.text(Watched(c).inner.context, tag, text);
+        };
+    o.pass = [](void* c) {
+        LevelWatch& lw = Watched(c);
+        lw.capture.Pass();
+        if (lw.inner.pass) lw.inner.pass(lw.inner.context);
+    };
+    if (inner.pieces)
+        o.pieces = [](void* c, std::string_view tag, int chunk, const output::Pieces& pieces) {
+            Watched(c).inner.pieces(Watched(c).inner.context, tag, chunk, pieces);
+        };
+    if (inner.tokens)
+        o.tokens = [](void* c, int chunk, const tokenizer::Tokens& tokens) {
+            Watched(c).inner.tokens(Watched(c).inner.context, chunk, tokens);
+        };
+    if (inner.analysis)
+        o.analysis = [](void* c, int chunk, const tokenizer::Tokens& tokens, const word::Analysis& analysis) {
+            Watched(c).inner.analysis(Watched(c).inner.context, chunk, tokens, analysis);
+        };
+    if (inner.composed)
+        o.composed = [](void* c, int chunk, int sentence, const output::Pieces& pieces) {
+            Watched(c).inner.composed(Watched(c).inner.context, chunk, sentence, pieces);
+        };
+    if (inner.cleaned)
+        o.cleaned = [](void* c, const output::Pieces& pieces) { Watched(c).inner.cleaned(Watched(c).inner.context, pieces); };
+    if (inner.restored)
+        o.restored = [](void* c, const pipeline::RestoreSteps& steps) {
+            Watched(c).inner.restored(Watched(c).inner.context, steps);
+        };
+    if (inner.filterLog)
+        o.filterLog = [](void* c, std::string_view message) { Watched(c).inner.filterLog(Watched(c).inner.context, message); };
+    return o;
+}
+
+// The line of each piece after the context when a line of the call is cut into pieces
+// (text::kMaxLineBytes), else empty: the observer then counts pieces.
+std::vector<int> PieceLines(std::span<const std::string> lines, std::size_t context) {
+    std::vector<int> out;
+    if (std::none_of(lines.begin(), lines.end(), [](const std::string& l) { return l.size() > text::kMaxLineBytes; }))
+        return out;
+    for (std::size_t i = context; i < lines.size(); i++)
+        out.insert(out.end(), text::TranslationPieces(lines[i]).size(), static_cast<int>(i - context));
+    return out;
+}
+
+}  // namespace
+
 std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated& generated,
                                            std::span<const std::string> lines,
                                            const StageObserver& observer, const TranslationOptions& options,
@@ -1406,6 +1698,15 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     context = std::min(context, lines.size());
     // The filter log of the lines translated: the context lines are read only.
     const auto logged = [&](std::size_t i) { return i >= context && !lines[i].empty() && lines[i] != "\r"; };
+    // The speech-level stage, after the translation of the call and before the post-filter.
+    const bool levelsAsked = !options.reference && options.speechLevels == SpeechLevels::Auto;
+    LevelWatch levelWatch;
+    bool levels = levelsAsked && !options.filters && reg::Prepare(lines.subspan(context), levelWatch.capture);
+    if (levels) levelWatch.capture.pieceLine = PieceLines(lines, context);
+    StageObserver watched = levels ? WatchLevels(levelWatch, observer) : observer;
+    const auto translated = [&](std::span<std::string> out) {
+        return out.size() >= context ? out.subspan(context) : std::span<std::string>();
+    };
     if (!options.filters) {
         if (observer.filterLog) {
             for (std::size_t i = 0; i < lines.size(); ++i) {
@@ -1414,7 +1715,12 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
                 FilterSnapshot(observer, "PRE", lines[i]);
             }
         }
-        auto out = TranslateDocumentPieces(snap, generated, lines, observer, options, lines, context);
+        const reg::SourceDecisions decided = levels ? reg::DecideSource(lines.subspan(context)) : reg::SourceDecisions{};
+        TranslationOptions decidedOptions = options;
+        decidedOptions.sourceDecisions = &decided;
+        auto out = TranslateDocumentPieces(snap, generated, lines, watched, decidedOptions, lines, context);
+        if (levels)
+            reg::Retrofit(lines.subspan(context), levelWatch.capture, translated(out), {}, options.levelChanges, &decided);
         if (observer.filterLog) {
             for (std::size_t i = context; i < out.size() && i < lines.size(); ++i) {
                 if (!logged(i)) continue;
@@ -1445,8 +1751,17 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     }
     TranslationOptions writtenOptions = options;
     writtenOptions.filterWritten = written;
+    levels = levelsAsked && reg::Prepare(std::span<const std::string>(filtered).subspan(context), levelWatch.capture);
+    const reg::SourceDecisions decided =
+        levels ? reg::DecideSource(std::span<const std::string>(filtered).subspan(context)) : reg::SourceDecisions{};
+    writtenOptions.sourceDecisions = &decided;
+    if (levels) levelWatch.capture.pieceLine = PieceLines(filtered, context);
+    watched = levels ? WatchLevels(levelWatch, observer) : observer;
     std::vector<std::string> out =
-        TranslateDocumentPieces(snap, generated, filtered, observer, writtenOptions, filtered, context);
+        TranslateDocumentPieces(snap, generated, filtered, watched, writtenOptions, filtered, context);
+    if (levels)
+        reg::Retrofit(std::span<const std::string>(filtered).subspan(context), levelWatch.capture, translated(out), {},
+                      options.levelChanges, &decided);
     // An empty input line is not post-filtered either.
     for (std::size_t i = context; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {

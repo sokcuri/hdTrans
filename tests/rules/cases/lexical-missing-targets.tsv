@@ -1,0 +1,127 @@
+# 규칙: LEX-120, LEX-121, LEX-122, LEX-123, LEX-124, LEX-125, LEX-126, LEX-127, LEX-128, LEX-129, LEX-130, LEX-131, LEX-132, LEX-133, LEX-134
+rule	input	expected	kind	layer
+lexical:todome	ふんと鼻を鳴らして止めを刺した。	has:결정타를 날렸다	fix	lookup
+lexical:todome	むしろ止めを刺した。	has:결정타를 날렸다	fix	lookup
+lexical:todome	トドメを刺すはずの爪を、紙一重でかわした。	has:결정타를 날릴	fix	lookup
+lexical:todome	一人ずつトドメを刺す」	has:결정타를 날린다	fix	lookup
+lexical:todome	息の根を止めた。	has:숨통을 끊었다	keep	lookup
+lexical:todome	車を止めて降りた。	has:차를 세워	keep	lookup
+lexical:nanyori	なにより、俺には会長お墨付きの、新しい対策がある。	has:무엇보다, 나에게는	fix	rewrites
+lexical:nanyori	そしてなにより慣れない異世界に不安がる	has:그리고 무엇보다 익숙	fix	rewrites
+cx:nanyori:10	「それはなによりだ」	has:그건 다행이	fix	rewrites
+cx:nanyori:10	まあ、怪我がなくてなによりだが	has:다행이지만	fix	rewrites
+cx:nanyori:10	全員無事でなによりだ。	has:다행이다	fix	rewrites
+lexical:nanyori	ま、無事でなによりだ。	has:무사해서 다행이다	keep	rewrites
+cx:nanyori:10	なにより嬉しかったのは、その、下着を	has:무엇보다도 기뻤던	keep	rewrites
+lexical:nanyori	なによりも、ここには美味しいご飯が待っている。	has:무엇보다도,	keep	rewrites
+lexical:nanyori	お元気そうでなによりですわ	has:다행이에요	keep	rewrites
+lexical:jun-ni	少しずつ順に倒れていく巨鳥。	has:순서대로 쓰러져	fix	lookup
+lexical:jun-ni	１番から順に食べていけばいいの？	has:순서대로 먹어	fix	lookup
+lexical:jun-ni	順に腰、背中とドレス姿で転がった。	has:순서대로 허리	fix	lookup
+lexical:jun-ni	得票率が高い順に回答する。	has:높은 순서대로	fix	lookup
+lexical:jun-ni	従順に俺のことを信じているような視線	has:온순하게	keep	lookup
+lexical:jun-ni	並んでいる順に店を口にしていく。	has:있는 순으로	keep	lookup
+lexical:hotte-oku	下手に放っておいても、処分しても害があるそうだ。	has:내버려 두어도	fix	lookup
+lexical:hotte-oku	あんな状態の千里を放っておくわけにはいかない。	has:내버려 둘 수는	fix	lookup
+lexical:hotte-oku	追いかけるだけ無駄なので、放っておこう。	has:내버려 두자	fix	lookup
+lexical:hotte-oku	ユメなら放っておいていいよ	has:그대로 두어도	keep	lookup
+lexical:hotte-oku	これは放っておけない大事だと思います	has:그대로 둘 수 없는	keep	lookup
+lexical:docchi-nishiro	どちらにしても同じことだ。	has:어느 쪽이든 같은	fix	lookup
+lexical:docchi-nishiro	いずれにせよ、タイムリミットは本日未明まで	has:어쨌든,	keep	lookup
+lexical:docchi-nishiro	紅茶にする？　それとも、他の飲み物にする？	has:홍차로 해?	keep	lookup
+lexical:docchi-nishiro	どっちにする？	has:어느 쪽으로 해?	keep	lookup
+lexical:suki-katte	いきなりやってきて、好き勝手言って……	has:제멋대로 말해	fix	lookup
+lexical:suki-katte	飲みたいものを好き勝手に準備する。	has:제멋대로 준비한다	fix	lookup
+lexical:suki-katte	これまではあの人達の好き勝手にされていました。	has:제멋대로	fix	lookup
+lexical:suki-katte	「よくも好き勝手言ってくれたわねーっ！」	has:제멋대로 말해	fix	lookup
+lexical:suki-katte	好きにしていいよ。	has:마음대로 해도	keep	lookup
+lexical:suki-katte	勝手に入るな。	has:마음대로 들어가지	keep	lookup
+lexical:compound-verbs	俺の脇腹を思い切り蹴り飛ばした。	has:걷어찼다	fix	lookup
+lexical:compound-verbs	アールがラピスのお尻を蹴っ飛ばす。	has:걷어찬다	fix	lookup
+lexical:compound-verbs	叶わない未来なんて、蹴り飛ばしてさ！	has:걷어차	fix	lookup
+lexical:compound-verbs	セリカは背後から蹴り飛ばされる。	has:걷어차인다	fix	lookup
+lexical:compound-verbs	いつまでも、鳴りやまなかった……	has:그치지 않았다	fix	lookup
+lexical:compound-verbs	アラームは鳴り止まない。	has:그치지 않는다	fix	lookup
+lexical:compound-verbs	ボールを蹴った。	has:공을 찼다	keep	lookup
+lexical:compound-verbs	電話が鳴った。	has:전화가 울렸다	keep	lookup
+lexical:okamainaku	「おかまいなく。婚約破棄を続けてください」	has:신경 쓰지 마세요.	fix	phrases
+lexical:okamainaku	「お構いなく。勝手にやらせていただきます」	has:신경 쓰지 마세요.	fix	phrases
+lexical:okamainaku	「いえいえ、こっちの事です、おかまいなく」	has:신경 쓰지 마세요」	fix	phrases
+lexical:okamainaku	「あ、お構いなく……」	has:신경 쓰지 마세요……	fix	phrases
+lexical:okamainaku	人目もおかまいなく泣いた。	has:상관없이 울었다	keep	phrases
+lexical:okamainaku	「おかまいなくできるか！」	lacks:신경 쓰지 마세요	keep	phrases
+lexical:idiom-verbs	まず、と前置きしてリーダーは言う。	has:운을 떼어	fix	lookup
+lexical:idiom-verbs	良いですか？　と前置きをして続ける。	has:운을 떼어	fix	lookup
+lexical:idiom-verbs	どうしても辞めることに気後れしてしまう。	has:주눅이 들어버린다	fix	lookup
+lexical:idiom-verbs	なんだか気後れして、少し視線を逸らした。	has:주눅이 들어,	fix	lookup
+lexical:idiom-verbs	事態の収拾に躍起になっていたように見えた。	has:기를 쓰고 있던	fix	lookup
+lexical:idiom-verbs	じゃあ嫁に来てからならいいの？	has:시집오고 나서	fix	lookup
+lexical:idiom-verbs	俺様の機嫌を損ねたら外交問題になるぞ	has:기분을 상하게 하면	fix	lookup
+lexical:idiom-verbs	前置きが長いんだけど……	has:서론이 긴데	keep	lookup
+lexical:idiom-verbs	その前置きはなんですか？	has:서론은	keep	lookup
+lexical:idiom-verbs	今日は機嫌がいい。	has:기분이 좋다	keep	lookup
+lexical:idiom-verbs	嫁が来た。	has:아내가 왔다	keep	lookup
+lexical:default-predicates	せめて日本語が堪能な人にしてくれって。	has:능숙한	fix	lookup
+lexical:default-predicates	貢がせてる男全員に同じもん強請って	has:바치게 하고	fix	lookup
+lexical:default-predicates	あー、貢いでますね、あれは。	has:바치네요	fix	lookup
+lexical:default-predicates	実に潔く、クロードを手放すことを決めた。	has:깨끗하고,	fix	lookup
+lexical:default-predicates	いっそ潔く丸坊主にすりゃいいのに！	has:깨끗하게	fix	lookup
+lexical:default-predicates	敗戦の責任とって、潔く死にますなど	has:깨끗하게 죽습니다	fix	lookup
+lexical:default-predicates	異世界の本を堪能することが大事だ。	has:즐기는 것이	keep	lookup
+lexical:default-predicates	露天風呂を堪能している。	has:즐기고 있다	keep	lookup
+lexical:default-predicates	魔族との戦いに何ら貢献しなかった。	has:공헌하지 않았다	keep	lookup
+lexical:default-predicates	清潔で見苦しくなければいい。	has:청결하고	keep	lookup
+lexical:default-nouns	黒衣に臙脂色の帯を締めていた。	has:검은 옷에	fix	lookup
+lexical:default-nouns	夜も寝ないで振るった小刀で作った木のカップ	has:작은 칼로	fix	lookup
+lexical:default-nouns	お忍び用のいつもよりずっと質素な服	has:잠행용	fix	lookup
+lexical:default-nouns	身分を隠して、お忍びで日本に来ている。	has:잠행으로	fix	lookup
+lexical:default-nouns	私はあなたの娘御を妻にと望んでいます	has:따님을	fix	lookup
+lexical:default-nouns	黒い衣を着ていた。	has:검은 옷을	keep	lookup
+lexical:default-nouns	娘が来た。	has:딸이 왔다	keep	lookup
+lexical:election-terms	予備選挙の準備が無事に終わってよかった。	has:예비 선거 준비가	fix	lookup
+lexical:election-terms	来週末に予備選挙があるから	has:예비 선거가	fix	lookup
+lexical:election-terms	袖に『選管』と書かれた腕章	has:『선관위』	fix	lookup
+lexical:election-terms	ダメ元で選管に提訴を行った。	has:선관위에	fix	lookup
+lexical:election-terms	全員揃ったことだし、辻立ちの場所を決めましょう	has:길거리 유세의	fix	lookup
+lexical:election-terms	朝の辻立ちを終えた後、部室に向かう。	has:길거리 유세를	fix	lookup
+lexical:election-terms	選挙管理委員会に届けた。	has:선거 관리 위원회	keep	lookup
+lexical:election-terms	選挙に出る。	has:선거에	keep	lookup
+lexical:numbered-fleet	新しく編成された第７艦隊の司令官。	has:편성된 제7함대	fix	lookup
+lexical:numbered-fleet	元・帝国軍第７艦隊司令官で	has:제국군 제7함대	fix	lookup
+lexical:numbered-fleet	中央艦隊討伐部隊第５艦隊司令官。	has:부대 제5함대	fix	lookup
+lexical:numbered-fleet	アメリカ第7艦隊が来た。	has:미국 제7함대	keep	lookup
+lexical:numbered-fleet	中央艦隊討伐部隊第1艦隊所属。	has:제1함대 소속	keep	lookup
+lexical:missing-nouns	空行有り、句点改行形式をお好みの方は	has:빈 줄	fix	lookup
+lexical:missing-nouns	解説者たちは訳知り顔で語っていた。	has:다 안다는 얼굴로	fix	lookup
+lexical:missing-nouns	少なくとも二年のクラス替えが行われるまでは	has:반 편성	fix	lookup
+lexical:missing-nouns	洗脳マッシーンとか催眠マッシーンとかを使って	has:최면 머신	fix	lookup
+lexical:missing-nouns	床ドンと壁ドンをマスターして	has:바닥쿵과 벽쿵	fix	lookup
+lexical:missing-nouns	新しいマシーンを買った。	has:머신을	keep	lookup
+lexical:missing-nouns	壁ドンされた。	has:벽쿵	keep	lookup
+lexical:set-adverbials	常ならば、何も言わずに去るはずだ。	has:평소라면,	fix	lookup
+lexical:set-adverbials	いずれ劣らぬ美男子揃いの取り巻きの方々	has:하나같이 뛰어난	fix	lookup
+lexical:set-adverbials	常に笑顔でいる。	has:항상	keep	lookup
+lexical:set-adverbials	いずれ分かる。	has:언젠가	keep	lookup
+lexical:docchi-nishiro	どっちにしても、俺は行く。	has:어느 쪽이든, 나는	fix	lookup
+lexical:docchi-nishiro	どちらにしろと先生は言った。	has:어느 쪽으로 하라고	keep	lookup
+cx:nanyori:20	それがなによりの証拠だ。	has:최고의 증거	fix	rewrites
+cx:nanyori:20	なによりも、ここには美味しいご飯が待っている。	has:무엇보다도,	keep	rewrites
+cx:nanyori:10	そう、それはなによりね。	has:다행이네	fix	rewrites
+lexical:suki-katte	好き勝手なことを言う。	has:제멋대로인 것을	keep	lookup
+lexical:suki-katte	好き勝手な真似はさせない。	has:제멋대로인 흉내는	keep	lookup
+lexical:set-adverbials	常ならぬ気配がした。	has:범상치 않은 기색	fix	lookup
+lexical:set-adverbials	常ならぬ気配がした。	lacks:평소라면	keep	lookup
+cx:nanyori:16	それは何よりだ。	has:그것은 다행이다	fix	rewrites
+cx:nanyori:14	無事で何よりです。	has:무사해서 다행입니다	fix	rewrites
+cx:nanyori:16	何より嬉しかった。	has:무엇보다 기뻤다	keep	rewrites
+cx:nanyori:20	何よりの証拠だ。	has:최고의 증거	fix	rewrites
+cx:nanyori:20	何よりも大切だ。	has:무엇보다도 중요하다	keep	rewrites
+lexical:set-adverbials	常ならば、何も言わずに去るはずだ。	lacks:범상치	keep	lookup
+cx:nanyori:14	無事で何よりです、けれど	!rule:cx:nanyori:14	keep	rewrites
+cx:nanyori:16	何よりね、あの子が心配なの。	lacks:다행	keep	rewrites
+cx:nanyori:16	何よりねえ、君が一番だよ。	lacks:다행	keep	rewrites
+cx:nanyori:16	それは何よりだ……	has:그것은 다행	fix	rewrites
+cx:nanyori:10	なによりね、あの子が心配なの。	lacks:다행	keep	rewrites
+cx:nanyori:10	なによりねえ、君が一番だよ。	lacks:다행	keep	rewrites
+cx:nanyori:10	「それは何よりね」	has:다행이네	fix	rewrites
+lexical:set-adverbials	常なら、もう寝ている時間だ。	has:평소라면, 이미	fix	lookup

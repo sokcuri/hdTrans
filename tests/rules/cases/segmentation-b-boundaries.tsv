@@ -13,8 +13,8 @@ dict:segmentation-b	そんなわけで戻った。	그래서 돌아왔다.	keep	
 dict:segmentation-b	彼にはわけない仕事だ。	그에게는 수월한 일이다.	keep	lookup
 dict:segmentation-b	なんのかんの言っても便利だ。	이러니저러니 말해도 편리하다.	fix	lookup
 dict:segmentation-b	何のかんの言いながら片付けた。	이러니저러니 말하면서 정리했다.	fix	lookup
-dict:segmentation-b	何の缶を開けた。	무슨캔을 땄다.	keep	lookup
-dict:segmentation-b	何の管を調べた。	무슨관을 조사했다.	keep	lookup
+dict:segmentation-b	何の缶を開けた。	무슨캔을 땄나.	keep	lookup
+dict:segmentation-b	何の管を調べた。	무슨관을 조사했나.	keep	lookup
 dict:segmentation-b	夫婦がいちゃついていた。	부부가 시시덕거리고 있었다.	fix	lookup
 dict:segmentation-b	いちゃつくな。	시시덕거리지 마.	fix	lookup
 dict:segmentation-b	ここにいちゃいけない。	여기에 있으면 안된다.	keep	lookup

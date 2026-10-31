@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+dict:jisjk:358006	田中さんの翔太が来た。	타나카 씨의 쇼타가 왔다.	fix	defaults
+dict:jisjk:358006	翔太くんの由美が来た。	쇼타 군의 유미가 왔다.	fix	defaults
+dict:jisjk:358006	由美ちゃんの健太が来た。	유미짱의 켄타가 왔다.	fix	defaults
+dict:jisjk:358006	田中様の由美が来た。	타나카님의 유미가 왔다.	fix	defaults
+dict:jisjk:358006	佐藤先生の由美が来た。	사토 선생님의 유미가 왔다.	fix	defaults
+dict:jisjk:358006	田中先輩の翔太が来た。	타나카 선배의 쇼타가 왔다.	fix	defaults
+dict:jisjk:358006	「田中さんの翔太を見た」	「타나카 씨의 쇼타를 보았다」	fix	defaults
+dict:jisjk:358006	田中君の由美を呼んだ。	타나카 군의 유미를 불렀다.	fix	defaults
+dict:jisjk:358006	田中氏の健太が話した。	타나카 씨의 켄타가 이야기했다.	fix	defaults
+dict:jisjk:374725	田中さんの翔太が来た。	!rule:dict:jisjk:374725	fix	defaults
+dict:jisjk:374725	翔太くんの由美が来た。	!rule:dict:jisjk:374725	fix	defaults
+dict:jisjk:374725	田中さんのジョンが来た。	!rule:dict:jisjk:374725	fix	defaults
+dict:jisjk:358006	兄の翔太が来た。	형 쇼타가 왔다.	keep	local
+dict:jisjk:358006	「妹の由美を呼んで」	「여동생 유미를 불러」	keep	local
+dict:jisjk:358006	先生の田中が来た。	선생님 타나카가 왔다.	keep	local
+dict:jisjk:358006	友達の健太が来た。	친구 켄타가 왔다.	keep	local
+dict:jisjk:358006	私は娘の由美と出かけた。	나는 딸 유미와 나갔다.	keep	local
+dict:jisjk:358006	先輩の翔太が笑った。	선배 쇼타가 웃었다.	keep	local
+dict:jisjk:358006	彼は弟の健太を呼んだ。	그는 남동생 켄타를 불렀다.	keep	local
+dict:jisjk:358006	母の由美が笑った。	어머니 유미가 웃었다.	keep	local
+dict:jisjk:358006	田中さんの家に行った。	타나카 씨의 집에 갔다.	keep	defaults
+dict:jisjk:374725	アメリカ人のジョンが来た。	미국인인 존이 왔다.	keep	local
+dict:jisjk:374725	フランス人のマリーが笑った。	프랑스인인 마리가 웃었다.	keep	local
+dict:jisjk:374725	「アメリカ人のジョンを呼んで」	「미국인인 존을 불러」	keep	local

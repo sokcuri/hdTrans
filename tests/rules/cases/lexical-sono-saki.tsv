@@ -1,0 +1,20 @@
+# 규칙: LEX-2904
+rule	input	expected	kind	layer
+cx:sono-saki:20	「やめて。その先は聞きたくない」	has:그 뒤는 듣고 싶지 않아	fix	rewrites
+cx:sono-saki:20	その先の話はとても難しかった。	has:그 뒤 이야기는	fix	rewrites
+cx:sono-saki:20	その先の言葉を彼は飲み込む。	has:그 뒤의 말을	fix	rewrites
+cx:sono-saki:20	なのに、その先を知りたい。	has:그 뒤를 알고 싶다	fix	rewrites
+cx:sono-saki:20	「落ち着けよ……大まかには想像出来るから、その先を話してくれ」	has:그 뒤를 이야기해 줘	fix	rewrites
+cx:sono-saki:20	俺がその先を促すと、彼は下唇を噛んだ。	has:그 뒤를 촉구하	fix	rewrites
+cx:sono-saki:20	ゲームは終わりでその先の展開は分からないと言っていた。	has:그 뒤 전개는	fix	rewrites
+cx:sono-saki:20	その先はどうしても言うことができなかった。	has:그 뒤는 아무래도 말할	fix	rewrites
+cx:sono-saki:20	その先を想像して、俺は身震いする。	has:그 뒤를 상상해	fix	rewrites
+cx:sono-saki:10	その先を曲がる。	그 앞을 돈다.	fix	rewrites
+cx:sono-saki:20	「よし、その先は行き止まりだ！」	has:그 앞은 막다른 곳이야	keep	rewrites
+cx:sono-saki:20	その先は殆ど何も見えない。	has:그 앞은 거의	keep	rewrites
+cx:sono-saki:20	「その先は強力な魔物が出る。行くなら気をつけるんだ。」	has:그 앞은 강력한	keep	rewrites
+cx:sono-saki:20	その先は、大きなドーム状の空洞になっていた。	has:그 앞은,	keep	rewrites
+cx:sono-saki:20	その先をみやると、令嬢たちが列を作っていた。	has:그 앞을	keep	rewrites
+cx:sono-saki:10	その先に小屋があった。	has:그 앞에 오두막이	keep	rewrites
+cx:sono-saki:10	その先まで歩いた。	has:그 앞까지	keep	rewrites
+cx:sono-saki:10	その先を照らした。	has:그 앞을 비추었다	keep	rewrites

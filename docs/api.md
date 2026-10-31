@@ -74,7 +74,7 @@ npm CLI의 `--userdict`는 파일 하나를 받으며 중복 지정은 오류입
 각 줄 뒤에 `\n`을 붙입니다.
 
 ```
-hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--cg-learned] [--speech LEVEL] [--wrapped] [--context FILE] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
+hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--userdict PATH]... [--ehnd DIR] [--each | --raw] [--reference] [--verify-dicts] [--compile-dicts | --compile-snapshot FILE | --no-cache] [--why] [--select-shadow] [--misread] [--no-cg] [--no-predicate-variants] [--cg-learned] [--speech LEVEL] [--speech-levels MODE] [--speech-report FILE] [--wrapped] [--context FILE] [--names FILE] [--propose-names] [--stages DIR] [--rule-counts FILE] [--in FILE | --file FILE] [--out FILE] [--] [text]
 ```
 
 | 옵션 | 설명 |
@@ -93,6 +93,8 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--raw` | 줄마다 단어 파이프라인만으로 번역 |
 | `--wrapped` | 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계. 줄 끝 화살표(➡, ￫, →, ⇒)는 다음 줄로 이어지며 번역 끝에 한 칸 띄어 남음, 규칙은 `spec/layout.md`의 LAY-14. `--each`, `--raw`와 함께 쓸 수 없고, 설정 파일의 `wrapped`는 그 둘에서 쓰지 않음 |
 | `--context FILE` | FILE의 UTF-8 줄을 입력 앞에 오는 같은 문서로 읽음. 이름, 「」 대사, 가족 호칭, 뜻 같은 단서로만 번역하고 출력하지 않음. `--wrapped`이면 입력이 이어 가는 문장의 앞부분. 끝의 줄바꿈 하나는 줄로 세지 않음. `--each`, `--raw`와 함께 쓸 수 없음 |
+| `--names FILE` | 입력 문서의 이름 목록. 한 줄에 `일본어<TAB>한국어[<TAB>종류[<TAB>hon]]` ([dictionary-files.md](dictionary-files.md#문서-이름-목록)). 잘못된 줄은 경고하고, 컴파일되지 않는 이름은 오류를 적고 건너뜀. 사용자 폴더의 `names*.txt` 위에 놓임. `--raw`와 함께 쓸 수 없음 |
+| `--propose-names` | 번역하지 않고 입력 문서가 보이는 이름(화자 포함) 가운데 `--names`에 없는 것을 같은 형식으로 한국어와 함께 출력. `--each`, `--raw`와 함께 쓸 수 없음 |
 | `--reference` | 번역 개선 규칙을 끈 기준 모드 |
 | `--verify-dicts` | 원본 해시와 모든 캐시 세그먼트를 검사하고 읽은 사전 정보를 표준 오류에 씀. 펼 수 없는 표지(품사 코드의 부류와 어긋나거나 표에 없는 계열)를 쓴 사전 줄([rule-language.md](rule-language.md#번역-안의-표지-d-y))이나 기본, 어휘 계층의 명사 줄 중 번역이 `하기`로 끝나는 한 낱말(출항하기, [dictionary-files.md](dictionary-files.md#열-파일)), 번역에 가나나 한자가 있는 사전 줄이 있으면 나열하고 실패 |
 | `--compile-dicts` | 사전 캐시를 컴파일, 검사하고 종료. 캐시 경로 또는 `up to date`를 출력 |
@@ -100,10 +102,13 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--no-cache` | 사전 캐시를 끔 (`--compile-dicts`, `--compile-snapshot`과 함께 쓸 수 없음). `.hdsnap`은 그대로 읽음 |
 | `--why` | 단어와 어미 선택, shadow 점수, 처리 단계와 Ehnd 필터 실행 로그를 표준 오류에 씀 |
 | `--select-shadow` | 번역은 바꾸지 않고 가장 짧은 대상(`shortest-target`)으로 점수를 매김. `--why`에 나타남 |
-| `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 ([misread-classifier.md](misread-classifier.md)) |
+| `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 |
 | `--no-cg` | CG-lite 손 규칙(`cgRules`, 기본 켬)을 끔: 오독 결정의 후보를 지우거나 고르는 규칙표 |
+| `--no-predicate-variants` | 서술어 뒤 기능어의 한자 표기(様)를 가나 표기(よう)로 읽지 않고 쓴 그대로 읽음(spec LEX-1050, 설정 `predicate_variants`) |
 | `--cg-learned` | 학습 규칙(`cgLearned`, 기본 끔)도 켬 |
-| `--speech LEVEL` | 대사의 말투. `strict`(기본): 번역의 `-다`를 그대로 두되, 일본어가 반말 표지(문장 끝 よ, ね, わ, じゃん, さ, もん, って, かな, かしら, 축약 ちゃう, てる, とく, ねえ)를 가진 「」 대사는 상태와 과거, 판단(다르다 → 달라, 했다 → 했어, 학생이다 → 학생이야)과 것, 무엇(것은 → 건, 무엇을 → 뭘)만 해체로 씀. ！, ？, 문장 끝 말줄임 앞의 서술어는 「」 밖에서도 해체(暑い！ → 더워!). `soft`: 「」 안(앞 줄에서 열린 「」 포함)의 `-다`를 해체로 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야). 「」를 쓰지 않는 글의 줄도 대사로 보이면 해체로 씀: 반말 문장 끝 조사가 있거나, 。, ！, ？, 말줄임, 쉼표, 줄표로 끝나지 않는 줄(それは違う → 그건 달라). 。로 끝나고 조사가 없는 줄, 전각 공백으로 들여쓴 줄, `이름：설명` 같은 줄은 `-다`로 두고, 끝으로만 대사로 본 줄의 동작 현재형도 그대로 둠(もう帰る → 이제 돌아간다). 두 값 모두 평서형 의문문은 해체로 묻고(大丈夫か？ → 괜찮아?, 行っただろう？ → 갔지?), 공손체(です, ます)와 고풍 말투(ておる, じゃ), 『』 안, 인용한 말(「…」という)은 그대로 둠. `--reference`에서는 `strict` |
+| `--speech LEVEL` | 대사의 말투. `strict`(기본): 번역의 `-다`를 그대로 두되, 일본어가 반말 표지(문장 끝 よ, ね, わ, じゃん, さ, もん, って, かな, かしら, 축약 ちゃう, てる, とく, ねえ)를 가진 「」 대사는 상태와 과거, 판단(다르다 → 달라, 했다 → 했어, 학생이다 → 학생이야)과 것, 무엇(것은 → 건, 무엇을 → 뭘)만 해체로 씀. ！, ？, 문장 끝 말줄임 앞의 서술어는 「」 밖에서도 해체(暑い！ → 더워!). `soft`: 「」 안(앞 줄에서 열린 「」 포함)의 `-다`를 해체로 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야). 「」를 쓰지 않는 글의 줄도 대사로 보이면 해체로 씀: 반말 문장 끝 조사가 있거나, 。, ！, ？, 말줄임, 쉼표, 줄표로 끝나지 않는 줄(それは違う → 그건 달라). 。로 끝나고 조사가 없는 줄, 전각 공백으로 들여쓴 줄, `이름：설명` 같은 줄은 `-다`로 두고, 끝으로만 대사로 본 줄의 동작 현재형도 그대로 둠(もう帰る → 이제 돌아간다). 두 값 모두 평서형 의문문은 해체로 묻고(大丈夫か？ → 괜찮아?, 行っただろう？ → 갔지?), 공손체(です, ます)와 고풍 말투(ておる, じゃ), 『』 안, 인용한 말(「…」という)은 그대로 둠. 「」로 시작하는 대사 줄은 두 값 모두 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙이 말투를 다시 정함(soft면 soft의 말투가 들어온 말투). `--reference`에서는 `strict`이고 그 규칙도 돌지 않음 |
+| `--speech-levels MODE` | 대사 줄의 말투 수준. `auto`(기본): 「」로 시작하는 대사 줄을 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙으로 다시 씀. `keep`: 번역의 말투를 그대로 둠(그 단계가 돌지 않음). `--raw`와 `--reference`에서는 돌지 않음. 대소문자는 가리지 않음. 설정 파일의 `speech_levels`, 환경 변수 `HDTRANS_SPEECH_LEVELS`보다 앞섬 |
+| `--speech-report FILE` | `auto`가 바꾼 줄을 TSV로 씀: 입력의 줄 번호(1부터, `--context` 줄은 세지 않음), 규칙(REG), 단서, 원문, 바꾸기 전, 바꾼 뒤. `keep`이나 `--reference`이면 빈 파일을 쓰고 stderr에 그 까닭을 적음. `--raw`이면 빈 파일 |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
 | `--rule-counts FILE` | 선택 규칙과 구문 표의 행마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G, cx), `index`(전역 규칙은 PRIO, 구문 표는 행 id), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
 
@@ -124,6 +129,7 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `HDTRANS_SNAPSHOT=off` | 캐시를 끔 |
 | `HDTRANS_VERIFY_DICTS=1` | `--verify-dicts`와 같음 |
 | `HDTRANS_DRIVER_DUMP=DIR` | `--stages DIR`과 같음 |
+| `HDTRANS_SPEECH_LEVELS` | `auto` 또는 `keep`. 설정 파일의 `speech_levels`보다 앞서고 `--speech-levels`보다 뒤짐. 잘못된 값은 환경 변수 오류로 알리고 무시 |
 
 ### 설정 파일
 
@@ -147,7 +153,9 @@ CLI 플래그가 파일보다 우선합니다.
 | `misread` | bool, 기본 `false`. `true`는 `--misread` |
 | `reference` | bool, 기본 `false`. `true`는 `--reference` |
 | `speech` | `strict`(기본) 또는 `soft`, `--speech`와 같음 |
+| `speech_levels` | `auto`(기본) 또는 `keep`, `--speech-levels`와 같음. 환경 변수 `HDTRANS_SPEECH_LEVELS`가 있으면 그 값(잘못된 값은 환경 변수 오류로 알리고 파일 값을 씀) |
 | `wrapped` | bool, 기본 `false`. 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. `true`는 `--wrapped` |
+| `predicate_variants` | bool, 기본 `true`. 서술어 뒤 기능어의 한자 표기(様)를 가나 표기(よう)처럼 읽음(spec LEX-1050). `false`는 `--no-predicate-variants` |
 | `strict_dict` | bool. [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리) |
 
 `cache`를 지우거나 DLL을 종료하면 적용 전 환경변수를 복원합니다. `HDTRANS_SNAPSHOT=off`는 그대로 유효합니다.
@@ -160,6 +168,7 @@ WebAssembly의 `HdTrans` 클래스는 YAML 대신 초기화 옵션과 사용자 
 
 창 하나에 **단문 번역**, **문서 번역**, **사전**, **로그** 탭이 있습니다. 실행 파일 옆의 `hdtrans-data/`에서 사전, 사용자 사전,
 설정을 엔진을 처음 불러올 때 읽습니다. 설정 파일 변경은 다음 사전 다시 읽기가 성공하면 함께 반영합니다.
+말투(`speech`, `speech_levels`)와 `wrapped`도 설정 파일의 값을 씁니다.
 문서 번역은 Shift-JIS, UTF-8(BOM 유무 무관), UTF-16LE(BOM)를 읽고
 UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF 또는 CR)을 따릅니다. 파일마다 문서 전체를 한 번에 번역하므로 문맥이 그 파일 안에서 이어집니다.
 
@@ -181,9 +190,12 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 - 문자열은 모두 UTF-8입니다.
 - 프로세스에 엔진 하나, 세션 하나입니다. 호출마다 따로 번역하므로 앞에서 번역한 텍스트가 다음 결과를 바꾸지 않습니다.
   한 호출에 여러 줄(`\n`)을 넣으면 그 안에서만 앞뒤 줄을 참고합니다.
-- 말투는 설정 파일의 `speech`(`strict` 기본, `soft`)로 정하며 `hdTrans_Reload`에서 다시 읽습니다. 호출마다 바꾸는 함수는 없습니다.
+- 말투는 설정 파일의 `speech`(`strict` 기본, `soft`)와 `speech_levels`(`auto` 기본, `keep`)로 정하며 `hdTrans_Reload`에서 다시 읽습니다. 호출마다 바꾸는 함수는 없습니다.
 - 잘린 입력은 설정 파일의 `wrapped`로 알리며 `hdTrans_Reload`에서 다시 읽습니다. `wrapped: true`: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨.
 - 앞 호출의 줄을 참고하려면 `hdTrans_TranslateContext`에 그 줄을 함께 넘깁니다.
+- 작품의 이름은 데이터 루트 `user/`(또는 설정의 `userdict:` 폴더)의 `names*.txt`, `names*.tsv`에 적거나 `hdTrans_SetNames`로 줍니다.
+  파일은 사용자 사전과 함께 읽고 자동으로 다시 읽으며, `hdTrans_SetNames`의 목록이 그 위에 놓입니다. 목록은 각 호출의 문서에 쓰이고
+  사전은 바꾸지 않습니다([dictionary-files.md](dictionary-files.md#문서-이름-목록)).
 - 호출은 스레드 안전하지만 재진입은 안 됩니다. 라이브러리를 내리기 전에 모든 호출을 끝내야 합니다.
 - 초기화, 다시 읽기, 종료는 대기 중인 번역보다 먼저 처리됩니다.
 - 데이터 루트 `user/`의 `userdict*.txt`, `userdict*.tsv`를 사전 폴더 다음에 읽고, 추가, 변경, 삭제를 자동 반영합니다
@@ -207,6 +219,7 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 | `void hdTrans_Terminate(void)` | 세션과 사전 해제, 옵션을 기본값으로 초기화. 여러 번 불러도 되고, 다시 Initialize할 수 있음 |
 | `int hdTrans_Translate(const char* text, size_t n, char** out, size_t* outn)` | `text[0..n)`(`\n`으로 구분한 한 줄 이상)을 프로세스 세션에서 번역. `*out`에 NUL로 끝나는 버퍼, `*outn`에 길이(NUL 제외). 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, size_t n, char** out, size_t* outn)` | `context[0..cn)`의 줄을 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 `hdTrans_Translate`처럼 돌려줌. 문맥 줄은 단서와, `wrapped`이면 `text`가 이어 가는 문장의 앞부분으로만 쓰고 호출 뒤에 남기지 않음. NULL이나 `cn` 0은 문맥 없음. 0 성공, -1 초기화 전, 종료 후 |
+| `int hdTrans_SetNames(const char* text, size_t n)` | 다음 번역부터 문서마다 쓸 이름 목록 `text[0..n)`([dictionary-files.md](dictionary-files.md#문서-이름-목록) 형식). 이름 목록 파일 위에 놓이며 같은 이름은 파일의 줄을 대신함. NULL이나 `n` 0은 목록을 뗌. 초기화 전에도 쓸 수 있고 Initialize, Reload 뒤에도 유지되며 Terminate가 뗌. 0 성공, -1 잘못된 줄이나 컴파일되지 않는 이름(나머지 줄은 씀, 초기화 전에는 줄 형식만 검사) |
 | `int hdTrans_Reset(void)` | 엔진의 지금 사전을 세션에 가져옴. 번역은 원래 호출마다 따로라서 결과는 바뀌지 않음. 0 성공, -1 초기화 전, 종료 후 |
 | `int hdTrans_Reload(void)` | 설정 파일과 사전 폴더, 사용자 사전, 켜 둔 Ehnd 폴더를 다시 불러옴. 0 성공, -1 초기화 전, 종료 후, 실패(이전 사전 유지) |
 | `int hdTrans_UserDictError(char** out, size_t* outn)` | 설정 파일 진단과 마지막 사용자 사전 읽기 오류(오류마다 한 줄, 없으면 빈 문자열)를 `hdTrans_Translate`처럼 버퍼로 돌려줌. 초기화에 성공해도 처음부터 없는 명시 사용자 경로의 경고가 있을 수 있음. 읽기 INFO는 포함하지 않음. 0 성공, -1 초기화 전, 종료 후 |
@@ -321,7 +334,10 @@ std::string ko = session.Translate("今日はいい天気ですね。");
 | `Translate(text, context)` | `context`(`\n`으로 나눈 줄)를 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 돌려줌. 문맥 줄은 단서와, `SetWrapped(true)`이면 `text`가 이어 가는 문장의 앞부분으로만 씀. 빈 `context`는 `Translate(text)`와 같음 |
 | `Reset()` | 엔진의 지금 사전을 가져옴. 번역 결과는 바꾸지 않음 |
 | `SetSpeech(Speech)` | 다음 번역부터 대사의 말투(`Strict`(기본), `Soft`, `--speech`와 같음). 기준 모드에서는 효과 없음 |
+| `SetSpeechLevels(SpeechLevels)` | 다음 번역부터 대사 줄의 말투 수준(`Auto`(기본), `Keep`, `--speech-levels`와 같음). 기준 모드에서는 `Keep` |
 | `SetWrapped(bool)` | 다음 번역부터: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 기본 `false`, `--wrapped`와 같음. 빈 줄은 늘 문장 경계 |
+| `SetPredicateVariants(bool)` | 다음 번역부터 서술어 뒤 기능어의 한자 표기(様)를 가나 표기(よう)처럼 읽음(spec LEX-1050). 기본 `true`, `false`는 `--no-predicate-variants`와 같음 |
+| `SetNames(text, errors)` | 다음 번역부터 호출마다 그 문서에 쓸 이름 목록([dictionary-files.md](dictionary-files.md#문서-이름-목록) 형식, `--names`와 같음). 엔진이 사용자 폴더에서 읽은 이름 목록 파일 위에 놓임. 빈 `text`는 목록을 뗌. 잘못된 줄이나 컴파일되지 않는 이름이 있으면 `false`, 나머지 줄은 씀. `errors`(선택)에 `줄: 이유`. 목록은 여기서, 그리고 세션이 새 사전을 받을 때 한 번 컴파일됨 |
 
 `UserReload::Auto` 엔진의 세션은 엔진에 새 사전이 생기면 다음 번역에서 그 사전으로 바꿉니다.
 필터와 Ehnd 형식은 [ehnd-compat.md](ehnd-compat.md)에 있습니다.

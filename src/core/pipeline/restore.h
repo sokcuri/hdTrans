@@ -150,6 +150,11 @@ using output::kStressMark;
 
 namespace internal {
 
+// The length of a stutter separator at rs[i]: 、 or ，, a run of … ‥ ― ─ —, or a run of two or more
+// ・, . or ． (し..しつれい).
+size_t StutterSeparator(std::u32string_view rs, size_t i);
+
+
 // Kana in Hangul as heard, by text::FromKana under Fan (きょどきょど 쿄도쿄도, ぬちゃっ 누챳):
 //   - ー, or a small vowel that repeats the vowel before it, adds a syllable of that
 //     vowel (なぁ 나아, ふー 후우; at most four);

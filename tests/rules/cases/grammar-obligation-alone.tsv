@@ -7,7 +7,7 @@ cx:fused-obligation:5	はぁ……提督の机も綺麗にしなきゃ。	하아
 cx:fused-obligation:5	大掃除！ お部屋の整理もしなくちゃ！	대청소! 방 정리도 해야 해!	fix	rewrites
 cx:fused-obligation:5	やだ、お洋服が……んもう、クリーニングしなきゃ……覚えてなさいよっ！	싫어, 옷이……이제, 클리닝해야 한다……기억해!	fix	rewrites
 cx:fused-obligation:5	敵艦を捕捉しなくては…。	적함을 포착해야 해….	fix	rewrites
-cx:fused-obligation:5	「帰って試験勉強をしなくてはならないんだ」	「돌아가 시험 공부를 해야 한다」	fix	rewrites
+cx:fused-obligation:5	「帰って試験勉強をしなくてはならないんだ」	「돌아가 시험 공부를 해야 해」	fix	rewrites
 cx:fused-obligation:5	足止めしなくてはならない。	저지해야 한다.	fix	rewrites
 cx:fused-obligation:5	「では、俺はそこで何かしなければいけないのですか？」	「그럼, 나는 거기서 뭔가 해야 합니까?」	fix	rewrites
 cx:fused-obligation:10	ミキさんとお揃いの水着、買わなくちゃ。	미키 씨와 세트의 수영복, 사야 한다.	fix	rewrites
@@ -22,7 +22,7 @@ cx:obligation-alone:40	ユイと大掃除しなきゃと思った。	유이와 �
 cx:obligation-alone:50	「皆さんの期待に応えなきゃって気持ちの方が強くて」	「여러분이 기대에 부응해야 한다는 기분이 강해서」	fix	rewrites
 cx:obligation-alone:60	早く行かなきゃって思った。	빨리 가야 한다고 생각했다.	fix	rewrites
 cx:obligation-alone:10	　抵抗しなくちゃいけないんだ。	 저항해야 한다.	fix	rewrites
-dict:jisjk:344317	「行かなくちゃいけない」	「가야 한다」	fix	local-ending
+dict:jisjk:344317	「行かなくちゃいけない」	「가야 해」	fix	local-ending
 dict:jisjk:344317	帰らなくちゃ……また怒られる……	돌아가야 한다……또 혼난다……	fix	local-ending
 cx:obligation-alone:70	格納庫も大掃除しなきゃ…って、コラ！	격납고도 대청소해야 한다…라니, 코라!	fix	rewrites
 cx:obligation-alone:70	行かなきゃ損だ	!rule:cx:obligation-alone:70	keep	rewrites
@@ -43,4 +43,4 @@ cx:fused-obligation:5	そろそろ風呂に入って寝る準備をしなけれ�
 cx:fused-obligation:5	後で姉にもお礼をしなくちゃ。	나중에 언니에게도 감사 인사를 해야 한다.	fix	rewrites
 cx:obligation-alone:10	むしろ、そうしなきゃいけなかったような……	오히려, 그렇게 해야 했던 것 같은……	fix	rewrites
 cx:obligation-alone:70	でも、言わなきゃ……言わなきゃいけない。	하지만, 말해야 한다……말해야 한다.	fix	rewrites
-dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨 곳에 가야 해!!	fix	local-ending
+dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨의 곳에 가야 해!!	fix	local-ending

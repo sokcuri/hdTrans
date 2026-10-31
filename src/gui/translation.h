@@ -17,7 +17,9 @@ struct TranslationOptions {
     bool cg = true;
     bool misread = false;
     Speech speech = Speech::Strict;
+    SpeechLevels speechLevels = SpeechLevels::Auto;
     bool wrapped = false;
+    bool predicateVariants = true;
 };
 
 // Input is UTF-8 with LF line endings. Translation keeps blank lines; in mixed modes,

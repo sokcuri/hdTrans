@@ -1,0 +1,27 @@
+# 규칙: GRM-76
+rule	input	expected	kind	layer
+cx:mono-ne:10	去年も泡沫候補の演説なんて、誰も聞いてなかったものね	has:아무도 듣지 않았잖아	fix	rewrites
+cx:mono-ne:10	会長はウチの鍵持ってたもんね	has:열쇠 가지고 있었잖아	fix	rewrites
+cx:mono-ne:10	うん……昔から、そうだったもんね	has:그랬잖아	fix	rewrites
+cx:mono-ne:10	長い間入院してたもんね	has:입원하고 있었잖아	fix	rewrites
+cx:mono-ne:10	直接電話しちゃったもんね	has:전화해버렸잖아	fix	rewrites
+cx:mono-ne:10	テロを阻止するに一役買うことになるとは思いもしなかったものね	has:않았잖아	fix	rewrites
+cx:mono-ne:11	間に合ったもんね	has:늦지 않았잖아	fix	rewrites
+cx:mono-ne:11	みんなホントに頑張ったもんね	has:노력했잖아	fix	rewrites
+cx:mono-ne:11	大喜びしてたもんね	has:기뻐하고 있었잖아	fix	rewrites
+cx:mono-ne:11	ああ……うちに来て漫画読んでたもんね	has:읽고 있었잖아	fix	rewrites
+cx:mono-ne:20	時間を飛び越えるって話だったもんね	has:이야기였잖아	fix	rewrites
+cx:mono-ne:30	まったく、あの子も面倒な子たちに惚れられたものね	has:있었네	fix	rewrites
+cx:mono-ne:30	随分と甘く見られたものね	has:봐졌네	fix	rewrites
+cx:mono-ne:30	ようやくここまで来れたものね	has:올 수 있었네	fix	rewrites
+cx:mono-ne:30	酷い事をする奴がいたものね！	has:있었네!	fix	rewrites
+cx:mono-ne:30	提督も随分と立派になったものね！	has:되었네!	fix	rewrites
+cx:mono-ne:10	私ら相手によそ見するとは、ナメられたもんね	!rule:cx:mono-ne:10	keep	rewrites
+cx:mono-ne:10	ふたり揃っておめおめと、あたしの前に顔を出せたもんね	!rule:cx:mono-ne:10	keep	rewrites
+cx:mono-ne:10	すーっと顔色良くなりましたもんね	!rule:cx:mono-ne:10	keep	rewrites
+cx:mono-ne:11	あの方強いものね。	!rule:cx:mono-ne:11	keep	rewrites
+cx:mono-ne:11	私ら相手によそ見するとは、ナメられたもんね	!rule:cx:mono-ne:11	keep	rewrites
+cx:mono-ne:20	それが仕事だもんね	!rule:cx:mono-ne:20	keep	rewrites
+cx:mono-ne:30	あの方強いものね。	!rule:cx:mono-ne:30	keep	rewrites
+cx:mono-ne:30	会長はウチの鍵持ってたもんね	!rule:cx:mono-ne:30	keep	rewrites
+cx:mono-ne:30	開始三秒で顎にアッパー食らって伸びたものね。	!rule:cx:mono-ne:30	keep	rewrites

@@ -21,7 +21,7 @@ normalize:voiced-mark	「え゛ーーーッッ？！」	「에에에엣?!」	fix
 normalize:voiced-mark	「ウ゛ァイオリン」	「바이올린」	fix	normalize
 normalize:voiced-mark	「ｳﾞｧｲｵﾘﾝ」	「바이올린」	keep	normalize
 normalize:voiced-mark	「ｶﾞﾝﾊﾞﾚ」	「힘내라」	keep	normalize
-normalize:voiced-mark	「バイオリンを弾く」	「바이올린을 연주한다」	keep	normalize
+normalize:voiced-mark	「バイオリンを弾く」	「바이올린을 연주해」	keep	normalize
 normalize:voiced-mark	「ウ゛ー」	「으으」	fix	normalize
 normalize:voiced-mark	「ウ゛ーッ！」	「으읏!」	fix	normalize
 normalize:voiced-mark	「ウ゛ゥ……」	「으으……」	fix	normalize

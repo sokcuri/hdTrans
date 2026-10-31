@@ -1,0 +1,18 @@
+#! layer=pack
+# 목적어, 자리, 앞뒤 말로 뜻을 고르는 팩 행: 掴まる 잡다, 果たす 이루다, 沈める 낮추다, 長い付き合い 오랜 사이
+id	lemma	pos	slot	cond	target	spec	prov	note	kind
+verb-object-senses:1	掴まる	v5	sense	dat=- after=しっかり|ちゃんと|確り|ぎゅっと|きちんと|がっちり|ぎゅう	잡다	LEX-3140	audit	しっかり掴まってろ 꽉 잡고 있어	
+verb-object-senses:3	掴まる	v5	sense	dat=- next=おく|おけ|ください|くれ	잡다	LEX-3140	audit	掴まってください 잡아 주세요	
+verb-object-senses:4	掴まる	v5	sense	dat=- form=te final=！|-	잡다	LEX-3140	audit	掴まって！ 잡아!	
+verb-object-senses:12	掴まる	v5	sense	dat=- head=力|もの|物|モノ|所|ところ|場所	잡다	LEX-3140	audit	掴まる力 잡는 힘	
+verb-object-senses:2	掴まる	v5	sense	dat=*	매달리다	LEX-3140	audit	手すりに掴まって 난간에 매달려	
+verb-object-senses:5	果たす	v5	sense	obj=優勝|出場|進出|合流|再会|生還|帰還|凱旋|融合|進化|復活|復帰|昇格|連覇|当選|合格|入学|勝利|制覇|夢|悲願|宿願|念願|本懐|願い|望み|自己実現|和解|独立	이루다	LEX-3141	audit	優勝を果たした 우승을 이루었다	
+verb-object-senses:17	果たす	v5	sense	obj=目的	달성하다	LEX-3141	audit	目的を果たす 목적을 달성하다	
+verb-object-senses:6	沈める	v1	sense	obj=腰|体|身体 dat=- to=-	낮추다	LEX-3142	audit	腰を沈める 허리를 낮추다	
+verb-object-senses:7	沈める	v1:규칙	sense	obj=体|身体|身 dat=ソファ|ソファー|椅子|カウチ|ベッド|布団|シーツ|座席|シート|クッション	묻다	LEX-3142	audit	ベッドに体を沈めた 침대에 몸을 묻었다	
+verb-object-senses:8	沈める	v1	sense	obj=体|身体|身|肩 dat=湯船|湯舟|湯|お湯|風呂|浴槽|温泉	담그다	LEX-3142	audit	湯船に身体を沈める 욕조에 몸을 담그다	
+verb-object-senses:9	沈める	v1:규칙	sense	obj=体|身体|身 to=ソファ|ソファー|椅子|カウチ|ベッド|布団|シーツ|座席|シート|クッション	묻다	LEX-3142	audit	ソファーへ身体を沈めた 소파에 몸을 묻었다	
+verb-object-senses:10	付き合い	n	sense	長い付き合い|古い付き合い|旧い付き合い	오랜 사이	LEX-3144	audit	長い付き合いになる 오랜 사이가 되다	colloc
+verb-object-senses:14	掴まる	v5	voice	head=腕|手|手首|肩|胸ぐら|胸倉|襟|襟首|髪|足|足首|首|腰|頭	passive	LEX-3140	audit	掴まれた腕 잡힌 팔	
+verb-object-senses:15	沈める	v1	sense	{X}に腰を沈める	{X}에 깊숙이 앉다	LEX-3142	audit	ソファに腰を沈める 소파에 깊숙이 앉다	colloc
+verb-object-senses:16	沈める	v1	sense	{X}に深く腰を沈める	{X}에 깊숙이 앉다	LEX-3142	audit	ソファに深く腰を沈める 소파에 깊숙이 앉다	colloc

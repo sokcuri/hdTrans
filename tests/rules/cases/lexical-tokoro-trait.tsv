@@ -1,0 +1,16 @@
+# 규칙: LEX-2902
+rule	input	expected	kind	layer
+cx:tokoro-trait:10	おとなしく控えめで、傲慢なところなど全く見受けられない。	has:오만한 면 같은 건	fix	rewrites
+cx:tokoro-trait:10	なんだ、意外と素直なところのある子じゃないか。	has:솔직한 면이 있는	fix	rewrites
+cx:tokoro-trait:10	彼女の律儀なところを微笑ましく思っていると、	has:성실한 면을	fix	rewrites
+cx:tokoro-trait:10	こういうお茶目なところも、彼女の魅力の一つだ。	has:장난스러운 면도	fix	rewrites
+cx:tokoro-trait:20	たまに見せる子供らしいところもまた可愛い。	has:어린이다운 면도	fix	rewrites
+cx:tokoro-trait:20	かわいいところもあるんだな……	has:귀여운 면도	fix	rewrites
+cx:tokoro-trait:20	優しいところが好き。	다정한 면이 좋아.	fix	rewrites
+cx:tokoro-trait:10	静かなところで話そう。	has:조용한 곳에서	keep	rewrites
+cx:tokoro-trait:10	綺麗なところだね。	has:예쁜 곳이구나	keep	rewrites
+cx:tokoro-trait:10	冷静になった所である事を思い出した。	lacks:면	keep	rewrites
+cx:tokoro-trait:20	高いところは苦手だ。	has:높은 곳은	keep	rewrites
+cx:tokoro-trait:20	危ないところだった。	lacks:면	keep	rewrites
+cx:tokoro-trait:20	いいところに来たな。	lacks:면	keep	rewrites
+cx:tokoro-trait:10	素朴なところだ	lacks:면	keep	rewrites

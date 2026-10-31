@@ -9,6 +9,7 @@
 
 #include "core/dict/snapshot.h"
 #include "core/tokenizer/token.h"
+#include "core/word/attach.h"
 #include "core/word/item.h"
 #include "core/word/select.h"
 
@@ -27,6 +28,7 @@ struct SessionSenses;
     X(causativePassive, true)         /* Short causative-passive verb endings. */ \
     X(exclamationNa, true)            /* Exclamatory な after predicates. */ \
     X(dialectForms, true)             /* Colloquial negative and contracted verb forms. */ \
+    X(predicateVariants, true)        /* Kanji spellings of grammatical words after a predicate (様 よう). */ \
     X(documentSenses, false)          /* Reuse trusted lexical senses within a session. */ \
     X(desireWindow, false)            /* Eight-character lookahead for desire endings. */ \
     X(expandedGroups, true)           /* Allow more than 100 entries in a group. */ \
@@ -79,10 +81,27 @@ struct Settings {
     std::string_view before;
     // Text path: the depth of 「」 and 『』 open at the start of the chunk.
     int quoteDepth = 0;
+    // Text path: the quotes of the line opened outside any quote before the chunk, and the styles
+    // of the line's quotes (pipeline::QuoteStyles with output::kCasualSpeech: element 0 the text
+    // outside quotes, element k the k-th quote), read by the construction feature casual-level.
+    int quoteCount = 0;
+    std::span<const std::uint8_t> quoteStyles;
+    // Text path: the speech level the speech-level stage decides for the line from the source
+    // (spec/register.md); none where the stage does not write the line.
+    enum class LineLevel : std::uint8_t { none, plain, casual, polite, formal, other };
+    LineLevel lineLevel = LineLevel::none;
+    // With lineLevel: the line speaks in an authoritative voice (spec REG-14); the document is prose
+    // fiction (spec REG-20); the levels of the quotes of a line of several quotes, in order (REG-15).
+    bool authoritative = false;
+    bool prose = false;
+    std::span<const LineLevel> quoteLevels;
     // Text path: the line uses the tic ぽい (PoiTicLine).
     bool poiTic = false;
     // Text path: the document writes its speech in 「」, so its text outside them is narration.
     bool narrated = false;
+    // Text path: the name rows of the document's name list, applied with the snapshot's packs; null
+    // for none.
+    const dict::PackTable* documentPacks = nullptr;
     // Empty by default; the list and its names outlive the analysis.
     std::span<const Scorer> scorers;
     std::span<const Scorer> shadowScorers;  // recorded only when selectShadow is set
@@ -102,6 +121,8 @@ struct Settings {
     // The characters the loaded pre-filter writes before kana (filter::Filters::Written), sorted:
     // kana right after one is text the pre-filter wrote, not an unknown stem to read by sound.
     std::span<const char32_t> filterWritten;
+    // Attachment annotations for the packs layer (attach.h); null: the layer reads its own context.
+    const AttachProvider* attach = nullptr;
 };
 
 // Called after every dictionary lookup with the token being processed (-1 before the

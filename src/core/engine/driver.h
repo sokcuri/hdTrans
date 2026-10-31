@@ -27,6 +27,11 @@ namespace hdTrans::filter {
 class Filters;
 }
 
+namespace hdTrans::reg {
+struct Change;
+struct SourceDecisions;
+}
+
 namespace hdTrans::internal {
 
 // Receives the outputs of the stages as they are made. A null member is not called. The
@@ -52,6 +57,12 @@ struct StageObserver {
     void (*restored)(void* context, const pipeline::RestoreSteps& steps) = nullptr;
     // Ehnd-style stage snapshots and fired filter rules, including trailing newlines.
     void (*filterLog)(void* context, std::string_view message) = nullptr;
+    // A pass of the compose stage over the line begins: the chains resolved after it replace those of the
+    // line's earlier passes (a line is composed again after a trial pass).
+    void (*pass)(void* context) = nullptr;
+    // Only the speech-level stage listens: no stage runs again for the observer, and the trial passes
+    // of a line report to it too (each starts with pass).
+    bool levelsOnly = false;
 };
 
 // Uses the session's dictionaries and options without retaining the observer; context as
@@ -71,6 +82,8 @@ struct Generated {
     // built-in program runs.
     rules::Program rules;
     bool hasRules = false;
+    // The name lists of the user folders loaded with the dictionary, compiled for it; null for none.
+    std::shared_ptr<const pipeline::DocumentNames> nameFiles;
 };
 
 // The rules program text a loaded dictionary assembles: the header, one L line per rule
@@ -80,6 +93,9 @@ std::string RuleProgramText(const dict::Snapshot& snap);
 
 // The marker families of a loaded dictionary, with the families the dictionaries made at load.
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap);
+
+// The name lists of the user folders that e loaded (Generated::nameFiles).
+std::shared_ptr<const pipeline::DocumentNames> NameFiles(const Engine& e);
 
 // What a session keeps between its calls.
 // The quotes a line leaves open for the lines after it (「明日行く。 then 明後日も行く」), and
@@ -104,6 +120,17 @@ struct TranslationOptions {
     const filter::Filters* filters = nullptr;
     // The speech level of the text inside 「」; Strict with reference.
     Speech speech = Speech::Strict;
+    // The speech-level stage after the translation (Session::SetSpeechLevels); off with reference.
+    SpeechLevels speechLevels = SpeechLevels::Auto;
+    // When set, gets the lines the speech-level stage changes, numbered from 0 after the context.
+    std::vector<reg::Change>* levelChanges = nullptr;
+    // The name list of the document (Session::SetNames), compiled for the snapshot; null for none.
+    const pipeline::DocumentNames* names = nullptr;
+    // The name rows of the document's name list (DocumentNames::packs); set per document.
+    const dict::PackTable* documentPacks = nullptr;
+    // The decisions of the speech-level stage for the lines after the context (reg::DecideSource), which
+    // the word stage reads; set by TranslateDocument.
+    const reg::SourceDecisions* sourceDecisions = nullptr;
     // Lines may break in the middle of a sentence (Session::SetWrapped).
     bool wrapped = false;
     // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).

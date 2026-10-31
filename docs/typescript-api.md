@@ -82,14 +82,19 @@ console.log(result.choices);
 
 대사의 말투는 `Speech` 값 `'strict'`(기본)와 `'soft'`이며 CLI의 `--speech`와 같습니다. `'strict'`는 번역의 `-다`를
 그대로 두고(「明日行く」 → 「내일 간다」), 반말 표지가 있는 대사의 상태와 과거만 해체로 씁니다(「違うよ。もう終わった」 →
-「달라. 벌써 끝났어」). `'soft'`는 「」 안의 `-다`를 해체로 쓰고(「내일 갈 거야」), 「」를 쓰지 않는 글의 줄도
+「아니야. 벌써 끝났어」). `'soft'`는 「」 안의 `-다`를 해체로 쓰고(「내일 갈 거야」), 「」를 쓰지 않는 글의 줄도
 대사로 보이면 해체로 씁니다(それは違う → 그건 달라). 애매한 줄은 `-다`로 둡니다(わかった。 → 알았다.). 평서형 의문문은
 두 값 모두 해체로 묻습니다(「大丈夫か？」 → 「괜찮아?」). 소설은 `'strict'`, 게임 대사와 채팅은 `'soft'`가 잘 맞습니다.
+「」로 시작하는 대사 줄은 두 값 모두 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙이 말투를 다시 정합니다. `SpeechLevels` 값
+`'keep'`이면 이 단계가 돌지 않고 번역의 말투를 그대로 둡니다(`'auto'`가 기본). `HdTrans.init({ speechLevels })`, `setSpeechLevels(levels)`,
+`translate(text, { speechLevels })`는 `speech`와 같은 방식으로 적용합니다.
 `HdTrans.init({ speech })`나 `setSpeech(speech)`는 다음 번역부터, `translate(text, { speech })`는 그 호출에만 적용합니다.
 
 ```ts
 hdTrans.setSpeech("soft");
 const strict = hdTrans.translate("「明日行く」", { speech: "strict" });  // 「내일 간다」
+hdTrans.translate("「いえ、当たり前のことですから」");                       // 「아뇨, 당연한 일이니까요」
+hdTrans.translate("「いえ、当たり前のことですから」", { speechLevels: "keep" });  // 「아뇨, 당연한 일이니까」
 ```
 
 `json: true`는 JSON 문자열이 아니라 타입이 있는 객체를 반환합니다.
@@ -171,6 +176,25 @@ hdTrans.clearUserDict();
 엄격 모드에서 잘못된 TSV로 교체를 시도하면 예외와 `userDictError`에 진단을 남기고 이전에 적용한 사용자 사전을 유지합니다.
 이때 `getUserDict()`는 여전히 적용 중인 항목을 반환하고, `getUserDictRaw()`는 수정 작업을 위해 마지막으로 제출한 원문을 반환합니다.
 두 조회 결과가 다를 수 있으므로 원문 편집기에서는 `userDictError`도 함께 확인합니다.
+
+## 문서 이름 목록
+
+한 작품의 등장인물, 지명처럼 그 문서에만 맞는 이름은 [이름 목록](dictionary-files.md#문서-이름-목록)으로 줍니다.
+형식은 CLI의 `--names`와 같고(`일본어<TAB>한국어[<TAB>종류[<TAB>hon]]`), 목록은 호출마다 그 문서에 쓰이며 사전은 바꾸지 않습니다.
+
+```ts
+const hdTrans = await HdTrans.init({ names: "衣更\t이사라\n" });
+hdTrans.translate("衣更は今日も元気だ。");  // 이사라는 오늘도 건강하다.
+hdTrans.setNames("");                        // 목록을 뗌
+hdTrans.translate("衣更は今日も元気だ。", { names: "衣更\t이사라" });  // 이 호출에만
+```
+
+- `HdTrans.init({ names })`나 `setNames(text)`는 다음 번역부터, `translate(text, { names })`는 그 호출에만 적용합니다.
+- 목록은 `setNames`에서 컴파일하므로 줄마다가 아니라 문서마다 한 번 줍니다. `translate`의 `names`는 호출마다 그 목록과 원래 목록을
+  다시 컴파일하므로, 같은 목록을 여러 번 쓰면 `setNames`로 둡니다.
+- 잘못된 줄이나 컴파일되지 않는 이름이 있으면 `setNames`와 `translate`는 나머지 줄을 적용한 뒤 `Error`를 던지고, `init`은 실패합니다.
+  메시지는 `hdtrans: name list:` 다음 줄부터 `줄: 이유`입니다. `getNames()`는 마지막으로 준 원문을 돌려줍니다.
+- 목록은 `setUserDict`, `setUserDictRaw`, `setEhnd`, `reset()` 뒤에도 유지됩니다.
 
 ## Ehnd 필터를 실행 중에 바꾸기
 

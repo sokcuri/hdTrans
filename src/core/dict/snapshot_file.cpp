@@ -957,7 +957,8 @@ public:
             if (!records.ok || f.folder < 0 || static_cast<std::size_t>(f.folder) >= sourceFolders || !SourceName(name) ||
                 (layer != static_cast<unsigned>(FileLayer::Base) && layer != static_cast<unsigned>(FileLayer::Kana) &&
                  layer != static_cast<unsigned>(FileLayer::Readings) && layer != static_cast<unsigned>(FileLayer::PreFilter) &&
-                 layer != static_cast<unsigned>(FileLayer::PostFilter)) ||
+                 layer != static_cast<unsigned>(FileLayer::PostFilter) && layer != static_cast<unsigned>(FileLayer::Pack) &&
+                 layer != static_cast<unsigned>(FileLayer::PackClasses)) ||
                 !ReadLayer(f.text, actualLayer) || static_cast<unsigned>(actualLayer) != layer) { Fail(); return false; }
             f.layer = actualLayer;
             f.name = RestoredSourcePath(folders, static_cast<std::size_t>(f.folder), name);

@@ -25,7 +25,7 @@ cx:masuka-offer:10	「明日の予定は決めてますか？」	!rule:cx:masuka
 cx:masuka-offer:10	「時間ありますか？」	「시간 있습니까?」	keep	rewrites
 cx:masuka-offer:5	「お持ちでいらっしゃいますか？」	!rule:cx:masuka-offer:5	keep	rewrites
 cx:masuka-offer:10	「私の胸の鼓動、感じますか」	!rule:cx:masuka-offer:10	keep	rewrites
-cx:masuka-offer:10	「一緒に行きませんか？」	「함께 가지 않겠습니까?」	keep	rewrites
+cx:masuka-offer:10	「一緒に行きませんか？」	「함께 가지 않을래요?」	keep	rewrites
 cx:masuka-offer:7	セーブしますか？はい／いいえ	세이브하시겠습니까? 네/아니요	fix	rewrites
 cx:masuka-offer:10	艦首扉が気になりますか？	!rule:cx:masuka-offer:10	keep	rewrites
 cx:masuka-offer:7	『課金を行いますか？』	『과금을 실시하시겠습니까?』	fix	rewrites

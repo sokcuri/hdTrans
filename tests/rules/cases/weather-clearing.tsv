@@ -1,0 +1,31 @@
+# 규칙: LEX-3120
+rule	input	expected	kind	layer
+pack:weather-clearing:2	やがて土煙が晴れる。	has:흙먼지가 걷힌다	fix	packs
+pack:weather-clearing:2	ゆっくりと煙幕が晴れる。	has:연막이 걷힌다	fix	packs
+pack:weather-clearing:2	もうもうと立ちこめる土煙が少しずつ晴れていく。	has:흙먼지가 조금씩 걷혀 간다	fix	packs
+pack:weather-clearing:2	人の心に立ち込める暗雲は晴れないままだ。	has:암운은 걷히지 않은	fix	packs
+pack:weather-clearing:2	先程晴れた雨雲がまたかかり始めている。	has:걷힌 비구름	fix	packs
+pack:weather-clearing:6	霧が晴れて、景色が戻った。	has:안개가 걷혀, 경치가	keep	packs
+pack:weather-clearing:6	霧が一気に晴れて景色が戻った。	has:안개가 단번에 걷혀 경치가	fix	packs
+pack:weather-clearing:6	煙が少しずつ晴れてレイの姿が見えてくる。	has:걷혀 레이의	fix	packs
+pack:weather-clearing:3	視界が晴れて五体満足で現れた俺と、	has:시야가 트여	fix	packs
+pack:weather-clearing:3	真っ白だった視界が徐々に晴れていく。	has:시야가 서서히 트여 간다	fix	packs
+pack:weather-clearing:4	疑念はその時点で晴れたと言っていい。	has:의심은 그 시점에서 풀렸다고	fix	packs
+pack:weather-clearing:4	俺の疑問は一向に晴れない。	has:의문은 전혀 풀리지 않는다	fix	packs
+pack:weather-clearing:4	これで俺の恨みが晴れた。	has:원한이 풀렸다	fix	packs
+pack:weather-clearing:4	でも疑問が晴れてスッキリしたでしょう？	has:의문이 풀려	fix	packs
+pack:weather-clearing:4	部屋に引き籠っても、気分が晴れるわけがない！！	has:기분이 풀릴 리가 없어	keep	packs
+pack:weather-clearing:4	それなのに心が晴れない。	has:마음이 풀리지 않는다	keep	packs
+pack:weather-clearing:5	だが、ミナの顔は晴れなかった。	has:얼굴은 밝아지지 않았다	fix	packs
+pack:weather-clearing:5	その表情は晴れないままだ。	has:표정은 밝아지지 않은 채다	fix	packs
+pack:weather-clearing:5	星司は先程と違い迷いの晴れた顔で頷く。	lacks:밝아진	keep	packs
+pack:weather-clearing:5	晴れない表情で俯いた。	has:어두운 표정	keep	packs
+pack:weather-clearing:6	今年の春、私は晴れて小学６年生へと進級した。	has:정식으로 초등학교	keep	packs
+pack:weather-clearing:6	晴れて夫婦となった初めての夜。	has:정식으로 부부가 된	keep	packs
+pack:weather-clearing:2	空が晴れた	has:하늘이 개었다	keep	packs
+pack:weather-clearing:2	空が晴れたら	has:하늘이 개면	keep	packs
+pack:weather-clearing:2	しかし、災厄な事に天候が晴れた。	has:기후가 개었다	keep	packs
+pack:weather-clearing:2	明日は晴れる	has:내일은 갠다	keep	packs
+pack:weather-clearing:2	よく晴れた午後だ。	!rule:pack:weather-clearing:6	keep	packs
+pack:weather-clearing:2	それは、晴れた日の空の色のようだった。	has:맑은 날	keep	packs
+pack:weather-clearing:2	明日晴れたら早めに連絡をしておこうと思った。	!rule:pack:weather-clearing:2	keep	packs

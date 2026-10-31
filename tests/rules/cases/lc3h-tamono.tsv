@@ -1,0 +1,39 @@
+# 규칙: GRM-199
+rule	input	expected	kind	layer
+cx:lc3h-tamono:10	わかったもんじゃないな。	has:알 수 없네	fix	rewrites
+cx:lc3h-tamono:11	何が潜んでるのかわかったものじゃない。	has:알 수 없다	fix	rewrites
+cx:lc3h-tamono:20	「あぁ、嫌われたら堪ったもんじゃない」	has:견딜 수 없어	fix	rewrites
+cx:lc3h-tamono:21	全く、たまったものじゃない。	has:견딜 수 없다	fix	rewrites
+cx:lc3h-tamono:30	説明も何もあったもんじゃない。	has:없다	fix	rewrites
+cx:lc3h-tamono:31	風情も何もあったものではない。	has:없다	fix	rewrites
+cx:lc3h-tamono:40	とても食えたもんじゃない。	has:수 있는 것이 아니	fix	rewrites
+cx:lc3h-tamono:41	システム的に、動けたものじゃないと。	has:수 있는 것이 아니	fix	rewrites
+cx:lc3h-tamono:10	味なんてわかったもんじゃない。	has:알 수 없다	fix	rewrites
+cx:lc3h-tamono:11	「いつ我々を殺そうとするか、分かったものじゃないな」	has:알 수 없네	fix	rewrites
+cx:lc3h-tamono:20	もし愛美に被害が起きたら溜まったもんじゃない。	has:견딜 수 없다	fix	rewrites
+cx:lc3h-tamono:21	期待される方は、堪ったものではないが・・・	has:견딜 수 없겠지만···	fix	rewrites
+cx:lc3h-tamono:30	情緒も何もあったもんじゃないわ！	has:없어	fix	rewrites
+cx:lc3h-tamono:31	緊張して雰囲気も何もあったものじゃなかった。	has:없었다	fix	rewrites
+cx:lc3h-tamono:40	未舗装の道は走れたもんじゃないね。	has:수 있는 것이 아니	fix	rewrites
+cx:lc3h-tamono:41	「キンは大丈夫かもしれんがユリとかは耐えられたものじゃないだろうな。」	has:수 있는 것이 아니	fix	rewrites
+cx:lc3h-tamono:10	龍にするか知れたもんじゃないわ」と由良が口を挟む。	has:알 수 없어	fix	rewrites
+cx:lc3h-tamono:11	……どこまで話を信じていいのか分かったものではないが。	has:알 수 없겠지만	fix	rewrites
+cx:lc3h-tamono:20	「それですと、遥様は溜まったもんじゃなかったでしょうね」	has:견딜 수 없었겠죠	fix	rewrites
+cx:lc3h-tamono:21	一撃でも食らったらたまったものじゃないだろう	has:견딜 수 없을	fix	rewrites
+cx:lc3h-tamono:30	救いもなにもあったもんじゃなかった。	has:없었다	fix	rewrites
+cx:lc3h-tamono:31	「ふむ…確かにこの服装だと威厳も何もあったものではないね」	has:없네	fix	rewrites
+cx:lc3h-tamono:40	しばらく俺は、たぶん見れたもんじゃなかっただろう。	has:수 있는 것이 아니	fix	rewrites
+cx:lc3h-tamono:41	温いジュースなんて飲めたものじゃない。	has:수 있는 것이 아니	fix	rewrites
+cx:lc3h-tamono:10	それに、白一人だと何やらかすかわかったもんじゃないからな。	has:알 수 없으니까	fix	rewrites
+cx:lc3h-tamono:11	妹のカナだって病気がいつ悪化するか分かったものではないのだ。	has:알 수 없는	fix	rewrites
+cx:lc3h-tamono:20	作者本人から盗作の疑いをかけられるなんて堪ったもんじゃない。	has:견딜 수 없다	fix	rewrites
+cx:lc3h-tamono:21	巻き込まれた側としては堪ったものではないが。	has:견딜 수 없겠지만	fix	rewrites
+cx:lc3h-tamono:10	「いいさ、大したものではない」	!rule:cx:lc3h-tamono:10	keep	rewrites
+cx:lc3h-tamono:11	「そんな大したものじゃない」	!rule:cx:lc3h-tamono:11	keep	rewrites
+cx:lc3h-tamono:20	服も大したものではない。	!rule:cx:lc3h-tamono:20	keep	rewrites
+cx:lc3h-tamono:21	「大したものじゃないよ」	!rule:cx:lc3h-tamono:21	keep	rewrites
+cx:lc3h-tamono:30	褒められたもんじゃないな――	!rule:cx:lc3h-tamono:30	keep	rewrites
+cx:lc3h-tamono:31	褒められたもんじゃないもんね？	!rule:cx:lc3h-tamono:31	keep	rewrites
+cx:lc3h-tamono:41	「いいさ、大したものではない」	!rule:cx:lc3h-tamono:41	keep	rewrites
+cx:lc3h-tamono:40	服も大したものではない。	!rule:cx:lc3h-tamono:40	keep	rewrites
+cx:lc3h-tamono:41	好きできたわけではないが、お給金はいただいているのでその分の働きはするつもりである。	!rule:cx:lc3h-tamono:41	keep	rewrites

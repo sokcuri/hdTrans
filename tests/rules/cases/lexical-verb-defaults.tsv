@@ -1,0 +1,33 @@
+# 규칙: LEX-161
+rule	input	expected	kind	layer
+lexical:verb-defaults	血塗れのベッド。	피투성이의 침대.	fix	phrases
+lexical:verb-defaults	――血塗れの侯爵。	has:피투성이의 후작	fix	phrases
+lexical:verb-defaults	血まみれの顔で駆け寄った。	has:피투성이의 얼굴로	keep	lookup
+lexical:verb-defaults	関わり合いになりたくないだ	has:얽히고 싶지 않은	fix	phrases
+lexical:verb-defaults	それでもまったく関わり合いにならなかった訳ではない。	has:얽히지 않았던	fix	phrases
+lexical:verb-defaults	隼人は教室を見まわした。	하야토는 교실을 둘러보았다.	fix	lookup
+lexical:verb-defaults	辺りを改めて見まわす。	근처를 다시 둘러본다.	fix	lookup
+lexical:verb-defaults	ライは、あたりを見まわします。	라이는, 주위를 둘러봅니다.	keep	lookup
+lexical:verb-defaults	均された地面、撤退する敵軍、	has:평평하게 골라진 땅	fix	lookup
+lexical:verb-defaults	平均すると百枚から二百枚	has:평균하면	keep	lookup
+lexical:verb-defaults	俺らと つるむ時間はねえってさ	has:어울리는 시간은	fix	lookup
+lexical:verb-defaults	いつも男とつるんでいた。	has:남자와 어울리고 있었다	fix	lookup
+lexical:verb-defaults	ただされるがままにつるされる。	has:매달아진다	keep	lookup
+lexical:verb-defaults	「白々しい！」	「속이 빤해!」	fix	lookup
+lexical:verb-defaults	……白々しい口調しやがって。	has:속이 빤한 어조	fix	lookup
+lexical:verb-defaults	問題は席の空きがない事である。	has:자리의 빈자리가 없는	fix	lookup
+lexical:verb-defaults	「なら３日後の空きが一番近い」	has:3일 후의 빈자리가	fix	lookup
+lexical:verb-defaults	空き缶を投げたのは愛だった。	has:빈 깡통을 던진	keep	lookup
+lexical:verb-defaults	足元に転がる空き缶を見つめた	has:빈 깡통을 바라보았다	keep	lookup
+lexical:verb-defaults	酒場が静寂に包まれる。	술집이 정적에 싸인다.	fix	lookup
+lexical:verb-defaults	玉座の間が静寂に包まれた。	has:정적에 싸였다	fix	lookup
+lexical:verb-defaults	静寂の中で、音が消える。	정적 속에서, 소리가 사라진다.	keep	lookup
+lexical:verb-defaults	ヤバイと思った時には遅かった。	has:위험하다고 생각했을 때는	fix	rewrites
+lexical:verb-defaults	「あ、適正狩場は、その……」	has:적정 사냥터는	fix	senses
+lexical:verb-defaults	ＡＷＯでの適正レベルは７６。	has:적정 레벨은	fix	senses
+lexical:verb-defaults	全魔法適正	has:적성	keep	senses
+lexical:verb-defaults	適正試験は楽勝の一発合格。	has:적성 시험은	keep	senses
+lexical:verb-defaults	ああ、しんど……。	아, 힘들어…….	fix	phrases
+lexical:verb-defaults	「はぁ、はぁ、はぁ……しんど」	「하아, 하아, 하아……힘들어」	fix	phrases
+lexical:verb-defaults	心臓も肺も頭もしんどい。	심장도 폐도 머리도 힘들다.	keep	phrases
+lexical:verb-defaults	息がしんどい。	숨이 힘들다.	keep	phrases

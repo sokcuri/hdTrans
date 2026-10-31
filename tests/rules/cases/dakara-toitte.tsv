@@ -1,0 +1,17 @@
+# 규칙: GRM-74
+rule	input	expected	kind	layer
+pattern:学生だからといって	規則違反だからといって、いたずらに罰するのはよくない	has:규칙 위반이라고 해서,	fix	lookup
+pattern:学生だからといって	いくら魔族が人類の敵だからといって、意思疎通ができないわけではない	has:적이라고 해서,	fix	lookup
+pattern:学生だからと言って	この庭は、死者だからと言って誰しもが来れる場所ではない	has:죽은 자라고 해서	fix	lookup
+pattern:学生だからといって	当たり前だ。縁者だからといって、ただ飯を食わせる男ではない。	has:친척이라고 해서,	fix	lookup
+pattern:学生だからといって	夏だからといって水着で行く必要はない	has:여름이라고 해서	fix	lookup
+pattern:静かだからといって	静かだからといって安心はできない	has:조용하다고 해서	fix	lookup
+pattern:学生だからといって	だからといって、手抜き飯で済ませるわけにはいかない	has:그렇다고 해서,	keep	lookup
+pattern:学生だからといって	それはそうだけど、だからといって私達にそれを止める権利はない	has:그렇다고 해서 저희들에게	keep	lookup
+pattern:学生だからといって	人質だからって何もされないとは限らない	has:인질이라고 해서	keep	lookup
+pattern:学生だからといって	いくら飲み屋街だからって、今何時だと思ってんのよ。	has:술집거리라고 해서,	keep	lookup
+pattern:学生だからといって	子供だからといって、甘やかすな。	has:아이라고 해서,	fix	lookup
+pattern:学生だからといって	女だからといって、手加減はしない。	has:여자라고 해서,	fix	lookup
+pattern:静かだからといって	簡単だからといって、油断するな。	has:간단하다고 해서,	fix	lookup
+pattern:静かだからといって	暇だからといって、遊んでばかりいられない。	has:한가하다고 해서,	fix	lookup
+pattern:学生だからといって	そうね……でもだからといって、大人しく従うとは限らない	has:그렇다고 해서,	keep	lookup

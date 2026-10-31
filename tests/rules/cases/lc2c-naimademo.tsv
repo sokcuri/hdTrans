@@ -1,0 +1,24 @@
+# 규칙: GRM-139
+rule	input	expected	kind	layer
+cx:lc2c-naimademo:10	子供一人分とはいかないまでも、前よ	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:10	快諾とはいかないまでも、認めてくれた。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:10	息がかかるほど、とはいかないまでも近い。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:10	快晴とはいかないまでも、晴れ間の多い日だった。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:10	拒否とはいかないまでも止められるかなと思ったんだけどな。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:10	明らかに疑問と、とはいかないまでも自然な何かを感じている。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:15	軽く語るとドン引きまではいかないまでも引かれた。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:15	まではいかないまでも、一般的に視野に映るものは詳細に見える。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:15	今では親友まではいかないまでも、友人の中でも近しい位置にいると思っている。	has:아니더라도	fix	rewrites
+cx:lc2c-naimademo:20	しないまでも、	has:않더라도	fix	rewrites
+cx:lc2c-naimademo:20	殺さないまでも、縛	has:않더라도	fix	rewrites
+cx:lc2c-naimademo:20	冒険者達も勝てないまでも	has:없더라도	fix	rewrites
+cx:lc2c-naimademo:20	姿を見ないまでもわかる。	has:않더라도	fix	rewrites
+cx:lc2c-naimademo:20	必死に、認めないまでも。	has:않더라도	fix	rewrites
+cx:lc2c-naimademo:20	歓迎とは言わないまでももう少	has:않더라도	fix	rewrites
+cx:lc2c-naimademo:20	どこまでも続く道。	!rule:cx:lc2c-naimademo:20	keep	rewrites
+cx:lc2c-naimademo:20	真夏とは言わないが、暑い。	!rule:cx:lc2c-naimademo:20	keep	rewrites
+cx:lc2c-naimademo:20	何も言わないでも分かる。	!rule:cx:lc2c-naimademo:20	keep	rewrites
+cx:lc2c-naimademo:10	勝てないまでも負けない戦いをする必要がある。	!rule:cx:lc2c-naimademo:10	keep	rewrites
+cx:lc2c-naimademo:10	真夏とは言わないまでも、暑い。	!rule:cx:lc2c-naimademo:10	keep	rewrites
+cx:lc2c-naimademo:15	快晴とはいかないまでも、晴れ間の多い日だった。	!rule:cx:lc2c-naimademo:15	keep	rewrites
+cx:lc2c-naimademo:15	真夏とは言わないまでも、暑い。	!rule:cx:lc2c-naimademo:15	keep	rewrites

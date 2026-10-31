@@ -12,6 +12,10 @@
 #include "core/rules/rules.h"
 #include "core/word/worker.h"
 
+namespace hdTrans::dict {
+struct PackRow;
+}
+
 namespace hdTrans::word {
 
 // What the passes read besides the chain: the rule program of the selection and the
@@ -21,6 +25,12 @@ struct Flusher {
     Worker& w;
     const rules::Program& program;
     output::Families& families;
+    // The packs layer's attachment of the chain (packs.cpp), asked of Settings::attach once per pass.
+    struct Attached {
+        bool asked = false, held = false;
+        Attachment attachment;
+        std::vector<const Item*> items;  // the chain's items, in the attachment's order
+    } attached{};
 };
 
 // Runs the sentence passes over w.chain (the chain of one sentence after the token loop).
@@ -43,6 +53,14 @@ void ReadUnplacedParticles(Flusher& f);
 void ReinsertPhrases(Flusher& f);
 void CleanupClass3(Flusher& f);
 void ApplyNegatives(Flusher& f);
+
+// Packs (packs.cpp, docs/packs.md). PackVoice sets v from the voice row that decides verb item
+// it (keyed by its surface, else by stem, the verb a dictionary word in (ら)れ is made from; its
+// cue reads v as the voice the chain decided) and returns the row, null for none; a row that reads
+// the passive does not apply when atLast (the られ of an ichidan verb after an adverb of adverb.at-last
+// in its clause, which may be the potential). ApplyPacks applies the sense, name, polarity and tense rows.
+const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voice& v, bool atLast);
+void ApplyPacks(Flusher& f);
 
 // Helpers of the text-path passes. TakeTarget (sense.cpp) selects the candidate of class
 // with target, or writes target over the selected one. SelectLemma (grammar.cpp) selects

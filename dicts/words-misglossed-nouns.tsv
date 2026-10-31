@@ -1,0 +1,35 @@
+#! layer=base
+# 뜻을 잘못 옮긴 기본 사전 명사와 잘못 나뉘던 한자 합성어의 바른 한국어
+key	ko	pos	sem	gram	note	id
+建売	분양 주택	N110	UAq	Hd	// LEX-3340	misglossed-nouns:1
+建売住宅	분양 주택	N110	UAq		// LEX-3340	misglossed-nouns:2
+建売物件	분양 주택	N110			// LEX-3340	misglossed-nouns:3
+弁舌	언변	N110	UTs	Hd	// LEX-3340	misglossed-nouns:4
+弓師	궁수	N110	VHn		// LEX-3340	misglossed-nouns:5
+彩り	색감	N110		Hd	// LEX-3340	misglossed-nouns:6
+後書	후기	N110	VSw		// LEX-3340	misglossed-nouns:7
+後書き	후기	I110	VSw		// LEX-3340	misglossed-nouns:8
+あとがき	후기	I110			// LEX-3340	misglossed-nouns:9
+後片づけ	뒷정리	I110	VCk		// LEX-3340	misglossed-nouns:10
+徒労感	허무감	N110			// LEX-3340	misglossed-nouns:11
+念写	염사	N110		Hd	// LEX-3340	misglossed-nouns:12
+思い遣り	배려	I110			// LEX-3340	misglossed-nouns:13
+急患	응급 환자	N110			// LEX-3340	misglossed-nouns:14
+恭順	순종	N110			// LEX-3340	misglossed-nouns:15
+情報開示	정보 공개	N110			// LEX-3340	misglossed-nouns:16
+感じ方	느끼는 방식	N110			// LEX-3340	misglossed-nouns:17
+慇懃	정중%A1@	G8L0			// LEX-3340	misglossed-nouns:18
+慇懃	정중	N110			// LEX-3340	misglossed-nouns:19
+拠りどころ	버팀목	N110	VPl		// LEX-3340	misglossed-nouns:20
+拠り所	버팀목	N110			// LEX-3340	misglossed-nouns:21
+手篭め	겁탈	N110			// LEX-3340	misglossed-nouns:22
+手籠め	겁탈	N110			// LEX-3340	misglossed-nouns:23
+手篭めに	겁탈&AV@	M4U9			// LEX-3340	misglossed-nouns:24
+手籠めに	겁탈&AV@	M4U9			// LEX-3340	misglossed-nouns:25
+手篭めにされ	겁탈당&AV@	M427			// LEX-3340	misglossed-nouns:26
+手籠めにされ	겁탈당&AV@	M427			// LEX-3340	misglossed-nouns:27
+さらに一歩	한 걸음 더	E110			// LEX-3340	misglossed-nouns:28
+御状態	상태	N110			// LEX-3341	misglossed-nouns:29
+技術家庭科	기술가정과	N110			// LEX-3341	misglossed-nouns:30
+肉悦	육체의 쾌락	N110			// LEX-3341	misglossed-nouns:31
+強火ファン	열성 팬	N110			// LEX-3341	misglossed-nouns:32

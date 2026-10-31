@@ -859,6 +859,8 @@
 有無を言わせない	거부할 수 없다	adj
 気付いたら	정신을 차려 보니	adv
 気がついたら	정신을 차려 보니	adv
+気が付いたら	정신을 차려 보니	adv
+気づいたら	정신을 차려 보니	adv
 誰もが	누구나	phrase
 全ては	모든 것은	phrase
 次の瞬間	다음 순간	phrase
@@ -1470,3 +1472,67 @@
 突然の	갑작스러운	phrase
 なぞる	더듬다	v5
 秘所	은밀한 곳	n
+// LEX-127 おかまいなく said on its own: 신경 쓰지 마세요 (人目もおかまいなく 상관없이 stays).
+おかまいなく	신경 쓰지 마세요	intj	final
+お構いなく	신경 쓰지 마세요	intj	final
+
+
+// LEX-151: set collocations read as the Korean collocation of the same use.
+事を運ぶ	일을 진행하다	v5
+ことを運ぶ	일을 진행하다	v5
+足を進める	발걸음을 옮기다	v1
+足をすすめる	발걸음을 옮기다	v1
+時を掛ける	시간을 들이다	v1:규칙
+時をかける	시간을 들이다	v1:규칙
+苦言を呈する	쓴소리를 하다	v
+苦言を呈される	쓴소리를 듣다	v1
+名を冠する	이름을 따다	v
+ダメ出しを食らう	지적을 받다	v5
+駄目出しを食らう	지적을 받다	v5
+嫁に行く	시집가다	v5
+嫁にいく	시집가다	v5
+ほとぼりが冷める	잠잠해지다	v1
+年が離れる	나이 차이가 나다	v1
+年が離れている	나이 차이가 나다	v1
+年が離れてる	나이 차이가 나다	v1
+年も離れている	나이 차이도 나다	v1
+年も離れてる	나이 차이도 나다	v1
+声に出す	소리 내다	v5
+ついて回る	따라다니다	v5
+付いて回る	따라다니다	v5
+// LEX-152: verbal nouns whose する verb is no 하다 verb.
+鞍替えする	갈아타다	v
+寄り道する	딴 데 들르다	v
+// LEX-153: modifier collocations.
+浮いた存在	겉도는 존재	n
+思い切りの良さ	과감함	n
+得意不得意	잘하고 못하는 것	n
+目下の者	아랫사람	n
+目下のもの	아랫사람	n
+目上の者	윗사람	n
+目上のもの	윗사람	n
+意匠設計	의장 설계	n
+// LEX-154: 話は別 before a copula or the end says the case at hand does not follow the rule just said; 話は別に before a verb is 따로, 話は別にして and 話は別として set it aside.
+話は別	이야기가 다르다	na
+話は別に	이야기는 따로	phrase
+話は別にして	이야기는 별개로 하고	phrase
+話は別にすれば	이야기는 별개로 하면	phrase
+話は別として	이야기는 별개로 하고	phrase
+
+// GRM-109 どうしたもんか, the spoken どうしたものか, asks what one should do: 어떻게 해야 하나, not the past 어떻게 한 건가.
+どうしたもんか	어떻게 해야 하나	phrase
+どうしたもんかのう	어떻게 해야 할까	phrase
+如何したものか	어떻게 해야 하나	phrase
+如何したもんか	어떻게 해야 하나	phrase
+どうしたもんかな	어떻게 해야 하나	phrase
+どうしたもんかね	어떻게 해야 하나	phrase
+どうしたもんかのぅ	어떻게 해야 할까	phrase
+// LEX-161: words whose Korean was missing or wrong in every context.
+血塗れ	피투성이	n
+関わり合いになる	얽히다	v5
+関わりあいになる	얽히다	v5
+しんど	힘들어	intj	final
+// LEX-162: a verb read by the noun it takes.
+場を取り直す	분위기를 다잡다	v5
+タックルかます	태클을 걸다	v5
+タックルをかます	태클을 걸다	v5

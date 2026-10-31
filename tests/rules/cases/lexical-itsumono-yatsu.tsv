@@ -1,0 +1,11 @@
+# 규칙: LEX-2901
+rule	input	expected	kind	layer
+cx:yatsu-thing:20	『いつものやつ、やろうか？』などと言っている。	has:『늘 그거, 할까?』	fix	rewrites
+cx:yatsu-thing:20	「おい、いつものやつを頼む」	has:늘 그거를 부탁해	fix	rewrites
+cx:yatsu-thing:20	いつものヤツでいいか？	has:늘 그거면	fix	rewrites
+cx:yatsu-thing:20	「てめえは昨日のやつか」	has:어제의 녀석인가	keep	rewrites
+cx:yatsu-thing:20	この前のやつは丸腰だった。	has:지난 번의 녀석은	keep	rewrites
+cx:yatsu-thing:20	いつもの奴らが来た。	has:평소의 놈들이	keep	rewrites
+cx:yatsu-thing:20	いつもの奴が来た。	has:평소의 놈이	keep	rewrites
+cx:yatsu-thing:20	変なやつだな。	이상한 녀석이네.	keep	rewrites
+cx:yatsu-thing:20	いつものやつが来た	lacks:그거	keep	rewrites

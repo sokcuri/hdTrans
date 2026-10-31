@@ -1,0 +1,248 @@
+#include "core/dict/pack.h"
+
+#include <string>
+#include <vector>
+
+#include "hdtest.h"
+
+using namespace hdTrans;
+using namespace hdTrans::dict;
+using hdTrans::userdict::Families;
+
+namespace {
+
+std::string Errors(const std::vector<PackError>& errors) {
+    std::string s;
+    for (const PackError& e : errors) s += (s.empty() ? "" : "\n") + std::to_string(e.line) + ": " + e.message;
+    return s;
+}
+
+// Each row as "id slot key class target atoms pri".
+std::string Show(const PackTable& t) {
+    std::string out;
+    for (const PackRow& r : t.rows) {
+        std::string atoms;
+        for (const PackAtom& a : r.atoms) {
+            atoms += (atoms.empty() ? "" : ",") + a.slot + "=";
+            for (std::size_t i = 0; i < a.values.size(); i++) atoms += (i ? "|" : "") + a.values[i];
+        }
+        out += (out.empty() ? "" : "; ") + r.id + " " + PackSlotName(r.slot) + " " + r.key + " " +
+               (r.classDigit ? std::string(1, r.classDigit) : "-") + " " + r.target + " [" + atoms + "] " +
+               std::to_string(r.pri) + (r.colloc ? " colloc" : "");
+    }
+    return out;
+}
+
+}  // namespace
+
+HD_TEST(dict_pack_rows) {
+    const std::string text =
+        "# comment\n"
+        "id\tslot\tlemma\tpos\tkind\tcond\ttarget\tpri\tprov\n"
+        "a\tsense\t高い/たかい/adj\tadj\tframe\tsubj=@thing\t비싸다\t2\treview\n"
+        "b\t\t本\tn\t\t*\t책\t\t\n"
+        "c\tvoice\t読む\tv5\tframe\tobj=手紙|本 form=ta\tactive\t-1\t\n"
+        "d\tpolarity\t行く\tv5\tframe\tform=neg\t1지 않을래\t\t\n"
+        "e\tsense\t気をつける\tv1\tcolloc\t気をつける|気を付ける\t조심하다\t\t\n";
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("p.tsv", text, nullptr, families, t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_CHECK_EQ(Show(t), std::string("a sense 高 7 비$AC@ [subj=@thing] 2; b sense 本 1 책 [] 0; "
+                                     "c voice 読 4 active [obj=手紙|本,form=ta] -1; d polarity 行 4 1지 않을래 [form=neg] 0; "
+                                     "e sense  - 조심하다 [] 0 colloc"));
+    HD_CHECK(t.byKey.contains("高") && t.byKey.contains("読") && !t.byKey.contains("気をつけ"));
+    HD_CHECK_EQ(PackRowById(t.rows[0].global).id, std::string("a"));
+    {
+        Families own;
+        PackTable v;
+        ParsePackRows("v.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\nv\tvoice\t叱る\tv5\tvoice=passive with=*\tpassive:혼나다\n",
+                      nullptr, own, v, errors);
+        HD_CHECK_EQ(Errors(errors), std::string());
+        HD_REQUIRE(v.rows.size() == 1);
+        HD_CHECK_EQ(v.rows[0].target, std::string("passive"));
+        HD_CHECK(v.rows[0].lexeme.starts_with("혼"));
+        HD_CHECK_EQ(PackRowById(v.rows[0].global).target, std::string("passive:혼나다"));
+    }
+    HD_CHECK_EQ(PackRowById(t.rows[0].global).target, std::string("비싸다"));
+}
+
+HD_TEST(dict_pack_errors) {
+    const struct {
+        const char* row;
+        const char* want;
+    } cases[] = {
+        {"x\twhat\t本\tn\t\t책", "2: slot \"what\", want sense, name, voice, polarity or tense"},
+        {"x\tsense\t本\tq\t\t책", "2: pos \"q\", want n, pn, suf, pref, num, v, vs, vk, v1, v5, adj, na, adv, intj or p"},
+        {"x\tsense\t本\tn\tobj\t책", "2: cue atom \"obj\", want slot=value"},
+        {"x\tsense\t本\tn\tcolour=red\t책", "2: cue slot \"colour\" is not one of the cue DSL"},
+        {"x\tvoice\t読む\tv5\t\tpassiv", "2: voice \"passiv\", want passive, potential, respectful, spontaneous or active"},
+        {"x\ttense\t読む\tv5\t\t었다", "2: ending \"었다\" does not start with a form code (0-9, A, B)"},
+        {"\tsense\t本\tn\t\t책", "2: empty id, lemma, pos or target"},
+        {"x\tvoice\t本\tn\t\tpassive:혼나다", "2: a voice verb (\"passive:혼나다\") needs a verb row and a Korean verb"},
+        {"x\tsense\t本\tn\tform=past\t책", "2: cue value \"past\" of form is not one the host reads"},
+        {"x\tsense\t本\tn\tvoice=passive\t책", "2: a voice= atom is read on voice, polarity and tense rows only"},
+        {"x\tsense\t本\tn\t\t책\nx\tsense\t紙\tn\t\t종이", "3: row id \"x\" is also at p.tsv:2"},
+        {"x\tsense\t本\tn\t\t책\t에게", "2: agent is read on voice rows only"},
+        {"x\tvoice\t読む\tv5\t\tpassive\tby", "2: agent \"by\" is not a Korean particle in Hangul"},
+        {"x\tvoice\t読む\tv5\t\tpassive\t가(이)", "2: agent \"가(이)\" is not a Korean particle in Hangul"},
+        {"x\tvoice\t読む\tv5\t\tpassive\t(이)", "2: agent \"(이)\" is not a Korean particle in Hangul"},
+    };
+    for (const auto& c : cases) {
+        Families families;
+        PackTable t;
+        std::vector<PackError> errors;
+        ParsePackRows("p.tsv", std::string("id\tslot\tlemma\tpos\tcond\ttarget\tagent\n") + c.row, nullptr, families, t, errors);
+        HD_CHECK_EQ(Errors(errors), std::string(c.want));
+    }
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("p.tsv", "id\tlemma\tpos\ttarget\n", nullptr, families, t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string("1: the header has no column cond"));
+}
+
+HD_TEST(dict_pack_agent_final_consonant) {
+    // a leading (이) in the agent particle follows the final consonant of the agent (친구가, 선생님이)
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("a.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\tagent\nx\tvoice\t読む\tv5\t\tpassive\t(이)가\n", nullptr,
+                  families, t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_REQUIRE(t.rows.size() == 1);
+    HD_CHECK_EQ(t.rows[0].agent, std::string("(이)가"));
+}
+
+HD_TEST(dict_pack_classes) {
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackClasses("c.tsv", "class\tparent\tnote\n@entity\t\troot\n@person\t@entity\n@person.kin\t@person\n", t, errors);
+    ParsePackClasses("m.tsv", "lemma\tclasses\n母\t@person.kin\n本\t@thing|@entity\n", t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_CHECK_EQ(t.Depth("@entity"), 1);
+    HD_CHECK_EQ(t.Depth("@person.kin"), 3);
+    HD_CHECK(t.Member("母", "@person.kin") && t.Member("母", "@person") && t.Member("母", "@entity"));
+    HD_CHECK(!t.Member("母", "@thing") && t.Member("本", "@entity") && !t.Member("犬", "@entity"));
+    CheckPackClasses(t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string("0: the class @thing of 本 is not a class"));
+    errors.clear();
+    ParsePackClasses("x.tsv", "key\tvalue\n", t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string("1: the header is neither class, parent nor lemma, classes"));
+}
+
+HD_TEST(dict_pack_open_rows) {
+    // lemma * is every word of the pos and lemma @class every word of a pack class: no key, the class digit of the
+    // pos, listed in open; a target - keeps the slot; final= reads the end of the sentence after the word.
+    const std::string text =
+        "id\tslot\tlemma\tpos\tcond\ttarget\n"
+        "a\tpolarity\t*\tv\tform=neg final=か！|か？\t1지 못해\n"
+        "b\tpolarity\t@still\tv\tform=neg final=か！\t-\n"
+        "c\tpolarity\tいい\tadj\tform=nja final=-|。\t1잖아\n"
+        "d\tsense\t本\tn\t\t-\n";
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("p.tsv", text, nullptr, families, t, errors);
+    ParsePackClasses("c.tsv", "class\tparent\n@still\t\n", t, errors);
+    CheckPackClasses(t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_CHECK_EQ(Show(t), std::string("a polarity  4 1지 못해 [form=neg,final=か！|か？] 0; b polarity  4 - [form=neg,final=か！] 0; "
+                                     "c polarity い 7 1잖아 [form=nja,final=-|。] 0; d sense 本 1 - [] 0"));
+    HD_CHECK(t.open.size() == 1 && t.open[OpenIndex(PackSlot::Polarity, '4')].size() == 2);
+    HD_CHECK(t.rows[1].lemmaClass == "@still" && t.rows[0].lemmaClass.empty());
+    {
+        // a lemma class that no pack-classes file declares is a set of classes.tsv: its members' keys
+        Families own;
+        PackTable u;
+        std::vector<PackError> errs;
+        ParsePackRows("p.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\nk\tpolarity\t@verb.unwilled\tv\t\t-\n", nullptr, own, u, errs);
+        CheckPackClasses(u, errs);
+        HD_CHECK_EQ(Errors(errs), std::string());
+        HD_REQUIRE(u.rows.size() == 1);
+        HD_CHECK(u.rows[0].lemmaKeys.contains("気づ") && u.rows[0].lemmaKeys.contains("ある"));
+    }
+    const struct {
+        const char* row;
+        const char* want;
+    } bad[] = {
+        {"x\tsense\t*\tn\t\t책", "2: a sense or name row names its lemma (lemma * and @class write endings, voices or -)"},
+        {"x\tpolarity\t@none\tv\t\t-", "2: the lemma class @none is not a class of the pack-classes files nor of classes.tsv"},
+        {"x\tpolarity\t*\tv5\t\t-", "2: pos \"v5\" of lemma * or @class, want v (not v1, v5), adj, na, n, p, adv or intj"},
+    };
+    for (const auto& c : bad) {
+        Families own;
+        PackTable u;
+        std::vector<PackError> errs;
+        ParsePackRows("p.tsv", std::string("id\tslot\tlemma\tpos\tcond\ttarget\n") + c.row, nullptr, own, u, errs);
+        CheckPackClasses(u, errs);
+        HD_CHECK_EQ(Errors(errs), std::string(c.want));
+    }
+}
+
+HD_TEST(dict_pack_collocs) {
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("c.tsv",
+                  "id\tlemma\tpos\tkind\tcond\ttarget\n"
+                  "a\t元\tn\tcolloc\t{X:@person}を元に戻す\t{X}을 원래대로 되돌리다\n"
+                  "b\t一体\tn\tcolloc\t{X}の一体\t{X} 하나\n"
+                  "c\t良い\tadj\tcolloc\t別に良い|別にいい\t괜찮다\n",
+                  nullptr, families, t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_REQUIRE(t.collocs.size() == 3);
+    const Colloc& a = t.collocs[0];
+    HD_CHECK(a.slot && a.befores.size() == 1 && a.befores[0].empty());
+    HD_CHECK_EQ(a.after, std::string("を元に戻す"));
+    HD_CHECK_EQ(a.slotClass, std::string("@person"));
+    HD_CHECK_EQ(a.particle, std::string("(을)를"));
+    HD_CHECK_EQ(a.headRaw, std::string("원래대로 되돌리다"));
+    HD_CHECK(!a.headVerb.empty());
+    HD_CHECK(t.collocs[1].spaced && t.collocs[1].particle.empty());
+    HD_CHECK_EQ(t.collocs[1].headRaw, std::string("하나"));
+    HD_CHECK(!t.collocs[2].slot && t.collocs[2].befores.size() == 2);
+    {
+        // a colloc row's cue atoms (column cue) are read for its last word
+        Families own;
+        PackTable u;
+        std::vector<PackError> e;
+        ParsePackRows("c.tsv", "id\tlemma\tpos\tkind\tcond\tcue\ttarget\nq\t良い\tadj\tcolloc\t別にいい\thead=-\t괜찮다\n",
+                      nullptr, own, u, e);
+        HD_CHECK_EQ(Errors(e), std::string());
+        HD_REQUIRE(u.rows.size() == 1);
+        HD_CHECK(u.rows[0].atoms.size() == 1 && u.rows[0].atoms[0].slot == "head");
+    }
+    const struct {
+        const char* row;
+        const char* want;
+    } cases[] = {
+        {"x\t元\tn\tcolloc\t{X}の元\t곁", "2: the target \"곁\" has no {X}"},
+        {"x\t元\tn\tcolloc\t{Y}の元\t{X} 곁", "2: a slot is {X} or {X:@class}, not \"{Y}\""},
+        {"x\t元\tn\tcolloc\t{X}の元|{X}のもと\t{X} 곁", "2: a pattern with a slot has one spelling"},
+        {"x\t元\tn\tcolloc\t元に\t{X} 곁", "2: the target \"{X} 곁\" has {X} but the pattern has no slot"},
+        {"x\t彼\tn\tcolloc\t彼の{X}\t그의 {X}", "2: a colloc pattern ends with words after its slot, not with the slot"},
+        {"x\t元\tn\tcolloc\t{X}を元に戻す\t다시 {X}을 되돌리다", "2: the target \"다시 {X}을 되돌리다\" has Korean before {X} but the pattern starts with the slot"},
+    };
+    for (const auto& c : cases) {
+        Families own;
+        PackTable v;
+        std::vector<PackError> e;
+        ParsePackRows("c.tsv", std::string("id\tlemma\tpos\tkind\tcond\ttarget\n") + c.row, nullptr, own, v, e);
+        HD_CHECK_EQ(Errors(e), std::string(c.want));
+    }
+    {
+        Families own;
+        PackTable v;
+        std::vector<PackError> e;
+        ParsePackRows("c.tsv", "id\tlemma\tpos\tkind\tcond\ttarget\nx\t振る\tv5\tcolloc\t首を縦に振る\t고개를 끄덕이다\n",
+                      nullptr, own, v, e);
+        HD_CHECK(e.size() == 1 && e[0].message.ends_with("name the class (pos POS:class)"));
+        e.clear();
+        PackTable w;
+        ParsePackRows("c.tsv", "id\tlemma\tpos\tkind\tcond\ttarget\nx\t振る\tv5:규칙\tcolloc\t首を縦に振る\t고개를 끄덕이다\n",
+                      nullptr, own, w, e);
+        HD_CHECK_EQ(Errors(e), std::string());
+    }
+}

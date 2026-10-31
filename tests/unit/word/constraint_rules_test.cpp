@@ -27,7 +27,7 @@ const dict::Snapshot* Dictionary() {
          "翼\t츠바사\tN110\tQPN\tWb\tGN\t7\n"
          "妹\t여동생\tN110\tVHn\t\tGN\t8\n"
          "妹\t이모토\tN110\tQPN\tWb\tGN\t9\n"
-         "続\t계속되&AA@\tM418\t\t\tGN\t10\n"
+         "続\t계속되&AA@\tM411\t\t\tGN\t10\n"
          "続\t츠즈키\tN130\tQPN\tWa\tGN\t11\n"
          "太郎\t타로\tN130\tQPN\tWb\tGN\t12\n"
          "太郎\t타로\tN130\tQCTVPl\t\tGN\t13\n"
@@ -58,6 +58,7 @@ const dict::Snapshot* Dictionary() {
          "こう\t이렇게\tN311\t\t\tGN\t36\n"
          "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"
          "一人立ち\t독립\tI110\t\tHd\tGN\t38\n"
+         "気付いたら\t정신을 차려 보니\tE300\t\t\tGN\t190\n"
          "一人\t한 사람\tN110\t\t\tGN\t41\n"
          "君と\t군과\tN110\tQPN\t\tGN\t42\n"
          "君と\t너와\tN110\t\t\tGN\t43\n"
@@ -110,6 +111,9 @@ const dict::Snapshot* Dictionary() {
          "した\t아래\tN110\t\t\tGN\t112\n"
          "くらい\t정도\tP200\t\t\tGN\t113\n"
          "たんと\t듬뿍\tE300\t\t\tGN\t114\n"
+         "しかし\t하지만\tE331\t\t\tGN\t125\n"
+         "気にするな\t신경 쓰지 마\tE320\t\t\tGN\t126\n"
+         "気\t기분\tN110\t\t\tGN\t127\n"
          "た\t밭\tN110\t\t\tGN\t115\n"
          "ち\t피\tN110\t\t\tGN\t121\n"
          "ちゃう\t아니야\tN110\t\t\tGN\t116\n"
@@ -119,7 +123,9 @@ const dict::Snapshot* Dictionary() {
          "だ\t(이)다\tP200\t\t\tGN\t122\n"
          "だ\t만&AJ@\tM4U1\t\t\tGN\t123\n"
          "だけ\t만\tP211\t\t\tGN\t124\n"
-         "バレ\t들&AA@\tM417\t\t\tGN\t120\n"},
+         "バレ\t들&AA@\tM417\t\t\tGN\t120\n"
+         "仁\t인\tN110\tXXX\tOn\tGN\t125\n"
+         "仁\t진\tN130\tVHnQPN\tWb\tGN\t126\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -174,7 +180,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{49});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{52});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -228,7 +234,9 @@ HD_TEST(constraint_honorific_hiragana) {
 // when it has one and no person sense. A verb as long, a person noun, a word without a name
 // sense, a name reading that is a Korean word of the word (태양, 정보제공자), a word after
 // お and a word inside a kanji run stay. An adjective stem blocks no name before くん and a
-// particle (碧くんが), only before its own ending (碧くない).
+// particle (碧くんが), only before its own ending (碧くない). A verb stem blocks only where the
+// honorific's kana conjugate it (続くんだ; not 続ちゃん), and a name row that also codes a person
+// (VHnQPN) is the name sense, no person noun (仁くん).
 HD_TEST(constraint_honorific_kanji) {
     CheckCases({
         {"翼くんが", "翼くんが", "翼", "츠바사!"},
@@ -247,6 +255,9 @@ HD_TEST(constraint_honorific_kanji) {
         {"翼が", "翼が", "翼", "날개 츠바사"},
         {"碧くんが", "碧くんが", "碧", "아오이!"},
         {"碧くない", "碧くない", "碧", "$C2@ 아오이"},
+        {"碧さんが", "碧さんが", "碧", "아오이!"},
+        {"続ちゃんが", "続ちゃんが", "続", "츠즈키!"},
+        {"仁くんが", "仁くんが", "仁", "진!"},
     });
 }
 
@@ -409,6 +420,44 @@ HD_TEST(constraint_tanto_after_tsu) {
         {"行ったんと", "たんと", "たんと", ""},
         {"ご飯をたんと", "たんと", "たんと", "듬뿍"},
         {"さあ、たんと", "たんと", "たんと", "듬뿍"},
+    });
+}
+
+// しかし right after a word and before a negative is しか and the negative of する (予感しかしない,
+// 味しかしません); after a pause, or before anything but a negative, it is the conjunction.
+HD_TEST(constraint_shika_before_negative) {
+    CheckCases({
+        {"予感しかしない", "しかしない", "しかし", ""},
+        {"味しかしません", "しかしません", "しかし", ""},
+        {"方法しかしなかった", "しかしなかった", "しかし", ""},
+        {"いや、しかしなあ", "しかしなあ", "しかし", "하지만"},
+        {"しかし、ない", "しかし、ない", "しかし", "하지만"},
+        {"だがしかし", "しかし", "しかし", "하지만"},
+        {"まあしかしねえ", "しかしねえ", "しかし", "하지만"},
+        {"まあしかしずいぶん", "しかしずいぶん", "しかし", "하지만"},
+        {"まあしかしぬるいな", "しかしぬるいな", "しかし", "하지만"},
+    });
+}
+
+// A word in たら before しい, しく or しかっ leaves its ら to らしい (気付いたらしい: 気付いた + らしい).
+HD_TEST(constraint_tara_before_shii) {
+    CheckCases({
+        {"気付いたらしい", "気付いたらしい", "気付いたら", ""},
+        {"気付いたらしく", "気付いたらしく", "気付いたら", ""},
+        {"気付いたら朝", "気付いたら朝", "気付いたら", "정신을 차려 보니"},
+        {"気付いたらすぐ", "気付いたらすぐ", "気付いたら", "정신을 차려 보니"},
+        {"気付いたらしき", "気付いたらしき", "気付いたら", ""},
+        {"気付いたらしきりに", "気付いたらしきりに", "気付いたら", "정신을 차려 보니"},
+        {"気付いたらしきたり", "気付いたらしきたり", "気付いたら", "정신을 차려 보니"},
+    });
+}
+
+// A word in るな before ら is a verb with the なら of a condition (気にするなら), not the prohibition.
+HD_TEST(constraint_runa_before_ra) {
+    CheckCases({
+        {"気にするなら", "気にするなら", "気にするな", ""},
+        {"気にするな", "気にするな", "気にするな", "신경 쓰지 마"},
+        {"気にするなよ", "気にするなよ", "気にするな", "신경 쓰지 마"},
     });
 }
 

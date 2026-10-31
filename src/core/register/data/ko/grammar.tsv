@@ -1,0 +1,41 @@
+#! grammar
+# The Korean words and endings G inserts for IR features (the C++ code names them, the strings live here).
+name	value	note
+aux.prog	있다	aspect=prog: -고 있다
+conn.prog	-고
+aux.result	있다	aspect=result: -어 있다
+aux.compl	버리다	aspect=compl: -어 버리다
+aux.dir-come	오다	aspect=dir-come: -어 오다
+aux.dir-go	가다	aspect=dir-go: -어 가다
+aux.try	보다	aspect=try: -어 보다
+aux.give	주다	aspect=give: -어 주다
+conn.aux	-어	the connective before an auxiliary
+aux.prog.hon	계시다	-고 있다 with -시-: -고 계시다
+neg.an	안	neg=an
+neg.mot	못	neg=mot
+aux.neg	않다	neg=ji-anh
+aux.neg-mot	못하다	neg=ji-mot
+conn.neg	-지	before 않다, 못하다
+aux.prohib	말다	neg=ji-ma: -지 말다
+family.jima	jima	neg=ji-ma: the -지 마 endings
+nom.geot	것	ctype=nom:geot
+conn.default	-고	a connective without rel or eomi
+final.fallback	다	no ending row
+pre.hon	-시-
+pre.past	-었-
+pre.gess	-겠-
+lemma.cop	이다
+lemma.negcop	아니다
+pot.noun	수	potential: -ㄹ 수 있다
+pot.exist	있다
+pot.neg	없다	potential with negation: -ㄹ 수 없다
+voice.aux	지다	passive or spontaneous: -어지다
+voice.ha	하다	passive of a 하다 verb: 사용하다 → 사용되다
+voice.doe	되다
+caus.ha	시키다	causative of a 하다 verb: 공부하다 → 공부시키다
+caus.aux	하다	causative: -게 하다
+conn.caus	-게
+lit.ends	다요까죠	last syllables of a word that the word stage wrote literally and the retrofit reads as a predicate
+mixed.hapsyo	니다|니까	words the retrofit could not read that carry 합쇼체; the line then keeps the word stage's levels
+mixed.haeyo	요|죠	same for 해요체
+mixed.word	어요|아요|에요|예요|해요|세요|까요|네요|데요|군요|래요|게요|나요|가요|지요|죠	해요체 ends of a Hangul word the reader kept whole (not 필요, 중요)

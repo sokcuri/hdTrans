@@ -1,0 +1,22 @@
+# 규칙: GRM-171
+rule	input	expected	kind	layer
+cx:lc2e-nonichigai:10	探っているのに違いない。	has:있는 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:10	を持っているのに違いない。	has:있는 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:10	審査をされているのに違いない	has:있는 것이 틀림없다	fix	rewrites
+cx:lc2e-nonichigai:10	て、私に怒ってくるのに違いない。	has:오는 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:10	彼女もまた病んでいるのに違いないのだ。	has:있는 것이 틀림없는	fix	rewrites
+cx:lc2e-nonichigai:10	奴らは、俺を嘲笑しているのに違いない。	has:있는 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:10	スキル『絶望』の力によるものに違いない。	!rule:cx:lc2e-nonichigai:10	keep	rewrites
+cx:lc2e-nonichigai:10	本当は優しい人に違いない。	!rule:cx:lc2e-nonichigai:10	keep	rewrites
+cx:lc2e-nonichigai:20	道を間違えたのに違いない！	has:잘못한 것이 틀림없어!	fix	rewrites
+cx:lc2e-nonichigai:20	恐らくはあったのに違いない。	has:있던 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:20	それが幸いしたのに違いない。	has:한 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:20	これはモイナがやったのに違いない。	has:한 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:20	昔みたいに抜け出してきたのに違いない。	has:나온 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:20	よほどこの道具が気に入ったのに違いない。	has:든 것이 틀림없다.	fix	rewrites
+cx:lc2e-nonichigai:20	奴の能力は物を操るものに違いない。	!rule:cx:lc2e-nonichigai:20	keep	rewrites
+cx:lc2e-nonichigai:20	いやきっと別人に違いない。	!rule:cx:lc2e-nonichigai:20	keep	rewrites
+cx:lc2e-nonichigai:30	（きっと良からぬことを思ったのに違いないわ）	has:생각한 것이 틀림없어	fix	rewrites
+cx:lc2e-nonichigai:30	夢の中で見たできごとを現実だと思ったのに違いないわん」	has:생각한 것이 틀림없어	fix	rewrites
+cx:lc2e-nonichigai:30	きっと有名なブランドのものに違いない。	!rule:cx:lc2e-nonichigai:30	keep	rewrites
+cx:lc2e-nonichigai:30	とても美しくて強いものに違いない。	!rule:cx:lc2e-nonichigai:30	keep	rewrites

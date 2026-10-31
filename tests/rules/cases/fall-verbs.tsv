@@ -1,0 +1,168 @@
+# 규칙: LEX-501, LEX-502, LEX-503, LEX-504, LEX-505, LEX-506, LEX-507, LEX-508, LEX-509, LEX-510, LEX-511, LEX-512, LEX-513, LEX-514, LEX-515, LEX-516, LEX-517, LEX-518, LEX-519, LEX-520, LEX-521, LEX-522, LEX-523
+rule	input	expected	kind	layer
+pack:fall-verbs:1	部長の叫び声が、天空へと伸びる。	has:퍼진다	fix	packs
+pack:fall-verbs:12	すると侑司の背後から、追いすがる触手のように、切羽詰まった声が伸びてきた。	has:뻗어 왔다	fix	packs
+pack:fall-verbs:1	メキメキと骨格が変わる音がし、爪が鋭く伸び、口から牙が生え出てきた。	has:손톱이 날카롭게 자라	keep	packs
+pack:fall-verbs:1	リンという音が聞こえそうなぐらいに伸びた背筋。	has:펴진 등	keep	packs
+pack:fall-verbs:1	隠していた久助の本音がうんと背伸びをして、触れたければ触れればいいと、容易く手が伸びる。	has:손이 뻗는다	keep	packs
+pack:fall-verbs:2	「婚約がなくなった令嬢も、ここで新しい出会いがあったりな」	has:약혼이 깨진	fix	packs
+pack:fall-verbs:2	王の威厳に満ちた言葉で周囲から人の気配が無くなった。	has:기색이 없어졌다	keep	packs
+pack:fall-verbs:2	呼吸の必要がなくなる。	has:필요가 없어진다	keep	packs
+pack:fall-verbs:2	検閲は中止、というか必要がなくなったわけでそのままアーティファクトの専門家である大瀬博士に引き継ぐことになった。	has:필요가 없어진	keep	packs
+pack:fall-verbs:3	「イケるわよ！　ナスがとろっとろでおいしいわ！　あー、ビールが進む……こくっ、んくっ……ぷはっ！」	has:잘 들어간다	fix	packs
+pack:fall-verbs:3	生ハムをつまみに酒が進む。	has:잘 들어간다	fix	packs
+pack:fall-verbs:4	世間を騒がせた犯人は、警察の勝利のまま捕まった。	has:세상을 떠들썩하게 한	fix	packs
+pack:fall-verbs:4	警察官の不祥事として大いに世間を騒がせた。	has:세상을 떠들썩하게 했다	fix	packs
+pack:fall-verbs:4	海外では連日テロの話題が世間を騒がせているが、ついにこの日本にまで、その手が。	has:세상을 떠들썩하게 하고 있지만	fix	packs
+pack:fall-verbs:5	よく通る声。	has:잘 들리는 목소리	fix	packs
+pack:fall-verbs:5	「礼。着座ー」という級長のよく通る声が教室に響いた。	has:잘 들리는 목소리	fix	packs
+pack:fall-verbs:5	さえない顔に似合わず、はきはきとよく通る声だった。	has:잘 들리는 목소리	fix	packs
+pack:fall-verbs:5	気にせずよく通る声で続ける。	has:잘 들리는 목소리	fix	packs
+pack:fall-verbs:5	さして張り上げていないのにも関わらず弓彦の声はよく通る。	!rule:pack:fall-verbs:5	keep	packs
+lexical:口をパクパクさせる	鳥の手羽先にかじりついていたリリーが、口をパクパクさせた。	has:입을 뻐끔거	fix	lookup
+lexical:口をパクパクさせる	目を見開いて、驚いた様子で口をパクパクさせていた。	has:입을 뻐끔거	fix	lookup
+lexical:口をパクパクさせる	母さんはこちらを見て口をパクパクさせている。	has:입을	keep	lookup
+lexical:口をパクパクさせる	真似してセシルも大きな口をパクパクさせた。	has:큰 입을	keep	lookup
+lexical:口をパクパクさせる	けれどベテラン女官は、口をパクパクさせていた。	has:입을	keep	lookup
+pack:fall-verbs:7	やばい、父さんにこってり絞られる（物理）	has:혼난다	fix	packs
+pack:fall-verbs:7	すぐさま依頼書は残り５枚に絞られた。	has:좁혀졌다	keep	packs
+pack:fall-verbs:7	そのフォームからは、目的地が一点に絞られていることが如実に現れている。	has:좁혀지고	keep	packs
+pack:fall-verbs:7	そして、あっと言う間にトリガーが引き絞られる。	has:당겨진다	keep	packs
+pack:fall-verbs:8	ペニスの先端に、甘い疼きが溜め込まれていく。	has:달콤한 욱신거림	fix	packs
+pack:fall-verbs:8	両手が戒められた状態で受ける甘い刺激。	has:달콤한 자극	fix	packs
+pack:fall-verbs:9	戦いの火蓋が切られる。	has:싸움의 막이 오른다	fix	packs
+pack:fall-verbs:11	チームリーダーを気取った千里が、強気に皆を鼓舞した。	has:자처한	fix	packs
+lexical:こぼれ落ちる	一気に不安になって、無意識に涙がこぼれ落ちる。	has:눈물이 흘러내린다	fix	lookup
+lexical:こぼれ落ちる	白いそれが彼の口の端からこぼれ落ちた。	has:입가에서 흘러내렸다	fix	lookup
+lexical:こぼれ落ちる	王様の瞳から薄らと涙がこぼれ落ちた。	has:눈물이 흘러내렸다	fix	lookup
+lexical:こぼれ落ちる	受け皿へ血が大量にこぼれ落ちる。	has:피가 대량으로 흘러내린다	fix	lookup
+lexical:こぼれ落ちる	閉じた目尻から、すうっと涙があふれてこぼれ落ちる。	has:눈물이 넘쳐	keep	lookup
+lexical:こぼれ落ちる	そして、目の中には光るものがあふれ、こぼれ落ちそうだ。	has:빛나는 것이 넘쳐	keep	lookup
+lexical:伝い落ちる	口に出して呟いた刹那、また涙が伝い落ちた。	has:타고 흘러내렸다	fix	lookup
+lexical:伝い落ちる	香乃の頬に熱いものが伝い落ちる。	has:타고 흘러내린다	fix	lookup
+lexical:伝い落ちる	一粒、また一粒と伝い落ちる。	has:타고 흘러내린다	fix	lookup
+lexical:伝い落ちる	溢れる愛液は最早下着だけでは吸い切れず、太腿にまで伝い落ちてしまっているのだ。	has:넓적다리에까지	keep	lookup
+lexical:伝い落ちる	絶望の喘ぎを放つ早苗の太ももを、ドロリとした液体が伝い落ちる。	has:허벅지를	keep	lookup
+lexical:削げ落ちる	耳たぶも削げ落ちて影も形もない。	has:떨어져 나가	fix	lookup
+lexical:削げ落ちる	その顔から冷静という名の仮面が削げ落ちる。	has:떨어져 나간다	fix	lookup
+lexical:剥がれ落ちる	ドライアドの体がボロボロと剥がれ落ちていく。	has:벗겨져 떨어져 간다	fix	lookup
+lexical:剥がれ落ちる	剥がれ落ちたものは宙を浮き、１つにまとまった。	has:벗겨져 떨어진 것은	fix	lookup
+lexical:剥がれ落ちる	今度はメグロスの鱗が大量に剥がれ落ち、その全てがクロノたちに向かって飛翔する。	has:비늘이 대량으로	keep	lookup
+lexical:剥がれ落ちる	壁面から剥がれ落ちた小石が、パラパラと音を立てて口の中へ飛び込んでくる。	has:벽면에서	keep	lookup
+lexical:剥がれ落ちる	薄布が剥がれ落ち、隠されていた秘宝が暴かれてしまった。	has:숨겨져 있던 비보가	keep	lookup
+lexical:垂れ落ちる	ポタポタと精液が男の腹の上に垂れ落ちる。	has:배 위에 흘러내린다	fix	lookup
+lexical:垂れ落ちる	ぽたぽたと、おしっこが垂れ落ちる。	has:오줌이 흘러내린다	fix	lookup
+lexical:垂れ落ちる	少女の眼尻から涙が垂れ落ちる。	has:눈물이 흘러내린다	fix	lookup
+lexical:垂れ落ちる	握った拳から血が垂れ落ち、震えは収まることを知らない。	has:잡은 주먹에서 피가	keep	lookup
+lexical:垂れ落ちる	ポタポタと精液が男の腹の上に垂れ落ちる。	has:똑똑 정액이	keep	lookup
+lexical:払い落とす	そして、なんの躊躇もなく全てを払い落とした。	has:털어 냈다	fix	lookup
+lexical:払い落とす	拾い上げた巾着袋の煤や埃を払い落とす。	has:털어 낸다	fix	lookup
+lexical:払い落とす	白鞘の振り上げによって生じた風力が空中のおはじきを払い落とした。	has:털어 냈다	fix	lookup
+lexical:払い落とす	砂を足にかけて虫を払い落とす彼女たちを見て、光は肩をすくめた。	has:털어 내는	fix	lookup
+lexical:払い落とす	地図を畳み、テーブルの上に落ちた木の葉を払い落とすと、ステラは膝から土汚れを払うイールに声をかけた。	has:말을 걸었다	keep	lookup
+lexical:払い落とす	砂を足にかけて虫を払い落とす彼女たちを見て、光は肩をすくめた。	has:모래를 다리에	keep	lookup
+lexical:流れ落ちる	岩壁の上から流れ落ちる水。	has:흘러내리는 물	fix	lookup
+lexical:流れ落ちる	両手ですくったお湯が指の間から流れ落ちる。	has:흘러내린다	fix	lookup
+lexical:流れ落ちる	目からは涙が、口からは血の筋が流れ落ちる。	has:흘러내린다	fix	lookup
+lexical:流れ落ちる	同様に流れ落ちて形をなくしていった。	has:흘러내려	fix	lookup
+lexical:流れ落ちる	膝から崩れ落ちる彼の口からは血が流れ落ち、それは確かにラツィルクの死を示していた。	has:무너져 내리는	keep	lookup
+lexical:流れ落ちる	残されたのは流れ落ちる湯の音と、白く煙る湯気と、うっとりと少女を拭う青年だけとなった。	has:뜨거운 물의 소리	keep	lookup
+lexical:流れ落ちる	流れ落ちる汗をぬぐいながら左手でぬぐいながら、はじき飛ばした破片に目をやった。	has:땀을 닦으면서	keep	lookup
+lexical:溢れ出る	長身から溢れ出る陽の気が、神々しい。	has:넘쳐흐르는	fix	lookup
+lexical:溢れ出る	溢れ出る真っ赤な血。	has:넘쳐흐르는 새빨간 피	fix	lookup
+lexical:溢れ出る	ルカ自身もそれを自覚しており、溢れ出る自信が更に魅力をプラスしている。	has:넘쳐흐르는 자신	fix	lookup
+lexical:溢れ出る	どうして男なのにこんなに色気が溢れ出ているのか。	has:넘쳐흐르고 있	fix	lookup
+lexical:溢れ出す	リルの見開いた両目から、大粒の涙が溢れ出した。	has:넘쳐흘렀다	fix	lookup
+lexical:溢れ出す	……っとなま暖かいザーメン混じりの体液が溢れ出した。	has:넘쳐흘렀다	fix	lookup
+lexical:溢れ出す	瞬間的に頭の中が真っ白になり、どっと蜜が溢れ出す。	has:넘쳐흐른다	fix	lookup
+lexical:溢れ出す	瞼と肩口から血が溢れ出し、急速に鼓動が速くなっていくのが分かる。	lacks:넘쳐흐르고 해	keep	lookup
+lexical:溢れ出す	愛液と腸液が止めどなく溢れ出し、体育館までの廊下をびしょびしょに濡らした。	lacks:넘쳐흐르고 해	keep	lookup
+lexical:溢れ出す	まるで彼女の中でずっと凍っていたものが、ようやく雪解けを迎えたように、拭えども拭えども後から溢れ出して止まらない。	lacks:넘쳐흐르고 해	keep	lookup
+lexical:蹴り落とす	それとほぼ同時に、再び木箱の中へと蹴り落とされる。	has:걷어차여 떨어진다	fix	lookup
+lexical:蹴り落とす	「……仕方ねぇなぁ。寝相が悪かったらベッドから蹴り落とすぞ」	has:걷어차 떨어뜨리겠어	fix	lookup
+lexical:蹴り落とす	本当に蹴り落としますよ！」	has:걷어차 떨어뜨려요	fix	lookup
+lexical:蹴り落とす	勢いよく突っ込んできたコウモリを叩き落し、脚に掴まれた短剣を屋根から蹴り落とす。	has:걷어차 떨어뜨린다	fix	lookup
+lexical:蹴り落とす	あたしを蹴り落とすのはご主人さまのおみ足なんだもの。	has:걷어차 떨어뜨리는 것은	fix	lookup
+lexical:蹴り落とす	「途中で悲鳴上げて蹴り落とされたから、未遂だよ。めっちゃ欲求不満」	has:걷어차여 떨어졌으니까	fix	lookup
+lexical:蹴り落とす	「おまえ、自分が生き残るために、誰かがこの世界から蹴り落とされてもいいのか？	has:걷어차여 떨어져도	fix	lookup
+lexical:蹴り落とす	そして穴っぽいのにイキナリ蹴り落とされて、気が付いたら森の中だった事。	has:걷어차여 떨어져,	fix	lookup
+lexical:蹴り落とす	宣言して、父親を絶望の淵へと蹴り落とすことを……。	has:떨어뜨리는 것을	keep	lookup
+lexical:切り落とす	剛の右腕を切り落とす。	has:오른팔을 잘라 낸다	fix	lookup
+lexical:切り落とす	その糸は陽炎達を殺そうと飛んできたが全て切り落とすことに成功した。	has:잘라 내는 것에	fix	lookup
+lexical:切り落とす	タガネの銀の髪の一房を触手が切り落とした。	has:잘라 냈다	fix	lookup
+lexical:切り落とす	一匹の羽を根元から切り落とし、返す刀でもう一匹に首を切り裂く。	has:날개를 밑동으로부터 잘라	keep	lookup
+lexical:漏れ出す	白い冷気も漏れ出している。	has:새어 나오고 있다	fix	lookup
+lexical:漏れ出す	白い冷気も漏れ出している。	lacks:나오고 하고	fix	lookup
+lexical:漏れ出す	魔力が漏れ出しているのか？	has:새어 나오고 있는	fix	lookup
+lexical:漏れ出す	手のひらから暖かな光が漏れ出し、傷を癒す。	lacks:나오고 해	fix	lookup
+lexical:漏れ出る	思わず猫みたいな怯えた声がアンナの口から漏れ出る。	has:새어 나온다	keep	lookup
+lexical:漏れ出る	吐息が漏れ出るくらい激しいキスをしたのち、私の足は開かれてビルの大きくなったそれが私の中に入ってこようとしている。	has:새어 나올 정도로	keep	lookup
+lexical:漏れ出る	漏れ出たおじさんのような声に少し羞恥心が沸き上がるが、とにかく気持ちがいい。	has:새어 나온 아저씨	keep	lookup
+lexical:漏れ出る	白山はぼんやりとそんな空を見上げながら、半分が喉から漏れ出た息のような声で呟いた。	has:새어 나온 숨	keep	lookup
+lexical:舞い落ちる	紙がハラリと俺の足元の床へと舞い落ちる。	has:흩날려 떨어진다	fix	lookup
+lexical:舞い落ちる	淡いピンク色の花びらたちが、大量に舞い落ちた。	has:흩날려 떨어졌다	fix	lookup
+lexical:舞い落ちる	アルトマイヤーの足下にひらりと写真が舞い落ちる。	has:흩날려 떨어진다	fix	lookup
+lexical:舞い落ちる	花びらが舞い落ちる	has:흩날려 떨어진다	keep	lookup
+lexical:舞い落ちる	エグザムは中央の気流渦から脱し、落ち葉が舞い落ちる様な速度で螺旋構造の縁に立とうとした。	has:흩날려 떨어지는	keep	lookup
+pack:fall-verbs:2	「痛みがなくても傷がなくなった事にはなりませんよ」	has:상처가 없어진	keep	packs
+pack:fall-verbs:2	なにせ、すぐ料理が無くなるのだ。	has:요리가 없어진다	keep	packs
+pack:fall-verbs:3	今度は酒が進む」と調味料談義を交え、食事を進めていく	has:술이 잘 들어간다	fix	packs
+pack:fall-verbs:3	今度は酒が進む」と調味料談義を交え、食事を進めていく	has:식사를 진행시켜	keep	packs
+lexical:降り頻る	降り頻る瓦礫を退けるほどの盾を作り出す	has:쏟아지는 잔해	fix	lookup
+pack:fall-verbs:4	最近世の中を騒がせている殺人鬼がいる。	has:세상을 떠들썩하게 하고 있는	fix	packs
+pack:fall-verbs:4	欠陥住宅とかそういう事件で世の中を騒がせた設計事務所も	has:세상을 떠들썩하게 한	fix	packs
+pack:fall-verbs:6	茜さんの声はよく通る。	has:목소리는 잘 들린다	fix	packs
+pack:fall-verbs:6	二階は静かで、母の声はよく通る。	has:목소리는 잘 들린다	fix	packs
+pack:fall-verbs:5	青の声のとおり、敵の全線が一斉にこちらに走ってくる。	has:목소리대로	keep	packs
+pack:fall-verbs:5	怒号が飛び交って声が通らなくなってる。	!rule:pack:fall-verbs:5	keep	packs
+lexical:口をぱくぱくさせる	ナンシー様が真っ赤な顔で口をぱくぱくさせて、殿下が激昂する	has:입을 뻐끔거려	fix	lookup
+pack:fall-verbs:7	お父君の陛下にギリッギリに絞られた挙句、	has:혼난 끝에	fix	packs
+pack:fall-verbs:8	乳首からピリッピリッとくる甘い快感電流に痙攣していた。	has:달콤한 쾌감	fix	packs
+pack:fall-verbs:8	ほのかに甘い香りが彼を包んだ。	has:달콤한 향기	keep	packs
+pack:fall-verbs:8	スズランの甘い香りだ。	!rule:pack:fall-verbs:8	keep	packs
+pack:fall-verbs:9	こうして、戦いの火蓋が切られた。	has:싸움의 막이 올랐다	fix	packs
+pack:fall-verbs:9	海の上を舞台に、決戦の火蓋が切られた。	has:결전의 막이 올랐다	fix	packs
+pack:fall-verbs:9	審判が手を振り下ろし試合の火蓋が切られる。	has:시합의 막이 오른다	fix	packs
+pack:fall-verbs:9	Ａランク指定という未知との戦闘の火蓋が切られる。	has:전투의 막이 오른다	fix	packs
+pack:fall-verbs:9	そして姉妹喧嘩の火蓋が切られた。	has:자매 싸움의 막이	fix	packs
+pack:fall-verbs:10	戦争の火蓋を切ったのが原因だ。	has:전쟁의 포문을 열	fix	packs
+pack:fall-verbs:10	戦いの火蓋を切るべく、背中に問い掛けた。	has:싸움의 포문을 열	fix	packs
+pack:fall-verbs:11	表面上取り繕って紳士を気取っているのか。	has:신사를 자처하고	fix	packs
+pack:fall-verbs:11	松山はあえて正義のヒーローを気取り、好感度を得る。	has:히어로를 자처하	fix	packs
+pack:fall-verbs:11	相手は正義の味方を気取っているようだ。	has:자처하고 있	fix	packs
+pack:fall-verbs:11	悲劇の主人公を気取るのは結構だ。	has:주인공을 자처하는	fix	packs
+lexical:こぼれ落ちる	少女の目から涙がこぼれおちるのが見えた。	has:눈물이 흘러내리는	fix	lookup
+lexical:伝い落ちる	溢れた汁が白い太ももを伝い落ちている。	has:허벅지를 타고 흘러내	fix	lookup
+lexical:伝い落ちる	溢れた汁が白い太ももを伝い落ちている。	lacks:타 떨어져	fix	lookup
+lexical:垂れ落ちる	大粒の汗が流れて廊下に垂れ落ちている。	has:굵은 땀이 흘러 복도에	keep	lookup
+lexical:剥がれ落ちる	鮮やかな藤色の付け爪は、瞬く間に剥がれ落ちた。	has:벗겨져 떨어졌다	fix	lookup
+lexical:剥がれ落ちる	今にも剥がれ落ちそうな紙の表面を指先で撫でた	has:벗겨져 떨어질 것 같은	fix	lookup
+lexical:払い落とす	付いていた草を払い落として首を回した。	has:풀을 털어 내	fix	lookup
+lexical:払い落とす	それを振り払うように大きく足を上げて	has:뿌리치도록	keep	lookup
+lexical:流れ落ちる	膝から崩れ落ちる彼の口からは血が流れ落ち、	has:무너져 내리는	keep	lookup
+lexical:流れ落ちる	ポタポタと頭から血が流れ落ちる。	has:피가 흘러내린다	fix	lookup
+lexical:溢れ出す	瞬間的に頭の中が真っ白になり、どっと蜜が溢れ出す。	lacks:흘러넘치고 낸	fix	lookup
+lexical:溢れ出す	拭えども拭えども後から溢れ出して止まらない。	has:넘쳐흘러 멈추지	fix	lookup
+lexical:切り落とす	私は敵が構えている最中に手刀で手首を切り落とした	has:손목을 잘라 냈다	fix	lookup
+lexical:切り落とす	一匹の羽を根元から切り落とし、返す刀でもう一匹に	lacks:떨어뜨	fix	lookup
+lexical:切り落とす	報償の算定に嘴が必要だと切り落とした後、	has:필요하다고 잘라	keep	lookup
+lexical:漏れ出す	「灯りは物置の扉の隙間から漏れ出したもののようだ」	has:새어 나	keep	lookup
+lexical:漏れ出す	すると獣王から殺気がもれ出す。	has:살기가 새어 나온다	fix	lookup
+lexical:漏れ出る	もれ出る吐息と視線を感じる。	has:새어 나오는 숨	fix	lookup
+lexical:舞い落ちる	満開の桜が新入生を迎え、抱きかかえるように桜が舞い落ちる。	has:흩날려 떨어진다	keep	lookup
+pack:fall-verbs:3	どんどん話が進むな。	has:이야기가 진행되	keep	packs
+pack:fall-verbs:4	皆を騒がせるつもりはない。	!rule:pack:fall-verbs:4	keep	packs
+pack:fall-verbs:7	「親父に絞られたか？」	has:혼났나	keep	packs
+lexical:降り頻る	降り頻る雨の中を駆ける。	has:쏟아지는 빗속	fix	lookup
+lexical:降り頻る	降りしきる雪の中、その灯りは幻想的に滲む。	has:쏟아지는 눈	keep	lookup
+pack:fall-verbs:13	縁談がなくなった。	has:혼담이 없어졌다	keep	packs
+pack:fall-verbs:9	教官の合図で火蓋が切られる。	has:신호로 막이 오른다	keep	packs
+pack:fall-verbs:11	変わらない気取った口調。	!rule:pack:fall-verbs:11	keep	packs
+pack:fall-verbs:11	気取った態度で、	!rule:pack:fall-verbs:11	keep	packs
+pack:fall-verbs:12	澄んだ声が伸びてくる。	has:맑은 목소리가 뻗어 온다	fix	packs
+lexical:払い落とす	地図を畳み、テーブルの上に落ちた木の葉を払い落とすと、	has:나뭇잎을 털어 내	fix	lookup
+lexical:払い落とす	ステラは膝から土汚れを払うイールに声をかけた。	has:말을 걸었다	keep	lookup
+lexical:削げ落ちる	鱗がごっそり削げ落ちる	has:비늘이 몽땅 떨어져 나간다	fix	lookup
+lexical:削げ落ちる	削げ落ちたもの	has:떨어져 나간 것	fix	lookup
+lexical:転げ落ちる	悪魔の翼が削げ落ち、ふたつ腕を振れば頭が転げ落ちた。	has:날개가 떨어져 나가	fix	lookup
+lexical:降り頻る	降り頻る雪は冷たく、	has:쏟아지는 눈은	fix	lookup

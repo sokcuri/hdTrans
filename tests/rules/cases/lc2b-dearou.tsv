@@ -1,0 +1,28 @@
+# 규칙: GRM-126
+rule	input	expected	kind	layer
+cx:lc2b-dearou:10	平民は間違いなく通い婚であろうと思われる。	has:결혼일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	恐らくは夕べ夜這いに来た団長の事であろうと推察。	has:일일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	普通なら冗談であろうと思うし、あり得ない。	has:농담일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	デマであろうと思ったが	has:유언비어일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	おとなしい感じの女性であろうと考察した。	has:여성일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	その低さから男性であろうと推測できる。	has:남성일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	即死であろうと思われた。	has:즉사일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	指示書であろうと思われた。	has:지시서일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	屋内であろうと思われる光景。	has:옥내일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	これは明晰夢であろうと思考する。	has:자각몽일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	今度こそは本物であろうと確信する。	has:진짜일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	彼の全力であろうと思われる力加減で。	has:전력일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	さぞかし悪党の顔であろうと思うモンでした。	has:얼굴일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	例え如何なる存在であろうとも。	!rule:cx:lc2b-dearou:10	keep	rewrites
+cx:lc2b-dearou:10	どんな聖職者であろうとも	!rule:cx:lc2b-dearou:10	keep	rewrites
+cx:lc2b-dearou:10	「足りぬであろうと思ってだな」	!rule:cx:lc2b-dearou:10	keep	rewrites
+cx:lc2b-dearou:10	たとえ軽い罪であろうと、採集的には死ぬが。	!rule:cx:lc2b-dearou:10	keep	rewrites
+cx:lc2b-dearou:10	どんな敵であろうと、彼がいれば失敗はない。	!rule:cx:lc2b-dearou:10	keep	rewrites
+cx:lc2b-dearou:20	報告は正確であろうと思われた。	has:정확할 것이라고	fix	rewrites
+cx:lc2b-dearou:10	当然の結果であろうと思われた。	has:결과일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	それは先導する冥府の王であろうと思われる。	has:왕일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	当然、その方が本人のためであろうと思われる。	has:위해서일 것이라고	fix	rewrites
+cx:lc2b-dearou:10	皇帝の森と呼ばれる場所であろうと思われた。	has:장소일 것이라고	fix	rewrites
+cx:lc2b-dearou:20	簡単な料理ではあるが、この腕ならヒスイに料理を任せて大丈夫であろうと確信した。	has:괜찮을 것이라고	fix	rewrites
+cx:lc2b-dearou:20	どんな敵であろうと、彼がいれば失敗はない。	!rule:cx:lc2b-dearou:20	keep	rewrites
+cx:lc2b-dearou:20	例え如何なる存在であろうとも。	!rule:cx:lc2b-dearou:20	keep	rewrites

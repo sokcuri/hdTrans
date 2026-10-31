@@ -1,0 +1,57 @@
+# 규칙: GRM-86
+rule	input	expected	kind	layer
+cx:lc-quote-bracket:5	本文には『うちに山ほどあるから好きなだけ持っていけ。明後日でいいか？』とあった。	has:』라고 적혀 있었다	fix	rewrites
+cx:lc-quote-bracket:5	「資料には『食品を多角的に研究し、豊かで安全な食文化の創造をめざす』……とありましたが……」	has:라고 적혀 있었습니다	fix	rewrites
+cx:lc-quote-bracket:7	ネームプレートには『Ｕｒｅｓｈｉｎｏ』とある。	has:』라고 적혀 있다	fix	rewrites
+cx:lc-quote-bracket:7	「中華と言えば、昔、『なんちゅーか、ほんちゅーか』ってあったわねぇ……」	!rule:cx:lc-quote-bracket:7	keep	rewrites
+cx:lc-quote-bracket:10	皆が『お？』と首をかしげる。	has:』라고 고개를	fix	rewrites
+cx:lc-quote-bracket:10	『臣下に的確な叱責が出来る僕はすごいだろう』と本気で言うことも珍しくない。	has:』라고 진심으로	fix	rewrites
+cx:lc-quote-bracket:10	元々は平民のため『侯爵家を乗っ取った平民』と罵られる事が日常。	has:』이라고 매도당하는	fix	rewrites
+cx:lc-quote-bracket:10	『彼女は男友達みたいなものだから』と寝言を言って婚約者をないがしろにした男。	has:』라고 잠꼬대를	fix	rewrites
+cx:lc-quote-bracket:10	生徒会との全面戦争という記事を見て、『いざ鎌倉』と駆けつけてきてくれたわけか。	has:』라고 달려와	fix	rewrites
+cx:lc-quote-bracket:10	もう一度見てみても、間違いなく末尾に『６５点』と添えられている。	has:』이라고 더해져	fix	rewrites
+cx:lc-quote-bracket:10	通りに出てすぐのところに、『Oceans』と掲げられたお店があった。	has:』라고 내걸어진	fix	rewrites
+cx:lc-quote-bracket:10	「あの少女は『シンダリオン』と名乗りました」	has:』이라고 자칭했습니다	fix	rewrites
+cx:lc-quote-bracket:10	「わかってるわ、液晶に『ペコジマ』と出ていたから」	has:』라고 나와	fix	rewrites
+cx:lc-quote-bracket:10	笑顔の女性に『お願いします』とやられると、けっこう効きます	has:』라고 당하면	fix	rewrites
+cx:lc-quote-bracket:10	『住吉家』と彫られた墓石が目に入った。	has:』라고 조각된	fix	rewrites
+cx:lc-quote-bracket:10	まず、『待て』と声をかけてベビーヘキサが反応を見せたこと。	has:』라고 말을 걸어	fix	rewrites
+cx:lc-quote-bracket:10	怪談における『友達から聞いた話』なんて、『昔々あるところに』と同じくらい意味のない、ただの導入でしかない。	!rule:cx:lc-quote-bracket:10	keep	rewrites
+cx:lc-quote-bracket:10	『男友達みたいな女』と浮気してた奴と、政略の婚約者に『おまえを愛することはない』と言って愛人と暮らそうとしてた奴か。	has:』와 바람피던	keep	rewrites
+cx:lc-quote-bracket:10	「うん、確かに今は３時で、『さん』と『じ』が入っているでしょ？」	!rule:cx:lc-quote-bracket:10	keep	rewrites
+cx:lc-quote-bracket:10	「アフタヌーン『大島ロール』とイブニング『大島ロール』です」	!rule:cx:lc-quote-bracket:10	keep	rewrites
+cx:lc-quote-bracket:10	召喚されたと気付いて、スバルが最初に行ったのが『八百屋？』との交渉だった。	!rule:cx:lc-quote-bracket:10	keep	rewrites
+cx:lc-quote-bracket:20	このハーモニカは『ＫＡＮＡ』って人の愛用品で	has:』라는 사람의	fix	rewrites
+cx:lc-quote-bracket:20	「それで、ひとつ思ったんだけど、『あげぼた』って名前の由来はなにかしら？」	has:』라는 이름의	fix	rewrites
+cx:lc-quote-bracket:20	アールは『めずらしくもない』って顔だ。	has:』라는 얼굴이다	fix	rewrites
+cx:lc-quote-bracket:20	「ラピスにしよう。うん。ラテン語で“石”って意味だ。」	has:”이라는 의미	fix	rewrites
+cx:lc-quote-bracket:20	「『マニフェスト』って単語と、『東雲』って名字を聞けば、だいたいわからない？」	has:』라는 단어와	fix	rewrites
+cx:lc-quote-bracket:20	たしかに『扇橋香奈』って表札が出ている。	has:』라는 명패가	fix	rewrites
+cx:lc-quote-bracket:20	『あんたのせいで』ってオーラがにじんでた。	has:』라는 아우라가	fix	rewrites
+cx:lc-quote-bracket:20	全然、『よし』って気分じゃない。	has:』라는 기분이	fix	rewrites
+cx:lc-quote-bracket:20	古代の壁画にも“最近の若者は何を考えているかわからない”って愚痴が描かれていた	has:”라는 푸념이	fix	rewrites
+cx:lc-quote-bracket:20	そういえば｢唐志現報霊異記｣って本に不思議なことばかりする娘のことが書いてあった	has:｣라는 책에	fix	rewrites
+cx:lc-quote-bracket:20	「え？『本』って何？」	!rule:cx:lc-quote-bracket:20	keep	rewrites
+cx:lc-quote-bracket:20	そもそも、架子の言う”電波”ってなんのことだ……？	!rule:cx:lc-quote-bracket:20	keep	rewrites
+cx:lc-quote-bracket:20	「『ゴールデンハンター』ってさ、今何巻まで出てるの？」	!rule:cx:lc-quote-bracket:20	keep	rewrites
+cx:lc-quote-bracket:20	いや、「他人」ってほど遠くないか。	!rule:cx:lc-quote-bracket:20	keep	rewrites
+cx:lc-quote-bracket:20	うちら、ただでさえ“トリガーが軽い”って上から目を付けられてるのよ	!rule:cx:lc-quote-bracket:20	keep	rewrites
+cx:lc-quote-bracket:30	マイケル様なんて入学してすぐ、“肩が当たった”って因縁付けて決闘を申し込んで	has:”이라고 시비를	fix	rewrites
+cx:lc-quote-bracket:30	「うちに来たら開口一番、『お紅茶ある！？』って飛び込んできてたもの」	has:』라고 뛰어들어	fix	rewrites
+cx:lc-quote-bracket:30	「でも、夢の中の人間に、『これは夢ですか』って聞かれても困っちゃうなぁ」	has:』라고 물어도	fix	rewrites
+cx:lc-quote-bracket:30	「ウチの署には代々、『風見とその関係者には関わるな』って厳しく言われていてな……」	has:』라고 엄격하게	fix	rewrites
+cx:lc-quote-bracket:30	「『人を傷つけてはいけません』って習ったって、俺はずっと傷つけられてきてるし」	has:』라고 배워도	fix	rewrites
+cx:lc-quote-bracket:30	「妹？　それは末っ子がお母さんに“妹がほしい！”っておねだりするあれ？」	has:”라고 조르기	fix	rewrites
+cx:lc-quote-bracket:30	「うん、サチが掃除してるの見かけて『あたしも手伝う』って声かけたんだけど……」	has:』라고 말을 걸었는데	fix	rewrites
+cx:lc-quote-bracket:30	｢俺が 必ず借金返すから｣って	has:｣라고	fix	rewrites
+cx:lc-quote-bracket:30	「まあ、みんな『タコス』ってしか言わないから」	has:』라고밖에	fix	rewrites
+cx:lc-quote-bracket:30	「いい返事だ」って笑われたけどｗ	has:」라고 웃어졌지만	fix	rewrites
+cx:lc-quote-bracket:30	「たしかに言ったわよアイツは！　『私が直しました』って！！」	has:』라고!!	fix	rewrites
+cx:lc-quote-bracket:30	まあ、昨日から今日にかけて、『千里が』『千里が』ってひたすら言ってたから	has:』라고 오로지	fix	rewrites
+cx:lc-quote-bracket:30	「仕事うまくいってないんでしょ。結婚しなさい、結婚」って毎日のように言ってきて	has:」이라고 거의 매일	fix	rewrites
+cx:lc-quote-bracket:30	「私は細かいこと気に掛けられないから、『あ！　弾切れ！？』ってなることがあるんだよね」	!rule:cx:lc-quote-bracket:30	keep	rewrites
+cx:lc-quote-bracket:30	毎年やってる『東京国際都市計画展』ってあるだろ、アレのチケットもらってさ	!rule:cx:lc-quote-bracket:30	keep	rewrites
+cx:lc-quote-bracket:30	「あのさ、森下さんと青海さんは、『山号寺号』って知ってるかな？」	!rule:cx:lc-quote-bracket:30	keep	rewrites
+cx:lc-quote-bracket:30	「あの……『せり』ってなんですか？」	!rule:cx:lc-quote-bracket:30	keep	rewrites
+cx:lc-quote-bracket:5	皆が『お？』と首をかしげる。	!rule:cx:lc-quote-bracket:5	keep	rewrites
+cx:lc-quote-bracket:20	「親の遺産あるなら働かなくても生きていけるじゃん羨ましい」って投稿見て吐きそうになった。	has:부럽다」라는 투고	fix	rewrites

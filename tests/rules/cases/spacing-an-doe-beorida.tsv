@@ -18,7 +18,7 @@ compose:joined-aux	切り捨てた	버렸다	keep	compose
 compose:joined-aux	ゴミを捨てる	쓰레기를 버린다	keep	compose
 compose:joined-aux	捨てた	버렸다	keep	compose
 compose:joined-before-doe	「部員の依頼はダメですか？」	「부원의 의뢰는 안됩니까?」	fix	compose
-compose:joined-before-doe	降りかかる火の粉は…払わないといけませんね！	닥치는 불똥은…털지 않으면 안되겠네요!	fix	compose
+compose:joined-before-doe	降りかかる火の粉は…払わないといけませんね！	닥치는 불똥은…털어야 하겠네요!	fix	compose
 compose:joined-before-doe	「……もう、だめかも……」	「……이제, 안될지도……」	fix	compose
 compose:joined-before-doe	「ダメじゃん！」と柏木。	「안되잖아!」라고 카시와기.	fix	compose
 compose:joined-before-doe	カケル、思い込みで友人を失ったら駄目だぞ	카케루, 선입견으로 친구를 잃으면 안된다	fix	compose
@@ -31,7 +31,7 @@ compose:joined-aux	「もう、本当にドキドキしちゃったよ」	「이
 compose:joined-aux	丸一日以上経っちまったな	꼬박 하루 이상 지나버렸네	fix	compose
 compose:joined-aux	また強くなってしまった……	또 강해져버렸다……	fix	compose
 compose:joined-aux	少し服が汚れてしまったわ。待ってて。	조금 옷이 더러워져버렸어. 기다리고 있어.	fix	compose
-compose:joined-aux	つい熱くなって、声に出してしまった。	무심코 뜨거워져, 목소리에 내버렸다.	fix	compose
+compose:joined-aux	つい熱くなって、声に出してしまった。	무심코 뜨거워져, 소리 내버렸다.	fix	compose
 compose:joined-aux	結局最後は、辰巳と同じ主張になってしまった。	결국 마지막은, 타츠미와 같은 주장이 되어버렸다.	fix	compose
 compose:joined-aux	「拾って捨てた」	「주워 버렸다」	keep	compose
 compose:joined-aux	紙を破って捨てた。	종이를 찢어 버렸다.	keep	compose
@@ -49,7 +49,7 @@ compose:joined-aux	袋に入れて捨ててください。	봉투에 넣어 버�
 compose:joined-aux	スペードの７と合わせて捨てたカードなんだよ	스페이드의 7과 합해 버린 카드야	keep	compose
 compose:joined-aux	古い服をまとめて捨てた	낡은 옷을 정리해 버렸다	keep	compose
 compose:joined-aux	壊して捨てた	부수어 버렸다	keep	compose
-compose:joined-aux	吐き捨てた一言	토해 버린 한마디	keep	compose
+compose:joined-aux	吐き捨てた一言	내뱉은 한마디	keep	compose
 compose:joined-aux	抱えていた子供をそこへ放り捨てた。	안고 있던 아이를 거기에 던져 버렸다.	keep	compose
 compose:joined-aux	集めて棄てた。	모아 버렸다.	keep	compose
 compose:joined-aux	拾ってすてた。	주워 내버렸다.	keep	compose

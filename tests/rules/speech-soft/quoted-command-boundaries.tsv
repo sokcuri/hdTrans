@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
 verb-quoted-command-k07	「本を読める」と言った。	「책을 읽을 수 있어」라고 말했다.	keep	conjugation
-verb-quoted-command-k10	「箱を出せない」と言った。	「상자를 낼 수 없어」라고 말했다.	keep	conjugation
-verb-quoted-command-k14	「箱を出せればいい」と言った。	「상자를 낼 수 있으면 돼」라고 말했다.	keep	conjugation
+verb-quoted-command-k10	「箱を出せない」と言った。	「상자를 꺼낼 수 없어」라고 말했다.	keep	conjugation
+verb-quoted-command-k14	「箱を出せればいい」と言った。	「상자를 꺼낼 수 있으면 돼」라고 말했다.	keep	conjugation
 verb-quoted-command-k35	「本を読む」と言った。	「책을 읽을 거야」라고 말했다.	keep	conjugation

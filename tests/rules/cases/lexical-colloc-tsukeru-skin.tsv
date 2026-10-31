@@ -1,0 +1,24 @@
+# 규칙: LEX-226
+rule	input	expected	kind	layer
+sense:つける	唇にリップをつけようとした所で、何となく、むかし同じ事をした気がした。	has:립을 바르려고	fix	senses
+sense:付ける	リップを付けさせて鏡で本人に確認させたり	has:립을 바르게 해	fix	senses
+sense:付ける	指に消毒液を付けて、ティッシュでそれを拭うと	has:소독액을 바르고	fix	senses
+sense:付ける	もちろん小さな傷があるが、それは消毒液をつけておく。	has:소독액을 발라 둔다	fix	senses
+sense:つける	ゴブリンはディアナの太ももに塗り薬をつけた。	has:바르는 약을 발랐다	fix	senses
+sense:つける	このクリームをつけてプニエを食べるのが好きでしてね	lacks:발라	keep	senses
+sense:つける	伊豆奈は口元にクリームをつけながらそう言った。	lacks:바르	keep	senses
+sense:付ける	その視界の端に安田が再び同じような電極にオイルを付けていた。	has:오일을 바르고 있었다	fix	senses
+sense:つける	手にハンドクリームをつけた。	has:핸드크림을 발랐다	fix	senses
+sense:つける	髪にワックスをつけて整える。	has:왁스를 발라	keep	senses
+sense:付ける	顔に日焼け止めをつけるのを忘れた。	has:자외선 차단제를 바르는	keep	senses
+sense:付ける	そんなことを思いながら化粧水をつけ、日焼け止め程度の軽い化粧を施す。	has:화장수를 발라	keep	senses
+sense:付ける	火狼が指を舐めてから薬をつけ口元に運ぼうとした。	has:약을 바르고	keep	senses
+sense:つける	香水をつける。	has:향수를 뿌린다	keep	senses
+sense:つける	名前をつける。	has:이름을 붙인다	keep	senses
+sense:つける	火をつける。	lacks:바르	keep	senses
+sense:つける	気をつける。	has:조심한다	keep	senses
+sense:つける	薬を飲む。	has:약을 먹는다	keep	senses
+sense:つける	力をつける。	has:힘을 기른다	keep	senses
+sense:つける	鼻に生クリームをつけながら	lacks:바르	keep	senses
+sense:付ける	クリップを付けられた瞬間、	lacks:바르	keep	senses
+sense:付ける	唇にリップクリームを付ける。	has:립밤을 바른다	fix	senses

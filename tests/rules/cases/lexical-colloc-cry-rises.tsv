@@ -1,0 +1,63 @@
+# 규칙: LEX-219
+rule	input	expected	kind	layer
+cx:colloc-noun-verb:235	値段が上がる。	has:가격이 오른다	keep	rewrites
+cx:colloc-noun-verb:235	株価が上がる。	has:주가가 오른다	keep	rewrites
+cx:colloc-noun-verb:235	成績が上がる。	has:성적이 오른다	keep	rewrites
+cx:colloc-noun-verb:225	歓喜の声が周囲から上がった。	has:환희의 목소리가 주위로부터 나왔다	fix	rewrites
+cx:colloc-noun-verb:225	今度は歓喜の声があちこちから上がる。	has:목소리가 여기저기에서 나온다	fix	rewrites
+cx:colloc-noun-verb:225	状況にそぐわない歓喜の声がライゼルから上がる。	has:환희의 목소리가 라이젤로부터 나온다	fix	rewrites
+cx:colloc-noun-verb:225	おお、と感嘆の声があちこちで上がる。	has:감탄의 목소리가 여기저기에서 나온다	fix	rewrites
+cx:colloc-noun-verb:225	文字にしにくい驚きの声が百合華から上がる。	has:놀라움의 목소리가 유리카에게서 나온다	fix	rewrites
+cx:colloc-noun-verb:225	歓喜の声が上がった。	has:환희의 목소리가 나왔다	keep	rewrites
+cx:colloc-noun-verb:230	声が教室中から上がっている。	has:목소리가 교실 전체에서 나오고 있다	fix	rewrites
+cx:colloc-noun-verb:230	同意する声が女たちから上がる。	has:동의하는 목소리가 여자들에게서 나온다	fix	rewrites
+cx:colloc-noun-verb:230	そのとき、呑気な声が横から上がった。	has:태평한 목소리가 옆에서 나왔다	fix	rewrites
+cx:colloc-noun-verb:230	甘ったるい声がモーガンの唇から上がる。	has:달콤한 목소리가 모건의 입술에서 나온다	fix	rewrites
+cx:colloc-noun-verb:230	声を上げる。	has:소리를 낸다	keep	rewrites
+cx:colloc-noun-verb:235	そんな戦いを見て、周りからはどよめきが上がっていた。	has:술렁임이 터져 나오고 있었다	fix	rewrites
+cx:colloc-noun-verb:235	集まった人の中から憤怒の叫び声が幾つも上がり、	has:비명이 여러 개 터져 나와	fix	rewrites
+cx:colloc-noun-verb:235	叫び声が教室中から上がった。	has:비명이 교실 전체에서 터져 나왔다	fix	rewrites
+cx:colloc-noun-verb:235	どよめきが上がる。	has:술렁임이 터져 나온다	fix	rewrites
+cx:colloc-noun-verb:235	歓声が上がる。	has:환성이 터진다	keep	rewrites
+cx:colloc-noun-verb:235	悲鳴が上がった。	has:비명이 터졌다	keep	rewrites
+cx:colloc-noun-verb:235	花火が上がった。	has:불꽃이 올랐다	keep	rewrites
+cx:colloc-noun-verb:235	火の手が上がる。	has:불길이 오른다	keep	rewrites
+cx:colloc-noun-verb:250	トウコの檄が飛び、思わず車を押す手を止めてしまった。	has:불호령이 떨어져	fix	rewrites
+cx:colloc-noun-verb:250	師匠から檄が飛び、慌てて周囲の気配を探る。	has:불호령이 떨어져	fix	rewrites
+cx:colloc-noun-verb:250	足がもつれ始めた生徒へ、丸山田の檄が飛ぶ。	has:불호령이 떨어진다	fix	rewrites
+cx:colloc-noun-verb:250	檄が飛ぶ。	has:불호령이 떨어진다	fix	rewrites
+cx:colloc-noun-verb:250	鳥が飛ぶ。	has:새가 난다	keep	rewrites
+cx:colloc-noun-verb:250	飛行機が飛ぶ。	has:비행기가 난다	keep	rewrites
+cx:colloc-noun-verb:250	話が飛ぶ。	has:딴 데로 샌다	keep	rewrites
+cx:colloc-noun-verb:255	すぐ脇の洗面所から和樹の声が飛んでくる。	has:목소리가 날아온다	fix	rewrites
+cx:colloc-noun-verb:255	声が飛んでくるのが聞こえた。	has:목소리가 날아오는 것이 들렸다	fix	rewrites
+cx:colloc-noun-verb:255	声が飛んで来た。	has:목소리가 날아왔다	fix	rewrites
+cx:colloc-noun-verb:255	叱責が飛んでくる。	has:질책이 날아온다	fix	rewrites
+cx:colloc-noun-verb:255	野次が飛んでくる。	has:야유가 날아온다	fix	rewrites
+cx:colloc-noun-verb:255	石が飛んでくる。	has:날아 온다	keep	rewrites
+cx:colloc-noun-verb:255	ボールが飛んできた。	has:공이 날아 왔다	keep	rewrites
+cx:colloc-noun-verb:260	アルザ議員が俺を“彼”と呼び続けている事に対して、野次が飛ぶ。	has:야유가 날아든다	fix	rewrites
+cx:colloc-noun-verb:260	殆どの学生から抗議や文句の野次が飛んだ。	has:야유가 날아들었다	fix	rewrites
+cx:colloc-noun-verb:260	エリオットが足を止めるのと同時に、硬い声が飛ぶ。	has:굳은 목소리가 날아든다	fix	rewrites
+cx:colloc-noun-verb:260	馬に乗っているとあちらこちらで黄色い声が飛んでいた。	has:목소리가 날아들고 있었다	fix	rewrites
+cx:colloc-noun-verb:260	ドルテが言い終わるやいなや野次と罵声が飛んだ。	has:욕소리가 날아들었다	fix	rewrites
+cx:colloc-noun-verb:260	声が飛んでこない。	has:날아들어 오지 않는다	fix	rewrites
+cx:colloc-noun-verb:260	鳥が飛んだ。	has:새가 날았다	keep	rewrites
+dict:jisjk:20573	背後からは兵士達の怒声が飛び交っている。	has:병사들의 고함이 난무하고 있다	fix	lookup
+dict:jisjk:20573	怒声が響く。	has:고함이 울린다	fix	lookup
+dict:jisjk:20573	怒声が聞こえた。	has:고함이 들렸다	fix	lookup
+dict:jisjk:20573	怒鳴り声が聞こえた。	lacks:고함이 들렸다	keep	lookup
+lexical:yaji	すかさずヤジが飛んだ。	has:야유가	fix	lookup
+lexical:yaji	ヤジ馬が集まる。	has:구경꾼이 모인다	keep	lookup
+lexical:yaji	オヤジが怒った。	has:아버지	keep	lookup
+sense:上げる	怒声を上げる。	has:고함을 지른다	fix	senses
+sense:上げる	怒号を上げて殴りかかった。	has:고함을 질러	fix	senses
+sense:上げる	罵声を上げて逃げ出した。	has:욕설을 질러 도망	fix	senses
+sense:上げる	悲鳴を上げた。	has:비명을 질렀다	keep	senses
+sense:上げる	声を上げる。	has:소리를 낸다	keep	senses
+sense:上げる	手を上げる。	lacks:지르	keep	senses
+sense:上げる	彼は大声を上げた。	has:큰 소리를 질렀다	keep	senses
+cx:colloc-noun-verb:230	お母さんは今にも泣き出しそうな声で上がってと僕たちを招き入れてくれた	lacks:나와와	keep	rewrites
+cx:colloc-noun-verb:235	叫び声が教室中から上がった。	has:비명이 교실 전체에서 터져 나왔다	fix	rewrites
+cx:colloc-noun-verb:228	『ひゃあ〜！』という声が教室中から上がっている。	has:라는 소리가 교실 전체에서 터져 나오고 있다	fix	rewrites
+cx:colloc-noun-verb:228	その叫びに呼応するような声が後ろから上がった。	lacks:터져	keep	rewrites

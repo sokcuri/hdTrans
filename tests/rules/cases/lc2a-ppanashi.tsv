@@ -1,0 +1,20 @@
+# 규칙: GRM-103
+rule	input	expected	kind	layer
+dict:lc2a:ppanashi:1	曲げっぱなしの腰が意外と痛かった。	has:굽힌 채인 허리가	fix	lookup
+dict:lc2a:ppanashi:1	つけっぱなしのメイド喫茶の看板の下に、無機質な空間が広がっていた。	has:붙인 채인 메이드	fix	lookup
+dict:lc2a:ppanashi:1	仕事場で付けっぱなしのニュース番組を聴きながら作業をしていると、聞き覚えのある名称が聞こえていて圭は目を上げた。	has:붙인 채인 뉴스	fix	lookup
+dict:lc2a:ppanashi:2	私自身、戦闘能力がないので、近接戦闘は任せっぱなしになってるから、私も心苦しいけど……。	has:맡긴 채로 되어	fix	lookup
+dict:lc2a:ppanashi:2	忘れている人も多いと思うがカンナは王都に来た日の買い物で白い指輪を購入、ずっと指につけっぱなしになっている。	has:붙인 채로 되어	fix	lookup
+dict:lc2a:ppanashi:3	お尻の穴が開きっぱなしになった。	has:열린 채로 되었다	fix	lookup
+dict:lc2a:ppanashi:3	でもまた借りっぱなしになるといけませんから	has:빌린 채로 되면	fix	lookup
+dict:lc2a:ppanashi:3	置きっぱなしになった自転車とかもあって、、、。	has:둔 채로 된 자전거라든지도	fix	lookup
+dict:lc2a:ppanashi:3	見回したら、アイツの服が脱ぎっぱなしになっていた。	has:벗은 채로 되어	fix	lookup
+dict:lc2a:ppanashi:3	僕は敷きっぱなしになっていた布団に突っ伏して泣いた。	has:깐 채로 되어 있던	fix	lookup
+dict:lc2a:ppanashi:3	目は白目を剥き、口が大きく開きっぱなしになっている。	has:벌어진 채로 되어	fix	lookup
+dict:lc2a:ppanashi:1	点けっぱなしのテレビが点滅していた。	has:켠 채인 텔레비전이	fix	lookup
+dict:lc2a:ppanashi:3	床に置きっぱなしになっている鞄の中を確かめる。	has:둔 채로 되어 있는	fix	lookup
+dict:lc2a:ppanashi:3	教科書を机に置きっぱなしにしているんだろうか？	has:둔 채로 하고 있는	fix	lookup
+dict:lc2a:ppanashi:1	その日一日を、里見は座りっぱなしで過ごした。	has:앉은 채로	keep	lookup
+dict:lc2a:ppanashi:1	脱ぎっぱなしの服。	has:벗은 채인	keep	lookup
+dict:lc2a:ppanashi:2	母は泣きっぱなしだったが、	lacks:운 채	keep	lookup
+dict:lc2a:ppanashi:3	体が震えっぱなしだった。	lacks:떨린 채	keep	lookup

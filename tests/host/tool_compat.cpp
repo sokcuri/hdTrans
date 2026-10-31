@@ -121,6 +121,81 @@ bool RunNative(HMODULE module, const std::wstring& missingDat, bool ansi, bool n
     return TranslateWide(reinterpret_cast<TranslateWFn>(addresses[19]), freeMem);
 }
 
+bool WriteBytes(const std::wstring& path, const std::string& bytes) {
+    const HANDLE file = CreateFileW(path.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (file == INVALID_HANDLE_VALUE) return false;
+    DWORD written = 0;
+    const bool ok = WriteFile(file, bytes.data(), static_cast<DWORD>(bytes.size()), &written, nullptr) && written == bytes.size();
+    CloseHandle(file);
+    return ok;
+}
+
+bool TranslatesTo(TranslateWFn translate, FreeMemFn freeMem, const wchar_t* input, const wchar_t* expected) {
+    wchar_t* output = translate(0, input);
+    const std::wstring copied = output ? output : L"";
+    if (output) freeMem(output);
+    if (copied != expected) std::printf("  got \"%ls\" for \"%ls\"\n", copied.c_str(), input);
+    return copied == expected;
+}
+
+HWND CreateAnemoneWindow() {
+    WNDCLASSW windowClass{};
+    windowClass.lpfnWndProc = DefWindowProcW;
+    windowClass.hInstance = GetModuleHandleW(nullptr);
+    windowClass.lpszClassName = L"AneParentClass";
+    if (!RegisterClassW(&windowClass)) return nullptr;
+    return CreateWindowExW(WS_EX_TOOLWINDOW, L"AneParentClass", L"", WS_POPUP, 0, 0, 0, 0, nullptr, nullptr,
+                           windowClass.hInstance, nullptr);
+}
+
+// Anemone's dictionary: anedic.txt next to the executable, read only while the process shows
+// Anemone's window. Anemone creates the window before InitializeEx (anemone-dict); a window
+// created later is found at the first translation (anemone-late) or on J2K_ReloadUserDict
+// (anemone-nowindow, which translates without it first). Anemone calls J2K_ReloadUserDict only
+// when the file changes.
+bool RunAnemoneDictionary(HMODULE module, const wchar_t* mode) {
+    wchar_t exePath[MAX_PATH]{};
+    const DWORD n = GetModuleFileNameW(nullptr, exePath, MAX_PATH);
+    if (n == 0 || n >= static_cast<DWORD>(MAX_PATH)) return false;
+    std::wstring aneDic(exePath);
+    aneDic.resize(aneDic.find_last_of(L'\\'));
+    aneDic += L"\\anedic.txt";
+    bool ok = Check(WriteBytes(aneDic, "\xEF\xBB\xBF// comment\r\n" +
+                                           Encode(L"こんにちは\t곤니치와\t0\r\n日本語\t니혼고\t1\r\n", CP_UTF8)),
+                    "UTF-8 anedic.txt next to the executable");
+    const auto initialize = Export<InitializeExFn>(module, "J2K_InitializeEx");
+    const auto translate = Export<TranslateWFn>(module, "J2K_TranslateMMNTW");
+    const auto freeMem = Export<FreeMemFn>(module, "J2K_FreeMem");
+    const auto reload = Export<void(__stdcall*)()>(module, "J2K_ReloadUserDict");
+    if (!initialize || !translate || !freeMem || !reload) return false;
+    HWND hwnd = nullptr;
+    if (std::wcscmp(mode, L"anemone-dict") == 0) ok = Check((hwnd = CreateAnemoneWindow()) != nullptr, "Anemone's window") && ok;
+    ok = Check(initialize("CSUSER123455", "C:\\missing\\Dat") != 0, "InitializeEx") && ok;
+    if (std::wcscmp(mode, L"anemone-nowindow") == 0) {
+        ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"안녕하세요"), "without Anemone's window anedic.txt is not read") && ok;
+        reload();
+        ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"일본어"), "nor after J2K_ReloadUserDict") && ok;
+        ok = Check((hwnd = CreateAnemoneWindow()) != nullptr, "Anemone's window after the first translation") && ok;
+        reload();
+        ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"니혼고"), "J2K_ReloadUserDict finds the window") && ok;
+    } else {
+        if (!hwnd) ok = Check((hwnd = CreateAnemoneWindow()) != nullptr, "Anemone's window after InitializeEx") && ok;
+        ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"곤니치와"), "the first translation applies anedic.txt") && ok;
+        ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"니혼고"), "noun row of anedic.txt") && ok;
+    }
+    const std::wstring edited = L"\xFEFFこんにちは\t안녕\t0\r\n";
+    ok = Check(WriteBytes(aneDic, std::string(reinterpret_cast<const char*>(edited.data()), edited.size() * sizeof(wchar_t))),
+               "edited anedic.txt in UTF-16LE with a byte order mark") && ok;
+    reload();
+    ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"안녕"), "J2K_ReloadUserDict reads anedic.txt again") && ok;
+    ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"일본어"), "removed row no longer applies") && ok;
+    DeleteFileW(aneDic.c_str());
+    reload();
+    ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"안녕하세요"), "removed anedic.txt no longer applies") && ok;
+    if (hwnd) DestroyWindow(hwnd);
+    return ok;
+}
+
 bool RunServer(HMODULE module, const std::wstring& missingDat) {
     const auto initialize = Export<InitializeExFn>(module, "J2K_InitializeEx");
     if (!initialize) return false;
@@ -308,7 +383,7 @@ bool RunWeb(HMODULE module) {
 
 int wmain(int argc, wchar_t** argv) {
     if (argc != 3) {
-        std::puts("usage: tool_compat <luna|luna-ansi|anemone|anemone-ansi|aral02|aral03|vnr|vnr-ansi|eztransserver|eztransweb> <DLL>");
+        std::puts("usage: tool_compat <luna|luna-ansi|anemone|anemone-ansi|anemone-dict|anemone-late|anemone-nowindow|aral02|aral03|vnr|vnr-ansi|eztransserver|eztransweb> <DLL>");
         return 2;
     }
     wchar_t cwd[MAX_PATH]{};
@@ -332,6 +407,9 @@ int wmain(int argc, wchar_t** argv) {
         ok = RunNative(module, missingDat, std::wcscmp(argv[1], L"luna-ansi") == 0, false);
     } else if (std::wcscmp(argv[1], L"anemone") == 0 || std::wcscmp(argv[1], L"anemone-ansi") == 0) {
         ok = RunNative(module, missingDat, std::wcscmp(argv[1], L"anemone-ansi") == 0, true);
+    } else if (std::wcscmp(argv[1], L"anemone-dict") == 0 || std::wcscmp(argv[1], L"anemone-late") == 0 ||
+               std::wcscmp(argv[1], L"anemone-nowindow") == 0) {
+        ok = RunAnemoneDictionary(module, argv[1]);
     } else if (std::wcscmp(argv[1], L"eztransserver") == 0) {
         ok = RunServer(module, missingDat);
     } else if (std::wcscmp(argv[1], L"eztransweb") == 0) {

@@ -2268,7 +2268,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ウィンドウ・システム	윈도 시스템	N110	UTt		GN						ウィンドウ・システム	w:2259
 ウィンドサーフィン	윈드서핑	N110			GN				llm		ウィンドサーフィン	w:2260
 ウィンドミル	윈드밀	N110			GN						ウィンドミル	w:2261
-ウィーク	더 위크	N110			GN						ウィーク	w:2262
+ウィーク	위크	N110			GN						ウィーク	w:2262
 ウィーク明け	주초	N110			GN				xxx llm	1		w:2263
 ウイスキーサワー	위스키 사워	N110			GN						ウイスキーサワー	w:2264
 ウイスキー・サワー	위스키 사워	N110			GN						ウイスキー・サワー	w:2265
@@ -11395,7 +11395,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 了い	채	N110		Z7	GN				llm		じまい	w:11388
 了知	요지	N110		Hd	GN						りょうち	w:11389
 了知	요지&AV@	M429			GN						りょうち	w:11390
-予備選挙	경선	N110			GN						よびせんきょ	w:11391
+予備選挙	예비 선거	N110			GN			LEX-131			よびせんきょ	w:11391
 予告篇	예고편	N110			GN						よこくへん	w:11392
 予定日	예정일	N110			GN						よていび	w:11393
 予定表	일정표	N110			GN						よていひょう	w:11394
@@ -13015,7 +13015,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 劣角	열각	N110			GN						れっかく	w:12977
 助けを呼	도움을 청&AV@	M426			GN				llm			w:12978
 助け手	조력자	N110	VHn		GN				llm		たすけて	w:12979
-助け舟	구명보트	N110	VTp		GN				xxx llm		たすけぶね	w:12980
+助け舟	구원의 손길	N110	VTp		GN			LEX-228	xxx llm		たすけぶね	w:12980
 助け舟	도움의 손길	N110	VHn		GN				llm		たすけぶね	w:12981
 助命	구명	N110			GN				xxx llm	1		w:12982
 助産師	산파	N110			GN						じょさんし	w:12983
@@ -17878,7 +17878,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 晴々	후련&AV@	M429			GN				xxx llm		はればれ	w:17834
 晴々	화창&AV@	M429			GN				llm		はればれ	w:17835
 晴々し	해$D5@	H7U0			GN						はればれしい	w:17836
-晴れて	정식으로	E300			GN				llm			w:17837
 晴れやかな笑顔	환한 미소	N110			GN				llm		はれやかなえがお	w:17838
 晴晴	후련&AV@	M429			GN				xxx llm		はればれ	w:17839
 晴晴	화창&AV@	M429			GN				llm		はればれ	w:17840
@@ -19506,7 +19505,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 火蓋	화문 덮개	N110	VPe		GN				llm		ひぶた	w:19458
 火蟻	열마디개미속	N110			GN						ひあり	w:19459
 火車	화차	N110			GN						かしゃ	w:19460
-灯し	등불	N110	VPe		GN				llm		あかし	w:19461
 灯し火	불빛	N110			GN						ともしび	w:19462
 灯り	등불	N110	VEl		GN				xxx llm			w:19463
 灯り	전등불	N110			GN						あかり	w:19464
@@ -20435,7 +20433,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 登載	등재	N110		Hd	GN				xxx	1	とうさい	w:20387
 登録番号	등록번호	N110			GN				llm		とうろくばんごう	w:20388
 登龍門	등용문	N110			GN						とうりゅうもん	w:20389
-白々し	속이 뻔히 보$AH@	H7U0			GN				llm			w:20390
+白々し	속이 빤$AB@	H7U0			GN			LEX-161	llm			w:20390
 白あり	흰개미	N110			GN						しろあり	w:20391
 白いんげん豆	흰강낭콩	N110			GN						しろいんげんまめ	w:20392
 白くま	백곰	N110			GN						しろくま	w:20393
@@ -21156,7 +21154,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 穴ぐら	움막	N110			GN						あなぐら	w:21107
 穴熊	오소리	N110	VAm		GN				llm		あなぐま	w:21108
 空えずき	헛구역질	N110	UTi		GN						からえずき	w:21109
-空き	빈	N110			GN				xxx llm	1		w:21110
+空き	빈자리	N110			GN			LEX-161	xxx llm	1		w:21110
 空しく	한갓되이	E300			GN						むなしく	w:21111
 空にな	&Ad@	M428			GN				xxx llm	1		w:21112
 空中分解	공중분해	N110		Hd	GN				llm		くうちゅうぶんかい	w:21113
@@ -22406,7 +22404,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 臓器提供	장기기증	N110			GN						ぞうきていきょう	w:22354
 臓物	내장	N110			GN				xxx llm	1		w:22355
 臘梅	납매	N110			GN						ろうばい	w:22356
-臥せ	&J4@	M428			GN				llm		ふせる	w:22357
+臥せ	앓아&J4@	M428			GN			LEX-149 앓아눕다: 臥せる is lying ill in bed	llm		ふせる	w:22357
 臥龍	와룡	N110			GN						がりゅう	w:22358
 臨床心理士	임상심리사	N110	VHn		GN						りんしょうしんりし	w:22359
 臨時首都	임시수도	N110			GN						りんじしゅと	w:22360
@@ -27154,3 +27152,23 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 半ばかり	반 정도	N110		Tu	GN	8643	||2 &&2 G-1== "Ct" G-2== "NjNdCt" &&2 S-1== "R年" G-1== "NjNd"	수량 뒤의 半ばかり는 그 수량에 붙여 쓰는 ‘반 정도’로 고른다(三年半ばかり 3년반 정도).				w:28966
 半ばかり	반 정도	N110	XXX		GN							w:28967
 承太郎	죠타로	N130	QPNVHn	Wb	GN							w:28974
+ゆら	흔들&AA@	M442			GN			LEX-94: 가나로 쓴 揺らぐ의 어간(ゆらいだ 흔들렸다)			ゆらぐ	w:28975
+舐め	얕&AY@	M427			GN			LEX-147 얕보다: 舐める of a person or in a scolding question				word:cue:nameru
+おねいさん	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29101
+おねいちゃん	언니	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29102
+おねいさま	언니	I110			GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29103
+おねーさん	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29104
+おねーちゃん	언니	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29105
+おねーさま	언니	I110			GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29106
+おにーさん	오빠	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29107
+おにーちゃん	오빠	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29108
+おねえさま	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29109
+おねぇさん	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29110
+おねぇちゃん	언니	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29111
+おねぇさま	언니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29112
+お兄さま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29113
+おにいさま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29114
+おにーさま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29115
+おにぃさん	오빠	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29116
+おにぃちゃん	오빠	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29117
+おにぃさま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29118

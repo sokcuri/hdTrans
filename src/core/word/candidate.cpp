@@ -524,6 +524,146 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
     return front != nullptr ? front : back;
 }
 
+bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
+
+// LEX-95: where the longest word at a point of a katakana run is no name and leaves, beside common
+// words, a stray piece: a word the dictionary reads only as a person's name, or kana no dictionary
+// word starts at, read by their sound (フリースリーカード: フリース, リー, カード; アイスミルクティー:
+// アイスミルク, ティー), a shorter word goes first when common words of three or more kana cover the
+// rest of the run with no more words (フリー, スリー, カード; アイス, ミルクティー); of those words the
+// longest. Words are dictionary keys of two or more kana inside the run, as the lookup of the word
+// stage finds them. A plain word with force keeps its place, and so does every word of a run longer
+// than 24 kana. records holds the words at full[cursor:], longest first.
+Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_view full, std::size_t cursor) {
+    constexpr std::size_t kMaxRun = 24;
+    if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    cursor = std::min(cursor, full.size());
+    if (cursor == full.size() || !KatakanaWordRune(text::DecodeRune(full.substr(cursor)).cp)) return records;
+    // The kana of the run before the cursor, and the rune boundaries of the run from it.
+    std::size_t before = 0;
+    for (std::size_t at = cursor; at > 0 && before <= kMaxRun;) {
+        std::size_t start = at - 1;
+        while (start > 0 && (static_cast<unsigned char>(full[start]) & 0xC0) == 0x80) start--;
+        if (!KatakanaWordRune(text::DecodeRune(full.substr(start)).cp)) break;
+        at = start;
+        before++;
+    }
+    const std::string_view text = full.substr(cursor);
+    std::vector<std::size_t> bounds{0};
+    for (std::string_view s = text; !s.empty() && before + bounds.size() <= kMaxRun + 1;) {
+        const text::Rune r = text::DecodeRune(s);
+        if (!KatakanaWordRune(r.cp)) break;
+        bounds.push_back(bounds.back() + r.size);
+        s.remove_prefix(r.size);
+    }
+    const std::size_t run = bounds.back();
+    const std::size_t greedy = records->source.size();
+    if (bounds.size() < 5 || before + bounds.size() > kMaxRun + 1 || greedy >= run ||
+        !std::binary_search(bounds.begin(), bounds.end(), greedy)) {
+        return records;
+    }
+    if (const std::string_view rest = text.substr(run); !rest.empty() && KatakanaWordRune(text::DecodeRune(rest).cp)) {
+        return records;
+    }
+    constexpr int kNone = 1 << 20;
+    const std::size_t n = bounds.size();
+    // The pieces at bounds[i]: the index in bounds of the end, whether the piece is a stray one (a
+    // word the dictionary reads only as a person's name, or kana read by their sound), and whether
+    // it is a common word (no reading as a proper noun nor in Latin letters, such as ホワイ WHY).
+    struct Piece {
+        std::size_t end;
+        bool stray, common;
+    };
+    std::vector<std::vector<Piece>> pieces(n);
+    for (std::size_t i = 0; i + 2 < n; i++) {
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i]), kModeGeneral);
+        for (std::size_t j = i + 2; j < n; j++) {
+            const std::size_t length = bounds[j] - bounds[i];
+            bool any = false, person = true, proper = false;
+            for (const dict::Candidate& c : found.list) {
+                if (c.source.size() != length || c.codes == nullptr) continue;
+                any = true;
+                person = person && c.codes->partText == "N130" && c.codes->sem.Text().find("QPN") != std::string_view::npos;
+                proper = proper || c.codes->partText == "N130" ||
+                         std::any_of(c.target.begin(), c.target.end(), [](char ch) {
+                             return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
+                         });
+            }
+            if (any) pieces[i].push_back({j, person, !proper});
+        }
+    }
+    // Kana where no dictionary word is found are read by their sound up to where a word starts (or
+    // the run ends). Such a piece counts as a stray piece when it ends the run and has two or more
+    // kana, the first not ー, ン or a small kana; one kana or such a start belongs to the word before
+    // it (ジャーニー|ズ, データベースサーバ|ー, フルーティ|ング), and a piece inside the run may be a part
+    // of a word the dictionary lacks (ゴールド|アーキッド).
+    for (std::size_t i = 0; i + 1 < n; i++) {
+        if (!pieces[i].empty()) continue;
+        std::size_t j = i + 1;
+        while (j + 1 < n && pieces[j].empty()) j++;
+        const char32_t r = text::DecodeRune(text.substr(bounds[i])).cp;
+        const bool bound = r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos;
+        pieces[i].push_back({j, j - i >= 2 && !bound && j == n - 1, false});
+    }
+    // persons[i][w]: the fewest stray pieces of a cover of the run from bounds[i] by w pieces.
+    std::vector<std::vector<int>> persons(n, std::vector<int>(n, kNone));
+    persons[n - 1][0] = 0;
+    for (std::size_t i = n - 1; i-- > 0;) {
+        for (const Piece& p : pieces[i]) {
+            for (std::size_t w = 0; w + 1 < n; w++) {
+                if (persons[p.end][w] == kNone) continue;
+                persons[i][w + 1] = std::min(persons[i][w + 1], persons[p.end][w] + (p.stray ? 1 : 0));
+            }
+        }
+    }
+    // The cover after the longest word, a word that is no name, by its fewest words.
+    std::size_t words = 0;
+    int greedyPersons = kNone;
+    for (const Piece& p : pieces[0]) {
+        if (bounds[p.end] != greedy || p.stray) continue;
+        for (std::size_t w = 0; w + 1 < n && greedyPersons == kNone; w++) {
+            if (persons[p.end][w] != kNone) {
+                words = w + 1;
+                greedyPersons = persons[p.end][w];
+            }
+        }
+    }
+    if (greedyPersons == kNone || greedyPersons == 0) return records;
+    // covered[i][w]: whether common words of three or more kana cover the run from bounds[i] by w
+    // words.
+    std::vector<std::vector<char>> covered(n, std::vector<char>(n, 0));
+    covered[n - 1][0] = 1;
+    for (std::size_t i = n - 1; i-- > 0;) {
+        for (const Piece& p : pieces[i]) {
+            if (!p.common || p.end - i < 3) continue;
+            for (std::size_t w = 0; w + 1 < n; w++) covered[i][w + 1] |= covered[p.end][w];
+        }
+    }
+    std::size_t chosen = 0;
+    for (const Piece& p : pieces[0]) {
+        if (bounds[p.end] >= greedy || bounds[p.end] <= chosen || !p.common || p.end < 3) continue;
+        for (std::size_t w = 0; w < words; w++) {
+            if (covered[p.end][w]) chosen = bounds[p.end];
+        }
+    }
+    if (chosen == 0) return records;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        Record**& tail = r->source.size() == chosen ? frontTail : backTail;
+        *tail = r;
+        tail = &r->child;
+        r = next;
+    }
+    if (front == nullptr) return records;
+    *frontTail = back;
+    return front;
+}
+
 Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
@@ -744,6 +884,65 @@ Record* AdverbOverKanaVerb(const dict::Snapshot& snapshot, Record* records, std:
     *adverbTail = rest;
     if (owned == nullptr) return adverbs;
     owned->child = adverbs;
+    return records;
+}
+
+// Text path: after a case particle or a comma, the verb records of the kana stem か (かく) whose
+// past or て form the text spells move ahead of the other records: no particle か follows there
+// (汗もかいた 땀도 흘렸다, 手紙をかいて 편지를 써서; but 何匹かいた, 誰かいた after a noun). A word that
+// the text starts with and that spells the form or more keeps its place.
+// Plain-dictionary records stay in front.
+Record* KanaVerbAfterParticle(const Item& parent, Record* records, std::string_view text) {
+    const std::string_view p = parent.group->surface;
+    if (p != "を" && p != "も" && p != "は" && p != "が" && p != "に" && p != "で" && p != "、") return records;
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    auto spells = [&](const Record& v) {
+        if (At(v.partCode, 0) != 'M' || At(v.partCode, 1) != '4' || v.partCode.size() != 4 || v.source != "か") {
+            return std::string_view();
+        }
+        const int kind = v.partCode[3] - '0';
+        for (const int branch : {6, 7}) {
+            const std::string_view form = Conjugation(kind, branch);
+            if (!form.empty() && text.starts_with(v.source) && text.substr(v.source.size()).starts_with(form)) {
+                return text.substr(0, v.source.size() + form.size());
+            }
+        }
+        return std::string_view();
+    };
+    std::string_view verb;
+    for (const Record* r = first; r != nullptr && verb.empty(); r = r->child) verb = spells(*r);
+    if (verb.empty() || !spells(*first).empty()) return records;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (!text.starts_with(r->source) || !spells(*r).empty()) continue;
+        if (r->source.size() > verb.size() || (r->source.size() == verb.size() && !AnyOf("PSTU", At(r->partCode, 0)))) {
+            return records;
+        }
+    }
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (!spells(*r).empty()) {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
     return records;
 }
 
@@ -1893,9 +2092,11 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
+        if (settings.text) records = KanaVerbAfterParticle(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
+    if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;
@@ -2110,6 +2311,23 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     return NewItem(NewDetail(kDetailInfo, token), g, full, cursor, token);
 }
 
+// Whether the godan e-row form that record matched before 、 also spells an ichidan stem of its
+// last kanji (粉々に砕け、 is 砕ける, 懐に入れ、 is 入れる), which the shorter reading takes.
+bool Worker::IchidanBeforeComma(const Detail& d, std::string_view text, int offset, const Record* record) const {
+    if (record == nullptr || (d.kind != 4 && d.kind != 11) || d.commaEForm == 0) return false;
+    const std::string_view entry = Conjugation(d.patternKind, d.kind);
+    const std::string_view tail = From(text, offset + static_cast<long>(record->source.size()));
+    if (!tail.starts_with(entry)) return false;
+    const std::string_view after = tail.substr(entry.size());
+    if (!after.starts_with(kJaFullComma) && !after.starts_with(kJaComma)) return false;
+    const std::string stem = std::string(LastChar(record->source)) + std::string(entry);
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = c.codes->partText;
+        if (pc.size() == 4 && pc[0] == 'M' && pc[1] == '4' && pc[3] == '7') return true;
+    }
+    return false;
+}
+
 // An item from the first usable record group of records at text[offset:], running the
 // conjugation checks of its kind: verbs ('4'), adjectives ('7'), adjectival nouns
 // ('8'), words without ending ('6') and the rest. Null when no record group passes.
@@ -2130,7 +2348,7 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
             word->patternKind = pattern;
             word->dialect = settings.text && settings.improvements.dialectForms;
             Record* stop = nullptr;
-            const bool ok = MatchConjugation(*word, text, offset, rec, stop);
+            const bool ok = MatchConjugation(*word, text, offset, rec, stop) && !IchidanBeforeComma(*word, text, offset, stop);
             rec = stop;
             if (!ok) {
                 while (rec != nullptr && sameGroup(rec) && At(rec->partCode, 3) - '0' == pattern) {

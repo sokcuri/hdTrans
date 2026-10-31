@@ -43,6 +43,8 @@
 //     are the builtin phrases.tsv (but its interjections in kana, which are
 //     utterances of the sound lexicon) and patterns.tsv, for the text path only.
 //     senses.tsv is compiled into the sense table (userdict::ParseSenses).
+//   - Plain files of the layers pack and pack-classes make the pack table (pack.h), compiled
+//     after the sense table, so a folder without them numbers the marker families as before.
 #include <cstddef>
 #include <cstdint>
 #include <memory>
@@ -57,6 +59,7 @@
 #include "core/dict/dict.h"
 #include "core/dict/tsv.h"
 #include "core/dict/load_info.h"
+#include "core/dict/pack.h"
 #include "core/dict/user_text.h"
 #include "core/output/families.h"
 #include "core/text/lifetime.h"
@@ -74,7 +77,7 @@ namespace internal {
 class SnapshotFile;
 }
 
-enum class FileLayer : uint8_t { Base, Words, Names, User, Kana, Readings, PreFilter, PostFilter };
+enum class FileLayer : uint8_t { Base, Words, Names, User, Kana, Readings, PreFilter, PostFilter, Pack, PackClasses };
 
 // A *.tsv file of a dictionary folder.
 struct File {
@@ -261,6 +264,8 @@ public:
     const pipeline::DocumentData& DocumentData() const;
     // The builtin sense table.
     const userdict::SenseTable& Senses() const { return senses_; }
+    // The pack rows of the folders' pack files (pack.h), empty without any.
+    const PackTable& Packs() const { return packs_; }
     // The marker families that the conjugating plain entries and senses use beyond
     // the static ones.
     const userdict::Families& GeneratedFamilies() const { return families_; }
@@ -381,6 +386,7 @@ private:
     mutable output::Families outputFamilies_;
     std::unique_ptr<const UserText> rawPlain_, textPlain_, rawExtraPlain_, textExtraPlain_;
     userdict::SenseTable senses_;
+    PackTable packs_;
     mutable std::once_flag documentOnce_;
     mutable std::shared_ptr<const pipeline::DocumentData> documentData_;
 };

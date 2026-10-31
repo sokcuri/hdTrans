@@ -1,0 +1,21 @@
+# 규칙: GRM-163
+rule	input	expected	kind	layer
+cx:lc2e-terukamo:10	「うん、左腕は折れてるかもだけど…」	has:있을지도 모르지만	fix	rewrites
+cx:lc2e-terukamo:10	「その分アキさんに不快な思いさせてるかもだけど……。ごめんね？」	has:시키고 있을지	fix	rewrites
+cx:lc2e-terukamo:10	しているかもしれない。	!rule:cx:lc2e-terukamo:10	keep	rewrites
+cx:lc2e-terukamo:10	血生臭いから怯えているかもしれないなあ。	!rule:cx:lc2e-terukamo:10	keep	rewrites
+cx:lc2e-terukamo:15	私たちが誰の為に戦ってるかも知らないで、ま	has:싸우고 있는지	fix	rewrites
+cx:lc2e-terukamo:15	何時どこで監視されてるかも分からないからな。	has:감시당하고 있는지	fix	rewrites
+cx:lc2e-terukamo:15	「建物も何も無いのに、ホント、どこに向かってるかもなの？」	has:향하고 있는지	fix	rewrites
+cx:lc2e-terukamo:15	「おうさ。天子が地上でなにやってるかも気になるし……年越しのなんで天子？」	has:하고 있는지	fix	rewrites
+cx:lc2e-terukamo:15	元クラブのママだということは教えてもらったが本名もどこに住んでるかも知らない。	has:살고 있는지	fix	rewrites
+cx:lc2e-terukamo:15	シンなら起きているかもしれないわね。	!rule:cx:lc2e-terukamo:15	keep	rewrites
+cx:lc2e-terukamo:15	授業が始まっているかもしれないのだ。	!rule:cx:lc2e-terukamo:15	keep	rewrites
+cx:lc2e-terukamo:20	「ついてるかもなー？」	has:붙어 있을지	fix	rewrites
+cx:lc2e-terukamo:20	「腕、折れてるかもな」	has:부러져 있을지	fix	rewrites
+cx:lc2e-terukamo:20	劉表も一枚噛んでるかも。	has:끼고 있을지	fix	rewrites
+cx:lc2e-terukamo:20	もうひとつ彷徨いてるかも	has:서성거리고 있을지	fix	rewrites
+cx:lc2e-terukamo:20	見てるかもしれないのに。	has:보고 있을지	fix	rewrites
+cx:lc2e-terukamo:20	「俺たちと似てるかもな」	has:닮아 있을지	fix	rewrites
+cx:lc2e-terukamo:20	母が伝染病を持っているかもしれないから？	!rule:cx:lc2e-terukamo:20	keep	rewrites
+cx:lc2e-terukamo:20	真帆、何か隠し持っているかもしれない！」	!rule:cx:lc2e-terukamo:20	keep	rewrites

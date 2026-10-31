@@ -4,7 +4,7 @@ normalize:volitional-ka	私も薄着しちゃおっかな	has:해버릴까	fix	n
 normalize:volitional-ka	もう寝ちゃおっかー……	이제 자버릴까~……	fix	normalize
 normalize:volitional-ka	今日は飲んじゃおっか！	오늘은 마셔버릴까!	fix	normalize
 normalize:volitional-ka	やっちゃおっか！	해 치울까!	fix	normalize
-normalize:volitional-ka	そろそろトドメを刺しちゃおっかな！	has:찔러버릴까!	fix	normalize
+normalize:volitional-ka	そろそろトドメを刺しちゃおっかな！	has:날려버릴까!	fix	normalize
 normalize:volitional-ka	明日言いつけちゃおっかなー？	내일 명령해버릴까~?	fix	normalize
 normalize:volitional-ka	でもらおっかなぁ	has:받을까	fix	normalize
 normalize:volitional-ka	一番おっかない	제일 무섭다	keep	normalize

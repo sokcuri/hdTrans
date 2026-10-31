@@ -91,6 +91,8 @@ struct Detail {
     bool tailLengthCheck = false;
     bool causativePassive = false;
     bool dialect = false;  // dialect forms may be read (the と form of kBranchTo)
+    // A godan e-row form before 、 (凌げ、, 急げ、): 0 no verb, 1 the potential, 2 the imperative.
+    int commaEForm = 0;
 
     // The conjugation branch 0..17 or kBranchTo of a verb; '0', 'x' or 'X' for adjectives; -1 unset.
     int kind = -1;
@@ -149,6 +151,10 @@ public:
     bool adjectival = false;
     bool lexical = false;
     std::string appended;  // Korean written right after the word, outside its count and conjugation (append-target)
+    std::vector<int> packRows;  // the pack rows that decided a slot of the word (dict::PackRowById ids)
+    std::string packLexeme;     // the Korean verb a voice row writes for the word, "" for none
+    Item* packAgent = nullptr;  // the particle of the word's agent phrase a voice row writes, and its text
+    std::string packAgentText;
 
     // Entry accessors: i is an entry of the group; outside it (-1) they read empty.
     std::string_view EntryText(int i) const;

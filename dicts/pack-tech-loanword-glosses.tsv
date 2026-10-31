@@ -1,0 +1,7 @@
+#! layer=pack
+# 이표기 사전의 잘못 적힌 외래어 기술 용어 번역을 바로잡음
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+tech-loanword-glosses:1	データ・インタフェース	n	sense	frame	*	데이터 인터페이스	10	LEX-2920	audit	
+tech-loanword-glosses:2	データ・ディクショナリ	n	sense	frame	*	데이터 딕셔너리	10	LEX-2920	audit	
+tech-loanword-glosses:3	デジタル・シグナル・プロセッサ	n	sense	frame	*	디지털 시그널 프로세서	10	LEX-2920	audit	
+tech-loanword-glosses:4	ドラム・プロッタ	n	sense	frame	*	드럼 플로터	10	LEX-2920	audit	

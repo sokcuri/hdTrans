@@ -8496,7 +8496,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヒモ男	기둥서방	N110			GN				llm			s:8493
 ひも男	기둥서방	N110			GN				llm			s:8494
 股ドン	가랑이 벽치기	N110			GN				llm			s:8495
-床ドン	바닥 쿵	N110			GN				llm			s:8496
+床ドン	바닥쿵	N110			GN			LEX-133	llm			s:8496
 ヘッショ	헤드샷	N110			GN				llm			s:8497
 ヒモ女	남자에게 얹혀사는 여자	N110			GN				llm			s:8498
 ひも女	남자에게 얹혀사는 여자	N110			GN				llm			s:8499

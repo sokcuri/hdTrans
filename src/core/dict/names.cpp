@@ -72,9 +72,6 @@ bool HasPrefixIn(std::string_view s, const std::array<std::string_view, N>& list
     return std::any_of(list.begin(), list.end(), [s](std::string_view p) { return s.starts_with(p); });
 }
 
-// Honorifics that follow a person's name.
-constexpr std::array<std::string_view, 11> kHonorifics = {"さん", "ちゃん", "くん", "君", "様", "さま",
-                                                           "先輩", "先生", "殿", "氏", "たん"};
 // The particles and honorifics that make a word followed by them an inflected key.
 constexpr std::array<std::string_view, 31> kParticleTails = {
     "の", "は", "が", "を", "に", "へ", "と", "も", "で", "や", "って", "とは", "には", "では", "から", "まで",
@@ -602,7 +599,7 @@ bool Snapshot::TitleKey(std::string_view key) const {
 bool Snapshot::AddressedName(std::string_view s, std::size_t n) const {
     const std::string_view key = s.substr(0, n);
     return RuneCount(key) >= 2 && !AnyRune(key, [](char32_t r) { return !IsKatakana(r); }) &&
-           HasPrefixIn(s.substr(n), kHonorifics) && !PersonName(key).empty();
+           HasPrefixIn(s.substr(n), internal::kNameHonorifics) && !PersonName(key).empty();
 }
 
 // The name senses that take part in a lookup of text and whose key prefixes text,

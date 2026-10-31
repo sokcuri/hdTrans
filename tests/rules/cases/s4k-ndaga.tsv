@@ -1,0 +1,34 @@
+# 규칙: GRM-250
+rule	input	expected	kind	layer
+dict:jisjk:345486	今思ったんだが、我々は追いかけないといけない。	has:지금 생각했는데,	fix	ending-defaults
+dict:jisjk:345486	「そのつもりだったんだが、ちょっとな」	has:그럴 생각이었는데,	fix	ending-defaults
+dict:gram:ndaga:datta-noun	いや、不可抗力だったのだが……。	has:불가항력이었는데…….	fix	defaults
+dict:gram:ndaga:datta-noun	大体いつも、こんな内容だったのだが。	has:내용이었는데.	fix	defaults
+dict:gram:ndaga:datta-n-noun	「俺、晴香とするまで童貞だったんだが」	has:동정이었는데」	fix	defaults
+dict:jisjk:353391	「突然で悪いんだが、俺の背中に隠れてくれないか？」	has:미안한데,	fix	ending-defaults
+dict:jisjk:341041	白色のソレは見た目で言うと狐なのだが、尻尾が二本。	has:여우인데,	fix	defaults
+dict:jisjk:341041	部品があればの話なのだが。	has:이야기인데.	fix	defaults
+dict:jisjk:341068	いつもならカウンターでもよかったのだが、今日は大事な話がある。	has:좋았는데,	fix	ending-defaults
+dict:jisjk:341068	幻覚だろうと信じようとしていたのだが、やはり幻覚などではなかったらしい。	has:믿으려 하고 있었는데,	fix	ending-defaults
+dict:jisjk:263651	良いことしかないと思うのだが……	has:생각하는데……	fix	ending-defaults
+dict:jisjk:355662	悪くはないのだが、良くはなかった。	has:나쁘지는 않은데,	fix	ending-defaults
+cx:s4k-ndaga:20	というか、俺たちは飲み散らかしてないんだが……。	has:어지르지 않는데…….	fix	rewrites
+cx:s4k-ndaga:20	人を襲おうという気も起きないのだが。	has:일어나지 않는데.	fix	rewrites
+cx:s4k-ndaga:30	ルーミル教に純潔の縛りでもあればよかったんだが。	has:했더라면 좋았겠는데.	fix	rewrites
+dict:jisjk:263651	この美人の女子高生が死んだ事を惜しんだが。	has:아꼈지만.	keep	ending-defaults
+dict:jisjk:263651	被害で済んだが、俺の身体はそうはいかない。	has:끝났지만,	keep	ending-defaults
+dict:jisjk:263651	いかにも不機嫌そうに見せる。だが、それも一瞬のこと。	has:하지만,	keep	defaults
+cx:s4k-ndaga:20	悪くはないのだが、良くはなかった。	!rule:cx:s4k-ndaga:20	keep	rewrites
+cx:s4k-ndaga:20	彼女は来ていないんだが、いい。	!rule:cx:s4k-ndaga:20	keep	rewrites
+cx:s4k-ndaga:30	いつもならカウンターでもよかったのだが、今日は大事な話がある。	!rule:cx:s4k-ndaga:30	keep	rewrites
+cx:s4k-ndaga:10	「その前に性能のチェックをしてほしいんだが……」	has:해 줬으면 하는데……」	fix	rewrites
+cx:s4k-ndaga:10	「依頼の報告と納品、素材の売却それと討伐依頼の情報が欲しいんだが……」	!rule:cx:s4k-ndaga:10	keep	rewrites
+dict:jisjk:118241	「申し訳ないのですが、それを連れてこっちに来てもらえませんか？	has:미안합니다만,	keep	ending-defaults
+cx:s4k-ndaga:40	その代わりと言ってはなんだが、今日はフリーダがついてきている。	has:대신이라고 말하기는 좀 그렇지만,	fix	rewrites
+cx:s4k-ndaga:40	「こう言ってはなんだが、意外に死者は少なかったな」	has:이렇게 말하기는 좀 그렇지만,	fix	rewrites
+cx:s4k-ndaga:40	こういってはなんだが…非常に下品だ。	has:말하기는 좀 그렇지만…	fix	rewrites
+cx:s4k-ndaga:40	さっきのお詫びと言っちゃなんだが俺と一緒に風呂に入んねぇか？」	has:사과라고 말하기는 좀 그렇지만	fix	rewrites
+cx:s4k-ndaga:40	自分で言うのもなんだが、俺は強い。	!rule:cx:s4k-ndaga:40	keep	rewrites
+dict:gram:ndaga:datta-desu-adj	「寝ていたときは静かだったのですが」	has:조용했습니다만」	fix	defaults
+dict:gram:ndaga:datta-desu-adj	ここは普段あまり人がこないのかとても静かだったのですが……	has:조용했습니다만……	fix	defaults
+dict:gram:ndaga:datta-desu-noun	もともと白っぽい謎の金属だったのですが、内側から少し光ってる。	has:금속이었습니다만,	fix	defaults

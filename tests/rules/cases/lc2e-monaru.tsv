@@ -1,0 +1,22 @@
+# 규칙: GRM-168
+rule	input	expected	kind	layer
+cx:lc2e-monaru:10	嬉しくもなる。	has:기뻐지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	外したくもなる。	has:싶어지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	やや強くもなる。	has:강해지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	「硬くもなりますが」	has:딱딱해지기도 합니다만	fix	rewrites
+cx:lc2e-monaru:10	そりゃ仲良くもなる。	has:좋아지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	逃げ出したくもなる。	has:싶어지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	無性に悲しくもなった。	has:슬퍼지기도 했다.	fix	rewrites
+cx:lc2e-monaru:10	好きだから悲しくもなる	has:슬퍼지기도 한다	fix	rewrites
+cx:lc2e-monaru:10	確かに怒りたくもなる。	has:싶어지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	と同時に寂しくもなる。	has:외로워지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	それなりに親しくもなる。	has:친해지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	八つ当たりしたくもなる。	has:싶어지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	今だけは認めたくもなる。	has:싶어지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	つい愚痴を言いたくもなる。	has:싶어지기도 한다.	fix	rewrites
+cx:lc2e-monaru:10	１０ｍにもなる丸い池に	!rule:cx:lc2e-monaru:10	keep	rewrites
+cx:lc2e-monaru:10	嫌にもなる。	!rule:cx:lc2e-monaru:10	keep	rewrites
+cx:lc2e-monaru:10	敷物にも、服にもなる。	!rule:cx:lc2e-monaru:10	keep	rewrites
+cx:lc2e-monaru:10	血抜きにもなるからだろうか。	!rule:cx:lc2e-monaru:10	keep	rewrites
+cx:lc2e-monaru:10	必死にもなるよなあ。	!rule:cx:lc2e-monaru:10	keep	rewrites
+cx:lc2e-monaru:10	練習にもなるし。	!rule:cx:lc2e-monaru:10	keep	rewrites

@@ -1,6 +1,6 @@
 # 규칙: LEX-50, SPC-1
 rule	input	expected	kind	layer
-dict:jisjk:374933	「どうも。ロイドという。よろしく頼む」	has:잘 부탁한다」	fix	local
+dict:jisjk:374933	「どうも。ロイドという。よろしく頼む」	has:잘 부탁해」	fix	local
 dict:jisjk:374933	よろしく頼むぜ	잘 부탁한다	fix	local
 dict:jisjk:374933	よろしく頼むよ｡	잘 부탁해.	fix	local
 lookup:closing-greeting	「わかったよ。後輩２人組、よろしくな」	「알았어. 후배 2인조, 잘 부탁해」	fix	lookup

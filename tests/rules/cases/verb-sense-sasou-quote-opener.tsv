@@ -1,0 +1,25 @@
+rule	input	expected	kind	layer
+dict:jisjk:365678	【田中】「誘ってくれるのは嬉しいけど、私には無理だよ」	【타나카】「권해 주는 건 기쁘지만, 나에게는 무리야」	fix	defaults
+dict:jisjk:365678	【翔太】「誘ってもらったけど、部活には入らないよ」	【쇼타】「권해 줬지만, 동아리에는 들어가지 않아」	fix	defaults
+dict:jisjk:365679	由美『誘ってくれたけど、今日は無理だ』	!rule:dict:jisjk:365679	fix	defaults
+dict:jisjk:365679	【彼ら】「誘ってくれるのは嬉しいけど」	!rule:dict:jisjk:365679	fix	defaults
+dict:jisjk:365678	田中「誘ってくれるのは嬉しいけど、私には無理だよ」	타나카 「권해 주는 건 기쁘지만, 나에게는 무리야」	fix	defaults
+dict:jisjk:365678	翔太『誘ってくれるのは嬉しいけど』	!rule:dict:jisjk:365678	fix	defaults
+dict:jisjk:365679	【あなた】「誘ってくれたのに断ってごめん」	!rule:dict:jisjk:365679	fix	defaults
+dict:jisjk:365679	【彼】「誘ってくれるのは嬉しいけど、俺には向いてない」	!rule:dict:jisjk:365679	fix	defaults
+dict:jisjk:365679	彼に『誘ってくれてありがとう』と伝えた。	그에게 『권해 주어서 고마워』라고 전했다.	fix	defaults
+dict:jisjk:365678	【友達】「誘ってくれたけど、今日は無理だ」	!rule:dict:jisjk:365678	fix	defaults
+dict:jisjk:365678	【由美】「誘ってくれたけど、今日は無理だ」	!rule:dict:jisjk:365678	fix	defaults
+dict:jisjk:365678	【田中】『誘ってみた』	!rule:dict:jisjk:365678	fix	defaults
+dict:jisjk:365678	田中を誘ってみた。	타나카를 불러 보았다.	keep	local
+dict:jisjk:365678	「田中を誘ってみた」	rule:dict:jisjk:365678=&EE@	keep	local
+dict:jisjk:365678	【由美】「翔太を誘ってみた」	【유미】「쇼타를 불러 보았다」	keep	local
+dict:jisjk:365678	翔太も誘ってください。	쇼타도 불러 주세요.	keep	local
+dict:jisjk:365678	由美を誘って映画に行った。	유미를 불러 영화 보러 갔다.	keep	local
+dict:jisjk:365678	【由美】「健太を誘ったの？」	【유미】「켄타를 불렀어?」	keep	local
+dict:jisjk:365678	【由美】「誘ってください」	【유미】「불러 주세요」	keep	local
+dict:jisjk:365678	友達を誘ってみた。	친구를 불러 보았다.	keep	local
+dict:jisjk:365678	「友達も誘おうよ」	「친구도 부르자」	keep	local
+dict:jisjk:365679	彼を誘ってみた。	그를 불러 보았다.	keep	local
+dict:jisjk:365679	「彼女を誘おうかな」	rule:dict:jisjk:365679=&EE@	keep	local
+dict:jisjk:365679	彼らを誘ってみよう。	그들을 불러 보자.	keep	local

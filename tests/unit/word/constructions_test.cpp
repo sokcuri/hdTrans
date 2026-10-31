@@ -1,5 +1,6 @@
 #include "core/word/constructions.h"
 
+#include <cstdint>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -336,7 +337,75 @@ std::string GuardedTarget(const std::vector<std::string_view>& table) {
     return "(no item)";
 }
 
+// The target of 人気 in text after a row that writes X where the questions of the word's speech are 해체,
+// with the quote styles of the line and the level and voice the speech-level stage decides for it.
+std::string CasualLevelTarget(std::string_view text, std::vector<std::uint8_t> styles,
+                              Settings::LineLevel level = Settings::LineLevel::none, bool authoritative = false,
+                              bool prose = false, std::string_view feature = "casual-level",
+                              std::vector<Settings::LineLevel> quotes = {}) {
+    const std::string row = "cx:a:10\t\tF+0== \"" + std::string(feature) + "\"\tset-target \"X\"\t\n";
+    const std::vector<std::string_view> table = {"//= a\tafter First 10\tdoc\n", row};
+    const internal::ConstructionTable t = internal::ParseConstructions(table, kPasses);
+    if (!t.errors.empty()) return "(table: " + Errors(t) + ")";
+    std::vector<hdTrans::dict::File> files{
+        {0, "base.tsv", "key\tko\tpos\tsem\tgram\tdict\trule\tid\tctx\n人気\t인기\tN110\t\t\tGN\t0\t1\t\n"}};
+    const hdTrans::dict::LoadResult loaded = hdTrans::dict::Load(std::move(files));
+    if (loaded.snapshot == nullptr) return "(no dictionary)";
+    const auto generated = hdTrans::internal::NewGenerated(*loaded.snapshot);
+    hdTrans::tokenizer::Tokens tokens;
+    Arena arena;
+    Analysis analysis;
+    hdTrans::tokenizer::Tokenize(text, tokens);
+    Settings settings = Settings::Reference();
+    settings.quoteStyles = styles;
+    settings.lineLevel = level;
+    settings.authoritative = authoritative;
+    settings.prose = prose;
+    settings.quoteLevels = quotes;
+    Analyze(tokens, *loaded.snapshot, {}, settings, arena, analysis);
+    if (analysis.fault || analysis.sentences.empty()) return "(no analysis)";
+    for (const Sentence& sentence : analysis.sentences) {
+        Worker& w = *analysis.worker;
+        w.chain = sentence.chain;
+        w.current = sentence.current;
+        w.transformSurface = sentence.transformSurface;
+        Flusher f{w, generated->rules, loaded.snapshot->OutputFamilies()};
+        Flush(f);
+        internal::RunConstructions(f, t, 0);
+        for (Item* it = w.chain.head; it != nullptr; it = it->next) {
+            if (it->group->surface == "人気") return std::string(it->EntryText(it->selected));
+        }
+    }
+    return "(no item)";
+}
+
 }  // namespace
+
+// casual-level reads the level the speech-level stage decides for the line and its voice; without one,
+// the style of the quote the word is in.
+HD_TEST(constructions_casual_level) {
+    using L = Settings::LineLevel;
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}), std::string("X"));
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 32}), std::string("X"));  // marked casual
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 1}), std::string("인기"));  // polite
+    HD_CHECK_EQ(CasualLevelTarget("「あ」「人気」", {0, 1, 0}), std::string("X"));
+    HD_CHECK_EQ(CasualLevelTarget("「あ」「人気」", {0, 0, 2}), std::string("인기"));  // old speech
+    HD_CHECK_EQ(CasualLevelTarget("人気。", {0}), std::string("인기"));  // outside quotes
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {}), std::string("인기"));  // no styles: reference path
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::casual), std::string("X"));
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::plain), std::string("인기"));
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 1}, L::casual), std::string("X"));  // the stage decides
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::casual, true), std::string("인기"));  // REG-14
+    HD_CHECK_EQ(CasualLevelTarget("人気。", {0}, L::casual), std::string("X"));  // a line the stage writes
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::casual, false, true, "prose"), std::string("X"));
+    // REG-15: the level of the word's own quote on a line of several quotes.
+    HD_CHECK_EQ(CasualLevelTarget("「あ」「人気」", {0, 0, 0}, L::casual, false, false, "casual-level", {L::casual, L::polite}),
+                std::string("인기"));
+    HD_CHECK_EQ(CasualLevelTarget("「人気」「あ」", {0, 0, 0}, L::polite, false, false, "casual-level", {L::casual, L::polite}),
+                std::string("X"));
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::none, false, true, "prose"), std::string("인기"));
+    HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::casual, false, false, "prose"), std::string("인기"));
+}
 
 // A family guard is a condition tried on each word before the family's rows: a false guard skips
 // every row, a true one leaves the rows as they are without a guard.

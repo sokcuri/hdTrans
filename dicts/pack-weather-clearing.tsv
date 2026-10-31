@@ -1,0 +1,8 @@
+#! layer=pack
+# 晴れる의 뜻을 주어로 고름: 구름, 연기, 안개는 걷히다, 시야는 트이다, 의심과 원한은 풀리다, 얼굴은 밝아지다
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+weather-clearing:2	晴れる	v1	sense	frame	subj=雲|暗雲|雨雲|煙|黒煙|白煙|煙幕|硝煙|霧|靄|もや|土埃|砂埃|土煙|砂煙|砂塵|粉塵|湯気|霞|闇	걷히다	10	LEX-3120	audit	
+weather-clearing:3	晴れる	v1:규칙	sense	frame	subj=視界|目の前	트이다	10	LEX-3120	audit	
+weather-clearing:4	晴れる	v1	sense	frame	subj=疑念|疑問|疑惑|容疑|嫌疑|誤解|疑い|恨み|無念|鬱憤|うっぷん|わだかまり|迷い|悩み|憂い	풀리다	10	LEX-3120	audit	
+weather-clearing:5	晴れる	v1	sense	frame	subj=顔|表情|顔色 head=-	밝아지다	10	LEX-3120	audit	
+weather-clearing:6	晴れる	v1	tense	frame	form=te subj=雲|暗雲|雨雲|煙|黒煙|白煙|煙幕|硝煙|霧|靄|もや|土埃|砂埃|土煙|砂煙|砂塵|粉塵|湯気|霞|闇|視界|目の前|疑念|疑問|疑惑|容疑|嫌疑|誤解|疑い|恨み|無念|鬱憤|うっぷん|わだかまり|迷い|悩み|憂い|顔|表情|顔色	6	10	LEX-3120	audit	

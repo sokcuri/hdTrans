@@ -39,6 +39,6 @@ dict:gram:nakereba:なくてはなりません	間違った歴史を全て書き
 dict:jisjk:4079	本当に素晴らしい八歳だ。十七歳＋八歳も見習わなくては。	정말 훌륭한 8세다. 17세＋8세도 본받아야 한다.	fix	local
 dict:gram:nakereba:suru:いけなくな	頑張らなきゃいけなくなるじゃん。	노력해야 하게 되잖아.	fix	local
 dict:jisjk:344317	そうだ、春のご挨拶に行かなくちゃ。	그래, 봄의 인사에 가야 한다.	keep	local-ending
-dict:gram:nakereba:suru:いけなくな	「やめてください。お嫁にいけなくなる」	「그만해 주세요. 아내에게 갈 수 없게 된다」	keep	defaults
+dict:gram:nakereba:suru:いけなくな	「やめてください。お嫁にいけなくなる」	「그만해 주세요. 시집갈 수 없게 된다」	keep	defaults
 dict:jisjk:4079	三日も歩かなきゃならない。	!rule:dict:jisjk:4079	keep	local
 dict:jisjk:4079	二度も謝らなくちゃいけないの？	!rule:dict:jisjk:4079	keep	local

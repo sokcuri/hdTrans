@@ -1,0 +1,84 @@
+#! layer=base
+# 가나로 쓴 외래어 가운데 뜻풀이나 표기가 틀린 기본 사전 낱말의 바른 한국어
+key	ko	pos	sem	gram	note	id
+パンサー	팬서	N130			// LEX-3380	katakana-misglosses:1
+パワーアンプ	파워 앰프	N110			// LEX-3380	katakana-misglosses:2
+パン類生地	빵류 반죽	N110			// LEX-3380	katakana-misglosses:3
+フェアグラウンド	페어 그라운드	N110	VBl		// LEX-3380	katakana-misglosses:4
+ビジネスロジスティクス	비즈니스 로지스틱스	N110			// LEX-3380	katakana-misglosses:5
+ビジネスロジスティックス	비즈니스 로지스틱스	N110			// LEX-3380	katakana-misglosses:6
+ヒートインシュレーション	히트 인슐레이션	N110			// LEX-3380	katakana-misglosses:7
+ピットチャート	피트 차트	N110			// LEX-3380	katakana-misglosses:8
+ファシリティマネジメント	퍼실리티 매니지먼트	N110			// LEX-3380	katakana-misglosses:9
+ファッションドリンク	패션 드링크	N110	VFd		// LEX-3380	katakana-misglosses:10
+フォリオ	폴리오	N110			// LEX-3380	katakana-misglosses:11
+フィンガ	핑거	N110			// LEX-3380	katakana-misglosses:12
+パルスリップル	펄스 리플	N110			// LEX-3380	katakana-misglosses:13
+フォームラバー	폼 러버	N110			// LEX-3380	katakana-misglosses:14
+フェイルソフト	페일 소프트	N110			// LEX-3380	katakana-misglosses:15
+パーコール	퍼콜	N110			// LEX-3380	katakana-misglosses:16
+テーパーウォッシャー	테이퍼 와셔	N110			// LEX-3381	katakana-misglosses:17
+パレタイザー	팔레타이저	N110			// LEX-3381	katakana-misglosses:18
+パレットレスハンドリング	팔레트리스 핸들링	N110			// LEX-3381	katakana-misglosses:19
+パワーウェイトレシオン	파워 웨이트 레이쇼	N110			// LEX-3381	katakana-misglosses:20
+パンチスルー	펀치 스루	N110			// LEX-3381	katakana-misglosses:21
+パークロック	파크 록	N110			// LEX-3381	katakana-misglosses:22
+パーセルシェルフ	파슬 셸프	N110			// LEX-3381	katakana-misglosses:23
+パースペックス	퍼스펙스	N110			// LEX-3381	katakana-misglosses:24
+パーソナライズ	개인화	N110			// LEX-3381	katakana-misglosses:25
+パーマネントインデックス	퍼머넌트 인덱스	N110			// LEX-3381	katakana-misglosses:26
+ヒンジピン	힌지핀	N110			// LEX-3381	katakana-misglosses:27
+ヒンズー語	힌두어	N110	UTs		// LEX-3381	katakana-misglosses:28
+ビスタビジョン	비스타비전	N110	VElVPe		// LEX-3381	katakana-misglosses:29
+ビデオチップ	비디오 칩	N110			// LEX-3381	katakana-misglosses:30
+ピアスイヤリング	피어스 이어링	N110	VAc		// LEX-3381	katakana-misglosses:31
+ピクル	피클	N110			// LEX-3381	katakana-misglosses:32
+ピクルス	피클	N110			// LEX-3381	katakana-misglosses:33
+ピボット	피벗	N110			// LEX-3381	katakana-misglosses:34
+ピリミジン	피리미딘	N110			// LEX-3381	katakana-misglosses:35
+ピンクスリップ	핑크 슬립	N110			// LEX-3381	katakana-misglosses:36
+ファイバ・トゥー・ザ・ホーム	파이버 투 더 홈	N110			// LEX-3381	katakana-misglosses:37
+ファインプレー	파인 플레이	N110			// LEX-3381	katakana-misglosses:38
+フィトンチッド	피톤치드	N110			// LEX-3381	katakana-misglosses:39
+フィナンシャルグループ	파이낸셜 그룹	N110			// LEX-3381	katakana-misglosses:40
+フィボナッツ数列	피보나치 수열	N110			// LEX-3381	katakana-misglosses:41
+フィランソロピー	필란트로피	N110			// LEX-3381	katakana-misglosses:42
+フォトリソグラフィー	포토리소그래피	N110			// LEX-3381	katakana-misglosses:43
+フォルティシモ	포르티시모	N110			// LEX-3381	katakana-misglosses:44
+フォローアップ	팔로업	N110			// LEX-3381	katakana-misglosses:45
+フタル酸エステル	프탈산 에스테르	N110	VMd		// LEX-3381	katakana-misglosses:46
+フタロシアニン	프탈로시아닌	N110			// LEX-3381	katakana-misglosses:47
+ビジネスマン	비즈니스맨	N110	VHn		// LEX-3382	katakana-misglosses:48
+ビジネス向け	비즈니스용	N110			// LEX-3382	katakana-misglosses:49
+ビジネス・デモクラシー	비즈니스 데모크라시	N110			// LEX-3382	katakana-misglosses:50
+ビジネスデモクラシー	비즈니스 데모크라시	N110			// LEX-3382	katakana-misglosses:51
+ビースクール	비즈니스 스쿨	N110	VBl		// LEX-3382	katakana-misglosses:52
+ビジネスコスト	비즈니스 코스트	N110			// LEX-3382	katakana-misglosses:53
+ビジネスコンサルタント	비즈니스 컨설턴트	N110			// LEX-3382	katakana-misglosses:54
+ビジネスシステム	비즈니스 시스템	N110			// LEX-3382	katakana-misglosses:55
+ビジネスリーダーシップ	비즈니스 리더십	N110			// LEX-3382	katakana-misglosses:56
+サイドビジネス	사이드 비즈니스	N110			// LEX-3382	katakana-misglosses:57
+ニュービジネス	뉴 비즈니스	N110			// LEX-3382	katakana-misglosses:58
+ニュー・ビジネス	뉴 비즈니스	N110			// LEX-3382	katakana-misglosses:59
+ビックビジネス	빅 비즈니스	N110			// LEX-3382	katakana-misglosses:60
+ベンチャー・ビジネス	벤처 비즈니스	N110			// LEX-3382	katakana-misglosses:61
+コメビジネス	쌀 비즈니스	N110			// LEX-3382	katakana-misglosses:62
+バウチャービジネス	바우처 비즈니스	N110			// LEX-3382	katakana-misglosses:63
+会員ビジネス	회원 비즈니스	N110			// LEX-3382	katakana-misglosses:64
+国際ビジネス	국제 비즈니스	N110			// LEX-3382	katakana-misglosses:65
+エコロジービジネス	에콜로지 비즈니스	N110	VMo		// LEX-3382	katakana-misglosses:66
+リプロダクトビジネス	리프로덕트 비즈니스	N110	VMo		// LEX-3382	katakana-misglosses:67
+ダイヤル・ビジネス	다이얼 비즈니스	N110			// LEX-3382	katakana-misglosses:68
+ビジネスサーベイ	비즈니스 서베이	N110			// LEX-3382	katakana-misglosses:69
+ビジネスプロトコル	비즈니스 프로토콜	N110			// LEX-3382	katakana-misglosses:70
+ビジネスリレーション	비즈니스 릴레이션	N110			// LEX-3382	katakana-misglosses:71
+ビジネスアセスメント	비즈니스 어세스먼트	N110			// LEX-3382	katakana-misglosses:72
+ビジネス・アセスメント	비즈니스 어세스먼트	N110			// LEX-3382	katakana-misglosses:73
+ビジネスドクター	비즈니스 닥터	N110	UAq		// LEX-3382	katakana-misglosses:74
+ビジネスセンター	비즈니스 센터	N110	VPl		// LEX-3382	katakana-misglosses:75
+ビジネス・センター	비즈니스 센터	N110	VPl		// LEX-3382	katakana-misglosses:76
+ビジネスゲーム	비즈니스 게임	N110	VRw		// LEX-3382	katakana-misglosses:77
+ビジネス・ゲーム	비즈니스 게임	N110	VRw		// LEX-3382	katakana-misglosses:78
+ビジネスモデル特許	비즈니스 모델 특허	N110			// LEX-3382	katakana-misglosses:79
+スクールオブビジネス	스쿨 오브 비즈니스	N110	VBlVGt		// LEX-3382	katakana-misglosses:80
+

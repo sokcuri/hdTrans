@@ -1,0 +1,88 @@
+# 규칙: LEX-3140
+# 규칙: LEX-3141
+# 규칙: LEX-3142
+# 규칙: LEX-3143
+# 규칙: LEX-3144
+rule	input	expected	kind	layer
+pack:verb-object-senses:1	「行くぞ、しっかり掴まってろ」	has:잡아라	fix	packs
+pack:verb-object-senses:1	「こっからは少し荒い運転になる。しっかり掴まってろ！！」	has:잡아라!!	fix	packs
+pack:verb-object-senses:1	しっかり掴まってくださいね！	has:잡아 주세요	fix	packs
+pack:verb-object-senses:1	そして「しっかり掴まってるんだぞ」と命じると	has:잡고 있는	fix	packs
+pack:verb-object-senses:3	少し急ぎますよ。掴まっててくださいね」	has:잡고 있어 주세요	fix	packs
+pack:verb-object-senses:3	「ユウキ様、動くぞ。しっかり掴まっていて欲しい」	has:잡고 있었으면	fix	packs
+pack:verb-object-senses:4	「振り落とされないように掴まって！！」	has:잡아!!	fix	packs
+pack:verb-object-senses:4	「じゃあ掴まって」	has:잡아」	fix	packs
+pack:verb-object-senses:12	ハイネの掴まる力がまた加わり	has:잡는 힘	fix	packs
+pack:verb-object-senses:2	僕はクリュスの身体にしっかり掴まると	has:매달린다고	fix	packs
+pack:verb-object-senses:2	悠希は電信柱に掴まってどうにか踏み止まれた	has:전신주에 매달려	keep	packs
+pack:verb-object-senses:1	兄弟は掴まってしまったんじゃない	has:잡혀	keep	packs
+pack:verb-object-senses:1	「掴まっても、拷問に掛けられずに楽に殺してもらえるわ」	has:잡혀도	keep	packs
+pack:verb-object-senses:1	まあ、運動神経がないわたしはすぐに掴まるから無駄な抵抗なんだけれどね	has:잡히니까	keep	packs
+pack:verb-object-senses:1	無謀にも逃げた上で掴まって制裁にあうくらいなら	has:잡혀	keep	packs
+pack:verb-object-senses:1	「佐伯の親から問い合わせがきた。桐子が掴まらないから」	has:잡히지 않	keep	packs
+pack:verb-object-senses:3	犯人はもう掴まっている。	has:잡히고 있다	keep	packs
+pack:verb-object-senses:14	魔法使いのサルモーが掴まれた腕をふりふり笑う。	has:잡힌 팔	fix	voice
+pack:verb-object-senses:14	腕を掴まれて痛い。	has:잡혀	keep	voice
+pack:verb-object-senses:5	ＦＰＳ部門で見事優勝を果たした。	has:우승을 이루었다	fix	packs
+pack:verb-object-senses:5	奇跡の予備選挙通過を果たしました	has:통과를 완수했습니다	keep	packs
+pack:verb-object-senses:5	才嘉は再会を果たしたときの有紗の顔を思い出す。	has:재회를 이루었을	fix	packs
+pack:verb-object-senses:5	無事合流を果たせたクルツ、ミケアニア、クライブ、エヴァの４人。	has:합류를 이룰 수 있었던	fix	packs
+pack:verb-object-senses:17	私は私の目的を果たしたいだけ。	has:목적을 달성하고 싶은	fix	packs
+pack:verb-object-senses:5	ついに私は人生の夢を果たした	has:꿈을 이루었다	fix	packs
+pack:verb-object-senses:5	―――五年ぶりに甲子園出場を果たすのか！』	has:출전을 이루는	fix	packs
+pack:verb-object-senses:5	俺も、自分の仕事を果たす！	has:완수한다	keep	packs
+pack:verb-object-senses:5	身命を賭して任務を果たす所存	has:임무를 완수할	keep	packs
+pack:verb-object-senses:5	セックスが重要な役割を果たしているということが書いてあった。	has:역할을 하고	keep	packs
+pack:verb-object-senses:5	きっとこの義務を果たした時	has:완수했을	keep	packs
+pack:verb-object-senses:6	再び腰を沈めていく。	has:허리를 낮추어 간다	fix	packs
+pack:verb-object-senses:6	一方、京太は無表情で腰を沈める。	has:허리를 낮춘다	fix	packs
+pack:verb-object-senses:6	そしてクズハは体を沈めて尻尾を突き出す。	has:몸을 낮추어	fix	packs
+pack:verb-object-senses:6	体を沈めると同時に足払いを仕掛け。	has:몸을 낮추는	fix	packs
+pack:verb-object-senses:7	ポスンとベッドに体を沈めた。	has:침대에 몸을 묻었다	fix	packs
+pack:verb-object-senses:7	マリアもふかふかの布団に体を沈めた。	has:이불에 몸을 묻었다	fix	packs
+pack:verb-object-senses:9	女はそう独り言を口にすると、ソファーへ身体を沈めた。	has:소파에 몸을 묻었다	fix	packs
+pack:verb-object-senses:8	サーラは湯船に身体を沈めながら	has:몸을 담그면서	fix	packs
+pack:verb-object-senses:8	湯船の対角線上に体を沈めた。	lacks:낮추	keep	packs
+pack:verb-object-senses:6	限られた火力であの巨体を沈めるには	has:거체를 가라앉히려면	keep	packs
+pack:verb-object-senses:6	逆らえないような口調で騒ぎを沈める。	has:소란을 가라앉힌다	keep	packs
+pack:verb-object-senses:6	底なし沼の近くに彼女の遺体を沈めた。	has:시신을 가라앉혔	keep	packs
+dict:verb-object-senses:w2	「頭が固くて、融通が利かなくて……」	has:융통성이 없어서	fix	fixed
+dict:verb-object-senses:w2	融通が利かない人だ	has:융통성이 없는 사람	fix	fixed
+dict:verb-object-senses:w2	融通が利かなかった。	has:융통성이 없었다	fix	fixed
+dict:verb-object-senses:w3	融通がきかないんだから	has:융통성이 없	fix	fixed
+dict:verb-object-senses:w5	融通の利かない奴だな	has:융통성이 없는 놈	fix	fixed
+dict:verb-object-senses:w7	「気が利かなくてすみません」	has:눈치가 없어서	fix	fixed
+dict:verb-object-senses:w7	気が利かないですね	has:눈치가 없네요	fix	fixed
+dict:verb-object-senses:w2	融通が利くね	has:융통성이 있	keep	fixed
+dict:verb-object-senses:w7	気が利くじゃないか	lacks:없	keep	fixed
+pack:verb-object-senses:10	「お前とは長い付き合いになりそうだ」	has:오랜 사이가 될	fix	packs
+pack:verb-object-senses:10	綾子は神林と旧い付き合いのある資産家に嫁いだ。	has:오랜 사이	fix	packs
+pack:verb-object-senses:10	長い付き合いであるわたしには	has:오랜 사이	fix	packs
+pack:verb-object-senses:10	「それなら。僕と付き合いませんか？」	lacks:오랜	keep	packs
+pack:verb-object-senses:10	付き合いはまだ短いけれど	lacks:사이	keep	packs
+pack:verb-object-senses:10	それなりに長い付き合いなのだろうか。	has:오랜 사이인	fix	packs
+pack:verb-object-senses:10	三姉妹とは家が近くて古い付き合いがある。	has:오랜 사이가	fix	packs
+pack:verb-object-senses:10	古い付き合いなんだ。	has:오랜 사이야	fix	packs
+pack:verb-object-senses:10	朝比奈家とは古い付き合いだと聞いた。	has:오랜 사이라고	fix	packs
+pack:verb-object-senses:10	私よりも付き合いの長い彼らがそう言っているのだ。	lacks:오랜 사이	keep	packs
+pack:verb-object-senses:10	長い付き合いのはずの宮司	has:오랜 사이	fix	packs
+dict:verb-object-senses:w2	体面にこだわって、融通が利かなくて。	has:융통성이 없어서	fix	defaults
+dict:verb-object-senses:w2	訓練されている分、融通が利かなそうである。	has:융통성이 없는 것 같다	fix	defaults
+dict:verb-object-senses:w5	なんて融通の利かない兵だ！	has:융통성이 없는	fix	defaults
+dict:verb-object-senses:w7	「気が利かなかったね。ごめん」	has:눈치가 없었네	fix	defaults
+dict:verb-object-senses:w8	「あ、すみません。気がきかなくて」	has:눈치가 없어서	fix	defaults
+dict:verb-object-senses:w8	「気がきかない」	has:눈치가 없어	fix	defaults
+dict:verb-object-senses:w7	気が利く奴だな	lacks:없	keep	defaults
+pack:verb-object-senses:14	サファイアはエメラルドに掴まれた手首を振りほどいた。	has:잡힌 손목	fix	voice
+pack:verb-object-senses:14	「コヨイ、俺に掴まれるか……？」	has:매달릴 수 있을까	keep	voice
+pack:verb-object-senses:14	掴まれていた手は離される。	lacks:잡을 수	keep	voice
+pack:verb-object-senses:14	やっと掴まれた腕が痛い。	has:잡힌 팔	keep	voice
+pack:verb-object-senses:15	ソファに腰を沈めた	has:소파에 깊숙이 앉았다	fix	packs
+pack:verb-object-senses:15	丸眼鏡の男がカウチに腰を沈めると、	has:카우치에 깊숙이 앉으면	fix	packs
+pack:verb-object-senses:15	グリオがどっかりと椅子に腰を沈めた。	has:의자에 깊숙이 앉았다	fix	packs
+pack:verb-object-senses:16	ソファーに深く腰を沈めて泣き出す。	has:소파에 깊숙이 앉아	fix	packs
+pack:verb-object-senses:6	陣馬は腰を沈めて鞘の先端を上げた。	has:허리를 낮추어	fix	packs
+dict:verb-object-senses:w11	気の利かない男だ	has:눈치가 없는 남자	fix	defaults
+dict:verb-object-senses:w11	気の利く男だ	lacks:없	keep	defaults
+pack:verb-object-senses:17	今こそ、ヴェンティアに来た目的を果たすときだ。	has:목적을 달성할 때다	fix	packs
+pack:verb-object-senses:17	客は目的を果たせば帰ってしまうから	has:목적을 달성하면	fix	packs

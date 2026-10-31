@@ -16,6 +16,7 @@ C:\hdTrans\
     dicts.txt
     user\
       userdict.example.txt
+      names.example.txt
       hdtrans.config.example.yaml
 ```
 
@@ -40,7 +41,8 @@ C:\hdTrans\
 
 3. 아네모네를 다시 실행합니다.
 
-사용자 사전은 `C:\hdTrans\hdtrans-data\user\userdict.txt`에 작성합니다. 아네모네의 구형 `AneDic.txt` 대신 이 파일을 씁니다.
+아네모네의 사용자 사전(`AneDic.txt`)은 Windows의 `J2KEngine.dll`이 아네모네 안에서 읽으므로 그대로 쓸 수 있습니다.
+파일을 고치면 아네모네가 엔진에 다시 읽기를 요청합니다. `C:\hdTrans\hdtrans-data\user\userdict.txt`의 항목이 `AneDic.txt`보다 우선하며,
 형식은 [사용자 사전](dictionary-files.md#사용자-사전)을 보세요.
 
 ## Textractor에서 아네모네로 보내기
@@ -141,6 +143,26 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
 
 기본 주소는 `http://localhost:8000/`입니다. DLL 경로를 직접 지정하려면 terminal 버전을 씁니다.
 
+## 작품의 이름 적기
+
+등장인물, 지명처럼 작품의 이름은 `C:\hdTrans\hdtrans-data\user\names.txt`에 한 줄에 하나씩 적습니다.
+일본어, 한국어, 종류(선택)를 탭으로 구분합니다. 형식은 `names.example.txt`와
+[dictionary-files.md](dictionary-files.md#문서-이름-목록)에 있습니다.
+
+```text
+衣更	이사라
+黒沢	쿠로사와	family
+みみ	미미	nick	hon
+```
+
+- 이름 목록은 사용자 사전과 달리 이름으로 읽으므로 경칭, 조사, 띄어쓰기가 맞습니다(`衣更さんに` 이사라 씨에게).
+- `J2KEngine.dll`과 `hdTransEngine.dll`은 사용자 사전과 함께 읽고, 게임을 하는 동안 고쳐 저장하면 다음 줄부터 반영합니다.
+  한 줄씩 보내는 후킹 도구에서도 줄마다 쓰입니다.
+- 보통 낱말과 같은 히라가나 이름(はな, ひかり)은 넷째 칸에 `hon`을 적어 경칭 앞에서만 이름으로 읽게 합니다.
+- 작품마다 나누려면 `user\games\작품\`에 그 작품의 `userdict.txt`와 `names.txt`를 두고 `user\hdtrans.config.yaml`에
+  `userdict: [., games/작품]`을 적습니다. 작품을 바꿀 때 이 줄을 고치고 도구를 다시 시작하거나 다시 읽기를 하면 사전과 이름이 함께 바뀝니다.
+- 잘못된 줄은 건너뛰고 hdTrans 프로그램의 로그 탭에 나옵니다.
+
 ## 번역 결과에 영향을 주는 것
 
 텍스트 후커, 번역 모음 도구, 플러그인, C DLL, npm과 웹 API에 모두 해당합니다.
@@ -150,19 +172,25 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
   「」 대사가 있는 대본과 함께 보내면 `그것은 다르다`.
 - **도구나 엔진을 다시 시작하기, reset 부르기:** 0.5.5부터 번역 결과를 바꾸지 않습니다. 앞에서 번역한 줄이 다음 줄에 남지
   않기 때문입니다. 다시 시작은 사전을 새로 읽을 뿐입니다.
-- **사전 바꾸기:** 사용자 사전(`user/userdict*.txt`)은 저장하면 다음 번역부터 반영됩니다. 설정 파일과 기본 사전은 도구를
+- **사전 바꾸기:** 사용자 사전(`user/userdict*.txt`)과 이름 목록(`user/names*.txt`)은 저장하면 다음 번역부터 반영됩니다. 설정 파일과 기본 사전은 도구를
   다시 시작하거나 다시 읽기(`J2K_ReloadUserDict`, `hdTrans_Reload`)를 하면 반영됩니다.
 - **사전 진단:** 번역이 이상하면 hdTrans 프로그램의 로그 탭(또는 `hdtrans --verify-dicts`)에서 사전 경고를 확인합니다.
 - **말투 설정:** `J2KEngine.dll`과 C API는 설정 파일의 `speech`로 엔진 전체에 정합니다. TypeScript는 `setSpeech()`로
   이후 번역에, `translate(text, { speech })`로 그 호출에만 정하고, C++은 `Session::SetSpeech`, CLI는 `--speech`입니다.
   말투마다 무엇이 달라지는지는 [README](../README.md#말투-strict와-soft)에 있습니다.
+- **대사의 말투 수준:** 「」나 『』로 시작하는 줄은 번역한 뒤 말투 수준 규칙이 문장 끝을 다시 씁니다(「白崎、俺が手伝うから大丈夫だ」 →
+  「시라사키, 내가 도우니까 괜찮아」). 후킹 도구가 한 줄씩 보내도 그 줄이 「로 시작하면 적용됩니다. 끄려면 설정 파일에
+  `speech_levels: keep`을 적고 도구를 다시 시작하거나 다시 읽기를 합니다(TypeScript `speechLevels`, CLI `--speech-levels`).
+  대사 하나가 여러 줄로 잘려 오면(`「白崎、俺が手伝うから`와 `大丈夫だ」`) 「를 같은 줄에서 닫지 않으므로 `wrapped: true`여도 그 대사는
+  번역의 말투 그대로입니다(`괜찮다」`). 자세한 내용은 [README](../README.md#대사의-말투-수준)에 있습니다.
 - **문장 중간에서 잘린 줄:** 설정 파일의 `wrapped: true`(CLI `--wrapped`, TypeScript `wrapped`): 입력이 문장 중간에서
   잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계입니다. 앞 호출의 줄은 남지 않으므로 이어지는 문장의
   앞부분은 문맥(C API `hdTrans_TranslateContext`, TypeScript `context`, CLI `--context`)으로 함께 넘깁니다.
 - **도구가 보낼 것:**
   - 한 줄씩 보냅니다. 여러 줄을 묶으면 위처럼 「」 밖 줄이 지문이 될 수 있습니다.
   - 화자 이름은 떼어 보냅니다. 붙여 보내면 이름이 문장의 일부로 번역되고, `アリス：それは違う`처럼 쌍점이 있는 줄은 `soft`에서도
-    대사로 보지 않아 `앨리스：그것은 다르다`가 됩니다. 이름 없이 `それは違う`면 `그건 달라`입니다.
+    대사로 보지 않아 `앨리스：그것은 다르다`가 됩니다. 이름 없이 `それは違う`면 `그건 달라`입니다. `白崎「…」`처럼 붙인 줄은
+    대사의 말투 수준도 바꾸지 않습니다.
   - 루비는 될 수 있으면 지웁니다. `君《きみ》`의 《》 루비는 엔진이 지우지만, `君(きみ)`처럼 괄호로 붙은 읽기는 글자로 남아
     결과가 바뀝니다(`君(きみ)が好き` 너가 좋아, `君が好き` 너를 좋아해).
 

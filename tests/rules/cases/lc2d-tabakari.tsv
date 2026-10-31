@@ -1,0 +1,29 @@
+# 규칙: GRM-146
+rule	input	expected	kind	layer
+cx:lc2d-tabakari:10	私 妻を亡くしたばかりで…	has:잃은 지 얼마 안 돼서	fix	rewrites
+cx:lc2d-tabakari:10	しかも今日会ったばかりで。	has:만난 지 얼마 안 돼서	fix	rewrites
+cx:lc2d-tabakari:10	「いや。僕も今来たばかりで。」	has:온 지 얼마 안 돼서	fix	rewrites
+cx:lc2d-tabakari:10	会ったばかりでなにを、とも思う。	has:만난 지 얼마 안 돼서	fix	rewrites
+cx:lc2d-tabakari:20	誓ったばかりだしな。	has:맹세한 지 얼마 안됐고	fix	rewrites
+cx:lc2d-tabakari:20	「始まったばかりだぞ？」	has:시작된 지 얼마 안됐다	fix	rewrites
+cx:lc2d-tabakari:20	昨日出会ったばかりだけど。	has:만난 지 얼마 안됐지만	fix	rewrites
+cx:lc2d-tabakari:20	「復習したばかりだったので。」	has:복습한 지 얼마 안됐었으므로	fix	rewrites
+cx:lc2d-tabakari:25	なったばかりだろう」	has:된 지 얼마 안됐을	fix	rewrites
+cx:lc2d-tabakari:25	「今シンだと名乗ったばかりだろう。もう忘れたのか？」	has:자칭한 지 얼마 안됐을	fix	rewrites
+cx:lc2d-tabakari:25	卵から生まれたばかりなのだろう、傍に割れた卵のかけらがある。	has:태어난 지 얼마 안됐을	fix	rewrites
+cx:lc2d-tabakari:30	まだ訓練は始まったばかりである。	has:시작된 지 얼마 안된다	fix	rewrites
+cx:lc2d-tabakari:30	娘は、湯浴みを始めたばかりである。	has:시작한 지 얼마 안된다	fix	rewrites
+cx:lc2d-tabakari:30	ただ小声で「伏せろ」と言ったばかりである。	has:말한 지 얼마 안된다	fix	rewrites
+cx:lc2d-tabakari:30	そんな彼は最近病で母を亡くしたばかりである。	has:잃은 지 얼마 안된다	fix	rewrites
+cx:lc2d-tabakari:40	今日出会ったばかりの彼だ。	has:만난 지 얼마 안된 그	fix	rewrites
+cx:lc2d-tabakari:40	最近引っ越したばかりの夕李。	has:이사한 지 얼마 안된	fix	rewrites
+cx:lc2d-tabakari:40	昨日発売したばかりの格ゲーじゃん。	has:발매한 지 얼마 안된	fix	rewrites
+cx:lc2d-tabakari:40	宿主ログは先程見たばかりの記憶を思い出した。	has:본 지 얼마 안된 기억	fix	rewrites
+cx:lc2d-tabakari:10	泣いてばかりだ。	!rule:cx:lc2d-tabakari:10	keep	rewrites
+cx:lc2d-tabakari:10	生まれたばかりの時には	!rule:cx:lc2d-tabakari:10	keep	rewrites
+cx:lc2d-tabakari:20	狩り始めたばかり…。	!rule:cx:lc2d-tabakari:20	keep	rewrites
+cx:lc2d-tabakari:20	間来たばかりなのに）	!rule:cx:lc2d-tabakari:20	keep	rewrites
+cx:lc2d-tabakari:25	自分を軽く笑い飛ばして、俊哉は引っ越したばかりのアパートを出る。	!rule:cx:lc2d-tabakari:25	keep	rewrites
+cx:lc2d-tabakari:25	仁はそっと立ち上がり、点けたばかりのタバコを灰皿に押し付ける。	!rule:cx:lc2d-tabakari:25	keep	rewrites
+cx:lc2d-tabakari:30	間来たばかりなのに）	!rule:cx:lc2d-tabakari:30	keep	rewrites
+cx:lc2d-tabakari:40	自分を軽く笑い飛ばして、俊哉は引っ越したばかりのアパートを出る。	!rule:cx:lc2d-tabakari:40	keep	rewrites

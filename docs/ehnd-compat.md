@@ -252,8 +252,9 @@ JP <TAB> KR [<TAB> TYPE [<TAB> ATTR]] [<TAB> 무시…] [//주석]
   Ehnd는 그 **파일의 나머지 줄을 읽지 않습니다**. hdTrans는 그 줄만 건너뛰고 기록하며, 코드 페이지
   표 없이 ASCII(JP는 반각 가타카나도) 1바이트, 나머지 2바이트로 셉니다.
 - 키가 빈 줄은 버립니다.
-- Ehnd는 `Dat\UserDict.jk`(`JKDIC_SWITCH`)와 아네모네의 `anedic.txt`도 합칩니다. hdTrans는 Ehnd
-  폴더의 `UserDict*.txt`만 읽습니다.
+- Ehnd는 `Dat\UserDict.jk`(`JKDIC_SWITCH`)와, 아네모네 안에서는 실행 파일 옆 `anedic.txt`도 합칩니다.
+  hdTrans는 Ehnd 폴더의 `UserDict*.txt`를 읽고, Windows의 `J2KEngine.dll`만 아네모네 안에서
+  `AneDic.txt`도 읽습니다([아네모네](tool-compatibility.md#아네모네-anemone)). `Dat\UserDict.jk`는 읽지 않습니다.
 
 ### 엔진에 넘기는 방식
 
@@ -428,7 +429,8 @@ _TGL	_CONN:MY_SWITCH_	ござる	です	20000000	0
 | REGEX 필드가 없으면 초기화 안 된 값 | 0(리터럴) |
 | 빈 SRC 리터럴 행은 끝나지 않음 | 버리고 기록 |
 | 너무 긴 UserDict 줄에서 파일 나머지를 버림 | 그 줄만 버리고 기록 |
-| `UserDict.jk`, `anedic.txt`, 설정 스위치, 명령어 | 읽지 않음 |
+| `UserDict.jk`, 설정 스위치, 명령어 | 읽지 않음 |
+| 아네모네 안에서 `anedic.txt`를 합침 | Windows `J2KEngine.dll`만 합침, Ehnd 설정과 무관 |
 | 후처리가 꺼지면 토글이 다음 요청으로 이어짐 | 줄마다 선언 상태 |
 | 선언되지 않은 이름이 섞이면 토글 되돌리기가 어긋남 | 선언되지 않은 이름은 꺼짐으로 되돌림 |
 | ATTR 21바이트 넘침이 문법 코드로 감 | 의미 코드로 그대로 |

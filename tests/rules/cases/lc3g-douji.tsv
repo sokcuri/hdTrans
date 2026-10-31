@@ -1,0 +1,27 @@
+# 규칙: GRM-181
+rule	input	expected	kind	layer
+cx:lc3g-douji:10	触れたと同時に。	has:접한 것과	fix	rewrites
+cx:lc3g-douji:10	それを認めたと同時に俺の中に	has:인정한 것과	fix	rewrites
+cx:lc3g-douji:10	声を掛けたと同時に気付いた。	has:건 것과	fix	rewrites
+cx:lc3g-douji:10	言ったと同時に殴った、のか？	has:말한 것과	fix	rewrites
+cx:lc3g-douji:10	「ひらいたと同時に離れていく」	has:연 것과	fix	rewrites
+cx:lc3g-douji:10	そう言ったと同時に光に包まれた。	has:말한 것과	fix	rewrites
+cx:lc3g-douji:10	と三人の挨拶が終わったと同時に…	has:끝난 것과	fix	rewrites
+cx:lc3g-douji:10	リセの悲鳴が甲高く響いたと同時に	has:울린 것과	fix	rewrites
+cx:lc3g-douji:20	と、叫んだと同時に、	has:외친 것과	fix	rewrites
+cx:lc3g-douji:20	剣を掴んだと同時に走り出す。	has:잡은 것과	fix	rewrites
+cx:lc3g-douji:20	咳き込んだと同時に倒れこむ老人。	has:기침한 것과	fix	rewrites
+cx:lc3g-douji:20	息を呑んだと同時に背筋が凍った。	has:삼킨 것과	fix	rewrites
+cx:lc3g-douji:20	母親は私を産んだと同時に死んだ。	has:낳은 것과	fix	rewrites
+cx:lc3g-douji:20	殴られ吹っ飛んだと同時に薬を飲む。	has:날아간 것과	fix	rewrites
+cx:lc3g-douji:20	叫んだと同時に右手で純の顔を殴ってきた。	has:외친 것과	fix	rewrites
+cx:lc3g-douji:20	叫んだと同時に暗黒の世界に投げ出された。	has:외친 것과	fix	rewrites
+cx:lc3g-douji:30	初めて乗せてもらった飛竜は凄く気持ちよかったと同時に怖かった。	has:좋았던 것과	fix	rewrites
+cx:lc3g-douji:10	そしてサメが何かに衝突すると同時に爆発した。	!rule:cx:lc3g-douji:10	keep	rewrites
+cx:lc3g-douji:20	イカされると同時に連続失禁！	!rule:cx:lc3g-douji:20	keep	rewrites
+cx:lc3g-douji:30	仰天すると同時に、感謝の気持ちでいっぱいになる。	!rule:cx:lc3g-douji:30	keep	rewrites
+cx:lc3g-douji:10	電話が切れると同時に男性は机に携帯を置く。	!rule:cx:lc3g-douji:10	keep	rewrites
+cx:lc3g-douji:20	拳銃から火花が散ると同時に、飛騨は刀を抜く。	!rule:cx:lc3g-douji:20	keep	rewrites
+cx:lc3g-douji:30	アオーンが考えると同時に返事が返ってきた。	!rule:cx:lc3g-douji:30	keep	rewrites
+cx:lc3g-douji:10	開演のブザーが鳴ると同時に舞台の幕が上がる。	!rule:cx:lc3g-douji:10	keep	rewrites
+cx:lc3g-douji:20	先生の話が終わると同時にチャイムが鳴る。	!rule:cx:lc3g-douji:20	keep	rewrites

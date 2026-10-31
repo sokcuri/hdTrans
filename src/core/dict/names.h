@@ -1,12 +1,18 @@
 #pragma once
 // Name-layer helpers of loading (names.cpp).
+#include <array>
 #include <cstddef>
+#include <string_view>
 
 #include "core/dict/codes.h"
 #include "core/dict/dict.h"
 #include "core/dict/layer.h"
 
 namespace hdTrans::dict::internal {
+
+// Honorifics that follow a person's name.
+inline constexpr std::array<std::string_view, 11> kNameHonorifics = {"さん", "ちゃん", "くん", "君", "様", "さま",
+                                                                     "先輩", "先生", "殿", "氏", "たん"};
 
 // Place-name semantic codes: QCT (city or region) or QNN (country). VPl alone is a
 // class of common nouns (우물, 시장).

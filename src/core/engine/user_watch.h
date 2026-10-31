@@ -19,6 +19,7 @@
 #include "core/dict/mapped_file.h"
 #include "core/dict/snapshot.h"
 #include "core/engine.h"
+#include "core/filter/filter.h"
 
 namespace hdTrans::internal {
 
@@ -47,6 +48,7 @@ struct FileWatch {
 
 struct UserVersion {
     std::vector<std::pair<std::string, FileVersion>> files;
+    std::vector<std::pair<std::string, FileVersion>> names;  // the name lists of the folders
     std::vector<dict::UserSource> sources;
     FileVersion config;
     std::uint64_t optionsRevision = 0;
@@ -136,6 +138,7 @@ struct UserWatch {
     bool sourceHistorySeeded = false;
     std::optional<dict::File> memoryUser;
     std::optional<std::vector<EhndFile>> memoryEhnd;
+    std::vector<filter::Source> hostUserDicts;
     bool memoryEhndStrict = true;
     bool memoryEhndStrictOverride = false;
     std::optional<bool> userStrictOverride;
@@ -186,5 +189,10 @@ bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verif
 bool OpenEhndSource(Engine& e, const dict::UserSource& source, const ConfigResult& config,
                     const DictionaryOptions& options = {});
 bool ReloadWithConfig(Engine& e, const ConfigResult& config, const DictionaryOptions& options = {});
+
+// UserDict texts of the host program (docs/ehnd-compat.md), loaded with the filters
+// after the dictionary-folder filters and before an Ehnd folder; the next load reads them.
+// Each source's name is shown in diagnostics.
+void SetHostUserDicts(Engine& e, std::vector<filter::Source> sources);
 
 }  // namespace hdTrans::internal

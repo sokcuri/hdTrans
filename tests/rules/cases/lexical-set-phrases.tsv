@@ -1,0 +1,44 @@
+# 규칙: LEX-166
+rule	input	expected	kind	layer
+lexical:set-phrases	だが 誘拐と疑うのは勘弁願いたいな。	has:봐줬으면 좋겠네	fix	phrases
+lexical:set-phrases	またあの倉庫では勘弁願いたい。	has:봐줬으면 좋겠다	fix	phrases
+lexical:set-phrases	迷惑をかけるのは勘弁願いたいところだ。	has:봐줬으면 하는 바다	fix	phrases
+lexical:set-phrases	今日はお尻の穴はご勘弁願います。	has:용서 바랍니다	keep	lookup
+lexical:set-phrases	やりおるな！「ビューノ」！	has:제법인데!	fix	phrases
+lexical:set-phrases	ぐぬぬ、中々やりおる。	has:제법이군	fix	phrases
+lexical:set-phrases	やり終えた	lacks:제법	keep	lookup
+lexical:set-phrases	声がかかると必ず帽子を取って	has:부르는 소리가 들리면	fix	phrases
+lexical:set-phrases	顔を前にやると、横から声がかかる。	has:옆에서 부르는 소리가 들린다	fix	phrases
+lexical:set-phrases	ナイスマッチョの掛け声が掛かっている。	has:구령이 걸려	keep	lookup
+lexical:set-phrases	忠義が本当に嘘を言っているように見えなくて、	has:거짓말을 하고 있는	fix	phrases
+lexical:set-phrases	二人とも嘘を言っている顔じゃない。	has:거짓말을 하는 얼굴	fix	phrases
+lexical:set-phrases	嘘をついている顔じゃない。	has:거짓말을 하고 있는 얼굴	keep	lookup
+lexical:set-phrases	僕が瞬きをする間に、サキは跳んでいた。	has:눈을 깜빡이는 동안에	fix	phrases
+lexical:set-phrases	何回か瞬きしてから模擬戦が終わったのだと	has:눈을 깜빡이고 나서	fix	phrases
+lexical:set-phrases	驚き過ぎて瞬きしか出来ない私を	has:깜박임밖에	keep	lookup
+lexical:set-phrases	取りあえず話は一段落ついたみたいで、	has:일단락된 것 같아	fix	phrases
+lexical:set-phrases	治療が一段落つかなければ、	has:일단락되지 않으면	fix	phrases
+lexical:set-phrases	仕事が一段落した	has:일단락했다	keep	lookup
+lexical:set-phrases	ニールはピンと来たようだ。	has:감이 온 것 같다	fix	phrases
+lexical:set-phrases	全くピンと来ないマルコ。	has:감이 오지 않는 마르코	fix	phrases
+lexical:set-phrases	耳がピンと立った	lacks:감이	keep	lookup
+lexical:set-phrases	一瞬元気になった部長が、	has:기운을 차린 부장이	fix	phrases
+lexical:set-phrases	元気な子だ	has:건강한 아이	keep	lookup
+lexical:set-phrases	ここまでの力を出せるようになった	has:힘을 낼 수 있게	fix	phrases
+lexical:set-phrases	力を出し切った	has:힘을 다 쏟아 냈다	keep	phrases
+lexical:set-phrases	しゃんとするんだろ。僕の部下も見ている。	has:똑바로 하는 거지	fix	phrases
+lexical:set-phrases	そう言って申し訳なさそうに、	has:미안한 듯이	fix	phrases
+lexical:set-phrases	申し訳なさそうな顔をした。	has:미안한 듯한 얼굴	fix	phrases
+lexical:set-phrases	申し訳ない	has:미안하다	keep	lookup
+lexical:set-phrases	さすがに、お見通しのようだ。	has:다 꿰뚫어 보고 있는 것 같다	fix	phrases
+lexical:set-phrases	全部お見通しよ	has:다 꿰뚫어 보고 있어	fix	phrases
+lexical:set-phrases	今後の見通しは明るい	has:전망은 밝다	keep	lookup
+lexical:set-phrases	医師はうんざりしていた。	has:진절머리가 나 있었다	fix	phrases
+lexical:set-phrases	うんざりだ	has:지긋지긋	keep	lookup
+lexical:set-phrases	令嬢を押しつけられるってうんざりしていた所に、	has:진절머리가 나 있던 곳에	fix	phrases
+lexical:set-phrases	さりげなくその豊満な胸を押し当ててくる。	has:가슴을 갖다 대어 온다	fix	phrases
+lexical:set-phrases	少女の首に押し当てられているが	has:갖다 대어지고 있지만	fix	phrases
+lexical:set-phrases	一発かましてやる	has:한 방 먹여	fix	phrases
+lexical:set-phrases	猿轡をかます	has:재갈을 물린다	keep	senses
+lexical:set-phrases	何処か晴れない表情をしている	has:어두운 표정을	fix	phrases
+lexical:set-phrases	「つる舞う形の群馬県」じゃない。	has:학이 춤추는 모양의 군마현	fix	phrases

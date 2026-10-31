@@ -1,0 +1,43 @@
+# The sample pack (tests/packs/sample, docs/packs.md): one case per slot and per step of the resolution.
+rule	input	expected	kind	layer
+pack:s.takai.thing	この本は高い。	이 책은 비싸다.	fix	packs
+pack:s.takai.thing	この本は高い。	rule:pack:s.takai.thing=비싸다	fix	packs
+pack:s.takai.thing-low	この本は高い。	!rule:pack:s.takai.thing-low	keep	packs
+pack:s.takai.mountain	山が高い。	rule:pack:s.takai.mountain=높다	keep	packs
+pack:s.takai.thing	空が高い。	하늘이 높다.	keep	packs
+pack:s.takai.thing	空が高い。	!rule:pack:s.takai.thing	keep	packs
+pack:s.yomu.active	手紙を読まれた。	편지를 읽었다.	fix	packs
+pack:s.yomu.active	手紙を読まれた。	rule:pack:s.yomu.active=active	fix	packs
+pack:s.taberu.potential	これなら食べられる。	rule:pack:s.taberu.potential=potential	keep	packs
+pack:s.iku.invite	明日は行かない？	내일은 가지 않을래?	fix	packs
+pack:s.iku.invite	明日は行きませんか？	!rule:pack:s.iku.invite	keep	packs
+pack:s.ciel	シエルが来た。	씨엘이 왔다.	fix	packs
+pack:s.ciel	シエルが来た。	rule:pack:s.ciel=씨엘	fix	packs
+pack:s.unazuku	一度として、彼は首を縦には振ってくれなかった。	!rule:pack:s.unazuku	keep	packs
+pack:s.unazuku	首を縦に振ってくれない。	고개를 끄덕여 주지 않는다.	keep	packs
+pack:s.modosu	話を元に戻そう。	이야기를 원래대로 되돌리자.	fix	packs
+pack:s.modosu	アンケートを元に再構築した。	!rule:pack:s.modosu	keep	packs
+pack:s.soba	青海さんの元に飛び込んだ。	아오미 씨의 품으로 뛰어들었다.	keep	packs
+pack:s.soba	母の元に向かった。	어머니의 곁으로 향했다.	fix	packs
+pack:s.soba	アンケートを元に再構築した。	!rule:pack:s.soba	keep	packs
+pack:s.ittai	最後の一体が泡になった。	마지막 하나가 거품이 되었다.	fix	packs
+pack:s.ittai	一体何をしている？	!rule:pack:s.ittai	keep	packs
+pack:s.betsuni	別にいいじゃない。	괜찮잖아.	fix	packs
+pack:s.betsuni	それでいいじゃない。	!rule:pack:s.betsuni	keep	packs
+pack:s.iu.respectful	先生が言われた。	선생님이 말씀하셨다.	keep	packs
+pack:s.iu.respectful	先生が言われた。	rule:pack:s.iu.respectful=respectful	keep	packs
+pack:s.iu.heard	彼に言われた。	그에게 들었다.	keep	packs
+pack:s.iu.heard	彼に言われた。	rule:pack:s.iu.heard=passive:듣다	keep	packs
+pack:s.iu.heard	先生が言われた。	!rule:pack:s.iu.heard	keep	packs
+pack:s.tomeru.parked	多くの車が止められた駐車場。	많은 차가 세워진 주차장.	fix	packs
+pack:s.tomeru.parked	車を止めた。	!rule:pack:s.tomeru.parked	keep	packs
+pack:s.iku.invite	行くしかない？	!rule:pack:s.iku.invite	keep	packs
+pack:s.iku.invite	行ったじゃないか？	!rule:pack:s.iku.invite	keep	packs
+pack:s.igai	猫以外は来た。	고양이를 빼고는 왔다.	fix	packs
+pack:s.igai	先生以外は来た。	선생님을 빼고는 왔다.	fix	packs
+pack:s.igai	以外と簡単だ。	!rule:pack:s.igai	keep	packs
+pack:s.naguru	兄に殴られた。	형한테 맞았다.	fix	packs
+pack:s.naguru	兄が殴った。	!rule:pack:s.naguru	keep	packs
+pack:s.naguru	兄から殴られた。	형한테 맞았다.	fix	packs
+pack:s.naguru	三時に殴られた。	3시에 맞았다.	keep	packs
+pack:s.naguru	後ろから殴られた。	뒤에서 맞았다.	keep	packs

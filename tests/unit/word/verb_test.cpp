@@ -166,6 +166,12 @@ HD_TEST(verb_match_conjugation) {
         {"食べた", 0, {{"食べ", "M423"}}, false, -1, 3, ""},
         {"食べた", 0, {{"食べ", "M431"}, {"食べ", "M433"}}, false, -1, 3, ""},
         {"書いた", 9, {{"書", "M421"}}, false, -1, -1, "M421"},
+        // A godan e-row form of a kanji stem before 、: the potential after が, the imperative elsewhere;
+        // a kana stem is no verb there.
+        {"雨風が凌げ、", 9, {{"凌", "M442"}}, true, 4, 2, "M442"},
+        {"急げ、急げ", 0, {{"急", "M442"}}, true, 11, 2, "M442"},
+        {"本を読め、", 6, {{"読", "M425"}}, true, 11, 5, "M425"},
+        {"それ、", 0, {{"そ", "M428"}}, false, -1, 8, ""},
     };
     for (const Case& c : cases) {
         std::deque<word::Record> pool;
