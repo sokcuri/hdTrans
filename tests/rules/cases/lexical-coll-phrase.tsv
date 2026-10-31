@@ -1,6 +1,9 @@
 # 규칙: LEX-151
 rule	input	expected	kind	layer
-phrase:coll	会長が部室を後にして、数十分。	회장이 동아리방을 떠나, 수십 분.	fix	builtin-phrase
+cx:coll-verb:70	会長が部室を後にして、数十分。	회장이 동아리방을 떠나고, 수십 분.	fix	rewrites
+cx:coll-verb:70	先生の家を後にして、銀地町の繁華街へ	has:집을 떠나고,	fix	rewrites
+cx:coll-verb:70	上機嫌で部室を後にした。	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	その話は後にして、まずは香奈を病院に戻してください	!rule:cx:coll-verb:70	keep	rewrites
 phrase:coll	同僚にそう挨拶して、俺は会社を後にした。	has:회사를 떠났다	fix	builtin-phrase
 phrase:coll	俺はソファーから立ちあがり、リビングを後にした。	has:거실을 떠났다	fix	builtin-phrase
 phrase:coll	「その話は後にしよう」	lacks:떠나	keep	builtin-phrase
