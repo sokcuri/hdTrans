@@ -82,7 +82,7 @@ console.log(result.choices);
 
 대사의 말투는 `Speech` 값 `'strict'`(기본)와 `'soft'`이며 CLI의 `--speech`와 같습니다. `'strict'`는 번역의 `-다`를
 그대로 두고(「明日行く」 → 「내일 간다」), 반말 표지가 있는 대사의 상태와 과거만 해체로 씁니다(「違うよ。もう終わった」 →
-「달라. 벌써 끝났어」). `'soft'`는 「」 안의 `-다`를 해체로 쓰고(「내일 갈 거야」), 「」를 쓰지 않는 글의 줄도
+「아니야. 벌써 끝났어」). `'soft'`는 「」 안의 `-다`를 해체로 쓰고(「내일 갈 거야」), 「」를 쓰지 않는 글의 줄도
 대사로 보이면 해체로 씁니다(それは違う → 그건 달라). 애매한 줄은 `-다`로 둡니다(わかった。 → 알았다.). 평서형 의문문은
 두 값 모두 해체로 묻습니다(「大丈夫か？」 → 「괜찮아?」). 소설은 `'strict'`, 게임 대사와 채팅은 `'soft'`가 잘 맞습니다.
 「」로 시작하는 대사 줄은 두 값 모두 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙이 말투를 다시 정합니다. `SpeechLevels` 값
@@ -93,6 +93,8 @@ console.log(result.choices);
 ```ts
 hdTrans.setSpeech("soft");
 const strict = hdTrans.translate("「明日行く」", { speech: "strict" });  // 「내일 간다」
+hdTrans.translate("「いえ、当たり前のことですから」");                       // 「아뇨, 당연한 일이니까요」
+hdTrans.translate("「いえ、当たり前のことですから」", { speechLevels: "keep" });  // 「아뇨, 당연한 일이니까」
 ```
 
 `json: true`는 JSON 문자열이 아니라 타입이 있는 객체를 반환합니다.

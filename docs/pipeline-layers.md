@@ -44,7 +44,7 @@
 | compose | 항목을 오른쪽에서 왼쪽으로 | 조사 형태, 활용 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateChunk` `s.composer.Compose(` |
 | cleanup | 모두 적용 | 출력 텍스트 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateBody` `output::Cleanup(sentences, gaps)` |
 | restore | 차례로. `cleanup.tsv`는 위치마다 파일 순서의 첫 행 | 출력 텍스트 | 없음 | `src/core/dict/builtin/extra/cleanup.tsv` | `src/core/engine/driver.cpp` `TranslateBody` `pipeline::RestoreAll(` |
-| register | 문서의 대사 줄마다, 말투 수준이 바뀌는 줄만(spec REG-10~REG-12) | 대사 줄의 말투, 그 줄의 입말 꼴 | 자막 문서와 `-reference`는 건너뜀 | `src/core/register/data/` | `src/core/engine/driver.cpp` `TranslateDocument` `reg::Retrofit(` |
+| register | 문서의 대사 줄마다, 말투 수준이 바뀌는 줄만(spec REG-10~REG-12). 줄의 말투 수준은 단어 단계 전에 원문으로 정하고 구문 표의 행도 그 결정을 읽음 | 대사 줄의 문장 끝 서술어(REG-22) | 자막 문서, `speech_levels: keep`, `-reference`는 건너뜀. 바뀐 줄은 `-speech-report` | `src/core/register/data/` | `src/core/engine/driver.cpp` `TranslateDocument` `reg::Retrofit(` |
 | postfilter | 모든 행 적용 | 출력 줄 | 없음 | Ehnd 폴더의 postfilter | `src/core/engine/driver.cpp` `TranslateDocument` `filter::Stage::Post` |
 
 `local`부터 `global-last`까지는 `Flush`가 부르는 `CleanupSelectors` 안에서, `senses`와 `scorers`는 `Select`
@@ -53,6 +53,7 @@
 ### 스위치
 
 - `-reference`는 `word::Improvements`와 `register`를 모두 끕니다. 그래도 `constraints`, 텍스트 패스, `senses`는 돕니다.
+- `-speech-levels keep`(설정 `speech_levels: keep`)은 `register`를 끄고, 구문 표의 행이 읽는 줄의 말투 수준 결정도 만들지 않습니다.
 - `-raw`(텍스트 경로가 아님)는 `constraints`, `voice`, `senses`~`packs`, `restore`, `register`를 건너뜁니다.
 - `-no-cg`는 `cg-lite`의 손 규칙을, `-cg-learned`는 학습 규칙을 켭니다. `-misread`는 `misread`를 켭니다.
 
@@ -98,7 +99,8 @@ WHY  1  0  0  0:0  だが  1  LocalRule  285  하지만  -1  None  -1  local  L2
 - 구문 표의 행이 정한 번역은 `rewrites`와 그 행의 id(`cx:return-to:10`)로 보입니다
   ([rule-language.md](rule-language.md#구문-표-constructionstsv)).
 - 기록하지 않는 층: `constraints`(추가한 이름 항목은 `fixed`), 찾기의 거르기, `voice`(남긴 후보 가운데 고른 층이
-  보임), `rewrites`의 C++ 패스 이름, `cg-lite`의 행, `compose`와 그 뒤(`register` 포함). 이 층들은 출력 텍스트를 바꿔도 `WHY`에 이름이 없습니다.
+  보임), `rewrites`의 C++ 패스 이름, `cg-lite`의 행, `compose`와 그 뒤(`register` 포함). 이 층들은 출력 텍스트를 바꿔도 `WHY`에 이름이 없습니다. `register`가 바꾼 줄과
+  규칙은 `-speech-report FILE`이 적습니다.
 - `defaults`로 고른 후보의 번역을 규칙의 대입이 바꿨으면 그 규칙이 보입니다(`CandidateChoice`).
 
 ## 층을 나눌 때의 한계

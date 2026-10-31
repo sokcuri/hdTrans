@@ -8,6 +8,12 @@
   브랜치를 `develop` 최신으로 맞출 필요는 없습니다. 병합된 트리는 `develop` push의 Build가 다시 테스트합니다.
 - 정식 릴리스에 넣을 변경은 `develop` → `main` PR로 모읍니다. 이 PR은 **Create a merge commit**으로 합쳐 개별 변경의 제목을 보존합니다.
 
+## 번역을 바꾸는 PR
+
+- 맞는 출력은 [spec/](../spec/README.md)의 규칙이 정합니다. PR 본문에 따른 규칙의 id(`REG-3`, `LEX-200`)를 적습니다.
+- 규칙과 id, `fix`와 `keep` 사례는 [테스트 남기기](fixing-translations.md#테스트-남기기)를 따릅니다.
+- 본문에 바뀐 줄 수와 판정 숫자, 기대 출력 세트가 움직였는지를 적습니다.
+
 오역 수정과 검증 방법은 [fixing-translations.md](fixing-translations.md)에 있습니다.
 
 ## 커밋과 PR 제목

@@ -36,6 +36,7 @@ J2K DLL은 초기화 인자의 `Dat`, 현재 폴더, 레지스트리와 무관�
 TwoControl 2024.08.30은 별도로 원본 사전 파일을 검사합니다. 다른 아래 로더는 `Dat` 폴더나 이지트랜스 실행 파일의 존재를 필수 검사하지 않습니다.
 도구의 ANSI 변환 문제를 피하려면 영문 경로를 씁니다.
 
+같은 `user/`의 `names*.txt`, `names*.tsv`는 작품의 [이름 목록](using-with-tools.md#작품의-이름-적기)이며 사용자 사전과 함께 다시 읽습니다.
 사용자 사전 파일 이름은 대소문자를 구별하지 않습니다. 소문자 이름의 바이트 순서로 읽고 같은 항목은 뒤 파일이 우선합니다.
 설정의 `userdict: [first.tsv, second.txt, folder]`로 기본 탐색을 대신할 수도 있습니다.
 
@@ -211,6 +212,17 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
 | [MTool][mtool] | 공개 ezTrans 연동 구현과 hdTrans 연결 방법은 확인되지 않았습니다. |
 
 이 도구들의 레지스트리 키나 설치 경로를 다른 도구에서 유추하지 않습니다.
+
+## 호출과 말투 설정
+
+`J2K_*`와 C API는 호출 하나에 받은 텍스트를 한 문서로 번역하고, 앞 호출의 줄을 남기지 않습니다. 말투를 정하는 함수 인자는 없습니다.
+설정 파일의 `speech`, `speech_levels`, `wrapped`가 엔진 전체에 적용되며 초기화와 `J2K_ReloadUserDict`, `hdTrans_Reload`에서 읽습니다.
+환경 변수 `HDTRANS_SPEECH_LEVELS`(`auto`, `keep`)가 있으면 `speech_levels`보다 앞섭니다.
+
+- `speech_levels: auto`(기본)는 「」나 『』로 시작해 같은 줄에서 닫히는 줄의 문장 끝을 [대사의 말투 수준](../spec/register.md) 규칙으로
+  다시 씁니다. 줄 하나씩 보내는 호스트에서도 같습니다. `【이름】` 화자 표시는 건너뛰지만 `白崎「…」`처럼 이름을 붙여 보낸 줄은 바꾸지 않습니다.
+- 대사 하나가 여러 줄이나 여러 호출로 잘려 오면 「를 닫지 않은 줄과 「로 시작하지 않는 줄이 되므로 `wrapped: true`여도 바꾸지 않습니다.
+- `speech_levels: keep`은 이 단계를 건너뛰고 단어 단계가 쓴 말투를 그대로 둡니다.
 
 ## C API와 Python ctypes
 
