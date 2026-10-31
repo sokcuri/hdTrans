@@ -10,7 +10,7 @@ dict:w:26791	親父が手近にいる店員を呼び止める。	아버지가 �
 dict:w:26793	刃が横薙ぎに弧を描いた。	칼날이 옆으로 호를 그렸다.	fix	defaults
 dict:w:26792	横薙ぎの一撃。	가로베기의 일격.	fix	defaults
 dict:w:26794	ヘタに動いて起こしたら困る。	섣불리 움직여 일으키면 곤란하다.	fix	defaults
-dict:w:26794	下手に出る。	서투르게 나온다.	keep	defaults
+dict:w:26794	下手に出る。	저자세로 나온다.	keep	defaults
 dict:w:26796	お目付は仕事なわけだし。	감시역은 일인 거고.	fix	defaults
 dict:w:26800	「ただ、今だけ……」	「다만, 지금만……」	fix	defaults
 dict:w:26801	イチゴのヘタに指を置いた。	딸기의 열매 꼭지에 손가락을 두었다.	keep	local

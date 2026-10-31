@@ -1,0 +1,52 @@
+# 규칙: LEX-3472
+rule	input	expected	kind	layer
+dict:everyday-sense-glosses:1	下手に動かない方がいい。	has:섣불리 움직이지	fix	defaults
+dict:everyday-sense-glosses:1	下手に希望を持たせるわけにはいかない。	has:섣불리 희망을	fix	defaults
+dict:everyday-sense-glosses:1	「マモル！落ち着け！下手に動くな！」	has:섣불리 움직	fix	defaults
+pack:everyday-sense-glosses:p1	下手になっちゃった〜	rule:pack:everyday-sense-glosses:p1=서투르게	keep	packs
+dict:everyday-sense-glosses:3	あたし達は我先に料理へかじりついた。	has:앞다투어	fix	defaults
+dict:everyday-sense-glosses:4	メインはおじい様だけど、俺もターゲットとのこと。	has:할아버님이지만	fix	defaults
+dict:everyday-sense-glosses:7	お婆様達のいる方へ振り返りニッコリと笑った。	has:할머님들	fix	defaults
+dict:everyday-sense-glosses:8	細長い身体と、大き目のはさみが特徴で、	has:큼직한 가위	fix	defaults
+dict:everyday-sense-glosses:9	掌にはグミのような感触の大きめの乳首の存在が感じられました。	has:큼직한	fix	defaults
+dict:everyday-sense-glosses:10	一人酒を楽しむと言った。	has:혼술을	fix	defaults
+dict:everyday-sense-glosses:11	梅雨の季節は、あまりお外に行けないね。	has:바깥에	fix	defaults
+dict:everyday-sense-glosses:12	名残惜しそうにベットから出てくる。	has:아쉬운 듯이	fix	defaults
+dict:everyday-sense-glosses:12	なんだか、名残惜しかったけど、いつまでもこうしてはいられない。	has:아쉬웠지만	fix	defaults
+dict:everyday-sense-glosses:13	帰り支度をしていると、未来が隣に立っていた。	has:돌아갈 채비를	fix	defaults
+dict:everyday-sense-glosses:14	綾波型10番艦の潮です。レイテ沖海戦などの激戦を潜り抜け、	has:격전을 빠져나가	fix	defaults
+dict:everyday-sense-glosses:15	右手で丸眼鏡のフレームを抑えつつ	has:동그란 안경	fix	defaults
+dict:everyday-sense-glosses:17	勢力争いが行われていくのは間違いなさそうです。	has:틀림없을 것 같습니다	fix	defaults
+dict:everyday-sense-glosses:19	その小剣は迷うこと無くナナの首筋目掛けて振るわれた。	has:망설임 없이	fix	defaults
+dict:everyday-sense-glosses:18	ここは迷うことなくレア職業に突撃！	has:망설임 없이 레어	fix	defaults
+dict:jisjk:260787	無理矢理笑顔を作って、そう言って見せた。	has:억지로 웃음	fix	defaults
+dict:jisjk:260787	ここは無理矢理にでも他のプレイヤーを巻き込まないといけないんだった。	has:억지로라도	fix	defaults
+dict:jisjk:202326	オレは胸元から手紙を取り出す。	has:가슴팍에서	fix	defaults
+dict:jisjk:90669	数々の厳しい作戦をくぐり抜け、生還しています！	has:빠져나가	fix	defaults
+dict:w:20524	懐にしまっていた手紙にかなり皺が寄ってしまった。	has:주름이 잡혀	fix	defaults
+pack:everyday-sense-glosses:p2	なんとも言えない表情を浮かべる先生。	rule:pack:everyday-sense-glosses:p2=뭐라고	fix	packs
+pack:everyday-sense-glosses:p2	があるのでなんとも言えない。	has:뭐라고 말할 수 없다	fix	packs
+pack:everyday-sense-glosses:p2	何とも言えない気分だ。	has:뭐라고 말할 수 없는	keep	packs
+pack:everyday-sense-glosses:p4	素知らぬ顔で気付かない振りをする俺。	rule:pack:everyday-sense-glosses:p4=척하다	fix	packs
+pack:everyday-sense-glosses:p4	別段痛くは無かったが痛がる振りをする。	has:아파하는 척한다	fix	packs
+pack:everyday-sense-glosses:p4	何年振りに見た思い出の橋。	!rule:pack:everyday-sense-glosses:p4	keep	packs
+pack:everyday-sense-glosses:p5	そう言ったら、白けた目を向けられた。	has:눈길을 받았다	fix	packs
+pack:everyday-sense-glosses:p5	父親に捨てられた事が、継母に冷たい目を向けられた事が、	has:차가운 눈길을 받은	fix	packs
+pack:everyday-sense-glosses:p5	健一が一方に目を向けた。	!rule:pack:everyday-sense-glosses:p5	keep	packs
+pack:everyday-sense-glosses:p6	夫か、もしくは周囲のサポートなしで出産後の母子が共に生きていくのは簡単ではない。	rule:pack:everyday-sense-glosses:p6=함께	fix	packs
+pack:everyday-sense-glosses:p6	僕も共に行く。	rule:pack:everyday-sense-glosses:p6=함께	fix	packs
+pack:everyday-sense-glosses:p6	二人の服装は共に濃い灰色で	!rule:pack:everyday-sense-glosses:p6	keep	packs
+pack:everyday-sense-glosses:p6	名実共に最強だ。	!rule:pack:everyday-sense-glosses:p6	keep	packs
+pack:everyday-sense-glosses:p7	今度からは気を付けるのですよ	rule:pack:everyday-sense-glosses:p7=다음	fix	packs
+pack:everyday-sense-glosses:p7	すまん、今度から気をつける・・・	has:다음부터	fix	packs
+pack:everyday-sense-glosses:p7	さあ、今度こそ勝負だ！	!rule:pack:everyday-sense-glosses:p7	keep	packs
+pack:everyday-sense-glosses:p8	全ては数億年の過去の彼方の出来事であり、推測する以外に術は無かった。	rule:pack:everyday-sense-glosses:p8=방법	fix	packs
+pack:everyday-sense-glosses:p8	だが彼にはその術がなく。	rule:pack:everyday-sense-glosses:p8=방법	fix	packs
+pack:everyday-sense-glosses:p8	俺は改竄術を発動させる。	!rule:pack:everyday-sense-glosses:p8	keep	packs
+pack:everyday-sense-glosses:p11	下手に出る。	rule:pack:everyday-sense-glosses:p11=저자세로	fix	packs
+pack:everyday-sense-glosses:p12	今まで僕の事、どんな風に見てたの？	rule:pack:everyday-sense-glosses:p12=식	fix	packs
+pack:everyday-sense-glosses:p12	どんな風に見える？	has:어떤 식으로	fix	packs
+pack:everyday-sense-glosses:p12	どんな風が吹くのだろうな。	!rule:pack:everyday-sense-glosses:p12	keep	packs
+pack:everyday-sense-glosses:p12	どういう風の吹きまわしだ？	!rule:pack:everyday-sense-glosses:p12	keep	packs
+pack:everyday-sense-glosses:p9	これで迷うことなく街にたどり着く	rule:pack:everyday-sense-glosses:p9=헤매는 일 없이	fix	packs
+pack:everyday-sense-glosses:p9	ここは迷うことなくレア職業に突撃！	!rule:pack:everyday-sense-glosses:p9	keep	packs

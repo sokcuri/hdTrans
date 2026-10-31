@@ -1,7 +1,7 @@
 # 규칙: GRM-36
 rule	input	expected	kind	layer
 rewrite:not-yet	『ロシア語でデレてるけど全然気付かない隣の氷室君』を投稿しました。	has:깨닫지 못하는 옆의	fix	rewrites
-rewrite:not-yet	素知らぬ顔で気付かない振りをする俺。	has:깨닫지 않는 모습	keep	rewrites
+rewrite:not-yet	素知らぬ顔で気付かない振りをする俺。	has:깨닫지 않는 척	keep	rewrites
 rewrite:not-yet	気付かないうちに眠っていた。	has:깨닫지 못하는 사이에	keep	rewrites
 rewrite:not-yet	本人は全く気付いてないけど。	has:깨닫지 못했는데.	fix	rewrites
 rewrite:not-yet	半開きにされたのには気付いてないようで、	has:깨닫지 못한 것 같아서,	fix	rewrites
