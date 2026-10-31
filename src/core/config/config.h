@@ -29,6 +29,7 @@ struct Config {
 struct ConfigDiagnostic {
     std::size_t line = 0;  // 1-based; 0 for file errors.
     std::string message;
+    bool environment = false;  // from an environment variable, not the file
 };
 
 struct ConfigResult {

@@ -1,4 +1,5 @@
 // UTF-8 CLI. The whole input is one session unless --each or --raw is given.
+#include <cctype>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -426,7 +427,8 @@ int RunMain(int argc, char** argv) {
         return 1;
     }
     for (const auto& diagnostic : config.diagnostics) {
-        std::fprintf(stderr, "hdtrans: %s:%zu: %s\n", configPath.c_str(), diagnostic.line, diagnostic.message.c_str());
+        if (diagnostic.environment) std::fprintf(stderr, "hdtrans: %s\n", diagnostic.message.c_str());
+        else std::fprintf(stderr, "hdtrans: %s:%zu: %s\n", configPath.c_str(), diagnostic.line, diagnostic.message.c_str());
     }
     if (!userPathsArg && config.settings.userdict) userPathsArg = config.settings.userdict;
     if (!ehndArg && config.settings.ehnd) ehndArg = config.settings.ehnd;
@@ -439,6 +441,9 @@ int RunMain(int argc, char** argv) {
         return 2;
     }
     hdTrans::SpeechLevels speechLevels = config.settings.speechLevels;
+    if (speechLevelsArg) {
+        for (char& ch : *speechLevelsArg) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    }
     if (speechLevelsArg && !hdTrans::internal::SpeechLevelsOf(*speechLevelsArg, speechLevels)) {
         std::fprintf(stderr, "hdtrans: --speech-levels takes auto or keep\n");
         return 2;
@@ -624,13 +629,19 @@ int RunMain(int argc, char** argv) {
     std::vector<hdTrans::reg::Change> levelChanges;
     std::string speechReport;
     if (!speechReportPath.empty()) options.levelChanges = &levelChanges;
+    if (!speechReportPath.empty() && (reference || speechLevels == hdTrans::SpeechLevels::Keep))
+        std::fprintf(stderr, "hdtrans: speech levels are off (%s); the speech report is empty\n",
+                     reference ? "--reference" : "keep");
     // The changed lines of one call, numbered from base.
     const auto reportChanges = [&](size_t base) {
         for (const hdTrans::reg::Change& c : levelChanges) {
             speechReport += std::to_string(base + c.line + 1) + "\t" + c.spec + "\t" + c.key;
             for (const std::string* text : {&c.source, &c.before, &c.after}) {
                 speechReport += '\t';
-                for (const char ch : *text) speechReport += ch == '\t' ? ' ' : ch;
+                for (const char ch : *text) {
+                    if (ch == '\r') continue;
+                    speechReport += ch == '\t' || ch == '\n' ? ' ' : ch;
+                }
             }
             speechReport += '\n';
         }
