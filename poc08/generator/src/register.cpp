@@ -39,6 +39,12 @@ struct RegisterTables {
     std::vector<CueRow> cues;
     std::vector<TailRow> tails;
     std::vector<std::u32string> quotatives;
+    std::vector<std::u32string> exclaim;            // cues.tsv exclaim: a whole sentence that exclaims (みっけ)
+    struct AuthRow {
+        std::vector<std::vector<std::u32string>> parts;  // each part (alternatives split by |) must occur (in the line, or for a speaker row across the speaker's lines)
+        bool speaker = false;               // marks the speaker in the scene, not only the line
+    };
+    std::vector<AuthRow> auth;  // voices.tsv auth: an authoritative voice (REG-14)
     std::map<std::string, LevelRow> levels;
     std::vector<std::string> honExclude;
 };
@@ -57,6 +63,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
             t->tails.push_back({ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string(), r[cm] == "strong"});
         }
         else if (r[cc] == "quotative") t->quotatives.push_back(ToU32(r[ct]));
+        else if (r[cc] == "exclaim") t->exclaim.push_back(ToU32(r[ct]));
         else t->cues.push_back({r[cc], r[cm], ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string()});
     }
     TsvTable l;
@@ -70,6 +77,21 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     TsvTable vx;
     if (!ReadTsv(dir + "/voices.tsv", vx, err)) return nullptr;
     for (const auto& r : vx.rows) {
+        if (r[0] == "auth") {
+            RegisterTables::AuthRow a;
+            for (const auto& part : Split(r[1], '+')) {
+                std::vector<std::u32string> alts;
+                for (const auto& alt : Split(part, '|')) alts.push_back(ToU32(alt));
+                a.parts.push_back(alts);
+            }
+            if (r[2] != "speaker" && r[2] != "line") {
+                err = "voices.tsv: auth value must be speaker or line: " + r[2];
+                return nullptr;
+            }
+            a.speaker = r[2] == "speaker";
+            t->auth.push_back(a);
+            continue;
+        }
         VoiceRow v;
         v.type = r[0];
         v.key = ToU32(r[1]);
@@ -185,10 +207,40 @@ std::u32string LastSentence(const std::u32string& u) {
     return u;
 }
 
+// The top-level quotes of a line (「了解なのよ」 「了解」 「かしこま」), each with its brackets; one entry or none
+// when the line holds fewer than two.
+std::vector<std::string> SplitQuotes(const std::string& ja) {
+    const std::u32string s = ToU32(ja);
+    std::vector<std::string> out;
+    int depth = 0;
+    size_t start = 0;
+    char32_t open = 0, close = 0;
+    for (size_t i = 0; i < s.size(); ++i) {
+        const char32_t ch = s[i];
+        if (depth == 0 && (ch == U'「' || ch == U'『' || ch == U'≪')) {
+            open = ch;
+            close = ch == U'「' ? U'」' : (ch == U'『' ? U'』' : U'≫');
+            start = i;
+            depth = 1;
+        } else if (depth > 0 && ch == open) {
+            ++depth;
+        } else if (depth > 0 && ch == close && --depth == 0) {
+            out.push_back(ToU8(s.substr(start, i - start + 1)));
+        } else if (depth == 0 && IsWordChar(ch)) {
+            return {};  // text between quotes (「…」と言った「…」) is narration: not a line of several quotes
+        }
+    }
+    return out;
+}
+
 struct Cues {
     bool strongTail = false;  // a sentence of the line ends in よ, ね, ぞ …
     bool lastStrong = false;  // the last sentence ends in one of them (its outermost tail particle)
     bool lastKa = false;      // the last sentence ends in the question particle か
+    bool plainDecl = false;   // the last sentence ends in a plain statement (だ, る, た, い, ん), no particle, no ？
+    bool exclaim = false;     // every sentence is a bare predicate alone or has no predicate (REG-13)
+    bool auth = false;        // the line has an authoritative voice cue (voices.tsv auth, REG-14)
+    std::vector<std::pair<size_t, size_t>> authParts;  // parts of speaker auth rows found (row, part)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
          cend = false;
     std::string first;
@@ -280,6 +332,88 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         else if (r.cue.rfind("first:", 0) == 0 && c.first.empty()) c.first = r.cue.substr(6);
     }
     c.cend = casualEnd && !c.pend;
+    // REG-14: a plain statement without a sentence-final particle (思えない, ファンだ, 戦ってみたかった)
+    {
+        std::u32string raw = LastSentence(u.text);
+        while (!raw.empty() && (raw.back() == U' ' || raw.back() == U'　' || raw.back() == U'」' || raw.back() == U'』')) raw.pop_back();
+        const bool question = !raw.empty() && (raw.back() == U'？' || raw.back() == U'?');
+        std::u32string x = stages.front();
+        while (!x.empty() && (x.back() == U'っ' || x.back() == U'ッ' || x.back() == U'ー')) x.pop_back();
+        static const std::u32string kEnds = U"だたいるうくすつぬぶむぐん";
+        static const std::u32string kORow = U"おこごそぞとどのほぼぽもよょろ";
+        const bool volitional = x.size() >= 2 && x.back() == U'う' && kORow.find(x[x.size() - 2]) != std::u32string::npos;
+        c.plainDecl = !question && !volitional && !tailStripped && !x.empty() && kEnds.find(x.back()) != std::u32string::npos;
+    }
+    // REG-13: an exclamation of discovery or realisation: the utterance is bare predicates alone (見つけた！, 面白い。,
+    // みっけ……あれ？), with no sentence-final particle; a piece without a predicate (あれ？) may stand beside them
+    {
+        std::vector<std::u32string> pieces;
+        std::vector<bool> asked;  // the piece ends in ？
+        std::u32string cur;
+        for (char32_t ch : u.text) {
+            if (IsSentenceEnd(ch) || ch == U'…' || ch == U'‥' || ch == U'、' || ch == U'，') {
+                if (ch == U'？' || ch == U'?') {
+                    if (!pieces.empty() && cur.empty()) asked.back() = true;  // ！？ after the piece
+                    else {
+                        pieces.push_back(cur);
+                        asked.push_back(true);
+                        cur.clear();
+                        continue;
+                    }
+                }
+                if (cur.empty()) continue;
+                pieces.push_back(cur);
+                asked.push_back(false);
+                cur.clear();
+            } else if (ch != U'ー' && ch != U'〜' && ch != U'～' && ch != U' ' && ch != U'　' && ch != U'♪' && ch != U'♥') {
+                cur.push_back(ch);
+            }
+        }
+        pieces.push_back(cur);
+        asked.push_back(false);
+        static const std::vector<std::u32string> kInterj = {U"はい", U"おい", U"えい", U"ほい", U"あい", U"うい"};
+        bool any = false, ok = true;
+        for (size_t pi = 0; pi < pieces.size(); ++pi) {
+            std::u32string p = pieces[pi];
+            while (!p.empty() && (p.back() == U'っ' || p.back() == U'ッ' || p.back() == U'！' || p.back() == U'!')) p.pop_back();
+            bool hasWord = false;
+            for (char32_t ch : p)
+                if (IsWordChar(ch)) hasWord = true;
+            if (!hasWord) continue;
+            if (p.size() > 6) {
+                ok = false;
+                break;
+            }
+            bool pred = std::find(t.exclaim.begin(), t.exclaim.end(), p) != t.exclaim.end();
+            const char32_t prev = p.size() >= 2 ? p[p.size() - 2] : 0;
+            const bool kanjiPrev = prev >= 0x4E00 && prev <= 0x9FFF;
+            const bool honorificNoun = p[0] == U'お' || p[0] == U'ご' || EndsWith(p, U"願い");  // お願い, お帰りなさい
+            // past: 見つけた, 勝った, 来た: た after an i- or e-row kana, っ or a kanji (not また, あなた)
+            static const std::u32string kPastPrev = U"いきぎしじちぢにひびぴみりえけげせぜてでねへべぺめれっ";
+            if (!pred && p.size() >= 2 && p.back() == U'た' && (kanjiPrev || kPastPrev.find(prev) != std::u32string::npos))
+                pred = true;
+            // adjective: 面白い, 怖い, 楽しい, いい (not なさい, ない, お願い, りょうかい, はい)
+            if (!pred && p.size() >= 2 && p.back() == U'い' && !honorificNoun &&
+                (kanjiPrev || prev == U'し' || prev == U'い') && std::find(kInterj.begin(), kInterj.end(), p) == kInterj.end())
+                pred = true;
+            if (asked[pi]) pred = false;  // a question asks, it does not exclaim (読んでいい？, できた？)
+            if (pred) any = true;
+            // a piece with a particle or another ending is not an exclamation (行くよ, それは)
+            else if (p.size() > 3) ok = false;
+        }
+        c.exclaim = ok && any;
+    }
+    for (size_t a = 0; a < t.auth.size(); ++a) {
+        bool all = !t.auth[a].parts.empty();
+        for (size_t p = 0; p < t.auth[a].parts.size(); ++p) {
+            bool found = false;
+            for (const auto& alt : t.auth[a].parts[p])
+                if (u.text.find(alt) != std::u32string::npos) found = true;
+            if (!found) all = false;
+            else if (t.auth[a].speaker) c.authParts.push_back({a, p});
+        }
+        if (all) c.auth = true;
+    }
     return c;
 }
 
@@ -293,6 +427,7 @@ std::string Key(const Cues& c) {
     if (c.arch) return "archaic";
     if (c.pany) return "polite-any";
     if (c.stiff) return "stiff";
+    if (c.exclaim && !c.strongTail) return "exclaim";
     if (c.cend) return "casual";
     return "bare";
 }
@@ -327,7 +462,12 @@ Persona VoiceOf(const RegisterTables& t, const std::string& ja) {
 
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines, const RegOptions& opt) {
     std::vector<RegDecision> out(lines.size());
-    struct Prof { double pol = 0, cas = 0; std::map<int, int> voice; };
+    struct Prof {
+        double pol = 0, cas = 0;
+        bool auth = false;
+        std::map<size_t, std::map<size_t, bool>> authParts;  // speaker auth row → parts seen in the scene
+        std::map<int, int> voice;
+    };
     std::unordered_map<std::string, Prof> carry;  // decayed evidence from earlier scenes
     size_t i = 0;
     while (i < lines.size()) {
@@ -339,6 +479,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             Prof p = kv.second;
             p.pol *= opt.decay;
             p.cas *= opt.decay;
+            p.auth = false;  // REG-14 marks a speaker for one scene
+            p.authParts.clear();
             prof[kv.first] = p;
         }
         std::vector<Cues> cues(j - i);
@@ -373,6 +515,12 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             const std::string& key = keys[k - i];
             if (key == "pend" || key == "keigo-pend" || key == "set") p.pol += 1;
             if (key == "casual" || key == "keigo-casual" || key == "stiff") p.cas += 1;
+            // REG-14: the speaker is marked authoritative in the scene when all parts of a speaker auth row occur in
+            // the speaker's lines (わし; 私 and おまえ)
+            for (const auto& [row, part] : cues[k - i].authParts) {
+                p.authParts[row][part] = true;
+                if (p.authParts[row].size() == t.auth[row].parts.size()) p.auth = true;
+            }
             const Persona v = VoiceOf(t, lines[k].ja);
             if (v != Persona::none) p.voice[static_cast<int>(v)] += 1;
         }
@@ -410,23 +558,42 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 }
                 continue;
             }
-            const std::string& key = keys[k - i];
-            d.key = key;
-            d.firstPerson = !cues[k - i].first.empty();
-            d.narration = key == "narr";
-            auto row = t.levels.find(key);
-            d.level = row != t.levels.end() ? row->second.level : Level::hae;
-            if (row != t.levels.end()) d.spec = row->second.spec;
-            if (row != t.levels.end() && row->second.keep) d.keep = true;
-            // REG-8: a line without its own level cue speaks like the speaker's cued lines in the scene: 해요
-            // when more of them are polite than plain
-            if (opt.profiles && row != t.levels.end() && row->second.profile && !lines[k].speaker.empty()) {
-                auto p = prof.find(lines[k].speaker);
-                if (p != prof.end() && p->second.pol > p->second.cas) {
-                    d.byProfile = d.level != Level::haeyo;
-                    d.level = Level::haeyo;
-                    if (d.byProfile) d.spec = "REG-8";
+            const auto speakerProf = lines[k].speaker.empty() ? prof.end() : prof.find(lines[k].speaker);
+            const bool authSpeaker = speakerProf != prof.end() && speakerProf->second.auth;
+            // the decision of one utterance (the line, or one of its quotes) from its cues
+            auto decide = [&](const Cues& c, std::string key, RegDecision& r) {
+                // REG-14: a plain statement without a sentence-final particle from an authoritative voice keeps -다
+                if (key == "casual" && c.plainDecl && (c.auth || authSpeaker)) key = "auth-plain";
+                r.key = key;
+                auto row = t.levels.find(key);
+                r.level = row != t.levels.end() ? row->second.level : Level::hae;
+                if (row != t.levels.end()) r.spec = row->second.spec;
+                r.keep = row != t.levels.end() && row->second.keep;
+                // REG-8: a line without its own level cue speaks like the speaker's cued lines in the scene: 해요
+                // when more of them are polite than plain
+                if (opt.profiles && row != t.levels.end() && row->second.profile && speakerProf != prof.end() &&
+                    speakerProf->second.pol > speakerProf->second.cas) {
+                    r.byProfile = r.level != Level::haeyo;
+                    r.level = Level::haeyo;
+                    if (r.byProfile) r.spec = "REG-8";
                 }
+            };
+            decide(cues[k - i], keys[k - i], d);
+            d.firstPerson = !cues[k - i].first.empty();
+            d.narration = d.key == "narr";
+            // REG-15: a line of several quotes gets a level per quote; the line's own decision is its last quote's
+            const std::vector<std::string> quotes = d.narration ? std::vector<std::string>() : SplitQuotes(lines[k].ja);
+            if (quotes.size() >= 2) {
+                for (const std::string& qt : quotes) {
+                    const Cues qc = Scan(t, qt);
+                    RegDecision qd;
+                    decide(qc, Key(qc), qd);
+                    d.quotes.push_back({qd.level, qd.keep, qd.key, qd.spec});
+                }
+                d.level = d.quotes.back().level;
+                d.keep = d.quotes.back().keep;
+                d.key = "quotes-" + d.quotes.back().key;
+                d.spec = "REG-15";
             }
             d.persona = VoiceOf(t, lines[k].ja);
             auto p = prof.find(lines[k].speaker);

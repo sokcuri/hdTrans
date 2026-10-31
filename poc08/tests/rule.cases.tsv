@@ -26,3 +26,6 @@ out	「アニスフィア王女を捕まえろ！　逃がすな、追え！」	
 out	「うるせえ。彼女持ちは黙ってろ」	「시끄러. 여친 있는 사람은 입을 다물어라」	REG-11: てろ (命令形 of the auxiliary): 다물어라 stays
 out	「敵であるアールを助けた事も、幼少期に研究員を射殺した事も、嫌疑を色濃くしている」	「적인 아르를 도운 일도, 어린 시절에 연구원을 사살한 일도, 혐의를 짙게 하고 있어」	REG-6: an adnominal である is not stiff speech, so 해라 → 해 (REG-2)
 out	「でしたら、私が感謝を示す場面かと」	「그렇다면, 내가 감사를 표하는 장면이 아닐까 합니다」	REG-12: a word kept literally with a level (합니다) keeps the line as 0.7.x wrote it (was 아닐까요 합니다)
+out	「みーっけ……あれ？」	「찾았다……어?」	REG-13: a bare discovery keeps 0.7.x's -다 (was 찾았어)
+out	「フム、よくわからんが問題ない」	「흠, 잘 모르지만 문제없다」	REG-14: a gruff ん negative keeps the plain statement's -다 (was 문제없어)
+out	「了解なのよ」 「了解」 「かしこま」	「알아」 「알았어」 「알았어요」	REG-15: each quote keeps its own level (was 알았어 for かしこま)

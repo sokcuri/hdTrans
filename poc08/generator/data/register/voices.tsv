@@ -6,7 +6,9 @@
 #
 # Columns
 #   type   first (a first-person pronoun), final (a sentence-final form), suffix (an honorific name suffix: the word
-#          before it is a name, S's scene registry)
+#          before it is a name, S's scene registry), auth (an authoritative or stiff voice, spec/register.md REG-14;
+#          key parts joined by + must all occur, | separates alternatives of a part; value speaker: the row marks the speaker in the scene
+#          (any of its lines), line: only the line itself)
 #   key    the Japanese string
 #   value  persona: none rough old-male lady formal pompous archaic grand
 type	key	value	note
@@ -36,3 +38,30 @@ suffix	さま	-
 suffix	先輩	-
 suffix	先生	-
 suffix	殿	-
+auth	わし	speaker	first person of an old or authoritative man
+auth	ワシ	speaker
+auth	儂	speaker
+auth	我が	speaker	我 as the first person (我が国, 我は)
+auth	我は	speaker
+auth	我の	speaker
+auth	我ら	speaker
+auth	拙者	speaker
+auth	それがし	speaker
+auth	余は	speaker	余 as the first person (not 余裕)
+auth	余が	speaker
+auth	余の	speaker
+auth	朕	speaker
+auth	私は|私が|私の|私も|私に|私を|私、|私だ|私で|私と+おまえ	speaker	私 for oneself and おまえ for the addressee: a superior speaking down (officer, interrogator)
+auth	私は|私が|私の|私も|私に|私を|私、|私だ|私で|私と+お前	speaker
+auth	私は|私が|私の|私も|私に|私を|私、|私だ|私で|私と+貴様	speaker
+auth	わたしは|わたしが|わたしの+おまえ|お前	speaker
+auth	分からん	line	the plain ん negative of a gruff voice
+auth	わからん	line
+auth	知らん	line
+auth	しれん	line
+auth	構わん	line
+auth	かまわん	line
+auth	ならん	line
+auth	いかん	line
+auth	許さん	line
+auth	足らん	line

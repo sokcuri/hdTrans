@@ -69,3 +69,28 @@ r9-2	REG-9	fix	d45		no	早く来て	hae
 r9-3	REG-9	fix	d45		no	すみません遅れました	haeyo
 r9-4	REG-9	keep	d46		yes	「それじゃ、また明日」	-
 r9-5	REG-9	keep	d46		no	わかってるよ。	hae
+r13-1	REG-13	fix	d60		yes	「みーっけ……あれ？」	haera
+r13-2	REG-13	fix	d61		yes	「見つけた！」	haera
+r13-3	REG-13	fix	d62		yes	「面白い。」	haera
+r13-4	REG-13	fix	d63		yes	「ふぃー、さっぱりした」	haera
+r13-5	REG-13	keep	d64		yes	「見つけたよ！」	hae
+r13-6	REG-13	keep	d65		yes	「できた？」	hae
+r13-7	REG-13	keep	d66		yes	「うん、そこにお願い」	hae
+r13-8	REG-13	keep	d67		yes	「待ちなさい！」	hae
+r13-9	REG-13	keep	d68		yes	「また、なのか？」	hae
+r14-1	REG-14	fix	d70	尋問官	yes	「おまえにはいくつかの嫌疑がかけられている」	-
+r14-2	REG-14	fix	d70	尋問官	yes	「……私はおまえ……あなたのファンだ」	haera
+r14-3	REG-14	fix	d70	尋問官	yes	「全ての記録を調べ尽くしたが、とてもあなたが反逆罪に問われるような人物とは思えない」	haera
+r14-4	REG-14	keep	d70	尋問官	yes	「……恐ろしい子供だな」	hae
+r14-5	REG-14	keep	d70	尋問官	yes	「その女性の名は？」	hae
+r14-6	REG-14	fix	d71	カーネル	yes	「私がやらずとも、計画は実行される」	-
+r14-7	REG-14	fix	d71	カーネル	yes	「おまえが執行するのか？　面白い。一度、おまえと戦ってみたかった」	haera
+r14-8	REG-14	fix	d72	みちる	yes	「あたしの時代がよ！」	-
+r14-9	REG-14	fix	d72	みちる	yes	「フム、よくわからんが問題ない」	haera
+r14-10	REG-14	keep	d72	みちる	yes	「どうしよう、さらに不安になってきた」	hae
+r14-11	REG-14	keep	d73	甲	yes	「お前が悪いんだ」	hae
+r14-12	REG-14	keep	d74		yes	「私服で来たお前が悪いんだ」	hae
+r15-1	REG-15	fix	d75		yes	「了解なのよ」 「了解」 「かしこま」	haeyo
+r15-2	REG-15	fix	d76		yes	「はい、そうです」 「行くよ」	hae
+r15-3	REG-15	keep	d77		yes	「了解。かしこま」	haeyo
+r15-4	REG-15	keep	d78		yes	「行きます」と言った「待って」	haeyo

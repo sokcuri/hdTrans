@@ -7,7 +7,8 @@
 #   cue     polite (desu/masu at a sentence end), polite-any (desu/masu anywhere), keigo (尊敬語/謙譲語),
 #           set (formal set phrases), archaic (old speech), stiff (stiff plain speech), casual (plain endings),
 #           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows),
-#           quotative (a string after which an any-not-quoted match does not count)
+#           quotative (a string after which an any-not-quoted match does not count),
+#           exclaim (a whole sentence that exclaims a discovery although it is not a た or い form, REG-13)
 #   mode    tail rows: strong marks a particle that makes an unbracketed line speech (inner monologue ending
 #           in よ/ね/ぞ is 해, not narration -다: spec/register.md REG-7); notafter as below; other rows:
 #           end: the last sentence ends in text, after any number of tail particles and closing marks;
@@ -53,6 +54,7 @@ polite	end	んす		だったんすか (っす after ん)
 polite	end	ッス
 polite	end	っス
 polite	end	ございます
+polite	end	かしこま		clipped かしこまりました, still a polite reply
 polite	end	ございません
 polite	end	ごめんなさい
 polite	end	すみません
@@ -185,3 +187,6 @@ first:ore	any	オレ
 first:ore	any	おれ
 first:watashi	any	私
 first:watashi	any	わたし
+exclaim	-	みっけ		見つけた, clipped (ー removed before matching)
+exclaim	-	見っけ
+exclaim	-	めっけ

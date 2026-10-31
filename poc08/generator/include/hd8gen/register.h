@@ -29,6 +29,12 @@ struct RegDecision {
     bool byProfile = false;   // the speaker profile changed the level
     bool firstPerson = false; // the source names the speaker (私, 俺 …): the subject is not the addressee
     bool keep = false;        // levels.tsv says keep: the level the input already has (0.7.x's own), haera otherwise
+    struct Quote {            // REG-15: one per top-level quote when the line has several (「了解」 「かしこま」)
+        Level level = Level::none;
+        bool keep = false;
+        std::string key, spec;
+    };
+    std::vector<Quote> quotes;
 };
 
 struct RegOptions {

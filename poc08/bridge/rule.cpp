@@ -519,6 +519,18 @@ std::u32string AfterTag(const RuleData& d, std::u32string s) {
     return s;
 }
 
+// The speaker tag of a line (【筧】「…」 → 筧), "" when it has none: REG-14 and REG-8 read the speaker in the scene.
+std::string SpeakerTag(const RuleData& d, std::u32string s) {
+    while (!s.empty() && Space(s.front())) s.erase(0, 1);
+    for (const auto& [open, close] : d.tags) {
+        if (s.empty() || s.front() != open) continue;
+        const size_t e = s.find(close);
+        if (e != std::u32string::npos && e > 1 && e <= 24) return U8(s.substr(1, e - 1));
+        break;
+    }
+    return "";
+}
+
 }  // namespace
 
 std::shared_ptr<const RuleData> LoadRule(const std::string& dataRoot, std::string& err) {
@@ -687,7 +699,7 @@ std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const st
     size_t lead = 0;
     while (lead < out075.size() && out075[lead] == ' ') lead++;
     Field(o, "lead", out075.substr(0, lead));
-    Field(o, "speaker", "");
+    Field(o, "speaker", dialogue ? SpeakerTag(d, ja32) : std::string());
     Field(o, "scene", "doc");
     Field(o, "work", "doc");
     o += std::string(",\"dialogue\":") + (dialogue ? "true" : "false");

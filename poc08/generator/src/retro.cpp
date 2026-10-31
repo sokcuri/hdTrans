@@ -1,6 +1,7 @@
 // The retrofit (hd8gen/retro.h): pre-IR lines of 0.7.x output → kir (analysis by synthesis) → R, W, G.
 #include "hd8gen/retro.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <map>
 #include <string>
@@ -880,6 +881,26 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         for (auto& n : nodes) n.id = n.origin = ++id;
         // R
         RegDecision d = decisions[li];
+        // REG-15: a line of several quotes (「了解」 「かしこま」) has a level per quote; quoteOf maps a node to its quote
+        std::vector<size_t> quoteOf(nodes.size(), 0);
+        {
+            int depth = 0;
+            size_t k = 0;
+            bool opened = false;
+            for (size_t q = 0; q < nodes.size(); ++q) {
+                if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qopen) {
+                    if (depth == 0 && opened) ++k;
+                    opened = true;
+                    ++depth;
+                }
+                quoteOf[q] = k;
+                if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qclose && depth > 0) --depth;
+            }
+        }
+        const bool perQuote = d.quotes.size() >= 2;
+        auto quoteAt = [&](size_t q) -> const RegDecision::Quote& {
+            return d.quotes[std::min(quoteOf[q], d.quotes.size() - 1)];
+        };
         std::vector<Reg> reg;
         UttLevel u;
         u.utt = 0;
@@ -891,6 +912,13 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             reg = AssignRegister(*rtab, nodes, d, first, tablesPtr);
             if (u.narration)
                 for (auto& g : reg) g.level = Level::haera;
+            if (perQuote && !u.narration)
+                for (auto& g : reg)
+                    for (size_t q = 0; q < nodes.size(); ++q)
+                        if (nodes[q].id == g.node) {
+                            g.level = quoteAt(q).level;
+                            if (g.level != Level::haeyo && g.level != Level::hapsyo) g.hon = false;
+                        }
             // a word 0.7.x wrote with a level the reader could not take apart: changing the others would mix levels
             bool mixed = false;
             // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다)
@@ -924,7 +952,8 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;  // REG-10: 합쇼체 is never lowered
                 // REG-11: the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
-                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
+                const bool keep = perQuote ? quoteAt(q).keep : d.keep;
+                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
                 for (auto& g : reg)
@@ -946,13 +975,16 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         // the speech level of each sentence end, before and after: whether the line changes level, and whether
         // its sentences would end at different levels (a polite end inside the line counts too: 모릅니다, …어요)
+        // (per quote when the line has several: each quote's last end may change, and its own ends must agree)
         bool levelChanged = false, mixedLevels = false;
-        {
+        const size_t quoteCount = nodes.empty() ? 1 : quoteOf.back() + 1;
+        for (size_t qi = 0; qi < quoteCount; ++qi) {
             Level end = Level::none;
-            bool lastChanged = false;  // the line's last sentence end (a V node, not a Raw word) changes level
+            bool lastChanged = false;  // the quote's last sentence end (a V node, not a Raw word) changes level
             std::vector<Level> innerPolite;
             for (size_t q = 0; q < nodes.size(); ++q) {
                 const Node& n = nodes[q];
+                if (quoteOf[q] != qi) continue;
                 if (n.kind != Kind::V || n.ctype != CType::final_) continue;
                 Level now = Level::none;
                 for (const auto& g : reg)
@@ -971,13 +1003,13 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             }
             for (Level l : innerPolite)
                 if (end != Level::none && l != end) mixedLevels = true;
-            // a later word the reader could not take apart ends the line: its level is 0.7.x's, not known here
+            // a later word the reader could not take apart ends the quote: its level is 0.7.x's, not known here
             for (size_t q = nodes.size(); q-- > 0;) {
-                if (nodes[q].kind == Kind::Punct) continue;
+                if (quoteOf[q] != qi || nodes[q].kind == Kind::Punct) continue;
                 if (nodes[q].kind != Kind::V) lastChanged = lastChanged && nodes[q].kind != Kind::Raw;
                 break;
             }
-            levelChanged = lastChanged;
+            levelChanged = levelChanged || lastChanged;
         }
         for (auto& n : nodes) n.decision = 0;
         const RewriteResult rw = Rewrite(*rules, *tablesPtr, nodes, reg, {u}, only, skip);
