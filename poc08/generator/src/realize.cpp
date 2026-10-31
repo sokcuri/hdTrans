@@ -194,6 +194,7 @@ std::vector<XNode> Expand(const Tables& t, const std::vector<Node>& in, const st
             adv.n.utt = n.utt;
             out.push_back(adv);
             x.n.neg = Neg::none;
+            x.n.glue = false;  // 공부 + 안 + 하다: 안 stands between the noun and the light verb (공부 안 해)
         }
         std::vector<XNode> chain{x};
         // voice: 하다 verbs swap their light verb (사용되다, 공부시키다); others take -어지다 / -게 하다
