@@ -1,6 +1,6 @@
 // The part of speech of a user dictionary row for each kind of a name list.
 const kindPos: Record<string, string> = {
-  given: 'name', full: 'name', nick: 'name', family: 'surname', place: 'n', org: 'n', title: 'n',
+  given: 'name', full: 'name', nick: 'name', family: 'surname', place: 'place', org: 'n', title: 'n',
 };
 
 /**

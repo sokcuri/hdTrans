@@ -9,6 +9,7 @@
 #include <utility>
 #include <vector>
 
+#include "core/dict/runes.h"
 #include "core/names/chars.h"
 
 namespace hdTrans::names {
@@ -60,6 +61,10 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
         text = nl == std::string_view::npos ? std::string_view() : text.substr(nl + 1);
         const std::string_view line = internal::TrimSpace(raw);
         if (line.empty() || line.starts_with('#')) continue;
+        if (!dict::internal::ValidUtf8(line)) {
+            fail(number, "invalid UTF-8");
+            continue;
+        }
         const std::vector<std::string_view> f = Fields(raw);
         if (f.size() < 2 || f[0].empty() || f[1].empty()) {
             fail(number, "a name needs JA and KO");

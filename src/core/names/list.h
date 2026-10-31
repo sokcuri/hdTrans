@@ -31,7 +31,7 @@ inline bool PersonKind(ListKind k) {
     return k == ListKind::Given || k == ListKind::Family || k == ListKind::Full || k == ListKind::Nick;
 }
 
-// Parses a name list. A malformed line is left out and reported in errors as
+// Parses a name list. A malformed line, or one that is not UTF-8, is left out and reported in errors as
 // "LINE: message"; returns whether every line parsed.
 bool ParseList(std::string_view text, List& out, std::vector<std::string>* errors = nullptr,
                std::string_view source = {});

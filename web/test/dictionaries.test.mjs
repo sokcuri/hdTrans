@@ -111,5 +111,5 @@ test('overlay puts the names tables of higher dictionaries last, where a name li
 
 test('exported names table rows read as user dictionary rows', () => {
   const o = overlay([dict('작품', 'hdtrans', '', '黒沢\t쿠로사와\tfamily\nみみ\t미미\tnick\thon\n星見町\t호시미초\tplace\n若葉\t와카바\tname\tprio=2')]);
-  assert.equal(o.userdictFile, '黒沢\t쿠로사와\tsurname\nみみ\t미미\tname\n星見町\t호시미초\tn\n若葉\t와카바\tname\tprio=2');
+  assert.equal(o.userdictFile, '黒沢\t쿠로사와\tsurname\nみみ\t미미\tname\n星見町\t호시미초\tplace\n若葉\t와카바\tname\tprio=2');
 });

@@ -167,6 +167,10 @@ mkdir -p "$tmp/cast"
 printf '猫\t냥코\n' > "$tmp/cast/names.txt"
 [ "$("$cli" -dicts "$tmp/settings/first" --userdict "$tmp/cast" -each -in "$tmp/input" 2> /dev/null)" = 냥코 ]
 [ "$("$cli" -dicts "$tmp/settings/first" --userdict "$tmp/cast" --names "$tmp/names" -in "$tmp/input" 2> /dev/null)" = 네코 ]
+# A list that is not UTF-8 is left out with one error.
+printf '\224\114\t\263\327\304\332\n' > "$tmp/legacy-names"
+[ "$("$cli" -dicts "$tmp/settings/first" --names "$tmp/legacy-names" -in "$tmp/input" 2> "$tmp/errors")" = 고양이 ]
+grep -F 'legacy-names: invalid UTF-8' "$tmp/errors" > /dev/null
 status=0
 "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -raw -in "$tmp/input" > /dev/null 2> "$tmp/errors" || status=$?
 [ "$status" -eq 2 ]

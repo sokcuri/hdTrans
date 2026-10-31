@@ -105,6 +105,13 @@ HD_TEST(engine_name_files) {
     HD_REQUIRE(Write(temp.path / "names-b.txt", "衣更\t키사라\n"));
     HD_CHECK(internal::CheckUserFile(engine));
     HD_CHECK_EQ(session.Translate("衣更は今日も元気だ。"), std::string("키사라는 오늘도 건강하다."));
+
+    // A file that is not UTF-8 is left out whole and reported once.
+    const auto legacy = temp.path / "names-c.txt";
+    HD_REQUIRE(Write(legacy, "\x88\xDF\x8D\x58\t\xC0\xCC\xBB\xE7\xB6\xF3\n"));
+    HD_CHECK(internal::CheckUserFile(engine));
+    HD_CHECK_EQ(engine.UserFileError(), legacy.string() + ": invalid UTF-8");
+    HD_CHECK_EQ(session.Translate("衣更は今日も元気だ。"), std::string("키사라는 오늘도 건강하다."));
 }
 
 // Calls keep translating while the names reload under them.

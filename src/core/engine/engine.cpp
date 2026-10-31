@@ -280,6 +280,10 @@ std::shared_ptr<const pipeline::DocumentNames> LoadNameFiles(const dict::Snapsho
             errors.push_back({path, dict::LoadErrorKind::UserRow, 0, dict::TsvErrorKind::Read, "cannot read the name list"});
             continue;
         }
+        if (!dict::internal::ValidUtf8(text)) {
+            errors.push_back({path, dict::LoadErrorKind::UserRow, 0, dict::TsvErrorKind::Read, "invalid UTF-8"});
+            continue;
+        }
         names::List list;
         std::vector<std::string> parseErrors;
         names::ParseList(text, list, &parseErrors, path);

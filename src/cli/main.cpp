@@ -25,6 +25,7 @@
 #include "core/engine.h"
 #include "core/dict/folders.h"
 #include "core/dict/pack.h"
+#include "core/dict/runes.h"
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
 #include "core/register/retrofit.h"
@@ -643,6 +644,10 @@ int RunMain(int argc, char** argv) {
             return 1;
         }
         std::vector<std::string> errors;
+        if (!hdTrans::dict::internal::ValidUtf8(text)) {
+            std::fprintf(stderr, "hdtrans: error: %s: invalid UTF-8\n", namesPath.c_str());
+            text.clear();
+        }
         hdTrans::names::ParseList(text, listed, &errors);
         for (const std::string& error : errors)
             std::fprintf(stderr, "hdtrans: warning: %s:%s\n", namesPath.c_str(), error.c_str());
