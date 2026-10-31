@@ -1,0 +1,21 @@
+#! layer=base
+# 뜻풀이가 틀렸거나 맞춤법이 틀린 기본 사전 낱말과 가나 표기 동사의 바른 한국어
+key	ko	pos	sem	gram	note	id
+単純労働集約産業	단순노동 집약산업	N110	QID		// LEX-3180	gloss-corrections:1
+単音節語	단음절어	I110			// LEX-3180	gloss-corrections:2
+博多俄か	하카타 니와카	N110	UAr		// LEX-3180	gloss-corrections:3
+印紙代	인지대	N110			// LEX-3180	gloss-corrections:4
+印鑑照合	인감 대조	N110			// LEX-3180	gloss-corrections:5
+卵胞ホルモン	난포 호르몬	N110			// LEX-3180	gloss-corrections:6
+厚物	꽃잎이 많은 국화	N110	VPt		// LEX-3180	gloss-corrections:8
+厚恩	후은	N110			// LEX-3180	gloss-corrections:9
+原末	원말	N110			// LEX-3180	gloss-corrections:10
+けいるいさく	계류삭	N110			// LEX-3180	gloss-corrections:12
+双対性	쌍대성	I110			// LEX-3180	gloss-corrections:13
+収束域	수렴 영역	I110			// LEX-3180	gloss-corrections:14
+取り立て為替	추심 어음	N110			// LEX-3180	gloss-corrections:15
+単複	단수와 복수	N110			// LEX-3180	gloss-corrections:17
+受け方	받는 방법	I110			// LEX-3180	gloss-corrections:18
+けっかい	결계	N110			// LEX-3180	gloss-corrections:20
+取りつけ	설치&AV@	M427			// LEX-3182	gloss-corrections:23
+あとをた	끊&AJ@	M424			// LEX-3183	gloss-corrections:24

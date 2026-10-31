@@ -1,0 +1,38 @@
+# 규칙: LEX-3180
+# 규칙: LEX-3182
+# 규칙: LEX-3183
+rule	input	expected	kind	layer
+dict:gloss-corrections:18	依頼の受け方や報酬の受け渡し等は全て書いてあるらしい。	has:받는 방법	fix	defaults
+dict:gloss-corrections:18	怪しまれるような引き受け方は避けたい。	has:맡는 방법	keep	defaults
+dict:gloss-corrections:20	「けっかい？」	has:결계	fix	defaults
+dict:gloss-corrections:20	魔法でけっかいを張った。	has:결계를 쳤다	fix	defaults
+dict:gloss-corrections:20	堤防が決壊した。	has:붕괴	keep	defaults
+dict:gloss-corrections:4	印紙代を払う。	has:인지대	fix	defaults
+dict:gloss-corrections:5	印鑑照合を行う。	has:인감 대조	fix	defaults
+dict:gloss-corrections:23	樹木に取りつけたカメラからの映像を確認しながら	has:설치한 카메라	fix	defaults
+dict:gloss-corrections:23	パルガンに固定用の器具を取りつける。	has:기구를 설치한다	fix	defaults
+pack:gloss-corrections:1	革命軍の協力を取りつけて、まずバンボがしたことは	has:협력을 얻어내고	fix	packs
+pack:gloss-corrections:1	カオリさんとのデートをようやく取りつけた。	has:데이트를 드디어 얻어냈다	fix	packs
+pack:gloss-corrections:1	ロイに会って約束を取りつけておきたかったのだ。	has:약속을 얻어	fix	packs
+pack:gloss-corrections:1	玄関に取りつけられたチャイムを鳴らす。	has:설치된 차임	keep	packs
+sense:取り付ける	約束を取り付けてようやくだった。	has:약속을 얻어내	keep	senses
+dict:gloss-corrections:24	商業ギルドに売りに行く冒険者があとをたたなかった。	has:끊이지 않았다	fix	defaults
+dict:gloss-corrections:24	行くものがあとをたちません。	has:끊이지 않습니다	fix	defaults
+dict:gloss-corrections:24	中でも男子たちからのナンパがあとをたたない。	has:헌팅이 끊이지 않는다	fix	defaults
+dict:gloss-corrections:24	白いチョークのあとをたどっていると、	has:더듬고	keep	defaults
+dict:gloss-corrections:24	立ち去ったマナの痕跡をたどり、	has:흔적을 더듬	keep	defaults
+dict:gloss-corrections:18	これは受け方が難しい。	has:받는 방법이 어렵다	fix	defaults
+dict:gloss-corrections:1	単純労働集約産業が多い。	has:단순노동 집약산업	fix	defaults
+dict:gloss-corrections:2	単音節語が多い。	has:단음절어가	fix	defaults
+dict:gloss-corrections:3	博多俄かを見た。	has:하카타 니와카를	fix	defaults
+dict:gloss-corrections:6	卵胞ホルモンが出る。	has:난포 호르몬이	fix	defaults
+dict:gloss-corrections:8	厚物の菊を育てる。	has:꽃잎이 많은 국화	fix	defaults
+dict:gloss-corrections:9	厚恩に報いる。	has:후은에	fix	defaults
+dict:gloss-corrections:10	原末を使う。	has:원말을	fix	defaults
+dict:gloss-corrections:12	けいるいさくを切る。	has:계류삭을	fix	defaults
+dict:gloss-corrections:13	双対性がある。	has:쌍대성이	fix	defaults
+dict:gloss-corrections:14	収束域を求める。	has:수렴 영역을	fix	defaults
+dict:gloss-corrections:15	取り立て為替を送る。	has:추심 어음을	fix	defaults
+dict:gloss-corrections:17	単複の区別がない。	has:단수와 복수	fix	defaults
+dict:gloss-corrections:4	印紙を貼る。	has:인지를 붙인다	keep	defaults
+dict:gloss-corrections:17	単体で動く。	has:단독으로	keep	defaults
