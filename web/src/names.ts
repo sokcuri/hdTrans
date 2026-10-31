@@ -22,7 +22,7 @@ export function namesDict(text: string): string {
       }
       if (f.length === 2) f.push('name');
       else if (f.length > 2 && f[2].trim() === '') f[2] = 'name';
-      else f[2] = kindPos[f[2].trim()] ?? f[2];
+      else if (f.length > 2) f[2] = kindPos[f[2].trim()] ?? f[2];
       if (f.length > 3) {
         f[3] = f[3].split(' ').filter((o) => o !== 'hon').join(' ');
         while (f.length > 3 && f[f.length - 1].trim() === '') f.pop();
