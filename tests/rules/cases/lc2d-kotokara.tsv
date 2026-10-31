@@ -1,0 +1,31 @@
+# 규칙: GRM-151
+rule	input	expected	kind	layer
+cx:lc2d-kotokara:10	飛んできたものが矢であることから、どこかに射手がいるはずだ。	has:화살이라는 점에서	fix	rewrites
+cx:lc2d-kotokara:10	ラビットは人畜無害な魔物であることから、最下級冒険者と同義とされる。	has:마물이라는 점에서	fix	rewrites
+cx:lc2d-kotokara:20	魔力がゆらめいていることから、なんとなくわかった。	has:있다는 점에서	fix	rewrites
+cx:lc2d-kotokara:20	気分のリフレッシュになることから、お気に入りの花だ。	has:된다는 점에서	fix	rewrites
+cx:lc2d-kotokara:20	手当もされていることから、凪を助けたのは恐らく彼だ。	has:있다는 점에서	fix	rewrites
+cx:lc2d-kotokara:30	皆に疲れの色が見え始めていたことから、	has:있었다는 점에서	fix	rewrites
+cx:lc2d-kotokara:30	仕事で嘉瑞が女性達を助けたことから、親しくなったのだ。	has:도왔다는 점에서	fix	rewrites
+cx:lc2d-kotokara:30	横を見ると、桜庭さんも土下座をしていたことから、察した。	has:있었다는 점에서	fix	rewrites
+cx:lc2d-kotokara:35	しかし物の影すら見当たらないことから、広いわりに物が少ないのだと気づいた。	has:않는다는 점에서	fix	rewrites
+cx:lc2d-kotokara:35	私の周りの人々が驚いていないことから、城内では誰もが知る周知の事実なのだろう。	has:않는다는 점에서	fix	rewrites
+cx:lc2d-kotokara:40	誰もいないことから、なんかさみしくなってきた	has:없다는 점에서	fix	rewrites
+cx:lc2d-kotokara:40	だが、獣人は基礎回復力が高いことから、５発以上が推奨されていた。	has:높다는 점에서	fix	rewrites
+cx:lc2d-kotokara:40	コールカスは僕らと年も近いことから、何かと僕らと張り合うことが多かった。	has:가깝다는 점에서	fix	rewrites
+cx:lc2d-kotokara:50	素材の採取が困難なことから、五級から一級の金額は天と地の差があった。	has:곤란하다는 점에서	fix	rewrites
+cx:lc2d-kotokara:50	学はないが、人当たりが良く、商売上手なことから、ダニエルは重用していた。	has:능숙하다는 점에서	fix	rewrites
+cx:lc2d-kotokara:60	このことから、殺害時間は直近の様に思える。	has:이 점에서	fix	rewrites
+cx:lc2d-kotokara:60	このことから、『爆裂魔球』と呼ばれることもしばしば。	has:이 점에서	fix	rewrites
+cx:lc2d-kotokara:60	このことから、嫌がらせを受けているのは僕だけと言うことになる。	has:이 점에서	fix	rewrites
+cx:lc2d-kotokara:61	そのことから、	has:그 점에서	fix	rewrites
+cx:lc2d-kotokara:61	そのことから、現在国がＧＰＳの信号を利用して都市ごとに３次元交通網を形成しつつある。	has:그 점에서	fix	rewrites
+cx:lc2d-kotokara:61	そのことから、どうやらサラステラさんやレラおばあちゃんはこれに見覚えがあるものと推測できる。	has:그 점에서	fix	rewrites
+cx:lc2d-kotokara:10	ふとしたことから	!rule:cx:lc2d-kotokara:10	keep	rewrites
+cx:lc2d-kotokara:20	ことから始まる。	!rule:cx:lc2d-kotokara:20	keep	rewrites
+cx:lc2d-kotokara:30	昨日のことから話そう	!rule:cx:lc2d-kotokara:30	keep	rewrites
+cx:lc2d-kotokara:35	生きることから、逃げない	!rule:cx:lc2d-kotokara:35	keep	rewrites
+cx:lc2d-kotokara:40	おめでたい話であることから	!rule:cx:lc2d-kotokara:40	keep	rewrites
+cx:lc2d-kotokara:50	私は考えることから逃げた。	!rule:cx:lc2d-kotokara:50	keep	rewrites
+cx:lc2d-kotokara:60	「解ったことから確認しよう」	!rule:cx:lc2d-kotokara:60	keep	rewrites
+cx:lc2d-kotokara:61	できることから少しずつだな。	!rule:cx:lc2d-kotokara:61	keep	rewrites

@@ -1,0 +1,22 @@
+# 규칙: GRM-153
+rule	input	expected	kind	layer
+cx:lc2d-narebanaru:10	幸福になればなるほどに、彼女の胸は締め付けられる。	has:될수록	fix	rewrites
+cx:lc2d-narebanaru:10	持続時間が長くなればなるほどにウィッチと戦いやすくなる。	has:길어질수록 마녀와	fix	rewrites
+cx:lc2d-narebanaru:10	彼の実力が高くなればなるほどに、全力を出せない苛立ちは大きくなった。	has:높아질수록	fix	rewrites
+cx:lc2d-narebanaru:20	春になればなるほど、	has:될수록	fix	rewrites
+cx:lc2d-narebanaru:20	欲望が強くなればなるほど	has:강해질수록	fix	rewrites
+cx:lc2d-narebanaru:20	成績が良くなればなるほど。	has:좋아질수록	fix	rewrites
+cx:lc2d-narebanaru:20	だから 親しくなればなるほど・	has:친해질수록·	fix	rewrites
+cx:lc2d-narebanaru:20	高位になればなるほど美味になる。	has:될수록 맛좋게	fix	rewrites
+cx:lc2d-narebanaru:20	冷静になればなるほど恥ずかしい。	has:될수록 부끄럽다	fix	rewrites
+cx:lc2d-narebanaru:20	長期戦になればなるほど南が不利。	has:될수록 남쪽이	fix	rewrites
+cx:lc2d-narebanaru:20	逆に多くなればなるほど弱くなる。	has:많아질수록 약해진다	fix	rewrites
+cx:lc2d-narebanaru:20	周りが暗くなればなるほど光は目立つ。	has:어두워질수록	fix	rewrites
+cx:lc2d-narebanaru:10	なるほど。	!rule:cx:lc2d-narebanaru:10	keep	rewrites
+cx:lc2d-narebanaru:10	「なるほど」	!rule:cx:lc2d-narebanaru:10	keep	rewrites
+cx:lc2d-narebanaru:10	なるほどね、	!rule:cx:lc2d-narebanaru:10	keep	rewrites
+cx:lc2d-narebanaru:10	あぁ、なるほど。	!rule:cx:lc2d-narebanaru:10	keep	rewrites
+cx:lc2d-narebanaru:20	「な、なるほど！	!rule:cx:lc2d-narebanaru:20	keep	rewrites
+cx:lc2d-narebanaru:20	なるほどなるほど。	!rule:cx:lc2d-narebanaru:20	keep	rewrites
+cx:lc2d-narebanaru:20	なるほど平等な社会だ	!rule:cx:lc2d-narebanaru:20	keep	rewrites
+cx:lc2d-narebanaru:20	考えれば考えるほど混乱する。	!rule:cx:lc2d-narebanaru:20	keep	rewrites

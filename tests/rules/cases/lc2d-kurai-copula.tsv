@@ -1,0 +1,28 @@
+# 규칙: GRM-154
+rule	input	expected	kind	layer
+cx:lc2d-kurai-copula:10	家庭教師雇えるくらいだからね。	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	人に誘われてやっと入るくらいだから。	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	「ペンギンが夢を見るくらいだからね」	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	手を合わせて拝んでいる人もいるくらいだから	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	出来て親の発する言葉を復唱するくらいだろう。	has:정도일 것이다	fix	rewrites
+cx:lc2d-kurai-copula:10	駐在さんも普通に納得するくらいだったんでしょ？	has:정도였던 것이지	fix	rewrites
+cx:lc2d-kurai-copula:10	「千里が言うくらいだから、よっぽどなんだろな」	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	こいつ重い刑に処されるくらいなのに案外余裕だなあ！	has:정도인데 의외로	fix	rewrites
+cx:lc2d-kurai-copula:10	精霊とか呼ばれるくらいだから魔物と戯れてろだって？	has:정도니까 마귀와	fix	rewrites
+cx:lc2d-kurai-copula:10	素性がまあまあ知れぬ男を家に置いてしまうくらいだし。	has:정도이고	fix	rewrites
+cx:lc2d-kurai-copula:10	大教母っていう位だからきっとよぼよぼのおばあさんよね。	has:정도니까 분명	fix	rewrites
+cx:lc2d-kurai-copula:10	敵である彼ですら、困った顔をして見つめるくらいだから。	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	名前があるくらいだから、しっかりとした組織なのだろう。	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	「よくってほどではないのよ？　たまにやるくらいなのよさ」	has:정도야	fix	rewrites
+cx:lc2d-kurai-copula:10	「うん。実際に結婚式を挙げちゃう人もいるくらいなんだから」	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	こんな、苦しくて情けないだけの日々を過ごすくらいだったら。	has:정도라면	fix	rewrites
+cx:lc2d-kurai-copula:10	待ち合わせに指定するくらいですから、目立つものがありまして。	has:정도니까	fix	rewrites
+cx:lc2d-kurai-copula:10	それに騎士団長っていうくらいだから給料だって悪くないだろう。	has:정도니까 급료라도	fix	rewrites
+cx:lc2d-kurai-copula:10	くらいでした。	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	ぐらいでしょうか」	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	いいよこれくらい！	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	２０％くらいだろう。	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	後半くらいだろうか。	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	時期もこのくらいだった。	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	「五人くらいじゃねえ？」	!rule:cx:lc2d-kurai-copula:10	keep	rewrites
+cx:lc2d-kurai-copula:10	どれぐらいだっただろう。	!rule:cx:lc2d-kurai-copula:10	keep	rewrites

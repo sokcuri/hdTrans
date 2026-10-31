@@ -1,0 +1,29 @@
+# 규칙: GRM-145
+rule	input	expected	kind	layer
+cx:lc2d-kotoka:10	何度吐いたことか。	has:토했던가	fix	rewrites
+cx:lc2d-kotoka:10	何度本気で叱ったことか	has:꾸짖었던가	fix	rewrites
+cx:lc2d-kotoka:10	どれほど落胆したことか。	has:낙담했던가	fix	rewrites
+cx:lc2d-kotoka:20	なんと心が荒んでいることか……	has:얼마나 마음이 거칠어지고 있는가	fix	rewrites
+cx:lc2d-kotoka:20	どれほどの期間になることか……。	has:기간이 되는가	fix	rewrites
+cx:lc2d-kotoka:20	それだけでどれほど肩の荷が軽くなることか。	has:가벼워지는가	fix	rewrites
+cx:lc2d-kotoka:25	その、なんと冒涜的で悪魔の所業であることか。	has:얼마나 모독적이어서 악마의 소행인가	fix	rewrites
+cx:lc2d-kotoka:30	なんと愉快なことか。	has:얼마나 유쾌한가	fix	rewrites
+cx:lc2d-kotoka:30	なんと可愛いことか！	has:얼마나 귀여운가	fix	rewrites
+cx:lc2d-kotoka:30	なんと幸福なことか。	has:얼마나 행복한가	fix	rewrites
+cx:lc2d-kotoka:35	卒業生だけで行えば良いのにと、何度思ったことか分からない。	has:생각했는지 모른다	fix	rewrites
+cx:lc2d-kotoka:35	彼女は自分と同じく召喚された人なのに、と何度憤ったことかわからない。	has:분개했는지 모른다	fix	rewrites
+cx:lc2d-kotoka:40	なんと虚しいことか。	has:얼마나 허무한가	fix	rewrites
+cx:lc2d-kotoka:40	なんと運の悪いことか。	has:얼마나 운이 나쁜가	fix	rewrites
+cx:lc2d-kotoka:40	なんと感慨深いことか！	has:얼마나 감개 깊은가	fix	rewrites
+cx:lc2d-kotoka:10	知ったことか。	!rule:cx:lc2d-kotoka:10	keep	rewrites
+cx:lc2d-kotoka:10	「同一ということか」	!rule:cx:lc2d-kotoka:10	keep	rewrites
+cx:lc2d-kotoka:20	なんてことかしら……。	!rule:cx:lc2d-kotoka:20	keep	rewrites
+cx:lc2d-kotoka:20	「どういうことかしら」	!rule:cx:lc2d-kotoka:20	keep	rewrites
+cx:lc2d-kotoka:25	「なんということか……」	!rule:cx:lc2d-kotoka:25	keep	rewrites
+cx:lc2d-kotoka:25	どういうことかと尋ねると	!rule:cx:lc2d-kotoka:25	keep	rewrites
+cx:lc2d-kotoka:30	なんと切り出したものか。	!rule:cx:lc2d-kotoka:30	keep	rewrites
+cx:lc2d-kotoka:30	つまりは何度も突進してくるということか。	!rule:cx:lc2d-kotoka:30	keep	rewrites
+cx:lc2d-kotoka:35	男を倒すことがどれだけ大変なことかを知ってしまったからだ。	!rule:cx:lc2d-kotoka:35	keep	rewrites
+cx:lc2d-kotoka:35	「ダイヤのしでかしたことがどれだけ大変なことかわかっていないだろう」	!rule:cx:lc2d-kotoka:35	keep	rewrites
+cx:lc2d-kotoka:40	その行為が、どれほどまでに不審なことか理解して、すぐに逃げ出しそうになってしまったが。	!rule:cx:lc2d-kotoka:40	keep	rewrites
+cx:lc2d-kotoka:40	「腹黒ということか？	!rule:cx:lc2d-kotoka:40	keep	rewrites

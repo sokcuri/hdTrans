@@ -1,0 +1,32 @@
+# 규칙: GRM-149
+rule	input	expected	kind	layer
+cx:lc2d-kosoga:10	これこそが！	has:이것이야말로	fix	rewrites
+cx:lc2d-kosoga:10	この船こそが我の城だ。	has:배야말로 나의	fix	rewrites
+cx:lc2d-kosoga:10	我らこそが多勢の考えと♪	has:우리들이야말로	fix	rewrites
+cx:lc2d-kosoga:10	これこそが、ショッケンだ。	has:이것이야말로	fix	rewrites
+cx:lc2d-kosoga:10	出会いこそが、人生の鍵で。	has:만남이야말로	fix	rewrites
+cx:lc2d-kosoga:10	これこそが感覚現像の真髄なのだ。	has:이것이야말로	fix	rewrites
+cx:lc2d-kosoga:10	我こそが、魔王様の右腕である――	has:나야말로	fix	rewrites
+cx:lc2d-kosoga:10	「…これこそが汝の力。力を示せ」	has:…이거야말로	fix	rewrites
+cx:lc2d-kosoga:10	時間の浪費と見学こそが、「意味」	has:견학이야말로	fix	rewrites
+cx:lc2d-kosoga:10	これこそが、鳥籠を開ける鍵なのだ。	has:이것이야말로	fix	rewrites
+cx:lc2d-kosoga:10	自分こそが世界を守る勇者なのだと。	has:자신이야말로	fix	rewrites
+cx:lc2d-kosoga:10	その召喚者こそが、タカアキだった。	has:소환자야말로	fix	rewrites
+cx:lc2d-kosoga:10	「そうか……あれこそが俺の本質……」	has:그런가……저거야말로	fix	rewrites
+cx:lc2d-kosoga:10	そここそが、俺の過ごしてきた故郷だ。	has:거기야말로	fix	rewrites
+cx:lc2d-kosoga:10	復讐こそが彼女の生きてきた理由であり。	has:복수야말로 그녀가	fix	rewrites
+cx:lc2d-kosoga:10	この光こそが魔力によって作られた魔法。	has:빛이야말로 마력에	fix	rewrites
+cx:lc2d-kosoga:10	いやむしろ勉強こそが内職と言えるのでは？	has:공부야말로 부업이라고	fix	rewrites
+cx:lc2d-kosoga:10	そしてその証明こそが今の発言なのだろう。	has:증명이야말로	fix	rewrites
+cx:lc2d-kosoga:10	それこそが『呪い』	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	でも、だからこそ、	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	だからこそ恐怖している。	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	これこそまさに極楽浄土。	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	それこそが男の目的だった。	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	「彼女こそ本物だ」	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	今度こそ、薄い唇が言葉をつむいだ。	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:10	“こちらこそ”	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:5	全体的に鋭利に纏まっている男、彼こそがグランツ・マゼンタ公爵その人であった。	has:그가 바로 그란츠	fix	rewrites
+cx:lc2d-kosoga:5	彼こそが村に駐屯している騎士団の隊長ディーノである。	has:그가 바로 마을에	fix	rewrites
+cx:lc2d-kosoga:5	ーー彼女こそが転生者で、ゲーム通りの展開を防ごうと暗躍したのではないか？	!rule:cx:lc2d-kosoga:5	keep	rewrites
+cx:lc2d-kosoga:5	「そうか……あれこそが俺の本質……」	!rule:cx:lc2d-kosoga:5	keep	rewrites

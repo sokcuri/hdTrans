@@ -1,0 +1,27 @@
+# 규칙: GRM-150
+rule	input	expected	kind	layer
+cx:lc2d-tesae:5	立ってさえいれば。	has:있기만 하면	fix	rewrites
+cx:lc2d-tesae:5	生きてさえいれば。	has:있기만 하면	fix	rewrites
+cx:lc2d-tesae:10	物音に気付いてさえいれば…。	has:알아차리기만 하면	fix	rewrites
+cx:lc2d-tesae:10	幸せな笑顔で覆い隠してさえいれば	has:가리기만 하면	fix	rewrites
+cx:lc2d-tesae:15	しかし、生きてさえすれば再起可能である。	has:살기만 하면	fix	rewrites
+cx:lc2d-tesae:18	理解してさえいれば、近寄ってさえしまえば…。	has:이해하기만 하면, 접근해 버리기만 하면	fix	rewrites
+cx:lc2d-tesae:18	それに、バレてさえしまえば、旅行どころではない。	has:버리기만 하면	fix	rewrites
+cx:lc2d-tesae:20	あんたはそこを退いてさえくれれば…	has:주기만 하면	fix	rewrites
+cx:lc2d-tesae:20	倒れないように立ち回ってさえくれれば、あとはどうにかする。	has:주기만 하면	fix	rewrites
+cx:lc2d-tesae:30	君に嫌われてさえいなければ、僕は	has:미움받지만 않으면	fix	rewrites
+cx:lc2d-tesae:30	「私が芋を、外で芋を焼いてさえいなければ」	has:굽지만 않으면	fix	rewrites
+cx:lc2d-tesae:35	どころか、見てさえいない。	has:보지도 않았다	fix	rewrites
+cx:lc2d-tesae:35	それが維持されてさえいない。	has:유지되지도 않았다	fix	rewrites
+cx:lc2d-tesae:40	葵は気づいてさえいなかった。	has:눈치채지도 않았다	fix	rewrites
+cx:lc2d-tesae:40	気付いてさえいないのかもしれない。	has:깨닫지도 않는	fix	rewrites
+cx:lc2d-tesae:50	今回だって、積荷を捨てさえしなければ・・・！」	has:버리기만 하지	fix	rewrites
+cx:lc2d-tesae:5	腐ってさえなければ	!rule:cx:lc2d-tesae:5	keep	rewrites
+cx:lc2d-tesae:10	と疑問にさえ思った。	!rule:cx:lc2d-tesae:10	keep	rewrites
+cx:lc2d-tesae:15	見つけてさえもらえない	!rule:cx:lc2d-tesae:15	keep	rewrites
+cx:lc2d-tesae:18	あ、みさえもですかね？	!rule:cx:lc2d-tesae:18	keep	rewrites
+cx:lc2d-tesae:20	ほのかに甘ささえ感じる。	!rule:cx:lc2d-tesae:20	keep	rewrites
+cx:lc2d-tesae:30	地図さえあれば、教皇を含め重要人物が幽閉されている場所もわかるはずだが……。	!rule:cx:lc2d-tesae:30	keep	rewrites
+cx:lc2d-tesae:35	君が、生きてさえ、いれば】	!rule:cx:lc2d-tesae:35	keep	rewrites
+cx:lc2d-tesae:40	森さえ抜けてしまえばなんとかなる。	!rule:cx:lc2d-tesae:40	keep	rewrites
+cx:lc2d-tesae:50	準備さえ整えば人間側も魔人達と渡り合えるとは思う。	!rule:cx:lc2d-tesae:50	keep	rewrites
