@@ -1,0 +1,48 @@
+# 규칙: LEX-3320
+# 규칙: LEX-3321
+rule	input	expected	kind	layer
+dict:word-sense-glosses:1	素妃杏にとって幸いだったのは嫁姑の確執等は無く	has:고부의 확집	fix	defaults
+dict:word-sense-glosses:1	結婚しても嫁姑問題なんかは起きそうにない。	has:고부 문제	fix	defaults
+dict:word-sense-glosses:1	あの嫁姑戦争から三日が経った。	has:고부 전쟁	fix	defaults
+dict:word-sense-glosses:1	嫁と姑の仲は良好だ。	lacks:고부	keep	defaults
+dict:word-sense-glosses:2	天才、奇才と褒め称えられることはありますが	has:기재라고	fix	defaults
+dict:word-sense-glosses:2	しかし不世出の奇才を固定観念に当てはめ	has:불세출의 기재를	fix	defaults
+dict:word-sense-glosses:2	これでは〝鬼才〟ではなく〝奇才〟だ	has:귀재	keep	defaults
+dict:word-sense-glosses:4	「さっきまで好天だったのに！」	has:좋은 날씨였는데	fix	defaults
+dict:word-sense-glosses:4	いくら好天でも、桜のつぼみがちらほら見えはじめた	has:아무리 좋은 날씨라도	fix	defaults
+dict:word-sense-glosses:5	このところは好天気が続いている。	has:좋은 날씨가 계속되고	fix	defaults
+dict:word-sense-glosses:22	好天候が続いている。	has:좋은 날씨가	fix	defaults
+dict:word-sense-glosses:4	天気が良いので外に出た。	has:날씨가	keep	defaults
+dict:word-sense-glosses:6	やっぱり勝負の基本は好手と悪手で相手を撹乱することだ	has:좋은 수와 악수로	fix	defaults
+dict:word-sense-glosses:6	レオがこの状況に導いたのは好手なのか、それとも悪手なのか。	has:좋은 수인지	fix	defaults
+dict:word-sense-glosses:23	とすると、最好手は俺たちが先にパビックを見つけて	has:최선의 수는	fix	defaults
+dict:word-sense-glosses:7	今が好機だ。	has:호기	keep	defaults
+dict:word-sense-glosses:7	チーム・デクスター側も好球続きの夫人に対抗すべく	has:좋은 공	fix	defaults
+dict:word-sense-glosses:24	好球必打。	has:좋은 공은 놓치지 않고 친다.	fix	defaults
+dict:word-sense-glosses:7	ボールはストライクゾーンの絶好球。	has:절호공	keep	defaults
+dict:word-sense-glosses:9	しかし、世の中、好事魔多しと人は云う。	has:호사다마	fix	defaults
+dict:word-sense-glosses:9	ただ、好事魔多しという諺もあるからのぉ。	has:호사다마라는 속담	fix	defaults
+dict:word-sense-glosses:10	この世界には世界を二分する形で太洋に異次元が横たわっており	has:대양에	fix	defaults
+dict:word-sense-glosses:10	いや、太洋州島嶼諸国の民は、古くからこれをしていたのだが。	has:대양주	fix	defaults
+dict:word-sense-glosses:10	太陽が昇る。	has:태양이	keep	defaults
+dict:word-sense-glosses:11	妻弟が家に来た。	has:처남이	fix	defaults
+dict:word-sense-glosses:12	娘細胞に分かれる。	has:딸세포로	fix	defaults
+dict:word-sense-glosses:13	好業績が続く。	has:호실적이	fix	defaults
+dict:word-sense-glosses:14	奇観を呈する。	has:기이한 광경	fix	defaults
+dict:word-sense-glosses:15	奇計を案じる。	has:기묘한 계책	fix	defaults
+dict:word-sense-glosses:16	娑羅の木の花	has:사라수의 꽃	fix	defaults
+dict:word-sense-glosses:16	娑羅双樹の花の色	lacks:별명	keep	defaults
+dict:word-sense-glosses:13	好物はカレーだ。	has:좋아하는	keep	defaults
+dict:word-sense-glosses:13	好調な滑り出しだった。	has:호조	keep	defaults
+dict:word-sense-glosses:17	好々爺を演じるのはここまでだ。	has:인자한 노인을 연기하는	fix	defaults
+dict:word-sense-glosses:17	ほっほっほと好々爺のように笑う執事に	has:인자한 노인처럼	fix	defaults
+dict:word-sense-glosses:17	ホッキーは好々爺の笑みで「そう構えんでもよろしい」と頭を振る。	has:인자한 노인의 미소로	fix	defaults
+dict:word-sense-glosses:3	特にニコニコと好好爺めいたその老人。	has:인자한 노인	fix	defaults
+dict:word-sense-glosses:18	老人は上座に座ると、いっそう好々爺然とした笑みを零す。	has:인자한 노인 같은 미소를	fix	defaults
+dict:word-sense-glosses:18	二人は暫く黙って、好々爺然とした導師の顔を見つめ返した。	has:인자한 노인 같은 도사의	fix	defaults
+dict:word-sense-glosses:20	いつも好々爺としたミアン祖父が、形相を変え玄関ホールに立った。	has:인자한 노인 같은	fix	defaults
+dict:word-sense-glosses:21	好々爺然として言う。	has:인자한 노인처럼 말한다	fix	defaults
+dict:word-sense-glosses:18	紳士然とした男が立っていた。	has:신사연한	keep	defaults
+dict:word-sense-glosses:17	戦いとは無縁の出来事であれば只の好々爺として日々を送っていた。	has:인자한 노인으로서	fix	defaults
+dict:word-sense-glosses:1	嫁が姑に頭を下げた。	lacks:고부	keep	defaults
+dict:word-sense-glosses:11	妻の弟が家に来た。	has:아내의 남동생	keep	defaults
