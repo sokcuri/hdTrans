@@ -202,29 +202,6 @@ Pieces RestoreLineBrackets(const Pieces& in, const Pieces& out) {
 
 bool IsSyllable(char32_t r) { return r >= text::kBase && r <= text::kLast; }
 
-// The length in runes of a stutter separator at rs[i]: 、 ， or a run of … ‥ ― ─ — or of
-// two or more ・.
-size_t StutterSeparator(std::u32string_view rs, size_t i) {
-    if (i >= rs.size()) return 0;
-    switch (rs[i]) {
-        case U'、':
-        case U'，':
-            return 1;
-        case U'…':
-        case U'‥':
-        case U'―':
-        case U'─':
-        case U'—':
-        case U'・': {
-            size_t n = i;
-            while (n < rs.size() && rs[n] == rs[i]) n++;
-            if (rs[i] == U'・' && n - i < 2) return 0;
-            return n - i;
-        }
-    }
-    return 0;
-}
-
 bool IsDropped(char32_t r) { return r >= kDropShift + 0x3041 && r <= kDropShift + 0x30FF; }
 
 constexpr std::u32string_view kSmallVowels = U"ァィゥェォ";
@@ -448,6 +425,30 @@ std::string WriteDropped(std::string_view s) {
     return out;
 }
 
+size_t internal::StutterSeparator(std::u32string_view rs, size_t i) {
+    if (i >= rs.size()) return 0;
+    switch (rs[i]) {
+        case U'、':
+        case U'，':
+            return 1;
+        case U'…':
+        case U'‥':
+        case U'―':
+        case U'─':
+        case U'—':
+        case U'・':
+        case U'.':
+        case U'．': {
+            size_t n = i;
+            while (n < rs.size() && rs[n] == rs[i]) n++;
+            if ((rs[i] == U'・' || rs[i] == U'.' || rs[i] == U'．') && n - i < 2) return 0;
+            return n - i;
+        }
+        default:
+            return 0;
+    }
+}
+
 std::string WriteStutters(std::string_view s) {
     const std::u32string rs = Runes(s);
     if (!Contains(rs, kStutterMark) && !Contains(rs, kStutterRest)) return std::string(s);
@@ -465,14 +466,19 @@ std::string WriteStutters(std::string_view s) {
         while (i + marks < rs.size() && rs[i + marks] == kStutterMark) marks++;
         while (i + marks + rest < rs.size() && rs[i + marks + rest] == kStutterRest) rest++;
         i += marks + rest - 1;
-        const size_t k = StutterSeparator(rs, i + 1);
+        const size_t k = internal::StutterSeparator(rs, i + 1);
         std::u32string sep = rs.substr(i + 1, k);
         if (sep == U"、" || sep == U"，") sep = U", ";
         i += k;
         size_t j = i + 1;
-        while (j < rs.size() && (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest ||
-                                 StutterSeparator(rs, j) > 0)) {
-            j++;
+        while (j < rs.size()) {
+            if (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest) {
+                j++;
+            } else if (const size_t step = internal::StutterSeparator(rs, j); step > 0) {
+                j += step;
+            } else {
+                break;
+            }
         }
         size_t word = 0;
         while (j + word < rs.size() && IsSyllable(rs[j + word])) word++;

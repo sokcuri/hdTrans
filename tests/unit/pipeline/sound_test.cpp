@@ -201,6 +201,9 @@ HD_TEST(pipeline_sound) {
         {"お…お兄ちゃん", "\xEE\x80\x80" "…お兄ちゃん"},
         {"だっ……大丈夫", "\xEE\x80\x80" "……大丈夫"},
         {"えっ……本当", "えっ……本当"},
+        // A run of two or more . or ． separates as an ellipsis does; one . does not.
+        {"し..しつれいします", "\xEE\x80\x80" "..しつれいします"},
+        {"こ．．こんにちは", "\xEE\x80\x80" "．．こんにちは"},
         {"「わ、わ、私は……」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、私は……」"},
         // A syllable said twice is a stutter even where it alone is a word (さ、 well).
         {"「さ、さ、最低」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、最低」"},
