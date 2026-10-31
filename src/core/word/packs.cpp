@@ -616,9 +616,10 @@ bool MatchColloc(const dict::PackTable& t, const dict::Colloc& c, std::string_vi
     while (last + 1 < items.size() && SlotSuffix(items[last + 1])) last++;
     slotEnd = last + 1;
     // The text after the slot read from the word after it; else the slot's last word may hold its
-    // start (最後の of {X}の一体), and that part is read.
-    if (ClassOf(x) == '1' && (c.slotClass.empty() || OfClass(t, x, x->group->surface, c.slotClass)) &&
-        ReadsText(items, slotEnd, c.after, end) && end > slotEnd)
+    // start (最後の of {X}の一体), and that part is read. The text is tried before the class, the
+    // dearer test.
+    if (ClassOf(x) == '1' && ReadsText(items, slotEnd, c.after, end) && end > slotEnd &&
+        (c.slotClass.empty() || OfClass(t, x, x->group->surface, c.slotClass)))
         return true;
     std::string_view after = c.after;
     const std::string_view seg = Segment(items[last]);
@@ -632,17 +633,15 @@ bool MatchColloc(const dict::PackTable& t, const dict::Colloc& c, std::string_vi
     }
     // The slot is a noun, or a word that holds a noun with the text after it (最後の).
     if (ClassOf(x) != '1' && !(absorbed && last == at)) return false;
+    if (after.empty()) end = slotEnd;
+    else if (!ReadsText(items, slotEnd, after, end) || end <= slotEnd) return false;
     if (!c.slotClass.empty()) {
         std::string_view noun = x->group->surface;
         const std::string_view read = std::string_view(c.after).substr(0, c.after.size() - after.size());
         if (absorbed && last == at && noun.size() > read.size() && noun.ends_with(read)) noun.remove_suffix(read.size());
         if (!OfClass(t, x, noun, c.slotClass)) return false;
     }
-    if (after.empty()) {
-        end = slotEnd;
-        return true;
-    }
-    return ReadsText(items, slotEnd, after, end) && end > slotEnd;
+    return true;
 }
 
 // Writes target over word x (its ending emptied with an empty target).
@@ -710,20 +709,39 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
     std::vector<Item*> items;
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next)
         if (it->group != nullptr) items.push_back(it);
+    std::vector<int> patterns;
     for (std::size_t i = 0; i < items.size(); i++) {
+        // The patterns that can read from items[i]: text before a slot starts with its surface or
+        // with what it reads in its token (ReadsText), so with the first letter of either; a slot
+        // first may be any word. In load order, as ties go to the first.
+        patterns.assign(t.collocsSlotFirst.begin(), t.collocsSlotFirst.end());
+        const auto lead = [&](std::string_view letter) {
+            if (letter.empty()) return;
+            const auto found = t.collocsByLead.find(letter);
+            if (found == t.collocsByLead.end()) return;
+            const std::size_t mid = patterns.size();
+            patterns.insert(patterns.end(), found->second.begin(), found->second.end());
+            std::inplace_merge(patterns.begin(), patterns.begin() + static_cast<std::ptrdiff_t>(mid), patterns.end());
+        };
+        const std::string_view seg = Segment(items[i]), surface = items[i]->group->surface;
+        const std::string_view segLetter = seg.substr(0, text::DecodeRune(seg).size);
+        const std::string_view surfaceLetter = surface.substr(0, text::DecodeRune(surface).size);
+        lead(segLetter);
+        if (surfaceLetter != segLetter) lead(surfaceLetter);
         CollocMatch best;
-        for (const dict::Colloc& c : t.collocs) {
-            for (const std::string& before : c.befores) {
-                CollocMatch m;
-                m.c = &c;
-                if (!MatchColloc(t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
-                if (!Applicable(f, t, items, i, taken, m)) continue;
-                m.length = before.size() + c.after.size();
-                const int pri = t.rows[static_cast<std::size_t>(c.row)].pri;
-                if (best.c == nullptr || m.length > best.length ||
-                    (m.length == best.length && pri > t.rows[static_cast<std::size_t>(best.c->row)].pri))
-                    best = m;
-            }
+        for (const int p : patterns) {
+            const auto [colloc, b] = t.collocPatterns[static_cast<std::size_t>(p)];
+            const dict::Colloc& c = t.collocs[static_cast<std::size_t>(colloc)];
+            const std::string& before = c.befores[static_cast<std::size_t>(b)];
+            CollocMatch m;
+            m.c = &c;
+            if (!MatchColloc(t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
+            if (!Applicable(f, t, items, i, taken, m)) continue;
+            m.length = before.size() + c.after.size();
+            const int pri = t.rows[static_cast<std::size_t>(c.row)].pri;
+            if (best.c == nullptr || m.length > best.length ||
+                (m.length == best.length && pri > t.rows[static_cast<std::size_t>(best.c->row)].pri))
+                best = m;
         }
         if (best.c == nullptr) continue;
         const dict::Colloc& c = *best.c;

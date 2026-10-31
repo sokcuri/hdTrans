@@ -929,6 +929,41 @@ void IndexFamily(const ConstructionTable& t, CxFamily& c) {
     }
 }
 
+// Adds to out the atoms the condition at node i needs to hold: itself, or the operands of an &&
+// or &&n, nested ones too.
+void NeededAtoms(const ConstructionTable& t, uint32_t i, std::vector<uint32_t>& out) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) {
+        out.push_back(n.count);
+        return;
+    }
+    if (n.kind != rules::BodyKind::And && n.kind != rules::BodyKind::AndAll) return;
+    uint32_t child = i + 1;
+    for (uint32_t k = 0; k < n.count; k++, child = t.nodes[child].end) NeededAtoms(t, child, out);
+}
+
+bool SameAtom(const CxAtom& a, const CxAtom& b) {
+    return a.field == b.field && a.match == b.match && a.delta == b.delta && a.negated == b.negated && a.value == b.value &&
+           a.set == b.set && a.feature == b.feature;
+}
+
+// Fills the atoms all rows of family c need, in the order of its first row.
+void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
+    if (c.rows.empty()) return;
+    std::vector<uint32_t> shared, needed;
+    NeededAtoms(t, t.rows[static_cast<std::size_t>(c.rows.front())].root, shared);
+    const auto in = [&](const std::vector<uint32_t>& atoms, uint32_t a) {
+        return std::ranges::any_of(atoms, [&](uint32_t b) { return SameAtom(t.atoms[a], t.atoms[b]); });
+    };
+    for (std::size_t k = 1; k < c.rows.size() && !shared.empty(); k++) {
+        needed.clear();
+        NeededAtoms(t, t.rows[static_cast<std::size_t>(c.rows[k])].root, needed);
+        std::erase_if(shared, [&](uint32_t a) { return !in(needed, a); });
+    }
+    for (const uint32_t a : shared)
+        if (!in(c.shared, a)) c.shared.push_back(a);
+}
+
 }  // namespace
 
 namespace {
@@ -1121,6 +1156,7 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
         IndexFamily(t, c);
+        ShareAtoms(t, c);
         const auto pass = std::ranges::find(passes, c.after);
         if (pass == passes.end()) {
             fail(c.line, "the family " + c.name + " runs after " + c.after + ", which is no pass");
@@ -1556,7 +1592,12 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
             if (family.indexed && tally == nullptr) {
                 const auto found = family.bySurface.find(std::string_view(it->group->surface));
                 rows = found != family.bySurface.end() ? &found->second : &family.open;
+                if (rows->empty()) continue;
             }
+            // An atom all rows need that is false here: none fires (rule counts try every row).
+            if (tally == nullptr &&
+                !std::ranges::all_of(family.shared, [&](uint32_t a) { return Holds(f, it, t.atoms[a]); }))
+                continue;
             for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
                 if (skip != nullptr && skip(row.id)) continue;

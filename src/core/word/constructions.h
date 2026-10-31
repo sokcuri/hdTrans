@@ -117,6 +117,9 @@ struct CxFamily {
     std::unordered_map<std::string, std::vector<int>, CxSurfaceHash, std::equal_to<>> bySurface;
     std::vector<int> open;
     bool indexed = false;  // some row has surfaces
+    // The atoms every row needs to hold (itself, or an operand of its && or &&n at any depth), into
+    // atoms: a word on which one is false fires none of the rows.
+    std::vector<uint32_t> shared;
 };
 
 struct CxError {
