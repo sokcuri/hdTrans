@@ -1418,13 +1418,15 @@ void DecideVoice(Flusher& f) {
         Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
         const dict::PackRow* packed = PackVoice(f, it, stem, v);
         if (packed != nullptr && !packed->agent.empty()) {
-            // The agent phrase of the row's reading: the animate agent the voice step found, else the
-            // nearest に, から, によって or により after a noun in the verb's clause.
+            // The agent phrase of the row's reading: the animate agent the voice step found (に, によって,
+            // により), else the nearest から after an animate noun in the verb's clause, not a quote's.
             Item* p = agent;
             for (Item* q = it->prev; p == nullptr && q != nullptr && !ClauseBreak(q); q = q->prev) {
-                const std::string_view s = q->group->surface;
-                if ((s == "に" || s == "から" || s == "によって" || s == "により") && q->prev != nullptr &&
-                    q->prev->selected >= 0 && At(q->prev->Code(q->prev->selected), 0) == '1')
+                const Item* a = q->prev;
+                const Item* n = q->next;
+                if (q->group->surface == "から" && a != nullptr && !a->detail->Yougo() &&
+                    Animate(a->Attr(std::max(a->selected, 0))) &&
+                    (n == nullptr || !dict::InClass(HDTRANS_CLASS("particle.quote"), n->group->surface)))
                     p = q;
             }
             if (p != nullptr && !p->Fixed()) {
