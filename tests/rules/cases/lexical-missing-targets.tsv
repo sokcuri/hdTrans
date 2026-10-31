@@ -106,3 +106,4 @@ lexical:docchi-nishiro	どっちにしても、俺は行く。	has:어느 쪽이
 lexical:docchi-nishiro	どちらにしろと先生は言った。	has:어느 쪽으로 하라고	keep	lookup
 cx:nanyori:20	それがなによりの証拠だ。	has:최고의 증거	fix	rewrites
 cx:nanyori:20	なによりも、ここには美味しいご飯が待っている。	has:무엇보다도,	keep	rewrites
+cx:nanyori:10	そう、それはなによりね。	has:다행이네	fix	rewrites
