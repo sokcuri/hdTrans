@@ -87,16 +87,13 @@ void LogLoadErrors(const hdTrans::Engine& engine, bool force = true, bool loaded
 
 void Log(const std::string& text) { OutputDebugStringW(WideFromUtf8("J2KEngine: " + text + "\n").c_str()); }
 
-// Whether this process shows Anemone's main window.
+// Whether this process shows Anemone's main window: the first window of the first of its two
+// class names that exists belongs to this process.
 bool InAnemone() {
-    for (const wchar_t* windowClass : {L"AneParentClass", L"AnemoneParentWndClass"}) {
-        for (HWND w = nullptr; (w = FindWindowExW(nullptr, w, windowClass, nullptr)) != nullptr;) {
-            DWORD pid = 0;
-            GetWindowThreadProcessId(w, &pid);
-            if (pid == GetCurrentProcessId()) return true;
-        }
-    }
-    return false;
+    HWND w = FindWindowW(L"AneParentClass", nullptr);
+    if (!w) w = FindWindowW(L"AnemoneParentWndClass", nullptr);
+    DWORD pid = 0;
+    return w && GetWindowThreadProcessId(w, &pid) && pid == GetCurrentProcessId();
 }
 
 // Anemone's AneDic.txt next to the executable, a UTF-8 file in the Ehnd UserDict format
