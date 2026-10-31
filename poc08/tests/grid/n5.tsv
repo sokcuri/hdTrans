@@ -3858,7 +3858,7 @@ n5-pfinal-3856	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statem
 n5-pfinal-3857	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=none	「友達は学生じゃなかった。」	「친구는 학생이 아니었어.」
 n5-pfinal-3858	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=none	「母は学生じゃなかった。」	「어머니는 학생이 아니었어.」
 n5-pfinal-3859	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=darou	「友達は学生じゃなかっただろう。」	「친구는 학생이 아니었을 거야.」
-n5-pfinal-3860	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;mod=none	「友達は学生？」	「친구는 학생이야?」
+n5-pfinal-3860	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;mod=none	「友達は学生？」	「친구는 학생?」
 n5-pfinal-3861	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;mod=none	「友達は学生じゃない？」	「친구는 학생이 아니야?」
 n5-pfinal-3862	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;mod=none	「友達は学生だった？」	「친구는 학생이었어?」
 n5-pfinal-3863	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;mod=none	「友達は学生じゃなかった？」	「친구는 학생이 아니었어?」
@@ -3902,7 +3902,7 @@ n5-pfinal-3900	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statem
 n5-pfinal-3901	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=none	「友達は医者じゃなかった。」	「친구는 의사가 아니었어.」
 n5-pfinal-3902	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=none	「母は医者じゃなかった。」	「어머니는 의사가 아니었어.」
 n5-pfinal-3903	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=darou	「友達は医者じゃなかっただろう。」	「친구는 의사가 아니었을 거야.」
-n5-pfinal-3904	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;mod=none	「友達は医者？」	「친구는 의사야?」
+n5-pfinal-3904	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;mod=none	「友達は医者？」	「친구는 의사?」
 n5-pfinal-3905	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;mod=none	「友達は医者じゃない？」	「친구는 의사가 아니야?」
 n5-pfinal-3906	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;mod=none	「友達は医者だった？」	「친구는 의사였어?」
 n5-pfinal-3907	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;mod=none	「友達は医者じゃなかった？」	「친구는 의사가 아니었어?」
@@ -3946,7 +3946,7 @@ n5-pfinal-3944	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statem
 n5-pfinal-3945	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=none	「友達は会社員じゃなかった。」	「친구는 회사원이 아니었어.」
 n5-pfinal-3946	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=none	「母は会社員じゃなかった。」	「어머니는 회사원이 아니었어.」
 n5-pfinal-3947	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;mod=darou	「友達は会社員じゃなかっただろう。」	「친구는 회사원이 아니었을 거야.」
-n5-pfinal-3948	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;mod=none	「友達は会社員？」	「친구는 회사원이야?」
+n5-pfinal-3948	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;mod=none	「友達は会社員？」	「친구는 회사원?」
 n5-pfinal-3949	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;mod=none	「友達は会社員じゃない？」	「친구는 회사원이 아니야?」
 n5-pfinal-3950	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;mod=none	「友達は会社員だった？」	「친구는 회사원이었어?」
 n5-pfinal-3951	block=pfinal;pred=noun-cop;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;mod=none	「友達は会社員じゃなかった？」	「친구는 회사원이 아니었어?」
@@ -4914,11 +4914,11 @@ n5-link-4912	block=link;group=seq;link=nagara;v1tense=-;ctx.polite=dialogue.masu
 n5-link-4913	block=link;group=seq;link=nagara;v1tense=-;ctx.polite=dialogue.masu;stype=statement;tense=past	「道を歩きながら友達と話しました。」	「길을 걸으면서 친구하고 이야기했어요.」
 n5-link-4914	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=nonpast	今日は暑いから、窓を開ける。	오늘은 더워서, 창문을 연다.
 n5-link-4915	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=past	今日は暑いから、窓を開けた。	오늘은 더워서, 창문을 열었다.
-n5-link-4916	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「今日は暑いから、窓を開ける。」	「오늘은 더워서, 창문을 열어.」
-n5-link-4917	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「今日は暑いから、窓を開けた。」	「오늘은 더워서, 창문을 열었어.」
+n5-link-4916	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「今日は暑いから、窓を開ける。」	「오늘은 더우니까, 창문을 열어.」
+n5-link-4917	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「今日は暑いから、窓を開けた。」	「오늘은 더우니까, 창문을 열었어.」
 n5-link-4918	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=question;tense=nonpast	「今日は暑いから、窓を開ける？」	「오늘은 더우니까, 창문을 열어?」
-n5-link-4919	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「今日は暑いから、窓を開けます。」	「오늘은 더워서, 창문을 열어요.」
-n5-link-4920	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「今日は暑いから、窓を開けました。」	「오늘은 더워서, 창문을 열었어요.」
+n5-link-4919	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「今日は暑いから、窓を開けます。」	「오늘은 더우니까, 창문을 열어요.」
+n5-link-4920	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「今日は暑いから、窓を開けました。」	「오늘은 더우니까, 창문을 열었어요.」
 n5-link-4921	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=question;tense=nonpast	「今日は暑いから、窓を開けますか。」	「오늘은 더우니까, 창문을 열어요?」
 n5-link-4922	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=request;tense=nonpast	「今日は暑いから、窓を開けてください。」	「오늘은 더우니까, 창문을 열어 주세요.」
 n5-link-4923	block=link;group=reason;link=kara;v1tense=past;ctx.polite=narration.plain;stype=statement;tense=nonpast	今日は暑かったから、窓を開ける。	오늘은 더웠으니까, 창문을 연다.
@@ -4932,11 +4932,11 @@ n5-link-4930	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.
 n5-link-4931	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.masu;stype=request;tense=nonpast	「今日は暑かったから、窓を開けてください。」	「오늘은 더웠으니까, 창문을 열어 주세요.」
 n5-link-4932	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=nonpast	この鞄は高いから、買わない。	이 가방은 비싸서, 사지 않는다.
 n5-link-4933	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=past	この鞄は高いから、買わなかった。	이 가방은 비싸서, 사지 않았다.
-n5-link-4934	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「この鞄は高いから、買わない。」	「이 가방은 비싸서, 안 사.」
-n5-link-4935	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「この鞄は高いから、買わなかった。」	「이 가방은 비싸서, 안 샀어.」
+n5-link-4934	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「この鞄は高いから、買わない。」	「이 가방은 비싸니까, 안 사.」
+n5-link-4935	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「この鞄は高いから、買わなかった。」	「이 가방은 비싸니까, 안 샀어.」
 n5-link-4936	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=question;tense=nonpast	「この鞄は高いから、買わない？」	「이 가방은 비싸니까, 안 사?」
-n5-link-4937	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「この鞄は高いから、買いません。」	「이 가방은 비싸서, 안 사요.」
-n5-link-4938	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「この鞄は高いから、買いませんでした。」	「이 가방은 비싸서, 안 샀어요.」
+n5-link-4937	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「この鞄は高いから、買いません。」	「이 가방은 비싸니까, 안 사요.」
+n5-link-4938	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「この鞄は高いから、買いませんでした。」	「이 가방은 비싸니까, 안 샀어요.」
 n5-link-4939	block=link;group=reason;link=kara;v1tense=past;ctx.polite=narration.plain;stype=statement;tense=nonpast	この鞄は高かったから、買わない。	이 가방은 비쌌으니까, 사지 않는다.
 n5-link-4940	block=link;group=reason;link=kara;v1tense=past;ctx.polite=narration.plain;stype=statement;tense=past	この鞄は高かったから、買わなかった。	이 가방은 비쌌으니까, 사지 않았다.
 n5-link-4941	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「この鞄は高かったから、買わない。」	「이 가방은 비쌌으니까, 안 사.」
@@ -4946,11 +4946,11 @@ n5-link-4944	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.
 n5-link-4945	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.masu;stype=statement;tense=past	「この鞄は高かったから、買いませんでした。」	「이 가방은 비쌌으니까, 안 샀어요.」
 n5-link-4946	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=nonpast	友達は学生だから、勉強する。	친구는 학생이라서, 공부한다.
 n5-link-4947	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=past	友達は学生だから、勉強した。	친구는 학생이라서, 공부했다.
-n5-link-4948	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「友達は学生だから、勉強する。」	「친구는 학생이라서, 공부해.」
-n5-link-4949	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「友達は学生だから、勉強した。」	「친구는 학생이라서, 공부했어.」
+n5-link-4948	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「友達は学生だから、勉強する。」	「친구는 학생이니까, 공부해.」
+n5-link-4949	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「友達は学生だから、勉強した。」	「친구는 학생이니까, 공부했어.」
 n5-link-4950	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=question;tense=nonpast	「友達は学生だから、勉強する？」	「친구는 학생이니까, 공부해?」
-n5-link-4951	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「友達は学生だから、勉強します。」	「친구는 학생이라서, 공부해요.」
-n5-link-4952	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「友達は学生だから、勉強しました。」	「친구는 학생이라서, 공부했어요.」
+n5-link-4951	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「友達は学生だから、勉強します。」	「친구는 학생이니까, 공부해요.」
+n5-link-4952	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「友達は学生だから、勉強しました。」	「친구는 학생이니까, 공부했어요.」
 n5-link-4953	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=question;tense=nonpast	「友達は学生だから、勉強しますか。」	「친구는 학생이니까, 공부해요?」
 n5-link-4954	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=request;tense=nonpast	「友達は学生だから、勉強してください。」	「친구는 학생이니까, 공부해 주세요.」
 n5-link-4955	block=link;group=reason;link=kara;v1tense=past;ctx.polite=narration.plain;stype=statement;tense=nonpast	友達は学生だったから、勉強する。	친구는 학생이었으니까, 공부한다.
@@ -4973,11 +4973,11 @@ n5-link-4971	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.
 n5-link-4972	block=link;group=reason;link=kara;v1tense=past;ctx.polite=dialogue.masu;stype=request;tense=nonpast	「宿題をしたから、公園で遊んでください。」	「숙제를 했으니까, 공원에서 놀아 주세요.」
 n5-link-4973	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=nonpast	母は忙しいから、母を手伝う。	어머니는 바빠서, 어머니를 돕는다.
 n5-link-4974	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=narration.plain;stype=statement;tense=past	母は忙しいから、母を手伝った。	어머니는 바빠서, 어머니를 도왔다.
-n5-link-4975	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「母は忙しいから、母を手伝う。」	「어머니는 바빠서, 어머니를 도와.」
-n5-link-4976	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「母は忙しいから、母を手伝った。」	「어머니는 바빠서, 어머니를 도왔어.」
+n5-link-4975	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=nonpast	「母は忙しいから、母を手伝う。」	「어머니는 바쁘니까, 어머니를 도와.」
+n5-link-4976	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=statement;tense=past	「母は忙しいから、母を手伝った。」	「어머니는 바쁘니까, 어머니를 도왔어.」
 n5-link-4977	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.plain;stype=question;tense=nonpast	「母は忙しいから、母を手伝う？」	「어머니는 바쁘니까, 어머니를 도와?」
-n5-link-4978	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「母は忙しいから、母を手伝います。」	「어머니는 바빠서, 어머니를 도와요.」
-n5-link-4979	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「母は忙しいから、母を手伝いました。」	「어머니는 바빠서, 어머니를 도왔어요.」
+n5-link-4978	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=nonpast	「母は忙しいから、母を手伝います。」	「어머니는 바쁘니까, 어머니를 도와요.」
+n5-link-4979	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=statement;tense=past	「母は忙しいから、母を手伝いました。」	「어머니는 바쁘니까, 어머니를 도왔어요.」
 n5-link-4980	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=question;tense=nonpast	「母は忙しいから、母を手伝いますか。」	「어머니는 바쁘니까, 어머니를 도와요?」
 n5-link-4981	block=link;group=reason;link=kara;v1tense=nonpast;ctx.polite=dialogue.masu;stype=request;tense=nonpast	「母は忙しいから、母を手伝ってください。」	「어머니는 바쁘니까, 어머니를 도와 주세요.」
 n5-link-4982	block=link;group=reason;link=kara;v1tense=past;ctx.polite=narration.plain;stype=statement;tense=nonpast	母は忙しかったから、母を手伝う。	어머니는 바빴으니까, 어머니를 돕는다.
@@ -5235,30 +5235,30 @@ n5-point-5233	block=point;point=N5-18;row=p18c;ctx.polite=dialogue.plain;stype=s
 n5-point-5234	block=point;point=N5-18;row=p18c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「部屋に時計もあった。」	「방에 시계도 있었어.」
 n5-point-5235	block=point;point=N5-18;row=p18c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「部屋に時計もあります。」	「방에 시계도 있어요.」
 n5-point-5236	block=point;point=N5-18;row=p18c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「部屋に時計もありました。」	「방에 시계도 있었어요.」
-n5-point-5237	block=point;point=N5-19;row=p19a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達の本を読む。	친구 책을 읽는다.
-n5-point-5238	block=point;point=N5-19;row=p19a;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達の本を読んだ。	친구 책을 읽었다.
-n5-point-5239	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達の本を読む。」	「친구 책을 읽어.」
-n5-point-5240	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達の本を読んだ。」	「친구 책을 읽었어.」
-n5-point-5241	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達の本を読みます。」	「친구 책을 읽어요.」
-n5-point-5242	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達の本を読みました。」	「친구 책을 읽었어요.」
+n5-point-5237	block=point;point=N5-19;row=p19a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達の本を読む。	친구의 책을 읽는다.
+n5-point-5238	block=point;point=N5-19;row=p19a;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達の本を読んだ。	친구의 책을 읽었다.
+n5-point-5239	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達の本を読む。」	「친구의 책을 읽어.」
+n5-point-5240	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達の本を読んだ。」	「친구의 책을 읽었어.」
+n5-point-5241	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達の本を読みます。」	「친구의 책을 읽어요.」
+n5-point-5242	block=point;point=N5-19;row=p19a;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達の本を読みました。」	「친구의 책을 읽었어요.」
 n5-point-5243	block=point;point=N5-19;row=p19b;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	私の本を読む。	내 책을 읽는다.
 n5-point-5244	block=point;point=N5-19;row=p19b;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	私の本を読んだ。	내 책을 읽었다.
 n5-point-5245	block=point;point=N5-19;row=p19b;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私の本を読む。」	「내 책을 읽어.」
 n5-point-5246	block=point;point=N5-19;row=p19b;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私の本を読んだ。」	「내 책을 읽었어.」
 n5-point-5247	block=point;point=N5-19;row=p19b;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私の本を読みます。」	「제 책을 읽어요.」
 n5-point-5248	block=point;point=N5-19;row=p19b;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「私の本を読みました。」	「제 책을 읽었어요.」
-n5-point-5249	block=point;point=N5-19;row=p19c;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	日本語の本を買う。	일본어 책을 산다.
-n5-point-5250	block=point;point=N5-19;row=p19c;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	日本語の本を買った。	일본어 책을 샀다.
-n5-point-5251	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「日本語の本を買う。」	「일본어 책을 사.」
-n5-point-5252	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「日本語の本を買った。」	「일본어 책을 샀어.」
-n5-point-5253	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「日本語の本を買います。」	「일본어 책을 사요.」
-n5-point-5254	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「日本語の本を買いました。」	「일본어 책을 샀어요.」
-n5-point-5255	block=point;point=N5-19;row=p19d;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	母の写真を見る。	어머니 사진을 본다.
-n5-point-5256	block=point;point=N5-19;row=p19d;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	母の写真を見た。	어머니 사진을 봤다.
-n5-point-5257	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母の写真を見る。」	「어머니 사진을 봐.」
-n5-point-5258	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母の写真を見た。」	「어머니 사진을 봤어.」
-n5-point-5259	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母の写真を見ます。」	「어머니 사진을 봐요.」
-n5-point-5260	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母の写真を見ました。」	「어머니 사진을 봤어요.」
+n5-point-5249	block=point;point=N5-19;row=p19c;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	日本語の本を買う。	일본어의 책을 산다.
+n5-point-5250	block=point;point=N5-19;row=p19c;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	日本語の本を買った。	일본어의 책을 샀다.
+n5-point-5251	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「日本語の本を買う。」	「일본어의 책을 사.」
+n5-point-5252	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「日本語の本を買った。」	「일본어의 책을 샀어.」
+n5-point-5253	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「日本語の本を買います。」	「일본어의 책을 사요.」
+n5-point-5254	block=point;point=N5-19;row=p19c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「日本語の本を買いました。」	「일본어의 책을 샀어요.」
+n5-point-5255	block=point;point=N5-19;row=p19d;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	母の写真を見る。	어머니의 사진을 본다.
+n5-point-5256	block=point;point=N5-19;row=p19d;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	母の写真を見た。	어머니의 사진을 봤다.
+n5-point-5257	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母の写真を見る。」	「어머니의 사진을 봐.」
+n5-point-5258	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母の写真を見た。」	「어머니의 사진을 봤어.」
+n5-point-5259	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母の写真を見ます。」	「어머니의 사진을 봐요.」
+n5-point-5260	block=point;point=N5-19;row=p19d;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母の写真を見ました。」	「어머니의 사진을 봤어요.」
 n5-point-5261	block=point;point=N5-20;row=p20a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	学校から家へ帰る。	학교에서 집에 돌아간다.
 n5-point-5262	block=point;point=N5-20;row=p20a;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	学校から家へ帰った。	학교에서 집에 돌아갔다.
 n5-point-5263	block=point;point=N5-20;row=p20a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「学校から家へ帰る。」	「학교에서 집에 돌아가.」
@@ -5523,9 +5523,9 @@ n5-point-5521	block=point;point=N5-54;row=p54f;ctx.polite=dialogue.masu;stype=qu
 n5-point-5522	block=point;point=N5-54;row=p54f;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「どうして行きませんでしたか。」	「왜 안 갔어요?」
 n5-point-5523	block=point;point=N5-54;row=p54g;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「なぜ来なかった？」	「왜 안 왔어?」
 n5-point-5524	block=point;point=N5-54;row=p54g;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「なぜ来ませんでしたか。」	「왜 안 왔어요?」
-n5-point-5525	block=point;point=N5-54;row=p54h;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「これはいくら？」	「이건 얼마야?」
+n5-point-5525	block=point;point=N5-54;row=p54h;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「これはいくら？」	「이건 얼마?」
 n5-point-5526	block=point;point=N5-54;row=p54h;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「これはいくらですか。」	「이건 얼마예요?」
-n5-point-5527	block=point;point=N5-54;row=p54i;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「これは何？」	「이건 뭐야?」
+n5-point-5527	block=point;point=N5-54;row=p54i;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「これは何？」	「이건 뭐?」
 n5-point-5528	block=point;point=N5-54;row=p54i;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「これは何ですか。」	「이건 뭐예요?」
 n5-point-5529	block=point;point=N5-54;row=p54j;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「りんごはいくつある？」	「사과는 몇 개 있어?」
 n5-point-5530	block=point;point=N5-54;row=p54j;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「りんごはいくつありますか。」	「사과는 몇 개 있어요?」

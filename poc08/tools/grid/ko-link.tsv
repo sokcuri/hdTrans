@@ -1,28 +1,28 @@
 #! grid-ko-link
 # Clause links. v1tense: the tense of the first clause (- = none in Japanese). main: the second clause's sentence
-# type (statement, or q = question/request/invitation). steps: on the first predicate, words as in ko-mod.tsv.
+# type (statement, or q = question/request/invitation). ctx: narration or dialogue (* = any). steps: on the first predicate, words as in ko-mod.tsv.
 # te picks by the first verb's features and the pair (N5-H2): motion or posture verb, or a shared object → -어서,
 # otherwise -고. tari: both verbs take -거나 and 하다 carries the end (N5-H13).
-link	v1tense	main	cond	steps	spec
-te	-	*	pclass=motion	-어서	N5-H2
-te	-	*	pclass=posture	-어서	N5-H2
-te	-	*	shared=1	-어서	N5-H2
-te	-	*	*	-고	N5-H2
-tekara	-	*	*	-고 +나다/V -어서	N5-34
-mae	-	*	*	-기 전에	N5-35
-ato	-	*	*	-ㄴ 후에	N5-36
-toki	nonpast	*	*	-ㄹ 때	N5-37
-toki	past	*	*	-었- -ㄹ 때	N5-37
-tari	-	*	*	-거나	N5-H13
-nagara	-	*	*	-면서	N5-39
-kara	nonpast	statement	*	-어서	N5-H3
-kara	nonpast	q	*	-니까	N5-H3
-kara	past	*	*	-었- -니까	N5-H3
-ga	nonpast	statement	*	-지만	N5-41
-ga	nonpast	q	*	-는데	N5-41
-ga	past	statement	*	-었- -지만	N5-41
-ga	past	q	*	-었- -는데	N5-41
-kedo	nonpast	statement	*	-지만	N5-41
-kedo	nonpast	q	*	-는데	N5-41
-kedo	past	statement	*	-었- -지만	N5-41
-kedo	past	q	*	-었- -는데	N5-41
+link	v1tense	main	ctx	cond	steps	spec
+te	-	*	*	pclass=motion	-어서	N5-H2
+te	-	*	*	pclass=posture	-어서	N5-H2
+te	-	*	*	shared=1	-어서	N5-H2
+te	-	*	*	*	-고	N5-H2
+tekara	-	*	*	*	-고 +나다/V -어서	N5-34
+mae	-	*	*	*	-기 전에	N5-35
+ato	-	*	*	*	-ㄴ 후에	N5-36
+toki	nonpast	*	*	*	-ㄹ 때	N5-37
+toki	past	*	*	*	-었- -ㄹ 때	N5-37
+tari	-	*	*	*	-거나	N5-H13
+nagara	-	*	*	*	-면서	N5-39
+kara	nonpast	statement	narration	*	-어서	N5-H3
+kara	nonpast	*	*	*	-니까	N5-H3
+kara	past	*	*	*	-었- -니까	N5-H3
+ga	nonpast	statement	*	*	-지만	N5-41
+ga	nonpast	q	*	*	-는데	N5-41
+ga	past	statement	*	*	-었- -지만	N5-41
+ga	past	q	*	*	-었- -는데	N5-41
+kedo	nonpast	statement	*	*	-지만	N5-41
+kedo	nonpast	q	*	*	-는데	N5-41
+kedo	past	statement	*	*	-었- -지만	N5-41
+kedo	past	q	*	*	-었- -는데	N5-41

@@ -109,7 +109,7 @@ class Oracle:
         for r in read_tsv(here, 'vocab.tsv'):
             self.vocab.setdefault(r['ja'], []).append(r)
         self.level = {(r['ctx'], r['polite']): r['level'] for r in read_tsv(here, 'ko-level.tsv')}
-        self.final = {(r['level'], r['stype'], r['sfp']): r for r in read_tsv(here, 'ko-final.tsv')}
+        self.final = {(r['level'], r['stype'], r['sfp'], r['pred']): r for r in read_tsv(here, 'ko-final.tsv')}
         self.neg = read_tsv(here, 'ko-neg.tsv')
         self.aspect = read_tsv(here, 'ko-aspect.tsv')
         self.mod = read_tsv(here, 'ko-mod.tsv')
@@ -371,7 +371,8 @@ class Oracle:
             b, bja = self.np(('n', np[3]), level)
             return attach(a, self.ko_particle(np[2], 'list', level)) + ' ' + b, None
         if k == 'poss':
-            a = self.contracted(np[1], level, 'poss') or self.noun(np[1], level)
+            # N5-H9: N1의 N2; a personal pronoun takes its possessive form (내/제 책)
+            a = self.contracted(np[1], level, 'poss') or attach(self.noun(np[1], level), '의')
             b, _ = self.np(('n', np[3]), level)
             return a + ' ' + b, None
         if k == 'adnom':
@@ -607,7 +608,13 @@ class Oracle:
                 self.negate(items, base, method)
             if tense == 'past':
                 self.last_pw(items).forms.append('-었-')
-        f = self.final[(level, stype, d['sfp'])]
+        bare = self.final.get((level, stype, d['sfp'], 'bare-noun'))
+        if bare and mod == 'none' and base.pos == 'C' and not base.forms and items == [base]:
+            head, _, last = base.host.rpartition(' ')
+            fu = self.fusion(last, '-', level)
+            word = fu['result'] if fu and fu['mode'] in ('replace', 'always') else last
+            return [(head + ' ' if head else '') + word], bare['punct']
+        f = self.final[(level, stype, d['sfp'], '*')]
         self.steps(items, f['steps'])
         return items, f['punct']
 
@@ -653,7 +660,8 @@ class Oracle:
         cond = {'pclass': f1.get('pclass', '-'), 'shared': p['shared']}
         row = None
         for r in self.link:
-            if r['link'] != link or r['v1tense'] not in ('-', d['v1tense']) or r['main'] not in ('*', main):
+            if r['link'] != link or r['v1tense'] not in ('-', d['v1tense']) or r['main'] not in ('*', main) \
+                    or r['ctx'] not in ('*', d['ctx']):
                 continue
             if r['cond'] != '*':
                 k, v = r['cond'].split('=')

@@ -1,18 +1,20 @@
 #! grid-ko-final
 # Sentence end by level x sentence type x final particle. steps: endings on the last predicate word; "+LEMMA/POS
-# endings" appends a predicate word. punct replaces the Japanese end mark.
-level	stype	sfp	steps	punct	spec
-haera	statement	none	-다	.	N5-H5
-hae	statement	none	-어	.	N5-H5
-hae	statement	yo	-어	.	N5-H11
-hae	statement	ne	-네	.	N5-H11
-hae	question	none	-어	?	N5-H20
-haeyo	statement	none	-어요	.	N5-H5
-haeyo	statement	yo	-어요	.	N5-H11
-haeyo	statement	ne	-네요	.	N5-H11
-haeyo	question	none	-어요	?	N5-H7
-haeyo	request	none	-어 +주다/V -세요	.	N5-26
-haeyo	prohibition	none	-지 +말다/V -세요	.	N5-27
-haeyo	invite-mashou	none	-죠	.	N5-H8
-haeyo	invite-mashouka	none	-ㄹ까요	?	N5-H8
-haeyo	invite-masenka	none	-지 +않다/V -ㄹ래요	?	N5-H8
+# endings" appends a predicate word; bare = the noun alone, no copula. pred bare-noun: a noun predicate with no
+# tense, polarity or modality to carry (学生？ → 학생?). punct replaces the Japanese end mark.
+level	stype	sfp	pred	steps	punct	spec
+haera	statement	none	*	-다	.	N5-H5
+hae	statement	none	*	-어	.	N5-H5
+hae	statement	yo	*	-어	.	N5-H11
+hae	statement	ne	*	-네	.	N5-H11
+hae	question	none	*	-어	?	N5-H20
+hae	question	none	bare-noun	bare	?	N5-H20
+haeyo	statement	none	*	-어요	.	N5-H5
+haeyo	statement	yo	*	-어요	.	N5-H11
+haeyo	statement	ne	*	-네요	.	N5-H11
+haeyo	question	none	*	-어요	?	N5-H7
+haeyo	request	none	*	-어 +주다/V -세요	.	N5-26
+haeyo	prohibition	none	*	-지 +말다/V -세요	.	N5-27
+haeyo	invite-mashou	none	*	-죠	.	N5-H8
+haeyo	invite-mashouka	none	*	-ㄹ까요	?	N5-H8
+haeyo	invite-masenka	none	*	-지 +않다/V -ㄹ래요	?	N5-H8
