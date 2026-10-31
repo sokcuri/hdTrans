@@ -1525,3 +1525,12 @@
 どうしたもんかな	어떻게 해야 하나	phrase
 どうしたもんかね	어떻게 해야 하나	phrase
 どうしたもんかのぅ	어떻게 해야 할까	phrase
+// LEX-161: words whose Korean was missing or wrong in every context.
+血塗れ	피투성이	n
+関わり合いになる	얽히다	v5
+関わりあいになる	얽히다	v5
+しんど	힘들어	intj	final
+// LEX-162: a verb read by the noun it takes.
+場を取り直す	분위기를 다잡다	v5
+タックルかます	태클을 걸다	v5
+タックルをかます	태클을 걸다	v5

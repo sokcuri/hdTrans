@@ -17,7 +17,7 @@ sound:poi	ぽいぽい！	뽀이뽀이!	fix	sound
 sound:poi	ぽい捨て禁止	함부로 버리기 금지	keep	sound
 sound:poi	紙をぽいっと捨てた。	종이를 휙 버렸다.	keep	sound
 sound:ppoi-drawn	お腹空いちゃったっぽーい。	배고파버린 것 같아~.	fix	sound
-sound:ppoi-drawn	明日も晴れるっぽーい！	내일도 개이는 것 같아~!	fix	sound
+sound:ppoi-drawn	明日も晴れるっぽーい！	내일도 개는 것 같아~!	fix	sound
 ending:ppoi	置いていかないでっぽい！	두고 가지 마 뽀이!	fix	builtin-ending
 ending:ppoi	あの子は甘いものが好きだっぽい。	그 아이는 단 것을 좋아하는 것 같아.	fix	builtin-ending
 ending:ppoi	それは嫌いなのっぽい。	그것은 싫은 것 같아.	fix	builtin-ending

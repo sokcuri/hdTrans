@@ -1,6 +1,6 @@
 # 규칙: LEX-152
 rule	input	expected	kind	layer
-cx:coll-verb:10	俺の奥底に潜むもの……	has:깊은 속에 숨는 것	fix	rewrites
+cx:coll-verb:10	俺の奥底に潜むもの……	has:깊은 속에 숨어 있는 것	fix	rewrites
 cx:coll-verb:10	「落ち着け。敵が潜んでないか周囲を警戒しろ」	has:적이 숨	fix	rewrites
 cx:coll-verb:10	それぞれ物陰に潜みながら戦闘し、	has:그늘에 숨으면서	fix	rewrites
 cx:coll-verb:10	≪待ち伏せだ！　西の広場に敵が潜んでいた！≫	has:적이 숨어 있었다	fix	rewrites

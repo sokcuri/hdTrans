@@ -9980,7 +9980,6 @@ ttt	ttt	K110			GN				jisjk:201744
 かまくらハム	가마쿠라햄	N110	VBlVMo		GN				jisjk:169323		
 かまけ	얽매&AJ@	M411			GN				jisjk:90606		
 かましき	냄비 받침	N110	VPe		GN				jisjk:169325		-1
-かます	가마니	I110			GN				jisjk:40736		
 かまたき	보일러 맨	N110	VHn		GN				jisjk:169329		-1
 かまってほし	돌봐 주길 바$KT@	H7N0		Av	GN				jisjk:139115		
 かまとと	새침떼기	I110	VHn		GN				jisjk:40737		
@@ -32879,7 +32878,7 @@ ttt	ttt	K110			GN				jisjk:201744
 つり革	손잡이	N110	VTpVPe		GN				jisjk:153560		
 つる	매&K4@	M433			GN				jisjk:91110		
 つる	덩굴	N110	VPt		GN				jisjk:116761		
-つる	교미&AV@	M415	VAm		GN				jisjk:143978		
+つる	어울&AA@	M415			GN			LEX-161	jisjk:143978		
 つる	학	N110	QAB		GN	2872	||2 &&3 S-1== "の" S-2== "羽" G-3== "NjNd" &&2 S+2== "折" P+2== "4**"	つる를 수량 羽の 뒤나 동사 折의 두 단어 앞에서 학으로 고른다. (미발동: rare-word)	jisjk:310005		
 つる	츠루	N130	QCTVPl		GN				jisjk:342409		
 つるが張	덩굴이 &Ho@	M428			GN				jisjk:141202		
@@ -38881,7 +38880,7 @@ ttt	ttt	K110			GN				jisjk:201744
 はるやまチェーン	하루야마 체인	I130	QIDVGt		GN				jisjk:41495		
 はるやま商事	하루야마 트레이딩	I130	QIDVGt		GN				jisjk:41496		
 はるよ	하루요	I130	QPN		GN				jisjk:103710		
-はれ	개&AJ@	M427			GN				jisjk:346396		
+はれ	&MT@	M427			GN			LEX-164	jisjk:346396		
 はれ	&JG@	M427	VBp		GN				jisjk:346397		
 はれがまし	화려$AB@	H7N0			GN				jisjk:122494		
 はればれし	환$AB@	H7N0	SFl		GN				jisjk:122500		
@@ -103525,7 +103524,7 @@ ttt	ttt	K110			GN				jisjk:201744
 下らな	쓸데$FA@	H7N0			GN				jisjk:120405		
 下り	나&AH@	M417			GN				jisjk:95834		
 下り	내&AA@	M417	VMo		GN	863	||1 &&3 P-1== "2**" P-2== "1**" A-2== "VMo"	下り를 물건 의미 명사와 조사 뒤에서 내리다로 고른다. (미발동: rare-context)	jisjk:95835		
-下り	물러&A5@	M417	VPl		GN				jisjk:95836		
+下り	물러&A5@	M417			GN			LEX-162	jisjk:95836		
 下り	내려&AH@	M417			GN				jisjk:147087		
 下り	내리막	N110			GN				jisjk:176021		
 下り	내려 &A1@	M437			GN	3331	||1 &&2 S-1== "を" ||2 S-2== "地下" S-2== "階段"	地下나 階段에 붙은 を 뒤에서 下り를 내려 가다로 고른다. (미발동: rare-context)	jisjk:342799		
@@ -162598,7 +162597,7 @@ ttt	ttt	K110			GN				jisjk:201744
 坂野辺新田	사카노베신덴	I130	QCTVPl		GN				jisjk:295440		
 坂長	사카쵸	N130	QCTVPl		GN				jisjk:295390		
 坂間	사카마	N130	QPN	Wa	GN				jisjk:13210		
-均	평균화&AV@	M433			GN				jisjk:92138		
+均	평평하게 &MN@	M433			GN			LEX-161	jisjk:92138		
 均し	동일$AB@	H7N0			GN				jisjk:122557		
 均一	균일	N110			GN				jisjk:17277		
 均一	균일%A1@	G8U0			GN				jisjk:341648		
@@ -228852,7 +228851,7 @@ ttt	ttt	K110			GN				jisjk:201744
 晴ら	개게 &AV@	M433	VFr		GN				jisjk:95276		
 晴れ	맑음	N110	VFr		GN				jisjk:12581		
 晴れ	공식적인 자리	N110	VPl		GN				jisjk:12582		
-晴れ	개&AJ@	M427	VFr	Dx	GN				jisjk:12583		
+晴れ	&MT@	M427	VFr	Dx	GN			LEX-164	jisjk:12583		
 晴れがまし	화려$AB@	H7U0			GN				jisjk:5955		
 晴れぎ	나들이옷	I110	VCpVAc		GN				jisjk:86157		
 晴れすがた	장한 모습	I110			GN				jisjk:86158		
@@ -322855,6 +322854,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見にく	보기 어$G8@	H7U0			GN				jisjk:5351		
 見まね	눈썰미	N110	UTt		GN				jisjk:203441		
 見まわ	둘러 &AY@	M448			GN				jisjk:375044		
+見まわ	둘러&AY@	M433			GN			LEX-161	lex161-mimawasu:1		
 見もの	볼거리	N110			GN				jisjk:267055		
 見や	바라&AY@	M438			GN				jisjk:91785		
 見やす	보기 $GF@	H7U0			GN				jisjk:5352		
@@ -353363,7 +353363,6 @@ ttt	ttt	K110			GN				jisjk:201744
 静子	세이코	N130	QPN	Wb	GN				jisjk:349937		
 静子	세이시	N130	QPN	Wb	GN				jisjk:349938		
 静子	정자	N130	QPN	Wb	GN				jisjk:349939		
-静寂	고요%A1@	G8L0			GN				jisjk:3645		
 静寂	정적	N110			GN				jisjk:3646		
 静寂境	정적경	I110			GN				jisjk:83322		
 静山	세이잔	N130	QPN	Wb	GN				jisjk:11305		

@@ -1,0 +1,28 @@
+# 규칙: LEX-162
+rule	input	expected	kind	layer
+lexical:verb-pairs	ラナは困惑のあまりぐるぐると目を回す。	has:빙글빙글 눈이 핑핑 돈다	fix	senses
+lexical:verb-pairs	ローラは混乱でぐるぐると目を回した。	has:눈이 핑핑 돌았다	fix	senses
+lexical:verb-pairs	目を回して気絶する。	has:몹시 놀라 기절한다	keep	senses
+lexical:verb-pairs	背中ではコンが目を回している。	lacks:핑핑	keep	senses
+lexical:verb-pairs	俺は清掃員のケツにストンピングをかます。	has:스톤핑을 날린다	fix	senses
+lexical:verb-pairs	サークライの頭にチョップをかます黒髪のお姉さん。	has:춥을 날리는	fix	senses
+lexical:verb-pairs	ジョニーは猛烈なダッシュをかまし、押し倒した。	has:대시를 날리고	fix	senses
+lexical:verb-pairs	かまってくれる。	상대해 준다.	keep	senses
+lexical:verb-pairs	縛られ、猿轡をかまされていた。	has:재갈을 물려지고	keep	senses
+lexical:verb-pairs	カエデさんがルイにタックルかます。	has:태클을 건다	fix	phrases
+lexical:verb-pairs	「お、お前なぁ……いきなりタックルかましてくるなよ。	has:태클을 걸어 오지	fix	phrases
+lexical:verb-pairs	「そんな必要ないさ。まだ切れるカードはある」	has:꺼낼 수 있는 카드는	fix	senses
+lexical:verb-pairs	対するレーイチは最早切れるカードが存在しない。	has:꺼낼 수 있는 카드가	fix	senses
+lexical:verb-pairs	「……電池が切れていました」	has:끊어져 있었습니다	keep	senses
+lexical:verb-pairs	新太は、自身が使える最大のカードを切った。	has:카드를 꺼냈다	keep	senses
+lexical:verb-pairs	ミレイは物凄い形相で俺を睨んでくる。	has:무시무시한 형상으로	fix	senses
+lexical:verb-pairs	見ると、雅男はものすごい形相で私を睨んでいる。	has:무시무시한 형상으로	fix	senses
+lexical:verb-pairs	ものすごい速度で戻っていく。	has:아주 대단한 속도로	keep	senses
+lexical:verb-pairs	ネイクは場を取り直すように一度咳払いして再び会議を開始する。	has:분위기를 다잡도록	fix	phrases
+lexical:verb-pairs	「ウオッホン」と咳払いで場を取り直し、ここからが本題。	has:분위기를 다잡아	fix	phrases
+lexical:verb-pairs	気を取り直してもう一回。	마음을 다잡아 다시 한번.	keep	senses
+lexical:verb-pairs	下りてきたのは一人の少女。	has:내려온 것은	fix	senses
+lexical:verb-pairs	男坂上の方から女が下りてくる。	has:여자가 내려온다	fix	senses
+lexical:verb-pairs	俺は慌ててベッドから下りた。	has:침대에서 내려갔다	fix	senses
+lexical:verb-pairs	ルドルフ男爵は馬から下りた。	has:말에서 내려갔다	keep	senses
+lexical:verb-pairs	坂を下りていきます。	has:언덕을 내려갑니다	keep	senses

@@ -1,0 +1,35 @@
+# 규칙: LEX-164
+rule	input	expected	kind	layer
+cx:word-cue:10	はれてミカヅキ工房が完成した	has:정식으로 미카즈키 공방이	fix	rewrites
+cx:word-cue:10	それで今日、晴れて入学式を迎えた――のだが。	has:정식으로 입학식을	fix	rewrites
+cx:word-cue:10	空は晴れていた。	하늘은 개 있었다.	fix	rewrites
+cx:word-cue:10	「ああ、晴れて今は俺の娘よ！」	has:정식으로 지금은	fix	rewrites
+cx:word-cue:10	外は晴れているはずだ。	!rule:cx:word-cue:10	keep	rewrites
+cx:word-cue:10	いつの間にか夜空は晴れている。	!rule:cx:word-cue:10	keep	rewrites
+cx:word-cue:10	煙がはれてそこにいたのは…	!rule:cx:word-cue:10	keep	rewrites
+cx:word-cue:20	並びに、セイクリア	has:아울러,	fix	rewrites
+cx:word-cue:20	並びに静聴！	아울러 경청!	fix	rewrites
+cx:word-cue:20	自己紹介並びに友達紹介。	자기 소개 및 친구 소개.	keep	rewrites
+cx:word-cue:25	あたしゃ勿体なくもミズ・ロッシュの愛娘だよ。	has:황송하게도 미즈	fix	rewrites
+cx:word-cue:25	ちょっと時間がもったいなくも、あるよな？	!rule:cx:word-cue:25	keep	rewrites
+cx:word-cue:25	それにもったいなくもある。	!rule:cx:word-cue:25	keep	rewrites
+cx:word-cue:25	もったいなくもなかったのかな	!rule:cx:word-cue:25	keep	rewrites
+cx:word-cue:30	まずい、阻止しないと！	큰일이다, 저지하지 않으면!	fix	rewrites
+cx:word-cue:30	まずい、ぶつかる！	큰일이다, 부딪친다!	keep	rewrites
+cx:word-cue:30	食わない理由はまずいから。	!rule:cx:word-cue:30	keep	rewrites
+cx:word-cue:40	これは本当にヤバイと思った。	has:정말 위험하다고 생각했다	fix	rewrites
+cx:word-cue:40	ヤバイと思うのですが！！	has:위험하다고 생각합니다만	fix	rewrites
+cx:word-cue:40	ヤバイ、と思う暇も無かった。	!rule:cx:word-cue:40	keep	rewrites
+cx:word-cue:40	ヤバイ！	큰일이야!	keep	rewrites
+cx:word-cue:50	あ・・やべ、これはヤバイ。	has:이것은 위험하다.	fix	rewrites
+cx:word-cue:50	これはヤバイ。	이것은 위험하다.	fix	rewrites
+cx:word-cue:50	急がないとメルティがヤバイ。	서두르지 않으면 멜티가 위험하다.	keep	rewrites
+cx:word-cue:50	ヤバイ、ヤバイからぁー！」	!rule:cx:word-cue:50	keep	rewrites
+cx:word-cue:60	想定よりヤバイ状態だ。	상정보다 위험한 상태다.	fix	rewrites
+cx:word-cue:60	うーん………ヤバイ感じ？	has:위험한 느낌	fix	rewrites
+cx:word-cue:60	ヤバイ、と思う暇も無かった。	!rule:cx:word-cue:60	keep	rewrites
+cx:word-cue:60	でも、大きさがヤバイ。	!rule:cx:word-cue:60	keep	rewrites
+cx:word-cue:35	静寂な図書室に二人きり。	고요한 도서실에 단둘이.	fix	rewrites
+cx:word-cue:35	二人だけの静寂な夜が訪れた。	has:고요한 밤이	fix	rewrites
+cx:word-cue:35	完全なる静寂だった。	!rule:cx:word-cue:35	keep	rewrites
+cx:word-cue:35	チャイムの音が静寂に染みた。	!rule:cx:word-cue:35	keep	rewrites
