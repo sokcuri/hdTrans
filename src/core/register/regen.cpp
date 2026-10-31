@@ -749,6 +749,8 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         o.ok = lineOk;
         o.levelChanged = levelChanged;
         o.mixedLevels = mixedLevels;
+        o.spec = dec.spec;
+        o.key = dec.key;
     }
     return out;
 }

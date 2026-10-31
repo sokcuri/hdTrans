@@ -47,4 +47,11 @@ HD_TEST(word_bare_adjectival_noun_stem) {
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
+    // keep: the translation's own level
+    hdTrans::internal::TranslationOptions keep;
+    keep.speechLevels = hdTrans::SpeechLevels::Keep;
+    const std::string quoted = "「花が綺麗」";
+    const auto kept = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&quoted, 1}, {}, keep);
+    HD_REQUIRE(kept.size() == 1);
+    HD_CHECK_EQ(kept[0], std::string("「꽃이 예쁘다」"));
 }

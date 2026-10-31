@@ -20,7 +20,7 @@ bool Blank(const std::string& s) { return s.find_first_not_of(" \t\r\xe3\x80\x80
 }  // namespace
 
 void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
-              const Switches& switches) {
+              const Switches& switches, std::vector<Change>* changes) {
     const Data* d = LoadedData();
     if (d == nullptr || !switches.levels || source.size() != out.size()) return;
     std::vector<std::string> ja;
@@ -44,6 +44,8 @@ void Retrofit(std::span<const std::string> source, const Capture& capture, std::
         // does a line whose sentences would end at different levels
         if (!dialogue[i] || !r.ok || r.mixedLevels || !r.levelChanged) continue;
         const bool cr = out[i].ends_with('\r');
+        if (changes != nullptr && r.out != WithoutCr(out[i]))
+            changes->push_back({i, ja[i], WithoutCr(out[i]), r.out, r.spec, r.key});
         out[i] = r.out + (cr ? "\r" : "");
     }
 }

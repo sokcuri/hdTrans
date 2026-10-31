@@ -6,17 +6,26 @@
 // stay at one level are replaced; 합쇼체 is never lowered and 해요체 not raised to 합쇼체.
 #include <span>
 #include <string>
+#include <vector>
 
 #include "core/register/reader.h"
 
 namespace hdTrans::reg {
+
+// A line the stage wrote again.
+struct Change {
+    std::size_t line = 0;  // in the call, from 0 after the context
+    std::string source, before, after;
+    std::string spec, key;  // the rule of spec/register.md and the cue key that decided the line
+};
 
 struct Switches {
     bool levels = true;  // the levels of the rules; false keeps every line as the translation wrote it
 };
 
 // Rewrites out (the translation of source, one line each, each with its "\r" when the source has one).
+// changes, when given, gets the lines written again.
 void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
-              const Switches& switches = {});
+              const Switches& switches = {}, std::vector<Change>* changes = nullptr);
 
 }  // namespace hdTrans::reg

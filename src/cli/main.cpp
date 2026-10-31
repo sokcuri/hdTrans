@@ -26,6 +26,7 @@
 #include "core/dict/pack.h"
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
+#include "core/register/retrofit.h"
 #include "core/engine/rules.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
@@ -103,6 +104,9 @@ void Usage(std::FILE* file) {
                "  --each, --raw          each line on its own (as text hooks send it), or word-pipeline-only lines\n"
                "  --speech LEVEL         strict (default): keep -다 but where the Japanese marks casual speech;\n"
                "                         soft: 해체 in 「」 and on bare lines that read as speech\n"
+               "  --speech-levels MODE   auto (default): dialogue lines take the speech level of spec/register.md;\n"
+               "                         keep: the translation's own levels\n"
+               "  --speech-report FILE   the lines the speech levels changed (TSV: line, rule, cue, source, before, after)\n"
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
@@ -313,6 +317,8 @@ int RunMain(int argc, char** argv) {
     bool selectShadow = false;
     bool misread = false;
     std::optional<std::string> speechArg;
+    std::optional<std::string> speechLevelsArg;
+    std::string speechReportPath;
     bool wrapped = false;
     std::string contextPath;
     bool noCg = false;
@@ -349,7 +355,8 @@ int RunMain(int argc, char** argv) {
         const bool takesValue = option == "-dicts" || option == "-config" || option == "-userdict"
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
-            || option == "-dump-rules" || option == "-speech" || option == "-context";
+            || option == "-dump-rules" || option == "-speech" || option == "-context"
+            || option == "-speech-levels" || option == "-speech-report";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -388,6 +395,8 @@ int RunMain(int argc, char** argv) {
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
         else if (option == "-speech") speechArg = *value;
+        else if (option == "-speech-levels") speechLevelsArg = *value;
+        else if (option == "-speech-report") speechReportPath = *value;
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
         else if (option == "-no-cg") noCg = true;
@@ -427,6 +436,11 @@ int RunMain(int argc, char** argv) {
     hdTrans::Speech speech = config.settings.speech;
     if (speechArg && !hdTrans::internal::SpeechOf(*speechArg, speech)) {
         std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
+        return 2;
+    }
+    hdTrans::SpeechLevels speechLevels = config.settings.speechLevels;
+    if (speechLevelsArg && !hdTrans::internal::SpeechLevelsOf(*speechLevelsArg, speechLevels)) {
+        std::fprintf(stderr, "hdtrans: --speech-levels takes auto or keep\n");
         return 2;
     }
     noCg = noCg || !config.settings.cg;
@@ -605,7 +619,23 @@ int RunMain(int argc, char** argv) {
     options.filters = filters.get();
     options.wordImprovements.misreadFilter = misread;
     options.speech = speech;
+    options.speechLevels = speechLevels;
     options.wrapped = wrapped;
+    std::vector<hdTrans::reg::Change> levelChanges;
+    std::string speechReport;
+    if (!speechReportPath.empty()) options.levelChanges = &levelChanges;
+    // The changed lines of one call, numbered from base.
+    const auto reportChanges = [&](size_t base) {
+        for (const hdTrans::reg::Change& c : levelChanges) {
+            speechReport += std::to_string(base + c.line + 1) + "\t" + c.spec + "\t" + c.key;
+            for (const std::string* text : {&c.source, &c.before, &c.after}) {
+                speechReport += '\t';
+                for (const char ch : *text) speechReport += ch == '\t' ? ' ' : ch;
+            }
+            speechReport += '\n';
+        }
+        levelChanges.clear();
+    };
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
@@ -657,6 +687,10 @@ int RunMain(int argc, char** argv) {
     };
     auto finish = [&] {
         if (stages && !stagerecords::Dump(stagesDir, collector)) return 1;
+        if (!speechReportPath.empty() && !WriteText(speechReportPath, speechReport)) {
+            std::fprintf(stderr, "hdtrans: cannot write %s\n", speechReportPath.c_str());
+            return 1;
+        }
         if (!dumpRulesPath.empty()) {
             const std::string rules = hdTrans::internal::RuleProgramText(*snapshot);
             if (rules.empty() || !WriteText(dumpRulesPath, rules)) {
@@ -707,6 +741,7 @@ int RunMain(int argc, char** argv) {
         addLines(input);
         const std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
+        reportChanges(0);
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");
@@ -725,6 +760,7 @@ int RunMain(int argc, char** argv) {
         } else {
             const std::string lines[] = {std::string(line)};
             out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options).front();
+            reportChanges(static_cast<size_t>(whyContext.lineBase));
         }
         if (stages) {
             stagerecords::AddOutput(collector, collector.caseBase + 1, out);

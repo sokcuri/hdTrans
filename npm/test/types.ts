@@ -31,7 +31,10 @@ async function check() {
   const explicitPlain: string = translator.translate('学生', { json: false });
   const dynamic: string | TranslationResult = translator.translate('学生', { json: Math.random() > 0.5 });
   const speech: Speech = 'soft';
-  const callOptions: TranslateOptions = { speech, wrapped: true, context: ['明日までに行かなければ'] };
+  const callOptions: TranslateOptions = { speech, speechLevels: 'keep', wrapped: true, context: ['明日までに行かなければ'] };
+  translator.setSpeechLevels('auto');
+  // @ts-expect-error The speech levels are auto or keep.
+  translator.setSpeechLevels('off');
   const continued: string | TranslationResult = translator.translate('ならない。', callOptions);
   translator.setWrapped(false);
   const wrappedInit: Promise<HdTrans> = HdTrans.init({ speech, wrapped: true });
