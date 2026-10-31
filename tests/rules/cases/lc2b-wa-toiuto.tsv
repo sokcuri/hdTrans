@@ -1,0 +1,26 @@
+# 규칙: GRM-115
+rule	input	expected	kind	layer
+cx:lc2b-wa-toiuto:10	理由はといえば、国道１号線を辿るだけで良いからだ。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	ウィンディードはというと特に構えること無くこちらを出迎えていた。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	対して男性はと言うと………あれ？	has:은 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	アイリスはというと、ナハトとずっと向かい合ったままだ。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	扉越しに浮かび上がったその光る文字はというと̶̶̶̶	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	そしてキュルンはというと……	has:은 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	アリスはというと、ゴーレムの横でせっせと散らばった紙を集めている。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	俺はと言えば、朝から心が折れそうだ。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	一方プリームスはと言うと、踵が高い靴では無いが既に足が痛い。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	しかし、ゼナスはといえば。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	そして私はというと、メイドのルナと共に裏庭に居た。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	「……それに比べてこっちの指揮官はと言えば」	has:은 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	ロニーはというと、ほぼ一瞬で綺麗になり、	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	そう言ってきたので、僕はと言うと	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	俺の実力はといえば、足でまといには辛うじてならない程度だ。	has:은 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	僕はというと、窓越しにすっかり暗くなった外を、個室で眺めていた。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	キエフ公国の要求に対してケーはというと、一切表情を変えずにいた。	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	私はというと…前世では黒髪黒目だったから全く怖くないんだよね！	has:는 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	零はと言うと、まだアビーに抱きつかれたままだった。	has:은 어떤가	fix	rewrites
+cx:lc2b-wa-toiuto:10	とはいえ、どうするよ。	!rule:cx:lc2b-wa-toiuto:10	keep	rewrites
+cx:lc2b-wa-toiuto:10	とはいえ、私は初心者領主。	!rule:cx:lc2b-wa-toiuto:10	keep	rewrites
+cx:lc2b-wa-toiuto:10	どちらかというと、寂滅。	!rule:cx:lc2b-wa-toiuto:10	keep	rewrites
+cx:lc2b-wa-toiuto:10	「エメンバリーというと、軍閥か」	!rule:cx:lc2b-wa-toiuto:10	keep	rewrites
+cx:lc2b-wa-toiuto:10	元はといえば、我々の不始末だ。	!rule:cx:lc2b-wa-toiuto:10	keep	rewrites

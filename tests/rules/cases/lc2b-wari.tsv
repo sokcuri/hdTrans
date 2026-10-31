@@ -1,0 +1,32 @@
+# 규칙: GRM-117
+rule	input	expected	kind	layer
+cx:lc2b-wari:20	風を聞きながら本のページめくる図書カードを栞がわりにして	has:대신에	fix	rewrites
+cx:lc2b-wari:10	「あら、お兄様。仕事が遅い割にはお耳は早いのですね。流石ですわ」	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	おい、リック、会ったばかりの割にはこの猿、お	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	（幻想っていう割にはリアルすぎないか）	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	「腐っている割には、いい乳をしてやがる」	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	給金も、月２０イェンと命の掛けている割にはあまりにも少ない。	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	「竜の魂を喰ったって割には、随分と渋い戦果じゃねぇか」	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	キセル、言う割にアジトに厳しい。	has:것에 비해서	fix	rewrites
+cx:lc2b-wari:10	自信を持って正解と言う割には”多分”……	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	よく尖れている割には、重圧感があり頑丈だ。	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:20	２３７．挨拶がわりに星押して、救われた彼の話。	has:대신에	fix	rewrites
+cx:lc2b-wari:10	気にしている割に、人の話をちゃんと聞かない。	has:것에 비해서	fix	rewrites
+cx:lc2b-wari:10	楽しすぎる割に３日で２枚しか描いてない、しかも落書き。	has:것에 비해서	fix	rewrites
+cx:lc2b-wari:20	丸くなった身体を沿う、しっぽを枕がわりに眠る。	has:대신에	fix	rewrites
+cx:lc2b-wari:10	杖こそあったが、僕に無詠唱をするなという割には無詠唱であった。	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	専務という割には若い気もする。	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:10	巨体な体格をしている割に、鉄人の観察眼は鋭かった。	has:것에 비해서	fix	rewrites
+cx:lc2b-wari:10	おや、言ってる割には全員軽傷じゃな。	has:것에 비해서는	fix	rewrites
+cx:lc2b-wari:20	ユイは小手調べがわりに軽く木刀を振り下ろした。	has:대신에	fix	rewrites
+cx:lc2b-wari:10	テキトーに魔力をこめて作ったわりに、上出来だと思う。	has:것에 비해서	fix	rewrites
+cx:lc2b-wari:10	細い腕の割に、ものすごい力だ。	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	「見た目の割に賢いじゃん」	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	大きさのわりに、かなりスリム。	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	「労力が割に合わない」	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	まったく割に合わない。	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	俺の代わりにサナが返事をする。	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	人の記憶を外部に抽出して記録出来るようになったのは割に最近だ。	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:10	すると、他の子に比べて自身の体格が小柄であることに気付いた――割に体力のお化けと化しているのだが。	!rule:cx:lc2b-wari:10	keep	rewrites
+cx:lc2b-wari:20	俺の代わりにサナが返事をする。	!rule:cx:lc2b-wari:20	keep	rewrites
+cx:lc2b-wari:20	ロータは俺の代わりに話にいった。	!rule:cx:lc2b-wari:20	keep	rewrites

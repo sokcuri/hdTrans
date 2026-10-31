@@ -20652,3 +20652,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 分ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:9
 よく分かっていな	잘 $C4@	H7U0		XnAv	GN			GRM-71 よく分からな처럼: 알다의 ている 부정은 모르다				variant:wakaru-neg:10
 よく分かってな	잘 $C4@	H7U0		XnAv	GN			GRM-71 よく分からな처럼: 알다의 ている 부정은 모르다				variant:wakaru-neg:11
+元はといえば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:1
+もとはといえば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:2
+もとはと言えば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:3
