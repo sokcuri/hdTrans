@@ -150,6 +150,7 @@
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
+//= ko.adverb-noun	Korean adverbs that the dictionary writes for Japanese nouns (結局 결국, 初めて 처음, 何かしら 무엇인가): one is written apart from the noun after it, with which it forms no compound (結局昼 결국 낮, 毎日猫 매일 고양이; spec LAY-19).
 //= ko.doing	Starts of the Korean of 하다 and 되다 in their forms (하, 한, 했, 되, 된, 돼, and $Kz@, 하다 in a word of the adjective class), which show that a する joins its verbal noun.
 //= ko.adjective-past-adnominal	The ending of an adjective that the past adnominal 있던 of a progressive becomes when the simple aspect drops it (困ってたところ 곤란했던 곳).
 //= ko.progressive-head	The Korean of the いる after a て form whose い is dropped before an ending row of the past (見てたぞ 보고 있었어), or of the おる after a て form said with と or ど (生きとる 살고 있다), ending in the marker family that the ending after it conjugates.
@@ -2270,6 +2271,42 @@ ko-verb.sequence	숙제하다
 ko-verb.sequence	운동하다
 ko-verb.sequence	산책하다
 ko.recall-interjection	앗
+ko.adverb-noun	결국
+ko.adverb-noun	갑자기
+ko.adverb-noun	그대로
+ko.adverb-noun	원래
+ko.adverb-noun	그렇게
+ko.adverb-noun	이렇게
+ko.adverb-noun	저렇게
+ko.adverb-noun	처음
+ko.adverb-noun	매일
+ko.adverb-noun	매년
+ko.adverb-noun	매주
+ko.adverb-noun	매번
+ko.adverb-noun	매달
+ko.adverb-noun	역시
+ko.adverb-noun	이미
+ko.adverb-noun	아직
+ko.adverb-noun	다시
+ko.adverb-noun	일단
+ko.adverb-noun	혹시
+ko.adverb-noun	벌써
+ko.adverb-noun	이제
+ko.adverb-noun	무엇인가
+ko.adverb-noun	누군가
+ko.adverb-noun	언젠가
+ko.adverb-noun	어딘가
+ko.adverb-noun	어쩐지
+ko.adverb-noun	왠지
+ko.adverb-noun	전혀
+ko.adverb-noun	별로
+ko.adverb-noun	항상
+ko.adverb-noun	가끔
+ko.adverb-noun	더욱
+ko.adverb-noun	너무
+ko.adverb-noun	매우
+ko.adverb-noun	아주
+ko.adverb-noun	정말
 
 ko-verb.voice-end	지다
 ko-verb.voice-end	되다
