@@ -3,6 +3,7 @@
 
 #include "hd8/analyzer.h"
 #include "lattice.h"
+#include "repair.h"
 #include "utf8.h"
 
 namespace hd8::ana {
@@ -22,6 +23,13 @@ bool Analyzer::Load(std::string_view snapshot, std::string* err) {
   auto m = std::make_unique<Model>();
   if (!Deserialize(snapshot, m.get(), err)) return false;
   model_ = std::move(m);
+  return true;
+}
+
+bool Analyzer::LoadRepair(std::string_view tsv, std::string* err) {
+  auto r = std::make_unique<RepairRules>();
+  if (!ParseRepairTsv(tsv, r.get(), err)) return false;
+  repair_ = std::move(r);
   return true;
 }
 
@@ -62,6 +70,7 @@ std::string_view Analyzer::FlagName(uint16_t bit) {
     case Elongated: return "elongated";
     case SpaceBefore: return "space-before";
     case SinoReading: return "sino-reading";
+    case Repaired: return "repaired";
     default: return "";
   }
 }
@@ -162,6 +171,23 @@ struct Emitter {
         t.lemma = t.surf;
         t.reading = Katakana(surf);
         break;
+      case ArcKind::repair: {
+        const auto& ra = ws.rarcs[a.ref];
+        const auto& g = m.groups[ra.group];
+        const auto& pf = m.pforms[ra.form];
+        t.surf.clear();
+        for (char32_t c : ra.text) AppendUtf8(t.surf, c);
+        t.cls = pf.cls;
+        t.lemma = std::string(m.S(g.lemma));
+        if (g.readKind == 0) {
+          t.reading = Katakana(m.C(g.stem, g.stemLen));
+          t.reading += m.S(pf.read);
+        } else if (g.readKind == 1) {
+          t.reading = std::string(m.S(g.read));
+          t.reading += m.S(pf.read);
+        }
+        break;
+      }
     }
     const auto& c = m.classes[t.cls];
     t.ud = c.ud;
@@ -210,6 +236,64 @@ struct Emitter {
   }
 };
 
+// Analysis::repairs and ::repaired from the repaired words of the path; tokens get the Repaired flag and
+// their edits.
+void RecordRepairs(const Model& m, const RepairRules& R, const Workspace& ws, std::string_view src,
+                   const std::vector<uint32_t>& tokPath, Analysis* out) {
+  (void)m;
+  auto byteB = [&](uint32_t k) { return ws.nchars[ws.coreN[k]].sb; };
+  auto byteE = [&](uint32_t k) { return ws.nchars[ws.coreN[k]].se; };
+  for (size_t ti = 0; ti < out->toks.size(); ++ti) {
+    const Arc& a = ws.arcs[ws.path[tokPath[ti]]];
+    if (a.kind != ArcKind::repair) continue;
+    if (ti > 0 && tokPath[ti - 1] == tokPath[ti]) continue;
+    const auto& ra = ws.rarcs[a.ref];
+    Token& t = out->toks[ti];
+    t.flags |= Repaired;
+    for (size_t k = 0; k < ra.edits.size(); ++k) {
+      const RepairEdit& e = ra.edits[k];
+      Repair r;
+      if (e.spaceOnly) {
+        r.src = {byteE(e.pos - 1u), byteB(e.pos)};
+      } else if (e.len == 0) {
+        r.src = {byteB(e.pos), byteB(e.pos)};
+      } else {
+        r.src = {byteB(e.pos), byteE(e.pos + e.len - 1u)};
+      }
+      // a run of one operation over adjacent letters is one repair
+      if (!out->repairs.empty() && out->repairs.back().tok == ti && out->repairs.back().src.end == r.src.begin &&
+          out->repairs.back().op == RepairOpId(R, e.op) && !e.spaceOnly) {
+        auto& b = out->repairs.back();
+        b.src.end = r.src.end;
+        b.from = std::string(src.substr(b.src.begin, b.src.end - b.src.begin));
+        for (char32_t c : e.to) AppendUtf8(b.to, c);
+        continue;
+      }
+      r.from = std::string(src.substr(r.src.begin, r.src.end - r.src.begin));
+      for (char32_t c : e.to) AppendUtf8(r.to, c);
+      r.op = std::string(RepairOpId(R, e.op));
+      r.cost = static_cast<uint16_t>(R.ops[static_cast<size_t>(e.op)].cost);
+      r.tok = static_cast<uint16_t>(ti);
+      out->repairs.push_back(std::move(r));
+    }
+  }
+  std::sort(out->repairs.begin(), out->repairs.end(),
+            [](const Repair& x, const Repair& y) { return x.src.begin < y.src.begin; });
+  size_t at = 0;
+  for (const Repair& r : out->repairs) {
+    if (r.src.begin < at) continue;
+    out->repaired.append(src.substr(at, r.src.begin - at));
+    out->repaired += r.to;
+    at = r.src.end;
+  }
+  out->repaired.append(src.substr(at));
+  for (const Repair& r : out->repairs) {
+    Token& t = out->toks[r.tok];
+    if (!t.repair.empty()) t.repair += "; ";
+    t.repair += r.op + " " + (r.from.empty() ? std::string("∅") : r.from) + "→" + (r.to.empty() ? std::string("∅") : r.to);
+  }
+}
+
 }  // namespace
 
 void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, Workspace* wsIn) const {
@@ -238,9 +322,18 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
 
   BuildLattice(m, ws, opt);
   RunViterbi(m, ws, opt.margins);
+  ws->rarcs.clear();
+  out->repairs.clear();
+  out->repaired.clear();
+  out->checks.clear();
+  bool repaired = opt.repair && repair_ && RepairPath(m, *repair_, ws, opt, opt.why ? &out->checks : nullptr);
   Emitter em{m, *ws, out};
   std::vector<uint32_t> tokPath;
   em.Emit(ws->path, &out->toks, true, opt, ws, &tokPath);
+  if (repaired) {
+    RecordRepairs(m, *repair_, *ws, src, tokPath, out);
+    return;  // margins and path 1 belong to the unrepaired lattice
+  }
   if (!opt.margins || ws->path.empty()) return;
 
   // margins, same-span alternatives and path 1
@@ -511,7 +604,7 @@ void TokJson(std::string& o, const Analyzer& a, const Token& t, const Analysis* 
   Esc(o, a.CformName(t.cform));
   o += ",\"flags\":[";
   bool first = true;
-  for (uint16_t bit = 1; bit != 0 && bit <= SinoReading; bit = static_cast<uint16_t>(bit << 1))
+  for (uint16_t bit = 1; bit != 0 && bit <= Repaired; bit = static_cast<uint16_t>(bit << 1))
     if (t.flags & bit) {
       if (!first) o += ',';
       first = false;
@@ -528,6 +621,10 @@ void TokJson(std::string& o, const Analyzer& a, const Token& t, const Analysis* 
   if (!t.removedBy.empty()) {
     o += ",\"removedBy\":";
     Esc(o, t.removedBy);
+  }
+  if (!t.repair.empty()) {
+    o += ",\"repair\":";
+    Esc(o, t.repair);
   }
   if (an && t.nAlt) {
     o += ",\"alts\":[";
@@ -585,6 +682,22 @@ std::string ToJson(const Analyzer& a, std::string_view src, const Analysis& an, 
     TokJson(o, a, an.toks[i], &an);
   }
   o += ']';
+  if (!an.repairs.empty()) {
+    o += ",\"repairs\":[";
+    for (size_t i = 0; i < an.repairs.size(); ++i) {
+      const auto& r = an.repairs[i];
+      if (i) o += ',';
+      o += "{\"src\":[" + std::to_string(r.src.begin) + "," + std::to_string(r.src.end) + "],\"from\":";
+      Esc(o, r.from);
+      o += ",\"to\":";
+      Esc(o, r.to);
+      o += ",\"op\":";
+      Esc(o, r.op);
+      o += ",\"cost\":" + std::to_string(r.cost) + ",\"tok\":" + std::to_string(r.tok) + "}";
+    }
+    o += "],\"repaired\":";
+    Esc(o, an.repaired);
+  }
   if (!an.alt.empty()) {
     o += ",\"alt\":{\"margin\":";
     Num(o, an.altMargin);

@@ -27,7 +27,7 @@ enum class Pos : uint8_t { n, pn, num, suf, pref, v1, v5, vs, vk, vz, adj, na, a
 
 enum TokFlag : uint16_t {
   Unknown = 1, Fallback = 2, LongUnit = 4, UserArc = 8, NameCand = 16, Spoken = 32, Elongated = 64,
-  SpaceBefore = 128, SinoReading = 256
+  SpaceBefore = 128, SinoReading = 256, Repaired = 512
 };
 
 struct Token {
@@ -44,6 +44,16 @@ struct Token {
   uint16_t cls = 0;             // connection class (right class for long units)
   std::string derive;           // ja/derive.tsv row that produced this arc, empty = none
   std::string removedBy;        // alternatives only: ja/constraints.tsv row that removed the arc
+  std::string repair;           // Repaired: the ja/repair.tsv edits that gave this reading ("rp.dakuten か→が")
+};
+
+// One edit of noisy input (ja/repair.tsv): src bytes `from` read as `to` by operation `op`.
+struct Repair {
+  Span src;
+  std::string from, to;
+  std::string op;        // ja/repair.tsv row id
+  uint16_t cost = 0;     // the row's cost (a run of drops or a word's katakana fold counts once)
+  uint16_t tok = 0;      // index in Analysis::toks of the word it belongs to
 };
 
 struct Analysis {
@@ -54,6 +64,9 @@ struct Analysis {
   std::vector<Token> alts;
   std::vector<Token> alt;       // path 1: best path differing at the lowest-margin span, when margin < altTau
   float altMargin = 0;
+  std::vector<Repair> repairs;  // in source order; empty when the line needed none
+  std::string repaired;         // src with every repair applied; empty when there is none
+  std::string checks;           // with Options::why: the check rows that fired and what the repair did
 };
 
 struct Options {
@@ -61,6 +74,8 @@ struct Options {
   float altTau = 0.5f;      // keep alternatives within this cost of the best path
   bool longUnits = true;    // use overlay arcs
   bool splitLongUnits = true;   // emit the short-unit parts of a long unit (false: the unit as one token)
+  bool repair = false;      // read noisy spans again with ja/repair.tsv (needs LoadRepair)
+  bool why = false;         // fill Analysis::checks
 };
 
 // Segmentation hints for a host segmenter (the 0.7.x word search): where words may end, and which
@@ -92,6 +107,7 @@ struct SegHints {
 
 struct Model;
 struct Workspace;
+struct RepairRules;
 
 class Analyzer {
  public:
@@ -104,6 +120,9 @@ class Analyzer {
   bool Load(std::string_view snapshot, std::string* err);
   // Adds long-unit arcs made by PackOverlay. May be called once after Load.
   bool LoadOverlay(std::string_view overlay, std::string* err);
+  // Loads ja/repair.tsv (the text of the file). Repairs run when Options::repair is set.
+  bool LoadRepair(std::string_view tsv, std::string* err);
+  bool HasRepair() const { return repair_ != nullptr; }
 
   // Thread-safe on one loaded analyzer. A workspace may be reused by one thread to avoid allocations.
   void Analyze(std::string_view src, const Options& opt, Analysis* out, Workspace* ws = nullptr) const;
@@ -124,6 +143,7 @@ class Analyzer {
 
  private:
   std::unique_ptr<Model> model_;
+  std::unique_ptr<RepairRules> repair_;
 };
 
 struct WorkspaceDeleter {

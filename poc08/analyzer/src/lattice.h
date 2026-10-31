@@ -2,6 +2,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
 #include <vector>
 
 #include "model.h"
@@ -9,7 +10,26 @@
 
 namespace hd8::ana {
 
-enum class ArcKind : uint8_t { lex, unk, longUnit, stutter };
+enum class ArcKind : uint8_t { lex, unk, longUnit, stutter, repair };
+
+// ja/repair.tsv operations (repair.h).
+enum class RepairOp : uint8_t { kataFold, smallBig, elong, stutter, space, dakuten, swap, edit1, count };
+
+// One elementary edit of a repaired word, in core positions.
+struct RepairEdit {
+  uint16_t pos = 0, len = 0;  // core chars replaced; with spaceOnly the spaces before core pos
+  std::u32string to;
+  RepairOp op = RepairOp::elong;
+  bool spaceOnly = false;
+};
+
+// A word read from repaired text; Workspace::rarcs[Arc::ref] of an ArcKind::repair arc.
+struct RepairArc {
+  uint32_t group = 0, form = 0;
+  std::u32string text;            // the repaired spelling
+  std::vector<RepairEdit> edits;  // in text order
+  int32_t cost = 0;
+};
 
 struct Arc {
   uint16_t b = 0, e = 0;  // core positions
@@ -18,7 +38,7 @@ struct Arc {
   ArcKind kind = ArcKind::lex;
   bool joined = false;    // crosses a source space inside a spaced run
   uint16_t flags = 0;     // TokFlag bits
-  uint32_t ref = 0;       // lex: group; unk: category << 8 | arc; long: index
+  uint32_t ref = 0;       // lex: group; unk: category << 8 | arc; long: index; repair: Workspace::rarcs
   uint32_t form = 0;      // lex: index into Model::pforms
   int16_t rule = -1;      // derive rule
   int16_t removedBy = -1; // constraint
@@ -43,6 +63,7 @@ struct Workspace {
   std::vector<uint32_t> bufMap;
   std::vector<uint8_t> derived;        // buffer position modified
   std::vector<uint32_t> path, path1;
+  std::vector<RepairArc> rarcs;        // repaired words of the line (repair.h)
   int32_t best = 0;
 };
 

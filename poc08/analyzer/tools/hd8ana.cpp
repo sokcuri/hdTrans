@@ -1,7 +1,9 @@
 // hd8ana: build, run, evaluate and train the 0.8 analyzer.
 //   hd8ana pack DATA_DIR OUT.bin
 //   hd8ana pack-long CORE.bin LONG.tsv OUT.bin
-//   hd8ana run CORE.bin [-l LONG.bin] [--units] [--format json|wakati|tsv]   (stdin → stdout; --units keeps long units whole)
+//   hd8ana run CORE.bin [-l LONG.bin] [--units] [--format json|wakati|tsv|text] [--repair [--repair-tsv FILE]] [--why]
+//              (stdin → stdout; --units keeps long units whole; --repair reads noisy spans with ja/repair.tsv,
+//              --format text writes each line with its repairs applied, --why lists checks and repairs on stderr)
 //   hd8ana eval CORE.bin [-l LONG.bin] [--units] [--no-derive] GOLD...        (tag.py format)
 //   hd8ana bench CORE.bin FILE [-l LONG.bin] [--no-margins]
 //   hd8ana train DATA_DIR SILVER OUT_DATA_DIR [--epochs N] [--step S] [--limit L]
@@ -166,6 +168,8 @@ int CmdPackLong(const Args& a) {
 
 Options OptsFrom(const Args& a) {
   Options o;
+  o.repair = a.Has("--repair");
+  o.why = a.Has("--why");
   o.splitLongUnits = !a.Has("--units");
   o.margins = !a.Has("--no-margins");
   o.longUnits = !a.Has("--no-long");
@@ -178,6 +182,12 @@ int CmdRun(const Args& a) {
   Analyzer an;
   if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
   Options opt = OptsFrom(a);
+  if (opt.repair) {
+    std::string tsv, err;
+    std::string path = a.Get("--repair-tsv", "poc08/analyzer/data/ja/repair.tsv");
+    if (!ReadFile(path, &tsv)) return Die("cannot read " + path);
+    if (!an.LoadRepair(tsv, &err)) return Die(err);
+  }
   if (a.Has("--no-derive")) {
     an.mutableModel()->rules.clear();
     an.mutableModel()->stutterRule = -1;
@@ -191,8 +201,16 @@ int CmdRun(const Args& a) {
     if (!line.empty() && line.back() == '\r') line.pop_back();
     an.Analyze(line, opt, &r, ws.get());
     ++n;
+    if (opt.why && (!r.checks.empty() || !r.repairs.empty())) {
+      std::cerr << "line " << n << ": " << line << '\n' << r.checks;
+      for (auto& rp : r.repairs)
+        std::cerr << "  repair " << rp.op << ' ' << (rp.from.empty() ? "∅" : rp.from) << "→" << (rp.to.empty() ? "∅" : rp.to)
+                  << " on " << r.toks[rp.tok].surf << '\n';
+    }
     if (fmt == "json") {
       std::cout << ToJson(an, line, r, a.Get("--doc"), n) << '\n';
+    } else if (fmt == "text") {
+      std::cout << (r.repairs.empty() ? line : r.repaired) << '\n';
     } else if (fmt == "wakati") {
       for (size_t i = 0; i < r.toks.size(); ++i) std::cout << (i ? " " : "") << r.toks[i].surf;
       std::cout << '\n';
@@ -200,7 +218,8 @@ int CmdRun(const Args& a) {
       for (auto& t : r.toks)
         std::cout << t.surf << '\t' << t.lemma << '\t' << t.reading << '\t' << Analyzer::PosName(t.pos) << '\t'
                   << an.UdName(t.ud) << '\t' << an.CtypeName(t.ctype) << '\t' << an.CformName(t.cform) << '\t'
-                  << t.margin << (t.derive.empty() ? "" : "\t") << t.derive << '\n';
+                  << t.margin << (t.derive.empty() ? "" : "\t") << t.derive << (t.repair.empty() ? "" : "\t")
+                  << t.repair << '\n';
       std::cout << "EOS\n";
     }
   }
@@ -273,6 +292,12 @@ int CmdEval(const Args& a) {
   Analyzer an;
   if (!LoadAnalyzer(&an, a.pos[0], a.Get("-l"), nullptr)) return 1;
   Options opt = OptsFrom(a);
+  if (opt.repair) {
+    std::string tsv, err;
+    std::string path = a.Get("--repair-tsv", "poc08/analyzer/data/ja/repair.tsv");
+    if (!ReadFile(path, &tsv)) return Die("cannot read " + path);
+    if (!an.LoadRepair(tsv, &err)) return Die(err);
+  }
   if (a.Has("--no-derive")) {
     an.mutableModel()->rules.clear();
     an.mutableModel()->stutterRule = -1;
@@ -756,7 +781,7 @@ int CmdNorm() {
 int main(int argc, char** argv) {
   if (argc < 2) return Die("usage: hd8ana pack|pack-long|run|eval|bench|train|longunits ...");
   std::string cmd = argv[1];
-  std::set<std::string> valued{"--slack", "-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff"};
+  std::set<std::string> valued{"--slack", "-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff", "--repair-tsv"};
   Args a = Parse(argc, argv, valued);
   if (cmd == "pack") return CmdPack(a);
   if (cmd == "pack-long") return CmdPackLong(a);

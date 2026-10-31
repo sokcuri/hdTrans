@@ -18,7 +18,7 @@ else()
     set(HD08_TEST_UNIT_DIR "${CMAKE_SOURCE_DIR}/tests/unit")
 endif()
 add_library(hd08_analyzer_core STATIC
-    src/analyzer.cpp src/lattice.cpp src/model.cpp src/model_tsv.cpp src/normalize.cpp)
+    src/analyzer.cpp src/lattice.cpp src/model.cpp src/model_tsv.cpp src/normalize.cpp src/repair.cpp)
 target_include_directories(hd08_analyzer_core PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
                                               PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_compile_features(hd08_analyzer_core PUBLIC cxx_std_20)
