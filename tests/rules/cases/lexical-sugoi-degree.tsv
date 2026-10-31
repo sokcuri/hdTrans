@@ -1,0 +1,24 @@
+# 규칙: LEX-2905
+rule	input	expected	kind	layer
+cx:sugoi-degree:10	すごい綺麗だった。	엄청 예뻤다.	fix	rewrites
+cx:sugoi-degree:10	「すごい綺麗な夕陽。」	「엄청 예쁜 석양.」	fix	rewrites
+cx:sugoi-degree:10	「ひかりって、すごい現実的だね……」	has:엄청 현실적이네	fix	rewrites
+cx:sugoi-degree:10	確かにすごい幸せなことだよね。	has:엄청 행복한	fix	rewrites
+cx:sugoi-degree:10	すっごい怖い。	엄청 무섭다.	fix	rewrites
+cx:sugoi-degree:10	「この前食べた神戸牛すっごい美味しかったし、また食べたいわね」	has:엄청 맛있었고	fix	rewrites
+cx:sugoi-degree:10	「すっごい大掛かりじゃないですかっ」	has:엄청 대대적이잖아요	fix	rewrites
+cx:sugoi-degree:10	「すごいたっぷり寝る気じゃないですか！」	has:엄청 듬뿍	fix	rewrites
+cx:sugoi-degree:10	「勝ったらすっごいサービスするわ！」	has:엄청 서비스해	fix	rewrites
+cx:sugoi-degree:10	うん。すっごいいいですね。	has:엄청 좋네요	fix	rewrites
+cx:sugoi-degree:20	「…しかも俺、すげー不機嫌」	has:엄청 기분이 안 좋아	fix	rewrites
+cx:sugoi-degree:20	やっぱ４人いると楽だよ。すげー楽しい！	has:엄청 즐거워!	fix	rewrites
+cx:sugoi-degree:20	すげー綺麗だな	엄청 예쁘네	fix	rewrites
+cx:sugoi-degree:10	すごい人だ。	대단한 사람이다.	keep	rewrites
+cx:sugoi-degree:10	すごい力だ。	대단한 힘이다.	keep	rewrites
+cx:sugoi-degree:10	それはすごい。	lacks:엄청	keep	rewrites
+cx:sugoi-degree:10	「すごい……熱い……」	has:대단히……뜨거워	keep	rewrites
+cx:sugoi-degree:10	えっすごい何か…。	has:대단한 뭔가	keep	rewrites
+cx:sugoi-degree:10	二人が凄い凄いと言って食べさせてくれる。	lacks:엄청	keep	rewrites
+cx:sugoi-degree:10	もうすんごい泣くんだ。	has:대단히 우는	keep	rewrites
+cx:sugoi-degree:20	すげー人だ	lacks:엄청	keep	rewrites
+cx:sugoi-degree:20	すげえわマジで	lacks:엄청	keep	rewrites

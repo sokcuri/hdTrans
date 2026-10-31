@@ -1,0 +1,28 @@
+# 규칙: LEX-2900
+rule	input	expected	kind	layer
+cx:issho-same:35	「そうそう、一緒。というか、昨日のやつだよ」	has:맞아 맞아, 똑같아.	fix	rewrites
+cx:issho-same:40	「そうそう、一緒だよ」	「맞아 맞아, 마찬가지야」	fix	rewrites
+cx:issho-same:10	だ。この世界にも脳ドックあるでしょ？興味持たないってのと一緒』	has:않는다는 것과 마찬가지』	fix	rewrites
+cx:issho-same:10	「この人と交渉のテーブルにつくのは、悪に魂を売るのと一緒なのです」	has:파는 것과 마찬가지인	fix	rewrites
+cx:issho-same:10	「そうそう。車だって事故すれば免許取り消しになるでしょ？それと一緒ね」	has:그것과 마찬가지네	fix	rewrites
+cx:issho-same:10	妹も最近急に機嫌が悪くなることがあるんだが、それと一緒だろう。	has:그것과 마찬가지일 것이다	fix	rewrites
+cx:issho-same:20	言い方を変えても一緒だ。	말투를 바꾸어도 마찬가지다.	fix	rewrites
+cx:issho-same:20	それは高校生になっても一緒だった。	has:되어도 마찬가지였다	fix	rewrites
+cx:issho-same:20	まぁ、しんどいのはドコ行っても一緒やろ。	has:가도 마찬가지지	fix	rewrites
+cx:issho-same:20	どうせどの料理が美味しいか分からないならば、どれを選んでも一緒。	has:선택해도 마찬가지.	fix	rewrites
+cx:issho-same:20	年頃の子はだいたいどこも一緒よ	has:어디도 마찬가지	fix	rewrites
+cx:issho-same:30	どうせ結果は一緒だ。	어차피 결과는 마찬가지다.	fix	rewrites
+cx:issho-same:30	二人の気持ちは一緒だった。	has:기분은 마찬가지였다	fix	rewrites
+cx:issho-same:10	「先生と一緒にいたい」	has:함께 있고 싶어	keep	rewrites
+cx:issho-same:10	彼と一緒だ。	그와 함께다.	keep	rewrites
+cx:issho-same:20	ただ、友人が作れても一緒のクラスになれるか分からない。	lacks:마찬가지	keep	rewrites
+cx:issho-same:20	そして、まだずっと明日になっても一緒に居られるのだ。	has:함께 있을 수 있다	keep	rewrites
+cx:issho-same:20	中学に入っても一緒に通学し、一緒に勉強した。	has:함께 통학해	keep	rewrites
+cx:issho-same:20	少々年が離れていても一緒に遊んでいた。	has:함께 놀고	keep	rewrites
+cx:issho-same:30	「ずっと一緒だよ」	「계속 함께야」	keep	rewrites
+cx:issho-same:35	うん、一緒に行こう。	응, 함께 가자.	keep	rewrites
+cx:issho-same:40	「そうそう、一緒にいようね」	lacks:마찬가지	keep	rewrites
+cx:issho-same:35	うん、一緒。	응, 함께.	keep	rewrites
+cx:issho-same:20	何があっても一緒だよ	lacks:마찬가지	keep	rewrites
+cx:issho-same:20	死んでも一緒だよ	lacks:마찬가지	keep	rewrites
+cx:issho-same:30	名前が一緒だ	lacks:마찬가지	keep	rewrites

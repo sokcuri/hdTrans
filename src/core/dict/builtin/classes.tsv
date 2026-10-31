@@ -3,6 +3,7 @@
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
 //= adverb.at-last	Adverbs of something reached at last (ついに, とうとう), after which a やった is a success (ついにやった 드디어 해냈다).
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
+//= adverb.noun-reading	Adverbs of amount or fit the dictionary also reads as nouns before です or だ (たっぷり, ぴったり), which stay adverbs after a degree word (すごいたっぷり 엄청 듬뿍).
 //= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.
 //= adverb.gradual	Adverbs of gradual change before a ている of なる, which make it a progression (次第になっている, どんどんなっている).
 //= adverb.going-well	Adverbs of manner before a kana いく of things going well (上手くいった 잘 되었다), not before いう.
@@ -16,6 +17,7 @@
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
+//= noun.same-attribute	Nouns of an outcome or a view two people or things can share (結果, 気持ち, 意見), after which 一緒 with は, が or も is 마찬가지 (結果は一緒 결과는 마찬가지).
 //= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
 //= noun.felt-ga	Starts of a word or phrase of a feeling in が (気が, 小腹が, お腹が), whose negative question asks how one feels: no invitation (気がしないか？ 그런 생각이 들지 않아?; spec MNG-7).
 //= word.invite-not	Stems of predicates of a feeling or a happening that no one invites to (気にしない？ 신경 쓰이지 않아?, 生まれない？): a negative question after one asks, it invites to nothing (spec MNG-7).
@@ -177,6 +179,8 @@
 //= ending.copies-bare	The bare endings of the last copy of an adjective or adjectival noun said again as a predicate (痛い痛い, 嫌だ嫌だ).
 //= ending.copies-plain	The Korean endings of that last copy that the copies may recast: the plain 1다 and the exclamative 6.
 //= ending.nominal	The ending rows, as key=ko, that make the word before them a noun (素早さ 재빠름, 重さ 무게): a word that starts with a sign is written on to it as to a noun (素早さ+2 재빠름+2).
+//= adjective.character	Stems of adjectives and adjectival nouns of a trait or an attitude of a person, after which ところ is a side of that person, 면 (傲慢なところ 오만한 면, 優しいところ 다정한 면).
+//= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.ability-condition	Words that with なら name the situation that makes an act possible (これなら, ここなら): before a derived causative in られよう they make it the potential.
@@ -408,6 +412,7 @@
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
 //= word.dismissal	Starts of the predicates that brush something aside without a negative ending (嫌い, どうでもいい): a など, なんか or なんて after a noun before one belittles it (spec LEX-90, LEX-91).
+//= word.agree-answer	Words of firm agreement that start an answer (そうそう, 確かに), after which 一緒 standing alone after a comma is 똑같아 (そうそう、一緒。 맞아 맞아, 똑같아).
 //= word.ability-scope	Words that make the (ら)れ of their clause the potential: anyone, any time or anywhere, or by oneself (誰でも着られる, 自分で決められる).
 //= word.iru-form	Words of the dictionary that a form of いる or いらっしゃる starts (いろ 色, いよう 異様, いたって 至って, いたみ 痛み, いらっしゃい 어서 오세요): right after a て form the text is that いる or いらっしゃる (待っていろよ, 何していようかな, 悔しがっていたみたい, 洗っていらっしゃい).
 //= word.arena-predicate	Words of standing out or doing one's part (活躍, 頑張る, 有名, 最強): a でも right before one after a noun that is no person is 에서도, where it holds (フランス海軍でも活躍した 프랑스 해군에서도 활약했다).
@@ -8170,3 +8175,134 @@ verb.harming	ぶちのめす
 verb.harming-causative	思い知らせる
 verb.harming-causative	わからせる
 verb.harming-causative	分からせる
+adjective.character	優し
+adjective.character	やさし
+adjective.character	可愛
+adjective.character	かわい
+adjective.character	可愛らし
+adjective.character	大人っぽ
+adjective.character	鈍
+adjective.character	腹黒
+adjective.character	図太
+adjective.character	抜け目な
+adjective.character	だらしな
+adjective.character	厚かまし
+adjective.character	ずる
+adjective.character	頼もし
+adjective.character	男らし
+adjective.character	女らし
+adjective.character	子供らし
+adjective.character	図々し
+adjective.character	気難し
+adjective.character	大人し
+adjective.character	おとなし
+adjective.character	素直
+adjective.character	傲慢
+adjective.character	真面目
+adjective.character	生真面目
+adjective.character	頑固
+adjective.character	強情
+adjective.character	不器用
+adjective.character	器用
+adjective.character	几帳面
+adjective.character	意地悪
+adjective.character	健気
+adjective.character	鈍感
+adjective.character	繊細
+adjective.character	大胆
+adjective.character	臆病
+adjective.character	我儘
+adjective.character	わがまま
+adjective.character	純粋
+adjective.character	一途
+adjective.character	律儀
+adjective.character	誠実
+adjective.character	謙虚
+adjective.character	高慢
+adjective.character	生意気
+adjective.character	冷静
+adjective.character	お茶目
+adjective.character	気弱
+adjective.character	強気
+adjective.character	弱気
+adjective.character	短気
+adjective.character	呑気
+adjective.character	のんき
+adjective.character	大雑把
+adjective.character	がさつ
+adjective.character	負けず嫌い
+adjective.character	自分勝手
+adjective.character	身勝手
+adjective.character	頑な
+adjective.character	卑怯
+adjective.character	無邪気
+adjective.character	寛大
+adjective.character	慎重
+adjective.character	迂闊
+adjective.character	うかつ
+adjective.character	偉そう
+adjective.character	不遜
+adjective.character	横柄
+adjective.character	尊大
+adjective.character	控えめ
+adjective.character	内気
+adjective.character	能天気
+adjective.character	優柔不断
+adjective.character	天然
+adjective.character	間抜け
+adjective.character	お人好し
+adjective.character	世話焼き
+adjective.character	人見知り
+adjective.character	意固地
+adjective.character	神経質
+adjective.character	優秀
+adjective.character	純真
+adjective.character	正直
+adjective.character	真っ直ぐ
+adjective.character	まっすぐ
+adjective.character	頑張り屋
+adjective.character	意地っ張り
+adjective.character	寂しがり
+adjective.character	照れ屋
+adjective.character	恥ずかしがり屋
+adjective.character	お節介
+adjective.character	おせっかい
+adjective.character	傲岸
+adjective.character	冷淡
+adjective.character	薄情
+adjective.character	冷酷
+adjective.character	残酷
+adjective.character	狡猾
+adjective.character	不真面目
+adjective.character	怠惰
+adjective.character	勤勉
+adjective.character	献身的
+adjective.character	幼
+adjective.degree-stem	すご
+adjective.degree-stem	すっご
+adjective.degree-stem	すんご
+adjective.degree-stem	凄
+adjective.degree-stem	スゴ
+adjective.degree-stem	スッゴ
+noun.same-attribute	結果
+noun.same-attribute	考え
+noun.same-attribute	意見
+noun.same-attribute	気持ち
+noun.same-attribute	答え
+noun.same-attribute	立場
+noun.same-attribute	境遇
+noun.same-attribute	反応
+noun.same-attribute	結論
+noun.same-attribute	末路
+noun.same-attribute	運命
+noun.same-attribute	言い分
+word.agree-answer	そうそう
+word.agree-answer	確かに
+word.agree-answer	うんうん
+adverb.noun-reading	たっぷり
+adverb.noun-reading	いっぱい
+adverb.noun-reading	ぴったり
+adverb.noun-reading	そっくり
+adverb.noun-reading	ばっちり
+adverb.noun-reading	ぎりぎり
+adverb.noun-reading	ギリギリ

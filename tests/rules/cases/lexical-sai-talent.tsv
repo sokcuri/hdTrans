@@ -1,0 +1,13 @@
+# 규칙: LEX-2906
+rule	input	expected	kind	layer
+dict:jisjk:184126	魔法の才はあるよ？	has:마법의 재능은 있어	fix	lookup
+dict:jisjk:184126	剣の才は周りの騎士と比するほどに。	has:검의 재능은	fix	lookup
+dict:jisjk:184126	如何に非凡な才があろうと、逃れられない道理だ。	has:비범한 재능이	fix	lookup
+dict:jisjk:184126	むしろ実力と才がある。	has:실력과 재능이 있다	fix	lookup
+dict:jisjk:184126	剣神は剣の才を、魔神は魔法の才を。	has:마법의 재능을	fix	lookup
+dict:jisjk:184126	領主としての才に申し分ない。	has:영주로서의 재능에	fix	lookup
+dict:jisjk:184126	「才有る者の孤独──」	has:재능 있는 사람	fix	lookup
+dict:jisjk:257630	彼は五才の時に引っ越した。	has:5세 때에	keep	lookup
+dict:jisjk:257630	妹は今年で１０才になる。	has:10세가 된다	keep	lookup
+dict:jisjk:184126	彼は天才だ。	그는 천재다.	keep	lookup
+dict:jisjk:184126	才能がある。	재능이 있다.	keep	lookup
