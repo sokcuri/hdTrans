@@ -17,9 +17,9 @@ normalize:emphatic-spelling	「ば、バッカ、これはわざとつけてた�
 normalize:emphatic-spelling	「はあ！？　バッカじゃないの！？」	「하아!? 바보가 아닌 거야!?」	fix	normalize
 normalize:emphatic-spelling	「冗談に決まってるでしょ、ばっかじゃないの」	「농담일 게 뻔하잖아, 바보가 아니야」	fix	normalize
 normalize:emphatic-spelling	「ばっかじゃないの！　ばっかじゃないの！」	「바보가 아니야! 바보가 아니야!」	fix	normalize
-normalize:emphatic-spelling	「みんなでとか……ばっかみたい」	has:바보같다	fix	normalize
+normalize:emphatic-spelling	「みんなでとか……ばっかみたい」	has:바보같아	fix	normalize
 normalize:emphatic-spelling	「うわ……今日もあっついねー」	「우와……오늘도 덥네~」	fix	normalize
-normalize:emphatic-spelling	「あー……今日もあっついなぁ……」	「아―……오늘도 더워……」	fix	normalize
+normalize:emphatic-spelling	「あー……今日もあっついなぁ……」	「아―……오늘도 덥네……」	fix	normalize
 normalize:emphatic-spelling	「ちぇっ……きっついなぁ。優しくしてよね」	「쳇……힘들어. 다정하게 해」	fix	normalize
 normalize:emphatic-spelling	「うっせ」	「시끄러」	fix	normalize
 normalize:emphatic-spelling	さすがですね。	역시 대단하네요.	keep	normalize
@@ -28,7 +28,7 @@ normalize:emphatic-spelling	「うっせーぞ、黙ってろ」	「시끄러워
 normalize:emphatic-spelling	「うっせえよ、フランもだろ」	「시끄러워, 프랑도지」	keep	normalize
 normalize:emphatic-spelling	バッカスの神殿	바커스의 신전	keep	normalize
 normalize:emphatic-spelling	「……いつにも増して、ひっどい成績やなぁ」	has:심한 성적	keep	normalize
-normalize:emphatic-spelling	「学食ばっかじゃ飽きる」	「학생식당뿐은 질린다」	keep	normalize
+normalize:emphatic-spelling	「学食ばっかじゃ飽きる」	「학생식당뿐은 질려」	keep	normalize
 normalize:emphatic-spelling	夏本番だー！ くぅ～、あっついねー！！	has:덥네~!!	fix	normalize
 normalize:emphatic-spelling	あっついなぁぁぁ……もー夏かぁ	has:더워	fix	normalize
 normalize:emphatic-spelling	アホくっさ…クソして寝るわ	has:바보스럽다…	fix	normalize

@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:voiced-mark	「う゛ー……」	「으으……」	fix	normalize
 normalize:voiced-mark	「う゛ぅ――――……」	「으으――――……」	fix	normalize
-normalize:voiced-mark	「あ゛っ、やってくれる！」	「앗, 해 준다!」	fix	normalize
+normalize:voiced-mark	「あ゛っ、やってくれる！」	「앗, 해 줘!」	fix	normalize
 normalize:voiced-mark	「あ゛…そこ…ですか？」	「아…거기…입니까?」	fix	normalize
 normalize:voiced-mark	「え゛っ！？」	「어!?」	fix	normalize
 normalize:voiced-mark	「え゛、私！？」	「어, 나!?」	fix	normalize
@@ -21,7 +21,7 @@ normalize:voiced-mark	「え゛ーーーッッ？！」	「에에에엣?!」	fix
 normalize:voiced-mark	「ウ゛ァイオリン」	「바이올린」	fix	normalize
 normalize:voiced-mark	「ｳﾞｧｲｵﾘﾝ」	「바이올린」	keep	normalize
 normalize:voiced-mark	「ｶﾞﾝﾊﾞﾚ」	「힘내라」	keep	normalize
-normalize:voiced-mark	「バイオリンを弾く」	「바이올린을 연주한다」	keep	normalize
+normalize:voiced-mark	「バイオリンを弾く」	「바이올린을 연주해」	keep	normalize
 normalize:voiced-mark	「ウ゛ー」	「으으」	fix	normalize
 normalize:voiced-mark	「ウ゛ーッ！」	「으읏!」	fix	normalize
 normalize:voiced-mark	「ウ゛ゥ……」	「으으……」	fix	normalize

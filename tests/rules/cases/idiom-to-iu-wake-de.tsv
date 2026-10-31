@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 dict:novel-idioms:9	さぁ、行こう！という訳で、アルくん！この話は私が持ち帰らせて貰うわ！	자, 가자! 그래서, 알 군! 이 이야기는 내가 가지고 돌아가겠어!	fix	local
-dict:novel-idioms:9	「……という訳で、俺の生きてる間は無理だ」	「……그래서, 내가 살아 있는 동안은 무리다」	fix	local
+dict:novel-idioms:9	「……という訳で、俺の生きてる間は無理だ」	「……그래서, 내가 살아 있는 동안은 무리야」	fix	local
 dict:novel-idioms:9	生きることも立派な戦いだ。という訳で間宮に行こうか。	사는 일도 훌륭한 싸움이다. 그래서 마미야에 갈까.	fix	local
 dict:novel-idioms:9	という訳で、今日はドローンバトルの特訓。	그래서, 오늘은 드론 배틀의 특훈.	fix	local
 dict:novel-idioms:9	はい！という訳で今日から	네! 그래서 오늘부터	fix	local

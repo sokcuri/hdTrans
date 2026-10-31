@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 phrase:よかった	「よかった、間に合った」	「다행이다, 늦지 않았다」	fix	builtin-phrase
 phrase:よかった	よかった……無事だったんだ。	다행이다……무사했었어.	fix	builtin-phrase
-phrase:よかった	「あの頃はよかった」	「그 무렵은 좋았다」	keep	builtin-phrase
+phrase:よかった	「あの頃はよかった」	「그 무렵은 좋았어」	keep	builtin-phrase
 phrase:よかった	「よかったら来てね」	「괜찮다면 와」	keep	builtin-phrase
 phrase:よかった	「よかったね」	「잘됐네」	keep	builtin-phrase
 dict:word:tasukaru:relief	「助かった……」	「살았어……」	fix	local

@@ -13,8 +13,8 @@ G30	なにか……体が、……重くなった気がする。	뭔가……몸
 G30	雪……冬……横たわる未来……。	눈……겨울……눕는 미래…….	fix	defaults
 G30	場所……人が来た。	장소……사람이 왔다.	fix	defaults
 G30	場所――人が来た。	장소――사람이 왔다.	fix	defaults
-G30	「村……人がいない」	「마을……사람이 없다」	fix	defaults
-G30	「学校……家に帰りたい」	「학교……집에 돌아가고 싶다」	fix	defaults
+G30	「村……人がいない」	「마을……사람이 없어」	fix	defaults
+G30	「学校……家に帰りたい」	「학교……집에 돌아가고 싶어」	fix	defaults
 G30	井戸……水が出ない。	우물……물이 나오지 않는다.	fix	defaults
 G30	日本人が来た。	일본인이 왔다.	keep	defaults
 G30	異世界人	이세계인	keep	defaults

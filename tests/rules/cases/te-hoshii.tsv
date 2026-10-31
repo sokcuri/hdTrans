@@ -1,7 +1,7 @@
 # 규칙: GRM-35
 rule	input	expected	kind	layer
 cx:te-hoshii:10	ぜひまた来てほしい。	has:와 줬으면 좋겠다.	fix	rewrites
-cx:te-hoshii:10	「すまない、ダリヤ。婚約を破棄させてほしい」	has:줬으면 좋겠다」	fix	rewrites
+cx:te-hoshii:10	「すまない、ダリヤ。婚約を破棄させてほしい」	has:줬으면 좋겠어」	fix	rewrites
 cx:te-hoshii:10	ややこしいから、どちらか一人にしてほしい。	has:줬으면 좋겠다.	fix	rewrites
 cx:te-hoshii:10	誰かほめてほしい。	has:줬으면 좋겠다.	fix	rewrites
 cx:te-hoshii:10	何もないけど、洗濯物干すの手伝ってほしいの	lacks:기를 원	keep	rewrites

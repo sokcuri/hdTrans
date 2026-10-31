@@ -85,6 +85,22 @@ endfunction()
 hdtrans_builtin_source(builtin_gen.cpp "${HDTRANS_BUILTIN_DIR}" kTables BuiltinTables HDTRANS_BUILTIN_TSV)
 hdtrans_builtin_source(builtin_extra_gen.cpp "${HDTRANS_BUILTIN_DIR}/extra" kFiles ExtraBuiltinFiles
     HDTRANS_BUILTIN_EXTRA_TSV)
+# The tables of the speech-level stage, src/core/register/data/*.tsv and its folders, compiled in.
+set(HDTRANS_REGISTER_DATA "${CMAKE_CURRENT_SOURCE_DIR}/src/core/register/data")
+file(GLOB HDTRANS_REGISTER_READER_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/*.tsv")
+file(GLOB HDTRANS_REGISTER_KO_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/ko/*.tsv")
+file(GLOB HDTRANS_REGISTER_LEVEL_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/register/*.tsv")
+file(GLOB HDTRANS_REGISTER_RETRO_TSV CONFIGURE_DEPENDS "${HDTRANS_REGISTER_DATA}/retro/*.tsv")
+hdtrans_builtin_source(register_reader_gen.cpp "${HDTRANS_REGISTER_DATA}" kReaderFiles RegisterReaderTables
+    HDTRANS_REGISTER_READER_TSV)
+hdtrans_builtin_source(register_ko_gen.cpp "${HDTRANS_REGISTER_DATA}/ko" kKoFiles RegisterKoTables HDTRANS_REGISTER_KO_TSV)
+hdtrans_builtin_source(register_levels_gen.cpp "${HDTRANS_REGISTER_DATA}/register" kLevelFiles RegisterLevelTables
+    HDTRANS_REGISTER_LEVEL_TSV)
+hdtrans_builtin_source(register_retro_gen.cpp "${HDTRANS_REGISTER_DATA}/retro" kRetroFiles RegisterRetroTables
+    HDTRANS_REGISTER_RETRO_TSV)
+set(HDTRANS_REGISTER_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/register_reader_gen.cpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/register_ko_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/register_levels_gen.cpp"
+    "${CMAKE_CURRENT_BINARY_DIR}/register_retro_gen.cpp")
 # The set names of the word classes, checked when a source names a class.
 add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h"
     COMMAND "${CMAKE_COMMAND}" "-DCLASSES=${HDTRANS_BUILTIN_DIR}/classes.tsv"
@@ -109,7 +125,7 @@ add_subdirectory(third_party/libyaml)
 file(GLOB_RECURSE HDTRANS_SOURCES CONFIGURE_DEPENDS src/core/*.cpp)
 add_library(hdtrans STATIC ${HDTRANS_SOURCES}
     "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
-    "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
+    ${HDTRANS_REGISTER_SOURCES} "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
 target_link_libraries(hdtrans PRIVATE pcre2-16 yaml)
 set_source_files_properties(src/cli/main.cpp PROPERTIES
     COMPILE_DEFINITIONS HDTRANS_VERSION_TEXT="${HDTRANS_VERSION_TEXT}")

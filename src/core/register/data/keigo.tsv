@@ -1,0 +1,36 @@
+#! keigo
+# The keigo, keigo-prefix and command-form rows of reader.tsv as the source spells the words: the
+# stage looks for them in the text of the words the word stage read in a dialogue line (its items,
+# stems and endings joined). Every such row of reader.tsv has a row here.
+#
+# Columns
+#   row    the reader.tsv row: keigo:<lemma>, keigo-prefix:<prefix>+<verb>, command-form:<form>
+#   start  spellings that start the word, | between them; keigo-prefix rows: what follows お or 御 and a
+#          verb stem (kanji, then one kana of the い or え row: お待ちになる, お伺いする, お持ちいたす)
+#   not    text at the same place that is another word, | between them; _ marks where the spelling
+#          starts when the text begins before it (み_なさ: the なさ of みなさん)
+# A command-form row also counts every verb the word stage conjugated in the imperative (見ろ, 追え).
+row	start	not	note
+keigo:いらっしゃる	いらっしゃ|いらし		いらしていた
+keigo:仰る	おっしゃ|仰っ|仰い|仰る|仰ら|仰れ|仰せ
+keigo:為さる	なさい|なさっ|なさる|なされ|なさら|なさん|為さ	み_なさ	ごめんなさい, おかえりなさい: なさる
+keigo:召し上がる	召し上が|召上が|めしあが
+keigo:御覧	ご覧|御覧|ごらん
+keigo:下さる	くださる|くださっ|くださら|くださいま|くだされ|下さる|下さっ|下さら|下さいま|下され		ください alone is the request
+keigo:申す	申し|申す|申さ|申せ	申し訳|申しわけ|申し込|申込|申し出|申し開|申し合|申し立|申し送|申し子|申し分
+keigo:申し上げる	申し上げ|申上げ|もうしあげ
+keigo:参る	参りま|まいりま		before ます only
+keigo:致す	致し|致す|致さ|致せ|致そ|いたしま|いたせ|いたさ|いたそう	致し方
+keigo:伺う	伺|うかが
+keigo:頂く	頂|いただ	頂上|頂点|頂戴
+keigo:頂戴	頂戴|ちょうだい
+keigo:存ずる	存じ|存ず|ぞんじ
+keigo:差し上げる	差し上げ|差上げ|さしあげ
+keigo:拝見	拝見
+keigo:御座る	ございま|御座いま|ござりま		before ます only
+keigo:居る	おりま|居りま		おります, not ておる
+keigo:有る	あらせられ|有らせられ
+keigo-prefix:御+成る	にな|に成
+keigo-prefix:御+為る	し|す|さ|せ
+keigo-prefix:御+致す	いた|致
+command-form:命令形	ください|下さい|なさい|くれ|いませ|せよ|しろ|てろ|でろ|とけ|どけ|たまえ|給え	くださいま|下さいま|なさいま|くれる|くれた|くれて|くれな|くれま|くれれ|くれば|くれよう|くれぐれ|いません|せよう|しろい|しろく|しろか|も_しろ|とける|とけた|とけて|とけな|とけま|とけば

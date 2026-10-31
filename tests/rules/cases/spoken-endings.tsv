@@ -28,7 +28,7 @@ sound:particle-nee	「やだねぇ、もう」	「싫어, 이제」	fix	sound
 sound:particle-nee	「ねぇ、先生」	「저기, 선생님」	keep	sound
 sound:particle-nee	「えへへ、ねぇ」	「에헤헤, 저기」	keep	sound
 sound:particle-nee	「ねぇねぇねぇ、先生」	「있잖아 있잖아 있잖아, 선생님」	keep	sound
-builtin-phrase:saa-ne	「さあね、知らない」	「글쎄, 모른다」	fix	builtin-phrase
+builtin-phrase:saa-ne	「さあね、知らない」	「글쎄, 몰라」	fix	builtin-phrase
 restore:retort-idiom	「彼に何を言うの？」	「그에게 무슨 말을 하는 거야?」	keep	restore
 restore:retort-idiom	何を言っていいか分からない	무슨 말을 해도 좋은가 모른다	keep	restore
 compose:spoken-syllables	「この文の主語は何ですか」	「이 문장의 주어는 뭡니까」	keep	compose
@@ -65,7 +65,7 @@ sound:short-answer	「いいの？」	「괜찮아?」	fix	sound
 sound:short-answer	「んなわけあるか」	「그럴 리가 있냐」	fix	sound
 dict:chatte	「忘れちゃって、ごめん」	「잊어서, 미안」	fix	lookup
 dict:chatte	「言っちゃってもいい？」	「말해버려도 좋아?」	fix	local-ending
-dict:jisjk:93288	「買おうと思って来た」	「사려고 왔다」	fix	local
+dict:jisjk:93288	「買おうと思って来た」	「사려고 왔어」	fix	local
 dict:jisjk:93288	明日行こうと思います。	내일 가려고 합니다.	fix	local
 dict:jisjk:93288	行こうと思って家を出た。	가려고 집을 나갔다.	fix	local
 dict:jisjk:93288	「直してやろうと思いましてね」	「고쳐 주려고요」	fix	local

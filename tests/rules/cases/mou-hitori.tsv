@@ -9,7 +9,7 @@ lookup:mou-hitori-no	もう一人の当事者である男は	또 다른 당사�
 lookup:mou-hitori-no	もう一人の部下の悲鳴に振り返った。	또 다른 부하의 비명에 돌아보았다.	fix	lookup
 lookup:mou-hitori-no	光と共に、もう一人の少女が現れた。	빛과 함께, 또 다른 소녀가 나타났다.	fix	lookup
 dict:jisjk:41726	「まあ待ちたまえ。もう一人来る」	「뭐 기다리게. 한 명 더 온다」	fix	local
-dict:jisjk:41726	「俺のミスだ、もう一人いたが見過ごしていた」	「내 실수다, 한 명 더 있었지만 간과하고 있었다」	fix	local
+dict:jisjk:41726	「俺のミスだ、もう一人いたが見過ごしていた」	「내 실수다, 한 명 더 있었지만 간과하고 있었어」	fix	local
 dict:jisjk:41726	「男役がもう一人必要だったんですよ」	rule:dict:jisjk:41726=한 명 더	fix	local
 dict:jisjk:41726	「ならもう一人」	!rule:dict:jisjk:41726	keep	local
 dict:jisjk:41726	もう一人が、振り返って俺たちにオーダーを通す。	rule:dict:jisjk:41726=다른 한 명	fix	local

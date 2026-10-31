@@ -1,0 +1,31 @@
+#! contract
+# Vowel contraction of a vowel-final stem syllable with the harmonic ending syllable (아/어/여 and 았/었/였).
+# The final consonant of the ending syllable (ㅆ of 었) moves to the result.
+#
+# Columns
+#   stem    the stem syllable's vowel (jamo), or a whole syllable for a row that names one (a syllable
+#           with a final consonant loses it when the row applies: 놓+아 → 놔)
+#   ending  the ending syllable's vowel
+#   result  the vowel of the merged syllable, or `-` to keep both syllables
+#   mode    must: always (written and spoken); default: the standard short form, used unless
+#           G runs in the uncontracted style; never: no contraction
+#   cond    - | init=ㅇ (the stem syllable has no initial consonant: 오+아 → 와) | next=yo (요 follows) | prefinal (the honorific -시-, not a lexical 시)
+stem	ending	result	mode	cond	example
+ㅏ	ㅏ	ㅏ	must	-	가+아 → 가
+ㅓ	ㅓ	ㅓ	must	-	서+어 → 서
+ㅕ	ㅓ	ㅕ	must	-	켜+어 → 켜
+ㅑ	ㅏ	ㅑ	must	-	(rare)
+ㅐ	ㅓ	ㅐ	default	-	내+어 → 내
+ㅔ	ㅓ	ㅔ	default	-	세+어 → 세
+ㅒ	ㅓ	ㅒ	default	-	하얘 (ㅎ stems already merged)
+ㅖ	ㅓ	ㅖ	default	-	(rare)
+ㅗ	ㅏ	ㅘ	must	init=ㅇ	오+아 → 와, 나오+아 → 나와
+ㅗ	ㅏ	ㅘ	default	-	보+아 → 봐
+놓	ㅏ	ㅘ	default	-	놓+아 → 놔, 놓+았 → 놨 (the ㅎ drops; 놓아 stays standard)
+ㅜ	ㅓ	ㅝ	default	-	주+어 → 줘, 배우+어 → 배워
+ㅚ	ㅓ	ㅙ	default	-	되+어 → 돼
+시	ㅓ	ㅔ	default	next=yo,prefinal	가시+어요 → 가세요 (honorific 시 only: 마셔요)
+ㅣ	ㅓ	ㅕ	default	-	마시+어 → 마셔, 시+어 → 셔
+하	ㅕ	ㅐ	default	-	하+여 → 해
+ㅟ	ㅓ	-	never	-	쉬+어 → 쉬어
+ㅢ	ㅓ	-	never	-	띄+어 → 띄어

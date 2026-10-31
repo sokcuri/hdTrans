@@ -1,7 +1,7 @@
 # 규칙: SPC-13
 rule	input	expected	kind	layer
 dict:archaic-speech	見れば見るほど父親に似ておらぬのう・・・」	보면 볼수록 아버지를 닮아 있지 않구먼···」	fix	lookup
-dict:archaic-speech	「面倒じゃな」	「귀찮군」	fix	lookup
+dict:archaic-speech	「面倒じゃな」	「귀찮구나」	fix	lookup
 dict:archaic-speech	補給は大切じゃな	보급은 중요하군	fix	lookup
 dict:archaic-speech	いよいよ、わらわの本領発揮じゃな！	드디어, 이 몸의 본령 발휘군!	fix	lookup
 dict:archaic-speech	これも冗談じゃよ。	이것도 농담이라네.	fix	lookup

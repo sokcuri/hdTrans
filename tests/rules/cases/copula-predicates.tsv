@@ -2,8 +2,8 @@
 rule	input	expected	kind	layer
 dict:copula-predicates:1	「ばっちりですよ」	「완벽해요」	fix	lookup
 dict:copula-predicates:1	「ああ、覚えてますよ。もちろん覚えてます、ばっちりです」	「아, 기억하고 있어요. 물론 기억하고 있습니다, 완벽합니다」	fix	lookup
-dict:copula-predicates:1	「ああ、ばっちりだった」	「아, 완벽했다」	fix	lookup
-dict:copula-predicates:1	「ばっちりだ」	「완벽하다」	fix	lookup
+dict:copula-predicates:1	「ああ、ばっちりだった」	「아, 완벽했어」	fix	lookup
+dict:copula-predicates:1	「ばっちりだ」	「완벽해」	fix	lookup
 dict:copula-predicates:1	大丈夫だ、来年…来年はばっちりだから！	괜찮다, 내년…내년은 완벽하니까!	fix	lookup
 dict:copula-predicates:1	ばっちり決まった。	완벽하게 정해졌다.	keep	lookup
 dict:copula-predicates:2	これなら夜戦もバッチリです。	이것이라면 야전도 완벽합니다.	fix	lookup

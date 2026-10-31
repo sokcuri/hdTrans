@@ -2,9 +2,9 @@
 rule	input	expected	kind	layer
 segmentation:kana-adjective-after-noun	「なんだこれかわいいな……」	「뭐야 이거 귀엽네……」	fix	lookup
 segmentation:kana-adjective-after-noun	水着かわいい……	수영복 귀여워……	fix	lookup
-segmentation:kana-adjective-after-noun	「ふふふ、玉藻ちゃんかわいい」	「후후후, 타마모짱 귀엽다」	fix	lookup
+segmentation:kana-adjective-after-noun	「ふふふ、玉藻ちゃんかわいい」	「후후후, 타마모짱 귀여워」	fix	lookup
 segmentation:kana-adjective-after-noun	「キャンベルかわいいじゃん。駄目なの？」	「캠벨 귀엽잖아. 안돼?」	fix	lookup
-segmentation:kana-adjective-after-noun	「部内で一番かわいいのは白崎だ」	「부내에서 제일 귀여운 건 시라사키다」	fix	lookup
+segmentation:kana-adjective-after-noun	「部内で一番かわいいのは白崎だ」	「부내에서 제일 귀여운 건 시라사키야」	fix	lookup
 segmentation:kana-adjective-after-noun	俺の彼女は、世界一かわいい。	내 그녀는, 세계 제일 귀엽다.	fix	lookup
 segmentation:kana-adjective-after-noun	「佳奈、よかったよ。最高にかわいかった」	「카나, 좋았어. 최고로 귀여웠어」	fix	lookup
 segmentation:kana-adjective-after-noun	やっぱり、青海さんの笑顔はとびきりかわいい。	역시, 아오미 씨의 웃는 얼굴은 특출 귀엽다.	fix	lookup

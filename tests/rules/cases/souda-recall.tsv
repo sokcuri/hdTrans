@@ -23,7 +23,7 @@ cx:souda-recall:10	ああ、そうだ、あの艦と一緒に航空戦艦にな�
 # 맞는 출력: 「아―, 맞다」
 cx:souda-recall:10	「あー、そうだ」	!rule:cx:souda-recall:10	current	rewrites
 cx:souda-recall:10	「そうそう、そうだ」	!rule:cx:souda-recall:10	keep	rewrites
-cx:souda-recall:20	「そう言われても……と、そうだ」	「그런 말을 들어도……아, 맞다」	fix	rewrites
+cx:souda-recall:20	「そう言われても……と、そうだ」	「그런 말을 들어도……아, 맞아」	fix	rewrites
 cx:souda-recall:20	「と、そうだ、おばちゃんは？」	「아, 맞다, 아줌마는?」	fix	rewrites
 cx:souda-recall:20	「いや、謝る必要はないし……と、そうだ、お願いしていい？」	rule:cx:souda-recall:20=%Dn@	fix	rewrites
 cx:souda-recall:20	置いておいてもいいんだけど……と、そうだっ！	놓아두어도 괜찮은데……아, 맞아!	fix	rewrites

@@ -5,4 +5,4 @@ rewrite:own-passive	学園の生徒に雇われた冒険者。	학원의 학생�
 rewrite:own-passive	簡単に地面が耕されていく。	간단하게 땅이 경작되어 간다.	fix	rewrites
 rewrite:own-passive	涙目で謝られた。	눈물 어린 눈으로 사과받았다.	fix	rewrites
 rewrite:own-passive	彼に無視された。	그에게 무시당했다.	fix	rewrites
-rewrite:own-passive	「そう言われると断れない」	「그런 말을 들으면 거절할 수 없다」	keep	rewrites
+rewrite:own-passive	「そう言われると断れない」	「그런 말을 들으면 거절할 수 없어」	keep	rewrites
