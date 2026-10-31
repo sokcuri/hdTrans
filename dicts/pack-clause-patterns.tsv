@@ -1,0 +1,5 @@
+#! layer=pack
+# 피동형이 존경이나 말을 걸어오다로 읽히는 동사의 태 칸
+id	lemma	pos	slot	kind	cond	target	agent	pri	spec	prov	note
+clause-patterns:1	会う	v5	voice	frame	register=polite|plain	respectful		50	GRM-3061	audit	会われる → 만나시다 (not passive 만나지다)
+clause-patterns:2	話しかける	v1	voice	frame	form=ta|te	passive:말을 걸어오다	이	50	GRM-3065	audit	話しかけられた/て → 말을 걸어오다
