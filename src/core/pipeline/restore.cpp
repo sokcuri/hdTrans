@@ -202,29 +202,6 @@ Pieces RestoreLineBrackets(const Pieces& in, const Pieces& out) {
 
 bool IsSyllable(char32_t r) { return r >= text::kBase && r <= text::kLast; }
 
-// The length in runes of a stutter separator at rs[i]: 、 ， or a run of … ‥ ― ─ — or of
-// two or more ・.
-size_t StutterSeparator(std::u32string_view rs, size_t i) {
-    if (i >= rs.size()) return 0;
-    switch (rs[i]) {
-        case U'、':
-        case U'，':
-            return 1;
-        case U'…':
-        case U'‥':
-        case U'―':
-        case U'─':
-        case U'—':
-        case U'・': {
-            size_t n = i;
-            while (n < rs.size() && rs[n] == rs[i]) n++;
-            if (rs[i] == U'・' && n - i < 2) return 0;
-            return n - i;
-        }
-    }
-    return 0;
-}
-
 bool IsDropped(char32_t r) { return r >= kDropShift + 0x3041 && r <= kDropShift + 0x30FF; }
 
 constexpr std::u32string_view kSmallVowels = U"ァィゥェォ";
@@ -446,6 +423,30 @@ std::string WriteDropped(std::string_view s) {
         out += internal::ReadKana(Utf8(kana));
     }
     return out;
+}
+
+size_t StutterSeparator(std::u32string_view rs, size_t i) {
+    if (i >= rs.size()) return 0;
+    switch (rs[i]) {
+        case U'、':
+        case U'，':
+            return 1;
+        case U'…':
+        case U'‥':
+        case U'―':
+        case U'─':
+        case U'—':
+        case U'・':
+        case U'.':
+        case U'．': {
+            size_t n = i;
+            while (n < rs.size() && rs[n] == rs[i]) n++;
+            if ((rs[i] == U'・' || rs[i] == U'.' || rs[i] == U'．') && n - i < 2) return 0;
+            return n - i;
+        }
+        default:
+            return 0;
+    }
 }
 
 std::string WriteStutters(std::string_view s) {

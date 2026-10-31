@@ -2,8 +2,10 @@
 
 ## SND-1 소리는 한 덩어리로, 말더듬은 같은 음절로 옮긴다
 
-한 번 내는 소리는 안에 공백이 없는 한국어 소리 하나로 옮기고 길이를 대략 맞춘다. 말더듬은 이어지는 낱말의 첫
-음절을 되풀이해 옮긴다. 홀로도 말이 되는 음절(ま, お, う, む, さ, や, ね, が, で, ちょ)이 쉼표를 사이에 두고, 또는 말머리에서
+한 번 내는 소리는 안에 공백이 없는 한국어 소리 하나로 옮기고 길이를 대략 맞춘다. 말더듬은 이어지는 낱말을 옮긴
+한국어의 첫 음절을 받침 없이 되풀이해 옮긴다(し、失礼します 시, 실례합니다; しょ..しょうちしました 아..알았습니다).
+말더듬을 가르는 표시는 、, ，, …, ‥, ―, ─, —의 줄, 두 개 이상의 ・, 두 개 이상의 . 또는 ．이고, 표시는 원문대로
+둔다(、, ，는 쉼표와 공백). 홀로도 말이 되는 음절(ま, お, う, む, さ, や, ね, が, で, ちょ)이 쉼표를 사이에 두고, 또는 말머리에서
 말줄임이나 줄표를 사이에 두고 한자 낱말 앞에 오면 그 낱말의 읽기가 그 음절로 시작할 때만 말더듬이고(ま、待って 기,
 기다려), 아니면 그 음절의 말이다(ま、仕方ない 뭐, 어쩔 수 없다). と, よ는 쉼표 앞에서만 그렇고, 줄을 여는 と, で는
 접속사이며, あ, え는 늘 감탄사다. 말머리(자막의 괄호 속 이름 뒤 포함)에서 あっ, えっ, おっ 바로 뒤에 히라가나 낱말이 오고, 그 っ로 시작하는 낱말(っす)보다
@@ -42,6 +44,10 @@
 | 総員、起こし！起床ーッ！ | 총원, 일으켜! 기상~! | 고침 |
 | と、とと、溶けちゃう | 노, 노, 녹아버린다 | 고침 |
 | 「ま、待って」 | 「기, 기다려」 | 고침 |
+| し..しつれいします | 시..실례합니다 | 고침 |
+| お..おはようございます | 아..안녕하세요 | 고침 |
+| しょ、しょうちしました | 아, 알았습니다 | 고침 |
+| 「そう..本当に？」 | 「그래..정말?」 | 유지 |
 | 「お……俺たち……」 | 「우……우리……」 | 유지 |
 | 「あ……先輩……」 | 「아……선배……」 | 고침 |
 | 「さ、さ、最低」 | 「최, 최, 최저」 | 고침 |
@@ -74,7 +80,8 @@
 | 猫という動物 | 고양이라는 동물 | 유지 |
 | じろじろと見る | 빤히 본다 | 유지 |
 
-사례: `tests/rules/cases/sound-stutter-pieces.tsv`, `tests/rules/cases/sound-small-kana-grunts.tsv`, `tests/rules/cases/sound-stutter-kanji.tsv`(한자 낱말 앞의 말더듬),
+사례: `tests/rules/cases/sound-stutter-pieces.tsv`, `tests/rules/cases/sound-stutter-separators.tsv`(말더듬 표시),
+`tests/rules/cases/lexical-kana-shouchi.tsv`(가나로 쓴 낱말), `tests/rules/cases/sound-small-kana-grunts.tsv`, `tests/rules/cases/sound-stutter-kanji.tsv`(한자 낱말 앞의 말더듬),
 `tests/rules/cases/sound-adverbial-to.tsv`(말더듬과 と), `tests/rules/cases/sound-drawn-cries.tsv`(소리의 길이),
 `tests/rules/cases/sound-drawl-shout.tsv`(외침의 ッ), `tests/rules/cases/sound-vowel-run.tsv`(낱말 안에서 늘인 모음),
 `tests/rules/cases/sound-quoting-to-iu.tsv`(소리 뒤의 という), `tests/rules/cases/sound-drawn-word.tsv`(늘여 쓴 낱말),

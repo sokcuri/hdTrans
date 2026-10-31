@@ -107,31 +107,6 @@ Match MarkerSpan(std::string_view s, std::span<const std::string> markers) {
     return {n, output::SpanOpen};
 }
 
-// The length in characters of a stutter separator at rs[i]: 、 ， or a run of … ‥ ― ─ — or
-// of two or more ・.
-size_t StutterSeparator(const std::vector<text::Rune>& rs, size_t i) {
-    if (i >= rs.size()) return 0;
-    const char32_t c = rs[i].cp;
-    switch (c) {
-        case U'、':
-        case U'，':
-            return 1;
-        case U'…':
-        case U'‥':
-        case U'―':
-        case U'─':
-        case U'—':
-        case U'・': {
-            size_t n = i;
-            while (n < rs.size() && rs[n].cp == c) n++;
-            if (c == U'・' && n - i < 2) return 0;
-            return n - i;
-        }
-        default:
-            return 0;
-    }
-}
-
 // The stutter marks of one stutter with their separators, within its first 64 bytes.
 Match StutterSpan(std::string_view s) {
     std::vector<text::Rune> rs;
@@ -139,8 +114,10 @@ Match StutterSpan(std::string_view s) {
         rs.push_back(text::DecodeRune(w));
         w.remove_prefix(rs.back().size);
     }
+    std::u32string cps;
+    for (const text::Rune& r : rs) cps.push_back(r.cp);
     size_t n = 0;
-    while (n < rs.size() && (rs[n].cp == kStutterMark || rs[n].cp == kStutterRest)) n += 1 + StutterSeparator(rs, n + 1);
+    while (n < rs.size() && (rs[n].cp == kStutterMark || rs[n].cp == kStutterRest)) n += 1 + StutterSeparator(cps, n + 1);
     size_t bytes = 0;
     for (size_t k = 0; k < n; k++) bytes += rs[k].size;
     return {bytes, output::SpanOpen};

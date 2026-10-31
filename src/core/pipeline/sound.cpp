@@ -224,29 +224,6 @@ constexpr std::u32string_view kStandalonePieces[] = {U"コレ", U"ソレ", U"ア
 // (ちっ違う, しっ司令官), written as if a comma followed.
 constexpr std::u32string_view kSoundsBeforeKanji = U"アウエオクケゲグサナネハヒフブヘホマムヤヨワン";
 
-// The length of a stutter separator at rs[i:]: 、 ， or a run of … ‥ ― ─ — or of two or more ・.
-size_t StutterSeparator(std::u32string_view rs, size_t i) {
-    if (i >= rs.size()) return 0;
-    switch (rs[i]) {
-        case U'、':
-        case U'，':
-            return 1;
-        case U'…':
-        case U'‥':
-        case U'―':
-        case U'─':
-        case U'—':
-        case U'・': {
-            size_t n = i;
-            while (n < rs.size() && rs[n] == rs[i]) n++;
-            if (rs[i] == U'・' && n - i < 2) return 0;
-            return n - i;
-        }
-        default:
-            return 0;
-    }
-}
-
 // A character that a hiragana run after it may continue as okurigana, a particle or an
 // ending.
 bool InWord(char32_t r) { return IsKanjiRune(r) || IsKatakanaRune(r) || text::IsLetter(r) || text::IsDigit(r); }

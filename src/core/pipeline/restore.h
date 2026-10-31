@@ -129,6 +129,9 @@ std::string WriteLaughter(std::string_view line, std::string_view source);
 constexpr char32_t kDropShift = 0xC000;
 // The stutter mark of the sound stage.
 constexpr char32_t kStutterMark = 0xE000;
+// The length of a stutter separator at rs[i]: 、 or ，, a run of … ‥ ― ─ — or ・, or a run of
+// two or more . or ． (し..しつれい).
+size_t StutterSeparator(std::u32string_view rs, size_t i);
 // After the marks of a longer stutter piece, one mark for each kana of the word the piece
 // does not reach (ごめ、 of ごめんなさい: 2 kStutterMark, 4 kStutterRest).
 constexpr char32_t kStutterRest = 0xE004;

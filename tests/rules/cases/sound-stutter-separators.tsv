@@ -1,0 +1,28 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:stutter-separators	しょ..しょうちしました	아..알았습니다	fix	sound
+sound:stutter-separators	し..しつれいします	시..실례합니다	fix	sound
+sound:stutter-separators	お..おはようございます	아..안녕하세요	fix	sound
+sound:stutter-separators	あ..ありがとうございます	가..감사합니다	fix	sound
+sound:stutter-separators	そ..それは	그..그것은	fix	sound
+sound:stutter-separators	な..なにを言ってるの	무..무슨 소리야	fix	sound
+sound:stutter-separators	「わ..わたしは」	「나..나는」	fix	sound
+sound:stutter-separators	ち..違う	아..아니다	fix	sound
+sound:stutter-separators	こ．．こんにちは	아．．안녕하세요	fix	sound
+sound:stutter-separators	「ま..待って」	「기..기다려」	fix	sound
+sound:stutter-separators	「う..うそ」	「거..거짓말」	fix	sound
+sound:stutter-separators	しょ、しょうちしました	아, 알았습니다	fix	sound
+sound:stutter-separators	「お……おはようございます」	「아……안녕하세요」	keep	sound
+sound:stutter-separators	「し、失礼しますっ」	「시, 실례합니다」	keep	sound
+sound:stutter-separators	「す、すみません」	「죄, 죄송합니다」	keep	sound
+sound:stutter-separators	し、し、失礼します	시, 시, 실례합니다	keep	sound
+sound:stutter-separators	あ、そう	아, 그래	keep	sound
+sound:stutter-separators	え、本当？	어, 정말?	keep	sound
+sound:stutter-separators	あ...鼠運送を優先して	아...쥐운송을 우선해	keep	sound
+sound:stutter-separators	「そう..本当に？」	「그래..정말?」	keep	sound
+sound:stutter-separators	「あーあ、つまんない」	「아~아, 재미없다」	keep	sound
+sound:stutter-separators	ア・イ・ウ	아·이·우	keep	sound
+sound:stutter-separators	「え..映画？」	「네..영화?」	keep	sound
+sound:stutter-separators	くっ...私は	큭...나는	keep	sound
+sound:stutter-separators	「あ、ありがとうございます」	「가, 감사합니다」	keep	sound
+sound:stutter-separators	「ど、どうしよう」	「어, 어떻게 하지」	keep	sound

@@ -182,6 +182,10 @@ HD_TEST(pipeline_write_stutters) {
         {"\uE000・어", "・어"},
         {"\uE000、!", "!"},
         {"\uE000、", ""},
+        // A run of two or more . or ． is a separator, kept as written.
+        {"\uE000..실례합니다", "시..실례합니다"},
+        {"\uE000．．안녕", "아．．안녕"},
+        {"\uE000.실례", ".실례"},
         // A dash run is a separator.
         {"「\uE000―――싫어어엇」", "「시―――싫어어엇」"},
         // A longer piece writes its share of the word's syllables with their finals, short of
