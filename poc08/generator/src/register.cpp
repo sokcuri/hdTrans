@@ -616,7 +616,14 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (v != std::u32string::npos && v >= 1 && v <= 12) {
             const char32_t p = u.text[v - 1];
             static const std::u32string kTitle = U"将王帝卿殿様師長官者君神";
-            if ((p >= U'ァ' && p <= U'ヺ' && p != U'ー') || kTitle.find(p) != std::u32string::npos) c.auth = true;
+            // a katakana name of three or more characters, not a casual katakana word (ダメよ、, ウソよ、, マジよ、)
+            size_t run = v;
+            while (run > 0 && u.text[run - 1] >= U'ァ' && u.text[run - 1] <= U'ヺ') --run;
+            const std::u32string kata = u.text.substr(run, v - run);
+            static const std::vector<std::u32string> kCasualKata = {U"ダメ", U"ウソ", U"イヤ", U"ムリ", U"マジ", U"ホント", U"ヤダ",
+                                                                    U"オッケー", U"ステキ", U"サイコー", U"サイテー", U"ヘン", U"ズルイ"};
+            const bool name = kata.size() >= 3 && std::find(kCasualKata.begin(), kCasualKata.end(), kata) == kCasualKata.end();
+            if (name || kTitle.find(p) != std::u32string::npos) c.auth = true;
         }
     }
     for (const auto& [kind, text] : t.honBack)
@@ -690,14 +697,17 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
     std::vector<bool> casualAt(lines.size(), false);
     auto blank = [&](size_t k) { return lines[k].ja.find_first_not_of(" \t\r\xe3\x80\x80") == std::string::npos; };
     {
-        size_t blanks = 0;
+        size_t blanks = 0, narration = 0;
         bool tagged = false;
         for (size_t k = 0; k < lines.size(); ++k) {
             if (blank(k)) ++blanks;
+            else if (!lines[k].dialogue) ++narration;
             if (!lines[k].speaker.empty()) tagged = true;
         }
-        // (a document of a few lines is no evidence: at least 10 lines and 2 blank ones)
-        prose = !tagged && lines.size() >= 10 && blanks >= 2 && blanks * 20 >= lines.size();
+        // (a document of a few lines is no evidence: at least 10 lines and 2 blank ones; and prose has narration: at
+        // least 3 in 10 of its lines that are not blank)
+        prose = !tagged && lines.size() >= 10 && blanks >= 2 && blanks * 20 >= lines.size() &&
+                narration * 10 >= (lines.size() - blanks) * 3;
         if (prose)
             for (size_t k = 0; k < lines.size(); ++k)
                 if (lines[k].dialogue) casualAt[k] = Scan(t, lines[k].ja).casualMark;

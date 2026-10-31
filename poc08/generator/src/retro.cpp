@@ -1000,9 +1000,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
                 // a polite clause trailing off after a conjunction (そうじゃないですけど……) keeps 0.7.x's form: no 요 after
                 // a trailing conjunction
-                bool lastV = true;
+                bool lastV = true;  // the trailing clause's own predicate: only marks follow it
                 for (size_t k = q + 1; k < nodes.size(); ++k)
-                    if (nodes[k].kind == Kind::V) lastV = false;
+                    if (nodes[k].kind != Kind::Punct) lastV = false;
                 const bool trailing = d.trailConj && lastV;
                 const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail || trailing;
                 const bool held = mixed || inner || keep || keigo || askedByEnding || hapsyo || raise || jaCommand ||
