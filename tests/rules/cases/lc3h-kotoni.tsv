@@ -1,0 +1,58 @@
+# 규칙: GRM-195
+rule	input	expected	kind	layer
+cx:lc3h-kotoni:9	これは大変なことになってきましたね、はい。	has:큰일이	fix	rewrites
+cx:lc3h-kotoni:10	大変なことになる。	has:큰일이 난다	fix	rewrites
+cx:lc3h-kotoni:11	とはいえ、本当にはぐれれば大変なことになりかねない。	has:큰일이 날지도	fix	rewrites
+cx:lc3h-kotoni:12	大変なことになってしまった。	has:큰일이 나 버렸다	fix	rewrites
+cx:lc3h-kotoni:13	会わせたら大変なことになりそうだ。	has:큰일이 날 것 같다	fix	rewrites
+cx:lc3h-kotoni:19	そんな面倒なことになるのはゴメンだ、	has:귀찮게	fix	rewrites
+cx:lc3h-kotoni:20	面倒なことになる。	has:귀찮게	fix	rewrites
+cx:lc3h-kotoni:21	少し面倒なことになってしまった。	has:귀찮게	fix	rewrites
+cx:lc3h-kotoni:22	何か面倒なことになりそう	has:귀찮게 될 것 같다	fix	rewrites
+cx:lc3h-kotoni:30	あんなことになるなんて。	has:그렇게	fix	rewrites
+cx:lc3h-kotoni:31	「可哀相に、何であんなことになってしまったのか」	has:그렇게	fix	rewrites
+cx:lc3h-kotoni:32	そんなことになりそうでね。	has:그렇게 될 것 같아	fix	rewrites
+cx:lc3h-kotoni:40	また許婚みたいなことになりかねない！	has:일이	fix	rewrites
+cx:lc3h-kotoni:41	これでは奏ちゃんに誤解を生ませるようなことになってしまう。	has:일이	fix	rewrites
+cx:lc3h-kotoni:42	しかし明日は面白そうなことになりそうだな。	has:일이 될 것 같네	fix	rewrites
+cx:lc3h-kotoni:10	大変なことになった。	has:큰일이 났다	fix	rewrites
+cx:lc3h-kotoni:12	大変なことになってしまったわ）	has:큰일이 나 버렸어	fix	rewrites
+cx:lc3h-kotoni:13	これ以上引かれると大変なことになりそうだし。	has:큰일이 날 것 같고	fix	rewrites
+cx:lc3h-kotoni:19	だから、こんな面倒なことになっちゃった。	has:이렇게 귀찮게	fix	rewrites
+cx:lc3h-kotoni:20	変なことになっている。	has:이상하게	fix	rewrites
+cx:lc3h-kotoni:21	クソ、なんか変なことになってしまった。	has:이상하게	fix	rewrites
+cx:lc3h-kotoni:22	面倒なことになりそうでー。	has:귀찮게 될 것 같아	fix	rewrites
+cx:lc3h-kotoni:30	「ろくなことにならないよ」	has:좋게	fix	rewrites
+cx:lc3h-kotoni:31	なぜ…どうしてこのようなことになってしまったのか…。	has:이렇게	fix	rewrites
+cx:lc3h-kotoni:32	̶̶そんなことになりそうで面高は戦慄した。	has:̶̶그렇게 될 것 같아	fix	rewrites
+cx:lc3h-kotoni:40	これがきっと巷でいう、ネカマに騙されました、みたいなことになるのだろう。	has:일이	fix	rewrites
+cx:lc3h-kotoni:42	「なんかまためんどくさそうなことになりそうだな」	has:일이 될 것 같네	fix	rewrites
+cx:lc3h-kotoni:10	「大変なことになった…」	has:큰일이 났어	fix	rewrites
+cx:lc3h-kotoni:12	「なんだか大変なことになってしまったね…。」	has:큰일이 나 버렸네	fix	rewrites
+cx:lc3h-kotoni:13	平らげないと大変なことになりそうな気がする。	has:큰일이 날 것 같은	fix	rewrites
+cx:lc3h-kotoni-idiom:10	厄介なことになった。	has:아프게	fix	rewrites
+cx:lc3h-kotoni-idiom:10	困ったことになった。	has:곤란하게	fix	rewrites
+cx:lc3h-kotoni-idiom:10	「ガウゥゥ……（困ったことになったわね……）」	has:곤란하게	fix	rewrites
+cx:lc3h-kotoni-idiom:10	娘の方も、盗賊に連れ去られた事が知れ渡ると、嫁ぎ先が無くなり、困ったことになる。	has:곤란하게	fix	rewrites
+cx:lc3h-kotoni-idiom:10	早いうちに然るべき場所に持ち込んで、然るべき対処をしないと後々厄介なことになる。	has:아프게	fix	rewrites
+cx:lc3h-kotoni-idiom:10	確かにそろそろ本気で、人間の生活に慣れ戻しておかないと、困ったことになりそうだ。	has:곤란하게	fix	rewrites
+cx:lc3h-kotoni:9	こんなことになっているなんて。	!rule:cx:lc3h-kotoni:9	keep	rewrites
+cx:lc3h-kotoni:10	結果こんなことになっている。	!rule:cx:lc3h-kotoni:10	keep	rewrites
+cx:lc3h-kotoni:11	なぜこんなことになったのか。	!rule:cx:lc3h-kotoni:11	keep	rewrites
+cx:lc3h-kotoni:12	お前とこんなことになったら、	!rule:cx:lc3h-kotoni:12	keep	rewrites
+cx:lc3h-kotoni:13	なんでこんなことになった…。	!rule:cx:lc3h-kotoni:13	keep	rewrites
+cx:lc3h-kotoni:19	撃的なことになったのである！	!rule:cx:lc3h-kotoni:19	keep	rewrites
+cx:lc3h-kotoni:20	ることになってしまいます！	!rule:cx:lc3h-kotoni:20	keep	rewrites
+cx:lc3h-kotoni:21	こんなことになっているなんて。	!rule:cx:lc3h-kotoni:21	keep	rewrites
+cx:lc3h-kotoni:22	結果こんなことになっている。	!rule:cx:lc3h-kotoni:22	keep	rewrites
+cx:lc3h-kotoni:30	なぜこんなことになったのか。	!rule:cx:lc3h-kotoni:30	keep	rewrites
+cx:lc3h-kotoni:31	お前とこんなことになったら、	!rule:cx:lc3h-kotoni:31	keep	rewrites
+cx:lc3h-kotoni:32	なんでこんなことになった…。	!rule:cx:lc3h-kotoni:32	keep	rewrites
+cx:lc3h-kotoni:40	撃的なことになったのである！	!rule:cx:lc3h-kotoni:40	keep	rewrites
+cx:lc3h-kotoni:41	ることになってしまいます！	!rule:cx:lc3h-kotoni:41	keep	rewrites
+cx:lc3h-kotoni:42	こんなことになっているなんて。	!rule:cx:lc3h-kotoni:42	keep	rewrites
+cx:lc3h-kotoni-idiom:10	困ったことに、半年前ま	!rule:cx:lc3h-kotoni-idiom:10	keep	rewrites
+cx:lc3h-kotoni-idiom:10	さらに困ったことに、	!rule:cx:lc3h-kotoni-idiom:10	keep	rewrites
+cx:lc3h-kotoni-idiom:10	困ったことに、この羊はでかい。	!rule:cx:lc3h-kotoni-idiom:10	keep	rewrites
+cx:lc3h-kotoni-idiom:10	しかし厄介なことに、	!rule:cx:lc3h-kotoni-idiom:10	keep	rewrites
+cx:lc3h-kotoni-idiom:10	「厄介なことに、ロミュオー曰く	!rule:cx:lc3h-kotoni-idiom:10	keep	rewrites
