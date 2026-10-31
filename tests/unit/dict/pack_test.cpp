@@ -84,12 +84,14 @@ HD_TEST(dict_pack_errors) {
         {"x\tsense\t本\tn\tform=past\t책", "2: cue value \"past\" of form is not one the host reads"},
         {"x\tsense\t本\tn\tvoice=passive\t책", "2: a voice= atom is read on voice, polarity and tense rows only"},
         {"x\tsense\t本\tn\t\t책\nx\tsense\t紙\tn\t\t종이", "3: row id \"x\" is also at p.tsv:2"},
+        {"x\tsense\t本\tn\t\t책\t에게", "2: agent is read on voice rows only"},
+        {"x\tvoice\t読む\tv5\t\tpassive\tby", "2: agent \"by\" is not a Korean particle in Hangul"},
     };
     for (const auto& c : cases) {
         Families families;
         PackTable t;
         std::vector<PackError> errors;
-        ParsePackRows("p.tsv", std::string("id\tslot\tlemma\tpos\tcond\ttarget\n") + c.row, nullptr, families, t, errors);
+        ParsePackRows("p.tsv", std::string("id\tslot\tlemma\tpos\tcond\ttarget\tagent\n") + c.row, nullptr, families, t, errors);
         HD_CHECK_EQ(Errors(errors), std::string(c.want));
     }
     Families families;

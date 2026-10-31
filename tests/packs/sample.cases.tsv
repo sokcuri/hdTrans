@@ -35,3 +35,8 @@ pack:s.iku.invite	行ったじゃないか？	!rule:pack:s.iku.invite	keep	packs
 pack:s.igai	猫以外は来た。	고양이를 빼고는 왔다.	fix	packs
 pack:s.igai	先生以外は来た。	선생님을 빼고는 왔다.	fix	packs
 pack:s.igai	以外と簡単だ。	!rule:pack:s.igai	keep	packs
+pack:s.naguru	兄に殴られた。	형한테 맞았다.	fix	packs
+pack:s.naguru	兄が殴った。	!rule:pack:s.naguru	keep	packs
+pack:s.naguru	兄から殴られた。	형한테 맞았다.	fix	packs
+pack:s.naguru	三時に殴られた。	3시에 맞았다.	keep	packs
+pack:s.naguru	後ろから殴られた。	뒤에서 맞았다.	keep	packs

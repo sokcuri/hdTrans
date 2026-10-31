@@ -1417,6 +1417,23 @@ void DecideVoice(Flusher& f) {
         Item* agent = AnimateAgent(it, stem, ni);
         Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
         const dict::PackRow* packed = PackVoice(f, it, stem, v);
+        if (packed != nullptr && !packed->agent.empty()) {
+            // The agent phrase of the row's reading: the animate agent the voice step found (に, によって,
+            // により), else the nearest から after an animate noun in the verb's clause, not a quote's.
+            Item* p = agent;
+            for (Item* q = it->prev; p == nullptr && q != nullptr && !ClauseBreak(q); q = q->prev) {
+                const Item* a = q->prev;
+                const Item* n = q->next;
+                if (q->group->surface == "から" && a != nullptr && !a->detail->Yougo() &&
+                    Animate(a->Attr(std::max(a->selected, 0))) &&
+                    (n == nullptr || !dict::InClass(HDTRANS_CLASS("particle.quote"), n->group->surface)))
+                    p = q;
+            }
+            if (p != nullptr && !p->Fixed()) {
+                it->packAgent = p;
+                it->packAgentText = packed->agent;
+            }
+        }
         if (packed != nullptr && (v == Voice::None || !packed->lexeme.empty())) {
             // A pack row reads the verb in the active, or as the Korean verb it names (docs/packs.md):
             // the verb it is made from, no passive, potential or respectful form written.

@@ -3,7 +3,7 @@
 // (docs/packs.md). A pack file is a plain file of a dictionary folder with the header
 // "#! layer=pack"; its rows are tab-separated under a header line naming the columns
 //
-//   id  lemma  pos  cond  target  [slot]  [kind]  [pri]  [spec]  [prov]  [note]
+//   id  lemma  pos  cond  target  [slot]  [kind]  [agent]  [pri]  [spec]  [prov]  [note]
 //
 // slot is sense (the default), name, voice, polarity or tense. lemma (written forms joined
 // by |; a lexicon id ja/yomi/pos reads its ja) and pos name the word: lemma is compiled like
@@ -56,6 +56,7 @@ struct PackRow {
     std::string target;     // compiled target (sense, name), voice name, or ending text; "-" keeps the slot
     std::string written;    // the target column as written
     std::string lexeme;     // a voice row's compiled Korean verb (passive:혼나다), "" for none
+    std::string agent;      // a voice row's Korean particle for the agent phrase (に, から: 에게서), "" for none
     bool adjective = false; // a noun target in 하다 (the root of a 하다 adjective), as in senses
     std::vector<PackAtom> atoms;
     int pri = 0;
