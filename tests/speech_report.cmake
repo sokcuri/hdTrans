@@ -7,15 +7,16 @@ endif()
 string(RANDOM LENGTH 12 ALPHABET abcdef0123456789 run)
 set(root "${WORK}/${run}")
 file(MAKE_DIRECTORY "${root}/home")
-# The second line is spoken plainly; the word stage gives it -다, the speech levels 해체.
-file(WRITE "${root}/in.txt" "「はい」\n「……子爵の娘は優秀だと聞いている」\r\n")
-file(WRITE "${root}/context.txt" "「……子爵の娘は優秀だと聞いている」\n「はい」\n")
+# The second line is spoken plainly; the word stage gives it -다, the speech levels 해체. The input has CRLF
+# line ends (file(WRITE) would turn \n into CRLF on Windows only).
+file(CONFIGURE OUTPUT "${root}/in.txt" CONTENT "「はい」\n「……子爵の娘は優秀だと聞いている」\n" NEWLINE_STYLE DOS)
+file(CONFIGURE OUTPUT "${root}/context.txt" CONTENT "「……子爵の娘は優秀だと聞いている」\n「はい」\n" NEWLINE_STYLE UNIX)
 
 function(run_cli report)
     execute_process(COMMAND "${CMAKE_COMMAND}" -E env --unset=HDTRANS_SPEECH_LEVELS "HOME=${root}/home"
         "HDTRANS_CACHE_DIR=off" "${CLI}" --dicts "${DICTS}" --userdict "" --in "${root}/in.txt"
         --speech-report "${root}/${report}" ${ARGN}
-        RESULT_VARIABLE status OUTPUT_VARIABLE output ERROR_VARIABLE error)
+        RESULT_VARIABLE status OUTPUT_VARIABLE output ERROR_VARIABLE error ENCODING UTF-8)
     if(NOT status EQUAL 0)
         message(FATAL_ERROR "CLI failed (${status}): ${error}")
     endif()
