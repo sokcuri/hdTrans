@@ -30,10 +30,10 @@ comma.topic-1	RW-2	ko	any	[N]:n [P top]:t [Punct comma]:c	!n.prev.ctype=adn & c.
 from.robuteo-1	RW-7	ko	any	[N]:n [P (으)로부터]:p	p.next.kase!=gen	set p.kase=src	(으)로부터 → 에서, after a person 에게서 (한테서 in speech); G chooses by the noun's class. Not before 의 (씨로부터의 의뢰 → 에게서의 is worse)
 from.robuteo-2	RW-7	ko	any	[N {sem=thing}]:n [P (으)로부터]:p	p.next.kind!=P & n.class!=person	set p.kase=src	(으)로부터 after a dictionary noun that is not a person (포켓, 결과, 정문) → 에서; not before another particle (씨로부터의, 취득으로부터가: a starting point)
 from.robuteo-3	RW-7	ko	any	[N {sem=person}]:n [P (으)로부터]:p	p.next.kind!=P	set p.kase=src	(으)로부터 after a person (씨, 선생님, 그들) → 에게서, 한테서 in speech
-from.robuteo-4	RW-7	ko	any	[N {sem!=person}]:n [P (으)로부터]:p	p.next.kind!=P & n.class=person	set n.sem=person; set p.kase=src	(으)로부터 after a person noun the dictionaries carry without a person code (후보, 언니, 모두) → 에게서
+from.robuteo-4	RW-7	ko	any	[N {sem!=person}]:n [P (으)로부터]:p	p.next.kind!=P & n.class=person	set n.sem=person; set p.kase=src	[off: lost under rubric mqm-v3.1] (으)로부터 after a person noun the dictionaries carry without a person code (후보, 언니, 모두) → 에게서
 gen.chain-1	RW-4	ko	any	[N]:a [P gen]:g [N]:b [P gen]:h [N]:c	a.dep=0 & b.dep=0 & !a.prev.ctype=adn & a.lemma!=나|너|저|우리|저희|그|그녀|당신|자네|그대|이|그것|이것|저것|자신|자기	del g	의-chains: A의 B의 C → A B의 C when A is not a pronoun and no relative clause modifies A (마친 느낌의 학교의); a person noun A is fine (선생님 입술의)
 like.deut-1	RW-10	ko	narr	[V {ctype=adn}]:v [N 것|거 {dep}]:n [V 같다]:a	a.ctype=adn	del n; set a.lemma=듯하다; set a.aux=1; set a.vpos=A; set a.kcls=HA	narration writes -는 것 같은 (ような) as -는 듯한 (튀는 듯한 착각); dialogue keeps 것 같은
-like.deut-2	RW-10	ko	narr	[V {ctype=adn}]:v [N 것|거 {dep}]:n [V 같다]:a	a.ctype=final & a.mood=decl & a.eomi=-	del n; set a.lemma=듯하다; set a.aux=1; set a.vpos=A; set a.kcls=HA	narration ends -는 것 같다 (ようだ, らしい) as -는 듯하다; -는 것 같은데, -다고 할까 keep 것 같다
+like.deut-2	RW-10	ko	narr	[V {ctype=adn}]:v [N 것|거 {dep}]:n [V 같다]:a	a.ctype=final & a.mood=decl & a.eomi=-	del n; set a.lemma=듯하다; set a.aux=1; set a.vpos=A; set a.kcls=HA	[off: lost under rubric mqm-v3.1] narration ends -는 것 같다 (ようだ, らしい) as -는 듯하다; -는 것 같은데, -다고 할까 keep 것 같다
 pron.anata-1	RW-8	ko	quote	[N 당신]:n	utt.level=hae|haera	set n.lemma=너	casual speech says 너, not 당신 (6.2 vs 2.0 per 1,000 lines)
 pron.anata-2	RW-8	ko	quote	[N 당신]:n [P subj|top]:p	utt.level=haeyo|hapsyo	del n; del p	polite speech drops the addressee pronoun
 pron.anata-3	RW-8	ko	quote	[N 당신들]:n	utt.level=hae|haera	set n.lemma=너희	casual speech to several people says 너희, not 당신들 (貴女達 → 너희)
