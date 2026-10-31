@@ -699,7 +699,8 @@ bool Applicable(const std::vector<Item*>& items, std::size_t i, const std::set<c
 
 // The colloc rows, left to right: at each word the longest applicable pattern that reads the words
 // from it (then pri, then load order). The words of a span take no other pack row.
-void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& taken) {
+// heads: the last words that keep their ending, whose ending slots (polarity, tense) stay open.
+void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& taken, std::set<const Item*>& heads) {
     std::vector<Item*> items;
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next)
         if (it->group != nullptr) items.push_back(it);
@@ -752,6 +753,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
             taken.insert(x);
         }
         head->packRows.push_back(r.global);
+        if (best.conjugates) heads.insert(head);
         i = best.end - 1;
     }
 }
@@ -785,11 +787,13 @@ void ApplyPacks(Flusher& f) {
     const dict::PackTable& t = f.w.snapshot.Packs();
     if (t.Empty() && f.w.settings.documentPacks == nullptr) return;
     f.attached.asked = false;  // the chain may have changed since the voice layer asked
-    std::set<const Item*> taken;
-    if (!t.collocs.empty()) ApplyCollocs(f, t, taken);
+    std::set<const Item*> taken, heads;
+    if (!t.collocs.empty()) ApplyCollocs(f, t, taken, heads);
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        // the head of a colloc span keeps its ending, and the ending's rows (polarity, tense) still apply
+        const bool head = heads.contains(it);
         if (it->group == nullptr || it->selected < 0 || it->selected >= static_cast<int>(it->group->entries.size()) ||
-            taken.contains(it))
+            (taken.contains(it) && !head))
             continue;
         // A fixed word (a user's word, a span the sound stage wrote) keeps its decisions; a name of the
         // name layer takes name rows, and a word of a plain entry the document's name rows (the name
@@ -800,13 +804,13 @@ void ApplyPacks(Flusher& f) {
         if (nameOnly && !nameLayer && (chosen->user == nullptr || f.w.settings.documentPacks == nullptr)) continue;
         const char cls = ClassOf(it);
         // A voice row's agent particle and Korean verb hold against the passes after the voice layer.
-        if (Item* p = it->packAgent; p != nullptr && p->selected >= 0 &&
+        if (Item* p = it->packAgent; !head && p != nullptr && p->selected >= 0 &&
                                      p->selected < static_cast<int>(p->group->entries.size()) && !p->Fixed() &&
                                      !taken.contains(p) && !it->packRows.empty()) {
             TakeTarget(p, ClassOf(p), it->packAgentText, {Provenance::Pack, it->packRows.front()});
             taken.insert(p);
         }
-        if (!it->packLexeme.empty() && cls == '4') {
+        if (!head && !it->packLexeme.empty() && cls == '4') {
             it->detail->record = 0;
             it->lexical = true;
             const Selection source{Provenance::Pack, it->packRows.front()};
@@ -816,6 +820,7 @@ void ApplyPacks(Flusher& f) {
         for (const dict::PackSlot slot :
              {dict::PackSlot::Sense, dict::PackSlot::Name, dict::PackSlot::Polarity, dict::PackSlot::Tense}) {
             if (nameOnly && slot != dict::PackSlot::Name) continue;
+            if (head && (slot == dict::PackSlot::Sense || slot == dict::PackSlot::Name)) continue;
             const dict::PackRow* best = DecidingRow(f, it, it->group->surface, slot, !nameOnly || nameLayer);
             if (best == nullptr) continue;
             const dict::PackRow& r = *best;

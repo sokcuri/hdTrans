@@ -15,7 +15,7 @@ dict:jisjk:341410	演習でもそうだった。	has:연습에서도	fix	local
 dict:jisjk:341410	授業でもエースだ。	has:수업에서도	fix	local
 dict:jisjk:341410	演習でもする？	has:연습이라도	keep	local
 dict:jisjk:4346	海でも綺麗だ。	has:바다에서도	keep	local
-dict:jisjk:353546	そのうちでも一番だ。	머지않아에서도 제일이다.	keep	local
+dict:jisjk:353546	そのうちでも一番だ。	그중에서도 제일이다.	keep	local
 cx:even-before-passive:20	家でも買うか。	has:집이라도 살까	fix	rewrites
 cx:even-before-passive:20	お風呂でもどう？	has:목욕이라도 어때	fix	rewrites
 cx:even-before-passive:20	家でも食べられる。	has:집에서도	keep	rewrites

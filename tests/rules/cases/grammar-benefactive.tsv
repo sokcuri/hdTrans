@@ -54,7 +54,7 @@ cx:benefactive-provider:10	母に手伝ってもらった。	어머니가 도와
 cx:benefactive-provider:10	兄に宿題を手伝ってもらって嬉しかった。	형이 숙제를 도와 주어서 기뻤다.	fix	rewrites
 cx:giver-acts:10	先輩に宿題を手伝ってもらった。	선배가 숙제를 도와 주었다.	fix	rewrites
 cx:giver-acts:10	母に手伝ってもらった。	rule:cx:giver-acts:10=도와 &CJ@	fix	rewrites
-cx:giver-acts:10	妖精のような姿のサポートナビに手伝ってもらいながら、	요정과 같은 모습의 사포트나비에 도움을 받으면서,	keep	rewrites
+cx:giver-acts:10	妖精のような姿のサポートナビに手伝ってもらいながら、	요정과 같은 모습의 서포트 내비에 도움을 받으면서,	keep	rewrites
 cx:giver-acts:10	心配だから先生にも手伝ってもらうか。	!rule:cx:giver-acts:10	keep	rewrites
 cx:giver-acts:10	手伝ってもらえますか？	도움을 받을 수 있습니까?	keep	rewrites
 cx:giver-acts:10	母に料理を手伝ってもらいたい。	어머니에게 요리를 도움을 받고 싶다.	keep	rewrites

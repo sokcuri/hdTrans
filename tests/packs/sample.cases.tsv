@@ -17,7 +17,7 @@ pack:s.unazuku	一度として、彼は首を縦には振ってくれなかっ�
 pack:s.unazuku	首を縦に振ってくれない。	고개를 끄덕여 주지 않는다.	keep	packs
 pack:s.modosu	話を元に戻そう。	이야기를 원래대로 되돌리자.	fix	packs
 pack:s.modosu	アンケートを元に再構築した。	!rule:pack:s.modosu	keep	packs
-pack:s.soba	青海さんの元に飛び込んだ。	아오미 씨 곁으로 뛰어들었다.	fix	packs
+pack:s.soba	母の元に向かった。	어머니 곁으로 향했다.	fix	packs
 pack:s.soba	アンケートを元に再構築した。	!rule:pack:s.soba	keep	packs
 pack:s.ittai	最後の一体が泡になった。	마지막 하나가 거품이 되었다.	fix	packs
 pack:s.ittai	一体何をしている？	!rule:pack:s.ittai	keep	packs
