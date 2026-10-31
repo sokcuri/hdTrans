@@ -1,0 +1,26 @@
+#! layer=base
+# 한자어 복합어의 뜻풀이: 한국어로 다른 뜻이 되는 음독을 뜻으로 바로잡음
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+嫁姑	고부	N110	VHn		GN			LEX-3320	word-sense-glosses:1
+奇才	기재	N110			GN			LEX-3320	word-sense-glosses:2
+好好爺	인자한 노인	I110	VHn		GN			LEX-3321	word-sense-glosses:3
+好天	좋은 날씨	N110			GN			LEX-3320	word-sense-glosses:4
+好天気	좋은 날씨	N110			GN			LEX-3320	word-sense-glosses:5
+好手	좋은 수	N110			GN			LEX-3320	word-sense-glosses:6
+好球	좋은 공	N110			GN			LEX-3320	word-sense-glosses:7
+好事魔多し	호사다마	N110			GN			LEX-3320	word-sense-glosses:9
+太洋	대양	N110			GN			LEX-3320	word-sense-glosses:10
+妻弟	처남	N110	VHn		GN			LEX-3320	word-sense-glosses:11
+娘細胞	딸세포	N110			GN			LEX-3320	word-sense-glosses:12
+好業績	호실적	N110			GN			LEX-3320	word-sense-glosses:13
+奇観	기이한 광경	N110			GN			LEX-3320	word-sense-glosses:14
+奇計	기묘한 계책	N110			GN			LEX-3320	word-sense-glosses:15
+娑羅の木	사라수	N110	VPt		GN			LEX-3320	word-sense-glosses:16
+好々爺	인자한 노인	I110	VHn		GN			LEX-3321	word-sense-glosses:17
+好々爺然とした	인자한 노인 같은	E0H0			GN			LEX-3321	word-sense-glosses:18
+好好爺然とした	인자한 노인 같은	E0H0			GN			LEX-3321	word-sense-glosses:19
+好々爺とした	인자한 노인 같은	E0H0			GN			LEX-3321	word-sense-glosses:20
+好々爺然として	인자한 노인처럼	E311			GN			LEX-3321	word-sense-glosses:21
+好天候	좋은 날씨	N110			GN			LEX-3320	word-sense-glosses:22
+最好手	최선의 수	N110			GN			LEX-3320	word-sense-glosses:23
+好球必打	좋은 공은 놓치지 않고 친다	N110			GN			LEX-3320	word-sense-glosses:24
