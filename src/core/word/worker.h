@@ -116,6 +116,9 @@ public:
     // in て). The desire forms (たい, 言いてえ) and a て the sound stage put before an ellipsis
     // (戦い…) do not count.
     bool TeAfterWaStem(std::string_view stem, std::string_view after) const;
+    // Whether the godan e-row form that record matched before 、 is also an ichidan stem of its
+    // last kanji (砕け、, 入れ、), so a longer godan record does not take it.
+    bool IchidanBeforeComma(const Detail& d, std::string_view text, int offset, const Record* record) const;
 
     // Allocation; every field is set.
     Record* NewRecord();

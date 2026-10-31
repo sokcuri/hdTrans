@@ -1,0 +1,27 @@
+# 규칙: GRM-142
+rule	input	expected	kind	layer
+conjugation:e-form-comma	雨風が凌げ、冬でも凍えることのない寝床。	has:비바람을 견딜 수 있어 겨울이라도	fix	conjugation
+conjugation:e-form-comma	これで金が稼げ、家族も養える。	이것으로 돈을 벌 수 있어 가족도 기를 수 있다.	fix	conjugation
+conjugation:e-form-comma	この壁なら攻撃が防げ、時間も稼げる。	이 벽이라면 공격을 막을 수 있어 시간도 벌 수 있다.	fix	conjugation
+conjugation:e-form-comma	子供でも簡単に記事が書け、評判になった。	has:기사를 쓸 수 있어	fix	conjugation
+conjugation:e-form-comma	撃て、撃て！	쏘아라, 쏘아라!	fix	conjugation
+conjugation:e-form-comma	撃て、てぇーっ！	쏘아라, 발사~!	fix	conjugation
+conjugation:e-form-comma	「くそっ……戻れ、戻れっ……！」	「젠장……돌아와라, 돌아와라……!」	fix	conjugation
+conjugation:e-form-comma	動け、動け。	움직여라, 움직여라.	fix	conjugation
+conjugation:e-form-comma	さあ急げ、置いて行くぞ！	자 서둘러라, 두고 가겠어!	fix	conjugation
+conjugation:e-form-comma	……喜べ、ベスト体重だ。	……기뻐해라, 베스트 체중이다.	fix	conjugation
+conjugation:e-form-comma	≪…よく聞け、９０２９。	≪…잘 들어라, 9029.	fix	conjugation
+conjugation:e-form-comma	「一言でいうと空気読め、に尽きる」	has:공기 읽어라,	fix	conjugation
+conjugation:e-form-comma	もっと本を読め、本を！	좀 더 책을 읽어라, 책을!	fix	conjugation
+conjugation:e-form-comma	「何をしたのか話せ、でなければ助けられない」	has:뭘 했는지 이야기해라,	fix	conjugation
+conjugation:e-form-comma	ぶっ放せ、Fuoooco!	발사해라, Fuoooco!	fix	conjugation
+conjugation:e-form-comma	内に流せ、わかったな！	안에 흘려라, 알았군!	fix	conjugation
+conjugation:e-form-comma	明日帰れ、な。	has:내일 돌아가라	fix	conjugation
+conjugation:e-form-comma	瓶は粉々に砕け、その瓶に	병은 산산조각에 부서져 그 병에	keep	conjugation
+conjugation:e-form-comma	密書を懐に入れ、仲間達が作った僅かな隙を見て	has:넣어	keep	conjugation
+conjugation:e-form-comma	「ちょっと待て、もっと大それたことを？」	「잠깐 기다려, 좀 더 엄청난 일을?」	keep	conjugation
+conjugation:e-form-comma	見ろ、あれを。	봐라, 저것을.	keep	conjugation
+conjugation:e-form-comma	雨を凌ぎ、夜を待った。	비를 견디고, 밤을 기다렸다.	keep	conjugation
+conjugation:e-form-comma	雨風が凌げる場所だ。	비바람을 견딜 수 있는 장소다.	keep	conjugation
+conjugation:e-form-comma	雨風が凌げない。	비바람을 견딜 수 없다.	keep	conjugation
+conjugation:e-form-comma	それ、本当？	그것, 정말?	keep	conjugation

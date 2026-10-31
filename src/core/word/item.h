@@ -91,6 +91,8 @@ struct Detail {
     bool tailLengthCheck = false;
     bool causativePassive = false;
     bool dialect = false;  // dialect forms may be read (the と form of kBranchTo)
+    // A godan e-row form before 、 (凌げ、, 急げ、): 0 no verb, 1 the potential, 2 the imperative.
+    int commaEForm = 0;
 
     // The conjugation branch 0..17 or kBranchTo of a verb; '0', 'x' or 'X' for adjectives; -1 unset.
     int kind = -1;
