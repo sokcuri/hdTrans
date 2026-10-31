@@ -22406,7 +22406,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 臓器提供	장기기증	N110			GN						ぞうきていきょう	w:22354
 臓物	내장	N110			GN				xxx llm	1		w:22355
 臘梅	납매	N110			GN						ろうばい	w:22356
-臥せ	&J4@	M428			GN				llm		ふせる	w:22357
+臥せ	앓아&J4@	M428			GN			LEX-149 앓아눕다: 臥せる is lying ill in bed	llm		ふせる	w:22357
 臥龍	와룡	N110			GN						がりゅう	w:22358
 臨床心理士	임상심리사	N110	VHn		GN						りんしょうしんりし	w:22359
 臨時首都	임시수도	N110			GN						りんじしゅと	w:22360
@@ -27155,3 +27155,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 半ばかり	반 정도	N110	XXX		GN							w:28967
 承太郎	죠타로	N130	QPNVHn	Wb	GN							w:28974
 ゆら	흔들&AA@	M442			GN			LEX-94: 가나로 쓴 揺らぐ의 어간(ゆらいだ 흔들렸다)			ゆらぐ	w:28975
+舐め	얕&AY@	M427			GN			LEX-147 얕보다: 舐める of a person or in a scolding question				word:cue:nameru

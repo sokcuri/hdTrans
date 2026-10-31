@@ -740,5 +740,22 @@ cx:ending-presumptive-rare:10	GRM-10	&&6 F+0== "conjugating" U+0== "よう" Y+0=
 //= doumo-greeting	after Select 75	The どうも of a greeting: before thanks or an apology it is 정말 (どうもありがとう 정말 고마워, どうもすみません 정말 죄송합니다); before 初めまして it is the greeting 안녕하세요 (どうも初めまして 안녕하세요 처음 뵙겠습니다).
 cx:doumo-greeting:10	LEX-73	&&2 S+0== "どうも" ||5 S+1== "ありがとう" S+1== "ありがとうございます" S+1== "ありがと" S+1== "すみません" S+1== "失礼"	set-target "정말"	どうもありがとう 정말 고마워
 cx:doumo-greeting:20	LEX-73	&&2 S+0== "どうも" ||2 S+1== "初めまして" S+1== "はじめまして"	set-target "안녕하세요"	どうも初めまして 안녕하세요 처음 뵙겠습니다
+//= cue-sense	after Select 17	A word whose sense a word, ending or mark right next to it decides (spec LEX-140 to LEX-149): 馬鹿な standing alone is 말도 안 돼; うち after a progressive before に is 동안; the verb before 切れ read 수 있다 takes 을 (다 참을 수 없고), and なくなる after it is 없게 되다; 手前 after a past or progressive before a comma is 이상, before も 체면; 近く after が or も before a comma is 가깝고; a passive 飲む after に is 삼키다; 舐める of a person (のことを) or in a progressive question with no object is 얕보다; 後 before は after a pause is 나머지; 黒 alone (not after a noun) before a particle is 검은색, before の and a noun 검은; すらりと before 伸びる is 쭉 and that 伸びる 뻗다.
+cx:cue-sense:20	LEX-140	&&4 S+0== "馬鹿" I+0== "馬鹿な" !1 F+0== "described-noun" ||3 F+0== "utterance-end" F+0== "sentence-end" F+1== "after-pause"	set-target "말도 안 돼" set-ending ""	馬鹿な……嘘だろ 말도 안 돼……
+cx:cue-sense:30	LEX-141	&&4 S+0== "うち" L+0== "집" S+1== "に" Y-1== "R고 있는"	set-target "동안"	考えてるうちに 생각하고 있는 동안에
+cx:cue-sense:35	LEX-141	&&5 S+0== "う" U+0== "ち" F+0== "verb" S+1== "に" Y-1== "R고 있는"	set-target "동안" set-ending ""	考えてるうちに 생각하고 있는 동안에
+cx:cue-sense:50	LEX-143	&&4 F+0== "verb" S+1== "切れ" L+1== "수 있다" Y+0== "6"	set-ending "3"	耐え切れず 다 참을 수 없고
+cx:cue-sense:55	LEX-143	&&4 S+0== "なくな" D+0== "않게 &C6@" S-1== "切れ" L-1== "수 있다"	set-target "없게 &C6@" set-target@-1 "수" set-ending@-1 ""	耐え切れなくなった 다 참을 수 없게 되었다
+cx:cue-sense:60	LEX-144	&&4 S+0== "手前" L+0== "앞" S+1== "、" ||4 I-1== "Rた" I-1== "Rだ" I-1== "Rている" I-1== "Rてる"	set-target "이상"	誓った手前、 맹세한 이상,
+cx:cue-sense:70	LEX-144	&&4 S+0== "手前" L+0== "앞" S+1== "Lも" ||4 I-1== "Rた" I-1== "Rだ" I-1== "Rている" I-1== "Rてる"	set-target "체면"	言った手前もある 말한 체면도 있다
+cx:cue-sense:80	LEX-145	&&4 S+0== "近く" ||2 S-1== "が" S-1== "も" P-2== "1" ||2 S+1== "、" S+1== "，"	set-target "가깝고"	年齢が近く、 나이가 가깝고,
+cx:cue-sense:90	LEX-146	&&4 B+0== "飲む" F+0== "passive" S-1== "に" C+0== "삼키다"	select-lemma "삼키다"	闇に飲まれて 어둠에 삼켜져
+cx:cue-sense:100	LEX-147	&&4 B+0== "舐める" S-1== "のことを" C+0== "얕보다" !1 L+0== "얕보다"	select-lemma "얕보다"	あの子達のことを舐めている 그 아이들을 얕보고 있다
+cx:cue-sense:110	LEX-147	&&5 B+0== "舐める" Y+0== "L1고 있" F+0== "question-after" C+0== "얕보다" !1 :object-in-clause	select-lemma "얕보다"	舐めてるのか？ 얕보고 있는 거야?
+cx:cue-sense:120	LEX-148	&&4 S+0== "後" L+0== "후" S+1== "は" F+0== "after-pause"	select-lemma "나머지"	……後は、ふたりで 나머지는, 둘이서
+cx:cue-sense:130	LEX-148	&&4 S+0== "黒" L+0== "흑" !1 P-1== "1" ||7 S+1== "から" S+1== "に" S+1== "を" S+1== "が" S+1== "は" S+1== "で" S+1== "も"	set-target "검은색"	黒を基調とした 검은색을 기조로 한
+cx:cue-sense:140	LEX-148	&&5 S+0== "黒" L+0== "흑" !1 P-1== "1" S+1== "の" P+2== "1"	set-target "검은" set-target@+1 " "	黒の扇 검은 부채
+cx:cue-sense:150	LEX-149	&&2 S+0== "すらりと" B+1== "伸びる"	set-target "쭉"	すらりと伸びた 쭉 뻗은
+cx:cue-sense:160	LEX-149	&&3 B+0== "伸びる" S-1== "すらりと" C+0== "뻗다"	select-lemma "뻗다"	すらりと伸びた 쭉 뻗은
 //= chinyu-narration	after Select 115	The 親友 read 절친 in a dialogue is 친한 친구 in the narration of a document that writes its dialogue in 「」 (house style: 절친 is a spoken word).
 cx:chinyu-narration:10	LEX-3	&&3 S+0== "親友" D+0== "절친" F+0== "narration"	set-target "친한 친구"	親友の家に行った。 친한 친구의 집에 갔다.
