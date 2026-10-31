@@ -142,9 +142,16 @@ private:
         return (*joins_)(before, after, word);
     }
 
-    // SpaceWord::Spelled on the text from the piece at from to the space at i and the text after it,
-    // which reaches over single spaces.
-    bool Spelled(size_t from, size_t i) const {
+    // Whether the character before at is a mark: not a space, a digit or a letter (1人 間 is a count).
+    bool MarkBefore(size_t at) const {
+        const char32_t c = s_[at - 1];
+        const char32_t a = c >= U'！' && c <= U'～' ? c - 0xFEE0 : c;
+        return !text::IsSpace(c) && !(a >= U'0' && a <= U'9') && !(a >= U'A' && a <= U'Z') && !(a >= U'a' && a <= U'z');
+    }
+
+    // SpaceWord::Spelled (or word) on the text from the piece at from to the space at i and the text
+    // after it, which reaches over single spaces.
+    bool Spelled(size_t from, size_t i, SpaceWord word = SpaceWord::Spelled) const {
         const auto blank = [](char32_t c) { return c != '\n' && c != '\r' && text::IsSpace(c); };
         size_t to = i + 1;
         while (to < s_.size() && to < i + 25 &&
@@ -158,7 +165,7 @@ private:
         for (size_t k = i + 1; k < to; k++) {
             if (!blank(s_[k])) text::AppendRune(after, s_[k]);
         }
-        return (*joins_)(before, after, SpaceWord::Spelled);
+        return (*joins_)(before, after, word);
     }
 
     // Whether the space at i, left out of the Japanese token being built, parts two words
@@ -203,6 +210,12 @@ private:
             wordAfter = to - from > 1;
         }
         if (run >= (kanji ? 2u : 3u) && (!kanji || !wordAfter || Spelled(kanjiStart, i))) return false;
+        // A kanji standing alone at the start or right after a mark before the space, that starts a
+        // kanji noun of the dictionary ending in the piece after it (紅 白って 홍백), spells that
+        // noun out (SpaceWord::Compound).
+        if (kanji && run == 1 && (start == 0 || MarkBefore(start)) && Spelled(start, i, SpaceWord::Compound)) {
+            return false;
+        }
         if (Joins(i, SpaceWord::Filler)) return true;
         // A piece that starts with a small kana or a long mark goes on with the word before it
         // (消す っていう).
