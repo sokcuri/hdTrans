@@ -1,0 +1,9 @@
+#! grid-disputes
+# Where the grid keeps its house form against the N5 lexicon until the lexicon owner and the lead settle it.
+# field ko: when the lexicon sense chosen for the grid's context is `lexicon`, the grid writes `house`; field te: the
+# lexicon's te value (* = any, also a missing one) is replaced by `house`.
+ja	field	lexicon	house	reason
+飲む	ko	먹다	마시다	sense 2 (obj=@medicine|@food) fires on drinks because @drink sits under @food
+知る	te	go	simple	N5-33: 知っている → 알다 (state), not 알고 있다
+買う	te	past	go	買っている is progressive or habitual in N5 (사고 있다), not 샀다
+高い	ko	높다	비싸다	a price: sense 2 (subj=@thing|@accessory|@money|@price) misses vehicles (車は時計より高い)

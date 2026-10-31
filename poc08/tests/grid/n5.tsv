@@ -1818,55 +1818,55 @@ n5-vfinal-1816	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-m
 n5-vfinal-1817	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「開けませんか。」	「열지 않을래요?」
 n5-vfinal-1818	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達から本を借りる。	친구에게서 책을 빌린다.
 n5-vfinal-1819	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達は先生から傘を借りる。	친구는 선생님에게서 우산을 빌린다.
-n5-vfinal-1820	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	友達から本を借りている。	친구에게서 책을 빌리고 있다.
+n5-vfinal-1820	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	友達から本を借りている。	친구에게서 책을 빌렸다.
 n5-vfinal-1821	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	友達から本を借りない。	친구에게서 책을 빌리지 않는다.
 n5-vfinal-1822	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	友達は先生から傘を借りない。	친구는 선생님에게서 우산을 빌리지 않는다.
-n5-vfinal-1823	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	友達から本を借りていない。	친구에게서 책을 빌리고 있지 않다.
+n5-vfinal-1823	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	友達から本を借りていない。	친구에게서 책을 빌리지 않았다.
 n5-vfinal-1824	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達から本を借りた。	친구에게서 책을 빌렸다.
 n5-vfinal-1825	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達は先生から傘を借りた。	친구는 선생님에게서 우산을 빌렸다.
-n5-vfinal-1826	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	友達から本を借りていた。	친구에게서 책을 빌리고 있었다.
+n5-vfinal-1826	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	友達から本を借りていた。	친구에게서 책을 빌렸다.
 n5-vfinal-1827	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達から本を借りなかった。	친구에게서 책을 빌리지 않았다.
 n5-vfinal-1828	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は先生から傘を借りなかった。	친구는 선생님에게서 우산을 빌리지 않았다.
-n5-vfinal-1829	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	友達から本を借りていなかった。	친구에게서 책을 빌리고 있지 않았다.
+n5-vfinal-1829	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	友達から本を借りていなかった。	친구에게서 책을 빌리지 않았다.
 n5-vfinal-1830	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りる。」	「친구한테서 책을 빌려.」
 n5-vfinal-1831	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は先生から傘を借りる。」	「친구는 선생님한테서 우산을 빌려.」
-n5-vfinal-1832	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている。」	「친구한테서 책을 빌리고 있어.」
+n5-vfinal-1832	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている。」	「친구한테서 책을 빌렸어.」
 n5-vfinal-1833	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りない。」	「친구한테서 책을 안 빌려.」
 n5-vfinal-1834	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は先生から傘を借りない。」	「친구는 선생님한테서 우산을 안 빌려.」
-n5-vfinal-1835	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない。」	「친구한테서 책을 안 빌리고 있어.」
+n5-vfinal-1835	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない。」	「친구한테서 책을 안 빌렸어.」
 n5-vfinal-1836	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達から本を借りた。」	「친구한테서 책을 빌렸어.」
 n5-vfinal-1837	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達は先生から傘を借りた。」	「친구는 선생님한테서 우산을 빌렸어.」
-n5-vfinal-1838	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた。」	「친구한테서 책을 빌리고 있었어.」
+n5-vfinal-1838	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた。」	「친구한테서 책을 빌렸어.」
 n5-vfinal-1839	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達から本を借りなかった。」	「친구한테서 책을 안 빌렸어.」
 n5-vfinal-1840	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は先生から傘を借りなかった。」	「친구는 선생님한테서 우산을 안 빌렸어.」
-n5-vfinal-1841	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった。」	「친구한테서 책을 안 빌리고 있었어.」
+n5-vfinal-1841	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった。」	「친구한테서 책을 안 빌렸어.」
 n5-vfinal-1842	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りる？」	「친구한테서 책을 빌려?」
-n5-vfinal-1843	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている？」	「친구한테서 책을 빌리고 있어?」
+n5-vfinal-1843	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている？」	「친구한테서 책을 빌렸어?」
 n5-vfinal-1844	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りない？」	「친구한테서 책을 안 빌려?」
-n5-vfinal-1845	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない？」	「친구한테서 책을 안 빌리고 있어?」
+n5-vfinal-1845	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない？」	「친구한테서 책을 안 빌렸어?」
 n5-vfinal-1846	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「友達から本を借りた？」	「친구한테서 책을 빌렸어?」
-n5-vfinal-1847	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた？」	「친구한테서 책을 빌리고 있었어?」
+n5-vfinal-1847	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた？」	「친구한테서 책을 빌렸어?」
 n5-vfinal-1848	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「友達から本を借りなかった？」	「친구한테서 책을 안 빌렸어?」
-n5-vfinal-1849	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった？」	「친구한테서 책을 안 빌리고 있었어?」
+n5-vfinal-1849	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった？」	「친구한테서 책을 안 빌렸어?」
 n5-vfinal-1850	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達から本を借ります。」	「친구한테서 책을 빌려요.」
 n5-vfinal-1851	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は先生から傘を借ります。」	「친구는 선생님한테서 우산을 빌려요.」
-n5-vfinal-1852	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りています。」	「친구한테서 책을 빌리고 있어요.」
+n5-vfinal-1852	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りています。」	「친구한테서 책을 빌렸어요.」
 n5-vfinal-1853	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りません。」	「친구한테서 책을 안 빌려요.」
 n5-vfinal-1854	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は先生から傘を借りません。」	「친구는 선생님한테서 우산을 안 빌려요.」
-n5-vfinal-1855	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていません。」	「친구한테서 책을 안 빌리고 있어요.」
+n5-vfinal-1855	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていません。」	「친구한테서 책을 안 빌렸어요.」
 n5-vfinal-1856	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達から本を借りました。」	「친구한테서 책을 빌렸어요.」
 n5-vfinal-1857	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は先生から傘を借りました。」	「친구는 선생님한테서 우산을 빌렸어요.」
-n5-vfinal-1858	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていました。」	「친구한테서 책을 빌리고 있었어요.」
+n5-vfinal-1858	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていました。」	「친구한테서 책을 빌렸어요.」
 n5-vfinal-1859	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達から本を借りませんでした。」	「친구한테서 책을 안 빌렸어요.」
 n5-vfinal-1860	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は先生から傘を借りませんでした。」	「친구는 선생님한테서 우산을 안 빌렸어요.」
-n5-vfinal-1861	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでした。」	「친구한테서 책을 안 빌리고 있었어요.」
+n5-vfinal-1861	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでした。」	「친구한테서 책을 안 빌렸어요.」
 n5-vfinal-1862	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りますか。」	「친구한테서 책을 빌려요?」
-n5-vfinal-1863	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りていますか。」	「친구한테서 책을 빌리고 있어요?」
-n5-vfinal-1864	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていませんか。」	「친구한테서 책을 안 빌리고 있어요?」
+n5-vfinal-1863	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りていますか。」	「친구한테서 책을 빌렸어요?」
+n5-vfinal-1864	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていませんか。」	「친구한테서 책을 안 빌렸어요?」
 n5-vfinal-1865	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「友達から本を借りましたか。」	「친구한테서 책을 빌렸어요?」
-n5-vfinal-1866	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていましたか。」	「친구한테서 책을 빌리고 있었어요?」
+n5-vfinal-1866	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていましたか。」	「친구한테서 책을 빌렸어요?」
 n5-vfinal-1867	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「友達から本を借りませんでしたか。」	「친구한테서 책을 안 빌렸어요?」
-n5-vfinal-1868	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでしたか。」	「친구한테서 책을 안 빌리고 있었어요?」
+n5-vfinal-1868	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでしたか。」	「친구한테서 책을 안 빌렸어요?」
 n5-vfinal-1869	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りてください。」	「친구한테서 책을 빌려 주세요.」
 n5-vfinal-1870	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りないでください。」	「친구한테서 책을 빌리지 마세요.」
 n5-vfinal-1871	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りましょう。」	「친구한테서 책을 빌리죠.」
@@ -5373,12 +5373,12 @@ n5-point-5371	block=point;point=N5-42;row=p42b;ctx.polite=dialogue.plain;stype=s
 n5-point-5372	block=point;point=N5-42;row=p42b;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「名前を大きく書いた。」	「이름을 크게 썼어.」
 n5-point-5373	block=point;point=N5-42;row=p42b;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「名前を大きく書きます。」	「이름을 크게 써요.」
 n5-point-5374	block=point;point=N5-42;row=p42b;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「名前を大きく書きました。」	「이름을 크게 썼어요.」
-n5-point-5375	block=point;point=N5-42;row=p42c;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	早く来る。	빨리 온다.
-n5-point-5376	block=point;point=N5-42;row=p42c;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	早く来た。	빨리 왔다.
-n5-point-5377	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「早く来る。」	「빨리 와.」
-n5-point-5378	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「早く来た。」	「빨리 왔어.」
-n5-point-5379	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「早く来ます。」	「빨리 와요.」
-n5-point-5380	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「早く来ました。」	「빨리 왔어요.」
+n5-point-5375	block=point;point=N5-42;row=p42c;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	早く来る。	빠르게 온다.
+n5-point-5376	block=point;point=N5-42;row=p42c;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	早く来た。	빠르게 왔다.
+n5-point-5377	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「早く来る。」	「빠르게 와.」
+n5-point-5378	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「早く来た。」	「빠르게 왔어.」
+n5-point-5379	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「早く来ます。」	「빠르게 와요.」
+n5-point-5380	block=point;point=N5-42;row=p42c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「早く来ました。」	「빠르게 왔어요.」
 n5-point-5381	block=point;point=N5-42;row=p42d;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	名前を小さく書く。	이름을 작게 쓴다.
 n5-point-5382	block=point;point=N5-42;row=p42d;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	名前を小さく書いた。	이름을 작게 썼다.
 n5-point-5383	block=point;point=N5-42;row=p42d;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「名前を小さく書く。」	「이름을 작게 써.」
@@ -5436,9 +5436,9 @@ n5-point-5434	block=point;point=N5-52;row=p52d;ctx.polite=dialogue.masu;stype=st
 n5-point-5435	block=point;point=N5-52;row=p52e;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	もう宿題をした。	벌써 숙제를 했다.
 n5-point-5436	block=point;point=N5-52;row=p52e;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「もう宿題をした。」	「벌써 숙제를 했어.」
 n5-point-5437	block=point;point=N5-52;row=p52e;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「もう宿題をしました。」	「벌써 숙제를 했어요.」
-n5-point-5438	block=point;point=N5-52;row=p52f;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	もう来ない。	더 이상 오지 않는다.
-n5-point-5439	block=point;point=N5-52;row=p52f;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「もう来ない。」	「더 이상 안 와.」
-n5-point-5440	block=point;point=N5-52;row=p52f;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「もう来ません。」	「더 이상 안 와요.」
+n5-point-5438	block=point;point=N5-52;row=p52f;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	もう来ない。	이제 오지 않는다.
+n5-point-5439	block=point;point=N5-52;row=p52f;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「もう来ない。」	「이제 안 와.」
+n5-point-5440	block=point;point=N5-52;row=p52f;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「もう来ません。」	「이제 안 와요.」
 n5-point-5441	block=point;point=N5-53;row=p53a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	これは本だ。	이것은 책이다.
 n5-point-5442	block=point;point=N5-53;row=p53a;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	これは本だった。	이것은 책이었다.
 n5-point-5443	block=point;point=N5-53;row=p53a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「これは本だ。」	「이건 책이야.」

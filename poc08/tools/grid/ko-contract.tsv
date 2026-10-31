@@ -1,11 +1,9 @@
 #! grid-ko-contract
-# Word forms of pronouns and question words by level (N5-H9, N5-H12, N5-H16). particle - = the word itself; poss =
+# Word forms of pronouns and question words by level that the lexicon sense does not give (N5-H9, N5-H12;
+# 私 → 나 / 저 is the lexicon's register cue, N5-H16). particle - = the word itself; poss =
 # the word before a noun for N の. Fused forms with a particle (이건, 뭘, 난, 내가, 누가, 걸) are not here: they come
 # from the generator's ko/spoken.tsv (STYLE §7), dialogue only except its always rows.
 ja	level	particle	ko	spec
-私	haera	-	나	N5-H16
-私	hae	-	나	N5-H16
-私	haeyo	-	저	N5-H16
 私	haera	poss	내	N5-H9
 私	hae	poss	내	N5-H9
 私	haeyo	poss	제	N5-H9

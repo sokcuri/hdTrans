@@ -4,171 +4,172 @@
 #   gcls    grid predicate class (the pred dimension) or noun/word class: godan-u … godan-ru, godan-ku-iku, ichidan,
 #           suru, kuru, sahen (noun + する; ko is the noun, the Korean verb is ko + 하다), i-adj, na-adj, noun, aru,
 #           iru, noun-cop (a noun the grid also uses as a predicate), noun, pron, adn, adv, advadj, qword, counter
-#   kcls    Korean class: reg, ㄹ, ㄷ, ㅂ, 르, 으, ㅎ, ㅅ, 하다 (a 하다 verb whose noun splits off before 안: 공부 안 해), V
-#           (a Korean verb glossing a non-verb), X (있다/없다), C (copula host)
+#   kpos    V: a non-verb glossed by a Korean verb (好き → 좋아하다, so 좋아한다, 좋아하지 않는다); - otherwise.
+#           The Korean gloss, class (kcls) and ている realization (te) come from the N5 lexicon; the ko column here
+#           is used only for lemmas the lexicon does not have.
 #   write   the written stem used in sentences (dictionary form)
 #   gframe  argument frame in frames.tsv
 #   gflags  noimp (no request/prohibition/invitation), noteiru (no ている cell), teiru-pos (positive only with ている,
 #           negative only simple: 知っている / 知らない), neg=WORD (suppletive Korean negative), time=past|future
 #           (a time noun only with past / nonpast)
-ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note	gcls	kcls	write	gframe	gflags
-買う	かう	v5	1	사다			vol=+ asp=activity	-	g	パンを買う → 빵을 사다	godan-u	reg	買う	o-buy	-
-会う	あう	v5	1	만나다		に=을	vol=+ asp=activity	-	g	友達に会う → 친구를 만나다	godan-u	reg	会う	d-meet	-
-歌う	うたう	v5	1	부르다			vol=+ asp=activity	-	g	歌を歌う → 노래를 부르다	godan-u	르	歌う	o-song	-
-洗う	あらう	v5	1	씻다			vol=+ asp=activity	-	g	手を洗う → 손을 씻다	godan-u	reg	洗う	o-wash	-
-手伝う	てつだう	v5	1	돕다			vol=+ asp=activity	-	g	母を手伝う → 어머니를 돕다	godan-u	ㅂ	手伝う	o-help	-
-書く	かく	v5	1	쓰다			vol=+ asp=activity	-	g	手紙を書く → 편지를 쓰다	godan-ku	으	書く	o-write	-
-聞く	きく	v5	1	듣다	obj=@sound		vol=+ asp=activity	-	g	音楽を聞く → 음악을 듣다	godan-ku	ㄷ	聞く	o-listen	-
-行く	いく	v5	1	가다			vol=+ asp=change pclass=motion	-	g	学校へ行く → 학교에 가다	godan-ku-iku	reg	行く	g-place	-
-歩く	あるく	v5	1	걷다			vol=+ asp=activity pclass=motion	-	g	公園を歩く → 공원을 걷다	godan-ku	ㄷ	歩く	p-path	-
-働く	はたらく	v5	1	일하다			vol=+ asp=activity	-	g	会社で働く → 회사에서 일하다	godan-ku	하다	働く	l-work	-
-泳ぐ	およぐ	v5	1	수영하다			vol=+ asp=activity	-	g	海で泳ぐ → 바다에서 수영하다	godan-gu	하다	泳ぐ	l-swim	-
-急ぐ	いそぐ	v5	1	서두르다			vol=+ asp=activity	-	g	急ぐ → 서두르다	godan-gu	르	急ぐ	-	-
-話す	はなす	v5	1	이야기하다			vol=+ asp=activity	-	g	友達と話す → 친구와 이야기하다	godan-su	하다	話す	c-person	-
-消す	けす	v5	1	끄다	obj=@device		vol=+ asp=activity	-	g	電気を消す → 불을 끄다	godan-su	으	消す	o-light	noteiru
-待つ	まつ	v5	1	기다리다			vol=+ asp=activity	-	g	友達を待つ → 친구를 기다리다	godan-tsu	reg	待つ	o-person	-
-立つ	たつ	v5	1	서다			vol=+ asp=change pclass=posture	-	g	先生が立つ → 선생님이 서다	godan-tsu	reg	立つ	s-person	-
-死ぬ	しぬ	v5	1	죽다			vol=- asp=change	-	g	犬が死ぬ → 개가 죽다	godan-nu	reg	死ぬ	s-animal	-
-遊ぶ	あそぶ	v5	1	놀다			vol=+ asp=activity	-	g	公園で遊ぶ → 공원에서 놀다	godan-bu	ㄹ	遊ぶ	l-play	-
-呼ぶ	よぶ	v5	1	부르다	obj=@person		vol=+ asp=activity	-	g	先生を呼ぶ → 선생님을 부르다	godan-bu	르	呼ぶ	o-person	noteiru
-読む	よむ	v5	1	읽다			vol=+ asp=activity	-	g	本を読む → 책을 읽다	godan-mu	reg	読む	o-read	-
-飲む	のむ	v5	1	마시다	obj=@drink		vol=+ asp=activity	-	g	水を飲む → 물을 마시다	godan-mu	reg	飲む	o-drink	-
-住む	すむ	v5	1	살다			vol=+ asp=activity	-	g	東京に住む → 도쿄에 살다	godan-mu	ㄹ	住む	l-live	noimp
-休む	やすむ	v5	1	쉬다			vol=+ asp=activity	-	g	家で休む → 집에서 쉬다	godan-mu	reg	休む	l-rest	-
-作る	つくる	v5	1	만들다			vol=+ asp=activity	-	g	料理を作る → 요리를 만들다	godan-ru	ㄹ	作る	o-make	-
-座る	すわる	v5	1	앉다			vol=+ asp=change pclass=posture	-	g	椅子に座る → 의자에 앉다	godan-ru	reg	座る	l-sit	-
-帰る	かえる	v5	1	돌아가다			vol=+ asp=change pclass=motion	-	g	家に帰る → 집에 돌아가다	godan-ru	reg	帰る	g-home	noteiru
-入る	はいる	v5	1	들어가다			vol=+ asp=change pclass=motion	-	g	部屋に入る → 방에 들어가다	godan-ru	reg	入る	g-room	-
-分かる	わかる	v5	1	알다		が=을	vol=- asp=state	-	g	日本語が分かる → 일본어를 알다	godan-ru	ㄹ	分かる	o-know	noteiru neg=모르다
-知る	しる	v5	1	알다			vol=- asp=state	-	g	先生を知っている → 선생님을 알다	godan-ru	ㄹ	知る	o-person	teiru-pos neg=모르다
-治る	なおる	v5	1	낫다			vol=- asp=change	-	g	風邪が治る → 감기가 낫다	godan-ru	ㅅ	治る	s-illness	noteiru
-食べる	たべる	v1	1	먹다			vol=+ asp=activity	-	g	パンを食べる → 빵을 먹다	ichidan	reg	食べる	o-food	-
-見る	みる	v1	1	보다			vol=+ asp=activity	-	g	映画を見る → 영화를 보다	ichidan	reg	見る	o-watch	-
-寝る	ねる	v1	1	자다			vol=+ asp=activity	-	g	寝る → 자다	ichidan	reg	寝る	-	-
-起きる	おきる	v1	1	일어나다			vol=+ asp=change	-	g	起きる → 일어나다	ichidan	reg	起きる	-	noteiru
-教える	おしえる	v1	1	가르치다			vol=+ asp=activity	-	g	子供に日本語を教える → 아이에게 일본어를 가르치다	ichidan	reg	教える	dt-teach	-
-開ける	あける	v1	1	열다			vol=+ asp=activity	-	g	窓を開ける → 창문을 열다	ichidan	ㄹ	開ける	o-open	noteiru
-借りる	かりる	v1	1	빌리다			vol=+ asp=activity	-	g	友達から本を借りる → 친구에게서 책을 빌리다	ichidan	reg	借りる	src-borrow	-
-為る	する	vs	1	하다			vol=+ asp=activity	-	g	宿題をする → 숙제를 하다	suru	reg	する	o-task	-
-来る	くる	vk	1	오다			vol=+ asp=change pclass=motion	-	g	友達が来る → 친구가 오다	kuru	reg	来る	s-person	-
-勉強	べんきょう	n	1	공부			cls=@activity vol=+ asp=activity	-	g	図書館で勉強する → 도서관에서 공부하다	sahen	하다	勉強	l-study	-
-結婚	けっこん	n	1	결혼			cls=@event vol=+ asp=change-past	-	g	結婚している → 결혼했다	sahen	하다	結婚	-	-
-料理	りょうり	n	1	요리			cls=@food vol=+ asp=activity	-	g	家で料理する → 집에서 요리하다	sahen	하다	料理	l-rest	-
-散歩	さんぽ	n	1	산책			cls=@activity vol=+ asp=activity	-	g	公園で散歩する → 공원에서 산책하다	sahen	하다	散歩	l-play	-
-電話	でんわ	n	1	전화			cls=@device vol=+ asp=activity	-	g	母に電話する → 어머니에게 전화하다	sahen	하다	電話	d-phone	-
-高い	たかい	adj	2	비싸다	subj=@thing|@food		vol=-	-	g	本は高い → 책은 비싸다	i-adj	reg	高い	s-price	-
-安い	やすい	adj	1	싸다			vol=-	-	g	パンは安い → 빵은 싸다	i-adj	reg	安い	s-price	-
-大きい	おおきい	adj	1	크다			vol=-	-	g	鞄は大きい → 가방은 크다	i-adj	으	大きい	s-size	-
-小さい	ちいさい	adj	1	작다			vol=-	-	g	部屋は小さい → 방은 작다	i-adj	reg	小さい	s-size	-
-暑い	あつい	adj	1	덥다			vol=-	-	g	今日は暑い → 오늘은 덥다	i-adj	ㅂ	暑い	s-weather	-
-寒い	さむい	adj	1	춥다			vol=-	-	g	今日は寒い → 오늘은 춥다	i-adj	ㅂ	寒い	s-weather	-
-難しい	むずかしい	adj	1	어렵다			vol=-	-	g	日本語は難しい → 일본어는 어렵다	i-adj	ㅂ	難しい	s-task	-
-楽しい	たのしい	adj	1	즐겁다			vol=-	-	g	学校は楽しい → 학교는 즐겁다	i-adj	ㅂ	楽しい	s-fun	-
-忙しい	いそがしい	adj	1	바쁘다			vol=-	-	g	母は忙しい → 어머니는 바쁘다	i-adj	으	忙しい	s-busy	-
-良い	よい	adj	1	좋다			vol=-	-	g	天気がいい → 날씨가 좋다	i-adj	reg	いい	s-good	-
-遠い	とおい	adj	1	멀다			vol=-	-	g	駅は遠い → 역은 멀다	i-adj	ㄹ	遠い	s-far	-
-白い	しろい	adj	1	하얗다			vol=-	-	g	鞄は白い → 가방은 하얗다	i-adj	ㅎ	白い	s-color	-
-速い	はやい	adj	1	빠르다			vol=-	-	g	車は速い → 차는 빠르다	i-adj	르	速い	s-fast	-
-静か	しずか	na	1	조용하다			vol=-	-	g	図書館は静かだ → 도서관은 조용하다	na-adj	reg	静か	s-quiet	-
-便利	べんり	na	1	편리하다			vol=-	-	g	車は便利だ → 차는 편리하다	na-adj	reg	便利	s-fast	-
-有名	ゆうめい	na	1	유명하다			vol=-	-	g	この店は有名だ → 이 가게는 유명하다	na-adj	reg	有名	s-famous	-
+ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note	gcls	kpos	write	gframe	gflags
+買う	かう	v5	1	사다			vol=+ asp=activity	-	g	パンを買う → 빵을 사다	godan-u	-	買う	o-buy	-
+会う	あう	v5	1	만나다		に=을	vol=+ asp=activity	-	g	友達に会う → 친구를 만나다	godan-u	-	会う	d-meet	-
+歌う	うたう	v5	1	부르다			vol=+ asp=activity	-	g	歌を歌う → 노래를 부르다	godan-u	-	歌う	o-song	-
+洗う	あらう	v5	1	씻다			vol=+ asp=activity	-	g	手を洗う → 손을 씻다	godan-u	-	洗う	o-wash	-
+手伝う	てつだう	v5	1	돕다			vol=+ asp=activity	-	g	母を手伝う → 어머니를 돕다	godan-u	-	手伝う	o-help	-
+書く	かく	v5	1	쓰다			vol=+ asp=activity	-	g	手紙を書く → 편지를 쓰다	godan-ku	-	書く	o-write	-
+聞く	きく	v5	1	듣다	obj=@sound		vol=+ asp=activity	-	g	音楽を聞く → 음악을 듣다	godan-ku	-	聞く	o-listen	-
+行く	いく	v5	1	가다			vol=+ asp=change pclass=motion	-	g	学校へ行く → 학교에 가다	godan-ku-iku	-	行く	g-place	-
+歩く	あるく	v5	1	걷다			vol=+ asp=activity pclass=motion	-	g	公園を歩く → 공원을 걷다	godan-ku	-	歩く	p-path	-
+働く	はたらく	v5	1	일하다			vol=+ asp=activity	-	g	会社で働く → 회사에서 일하다	godan-ku	-	働く	l-work	-
+泳ぐ	およぐ	v5	1	수영하다			vol=+ asp=activity	-	g	海で泳ぐ → 바다에서 수영하다	godan-gu	-	泳ぐ	l-swim	-
+急ぐ	いそぐ	v5	1	서두르다			vol=+ asp=activity	-	g	急ぐ → 서두르다	godan-gu	-	急ぐ	-	-
+話す	はなす	v5	1	이야기하다			vol=+ asp=activity	-	g	友達と話す → 친구와 이야기하다	godan-su	-	話す	c-person	-
+消す	けす	v5	1	끄다	obj=@device		vol=+ asp=activity	-	g	電気を消す → 불을 끄다	godan-su	-	消す	o-light	noteiru
+待つ	まつ	v5	1	기다리다			vol=+ asp=activity	-	g	友達を待つ → 친구를 기다리다	godan-tsu	-	待つ	o-person	-
+立つ	たつ	v5	1	서다			vol=+ asp=change pclass=posture	-	g	先生が立つ → 선생님이 서다	godan-tsu	-	立つ	s-person	-
+死ぬ	しぬ	v5	1	죽다			vol=- asp=change	-	g	犬が死ぬ → 개가 죽다	godan-nu	-	死ぬ	s-animal	-
+遊ぶ	あそぶ	v5	1	놀다			vol=+ asp=activity	-	g	公園で遊ぶ → 공원에서 놀다	godan-bu	-	遊ぶ	l-play	-
+呼ぶ	よぶ	v5	1	부르다	obj=@person		vol=+ asp=activity	-	g	先生を呼ぶ → 선생님을 부르다	godan-bu	-	呼ぶ	o-person	noteiru
+読む	よむ	v5	1	읽다			vol=+ asp=activity	-	g	本を読む → 책을 읽다	godan-mu	-	読む	o-read	-
+飲む	のむ	v5	1	마시다	obj=@drink		vol=+ asp=activity	-	g	水を飲む → 물을 마시다	godan-mu	-	飲む	o-drink	-
+住む	すむ	v5	1	살다			vol=+ asp=activity	-	g	東京に住む → 도쿄에 살다	godan-mu	-	住む	l-live	noimp
+休む	やすむ	v5	1	쉬다			vol=+ asp=activity	-	g	家で休む → 집에서 쉬다	godan-mu	-	休む	l-rest	-
+作る	つくる	v5	1	만들다			vol=+ asp=activity	-	g	料理を作る → 요리를 만들다	godan-ru	-	作る	o-make	-
+座る	すわる	v5	1	앉다			vol=+ asp=change pclass=posture	-	g	椅子に座る → 의자에 앉다	godan-ru	-	座る	l-sit	-
+帰る	かえる	v5	1	돌아가다			vol=+ asp=change pclass=motion	-	g	家に帰る → 집에 돌아가다	godan-ru	-	帰る	g-home	noteiru
+入る	はいる	v5	1	들어가다			vol=+ asp=change pclass=motion	-	g	部屋に入る → 방에 들어가다	godan-ru	-	入る	g-room	-
+分かる	わかる	v5	1	알다		が=을	vol=- asp=state	-	g	日本語が分かる → 일본어를 알다	godan-ru	-	分かる	o-know	noteiru neg=모르다
+知る	しる	v5	1	알다			vol=- asp=state	-	g	先生を知っている → 선생님을 알다	godan-ru	-	知る	o-person	teiru-pos neg=모르다
+治る	なおる	v5	1	낫다			vol=- asp=change	-	g	風邪が治る → 감기가 낫다	godan-ru	-	治る	s-illness	noteiru
+食べる	たべる	v1	1	먹다			vol=+ asp=activity	-	g	パンを食べる → 빵을 먹다	ichidan	-	食べる	o-food	-
+見る	みる	v1	1	보다			vol=+ asp=activity	-	g	映画を見る → 영화를 보다	ichidan	-	見る	o-watch	-
+寝る	ねる	v1	1	자다			vol=+ asp=activity	-	g	寝る → 자다	ichidan	-	寝る	-	-
+起きる	おきる	v1	1	일어나다			vol=+ asp=change	-	g	起きる → 일어나다	ichidan	-	起きる	-	noteiru
+教える	おしえる	v1	1	가르치다			vol=+ asp=activity	-	g	子供に日本語を教える → 아이에게 일본어를 가르치다	ichidan	-	教える	dt-teach	-
+開ける	あける	v1	1	열다			vol=+ asp=activity	-	g	窓を開ける → 창문을 열다	ichidan	-	開ける	o-open	noteiru
+借りる	かりる	v1	1	빌리다			vol=+ asp=activity	-	g	友達から本を借りる → 친구에게서 책을 빌리다	ichidan	-	借りる	src-borrow	-
+為る	する	vs	1	하다			vol=+ asp=activity	-	g	宿題をする → 숙제를 하다	suru	-	する	o-task	-
+来る	くる	vk	1	오다			vol=+ asp=change pclass=motion	-	g	友達が来る → 친구가 오다	kuru	-	来る	s-person	-
+勉強	べんきょう	n	1	공부			cls=@activity vol=+ asp=activity	-	g	図書館で勉強する → 도서관에서 공부하다	sahen	-	勉強	l-study	-
+結婚	けっこん	n	1	결혼			cls=@event vol=+ asp=change-past	-	g	結婚している → 결혼했다	sahen	-	結婚	-	-
+料理	りょうり	n	1	요리			cls=@food vol=+ asp=activity	-	g	家で料理する → 집에서 요리하다	sahen	-	料理	l-rest	-
+散歩	さんぽ	n	1	산책			cls=@activity vol=+ asp=activity	-	g	公園で散歩する → 공원에서 산책하다	sahen	-	散歩	l-play	-
+電話	でんわ	n	1	전화			cls=@device vol=+ asp=activity	-	g	母に電話する → 어머니에게 전화하다	sahen	-	電話	d-phone	-
+高い	たかい	adj	2	비싸다	subj=@thing|@food		vol=-	-	g	本は高い → 책은 비싸다	i-adj	-	高い	s-price	-
+安い	やすい	adj	1	싸다			vol=-	-	g	パンは安い → 빵은 싸다	i-adj	-	安い	s-price	-
+大きい	おおきい	adj	1	크다			vol=-	-	g	鞄は大きい → 가방은 크다	i-adj	-	大きい	s-size	-
+小さい	ちいさい	adj	1	작다			vol=-	-	g	部屋は小さい → 방은 작다	i-adj	-	小さい	s-size	-
+暑い	あつい	adj	1	덥다			vol=-	-	g	今日は暑い → 오늘은 덥다	i-adj	-	暑い	s-weather	-
+寒い	さむい	adj	1	춥다			vol=-	-	g	今日は寒い → 오늘은 춥다	i-adj	-	寒い	s-weather	-
+難しい	むずかしい	adj	1	어렵다			vol=-	-	g	日本語は難しい → 일본어는 어렵다	i-adj	-	難しい	s-task	-
+楽しい	たのしい	adj	1	즐겁다			vol=-	-	g	学校は楽しい → 학교는 즐겁다	i-adj	-	楽しい	s-fun	-
+忙しい	いそがしい	adj	1	바쁘다			vol=-	-	g	母は忙しい → 어머니는 바쁘다	i-adj	-	忙しい	s-busy	-
+良い	よい	adj	1	좋다			vol=-	-	g	天気がいい → 날씨가 좋다	i-adj	-	いい	s-good	-
+遠い	とおい	adj	1	멀다			vol=-	-	g	駅は遠い → 역은 멀다	i-adj	-	遠い	s-far	-
+白い	しろい	adj	1	하얗다			vol=-	-	g	鞄は白い → 가방은 하얗다	i-adj	-	白い	s-color	-
+速い	はやい	adj	1	빠르다			vol=-	-	g	車は速い → 차는 빠르다	i-adj	-	速い	s-fast	-
+静か	しずか	na	1	조용하다			vol=-	-	g	図書館は静かだ → 도서관은 조용하다	na-adj	-	静か	s-quiet	-
+便利	べんり	n	2	편리하다			vol=-	-	g	車は便利だ → 차는 편리하다	na-adj	-	便利	s-fast	-
+有名	ゆうめい	na	1	유명하다			vol=-	-	g	この店は有名だ → 이 가게는 유명하다	na-adj	-	有名	s-famous	-
 好き	すき	na	1	좋아하다		が=을	vol=-	-	g	友達は犬が好きだ → 친구는 개를 좋아하다	na-adj	V	好き	o-like	-
-欲しい	ほしい	adj	1	갖고 싶다		が=을	vol=-	-	g	車が欲しい → 차를 갖고 싶다	hoshii	reg	ほしい	o-want	-
-成る	なる	v5	1	되다			vol=- asp=change	-	g	先生になる → 선생님이 되다	naru	reg	なる	-	-
-有る	ある	v5	1	있다			vol=- asp=state	-	g	部屋に本がある → 방에 책이 있다	aru	X	ある	e-thing	neg=없다
-居る	いる	v1	1	있다			vol=- asp=state	-	g	公園に犬がいる → 공원에 개가 있다	iru	X	いる	e-anim	neg=없다
-学生	がくせい	n	1	학생			cls=@person.role anim=+	-	g	友達は学生だ → 친구는 학생이다	noun-cop	C	学生	s-top	-
-医者	いしゃ	n	1	의사			cls=@person.role anim=+	-	g	母は医者だ → 어머니는 의사다	noun-cop	C	医者	s-top	-
-先生	せんせい	n	1	선생님			cls=@person.higher anim=+	-	g	先生が来る → 선생님이 오다	noun	C	先生	-	-
-会社員	かいしゃいん	n	1	회사원			cls=@person.role anim=+	-	g	父は会社員だ → 아버지는 회사원이다	noun-cop	C	会社員	s-top	-
-友達	ともだち	n	1	친구			cls=@person.close anim=+	-	g	友達と遊ぶ → 친구와 놀다	noun	C	友達	-	-
-母	はは	n	1	어머니			cls=@person.kin anim=+	-	g	母は医者だ → 어머니는 의사다	noun	C	母	-	-
-父	ちち	n	1	아버지			cls=@person.kin anim=+	-	g	父は会社員だ → 아버지는 회사원이다	noun	C	父	-	-
-子供	こども	n	1	아이			cls=@person.child anim=+	-	g	子供に教える → 아이에게 가르치다	noun	C	子供	-	-
-犬	いぬ	n	1	개			cls=@animal anim=+	-	g	犬がいる → 개가 있다	noun	C	犬	-	-
-猫	ねこ	n	1	고양이			cls=@animal anim=+	-	g	猫がいる → 고양이가 있다	noun	C	猫	-	-
-学校	がっこう	n	1	학교			cls=@organization	-	g	学校へ行く → 학교에 가다	noun	C	学校	-	-
-図書館	としょかん	n	1	도서관			cls=@building	-	g	図書館で勉強する → 도서관에서 공부하다	noun	C	図書館	-	-
-公園	こうえん	n	1	공원			cls=@place	-	g	公園で遊ぶ → 공원에서 놀다	noun	C	公園	-	-
-駅	えき	n	1	역			cls=@place	-	g	駅まで歩く → 역까지 걷다	noun	C	駅	-	-
-家	いえ	n	1	집			cls=@house	-	g	家に帰る → 집에 돌아가다	noun	C	家	-	-
-部屋	へや	n	1	방			cls=@place	-	g	部屋に入る → 방에 들어가다	noun	C	部屋	-	-
-海	うみ	n	1	바다			cls=@place	-	g	海で泳ぐ → 바다에서 수영하다	noun	C	海	-	-
-川	かわ	n	1	강			cls=@place	-	g	川で泳ぐ → 강에서 수영하다	noun	C	川	-	-
-東京	とうきょう	n	1	도쿄			cls=@place	-	g	東京に住む → 도쿄에 살다	noun	C	東京	-	-
-大阪	おおさか	n	1	오사카			cls=@place	-	g	大阪に住む → 오사카에 살다	noun	C	大阪	-	-
-教室	きょうしつ	n	1	교실			cls=@place	-	g	教室に学生がいる → 교실에 학생이 있다	noun	C	教室	-	-
-店	みせ	n	1	가게			cls=@building	-	g	店で働く → 가게에서 일하다	noun	C	店	-	-
-会社	かいしゃ	n	1	회사			cls=@organization	-	g	会社で働く → 회사에서 일하다	noun	C	会社	-	-
-椅子	いす	n	1	의자			cls=@furniture	-	g	椅子に座る → 의자에 앉다	noun	C	椅子	-	-
-道	みち	n	1	길			cls=@place	-	g	道を歩く → 길을 걷다	noun	C	道	-	-
-本	ほん	n	1	책			cls=@document	-	g	本を読む → 책을 읽다	noun	C	本	-	-
-新聞	しんぶん	n	1	신문			cls=@document	-	g	新聞を読む → 신문을 읽다	noun	C	新聞	-	-
-手紙	てがみ	n	1	편지			cls=@document	-	g	手紙を書く → 편지를 쓰다	noun	C	手紙	-	-
-名前	なまえ	n	1	이름			cls=@abstract	-	g	名前を書く → 이름을 쓰다	noun	C	名前	-	-
-窓	まど	n	1	창문			cls=@thing	-	g	窓を開ける → 창문을 열다	noun	C	窓	-	-
-ドア	ドア	n	1	문			cls=@thing	-	g	ドアを開ける → 문을 열다	noun	C	ドア	-	-
-傘	かさ	n	1	우산			cls=@thing	-	g	傘を買う → 우산을 사다	noun	C	傘	-	-
-鞄	かばん	n	1	가방			cls=@thing	-	g	鞄を買う → 가방을 사다	noun	C	鞄	-	-
-時計	とけい	n	1	시계			cls=@thing	-	g	時計を買う → 시계를 사다	noun	C	時計	-	-
-車	くるま	n	1	차			cls=@vehicle	-	g	車で行く → 차로 가다	noun	C	車	-	-
-自転車	じてんしゃ	n	1	자전거			cls=@vehicle	-	g	車は自転車より速い → 차는 자전거보다 빠르다	noun	C	自転車	-	-
-写真	しゃしん	n	1	사진			cls=@thing	-	g	写真を見る → 사진을 보다	noun	C	写真	-	-
-映画	えいが	n	1	영화			cls=@show	-	g	映画を見る → 영화를 보다	noun	C	映画	-	-
-歌	うた	n	1	노래			cls=@music	-	g	歌を歌う → 노래를 부르다	noun	C	歌	-	-
-音楽	おんがく	n	1	음악			cls=@music	-	g	音楽を聞く → 음악을 듣다	noun	C	音楽	-	-
-電気	でんき	n	1	불			cls=@device	-	g	電気を消す → 불을 끄다	noun	C	電気	-	-
-テレビ	テレビ	n	1	텔레비전			cls=@device	-	g	テレビを消す → 텔레비전을 끄다	noun	C	テレビ	-	-
-宿題	しゅくだい	n	1	숙제			cls=@task	-	g	宿題をする → 숙제를 하다	noun	C	宿題	-	-
-掃除	そうじ	n	1	청소			cls=@activity	-	g	掃除をする → 청소를 하다	noun	C	掃除	-	-
-日本語	にほんご	n	1	일본어			cls=@language	-	g	日本語で話す → 일본어로 이야기하다	noun	C	日本語	-	-
-ペン	ペン	n	1	펜			cls=@tool	-	g	ペンで書く → 펜으로 쓰다	noun	C	ペン	-	-
-紙	かみ	n	1	종이			cls=@thing	-	g	紙を買う → 종이를 사다	noun	C	紙	-	-
-手	て	n	1	손			cls=@body	-	g	手を洗う → 손을 씻다	noun	C	手	-	-
-顔	かお	n	1	얼굴			cls=@body	-	g	顔を洗う → 얼굴을 씻다	noun	C	顔	-	-
-風邪	かぜ	n	1	감기			cls=@illness	-	g	風邪が治る → 감기가 낫다	noun	C	風邪	-	-
-天気	てんき	n	1	날씨			cls=@weather	-	g	天気がいい → 날씨가 좋다	noun	C	天気	-	-
-ケーキ	ケーキ	n	1	케이크			cls=@food	-	g	ケーキを作る → 케이크를 만들다	noun	C	ケーキ	-	-
-パン	パン	n	1	빵			cls=@food	-	g	パンを食べる → 빵을 먹다	noun	C	パン	-	-
-林檎	りんご	n	1	사과			cls=@food	-	g	りんごを食べる → 사과를 먹다	noun	C	りんご	-	-
-肉	にく	n	1	고기			cls=@food	-	g	肉を食べる → 고기를 먹다	noun	C	肉	-	-
-御飯	ごはん	n	1	밥			cls=@meal	-	g	ご飯を食べる → 밥을 먹다	noun	C	ご飯	-	-
-水	みず	n	1	물			cls=@drink	-	g	水を飲む → 물을 마시다	noun	C	水	-	-
-コーヒー	コーヒー	n	1	커피			cls=@drink	-	g	コーヒーを飲む → 커피를 마시다	noun	C	コーヒー	-	-
-牛乳	ぎゅうにゅう	n	1	우유			cls=@drink	-	g	牛乳を買う → 우유를 사다	noun	C	牛乳	-	-
-今日	きょう	n	1	오늘			cls=@time.point	-	g	今日は暑い → 오늘은 덥다	noun	C	今日	-	-
-明日	あした	n	1	내일			cls=@time.point	-	g	明日行く → 내일 가다	noun	C	明日	-	time=future
-昨日	きのう	n	1	어제			cls=@time.point	-	g	昨日行った → 어제 갔다	noun	C	昨日	-	time=past
-毎日	まいにち	n	1	매일			cls=@time	-	g	毎日歩く → 매일 걷다	noun	C	毎日	-	-
-朝	あさ	n	1	아침			cls=@time.point	-	g	朝から働く → 아침부터 일하다	noun	C	朝	-	-
-夜	よる	n	1	밤			cls=@time.point	-	g	夜まで勉強する → 밤까지 공부하다	noun	C	夜	-	-
-日曜日	にちようび	n	1	일요일			cls=@time.point	-	g	日曜日に行く → 일요일에 가다	noun	C	日曜日	-	-
-私	わたし	n	1	나			cls=@person anim=+	-	g	私は学生だ → 나는 학생이다	pron	C	私	-	-
-私	わたし	n	2	저	register=polite		cls=@person anim=+	-	g	私は学生です → 저는 학생이에요	pron	C	私	-	-
+欲しい	ほしい	adj	1	갖고 싶다		が=을	vol=-	-	g	車が欲しい → 차를 갖고 싶다	hoshii	-	ほしい	o-want	-
+成る	なる	v5	1	되다			vol=- asp=change	-	g	先生になる → 선생님이 되다	naru	-	なる	-	-
+有る	ある	v5	1	있다			vol=- asp=state	-	g	部屋に本がある → 방에 책이 있다	aru	-	ある	e-thing	neg=없다
+居る	いる	v1	1	있다			vol=- asp=state	-	g	公園に犬がいる → 공원에 개가 있다	iru	-	いる	e-anim	neg=없다
+学生	がくせい	n	1	학생			cls=@person.role anim=+	-	g	友達は学生だ → 친구는 학생이다	noun-cop	-	学生	s-top	-
+医者	いしゃ	n	1	의사			cls=@person.role anim=+	-	g	母は医者だ → 어머니는 의사다	noun-cop	-	医者	s-top	-
+先生	せんせい	n	1	선생님			cls=@person.higher anim=+	-	g	先生が来る → 선생님이 오다	noun	-	先生	-	-
+会社員	かいしゃいん	n	1	회사원			cls=@person.role anim=+	-	g	父は会社員だ → 아버지는 회사원이다	noun-cop	-	会社員	s-top	-
+友達	ともだち	n	1	친구			cls=@person.close anim=+	-	g	友達と遊ぶ → 친구와 놀다	noun	-	友達	-	-
+母	はは	n	1	어머니			cls=@person.kin anim=+	-	g	母は医者だ → 어머니는 의사다	noun	-	母	-	-
+父	ちち	n	1	아버지			cls=@person.kin anim=+	-	g	父は会社員だ → 아버지는 회사원이다	noun	-	父	-	-
+子供	こども	n	1	아이			cls=@person.child anim=+	-	g	子供に教える → 아이에게 가르치다	noun	-	子供	-	-
+犬	いぬ	n	1	개			cls=@animal anim=+	-	g	犬がいる → 개가 있다	noun	-	犬	-	-
+猫	ねこ	n	1	고양이			cls=@animal anim=+	-	g	猫がいる → 고양이가 있다	noun	-	猫	-	-
+学校	がっこう	n	1	학교			cls=@organization	-	g	学校へ行く → 학교에 가다	noun	-	学校	-	-
+図書館	としょかん	n	1	도서관			cls=@building	-	g	図書館で勉強する → 도서관에서 공부하다	noun	-	図書館	-	-
+公園	こうえん	n	1	공원			cls=@place	-	g	公園で遊ぶ → 공원에서 놀다	noun	-	公園	-	-
+駅	えき	n	1	역			cls=@place	-	g	駅まで歩く → 역까지 걷다	noun	-	駅	-	-
+家	いえ	n	1	집			cls=@house	-	g	家に帰る → 집에 돌아가다	noun	-	家	-	-
+部屋	へや	n	1	방			cls=@place	-	g	部屋に入る → 방에 들어가다	noun	-	部屋	-	-
+海	うみ	n	1	바다			cls=@place	-	g	海で泳ぐ → 바다에서 수영하다	noun	-	海	-	-
+川	かわ	n	1	강			cls=@place	-	g	川で泳ぐ → 강에서 수영하다	noun	-	川	-	-
+東京	とうきょう	n	1	도쿄			cls=@place	-	g	東京に住む → 도쿄에 살다	noun	-	東京	-	-
+大阪	おおさか	n	1	오사카			cls=@place	-	g	大阪に住む → 오사카에 살다	noun	-	大阪	-	-
+教室	きょうしつ	n	1	교실			cls=@place	-	g	教室に学生がいる → 교실에 학생이 있다	noun	-	教室	-	-
+店	みせ	n	1	가게			cls=@building	-	g	店で働く → 가게에서 일하다	noun	-	店	-	-
+会社	かいしゃ	n	1	회사			cls=@organization	-	g	会社で働く → 회사에서 일하다	noun	-	会社	-	-
+椅子	いす	n	1	의자			cls=@furniture	-	g	椅子に座る → 의자에 앉다	noun	-	椅子	-	-
+道	みち	n	1	길			cls=@place	-	g	道を歩く → 길을 걷다	noun	-	道	-	-
+本	ほん	n	1	책			cls=@document	-	g	本を読む → 책을 읽다	noun	-	本	-	-
+新聞	しんぶん	n	1	신문			cls=@document	-	g	新聞を読む → 신문을 읽다	noun	-	新聞	-	-
+手紙	てがみ	n	1	편지			cls=@document	-	g	手紙を書く → 편지를 쓰다	noun	-	手紙	-	-
+名前	なまえ	n	1	이름			cls=@abstract	-	g	名前を書く → 이름을 쓰다	noun	-	名前	-	-
+窓	まど	n	1	창문			cls=@thing	-	g	窓を開ける → 창문을 열다	noun	-	窓	-	-
+ドア	どあ	n	1	문			cls=@thing	-	g	ドアを開ける → 문을 열다	noun	-	ドア	-	-
+傘	かさ	n	1	우산			cls=@thing	-	g	傘を買う → 우산을 사다	noun	-	傘	-	-
+鞄	かばん	n	1	가방			cls=@thing	-	g	鞄を買う → 가방을 사다	noun	-	鞄	-	-
+時計	とけい	n	1	시계			cls=@thing	-	g	時計を買う → 시계를 사다	noun	-	時計	-	-
+車	くるま	n	1	차			cls=@vehicle	-	g	車で行く → 차로 가다	noun	-	車	-	-
+自転車	じてんしゃ	n	1	자전거			cls=@vehicle	-	g	車は自転車より速い → 차는 자전거보다 빠르다	noun	-	自転車	-	-
+写真	しゃしん	n	1	사진			cls=@thing	-	g	写真を見る → 사진을 보다	noun	-	写真	-	-
+映画	えいが	n	1	영화			cls=@show	-	g	映画を見る → 영화를 보다	noun	-	映画	-	-
+歌	うた	n	1	노래			cls=@music	-	g	歌を歌う → 노래를 부르다	noun	-	歌	-	-
+音楽	おんがく	n	1	음악			cls=@music	-	g	音楽を聞く → 음악을 듣다	noun	-	音楽	-	-
+電気	でんき	n	1	불			cls=@device	-	g	電気を消す → 불을 끄다	noun	-	電気	-	-
+テレビ	てれび	n	1	텔레비전			cls=@device	-	g	テレビを消す → 텔레비전을 끄다	noun	-	テレビ	-	-
+宿題	しゅくだい	n	1	숙제			cls=@task	-	g	宿題をする → 숙제를 하다	noun	-	宿題	-	-
+掃除	そうじ	n	1	청소			cls=@activity	-	g	掃除をする → 청소를 하다	noun	-	掃除	-	-
+日本語	にほんご	n	1	일본어			cls=@language	-	g	日本語で話す → 일본어로 이야기하다	noun	-	日本語	-	-
+ペン	ぺん	n	1	펜			cls=@tool	-	g	ペンで書く → 펜으로 쓰다	noun	-	ペン	-	-
+紙	かみ	n	1	종이			cls=@thing	-	g	紙を買う → 종이를 사다	noun	-	紙	-	-
+手	て	n	1	손			cls=@body	-	g	手を洗う → 손을 씻다	noun	-	手	-	-
+顔	かお	n	1	얼굴			cls=@body	-	g	顔を洗う → 얼굴을 씻다	noun	-	顔	-	-
+風邪	かぜ	n	1	감기			cls=@illness	-	g	風邪が治る → 감기가 낫다	noun	-	風邪	-	-
+天気	てんき	n	1	날씨			cls=@weather	-	g	天気がいい → 날씨가 좋다	noun	-	天気	-	-
+ケーキ	けーき	n	1	케이크			cls=@food	-	g	ケーキを作る → 케이크를 만들다	noun	-	ケーキ	-	-
+パン	ぱん	n	1	빵			cls=@food	-	g	パンを食べる → 빵을 먹다	noun	-	パン	-	-
+林檎	りんご	n	1	사과			cls=@food	-	g	りんごを食べる → 사과를 먹다	noun	-	りんご	-	-
+肉	にく	n	1	고기			cls=@food	-	g	肉を食べる → 고기를 먹다	noun	-	肉	-	-
+御飯	ごはん	n	1	밥			cls=@meal	-	g	ご飯を食べる → 밥을 먹다	noun	-	ご飯	-	-
+水	みず	n	1	물			cls=@drink	-	g	水を飲む → 물을 마시다	noun	-	水	-	-
+コーヒー	こーひー	n	1	커피			cls=@drink	-	g	コーヒーを飲む → 커피를 마시다	noun	-	コーヒー	-	-
+牛乳	ぎゅうにゅう	n	1	우유			cls=@drink	-	g	牛乳を買う → 우유를 사다	noun	-	牛乳	-	-
+今日	きょう	n	1	오늘			cls=@time.point	-	g	今日は暑い → 오늘은 덥다	noun	-	今日	-	-
+明日	あした	n	1	내일			cls=@time.point	-	g	明日行く → 내일 가다	noun	-	明日	-	time=future
+昨日	きのう	n	1	어제			cls=@time.point	-	g	昨日行った → 어제 갔다	noun	-	昨日	-	time=past
+毎日	まいにち	n	1	매일			cls=@time	-	g	毎日歩く → 매일 걷다	noun	-	毎日	-	-
+朝	あさ	n	1	아침			cls=@time.point	-	g	朝から働く → 아침부터 일하다	noun	-	朝	-	-
+夜	よる	n	1	밤			cls=@time.point	-	g	夜まで勉強する → 밤까지 공부하다	noun	-	夜	-	-
+日曜日	にちようび	n	1	일요일			cls=@time.point	-	g	日曜日に行く → 일요일에 가다	noun	-	日曜日	-	-
+私	わたし	n	1	나			cls=@person anim=+	-	g	私は学生だ → 나는 학생이다	pron	-	私	-	-
+私	わたし	n	2	저	register=polite		cls=@person anim=+	-	g	私は学生です → 저는 학생이에요	pron	-	私	-	-
 此の	この	adn	1	이				-	g	この本 → 이 책	adn	-	この	-	-
 其の	その	adn	1	그				-	g	その本 → 그 책	adn	-	その	-	-
 彼の	あの	adn	1	저				-	g	あの店 → 저 가게	adn	-	あの	-	-
 何の	どの	adn	1	어느				-	g	どの本 → 어느 책	adn	-	どの	-	-
-此れ	これ	n	1	이것			cls=@entity	-	g	これは本だ → 이것은 책이다 (dialogue 이거)	pron	C	これ	-	-
-其れ	それ	n	1	그것			cls=@entity	-	g	それは傘だ → 그것은 우산이다 (dialogue 그거)	pron	C	それ	-	-
-彼れ	あれ	n	1	저것			cls=@entity	-	g	あれは駅だ → 저것은 역이다 (dialogue 저거)	pron	C	あれ	-	-
-此処	ここ	n	1	여기			cls=@place	-	g	ここに本がある → 여기에 책이 있다	pron	C	ここ	-	-
-其処	そこ	n	1	거기			cls=@place	-	g	そこに犬がいる → 거기에 개가 있다	pron	C	そこ	-	-
-彼処	あそこ	n	1	저기			cls=@place	-	g	あそこは駅だ → 저기는 역이다	pron	C	あそこ	-	-
-何処	どこ	n	1	어디			cls=@question	-	g	どこへ行きますか → 어디에 가요?	qword	C	どこ	-	-
-何	なに	n	1	뭐			cls=@question	-	g	何を食べますか → 뭘 먹어요? (narration 무엇)	qword	C	何	-	-
-誰	だれ	n	1	누구			cls=@question anim=+	-	g	誰が来ましたか → 누가 왔어요?	qword	C	誰	-	-
-何時	いつ	n	1	언제			cls=@question	-	g	いつ来ますか → 언제 와요?	qword	C	いつ	-	-
+此れ	これ	n	1	이것			cls=@entity	-	g	これは本だ → 이것은 책이다 (dialogue 이거)	pron	-	これ	-	-
+其れ	それ	n	1	그것			cls=@entity	-	g	それは傘だ → 그것은 우산이다 (dialogue 그거)	pron	-	それ	-	-
+彼れ	あれ	n	1	저것			cls=@entity	-	g	あれは駅だ → 저것은 역이다 (dialogue 저거)	pron	-	あれ	-	-
+此処	ここ	n	1	여기			cls=@place	-	g	ここに本がある → 여기에 책이 있다	pron	-	ここ	-	-
+其処	そこ	n	1	거기			cls=@place	-	g	そこに犬がいる → 거기에 개가 있다	pron	-	そこ	-	-
+彼処	あそこ	n	1	저기			cls=@place	-	g	あそこは駅だ → 저기는 역이다	pron	-	あそこ	-	-
+何処	どこ	n	1	어디			cls=@question	-	g	どこへ行きますか → 어디에 가요?	qword	-	どこ	-	-
+何	なに	n	1	뭐			cls=@question	-	g	何を食べますか → 뭘 먹어요? (narration 무엇)	qword	-	何	-	-
+誰	だれ	n	1	누구			cls=@question anim=+	-	g	誰が来ましたか → 누가 왔어요?	qword	-	誰	-	-
+何時	いつ	n	1	언제			cls=@question	-	g	いつ来ますか → 언제 와요?	qword	-	いつ	-	-
 如何	どう	adv	1	어떻게				-	g	どうしますか → 어떻게 해요?	qword	-	どう	-	-
 如何して	どうして	adv	1	왜				-	g	どうして行きませんか → 왜 안 가요?	qword	-	どうして	-	-
 何故	なぜ	adv	1	왜				-	g	なぜ来ませんでしたか → 왜 안 왔어요?	qword	-	なぜ	-	-
-幾ら	いくら	n	1	얼마			cls=@question	-	g	これはいくらですか → 이건 얼마예요?	qword	C	いくら	-	-
-幾つ	いくつ	n	1	몇 개			cls=@question	-	g	りんごはいくつありますか → 사과는 몇 개 있어요?	qword	C	いくつ	-	-
+幾ら	いくら	n	1	얼마			cls=@question	-	g	これはいくらですか → 이건 얼마예요?	qword	-	いくら	-	-
+幾つ	いくつ	n	1	몇 개			cls=@question	-	g	りんごはいくつありますか → 사과는 몇 개 있어요?	qword	-	いくつ	-	-
 余り	あまり	adv	1	별로	pred=-			-	g	あまり食べない → 별로 먹지 않다	adv	-	あまり	-	-
 未だ	まだ	adv	1	아직				-	g	まだ食べていない → 아직 안 먹었다	adv	-	まだ	-	-
 もう	もう	adv	2	벌써	form=ta			-	g	もう宿題をした → 벌써 숙제를 했다	adv	-	もう	-	-
 もう	もう	adv	4	더 이상	pred=-			-	g	もう食べない → 더 이상 먹지 않다	adv	-	もう	-	-
-早い	はやい	adj	4	빨리	form=adv			-	g	早く来る → 빨리 오다	advadj	-	早い	-	-
+早い	はやい	adj	1	빠르다				-	g	早く来る → 빠르게 오다	advadj	-	早い	-	-
 つ	つ	suf	1	개			num=native	-	g	三つ → 세 개; 一つ → 하나	counter	-	つ	-	-
 人	にん	suf	1	명			num=native	-	g	三人 → 세 명	counter	-	人	-	-
 枚	まい	suf	1	장			num=native	-	g	二枚 → 두 장	counter	-	枚	-	-
