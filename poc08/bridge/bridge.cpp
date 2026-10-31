@@ -194,6 +194,12 @@ void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
             cut = at;
         }
         if (cut > t.src.begin && cut < t.src.end) cs->ends.push_back(cut);
+        // inside an inflected word 0.7.x splits a stem key from its ending (と言 + われる): those cuts are its own
+        const bool conjugated = t.pos == Pos::v1 || t.pos == Pos::v5 || t.pos == Pos::vs || t.pos == Pos::vk ||
+                                t.pos == Pos::vz || t.pos == Pos::adj || t.pos == Pos::aux;
+        if (conjugated)
+            for (uint32_t at = t.src.begin + 1; at < t.src.end; at++)
+                if ((static_cast<unsigned char>(text[at]) & 0xC0) != 0x80) cs->ends.push_back(at);
         // a final small tsu marks a clipped, emphatic ending (ないの|っ, いい|っ) unless it is a verb or adjective's
         // sound-changed form (行っ+て)
         const bool inflecting = t.pos == Pos::v1 || t.pos == Pos::v5 || t.pos == Pos::vs || t.pos == Pos::vk ||
