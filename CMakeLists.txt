@@ -296,8 +296,12 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.packs COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts,${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/sample"
             "${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/sample.cases.tsv" --no-current)
+        # The worked examples of docs/packs.md (팩 쓰기 안내), loaded with the shipped dictionaries.
+        add_test(NAME rules.packs.guide COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts,${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/guide"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/guide.cases.tsv" --no-current)
         set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
-            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents rules.packs
+            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents rules.packs rules.packs.guide
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).
