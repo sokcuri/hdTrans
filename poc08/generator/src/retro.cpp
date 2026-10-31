@@ -1043,10 +1043,11 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             }
             for (Level l : innerPolite)
                 if (end != Level::none && l != end) mixedLevels = true;
-            // a later word the reader could not take apart ends the quote: its level is 0.7.x's, not known here
+            // REG-12: the quote's last word must be that sentence end; a later word (그래서?, 사실이야? 유필리아, a word
+            // the reader could not take apart, a connective) ends it at a level not known here
             for (size_t q = nodes.size(); q-- > 0;) {
                 if (quoteOf[q] != qi || nodes[q].kind == Kind::Punct) continue;
-                if (nodes[q].kind != Kind::V) lastChanged = lastChanged && nodes[q].kind != Kind::Raw;
+                if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) lastChanged = false;
                 break;
             }
             levelChanged = levelChanged || lastChanged;

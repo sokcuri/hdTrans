@@ -125,3 +125,7 @@ r18-2	REG-18	fix	d103		yes	「すごいな」	hae	-
 r18-3	REG-18	fix	d104		yes	「疲れたなあ」	hae	-
 r18-4	REG-18	keep	d105		yes	「行くな！」	hae	-
 r18-5	REG-18	keep	d106		yes	「そうかな」	hae	-
+r13-15	REG-13	fix	d107		yes	「みんなを、信じる……か」	haera	-
+r14-13	REG-14	fix	d108		yes	「ララティーナ嬢、わたしの息子たちだ」	haera	-
+r14-14	REG-14	fix	d109		yes	「父上にも母上にも文句は言わせない！　私は、私の意志で己の道を定める！」	haera	-
+r18-6	REG-18	keep	d110		yes	「……今日はがんばったし……ご褒美、ほしいな……」	hae	-

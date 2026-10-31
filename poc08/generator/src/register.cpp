@@ -298,7 +298,10 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             static const std::u32string kDecl = U"だたいるうくすつぬぶむぐん";
             if ((best->text == U"ぞ" || best->text == U"ぜ") && kDecl.find(e) != std::u32string::npos) c.declZo = true;
             // な on a verb's dictionary form forbids (行くな); on い, た, だ it exclaims
-            if ((best->text == U"な" || best->text == U"なあ") && (e == U'い' || e == U'た' || e == U'だ')) c.exclaimNe = true;
+            // ... but not after a wish (ほしいな, 行きたいな: 갖고 싶은데)
+            const bool wish = EndsWith(rest, U"たい") || EndsWith(rest, U"ほしい") || EndsWith(rest, U"欲しい");
+            if ((best->text == U"な" || best->text == U"なあ") && (e == U'い' || e == U'た' || e == U'だ') && !wish)
+                c.exclaimNe = true;
         }
         std::u32string next = s.substr(0, s.size() - best->text.size());
         while (!next.empty() && IsMark(next.back())) next.pop_back();
@@ -483,6 +486,11 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             else if (p.size() > 3) ok = false;
         }
         c.exclaim = ok && any;
+        // musing over one's own words: a predicate, a pause, then か (信じる……か, そういうこと……か)
+        std::u32string raw = LastSentence(u.text);
+        while (!raw.empty() && IsMark(raw.back()) && raw.back() != U'…' && raw.back() != U'‥') raw.pop_back();
+        if (raw.size() >= 3 && raw.back() == U'か' && (raw[raw.size() - 2] == U'…' || raw[raw.size() - 2] == U'‥'))
+            c.exclaim = true;
     }
     for (const auto& [kind, text] : t.honBack)
         if (u.text.find(text) != std::u32string::npos) (kind == "give" ? c.honGive : c.honSonkei) = true;

@@ -38,3 +38,5 @@ out	「あ、ホントだ」	「아, 진짜다」	REG-13: realisation keeps -다
 out	「ほう。申してみよ」	「호오. 말해 봐라」	REG-6: the old imperative てみよ keeps 0.7.x (was 말해 봐)
 out	「はぁ、今日は寒いなぁ」	「하아, 오늘은 춥네」	REG-18: exclamatory なぁ is 해체 -네 (was 춥다)
 out	「よ、よし、それじゃ行くぞっ！」	「조, 좋아, 그럼 간다!」	REG-17: a declaration with ぞ keeps -다
+out	「それは報告を聞いてから判断する。……それで？」	「그건 보고를 듣고 나서 판단한다. ……그래서?」	REG-12: a word after the changed end (그래서?) ends the line: 0.7.x text (was 판단해)
+out	「……今日はがんばったし……ご褒美、ほしいな……」	「……오늘은 열심히 했고……상, 가지고 싶은데……」	REG-18: な after a wish is not an exclamation (was 가지고 싶네)
