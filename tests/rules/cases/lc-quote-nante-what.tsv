@@ -1,0 +1,26 @@
+# 규칙: GRM-84
+rule	input	expected	kind	layer
+cx:lc-quote-nante-what:10	「待って待って、途中が抜けてない？　お母さんの質問にはなんて答えたの？」	has:질문에는 뭐라고 대답	fix	rewrites
+cx:lc-quote-nante-what:10	「それを決めた時、俺の目の前でコソコソ話してたけど……あれお母さんになんて言われてたの？」	has:엄마에게 뭐라고	fix	rewrites
+cx:lc-quote-nante-what:10	彼女は、なんて言ったんだ？	has:그녀는, 뭐라고 말한	fix	rewrites
+cx:lc-quote-nante-what:10	「先生になんて言った！？」	has:선생님에게 뭐라고 말했어	fix	rewrites
+cx:lc-quote-nante-what:10	「もしも、そんなことになったら、あんたは美冬になんて言うつもり？」	has:에 뭐라고 말할 생각	fix	rewrites
+cx:lc-quote-nante-what:10	「なんて言われた？」	has:뭐라고	fix	rewrites
+cx:lc-quote-nante-what:10	もしもバレたりしたら、千里になんて言われるか……	has:뭐라고	fix	rewrites
+cx:lc-quote-nante-what:10	でも、なんて言えばいいかわからなかった。	has:하지만, 뭐라고 말하면	fix	rewrites
+cx:lc-quote-nante-what:10	「へえ、なんていう店？」	has:뭐라는 가게?	fix	rewrites
+cx:lc-quote-nante-what:10	「あの掃除班の、なんて言いましたかね……そう、逢沢永夏。」	has:청소반의, 뭐라고	fix	rewrites
+cx:lc-quote-nante-what:10	でも、それを押し通して選挙に負けたら、下の人にはなんて言うつもり？	has:사람에게는 뭐라고	fix	rewrites
+cx:lc-quote-nante-what:10	楽しみなんて何一つなかったし、世界が灰色の、なんていうの？モノクロ？みたいな。	has:회색의, 뭐라는 거야?	fix	rewrites
+cx:lc-quote-nante-what:10	「うん。なんていうのかな……親とか、兄弟とかの『好き』に似てるかな……？」	has:뭐라는 걸까	fix	rewrites
+cx:lc-quote-nante-what:20	「なんて名前だっけ？」	has:무슨 이름	fix	rewrites
+cx:lc-quote-nante-what:20	「あのおっちゃん、なんて名前だったかなぁ……？」	has:무슨 이름	fix	rewrites
+cx:lc-quote-nante-what:10	流石に学校で真昼に渡した、なんて言える筈もなく、曖昧に濁す。	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:10	それに死ぬ前になんて言わないで。	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:10	かつ魔学での功績で是非、次の王になんて言われたら面倒事になる。	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:10	「はい、『レシピ』、なんて言うのも恥ずかしい材料なので……」	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:10	「別に……ウソだなんて言ってないでしょ。」	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:10	休み時間、青海さんには、『前をちゃんと見た方がいいよ』……なんて言ったくせに、俺のバカ！	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:10	「あ、あのさ、あたし、家に帰るなんて言ってないわよ？」	!rule:cx:lc-quote-nante-what:10	keep	rewrites
+cx:lc-quote-nante-what:20	なんて名前だ。	!rule:cx:lc-quote-nante-what:20	keep	rewrites
+cx:lc-quote-nante-what:10	ボクたちの事はさぁ、なんて言われてもいいけど	!rule:cx:lc-quote-nante-what:10	keep	rewrites
