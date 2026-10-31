@@ -1,0 +1,229 @@
+#! cases
+# Voice table cases (VC-*): ja, the 0.7.x reading given as base, the expected class. fix: the table overrides
+# the base with class (decided by row id); keep: the base is right and stays. Short real excerpts unless src=inv.
+id	kind	ja	base	class	src
+voice.none	fix	喜怒哀楽……感情を発露するたび、未散は殴られるようになった。	NONE	PASSIVE	vn
+voice.none	fix	笑顔を浮かべるローラへ、いくつもの銃口が向けられた。	NONE	PASSIVE	vn
+voice.none	fix	「そう言われると、たしかにそうなんだけどさ……」	NONE	PASSIVE	vn
+voice.none	fix	「市立ということは……国の管轄下に置かれたということ？」	NONE	PASSIVE	vn
+voice.none	fix	出会い頭にぶつかって、ぺこぺこ謝ったり、謝られたり……	NONE	PASSIVE	vn
+voice.none	fix	少し離れたところで、東雲さんが奇妙なふたり組に絡まれていた。	NONE	PASSIVE	vn
+voice.none	fix	「それでわたし達は新設されたＳ組の──」	NONE	PASSIVE	vn
+voice.none	fix	「かなぁ……とか言われても、事実なんで……」	NONE	PASSIVE	vn
+voice.none	fix	まずいタイミングで、心の色を覗かれてしまった……	NONE	PASSIVE	vn
+voice.none.agent	fix	「いっぱい使っちゃうと、おばさんに怒られたりするわけ？」	NONE	PASSIVE	vn
+voice.none.agent	fix	会長に紹介されて、香奈さんに頭をさげた。	NONE	PASSIVE	vn
+voice.none.agent	fix	「今、俺……財務部長の座をあんたに獲られたこと、心底後悔してる」	NONE	PASSIVE	vn
+voice.none.agent	fix	「そうね、予想通り、上司に強制されたんだってさ」	NONE	PASSIVE	vn
+voice.none.agent	fix	「野上のバ……センセーに指導されてたんだよ」	NONE	PASSIVE	vn
+voice.none.agent	fix	「いいだろう。アンタには模擬戦でやられたからな」	NONE	PASSIVE	vn
+voice.none.agent	fix	未散に直接、自分は『Ｓ特』だと告白されたんだから。	NONE	PASSIVE	vn
+voice.none.agent	fix	俺に嫌われたという気持ちを、どうしても払拭できないらしい。	NONE	PASSIVE	vn
+voice.none.neg	fix	……誰の判断を元にしても、迷走は避けられないだろう。	NONE	POTENTIAL	vn
+voice.none.neg	fix	「もう無理よ、止められない！　一度退いて、立て直すしかないわ！」	NONE	POTENTIAL	vn
+voice.none.neg	fix	「でも、そちらのハンデはあげられないわよ？」	NONE	POTENTIAL	vn
+voice.none.neg	fix	「うん。これ以上うるさくなると、俺たちが耐えられなくなりそうだ」	NONE	POTENTIAL	vn
+voice.none.neg	fix	「時間もかけられない。すぐに本部に連絡がいって、増援が来ちゃう」	NONE	POTENTIAL	vn
+voice.none.neg	fix	とても痛くて、耐えられない。	NONE	POTENTIAL	vn
+voice.none.neg	fix	「出られない、という事か」	NONE	POTENTIAL	vn
+voice.kangaeru.neg	fix	でも、その考えられないことを、青海さんはやってるわけで……	NONE	POTENTIAL	vn
+voice.kangaeru.neg	fix	今は、そのことしか考えられなかった。	NONE	POTENTIAL	vn
+voice.kangaeru.neg	fix	今は、みいちゃんのこと以外なにも考えられなかった。	NONE	POTENTIAL	vn
+voice.kangaeru.neg	fix	「あの時は全然考えられなかったけど……今は、ちゃんと考えてる」	NONE	POTENTIAL	vn
+voice.kangaeru.neg	fix	「どれも考えられない」	SPONTANEOUS	POTENTIAL	vn
+voice.kangaeru.adn	fix	「故障でないとすると、考えられる原因は何だ」	NONE	POTENTIAL	vn
+voice.kangaeru.adn	fix	「考えられるのは、なんだ？　焦らすな、早く言え！」	SPONTANEOUS	POTENTIAL	vn
+voice.shinjiru.neg	fix	全然信じられないんだけど……	NONE	POTENTIAL	vn
+voice.shinjiru.neg	fix	「こんなにうまくいくなんて、自分でもちょっと信じられないな……」	PASSIVE	POTENTIAL	vn
+voice.shinjiru.neg	fix	「クソメイドのことが信じられない？」	SPONTANEOUS	POTENTIAL	vn
+voice.shinjiru.neg	fix	「あたしも信じられなかったわ……でも……事実なの……」	NONE	POTENTIAL	vn
+voice.shinjiru.neg	fix	信じられない光景……	NONE	POTENTIAL	vn
+voice.kuru.pot	fix	「一度やめちゃったら……もう二度と戻ってこられないんだよ……？」	NONE	POTENTIAL	vn
+voice.kuru.pot	fix	「なぜ来られないの？」	HONORIFIC	POTENTIAL	vn
+voice.kuru.pot	fix	「蒼！？　今日は未来ちゃん来られないって言うから――― 」	PASSIVE	POTENTIAL	vn
+voice.pot.iru	fix	だからといって尻込みはしていられない。	HONORIFIC	POTENTIAL	vn
+voice.pot.iru	fix	夢の世界にずっといられればいいのに……	NONE	POTENTIAL	vn
+voice.pot.iru	fix	やっぱり、夢の中にしかいられないんだ。	PASSIVE	POTENTIAL	vn
+voice.pot.iru	fix	なんだか、名残惜しかったけど、いつまでもこうしてはいられない。	SPONTANEOUS	POTENTIAL	vn
+voice.pot.iru	fix	「……優しいままじゃいられない世界なんだから」	PASSIVE	POTENTIAL	vn
+voice.pot.iru	fix	手のひらに伝わる感触に興奮して、そうせずにはいられなかった。	HONORIFIC	POTENTIAL	vn
+voice.pot.iru	fix	「キャハハハ、いつまでよけていられるかな～」	HONORIFIC	POTENTIAL	vn
+voice.pot.iru	fix	どうすれば、夢の世界にずっといられるんだ？	NONE	POTENTIAL	vn
+voice.rare.neg	fix	自分では、この扉を開けられないということか……？	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	今度こそよけられない──	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	「だから、千里がくれるチョコは、もう、食べられない」	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	「素人相手にエグいところは見せられない」	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	「世界の崩壊は止められない。脱出を最優先にしましょう」	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	（あー、私も最初はあんな感じで上手く的に当てられなかったなぁ）	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	「コヨイ、自分で食べられないくらい元気ない？」	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	両手がふさがっているため、うまくドアが開けられない。	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	「やだよー、おいしいお菓子が食べられなくなるよー」	PASSIVE	POTENTIAL	vn
+voice.rare.neg	fix	結局、昨日は２時間くらいしか寝られなかったし……	PASSIVE	POTENTIAL	vn
+voice.rare.teiru	fix	「ポートアイランドの基盤に爆弾が仕掛けられてる！？」	NONE	PASSIVE	vn
+voice.rare.teiru	fix	「……そんなもの、この部室に仕掛けられてるんですか？」	NONE	PASSIVE	vn
+voice.rare.teiru	fix	「だよなぁ……確実に目ぇつけられてるって感じだもんなぁ……」	NONE	PASSIVE	vn
+voice.rare.teiru	fix	「ん……？　なんか見られてる……？」	POTENTIAL	PASSIVE	vn
+voice.rare.teiru	fix	「俺は追い詰められてたんだ」	NONE	PASSIVE	vn
+voice.rare.teiru	fix	「ん？　ああッ！　あいつ、逃げられてるじゃん！」	NONE	PASSIVE	vn
+voice.rare.teiru2	fix	≪タナトスさんが目星をつけた場所に爆弾が仕掛けられていました≫	POTENTIAL	PASSIVE	vn
+voice.rare.teiru2	fix	あらかじめ決められていたような……まるで、台本があったような……	NONE	PASSIVE	vn
+voice.rare.teiru2	fix	子供のころ、なにかにつけてアメフトを勧められていたような……。	POTENTIAL	PASSIVE	vn
+voice.rare.teiru2	fix	忘れることもできないくらい、細かい傷を植え付けられている。	POTENTIAL	PASSIVE	vn
+voice.rare.teiru2	fix	蔑みの眼差しが、俺や青海さんに向けられていた。	POTENTIAL	PASSIVE	vn
+voice.rare.teiru2	fix	「学園側で認められているのならいいんじゃない？」	POTENTIAL	PASSIVE	vn
+voice.bad	fix	陸路はアールに破壊され、空路はヘイディオに抑えられている。	POTENTIAL	PASSIVE	vn
+voice.rare.agent	fix	エルに連れられて、二人は医務室へと向かった。	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent	fix	誰かに呼び止められて振り返る。	POTENTIAL	PASSIVE	vn
+voice.rare.agent	fix	会長に持ち上げられて、みんなの顔が緩む。	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent	fix	助かった！　というか先生に助けられた……！	NONE	PASSIVE	vn
+voice.rare.agent	fix	地面に突っ伏した俺に、容赦ない蹴りの応酬が浴びせられる。	SPONTANEOUS	PASSIVE	vn
+voice.bad	fix	袖に『選管』と書かれた腕章を付けた人に尋ねられた。	POTENTIAL	PASSIVE	vn
+voice.rare.agent	fix	部屋にあがるなり、先生にはやし立てられた。	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent	fix	野上先生に連れられ、コヨイが本部をあとにした。	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent.pot	fix	八百屋のおじさんに声をかけられた。	HONORIFIC	PASSIVE	vn
+voice.rare.agent.pot	fix	≪変なことを聞くけど……誰かにつけられたりしていない？≫	POTENTIAL	PASSIVE	vn
+voice.rare.agent.pot	fix	「そんな私に与えられた初めての任務は──」	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent.pot	fix	「おいおい、こんなところを誰かに見られたら……」	POTENTIAL	PASSIVE	vn
+voice.rare.agent.pot	fix	俺に見られるのが恥ずかしいのか、チラチラこちらを見てくる。	NONE	PASSIVE	vn
+voice.rare.agent.pot	fix	立ち上がろうとしたところで、青海さんに止められた。	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent.pot	fix	まずは、一番そばにいる葉月先生に声を掛けられた。	SPONTANEOUS	PASSIVE	vn
+voice.rare.agent.pot	fix	「学園長？　ああ、確かにあの人に見られたら大変そうかも」	POTENTIAL	PASSIVE	vn
+voice.godan.agent	fix	青海さんに言われて、ふたりはお手伝いをはじめる。	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	コヨイちゃんに言われて、あたりを見回すが──	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	「あら、そんなにゆうくんをあたしに取られたくない？」	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	全員、野上先生に追い出されてしまった。	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	男子生徒に突き飛ばされた青海さんの元に慌てて駆け寄る。	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	「あんたはあの女にだまされてんのよっ！」	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	先生にそう言われて、ちょっとうれしく感じる。	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	「お母さんに、途中で起こされて……」	POTENTIAL	PASSIVE	vn
+voice.godan.agent	fix	「残念だが、お前に脳を覗かれるのはお断りだそうだ」	SPONTANEOUS	PASSIVE	vn
+voice.godan.agent	fix	「いや、古賀さんに連れ込まれてな……」	SPONTANEOUS	PASSIVE	vn
+voice.bad	fix	「ただ、風邪薬がないと言われてしまって……」	POTENTIAL	PASSIVE	vn
+voice.bad	fix	みいちゃんの甘い声に誘われて、また力が入ってしまっていた。	POTENTIAL	PASSIVE	vn
+voice.bad	fix	「貴女、ソウルスピードって呼ばれてるんだって？」	SPONTANEOUS	PASSIVE	vn
+voice.bad	fix	戦いながら、いつしか俺はハルトの強さと美しさに心を奪われていた。	SPONTANEOUS	PASSIVE	vn
+voice.bad	fix	まあ、予想された事態ではある。	SPONTANEOUS	PASSIVE	vn
+voice.bad	fix	「ちょっ！　フラれたこと前提かよ！」	SPONTANEOUS	PASSIVE	vn
+voice.bad	fix	「梅昆布茶でも出されない限り、私は騙されない」	POTENTIAL	PASSIVE	vn
+voice.bad	fix	私はあの人に心配されてどう感じたのだろうか……わからない。	POTENTIAL	PASSIVE	vn
+voice.bad.agent	fix	鐘が鳴り響き、案内の人に合図される。	POTENTIAL	PASSIVE	vn
+voice.bad.agent	fix	マニュアルに忠実な店員に案内されて、俺とみいちゃんは席についた。	SPONTANEOUS	PASSIVE	vn
+voice.bad.agent	fix	「……どうして俺を殺そうとする。誰かに命令されたのか？」	SPONTANEOUS	PASSIVE	vn
+voice.bad.agent	fix	「それは、父にも何度か指摘されたことがあります」	SPONTANEOUS	PASSIVE	vn
+voice.bad.agent	fix	「彼らを追っていたＳＯＲＤの人に私は保護されたわ」	SPONTANEOUS	PASSIVE	vn
+voice.bad.neg	fix	合宿中は食料を現地調達するため、ろくな物が食べられなかった。	SPONTANEOUS	POTENTIAL	vn
+voice.bad.neg	fix	「そうなの……食べたくても食べられないって、ホントに辛いのよー」	SPONTANEOUS	POTENTIAL	vn
+voice.bad.neg	fix	「あたしはほら、あんまり食べられないのよ」	SPONTANEOUS	POTENTIAL	vn
+voice.bad.neg	fix	（この手錠を外してくれ、ハルトの剣をよけられない！？）	SPONTANEOUS	POTENTIAL	vn
+voice.bad.neg	fix	とても、今日は耐えられない気がする。	SPONTANEOUS	POTENTIAL	vn
+voice.hon.higher.subj	fix	「ロールケーキ……って、大島先輩が作られるんですか？」	POTENTIAL	HONORIFIC	vn
+voice.hon.nasaru	fix	「はい……お、おふたりで会食なされていた理由はなんでしょうか？」	SPONTANEOUS	HONORIFIC	vn
+voice.hon.nasaru	fix	「演説の予約、なされるのですね？」	POTENTIAL	HONORIFIC	vn
+voice.hon.oru	fix	「ん？　んんん？　見知らぬ方がおられるのですが？」	PASSIVE	HONORIFIC	vn
+voice.hon.oru	fix	「ええと……おおしま候補はどちらにおられますか？」	NONE	HONORIFIC	vn
+voice.hon.oru	fix	なにかよくわからないけどいっちょ前に青春しておられる。	SPONTANEOUS	HONORIFIC	vn
+voice.hon.oru	fix	「おお、まだこんなところにおられたのですか、おおしま氏」	PASSIVE	HONORIFIC	vn
+voice.suru.to	fix	「だって、ようやく必要とされてるって思ったから」	NONE	PASSIVE	vn
+voice.suru.to	fix	「あおくんに必要とされて……ちゃんと、役に立てたから」	NONE	PASSIVE	vn
+voice.omou.te	fix	誰にもすごいと思われてない。	NONE	PASSIVE	vn
+voice.none	fix	「ヘタに手を出せば報復されるだろうしな」	NONE	PASSIVE	vn
+voice.none	fix	どちらも厳しい状況に追い込まれているようだ。	NONE	PASSIVE	vn
+voice.none	fix	何度も繰り返された、千里の贖罪の儀式。	NONE	PASSIVE	vn
+voice.none	fix	廃人のようになったアールが、カーネルに連れ去られていく。	NONE	PASSIVE	vn
+voice.none	fix	立ち入りが禁止されている部屋に入れそうなルートをついに見つけた。	NONE	PASSIVE	vn
+voice.none	fix	セリカが撃たれて倒れていた。助けようとしたフランも撃たれる。	NONE	PASSIVE	vn
+voice.none	fix	部室は静寂に包まれている。	NONE	PASSIVE	vn
+voice.none	fix	「発表されたのですぞ！　東雲皐月のマニフェストが！」	NONE	PASSIVE	vn
+voice.none	fix	「そして、自分も殺された事にして、裏社会の闇に消えた……」	NONE	PASSIVE	vn
+voice.none	fix	七瀬パパの口からハンバーグが勢いよく射出される。	NONE	PASSIVE	vn
+voice.none	fix	背後から撃たれた左肩の痛みに顔をしかめながら振り返る。	NONE	PASSIVE	vn
+voice.none	fix	「残されるものの辛さを知っているのに……無責任だった……」	NONE	PASSIVE	vn
+voice.none	fix	雨の中、ひとり置き去りにされる子猫のような瞳……	NONE	PASSIVE	vn
+voice.none	fix	「……言われたことをやってるだけだよ」	NONE	PASSIVE	vn
+voice.none	fix	「あはは、いつも言われてるんだ」	NONE	PASSIVE	vn
+voice.none	fix	「大丈夫、大丈夫。オレ、やればできるって言われるしー」	NONE	PASSIVE	vn
+voice.none.neg.out	fix	「少し待ってて。鍵が開けられないか試してみるわ」	NONE	POTENTIAL	vn
+voice.none.neg.out	fix	結局、昨日は２時間くらいしか寝られなかったし……	NONE	POTENTIAL	vn
+voice.hon.nasaru	fix	私の家や 私を辱めた相手を成敗なされたのだと知り	PASSIVE	HONORIFIC	vn
+voice.hon.nasaru	fix	(忠相)大黒屋は遠島讃岐守殿は切腹なされました	PASSIVE	HONORIFIC	vn
+voice.hon.nasaru	fix	そのようなことをなされては…！	OTHER	HONORIFIC	vn
+voice.hon.humble	fix	もっと若い女子に仰せられませ	NONE	HONORIFIC	vn
+voice.hon.humble	fix	江戸のご家来衆の結束を見せてこそ国元のご家来衆も動くと申されて｡	PASSIVE	HONORIFIC	vn
+voice.hon.nasaru	fix	ご決断なされたと｡殿下 そこまで…｡	PASSIVE	HONORIFIC	vn
+voice.hon.nasaru	fix	とと様が お帰りなされたら言いつけますよ	NONE	HONORIFIC	vn
+voice.hon.humble	fix	よう参られた。	NONE	HONORIFIC	vn
+voice.hon.oru	fix	書状で述べておられよう	PASSIVE	HONORIFIC	vn
+voice.hon.humble	fix	閣議を通すための方便であったと申されるか	PASSIVE	HONORIFIC	vn
+voice.hon.nasaru	fix	よかった｡無事生還なされたのね｡	PASSIVE	HONORIFIC	vn
+voice.hon.oru	fix	そして　家康公がおられたればこそ	OTHER	HONORIFIC	vn
+voice.suru.to	fix	｢有罪とされまた刑罰を科せられない｣	SPONTANEOUS	PASSIVE	vn
+voice.suru.to	fix	歴史ある地名や名称は反革命的　ブルジョア的とされ打倒の対象となった。	SPONTANEOUS	PASSIVE	vn
+voice.suru.to	fix	この人物が所持していたとされる「馬式自動拳銃」すなわちモーゼルミリタリーＣ９６は	SPONTANEOUS	PASSIVE	vn
+voice.kangaeru.neg	fix	私 作品のことまだ全然考えられてない｡	SPONTANEOUS	POTENTIAL	vn
+voice.omou.te	fix	もし キモいって思われてもこの整ったイケメンフェースでカバーできちゃいます	SPONTANEOUS	PASSIVE	vn
+voice.kangaeru.neg	fix	もう何も考えられず、ただひたすらに朔夜の女性器を貪る。	SPONTANEOUS	POTENTIAL	vn
+-	keep	「貴女、ソウルスピードって呼ばれてるんだって？」	PASSIVE	PASSIVE	vn
+-	keep	「だから、千里がくれるチョコは、もう、食べられない」	POTENTIAL	POTENTIAL	vn
+voice.hon.oru	keep	「ん？　んんん？　見知らぬ方がおられるのですが？」	HONORIFIC	HONORIFIC	vn
+voice.shinjiru.neg	keep	全然信じられないんだけど……	POTENTIAL	POTENTIAL	vn
+-	keep	「わああぁぁ！？　ちょっと、全然止められてないじゃないのよ！」	POTENTIAL	POTENTIAL	vn
+-	keep	怪我のせいで、照準が定められてない……？	POTENTIAL	POTENTIAL	vn
+-	keep	「エルです。……それ以上の素性を明かす権限を与えられていません」	PASSIVE	PASSIVE	vn
+-	keep	（じゃあ、やっぱり私には答えられないかな）	POTENTIAL	POTENTIAL	vn
+-	keep	「あら、そんなにゆうくんをあたしに取られたくない？」	PASSIVE	PASSIVE	vn
+-	keep	「どうしてって、衣更がいるときに入ってこられたら困るでしょ？」	PASSIVE	PASSIVE	vn
+-	keep	喜怒哀楽……感情を発露するたび、未散は殴られるようになった。	PASSIVE	PASSIVE	vn
+-	keep	笑顔を浮かべるローラへ、いくつもの銃口が向けられた。	PASSIVE	PASSIVE	vn
+-	keep	青海さんに言われて、ふたりはお手伝いをはじめる。	PASSIVE	PASSIVE	vn
+voice.rare.agent.pot	keep	八百屋のおじさんに声をかけられた。	PASSIVE	PASSIVE	vn
+-	keep	「ポートアイランドの基盤に爆弾が仕掛けられてる！？」	PASSIVE	PASSIVE	vn
+-	keep	……誰の判断を元にしても、迷走は避けられないだろう。	POTENTIAL	POTENTIAL	vn
+voice.pot.iru	keep	だからといって尻込みはしていられない。	POTENTIAL	POTENTIAL	vn
+voice.hon.nasaru	keep	「はい……お、おふたりで会食なされていた理由はなんでしょうか？」	HONORIFIC	HONORIFIC	vn
+-	keep	「だって、ようやく必要とされてるって思ったから」	PASSIVE	PASSIVE	vn
+-	keep	誰にもすごいと思われてない。	PASSIVE	PASSIVE	vn
+-	keep	「架子……ついに、こっちにも来られたんだね……」	POTENTIAL	POTENTIAL	vn
+-	keep	「はぁ……夢に来られたんだな」	POTENTIAL	POTENTIAL	vn
+-	keep	「私がここに来られたのは、ただの偶然」	POTENTIAL	POTENTIAL	vn
+voice.hon.oru	keep	市之進殿も必ずおられる	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	鎮西八郎爲朝なる武将がおられるゆえあえて　九郎と名乗りたい。	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	兄上は 誰をも斬ってはおられぬではないか	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	今 町長さんの息子さんはどこにおられますか？	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	俳句の運座をよく組んでおられたな	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	孫の千万太さんの帰還を待っておられたそうじゃ	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	蘭堂先生と花子さんは 愛し合っておられます｡	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	そのお方は　迷うておられる。	HONORIFIC	HONORIFIC	vn
+voice.hon.oru	keep	（青木）横山様は　一人でも多くの同志を募っておられる。	HONORIFIC	HONORIFIC	vn
+-	keep	「そーよねー、日曜日に他の予定入れられるもんねぇ」	POTENTIAL	POTENTIAL	vn
+-	keep	「今年の財務部ブースは、意外とすっきりされてましたね」	HONORIFIC	HONORIFIC	vn
+voice.suru.to	fix	それは不可能とされていた。	NONE	PASSIVE	inv
+voice.suru.to	fix	最強とされる剣士だ。	SPONTANEOUS	PASSIVE	inv
+voice.suru.to	fix	昔から縁起が悪いとされてきた。	SPONTANEOUS	PASSIVE	inv
+voice.suru.to	fix	この薬は危険とされている。	NONE	PASSIVE	inv
+voice.suru.to	fix	彼は犯人とされた。	SPONTANEOUS	PASSIVE	inv
+voice.suru.to	fix	重要とされる理由がある。	NONE	PASSIVE	inv
+voice.suru.to	fix	禁止とされた場所に入った。	SPONTANEOUS	PASSIVE	inv
+voice.suru.to	fix	正しいとされてきた考えだ。	NONE	PASSIVE	inv
+voice.suru.to	fix	天才とされる少女がいる。	SPONTANEOUS	PASSIVE	inv
+voice.suru.to	fix	不吉とされる数字だ。	NONE	PASSIVE	inv
+-	keep	それは不可能とされていた。	PASSIVE	PASSIVE	inv
+voice.omou.te	fix	変な人だと思われている。	SPONTANEOUS	PASSIVE	inv
+voice.omou.te	fix	わがままだと思われてる。	SPONTANEOUS	PASSIVE	inv
+voice.omou.te	fix	子供だと思われても仕方ない。	SPONTANEOUS	PASSIVE	inv
+-	keep	明日は雨だと思われる。	SPONTANEOUS	SPONTANEOUS	inv
+-	keep	それが原因だと思われます。	SPONTANEOUS	SPONTANEOUS	inv
+voice.kangaeru.neg	fix	そんなこと、考えられない。	SPONTANEOUS	POTENTIAL	inv
+-	keep	昔からそう考えられてきた。	SPONTANEOUS	SPONTANEOUS	inv
+-	keep	それが一番の原因と考えられています。	SPONTANEOUS	SPONTANEOUS	inv
+voice.rare.teiru	fix	「ずっと見られてるよ」	POTENTIAL	PASSIVE	inv
+voice.rare.teiru	fix	「あいつ、先生に褒められてる」	POTENTIAL	PASSIVE	inv
+voice.rare.teiru2	fix	机の上に花が並べられている。	POTENTIAL	PASSIVE	inv
+-	keep	「全然食べられてない」	POTENTIAL	POTENTIAL	inv
+-	keep	「まだ決められてないんだ」	POTENTIAL	POTENTIAL	inv
+voice.bad	fix	「名前を呼ばれた」	POTENTIAL	PASSIVE	inv
+voice.bad	fix	財布を取られた。	POTENTIAL	PASSIVE	inv
+voice.bad	fix	手紙が書かれていた。	SPONTANEOUS	PASSIVE	inv
+voice.bad	fix	また騙された。	SPONTANEOUS	PASSIVE	inv
+voice.bad	fix	その道具はよく使われている。	SPONTANEOUS	PASSIVE	inv
+-	keep	「名前を呼ばれた」	PASSIVE	PASSIVE	inv
+-	keep	「先生が書かれた本です」	HONORIFIC	HONORIFIC	inv

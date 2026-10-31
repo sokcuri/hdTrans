@@ -1,5 +1,6 @@
-# poc08/transfer: W4 learned deciders (られる voice; ため, ように, ところで), stacked on 0.7.5's decision,
-# plus the research construction matcher (superseded, kept as the inventory's reference).
+# poc08/transfer: the native transfer rows, the deciders at decision points over 0.7.x's decision (られる voice: a
+# hand-written rule table; ため, ように, ところで: W4 learned weights), plus the research construction matcher
+# (superseded, kept as the inventory's reference).
 add_library(hd08_transfer STATIC src/ir_view.cpp src/table.cpp src/match.cpp src/decide.cpp src/native.cpp src/stage.cpp)
 target_include_directories(hd08_transfer PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
 target_link_libraries(hd08_transfer PUBLIC hd08_ir)

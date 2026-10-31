@@ -1,4 +1,4 @@
-// Learned deciders: decision points, named features, the weight tables and the gated decision.
+// Deciders: decision points, named features, the rule and weight tables and the decision.
 #include "decide.h"
 
 #include <algorithm>
@@ -234,6 +234,150 @@ std::vector<std::string> Features(const Table& t, const LineIR& v, const Decisio
   return f;
 }
 
+namespace {
+
+bool KnownClass(const Decider& dec, const std::string& c) {
+  return std::find(dec.classes.begin(), dec.classes.end(), c) != dec.classes.end();
+}
+
+// One row of a rule table: id spec when class st prov note. A condition is key, key=a|b or key=* (any value),
+// each possibly negated with !.
+bool ParseRule(const std::vector<std::string>& c, Decider& dec, std::string& why) {
+  if (c.size() < 4) {
+    why = "a rule row needs id, spec, when and class: " + (c.empty() ? std::string() : c[0]);
+    return false;
+  }
+  DecideRule r;
+  r.id = c[0];
+  r.spec = c[1];
+  r.cls = c[3];
+  if (r.spec.empty() || r.spec == "-") {
+    why = r.id + ": no spec id";
+    return false;
+  }
+  if (r.cls != "KEEP" && r.cls != "@default" && !KnownClass(dec, r.cls)) {
+    why = r.id + ": unknown class " + r.cls;
+    return false;
+  }
+  if (c[2] != "-") {
+    std::istringstream s(c[2]);
+    std::string a;
+    while (s >> a) {
+      RuleAtom at;
+      if (a[0] == '!') {
+        at.negate = true;
+        a = a.substr(1);
+      }
+      const size_t eq = a.find('=');
+      at.key = a.substr(0, eq);
+      if (eq != std::string::npos) at.values = Split(a.substr(eq + 1), '|');
+      if (at.key.empty() || (eq != std::string::npos && at.values.empty())) {
+        why = r.id + ": bad condition " + a;
+        return false;
+      }
+      if (!at.negate && (at.key == "vlem" || at.key == "vnoun")) ++r.lemmas;
+      r.atoms.push_back(std::move(at));
+    }
+  }
+  r.order = dec.rows.size();
+  dec.rows.push_back(std::move(r));
+  return true;
+}
+
+void LoadVerbs(const std::filesystem::path& file, Decider& dec, std::vector<std::string>& errors) {
+  std::ifstream in(file, std::ios::binary);
+  std::string line;
+  bool header = true;
+  while (std::getline(in, line)) {
+    if (!line.empty() && line.back() == '\r') line.pop_back();
+    if (line.empty() || line[0] == '#') continue;
+    if (header) {
+      header = false;
+      continue;
+    }
+    auto c = Split(line, '\t');
+    if (c.size() < 4) {
+      errors.push_back("verbs.tsv: a row needs lemma, pos, allow and default: " + line);
+      continue;
+    }
+    std::vector<std::string> allow;
+    std::istringstream s(c[2]);
+    for (std::string a; s >> a;) {
+      if (!KnownClass(dec, a)) errors.push_back("verbs.tsv: " + c[0] + ": unknown class " + a);
+      allow.push_back(a);
+    }
+    if (std::find(allow.begin(), allow.end(), c[3]) == allow.end())
+      errors.push_back("verbs.tsv: " + c[0] + ": the default " + c[3] + " is not allowed");
+    for (const std::string& lemma : Split(c[0], '|')) dec.verbs.push_back({lemma, c[1], allow, c[3]});
+  }
+}
+
+// The voice table's facts about the point's verb: allow=<class> for each reading it allows, vdefault=<class>,
+// intable, and p075bad when 0.7.5's reading is one the verb does not allow. Returns the verb's default ("" when
+// the verb is not in the table).
+std::string VerbFacts(const Decider& d, const std::vector<std::string>& f, const std::string& base,
+                      std::vector<std::string>& out) {
+  std::string lemma, pos;
+  for (const auto& x : f) {
+    if (x.rfind("vlem=", 0) == 0) lemma = x.substr(5);
+    else if (x.rfind("vpos=", 0) == 0) pos = x.substr(5);
+  }
+  for (const DecideVerb& v : d.verbs) {
+    if (v.lemma != lemma || (v.pos != "*" && v.pos != pos)) continue;
+    out.push_back("intable");
+    out.push_back("vdefault=" + v.dflt);
+    for (const auto& a : v.allow) out.push_back("allow=" + a);
+    if (KnownClass(d, base) && std::find(v.allow.begin(), v.allow.end(), base) == v.allow.end())
+      out.push_back("p075bad");
+    return v.dflt;
+  }
+  return "";
+}
+
+bool Holds(const RuleAtom& a, const std::set<std::string>& have) {
+  bool hit = false;
+  if (a.values.empty()) hit = have.count(a.key) > 0;
+  else if (a.values.size() == 1 && a.values[0] == "*") {  // key=*: the feature with any value
+    auto it = have.lower_bound(a.key + "=");
+    hit = it != have.end() && it->compare(0, a.key.size() + 1, a.key + "=") == 0;
+  } else
+    for (const auto& v : a.values)
+      if (have.count(a.key + "=" + v)) {
+        hit = true;
+        break;
+      }
+  return hit != a.negate;
+}
+
+DeciderResult DecideRules(const Decider& d, const std::vector<std::string>& features, const std::string& base075) {
+  DeciderResult r;
+  r.base = base075.empty() ? "NONE" : base075;
+  std::vector<std::string> all(features);
+  all.push_back("p075=" + r.base);
+  const std::string dflt = VerbFacts(d, features, r.base, all);
+  const std::set<std::string> have(all.begin(), all.end());
+  const DecideRule* best = nullptr;
+  for (const DecideRule& row : d.rows) {
+    if (!std::all_of(row.atoms.begin(), row.atoms.end(), [&](const RuleAtom& a) { return Holds(a, have); })) continue;
+    if (best == nullptr || std::make_pair(row.lemmas, row.atoms.size()) > std::make_pair(best->lemmas, best->atoms.size()))
+      best = &row;
+  }
+  r.chosen = r.top = r.base;
+  if (best != nullptr) {
+    r.rule = best->id;
+    r.because.push_back({"rule:" + best->id, 1.0f});
+    if (best->cls != "KEEP") r.top = best->cls == "@default" ? (dflt.empty() ? "PASSIVE" : dflt) : best->cls;
+  }
+  r.overridden = r.top != r.base;
+  r.chosen = r.top;
+  r.pTop = 1.0f;
+  r.pBase = r.overridden ? 0.0f : 1.0f;
+  r.margin = r.overridden ? 1.0f : 0.0f;
+  return r;
+}
+
+}  // namespace
+
 bool LoadDeciders(const std::string& dirName, DecideData& d) {
   namespace fs = std::filesystem;
   std::error_code ec;
@@ -261,11 +405,18 @@ bool LoadDeciders(const std::string& dirName, DecideData& d) {
           if (k == "family") dec.family = val;
           else if (k == "tau") dec.tau = std::strtof(val.c_str(), nullptr);
           else if (k == "id") dec.id = val;
+          else if (k == "kind") dec.rules = val == "rules";
         }
         continue;
       }
       if (line[0] == '#') continue;
       auto c = Split(line, '\t');
+      if (dec.rules && c[0] != "classes") {
+        if (c[0] == "id") continue;  // the header line
+        std::string why;
+        if (!ParseRule(c, dec, why)) d.errors.push_back(Utf8Of(file.filename()) + ": " + why);
+        continue;
+      }
       if (c[0] == "classes") {
         dec.classes.assign(c.begin() + 1, c.end());
         dec.bias.assign(dec.classes.size(), 0.0f);
@@ -293,12 +444,18 @@ bool LoadDeciders(const std::string& dirName, DecideData& d) {
       continue;
     }
     if (dec.id.empty()) dec.id = dec.family;
+    if (dec.rules) {
+      const fs::path verbs = dir / fs::path(std::u8string(dec.family.begin(), dec.family.end())) / "verbs.tsv";
+      if (fs::exists(verbs, ec)) LoadVerbs(verbs, dec, d.errors);
+      if (dec.rows.empty()) d.errors.push_back(Utf8Of(file.filename()) + ": a rule table without rows");
+    }
     d.byFamily[dec.family] = std::move(dec);
   }
   return !ec;
 }
 
 DeciderResult Decide(const Decider& d, const std::vector<std::string>& features, const std::string& base075) {
+  if (d.rules) return DecideRules(d, features, base075);
   DeciderResult r;
   size_t k = d.classes.size();
   std::vector<float> z(d.bias);

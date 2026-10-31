@@ -1,0 +1,64 @@
+#! voice-verbs
+# The (ら)れる readings each verb allows and the one it takes when no cue decides (VC-9). lemma: UniDic lemma
+# (alternatives with |); pos: v5 (godan, れる), v1 (ichidan, られる), vk, vs or * ; allow: of PASSIVE POTENTIAL
+# HONORIFIC SPONTANEOUS; default: the reading without a cue. Every verb allows the respectful reading (a superior
+# subject); a godan verb's れる never reads the potential (its potential is the e-row verb: 呼べる); される never does
+# (できる is); only verbs of thought and feeling read the spontaneous.
+lemma	pos	allow	default	spec	note
+為る	vs	PASSIVE HONORIFIC	PASSIVE	VC-9	される: 言及される, 担当された
+言う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	言われる
+居る	v5	HONORIFIC	HONORIFIC	VC-9	おられる: respect
+居る	v1	POTENTIAL	POTENTIAL	VC-9	いられない: cannot stay
+見る	v1	PASSIVE POTENTIAL HONORIFIC SPONTANEOUS	PASSIVE	VC-9	見られる: be seen / can see / be seen as
+呼ぶ	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	呼ばれる
+殺す	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	殺される
+取る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	取られる
+書く	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	書かれる
+聞く	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	聞かれる
+思う	v5	SPONTANEOUS PASSIVE HONORIFIC	SPONTANEOUS	VC-9	思われる: it seems / be thought
+食べる	v1	POTENTIAL PASSIVE HONORIFIC	POTENTIAL	VC-9	食べられる: can eat
+打つ	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	打たれる
+来る	vk	POTENTIAL HONORIFIC PASSIVE	POTENTIAL	VC-9	来られる: can come; respect; 来られて困る
+止める	v1	POTENTIAL PASSIVE HONORIFIC	PASSIVE	VC-9	止められる
+考える	v1	POTENTIAL SPONTANEOUS HONORIFIC	SPONTANEOUS	VC-9	考えられる: it is thought / can think
+掛ける	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	声を掛けられる
+遣る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	やられる
+頼む	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	頼まれる
+許す	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	許される
+逃げる	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	逃げられた (suffered) / 逃げられない
+信ずる|信じる	*	POTENTIAL PASSIVE HONORIFIC	POTENTIAL	VC-9	信じられない
+使う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	使われる
+置く	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	置かれる
+怒る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	怒られる
+騙す	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	騙される
+襲う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	襲われる
+嫌う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	嫌われる
+得る	v1	POTENTIAL HONORIFIC	POTENTIAL	VC-9	得られる: can obtain
+作る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	作られる
+捨てる	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	捨てられる
+行く	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	行かれる: respect; 持って行かれる
+付ける	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	付けられる
+行う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	行われる
+残す	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	残される
+避ける	v1	POTENTIAL PASSIVE HONORIFIC	POTENTIAL	VC-9	避けられない
+出す	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	出される
+包む	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	包まれる
+奪う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	奪われる
+聞かす	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	聞かされる
+誘う	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	誘われる
+振る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	振られる
+送る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	送られる
+出る	v1	POTENTIAL HONORIFIC	POTENTIAL	VC-9	出られる: can go out
+上げる	v1	POTENTIAL PASSIVE HONORIFIC	PASSIVE	VC-9	上げられる
+耐える	v1	POTENTIAL HONORIFIC	POTENTIAL	VC-9	耐えられない
+知る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	知られる
+与える	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	与えられる
+感ずる|感じる	*	SPONTANEOUS POTENTIAL HONORIFIC	SPONTANEOUS	VC-9	感じられる: is felt
+殴る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	殴られる
+認める	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	認められる
+求める	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	求められる
+巻き込む	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	巻き込まれる
+吊る	v5	PASSIVE HONORIFIC	PASSIVE	VC-9	吊られる
+褒める	v1	PASSIVE POTENTIAL HONORIFIC	PASSIVE	VC-9	褒められる
+成す|為さる	*	HONORIFIC PASSIVE	HONORIFIC	VC-9	なされる: respect; 改良がなされた (passive)
+申す|参る|仰せる|致す	*	HONORIFIC	HONORIFIC	VC-9	申される, 参られた (old speech)

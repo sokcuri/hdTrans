@@ -66,6 +66,11 @@ if(HD08_PYTHON AND TARGET hd8gen_cli)
     add_test(NAME poc08.grid.n5 COMMAND "${HD08_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/grid/grid.py"
         --hd8gen $<TARGET_FILE:hd8gen_cli> --check "${CMAKE_CURRENT_SOURCE_DIR}/tests/grid/n5.tsv")
 endif()
+if(HD08_PYTHON AND TARGET hd8decide)
+    # the voice rule table's cases (spec/voice.md): analysed, then decided with the case's base reading
+    add_test(NAME poc08.transfer.voice COMMAND "${HD08_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/transfer/tests/voice_cases.py"
+        $<TARGET_FILE:hdtrans08_ir> $<TARGET_FILE:hd8decide> "${CMAKE_CURRENT_SOURCE_DIR}/transfer/data")
+endif()
 if(HDTRANS_SH)
     add_test(NAME poc08.cli COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli.sh" $<TARGET_FILE:hdtrans08_ir>)
     add_test(NAME poc08.hooks COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/hooks.sh" $<TARGET_FILE:hdtrans_cli>

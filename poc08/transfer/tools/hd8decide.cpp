@@ -1,10 +1,11 @@
-// hd8decide: the learned deciders on ir.jsonl lines (training dumps and decisions with --why records).
+// hd8decide: the deciders on ir.jsonl lines (feature dumps and decisions with --why records).
 //
 //   hd8decide --data DIR --dump < ir.jsonl
 //       one line per decision point: case, token, family, src byte begin, features (space-separated)
 //   hd8decide --data DIR --decide BASE.tsv < ir.jsonl
 //       BASE.tsv: case<TAB>src-begin<TAB>0.7.5 class; one JSON line per decision point with the class,
-//       the 0.7.5 class it kept or overrode, the margin and each feature's contribution
+//       the 0.7.5 class it kept or overrode, the margin and what decided it (rule:<row id> for a rule
+//       table, each feature's contribution for a weight table)
 // DIR is the transfer data folder. Exit: 0 ok, 2 usage or load error.
 #include <fstream>
 #include <iostream>
