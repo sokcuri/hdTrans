@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 segmentation:stem-before-sou	優しすぎて泣きそう。	너무 다정해 울 것 같다.	fix	lookup
-segmentation:stem-before-sou	「ごめん、私、泣きそう」	「미안, 나, 울 거 같아」	fix	lookup
+segmentation:stem-before-sou	「ごめん、私、泣きそう」	「미안, 나, 울 것 같아」	fix	lookup
 segmentation:stem-before-sou	泣きを見る。	낭패를 본다.	keep	lookup
 dict:jisjk:342479	「どう？　来れそう？」	「어때? 올 수 있을 것 같아?」	fix	local
 dict:jisjk:342479	泣きそうな顔。	울 것 같은 얼굴.	keep	local

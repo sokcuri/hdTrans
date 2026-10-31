@@ -52,6 +52,24 @@ bool EndsInTail(std::u32string_view s, const TailRow& tail) {
     return tail.notAfter.find(head.back()) == std::u32string::npos;
 }
 
+// Whether the keigo word at i of text speaks of a third person (陛下は…おられる) or is a set phrase (嘘おっしゃい):
+// then it does not raise the listener.
+bool KeigoOfOthers(std::u32string_view text, std::size_t i) {
+    const std::u32string_view before = text.substr(0, i);
+    if (before.ends_with(U"嘘") || before.ends_with(U"冗談")) return true;
+    std::size_t start = before.size();
+    while (start > 0 && !IsSentenceEnd(before[start - 1])) --start;
+    const std::u32string_view clause = before.substr(start);
+    constexpr std::u32string_view kTitles[] = {U"陛下", U"殿下", U"閣下", U"様", U"さま", U"殿", U"先生", U"社長", U"上"};
+    constexpr std::u32string_view kParticles = U"はがもの";
+    for (const auto title : kTitles)
+        for (std::size_t at = clause.find(title); at != std::u32string_view::npos; at = clause.find(title, at + 1)) {
+            const std::size_t after = at + title.size();
+            if (after < clause.size() && kParticles.find(clause[after]) != std::u32string_view::npos) return true;
+        }
+    return false;
+}
+
 void PopMarks(std::u32string& s) {
     while (!s.empty() && IsMark(s.back())) s.pop_back();
 }
@@ -162,6 +180,8 @@ struct Cues {
     bool trailConj = false;   // the last clause trails off after a conjunction (けど……, が……, て……)
     bool honSonkei = false, honGive = false;  // REG-16
     bool declZo = false;      // REG-17: a plain statement declared with ぞ or ぜ
+    bool declBang = false;    // REG-21: a verb's dictionary form cut off with っ or exclaimed with ！ (出るっ, イクよっ！)
+    bool giveDecl = false;    // REG-21: the speaker's own will, てあげる, てみる or a benign てやる to someone (お前に貸してやる)
     bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ
     std::vector<std::pair<std::size_t, std::size_t>> authParts;  // parts of speaker auth rows found (row, part)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
@@ -214,15 +234,19 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
            last[last.size() - 2] >= U'ぁ' && last[last.size() - 2] <= U'ゖ')
         last.pop_back();
     PopMarks(last);
-    // an elongation mark between kana is not part of the word (でーす, ますぅ)
+    // an elongation mark or a small vowel that stretches the kana before it, between kana, is not part of
+    // the word (でーす, くださぁい)
     for (std::size_t k = 1; k + 1 < last.size();) {
         const bool kanaL = last[k - 1] >= U'ぁ' && last[k - 1] <= U'ヺ';
         const bool kanaR = last[k + 1] >= U'ぁ' && last[k + 1] <= U'ヺ';
-        if ((last[k] == U'ー' || last[k] == U'〜' || last[k] == U'～') && kanaL && kanaR) last.erase(k, 1);
+        const bool stretch = last[k] == U'ー' || last[k] == U'〜' || last[k] == U'～' || last[k] == U'ぁ' || last[k] == U'ぃ' ||
+                             last[k] == U'ぅ' || last[k] == U'ぇ' || last[k] == U'ぉ';
+        if (stretch && kanaL && kanaR) last.erase(k, 1);
         else ++k;
     }
     std::vector<std::u32string> stages{last};
     bool tailStripped = false;
+    std::u32string firstTail;  // the outermost tail particle stripped
     for (int guard = 0; guard < 6; ++guard) {
         const std::u32string s = stages.back();
         const TailRow* best = nullptr;
@@ -231,11 +255,12 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (!best) break;
         if (stages.size() == 1 && best->strong) c.lastStrong = true;
         if (stages.size() == 1 && best->text == U"か") c.lastKa = true;
+        if (stages.size() == 1) firstTail = best->text;
         if (stages.size() == 1) {
             std::u32string rest = s.substr(0, s.size() - best->text.size());
             PopMarks(rest);
             const char32_t e = rest.empty() ? 0 : rest.back();
-            constexpr std::u32string_view kDecl = U"だたいるうくすつぬぶむぐん";
+            constexpr std::u32string_view kDecl = U"だたいるうくすつぬぶむぐんルウクスツヌブムグ";
             if ((best->text == U"ぞ" || best->text == U"ぜ") && kDecl.find(e) != std::u32string_view::npos) c.declZo = true;
             // な on a verb's dictionary form forbids (行くな); on い, た, だ it exclaims, but not after a wish
             // (ほしいな, 行きたいな); the desire たい follows a verb stem, not the adjectives 冷たい, 重たい …
@@ -247,8 +272,10 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
                 if (EndsWith(rest, a)) taiAdj = true;
             const bool desire = EndsWith(rest, U"たい") && !taiAdj && rest.size() >= 3 &&
                                 kStem.find(rest[rest.size() - 3]) != std::u32string_view::npos;
+            // a wish, a farewell (またな) or a command softened with な (しなさいな, ください な) exclaims nothing
             const bool wish = desire || EndsWith(rest, U"ほしい") || EndsWith(rest, U"欲しい") ||
-                              EndsWith(rest, U"また");  // またな is a farewell
+                              EndsWith(rest, U"また") || EndsWith(rest, U"なさい") || EndsWith(rest, U"ください") ||
+                              EndsWith(rest, U"下さい");
             if ((best->text == U"な" || best->text == U"なあ") && (e == U'い' || e == U'た' || e == U'だ') && !wish)
                 c.exclaimNe = true;
         }
@@ -287,12 +314,15 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             }
             return at > 0 && !r.notAfter.empty() && r.notAfter.find(str[at - 1]) != std::u32string::npos;
         };
-        if (r.mode == "end") {
+        if (r.mode == "end" || r.mode == "end-after") {
             for (const auto& s : stages)
-                if (EndsWith(s, r.text) && !before(s, s.size() - r.text.size())) hit = true;
+                if (EndsWith(s, r.text) && !before(s, s.size() - r.text.size()) &&
+                    (r.mode == "end" || s.size() > r.text.size()))
+                    hit = true;
         } else {
             for (std::size_t i = u.text.find(r.text); i != std::u32string::npos; i = u.text.find(r.text, i + 1)) {
                 if (before(u.text, i)) continue;
+                if (r.cue == "keigo" && KeigoOfOthers(u.text, i)) continue;
                 const bool followed = std::any_of(r.notBefore.begin(), r.notBefore.end(), [&](const std::u32string& w) {
                     return StartsAt(u.text, i + r.text.size(), w);
                 });
@@ -346,7 +376,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             for (const auto& tr : t.tails)
                 if (EndsInTail(x, tr)) tail = true;
             for (const auto& r : t.cues) {
-                if (r.mode != "end" || !EndsWith(x, r.text) || x.size() <= r.text.size()) continue;
+                if ((r.mode != "end" && r.mode != "end-after") || !EndsWith(x, r.text) || x.size() <= r.text.size()) continue;
                 if (!r.notAfter.empty() && r.notAfter.find(x[x.size() - r.text.size() - 1]) != std::u32string::npos) continue;
                 if (r.cue == "polite") c.pend = true;
                 else if (r.cue == "casual") casualEnd = true;
@@ -354,6 +384,15 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             if (tail) casualEnd = true;
         }
     }
+    // REG-3: a final でしょうが retorts in plain speech; ますってば insists politely
+    if (EndsWith(stages.front(), U"でしょうが") || EndsWith(stages.front(), U"でしょーが")) {
+        c.pend = c.pany = false;
+        casualEnd = true;
+    }
+    if (EndsWith(stages.front(), U"ますってば") || EndsWith(stages.front(), U"ですってば")) c.pend = true;
+    // でしょう before けど concedes (あるんでしょうけど) at any level: no polite end of its own
+    for (const std::u32string_view concede : {U"でしょうけど", U"でしょうけれど", U"でしょうけども"})
+        if (EndsWith(stages.front(), concede)) c.pend = false;
     c.cend = casualEnd && !c.pend;
     if (tailStripped || c.strongTail) c.casualMark = true;
     {
@@ -381,6 +420,39 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         const bool volitional = x.size() >= 2 && x.back() == U'う' && kORow.find(x[x.size() - 2]) != std::u32string_view::npos &&
                                 !EndsWith(x, U"だろう") && !EndsWith(x, U"であろう");  // conjecture, not volition
         c.plainDecl = !question && !volitional && !tailStripped && !x.empty() && kEnds.find(x.back()) != std::u32string_view::npos;
+        // REG-21: a verb's dictionary form, bare or with よ alone, cut off with っ or exclaimed with ！; not a passive
+        // (犯される), an adjective or だ (好きだっ), nor with ね (行くねっ！: -ㄹ게)
+        std::u32string end = raw;
+        while (!end.empty() && (end.back() == U'…' || end.back() == U'‥' || end.back() == U'ー' || end.back() == U'―'))
+            end.pop_back();
+        const bool bang = !end.empty() && (end.back() == U'！' || end.back() == U'!');
+        while (!end.empty() && (end.back() == U'！' || end.back() == U'!' || end.back() == U'…' || end.back() == U'‥'))
+            end.pop_back();
+        const bool cut = !end.empty() && (end.back() == U'っ' || end.back() == U'ッ');
+        if (!question && (!tailStripped || (stages.size() == 2 && firstTail == U"よ"))) {
+            std::u32string v = stages[tailStripped ? 1 : 0];
+            while (!v.empty() && (v.back() == U'っ' || v.back() == U'ッ' || v.back() == U'ー')) v.pop_back();
+            for (const std::u32string_view give : {U"てあげる", U"であげる", U"てみる", U"でみる"})
+                if (EndsWith(v, give)) c.giveDecl = true;
+            // てやる is also the threat (殺してやる): a promise only with a beneficiary named by に (お前に貸してやる)
+            // and no harm in the verb
+            if (EndsWith(v, U"てやる") || EndsWith(v, U"でやる")) {
+                bool harm = false;
+                for (const std::u32string_view h : {U"殺", U"潰", U"殴", U"叩", U"ぶっ", U"ぶん", U"思い知", U"後悔", U"懲ら",
+                                                     U"犯", U"壊", U"消し", U"倒し", U"痛い目", U"地獄", U"呪"})
+                    if (v.find(h) != std::u32string::npos) harm = true;
+                const std::size_t te = v.size() - 3;
+                const std::size_t ni = v.rfind(U'に', te);
+                const bool beneficiary = ni != std::u32string::npos && ni > 0;
+                c.giveDecl = beneficiary && !harm;
+            }
+            constexpr std::u32string_view kVerbEnds = U"うくぐすつぬぶむるウクグスツヌブムル";
+            constexpr std::u32string_view kARow = U"あかがさざただなはばぱまやらわ";
+            const bool vol = v.size() >= 2 && v.back() == U'う' && kORow.find(v[v.size() - 2]) != std::u32string_view::npos;
+            const bool passive = EndsWith(v, U"られる") ||
+                                 (v.size() >= 3 && EndsWith(v, U"れる") && kARow.find(v[v.size() - 3]) != std::u32string_view::npos);
+            c.declBang = (bang || cut) && v.size() >= 2 && !vol && !passive && kVerbEnds.find(v.back()) != std::u32string_view::npos;
+        }
     }
     // REG-13: an exclamation of discovery or realisation: bare predicates alone (見つけた！, 面白い。, みっけ……あれ？),
     // with no sentence-final particle; a piece without a predicate (あれ？) may stand beside them
@@ -644,6 +716,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 d.honSonkei = hc.honSonkei;
                 d.honGive = hc.honGive;
                 d.exclaimNe = hc.exclaimNe && Key(hc) == "exclaim-ne";
+                d.declBang = hc.declBang && Key(hc) == "casual";
+                d.giveDecl = hc.giveDecl && Key(hc) == "casual";
             }
             if (!lines[k].dialogue && lines[k].speaker.empty()) {
                 const Cues c = Scan(t, lines[k].ja);

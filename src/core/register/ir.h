@@ -35,8 +35,11 @@ struct Node {
     std::string kase;   // P: subj top obj gen dat goal src loc instr com quot voc | lex
     Punct punct = Punct::none;
     std::string jaMark;  // Punct: the mark as written
-    // While a line is read: the level the word's ending had in the translation.
+    // While a line is read: the level the word's ending had in the translation, and where the node
+    // stands in the translation [from, to), in characters.
     Level was = Level::none;
+    uint32_t from = 0, to = 0;
+    std::string wasEomi;
 };
 
 // The level of one V node.

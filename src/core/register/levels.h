@@ -40,6 +40,8 @@ struct RegDecision {
     bool honSonkei = false;  // REG-16: an honorific verb backs -시- on the final predicate
     bool honGive = false;    // REG-16: the addressee gives: -시- on 주다
     bool exclaimNe = false;  // REG-18: the last sentence exclaims with な on a predicate: 해체 -네
+    bool declBang = false;   // REG-21: the last sentence declares with a verb cut off or exclaimed (出るっ, 行く！)
+    bool giveDecl = false;   // REG-21: the speaker's own will (教えてあげる, してみる, お前に貸してやる): -ㄹ게
 };
 
 // Decides every line of one document, lines in order.

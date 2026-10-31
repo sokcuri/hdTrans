@@ -159,10 +159,12 @@ struct Writer {
     std::string out;
     std::u32string word;  // the current word (since the last space)
     bool noSpace = true;  // the next item attaches (line start, after an opening quote or a prefix)
-    void Emit(const std::string& s, bool attach) {
+    std::vector<OutSpan>* spans = nullptr;
+    void Emit(const std::string& s, bool attach, uint32_t node) {
         if (s.empty()) return;
         if (!attach && !noSpace) out.push_back(' ');
         if (!attach) word.clear();
+        if (spans != nullptr) spans->push_back({out.size(), out.size() + s.size(), node});
         out += s;
         const std::u32string u = ToU32(s);
         const std::size_t sp = u.rfind(U' ');
@@ -346,9 +348,11 @@ std::string ConjugateForms(const Tables& t, const std::string& lemma, const std:
     return ToU8(prefix + s.text);
 }
 
-std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std::vector<Reg>& reg, const UttLevel& utt) {
+std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std::vector<Reg>& reg, const UttLevel& utt,
+                     std::vector<OutSpan>* spans) {
     const std::vector<XNode> xs = Expand(t, nodes, reg, utt);
     Writer w;
+    w.spans = spans;
     bool fusePending = false;
     Kind prevKind = Kind::Punct;
     bool prevAdn = false;
@@ -380,7 +384,7 @@ std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std:
                     else if (a == "after-digit") attach = !w.word.empty() && w.word.back() >= U'0' && w.word.back() <= U'9';
                     else if (a == "after-noun") attach = prevKind == Kind::N || prevKind == Kind::Raw || (prevKind == Kind::P && !prevAdn);
                 }
-                w.Emit(text, attach);
+                w.Emit(text, attach, n.id);
                 if (wr != t.words.end() && wr->second.attach == "next") w.noSpace = true;
                 if (consumeNext) ++i;
                 prevKind = Kind::N;
@@ -390,7 +394,7 @@ std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std:
             case Kind::P: {
                 // a particle after a comma keeps its space (부수입이다, 라고): it cannot attach to a mark
                 const bool afterComma = i > 0 && xs[i - 1].n.kind == Kind::Punct && xs[i - 1].n.punct == Punct::comma;
-                w.Emit(ParticleText(t, n, w.word, x.hon, x.spoken), !afterComma);
+                w.Emit(ParticleText(t, n, w.word, x.hon, x.spoken), !afterComma, n.id);
                 prevKind = Kind::P;
                 break;
             }
@@ -406,7 +410,7 @@ std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std:
                     const auto wr = t.words.find("V:" + n.lemma);
                     if (wr != t.words.end() && wr->second.attach == "always") attach = true;
                 }
-                w.Emit(text, attach);
+                w.Emit(text, attach, n.id);
                 prevKind = Kind::V;
                 prevAdn = n.ctype == CType::adn;
                 break;
@@ -439,13 +443,13 @@ std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std:
                     }
                 }
                 const std::string attachMode = pr ? pr->attach : "left";
-                w.Emit(text, attachMode == "left" || attachMode == "both" || n.glue);
+                w.Emit(text, attachMode == "left" || attachMode == "both" || n.glue, n.id);
                 if (attachMode == "right" || attachMode == "both") w.noSpace = true;
                 prevKind = Kind::Punct;
                 break;
             }
             case Kind::Raw:
-                w.Emit(n.lemma, n.glue);
+                w.Emit(n.lemma, n.glue, n.id);
                 prevKind = Kind::Raw;
                 break;
         }

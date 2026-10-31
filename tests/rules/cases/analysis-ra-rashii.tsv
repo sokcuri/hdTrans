@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-analysis:ra-rashii	「情熱的ながら献身的な、最高の彼女らしい」	「정열적이면서 헌신적인, 최고의 그녀인 거 같아」	fix	analysis
+analysis:ra-rashii	「情熱的ながら献身的な、最高の彼女らしい」	「정열적이면서 헌신적인, 최고의 그녀인 것 같아」	fix	analysis
 analysis:ra-rashii	いかにも“お前らしい”台詞だな。	그야말로 “너답다”대사네.	fix	analysis
 analysis:ra-rashii	そうだなぁ…僕らしくもないが、この季節は…色々考える。	그래~…나다운 것도 아니지만, 이 계절은…여러 가지 생각한다.	fix	analysis
 analysis:ra-rashii	彼らが来た。	그들이 왔다.	keep	analysis

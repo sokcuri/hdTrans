@@ -218,8 +218,9 @@ Punct PunctOfChar(char32_t c) {
     }
 }
 
-// The text of a gap as Raw words and Punct marks (each mark keeps its own character).
-void GapNodes(const std::u32string& g, bool glueFirst, std::vector<Node>& out) {
+// The text of a gap as Raw words and Punct marks (each mark keeps its own character); the gap starts at
+// offset in the translation.
+void GapNodes(const std::u32string& g, std::size_t offset, bool glueFirst, std::vector<Node>& out) {
     std::size_t i = 0;
     bool spaceBefore = !glueFirst;
     while (i < g.size()) {
@@ -235,6 +236,8 @@ void GapNodes(const std::u32string& g, bool glueFirst, std::vector<Node>& out) {
             p.punct = PunctOfChar(g[i]);
             p.jaMark = ToU8(g.substr(i, j - i));
             p.glue = !spaceBefore;
+            p.from = static_cast<uint32_t>(offset + i);
+            p.to = static_cast<uint32_t>(offset + j);
             out.push_back(p);
             spaceBefore = false;
             i = j;
@@ -244,6 +247,8 @@ void GapNodes(const std::u32string& g, bool glueFirst, std::vector<Node>& out) {
         while (j < g.size() && !IsSpace(g[j]) && !IsMarkChar(g[j])) ++j;
         Node n = MakeNode(Kind::Raw, ToU8(g.substr(i, j - i)));
         n.glue = !spaceBefore;
+        n.from = static_cast<uint32_t>(offset + i);
+        n.to = static_cast<uint32_t>(offset + j);
         out.push_back(n);
         spaceBefore = false;
         i = j;
@@ -268,7 +273,7 @@ struct Aligner {
     void Gap(std::size_t to) {
         if (to > c) {
             const bool glue = c > 0 && !IsSpace(o[c - 1]);
-            GapNodes(o.substr(c, to - c), glue && !nodes.empty(), nodes);
+            GapNodes(o.substr(c, to - c), c, glue && !nodes.empty(), nodes);
         }
         c = to;
     }
@@ -281,6 +286,8 @@ struct Aligner {
         Gap(p);
         Node n = MakeNode(k, t);
         n.glue = !SpaceBefore(p);
+        n.from = static_cast<uint32_t>(p);
+        n.to = static_cast<uint32_t>(p + u.size());
         nodes.push_back(n);
         c = p + u.size();
         ++aligned;
@@ -301,7 +308,10 @@ void FoldNegation(const Tables& t, std::vector<Node>& nodes) {
         if (neg == Neg::none) continue;
         const std::string lem = v.lemma, vp = v.vpos, kc = v.kcls;
         const bool vaux = v.aux, vglue = v.glue;
+        const uint32_t vfrom = std::min(v.from, x.from), vto = std::max(v.to, x.to);
         v = x;
+        v.from = vfrom;
+        v.to = vto;
         v.lemma = lem;
         v.vpos = vp;
         v.kcls = kc;
@@ -386,7 +396,11 @@ bool AlignPredicate(Words& r, Aligner& a, const PreItem& it, Want want, Mood moo
         if (got.empty()) continue;
         a.Gap(p);
         got[0].glue = got[0].glue || (!a.SpaceBefore(p) && !cop);
-        for (auto& n : got) a.nodes.push_back(n);
+        for (auto& n : got) {
+            n.from = static_cast<uint32_t>(p);
+            n.to = static_cast<uint32_t>(e);
+            a.nodes.push_back(n);
+        }
         a.c = e;
         ++a.aligned;
         // the other words of the ending row, as the translation wrote them
@@ -409,11 +423,16 @@ bool AlignPredicate(Words& r, Aligner& a, const PreItem& it, Want want, Mood moo
                 Level lv = Level::hae;
                 ParseLevel(jm->second, lv);
                 v.was = lv;
+                v.to = static_cast<uint32_t>(qe);
                 a.c = qe;
                 continue;
             }
             if (!ReadRestWord(r, ww, wk, (qe < a.o.size() && a.o[qe] == U'?') ? Mood::q : mood, ns, pos)) break;
-            for (auto& n : ns) a.nodes.push_back(n);
+            for (auto& n : ns) {
+                n.from = static_cast<uint32_t>(q);
+                n.to = static_cast<uint32_t>(qe);
+                a.nodes.push_back(n);
+            }
             a.c = qe;
         }
         FoldNegation(t, a.nodes);
@@ -458,6 +477,8 @@ bool BuildAligned(Words& r, const PreLine& line, std::vector<Node>& nodes) {
                 if (nodes.size() >= 2 && nodes.back().glue) host = nodes[nodes.size() - 2].lemma;
                 if (ReadLiteral(r, it.t, host, want, mood, lit)) {
                     lit.glue = nodes.back().glue;
+                    lit.from = nodes.back().from;
+                    lit.to = nodes.back().to;
                     nodes.back() = lit;
                 }
             }
@@ -489,6 +510,8 @@ bool BuildAligned(Words& r, const PreLine& line, std::vector<Node>& nodes) {
             }
             const std::u32string ru = ToU32(RealizeParticle(form, prev));
             if (!ru.empty() && o.compare(a.c, ru.size(), ru) == 0) {
+                p.from = static_cast<uint32_t>(a.c);
+                p.to = static_cast<uint32_t>(a.c + ru.size());
                 nodes.push_back(p);
                 a.c += ru.size();
                 ++a.aligned;
@@ -513,6 +536,193 @@ bool EndsWithAny(const std::string& s, const std::string& list) {
     return false;
 }
 
+// A copula read with its noun as one predicate (것이다): the noun and 이다 apart, so that speech fuses them
+// (거야) as it does when they come apart.
+void SplitNounCopula(const Tables& t, std::vector<Node>& nodes) {
+    const std::string cop = t.G("lemma.cop");
+    for (std::size_t q = 0; q < nodes.size(); ++q) {
+        const Node& n = nodes[q];
+        if (n.kind != Kind::V || n.lemma.size() <= cop.size() || !n.lemma.ends_with(cop)) continue;
+        const std::string host = n.lemma.substr(0, n.lemma.size() - cop.size());
+        bool fuses = false;
+        for (const auto& sr : t.spoken)
+            if (sr.host == host && sr.next == "COP") fuses = true;
+        if (!fuses) continue;
+        Node noun = MakeNode(Kind::N, host);
+        noun.dep = true;
+        noun.glue = n.glue;
+        noun.from = n.from;
+        noun.to = n.to;
+        Node v = n;
+        v.lemma = cop;
+        v.kcls = "COP";
+        v.vpos = "C";
+        v.glue = true;
+        nodes[q] = v;
+        nodes.insert(nodes.begin() + static_cast<std::ptrdiff_t>(q), noun);
+        ++q;
+    }
+}
+
+// REG-21: whether the predicate at q stands alone in its clause: before it, back to a mark or the line start,
+// only its own verbs (나와 버린다) and an adverb of time (이제, 또). A verb giving (해 줄게) is no declaration.
+bool SingleVerb(const std::vector<Node>& nodes, std::size_t q) {
+    if (nodes[q].lemma == "주다") return false;
+    for (std::size_t k = q; k > 0; --k) {
+        const Node& p = nodes[k - 1];
+        if (p.kind == Kind::Punct) return true;
+        // its own verbs: one it is written onto (도망쳐 간다) or the same verb said again (간다 간다)
+        if (p.kind == Kind::V && (p.ctype == CType::conn || p.lemma == nodes[q].lemma)) continue;
+        if (p.kind == Kind::N || p.kind == Kind::Raw) {
+            bool adverb = false;
+            for (const char* a : {"이제", "이젠", "또", "곧", "다시", "벌써", "바로"})
+                if (p.lemma == a) adverb = true;
+            if (adverb) continue;
+        }
+        return false;
+    }
+    return true;
+}
+
+// Whether a quote of the source is left open (「… without its 」).
+bool OpenQuote(const std::string& ja) {
+    int a = 0, b = 0;
+    for (const char32_t c : ToU32(ja)) {
+        if (c == U'「') ++a;
+        else if (c == U'」') --a;
+        else if (c == U'『') ++b;
+        else if (c == U'』') --b;
+    }
+    return a != 0 || b != 0;
+}
+
+// The text Generate wrote for each node, by node id (bytes; the spaces between a node's pieces included).
+std::vector<std::pair<std::size_t, std::size_t>> NodeTexts(std::size_t count, const std::vector<OutSpan>& spans) {
+    std::vector<std::pair<std::size_t, std::size_t>> out(count + 1, {std::string::npos, 0});
+    for (const OutSpan& sp : spans) {
+        if (sp.node > count) continue;
+        auto& r = out[sp.node];
+        r.first = std::min(r.first, sp.begin);
+        r.second = std::max(r.second, sp.end);
+    }
+    return out;
+}
+
+// The translation with only its sentence-final predicates written again: every other word stays as the
+// word stage wrote it. A predicate is written again only when the same reading at its old level gives back
+// the old text (the reading is sure); otherwise, or when nothing can be placed, ok turns false.
+std::string Splice(const Tables& t, const std::string& before, const std::vector<Node>& nodes, const std::vector<Reg>& reg,
+                   const UttLevel& u, const std::string& g, const std::vector<OutSpan>& spans,
+                   const std::vector<bool>& nested, bool& ok) {
+    const std::u32string o = ToU32(before);
+    const auto texts = NodeTexts(nodes.size(), spans);
+    const auto newText = [&](uint32_t id) {
+        const auto& r = texts[id];
+        return r.first == std::string::npos ? std::string() : g.substr(r.first, r.second - r.first);
+    };
+    const auto oldText = [&](const Node& n) { return ToU8(o.substr(n.from, n.to - n.from)); };
+    // the groups to write again: a final predicate, with a dependent noun fused onto it (것 + 이야 → 거야)
+    struct Group {
+        std::size_t first, last;
+    };
+    const auto levelOf = [&](uint32_t id) {
+        for (const auto& r : reg)
+            if (r.node == id) return r.level;
+        return Level::none;
+    };
+    const auto plain = [](Level l) { return l == Level::haera || l == Level::hae; };
+    std::vector<Group> groups;
+    for (std::size_t q = 0; q < nodes.size(); ++q) {
+        const Node& n = nodes[q];
+        if (n.kind != Kind::V || n.ctype != CType::final_ || nested[q] || n.to <= n.from) continue;
+        if (newText(n.id) == oldText(n)) continue;
+        const Level target = levelOf(n.id);
+        // a final family (-ㄴ걸, -지, -네) read at a level that is not polite keeps its form in 해체 and 해라체: a
+        // change of level there is none, and a form such as 온걸 may be read at another level than it has (하오체)
+        const bool polite = n.was == Level::haeyo || n.was == Level::hapsyo;
+        if (!n.eomi.empty() && n.eomi == n.wasEomi && n.was != Level::none && !polite && plain(target)) continue;
+        // REG-10: a predicate with -시- for the listener (주세요, 계십니까) is never lowered
+        if ((n.was == Level::haeyo || n.was == Level::hapsyo) && plain(target)) {
+            const std::string w = oldText(n);
+            for (const char* hon : {"세요", "셔요", "십시오", "십니다", "십니까", "시죠", "시지요", "셨어요", "셨습니", "시네요",
+                                    "실래요", "실까요", "시겠", "세용"})
+                if (w.find(hon) != std::string::npos) {
+                    ok = false;
+                    return before;
+                }
+        }
+        // a sentence end right before another word (개요 정도는, 역시다 엘 군) is not sure to be one: the line stays;
+        // the same predicate said again (아팠다 아팠다) is
+        if (q + 1 < nodes.size() && nodes[q + 1].kind != Kind::Punct &&
+            !(nodes[q + 1].kind == Kind::V && nodes[q + 1].lemma == n.lemma)) {
+            ok = false;
+            return before;
+        }
+        // with the words written into the same text (강해 + 진다) and a noun the copula fuses with (것 + 이다)
+        std::size_t first = q;
+        while (first > 0) {
+            const Node& p = nodes[first - 1];
+            if (p.kind == Kind::Punct || p.to <= p.from) break;
+            bool fuses = false;
+            if (p.kind == Kind::N && p.to == n.from)
+                for (const auto& sr : t.spoken)
+                    if (sr.host == p.lemma && sr.next == "COP") fuses = true;
+            if (p.to <= n.from && !fuses) break;
+            --first;
+        }
+        groups.push_back({first, q});
+    }
+    if (groups.empty()) return before;
+    // the same readings at the old levels must give back the old text
+    std::vector<Reg> old = reg;
+    std::vector<Node> oldNodes = nodes;
+    for (const Group& gr : groups) {
+        for (auto& r : old)
+            if (r.node == nodes[gr.last].id) {
+                r.level = nodes[gr.last].was;
+                r.hon = false;
+            }
+        oldNodes[gr.last].eomi = nodes[gr.last].wasEomi;
+    }
+    std::vector<OutSpan> oldSpans;
+    const std::string og = Generate(t, oldNodes, old, u, &oldSpans);
+    const auto oldTexts = NodeTexts(nodes.size(), oldSpans);
+    // the word stage may have written a form the generator fuses in speech (것이다 for 거다): the old text is
+    // also given back without spoken fusions
+    UttLevel written = u;
+    written.narration = true;
+    std::vector<OutSpan> writtenSpans;
+    std::string wg;
+    std::vector<std::pair<std::size_t, std::size_t>> writtenTexts;
+    const auto regenAt = [&](const auto& tx, const std::string& text, std::size_t a, std::size_t b) {
+        std::size_t begin = std::string::npos, end = 0;
+        for (std::size_t k = a; k <= b; ++k) {
+            const auto& r = tx[nodes[k].id];
+            if (r.first == std::string::npos) continue;
+            begin = std::min(begin, r.first);
+            end = std::max(end, r.second);
+        }
+        return begin == std::string::npos ? std::string() : text.substr(begin, end - begin);
+    };
+    std::u32string result = o;
+    for (auto gr = groups.rbegin(); gr != groups.rend(); ++gr) {
+        const uint32_t from = nodes[gr->first].from, to = nodes[gr->last].to;
+        const std::string was = ToU8(o.substr(from, to - from));
+        if (regenAt(oldTexts, og, gr->first, gr->last) != was) {
+            if (wg.empty()) {
+                wg = Generate(t, oldNodes, old, written, &writtenSpans);
+                writtenTexts = NodeTexts(nodes.size(), writtenSpans);
+            }
+            if (regenAt(writtenTexts, wg, gr->first, gr->last) != was) {
+                ok = false;
+                return before;
+            }
+        }
+        result.replace(from, to - from, ToU32(regenAt(texts, g, gr->first, gr->last)));
+    }
+    return ToU8(result);
+}
+
 }  // namespace
 
 std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lines, const std::vector<bool>& build,
@@ -528,8 +738,12 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         const PreLine& line = lines[li];
         std::vector<Node> nodes;
         bool lineOk = BuildAligned(r, line, nodes);
+        SplitNounCopula(t, nodes);
         uint32_t id = 0;
-        for (auto& n : nodes) n.id = ++id;
+        for (auto& n : nodes) {
+            n.id = ++id;
+            n.wasEomi = n.eomi;
+        }
         // REG-12: a command read where none can be leaves the line as it is: an adjective has no imperative
         // (진지하게 is the adverb), and a command right before another predicate (선택하지 말았으면 좋겠다) is none
         for (std::size_t q = 0; q < nodes.size(); ++q) {
@@ -541,6 +755,8 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
             if (pos == "A" || negated || (q + 1 < nodes.size() && nodes[q + 1].kind == Kind::V)) lineOk = false;
         }
         const RegDecision& dec = decisions[li];
+        // REG-1: narration after a quote, or a quote left open, keeps the line as the word stage wrote it
+        if (options.levels && (dec.narration || OpenQuote(line.ja))) lineOk = false;
         // REG-15: a line of several quotes has a level per quote; quoteOf maps a node to its quote
         std::vector<std::size_t> quoteOf(nodes.size(), 0);
         std::vector<bool> nested(nodes.size(), false);  // inside a quote within the quote: another voice
@@ -643,9 +859,22 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                 for (std::size_t k = q + 1; k < nodes.size(); ++k)
                     if (nodes[k].kind != Kind::Punct) lastWord = false;
                 const bool trailing = dec.trailConj && lastWord;
-                const bool keep = (perQuote ? quoteAt(q).keep : dec.keep) || thinkOf(q) || nested[q] || trail || trailing;
+                // REG-21: a declaration of one verb (出るっ, もう、イクよっ！) keeps -ㄴ다
+                const bool declared = dec.declBang && lastWord && was == Level::haera && nodes[q].ctype == CType::final_ &&
+                                      nodes[q].mood == Mood::decl && nodes[q].tense == Tense::nonpast && SingleVerb(nodes, q);
+                const bool keep = (perQuote ? quoteAt(q).keep : dec.keep) || thinkOf(q) || nested[q] || trail || trailing ||
+                                  declared;
+                // REG-21: a plain 주다, or 보다 after a verb or for てみる, at the end (빌려 준다, 해 본다) has in 해체 the
+                // form that asks (빌려 줘, 해 봐): the speaker's own will (てあげる, てみる, お前に貸してやる) is a promise, -ㄹ게;
+                // any other keeps -다 (殺してやる: a threat, not 죽여 줄게)
+                const bool auxSee = nodes[q].lemma == "보다" &&
+                                    (dec.giveDecl || (q > 0 && nodes[q - 1].kind == Kind::V && nodes[q - 1].ctype == CType::conn));
+                const bool give = (nodes[q].lemma == "주다" || auxSee) && nodes[q].ctype == CType::final_ &&
+                                  nodes[q].mood == Mood::decl && nodes[q].tense == Tense::nonpast && was == Level::haera &&
+                                  nodes[q].eomi.empty() && lastWord && target == Level::hae;
                 const bool held = mixed || inner || keep || keigo || askedByEnding || hapsyo || raise || jaCommand ||
-                                  (command && dec.key.starts_with("scene-speech"));
+                                  (command && dec.key.starts_with("scene-speech")) || (give && !dec.giveDecl);
+                if (!held && give) nodes[q].eomi = "lge";
                 if (!held && raisePlain) {
                     // the plain end stays plain, at the dialogue level of REG-2 (해), not raised to 해요
                     for (auto& g : reg)
@@ -685,6 +914,7 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                 for (std::size_t k = q + 1; k < nodes.size(); ++k)
                     if (nodes[k].kind != Kind::Punct) lastWord = false;
                 if (now == Level::hae && nodes[q].mood == Mood::decl && nodes[q].eomi.empty() && lastWord) {
+                    nodes[q].wasEomi = nodes[q].eomi;
                     nodes[q].eomi = "ne";
                     neChanged = true;
                 }
@@ -728,7 +958,9 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
             }
             levelChanged = levelChanged || lastChanged;
         }
-        std::string g = Generate(t, nodes, reg, u);
+        std::vector<OutSpan> spans;
+        std::string g = Generate(t, nodes, reg, u, &spans);
+        const std::string spliced = lineOk ? Splice(t, line.out, nodes, reg, u, g, spans, nested, lineOk) : line.out;
         // a stutter (ど、どういう) repeats the first syllable of the next word: \x01, 어떤 → 어, 어떤
         for (std::size_t pos = g.find('\x01'); pos != std::string::npos; pos = g.find('\x01')) {
             std::size_t q = pos + 1;
@@ -744,7 +976,7 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         while (lead < line.out.size() && line.out[lead] == ' ') ++lead;
         g = line.out.substr(0, lead) + g;
         RegenLine& o = out[li];
-        o.out = lineOk ? g : line.out;
+        o.out = lineOk ? spliced : line.out;
         o.gen = g;
         o.ok = lineOk;
         o.levelChanged = levelChanged;

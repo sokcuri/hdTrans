@@ -111,7 +111,7 @@ r6-13	REG-6	keep	d88		yes	「かなり」	hae	-
 r16-1	REG-16	fix	d90		yes	「行きますか？」	haeyo	no
 r16-2	REG-16	fix	d91		yes	「行きませんか？」	haeyo	no
 r16-3	REG-16	fix	d92		yes	「明日、学校に行きますか？」	haeyo	no
-r16-4	REG-16	keep	d93		yes	「先生はいらっしゃいますか？」	hapsyo	yes
+r16-4	REG-16	keep	d93		yes	「先生はいらっしゃいますか？」	haeyo	yes
 r16-5	REG-16	keep	d94		yes	「ちょっと待ってください」	haeyo	yes
 r16-6	REG-16	keep	d95		yes	「教えてくれますか？」	haeyo	yes
 r16-7	REG-16	keep	d96		yes	「何を召し上がりますか？」	hapsyo	yes
@@ -217,3 +217,12 @@ r20-n11	REG-20	keep	p3		yes	「うん」	-	-
 r20-n12	REG-20	keep	p3		no	陽菜	-	-
 r20-n13	REG-20	keep	p3		yes	「そう」	-	-
 r14-22	REG-14	keep	d142		yes	「絶対イヤよ、そんなの許さない」	hae	-
+r5-31	REG-5	keep	d301		yes	「陛下はそうおっしゃった」	hae	-
+r5-32	REG-5	keep	d302		yes	「嘘おっしゃい」	hae	-
+r5-33	REG-5	fix	d303		yes	「そうおっしゃいましても」	haeyo	-
+r3-31	REG-3	keep	d304		yes	「だから言ったでしょうが！」	hae	-
+r3-32	REG-3	fix	d305		yes	「もう行きますってば」	haeyo	-
+r3-33	REG-3	fix	d306		yes	「お先にどうぞ」	haeyo	-
+r3-34	REG-3	fix	d307		yes	「ちゃんと待っててくださぁい」	haeyo	-
+r17-31	REG-17	fix	d308		yes	「よし、イクぞっ」	haera	-
+r17-32	REG-17	fix	d309		yes	「行くぞー！」	haera	-
