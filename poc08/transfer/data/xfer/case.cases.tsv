@@ -84,3 +84,5 @@ case.mo.naku.hold	fix	そう思う間もなく――	-	inv
 case.mo.naku.hold	keep	本もない。	책도 없다.	inv
 case.wa.aru	fix	「時間はある。」	「시간은 있어.」	inv
 case.wa.aru	keep	「時間がある。」	「시간이 있어.」	inv
+case.no.det	fix	「何の本ですか。」	「무슨 책이에요?」	inv
+case.no.det	keep	「先生の本です。」	「선생님의 책이에요.」	inv

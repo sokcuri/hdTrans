@@ -26,6 +26,7 @@
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
 #include "core/engine/rules.h"
+#include "core/filter/filter.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
 #include "frontend/load_info.h"
@@ -714,6 +715,11 @@ int RunMain(int argc, char** argv) {
     poc08Options.cfg.wrapped = wrapped;
     poc08Options.cfg.document = !each;
     if (userPathsArg) poc08Options.cfg.userdicts = *userPathsArg;
+    // the native route reads the source line alone and writes its own text: with mid-sentence line breaks, filters
+    // or user dictionaries 0.7.x keeps every line
+    poc08Options.nativeHeld = wrapped || userPathsArg.has_value() ||
+                              (filters && (filters->Rows(hdTrans::filter::Stage::Pre) > 0 ||
+                                           filters->Rows(hdTrans::filter::Stage::Post) > 0 || filters->User() != nullptr));
     poc08Options.sideIr = !poc08Why.empty() || !poc08Stages.empty();
     poc08Options.lift = !poc08Misses.empty() || poc08Stats;
     {
@@ -893,6 +899,7 @@ int RunMain(int argc, char** argv) {
 #ifdef HDTRANS_POC08_HOOKS
         std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
+        if (poc08.bridge != nullptr) hd08::bridge::ApplyNative(poc08.bridge, lines, contextLines, translated);
         if (ruleData) {
             const std::vector<std::string> source(lines.begin() + static_cast<std::ptrdiff_t>(contextLines), lines.end());
             hd08::bridge::RuleRewrite(*ruleData, source, ruleWatch.capture, translated, ruleCounts, rulePreOut,
@@ -927,6 +934,11 @@ int RunMain(int argc, char** argv) {
 #endif
             out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options).front();
 #ifdef HDTRANS_POC08_HOOKS
+            if (poc08.bridge != nullptr) {
+                std::vector<std::string> one{out};
+                hd08::bridge::ApplyNative(poc08.bridge, lines, 0, one);
+                out = one.front();
+            }
             if (ruleData) {
                 std::vector<std::string> one{out};
                 hd08::bridge::RuleRewrite(*ruleData, {std::string(line)}, ruleWatch.capture, one, ruleCounts, rulePreOut,

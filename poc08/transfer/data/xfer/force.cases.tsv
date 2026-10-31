@@ -28,3 +28,7 @@ force.te.final.fp	fix	「本を読んでね」	「책을 읽어」	inv
 force.te.final.fp	keep	「本を読んで寝る」	「책을 읽고 자」	inv
 force.ka.close	fix	「友達は学校に行きますか」	「친구는 학교에 가요?」	inv
 force.ka.close	keep	「友達は学校に行きますか。」	「친구는 학교에 가요?」	inv
+force.doushita.masu.hold	fix	「どうしました？」	-	inv
+force.doushita.masu.hold	keep	「友達はどうしますか？」	「친구는 어떻게 해요?」	inv
+force.suman.hold	fix	「……すまん」	-	inv
+force.suman.hold	keep	「……すみません」	「……미안해요」	inv

@@ -43,3 +43,4 @@ case.ni.issho	N5-42	一緒 [kase=ni]	-	-	Adv:같이	m	own	一緒に → 같이
 case.mo.cop.hold	N5-18	[kase=mo] [role=cop]	-	line.route=fallback	-	m	own	私もです (も + copula): held for 0.7.x
 case.mo.naku.hold	N5-18	[kase=mo] [aux.nai.adj,form.role=renyo]	-	line.route=fallback	-	m	own	間もなく (without): held for 0.7.x
 case.wa.aru	N5-07	{NP} [kase=wa] [aux.aru.cop]	-	-	P:top V:있다	m	own	時間はある (ある read as the copula's) → 시간은 있다
+case.no.det	N5-54	{NP} [kase=no]	NP.ko=무슨	-	-	m	own	何の用 → 무슨 볼일

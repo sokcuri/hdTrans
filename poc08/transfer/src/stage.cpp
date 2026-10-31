@@ -147,14 +147,16 @@ TransferData* LoadTransfer(const Config& cfg, std::string& err) {
     delete d;
     return nullptr;
   }
+  // the native tables: an error there leaves the native route off (every line held) and the deciders working;
+  // hd8native lint reports it
   nat::Load(cfg.data, d->native);
-  if (!d->native.errors.empty()) {
-    err = "transfer: " + d->native.errors.front();
+  std::string serr;
+  d->structure = LoadStructure(cfg, serr);
+  if (!d->structure) {
+    err = "transfer: " + serr;
     delete d;
     return nullptr;
   }
-  std::string serr;
-  d->structure = LoadStructure(cfg, serr);
   d->native.structure = d->structure;
   return d;
 }

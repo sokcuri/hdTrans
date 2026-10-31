@@ -186,35 +186,16 @@ std::vector<XNode> Expand(const Tables& t, const std::vector<Node>& in, const st
         const std::string pos = !n.vpos.empty() ? n.vpos : info.pos;
         const std::string auxPos = (pos == "A" || pos == "C" || pos == "N") ? "A" : "V";
         if (n.neg == Neg::an || n.neg == Neg::mot) {
-            // a noun + 하다 verb takes 안 before 하다 (공부 안 해, 이야기 안 해); a -어하다 verb (좋아하다) does not
-            const std::string ha = t.G("voice.ha");
-            if (pos == "V" && EndsWith(x.n.lemma, ha) && x.n.lemma.size() > ha.size()) {
-                const std::u32string stem = ToU32(x.n.lemma.substr(0, x.n.lemma.size() - ha.size()));
-                const char32_t last = stem.back();
-                const bool eoHa = IsSyllable(last) && Initial(last) == kInitIeung && Final(last) == kFinNone &&
-                                  (Medial(last) == A || Medial(last) == EO || Medial(last) == YEO ||
-                                   Medial(last) == WO || Medial(last) == WA);
-                if (IsSyllable(last) && !eoHa) {
-                    XNode noun = x;
-                    noun.n = Node{};
-                    noun.n.kind = Kind::N;
-                    noun.n.lemma = ToU8(stem);
-                    noun.n.id = noun.n.origin = x.n.origin;
-                    noun.n.utt = n.utt;
-                    noun.n.glue = x.n.glue;
-                    out.push_back(noun);
-                    x.n.lemma = ha;
-                    x.n.kcls.clear();
-                }
-            }
+            const bool prevIsNoun = !out.empty() && out.back().n.kind == Kind::N;
             XNode adv = x;
             adv.n = Node{};
             adv.n.kind = Kind::Adv;
             adv.n.lemma = t.G(n.neg == Neg::an ? "neg.an" : "neg.mot");
             adv.n.id = adv.n.origin = x.n.origin;
             adv.n.utt = n.utt;
-            // 안 takes the word's place: it attaches where the word did (……안 했어), unless a noun split off before it
-            adv.n.glue = x.n.lemma == ha ? false : x.n.glue;
+            // 안 takes the word's place: it attaches where the word did (……안 했어); after a noun (공부 + 하다) the
+            // light verb's glue means the noun ends a word, and 안 stands apart (공부 안 해)
+            adv.n.glue = x.n.glue && !prevIsNoun;
             out.push_back(adv);
             x.n.neg = Neg::none;
             x.n.glue = false;  // 공부 + 안 + 하다: 안 stands between the noun and the light verb (공부 안 해)

@@ -31,7 +31,8 @@ namespace hd08::bridge {
 struct Options {
     Config cfg;
     bool normalize = false, segment = false, generate = false, decide = false, reselect = false;
-    bool native = false;  // native route (T → R → G on covered sentences)
+    bool native = false;  // native route (T → R → G on covered lines)
+    bool nativeHeld = false;  // the native route stays off for this run (--wrapped, filters, user dictionaries)
     bool rule = false;    // 0.8-rule: segment plus the retrofit on dialogue (bridge/rule.h; run by the CLI)
     bool sideIr = false;  // keep the side IR records (--why, --stages); costs time
     bool lift = false;    // lift every sentence even when no part needs it (to count the misses)

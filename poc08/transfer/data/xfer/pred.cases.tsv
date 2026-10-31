@@ -66,3 +66,5 @@ pred.dem.aa	fix	「ああいう人がいない。」	「저런 사람이 없어.
 pred.dem.aa	keep	「こう言う。」	「이렇게 말해.」	inv
 pred.na.end.hold	fix	「ゴメンな……」	-	inv
 pred.na.end.hold	keep	「静かな部屋だ。」	「조용한 방이야.」	inv
+pred.dem.dou.c	fix	「どういう、本？」	「어떤, 책?」	inv
+pred.dem.dou.c	keep	「どう言う？」	「어떻게 말해?」	inv

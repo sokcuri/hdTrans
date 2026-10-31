@@ -36,8 +36,9 @@ std::vector<std::string> ListFiles(const std::string& dir, const std::string& su
     std::vector<std::string> out;
     std::error_code ec;
     const std::filesystem::path p(std::u8string(dir.begin(), dir.end()));
-    for (const auto& e : std::filesystem::directory_iterator(p, ec)) {
-        if (!e.is_regular_file()) continue;
+    for (std::filesystem::directory_iterator it(p, ec), end; !ec && it != end; it.increment(ec)) {
+        const auto& e = *it;
+        if (!e.is_regular_file(ec)) continue;
         const std::u8string u = e.path().u8string();
         std::string name(u.begin(), u.end());
         if (name.size() >= suffix.size() && name.compare(name.size() - suffix.size(), suffix.size(), suffix) == 0)
@@ -173,6 +174,7 @@ void LoadRows(const std::string& path, Data& d) {
             else if (f.size() >= 3 && f[0] == "unit") d.units[f[1]] = std::atoi(f[2].c_str());
             else if (f.size() >= 3 && f[0] == "alone") d.alone[f[1]] = std::atoi(f[2].c_str());
             else if (f.size() >= 2 && f[0] == "predicate") d.predicateEnd = f[1];
+            else if (f.size() >= 2 && f[0] == "light") d.lightVerb = f[1];
         });
         return;
     }
@@ -441,6 +443,12 @@ void Load(const std::string& root, Data& d) {
     for (const std::string& f : ListFiles(root + "/lexicon/lex/levels", ".tsv")) LoadLexicon(f, d);
     LoadLexicon(root + "/lexicon/lex/lexicon/curriculum.tsv", d);
     LoadPhrases(root + "/lexicon/lex/phrases-curriculum.tsv", d);
+    for (size_t i = 0; i < d.rows.size(); i++)
+        if (d.rows[i].then == "supp") d.supp[d.rows[i].when.substr(8)] = i;
+    for (const Entry& e : d.entries)
+        if (e.pos == "n")
+            for (const Sense& sn : e.senses)
+                if (sn.ko.find(' ') == std::string::npos) d.koNouns.insert(sn.ko);
     for (Row& r : d.rows) {
         SetSpecificity(d, r);
         // a phrase names its words: it is more specific than any grammar row over them
@@ -455,8 +463,9 @@ std::vector<std::string> SpecIds(const std::string& specDir) {
     std::set<std::string> out;
     std::error_code ec;
     const std::filesystem::path p(std::u8string(specDir.begin(), specDir.end()));
-    for (const auto& e : std::filesystem::recursive_directory_iterator(p, ec)) {
-        if (!e.is_regular_file() || e.path().extension() != ".md") continue;
+    for (std::filesystem::recursive_directory_iterator it(p, ec), end; !ec && it != end; it.increment(ec)) {
+        const auto& e = *it;
+        if (!e.is_regular_file(ec) || e.path().extension() != ".md") continue;
         const std::u8string u = e.path().u8string();
         std::string text;
         if (!ReadWholeFile(std::string(u.begin(), u.end()), text)) continue;
@@ -509,7 +518,8 @@ struct Cand {
     size_t row = 0;
     int begin = 0, end = 0;               // matched token range [begin, end)
     std::vector<int> consumed;            // token indexes
-    std::map<std::string, int> slots;     // slot name → token (first of each name)
+    std::map<std::string, int> slots;     // slot name → token (first of each name), for conditions and targets
+    std::vector<int> slotToks;            // every token a slot read
     int anchor = -1;
     int clause = -1;
     std::vector<std::string> because;
@@ -606,6 +616,7 @@ struct Ctx {
         Cand y = c;
         if (a.k == Atom::K::Slot) {
             y.slots.emplace(a.slot, i);
+            y.slotToks.push_back(i);
         } else {
             y.consumed.push_back(i);
         }
@@ -1115,7 +1126,10 @@ uint32_t SemOf(const Data& d, std::string classes) {
     return m;
 }
 
-const TokAux kNoAux;
+const TokAux& NoAux() {
+    static const TokAux none;
+    return none;
+}
 
 struct Placed {
     KNode n;
@@ -1128,6 +1142,11 @@ struct Placed {
 void Transfer(const Data& d, Doc& doc, Line& line) {
     line.kir.clear();
     line.unmatched.clear();
+    if (!d.errors.empty()) {
+        line.unmatched.push_back(doc.I("native-tables/error"));
+        line.route = 2;
+        return;
+    }
     Ctx x{d, doc, line, {}, {}, {}};
     x.aux = d.structure ? AuxOf(*d.structure, doc, line.toks) : std::vector<TokAux>(line.toks.size());
     x.aux.resize(line.toks.size());
@@ -1163,7 +1182,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 k.pos = "num";
                 k.epos = Pos::n;
                 k.content = true;
-                k.aux = &kNoAux;  // the unit is a word: the counter's function reading (時 → link time) is not
+                k.aux = &NoAux();  // the unit is a word: the counter's function reading (時 → link time) is not
                 k.number = value;
                 k.digits = digits;
                 k.counter = counter;
@@ -1195,7 +1214,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         k.last = static_cast<int>(last);
         k.src = {t.src.begin, line.toks[last].src.end};
         k.surf = std::string(line.Src(k.src));
-        k.aux = joined ? &kNoAux : &x.aux[last];
+        k.aux = joined ? &NoAux() : &x.aux[last];
         k.form = Strip(Strip(x.aux[last].form, "aux:"), "aux.form.");
         if (joined) {
             k.lemma = joined->ja;
@@ -1351,13 +1370,15 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             if (ok) cands.push_back(std::move(c));
         }
     }
-    std::sort(cands.begin(), cands.end(), [&](const Cand& a, const Cand& b) {
+    std::stable_sort(cands.begin(), cands.end(), [&](const Cand& a, const Cand& b) {
         const Row& ra = d.rows[a.row];
         const Row& rb = d.rows[b.row];
         if (ra.specificity != rb.specificity) return SpecGreater(ra.specificity, rb.specificity);
         if (a.end - a.begin != b.end - b.begin) return a.end - a.begin > b.end - b.begin;
         if (a.begin != b.begin) return a.begin < b.begin;
-        return ra.order < rb.order;
+        if (ra.order != rb.order) return ra.order < rb.order;
+        if (a.consumed != b.consumed) return a.consumed < b.consumed;
+        return a.slotToks < b.slotToks;
     });
     // A token is consumed by one accepted candidate, or read as a slot by any number of them, not both.
     std::vector<int> owner(n, -1);   // accepted candidate consuming the token
@@ -1372,14 +1393,14 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             else if (reader[static_cast<size_t>(t)] >= 0) clash = reader[static_cast<size_t>(t)];
         }
         // a nominaliser read as {NP} is a function word its own row consumes: no clash
-        for (const auto& [name, t] : c.slots)
+        for (int t : c.slotToks)
             if (x.tk[static_cast<size_t>(t)].content && owner[static_cast<size_t>(t)] >= 0) clash = owner[static_cast<size_t>(t)];
         if (clash >= 0) {
             lost[static_cast<size_t>(clash)].push_back(ci);
             continue;
         }
         for (int t : c.consumed) owner[static_cast<size_t>(t)] = static_cast<int>(accepted.size());
-        for (const auto& [name, t] : c.slots)
+        for (int t : c.slotToks)
             if (x.tk[static_cast<size_t>(t)].content && reader[static_cast<size_t>(t)] < 0)
                 reader[static_cast<size_t>(t)] = static_cast<int>(accepted.size());
         accepted.push_back(ci);
@@ -1393,12 +1414,12 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
     for (size_t a = 0; a < accepted.size(); a++) {
         const Cand& c = cands[accepted[a]];
         const Row& r = d.rows[c.row];
-        for (const auto& [name, tok] : c.slots) {
+        for (const auto& [name, tok] : c.slots)
             for (const Cond& cd : r.conds)
                 if (cd.target == name && cd.key == "form") formRead[static_cast<size_t>(tok)] = true;
+        for (int tok : c.slotToks)
             if (std::find(c.consumed.begin(), c.consumed.end(), tok + 1) != c.consumed.end())
                 formRead[static_cast<size_t>(tok)] = true;
-        }
     }
     for (size_t i = 0; i < n; i++) {
         const Tk& k = x.tk[i];
@@ -1470,8 +1491,9 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             dec.rule = doc.I(k.counter ? (native ? "xfer:num.native" : "xfer:num.sino") : "xfer:num.bare");
             dec.spec = doc.I(k.counter ? "N5-56" : "N5-55");
             dec.src = k.src;
-            const uint32_t did = line.Decide(std::move(dec));
+            uint32_t did = 0;
             auto push = [&](KK kind, const std::string& lemma, bool glue, int sub) {
+                if (!did) did = line.Decide(dec);
                 Placed p;
                 p.tok = p.ptok = static_cast<int>(i);
                 p.sub = sub;
@@ -1483,6 +1505,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 p.n.decision = did;
                 placed.push_back(std::move(p));
             };
+            const size_t first = placed.size();
             const std::string digitText = k.digits ? std::string(line.Src({k.t->src.begin, line.toks[static_cast<size_t>(k.counter ? k.last - 1 : k.last)].src.end})) : "";
             if (alone != d.alone.end() && k.number == alone->second && !k.digits) {
                 push(KK::N, Numeral(d, 1, true, false), false, 0);
@@ -1498,7 +1521,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 push(KK::N, word, false, 0);
                 if (cs) push(KK::N, cs->ko, false, 1);
             }
-            wordNode[i] = static_cast<int>(placed.size()) - 1;
+            wordNode[i] = static_cast<int>(first);
             continue;
         }
         if (!k.content || !k.sense) {
@@ -1663,8 +1686,14 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         return best >= 0 ? best : before;
     };
 
-    // Assignments: per node field, the first (most specific) accepted row wins.
+    // Assignments: per node field, the first (most specific) accepted row wins; a field a row's node template sets
+    // is that row's.
     std::set<std::pair<int, std::string>> done;
+    for (size_t a = 0; a < accepted.size(); a++) {
+        const Row& r = d.rows[cands[accepted[a]].row];
+        for (size_t k = 0; k < r.nodes.size() && k < candNodes[a].size(); k++)
+            for (const auto& [f, v] : r.nodes[k].fields) done.insert({candNodes[a][k], f});
+    }
     for (size_t a = 0; a < accepted.size(); a++) {
         const Cand& c = cands[accepted[a]];
         const Row& r = d.rows[c.row];
@@ -1703,8 +1732,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
     // Suppletive negatives (supp rows): a negated predicate whose Korean lemma has its own negative word.
     for (Placed& p : placed) {
         if (p.n.kind != KK::V || p.n.neg == kneg::none) continue;
-        for (const Row& r : d.rows) {
-            if (r.then != "supp" || doc.S(p.n.lemma) != r.when.substr(8)) continue;
+        const auto sp = d.supp.find(std::string(doc.S(p.n.lemma)));
+        if (sp == d.supp.end()) continue;
+        {
+            const Row& r = d.rows[sp->second];
             Decision dec;
             dec.stage = 'T';
             dec.kind = Ev::Cued;
@@ -1716,7 +1747,6 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             p.n.neg = kneg::none;
             p.n.kcls = 0;  // the class was the positive lemma's (알다 ㄹ, 모르다 르)
             line.Decide(std::move(dec));
-            break;
         }
     }
     // A word right after an ellipsis or a dash keeps the source's spacing: no space in the source, none in Korean.
@@ -1730,6 +1760,27 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
     for (size_t oi = 0; oi < order.size(); oi++) {
         Placed& p = placed[order[oi]];
         KNode nd = p.n;
+        // N5-H1: a short-negated noun + 하다 verb puts 안 before 하다 (話さない → 이야기 안 해): the noun is a node
+        if (nd.kind == KK::V && nd.neg == kneg::an && !d.lightVerb.empty()) {
+            const std::string lemma(doc.S(nd.lemma));
+            if (lemma.size() > d.lightVerb.size() && lemma.ends_with(d.lightVerb) &&
+                d.koNouns.count(lemma.substr(0, lemma.size() - d.lightVerb.size()))) {
+                KNode noun;
+                noun.kind = KK::N;
+                noun.lemma = doc.I(lemma.substr(0, lemma.size() - d.lightVerb.size()));
+                noun.src = nd.src;
+                noun.decision = nd.decision;
+                noun.glue = nd.glue;
+                noun.id = static_cast<uint32_t>(line.kir.size() + 1);
+                const Tk& k0 = x.tk[static_cast<size_t>(p.ptok)];
+                noun.utt = k0.utt;
+                noun.clause = static_cast<uint16_t>(k0.clause < 0 ? 0 : k0.clause);
+                line.kir.push_back(noun);
+                nd.lemma = doc.I(d.lightVerb);
+                nd.kcls = 0;
+                nd.glue = true;
+            }
+        }
         nd.id = static_cast<uint32_t>(line.kir.size() + 1);
         const Tk& k = x.tk[static_cast<size_t>(p.ptok)];
         nd.utt = k.utt;

@@ -33,3 +33,4 @@ pred.dem.dou	N5-53	どう 言う	next.pos=n	-	Det:어떤	m	own	どういう意�
 pred.dem.kou	N5-53	こう 言う	next.pos=n	-	Det:이런	m	own	こういう本 → 이런 책
 pred.dem.aa	N5-53	ああ 言う	next.pos=n	-	Det:저런	m	own	ああいう人 → 저런 사람
 pred.na.end.hold	N5-06	{N} [aux.da,form.role=adn]	next.kind=punct	line.route=fallback	-	m	own	ゴメンな (な ends the line): held for 0.7.x
+pred.dem.dou.c	N5-53	どう 言う	next.role=comma	-	Det:어떤	m	own	どういう、意味 → 어떤, 의미

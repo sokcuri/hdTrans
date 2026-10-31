@@ -212,7 +212,7 @@ bool RunNative(const Engine& e, Doc& doc, Line& line) {
     StageR(*e.discourse, rc, doc, line);
     line.kir2 = line.kir;
     for (KNode& n : line.kir2) n.origin = n.id;
-    StageG(*e.generator, e.cfg, doc, line);
+    StageG(*e.generator, rc, doc, line);
     return !line.out.empty();
 }
 

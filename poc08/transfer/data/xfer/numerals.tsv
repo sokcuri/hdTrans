@@ -3,7 +3,7 @@
 # A counter's num feature (lexicon) picks native or sino; native numerals stop at 99, higher numbers are Sino-Korean.
 # Rows: value N native adn sino; digit KANJI N; wago KANA N (ひと, ふた: native numerals before つ); unit KANJI N (十 百 千); alone COUNTER N: the counter is dropped and
 # the counting word stands alone (一つ → 하나); predicate KO: the ending of a Korean predicate lemma (a noun sense
-# with it reads as a predicate).
+# with it reads as a predicate); light KO: the light verb of noun + verb predicates (공부 안 하다).
 kind	key	a	b	c
 value	1	하나	한	일
 value	2	둘	두	이
@@ -49,3 +49,4 @@ unit	百	100
 unit	千	1000
 alone	つ	1
 predicate	다
+light	하다

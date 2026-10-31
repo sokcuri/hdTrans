@@ -509,7 +509,7 @@ std::string TakeReselections(Bridge* b) {
 }
 
 void ApplyNative(Bridge* b, std::span<const std::string> lines, size_t contextLines, std::vector<std::string>& out) {
-    if (!b->opt.native || lines.size() < contextLines) return;
+    if (!b->opt.native || b->opt.nativeHeld || lines.size() < contextLines) return;
     std::vector<std::string> src(lines.begin(), lines.end());
     for (std::string& l : src)
         if (!l.empty() && l.back() == '\r') l.pop_back();
@@ -537,9 +537,10 @@ void ApplyNative(Bridge* b, std::span<const std::string> lines, size_t contextLi
             stages += LineJson(doc, l) + '\n';
         }
         if (!use) continue;
-        // the white space 0.7.x kept at the start of the line stays
+        // the white space 0.7.x kept at the start of the line and its line-end \r stay
         std::string& o = out[i - contextLines];
-        o = o.substr(0, LeadSpace(o)) + l.out;
+        const bool cr = !o.empty() && o.back() == '\r';
+        o = o.substr(0, LeadSpace(o)) + l.out + (cr ? "\r" : "");
         native++;
     }
     std::lock_guard<std::mutex> lock(b->mu);

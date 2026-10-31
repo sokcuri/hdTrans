@@ -4,12 +4,12 @@ asp.teiru	fix	本を読んでいる。	책을 읽고 있다.	inv
 asp.teiru	keep	本を読む。	책을 읽는다.	inv
 asp.teiru.result	fix	先生は座っている。	선생님은 앉아 있다.	inv
 asp.teiru.result	keep	先生は本を読んでいる。	선생님은 책을 읽고 있다.	inv
-asp.teiru.state	fix	私は先生を知っている。	나는 선생님을 안다.	inv
+asp.teiru.state	fix	私は疲れている。	나는 피곤하다.	inv
 asp.teiru.state	keep	私は先生を待っている。	나는 선생님을 기다리고 있다.	inv
-asp.teiru.past	fix	先生は結婚している。	선생님은 결혼했다.	inv
+asp.teiru.past	fix	授業は始まっている。	수업은 시작됐다.	inv
 asp.teiru.past	keep	先生は座っている。	선생님은 앉아 있다.	inv
 asp.teiru.mada	fix	「まだ食べていない。」	「아직 안 먹었어.」	inv
 asp.teiru.mada	keep	「パンを食べていない。」	「빵을 안 먹고 있어.」	inv
 asp.teiru.change.neg	fix	「先生は来ていない。」	「선생님은 안 왔어.」	inv
-asp.teiru.change.neg	keep	「先生は座っていない。」	「선생님은 안 앉아 있어.」	inv
+asp.teiru.change.neg	keep	「本を読んでいない。」	「책을 안 읽고 있어.」	inv
 asp.teiru.change.neg	fix	「友達は来ていませんか。」	「친구는 안 왔어요?」	inv

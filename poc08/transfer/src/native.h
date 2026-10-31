@@ -31,6 +31,7 @@
 #include <map>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "ir/stages.h"
@@ -97,6 +98,9 @@ struct Data {
     std::map<int, std::array<std::string, 3>> numerals;            // value → native, adnominal, Sino-Korean
     std::map<std::string, int> digits, units, alone;               // kanji digits and units; counters read alone
     std::string predicateEnd;                                      // the ending of a Korean predicate lemma
+    std::string lightVerb;                                         // the Korean light verb (noun + it is a verb)
+    std::unordered_map<std::string, size_t> supp;                  // Korean lemma → its supp row
+    std::unordered_set<std::string> koNouns;                       // Korean glosses of noun entries (공부, 이야기)
     std::vector<std::string> errors;
     const StructureData* structure = nullptr;  // aux.tsv reading of tokens (owned by TransferData)
 

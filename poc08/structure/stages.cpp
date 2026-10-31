@@ -123,6 +123,8 @@ std::vector<TokAux> AuxOf(const StructureData& s, const Doc& doc, const std::vec
         static const char* const kKinds[] = {"form", "voice", "tense", "link", "cop", "modal", "polite", "neg",
                                              "aspect", "jreg", "quote", "bene", "force", "aux", "light", "case",
                                              "topic", "focus", "final", "nom", "fn", "suffix", "prefix", "punct"};
+        static_assert(sizeof(kKinds) / sizeof(kKinds[0]) == static_cast<size_t>(hd8::AuxKind::punct) + 1,
+                      "one name per AuxKind");
         f.push_back(std::string("kind=") + kKinds[static_cast<int>(r.kind)]);
         size_t at = 0;
         while (at <= r.setsText.size()) {
