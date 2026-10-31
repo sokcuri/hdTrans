@@ -107,3 +107,14 @@ lexical:docchi-nishiro	どちらにしろと先生は言った。	has:어느 쪽
 cx:nanyori:20	それがなによりの証拠だ。	has:최고의 증거	fix	rewrites
 cx:nanyori:20	なによりも、ここには美味しいご飯が待っている。	has:무엇보다도,	keep	rewrites
 cx:nanyori:10	そう、それはなによりね。	has:다행이네	fix	rewrites
+lexical:suki-katte	好き勝手なことを言う。	has:제멋대로인 것을	keep	lookup
+lexical:suki-katte	好き勝手な真似はさせない。	has:제멋대로인 흉내는	keep	lookup
+lexical:set-adverbials	常ならぬ気配がした。	has:범상치 않은 기색	fix	lookup
+lexical:set-adverbials	常ならぬ気配がした。	lacks:평소라면	keep	lookup
+lexical:set-adverbials	常ならない様子だ。	lacks:평소라면	keep	lookup
+cx:nanyori:10	それは何よりだ。	has:그것은 다행이다	fix	rewrites
+cx:nanyori:10	無事で何よりです。	has:다행입니다	fix	rewrites
+cx:nanyori:10	何より嬉しかった。	has:무엇보다 기뻤다	keep	rewrites
+cx:nanyori:20	何よりの証拠だ。	has:최고의 증거	fix	rewrites
+cx:nanyori:20	何よりも大切だ。	has:무엇보다도 중요하다	keep	rewrites
+lexical:set-adverbials	常ならば、何も言わずに去るはずだ。	lacks:범상치	keep	lookup
