@@ -31,4 +31,6 @@ force.ka.close	keep	「友達は学校に行きますか。」	「친구는 학�
 force.doushita.masu.hold	fix	「どうしました？」	-	inv
 force.doushita.masu.hold	keep	「友達はどうしますか？」	「친구는 어떻게 해요?」	inv
 force.suman.hold	fix	「……すまん」	-	inv
-force.suman.hold	keep	「……すみません」	「……미안해요」	inv
+force.suman.hold	keep	「……すみません」	「……죄송해요」	inv
+force.doushite	fix	「それはどうして？」	「그건 왜?」	inv
+force.doushite	keep	「それはどうする？」	「그건 어떻게 해?」	inv

@@ -18,3 +18,4 @@ punct.ellipsis	fix	「……本がある。」	「……책이 있어.」	inv
 punct.ellipsis	keep	「本がある。」	「책이 있어.」	inv
 punct.dash	fix	「本が――ある。」	「책이――있어.」	inv
 punct.dash	keep	「本がある。」	「책이 있어.」	inv
+punct.end.ka	keep	犬ではなかったか。	개가 아니었어.	inv

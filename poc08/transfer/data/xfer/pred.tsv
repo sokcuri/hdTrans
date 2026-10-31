@@ -11,8 +11,8 @@ pred.na.ja	N5-05	{Na} [role=cop-ja]	-	-	-	m	own	静かじゃない → 안 조�
 pred.na.dewa	N5-05	{Na} [role=cop-te] [kase=wa]	-	-	-	m	own	静かではない → 조용하지 않다
 pred.suru	N5-10	{N} [role=light]	-	-	V:하다{glue}	m	own	勉強する → 공부하다
 pred.nai.exist	N5-07	[aux.nai.exist]	-	-	V:없다	m	own	本がない → 책이 없다
-pred.adn	N5-06	-	cl.link=adn cl.tense=nonpast cl.endform=rentai	pred.ctype=adn:nonpast	-	m	own	高い本 → 비싼 책
-pred.adn.past	N5-06	-	cl.link=adn cl.tense=past cl.endform=rentai	pred.ctype=adn:past;pred.tense=nonpast	-	m	own	読んだ本 → 읽은 책
+pred.adn	N5-06	-	cl.link=adn cl.tense=nonpast cl.endform=rentai cl.after!=punct	pred.ctype=adn:nonpast	-	m	own	高い本 → 비싼 책
+pred.adn.past	N5-06	-	cl.link=adn cl.tense=past cl.endform=rentai cl.after!=punct	pred.ctype=adn:past;pred.tense=nonpast	-	m	own	読んだ本 → 읽은 책
 pred.adv.adj	N5-42	{A}	A.form=renyo next.pos=v1|v5|vs|vk|vz	A.ctype=conn;A.rel=result	-	m	own	早く書く → 빠르게 쓰다
 pred.adv.na	N5-42	{Na} [role=cop-ni]	-	Na.ctype=conn;Na.rel=result	-	m	own	静かに書く → 조용하게 쓰다
 pred.naru.adj	N5-43	{A} 成る	-	A.ctype=conn;A.eomi=-어	V:지다{aux}	m	own	高くなる → 비싸지다
@@ -34,3 +34,5 @@ pred.dem.kou	N5-53	こう 言う	next.pos=n	-	Det:이런	m	own	こういう本 �
 pred.dem.aa	N5-53	ああ 言う	next.pos=n	-	Det:저런	m	own	ああいう人 → 저런 사람
 pred.na.end.hold	N5-06	{N} [aux.da,form.role=adn]	next.kind=punct	line.route=fallback	-	m	own	ゴメンな (な ends the line): held for 0.7.x
 pred.dem.dou.c	N5-53	どう 言う	next.role=comma	-	Det:어떤	m	own	どういう、意味 → 어떤, 의미
+pred.dem.dou.ta	N5-53	どう 言う [tense=past]	next.pos=n	-	Det:어떤	m	own	どういった意味 → 어떤 의미
+pred.cop.ka	N5-25	{N} [aux.f.ka]	N.ispred=+	-	V:이다{glue,mood=q}	m	own	長い文か。 → 긴 문장인가.

@@ -12,3 +12,4 @@ adv.sou.cop.ne	N5-53	{C} [role=cop] ね/p_final	C.lemma=そう	C.lemma=그렇다
 adv.dou.cop	N5-54	{C} [role=cop]	C.lemma=どう	C.lemma=어떻다;C.kind=V	-	m	own	どうでしたか → 어땠어요?
 pol.neg.notice.short	N5-H1	[pol=neg]	utt=dialogue pred.lemma=気付く	pred.neg=mot	-	m	own	気付かなかった(「」) → 못 알아차렸어 (notice: failing is 못)
 pol.neg.notice.long	N5-H1	[pol=neg]	utt=narration pred.lemma=気付く	pred.neg=ji-mot	-	m	own	気付かなかった → 알아차리지 못했다
+pol.neg.renyo.hold	N5-H1	[pol=neg,form.role=renyo]	next.kind!=tense|punct|final|polite|link|neg	line.route=fallback	-	m	own	思わず, なくなる (a negative continuing the clause, N3): held for 0.7.x

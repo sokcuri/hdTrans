@@ -18,7 +18,8 @@
 //            <slot>.<key> and pred.<key>, head.<key>, next.<key>, prev.<key> with key
 //            lemma pos form ko cls kcls vpos trans (+ when its frame takes an object) or a lexicon feature
 //   then   assignments target.field=value joined by ";" (target: a slot, or pred = the clause's last predicate node);
-//          line.route=fallback holds the line for 0.7.x (a shape the native rows do not translate yet)
+//          line.route=fallback holds the line for 0.7.x (a shape the native rows do not translate yet); pred?.f sets
+//          the field only when the clause has a predicate node
 //   ko     node templates joined by spaces, inserted at the row's first consumed token: Kind:lemma{field=value,flag};
 //          P:<kase> or P:=<particle>, Punct:<kind>; _ in a lemma is a space
 // Specificity, compared left to right: lemma atoms (match literals, facts naming an aux.tsv row, lemma/ko/has

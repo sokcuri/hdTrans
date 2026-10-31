@@ -2,11 +2,11 @@
 # Punctuation marks as Punct nodes (the generator writes the Korean mark).
 id	spec	match	when	then	ko	st	prov	note
 punct.end	N5-H7	。|．	-	-	Punct:end	m	own	。 → .
-punct.end.ka	N5-H7	。|．	prev.lemma=か	-	Punct:q	m	own	行きませんか。 → 가지 않으실래요?
+punct.end.ka	N5-H7	。|．	prev.lemma=か utt=dialogue	-	Punct:q	m	own	「行きませんか。」 → 「가지 않을래요?」 (narration keeps its period)
 punct.comma	N5-H7	[aux.punct.comma]	-	-	Punct:comma	m	own	、 → ,
 punct.open	N5-H5	[aux.punct.open]	-	-	Punct:qopen	m	own	「 stays
 punct.close	N5-H5	[aux.punct.close]	-	-	Punct:qclose	m	own	」 stays
-punct.q	N5-25	[aux.punct.q]	-	pred.mood=q	Punct:q	m	own	？ asks
+punct.q	N5-25	[aux.punct.q]	-	pred?.mood=q	Punct:q	m	own	？ asks (a question without a predicate: 왜?)
 punct.excl	N5-H7	[aux.punct.excl]	-	-	Punct:excl	m	own	！
 punct.ellipsis	N5-H7	…|‥	-	-	Punct:ellipsis	m	own	…… stays
 punct.dash	N5-H7	――|―	-	-	Punct:dash	m	own	―― stays

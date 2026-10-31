@@ -16,3 +16,4 @@ force.te.final.fp	N5-26	[link=te] [aux.f.yo]	-	pred.mood=imp	-	m	own	気をつ�
 force.ka.close	N5-H7	[aux.f.ka]	next.role=close	pred.mood=q	Punct:q	m	own	「どうでしたか」 → 「어땠어요?」
 force.doushita.masu.hold	N5-54	どう|如何 為る [polite=desu-masu] [tense=past]	-	line.route=fallback	-	m	own	どうしました: held for 0.7.x
 force.suman.hold	N5-H1	済む [pol=neg]	-	line.route=fallback	-	m	own	すまん / すまない (sorry): held for 0.7.x
+force.doushite	N5-54	どう 為る [link=te]	-	-	Adv:왜	m	own	どうして → 왜

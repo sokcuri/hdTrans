@@ -55,9 +55,9 @@ mod.daro.confirm.n	fix	「先生だろう？」	「선생님이지?」	inv
 mod.daro.confirm.n	keep	「先生だろう。」	「선생님일 거야.」	inv
 mod.daro.wh.q	fix	「何だろう？」	「뭘까?」	inv
 mod.daro.wh.q	keep	「先生だろう？」	「선생님이지?」	inv
-mod.daro.ka	fix	雨が降るだろうか。	비가 내릴까?	inv
+mod.daro.ka	fix	雨が降るだろうか。	비가 내릴까.	inv
 mod.daro.ka	keep	雨が降るだろう。	비가 내릴 것이다.	inv
-mod.daro.ka.n	fix	雨だろうか。	비일까?	inv
+mod.daro.ka.n	fix	雨だろうか。	비일까.	inv
 mod.daro.ka.n	keep	雨だろう。	비일 것이다.	inv
 mod.noda.hold	fix	死ぬのか？	-	inv
 mod.noda.hold	keep	死ぬ。	죽는다.	inv
@@ -69,3 +69,9 @@ mod.desho.ka.n	fix	「雨でしょうか。」	「비일까요?」	inv
 mod.desho.ka.n	keep	「雨でしょう。」	「비일 거예요.」	inv
 mod.yokatta.hold	fix	「よかった」	-	inv
 mod.yokatta.hold	keep	「天気がよかった」	「날씨가 좋았어」	inv
+mod.noda.yo.hold	fix	「何でそうなるのよ？」	-	inv
+mod.noda.yo.hold	keep	「そうなるよ。」	「그렇게 돼.」	inv
+mod.kotonisuru.hold	fix	犬に名前を付けることにした。	-	inv
+mod.kotonisuru.hold	keep	犬に名前を付けた。	개에게 이름을 붙였다.	inv
+mod.sugiru.hold	fix	「簡単すぎない？」	-	inv
+mod.sugiru.hold	keep	「簡単じゃない？」	「안 간단해?」	inv

@@ -24,7 +24,7 @@ pred.adn	fix	高い本を買う。	비싼 책을 산다.	inv
 pred.adn	keep	本は高い。	책은 비싸다.	inv
 pred.adn.past	fix	昨日読んだ本は高い。	어제 읽은 책은 비싸다.	inv
 pred.adn.past	keep	昨日、本を読んだ。	어제, 책을 읽었다.	inv
-pred.adv.adj	fix	早く書く。	빠르게 쓴다.	inv
+pred.adv.adj	fix	遅く書く。	늦게 쓴다.	inv
 pred.adv.adj	keep	本が高くない。	책이 비싸지 않다.	inv
 pred.adv.na	fix	静かに書く。	조용하게 쓴다.	inv
 pred.adv.na	keep	部屋が静かになる。	방이 조용해진다.	inv
@@ -68,3 +68,8 @@ pred.na.end.hold	fix	「ゴメンな……」	-	inv
 pred.na.end.hold	keep	「静かな部屋だ。」	「조용한 방이다.」	inv
 pred.dem.dou.c	fix	「どういう、本？」	「어떤, 책?」	inv
 pred.dem.dou.c	keep	「どう言う？」	「어떻게 말해?」	inv
+pred.adn	keep	おかしい、本ではない。	이상하다, 책이 아니다.	inv
+pred.dem.dou.ta	fix	「それはどういった本ですか。」	「그건 어떤 책이에요?」	inv
+pred.dem.dou.ta	keep	「どう言った？」	「어떻게 말했어?」	inv
+pred.cop.ka	fix	長い文か。	긴 문장이야.	inv
+pred.cop.ka	keep	長い文だ。	긴 문장이다.	inv

@@ -23,3 +23,5 @@ pol.neg.notice.short	fix	「私も気付きませんでした」	「저도 못 �
 pol.neg.notice.short	keep	「私も気付きました」	「저도 알아차렸어요」	inv
 pol.neg.notice.long	fix	私は気付かなかった。	나는 알아차리지 못했다.	inv
 pol.neg.notice.long	keep	私は気付いた。	나는 알아차렸다.	inv
+pol.neg.renyo.hold	fix	指が抜けなくなった。	-	inv
+pol.neg.renyo.hold	keep	指が抜けない。	손가락이 빠지지 않는다.	inv

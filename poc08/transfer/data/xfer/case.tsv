@@ -47,3 +47,10 @@ case.no.det	N5-54	{NP} [kase=no]	NP.ko=무슨	-	-	m	own	何の用 → 무슨 볼
 case.ni.saki	N5-42	先 [kase=ni]	-	-	Adv:먼저	m	own	先に → 먼저
 case.ni.mukete	N5-14	{NP} [kase=ni] 向かう [link=te]	-	-	P:obj V:향하다{ctype=conn,eomi=-어}	m	own	目的に向かって → 목적을 향해
 case.ka.nanika	N5-54	{NP} [aux.p.ka.adv]	NP.lemma=何	-	-	m	own	何か → 뭔가 (the sense holds the か)
+case.no.subj	N5-19	{NP} [kase=no]	next.pos=v1|v5|vs|vk|adj	-	P:subj	m	own	人の居ない場所 → 사람이 없는 곳 (の is the subject of an adnominal clause)
+case.to.quote.hold	N5-17	{NP} [kase=to]	next.kind=quote	line.route=fallback	-	m	own	と before a quote verb (N4 quote): held for 0.7.x
+case.num.mo	N5-56	{NP} [kase=mo]	NP.pos=num	-	P:=(이)나	m	own	二つもある → 두 개나 있다
+case.ka.comma.hold	N5-25	[aux.punct.comma] [aux.f.ka]	-	line.route=fallback	-	m	own	長い文、か (か after a pause): held for 0.7.x
+case.ii.kara.hold	N5-H3	良い [link=kara]	prev.pos=absent|sym	line.route=fallback	-	m	own	いいから (never mind): held for 0.7.x
+case.ni.dat.animal	N5-14	{N:@animal} [kase=ni]	-	-	P:dat	m	own	犬に名前を付ける → 개에게 이름을 붙이다
+case.num.mo.aru	N5-56	{NP} [kase=mo] [aux.aru.cop]	NP.pos=num	-	P:=(이)나 V:있다	m	own	二つもある → 두 개나 있다

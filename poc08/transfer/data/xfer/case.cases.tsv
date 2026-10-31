@@ -93,3 +93,17 @@ case.ni.mukete	fix	学校に向かって歩く。	학교를 향해 걷는다.	in
 case.ni.mukete	keep	学校に行って歩く。	학교에 가서 걷는다.	inv
 case.ka.nanika	fix	「何か問題がある？」	「뭔가 문제가 있어?」	inv
 case.ka.nanika	keep	「パンかりんごを食べる。」	「빵이나 사과를 먹어.」	inv
+case.no.subj	fix	「人の居ない場所？」	「사람이 없는 곳?」	inv
+case.no.subj	keep	「人の場所？」	「사람의 곳?」	inv
+case.to.quote.hold	fix	四十日と考えて、百二十日？	-	inv
+case.to.quote.hold	keep	友達と遊ぶ。	친구와 논다.	inv
+case.num.mo	fix	月が二つも見える。	달이 두 개나 보인다.	inv
+case.num.mo	keep	月もある。	달도 있다.	inv
+case.ka.comma.hold	fix	――長い文、か。	-	inv
+case.ka.comma.hold	keep	長い文か。	긴 문장이야.	inv
+case.ii.kara.hold	fix	「いいから、行ってください」	-	inv
+case.ii.kara.hold	keep	「天気がいいから、行ってください」	「날씨가 좋으니까, 가 주세요」	inv
+case.ni.dat.animal	fix	犬に名前を付けた。	개에게 이름을 붙였다.	inv
+case.ni.dat.animal	keep	学校に名前を付けた。	학교에 이름을 붙였다.	inv
+case.num.mo.aru	fix	月が二つもある。	달이 두 개나 있다.	inv
+case.num.mo.aru	keep	月もある。	달도 있다.	inv

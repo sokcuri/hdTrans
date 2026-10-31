@@ -34,3 +34,6 @@ mod.noda.cop.hold	N5-57	[role=nomi] [role=cop]	-	line.route=fallback	-	m	own	の
 mod.desho.ka	N5-46	[aux.desu.desho] [aux.f.ka]	-	pred.eomi=lkka;pred.mood=q	-	m	own	行くでしょうか → 갈까요
 mod.desho.ka.n	N5-46	{N} [aux.desu.desho] [aux.f.ka]	-	-	V:이다{glue,eomi=lkka,mood=q}	m	own	何の用でしょうか → 무슨 볼일일까요
 mod.yokatta.hold	N5-04	{A} [tense=past]	A.lemma=良い cl.args=absent	line.route=fallback	-	m	own	よかった (relief): held for 0.7.x
+mod.noda.yo.hold	N5-57	[role=nomi] [aux.f.yo]	-	line.route=fallback	-	m	own	のよ (explanatory, N4): held for 0.7.x
+mod.kotonisuru.hold	N5-57	[aux.fn.koto] [kase=ni] 為る	-	line.route=fallback	-	m	own	ことにする (N3): held for 0.7.x
+mod.sugiru.hold	N5-H1	過ぎる	-	line.route=fallback	-	m	own	すぎる (N4): held for 0.7.x

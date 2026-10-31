@@ -129,7 +129,8 @@ bool ParseCond(const std::string& t, Cond& c, std::string& err) {
                                                "N", "NP", "V", "A", "Na", "X", "C"};
     if (!targets.count(c.target)) return err = "unknown condition target " + c.target, false;
     if (c.target != "utt" && c.key.empty()) return err = "condition without a key: " + t, false;
-    if (c.target == "utt" && !c.key.empty() && c.key != "level") return err = "utt has only the key level: " + t, false;
+    if (c.target == "utt" && !c.key.empty() && c.key != "level" && c.key != "register")
+        return err = "utt has only the keys level and register: " + t, false;
     return true;
 }
 
@@ -278,7 +279,7 @@ void LoadLexicon(const std::string& path, Data& d, bool fill = false) {
     const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
     std::vector<std::string> head;
     size_t at = 0, lineNo = 0;
-    static const std::set<std::string> plain{"ja", "yomi", "pos", "sense", "ko", "cue", "frame", "feat", "st",
+    static const std::set<std::string> plain{"ja", "yomi", "pos", "sense", "ko", "cue", "feat", "st",
                                              "prov", "note", "grid", "ctype", "senses",
                                              "gcls", "write", "gframe", "gflags"};
     while (at < text.size()) {
@@ -351,7 +352,9 @@ void LoadPhrases(const std::string& path, Data& d) {
     if (!ReadWholeFile(path, text)) return;
     const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
     Rows(text, [&](const std::vector<std::string>& f, size_t) {
-        if (f.size() < 5 || f[1].find('{') != std::string::npos || f[4] != "r" || !f[3].empty()) return;
+        // a cue other than a register one (register=casual) is not read on phrases yet
+        if (f.size() < 5 || f[1].find('{') != std::string::npos || f[4] != "r" ||
+            (!f[3].empty() && !f[3].starts_with("register="))) return;
         Row r;
         r.id = "ph:" + f[0];
         r.spec = "LEX";
@@ -360,6 +363,13 @@ void LoadPhrases(const std::string& path, Data& d) {
         r.ko = f[2];
         r.st = f[4];
         r.prov = f.size() > 5 ? f[5] : "";
+        if (!f[3].empty()) {
+            Cond c;
+            c.target = "utt";
+            c.key = "register";
+            c.values = Split(f[3].substr(9), '|');
+            r.conds.push_back(std::move(c));
+        }
         const std::vector<std::string> words = Words(f[2]);
         for (size_t i = 0; i < words.size(); i++) {
             KoNode n;
@@ -633,7 +643,11 @@ struct Ctx {
         if (key == "form") return k.form;
         if (key == "surf") return k.surf;
         if (key == "ko") return k.sense ? k.sense->ko : "";
-        if (key == "frame") return k.sense ? k.sense->frame : "";
+        if (key == "frame") {
+            if (!k.sense) return "";
+            if (!k.sense->frame.empty() || !k.entry || k.sense->sense != 1) return k.sense->frame;
+            return Get(k.entry->feat, "frame");  // the level list's frame describes sense 1
+        }
         if (key == "cls" && k.sense) {
             const std::string c = Get(k.sense->feat, "cls");
             return c.empty() && k.entry && k.sense->sense == 1 ? Get(k.entry->feat, "cls") : c;
@@ -848,7 +862,12 @@ struct Ctx {
     bool CondOk(const Cond& cd, const Cand& c, std::string& fact) const {
         std::string v;
         bool multi = false;  // mod holds several values
-        if (cd.target == "utt" && cd.key == "level") {
+        if (cd.target == "utt" && cd.key == "register") {
+            // the register a phrase cue names: casual when S read the utterance as plain or casual speech
+            const Tk* a = c.anchor >= 0 ? &tk[static_cast<size_t>(c.anchor)] : nullptr;
+            const unsigned lv = a && a->utt < line.utts.size() ? line.utts[a->utt].sourceLevel : 0;
+            v = lv == srclevel::plain || lv == srclevel::casual ? "casual" : "polite";
+        } else if (cd.target == "utt" && cd.key == "level") {
             // the source level S read for the utterance: plain desu-masu keigo archaic casual
             const Tk* a = c.anchor >= 0 ? &tk[static_cast<size_t>(c.anchor)] : nullptr;
             if (a && a->utt < line.utts.size()) v = std::string(Name(F::srclevel, line.utts[a->utt].sourceLevel));
@@ -861,6 +880,19 @@ struct Ctx {
                 const Clause& cl = line.clauses[static_cast<size_t>(c.clause)];
                 for (size_t i = 0; i < tk.size(); i++)
                     if (tk[i].bun >= cl.firstBun && tk[i].bun <= cl.lastBun) v += (v.empty() ? "" : ",") + tk[i].lemma;
+            }
+        } else if (cd.target == "cl" && cd.key == "after") {
+            // the kind of the token after the clause's predicate bunsetsu (punct, case, …; "" for a word)
+            if (c.clause >= 0 && line.clauses[static_cast<size_t>(c.clause)].pred < line.buns.size()) {
+                const Bunsetsu& b = line.buns[line.clauses[static_cast<size_t>(c.clause)].pred];
+                int last = tkOf[b.last];
+                while (last >= 0 && tk[static_cast<size_t>(last)].t->pos == Pos::sym &&
+                       std::find(tk[static_cast<size_t>(last)].aux->facts.begin(), tk[static_cast<size_t>(last)].aux->facts.end(),
+                                 "role=comma") == tk[static_cast<size_t>(last)].aux->facts.end())
+                    last--;
+                // a comma closing the bunsetsu, or the token after it
+                const int at = last >= 0 && tk[static_cast<size_t>(last)].t->pos == Pos::sym ? last : tkOf[b.last] + 1;
+                v = TokKey(at, "kind");
             }
         } else if (cd.target == "cl" && cd.key == "endform") {
             // the inflected form the clause's predicate bunsetsu ends in (punctuation aside)
@@ -1034,6 +1066,18 @@ std::string Numeral(const Data& d, int v, bool native, bool adn) {
 }
 
 // The entry of a spelling read as a noun (n, pn or na), for joined units.
+// Every character of s is katakana (U+30A1..U+30FA, U+30FC).
+bool IsKatakana(std::string_view s) {
+    if (s.empty()) return false;
+    for (size_t i = 0; i < s.size(); i += 3) {
+        if (i + 2 >= s.size() || static_cast<unsigned char>(s[i]) != 0xE3) return false;
+        const uint32_t cp = ((static_cast<unsigned char>(s[i]) & 0x0Fu) << 12) |
+                            ((static_cast<unsigned char>(s[i + 1]) & 0x3Fu) << 6) | (static_cast<unsigned char>(s[i + 2]) & 0x3Fu);
+        if (!((cp >= 0x30A1 && cp <= 0x30FA) || cp == 0x30FC)) return false;
+    }
+    return true;
+}
+
 const Entry* FindSpelling(const Data& d, const std::string& ja, const char*) {
     auto it = d.byLemma.find(ja);
     if (it == d.byLemma.end()) return nullptr;
@@ -1281,8 +1325,14 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                                  x.tk[i + 1].aux->facts.end() &&
                 !k.surf.empty() && k.surf.size() < x.tk[i + 2].surf.size() && x.tk[i + 2].surf.starts_with(k.surf))
                 line.unmatched.push_back(doc.I(k.surf + "/stutter"));
-            if (k.t->pos != Pos::sym && !IsNounPos(k.t->pos) && k.surf.find("\xE3\x83\xBC") != std::string::npos)  // ー
+            if (k.t->pos != Pos::sym && !IsNounPos(k.t->pos) &&
+                (k.surf.find("\xE3\x83\xBC") != std::string::npos || k.surf.find("\xEF\xBD\x9E") != std::string::npos ||
+                 k.surf.find("\xE3\x80\x9C") != std::string::npos))  // ー ～ 〜
                 line.unmatched.push_back(doc.I(k.surf + "/prolonged"));
+            // a word the source writes in katakana whose lemma is not (シロ for 白, マズイ for 不味い): a name or a
+            // marked word; the native route does not read it yet
+            if (k.content && !k.surf.empty() && IsKatakana(k.surf) && !IsKatakana(k.lemma.substr(0, k.lemma.find('-'))))
+                line.unmatched.push_back(doc.I(k.surf + "/katakana"));
         }
         if (open != close) line.unmatched.push_back(doc.I("quote/unbalanced"));
     }
@@ -1305,16 +1355,23 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         if (!r.phrase.empty()) {
             // the phrase's text: the units' spellings, the last one also in its dictionary form (連絡を取った)
             for (int st = 0; st < static_cast<int>(n); st++) {
-                std::string spell;
-                for (int e = st; e < static_cast<int>(n) && spell.size() < r.phrase.size(); e++) {
+                // the units' spellings, or their readings in hiragana (頂きます = いただきます); the last unit may
+                // also be in its dictionary form (lemma or written form)
+                std::string spell, kana;
+                for (int e = st; e < static_cast<int>(n) && std::min(spell.size(), kana.size()) < r.phrase.size(); e++) {
                     const Tk& k = x.tk[static_cast<size_t>(e)];
-                    std::string dict = k.lemma;
+                    std::string orth = k.lemma;
                     if (k.entry) {
                         auto o = k.entry->feat.find("orth");
-                        if (o != k.entry->feat.end()) dict = o->second;
+                        if (o != k.entry->feat.end()) orth = o->second;
                     }
-                    const bool hit = spell + k.surf == r.phrase || ((IsVerbPos(k.epos) || k.epos == Pos::adj) && spell + dict == r.phrase);
+                    std::string reading;
+                    for (int t = k.first; t <= k.last; t++) reading += Hiragana(doc.S(line.toks[static_cast<size_t>(t)].reading));
+                    const bool infl = IsVerbPos(k.epos) || k.epos == Pos::adj;
+                    const bool hit = spell + k.surf == r.phrase || kana + reading == r.phrase ||
+                                     (infl && (spell + orth == r.phrase || spell + k.lemma == r.phrase));
                     spell += k.surf;
+                    kana += reading.empty() ? k.surf : reading;
                     if (!hit) continue;
                     Cand c;
                     c.row = ri;
@@ -1375,6 +1432,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         const Row& ra = d.rows[a.row];
         const Row& rb = d.rows[b.row];
         if (ra.specificity != rb.specificity) return SpecGreater(ra.specificity, rb.specificity);
+        // between equally specific rows a hold row wins: a shape not translated yet goes to 0.7.x
+        const bool ha = ra.then.find("line.route=fallback") != std::string::npos;
+        const bool hb = rb.then.find("line.route=fallback") != std::string::npos;
+        if (ha != hb) return ha;
         if (a.end - a.begin != b.end - b.begin) return a.end - a.begin > b.end - b.begin;
         if (a.begin != b.begin) return a.begin < b.begin;
         if (ra.order != rb.order) return ra.order < rb.order;
@@ -1408,6 +1469,18 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         lost.emplace_back();
     }
 
+    // A consumed token whose inflected form carries a mood its own row does not (しよう: the light verb in its
+    // volitional form) loses that mood: the line stays with 0.7.x.
+    for (size_t i = 0; i < n; i++) {
+        if (owner[i] < 0) continue;
+        const auto& f = x.tk[i].aux->facts;
+        auto has = [&](const char* q) { return std::find(f.begin(), f.end(), q) != f.end(); };
+        const bool formMood = has("form.mod=volitional") || has("form.force=imp") || has("form.link=ba");
+        bool ownMood = false;  // the token's own row names a mood, a modality or a link (だろう: conjecture)
+        for (const std::string& q : f)
+            if (q.starts_with("mod=") || q.starts_with("force=") || q.starts_with("link=")) ownMood = true;
+        if (formMood && !ownMood) line.unmatched.push_back(doc.I(x.tk[i].surf + "/form-mood"));
+    }
     // The inflected form of a content word is a morpheme too: an imperative, volitional or fused conditional form,
     // or a stem form not followed by its ending, needs an accepted row that reads it (a condition on the slot's
     // form, or a consumed atom right after the slot).
@@ -1512,6 +1585,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 push(KK::N, Numeral(d, 1, true, false), false, 0);
             } else if (k.digits) {
                 push(KK::Raw, digitText, false, 0);
+                if (cs) push(KK::N, cs->ko, true, 1);
+            } else if (!native || k.number > 10) {
+                // a Sino-Korean count, a bare numeral or a large one: digits, the counter attached (30일, 5월, 120엔)
+                push(KK::Raw, std::to_string(k.number), false, 0);
                 if (cs) push(KK::N, cs->ko, true, 1);
             } else {
                 const std::string word = Numeral(d, k.number, native, cs != nullptr);
@@ -1706,8 +1783,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 if (s.field == "route" && s.value == "fallback") line.unmatched.push_back(doc.I(r.id + "/held"));
                 continue;
             }
-            if (s.target == "pred") {
+            const bool optional = s.target == "pred?";  // pred?: a sentence without a predicate keeps no field
+            if (s.target == "pred" || optional) {
                 node = predNode(c.clause, c.consumed.empty() ? std::numeric_limits<int>::max() : c.consumed.front());
+                if (node < 0 && optional) continue;
             } else if (s.target == "ko") {
                 node = candNodes[a].empty() ? -1 : candNodes[a].front();
             } else {
