@@ -327,7 +327,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 角々しい	かどかどしい	adj	1	신경질적이다				u	w	
 金臭い	かなくさい	adj	1	쇳내가 많다				u	b	
 金臭い	かなくさい	adj	2	쇳내투성이다				u	b	
-可成	かなり	na	1	상당한	next=の		cls=@degree	u	b	
+可成	かなり	na	1	상당한	next=の		cls=@degree name=+	u	b	
 黴臭い	かびくさい	adj	1	퀴퀴하다				u	w	
 黴臭い	かびくさい	adj	2	곰팡내가 많다				u	b	
 黴臭い	かびくさい	adj	3	곰팡이 냄새가 나다				u	b	
@@ -1259,7 +1259,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 疎ら	まばら	na	1	드문드문하다				u	wl	
 疎ら	まばら	na	2	드물다				u	b	rule:5075 +unmapped
 眩しい	まぶしい	adj	1	눈부시다				u	b	
-まめ	まめ	na	1	부지런하다				u	b	
+まめ	まめ	na	1	부지런하다			name=+	u	b	
 まめやか	まめやか	na	1	충실하다				u	b	
 稀	まれ	na	1	보기 드물다				u	b	
 稀	まれ	na	2	드물다				u	b	
@@ -1487,7 +1487,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 クレージー	くれーじー	na	1	크레이지				u	b	
 クレバー	くればー	na	1	클레버하다				u	b	
 クレバー	くればー	na	2	클레버				u	b	
-クール	くーる	na	1	쿨하다				u	b	
+クール	くーる	na	1	쿨하다			name=+	u	b	
 グルーミー	ぐるーみー	na	1	그루미				u	b	
 グレート	ぐれーと	na	1	멋지다				u	b	
 グレート	ぐれーと	na	2	그레이트				u	b	
@@ -1502,7 +1502,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 コンテンポラリー	こんてんぽらりー	na	2	현대음악				u	c+np	from-names
 コンベンショナル	こんべんしょなる	na	1	컨벤셔널이다				u	b	
 コンベンショナル	こんべんしょなる	na	2	컨벤셔널				u	b	
-ゴア	ごあ	na	1	고어				u	b	
+ゴア	ごあ	na	1	고어			name=+	u	b	
 ゴージャス	ごーじゃす	na	1	고저스				u	b	
 サイエンティフィック	さいえんてぃふぃっく	na	1	사이언티픽				u	b	
 サイケ	さいけ	na	1	환각적이다				u	b	
@@ -1545,12 +1545,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ストイック	すといっく	na	4	스토아 학파				u	c+np	from-names
 ストリクト	すとりくと	na	1	스트릭트				u	b	
 スパイシー	すぱいしー	na	1	스파이시				u	b	
-スピーディー	すぴーでぃー	na	1	스피디하다				u	b	
+スピーディー	すぴーでぃー	na	1	스피디하다			name=+	u	b	
 スピーディー	すぴーでぃー	na	2	스피드				u	b	
 スピーディー	すぴーでぃー	na	3	스피디				u	b	
 スピーディー	すぴーでぃー	na	4	스피디 하다				u	b	
 スポーティー	すぽーてぃー	na	1	스포티				u	b	
-スマイリー	すまいりー	na	1	스마일리				u	b	
+スマイリー	すまいりー	na	1	스마일리			name=+	u	b	
 スマート	すまーと	na	1	스마트하다				u	b	
 スマート	すまーと	na	2	스마트				u	b	
 スムーズ	すむーず	na	1	매끄럽다				u	wl	
@@ -1597,7 +1597,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 トラッド	とらっど	na	1	전통				u	b	
 トラッド	とらっど	na	2	민요				u	c+nw	from-names
 トラディショナル	とらでぃしょなる	na	1	전통적				u	b	
-トリッキー	とりっきー	na	1	트리키				u	b	
+トリッキー	とりっきー	na	1	트리키			name=+	u	b	
 トレンディー	とれんでぃー	na	1	트렌디하다				u	b	
 トレンディー	とれんでぃー	na	2	트렌디				u	c+np	from-names
 ドグマティック	どぐまてぃっく	na	1	독단적				u	b	
@@ -1621,11 +1621,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ノミナル	のみなる	na	1	명목상이다				u	b	
 ノミナル	のみなる	na	2	명목				u	b	
 ノンシャラン	のんしゃらん	na	1	무관심				u	b	
-ノーブル	のーぶる	na	1	귀족적이다				u	b	
+ノーブル	のーぶる	na	1	귀족적이다			name=+	u	b	
 ノーブル	のーぶる	na	2	노블				u	b	
 ノーマル	のーまる	na	1	정상적이다				u	b	
 ノーマル	のーまる	na	2	노멀				u	b	
-ハッピー	はっぴー	na	1	해피				u	b	
+ハッピー	はっぴー	na	1	해피			name=+	u	b	
 ハンサム	はんさむ	na	1	핸섬하다				u	b	
 ハンサム	はんさむ	na	2	핸섬				u	b	
 ハンディー	はんでぃー	na	1	핸디				u	b	
@@ -1643,7 +1643,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ヒューマニスティック	ひゅーまにすてぃっく	na	1	휴머니스틱하다				u	b	
 ヒロイック	ひろいっく	na	1	영웅적이다				u	b	
 ビジネスライク	びじねすらいく	na	1	사무적이다				u	b	
-ビッグ	びっぐ	na	1	빅				u	b	
+ビッグ	びっぐ	na	1	빅			name=+	u	b	
 ビビッド	びびっど	na	1	비비드				u	w	
 ビビッド	びびっど	na	2	비비드하다				u	w	
 ビューティフル	びゅーてぃふる	na	1	뷰티풀				u	w	
@@ -1739,7 +1739,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 リスキー	りすきー	na	1	리스키				u	b	
 リズミカル	りずみかる	na	1	리드미컬하다				u	b	
 リズミカル	りずみかる	na	2	리드미컬				u	b	
-リッチ	りっち	na	1	리치				u	b	
+リッチ	りっち	na	1	리치			name=+	u	b	
 リムーバブル	りむーばぶる	na	1	리무버블				u	b	
 リリカル	りりかる	na	1	서정적인				u	b	
 リリカル	りりかる	na	2	서정적이다				u	b	
@@ -1794,7 +1794,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 人嫌い	ひとぎらい	na	1	사람을 싫어하다				u	b	
 人臭い	ひとくさい	adj	1	인간답다				u	b	
 人臭い	ひとくさい	adj	2	인기척이 있다				u	b	
-伊達	だて	na	1	멋부림				u	b	
+伊達	だて	na	1	멋부림			name=+	u	b	
 似気無い	にげない	adj	1	어울리지 않다				u	w	
 低め	ひくめ	na	1	낮음				u	b	
 侠	きゃん	na	1	말괄량이				u	b	
@@ -1809,7 +1809,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 優美	ゆうび	na	1	우아하다				u	b	
 優良	ゆうりょう	na	1	우량하다				u	b	
 優良	ゆうりょう	na	2	우량				u	b	
-克明	こくめい	na	1	극명				u	b	
+克明	こくめい	na	1	극명			name=+	u	b	
 克明	こくめい	na	2	극명하다				u	b	
 入念	にゅうねん	na	1	꼼꼼하다				u	b	
 入念	にゅうねん	na	2	정성				u	b	
@@ -1897,7 +1897,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 口速	くちばや	na	1	빠른 말투				u	b	
 口重い	くちおもい	adj	1	과묵하다				u	b	
 古めかしい	ふるめかしい	adj	1	예스럽다				u	b	
-可憐	かれん	na	1	가련하다				u	b	
+可憐	かれん	na	1	가련하다			name=+	u	b	
 可憐	かれん	na	2	가련				u	b	
 史的	してき	na	1	역사적				u	b	
 史的	してき	na	2	사적				u	c+np	from-names
@@ -1966,7 +1966,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大掛かり	おおがかり	na	3	대규모				u	b	
 大抵	たいてい	na	1	대개				u	b	
 おおどか	おおどか	na	1	대범하다				u	b	
-大童	おおわらわ	na	1	분주하다				u	b	
+大童	おおわらわ	na	1	분주하다			name=+	u	b	
 大仰	おおぎょう	na	1	호들갑스럽다				u	b	
 大儀	たいぎ	na	1	귀찮다				u	b	
 大層	たいそう	na	1	무척				u	w	
@@ -2011,7 +2011,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 安価	あんか	na	3	염가로	next=で			u	b	
 安易	あんい	na	1	안이하다				u	b	
 安易	あんい	na	2	안이				u	b	
-安楽	あんらく	na	1	안락하다				u	b	
+安楽	あんらく	na	1	안락하다			name=+	u	b	
 安楽	あんらく	na	2	안락				u	b	
 安気	あんき	na	1	근심 걱정 없다				u	b	
 安直	あんちょく	na	1	간편하다				u	b	
@@ -2063,7 +2063,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 幾久しい	いくひさしい	adj	1	언제까지나 변함이 없다				u	b	
 広闊	こうかつ	na	1	광활하다				u	w	
 広闊	こうかつ	na	2	광활				u	w	
-広大	こうだい	na	1	광대하다				u	b	
+広大	こうだい	na	1	광대하다			name=+	u	b	
 広漠	こうばく	na	1	광막				u	b	
 底堅い	そこがたい	adj	1	안정적이다				u	b	
 廉価	れんか	na	1	염가				u	b	
@@ -2091,7 +2091,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 心忙しい	こころせわしい	adj	2	어수선하다				u	b	
 心的	しんてき	na	1	심리적				u	b	
 心的	しんてき	na	2	심적이다				u	b	
-忠実	ちゅうじつ	na	1	충실하다				u	b	
+忠実	ちゅうじつ	na	1	충실하다			name=+	u	b	
 忠実	ちゅうじつ	na	2	충실				u	b	
 念入り	ねんいり	na	1	정성스럽다				u	b	
 念入り	ねんいり	na	2	공들임				u	b	
@@ -2208,7 +2208,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 横長	よこなが	na	2	횡장				u	b	
 機敏	きびん	na	1	기민				u	b	
 機敏	きびん	na	2	기민하다				u	b	
-正大	せいだい	na	1	정대				u	b	
+正大	せいだい	na	1	정대			name=+	u	b	
 無骨	ぶこつ	na	1	투박하다				u	x	
 無骨	ぶこつ	na	2	예의를 모름				u	b	
 無骨	ぶこつ	na	3	풍류를 모름				u	b	
@@ -2389,7 +2389,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 粘っこい	ねばっこい	adj	2	끈적끈적하다				u	b	
 粛々	しゅくしゅく	na	1	묵묵히	next=と			u	wl	
 粛々	しゅくしゅく	na	2	조용하게	next=と			u	w	
-純	じゅん	na	1	순수하다				u	b	
+純	じゅん	na	1	순수하다			name=+	u	b	
 純然	じゅんぜん	na	1	천연				u	b	
 紛々	ふんぷん	na	1	분분하다				u	b	
 紛々	ふんぷん	na	2	분분				u	b	
@@ -2449,7 +2449,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 茫然	ぼうぜん	na	3	멍하니	next=と			u	x	
 荒涼	こうりょう	na	1	황량				u	b	
 荒漠	こうばく	na	1	황막하다				u	b	
-荘厳	そうごん	na	1	장엄하다				u	b	
+荘厳	そうごん	na	1	장엄하다			name=+	u	b	
 著名	ちょめい	na	1	저명하다				u	b	
 著名	ちょめい	na	2	저명				u	b	
 著明	ちょめい	na	1	매우 분명하다				u	b	
@@ -2558,11 +2558,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 間遠い	まどおい	adj	1	뜸하다				u	b	
 闊達	かったつ	na	1	활달하다				u	w	
 闌干	らんかん	na	1	난간				u	b	
-陶然	とうぜん	na	1	도연				u	b	
+陶然	とうぜん	na	1	도연			name=+	u	b	
 陽気	ようき	na	1	쾌활하다				u	wl	
 陽気	ようき	na	2	밝다				u	b	
 隠然	いんぜん	na	1	은연				u	b	
-雄大	ゆうだい	na	1	웅대				u	b	
+雄大	ゆうだい	na	1	웅대			name=+	u	b	
 雑	ざつ	na	1	엉성하다				u	b	
 雑	ざつ	na	2	대강	next=と			u	b	
 雑多	ざった	na	1	잡다하다				u	b	
@@ -2636,7 +2636,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 へっちゃら	へっちゃら	na	1	아무렇지 않다				u	wl	
 アルゴリズミック	あるごりずみっく	na	1	알고리즘적				u	wl	
 アルゴリズミック	あるごりずみっく	na	2	알고리즘적이다				u	wl	
-イノセンス	いのせんす	na	1	이노센스				u	w	
+イノセンス	いのせんす	na	1	이노센스			name=+	u	w	
 エモい	えもい	adj	1	감성적이다				u	wl	
 エモい	えもい	adj	2	애잔하다				u	wl	
 諤々	がくがく	na	1	덜덜				u	wl	
@@ -2657,7 +2657,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 端	はした	na	1	우수리			cls=@position	u	wl	
 端	はした	na	2	푼돈				u	wl	
 端	はした	na	3	어중간하다				u	wl	
-美妙	びみょう	na	1	미묘				u	w	
+美妙	びみょう	na	1	미묘			name=+	u	w	
 蔑ろ	ないがしろ	na	1	소홀하다				u	wl	
 逆しま	さかしま	na	1	거꾸로				u	wl	
 逆しま	さかしま	na	2	불합리				u	wl	

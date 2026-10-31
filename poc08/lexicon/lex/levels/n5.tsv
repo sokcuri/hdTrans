@@ -703,7 +703,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 切る	きる	v5	切る	verb	자르다	REU			+	activity	go				ga=@person o=@thing		y	五段-ラ行	9
 勝つ	かつ	v5	勝つ	verb	이기다	REG			+	change	go				ga=@person ni=@person		y	五段-タ行	1
 勤める	つとめる	v1	勤める	verb	맡다	REG			+	activity	go				ga=@person o=@person.role		y	下一段-マ行	2
-取る	とる	v5	取る	verb	집다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	17
+取る	とる	v5	取る	verb	집다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	20
 吸う	すう	v5	吸う	verb	들이마시다	REG			+	activity	go				ga=@person o=@thing		n	五段-ワア行	4
 呉れる	くれる	v1	くれる	verb	주다	REG			+	change	go				ga=@person ni=@person o=@thing		y	下一段-ラ行	1
 呼ぶ	よぶ	v5	呼ぶ	verb	부르다	REU			+	activity	go				ga=@person o=@person		y	五段-バ行	1

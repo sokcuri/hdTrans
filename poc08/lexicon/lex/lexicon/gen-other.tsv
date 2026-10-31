@@ -126,7 +126,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大いなる	おおいなる	adn	1	커다란				u	b	
 大いに	おおいに	adv	1	크게				u	wl	
 大いに	おおいに	adv	2	많이				u	b	
-大方	おおかた	adv	1	대충				u	b	
+大方	おおかた	adv	1	대충			name=+	u	b	
 大方	おおかた	adv	2	대부분				u	b	
 大凡	おおよそ	adv	1	대체로				u	b	
 大凡	おおよそ	adv	2	대강				u	b	
@@ -290,7 +290,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 きょとん	きょとん	adv	2	멍청히	next=と			u	b	
 きょろきょろ	きょろきょろ	adv	1	두리번두리번				u	b	
 きらきら	きらきら	adv	1	반짝반짝				u	b	
-きらり	きらり	adv	1	반짝				u	b	
+きらり	きらり	adv	1	반짝			name=+	u	b	
 きりきり	きりきり	adv	1	쑥쑥				u	b	
 きりり	きりり	adv	1	꽉	next=と			u	b	
 極めて	きわめて	adv	1	극히				u	b	
@@ -383,7 +383,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 けらけら	けらけら	adv	1	깔깔				u	b	
 けろり	けろり	adv	1	천연덕스럽게	next=と			u	b	
 けろり	けろり	adv	2	싹	next=と			u	b	
-けんけん	けんけん	adv	1	무뚝뚝하게				u	b	
+けんけん	けんけん	adv	1	무뚝뚝하게			name=+	u	b	
 けんけん	けんけん	adv	2	왁자지껄				u	b	
 げえげえ	げえげえ	adv	1	웩웩				u	b	
 げそげそ	げそげそ	adv	1	핼쑥하게				u	b	
@@ -742,7 +742,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ちくちく	ちくちく	adv	1	따끔따끔				u	b	
 ちくちく	ちくちく	adv	2	쿡쿡				u	b	
 ちくり	ちくり	adv	1	조금	next=と			u	b	
-ちびちび	ちびちび	adv	1	홀짝홀짝				u	b	
+ちびちび	ちびちび	adv	1	홀짝홀짝			name=+	u	b	
 ちゃっかり	ちゃっかり	adv	1	약삭빠르게				u	b	
 ちゃらちゃら	ちゃらちゃら	adv	1	짤랑짤랑				u	b	
 ちゅうちゅう	ちゅうちゅう	adv	1	찍찍				u	b	
@@ -1055,7 +1055,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ひょろり	ひょろり	adv	1	가냘프게	next=と			u	b	
 ひょんな	ひょんな	adn	1	엉뚱한				u	b	
 ひらひら	ひらひら	adv	1	팔랑팔랑				u	b	
-ひらり	ひらり	adv	1	훌쩍	next=と			u	b	
+ひらり	ひらり	adv	1	훌쩍	next=と		name=+	u	b	
 ひりひり	ひりひり	adv	1	얼얼				u	b	
 ひりひり	ひりひり	adv	2	따끔따끔				u	b	
 ひりり	ひりり	adv	1	얼얼하게	next=と			u	b	
@@ -1483,7 +1483,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 幸い	さいわい	adv	4	다행	next=Lと			u	b	rule:508
 幸い	さいわい	adv	5	좋다	after=いただけ			u	b	rule:3167 +unmapped assigns-neighbour
 幸い	さいわい	adv	6	좋다	after=頂			u	b	rule:3167 +unmapped assigns-neighbour
-幾	いく	num	1	얼마				u	b	
+幾	いく	num	1	얼마			name=+	u	b	
 幾	いく	num	2	기				u	b	
 広々	ひろびろ	adv	1	널찍함				u	b	
 広々	ひろびろ	adv	2	널찍이	next=と			u	b	
@@ -1572,7 +1572,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 碌に	ろくに	adv	2	제대로				u	wl	
 確たる	かくたる	adn	1	확실한				u	b	
 秋毫	しゅうごう	adv	1	추호				u	b	
-穣	じょう	num	1	양				u	b	
+穣	じょう	num	1	양			name=+	u	b	
 突如	とつじょ	adv	1	갑자기				u	b	
 等々	とうとう	suf	1	등등				u	b	
 篤と	とくと	adv	1	신중히				u	b	
@@ -1601,7 +1601,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 追い追い	おいおい	adv	3	머지않아	next=に			u	w	
 逐一	ちくいち	adv	1	일일이 상세하게				u	b	
 遥か	はるか	adv	1	아득히				u	b	
-遺	い	pref	1	유				u	b	
+遺	い	pref	1	유			name=+	u	b	
 那由他	なゆた	num	1	나유타				u	b	
 重重	おもおも	adv	1	거듭거듭				u	b	
 長々	ながなが	adv	1	오랫동안				u	w	
@@ -1610,10 +1610,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 閣	かく	suf	1	각				u	b	
 除	じょ	pref	1	제				u	b	
 難なく	なんなく	adv	1	쉽게				u	b	
-零	れい	num	1	영				u	b	
+零	れい	num	1	영			name=+	u	b	
 零	れい	num	2	령				u	b	
 青々	あおあお	adv	1	청청하게	next=と			u	w	
-順次	じゅんじ	adv	1	차례차례				u	b	
+順次	じゅんじ	adv	1	차례차례			name=+	u	b	
 順次	じゅんじ	adv	2	순차				u	b	
 麗々	れいれい	adv	1	번지르르하게	next=と			u	w	
 何故	なにゆえ	adv	1	어째서				u	x	
@@ -1672,13 +1672,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 がっつり	がっつり	adv	2	제대로				u	wl	
 がら	がら	adv	1	벌컥	next=と			u	w	
 がり	がり	adv	1	아드득	next=と			u	w	
-さら	さら	adv	1	아무렇지 않게	next=と			u	wl	
+さら	さら	adv	1	아무렇지 않게	next=と		name=+	u	wl	
 しゃんと	しゃんと	adv	1	꼿꼿이				u	wl	
-つう	つう	adv	1	쓱	next=と			u	w	
+つう	つう	adv	1	쓱	next=と		name=+	u	w	
 どっと	どっと	adv	1	덜컥				u	w	
 どっと	どっと	adv	2	우르르				u	wl	
 どくん	どくん	adv	1	두근				u	wl	
-にこ	にこ	adv	1	씩	next=と			u	w	
+にこ	にこ	adv	1	씩	next=と		name=+	u	w	
 にこり	にこり	adv	1	방긋				u	wl	
 にこり	にこり	adv	2	활짝				u	w	
 にたり	にたり	adv	1	히죽				u	wl	
@@ -1690,7 +1690,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぴい	ぴい	adv	1	삐익				u	wl	
 ぼそ	ぼそ	adv	1	나직이	next=と			u	w	
 ぽきり	ぽきり	adv	1	똑				u	wl	
-ぽち	ぽち	adv	1	꾹				u	wl	
+ぽち	ぽち	adv	1	꾹			name=+	u	wl	
 ぽつん	ぽつん	adv	1	덩그러니				u	wl	
 もふもふ	もふもふ	adv	1	복슬복슬				u	wl	
 伝い	つたい	suf	1	따라				u	wl	
@@ -1722,7 +1722,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ようやっと	ようやっと	adv	1	드디어				u	w	
 ついぞ	ついぞ	adv	1	끝내				u	w	
 っち	っち	suf	1	치				u	w	
-耳	じ	pref	1	귀	next=塞ぐ			u	x	senses
+耳	じ	pref	1	귀	next=塞ぐ		name=+	u	x	senses
 鼻	び	pref	1	콧방귀	next=鳴らす			u	x	senses
 振る	ぶる	suf	1	매기다	after=番号|ルビ			u	x	senses
 振る	ぶる	suf	2	흔들다	after=手|旗|帽子|尻尾|ハンカチ|ペンライト			u	x	senses

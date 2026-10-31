@@ -11,7 +11,7 @@ Errors on st=r/m rows and schema errors fail the run; on st=u rows they are coun
 Class rule (strict on st=r, counted on st=m/u): an alternative list in a cue names at most two literal lemmas, and
 two literal lemmas that share a specific class (a leaf, or a class at depth 3 or more; through the cls feature of
 their entries) must be written as the class.
-Lemma features: vol, asp, te, neg (suppletive negative), cls, anim, ni, num, lu (closed value sets on st=r rows).
+Lemma features: vol, asp, te, neg (suppletive negative), name (+: the spelling is also a given or family name), cls, anim, ni, num, lu (closed value sets on st=r rows).
 """
 import argparse
 import collections
@@ -144,7 +144,7 @@ def main():
                         member[r['ja']].update(c for c in ancestors(v) if classes.get(c))
     parents_of = set(classes.values())
     FEATS = {'vol': {'+', '-'}, 'asp': {'state', 'activity', 'change', 'instant', 'type4'},
-             'te': {'go', 'eo', 'past', 'simple'}, 'anim': {'+', '-'}, 'ni': {'-'}, 'num': {'native', 'sino'}}
+             'te': {'go', 'eo', 'past', 'simple'}, 'name': {'+'}, 'anim': {'+', '-'}, 'ni': {'-'}, 'num': {'native', 'sino'}}
 
     def check_list(slot, vals, where, st):
         lits = [v for v in vals if not v.startswith('@') and v != '-']

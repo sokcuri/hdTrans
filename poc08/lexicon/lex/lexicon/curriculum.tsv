@@ -53,8 +53,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 彼の	あの	adn	1	그				r	r	あの時 → 그때
 彼の	あの	adn	2	저	head=@place|@building|@vehicle|@direction			r	r	あの建物 → 저 건물
 彼の	あの	adn	3	저기	head=-			r	r	あの、ちょっと待って → 저기, 잠깐만
-所	ところ	n	1	곳			cls=@place	r	r	静かな所 → 조용한 곳
-前	まえ	n	1	앞			cls=@direction|@time|@position	r	r	駅の前 → 역 앞
+所	ところ	n	1	곳			cls=@place name=+	r	r	静かな所 → 조용한 곳
+前	まえ	n	1	앞			cls=@direction|@time|@position name=+	r	r	駅の前 → 역 앞
 前	まえ	n	2	전	mod=@time|@period|@number|@quantity|@event			r	r	三年前 → 3년 전
 有り難う	ありがとう	intj	1	고마워				r	r	ありがとう → 고마워
 待つ	まつ	v5	1	기다리다			vol=+ asp=activity te=go	r	r	友達を待つ → 친구를 기다리다
@@ -81,10 +81,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 後	あと	n	4	나중	next=で			r	r	後で話す → 나중에 이야기하다
 済む	すむ	v5	1	끝나다			vol=- asp=change te=past	r	r	用事が済む → 볼일이 끝나다
 二人	ふたり	n	1	두 사람			cls=@person anim=+	r	r	二人が来た → 두 사람이 왔다
-中	なか	n	1	안			cls=@place	r	r	箱の中 → 상자 안
+中	なか	n	1	안			cls=@place name=+	r	r	箱の中 → 상자 안
 中	なか	n	2	속	mod=@body|@emotion|夢|記憶|@weather			r	r	夢の中 → 꿈속
 中	なか	n	3	중	mod=@person|@group|@organization|@number|@quantity			r	r	三人の中 → 세 명 중
-先生	せんせい	n	1	선생님			anim=+ cls=@person.role|@person	r	r	先生が来た → 선생님이 왔다
+先生	せんせい	n	1	선생님			anim=+ cls=@person.role|@person name=+	r	r	先生が来た → 선생님이 왔다
 未だ	まだ	adv	1	아직				r	r	まだ来ない → 아직 안 오다
 で	で	conj	1	그럼				r	r	じゃあ、行こう → 그럼 가자
 で	で	conj	2	그래서	next=@question|此れ			r	r	で、どうする → 그래서 어떻게 해
@@ -149,7 +149,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 見える	みえる	v1	1	보이다			vol=- asp=state te=simple	r	r	山が見える → 산이 보이다
 家	いえ	n	1	집			cls=@house	r	r	家に帰る → 집에 돌아가다
 家	いえ	n	2	가	after=@person			r	r	田中家 → 다나카가
-上	うえ	n	1	위			cls=@position	r	r	机の上 → 책상 위
+上	うえ	n	1	위			cls=@position name=+	r	r	机の上 → 책상 위
 どうぞ	どうぞ	adv	1	어서				r	r	どうぞ入って → 어서 들어와
 どうぞ	どうぞ	adv	2	부디	pred=願う|許す			r	r	どうぞ許して → 부디 용서해
 女	おんな	n	1	여자			anim=+ cls=@person	r	r	女が来る → 여자가 오다
@@ -161,7 +161,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 呼ぶ	よぶ	v5	1	부르다			vol=+ asp=activity te=go	r	r	名前を呼ぶ → 이름을 부르다
 欲しい	ほしい	adj	1	갖고 싶다		が=을		r	r	本が欲しい → 책을 갖고 싶다
 姉	ねえ	n	1	언니			anim=+ lu cls=@person.kin|@person	r	r	姉が来る → 언니가 오다
-花	はな	n	1	꽃			cls=@plant	r	r	花が咲く → 꽃이 피다
+花	はな	n	1	꽃			cls=@plant name=+	r	r	花が咲く → 꽃이 피다
 可愛い	かわいい	adj	1	귀엽다				r	r	可愛い犬 → 귀여운 개
 可愛い	かわいい	adj	2	예쁘다	head=@plant|@clothing|@color|@accessory|@thing.made			r	r	可愛い服 → 예쁜 옷
 一番	いちばん	adv	1	제일				r	r	一番好き → 제일 좋아하다
@@ -180,7 +180,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ずっと	ずっと	adv	2	훨씬	after=より			r	r	彼よりずっと大きい → 그보다 훨씬 크다
 書く	かく	v5	1	쓰다			vol=+ asp=activity te=go	r	r	手紙を書く → 편지를 쓰다
 書く	かく	v5	2	그리다	obj=@picture|@shape|線			r	r	絵を書く → 그림을 그리다
-金	かね	n	1	돈			lu cls=@money	r	r	金がない → 돈이 없다
+金	かね	n	1	돈			lu cls=@money name=+	r	r	金がない → 돈이 없다
 娘	むすめ	n	1	딸			cls=@person.kin anim=+	r	r	娘が生まれる → 딸이 태어나다
 娘	むすめ	n	2	아가씨	mod=若い|年頃			r	r	年頃の娘 → 나이 찬 아가씨
 娘	むすめ	n	3	아이	mod=この|あの			r	r	この娘 → 이 아이
@@ -202,7 +202,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 頃	ころ	n	2	시절	mod=若い|幼い			r	r	若い頃 → 젊은 시절
 頃	ころ	n	3	쯤	after=@time|@period|@number			r	r	三時頃 → 3시쯤
 始める	はじめる	v1	1	시작하다			vol=+ asp=change te=past	r	r	勉強を始める → 공부를 시작하다
-間	あいだ	n	1	동안			cls=@period	r	r	留守の間 → 집을 비운 동안
+間	あいだ	n	1	동안			cls=@period name=+	r	r	留守の間 → 집을 비운 동안
 間	あいだ	n	2	사이	mod=@person|@group|@place|@body			r	r	二人の間 → 두 사람 사이
 何故	なぜ	adv	1	왜				r	r	なぜ来た → 왜 왔어
 意味	いみ	n	1	의미			cls=@abstract	r	r	意味がない → 의미가 없다
@@ -237,7 +237,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 口	くち	n	1	입			cls=@body	r	r	口を開ける → 입을 열다
 伯父	おじ	n	1	아저씨			cls=@person.kin anim=+ lu	r	r	おじさん → 아저씨
 伯父	おじ	n	2	삼촌	mod=@person			r	r	私のおじさん → 내 삼촌
-水	みず	n	1	물			cls=@drink|@liquid	r	r	水を飲む → 물을 마시다
+水	みず	n	1	물			cls=@drink|@liquid name=+	r	r	水を飲む → 물을 마시다
 先ず	まず	adv	1	우선				r	r	まず座って → 우선 앉아
 先ず	まず	adv	2	거의	pred=無い|あり得る			r	r	まず無い → 거의 없다
 いらっしゃる	いらっしゃる	v5	1	계시다			vol=- asp=state te=simple	r	r	先生がいらっしゃる → 선생님이 계시다
@@ -266,14 +266,14 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 明日	あす	n	1	내일			cls=@time.point ni=-	r	r	明日は休みだ → 내일은 쉬는 날이다
 店	みせ	n	1	가게			cls=@shop|@organization	r	r	店に入る → 가게에 들어가다
 ゲーム	げーむ	n	1	게임			cls=@game	r	r	ゲームをする → 게임을 하다
-月	つき	n	1	달			cls=@sky	r	r	月が綺麗だ → 달이 아름답다
+月	つき	n	1	달			cls=@sky name=+	r	r	月が綺麗だ → 달이 아름답다
 月	つき	n	2	월	after=@number			r	r	5月 → 5월
-元気	げんき	n	1	기운			cls=@mood|@strength	r	r	元気がない → 기운이 없다
+元気	げんき	n	1	기운			cls=@mood|@strength name=+	r	r	元気がない → 기운이 없다
 元気	げんき	n	2	건강하다	form=cop|attr			r	r	元気だ → 건강하다
 元気	げんき	n	3	힘차게	form=adv			r	r	元気に走る → 힘차게 달리다
 生まれる	うまれる	v1	1	태어나다			vol=- asp=change te=past	r	r	日本で生まれた → 일본에서 태어났다
 生まれる	うまれる	v1	2	생겨나다	subj=@emotion|@idea|@relation|@event			r	r	隙が生まれる → 틈이 생기다
-海	うみ	n	1	바다			cls=@water.body	r	r	海に行く → 바다에 가다
+海	うみ	n	1	바다			cls=@water.body name=+	r	r	海に行く → 바다에 가다
 面白い	おもしろい	adj	1	재미있다			vol=- asp=state	r	r	面白い話 → 재미있는 이야기
 探す	さがす	v5	1	찾다			vol=+ asp=activity te=go	r	r	鍵を探す → 열쇠를 찾다
 高い	たかい	adj	1	높다				r	r	山が高い → 산이 높다
@@ -297,16 +297,16 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 姉	あね	n	1	언니			anim=+ cls=@person.kin|@person	r	r	姉がいる → 언니가 있다
 姉	あね	n	2	누나	mod=俺|僕			r	r	俺の姉 → 내 누나
 猫	ねこ	n	1	고양이			cls=@animal anim=+	r	r	猫がいる → 고양이가 있다
-車	くるま	n	1	차			cls=@vehicle	r	r	車に乗る → 차를 타다
+車	くるま	n	1	차			cls=@vehicle name=+	r	r	車に乗る → 차를 타다
 大変	たいへん	na	1	힘들다				r	r	仕事が大変だ → 일이 힘들다
 大変	たいへん	na	2	큰일	form=cop subj=-			r	r	大変だ！ → 큰일이다
-円	えん	n	1	엔			cls=@money num=sino	r	r	百円 → 백 엔
+円	えん	n	1	엔			cls=@money num=sino name=+	r	r	百円 → 백 엔
 円	えん	n	2	원	pred=描く			r	r	円を描く → 원을 그리다
 遅い	おそい	adj	1	늦다				r	r	帰りが遅い → 귀가가 늦다
 遅い	おそい	adj	2	느리다	subj=@motion|@vehicle			r	r	反応が遅い → 반응이 느리다
 迚も	とても	adv	1	아주			neg=도저히	r	r	とても大きい → 아주 크다
 咲く	さく	v5	1	피다			vol=- asp=change te=eo	r	r	花が咲く → 꽃이 피다
-夏	なつ	n	1	여름			cls=@season	r	r	夏が来る → 여름이 오다
+夏	なつ	n	1	여름			cls=@season name=+	r	r	夏が来る → 여름이 오다
 大好き	だいすき	na	1	정말 좋아하다		が=을		r	r	犬が大好きだ → 개를 정말 좋아하다
 決める	きめる	v1	1	정하다			vol=+ asp=change te=past	r	r	日を決める → 날짜를 정하다
 決める	きめる	v1	2	결정하다	obj=@result			r	r	結果を決める → 결과를 결정하다
@@ -344,9 +344,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 見付ける	みつける	v1	2	찾아내다	obj=犯人|原因			r	r	犯人を見つける → 범인을 찾아내다
 必ず	かならず	adv	1	반드시				r	r	必ず行く → 반드시 가다
 怒る	おこる	v5	1	화내다			vol=- asp=change te=past	r	r	先生が怒る → 선생님이 화내다
-空	そら	n	1	하늘			cls=@sky	r	r	空を見る → 하늘을 보다
+空	そら	n	1	하늘			cls=@sky name=+	r	r	空を見る → 하늘을 보다
 約束	やくそく	n	1	약속			cls=@plan	r	r	約束を守る → 약속을 지키다
-ママ	まま	n	1	엄마			cls=@person.kin anim=+	r	r	ママが来る → 엄마가 오다
+ママ	まま	n	1	엄마			cls=@person.kin anim=+ name=+	r	r	ママが来る → 엄마가 오다
 聞こえる	きこえる	v1	1	들리다			vol=- asp=state te=simple	r	r	声が聞こえる → 목소리가 들리다
 要る	いる	v5	1	필요하다			vol=- asp=state te=simple	r	r	お金が要る → 돈이 필요하다
 最近	さいきん	n	1	요즘			cls=@time ni=-	r	r	最近忙しい → 요즘 바쁘다
@@ -389,7 +389,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 選ぶ	えらぶ	v5	1	고르다			vol=+ asp=change te=go	r	r	本を選ぶ → 책을 고르다
 選ぶ	えらぶ	v5	2	선택하다	obj=道|運命			r	r	道を選ぶ → 길을 선택하다
 選ぶ	えらぶ	v5	3	뽑다	with=選挙			r	r	選挙で選ぶ → 선거로 뽑다
-茶	ちゃ	n	1	차			lu cls=@drink|@brew	r	r	お茶を飲む → 차를 마시다
+茶	ちゃ	n	1	차			lu cls=@drink|@brew name=+	r	r	お茶を飲む → 차를 마시다
 茶	ちゃ	n	2	갈색	next=髪|色			r	r	茶髪 → 갈색 머리
 絵	え	n	1	그림			cls=@picture	r	r	絵を描く → 그림을 그리다
 如何	いかが	na	1	어떻다			lu	r	r	いかがですか → 어떠십니까
@@ -406,7 +406,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 一杯	いっぱい	adv	2	가득	pred=満ちる|詰まる			r	r	いっぱい詰まる → 가득 차다
 色	いろ	n	1	색			cls=@color	r	r	きれいな色 → 예쁜 색
 色	いろ	n	2	기색	mod=@emotion|@mood			r	r	興奮の色 → 흥분한 기색
-緑	みどり	n	1	초록			cls=@color	r	r	緑の服 → 초록색 옷
+緑	みどり	n	1	초록			cls=@color name=+	r	r	緑の服 → 초록색 옷
 緑	みどり	n	2	미도리	next=さん|ちゃん			r	r	緑さん → 미도리 씨
 急ぐ	いそぐ	v5	1	서두르다			vol=+ asp=activity te=go	r	r	急いで行く → 서둘러 가다
 本	ほん	suf	1	개			num=native cls=@document	r	r	２本 → 두 개
@@ -419,8 +419,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 本	ほん	n	1	책			cls=@document	r	r	本を読む → 책을 읽다
 消える	きえる	v1	1	사라지다			vol=- asp=change te=eo	r	r	姿が消える → 모습이 사라지다
 消える	きえる	v1	2	꺼지다	subj=@light|火			r	r	火が消える → 불이 꺼지다
-パン	ぱん	n	1	빵			cls=@food	r	r	パンを食べる → 빵을 먹다
-村	むら	n	1	마을			cls=@town	r	r	村に住む → 마을에 살다
+パン	ぱん	n	1	빵			cls=@food name=+	r	r	パンを食べる → 빵을 먹다
+村	むら	n	1	마을			cls=@town name=+	r	r	村に住む → 마을에 살다
 服	ふく	n	1	옷			cls=@clothing	r	r	服を着る → 옷을 입다
 病院	びょういん	n	1	병원			cls=@facility	r	r	病院に行く → 병원에 가다
 大学	だいがく	n	1	대학			cls=@school|@organization	r	r	大学に行く → 대학에 가다
@@ -441,10 +441,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 甘い	あまい	adj	4	만만하다	subj=世の中|世間			r	r	世の中は甘くない → 세상은 만만하지 않다
 甘い	あまい	adj	5	허술하다	subj=@activity			r	r	警備が甘い → 경비가 허술하다
 甘い	あまい	adj	6	무르다	dat=@person			r	r	生徒に甘い → 학생에게 무르다
-風	かぜ	n	1	바람			cls=@weather|@wind	r	r	風が吹く → 바람이 불다
+風	かぜ	n	1	바람			cls=@weather|@wind name=+	r	r	風が吹く → 바람이 불다
 毎日	まいにち	n	1	매일			cls=@time ni=-	r	r	毎日行く → 매일 가다
 彼処	あそこ	n	1	저기			cls=@place	r	r	あそこにある → 저기에 있다
-春	はる	n	1	봄			cls=@season	r	r	春が来る → 봄이 오다
+春	はる	n	1	봄			cls=@season name=+	r	r	春が来る → 봄이 오다
 嫌い	きらい	n	1	싫다				r	r	野菜が嫌いだ → 채소가 싫다
 歌う	うたう	v5	1	노래하다			vol=+ asp=activity te=go	r	r	みんなで歌う → 다 같이 노래하다
 歌う	うたう	v5	2	부르다	obj=@music			r	r	歌を歌う → 노래를 부르다
@@ -474,10 +474,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 伯母	おば	n	1	이모			cls=@person.kin anim=+ lu	r	r	おばが来る → 이모가 오다
 伯母	おば	n	2	아주머니	next=さん|ちゃん			r	r	おばさん → 아주머니
 妻	つま	n	1	아내			cls=@person.kin anim=+	r	r	妻と話す → 아내와 이야기하다
-沢山	たくさん	adv	1	많이				r	r	たくさん食べる → 많이 먹다
+沢山	たくさん	adv	1	많이			name=+	r	r	たくさん食べる → 많이 먹다
 何れ	どれ	n	1	어느 것				r	r	どれがいい → 어느 것이 좋아
 何れ	どれ	n	2	얼마나	next=だけ|ほど			r	r	どれだけ怖いか → 얼마나 무서운지
-町	まち	n	1	마을			cls=@town	r	r	小さな町 → 작은 마을
+町	まち	n	1	마을			cls=@town name=+	r	r	小さな町 → 작은 마을
 町	まち	n	2	거리	pred=歩く|出る			r	r	町を歩く → 거리를 걷다
 丁度	ちょうど	adv	1	딱				r	r	ちょうどいい → 딱 좋다
 丁度	ちょうど	adv	2	마침	pred=来る|終わる			r	r	ちょうど来た → 마침 왔다
@@ -487,13 +487,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 勉強	べんきょう	n	1	공부			cls=@activity	r	r	勉強する → 공부하다
 漸と	やっと	adv	1	드디어				r	r	やっと着いた → 드디어 도착했다
 漸と	やっと	adv	2	겨우	pred=間に合う|出来る			r	r	やっと間に合った → 겨우 시간에 맞췄다
-パパ	ぱぱ	n	1	아빠			cls=@person.kin anim=+	r	r	パパが来る → 아빠가 오다
+パパ	ぱぱ	n	1	아빠			cls=@person.kin anim=+ name=+	r	r	パパが来る → 아빠가 오다
 高校	こうこう	n	1	고등학교			cls=@school	r	r	高校に通う → 고등학교에 다니다
 社長	しゃちょう	n	1	사장			cls=@person.role anim=+	r	r	社長が来る → 사장이 오다
 残念	ざんねん	na	1	아쉽다				r	r	残念だ → 아쉽다
 枚	まい	suf	1	장			num=native	r	r	三枚 → 세 장
 熱い	あつい	adj	1	뜨겁다				r	r	熱いお茶 → 뜨거운 차
-風呂	ふろ	n	1	목욕			lu cls=@bath	r	r	お風呂が好き → 목욕이 좋다
+風呂	ふろ	n	1	목욕			lu cls=@bath name=+	r	r	お風呂が好き → 목욕이 좋다
 風呂	ふろ	n	2	욕조	pred=浸かる			r	r	風呂に浸かる → 욕조에 몸을 담그다
 特に	とくに	adv	1	특히				r	r	特に大切だ → 특히 중요하다
 特に	とくに	adv	2	딱히	pred=無い|変わる			r	r	特にない → 딱히 없다
@@ -505,7 +505,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 押す	おす	v5	1	누르다			vol=+ asp=activity te=go	r	r	ボタンを押す → 버튼을 누르다
 押す	おす	v5	2	밀다	obj=@person|@opening|@vehicle|背中			r	r	背中を押す → 등을 밀다
 押す	おす	v5	3	찍다	obj=判子|判			r	r	判子を押す → 도장을 찍다
-秋	あき	n	1	가을			cls=@season	r	r	秋が来る → 가을이 오다
+秋	あき	n	1	가을			cls=@season name=+	r	r	秋が来る → 가을이 오다
 特別	とくべつ	na	1	특별하다				r	r	特別な日 → 특별한 날
 止まる	とまる	v5	1	멈추다			vol=- asp=change te=eo	r	r	車が止まる → 차가 멈추다
 止まる	とまる	v5	2	서다	subj=@vehicle			r	r	電車が止まる → 전철이 서다
@@ -523,11 +523,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 木	き	n	2	목	next=曜日			r	r	木曜日 → 목요일
 少ない	すくない	adj	1	적다				r	r	人が少ない → 사람이 적다
 今夜	こんや	n	1	오늘 밤			cls=@time ni=-	r	r	今夜行く → 오늘 밤 가다
-青	あお	n	1	파랑			cls=@color	r	r	青を選ぶ → 파랑을 고르다
+青	あお	n	1	파랑			cls=@color name=+	r	r	青を選ぶ → 파랑을 고르다
 青	あお	n	2	파란불	subj=信号			r	r	信号が青だ → 신호가 파란불이다
 恥ずかしい	はずかしい	adj	1	부끄럽다				r	r	恥ずかしい → 부끄럽다
 貸す	かす	v5	1	빌려주다			vol=+ asp=change te=past	r	r	本を貸す → 책을 빌려주다
-月	がつ	n	1	월			cls=@time num=sino	r	r	三月 → 3월
+月	がつ	n	1	월			cls=@time num=sino name=+	r	r	三月 → 3월
 渡す	わたす	v5	1	건네다			vol=+ asp=activity te=go	r	r	本を渡す → 책을 건네다
 勝つ	かつ	v5	1	이기다			vol=+ asp=change te=go	r	r	試合に勝つ → 경기에 이기다
 側	そば	n	1	옆			cls=@position|@side	r	r	駅のそば → 역 옆
@@ -564,10 +564,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 夫	おっと	n	1	남편			cls=@person.kin anim=+	r	r	夫に嘘をつく → 남편에게 거짓말을 하다
 黒	くろ	n	1	검은색			cls=@color	r	r	黒とシルバー → 검은색과 은색
 集まる	あつまる	v5	1	모이다			vol=+ asp=change te=eo	r	r	人が集まる → 사람이 모이다
-星	ほし	n	1	별			cls=@sky	r	r	星が見える → 별이 보이다
+星	ほし	n	1	별			cls=@sky name=+	r	r	星が見える → 별이 보이다
 年	とし	n	1	나이			cls=@period	r	r	年を取る → 나이를 먹다
 年	とし	n	2	해	mod=次|生まれる			r	r	次の年 → 다음 해
-耳	みみ	n	1	귀			cls=@body	r	r	耳が赤い → 귀가 빨갛다
+耳	みみ	n	1	귀			cls=@body name=+	r	r	耳が赤い → 귀가 빨갛다
 殆ど	ほとんど	n	1	거의				r	r	ほとんどない → 거의 없다
 殆ど	ほとんど	n	2	대부분	next=が|は			r	r	ほとんどが学生だ → 대부분이 학생이다
 落とす	おとす	v5	1	떨어뜨리다			vol=+ asp=change te=past	r	r	財布を落とす → 지갑을 떨어뜨리다
@@ -577,7 +577,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 落とす	おとす	v5	5	지우다	obj=汚れ|化粧			r	r	化粧を落とす → 화장을 지우다
 落とす	おとす	v5	6	떨구다	obj=肩|視線			r	r	視線を落とす → 시선을 떨구다
 箇月	かげつ	n	1	개월			num=sino	r	r	三ヶ月 → 3개월
-右	みぎ	n	1	오른쪽			cls=@direction	r	r	右に曲がる → 오른쪽으로 돌다
+右	みぎ	n	1	오른쪽			cls=@direction name=+	r	r	右に曲がる → 오른쪽으로 돌다
 両親	りょうしん	n	1	부모님			cls=@person.kin anim=+	r	r	両親に会う → 부모님을 만나다
 午前	ごぜん	n	1	오전			cls=@time	r	r	午前九時 → 오전 9시
 英語	えいご	n	1	영어			cls=@language|@subject.school	r	r	英語を話す → 영어를 하다
@@ -597,7 +597,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 遅れる	おくれる	v1	1	늦다			vol=- asp=change te=past	r	r	約束に遅れる → 약속에 늦다
 遅れる	おくれる	v1	2	뒤처지다	dat=流行|時代			r	r	流行に遅れる → 유행에 뒤처지다
 運転	うんてん	n	1	운전			cls=@activity	r	r	運転が上手い → 운전이 능숙하다
-季節	きせつ	n	1	계절			cls=@season	r	r	春の季節 → 봄 계절
+季節	きせつ	n	1	계절			cls=@season name=+	r	r	春の季節 → 봄 계절
 古い	ふるい	adj	1	오래되다				r	r	古い本 → 오래된 책
 古い	ふるい	adj	2	낡다	head=@clothing|@vehicle|@furniture|@tool			r	r	古い車 → 낡은 차
 古い	ふるい	adj	3	오래다	head=@person.close|知り合い			r	r	古い友人 → 오랜 친구
@@ -681,13 +681,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 遠い	とおい	adj	1	멀다				r	r	駅から遠い → 역에서 멀다
 番組	ばんぐみ	n	1	프로그램			cls=@show	r	r	テレビ番組 → 텔레비전 프로그램
 暗い	くらい	adj	1	어둡다				r	r	暗い部屋 → 어두운 방
-白	しろ	n	1	흰색			cls=@color	r	r	白と黒 → 흰색과 검은색
+白	しろ	n	1	흰색			cls=@color name=+	r	r	白と黒 → 흰색과 검은색
 歯	は	n	1	이			cls=@body	r	r	歯を磨く → 이를 닦다
 歯	は	n	2	이빨	mod=@animal|@monster			r	r	獣の歯 → 짐승의 이빨
 半	はん	n	1	반			cls=@quantity	r	r	六時半 → 6시 반
 スマホ	すまほ	n	1	스마트폰			cls=@phone	r	r	スマホを使う → 스마트폰을 쓰다
-北	きた	n	1	북쪽			cls=@direction	r	r	北へ行く → 북쪽으로 가다
-左	ひだり	n	1	왼쪽			cls=@direction	r	r	左に曲がる → 왼쪽으로 돌다
+北	きた	n	1	북쪽			cls=@direction name=+	r	r	北へ行く → 북쪽으로 가다
+左	ひだり	n	1	왼쪽			cls=@direction name=+	r	r	左に曲がる → 왼쪽으로 돌다
 動物	どうぶつ	n	1	동물			cls=@animal anim=+	r	r	動物が好きだ → 동물을 좋아하다
 弱い	よわい	adj	1	약하다				r	r	体が弱い → 몸이 약하다
 卒業	そつぎょう	n	1	졸업			cls=@event	r	r	卒業する → 졸업하다
@@ -715,18 +715,18 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 勤める	つとめる	v1	1	맡다			vol=+ asp=activity te=go	r	r	司会を務める → 사회를 맡다
 勤める	つとめる	v1	2	다니다	dat=@organization|@facility			r	r	会社に勤める → 회사에 다니다
 兄弟	きょうだい	n	1	형제			cls=@person.kin anim=+	r	r	兄弟がいる → 형제가 있다
-森	もり	n	1	숲			cls=@nature	r	r	森に入る → 숲에 들어가다
+森	もり	n	1	숲			cls=@nature name=+	r	r	森に入る → 숲에 들어가다
 森	もり	n	2	모리	next=さん			r	r	森さん → 모리 씨
 電車	でんしゃ	n	1	전철			cls=@vehicle	r	r	電車に乗る → 전철을 타다
 返事	へんじ	n	1	대답			cls=@speech	r	r	返事をする → 대답을 하다
 返事	へんじ	n	2	답장	mod=@document|@message			r	r	メールの返事 → 메일 답장
-ニュース	にゅーす	n	1	뉴스			cls=@info	r	r	ニュースを見る → 뉴스를 보다
+ニュース	にゅーす	n	1	뉴스			cls=@info name=+	r	r	ニュースを見る → 뉴스를 보다
 背中	せなか	n	1	등			cls=@body	r	r	背中を撫でる → 등을 쓰다듬다
 背中	せなか	n	2	뒷모습	pred=見送る|眺める			r	r	背中を見送る → 뒷모습을 배웅하다
 週間	しゅうかん	n	1	주일			cls=@duration num=sino	r	r	一週間 → 일주일
 週間	しゅうかん	n	2	주간	next=予報|ランキング			r	r	週間予報 → 주간 예보
-桜	さくら	n	1	벚꽃			cls=@plant	r	r	桜が咲く → 벚꽃이 피다
-雪	ゆき	n	1	눈			cls=@weather	r	r	雪が降る → 눈이 내리다
+桜	さくら	n	1	벚꽃			cls=@plant name=+	r	r	桜が咲く → 벚꽃이 피다
+雪	ゆき	n	1	눈			cls=@weather name=+	r	r	雪が降る → 눈이 내리다
 冬	ふゆ	n	1	겨울			cls=@season	r	r	冬に入る → 겨울에 들어가다
 晩	ばん	n	1	밤			cls=@period	r	r	ある晩 → 어느 날 밤
 晩	ばん	n	2	저녁	after=昼			r	r	朝昼晩 → 아침 점심 저녁
@@ -735,7 +735,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 兄	にい	n	1	형			anim=+ lu cls=@person.kin|@person	r	r	兄がいる → 형이 있다
 さようなら	さようなら	intj	1	안녕히 가세요				r	r	さようなら → 안녕히 가세요
 さようなら	さようなら	intj	2	안녕	register=casual			r	r	さよなら → 안녕
-バス	ばす	n	1	버스			cls=@vehicle	r	r	バスに乗る → 버스를 타다
+バス	ばす	n	1	버스			cls=@vehicle name=+	r	r	バスに乗る → 버스를 타다
 バス	ばす	n	2	욕실	next=付き			r	r	バス付き → 욕실 딸린
 去年	きょねん	n	1	작년			cls=@time.point ni=-	r	r	去年行った → 작년에 갔다
 間に合う	まにあう	v5	1	늦지 않다			vol=- asp=change te=past neg=늦다	r	r	電車に間に合う → 기차에 늦지 않다
@@ -780,7 +780,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 低い	ひくい	adj	2	작다	subj=背|身長			r	r	背が低い → 키가 작다
 字	じ	n	1	글자			cls=@language	r	r	漢字の字 → 한자 글자
 字	じ	n	2	글씨	mod=きれい|汚い			r	r	汚い字 → 글씨가 엉망이다
-東	ひがし	n	1	동쪽			cls=@direction	r	r	東に進む → 동쪽으로 나아가다
+東	ひがし	n	1	동쪽			cls=@direction name=+	r	r	東に進む → 동쪽으로 나아가다
 東	ひがし	n	2	동	next=アジア|日本			r	r	東アジア → 동아시아
 テーブル	てーぶる	n	1	테이블			cls=@furniture	r	r	テーブルを拭く → 테이블을 닦다
 教室	きょうしつ	n	1	교실			cls=@room	r	r	教室に入る → 교실에 들어가다
@@ -792,7 +792,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 吹く	ふく	v5	1	불다			vol=+ asp=activity te=go	r	r	風が吹く → 바람이 불다
 吹く	ふく	v5	2	뿜다	obj=@light			r	r	火を吹く → 불을 뿜다
 吹く	ふく	v5	3	분출하다	subj=火山|温泉			r	r	火山が噴く → 화산이 분출하다
-下手	へた	n	1	서투르다				r	r	歌が下手だ → 노래가 서투르다
+下手	へた	n	1	서투르다			name=+	r	r	歌が下手だ → 노래가 서투르다
 下手	へた	n	2	섣불리	form=adv			r	r	下手に手を出す → 섣불리 손을 대다
 ボール	ぼーる	n	1	공			cls=@toy	r	r	ボールを投げる → 공을 던지다
 箱	はこ	n	1	상자			cls=@container	r	r	箱を開ける → 상자를 열다
@@ -804,9 +804,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 寄る	よる	v5	2	다가가다	dat=@position|@direction|@person			r	r	そばに寄る → 곁으로 다가가다
 寄る	よる	v5	3	잡히다	subj=皺			r	r	眉間に皺が寄る → 미간에 주름이 잡히다
 授業	じゅぎょう	n	1	수업			cls=@lesson|@lecture	r	r	授業を受ける → 수업을 듣다
-南	みなみ	n	1	남쪽			cls=@direction	r	r	南に進む → 남쪽으로 나아가다
+南	みなみ	n	1	남쪽			cls=@direction name=+	r	r	南に進む → 남쪽으로 나아가다
 砂糖	さとう	n	1	설탕			cls=@seasoning	r	r	砂糖を入れる → 설탕을 넣다
-西	にし	n	1	서쪽			cls=@direction	r	r	西に進む → 서쪽으로 나아가다
+西	にし	n	1	서쪽			cls=@direction name=+	r	r	西に進む → 서쪽으로 나아가다
 階段	かいだん	n	1	계단			cls=@place	r	r	階段を上る → 계단을 오르다
 洗う	あらう	v5	1	씻다			vol=+ asp=activity te=go	r	r	手を洗う → 손을 씻다
 洗う	あらう	v5	2	빨다	obj=@clothing|@legwear|洗濯物			r	r	服を洗う → 옷을 빨다
@@ -872,17 +872,17 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 消しゴム	けしごむ	n	1	지우개			cls=@tool lu	r	r	消しゴムで消す → 지우개로 지우다
 ノート	のーと	n	1	공책			cls=@document	r	r	ノートを広げる → 공책을 펼치다
 ノート	のーと	n	2	노트북	next=パソコン|PC			r	r	ノートパソコン → 노트북
-ペン	ぺん	n	1	펜			cls=@writing.tool	r	r	ペンで書く → 펜으로 쓰다
+ペン	ぺん	n	1	펜			cls=@writing.tool name=+	r	r	ペンで書く → 펜으로 쓰다
 ボールペン	ぼーるぺん	n	1	볼펜			cls=@writing.tool lu	r	r	ボールペンを置く → 볼펜을 내려놓다
 漢字	かんじ	n	1	한자			cls=@language|@rote	r	r	漢字を書く → 한자를 쓰다
 平仮名	ひらがな	n	1	히라가나			cls=@language	r	r	ひらがなで書く → 히라가나로 쓰다
 片仮名	かたかな	n	1	카타카나			cls=@language	r	r	カタカナで書く → 카타카나로 쓰다
 作文	さくぶん	n	1	작문			cls=@document|@writing	r	r	作文を書く → 작문을 쓰다
 図書館	としょかん	n	1	도서관			cls=@facility lu	r	r	図書館に行く → 도서관에 가다
-黒板	こくばん	n	1	칠판			cls=@thing	r	r	黒板に書く → 칠판에 쓰다
+黒板	こくばん	n	1	칠판			cls=@thing name=+	r	r	黒板に書く → 칠판에 쓰다
 教科書	きょうかしょ	n	1	교과서			lu cls=@document	r	r	教科書を開く → 교과서를 펴다
 果物	くだもの	n	1	과일			cls=@food	r	r	果物を食べる → 과일을 먹다
-林檎	りんご	n	1	사과			cls=@food	r	r	りんごを食べる → 사과를 먹다
+林檎	りんご	n	1	사과			cls=@food name=+	r	r	りんごを食べる → 사과를 먹다
 蜜柑	みかん	n	1	귤			cls=@food	r	r	みかんを食べる → 귤을 먹다
 バナナ	ばなな	n	1	바나나			cls=@food	r	r	バナナを食べる → 바나나를 먹다
 醤油	しょうゆ	n	1	간장			cls=@seasoning	r	r	醤油をつける → 간장을 찍다
@@ -952,23 +952,23 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 エレベーター	えれべーたー	n	1	엘리베이터			cls=@machine	r	r	エレベーターに乗る → 엘리베이터를 타다
 銀行	ぎんこう	n	1	은행			cls=@facility	r	r	銀行に行く → 은행에 가다
 郵便局	ゆうびんきょく	n	1	우체국			cls=@facility lu	r	r	郵便局に行く → 우체국에 가다
-公園	こうえん	n	1	공원			cls=@place	r	r	公園に行く → 공원에 가다
+公園	こうえん	n	1	공원			cls=@place name=+	r	r	公園に行く → 공원에 가다
 喫茶店	きっさてん	n	1	카페			cls=@shop lu	r	r	喫茶店に入る → 카페에 들어가다
 食堂	しょくどう	n	1	식당			cls=@facility	r	r	食堂で食べる → 식당에서 먹다
 交番	こうばん	n	1	파출소			cls=@facility	r	r	交番に行く → 파출소에 가다
 映画館	えいがかん	n	1	영화관			cls=@facility lu	r	r	映画館に行く → 영화관에 가다
 大使館	たいしかん	n	1	대사관			cls=@facility lu	r	r	大使館に行く → 대사관에 가다
-八百屋	やおや	n	1	채소 가게			cls=@shop	r	r	八百屋で買う → 채소 가게에서 사다
+八百屋	やおや	n	1	채소 가게			cls=@shop name=+	r	r	八百屋で買う → 채소 가게에서 사다
 デパート	でぱーと	n	1	백화점			cls=@shop	r	r	デパートに行く → 백화점에 가다
 レストラン	れすとらん	n	1	레스토랑			cls=@shop	r	r	レストランで食べる → 레스토랑에서 먹다
 建物	たてもの	n	1	건물			cls=@building	r	r	建物に入る → 건물에 들어가다
-池	いけ	n	1	연못			cls=@water.body	r	r	池で釣る → 연못에서 낚다
-橋	はし	n	1	다리			cls=@road	r	r	橋を渡る → 다리를 건너다
+池	いけ	n	1	연못			cls=@water.body name=+	r	r	池で釣る → 연못에서 낚다
+橋	はし	n	1	다리			cls=@road name=+	r	r	橋を渡る → 다리를 건너다
 角	かど	n	1	모퉁이			cls=@position	r	r	角を曲がる → 모퉁이를 돌다
 角	かど	n	2	모서리	mod=@furniture|@container|@document			r	r	机の角 → 책상 모서리
 交差点	こうさてん	n	1	교차로			cls=@road lu	r	r	交差点を渡る → 교차로를 건너다
 入り口	いりぐち	n	1	입구			cls=@opening	r	r	入口で待つ → 입구에서 기다리다
-出口	でぐち	n	1	출구			cls=@place	r	r	出口に向かう → 출구로 향하다
+出口	でぐち	n	1	출구			cls=@place name=+	r	r	出口に向かう → 출구로 향하다
 本屋	ほんや	n	1	서점			cls=@shop	r	r	本屋に行く → 서점에 가다
 プール	ぷーる	n	1	수영장			cls=@facility|@water.body	r	r	プールで泳ぐ → 수영장에서 헤엄치다
 曇り	くもり	n	1	흐림			cls=@weather	r	r	曇りのち晴れ → 흐린 뒤 맑음
@@ -1005,13 +1005,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 夕べ	ゆうべ	n	1	어젯밤			cls=@time.point ni=-	r	r	夕べ寝られなかった → 어젯밤에 잠을 못 잤다
 一月	いちがつ	n	1	1월			cls=@time.point lu	r	r	一月 → 1월 (digits)
 二月	にがつ	n	1	2월			cls=@time.point lu	r	r	二月 → 2월 (digits)
-三月	さんがつ	n	1	3월			cls=@time.point lu	r	r	三月 → 3월 (digits)
+三月	さんがつ	n	1	3월			cls=@time.point lu name=+	r	r	三月 → 3월 (digits)
 四月	しがつ	n	1	4월			cls=@time.point lu	r	r	四月 → 4월 (digits)
-五月	ごがつ	n	1	5월			cls=@time.point lu	r	r	五月 → 5월 (digits)
+五月	ごがつ	n	1	5월			cls=@time.point lu name=+	r	r	五月 → 5월 (digits)
 六月	ろくがつ	n	1	6월			cls=@time.point lu	r	r	六月 → 6월 (digits)
 七月	しちがつ	n	1	7월			cls=@time.point lu	r	r	七月 → 7월 (digits)
 八月	はちがつ	n	1	8월			cls=@time.point lu	r	r	八月 → 8월 (digits)
-九月	くがつ	n	1	9월			cls=@time.point lu	r	r	九月 → 9월 (digits)
+九月	くがつ	n	1	9월			cls=@time.point lu name=+	r	r	九月 → 9월 (digits)
 十月	じゅうがつ	n	1	10월			cls=@time.point lu	r	r	十月 → 10월 (digits)
 十一月	じゅういちがつ	n	1	11월			cls=@time.point lu	r	r	十一月 → 11월 (digits)
 十二月	じゅうにがつ	n	1	12월			cls=@time.point lu	r	r	十二月 → 12월 (digits)
@@ -1109,7 +1109,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 不便	ふべん	n	2	불편하다	form=cop			r	r	不便な場所 → 불편한 곳
 賑やか	にぎやか	na	1	떠들썩하다				r	r	賑やかな声 → 떠들썩한 목소리
 賑やか	にぎやか	na	2	번화하다	head=@town			r	r	賑やかな街 → 번화한 거리
-丈夫	じょうぶ	na	1	튼튼하다				r	r	丈夫な体 → 튼튼한 몸
+丈夫	じょうぶ	na	1	튼튼하다			name=+	r	r	丈夫な体 → 튼튼한 몸
 親切	しんせつ	n	1	친절				r	r	ご親切に感謝する → 친절에 감사하다
 親切	しんせつ	n	2	친절하다	form=cop			r	r	親切な人 → 친절한 사람
 何時も	いつも	adv	1	항상			lu	r	r	いつも朝ご飯を食べる → 항상 아침을 먹다
@@ -1124,7 +1124,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 初めまして	はじめまして	intj	1	처음 뵙겠습니다			lu	r	r	初めまして、田中です → 처음 뵙겠습니다. 다나카입니다
 スポーツ	すぽーつ	n	1	스포츠			cls=@sport	r	r	スポーツが好きだ → 스포츠를 좋아하다
 ギター	ぎたー	n	1	기타			cls=@instrument	r	r	ギターを弾く → 기타를 치다
-ピアノ	ぴあの	n	1	피아노			cls=@instrument	r	r	ピアノを弾く → 피아노를 치다
+ピアノ	ぴあの	n	1	피아노			cls=@instrument name=+	r	r	ピアノを弾く → 피아노를 치다
 漫画	まんが	n	1	만화			cls=@document	r	r	漫画を読む → 만화를 읽다
 野球	やきゅう	n	1	야구			cls=@sport	r	r	野球をする → 야구를 하다
 サッカー	さっかー	n	1	축구			cls=@sport	r	r	サッカーをする → 축구를 하다
@@ -1134,7 +1134,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大勢	おおぜい	n	2	많은	next=の			r	r	大勢の人 → 많은 사람
 大勢	おおぜい	n	3	여럿이서	next=で			r	r	大勢で行く → 여럿이서 가다
 外国語	がいこくご	n	1	외국어			lu cls=@language	r	r	外国語を勉強する → 외국어를 공부하다
-一	いち	num	1	일			cls=@number num=sino	r	r	一月 → 일월
+一	いち	num	1	일			cls=@number num=sino name=+	r	r	一月 → 일월
 二	に	num	1	이			cls=@number num=sino	r	r	二月 → 이월
 三	さん	num	1	삼			cls=@number num=sino	r	r	三月 → 삼월
 四	よん	num	1	사			cls=@number num=sino	r	r	四月 → 사월
@@ -1145,10 +1145,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 八	はち	num	1	팔			cls=@number num=sino	r	r	八月 → 팔월
 九	きゅう	num	1	구			cls=@number num=sino	r	r	九月 → 구월
 十	じゅう	num	1	십			cls=@number num=sino	r	r	十円 → 십 엔
-百	ひゃく	num	1	백			cls=@number num=sino	r	r	百円 → 백 엔
-千	せん	num	1	천			cls=@number num=sino	r	r	千円 → 천 엔
+百	ひゃく	num	1	백			cls=@number num=sino name=+	r	r	百円 → 백 엔
+千	せん	num	1	천			cls=@number num=sino name=+	r	r	千円 → 천 엔
 万	まん	num	1	만			cls=@number lu num=sino	r	r	一万円 → 만 엔
-一	ひと	num	1	하나			cls=@number lu num=native	r	r	一つ → 하나
+一	ひと	num	1	하나			cls=@number lu num=native name=+	r	r	一つ → 하나
 二	ふた	num	1	둘			cls=@number lu num=native	r	r	二つ → 둘
 三	み	num	1	셋			cls=@number lu num=native	r	r	三つ → 셋
 五	いつ	num	1	다섯			cls=@number lu num=native	r	r	五つ → 다섯
@@ -1413,8 +1413,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 課長	かちょう	n	1	과장			cls=@person.role anim=+	r	r	課長に会う → 과장을 만나다
 先輩	せんぱい	n	1	선배			anim=+ cls=@person.role|@person	r	r	先輩に聞く → 선배에게 묻다
 後輩	こうはい	n	1	후배			anim=+ cls=@person.role|@person	r	r	後輩ができた → 후배가 생겼다
-店長	てんちょう	n	1	점장			cls=@person.role anim=+	r	r	店長に聞く → 점장에게 묻다
-仲間	なかま	n	1	동료			anim=+ cls=@group|@person|@person.close	r	r	仲間を守る → 동료를 지키다
+店長	てんちょう	n	1	점장			cls=@person.role anim=+ name=+	r	r	店長に聞く → 점장에게 묻다
+仲間	なかま	n	1	동료			anim=+ cls=@group|@person|@person.close name=+	r	r	仲間を守る → 동료를 지키다
 友人	ゆうじん	n	1	친구			anim=+ cls=@person|@person.close	r	r	友人と会う → 친구를 만나다
 知り合い	しりあい	n	1	아는 사람			cls=@person anim=+	r	r	知り合いに会う → 아는 사람을 만나다
 知り合い	しりあい	n	2	아는 사이	form=cop			r	r	知り合いだ → 아는 사이다
@@ -1443,16 +1443,16 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 お客さん	おきゃくさん	n	1	손님			anim=+ lu cls=@person	r	r	お客さんが来る → 손님이 오다
 年寄り	としより	n	1	노인			cls=@person anim=+	r	r	年寄りに席を譲る → 노인에게 자리를 양보하다
 親戚	しんせき	n	1	친척			cls=@person.kin anim=+	r	r	親戚の家 → 친척 집
-孫	まご	n	1	손주			cls=@person.kin anim=+	r	r	孫の顔を見る → 손주 얼굴을 보다
+孫	まご	n	1	손주			cls=@person.kin anim=+ name=+	r	r	孫の顔を見る → 손주 얼굴을 보다
 従兄弟	いとこ	n	1	사촌			cls=@person.kin anim=+	r	r	いとこに会う → 사촌을 만나다
 父親	ちちおや	n	1	아버지			cls=@person.kin anim=+	r	r	父親に似る → 아버지를 닮다
 母親	ははおや	n	1	어머니			cls=@person.kin anim=+	r	r	母親に似る → 어머니를 닮다
 奥さん	おくさん	n	1	부인			cls=@person.kin anim=+ lu	r	r	奥さんは元気ですか → 부인은 잘 지내세요
 旦那	だんな	n	1	남편			cls=@person.kin anim=+	r	r	旦那と一緒に → 남편과 함께
-お父さん	おちちさん	n	1	아버지			cls=@person.kin anim=+ lu	r	r	お父さんに話す → 아버지에게 말하다
-お父さん	おちちさん	n	2	아빠	register=casual			r	r	お父さん、来て → 아빠, 와
-お母さん	おははさん	n	1	어머니			cls=@person.kin anim=+ lu	r	r	お母さんに話す → 어머니께 말하다
-お母さん	おははさん	n	2	엄마	register=casual			r	r	お母さん、来て → 엄마, 와
+お父さん	おとうさん	n	1	아버지			cls=@person.kin anim=+ lu	r	r	お父さんに話す → 아버지에게 말하다
+お父さん	おとうさん	n	2	아빠	register=casual			r	r	お父さん、来て → 아빠, 와
+お母さん	おかあさん	n	1	어머니			cls=@person.kin anim=+ lu	r	r	お母さんに話す → 어머니께 말하다
+お母さん	おかあさん	n	2	엄마	register=casual			r	r	お母さん、来て → 엄마, 와
 おじいさん	おじいさん	n	1	할아버지			cls=@person.kin anim=+ lu	r	r	おじいさんが来た → 할아버지가 왔다
 おばあさん	おばあさん	n	1	할머니			cls=@person.kin anim=+ lu	r	r	おばあさんが来た → 할머니가 왔다
 家庭	かてい	n	1	가정			cls=@group	r	r	幸せな家庭 → 행복한 가정
@@ -1499,12 +1499,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 経験	けいけん	n	1	경험			cls=@abstract	r	r	経験がある → 경험이 있다
 警察	けいさつ	n	1	경찰			cls=@organization	r	r	警察を呼ぶ → 경찰을 부르다
 景色	けしき	n	1	풍경			cls=@nature	r	r	きれいな景色 → 아름다운 풍경
-島	しま	n	1	섬			cls=@nature	r	r	島に住む → 섬에 살다
-港	みなと	n	1	항구			cls=@place	r	r	港に着く → 항구에 도착하다
+島	しま	n	1	섬			cls=@nature name=+	r	r	島に住む → 섬에 살다
+港	みなと	n	1	항구			cls=@place name=+	r	r	港に着く → 항구에 도착하다
 空港	くうこう	n	1	공항			cls=@facility	r	r	空港に着く → 공항에 도착하다
 神社	じんじゃ	n	1	신사			cls=@facility	r	r	神社に参拝する → 신사에 참배하다
 寺	てら	n	1	절			cls=@facility	r	r	寺に行く → 절에 가다
-城	しろ	n	1	성			cls=@building	r	r	城を建てる → 성을 짓다
+城	しろ	n	1	성			cls=@building name=+	r	r	城を建てる → 성을 짓다
 美術館	びじゅつかん	n	1	미술관			cls=@facility lu	r	r	美術館に行く → 미술관에 가다
 博物館	はくぶつかん	n	1	박물관			cls=@facility lu	r	r	博物館に行く → 박물관에 가다
 動物園	どうぶつえん	n	1	동물원			cls=@facility lu	r	r	動物園に行く → 동물원에 가다
@@ -1515,25 +1515,25 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 受け付け	うけつけ	n	1	접수			cls=@activity|@place	r	r	受付を始める → 접수를 시작하다
 受け付け	うけつけ	n	2	접수처	pred=行く|来る			r	r	受付に行く → 접수처에 가다
 道路	どうろ	n	1	도로			cls=@road	r	r	道路を渡る → 도로를 건너다
-坂	さか	n	1	언덕			cls=@road	r	r	坂を上る → 언덕을 오르다
+坂	さか	n	1	언덕			cls=@road name=+	r	r	坂を上る → 언덕을 오르다
 近所	きんじょ	n	1	근처			cls=@place	r	r	家の近所 → 집 근처
 近所	きんじょ	n	2	동네	head=@person|@shop			r	r	近所のおばさん → 동네 아주머니
 市	し	n	1	시			cls=@town	r	r	Ａ市に住む → A시에 살다
-県	けん	n	1	현			cls=@place	r	r	千葉県 → 지바현
+県	けん	n	1	현			cls=@place name=+	r	r	千葉県 → 지바현
 田舎	いなか	n	1	시골			cls=@place	r	r	田舎に住む → 시골에 살다
 湖	みずうみ	n	1	호수			lu cls=@water.body	r	r	湖で泳ぐ → 호수에서 수영하다
 草	くさ	n	1	풀			cls=@plant	r	r	草を刈る → 풀을 베다
 葉	は	n	1	잎			cls=@plant	r	r	葉が落ちる → 잎이 떨어지다
-石	いし	n	1	돌			cls=@material	r	r	石を投げる → 돌을 던지다
+石	いし	n	1	돌			cls=@material name=+	r	r	石を投げる → 돌을 던지다
 砂	すな	n	1	모래			cls=@material|@dirt	r	r	砂で遊ぶ → 모래로 놀다
 土	つち	n	1	흙			cls=@material	r	r	土を掘る → 흙을 파다
 波	なみ	n	1	파도			cls=@nature	r	r	波が高い → 파도가 높다
 波	なみ	n	2	물결	mod=@person|@group			r	r	人の波 → 사람의 물결
 波	なみ	n	3	파동	mod=@emotion			r	r	感情の波 → 감정의 파동
-太陽	たいよう	n	1	태양			cls=@sky	r	r	太陽が昇る → 태양이 떠오르다
-光	ひかり	n	1	빛			cls=@light	r	r	光が差す → 빛이 들다
+太陽	たいよう	n	1	태양			cls=@sky name=+	r	r	太陽が昇る → 태양이 떠오르다
+光	ひかり	n	1	빛			cls=@light name=+	r	r	光が差す → 빛이 들다
 地球	ちきゅう	n	1	지구			cls=@place	r	r	地球に戻る → 지구로 돌아오다
-宇宙	うちゅう	n	1	우주			cls=@sky	r	r	宇宙に行く → 우주에 가다
+宇宙	うちゅう	n	1	우주			cls=@sky name=+	r	r	宇宙に行く → 우주에 가다
 植物	しょくぶつ	n	1	식물			cls=@plant	r	r	植物を育てる → 식물을 기르다
 天気予報	てんきよほう	n	1	일기예보			cls=@info lu	r	r	天気予報を見る → 일기예보를 보다
 雷	かみなり	n	1	천둥			cls=@weather	r	r	雷が鳴る → 천둥이 치다
@@ -1567,7 +1567,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 予習	よしゅう	n	1	예습			cls=@task	r	r	予習をする → 예습을 하다
 復習	ふくしゅう	n	1	복습			cls=@task	r	r	復習をする → 복습을 하다
 小学校	しょうがっこう	n	1	초등학교			lu cls=@school	r	r	小学校に通う → 초등학교에 다니다
-中学校	なかがっこう	n	1	중학교			lu cls=@school	r	r	中学校に通う → 중학교에 다니다
+中学校	ちゅうがっこう	n	1	중학교			lu cls=@school	r	r	中学校に通う → 중학교에 다니다
 留学	りゅうがく	n	1	유학			cls=@activity	r	r	留学に行く → 유학을 가다
 知識	ちしき	n	1	지식			cls=@info	r	r	知識がある → 지식이 있다
 実験	じっけん	n	1	실험			cls=@activity	r	r	実験をする → 실험을 하다
@@ -1588,7 +1588,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 文字	もじ	n	2	문자	mod=古代|魔法			r	r	古代の文字 → 고대 문자
 家具	かぐ	n	1	가구			cls=@furniture	r	r	家具を買う → 가구를 사다
 引き出し	ひきだし	n	1	서랍			lu cls=@container	r	r	引き出しを開ける → 서랍을 열다
-鏡	かがみ	n	1	거울			cls=@thing	r	r	鏡を見る → 거울을 보다
+鏡	かがみ	n	1	거울			cls=@thing name=+	r	r	鏡を見る → 거울을 보다
 布団	ふとん	n	1	이불			cls=@bedding	r	r	布団を敷く → 이불을 깔다
 畳	たたみ	n	1	다다미			cls=@thing	r	r	畳の上に座る → 다다미 위에 앉다
 押し入れ	おしいれ	n	1	벽장			cls=@furniture	r	r	押し入れに入れる → 벽장에 넣다
@@ -1604,7 +1604,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 鍋	なべ	n	1	냄비			cls=@tableware|@container	r	r	鍋で煮る → 냄비로 끓이다
 鍋	なべ	n	2	전골	pred=食べる|囲む			r	r	みんなで鍋を囲む → 다 같이 전골을 먹다
 住所	じゅうしょ	n	1	주소			cls=@info|@personal.info	r	r	住所を書く → 주소를 쓰다
-留守	るす	n	1	부재중			cls=@abstract	r	r	留守にする → 집을 비우다
+留守	るす	n	1	부재중			cls=@abstract name=+	r	r	留守にする → 집을 비우다
 留守	るす	n	2	집에 없다	form=cop			r	r	留守だ → 집에 없다
 道具	どうぐ	n	1	도구			cls=@tool	r	r	道具を使う → 도구를 쓰다
 人形	にんぎょう	n	1	인형			cls=@toy	r	r	人形を作る → 인형을 만들다
@@ -1612,10 +1612,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 お土産	おみやげ	n	1	선물			lu cls=@thing|@reward	r	r	お土産を買う → 선물을 사다
 贈り物	おくりもの	n	1	선물			cls=@thing|@reward	r	r	贈り物をする → 선물을 하다
 品物	しなもの	n	1	물건			cls=@thing	r	r	品物を選ぶ → 물건을 고르다
-糸	いと	n	1	실			cls=@material	r	r	糸を通す → 실을 꿰다
+糸	いと	n	1	실			cls=@material name=+	r	r	糸を通す → 실을 꿰다
 針	はり	n	1	바늘			cls=@tool	r	r	針と糸 → 바늘과 실
 針	はり	n	2	침	mod=蜂|毒			r	r	蜂の針 → 벌의 침
-布	ぬの	n	1	천			cls=@material	r	r	布で包む → 천으로 싸다
+布	ぬの	n	1	천			cls=@material name=+	r	r	布で包む → 천으로 싸다
 タオル	たおる	n	1	수건			cls=@thing lu	r	r	タオルで拭く → 수건으로 닦다
 瓶	びん	n	1	병			cls=@container	r	r	瓶を開ける → 병을 따다
 缶	かん	n	1	캔			cls=@container	r	r	缶を開ける → 캔을 따다
@@ -1623,7 +1623,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 袋	ふくろ	n	1	봉지			cls=@container|@wrapping	r	r	ビニール袋に入れる → 비닐봉지에 넣다
 袋	ふくろ	n	2	주머니	mod=巾着|布			r	r	布の袋 → 천 주머니
 電池	でんち	n	1	배터리			cls=@thing	r	r	電池が切れる → 배터리가 다 되다
-カード	かーど	n	1	카드			cls=@document	r	r	カードを出す → 카드를 내다
+カード	かーど	n	1	카드			cls=@document name=+	r	r	カードを出す → 카드를 내다
 下着	したぎ	n	1	속옷			cls=@clothing	r	r	下着を着る → 속옷을 입다
 水着	みずぎ	n	1	수영복			cls=@clothing	r	r	水着を着る → 수영복을 입다
 制服	せいふく	n	1	교복			cls=@clothing	r	r	制服を着る → 교복을 입다
@@ -1646,7 +1646,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 夕食	ゆうしょく	n	1	저녁			cls=@meal	r	r	夕食を作る → 저녁을 만들다
 朝食	ちょうしょく	n	1	아침			cls=@meal	r	r	朝食を作る → 아침을 만들다
 昼食	ちゅうしょく	n	1	점심			cls=@meal	r	r	昼食を取る → 점심을 먹다
-米	こめ	n	1	쌀			cls=@food	r	r	米を炊く → 쌀을 짓다
+米	こめ	n	1	쌀			cls=@food name=+	r	r	米を炊く → 쌀을 짓다
 飯	めし	n	1	밥			cls=@meal	r	r	飯を食う → 밥을 먹다
 御数	おかず	n	1	반찬			cls=@food	r	r	おかずを作る → 반찬을 만들다
 ラーメン	らーめん	n	1	라멘			cls=@food	r	r	ラーメンを食べる → 라멘을 먹다
@@ -1657,7 +1657,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 香り	かおり	n	1	향			cls=@abstract|@smell	r	r	コーヒーの香り → 커피 향
 食料品	しょくりょうひん	n	1	식료품			cls=@food lu	r	r	食料品を買う → 식료품을 사다
 材料	ざいりょう	n	1	재료			cls=@material	r	r	材料を集める → 재료를 모으다
-饂飩	うどん	n	1	우동			cls=@food	r	r	うどんを食べる → 우동을 먹다
+饂飩	うどん	n	1	우동			cls=@food name=+	r	r	うどんを食べる → 우동을 먹다
 お湯	おゆ	n	1	뜨거운 물			lu cls=@liquid	r	r	お湯を沸かす → 물을 끓이다
 ワイン	わいん	n	1	와인			cls=@drink	r	r	ワインを飲む → 와인을 마시다
 ミルク	みるく	n	1	우유			cls=@drink	r	r	コーヒーにミルクを入れる → 커피에 우유를 넣다
@@ -1690,7 +1690,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 喉	のど	n	1	목			cls=@body	r	r	喉が渇く → 목이 마르다
 骨	ほね	n	1	뼈			cls=@body	r	r	骨が折れる → 뼈가 부러지다
 毛	け	n	1	털			cls=@hair	r	r	毛が生える → 털이 나다
-力	ちから	n	1	힘			cls=@strength	r	r	力が強い → 힘이 세다
+力	ちから	n	1	힘			cls=@strength name=+	r	r	力が強い → 힘이 세다
 息	いき	n	1	숨			cls=@body.output|@breath	r	r	息をする → 숨을 쉬다
 血	ち	n	1	피			cls=@body.output	r	r	血が出る → 피가 나다
 汗	あせ	n	1	땀			cls=@body.output	r	r	汗をかく → 땀을 흘리다
@@ -1706,10 +1706,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 不安	ふあん	n	1	불안			cls=@emotion	r	r	不安を感じる → 불안을 느끼다
 不安	ふあん	n	2	불안하다	form=cop|attr			r	r	不安だ → 불안하다
 安心	あんしん	n	1	안심			cls=@emotion	r	r	安心する → 안심하다
-希望	きぼう	n	1	희망			cls=@idea	r	r	希望を持つ → 희망을 가지다
-夢	ゆめ	n	1	꿈			cls=@abstract	r	r	夢を見る → 꿈을 꾸다
-恋	こい	n	1	사랑			cls=@emotion	r	r	恋をする → 사랑에 빠지다
-愛	あい	n	1	사랑			cls=@emotion	r	r	愛を伝える → 사랑을 전하다
+希望	きぼう	n	1	희망			cls=@idea name=+	r	r	希望を持つ → 희망을 가지다
+夢	ゆめ	n	1	꿈			cls=@abstract name=+	r	r	夢を見る → 꿈을 꾸다
+恋	こい	n	1	사랑			cls=@emotion name=+	r	r	恋をする → 사랑에 빠지다
+愛	あい	n	1	사랑			cls=@emotion name=+	r	r	愛を伝える → 사랑을 전하다
 幸せ	しあわせ	n	1	행복			cls=@emotion	r	r	幸せを願う → 행복을 빌다
 幸せ	しあわせ	n	2	행복하다	form=cop|attr			r	r	幸せな人 → 행복한 사람
 楽しみ	たのしみ	n	1	즐거움			cls=@emotion	r	r	楽しみが増える → 즐거움이 늘다
@@ -1733,19 +1733,19 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 将来	しょうらい	n	1	장래			cls=@time	r	r	将来の夢 → 장래의 꿈
 最後	さいご	n	1	마지막			cls=@time	r	r	最後に → 마지막으로
 最初	さいしょ	n	1	처음			cls=@time	r	r	最初に → 처음에
-途中	とちゅう	n	1	도중			cls=@period	r	r	途中で帰る → 도중에 돌아가다
+途中	とちゅう	n	1	도중			cls=@period name=+	r	r	途中で帰る → 도중에 돌아가다
 以前	いぜん	n	1	예전			cls=@time	r	r	以前の話 → 예전 이야기
 以後	いご	n	1	이후			cls=@time	r	r	以後は気をつける → 이후에는 조심하다
 予定	よてい	n	1	예정			cls=@plan|@personal.info	r	r	予定を立てる → 예정을 세우다
 予定	よてい	n	2	일정	pred=ある|ない			r	r	今日は予定がある → 오늘은 일정이 있다
 用意	ようい	n	1	준비			cls=@activity|@readiness	r	r	用意をする → 준비를 하다
-未来	みらい	n	1	미래			cls=@period	r	r	未来を予知する → 미래를 예지하다
+未来	みらい	n	1	미래			cls=@period name=+	r	r	未来を予知する → 미래를 예지하다
 過去	かこ	n	1	과거			cls=@time|@info	r	r	過去を忘れる → 과거를 잊다
 現在	げんざい	n	1	현재			cls=@time	r	r	現在の状況 → 현재 상황
 今回	こんかい	n	1	이번			cls=@time	r	r	今回は → 이번에는
 今後	こんご	n	1	앞으로			cls=@time	r	r	今後も → 앞으로도
 普段	ふだん	n	1	평소			ni=- cls=@time|@state	r	r	普段は静かだ → 평소에는 조용하다
-時代	じだい	n	1	시대			cls=@period	r	r	江戸時代 → 에도 시대
+時代	じだい	n	1	시대			cls=@period name=+	r	r	江戸時代 → 에도 시대
 時代	じだい	n	2	시절	after=@life.stage			r	r	学生時代 → 학생 시절
 期間	きかん	n	1	기간			cls=@duration	r	r	期間限定 → 기간 한정
 夜中	よなか	n	1	한밤중			cls=@period	r	r	夜中に外出する → 한밤중에 외출하다
@@ -1753,7 +1753,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 平日	へいじつ	n	1	평일			cls=@period	r	r	平日は仕事だ → 평일에는 일이다
 休日	きゅうじつ	n	1	휴일			cls=@period|@leisure	r	r	休日に作業する → 휴일에 작업하다
 正月	しょうがつ	n	1	설			cls=@period	r	r	お正月に帰省する → 설에 고향에 가다
-昼間	ひるま	n	1	낮			cls=@period	r	r	昼間は暑い → 낮에는 덥다
+昼間	ひるま	n	1	낮			cls=@period name=+	r	r	昼間は暑い → 낮에는 덥다
 半年	はんとし	n	1	반년			cls=@duration	r	r	半年かかる → 반년 걸리다
 この間	このあいだ	n	1	지난번			cls=@time.point ni=- lu	r	r	この間言ったでしょ → 지난번에 말했잖아
 運動	うんどう	n	1	운동			cls=@activity	r	r	毎日運動する → 매일 운동하다
@@ -1774,7 +1774,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 世話	せわ	n	1	보살핌			cls=@activity|@task|@trouble	r	r	世話が大変だ → 보살핌이 힘들다
 邪魔	じゃま	n	1	방해			cls=@abstract	r	r	邪魔をする → 방해하다
 邪魔	じゃま	n	2	방해되다	form=cop|attr			r	r	邪魔な組織 → 방해되는 조직
-利用	りよう	n	1	이용			cls=@activity	r	r	電車を利用する → 전철을 이용하다
+利用	りよう	n	1	이용			cls=@activity name=+	r	r	電車を利用する → 전철을 이용하다
 予想	よそう	n	1	예상			cls=@guess	r	r	予想が外れる → 예상이 빗나가다
 挨拶	あいさつ	n	1	인사			cls=@speech	r	r	挨拶をする → 인사를 하다
 喧嘩	けんか	n	1	싸움			cls=@event	r	r	子供の喧嘩 → 아이들 싸움
@@ -1816,7 +1816,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 給料	きゅうりょう	n	1	월급			cls=@money	r	r	給料をもらう → 월급을 받다
 小銭	こぜに	n	1	잔돈			cls=@money	r	r	小銭がない → 잔돈이 없다
 釣り	つり	n	1	낚시			cls=@activity	r	r	釣りに行く → 낚시하러 가다
-花火	はなび	n	1	불꽃놀이			cls=@event	r	r	花火を見る → 불꽃놀이를 보다
+花火	はなび	n	1	불꽃놀이			cls=@event name=+	r	r	花火を見る → 불꽃놀이를 보다
 花火	はなび	n	2	불꽃	pred=上がる|打ち上げる			r	r	花火が上がる → 불꽃이 터지다
 小説	しょうせつ	n	1	소설			cls=@document|@writing	r	r	小説を書く → 소설을 쓰다
 コンサート	こんさーと	n	1	콘서트			cls=@show	r	r	コンサートに行く → 콘서트에 가다
@@ -1838,9 +1838,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 辺り	あたり	n	2	쯤	after=@time|@period|@number|@quantity			r	r	今夜あたり → 오늘 밤쯤
 辺り	あたり	n	3	주위	pred=見回す|見渡す			r	r	あたりを見回す → 주위를 둘러보다
 周り	まわり	n	1	주변			cls=@position	r	r	周りを見る → 주변을 보다
-奥	おく	n	1	안쪽			cls=@position	r	r	部屋の奥 → 방 안쪽
+奥	おく	n	1	안쪽			cls=@position name=+	r	r	部屋の奥 → 방 안쪽
 奥	おく	n	2	속	mod=@body|心			r	r	胸の奥 → 가슴속
-表	おもて	n	1	앞면			lu cls=@position	r	r	紙の表 → 종이 앞면
+表	おもて	n	1	앞면			lu cls=@position name=+	r	r	紙の表 → 종이 앞면
 表	おもて	n	2	밖	pred=出る			r	r	表に出る → 밖에 나가다
 裏	うら	n	1	뒤			cls=@direction|@position	r	r	店の裏 → 가게 뒤
 裏	うら	n	2	배후	mod=@organization|@group pred=居る			r	r	生徒会の裏にいる → 학생회의 배후에 있다
@@ -1852,7 +1852,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 辺	へん	n	1	근처			cls=@place	r	r	この辺 → 이 근처
 辺	へん	n	2	변	mod=@shape			r	r	三角形の辺 → 삼각형의 변
 以外	いがい	n	1	이외			cls=@abstract	r	r	それ以外 → 그 이외
-紫	むらさき	n	1	보라색			cls=@color	r	r	紫の花 → 보라색 꽃
+紫	むらさき	n	1	보라색			cls=@color name=+	r	r	紫の花 → 보라색 꽃
 灰色	はいいろ	n	1	회색			cls=@color	r	r	灰色の空 → 회색 하늘
 水色	みずいろ	n	1	하늘색			cls=@color	r	r	水色のシャツ → 하늘색 셔츠
 ピンク	ぴんく	n	1	핑크			cls=@color	r	r	ピンクのリボン → 핑크 리본
@@ -1864,7 +1864,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 割	わり	n	1	비율			cls=@quantity num=sino	r	r	割合の割 → 비율
 割	わり	n	2	할	after=@number|@quantity			r	r	三割 → 3할
 億	おく	num	1	억			num=sino	r	r	三億 → 3억
-ゼロ	ぜろ	num	1	제로				r	r	可能性はゼロだ → 가능성은 제로다
+ゼロ	ぜろ	num	1	제로			name=+	r	r	可能性はゼロだ → 가능성은 제로다
 全て	すべて	n	1	전부			cls=@quantity	r	r	お前が全てだ → 네가 전부다
 全て	すべて	n	2	모든	form=no-attr			r	r	全ての生徒 → 모든 학생
 以上	いじょう	n	1	이상			cls=@quantity	r	r	十人以上 → 열 명 이상
@@ -1961,7 +1961,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 自由	じゆう	n	1	자유			cls=@abstract	r	r	自由がない → 자유가 없다
 自由	じゆう	n	2	자유롭다	form=cop|attr|adv			r	r	自由に選べる → 자유롭게 고를 수 있다
 複雑	ふくざつ	n	1	복잡하다				r	r	複雑な気分 → 복잡한 기분
-丁寧	ていねい	na	1	정성스럽다				r	r	丁寧に洗う → 정성스럽게 씻다
+丁寧	ていねい	na	1	정성스럽다			name=+	r	r	丁寧に洗う → 정성스럽게 씻다
 丁寧	ていねい	na	2	정중하다	head=@speech|態度			r	r	丁寧な言葉 → 정중한 말
 丁寧	ていねい	na	3	정중하다	pred=お辞儀|挨拶			r	r	丁寧にお辞儀する → 정중히 인사하다
 真面目	まじめ	na	1	성실하다				r	r	真面目な人 → 성실한 사람
@@ -2006,7 +2006,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 無駄	むだ	n	3	소용없다	form=cop			r	r	言っても無駄だ → 말해도 소용없다
 可能	かのう	na	1	가능하다				r	r	可能な限り → 가능한 한
 可能	かのう	na	2	가능	next=性			r	r	可能性が高い → 가능성이 높다
-正直	しょうじき	n	1	솔직하다			cls=@abstract	r	r	正直に言う → 솔직하게 말하다
+正直	しょうじき	n	1	솔직하다			cls=@abstract name=+	r	r	正直に言う → 솔직하게 말하다
 正直	しょうじき	n	2	정직하다	head=@person			r	r	正直な人 → 정직한 사람
 素直	すなお	na	1	솔직하다				r	r	素直な気持ち → 솔직한 마음
 素直	すなお	na	2	순순하다	pred=従う|受け入れる			r	r	素直に従う → 순순히 따르다
@@ -2071,14 +2071,14 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 丸で	まるで	adv	2	전혀	pred=違う|駄目			r	r	まるで違う → 전혀 다르다
 突然	とつぜん	adv	1	갑자기				r	r	突然来た → 갑자기 왔다
 突然	とつぜん	adv	2	갑작스럽다	form=cop|attr			r	r	突然の話 → 갑작스러운 이야기
-可成	かなり	adv	1	꽤				r	r	かなり高い → 꽤 비싸다
+可成	かなり	adv	1	꽤			name=+	r	r	かなり高い → 꽤 비싸다
 是非	ぜひ	adv	1	꼭				r	r	ぜひ来て → 꼭 와
 是非	ぜひ	adv	2	부디	pred=願う|頼む			r	r	ぜひお願いします → 부디 부탁하다
 どんどん	どんどん	adv	1	점점				r	r	どんどん大きくなる → 점점 커지다
 どんどん	どんどん	adv	2	계속	main.vol=+			r	r	どんどん応援していく → 계속 응원해 나가다
 どんどん	どんどん	adv	3	척척	pred=進む|片付く			r	r	仕事がどんどん片付く → 일이 척척 처리되다
 どんどん	どんどん	adv	4	마음껏	pred=食べる|飲む			r	r	どんどん食べて → 마음껏 먹어
-行成	いきなり	adv	1	갑자기				r	r	いきなり → 갑자기
+行成	いきなり	adv	1	갑자기			name=+	r	r	いきなり → 갑자기
 態々	わざわざ	adv	1	일부러				r	r	わざわざ来る → 일부러 오다
 遂に	ついに	adv	1	마침내				r	r	ついに完成した → 마침내 완성됐다
 遂に	ついに	adv	2	끝내	pred=死ぬ|倒れる			r	r	ついに倒れた → 끝내 쓰러졌다
@@ -2102,7 +2102,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 がっかり	がっかり	adv	1	실망				r	r	がっかりする → 실망하다
 何とか	なんとか	adv	1	어떻게든			lu	r	r	何とかする → 어떻게든 하다
 何とか	なんとか	adv	2	간신히	pred=間に合う|終わる			r	r	何とか間に合った → 간신히 시간에 맞췄다
-流石	さすが	adv	1	역시				r	r	さすが先生 → 역시 선생님
+流石	さすが	adv	1	역시			name=+	r	r	さすが先生 → 역시 선생님
 流石	さすが	adv	2	아무래도	next=に			r	r	さすがに失礼だ → 아무래도 실례다
 流石	さすが	adv	3	역시 대단하다	form=cop			r	r	さすがだ → 역시 대단하다
 成る可く	なるべく	adv	1	되도록				r	r	なるべく早く → 되도록 빨리
@@ -2126,9 +2126,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 おかえり	おかえり	n	1	어서 와			lu	r	r	おかえり → 어서 와
 おやすみ	おやすみ	n	1	잘 자			lu	r	r	おやすみ → 잘 자
 おやすみ	おやすみ	n	2	휴일	form=cop|no-attr			r	r	明日はおやすみです → 내일은 휴일이다
-お疲れ様	おつかれさま	n	1	수고했다			lu	r	r	お疲れ様 → 수고했어
+お疲れ様	おつかれさま	n	1	수고하셨다			lu	r	r	お疲れ様です → 수고하셨습니다
+お疲れ様	おつかれさま	n	2	수고했다	register=casual			r	r	お疲れ様 → 수고했어
 おめでとう	おめでとう	intj	1	축하하다			lu	r	r	おめでとう → 축하해
-すみません	すみません	intj	1	죄송하다			lu	r	r	すみません、遅れました → 죄송합니다, 늦었습니다
+すみません	すみません	intj	1	죄송하다			lu	r	r	すみません → 죄송합니다 (polite, formal)
+すみません	すみません	intj	2	미안하다	register=casual			r	r	すまん → 미안해
+すみません	すみません	intj	3	미안하다	register=friendly			r	r	すみません → 미안해요 (friendly polite)
 畏まりました	かしこまりました	intj	1	알겠다			lu	r	r	かしこまりました → 알겠습니다
 ようこそ	ようこそ	intj	1	환영하다			lu	r	r	ようこそ、我が家へ → 우리 집에 온 걸 환영해
 取る	とる	v5	1	집다			vol=+ asp=activity te=go	r	r	何かを手に取る → 무언가를 집다
@@ -2148,6 +2151,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 取る	とる	v5	15	택하다	obj=何方			r	r	どっちを取るか → 어느 쪽을 택할지
 取る	とる	v5	16	가지다	next=来る|行く			r	r	本を取ってくる → 책을 가져오다
 取る	とる	v5	17	듣다	obj=@lesson|@subject.school			r	r	栄養学を取る → 영양학을 듣다
+取る	とる	v5	18	취하다	obj=- mod=連絡|@stance			r	r	連絡、取らないで → 연락, 취하지 마
+取る	とる	v5	19	찍다	obj=- mod=@picture			r	r	写真撮ろう → 사진 찍자
+取る	とる	v5	20	지다	obj=- mod=責任			r	r	責任取って → 책임져
 出す	だす	v5	1	내다			vol=+ asp=activity te=go	r	r	声を出す → 소리를 내다
 出す	だす	v5	2	꺼내다	from=@container|@furniture			r	r	本棚から出す → 책장에서 꺼내다
 出す	だす	v5	3	내밀다	obj=@body			r	r	舌を出す → 혀를 내밀다

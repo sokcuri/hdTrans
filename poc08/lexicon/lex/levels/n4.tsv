@@ -130,8 +130,8 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 ワイン	わいん	n	ワイン	drink	와인		@drink										y		1
 おじいさん	おじいさん	n	おじいさん	family	할아버지		@person.kin	+									y		1
 おばあさん	おばあさん	n	おばあさん	family	할머니		@person.kin	+									y		1
-お母さん	おははさん	n	お母さん	family	어머니		@person.kin	+									y		2
-お父さん	おちちさん	n	お父さん	family	아버지		@person.kin	+									y		2
+お母さん	おかあさん	n	お母さん	family	어머니		@person.kin	+									y		2
+お父さん	おとうさん	n	お父さん	family	아버지		@person.kin	+									y		2
 夫婦	ふうふ	n	夫婦	family	부부		@person.kin|@group	+									y		1
 奥さん	おくさん	n	奥さん	family	부인		@person.kin	+									y		1
 孫	まご	n	孫	family	손주		@person.kin	+									y		1
@@ -185,8 +185,8 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 おかえり	おかえり	n	おかえり	greeting	어서 와												y		1
 おめでとう	おめでとう	intj	おめでとう	greeting	축하하다												y		1
 おやすみ	おやすみ	n	おやすみ	greeting	잘 자												y		2
-お疲れ様	おつかれさま	n	お疲れ様	greeting	수고했다												y		1
-すみません	すみません	intj	すみません	greeting	죄송하다												y		1
+お疲れ様	おつかれさま	n	お疲れ様	greeting	수고하셨다												y		2
+すみません	すみません	intj	すみません	greeting	죄송하다												y		3
 ようこそ	ようこそ	intj	ようこそ	greeting	환영하다												y		1
 申し訳	もうしわけ	n	申し訳	greeting	변명		@speech										y		1
 行ってきます	いってきます	intj	いってきます	greeting	다녀오겠다												y		1
@@ -433,7 +433,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 俺	おれ	n	俺	pronoun	나		@person	+									y		1
 君	きみ	n	君	pronoun	너		@person	+									y		2
 レポート	れぽーと	n	レポート	school	보고서		@document										y		1
-中学校	なかがっこう	n	中学校	school	중학교		@school										y		1
+中学校	ちゅうがっこう	n	中学校	school	중학교		@school										y		1
 予習	よしゅう	n	予習	school	예습		@task										y		1
 入学	にゅうがく	n	入学	school	입학		@event										y		1
 出席	しゅっせき	n	出席	school	출석		@activity										y		1

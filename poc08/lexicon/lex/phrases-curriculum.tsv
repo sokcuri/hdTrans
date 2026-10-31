@@ -14,7 +14,6 @@ id	pattern	ko	cue	st	prov	note
 手を貸す#c1	手を貸す	도와주다		r	r	手/て/n
 手に入れる#c1	手に入れる	손에 넣다		r	r	手/て/n
 手を出す#c1	手を出す	손을 대다		r	r	手/て/n
-すみません#c1	すみません	미안하다		r	r	済む/すむ/v5
 気が済む#c1	気が済む	직성이 풀리다		r	r	済む/すむ/v5
 二人で#c1	二人で	둘이서		r	r	二人/ふたり/n
 二人とも#c1	二人とも	둘 다		r	r	二人/ふたり/n
@@ -295,8 +294,6 @@ id	pattern	ko	cue	st	prov	note
 怪我人#c1	怪我人	부상자		r	r	怪我/けが/n
 具合が悪い#c1	具合が悪い	몸이 안 좋다		r	r	具合/ぐあい/n
 心の痛み#c1	心の痛み	마음의 아픔		r	r	痛み/いたみ/n
-お疲れ様#c1	お疲れ様	수고하다		r	r	疲れ/つかれ/n
-お疲れ#c1	お疲れ	수고하다		r	r	疲れ/つかれ/n
 首になる#c1	首になる	해고되다		r	r	首/くび/n
 首にする#c1	首にする	해고하다		r	r	首/くび/n
 首を突っ込む#c1	首を突っ込む	끼어들다		r	r	首/くび/n
@@ -514,6 +511,15 @@ id	pattern	ko	cue	st	prov	note
 板につく#c1	板につく	몸에 배다		r	r	役が板についてきた → 역할이 몸에 배어 왔다
 口をついて出る#c1	口をついて出る	입에서 튀어나오다		r	r	思っていることが口をついて出た → 생각하던 말이 입에서 튀어나왔다
 面と向かう#c1	面と向かう	마주 대하다		r	r	面と向かって言う → 마주 대하고 말하다
+すみません#s1	すみません	죄송하다		r	r	set phrase (STYLE §12)
+すみません#s2	すみません	미안하다	register=casual	r	r	set phrase (STYLE §12)
+すみません#s3	すみません	미안하다	register=friendly	r	r	set phrase (STYLE §12)
+済みません#s1	済みません	죄송하다		r	r	set phrase (STYLE §12)
+済みません#s2	済みません	미안하다	register=casual	r	r	set phrase (STYLE §12)
+済みません#s3	済みません	미안하다	register=friendly	r	r	set phrase (STYLE §12)
+お疲れ様#s1	お疲れ様	수고하셨다		r	r	set phrase (STYLE §12)
+お疲れ様#s2	お疲れ様	수고했다	register=casual	r	r	set phrase (STYLE §12)
+お疲れ#s1	お疲れ	수고했다		r	r	set phrase (STYLE §12)
 大変な事になる#c1	大変な事になる	큰일이 나다		r	r	大変/たいへん/na
 大変な事#c1	大変な事	큰일		r	r	大変/たいへん/na
 どん引きする#c1	どん引きする	정떨어지다		r	r	引く/ひく/v5
