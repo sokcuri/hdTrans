@@ -596,6 +596,49 @@ bool OpenQuote(const std::string& ja) {
     return a != 0 || b != 0;
 }
 
+// REG-23: the end of each sentence of the source's quote, the marks after it and a sentence-final よ, ね
+// left out; sentences end at a run of 。．！？ outside an inner quote. Empty for a line of several quotes.
+std::vector<std::u32string> SourceSentenceEnds(const std::string& ja) {
+    const std::u32string u = ToU32(ja);
+    const std::size_t open = u.find_first_of(U"「『");
+    if (open == std::u32string::npos) return {};
+    const char32_t close = u[open] == U'「' ? U'」' : U'』';
+    const std::size_t end = u.rfind(close);
+    if (end == std::u32string::npos || end < open || u.find_first_of(U"「『", end) != std::u32string::npos) return {};
+    const auto isEnd = [](char32_t c) { return c == U'。' || c == U'．' || c == U'！' || c == U'？' || c == U'!' || c == U'?'; };
+    std::vector<std::u32string> out;
+    std::u32string cur;
+    int depth = 0;
+    for (std::size_t i = open + 1; i < end; ++i) {
+        const char32_t c = u[i];
+        if (c == U'「' || c == U'『') ++depth;
+        if ((c == U'」' || c == U'』') && depth > 0) --depth;
+        if (depth == 0 && isEnd(c)) {
+            if (!cur.empty()) out.push_back(cur);
+            cur.clear();
+            continue;
+        }
+        cur.push_back(c);
+    }
+    if (!cur.empty()) out.push_back(cur);
+    for (auto& e : out) {
+        while (!e.empty() && std::u32string_view(U"ー〜～っッ…‥・ 　").find(e.back()) != std::u32string_view::npos) e.pop_back();
+        for (const std::u32string_view tail : {std::u32string_view(U"よね"), std::u32string_view(U"よ"), std::u32string_view(U"ね")})
+            if (e.size() > tail.size() && std::u32string_view(e).ends_with(tail)) {
+                e.resize(e.size() - tail.size());
+                break;
+            }
+    }
+    return out;
+}
+
+// REG-23: whether a source sentence end is the explanatory んです after the plain form of a predicate
+// (来たんです, いるんです, 好きなんです), not a noun in ん (おばあちゃんです, ハヤテさんです).
+bool ExplanatoryEnd(std::u32string_view e) {
+    if (!e.ends_with(U"んです") || e.size() < 4) return false;
+    return std::u32string_view(U"るただいなうすつぬぶむぐ").find(e[e.size() - 4]) != std::u32string_view::npos;
+}
+
 // The text Generate wrote for each node, by node id (bytes; the spaces between a node's pieces included).
 std::vector<std::pair<std::size_t, std::size_t>> NodeTexts(std::size_t count, const std::vector<OutSpan>& spans) {
     std::vector<std::pair<std::size_t, std::size_t>> out(count + 1, {std::string::npos, 0});
@@ -817,6 +860,51 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                             g.level = quoteAt(q).level;
                             if (g.level != Level::haeyo && g.level != Level::hapsyo) g.hon = false;
                         }
+            // REG-23: inside one quote, after a 해요체 statement of that quote and with no formal cue in the source
+            // (keigo.tsv, a set greeting), the 합쇼체 end of a sentence the source closes with the explanatory んです
+            // is 해요체
+            std::vector<bool> lower(nodes.size(), false);
+            const bool formal = line.keigo || dec.key.starts_with("keigo") || dec.key == "set";
+            const std::vector<std::u32string> jaEnds =
+                !u.narration && !formal && !perQuote ? SourceSentenceEnds(line.ja) : std::vector<std::u32string>{};
+            if (!jaEnds.empty()) {
+                const auto boundary = [&](std::size_t k) {
+                    return nodes[k].kind == Kind::Punct && !nested[k] &&
+                           (nodes[k].punct == Punct::end || nodes[k].punct == Punct::q || nodes[k].punct == Punct::excl);
+                };
+                // the translation's sentences (a run of marks ends one) must be the source's, one for one
+                std::size_t runs = 0;
+                bool tail = false;
+                for (std::size_t k = 0; k < nodes.size(); ++k) {
+                    if (boundary(k)) {
+                        if (k == 0 || !boundary(k - 1)) ++runs;
+                        tail = false;
+                    } else if (nodes[k].kind != Kind::Punct) {
+                        tail = true;
+                    }
+                }
+                if (runs + (tail ? 1 : 0) == jaEnds.size()) {
+                    bool seen = false;
+                    std::size_t sentence = 0;
+                    for (std::size_t q = 0; q < nodes.size(); ++q) {
+                        if (boundary(q) && (q == 0 || !boundary(q - 1))) ++sentence;
+                        const Node& n = nodes[q];
+                        if (n.kind != Kind::V || n.ctype != CType::final_ || nested[q] || thinkOf(q)) continue;
+                        bool end = true;  // the sentence's last word
+                        for (std::size_t k = q + 1; k < nodes.size() && !boundary(k); ++k)
+                            if (nodes[k].kind != Kind::Punct) end = false;
+                        if (!end) continue;
+                        if (seen && n.was == Level::hapsyo && sentence < jaEnds.size() && ExplanatoryEnd(jaEnds[sentence]))
+                            lower[q] = true;
+                        // a statement the source ends in です or ます sets the quote's level; a request (ください) or
+                        // a question does not
+                        if (n.was == Level::haeyo && (n.mood == Mood::decl || n.mood == Mood::excl) && sentence < jaEnds.size() &&
+                            (std::u32string_view(jaEnds[sentence]).ends_with(U"です") ||
+                             std::u32string_view(jaEnds[sentence]).ends_with(U"ます")))
+                            seen = true;
+                    }
+                }
+            }
             // a word kept with a level the reader could not take apart: changing the others would mix levels
             // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다; a noun in 요 is no polite end)
             bool mixed = false;
@@ -844,11 +932,11 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                         if (nodes[k].punct == Punct::q) askedByEnding = false;
                     }
                 }
-                // REG-10: 합쇼체 is never lowered, nor 해요체 raised to 합쇼체
-                const bool hapsyo = was == Level::hapsyo;
+                // REG-10: 합쇼체 is never lowered, nor 해요체 raised to 합쇼체, but for the んです ends of REG-23
                 Level target = Level::none;
                 for (const auto& g : reg)
                     if (g.node == nodes[q].id) target = g.level;
+                const bool hapsyo = was == Level::hapsyo && !(lower[q] && target == Level::haeyo);
                 const bool raise = was == Level::haeyo && target == Level::hapsyo;
                 // REG-12: the source's last sentence is plain although the line has です/ます inside (そうですね、…
                 // かもしれない): the plain end is not raised to a polite one
