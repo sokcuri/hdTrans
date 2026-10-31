@@ -3,3 +3,4 @@
 class	parent	note
 @entity		root
 @thing	@entity	
+@person	@entity	
