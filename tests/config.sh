@@ -160,10 +160,20 @@ printf 'surface\n猫\n' > "$tmp/cast-off"
 printf 'ルルさん、おはよう。\nルルさん、またね。\n' > "$tmp/called"
 "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" --propose-names -in "$tmp/called" > "$tmp/out" 2> "$tmp/errors"
 [ "$(cat "$tmp/out")" = "$(printf 'ルル\t룰\tgiven')" ]
+# One line per call reads the list too.
+[ "$("$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -each -in "$tmp/input" 2> /dev/null)" = 네코 ]
+# The names*.txt of a user folder are a list under --names.
+mkdir -p "$tmp/cast"
+printf '猫\t냥코\n' > "$tmp/cast/names.txt"
+[ "$("$cli" -dicts "$tmp/settings/first" --userdict "$tmp/cast" -each -in "$tmp/input" 2> /dev/null)" = 냥코 ]
+[ "$("$cli" -dicts "$tmp/settings/first" --userdict "$tmp/cast" --names "$tmp/names" -in "$tmp/input" 2> /dev/null)" = 네코 ]
 status=0
-"$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -each -in "$tmp/input" > /dev/null 2> "$tmp/errors" || status=$?
+"$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -raw -in "$tmp/input" > /dev/null 2> "$tmp/errors" || status=$?
 [ "$status" -eq 2 ]
-grep -F -- '--names and --propose-names cannot be combined with --each or --raw' "$tmp/errors" > /dev/null
+grep -F -- '--names cannot be combined with --raw, --propose-names with --each or --raw' "$tmp/errors" > /dev/null
+status=0
+"$cli" -dicts "$tmp/settings/first" --propose-names -each -in "$tmp/input" > /dev/null 2> "$tmp/errors" || status=$?
+[ "$status" -eq 2 ]
 status=0
 "$cli" -config "$tmp/settings/custom.yaml" --context "$tmp/missing" -in "$tmp/two" > /dev/null 2> "$tmp/errors" || status=$?
 [ "$status" -eq 1 ]

@@ -205,16 +205,18 @@ public:
 
     // The names of the documents of later translations, as the lines of a name list
     // (docs/api.md): JA <TAB> KO [<TAB> KIND [<TAB> OPTIONS]]. The list applies to each call
-    // on its own, beside the names the call's lines show; empty text drops it. Returns false
-    // when a line is malformed or its name does not compile; the other lines are kept. The list
-    // is compiled here and again when the session takes new dictionaries.
-    bool SetNames(std::string_view text);
+    // on its own, beside the names the call's lines show, over the name files the engine
+    // loaded with its user dictionaries; empty text drops it. Returns false when a line is
+    // malformed or its name does not compile, each reported in errors as "LINE: message"; the
+    // other lines are kept. The list is compiled here and again when the session takes new
+    // dictionaries.
+    bool SetNames(std::string_view text, std::vector<std::string>* errors = nullptr);
 
 private:
     friend struct internal::Access;
     std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer,
                                   std::string_view context = {});
-    bool CompileNames();
+    bool CompileNames(std::vector<std::string>* errors = nullptr);
 
     const Engine& engine_;
     const bool reference_;
@@ -225,7 +227,8 @@ private:
     bool wrapped_ = false;
     bool predicateVariants_ = true;
     std::shared_ptr<const names::List> nameList_;
-    // nameList_ compiled for namesSnapshot_; rebuilt when snapshot_ is another.
+    // The name files of generated_ and nameList_ over them, compiled for namesSnapshot_;
+    // rebuilt when snapshot_ is another.
     std::shared_ptr<const pipeline::DocumentNames> names_;
     std::shared_ptr<const dict::Snapshot> namesSnapshot_;
     std::shared_ptr<const dict::Snapshot> snapshot_;

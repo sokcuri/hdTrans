@@ -21,6 +21,7 @@
 #include "core/engine/user_watch.h"
 #include "core/filter/ehnd.h"
 #include "core/filter/filter.h"
+#include "core/names/list.h"
 #include "core/output/families.h"
 #include "core/userdict/conjugating.h"
 #include "core/text/lines.h"
@@ -256,6 +257,53 @@ std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {
     return generated;
 }
 
+namespace {
+
+// The name lists of version, read and compiled for snap; null when they hold no name. A file that
+// cannot be read, a malformed line and a name that does not compile are reported in errors and
+// left out.
+std::shared_ptr<const names::List> LoadNameFiles(const dict::Snapshot& snap, const UserVersion& version,
+                                                 std::vector<dict::LoadError>& errors) {
+    if (version.names.empty()) return nullptr;
+    const auto lineError = [&errors](const std::string& file, std::string_view text) {
+        // text is "LINE: message".
+        int line = 0;
+        std::size_t i = 0;
+        while (i < text.size() && text[i] >= '0' && text[i] <= '9') line = line * 10 + (text[i++] - '0');
+        if (text.substr(i).starts_with(": ")) i += 2;
+        errors.push_back({file, dict::LoadErrorKind::UserRow, line, dict::TsvErrorKind::Read, std::string(text.substr(i))});
+    };
+    names::List all;
+    for (const auto& [path, stamp] : version.names) {
+        std::string text;
+        if (!stamp.present || !dict::ReadUserFile(path, text)) {
+            errors.push_back({path, dict::LoadErrorKind::UserRow, 0, dict::TsvErrorKind::Read, "cannot read the name list"});
+            continue;
+        }
+        names::List list;
+        std::vector<std::string> parseErrors;
+        names::ParseList(text, list, &parseErrors, path);
+        for (const std::string& error : parseErrors) lineError(path, error);
+        names::Merge(all, list);
+    }
+    if (all.names.empty()) return nullptr;
+    std::unique_ptr<pipeline::DocumentNames> compiled;
+    std::vector<std::string> compileErrors;
+    pipeline::CompileNames(snap, all, compiled, &compileErrors);
+    for (const std::string& error : compileErrors) {
+        // error is "FILE:LINE: message".
+        const auto file = std::find_if(version.names.begin(), version.names.end(), [&](const auto& f) {
+            return error.starts_with(f.first + ":");
+        });
+        if (file == version.names.end()) continue;
+        lineError(file->first, std::string_view(error).substr(file->first.size() + 1));
+    }
+    if (compiled->list.names.empty()) return nullptr;
+    return std::make_shared<const names::List>(std::move(compiled->list));
+}
+
+}  // namespace
+
 struct Access {
     static bool Reference(const Engine& e) { return e.reference_; }
     static std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
@@ -267,7 +315,8 @@ struct Access {
     static bool Finish(Engine& e, std::uint64_t ticket, const UserVersion& version, dict::LoadResult r,
                        std::vector<dict::LoadError> userErrors, FilterLoad filters, bool keepFailed,
                        MemoryInput memory, const dict::UserSource& ehndSource,
-                       const std::vector<dict::UserSource>& requested) {
+                       const std::vector<dict::UserSource>& requested,
+                       std::shared_ptr<const names::List> nameFiles) {
         if (ticket < e.current_) return Loaded(r);
         UserWatch& w = *e.watch_;
         const bool filterFailed = !filters.read || !filters.valid;
@@ -334,6 +383,7 @@ struct Access {
         e.current_ = ticket;
         e.snapshot_ = std::move(r.snapshot);
         e.generated_ = NewGenerated(*e.snapshot_);
+        e.generated_->nameFiles = std::move(nameFiles);
         e.filters_ = std::move(filters.filters);
         e.filterErrors_ = std::move(filters.errors);
         w.ehnd.loaded = std::move(filters.version);
@@ -481,6 +531,7 @@ struct Access {
         const bool cacheWrite = e.cacheWrite_ == CacheWrite::Sync;
         std::vector<dict::LoadError> userErrors;
         dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
+        auto nameFiles = Loaded(r) ? LoadNameFiles(*r.snapshot, version, userErrors) : nullptr;
         FilterLoad filters = FiltersOf(r, ehnd, ehndStrict, memory, knownEhnd, verify);
         if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
             UserVersionOf(requested, options.configPath, revision) != version) {
@@ -490,7 +541,7 @@ struct Access {
         }
         std::lock_guard<std::mutex> lock(e.mu_);
         if (!Finish(e, ticket, version, std::move(r), std::move(userErrors), std::move(filters), active || !open,
-                    std::move(memory), ehnd, requested)) return false;
+                    std::move(memory), ehnd, requested, std::move(nameFiles))) return false;
         if (open && ticket == e.current_) {
             e.dirs_ = dirs;
             e.verifyDicts_ = verify;
@@ -537,6 +588,7 @@ struct Access {
             const bool ehndStrict = verify || memory.folderStrictOverride.value_or(baseStrict);
             std::vector<dict::LoadError> userErrors;
             dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
+            auto nameFiles = Loaded(r) ? LoadNameFiles(*r.snapshot, version, userErrors) : nullptr;
             FilterLoad filters = FiltersOf(r, ehndSource, ehndStrict, memory, knownEhnd, verify);
             if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
                 UserVersionOf(paths, options.configPath, revision) != version) {
@@ -549,7 +601,7 @@ struct Access {
             Engine& engine = *target->engine;
             std::lock_guard<std::mutex> lock(engine.mu_);
             Finish(engine, ticket, version, std::move(r), std::move(userErrors), std::move(filters), true,
-                   std::move(memory), ehndSource, paths);
+                   std::move(memory), ehndSource, paths, std::move(nameFiles));
             engine.watch_->running = false;
             engine.watch_->done.notify_all();
         });
@@ -924,7 +976,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
                                        std::string_view context) {
     if (engine_.watch_->automatic) internal::Access::Refresh(engine_, snapshot_, generated_, filters_);
     if (!snapshot_) return {};
-    if (nameList_ && namesSnapshot_ != snapshot_) static_cast<void>(CompileNames());
+    if (namesSnapshot_ != snapshot_) static_cast<void>(CompileNames());
     std::vector<std::string> lines;
     std::size_t contextLines = 0;
     // One "\n" that ends the context ends its last line.
@@ -954,22 +1006,34 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     return out;
 }
 
-bool Session::SetNames(std::string_view text) {
+bool Session::SetNames(std::string_view text, std::vector<std::string>* errors) {
     auto list = std::make_shared<names::List>();
-    const bool ok = names::ParseList(text, *list);
+    const bool ok = names::ParseList(text, *list, errors);
     names_.reset();
     namesSnapshot_.reset();
     nameList_.reset();
     if (!list->names.empty()) nameList_ = std::move(list);
-    return CompileNames() && ok;
+    return CompileNames(errors) && ok;
 }
 
-bool Session::CompileNames() {
-    if (!nameList_ || !snapshot_) return true;
-    std::unique_ptr<pipeline::DocumentNames> compiled;
-    const bool ok = pipeline::CompileNames(*snapshot_, *nameList_, compiled);
-    names_ = std::move(compiled);
+bool Session::CompileNames(std::vector<std::string>* errors) {
+    if (!snapshot_) return true;
     namesSnapshot_ = snapshot_;
+    names_.reset();
+    const names::List* files = generated_ ? generated_->nameFiles.get() : nullptr;
+    if (!nameList_ && !files) return true;
+    names::List merged;
+    const names::List* list = nameList_.get();
+    if (files && nameList_) {
+        merged = *files;
+        names::Merge(merged, *nameList_);
+        list = &merged;
+    } else if (files) {
+        list = files;
+    }
+    std::unique_ptr<pipeline::DocumentNames> compiled;
+    const bool ok = pipeline::CompileNames(*snapshot_, *list, compiled, errors);
+    names_ = std::move(compiled);
     return ok;
 }
 
@@ -985,6 +1049,14 @@ namespace internal {
 std::string TranslateObserved(Session& session, std::string_view text, const StageObserver& observer,
                               std::string_view context) {
     return Access::TranslateObserved(session, text, observer, context);
+}
+
+std::shared_ptr<const names::List> NameFiles(const Engine& e) {
+    std::shared_ptr<const dict::Snapshot> snap;
+    std::shared_ptr<Generated> generated;
+    std::shared_ptr<const filter::Filters> filters;
+    Access::Current(e, snap, generated, filters);
+    return generated ? generated->nameFiles : nullptr;
 }
 
 std::string TranslateRaw(const Engine& e, std::string_view line) {

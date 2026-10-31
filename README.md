@@ -59,6 +59,7 @@ hdtrans-data/
   user/
     hdtrans.config.example.yaml
     userdict.example.txt
+    names.example.txt
   ehnd/
     README.txt
     PreFilter_example.txt
@@ -202,6 +203,7 @@ CLI는 `--speech soft`, 설정 파일은 `speech: soft`, 웹 번역기는 **대�
 
 결과를 정하는 방법은 세 가지입니다.
 
+- **이름 목록에 넣기:** [문서 이름 목록](#문서-이름-목록)의 이름은 배운 이름보다 먼저 쓰이고, 한 줄씩 번역할 때도 이름으로 읽습니다.
 - **사용자 사전에 넣기:** 사용자 사전의 행은 배운 이름보다 먼저 쓰입니다(`マリア・デ・ルカ`를 `마리아·데·루카`로 적은 행).
   이름 하나만 바로잡을 때 가장 확실합니다.
 - **한 줄씩 번역하기:** 번역 창에서 **한꺼번에 묶어서 번역**을 끄거나 CLI에서 `--each`를 씁니다. **문서 번역** 탭은 늘
@@ -240,6 +242,28 @@ UTF-8로 저장하고 한 줄에 일본어와 한국어를 **탭**으로 구분�
 `userdict-place.txt`처럼 `userdict`로 시작하는 `.txt` 파일로 나누어도 됩니다.
 번역 창과 연결 도구에서는 저장한 내용이 다음 번역부터 반영됩니다.
 품사와 자세한 형식은 [사용자 사전 안내](docs/dictionary-files.md#사용자-사전)를 보세요.
+
+## 문서 이름 목록
+
+등장인물, 지명처럼 작품의 이름은 `hdtrans-data/user/names.txt`에 적습니다. 한 줄에 이름 하나, 일본어와 한국어,
+종류(선택)와 `hon`(선택)을 **탭**으로 구분합니다. 사용자 사전과 달리 이름으로 읽으므로 경칭, 조사, 띄어쓰기가 맞습니다.
+
+```text
+衣更	이사라
+黒沢	쿠로사와	family
+みみ	미미	nick	hon
+```
+
+| 쓰는 곳 | 방법 |
+|---|---|
+| 번역 창, `J2KEngine.dll` | `user/`의 `names*.txt`, `names*.tsv`를 사용자 사전과 함께 읽고, 고치면 다음 번역부터 반영 |
+| 명령줄 | 같은 파일, 그 위에 `--names FILE` |
+| C API | 같은 파일, 그 위에 `hdTrans_SetNames` |
+| npm | `HdTrans.init({ names })`, `setNames(text)`, `translate(text, { names })` |
+| 웹 | 사전 탭의 **이름 표**(켠 사전의 표를 목록 순서대로) |
+
+설정의 `userdict:`에 적은 폴더의 `names*.txt`도 읽으므로 작품마다 폴더를 두고 사전과 이름을 함께 고를 수 있습니다.
+종류, `hon`과 자세한 규칙은 [이름 목록 안내](docs/dictionary-files.md#문서-이름-목록)를 보세요.
 
 ## 설정과 Ehnd 사전
 

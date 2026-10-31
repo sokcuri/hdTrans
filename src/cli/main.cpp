@@ -425,8 +425,8 @@ int RunMain(int argc, char** argv) {
         std::fputs("hdtrans: --wrapped and --context cannot be combined with --each or --raw\n", stderr);
         return 2;
     }
-    if ((!namesPath.empty() || proposeNames) && (each || raw)) {
-        std::fputs("hdtrans: --names and --propose-names cannot be combined with --each or --raw\n", stderr);
+    if ((!namesPath.empty() && raw) || (proposeNames && (each || raw))) {
+        std::fputs("hdtrans: --names cannot be combined with --raw, --propose-names with --each or --raw\n", stderr);
         return 2;
     }
 
@@ -630,7 +630,9 @@ int RunMain(int argc, char** argv) {
     }
 
     hdTrans::names::List names;
+    if (const auto files = hdTrans::internal::NameFiles(engine)) names = *files;
     if (!namesPath.empty()) {
+        hdTrans::names::List listed;
         std::string text;
         std::FILE* f = OpenFile(namesPath, false);
         const bool read = f && ReadAll(f, text);
@@ -640,9 +642,10 @@ int RunMain(int argc, char** argv) {
             return 1;
         }
         std::vector<std::string> errors;
-        hdTrans::names::ParseList(text, names, &errors);
+        hdTrans::names::ParseList(text, listed, &errors);
         for (const std::string& error : errors)
             std::fprintf(stderr, "hdtrans: warning: %s:%s\n", namesPath.c_str(), error.c_str());
+        hdTrans::names::Merge(names, listed);
     }
 
     const auto snapshot = engine.Dictionaries();
@@ -650,6 +653,7 @@ int RunMain(int argc, char** argv) {
     if (!names.names.empty()) {
         std::vector<std::string> errors;
         hdTrans::pipeline::CompileNames(*snapshot, names, documentNames, &errors);
+        // The names of the user folders compiled when they loaded, so the errors are of --names.
         for (const std::string& error : errors)
             std::fprintf(stderr, "hdtrans: error: %s:%s\n", namesPath.c_str(), error.c_str());
     }

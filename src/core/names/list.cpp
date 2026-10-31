@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <cstddef>
+#include <set>
 #include <string>
 #include <string_view>
 #include <utility>
@@ -46,7 +47,7 @@ std::string_view KindName(ListKind k) {
     return "given";
 }
 
-bool ParseList(std::string_view text, List& out, std::vector<std::string>* errors) {
+bool ParseList(std::string_view text, List& out, std::vector<std::string>* errors, std::string_view source) {
     if (text.starts_with("\xEF\xBB\xBF")) text.remove_prefix(3);
     bool ok = true;
     auto fail = [&](std::size_t number, std::string_view message) {
@@ -74,8 +75,9 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
             fail(number, "JA holds white space, | or /");
             continue;
         }
-        Listed name{std::string(f[0]), std::string(f[1])};
+        Listed name{std::string(f[0]), std::string(f[1]), };
         name.line = static_cast<int>(number);
+        name.source = source;
         if (f.size() > 2 && !f[2].empty()) {
             const auto kind = std::find_if(kKinds.begin(), kKinds.end(), [&](const auto& k) { return k.second == f[2]; });
             if (kind == kKinds.end()) {
@@ -106,6 +108,18 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
         out.names.push_back(std::move(name));
     }
     return ok;
+}
+
+void Merge(List& into, const List& over) {
+    if (over.names.empty()) return;
+    std::set<std::string_view> keys;
+    for (const Listed& o : over.names) keys.insert(o.ja);
+    std::erase_if(into.names, [&](const Listed& n) { return keys.contains(n.ja); });
+    into.names.insert(into.names.end(), over.names.begin(), over.names.end());
+}
+
+std::string Where(const Listed& name) {
+    return name.source.empty() ? std::to_string(name.line) : name.source + ":" + std::to_string(name.line);
 }
 
 std::string ListLine(const Listed& name) {

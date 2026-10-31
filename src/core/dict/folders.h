@@ -32,11 +32,15 @@ struct UserSource {
 
 // Expands folders to top-level userdict*.txt/tsv and .txt/tsv files whose first line
 // is a prefilter/postfilter header, in lowercase filename byte order.
-// Explicit files keep their positions; empty paths are ignored.
+// Explicit files keep their positions; empty paths are ignored. The name lists of the
+// folders, their top-level names*.txt/tsv files, go to names in the same order.
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths);
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths, std::vector<UserSource>& sources);
 std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::vector<UserSource>& sources,
-                                   std::vector<std::string>* readFailures = nullptr);
+                                   std::vector<std::string>* readFailures = nullptr,
+                                   std::vector<std::string>* names = nullptr);
+// Reads a whole file; false when it cannot be read.
+bool ReadUserFile(std::string_view utf8, std::string& out);
 std::string ConfigFile(std::string_view programDir);
 // The selected or expected optional ehnd directory in the data root.
 std::string EhndFolder(std::string_view programDir);

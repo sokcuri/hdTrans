@@ -47,6 +47,7 @@ struct FileWatch {
 
 struct UserVersion {
     std::vector<std::pair<std::string, FileVersion>> files;
+    std::vector<std::pair<std::string, FileVersion>> names;  // the name lists of the folders
     std::vector<dict::UserSource> sources;
     FileVersion config;
     std::uint64_t optionsRevision = 0;

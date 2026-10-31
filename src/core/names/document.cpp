@@ -168,6 +168,15 @@ const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view
 
 // The listed names as pack name rows, id names:LINE: of any word of the name's key, or for a hon
 // name of one an honorific follows.
+// The pack row id of a listed name: names:LINE for the list of the session, FILE:LINE for a file.
+std::string RowId(const names::Listed& l) {
+    std::string source = l.source.empty() ? std::string("names") : l.source;
+    for (char& c : source) {
+        if (c == '\t' || c == '\n' || c == '\r') c = '_';
+    }
+    return source + ":" + std::to_string(l.line);
+}
+
 std::string ListPackRows(const names::List& list) {
     std::string honorific = "next=";
     for (const std::string_view h : dict::internal::kNameHonorifics) {
@@ -176,7 +185,7 @@ std::string ListPackRows(const names::List& list) {
     }
     std::string out = "id\tlemma\tpos\tcond\ttarget\tslot\n";
     for (const names::Listed& l : list.names) {
-        out += "names:" + std::to_string(l.line) + "\t" + l.ja + "\tn\t" + (l.honorificOnly ? honorific : "*") + "\t" +
+        out += RowId(l) + "\t" + l.ja + "\tn\t" + (l.honorificOnly ? honorific : "*") + "\t" +
                l.ko + "\tname\n";
     }
     return out;
@@ -203,13 +212,12 @@ bool CompileNames(const dict::Snapshot& snap, const names::List& list, std::uniq
         const std::size_t i = e.line >= 2 ? static_cast<std::size_t>(e.line - 2) : kept.names.size();
         if (i < kept.names.size()) failed.insert(i);
         if (errors != nullptr) {
-            errors->push_back((i < kept.names.size() ? std::to_string(kept.names[i].line) : std::string("0")) + ": " +
-                              e.message);
+            errors->push_back((i < kept.names.size() ? names::Where(kept.names[i]) : std::string("0")) + ": " + e.message);
         }
     }
     std::map<std::string, std::string, std::less<>> honIds;  // row id to JA
     for (const names::Listed& l : kept.names) {
-        if (l.honorificOnly) honIds["names:" + std::to_string(l.line)] = l.ja;
+        if (l.honorificOnly) honIds[RowId(l)] = l.ja;
     }
     for (std::size_t i = 0; i < out->packs.rows.size(); i++) {
         if (const auto h = honIds.find(out->packs.rows[i].id); h != honIds.end()) out->honRows[h->second] = i;

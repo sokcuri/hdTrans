@@ -59,6 +59,7 @@ class PackageReleaseTest(unittest.TestCase):
             data = folder / "hdtrans-data"
             self.write(data / "user/hdtrans.config.example.yaml", b"# user configuration\n")
             self.write(data / "user/userdict.example.txt", b"# user dictionary\n")
+            self.write(data / "user/names.example.txt", b"# name list\n")
             self.write(data / "dicts/stale.tsv", b"must not be shipped\n")
             self.write(data / "dicts.txt", b"stale metadata\n")
             self.write(data / "dicts.hdsnap", b"stale snapshot\n")
@@ -126,6 +127,7 @@ class PackageReleaseTest(unittest.TestCase):
                 self.assertEqual(set(files), common | binaries | ehnd | {
                     data + "dicts.hdsnap", data + "dicts.txt",
                     data + "user/hdtrans.config.example.yaml", data + "user/userdict.example.txt",
+                    data + "user/names.example.txt",
                 })
                 self.assertEqual(files[data + "dicts.txt"], self.expected_version())
                 if shared_snapshot is None:
@@ -134,6 +136,7 @@ class PackageReleaseTest(unittest.TestCase):
                 self.assertEqual(files[data + "dicts.hdsnap"], shared_snapshot)
                 self.assertEqual(files[data + "user/hdtrans.config.example.yaml"], b"# user configuration\n")
                 self.assertEqual(files[data + "user/userdict.example.txt"], b"# user dictionary\n")
+                self.assertEqual(files[data + "user/names.example.txt"], b"# name list\n")
                 for name, content in self.ehnd.items():
                     self.assertEqual(files[data + "ehnd/" + name], content)
                 for notice in ("third_party/pcre2/LICENCE.md", "third_party/pcre2/deps/sljit/LICENSE",

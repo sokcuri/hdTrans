@@ -473,6 +473,9 @@ void CheckJ2K(const std::filesystem::path& source, const std::filesystem::path& 
         Write(config, base + "ehnd: fixtures/Ehnd\n");
         reload();
         checkTranslation(L"タマ", L"나비", "J2K configured Ehnd path");
+        Write(config, "dicts: fixtures/first\nuserdict: fixtures/cast\ncache: off\n");
+        reload();
+        checkTranslation(L"猫", L"미케", "J2K name file of a user folder");
         const auto userRows = config.parent_path() / "fixtures/j2k-user.txt";
         const std::string rowConfig = "dicts: fixtures/first\nuserdict: fixtures/j2k-user.txt\ncache: off\n";
         Write(userRows, "犬\tJ2K_OLD\n");
@@ -617,6 +620,15 @@ int main(int argc, char** argv) {
     Check(hdTrans_SetNames("猫", 3) == -1, "malformed name line");
     Check(Translate("猫") == "고양이", "malformed list holds no name");
     Check(hdTrans_SetNames(nullptr, 0) == 0, "drop names");
+    std::filesystem::create_directories(fixtures / "cast", error);
+    Write(fixtures / "cast/names.txt", "猫\t미케\n");
+    Write(config, "dicts: fixtures/first\nuserdict: fixtures/cast\ncache: off\n");
+    Check(hdTrans_Reload() == 0, "reload with a user folder");
+    Check(Translate("猫") == "미케", "name file of a user folder");
+    Check(hdTrans_SetNames(names.data(), names.size()) == 0 && Translate("猫") == "네코", "listed name over the name file");
+    Check(hdTrans_SetNames(nullptr, 0) == 0 && Translate("猫") == "미케", "name file without the list");
+    Write(config, "dicts: fixtures/first\nuserdict: fixtures/user.tsv\ncache: off\n");
+    Check(hdTrans_Reload() == 0 && Translate("猫") == "고양이", "reload without the name file");
     Write(fixtures / "second-user.txt", "犬\t뒤파일\n");
     Write(fixtures / "bad-user.tsv", "猫\n");
     Write(config, "dicts: fixtures/first\nuserdict: [fixtures/user.tsv, fixtures/bad-user.tsv, fixtures/second-user.txt]\ncache: off\n");
