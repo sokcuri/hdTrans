@@ -1476,7 +1476,6 @@
 
 
 // LEX-151: set collocations read as the Korean collocation of the same use.
-を後にする	(을)를 떠나다	v	gattr=Tu
 事を運ぶ	일을 진행하다	v5
 ことを運ぶ	일을 진행하다	v5
 足を進める	발걸음을 옮기다	v1
@@ -1511,6 +1510,10 @@
 目上の者	윗사람	n
 目上のもの	윗사람	n
 意匠設計	의장 설계	n
-// LEX-154: 話は別 says the case at hand does not follow the rule just said.
+// LEX-154: 話は別 before a copula or the end says the case at hand does not follow the rule just said; 話は別に before a verb is 따로, 話は別にして and 話は別として set it aside.
 話は別	이야기가 다르다	na
+話は別に	이야기는 따로	phrase
+話は別にして	이야기는 별개로 하고	phrase
+話は別にすれば	이야기는 별개로 하면	phrase
+話は別として	이야기는 별개로 하고	phrase
 

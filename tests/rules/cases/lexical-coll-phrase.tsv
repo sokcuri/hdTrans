@@ -2,12 +2,12 @@
 rule	input	expected	kind	layer
 cx:coll-verb:70	会長が部室を後にして、数十分。	회장이 동아리방을 떠나고, 수십 분.	fix	rewrites
 cx:coll-verb:70	先生の家を後にして、銀地町の繁華街へ	has:집을 떠나고,	fix	rewrites
-cx:coll-verb:70	上機嫌で部室を後にした。	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	上機嫌で部室を後にした。	has:동아리방을 떠났다	fix	rewrites
 cx:coll-verb:70	その話は後にして、まずは香奈を病院に戻してください	!rule:cx:coll-verb:70	keep	rewrites
-phrase:coll	同僚にそう挨拶して、俺は会社を後にした。	has:회사를 떠났다	fix	builtin-phrase
-phrase:coll	俺はソファーから立ちあがり、リビングを後にした。	has:거실을 떠났다	fix	builtin-phrase
-phrase:coll	「その話は後にしよう」	lacks:떠나	keep	builtin-phrase
-phrase:coll	「レイチェルちゃん。ちょっと後にして。」	lacks:떠나	keep	builtin-phrase
+cx:coll-verb:70	同僚にそう挨拶して、俺は会社を後にした。	has:회사를 떠났다	fix	rewrites
+cx:coll-verb:70	俺はソファーから立ちあがり、リビングを後にした。	has:거실을 떠났다	fix	rewrites
+cx:coll-verb:70	「その話は後にしよう」	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	「レイチェルちゃん。ちょっと後にして。」	!rule:cx:coll-verb:70	keep	rewrites
 phrase:coll	そうなるように事を運んでおられた	has:일을 진행하고	fix	builtin-phrase
 phrase:coll	私は足をすすめる。	has:발걸음을 옮긴다	fix	builtin-phrase
 phrase:coll	そう決意して、さらに足を進めると、	has:발걸음을 옮기	fix	builtin-phrase
@@ -27,3 +27,7 @@ phrase:coll	年の離れた兄が両親を養っており、	has:나이 차이�
 phrase:coll	つい熱くなって、声に出してしまった。	has:소리 내버렸다	fix	builtin-phrase
 phrase:coll	思わず、声を出してうなってしまった。	has:소리를 내	keep	lookup
 phrase:coll	トニーは後ろをついて回ってその勘定を払った	has:뒤를 따라다녀	fix	builtin-phrase
+cx:coll-verb:70	宿題を後にして	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	その話を後にしよう	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	食事を後にする	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	言いながら、彼らはテラス側から食堂を後にした。	has:식당을 떠났다	fix	rewrites

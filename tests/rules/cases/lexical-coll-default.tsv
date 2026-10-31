@@ -16,3 +16,7 @@ lexical:coll-default	辰巳に鞍替えするという結論が出てたよう�
 lexical:coll-default	「……悪いけど、少し寄り道したい」	has:조금 딴 데 들르고 싶다	fix	builtin-phrase
 lexical:coll-default	ヨソのブース見物はもうしたので、寄り道せずに講堂を出た。	has:딴 데 들르지 않고	fix	builtin-phrase
 lexical:coll-default	帰り道に雨が降った。	lacks:들르	keep	lookup
+lexical:coll-default	国境にまたがる山脈	has:국경에 걸치는	keep	senses
+lexical:coll-default	複数の部署にまたがる案件	has:부서에 걸치는	keep	senses
+lexical:coll-default	長期にまたがる計画	has:장기에 걸칠	keep	senses
+lexical:coll-default	ナオは無言でバイクにまたがると、	has:오토바이에 올라타	fix	senses

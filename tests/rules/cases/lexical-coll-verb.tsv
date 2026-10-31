@@ -3,8 +3,8 @@ rule	input	expected	kind	layer
 lexical:coll-verb	「どうしたんだ、由弦。急にため息などついて」	has:한숨 등 쉬어	fix	senses
 lexical:coll-verb	「どうしたの？　ため息なんかついちゃって」	has:쉬어	fix	senses
 lexical:coll-verb	スバルはもう何度目になるかわからないため息をついた。	has:한숨을 쉬었다	keep	lookup
-lexical:coll-verb	「けじめ、つけたいから……」	「매듭, 짓고 싶으니까……」	fix	senses
-lexical:coll-verb	「でも……けじめ、つけないと……」	has:매듭, 짓지 않으면	fix	senses
+cx:coll-verb:80	「けじめ、つけたいから……」	「매듭, 짓고 싶으니까……」	fix	rewrites
+cx:coll-verb:80	「でも……けじめ、つけないと……」	has:매듭, 짓지 않으면	fix	rewrites
 lexical:coll-verb	ただ……最低限のケジメはつけたい。	has:매듭은 짓고 싶다	fix	senses
 lexical:coll-verb	悪いことは確かだから、ちゃんとけじめをつけなきゃ。	has:매듭을 지어야	fix	senses
 lexical:coll-verb	「だから、けじめとか言われて」	lacks:매듭	keep	senses
@@ -20,3 +20,5 @@ cx:coll-verb:60	「死に際に変な夢でも見てるってこと？」	has:�
 cx:coll-verb:60	夢にまで見た、オールヌード……	!rule:cx:coll-verb:60	keep	rewrites
 cx:coll-verb:60	毎日この光景を夢で見る。	!rule:cx:coll-verb:60	keep	rewrites
 cx:coll-verb:60	「それに、みいちゃんにしてもらえるなんて、夢みたいで……」	has:꿈 같	keep	rewrites
+cx:coll-verb:80	けじめとして、テレビをつけた	has:텔레비전을 켰다	keep	rewrites
+cx:coll-verb:80	最低限のケジメはつけたい。	!rule:cx:coll-verb:80	keep	rewrites

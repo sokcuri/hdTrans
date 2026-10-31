@@ -1488,12 +1488,12 @@
 食えない	먹을 수 없다	もう,これ以上,腹,お腹,満腹,食う	before	adj
 // LEX-150: a verb paired with one noun reads as the Korean verb of that pair, also with a particle between or none.
 つく	쉬다	ため息,溜息,溜め息	before	v5
-つける	짓다	けじめ,ケジメ	sentence	v1:ㅅ
-付ける	짓다	けじめ,ケジメ	sentence	v1:ㅅ
+つける	짓다	けじめ,ケジメ	before	v1:ㅅ
+付ける	짓다	けじめ,ケジメ	before	v1:ㅅ
 けじめ	매듭	つける,付ける	after	n
 ケジメ	매듭	つける,付ける	after	n
-// LEX-152: またがる is getting on what one rides, 걸치다 only over a span.
-またがる	걸치다	年,年度,期間,時代,世代,分野,国,県,州,両方,複数	before	v5
-またがる	올라타다			v5
+// LEX-152: またがる is 걸치다 over a span; after a thing one rides, before it or earlier in the sentence, it is 올라타다.
+またがる	올라타다	自転車,チャリ,チャリンコ,バイク,オートバイ,スクーター,原付,馬,ロバ,背,背中,後ろ,上,鞍,サドル,箒,ほうき,シート	before	v5
+またがる	올라타다	自転車,チャリ,チャリンコ,バイク,オートバイ,スクーター,原付,馬,ロバ,箒,ほうき	sentence	v5
 // LEX-153: 渇いた before 喉 is 마른.
 渇く	마르다	喉,のど	after	v5

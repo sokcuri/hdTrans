@@ -18,3 +18,7 @@ lexical:coll-modifier	何より、その思い切りの良さが衝撃だった�
 lexical:coll-modifier	得意不得意はあっても使える魔法を	has:잘하고 못하는 것은 있어도	fix	builtin-phrase
 lexical:coll-modifier	どう見ても目下のものに、実名を呼ばれる事は	has:아랫사람에	fix	builtin-phrase
 lexical:coll-modifier	花形の意匠設計でも、派手な大型物件でもない。	has:의장 설계	fix	builtin-phrase
+cx:coll-verb:30	性格が変わった人	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:30	すっかり変わった人になった	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:30	名前が変わった娘	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:40	彼はすっかり変わった方だ	!rule:cx:coll-verb:40	keep	rewrites

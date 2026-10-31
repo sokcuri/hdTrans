@@ -15,3 +15,12 @@ lexical:coll-attitude	ふらふらしていた、っていうなら話は別だ�
 lexical:coll-attitude	「大切な人のことを丁重に弔うのなら話は別よ」	has:이야기가 달라	fix	builtin-phrase
 lexical:coll-attitude	それとこれとは別の話だ。	lacks:다르다	keep	lookup
 cx:coll-verb:50	友達の恋人ってのが余計たち悪いと思う・・・	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	本当に悪いと思ってる	has:정말 미안하다고 생각	fix	rewrites
+cx:coll-verb:50	体に悪いと思う	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	頭は悪いと思う	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	性格悪いと思う	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	天気も悪いと思う	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	それは悪いと思う	!rule:cx:coll-verb:50	keep	rewrites
+lexical:coll-attitude	その話は別にして、本題に入ろう	has:그 이야기는 별개로 하고	keep	builtin-phrase
+lexical:coll-attitude	話は別に聞く	lacks:다르	keep	builtin-phrase
+lexical:coll-attitude	話は別として	has:이야기는 별개로	keep	builtin-phrase
