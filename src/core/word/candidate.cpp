@@ -887,6 +887,65 @@ Record* AdverbOverKanaVerb(const dict::Snapshot& snapshot, Record* records, std:
     return records;
 }
 
+// Text path: after a case particle or a comma, the verb records of the kana stem か (かく) whose
+// past or て form the text spells move ahead of the other records: no particle か follows there
+// (汗もかいた 땀도 흘렸다, 手紙をかいて 편지를 써서; but 何匹かいた, 誰かいた after a noun). A word that
+// the text starts with and that spells the form or more keeps its place.
+// Plain-dictionary records stay in front.
+Record* KanaVerbAfterParticle(const Item& parent, Record* records, std::string_view text) {
+    const std::string_view p = parent.group->surface;
+    if (p != "を" && p != "も" && p != "は" && p != "が" && p != "に" && p != "で" && p != "、") return records;
+    Record* owned = nullptr;
+    Record* first = records;
+    while (first != nullptr && first->user != nullptr) {
+        owned = first;
+        first = first->child;
+    }
+    if (first == nullptr) return records;
+    auto spells = [&](const Record& v) {
+        if (At(v.partCode, 0) != 'M' || At(v.partCode, 1) != '4' || v.partCode.size() != 4 || v.source != "か") {
+            return std::string_view();
+        }
+        const int kind = v.partCode[3] - '0';
+        for (const int branch : {6, 7}) {
+            const std::string_view form = Conjugation(kind, branch);
+            if (!form.empty() && text.starts_with(v.source) && text.substr(v.source.size()).starts_with(form)) {
+                return text.substr(0, v.source.size() + form.size());
+            }
+        }
+        return std::string_view();
+    };
+    std::string_view verb;
+    for (const Record* r = first; r != nullptr && verb.empty(); r = r->child) verb = spells(*r);
+    if (verb.empty() || !spells(*first).empty()) return records;
+    for (const Record* r = first; r != nullptr; r = r->child) {
+        if (!text.starts_with(r->source) || !spells(*r).empty()) continue;
+        if (r->source.size() > verb.size() || (r->source.size() == verb.size() && !AnyOf("PSTU", At(r->partCode, 0)))) {
+            return records;
+        }
+    }
+    Record* verbs = nullptr;
+    Record* rest = nullptr;
+    Record** verbTail = &verbs;
+    Record** restTail = &rest;
+    for (Record* r = first; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        if (!spells(*r).empty()) {
+            *verbTail = r;
+            verbTail = &r->child;
+        } else {
+            *restTail = r;
+            restTail = &r->child;
+        }
+        r = next;
+    }
+    *verbTail = rest;
+    if (owned == nullptr) return verbs;
+    owned->child = verbs;
+    return records;
+}
+
 // Text path: the verb records of records move ahead of a longer record that is no verb but
 // spells a form of the verb before a polite ます (喜び + ます: 喜ぶ, not the noun 喜び; 急ぎます,
 // 頑張れます): the verb's stem and its continuative or its potential stem, and no record longer.
@@ -2033,6 +2092,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));
         if (settings.text) records = NounAfterModifier(*parent, records, From(full, cursor));
+        if (settings.text) records = KanaVerbAfterParticle(*parent, records, From(full, cursor));
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }

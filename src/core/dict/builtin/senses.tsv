@@ -1534,3 +1534,16 @@
 // LEX-226: 付ける after a substance put on the skin, the lips, the hair or the hands is 바르다 (香水 stays 뿌리다 above).
 付ける	바르다	リップ,リップクリーム,オイル,ローション,油,ハンドクリーム,化粧水,乳液,美容液,保湿クリーム,日焼け止め,ワックス,消毒液,塗り薬,ジェル,ファンデーション,白粉,おしろい,グロス,ポマード,整髪料,ボディクリーム,香油,薬用クリーム,ワセリン,膏薬,軟膏,薬	before	v1
 つける	바르다	薬,軟膏,リップ,リップクリーム,オイル,ローション,油,ハンドクリーム,化粧水,乳液,美容液,保湿クリーム,日焼け止め,ワックス,消毒液,塗り薬,ジェル,ファンデーション,白粉,おしろい,グロス,ポマード,整髪料,ボディクリーム,香油,薬用クリーム,ワセリン,膏薬	before	v1
+// LEX-2932: kana かく after sweat is 흘리다 (also with 乾く in the sentence: the sweat dries), after 恥 당하다, after a picture 그리다; 恥 before かく is 창피.
+かく	흘리다	汗,冷や汗,寝汗,大汗,脂汗,手汗,あせ,ひやあせ	before	v5
+かく	흘리다	乾く	sentence	v5
+かく	당하다	恥,赤っ恥	before	v5
+かく	그리다	絵,イラスト,漫画,似顔絵,地図	before	v5
+恥	창피	かく	after	n
+// LEX-2934: 義理の息子 is 사위, the stepson 의붓아들 in a sentence of a grandchild, a remarriage, a stepparent or an adoption; 義理の娘 is 의붓딸, 며느리 in a sentence of a marriage or a bride.
+義理の息子	의붓아들	孫,再婚,継母,継父,後妻,養子	sentence	n
+義理の娘	며느리	嫁,嫁ぐ,嫁入り,花嫁,婚約,婚約者,結婚,結婚式	sentence	n
+// LEX-2937: シメる is 혼내 주다; after a dish that ends a meal, or ここで, it ends it, 마무리하다.
+シメる	마무리하다	ここで,うどん,ラーメン,雑炊,おじや,麺,そば,茶漬け,お茶漬け,デザート	before	v1
+// LEX-2941: kana よつば is mostly a name, 요츠바; in a sentence of a wish, luck or a clover it is the four-leaf clover, 네잎클로버.
+よつば	네잎클로버	願,願を掛け,願掛け,願い,願う,幸運,幸せ,クローバー,押し花	sentence	n
