@@ -28,7 +28,6 @@ dict:jisjk:137846	そういいながら彼は背中に背負っていた大き�
 dict:jisjk:137846	人は皆、何かしらの不幸を背負っているものです。	has:불행을 짊어지고	fix	defaults
 dict:jisjk:4630	その瞳にはわずかな不安と、多大な信頼の色が浮かんでいた。	has:약간의 불안	fix	defaults
 dict:jisjk:14088	そんな軽いノリで頼むことじゃなくない？	has:가벼운 분위기로	fix	defaults
-dict:jisjk:5011	時々ミラはビクンと背筋を伸ばしたりしているがくすぐったいんだろうか。	has:간지러울까	fix	defaults
 lookup:sei-janai	「みんなのせいじゃないよ」	has:탓이 아니야	fix	defaults
 lookup:sei-janai	これは病気のせいじゃない。	has:병 탓이 아니다	fix	defaults
 lookup:sei-janai	いや、気のせいじゃないよ。ぼくもこの声をさっきも聞いたから。	has:기분 탓이 아니야	keep	defaults
