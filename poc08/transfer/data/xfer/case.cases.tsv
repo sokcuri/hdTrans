@@ -82,3 +82,5 @@ case.mo.cop.hold	fix	「私もです」	-	inv
 case.mo.cop.hold	keep	「私も学生です」	「저도 학생이에요」	inv
 case.mo.naku.hold	fix	そう思う間もなく――	-	inv
 case.mo.naku.hold	keep	本もない。	책도 없다.	inv
+case.wa.aru	fix	「時間はある。」	「시간은 있어.」	inv
+case.wa.aru	keep	「時間がある。」	「시간이 있어.」	inv
