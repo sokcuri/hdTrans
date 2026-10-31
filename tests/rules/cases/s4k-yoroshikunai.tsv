@@ -1,0 +1,37 @@
+# 규칙: GRM-169
+rule	input	expected	kind	layer
+cx:s4k-yoroshikunai:10	この流れはよろしくない。	has:좋지 않다.	fix	rewrites
+cx:s4k-yoroshikunai:10	この世界でのクロの発育は明らかによろしくない。	has:분명하게 좋지 않다.	fix	rewrites
+cx:s4k-yoroshikunai:10	成績がよろしくない魂には	has:성적이 좋지 않은 영혼	fix	rewrites
+cx:s4k-yoroshikunai:10	「おや、あまり機嫌がよろしくない？」	has:기분이 좋지 않아?」	fix	rewrites
+cx:s4k-yoroshikunai:10	ごめんなさいね、頭がよろしくなくて……	has:머리가 좋지 않아	fix	rewrites
+cx:s4k-yoroshikunai:10	おなかがあんまりよろしくなくて	has:별로 좋지 않아서	fix	rewrites
+cx:s4k-yoroshikunai:10	まあ、ゲーム内でもラビッターの扱いは確かによろしくなかった。	has:확실히 좋지 않았다.	fix	rewrites
+cx:s4k-yoroshikunai:10	どうやらこの二人、相性がよろしくないらしい。	has:궁합이 좋지 않은 것 같다.	fix	rewrites
+cx:s4k-yoroshikunai:10	ジャンプでの回避はあまりよろしくない。	has:그다지 좋지 않다.	fix	rewrites
+cx:s4k-yoroshikunai:10	背筋によろしくない痛みが走るけれど、	has:등에 좋지 않은 아픔	fix	rewrites
+cx:s4k-yoroshikunai:10	「我が君、どこかお体の具合がよろしくないのですか」	has:상태가 좋지 않습니까」	fix	rewrites
+cx:s4k-yoroshikunai:10	本人達の主張を聞いてやらないのはよろしくないし、	has:좋지 않고,	fix	rewrites
+cx:s4k-yoroshikunai:10	「ちょっと待ってよ。全然よろしくないから。	has:전혀 좋지 않으니까.	fix	rewrites
+cx:s4k-yoroshikunai:10	「これからよろしくね」	!rule:cx:s4k-yoroshikunai:10	keep	rewrites
+cx:s4k-yoroshikunai:10	「よろしくな」	!rule:cx:s4k-yoroshikunai:10	keep	rewrites
+cx:s4k-yoroshikunai:10	「じゃ、よろしくな、相棒」	!rule:cx:s4k-yoroshikunai:10	keep	rewrites
+cx:s4k-yoroshikunai:10	「よろしくなんて言えない」	!rule:cx:s4k-yoroshikunai:10	keep	rewrites
+cx:s4k-yoroshikunai:20	これまたリーヴァの教育によろしくなさそうなものだった。	has:교육에 좋지 않을 것 같은 것이었다.	fix	rewrites
+cx:s4k-yoroshikunai:20	見る限りあまりアタマがよろしくなさそうだから、	has:머리가 좋지 않을 것 같으니까,	fix	rewrites
+cx:s4k-yoroshikunai:20	でも、少し体調がよろしくなさそうですわね」	has:컨디션이 좋지 않을 것 같네요」	fix	rewrites
+cx:s4k-yoroshikunai:20	「よろしくお願いします」	!rule:cx:s4k-yoroshikunai:20	keep	rewrites
+cx:s4k-yoroshikunai:30	「こんなところで立ち話もよろしくありません。	has:서서 이야기도 좋지 않습니다.	fix	rewrites
+cx:s4k-yoroshikunai:30	やはり身分的な立場上、主筋を見下ろす形はよろしくありません。	has:형태는 좋지 않습니다.	fix	rewrites
+cx:s4k-yoroshikunai:30	流石にその言動は宜しくありませんよ？	has:언동은 좋지 않아요?	fix	rewrites
+cx:s4k-yoroshikunai:30	『・・母上・・体調でもよろしくありませんでしたか？』	has:컨디션이라도 좋지 않았습니까?』	fix	rewrites
+cx:s4k-yoroshikunai:30	精神衛生上、よろしくありません。	has:정신 위생상, 좋지 않습니다.	fix	rewrites
+cx:s4k-yoroshikunai:30	「よろしく頼む」	!rule:cx:s4k-yoroshikunai:30	keep	rewrites
+cx:s4k-yoroshikunai:40	その点では眼鏡はあまりよろしくございませんね。	has:그다지 좋지 않습니다.	fix	rewrites
+cx:s4k-yoroshikunai:40	「どうぞよろしくお願いいたします」	!rule:cx:s4k-yoroshikunai:40	keep	rewrites
+cx:s4k-yoroshikunai:50	「無理してお話されないでください。顔色がよろしくありませんわ」	has:안색이 좋지 않아요」	fix	rewrites
+cx:s4k-yoroshikunai:50	「閣下。それはよろしくありませぬ。	has:그것은 좋지 않사옵니다.	fix	rewrites
+cx:s4k-yoroshikunai:50	「陰口はよろしくありませんわね。	has:험담은 좋지 않아요.	fix	rewrites
+cx:s4k-yoroshikunai:50	「あらあこんばんは、おヒナちゃん。よろしくねえ」	!rule:cx:s4k-yoroshikunai:50	keep	rewrites
+cx:s4k-yoroshikunai:55	イザークの性格は……その、あまりよろしくありませんし。	has:좋지 않고.	fix	rewrites
+cx:s4k-yoroshikunai:55	「それじゃあ５００ロト。うん、毎度あり。またよろしくねぇ」	!rule:cx:s4k-yoroshikunai:55	keep	rewrites

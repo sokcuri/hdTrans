@@ -1442,3 +1442,10 @@ cx:lc2e-toitta:20	GRM-170	&&7 ||2 S+0== "と言" S+0== "とい" ||2 I+0== "Rっ�
 cx:lc2e-nonichigai:10	GRM-171	&&4 F+0== "conjugating" I+0== "Rのに" Y+0== "0데" S+1== "違いな"	set-ending "0 것이"	焚いているのに違いない 피우고 있는 것이 틀림없다
 cx:lc2e-nonichigai:20	GRM-171	&&4 F+0== "conjugating" I+0== "Rのに" Y+0== "5는데" S+1== "違いな"	set-ending "8 것이"	皆がそう思ったのに違いない 모두가 그렇게 생각한 것이 틀림없다
 cx:lc2e-nonichigai:30	GRM-171	&&2 S+0== "思ったのに" S+1== "違いな"	set-target "생각한 것이"	良からぬことを思ったのに違いない 나쁜 일을 생각한 것이 틀림없다
+//= s4k-yoroshikunai	after OfferPromise 3190	The negative of よろしい that the word stage read as the greeting adverb よろしく before ない, なく, なかった, ありません or ございません (아무쪼록 없다, 잘 없습니다) is 좋지 않다 in every form (調子がよろしくない 상태가 좋지 않다, よろしくなくて 좋지 않아서, よろしくありません 좋지 않습니다); the greeting and request stay (よろしくお願いします, よろしく頼む, よろしくねぇ).
+cx:s4k-yoroshikunai:10	GRM-169	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "な" D+1== "$FA@"	set-target "좋지" set-target@+1 "$D7@"	調子がよろしくない 상태가 좋지 않다
+cx:s4k-yoroshikunai:20	GRM-169	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "なさそう" D+1== "L없을 "	set-target "좋지" replace-head@+1 "없을" "않을"	よろしくなさそうだ 좋지 않을 것 같다
+cx:s4k-yoroshikunai:30	GRM-169	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "あ" D+1== "&M9@" I+1== "Lありませ"	set-target "좋지" set-verb@+1 "않다"	よろしくありません 좋지 않습니다
+cx:s4k-yoroshikunai:40	GRM-169	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "ござ" I+1== "Lございませ"	set-target "좋지" set-verb@+1 "않다" set-ending@+1 "7니다"	よろしくございません 좋지 않습니다
+cx:s4k-yoroshikunai:50	GRM-169	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L없"	set-target "좋지" replace-head@+1 "없어" "않아" replace-head@+1 "없" "않"	顔色がよろしくありませんわ 안색이 좋지 않아요
+cx:s4k-yoroshikunai:55	GRM-169	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L않"	set-target "좋지"	あまりよろしくありませんし 그다지 좋지 않고
