@@ -29,3 +29,4 @@ pack:negf:iinja	いいんじゃない ？	!rule:pack:negf:iinja	keep	packs
 pack:negf:iinja-suggest	そっちは慎んだ方が良いんじゃない。	rule:pack:negf:iinja-suggest=-	keep	packs
 pack:negf:iinja	事前に一言頂戴してもよかったのではないかと	!rule:pack:negf:iinja	keep	packs
 pack:negf:iinja	もっと早く言ってくれてもよかったんじゃない	!rule:pack:negf:iinja	keep	packs
+pack:negf:iinja	対策を考えるのは、当選した後でもいいんじゃないかと……」	!rule:pack:negf:iinja	keep	packs

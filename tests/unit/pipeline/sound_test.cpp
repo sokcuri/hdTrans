@@ -1340,6 +1340,8 @@ HD_TEST(pipeline_contracted_n) {
         {"見たんかい", "見たのかい"},          // the の after a past
         {"主任さんから", "主任さんから"},      // the honorific after a noun
         {"負けんしゅ", "負けんしゅ"},
+        {"負けんか！", "負けんか！"},      // the reproach keeps the ん of an ichidan verb too
+        {"負けんかァ！", "負けんかァ！"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
     // the verb of a rebuke before んじゃない (spoken forms)

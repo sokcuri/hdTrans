@@ -238,7 +238,13 @@ Context ContextOf(Flusher& f, const Item* it) {
             }
         }
     }
-    for (std::string_view rest = std::string_view(ending).substr(core.size()); !rest.empty();) {
+    // after a negative the whole rest of the ending ends the sentence, also what the particle list lacks
+    // (いいんじゃないかと: かと)
+    std::size_t tailFrom = core.size();
+    for (const std::string_view neg : {"ない", "ません"}) {
+        if (const std::size_t at = ending.rfind(neg); at != std::string::npos) tailFrom = std::min(tailFrom, at + neg.size());
+    }
+    for (std::string_view rest = std::string_view(ending).substr(tailFrom); !rest.empty();) {
         const std::size_t size = text::DecodeRune(rest).size;
         if (size == 0) break;
         if (!Faint(rest.substr(0, size))) c.final += rest.substr(0, size);
@@ -290,7 +296,11 @@ Context ContextOf(Flusher& f, const Item* it) {
     if (form == "ん" || (form.ends_with("ん") && form.size() >= 6 &&
                          std::string_view("かがさたなばまらわせこ").find(form.substr(form.size() - 6, 3)) != std::string_view::npos)) {
         c.forms.insert("neg");
+        c.forms.insert("old-neg");
     }
+    // old-neg: the old negative ん (above) or ぬ of old speech (寄らぬか)
+    if (c.forms.count("neg") > 0 && lastNeg != std::string::npos && std::string_view(ending).substr(lastNeg).starts_with("ぬ"))
+        c.forms.insert("old-neg");
     // nja: the non-past predicate negated through the の of んじゃない, のではない (いいんじゃない, 行くのではない);
     // a past before the の (よかったのではないか) asks about what happened and is not nja
     for (const std::string_view nja : {"んじゃな", "のじゃな", "のではな", "んではな"}) {

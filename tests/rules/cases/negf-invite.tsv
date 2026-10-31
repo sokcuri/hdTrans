@@ -64,3 +64,5 @@ cx:neg-final-invite:10	あの人、怒らない？	lacks:않을래	keep	rewrites
 cx:neg-final-invite:40	誰か来ませんか？	lacks:않을래	keep	rewrites
 cx:neg-final-invite:40	雨が降りませんか？	lacks:않을래	keep	rewrites
 cx:neg-final-invite:10	明日は行かない？	has:가지 않을래?	fix	rewrites
+cx:neg-final-invite:10	……誤解されない？	lacks:않을래	keep	rewrites
+cx:neg-final-invite:40	差し入れ？ありがとう！一緒に三人でいただきませんか？	has:받지 않을래요?	fix	rewrites

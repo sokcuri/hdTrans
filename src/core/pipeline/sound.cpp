@@ -2968,8 +2968,8 @@ bool AnyKind(int, const dict::Codes*) { return true; }
 bool IchidanKind(int kind, const dict::Codes*) { return kind == kIchidan; }
 bool RaGodanKind(int kind, const dict::Codes*) { return kind == kRaGodan; }
 bool IchidanOrKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuruKanji; }
-// Whether rest is か, then drawn or clipped kana (kana.drawn-out, mark.clip), then an exclamation
-// mark (か！, かッ!!, かぁ！).
+// Whether rest is か, then drawn or clipped kana (kana.drawn-out, mark.clip), small katakana vowels or
+// an ellipsis, then an exclamation mark (か！, かッ!!, かぁ！, かァ！, か……！).
 bool ReproachKa(std::string_view rest) {
     if (!rest.starts_with("か")) return false;
     rest.remove_prefix(std::string_view("か").size());
@@ -2978,7 +2978,8 @@ bool ReproachKa(std::string_view rest) {
         if (size == 0) return false;
         const std::string_view rune = rest.substr(0, size);
         if (rune == "！" || rune == "!") return true;
-        if (!dict::InClass(HDTRANS_CLASS("kana.drawn-out"), rune) && !dict::InClass(HDTRANS_CLASS("mark.clip"), rune)) {
+        if (!dict::InClass(HDTRANS_CLASS("kana.drawn-out"), rune) && !dict::InClass(HDTRANS_CLASS("mark.clip"), rune) &&
+            std::string_view("ァィゥェォ…‥").find(rune) == std::string_view::npos) {
             return false;
         }
         rest.remove_prefix(size);
@@ -3229,6 +3230,8 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             // Before a written ない a lone kana after a particle is a stem too where the word ends with the
             // ん (練習になんない is no なん; かかるとみんないい人 is みんな).
             if (spanned && !afterTe && !(nai && i - from == 1 && !spannedPast)) continue;
+            // The reproach before ！ keeps the ん of every verb for the end rows of んか (片付けんか！)
+            if (says == Says::Negative && ReproachKa(rest)) break;
             kana = ContractedKana(says, stem, rs, from, i, ctx, snap);
             // A verb's stem that takes none of these readings ends the search: the kana inside it
             // start no stem (でき of 想像できんな is no き). A stem of kana only, which is read only as a

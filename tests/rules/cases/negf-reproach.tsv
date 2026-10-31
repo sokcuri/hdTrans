@@ -5,20 +5,20 @@ pack:negf:reproach	さっさと歩かんかぁ！	빨리 걷지 못해!	fix	pack
 pack:negf:reproach	「死ぬまで黙らんかぁ！」	has:입을 다물지 못해!	fix	packs
 pack:negf:reproach	田中はおらぬか！	!rule:pack:negf:reproach	keep	packs
 pack:negf:reproach	笑わんのか!?	!rule:pack:negf:reproach	keep	packs
-pack:negf:reproach	いい加減にしないか！	적당히 하지 못해!	fix	packs
-pack:negf:reproach	早く食べないかっ！	빨리 먹지 못해!	fix	packs
-pack:negf:reproach	ちゃんと聞かないか！	has:듣지 못해!	fix	packs
+cx:neg-final-reproach:20	いい加減にしないか！	적당히 하지 못해!	fix	rewrites
+cx:neg-final-reproach:20	早く食べないかっ！	빨리 먹지 못해!	fix	rewrites
+cx:neg-final-reproach:20	ちゃんと聞かないか！	has:듣지 못해!	fix	rewrites
 pack:negf:reproach	誰かいないか！	!rule:pack:negf:reproach	keep	packs
 pack:negf:reproach	「なら、写真撮らないか？」	!rule:pack:negf:reproach	keep	packs
 cx:neg-final-reproach:30	早くしないか！	빨리 하지 못해!	fix	rewrites
-cx:neg-final-reproach:30	静かにしないかッ！	has:하지 못해!	fix	rewrites
+cx:neg-final-reproach:30	早く静かにしないかッ！	has:하지 못해!	fix	rewrites
 cx:neg-final-reproach:30	「だったら、今から立候補しないか？」	!rule:cx:neg-final-reproach:30	keep	rewrites
 cx:neg-final-reproach:40	こら やめんか。	has:그만두지 못해.	fix	rewrites
 cx:neg-final-reproach:40	わしのそばに　いてくれんか。	!rule:cx:neg-final-reproach:40	keep	rewrites
 cx:neg-final-reproach:40	ところで 一献つきあわんか？	!rule:cx:neg-final-reproach:40	keep	rewrites
 cx:reproach-nka:10	(従者)寄れ！ 寄らぬか！ 道を開けろ！	has:다가가지 못해!	keep	rewrites
 pack:negf:reproach	「貴様！　何を言いかけた!?　吐け!!　吐かんかッ!!」	rule:pack:negf:reproach=1지 못해	fix	packs
-pack:negf:reproach	いい加減にしないか！	rule:pack:negf:reproach=1지 못해	fix	packs
+cx:neg-final-reproach:20	いい加減にしないか！	rule:cx:neg-final-reproach:20=6	fix	rewrites
 pack:negf:reproach	「なら、写真撮らないか？」	!rule:pack:negf:reproach	keep	packs
 pack:negf:reproach-unwilled	田中はおらぬか！	has:있지 않는가!	keep	packs
 pack:negf:reproach-unwilled	いい加減にしないか！	!rule:pack:negf:reproach-unwilled	fix	packs
@@ -32,12 +32,24 @@ pack:negf:reproach	何か食べるものはないか！	!rule:pack:negf:reproach
 pack:negf:reproach	読むものはないか！	!rule:pack:negf:reproach	keep	packs
 pack:negf:reproach	雨が降らないか！	!rule:pack:negf:reproach	keep	packs
 pack:negf:reproach	扉が開かないか！	lacks:못해	keep	packs
-pack:negf:reproach-unwilled	気づかないか！	rule:pack:negf:reproach-unwilled=-	keep	packs
+pack:negf:reproach-unwilled	気づかんか！	rule:pack:negf:reproach-unwilled=-	keep	packs
 pack:negf:reproach	信じられないか！	has:믿을 수 없	keep	packs
 pack:negf:reproach	まだ見つからないか！	lacks:못해	keep	packs
 pack:negf:reproach	黙らんかァ！！	rule:pack:negf:reproach=1지 못해	fix	packs
-pack:negf:reproach	早く食べないか……！	rule:pack:negf:reproach=1지 못해	fix	packs
-pack:negf:reproach	来んか！	has:오지 못해!	fix	packs
+pack:negf:reproach	誰かおらんか！	rule:pack:negf:reproach-unwilled=-	keep	packs
 cx:neg-final-reproach:30	バスが来ないか！	!rule:cx:neg-final-reproach:30	keep	rewrites
 cx:neg-final-reproach:30	誰か来ないか！	!rule:cx:neg-final-reproach:30	keep	rewrites
 cx:neg-final-reproach:30	本当に来ないか！	!rule:cx:neg-final-reproach:30	keep	rewrites
+cx:neg-final-reproach:20	……以前、お前も言ってたが、冒険者に復帰しないか！	lacks:못해	keep	rewrites
+cx:neg-final-reproach:20	どうか俺と結婚してくれないか！	lacks:못해	keep	rewrites
+cx:neg-final-reproach:30	仲直りしないか！	!rule:cx:neg-final-reproach:30	keep	rewrites
+cx:neg-final-reproach:20	起きないか！	!rule:cx:neg-final-reproach:20	keep	rewrites
+pack:negf:reproach	やめんか！	has:그만두지 못해!	fix	packs
+pack:negf:reproach	妾の餌をださんか！	has:내지 못해!	fix	packs
+pack:negf:reproach	全く、散らかしたのなら片付けんか！	has:정리하지 못해!	fix	packs
+pack:negf:reproach	もっと簡単に教えんか！	has:가르치지 못해!	fix	packs
+cx:neg-final-reproach:20	こら、やめないか！	has:그만두지 못해!	fix	rewrites
+cx:neg-final-reproach:30	静かにしないかッ！	has:하지 못해!	fix	rewrites
+cx:neg-final-reproach:20	早く食べないか……！	has:먹지 못해……!	fix	rewrites
+pack:negf:reproach	来んか！	has:오지 못해!	fix	packs
+pack:negf:reproach-unwilled	気づかないか！	lacks:못해!	keep	packs

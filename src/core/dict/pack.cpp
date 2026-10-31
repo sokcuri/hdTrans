@@ -92,7 +92,7 @@ char PosDigit(std::string_view pos) {
 
 // The values a cue atom of these slots may take.
 bool KnownValue(std::string_view slot, std::string_view v) {
-    static constexpr std::string_view kForms[] = {"ta", "neg", "nja", "te", "te-request", "vol", "cop", "attr", "adv"};
+    static constexpr std::string_view kForms[] = {"ta", "neg", "old-neg", "nja", "te", "te-request", "vol", "cop", "attr", "adv"};
     static constexpr std::string_view kVoices[] = {"none", "passive", "potential", "respectful", "spontaneous"};
     static constexpr std::string_view kRegisters[] = {"polite", "casual", "plain"};
     auto in = [&](const auto& set) { return std::find(std::begin(set), std::end(set), v) != std::end(set); };

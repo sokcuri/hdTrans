@@ -10,6 +10,7 @@
 //= adverb.habit	Adverbs of habit and frequency: a ますか question with one of them asks what someone usually does, not an offer (毎日勉強しますか 매일 공부합니까).
 //= adverb.negative-polarity	Adverbs that need a negative after them (二度と, 決して, 到底): with an affirmative verb in a quotation before a sentence-final 思うな the な is the negative, a prohibition (二度と会えると思うな 두 번 다시 만날 수 있다고 생각하지 마).
 //= adverb.fact-question	Adverbs before a sentence-final negative question that ask whether something is so, not for an act (まだ来ない？ 아직 오지 않아?, 全然食べないの？): no invitation (spec MNG-7).
+//= adverb.urge	Adverbs that urge the listener to act at once or properly (早く, さっさと, いい加減に): a ないか！ after one in its sentence orders the act, 지 못해 (早くしないか！ 빨리 하지 못해!); without one or a scolding word a ないか！ may as well invite (仲直りしないか！; spec MNG-8).
 //= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
@@ -136,6 +137,7 @@
 //= ko-root.hada-state	Roots of Korean 하다 adjectives that the sound stage writes before する (しんと 고요): their している is the adjective (しんとしている 고요하다).
 //= ko-adjective.hada-state	Korean 하다 adjectives of a bearing or a state that the 하다 verb of a Japanese と word reads (堂々と 당당하다): their て form before いる is 하게, not 하고 (당당하게 있다).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
+//= ko-word.scold	The Korean the sound stage writes for a scolding interjection of word.scold before a comma (こら、 이봐): the word that carries it is that interjection (spec MNG-8).
 //= ko-noun.cp-danghada	Korean nouns of what one undergoes whose causative-passive (させられる after the Japanese noun) is the noun with 당하다 (해고당하다, 퇴학당하다), not the act one is made to do.
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
 //= ko-noun.passive-danghada	Korean nouns of 하다 whose passive is the noun with 당하다 (무시당하다).
@@ -1988,6 +1990,7 @@ ko-adjective.stem-end	탐탁
 ko-adjective.stem-end	점잖
 ko-adjective.stem-end	고프
 ko-adjective.stem-end	뻔하
+ko-word.scold	이봐
 
 ko-noun.passive-batda	사과
 ko-noun.passive-batda	축하
@@ -7484,6 +7487,19 @@ adverb.negative-polarity	少しも
 adverb.negative-polarity	ちっとも
 adverb.negative-polarity	微塵も
 adverb.negative-polarity	毛頭
+adverb.urge	早く
+adverb.urge	はやく
+adverb.urge	早う
+adverb.urge	さっさと
+adverb.urge	とっとと
+adverb.urge	いい加減に
+adverb.urge	いいかげんに
+adverb.urge	ちゃんと
+adverb.urge	しっかり
+adverb.urge	きちんと
+adverb.urge	すぐに
+adverb.urge	すぐ
+adverb.urge	今すぐ
 adverb.fact-question	まだ
 adverb.fact-question	未だ
 adverb.fact-question	もう
