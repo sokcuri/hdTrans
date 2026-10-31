@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "hd8/analyzer.h"
+#include "hd8/stage_repair.h"
 #include "ir/stages.h"
 #include "lattice.h"
 #include "model.h"
@@ -14,6 +15,7 @@ namespace hd08 {
 
 struct AnalyzerData {
   hd8::ana::Analyzer analyzer;
+  bool repair = false;  // EnableRepair: StageA reads noisy spans again (ja/repair.tsv)
 };
 
 namespace {
@@ -54,6 +56,7 @@ Token Convert(const hd8::ana::Analyzer& an, Doc& doc, const hd8::ana::Token& t) 
   o.nAlt = t.nAlt;
   if (!t.derive.empty()) o.derive = doc.I(t.derive);
   if (!t.removedBy.empty()) o.removedBy = doc.I(t.removedBy);
+  if (!t.repair.empty()) o.derive = doc.I(t.repair);  // a repaired reading: "rp.dakuten か→が"
   return o;
 }
 
@@ -90,7 +93,40 @@ AnalyzerData* LoadAnalyzer(const Config& cfg, std::string& err) {
     delete d;
     return nullptr;
   }
+  std::string rp;
+  if (ReadAll(dir + "/ja/repair.tsv", &rp) && !d->analyzer.LoadRepair(rp, &err)) {
+    err = "analyzer: " + err;
+    delete d;
+    return nullptr;
+  }
   return d;
+}
+
+bool EnableRepair(AnalyzerData* data) {
+  if (!data || !data->analyzer.HasRepair()) return false;
+  data->repair = true;
+  return true;
+}
+
+bool RepairEnabled(const AnalyzerData& data) { return data.repair; }
+
+bool RepairText(const AnalyzerData& data, std::string_view src, std::string* out, std::string* why) {
+  if (!data.repair) return false;
+  hd8::ana::Analysis r;
+  hd8::ana::Options opt;
+  opt.margins = false;
+  opt.repair = true;
+  opt.why = why != nullptr;
+  data.analyzer.Analyze(src, opt, &r, ThreadWorkspace());
+  if (r.repairs.empty()) return false;
+  *out = std::move(r.repaired);
+  if (why) {
+    *why += r.checks;
+    for (auto& x : r.repairs)
+      *why += "  repair " + x.op + " " + (x.from.empty() ? std::string("∅") : x.from) + "→" +
+              (x.to.empty() ? std::string("∅") : x.to) + " on " + r.toks[x.tok].surf + "\n";
+  }
+  return true;
 }
 
 void FreeAnalyzer(AnalyzerData* data) { delete data; }
@@ -114,6 +150,7 @@ void StageN(const AnalyzerData&, const Config&, Doc& doc, Line& line) {
 void StageA(const AnalyzerData& a, const Config&, Doc& doc, Line& line, const std::vector<ForcedSpan>&) {
   hd8::ana::Analysis r;
   hd8::ana::Options opt;
+  opt.repair = a.repair;
   a.analyzer.Analyze(line.src, opt, &r, ThreadWorkspace());
   line.toks.clear();
   line.alts.clear();

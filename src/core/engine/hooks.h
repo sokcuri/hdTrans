@@ -40,6 +40,9 @@ struct Hooks {
     // the doc argument of the other hooks, released by endDocument.
     void* (*beginDocument)(void* context, std::span<const std::string> lines) = nullptr;
     void (*endDocument)(void* context, void* doc) = nullptr;
+    // A, input repair: the line's text after the pre-filter → the same text with the spans the
+    // analyzer repaired replaced (only those); false keeps the text. It runs before normalization.
+    bool (*repair)(void* context, void* doc, int line, std::string_view text, std::string& out) = nullptr;
     // N: the line's text after the pre-filter → the normalised text the sound stage reads; false
     // keeps the 0.7.x normalization.
     bool (*normalize)(void* context, void* doc, int line, std::string_view text, std::string& out) = nullptr;

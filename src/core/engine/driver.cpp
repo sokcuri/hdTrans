@@ -955,6 +955,10 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     const RespellLookup respell{snap, ctx.lookup};
     const auto normalize = [&](std::string_view text) {
 #ifdef HDTRANS_POC08_HOOKS
+        std::string repaired;
+        if (const hooks::Run* run = options.hookRun; run != nullptr && run->hooks->repair != nullptr &&
+                                                      run->hooks->repair(run->hooks->context, run->doc, run->line, text, repaired))
+            text = repaired;
         if (const hooks::Run* run = options.hookRun; run != nullptr && run->hooks->normalize != nullptr) {
             std::string replaced;
             if (run->hooks->normalize(run->hooks->context, run->doc, run->line, text, replaced))

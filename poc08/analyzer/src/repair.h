@@ -34,6 +34,8 @@ struct RepairRules {
   struct Check {
     std::string id;
     bool pair = false;
+    bool trigger = true;  // false (valid.*): judges readings, never opens a span by itself
+    bool space = false;   // tests r.space: also fires across a space (other pair checks do not)
     Conj when;
     std::vector<Conj> require;  // empty: the reading is invalid whenever `when` holds
   };
@@ -46,10 +48,15 @@ struct RepairRules {
   std::vector<std::string> noEditUd;    // never edited by edit1 (names)
   std::vector<std::string> stopUd;      // spans read again stop at these
   std::vector<std::string> pauseUd;     // a space after these is a pause, not a stray
+  std::vector<std::string> phraseEndUd; // a space after these parts two phrases (そばに いて)
   std::u32string repeatMarks;           // marks whose repeat is dropped like a letter's
   std::u32string tripleFree;            // letters whose run of three is not noise
   std::u32string laughs;                // the same after a vowel or at the start (あははは)
   std::u32string notAfterSokuon;        // letters that never follow っ
+  std::u32string censor;                // marks that hide letters (ポケ〇ン): the katakana next to them stays
+  std::u32string softVowels;            // small vowels that make a foreign sound with the letter before (ふぉ)
+  std::u32string voicedWords;           // one-letter words a restored dakuten may make (が だ で ぞ ど ぜ)
+  std::u32string soundEnd;              // letters after a repeated letter that make it a sound word (とてててと)
 
   int32_t arcBudget = 6;     // highest repair cost of one word
   int32_t windowBudget = 12; // highest repair cost of one span

@@ -2,6 +2,8 @@
 // The bridge between the 0.7.x engine and the 0.8 components (PIVOT): it implements the hook
 // points of src/core/engine/hooks.h with the poc08 stages and keeps the side IR of every
 // sentence for --why and --stages.
+//   repair     the analyzer reads noisy spans again (ja/repair.tsv) and 0.7.x reads the line with only
+//              those spans replaced;
 //   normalize  the analyzer's N replaces the 0.7.x normalization;
 //   segment    the analyzer's tokens decide where 0.7.x words may end;
 //   generate   0.7.x's resolved sentence is lifted to kir (lift.h), the deciders (D) overwrite
@@ -27,12 +29,13 @@ namespace hd08::bridge {
 struct Options {
     Config cfg;
     bool normalize = false, segment = false, generate = false, decide = false, reselect = false;
+    bool repair = false;  // input repair (ja/repair.tsv) before 0.7.x reads a line
     bool rule = false;    // 0.8-rule: segment plus the retrofit on dialogue (bridge/rule.h; run by the CLI)
     bool sideIr = false;  // keep the side IR records (--why, --stages); costs time
     bool lift = false;    // lift every sentence even when no part needs it (to count the misses)
 };
 
-// Reads a --poc08 list: "all", "none", or names from normalize, segment, generate, decide.
+// Reads a --poc08 list: "all", "none", or names from repair, normalize, segment, generate, decide, reselect, rule.
 bool ParseParts(std::string_view list, Options& out, std::string& err);
 
 struct Counts {
@@ -42,6 +45,7 @@ struct Counts {
     uint64_t liftedItems = 0;
     uint64_t failedItems = 0;    // items the lift could not express (lift.tsv misses)
     uint64_t normalized = 0;     // lines the analyzer normalised differently from the input
+    uint64_t repaired = 0;       // lines (or pieces) 0.7.x read with repaired spans
     uint64_t segmentedChunks = 0;
     uint64_t refits = 0;         // 0.7.x words that gave way to the segmentation (counted by fits)
     uint64_t points = 0;         // reselect: decider points read

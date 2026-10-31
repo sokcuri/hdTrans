@@ -19,11 +19,11 @@ namespace {
 
 // ---- table ------------------------------------------------------------------------------------------
 enum Field : uint8_t { fUd, fCtype, fCform, fLemma, fSurf, fPos, fArc, fDerive, fScript, fLemmaScript, fLen,
-                       fElong, fPrevCc, fNextCc, fSpace, fTriple, fSokuon, fFold, fFirstKata, fLastKata, fSame,
-                       fCount };
+                       fElong, fPrevCc, fNextCc, fSpace, fTriple, fSokuon, fFold, fFirstKata, fLastKata, fWordRun,
+                       fLead, fSame, fCount };
 constexpr std::string_view kFields[] = {"ud",  "ctype", "cform",  "lemma",       "surf", "pos",
                                         "arc", "derive", "script", "lemmascript", "len",  "elong",
-                                        "prevcc", "nextcc", "space", "triple", "sokuon", "fold", "firstkata", "lastkata",
+                                        "prevcc", "nextcc", "space", "triple", "sokuon", "fold", "firstkata", "lastkata", "wordrun", "lead",
                                         "same"};
 constexpr std::string_view kOps[] = {"kata-fold", "small-big", "elong", "stutter", "space", "dakuten", "swap", "edit1"};
 
@@ -78,6 +78,7 @@ bool IsKana(char32_t c) { return IsHiragana(c) || IsKatakana(c); }
 bool IsLongMark(char32_t c) { return c == U'ー' || c == U'〜' || c == U'～'; }
 bool IsSokuon(char32_t c) { return c == U'っ' || c == U'ッ'; }
 bool IsKataLetter(char32_t c) { return c >= 0x30A1 && c <= 0x30F6; }
+bool IsSmall(char32_t c);
 char32_t Fold(char32_t c) { return IsKataLetter(c) ? c - 0x60 : c; }
 
 // Vowel of a kana (1..5), 0 if none.
@@ -107,6 +108,11 @@ char32_t SmallBig(char32_t c) {
   return 0;
 }
 
+bool IsSmall(char32_t c) {
+  static constexpr std::u32string_view kSmall = U"ぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮ";
+  return kSmall.find(c) != std::u32string_view::npos;
+}
+
 // Voiced and half-voiced forms of an unvoiced kana (0 when none).
 char32_t Voiced(char32_t c) {
   bool hira = IsHiragana(c);
@@ -126,7 +132,7 @@ char32_t HalfVoiced(char32_t c) {
 }
 
 std::string_view CcName(char32_t c) {
-  if (c == U'ー' || c == U'〜' || c == U'～') return "mark";
+  if (IsLongMark(c) || IsSokuon(c)) return "mark";
   if (IsHiragana(c)) return "hira";
   if (IsKatakana(c)) return "kata";
   if (IsKanji(c)) return "kanji";
@@ -146,25 +152,30 @@ struct Info {
   bool sokuon = false;   // keeps a っ before a letter that never follows it (じっゃ, 奪いっに, うっい)
   std::string_view fold = "none";  // katakana letters of the span read as hiragana: none, part, all
   bool firstKata = false, lastKata = false;  // the span's first and last letters are katakana as written
+  bool lead = false;     // two letters come right before the span (or before its run of marks)
+  bool wordRun = false;  // the span is a whole katakana run that the dictionary has as written (バカ, ヘン)
   int len = 0;
   bool content = false;  // not a function word, for the swap and fold conditions
 };
 
 std::string_view ScriptOf(std::u32string_view s) {
-  bool hira = false, kata = false, kanji = false, sym = false, other = false, mixed = false;
+  bool hira = false, kata = false, kanji = false, sym = false, other = false, mixed = false, marks = !s.empty();
   for (char32_t c : s) {
+    if (!IsLongMark(c) && !IsSokuon(c)) marks = false;
     if (IsHiragana(c)) hira = true;
     else if (c == U'ー') {
     } else if (IsKatakana(c)) {
-      if (hira) mixed = true;
+      // a big katakana letter after hiragana: れル, すグ (あッ, がぁッ are spoken marks)
+      if (hira && !IsSmall(c)) mixed = true;
       kata = true;
     } else if (IsKanji(c)) kanji = true;
     else if (CcName(c) == "other") other = true;
     else sym = true;
   }
+  if (marks) return "mark";
   if (mixed) return "mixed";
   int kinds = hira + kata + kanji + other + sym;
-  if (kinds == 0) return s.empty() ? "sym" : "kata";  // ー alone
+  if (kinds == 0) return s.empty() ? "sym" : "kata";
   if (kinds > 1) return "other";
   return hira ? "hira" : kata ? "kata" : kanji ? "kanji" : sym ? "sym" : "other";
 }
@@ -226,11 +237,21 @@ struct Facts {
   const std::vector<char32_t>& core;
   bool layout = false;
   const std::vector<uint8_t>* single = nullptr;  // a single space before core k
+  const std::vector<uint32_t>* wordRun = nullptr;  // begin << 16 | end of the katakana word run over core k
   const std::vector<uint8_t>* triple = nullptr;  // 1: the third letter of a run of one letter in running text;
                                                  // 2: a っ before a letter that never follows it
 
   void Around(Info* x, uint32_t b, uint32_t e) const {
     size_t n = core.size();
+    bool marks = e > b;
+    for (uint32_t k = b; k < e; ++k) marks = marks && (IsLongMark(core[k]) || IsSokuon(core[k]));
+    if (marks) {
+      // a token of marks only (ー, 〜, っ) is judged by the letters around its whole run
+      while (b > 0 && !ws.spaceBefore[b] && (IsLongMark(core[b - 1]) || IsSokuon(core[b - 1]))) --b;
+      while (e < n && !ws.spaceBefore[e] && (IsLongMark(core[e]) || IsSokuon(core[e]))) ++e;
+    }
+    auto letter = [&](uint32_t k) { return IsHiragana(core[k]) || IsKatakana(core[k]) || IsKanji(core[k]); };
+    x->lead = b >= 2 && !ws.spaceBefore[b] && !ws.spaceBefore[b - 1] && letter(b - 1) && letter(b - 2);
     x->prevCc = b == 0 || ws.spaceBefore[b] ? std::string_view("edge") : CcName(core[b - 1]);
     x->nextCc = e >= n || ws.spaceBefore[e] ? std::string_view("edge") : CcName(core[e]);
     x->space = b > 0 && ws.spaceBefore[b] && !layout && (!single || (*single)[b]);
@@ -254,6 +275,8 @@ struct Facts {
     if (ra && x.space)
       for (auto& e : ra->edits)
         if (e.spaceOnly && e.pos == a.b) x.space = false;
+    if (wordRun && (*wordRun)[a.b] != UINT32_MAX)
+      x.wordRun = ((*wordRun)[a.b] >> 16) == a.b && ((*wordRun)[a.b] & 0xFFFF) == a.e;
     x.firstKata = IsKatakana(core[a.b]) && core[a.b] != U'ー';
     x.lastKata = IsKatakana(core[a.e - 1]);
     if (ra) {
@@ -339,6 +362,8 @@ std::string_view FieldOf(const Info& x, uint8_t f, std::string& buf) {
     case fFold: return x.fold;
     case fFirstKata: return x.firstKata ? "1" : "0";
     case fLastKata: return x.lastKata ? "1" : "0";
+    case fWordRun: return x.wordRun ? "1" : "0";
+    case fLead: return x.lead ? "1" : "0";
     default: return {};
   }
 }
@@ -374,20 +399,20 @@ bool Fires(const RepairRules::Check& c, const Info& l, const Info* r) {
   return true;
 }
 
-int TokBad(const RepairRules& R, const Info& t, std::string* why) {
+int TokBad(const RepairRules& R, const Info& t, std::string* why, bool triggersOnly = false) {
   int n = 0;
   for (auto& c : R.tok)
-    if (Fires(c, t, nullptr)) {
+    if ((!triggersOnly || c.trigger) && Fires(c, t, nullptr)) {
       ++n;
       if (why) *why += " " + c.id + "(" + t.surf + ")";
     }
   return n;
 }
 
-int PairBad(const RepairRules& R, const Info& l, const Info& r, std::string* why) {
+int PairBad(const RepairRules& R, const Info& l, const Info& r, std::string* why, bool triggersOnly = false) {
   int n = 0;
   for (auto& c : R.pair)
-    if (Fires(c, l, &r)) {
+    if ((!triggersOnly || c.trigger) && (c.space || !r.space) && Fires(c, l, &r)) {
       ++n;
       if (why) *why += " " + c.id + "(" + l.surf + "|" + r.surf + ")";
     }
@@ -420,6 +445,9 @@ struct Gen {
   bool layout = false;  // spaces separate words in this line: none is joined
   const std::vector<uint8_t>* single = nullptr;  // a single space before core k (only those are joined)
   const std::vector<uint32_t>* wordRun = nullptr; // begin << 16 | end of the katakana word run over core k
+  const std::vector<uint8_t>* longKata = nullptr; // letters of a katakana run of three letters or more
+  const std::vector<uint8_t>* unknown = nullptr;  // letters of an unknown word of the current reading
+  bool Unknown(uint32_t j) const { return unknown && j < unknown->size() && (*unknown)[j]; }
 
   uint32_t start = 0;
   std::u32string prod;
@@ -488,10 +516,17 @@ struct Gen {
         Pop(add);
       });
     };
-    if (IsLongMark(c)) try1(RepairOp::elong);
-    else if (IsSokuon(c) && j + 1 < core.size()) try1(RepairOp::elong);
-    else if (IsVowelLetter(c) && Vowel(c) == Vowel(prod.back())) try1(RepairOp::elong);
-    if (j > 0 && c == core[j - 1] && (IsKana(c) || IsKanji(c) || R.repeatMarks.find(c) != std::u32string::npos))
+    bool inLong = longKata && (*longKata)[j];
+    bool doubled = (j > 0 && IsLongMark(core[j - 1])) || (j + 1 < core.size() && IsLongMark(core[j + 1]));
+    if (IsLongMark(c)) {
+      if (!inLong || doubled) try1(RepairOp::elong);
+    } else if (inLong) {
+    } else if (IsSokuon(c) && j + 1 < core.size()) {
+      try1(RepairOp::elong);
+    } else if (IsHiragana(c) && IsVowelLetter(c) && Vowel(c) == Vowel(prod.back())) {
+      try1(RepairOp::elong);
+    }
+    if (j > 0 && c == core[j - 1] && !inLong && (IsKana(c) || IsKanji(c) || R.repeatMarks.find(c) != std::u32string::npos))
       try1(RepairOp::stutter);
   }
 
@@ -502,16 +537,20 @@ struct Gen {
     AtSpace(j, [&] {
       char32_t c = core[j];
       fn(c, j + 1);
+      if (longKata && (*longKata)[j]) return;
+      bool digraph = IsKatakana(c) && ((j + 1 < core.size() && (core[j + 1] == U'ャ' || core[j + 1] == U'ュ' || core[j + 1] == U'ョ')) ||
+                                       c == U'ャ' || c == U'ュ' || c == U'ョ');
       auto variants = [&](char32_t base, bool folded) {
-        if (On(RepairOp::smallBig))
-          if (char32_t s = SmallBig(base)) Alt(j, s, RepairOp::smallBig, folded, fn);
-        if (On(RepairOp::dakuten)) {
+        if (On(RepairOp::smallBig))  // big read as small (だつた → だった); a small kana is never read big
+          if (char32_t s = SmallBig(base); s && IsSmall(s)) Alt(j, s, RepairOp::smallBig, folded, fn);
+        bool foreign = j + 1 < core.size() && R.softVowels.find(core[j + 1]) != std::u32string::npos;  // ふぉ, てぃ
+        if (On(RepairOp::dakuten) && !foreign) {
           if (char32_t v = Voiced(base)) Alt(j, v, RepairOp::dakuten, folded, fn);
           if (char32_t v = HalfVoiced(base)) Alt(j, v, RepairOp::dakuten, folded, fn);
         }
       };
       variants(c, false);
-      if (On(RepairOp::kataFold) && IsKataLetter(c)) {
+      if (On(RepairOp::kataFold) && IsKataLetter(c) && !digraph) {
         Alt(j, Fold(c), RepairOp::kataFold, true, fn);
         variants(Fold(c), true);
       }
@@ -568,7 +607,7 @@ struct Gen {
       prod.pop_back();
     });
     // one edit in a kana word: substitute, insert or drop a kana
-    if (On(RepairOp::edit1) && !edited && node && !prod.empty()) {
+    if (On(RepairOp::edit1) && !edited && node && !prod.empty() && Unknown(j)) {
       const auto& nd = m.trie.nodes[node];
       for (uint32_t k = nd.child; k < nd.child + nd.nChild; ++k) {
         char32_t x = m.trie.edgeChar[k];
@@ -616,7 +655,7 @@ struct Gen {
       Suffix(g, f, k + 1, j2);
       prod.pop_back();
     });
-    if (On(RepairOp::edit1) && !edited && !prod.empty() && IsKana(t)) {
+    if (On(RepairOp::edit1) && !edited && !prod.empty() && IsKana(t) && Unknown(j)) {
       if (j < hi && IsKana(core[j]) && core[j] != t) EditStep(j, t, 1, [&](uint32_t j2) { Suffix(g, f, k + 1, j2); });
       EditStep(j, t, 0, [&](uint32_t j2) { Suffix(g, f, k + 1, j2); });
       if (j < hi && IsKana(core[j])) EditStep(j, 0, 1, [&](uint32_t j2) { Suffix(g, f, k, j2); });
@@ -657,6 +696,17 @@ struct Gen {
     return false;
   }
 
+  // every folded letter is a katakana run of one letter (音ガした, 親ノ過剰): longer runs read as words
+  bool OneLetterRuns() const {
+    for (auto& e : edits) {
+      if (e.spaceOnly || e.len != 1 || !IsKataLetter(core[e.pos])) continue;
+      bool before = e.pos > 0 && !ws.spaceBefore[e.pos] && IsKatakana(core[e.pos - 1]);
+      bool after = e.pos + 1u < core.size() && !ws.spaceBefore[e.pos + 1] && IsKatakana(core[e.pos + 1]);
+      if (before || after) return false;
+    }
+    return true;
+  }
+
   bool AllHiragana(uint32_t b, uint32_t e) const {
     for (uint32_t k = b; k < e; ++k)
       if (!IsHiragana(core[k])) return false;
@@ -677,6 +727,11 @@ struct Gen {
     bool joined = false, other = folds > 0;
     for (auto& e : edits) (e.spaceOnly ? joined : other) = true;
     if (joined && other) return;  // a space is joined only inside an otherwise exact word
+    // a restored dakuten makes a one-letter word only of the voiced function words (か → が, た → だ);
+    // は stays は
+    if (prod.size() == 1)
+      for (auto& e : edits)
+        if (e.op == RepairOp::dakuten && R.voicedWords.find(prod[0]) == std::u32string::npos) return;
     bool touches = touchE > touchB && start < touchE && j > touchB;
     if (edits.empty() && !touches) return;  // the plain word is in the lattice already
     if (total > R.arcBudget || j <= start) return;
@@ -685,7 +740,12 @@ struct Gen {
     std::string_view ud = m.udNames[m.classes[pf.cls].ud];
     if (folds) {
       // katakana read as hiragana: function words, inflections, or a word spelt in both scripts
-      bool ok = (HasPrefix(R.functionUd, ud) && InText(start, j)) || foldsStem == 0 || SpanMixed(start, j);
+      // a one-letter katakana particle or auxiliary right after a kanji (音ガした, 親ノ過剰, 部屋デ), or the
+      // katakana inflection of a word with a kanji stem (考エて)
+      bool afterWord = start > 0 && !ws.spaceBefore[start] && IsKanji(core[start - 1]);
+      bool ok = (HasPrefix(R.functionUd, ud) && afterWord && OneLetterRuns()) || (foldsStem == 0 && IsKanji(core[start]));
+      // a katakana ending before punctuation is a spelling (見ロ」, だヨ。), not noise
+      if (ok && IsKataLetter(core[j - 1]) && (j >= core.size() || ws.spaceBefore[j] || CcName(core[j]) == "sym")) ok = false;
       if (!ok) return;
       // a katakana run that is a word as written is read as hiragana only as one particle or auxiliary
       // (カラ → から), never split (ダメ is not だ + め) nor as another word (サル is not さる)
@@ -701,6 +761,8 @@ struct Gen {
       int minLen = R.ops[static_cast<size_t>(RepairOp::edit1)].minLen;
       if (static_cast<int>(prod.size()) < minLen || HasPrefix(R.noEditUd, ud)) return;
       if (!AllHiragana(start, j)) return;  // never on katakana words: names and loanwords
+      for (uint32_t k = start; k < j; ++k)
+        if (IsSmall(core[k])) return;  // nor on sound words (びゅるっ)
       for (char32_t c : prod)
         if (!IsKana(c)) return;
     }
@@ -814,6 +876,38 @@ class Reader {
         for (uint32_t x = l; x < r; ++x) wordRun_[x] = l << 16 | r;
       l = r;
     }
+    // katakana runs of three letters or more (ー not counted) are names and loanwords: no letter of
+    // theirs is read otherwise (タナトス, フィーナ, パタパタ); only a doubled ー may drop (ドーーア)
+    longKata_.assign(core.size() + 1, 0);
+    for (uint32_t l = 0; l < core.size();) {
+      if (!IsKatakana(core[l])) {
+        ++l;
+        continue;
+      }
+      uint32_t r = l, letters = 0;
+      while (r < core.size() && (r == l || !ws_->spaceBefore[r]) && IsKatakana(core[r])) letters += core[r++] != U'ー';
+      bool small = false;
+      for (uint32_t x = l; x < r; ++x) small = small || IsSmall(core[x]);
+      bool spoken = IsLongMark(core[l]) || IsSokuon(core[l]);
+      bool censored = (l > 0 && R_.censor.find(core[l - 1]) != std::u32string::npos) ||
+                      (r < core.size() && R_.censor.find(core[r]) != std::u32string::npos);
+      if (letters >= 3 || small || spoken || censored)
+        for (uint32_t x = l; x < r; ++x) longKata_[x] = 1;
+      l = r;
+    }
+    // unknown words of the current reading; a katakana run read as one unknown word is a name or a loanword
+    unknown_.assign(core.size() + 1, 0);
+    for (uint32_t ai : ws_->path) {
+      const Arc& a = ws_->arcs[ai];
+      if (a.kind != ArcKind::unk) continue;
+      bool kata = a.e - a.b >= 2;
+      for (uint32_t x = a.b; x < a.e; ++x) {
+        unknown_[x] = 1;
+        kata = kata && IsKatakana(core[x]);
+      }
+      if (kata)
+        for (uint32_t x = a.b; x < a.e; ++x) longKata_[x] = 1;
+    }
     // stray spaces are single: a run of two or more is layout (＊　＊ 　＊)
     single_.assign(core.size() + 1, 0);
     for (size_t k = 1; k < core.size(); ++k)
@@ -831,7 +925,14 @@ class Reader {
       if (kana && R_.tripleFree.find(c) != std::u32string::npos) continue;
       bool laugh = R_.laughs.find(c) != std::u32string::npos;
       bool atStart = p == 0 || ws_->spaceBefore[p] || !(IsHiragana(core[p - 1]) || IsKanji(core[p - 1]) || IsKatakana(core[p - 1]));
-      if (laugh && (atStart || IsVowelLetter(core[p - 1]))) continue;
+      if (laugh && (atStart || IsVowelLetter(core[p - 1]) || IsSokuon(core[p - 1]))) continue;  // ぶっははは
+      if (atStart && kana) continue;  // す、すすすみません; ななな なんで; だだだ、駄目: a stutter that opens a phrase
+      size_t q = p;
+      while (q < core.size() && core[q] == c) ++q;
+      // before punctuation or the end it is a cry (いたたたた！, うぬぬぬ……)
+      if (q >= core.size() || ws_->spaceBefore[q] || !(IsHiragana(core[q]) || IsKatakana(core[q]) || IsKanji(core[q])))
+        continue;
+      if (q < core.size() && (IsSokuon(core[q]) || IsLongMark(core[q]) || R_.soundEnd.find(core[q]) != std::u32string::npos)) continue;  // いたたたたっ, とてててと
       triple_[p + 2] = 1;
     }
     // っ before a vowel, a small kana, ん, ー, っ or a letter of the な, ま, や, ら and わ rows: no word is
@@ -855,16 +956,19 @@ class Reader {
     const auto& core = ws_->core;
     auto jp = [](char32_t c) { return IsHiragana(c) || IsKatakana(c) || IsKanji(c); };
     std::vector<uint8_t> after(n + 1, 0);  // the current reading ends an interjection or a final particle here
+    std::vector<uint8_t> afterFunction(n + 1, 0);  // … a particle or an auxiliary
     for (uint32_t ai : ws_->path) {
       const Arc& a = ws_->arcs[ai];
       uint16_t cls = a.kind == ArcKind::lex ? m_.pforms[a.form].cls : a.lcls;
       if (a.kind == ArcKind::longUnit) continue;
       std::string_view ud = m_.udNames[m_.classes[cls].ud];
       if (HasPrefix(R_.pauseUd, ud) && a.e - a.b >= 2) after[a.e] = 1;
+      if (HasPrefix(R_.phraseEndUd, ud)) afterFunction[a.e] = 1;
     }
     for (uint32_t k = 1; k < n; ++k) {
       if (!ws_->spaceBefore[k] || !single_[k] || ws_->joinable[k] || !jp(core[k - 1]) || !jp(core[k])) continue;
       if (after[k]) continue;  // ああ あっし, よ そして: a pause after an interjection or a final particle
+      if (afterFunction[k]) continue;  // そばに いて: a space after a particle or an auxiliary parts phrases
       Workspace tmp;
       for (uint32_t x = 0; x < ws_->nchars.size(); ++x)
         if (x <= ws_->coreN[k - 1] || x >= ws_->coreN[k]) tmp.nchars.push_back(ws_->nchars[x]);
@@ -873,7 +977,7 @@ class Reader {
       // a spaced repeat or stutter (はい はい, ハァ ハァ, ど どうした) keeps its space
       for (uint32_t ai : tmp.path) {
         const Arc& a = tmp.arcs[ai];
-        if (a.b >= k || a.e <= k || (a.kind != ArcKind::lex && a.kind != ArcKind::longUnit)) continue;
+        if (a.b >= k || a.e <= k || a.kind != ArcKind::lex) continue;  // a long unit is words (もう ちょっと)
         if (k - a.b <= a.e - k && std::equal(core.begin() + a.b, core.begin() + k, core.begin() + k)) continue;
         bool one = true;  // one letter repeated (あああ)
         for (uint32_t x = a.b + 1; x < a.e; ++x) one = one && core[x] == core[a.b];
@@ -882,6 +986,8 @@ class Reader {
       }
     }
   }
+
+  bool LongKata(uint32_t p) const { return p < longKata_.size() && longKata_[p]; }
 
   // A kept space a dictionary word spans, before core position p (not at the edge of the span read).
   int SpaceBad(uint32_t p, const RepairArc* next) const {
@@ -896,7 +1002,7 @@ class Reader {
   void Read(const Window& w, const std::vector<char32_t>& core, int32_t swapAt, Best* best) {
     std::vector<LArc> arcs;
     std::vector<RepairArc> rarcs;
-    Facts facts{m_, R_, *ws_, core, layout_, &single_, &triple_};
+    Facts facts{m_, R_, *ws_, core, layout_, &single_, &wordRun_, &triple_};
     const auto& A = ws_->arcs;
     uint32_t tb = swapAt >= 0 ? static_cast<uint32_t>(swapAt) : 0, te = swapAt >= 0 ? tb + 2 : 0;
     for (uint32_t pos = w.b; pos < w.e; ++pos)
@@ -914,6 +1020,8 @@ class Reader {
     gen.layout = layout_;
     gen.single = &single_;
     gen.wordRun = &wordRun_;
+    gen.longKata = &longKata_;
+    gen.unknown = &unknown_;
     for (uint32_t i = w.b; i < w.e; ++i) gen.From(i);
     for (auto& la : arcs) {
       la.info = facts.Of(la.arc, la.rarc >= 0 ? &rarcs[static_cast<size_t>(la.rarc)] : nullptr);
@@ -990,7 +1098,7 @@ class Reader {
 
   // The current reading of the window, scored the same way.
   Key Score(const Window& w, const std::vector<uint32_t>& pathArcs, std::string* why) const {
-    Facts facts{m_, R_, *ws_, ws_->core, layout_, &single_, &triple_};
+    Facts facts{m_, R_, *ws_, ws_->core, layout_, &single_, &wordRun_, &triple_};
     const auto& A = ws_->arcs;
     Info prev = Edge(w.left, facts);
     Key k;
@@ -1010,21 +1118,21 @@ class Reader {
 
   // Which path arcs a check fires on (tokens and transitions, the right edge included).
   void Marks(std::vector<uint8_t>* mark) const {
-    Facts facts{m_, R_, *ws_, ws_->core, layout_, &single_, &triple_};
+    Facts facts{m_, R_, *ws_, ws_->core, layout_, &single_, &wordRun_, &triple_};
     const auto& A = ws_->arcs;
     const auto& P = ws_->path;
     mark->assign(P.size(), 0);
     Info prev;
     for (size_t i = 0; i < P.size(); ++i) {
       Info x = facts.Of(A[P[i]], nullptr);
-      if (TokBad(R_, x, nullptr)) (*mark)[i] = 1;
-      if (PairBad(R_, prev, x, nullptr) || (i > 0 && SpaceBad(A[P[i]].b, nullptr))) {
+      if (TokBad(R_, x, nullptr, true)) (*mark)[i] = 1;
+      if (PairBad(R_, prev, x, nullptr, true) || (i > 0 && SpaceBad(A[P[i]].b, nullptr))) {
         (*mark)[i] = 1;
         if (i > 0) (*mark)[i - 1] = 1;
       }
       prev = std::move(x);
     }
-    if (!P.empty() && PairBad(R_, prev, Info{}, nullptr)) mark->back() = 1;
+    if (!P.empty() && PairBad(R_, prev, Info{}, nullptr, true)) mark->back() = 1;
   }
 
  private:
@@ -1066,6 +1174,7 @@ class Reader {
   Options opt_;
   std::vector<uint8_t> cross_, single_, triple_;
   std::vector<uint32_t> wordRun_;
+  std::vector<uint8_t> longKata_, unknown_;
   bool layout_ = false;
 };
 
@@ -1106,6 +1215,11 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
       else if (name == "no-edit-ud") out->noEditUd = list;
       else if (name == "stop-ud") out->stopUd = list;
       else if (name == "pause-ud") out->pauseUd = list;
+      else if (name == "phrase-end-ud") out->phraseEndUd = list;
+      else if (name == "censor-marks") out->censor = letters;
+      else if (name == "sound-end") out->soundEnd = letters;
+      else if (name == "voiced-words") out->voicedWords = letters;
+      else if (name == "soft-vowels") out->softVowels = letters;
       else if (name == "repeat-marks") out->repeatMarks = letters;
       else if (name == "triple-free") out->tripleFree = letters;
       else if (name == "laughs") out->laughs = letters;
@@ -1120,10 +1234,11 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
       out->spaceInWord = id;
       continue;
     }
-    if (kind == "bad.tok" || kind == "bad.pair") {
+    if (kind == "bad.tok" || kind == "bad.pair" || kind == "valid.tok" || kind == "valid.pair") {
       RepairRules::Check c;
       c.id = id;
-      c.pair = kind == "bad.pair";
+      c.pair = kind == "bad.pair" || kind == "valid.pair";
+      c.trigger = kind[0] == 'b';
       std::string ce;
       if (!ParseConj(f[4], c.pair, &c.when, &ce)) {
         *err = "repair.tsv " + id + ": " + ce;
@@ -1144,6 +1259,7 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
           s = p + 2;
         }
       }
+      for (auto& a : c.when) c.space = c.space || a.field == fSpace;
       (c.pair ? out->pair : out->tok).push_back(std::move(c));
       continue;
     }
@@ -1217,7 +1333,9 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
     if (R.ops[static_cast<size_t>(RepairOp::swap)].on && best.key.bad > 0) {
       std::vector<char32_t> sw = ws->core;
       for (uint32_t p = w.b; p + 1 < w.e; ++p) {
-        if (!IsKana(sw[p]) || !IsKana(sw[p + 1]) || sw[p] == sw[p + 1] || ws->spaceBefore[p + 1]) continue;
+        auto letter = [](char32_t c) { return IsKana(c) && !IsLongMark(c) && !IsSmall(c); };
+        if (!letter(sw[p]) || !letter(sw[p + 1]) || sw[p] == sw[p + 1] || ws->spaceBefore[p + 1]) continue;
+        if (IsHiragana(sw[p]) != IsHiragana(sw[p + 1]) || reader.LongKata(p) || reader.LongKata(p + 1)) continue;
         if (!hot[p] && !hot[p + 1]) continue;
         std::swap(sw[p], sw[p + 1]);
         reader.Read(w, sw, static_cast<int32_t>(p), &best);

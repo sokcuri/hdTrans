@@ -1,5 +1,7 @@
 #include "bridge.h"
 
+#include "hd8/stage_repair.h"
+
 #include <algorithm>
 #include <atomic>
 #include <map>
@@ -53,7 +55,7 @@ struct Bridge {
     std::shared_ptr<const RuleData> rule;
     hdTrans::hooks::Hooks hooks;
     bool analyzerReal = false, generatorReal = false, transferReal = false;
-    std::atomic<uint64_t> sentences{0}, generated{0}, kept{0}, liftedItems{0}, failedItems{0}, normalized{0},
+    std::atomic<uint64_t> sentences{0}, generated{0}, kept{0}, liftedItems{0}, failedItems{0}, normalized{0}, repaired{0},
         segmentedChunks{0}, refits{0}, points{0}, overrides{0}, reselected{0};
     std::mutex mu;  // guards the fields below
     std::string why, stages, reselections;
@@ -125,6 +127,18 @@ void EndDocument(void* context, void* doc) {
     b.why += why;
     b.stages += stages;
     delete ds;
+}
+
+bool Repair(void* context, void*, int line, std::string_view text, std::string& out) {
+    auto& b = *static_cast<Bridge*>(context);
+    std::string why;
+    if (!RepairText(*b.engine.analyzer, text, &out, b.opt.sideIr ? &why : nullptr)) return false;
+    b.repaired++;
+    if (b.opt.sideIr) {
+        std::lock_guard<std::mutex> lock(b.mu);
+        b.why += "repair line " + std::to_string(line + 1) + ": " + std::string(text) + "\n" + why;
+    }
+    return true;
 }
 
 bool Normalize(void* context, void*, int, std::string_view text, std::string& out) {
@@ -353,7 +367,7 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
 }  // namespace
 
 bool ParseParts(std::string_view list, Options& out, std::string& err) {
-    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = false;
+    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = out.repair = false;
     if (list == "none") return true;
     if (list == "all") {
         out.normalize = out.segment = out.generate = out.decide = true;
@@ -364,14 +378,16 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
         size_t comma = list.find(',', at);
         if (comma == std::string_view::npos) comma = list.size();
         const std::string_view part = list.substr(at, comma - at);
-        if (part == "normalize") out.normalize = true;
+        if (part == "repair") out.repair = true;
+        else if (part == "normalize") out.normalize = true;
         else if (part == "segment") out.segment = true;
         else if (part == "generate") out.generate = true;
         else if (part == "decide") out.decide = true;
         else if (part == "reselect") out.reselect = true;
         else if (part == "rule") out.rule = out.segment = true;
         else {
-            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, all, none)";
+            err = "unknown part " + std::string(part) +
+                  " (repair, normalize, segment, generate, decide, reselect, rule, all, none)";
             return false;
         }
         at = comma + 1;
@@ -407,6 +423,8 @@ Bridge* Create(const Options& options, std::string& err) {
     b->hooks.beginDocument = BeginDocument;
     b->hooks.endDocument = EndDocument;
     if (b->opt.normalize) b->hooks.normalize = Normalize;
+    b->opt.repair = options.repair && b->analyzerReal && EnableRepair(b->engine.analyzer);
+    if (b->opt.repair) b->hooks.repair = Repair;
     if (b->opt.segment) {
         b->hooks.beginChunk = BeginChunk;
         b->hooks.endChunk = EndChunk;
@@ -431,6 +449,7 @@ std::string ActiveParts(const Bridge* b) {
     auto add = [&s](bool on, const char* name) {
         if (on) s += s.empty() ? name : std::string(",") + name;
     };
+    add(b->opt.repair, "repair");
     add(b->opt.normalize, "normalize");
     add(b->opt.segment, "segment");
     add(b->opt.generate, "generate");
@@ -448,6 +467,7 @@ Counts CountsOf(const Bridge* b) {
     c.liftedItems = b->liftedItems;
     c.failedItems = b->failedItems;
     c.normalized = b->normalized;
+    c.repaired = b->repaired;
     c.segmentedChunks = b->segmentedChunks;
     c.refits = b->refits;
     c.points = b->points;
