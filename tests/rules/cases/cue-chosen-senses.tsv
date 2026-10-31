@@ -34,7 +34,6 @@ pack:cue-chosen-senses:14	飯を食い終わった俺たちに、ユナは冷や
 pack:cue-chosen-senses:14	仕事では無く誰かに料理を振る舞うのはいつぶりだろう…	has:요리를 대접하는	fix	packs
 pack:cue-chosen-senses:14	王女らしく振る舞うのがバカらしくなっちゃった。	has:왕녀답게 행동하는	keep	packs
 pack:cue-chosen-senses:17	現在わたしはなぜか、伯爵家ご令嬢たちのテーブルに混ざって、紅茶を振る舞われている。	has:홍차를 대접받고 있다	fix	packs
-pack:cue-chosen-senses:17	ハインリヒたちは建物の食堂に連れられ、食事を振る舞われた。	rule:pack:cue-chosen-senses:17=passive:대접받다	fix	packs
 pack:cue-chosen-senses:18	カラフルな上着とズボンに、頭には三角帽を被っている。	has:삼각모를 쓰고 있다	fix	packs
 pack:cue-chosen-senses:18	溜息をついて、王子の仮面を被り部屋を出た。	has:가면을 써	keep	packs
 pack:cue-chosen-senses:19	するすると荷台へ登って毛布を頭から被り横になった。	has:담요를 머리에서 뒤집어써	fix	packs
@@ -61,7 +60,7 @@ pack:cue-chosen-senses:29	先輩の腕に思いっきり力がこもった。	ha
 pack:cue-chosen-senses:29	その言葉には静かな怒りがこもっていた。	has:분노가 담겨	fix	packs
 pack:cue-chosen-senses:30	殺意の籠った手紙を送る者もいた。	has:살의가 담긴 편지	fix	packs
 pack:cue-chosen-senses:30	そして、いきなり憎悪の篭った目で僕らを睨みつけて言った。	has:증오가 담긴 눈	fix	packs
-pack:cue-chosen-senses:30	熱のこもった廊下の空気。	has:열이 가득 찬 복도	keep	packs
+pack:cue-chosen-senses:31	熱のこもった廊下の空気。	has:열이 가득 찬 복도	fix	packs
 pack:cue-chosen-senses:31	コツンコツン、と湿気の籠った暗い洞窟を歩く靴の音が響く。	!rule:pack:cue-chosen-senses:30	keep	packs
 pack:cue-chosen-senses:32	しゃもじが怒りのこもった声で呪詛のごとく繰り返した。	has:분노가 담긴 목소리	fix	packs
 pack:cue-chosen-senses:32	振り返りもせず、低く殺意のこもった声で発せられたその一言が、	has:살의가 담긴 목소리	fix	packs
