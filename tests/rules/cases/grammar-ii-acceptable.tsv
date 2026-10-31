@@ -1,6 +1,6 @@
 # 규칙: SPC-6
 rule	input	expected	kind	layer
-dict:gram:de-ii:1	……これでいい？	……이것으로 좋아?	keep	local
+dict:gram:de-ii:1	……これでいい？	……이거면 돼?	fix	local
 dict:gram:de-ii:1	dogでいい？	dog면 돼?	fix	local
 dict:gram:de-ii:1	普通でいいですか？	보통이면 됩니까?	fix	local
 dict:gram:de-ii:1	私のことはアルファでいいわよ。	나는 알파면 돼.	fix	local
@@ -33,9 +33,9 @@ dict:gram:de-ii:1	スシ、好評でよかったです。	스시, 호평이라�
 dict:gram:de-ii:1	はじめから断っていればよかったのに。	has:좋았을	keep	local
 dict:gram:de-ii:1	だとしたらいい勘してるよ	has:좋은 감	keep	local
 dict:gram:de-ii:1	これでいい人	이것으로 좋은 사람	keep	local
-dict:gram:de-ii:1	それでいい。	그것으로 좋다.	keep	local
-dict:gram:de-ii:1	それでいいんです。	그것으로 좋습니다.	keep	local
-dict:gram:de-ii:1	本当にそれでいいのか？	정말 그것으로 좋은 건가?	keep	local
+dict:gram:de-ii:1	それでいい。	그거면 된다.	fix	local
+dict:gram:de-ii:1	それでいいんです。	그거면 됩니다.	fix	local
+dict:gram:de-ii:1	本当にそれでいいのか？	정말 그거면 되는 건가?	fix	local
 dict:gram:de-ii:1	それでいいなら	그것으로 좋으면	keep	local
 dict:gram:ii-done:1	まあ、いいか。	뭐, 됐나.	fix	local
 dict:gram:ii-done:1	まあいっか！	뭐 됐나!	fix	local

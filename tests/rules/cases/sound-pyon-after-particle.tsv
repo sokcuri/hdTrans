@@ -31,7 +31,7 @@ sound:end-row-after-particle	家をでちゃった。	집을 나와버렸다.	ke
 sound:end-row-after-particle	外にでちゃう。	밖에 나와버린다.	keep	lookup
 ending:dechi	もう行くでち。	이제 가요.	keep	builtin-ending
 ending:sshu	がんばるっしゅ！	열심히 해요!	keep	builtin-ending
-ending:ssho	それでいいっしょ。	그것으로 좋지.	keep	builtin-ending
+ending:ssho	それでいいっしょ。	그거면 되지.	keep	builtin-ending
 dict:jisjk:1147	彼女は席からぴょんと降りた。	그녀는 자리에서 폴짝 내렸다.	fix	defaults
 dict:jisjk:1147	うさぎぴょんと跳ねた。	토끼 폴짝 뛰었다.	fix	defaults
 dict:jisjk:1147	そしてぴょんと跳ねた。	그리고 폴짝 뛰었다.	fix	defaults
