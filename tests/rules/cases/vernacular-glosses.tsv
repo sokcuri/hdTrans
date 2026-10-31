@@ -1,0 +1,60 @@
+# 규칙: LEX-3160
+# 규칙: LEX-3161
+# 규칙: LEX-3162
+rule	input	expected	kind	layer
+lexical:飲精	中には、Ｂ５サイズの薄い本が入っていた。	has:얇은 책	keep	lookup
+lexical:無敵の人	うちの娘の所に永久就職して！	has:영구 취직	keep	lookup
+lexical:無敵の人	いわゆる無敵の人。	has:잃을 게 없는 사람	fix	lookup
+lexical:無敵の人気	英雄となって庶民に無敵の人気を誇る。	has:무적의 인기	fix	lookup
+lexical:無敵の人魚	無敵の人魚姫を更に強くしなきゃね。	has:무적의 인어	fix	lookup
+lexical:飲精	飲精くらい何でもない事だ。	has:정액 마시기	fix	lookup
+lexical:飲精	黙食をお願いします。	has:묵식	keep	lookup
+lexical:無敵の人生	無敵の人生だ。	has:무적의 인생	fix	lookup
+lexical:無敵の人	無敵の強さを誇る。	lacks:잃을 게	keep	lookup
+lexical:飯マズ	すてゼリフを吐いた。	has:막말	keep	lookup
+lexical:利き手	……利き手がやられたか。	has:주로 쓰는 손	fix	lookup
+lexical:利き手	利き手である左手に拳を作った。	has:주로 쓰는 손	fix	lookup
+lexical:非利き手	非利き手で剣を握る。	has:주로 쓰지 않는 손	fix	lookup
+lexical:お家騒動	王家のお家騒動に巻き込まれる。	has:집안싸움	fix	lookup
+lexical:お茶請け	お茶請けはクッキーでいいよな	has:다과	fix	lookup
+lexical:練り製品	魚の練り製品も作り方なんて知らない。	has:어묵류	fix	lookup
+lexical:上がり框	ブーツを脱がずに上がり框を踏んだ。	has:현관 마루 턱	fix	lookup
+lexical:当たり役	これがまた当たり役でね	has:인기 배역	fix	lookup
+lexical:当たり屋	いわゆる当たり屋って奴。	has:자해 공갈범	fix	lookup
+lexical:水菜	野菜は白菜、水菜、ネギを煮た。	has:미즈나	fix	lookup
+lexical:追い焚き	追い焚き機能もない。	has:목욕물 재가열	fix	lookup
+lexical:手懸かり	親玉の手懸かりが一つも見付かってない。	has:단서	fix	lookup
+lexical:もろ肌	もろ肌を脱いだ。	has:웃통	fix	lookup
+lexical:札付きの	兄のどちらもが札付きの悪だ。	has:악명 높은	fix	lookup
+lexical:寸胴鍋	寸胴鍋で煮る。	has:곰솥	fix	lookup
+lexical:吊り手	吊り手を握った。	has:손잡이	fix	lookup
+lexical:湯の花饅頭	有名な水沢うどんや湯の花饅頭	has:온천 만주	fix	lookup
+lexical:利き手	右利きだ。	lacks:주로 쓰는 손	keep	lookup
+lexical:手懸かり	新ヨモギ茶をうちの商会で手懸けることになった。	lacks:단서	keep	lookup
+lexical:手懸かり	僅かな手懸りを集めた。	has:단서	keep	lookup
+lexical:お茶請け	売り言葉に買い言葉だ。	has:오는 말에 가는 말	keep	lookup
+lexical:札付きの	札つきの生徒だった。	has:악명 높은 학생	fix	lookup
+lexical:札付きの	お札を貼った。	lacks:악명	keep	lookup
+lexical:茶請け	お茶を飲んだ。	lacks:다과	keep	lookup
+lexical:当たり屋	当たりを引いた。	lacks:자해	keep	lookup
+lexical:肩ひじ張る	そんなに肩ひじ張らなくてもいいですよ。	has:어깨에 힘을 주지 않아도	fix	lookup
+lexical:肩ひじ張る	だーからそんな肩ひじ張るなっての。	has:어깨에 힘	fix	lookup
+lexical:肩ひじを張る	騙されまいと肩ひじを張る己が愚かしい。	has:어깨에 힘을 주	fix	lookup
+lexical:肩肘張る	そんなに肩肘張らなくてもいいですよ。	has:어깨에 힘을 주지 않아도	fix	lookup
+lexical:肩ひじ張る	余計な肩ひじ張らないで済むんだろう。	has:어깨에 힘	fix	lookup
+lexical:肩ひじ張る	テーブルに肩ひじをつき、少しうつむく。	lacks:어깨에 힘	keep	lookup
+lexical:肩肘を張る	肩肘を張って生きてきた。	has:어깨에 힘을 주어	keep	lookup
+lexical:肩ひじ張る	肩を叩いた。	lacks:힘을 주	keep	lookup
+lexical:肩ひじ張る	ひじを張った。	lacks:어깨에	keep	lookup
+lexical:非利き手	経験を積みかさねてきた。	lacks:축적	keep	lookup
+lexical:寸胴鍋	ずん胴で煮込んだ。	lacks:몸매	keep	lookup
+lexical:無敵の人	無敵の剣士だ。	lacks:잃을 게	keep	lookup
+lexical:当たり役	役に立つ。	lacks:배역	keep	lookup
+lexical:利き手	利き腕を痛めた。	lacks:주로 쓰는 손	keep	lookup
+lexical:無敵の人形	人形を抱いた。	lacks:살덩이	keep	lookup
+lexical:薄い本	薄い紙だ。	lacks:동인지	keep	lookup
+lexical:永久就職	やっと就職した。	lacks:평생	keep	lookup
+lexical:お家騒動	家の中が騒がしい。	lacks:집안싸움	keep	lookup
+lexical:練り製品	乳製品だ。	lacks:어묵	keep	lookup
+lexical:吊り手	釣り人が来た。	lacks:손잡이	keep	lookup
+lexical:手懸かり	手懸かりを見つけ出す。	has:단서를 찾아낸다	fix	lookup
