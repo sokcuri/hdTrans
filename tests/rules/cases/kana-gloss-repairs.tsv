@@ -1,0 +1,46 @@
+# 규칙: LEX-3280, LEX-3281
+rule	input	expected	kind	layer
+dict:kana-gloss-repairs:1	「お前、クラリネットにコンバートしてやろうか」	has:컨버트해	fix	defaults
+dict:kana-gloss-repairs:1	どうやらリアル・ツヴァイトで使えた道具はコンバートされないらしい。	has:컨버트되지	fix	defaults
+dict:kana-gloss-repairs:1	コンバートでスキルがリセットされた。	has:컨버트로	fix	defaults
+dict:kana-gloss-repairs:1	バッティングの向上を認められてのコンバートなら、光栄なことでもある。	has:컨버트라면	fix	defaults
+dict:kana-gloss-repairs:23	シングル盤を買っても良かったと思う（笑）	has:싱글 음반을	fix	defaults
+dict:kana-gloss-repairs:23	壁にはシングル盤の小さいレコードが飾られていた。	has:싱글 음반의	fix	defaults
+dict:kana-gloss-repairs:11	今は野外なので、サーモなどのセンサーは全てオフにしてある。	has:서모 등의	fix	defaults
+dict:kana-gloss-repairs:11	サーモ、赤外線、そして空気成分の分析システムです。	has:서모, 적외선	fix	defaults
+dict:kana-gloss-repairs:4	コンピューターイリテラシー	has:컴퓨터 문맹	fix	defaults
+dict:kana-gloss-repairs:9	サーキットレベルゲートウェイ	has:서킷 레벨 게이트웨이	fix	defaults
+dict:kana-gloss-repairs:15	システムロードファイル	has:시스템 로드 파일	fix	defaults
+dict:kana-gloss-repairs:16	シミュレーショニズム	has:시뮬레이셔니즘	fix	defaults
+dict:kana-gloss-repairs:21	ジップコードデータベース	has:ZIP 코드 데이터베이스	fix	defaults
+dict:kana-gloss-repairs:22	ジャミング信号	has:재밍 신호	fix	defaults
+dict:kana-gloss-repairs:1	コンバーターを繋いだ。	has:컨버터를	keep	defaults
+dict:kana-gloss-repairs:1	コンバーチブルに乗った。	has:컨버터블을	keep	defaults
+dict:kana-gloss-repairs:11	サーモンを焼いた。	has:연어를	keep	defaults
+dict:kana-gloss-repairs:11	サーモグラフィで確認する。	has:서모그라피로	keep	defaults
+dict:kana-gloss-repairs:23	シングルで発売した。	has:싱글로	keep	defaults
+dict:kana-gloss-repairs:22	ジャミングをかけろ！	has:재밍을	keep	defaults
+dict:kana-gloss-repairs:21	ジップコードを入力する。	has:ZIP 코드를	keep	defaults
+dict:kana-gloss-repairs:13	シェープアップしたい。	has:셰이프 업	keep	defaults
+dict:kana-gloss-repairs:2	コンパクトな部屋だ。	has:컴팩트한	keep	defaults
+dict:kana-gloss-repairs:15	システムを再起動する。	has:시스템을	keep	defaults
+dict:kana-gloss-repairs:8	サムネイルを見た。	has:썸네일을	keep	defaults
+dict:kana-gloss-repairs:24	女性はその姿へおざなりな拍手で応えた。	has:무성의한 박수	fix	defaults
+dict:kana-gloss-repairs:24	月照はおざなりに答えた。	has:무성의하게 대답	fix	defaults
+dict:kana-gloss-repairs:24	いきなりの突っ込みに対応が少々おざなりになってしまった俺。	has:무성의하게 되어	fix	defaults
+dict:kana-gloss-repairs:24	俺は「うん」とか「ああ」とかおざなりな返事をする。	has:무성의한 대답	fix	defaults
+dict:kana-gloss-repairs:24	「君の戦い方は防御がおざなりですね」	has:무성의하네요	fix	defaults
+dict:kana-gloss-repairs:25	「ワシのおたからやから」	has:보물	fix	defaults
+dict:kana-gloss-repairs:25	なんだかおたからのにおいががする。	has:보물의	fix	defaults
+dict:kana-gloss-repairs:25	「これ、おたから？」	has:보물?	fix	defaults
+dict:kana-gloss-repairs:25	「わぁぁ、おたからだらけだぁぁ……」	has:보물투성이	fix	defaults
+dict:kana-gloss-repairs:27	「ヒデ、おくゆかしい日本人だね」	has:그윽한 일본인	fix	defaults
+dict:kana-gloss-repairs:27	日本じんは、おくゆかしいから。	has:그윽하니까	fix	defaults
+dict:kana-gloss-repairs:26	おきふし	has:기거	fix	defaults
+dict:jisjk:165269	おごのり	has:강리	keep	defaults
+dict:kana-gloss-repairs:28	サボリじん	has:농땡이꾼	fix	defaults
+dict:kana-gloss-repairs:25	お宝探しに行こう。	has:보물 찾으러	keep	defaults
+dict:kana-gloss-repairs:27	奥ゆかしい人だ。	has:그윽한 사람	keep	defaults
+dict:kana-gloss-repairs:27	奥ゆかしさがある。	has:그윽함이	keep	defaults
+dict:kana-gloss-repairs:24	勉強をおろそかにした。	has:소홀히 했다	keep	defaults
+dict:kana-gloss-repairs:24	気遣う言葉にお座なりな返事をした。	has:무성의한 대답	keep	defaults

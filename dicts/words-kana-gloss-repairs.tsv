@@ -1,0 +1,31 @@
+#! layer=base
+# 사전 기본 행의 뜻이 틀리거나 철자가 깨진 가나 표기 낱말과 외래어 용어
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+コンバート	컨버트	N110			GN			// LEX-3280				kana-gloss-repairs:1
+コンパクトオーディット	컴팩트 오디트	N110			GN			// LEX-3280				kana-gloss-repairs:2
+コンパートメントモデル	컴파트먼트 모델	N110			GN			// LEX-3280				kana-gloss-repairs:3
+コンピューターイリテラシー	컴퓨터 문맹	N110			GN			// LEX-3280				kana-gloss-repairs:4
+コ字状	ㄷ자 모양	N110			GN			// LEX-3280				kana-gloss-repairs:5
+ゴージカット	고지 컷	N110			GN			// LEX-3280				kana-gloss-repairs:6
+サインフラグ	사인 플래그	N110			GN			// LEX-3280				kana-gloss-repairs:7
+サムスイッチ	썸 스위치	N110			GN			// LEX-3280				kana-gloss-repairs:8
+サーキットレベルゲートウェイ	서킷 레벨 게이트웨이	N110			GN			// LEX-3280				kana-gloss-repairs:9
+サーミスタ	서미스터	N110			GN			// LEX-3280				kana-gloss-repairs:10
+サーモ	서모	N110			GN			// LEX-3280				kana-gloss-repairs:11
+サーモシャワー	서모 샤워	N110			GN			// LEX-3280				kana-gloss-repairs:12
+シェープ	셰이프	N110			GN			// LEX-3280				kana-gloss-repairs:13
+システムオーダーリング	시스템 오더링	N110			GN			// LEX-3280				kana-gloss-repairs:14
+システムロードファイル	시스템 로드 파일	N110			GN			// LEX-3280				kana-gloss-repairs:15
+シミュレーショニズム	시뮬레이셔니즘	N110			GN			// LEX-3280				kana-gloss-repairs:16
+シャリベツ	셔벗	N110			GN			// LEX-3280				kana-gloss-repairs:17
+シリンダーピッチ	실린더 피치	N110			GN			// LEX-3280				kana-gloss-repairs:18
+ジェニック	제닉	N110			GN			// LEX-3280				kana-gloss-repairs:19
+ジエーエッチシー	JHC	N110			GN			// LEX-3280				kana-gloss-repairs:20
+ジップコードデータベース	ZIP 코드 데이터베이스	N110			GN			// LEX-3280				kana-gloss-repairs:21
+ジャミング信号	재밍 신호	N110			GN			// LEX-3280				kana-gloss-repairs:22
+シングル盤	싱글 음반	N110			GN			// LEX-3280				kana-gloss-repairs:23
+おざなり	무성의%A1@	G8U0			GN			// LEX-3281				kana-gloss-repairs:24
+おたから	보물	N110			GN			// LEX-3281				kana-gloss-repairs:25
+おきふし	기거	N110		Hd	GN			// LEX-3281				kana-gloss-repairs:26
+おくゆかし	그윽$AB@	H7U0			GN			// LEX-3281				kana-gloss-repairs:27
+サボリじん	농땡이꾼	N110			GN			// LEX-3281				kana-gloss-repairs:28
