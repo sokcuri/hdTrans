@@ -868,6 +868,7 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
             const std::vector<std::u32string> jaEnds =
                 !u.narration && !formal && !perQuote ? SourceSentenceEnds(line.ja) : std::vector<std::u32string>{};
             if (!jaEnds.empty()) {
+                const std::u32string out32 = ToU32(line.out);
                 const auto boundary = [&](std::size_t k) {
                     return nodes[k].kind == Kind::Punct && !nested[k] &&
                            (nodes[k].punct == Punct::end || nodes[k].punct == Punct::q || nodes[k].punct == Punct::excl);
@@ -894,7 +895,10 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                         for (std::size_t k = q + 1; k < nodes.size() && !boundary(k); ++k)
                             if (nodes[k].kind != Kind::Punct) end = false;
                         if (!end) continue;
-                        if (seen && n.was == Level::hapsyo && sentence < jaEnds.size() && ExplanatoryEnd(jaEnds[sentence]))
+                        // the aligned sentence must end in a 합쇼체 statement (입니다, 합니다) in the translation too
+                        if (seen && n.was == Level::hapsyo && n.mood == Mood::decl && sentence < jaEnds.size() &&
+                            ExplanatoryEnd(jaEnds[sentence]) && n.to > n.from &&
+                            std::u32string_view(out32).substr(n.from, n.to - n.from).ends_with(U"니다"))
                             lower[q] = true;
                         // a statement the source ends in です or ます sets the quote's level; a request (ください) or
                         // a question does not
