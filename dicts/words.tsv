@@ -23065,7 +23065,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蜘蛛の糸	거미줄	N110			GN						くものいと	w:23015
 蜘蛛人手	거미불가사리류	N110			GN						くもひとで	w:23016
 蜘蛛海星	거미불가사리류	N110			GN						くもひとで	w:23017
-蜜	시럽	N110	VFd		GN				llm		みつ	w:23018
+蜜	꿀	N110	VFd		GN				llm		みつ	w:23018
 蜜ろう	밀랍	N110			GN						みつろう	w:23019
 蜜柑	귤	N110			GN				xxx	1	みかん	w:23020
 蜜柑科	운향과	N110			GN						みかんが	w:23021
@@ -25026,7 +25026,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鍋料理	전골	N110	VFd		GN				llm		なべりょうり	w:24977
 鍋鶴	흑두루미	N110			GN						なべづる	w:24978
 鍼治療	침술	N110			GN						はりちりょう	w:24979
-鎌	유도 질문	N110	UTs		GN				llm		かま	w:24980
+鎌	낫	N110	UTs		GN				llm		かま	w:24980
 鎌切	사마귀	N110			GN						かまきり	w:24981
 鎖国主義	쇄국주의	N110			GN						さこくしゅぎ	w:24982
 鎖鎌	사슬낫	N110			GN						くさりがま	w:24983

@@ -42,7 +42,7 @@ dict:jisjk:240449	「其方は常にツェントの剣であるダンケルフ�
 dict:jisjk:240449	其方は我が柴田家の嫡男なのだから、常に武芸を磨け	그대는 우리 시바타가의 적장자니까, 항상 무예를 닦아라	fix	lookup
 dict:jisjk:200790	其方此方	사방	keep	lookup
 cx:archaic-pronoun:10	余の定義に異議があるか？	짐의 정의에 이의가 있을까?	fix	rewrites
-cx:archaic-pronoun:10	……ところで貴様、いつから余の眷属になった？	……그런데 네놈, 언제부터 짐의 친족이 됐어?	fix	rewrites
+cx:archaic-pronoun:10	……ところで貴様、いつから余の眷属になった？	……그런데 네놈, 언제부터 짐의 권속이 됐어?	fix	rewrites
 cx:archaic-pronoun:10	十年余の歳月	!rule:cx:archaic-pronoun:10	keep	rewrites
 cx:archaic-pronoun:10	百余の国	!rule:cx:archaic-pronoun:10	keep	rewrites
 phrase:余は	余は王である。	짐은 왕이다.	keep	builtin-phrase

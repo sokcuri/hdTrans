@@ -1317,7 +1317,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あっけらかんと	어이없이	E300	SFl		GN				jisjk:122741		
 あっさり	시원시럽게	E301			GN				jisjk:117162		
 あっさり	깨끗&AV@	M4U9	SFl		GN				jisjk:140207		
-あっさりと	시원스럽게	E300			GN				jisjk:264595		
+あっさりと	쉽게	E300			GN				jisjk:264595		
 あっしゅく	압축	N110			CT				jisjk:259800		
 あっせいてき	압박적%D4@	G8U0			GN				jisjk:119293		
 あっせん	알선	N110		Hd	GN				jisjk:103672		
@@ -13699,7 +13699,7 @@ ttt	ttt	K110			GN				jisjk:201744
 くすくすと	낄낄	E311			GN				jisjk:309		
 くすぐ	간질&AJ@	M438			GN				jisjk:90677		
 くすぐ	자극&AV@	M448			GN	2742	||1 A-2== "UFlUYi"	앞쪽 대상이 감정·욕구 관련 의미이면 'くすぐ'를 '자극하다'로 고른다.	jisjk:267592		
-くすぐった	낯간지$G7@	H7U0			GN				jisjk:5011		
+くすぐった	간지$G7@	H7U0			GN				jisjk:5011		
 くすぐった	간지$G7@	H7N0	SFl		GN				jisjk:120399		
 くすぐられ	간지러워&AL@	M417			GN				jisjk:90678		
 くすぐり	간질임	N110			GN				jisjk:175945		
@@ -27509,7 +27509,6 @@ ttt	ttt	K110			GN				jisjk:201744
 せいじつ	성실	N110	SFl	Dd	GN				jisjk:197590		-1
 せいじてき	정치적	N110			GN				jisjk:197594		-1
 せいじはん	정치범	N110	VHn		GN				jisjk:197595		-1
-せいじゃ	성자	N110	UClVBp		GN				jisjk:197599		-1
 せいじゃく	정적	N110		Dd	GN				jisjk:197600		-1
 せいじゃないかと	4 탓이 아닐까 라고	S560			GN				jisjk:263529		
 せいじゅ	성수	N110			GN				jisjk:197602		-1
@@ -44602,7 +44601,7 @@ ttt	ttt	K110			GN				jisjk:201744
 わずかであ	&HY@	M428			GN				jisjk:148784		
 わずかでござ	얼마 안 &C6@	M4U8			GN				jisjk:267529		
 わずかとな	얼마 남지 &LW@	M428			GN				jisjk:375005		
-わずかな	몇 안 되는	C0D1			GN				jisjk:4630		
+わずかな	약간의	C0D1			GN				jisjk:4630		
 わずかながら	적지만	C300			GN				jisjk:149594		
 わずかながらも	조금이나마	C0H0			GN				jisjk:264430		
 わずかに	조금	N110			GN	2423	||1 &&4 S+1== "すぎ" P+1== "4**" M+1== "58*59*" D+0= "조금에"	뒤의 동사 すぎ가 지정된 부정 계열 어미를 가지면 わずかに를 '조금에'로 바꾼다. (미발동: other)	jisjk:265889		
@@ -65496,7 +65495,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スポカルゾーン	스포츠 문화 지역	N110	VBl		GN				jisjk:130105		
 スポケーン	스포켄	N110	VPl		GN				jisjk:130106		
 スポッティング	스포팅	N110			GN				jisjk:130107		
-スポット	스포트	N110	 		GN				jisjk:130108		
+スポット	스폿	N110	 		GN				jisjk:130108		
 スポットアナウンス	스포트 아나운스	N110	VCm		GN				jisjk:130110		
 スポットチェック	불시 점검	N110			GN				jisjk:130111		
 スポットテレビ	스폿 텔레비전	N110	VEI		GN				jisjk:49323		
@@ -73898,7 +73897,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ノモグラプ	조견계산표	N110	VSp		GN				jisjk:52886		
 ノモグラム	계산 도표	N110			GN				jisjk:132148		
 ノライズム	노라이즘	N110			GN				jisjk:132149		
-ノリ	김	N110	VFd		GN				jisjk:14088		
+ノリ	분위기	N110	VFd		GN				jisjk:14088		
 ノリがい	느낌이 $DE@	H7U0		Pn	GN				jisjk:344449		
 ノリにノッてい	우쭐해 &HN@	M427			GN				jisjk:148492		
 ノリエガ	노리에가	N130	QPN	Wa	GN				jisjk:357913		
@@ -75173,7 +75172,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バエク	바에크	N130	QPN		GN				jisjk:366091		
 バカ	바보	N110	VHn		GN	881	||1 &&2 S+1== "じゃな" P+1== "7**"	「バカ」 뒤에 부정 표현 「じゃな」가 오면 ‘바보’를 고른다.	jisjk:103411		
 バカ	터무니없이	N110		Nn	GN	3326	||1 &&2 P+1== "7**8**" S+1!= "Lも"	バカ는 다음 말이 い형용사·형용동사이면 정도 부사 ‘터무니없이’를 고른다. も로 시작하는 말(もいいとこ) 앞은 아니다.	jisjk:342777		
-バカな	시시한	N110			GN				jisjk:152415		
+バカな	바보 같은	N110			GN				jisjk:152415		
 バカに	바보 취급&AV@	M429			GN				jisjk:261689		
 バカにならな	만만치 $D7@	H7U0			GN				jisjk:343843		
 バカみたい	바보%B3@	G8U0			GN				jisjk:343494		
@@ -82824,7 +82823,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ベッチーニョ	벳치뇨	N130	QPN		GN				jisjk:366252		
 ベッツ	뱃츠	N130	QPN		GN				jisjk:368237		
 ベッティング	베팅	N110			GN				jisjk:114253		
-ベット	배트	N110			GN				jisjk:115236		
+ベット	침대	N110			GN				jisjk:115236		
 ベットに横たわ	침대에 가로&J4@	M428			GN				jisjk:148383		
 ベットリッヒ	베트리히	N130	QPN		GN				jisjk:369856		
 ベットル	베틀	N130	QPN		GN				jisjk:372062		
@@ -85655,7 +85654,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マッコリ	막걸리	N130	VFd		GN				jisjk:201535		
 マッコー	맛코	N110	VPl		GN				jisjk:57263		
 マッコール	맥콜	N130	QPN		GN				jisjk:371188		
-マッサージ	맛사지	N110			GN				jisjk:57265		
+マッサージ	마사지	N110			GN				jisjk:57265		
 マッサージパーラー	안마시술소	N110			GN				jisjk:57266		
 マッサージャー	안마사	N110			GN				jisjk:57267		
 マッサージ師	마사지사	N110	VHn		GN				jisjk:265057		
@@ -132231,7 +132230,7 @@ ttt	ttt	K110			GN				jisjk:201744
 其の節	그 당시 	N110			GN				jisjk:240512		
 其の許	자네	N120	VHn		GN				jisjk:240533		
 其の辺	그 근처	N110			GN				jisjk:240525		
-其れ	이것	N120			GN				jisjk:351302		
+其れ	그것	N120			GN				jisjk:351302		
 其れ丈	그것만	N110			GN				jisjk:240592		
 其れ相応	그에 상응함	N110		Hd	GN				jisjk:240591		
 其一	그 하나	N110			GN				jisjk:97929		
@@ -175454,7 +175453,7 @@ ttt	ttt	K110			GN				jisjk:201744
 奘一郎	소우이치로우	N130	QPN	Wb	GN				jisjk:356862		
 奚琴	해금	N110	VRw		GN				jisjk:38644		
 奠都	도읍을 정함	N110			GN				jisjk:244800		
-奢	사치&AV@	M418			GN				jisjk:93280		
+奢	한턱&A6@	M418			GN				jisjk:93280		
 奢り	사치	N110			GN				jisjk:165270		
 奢侈	사치	N110			GN				jisjk:25049		
 奥	안쪽	N110	VPlXXX		GN				jisjk:115483		
@@ -212385,7 +212384,7 @@ ttt	ttt	K110			GN				jisjk:201744
 手古奈	테코나	N130	QPN	Wb	GN				jisjk:347810		
 手合い	대국	I110			GN				jisjk:75805		
 手合い	상대	I110	VHn		GN				jisjk:75806		
-手合わせ	대국	I110			GN				jisjk:75807		
+手合わせ	대련	I110			GN				jisjk:75807		
 手向	전별	N110			GN				jisjk:27261		
 手向	저항&AV@	M420			GN				jisjk:144430		
 手向	토우게	N130	QCTVPl		GN				jisjk:310821		
@@ -250688,7 +250687,7 @@ ttt	ttt	K110			GN				jisjk:201744
 此彼	이것과 저것	N120			GN				jisjk:183121		
 此後	차후	N110	UMe		GN				jisjk:35159		
 此所	여기	N110	VPl		GN				jisjk:35156		
-此方	이분	N110	VHn		GN				jisjk:35155		
+此方	이쪽	N110			GN				jisjk:35155		
 此方さん	이분	N120			GN				jisjk:231315		
 此方の人	당신	N110	VHn		GN				jisjk:231169		
 此方人等	우리들	N110	VHn		GN				jisjk:182456		
@@ -281889,7 +281888,7 @@ ttt	ttt	K110			GN				jisjk:201744
 相容	호환	N110			GN				jisjk:100815		
 相宿	동숙	N110			GN				jisjk:25900		
 相対	상대	N110		Hd	GN				jisjk:25886		
-相対	대립&C6@	M419	SFl		GN				jisjk:137414		
+相対	마주&AV@	M419	SFl		GN				jisjk:137414		
 相対アドレス	상대 어드레스	N110	VEl		GN				jisjk:240153		
 相対主義	상대주의	N110			GN				jisjk:200324		
 相対価値	상대가치	N110			BZ				jisjk:361364		
@@ -282841,7 +282840,7 @@ ttt	ttt	K110			GN				jisjk:201744
 真性コレラ	진성콜레라	I110	UTi		GN				jisjk:85380		
 真悟	신고	N110			GN				jisjk:102725		
 真情	진정	N110	UFl		GN				jisjk:34967		
-真意	진심	N110	UFl	Oq	GN				jisjk:34964		
+真意	진의	N110	UFl	Oq	GN				jisjk:34964		
 真意をただ	진의를 가&AA@	M443			GN				jisjk:136102		
 真成寺町	신죠지마치	I130	QCTVPl		GN				jisjk:301755		
 真我里	마가리	N130	QCTVPl		GN				jisjk:328941		
@@ -283339,7 +283338,7 @@ ttt	ttt	K110			GN				jisjk:201744
 眩惑	현혹	N110		Hd	GN				jisjk:38996		
 眩暈	현기증	N110			GN				jisjk:179082		
 眩気症	현기증	I110	UTi		GN				jisjk:88899		
-眷属	친족	N110	VHnVHn		GN				jisjk:178498		
+眷属	권속	N110	VHnVHn		GN				jisjk:178498		
 眷恋	간절한 사모	N110	SFl	Hd	GN				jisjk:178761		
 眷族	친족	N110	VHnVHn		GN				jisjk:178500		
 眷顧	호의	N110			GN				jisjk:178273		
@@ -305348,7 +305347,7 @@ ttt	ttt	K110			GN				jisjk:201744
 背負い込	떠&FC@	M445			GN				jisjk:139994		
 背負い込み	떠맡음	N110			GN				jisjk:235051		
 背負こみ	떠 맡기기	I110		Hd	GN				jisjk:69870		
-背負ってい	떠맡고 &HN@	M427			GN				jisjk:137846		
+背負ってい	짊어지고 &HN@	M427			GN				jisjk:137846		
 背負子	지게	I110			GN				jisjk:69871		
 背負投げ	업어치기	N110	VRw	Hd	GN				jisjk:198210		
 背負込	떠&FC@	M445			GN				jisjk:136434		
@@ -329534,7 +329533,7 @@ ttt	ttt	K110			GN				jisjk:201744
 買い入れ期間	매입기간	I110	UMe		GN				jisjk:68491		
 買い入れ消却	매입 소각	N110		Hd	BZ				jisjk:350697		
 買い入れ額	매입액	I110	VMo		GN				jisjk:68492		
-買い出し	직매	I110		Hd	GN				jisjk:68496		
+買い出し	장보기	I110		Hd	GN				jisjk:68496		
 買い切	매점&AV@	M438			GN				jisjk:92701		
 買い切	모조리 &AX@	M448			GN				jisjk:147155		
 買い切り	매점	N110	VMo		GN				jisjk:166603		
@@ -347406,7 +347405,7 @@ ttt	ttt	K110			GN				jisjk:201744
 間口	마쿠치	N130	QCTVPl		GN				jisjk:329069		
 間口	마구치	N130	QCTVPl		GN				jisjk:329088		
 間口運輸	마구치 운수	I130	QIDVGt		GN				jisjk:60387		
-間合い	틈	I110	UMeVPl		GN				jisjk:60400		
+間合い	간격	I110	UMeVPl		GN				jisjk:60400		
 間合せ先	문의처	I110	VPl		GN				jisjk:60401		
 間夫	정부	N110	VHn		GN				jisjk:251926		
 間奏	간주	N110	UHr		GN				jisjk:14574		

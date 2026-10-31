@@ -5,7 +5,7 @@ analysis:adnominal-na-word	女子学生がトイレでするようなクサい�
 analysis:adnominal-na-word	みたいなクサい台詞	has:같은	fix	analysis
 analysis:adnominal-na-word	ようなクドい話	같은 장황한 이야기	fix	analysis
 analysis:adnominal-na-word	変なクサい台詞	has:이상한	fix	analysis
-analysis:adnominal-na-word	くすぐったいようなくすぐったくないような	낯간지러운 것 같은 낯간지럽지 않은 것 같은	fix	analysis
+analysis:adnominal-na-word	くすぐったいようなくすぐったくないような	간지러운 것 같은 간지럽지 않은 것 같은	fix	analysis
 analysis:adnominal-na-word	みたいなくせに	같은 주제에	fix	analysis
 analysis:adnominal-na-word	変なくせがある	이상한 버릇이 있다	fix	analysis
 analysis:adnominal-na-word	きれいなくつ	예쁜 구두	fix	analysis

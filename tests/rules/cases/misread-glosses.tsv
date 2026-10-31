@@ -1,0 +1,68 @@
+# 규칙: LEX-3474
+rule	input	expected	kind	layer
+dict:jisjk:115236	眼鏡の男はルナを抱きかかえ、ベットに寝かせると手当を始めた。	has:침대에 재우니	fix	defaults
+dict:jisjk:115236	彼は椅子ではなくベットに腰を下ろす。	has:침대에 앉는다	fix	defaults
+dict:w:23018	ドデカグマらは互いに押し合い、蜜を奪い合う。	has:꿀을 서로 빼앗는다	fix	defaults
+dict:w:23018	だがしかし、そばの蜂蜜は家族からは不評だった。	has:벌꿀은	keep	defaults
+dict:jisjk:178498	それ以前にヴァンパイアの眷属には休憩の必要は殆どない。	has:권속에게는	fix	defaults
+dict:jisjk:57265	後でジェシカにマッサージしてもらおうかしら…	has:마사지해	fix	defaults
+dict:jisjk:130108	条件がよければ富士山も此処から見ること出来る絶景スポットだ。	has:절경 스폿이다	fix	defaults
+dict:jisjk:68496	明里が服を買って、これで買い出しも終わりか	has:장보기도 끝인가	fix	defaults
+dict:jisjk:60400	半身になって棍を中段で構えると、ドマは間合いの外で止まった。	has:간격의 밖에서	fix	defaults
+dict:jisjk:351302	「其れを聞いてほっとしたよ、で此処にするのか。」	has:그걸 듣고	fix	defaults
+dict:jisjk:75807	セリンの代わりに自分と手合わせをしろと言う事なのだろう。	has:대련을 하라는	fix	defaults
+dict:jisjk:34964	「真意を確かめたいから…」	「진의를 확인하고 싶으니까…」	fix	defaults
+dict:w:24980	太一は炎を帯びた鎌でオオカミを斬りつけた。	has:낫으로 늑대를	fix	defaults
+dict:w:24980	まさか幼女に鎌をかけられるとは思わなかった。	has:떠봐진다	keep	defaults
+dict:jisjk:35155	一斉に男達の視線が此方に向かい、一人が此方の方に向かってくる。	has:시선이 이쪽으로 향해	fix	defaults
+dict:jisjk:35155	「それは此方の台詞です」	has:이쪽의 대사입니다	fix	defaults
+dict:jisjk:152415	バカな女だが、くだらない女じゃない。	has:바보 같은	fix	defaults
+dict:jisjk:264595	こうしてヘイスは二度目の仕事に取り掛かり、予定通りあっさりと終わらせてしまう。	has:쉽게 끝내	fix	defaults
+dict:jisjk:264595	一縷の望みをかけた質問はあっさりと切り捨てられた。	has:쉽게 버려졌다	fix	defaults
+dict:misread-glosses:21	魚で言えば白身魚のような淡泊であっさりとした味わい。	has:담백한 맛	fix	defaults
+dict:jisjk:93280	「そうかもしれないですね。なんか甘いもの奢ってくださいよ」	has:한턱내 주세요	fix	defaults
+dict:jisjk:93280	父親の逞しすぎる背中を殴りつけるが、少女の華奢な手を軽々と防ぎきる。	has:가녀린 손	keep	defaults
+dict:jisjk:137414	一行が銭湯の前まで来ると、ヒビキは正面から相対した。	has:정면에서 마주했다	fix	defaults
+dict:i:7491	連続で何度も剣を振るが、回避され、防御され、ダメージを与えられない。	has:데미지를 줄 수 없다	fix	defaults
+dict:jisjk:137846	そういいながら彼は背中に背負っていた大きなリュックサックを下した。	has:등에 짊어지고 있던	fix	defaults
+dict:jisjk:137846	人は皆、何かしらの不幸を背負っているものです。	has:불행을 짊어지고	fix	defaults
+dict:jisjk:4630	その瞳にはわずかな不安と、多大な信頼の色が浮かんでいた。	has:약간의 불안	fix	defaults
+dict:jisjk:14088	そんな軽いノリで頼むことじゃなくない？	has:가벼운 분위기로	fix	defaults
+dict:jisjk:5011	時々ミラはビクンと背筋を伸ばしたりしているがくすぐったいんだろうか。	has:간지러울까	fix	defaults
+lookup:sei-janai	「みんなのせいじゃないよ」	has:탓이 아니야	fix	defaults
+lookup:sei-janai	これは病気のせいじゃない。	has:병 탓이 아니다	fix	defaults
+lookup:sei-janai	いや、気のせいじゃないよ。ぼくもこの声をさっきも聞いたから。	has:기분 탓이 아니야	keep	defaults
+dict:misread-glosses:1	小首を傾げると、ルークが意地の悪い笑みを浮かべていた。	has:심술궂은 미소	fix	defaults
+dict:misread-glosses:1	この人、思ったよりも意地の悪い人だ。	has:심술궂은 사람	fix	defaults
+dict:misread-glosses:2	見ればエリックもかなり目が虚ろだった。	has:눈이 공허했다	fix	defaults
+dict:misread-glosses:2	金髪の男が取り巻きから警棒を受け取り、虚ろな瞳で振りかぶった。	has:공허한 눈동자	fix	defaults
+dict:misread-glosses:3	ここに来る前の記憶が薄らと残っている。	has:기억이 희미하게 남아	fix	defaults
+dict:misread-glosses:4	それでもなお、こうしてシルヴィオはリリーディアに愛をくれるのだ。	has:그럼에도,	fix	defaults
+dict:misread-glosses:5	俺は一息にそう言うと、皆を見た。	has:단숨에 그렇게	fix	defaults
+dict:misread-glosses:6	レクリエーション、肝試し、キャンプファイアー。	has:담력 시험	fix	defaults
+dict:misread-glosses:7	返り血はきれいさっぱり洗い落とされ、	has:말끔히 씻어	fix	defaults
+dict:misread-glosses:10	「ご大層な肩書きを持ったやつばかりだな」	has:대단한 직함	fix	defaults
+dict:misread-glosses:11	「それにしても、ハーディンの森で大声を出すなんて、なんて罰当たりな子供だ……」	has:천벌 받을 아이	fix	defaults
+dict:misread-glosses:25	「準備万端ですね」	has:만반의 준비군요	fix	defaults
+dict:misread-glosses:25	フタヒトマルマルでーす。魚雷も準備万端、はりきっていきましょー！	has:어뢰도 만반의 준비	fix	defaults
+dict:misread-glosses:12	そうね、準備は万端だ。	has:준비는 만반이다	fix	defaults
+dict:misread-glosses:15	只ならぬ雰囲気にニョルグもピンと背筋を伸ばした。	has:보통이 아닌 분위기	fix	defaults
+dict:misread-glosses:16	「夜中にグラスア裏なんて歩くのはよっぽどの物好きか命知らずですよ」	has:상당한 호기심	fix	defaults
+dict:misread-glosses:17	ホロウは魔力切れで弱くなったと思ったようだが、実は違う。	has:마력 고갈로	fix	defaults
+dict:misread-glosses:18	婆ちゃんは旅をしていた。	has:할머니는	fix	defaults
+dict:misread-glosses:19	リビングに行くと、爺ちゃんが鍛練するか聞いて来た。	has:할아버지가	fix	defaults
+dict:misread-glosses:22	ただ狙いだけが斜め上に逸れて、銃弾は明後日の方向に飛んで行ってしまった。	has:엉뚱한 방향으로	fix	defaults
+dict:misread-glosses:22	「明後日か…なんだか凄くモヤモヤする…」	has:모레	keep	defaults
+dict:misread-glosses:23	いつまでも綺麗な妄想に逃げていては、先にあの世に行った仲間達に笑われてしまう。	has:동료들에게	fix	defaults
+dict:misread-glosses:23	仲間と訓練する。	has:동료와	keep	defaults
+dict:misread-glosses:8	それまでの煤けたような表情が綺麗さっぱり洗い流されたかのように。	has:말끔히 씻어	fix	defaults
+dict:misread-glosses:9	何気なしに血を拭った時、なんとなく理由を察した。	has:무심코 피를	fix	defaults
+dict:misread-glosses:13	うちの家族は動物好きだが、父はどちらかと言うと犬派。	has:개파	fix	defaults
+dict:misread-glosses:14	楠木さんは猫派ですか？	has:고양이파	fix	defaults
+dict:misread-glosses:20	その姿は、さながら『猫顔のてるてる坊主』	has:테루테루보즈	fix	defaults
+dict:misread-glosses:24	まずはミイニャ伍長が手で合図をして、分隊の半数を獣道沿いの茂みに配置する。	has:짐승길	fix	defaults
+dict:misread-glosses:24	舗装された道では無く森の獣道を歩いた。	has:숲의 짐승길을	fix	defaults
+pack:misread-glosses:p1	食卓には、ノリに漬物に生卵に焼鮭。	has:김에 채소 절임	keep	defaults
+pack:misread-glosses:p1	湯気を立てるご飯を、まずはノリで味わう。	has:김으로 맛본다	keep	defaults
+pack:misread-glosses:p1	あとはいつものノリだった。	has:평소의 분위기였다	fix	defaults
+pack:misread-glosses:p2	「ええ、ご飯を奢る者と、奢られる者の関係です」	has:한턱내는 사람과 얻어먹는 사람	fix	defaults

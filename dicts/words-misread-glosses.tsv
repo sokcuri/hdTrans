@@ -1,0 +1,28 @@
+#! layer=base
+# 기본 뜻풀이나 분석이 틀린 낱말과 구의 바른 한국어: 虚ろ 공허하다, 一息に 단숨에, 肝試し 담력 시험, 明後日の方向 엉뚱한 방향
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+意地の悪	심술$F3@	H7U0			GN			LEX-3474	misread-glosses:1
+虚ろ	공허%A1@	G8U0			GN			LEX-3474	misread-glosses:2
+薄らと	희미하게	E300			GN			LEX-3474	misread-glosses:3
+それでもなお	그럼에도	E300			GN			LEX-3474	misread-glosses:4
+一息に	단숨에	E300			GN			LEX-3474	misread-glosses:5
+肝試し	담력 시험	N110			GN			LEX-3474	misread-glosses:6
+きれいさっぱり	말끔히	E300			GN			LEX-3474	misread-glosses:7
+綺麗さっぱり	말끔히	E300			GN			LEX-3474	misread-glosses:8
+何気なしに	무심코	E300			GN			LEX-3474	misread-glosses:9
+大層な	대단한	E0H0			GN			LEX-3474	misread-glosses:10
+罰当たりな	천벌 받을	E0H0			GN			LEX-3474	misread-glosses:11
+万端	만반	N110			GN			LEX-3474	misread-glosses:12
+犬派	개파	N110			GN			LEX-3474	misread-glosses:13
+猫派	고양이파	N110			GN			LEX-3474	misread-glosses:14
+只ならぬ	보통이 아닌	E0H0			GN			LEX-3474	misread-glosses:15
+よっぽどの	상당한	E0H0			GN			LEX-3474	misread-glosses:16
+魔力切れ	마력 고갈	N110			GN			LEX-3474	misread-glosses:17
+婆ちゃん	할머니	I110	VHn		GN			LEX-3474	misread-glosses:18
+爺ちゃん	할아버지	I110	VHn		GN			LEX-3474	misread-glosses:19
+てるてる坊主	테루테루보즈	N110			GN			LEX-3474	misread-glosses:20
+あっさりとした	담백한	E0H0			GN			LEX-3474	misread-glosses:21
+明後日の方向	엉뚱한 방향	N110			GN			LEX-3474	misread-glosses:22
+仲間達	동료들	N110	VHn		GN			LEX-3474	misread-glosses:23
+獣道	짐승길	N110			GN			LEX-3474	misread-glosses:24
+準備万端	만반의 준비	N110			GN			LEX-3474	misread-glosses:25
