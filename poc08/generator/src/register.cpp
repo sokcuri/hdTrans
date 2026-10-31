@@ -621,7 +621,9 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             // katakana words (ダメよ、, ゴメンよ、) never follow a title
             size_t run = v;
             while (run > 0 && ((u.text[run - 1] >= U'ァ' && u.text[run - 1] <= U'ヺ') || u.text[run - 1] == U'ー')) --run;
-            const bool titled = run < v && run > 0 && u.text[run - 1] >= 0x4E00 && u.text[run - 1] <= 0x9FFF;
+            // the kanji before the name ends a title or rank (副将, 団長, 隊長, 将軍, 騎士, 陛下, 殿下), not an adverb (絶対, 全然, 超)
+            static const std::u32string kRank = U"将長官王帝卿師士佐尉督主侯爵伯臣相";
+            const bool titled = run < v && run > 0 && kRank.find(u.text[run - 1]) != std::u32string::npos;
             if (titled || kTitle.find(p) != std::u32string::npos) c.auth = true;
         }
     }
@@ -702,6 +704,10 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             if (k + 1 >= lines.size() || !lines[k + 1].dialogue || lines[k].dialogue) return false;
             const std::u32string x = ToU32(lines[k].ja);
             if (x.empty() || x.size() > 12) return false;
+            bool letter = false;  // a scene mark (◇◇◇, ——, ＊) is no name
+            for (char32_t ch : x)
+                if (IsWordChar(ch)) letter = true;
+            if (!letter) return false;
             for (char32_t ch : x)
                 if (ch == U'。' || ch == U'、' || ch == U'！' || ch == U'？' || ch == U'…' || ch == U'「') return false;
             return true;
