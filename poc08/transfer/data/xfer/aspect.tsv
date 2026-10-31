@@ -6,4 +6,4 @@ asp.teiru.change	N5-33	[link=te] [aspect=te-iru]	pred.asp=change	pred.aspect=res
 asp.teiru.state	N5-33	[link=te] [aspect=te-iru]	pred.asp=state	-	-	m	own	知っている → 알다
 asp.teiru.change-past	N5-33	[link=te] [aspect=te-iru]	pred.asp=change-past	pred.tense=past	-	m	own	結婚している → 결혼했다
 asp.teiru.mada	N5-52	[link=te] [aspect=te-iru]	cl.has=未だ cl.pol=neg	pred.tense=past	-	m	own	まだ食べていない → 아직 안 먹었다
-asp.teiru.change.neg	N5-H15	[link=te] [aspect=te-iru]	pred.asp=change pred.pclass!=posture cl.pol=neg	pred.tense=past	-	m	own	来ていない → 안 왔다
+asp.teiru.change.neg	N5-H15	[link=te] [aspect=te-iru]	pred.asp=change pred.pclass!=posture cl.has=ない|ず	pred.tense=past	-	m	own	来ていない → 안 왔다

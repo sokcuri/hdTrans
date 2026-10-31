@@ -12,3 +12,4 @@ asp.teiru.mada	fix	「まだ食べていない。」	「아직 안 먹었어.」
 asp.teiru.mada	keep	「パンを食べていない。」	「빵을 안 먹고 있어.」	inv
 asp.teiru.change.neg	fix	「先生は来ていない。」	「선생님은 안 왔어.」	inv
 asp.teiru.change.neg	keep	「先生は座っていない。」	「선생님은 안 앉아 있어.」	inv
+asp.teiru.change.neg	fix	「友達は来ていませんか。」	「친구는 안 왔어요?」	inv

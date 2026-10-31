@@ -17,7 +17,7 @@ case.mo	N5-18	{NP} [kase=mo]	-	-	P:=도	m	own	私も → 나도
 case.no	N5-19	{NP} [kase=no]	-	-	-	m	own	日本語の本 → 일본어 책 (N5-H9)
 case.kara.src	N5-20	{NP} [kase=kara]	-	-	P:src	m	own	家から → 집에서
 case.kara.time	N5-20	{N:@time} [kase=kara]	-	-	P:=부터	m	own	明日から → 내일부터
-case.kara.person	N5-20	{N:@person} [kase=kara]	-	-	P:=에게서	m	own	友達から → 친구에게서
+case.kara.person	N5-20	{N:@person} [kase=kara]	-	-	P:src	m	own	友達から → 친구에게서
 case.made	N5-21	{NP} [kase=made]	-	-	P:=까지	m	own	駅まで → 역까지
 case.yori	N5-23	{NP} [kase=yori]	-	-	P:=보다	m	own	私より → 나보다
 case.dake	N5-58	{NP} だけ	-	-	P:=만	m	own	一人だけ → 혼자만
