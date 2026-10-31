@@ -5619,6 +5619,9 @@ verb.quote-start	望
 verb.quote-start	命じ
 verb.quote-start	言い聞かせ
 verb.quote-start	感じ
+verb.quote-start	聞か	GRM-83
+verb.quote-start	聞い	GRM-83
+verb.quote-start	聞き	GRM-83
 
 verb.receiver-passive	許
 verb.receiver-passive	任

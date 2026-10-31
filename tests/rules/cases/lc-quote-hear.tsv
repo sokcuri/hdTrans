@@ -1,0 +1,17 @@
+# 규칙: GRM-83
+rule	input	expected	kind	layer
+rewrite:quote-to-hear	外国では地面の下に電線を埋めると聞いたことがあるが、	has:묻는다고 들은 적이	fix	rewrites
+rewrite:quote-to-hear	不老不死の力を与えられると聞いたことがある	has:준다고 들은 적이	fix	rewrites
+rewrite:quote-to-hear	「そうね。学園長から風見くんが転入してくると聞かされたときは」	has:전입해 온다고 들었을	fix	rewrites
+rewrite:quote-to-hear	「昨日、大島くんから選挙に出馬するかもしれないと聞かされましてね……ちょっと興味が湧いたんです」	has:모른다고 들어서	fix	rewrites
+rewrite:quote-to-hear	「Ｄ組の皆さんが、ケーキを手作りしていると聞きつけて、参加しに」	has:있다고 우연히 들어	fix	rewrites
+rewrite:quote-to-hear	「ただ、上からは“Ｄ組”って聞かされてたから、マサキがしっかり管理しているのかと思ってたのよ」	has:“D조”라고	fix	rewrites
+rewrite:quote-to-hear	「でも、夢の中の人間に、『これは夢ですか』って聞かれても困っちゃうなぁ」	has:『이것은 꿈입니까』라고	fix	rewrites
+rewrite:quote-to-hear	でも、それが恋愛感情かって聞かれると……	has:감정인가라고	fix	rewrites
+rewrite:quote-to-hear	大島くんから選挙に出るかもしれないと聞きました。	has:모른다고 들었습니다	fix	rewrites
+rewrite:quote-to-hear	先生に聞いたら分かった。	선생님에게 들었더니 알았다.	keep	rewrites
+rewrite:quote-to-hear	音楽を聞きながら歩いた。	음악을 들으면서 걸었다.	keep	rewrites
+rewrite:quote-to-hear	よく聞くと、それは鳥の声だった。	잘 들으니, 그것은 새의 소리였다.	keep	rewrites
+rewrite:quote-to-hear	彼が来ると聞いた。	그가 온다고 들었다.	keep	rewrites
+rewrite:quote-to-hear	人の話を聞かない。	사람의 이야기를 듣지 않는다.	keep	rewrites
+rewrite:quote-to-hear	その話は聞きたくない。	그 이야기는 듣고 싶지 않다.	keep	rewrites
