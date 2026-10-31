@@ -51,8 +51,8 @@ r6-8	REG-6	keep	d38		yes	「どうかな……唯一の趣味であることは�
 r6-9	REG-6	keep	d39		yes	「あだだだっ、死ぬっ、死ぬっ！」	hae	-
 r6-10	REG-6	keep	d40		yes	「というわけで、私の絵は大したものじゃないんだ」	hae	-
 r7-1	REG-7	fix	d41		yes	「それじゃ、また明日」	-	-
-r7-2	REG-7	fix	d41		no	先生、乗っ取り犯がここにいます。	haeyo	-
-r7-3	REG-7	fix	d41		no	いや、もういいです。	haeyo	-
+r7-2	REG-7	fix	d41		no	先生、乗っ取り犯がここにいます。	hapsyo	-
+r7-3	REG-7	fix	d41		no	いや、もういいです。	hapsyo	-
 r7-4	REG-7	fix	d41		no	ストレートに言ったら、絶対傷つくぞ。	haera	-
 r7-5	REG-7	fix	d41		no	それじゃ、またね。	hae	-
 r7-6	REG-7	fix	d41		no	よろしくお願いします。	hapsyo	-
@@ -143,3 +143,8 @@ r15-6	REG-15	keep	d120		yes	そう言って「行くぞ」「了解です」	hae
 r14-18	REG-14	keep	d121		yes	「お嬢、早く逃げるんだ」	hae	-
 r14-19	REG-14	keep	d122		yes	「彼女は伯爵家の令嬢。強いんだ」	hae	-
 r18-9	REG-18	keep	d123		yes	「着たいな」	hae	-
+r7-9	REG-7	keep	d124	筧	no	【筧】いや、もういいです。	haeyo	-
+r7-10	REG-7	fix	d125		yes	「どうぞ、お入りください」	-	-
+r7-11	REG-7	fix	d125		no	本日の営業は終了しました。	hapsyo	-
+r9-6	REG-9	fix	d126		no	もういいです	haeyo	-
+r9-7	REG-9	fix	d126		no	わかってるよ	-	-

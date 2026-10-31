@@ -671,7 +671,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             sceneArchaic = sceneSpeech && archaic >= 2;  // period drama captions; games keep the table (hae)
         }
         for (size_t k = i; k < j; ++k) {
-            if (!lines[k].dialogue) continue;
+            if (!lines[k].dialogue && lines[k].speaker.empty()) continue;
             cues[k - i] = Scan(t, lines[k].ja);
             keys[k - i] = Key(cues[k - i]);
             if (lines[k].speaker.empty()) continue;
@@ -696,7 +696,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 d.honGive = hc.honGive;
                 d.exclaimNe = hc.exclaimNe && Key(hc) == "exclaim-ne";
             }
-            if (!lines[k].dialogue) {
+            // STYLE §9: an unquoted line with a speaker tag is dialogue
+            if (!lines[k].dialogue && lines[k].speaker.empty()) {
                 // an unbracketed line is narration unless it ends like speech (inner monologue: …だよ, …です)
                 const Cues c = Scan(t, lines[k].ja);
                 const std::string key = Key(c);
@@ -718,6 +719,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 if (row != t.levels.end() &&
                     (row->second.unquoted == U::yes || (row->second.unquoted == U::strong && c.strongTail))) {
                     d.level = row->second.level;
+                    // STYLE §9: です/ます in narration, documents and notices is 합쇼 (a polite narrator), not 해요
+                    if (d.level == Level::haeyo) d.level = Level::hapsyo;
                     d.key = "unbracketed-" + key;
                     d.spec = "REG-7";
                 } else {
