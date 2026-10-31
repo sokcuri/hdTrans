@@ -1021,6 +1021,16 @@ Voice CandidateVoice(Flusher& f, const Item* it, int slot) {
     return Voice::None;
 }
 
+// Whether the dictionary word item it has a candidate in the potential that carries no marker of the
+// older negative rules (gram Ma: 決められ 결정할 수, whose negative those rules wrote), which then
+// reads it as it stands (耐えられ 견딜 수).
+bool PlainPotentialCandidate(Flusher& f, const Item* it) {
+    for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+        if (CandidateVoice(f, it, slot) == Voice::Potential && !GrammarCode(it->GAttr(slot), "Ma")) return true;
+    }
+    return false;
+}
+
 // Keeps the candidates of item it that read voice v (the passive and the spontaneous form: neither
 // the potential nor the respectful form) and reports whether one does.
 bool KeepVoiceCandidates(Flusher& f, Item* it, Voice v) {
@@ -1123,6 +1133,63 @@ bool CausativePotentialEnding(std::string_view rest) {
            !rest.starts_with("たら") && !rest.starts_with("たり") && !rest.starts_with("ます") && !rest.starts_with("よう");
 }
 
+// Whether the nearest subject before verb item it in its clause (a noun before が) names no person; an
+// object of を before it comes first and makes it none. A topic in は may be the object (要望は決められない).
+bool ThingSubjectBefore(const Item* it) {
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s == "を") return false;
+        if (s == "が" && p->prev != nullptr && !p->prev->detail->Yougo()) {
+            return !Person(p->prev->Attr(std::max(p->prev->selected, 0)));
+        }
+    }
+    return false;
+}
+
+// Whether the dictionary word item it in the られ of the ichidan or くる verb stem, followed by rest, is
+// the potential as the analysed られ before a negative is (決められない 결정할 수 없다, 連れてこられない
+// 데려올 수 없다; spec GRM-50): not when its subject in が is no person (食事が与えられず), a verb whose られ is
+// the passive whatever its object or of what is taken away (求められ, 取り上げられ), one of acts done to
+// someone after its object or しか in a narrative form (食事を与えられず 식사가 주어지지 않고), a passive of something
+// wished for (褒められない, GRM-36), a feeling (感じられない), a person or 誰 before に, にも, には or から
+// (誰にも見られない), or ないように and ないうちに.
+bool LexicalNegativePotential(Flusher& f, const Item* it, std::string_view stem, std::string_view rest) {
+    const std::string_view surface = it->group->surface;
+    // The ん of くる's られ is its negative (連れてこられん); after another verb it may be the る said
+    // short (考えられんの), and な starts ながら or なさい as well.
+    if (surface.ends_with("こられ") || surface.ends_with("来られ")) {
+        if (dict::StartsWithMember(HDTRANS_CLASS("ending.rare-negative"), rest) == 0) return false;
+    } else {
+        if (dict::StartsWithMember(HDTRANS_CLASS("ending.lexical-potential-negative"), rest) == 0) return false;
+        // られ also ends the passive of a godan verb in る (守られ), which has no potential of this form.
+        std::string_view base;
+        const std::vector<const Record*> verbs = BaseVerbRecords(f, surface, base);
+        if (verbs.empty() || At(DefaultRecord(verbs)->partCode, 3) != '7') return false;
+    }
+    if (dict::InClass(HDTRANS_CLASS("verb.passive-any-object"), stem) || dict::InClass(HDTRANS_CLASS("verb.receiver-passive"), stem) ||
+        dict::InClass(HDTRANS_CLASS("verb.spontaneous"), stem) || dict::EndsWithMember(HDTRANS_CLASS("verb.unattained"), surface) > 0) {
+        return false;
+    }
+    if (dict::InClass(HDTRANS_CLASS("verb.passive-after-object"), stem) &&
+        (rest.starts_with("なかっ") || rest.starts_with("ず") || rest.starts_with("ぬ"))) {
+        for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+            if (p->group->surface == "を" || p->group->surface == "しか") return false;
+        }
+    }
+    // Not doing it so that, or before, someone does it to one is the passive (誰にも見られないように).
+    if (rest.starts_with("ないよう") || rest.starts_with("ないうち")) return false;
+    for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+        const std::string_view s = p->group->surface;
+        if (s != "に" && s != "にも" && s != "には" && s != "から") continue;
+        const Item* a = p->prev;
+        if (a != nullptr && !a->detail->Yougo() &&
+            (Person(a->Attr(std::max(a->selected, 0))) || a->group->surface.starts_with("誰"))) {
+            return false;
+        }
+    }
+    return !ThingSubjectBefore(it);
+}
+
 // The voice of the (ら)れ of verb item it, first signal first (spec GRM-10): an agent that is a
 // person or an animal makes the passive; then the respectful form; a godan passive, and たい after
 // it, the passive; a word of ability the potential; a trouble after its condition the passive; a
@@ -1167,12 +1234,7 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         return !passive && potentialEnding ? Voice::Potential : Voice::Passive;
     }
     if (form == VoiceForm::Rare) return passive ? Voice::Passive : Voice::Potential;
-    // A dictionary word in the られ of くる (連れてこられ, 出てこられ) before a negative is the potential, as
-    // the analysed られ of くる is (連れてこられない 데려올 수 없다, 連れてこれません).
-    if (form == VoiceForm::Lexical && ichidan && (surface.ends_with("こられ") || surface.ends_with("来られ")) &&
-        dict::StartsWithMember(HDTRANS_CLASS("ending.rare-negative"), rest) > 0) {
-        return Voice::Potential;
-    }
+    if (form == VoiceForm::Lexical && ichidan && LexicalNegativePotential(f, it, stem, rest)) return Voice::Potential;
     return Voice::None;
 }
 
@@ -1239,6 +1301,34 @@ void SpelledPotential(Flusher& f, Item* it) {
     it->group = potential->group;
     it->detail = potential->detail;
     it->detail->voice = Voice::Potential;
+}
+
+// Reads the dictionary word item it in the られ of the ichidan or くる verb stem as the potential of that
+// verb, analysed at its place as the analysis reads an ichidan potential (続けられ 계속할 수); false, with
+// nothing changed, when the analysis reads no such verb of the same length.
+bool ReadAsBasePotential(Flusher& f, Item* it, std::string_view stem) {
+    if (stem.empty()) return false;
+    const std::string_view base = f.w.arena.Keep(std::string(stem));
+    const Lookup found = f.w.DoLookup(base, kModeGeneral);
+    Item* potential = f.w.InsertLateCandidate(it->text, it->start, it->tokenIndex, found.records);
+    if (potential == nullptr || (potential->detail->record != 0 && potential->detail->record != 4) ||
+        potential->length != it->length || potential->group->surface != base) {
+        return false;
+    }
+    // The analysis reads an ichidan られ in record 0 with the endings of its forms; it is the potential
+    // only with an ending of the potential (class 54, 3 수) among them.
+    if (potential->detail->record == 0) {
+        const Group* endings = potential->detail->group;
+        if (endings == nullptr ||
+            std::ranges::none_of(endings->entries, [](const Entry* e) { return At(e->code, 1) == '4'; })) {
+            return false;
+        }
+    }
+    // The voice step runs before selection, so no candidate of the old group is selected yet.
+    it->group = potential->group;
+    it->detail = potential->detail;
+    it->detail->voice = Voice::Potential;
+    return true;
 }
 
 // Whether surface is a dictionary word in (ら)れ made from a godan verb (知られ 知る), whose (ら)れ
@@ -1368,8 +1458,11 @@ void DecideVoice(Flusher& f) {
         it->detail->doerLeftOut = doerLeftOut;
         if (form == VoiceForm::Lexical) {
             // A word whose candidates all read the potential is read as the passive of the verb it is
-            // made from when that verb takes an object (調べられた 조사되었다).
-            if (!own && v != Voice::None && !KeepVoiceCandidates(f, it, v) && passiveVoice &&
+            // made from when that verb takes an object (調べられた 조사되었다); one with no candidate in
+            // the potential is read as the potential of that verb (続けられなかった 계속할 수 없었다).
+            if (!own && v == Voice::Potential) {
+                if (PlainPotentialCandidate(f, it) || !ReadAsBasePotential(f, it, stem)) KeepVoiceCandidates(f, it, v);
+            } else if (!own && v != Voice::None && !KeepVoiceCandidates(f, it, v) && passiveVoice &&
                 BaseTakesObject(f, spelled) && ReadAsBaseVerb(f, it, spelled)) {
                 WriteLexicalPassive(f, it);
             } else if (doerLeftOut && WordlessPassive(f, it)) {

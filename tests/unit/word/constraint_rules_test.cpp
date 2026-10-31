@@ -110,6 +110,9 @@ const dict::Snapshot* Dictionary() {
          "した\t아래\tN110\t\t\tGN\t112\n"
          "くらい\t정도\tP200\t\t\tGN\t113\n"
          "たんと\t듬뿍\tE300\t\t\tGN\t114\n"
+         "しかし\t하지만\tE331\t\t\tGN\t125\n"
+         "気にするな\t신경 쓰지 마\tE320\t\t\tGN\t126\n"
+         "気\t기분\tN110\t\t\tGN\t127\n"
          "た\t밭\tN110\t\t\tGN\t115\n"
          "ち\t피\tN110\t\t\tGN\t121\n"
          "ちゃう\t아니야\tN110\t\t\tGN\t116\n"
@@ -174,7 +177,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{49});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{51});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -409,6 +412,31 @@ HD_TEST(constraint_tanto_after_tsu) {
         {"行ったんと", "たんと", "たんと", ""},
         {"ご飯をたんと", "たんと", "たんと", "듬뿍"},
         {"さあ、たんと", "たんと", "たんと", "듬뿍"},
+    });
+}
+
+// しかし right after a word and before a negative is しか and the negative of する (予感しかしない,
+// 味しかしません); after a pause, or before anything but a negative, it is the conjunction.
+HD_TEST(constraint_shika_before_negative) {
+    CheckCases({
+        {"予感しかしない", "しかしない", "しかし", ""},
+        {"味しかしません", "しかしません", "しかし", ""},
+        {"方法しかしなかった", "しかしなかった", "しかし", ""},
+        {"いや、しかしなあ", "しかしなあ", "しかし", "하지만"},
+        {"しかし、ない", "しかし、ない", "しかし", "하지만"},
+        {"だがしかし", "しかし", "しかし", "하지만"},
+        {"まあしかしねえ", "しかしねえ", "しかし", "하지만"},
+        {"まあしかしずいぶん", "しかしずいぶん", "しかし", "하지만"},
+        {"まあしかしぬるいな", "しかしぬるいな", "しかし", "하지만"},
+    });
+}
+
+// A word in るな before ら is a verb with the なら of a condition (気にするなら), not the prohibition.
+HD_TEST(constraint_runa_before_ra) {
+    CheckCases({
+        {"気にするなら", "気にするなら", "気にするな", ""},
+        {"気にするな", "気にするな", "気にするな", "신경 쓰지 마"},
+        {"気にするなよ", "気にするなよ", "気にするな", "신경 쓰지 마"},
     });
 }
 

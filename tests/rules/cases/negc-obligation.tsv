@@ -1,0 +1,32 @@
+# 규칙: GRM-53, GRM-12, MNG-15
+rule	input	expected	kind	layer
+cx:neg-clause-obligation:10	死ななきゃいけません。	has:죽어야 합니다	fix	rewrites
+cx:neg-clause-obligation:10	呪いのビデオを取りに行かなきゃいけないんスよー	has:가야 해요	fix	rewrites
+cx:neg-clause-obligation:10	食べなきゃいけない	has:먹어야 한다	keep	rewrites
+cx:neg-clause-obligation:20	食べなきゃなりません	has:먹어야 합니다	fix	rewrites
+cx:neg-clause-obligation:20	帰らなくちゃなりません。	has:돌아가야 합니다	fix	rewrites
+cx:neg-clause-obligation:20	行かなければなりませんか	has:가야 합니까	keep	rewrites
+cx:neg-clause-obligation:25	仕事も 探さねばならんし｡	has:찾아야 하고	fix	rewrites
+cx:neg-clause-obligation:25	仕事も探さねばならん。	has:찾아야 해	keep	rewrites
+cx:neg-clause-obligation:30	やり直さねばならん。	has:다시 해야 해	fix	rewrites
+cx:neg-clause-obligation:30	彼にはこれからも働いてもらわねばならん	has:일해 주어야 해	fix	rewrites
+cx:neg-clause-obligation:30	行かなくちゃならんかもしれません	!rule:cx:neg-clause-obligation:30	keep	rewrites
+cx:neg-clause-obligation:40	考えなきゃならぬ。	has:생각해야 한다	fix	rewrites
+cx:neg-clause-obligation:40	行かなくちゃならぬ	has:가야 한다	fix	rewrites
+cx:neg-clause-obligation:40	急がなきゃならないのか	!rule:cx:neg-clause-obligation:40	keep	rewrites
+cx:neg-clause-obligation:50	取り急いで調べねばならぬことがあって遅れました	has:조사해야 하는 일이	fix	rewrites
+cx:neg-clause-obligation:50	帰らなきゃならんことがある	has:돌아가야 하는 일이	fix	rewrites
+cx:neg-clause-obligation:50	急がねばならぬのだ！	!rule:cx:neg-clause-obligation:50	keep	rewrites
+cx:neg-clause-obligation:55	お別れせねばなりません	has:작별해야 합니다	fix	rewrites
+cx:neg-clause-obligation:55	報告せねばなりません	has:보고해야 합니다	fix	rewrites
+cx:neg-clause-obligation:55	何か補填をせねば父上が	has:하지 않으면	keep	rewrites
+cx:neg-clause-obligation:56	人物に一度、挨拶せねばならん。	has:인사해야 해	fix	rewrites
+cx:neg-clause-obligation:56	反省せねば	!rule:cx:neg-clause-obligation:56	keep	rewrites
+cx:neg-clause-obligation:60	この世界に慣れないといけないと思って	has:익숙해야 한다고	fix	rewrites
+cx:neg-clause-obligation:60	じゃあどっちかを切り捨てないといけない。	has:버려야 한다	fix	rewrites
+cx:neg-clause-obligation:60	間に入って止めないといけない。	has:멈추어야 한다	fix	rewrites
+cx:neg-clause-obligation:60	行かないと間に合わない	has:가지 않으면 늦는다	keep	rewrites
+cx:neg-clause-obligation:60	早くしないと、置いていくよ	!rule:cx:neg-clause-obligation:60	keep	rewrites
+cx:neg-clause-obligation:70	元部長の実力を見せないといけませんね？	has:보여야 하겠네요	fix	rewrites
+cx:neg-clause-obligation:70	取り戻さないといけませんからねー	has:되찾아야 하니까요	fix	rewrites
+cx:neg-clause-obligation:70	行かないと困りません	!rule:cx:neg-clause-obligation:70	keep	rewrites

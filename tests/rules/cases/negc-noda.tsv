@@ -1,0 +1,32 @@
+# 규칙: GRM-51, MNG-15
+rule	input	expected	kind	layer
+cx:neg-clause-noda:10	彼らは何もしなかったのではありません。	has:하지 않았던 것은 아닙니다	fix	rewrites
+cx:neg-clause-noda:10	……領地の税を引き上げればよかったのではないか」	has:좋았던 것은 아닌가	fix	rewrites
+cx:neg-clause-noda:10	一言頂戴してもよかったのではないかと戸惑っている	has:괜찮았던 것은 아닐까	fix	rewrites
+cx:neg-clause-noda:10	可能だったのではないでしょうか	has:가능했던 것은 아닐까요	fix	rewrites
+cx:neg-clause-noda:10	女装させてあげたほうがよかったのではないでしょうか	has:좋았던 것은 아닐까요	fix	rewrites
+cx:neg-clause-noda:10	ああすれば良かったのではないか、	has:좋았던 것은 아닌	fix	rewrites
+cx:neg-clause-noda:10	彼は逃げたのではない。	has:도망친 것은 아니다	keep	rewrites
+cx:neg-clause-noda:10	お金がなかったので、帰った。	has:없었기 때문에	keep	rewrites
+cx:neg-clause-noda:10	こんなに暑いのでは仕事にならない	!rule:cx:neg-clause-noda:10	keep	rewrites
+cx:neg-clause-noda:20	「わたし、何かしてほしくて看病したんじゃないよ」	has:간병한 게 아니야	fix	rewrites
+cx:neg-clause-noda:20	コンテストで勝つために依頼を受けたんじゃないよ	has:받은 게 아니야	fix	rewrites
+cx:neg-clause-noda:20	あ、悪い意味で言ったんじゃないよ？	has:말한 게 아니야	fix	rewrites
+cx:neg-clause-noda:20	惡い意味で言ったんじゃないよ。そんなに怒るなよ。	has:말한 게 아니야	fix	rewrites
+cx:neg-clause-noda:20	そんなマジな意味で言ったんじゃないですよ。	has:말한 게 아니에요	fix	rewrites
+cx:neg-clause-noda:20	今はそういう話をしにきたんじゃないから、	has:온 게 아니니까	fix	rewrites
+cx:neg-clause-noda:20	あんたがやったんじゃない！！	!rule:cx:neg-clause-noda:20	keep	rewrites
+cx:neg-clause-noda:20	自信、ついたんじゃないですか？	!rule:cx:neg-clause-noda:20	keep	rewrites
+cx:neg-clause-noda:20	ケガをしたんじゃないかって思っちゃった。	!rule:cx:neg-clause-noda:20	keep	rewrites
+cx:neg-clause-noda:20	これたぶん死んだんじゃないですかねぇ	!rule:cx:neg-clause-noda:20	keep	rewrites
+cx:neg-clause-noda:30	そういうつもりで見てたんじゃないよ	has:보고 있던 게 아니야	fix	rewrites
+cx:neg-clause-noda:30	俺の身体が揺れていたんじゃなく、	has:흔들리고 있던 게 아니고	fix	rewrites
+cx:neg-clause-noda:30	見てたんじゃないの？	!rule:cx:neg-clause-noda:30	keep	rewrites
+cx:neg-clause-noda:40	俺が悪いんじゃない、悪いのは社会だ！	has:내가 나쁜 게 아니야	fix	rewrites
+cx:neg-clause-noda:40	いいんじゃない、休んでも？	!rule:cx:neg-clause-noda:40	keep	rewrites
+cx:neg-clause-noda:40	かなりつらいんじゃないですか？	!rule:cx:neg-clause-noda:40	keep	rewrites
+cx:neg-clause-noda:50	今買ってきたんじゃなくて、	has:사 온 게 아니라	fix	rewrites
+cx:neg-clause-noda:50	それに、覗いたんじゃなくて、事故で見えただけ！	has:본 게 아니라	fix	rewrites
+cx:neg-clause-noda:50	あたしは作れないんじゃなくて、作らないのよ	has:없는 게 아니라	fix	rewrites
+cx:neg-clause-noda:50	楽しくなくて、帰った。	!rule:cx:neg-clause-noda:50	keep	rewrites
+cx:neg-clause-noda:40	それでいいんじゃない、別に	!rule:cx:neg-clause-noda:40	keep	rewrites

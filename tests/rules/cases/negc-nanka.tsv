@@ -1,0 +1,32 @@
+# 규칙: LEX-18
+rule	input	expected	kind	layer
+cx:neg-clause-nanka:10	恨んでなんかない。	has:원망하고 있지 않다	fix	rewrites
+cx:neg-clause-nanka:10	歪んでなんかない…	has:비뚤어져 있지 않아	fix	rewrites
+cx:neg-clause-nanka:10	お、お、思ってなんかないわよーっ！	has:생각하고 있지 않아	fix	rewrites
+cx:neg-clause-nanka:10	別に貶めてなんかないわ。	has:깎아내리고 있지 않아	fix	rewrites
+cx:neg-clause-nanka:10	揉めてなんてないよね？	lacks:왠지	fix	rewrites
+cx:neg-clause-nanka:10	えっ、の…呑んでなんかないよぉ？	has:있지 않아	fix	rewrites
+cx:neg-clause-nanka:10	怒ってなんかないですよ？	has:화내고 있지 않아요	fix	rewrites
+cx:neg-clause-nanka:10	何も隠してなんかないよ。	has:숨기고 있지 않아	fix	rewrites
+cx:neg-clause-nanka:10	泣いてなんかないもん	has:울고 있지 않은 걸	fix	rewrites
+cx:neg-clause-nanka:10	悔しくなんかないもん！！	!rule:cx:neg-clause-nanka:10	keep	rewrites
+cx:neg-clause-nanka:10	見たことなんかない。	!rule:cx:neg-clause-nanka:10	keep	rewrites
+cx:neg-clause-nanka:10	お金なんかない	!rule:cx:neg-clause-nanka:10	keep	rewrites
+cx:neg-clause-nanka:20	誰も怒ってなんかいないわ	has:화내고 있지 않아	fix	rewrites
+cx:neg-clause-nanka:20	からかってなんかいないわ、	has:놀리고 있지 않아	fix	rewrites
+cx:neg-clause-nanka:20	何も隠してなんかいないよ！	has:숨기고 있지 않아	fix	rewrites
+cx:neg-clause-nanka:20	開き直ってなんかいないですよっ！	has:나오고 있지 않아요	fix	rewrites
+cx:neg-clause-nanka:20	彼女は泣いてなんかいない。	has:울고 있지 않다	fix	rewrites
+cx:neg-clause-nanka:20	落ち込んでなんかいないですって！	lacks:왠지	fix	rewrites
+cx:neg-clause-nanka:20	あいつなんかいないほうがいい	!rule:cx:neg-clause-nanka:20	keep	rewrites
+cx:neg-clause-nanka:30	全然疲れてなんかいませんよ！	has:지쳐 있지 않아요	fix	rewrites
+cx:neg-clause-nanka:30	どのクラブも、サボってなんかいません。	has:피우고 있지 않습니다	fix	rewrites
+cx:neg-clause-nanka:30	眠くなってなんかいません！	has:있지 않습니다	fix	rewrites
+cx:neg-clause-nanka:30	猫なんかいません	!rule:cx:neg-clause-nanka:30	keep	rewrites
+cx:neg-clause-nanka-verb:10	全然疲れてなんかいませんよ！	has:지쳐 있지	fix	rewrites
+cx:neg-clause-nanka-verb:10	歪んでなんかない…	has:비뚤어져 있지	fix	rewrites
+cx:neg-clause-nanka-verb:10	疲れてない	!rule:cx:neg-clause-nanka-verb:10	keep	rewrites
+cx:neg-clause-nanka-verb:20	別に困ってなんかないよね？	has:곤란하지 않지	fix	rewrites
+cx:neg-clause-nanka-verb:20	困ってない	!rule:cx:neg-clause-nanka-verb:20	keep	rewrites
+cx:neg-clause-nanka-verb:30	泣いてなんかないもん	has:울고 있지	fix	rewrites
+cx:neg-clause-nanka-verb:30	泣いてない	!rule:cx:neg-clause-nanka-verb:30	keep	rewrites

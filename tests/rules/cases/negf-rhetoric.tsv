@@ -27,3 +27,5 @@ cx:neg-final-rhetoric:25	「田中さんなら、コスプレ作戦すれば、�
 cx:neg-final-rhetoric:25	それが自然と思うんじゃない。	!rule:cx:neg-final-rhetoric:25	keep	rewrites
 pack:negf:iinja	いいんじゃない ？	!rule:pack:negf:iinja	keep	packs
 pack:negf:iinja-suggest	そっちは慎んだ方が良いんじゃない。	rule:pack:negf:iinja-suggest=-	keep	packs
+pack:negf:iinja	事前に一言頂戴してもよかったのではないかと	!rule:pack:negf:iinja	keep	packs
+pack:negf:iinja	もっと早く言ってくれてもよかったんじゃない	!rule:pack:negf:iinja	keep	packs
