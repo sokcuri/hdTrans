@@ -7,3 +7,5 @@ pol.mou.neg	N5-52	もう	cl.pol=neg	-	Adv:더_이상	m	own	もう食べない �
 adv.mou.ii	N5-52	もう 良い	cl.tense=nonpast	-	Adv:이제 V:되다{tense=past}	m	own	もういい → 이제 됐어
 adv.sou.alone	N5-53	{C}	C.lemma=そう next.kind=punct	C.lemma=그래	-	m	own	……そう → ……그래
 adv.sou.eol	N5-53	{C}	C.lemma=そう next.pos=absent	C.lemma=그래	-	m	own	そう → 그래
+adv.sou.cop	N5-53	{C} [role=cop]	C.lemma=そう	C.lemma=그렇다;C.kind=V	-	m	own	そうです → 그래요
+adv.sou.final	N5-53	{C}	C.lemma=そう next.kind=final	C.lemma=그래	-	m	own	そうよ → 그래

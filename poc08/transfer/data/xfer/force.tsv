@@ -12,3 +12,4 @@ force.naide.final	N5-27	[pol=neg] [link=te]	next.role=end|q|excl|close	pred.neg=
 force.te.final.eol	N5-26	[link=te]	next.pos=absent	pred.mood=imp	-	m	own	読んで → 읽어 (line end)
 force.naide.final.eol	N5-27	[pol=neg] [link=te]	next.pos=absent	pred.neg=ji-ma;pred.mood=imp	-	m	own	起きないで → 일어나지 마 (line end)
 force.doushita.hold	N5-54	どう|如何 為る [tense=past]	-	line.route=fallback	-	m	own	どうした (what's wrong): held for 0.7.x
+force.te.final.fp	N5-26	[link=te] [aux.f.yo]	-	pred.mood=imp	-	m	own	気をつけてね → 조심해

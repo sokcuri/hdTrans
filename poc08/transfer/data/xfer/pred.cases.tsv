@@ -51,3 +51,7 @@ pred.cop.q.wh	fix	「何？」	「뭐?」	inv
 pred.cop.q.wh	keep	「学生？」	「학생이야?」	inv
 pred.cop.wh.hold	fix	「何だ、これ？」	-	inv
 pred.cop.wh.hold	keep	「これは本だ。」	「이건 책이야.」	inv
+pred.nai.exist.mo	fix	本もない。	책도 없다.	inv
+pred.nai.exist.mo	keep	本もある。	책도 있다.	inv
+pred.nai.exist.wa	fix	「時間はない。」	「시간은 없어.」	inv
+pred.nai.exist.wa	keep	「時間はある。」	「시간은 있어.」	inv

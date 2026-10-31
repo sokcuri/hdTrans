@@ -24,3 +24,5 @@ force.masenka	keep	「友達は本を読んでいませんか。」	「친구는
 force.masenka	keep	「友達は日本語が分かりませんか。」	「친구는 일본어를 몰라요?」	inv
 force.doushita.hold	fix	「どうした？」	-	inv
 force.doushita.hold	keep	「どうする？」	「어떻게 해?」	inv
+force.te.final.fp	fix	「本を読んでね」	「책을 읽어」	inv
+force.te.final.fp	keep	「本を読んで寝る」	「책을 읽고 자」	inv

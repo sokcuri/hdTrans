@@ -66,7 +66,19 @@ case.mo.aru	fix	部屋に時計もある。	방에 시계도 있다.	inv
 case.mo.aru	keep	部屋に時計がある。	방에 시계가 있다.	inv
 case.de.pron	fix	「これでいい。」	「이걸로 좋아.」	inv
 case.de.pron	keep	「ここで遊ぶ。」	「여기에서 놀아.」	inv
-case.de.sorede	fix	「それで、学校に行った。」	「그래서, 학교에 갔어.」	inv
-case.de.sorede	keep	「これで、学校に行った。」	「이걸로, 학교에 갔어.」	inv
 case.de.time	fix	「今日で終わる。」	「오늘로 끝나.」	inv
 case.de.time	keep	「学校で終わる。」	「학교에서 끝나.」	inv
+case.sore.hold	fix	「それで、学校に行った。」	-	inv
+case.sore.hold	keep	「これで、学校に行った。」	「이걸로, 학교에 갔어.」	inv
+case.sore.kara.hold	fix	それから、学校に行く。	-	inv
+case.sore.kara.hold	keep	学校から来る。	학교에서 온다.	inv
+case.sore.ni.hold	fix	それに、学校に行く。	-	inv
+case.sore.ni.hold	keep	学校に行く。	학교에 간다.	inv
+case.ni.hontou	fix	本当にかわいい。	정말 귀엽다.	inv
+case.ni.hontou	keep	本当だ。	정말이다.	inv
+case.ni.issho	fix	一緒に行く。	같이 간다.	inv
+case.ni.issho	keep	学校に行く。	학교에 간다.	inv
+case.mo.cop.hold	fix	「私もです」	-	inv
+case.mo.cop.hold	keep	「私も学生です」	「저도 학생이에요」	inv
+case.mo.naku.hold	fix	そう思う間もなく――	-	inv
+case.mo.naku.hold	keep	本もない。	책도 없다.	inv

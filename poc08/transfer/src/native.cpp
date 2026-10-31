@@ -713,7 +713,7 @@ struct Ctx {
         if (i > 0) afters.push_back(tk[i - 1].lemma);
         if (k.epos == Pos::adj && k.form == "renyo" && i + 1 < tk.size() && tk[i + 1].content) forms.insert("adv");
         // cop / attr: a noun read as a predicate (便利だ, 便利な, 便利ではない)
-        if (i + 1 < tk.size()) {
+        if (i + 1 < tk.size() && (IsNounPos(k.epos) || k.epos == Pos::na)) {
             const Tk& nx = tk[i + 1];
             auto has = [&](const Tk& t, const char* f) {
                 return std::find(t.aux->facts.begin(), t.aux->facts.end(), f) != t.aux->facts.end();
@@ -1085,6 +1085,11 @@ bool SetField(KNode& n, Doc& doc, const std::string& field, const std::string& v
     if (field == "modal") return en(F::modal, n.modal);
     if (field == "kcls") return en(F::kcls, n.kcls);
     if (field == "lemma") return n.lemma = doc.I(value), true;
+    if (field == "kind") {
+        if (!Parse(F::kk, value, v)) return false;
+        n.kind = static_cast<KK>(v);
+        return true;
+    }
     if (field == "eomi") return n.eomi = doc.I(value), true;
     if (field == "aux") return n.aux = on, true;
     if (field == "dep") return n.dep = on, true;
@@ -1668,6 +1673,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 line.decisions[candDecision[a] - 1].because.push_back(doc.I("bad=" + s.field + "=" + s.value));
         }
     }
+    // A predicate whose Korean is two words (안 되다) cannot take a negation of its own: the line stays with 0.7.x.
+    for (const Placed& p : placed)
+        if (p.n.kind == KK::V && p.n.neg != kneg::none && doc.S(p.n.lemma).find(' ') != std::string_view::npos)
+            line.unmatched.push_back(doc.I(std::string(doc.S(p.n.lemma)) + "/neg"));
     // Suppletive negatives (supp rows): a negated predicate whose Korean lemma has its own negative word.
     for (Placed& p : placed) {
         if (p.n.kind != KK::V || p.n.neg == kneg::none) continue;

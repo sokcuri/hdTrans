@@ -31,8 +31,14 @@ case.de.language	N5-16	{N:@language} [kase=de]	-	-	P:instr	m	own	日本語で話
 case.no.na	N5-H9	{NP} [kase=no]	NP.ko=나	NP.lemma=내	-	m	own	私の本 → 내 책
 case.no.jeo	N5-H9	{NP} [kase=no]	NP.ko=저	NP.lemma=제	-	m	own	私の本(です/ます) → 제 책
 case.no.neo	N5-H9	{NP} [kase=no]	NP.ko=너	NP.lemma=네	-	m	own	君の本 → 네 책
-case.ka.or	N5-22	{NP} [aux.p.ka.adv]	next.pos=n|pn	-	P:=(이)나	m	own	パンかりんご → 빵이나 사과
+case.ka.or	N5-22	{NP} [aux.p.ka.adv]	next.pos=n|pn NP.cls!=@question	-	P:=(이)나	m	own	パンかりんご → 빵이나 사과
 case.mo.aru	N5-07	{NP} [kase=mo] [aux.aru.cop]	-	-	P:=도 V:있다	m	own	時計もある (ある read as the copula's) → 시계도 있다
 case.de.pron	N5-16	{NP} [kase=de]	NP.field=pronoun NP.cls=@entity NP.cls!=@place	-	P:instr	m	own	これでいい → 이걸로 좋다
-case.de.sorede	N5-41	其れ [kase=de]	prev.pos=absent|sym	-	Adv:그래서	m	own	それで、話は → 그래서, 이야기는
 case.de.time	N5-16	{N:@time} [kase=de]	-	-	P:instr	m	own	今日で終わり → 오늘로 끝
+case.sore.hold	N5-53	其れ [kase=de]	prev.pos=absent|sym	line.route=fallback	-	m	own	それで / それじゃ at a line start (conjunctions): held for 0.7.x
+case.sore.kara.hold	N5-53	其れ [kase=kara]	prev.pos=absent|sym	line.route=fallback	-	m	own	それから (conjunction): held for 0.7.x
+case.sore.ni.hold	N5-53	其れ [kase=ni]	prev.pos=absent|sym	line.route=fallback	-	m	own	それに (conjunction): held for 0.7.x
+case.ni.hontou	N5-42	本当 [kase=ni]	-	-	Adv:정말	m	own	本当に → 정말
+case.ni.issho	N5-42	一緒 [kase=ni]	-	-	Adv:같이	m	own	一緒に → 같이
+case.mo.cop.hold	N5-18	[kase=mo] [role=cop]	-	line.route=fallback	-	m	own	私もです (も + copula): held for 0.7.x
+case.mo.naku.hold	N5-18	[kase=mo] [aux.nai.adj,form.role=renyo]	-	line.route=fallback	-	m	own	間もなく (without): held for 0.7.x

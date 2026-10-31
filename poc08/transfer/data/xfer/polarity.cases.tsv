@@ -13,3 +13,7 @@ adv.sou.alone	fix	「……そう……」	「……그래……」	inv
 adv.sou.alone	keep	「そう言う。」	「그렇게 말해.」	inv
 adv.sou.eol	fix	そう	그래	inv
 adv.sou.eol	keep	「そう言う」	「그렇게 말해」	inv
+adv.sou.cop	fix	「そうです」	「그래요」	inv
+adv.sou.cop	keep	「そう言う」	「그렇게 말해」	inv
+adv.sou.final	fix	「そうよ！」	「그래!」	inv
+adv.sou.final	keep	「そう言うよ」	「그렇게 말해」	inv
