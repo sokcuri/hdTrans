@@ -17,6 +17,7 @@ using hangul::ToU8;
 struct CueRow {
     std::string cue, mode;
     std::u32string text, notAfter;
+    std::vector<std::u32string> notBefore;  // strings that must not follow text (男で|すまない: not です)
 };
 struct LevelRow {
     std::string key, spec;
@@ -55,7 +56,7 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     auto t = std::make_shared<RegisterTables>();
     TsvTable c;
     if (!ReadTsv(dir + "/cues.tsv", c, err)) return nullptr;
-    const int cc = c.Col("cue"), cm = c.Col("mode"), ct = c.Col("text"), cn = c.Col("notafter");
+    const int cc = c.Col("cue"), cm = c.Col("mode"), ct = c.Col("text"), cn = c.Col("notafter"), cb = c.Col("notbefore");
     if (cc < 0 || cm < 0 || ct < 0) {
         err = "cues.tsv: missing column";
         return nullptr;
@@ -66,7 +67,12 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
         }
         else if (r[cc] == "quotative") t->quotatives.push_back(ToU32(r[ct]));
         else if (r[cc] == "exclaim") t->exclaim.push_back(ToU32(r[ct]));
-        else t->cues.push_back({r[cc], r[cm], ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string()});
+        else {
+            CueRow row{r[cc], r[cm], ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string(), {}};
+            if (cb >= 0 && !r[cb].empty())
+                for (const auto& w : Split(r[cb], '|')) row.notBefore.push_back(ToU32(w));
+            t->cues.push_back(row);
+        }
     }
     TsvTable l;
     if (!ReadTsv(dir + "/levels.tsv", l, err)) return nullptr;
@@ -388,6 +394,10 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         } else {
             for (size_t i = u.text.find(r.text); i != std::u32string::npos; i = u.text.find(r.text, i + 1)) {
                 if (before(u.text, i)) continue;
+                bool followed = false;
+                for (const auto& w : r.notBefore)
+                    if (StartsAt(u.text, i + r.text.size(), w)) followed = true;
+                if (followed) continue;
                 if (r.mode == "any-not-quoted") {
                     const size_t j = i + r.text.size();
                     bool quoted = false;

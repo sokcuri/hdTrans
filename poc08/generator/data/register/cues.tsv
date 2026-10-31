@@ -14,9 +14,10 @@
 #           end: the last sentence ends in text, after any number of tail particles and closing marks;
 #           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
 #   text    the Japanese string
+#   notbefore  any rows: strings that must not follow text, | separated (男ですまない is 男で + すまない)
 #   notafter  characters that must not come right before text (the ます of ぶちかます is not polite); in tail
 #             rows, words separated by | (どう|: the ぞ of どうぞ)
-cue	mode	text	notafter	note
+cue	mode	text	notafter	note	notbefore
 quotative	-	って		a polite form followed by these is quoted, not spoken (any-not-quoted)
 quotative	-	と言
 quotative	-	と思
@@ -62,7 +63,7 @@ polite	end	かしこま		clipped かしこまりました, still a polite reply
 polite	end	ございません
 polite	end	ごめんなさい
 polite	end	すみません
-polite-any	any-not-quoted	です
+polite-any	any-not-quoted	です		です inside the line; not で + すまない, すみません	まな|まん|まね|みま|みな
 polite-any	any-not-quoted	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩、
 polite-any	any-not-quoted	ました	覚醒冷済澄励悩
 polite-any	any-not-quoted	でした
@@ -196,3 +197,10 @@ exclaim	-	見っけ
 exclaim	-	めっけ
 archaic	end	なり	かきと	the old copula なり (騎士団なり); not かなり, いきなり, となり
 stiff	end	てみよ		the old imperative of みる (申してみよ)
+quotative	-	と		a polite form before と is quoted speech (許してくださいと詫びる)
+casual	end	く		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	す		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	つ		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	ぶ		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	む		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	ぐ		a verb in its dictionary form (頂く, 任せる → る row)

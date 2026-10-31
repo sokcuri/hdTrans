@@ -886,7 +886,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             if (n.kind != Kind::V || n.ctype != CType::final_ || n.mood != Mood::imp) continue;
             std::string pos = n.vpos;
             if (pos.empty()) pos = LookupPredicate(*tablesPtr, n.lemma).pos;
-            if (pos == "A" || (q + 1 < nodes.size() && nodes[q + 1].kind == Kind::V)) lineOk = false;
+            // a negated command is a prohibition (-지 마), never -지 않게: 하시지 않게 is the connective, not a command
+            const bool negated = n.neg == Neg::an || n.neg == Neg::jiAnh;
+            if (pos == "A" || negated || (q + 1 < nodes.size() && nodes[q + 1].kind == Kind::V)) lineOk = false;
         }
         // R
         RegDecision d = decisions[li];
@@ -987,12 +989,17 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 for (const auto& g : reg)
                     if (g.node == nodes[q].id) target = g.level;
                 const bool raise = opt.keepHapsyo && was == Level::haeyo && target == Level::hapsyo;
+                // REG-12: the source's last sentence is plain although the line has です/ます inside (そうですね、…
+                // かもしれない): 0.7.x's plain end is not raised to a polite one
+                const bool politeInside = d.key == "polite-any" || d.key == "quotes-polite-any";
+                const bool raisePlain = politeInside && (was == Level::haera || was == Level::hae) &&
+                                        (target == Level::haeyo || target == Level::hapsyo);
                 // REG-11: the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
                 // REG-12: the source trails off after a て-form (言われて……): 0.7.x's -어 is not a command to raise
                 const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
                 const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail;
-                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !raise && !jaCommand &&
+                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !raise && !raisePlain && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
                 for (auto& g : reg)

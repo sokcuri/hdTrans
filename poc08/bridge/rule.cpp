@@ -525,7 +525,7 @@ std::string SpeakerTag(const RuleData& d, std::u32string s) {
     for (const auto& [open, close] : d.tags) {
         if (s.empty() || s.front() != open) continue;
         const size_t e = s.find(close);
-        if (e != std::u32string::npos && e > 1 && e <= 24) return U8(s.substr(1, e - 1));
+        if (e != std::u32string::npos && e > 1 && e <= 24 && e + 1 < s.size()) return U8(s.substr(1, e - 1));
         break;
     }
     return "";
@@ -699,7 +699,7 @@ std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const st
     size_t lead = 0;
     while (lead < out075.size() && out075[lead] == ' ') lead++;
     Field(o, "lead", out075.substr(0, lead));
-    Field(o, "speaker", dialogue ? SpeakerTag(d, ja32) : std::string());
+    Field(o, "speaker", SpeakerTag(d, ja32));  // also on unquoted lines: a tagged line is dialogue (STYLE §9)
     Field(o, "scene", std::to_string(scene));  // scenes are cut at blank lines (REG-8, REG-14 stay in a scene)
     Field(o, "work", "doc");
     o += std::string(",\"dialogue\":") + (dialogue ? "true" : "false");

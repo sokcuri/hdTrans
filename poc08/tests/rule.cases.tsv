@@ -40,3 +40,7 @@ out	「はぁ、今日は寒いなぁ」	「하아, 오늘은 춥네」	REG-18: 
 out	「よ、よし、それじゃ行くぞっ！」	「조, 좋아, 그럼 간다!」	REG-17: a declaration with ぞ keeps -다
 out	「それは報告を聞いてから判断する。……それで？」	「그건 보고를 듣고 나서 판단한다. ……그래서?」	REG-12: a word after the changed end (그래서?) ends the line: 0.7.x text (was 판단해)
 out	「……今日はがんばったし……ご褒美、ほしいな……」	「……오늘은 열심히 했고……상, 가지고 싶은데……」	REG-18: な after a wish is not an exclamation (was 가지고 싶네)
+out	「いいえ、楽になさってください。体調がすぐれないようでしたら出直しますから、決して無理はなさらないよう……」	「아니요, 편하게 하셔 주세요. 컨디션이 시원치 않은 것 같다면 다시 오기 때문에, 결코 무리는 하시지 않게……」	REG-12: a negated command cannot be one: -지 않게 stays a connective (was 않으세요)
+out	「けれど、その最先端に浸れば。……そうですね、確かに一度得たものを手放すのは難しいのかもしれない」	「하지만, 그 최첨단에 잠기면. ……그렇네요, 확실히 한 번 얻은 걸 손에서 놓는 건 어려운 건지도 모른다」	REG-12: a plain last sentence beside です inside is not raised to 해요 (was 몰라요)
+out	「態度というなら、改めるべきはお前の方だ。僕に追いすがり、許してくださいと詫びる気はないのか？」	「태도라고 한다면, 고쳐야 하는 건 네 쪽이다. 나에게 바싹 뒤따라, 용서해 주세요 하고 사과할 생각은 없는 건가?」	REG-3: ください before と is quoted, not the speaker's politeness (was 네 쪽이에요)
+out	「父上には後で承諾を頂く」	「아버님에게는 나중에 승낙을 받는다」	REG-14: 父上 marks a high-born voice; its plain statement keeps -다 (was 받아)

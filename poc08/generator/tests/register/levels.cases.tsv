@@ -148,3 +148,6 @@ r7-10	REG-7	fix	d125		yes	「どうぞ、お入りください」	-	-
 r7-11	REG-7	fix	d125		no	本日の営業は終了しました。	hapsyo	-
 r9-6	REG-9	fix	d126		no	もういいです	haeyo	-
 r9-7	REG-9	fix	d126		no	わかってるよ	-	-
+r3-11	REG-3	keep	d127		yes	「意気地のない男ですまなかった」	hae	-
+r3-12	REG-3	keep	d128		yes	「許してくださいと詫びる気はないのか？」	hae	-
+r2-9	REG-2	fix	d129		yes	「来春、小田原へ出る」	hae	-
