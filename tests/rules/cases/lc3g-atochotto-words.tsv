@@ -1,0 +1,20 @@
+# 규칙: LEX-211
+rule	input	expected	kind	layer
+lookup:atochotto	あとちょっとで街だ。	has:곧 거리다	fix	lookup
+lookup:atochotto	「あとちょっとで教室だね」	has:곧 교실이구나	fix	lookup
+lookup:atochotto	けどあとちょっとで目的地。	has:곧 목적지	fix	lookup
+lookup:atochotto	あとちょっとで何かに届く。	has:곧 무언가에 닿는다	fix	lookup
+lookup:atochotto	「もうちょっとで着きますぞ。」	has:곧 도착합니다	fix	lookup
+lookup:atochotto	後、もうちょっとでクリスマスか。	has:곧 크리스마스인가	fix	lookup
+lookup:atochotto	「今年もあとちょっとで終わりだな」	has:곧 끝이네	fix	lookup
+lookup:atochotto	もうちょっとでＢ地区がみえそうだ。	has:곧 B지구가	fix	lookup
+lookup:atochotto	「もうちょっとで読み終えますから」	has:곧 다 읽을	fix	lookup
+lookup:atochotto	「すみません、あとちょっとで終わります」	has:곧 끝납니다	fix	lookup
+lookup:atochotto	「そうだね。もうちょっとで日が暮れちゃうし」	has:곧 해가	fix	lookup
+lookup:atochotto	あとちょっとでも力を入れられたら粉砕されてしまう。	has:조금이라도 더 힘을	fix	lookup
+lookup:atochotto	あと少しでも遅かったら、代わりに	has:조금이라도 더 늦었으면	fix	lookup
+lookup:atochotto	もう少しでも体力が回復すれば。	has:조금이라도 더 체력이	fix	lookup
+lookup:atochotto	あと少しで終わる。	has:곧 끝난다	keep	lookup
+lookup:atochotto	もう少しで終わる。	has:거의 끝난다	keep	lookup
+lookup:atochotto	「あと少しですよ」	has:앞으로 조금이에요	keep	lookup
+lookup:atochotto	もうちょっと待って。	has:좀 더 기다려	keep	lookup

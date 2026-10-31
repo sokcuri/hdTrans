@@ -20655,3 +20655,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 元はといえば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:1
 もとはといえば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:2
 もとはと言えば	따지고 보면	A9D0			GN			LEX-170 元はと言えば의 가나 표기			もとはといえば	variant:lc2b:motohatoieba:3
+あとちょっとで	곧	E300			GN			LEX-211 あと少しで의 다른 꼴				variant:lc3g:atochotto:1
+もうちょっとで	곧	E300			GN			LEX-211 あと少しで와 같은 곧				variant:lc3g:atochotto:2
+あとちょっとでも	조금이라도 더	E300			GN			LEX-211 あとちょっとで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:3
+もうちょっとでも	조금이라도 더	E300			GN			LEX-211 もうちょっとで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:4
+あと少しでも	조금이라도 더	E300			GN			LEX-211 あと少しで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:5
+もう少しでも	조금이라도 더	E300			GN			LEX-211 もう少しで 뒤 も는 조금이라도 더				variant:lc3g:atochotto:6

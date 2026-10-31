@@ -1540,3 +1540,13 @@ cx:lc3g-monoda:30	GRM-186	&&4 F+0== "conjugating" S+0== "困" Y+0== "8 것" S+1=
 cx:lc3g-tokorode:10	GRM-188	&&3 :lc3g-tkr-word !1 :lc3g-tkr-past :lc3g-tkr-adv	set-ending "6 봤자"	いくら差があったところで 아무리 차이가 있어 봤자
 cx:lc3g-tokorode:20	GRM-188	&&3 :lc3g-tkr-word !1 :lc3g-tkr-past :lc3g-tkr-futile	set-ending "6 봤자"	勝てたところで意味は無い 이길 수 있어 봤자 의미는 없다
 cx:lc3g-tokorode:30	GRM-188	&&3 :lc3g-tkr-word !1 :lc3g-tkr-past :lc3g-tkr-neg	set-ending "6 봤자"	拷問にかけたところで、情報は出さない 고문을 가해 봤자, 정보는 내지 않는다
+//= lc3g-doudatte	after OfferPromise 1291	guard S+0== "どうだ"	どうだっていい that the word stage split into どうだ 어때 and a quote って is どうでもいい, it does not matter: 아무래도 좋다 (そんなことどうだっていい 그런 일 아무래도 좋아, どうだっていいことだ 아무래도 좋은 일이다), not 어때라고 해 or 어때는 좋다.
+cx:lc3g-doudatte:10	LEX-210	&&4 S+1== "って" L+1== "(은)는" S+2== "い" D+2== "$DE@"	set-target "아무래도" set-target@+1 ""	どうだっていいだろ 아무래도 좋지
+cx:lc3g-doudatte:20	LEX-210	&&3 S+1== "ってい" I+1== "っていい" ||2 S+2== "こと" S+2== "事"	set-target "아무래도 좋은" set-target@+1 "" set-ending@+1 ""	どうだっていいことだ 아무래도 좋은 일이다
+cx:lc3g-doudatte:30	LEX-210	&&3 S+1== "ってい" I+1== "っていい" ||2 S+2== "けど" S+2== "けれど"	set-target "아무래도 좋지만" set-target@+1 "" set-ending@+1 "" set-target@+2 ""	どうだっていいけど 아무래도 좋지만
+cx:lc3g-doudatte:40	LEX-210	&&4 S+1== "ってい" I+1== "っていい" F+1== "quoted" ||2 F+1== "sentence-end" F+1== "period-after"	set-target "아무래도 좋아" set-target@+1 "" set-ending@+1 ""	「どうだっていい」 아무래도 좋아
+cx:lc3g-doudatte:45	LEX-210	&&4 S+1== "ってい" I+1== "っていい" S+2== "ん" ||3 S+3== "だよ" S+3== "だ" S+3== "です"	set-target "아무래도 좋아" set-target@+1 "" set-ending@+1 "" set-target@+2 "" set-target@+3 ""	どうだっていいんだよ 아무래도 좋아
+cx:lc3g-doudatte:50	LEX-210	&&3 S+1== "ってい" I+1== "っていい" ||2 F+1== "sentence-end" F+1== "period-after"	set-target "아무래도 좋다" set-target@+1 "" set-ending@+1 ""	どうだっていい。 아무래도 좋다.
+//= lc3g-atochotto	after OfferPromise 1297	guard ||6 S+0== "あとちょっとで" S+0== "もうちょっとで" S+0== "あと少しで" S+0== "もう少しで" S+0== "あとちょいで" S+0== "もうちょいで"	あとちょっとで, もうちょっとで, あと少しで read 곧 is 거의, as もう少しで already reads, when the narrow miss of GRM-5 (-(으)ㄹ 뻔했다) ends its sentence (あとちょっとで顔面が壊れるところだった 거의 안면이 망가질 뻔했다) or the first predicate after it is past (もうちょっとで具が見えたのに 거의 도구가 보였는데); before anything else it stays 곧 (あとちょっとで終わります 곧 끝납니다).
+cx:lc3g-atochotto:10	LEX-211	&&2 D+0== "곧" >0 ||2 Y+0== "~뻔" D+0== "~뻔했" S+0== "00。！？!?「」『』"	set-target "거의"	あとちょっとで負けるところだった 거의 질 뻔했다
+cx:lc3g-atochotto:20	LEX-211	&&2 D+0== "곧" >0 &&2 F+0== "conjugating" Y+0== "L5" ||2 F+0== "conjugating" S+0== "00。！？!?「」『』、"	set-target "거의"	もうちょっとで具が見えたのに 거의 도구가 보였는데

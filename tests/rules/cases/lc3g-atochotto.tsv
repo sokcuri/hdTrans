@@ -1,0 +1,26 @@
+# 규칙: LEX-211
+rule	input	expected	kind	layer
+cx:lc3g-atochotto:10	あとちょっとで顔面が壊れるところだった	has:거의 안면이 망가질 뻔했다	fix	rewrites
+cx:lc3g-atochotto:10	もうちょっとでサックリやられるところだったよ	has:거의	fix	rewrites
+cx:lc3g-atochotto:10	「うん……あとちょっとで、殺されるところだった」	has:거의	fix	rewrites
+cx:lc3g-atochotto:10	あっぶない、あとちょっとで欲望に負けるところだった。	has:거의 욕망에 질 뻔했다	fix	rewrites
+cx:lc3g-atochotto:10	「危なかった。あとちょっとで理性が無くなるところだったよ」	has:거의 이성이 없어질 뻔했어	fix	rewrites
+cx:lc3g-atochotto:10	「惜しかったわね。もうちょっとで左目をぶち抜くところだったのに」	has:거의 좌목을 구멍낼 뻔했는데	fix	rewrites
+cx:lc3g-atochotto:20	あとちょっとで勝てたのに！	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	あとちょっとで死ねたのに。	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「もうちょっとで具が見えたのになぁ。」	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	それが功を奏したのか分からないが、もうちょっとでヤバかった。	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「残念、ヒーロー登場か。シリル君、もうちょっとで番えたのにね」	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「惜しい、あとちょっとで当たってたのに。やっちゃえゴーレム君！」	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「カルディエは……もうちょっとで電気羊……捕まえられたのにっ！！」	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「あともうちょっとで連れて来られたのに、なんで休憩を入れちゃったの？」	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「ウウッ………アタシの千年王国………あとちょっとで勝てたのに……………」	has:거의	fix	rewrites
+cx:lc3g-atochotto:20	「にしても、聖ってば降りてくるの遅かったよね。あとちょっとで食べられたのに〜」	has:거의	fix	rewrites
+cx:lc3g-atochotto:10	このフリも、あとちょっとで終わり。	!rule:cx:lc3g-atochotto:10	keep	rewrites
+cx:lc3g-atochotto:20	あとちょっとで終わってしまうので、寂しいです。	!rule:cx:lc3g-atochotto:20	keep	rewrites
+cx:lc3g-atochotto:10	（やっとか、この生活もあとちょっとで終わるんだな）	!rule:cx:lc3g-atochotto:10	keep	rewrites
+cx:lc3g-atochotto:20	「今年もあとちょっとで終わりだな」	!rule:cx:lc3g-atochotto:20	keep	rewrites
+cx:lc3g-atochotto:10	あとちょっとで終わるんでな。	!rule:cx:lc3g-atochotto:10	keep	rewrites
+cx:lc3g-atochotto:20	あとちょっとで終わっちゃう！	!rule:cx:lc3g-atochotto:20	keep	rewrites
+cx:lc3g-atochotto:10	「びっくりしないでね、あとちょっとで終わるからね」	!rule:cx:lc3g-atochotto:10	keep	rewrites
+cx:lc3g-atochotto:20	あとちょっとで終わるし！」	!rule:cx:lc3g-atochotto:20	keep	rewrites
