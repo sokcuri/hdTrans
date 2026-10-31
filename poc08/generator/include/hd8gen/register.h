@@ -36,6 +36,10 @@ struct RegDecision {
     };
     std::vector<Quote> quotes;
     bool trail = false;       // the utterance trails off after a て-form (言われて……): no command at its end
+    // REG-16: what backs the addressee as the subject of a polite question (hon.tsv back rows, or Z's constraint)
+    bool honSonkei = false;   // an honorific verb (いらっしゃる, 召し上がる, ご覧): -시- on the final predicate
+    bool honGive = false;     // the addressee gives (くれる, くださる): -시- on 주다
+    bool exclaimNe = false;   // REG-18: the last sentence exclaims with な/なぁ on a predicate: 해체 -네 (춥네)
 };
 
 struct RegOptions {
@@ -56,9 +60,11 @@ std::vector<std::pair<std::string, std::string>> LevelSpecs(const RegisterTables
 bool IsHonorificSuffix(const RegisterTables&, const std::string& word);
 Persona VoiceOf(const RegisterTables&, const std::string& ja);
 
-// Addressee honorific: V nodes of a polite utterance whose subject is the addressee get hon. Without clause
-// arguments (no L yet) the subject is approximated: a question or request with no explicit subject or topic
-// in its clause, a verb (not an adjective, 이다 or 있다), and no first person in the source.
+// Addressee honorific (REG-16): V nodes of a polite utterance whose subject is the addressee get hon, only where a
+// constraint backs the addressee: a request or command to the addressee (imperative mood), a question with an
+// honorific verb (RegDecision.honSonkei), or the addressee giving (honGive: on 주다). A plain polite question or
+// invitation takes none (行きますか → 가요?). Also required: no explicit subject or topic in the clause, a verb (not
+// an adjective, 이다 or 있다), and no first person in the source.
 std::vector<Reg> AssignRegister(const RegisterTables&, const std::vector<Node>& kir, const RegDecision& d,
                                 bool firstPersonInSource, const struct Tables* gen = nullptr);
 

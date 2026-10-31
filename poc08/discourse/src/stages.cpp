@@ -299,6 +299,12 @@ void StageR(const DiscourseData& d, const Config& cfg, Doc& doc, Line& line) {
         }
         nodes.push_back(n);
     }
+    // REG-16: Z's constraint rules back the addressee as subject (an omitted subject classed addressee by a rule,
+    // not by default): a polite question of that clause may take -시- as with an honorific verb
+    for (const Clause& c : line.clauses)
+        if (c.subj.kind == static_cast<uint8_t>(refkind::addressee) && c.subj.decision > 0 &&
+            c.subj.decision <= line.decisions.size() && line.decisions[c.subj.decision - 1].kind != Ev::Default)
+            dec.honSonkei = true;
     const std::vector<hd8gen::Reg> regs = hd8gen::AssignRegister(*d.reg, nodes, dec, dec.firstPerson, d.gen.get());
     for (const auto& g : regs) {
         KReg r;

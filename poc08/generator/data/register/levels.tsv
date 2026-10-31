@@ -5,7 +5,7 @@
 # Columns
 #   key       the cue key of the line, the first that holds in this order: narr (a quote inside a narration
 #             line), empty (no word), set, keigo-pend, pend, keigo-casual, keigo, archaic, polite-any, stiff,
-#             exclaim, casual, bare; auth-plain is casual from an authoritative voice (REG-14)
+#             decl-zo, exclaim-ne, exclaim, casual, bare; auth-plain is casual from an authoritative voice (REG-14)
 #   spec      the rule in spec/register.md
 #   level     haera hae haeyo hapsyo
 #   profile   yes: a line of this key takes the level of the speaker in the scene (REG-8)
@@ -27,3 +27,5 @@ archaic	REG-6	hae	no	yes	no	old speech (じゃ, ておる, ぬ): the input's lev
 stiff	REG-6	hae	no	yes	no	である, 諸君: the input's level until personas
 exclaim	REG-13	haera	no	yes	no	見つけた！, 面白い。: an exclamation of discovery keeps -다
 auth-plain	REG-14	haera	no	yes	no	an authoritative voice's plain statement keeps -다 (ファンだ → 팬이다)
+decl-zo	REG-17	haera	no	yes	strong	行くぞ！ → 간다!: a declaration with ぞ or ぜ keeps -다
+exclaim-ne	REG-18	hae	no	no	strong	寒いなぁ → 춥네: an exclamation with な on a predicate is 해체 -네

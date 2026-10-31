@@ -1000,8 +1000,23 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         // the speech level of each sentence end, before and after: whether the line changes level, and whether
         // its sentences would end at different levels (a polite end inside the line counts too: 모릅니다, …어요)
+        // REG-18: an exclamation with な on a predicate (寒いなぁ) ends in 해체 -네 (춥네): the last sentence end
+        bool neChanged = false;
+        if (levelMode == "auto" && d.exclaimNe && !d.narration) {
+            for (size_t q = nodes.size(); q-- > 0;) {
+                if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) continue;
+                Level now = Level::none;
+                for (const auto& g : reg)
+                    if (g.node == nodes[q].id) now = g.level;
+                if (now == Level::hae && nodes[q].mood == Mood::decl && nodes[q].eomi != "ne") {
+                    nodes[q].eomi = "ne";
+                    neChanged = true;
+                }
+                break;
+            }
+        }
         // (per quote when the line has several: each quote's last end may change, and its own ends must agree)
-        bool levelChanged = false, mixedLevels = false;
+        bool levelChanged = neChanged, mixedLevels = false;
         const size_t quoteCount = nodes.empty() ? 1 : quoteOf.back() + 1;
         for (size_t qi = 0; qi < quoteCount; ++qi) {
             Level end = Level::none;

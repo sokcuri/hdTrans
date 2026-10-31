@@ -1,6 +1,8 @@
 #! hon
 # Addressee -시- (hon.addressee): predicates that do not take it although the clause has no subject, because
-# their subject is rarely the addressee (되다: 자리면 돼요?, not 되세요?).
+# their subject is rarely the addressee (되다: 자리면 돼요?, not 되세요?). back rows (spec/register.md REG-16): what backs
+# the addressee as the subject of a polite question until Z's constraint rules fill Clause.subj: sonkei (an
+# honorific verb: -시- on the final predicate) and give (the addressee gives: -시- on 주다).
 type	lemma	note
 exclude	되다	the subject is a thing: 이걸로 돼요?
 exclude	보이다	보여요? (it is visible)
@@ -16,3 +18,18 @@ exclude	맞다	맞아요?
 exclude	좋다
 exclude	싫다
 exclude	suffix:시다	a lemma that already carries -시- (하시다, 계시다): no second 시
+back	sonkei	いらっしゃ
+back	sonkei	おっしゃ
+back	sonkei	召し上が
+back	sonkei	ご覧
+back	sonkei	なさいます
+back	sonkei	なさいました
+back	sonkei	なさる
+back	sonkei	なさった
+back	sonkei	お越し
+back	sonkei	お見えに
+back	sonkei	ご存じ
+back	sonkei	ご存知
+back	give	くれ
+back	give	くださ
+back	give	下さ

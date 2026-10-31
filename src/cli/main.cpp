@@ -168,7 +168,8 @@ void Usage(std::FILE* file) {
 #ifdef HDTRANS_POC08_HOOKS
     std::fputs("\n0.8 proof of concept (hdtrans08):\n"
                "  --poc08 PARTS          stages the 0.8 components replace: normalize, segment, generate, decide,\n"
-               "                         reselect (deciders choosing among 0.7.x's endings), all or none (default);\n"
+               "                         reselect (deciders choosing among 0.7.x's endings), rule (segment + the\n"
+               "                         speech retrofit), retrofit (the speech retrofit alone), all or none (default);\n"
                "                         a part whose component is not built stays 0.7.x\n"
                "  --speech auto|haera|hae|haeyo|hapsyo  speech level of the 0.8 generator\n"
                "  --poc08-data DIR       data root of the 0.8 components (default: the poc08 source folder)\n"

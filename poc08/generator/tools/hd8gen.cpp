@@ -188,7 +188,7 @@ int LevelEval(const RegisterTables& rt, const std::string& path, const RegOption
 // scene, in file order; a row with level "-" is context only. Each row is checked for its level and, when given,
 // the spec id that decided it. With spec, every spec id of levels.tsv and of the cases must be a heading of that
 // file, and every REG id that levels.tsv uses needs a fix and a keep case.
-int LevelCases(const RegisterTables& rt, const std::string& path, const std::string& specPath) {
+int LevelCases(const RegisterTables& rt, const Tables& gen, const std::string& path, const std::string& specPath) {
     TsvTable t;
     std::string err;
     if (!ReadTsv(path, t, err)) {
@@ -196,7 +196,7 @@ int LevelCases(const RegisterTables& rt, const std::string& path, const std::str
         return 1;
     }
     const int cid = t.Col("id"), cspec = t.Col("spec"), ccase = t.Col("case"), cdoc = t.Col("doc"), csp = t.Col("speaker"),
-              cdia = t.Col("dialogue"), cja = t.Col("ja"), clev = t.Col("level");
+              cdia = t.Col("dialogue"), cja = t.Col("ja"), clev = t.Col("level"), chon = t.Col("hon");
     if (cid < 0 || cspec < 0 || ccase < 0 || cdoc < 0 || csp < 0 || cdia < 0 || cja < 0 || clev < 0) {
         std::fprintf(stderr, "%s: missing column\n", path.c_str());
         return 1;
@@ -233,10 +233,33 @@ int LevelCases(const RegisterTables& rt, const std::string& path, const std::str
         const std::string got = Name(ds[k].level);
         const bool levelOk = got == r[clev];
         // a fix case names the rule that decides it; a keep case names the rule it must not fall under
-        const bool specOk = r[ccase] == "fix" ? ds[k].spec == r[cspec] : ds[k].spec != r[cspec];
-        if (!levelOk || !specOk) {
-            std::fprintf(stderr, "FAIL %s (%s %s): got %s by %s [%s], want %s\n", r[cid].c_str(), r[cspec].c_str(),
-                         r[ccase].c_str(), got.c_str(), ds[k].spec.c_str(), ds[k].key.c_str(), r[clev].c_str());
+        // REG-16 is not a level rule: its cases check hon, not the spec that decided the level
+        const bool specOk = r[cspec] == "REG-16" || (r[ccase] == "fix" ? ds[k].spec == r[cspec] : ds[k].spec != r[cspec]);
+        // hon (REG-16): whether the line's final predicate gets the addressee -시-. The predicate stands in as one
+        // V node: 주다 when the addressee gives (くれ, くださ), else 가다; its mood from the source (？ or か: question;
+        // ください, なさい: request; else statement).
+        bool honOk = true;
+        std::string honGot;
+        if (chon >= 0 && !r[chon].empty() && r[chon] != "-") {
+            const std::string& ja = r[cja];
+            Node v;
+            v.id = 1;
+            v.kind = Kind::V;
+            v.ctype = CType::final_;
+            const bool give = ja.find("くれ") != std::string::npos || ja.find("くださ") != std::string::npos;
+            v.lemma = give ? "주다" : "가다";
+            v.vpos = "V";
+            v.kcls = give ? "U" : "REG";
+            if (ja.find("ください") != std::string::npos || ja.find("なさい") != std::string::npos) v.mood = Mood::imp;
+            else if (ja.find("？") != std::string::npos || ja.find("か」") != std::string::npos) v.mood = Mood::q;
+            const std::vector<Reg> regs = AssignRegister(rt, {v}, ds[k], ds[k].firstPerson, &gen);
+            honGot = !regs.empty() && regs[0].hon ? "yes" : "no";
+            honOk = honGot == r[chon];
+        }
+        if (!levelOk || !specOk || !honOk) {
+            std::fprintf(stderr, "FAIL %s (%s %s): got %s by %s [%s] hon %s, want %s hon %s\n", r[cid].c_str(),
+                         r[cspec].c_str(), r[ccase].c_str(), got.c_str(), ds[k].spec.c_str(), ds[k].key.c_str(),
+                         honGot.c_str(), r[clev].c_str(), chon >= 0 ? r[chon].c_str() : "");
             ++fail;
         }
     }
@@ -365,7 +388,7 @@ int main(int argc, char** argv) {
         std::string spec;
         for (size_t k = 2; k + 1 < args.size(); ++k)
             if (args[k] == "--spec") spec = args[k + 1];
-        return LevelCases(*rt, args[1], spec);
+        return LevelCases(*rt, *tables, args[1], spec);
     }
     return Usage();
 }

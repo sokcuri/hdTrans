@@ -47,6 +47,7 @@ struct RegisterTables {
     std::vector<AuthRow> auth;  // voices.tsv auth: an authoritative voice (REG-14)
     std::map<std::string, LevelRow> levels;
     std::vector<std::string> honExclude;
+    std::vector<std::pair<std::string, std::u32string>> honBack;  // hon.tsv back rows: sonkei | give, Japanese text
 };
 
 std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir, std::string& err) {
@@ -105,6 +106,13 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     if (!ReadTsv(dir + "/hon.tsv", hx, err)) return nullptr;
     for (const auto& r : hx.rows)
         if (r[0] == "exclude") t->honExclude.push_back(r[1]);
+        else if (r[0] == "back") {
+            if (r.size() < 3 || (r[1] != "sonkei" && r[1] != "give")) {
+                err = "hon.tsv: back rows need kind sonkei or give and a text";
+                return nullptr;
+            }
+            t->honBack.push_back({r[1], ToU32(r[2])});
+        }
     for (const auto& r : l.rows) {
         LevelRow row;
         row.key = r[lk];
@@ -241,6 +249,9 @@ struct Cues {
     bool exclaim = false;     // every sentence is a bare predicate alone or has no predicate (REG-13)
     bool auth = false;        // the line has an authoritative voice cue (voices.tsv auth, REG-14)
     bool trail = false;       // the last sentence trails off after a て-form (言われて……)
+    bool honSonkei = false, honGive = false;  // REG-16 (hon.tsv back rows)
+    bool declZo = false;      // REG-17: a plain statement declared with ぞ or ぜ (行くぞ, やるぜ)
+    bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ (寒いなぁ)
     std::vector<std::pair<size_t, size_t>> authParts;  // parts of speaker auth rows found (row, part)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
          cend = false;
@@ -280,6 +291,15 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (!best) break;
         if (stages.size() == 1 && best->strong) c.lastStrong = true;
         if (stages.size() == 1 && best->text == U"か") c.lastKa = true;
+        if (stages.size() == 1) {
+            std::u32string rest = s.substr(0, s.size() - best->text.size());
+            while (!rest.empty() && IsMark(rest.back())) rest.pop_back();
+            const char32_t e = rest.empty() ? 0 : rest.back();
+            static const std::u32string kDecl = U"だたいるうくすつぬぶむぐん";
+            if ((best->text == U"ぞ" || best->text == U"ぜ") && kDecl.find(e) != std::u32string::npos) c.declZo = true;
+            // な on a verb's dictionary form forbids (行くな); on い, た, だ it exclaims
+            if ((best->text == U"な" || best->text == U"なあ") && (e == U'い' || e == U'た' || e == U'だ')) c.exclaimNe = true;
+        }
         std::u32string next = s.substr(0, s.size() - best->text.size());
         while (!next.empty() && IsMark(next.back())) next.pop_back();
         stages.push_back(next);
@@ -464,6 +484,8 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         }
         c.exclaim = ok && any;
     }
+    for (const auto& [kind, text] : t.honBack)
+        if (u.text.find(text) != std::u32string::npos) (kind == "give" ? c.honGive : c.honSonkei) = true;
     for (size_t a = 0; a < t.auth.size(); ++a) {
         bool all = !t.auth[a].parts.empty();
         for (size_t p = 0; p < t.auth[a].parts.size(); ++p) {
@@ -488,6 +510,8 @@ std::string Key(const Cues& c) {
     if (c.arch) return "archaic";
     if (c.pany) return "polite-any";
     if (c.stiff) return "stiff";
+    if (c.cend && c.declZo) return "decl-zo";
+    if (c.cend && c.exclaimNe) return "exclaim-ne";
     if (c.exclaim && !c.strongTail) return "exclaim";
     if (c.cend) return "casual";
     return "bare";
@@ -587,6 +611,12 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
         }
         for (size_t k = i; k < j; ++k) {
             RegDecision& d = out[k];
+            {
+                const Cues hc = Scan(t, lines[k].ja);
+                d.honSonkei = hc.honSonkei;
+                d.honGive = hc.honGive;
+                d.exclaimNe = hc.exclaimNe && Key(hc) == "exclaim-ne";
+            }
             if (!lines[k].dialogue) {
                 // an unbracketed line is narration unless it ends like speech (inner monologue: …だよ, …です)
                 const Cues c = Scan(t, lines[k].ja);
@@ -688,8 +718,13 @@ std::vector<Reg> AssignRegister(const RegisterTables& rt, const std::vector<Node
         r.node = n.id;
         r.level = d.narration ? Level::haera : d.level;
         r.persona = d.persona;
-        if (polite && !d.narration && n.ctype == CType::final_ && (n.mood == Mood::q || n.mood == Mood::imp) &&
-            !firstPersonInSource && !subjectSeen && !n.aux) {
+        // REG-16: the addressee gives (教えてくれますか → 가르쳐 주시겠어요): -시- on 주다, auxiliary or not
+        if (polite && !d.narration && d.honGive && n.lemma == "주다" && n.ctype == CType::final_ &&
+            (n.mood == Mood::q || n.mood == Mood::imp) && !firstPersonInSource)
+            r.hon = true;
+        // REG-16: a request or command to the addressee, or a question with an honorific verb
+        const bool backed = n.mood == Mood::imp || (n.mood == Mood::q && d.honSonkei);
+        if (polite && !d.narration && n.ctype == CType::final_ && backed && !firstPersonInSource && !subjectSeen && !n.aux) {
             std::string pos = n.vpos;
             std::string cls = n.kcls;
             if (gen && (pos.empty() || cls.empty())) {
