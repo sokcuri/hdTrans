@@ -1,0 +1,37 @@
+# 규칙: LEX-2920
+# 규칙: LEX-2921
+rule	input	expected	kind	layer
+dict:tech-loanword-glosses:w24	「トランスポートゲートが動かないんだな？」	has:트랜스포트 게이트	fix	lookup
+dict:tech-loanword-glosses:w24	「トランスポート！」	has:트랜스포트!	fix	lookup
+dict:tech-loanword-glosses:w24	「ハイエナ・トランスポート……運送屋に間違いなさそうだな」	has:하이에나·트랜스포트	fix	lookup
+dict:tech-loanword-glosses:w29	ローストビーフサンドやトルティーヤなどを注文した。	has:토르티야 등	fix	lookup
+dict:tech-loanword-glosses:w29	これが、トルティーヤなのね。	has:토르티야	fix	lookup
+dict:tech-loanword-glosses:w40	２階はノッチ組みのログ壁。	has:노치	fix	lookup
+dict:tech-loanword-glosses:w40	もう片側には小さなノッチがありました。	has:작은 노치가	fix	lookup
+dict:tech-loanword-glosses:w40	「あれさぁ、ふつうの運転でやるとフルノッチってなかなか使わないのに	has:풀 노치	fix	lookup
+dict:tech-loanword-glosses:w11	自動ディクショナリインデクシング。	has:딕셔너리 인덱싱	fix	lookup
+dict:tech-loanword-glosses:w2	デュアルプロセッサの機械だ。	has:듀얼 프로세서	fix	lookup
+dict:tech-loanword-glosses:w22	ネットワークのトポロジーを描く。	has:토폴로지	fix	lookup
+dict:tech-loanword-glosses:w38	ネットワークプロトコールを決める。	has:네트워크 프로토콜	fix	lookup
+dict:tech-loanword-glosses:w34	ドレーンプラグを緩めた。	has:드레인 플러그	fix	lookup
+dict:tech-loanword-glosses:w44	何かノスタルジックな感じさえする。	has:노스탤지어적인 느낌	fix	lookup
+dict:tech-loanword-glosses:w44	意外とノスタルジックなんだな	has:노스탤지어적이구나	fix	lookup
+dict:tech-loanword-glosses:w45	出血やおりものもない。	has:질 분비물도 없다	fix	lookup
+dict:tech-loanword-glosses:w45	血はついていないが、茶色いおりもので激しく汚れていた。	has:갈색 질 분비물로	fix	lookup
+dict:tech-loanword-glosses:w45	そこにおりもの痕跡があることを確かめる。	has:질 분비물 흔적	fix	lookup
+dict:tech-loanword-glosses:w48	悪魔に取りつかれた彼等は僕達の怨敵だ。	has:원수다	fix	lookup
+dict:tech-loanword-glosses:w48	「憎き、憎き怨敵！」	has:원수!	fix	lookup
+dict:tech-loanword-glosses:w24	トランスポーター	lacks:트랜스포트	keep	lookup
+dict:tech-loanword-glosses:w29	トルティーヤチップス	has:토르티야	fix	lookup
+dict:tech-loanword-glosses:w40	「なんやイノッチ、緊張でもしとんのか？」	lacks:노치	keep	lookup
+dict:tech-loanword-glosses:w11	左右対称のディクショナリー。	has:사전	keep	lookup
+dict:tech-loanword-glosses:w2	このプロセッサは速い。	has:이 프로세서는	keep	lookup
+dict:tech-loanword-glosses:w44	ノスタルジックギャングバングキッズ	lacks:노스탤지어적	keep	lookup
+dict:tech-loanword-glosses:w45	織物の工場	has:직물	keep	lookup
+dict:tech-loanword-glosses:w48	怨敵退散！	has:원수는 물러가라	keep	lookup
+dict:tech-loanword-glosses:w19	スイッチを押す。	has:스위치를	keep	lookup
+dict:tech-loanword-glosses:w19	スイッチングハブをつなぐ。	has:스위칭	keep	lookup
+dict:tech-loanword-glosses:w2	プロセッサーの性能が上がった。	has:프로세서	keep	lookup
+dict:tech-loanword-glosses:w44	ノスタルジアを感じる。	has:노스탤지어를	keep	lookup
+dict:tech-loanword-glosses:w11	「ガイドディクショナリーか……」	has:가이드 사전	keep	lookup
+dict:tech-loanword-glosses:w24	トランスポーターに乗る。	has:트랜스포터를	keep	lookup
