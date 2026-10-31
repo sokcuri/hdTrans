@@ -6,6 +6,11 @@ aspect.fold-1	fix	hae	V:알다{ctype=conn,eomi=-고} V:있다{aux=1,tense=past}	
 aspect.fold-1	fix	narr	V:보다{ctype=conn,eomi=-고} V:있다{aux=1,ctype=adn}	보고 있는
 aspect.fold-1	keep	narr	V:먹다{ctype=conn,eomi=-어} V:있다{aux=1}	먹어 있다
 aspect.fold-1	keep	narr	V:먹다{ctype=conn,eomi=-고} V:가다	먹고 간다
+compl.beorida-1	fix	hae	V:사다{ctype=conn,eomi=-어} V:버리다{aux=1,ctype=conn,eomi=-면}	사면
+compl.beorida-1	fix	narr	V:교환하다{ctype=conn,eomi=-어} V:버리다{aux=1,ctype=adn,rel=past} N:거 P:obj	교환한 거를
+compl.beorida-1	fix	narr	V:섞이다{ctype=conn,eomi=-어} V:버리다{aux=1,ctype=adn,rel=nonpast} N:것{dep=1} V:같다{aux=1,ctype=adn}	섞이는 것 같은
+compl.beorida-1	keep	narr	V:가다{ctype=conn,eomi=-어} V:버리다{aux=1,tense=past}	가 버렸다
+compl.beorida-1	keep	narr	V:잊다{ctype=conn,eomi=-어} V:버리다{aux=1,ctype=adn,rel=past} N:것{dep=1}	잊어 버린 것
 comma.conj-1	fix	narr	N:하지만 Punct:comma{jaMark=、} N:문제 P:lex=도 V:있다{tense=past}	하지만 문제도 있었다
 comma.conj-1	fix	hae	Punct:qopen{jaMark=「} N:그럼 Punct:comma{jaMark=、} V:가다{mood=prop} Punct:qclose{jaMark=」}	「그럼 가자」
 comma.conj-1	keep	hae	Punct:qopen{jaMark=「} N:응 Punct:comma{jaMark=、} V:알다{tense=past} Punct:qclose{jaMark=」}	「응, 알았어」
@@ -21,17 +26,27 @@ comma.nosrc-1	fix	narr	N:그 Punct:comma N:사람 P:subj V:오다{tense=past}	�
 comma.nosrc-1	keep	narr	N:그 Punct:comma{jaMark=、} N:사람 P:subj V:오다{tense=past}	그, 사람이 왔다
 comma.topic-1	fix	narr	N:나 P:top Punct:comma{jaMark=、} V:싫다	나는 싫다
 comma.topic-1	keep	narr	N:사과 P:lex=도 Punct:comma{jaMark=、} N:배 P:lex=도 V:좋다	사과도, 배도 좋다
+comma.topic-1	keep	narr	N:겨울 P:top Punct:comma{jaMark=、} N:겨울 P:top N:눈	겨울은, 겨울은 눈
 comma.topic-1	keep	narr	V:끝내다{ctype=adn,tense=past} N:나 P:top Punct:comma{jaMark=、} N:역시 V:화나다{tense=past}	끝낸 나는, 역시 화났다
 comma.topic-1	fix	narr	N:미치루 P:top Punct:comma{jaMark=、} N:나 P:lex=에게 V:붙다{tense=past}	미치루는 나에게 붙었다
-from.robuteo-1	fix	narr	N:냉장고 P:lex=로부터 N:우유 P:obj V:꺼내다{tense=past}	냉장고에서 우유를 꺼냈다
-from.robuteo-1	fix	narr	N:친구{sem=person} P:lex=로부터 N:편지 P:obj V:받다{tense=past}	친구에게서 편지를 받았다
+from.robuteo-1	fix	narr	N:포켓 P:lex=(으)로부터 N:하모니카 P:obj V:꺼내다{tense=past}	포켓에서 하모니카를 꺼냈다
+from.robuteo-1	fix	narr	N:친구{sem=person} P:lex=(으)로부터 N:편지 P:obj V:받다{tense=past}	친구에게서 편지를 받았다
+from.robuteo-1	fix	hae	N:친구{sem=person} P:lex=(으)로부터 N:편지 P:obj V:받다{tense=past}	친구한테서 편지를 받았어
+from.robuteo-1	keep	narr	N:씨{sem=person} P:lex=(으)로부터 P:gen N:의뢰 P:obj V:받다{tense=past}	씨로부터의 의뢰를 받았다
 from.robuteo-1	keep	narr	N:냉장고 P:lex=에서 N:우유 P:obj V:꺼내다{tense=past}	냉장고에서 우유를 꺼냈다
 gen.chain-1	fix	narr	N:학교 P:gen N:옥상 P:gen N:문 P:subj V:열리다{tense=past}	학교 옥상의 문이 열렸다
 gen.chain-1	keep	narr	N:나 P:gen N:친구 P:gen N:집 P:goal V:가다{tense=past}	나의 친구의 집에 갔다
 gen.chain-1	keep	narr	V:마치다{ctype=adn,tense=past} N:느낌 P:gen N:학교 P:gen N:학생 P:subj V:보다{tense=past}	마친 느낌의 학교의 학생이 봤다
 gen.chain-1	keep	narr	N:자신 P:gen N:일족 P:gen N:뿌리 P:obj V:보이다{tense=past}	자신의 일족의 뿌리를 보였다
 gen.chain-1	fix	narr	N:선생님 P:gen N:입술 P:gen N:감촉	선생님 입술의 감촉
-gen.chain-1	keep	narr	N:선배{sem=person} P:gen N:동생 P:gen N:책 P:obj V:읽다{tense=past}	선배의 동생의 책을 읽었다
+gen.chain-1	fix	narr	N:선배{sem=person} P:gen N:동생 P:gen N:책 P:obj V:읽다{tense=past}	선배 동생의 책을 읽었다
+like.deut-2	fix	narr	V:알다{ctype=adn,rel=nonpast} N:것{dep=1} V:같다{aux=1}	아는 듯하다
+like.deut-2	fix	narr	V:준비하다{ctype=adn,rel=past} N:것{dep=1} V:같다{aux=1,tense=past}	준비한 듯했다
+like.deut-2	keep	narr	V:돌아오다{ctype=adn,rel=nonpast} N:것{dep=1} V:같다{aux=1,eomi=neunde}	돌아오는 것 같은데
+like.deut-1	keep	narr	V:알다{ctype=adn,rel=nonpast} N:것{dep=1} V:같다{aux=1}	아는 것 같다
+like.deut-1	fix	narr	V:떨어지다{ctype=adn,rel=fut} N:것{dep=1} V:같다{aux=1,ctype=adn,rel=nonpast} N:기분	떨어질 듯한 기분
+like.deut-2	keep	hae	Punct:qopen{jaMark=「} V:알다{ctype=adn,rel=nonpast} N:것{dep=1} V:같다{aux=1} Punct:qclose{jaMark=」}	「아는 거 같아」
+like.deut-1	keep	narr	N:꿈 V:같다{ctype=adn,rel=nonpast} N:이야기	꿈 같은 이야기
 pron.anata-1	fix	hae	N:당신 P:subj V:하다{tense=past,mood=q}	네가 했어
 pron.anata-1	keep	narr	N:당신 P:subj V:하다{tense=past}	당신이 했다
 pron.anata-2	fix	haeyo	N:당신 P:top N:누구 V:이다{mood=q}	누구예요
@@ -40,3 +55,27 @@ prog.state-1	fix	hae	V:알다{aspect=prog}	알아
 prog.state-1	fix	haeyo	N:그거 P:top V:기억하다{aspect=prog}	그건 기억해요
 prog.state-1	keep	narr	V:알다{aspect=prog,tense=past}	알고 있었다
 prog.state-1	keep	hae	V:먹다{aspect=prog}	먹고 있어
+prog.state-2	fix	hae	V:의심하다{aspect=prog}	의심해
+prog.state-2	keep	hae	V:생각하다{aspect=prog}	생각하고 있어
+prog.state-2	fix	haeyo	N:그거 P:top V:기억하다{aspect=prog}	그건 기억해요
+prog.state-2	keep	hae	V:알다{aspect=prog}	알고 있어
+prog.state-2	keep	narr	V:생각하다{aspect=prog,tense=past}	생각하고 있었다
+prog.state-2	keep	hae	V:먹다{aspect=prog}	먹고 있어
+pron.anata-3	fix	hae	Punct:qopen{jaMark=「} N:당신들 Punct:comma{jaMark=、} N:잡담 P:top V:그만하다{mood=imp} Punct:qclose{jaMark=」}	「너희, 잡담은 그만해」
+pron.anata-3	keep	haeyo	Punct:qopen{jaMark=「} N:당신들 P:top N:누구 V:이다{mood=q} Punct:qclose{jaMark=」}	「당신들은 누구예요」
+pron.anata-4	fix	hae	Punct:qopen{jaMark=「} N:당신 N:들{glue=1} P:top V:모르다 Punct:qclose{jaMark=」}	「너희는 몰라」
+pron.anata-4	keep	hapsyo	Punct:qopen{jaMark=「} N:당신 N:들{glue=1} P:top V:모르다 Punct:qclose{jaMark=」}	「당신들은 모릅니다」
+compl.beorida-2	fix	hae	V:들어가다{ctype=conn,eomi=-어} V:버리다{aux=1,ctype=conn,eomi=-면}	들어가면
+compl.beorida-2	keep	hae	V:태우다{ctype=conn,eomi=-어} V:버리다{aux=1,ctype=adn,rel=fut} N:거{dep=1} V:이다	태워 버릴 거야
+compl.beorida-3	fix	narr	V:정해지다{ctype=conn,eomi=-어} V:버리다{aux=1,tense=past}	정해졌다
+compl.beorida-3	fix	narr	V:더러워지다{ctype=conn,eomi=-어} V:버리다{aux=1,tense=past,ctype=conn,eomi=-지만}	더러워졌지만
+compl.beorida-3	keep	narr	V:가다{ctype=conn,eomi=-어} V:버리다{aux=1,tense=past}	가 버렸다
+compl.beorida-3	keep	narr	V:가지다{ctype=conn,eomi=-어} V:버리다{aux=1,tense=past}	가져 버렸다
+from.robuteo-2	fix	narr	N:포켓{sem=thing} P:lex=(으)로부터 N:하모니카 P:obj V:꺼내다{tense=past}	포켓에서 하모니카를 꺼냈다
+from.robuteo-2	keep	narr	N:나오 P:lex=(으)로부터 N:사탕 P:obj V:받다{tense=past}	나오로부터 사탕을 받았다
+from.robuteo-2	keep	narr	N:언니{sem=thing} P:lex=(으)로부터 N:전화 P:subj V:있다{tense=past}	언니로부터 전화가 있었다
+from.robuteo-3	fix	narr	N:씨{sem=person} P:lex=(으)로부터 N:정보 P:obj V:받다{tense=past}	씨에게서 정보를 받았다
+from.robuteo-3	keep	narr	N:씨{sem=person} P:lex=(으)로부터 P:gen N:의뢰	씨로부터의 의뢰
+from.robuteo-2	keep	narr	N:취득{sem=thing} P:lex=(으)로부터 P:subj V:되다	취득으로부터가 된다
+from.robuteo-4	fix	hae	N:언니{sem=thing} P:lex=(으)로부터 N:전화 P:subj V:있다{tense=past}	언니한테서 전화가 있었어
+from.robuteo-4	keep	narr	N:창{sem=thing} P:lex=(으)로부터 N:빛 P:subj V:들어오다{tense=past}	창으로부터 빛이 들어왔다

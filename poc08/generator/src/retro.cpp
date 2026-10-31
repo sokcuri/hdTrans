@@ -660,6 +660,8 @@ bool BuildAligned(Retro& r, const json::Value& v, std::vector<Node>& nodes, size
             const Kind nk = kind == "N" && IsHangulWord(t) ? Kind::N : Kind::Raw;
             if (!a.Text(t, nk, false)) ++a.skipped;
             else if (nk == Kind::N) {
+                if (it.Bool("person")) SetFeature(nodes.back(), "sem", "person");
+                else if (it.Bool("thing")) SetFeature(nodes.back(), "sem", "thing");
                 // a word 0.7.x wrote whole (입니다, 부탁드립니다) may be a predicate
                 Node lit;
                 std::string host;
@@ -841,6 +843,8 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 if (kind == "N" || kind == "Raw") {
                     Node n = MakeNode(kind == "N" && IsHangulWord(it.Str("t")) ? Kind::N : Kind::Raw, it.Str("t"));
                     n.glue = it.Bool("glue");
+                    if (n.kind == Kind::N && it.Bool("person")) SetFeature(n, "sem", "person");
+                    else if (n.kind == Kind::N && it.Bool("thing")) SetFeature(n, "sem", "thing");
                     std::string host;
                     if (n.glue && !nodes.empty() && (nodes.back().kind == Kind::N || nodes.back().kind == Kind::Raw)) host = nodes.back().lemma;
                     Node lit;

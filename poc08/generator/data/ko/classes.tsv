@@ -1,0 +1,57 @@
+#! classes
+# Hand-curated classes of Korean lemmas, read by rule conditions (rewrite rules: x.class=NAME). A lemma may be in
+# several classes. Members are added by reading cases, never by counting a corpus.
+#
+# Columns
+#   class   state: verbs of feeling and remembering whose ている is a state, not an action in progress
+#           (覚えてる → 기억해, 疑ってる → 의심해); 알다 and 생각하다 are not (わかってる → 알고 있어,
+#           考えてる → 생각하고 있어 read naturally)
+#           nonagent: predicates of a change that happens to the subject (passive, -어지다, 되다, -받다)
+#           person: nouns for people the dictionaries carry without a person code (후보, 언니, 모두)
+#   lemma   the Korean lemma (with 다); ~ending: every lemma with that ending
+class	lemma	note
+state	기억하다	覚えてる → 기억해
+state	믿다	信じてる → 믿어
+state	바라다	願ってる → 바라
+state	원하다	望んでる → 원해
+state	사랑하다	愛してる → 사랑해
+state	좋아하다	好いてる → 좋아해
+state	싫어하다	嫌がってる → 싫어해
+state	의심하다	疑ってる → 의심해
+state	모르다	知らないでいる → 몰라
+nonagent	~어지다	떨어지다, 정해지다: a change that happens to the subject (rows with ~ match a lemma ending)
+nonagent	~아지다	좋아지다
+nonagent	~워지다	더러워지다, 뜨거워지다
+nonagent	~해지다	정해지다, 조용해지다
+nonagent	~러지다	부러지다, 쓰러지다
+nonagent	되다	되다 (なる)
+nonagent	~되다	결정되다, 탈선되다
+nonagent	~받다	설교받다, 사랑받다
+nonagent	당하다	당하다 (やられる)
+nonagent	~당하다	이용당하다
+person	후보	候補者 (a candidate)
+person	후보자	
+person	언니	お姉ちゃん
+person	누나	
+person	오빠	
+person	형	
+person	동생	
+person	남학생	男子生徒
+person	여학생	
+person	학생	
+person	왕	王
+person	왕자	
+person	공주	
+person	모두	全て, みんな (everyone)
+person	군	くん after a name
+person	씨	さん after a name
+person	님	様 after a name
+person	선배	
+person	후배	
+person	아이	
+person	부모	
+person	마스터	マスター (a person addressed)
+person	일본인	
+person	사람	
+person	녀석	
+person	놈	

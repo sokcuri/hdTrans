@@ -21,7 +21,7 @@ const char* const kAspects[] = {"simple", "prog", "result", "compl", "dir-come",
 const char* const kMoods[] = {"decl", "q", "imp", "prop", "excl"};
 const char* const kNegs[] = {"none", "an", "ji-anh", "mot", "ji-mot", "ji-ma"};
 const char* const kPuncts[] = {"none", "comma", "pause", "end", "q", "excl", "qopen", "qclose", "ellipsis", "dash", "mark"};
-const char* const kSems[] = {"person", "place", "time", "counter", "num", "sino", "native", "animate"};
+const char* const kSems[] = {"person", "place", "time", "counter", "num", "sino", "native", "animate", "thing"};
 bool Flag(const std::string& v) { return v == "1" || v == "true" || v == "yes"; }
 }  // namespace
 
@@ -60,7 +60,7 @@ bool SetFeature(Node& n, const std::string& k, const std::string& v) {
     else if (k == "sem") {
         n.sem = 0;
         for (const auto& s : Split(v, '|'))
-            for (size_t i = 0; i < 8; ++i)
+            for (size_t i = 0; i < 9; ++i)
                 if (s == kSems[i]) n.sem |= 1u << i;
     } else return false;
     return true;
@@ -91,7 +91,7 @@ std::string GetFeature(const Node& n, const std::string& k) {
     if (k == "punct") return kPuncts[static_cast<int>(n.punct)];
     if (k == "sem") {
         std::string s;
-        for (size_t i = 0; i < 8; ++i)
+        for (size_t i = 0; i < 9; ++i)
             if (n.sem & (1u << i)) s += (s.empty() ? "" : "|") + std::string(kSems[i]);
         return s;
     }

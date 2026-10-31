@@ -53,12 +53,19 @@ std::string U8(std::u32string_view s) {
 bool Hangul(char32_t c) { return c >= 0xAC00 && c <= 0xD7A3; }
 bool AllHangul(std::u32string_view s) { return std::all_of(s.begin(), s.end(), Hangul); }
 bool Kana(char32_t c) { return (c >= 0x3041 && c <= 0x3093) || (c >= 0x30A1 && c <= 0x30F6); }
+// the semantic code of person nouns in the 0.7.x dictionaries (先生, 友達, 彼, 母)
+constexpr std::string_view kPersonCode = "VHn";
+// the semantic code of proper names (王 as a name, 日本人)
+constexpr std::string_view kNameCode = "QPN";
+// the part code of common nouns (N110); proper nouns are N130, pronouns N120
+constexpr std::string_view kCommonNounCode = "110";
+
 bool Space(char32_t c) { return c == ' ' || c == 0x3000 || c == '\t' || c == '\r' || c == '\n'; }
 
 // One pre-IR item, written as the retrofit reads it.
 struct PreItem {
     std::string k, t, p, m, lemma, pos, cls, row, rest, marker;
-    bool bare = false, gap = false, stutter = false, glue = false, hasBare = false;
+    bool bare = false, gap = false, stutter = false, glue = false, hasBare = false, person = false, thing = false;
 };
 
 }  // namespace
@@ -334,6 +341,7 @@ std::vector<PreItem> ItemsOfTarget(const RuleData& d, const std::u32string& t, c
 struct Row {
     int sent = 0, seg = 0;
     std::u32string surf, target, ending;
+    bool person = false, thing = false;
 };
 
 std::vector<PreItem> ConvertLine(const RuleData& d, const std::u32string& ja, const std::vector<Row>& rows) {
@@ -409,6 +417,13 @@ std::vector<PreItem> ConvertLine(const RuleData& d, const std::u32string& ja, co
             }
         }
         std::vector<PreItem> its = ItemsOfTarget(d, r.target, r.ending, r.surf);
+        // a target of several nouns (모리시타 씨) is one word: the class goes on its last noun
+        for (size_t q = its.size(); q-- > 0;)
+            if (its[q].k == "N") {
+                its[q].person = r.person;
+                its[q].thing = r.thing;
+                break;
+            }
         if (p < 0) {
             // a mark the chain wrote itself (? for ？): it stands for the next uncovered mark of its kind
             for (PreItem& it : its) {
@@ -488,6 +503,8 @@ std::string ItemJson(const PreItem& it) {
     std::string o = "{\"k\":";
     AppendJsonString(o, it.k);
     if (!it.t.empty() || it.k == "N" || it.k == "Raw" || it.k == "P") Field(o, "t", it.t);
+    if (it.person) o += ",\"person\":true";
+    if (it.thing) o += ",\"thing\":true";
     if (!it.p.empty()) Field(o, "p", it.p);
     if (it.k == "Punct") Field(o, "m", it.m);
     if (it.k == "V") {
@@ -519,6 +536,104 @@ std::u32string AfterTag(const RuleData& d, std::u32string s) {
         break;
     }
     return s;
+}
+
+std::vector<std::u32string> Words(const std::u32string& s) {
+    std::vector<std::u32string> w;
+    std::u32string cur;
+    for (char32_t c : s) {
+        if (c == U' ') {
+            if (!cur.empty()) w.push_back(cur);
+            cur.clear();
+        } else {
+            cur += c;
+        }
+    }
+    if (!cur.empty()) w.push_back(cur);
+    return w;
+}
+
+std::u32string Join(const std::vector<std::u32string>& w, size_t a, size_t b) {
+    std::u32string o;
+    for (size_t k = a; k < b; k++) {
+        if (!o.empty()) o += U' ';
+        o += w[k];
+    }
+    return o;
+}
+
+// Carries what the rewrite rules changed (r0 → r1, the retrofit's line without and with them) onto 0.7.x's own
+// text o: each changed run of words of r0 is looked up in o with spaces ignored (it must start and end on word
+// boundaries and occur once) and replaced by r1's words. False when a run is not found, so the line keeps 0.7.x's
+// text: the retrofit's other differences from 0.7.x (its own spacing, a word it reads differently) never move.
+bool Transplant(const std::string& o8, const std::string& r08, const std::string& r18, std::string& out) {
+    const std::u32string o = U32(o8);
+    const std::vector<std::u32string> w0 = Words(U32(r08)), w1 = Words(U32(r18));
+    const size_t n = w0.size(), m = w1.size();
+    if (n > 400 || m > 400) return false;
+    // longest common subsequence of words
+    std::vector<std::vector<uint16_t>> L(n + 1, std::vector<uint16_t>(m + 1, 0));
+    for (size_t i = n; i-- > 0;)
+        for (size_t j = m; j-- > 0;)
+            L[i][j] = w0[i] == w1[j] ? static_cast<uint16_t>(L[i + 1][j + 1] + 1) : std::max(L[i + 1][j], L[i][j + 1]);
+    struct Hunk {
+        size_t a0, a1, b0, b1;
+    };
+    std::vector<Hunk> hunks;
+    size_t i = 0, j = 0;
+    while (i < n || j < m) {
+        if (i < n && j < m && w0[i] == w1[j]) {
+            i++, j++;
+            continue;
+        }
+        Hunk h{i, i, j, j};
+        while ((i < n || j < m) && !(i < n && j < m && w0[i] == w1[j])) {
+            if (j >= m || (i < n && L[i + 1][j] >= L[i][j + 1])) i++;
+            else j++;
+        }
+        h.a1 = i, h.b1 = j;
+        hunks.push_back(h);
+    }
+    if (hunks.empty()) return false;
+    // o without spaces, with the position of each kept character
+    std::u32string so;
+    std::vector<size_t> at;
+    for (size_t k = 0; k < o.size(); k++)
+        if (o[k] != U' ') so += o[k], at.push_back(k);
+    auto boundary = [&](size_t k) { return k == 0 || k >= o.size() || o[k - 1] == U' ' || o[k] == U' '; };
+    std::u32string res;
+    size_t done = 0;  // o is copied up to here
+    for (const Hunk& h : hunks) {
+        // a pure insertion is anchored on the word before it
+        const size_t a0 = h.a0 == h.a1 && h.a0 > 0 ? h.a0 - 1 : h.a0;
+        const size_t b0 = h.a0 == h.a1 && h.a0 > 0 ? h.b0 - 1 : h.b0;
+        if (a0 == h.a1) return false;
+        std::u32string key;
+        for (size_t k = a0; k < h.a1; k++) key += w0[k];
+        const size_t f = so.find(key);
+        if (f == std::u32string::npos || so.find(key, f + 1) != std::u32string::npos) return false;
+        const size_t s0 = at[f], s1 = at[f + key.size() - 1] + 1;
+        if (s0 < done || !boundary(s0) || !(s1 >= o.size() || o[s1] == U' ')) return false;
+        // the retrofit may space more than 0.7.x (돌려 버렸다 for 돌려버렸다) but never less (우선, 들 → 우선,들)
+        const auto spaces = [](std::u32string_view x) { return std::count(x.begin(), x.end(), U' '); };
+        if (spaces(std::u32string_view(o).substr(s0, s1 - s0)) > static_cast<long>(h.a1 - a0 - 1)) return false;
+        res += o.substr(done, s0 - done);
+        std::u32string rep = Join(w1, b0, h.b1);
+        if (rep.empty()) {
+            // a deleted word takes one space with it
+            if (s1 < o.size() && o[s1] == U' ') done = s1 + 1;
+            else {
+                while (!res.empty() && res.back() == U' ') res.pop_back();
+                done = s1;
+            }
+            continue;
+        }
+        res += rep;
+        done = s1;
+    }
+    res += o.substr(done);
+    out = U8(res);
+    return true;
 }
 
 }  // namespace
@@ -619,6 +734,23 @@ void RuleCapture::Resolved(int chunk, int sentence, const hdTrans::word::Chain& 
         x.token = it->tokenIndex;
         if (it->group != nullptr) x.surface = it->group->surface;
         x.target = std::string(it->EntryText(it->selected));
+        if (it->group != nullptr)
+            if (const hdTrans::word::Entry* e = it->group->At(it->selected)) {
+                const bool name = e->user != nullptr && (e->user->name || e->user->nameLayer);
+                x.person = e->attr.find(kPersonCode) != std::string_view::npos || (e->user != nullptr && e->user->name);
+                // a katakana word may be a name the dictionaries do not know (コヨイ, ナオ): never a known thing
+                const std::u32string su = U32(x.surface);
+                const bool kana = !su.empty() && std::all_of(su.begin(), su.end(), [](char32_t c) { return (c >= 0x30A1 && c <= 0x30FA) || c == 0x30FC || c == 0x30FB; });
+                // a word with a person or name sense among its candidates (千里: 천리, and the name 치사토) is not a
+                // known thing either
+                bool personSense = false;
+                for (const hdTrans::word::Entry* o : it->group->entries)
+                    if (o != nullptr && (o->attr.find(kPersonCode) != std::string_view::npos || o->attr.find(kNameCode) != std::string_view::npos ||
+                                         (o->user != nullptr && (o->user->name || o->user->nameLayer))))
+                        personSense = true;
+                x.thing = !x.person && !name && !kana && !personSense && e->cls == 'N' && e->code == kCommonNounCode &&
+                          e->attr.find(kNameCode) == std::string_view::npos;
+            }
         if (const hdTrans::word::Group* g = it->DirectGroup())
             if (const hdTrans::word::Entry* e = g->At(it->DirectIndex())) x.ending = e->dst;
         v.push_back(std::move(x));
@@ -682,6 +814,8 @@ std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const st
             r.surf = U32(x.surface);
             r.target = U32(x.target);
             r.ending = U32(x.ending);
+            r.person = x.person;
+            r.thing = x.thing;
             rows.push_back(std::move(r));
         }
     }
@@ -757,21 +891,26 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
         counts.read++;
         const bool cr = !out[i].empty() && out[i].back() == '\r';
         const std::string o075 = cr ? out[i].substr(0, out[i].size() - 1) : out[i];
-        // a rewrite rule changes the line: taken where the line is replaced anyway, or where the pass without
-        // rules gives back 0.7.x's text exactly (so nothing but the rule moves)
+        // a rewrite rule changes the line: taken whole where the line is replaced anyway; elsewhere only the words
+        // the rules changed move onto 0.7.x's text (so nothing but the rule moves)
         const hd8gen::RetroLine* w = nullptr;
         if (i < rewritten.size() && rewritten[i].ok && !rewritten[i].fired.empty() && rewritten[i].out != lines[i].out &&
             !rewritten[i].mixedLevels && rewritten[i].levelChanged == lines[i].levelChanged)
             w = &rewritten[i];
         const bool level = dialogue[i] && !lines[i].mixedLevels && lines[i].levelChanged;
-        if (w != nullptr && !level && lines[i].out != o075) {
-            counts.rewriteBlocked++;
-            w = nullptr;
-        }
         if (w != nullptr && !level) {
-            counts.rewritten++;
-            out[i] = w->out + (cr ? "\r" : "");
-            continue;
+            // the line keeps 0.7.x's text except for what the rules changed
+            std::string t;
+            if (lines[i].out == o075) t = w->out;
+            else if (!Transplant(o075, lines[i].out, w->out, t)) {
+                counts.rewriteBlocked++;
+                w = nullptr;
+            }
+            if (w != nullptr) {
+                counts.rewritten++;
+                out[i] = t + (cr ? "\r" : "");
+                continue;
+            }
         }
         if (!dialogue[i]) continue;
         // only a change of speech level is worth the rewrite: a line at the same level keeps 0.7.x's text, and

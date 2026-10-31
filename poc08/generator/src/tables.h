@@ -1,6 +1,7 @@
 #pragma once
 // In-memory form of data/ko/*.tsv.
 #include <map>
+#include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -73,6 +74,11 @@ struct Tables {
     std::vector<PunctRow> punct;
     std::vector<PersonaRow> persona;
     std::unordered_map<std::string, std::string> grammar;
+    std::unordered_map<std::string, std::string> lemmaClasses;  // lemma → its classes (ko/classes.tsv), | joined
+    std::vector<std::pair<std::string, std::string>> suffixClasses;  // (lemma ending, class): rows ~ending
+    std::set<std::string> classNames;
+    // the classes of a lemma, | joined (exact rows, then lemma endings)
+    std::string ClassesOf(const std::string& lemma) const;
     const std::string& G(const std::string& name) const;
 };
 

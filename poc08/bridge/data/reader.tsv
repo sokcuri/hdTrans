@@ -223,3 +223,9 @@ rewrite	comma.conj-1
 rewrite	comma.topic-1
 rewrite	comma.conn-2
 rewrite	gen.chain-1
+rewrite	like.deut-1
+rewrite	like.deut-2
+rewrite	aspect.fold-1
+rewrite	prog.state-2
+rewrite	from.robuteo-3
+rewrite	from.robuteo-4

@@ -18,7 +18,7 @@ const char* const kAspects[] = {"simple", "prog", "result", "compl", "dir-come",
 const char* const kMoods[] = {"decl", "q", "imp", "prop", "excl"};
 const char* const kNegs[] = {"none", "an", "ji-anh", "mot", "ji-mot", "ji-ma"};
 const char* const kPuncts[] = {"none", "comma", "pause", "end", "q", "excl", "qopen", "qclose", "ellipsis", "dash", "mark"};
-const char* const kSems[] = {"person", "place", "time", "counter", "num", "sino", "native", "animate"};
+const char* const kSems[] = {"person", "place", "time", "counter", "num", "sino", "native", "animate", "thing"};
 }  // namespace
 
 const char* KindName(Kind k) { return kKinds[static_cast<int>(k)]; }
@@ -41,7 +41,7 @@ bool NodeFromJson(const json::Value& v, Node& n, std::string& err) {
     n.vpos = v.Str("vpos");
     if (const json::Value* s = v.Get("sem")) {
         for (const auto& x : s->arr)
-            for (size_t i = 0; i < 8; ++i)
+            for (size_t i = 0; i < 9; ++i)
                 if (x.str == kSems[i]) n.sem |= 1u << i;
     }
     n.tense = v.Str("tense") == "past" ? Tense::past : Tense::nonpast;
@@ -104,7 +104,7 @@ json::Value NodeToJson(const Node& n) {
     if (n.sem) {
         json::Value s;
         s.t = json::Value::T::Arr;
-        for (size_t i = 0; i < 8; ++i)
+        for (size_t i = 0; i < 9; ++i)
             if (n.sem & (1u << i)) s.arr.push_back(json::S(kSems[i]));
         v.Set("sem", s);
     }

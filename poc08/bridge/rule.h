@@ -36,6 +36,8 @@ struct RuleCapture {
     struct Item {
         int chunk = 0, sentence = 0, token = 0;
         std::string surface, target, ending;
+        bool person = false;  // the selected entry names a person (semantic code VHn, or a name entry)
+        bool thing = false;   // a dictionary noun that is not a person and not a name (ポケット, 結果)
     };
     std::vector<std::vector<Item>> items;  // per line
     std::vector<std::string> cleaned;      // per line: the cleaned text (the stage C pieces joined)

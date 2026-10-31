@@ -192,6 +192,21 @@ std::shared_ptr<const Tables> LoadTables(const std::string& dir, std::string& er
         }
     }
     {
+        // hand-curated classes of Korean lemmas, read by rule conditions (x.class=state)
+        const std::string p = dir + "/classes.tsv";
+        TsvTable tsv;
+        if (!ReadTsv(p, tsv, err) || !Need(tsv, {"class", "lemma"}, c, p, err)) return nullptr;
+        for (const auto& r : tsv.rows) {
+            t->classNames.insert(r[c[0]]);
+            if (!r[c[1]].empty() && r[c[1]][0] == '~') {
+                t->suffixClasses.push_back({r[c[1]].substr(1), r[c[0]]});
+                continue;
+            }
+            std::string& v = t->lemmaClasses[r[c[1]]];
+            v += (v.empty() ? "" : "|") + r[c[0]];
+        }
+    }
+    {
         const std::string p = dir + "/spoken.tsv";
         TsvTable tsv;
         if (!ReadTsv(p, tsv, err) || !Need(tsv, {"host", "next", "result", "mode"}, c, p, err)) return nullptr;
@@ -225,6 +240,15 @@ std::shared_ptr<const Tables> LoadTables(const std::string& dir, std::string& er
             }
     }
     return t;
+}
+
+std::string Tables::ClassesOf(const std::string& lemma) const {
+    std::string v;
+    if (auto k = lemmaClasses.find(lemma); k != lemmaClasses.end()) v = k->second;
+    for (const auto& [end, cls] : suffixClasses)
+        if (lemma.size() > end.size() && lemma.compare(lemma.size() - end.size(), end.size(), end) == 0)
+            v += (v.empty() ? "" : "|") + cls;
+    return v;
 }
 
 const std::string& Tables::G(const std::string& name) const {

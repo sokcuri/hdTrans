@@ -19,8 +19,9 @@ enum class CType : uint8_t { final_, conn, adn, nom, quote, stem };
 enum class Neg : uint8_t { none, an, jiAnh, mot, jiMot, jiMa };
 enum class Punct : uint8_t { none, comma, pause, end, q, excl, qopen, qclose, ellipsis, dash, mark };
 
-// sem bits (IR.md: person place time counter num sino native animate)
-enum Sem : uint32_t { kPerson = 1, kPlace = 2, kTime = 4, kCounter = 8, kNum = 16, kSino = 32, kNative = 64, kAnimate = 128 };
+// sem bits (IR.md: person place time counter num sino native animate; thing: a dictionary noun known not to be a
+// person, generator-local)
+enum Sem : uint32_t { kPerson = 1, kPlace = 2, kTime = 4, kCounter = 8, kNum = 16, kSino = 32, kNative = 64, kAnimate = 128, kThing = 256 };
 
 struct Span { uint32_t begin = 0, end = 0; };
 

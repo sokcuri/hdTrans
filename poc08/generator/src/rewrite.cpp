@@ -262,6 +262,7 @@ std::string Feature(const Ctx& c, size_t i, const std::string& name) {
         }
         return Name(l);
     }
+    if (name == "class") return c.gen.ClassesOf(n.lemma);
     if (name == "cls") return n.kcls.empty() ? LookupPredicate(c.gen, n.lemma).cls : n.kcls;
     if (name == "pos") return n.vpos.empty() ? LookupPredicate(c.gen, n.lemma).pos : n.vpos;
     return GetFeature(n, name);
@@ -270,7 +271,7 @@ std::string Feature(const Ctx& c, size_t i, const std::string& name) {
 bool FeatOk(const Ctx& c, size_t i, const FeatTest& f) {
     const std::string v = Feature(c, i, f.name);
     bool any = false;
-    if (f.name == "sem") {
+    if (f.name == "sem" || f.name == "class") {
         for (const auto& want : f.values)
             for (const auto& have : Split(v, '|'))
                 if (have == want) any = true;
@@ -408,7 +409,18 @@ bool CondOk(const Ctx& c, const std::vector<Atom>& cond, const std::map<std::str
                 } else if (a.op.empty()) {
                     r = Feature(c, i, f) == "1";
                 } else {
-                    FeatTest t{f, a.op == "!=", a.values};
+                    // a value @y.feat is the feature of another bound node; - is the empty value
+                    std::vector<std::string> vals = a.values;
+                    for (auto& v : vals) {
+                        if (v.size() > 1 && v[0] == '@') {
+                            const size_t d2 = v.find('.');
+                            auto o = d2 == std::string::npos ? b.end() : b.find(v.substr(1, d2 - 1));
+                            v = o == b.end() ? std::string("\x01") : Feature(c, o->second, v.substr(d2 + 1));
+                        } else if (v == "-") {
+                            v.clear();
+                        }
+                    }
+                    FeatTest t{f, a.op == "!=", vals};
                     r = FeatOk(c, i, t);
                 }
             }
@@ -634,6 +646,20 @@ RewriteResult Rewrite(const RuleSet& rs, const Tables& t, const std::vector<Node
 
 LintReport Lint(const RuleSet& rs, const Tables& t) {
     LintReport rep;
+    // a class a rule names must exist in ko/classes.tsv
+    auto checkClass = [&](const std::string& rule, const std::string& feat, const std::vector<std::string>& values) {
+        if (feat != "class") return;
+        for (const auto& v : values)
+            if (!t.classNames.count(v)) rep.problems.push_back(rule + ": unknown class " + v);
+    };
+    for (const auto& r : rs.rules) {
+        for (const auto& m : r.m)
+            for (const auto& f : m.feats) checkClass(r.id, f.name, f.values);
+        for (const auto& a : r.cond) {
+            const size_t dot = a.lhs.rfind('.');
+            if (dot != std::string::npos) checkClass(r.id, a.lhs.substr(dot + 1), a.values);
+        }
+    }
     std::map<std::string, std::pair<int, int>> counts;  // fix, keep
     for (const auto& r : rs.rules) counts[r.id] = {0, 0};
     for (const auto& cs : rs.cases) {
