@@ -1,5 +1,11 @@
 #! analyzer-params
+# compiled from ja/prefs.tsv
 key	value
-join_cost	1.5
-stutter_cost	6
+join_cost	1000
+derive_cost	1000000000000
+forbid_cost	100000000000000000
+unit_cost	1000000
+cut	kanji kanji 2000
+cut	kata kata 1000000000000000
+cut	vowelrun * 1000000000000
 stutter_ud	感動詞-フィラー

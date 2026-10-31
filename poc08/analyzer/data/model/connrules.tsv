@@ -1,0 +1,48 @@
+#! analyzer-connrules
+# compiled from ja/conn.tsv (forbidden pairs) and the pair rows of ja/prefs.tsv
+left	right	cost	id
+ud=動詞|形容詞|助動詞|接尾辞 & cform=未然形	!lemma=ない|ず|れる|られる|せる|させる|しめる|まい|へん|む|はる|や|じ	100000000000000000	cn.mizen
+cform=連用形-イ音便|連用形-促音便|連用形-撥音便 & !lemma=下さる|為さる|御座る|いらっしゃる|仰る|てらっしゃる|おっしゃる	!lemma=て|た|たり|たって|てる|ちゃう|ちまう|とく|てく|とる|てらっしゃる|ます	100000000000000000	cn.onbin
+ud=動詞|形容詞|助動詞|接尾辞 & cform=仮定形-一般 & !lemma=た|だ|なんだ	!lemma=ば|ど|ども	100000000000000000	cn.katei
+!cform=連用形	ud=助動詞 & lemma=ます	100000000000000000	cn.masu
+!cform=連用形	ud=助動詞 & lemma=た	100000000000000000	cn.ta
+!cform=連用形 & !lemma=ない|ず|無い	ud=助詞-接続助詞 & lemma=て	100000000000000000	cn.te
+!cform=未然形	ud=助動詞 & lemma=ない	100000000000000000	cn.nai
+!cform=未然形	ud=助動詞 & lemma=れる|られる|せる|させる|しめる	100000000000000000	cn.voice
+!cform=連用形	ud=助動詞 & lemma=たい	100000000000000000	cn.tai
+!cform=仮定形 & !lemma=って|たって	ud=助詞-接続助詞 & lemma=ば	100000000000000000	cn.ba
+ud=動詞|形容詞|助動詞 & !lemma=ず	lemma=を	100000000000000000	cn.wo-pred
+ud=助詞|助動詞|動詞|形容詞|形状詞|連体詞|接頭辞|副詞	ud=接続詞	100000000000000000	cn.conj-pos
+ud=接頭辞	bos / ud=助詞|助動詞|補助記号|接尾辞|接続詞|感動詞	100000000000000000	cn.prefix-next
+bos / ud=助詞|助動詞|補助記号|接続詞|感動詞|接頭辞	ud=接尾辞	100000000000000000	cn.suffix-prev
+cform=命令形 & !lemma=下さる|為さる|御座る|いらっしゃる|仰る|てらっしゃる|おっしゃる	ud=助動詞|助詞-格助詞|助詞-係助詞|助詞-接続助詞|助詞-準体助詞 & !lemma=と|つう|って|や	100000000000000000	cn.meirei-next
+ud=助詞-終助詞	ud=助動詞|助詞-格助詞|助詞-係助詞|助詞-接続助詞|助詞-準体助詞 & !lemma=と|って|つう	100000000000000000	cn.final-next
+ud=助詞-格助詞|助詞-係助詞|助詞-準体助詞|助詞-接続助詞|接頭辞 / cform=未然形|連用形-イ音便|連用形-促音便|連用形-撥音便|仮定形|語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	100000000000000000	cn.intj-prev
+cform=終止形	ud=名詞|代名詞|助詞-準体助詞|形状詞-助動詞語幹 & !lemma=みたい	100000000000000000	cn.shushi-next
+cform=連体形	ud=補助記号-句点|助詞-終助詞|助詞-接続助詞 & !lemma=の	100000000000000000	cn.rentai-next
+!ud=形状詞|名詞-普通名詞-形状詞可能|名詞-普通名詞-サ変形状詞可能|接尾辞-形状詞的	lemma=だ & cform=連用形-ニ	100000000000000000	cn.da-ni
+lemma=だ & cform=連用形-一般	!bos & !ud=補助記号 & !lemma=有る|無い|御座る|居る|は|も|ない|すら|さえ|こそ|しか	100000000000000000	cn.da-de
+ud=名詞|代名詞|接尾辞	ud=助詞 & lemma=すけ	100000000000000000	cn.suke-noun
+cform=連用形	ud=助詞-副助詞|助動詞 & lemma=って|つう	100000000000000000	cn.tte-renyou
+!cform=未然形	ud=助動詞 & lemma=ず	100000000000000000	cn.zu
+!cform=連用形	ud=助動詞 & lemma=てる|ちゃう|ちまう|とく|てく|とる|たる|たげる|てらっしゃる	100000000000000000	cn.contracted
+ud=動詞|形容詞|助動詞	ud=助詞-格助詞 & lemma=の	100000000000000000	cn.no-kaku
+ud=動詞|形容詞 & cform=終止形	ud=動詞|形容詞|連体詞|接頭辞|接尾辞|形状詞-一般	100000000000000000	cn.shushi-content
+lemma=てる & cform=連体形-省略	!lemma=の	100000000000000000	cn.teru-omit
+ud=形容詞 & cform=語幹	ud=助詞	100000000000000000	cn.gokan-particle
+ud=接続詞	ud=助動詞 / lemma=無い	100000000000000000	cn.conj-aux
+ud=形容詞 & cform=終止形|連体形	ud=助詞-格助詞 & lemma=が|を	100000000000000000	cn.adj-case
+cform=連用形-イ音便 & !lemma=下さる|為さる|御座る|いらっしゃる|仰る|てらっしゃる|おっしゃる	ud=助動詞 & lemma=ます	100000000000000000	cn.onbin-masu
+ud=接頭辞 & !lemma=御	ud=動詞|形容詞	100000000000000000	cn.prefix-verb
+cform=連体形	ud=動詞-非自立可能	100000000000000000	cn.rentai-aux-verb
+ud=助詞-格助詞 & lemma=で	lemma=有る|御座る	100000000000000000	cn.de-aru
+ud=形状詞-助動詞語幹 & !lemma=みたい	ud=助詞-終助詞	100000000000000000	cn.you-final
+ud=助詞-終助詞	ud=名詞|動詞|形容詞|形状詞|副詞|連体詞|代名詞|接頭辞	1000	pf.final-content
+ud=名詞-固有名詞	ud=動詞-非自立可能	1000000000	pf.name-aux
+ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞|形状詞-助動詞語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	1000000000	pf.intj-mid
+ud=形容詞 & cform=連用形-ウ音便 & !lemma=めでたい	!lemma=御座る|存ずる|存じる	1000000000	pf.adj-u
+ud=助詞-接続助詞 & lemma=て	ud=形容詞	1000	pf.te-adj
+ud=助動詞|形容詞 & cform=終止形	ud=動詞-非自立可能	1000000000	pf.final-aux-verb
+ud=名詞|代名詞	ud=名詞-普通名詞	1	pf.noun-noun
+ud=動詞 & cform=連用形-一般	ud=助詞-格助詞 & lemma=を|が|は|も|の	1	pf.renyo-case
+ud=助詞-副助詞 & lemma=か	bos / ud=補助記号-句点	1	pf.ka-final

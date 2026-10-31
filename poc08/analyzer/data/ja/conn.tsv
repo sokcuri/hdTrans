@@ -1,0 +1,43 @@
+#! conn
+# Forbidden adjacencies (school-grammar morphotactics): a token of class `left` is never followed by one of
+# class `right`. Compiled into model/conn.tsv by build/mkrules.py; a path with a forbidden pair is taken only
+# when no other path exists.
+# Selectors: atoms joined by &, alternatives of such separated by " / "; key=a|b (any of); ! negates. Keys: ud (prefix of pos1-pos4), ctype (prefix),
+# cform (prefix), lemma (exact; function words and 非自立可能 words carry their lemma), bos (line start or end).
+id	spec	left	right	note
+cn.mizen	ANA-C1	ud=動詞|形容詞|助動詞|接尾辞 & cform=未然形	!lemma=ない|ず|れる|られる|せる|させる|しめる|まい|へん|む|はる|や|じ	the irrealis form only before the auxiliaries that take it (書か+ない, 書か+れる, せ+ず)
+cn.onbin	ANA-C2	cform=連用形-イ音便|連用形-促音便|連用形-撥音便 & !lemma=@hon-ra	!lemma=て|た|たり|たって|てる|ちゃう|ちまう|とく|てく|とる|てらっしゃる|ます	a sound-changed continuative only before t/d endings (書い+て, 待っ+た, 読ん+で); ござい/いらっしゃい+ます
+cn.katei	ANA-C3	ud=動詞|形容詞|助動詞|接尾辞 & cform=仮定形-一般 & !lemma=た|だ|なんだ	!lemma=ば|ど|ども	the conditional form only before ば (書け+ば, なけれ+ば); たら and なら stand alone
+cn.masu	ANA-C4	!cform=連用形	ud=助動詞 & lemma=ます	ます only after a continuative (書き+ます)
+cn.ta	ANA-C5	!cform=連用形	ud=助動詞 & lemma=た	た/だ only after a continuative (書い+た, 高かっ+た, でし+た)
+cn.te	ANA-C6	!cform=連用形 & !lemma=ない|ず|無い	ud=助詞-接続助詞 & lemma=て	て/で only after a continuative, or ない (書い+て, 読ん+で, 来+ない+で)
+cn.nai	ANA-C7	!cform=未然形	ud=助動詞 & lemma=ない	the auxiliary ない only after an irrealis form (書か+ない); 無い after く is the adjective
+cn.voice	ANA-C8	!cform=未然形	ud=助動詞 & lemma=れる|られる|せる|させる|しめる	voice auxiliaries only after an irrealis form (書か+れる, 食べ+させる, さ+せる)
+cn.tai	ANA-C9	!cform=連用形	ud=助動詞 & lemma=たい	たい only after a continuative (書き+たい)
+cn.ba	ANA-C10	!cform=仮定形 & !lemma=って|たって	ud=助詞-接続助詞 & lemma=ば	ば only after a conditional form (書け+ば); ってば
+cn.wo-pred	ANA-C11	ud=動詞|形容詞|助動詞 & !lemma=ず	lemma=を	を never right after a predicate; ざる+を (得ない) is the exception
+cn.conj-pos	ANA-C12	ud=助詞|助動詞|動詞|形容詞|形状詞|連体詞|接頭辞|副詞	ud=接続詞	a conjunction opens a sentence or clause, or joins nouns (東京及び大阪); never right after a particle or a predicate
+cn.prefix-next	ANA-C13	ud=接頭辞	bos / ud=助詞|助動詞|補助記号|接尾辞|接続詞|感動詞	a prefix needs a content word after it (お+礼, 御+願い)
+cn.suffix-prev	ANA-C14	bos / ud=助詞|助動詞|補助記号|接続詞|感動詞|接頭辞	ud=接尾辞	a suffix needs a word before it (東雲+さん, 学園+長)
+cn.meirei-next	ANA-C15	cform=命令形 & !lemma=@hon-ra	ud=助動詞|助詞-格助詞|助詞-係助詞|助詞-接続助詞|助詞-準体助詞 & !lemma=と|つう|って|や	an imperative ends its clause: no auxiliary or case, topic, conjunctive particle after it except the quoting と (来いと言った)
+cn.final-next	ANA-C16	ud=助詞-終助詞	ud=助動詞|助詞-格助詞|助詞-係助詞|助詞-接続助詞|助詞-準体助詞 & !lemma=と|って|つう	a sentence-final particle ends its clause: only another final particle, a quoting と/って or punctuation follow
+cn.intj-prev	ANA-C17	ud=助詞-格助詞|助詞-係助詞|助詞-準体助詞|助詞-接続助詞|接頭辞 / cform=未然形|連用形-イ音便|連用形-促音便|連用形-撥音便|仮定形|語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	an interjection opens an utterance: it never follows a case, topic or conjunctive particle, a prefix or a non-final form directly
+cn.shushi-next	ANA-C18	cform=終止形	ud=名詞|代名詞|助詞-準体助詞|形状詞-助動詞語幹 & !lemma=みたい	the conclusive form ends a clause: a noun, the nominalizer の or よう after a predicate takes its attributive form (行く人 is 連体形); みたい follows the conclusive form
+cn.rentai-next	ANA-C19	cform=連体形	ud=補助記号-句点|助詞-終助詞|助詞-接続助詞 & !lemma=の	the attributive form modifies what follows: never before a full stop, a final or conjunctive particle, which take the conclusive form; the final の takes the attributive form (何なの)
+cn.da-ni	ANA-C20	!ud=形状詞|名詞-普通名詞-形状詞可能|名詞-普通名詞-サ変形状詞可能|接尾辞-形状詞的	lemma=だ & cform=連用形-ニ	the copula's adverbial に only after a na-adjective stem (静か+に, 好意的+に); after a noun に is the case particle
+cn.da-de	ANA-C21	lemma=だ & cform=連用形-一般	!bos & !ud=補助記号 & !lemma=有る|無い|御座る|居る|は|も|ない|すら|さえ|こそ|しか	the copula's continuative で before ある/ない/ござる/いる, a topic or focus particle, or a pause (学生で、 学生ではない); elsewhere で is the case particle
+cn.suke-noun	ANA-C22	ud=名詞|代名詞|接尾辞	ud=助詞 & lemma=すけ	the dialect conjunctive particle すけ follows a predicate, never a noun (佳奈すけ is a nickname)
+cn.tte-renyou	ANA-C23	cform=連用形	ud=助詞-副助詞|助動詞 & lemma=って|つう	the quoting って never follows a continuative: 言っ+て, not 言+って
+cn.zu	ANA-C24	!cform=未然形	ud=助動詞 & lemma=ず	ず/ぬ/ん (negation) only after an irrealis form (書か+ず, ませ+ん)
+cn.contracted	ANA-C25	!cform=連用形	ud=助動詞 & lemma=てる|ちゃう|ちまう|とく|てく|とる|たる|たげる|てらっしゃる	contracted auxiliaries (てる = ている, ちゃう = てしまう …) take the continuative like the て they contain (見+てる, 言っ+ちゃう)
+cn.no-kaku	ANA-C26	ud=動詞|形容詞|助動詞	ud=助詞-格助詞 & lemma=の	after a predicate の is the nominalizer or the final particle, not the genitive case particle
+cn.shushi-content	ANA-C27	ud=動詞|形容詞 & cform=終止形	ud=動詞|形容詞|連体詞|接頭辞|接尾辞|形状詞-一般	a verb or adjective right before a content word is attributive (大きい木, 走る人), not conclusive
+cn.teru-omit	ANA-C28	lemma=てる & cform=連体形-省略	!lemma=の	the clipped attributive て of てる only before the nominalizer の/ん (ふらつい+て+ん+だ)
+cn.gokan-particle	ANA-C29	ud=形容詞 & cform=語幹	ud=助詞	an adjective stem stands before そう, すぎる, さ, げ or the end, never before a particle (よ+ね is the final particle, not 良い)
+cn.conj-aux	ANA-C30	ud=接続詞	ud=助動詞 / lemma=無い	a conjunction opens a clause: never an auxiliary or ない right after it (彼しか+し+ない, not しかし+ない)
+cn.adj-case	ANA-C31	ud=形容詞 & cform=終止形|連体形	ud=助詞-格助詞 & lemma=が|を	an adjective takes no case particle が/を directly; before them the word is a noun (臭いが: the smell) or が is conjunctive
+cn.onbin-masu	ANA-C32	cform=連用形-イ音便 & !lemma=@hon-ra	ud=助動詞 & lemma=ます	only the honorific ラ行 verbs put ます after their イ音便 form (おっしゃい+ます; 仰い+ます is not 仰ぐ)
+cn.prefix-verb	ANA-C33	ud=接頭辞 & !lemma=御	ud=動詞|形容詞	only the honorific お/ご prefixes a verb (お+願い); other prefixes take nouns (本+読み is 本 + 読む)
+cn.rentai-aux-verb	ANA-C34	cform=連体形	ud=動詞-非自立可能	an attributive form is not followed by an auxiliary verb (いい+し is the listing particle, not する)
+cn.de-aru	ANA-C35	ud=助詞-格助詞 & lemma=で	lemma=有る|御座る	で before ある/ござる is the copula (話であれば, 学生である), not the case particle
+cn.you-final	ANA-C36	ud=形状詞-助動詞語幹 & !lemma=みたい	ud=助詞-終助詞	the stems よう and そう take the copula before a final particle (のよう+な is だ, not the final なあ); みたい takes it directly

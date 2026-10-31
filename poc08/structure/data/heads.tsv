@@ -1,0 +1,23 @@
+#! heads
+# Rule heads (C). Each bunsetsu takes, among the candidates on the head chain to its right (so the tree stays
+# projective), the first one its most specific matching row accepts; the sentence-final bunsetsu accepts every
+# dependent. dep atoms: dt (adn topic pred case adv conj other), kase, link (aux.tsv link names, adn, renyo, final),
+# cwc, last, form, comma, nextnoun, pred; ! negates; atoms joined by &. head: noun (the first nominal), pred (the
+# first predicate), pred>=X (the first predicate whose clause level is X or wider; an attributive predicate counts as B), next, final.
+# level rows: the scope level of a clause link, A < B < C < D (sentence end), after Minami's clause hierarchy.
+id	spec	dep	head	note
+lv.a	STR-H1	link=nagara|tari	level=A	accompanying action: ながら, たり
+lv.b	STR-H1	link=te|renyo|ba|tara|to|nara|temo|zu|time|tame|you-ni|node	level=B	sequence, condition, cause by ので, time and purpose
+lv.c	STR-H1	link=ga|kara|shi|noni	level=C	contrast, reason by から, listing し, のに
+h.default	STR-H2	*	pred	a case or adverbial phrase depends on the nearest predicate
+h.adn	STR-H3	dt=adn	noun	の-phrases and attributive clauses modify the nearest noun
+h.topic	STR-H4	dt=topic	pred>=C	a topic (は, a noun with a comma) scopes over clauses up to a contrast/reason clause or the end
+h.conj	STR-H4	dt=conj	pred>=C	a conjunction scopes like a topic
+h.pred.a	STR-H5	dt=pred & link=nagara|tari	pred>=A	a clause depends on the nearest predicate of an equal or wider clause
+h.pred.b	STR-H5	dt=pred & link=te|renyo|ba|tara|to|nara|temo|zu|time|tame|you-ni|node	pred>=B	a B-level clause skips A-level predicates; an attributive clause can hold it
+h.pred.c	STR-H5	dt=pred & link=ga|kara|shi|noni	pred>=C	a C-level clause depends on a C-level clause or the end
+h.mo	STR-H6	kase=mo	pred	も marks an argument of the nearest predicate, not a topic
+h.to-coord	STR-H7	kase=to & nextnoun & !pred & !comma	next	と before a noun phrase joins the two nouns (AとBが)
+h.intj	STR-H8	dt=topic & cwc=intj|filler	final	an interjection belongs to the whole utterance
+h.adverbial	STR-H5	dt=pred & link=renyo & cwc=adj|adj-dep|na|na-aux	pred	the adverbial form of an adjective (深く, 静かに) modifies the nearest predicate
+h.topic-comma	STR-H4	kase=wa & comma	final	a topic set off by a comma scopes over the whole sentence

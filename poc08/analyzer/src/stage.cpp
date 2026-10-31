@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "hd8/analyzer.h"
+#include "hd8/stage_hints.h"
 #include "ir/stages.h"
 #include "lattice.h"
 #include "model.h"
@@ -94,6 +95,15 @@ AnalyzerData* LoadAnalyzer(const Config& cfg, std::string& err) {
 }
 
 void FreeAnalyzer(AnalyzerData* data) { delete data; }
+
+void AnalyzerAllowedEnds(const AnalyzerData& data, std::string_view text, float slackUnits,
+                         std::vector<uint32_t>* ends) {
+  hd8::ana::SegHints h;
+  data.analyzer.Hints(text, &h, ThreadWorkspace(), slackUnits);
+  ends->clear();
+  for (uint32_t i = 1; i < h.ends.size(); ++i)
+    if (h.ends[i] != 0) ends->push_back(i);
+}
 
 void StageN(const AnalyzerData&, const Config&, Doc& doc, Line& line) {
   std::vector<hd8::ana::internal::NChar> nchars;

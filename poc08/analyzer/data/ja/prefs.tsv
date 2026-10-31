@@ -1,0 +1,61 @@
+#! prefs
+# Ordered preferences between analyses. Each row counts on a path; paths are compared rank by rank, smaller
+# count first, and the first rank that differs decides (rank 1 is compared first). Rows of one rank add up.
+# kind: unk (an unknown-word arc), derived (a derived spoken arc, ja/derive.tsv), join (a word read across a
+# space), arc (a dictionary arc whose form matches `select`), pair (a token matching `select` followed by one
+# matching `next`). Selectors as in ja/conn.tsv; arc rows also know surf, len, hira, kata, kana, kanji, alnum,
+# kanaspell (a kana form of a lemma written in kanji), hiraspell (a hiragana form of a lemma not written in
+# hiragana), variant (a kanji not in the lemma), goshu, pos1; lemma is known for every arc.
+# weight (optional, default 1): the count a row adds within its rank; rank 6 uses it to order parts of speech.
+id	spec	rank	kind	select	next	note	weight
+pf.unknown	ANA-P1	1	unk	*	-	fewer unknown-word arcs
+pf.derived	ANA-P2	2	derived	*	-	fewer derived spoken arcs
+pf.join	ANA-P5	5	join	*	-	on a tie, fewer words read across a space (a spaced run that one word covers is joined by the unit count: 通 知 表)
+pf.archaic	ANA-P3	3	arc	ctype=文語 / lemma=@archaic-aux	-	classical inflections and auxiliaries only where no modern reading exists
+pf.hira-content	ANA-P3	3	arc	hiraspell & ud=名詞|動詞|形状詞-一般|接尾辞 & !lemma=@formal-noun|@kana-noun|@kana-verb / hiraspell & ud=副詞 & !lemma=@kana-adverb / hiraspell & ud=形容詞 & cform=語幹 / hiraspell & ud=形容詞 & len=1|2 & !lemma=@kana-verb	-	a hiragana run is read as function words before a content word spelled in hiragana (した: し+た, not 下; いた: い+た, not the stem of 痛い); nouns and verbs written in kana by convention are exempt, and so are full adjective forms (かわいい)
+pf.contraction	ANA-P3	3	arc	lemma=てく|とく|とる|たる|たげる|てらっしゃる|つう	-	a contracted auxiliary only where the full form cannot be read (て+き, not てき)
+pf.units	ANA-P4	4	arc	*	-	fewer units
+pf.propn	ANA-P5	5	arc	ud=名詞-固有名詞	-	a common word over a name of the same length
+pf.variant	ANA-P5	5	arc	variant	-	the lemma's own spelling over a variant spelling (本当+に, not 本+当に)
+pf.filler	ANA-P5	5	arc	ud=感動詞-フィラー	-	a filler only where nothing else reads the span
+pf.rendaku	ANA-P3	3	arc	rendaku & hira	-	a voiced word-initial (rendaku) form only ends a compound (ごめん is 御免, not ごめ+ん)
+pf.kango1	ANA-P5	5	arc	ud=名詞 & goshu=漢 & len=1 & kanji	-	a one-kanji Sino-Japanese noun is mostly a bound form: on a tie, the reading that joins the kanji to its kana (持っ+て, not 持+って)
+pf.unknown-hira	ANA-P3	3	arc	hira & !known & !ud=助詞|助動詞|補助記号|接頭辞|形状詞-助動詞語幹|名詞-助動詞語幹 & !lemma=@formal-noun|@kana-verb	-	a hiragana word the translation lexicon does not know is read only where nothing else reads the span (すか, もそ, とい)
+pf.unknown-word	ANA-P5	5	arc	!known & !hira & !ud=助詞|助動詞|補助記号|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|名詞-固有名詞 & !lemma=@formal-noun	-	on a tie, words the translation lexicon knows
+pf.okuri	ANA-P3	3	arc	okuri	-	an okurigana-omitted spelling (持 for 持ち) only where the full reading cannot be (持っ+て, not 持+って)
+pf.fvariant	ANA-P3	3	arc	fvariant	-	a function word spelled as a variant of its lemma (が for か, てい for たい) only where the plain reading cannot be
+pf.shortform	ANA-P3	3	arc	shortform & ud=接続詞|感動詞|連体詞|形状詞-助動詞語幹|名詞-助動詞語幹	-	a shortened conjunction or interjection (して for そして) only where the full reading cannot be
+pf.key	ANA-P5	5	arc	hira & !key & !ud=補助記号	-	x
+pf.pos-adverb	ANA-P6	6	arc	ud=副詞 & len=1	-	on a tie, a reading as noun, verb, adjective or particle before an adverb (と as particle, not the adverb と)	2
+pf.pos-intj	ANA-P6	6	arc	ud=感動詞	-	on a tie, an interjection last	3
+pf.pos-conj	ANA-P6	6	arc	ud=接続詞	-	on a tie, a conjunction after the other readings	2
+pf.pos-adn	ANA-P6	6	arc	ud=連体詞	-	on a tie, an adnominal after a noun or verb reading	1
+pf.pos-prefix	ANA-P6	6	arc	ud=接頭辞	-	on a tie, a prefix after a full word	2
+pf.pos-p-adv	ANA-P6	6	arc	ud=助詞-副助詞 / ud=助詞-接続助詞 & !lemma=て	-	on a tie, a case or topic particle before an adverbial or conjunctive particle of the same spelling (not て) of the same spelling	1
+pf.pos-p-final	ANA-P6	6	arc	ud=助詞-終助詞	-	on a tie, a final particle after the others; conn rules keep it at a clause end	1
+pf.pos-na	ANA-P6	6	arc	ud=形状詞-一般	-	on a tie, a noun before a na-adjective of the same spelling	1
+pf.final-content	ANA-P5	5	pair	ud=助詞-終助詞	ud=名詞|動詞|形容詞|形状詞|副詞|連体詞|代名詞|接頭辞	a final particle usually ends its clause: on a tie, not before a content word	1
+pf.ivariant	ANA-P3	3	arc	ivariant	-	an inflected form spelled unlike its base (て as a form of たい, ね of ない, ない of なさる) only where the plain reading cannot be	1
+pf.kana-pron1	ANA-P3	3	arc	ud=代名詞 & hiraspell & len=1	-	a one-kana pronoun (か for 彼) only where nothing else reads it	1
+pf.pshort	ANA-P6	6	arc	pshort	-	on a tie, a particle in its full spelling (よ as the final particle, not short より)	1
+pf.archaic-do	ANA-P3	3	arc	ud=助詞-接続助詞 & lemma=ど|ども	-	the classical concessive ど/ども only where no modern reading exists (だ+けど, not だけ+ど)	1
+pf.marked-form	ANA-P3	3	arc	cform=連用形-省略|連体形-省略|終止形-撥音便|連体形-撥音便|終止形-促音便|終止形-融合|未然形-補助|連体形-補助|終止形-補助|ク語法|已然形 & !lemma=ず|てる|だ	-	contracted or classical inflected forms (悔し for 悔しく, 下さん for 下さる) only where the standard form cannot be read	1
+pf.kanji-cut	ANA-P5	5	cut	kanji	kanji	on a tie, no cut inside a run of kanji that a dictionary word covers (後悔+し, not 後+悔し; 森下+さん)	2
+pf.fallback-word	ANA-P5	5	arc	!known & !basekey & !ud=助詞|助動詞|補助記号|空白|名詞-固有名詞|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|接尾辞|接頭辞|名詞-数詞|代名詞|接続詞|連体詞 & !lemma=@formal-noun|@kana-noun|@kana-verb	-	a word that neither the translation lexicon nor the 0.7.x dictionaries know is a fallback reading, a tie-breaker: on a tie, the reading through words the translation lexicon or the 0.7.x dictionaries know	1
+pf.wvariant	ANA-P3	3	arc	wvariant	-	an inflected word in a contracted word form (なる for なさる) only where the plain reading cannot be	1
+pf.te-aux	ANA-P6	6	arc	ud=助動詞 & surf=て|で	-	on a tie, て/で as the conjunctive particle, not a clipped auxiliary form (てる, だ)	1
+pf.kata-cut	ANA-P1	1	cut	kata	kata	a cut inside a katakana run counts like an unknown word: a loanword or name is read whole unless dictionary words cover it with fewer pieces (ヴァーゲルディアス)	1
+pf.pelong	ANA-P3	3	arc	pelong	-	a lengthened non-final particle (てえ for て) only where nothing else reads the span; lengthening belongs to final particles	1
+pf.pvariant	ANA-P6	6	arc	pvariant	-	on a tie, a particle in its own letters (not て for と)	2
+pf.pletter	ANA-P3	3	arc	pletter	-	a particle whose first letter differs from its lemma other than by contraction (てえ for って, て for と) only where nothing else reads the span	1
+pf.dialect-final	ANA-P3	3	arc	ud=助詞-終助詞 & lemma=え|ばい|けん|べ|がな|のう|ぞい|たい / ud=助動詞 & lemma=や|じゃ|どす|へん|ひん|はる|やん	-	dialect final particles and auxiliaries (え, たい, ばい, のう; copula や, じゃ) only where no standard reading exists (飲み+てえ, not 飲み+て+え; 今+やっ+て, not や)	1
+pf.vowel-run-cut	ANA-P2	2	cut	vowelrun	*	a cut inside a run of three or more same-vowel letters counts like a derived word: the run is one lengthened word (かわいいいい)	1
+pf.name-aux	ANA-P3	3	pair	ud=名詞-固有名詞	ud=動詞-非自立可能	a name followed directly by an auxiliary verb (風吹+い+た) only where nothing else reads the span: the kanji usually belong to a verb	1
+pf.intj-mid	ANA-P3	3	pair	ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞|形状詞-助動詞語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	an interjection right after a noun or a non-final particle (それは+あと, not それ+はあ+と) only where nothing else reads the span	1
+pf.adj-u	ANA-P3	3	pair	ud=形容詞 & cform=連用形-ウ音便 & !lemma=めでたい	!lemma=御座る|存ずる|存じる	the ウ音便 of an adjective (よう, 早う) stands before ございます/存じます; elsewhere (dialect) only where nothing else reads the span (のよう+な is 様, not 良い)	1
+pf.kana1-noun	ANA-P3	3	arc	hira & len=1 & ud=名詞-普通名詞	-	a one-kana common noun (ま for 間, め for 目) only where no function word reads it	1
+pf.te-adj	ANA-P5	5	pair	ud=助詞-接続助詞 & lemma=て	ud=形容詞	after the te-form an auxiliary verb follows (て+いく, not the adjective いい), on a tie	1
+pf.final-aux-verb	ANA-P3	3	pair	ud=助動詞|形容詞 & cform=終止形	ud=動詞-非自立可能	a conclusive form is not followed by an auxiliary verb (ない+し is the listing particle) unless nothing else reads the span (来た来た)	1
+pf.noun-noun	ANA-P6	6	pair	ud=名詞|代名詞	ud=名詞-普通名詞	on a tie, after a noun the suffix reading of the next word (２名+様, 大島+くん), not a second noun	1
+pf.renyo-case	ANA-P6	6	pair	ud=動詞 & cform=連用形-一般	ud=助詞-格助詞 & lemma=を|が|は|も|の	on a tie, a continuative before を/が/は/も/の is the noun of the verb (締めを), not the verb	1
+pf.ka-final	ANA-P6	6	pair	ud=助詞-副助詞 & lemma=か	bos / ud=補助記号-句点	on a tie, か at the end of a sentence is the final particle	1

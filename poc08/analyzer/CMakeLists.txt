@@ -38,6 +38,7 @@ target_include_directories(hd08_analyzer_tests PRIVATE "${CMAKE_CURRENT_SOURCE_D
 target_compile_definitions(hd08_analyzer_tests PRIVATE "HD08_ANALYZER_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}/data\"")
 target_link_libraries(hd08_analyzer_tests PRIVATE hd08_analyzer_core)
 add_test(NAME poc08.analyzer COMMAND hd08_analyzer_tests)
+add_test(NAME poc08.analyzer.cases COMMAND hd8ana cases "${CMAKE_CURRENT_SOURCE_DIR}/data" "${CMAKE_CURRENT_SOURCE_DIR}/tests/cases.tsv")
 
 if(EMSCRIPTEN)
     # node runs the tool and the tests against the host file system

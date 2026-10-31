@@ -30,6 +30,7 @@ struct Options {
     bool rule = false;    // 0.8-rule: segment plus the retrofit on dialogue (bridge/rule.h; run by the CLI)
     bool sideIr = false;  // keep the side IR records (--why, --stages); costs time
     bool lift = false;    // lift every sentence even when no part needs it (to count the misses)
+    bool attach = false;  // write the attachment of every sentence's chain items (TakeAttachments, bridge/attach.h)
 };
 
 // Reads a --poc08 list: "all", "none", or names from normalize, segment, generate, decide.
@@ -64,6 +65,8 @@ std::string TakeStages(Bridge* bridge);
 // The overrides reselect made or could not make, as TSV (line, family, 0.7.x class, decided class,
 // realised, the old and the new ending), one per sentence pass (the last pass per sentence counts).
 std::string TakeReselections(Bridge* bridge);
+// The attachment JSON lines of --poc08 attach (one per sentence) collected since the last call.
+std::string TakeAttachments(Bridge* bridge);
 // The lift misses by key, most frequent first, as TSV (kind, key, count), at most limit rows.
 std::string LiftMisses(const Bridge* bridge, size_t limit);
 // The 0.8-rule tables (bridge/rule.h) when the rule part is on, else null.

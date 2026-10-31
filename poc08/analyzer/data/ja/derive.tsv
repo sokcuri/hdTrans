@@ -82,3 +82,16 @@ dv.small.え	lit	ぇ	え	0.5	prev.cc=hira|kata	own
 dv.small.お	lit	ぉ	お	0.5	prev.cc=hira|kata	own	
 dv.comma-join	lit	、	-	2.0	prev.cc=kanji & next.cc=hira|kanji	own	勿体、ない; 申し訳、ありません
 dv.sokuon-mimetic	lit	っ	-	2.0	prev.cc=hira & next.cc=hira & !next=け	own	ふっかふか, すっごい
+dv.ee-ei.え	lit	えー	えい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (えー for えい: せんせー, あかんべー)
+dv.ee-ei.け	lit	けー	けい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (けー for けい: せんせー, あかんべー)
+dv.ee-ei.げ	lit	げー	げい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (げー for げい: せんせー, あかんべー)
+dv.ee-ei.せ	lit	せー	せい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (せー for せい: せんせー, あかんべー)
+dv.ee-ei.ぜ	lit	ぜー	ぜい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (ぜー for ぜい: せんせー, あかんべー)
+dv.ee-ei.て	lit	てー	てい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (てー for てい: せんせー, あかんべー)
+dv.ee-ei.で	lit	でー	でい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (でー for でい: せんせー, あかんべー)
+dv.ee-ei.ね	lit	ねー	ねい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (ねー for ねい: せんせー, あかんべー)
+dv.ee-ei.へ	lit	へー	へい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (へー for へい: せんせー, あかんべー)
+dv.ee-ei.べ	lit	べー	べい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (べー for べい: せんせー, あかんべー)
+dv.ee-ei.ぺ	lit	ぺー	ぺい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (ぺー for ぺい: せんせー, あかんべー)
+dv.ee-ei.め	lit	めー	めい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (めー for めい: せんせー, あかんべー)
+dv.ee-ei.れ	lit	れー	れい	0.8	prev.cc=hira|kata|kanji	own	spoken ei written with a long mark (れー for れい: せんせー, あかんべー)

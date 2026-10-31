@@ -60,7 +60,34 @@ struct Options {
   bool margins = true;      // compute margins and alternatives (backward pass)
   float altTau = 0.5f;      // keep alternatives within this cost of the best path
   bool longUnits = true;    // use overlay arcs
-  bool splitLongUnits = false;  // emit the short-unit parts of a long unit instead of the unit
+  bool splitLongUnits = true;   // emit the short-unit parts of a long unit (false: the unit as one token)
+};
+
+// Segmentation hints for a host segmenter (the 0.7.x word search): where words may end, and which
+// single dictionary words the analyzer considered and rejected.
+struct SegHints {
+  // Per byte offset 0..text.size(): 0 where no word ends; else the class of the analyzer word that
+  // starts there: 'n' noun, 'v' verb, 'a' adjective, 'k' adjectival noun, 'd' adverb, conjunction or
+  // interjection, 'm' adnominal, 'p' particle, 'x' auxiliary (also auxiliary stems such as よう),
+  // 'f' prefix, 'z' suffix, 's' symbol, 'u' other; 'e' where a word only ends; 'i' inside a word where
+  // a cut is still plausible: a compound verb (言い|かけた), a derived spoken word (か|ぁ), or a cut
+  // that a path close to the best one makes.
+  std::vector<uint8_t> ends;
+  // Spans of one content word of the lexicon that cover two or more analyzer words, one of them a
+  // particle (しかし over しか + し), and lose clearly, with that word's class letter: a host word of that class over exactly that span is a
+  // reading the analyzer rejected.
+  struct Rejected {
+    Span span;
+    uint8_t cls = 0;
+  };
+  std::vector<Rejected> rejected;
+  // Verb and adjective forms written in kana whose lemma is a kanji word, with that word's kanji
+  // spelling of the same form (たっ → 経っ): a host dictionary keyed by kanji finds the analyzer's word.
+  struct Respell {
+    Span span;
+    std::string kanji;
+  };
+  std::vector<Respell> respell;
 };
 
 struct Model;
@@ -80,6 +107,10 @@ class Analyzer {
 
   // Thread-safe on one loaded analyzer. A workspace may be reused by one thread to avoid allocations.
   void Analyze(std::string_view src, const Options& opt, Analysis* out, Workspace* ws = nullptr) const;
+
+  // A cut the analyzer does not make is still allowed ('i') where a path with that cut costs less than
+  // `slack` nats more than the best path; a rejected word must lose by at least `slack`.
+  void Hints(std::string_view text, SegHints* out, Workspace* ws = nullptr, float slack = 2.0f) const;
 
   std::string_view UdName(uint16_t ud) const;
   std::string_view CtypeName(uint8_t ctype) const;

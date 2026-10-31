@@ -1,0 +1,9 @@
+#! classes
+# Named lemma classes for ja/conn.tsv, ja/prefs.tsv and ja/lexfilter.tsv (written @id in a selector).
+id	members	note
+hon-ra	下さる|為さる|御座る|いらっしゃる|仰る|てらっしゃる|おっしゃる	honorific ラ行 verbs whose イ音便 form is also the imperative and the stem before ます (ください, いらっしゃい)
+formal-noun	事|物|所|時|為|訳|筈|方|内|儘|侭|積もり|積り|外|間|頃|通り|振り|序で|毎|辺|様|風|所為|故	nouns that the official orthography writes in hiragana when used grammatically (こと, もの, ところ, とき, ため, わけ, はず, ほう, うち, まま, つもり, せい …)
+archaic-aux	かも|とも|なんだ|べい|かし|き|けり|ごとし|たり-完了|たり-断定|なり-断定|べし|まじ|む|り|じ|ずら|どす|がんす|ざんす|やんす|とらす|よらす|しゃる|ちゃる|けむ|らむ|めり|なり-伝聞	classical and dialect auxiliaries and particles (exclamatory かも, concessive とも, なんだ = なかった): read only where no modern reading exists
+kana-verb	為る|居る|有る|成る|来る|行く|遣る|呉れる|貰う|仕舞う|置く|見る|上げる|下さる|頂く|致す|御座る|為さる|出来る|付く|掛ける|過ぎる|始める|出す|込む|切る|合う|続ける|得る|頂ける|申す|参る|貰える|見える|無い|良い|欲しい	auxiliary verbs and adjectives written in hiragana after a te-form or stem (公用文: ～ていく, ～てくる, ～てしまう, ～ておく, ～てみる, ～てあげる, ～てくれる, ～てもらう, ～てほしい, ない, よい)
+kana-noun	皆|二人|一人|後|御免|奴|駄目|為|所為|内|儘|侭|物|事|所|時|訳|筈|方|積もり|積り|位|程|通り|振り|序で|毎|辺|様|風|故|此れ|其れ|彼れ|一寸|一緒|本当|今日|明日|昨日|嘘|頃|間|中|外|他|下さい|有難う|有り難う|御早う|今日は|御目出度う|御疲れ|御馳走|宜しく	nouns commonly written in hiragana (みんな, あと, ごめん, やつ, だめ, ほんと …) besides the formal nouns
+kana-adverb	一寸|未だ|矢張り|良く|又|直ぐ|若し|宜しく|先ず|勿論|余り|急度|何故|色々|流石|唯|成る程|迚も|詰まり|一杯|兎に角|確り|丸で|全く|折角|丁度|大分|随分|大抵|大体|一体|一応|結構|中々|段々|益々|是非|恐らく|必ず|少し|暫く|漸く|如何|然う|此う|斯う|彼あ|何う|然して|一番|大変|本当|屹度|只|尚|猶	adverbs conventionally written in hiragana (ちょっと, まだ, やはり, よく, また, すぐ, もし …)

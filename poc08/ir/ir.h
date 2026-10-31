@@ -30,7 +30,7 @@ namespace hd08 {
 #define HD08_BUNFLAG(X) X(topic, "topic") X(commaAfter, "comma-after") X(quoteClose, "quote-close")
 #define HD08_ROLE(X) X(subj, "subj") X(obj, "obj") X(dat, "dat") X(loc, "loc") X(from, "from") X(with, "with") \
     X(to, "to") X(cmp, "cmp") X(topic, "topic") X(head, "head")
-#define HD08_HOW(X) X(marked, "marked") X(topic, "topic") X(relhead, "relhead") X(omitted, "omitted")
+#define HD08_HOW(X) X(marked, "marked") X(topic, "topic") X(relhead, "relhead") X(omitted, "omitted") X(bare, "bare")
 #define HD08_LINK(X) X(final, "final") X(te, "te") X(tara, "tara") X(to, "to") X(ba, "ba") X(nara, "nara") \
     X(node, "node") X(kara, "kara") X(noni, "noni") X(tame, "tame") X(you_ni, "you-ni") X(nagara, "nagara")  \
     X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote") X(ga, "ga") X(temo, "temo") X(shi, "shi") \

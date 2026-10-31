@@ -108,7 +108,7 @@ struct Emitter {
     auto surf = Core(a.b, a.e);
     for (char32_t c : surf) AppendUtf8(t.surf, c);
     t.flags = a.flags;
-    t.cost = static_cast<float>(a.cost) / 100.0f;
+    t.cost = static_cast<float>(static_cast<double>(a.cost) / static_cast<double>(m.unitCost));
     if (a.rule >= 0) t.derive = m.rules[static_cast<size_t>(a.rule)].id;
     if (a.removedBy >= 0) t.removedBy = m.constraints[static_cast<size_t>(a.removedBy)].id;
     switch (a.kind) {
@@ -172,9 +172,11 @@ struct Emitter {
   }
 
   // Path → tokens with spaces; joined arcs record a join edit.
+  // tokPath (optional) receives the path index of each token.
   void Emit(const std::vector<uint32_t>& path, std::vector<Token>* toks, bool edits,
-            const Options& opt, Workspace* mws) const {
+            const Options& opt, Workspace* mws, std::vector<uint32_t>* tokPath = nullptr) const {
     toks->clear();
+    if (tokPath) tokPath->clear();
     for (size_t pi = 0; pi < path.size(); ++pi) {
       const Arc& a = ws.arcs[path[pi]];
       bool spaced = a.b > 0 && ws.spaceBefore[a.b];
@@ -188,6 +190,7 @@ struct Emitter {
           Token t = Make(p);
           if (k == 0 && spaced) t.flags |= SpaceBefore;
           toks->push_back(std::move(t));
+          if (tokPath) tokPath->push_back(static_cast<uint32_t>(pi));
         }
       } else {
         Token t = Make(a);
@@ -201,6 +204,7 @@ struct Emitter {
           out->edits.push_back(std::move(e));
         }
         toks->push_back(std::move(t));
+        if (tokPath) tokPath->push_back(static_cast<uint32_t>(pi));
       }
     }
   }
@@ -235,19 +239,26 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
   BuildLattice(m, ws, opt);
   RunViterbi(m, ws, opt.margins);
   Emitter em{m, *ws, out};
-  em.Emit(ws->path, &out->toks, true, opt, ws);
-  if (!opt.margins || opt.splitLongUnits || ws->path.empty()) return;
+  std::vector<uint32_t> tokPath;
+  em.Emit(ws->path, &out->toks, true, opt, ws, &tokPath);
+  if (!opt.margins || ws->path.empty()) return;
 
   // margins, same-span alternatives and path 1
   const auto& A = ws->arcs;
-  int32_t tau = static_cast<int32_t>(opt.altTau * 100.0f);
-  int32_t minMargin = kInf;
+  // costs are in units of one token (ja/prefs.tsv pf.units); a margin below one unit was decided by a class
+  // preference only, a margin of 0 is a tie
+  const double unit = static_cast<double>(m.unitCost);
+  auto units = [unit](int64_t c) { return static_cast<float>(static_cast<double>(c) / unit); };
+  int64_t tau = static_cast<int64_t>(static_cast<double>(opt.altTau) * unit);
+  int64_t minMargin = kInf;
   int32_t minArc = -1;
   size_t ti = 0;
   for (size_t pi = 0; pi < ws->path.size(); ++pi) {
     const Arc& x = A[ws->path[pi]];
-    int32_t margin = kInf, arg = -1;
-    Token* tok = ti < out->toks.size() ? &out->toks[ti] : nullptr;
+    int64_t margin = kInf;
+    int32_t arg = -1;
+    while (ti < tokPath.size() && tokPath[ti] < pi) ++ti;
+    Token* tok = ti < tokPath.size() && tokPath[ti] == pi ? &out->toks[ti] : nullptr;
     uint16_t altFirst = static_cast<uint16_t>(out->alts.size());
     for (uint32_t yi = 0; yi < A.size(); ++yi) {
       const Arc& y = A[yi];
@@ -261,25 +272,22 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
         continue;
       }
       if (y.fwd >= kInf || y.bwd >= kInf) continue;
-      int32_t pc = y.fwd + y.bwd - ws->best;
+      int64_t pc = y.fwd + y.bwd - ws->best;
       if (pc < margin) {
         margin = pc;
         arg = static_cast<int32_t>(yi);
       }
       if (y.b == x.b && y.e == x.e && pc < tau && tok) {
         Token t = em.Make(y);
-        t.margin = static_cast<float>(pc) / 100.0f;
+        t.margin = units(pc);
         out->alts.push_back(std::move(t));
       }
     }
-    if (tok && x.kind != ArcKind::longUnit) {
-      tok->margin = margin >= kInf ? 99.0f : static_cast<float>(margin) / 100.0f;
+    if (tok) {
       tok->alt = altFirst;
       tok->nAlt = static_cast<uint16_t>(out->alts.size() - altFirst);
-      ++ti;
-    } else if (tok) {
-      tok->margin = margin >= kInf ? 99.0f : static_cast<float>(margin) / 100.0f;
-      ++ti;
+      for (size_t k = ti; k < tokPath.size() && tokPath[k] == pi; ++k)
+        out->toks[k].margin = margin >= kInf ? 1e9f : units(margin);
     }
     if (margin < minMargin) {
       minMargin = margin;
@@ -293,7 +301,170 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
     for (int32_t a = A[static_cast<size_t>(minArc)].np; a >= 0; a = A[static_cast<size_t>(a)].np)
       p1.push_back(static_cast<uint32_t>(a));
     em.Emit(p1, &out->alt, false, opt, ws);
-    out->altMargin = static_cast<float>(minMargin) / 100.0f;
+    out->altMargin = units(minMargin);
+  }
+}
+
+// ---- segmentation hints ----------------------------------------------------------------------------
+namespace {
+
+uint8_t ClassCode(const Model& m, uint16_t cls) {
+  if (m.udNames[m.classes[cls].ud].find("助動詞語幹") != std::string::npos) return 'x';
+  switch (m.classPos[cls]) {
+    case Pos::n: case Pos::pn: case Pos::num: return 'n';
+    case Pos::v1: case Pos::v5: case Pos::vs: case Pos::vk: case Pos::vz: return 'v';
+    case Pos::adj: return 'a';
+    case Pos::na: return 'k';
+    case Pos::adv: case Pos::conj: case Pos::intj: return 'd';
+    case Pos::adn: return 'm';
+    case Pos::aux: return 'x';
+    case Pos::p_case: case Pos::p_topic: case Pos::p_conj: case Pos::p_final: case Pos::p_adv: return 'p';
+    case Pos::pref: return 'f';
+    case Pos::suf: return 'z';
+    case Pos::sym: return 's';
+    default: return 'u';
+  }
+}
+
+}  // namespace
+
+void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, float slackNats) const {
+  WorkspacePtr own;
+  Workspace* ws = wsIn;
+  if (!ws) {
+    own = NewWorkspace();
+    ws = own.get();
+  }
+  out->ends.assign(text.size() + 1, 0);
+  out->rejected.clear();
+  out->respell.clear();
+  out->ends[0] = 'u';
+  out->ends[text.size()] = 'e';
+  if (!model_) return;
+  const Model& m = *model_;
+  internal::Normalize(text, &ws->nchars, &ws->edits);
+  Options opt;
+  opt.margins = false;
+  BuildLattice(m, ws, opt);
+  RunViterbi(m, ws, true);
+  const int64_t slack = static_cast<int64_t>(static_cast<double>(slackNats) * static_cast<double>(m.unitCost));
+  auto through = [&](const Arc& a) {
+    return a.fwd >= kInf || a.bwd >= kInf ? kInf : a.fwd + a.bwd - ws->best;
+  };
+  // short-unit path: long units are replaced by their parts
+  std::vector<uint32_t> path, parts;
+  for (size_t pi = 0; pi < ws->path.size(); ++pi) {
+    const Arc& a = ws->arcs[ws->path[pi]];
+    if (a.kind != ArcKind::longUnit) {
+      path.push_back(ws->path[pi]);
+      continue;
+    }
+    uint16_t sc = pi == 0 ? 0 : ws->arcs[ws->path[pi - 1]].rcls;
+    uint16_t ec = pi + 1 < ws->path.size() ? ws->arcs[ws->path[pi + 1]].lcls : 0;
+    SubPath(m, *ws, a.b, a.e, sc, ec, &parts);
+    path.insert(path.end(), parts.begin(), parts.end());
+  }
+  size_t n = ws->core.size();
+  auto byteB = [&](uint32_t b) { return ws->nchars[ws->coreN[b]].sb; };
+  auto byteE = [&](uint32_t e) { return ws->nchars[ws->coreN[e - 1]].se; };
+  std::vector<uint8_t> boundary(n + 1, 0);
+  std::vector<uint32_t> tokenAt(n + 1, UINT32_MAX);
+  for (uint32_t ai : path) {
+    const Arc& a = ws->arcs[ai];
+    boundary[a.b] = boundary[a.e] = 1;
+    tokenAt[a.b] = ai;
+    if (byteE(a.e) <= text.size() && out->ends[byteE(a.e)] == 0) out->ends[byteE(a.e)] = 'e';
+  }
+  for (uint32_t ai : path) {
+    const Arc& a = ws->arcs[ai];
+    uint16_t cls = a.kind == ArcKind::lex ? m.pforms[a.form].cls : a.lcls;
+    if (byteB(a.b) <= text.size()) out->ends[byteB(a.b)] = ClassCode(m, cls);
+  }
+  for (uint32_t ai : path) {
+    const Arc& x = ws->arcs[ai];
+    if (x.kind != ArcKind::lex || ClassCode(m, m.pforms[x.form].cls) != 'v' || x.e - x.b < 4) continue;
+    // a compound verb: a continuative verb form of two letters or more, then a verb to the end
+    for (uint32_t k = ws->beginStart[x.b]; k < ws->beginStart[x.b + 1]; ++k) {
+      const Arc& y = ws->arcs[ws->byBegin[k]];
+      if (y.kind != ArcKind::lex || y.e >= x.e || y.e - y.b < 2 || y.rule >= 0) continue;
+      const auto& yc = m.classes[m.pforms[y.form].cls];
+      if (ClassCode(m, m.pforms[y.form].cls) != 'v' || m.cformNames[yc.cform].rfind("連用形", 0) != 0) continue;
+      bool rest = false;
+      for (uint32_t j = ws->beginStart[y.e]; j < ws->beginStart[y.e + 1] && !rest; ++j) {
+        const Arc& z = ws->arcs[ws->byBegin[j]];
+        rest = z.kind == ArcKind::lex && z.e == x.e && z.rule < 0 && ClassCode(m, m.pforms[z.form].cls) == 'v';
+      }
+      if (rest && out->ends[byteB(y.e)] == 0) out->ends[byteB(y.e)] = 'i';
+    }
+  }
+  // derived spoken words may be cut anywhere inside (か|ぁ, た|ぁ～)
+  for (uint32_t ai : path) {
+    const Arc& x = ws->arcs[ai];
+    if (x.rule < 0) continue;
+    for (uint32_t k = x.b + 1; k < x.e; ++k)
+      if (out->ends[byteB(k)] == 0) out->ends[byteB(k)] = 'i';
+  }
+  // cuts made by a path close to the best one
+  for (const Arc& a : ws->arcs) {
+    if (a.removedBy >= 0 || a.e >= n || boundary[a.e]) continue;
+    if (through(a) < slack && out->ends[byteB(a.e)] == 0) out->ends[byteB(a.e)] = 'i';
+  }
+  // kana verb and adjective forms of a kanji lemma, spelled in kanji when the analyzer is sure of the word
+  for (uint32_t ai : path) {
+    const Arc& x = ws->arcs[ai];
+    if (x.kind != ArcKind::lex || x.rule >= 0) continue;
+    uint8_t c = ClassCode(m, m.pforms[x.form].cls);
+    if (c != 'v' && c != 'a') continue;
+    std::string_view xud = m.udNames[m.groups[x.ref].ud];
+    if (xud.size() < 6 || xud.substr(xud.size() - 6) != "一般") continue;  // not する, いる, なる
+    bool kana = true;
+    for (uint32_t k = x.b; k < x.e; ++k) kana = kana && internal::IsHiragana(ws->core[k]);
+    if (!kana) continue;
+    // only a kana spelling of several words (たつ: 立つ, 経つ, 断つ), where the analyzer's word wins clearly
+    bool sure = true, homograph = false;
+    for (uint32_t k = ws->beginStart[x.b]; k < ws->beginStart[x.b + 1] && sure; ++k) {
+      const Arc& y = ws->arcs[ws->byBegin[k]];
+      if (&y == &x || y.e != x.e || y.kind != ArcKind::lex) continue;
+      uint8_t yc = ClassCode(m, m.pforms[y.form].cls);
+      if ((yc != 'v' && yc != 'a') || m.S(m.groups[y.ref].lemma) == m.S(m.groups[x.ref].lemma)) continue;
+      homograph = true;
+      if (through(y) < slack) sure = false;
+    }
+    if (!sure || !homograph) continue;
+    auto it = m.kanjiGroups.find(m.S(m.groups[x.ref].lemma));
+    if (it == m.kanjiGroups.end()) continue;
+    uint16_t cls = m.pforms[x.form].cls;
+    std::string best;
+    int64_t bestCost = kInf;
+    for (uint32_t g : it->second) {
+      const auto& gr = m.groups[g];
+      if (gr.ud != m.groups[x.ref].ud || gr.ctype != m.groups[x.ref].ctype) continue;
+      const auto& p = m.paradigms[gr.paradigm];
+      for (uint32_t f = p.first; f < p.first + p.count; ++f) {
+        if (m.pforms[f].cls != cls || gr.cost >= bestCost) continue;
+        best.clear();
+        for (char32_t ch : m.C(gr.stem, gr.stemLen)) AppendUtf8(best, ch);
+        for (char32_t ch : m.C(m.pforms[f].suf, m.pforms[f].sufLen)) AppendUtf8(best, ch);
+        bestCost = gr.cost;
+      }
+    }
+    if (!best.empty()) out->respell.push_back({{byteB(x.b), byteE(x.e)}, best});
+  }
+  for (const Arc& a : ws->arcs) {
+    if (a.kind != ArcKind::lex || a.rule >= 0 || a.removedBy >= 0 || !boundary[a.b] || !boundary[a.e]) continue;
+    if (tokenAt[a.b] != UINT32_MAX && ws->arcs[tokenAt[a.b]].e >= a.e) continue;  // one analyzer word or less
+    uint8_t c = ClassCode(m, m.pforms[a.form].cls);
+    if (c == 'p' || c == 'x' || c == 's' || c == 'u') continue;
+    // only a word that loses clearly and would swallow a particle the analyzer reads (しか + し)
+    if (through(a) < slack) continue;
+    bool swallows = false;
+    for (uint32_t k = a.b; k < a.e && !swallows; ++k) {
+      if (tokenAt[k] == UINT32_MAX) continue;
+      const Arc& t = ws->arcs[tokenAt[k]];
+      uint8_t tc = ClassCode(m, t.kind == ArcKind::lex ? m.pforms[t.form].cls : t.lcls);
+      swallows = tc == 'p';
+    }
+    if (swallows) out->rejected.push_back({{byteB(a.b), byteE(a.e)}, c});
   }
 }
 

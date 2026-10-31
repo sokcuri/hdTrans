@@ -75,3 +75,6 @@ to-cond	行かないと困る。	行か	link=to
 to-quote	彼は来ると言った。	来る	link=quote
 nominal-tame	元々は平民のため罵られる。	ため	link=tame
 particle-yotte	ナイフによって刺された。	$	voice=rare arg=dat:ナイフ
+bare-obj-1	迷惑かけた。	$	arg=obj:迷惑
+bare-obj-2	責任取ってよ。	$	arg=obj:責任
+bare-obj-keep-light	勉強した。	$	tense=past

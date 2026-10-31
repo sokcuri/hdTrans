@@ -1,0 +1,13 @@
+#! segment-cases
+# Fix and keep cases of --poc08 segment (tests/segment.sh). kind same: the segmented run writes what 0.7.x writes
+# alone for the line (the analyzer's cuts leave 0.7.x's own reading of the words in place).
+kind	input	note
+same	「寝癖ねぇ……あんたの髪型なんか、誰も気にしてないのに」	a lengthened final particle may be cut off its lengthening (ね|ぇ, not the interjection ねぇ)
+same	「へー……キレイな人ねぇ……」	ね|ぇ after a noun
+same	「ゆうくん……ダメねぇ……」	ね|ぇ after a na-adjective
+same	「だねえ」	a final particle lengthened by its own vowel (ね|え)
+same	「だからぁ、違うって」	から|ぁ
+same	「お、生徒会長」	inside a compound noun 0.7.x keeps its own keys (生徒会長, not 生徒 + 会長)
+same	多岐川さんは、慣例に則り、世襲に近い形で生徒会長に選ばれた。	生徒会長 before a particle
+same	「私はまだ現役生徒会長で、学園の未来を守る義務がありますから」	生徒会長 inside a longer noun run
+same	「それは困りますぞ」	keep: ます+ぞ
