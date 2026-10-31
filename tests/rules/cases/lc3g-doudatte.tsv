@@ -1,0 +1,29 @@
+# 규칙: LEX-210
+rule	input	expected	kind	layer
+cx:lc3g-doudatte:10	どうだっていいよ。	has:아무래도	fix	rewrites
+cx:lc3g-doudatte:10	どうだっていいだろう	has:아무래도	fix	rewrites
+cx:lc3g-doudatte:10	もう、どうだっていいや。	has:아무래도	fix	rewrites
+cx:lc3g-doudatte:10	「別にどうだっていいだろ」	has:아무래도	fix	rewrites
+cx:lc3g-doudatte:20	本当、どうだっていいことなんだ。	has:아무래도 좋은	fix	rewrites
+cx:lc3g-doudatte:20	でも、そんなことどうだっていいことだ。	has:아무래도 좋은	fix	rewrites
+cx:lc3g-doudatte:30	どうだっていいけれど	has:아무래도 좋지만	fix	rewrites
+cx:lc3g-doudatte:40	「そんなことどうだっていい」	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:40	「そんなものどうだっていい」	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:40	「そんなことはどうだっていい。	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:40	「そんなことはどうだっていい。な？」	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:45	どうだっていいんだ。	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:45	「そんなことはどうだっていいんだよ！」	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:45	「……どうだっていいんだよ。金なんざ別に」	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:45	「そんなもんどうだっていいんだよ！隠していやがった！」	has:아무래도 좋아	fix	rewrites
+cx:lc3g-doudatte:50	どうだっていい。	has:아무래도 좋다	fix	rewrites
+cx:lc3g-doudatte:50	でも、どうだっていい。	has:아무래도 좋다	fix	rewrites
+cx:lc3g-doudatte:50	そんな事はどうだっていい	has:아무래도 좋다	fix	rewrites
+cx:lc3g-doudatte:50	姿形なんてどうだっていい	has:아무래도 좋다	fix	rewrites
+cx:lc3g-doudatte:10	「鈴音以外のメンバーはどうだって聞いてんの」	!rule:cx:lc3g-doudatte:10	keep	rewrites
+cx:lc3g-doudatte:20	どうだって聞かれても。	!rule:cx:lc3g-doudatte:20	keep	rewrites
+cx:lc3g-doudatte:30	「どうだって聞かれても。別に。二人で帰ってたよ。」	!rule:cx:lc3g-doudatte:30	keep	rewrites
+cx:lc3g-doudatte:40	アリアネはどうだって聞いてんだ！」	!rule:cx:lc3g-doudatte:40	keep	rewrites
+cx:lc3g-doudatte:45	はどうだって聞いてんだよ。	!rule:cx:lc3g-doudatte:45	keep	rewrites
+cx:lc3g-doudatte:50	「お陰で口うるさくお前の方はどうだって聞かれたよ」	!rule:cx:lc3g-doudatte:50	keep	rewrites
+cx:lc3g-doudatte:10	「どうだって聞かれても、なにがなんだか？」	!rule:cx:lc3g-doudatte:10	keep	rewrites
+cx:lc3g-doudatte:20	「違う！お前の考えはどうだって聞いてるんだ！」	!rule:cx:lc3g-doudatte:20	keep	rewrites

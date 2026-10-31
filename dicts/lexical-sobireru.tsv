@@ -1,0 +1,34 @@
+#! layer=words
+# 동사 연용형 + そびれる: 그 일을 할 기회를 놓치다
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+聞きそびれ	물어볼 기회를 놓&AO@	M417			GN			LEX-212 聞きそびれる는 물어볼 기회를 놓치다				lc3g:sobireru:1
+訊きそびれ	물어볼 기회를 놓&AO@	M417			GN			LEX-212 訊きそびれる는 물어볼 기회를 놓치다				lc3g:sobireru:2
+聴きそびれ	들을 기회를 놓&AO@	M417			GN			LEX-212 聴きそびれる는 들을 기회를 놓치다				lc3g:sobireru:3
+尋ねそびれ	물어볼 기회를 놓&AO@	M417			GN			LEX-212 尋ねそびれる는 물어볼 기회를 놓치다				lc3g:sobireru:4
+渡しそびれ	건넬 기회를 놓&AO@	M417			GN			LEX-212 渡しそびれる는 건넬 기회를 놓치다				lc3g:sobireru:5
+逃げそびれ	도망칠 기회를 놓&AO@	M417			GN			LEX-212 逃げそびれる는 도망칠 기회를 놓치다				lc3g:sobireru:6
+かけそびれ	걸 기회를 놓&AO@	M417			GN			LEX-212 かけそびれる는 걸 기회를 놓치다				lc3g:sobireru:7
+掛けそびれ	걸 기회를 놓&AO@	M417			GN			LEX-212 掛けそびれる는 걸 기회를 놓치다				lc3g:sobireru:8
+食いそびれ	먹을 기회를 놓&AO@	M417			GN			LEX-212 食いそびれる는 먹을 기회를 놓치다				lc3g:sobireru:9
+食べそびれ	먹을 기회를 놓&AO@	M417			GN			LEX-212 食べそびれる는 먹을 기회를 놓치다				lc3g:sobireru:10
+入りそびれ	들어갈 기회를 놓&AO@	M417			GN			LEX-212 入りそびれる는 들어갈 기회를 놓치다				lc3g:sobireru:11
+伝えそびれ	전할 기회를 놓&AO@	M417			GN			LEX-212 伝えそびれる는 전할 기회를 놓치다				lc3g:sobireru:12
+見そびれ	볼 기회를 놓&AO@	M417			GN			LEX-212 見そびれる는 볼 기회를 놓치다				lc3g:sobireru:13
+買いそびれ	살 기회를 놓&AO@	M417			GN			LEX-212 買いそびれる는 살 기회를 놓치다				lc3g:sobireru:14
+返しそびれ	돌려줄 기회를 놓&AO@	M417			GN			LEX-212 返しそびれる는 돌려줄 기회를 놓치다				lc3g:sobireru:15
+乗りそびれ	탈 기회를 놓&AO@	M417			GN			LEX-212 乗りそびれる는 탈 기회를 놓치다				lc3g:sobireru:16
+出そびれ	나갈 기회를 놓&AO@	M417			GN			LEX-212 出そびれる는 나갈 기회를 놓치다				lc3g:sobireru:17
+会いそびれ	만날 기회를 놓&AO@	M417			GN			LEX-212 会いそびれる는 만날 기회를 놓치다				lc3g:sobireru:18
+書きそびれ	쓸 기회를 놓&AO@	M417			GN			LEX-212 書きそびれる는 쓸 기회를 놓치다				lc3g:sobireru:19
+謝りそびれ	사과할 기회를 놓&AO@	M417			GN			LEX-212 謝りそびれる는 사과할 기회를 놓치다				lc3g:sobireru:20
+帰りそびれ	돌아갈 기회를 놓&AO@	M417			GN			LEX-212 帰りそびれる는 돌아갈 기회를 놓치다				lc3g:sobireru:21
+答えそびれ	대답할 기회를 놓&AO@	M417			GN			LEX-212 答えそびれる는 대답할 기회를 놓치다				lc3g:sobireru:22
+断りそびれ	거절할 기회를 놓&AO@	M417			GN			LEX-212 断りそびれる는 거절할 기회를 놓치다				lc3g:sobireru:23
+告げそびれ	알릴 기회를 놓&AO@	M417			GN			LEX-212 告げそびれる는 알릴 기회를 놓치다				lc3g:sobireru:24
+受け取りそびれ	받을 기회를 놓&AO@	M417			GN			LEX-212 受け取りそびれる는 받을 기회를 놓치다				lc3g:sobireru:25
+止めそびれ	말릴 기회를 놓&AO@	M417			GN			LEX-212 止めそびれる는 말릴 기회를 놓치다				lc3g:sobireru:26
+しそびれ	할 기회를 놓&AO@	M417			GN			LEX-212 サ변 명사 뒤 しそびれる는 할 기회를 놓치다				lc3g:sobireru:27
+死にそびれ	죽을 기회를 놓&AO@	M417			GN			LEX-212 死にそびれる는 죽을 기회를 놓치다				lc3g:sobireru:28
+立ちそびれ	설 기회를 놓&AO@	M417			GN			LEX-212 立ちそびれる는 설 기회를 놓치다				lc3g:sobireru:29
+思い出しそびれ	떠올릴 기회를 놓&AO@	M417			GN			LEX-212 思い出しそびれる는 떠올릴 기회를 놓치다				lc3g:sobireru:30
+名乗りそびれ	이름을 댈 기회를 놓&AO@	M417			GN			LEX-212 名乗りそびれる는 이름을 댈 기회를 놓치다				lc3g:sobireru:31

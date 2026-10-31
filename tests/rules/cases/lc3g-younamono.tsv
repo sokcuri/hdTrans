@@ -1,0 +1,28 @@
+# 규칙: GRM-183
+rule	input	expected	kind	layer
+cx:lc3g-younamono:5	「私は変人です」と言っているようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:5	こんなの死ねって言っているようなものじゃないか。	has:것과 마찬가지잖아	fix	rewrites
+cx:lc3g-younamono:5	そんなの、答えを言っているようなものじゃないか。	has:것과 마찬가지잖아	fix	rewrites
+cx:lc3g-younamono:5	そんなんじゃ、なんでもあると言っているようなものだろう。	has:것과 마찬가지일	fix	rewrites
+cx:lc3g-younamono:5	カルディアの口にした言葉が事実だと言っているようなものだった。	has:것과 마찬가지였다	fix	rewrites
+cx:lc3g-younamono:5	ガウルの言い分は、ロベリアを見捨てろと言っているようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:5	今のセリフは、ギブアドテイク、と暗に言っているようなものだった。	has:것과 마찬가지였다	fix	rewrites
+cx:lc3g-younamono:10	とぶつけられたようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:10	もう答えは出たようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:10	呆れているようなものだった。	has:것과 마찬가지였다	fix	rewrites
+cx:lc3g-younamono:10	宣告されたようなものだった。	has:것과 마찬가지였다	fix	rewrites
+cx:lc3g-younamono:10	管が握っているようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:10	罪を認めたようなものだった。	has:것과 마찬가지였다	fix	rewrites
+cx:lc3g-younamono:10	酒によっているようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:10	一方的に殴っているようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:10	既に花を扱っているようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:10	勝敗は決まったようなものだからな。	has:것과 마찬가지니까	fix	rewrites
+cx:lc3g-younamono:10	明日の予定は定まったようなものだ。	has:것과 마찬가지다	fix	rewrites
+cx:lc3g-younamono:5	この街の名物のようなものだろうか。	!rule:cx:lc3g-younamono:5	keep	rewrites
+cx:lc3g-younamono:10	俺の腕は超高速で動く刃のようなものだ」	!rule:cx:lc3g-younamono:10	keep	rewrites
+cx:lc3g-younamono:5	それらは、ファンタジーのようなものだ。	!rule:cx:lc3g-younamono:5	keep	rewrites
+cx:lc3g-younamono:10	僕にとっては気まぐれにつける日記帳のようなものだ。	!rule:cx:lc3g-younamono:10	keep	rewrites
+cx:lc3g-younamono:5	所謂、蛇の的当てのようなものだった。	!rule:cx:lc3g-younamono:5	keep	rewrites
+cx:lc3g-younamono:10	聞こえは悪いが天下りのようなものだ。	!rule:cx:lc3g-younamono:10	keep	rewrites
+cx:lc3g-younamono:5	エイリークの武器は鎖鞭のようなものだ。	!rule:cx:lc3g-younamono:5	keep	rewrites
+cx:lc3g-younamono:10	実際、彼女は魔女のようなものだろう。	!rule:cx:lc3g-younamono:10	keep	rewrites
