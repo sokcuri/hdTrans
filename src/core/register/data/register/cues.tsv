@@ -268,3 +268,7 @@ casual-mark	any	君が
 casual-mark	any	君の
 casual-mark	any	君に
 casual-mark	any	君を
+polite	end	んス		(katakana ス after ん: 一緒じゃないんスか)
+polite	end	ンス
+polite	end	デス		デース (ー between kana is dropped)
+polite	end	マス
