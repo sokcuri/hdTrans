@@ -10,8 +10,11 @@ pack:g.mairu	何用で参られたのです？	무슨 일로 오셨습니까?	fi
 pack:g.naguru	兄から殴られた。	형한테 맞았다.	fix	packs
 pack:g.naguru	後ろから殴られた。	뒤에서 맞았다.	keep	packs
 pack:g.wakaru.ack	分かった！	알겠어!	fix	packs
-pack:g.wakaru.ask	分かったか？	!rule:pack:g.wakaru.ack	keep	packs
-pack:g.unazuku	彼は首を縦に振った。	그는 고개를 끄덕였다.	keep	packs
+pack:g.wakaru.ack	分かったか？	!rule:pack:g.wakaru.ack	keep	packs
+pack:g.wakaru.ack2	うん、分かった。	응, 알겠어.	fix	packs
+pack:g.tenitoru	試作品を手に取った。	시제품을 집어 들었다.	fix	packs
+pack:g.tenitoru	御園の手を取ってみる。	!rule:pack:g.tenitoru	keep	packs
+pack:negf:iinja-suggest	慎んだ方がいいんじゃない。	조심하는 것이 좋지 않아.	keep	packs
 pack:g.modosu	話を元に戻そう。	이야기를 원래대로 되돌리자.	fix	packs
 pack:g.soba	青海さんの元に飛び込んだ。	아오미 씨 곁으로 뛰어들었다.	fix	packs
 pack:g.betsuni	別にいいじゃない。	괜찮잖아.	fix	packs
