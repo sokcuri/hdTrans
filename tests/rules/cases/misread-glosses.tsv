@@ -17,6 +17,14 @@ dict:w:24980	まさか幼女に鎌をかけられるとは思わなかった。	
 dict:jisjk:35155	一斉に男達の視線が此方に向かい、一人が此方の方に向かってくる。	has:시선이 이쪽으로 향해	fix	defaults
 dict:jisjk:35155	「それは此方の台詞です」	has:이쪽의 대사입니다	fix	defaults
 dict:jisjk:152415	バカな女だが、くだらない女じゃない。	has:바보 같은	fix	defaults
+pack:misread-glosses:p4	そんなバカな。	말도 안돼.	fix	packs
+pack:misread-glosses:p4	「んなバカな。裏は俺が抑えてたんだぞ？」	has:말도 안돼. 뒤는	fix	packs
+pack:misread-glosses:p4	「こ、こんなバカな光景見たら誰だって笑うわよ！	has:바보 같은 광경	keep	packs
+pack:misread-glosses:p5	「さ、最初っからそう言いなさいよっ。バカなんだから……」	has:바보니까	fix	packs
+pack:misread-glosses:p5	「まあぶっちゃけ紘輝はバカなんだから」	has:히로키는 바보니까	fix	packs
+pack:misread-glosses:p3	それならばもっと勝ち易そうな別の博打にベットすべきだ。	has:노름에 베팅해야	fix	packs
+pack:misread-glosses:p3	連れていかれた先は、あのベットしかない部屋。	has:그 침대밖에 없는 방	keep	packs
+dict:jisjk:178500	眷族を呼ぶ。	has:권속을 부른다	fix	defaults
 dict:jisjk:264595	こうしてヘイスは二度目の仕事に取り掛かり、予定通りあっさりと終わらせてしまう。	has:쉽게 끝내	fix	defaults
 dict:jisjk:264595	一縷の望みをかけた質問はあっさりと切り捨てられた。	has:쉽게 버려졌다	fix	defaults
 dict:misread-glosses:21	魚で言えば白身魚のような淡泊であっさりとした味わい。	has:담백한 맛	fix	defaults
@@ -44,9 +52,9 @@ dict:misread-glosses:10	「ご大層な肩書きを持ったやつばかりだ�
 dict:misread-glosses:11	「それにしても、ハーディンの森で大声を出すなんて、なんて罰当たりな子供だ……」	has:천벌 받을 아이	fix	defaults
 dict:misread-glosses:25	「準備万端ですね」	has:만반의 준비군요	fix	defaults
 dict:misread-glosses:25	フタヒトマルマルでーす。魚雷も準備万端、はりきっていきましょー！	has:어뢰도 만반의 준비	fix	defaults
-dict:misread-glosses:12	そうね、準備は万端だ。	has:준비는 만반이다	fix	defaults
+dict:misread-glosses:12	そうね、準備は万端だ。	has:준비는 만전이다	fix	defaults
 dict:misread-glosses:15	只ならぬ雰囲気にニョルグもピンと背筋を伸ばした。	has:보통이 아닌 분위기	fix	defaults
-dict:misread-glosses:16	「夜中にグラスア裏なんて歩くのはよっぽどの物好きか命知らずですよ」	has:상당한 호기심	fix	defaults
+dict:misread-glosses:16	「夜中にグラスア裏なんて歩くのはよっぽどの物好きか命知らずですよ」	has:어지간한 호기심	fix	defaults
 dict:misread-glosses:17	ホロウは魔力切れで弱くなったと思ったようだが、実は違う。	has:마력 고갈로	fix	defaults
 dict:misread-glosses:18	婆ちゃんは旅をしていた。	has:할머니는	fix	defaults
 dict:misread-glosses:19	リビングに行くと、爺ちゃんが鍛練するか聞いて来た。	has:할아버지가	fix	defaults
@@ -61,7 +69,7 @@ dict:misread-glosses:14	楠木さんは猫派ですか？	has:고양이파	fix	d
 dict:misread-glosses:20	その姿は、さながら『猫顔のてるてる坊主』	has:테루테루보즈	fix	defaults
 dict:misread-glosses:24	まずはミイニャ伍長が手で合図をして、分隊の半数を獣道沿いの茂みに配置する。	has:짐승길	fix	defaults
 dict:misread-glosses:24	舗装された道では無く森の獣道を歩いた。	has:숲의 짐승길을	fix	defaults
-pack:misread-glosses:p1	食卓には、ノリに漬物に生卵に焼鮭。	has:김에 채소 절임	keep	defaults
-pack:misread-glosses:p1	湯気を立てるご飯を、まずはノリで味わう。	has:김으로 맛본다	keep	defaults
-pack:misread-glosses:p1	あとはいつものノリだった。	has:평소의 분위기였다	fix	defaults
-pack:misread-glosses:p2	「ええ、ご飯を奢る者と、奢られる者の関係です」	has:한턱내는 사람과 얻어먹는 사람	fix	defaults
+pack:misread-glosses:p1	食卓には、ノリに漬物に生卵に焼鮭。	has:김에 채소 절임	keep	packs
+pack:misread-glosses:p1	湯気を立てるご飯を、まずはノリで味わう。	has:김으로 맛본다	keep	packs
+dict:jisjk:14088	あとはいつものノリだった。	has:평소의 분위기였다	fix	defaults
+pack:misread-glosses:p2	「ええ、ご飯を奢る者と、奢られる者の関係です」	has:한턱내는 사람과 얻어먹는 사람	fix	packs
