@@ -1,0 +1,49 @@
+# 규칙: GRM-175, GRM-177, GRM-179
+rule	input	expected	kind	layer
+rewrite:past-sequence	自分が正しいと決めつけていた。	has:올바르다고 단정	fix	rewrites
+rewrite:past-sequence	誰かが見ていると察知した。	has:있다고 감지	fix	rewrites
+rewrite:past-sequence	立場の違う人間同士が、信頼関係など結べるはずがないと決めつけていた。	has:없다고 단정	fix	rewrites
+rewrite:past-sequence	お前は何事もまずできないと決めつけて動かない。	has:없다고 단정	fix	rewrites
+rewrite:past-sequence	「できないと決めつけてるのは、あんたの方だろう」	has:없다고 단정	fix	rewrites
+rewrite:past-sequence	無理に起こすのは危険だと察知した佑は、両手を叩いた。	has:위험하다고 감지	fix	rewrites
+rewrite:past-sequence	ライカなら気配で只者ではないと察知できそうだ。	has:아니라고 감지	fix	rewrites
+rewrite:past-sequence	一定時間経ったら一人は御者台、もう一人は荷台で休むと決められた。	has:쉰다고 결정	fix	rewrites
+rewrite:past-sequence	居間では三人の弁護士で対応すると決められた。	has:대응한다고 결정	fix	rewrites
+rewrite:past-sequence	私が、自分が他と違うと気付き始めたのは幼稚園の頃だった。	has:다르다고	fix	rewrites
+rewrite:past-sequence	乙女ゲームの世界に転生していると気付き、様々整理した。	has:있다고	fix	rewrites
+rewrite:past-sequence	でも考えて考えて、強くなるしかないと悟った。	has:없다고	keep	rewrites
+rewrite:past-sequence	ソウマは昨日していたことがばれていると悟り、黙り込む。	has:있다고	fix	rewrites
+rewrite:past-sequence	どこで間違ったのか、ティアが信を勇者だと勘違い。	has:용사라고 착각	fix	rewrites
+rewrite:past-sequence	さっきは援交だと勘違いされた。	has:원조교제라고 착각	keep	rewrites
+rewrite:past-sequence	ただの剣士だと勘違いをしている。	has:검사라고 착각	fix	rewrites
+rewrite:past-sequence	少なくとも剣においては才能があると自覚をしている。	has:있다고 자각	fix	rewrites
+rewrite:past-sequence	自分が先頭だと自覚を持って深呼吸をする。	has:선두라고 자각	fix	rewrites
+rewrite:past-sequence	儂は譲ると決めた。	has:양보한다고	keep	rewrites
+rewrite:past-sequence	次の二の門もどうか勝ち抜いてもらいたいと仰せつかっています。	has:한다고	fix	rewrites
+rewrite:past-sequence	それもフランブルク王国に嫁ぐと決まり周辺国家は大騒ぎだった。	has:시집간다고	fix	rewrites
+rewrite:past-sequence	絶対にその話題をされると決めつけていました。	has:하신다고	fix	rewrites
+rewrite:past-sequence	もしあの時、ドアを開けたら彼がいた。	lacks:열었더니	fix	rewrites
+rewrite:past-sequence	もし、今日あたしが、あの台に座って出していたら……死んでいた。	lacks:있었더니	fix	rewrites
+rewrite:past-sequence	仮に駅前でジャグリングをしてて、最後にこの技が出たら感動していた。	lacks:꺼내자	fix	rewrites
+rewrite:past-sequence	もし、人質ではなく、殺す為に突っ込んで来ていたら死んでいた。	lacks:있었더니	fix	rewrites
+rewrite:past-sequence	ボタンを押すと音が鳴るので驚いた。	has:누르면	fix	rewrites
+rewrite:past-sequence	扉を開けると彼がいるので驚いた。	has:열면	fix	rewrites
+rewrite:past-sequence	もし雨なら行かないと決めていたが、朝起きると晴れていた。	has:일어나니	keep	rewrites
+rewrite:past-sequence	もし、扉がなかったらと思うとタクトは冷や汗が止まらなかった。	has:생각하니	fix	rewrites
+rewrite:past-sequence	しかし中に入ると想像以上に広くて驚いた。	has:들어오니	keep	rewrites
+rewrite:past-sequence	やってみると予想以上に難しかった。	has:해 보니	keep	rewrites
+rewrite:past-sequence	扉を開けると予想通り、菖蒲さんが立っていた。	has:열자	keep	rewrites
+rewrite:past-sequence	振り返ると想像を絶する光景が広がっていた。	has:돌아보니	keep	rewrites
+rewrite:past-sequence	家に着くと仰天した。	has:도착하니	keep	rewrites
+rewrite:past-sequence	指先が奥にぶつかると太一はビクンッと仰け反った	lacks:부딪친다고	keep	rewrites
+rewrite:past-sequence	振り返るとぼやけた影が見えた。	has:돌아보니	keep	rewrites
+rewrite:past-sequence	彼女が笑うと察しがついた。	has:웃으니	keep	rewrites
+rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨니	keep	rewrites
+rewrite:past-sequence	目を覚ますと決まって彼がいた。	has:뜨면	keep	rewrites
+rewrite:past-sequence	「新人が入ると決まって初日にパーティーを開くんだよ」	has:들어오면	keep	rewrites
+rewrite:past-sequence	ダンディーなお店にはダンディーなマスターがいると決まっている。	has:있다고	keep	rewrites
+rewrite:past-sequence	周りを見ると気付かないうちに日も落ちていた。	lacks:본다고	keep	rewrites
+rewrite:past-sequence	喜び過ぎると勘違いだった時に立ち直れない。	has:지나면	keep	rewrites
+rewrite:past-sequence	顔を上げると仰ぎ見るほどの巨人がいた。	lacks:든다고	keep	rewrites
+rewrite:past-sequence	部屋に入ると決め台詞を言った。	lacks:들어간다고	keep	rewrites
+rewrite:past-sequence	行くと仰いました。	has:간다고	keep	rewrites
