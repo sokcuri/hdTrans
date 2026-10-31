@@ -1,0 +1,15 @@
+# 규칙: GRM-87
+rule	input	expected	kind	layer
+cx:lc-quote-omou:20	「……無様ですわね。一度は好敵手と思ったのに。幻滅でしてよ〜？」	has:호적수라고 생각했는데	fix	rewrites
+cx:lc-quote-omou:20	「つまりレナさんは私達に有利な条件と思わせて、実は自分が有利な条件を出したってこと？」	has:조건이라고 생각하게	fix	rewrites
+cx:lc-quote-omou:20	目の前には着飾った貴族の子息、子女と思わしき子達がいっぱいいる。	has:자녀라고	fix	rewrites
+cx:lc-quote-omou:20	物体のセンサーと思わしき物の背後に回って空き缶を投げつけた。	has:센서라고	fix	rewrites
+cx:lc-quote-omou:20	電話の相手は382さんだんと思いす	rule:cx:lc-quote-omou:20=(이)라고	fix	rewrites
+cx:lc-quote-omou:10	砦を出るとき、これだけはと思い腰にさしてきた	has:이것만은 하고 생각	fix	rewrites
+cx:lc-quote-omou:10	そんな感じで四匹を呼んでいたので、ふと親犬たちにもと思い立ったのだ。	has:어미 개들에게도 하고	fix	rewrites
+cx:lc-quote-omou:20	いつもきらきらと、憧憬と思慕を浮かべて自分を見ていたエリザベス。	has:동경과 사모를	keep	rewrites
+cx:lc-quote-omou:20	最近、森下さんの反応パターンと思考が、少しずつわかってきたような気がする。	has:패턴과 사고가	keep	rewrites
+cx:lc-quote-omou:20	彼女と思い出を作った。	!rule:cx:lc-quote-omou:20	keep	rewrites
+cx:lc-quote-omou:20	彼を敵と思う。	!rule:cx:lc-quote-omou:20	keep	rewrites
+cx:lc-quote-omou:10	ちゃんと整えれば綺麗なのだから、腐っても王族なのだと思わずユフィリアは思ってしまう。	has:왕족이다 하고	fix	rewrites
+cx:lc-quote-omou:10	「ザリガニにお線香でもと思ってきたけど……。」	!rule:cx:lc-quote-omou:10	keep	rewrites
