@@ -1,0 +1,6 @@
+#! layer=pack
+# ナット의 뜻을 문맥으로 고름: 조이고 푸는 동사나 볼트, 나사 곁의 ナット는 너트
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+loan-terms:1	ナット	n	sense	frame	pred=外す|外れる|回す|締める|締め付ける|締まる|緩む|緩める|固定する|交換する|取り付ける|嵌める|はめる|あてがう|錆びる	너트	10	LEX-3241	audit	
+loan-terms:2	ナット	n	sense	frame	mod=ボルト|ネジ|ねじ|螺子|ビス	너트	10	LEX-3241	audit	
+loan-terms:3	ナット	n	sense	frame	pred=ボルト|ネジ|ねじ|螺子|ビス	너트	10	LEX-3241	audit	

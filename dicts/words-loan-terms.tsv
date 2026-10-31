@@ -1,0 +1,26 @@
+#! layer=base
+# 가나 외래어 명사의 한국어 표기: 토폴로지, 토르티야, 포퓰리즘처럼 외래어 표기법에 맞는 표기
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+トポロジー	토폴로지	N110			GN			// LEX-3240	loan-terms:1		
+トリクロロエタン	트리클로로에탄	N110			GN			// LEX-3240	loan-terms:2		
+トリクロロエチレン	트리클로로에틸렌	N110			GN			// LEX-3240	loan-terms:3		
+トリクロロフェノール	트리클로로페놀	N110	VMd		GN			// LEX-3240	loan-terms:4		
+トルティーヤ	토르티야	N110			GN			// LEX-3240	loan-terms:6		
+トーションバー	토션바	N110			GN			// LEX-3240	loan-terms:7		
+トータリゼーター	토털라이제이터	N110			GN			// LEX-3240	loan-terms:8		
+トレーラカード	트레일러 카드	N110			GN			// LEX-3240	loan-terms:9		
+ドッギーバッグ	도기백	N110	VPe		GN			// LEX-3240	loan-terms:10		
+ドラムプロッタ	드럼 플로터	N110			GN			// LEX-3240	loan-terms:11		
+トラフィックカーミング	트래픽 카밍	N110			GN			// LEX-3240	loan-terms:12		
+ナフタレン	나프탈렌	N110	VMd		GN			// LEX-3240	loan-terms:14		
+ニューポピュリズム	뉴 포퓰리즘	N110			GN			// LEX-3240	loan-terms:18		
+ヌクレオシド	뉴클레오시드	N110			GN			// LEX-3240	loan-terms:19		
+ネストされたブロック	중첩된 블록	N110			GN			// LEX-3240	loan-terms:21		
+ネットワークプロトコール	네트워크 프로토콜	N110			GN			// LEX-3240	loan-terms:22		
+ネティズン	네티즌	N110	VHn		GN			// LEX-3240	loan-terms:23		
+ノルフロキサシン	노르플록사신	N110			GN			// LEX-3240	loan-terms:24		
+ハンドヘルドターミナル	핸드헬드 단말기	N110	VEl		GN			// LEX-3240	loan-terms:25		
+ハードウェアサニティタイマ	하드웨어 새니티 타이머	N110			GN			// LEX-3240	loan-terms:26		
+ハードエネルギーパス	하드 에너지 패스	N110	VMo		GN			// LEX-3240	loan-terms:27		
+ハート封筒	하트 봉투	N110	VPl		GN			// LEX-3240	loan-terms:28		
+ポピュリズム	포퓰리즘	N110			GN			// LEX-3240	loan-terms:29		

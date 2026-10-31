@@ -1,0 +1,33 @@
+# 규칙: LEX-3240
+# 규칙: LEX-3241
+rule	input	expected	kind	layer
+dict:loan-terms:6	スープやトルティーヤ等に代表される焼いた穀類として食べられる。	has:토르티야 등	fix	lookup
+dict:loan-terms:6	アンナ様はトルティーヤの様なパンのサンドイッチだ。	has:토르티야와 같은	fix	lookup
+dict:loan-terms:6	トルティーヤっぽい食べ物を購入	has:토르티야 같은	fix	lookup
+dict:loan-terms:1	夢の世界におけるトポロジーは如何にも歪んだポリゴンのようだ。	has:토폴로지는	fix	lookup
+dict:loan-terms:1	「はい。トポロジーと線形、非線形はアメリカで大分やって来ました」	has:토폴로지와 선형	fix	lookup
+dict:loan-terms:29	ポピュリズムに乗らない民族なんですよ	has:포퓰리즘을	fix	lookup
+dict:loan-terms:29	実に悪い意味でのポピュリズム的な発想ですね。	has:포퓰리즘적인	fix	lookup
+dict:loan-terms:7	少尉が聞く話によると、当初トーションバーだったそうだ。	has:토션바였다	fix	lookup
+dict:loan-terms:14	ゾンビになると血液がナフタレンとかホルマリンになるのか？	has:나프탈렌이라든지	fix	lookup
+dict:loan-terms:14	タンスに入れといたらさ、ナフタレンの匂いが…。	has:나프탈렌의 냄새	fix	lookup
+dict:loan-terms:3	二酸化窒素・二酸化硫黄・トリクロロエチレンといった有害物質で汚染され	has:트리클로로에틸렌	fix	lookup
+dict:loan-terms:2	トリクロロエタンを使う。	has:트리클로로에탄을	fix	lookup
+dict:loan-terms:23	ネティズンの反応が早い。	has:네티즌의	fix	lookup
+dict:loan-terms:22	ネットワークプロトコル	네트워크 프로토콜	keep	lookup
+dict:loan-terms:28	ハート形の封筒	has:하트 모양의 봉투	keep	lookup
+dict:loan-terms:2	トリクロロメタン！？	lacks:트리클로로에탄	keep	lookup
+dict:loan-terms:25	ハンドヘルドＰＣの方にメールが着た。	lacks:단말기	keep	lookup
+dict:loan-terms:25	彼女はハンドヘルドＰＣをぽちぽちと操作している。	has:휴대용 PC를	keep	lookup
+pack:loan-terms:1	ペンチでドアの外枠のナットを外し終わる。	has:외측선의 너트를	fix	packs
+pack:loan-terms:2	ボルトのナットを外し、夏タイヤを収納する	has:볼트의 너트를	fix	packs
+pack:loan-terms:1	スパナを片手にナットが緩んでいないかを確かめる。	has:너트가	fix	packs
+pack:loan-terms:3	その中にナットやボルトと言った合金材質を入れる。	has:너트나 볼트	fix	packs
+pack:loan-terms:1	ボルトに幾つかのナットを締め付けただけの物や。	has:몇개의 너트를	fix	packs
+pack:loan-terms:1	ケーブルの接合部のナットを回す。	has:접합부의 너트를	fix	packs
+pack:loan-terms:2	ネジのナットを締める。	has:나사의 너트를	fix	packs
+pack:loan-terms:1	「ナット？『森の慟哭』の奴らか？」	has:나트?	keep	packs
+pack:loan-terms:1	ナット・キング・コール	냇 킹 콜	keep	packs
+pack:loan-terms:2	ウォールナット材の円卓	has:월너트재	keep	packs
+pack:loan-terms:1	マリクとナットが喧嘩してたの！	has:나트가	keep	packs
+pack:loan-terms:1	ナットが驚いた声でツッコむ。	has:나트가 놀란	keep	packs
