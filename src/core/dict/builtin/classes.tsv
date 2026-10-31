@@ -222,6 +222,7 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
+//= noun.quoted-clause	The nouns that a quotation in って fused into the ending of a predicate describes (行くって話 간다는 이야기, やめろって意味 그만두라는 의미).
 //= noun.quote-request	Verbal nouns of asking, wishing, answering and ordering whose する takes what is asked or wished with って (静かにってお願いした 조용히라고 부탁했다, 場所って希望した 장소라고 희망했다).
 //= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
 //= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
@@ -3273,6 +3274,66 @@ noun.quoted	子
 noun.quoted	娘
 noun.quoted	噂
 noun.quoted	もん
+noun.quoted-clause	こと	GRM-80
+noun.quoted-clause	事	GRM-80
+noun.quoted-clause	もの	GRM-80
+noun.quoted-clause	物	GRM-80
+noun.quoted-clause	もん	GRM-80
+noun.quoted-clause	奴	GRM-80
+noun.quoted-clause	やつ	GRM-80
+noun.quoted-clause	ヤツ	GRM-80
+noun.quoted-clause	人	GRM-80
+noun.quoted-clause	子	GRM-80
+noun.quoted-clause	感じ	GRM-80
+noun.quoted-clause	カンジ	GRM-80
+noun.quoted-clause	話	GRM-80
+noun.quoted-clause	噂	GRM-80
+noun.quoted-clause	言葉	GRM-80
+noun.quoted-clause	意味	GRM-80
+noun.quoted-clause	約束	GRM-80
+noun.quoted-clause	気持ち	GRM-80
+noun.quoted-clause	気分	GRM-80
+noun.quoted-clause	名前	GRM-80
+noun.quoted-clause	理由	GRM-80
+noun.quoted-clause	表情	GRM-80
+noun.quoted-clause	態度	GRM-80
+noun.quoted-clause	雰囲気	GRM-80
+noun.quoted-clause	様子	GRM-80
+noun.quoted-clause	連絡	GRM-80
+noun.quoted-clause	メール	GRM-80
+noun.quoted-clause	手紙	GRM-80
+noun.quoted-clause	電話	GRM-80
+noun.quoted-clause	知らせ	GRM-80
+noun.quoted-clause	命令	GRM-80
+noun.quoted-clause	指示	GRM-80
+noun.quoted-clause	依頼	GRM-80
+noun.quoted-clause	お願い	GRM-80
+noun.quoted-clause	願い	GRM-80
+noun.quoted-clause	意見	GRM-80
+noun.quoted-clause	考え	GRM-80
+noun.quoted-clause	評判	GRM-80
+noun.quoted-clause	条件	GRM-80
+noun.quoted-clause	ルール	GRM-80
+noun.quoted-clause	予定	GRM-80
+noun.quoted-clause	計画	GRM-80
+noun.quoted-clause	説	GRM-80
+noun.quoted-clause	返事	GRM-80
+noun.quoted-clause	答え	GRM-80
+noun.quoted-clause	文句	GRM-80
+noun.quoted-clause	台詞	GRM-80
+noun.quoted-clause	セリフ	GRM-80
+noun.quoted-clause	合図	GRM-80
+noun.quoted-clause	メッセージ	GRM-80
+noun.quoted-clause	話題	GRM-80
+noun.quoted-clause	設定	GRM-80
+noun.quoted-clause	イメージ	GRM-80
+noun.quoted-clause	思い	GRM-80
+noun.quoted-clause	想い	GRM-80
+noun.quoted-clause	自信	GRM-80
+noun.quoted-clause	証拠	GRM-80
+noun.quoted-clause	主張	GRM-80
+noun.quoted-clause	説明	GRM-80
+noun.quoted-clause	報告	GRM-80
 
 noun.realm-compound	国境
 noun.realm-compound	国内

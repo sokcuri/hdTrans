@@ -1,0 +1,38 @@
+# 규칙: GRM-80
+rule	input	expected	kind	layer
+cx:lc-quote-adnominal:10	「ん……ああ、なるほど。おおしまくんに投票しろってことか」	has:투표하라는 건가	fix	rewrites
+cx:lc-quote-adnominal:10	「本の内容を教えろってこと？　お断りよ」	has:가르치라는 거?	fix	rewrites
+cx:lc-quote-adnominal:10	「バカ者、自分でやれってことだ」	has:하라는 거야	fix	rewrites
+cx:lc-quote-adnominal:10	≪２人でコードを切断しろってことか……≫	has:절단하라는 건가	fix	rewrites
+cx:lc-quote-adnominal:10	「メディアを鵜呑みにするなってこと。」	has:믿지 말라는 거	fix	rewrites
+cx:lc-quote-adnominal:10	「で、なにか対抗策を考えようってことで、いまここにいるわけよ」	has:생각하자는 걸로	fix	rewrites
+cx:lc-quote-adnominal:10	いや、やらせろってこと？	has:시키라는 것?	fix	rewrites
+cx:lc-quote-adnominal:10	「手で洗えってことか？」	has:씻으라는 거야?	fix	rewrites
+cx:lc-quote-adnominal:10	「車線を変えるなってこと？　……了解！」	has:바꾸지 말라는 거?	fix	rewrites
+cx:lc-quote-adnominal:10	「……噛ませ犬になれってことか」	has:되라는 건가	fix	rewrites
+cx:lc-quote-adnominal:10	余計な詮索はするなってことなんだろう。	has:하지 말라는 것이겠지	fix	rewrites
+cx:lc-quote-adnominal:10	「つまり、命令違反を期待してるって事なのよ。」	has:기대하고 있다는 거야	fix	rewrites
+cx:lc-quote-adnominal:20	昨日校舎裏の回廊の階段から突き落とされたって話だけど。	has:떨어뜨려졌다는 이야기	fix	rewrites
+cx:lc-quote-adnominal:20	嫌がらせを受けた末に立候補をとりやめたって話があるんだ	has:취소했다는 이야기가	fix	rewrites
+cx:lc-quote-adnominal:20	「邪魔だからどけって感じでしたよ」	has:물러나라는 느낌	fix	rewrites
+cx:lc-quote-adnominal:20	「４月の初めに、俺が白崎を救ったって話があったじゃないですか」	has:구했다는 이야기가	fix	rewrites
+cx:lc-quote-adnominal:20	「目標とか進路以前に、歌の世界でやっていくかで迷ってるって感じですね」	has:헤매고 있다는 느낌	fix	rewrites
+cx:lc-quote-adnominal:20	「まあ、ゆうくんにいいところ見せようって気持ちはよーくわかるけど……」	has:보이자는 마음은	fix	rewrites
+cx:lc-quote-adnominal:20	「それがイヤだって人もいるんだろ。」	has:싫다는 사람도	fix	rewrites
+cx:lc-quote-adnominal:20	「今日はダメだってメール来てたから」	has:안된다는 메일	fix	rewrites
+cx:lc-quote-adnominal:20	「美浜でハンドラーになったって噂、本当だったんだ」	has:됐다는 소문	fix	rewrites
+cx:lc-quote-adnominal:20	「それなら遅くなりそうだって連絡がありそうじゃないですか？」	has:늦어질 것 같다는 연락이	fix	rewrites
+cx:lc-quote-adnominal:20	「うん、すっごく元気が出たよ。これから頑張ろうって気持ちになった」	has:노력하자는 기분이	fix	rewrites
+cx:lc-quote-adnominal:20	もし、ホントにダメなら、ここでイヤだって答えが返ってくるはず……	has:싫다는 대답이	fix	rewrites
+cx:lc-quote-adnominal:20	表向きは海外の要人。お忍びで日本に来てるって設定になってる	has:오고 있다는 설정이	fix	rewrites
+cx:lc-quote-adnominal:30	おまえらのハンドラーは腰抜けだって評判だもんな	has:겁쟁이라는 평판	fix	rewrites
+cx:lc-quote-adnominal:30	「最後……は、クラスメイトだって話だし、今更挨拶もないかな？」	has:클래스메이트라는 이야기	fix	rewrites
+cx:lc-quote-adnominal:30	「ああ、そこに集まってる人、ほとんどサクラだって話」	has:사쿠라라는 이야기	fix	rewrites
+cx:lc-quote-adnominal:20	誰がどう考えたって評判が危険なのはジェイド閣下です！	!rule:cx:lc-quote-adnominal:20	keep	rewrites
+cx:lc-quote-adnominal:20	来いって電話した。	!rule:cx:lc-quote-adnominal:20	keep	rewrites
+cx:lc-quote-adnominal:20	走るって気持ちいい。	!rule:cx:lc-quote-adnominal:20	keep	rewrites
+cx:lc-quote-adnominal:20	「……難しい任務をやるかやらないかって話してましたね」	!rule:cx:lc-quote-adnominal:20	keep	rewrites
+cx:lc-quote-adnominal:20	早く来いって手を振った。	!rule:cx:lc-quote-adnominal:20	keep	rewrites
+cx:lc-quote-adnominal:10	「つまりそれは、確定した未来ってことですか？」	!rule:cx:lc-quote-adnominal:10	keep	rewrites
+cx:lc-quote-adnominal:30	「最近は弟だって料理くらいするよ」	!rule:cx:lc-quote-adnominal:30	keep	rewrites
+cx:lc-quote-adnominal:10	「それって、わがままを言うってこと？」	!rule:cx:lc-quote-adnominal:10	keep	rewrites
