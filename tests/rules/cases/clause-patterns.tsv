@@ -48,6 +48,9 @@ pack:clause-patterns:2	突然話しかけられて何を言い出すのだろう
 pack:clause-patterns:2	単純になかなか私がお客さんに話しかけられないでいるからだ。	!rule:pack:clause-patterns:2	keep	packs
 pack:clause-patterns:2	なので周りからあまり話しかけられず、しかも一部の男子生徒によって和人はオタクのレッテルを張らている。	!rule:pack:clause-patterns:2	keep	packs
 pack:clause-patterns:2	それだけでなく、話しかけられることも増えたのだが相変わらず逃げてしまっている。	!rule:pack:clause-patterns:2	keep	packs
+pack:clause-patterns:2	友達に話しかけられた。	has:친구가 말을 걸어왔다.	fix	packs
+pack:clause-patterns:2	先生に話しかけられて驚いた。	has:선생님이 말을 걸어와	fix	packs
+pack:clause-patterns:2	やっと彼女に話しかけられた。	!rule:pack:clause-patterns:2	keep	packs
 grammar:書くのが許せない	椿は美緒が幸せになるのが許せない。その執念だけが彼女の生きる理由になっていた。	has:것을 용서할 수 없다	fix	lookup
 grammar:書くのが許せない	皓と付き合うのが許せない。	has:사귀는 것을 용서할 수 없다	fix	lookup
 grammar:書くのが許せない	そのことが許せなくて、アリサの中で怒りのボルテージがぐんぐん上がっていった。	has:그것을 용서할 수 없어서	keep	lookup
@@ -83,73 +86,78 @@ grammar:書かぬ限り	捨て去らぬ限りそれは希望なのだから。	h
 grammar:書かぬ限り	俺が許さぬ限り自由など得られるはずもない。	has:않는 한 자유	fix	lookup
 grammar:書かぬ限り	『エノクが結界を解かぬ限りは、此処から出れぬ……』	has:한은, 여기에서	fix	lookup
 grammar:書かぬ限り	そいつを倒さぬ限り魔力の封印は解けないと、	has:않는 한 마력	fix	lookup
-grammar:書かない限り、	フランツが死にでもしない限り、次の皇帝は彼に決まっている。	has:않는 한, 다음	keep	lookup
-grammar:書かない限り、	群れが追加で攻めてこない限り、しばらくは持ち堪えるだろうよ」	has:않는 한, 당분간은	keep	lookup
-grammar:書かない限り、	同じことが出来る者が出て来ない限り、ランキング一位は揺るがぬだろう。	has:않는 한, 랭킹	keep	lookup
-grammar:書かない限り、	寒くない限り、彼女は外で食事を摂る。	has:않은 한, 그녀는	keep	lookup
-grammar:書かない限り、	遠方を見る方法とセットで実現しない限り、実用的な運用は困難と思われる。	has:않는 한, 실용적인	keep	lookup
-grammar:書かない限り、	話を聞きたくても神殿を出ない限りはゆっくり話すことは難しいだろう。	has:않는 한은 천천히	keep	lookup
-grammar:書かない限り、	まあ、急所に当たらない限りは大丈夫だけども	has:않는 한 괜찮지만	keep	lookup
-grammar:書かない限り、	彼と添い遂げるには誘拐でもされない限りはありえない未来だろう。	has:되지 않는 한 있을	keep	lookup
+grammar:書かぬ限り	フランツが死にでもしない限り、次の皇帝は彼に決まっている。	has:않는 한, 다음	keep	lookup
+grammar:書かぬ限り	群れが追加で攻めてこない限り、しばらくは持ち堪えるだろうよ」	has:않는 한, 당분간은	keep	lookup
+grammar:書かぬ限り	同じことが出来る者が出て来ない限り、ランキング一位は揺るがぬだろう。	has:않는 한, 랭킹	keep	lookup
+grammar:書かぬ限り	寒くない限り、彼女は外で食事を摂る。	has:않은 한, 그녀는	keep	lookup
+grammar:書かぬ限り	遠方を見る方法とセットで実現しない限り、実用的な運用は困難と思われる。	has:않는 한, 실용적인	keep	lookup
+grammar:書かぬ限り	話を聞きたくても神殿を出ない限りはゆっくり話すことは難しいだろう。	has:않는 한은 천천히	keep	lookup
+grammar:書かぬ限り	まあ、急所に当たらない限りは大丈夫だけども	has:않는 한 괜찮지만	keep	lookup
+grammar:書かぬ限り	彼と添い遂げるには誘拐でもされない限りはありえない未来だろう。	has:되지 않는 한 있을	keep	lookup
 grammar:書かぬ限り	できる限り外を出歩いてみるべきというのが、２人の考えだった。	has:수 있는 한 밖을	keep	lookup
 grammar:書くといいね	「三人とも同じクラスになるといいねー」	has:되면 좋겠네~」	fix	lookup
 grammar:書くといいね	「まあ、頑張って生きてよ。安楽死ができるといいねって聞こえてないか」	has:좋겠네는 들리지	fix	lookup
 grammar:書くといいね	妃夏「また明日、その数が増えるといいね」	has:늘어나면 좋겠네」	fix	lookup
-grammar:書くといいね	まだ庶民と関わりたがらない人もいるだろけど、何とかなるといいけど……。	has:되면 좋겠는데…….	fix	lookup
-grammar:書くといいね	『そうだな…。忘れられるといいけどな』	has:있으면 좋겠는데』	fix	lookup
-grammar:書くといいね	居てくれるといいんだけど︾	has:주면 좋겠는데 ︾	fix	lookup
-grammar:書くといいね	『あの猫と遭遇してないといいけど。』	has:않으면 좋겠는데.』	fix	lookup
-grammar:書くといいね	出くわさないといいけど。	has:않으면 좋겠는데.	fix	lookup
-grammar:書くといいね	あくまで予定なので気が変わらないといいけど。	has:변함없으면 좋겠는데.	fix	lookup
-grammar:書くといいね	「ゆ、雪があまり積もらないといいな」	has:눈이 너무 쌓이지 않으면 좋겠다」	fix	lookup
-grammar:書くといいね	できるだけ壊すなと言っておいたけど壊さないといいな……。	has:않으면 좋겠다…….	fix	lookup
-grammar:書くといいね	その笑顔が自分にだけ向けられるといいのに。	has:보내지면 좋을 텐데.	fix	lookup
-grammar:書くといいね	アヤメにも、そんな時間が来るといいのに。	has:오면 좋을 텐데.	fix	lookup
-grammar:書くといいね	あぁ、こんな風景、どこかに行ってしまったらいいのに・・・。	has:좋을 텐데···.	fix	lookup
-grammar:書くといいね	「はぁ……模擬戦でも使えたらいいのになぁ……」	has:좋을 텐데……」	fix	lookup
-grammar:書くといいね	ナイジェルが首輪をくれたらいいのにな。	has:주면 좋을 텐데.	fix	lookup
-grammar:書くといいね	「いいですよ。お口に合うといいんですが」	has:맞으면 좋겠는데요」	fix	lookup
-grammar:書くといいね	「そうだといいんですが・・・あ、あれは！」	has:「그러면 좋겠는데요···아,	fix	lookup
-grammar:書くといいね	「同じクラスになれたらいいね」	has:있으면 좋겠네」	fix	lookup
-grammar:書くといいね	時には立ち向かっていけたらいいね	has:있으면 좋겠네	fix	lookup
+grammar:書くといいけど	まだ庶民と関わりたがらない人もいるだろけど、何とかなるといいけど……。	has:되면 좋겠는데…….	fix	lookup
+grammar:書くといいけどな	『そうだな…。忘れられるといいけどな』	has:있으면 좋겠는데』	fix	lookup
+grammar:書くといいんだけど	居てくれるといいんだけど︾	has:주면 좋겠는데 ︾	fix	lookup
+grammar:書かないといいけど	『あの猫と遭遇してないといいけど。』	has:않으면 좋겠는데.』	fix	lookup
+grammar:書かないといいけど	出くわさないといいけど。	has:않으면 좋겠는데.	fix	lookup
+grammar:書かないといいけど	あくまで予定なので気が変わらないといいけど。	has:변함없으면 좋겠는데.	fix	lookup
+grammar:書かないといいな	「ゆ、雪があまり積もらないといいな」	has:눈이 너무 쌓이지 않으면 좋겠다」	fix	lookup
+grammar:書かないといいな	できるだけ壊すなと言っておいたけど壊さないといいな……。	has:않으면 좋겠다…….	fix	lookup
+grammar:書くといいのに	その笑顔が自分にだけ向けられるといいのに。	has:보내지면 좋을 텐데.	fix	lookup
+grammar:書くといいのに	アヤメにも、そんな時間が来るといいのに。	has:오면 좋을 텐데.	fix	lookup
+grammar:書いたらいいのに	あぁ、こんな風景、どこかに行ってしまったらいいのに・・・。	has:좋을 텐데···.	fix	lookup
+grammar:書いたらいいのに	「はぁ……模擬戦でも使えたらいいのになぁ……」	has:좋을 텐데……」	fix	lookup
+grammar:書いたらいいのに	ナイジェルが首輪をくれたらいいのにな。	has:주면 좋을 텐데.	fix	lookup
+grammar:書くといいんですが	「いいですよ。お口に合うといいんですが」	has:맞으면 좋겠는데요」	fix	lookup
+grammar:学生だといいんですが	「そうだといいんですが・・・あ、あれは！」	has:「그러면 좋겠는데요···아,	fix	lookup
+grammar:書いたらいいね	「同じクラスになれたらいいね」	has:있으면 좋겠네」	fix	lookup
+grammar:書いたらいいね	時には立ち向かっていけたらいいね	has:있으면 좋겠네	fix	lookup
 grammar:書くといいね	フェルスが、ぶつぶつといいながら、興味をしめしている。	lacks:좋겠	keep	lookup
 grammar:書くといいね	こんな偏狭といいながらも、少年の表情は笑みに包まれていた。	lacks:좋겠	keep	lookup
-grammar:書くといいね	「気にせずめいっぱい休めばいいのにな。それができたら苦労しないしな」	has:쉬면 좋을 텐데.	keep	lookup
-grammar:書くといいね	「種族差なんて無くなればいいのにね」	has:없어지면 좋을 텐데」	keep	lookup
-grammar:書くといいね	「そうよね、いいことしてるなら放っておけばいいのに」	has:두면 좋을 텐데」	keep	lookup
+grammar:書くといいのに	「気にせずめいっぱい休めばいいのにな。それができたら苦労しないしな」	has:쉬면 좋을 텐데.	keep	lookup
+grammar:書くといいのに	「種族差なんて無くなればいいのにね」	has:없어지면 좋을 텐데」	keep	lookup
+grammar:書くといいのに	「そうよね、いいことしてるなら放っておけばいいのに」	has:두면 좋을 텐데」	keep	lookup
 grammar:書くといいね	例えるならば、真っ白な部屋に黒い箱が置いてあるのを想像するといい。	has:상상하면 좋다.	keep	lookup
 grammar:書くといいね	「まだ暴れ足りないのかい？僕は止めないから好きにするといいよ。」	has:마음대로 하면 좋아.」	keep	lookup
 grammar:書くといいね	「唇にはしないから、安心するといいよ」	has:안심하면 좋아」	keep	lookup
-grammar:書くといいね	「では、私も。また会える時があるといいですね。」	has:있으면 좋겠네요.」	keep	lookup
-grammar:書くといいね	また会えるといいですね。」	has:있으면 좋겠네요.」	keep	lookup
+grammar:書くといいですね	「では、私も。また会える時があるといいですね。」	has:있으면 좋겠네요.」	keep	lookup
+grammar:書くといいですね	また会えるといいですね。」	has:있으면 좋겠네요.」	keep	lookup
 grammar:書くといいね	「話聞いてくれるといいが」	has:주면 좋겠지만」	keep	lookup
 grammar:書くといいね	というかそもそも夜の相手の意味を分かっているといいが。	has:있으면 좋겠지만.	keep	lookup
-grammar:書くといいね	――ギルさん、受けてくれるといいな。	has:받아 주면 좋겠다.	keep	lookup
-grammar:書くといいね	頭硬い人じゃなくて気軽に話せるといいなぁ。	has:있으면 좋겠다.	keep	lookup
-grammar:書くといいね	自分がいけばいいけど、あまりでたくなかったから。	has:가면 좋지만, 그다지	keep	lookup
+grammar:書くといいな	――ギルさん、受けてくれるといいな。	has:받아 주면 좋겠다.	keep	lookup
+grammar:書くといいな	頭硬い人じゃなくて気軽に話せるといいなぁ。	has:있으면 좋겠다.	keep	lookup
+grammar:書くといいけど	自分がいけばいいけど、あまりでたくなかったから。	has:가면 좋지만, 그다지	keep	lookup
+grammar:書いたらいいんだけど	忙しかったらいいんだけどさ	lacks:좋겠는데	keep	lookup
+grammar:書いたらいいんだけど	言いたくなかったらいいんだけどさ	lacks:좋겠는데	keep	lookup
+grammar:書いたらいいんだけど	イヤだったらいいんだけど	lacks:좋겠는데	keep	lookup
+grammar:書くといいんだが	さえ止めればいいんだが	lacks:좋겠는데	keep	lookup
+grammar:書くといいんですけど	これを押せばいいんですけど、なかなか押せなくて	lacks:좋겠는데	keep	lookup
 grammar:お使いになる	えっ、今お使いになるのですか？	has:지금 쓰십니까?	fix	lookup
-grammar:お使いになる	「お兄様はお帰りになられたのですね」	has:「오라버니는 귀가하셨군요」	fix	lookup
-grammar:お使いになる	”あなたが正しい騎士になれば女神様もお喜びになられるでしょう”	has:여신님도 기뻐하시겠죠”	fix	lookup
-grammar:お使いになる	「夕食にお召し上がりになりますか？」	has:드시겠습니까?」	fix	lookup
-grammar:お使いになる	「焼きリンゴ、作って来ましたけど、食べ……お召し上がりになられますか？」	has:먹고……드시겠습니까?」	fix	lookup
-grammar:お使いになる	「そうであろうな……エリーゼ様が私をお許しになるわけがない」	has:나를 허락하실 리가	fix	lookup
-grammar:お使いになる	どころかお疲れになってしまうではないか。	has:지치셔	fix	lookup
-grammar:お使いになる	陛下は、その唐突な問いに間を置かずにお答えになった。	has:않고 대답하셨다.	fix	lookup
-grammar:お使いになる	すぐにお答えになる若様に、奈瑠はぎょっとした。	has:대답하시는 도련님에게,	fix	lookup
-grammar:お使いになる	穏やかな微笑で、とんでもない事をお尋ねになってくる。	has:물으셔	fix	lookup
-grammar:お使いになる	「お急ぎになった方が良いかもしれませんね」	has:「서두르시는 것이	fix	lookup
-grammar:お使いになる	「皆さま随分とお急ぎになって、どちらへ向かったのでしょう？」	has:상당히 서두르셔,	fix	lookup
-grammar:お使いになる	「ああ、お急ぎにならなくてもよろしいですよ。」と、書類を差し出した。	has:「아, 서두르시지	fix	lookup
-grammar:お使いになる	「わかりました、また家をお売りになるときはギルドにご連絡ください」	has:집을 파실 때는	fix	lookup
+grammar:お帰りになる	「お兄様はお帰りになられたのですね」	has:「오라버니는 돌아오셨군요」	fix	lookup
+grammar:お喜びになる	”あなたが正しい騎士になれば女神様もお喜びになられるでしょう”	has:여신님도 기뻐하시겠죠”	fix	lookup
+grammar:お召し上がりになる	「夕食にお召し上がりになりますか？」	has:드시겠습니까?」	fix	lookup
+grammar:お召し上がりになる	「焼きリンゴ、作って来ましたけど、食べ……お召し上がりになられますか？」	has:먹고……드시겠습니까?」	fix	lookup
+grammar:お許しになる	「そうであろうな……エリーゼ様が私をお許しになるわけがない」	has:나를 허락하실 리가	fix	lookup
+grammar:お疲れになる	どころかお疲れになってしまうではないか。	has:지치셔	fix	lookup
+grammar:お答えになる	陛下は、その唐突な問いに間を置かずにお答えになった。	has:않고 대답하셨다.	fix	lookup
+grammar:お答えになる	すぐにお答えになる若様に、奈瑠はぎょっとした。	has:대답하시는 도련님에게,	fix	lookup
+grammar:お尋ねになる	穏やかな微笑で、とんでもない事をお尋ねになってくる。	has:물으셔	fix	lookup
+grammar:お急ぎになる	「お急ぎになった方が良いかもしれませんね」	has:「서두르시는 것이	fix	lookup
+grammar:お急ぎになる	「皆さま随分とお急ぎになって、どちらへ向かったのでしょう？」	has:상당히 서두르셔,	fix	lookup
+grammar:お急ぎになる	「ああ、お急ぎにならなくてもよろしいですよ。」と、書類を差し出した。	has:「아, 서두르시지	fix	lookup
+grammar:お売りになる	「わかりました、また家をお売りになるときはギルドにご連絡ください」	has:집을 파실 때는	fix	lookup
 grammar:お使いになる	最近休校で部活も何もなく、運動不足でお使いに行ったりしていました。	has:운동부족으로 심부름	keep	lookup
 grammar:お使いになる	それはさながら、初めてお使いに行く子供のようであった。	has:처음으로 심부름	keep	lookup
 grammar:お使いになる	…という事で、お使いに行って貰えますか？	has:…그래서, 심부름	keep	lookup
-grammar:お使いになる	「お帰りなさいませ、タケル♡」	has:「어서 오세요,	keep	lookup
-grammar:お使いになる	「お帰りなさい」	has:「어서 오세요」	keep	lookup
-grammar:お使いになる	「愛海お嬢様、お帰りなさいませ」	has:아가씨, 어서 오세요」	keep	lookup
-grammar:お使いになる	「お疲れ様。何か飲む？」	has:「수고하셨습니다.	keep	lookup
-grammar:お使いになる	「……由良さん、お疲れ様です」	has:씨, 수고하셨습니다」	keep	lookup
+grammar:お帰りになる	「お帰りなさいませ、タケル♡」	has:「어서 오세요,	keep	lookup
+grammar:お帰りになる	「お帰りなさい」	has:「어서 오세요」	keep	lookup
+grammar:お帰りになる	「愛海お嬢様、お帰りなさいませ」	has:아가씨, 어서 오세요」	keep	lookup
+grammar:お疲れになる	「お疲れ様。何か飲む？」	has:「수고하셨습니다.	keep	lookup
+grammar:お疲れになる	「……由良さん、お疲れ様です」	has:씨, 수고하셨습니다」	keep	lookup
 grammar:お使いになる	「気にせずお休みになってくださいまし。明日はわたくしの魔法で癒して差し上げましてよ」	has:않고 쉬셔 주세요.	keep	lookup
 grammar:お使いになる	「舞花様は自室でお休みになっておられますので、今日の所はお帰りいただけますか」	has:방에서 쉬시고 계시기	keep	lookup
-grammar:書かない限り、	左手の指輪を見ない限り、全く人妻には見えない。	has:보지 않는 이상	keep	lookup
-grammar:書かない限り、	村の掟を破らない限り、衣食住の保障がされること。	has:어기지 않는 이상	keep	lookup
+grammar:書かぬ限り	左手の指輪を見ない限り、全く人妻には見えない。	has:보지 않는 이상	keep	lookup
+grammar:書かぬ限り	村の掟を破らない限り、衣食住の保障がされること。	has:어기지 않는 이상	keep	lookup
