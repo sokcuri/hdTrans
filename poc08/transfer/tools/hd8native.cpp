@@ -93,6 +93,7 @@ int Lint(const std::string& data) {
     for (const nat::Case& c : d.cases) (c.kind == "fix" ? cases[c.id].first : cases[c.id].second)++;
     std::set<std::string> rowIds;
     for (const nat::Row& r : d.rows) {
+        if (!r.phrase.empty()) continue;  // lexicon phrases: the lexicon's own check covers them
         rowIds.insert(r.id);
         auto err = [&](const std::string& what) {
             std::printf("error\t%s\t%s\t%s\n", r.file.c_str(), r.id.c_str(), what.c_str());

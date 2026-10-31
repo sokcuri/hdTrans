@@ -69,6 +69,7 @@ struct Row {
     std::vector<KoNode> nodes;
     std::array<int, 5> specificity{};
     size_t order = 0;
+    std::string phrase;  // a lexicon phrase (lexicon/lex/phrases-curriculum.tsv): its Japanese pattern
 };
 
 struct Case {

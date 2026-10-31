@@ -22,3 +22,8 @@ mod.daro.wh	N5-54	{N:@question} [aux.da.daro]	-	-	V:이다{glue,eomi=lkka,mood=q
 mod.tewaikenai.masu	N5-50	[link=te] [kase=wa] [aux.iku.eval] [polite=desu-masu] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	行ってはいけません → 가면 안 돼요
 mod.chaikenai.masu	N5-50	[aux.c.cha] [aux.iku.eval] [polite=desu-masu] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	食べちゃいけません → 먹으면 안 돼요
 mod.hoshii.neg	N5-45	{NP} [kase=ga] 欲しい [pol=neg]	-	-	P:obj V:갖다{ctype=conn,eomi=-고} V:싶다{aux,vpos=A,neg=ji-anh}	m	own	本がほしくない → 책을 갖고 싶지 않다
+mod.teii	N5-49	[link=te] 良い|宜しい	-	pred.ctype=conn;pred.eomi=-어도	V:되다	m	own	答えていい → 대답해도 되다
+mod.daro.confirm	N5-46	[aux.da.daro] [aux.punct.q]	-	pred.eomi=ji;pred.mood=q	Punct:q	m	own	見えなかっただろ？ → 안 보였지?
+mod.desho.confirm	N5-46	[aux.desu.desho] [aux.punct.q]	-	pred.eomi=ji;pred.mood=q	Punct:q	m	own	行くでしょう？ → 가죠?
+mod.daro.confirm.n	N5-46	{N} [aux.da.daro] [aux.punct.q]	-	-	V:이다{glue,eomi=ji,mood=q} Punct:q	m	own	学生だろ？ → 학생이지?
+mod.daro.wh.q	N5-54	{N:@question} [aux.da.daro] [aux.punct.q]	-	-	V:이다{glue,eomi=lkka,mood=q} Punct:q	m	own	何だろう？ → 뭘까?

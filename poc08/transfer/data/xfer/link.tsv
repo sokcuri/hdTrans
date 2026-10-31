@@ -20,3 +20,5 @@ link.ga.ask	N5-41	[link=ga]	main.force=imp|request|prop|q	pred.ctype=conn;pred.r
 link.node	N5-H3	[role=nomi] [role=cop-te]	-	pred.ctype=conn;pred.rel=cause	-	m	own	降るので → 와서
 link.node.ask	N5-H3	[role=nomi] [role=cop-te]	main.force=imp|request|prop|q	pred.ctype=conn;pred.rel=reason	-	m	own	降るので行きましょう → 오니까 가죠
 link.te.shared	N5-H2	[link=te]	cl.args=obj main.args!=obj mainpred.trans=+	pred.ctype=conn;pred.rel=cause	-	m	own	パンを買って食べる → 빵을 사서 먹다
+link.kara.final	N5-H3	[link=kara]	next.role=end|close|q|excl	pred.ctype=conn;pred.rel=reason	-	m	own	頑張るから…… → 노력하니까……
+link.node.final	N5-H3	[role=nomi] [role=cop-te]	next.role=end|close|q|excl	pred.ctype=conn;pred.rel=reason	-	m	own	大丈夫なので。 → 괜찮으니까.

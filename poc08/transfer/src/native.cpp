@@ -270,14 +270,14 @@ void LoadCases(const std::string& path, Data& d) {
 // A lexicon file, by its header: sense rows (ja yomi pos sense ko cue frame feat st prov note) or a level list
 // (ja yomi pos … ko …: one row per lemma, ko = sense 1, the other named columns are features of the entry). Sense
 // rows replace the sense-1 stand-in a level list gave.
-void LoadLexicon(const std::string& path, Data& d) {
+void LoadLexicon(const std::string& path, Data& d, bool fill = false) {
     std::string text;
     if (!ReadWholeFile(path, text)) return;
     const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
     std::vector<std::string> head;
     size_t at = 0, lineNo = 0;
     static const std::set<std::string> plain{"ja", "yomi", "pos", "sense", "ko", "cue", "frame", "feat", "st",
-                                             "prov", "note", "orth", "field", "grid", "ctype", "senses",
+                                             "prov", "note", "grid", "ctype", "senses",
                                              "gcls", "write", "gframe", "gflags"};
     while (at < text.size()) {
         size_t e = text.find('\n', at);
@@ -319,6 +319,9 @@ void LoadLexicon(const std::string& path, Data& d) {
         Entry* found = nullptr;
         for (size_t i : list)
             if (d.entries[i].yomi == c["yomi"] && d.entries[i].pos == c["pos"]) found = &d.entries[i];
+        // fill: a lemma the curriculum already has keeps its reviewed senses
+        if (fill && found && found->file != file) continue;
+        if (fill && c["st"] == "u") continue;
         if (!found) {
             Entry ne;
             ne.ja = c["ja"];
@@ -337,6 +340,34 @@ void LoadLexicon(const std::string& path, Data& d) {
             found->senses.push_back(std::move(s));
         }
     }
+}
+
+// Reviewed lexicon phrases without slots (st=r): id pattern ko cue st prov note. Each is a row matched by its
+// Japanese text; its Korean words are nodes (the last a predicate when it is one).
+void LoadPhrases(const std::string& path, Data& d) {
+    std::string text;
+    if (!ReadWholeFile(path, text)) return;
+    const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
+    Rows(text, [&](const std::vector<std::string>& f, size_t) {
+        if (f.size() < 5 || f[1].find('{') != std::string::npos || f[4] != "r" || !f[3].empty()) return;
+        Row r;
+        r.id = "ph:" + f[0];
+        r.spec = "LEX";
+        r.file = file;
+        r.phrase = f[1];
+        r.ko = f[2];
+        r.st = f[4];
+        r.prov = f.size() > 5 ? f[5] : "";
+        const std::vector<std::string> words = Words(f[2]);
+        for (size_t i = 0; i < words.size(); i++) {
+            KoNode n;
+            n.kind = i + 1 == words.size() && !d.predicateEnd.empty() && words[i].ends_with(d.predicateEnd) ? "V" : "N";
+            n.lemma = words[i];
+            r.nodes.push_back(std::move(n));
+        }
+        r.order = d.rows.size();
+        d.rows.push_back(std::move(r));
+    });
 }
 
 void LoadClasses(const std::string& path, Data& d) {
@@ -409,7 +440,12 @@ void Load(const std::string& root, Data& d) {
     LoadClasses(root + "/lexicon/lex/classes.tsv", d);
     for (const std::string& f : ListFiles(root + "/lexicon/lex/levels", ".tsv")) LoadLexicon(f, d);
     LoadLexicon(root + "/lexicon/lex/lexicon/curriculum.tsv", d);
-    for (Row& r : d.rows) SetSpecificity(d, r);
+    LoadPhrases(root + "/lexicon/lex/phrases-curriculum.tsv", d);
+    for (Row& r : d.rows) {
+        SetSpecificity(d, r);
+        // a phrase names its words: it is more specific than any grammar row over them
+        if (!r.phrase.empty()) r.specificity = {static_cast<int>(r.phrase.size()), static_cast<int>(r.phrase.size()), 0, 0, 0};
+    }
     std::set<std::string> ids;
     for (const Row& r : d.rows)
         if (!ids.insert(r.id).second) d.errors.push_back(r.file + ": duplicate id " + r.id);
@@ -1188,6 +1224,12 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         }
     }
 
+    // tokens the analyzer read by a derived spoken arc, as unknown or by a fallback: the VN speech stage reads them,
+    // so the line stays with 0.7.x for now
+    for (size_t i = 0; i < nt; i++)
+        if (line.toks[i].pos != Pos::sym &&
+            (line.toks[i].flags & (tokflag::Unknown | tokflag::Fallback | tokflag::Spoken | tokflag::Elongated)))
+            line.unmatched.push_back(doc.I(std::string(line.Src(line.toks[i].src)) + "/spoken"));
     for (size_t i = 0; i < n; i++) {
         Tk& k = x.tk[i];
         if (!k.entry) continue;
@@ -1204,7 +1246,32 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         const Row& r = d.rows[ri];
         if (r.then == "supp") continue;
         std::vector<Cand> found;
-        if (r.atoms.empty()) {
+        if (!r.phrase.empty()) {
+            // the phrase's text: the units' spellings, the last one also in its dictionary form (連絡を取った)
+            for (int st = 0; st < static_cast<int>(n); st++) {
+                std::string spell;
+                for (int e = st; e < static_cast<int>(n) && spell.size() < r.phrase.size(); e++) {
+                    const Tk& k = x.tk[static_cast<size_t>(e)];
+                    std::string dict = k.lemma;
+                    if (k.entry) {
+                        auto o = k.entry->feat.find("orth");
+                        if (o != k.entry->feat.end()) dict = o->second;
+                    }
+                    const bool hit = spell + k.surf == r.phrase || ((IsVerbPos(k.epos) || k.epos == Pos::adj) && spell + dict == r.phrase);
+                    spell += k.surf;
+                    if (!hit) continue;
+                    Cand c;
+                    c.row = ri;
+                    c.begin = st;
+                    c.end = e + 1;
+                    for (int t = st; t <= e; t++) c.consumed.push_back(t);
+                    c.anchor = st;
+                    c.clause = x.tk[static_cast<size_t>(e)].clause;
+                    found.push_back(std::move(c));
+                    break;
+                }
+            }
+        } else if (r.atoms.empty()) {
             // a row without atoms reads one clause: its anchor is the clause's predicate word
             for (size_t c = 0; c < line.clauses.size(); c++) {
                 Cand cd;

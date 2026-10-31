@@ -21,10 +21,12 @@ host	next	result	mode	example
 이것	top	이건	replace	이것은 → 이건
 이것	obj	이걸	replace	이것을 → 이걸
 이것	-	이거	replace	이것 → 이거
+이것	instr	이걸로	replace	이것으로 → 이걸로
 그것	subj	그게	replace	그것이 → 그게
 그것	top	그건	replace	그것은 → 그건
 그것	obj	그걸	replace	그것을 → 그걸
 그것	-	그거	replace	그것 → 그거
+그것	instr	그걸로	replace	그것으로 → 그걸로
 저것	subj	저게	replace	저것이 → 저게
 저것	top	저건	replace	저것은 → 저건
 저것	obj	저걸	replace	저것을 → 저걸

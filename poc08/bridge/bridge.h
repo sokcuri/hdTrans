@@ -8,9 +8,9 @@
 //              voice and connective slots, and R, W and G write the sentence;
 //   decide     D runs (otherwise kir keeps 0.7.x's choices);
 //   rule       0.8-rule: segment, and the generator's retrofit on dialogue lines (bridge/rule.h);
-//   native     native T (DESIGN-v3): a sentence whose every token a native row or lexicon entry consumes is written
-//              by T, R and G; any other sentence keeps 0.7.x's composition (so with no covering rule the output
-//              is 0.7.x's, byte for byte);
+//   native     native T (DESIGN-v3): a line whose every token a native row or lexicon entry consumes is written
+//              by T, R and G in place of 0.7.x's line (ApplyNative, called by the CLI on the translated lines);
+//              any other line keeps 0.7.x's output, byte for byte;
 //   reselect   D inside 0.7.x: where a decider overrides 0.7.x (voice, ように, ところで), the item takes
 //              the ending candidate 0.7.x already had whose class is the decided one, and the
 //              sentence is composed again (no generator).
@@ -18,6 +18,7 @@
 #include <cstdint>
 #include <string>
 #include <memory>
+#include <span>
 #include <string_view>
 #include <vector>
 
@@ -71,6 +72,9 @@ std::string TakeStages(Bridge* bridge);
 std::string TakeReselections(Bridge* bridge);
 // The lift misses by key, most frequent first, as TSV (kind, key, count), at most limit rows.
 std::string LiftMisses(const Bridge* bridge, size_t limit);
+// The native route over one TranslateDocument call: lines as given (context lines first), out the translated
+// lines after the context; every line the native transfer covers is replaced by its native text.
+void ApplyNative(Bridge* bridge, std::span<const std::string> lines, size_t contextLines, std::vector<std::string>& out);
 // The 0.8-rule tables (bridge/rule.h) when the rule part is on, else null.
 std::shared_ptr<const RuleData> RuleDataOf(const Bridge* bridge);
 // The analyzer's tokens of one source text (UniDic lemma, reading, conjugation form; empty without an analyzer).

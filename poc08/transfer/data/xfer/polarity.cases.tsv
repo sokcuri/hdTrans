@@ -9,3 +9,7 @@ pol.mou.neg	fix	もうパンを食べない。	더 이상 빵을 먹지 않는�
 pol.mou.neg	keep	もうパンを食べた。	벌써 빵을 먹었다.	inv
 adv.mou.ii	fix	「もういいです」	「이제 됐어요」	inv
 adv.mou.ii	keep	「部屋が静かです」	「방이 조용해요」	inv
+adv.sou.alone	fix	「……そう……」	「……그래……」	inv
+adv.sou.alone	keep	「そう言う。」	「그렇게 말해.」	inv
+adv.sou.eol	fix	そう	그래	inv
+adv.sou.eol	keep	「そう言う」	「그렇게 말해」	inv

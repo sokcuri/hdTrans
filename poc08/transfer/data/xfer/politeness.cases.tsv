@@ -2,3 +2,5 @@
 id	kind	ja	ko	src
 polite.masu	fix	「本を読みます。」	「책을 읽어요.」	inv
 polite.masu	keep	「本を読む。」	「책을 읽어.」	inv
+polite.wakarimashita	fix	「わかりました。」	「알겠어요.」	inv
+polite.wakarimashita	keep	「日本語が分かりました。」	「일본어를 알았어요.」	inv

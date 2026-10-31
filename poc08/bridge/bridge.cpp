@@ -19,12 +19,23 @@ namespace hd08::bridge {
 
 namespace {
 
+// Bytes of white space (space, tab, ideographic space) at the start of text.
+size_t LeadSpace(std::string_view text) {
+    size_t i = 0;
+    while (i < text.size()) {
+        if (text[i] == ' ' || text[i] == '\t') i++;
+        else if (text.compare(i, 3, "\xE3\x80\x80") == 0) i += 3;
+        else break;
+    }
+    return i;
+}
+
 // One sentence as last written: the compose stage may run a line more than once (trial passes),
 // and only the last pass counts.
 struct SentenceRecord {
     std::string why, stages, reselections;
     uint64_t points = 0, overrides = 0, reselected = 0;
-    bool generated = false, native = false;
+    bool generated = false;
     uint64_t lifted = 0;
     std::vector<LiftMiss> misses;
 };
@@ -35,9 +46,6 @@ struct DocState {
     std::vector<std::pair<int, int>> last;  // per line: the (chunk, sentence) lifted last; an earlier one starts a pass
     std::vector<std::map<std::pair<int, int>, SentenceRecord>> records;  // per line, by (chunk, sentence)
     std::vector<uint32_t> fromSel;  // per line: the lift cursor of reselect
-    std::vector<int8_t> natState;   // per line: native route 0 not tried, 1 written natively, 2 kept by 0.7.x
-    std::vector<std::string> natOut, natWhy, natStages;
-    std::vector<bool> natWritten;   // per line: this pass has written the native text
     std::vector<std::pair<int, int>> lastSel;
     bool caption = false;  // 0.8-rule: the document reads as captions, so no part changes it
 };
@@ -81,14 +89,9 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
     ds->last.assign(lines.size(), {-1, -1});
     ds->records.resize(lines.size());
     ds->fromSel.assign(lines.size(), 0);
-    ds->natState.assign(lines.size(), 0);
-    ds->natOut.resize(lines.size());
-    ds->natWhy.resize(lines.size());
-    ds->natStages.resize(lines.size());
-    ds->natWritten.assign(lines.size(), false);
     if (b.rule) ds->caption = CaptionDocument(*b.rule, std::vector<std::string>(lines.begin(), lines.end()));
     ds->lastSel.assign(lines.size(), {-1, -1});
-    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect || b.opt.native) {
+    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
         const Config& cfg = b.engine.cfg;
         const std::vector<ForcedSpan> none;
@@ -117,10 +120,6 @@ void EndDocument(void* context, void* doc) {
     auto* ds = static_cast<DocState*>(doc);
     std::string why, stages = b.opt.sideIr ? DocJson(ds->doc) + '\n' : std::string();
     std::lock_guard<std::mutex> lock(b.mu);
-    for (size_t i = 0; i < ds->natWhy.size(); i++) {
-        why += ds->natWhy[i];
-        stages += ds->natStages[i];
-    }
     for (const auto& line : ds->records) {
         for (const auto& [key, r] : line) {
             b.sentences++;
@@ -133,7 +132,6 @@ void EndDocument(void* context, void* doc) {
             b.points += r.points;
             b.overrides += r.overrides;
             b.reselected += r.reselected;
-            b.native += r.native;
             b.reselections += r.reselections;
         }
     }
@@ -325,35 +323,6 @@ bool Reselect(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     return changed;
 }
 
-// The native route of one line: the line's analysis through native T, R and G, once per line. A line goes
-// native only when T consumed every token of it; then its first 0.7.x sentence writes the native text and the
-// others write nothing.
-// Bytes of white space (space, tab, ideographic space) at the start of text.
-size_t LeadSpace(std::string_view text) {
-    size_t i = 0;
-    while (i < text.size()) {
-        if (text[i] == ' ' || text[i] == '\t') i++;
-        else if (text.compare(i, 3, "\xE3\x80\x80") == 0) i += 3;
-        else break;
-    }
-    return i;
-}
-
-const std::string* NativeLine(Bridge& b, DocState& ds, size_t lineIndex) {
-    if (ds.natState[lineIndex] == 0) {
-        Line& line = ds.doc.lines[lineIndex];
-        const bool use = RunNative(b.engine, ds.doc, line);
-        ds.natState[lineIndex] = use ? 1 : 2;
-        ds.natOut[lineIndex] = line.out;
-        if (b.opt.sideIr) {
-            const LineReport report = Report(b.engine, ds.doc, line);
-            ds.natWhy[lineIndex] = WhyRecords(b.engine, ds.doc, line, report);
-            ds.natStages[lineIndex] = LineJson(ds.doc, line) + '\n';
-        }
-    }
-    return ds.natState[lineIndex] == 1 ? &ds.natOut[lineIndex] : nullptr;
-}
-
 bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s, std::string& out) {
     auto& b = *static_cast<Bridge*>(context);
     auto& ds = *static_cast<DocState*>(doc);
@@ -361,29 +330,9 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     const auto lineIndex = static_cast<size_t>(s.line);
     // The compose stage may go over a line more than once; a sentence not after the last one starts a pass.
     const std::pair<int, int> here{s.chunk, s.index};
-    if (here <= ds.last[lineIndex]) {
-        ds.from[lineIndex] = 0;
-        ds.natWritten[lineIndex] = false;
-    }
+    if (here <= ds.last[lineIndex]) ds.from[lineIndex] = 0;
     ds.last[lineIndex] = here;
-    if (b.opt.native && !ds.caption) {
-        SentenceRecord& r = ds.records[lineIndex][{s.chunk, s.index}];
-        r = SentenceRecord{};
-        if (const std::string* text = NativeLine(b, ds, lineIndex)) {
-            // 0.7.x's sentences of white space alone stay; the first other one writes the line, the rest nothing
-            const size_t lead = LeadSpace(s.composed);
-            if (lead == s.composed.size()) return false;
-            r.native = !ds.natWritten[lineIndex];
-            if (r.native) {
-                out = std::string(s.composed.substr(0, lead)) + *text;
-                ds.natWritten[lineIndex] = true;
-            } else {
-                out.clear();
-            }
-            return true;
-        }
-        if (!b.opt.generate) return false;
-    }
+
     // The sentence as a line of its own: the line's analysis and scope, the sentence's nodes.
     Line sent;
     std::vector<LiftMiss> misses;
@@ -482,7 +431,7 @@ Bridge* Create(const Options& options, std::string& err) {
         b->hooks.fits = Fits;
     }
     // The lift and the side IR run whenever a part, --why or --stages needs them.
-    if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift || b->opt.native) b->hooks.generate = Generate;
+    if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift) b->hooks.generate = Generate;
     if (b->opt.reselect) b->hooks.reselect = Reselect;
     return b.release();
 }
@@ -557,6 +506,46 @@ std::vector<SourceToken> AnalyzeSource(const Bridge* b, std::string_view text) {
 std::string TakeReselections(Bridge* b) {
     std::lock_guard<std::mutex> lock(b->mu);
     return std::exchange(b->reselections, {});
+}
+
+void ApplyNative(Bridge* b, std::span<const std::string> lines, size_t contextLines, std::vector<std::string>& out) {
+    if (!b->opt.native || lines.size() < contextLines) return;
+    std::vector<std::string> src(lines.begin(), lines.end());
+    for (std::string& l : src)
+        if (!l.empty() && l.back() == '\r') l.pop_back();
+    // caption documents: their unquoted lines are speech, which S does not read yet
+    if (b->rule && CaptionDocument(*b->rule, std::vector<std::string>(src.begin() + static_cast<std::ptrdiff_t>(contextLines), src.end())))
+        return;
+    Doc doc;
+    for (size_t i = 0; i < src.size(); i++) {
+        Line l;
+        l.id = static_cast<uint32_t>(i + 1);
+        l.src = src[i];
+        l.context = i < contextLines;
+        doc.lines.push_back(std::move(l));
+    }
+    Analyse(b->engine, doc, kMaxStructureBytes);
+    std::string why, stages;
+    uint64_t native = 0;
+    for (size_t i = contextLines; i < doc.lines.size() && i - contextLines < out.size(); i++) {
+        Line& l = doc.lines[i];
+        if (l.src.size() > kMaxStructureBytes) continue;
+        const bool use = RunNative(b->engine, doc, l);
+        if (b->opt.sideIr) {
+            const LineReport report = Report(b->engine, doc, l);
+            why += WhyRecords(b->engine, doc, l, report);
+            stages += LineJson(doc, l) + '\n';
+        }
+        if (!use) continue;
+        // the white space 0.7.x kept at the start of the line stays
+        std::string& o = out[i - contextLines];
+        o = o.substr(0, LeadSpace(o)) + l.out;
+        native++;
+    }
+    std::lock_guard<std::mutex> lock(b->mu);
+    b->native += native;
+    b->why += why;
+    b->stages += stages;
 }
 
 std::string TakeStages(Bridge* b) {

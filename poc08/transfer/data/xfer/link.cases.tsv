@@ -38,3 +38,7 @@ link.ga.ask	fix	「本は高いけど買う？」	「책은 비싼데 사?」	in
 link.ga.ask	keep	本は高いけど買う。	책은 비싸지만 산다.	inv
 link.te.shared	fix	パンを買って食べる。	빵을 사서 먹는다.	inv
 link.te.shared	keep	パンを食べて寝る。	빵을 먹고 잔다.	inv
+link.kara.final	fix	「学校に行くから。」	「학교에 가니까.」	inv
+link.kara.final	keep	学校に行くから本を読まない。	학교에 가서 책을 읽지 않는다.	inv
+link.node.final	fix	「学校に行くので。」	「학교에 가니까.」	inv
+link.node.final	keep	学校に行くので本を読まない。	학교에 가서 책을 읽지 않는다.	inv

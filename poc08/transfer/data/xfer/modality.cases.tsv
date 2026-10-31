@@ -34,7 +34,7 @@ mod.koto.aru	fix	学校に行ったことがある。	학교에 간 적이 있�
 mod.koto.aru	keep	学校に行ったことがない。	학교에 간 적이 없다.	inv
 mod.koto.nai	fix	学校に行ったことがない。	학교에 간 적이 없다.	inv
 mod.koto.nai	keep	学校に行ったことがある。	학교에 간 적이 있다.	inv
-mod.daro.wh	fix	「何だろう？」	「뭘까?」	inv
+mod.daro.wh	fix	「何だろう。」	「뭘까.」	inv
 mod.daro.wh	keep	「雨だろう。」	「비일 거야.」	inv
 mod.tewaikenai.masu	fix	「学校に行ってはいけません。」	「학교에 가면 안 돼요.」	inv
 mod.tewaikenai.masu	keep	「学校に行ってもいいです。」	「학교에 가도 돼요.」	inv
@@ -45,3 +45,13 @@ mod.daro	fix	学校に行かないだろう。	학교에 가지 않을 것이다
 mod.tsumori	fix	学校に行かないつもりだ。	학교에 가지 않을 생각이다.	inv
 mod.hoshii.neg	fix	「本がほしくない。」	「책을 갖고 싶지 않아.」	inv
 mod.hoshii.neg	keep	「本がほしい。」	「책을 갖고 싶어.」	inv
+mod.teii	fix	「学校に行っていい？」	「학교에 가도 돼?」	inv
+mod.teii	keep	「学校に行ってもいい？」	「학교에 가도 돼?」	inv
+mod.daro.confirm	fix	「先生は来なかっただろう？」	「선생님은 안 왔지?」	inv
+mod.daro.confirm	keep	先生は来なかっただろう。	선생님은 오지 않았을 것이다.	inv
+mod.desho.confirm	fix	「先生は来るでしょう？」	「선생님은 오죠?」	inv
+mod.desho.confirm	keep	「先生は来るでしょう。」	「선생님은 올 거예요.」	inv
+mod.daro.confirm.n	fix	「先生だろう？」	「선생님이지?」	inv
+mod.daro.confirm.n	keep	「先生だろう。」	「선생님일 거야.」	inv
+mod.daro.wh.q	fix	「何だろう？」	「뭘까?」	inv
+mod.daro.wh.q	keep	「先生だろう？」	「선생님이지?」	inv

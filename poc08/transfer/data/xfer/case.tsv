@@ -33,3 +33,6 @@ case.no.jeo	N5-H9	{NP} [kase=no]	NP.ko=저	NP.lemma=제	-	m	own	私の本(です
 case.no.neo	N5-H9	{NP} [kase=no]	NP.ko=너	NP.lemma=네	-	m	own	君の本 → 네 책
 case.ka.or	N5-22	{NP} [aux.p.ka.adv]	next.pos=n|pn	-	P:=(이)나	m	own	パンかりんご → 빵이나 사과
 case.mo.aru	N5-07	{NP} [kase=mo] [aux.aru.cop]	-	-	P:=도 V:있다	m	own	時計もある (ある read as the copula's) → 시계도 있다
+case.de.pron	N5-16	{NP} [kase=de]	NP.field=pronoun NP.cls=@entity NP.cls!=@place	-	P:instr	m	own	これでいい → 이걸로 좋다
+case.de.sorede	N5-41	其れ [kase=de]	prev.pos=absent|sym	-	Adv:그래서	m	own	それで、話は → 그래서, 이야기는
+case.de.time	N5-16	{N:@time} [kase=de]	-	-	P:instr	m	own	今日で終わり → 오늘로 끝
