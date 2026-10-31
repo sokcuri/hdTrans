@@ -1,0 +1,323 @@
+#! repair-cases
+# Cases of ja/repair.tsv: ja is the input line, repaired the text the analyzer must give back (the same text
+# for keep). src: real (a short real excerpt), inv (real text with invented noise, or an invented shape).
+id	kind	ja	repaired	src
+rp.kata-fold	fix	筧クん」	筧くん」	inv
+rp.kata-fold	fix	「白崎、待テっ」	「白崎、待てっ」	inv
+rp.kata-fold	fix	「友達ニなってよ」	「友達になってよ」	inv
+rp.kata-fold	fix	千里の気持チは…	千里の気持ちは…	inv
+rp.kata-fold	keep	とりあえず、バカなことを考える	とりあえず、バカなことを考える	real
+rp.kata-fold	keep	「何年経っても陰キャっすねぇ」	「何年経っても陰キャっすねぇ」	real
+rp.kata-fold	keep	ロシア語でデレる隣の席	ロシア語でデレる隣の席	real
+rp.kata-fold	keep	「ド変態って……」	「ド変態って……」	real
+rp.kata-fold	keep	その時、ヘリからタナトスさんの声が響いた。	その時、ヘリからタナトスさんの声が響いた。	real
+rp.small-big	fix	鬱陶しい羽虫が落ちてくるツス！	鬱陶しい羽虫が落ちてくるッス！	inv
+rp.small-big	fix	ギザが不機嫌そうに唸つた。	ギザが不機嫌そうに唸った。	inv
+rp.small-big	fix	それとも、番号が揃つた札束？	それとも、番号が揃った札束？	inv
+rp.small-big	fix	なぜか居心地の悪さを感じて、その場を立ち去つた。	なぜか居心地の悪さを感じて、その場を立ち去った。	inv
+rp.small-big	keep	「考えてみりゃもう１０月だ」	「考えてみりゃもう１０月だ」	real
+rp.small-big	keep	ぷちゅり、という感覚	ぷちゅり、という感覚	real
+rp.elong	fix	指輪の男が腕時計に〜目をやる。	指輪の男が腕時計に目をやる。	inv
+rp.elong	fix	一瞬、見覚えのあっる姿が視界に入った。	一瞬、見覚えのある姿が視界に入った。	inv
+rp.elong	fix	「あったっりまえでしょう？	「あったりまえでしょう？	inv
+rp.elong	fix	じっゃ、ユメ、続き頼む」	じゃ、ユメ、続き頼む」	inv
+rp.elong	keep	「だーれだ！」	「だーれだ！」	real
+rp.elong	keep	「ちがーう！」	「ちがーう！」	real
+rp.elong	keep	「やるやる、ちょーやりたい！」	「やるやる、ちょーやりたい！」	real
+rp.elong	keep	せ～の…。	せ～の…。	real
+rp.elong	keep	「ぐあッッ！！？」	「ぐあッッ！！？」	real
+rp.stutter	fix	指輪輪輪の男が腕時計に目をやる。	指輪の男が腕時計に目をやる。	inv
+rp.stutter	fix	「マサキたちちちがまとめた対抗組織に関する資料か…	「マサキたちがまとめた対抗組織に関する資料か…	inv
+rp.stutter	fix	「謝るだけの理由はあるんだし、、、許せるんなら許してあげれば？	「謝るだけの理由はあるんだし、許せるんなら許してあげれば？	inv
+rp.stutter	fix	「わたしのこと、心配してくれたんだだだよね」	「わたしのこと、心配してくれたんだよね」	inv
+rp.stutter	keep	「「あ」」	「「あ」」	real
+rp.stutter	keep	「す、すすすすすすみませーん！」	「す、すすすすすすみませーん！」	real
+rp.stutter	keep	「いたたたたた！」	「いたたたたた！」	real
+rp.stutter	keep	「キャハハハ、いつまでよけていられるかな～」	「キャハハハ、いつまでよけていられるかな～」	real
+rp.stutter	keep	「グルルルル…………」	「グルルルル…………」	real
+rp.space	fix	指輪の男が腕時計に目をやる 。	指輪の男が腕時計に目をやる。	inv
+rp.space	fix	「マサキたちがまとめた対抗組織 に関する資料か…	「マサキたちがまとめた対抗組織に関する資料か…	inv
+rp.space	fix	森下さんはどう ？	森下さんはどう？	inv
+rp.space	fix	ダメだと 、思って…	ダメだと、思って…	inv
+rp.space	keep	私たちのそばに いてくださった	私たちのそばに いてくださった	real
+rp.space	keep	はい はい	はい はい	real
+rp.space	keep	万一 お納めできぬとなれば	万一 お納めできぬとなれば	real
+rp.space	keep	あ～ もう ちょっと…｡	あ～ もう ちょっと…｡	real
+rp.space	keep	ああ でも分かるなあ	ああ でも分かるなあ	real
+rp.dakuten	fix	「ふーん、ずいふん熱心ねぇ」	「ふーん、ずいぶん熱心ねぇ」	inv
+rp.dakuten	keep	俺は架子に腕を絡められたまま	俺は架子に腕を絡められたまま	real
+rp.dakuten	keep	「関西ならではの機能的なメイド服」	「関西ならではの機能的なメイド服」	real
+rp.dakuten	keep	「ぐふぉふぉふぉふぉ」	「ぐふぉふぉふぉふぉ」	real
+rp.dakuten	keep	「見たとおりのヘンなやつなんだよね」	「見たとおりのヘンなやつなんだよね」	real
+rp.swap	fix	指輪の男が腕時計に目をるや。	指輪の男が腕時計に目をやる。	inv
+rp.swap	fix	「クソ、このまま逃がしたら俺らの沽券に関わぞる」	「クソ、このまま逃がしたら俺らの沽券に関わるぞ」	inv
+rp.swap	fix	俺たちもその一部なんろだうが。	俺たちもその一部なんだろうが。	inv
+rp.swap	fix	「頼ぞむ」	「頼むぞ」	inv
+rp.swap	keep	姉、トゥーリがいること。	姉、トゥーリがいること。	real
+rp.swap	keep	ぬあ～っ！	ぬあ～っ！	real
+rp.edit1	keep	時に[ぎまん,1]欺瞞し	時に[ぎまん,1]欺瞞し	real
+rp.edit1	keep	びゅるっ！　びゅくぅ……っ！	びゅるっ！　びゅくぅ……っ！	real
+rp.edit1	keep	閃のように重要な事柄	閃のように重要な事柄	real
+rp.bad.unknown	fix	「ケートク生に授業サっボらせて、場所取りさせてたのよ…	「ケートク生に授業サボらせて、場所取りさせてたのよ…	inv
+rp.bad.unknown	fix	「オスーーロの思想を受け継いでいるんじゃないかな」	「オスロの思想を受け継いでいるんじゃないかな」	inv
+rp.bad.unknown	fix	足裏マッサーーージか。	足裏マッサージか。	inv
+rp.bad.unknown	fix	ギーーザが不機嫌そうに唸った。	ギザが不機嫌そうに唸った。	inv
+rp.bad.unknown	keep	俺の股間も、もうガッチガチに固くなっていた。	俺の股間も、もうガッチガチに固くなっていた。	real
+rp.bad.unknown	keep	「全然効かねーーーーぞッッッ！	「全然効かねーーーーぞッッッ！	real
+rp.bad.unknown-mark	fix	クっリスマスイブ――	クリスマスイブ――	inv
+rp.bad.unknown-mark	fix	「じゃあ、俺も放置すっるに１票」	「じゃあ、俺も放置するに１票」	inv
+rp.bad.unknown-mark	fix	話は、その日の夜１１時までーー続いた。	話は、その日の夜１１時まで続いた。	inv
+rp.bad.unknown-mark	fix	１年生が〜高峰をちらりと見てからうなずいた。	１年生が高峰をちらりと見てからうなずいた。	inv
+rp.bad.unknown-mark	keep	「ＰｅＴＳを使いこなすには、それなりの力量が必要よ？	「ＰｅＴＳを使いこなすには、それなりの力量が必要よ？	real
+rp.bad.unknown-mark	keep	――危ない危ない。	――危ない危ない。	real
+rp.bad.mixed	fix	「前衛と後衛のバランっスとかを考えると…	「前衛と後衛のバランスとかを考えると…	inv
+rp.bad.mixed	keep	「当たり前じゃないっスか！	「当たり前じゃないっスか！	real
+rp.bad.mixed	keep	「いや、ジャーナリズム精神とかそういうのはないっス」	「いや、ジャーナリズム精神とかそういうのはないっス」	real
+rp.bad.kana-variant	fix	「前衛と後衛のバランっスとかを考えると…	「前衛と後衛のバランスとかを考えると…	inv
+rp.bad.kana-variant	fix	鬱陶しい羽虫が落ちてくるツス！	鬱陶しい羽虫が落ちてくるッス！	inv
+rp.bad.kana-variant	fix	慎重に、パジャ マの上着をまくり上げていく。	慎重に、パジャマの上着をまくり上げていく。	inv
+rp.bad.kana-variant	fix	「これからマ ッサージをするというのにそんなに凝り固まってどうする」	「これからマッサージをするというのにそんなに凝り固まってどうする」	inv
+rp.bad.kana-variant	keep	「なんばしよっとか、このバカチンが！	「なんばしよっとか、このバカチンが！	real
+rp.bad.kana-variant	keep	「オージマに、まかせる」	「オージマに、まかせる」	real
+rp.bad.kana-function	fix	「ケートク生に授業サっボらせて、場所取りさせてたのよ…	「ケートク生に授業サボらせて、場所取りさせてたのよ…	inv
+rp.bad.kana-function	fix	全部モニ〜タリングしてたんだろう。	全部モニタリングしてたんだろう。	inv
+rp.bad.kana-function	fix	「前衛と後衛のバランっスとかを考えると…	「前衛と後衛のバランスとかを考えると…	inv
+rp.bad.kana-function	fix	「友達ニなってよ」	「友達になってよ」	inv
+rp.bad.kana-function	keep	「アカン、セリカ以上にど下手や。	「アカン、セリカ以上にど下手や。	real
+rp.bad.kana-function	keep	「久慈ヶ嶺学園でいろいろ学んだけど、やっぱりまだまだだなぁ…	「久慈ヶ嶺学園でいろいろ学んだけど、やっぱりまだまだだなぁ…	real
+rp.bad.kana-letter	fix	「ケートク生に授業サっボらせて、場所取りさせてたのよ…	「ケートク生に授業サボらせて、場所取りさせてたのよ…	inv
+rp.bad.kana-letter	fix	全部モニ〜タリングしてたんだろう。	全部モニタリングしてたんだろう。	inv
+rp.bad.kana-letter	fix	にもかかわらず過剰に努力をしているのなら、桜庭のモ〜チベーションは何なんだ？	にもかかわらず過剰に努力をしているのなら、桜庭のモチベーションは何なんだ？	inv
+rp.bad.kana-letter	fix	教師では届かないレ〜ベルに達しているのだ。	教師では届かないレベルに達しているのだ。	inv
+rp.bad.kana-letter	keep	「久慈ヶ嶺学園でいろいろ学んだけど、やっぱりまだまだだなぁ…	「久慈ヶ嶺学園でいろいろ学んだけど、やっぱりまだまだだなぁ…	real
+rp.bad.kana-letter	keep	内ヶ島兵庫頭氏理　　　　　本願寺に与した飛騨国の国人領主	内ヶ島兵庫頭氏理　　　　　本願寺に与した飛騨国の国人領主	real
+rp.bad.noun-sokuon	fix	「どっもです」	「どもです」	inv
+rp.bad.noun-sokuon	keep	「全然効かねーーーーぞッッッ！	「全然効かねーーーーぞッッッ！	real
+rp.bad.noun-sokuon	keep	「むしゃのこーじっ！	「むしゃのこーじっ！	real
+rp.bad.kana-noun	fix	立 ち上がりながら尋ねる。	立ち上がりながら尋ねる。	inv
+rp.bad.kana-noun	fix	じゃ、ユメ、続き頼 む」	じゃ、ユメ、続き頼む」	inv
+rp.bad.kana-noun	fix	購買のレジが激混みで遅 くなってしまった。	購買のレジが激混みで遅くなってしまった。	inv
+rp.bad.kana-noun	fix	いきな りはしごを外された。	いきなりはしごを外された。	inv
+rp.bad.kana-noun	keep	「ほんどに…	「ほんどに…	real
+rp.bad.kana-noun	keep	[こが,1]古賀[けいすけ,1]恵祐。	[こが,1]古賀[けいすけ,1]恵祐。	real
+rp.bad.classical-su	fix	「どもで す」	「どもです」	inv
+rp.bad.classical-su	fix	でも、筧さんに会えて良かったで す」	でも、筧さんに会えて良かったです」	inv
+rp.bad.classical-su	fix	「だ、男女が密着すすするのは恥ずかしいでしょ…	「だ、男女が密着するのは恥ずかしいでしょ…	inv
+rp.bad.classical-su	fix	「はい、ありままません。	「はい、ありません。	inv
+rp.bad.classical-su	keep	欠点を克服すべく、俺たちは練習に励んでいた。	欠点を克服すべく、俺たちは練習に励んでいた。	real
+rp.bad.classical-su	keep	それがキミの、今すべき仕事です」	それがキミの、今すべき仕事です」	real
+rp.bad.fold-edge-l	keep	ヘリからタナトスさんの声	ヘリからタナトスさんの声	real
+rp.bad.fold-edge-r	keep	とりあえず、バカなことを	とりあえず、バカなことを	real
+rp.bad.mark	fix	指輪の男が腕時計に〜目をやる。	指輪の男が腕時計に目をやる。	inv
+rp.bad.mark	fix	「マスターは〜言いました。	「マスターは言いました。	inv
+rp.bad.mark	fix	「他に〜誰かついてる？	「他に誰かついてる？	inv
+rp.bad.mark	fix	『焼肉の〜店　牛と私』	『焼肉の店　牛と私』	inv
+rp.bad.mark	keep	お～竹が揺れている｡	お～竹が揺れている｡	real
+rp.bad.mark	keep	風邪っぴきの周は抵抗する	風邪っぴきの周は抵抗する	real
+rp.bad.elong-mid	fix	普通に入ってきてーーるつもりだけど」	普通に入ってきてるつもりだけど」	inv
+rp.bad.elong-mid	keep	「温かいものをお求めの方は、こちらでお願いしまーす！	「温かいものをお求めの方は、こちらでお願いしまーす！	real
+rp.bad.elong-mid	keep	「それでは２名様禁煙席ご案内いたしまーす！	「それでは２名様禁煙席ご案内いたしまーす！	real
+rp.bad.elong-infl	keep	「すごーく、いい匂い」	「すごーく、いい匂い」	inv
+rp.bad.elong-infl	keep	「しないでーー」	「しないでーー」	inv
+rp.bad.sokuon	fix	一瞬、見覚えのあっる姿が視界に入った。	一瞬、見覚えのある姿が視界に入った。	inv
+rp.bad.sokuon	fix	じっゃ、ユメ、続き頼む」	じゃ、ユメ、続き頼む」	inv
+rp.bad.sokuon	fix	「あきらっめたら、そこで成長終了なんだよ！	「あきらめたら、そこで成長終了なんだよ！	inv
+rp.bad.sokuon	fix	「いいえ、こちらこそしつこく電話して申し訳ございませっんでした、ムシジマくん」	「いいえ、こちらこそしつこく電話して申し訳ございませんでした、ムシジマくん」	inv
+rp.bad.sokuon	keep	かっこつけるわけじゃないんだが」	かっこつけるわけじゃないんだが」	real
+rp.bad.sokuon	keep	結婚して19年たってる筈で、女房も今はかなり歳を食っている。	結婚して19年たってる筈で、女房も今はかなり歳を食っている。	real
+rp.bad.elong-end	fix	外せば、大好きな先生との絆が断ち切ら〜れてしまう。	外せば、大好きな先生との絆が断ち切られてしまう。	inv
+rp.bad.elong-end	keep	「全然効かねーーーーぞッッッ！	「全然効かねーーーーぞッッッ！	real
+rp.bad.elong-end	keep	「そーなんですか、惜しかったですねぇ」	「そーなんですか、惜しかったですねぇ」	real
+rp.bad.final-mid	fix	ち ょっと間違えば、不良のたまり場と化すような環境だってのに。	ちょっと間違えば、不良のたまり場と化すような環境だってのに。	inv
+rp.bad.final-mid	fix	「自分の知らないところで話が進んでいたか らだろうな」	「自分の知らないところで話が進んでいたからだろうな」	inv
+rp.bad.final-mid	fix	これ、よ かったら」	これ、よかったら」	inv
+rp.bad.final-mid	fix	「いいもなにも、青海さんともうちょっと話したいなーって思ったのは 、俺の方だから」	「いいもなにも、青海さんともうちょっと話したいなーって思ったのは、俺の方だから」	inv
+rp.bad.final-mid	keep	架子が言うならそうなんだなって」	架子が言うならそうなんだなって」	real
+rp.bad.final-mid	keep	暇潰しにはいいかなって…	暇潰しにはいいかなって…	real
+rp.bad.end-then-word	fix	白髪の教師が、何かにゃむにゃむ言っていっる。	白髪の教師が、何かにゃむにゃむ言っている。	inv
+rp.bad.end-then-word	fix	「盛り上がってっるじゃないか」	「盛り上がってるじゃないか」	inv
+rp.bad.end-then-word	fix	「最近いろいろっやってるみたいですね」	「最近いろいろやってるみたいですね」	inv
+rp.bad.end-then-word	fix	「ふーん、ずいふん熱心ねぇ」	「ふーん、ずいぶん熱心ねぇ」	inv
+rp.bad.end-then-word	keep	「そしたらそのお礼が届いてたみたい」	「そしたらそのお礼が届いてたみたい」	real
+rp.bad.end-then-word	keep	「関係者だって言っているじゃない！	「関係者だって言っているじゃない！	real
+rp.bad.intj-after-word	fix	「いいえ、こちらこそしつこく電話して申し訳ございませっんでした、ムシジマくん」	「いいえ、こちらこそしつこく電話して申し訳ございませんでした、ムシジマくん」	inv
+rp.bad.intj-after-word	fix	「そうはいきっません」	「そうはいきません」	inv
+rp.bad.intj-after-word	fix	ああ、そ ういえば、あいつはケートク生だっけ」	ああ、そういえば、あいつはケートク生だっけ」	inv
+rp.bad.intj-after-word	fix	みんなは『強制されているわわわけじゃない』	みんなは『強制されているわけじゃない』	inv
+rp.bad.intj-after-word	keep	「望月さん、今までありがとうございました」	「望月さん、今までありがとうございました」	real
+rp.bad.intj-after-word	keep	あおくんと幼馴染の七瀬です」	あおくんと幼馴染の七瀬です」	real
+rp.bad.intj-letter	fix	「いいえ、こちらこそしつこく電話して申し訳ございませっんでした、ムシジマくん」	「いいえ、こちらこそしつこく電話して申し訳ございませんでした、ムシジマくん」	inv
+rp.bad.intj-letter	fix	「そうしてお いた方がいいな。	「そうしておいた方がいいな。	inv
+rp.bad.intj-letter	fix	ゆっくりと奥深くま で進み、そして、静かに腰を引いていく。	ゆっくりと奥深くまで進み、そして、静かに腰を引いていく。	inv
+rp.bad.intj-letter	fix	今日はきちんとやりま すから」	今日はきちんとやりますから」	inv
+rp.bad.intj-letter	keep	「でもま、何とか耐えてみますか」	「でもま、何とか耐えてみますか」	real
+rp.bad.intj-letter	keep	「かしこま」	「かしこま」	real
+rp.bad.elong-particle	fix	「あんたいつまで〜寝てるの？	「あんたいつまで寝てるの？	inv
+rp.bad.elong-particle	fix	寮からここまで、どんな道筋で〜帰ってきたのかも覚えていない。	寮からここまで、どんな道筋で帰ってきたのかも覚えていない。	inv
+rp.bad.elong-particle	fix	「本当に一人で〜全部片付けちまった…	「本当に一人で全部片付けちまった…	inv
+rp.bad.elong-particle	fix	話は、その日の夜１１時までーー続いた。	話は、その日の夜１１時まで続いた。	inv
+rp.bad.elong-particle	keep	「そのー、なんというか」	「そのー、なんというか」	inv
+rp.bad.ta	fix	ギザが不機嫌そうに唸つた。	ギザが不機嫌そうに唸った。	inv
+rp.bad.ta	fix	なぜか居心地の悪さを感じて、その場を立ち去つた。	なぜか居心地の悪さを感じて、その場を立ち去った。	inv
+rp.bad.ta	fix	新たに、生クリームで乳首を覆つた。	新たに、生クリームで乳首を覆った。	inv
+rp.bad.ta	fix	うわずつた声が聞こえた。	うわずった声が聞こえた。	inv
+rp.bad.ta	keep	「せ、先輩～、どうしたんですかぁ？	「せ、先輩～、どうしたんですかぁ？	real
+rp.bad.ta	keep	「どうした？	「どうした？	real
+rp.bad.te	fix	「はい、戻つて来ました」	「はい、戻って来ました」	inv
+rp.bad.te	fix	「鈴木さんって呼び方、変 えてもらえないかな？	「鈴木さんって呼び方、変えてもらえないかな？	inv
+rp.bad.te	fix	行かないで …	行かないで…	inv
+rp.bad.te	fix	竹刀が、うなりを上 げて目の前を通り過ぎた。	竹刀が、うなりを上げて目の前を通り過ぎた。	inv
+rp.bad.te	keep	見ないで…	見ないで…	real
+rp.bad.te	keep	あまり近づかないでほしいです」	あまり近づかないでほしいです」	real
+rp.bad.masu	fix	「私が入った次の日に辞めるとか、当てつけみたいで困りっます…	「私が入った次の日に辞めるとか、当てつけみたいで困ります…	inv
+rp.bad.masu	fix	「とても素晴らしいアイデアだと思いっます」	「とても素晴らしいアイデアだと思います」	inv
+rp.bad.masu	fix	「はい、あ りません。	「はい、ありません。	inv
+rp.bad.masu	fix	「頑張りままましょうっ」	「頑張りましょうっ」	inv
+rp.bad.masu	keep	「あの、わたしはどうしましょう？	「あの、わたしはどうしましょう？	real
+rp.bad.masu	keep	いたということになりますな いいえ あの鐘楼で会ったのは	いたということになりますな いいえ あの鐘楼で会ったのは	real
+rp.bad.tai	fix	ほら、、、つながり、たいし…	ほら、つながり、たいし…	inv
+rp.bad.tai	keep	「ずっと、こうしたかった…	「ずっと、こうしたかった…	real
+rp.bad.tai	keep	「混ぜたやつつまみたーい」	「混ぜたやつつまみたーい」	real
+rp.bad.nai	fix	「普通のカレーは、気取ってなななくていいですよね、あむっ」	「普通のカレーは、気取ってなくていいですよね、あむっ」	inv
+rp.bad.nai	fix	「嫌じゃななないけど…	「嫌じゃないけど…	inv
+rp.bad.nai	fix	「やはりＳＯＲＤの目は誤誤誤魔化せないわね」	「やはりＳＯＲＤの目は誤魔化せないわね」	inv
+rp.bad.nai	fix	構わわわず、２度３度と凪を突き上げる。	構わず、２度３度と凪を突き上げる。	inv
+rp.bad.nai	keep	「大丈ばない」	「大丈ばない」	real
+rp.bad.nai	keep	なんで３０分もかかるのよ、ぶっちゃけ雑魚くない！	なんで３０分もかかるのよ、ぶっちゃけ雑魚くない！	real
+rp.bad.reru	fix	それれれから玉藻の左手が、机の上で動く。	それから玉藻の左手が、机の上で動く。	inv
+rp.bad.reru	fix	なにせ師匠への愛がありったけ込めららられてるからね～～」	なにせ師匠への愛がありったけ込められてるからね～～」	inv
+rp.bad.reru	fix	だけど、これれれは必要なウソ…	だけど、これは必要なウソ…	inv
+rp.bad.reru	fix	それれれか、裏ルートで手に入れるか」	それか、裏ルートで手に入れるか」	inv
+rp.bad.reru	keep	「れろ…	「れろ…	real
+rp.bad.reru	keep	はぁっ、れろ…	はぁっ、れろ…	real
+rp.bad.ba	fix	ち ょっと間違えば、不良のたまり場と化すような環境だってのに。	ちょっと間違えば、不良のたまり場と化すような環境だってのに。	inv
+rp.bad.ba	fix	ああ、そ ういえば、あいつはケートク生だっけ」	ああ、そういえば、あいつはケートク生だっけ」	inv
+rp.bad.ba	keep	「動くなってば」	「動くなってば」	real
+rp.bad.ba	keep	「そんなことないってば！	「そんなことないってば！	real
+rp.bad.juntai	fix	「前衛と後衛のバランっスとかを考えると…	「前衛と後衛のバランスとかを考えると…	inv
+rp.bad.juntai	fix	「結果、聞いてるっんでしょ？	「結果、聞いてるんでしょ？	inv
+rp.bad.juntai	fix	「「「なんでこんなのが合格なのよ…	「なんでこんなのが合格なのよ…	inv
+rp.bad.juntai	fix	そののの隙に――	その隙に――	inv
+rp.bad.juntai	keep	「こんなのずるいよ。	「こんなのずるいよ。	real
+rp.bad.juntai	keep	あたし、こんなの耐えられないよ…	あたし、こんなの耐えられないよ…	real
+rp.bad.onbin	fix	皐月の背中をポンポンとっ叩いた後、先生はこっちを見る。	皐月の背中をポンポンと叩いた後、先生はこっちを見る。	inv
+rp.bad.onbin	fix	佳奈すけのこういうところ、好きだっな。	佳奈すけのこういうところ、好きだな。	inv
+rp.bad.onbin	fix	俺は何とっ返していた？	俺は何と返していた？	inv
+rp.bad.onbin	fix	「なんか、顔が火照っちちちゃってさ」	「なんか、顔が火照っちゃってさ」	inv
+rp.bad.onbin	keep	「なら、いっちゃん強い子のお墨付きをもらえばいいんじゃね？	「なら、いっちゃん強い子のお墨付きをもらえばいいんじゃね？	real
+rp.bad.onbin	keep	（ナナ子）まっちゃん　早く逃げよう！	（ナナ子）まっちゃん　早く逃げよう！	real
+rp.bad.mizen	fix	「最近は、本読まっなくて平気なの？	「最近は、本読まなくて平気なの？	inv
+rp.bad.mizen	fix	だからこそ桜庭は、生徒会との打ち合わせに白崎をついて行かかかせたのだ。	だからこそ桜庭は、生徒会との打ち合わせに白崎をついて行かせたのだ。	inv
+rp.bad.mizen	fix	「誰か一人に苦労さささせてまで、私、図書部を守りたいとは思いません」	「誰か一人に苦労させてまで、私、図書部を守りたいとは思いません」	inv
+rp.bad.mizen	fix	どこか達観した笑顔に返す言葉もなく、俺は肩をすくめるだけで応じたたた。	どこか達観した笑顔に返す言葉もなく、俺は肩をすくめるだけで応じた。	inv
+rp.bad.mizen	keep	「せ、先輩～、どうしたんですかぁ？	「せ、先輩～、どうしたんですかぁ？	real
+rp.bad.mizen	keep	「だから安心していいわよ」	「だから安心していいわよ」	real
+rp.bad.katei	fix	「ははは、だけどさ、誰でも作れれれるのって、レシピとして非常に優れてると思うよ」	「ははは、だけどさ、誰でも作れるのって、レシピとして非常に優れてると思うよ」	inv
+rp.bad.katei	keep	「それができりゃあ苦労しねえよ！	「それができりゃあ苦労しねえよ！	real
+rp.bad.katei	keep	そんなの 見りゃ分かるわよフンッ	そんなの 見りゃ分かるわよフンッ	real
+rp.bad.aux-host	fix	白髪の教師が、何かにゃむにゃむ言っていっる。	白髪の教師が、何かにゃむにゃむ言っている。	inv
+rp.bad.aux-host	fix	「ケートク生に授業サっボらせて、場所取りさせてたのよ…	「ケートク生に授業サボらせて、場所取りさせてたのよ…	inv
+rp.bad.aux-host	fix	「私が入った次の日に辞めるとか、当てつけみたいで困りっます…	「私が入った次の日に辞めるとか、当てつけみたいで困ります…	inv
+rp.bad.aux-host	fix	「とても素晴らしいアイデアだと思いっます」	「とても素晴らしいアイデアだと思います」	inv
+rp.bad.aux-host	keep	「せ、先輩～、どうしたんですかぁ？	「せ、先輩～、どうしたんですかぁ？	real
+rp.bad.aux-host	keep	「どうした？	「どうした？	real
+rp.bad.aux-after-particle	fix	うわずつた声が聞こえた。	うわずった声が聞こえた。	inv
+rp.bad.aux-after-particle	fix	しかし、青海さんは一服することなく次の作業に取りか かる。	しかし、青海さんは一服することなく次の作業に取りかかる。	inv
+rp.bad.aux-after-particle	fix	「普通のカレーは、気取ってなななくていいですよね、あむっ」	「普通のカレーは、気取ってなくていいですよね、あむっ」	inv
+rp.bad.aux-after-particle	fix	詳しい事情はわからないけど、みんなそれぞぞぞれ満足しているように見えた。	詳しい事情はわからないけど、みんなそれぞれ満足しているように見えた。	inv
+rp.bad.aux-after-particle	keep	「チクショウ、どうなってやがる！	「チクショウ、どうなってやがる！	real
+rp.bad.aux-after-particle	keep	皆の思いが具現化したかのごとく、森下さんが部室に現れた。	皆の思いが具現化したかのごとく、森下さんが部室に現れた。	real
+rp.bad.case-after-case	fix	白くてすべすべとした太も もを撫でた。	白くてすべすべとした太ももを撫でた。	inv
+rp.bad.case-after-case	fix	「御園、聞きたいこ とがある」	「御園、聞きたいことがある」	inv
+rp.bad.case-after-case	fix	自分の目の前にキーホルダーをををかざす。	自分の目の前にキーホルダーをかざす。	inv
+rp.bad.case-after-case	fix	「まだ、、、これからが長いわよ」	「まだ、これからが長いわよ」	inv
+rp.bad.case-after-case	keep	だれもが、気持ちは部室にあった。	だれもが、気持ちは部室にあった。	real
+rp.bad.case-after-case	keep	「よし、ここからが本番だな」	「よし、ここからが本番だな」	real
+rp.bad.case-after-topic	fix	白くてすべすべとした太も もを撫でた。	白くてすべすべとした太ももを撫でた。	inv
+rp.bad.case-after-topic	fix	「申し訳ないが許可することはで きない」	「申し訳ないが許可することはできない」	inv
+rp.bad.case-after-topic	keep	だれもが、気持ちは部室にあった。	だれもが、気持ちは部室にあった。	real
+rp.bad.case-after-topic	keep	それこそがこの事態が巻き起こった発端とも言える。	それこそがこの事態が巻き起こった発端とも言える。	real
+rp.bad.case-after-pred	fix	「じゃあ、俺も放置すっるに１票」	「じゃあ、俺も放置するに１票」	inv
+rp.bad.case-after-pred	fix	可愛いよりちょっとヘンな のが好き	可愛いよりちょっとヘンなのが好き	inv
+rp.bad.case-after-pred	fix	それれれから玉藻の左手が、机の上で動く。	それから玉藻の左手が、机の上で動く。	inv
+rp.bad.case-after-pred	fix	むふふ、こいつは面白いぜ、みたいな顔で書いたに違いななない。	むふふ、こいつは面白いぜ、みたいな顔で書いたに違いない。	inv
+rp.bad.case-after-pred	keep	悪いが見てきてもらってもいいか？	悪いが見てきてもらってもいいか？	real
+rp.bad.case-after-pred	keep	「懐かしいにもほどがあるって…	「懐かしいにもほどがあるって…	real
+rp.bad.range-l	keep	３〜５人で来てください	３〜５人で来てください	inv
+rp.bad.range-r	keep	東京〜大阪の間	東京〜大阪の間	inv
+rp.bad.wa-after-case	fix	「さて、今週末で学園ははは夏休みに入る」	「さて、今週末で学園は夏休みに入る」	inv
+rp.bad.wa-after-case	fix	道具ははは使ってこそ意味があるからな」	道具は使ってこそ意味があるからな」	inv
+rp.bad.wa-after-case	fix	「話はははね」	「話はね」	inv
+rp.bad.wa-after-case	fix	彼女の迷いのない表情ははは尊敬に値する。	彼女の迷いのない表情は尊敬に値する。	inv
+rp.bad.wa-after-case	keep	これがいいと思う	これがいいと思う	inv
+rp.bad.same-particle	fix	「なんかかか、急に動かなくなったんだけど」	「なんか、急に動かなくなったんだけど」	inv
+rp.bad.same-particle	fix	「勝手に解説入れんなよよよ」	「勝手に解説入れんなよ」	inv
+rp.bad.same-particle	fix	立ち上がりななながら尋ねる。	立ち上がりながら尋ねる。	inv
+rp.bad.same-particle	fix	「でも、おかしいななな」	「でも、おかしいな」	inv
+rp.bad.same-particle	keep	「べつの漫画で気を紛らわせとくとかかなぁ」	「べつの漫画で気を紛らわせとくとかかなぁ」	real
+rp.bad.same-particle	keep	ななな なんで そっちに!	ななな なんで そっちに!	real
+rp.bad.triple	fix	指輪輪輪の男が腕時計に目をやる。	指輪の男が腕時計に目をやる。	inv
+rp.bad.triple	fix	「マサキたちちちがまとめた対抗組織に関する資料か…	「マサキたちがまとめた対抗組織に関する資料か…	inv
+rp.bad.triple	fix	「わたしのこと、心配してくれたんだだだよね」	「わたしのこと、心配してくれたんだよね」	inv
+rp.bad.triple	fix	「なんかかか、急に動かなくなったんだけど」	「なんか、急に動かなくなったんだけど」	inv
+rp.bad.triple	keep	「うぬぬぬ……ぬわわぁぁぁっ！？」	「うぬぬぬ……ぬわわぁぁぁっ！？」	real
+rp.bad.triple	keep	「ぶっははは！」	「ぶっははは！」	real
+rp.bad.triple	keep	「ままま。で、そういうわけ」	「ままま。で、そういうわけ」	real
+rp.bad.sokuon-letter	fix	一瞬、見覚えのあっる姿が視界に入った。	一瞬、見覚えのある姿が視界に入った。	inv
+rp.bad.sokuon-letter	fix	「あったっりまえでしょう？	「あったりまえでしょう？	inv
+rp.bad.sokuon-letter	fix	じっゃ、ユメ、続き頼む」	じゃ、ユメ、続き頼む」	inv
+rp.bad.sokuon-letter	fix	「あきらっめたら、そこで成長終了なんだよ！	「あきらめたら、そこで成長終了なんだよ！	inv
+rp.bad.sokuon-letter	keep	ハハハハハッえっ？	ハハハハハッえっ？	real
+rp.bad.mark-repeat	fix	「謝るだけの理由はあるんだし、、、許せるんなら許してあげれば？	「謝るだけの理由はあるんだし、許せるんなら許してあげれば？	inv
+rp.bad.mark-repeat	fix	というか、、、できない。	というか、できない。	inv
+rp.bad.mark-repeat	fix	「「「なんでこんなのが合格なのよ…	「なんでこんなのが合格なのよ…	inv
+rp.bad.mark-repeat	fix	「「「ひゃんっ…	「ひゃんっ…	inv
+rp.bad.mark-repeat	keep	「「「キャーーーーー」」」	「「「キャーーーーー」」」	real
+rp.bad.copula	fix	「でも“したいこと”は一つででである必要はないですから」	「でも“したいこと”は一つである必要はないですから」	inv
+rp.bad.copula	keep	勇気を出せだの、頑張れだのと無責任な言葉を投げつけた。	勇気を出せだの、頑張れだのと無責任な言葉を投げつけた。	real
+rp.bad.copula	keep	「いや、なんでいちいちみんなフルネーム呼んでんの」	「いや、なんでいちいちみんなフルネーム呼んでんの」	real
+rp.bad.copula-twice	fix	「でも“したいこと”は一つででである必要はないですから」	「でも“したいこと”は一つである必要はないですから」	inv
+rp.bad.copula-twice	fix	佳奈すけのこういうところ、好きだだだな。	佳奈すけのこういうところ、好きだな。	inv
+rp.bad.copula-twice	keep	まるで、その答えが不服であったかのようにだ。	まるで、その答えが不服であったかのようにだ。	real
+rp.bad.suffix	fix	「じゃあ、遠慮なく頼らせてもら うわ！	「じゃあ、遠慮なく頼らせてもらうわ！	inv
+rp.bad.suffix	fix	ファンサイトもここだじけゃない」	ファンサイトもここだけじゃない」	inv
+rp.bad.suffix	keep	どうして架子は、現実にいてくれないんだ？	どうして架子は、現実にいてくれないんだ？	real
+rp.bad.prefix	fix	クリスマスイ ブ――	クリスマスイブ――	inv
+rp.bad.prefix	fix	「 お…	「お…	inv
+rp.bad.prefix	fix	「頼ムぞ」	「頼むぞ」	inv
+rp.bad.prefix	keep	「あ、蒼先輩おはざーす」	「あ、蒼先輩おはざーす」	real
+rp.bad.prefix	keep	「美絵瑠おはよ。	「美絵瑠おはよ。	real
+rp.bad.space-in-word	fix	「勝手に解 説入れんなよ」	「勝手に解説入れんなよ」	inv
+rp.bad.space-in-word	fix	「じゃ、そ んなわけで」	「じゃ、そんなわけで」	inv
+rp.bad.space-in-word	fix	「問題はどうやって知らせ るかだ」	「問題はどうやって知らせるかだ」	inv
+rp.bad.space-in-word	fix	立 ち上がりながら尋ねる。	立ち上がりながら尋ねる。	inv
+rp.bad.space-in-word	keep	言えよ そして名誉毀損について勉強しろ	言えよ そして名誉毀損について勉強しろ	real
+rp.bad.space-punct	fix	指輪の男が腕時計に目をやる 。	指輪の男が腕時計に目をやる。	inv
+rp.bad.space-punct	fix	森下さんはどう ？	森下さんはどう？	inv
+rp.bad.space-punct	fix	ダメだと 、思って…	ダメだと、思って…	inv
+rp.bad.space-punct	fix	「へぇ、見やすくまとめてあるな 」	「へぇ、見やすくまとめてあるな」	inv
+rp.bad.space-punct	keep	「え{k=-5.0}―――{/k} 」	「え{k=-5.0}―――{/k} 」	real
+rp.bad.space-open	fix	「 そうだね」	「そうだね」	inv
+rp.bad.space-open	fix	「 ええ、こちらこそ、ぜひよろしく」	「ええ、こちらこそ、ぜひよろしく」	inv
+rp.bad.space-open	fix	「 嫌いじゃないですよ。	「嫌いじゃないですよ。	inv
+rp.bad.space-open	fix	「 由美子もツンデレになりたいってこと！	「由美子もツンデレになりたいってこと！	inv
+rp.bad.space-open	keep	＊　＊ 　＊	＊　＊ 　＊	real
+rp.bad.space-dots	fix	寝れなくて …	寝れなくて…	inv
+rp.bad.space-dots	fix	「んっ、ちゅ、んっ、んっ、んんん …	「んっ、ちゅ、んっ、んっ、んんん…	inv
+rp.bad.space-dots	fix	行かないで …	行かないで…	inv
+rp.bad.space-dots	fix	「やれやれ、殺す前に心が完全に折れてしまったか …	「やれやれ、殺す前に心が完全に折れてしまったか…	inv
+rp.bad.space-dots	keep	「いいっ…… 」	「いいっ…… 」	inv
+rp.bad.space-same	fix	「… …いいんですか？」	「……いいんですか？」	inv
+rp.bad.space-same	keep	「……いいんですか？」	「……いいんですか？」	inv
+rp.bad.space-letter	fix	「マサキたちがまとめた対抗組織 に関する資料か…	「マサキたちがまとめた対抗組織に関する資料か…	inv
+rp.bad.space-letter	fix	「問題はどうやって知らせ るかだ」	「問題はどうやって知らせるかだ」	inv
+rp.bad.space-letter	fix	立 ち上がりながら尋ねる。	立ち上がりながら尋ねる。	inv
+rp.bad.space-letter	fix	「わ、私達 も、カップルに見えちゃったりするのかな…	「わ、私達も、カップルに見えちゃったりするのかな…	inv
+rp.bad.space-letter	keep	い　い…	い　い…	real
+rp.bad.space-letter	keep	これ かごに入れて｡	これ かごに入れて｡	real
+rp.bad.space-dep	fix	『焼肉の〜店　牛と私』	『焼肉の店　牛と私』	inv
+rp.bad.space-dep	fix	「マサキたちがまとめた対抗組織 に関する資料か…	「マサキたちがまとめた対抗組織に関する資料か…	inv
+rp.bad.space-dep	fix	「問題はどうやって知らせ るかだ」	「問題はどうやって知らせるかだ」	inv
+rp.bad.space-dep	fix	「わ、私達 も、カップルに見えちゃったりするのかな…	「わ、私達も、カップルに見えちゃったりするのかな…	inv
+rp.bad.space-dep	keep	(佐藤) 見事 壁クリアです｡	(佐藤) 見事 壁クリアです｡	real
+rp.bad.space-dep	keep	い　い…	い　い…	real

@@ -33,7 +33,7 @@
 # letter before and after: hira kata kanji mark (ー 〜) sym edge), space (1 when a space comes before the token).
 # same=surf: l and r have the same text. Until ja/conn.tsv lands, the bad.pair rows stand in for its
 # hard adjacency of POS and cForm. valid.tok and valid.pair rows judge readings the same way but never open
-# a span by themselves. A pair row that does not test r.space does not fire across a space.
+# a span by themselves; they carry keep cases only. A pair row that does not test r.space does not fire across a space.
 #
 # Parameter rows (kind param): lists the operations and checks read; the list is in `when`
 # (POS prefixes joined by |, or a string of letters).
@@ -63,6 +63,7 @@ rp.dakuten	REP-6	dakuten	2	-	-	m	own	とうしたんた → どうしたんだ; 
 rp.swap	REP-7	swap	3	minlen=4	-	m	own	どうたしんだ → どうしたんだ; らいし → らしい
 rp.edit1	REP-8	edit1	4	minlen=4	-	m	own	one kana off in a long kana word
 rp.bad.unknown	REP-9	bad.tok	-	t.arc=unk & t.script=hira|kata|kanji|jp|mixed|mark	-	m	own	no dictionary word in Japanese letters: デドアガ, ドーーア (digits and Latin are not judged)
+rp.bad.unknown-mark	REP-9	valid.tok	-	t.arc=unk & t.script=sym|other	-	m	own	an unknown reading of a mark, a digit or a Latin letter judges a reading but opens no span: 「 そうだね」 cannot dodge rp.bad.space-open with an unknown 「
 rp.bad.mixed	REP-9	bad.tok	-	t.script=mixed	-	m	own	katakana after hiragana inside one word: れル, すグ
 rp.bad.kana-variant	REP-9	bad.tok	-	t.script=kata & t.lemmascript=other & t.arc=lex|long|repair & t.wordrun=0 & !t.surf=ス|ッス	t.prevcc=kata|kanji|mark|sym|edge|other & t.nextcc=kata|kanji|mark|sym|edge|other	m	own	a katakana spelling of a native word glued to hiragana, as part of a longer katakana run: すグニ, 怖イんです; a whole katakana word (バカな, ヘンな, マシだ) stays
 rp.bad.kana-function	REP-9	bad.tok	-	t.script=kata & t.ud^=助詞|助動詞 & !t.surf=ス|ッス	-	m	own	a particle or an auxiliary spelt in katakana: デドアガ (で, が); the spoken ス of っス, んス stays
@@ -70,11 +71,11 @@ rp.bad.kana-letter	REP-9	bad.tok	-	t.script=kata & t.len=1 & !t.ud^=補助記号
 rp.bad.noun-sokuon	REP-9	bad.tok	-	t.surf$=っ|ッ & t.pos=n|pn|num|suf|pref	-	m	own	a noun does not end in a small っ: 当たりっ前 (りっ)
 rp.bad.kana-noun	REP-9	bad.tok	-	t.script=hira & t.len=1 & t.pos=n|pn|num	-	m	own	a noun of one hiragana letter: 当 た りっ 前
 rp.bad.classical-su	REP-9	bad.tok	-	t.ctype=文語サ行変格 & t.lemma=為る	-	m	own	classical す in modern text is a misreading of other kana: とうしたんた
-rp.bad.fold-edge-l	REP-9	bad.pair	-	l.fold=none & l.script=kata & r.fold=part|all & r.firstkata=1	l.lemmascript=kata & l.arc=lex|long	m	own	a katakana run read partly as hiragana keeps only a katakana word: デドア|が (ドア) but not タナ|とす
-rp.bad.fold-edge-r	REP-9	bad.pair	-	l.fold=part|all & l.lastkata=1 & r.fold=none & r.script=kata	r.lemmascript=kata & r.arc=lex|long	m	own	the same, the katakana word after: で|ドア
+rp.bad.fold-edge-l	REP-9	valid.pair	-	l.fold=none & l.script=kata & r.fold=part|all & r.firstkata=1	l.lemmascript=kata & l.arc=lex|long	m	own	a katakana run read partly as hiragana keeps only a katakana word: デドア|が (ドア) but not タナ|とす
+rp.bad.fold-edge-r	REP-9	valid.pair	-	l.fold=part|all & l.lastkata=1 & r.fold=none & r.script=kata	r.lemmascript=kata & r.arc=lex|long	m	own	the same, the katakana word after: で|ドア
 rp.bad.mark	REP-9	bad.tok	-	t.script=mark & t.prevcc=hira & t.nextcc=kanji & t.lead=1	-	m	own	a lone run of ー, 〜 or っ between a word in hiragana and a kanji: 俺は〜砂浜, 俺のっ潜在; お～竹, せ～の, 風邪っぴき, ぐあッッ！ stay
 rp.bad.elong-mid	REP-9	bad.tok	-	t.elong=mid|infl & t.pos=aux|p_case|p_topic|p_conj|p_adv	-	m	own	lengthening inside a particle or an auxiliary: ませ〜ん, た〜ら; だーれ, ちがーう, すごーい stay
-rp.bad.elong-infl	REP-9	bad.pair	-	l.elong=infl & l.pos=aux & r.pos=aux|p_case|p_conj	-	m	own	a lengthened auxiliary before another function word: したーんだ
+rp.bad.elong-infl	REP-9	valid.pair	-	l.elong=infl & l.pos=aux & r.pos=aux|p_case|p_conj	-	m	own	a lengthened auxiliary before another function word: したーんだ
 rp.bad.sokuon	REP-9	bad.tok	-	t.derive=dv.sokuon-mimetic	t.pos=adv|adj|intj|na	m	own	an inserted っ only in intensified adverbs and adjectives: すっごい; 追いかけっる not
 rp.bad.elong-end	REP-9	bad.pair	-	l.elong=end & r.pos=p_case|p_topic|p_conj|p_adv|aux & !l.pos=intj|p_final	-	m	own	a word lengthened at its end before a particle or an auxiliary: 幼なじみーの, さんーーが; ちょーやりたい, ちーちゃん, いいなー？ stay
 rp.bad.final-mid	REP-9	bad.pair	-	l.ud=助詞-終助詞	r.ud^=助詞-終助詞|補助記号|感動詞 || r.arc=edge || r.pos=sym	m	own	a final particle ends the utterance: 幼なじみーの女の子 (の read as final)
@@ -98,8 +99,8 @@ rp.bad.aux-after-particle	REP-9	bad.pair	-	r.ud=助動詞 & l.ud^=助詞	r.ctype
 rp.bad.case-after-case	REP-9	bad.pair	-	r.surf=が|を & r.ud=助詞-格助詞 & l.ud=助詞-格助詞|助詞-係助詞	l.surf=の	m	own	が/を directly after another case particle: ことがーを
 rp.bad.case-after-topic	REP-9	valid.pair	-	r.ud=助詞-格助詞 & l.ud=助詞-係助詞	-	m	own	a case particle directly after は or も: 俺は〜砂浜 (〜 read as a case particle)
 rp.bad.case-after-pred	REP-9	bad.pair	-	r.ud=助詞-格助詞 & l.cform^=終止形|未然形|仮定形|命令形	r.surf=と|って|っと	m	own	a case particle after a conclusive or irrealis form is only the quoting と or って: 聞きたい〜こと
-rp.bad.range-l	REP-9	bad.pair	-	r.surf=〜|～ & r.ud=助詞-格助詞	l.pos=n|pn|num|suf	m	own	the range 〜 (３〜５, 東京〜大阪) stands between nouns: 我々も〜いつ, 腕時計に〜目
-rp.bad.range-r	REP-9	bad.pair	-	l.surf=〜|～ & l.ud=助詞-格助詞	r.pos=n|pn|num|pref	m	own	the same, the noun after it
+rp.bad.range-l	REP-9	valid.pair	-	r.surf=〜|～ & r.ud=助詞-格助詞	l.pos=n|pn|num|suf	m	own	the range 〜 (３〜５, 東京〜大阪) stands between nouns: 我々も〜いつ, 腕時計に〜目
+rp.bad.range-r	REP-9	valid.pair	-	l.surf=〜|～ & l.ud=助詞-格助詞	r.pos=n|pn|num|pref	m	own	the same, the noun after it
 rp.bad.wa-after-case	REP-9	bad.pair	-	r.surf=は & r.ud=助詞-係助詞 & l.surf=が|を|は|も	-	m	own	は after が, を, は or も
 rp.bad.same-particle	REP-9	bad.pair	-	l.ud^=助詞 & r.ud^=助詞 & same=surf & !l.surf=て|で	-	m	own	one particle twice: 手をを, ははは; ててて (ていて) stays
 rp.bad.triple	REP-9	bad.tok	-	t.triple=1	-	m	own	one letter three times in running text: 実実実力, だだだよ, 倒れれれて; ああああ, あははは, ドドド stay

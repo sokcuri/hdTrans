@@ -15,3 +15,4 @@
 | [sounds.md](sounds.md) | 소리 (`SND`) |
 | [grammar.md](grammar.md) | 문법 (`GRM`) |
 | [meaning.md](meaning.md) | 뜻 (`MNG`): 뜻이 뒤집히는 오역, 실패가 없어야 하는 사례 |
+| [input-repair.md](input-repair.md) | 입력 고치기 (`REP`): 0.8 분석기가 잡음 섞인 입력을 다시 읽는 규칙 |

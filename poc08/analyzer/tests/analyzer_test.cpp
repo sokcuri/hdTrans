@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "hd8/analyzer.h"
 #include "hdtest.h"
@@ -19,6 +20,16 @@ std::string NormText(std::string_view src, std::vector<NormEdit>* edits) {
   std::string out;
   for (auto& c : nc) internal::AppendUtf8(out, c.c);
   return out;
+}
+
+bool ReadText(const std::string& path, std::string* out) {
+  std::FILE* f = std::fopen(path.c_str(), "rb");
+  if (!f) return false;
+  char buf[65536];
+  size_t k;
+  while ((k = std::fread(buf, 1, sizeof buf, f)) > 0) out->append(buf, k);
+  std::fclose(f);
+  return true;
 }
 
 const Analyzer* Shared() {
@@ -131,6 +142,60 @@ HD_TEST(analyze_spoken_derived) {
   HD_CHECK_EQ(t->lemma, std::string("たい"));
   HD_CHECK(t->flags & Spoken);
   HD_CHECK(!t->derive.empty());
+}
+
+// Every case of ja/repair.cases.tsv: the repaired text of a fix case, the unchanged text of a keep case.
+HD_TEST(repair_cases) {
+  static Analyzer* a = [] {
+    auto* an = new Analyzer;
+    Model m;
+    std::string err;
+    if (!LoadTsvDir(HD08_ANALYZER_DATA, &m, &err)) return an;
+    Finalize(&m);
+    if (!an->Load(Serialize(m), &err)) return an;
+    std::string tsv;
+    if (!ReadText(std::string(HD08_ANALYZER_DATA) + "/ja/repair.tsv", &tsv) || !an->LoadRepair(tsv, &err))
+      std::fprintf(stderr, "repair.tsv: %s\n", err.c_str());
+    return an;
+  }();
+  if (!a->model() || !a->HasRepair()) HD_SKIP("no analyzer or repair data");
+  std::string cases;
+  HD_REQUIRE(ReadText(std::string(HD08_ANALYZER_DATA) + "/ja/repair.cases.tsv", &cases));
+  Options opt;
+  opt.margins = false;
+  opt.repair = true;
+  int n = 0, bad = 0;
+  bool header = false;
+  size_t at = 0;
+  while (at < cases.size()) {
+    size_t nl = cases.find('\n', at);
+    std::string line = cases.substr(at, nl == std::string::npos ? std::string::npos : nl - at);
+    at = nl == std::string::npos ? cases.size() : nl + 1;
+    if (line.empty() || line[0] == '#') continue;
+    if (!header) {
+      header = true;
+      continue;
+    }
+    std::vector<std::string> f;
+    for (size_t s = 0, t; ; s = t + 1) {
+      t = line.find('\t', s);
+      f.push_back(line.substr(s, t == std::string::npos ? std::string::npos : t - s));
+      if (t == std::string::npos) break;
+    }
+    HD_REQUIRE(f.size() >= 4);
+    Analysis r;
+    a->Analyze(f[2], opt, &r);
+    std::string got = r.repairs.empty() ? f[2] : r.repaired;
+    ++n;
+    if (got != f[3]) {
+      ++bad;
+      std::fprintf(stderr, "  %s %s: %s -> %s (want %s)\n", f[0].c_str(), f[1].c_str(), f[2].c_str(), got.c_str(),
+                   f[3].c_str());
+    }
+  }
+  std::printf("repair cases: %d, wrong %d\n", n, bad);
+  HD_CHECK(n > 0);
+  HD_CHECK_EQ(bad, 0);
 }
 
 int main(int argc, char** argv) {
