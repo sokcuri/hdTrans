@@ -1,0 +1,8 @@
+# 규칙: GRM-88
+rule	input	expected	kind	layer
+cx:lc-quote-ieba:10	ただし、ペイント弾と言えど、当たると痛い。	has:페인트탄이라고 해도,	fix	rewrites
+cx:lc-quote-ieba:10	「いくら蒼先輩と言えど、言えないこともあるんす……」	has:선배라고 해도,	fix	rewrites
+cx:lc-quote-ieba:10	「私情を持ち込んでの実戦は、例え訓練と言えど事故や負傷の原因となる。」	has:훈련이라고 해도	fix	rewrites
+cx:lc-quote-ieba:10	「い、一応ね、夢の中と言えども私は女の子なわけで」	has:꿈속이라고 해도	keep	rewrites
+cx:lc-quote-ieba:10	「いくら傷心のさなかといえど、ディートリヒ殿下にそのようなお言葉……っ！」	!rule:cx:lc-quote-ieba:10	keep	rewrites
+cx:lc-quote-ieba:10	「中華と言えば、昔、そういうのがあったわねぇ……」	!rule:cx:lc-quote-ieba:10	keep	rewrites

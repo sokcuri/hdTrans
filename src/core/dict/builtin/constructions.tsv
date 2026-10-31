@@ -846,3 +846,5 @@ cx:lc-quote-bracket:30	GRM-86	&&5 :tte-bracket !1 ||2 B+1== "なる" B+1== "あ�
 //= lc-quote-omou	after OfferPromise 227	A と read (와)과 right before a verb in 思 (not 思い出) quotes what is thought: after a noun (이)라고 (一度は好敵手と思ったのに 한 번은 호적수라고 생각했는데, 有利な条件と思わせて 유리한 조건이라고 생각하게 해), after a particle that leaves what is thought unsaid 하고 (これだけはと思い 이것만은 하고 생각해).
 cx:lc-quote-omou:10	GRM-87	&&5 ||2 S+0== "と" S+0== "と、" L+0== "(와)과" ||6 I+1== "L思っ" I+1== "L思わ" I+1== "L思い" I+1== "L思う" I+1== "L思え" I+1== "L思お" !1 I+1== "L思い出" P-1== "2"	set-target " 하고"	これだけはと思い 이것만은 하고 생각해
 cx:lc-quote-omou:20	GRM-87	&&5 ||2 S+0== "と" S+0== "と、" L+0== "(와)과" ||6 I+1== "L思っ" I+1== "L思わ" I+1== "L思い" I+1== "L思う" I+1== "L思え" I+1== "L思お" !1 I+1== "L思い出" P-1== "1"	select-lemma "(이)라고"	一度は好敵手と思ったのに 한 번은 호적수라고 생각했는데
+//= lc-quote-ieba	after OfferPromise 237	A と before 言えど or 言えども written in kanji, split into 言, え and ど, concedes what is called so: (이)라고 해도 (ペイント弾と言えど 페인트탄이라고 해도, 夢の中と言えども 꿈속이라고 해도), as といえど already reads.
+cx:lc-quote-ieba:10	GRM-88	&&4 S+0== "と" S+1== "言" S+2== "え" ||2 S+3== "ど" S+3== "ども"	select-lemma "(이)라고" set-target@+1 "해도" set-target@+2 "" set-target@+3 ""	ペイント弾と言えど 페인트탄이라고 해도
