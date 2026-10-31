@@ -75,7 +75,7 @@ sense:見かける	駅で先生をお見かけしました。	역에서 선생�
 dict:jisjk:3829	裏の通りを歩く。	뒤의 거리를 걷는다.	fix	local
 dict:jisjk:4904	料理をうまい方法で作った。	요리를 능숙한 방법으로 만들었다.	fix	local
 dict:jisjk:5289	子供にやさしい先生です。	아이에게 다정한 선생님입니다.	fix	local
-cx:benefactive-provider:10	だれに話してもらう。	누가 이야기해 준다.	fix	rewrites
+cx:benefactive-provider:10	だれに話してもらう。	누가 이야기해 주나.	fix	rewrites
 dict:jisjk:80454	基本は一通り学んだ。	기본은 한 차례 배웠다.	fix	local
 dict:jisjk:92227	彼はいつも気をつけます。	그는 언제나 조심합니다.	fix	local
 dict:jisjk:115623	これは金と言う金属です。	이것은 금이라는 금속입니다.	fix	local

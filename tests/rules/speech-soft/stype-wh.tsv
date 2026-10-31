@@ -1,0 +1,5 @@
+# 규칙: SPC-21, SPC-18
+rule	input	expected	kind	layer
+cx:stype-wh:40	誰が来た。	누가 왔나.	fix	rewrites
+cx:stype-wh:40	お前なんでこんな奴連れてきた	너 왜 이런 놈 데려왔어	keep	rewrites
+cx:stype-wh:40	どこ行った	!rule:cx:stype-wh:40	keep	rewrites

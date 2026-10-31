@@ -1,0 +1,32 @@
+# 규칙: SPC-21
+rule	input	expected	kind	layer
+cx:stype-wh:10	「何やっているんだ、おまえ」	「뭐 하고 있는 거야, 너」	fix	rewrites
+cx:stype-wh:10	「ど、どこまで続くんだ、これ……？」	rule:cx:stype-wh:10=0 거야	fix	rewrites
+cx:stype-wh:10	「うん、彼女の笑顔を見ると、俺はいつも元気づけられるんだ」	!rule:cx:stype-wh:10	keep	rewrites
+cx:stype-wh:10	「なんだ、いつも持ち歩いてるんだ」	!rule:cx:stype-wh:10	keep	rewrites
+cx:stype-wh:20	「……現実から逃げて、なにが悪いんだ。」	「……현실로부터 도망쳐, 뭐가 나쁜 거야.」	fix	rewrites
+cx:stype-wh:20	「見えている敵になんで当たらないんだ、もどかしい」	rule:cx:stype-wh:20=4 거야	fix	rewrites
+cx:stype-wh:20	「どうして……こんなに恐ろしいんだ」	「왜……이렇게 무서운 거야」	fix	rewrites
+cx:stype-wh:20	「何をしても無駄なんだ」	!rule:cx:stype-wh:20	keep	rewrites
+cx:stype-wh:20	「何と美しいんだ」	!rule:cx:stype-wh:20	keep	rewrites
+cx:stype-wh:20	「……かもしれない。だがもう誰も失いたくないんだ」	!rule:cx:stype-wh:20	keep	rewrites
+cx:stype-wh:30	このヤロウ……誰のせいだと思ってやがる。	rule:cx:stype-wh:30=1나	fix	rewrites
+cx:stype-wh:30	あっ、なぜ逃げる。	앗, 왜 도망치나.	fix	rewrites
+cx:stype-wh:30	……どうする。	……어떻게 하나.	fix	rewrites
+cx:stype-wh:30	何を言う。この潮風で十分だろう。	rule:cx:stype-wh:30=1나	fix	rewrites
+cx:stype-wh:30	お前なんでこんな奴連れてきた	!rule:cx:stype-wh:40	keep	rewrites
+cx:stype-wh:30	材料の量を変えたり、何本ものポーションを試作する。	!rule:cx:stype-wh:30	keep	rewrites
+cx:stype-wh:30	ほとんどのことが何の苦も無くできてしまう。	!rule:cx:stype-wh:30	keep	rewrites
+cx:stype-wh:40	――人夫、何人動員した。	――인부, 몇 사람 동원했나.	fix	rewrites
+cx:stype-wh:40	石はどこから運んだ。船か。	돌은 어디에서 옮겼나. 배인가.	fix	rewrites
+cx:stype-wh:40	工区をいくつに割った。	공구를 몇개로 나누었나.	fix	rewrites
+cx:stype-wh:40	いきなりどうした。	rule:cx:stype-wh:40=5나	fix	rewrites
+cx:stype-wh:40	本当に……俺は、どうすることもできなかった。	!rule:cx:stype-wh:40	keep	rewrites
+cx:stype-wh:40	でも何をしたところで意味がなかった。	!rule:cx:stype-wh:40	keep	rewrites
+cx:stype-wh:40	期せずして誰何の声が重なる。	!rule:cx:stype-wh:30	keep	rewrites
+cx:stype-wh:40	何をしたか覚えている。	!rule:cx:stype-wh:40	keep	rewrites
+cx:stype-nani-dekiru:10	本当に放り込まれたら尻ごみ以外の何ができる。	정말 집어넣어지면 뒷걸음질 이외의 무엇을 할 수 있나.	fix	rewrites
+cx:stype-nani-dekiru:10	「裏切り者め、丸腰で何ができる！」	rule:cx:stype-nani-dekiru:10=(을)를	fix	rewrites
+cx:stype-nani-dekiru:10	なんとなく察することができる	!rule:cx:stype-nani-dekiru:10	keep	rewrites
+cx:stype-nani-dekiru:5	「私に何ができる？」	「나에게 뭘 할 수 있어?」	fix	rewrites
+cx:stype-nani-dekiru:5	人の批判ができるほど、さ	!rule:cx:stype-nani-dekiru:5	keep	rewrites

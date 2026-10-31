@@ -25,7 +25,7 @@ cx:subject-before-ga:40	誰のせいだ。	누구의 탓이다.	keep	rewrites
 cx:subject-before-ga:20	問題は誰じゃなくて何をしたかだ。	문제는 누가 아니고 무엇을 했는지다.	fix	rewrites
 cx:subject-before-ga:10	誰が好き？	누구를 좋아해?	keep	rewrites
 cx:subject-before-ga:10	ヌーが好き	누를 좋아해	keep	rewrites
-cx:subject-before-ga:40	誰が来た。	누가 왔다.	fix	rewrites
+cx:subject-before-ga:40	誰が来た。	누가 왔나.	fix	rewrites
 cx:subject-before-ga:40	俺の方が得意だ。	내가 자신있다.	fix	rewrites
 cx:subject-before-ga:40	僕に使えるか？	내가 쓸 수 있을까?	fix	rewrites
 cx:subject-no:10	誰の来ない部屋	누가 오지 않는 방	fix	rewrites
