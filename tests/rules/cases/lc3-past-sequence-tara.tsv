@@ -1,0 +1,36 @@
+# 규칙: GRM-176
+rule	input	expected	kind	layer
+rewrite:past-sequence	書庫に向かったら入り口にかけてあったカレンダーを見て思い出した。	has:향했더니	fix	rewrites
+rewrite:past-sequence	さて行くかと駆け出したらミルスに止められた。	has:시작했더니	fix	rewrites
+rewrite:past-sequence	部屋で嘆願書を読んでいたら手紙が届いた。	has:읽고 있었더니	fix	rewrites
+rewrite:past-sequence	道に飛び出したら野良猫が漫画みたいに跳ねて逃げた。	has:뛰쳐나왔더니	fix	rewrites
+rewrite:past-sequence	監督官の顔を見たら笑ってしまった。	has:보았더니	fix	rewrites
+rewrite:past-sequence	莫迦が森に間違ったブーメランを投げたら追っかけてきた。	has:던졌더니	fix	rewrites
+rewrite:past-sequence	パンを食べながら携帯をいじっていたら後ろから話しかけられた。	has:만지고 있었더니	fix	rewrites
+rewrite:past-sequence	おそるおそる覗いたら金貨だった。	has:들여다 보았더니	fix	rewrites
+rewrite:past-sequence	昨日告白したらたまたまｏｋをもらえた。	has:고백했더니	fix	rewrites
+rewrite:past-sequence	歯を磨いていたら後ろに洋司がやってきた。	has:닦고 있었더니	fix	rewrites
+rewrite:past-sequence	振り向いたらそこには、茶髪のフードを深くかぶった男が居た。	has:뒤돌아 보았더니	fix	rewrites
+rewrite:past-sequence	目を開けたら目の前にウィルの顔があった。	has:눈을 떴더니	fix	rewrites
+rewrite:past-sequence	次のカルタを読もうとしたら由香がストップをかけた。	has:읽으려고 했더니	fix	rewrites
+rewrite:past-sequence	なんとなく聞いてみたら側にいた事務員の女性が教えてくれた。	has:물어 보았더니	fix	rewrites
+rewrite:past-sequence	試しに呼びかけてみたらかなりの人数が集まった。	has:불러 보았더니	fix	rewrites
+rewrite:past-sequence	記事目録をぼーっと目にしていたら昔の記憶がちょっと蘇ってしまった。	has:보고 있었더니	fix	rewrites
+rewrite:past-sequence	外に出て、がむしゃらに走っていたら頭が冷えた。	has:달리고 있었더니	fix	rewrites
+rewrite:past-sequence	客室で待っていたらガディさんが入ってきた。	has:기다리고 있었더니	fix	rewrites
+rewrite:past-sequence	「梓さんに訊いたら教えてくれました」	has:물었더니	fix	rewrites
+rewrite:past-sequence	「メルテの顔見たら疲れが軽くなったわ」	has:보았더니	fix	rewrites
+rewrite:past-sequence	「さっき様子を見に行ったら、酒が飲めないってぼやいてたぞ」	has:보러 갔더니	fix	rewrites
+rewrite:past-sequence	古寺がいなかったらエラい事になりそうだった。	has:없었으면	keep	rewrites
+rewrite:past-sequence	少し間違えたら殴られてしまいそうな勢いでした。	has:잘못하면	keep	rewrites
+rewrite:past-sequence	そしてパパが知ったら捨てられるぞと脅された。	has:알면	keep	rewrites
+rewrite:past-sequence	血約を結ばれたら人形として使えるか彼女にはわからなかった。	lacks:맺었더니	keep	rewrites
+rewrite:past-sequence	戻ってきたら日にちは変わってしまうけど俺の気持ちは変わってしまった。	has:돌아오면	keep	rewrites
+rewrite:past-sequence	俺はこうなったら二人が何をしていたのか確かめてみることにした。	has:되면	keep	rewrites
+rewrite:past-sequence	「学校の先生も知らない人に話しかけられたら気を付けろって言ってた」	has:걸어지면	keep	rewrites
+rewrite:past-sequence	「いや、でも……いじめたら損をするって……話……したよな？」	has:괴롭히면	keep	rewrites
+rewrite:past-sequence	門が閉じられていたらお終いだけど、天は私たちを見放さなかった。	lacks:있었더니	keep	rewrites
+rewrite:past-sequence	元の姿に戻ったら絶対にお礼参りをしよう、とユフィーリアは心に決めた。	lacks:돌아갔더니	keep	rewrites
+rewrite:past-sequence	唇同士が少しでも動いたら触れそうな距離にパニック寸前に陥った。	has:움직이면	keep	rewrites
+rewrite:past-sequence	肉眼で見たらどんなだろう…と想像した。	has:보면	keep	rewrites
+rewrite:past-sequence	自分の死に様でも見えたら最悪だが、そもそも未来が見えると決まったわけじゃない。	has:보이면 최악	fix	rewrites

@@ -17,7 +17,7 @@ lexical:katakana-words	テレながら言った。	쑥스러워하면서 말했�
 lexical:katakana-words	毛皮をナメす。	모피를 무두질한다.	fix	lookup
 lexical:katakana-words	生のままじゃキツい。	생으로는 힘들다.	fix	lookup
 lexical:katakana-words	同じカマの飯を食う仲間だ。	한솥밥을 먹는 동료다.	fix	lookup
-lexical:katakana-words	カマをかけたら正解だった。	떠보면 정답이었다.	fix	lookup
+lexical:katakana-words	カマをかけたら正解だった。	떠보았더니 정답이었다.	fix	lookup
 lexical:katakana-words	クワ・トイネ公国だ。	쿠와 트이네 공국이다.	keep	lookup
 lexical:katakana-words	リスクが高い。	리스크가 높다.	keep	lookup
 lexical:katakana-words	モヤモヤする。	찜찜한다.	keep	lookup
