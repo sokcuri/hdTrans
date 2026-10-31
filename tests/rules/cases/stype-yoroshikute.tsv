@@ -1,0 +1,18 @@
+# 규칙: SPC-24
+rule	input	expected	kind	layer
+cx:stype-yoroshikute:20	「あなたのお名前を聞いても宜しくて？」	「당신의 이름을 물어도 될까요?」	fix	rewrites
+cx:stype-yoroshikute:20	「お茶をいただいても宜しくて？」	rule:cx:stype-yoroshikute:20=될까요	fix	rewrites
+cx:stype-yoroshikute:20	「準備は宜しくて」	!rule:cx:stype-yoroshikute:20	keep	rewrites
+cx:stype-yoroshikute:20	「今後とも宜しく」	!rule:cx:stype-yoroshikute:20	keep	rewrites
+cx:stype-yoroshikute:10	「お名前を聞いてもよろしくて？」	rule:cx:stype-yoroshikute:10=될까요	fix	rewrites
+cx:stype-yoroshikute:10	「ここに座ってもよろしくて？」	rule:cx:stype-yoroshikute:10=될까요	fix	rewrites
+cx:stype-yoroshikute:10	「少しお話ししてもよろしくて？」	rule:cx:stype-yoroshikute:10=될까요	fix	rewrites
+cx:stype-yoroshikute:10	「お名前を聞いてもよろしくて」	!rule:cx:stype-yoroshikute:10	keep	rewrites
+cx:stype-yoroshikute:10	「よろしくてよ」	!rule:cx:stype-yoroshikute:10	keep	rewrites
+cx:stype-yoroshikute:30	提督、準備はよろしくて？	제독, 준비는 괜찮을까요?	fix	rewrites
+cx:stype-yoroshikute:30	「よろしくて？」	rule:cx:stype-yoroshikute:30=괜찮을까요	fix	rewrites
+cx:stype-yoroshikute:30	よろしくてよ、提督	!rule:cx:stype-yoroshikute:30	keep	rewrites
+cx:stype-yoroshikute:30	うふふっ♪ よろしくてよ	!rule:cx:stype-yoroshikute:30	keep	rewrites
+cx:stype-yoroshikute:30	よろしくお願いします。	!rule:cx:stype-yoroshikute:30	keep	rewrites
+cx:stype-yoroshikute:40	「準備は宜しくて？」	rule:cx:stype-yoroshikute:40=괜찮을까요	fix	rewrites
+cx:stype-yoroshikute:40	「よろしく頼むわ」	!rule:cx:stype-yoroshikute:40	keep	rewrites
