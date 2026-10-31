@@ -238,6 +238,23 @@ std::vector<std::string> SplitQuotes(const std::string& ja) {
     int depth = 0;
     size_t start = 0;
     char32_t open = 0, close = 0;
+    // text before the first quote may only be a speaker tag: 【name】, [name], (name), or a short bare name
+    {
+        size_t first = 0;
+        while (first < s.size() && s[first] != U'「' && s[first] != U'『' && s[first] != U'≪') ++first;
+        std::u32string pre = s.substr(0, first);
+        while (!pre.empty() && (pre.back() == U' ' || pre.back() == U'　')) pre.pop_back();
+        size_t lead = 0;
+        while (lead < pre.size() && (pre[lead] == U' ' || pre[lead] == U'　')) ++lead;
+        pre = pre.substr(lead);
+        const bool bracketed = pre.size() >= 2 && pre.size() <= 26 &&
+                               ((pre.front() == U'【' && pre.back() == U'】') || (pre.front() == U'[' && pre.back() == U']') ||
+                                (pre.front() == U'（' && pre.back() == U'）') || (pre.front() == U'(' && pre.back() == U')'));
+        bool bareName = pre.size() <= 12;
+        for (char32_t ch : pre)
+            if (ch == U'、' || ch == U'。' || ch == U'，' || (ch >= U'ぁ' && ch <= U'ゖ')) bareName = false;
+        if (!pre.empty() && !bracketed && !bareName) return {};
+    }
     for (size_t i = 0; i < s.size(); ++i) {
         const char32_t ch = s[i];
         if (depth == 0 && (ch == U'「' || ch == U'『' || ch == U'≪')) {
@@ -314,7 +331,16 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             if ((best->text == U"ぞ" || best->text == U"ぜ") && kDecl.find(e) != std::u32string::npos) c.declZo = true;
             // な on a verb's dictionary form forbids (行くな); on い, た, だ it exclaims
             // ... but not after a wish (ほしいな, 行きたいな: 갖고 싶은데)
-            const bool wish = EndsWith(rest, U"たい") || EndsWith(rest, U"ほしい") || EndsWith(rest, U"欲しい") ||
+            // the desire たい follows a verb stem (行きたい, 見たい), not the adjectives 冷たい, 重たい, 眠たい, めでたい
+            static const std::u32string kStem = U"いきぎしじちにひびみりえけげせぜてでねべめれ見来寝出";
+            static const std::vector<std::u32string> kTaiAdj = {U"冷たい", U"重たい", U"眠たい", U"めでたい", U"ありがたい",
+                                                                U"つめたい", U"おもたい", U"ねむたい"};
+            bool taiAdj = false;
+            for (const auto& a : kTaiAdj)
+                if (EndsWith(rest, a)) taiAdj = true;
+            const bool desire = EndsWith(rest, U"たい") && !taiAdj && rest.size() >= 3 &&
+                                kStem.find(rest[rest.size() - 3]) != std::u32string::npos;
+            const bool wish = desire || EndsWith(rest, U"ほしい") || EndsWith(rest, U"欲しい") ||
                               EndsWith(rest, U"また");  // またな is a farewell
             if ((best->text == U"な" || best->text == U"なあ") && (e == U'い' || e == U'た' || e == U'だ') && !wish)
                 c.exclaimNe = true;
@@ -509,8 +535,29 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         c.exclaim = ok && any;
         // musing over one's own words: a predicate, a pause, then か (信じる……か, そういうこと……か)
         std::u32string raw = LastSentence(u.text);
-        while (!raw.empty() && IsMark(raw.back()) && raw.back() != U'…' && raw.back() != U'‥') raw.pop_back();
-        if (raw.size() >= 3 && raw.back() == U'か' && (raw[raw.size() - 2] == U'…' || raw[raw.size() - 2] == U'‥'))
+        bool asks = false;
+        while (!raw.empty() && IsMark(raw.back()) && raw.back() != U'…' && raw.back() != U'‥') {
+            if (raw.back() == U'？' || raw.back() == U'?') asks = true;
+            raw.pop_back();
+        }
+        bool alone = true;  // the musing is the utterance's only sentence with a word
+        {
+            size_t sentences = 0;
+            std::u32string cur2;
+            for (char32_t ch : u.text) {
+                cur2.push_back(ch);
+                if (IsSentenceEnd(ch)) {
+                    for (char32_t x : cur2)
+                        if (IsWordChar(x)) { ++sentences; break; }
+                    cur2.clear();
+                }
+            }
+            for (char32_t x : cur2)
+                if (IsWordChar(x)) { ++sentences; break; }
+            alone = sentences <= 1;
+        }
+        if (!asks && alone && raw.size() >= 3 && raw.back() == U'か' &&
+            (raw[raw.size() - 2] == U'…' || raw[raw.size() - 2] == U'‥'))
             c.exclaim = true;
     }
     for (const auto& [kind, text] : t.honBack)

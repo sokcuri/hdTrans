@@ -73,9 +73,9 @@ bool IsSceneMark(const std::string& s) {
 uint8_t SourceLevelOf(std::string key) {
     if (key.rfind("quotes-", 0) == 0) key = key.substr(7);  // REG-15: the line's last quote
     if (key == "pend" || key == "polite-any") return srclevel::desu_masu;
-    if (key == "keigo-pend" || key == "keigo" || key == "set") return srclevel::keigo;
+    if (key == "keigo-pend" || key == "keigo" || key == "keigo-casual" || key == "set") return srclevel::keigo;
     if (key == "archaic") return srclevel::archaic;
-    if (key == "casual" || key == "stiff" || key == "keigo-casual" || key == "auth-plain" || key == "decl-zo" ||
+    if (key == "casual" || key == "stiff" || key == "auth-plain" || key == "decl-zo" ||
         key == "exclaim-ne" || key == "exclaim")
         return srclevel::casual;
     return srclevel::plain;

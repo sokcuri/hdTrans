@@ -136,3 +136,7 @@ r16-9	REG-16	fix	d114		yes	「彼がくれますか？」	haeyo	no
 r18-7	REG-18	keep	d115		yes	「じゃあ、またな」	hae	-
 r14-15	REG-14	keep	d116	甲	yes	「その話は疑わしいね」	-	-
 r14-16	REG-14	keep	d116	甲	yes	「明日の朝はみんなで学校に行くんだ」	hae	-
+r18-8	REG-18	fix	d117		yes	「冷たいなぁ」	hae	-
+r13-16	REG-13	keep	d118		yes	「本当に……か？」	hae	-
+r14-17	REG-14	keep	d119		yes	「お嬢様が来るんだ」	hae	-
+r15-6	REG-15	keep	d120		yes	そう言って「行くぞ」「了解です」	haeyo	-

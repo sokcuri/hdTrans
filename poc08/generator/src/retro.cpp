@@ -910,6 +910,8 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         // per quote only when R decided per quote and 0.7.x's text has as many quotes; else the line is one group
         const bool perQuote = d.quotes.size() >= 2 && !nodes.empty() && quoteOf.back() + 1 == d.quotes.size();
+        // R decided per quote but 0.7.x's text has another number of quotes: the levels cannot be placed, keep 0.7.x
+        if (d.quotes.size() >= 2 && !perQuote) lineOk = false;
         if (!perQuote) std::fill(quoteOf.begin(), quoteOf.end(), 0);
         // REG-12: -ㄹ까 before 하다 (추가할까 하고, 아닐까 합니다) is the construction "think of", not a sentence end
         auto thinkOf = [&](size_t q) {
