@@ -55,3 +55,5 @@ constraint:tara-before-shii	そしたらしきりに頷いた。	has:그랬더�
 constraint:tara-before-shii	予備も併せて大目に買ったらしきりに恐縮していた。	has:끊임없이 황송해하고	keep	lookup
 constraint:tara-before-shii	これも北原のおかげだなと言ったらしきりに照れていた。	has:끊임없이 수줍어하고	keep	lookup
 cx:lc3i-kigatsuku:10	頭重くて、何も考えられなくて、気づいたら何時間も経ってたりして。	has:정신을 차려 보니 몇 시간이나	keep	rewrites
+cx:lc3i-kigatsuku:10	「気づいたら朝だった」って笑って	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気がついたら眠ってしまって。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites

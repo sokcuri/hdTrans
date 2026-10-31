@@ -62,3 +62,6 @@ cx:lc3i-nishicha:10	まあ、そんなこと、こっちにしちゃどうでも
 cx:lc3i-nishicha:10	戦争したい奴らにしちゃどうでもいいんだよ、あれは。	!rule:cx:lc3i-nishicha:10	keep	rewrites
 cx:lc3i-nishicha:10	春にしちゃどうも暑い	has:봄치고는	fix	rewrites
 cx:lc3i-nishicha:20	それにしちゃどうも行動が不釣り合いだが	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:10	春にしちゃどうかしてる暑さだ	has:봄치고는	fix	rewrites
+cx:lc3i-nishicha:10	まあ、その辺にしちゃどうかな	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	もう少し大きくなってからにしちゃどうかの？	!rule:cx:lc3i-nishicha:10	keep	rewrites

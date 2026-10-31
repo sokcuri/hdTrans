@@ -8723,7 +8723,7 @@ pronoun.demonstrative	あれ
 pronoun.demonstrative	ここ
 pronoun.demonstrative	そこ
 pronoun.demonstrative	あそこ
-//= word.after-teha-cond	Starts of words after a ては or ちゃ that make it a condition: a prohibition, what must be, a trouble, a favour asked of the hearer or a suggestion, and どうでも, after which it says what something is to someone (ダメ, いけない, ならない, 困る, くれない, どうだ, いかが, こっちにしちゃどうでもいい; a lone どう is checked as a whole word, not どうも): such a ては is no にしては of for a N (spec GRM-205).
+//= word.after-teha-cond	Starts of words after a ては or ちゃ that make it a condition: a prohibition, what must be, a trouble, a favour asked of the hearer or a suggestion, and どうでも, after which it says what something is to someone (ダメ, いけない, ならない, 困る, くれない, どうだ, いかが, こっちにしちゃどうでもいい; a lone どう or どうか is checked as a whole word, not どうも or the verb どうかしてる): such a ては is no にしては of for a N (spec GRM-205).
 word.after-teha-cond	ダメ
 word.after-teha-cond	だめ
 word.after-teha-cond	駄目
@@ -8742,7 +8742,8 @@ word.after-teha-cond	貰
 word.after-teha-cond	どうだ
 word.after-teha-cond	どうです
 word.after-teha-cond	どうでしょ
-word.after-teha-cond	どうか
+word.after-teha-cond	どうかな
+word.after-teha-cond	どうかしら
 word.after-teha-cond	どうよ
 word.after-teha-cond	どうでぇ
 word.after-teha-cond	いかが
