@@ -42,7 +42,12 @@ struct RepairRules {
   std::vector<Check> tok, pair;
   std::string spaceInWord;  // the bad.space row: a kept space that a dictionary word spans
 
+  // Lexicon tiers (until the rule analyzer marks its fallback rows): 1 for a group outside the core lexicon.
+  // Empty: every word is core.
+  std::vector<uint8_t> fallbackGroup;
+
   // param rows
+  std::vector<std::string> coreUd;      // closed classes: always core
   std::vector<std::string> functionUd;  // UniDic POS prefixes of function words (fold, swap)
   std::vector<std::string> foldWordUd;  // a katakana word as written folds only into these
   std::vector<std::string> noEditUd;    // never edited by edit1 (names)
@@ -65,6 +70,9 @@ struct RepairRules {
 };
 
 bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err);
+// Marks the groups of m outside the core lexicon: core = the closed classes of rp.param.core-ud and the groups
+// whose stem, lemma or a form is one of `keys` (one key a line).
+void SetCoreKeys(const Model& m, std::string_view keys, RepairRules* r);
 std::string_view RepairOpId(const RepairRules& rules, RepairOp op);
 
 // Repairs the best path in ws (after BuildLattice and RunViterbi): spans of ws->path where a check fires

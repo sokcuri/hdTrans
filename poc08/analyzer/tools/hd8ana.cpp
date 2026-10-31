@@ -188,6 +188,11 @@ int CmdRun(const Args& a) {
     std::string path = a.Get("--repair-tsv", "poc08/analyzer/data/ja/repair.tsv");
     if (!ReadFile(path, &tsv)) return Die("cannot read " + path);
     if (!an.LoadRepair(tsv, &err)) return Die(err);
+    if (a.Has("--core-keys")) {
+      std::string keys;
+      if (!ReadFile(a.Get("--core-keys"), &keys)) return Die("cannot read " + a.Get("--core-keys"));
+      an.SetRepairCore(keys);
+    }
   }
   if (a.Has("--no-derive")) {
     an.mutableModel()->rules.clear();
@@ -298,6 +303,11 @@ int CmdEval(const Args& a) {
     std::string path = a.Get("--repair-tsv", "poc08/analyzer/data/ja/repair.tsv");
     if (!ReadFile(path, &tsv)) return Die("cannot read " + path);
     if (!an.LoadRepair(tsv, &err)) return Die(err);
+    if (a.Has("--core-keys")) {
+      std::string keys;
+      if (!ReadFile(a.Get("--core-keys"), &keys)) return Die("cannot read " + a.Get("--core-keys"));
+      an.SetRepairCore(keys);
+    }
   }
   if (a.Has("--no-derive")) {
     an.mutableModel()->rules.clear();
@@ -782,7 +792,7 @@ int CmdNorm() {
 int main(int argc, char** argv) {
   if (argc < 2) return Die("usage: hd8ana pack|pack-long|run|eval|bench|train|longunits ...");
   std::string cmd = argv[1];
-  std::set<std::string> valued{"--slack", "-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff", "--repair-tsv"};
+  std::set<std::string> valued{"--slack", "-l", "--format", "--epochs", "--step", "--limit", "--bonus", "--reps", "--doc", "--diff", "--repair-tsv", "--core-keys"};
   Args a = Parse(argc, argv, valued);
   if (cmd == "pack") return CmdPack(a);
   if (cmd == "pack-long") return CmdPackLong(a);

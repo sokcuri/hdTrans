@@ -124,6 +124,9 @@ class Analyzer {
   // Loads ja/repair.tsv (the text of the file). Repairs run when Options::repair is set.
   bool LoadRepair(std::string_view tsv, std::string* err);
   bool HasRepair() const { return repair_ != nullptr; }
+  // The core lexicon for repairs, one key a line (translation-dictionary keys); words outside it are fallback
+  // words. Call after LoadRepair. Without it every word is core.
+  bool SetRepairCore(std::string_view keys);
 
   // Thread-safe on one loaded analyzer. A workspace may be reused by one thread to avoid allocations.
   void Analyze(std::string_view src, const Options& opt, Analysis* out, Workspace* ws = nullptr) const;

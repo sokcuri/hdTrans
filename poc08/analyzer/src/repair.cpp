@@ -20,10 +20,10 @@ namespace {
 // ---- table ------------------------------------------------------------------------------------------
 enum Field : uint8_t { fUd, fCtype, fCform, fLemma, fSurf, fPos, fArc, fDerive, fScript, fLemmaScript, fLen,
                        fElong, fPrevCc, fNextCc, fSpace, fTriple, fSokuon, fFold, fFirstKata, fLastKata, fWordRun,
-                       fLead, fRepeat, fSame, fCount };
+                       fLead, fRepeat, fTier, fSame, fCount };
 constexpr std::string_view kFields[] = {"ud",  "ctype", "cform",  "lemma",       "surf", "pos",
                                         "arc", "derive", "script", "lemmascript", "len",  "elong",
-                                        "prevcc", "nextcc", "space", "triple", "sokuon", "fold", "firstkata", "lastkata", "wordrun", "lead", "repeat",
+                                        "prevcc", "nextcc", "space", "triple", "sokuon", "fold", "firstkata", "lastkata", "wordrun", "lead", "repeat", "tier",
                                         "same"};
 constexpr std::string_view kOps[] = {"kata-fold", "small-big", "elong", "stutter", "space", "dakuten", "swap", "edit1"};
 
@@ -150,6 +150,7 @@ struct Info {
   bool space = false;
   bool triple = false;   // keeps a letter written three times in running text (実実実力, だだだよ)
   bool sokuon = false;   // keeps a っ before a letter that never follows it (じっゃ, 奪いっに, うっい)
+  std::string_view tier = "core";  // core, fallback (a word outside the core lexicon) or unknown
   bool repeat = false;   // keeps a repeated comma or an unpartnered repeated bracket (、、、, 「「「なんで…」)
   std::string_view fold = "none";  // katakana letters of the span read as hiragana: none, part, all
   bool firstKata = false, lastKata = false;  // the span's first and last letters are katakana as written
@@ -342,6 +343,11 @@ struct Facts {
     if (a.rule >= 0) x.derive = m.rules[static_cast<size_t>(a.rule)].id;
     if (a.kind != ArcKind::repair && Lengthened(text)) x.elong = ElongOf(text);
     x.lemmaScript = HasKatakana(x.lemma) ? "kata" : "other";
+    if (a.kind == ArcKind::unk) x.tier = "unknown";
+    else if (!R.fallbackGroup.empty()) {
+      uint32_t g = a.kind == ArcKind::lex ? a.ref : a.kind == ArcKind::repair ? ra->group : UINT32_MAX;
+      if (g != UINT32_MAX && g < R.fallbackGroup.size() && R.fallbackGroup[g]) x.tier = "fallback";
+    }
     x.content = !HasPrefix(R.functionUd, x.ud);
     return x;
   }
@@ -372,6 +378,7 @@ std::string_view FieldOf(const Info& x, uint8_t f, std::string& buf) {
     case fWordRun: return x.wordRun ? "1" : "0";
     case fLead: return x.lead ? "1" : "0";
     case fRepeat: return x.repeat ? "1" : "0";
+    case fTier: return x.tier;
     default: return {};
   }
 }
@@ -745,6 +752,7 @@ struct Gen {
     bool touches = touchE > touchB && start < touchE && j > touchB;
     if (edits.empty() && !touches) return;  // the plain word is in the lattice already
     if (total > R.arcBudget || j <= start) return;
+    if (g < R.fallbackGroup.size() && R.fallbackGroup[g]) return;  // a repaired reading uses core words only
     const auto& grp = m.groups[g];
     const auto& pf = m.pforms[f];
     std::string_view ud = m.udNames[m.classes[pf.cls].ud];
@@ -1042,6 +1050,21 @@ class Reader {
 
   bool LongKata(uint32_t p) const { return p < longKata_.size() && longKata_[p]; }
 
+  // The analyzer's reading of the span has a word outside the core lexicon (fallback or unknown, in Japanese
+  // letters): it is compared with repaired readings only (prefs: fewer fallback words, then repair cost).
+  bool LexicalTrigger(const std::vector<uint32_t>& pathArcs) const {
+    if (R_.fallbackGroup.empty()) return false;
+    Facts facts{m_, R_, *ws_, ws_->core, layout_, &single_, &wordRun_, &triple_};
+    for (uint32_t ai : pathArcs) {
+      const Arc& a = ws_->arcs[ai];
+      const RepairArc* ra = a.kind == ArcKind::repair ? &ws_->rarcs[a.ref] : nullptr;
+      Info x = facts.Of(a, ra);
+      if (x.elong != "none" || !x.derive.empty()) continue;  // spoken forms (すごーい) are not lexical noise
+      if (x.tier == "fallback" || (x.tier == "unknown" && x.script != "sym" && x.script != "other")) return true;
+    }
+    return false;
+  }
+
   // A kept space a dictionary word spans, before core position p (not at the edge of the span read).
   int SpaceBad(uint32_t p, const RepairArc* next) const {
     if (!Cross(p)) return 0;
@@ -1052,7 +1075,8 @@ class Reader {
   }
 
   // The best reading of window w over `core` (the line's text, or with one swap at swapAt).
-  void Read(const Window& w, const std::vector<char32_t>& core, int32_t swapAt, Best* best, std::string* trace = nullptr) {
+  void Read(const Window& w, const std::vector<char32_t>& core, int32_t swapAt, Best* best, std::string* trace = nullptr,
+            bool mustRepair = false) {
     std::vector<LArc> arcs;
     std::vector<RepairArc> rarcs;
     Facts facts{m_, R_, *ws_, core, layout_, &single_, &wordRun_, &triple_};
@@ -1086,20 +1110,24 @@ class Reader {
     uint16_t rightCls = w.right >= 0 ? A[static_cast<size_t>(w.right)].lcls : 0;
     int32_t swapCost = swapAt >= 0 ? R_.ops[static_cast<size_t>(RepairOp::swap)].cost : 0;
 
-    // dynamic programme over the candidates in start order
+    // dynamic programme over the candidates in start order; state = arc * 2 + (a repaired word or the swap on
+    // the path). With mustRepair the reading is compared with the analyzer's own reading only, so another
+    // unrepaired reading never stands in for it (ご|さ|い|ます for ごさいます).
     std::vector<uint32_t> order(arcs.size());
     for (uint32_t k = 0; k < order.size(); ++k) order[k] = k;
     std::sort(order.begin(), order.end(), [&](uint32_t x, uint32_t y) { return arcs[x].arc.b < arcs[y].arc.b; });
     std::vector<std::vector<uint32_t>> endAt(w.e + 1);
-    std::vector<Key> f(arcs.size(), kNoKey);
-    std::vector<int32_t> bp(arcs.size(), -1);
+    std::vector<Key> f(arcs.size() * 2, kNoKey);
+    std::vector<int32_t> bp(arcs.size() * 2, -1);
+    const uint32_t startU = swapAt >= 0 ? 1 : 0;
     for (uint32_t x : order) {
       LArc& a = arcs[x];
       // a repaired word must itself be a valid reading
       if (a.rarc >= 0 && a.bad) continue;
-      Key bk = kNoKey;
-      int32_t arg = -1;
-      auto consider = [&](const Info& li, uint16_t lcls, Key base, int32_t from, bool repairedLeft) {
+      const uint32_t own = a.rarc >= 0 ? 1 : 0;
+      Key bk[2] = {kNoKey, kNoKey};
+      int32_t arg[2] = {-1, -1};
+      auto consider = [&](const Info& li, uint16_t lcls, Key base, int32_t from, bool repairedLeft, uint32_t u) {
         if (base.bad >= kNoKey.bad) return;
         int pb = PairBad(R_, li, a.info, nullptr);
         if (pb && (a.rarc >= 0 || repairedLeft)) return;
@@ -1107,40 +1135,50 @@ class Reader {
         k.bad += pb + a.bad;
         k.rep += a.rep;
         k.cost += m_.Conn(lcls, a.arc.lcls) + a.arc.cost;
-        if (k < bk) {
-          bk = k;
-          arg = from;
+        uint32_t v = u | own;
+        if (k < bk[v]) {
+          bk[v] = k;
+          arg[v] = from;
         }
       };
-      if (a.arc.b == w.b) consider(leftInfo, leftCls, Key{0, swapCost, 0}, -1, false);
+      if (a.arc.b == w.b) consider(leftInfo, leftCls, Key{0, swapCost, 0}, -1, false, startU);
       int sb = a.arc.b > w.b ? SpaceBad(a.arc.b, a.rarc >= 0 ? &rarcs[static_cast<size_t>(a.rarc)] : nullptr) : 0;
-      for (uint32_t y : endAt[a.arc.b]) {
-        Key base = f[y];
+      for (uint32_t ys : endAt[a.arc.b]) {
+        uint32_t y = ys / 2;
+        Key base = f[ys];
         if (base.bad < kNoKey.bad) base.bad += sb;
-        consider(arcs[y].info, arcs[y].arc.rcls, base, static_cast<int32_t>(y), arcs[y].rarc >= 0);
+        consider(arcs[y].info, arcs[y].arc.rcls, base, static_cast<int32_t>(ys), arcs[y].rarc >= 0, ys % 2);
       }
-      f[x] = bk;
-      bp[x] = arg;
-      if (bk.bad < kNoKey.bad) endAt[a.arc.e].push_back(x);
+      for (uint32_t v = 0; v < 2; ++v) {
+        f[x * 2 + v] = bk[v];
+        bp[x * 2 + v] = arg[v];
+        if (bk[v].bad < kNoKey.bad) endAt[a.arc.e].push_back(x * 2 + v);
+      }
     }
     Key fin = kNoKey;
     int32_t last = -1;
-    for (uint32_t y : endAt[w.e]) {
+    for (uint32_t ys : endAt[w.e]) {
+      uint32_t y = ys / 2;
+      if (mustRepair && ys % 2 == 0) continue;
       int pb = PairBad(R_, arcs[y].info, rightInfo, nullptr);
       if (pb && arcs[y].rarc >= 0) continue;
-      Key k = f[y];
+      Key k = f[ys];
       k.bad += pb;
       k.cost += m_.Conn(arcs[y].arc.rcls, rightCls);
       if (k < fin) {
         fin = k;
-        last = static_cast<int32_t>(y);
+        last = static_cast<int32_t>(ys);
       }
     }
     if (trace) {
       // --why at level 2: the best reading of this variant and the repaired words tried
       *trace += "    read" + (swapAt >= 0 ? " swap@" + std::to_string(swapAt) : std::string()) + ": bad " +
                 std::to_string(fin.bad) + " cost " + std::to_string(fin.rep) + " |";
-      for (int32_t x = last; x >= 0; x = bp[static_cast<size_t>(x)]) *trace += " " + arcs[static_cast<size_t>(x)].info.surf;
+      for (int32_t x = last; x >= 0; x = bp[static_cast<size_t>(x)]) {
+        const Info& in = arcs[static_cast<size_t>(x) / 2].info;
+        *trace += " " + in.surf + "[" + std::string(in.ud) + (in.cform.empty() ? "" : " " + std::string(in.cform)) + " " +
+                  std::string(in.lemma) + "]";
+      }
       *trace += " (right to left)\n";
       size_t shown = 0;
       for (auto& la : arcs)
@@ -1151,7 +1189,7 @@ class Reader {
     if (last < 0 || !(fin < best->key)) return;
     if (swapAt >= 0 && fin.bad > 0) return;  // a transposition must make the span a valid reading
     std::vector<uint32_t> path;
-    for (int32_t x = last; x >= 0; x = bp[static_cast<size_t>(x)]) path.push_back(static_cast<uint32_t>(x));
+    for (int32_t x = last; x >= 0; x = bp[static_cast<size_t>(x)]) path.push_back(static_cast<uint32_t>(x) / 2);
     std::reverse(path.begin(), path.end());
     if (swapAt >= 0 && !SwapOk(arcs, rarcs, path, static_cast<uint32_t>(swapAt))) return;
     best->key = fin;
@@ -1285,6 +1323,7 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
       else if (name == "pause-ud") out->pauseUd = list;
       else if (name == "phrase-end-ud") out->phraseEndUd = list;
       else if (name == "censor-marks") out->censor = letters;
+      else if (name == "core-ud") out->coreUd = list;
       else if (name == "sound-end") out->soundEnd = letters;
       else if (name == "voiced-words") out->voicedWords = letters;
       else if (name == "brackets") out->brackets = letters;
@@ -1356,6 +1395,31 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
   return true;
 }
 
+void SetCoreKeys(const Model& m, std::string_view keys, RepairRules* r) {
+  std::unordered_map<std::string, uint8_t> set;
+  for (size_t at = 0; at < keys.size();) {
+    size_t nl = keys.find('\n', at);
+    std::string k(keys.substr(at, nl == std::string_view::npos ? std::string_view::npos : nl - at));
+    if (!k.empty() && k.back() == '\r') k.pop_back();
+    if (!k.empty()) set.emplace(std::move(k), 1);
+    at = nl == std::string_view::npos ? keys.size() : nl + 1;
+  }
+  r->fallbackGroup.assign(m.groups.size(), 1);
+  for (size_t g = 0; g < m.groups.size(); ++g) {
+    const auto& grp = m.groups[g];
+    if (HasPrefix(r->coreUd, m.udNames[grp.ud])) {
+      r->fallbackGroup[g] = 0;
+      continue;
+    }
+    std::string stem = ToUtf8(m.C(grp.stem, grp.stemLen));
+    bool core = set.count(stem) || set.count(std::string(m.S(grp.lemma)));
+    const auto& p = m.paradigms[grp.paradigm];
+    for (uint32_t f = p.first; f < p.first + p.count && !core; ++f)
+      core = set.count(stem + ToUtf8(m.C(m.pforms[f].suf, m.pforms[f].sufLen))) != 0;
+    r->fallbackGroup[g] = core ? 0 : 1;
+  }
+}
+
 std::string_view RepairOpId(const RepairRules& rules, RepairOp op) { return rules.ops[static_cast<size_t>(op)].id; }
 
 bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Options& opt, std::string* why) {
@@ -1401,12 +1465,13 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
     std::vector<uint32_t> cur(P.begin() + static_cast<long>(s), P.begin() + static_cast<long>(t));
     std::string checks;
     Key now = reader.Score(w, cur, why ? &checks : nullptr);
+    const bool lexical = reader.LexicalTrigger(cur);
     Best best;
     best.key = now;
     best.key.rep = 0;
     std::string trace;
     std::string* tr = why && opt.whyLevel >= 2 ? &trace : nullptr;
-    reader.Read(w, ws->core, -1, &best, tr);
+    reader.Read(w, ws->core, -1, &best, tr, lexical);
     if (R.ops[static_cast<size_t>(RepairOp::swap)].on && best.key.bad > 0) {
       std::vector<char32_t> sw = ws->core;
       for (uint32_t p = w.b; p + 1 < w.e; ++p) {
@@ -1415,7 +1480,7 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
         if (IsHiragana(sw[p]) != IsHiragana(sw[p + 1]) || reader.LongKata(p) || reader.LongKata(p + 1)) continue;
         if (!hot[p] && !hot[p + 1]) continue;
         std::swap(sw[p], sw[p + 1]);
-        reader.Read(w, sw, static_cast<int32_t>(p), &best, tr);
+        reader.Read(w, sw, static_cast<int32_t>(p), &best, tr, lexical);
         std::swap(sw[p], sw[p + 1]);
       }
     }

@@ -33,6 +33,12 @@ bool Analyzer::LoadRepair(std::string_view tsv, std::string* err) {
   return true;
 }
 
+bool Analyzer::SetRepairCore(std::string_view keys) {
+  if (!repair_ || !model_) return false;
+  SetCoreKeys(*model_, keys, repair_.get());
+  return true;
+}
+
 bool Analyzer::LoadOverlay(std::string_view overlay, std::string* err) {
   if (!model_) {
     *err = "no snapshot loaded";

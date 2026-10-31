@@ -198,6 +198,35 @@ HD_TEST(repair_cases) {
   HD_CHECK_EQ(bad, 0);
 }
 
+// With a core lexicon, a fallback word that a repair turns into core words is read again: ごさ is outside the
+// core (here the closed classes alone), so ありがとうごさいます is read as ございます.
+HD_TEST(repair_core_fallback) {
+  Analyzer an;
+  Model m;
+  std::string err, tsv;
+  if (!LoadTsvDir(HD08_ANALYZER_DATA, &m, &err)) HD_SKIP("no analyzer data");
+  Finalize(&m);
+  HD_REQUIRE(an.Load(Serialize(m), &err));
+  HD_REQUIRE(ReadText(std::string(HD08_ANALYZER_DATA) + "/ja/repair.tsv", &tsv));
+  HD_REQUIRE(an.LoadRepair(tsv, &err));
+  Options opt;
+  opt.margins = false;
+  opt.repair = true;
+  Analysis r;
+  an.Analyze("ありがとうごさいます", opt, &r);
+  HD_CHECK(r.repairs.empty());  // without a core lexicon every word is core
+  HD_REQUIRE(an.SetRepairCore("-\n"));
+  an.Analyze("ありがとうごさいます", opt, &r);
+  HD_CHECK_EQ(r.repaired, std::string("ありがとうございます"));
+  an.Analyze("ありがとうございます", opt, &r);
+  HD_CHECK(r.repairs.empty());
+  // spoken lengthening never changes, even of a word outside the core
+  for (const char* keep : {"「すごーい！」", "「ちがーう！」", "「だーれだ！」", "「いいなー？」"}) {
+    an.Analyze(keep, opt, &r);
+    HD_CHECK(r.repairs.empty());
+  }
+}
+
 int main(int argc, char** argv) {
   const std::string_view filter = argc > 1 ? argv[1] : "";
   int failed = 0, run = 0;

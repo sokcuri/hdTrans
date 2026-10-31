@@ -38,6 +38,7 @@
 # Parameter rows (kind param): lists the operations and checks read; the list is in `when`
 # (POS prefixes joined by |, or a string of letters).
 id	spec	kind	cost	when	require	st	prov	note
+rp.param.core-ud	REP-9	param	-	助詞|助動詞|補助記号|記号|接尾辞|接頭辞|代名詞|連体詞|接続詞|感動詞|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|名詞-数詞	-	m	own	closed classes, always in the core lexicon
 rp.param.function-ud	REP-1	param	-	助詞|助動詞|接尾辞|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|補助記号	-	m	own	function words: katakana in them may be read as hiragana; a transposition may sit in them
 rp.param.fold-word-ud	REP-1	param	-	助詞|助動詞	-	m	own	a katakana run that is a word as written is read as hiragana only as one of these (カラ → から)
 rp.param.no-edit-ud	REP-8	param	-	名詞-固有名詞	-	m	own	one edit never yields a name
@@ -62,6 +63,7 @@ rp.space	REP-5	space	1	-	-	m	own	だったら しい → だったらしい; 嬉
 rp.dakuten	REP-6	dakuten	2	-	-	m	own	とうしたんた → どうしたんだ; ごさいます → ございます
 rp.swap	REP-7	swap	3	minlen=4	-	m	own	どうたしんだ → どうしたんだ; らいし → らしい
 rp.edit1	REP-8	edit1	4	minlen=4	-	m	own	one kana off in a long kana word
+rp.bad.fallback	REP-9	bad.tok	-	t.tier=fallback & t.elong=none & t.derive=	-	m	own	a word outside the core lexicon (a fallback row): ありがとうごさいます (ごさ); a repaired reading uses core words only; a lengthened or spoken word (すごーい) is judged by the lengthening rows alone
 rp.bad.unknown	REP-9	bad.tok	-	t.arc=unk & t.script=hira|kata|kanji|jp|mixed|mark	-	m	own	no dictionary word in Japanese letters: デドアガ, ドーーア (digits and Latin are not judged)
 rp.bad.unknown-mark	REP-9	valid.tok	-	t.arc=unk & t.script=sym|other	-	m	own	an unknown reading of a mark, a digit or a Latin letter judges a reading but opens no span: 「 そうだね」 cannot dodge rp.bad.space-open with an unknown 「
 rp.bad.mixed	REP-9	bad.tok	-	t.script=mixed	-	m	own	katakana after hiragana inside one word: れル, すグ
@@ -73,6 +75,7 @@ rp.bad.kana-noun	REP-9	bad.tok	-	t.script=hira & t.len=1 & t.pos=n|pn|num	-	m	ow
 rp.bad.classical-su	REP-9	bad.tok	-	t.ctype=文語サ行変格 & t.lemma=為る	-	m	own	classical す in modern text is a misreading of other kana: とうしたんた
 rp.bad.fold-edge-l	REP-9	valid.pair	-	l.fold=none & l.script=kata & r.fold=part|all & r.firstkata=1	l.lemmascript=kata & l.arc=lex|long	m	own	a katakana run read partly as hiragana keeps only a katakana word: デドア|が (ドア) but not タナ|とす
 rp.bad.fold-edge-r	REP-9	valid.pair	-	l.fold=part|all & l.lastkata=1 & r.fold=none & r.script=kata	r.lemmascript=kata & r.arc=lex|long	m	own	the same, the katakana word after: で|ドア
+rp.bad.small-vowel	REP-9	valid.tok	-	t.surf=ぁ|ぃ|ぅ|ぇ|ぉ|ァ|ィ|ゥ|ェ|ォ & t.ud^=補助記号|記号 & t.nextcc=hira|kata|kanji & t.prevcc=hira|kata|kanji	-	m	own	a small vowel standing alone between two letters: ごさぃます; なぁんだ reads the vowel inside its word
 rp.bad.mark	REP-9	bad.tok	-	t.script=mark & t.prevcc=hira & t.nextcc=kanji & t.lead=1	-	m	own	a lone run of ー, 〜 or っ between a word in hiragana and a kanji: 俺は〜砂浜, 俺のっ潜在; お～竹, せ～の, 風邪っぴき, ぐあッッ！ stay
 rp.bad.elong-mid	REP-9	bad.tok	-	t.elong=mid|infl & t.pos=aux|p_case|p_topic|p_conj|p_adv	-	m	own	lengthening inside a particle or an auxiliary: ませ〜ん, た〜ら; だーれ, ちがーう, すごーい stay
 rp.bad.elong-infl	REP-9	valid.pair	-	l.elong=infl & l.pos=aux & r.pos=aux|p_case|p_conj	-	m	own	a lengthened auxiliary before another function word: したーんだ
@@ -85,7 +88,7 @@ rp.bad.intj-letter	REP-9	bad.pair	-	r.ud^=感動詞 & r.len=1 & r.script=hira & 
 rp.bad.elong-particle	REP-9	bad.pair	-	l.elong=end & l.pos=p_case|p_topic|p_conj|p_adv & l.nextcc=kanji	-	m	own	a particle lengthened right before a kanji word: 心のー声, 部員がー居る; その、 and ちょー大好き stay
 rp.bad.ta	REP-9	bad.pair	-	r.ctype=助動詞-タ & !l.arc=edge	l.cform^=連用形	m	own	た/だ after a continuative form only: 女の子たよ, どうたし
 rp.bad.te	REP-9	bad.pair	-	r.ud=助詞-接続助詞 & r.lemma=て|たり & !l.arc=edge	l.cform^=連用形	m	own	て/で after a continuative form only: 自分て思って
-rp.bad.masu	REP-9	bad.pair	-	r.ctype=助動詞-マス & !l.arc=edge	l.cform^=連用形	m	own	ます after a continuative form only
+rp.bad.masu	REP-9	bad.pair	-	r.ctype=助動詞-マス & !l.arc=edge	l.cform=連用形-一般|連用形-補助 || l.cform=連用形-イ音便 & l.lemma=御座る|いらっしゃる|為さる|下さる|仰る|おっしゃる	m	own	ます after the plain continuative form, or the イ音便 of ござる, いらっしゃる, なさる, くださる, おっしゃる: ご|さい|ます (裂い) is not one
 rp.bad.tai	REP-9	bad.pair	-	r.ctype=助動詞-タイ & !l.arc=edge	l.cform^=連用形	m	own	たい after a continuative form only
 rp.bad.nai	REP-9	bad.pair	-	r.ctype=助動詞-ナイ|助動詞-ヌ & !l.arc=edge	l.cform^=未然形	m	own	ない/ぬ after an irrealis form only
 rp.bad.reru	REP-9	bad.pair	-	r.ctype=助動詞-レル & !l.arc=edge	l.cform^=未然形	m	own	れる/られる after an irrealis form only
@@ -109,7 +112,7 @@ rp.bad.mark-repeat	REP-9	bad.tok	-	t.repeat=1	-	m	own	a repeated comma, or a rep
 rp.bad.copula	REP-9	bad.pair	-	r.ctype=助動詞-ダ|助動詞-デス & !l.arc=edge	!l.cform^=連用形|未然形|仮定形|命令形	m	own	だ/です not after a continuative or irrealis form
 rp.bad.copula-twice	REP-9	bad.pair	-	l.ctype=助動詞-ダ & r.ctype=助動詞-ダ	-	m	own	だだ
 rp.bad.suffix	REP-9	valid.pair	-	r.ud^=接尾辞	!l.ud^=助詞|助動詞	m	own	a suffix after a particle or an auxiliary: かららら
-rp.bad.prefix	REP-9	bad.pair	-	l.ud=接頭辞	!r.ud^=助詞|助動詞|補助記号 & !r.arc=edge	m	own	a prefix before a particle, an auxiliary, punctuation or the end
+rp.bad.prefix	REP-9	bad.pair	-	l.ud=接頭辞	!r.ud^=助詞|助動詞|補助記号|接頭辞|接尾辞 & !r.arc=edge	m	own	a prefix before a particle, an auxiliary, another prefix, a suffix, punctuation or the end: ご|さい|ます (御 + 再), ご|さ|い
 rp.bad.space-in-word	REP-9	bad.space	-	-	-	m	own	a space inside a word: だったら しい (らしい), 実 力不足 (実力), ど うですか (どう)
 rp.bad.space-punct	REP-9	bad.pair	-	r.space=1 & r.surf=。|、|」|』|）|】|》|〉|？|！ & l.script=hira|kata|kanji|jp|mixed	-	m	own	a space before 。、」: つく 。, です 」
 rp.bad.space-open	REP-9	bad.pair	-	r.space=1 & l.ud=補助記号-括弧開	-	m	own	a space after 「: 「 はいはい
