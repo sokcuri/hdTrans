@@ -8,7 +8,7 @@ lexical:todome	息の根を止めた。	has:숨통을 끊었다	keep	lookup
 lexical:todome	車を止めて降りた。	has:차를 세워	keep	lookup
 lexical:nanyori	なにより、俺には会長お墨付きの、新しい対策がある。	has:무엇보다, 나에게는	fix	rewrites
 lexical:nanyori	そしてなにより慣れない異世界に不安がる	has:그리고 무엇보다 익숙	fix	rewrites
-cx:nanyori:10	「それはなによりだ」	has:그건 다행이다	fix	rewrites
+cx:nanyori:10	「それはなによりだ」	has:그건 다행이	fix	rewrites
 cx:nanyori:10	まあ、怪我がなくてなによりだが	has:다행이지만	fix	rewrites
 cx:nanyori:10	全員無事でなによりだ。	has:다행이다	fix	rewrites
 lexical:nanyori	ま、無事でなによりだ。	has:무사해서 다행이다	keep	rewrites

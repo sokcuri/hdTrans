@@ -18,7 +18,7 @@ phrase:coll	たまにマリアローゼ様に苦言を呈されてもいる。	h
 phrase:coll	征服者の名を冠するその部隊	has:이름을 따는	fix	builtin-phrase
 phrase:coll	言葉の途中で、意外なところからダメ出しを食らった。	has:지적을 받았다	fix	builtin-phrase
 phrase:coll	みいちゃんが俺にいつものダメ出しをした。	has:지적을 했다	keep	lookup
-phrase:coll	「もう、お嫁にいけなくなる」	has:시집갈 수 없게 된다	fix	builtin-phrase
+phrase:coll	「もう、お嫁にいけなくなる」	has:시집갈 수 없게 	fix	builtin-phrase
 phrase:coll	「うううう……もうお嫁に行けない……」	has:시집갈 수 없	fix	builtin-phrase
 phrase:coll	ほとぼりが冷めた頃に、適当な理由で婚約を解消してしまえば	has:잠잠해졌을 무렵에	fix	builtin-phrase
 phrase:coll	確かに君と僕は 15も年が離れてる	has:나이 차이가 난다	fix	builtin-phrase

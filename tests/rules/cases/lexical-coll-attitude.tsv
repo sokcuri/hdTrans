@@ -10,7 +10,7 @@ cx:coll-verb:50	彼が悪いと思う。	!rule:cx:coll-verb:50	keep	rewrites
 cx:coll-verb:50	機嫌が悪いと執事に当たり散らし、	!rule:cx:coll-verb:50	keep	rewrites
 cx:coll-verb:50	これだからお義姉様が気持ち悪いと言うのよ。	!rule:cx:coll-verb:50	keep	rewrites
 lexical:coll-attitude	だが、――実家の事となれば話は別だ。	has:이야기가 다르다	fix	builtin-phrase
-lexical:coll-attitude	「私も同じ意見だが、相手があのアールなら話は別だ」	has:이야기가 다르다	fix	builtin-phrase
+lexical:coll-attitude	「私も同じ意見だが、相手があのアールなら話は別だ」	has:이야기가 달	fix	builtin-phrase
 lexical:coll-attitude	ふらふらしていた、っていうなら話は別だけど……	has:이야기가 다르지만	fix	builtin-phrase
 lexical:coll-attitude	「大切な人のことを丁重に弔うのなら話は別よ」	has:이야기가 달라	fix	builtin-phrase
 lexical:coll-attitude	それとこれとは別の話だ。	lacks:다르다	keep	lookup
