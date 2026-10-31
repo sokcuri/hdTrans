@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:gram:mirare-passive:1	誰かに見られたらどうすんの……！？	누군가에게 보이면 어떻게 해……!?	fix	local
 dict:gram:mirare-passive:1	彼女の夢が見られるなんて保証はない。	그녀의 꿈을 볼 수 있다니 보증은 없다.	keep	local
 dict:gram:mirare-passive:2	俺に見られるのが恥ずかしいのか	나에게 보이는 것이 부끄러운 건가	fix	local
-dict:gram:mirare-passive:2	僕たちも容疑者に見られているっぽかったです	저희도 용의자로 보여지고 있는 것 같았습니다	keep	local
+dict:gram:mirare-passive:2	僕たちも容疑者に見られているっぽかったです	저희도 용의자로 보이고 있는 것 같았습니다	keep	local
 dict:passive-gaze:1	冷たい目で見られた。	차가운 눈초리를 받았다.	fix	local
 dict:passive-gaze:3	ロシアでも日本でも奇異の目で見られ続けた私に、	러시아에서도 일본에서도 기이의 눈초리를 계속 받은 나에게,	fix	local
 dict:gram:iware:hear	「……言われたくなかったよ」	「……듣고 싶지 않았어」	fix	local

@@ -52,8 +52,8 @@ cx:hodo-degree:15	彼ほどの人はいない。	그 정도의 사람은 없다.
 cx:hodo-degree:30	膝から崩れ落ちそうな程だった	무릎에서 무너져 내릴 것 같을 정도였다	fix	rewrites
 cx:hodo-degree:30	修復不可能な程までに断裂した	수복 불가능할 정도까지 단열했다	fix	rewrites
 cx:hodo-degree:30	付き合っているほど暇ではない。	사귈 만큼 한가하지 않다.	keep	rewrites
-normalize:spelling-variant	私の置かれている状況について等を聞いた。	내가 놓여져 있는 상황에 대해 등을 들었다.	keep	lookup
-normalize:spelling-variant	私の置かれている状況についてなどを聞いた。	내가 놓여져 있는 상황에 대해 등을 들었다.	fix	lookup
+normalize:spelling-variant	私の置かれている状況について等を聞いた。	내가 놓여 있는 상황에 대해 등을 들었다.	keep	lookup
+normalize:spelling-variant	私の置かれている状況についてなどを聞いた。	내가 놓여 있는 상황에 대해 등을 들었다.	fix	lookup
 normalize:spelling-variant	バスの遅れ等による運賃の払い戻し	버스의 지연 등에 의한 운임의 환불	keep	lookup
 normalize:spelling-variant	バスの遅れなどによる運賃の払い戻し	버스의 지연 등에 의한 운임의 환불	fix	lookup
 dict:jisjk:118867	この時の為、今、ここにいます。	rule:dict:jisjk:118867=(을)를 위해	fix	local

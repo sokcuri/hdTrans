@@ -26,7 +26,7 @@ dict:ichimoku-nimoku-passive	一目も二目も置かれています。	높이 �
 dict:ichimoku-nimoku-passive	先輩には一目置く。	선배에게는 한 수 접어준다.	keep	lookup
 dict:ichimoku-nimoku-passive	一目で分かった。	한눈에 알았다.	keep	lookup
 dict:ichimoku-nimoku-passive	箱を二つ置いた。	상자를 두 개 두었다.	keep	lookup
-dict:ichimoku-nimoku-passive	手紙が置かれていた。	편지가 놓여져 있었다.	keep	lookup
+dict:ichimoku-nimoku-passive	手紙が置かれていた。	편지가 놓여 있었다.	keep	lookup
 dict:te-wo-furikaesu	手を振り返した。	손을 흔들어 답했다.	fix	lookup
 dict:te-wo-furikaesu	手を振り返す。	손을 흔들어 답한다.	fix	lookup
 dict:te-wo-furikaesu	手を振り返してくれた。	손을 흔들어 답해 주었다.	fix	lookup
