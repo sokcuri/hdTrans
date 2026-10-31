@@ -1,0 +1,12 @@
+#! layer=base
+# 굳은 말의 부정: 融通が利かない 융통성이 없다, 気が利かない 눈치가 없다
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+融通が利かな	융통성이 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w2
+融通がきかな	융통성이 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w3
+融通が効かな	융통성이 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w4
+融通の利かな	융통성이 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w5
+融通のきかな	융통성이 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w6
+気が利かな	눈치가 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w7
+気がきかな	눈치가 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w8
+気の利かな	눈치가 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w11
+気のきかな	눈치가 $FA@	H7N0			GN			LEX-3143	verb-object-senses:w12
