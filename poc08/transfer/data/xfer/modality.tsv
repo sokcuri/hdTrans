@@ -18,7 +18,7 @@ mod.tewaikenai	N5-50	[link=te] [kase=wa] [aux.iku.eval] [pol=neg]	-	pred.ctype=c
 mod.chaikenai	N5-50	[aux.c.cha] [aux.iku.eval] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	食べちゃいけない → 먹으면 안 되다
 mod.koto.aru	N5-51	[tense=past] [aux.fn.koto] [kase=ga] 有る	-	pred.ctype=adn:past	N:적{dep} P:subj V:있다	m	own	行ったことがある → 간 적이 있다
 mod.koto.nai	N5-51	[tense=past] [aux.fn.koto] [kase=ga] [aux.nai.exist]	-	pred.ctype=adn:past	N:적{dep} P:subj V:없다	m	own	行ったことがない → 간 적이 없다
-mod.daro.wh	N5-54	{N} [aux.da.daro]	N.wh=+	-	V:이다{glue,eomi=lkka,mood=q}	m	own	何だろう → 뭘까
+mod.daro.wh	N5-54	{N:@question} [aux.da.daro]	-	-	V:이다{glue,eomi=lkka,mood=q}	m	own	何だろう → 뭘까
 mod.tewaikenai.masu	N5-50	[link=te] [kase=wa] [aux.iku.eval] [polite=desu-masu] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	行ってはいけません → 가면 안 돼요
 mod.chaikenai.masu	N5-50	[aux.c.cha] [aux.iku.eval] [polite=desu-masu] [pol=neg]	-	pred.ctype=conn;pred.rel=cond	V:되다{neg=an}	m	own	食べちゃいけません → 먹으면 안 돼요
 mod.hoshii.neg	N5-45	{NP} [kase=ga] 欲しい [pol=neg]	-	-	P:obj V:갖다{ctype=conn,eomi=-고} V:싶다{aux,vpos=A,neg=ji-anh}	m	own	本がほしくない → 책을 갖고 싶지 않다

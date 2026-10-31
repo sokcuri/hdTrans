@@ -6,14 +6,14 @@ mod.tai.neg	fix	「パンを食べたくない。」	「빵을 먹고 싶지 않
 mod.tai.neg	keep	「パンを食べない。」	「빵을 안 먹어.」	inv
 mod.hoshii	fix	「本がほしい。」	「책을 갖고 싶어.」	inv
 mod.hoshii	keep	「本が高い。」	「책이 비싸.」	inv
-mod.desho	fix	「明日は雨が降るでしょう。」	「내일은 비가 올 거예요.」	inv
-mod.desho	keep	「明日は雨が降ります。」	「내일은 비가 와요.」	inv
+mod.desho	fix	「明日は雨が降るでしょう。」	「내일은 비가 내릴 거예요.」	inv
+mod.desho	keep	「明日は雨が降ります。」	「내일은 비가 내려요.」	inv
 mod.desho.na	fix	「部屋は静かでしょう。」	「방은 조용할 거예요.」	inv
 mod.desho.na	keep	「部屋は静かです。」	「방은 조용해요.」	inv
 mod.desho.n	fix	「明日は雨でしょう。」	「내일은 비일 거예요.」	inv
 mod.desho.n	keep	「明日は雨です。」	「내일은 비예요.」	inv
-mod.daro	fix	雨が降るだろう。	비가 올 것이다.	inv
-mod.daro	keep	雨が降る。	비가 온다.	inv
+mod.daro	fix	雨が降るだろう。	비가 내릴 것이다.	inv
+mod.daro	keep	雨が降る。	비가 내린다.	inv
 mod.daro.na	fix	部屋は静かだろう。	방은 조용할 것이다.	inv
 mod.daro.na	keep	部屋は静かだ。	방은 조용하다.	inv
 mod.daro.n	fix	明日は雨だろう。	내일은 비일 것이다.	inv

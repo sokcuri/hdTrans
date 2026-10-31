@@ -2,8 +2,8 @@
 id	kind	ja	ko	src
 case.wa	fix	私は学生だ。	나는 학생이다.	inv
 case.wa	keep	私が学生だ。	내가 학생이다.	inv
-case.ga	fix	雨が降る。	비가 온다.	inv
-case.ga	keep	雨は降る。	비는 온다.	inv
+case.ga	fix	雨が降る。	비가 내린다.	inv
+case.ga	keep	雨は降る。	비는 내린다.	inv
 case.ga.frame	fix	私は本が好きだ。	나는 책을 좋아한다.	inv
 case.ga.frame	keep	本が高い。	책이 비싸다.	inv
 case.wo	fix	本を読む。	책을 읽는다.	inv
@@ -39,7 +39,7 @@ case.made	keep	学校に行く。	학교에 간다.	inv
 case.yori	fix	本は水より高い。	책은 물보다 비싸다.	inv
 case.yori	keep	本は高い。	책은 비싸다.	inv
 case.dake	fix	水だけ飲む。	물만 마신다.	inv
-case.dake	keep	水を飲む。	물을 마신다.	inv
+case.dake	keep	手紙を書く。	편지를 쓴다.	inv
 case.ya	fix	本やペンを買う。	책이나 펜을 산다.	inv
 case.ya	keep	本とペンを買う。	책과 펜을 산다.	inv
 case.mo.nani.neg	fix	何も食べない。	아무것도 먹지 않는다.	inv
@@ -60,3 +60,7 @@ case.no.jeo	fix	「私の本を読みます。」	「제 책을 읽어요.」	in
 case.no.jeo	keep	「私の本を読む。」	「내 책을 읽어.」	inv
 case.no.neo	fix	「君の本を読む。」	「네 책을 읽어.」	inv
 case.no.neo	keep	「私の本を読む。」	「내 책을 읽어.」	inv
+case.ka.or	fix	パンかりんごを食べる。	빵이나 사과를 먹는다.	inv
+case.ka.or	keep	パンとりんごを食べる。	빵과 사과를 먹는다.	inv
+case.mo.aru	fix	部屋に時計もある。	방에 시계도 있다.	inv
+case.mo.aru	keep	部屋に時計がある。	방에 시계가 있다.	inv

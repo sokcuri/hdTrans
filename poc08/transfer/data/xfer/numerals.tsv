@@ -1,24 +1,42 @@
 #! numerals
 # Korean numerals (N5-55, N5-56). native: the counting word; adn: its form before a counter; sino: Sino-Korean.
 # A counter's num feature (lexicon) picks native or sino; native numerals stop at 99, higher numbers are Sino-Korean.
-value	native	adn	sino
-1	하나	한	일
-2	둘	두	이
-3	셋	세	삼
-4	넷	네	사
-5	다섯	다섯	오
-6	여섯	여섯	육
-7	일곱	일곱	칠
-8	여덟	여덟	팔
-9	아홉	아홉	구
-10	열	열	십
-20	스물	스무	이십
-30	서른	서른	삼십
-40	마흔	마흔	사십
-50	쉰	쉰	오십
-60	예순	예순	육십
-70	일흔	일흔	칠십
-80	여든	여든	팔십
-90	아흔	아흔	구십
-100	-	-	백
-1000	-	-	천
+# Rows: value N native adn sino; digit KANJI N; unit KANJI N (十 百 千); alone COUNTER N: the counter is dropped and
+# the counting word stands alone (一つ → 하나); predicate KO: the ending of a Korean predicate lemma (a noun sense
+# with it reads as a predicate).
+kind	key	a	b	c
+value	1	하나	한	일
+value	2	둘	두	이
+value	3	셋	세	삼
+value	4	넷	네	사
+value	5	다섯	다섯	오
+value	6	여섯	여섯	육
+value	7	일곱	일곱	칠
+value	8	여덟	여덟	팔
+value	9	아홉	아홉	구
+value	10	열	열	십
+value	20	스물	스무	이십
+value	30	서른	서른	삼십
+value	40	마흔	마흔	사십
+value	50	쉰	쉰	오십
+value	60	예순	예순	육십
+value	70	일흔	일흔	칠십
+value	80	여든	여든	팔십
+value	90	아흔	아흔	구십
+value	100	-	-	백
+value	1000	-	-	천
+digit	〇	0
+digit	一	1
+digit	二	2
+digit	三	3
+digit	四	4
+digit	五	5
+digit	六	6
+digit	七	7
+digit	八	8
+digit	九	9
+unit	十	10
+unit	百	100
+unit	千	1000
+alone	つ	1
+predicate	다

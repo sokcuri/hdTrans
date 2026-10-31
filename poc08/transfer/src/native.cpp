@@ -168,7 +168,11 @@ void LoadRows(const std::string& path, Data& d) {
     const std::string file = std::filesystem::path(std::u8string(path.begin(), path.end())).filename().string();
     if (text.starts_with("#! numerals")) {
         Rows(text, [&](const std::vector<std::string>& f, size_t) {
-            if (f.size() >= 4) d.numerals[std::atoi(f[0].c_str())] = {f[1], f[2], f[3]};
+            if (f.size() >= 5 && f[0] == "value") d.numerals[std::atoi(f[1].c_str())] = {f[2], f[3], f[4]};
+            else if (f.size() >= 3 && f[0] == "digit") d.digits[f[1]] = std::atoi(f[2].c_str());
+            else if (f.size() >= 3 && f[0] == "unit") d.units[f[1]] = std::atoi(f[2].c_str());
+            else if (f.size() >= 3 && f[0] == "alone") d.alone[f[1]] = std::atoi(f[2].c_str());
+            else if (f.size() >= 2 && f[0] == "predicate") d.predicateEnd = f[1];
         });
         return;
     }
@@ -519,7 +523,9 @@ struct Ctx {
         if (!ok) return false;
         if (!a.cls.empty()) {
             bool isA = false;
-            for (const std::string& one : Split(TokKey(i, "cls"), ' '))
+            std::string cls = TokKey(i, "cls");
+            std::replace(cls.begin(), cls.end(), '|', ' ');
+            for (const std::string& one : Split(cls, ' '))
                 isA = isA || (!one.empty() && d.IsA(one, a.cls));
             if (!isA) return false;
         }
@@ -640,9 +646,9 @@ struct Ctx {
                 std::string c = Get(en.feat, "cls");
                 for (const Sense& s : en.senses)
                     if (s.sense == 1 && c.empty()) c = Get(s.feat, "cls");
-                for (const std::string& one : Split(c, '|'))
-                    for (const std::string& two : Split(one, ' '))
-                        if (!two.empty()) out.push_back(two);
+                std::replace(c.begin(), c.end(), '|', ' ');
+                for (const std::string& two : Split(c, ' '))
+                    if (!two.empty()) out.push_back(two);
             }
             return out;
         };
@@ -668,6 +674,21 @@ struct Ctx {
         if (i + 1 < tk.size()) nexts.push_back(tk[i + 1].lemma);
         if (i > 0) afters.push_back(tk[i - 1].lemma);
         if (k.epos == Pos::adj && k.form == "renyo" && i + 1 < tk.size() && tk[i + 1].content) forms.insert("adv");
+        // cop / attr: a noun read as a predicate (便利だ, 便利な, 便利ではない)
+        if (i + 1 < tk.size()) {
+            const Tk& nx = tk[i + 1];
+            auto has = [&](const Tk& t, const char* f) {
+                return std::find(t.aux->facts.begin(), t.aux->facts.end(), f) != t.aux->facts.end();
+            };
+            if (has(nx, "role=cop") || has(nx, "role=cop-ja") || has(nx, "role=cop-te") || has(nx, "role=cop-ni") ||
+                (has(nx, "kase=de") && i + 2 < tk.size() && has(tk[i + 2], "kase=wa")))
+                forms.insert("cop");
+            if (has(nx, "role=cop") && nx.form == "rentai") forms.insert("attr");
+        }
+        // ta: the clause is in the past (もう + past → 벌써)
+        if (cl >= 0 && line.clauses[static_cast<size_t>(cl)].tense == tense::past) forms.insert("ta");
+        // the noun an adnominal adjective modifies is its subject (高い本: 本が高い)
+        if ((k.epos == Pos::adj || k.epos == Pos::na) && args["subj"].empty()) args["subj"] = heads;
         const Utterance* u = k.utt < line.utts.size() ? &line.utts[k.utt] : nullptr;
         const bool polite = (u && (u->sourceLevel == srclevel::desu_masu || u->sourceLevel == srclevel::keigo)) ||
                             (cl >= 0 && line.clauses[static_cast<size_t>(cl)].polite != polite::plain);
@@ -726,7 +747,7 @@ struct Ctx {
                 } else if (slot == "main.vol") {
                     for (const std::string& v : vals) ok = ok || v == mainVol;
                 } else if (slot == "register") {
-                    for (const std::string& v : vals) ok = ok || (v == "polite" && polite);
+                    for (const std::string& v : vals) ok = ok || (v == "polite" && polite) || (v == "casual" && !polite);
                     kind = 3;
                 }
                 if (!ok) {
@@ -826,6 +847,7 @@ struct Ctx {
         }
         if (cd.key == "frame" || cd.key == "cls") {
             std::replace(v.begin(), v.end(), ' ', ',');
+            std::replace(v.begin(), v.end(), '|', ',');
             multi = true;
         }
         bool hit = false;
@@ -865,38 +887,39 @@ std::string Hiragana(std::string_view s) {
 }
 
 // The value of a numeral written in digits or in kanji (三, 二十, 百五十), -1 when it is neither.
-int NumberValue(std::string_view s, bool& digits) {
+int NumberValue(const Data& d, std::string_view s, bool& digits) {
     digits = false;
     if (s.empty()) return -1;
-    std::u32string u;
-    for (size_t i = 0; i < s.size();) {
-        const unsigned char c = static_cast<unsigned char>(s[i]);
-        char32_t cp;
-        int len = c < 0x80 ? 1 : c < 0xE0 ? 2 : c < 0xF0 ? 3 : 4;
-        cp = len == 1 ? c : len == 2 ? (c & 0x1F) : len == 3 ? (c & 0x0F) : (c & 0x07);
-        for (int k = 1; k < len && i + static_cast<size_t>(k) < s.size(); k++) cp = (cp << 6) | (static_cast<unsigned char>(s[i + static_cast<size_t>(k)]) & 0x3F);
-        u += cp;
-        i += static_cast<size_t>(len);
-    }
     long v = 0;
     bool allDigits = true;
-    for (char32_t c : u) {
-        if (c >= U'0' && c <= U'9') v = v * 10 + (c - U'0');
-        else if (c >= 0xFF10 && c <= 0xFF19) v = v * 10 + (c - 0xFF10);
-        else allDigits = false;
+    for (size_t i = 0; i < s.size(); i++) {
+        const unsigned char c = static_cast<unsigned char>(s[i]);
+        if (c >= '0' && c <= '9') {
+            v = v * 10 + (c - '0');
+        } else if (c == 0xEF && i + 2 < s.size() && static_cast<unsigned char>(s[i + 1]) == 0xBC &&
+                   static_cast<unsigned char>(s[i + 2]) >= 0x90 && static_cast<unsigned char>(s[i + 2]) <= 0x99) {
+            v = v * 10 + (static_cast<unsigned char>(s[i + 2]) - 0x90);  // full-width digit
+            i += 2;
+        } else {
+            allDigits = false;
+            break;
+        }
     }
     if (allDigits) {
         digits = true;
         return v > 1000000 ? -1 : static_cast<int>(v);
     }
-    static const std::u32string kDigit = U"〇一二三四五六七八九";
+    // kanji numerals by the table's digit and unit rows (三, 二十, 百五十)
     long total = 0, part = 0;
-    for (char32_t c : u) {
-        const size_t dpos = kDigit.find(c);
-        if (dpos != std::u32string::npos) part = part * 10 + static_cast<long>(dpos);
-        else if (c == U'十' || c == U'百' || c == U'千') {
-            const long unit = c == U'十' ? 10 : c == U'百' ? 100 : 1000;
-            total += (part == 0 ? 1 : part) * unit;
+    for (size_t i = 0; i < s.size();) {
+        const unsigned char c = static_cast<unsigned char>(s[i]);
+        const size_t len = c < 0x80 ? 1 : c < 0xE0 ? 2 : c < 0xF0 ? 3 : 4;
+        const std::string ch(s.substr(i, len));
+        i += len;
+        if (auto dg = d.digits.find(ch); dg != d.digits.end()) {
+            part = part * 10 + dg->second;
+        } else if (auto un = d.units.find(ch); un != d.units.end()) {
+            total += (part == 0 ? 1 : part) * un->second;
             part = 0;
         } else {
             return -1;
@@ -1021,8 +1044,9 @@ bool SetField(KNode& n, Doc& doc, const std::string& field, const std::string& v
     return false;
 }
 
-uint32_t SemOf(const Data& d, const std::string& classes) {
+uint32_t SemOf(const Data& d, std::string classes) {
     uint32_t m = 0;
+    std::replace(classes.begin(), classes.end(), '|', ' ');
     for (const std::string& c : Split(classes, ' ')) {
         if (c.empty()) continue;
         if (d.IsA(c, "@person")) m |= sem::person | sem::animate;
@@ -1032,6 +1056,8 @@ uint32_t SemOf(const Data& d, const std::string& classes) {
     }
     return m;
 }
+
+const TokAux kNoAux;
 
 struct Placed {
     KNode n;
@@ -1064,7 +1090,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             size_t j = i;
             while (j + 1 < nt && line.toks[j + 1].pos == Pos::num) spell += line.Src(line.toks[++j].src);
             bool digits = false;
-            const int value = NumberValue(spell, digits);
+            const int value = NumberValue(d, spell, digits);
             if (value >= 0) {
                 Tk k;
                 const Token& t = line.toks[i];
@@ -1079,7 +1105,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 k.pos = "num";
                 k.epos = Pos::n;
                 k.content = true;
-                k.aux = &x.aux[j];
+                k.aux = &kNoAux;  // the unit is a word: the counter's function reading (時 → link time) is not
                 k.number = value;
                 k.digits = digits;
                 k.counter = counter;
@@ -1111,7 +1137,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         k.last = static_cast<int>(last);
         k.src = {t.src.begin, line.toks[last].src.end};
         k.surf = std::string(line.Src(k.src));
-        k.aux = &x.aux[last];
+        k.aux = joined ? &kNoAux : &x.aux[last];
         k.form = Strip(Strip(x.aux[last].form, "aux:"), "aux.form.");
         if (joined) {
             k.lemma = joined->ja;
@@ -1158,8 +1184,15 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         }
     }
 
-    for (size_t i = 0; i < n; i++)
-        if (x.tk[i].entry) x.tk[i].sense = x.Choose(i, x.tk[i].senseWhy);
+    for (size_t i = 0; i < n; i++) {
+        Tk& k = x.tk[i];
+        if (!k.entry) continue;
+        k.sense = x.Choose(i, k.senseWhy);
+        // a noun whose chosen sense is a predicate (便利 → 편리하다 by form=cop) is read as a な-adjective
+        if (k.sense && IsNounPos(k.epos) && !d.predicateEnd.empty() && k.sense->ko.ends_with(d.predicateEnd) &&
+            k.senseWhy.find("form=") != std::string::npos)
+            k.epos = Pos::na;
+    }
 
     // Candidates: every match of every row whose conditions hold.
     std::vector<Cand> cands;
@@ -1289,7 +1322,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             std::string numFeat = cs ? Ctx::Get(cs->feat, "num") : "";
             if (numFeat.empty() && k.counter) numFeat = Ctx::Get(k.counter->feat, "num");
             const bool native = numFeat == "native";
-            const bool tsu = cs && k.counter->ja == "つ";
+            const auto alone = k.counter ? d.alone.find(k.counter->ja) : d.alone.end();
             Decision dec;
             dec.stage = 'T';
             dec.kind = Ev::Cued;
@@ -1310,7 +1343,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 placed.push_back(std::move(p));
             };
             const std::string digitText = k.digits ? std::string(line.Src({k.t->src.begin, line.toks[static_cast<size_t>(k.counter ? k.last - 1 : k.last)].src.end})) : "";
-            if (tsu && k.number == 1 && !k.digits) {
+            if (alone != d.alone.end() && k.number == alone->second && !k.digits) {
                 push(KK::N, Numeral(d, 1, true, false), false, 0);
             } else if (k.digits) {
                 push(KK::Raw, digitText, false, 0);
@@ -1533,6 +1566,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             dec.because.push_back(doc.I("neg=" + std::string(Name(F::kneg, p.n.neg))));
             p.n.lemma = doc.I(r.ko);
             p.n.neg = kneg::none;
+            p.n.kcls = 0;  // the class was the positive lemma's (알다 ㄹ, 모르다 르)
             line.Decide(std::move(dec));
             break;
         }

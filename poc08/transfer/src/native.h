@@ -94,6 +94,8 @@ struct Data {
     std::unordered_map<std::string, std::vector<size_t>> byLemma;   // ja → entries
     std::unordered_map<std::string, std::string> classParent;      // @class → parent ("" root)
     std::map<int, std::array<std::string, 3>> numerals;            // value → native, adnominal, Sino-Korean
+    std::map<std::string, int> digits, units, alone;               // kanji digits and units; counters read alone
+    std::string predicateEnd;                                      // the ending of a Korean predicate lemma
     std::vector<std::string> errors;
     const StructureData* structure = nullptr;  // aux.tsv reading of tokens (owned by TransferData)
 

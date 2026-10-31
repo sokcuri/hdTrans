@@ -47,6 +47,7 @@ host	next	result	mode	example
 무엇	COP	뭐	fuse	무엇이야 → 뭐야
 무엇	-	뭐	replace	무엇 → 뭐
 뭐	obj	뭘	replace	뭐를 → 뭘
+뭐	COP	뭐	fuse	뭐일까 → 뭘까, 뭐이야 → 뭐야
 나	top	난	replace	나는 → 난
 너	top	넌	replace	너는 → 넌
 나	subj	내가	always	나가 is not Korean: the pronoun fuses with 가 in every style

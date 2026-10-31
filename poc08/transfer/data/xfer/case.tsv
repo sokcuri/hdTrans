@@ -31,3 +31,5 @@ case.de.language	N5-16	{N:@language} [kase=de]	-	-	P:instr	m	own	日本語で話
 case.no.na	N5-H9	{NP} [kase=no]	NP.ko=나	NP.lemma=내	-	m	own	私の本 → 내 책
 case.no.jeo	N5-H9	{NP} [kase=no]	NP.ko=저	NP.lemma=제	-	m	own	私の本(です/ます) → 제 책
 case.no.neo	N5-H9	{NP} [kase=no]	NP.ko=너	NP.lemma=네	-	m	own	君の本 → 네 책
+case.ka.or	N5-22	{NP} [aux.p.ka.adv]	next.pos=n|pn	-	P:=(이)나	m	own	パンかりんご → 빵이나 사과
+case.mo.aru	N5-07	{NP} [kase=mo] [aux.aru.cop]	-	-	P:=도 V:있다	m	own	時計もある (ある read as the copula's) → 시계도 있다

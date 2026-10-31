@@ -7,7 +7,5 @@ pol.neg.long	keep	「本を読まない。」	「책을 안 읽어.」	inv
 pol.neg.short	fix	「毎日、勉強しない。」	「매일, 공부 안 해.」	inv
 pol.mou.neg	fix	もうパンを食べない。	더 이상 빵을 먹지 않는다.	inv
 pol.mou.neg	keep	もうパンを食べた。	벌써 빵을 먹었다.	inv
-adv.mou.nonpast	fix	もう寝る。	이제 잔다.	inv
-adv.mou.nonpast	keep	もう寝た。	벌써 잤다.	inv
 adv.mou.ii	fix	「もういいです」	「이제 됐어요」	inv
-adv.mou.ii	keep	「本がいいです」	「책이 좋아요」	inv
+adv.mou.ii	keep	「部屋が静かです」	「방이 조용해요」	inv

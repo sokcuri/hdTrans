@@ -2,7 +2,7 @@
 # Clause links (N5-31, N5-34…N5-41).
 id	spec	match	when	then	ko	st	prov	note
 link.te.seq	N5-H2	[link=te]	-	pred.ctype=conn;pred.rel=seq	-	m	own	食べて寝る → 먹고 자다
-link.te.motion	N5-H2	[link=te]	pred.pclass=motion|posture	pred.ctype=conn;pred.rel=cause	-	m	own	行って買う → 가서 사다
+link.te.motion	N5-H2	[link=te]	pred.te=eo	pred.ctype=conn;pred.rel=cause	-	m	own	行って買う → 가서 사다 (verbs whose ている is -어 있다: motion and posture)
 link.te.cause	N5-H2	[link=te]	pred.vol=-	pred.ctype=conn;pred.rel=cause	-	m	own	雨が降って → 비가 와서
 link.te.adj	N5-H2	[link=te]	pred.pos=adj|na	pred.ctype=conn;pred.rel=cause	-	m	own	高くて → 비싸서
 link.tekara	N5-34	[link=te] から/p_case	-	pred.ctype=conn;pred.eomi=-고	V:나다{aux,ctype=conn,rel=cause}	m	own	食べてから → 먹고 나서
