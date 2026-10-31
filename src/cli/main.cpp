@@ -167,7 +167,7 @@ void Usage(std::FILE* file) {
                "Legacy single-hyphen options are also accepted, except --verbose. Use -- before literal text starting with '-'.\n", file);
 #ifdef HDTRANS_POC08_HOOKS
     std::fputs("\n0.8 proof of concept (hdtrans08):\n"
-               "  --poc08 PARTS          stages the 0.8 components replace: normalize, segment, generate, decide,\n"
+               "  --poc08 PARTS          stages the 0.8 components replace: normalize, segment, generate, decide, native,\n"
                "                         reselect (deciders choosing among 0.7.x's endings), all or none (default);\n"
                "                         a part whose component is not built stays 0.7.x\n"
                "  --speech auto|haera|hae|haeyo|hapsyo  speech level of the 0.8 generator\n"
@@ -776,13 +776,14 @@ int RunMain(int argc, char** argv) {
             std::fprintf(stderr,
                          "hdtrans08 poc08: parts=%s sentences=%llu generated=%llu kept=%llu lifted_items=%llu "
                          "failed_items=%llu normalized_lines=%llu segmented_chunks=%llu refits=%llu points=%llu "
-                         "overrides=%llu reselected=%llu\n",
+                         "overrides=%llu reselected=%llu native=%llu\n",
                          parts.empty() ? "none" : parts.c_str(), static_cast<unsigned long long>(c.sentences),
                          static_cast<unsigned long long>(c.generated), static_cast<unsigned long long>(c.kept),
                          static_cast<unsigned long long>(c.liftedItems), static_cast<unsigned long long>(c.failedItems),
                          static_cast<unsigned long long>(c.normalized), static_cast<unsigned long long>(c.segmentedChunks),
                          static_cast<unsigned long long>(c.refits), static_cast<unsigned long long>(c.points),
-                         static_cast<unsigned long long>(c.overrides), static_cast<unsigned long long>(c.reselected));
+                         static_cast<unsigned long long>(c.overrides), static_cast<unsigned long long>(c.reselected),
+                         static_cast<unsigned long long>(c.native));
         }
         return ok;
     };

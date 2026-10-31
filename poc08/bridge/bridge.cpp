@@ -1,6 +1,8 @@
 #include "bridge.h"
 
 #include <algorithm>
+#include <cstdio>
+#include <cstdlib>
 #include <atomic>
 #include <map>
 #include <memory>
@@ -22,7 +24,7 @@ namespace {
 struct SentenceRecord {
     std::string why, stages, reselections;
     uint64_t points = 0, overrides = 0, reselected = 0;
-    bool generated = false;
+    bool generated = false, native = false;
     uint64_t lifted = 0;
     std::vector<LiftMiss> misses;
 };
@@ -33,6 +35,9 @@ struct DocState {
     std::vector<std::pair<int, int>> last;  // per line: the (chunk, sentence) lifted last; an earlier one starts a pass
     std::vector<std::map<std::pair<int, int>, SentenceRecord>> records;  // per line, by (chunk, sentence)
     std::vector<uint32_t> fromSel;  // per line: the lift cursor of reselect
+    std::vector<int8_t> natState;   // per line: native route 0 not tried, 1 written natively, 2 kept by 0.7.x
+    std::vector<std::string> natOut, natWhy, natStages;
+    std::vector<bool> natWritten;   // per line: this pass has written the native text
     std::vector<std::pair<int, int>> lastSel;
     bool caption = false;  // 0.8-rule: the document reads as captions, so no part changes it
 };
@@ -54,7 +59,7 @@ struct Bridge {
     hdTrans::hooks::Hooks hooks;
     bool analyzerReal = false, generatorReal = false, transferReal = false;
     std::atomic<uint64_t> sentences{0}, generated{0}, kept{0}, liftedItems{0}, failedItems{0}, normalized{0},
-        segmentedChunks{0}, refits{0}, points{0}, overrides{0}, reselected{0};
+        segmentedChunks{0}, refits{0}, points{0}, overrides{0}, reselected{0}, native{0};
     std::mutex mu;  // guards the fields below
     std::string why, stages, reselections;
     std::map<std::pair<std::string, std::string>, uint64_t> misses;
@@ -76,9 +81,14 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
     ds->last.assign(lines.size(), {-1, -1});
     ds->records.resize(lines.size());
     ds->fromSel.assign(lines.size(), 0);
+    ds->natState.assign(lines.size(), 0);
+    ds->natOut.resize(lines.size());
+    ds->natWhy.resize(lines.size());
+    ds->natStages.resize(lines.size());
+    ds->natWritten.assign(lines.size(), false);
     if (b.rule) ds->caption = CaptionDocument(*b.rule, std::vector<std::string>(lines.begin(), lines.end()));
     ds->lastSel.assign(lines.size(), {-1, -1});
-    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect) {
+    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect || b.opt.native) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
         const Config& cfg = b.engine.cfg;
         const std::vector<ForcedSpan> none;
@@ -107,6 +117,10 @@ void EndDocument(void* context, void* doc) {
     auto* ds = static_cast<DocState*>(doc);
     std::string why, stages = b.opt.sideIr ? DocJson(ds->doc) + '\n' : std::string();
     std::lock_guard<std::mutex> lock(b.mu);
+    for (size_t i = 0; i < ds->natWhy.size(); i++) {
+        why += ds->natWhy[i];
+        stages += ds->natStages[i];
+    }
     for (const auto& line : ds->records) {
         for (const auto& [key, r] : line) {
             b.sentences++;
@@ -119,6 +133,7 @@ void EndDocument(void* context, void* doc) {
             b.points += r.points;
             b.overrides += r.overrides;
             b.reselected += r.reselected;
+            b.native += r.native;
             b.reselections += r.reselections;
         }
     }
@@ -310,6 +325,35 @@ bool Reselect(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     return changed;
 }
 
+// The native route of one line: the line's analysis through native T, R and G, once per line. A line goes
+// native only when T consumed every token of it; then its first 0.7.x sentence writes the native text and the
+// others write nothing.
+// Bytes of white space (space, tab, ideographic space) at the start of text.
+size_t LeadSpace(std::string_view text) {
+    size_t i = 0;
+    while (i < text.size()) {
+        if (text[i] == ' ' || text[i] == '\t') i++;
+        else if (text.compare(i, 3, "\xE3\x80\x80") == 0) i += 3;
+        else break;
+    }
+    return i;
+}
+
+const std::string* NativeLine(Bridge& b, DocState& ds, size_t lineIndex) {
+    if (ds.natState[lineIndex] == 0) {
+        Line& line = ds.doc.lines[lineIndex];
+        const bool use = RunNative(b.engine, ds.doc, line);
+        ds.natState[lineIndex] = use ? 1 : 2;
+        ds.natOut[lineIndex] = line.out;
+        if (b.opt.sideIr) {
+            const LineReport report = Report(b.engine, ds.doc, line);
+            ds.natWhy[lineIndex] = WhyRecords(b.engine, ds.doc, line, report);
+            ds.natStages[lineIndex] = LineJson(ds.doc, line) + '\n';
+        }
+    }
+    return ds.natState[lineIndex] == 1 ? &ds.natOut[lineIndex] : nullptr;
+}
+
 bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s, std::string& out) {
     auto& b = *static_cast<Bridge*>(context);
     auto& ds = *static_cast<DocState*>(doc);
@@ -317,8 +361,29 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     const auto lineIndex = static_cast<size_t>(s.line);
     // The compose stage may go over a line more than once; a sentence not after the last one starts a pass.
     const std::pair<int, int> here{s.chunk, s.index};
-    if (here <= ds.last[lineIndex]) ds.from[lineIndex] = 0;
+    if (here <= ds.last[lineIndex]) {
+        ds.from[lineIndex] = 0;
+        ds.natWritten[lineIndex] = false;
+    }
     ds.last[lineIndex] = here;
+    if (b.opt.native && !ds.caption) {
+        SentenceRecord& r = ds.records[lineIndex][{s.chunk, s.index}];
+        r = SentenceRecord{};
+        if (const std::string* text = NativeLine(b, ds, lineIndex)) {
+            // 0.7.x's sentences of white space alone stay; the first other one writes the line, the rest nothing
+            const size_t lead = LeadSpace(s.composed);
+            if (lead == s.composed.size()) return false;
+            r.native = !ds.natWritten[lineIndex];
+            if (r.native) {
+                out = std::string(s.composed.substr(0, lead)) + *text;
+                ds.natWritten[lineIndex] = true;
+            } else {
+                out.clear();
+            }
+            return true;
+        }
+        if (!b.opt.generate) return false;
+    }
     // The sentence as a line of its own: the line's analysis and scope, the sentence's nodes.
     Line sent;
     std::vector<LiftMiss> misses;
@@ -353,7 +418,7 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
 }  // namespace
 
 bool ParseParts(std::string_view list, Options& out, std::string& err) {
-    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = false;
+    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = out.native = false;
     if (list == "none") return true;
     if (list == "all") {
         out.normalize = out.segment = out.generate = out.decide = true;
@@ -370,8 +435,9 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
         else if (part == "decide") out.decide = true;
         else if (part == "reselect") out.reselect = true;
         else if (part == "rule") out.rule = out.segment = true;
+        else if (part == "native") out.native = true;
         else {
-            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, all, none)";
+            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, native, all, none)";
             return false;
         }
         at = comma + 1;
@@ -384,7 +450,8 @@ Bridge* Create(const Options& options, std::string& err) {
     b->opt = options;
     // Only the components a part needs are loaded: segment and normalize need the analyzer alone, so 0.8-rule
     // loads no structure, discourse or transfer table.
-    const bool full = options.generate || options.decide || options.reselect || options.sideIr || options.lift;
+    const bool full = options.generate || options.decide || options.reselect || options.sideIr || options.lift ||
+                      options.native;
     if (full) {
         if (!LoadEngine(options.cfg, b->engine, err)) return nullptr;
     } else {
@@ -392,7 +459,8 @@ Bridge* Create(const Options& options, std::string& err) {
         if (!(b->engine.analyzer = LoadAnalyzer(options.cfg, err))) return nullptr;
     }
     if (!LoadLift(options.cfg.data, b->lift, err)) return nullptr;
-    if (options.rule && !(b->rule = LoadRule(options.cfg.data, err))) return nullptr;
+    // the native route keeps away from caption documents, as 0.8-rule does (their unquoted lines are speech)
+    if ((options.rule || options.native) && !(b->rule = LoadRule(options.cfg.data, err))) return nullptr;
     const std::string stubs = StubComponents();
     auto stub = [&](const char* name) { return (',' + stubs + ',').find(',' + std::string(name) + ',') != std::string::npos; };
     b->analyzerReal = !stub("analyzer");
@@ -403,6 +471,7 @@ Bridge* Create(const Options& options, std::string& err) {
     b->opt.generate = options.generate && b->generatorReal;
     b->opt.decide = options.decide && b->transferReal;
     b->opt.reselect = options.reselect && b->transferReal;
+    b->opt.native = options.native && b->transferReal && b->generatorReal;
     b->hooks.context = b.get();
     b->hooks.beginDocument = BeginDocument;
     b->hooks.endDocument = EndDocument;
@@ -413,7 +482,7 @@ Bridge* Create(const Options& options, std::string& err) {
         b->hooks.fits = Fits;
     }
     // The lift and the side IR run whenever a part, --why or --stages needs them.
-    if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift) b->hooks.generate = Generate;
+    if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift || b->opt.native) b->hooks.generate = Generate;
     if (b->opt.reselect) b->hooks.reselect = Reselect;
     return b.release();
 }
@@ -437,6 +506,7 @@ std::string ActiveParts(const Bridge* b) {
     add(b->opt.decide, "decide");
     add(b->opt.reselect, "reselect");
     add(b->opt.rule, "rule");
+    add(b->opt.native, "native");
     return s;
 }
 
@@ -453,6 +523,7 @@ Counts CountsOf(const Bridge* b) {
     c.points = b->points;
     c.overrides = b->overrides;
     c.reselected = b->reselected;
+    c.native = b->native;
     return c;
 }
 
@@ -461,7 +532,7 @@ std::string TakeWhy(Bridge* b) {
     return std::exchange(b->why, {});
 }
 
-std::shared_ptr<const RuleData> RuleDataOf(const Bridge* b) { return b->rule; }
+std::shared_ptr<const RuleData> RuleDataOf(const Bridge* b) { return b->opt.rule ? b->rule : nullptr; }
 
 std::vector<SourceToken> AnalyzeSource(const Bridge* b, std::string_view text) {
     std::vector<SourceToken> out;
