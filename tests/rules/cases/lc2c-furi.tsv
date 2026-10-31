@@ -1,0 +1,22 @@
+# 규칙: GRM-141
+rule	input	expected	kind	layer
+cx:lc2c-furi:10	大人のフリをした子供	has:어른인 척한	fix	rewrites
+cx:lc2c-furi:10	疑問のふりをした確認。	has:의문인 척한	fix	rewrites
+cx:lc2c-furi:10	味方のふりをしてただけ。	has:아군인 척하고	fix	rewrites
+cx:lc2c-furi:10	私は観光客のふりをした。	has:관광객인 척했다.	fix	rewrites
+cx:lc2c-furi:10	ここは別人のふりをする。	has:딴사람인 척한다.	fix	rewrites
+cx:lc2c-furi:10	仁人は直也のふりをした。	has:나오야인 척했다.	fix	rewrites
+cx:lc2c-furi:10	変わり者のフリをしている	has:괴짜인 척하고	fix	rewrites
+cx:lc2c-furi:10	僕は諦めて安堵のふりをした	has:안도인 척했다	fix	rewrites
+cx:lc2c-furi:20	友達のふりしてさ。	has:친구인 척	fix	rewrites
+cx:lc2c-furi:20	「人間のふりして！	has:「인간인 척	fix	rewrites
+cx:lc2c-furi:20	他人のふりしてやがる。	has:타인인 척	fix	rewrites
+cx:lc2c-furi:20	そのまま死体のふりして	has:시체인 척	fix	rewrites
+cx:lc2c-furi:20	二人して他人のふりしやがった！！	has:타인인 척	fix	rewrites
+cx:lc2c-furi:20	癖に、バカのふりしてる超絶のバカ」	has:바보인 척	fix	rewrites
+cx:lc2c-furi:20	で教会の前で他人のふりしたんだよ！	has:타인인 척	fix	rewrites
+cx:lc2c-furi:20	救世主のふりしてやっぱし悪魔だー！	has:구세주인 척	fix	rewrites
+cx:lc2c-furi:10	宇宙人の振りをして国際機関にデータを送信したこともあった。	!rule:cx:lc2c-furi:10	keep	rewrites
+cx:lc2c-furi:20	俺は聞こえないふりをした。	!rule:cx:lc2c-furi:20	keep	rewrites
+cx:lc2c-furi:10	試しに、眠っているままのふりをして、自分の脚を動かそうとした。	!rule:cx:lc2c-furi:10	keep	rewrites
+cx:lc2c-furi:20	いや、そのふりをしたようです。	!rule:cx:lc2c-furi:20	keep	rewrites

@@ -1,0 +1,26 @@
+# 규칙: GRM-137
+rule	input	expected	kind	layer
+cx:lc2c-zujimai:5	謎は解けずじまい。	has:없는 채.	fix	rewrites
+cx:lc2c-zujimai:5	「だろうね。有坂さんだもの。じゃあ、この謎は解けずじまいか」	has:없는 채인가」	fix	rewrites
+cx:lc2c-zujimai:10	君には逢えずじまい	has:못한 채	fix	rewrites
+cx:lc2c-zujimai:10	行けずじまいだったね」	has:못한 채였다」	fix	rewrites
+cx:lc2c-zujimai:10	「接触も出来ずじまいか？」	has:못한 채인가?」	fix	rewrites
+cx:lc2c-zujimai:10	だけど、言えずじまいだった。	has:못한 채였다.	fix	rewrites
+cx:lc2c-zujimai:10	お礼も言えずじまいだし……」	has:못한 채이고……」	fix	rewrites
+cx:lc2c-zujimai:10	手を出せずじまいだったんだ」	has:못한 채였다」	fix	rewrites
+cx:lc2c-zujimai:20	結局 撮らずじまい	has:않은 채	fix	rewrites
+cx:lc2c-zujimai:20	結局、結論は出ずじまいか…。	has:않은 채인가….	fix	rewrites
+cx:lc2c-zujimai:20	結局公園の後はなにも起こらずじまいだ。	has:않은 채다.	fix	rewrites
+cx:lc2c-zujimai:20	結局一度も押し倒されずじまいなのである。	has:않은 채	fix	rewrites
+cx:lc2c-zujimai:20	結局切らずじまいだった前髪を邪魔そうに見る。	has:않은 채였던	fix	rewrites
+cx:lc2c-zujimai:20	と一蹴されてしまって食べずじまいになっていた。	has:않은 채가	fix	rewrites
+cx:lc2c-zujimai:30	れは、こうしないとまた言わずじまいに終わってしまいそうだから。	has:않은 채로	fix	rewrites
+cx:lc2c-zujimai:30	しかしケイトは、最後までまともに乗る事が出来ずじまいに終わった。	has:않은 채로	fix	rewrites
+cx:lc2c-zujimai:5	結局会わずに帰った。	!rule:cx:lc2c-zujimai:5	keep	rewrites
+cx:lc2c-zujimai:10	今日はもう店じまいだ。	!rule:cx:lc2c-zujimai:10	keep	rewrites
+cx:lc2c-zujimai:20	結局会わずに帰った。	!rule:cx:lc2c-zujimai:20	keep	rewrites
+cx:lc2c-zujimai:30	今日はもう店じまいだ。	!rule:cx:lc2c-zujimai:30	keep	rewrites
+lookup:wakarazujimai	結局、内容はわからずじまい。	has:끝내 알지 못한 채	fix	lookup
+lookup:wakarazujimai	結局正体はわからずじまいか。	has:끝내 알지 못한 채	fix	lookup
+lookup:wakarazujimai	襲撃者の正体もわからずじまいだ。	has:끝내 알지 못한 채	fix	lookup
+lookup:wakarazujimai	その行方すらわからずじまいなのだ。	has:끝내 알지 못한 채	fix	lookup

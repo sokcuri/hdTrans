@@ -1,0 +1,23 @@
+# 규칙: GRM-136
+rule	input	expected	kind	layer
+cx:lc2c-yainaya:10	声を、聞くや否や	has:듣자마자	fix	rewrites
+cx:lc2c-yainaya:10	ら見えるや否や、	has:보이자마자	fix	rewrites
+cx:lc2c-yainaya:10	ようやく声が出るや否や	has:나오자마자	fix	rewrites
+cx:lc2c-yainaya:10	なんて考えているや否や。	has:있자마자	fix	rewrites
+cx:lc2c-yainaya:10	見せるや否や、飛び立った。	has:보이자마자	fix	rewrites
+cx:lc2c-yainaya:10	その言葉を言い終えるや否や。	has:끝내자마자	fix	rewrites
+cx:lc2c-yainaya:10	麓にある宿場町に着くや否や、	has:도착하자마자	fix	rewrites
+cx:lc2c-yainaya:10	現れるや否や地面に突っ伏した。	has:나타나자마자	fix	rewrites
+cx:lc2c-yainaya:20	言うやいなや。	has:말하자마자	fix	rewrites
+cx:lc2c-yainaya:20	というやいなや	has:하자마자	fix	rewrites
+cx:lc2c-yainaya:20	そう言うやいなや。	has:말하자마자	fix	rewrites
+cx:lc2c-yainaya:20	和を見つけるやいなや、	has:찾아내자마자	fix	rewrites
+cx:lc2c-yainaya:20	言うやいなや空間が歪んだ。	has:말하자마자	fix	rewrites
+cx:lc2c-yainaya:20	入るやいなや俺は大声で叫ぶ。	has:들어가자마자	fix	rewrites
+cx:lc2c-yainaya:20	入るやいなや会長は言葉を失った	has:들어가자마자	fix	rewrites
+cx:lc2c-yainaya:20	と、露天の椅子に腰掛けるやいなや	has:앉자마자	fix	rewrites
+cx:lc2c-yainaya:10	椅子に座るやいなや息を吐く。	!rule:cx:lc2c-yainaya:10	keep	rewrites
+cx:lc2c-yainaya:10	部屋に入るやいなや会長は言葉を失った	!rule:cx:lc2c-yainaya:10	keep	rewrites
+cx:lc2c-yainaya:10	生まれてすぐの頃は全然泣かなくて	!rule:cx:lc2c-yainaya:10	keep	rewrites
+cx:lc2c-yainaya:20	言うや否や、カルナの身体が膨張をする。	!rule:cx:lc2c-yainaya:20	keep	rewrites
+cx:lc2c-yainaya:20	金色の石を見るや否や飛びつくレイ。	!rule:cx:lc2c-yainaya:20	keep	rewrites

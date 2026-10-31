@@ -1,0 +1,30 @@
+# 규칙: GRM-138
+rule	input	expected	kind	layer
+cx:lc2c-kkonai:10	できっこない。	has:리가 없다.	fix	rewrites
+cx:lc2c-kkonai:10	「できっこないだろ」	has:리가 없지」	fix	rewrites
+cx:lc2c-kkonai:10	「できっこないですよ！」	has:리가 없어요!」	fix	rewrites
+cx:lc2c-kkonai:15	出来っこない。	has:리가 없다.	fix	rewrites
+cx:lc2c-kkonai:15	なきゃ出来っこない！	has:리가 없다!	fix	rewrites
+cx:lc2c-kkonai:15	捕縛なんて出来っこない。	has:리가 없다.	fix	rewrites
+cx:lc2c-kkonai:16	出来っこないって思って聞いたものだった。	has:리가 없다고	fix	rewrites
+cx:lc2c-kkonai:16	常の藍ならば、そんなの出来っこないと思っていたかもしれない。	has:리가 없다고	fix	rewrites
+cx:lc2c-kkonai:16	「そっちこそ舐めてるんじゃないか？そんなことはできっこないって」	has:리가 없다고」	fix	rewrites
+cx:lc2c-kkonai:20	こんなのできっこないよ！	has:리가 없어!	fix	rewrites
+cx:lc2c-kkonai:20	るなんてことはできっこないさ。	has:리가 없어.	fix	rewrites
+cx:lc2c-kkonai:20	見つけるなんてできっこないよ。	has:리가 없어.	fix	rewrites
+cx:lc2c-kkonai:25	勝てっこない。	has:리가 없다.	fix	rewrites
+cx:lc2c-kkonai:25	勝てっこない！」	has:리가 없다!」	fix	rewrites
+cx:lc2c-kkonai:25	絶対打てっこない。	has:리가 없다.	fix	rewrites
+cx:lc2c-kkonai:26	「あたしには、勝てっこないって言ったのよ」	has:리가 없다고	fix	rewrites
+cx:lc2c-kkonai:30	に勝てっこないよ。	has:리가 없어.	fix	rewrites
+cx:lc2c-kkonai:30	勝てっこないのね。	has:리가 없구나.	fix	rewrites
+cx:lc2c-kkonai:30	勝てっこないのにさ。	has:리가 없는데.	fix	rewrites
+cx:lc2c-kkonai:60	「でもどうするんですか？？自分たちじゃ敵いっこないですよ？」	has:리가 없어요?」	fix	rewrites
+cx:lc2c-kkonai:10	仕事を淡々とこなす。	!rule:cx:lc2c-kkonai:10	keep	rewrites
+cx:lc2c-kkonai:15	彼はまだ来ない。	!rule:cx:lc2c-kkonai:15	keep	rewrites
+cx:lc2c-kkonai:16	そんなこと、テレビに映る情報だけでわかりっこない。	!rule:cx:lc2c-kkonai:16	keep	rewrites
+cx:lc2c-kkonai:20	仕事を淡々とこなす。	!rule:cx:lc2c-kkonai:20	keep	rewrites
+cx:lc2c-kkonai:25	彼はまだ来ない。	!rule:cx:lc2c-kkonai:25	keep	rewrites
+cx:lc2c-kkonai:26	そんなこと、テレビに映る情報だけでわかりっこない。	!rule:cx:lc2c-kkonai:26	keep	rewrites
+cx:lc2c-kkonai:30	仕事を淡々とこなす。	!rule:cx:lc2c-kkonai:30	keep	rewrites
+cx:lc2c-kkonai:60	彼はまだ来ない。	!rule:cx:lc2c-kkonai:60	keep	rewrites
