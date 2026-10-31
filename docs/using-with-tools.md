@@ -41,7 +41,8 @@ C:\hdTrans\
 
 3. 아네모네를 다시 실행합니다.
 
-사용자 사전은 `C:\hdTrans\hdtrans-data\user\userdict.txt`에 작성합니다. 아네모네의 구형 `AneDic.txt` 대신 이 파일을 씁니다.
+아네모네의 사용자 사전(`AneDic.txt`)은 Windows의 `J2KEngine.dll`이 아네모네 안에서 읽으므로 그대로 쓸 수 있습니다.
+파일을 고치면 아네모네가 엔진에 다시 읽기를 요청합니다. `C:\hdTrans\hdtrans-data\user\userdict.txt`의 항목이 `AneDic.txt`보다 우선하며,
 형식은 [사용자 사전](dictionary-files.md#사용자-사전)을 보세요.
 
 ## Textractor에서 아네모네로 보내기

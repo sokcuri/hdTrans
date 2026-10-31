@@ -43,6 +43,7 @@ struct MemoryInput {
     bool strictEhndOverride = false;
     std::optional<bool> usersStrictOverride;
     std::optional<bool> folderStrictOverride;
+    std::vector<filter::Source> host;  // SetHostUserDicts
 };
 
 // The filters of the prefilter and postfilter files of a snapshot and of an Ehnd folder.
@@ -90,13 +91,15 @@ dict::LoadFileKind FilterFileKind(const filter::Source& source, bool memory) {
     case Kind::SkipLayer:
         return memory ? FileKind::MemoryEhndSkipLayer : FileKind::EhndSkipLayer;
     case Kind::UserDict:
-        return memory ? FileKind::MemoryEhndUserDict : FileKind::EhndUserDict;
+        return source.host ? FileKind::HostUserDict : memory ? FileKind::MemoryEhndUserDict : FileKind::EhndUserDict;
     }
     return FileKind::Shipped;
 }
 
-// The filters of snap and of one Ehnd input (none when empty).
+// The filters of snap, of the host program's user dictionaries and of one Ehnd input (none
+// when empty).
 FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool strict,
+                       const std::vector<filter::Source>& host,
                        const std::optional<std::vector<EhndFile>>& memory = {}, bool memoryStrict = true,
                        bool explicitPath = true, const std::optional<dict::UserSource>& known = {}) {
     FilterLoad out;
@@ -111,6 +114,7 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool 
         sources.push_back({kind, f.name, std::string(dict::internal::WithoutHeader(f.text)), true});
         if (f.user) userFilters.insert_or_assign(f.name, f.strict);
     }
+    sources.insert(sources.end(), host.begin(), host.end());
     if (memory) {
         std::vector<filter::Source> added;
         for (const EhndFile& file : *memory) {
@@ -167,6 +171,7 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool 
         remember(rows);
         std::unordered_set<std::string> failed;
         for (const auto& source : sources) {
+            if (source.host) continue;
             if (source.native) {
                 const auto policy = userFilters.find(source.name);
                 if (policy == userFilters.end() || !policy->second) continue;
@@ -183,7 +188,7 @@ FilterLoad LoadFilters(const dict::Snapshot* snap, const std::string& dir, bool 
             out.filters = std::move(built);
             for (std::size_t i = 0; i < sources.size(); ++i) {
                 std::string path = sources[i].name;
-                if (!sources[i].native && !memory) {
+                if (!sources[i].native && !sources[i].host && !memory) {
                     const auto folder = std::filesystem::path(std::u8string(
                         reinterpret_cast<const char8_t*>(dir.data()), dir.size()));
                     const auto name = std::filesystem::path(std::u8string(
@@ -475,7 +480,8 @@ struct Access {
             failed.version = FolderVersionOf(dir);
             return failed;
         }
-        return LoadFilters(r.snapshot.get(), dir, strict, memory.ehnd, verify || memory.strictEhnd, source.explicitPath, known);
+        return LoadFilters(r.snapshot.get(), dir, strict, memory.host, memory.ehnd, verify || memory.strictEhnd,
+                           source.explicitPath, known);
     }
 
     static bool Load(Engine& e, const std::vector<std::string>& dirs, bool verify,
@@ -502,7 +508,8 @@ struct Access {
             revision = e.watch_->optionsRevision;
             accepted = e.watch_->acceptedSources;
             memory = {e.watch_->memoryUser, e.watch_->memoryEhnd, e.watch_->memoryEhndStrict,
-                      e.watch_->memoryEhndStrictOverride, e.watch_->userStrictOverride, e.watch_->ehndStrictOverride};
+                      e.watch_->memoryEhndStrictOverride, e.watch_->userStrictOverride, e.watch_->ehndStrictOverride,
+                      e.watch_->hostUserDicts};
         }
         const UserVersion version = UserVersionOf(requested, options.configPath, revision);
         const ConfigResult config = suppliedConfig ? *suppliedConfig :
@@ -586,7 +593,8 @@ struct Access {
                                     knownEhnd = w.acceptedEhnd, options = w.options,
                                     revision = w.optionsRevision, accepted = w.acceptedSources,
                                     memory = MemoryInput{w.memoryUser, w.memoryEhnd, w.memoryEhndStrict,
-                                        w.memoryEhndStrictOverride, w.userStrictOverride, w.ehndStrictOverride},
+                                        w.memoryEhndStrictOverride, w.userStrictOverride, w.ehndStrictOverride,
+                                        w.hostUserDicts},
                                     cacheWrite = e.cacheWrite_ == CacheWrite::Sync]() mutable {
             const UserVersion version = UserVersionOf(paths, options.configPath, revision);
             const ConfigResult config = options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
@@ -670,6 +678,11 @@ struct Access {
         return e.watch_->acceptedSources;
     }
 
+    static void SetHost(Engine& e, std::vector<filter::Source> sources) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        e.watch_->hostUserDicts = std::move(sources);
+    }
+
     static void SeedSources(Engine& e, std::vector<dict::UserSource> sources,
                             std::optional<dict::UserSource> ehnd = {}) {
         std::lock_guard<std::mutex> lock(e.mu_);
@@ -717,6 +730,7 @@ struct Access {
             std::shared_ptr<const dict::Snapshot> snap;
             EngineOptions options;
             std::optional<dict::UserSource> known;
+            std::vector<filter::Source> host;
             bool verify;
             std::uint64_t ticket;
             {
@@ -732,13 +746,14 @@ struct Access {
                 snap = e.snapshot_;
                 options = e.watch_->options;
                 known = e.watch_->acceptedEhnd;
+                host = e.watch_->hostUserDicts;
                 verify = e.verifyDicts_;
             }
             const FileVersion version = VersionOf(options.configPath);
             const ConfigResult config = suppliedConfig ? *suppliedConfig :
                 options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
             const bool strict = verify || local.strict.value_or(StrictDict(options, verify, config));
-            FilterLoad filters = LoadFilters(snap.get(), dir, strict, {}, true, explicitPath, known);
+            FilterLoad filters = LoadFilters(snap.get(), dir, strict, host, {}, true, explicitPath, known);
             if ((!options.configPath.empty() && !ConfigMatches(config, version)) ||
                 VersionOf(options.configPath) != version) {
                 filters.read = false;
@@ -799,6 +814,14 @@ std::vector<dict::UserSource> AcceptedUserSources(const Engine& e, std::optional
 
 void SeedUserSources(Engine& e, std::vector<dict::UserSource> sources, std::optional<dict::UserSource> ehnd) {
     Access::SeedSources(e, std::move(sources), std::move(ehnd));
+}
+
+void SetHostUserDicts(Engine& e, std::vector<filter::Source> sources) {
+    for (auto& source : sources) {
+        source.kind = filter::Source::Kind::UserDict;
+        source.host = true;
+    }
+    Access::SetHost(e, std::move(sources));
 }
 
 bool OpenUserSources(Engine& e, const std::vector<std::string>& dirs, bool verify,

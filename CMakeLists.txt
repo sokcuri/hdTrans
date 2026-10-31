@@ -474,6 +474,15 @@ elseif(WIN32)
         set_tests_properties(host.${tool} PROPERTIES WORKING_DIRECTORY "${toolCompatDir}"
             LABELS tool-compat TIMEOUT 120)
     endforeach()
+    # Copies of the host in their own folders, which the tests give an anedic.txt.
+    foreach(tool anemone-dict anemone-late anemone-nowindow)
+        set(toolDir "${CMAKE_CURRENT_BINARY_DIR}/tool-compat-${tool}")
+        file(MAKE_DIRECTORY "${toolDir}")
+        add_custom_command(TARGET tool_compat POST_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E copy_if_different $<TARGET_FILE:tool_compat> "${toolDir}/tool_compat.exe" VERBATIM)
+        add_test(NAME host.${tool} COMMAND "${toolDir}/tool_compat.exe" ${tool} $<TARGET_FILE:j2kengine>)
+        set_tests_properties(host.${tool} PROPERTIES WORKING_DIRECTORY "${toolDir}" LABELS tool-compat TIMEOUT 120)
+    endforeach()
     add_test(NAME host.eztransweb COMMAND tool_compat eztransweb $<TARGET_FILE_DIR:j2kengine>/J2KEngineH.dll)
     set_tests_properties(host.eztransweb PROPERTIES WORKING_DIRECTORY "${toolCompatDir}"
         LABELS tool-compat TIMEOUT 120)
