@@ -333,6 +333,12 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         if (r.slot == PackSlot::Voice && target.find(':') != std::string_view::npos &&
             (lexeme.empty() || (pos != "v" && pos != "v1" && pos != "v5")))
             return fail("a voice verb (" + userdict::internal::Quote(target) + ") needs a verb row and a Korean verb");
+        // agent: the particle a voice row writes on its verb's agent phrase (先生に叱られた 선생님한테)
+        r.agent = col(f, "agent");
+        if (!r.agent.empty() && r.slot != PackSlot::Voice) return fail("agent is read on voice rows only");
+        for (const char32_t ch : userdict::internal::Runes(r.agent))
+            if (ch < 0xAC00 || ch > 0xD7A3)
+                return fail("agent " + userdict::internal::Quote(r.agent) + " is not a Korean particle in Hangul");
         // A target - keeps the slot as the chain decided it: the row wins over less specific rows and writes nothing.
         const bool keep = target == "-";
         if ((r.slot == PackSlot::Polarity || r.slot == PackSlot::Tense) && !keep &&

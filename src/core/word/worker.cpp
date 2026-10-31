@@ -227,6 +227,8 @@ Item* Worker::NewItem(Detail* d, Group* g, std::string_view text, int start, int
     it->appended.clear();
     it->packRows.clear();
     it->packLexeme.clear();
+    it->packAgent = nullptr;
+    it->packAgentText.clear();
     return it;
 }
 

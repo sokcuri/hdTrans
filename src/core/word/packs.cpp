@@ -663,7 +663,12 @@ void ApplyPacks(Flusher& f) {
         const bool nameOnly = it->Fixed();
         if (nameOnly && (chosen->user == nullptr || !chosen->user->nameLayer)) continue;
         const char cls = ClassOf(it);
-        // A voice row's Korean verb holds against the passes after the voice layer.
+        // A voice row's agent particle and Korean verb hold against the passes after the voice layer.
+        if (it->packAgent != nullptr && it->packAgent->selected >= 0 && !it->packRows.empty()) {
+            Item* p = it->packAgent;
+            TakeTarget(p, ClassOf(p), it->packAgentText, {Provenance::Pack, it->packRows.front()});
+            taken.insert(p);
+        }
         if (!it->packLexeme.empty() && cls == '4') {
             it->detail->record = 0;
             it->lexical = true;

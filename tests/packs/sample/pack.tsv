@@ -1,6 +1,6 @@
 #! layer=pack
 # Sample pack: one row per slot and the resolution order (docs/packs.md).
-id	slot	lemma	pos	kind	cond	target	pri	spec	prov	note
+id	slot	lemma	pos	kind	cond	target	pri	spec	prov	note	agent
 s.takai.thing	sense	高い/たかい/adj	adj	frame	subj=@thing	비싸다	0		sample	a thing that costs
 s.takai.thing-low	sense	高い	adj	frame	subj=@thing	값비싸다	-1		sample	same cue, lower pri: never wins
 s.takai.mountain	sense	高い	adj	frame	subj=山	높다	0		sample	a lemma beats its class
@@ -17,3 +17,4 @@ s.iu.respectful	voice	言う	v5	frame	voice=respectful	respectful	0		sample	the 
 s.iu.heard	voice	言う	v5	frame	dat=*	passive:듣다	0		sample	a passive said by another Korean verb
 s.tomeru.parked	voice	止める	v1	frame	voice=potential|none form=ta head=*	passive:세워지다	0		sample	a passive said by its own Korean verb
 s.igai	sense	以外	n	colloc	{X}以外	{X}을 빼고	0		sample	the head right after the slot
+s.naguru	voice	殴る	v5	frame	*	passive:맞다	0		sample	the agent particle travels with the verb	한테
