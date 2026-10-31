@@ -611,6 +611,12 @@ int main(int argc, char** argv) {
     Check(Translate("犬") == "멍멍이", "configured user dictionary");
     Check(Translate("タマ") == "나비", "configured Ehnd dictionary");
     Check(Errors().empty(), "valid config diagnostics");
+    const std::string names = "猫\t네코\n";
+    Check(hdTrans_SetNames(names.data(), names.size()) == 0, "set names");
+    Check(Translate("猫") == "네코", "listed name");
+    Check(hdTrans_SetNames("猫", 3) == -1, "malformed name line");
+    Check(Translate("猫") == "고양이", "malformed list holds no name");
+    Check(hdTrans_SetNames(nullptr, 0) == 0, "drop names");
     Write(fixtures / "second-user.txt", "犬\t뒤파일\n");
     Write(fixtures / "bad-user.tsv", "猫\n");
     Write(config, "dicts: fixtures/first\nuserdict: [fixtures/user.tsv, fixtures/bad-user.tsv, fixtures/second-user.txt]\ncache: off\n");
@@ -663,6 +669,19 @@ int main(int argc, char** argv) {
         Check(hdTrans_TranslateContext(nullptr, 0, "x", 1, &output, &size) == -1 && !output,
               "context translation fails when terminated");
     }
+    // A name list set before Initialize holds through Initialize and Reload; Terminate drops it.
+    Check(hdTrans_SetNames(names.data(), names.size()) == 0, "set names before initialize");
+    Write(config, "dicts: fixtures/first\nuserdict: ''\nehnd: ''\ncache: off\n");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize with names");
+    Check(Translate("猫") == "네코", "names set before Initialize");
+    Check(hdTrans_Reload() == 0, "reload with names");
+    Check(Translate("猫") == "네코", "names survive Reload");
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize again with names");
+    Check(Translate("猫") == "네코", "names survive Initialize");
+    hdTrans_Terminate();
+    Check(hdTrans_Initialize(nullptr) == 0, "initialize after names");
+    Check(Translate("猫") == "고양이", "Terminate drops names");
+    hdTrans_Terminate();
 
     Write(config, "dicts: fixtures/second\nuserdict: ''\nehnd: ''\ncache: cache\n");
     std::string explicitDirs = Utf8(fixtures / "first");

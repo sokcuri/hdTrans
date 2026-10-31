@@ -147,6 +147,23 @@ document_only() {
 document_only --wrapped -each
 document_only -wrapped --raw
 document_only --context "$tmp/context" -each
+printf '猫\t네코\nルル\n' > "$tmp/names"
+"$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -in "$tmp/input" > "$tmp/out" 2> "$tmp/errors"
+[ "$(cat "$tmp/out")" = 네코 ]
+grep -F 'names:2: a name needs JA and KO' "$tmp/errors" > /dev/null
+# The listed name decides the word as a name row of the document (docs/packs.md); HD08_CAST_OFF drops it.
+"$cli" -dicts "$tmp/settings/first" --names "$tmp/names" --why -in "$tmp/input" > /dev/null 2> "$tmp/errors"
+grep -F 'pack:names:1' "$tmp/errors" > /dev/null
+grep "^WHY-PACK.*$(printf '\t')names:1$(printf '\t')name$(printf '\t')네코\$" "$tmp/errors" > /dev/null
+printf 'surface\n猫\n' > "$tmp/cast-off"
+[ "$(HD08_CAST_OFF="$tmp/cast-off" "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -in "$tmp/input" 2> /dev/null)" = 고양이 ]
+printf 'ルルさん、おはよう。\nルルさん、またね。\n' > "$tmp/called"
+"$cli" -dicts "$tmp/settings/first" --names "$tmp/names" --propose-names -in "$tmp/called" > "$tmp/out" 2> "$tmp/errors"
+[ "$(cat "$tmp/out")" = "$(printf 'ルル\t룰\tgiven')" ]
+status=0
+"$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -each -in "$tmp/input" > /dev/null 2> "$tmp/errors" || status=$?
+[ "$status" -eq 2 ]
+grep -F -- '--names and --propose-names cannot be combined with --each or --raw' "$tmp/errors" > /dev/null
 status=0
 "$cli" -config "$tmp/settings/custom.yaml" --context "$tmp/missing" -in "$tmp/two" > /dev/null 2> "$tmp/errors" || status=$?
 [ "$status" -eq 1 ]

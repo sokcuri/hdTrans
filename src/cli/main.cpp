@@ -110,6 +110,8 @@ void Usage(std::FILE* file) {
                "  --speech-report FILE   the lines the speech levels changed (TSV: line, rule, cue, source, before, after)\n"
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
+               "  --names FILE           names of the input document: JA<TAB>KO[<TAB>KIND[<TAB>hon]] per line\n"
+               "  --propose-names        print the names the input document shows, in the --names format\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
@@ -322,6 +324,8 @@ int RunMain(int argc, char** argv) {
     std::string speechReportPath;
     bool wrapped = false;
     std::string contextPath;
+    std::string namesPath;
+    bool proposeNames = false;
     bool noCg = false;
     bool cgLearned = false;
     bool reference = false;
@@ -357,7 +361,7 @@ int RunMain(int argc, char** argv) {
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
             || option == "-dump-rules" || option == "-speech" || option == "-context"
-            || option == "-speech-levels" || option == "-speech-report";
+            || option == "-speech-levels" || option == "-speech-report" || option == "-names";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -400,6 +404,8 @@ int RunMain(int argc, char** argv) {
         else if (option == "-speech-report") speechReportPath = *value;
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
+        else if (option == "-names") namesPath = *value;
+        else if (option == "-propose-names") proposeNames = true;
         else if (option == "-no-cg") noCg = true;
         else if (option == "-cg-learned") cgLearned = true;
         else {
@@ -414,6 +420,10 @@ int RunMain(int argc, char** argv) {
     }
     if ((wrapped || !contextPath.empty()) && (each || raw)) {
         std::fputs("hdtrans: --wrapped and --context cannot be combined with --each or --raw\n", stderr);
+        return 2;
+    }
+    if ((!namesPath.empty() || proposeNames) && (each || raw)) {
+        std::fputs("hdtrans: --names and --propose-names cannot be combined with --each or --raw\n", stderr);
         return 2;
     }
 
@@ -615,7 +625,30 @@ int RunMain(int argc, char** argv) {
         if (context.ends_with('\n')) context.pop_back();
     }
 
+    hdTrans::names::List names;
+    if (!namesPath.empty()) {
+        std::string text;
+        std::FILE* f = OpenFile(namesPath, false);
+        const bool read = f && ReadAll(f, text);
+        if (f) std::fclose(f);
+        if (!read) {
+            std::fprintf(stderr, "hdtrans: cannot read %s\n", namesPath.c_str());
+            return 1;
+        }
+        std::vector<std::string> errors;
+        hdTrans::names::ParseList(text, names, &errors);
+        for (const std::string& error : errors)
+            std::fprintf(stderr, "hdtrans: warning: %s:%s\n", namesPath.c_str(), error.c_str());
+    }
+
     const auto snapshot = engine.Dictionaries();
+    std::unique_ptr<hdTrans::pipeline::DocumentNames> documentNames;
+    if (!names.names.empty()) {
+        std::vector<std::string> errors;
+        hdTrans::pipeline::CompileNames(*snapshot, names, documentNames, &errors);
+        for (const std::string& error : errors)
+            std::fprintf(stderr, "hdtrans: error: %s:%s\n", namesPath.c_str(), error.c_str());
+    }
     const auto generated = hdTrans::internal::NewGenerated(*snapshot);
     const hdTrans::word::Scorer diagnosticScorers[] = {{"shortest-target", hdTrans::word::ShortestTargetScore}};
     const auto filters = engine.Filters();
@@ -647,6 +680,7 @@ int RunMain(int argc, char** argv) {
         }
         levelChanges.clear();
     };
+    options.names = documentNames.get();
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
@@ -750,6 +784,10 @@ int RunMain(int argc, char** argv) {
         if (!context.empty()) addLines(context);
         const size_t contextLines = lines.size();
         addLines(input);
+        if (proposeNames) {
+            emit(hdTrans::pipeline::ProposeNames(*snapshot, lines, options.names));
+            return finish();
+        }
         const std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
         reportChanges(0);

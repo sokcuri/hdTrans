@@ -128,6 +128,12 @@ void Registry::SetName(std::string_view t, std::string_view kr) {
     }
 }
 
+void Registry::AddListed(const Listed& name) {
+    if (name.ja.empty() || name.ko.empty()) return;
+    scoresValid_ = false;
+    listed_[name.ja] = name;
+}
+
 void Registry::SetReading(const std::string& key, const std::string& value) {
     if (value.empty()) return;
     if (reading_[key].empty()) reading_[key] = value;
@@ -721,6 +727,9 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (n.score >= kThreshold) att.insert(t);
     }
     for (const auto& [t, kr] : tables_->fixed) att.insert(t);
+    for (const auto& [t, l] : listed_) {
+        if (PersonKind(l.kind)) att.insert(t);
+    }
     // Whether the katakana run t goes on after its head x in words of two kana or more: common
     // words of the dictionaries (ダンジョンゲート) or a run the lines write on its own
     // (ゴブリンアーチャー beside アーチャー). Such a run is a compound of x, not a longer name; x
@@ -915,9 +924,24 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
         if (n.score >= need) scores_[t] = n;
     }
+    for (const auto& [t, l] : listed_) {
+        if (!PersonKind(l.kind)) {
+            scores_.erase(t);
+            continue;
+        }
+        // hon keeps a name the lines show standing alone.
+        const auto learned = scores_.find(t);
+        Name n = all[t];
+        n.person = true;
+        n.honorificOnly = l.honorificOnly && (learned == scores_.end() || learned->second.honorificOnly);
+        n.hasParts = false;
+        n.parts.clear();
+        scores_[t] = n;
+    }
     scoresValid_ = true;
     for (const std::string& t : Names()) {
         Name& n = scores_[t];
+        if (listed_.count(t) > 0) continue;
         if (!n.hasParts) {
             std::vector<std::string> parts;
             if (Split(t, parts)) {
@@ -1130,6 +1154,7 @@ void Registry::FindSiblingNames() {
 
 bool Registry::Named(std::string_view t) {
     const std::string key(t);
+    if (const auto l = listed_.find(key); l != listed_.end()) return PersonKind(l->second.kind);
     if (Accepted().count(key) > 0) return true;
     if (SiblingNames().count(key) > 0) return true;
     const auto h = hon_.find(key), g = gloss_.find(key);
@@ -1165,6 +1190,9 @@ std::vector<std::string> Registry::NamedSurfaces() {
         for (const std::string& t : LabelParts(k)) named.insert(t);
     }
     for (const std::string& t : SiblingNames()) named.insert(t);
+    for (const auto& [t, l] : listed_) {
+        if (!PersonKind(l.kind)) named.erase(t);
+    }
     return std::vector<std::string>(named.begin(), named.end());
 }
 

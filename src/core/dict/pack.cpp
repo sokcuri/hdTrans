@@ -57,20 +57,6 @@ std::string_view PlainPos(std::string_view pos) {
     return pos;
 }
 
-// The cast-blind contract of evaluation: when HD08_CAST_OFF names a TSV file, name rows whose
-// Japanese is a surface of its first column are dropped.
-std::set<std::string, std::less<>> CastOff() {
-    std::set<std::string, std::less<>> out;
-    const char* path = std::getenv("HD08_CAST_OFF");
-    if (path == nullptr || *path == 0) return out;
-    std::ifstream in(path);
-    for (std::string line; std::getline(in, line);) {
-        const std::string_view first = TrimSpace(std::string_view(line).substr(0, line.find('\t')));
-        if (!first.empty() && !first.starts_with("#") && first != "surface") out.emplace(first);
-    }
-    return out;
-}
-
 std::mutex registryMutex;
 struct RegistryData {
     std::vector<PackRowLabel> rows;
@@ -202,6 +188,18 @@ std::string CompileColloc(std::string_view pattern, std::string_view target, std
 
 }  // namespace
 
+std::set<std::string, std::less<>> CastOffNames() {
+    std::set<std::string, std::less<>> out;
+    const char* path = std::getenv("HD08_CAST_OFF");
+    if (path == nullptr || *path == 0) return out;
+    std::ifstream in(path);
+    for (std::string line; std::getline(in, line);) {
+        const std::string_view first = TrimSpace(std::string_view(line).substr(0, line.find('\t')));
+        if (!first.empty() && !first.starts_with("#") && first != "surface") out.emplace(first);
+    }
+    return out;
+}
+
 PackRowLabel PackRowById(int global) {
     const std::lock_guard<std::mutex> lock(registryMutex);
     const std::vector<PackRowLabel>& rows = Registry().rows;
@@ -250,7 +248,7 @@ bool PackTable::Member(std::string_view lemma, std::string_view cls) const {
 void ParsePackRows(std::string_view file, std::string_view text, const Dict* base, userdict::Families& families,
                    PackTable& table, std::vector<PackError>& errors) {
     std::vector<std::string> head;
-    const std::set<std::string, std::less<>> castOff = CastOff();
+    const std::set<std::string, std::less<>> castOff = CastOffNames();
     auto col = [&](const std::vector<std::string_view>& f, std::string_view name) -> std::string_view {
         for (std::size_t i = 0; i < head.size() && i < f.size(); i++)
             if (head[i] == name) return TrimSpace(f[i]);

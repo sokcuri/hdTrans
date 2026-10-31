@@ -20,6 +20,8 @@
 #include "core/pipeline/normalize.h"
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
+#include "core/dict/names.h"
+#include "core/dict/pack.h"
 #include "core/dict/char_readings.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
@@ -164,10 +166,72 @@ const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view
     return found->second;
 }
 
+// The listed names as pack name rows, id names:LINE: of any word of the name's key, or for a hon
+// name of one an honorific follows.
+std::string ListPackRows(const names::List& list) {
+    std::string honorific = "next=";
+    for (const std::string_view h : dict::internal::kNameHonorifics) {
+        if (honorific.size() > 5) honorific += '|';
+        honorific += h;
+    }
+    std::string out = "id\tlemma\tpos\tcond\ttarget\tslot\n";
+    for (const names::Listed& l : list.names) {
+        out += "names:" + std::to_string(l.line) + "\t" + l.ja + "\tn\t" + (l.honorificOnly ? honorific : "*") + "\t" +
+               l.ko + "\tname\n";
+    }
+    return out;
+}
+
 }  // namespace
 
+bool CompileNames(const dict::Snapshot& snap, const names::List& list, std::unique_ptr<DocumentNames>& out,
+                  std::vector<std::string>* errors) {
+    out = std::make_unique<DocumentNames>(snap.DocumentData().registry);
+    names::List kept;
+    if (!list.names.empty()) {
+        const std::set<std::string, std::less<>> off = dict::CastOffNames();
+        for (const names::Listed& l : list.names) {
+            if (!off.contains(l.ja)) kept.names.push_back(l);
+        }
+    }
+    userdict::Families families;
+    std::vector<dict::PackError> packErrors;
+    dict::ParsePackRows("names", ListPackRows(kept), &snap.Base(), families, out->packs, packErrors);
+    // Row i of the rows is line i + 2 of their text, under the header.
+    std::set<std::size_t> failed;
+    for (const dict::PackError& e : packErrors) {
+        const std::size_t i = e.line >= 2 ? static_cast<std::size_t>(e.line - 2) : kept.names.size();
+        if (i < kept.names.size()) failed.insert(i);
+        if (errors != nullptr) {
+            errors->push_back((i < kept.names.size() ? std::to_string(kept.names[i].line) : std::string("0")) + ": " +
+                              e.message);
+        }
+    }
+    std::map<std::string, std::string, std::less<>> honIds;  // row id to JA
+    for (const names::Listed& l : kept.names) {
+        if (l.honorificOnly) honIds["names:" + std::to_string(l.line)] = l.ja;
+    }
+    for (std::size_t i = 0; i < out->packs.rows.size(); i++) {
+        if (const auto h = honIds.find(out->packs.rows[i].id); h != honIds.end()) out->honRows[h->second] = i;
+    }
+    for (std::size_t i = 0; i < kept.names.size(); i++) {
+        if (failed.contains(i)) continue;
+        const names::Listed& l = kept.names[i];
+        out->list.names.push_back(l);
+        out->keys.insert(l.ja);
+        out->registry.AddListed(l);
+        if (names::PersonKind(l.kind)) {
+            out->persons[l.ja] = l.ko;
+        } else {
+            out->rows += l.ja + "\t" + l.ko + "\t" + (l.kind == names::ListKind::Place ? "place" : "n") + "\n";
+        }
+        out->key += std::string("\0listed\0", 8) + names::ListLine(l);
+    }
+    return packErrors.empty();
+}
+
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
-                                               bool extraBuiltin) {
+                                               bool extraBuiltin, const DocumentNames* names) {
     std::vector<std::string> canonicalLines;
     if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
             return line.find("゙") != std::string::npos || line.find("゚") != std::string::npos;
@@ -181,7 +245,8 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     doc->extraBuiltin = extraBuiltin;
     doc->data = &snap.DocumentData();
     doc->codes = std::make_unique<dict::CodeTable>();
-    doc->registry = std::make_unique<names::Registry>(doc->data->registry);
+    doc->names = names;
+    doc->registry = std::make_unique<names::Registry>(names != nullptr ? names->registry : doc->data->registry);
     names::Registry& r = *doc->registry;
     for (const std::string& line : lines) r.Add(line);
 
@@ -236,6 +301,18 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     doc->historical = names::HistoricalRows(snap, historical);
     if (!doc->historical.empty()) doc->key += std::string("\0historical\0", 12) + doc->historical;
 
+    if (names != nullptr && !names->packs.Empty()) {
+        doc->packs = &names->packs;
+        const std::vector<std::string> honorificOnly = r.HonorificOnlyNames();
+        for (const auto& [t, row] : names->honRows) {
+            if (std::binary_search(honorificOnly.begin(), honorificOnly.end(), t)) continue;
+            if (doc->ownPacks == nullptr) {
+                doc->ownPacks = std::make_unique<dict::PackTable>(names->packs);
+                doc->packs = doc->ownPacks.get();
+            }
+            doc->ownPacks->rows[row].atoms.clear();
+        }
+    }
     for (const std::string& t : r.Names()) doc->accepted.insert(t);
     doc->named = doc->accepted;
     for (const std::string& t : r.NamedSurfaces()) doc->named.insert(t);
@@ -244,9 +321,23 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     const std::string registryDict = r.Dict();
     userdict::Context ctx{doc->codes.get(), &doc->families, &snap.Base()};
     doc->extra = userdict::Parse(registryDict, -1, ctx).entries;
+    if (names != nullptr) {
+        for (dict::UserEntry& e : userdict::Parse(names->rows, -1, ctx).entries) doc->extra.push_back(std::move(e));
+        for (dict::UserEntry& e : doc->extra) {
+            if (names->keys.contains(e.key)) e.file = kListedFile;
+        }
+        doc->key += names->key;
+    }
     for (dict::UserEntry& e : userdict::Parse(doc->historical, -1, ctx).entries) doc->extra.push_back(std::move(e));
     FinishCodes(*doc->codes);
     return doc;
+}
+
+std::string ProposeNames(const dict::Snapshot& snap, std::span<const std::string> lines, const DocumentNames* names) {
+    const std::unique_ptr<DocumentContext> doc = BuildDocument(snap, lines, false, names);
+    std::string out;
+    for (const names::Listed& l : doc->registry->Proposed()) out += names::ListLine(l) + "\n";
+    return out;
 }
 
 namespace {
@@ -514,7 +605,7 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     if (found == doc.plainByKey.end()) {
         std::vector<dict::UserEntry> entries;
         for (const dict::UserEntry& e : doc.extra) {
-            if (!doc.data->dictKeys.contains(e.key) &&
+            if ((e.file == kListedFile || !doc.data->dictKeys.contains(e.key)) &&
                 !std::binary_search(facts.skip.begin(), facts.skip.end(), e.key)) entries.push_back(e);
         }
         DocumentContext::CachedLookup cached;
@@ -551,6 +642,7 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     ctx.named = &doc.named;
     ctx.prose = &doc.prose;
     ctx.lineProse = &lookup.prose;
+    if (doc.names != nullptr && !doc.names->persons.empty()) ctx.listed = &doc.names->persons;
     return ctx;
 }
 

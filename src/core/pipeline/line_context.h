@@ -35,6 +35,9 @@ struct LineContext {
     // their counts, and those of this line (names::ProseRuns). Null without a document.
     const std::map<std::string, int, std::less<>>* prose = nullptr;
     const std::vector<std::string>* lineProse = nullptr;
+    // The person names of the document's name list (Session::SetNames) and their Korean.
+    // Null without one.
+    const std::map<std::string, std::string, std::less<>>* listed = nullptr;
 };
 
 }  // namespace hdTrans::pipeline

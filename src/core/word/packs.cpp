@@ -517,6 +517,20 @@ int BestRow(Flusher& f, const dict::PackTable& t, const Item* it, std::string_vi
     return best;
 }
 
+// The row of slot that decides the word, or null: a row of the document's name list
+// (Settings::documentPacks) that holds is final for its document, as user rows are elsewhere;
+// otherwise the snapshot's rows decide, unless snapshotRows is false.
+const dict::PackRow* DecidingRow(Flusher& f, const Item* it, std::string_view key, dict::PackSlot slot,
+                                 bool snapshotRows) {
+    if (const dict::PackTable* list = f.w.settings.documentPacks; list != nullptr) {
+        if (const int i = BestRow(f, *list, it, key, slot); i >= 0) return &list->rows[static_cast<std::size_t>(i)];
+    }
+    if (!snapshotRows) return nullptr;
+    const dict::PackTable& t = f.w.snapshot.Packs();
+    const int i = BestRow(f, t, it, key, slot);
+    return i < 0 ? nullptr : &t.rows[static_cast<std::size_t>(i)];
+}
+
 // The text an item reads in its token: its surface and its conjugation ending.
 std::string_view Segment(const Item* it) {
     const std::size_t start = static_cast<std::size_t>(std::max(it->start, 0));
@@ -769,7 +783,7 @@ const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voic
 
 void ApplyPacks(Flusher& f) {
     const dict::PackTable& t = f.w.snapshot.Packs();
-    if (t.Empty()) return;
+    if (t.Empty() && f.w.settings.documentPacks == nullptr) return;
     f.attached.asked = false;  // the chain may have changed since the voice layer asked
     std::set<const Item*> taken;
     if (!t.collocs.empty()) ApplyCollocs(f, t, taken);
@@ -778,10 +792,12 @@ void ApplyPacks(Flusher& f) {
             taken.contains(it))
             continue;
         // A fixed word (a user's word, a span the sound stage wrote) keeps its decisions; a name of the
-        // name layer takes name rows.
+        // name layer takes name rows, and a word of a plain entry the document's name rows (the name
+        // list stands in for the plain rows of its names in its document).
         const Entry* chosen = it->group->At(it->selected);
         const bool nameOnly = it->Fixed();
-        if (nameOnly && (chosen->user == nullptr || !chosen->user->nameLayer)) continue;
+        const bool nameLayer = chosen->user != nullptr && chosen->user->nameLayer;
+        if (nameOnly && !nameLayer && (chosen->user == nullptr || f.w.settings.documentPacks == nullptr)) continue;
         const char cls = ClassOf(it);
         // A voice row's agent particle and Korean verb hold against the passes after the voice layer.
         if (Item* p = it->packAgent; p != nullptr && p->selected >= 0 &&
@@ -800,9 +816,9 @@ void ApplyPacks(Flusher& f) {
         for (const dict::PackSlot slot :
              {dict::PackSlot::Sense, dict::PackSlot::Name, dict::PackSlot::Polarity, dict::PackSlot::Tense}) {
             if (nameOnly && slot != dict::PackSlot::Name) continue;
-            const int best = BestRow(f, t, it, it->group->surface, slot);
-            if (best < 0) continue;
-            const dict::PackRow& r = t.rows[static_cast<std::size_t>(best)];
+            const dict::PackRow* best = DecidingRow(f, it, it->group->surface, slot, !nameOnly || nameLayer);
+            if (best == nullptr) continue;
+            const dict::PackRow& r = *best;
             const Selection source{Provenance::Pack, r.global};
             if (r.target == "-") {
                 it->packRows.push_back(r.global);
