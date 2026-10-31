@@ -69,7 +69,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 | `voice` | `voice` `polarity` `tense` 행에서: 팩 전에 신호가 정한 읽기 `none` `passive` `potential` `respectful` `spontaneous`(`polarity` `tense` 행에서는 voice 층이 정한 읽기와 사전의 가능형; 이웃·형태 원자로 셈) |
 | `how` | 단어가 논항일 때 그 쓰임(`marked` `topic` `bare` `omitted` `relhead` …), 부착 정보가 있을 때만 |
 | `subj.how` `obj.how` … `arg.how` | 술어의 그 칸 논항의 쓰임(`obj.how=bare`: 迷惑かけた), 부착 정보가 있을 때만 |
-| `cl.자질`, `main.자질` | 단어의 절, 그 절이 걸리는 맨 위 절(주절)의 자질(`cl.tense=past`, `main.vol=+`, `main.force=imperative`), 부착 정보가 있을 때만 |
+| `cl.자질`, `main.자질` | 단어의 절, 그 절이 걸리는 맨 위 절(주절)의 자질(`cl.tense=past`, `main.vol=+`, `main.force=imp`), 부착 정보가 있을 때만. 값은 제공자가 쓰는 이름(0.8 IR의 이름: force `decl` `q` `imp` `prohib` `prop` `excl` `request`, tense `nonpast` `past`, pol `pos` `neg`) |
 | `domain` | 이 호스트에는 그런 자질이 없어 늘 맞지 않음 |
 
 ## 연어 행 (`colloc`)
