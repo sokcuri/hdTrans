@@ -12,6 +12,7 @@
 | [layout.md](layout.md) | 배치 (`LAY`) |
 | [words.md](words.md) | 낱말 (`LEX`) |
 | [speech.md](speech.md) | 말투 (`SPC`) |
+| [register.md](register.md) | 0.8 말투 수준 (`REG`): 대사와 지문의 해라, 해, 해요, 합쇼 |
 | [sounds.md](sounds.md) | 소리 (`SND`) |
 | [grammar.md](grammar.md) | 문법 (`GRM`) |
 | [meaning.md](meaning.md) | 뜻 (`MNG`): 뜻이 뒤집히는 오역, 실패가 없어야 하는 사례 |

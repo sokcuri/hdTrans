@@ -3,6 +3,8 @@
 //   hd8gen [--data DIR] conj LEMMA FORM...          one predicate: 가다 -었- -어요 → 갔어요
 //   hd8gen [--data DIR] gold FILE.tsv               gold paradigm set: id lemma pos cls forms expected
 //   hd8gen [--data DIR] gen FILE.jsonl              IR lines (kir2 + reg + lev [+ out]) → text
+//   hd8gen [--data DIR] level FILE.jsonl [--dump]   speech-level agreement with reference levels
+//   hd8gen [--data DIR] levelcases FILE.tsv [--spec spec/register.md]   REG fix/keep cases
 #include <cstdio>
 #include <cstdlib>
 #include <map>
@@ -182,6 +184,94 @@ int LevelEval(const RegisterTables& rt, const std::string& path, const RegOption
     return 0;
 }
 
+// Speech-level cases (REG rules): tests/register/levels.cases.tsv. Rows of one doc form one document of one
+// scene, in file order; a row with level "-" is context only. Each row is checked for its level and, when given,
+// the spec id that decided it. With spec, every spec id of levels.tsv and of the cases must be a heading of that
+// file, and every REG id that levels.tsv uses needs a fix and a keep case.
+int LevelCases(const RegisterTables& rt, const std::string& path, const std::string& specPath) {
+    TsvTable t;
+    std::string err;
+    if (!ReadTsv(path, t, err)) {
+        std::fprintf(stderr, "%s\n", err.c_str());
+        return 1;
+    }
+    const int cid = t.Col("id"), cspec = t.Col("spec"), ccase = t.Col("case"), cdoc = t.Col("doc"), csp = t.Col("speaker"),
+              cdia = t.Col("dialogue"), cja = t.Col("ja"), clev = t.Col("level");
+    if (cid < 0 || cspec < 0 || ccase < 0 || cdoc < 0 || csp < 0 || cdia < 0 || cja < 0 || clev < 0) {
+        std::fprintf(stderr, "%s: missing column\n", path.c_str());
+        return 1;
+    }
+    std::vector<RegLine> lines;
+    std::map<std::string, uint32_t> scenes;
+    for (const auto& r : t.rows) {
+        RegLine l;
+        l.ja = r[cja];
+        l.speaker = r[csp];
+        l.dialogue = r[cdia] == "yes";
+        l.scene = scenes.emplace(r[cdoc], static_cast<uint32_t>(scenes.size() + 1)).first->second;
+        lines.push_back(l);
+    }
+    // documents are contiguous runs of one doc id
+    for (size_t k = 1; k < t.rows.size(); ++k)
+        if (t.rows[k][cdoc] != t.rows[k - 1][cdoc] && scenes[t.rows[k][cdoc]] < scenes[t.rows[k - 1][cdoc]]) {
+            std::fprintf(stderr, "%s:%d: doc %s is not contiguous\n", path.c_str(), t.lines[k], t.rows[k][cdoc].c_str());
+            return 1;
+        }
+    const std::vector<RegDecision> ds = DecideLevels(rt, lines, {});
+    int fail = 0, n = 0;
+    std::map<std::string, std::pair<int, int>> fixKeep;  // spec → fix, keep
+    for (size_t k = 0; k < t.rows.size(); ++k) {
+        const auto& r = t.rows[k];
+        if (r[clev] == "-") continue;
+        ++n;
+        if (r[ccase] == "fix") ++fixKeep[r[cspec]].first;
+        else if (r[ccase] == "keep") ++fixKeep[r[cspec]].second;
+        else {
+            std::fprintf(stderr, "FAIL %s: case must be fix or keep\n", r[cid].c_str());
+            ++fail;
+        }
+        const std::string got = Name(ds[k].level);
+        const bool levelOk = got == r[clev];
+        // a fix case names the rule that decides it; a keep case names the rule it must not fall under
+        const bool specOk = r[ccase] == "fix" ? ds[k].spec == r[cspec] : ds[k].spec != r[cspec];
+        if (!levelOk || !specOk) {
+            std::fprintf(stderr, "FAIL %s (%s %s): got %s by %s [%s], want %s\n", r[cid].c_str(), r[cspec].c_str(),
+                         r[ccase].c_str(), got.c_str(), ds[k].spec.c_str(), ds[k].key.c_str(), r[clev].c_str());
+            ++fail;
+        }
+    }
+    if (!specPath.empty()) {
+        std::ifstream sp(specPath);
+        if (!sp) {
+            std::fprintf(stderr, "cannot read %s\n", specPath.c_str());
+            return 1;
+        }
+        std::map<std::string, bool> headings;
+        std::string line;
+        while (std::getline(sp, line))
+            if (line.rfind("## ", 0) == 0) {
+                const size_t e = line.find(' ', 3);
+                headings[line.substr(3, e == std::string::npos ? std::string::npos : e - 3)] = true;
+            }
+        std::map<std::string, bool> used;
+        for (const auto& [key, spec] : LevelSpecs(rt)) used[spec] = true;
+        for (const auto& [spec, fk] : fixKeep) used.emplace(spec, false);
+        for (const auto& [spec, inTable] : used) {
+            if (!headings.count(spec)) {
+                std::fprintf(stderr, "FAIL spec %s is not a heading of %s\n", spec.c_str(), specPath.c_str());
+                ++fail;
+            }
+            if (inTable && (fixKeep[spec].first == 0 || fixKeep[spec].second == 0)) {
+                std::fprintf(stderr, "FAIL spec %s needs a fix and a keep case (%d fix, %d keep)\n", spec.c_str(),
+                             fixKeep[spec].first, fixKeep[spec].second);
+                ++fail;
+            }
+        }
+    }
+    std::fprintf(stderr, "level cases %d, failed %d\n", n, fail);
+    return fail || n == 0 ? 1 : 0;
+}
+
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -263,9 +353,19 @@ int main(int argc, char** argv) {
             else if (args[k] == "--dump") dump = true;
             else if (args[k] == "--no-profile") ro.profiles = false;
             else if (args[k].rfind("--decay=", 0) == 0) ro.decay = std::atof(args[k].c_str() + 8);
-            else if (args[k].rfind("--threshold=", 0) == 0) ro.threshold = std::atof(args[k].c_str() + 12);
         }
         return LevelEval(*rt, args[1], ro, scored, dump);
+    }
+    if (args[0] == "levelcases" && args.size() >= 2) {
+        auto rt = LoadRegisterTables(data + "/register", err);
+        if (!rt) {
+            std::fprintf(stderr, "%s\n", err.c_str());
+            return 1;
+        }
+        std::string spec;
+        for (size_t k = 2; k + 1 < args.size(); ++k)
+            if (args[k] == "--spec") spec = args[k + 1];
+        return LevelCases(*rt, args[1], spec);
     }
     return Usage();
 }

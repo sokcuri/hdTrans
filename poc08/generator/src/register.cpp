@@ -19,10 +19,15 @@ struct CueRow {
     std::u32string text, notAfter;
 };
 struct LevelRow {
-    std::string key;
+    std::string key, spec;
     Level level = Level::hae;
     bool profile = false;
     bool keep = false;  // keep the level the input already has (RegDecision.keep)
+    enum class Unquoted { no, yes, strong } unquoted = Unquoted::no;  // a line outside quotes (REG-7)
+};
+struct TailRow {
+    std::u32string text, notAfter;  // a sentence-final particle; characters that must not come right before it
+    bool strong = false;
 };
 struct VoiceRow {
     std::string type;
@@ -32,7 +37,8 @@ struct VoiceRow {
 struct RegisterTables {
     std::vector<VoiceRow> voices;
     std::vector<CueRow> cues;
-    std::vector<std::u32string> tails, strongTails, quotatives;
+    std::vector<TailRow> tails;
+    std::vector<std::u32string> quotatives;
     std::map<std::string, LevelRow> levels;
     std::vector<std::string> honExclude;
 };
@@ -48,16 +54,16 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     }
     for (const auto& r : c.rows) {
         if (r[cc] == "tail") {
-            t->tails.push_back(ToU32(r[ct]));
-            if (r[cm] == "strong") t->strongTails.push_back(ToU32(r[ct]));
+            t->tails.push_back({ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string(), r[cm] == "strong"});
         }
         else if (r[cc] == "quotative") t->quotatives.push_back(ToU32(r[ct]));
         else t->cues.push_back({r[cc], r[cm], ToU32(r[ct]), cn >= 0 ? ToU32(r[cn]) : std::u32string()});
     }
     TsvTable l;
     if (!ReadTsv(dir + "/levels.tsv", l, err)) return nullptr;
-    const int lk = l.Col("key"), ll = l.Col("level"), lp = l.Col("profile"), lkeep = l.Col("keep");
-    if (lk < 0 || ll < 0 || lp < 0) {
+    const int lk = l.Col("key"), ls = l.Col("spec"), ll = l.Col("level"), lp = l.Col("profile"), lkeep = l.Col("keep"),
+              lu = l.Col("unquoted");
+    if (lk < 0 || ls < 0 || ll < 0 || lp < 0 || lkeep < 0 || lu < 0) {
         err = "levels.tsv: missing column";
         return nullptr;
     }
@@ -80,7 +86,18 @@ std::shared_ptr<const RegisterTables> LoadRegisterTables(const std::string& dir,
     for (const auto& r : l.rows) {
         LevelRow row;
         row.key = r[lk];
-        row.keep = lkeep >= 0 && r[lkeep] == "yes";
+        row.spec = r[ls];
+        if (row.spec.empty()) {
+            err = "levels.tsv: no spec id for " + row.key;
+            return nullptr;
+        }
+        row.keep = r[lkeep] == "yes";
+        if (r[lu] == "yes") row.unquoted = LevelRow::Unquoted::yes;
+        else if (r[lu] == "strong") row.unquoted = LevelRow::Unquoted::strong;
+        else if (r[lu] != "no") {
+            err = "levels.tsv: bad unquoted " + r[lu];
+            return nullptr;
+        }
         if (!ParseLevel(r[ll], row.level)) {
             err = "levels.tsv: bad level " + r[ll];
             return nullptr;
@@ -110,6 +127,11 @@ bool IsWordChar(char32_t c) {
 }
 bool EndsWith(const std::u32string& s, const std::u32string& e) {
     return s.size() >= e.size() && s.compare(s.size() - e.size(), e.size(), e) == 0;
+}
+// Whether s ends in the tail particle (not right after one of its notAfter characters: the ぞ of どうぞ).
+bool EndsInTail(const std::u32string& s, const TailRow& tail) {
+    if (s.size() <= tail.text.size() || !EndsWith(s, tail.text)) return false;
+    return tail.notAfter.find(s[s.size() - tail.text.size() - 1]) == std::u32string::npos;
 }
 bool StartsAt(const std::u32string& s, size_t i, const std::u32string& e) { return s.compare(i, e.size(), e) == 0; }
 
@@ -164,7 +186,8 @@ std::u32string LastSentence(const std::u32string& u) {
 }
 
 struct Cues {
-    bool strongTail = false;  // the line ends in よ, ね, ぞ …
+    bool strongTail = false;  // a sentence of the line ends in よ, ね, ぞ …
+    bool lastStrong = false;  // the last sentence ends in one of them (its outermost tail particle)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
          cend = false;
     std::string first;
@@ -192,11 +215,12 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     bool tailStripped = false;
     for (int guard = 0; guard < 6; ++guard) {
         const std::u32string& s = stages.back();
-        size_t best = 0;
+        const TailRow* best = nullptr;
         for (const auto& tail : t.tails)
-            if (tail.size() > best && tail.size() < s.size() && EndsWith(s, tail)) best = tail.size();
+            if ((!best || tail.text.size() > best->text.size()) && EndsInTail(s, tail)) best = &tail;
         if (!best) break;
-        std::u32string next = s.substr(0, s.size() - best);
+        if (stages.size() == 1 && best->strong) c.lastStrong = true;
+        std::u32string next = s.substr(0, s.size() - best->text.size());
         while (!next.empty() && IsMark(next.back())) next.pop_back();
         stages.push_back(next);
         tailStripped = true;
@@ -207,8 +231,8 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         std::u32string sent;
         auto check = [&](std::u32string x) {
             while (!x.empty() && IsMark(x.back())) x.pop_back();
-            for (const auto& st : t.strongTails)
-                if (EndsWith(x, st) && x.size() > st.size()) c.strongTail = true;
+            for (const auto& tail : t.tails)
+                if (tail.strong && EndsInTail(x, tail)) c.strongTail = true;
         };
         for (char32_t ch : u.text) {
             if (IsSentenceEnd(ch)) {
@@ -262,7 +286,7 @@ std::string Key(const Cues& c) {
     if (c.set && !c.cend) return "set";
     if (c.keigo && c.pend) return "keigo-pend";
     if (c.pend) return "pend";
-    if (c.keigo) return "keigo";
+    if (c.keigo) return c.lastStrong ? "keigo-casual" : "keigo";
     if (c.arch) return "archaic";
     if (c.pany) return "polite-any";
     if (c.stiff) return "stiff";
@@ -273,6 +297,12 @@ std::string Key(const Cues& c) {
 }  // namespace
 
 std::string CueKey(const RegisterTables& t, const std::string& ja) { return Key(Scan(t, ja)); }
+
+std::vector<std::pair<std::string, std::string>> LevelSpecs(const RegisterTables& t) {
+    std::vector<std::pair<std::string, std::string>> out;
+    for (const auto& [key, row] : t.levels) out.emplace_back(key, row.spec);
+    return out;
+}
 
 bool IsHonorificSuffix(const RegisterTables& t, const std::string& word) {
     const std::u32string u = ToU32(word);
@@ -339,7 +369,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             Prof& p = prof[lines[k].speaker];
             const std::string& key = keys[k - i];
             if (key == "pend" || key == "keigo-pend" || key == "set") p.pol += 1;
-            if (key == "casual" || key == "stiff") p.cas += 1;
+            if (key == "casual" || key == "keigo-casual" || key == "stiff") p.cas += 1;
             const Persona v = VoiceOf(t, lines[k].ja);
             if (v != Persona::none) p.voice[static_cast<int>(v)] += 1;
         }
@@ -355,16 +385,25 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                     d.level = row != t.levels.end() ? row->second.level : Level::hae;
                     d.keep = (row != t.levels.end() && row->second.keep) || (sceneArchaic && (key == "casual" || key == "bare"));
                     d.key = "scene-speech-" + key;
-                } else if (key == "pend" || key == "keigo-pend" || key == "polite-any") {
-                    d.level = key == "keigo-pend" ? Level::hapsyo : Level::haeyo;
+                    // REG-9: the scene is speech, each line at its row's level; period speech in it keeps the
+                    // input's plain levels
+                    d.spec = "REG-9";
+                    continue;
+                }
+                // REG-7: an unquoted line that ends politely, or (for the rows marked strong) with a strong
+                // sentence-final particle, is speech at its row's level; any other is narration (REG-1)
+                auto row = t.levels.find(key);
+                using U = LevelRow::Unquoted;
+                if (row != t.levels.end() &&
+                    (row->second.unquoted == U::yes || (row->second.unquoted == U::strong && c.strongTail))) {
+                    d.level = row->second.level;
                     d.key = "unbracketed-" + key;
-                } else if (key == "casual" && c.strongTail) {
-                    d.level = Level::hae;
-                    d.key = "unbracketed-casual";
+                    d.spec = "REG-7";
                 } else {
                     d.level = Level::haera;
                     d.narration = true;
                     d.key = "narration";
+                    d.spec = "REG-1";
                 }
                 continue;
             }
@@ -374,15 +413,16 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             d.narration = key == "narr";
             auto row = t.levels.find(key);
             d.level = row != t.levels.end() ? row->second.level : Level::hae;
+            if (row != t.levels.end()) d.spec = row->second.spec;
             if (row != t.levels.end() && row->second.keep) d.keep = true;
+            // REG-8: a line without its own level cue speaks like the speaker's cued lines in the scene: 해요
+            // when more of them are polite than plain
             if (opt.profiles && row != t.levels.end() && row->second.profile && !lines[k].speaker.empty()) {
                 auto p = prof.find(lines[k].speaker);
-                if (p != prof.end() && p->second.pol + p->second.cas > 0) {
-                    const double share = p->second.pol / (p->second.pol + p->second.cas);
-                    const Level was = d.level;
-                    if (share > opt.threshold) d.level = Level::haeyo;
-                    else if (key == "bare" || key == "empty") d.level = Level::hae;
-                    d.byProfile = d.level != was;
+                if (p != prof.end() && p->second.pol > p->second.cas) {
+                    d.byProfile = d.level != Level::haeyo;
+                    d.level = Level::haeyo;
+                    if (d.byProfile) d.spec = "REG-8";
                 }
             }
             d.persona = VoiceOf(t, lines[k].ja);

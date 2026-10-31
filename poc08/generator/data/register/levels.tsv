@@ -1,23 +1,27 @@
 #! levels
-# Speech level of an utterance from its cue key (R, decision order step 1 and 4 of DESIGN.md §4.4).
-# The share column is the share of dev game dialogue lines with this key whose human translation has the
-# level (5 works, scenes outside the held-out set; 76,553 lines), so a row can be re-derived and audited.
+# Speech level of an utterance from its cue key (R). Every row is a house-style decision written in
+# spec/register.md under its spec id; cases: tests/register/levels.cases.tsv (hd8gen levelcases).
 #
 # Columns
-#   key     the first cue key that holds, in this order: narr (a quote inside a narration line), empty (no
-#           word), set, keigo-pend, pend, keigo, archaic, polite-any, stiff, casual, bare
-#   level   haera hae haeyo hapsyo
-#   keep    yes: when the input already has a level (0.7.x's own ending, the bridge), keep it instead
-#   profile yes: when the speaker's scoped profile is polite (share of polite lines > threshold), use haeyo
-key	level	profile	keep	share	note
-narr	haera	no	no	81	「…」と言った: the line ends in narration
-empty	hae	yes	no	-	……, ！？
-set	hapsyo	no	no	66	失礼します → 실례하겠습니다
-keigo-pend	hapsyo	no	no	62	いらっしゃいます → 계십니다
-pend	haeyo	no	no	80	です/ます at the end
-keigo	haeyo	yes	no	44	keigo without a polite end
-archaic	hae	no	yes	84	old speech: games use 해 (84%), period drama keeps 0.7.x's plain -다/-라 (いかぬ → 않는다, 来い → 와라); keep the input's level
-polite-any	haeyo	yes	no	65	です/ます inside the line, plain end
-stiff	hae	no	yes	79	である, 諸君: keep the input's level
-casual	hae	no	no	92	plain endings and sentence-final particles
-bare	hae	yes	no	83	no cue (nouns, interjections)
+#   key       the cue key of the line, the first that holds in this order: narr (a quote inside a narration
+#             line), empty (no word), set, keigo-pend, pend, keigo-casual, keigo, archaic, polite-any, stiff,
+#             casual, bare
+#   spec      the rule in spec/register.md
+#   level     haera hae haeyo hapsyo
+#   profile   yes: a line of this key takes the level of the speaker in the scene (REG-8)
+#   keep      yes: when the input already has a level (0.7.x's own ending), keep it instead (REG-6)
+#   unquoted  a line outside quotes is speech with this level: yes; strong: only when a sentence of it ends in a
+#             strong sentence-final particle (よ, ね, ぞ …); no: it is narration (REG-1, REG-7)
+key	spec	level	profile	keep	unquoted	note
+narr	REG-1	haera	no	no	no	「…」と言った: the line ends in narration
+empty	REG-2	hae	yes	no	no	……, ！？
+bare	REG-2	hae	yes	no	no	no cue (nouns, interjections)
+casual	REG-2	hae	no	no	strong	plain endings and sentence-final particles: 해, never -다
+pend	REG-3	haeyo	no	no	yes	です/ます at the end
+polite-any	REG-3	haeyo	no	no	yes	です/ます inside the line, plain end
+keigo-pend	REG-4	hapsyo	no	no	yes	いらっしゃいます → 계십니다
+set	REG-4	hapsyo	no	no	yes	失礼します → 실례하겠습니다
+keigo	REG-5	haeyo	no	no	no	召し上がれ → 드세요
+keigo-casual	REG-5	hae	no	no	strong	いらっしゃるの？ → 계셔?
+archaic	REG-6	hae	no	yes	no	old speech (じゃ, ておる, ぬ): the input's level until personas
+stiff	REG-6	hae	no	yes	no	である, 諸君: the input's level until personas

@@ -1,8 +1,8 @@
 #! voices
 # Character voice (persona) cues and name suffixes, read by S and R. A speaker's persona is the voice of the
 # most frequent cue among its lines in the scene; R passes it to G, which picks ending variants from
-# data/ko/persona.tsv (old-male: 좋구먼). Levels are not changed by a voice here: the dev games show 해 for
-# 84% of old-speech lines.
+# data/ko/persona.tsv (old-male: 좋구먼). Levels are not changed by a voice here (spec/register.md REG-6:
+# personas and 하오/하게 come with the VN stage).
 #
 # Columns
 #   type   first (a first-person pronoun), final (a sentence-final form), suffix (an honorific name suffix: the word

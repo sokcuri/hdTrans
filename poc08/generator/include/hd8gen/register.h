@@ -1,7 +1,6 @@
 #pragma once
-// R: the register model. Decides the speech level of each utterance from its cues, the speaker's profile in
-// scope (scene, and earlier scenes of the same document with weight halving at each scene boundary), and the
-// default. Then marks addressee -시- on the V nodes of polite utterances.
+// R: the register model. Decides the speech level of each utterance by the house-style rules of
+// spec/register.md (REG-n): its cues (levels.tsv), the speaker's cued lines in the scene, and the default. Then marks addressee -시- on the V nodes of polite utterances.
 #include <memory>
 #include <string>
 #include <vector>
@@ -26,15 +25,15 @@ struct RegDecision {
     Persona persona = Persona::none;
     bool narration = false;   // the line is narration (or ends in narration after a quote)
     std::string key;          // cue key that decided it, for --why
+    std::string spec;         // the rule of spec/register.md that decided it (REG-n), for --why
     bool byProfile = false;   // the speaker profile changed the level
     bool firstPerson = false; // the source names the speaker (私, 俺 …): the subject is not the addressee
     bool keep = false;        // levels.tsv says keep: the level the input already has (0.7.x's own), haera otherwise
 };
 
 struct RegOptions {
-    double decay = 0.0;       // weight of earlier scenes per boundary (0 = this scene only)
-    double threshold = 0.6;   // polite share above which a profile counts as polite
-    bool profiles = true;
+    double decay = 0.0;       // weight of earlier scenes per boundary (0 = this scene only, REG-8)
+    bool profiles = true;     // REG-8: a line without its own cue speaks like the speaker's cued lines
 };
 
 // Decides every line of one document (lines in order). Each decision depends only on lines in its scope.
@@ -42,6 +41,9 @@ std::vector<RegDecision> DecideLevels(const RegisterTables&, const std::vector<R
 
 // The cue key of one line alone (for tests and --why).
 std::string CueKey(const RegisterTables&, const std::string& ja);
+
+// The key and spec id of every levels.tsv row (for the case check).
+std::vector<std::pair<std::string, std::string>> LevelSpecs(const RegisterTables&);
 
 // voices.tsv: whether a Japanese word is an honorific name suffix (さん, 様), and the voice of a line ("" none).
 bool IsHonorificSuffix(const RegisterTables&, const std::string& word);

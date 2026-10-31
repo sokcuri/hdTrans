@@ -906,11 +906,11 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                                    nodes[q + 1].punct == Punct::comma;
                 // in a caption scene a plain command 0.7.x wrote as -어라 (来い → 와라) stays one
                 const bool command = nodes[q].mood == Mood::imp && static_cast<Level>(nodes[q].decision) == Level::haera;
-                // honorific or humble source (いらっしゃる, 申す, おります, ご覧になって): 0.7.x's polite level
+                // REG-10: honorific or humble source (いらっしゃる, 申す, おります, ご覧になって): 0.7.x's polite level
                 // (합쇼체, or 해요체 for ご覧になって → 보세요) stays; R would lower it from the sentence end alone
                 const Level was = static_cast<Level>(nodes[q].decision);
                 const bool keigo = v.Bool("keigo") && (was == Level::hapsyo || was == Level::haeyo);
-                // a question 0.7.x asked by its ending alone (아닙니까. 가십니까): no ? follows, and the 해요체 or
+                // REG-12: a question 0.7.x asked by its ending alone (아닙니까. 가십니까): no ? follows, and the 해요체 or
                 // 해체 question is the statement's form (아니에요. 가세요), so another level would stop asking
                 bool askedByEnding = false;
                 if (nodes[q].mood == Mood::q && nodes[q].ctype == CType::final_) {
@@ -920,8 +920,8 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                         if (nodes[k].punct == Punct::q) askedByEnding = false;
                     }
                 }
-                const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;
-                // the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
+                const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;  // REG-10: 합쇼체 is never lowered
+                // REG-11: the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
                 if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))

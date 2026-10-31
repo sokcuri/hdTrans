@@ -1,0 +1,67 @@
+#! level-cases
+# Speech-level cases of the REG rules (spec/register.md), run by `hd8gen levelcases` (ctest poc08.generator.levels).
+# Rows with one doc id form one document of one scene, in file order. case fix: the rule named in spec decides
+# the line's level; case keep: the line is near the rule but must not fall under it. level "-": context only.
+# dialogue yes: the line is a dialogue line of a script (a quote, or a speaker line).
+id	spec	case	doc	speaker	dialogue	ja	level
+r1-1	REG-1	fix	d1		yes	『正解！』と鈴木が手で○を作った。	haera
+r1-2	REG-1	fix	d2		yes	「お、意外と素直だな」	-
+r1-3	REG-1	fix	d2		no	道はまさに芋洗いのような混雑。	haera
+r1-4	REG-1	fix	d2		no	雨の音に目を覚ました。	haera
+r1-5	REG-1	keep	d3		yes	「お、意外と素直だな」	hae
+r2-1	REG-2	fix	d4		yes	「お、意外と素直だな」	hae
+r2-2	REG-2	fix	d5		yes	「わかってるわよ」	hae
+r2-3	REG-2	fix	d6		yes	「ああ、ただいま」	hae
+r2-4	REG-2	fix	d7		yes	「……」	hae
+r2-5	REG-2	fix	d8		yes	「明日行きますって言ってた」	hae
+r2-6	REG-2	fix	d9		yes	「いっぱい汚してごめん」	hae
+r2-7	REG-2	keep	d10		yes	「半信半疑です……」	haeyo
+r2-8	REG-2	keep	d11		yes	「粗茶でございます」	hapsyo
+r3-1	REG-3	fix	d12		yes	「か、帰っちゃいましたね」	haeyo
+r3-2	REG-3	fix	d13		yes	「ひどいですよ、それ」	haeyo
+r3-3	REG-3	fix	d14		yes	「半信半疑です……」	haeyo
+r3-4	REG-3	fix	d15		yes	「看病して下さった御礼です。差し入れということで」	haeyo
+r3-5	REG-3	keep	d16		yes	「明日行きますって言ってた」	hae
+r3-6	REG-3	keep	d17		yes	「それでは、失礼します」	hapsyo
+r4-1	REG-4	fix	d18		yes	「粗茶でございます」	hapsyo
+r4-2	REG-4	fix	d19		yes	「それでは、失礼します」	hapsyo
+r4-3	REG-4	fix	d20		yes	「……お疲れ様でした」	hapsyo
+r4-4	REG-4	fix	d21		yes	「はじめまして、私は、大島と申します」	hapsyo
+r4-5	REG-4	keep	d22		yes	「か、帰っちゃいましたね」	haeyo
+r4-6	REG-4	keep	d23		yes	「はい、いらっしゃい」	haeyo
+r5-1	REG-5	fix	d24		yes	「はい、いらっしゃい」	haeyo
+r5-2	REG-5	fix	d25		yes	「とにかく、今から伺いますので」	haeyo
+r5-3	REG-5	fix	d26		yes	「嬉野さん、今はいらっしゃるの？」	hae
+r5-4	REG-5	fix	d27		yes	「やって頂戴。覚悟ならできているわ」	hae
+r5-5	REG-5	keep	d28		yes	「粗茶でございます」	hapsyo
+r5-6	REG-5	keep	d29		yes	「いらっしゃいませ」	hapsyo
+r5-7	REG-5	keep	d30		yes	「おっしゃあ、来いっ」	hae
+r6-1	REG-6	fix	d31		yes	「入りたまえ」	hae
+r6-2	REG-6	fix	d32		yes	「お医者さんごっこなどしておらん！」	hae
+r6-3	REG-6	fix	d33		yes	「ち、違うでござるよ」	hae
+r6-4	REG-6	fix	d34		yes	「他に私の相手ができる者はおらぬのか？」	hae
+r6-5	REG-6	keep	d35		yes	「立候補したい人はいる？」	hae
+r6-6	REG-6	keep	d36		yes	「ま、何にせよ、助かったんだからＯＫってことで」	hae
+r6-7	REG-6	keep	d37		yes	「あたし、肉じゃがが食べたいなー」	hae
+r6-8	REG-6	keep	d38		yes	「どうかな……唯一の趣味であることは確かだ」	hae
+r6-9	REG-6	keep	d39		yes	「あだだだっ、死ぬっ、死ぬっ！」	hae
+r6-10	REG-6	keep	d40		yes	「というわけで、私の絵は大したものじゃないんだ」	hae
+r7-1	REG-7	fix	d41		yes	「それじゃ、また明日」	-
+r7-2	REG-7	fix	d41		no	先生、乗っ取り犯がここにいます。	haeyo
+r7-3	REG-7	fix	d41		no	いや、もういいです。	haeyo
+r7-4	REG-7	fix	d41		no	ストレートに言ったら、絶対傷つくぞ。	hae
+r7-5	REG-7	fix	d41		no	それじゃ、またね。	hae
+r7-6	REG-7	fix	d41		no	よろしくお願いします。	hapsyo
+r7-7	REG-7	keep	d41		no	雨の音に目を覚ました。	haera
+r7-8	REG-7	keep	d41		no	変な声が出た。	haera
+r8-1	REG-8	fix	d42	甲	yes	「はい、そうです」	-
+r8-2	REG-8	fix	d42	甲	yes	「わかりました。行きましょう」	-
+r8-3	REG-8	fix	d42	甲	yes	「えっと、この本」	haeyo
+r8-4	REG-8	keep	d43	乙	yes	「わかった」	-
+r8-5	REG-8	keep	d43	乙	yes	「えっと、この本」	hae
+r8-6	REG-8	keep	d44		yes	「えっと、この本」	hae
+r9-1	REG-9	fix	d45		no	わかってるよ	hae
+r9-2	REG-9	fix	d45		no	早く来て	hae
+r9-3	REG-9	fix	d45		no	すみません遅れました	haeyo
+r9-4	REG-9	keep	d46		yes	「それじゃ、また明日」	-
+r9-5	REG-9	keep	d46		no	わかってるよ。	hae
