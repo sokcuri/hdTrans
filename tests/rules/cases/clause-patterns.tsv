@@ -24,12 +24,12 @@ pack:clause-patterns:1	「だったら、今度会われたときに」	has:만�
 pack:clause-patterns:1	「アレン様、本当に会われるのですか？」	has:만나십니까	keep	packs
 pack:clause-patterns:1	「会われますか？呼びますよ」	has:만나시겠습니까	keep	packs
 pack:clause-patterns:1	会合ではアジアの分割について話しあわれてイギリスは東進をしないことを約束し、	!rule:pack:clause-patterns:1	keep	packs
-grammar:書きおったか	「おお、来おったか」	has:왔구나	fix	lookup
-grammar:書きおったか	「くっ、とうとうここまで来おったか」	has:왔구나	fix	lookup
-grammar:書きおったか	「来おったか……！」	has:왔구나	fix	lookup
-grammar:書きおったか	角田は相変わらず毛の生えたところを撫でたりさすったりして、ときおりからかうように毛を引っ張ってくる。	lacks:구나	keep	lookup
+grammar:書きおったか	「おお、来おったか」	has:왔는가	fix	lookup
+grammar:書きおったか	「くっ、とうとうここまで来おったか」	has:왔는가	fix	lookup
+grammar:書きおったか	「来おったか……！」	has:왔는가	fix	lookup
+grammar:書きおったか	角田は相変わらず毛の生えたところを撫でたりさすったりして、ときおりからかうように毛を引っ張ってくる。	lacks:는가	keep	lookup
 grammar:書きおったか	ときおりかき混ぜながら煮込むこと数時間。	has:때때로	keep	lookup
-grammar:書きおったか	「ふぅーー。ようやっと来おったかい」	lacks:왔구나	keep	lookup
+grammar:書きおったか	「ふぅーー。ようやっと来おったかい」	lacks:왔는가	keep	lookup
 grammar:書いちゃうと思うから	いや、他のギルドのトップが反応しちゃうと思うから、よくはないと思う……。	has:반응해 버릴 것 같으니까	fix	lookup
 grammar:書いちゃうと思うから	「ただ、育てるとしたら室内でね。外だと寒くて枯れちゃうと思うから」	has:시들어 버릴 것 같으니까	fix	lookup
 grammar:書いちゃうと思う	「たぶん、なんとかなっちゃうと思う」	has:돼 버릴 것 같아	fix	lookup
