@@ -267,7 +267,7 @@ ConfigResult LoadConfig(std::string_view path) {
         std::string name(levels);
         for (char& ch : name) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
         if (!SpeechLevelsOf(name, result.settings.speechLevels))
-            result.diagnostics.push_back({0, "HDTRANS_SPEECH_LEVELS: expected auto or keep"});
+            result.diagnostics.push_back({0, "HDTRANS_SPEECH_LEVELS: expected auto or keep", true});
     }
     return result;
 }
@@ -276,7 +276,8 @@ std::string ConfigErrors(const ConfigResult& result, std::string_view path) {
     std::string errors;
     for (const auto& diagnostic : result.diagnostics) {
         if (!errors.empty()) errors += '\n';
-        errors += std::string(path) + ":" + std::to_string(diagnostic.line) + ": " + diagnostic.message;
+        if (diagnostic.environment) errors += diagnostic.message;
+        else errors += std::string(path) + ":" + std::to_string(diagnostic.line) + ": " + diagnostic.message;
     }
     return errors;
 }

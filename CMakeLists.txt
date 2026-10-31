@@ -199,6 +199,11 @@ if(NOT EMSCRIPTEN)
         -DFIXTURE=${CMAKE_CURRENT_SOURCE_DIR}/tests/unit/dict/testdata/folder
         -DWORK=${CMAKE_CURRENT_BINARY_DIR}/cli-options -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli_options.cmake")
     string(REGEX REPLACE "([][+.*()^$?|\\])" "\\\\\\1" versionPattern "${HDTRANS_VERSION_TEXT}")
+    # The speech report of the CLI, with the dictionaries of dicts/.
+    add_test(NAME cli.speech-report COMMAND "${CMAKE_COMMAND}" -DCLI=$<TARGET_FILE:hdtrans_cli>
+        -DDICTS=${CMAKE_CURRENT_SOURCE_DIR}/dicts -DWORK=${CMAKE_CURRENT_BINARY_DIR}/speech-report
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/speech_report.cmake")
+    set_tests_properties(cli.speech-report PROPERTIES TIMEOUT 300)
     set_tests_properties(cli.version PROPERTIES
         PASS_REGULAR_EXPRESSION "^hdTrans v${versionPattern} \\(native\\) / dict "
         ENVIRONMENT "HDTRANS_CACHE_DIR=off")
