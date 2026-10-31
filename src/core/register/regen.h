@@ -21,6 +21,7 @@ struct RegenLine {
     bool ok = false;  // every word was read
     bool levelChanged = false;  // the last sentence end of the line (or of one of its quotes) changes level
     bool mixedLevels = false;   // the sentence ends would be at different levels
+    std::string spec, key;      // the rule and cue key of the line's level
 };
 
 // Regenerates the lines whose build flag is set; the levels are decided over all lines (one document).

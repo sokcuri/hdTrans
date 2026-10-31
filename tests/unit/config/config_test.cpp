@@ -126,6 +126,16 @@ HD_TEST(ConfigSpeech) {
     }
 }
 
+HD_TEST(ConfigSpeechLevels) {
+    TempConfig file;
+    HD_CHECK(file.Load("").settings.speechLevels == hdTrans::SpeechLevels::Auto);
+    HD_CHECK(file.Load("speech_levels: keep\n").settings.speechLevels == hdTrans::SpeechLevels::Keep);
+    HD_CHECK(file.Load("speech_levels: Auto\n").settings.speechLevels == hdTrans::SpeechLevels::Auto);
+    const auto bad = file.Load("speech_levels: off\n");
+    HD_REQUIRE(bad.diagnostics.size() == 1);
+    HD_CHECK_EQ(bad.diagnostics[0].message, "speech_levels: expected auto or keep");
+}
+
 HD_TEST(ConfigPaths) {
     TempConfig file;
     const struct Case { const char* yaml; const char* path; } cases[] = {

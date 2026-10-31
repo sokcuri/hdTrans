@@ -1477,7 +1477,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     // The filter log of the lines translated: the context lines are read only.
     const auto logged = [&](std::size_t i) { return i >= context && !lines[i].empty() && lines[i] != "\r"; };
     // The speech-level stage, after the translation of the call and before the post-filter.
-    const bool levels = !options.reference;
+    const bool levels = !options.reference && options.speechLevels == SpeechLevels::Auto;
     LevelWatch levelWatch;
     if (levels && !options.filters) levelWatch.capture.pieceLine = PieceLines(lines, context);
     const StageObserver watched = levels ? WatchLevels(levelWatch, observer) : observer;
@@ -1493,7 +1493,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
             }
         }
         auto out = TranslateDocumentPieces(snap, generated, lines, watched, options, lines, context);
-        if (levels) reg::Retrofit(lines.subspan(context), levelWatch.capture, translated(out));
+        if (levels) reg::Retrofit(lines.subspan(context), levelWatch.capture, translated(out), {}, options.levelChanges);
         if (observer.filterLog) {
             for (std::size_t i = context; i < out.size() && i < lines.size(); ++i) {
                 if (!logged(i)) continue;
@@ -1527,7 +1527,9 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     if (levels) levelWatch.capture.pieceLine = PieceLines(filtered, context);
     std::vector<std::string> out =
         TranslateDocumentPieces(snap, generated, filtered, watched, writtenOptions, filtered, context);
-    if (levels) reg::Retrofit(std::span<const std::string>(filtered).subspan(context), levelWatch.capture, translated(out));
+    if (levels)
+        reg::Retrofit(std::span<const std::string>(filtered).subspan(context), levelWatch.capture, translated(out), {},
+                      options.levelChanges);
     // An empty input line is not post-filtered either.
     for (std::size_t i = context; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {

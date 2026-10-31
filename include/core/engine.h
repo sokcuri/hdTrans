@@ -42,6 +42,10 @@ enum class Speech {
              // 해체 (大丈夫か？ 괜찮아?)
 };
 
+// The speech levels of dialogue lines (spec/register.md): Auto writes a line that a quote opens again
+// at the level its cues give after the translation; Keep keeps the translation's own levels.
+enum class SpeechLevels { Auto, Keep };
+
 // Dictionary parsing at load time; explicit strictDict takes precedence over the config.
 struct EngineOptions {
     std::optional<bool> strictDict{};
@@ -177,6 +181,10 @@ public:
     // writes Speech::Strict.
     void SetSpeech(Speech speech) { speech_ = speech; }
 
+    // The speech levels of the dialogue lines of later translations; SpeechLevels::Auto until set.
+    // Reference mode keeps the translation's levels.
+    void SetSpeechLevels(SpeechLevels levels) { speechLevels_ = levels; }
+
     // Whether the lines of later translations may break in the middle of a sentence
     // (captions, hooked text); false until set. Wrapped, a line that ends where a sentence
     // cannot end is translated as one sentence with the lines after it, and the translation
@@ -193,6 +201,7 @@ private:
     const bool cg_;
     const bool misread_;
     Speech speech_ = Speech::Strict;
+    SpeechLevels speechLevels_ = SpeechLevels::Auto;
     bool wrapped_ = false;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
