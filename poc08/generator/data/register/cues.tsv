@@ -14,7 +14,8 @@
 #           end: the last sentence ends in text, after any number of tail particles and closing marks;
 #           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
 #   text    the Japanese string
-#   notafter  characters that must not come right before text (the ます of ぶちかます is not polite)
+#   notafter  characters that must not come right before text (the ます of ぶちかます is not polite); in tail
+#             rows, words separated by | (どう|: the ぞ of どうぞ)
 cue	mode	text	notafter	note
 quotative	-	って		a polite form followed by these is quoted, not spoken (any-not-quoted)
 quotative	-	と言
@@ -36,7 +37,7 @@ tail	-	もの
 tail	-	もん
 tail	strong	ねえ
 tail	-	よお
-tail	strong	ぞ	う	どうぞ is a word, not どう + ぞ
+tail	strong	ぞ	どう|	どうぞ is a word, not どう + ぞ (参ろうぞ keeps its ぞ)
 tail	strong	ぜ
 tail	strong	さ
 tail	strong	なあ		the lengthened な (寒いなあ)

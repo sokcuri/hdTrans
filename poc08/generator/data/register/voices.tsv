@@ -38,8 +38,8 @@ suffix	さま	-
 suffix	先輩	-
 suffix	先生	-
 suffix	殿	-
-auth	わし	speaker	first person of an old or authoritative man
-auth	ワシ	speaker
+auth	わしは|わしが|わしの|わしも|わしに|わしを	speaker	first person of an old or authoritative man
+auth	ワシは|ワシが|ワシの|ワシも|ワシに|ワシを	speaker
 auth	儂	speaker
 auth	我が	speaker	我 as the first person (我が国, 我は)
 auth	我は	speaker
@@ -61,7 +61,6 @@ auth	知らん	line
 auth	しれん	line
 auth	構わん	line
 auth	かまわん	line
-auth	ならん	line
 auth	いかん	line
 auth	許さん	line
 auth	足らん	line

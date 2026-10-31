@@ -159,9 +159,24 @@ bool EndsWith(const std::u32string& s, const std::u32string& e) {
     return s.size() >= e.size() && s.compare(s.size() - e.size(), e.size(), e) == 0;
 }
 // Whether s ends in the tail particle (not right after one of its notAfter characters: the ぞ of どうぞ).
+// notAfter holds characters, or words separated by | (どう: the ぞ of どうぞ, while 参ろうぞ keeps its ぞ).
 bool EndsInTail(const std::u32string& s, const TailRow& tail) {
     if (s.size() <= tail.text.size() || !EndsWith(s, tail.text)) return false;
-    return tail.notAfter.find(s[s.size() - tail.text.size() - 1]) == std::u32string::npos;
+    const std::u32string head = s.substr(0, s.size() - tail.text.size());
+    {
+        if (tail.notAfter.find(U'|') != std::u32string::npos) {
+            size_t a = 0;
+            while (a <= tail.notAfter.size()) {
+                size_t b = tail.notAfter.find(U'|', a);
+                if (b == std::u32string::npos) b = tail.notAfter.size();
+                const std::u32string w = tail.notAfter.substr(a, b - a);
+                if (!w.empty() && EndsWith(head, w)) return false;
+                a = b + 1;
+            }
+            return true;
+        }
+    }
+    return tail.notAfter.find(head.back()) == std::u32string::npos;
 }
 bool StartsAt(const std::u32string& s, size_t i, const std::u32string& e) { return s.compare(i, e.size(), e) == 0; }
 
@@ -234,7 +249,7 @@ std::vector<std::string> SplitQuotes(const std::string& ja) {
             ++depth;
         } else if (depth > 0 && ch == close && --depth == 0) {
             out.push_back(ToU8(s.substr(start, i - start + 1)));
-        } else if (depth == 0 && IsWordChar(ch)) {
+        } else if (depth == 0 && IsWordChar(ch) && !out.empty()) {
             return {};  // text between quotes (「…」と言った「…」) is narration: not a line of several quotes
         }
     }
@@ -299,7 +314,8 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             if ((best->text == U"ぞ" || best->text == U"ぜ") && kDecl.find(e) != std::u32string::npos) c.declZo = true;
             // な on a verb's dictionary form forbids (行くな); on い, た, だ it exclaims
             // ... but not after a wish (ほしいな, 行きたいな: 갖고 싶은데)
-            const bool wish = EndsWith(rest, U"たい") || EndsWith(rest, U"ほしい") || EndsWith(rest, U"欲しい");
+            const bool wish = EndsWith(rest, U"たい") || EndsWith(rest, U"ほしい") || EndsWith(rest, U"欲しい") ||
+                              EndsWith(rest, U"また");  // またな is a farewell
             if ((best->text == U"な" || best->text == U"なあ") && (e == U'い' || e == U'た' || e == U'だ') && !wish)
                 c.exclaimNe = true;
         }
@@ -330,8 +346,13 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     for (const auto& r : t.cues) {
         bool hit = false;
         auto before = [&](const std::u32string& str, size_t at) {
-            // a row with notafter is an auxiliary (ます): it cannot start the utterance either (ますます)
-            return !r.notAfter.empty() && (at == 0 || r.notAfter.find(str[at - 1]) != std::u32string::npos);
+            // a polite auxiliary (ます, ました) cannot start the utterance (ますます), and ます beside ます is ますます
+            const bool aux = r.cue == "polite" || r.cue == "polite-any";
+            if (aux && r.text.rfind(U"ま", 0) == 0) {
+                if (at == 0) return true;
+                if (StartsAt(str, at, U"ますます") || (at >= 2 && str.compare(at - 2, 2, U"ます") == 0)) return true;
+            }
+            return at > 0 && !r.notAfter.empty() && r.notAfter.find(str[at - 1]) != std::u32string::npos;
         };
         if (r.mode == "end") {
             for (const auto& s : stages)
@@ -728,7 +749,7 @@ std::vector<Reg> AssignRegister(const RegisterTables& rt, const std::vector<Node
         r.persona = d.persona;
         // REG-16: the addressee gives (教えてくれますか → 가르쳐 주시겠어요): -시- on 주다, auxiliary or not
         if (polite && !d.narration && d.honGive && n.lemma == "주다" && n.ctype == CType::final_ &&
-            (n.mood == Mood::q || n.mood == Mood::imp) && !firstPersonInSource)
+            (n.mood == Mood::q || n.mood == Mood::imp) && !firstPersonInSource && !subjectSeen)
             r.hon = true;
         // REG-16: a request or command to the addressee, or a question with an honorific verb
         const bool backed = n.mood == Mood::imp || (n.mood == Mood::q && d.honSonkei);

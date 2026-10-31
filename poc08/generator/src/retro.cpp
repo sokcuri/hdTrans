@@ -908,7 +908,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qclose && depth > 0) --depth;
             }
         }
-        const bool perQuote = d.quotes.size() >= 2;
+        // per quote only when R decided per quote and 0.7.x's text has as many quotes; else the line is one group
+        const bool perQuote = d.quotes.size() >= 2 && !nodes.empty() && quoteOf.back() + 1 == d.quotes.size();
+        if (!perQuote) std::fill(quoteOf.begin(), quoteOf.end(), 0);
         // REG-12: -ㄹ까 before 하다 (추가할까 하고, 아닐까 합니다) is the construction "think of", not a sentence end
         auto thinkOf = [&](size_t q) {
             if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || q + 1 >= nodes.size()) return false;
@@ -947,7 +949,11 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다)
             for (const auto& n : nodes) {
                 if (n.kind != Kind::Raw && n.kind != Kind::N) continue;
-                for (const char* key : {"mixed.hapsyo", "mixed.haeyo"})
+                // a noun ending in 요 (필요, 중요) is no polite end: a kept Hangul word counts by mixed.word endings
+                const std::initializer_list<const char*> keys = n.kind == Kind::Raw
+                                                                     ? std::initializer_list<const char*>{"mixed.hapsyo", "mixed.haeyo"}
+                                                                     : std::initializer_list<const char*>{"mixed.hapsyo", "mixed.word"};
+                for (const char* key : keys)
                     for (const auto& e : Split(tablesPtr->G(key), '|'))
                         if (n.lemma.size() >= e.size() && n.lemma.compare(n.lemma.size() - e.size(), e.size(), e) == 0) mixed = true;
             }
@@ -1008,7 +1014,10 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 Level now = Level::none;
                 for (const auto& g : reg)
                     if (g.node == nodes[q].id) now = g.level;
-                if (now == Level::hae && nodes[q].mood == Mood::decl && nodes[q].eomi != "ne") {
+                bool lastWord = true;
+                for (size_t k = q + 1; k < nodes.size(); ++k)
+                    if (nodes[k].kind != Kind::Punct) lastWord = false;
+                if (now == Level::hae && nodes[q].mood == Mood::decl && nodes[q].eomi.empty() && lastWord) {
                     nodes[q].eomi = "ne";
                     neChanged = true;
                 }

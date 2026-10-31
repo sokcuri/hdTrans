@@ -129,3 +129,10 @@ r13-15	REG-13	fix	d107		yes	「みんなを、信じる……か」	haera	-
 r14-13	REG-14	fix	d108		yes	「ララティーナ嬢、わたしの息子たちだ」	haera	-
 r14-14	REG-14	fix	d109		yes	「父上にも母上にも文句は言わせない！　私は、私の意志で己の道を定める！」	haera	-
 r18-6	REG-18	keep	d110		yes	「……今日はがんばったし……ご褒美、ほしいな……」	hae	-
+r6-14	REG-6	fix	d111		yes	「じゃが、それは困る」	hae	-
+r3-10	REG-3	keep	d112		yes	「これは……ますます」	hae	-
+r15-5	REG-15	fix	d113	筧	yes	【筧】「行くぞ」「了解です」	haeyo	-
+r16-9	REG-16	fix	d114		yes	「彼がくれますか？」	haeyo	no
+r18-7	REG-18	keep	d115		yes	「じゃあ、またな」	hae	-
+r14-15	REG-14	keep	d116	甲	yes	「その話は疑わしいね」	-	-
+r14-16	REG-14	keep	d116	甲	yes	「明日の朝はみんなで学校に行くんだ」	hae	-

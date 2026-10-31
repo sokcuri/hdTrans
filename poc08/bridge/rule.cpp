@@ -670,7 +670,7 @@ bool CaptionDocument(const RuleData& d, const std::vector<std::string>& ja) {
 }
 
 std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const std::string& out075, const RuleCapture& cap,
-                    bool dialogue, bool keigo, bool command) {
+                    bool dialogue, bool keigo, bool command, int scene) {
     std::vector<Row> rows;
     if (i < cap.items.size()) {
         for (const auto& x : cap.items[i]) {
@@ -700,7 +700,7 @@ std::string PreLine(const RuleData& d, size_t i, const std::string& ja, const st
     while (lead < out075.size() && out075[lead] == ' ') lead++;
     Field(o, "lead", out075.substr(0, lead));
     Field(o, "speaker", dialogue ? SpeakerTag(d, ja32) : std::string());
-    Field(o, "scene", "doc");
+    Field(o, "scene", std::to_string(scene));  // scenes are cut at blank lines (REG-8, REG-14 stay in a scene)
     Field(o, "work", "doc");
     o += std::string(",\"dialogue\":") + (dialogue ? "true" : "false");
     if (keigo) o += ",\"keigo\":true";
@@ -718,7 +718,9 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
     }
     std::vector<bool> dialogue(ja.size());
     std::vector<std::string> pre;
+    int scene = 0;
     for (size_t i = 0; i < ja.size(); i++) {
+        if (ja[i].find_first_not_of(" \t\r\xe3\x80\x80") == std::string::npos) ++scene;
         dialogue[i] = DialogueLine(d, ja[i]);
         counts.dialogue += dialogue[i];
         std::vector<SourceToken> toks;
@@ -732,7 +734,7 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
                 if (t.cform.rfind(f, 0) == 0) command = true;
         std::string o = i < out.size() ? out[i] : std::string();
         if (!o.empty() && o.back() == '\r') o.pop_back();
-        pre.push_back(PreLine(d, i, ja[i], o, cap, dialogue[i], keigo, command));
+        pre.push_back(PreLine(d, i, ja[i], o, cap, dialogue[i], keigo, command, scene));
     }
     if (preOut)
         for (const std::string& l : pre) *preOut += l + "\n";
