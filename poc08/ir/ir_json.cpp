@@ -370,6 +370,7 @@ template <class V> void Fields(V& v, Token& x) {
     v.Float("margin", x.margin);
     v.Interned("derive", x.derive);
     v.Interned("removedBy", x.removedBy);
+    v.Interned("repair", x.repair);
 }
 
 template <class V> void Fields(V& v, Utterance& x) {

@@ -56,7 +56,7 @@ Token Convert(const hd8::ana::Analyzer& an, Doc& doc, const hd8::ana::Token& t) 
   o.nAlt = t.nAlt;
   if (!t.derive.empty()) o.derive = doc.I(t.derive);
   if (!t.removedBy.empty()) o.removedBy = doc.I(t.removedBy);
-  if (!t.repair.empty()) o.derive = doc.I(t.repair);  // a repaired reading: "rp.dakuten か→が"
+  if (!t.repair.empty()) o.repair = doc.I(t.repair);  // a repaired reading: "rp.dakuten か→が"
   return o;
 }
 

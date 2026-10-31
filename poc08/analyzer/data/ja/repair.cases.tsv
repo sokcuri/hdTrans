@@ -321,3 +321,13 @@ rp.bad.space-dep	fix	「問題はどうやって知らせ るかだ」	「問題
 rp.bad.space-dep	fix	「わ、私達 も、カップルに見えちゃったりするのかな…	「わ、私達も、カップルに見えちゃったりするのかな…	inv
 rp.bad.space-dep	keep	(佐藤) 見事 壁クリアです｡	(佐藤) 見事 壁クリアです｡	real
 rp.bad.space-dep	keep	い　い…	い　い…	real
+rp.elong	keep	「そうだよー」	「そうだよー」	inv
+rp.elong	keep	「いいなー？」	「いいなー？」	inv
+rp.elong	keep	「まじかー！」	「まじかー！」	inv
+rp.elong	keep	「おーい、待ってー！」	「おーい、待ってー！」	inv
+rp.elong	keep	「かわいーい！」	「かわいーい！」	inv
+rp.elong	keep	「えーと、うーん……」	「えーと、うーん……」	inv
+rp.elong	keep	「すごーく楽しかった」	「すごーく楽しかった」	inv
+rp.elong	keep	「やだー！」	「やだー！」	inv
+rp.elong	keep	「ねーねー、聞いて」	「ねーねー、聞いて」	inv
+rp.elong	keep	「でーす！」	「でーす！」	inv
