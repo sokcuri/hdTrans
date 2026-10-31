@@ -1133,6 +1133,7 @@ const TokAux& NoAux() {
 
 struct Placed {
     KNode n;
+    int cand = -1;         // the accepted candidate whose template made the node (-1: a lexicon word)
     int tok = 0, sub = 0;  // order key
     int ptok = 0;          // token whose bunsetsu the node belongs to
 };
@@ -1642,6 +1643,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             for (const auto& [f, v] : kn.fields) SetField(nd, doc, f, v);
             nd.src = dec.src;
             nd.decision = candDecision[a];
+            p.cand = static_cast<int>(a);
             candNodes[a].push_back(static_cast<int>(placed.size()));
             placed.push_back(std::move(p));
         }
@@ -1761,10 +1763,13 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         Placed& p = placed[order[oi]];
         KNode nd = p.n;
         // N5-H1: a short-negated noun + 하다 verb puts 안 before 하다 (話さない → 이야기 안 해): the noun is a node
-        if (nd.kind == KK::V && nd.neg == kneg::an && !d.lightVerb.empty()) {
+        // (a verb: 話す → 이야기하다, or a phrase verb: 顔を洗う → 세수하다; never an adjective: 안 편리해)
+        if (nd.kind == KK::V && nd.neg == kneg::an && !d.lightVerb.empty() &&
+            IsVerbPos(x.tk[static_cast<size_t>(p.ptok)].epos)) {
             const std::string lemma(doc.S(nd.lemma));
-            if (lemma.size() > d.lightVerb.size() && lemma.ends_with(d.lightVerb) &&
-                d.koNouns.count(lemma.substr(0, lemma.size() - d.lightVerb.size()))) {
+            const std::string stem = lemma.size() > d.lightVerb.size() ? lemma.substr(0, lemma.size() - d.lightVerb.size()) : "";
+            const bool phraseVerb = p.cand >= 0 && !d.rows[cands[accepted[static_cast<size_t>(p.cand)]].row].phrase.empty();
+            if (!stem.empty() && lemma.ends_with(d.lightVerb) && (d.koNouns.count(stem) || (phraseVerb && stem.size() >= 6))) {
                 KNode noun;
                 noun.kind = KK::N;
                 noun.lemma = doc.I(lemma.substr(0, lemma.size() - d.lightVerb.size()));
