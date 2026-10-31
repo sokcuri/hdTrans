@@ -1,0 +1,54 @@
+# 규칙: LEX-2910
+# 규칙: LEX-2911
+rule	input	expected	kind	layer
+dict:loanword-and-phrase-glosses:1	胴体部分のみのトルソーしかないようだ。	has:토르소	fix	lookup
+dict:loanword-and-phrase-glosses:1	何やら勧進帳を演じているトルソーの前を通りながら	has:토르소	fix	lookup
+dict:loanword-and-phrase-glosses:2	パーカッションパートに来た人は俺一人だった。	has:퍼커션	fix	lookup
+dict:loanword-and-phrase-glosses:2	パーカッションを叩く様な仕草で、リズムを刻みだす	has:퍼커션	fix	lookup
+dict:loanword-and-phrase-glosses:3	なんでパーソナリティーの人が曲をかけると、	has:퍼스낼리티	fix	lookup
+dict:loanword-and-phrase-glosses:4	若い女性パーソナリティの	has:퍼스낼리티	fix	lookup
+dict:loanword-and-phrase-glosses:5	本来は”ブリーダー”スキルなどを持ったものが	has:브리더	fix	lookup
+dict:loanword-and-phrase-glosses:5	すぐにサブリーダーを決めようかという話にもなった。	has:부지도자	keep	lookup
+dict:loanword-and-phrase-glosses:6	家内の飲んでるプラセンタとやらは高い。	has:플라센타	fix	lookup
+dict:loanword-and-phrase-glosses:6	馬プラセンタエキス、ガラナエキス	has:말태반	keep	lookup
+dict:loanword-and-phrase-glosses:7	ベーキングパウダーとクルミを入れるかな。	has:베이킹파우더	fix	lookup
+dict:loanword-and-phrase-glosses:8	私の鉄でミニチュア自転車をまず作ってから	has:미니어처	fix	lookup
+dict:loanword-and-phrase-glosses:9	俺はボストンバッグからスーパースッポ	has:보스턴백	fix	lookup
+dict:loanword-and-phrase-glosses:10	そのプードルの服に入れられた麻薬は	has:푸들	fix	lookup
+dict:loanword-and-phrase-glosses:11	さりとてフォークロアとして残っているわけでもなく。	has:포클로어	fix	lookup
+dict:loanword-and-phrase-glosses:12	信者の少ないマイナーな宗教団体だ。	has:마이너한 종교	fix	lookup
+dict:loanword-and-phrase-glosses:13	４００マルチのハーモニックな排気音	has:하모닉	fix	lookup
+dict:loanword-and-phrase-glosses:13	ロサンジェルス・フィルハーモニック演奏の	has:필하모닉	keep	lookup
+dict:loanword-and-phrase-glosses:14	えびの入ったトムヤム味の	has:똠얌	fix	lookup
+dict:loanword-and-phrase-glosses:14	タイ料理屋でトムヤムクンを頼んだ	has:똠얌꿍	keep	lookup
+dict:loanword-and-phrase-glosses:15	左脚のスキーモービルからターンピックを撃ち込み	has:스키모빌	fix	lookup
+dict:loanword-and-phrase-glosses:15	偵察時にはスノーモービルで移動していた	has:스노모빌	keep	lookup
+dict:loanword-and-phrase-glosses:16	途中まで書いたものをブラッシュアップして載せるか	has:브러시업해	fix	lookup
+dict:loanword-and-phrase-glosses:16	そのイーリスとやらがブラッシュアップしたものと見て	has:브러시업한	fix	lookup
+dict:loanword-and-phrase-glosses:17	壁に並んだお品書きが目印の居酒屋みたいな店だった。	has:메뉴	fix	lookup
+dict:loanword-and-phrase-glosses:17	お品書きに目を通していると、若い女が声を掛けてきた。	has:메뉴	fix	lookup
+dict:loanword-and-phrase-glosses:18	だって、すぐに近所のパン屋さんの看板が見えてきたんだもの。	has:빵집의 간판	fix	lookup
+dict:loanword-and-phrase-glosses:18	クッキーあたりを見てみようと、パン屋さんに寄ることを決める。	has:빵집에	fix	lookup
+dict:loanword-and-phrase-glosses:18	近所のパン屋で買った	has:빵가게	keep	lookup
+dict:loanword-and-phrase-glosses:19	多分、婚約話はお流れだね？	has:무산	fix	lookup
+dict:loanword-and-phrase-glosses:19	今もなお流れ出ている大量の血液によって	has:여전히 흘러나오고	keep	lookup
+dict:loanword-and-phrase-glosses:20	トラブルが起きたせいでお流れになっていたという	has:무산되어 있었다	fix	lookup
+dict:loanword-and-phrase-glosses:20	お流れになった	has:무산되었다	fix	lookup
+dict:loanword-and-phrase-glosses:21	場面が「まだ眠いの〜」でお流れにされたのだ。	has:무산되었던	fix	lookup
+dict:loanword-and-phrase-glosses:22	私はシューハートを連れて人ごみをかきわけて進んだ。	has:인파를 헤쳐	fix	lookup
+dict:loanword-and-phrase-glosses:22	大勢の報道陣をかきわけて、伊勢と霧島が向かった。	has:보도진을 헤치고	fix	lookup
+dict:loanword-and-phrase-glosses:22	人ごみをかき分けて進んだ	has:밀어 헤쳐	keep	lookup
+dict:loanword-and-phrase-glosses:23	紙とペンを取り出して説明をしてくれるらしい。	has:펜을 꺼내	fix	lookup
+dict:loanword-and-phrase-glosses:23	サイドテーブルを漁りペンを取り出すと	lacks:쥐기 시작	fix	lookup
+dict:loanword-and-phrase-glosses:23	筆箱からシャープペンを取り出し、問題集に取り掛かった。	has:샤프를 꺼내고	keep	lookup
+dict:loanword-and-phrase-glosses:23	ペンを取り、書き始めた。	has:펜을 쥐어	keep	lookup
+pack:loanword-and-phrase-glosses:p1	ようやく落ち着いた状況になるメドが立ったのに	has:전망이 섰는데	fix	packs
+pack:loanword-and-phrase-glosses:p1	これで“剣術”と“魔法”のメドが立ったな。	has:전망이 섰군	fix	packs
+pack:loanword-and-phrase-glosses:p1	オタクである私の十八番メドレーを聞かせてあげよう	has:메들리	keep	packs
+dict:loanword-and-phrase-glosses:25	カサンドラはせめて、取り置きをお願いしようと、	has:부탁드리려고	fix	lookup
+dict:loanword-and-phrase-glosses:25	俺はサナエにお願いしようと思った。	has:부탁하려고 했다	keep	lookup
+pack:loanword-and-phrase-glosses:p1	月末をメドに完成させる。	has:목표	keep	packs
+pack:loanword-and-phrase-glosses:p1	生活できるめどは立った。	has:전망은 섰다	fix	packs
+pack:loanword-and-phrase-glosses:p1	復旧のメドが立っていない状況だった。	has:복구의 전망이	fix	packs
+pack:loanword-and-phrase-glosses:p2	髪をかきわけ、地肌を見せる先生。	has:머리카락을 넘겨	fix	packs
+pack:loanword-and-phrase-glosses:p2	人ごみをかき分けて進んだ	has:밀어 헤쳐	keep	packs
