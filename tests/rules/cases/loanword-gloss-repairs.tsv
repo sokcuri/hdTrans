@@ -1,0 +1,26 @@
+# 규칙: LEX-3220
+rule	input	expected	kind	layer
+dict:loanword-gloss-repairs:1	ピクルスがただのつまみ食いになった。	has:피클이	fix	lookup
+dict:loanword-gloss-repairs:1	私は手を入念に洗ってから、瓶にピクルスを一つずつ入れていった。	has:피클을	fix	lookup
+dict:loanword-gloss-repairs:3	ファインプレーだ。	has:파인 플레이	fix	lookup
+dict:loanword-gloss-repairs:3	今回はハンナちゃんとユーリのファインプレーだな。	has:파인 플레이	fix	lookup
+dict:loanword-gloss-repairs:4	休み明けのフォルティシモ。	has:포르티시모	fix	lookup
+dict:loanword-gloss-repairs:5	なんというブルジョアな生活ぶりだろう。	has:부르주아	fix	lookup
+dict:loanword-gloss-repairs:6	「ブルジョアーだねェ。	has:부르주아	fix	lookup
+dict:loanword-gloss-repairs:8	無地のパーカーやセーター、そしてブルゾンなどをカゴに入れていく。	has:블루종	fix	lookup
+dict:loanword-gloss-repairs:8	神崎は前を歩く黒いブルゾンを来た若い男性を指さす。	has:블루종	fix	lookup
+dict:loanword-gloss-repairs:9	材料のスパイスをブレンダーで細かく混ぜ合わせるだけ。	has:블렌더로	fix	lookup
+dict:loanword-gloss-repairs:9	消化しやすいようにブレンダーですりつぶしたんだ。	has:블렌더	fix	lookup
+dict:loanword-gloss-repairs:11	特に遺伝子異常のフリークスに関してウルフはそう思っていた。	has:프릭스	fix	lookup
+dict:loanword-gloss-repairs:12	ブルーズ・ハープがお気に入りでな	has:블루스	fix	lookup
+dict:loanword-gloss-repairs:9	舌に自信があるブレンダーが居るならブレンドするのが一番良い。	has:블렌더	fix	lookup
+dict:loanword-gloss-repairs:3	「全然。むしろファインプレーだ。	lacks:화인	fix	lookup
+dict:loanword-gloss-repairs:5	ブルジョアに金を渡した。	has:부르주아에게	fix	lookup
+dict:loanword-gloss-repairs:10	ポートフォリオを提出するなど自分が全然知らなかった選考があった。	has:포트폴리오	keep	lookup
+dict:loanword-gloss-repairs:5	このブルジョアジーめ。	has:부르주아지	keep	lookup
+dict:loanword-gloss-repairs:25	しかし、フィンガースナップはかっこいいな。	has:핑거 스냅	keep	lookup
+dict:loanword-gloss-repairs:25	ちなみにモミの銃ガンはワンフィンガー。	lacks:플레이트	keep	lookup
+dict:loanword-gloss-repairs:17	告白にポロリとピアスが落ちた。	has:귀걸이	keep	lookup
+dict:loanword-gloss-repairs:11	「マジか……この着物フリークめ」	has:기모노 프릭	keep	lookup
+dict:loanword-gloss-repairs:11	学校や遊びでフリークライミングみたいなことはほんの少しやっていて良かった。	has:프리 클라이밍	keep	lookup
+dict:loanword-gloss-repairs:12	ブルースクリーンを映し出すような日も遠くないのではなかろうか。	has:블루스크린	keep	lookup

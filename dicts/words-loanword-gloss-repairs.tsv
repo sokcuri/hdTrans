@@ -1,0 +1,44 @@
+#! layer=base
+# 기본 사전의 틀린 외래어 풀이를 바른 한국어 표기로 덮는 명사
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ピクルス	피클	N110			GN			LEX-3220				loanword-gloss-repairs:1
+ピクル	피클	N110			GN			LEX-3220				loanword-gloss-repairs:2
+ファインプレー	파인 플레이	N110			GN			LEX-3220				loanword-gloss-repairs:3
+フォルティシモ	포르티시모	N110			GN			LEX-3220				loanword-gloss-repairs:4
+ブルジョア	부르주아	N110	VHn		GN			LEX-3220				loanword-gloss-repairs:5
+ブルジョアー	부르주아	N110	VHn		GN			LEX-3220				loanword-gloss-repairs:6
+ブルジョア革命	부르주아 혁명	N110			GN			LEX-3220				loanword-gloss-repairs:7
+ブルゾン	블루종	N110			GN			LEX-3220				loanword-gloss-repairs:8
+ブレンダー	블렌더	N110			GN			LEX-3220				loanword-gloss-repairs:9
+フォリオ	폴리오	N110			GN			LEX-3220				loanword-gloss-repairs:10
+フリークス	프릭스	N110	VHn		GN			LEX-3220				loanword-gloss-repairs:11
+ブルーズ	블루스	N110			GN			LEX-3220				loanword-gloss-repairs:12
+ピボット	피벗	N110			GN			LEX-3220				loanword-gloss-repairs:13
+ピトン	피톤	N110	VPe		GN			LEX-3220				loanword-gloss-repairs:14
+ピリミジン	피리미딘	N110			GN			LEX-3220				loanword-gloss-repairs:15
+ピンクスリップ	핑크 슬립	N110			GN			LEX-3220				loanword-gloss-repairs:16
+ピアスイヤリング	피어스 이어링	N110	VAc		GN			LEX-3220				loanword-gloss-repairs:17
+ビースクール	비 스쿨	N110	VBl		GN			LEX-3220				loanword-gloss-repairs:18
+ファシリティマネジメント	퍼실리티 매니지먼트	N110			GN			LEX-3220				loanword-gloss-repairs:19
+ファッションドリンク	패션 드링크	N110	VFd		GN			LEX-3220				loanword-gloss-repairs:20
+フィトンチッド	피톤치드	N110			GN			LEX-3220				loanword-gloss-repairs:21
+フィナンシャルグループ	파이낸셜 그룹	N110			GN			LEX-3220				loanword-gloss-repairs:22
+フィボナッツ数列	피보나치 수열	N110			GN			LEX-3220				loanword-gloss-repairs:23
+フィルムズ	필름스	N110			GN			LEX-3220				loanword-gloss-repairs:24
+フィンガ	핑거	N110			GN			LEX-3220				loanword-gloss-repairs:25
+フェアキャディ	페어 캐디	N110	VPl		GN			LEX-3220				loanword-gloss-repairs:26
+フェイルソフト	페일 소프트	N110			GN			LEX-3220				loanword-gloss-repairs:27
+フォトリソグラフィー	포토리소그래피	N110			GN			LEX-3220				loanword-gloss-repairs:28
+フォローアップ	팔로업	N110			GN			LEX-3220				loanword-gloss-repairs:29
+フォームラバー	폼 러버	N110			GN			LEX-3220				loanword-gloss-repairs:30
+フタル酸エステル	프탈산 에스테르	N110	VMd		GN			LEX-3220				loanword-gloss-repairs:31
+フタロシアニン	프탈로시아닌	N110			GN			LEX-3220				loanword-gloss-repairs:32
+フラットレートタックス	단일세율 과세	N110	VMo		GN			LEX-3220				loanword-gloss-repairs:33
+フロリン	플로린	N110			GN			LEX-3220				loanword-gloss-repairs:34
+ブチロラクトン	부티로락톤	N110			GN			LEX-3220				loanword-gloss-repairs:35
+ブラスリー	브라스리	N110			GN			LEX-3220				loanword-gloss-repairs:36
+ブルーチップスタンプ	블루칩 스탬프	N110			GN			LEX-3220				loanword-gloss-repairs:37
+ブレーンフィットネス	브레인 피트니스	N110	QHP		GN			LEX-3220				loanword-gloss-repairs:38
+ブロックタックル	블록 태클	N110			GN			LEX-3220				loanword-gloss-repairs:39
+ブロードバンド方式	브로드밴드 방식	N110			GN			LEX-3220				loanword-gloss-repairs:40
+プット・オプション付き	풋옵션부	N110			GN			LEX-3220				loanword-gloss-repairs:41
