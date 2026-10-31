@@ -5449,7 +5449,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 消しごむ	지우개	I110	VSw		GN							jisjk:75319
 消しと	날아가버&AA@	M416			GN							jisjk:93604
 焼豚	돼지고기구이	I110	VFd		GN							jisjk:75352
-焼付	인상 지어&AL@	M421			GN							jisjk:344441
+焼付	새겨&AL@	M421			GN			LEX-227				jisjk:344441
 焼けこげ	탄 자국	I110	VPl		GN							jisjk:75382
 焼けこげ	그을&AA@	M427			GN				llm			w:19690
 燒賣	샤오마이	N110			GN							jisjk:26904

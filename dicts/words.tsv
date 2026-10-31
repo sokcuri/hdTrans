@@ -13015,7 +13015,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 劣角	열각	N110			GN						れっかく	w:12977
 助けを呼	도움을 청&AV@	M426			GN				llm			w:12978
 助け手	조력자	N110	VHn		GN				llm		たすけて	w:12979
-助け舟	구명보트	N110	VTp		GN				xxx llm		たすけぶね	w:12980
+助け舟	구원의 손길	N110	VTp		GN			LEX-228	xxx llm		たすけぶね	w:12980
 助け舟	도움의 손길	N110	VHn		GN				llm		たすけぶね	w:12981
 助命	구명	N110			GN				xxx llm	1		w:12982
 助産師	산파	N110			GN						じょさんし	w:12983

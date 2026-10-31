@@ -1,0 +1,41 @@
+# 규칙: LEX-218
+rule	input	expected	kind	layer
+cx:colloc-noun-verb:110	……また、嫌な予感がした。	has:예감이 들었다	fix	rewrites
+cx:colloc-noun-verb:110	嫌な予感がして急いで帰ってきたのだろう。	has:예감이 들어 서둘러	fix	rewrites
+cx:colloc-noun-verb:110	（嫌な予感がする）	has:예감이 든다	fix	rewrites
+cx:colloc-noun-verb:110	帰ってきた心地がする。	has:기분이 든다	fix	rewrites
+cx:colloc-noun-verb:110	どんどん足場が削られていくような心地がする。	has:기분이 든다	fix	rewrites
+cx:colloc-noun-verb:110	真実戦争になる気しかしない。	has:생각밖에 들지 않는다	fix	rewrites
+cx:colloc-noun-verb:110	名前を与えたせいだろうか、あたたかな心地がする。	lacks:기분이 한다	fix	rewrites
+cx:colloc-noun-verb:110	何か音がする。	has:소리가 난다	keep	rewrites
+cx:colloc-noun-verb:110	いい匂いがする。	has:냄새가 난다	keep	rewrites
+cx:colloc-noun-verb:110	勉強をする。	has:공부를 한다	keep	rewrites
+cx:colloc-noun-verb:110	ひどく心配する。	has:걱정한다	keep	rewrites
+cx:colloc-noun-verb:110	彼は心配している。	has:걱정하고 있다	keep	rewrites
+cx:colloc-noun-verb:110	予感が当たった。	has:예감이 맞았다	keep	rewrites
+cx:colloc-noun-verb:110	予感は的中した。	has:예감은 적중했다	keep	rewrites
+cx:colloc-noun-verb:110	なんとなくわかる気がする。	has:아는 것 같다	keep	rewrites
+cx:colloc-noun-verb:110	結構歩いた気がするが、時間の感覚がわからない。	has:걸은 것 같은데	keep	rewrites
+cx:colloc-noun-verb:110	今日は気にする必要はない。	has:신경 쓸 필요	keep	rewrites
+cx:colloc-noun-verb:110	彼は気を失った。	has:정신을 잃었다	keep	rewrites
+cx:colloc-noun-verb:110	彼は気にしないで先に行った。	has:신경 쓰지 말고	keep	rewrites
+cx:colloc-noun-verb:110	彼は気が変わった。	has:마음이 바뀌었다	keep	rewrites
+cx:colloc-noun-verb:110	そりゃまあ、悪い気はしないよ？	has:기분은 나쁘지 않아	keep	rewrites
+cx:colloc-noun-verb:120	止めるどころか触れる気すらしなかった。	has:생각조차 들지 않았다	fix	rewrites
+cx:colloc-noun-verb:120	さっきから特に何か起こる予感もしない。	has:예감도 들지 않는다	fix	rewrites
+cx:colloc-noun-verb:120	単体では勝てる気さえしない。	has:생각마저 들지 않는다	fix	rewrites
+cx:colloc-noun-verb:120	確かに、そこまで考えの及ぶ君となら、子孫を進化に導く事ができそうな気もしないではないわね	has:기분도 들지 않지	fix	rewrites
+cx:colloc-noun-verb:120	そういえば、なんだか下着の中がネトつく気もしないでもない。	has:생각도 들지 않지는 않다	fix	rewrites
+cx:colloc-noun-verb:120	嫌な予感もしなければ、身体が傾くような感覚に襲われたこともなかった。	has:예감도 들지 않으면	fix	rewrites
+cx:colloc-noun-verb:120	勝てる気どころか一撃入れられる気もしない。	has:생각도 들지 않는다	fix	rewrites
+cx:colloc-noun-verb:120	聞く気すらしない。	lacks:하지 않는다	fix	rewrites
+cx:colloc-noun-verb:120	彼は気にしないで先に行った。	lacks:들지	keep	rewrites
+cx:colloc-noun-verb:120	ひどく心配しない。	has:걱정하지 않는다	keep	rewrites
+cx:colloc-noun-verb:130	幼馴染の名案といわんばかりのその顔に、僕は嫌な予感がしてならない。	has:예감이 들어 견딜 수 없다	fix	rewrites
+cx:colloc-noun-verb:130	それが、嫌な予感がしてならないと不安に駆られた。	has:들어 견딜 수 없	fix	rewrites
+cx:colloc-noun-verb:130	嫌われてしまう気がしてならない。	has:기분이 들지 않을 수 없다	keep	rewrites
+cx:colloc-noun-verb:130	彼は勉強をしてならない。	lacks:견딜 수	keep	rewrites
+cx:colloc-noun-verb:140	ただこれを誰かに知らせたら嫌な予感がする気がする。	has:예감이 드는 것 같다	fix	rewrites
+cx:colloc-noun-verb:140	僕は胸の内がソワソワして、嫌な予感がする気がしたけど	has:예감이 드는 것 같았지만	fix	rewrites
+cx:colloc-noun-verb:140	一安心できたが、なんだかいやな予感がする気がする。	has:예감이 드는 것 같다	fix	rewrites
+cx:colloc-noun-verb:140	勉強をする気がする。	has:것 같다	keep	rewrites
