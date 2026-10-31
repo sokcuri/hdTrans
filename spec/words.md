@@ -3245,7 +3245,7 @@ X御用達는 X가 즐겨 쓰는 것이므로 `납품업자`가 아니라 `애�
 | 簡単なポートフォリオを何気なくご覧になって | 간단한 포트폴리오를 무심코 보세요 | 유지 |
 | ミドルフィンガーを立てた。 | 미들 핑거를 세웠다. | 유지 |
 
-사례: `tests/rules/cases/loanword-glosses.tsv`
+사례: `tests/rules/cases/katakana-misglosses.tsv`
 
 ## LEX-3381 표기가 틀린 가나 외래어 낱말은 흔히 쓰는 한국어 표기로 쓴다
 
@@ -3262,7 +3262,7 @@ X御用達는 X가 즐겨 쓰는 것이므로 `납품업자`가 아니라 `애�
 | 広告がそれ系にパーソナライズされていた。 | 광고가 그것계에 개인화되고 있었다. | 고침 |
 | あ、ピクルスは抜いてください」 | 아, 피클은 뽑아 주세요」 | 고침 |
 
-사례: `tests/rules/cases/loanword-glosses.tsv`
+사례: `tests/rules/cases/katakana-misglosses.tsv`
 
 ## LEX-3382 ビジネス가 든 낱말은 비즈니스로 쓴다
 
@@ -3278,4 +3278,4 @@ X御用達는 X가 즐겨 쓰는 것이므로 `납품업자`가 아니라 `애�
 | ビジネスホテルに泊まる。 | 비즈니스호텔에 묵는다. | 유지 |
 | ビジネスパートナーとして付き合う。 | 비즈니스 파트너로서 사귄다. | 유지 |
 
-사례: `tests/rules/cases/loanword-glosses.tsv`
+사례: `tests/rules/cases/katakana-misglosses.tsv`
