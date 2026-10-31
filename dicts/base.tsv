@@ -13608,7 +13608,7 @@ ttt	ttt	K110			GN				jisjk:201744
 くぐも	흐려&AL@	M418			GN				jisjk:90668		
 くぐりど	쪽문	N110	VBl		GN				jisjk:175815		-1
 くぐり戸	쪽문	N110	VBl		GN				jisjk:175814		
-くぐり抜け	빠져 나&A1@	M437			GN				jisjk:90669		
+くぐり抜け	빠져나&A1@	M437			GN				jisjk:90669		
 くけ針	공그름바늘	I110			GN				jisjk:106583		
 くさ	&HF@	M438			GN				jisjk:90670		
 くさ	헐&Hd@	M433			GN				jisjk:90671		
@@ -26609,7 +26609,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すぐ	금방	E300			GN	3020	||2 ||4 S+1== "でき" S+1== "出来" S+1== "わか" S+1== "分か" &&2 S-1== "生まれ" P-1== "4**"	'でき·出来·わか·分か' 앞이나 '生まれ' 뒤의 'すぐ'를 짧은 시간을 나타내는 '금방'으로 고른다.	jisjk:341130		
 すぐ	바로	E300	VPl		GN	4506	||1 &&2 P+1== "1**" A+1== "VPl"	「すぐ」 뒤에 장소 의미 명사가 오면 ‘바로’를 고른다.	jisjk:365212		
 すぐ	1자 마자	S570			GN				jisjk:374820		
-すぐさま	곧 바로	E311			GN				jisjk:528		
+すぐさま	곧바로	E311			GN				jisjk:528		
 すぐそば	바로 옆	E300			GN				jisjk:263995		
 すぐに	곧바로	E311			GN				jisjk:529		
 すぐにでも	당장이라도	E311			GN				jisjk:114815		
@@ -268371,7 +268371,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無理数	무리수	I110			GN				jisjk:69120		
 無理方程式	무리 방정식	N110			GN				jisjk:253290		
 無理無体	무리	N110		Dd	GN				jisjk:253291		
-無理矢理	무리하게	I110		Nn	GN				jisjk:260787		
+無理矢理	억지로	I110		Nn	GN				jisjk:260787		
 無理算段	무리해서 변통	N110		Hd	GN				jisjk:253289		
 無理解	몰이해적%D4@	G8L0			GN				jisjk:2826		
 無理解	몰이해	N110			GN				jisjk:2827		
@@ -305559,7 +305559,7 @@ ttt	ttt	K110			GN				jisjk:201744
 胸乳	유방	N110	VBp		GN				jisjk:253186		
 胸倉	가슴팍	N110	VBp		GN				jisjk:40126		
 胸像	흉상	N110			GN				jisjk:40122		
-胸元	가슴 팍	K110	VBp		GN				jisjk:202326		
+胸元	가슴팍	K110	VBp		GN				jisjk:202326		
 胸先	앞가슴	N110	VBp		GN				jisjk:40123		
 胸回り	가슴둘레	N110			GN				jisjk:253200		
 胸囲	흉위	N110			GN				jisjk:40124		

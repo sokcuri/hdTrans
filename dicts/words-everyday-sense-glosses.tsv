@@ -1,0 +1,23 @@
+#! layer=base
+# 기본 뜻풀이가 틀린 흔한 낱말의 바른 한국어: 下手に 섣불리, 我先に 앞다투어, おじい様 할아버님, 大き目の 큼직한
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+下手に	섣불리	E311			GN			LEX-3472	everyday-sense-glosses:1
+我先に	앞다투어	E311			GN			LEX-3472	everyday-sense-glosses:3
+おじい様	할아버님	N110	VHn		GN			LEX-3472	everyday-sense-glosses:4
+お爺様	할아버님	N110	VHn		GN			LEX-3472	everyday-sense-glosses:5
+おばあ様	할머님	N110	VHn		GN			LEX-3472	everyday-sense-glosses:6
+お婆様	할머님	N110	VHn		GN			LEX-3472	everyday-sense-glosses:7
+大き目の	큼직한	E0H0			GN			LEX-3472	everyday-sense-glosses:8
+大きめの	큼직한	E0H0			GN			LEX-3472	everyday-sense-glosses:9
+一人酒	혼술	N110			GN			LEX-3472	everyday-sense-glosses:10
+お外	바깥	N110	VPl		GN			LEX-3472	everyday-sense-glosses:11
+名残惜し	아$GF@	H7U0			GN			LEX-3472	everyday-sense-glosses:12
+帰り支度	돌아갈 채비	N110		Hd	GN			LEX-3472	everyday-sense-glosses:13
+潜り抜け	빠져나&A1@	M437			GN			LEX-3472	everyday-sense-glosses:14
+丸眼鏡	동그란 안경	N110			GN			LEX-3472	everyday-sense-glosses:15
+丸メガネ	동그란 안경	N110			GN			LEX-3472	everyday-sense-glosses:16
+間違いなさそう	틀림없을 것 %B3@	G8U0			GN			LEX-3472	everyday-sense-glosses:17
+迷うことなく	망설임 없이	E311			GN			LEX-3472	everyday-sense-glosses:18
+迷うこと無く	망설임 없이	E311			GN			LEX-3472	everyday-sense-glosses:19
+迷う事なく	망설임 없이	E311			GN			LEX-3472	everyday-sense-glosses:20
+迷う事無く	망설임 없이	E311			GN			LEX-3472	everyday-sense-glosses:21

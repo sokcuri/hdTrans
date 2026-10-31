@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:inward-auxiliary	文章を打ち込むスピード	문장을 치는 스피드	fix	rewrites
-rewrite:inward-auxiliary	急いで荷物を詰め込んで帰り支度を急ぐ。	서둘러 짐을 싸 돌아오는 길 준비를 서두른다.	fix	rewrites
+rewrite:inward-auxiliary	急いで荷物を詰め込んで帰り支度を急ぐ。	서둘러 짐을 싸 돌아갈 채비를 서두른다.	fix	rewrites
 rewrite:inward-auxiliary	やりこんでいるゲーム	하고 있는 게임	fix	rewrites
 rewrite:inward-auxiliary	道が込んでいる。	길이 붐비고 있다.	keep	rewrites
 rewrite:inward-auxiliary	仕事が立て込んでてな。	일이 붐비고 있어.	keep	rewrites

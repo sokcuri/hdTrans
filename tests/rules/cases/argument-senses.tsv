@@ -1,0 +1,84 @@
+# 규칙: LEX-3471
+rule	input	expected	kind	layer
+pack:argument-senses:1	健君、お姉ちゃんを起こして	rule:pack:argument-senses:1=깨우다	fix	packs
+pack:argument-senses:1	そろそろディアナを部屋へ送ろうと、彼女を起こさないようゆっくりと立ち上がる。	rule:pack:argument-senses:1=깨우다	fix	packs
+pack:argument-senses:1	みんなを起こさないように立ち上がり、小屋の外へ出る。	rule:pack:argument-senses:1=깨우다	fix	packs
+pack:argument-senses:1	それなのに、私の不注意でお前を起こしてしまったな。	has:너를 깨워	fix	packs
+pack:argument-senses:1	ゆっくりと体を起こす。	!rule:pack:argument-senses:1	keep	packs
+pack:argument-senses:1	北句麗国で反乱を起こしている。	has:반란을 일으키	keep	packs
+pack:argument-senses:2	客人を入れるのは初めてだな	rule:pack:argument-senses:2=들이다	fix	packs
+pack:argument-senses:23	変な人を部屋に入れてごめんなさい	has:방에 들여서	fix	packs
+pack:argument-senses:3	巣の中に光を入れてみる。	has:빛을 넣어	fix	packs
+pack:argument-senses:3	なかに入れてもお肉は腐ります	has:넣어도	fix	packs
+pack:argument-senses:24	お茶を入れてくれた。	has:차를 끓여	keep	packs
+pack:argument-senses:30	先生でも入れる部屋だ。	has:들어갈 수 있는 방	keep	packs
+pack:argument-senses:32	どこか近場の店にでも入れるか？	has:들어갈 수 있을까	keep	packs
+pack:argument-senses:4	頷いた彼女は一度下がり、また戻って来た。	rule:pack:argument-senses:4=물러나다	fix	packs
+pack:argument-senses:5	側近を下がらせた。	rule:pack:argument-senses:5=물러나다	fix	packs
+pack:argument-senses:31	赤ん坊は中々テンションが下がらない様子で騒いでいる。	has:내려가지	keep	packs
+pack:argument-senses:25	熱も下がってきたとはいえまだ高い	has:내려가	keep	packs
+sense:sagaru-steps	と数歩下がった。	has:몇 걸음 물러났다	fix	senses
+pack:argument-senses:7	思わず笑みが漏れる。	rule:pack:argument-senses:7=새어 나오다	fix	packs
+pack:argument-senses:7	と喘ぎ声が漏れた。	rule:pack:argument-senses:7=새어 나오다	fix	packs
+pack:argument-senses:7	小さな吐息が漏れた。	has:숨결이 새어 나왔다	fix	packs
+pack:argument-senses:7	どうやら情報が漏れたみたい	!rule:pack:argument-senses:7	keep	packs
+pack:argument-senses:8	ラチェット教諭の指示によって、生徒が散っていく。	rule:pack:argument-senses:8=흩어지다	fix	packs
+pack:argument-senses:8	桜が散ったか	!rule:pack:argument-senses:8	keep	packs
+pack:argument-senses:9	悪態を吐きながらズボンからスマホを取り出し、	rule:pack:argument-senses:9=내뱉다	fix	packs
+pack:argument-senses:9	捨て台詞を吐いて、アールは逃走した。	rule:pack:argument-senses:9=내뱉다	fix	packs
+pack:argument-senses:9	胃液と水分を吐いただけだが、	has:토했	keep	packs
+sense:tameiki-haku	そっとため息を吐いた。	has:한숨을 쉬었다	fix	senses
+sense:tameiki-haku	大きく長いため息を吐きながら入室を許可した。	lacks:한숨을 한숨을	fix	senses
+sense:tameiki-haku	グレーテルは短く息を吐いた。	has:숨을 내쉬었다	keep	senses
+pack:argument-senses:11	今はこの迷宮探索に全力を注ぐことにしよう。	rule:pack:argument-senses:11=쏟다	fix	packs
+pack:argument-senses:11	花音に愛情を注いで育ててくれたお母さん。	rule:pack:argument-senses:11=쏟다	fix	packs
+pack:argument-senses:11	電気ケトルのお湯を注ぐ。	has:따른다	keep	packs
+pack:argument-senses:11	千春は魔石を握り締め目をつぶって魔力を注ぐ。	has:마력을 불어넣는다	keep	packs
+pack:argument-senses:13	そしてシャアルラは最後の言葉を放った。	rule:pack:argument-senses:13=던지다	fix	packs
+sense:hanatsu-strike	フェイは一気に間合いを詰めて突きを放つ。	has:찌르기를 날린다	fix	senses
+sense:hanatsu-strike	禍々しい赤い光を放っている。	has:빛을 발하고	keep	senses
+pack:argument-senses:14	とはいえ、ここは特に迷う事はない。	rule:pack:argument-senses:14=망설이다	fix	packs
+pack:argument-senses:15	スープで麺が伸びているわけではない。	rule:pack:argument-senses:15=불다	fix	packs
+pack:argument-senses:15	伸び始めた牧草地に家畜を放牧する。	has:자라기 시작한	keep	packs
+pack:argument-senses:16	門を潜って街中へと足を踏み入れる。	rule:pack:argument-senses:16=지나다	fix	packs
+pack:argument-senses:16	人で出来た海に潜ったようだ。	has:잠수한	keep	packs
+pack:argument-senses:17	私は手すりを乗り越え、その場から飛んだ。	rule:pack:argument-senses:17=넘다	fix	packs
+pack:argument-senses:17	次々と門を潜り、試練を乗り越えていく。	has:시련을 극복해	keep	packs
+pack:argument-senses:18	付き合いはじめたばかりの丸尾は横浜の出身なので、市内に詳しい。	rule:pack:argument-senses:18=밝다	fix	packs
+pack:argument-senses:28	山に詳しい者を明日呼ぶ。	rule:pack:argument-senses:28=밝다	fix	packs
+pack:argument-senses:28	今夜中に詳しい情報を集めておくよ。	has:자세한 정보	keep	packs
+pack:argument-senses:28	だから、僕に詳しい話をし	!rule:pack:argument-senses:28	keep	packs
+pack:argument-senses:20	俺は疲れていたので、人間と関わるのが面倒になっていた。	rule:pack:argument-senses:20=엮이다	fix	packs
+pack:argument-senses:20	誰もが、聖女の恩恵に関わろうと動き出した。	!rule:pack:argument-senses:20	keep	packs
+pack:argument-senses:22	ジュゲムが傷を癒してくれたわ。	rule:pack:argument-senses:22=치유하다	fix	packs
+pack:argument-senses:29	再び唇を近づける。	rule:pack:argument-senses:29=가까이 대다	fix	packs
+pack:argument-senses:29	思わず鼻を近づける。	rule:pack:argument-senses:29=가까이 대다	fix	packs
+pack:argument-senses:29	敵を近づけるな！九三一、お願い！	!rule:pack:argument-senses:29	keep	packs
+pack:argument-senses:34	もちろん僕はそれ以上近づくことはできませんでした	rule:pack:argument-senses:34=다가가다	fix	packs
+pack:argument-senses:34	白木は大型モニターに近づこうと、前に出る。	has:가까워지려고	keep	packs
+pack:argument-senses:43	ベネットが、私に近づいた。	rule:pack:argument-senses:43=다가오다	fix	packs
+pack:argument-senses:43	それ以上私に近づくな	has:나에게 다가오지 마	fix	packs
+pack:argument-senses:34	男が近づいていたことに気づけなかった。	has:가까워지고	keep	packs
+pack:argument-senses:35	背後から近づいてくる気配に大きなため息を吐く。	has:다가오는	keep	packs
+pack:argument-senses:36	早くその場から離れろ！	rule:pack:argument-senses:36=떠나다	fix	packs
+pack:argument-senses:39	王都から離れた場所で構いません。	rule:pack:argument-senses:39=떨어지다	fix	packs
+pack:argument-senses:48	でも、ここから離れてはダメ……	has:떠나서는 안돼	keep	packs
+pack:argument-senses:37	彼の頭が胴体から離れ、血が噴き出す。	rule:pack:argument-senses:37=떨어지다	fix	packs
+pack:argument-senses:37	マ、マコトさんから離れてくださいっ！	rule:pack:argument-senses:37=떨어지다	fix	packs
+pack:argument-senses:46	あの光景が頭から離れない。	rule:pack:argument-senses:46=떠나다	fix	packs
+pack:argument-senses:44	少しずつ、ふたりから離れていく。	has:멀어져 간다	keep	packs
+pack:argument-senses:47	歌から離れる方に進むのは良くない	has:멀어지는	keep	packs
+pack:argument-senses:37	紅葉との距離が離れすぎた。	!rule:pack:argument-senses:37	keep	packs
+pack:argument-senses:38	ワシが最高の武器を打ってやる！	rule:pack:argument-senses:38=벼리다	fix	packs
+pack:argument-senses:40	敵が何度も大地に武器を打ちつけるように、と。	!rule:pack:argument-senses:38	keep	packs
+sense:hazusu-objects	エプロンを外し、貴重品だけ持って店を飛び出す。	has:에이프런을 벗고	fix	senses
+sense:hazusu-objects	慌てて布を押さえていた片手を外し、なんとか受け取る。	has:한 손을 떼고	fix	senses
+sense:hazusu-objects	アイアンナックルは外している。	has:빼고 있다	fix	senses
+sense:hazusu-objects	ネックレスを外した。	has:목걸이를 벗었다	keep	senses
+sense:tsuno-horn	髪はややベージュな金色の巻き毛のロングヘア、巻いた角、	has:감은 뿔	fix	senses
+sense:karai-smell	辛い匂いが漂ってきて空腹を刺激する。	has:매운 냄새	fix	senses
+sense:karai-smell	とても辛い過去。	has:괴로운 과거	keep	senses
+sense:takai-trees	外から見るとそこだけ木々が高く植物で土が見えない。	has:나무들이 높게	fix	senses
+sense:fuu-manner	今まで僕の事、どんな風に見てたの？	has:어떤 식으로	fix	senses
+sense:fuu-manner	そんな風に言わないで。	has:그런 식으로	keep	senses
+pack:argument-senses:41	一番教室から離れてるからね。	has:교실에서 멀어지	keep	packs
