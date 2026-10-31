@@ -371,6 +371,7 @@
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
+//= word.dismissal	Starts of the predicates that brush something aside without a negative ending (嫌い, どうでもいい): a など, なんか or なんて after a noun before one belittles it (spec LEX-90, LEX-91).
 //= word.ability-scope	Words that make the (ら)れ of their clause the potential: anyone, any time or anywhere, or by oneself (誰でも着られる, 自分で決められる).
 //= word.iru-form	Words of the dictionary that a form of いる or いらっしゃる starts (いろ 色, いよう 異様, いたって 至って, いたみ 痛み, いらっしゃい 어서 오세요): right after a て form the text is that いる or いらっしゃる (待っていろよ, 何していようかな, 悔しがっていたみたい, 洗っていらっしゃい).
 //= word.arena-predicate	Words of standing out or doing one's part (活躍, 頑張る, 有名, 最強): a でも right before one after a noun that is no person is 에서도, where it holds (フランス海軍でも活躍した 프랑스 해군에서도 활약했다).
@@ -7236,6 +7237,11 @@ word.belittling	風情
 word.belittling	なんか
 word.belittling	なんぞ
 word.belittling	程度
+word.dismissal	嫌い
+word.dismissal	大嫌い
+word.dismissal	きらい
+word.dismissal	だいきらい
+word.dismissal	どうでも
 ending.no-exclamation-na	言う
 ending.no-exclamation-na	思う
 ending.no-exclamation-na	よう
