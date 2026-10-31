@@ -1,0 +1,50 @@
+#! layer=base
+# 외래어 기술 용어와 몇 낱말의 잘못 적힌 기본 사전 번역을 바로잡음
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+デュアルカード	듀얼 카드	N110			GN			LEX-2920				tech-loanword-glosses:w1
+デュアルプロセッサ	듀얼 프로세서	N110			GN			LEX-2920				tech-loanword-glosses:w2
+デュアルプロセッサシステム	듀얼 프로세서 시스템	N110			GN			LEX-2920				tech-loanword-glosses:w3
+デュアルリンクインタフェース	듀얼 링크 인터페이스	N110			GN			LEX-2920				tech-loanword-glosses:w4
+タンデムプロセッサ	탠덤 프로세서	N110			GN			LEX-2920				tech-loanword-glosses:w5
+ディスクコプロセッサ	디스크 코프로세서	N110			GN			LEX-2920				tech-loanword-glosses:w6
+ディスクコプロセッサー	디스크 코프로세서	N110			GN			LEX-2920				tech-loanword-glosses:w7
+ディスクコプロセッサボード	디스크 코프로세서 보드	N110			GN			LEX-2920				tech-loanword-glosses:w8
+デジタルシグナルプロセッサ	디지털 시그널 프로세서	N110			GN			LEX-2920				tech-loanword-glosses:w9
+データ。 プロセッサ	데이터 프로세서	N110			GN			LEX-2920				tech-loanword-glosses:w10
+ディクショナリ	딕셔너리	N110			GN			LEX-2920				tech-loanword-glosses:w11
+データ。 ディクショナリ	데이터 딕셔너리	N110			GN			LEX-2920				tech-loanword-glosses:w12
+データ。 ディクショナリー	데이터 딕셔너리	N110			GN			LEX-2920				tech-loanword-glosses:w13
+データディクショナリ	데이터 딕셔너리	N110			GN			LEX-2920				tech-loanword-glosses:w14
+データディクショナリー	데이터 딕셔너리	N110			GN			LEX-2920				tech-loanword-glosses:w15
+データインタフェース	데이터 인터페이스	N110			GN			LEX-2920				tech-loanword-glosses:w16
+データシステムインタフェース	데이터 시스템 인터페이스	N110			GN			LEX-2920				tech-loanword-glosses:w17
+データエントリフィールド	데이터 엔트리 필드	N110			GN			LEX-2920				tech-loanword-glosses:w18
+スイッチイング	스위칭	N110			GN			LEX-2920				tech-loanword-glosses:w19
+スイッチバルブ	스위치 밸브	N110	VPe		GN			LEX-2920				tech-loanword-glosses:w20
+データリンクスイッチング	데이터 링크 스위칭	N110			GN			LEX-2920				tech-loanword-glosses:w21
+トポロジー	토폴로지	N110			GN			LEX-2920				tech-loanword-glosses:w22
+トラフィックカーミング	트래픽 카밍	N110			GN			LEX-2920				tech-loanword-glosses:w23
+トランスポート	트랜스포트	N110			GN			LEX-2920				tech-loanword-glosses:w24
+トランスポートドア	트랜스포트 도어	N110			GN			LEX-2920				tech-loanword-glosses:w25
+トリクロロエタン	트리클로로에탄	N110			GN			LEX-2920				tech-loanword-glosses:w26
+トリクロロフェノール	트리클로로페놀	N110	VMd		BZ			LEX-2920				tech-loanword-glosses:w27
+トリプレックスケーブル	트리플렉스 케이블	N110			GN			LEX-2920				tech-loanword-glosses:w28
+トルティーヤ	토르티야	N110			GN			LEX-2920				tech-loanword-glosses:w29
+トータリゼーター	토털리제이터	N110			GN			LEX-2920				tech-loanword-glosses:w31
+トレーラカード	트레일러 카드	N110	VMo		GN			LEX-2920				tech-loanword-glosses:w32
+ドラムプロッタ	드럼 플로터	N110			GN			LEX-2920				tech-loanword-glosses:w33
+ドレーンプラグ	드레인 플러그	N110			GN			LEX-2920				tech-loanword-glosses:w34
+ナフタレン	나프탈렌	N110	VMd		GN			LEX-2920				tech-loanword-glosses:w35
+ニードルローラーベアリング	니들 롤러 베어링	N110			GN			LEX-2920				tech-loanword-glosses:w36
+ニーモニックコード	니모닉 코드	N110			GN			LEX-2920				tech-loanword-glosses:w37
+ネットワークプロトコール	네트워크 프로토콜	N110			GN			LEX-2920				tech-loanword-glosses:w38
+ネティズン	네티즌	N110	VHn		GN			LEX-2920				tech-loanword-glosses:w39
+ノッチ	노치	N110			GN			LEX-2920				tech-loanword-glosses:w40
+ヌクレオシド	뉴클레오사이드	N110			GN			LEX-2921				tech-loanword-glosses:w41
+ニューポピュリズム	뉴 포퓰리즘	N110			GN			LEX-2921				tech-loanword-glosses:w42
+ニカラグア野党連合	니카라과 야당 연합	N110	VGt		BZ			LEX-2920				tech-loanword-glosses:w43
+ノスタルジック	노스탤지어적%D4@	G8U0			GN			LEX-2921				tech-loanword-glosses:w44
+おりもの	질 분비물	N110			GN			LEX-2921				tech-loanword-glosses:w45
+おりもの	직물	N110	VCp		GN			LEX-2921		-1		tech-loanword-glosses:w46
+おんてき	원수	N110	VHnSFl		GN			LEX-2921		-1		tech-loanword-glosses:w47
+怨敵	원수	N110	VHn		GN			LEX-2921				tech-loanword-glosses:w48
