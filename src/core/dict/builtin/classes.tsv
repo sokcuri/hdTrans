@@ -14,6 +14,7 @@
 //= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
 //= adverb.suppose	Words of supposition that make a と or たら in their sentence a condition, not a step that followed (もしあの時断っていたら 거절했다면, 仮に負けたとしたら).
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
+//= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
 //= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
 //= noun.felt-ga	Starts of a word or phrase of a feeling in が (気が, 小腹が, お腹が), whose negative question asks how one feels: no invitation (気がしないか？ 그런 생각이 들지 않아?; spec MNG-7).
@@ -7729,6 +7730,7 @@ word.scold	こらこら
 word.scold	コラコラ
 word.scold	こらっ
 word.scold	コラッ
+word.kana-before-word	みな
 word.someone	誰か
 word.someone	だれか
 word.someone	誰かさん

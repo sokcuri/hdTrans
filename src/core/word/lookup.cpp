@@ -500,12 +500,15 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     }
     const std::string_view pc = u.codes->partText;
     if (pc.size() > 1 && (pc[1] == '4' || pc[1] == '7')) return true;
-    const std::string_view next = FirstChar(query.substr(std::min(u.key.size(), query.size())));
+    const std::string_view rest = query.substr(std::min(u.key.size(), query.size()));
+    const std::string_view next = FirstChar(rest);
     switch (NameClassOf(next)) {
     case kClassHiragana:
+        // な and がら after it are the ながら of a verb stem (みながら 보면서).
+        if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
         return Has(kKanaAfter, next) || KanaBeforeCopula(u, query);
     case kClassKanji:
-        return false;
+        return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
     }
     return text::RuneCount(u.key) >= 3;
 }

@@ -167,6 +167,11 @@ bool MatchConjugation(Detail& d, std::string_view text, int offset, Record* reco
         }
     }
     potential = potential && imperative;
+    // A godan e-row form of a kanji stem before 、 is the continuative of its potential after the
+    // が that marks what can be done (雨風が凌げ、), the imperative elsewhere (急げ、急げ). Kana
+    // stems stay unread there (それ、, ため、): kana do not show where a word ends.
+    d.commaEForm = 0;
+    if (!recordText.empty() && text::IsKanji(DecodeLastRune(recordText).cp)) d.commaEForm = prefix.ends_with(kJaGa) ? 1 : 2;
     // A stem in kana only that the dictionary also has as a noun is that noun before the と of a と
     // form (ずれとる, ウケとりました): kana do not show where a word ends. A noun or pronoun that comes
     // first in the lookup is read first anyway (だれとった 誰 and 取った).
@@ -235,7 +240,10 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
                  Starts(rest, "』だの"))) {
                 continue;
             }
-            if (Starts(rest, kJaFullComma) || Starts(rest, kJaComma)) continue;
+            if (Starts(rest, kJaFullComma) || Starts(rest, kJaComma)) {
+                const bool godan = entry == Conjugation(kind, branch == 4 ? 11 : 4);
+                if (!godan || d.commaEForm == 0 || (branch == 4 && d.commaEForm != 1)) continue;
+            }
             // A bare e-row form before a closing bracket, a full-width sentence mark or the
             // quoting って or と is the imperative (「撃て」, 「書け」の一点張り, 言えって言った):
             // a potential stem cannot end there without its る. Neither form takes a copula

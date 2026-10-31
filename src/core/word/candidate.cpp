@@ -2251,6 +2251,23 @@ Item* Worker::HonorificItem(std::string_view full, int cursor, int token, Item* 
     return NewItem(NewDetail(kDetailInfo, token), g, full, cursor, token);
 }
 
+// Whether the godan e-row form that record matched before 、 also spells an ichidan stem of its
+// last kanji (粉々に砕け、 is 砕ける, 懐に入れ、 is 入れる), which the shorter reading takes.
+bool Worker::IchidanBeforeComma(const Detail& d, std::string_view text, int offset, const Record* record) const {
+    if (record == nullptr || (d.kind != 4 && d.kind != 11) || d.commaEForm == 0) return false;
+    const std::string_view entry = Conjugation(d.patternKind, d.kind);
+    const std::string_view tail = From(text, offset + static_cast<long>(record->source.size()));
+    if (!tail.starts_with(entry)) return false;
+    const std::string_view after = tail.substr(entry.size());
+    if (!after.starts_with(kJaFullComma) && !after.starts_with(kJaComma)) return false;
+    const std::string stem = std::string(LastChar(record->source)) + std::string(entry);
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view pc = c.codes->partText;
+        if (pc.size() == 4 && pc[0] == 'M' && pc[1] == '4' && pc[3] == '7') return true;
+    }
+    return false;
+}
+
 // An item from the first usable record group of records at text[offset:], running the
 // conjugation checks of its kind: verbs ('4'), adjectives ('7'), adjectival nouns
 // ('8'), words without ending ('6') and the rest. Null when no record group passes.
@@ -2271,7 +2288,7 @@ Item* Worker::InsertLateCandidate(std::string_view text, int offset, int token, 
             word->patternKind = pattern;
             word->dialect = settings.text && settings.improvements.dialectForms;
             Record* stop = nullptr;
-            const bool ok = MatchConjugation(*word, text, offset, rec, stop);
+            const bool ok = MatchConjugation(*word, text, offset, rec, stop) && !IchidanBeforeComma(*word, text, offset, stop);
             rec = stop;
             if (!ok) {
                 while (rec != nullptr && sameGroup(rec) && At(rec->partCode, 3) - '0' == pattern) {
