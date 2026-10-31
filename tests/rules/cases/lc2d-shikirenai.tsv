@@ -1,0 +1,28 @@
+# 규칙: GRM-152
+rule	input	expected	kind	layer
+cx:lc2d-shikirenai:10	自分の現状が把握しきれない。	has:다 파악할 수	fix	rewrites
+cx:lc2d-shikirenai:10	そればかりは否定しきれない。	has:다 부정할 수	fix	rewrites
+cx:lc2d-shikirenai:10	説明しきれないと思い簡単に流す翔	has:다 설명할 수	fix	rewrites
+cx:lc2d-shikirenai:10	排除しきれなかった為に………――	has:다 배제할 수	fix	rewrites
+cx:lc2d-shikirenai:10	いや、しかし……否定しきれない。	has:하지만……다 부정할	fix	rewrites
+cx:lc2d-shikirenai:10	「末端までは、管理しきれないか……」	has:다 관리할 수	fix	rewrites
+cx:lc2d-shikirenai:10	性でも対処しきれない規模でですわ！」	has:다 대처할 수	fix	rewrites
+cx:lc2d-shikirenai:10	体を制御しきれないと脳が悲鳴を上げる。	has:다 제어할 수	fix	rewrites
+cx:lc2d-shikirenai:10	勢いに呑まれてアタシは現状を把握しきれない。	has:다 파악할 수	fix	rewrites
+cx:lc2d-shikirenai:10	だがあまりに細かいので詳細は確認しきれないな。	has:다 확인할 수	fix	rewrites
+cx:lc2d-shikirenai:10	見たことのない光景過ぎて、頭が処理しきれない。	has:다 처리할 수	fix	rewrites
+cx:lc2d-shikirenai:10	≪けど、絶対に爆弾を解除しきれるとは限らないわ≫	has:다 해제할 수	fix	rewrites
+cx:lc2d-shikirenai:10	「うーん、前回だけじゃ消化しきれなかった感じ？」	has:다 소화할 수	fix	rewrites
+cx:lc2d-shikirenai:10	「だがあの踏み込みの速さ。対応しきれないぞ！？」	has:다 대응할 수	fix	rewrites
+cx:lc2d-shikirenai:10	「あー……そんなにたくさん消費しきれるかなぁ……」	has:다 소비할 수	fix	rewrites
+cx:lc2d-shikirenai:10	しかも、膂力も強すぎて意識しないと制御しきれないし	has:다 제어할 수	fix	rewrites
+cx:lc2d-shikirenai:10	「そこまで覚悟がある子を説得しきれそうにないわ……」	has:다 설득할 수	fix	rewrites
+cx:lc2d-shikirenai:10	完全な善意で仕事を提供してもらう方が信用しきれない。	has:다 신용할 수	fix	rewrites
+cx:lc2d-shikirenai:10	だが理解はしきれない。	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	隠しきれなかった思いに	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	驚きは隠しきれなかった。	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	僕は驚きを隠しきれない。	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	衝撃を逃がしきれなかった。	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	我慢しきれなくなってきた。	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	情報過多で整理がしきれない。	!rule:cx:lc2d-shikirenai:10	keep	rewrites
+cx:lc2d-shikirenai:10	隠しきれない悲しみ、寂しさ。	!rule:cx:lc2d-shikirenai:10	keep	rewrites

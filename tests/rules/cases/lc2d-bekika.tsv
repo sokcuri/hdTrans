@@ -1,0 +1,34 @@
+# 규칙: GRM-147
+rule	input	expected	kind	layer
+cx:lc2d-bekika:10	『教会』本部に施設の拡張を要請するべきかもな。	has:할지도	fix	rewrites
+cx:lc2d-bekika:10	「葵衣の知的好奇心は見習うべきかもしれないな」	has:할지도 모르네	fix	rewrites
+cx:lc2d-bekika:10	そういう形に、顔を歪めたというべきかもしれない。	has:할지도 모른다	fix	rewrites
+cx:lc2d-bekika:15	「やっぱり今からでも考え直すべきかしら……」	has:할까	fix	rewrites
+cx:lc2d-bekika:15	我が国でもディルツのように、王族の子も入れる学園を作るべきかしら」	has:할까	fix	rewrites
+cx:lc2d-bekika:20	これを神達に伝えるべきかどうか。	has:할지 어떨지	fix	rewrites
+cx:lc2d-bekika:20	怒るべきかどうかすごく脳内で葛藤しましたが、久瀬律に面白がっている様子がないのです。	has:할지 어떨지	fix	rewrites
+cx:lc2d-bekika:21	最後に念を押すべきか否か、フィアールカが迷ったところ。	has:할지 말지	fix	rewrites
+cx:lc2d-bekika:21	僕と更紗が最後の数分間だけ恋人同士であったことを、ご両親に伝えるべきか否か。	has:할지 말지	fix	rewrites
+cx:lc2d-bekika:30	モズの事を話すべきか迷っていると──	has:할지 망설이고	fix	rewrites
+cx:lc2d-bekika:30	どんな服を生み出すべきか頭を悩ませる。	has:할지 골머리를	fix	rewrites
+cx:lc2d-bekika:30	エリアスは正直に答えるべきか言葉に詰まる。	has:할지 말이	fix	rewrites
+cx:lc2d-bekika:40	言うべきか？	has:할까	fix	rewrites
+cx:lc2d-bekika:40	殺すべきか……	has:할까	fix	rewrites
+cx:lc2d-bekika:40	教えるべきか…	has:할까	fix	rewrites
+cx:lc2d-bekika:51	ここは謙遜しながらそっと断るべきだったか……。	has:했나	fix	rewrites
+cx:lc2d-bekika:51	こんなことなら、犬塚に情報を貰うべきだったか。	has:했나	fix	rewrites
+cx:lc2d-bekika:51	『楽しそうだ。やはり、無理にでも応募しておくべきだったか』	has:했나	fix	rewrites
+cx:lc2d-bekika:10	まずなにをすべきか。	!rule:cx:lc2d-bekika:10	keep	rewrites
+cx:lc2d-bekika:10	どうすべきか考えていると	!rule:cx:lc2d-bekika:10	keep	rewrites
+cx:lc2d-bekika:15	今、すべきことは何か。	!rule:cx:lc2d-bekika:15	keep	rewrites
+cx:lc2d-bekika:15	大きな覚悟決めるべきだ。	!rule:cx:lc2d-bekika:15	keep	rewrites
+cx:lc2d-bekika:20	ここは即刻退却すべきだ、	!rule:cx:lc2d-bekika:20	keep	rewrites
+cx:lc2d-bekika:20	落としたとみるべきだろう。	!rule:cx:lc2d-bekika:20	keep	rewrites
+cx:lc2d-bekika:21	これから気にしておくべきだな。	!rule:cx:lc2d-bekika:21	keep	rewrites
+cx:lc2d-bekika:21	早く手当を受けさせるべきだろう。	!rule:cx:lc2d-bekika:21	keep	rewrites
+cx:lc2d-bekika:30	きちんと断罪は受けるべきだしな。	!rule:cx:lc2d-bekika:30	keep	rewrites
+cx:lc2d-bekika:30	「では自分が何をすべきかもだ。」	!rule:cx:lc2d-bekika:30	keep	rewrites
+cx:lc2d-bekika:40	どう返事すべきか悩んでしまった。	!rule:cx:lc2d-bekika:40	keep	rewrites
+cx:lc2d-bekika:40	生きるべきか死ぬべきか、シェークスピアを気取っていたのに。	!rule:cx:lc2d-bekika:40	keep	rewrites
+cx:lc2d-bekika:51	何かを声を掛けるべきだったのかもしれない。	!rule:cx:lc2d-bekika:51	keep	rewrites
+cx:lc2d-bekika:51	ゾフィを殺すべきだったかもしれない。	!rule:cx:lc2d-bekika:51	keep	rewrites
