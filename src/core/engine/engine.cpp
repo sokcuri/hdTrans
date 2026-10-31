@@ -940,6 +940,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     options.speech = speech_;
     options.speechLevels = speechLevels_;
     options.wrapped = wrapped_;
+    options.names = names_.get();
     options.filters = filters_.get();
     const std::vector<std::string> translated =
         internal::TranslateDocument(*snapshot_, *generated_, lines, observer, options, contextLines);
@@ -949,6 +950,17 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
         out += translated[i];
     }
     return out;
+}
+
+bool Session::SetNames(std::string_view text) {
+    auto list = std::make_shared<names::List>();
+    const bool ok = names::ParseList(text, *list);
+    if (list->names.empty()) {
+        names_.reset();
+    } else {
+        names_ = std::move(list);
+    }
+    return ok;
 }
 
 void Session::Reset() {

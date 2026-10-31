@@ -112,6 +112,8 @@ struct TranslationOptions {
     SpeechLevels speechLevels = SpeechLevels::Auto;
     // When set, gets the lines the speech-level stage changes, numbered from 0 after the context.
     std::vector<reg::Change>* levelChanges = nullptr;
+    // The names of the document (Session::SetNames); null for none.
+    const names::List* names = nullptr;
     // Lines may break in the middle of a sentence (Session::SetWrapped).
     bool wrapped = false;
     // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).

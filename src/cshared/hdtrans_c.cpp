@@ -20,6 +20,7 @@
 #include "core/dict/folders.h"
 #include "core/engine.h"
 #include "core/engine/user_watch.h"
+#include "core/names/list.h"
 #include "frontend/module_dir.h"
 
 namespace {
@@ -44,6 +45,7 @@ std::vector<std::string> g_activeFilterErrors;
 hdTrans::internal::ConfigCache g_cache;
 std::unique_ptr<hdTrans::Engine> g_engine;
 std::unique_ptr<hdTrans::Session> g_session;
+std::string g_names;  // the name list of hdTrans_SetNames
 
 // Queued state changes run before new translations.
 class AdminLock {
@@ -223,6 +225,7 @@ int hdTrans_Initialize(const char* dirs) {
     g_session->SetSpeech(settings.speech);
     g_session->SetSpeechLevels(settings.speechLevels);
     g_session->SetWrapped(settings.wrapped);
+    static_cast<void>(g_session->SetNames(g_names));
     g_dirs = requestedPaths;
     g_ehnd.reset();
     ClearFailedLoad();
@@ -242,6 +245,7 @@ void hdTrans_Terminate(void) {
     g_configErrors.clear();
     g_configPath.clear();
     g_strictDictOverride.reset();
+    g_names.clear();
     ClearFailedLoad();
     static_cast<void>(g_cache.Apply(std::nullopt));
 }
@@ -259,6 +263,15 @@ int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, s
     if (!g_session) return -1;
     const std::string_view lines = context ? std::string_view(context, cn) : std::string_view();
     return Copy(g_session->Translate(std::string_view(text, n), lines), out, outn);
+}
+
+int hdTrans_SetNames(const char* text, size_t n) {
+    AdminLock lock;
+    g_names = text ? std::string(text, n) : std::string();
+    hdTrans::names::List list;
+    const bool ok = hdTrans::names::ParseList(g_names, list);
+    if (g_session) static_cast<void>(g_session->SetNames(g_names));
+    return ok ? 0 : -1;
 }
 
 int hdTrans_Reset(void) {
@@ -319,6 +332,7 @@ int hdTrans_Reload(void) {
     g_session->SetSpeech(settings.speech);
     g_session->SetSpeechLevels(settings.speechLevels);
     g_session->SetWrapped(settings.wrapped);
+    static_cast<void>(g_session->SetNames(g_names));
     g_configErrors = ConfigDiagnostics(config, configPath, dir);
     g_configPath = configPath;
     ClearFailedLoad();

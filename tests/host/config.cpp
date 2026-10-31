@@ -611,6 +611,12 @@ int main(int argc, char** argv) {
     Check(Translate("犬") == "멍멍이", "configured user dictionary");
     Check(Translate("タマ") == "나비", "configured Ehnd dictionary");
     Check(Errors().empty(), "valid config diagnostics");
+    const std::string names = "猫\t네코\n";
+    Check(hdTrans_SetNames(names.data(), names.size()) == 0, "set names");
+    Check(Translate("猫") == "네코", "listed name");
+    Check(hdTrans_SetNames("猫", 3) == -1, "malformed name line");
+    Check(Translate("猫") == "고양이", "malformed list holds no name");
+    Check(hdTrans_SetNames(nullptr, 0) == 0, "drop names");
     Write(fixtures / "second-user.txt", "犬\t뒤파일\n");
     Write(fixtures / "bad-user.tsv", "猫\n");
     Write(config, "dicts: fixtures/first\nuserdict: [fixtures/user.tsv, fixtures/bad-user.tsv, fixtures/second-user.txt]\ncache: off\n");

@@ -18,6 +18,10 @@ namespace filter {
 class Filters;
 }
 
+namespace names {
+struct List;
+}
+
 namespace internal {
 struct Access;
 struct Generated;
@@ -191,6 +195,12 @@ public:
     // is split back at the breaks, one line out for each line in.
     void SetWrapped(bool wrapped) { wrapped_ = wrapped; }
 
+    // The names of the documents of later translations, as the lines of a name list
+    // (docs/api.md): JA <TAB> KO [<TAB> KIND [<TAB> OPTIONS]]. The list applies to each call
+    // on its own, beside the names the call's lines show; empty text drops it. Returns false
+    // when a line is malformed; the other lines are kept.
+    bool SetNames(std::string_view text);
+
 private:
     friend struct internal::Access;
     std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer,
@@ -203,6 +213,7 @@ private:
     Speech speech_ = Speech::Strict;
     SpeechLevels speechLevels_ = SpeechLevels::Auto;
     bool wrapped_ = false;
+    std::shared_ptr<const names::List> names_;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

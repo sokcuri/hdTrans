@@ -15,6 +15,7 @@
 #include "core/dict/codes.h"
 #include "core/dict/snapshot.h"
 #include "core/dict/user_text.h"
+#include "core/names/list.h"
 #include "core/names/name_cues.h"
 #include "core/names/registry.h"
 #include "core/pipeline/line_context.h"
@@ -51,8 +52,13 @@ struct DocumentContext {
     std::unique_ptr<names::Registry> registry;
     std::unique_ptr<dict::CodeTable> codes;  // the codes of the entries compiled here
     userdict::Families families;
-    // The plain entries of the registry and the historical names, before the skip filter.
+    // The plain entries of the registry, the listed names and the historical names, before the
+    // skip filter. The entries of listed names have file kListedFile.
     std::vector<dict::UserEntry> extra;
+    // The Korean of the listed names that stand alone (not hon).
+    std::map<std::string, std::string, std::less<>> listed;
+    // The Korean of the listed persons, hon ones too.
+    std::map<std::string, std::string, std::less<>> listedPersons;
     struct CachedLookup {
         std::unique_ptr<dict::UserText> plain;
         dict::KeySet confirmed;  // filtered accepted names, only for nonempty skip keys
@@ -85,9 +91,19 @@ struct LineLookup {
     std::vector<std::string> prose;  // LineFacts::prose
 };
 
-// Builds the context of the lines of a document (each may end in "\r").
+// The source index of the plain entries of listed names: later than every dictionary file, so
+// that a listed name replaces a plain row of its key.
+inline constexpr int kListedFile = 1 << 30;
+
+// Builds the context of the lines of a document (each may end in "\r"), with the names of
+// list (null for none).
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
-                                               bool extraBuiltin = false);
+                                               bool extraBuiltin = false, const names::List* list = nullptr);
+
+// The names list would add for the document of lines: the registry's accepted names that list
+// lacks, in the list format, one per line.
+std::string ProposeNames(const dict::Snapshot& snap, std::span<const std::string> lines,
+                         const names::List* list = nullptr);
 
 // The facts of one line of the document; line is the line without its "\r".
 LineFacts ReadLine(DocumentContext& doc, std::string_view line);

@@ -1293,7 +1293,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         return joined;
     }
     const std::unique_ptr<pipeline::DocumentContext> doc = pipeline::BuildDocument(
-        snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin);
+        snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin, options.names);
 
     Scratch s;
     word::SessionSenses senses;

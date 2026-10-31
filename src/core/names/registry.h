@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "core/dict/snapshot.h"
+#include "core/names/list.h"
 #include "core/text/kana.h"
 
 namespace hdTrans::names {
@@ -80,6 +81,9 @@ public:
     // Adds a readings table: JP <TAB> reading (kana or Hangul) per line. Returns false
     // when a line is malformed; the other lines are kept.
     bool LoadReadings(std::string_view text);
+    // Takes a listed name: a person (PersonKind) is an accepted name written name.ko, any
+    // other kind no accepted name. The lines' evidence is read as without it.
+    void List(const Listed& name);
     // Reads the evidence of one line.
     void Add(std::string_view line);
 
@@ -103,6 +107,9 @@ public:
     std::string Dict();
     // The Korean of an accepted surface, or "".
     std::string Render(std::string_view t);
+    // The accepted names that are not listed, as name-list lines with their Korean: a full
+    // name, a surname as family, a name only before an honorific with hon.
+    std::vector<Listed> Proposed();
     // The registered names of line (ruby markup removed), leftmost-longest, that fill
     // their kanji or katakana run.
     std::vector<Occurrence> Occurrences(std::string_view line);
@@ -177,6 +184,7 @@ private:
     void SetReading(const std::string& key, const std::string& value);
     void SetActor(const std::string& key, const std::string& value);
     const dict::Snapshot* snap_;
+    std::map<std::string, Listed> listed_;
     struct Tables {
         std::map<std::string, std::string> readings;  // surface to reading or Hangul
         std::map<std::string, std::string> fixed;     // plain-dictionary name renderings

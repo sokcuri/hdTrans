@@ -1239,6 +1239,28 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         }
         const size_t end = i;
         i += honorific.size();
+        // A listed kana name before the honorific is the name, written as listed (にはみみちゃん,
+        // もしもしみみちゃん), but a kin term stays one (にいちゃん).
+        bool listed = false;
+        if (ctx.listed != nullptr) {
+            size_t from = end;
+            while (from > at) {
+                const text::Rune r = LastRune(text.substr(0, from));
+                if (!NicknameRune(r.cp) || r.size == 0 || r.size > from) break;
+                from -= r.size;
+            }
+            for (; from < end; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
+                const auto l = ctx.listed->find(text.substr(from, end - from));
+                if (l == ctx.listed->end()) continue;
+                if (dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), l->first)) break;
+                if (from > at) output::Add(out, text.substr(at, from - at));
+                out.push_back({l->second, output::SpanWord});
+                at = end;
+                listed = true;
+                break;
+            }
+        }
+        if (listed) continue;
         const size_t start = NicknameStart(text, end, spanBefore && at == 0, snap);
         if (start == std::string_view::npos || start < at) continue;
         const std::string_view name = text.substr(start, end - start);

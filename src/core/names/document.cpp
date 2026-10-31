@@ -167,7 +167,7 @@ const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view
 }  // namespace
 
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
-                                               bool extraBuiltin) {
+                                               bool extraBuiltin, const names::List* list) {
     std::vector<std::string> canonicalLines;
     if (std::any_of(lines.begin(), lines.end(), [](const std::string& line) {
             return line.find("゙") != std::string::npos || line.find("゚") != std::string::npos;
@@ -183,6 +183,21 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     doc->codes = std::make_unique<dict::CodeTable>();
     doc->registry = std::make_unique<names::Registry>(doc->data->registry);
     names::Registry& r = *doc->registry;
+    // The rows of the listed places, organizations and titles; the persons join the registry.
+    std::string listedRows;
+    std::set<std::string> listedKeys;
+    if (list != nullptr) {
+        for (const names::Listed& l : list->names) {
+            listedKeys.insert(l.ja);
+            if (!l.honorificOnly) doc->listed[l.ja] = l.ko;
+            r.List(l);
+            if (names::PersonKind(l.kind)) {
+                doc->listedPersons[l.ja] = l.ko;
+            } else {
+                listedRows += l.ja + "\t" + l.ko + "\t" + (l.kind == names::ListKind::Place ? "place" : "n") + "\n";
+            }
+        }
+    }
     for (const std::string& line : lines) r.Add(line);
 
     doc->registryKey = r.Key();
@@ -244,9 +259,23 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     const std::string registryDict = r.Dict();
     userdict::Context ctx{doc->codes.get(), &doc->families, &snap.Base()};
     doc->extra = userdict::Parse(registryDict, -1, ctx).entries;
+    for (dict::UserEntry& e : userdict::Parse(listedRows, -1, ctx).entries) doc->extra.push_back(std::move(e));
+    for (dict::UserEntry& e : doc->extra) {
+        if (listedKeys.count(e.key) > 0) e.file = kListedFile;
+    }
+    if (list != nullptr) {
+        for (const names::Listed& l : list->names) doc->key += std::string("\0listed\0", 8) + names::ListLine(l);
+    }
     for (dict::UserEntry& e : userdict::Parse(doc->historical, -1, ctx).entries) doc->extra.push_back(std::move(e));
     FinishCodes(*doc->codes);
     return doc;
+}
+
+std::string ProposeNames(const dict::Snapshot& snap, std::span<const std::string> lines, const names::List* list) {
+    const std::unique_ptr<DocumentContext> doc = BuildDocument(snap, lines, false, list);
+    std::string out;
+    for (const names::Listed& l : doc->registry->Proposed()) out += names::ListLine(l) + "\n";
+    return out;
 }
 
 namespace {
@@ -473,6 +502,11 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.persons = internal::PersonPlaces(*doc.snap, cues, doc.registry.get(), &doc.persons_);
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
+    // A listed name alone on its line is read as listed.
+    if (const auto l = doc.listed.find(names::internal::TrimLineSpace(facts.text)); !facts.wholeLine && l != doc.listed.end()) {
+        const std::size_t at = facts.text.find(l->first);
+        facts.wholeLine = facts.text.substr(0, at) + l->second + facts.text.substr(at + l->first.size());
+    }
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     // A name alone on its line is read by a reading written over it where the dictionary's name
     // spells another (龍生《たつき》 타츠키, not 타츠오).
@@ -514,7 +548,7 @@ LineLookup LookupOf(DocumentContext& doc, const LineFacts& facts) {
     if (found == doc.plainByKey.end()) {
         std::vector<dict::UserEntry> entries;
         for (const dict::UserEntry& e : doc.extra) {
-            if (!doc.data->dictKeys.contains(e.key) &&
+            if ((e.file == kListedFile || !doc.data->dictKeys.contains(e.key)) &&
                 !std::binary_search(facts.skip.begin(), facts.skip.end(), e.key)) entries.push_back(e);
         }
         DocumentContext::CachedLookup cached;
@@ -551,6 +585,7 @@ LineContext ContextOf(const DocumentContext& doc, const LineLookup& lookup) {
     ctx.named = &doc.named;
     ctx.prose = &doc.prose;
     ctx.lineProse = &lookup.prose;
+    if (!doc.listedPersons.empty()) ctx.listed = &doc.listedPersons;
     return ctx;
 }
 
