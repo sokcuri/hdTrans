@@ -567,12 +567,12 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     }
     constexpr int kNone = 1 << 20;
     const std::size_t n = bounds.size();
-    // The words at bounds[i]: the index in bounds of the end, whether the dictionary reads the
-    // word only as a person's name, and whether it is a common word (no reading as a proper noun
-    // nor in Latin letters, such as ホワイ WHY).
+    // The pieces at bounds[i]: the index in bounds of the end, whether the piece is a stray one (a
+    // word the dictionary reads only as a person's name, or kana read by their sound), and whether
+    // it is a common word (no reading as a proper noun nor in Latin letters, such as ホワイ WHY).
     struct Piece {
         std::size_t end;
-        bool person, common;
+        bool stray, common;
     };
     std::vector<std::vector<Piece>> pieces(n);
     for (std::size_t i = 0; i + 2 < n; i++) {
@@ -592,26 +592,27 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
             if (any) pieces[i].push_back({j, person, !proper});
         }
     }
-    // Kana no dictionary word starts at are read by their sound up to where a word starts (or the
-    // run ends). Such a piece of two or more kana counts as a stray piece, as a name-only word does;
-    // one kana, or a piece that starts with ー, ン or a small kana, belongs to the word before it
-    // (ジャーニー|ズ, データベースサーバ|ー, フルーティ|ング).
+    // Kana where no dictionary word is found are read by their sound up to where a word starts (or
+    // the run ends). Such a piece counts as a stray piece when it ends the run and has two or more
+    // kana, the first not ー, ン or a small kana; one kana or such a start belongs to the word before
+    // it (ジャーニー|ズ, データベースサーバ|ー, フルーティ|ング), and a piece inside the run may be a part
+    // of a word the dictionary lacks (ゴールド|アーキッド).
     for (std::size_t i = 0; i + 1 < n; i++) {
         if (!pieces[i].empty()) continue;
         std::size_t j = i + 1;
         while (j + 1 < n && pieces[j].empty()) j++;
         const char32_t r = text::DecodeRune(text.substr(bounds[i])).cp;
         const bool bound = r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos;
-        pieces[i].push_back({j, j - i >= 2 && !bound, false});
+        pieces[i].push_back({j, j - i >= 2 && !bound && j == n - 1, false});
     }
-    // persons[i][w]: the fewest person words of a cover of the run from bounds[i] by w words.
+    // persons[i][w]: the fewest stray pieces of a cover of the run from bounds[i] by w pieces.
     std::vector<std::vector<int>> persons(n, std::vector<int>(n, kNone));
     persons[n - 1][0] = 0;
     for (std::size_t i = n - 1; i-- > 0;) {
         for (const Piece& p : pieces[i]) {
             for (std::size_t w = 0; w + 1 < n; w++) {
                 if (persons[p.end][w] == kNone) continue;
-                persons[i][w + 1] = std::min(persons[i][w + 1], persons[p.end][w] + (p.person ? 1 : 0));
+                persons[i][w + 1] = std::min(persons[i][w + 1], persons[p.end][w] + (p.stray ? 1 : 0));
             }
         }
     }
@@ -619,7 +620,7 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     std::size_t words = 0;
     int greedyPersons = kNone;
     for (const Piece& p : pieces[0]) {
-        if (bounds[p.end] != greedy || p.person) continue;
+        if (bounds[p.end] != greedy || p.stray) continue;
         for (std::size_t w = 0; w + 1 < n && greedyPersons == kNone; w++) {
             if (persons[p.end][w] != kNone) {
                 words = w + 1;

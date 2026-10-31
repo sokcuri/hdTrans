@@ -41,3 +41,6 @@ segmentation:katakana-cover	俺はボディスポンジにボディソープを�
 segmentation:katakana-cover	シングルスターのパーティだったらしい。	has:싱글 스타의	fix	lookup
 segmentation:katakana-cover	オールドレインとは、与えたダメージに応じて回復するパッシブスキルだ。	has:올 드레인이란	fix	lookup
 segmentation:katakana-cover	蜥蜴は、ビックリザード、ハイリザード、ダッシュリザード、の３種、悩んだが、ハイリザードで。	has:빅 리자드	fix	lookup
+segmentation:katakana-cover	ゴールドアーキッドの花。	has:고르드아킷드	keep	lookup
+segmentation:katakana-cover	俺はあんまり詳しく無いから分からないのだが、よく企画部の女子達ががキャーキャーゆってるジャーニーズクラブの若手のアイドルみたいな顔をしている。	has:자니즈크라브	keep	lookup
+segmentation:katakana-cover	「カシアス、アロイス。ともに合力し、フルーティング城砦をよくぞ守ってくれた」	has:후루팅 성채	keep	lookup
