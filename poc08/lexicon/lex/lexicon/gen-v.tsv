@@ -95,14 +95,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 暴き出す	あばきだす	v5	1	들추어내다				u	w	
 暴れる	あばれる	v1	1	날뛰다				u	b	
 暴れる	あばれる	v1	2	마음껏 뛰다				u	b	
-浴びる	あびる	v1	1	뒤집어 쓰다				u	b	
-浴びる	あびる	v1	2	받다				u	b	
-浴びる	あびる	v1	3	뒤집어쓰다				u	b	
-浴びる	あびる	v1	4	하다	after=シャワー			u	b	rule:3562 +unmapped
-浴びる	あびる	v1	5	하다	arg=シャワー|風呂|Shower			u	x	senses
-浴びる	あびる	v1	6	쬐다	arg=太陽|日差し|日光|日|陽光|朝日			u	x	senses
-浴びる	あびる	v1	7	하다	arg=シャワー|風呂|水			u	x	senses
-浴びる	あびる	v1	8	쬐다	arg=日差し|日光|太陽|朝日|日			u	x	senses
 溢れる	あふれる	v1	1	넘치다				u	b	
 溢れる	あふれる	v1	2	흘러넘치다				u	b	
 溢れる	あふれる	v1	3	새어 나오다	arg=言葉|声|本音			u	x	senses
@@ -1067,9 +1059,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 惟る	おもんみる	v1	3	잘 생각하다				u	b	
 及ぶ	およぶ	v5	1	미치다				u	b	
 及ぶ	およぶ	v5	2	이르다				u	b	rule:2255 +unmapped
-泳ぐ	およぐ	v5	1	헤엄치다				u	b	
-泳ぐ	およぐ	v5	2	흔들리다	arg=目|視線			u	x	senses
-泳ぐ	およぐ	v5	3	흔들리다	arg=目|視線|瞳			u	x	senses
 及ぼす	およぼす	v5	1	끼치다				u	w	
 及ぼす	およぼす	v5	2	미치다				u	b	
 及ぼす	およぼす	v5	3	미치게 하다				u	b	
@@ -1230,7 +1219,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 兼ねる	かねる	v1	1	겸하다				u	b	
 兼ねる	かねる	v1	2	어렵다				u	b	rule:4088 +unmapped assigns-neighbour
 庇う	かばう	v5	1	감싸다				u	b	
-被る	かぶる	v5	1	쓰다				u	b	
 被せる	かぶせる	v1	1	씌우다				u	b	
 被せる	かぶせる	v1	2	뒤집어 씌우다				u	b	rule:914 +unmapped
 齧り付く	かぶりつく	v5	1	베어 물다				u	wl	
@@ -1416,8 +1404,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 汲み出す	くみだす	v5	1	퍼내다				u	w	
 汲み出す	くみだす	v5	2	퍼 내다				u	b	
 汲み干す	くみほす	v5	1	퍼내다				u	b	
-曇る	くもる	v5	1	흐려지다				u	b	
-曇る	くもる	v5	2	흐리다				u	b	
 曇らす	くもらす	v5	1	흐리게 하다				u	b	
 燻る	くゆる	v5	1	연기나다				u	b	
 眩む	くらむ	v5	1	어두워지다				u	b	
@@ -3911,7 +3897,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 鳴らす	ならす	v5	5	튕기다	arg=指			u	x	senses
 倣う	ならう	v5	1	배우다				u	b	
 倣う	ならう	v5	2	모방하다				u	b	
-並べる	ならべる	v1	1	늘어놓다				u	b	
 成り立つ	なりたつ	v5	1	이루어지다				u	b	
 成り立つ	なりたつ	v5	2	성립되다				u	b	
 成り立つ	なりたつ	v5	3	성립하다				u	b	
@@ -3947,7 +3932,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 睨み合う	にらみあう	v5	2	대치하다				u	w	
 睨み合わせる	にらみあわせる	v1	1	견주어 보다				u	b	
 睨める	にらめる	v1	1	노려보다				u	b	
-脱ぐ	ぬぐ	v5	1	벗다				u	b	
 ぬかる	ぬかる	v5	1	질퍽거리다				u	b	
 拭う	ぬぐう	v5	1	닦다				u	b	
 拭う	ぬぐう	v5	2	떨치다	arg=不安|疑念|違和感|印象|疑い|疑惑|恐怖|懸念			u	x	senses
@@ -4025,9 +4009,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 乗り出す	のりだす	v5	4	개입하다				u	b	
 乗り出す	のりだす	v5	5	타고 나아가다				u	b	
 乗り出す	のりだす	v5	6	내밀다	arg=身			u	x	senses
-履く	はく	v5	1	입다				u	b	
-履く	はく	v5	2	신다				u	b	
-履く	はく	v5	3	쓸다				u	b	rule:1708 +unmapped
 剥ぐ	はぐ	v5	1	벗기다				u	b	
 這い出す	はいだす	v5	1	기기 시작하다				u	b	
 這い出す	はいだす	v5	2	기어 나오다				u	b	
@@ -4440,7 +4421,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 見掛ける	みかける	v1	2	보이다				u	b	
 見掛ける	みかける	v1	3	눈에 띄다				u	b	
 見掛ける	みかける	v1	4	보기 시작하다				u	b	rule:3419 +unmapped
-磨く	みがく	v5	1	닦다				u	b	
 見せ掛ける	みせかける	v1	1	가장하다				u	b	
 見せ掛ける	みせかける	v1	2	보이게 하다				u	b	rule:3408 +unmapped assigns-neighbour
 見せ付ける	みせつける	v1	1	과시하다				u	b	
@@ -5149,11 +5129,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 吠え立てる	ほえたてる	v1	1	짖어대다				u	w	
 含まる	ふくまる	v5	1	포함하다				u	b	
 含める	ふくめる	v1	1	포함하다				u	b	
-吸う	すう	v5	1	들이마시다				u	b	
-吸う	すう	v5	2	피우다				u	b	rule:907 +unmapped
-吸う	すう	v5	3	빨아들이다				u	b	rule:2299 +unmapped
-吸う	すう	v5	4	빨다	arg=母乳|乳|おっぱい|乳首			u	x	senses
-吸う	すう	v5	5	빨다	arg=血			u	x	senses
 吸い付く	すいつく	v5	1	들러 붙다				u	b	
 吸い付く	すいつく	v5	2	달라붙다				u	b	
 吹かす	ふかす	v5	1	피우다				u	x	
@@ -5227,8 +5202,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 問い合わせる	といあわせる	v1	1	문의하다				u	b	
 問い直す	といなおす	v5	1	되묻다				u	w	
 啓する	けいする	vs	1	말씀드리다				u	b	
-鳴く	なく	v5	1	우다				u	b	
-鳴く	なく	v5	2	울다				u	b	
 善がる	よがる	v5	1	좋아하다				u	b	
 喫する	きっする	vs	1	마시다				u	b	
 喫する	きっする	vs	2	피우다				u	b	
@@ -5586,9 +5559,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 弾む	はずむ	v5	1	튀다				u	b	
 弾む	はずむ	v5	2	들뜨다				u	b	
 弾む	はずむ	v5	3	활기를 띠다				u	b	
-弾く	ひく	v5	1	연주하다				u	b	rule:406 +unmapped
-弾く	ひく	v5	2	튕기다	arg=弦|コイン|指			u	x	senses
-弾く	ひく	v5	3	활기를 띠다	arg=会話			u	x	senses
 引き鳴らす	ひきならす	v5	1	타다				u	b	
 弾く	ひく	v1	1	터지다				u	wl	
 弾く	ひく	v1	2	튀다				u	b	
@@ -6038,8 +6008,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 時化る	しける	v1	1	거칠어지다				u	b	
 晴らす	はらす	v5	1	풀다				u	b	
 晴らす	はらす	v5	2	개게 하다				u	b	
-晴れる	はれる	v1	1	개이다				u	b	
-晴れる	はれる	v1	2	걷히다	arg=霧|靄|もや|霞|雲|煙			u	x	senses
 晴れ上がる	はれあがる	v5	1	맑게 개이다				u	b	
 暇取る	ひまどる	v5	1	시간이 걸리다				u	w	
 暮れる	くれる	v1	1	저물다				u	b	
@@ -6047,11 +6015,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 暴く	あばく	v5	1	폭로하다				u	b	
 暴く	あばく	v5	2	폭로내다				u	b	
 暴れ回る	あばれまわる	v5	1	마구 설치다				u	w	
-曲がる	まがる	v5	1	구불거리다				u	b	
-曲がる	まがる	v5	2	구부러지다				u	b	
-曲がる	まがる	v5	3	돌다				u	b	
-曲がる	まがる	v5	4	기울다				u	b	
-曲がる	まがる	v5	5	비뚤어지다				u	b	rule:643 +unmapped
 曲がりくねる	まがりくねる	v5	1	구부러지다				u	w	
 更ける	ふける	v1	1	깊어지다				u	b	
 書き送る	かきおくる	v5	1	써서 보내다				u	w	
@@ -6638,7 +6601,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 群がる	むらがる	v5	2	모이다				u	b	
 群れる	むれる	v1	1	군집하다				u	b	rule:343 +unmapped assigns-neighbour
 羽ばたく	はばたく	v5	1	홰치다				u	b	
-習う	ならう	v5	1	배우다				u	b	
 習う	ならう	v1	1	배울 수 있다				u	b	rule:2124 +unmapped assigns-neighbour
 習わす	ならわす	v5	1	가르치다				u	b	
 翔る	かける	v5	1	비상하다				u	b	

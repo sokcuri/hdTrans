@@ -1,12 +1,16 @@
 #! classes
-# Named semantic classes for cues (obj=@headwear) and noun features (cls=@person). codes: 0.7 meaning codes whose rows seed the class.
+# Named semantic classes for cues (obj=@headwear) and noun features (cls=@person), curated by hand (v1).
+# A noun belongs to a class through its cls feature in the lexicon; a member of a class is also a member of every
+# ancestor. members: examples only. codes: 0.7 meaning codes whose rows seeded the class.
 class	parent	codes	members (examples)
 @entity			(root of concrete things)
 @abstract			(root of abstract things)
 @person	@entity	UAq UQf	人, 男, 女, 子, 彼, 先生, 兵士, 友達
 @person.kin	@person	UQf	父, 母, 兄, 姉, 弟, 妹, 娘, 息子, 夫, 妻
-@person.role	@person	UAq	医者, 店員, 騎士, 魔法使い, 社長, 王
+@person.role	@person	UAq	医者, 店員, 学生, 警官, 騎士, 社長, 王
 @person.higher	@person		先生, 先輩, 社長, 王, 陛下, 殿下, 姫, 様
+@person.close	@person		友達, 恋人, 彼女, 彼氏, 仲間, 味方, 親友
+@person.child	@person		子, 子供, 赤ちゃん, 男の子, 女の子
 @group	@entity	VGt	家族, 軍, 騎士団, パーティー, クラス, 部隊, チーム
 @organization	@group	QID QMS KNa	会社, 学校, ギルド, 政府, 警察, 組合
 @animal	@entity	QAA QAB QAC QAD QAE QAF QAG	犬, 猫, 鳥, 馬, 魚, 虫, 狼
@@ -14,65 +18,149 @@ class	parent	codes	members (examples)
 @plant	@entity	QAL QAN QAO QAM	木, 花, 草, 薔薇, 桜, 森
 @body	@entity	QHP	手, 足, 頭, 顔, 目, 口, 胸, 背中, 指
 @illness	@abstract	UTi QHp	病気, 風邪, 怪我, 熱, 傷
-@food	@entity		ご飯, パン, 肉, 料理, 弁当, 菓子, ケーキ
-@drink	@food		水, 茶, お茶, コーヒー, 酒, ジュース
-@meal	@event		朝食, 昼食, 夕食, 夕飯, ご飯, 食事
-@clothing	@entity		服, 制服, 上着, 着物, ドレス, シャツ, スカート
-@headwear	@clothing		帽子, ヘルメット, 冠, フード, 兜
-@eyewear	@clothing		眼鏡, サングラス, ゴーグル
-@footwear	@clothing		靴, 靴下, ブーツ, 下駄
-@accessory	@clothing		指輪, ネックレス, 腕輪, ピアス, 時計
-@tool	@entity	UTt	道具, 鍵, 鋏, 箒, ペン, 鉛筆
+@body.output	@body		涙, 汗, 血, 鼻血, 咳, くしゃみ, 欠伸, ため息
+@body.mark	@mark		傷, 痣, しわ, にきび, 跡
+@hair	@body		髪, 髪の毛, ひげ, 前髪
+@thing	@entity		物, 荷物, 本, 鞄, 傘, 鍵, 箱, プレゼント
+@food	@thing		ご飯, パン, 肉, 料理, 弁当, 菓子, ケーキ
+@drink	@food		水, 茶, お茶, コーヒー, 酒, ジュース, 牛乳
+@medicine	@thing		薬, 風邪薬, 錠剤
+@clothing	@thing		服, 制服, 上着, 着物, ドレス, シャツ, スカート
+@headwear	@clothing		帽子, ヘルメット, 冠, フード, 兜, 仮面
+@eyewear	@clothing		眼鏡, サングラス, ゴーグル, コンタクト
+@footwear	@clothing		靴, 靴下, ブーツ, 下駄, スリッパ
+@legwear	@clothing		ズボン, スカート, パンツ, ジーンズ
+@accessory	@clothing		指輪, ネックレス, 腕輪, ピアス, 時計, リボン
+@tool	@thing	UTt	道具, 鍵, 鋏, 箒, ペン, 鉛筆
+@writing.tool	@tool		ペン, 鉛筆, ボールペン, 万年筆, チョーク
 @weapon	@tool		剣, 刀, 槍, 弓, 銃, ナイフ, 盾
+@instrument	@tool		ピアノ, ギター, バイオリン, 太鼓, 笛, 琴
 @machine	@tool		機械, ロボット, エンジン, 装置
 @device	@machine		スマホ, 携帯, 電話, パソコン, テレビ, カメラ, ラジオ
+@phone	@device		電話, 携帯, スマホ
+@lighting	@device		電気, 明かり, 電灯, ライト, ランプ
+@appliance	@device		エアコン, 冷房, 暖房, ストーブ, 冷蔵庫, 洗濯機
+@container	@thing		箱, 袋, 瓶, 鞄, カップ, 皿, 籠, 財布
+@tableware	@container		皿, 茶碗, コップ, カップ, 箸, スプーン
+@document	@thing		手紙, 本, 書類, 資料, 日記, 地図, 契約書
+@message	@document		手紙, メール, メッセージ, 葉書, 連絡
+@picture	@document		写真, 絵, 画像, 映像, 動画
+@ticket	@document		切符, チケット, 券, 定期
+@toy	@thing		人形, おもちゃ, ぬいぐるみ, ボール, 積み木
 @vehicle	@entity	VTp UTp	車, 電車, 船, 馬車, 自転車, バス, 飛行機
 @furniture	@entity		机, 椅子, ベッド, 棚, テーブル, ソファ
 @seat	@furniture		椅子, ソファ, ベンチ, 席, 座席
 @bedding	@furniture		布団, 毛布, 枕, シーツ
-@container	@entity		箱, 袋, 瓶, 鞄, カップ, 皿, 籠
-@document	@entity		手紙, 本, 書類, 資料, 日記, 地図, 契約書
-@picture	@document		写真, 絵, 画像, 映像, 動画
-@music	@abstract	QMU QMu USo	音楽, 曲, 歌, レコード, CD
-@sound	@abstract	USo UHr	音, 声, 悲鳴, 歓声, 足音
-@shout	@sound		悲鳴, 歓声, 叫び, 大声, 声
-@language	@abstract	QLG	日本語, 英語, 言葉, 方言
-@money	@abstract	QMM	金, お金, 円, 代金, 給料, 料金
+@opening	@entity		ドア, 扉, 戸, 窓, 門, 蓋, カーテン, 引き出し
+@material	@entity	UGs	石, 木, 鉄, 金, 布, 紙
+@liquid	@material		水, お湯, 湯, 油, 液
+@seasoning	@food		塩, 砂糖, 醤油, 味噌, ソース, 胡椒
+@place	@entity	QCT	所, 場所, 町, 村, 国, 部屋, 家, 学校, 店, 外
+@place.upper	@place		屋上, 二階, 上, 山, 丘, 塔
+@building	@place		家, 城, 店, 学校, 病院, 教会, 塔, ビル
+@room	@place		部屋, 教室, 台所, 寝室, 廊下, 玄関, トイレ
+@facility	@building		店, 病院, 駅, 図書館, 銀行, ホテル
+@shop	@facility		店, 本屋, 八百屋, スーパー, コンビニ, 喫茶店
+@school	@facility		学校, 大学, 高校, 中学, 小学校, 幼稚園
+@house	@building		家, 実家, 屋敷, 部屋, 住まい
+@bath	@place		風呂, お風呂, シャワー, 温泉, 湯船
+@road	@place		道, 道路, 通り, 橋, 角, 交差点, 廊下
+@town	@place		町, 村, 街, 都市, 国, 東京
+@nature	@place		山, 川, 海, 森, 空, 湖
+@water.body	@nature		川, 海, 湖, 池, プール
+@sky	@nature		空, 太陽, 月, 星, 雲
+@position	@place		上, 下, 中, 外, 前, 後ろ, 隣, 横, 近く, 側
 @time	@abstract	UMe	時, 時間, 日, 朝, 夜, 今日, 明日, 年, 季節
+@time.point	@time		今日, 明日, 昨日, 朝, 昼, 夜, 今, 今年, 来週
+@duration	@time		時間, 一時間, 年月, 間, 数日, 何年, しばらく
 @period	@time	KSt	期間, 間, 頃, 時代, 春, 夏, 秋, 冬
+@season	@period		春, 夏, 秋, 冬
+@leisure	@time		暇, 余裕, 休み, 休日
 @event	@abstract		事件, 祭り, 試合, 戦い, 会議, 式, パーティー
-@task	@event		宿題, 仕事, 課題, 作業, 任務, 依頼
+@meal	@event		朝食, 昼食, 夕食, 夕飯, ご飯, 食事, 朝ご飯
+@task	@event		宿題, 仕事, 課題, 作業, 任務, 依頼, 準備
 @activity	@event		勉強, 運動, 料理, 掃除, 練習, 訓練
 @sport	@activity	SPt	野球, サッカー, テニス, 水泳, 試合
+@game	@activity		ゲーム, 遊び, 将棋, トランプ, パズル
+@lesson	@activity		授業, 講義, レッスン, 稽古
+@exam	@event		試験, テスト, 面接, 入試, 検査
+@competition	@event		大会, 試合, 選挙, コンテスト, 戦い
+@incident	@event		事件, 事故, 地震, 火事, 戦争, 問題
+@ceremony	@event		式, 結婚式, 葬式, 祭り, 入学式
+@show	@event		番組, 映画, ドラマ, アニメ, 芝居, 劇
 @skill	@abstract	UTt	技, 技術, 魔法, 剣術, 才能, 能力
-@magic	@skill		魔法, 魔術, 呪文, 結界, 呪い
+@magic	@skill		魔法, 魔術, 呪文, 結界, 呪い, 暗示
 @subject.school	@abstract	USu	数学, 英語, 歴史, 国語, 科学
-@qualification	@abstract		資格, 免許, 学位, 単位
+@qualification	@abstract		資格, 免許, 学位, 単位, 賞, 一位
 @rule	@abstract	ULw UMN ULm	法, 規則, 法律, 校則, 約束, ルール
 @info	@abstract		話, 情報, 噂, 名前, 住所, 理由, 意見, 結果, 答え
 @question	@info		質問, 問題, 疑問, 謎
 @topic	@info		話題, 件, 問題, 点, 事情
+@result	@info		結果, 答え, 結論, 成果, 判決
+@rumor	@info		噂, 評判, 悪評
 @idea	@abstract	UTh USm	考え, 意見, 思想, 計画, 予定
+@plan	@idea		計画, 予定, 方針, 目処, 見通し
 @speech	@abstract	UTs USe	言葉, 話, 返事, 挨拶, 嘘, 冗談, 文句
+@request	@speech		頼み, 願い, 提案, 要求, 申し出, 誘い, 条件
+@order	@speech		命令, 指示, 許可, 指令, 言いつけ
 @emotion	@abstract	UFl SFl	気持ち, 感情, 怒り, 喜び, 悲しみ, 不安
 @mood	@emotion		気分, 機嫌, 雰囲気, 疑い, 誤解
+@trouble	@abstract		迷惑, 心配, 負担, 苦労, 手間
+@damage	@abstract		被害, ダメージ, 損害, 攻撃, 衝撃
+@strength	@abstract		力, 元気, 勇気, 体力, 自信, 実力, 本気
+@habit	@abstract		習慣, 癖, 趣味
 @relation	@abstract	UXm	関係, 縁, 仲, 友情, 恋
-@place	@entity	QCT	所, 場所, 町, 村, 国, 部屋, 家, 学校, 店, 外
-@place.upper	@place		屋上, 二階, 上, 山, 丘, 塔
-@building	@place		家, 城, 店, 学校, 病院, 教会, 塔, ビル
-@room	@place		部屋, 教室, 台所, 寝室, 廊下, 玄関
-@facility	@building		店, 病院, 駅, 図書館, 銀行, ホテル
-@house	@building		家, 実家, 屋敷, 部屋, 住まい
-@nature	@place		山, 川, 海, 森, 空, 湖
 @weather	@abstract		天気, 雨, 雪, 雲, 風, 霧, 嵐
 @direction	@abstract	UDr UXg	前, 後ろ, 上, 下, 右, 左, 北, 南, 方向
 @color	@abstract	UCr	色, 赤, 青, 白, 黒, 緑
-@material	@entity	UGs	石, 木, 鉄, 金, 布, 紙, 水
 @light	@abstract	UXl	光, 明かり, 火, 炎, 煙
+@sound	@abstract	USo UHr	音, 声, 悲鳴, 歓声, 足音
+@shout	@sound		悲鳴, 歓声, 叫び, 大声, 声
+@music	@sound	QMU QMu	音楽, 曲, 歌, レコード, CD
+@language	@abstract	QLG	日本語, 英語, 言葉, 方言
+@money	@abstract	QMM	金, お金, 円, 代金, 給料, 料金
 @quantity	@abstract	UXf UXb UXd UXw UXt UXs	数, 量, 重さ, 長さ, 速さ, 温度, 距離
 @number	@quantity		一, 二, 三, 数字
 @shape	@abstract		形, 丸, 線, 点, 角
 @thing.made	@entity		作品, 料理, 建物, 道具, 店
 @object.long	@entity		剣, 棒, 槍, 指, 舌, ペン, 髪, 糸
-@game	@activity		ゲーム, 遊び, 将棋, トランプ, パズル
 @crime	@event	HGu UGu UPp	犯罪, 罪, 盗み, 殺人, 罰
+@counter	@number		人, 個, 回, 枚, 本, 匹, 歳, 円 (counter suffixes after a numeral)
+@sign	@abstract		気配, 兆し, 様子, 動き, 隙 (an outward sign someone or something shows)
+@motion	@abstract		動き, 反応, 速度, 動作, 歩み, ペース (a movement whose speed or manner is judged)
+@bottle	@container		缶, 瓶, ボトル, 缶詰, 樽 (sealed containers)
+@tobacco	@thing		タバコ, 煙草, 葉巻, 煙管 (smoking products)
+@mist	@weather		霧, 靄, 霞, 湯気, 煙 (haze, fog, steam)
+@stance	@abstract		態度, 姿勢, ポーズ, 体勢, 構え, 措置, 立場, 態勢, 行動, 戦法 (a posture, attitude or course of action one adopts: 取る 취하다)
+@rest	@activity		休憩, 休息, 小休止, 休止, 仮眠, 睡眠, 一休み, 休養, 昼寝 (a pause or rest one takes)
+@record	@info		メモ, 記録, アンケート, 点呼, 採決, 多数決, 出欠 (notes, records and polls one takes)
+@score	@result		点, 点数, 成績, 得点, 満点, 評価, 赤点, 百点, 偏差値, 評点 (a mark or grade one gets or gives)
+@price	@money		値段, 価格, 値, 定価, 相場, 単価, 値打ち (the price or value put on something)
+@brew	@drink		茶, お茶, 紅茶, 緑茶, コーヒー, ココア, 抹茶, 麦茶, ほうじ茶, 番茶, カフェオレ, ハーブティー (hot drinks one makes by steeping or brewing)
+@cosmetic	@thing		クリーム, 化粧水, 乳液, 口紅, リップ, 日焼け止め, ファンデーション, マニキュア, ローション (things one puts on the skin)
+@settlement	@abstract		けじめ, 区切り, 決着, 結末, 落ち, けり, 始末, 区別, 片 (a closure or decision one settles: 付ける 짓다)
+@personal.info	@info		名前, 住所, 年齢, 電話番号, 連絡先, 誕生日, 好み, 都合, 予定, 趣味, 職業, 身長, 体重, 血液型
+@readiness	@abstract		準備, 用意, 支度, 覚悟, 心構え, 身支度, 段取り
+@character	@abstract		性格, 個性, 本性, 本音, 人柄, 性分, 地
+@dirt	@material		泥, 汚れ, 埃, インク, ペンキ, 墨, 煤, 染み, 絵の具, 口紅
+@mark	@entity		跡, 傷, 傷跡, 焦げ目, 折り目, 皺, 寝癖, 痕, 凹み, ひび
+@attachment	@thing		フリル, リボン, レース, ボタン, ポケット, 飾り, 鈴, フード, 紐, 取っ手, タグ, 名札
+@side	@abstract		味方, 敵, 側, 陣営, 派, どっち, どちら, 敵側, 味方側
+@post	@abstract		役職, ポスト, 職務, 役目, 持ち場, 要職
+@guess	@idea		想像, 予想, 予測, 察し, 見当, 目星, 区別, 見分け, 判別, 推測
+@call	@speech		通話, 通信, 回線, 交信, 放送
+@wrapping	@thing		封, 包装, 包み, 包装紙, 包装フィルム, 袋, 封筒, パッケージ, ラップ
+@attention	@abstract		注意, 興味, 関心, 注目, 人目, 視線, 同情, 好奇心, 歓心
+@firearm	@weapon		銃, 拳銃, 鉄砲, ライフル, ハンドガン, ピストル, 狙撃銃, 機関銃, 大砲, ショットガン
+@ammunition	@weapon		弾, 弾丸, 銃弾, 砲弾, ミサイル
+@protest	@speech		異論, 異議, 反対, 反論, 不満, 苦情, 批判, 抗議, 文句, 要望, 声明, 犯行声明
+@control	@thing		電源, スイッチ, アラーム, タイマー, ディスプレイ, モニター, 画面, 無線, ブレーカー
+@harm	@damage		被害, 損害, ダメージ, 打撃, 損失, 痛手, 重傷, 深手, 傷
+@blow	@damage		弾, 銃弾, 弾丸, 矢, 蹴り, パンチ, 一撃, 砲弾, 直撃弾, 流れ弾, 平手, ビンタ
+@abuse	@damage		暴力, 嫌がらせ, いじめ, 虐待, 暴行, 拷問, セクハラ, パワハラ, 迫害, 仕打ち
+@lecture	@lesson		授業, 講義, 講座, 補習, セミナー, ゼミ
+@wind	@weather		風, 夜風, 潮風, そよ風, 北風, 隙間風, 外気, 夜気, 冷気
+@lottery	@abstract		くじ, 宝くじ, 福引き, 抽選, 懸賞, 一等, 二等, 特賞, 賞品, 景品
+@duty	@task		サポート, 支援, 援護, 応援, 補佐, 裏方, 守り, 司会, 見張り, 警備, 護衛, 説得, 斥候, 偵察, 広報, 雑務
+@heard	@speech		説明, 話, 言葉, 忠告, 説教, 小言, 助言, アドバイス
+@hand	@body		手, 指, 指先, 手のひら, 掌, 手の甲, 人差し指, 親指, 中指, 小指, 素手

@@ -308,7 +308,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 頭光	ずこう	n	1	쓰무리노 히카루				u	c+b	from-names
 駅家	えきか	n	1	에키야				u	c+b	from-names
 高大	こうだい	n	1	고려대				u	c+b	from-names
-麦茶	むぎちゃ	n	1	보리차				u	c+b	from-names
+麦茶	むぎちゃ	n	1	보리차			cls=@brew	u	c+b	from-names
 黄石	こうせき	n	1	황스				u	c+b	from-names
 龍飛	りょうひ	n	1	용비				u	c+nw	from-names
 龍飛	りょうひ	n	2	닷피				u	c+b	from-names
@@ -603,7 +603,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 キャリパー	きゃりぱー	n	1	캘리퍼				u	c+np	from-names
 キューレット	きゅーれっと	n	1	큐렛				u	c+np	from-names
 キリム	きりむ	n	1	키림				u	c+np	from-names
-金	きん	n	1	킨				u	c+nw	from-names
+金	きん	n	1	킨			cls=@money	u	c+nw	from-names
 きんき	きんき	n	1	킨키				u	c+np	from-names
 キンダー	きんだー	n	1	킨더				u	c+np	from-names
 ギミー	ぎみー	n	1	기미				u	c+np	from-names
@@ -861,7 +861,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 タイド	たいど	n	1	타이드				u	c+np	from-names
 タイニー	たいにー	n	1	타이니				u	c+np	from-names
 タオマフ	たおまふ	n	1	타월 머플러				u	c+np	from-names
-タオルケット	たおるけっと	n	1	타월 케트				u	c+np	from-names
+タオルケット	たおるけっと	n	1	타월 케트			cls=@bedding	u	c+np	from-names
 たかさご	たかさご	n	1	타카사고				u	c+np	from-names
 タカビー	たかびー	na	1	타카비				u	c+np	from-names
 たかべ	たかべ	n	1	타카베				u	c+np	from-names
@@ -1100,7 +1100,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 パリダカ	ぱりだか	n	1	다카르 랠리				u	c+nw	from-names
 パリーグ	ぱりーぐ	n	1	퍼시픽 리그				u	c+np	from-names
 パロマ	ぱろま	n	1	파로마				u	c+np	from-names
-パワハラ	ぱわはら	n	1	파워하라				u	c+np	from-names
+パワハラ	ぱわはら	n	1	파워하라			cls=@abuse	u	c+np	from-names
 パワポケ	ぱわぽけ	n	1	파워포켓				u	c+np	from-names
 パワード	ぱわーど	n	1	파워드				u	c+np	from-names
 パンツァーシュレック	ぱんつぁーしゅれっく	n	1	팬저슈렉				u	c+nw	from-names
@@ -1245,7 +1245,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ペピータ	ぺぴーた	n	1	페피타				u	c+np	from-names
 ペペロミア	ぺぺろみあ	n	1	페페로미아				u	c+np	from-names
 ペペロンチーノ	ぺぺろんちーの	n	1	스파게티 알리오 올리오				u	c+np	from-names
-縁	へり	n	1	페리				u	c+np	from-names
+縁	へり	n	1	페리			cls=@relation	u	c+np	from-names
 ペルシュロン	ぺるしゅろん	n	1	페르슈롱				u	c+np	from-names
 ペレグリヌス	ぺれぐりぬす	n	1	페레그리누스				u	c+nw	from-names
 ペープサート	ぺーぷさーと	n	1	페프사트				u	c+np	from-names
@@ -1499,7 +1499,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 入渠	にゅうきょ	n	1	입거				u	c+np	from-names
 公女	こうじょ	n	1	공녀				u	c+np	from-names
 公王	こうおう	n	1	공왕				u	c+np	from-names
-再戦	さいせん	n	1	재전				u	c+np	from-names
+再戦	さいせん	n	1	재전			cls=@competition	u	c+np	from-names
 冠名	かんむりめい	n	1	관명				u	c+np	from-names
 凡愚	ぼんぐ	n	1	범우				u	c+np	from-names
 凶運	きょううん	n	1	흉운				u	c+np	from-names

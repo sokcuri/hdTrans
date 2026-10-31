@@ -8,6 +8,10 @@ conjugate (not a dictionary form, unknown or non-unique class, homograph without
 spelling, junk); surface keys (a lexicon ja that is not one analyzer lemma and is not marked `lu`);
 cue syntax, slots and classes; multi-sense entries whose later senses have no cue; phrase slots; names.
 Errors on st=r/m rows and schema errors fail the run; on st=u rows they are counted per check.
+Class rule (strict on st=r, counted on st=m/u): an alternative list in a cue names at most two literal lemmas, and
+two literal lemmas that share a specific class (a leaf, or a class at depth 3 or more; through the cls feature of
+their entries) must be written as the class.
+Lemma features: vol, asp, te, neg (suppletive negative), cls, anim, ni, num, lu (closed value sets on st=r rows).
 """
 import argparse
 import collections
@@ -124,6 +128,36 @@ def main():
                     R.add('schema-columns', f, True)
             r['_file'] = os.path.basename(f)
             lex_rows.append(r)
+    # class membership from the cls feature of each entry's first row (with ancestors)
+    def ancestors(c):
+        out = []
+        while c and c in classes and c not in out:
+            out.append(c)
+            c = classes[c]
+        return out
+    member = collections.defaultdict(set)
+    for r in lex_rows:
+        if r['sense'] == '1':
+            for f in r['feat'].split():
+                if f.startswith('cls='):
+                    for v in f[4:].split('|'):
+                        member[r['ja']].update(c for c in ancestors(v) if classes.get(c))
+    parents_of = set(classes.values())
+    FEATS = {'vol': {'+', '-'}, 'asp': {'state', 'activity', 'change', 'instant', 'type4'},
+             'te': {'go', 'eo', 'past', 'simple'}, 'anim': {'+', '-'}, 'ni': {'-'}, 'num': {'native', 'sino'}}
+
+    def check_list(slot, vals, where, st):
+        lits = [v for v in vals if not v.startswith('@') and v != '-']
+        if slot in ('form', 'register', 'main.vol', 'domain') or len(lits) < 2:
+            return
+        if len(lits) >= 3:
+            R.add('cue-surface-list', where, st == 'r')
+        common = set.intersection(*[member.get(v, set()) for v in lits])
+        if common:
+            # strict when the shared class is specific: a leaf, or at depth 3 or more
+            specific = [c for c in common if c not in parents_of or len(ancestors(c)) >= 3]
+            R.add('cue-shared-class', where + ' → ' + '|'.join(sorted(common)), st == 'r' and bool(specific))
+
     entries = collections.OrderedDict()
     for r in lex_rows:
         lid = (r['ja'], r['yomi'], r['pos'])
@@ -176,6 +210,7 @@ def main():
                     for slot, vals in parse_cue(r[col]):
                         if slot not in SLOTS:
                             R.add('cue-slot', where + ' ' + r[col], strict)
+                        check_list(slot, vals, where + ' ' + r[col], r['st'])
                         for v in vals:
                             check_class(v, where + ' ' + r[col], strict)
                             if slot == 'form' and v not in FORMS:
@@ -183,6 +218,12 @@ def main():
                 except ValueError:
                     R.add('cue-syntax', where + ' ' + r[col], strict)
         for f in r['feat'].split():
+            k, _, v = f.partition('=')
+            if k == 'neg':
+                if not v or (r['pos'] != 'adv' and not v.endswith('다')):
+                    R.add('feat-value', where + ' ' + f, r['st'] == 'r')
+            elif r['st'] == 'r' and k != 'lu' and (k not in FEATS and k != 'cls' or k in FEATS and v not in FEATS[k]):
+                R.add('feat-value', where + ' ' + f, True)
             if f.startswith('cls='):
                 for v in f[4:].split('|'):
                     check_class(v, where, strict)
