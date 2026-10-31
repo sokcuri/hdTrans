@@ -32,3 +32,15 @@ segmentation:katakana-cover	スリーサイズ不明。	has:쓰리 사이즈	kee
 segmentation:katakana-cover	「光魔法………サウザンドホワイトレイ！！」	has:화이트 레이	keep	lookup
 segmentation:katakana-cover	シャンプーや、ボディソープの香りだけではない、嗅いでいるとふわふわ、どこかに連れて行かれそうな香り。	has:바디 워시	keep	lookup
 segmentation:katakana-cover	サクライフリースリー	사쿠라이 프리 쓰리	fix	lookup
+segmentation:katakana-cover	春香の前に２つのドーナツとアイスミルクティーを置く健司がその横に座った。	has:아이스 밀크티를	fix	lookup
+segmentation:katakana-cover	碓氷は普段はコーヒー派だが、今回はパンケーキもアイスミルクティーも竹ノ内がチョイスしたのだ。	has:아이스 밀크티도	fix	lookup
+segmentation:katakana-cover	アマレロにアイスミルクティーを出してもらい、のんびりと召喚リストを見ていた。	has:아이스 밀크티를	fix	lookup
+segmentation:katakana-cover	飲み物は３人ともアイスミルクティーだ。	has:아이스 밀크티다	fix	lookup
+segmentation:katakana-cover	このボディスポンジを使ったのだろうか。	has:보디 스펀지를	fix	lookup
+segmentation:katakana-cover	俺はボディスポンジにボディソープを染み込ませた。	has:보디 스펀지에	fix	lookup
+segmentation:katakana-cover	シングルスターのパーティだったらしい。	has:싱글 스타의	fix	lookup
+segmentation:katakana-cover	オールドレインとは、与えたダメージに応じて回復するパッシブスキルだ。	has:올 드레인이란	fix	lookup
+segmentation:katakana-cover	蜥蜴は、ビックリザード、ハイリザード、ダッシュリザード、の３種、悩んだが、ハイリザードで。	has:빅 리자드	fix	lookup
+segmentation:katakana-cover	ゴールドアーキッドの花。	has:고르드아킷드	keep	lookup
+segmentation:katakana-cover	俺はあんまり詳しく無いから分からないのだが、よく企画部の女子達ががキャーキャーゆってるジャーニーズクラブの若手のアイドルみたいな顔をしている。	has:자니즈크라브	keep	lookup
+segmentation:katakana-cover	「カシアス、アロイス。ともに合力し、フルーティング城砦をよくぞ守ってくれた」	has:후루팅 성채	keep	lookup

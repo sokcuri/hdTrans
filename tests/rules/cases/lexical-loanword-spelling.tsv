@@ -11,3 +11,5 @@ lookup:loanword-spelling	ワン、ツー、スリー！	has:쓰리	keep	lookup
 lookup:loanword-spelling	マークスリーを着た。	has:마크 쓰리	keep	lookup
 lookup:loanword-spelling	サーボユニットを交換した。	has:서보 유닛	fix	lookup
 lookup:loanword-spelling	サーモセット樹脂	has:서모셋	fix	lookup
+lookup:loanword-spelling	「よろしく、今日でコラボウィークを終える九重ヤイバだ」	has:콜라보 위크를	fix	lookup
+lookup:loanword-spelling	「ウィークリーダー」には﹇看破﹈の術式を組み込んだ。	has:「위크 리더」	fix	lookup
