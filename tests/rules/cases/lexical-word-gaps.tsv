@@ -154,6 +154,7 @@ dict:jisjk:95439	家を壊す。	lacks:철거	keep	defaults
 dict:jisjk:95439	部品を取り外す。	has:떼어	keep	defaults
 dict:jisjk:95439	壁を打ち壊す。	lacks:철거	keep	defaults
 dict:jisjk:95439	ゴミを取り除く。	lacks:철거	keep	defaults
+dict:jisjk:95439	しかし、この施設は取り壊されるのが確定してる物件なので、	has:철거되는	keep	defaults
 lexical:kainarasu	そのまま飼いならされて。。	has:길들여	fix	fixed
 lexical:kainarasu	（飼いならされていたとばかり思っていたのですが……）	has:길들여	fix	fixed
 lexical:kainarasu	「気にしないで。あの小鳥は私が飼いならしていたわけじゃないの」	has:길들이	fix	fixed
