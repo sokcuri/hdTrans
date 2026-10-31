@@ -346,6 +346,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         // follows the final consonant, (이)가)
         r.agent = col(f, "agent");
         if (!r.agent.empty() && r.slot != PackSlot::Voice) return fail("agent is read on voice rows only");
+        if (r.agent == "(이)") return fail("agent \"(이)\" is not a Korean particle in Hangul");
         for (const char32_t ch : userdict::internal::Runes(r.agent.starts_with("(이)") ? r.agent.substr(5) : r.agent))
             if ((ch < 0xAC00 || ch > 0xD7A3) && ch != U' ')
                 return fail("agent " + userdict::internal::Quote(r.agent) + " is not a Korean particle in Hangul");

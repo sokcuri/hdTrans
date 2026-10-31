@@ -87,6 +87,7 @@ HD_TEST(dict_pack_errors) {
         {"x\tsense\t本\tn\t\t책\t에게", "2: agent is read on voice rows only"},
         {"x\tvoice\t読む\tv5\t\tpassive\tby", "2: agent \"by\" is not a Korean particle in Hangul"},
         {"x\tvoice\t読む\tv5\t\tpassive\t가(이)", "2: agent \"가(이)\" is not a Korean particle in Hangul"},
+        {"x\tvoice\t読む\tv5\t\tpassive\t(이)", "2: agent \"(이)\" is not a Korean particle in Hangul"},
     };
     for (const auto& c : cases) {
         Families families;
