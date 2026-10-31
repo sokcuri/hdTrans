@@ -2,11 +2,11 @@
 
 Input: hdtrans08-ir --each --stages DIR (DIR/ir.jsonl: a doc record, then one line record per input line).
 Output per line: sentences (byte spans) and, per clause, the expectations the checks read:
-pol (neg|pos), negFn, force, tense, voice, bene, polite, modality, root (no parent), its sentence, and the
-tokens that carry numbers and person names.
+pol (neg|pos), negFn, force, tense, voice, bene, polite, modality, link, linkSub, its sentence, and the
+tokens that carry numbers and person names. Clause heads are not read (the clause link says whether a clause ends
+its sentence).
 """
 import json
-import os
 import re
 
 ENDS = set('。！？!?')
@@ -115,69 +115,18 @@ def numbers(rec):
     return out
 
 
-_SKIP = None
-
-
-def _skip():
-    """Proper nouns references do not transliterate (a table built by tools/build_names.py from dev references;
-    it lists names of the dev texts, so it stays outside the repository: path in HD8_QE_NAMES)."""
-    global _SKIP
-    if _SKIP is None:
-        _SKIP = set()
-        p = os.environ.get('HD8_QE_NAMES', '')
-        if p and os.path.exists(p):
-            for l in open(p, encoding='utf-8'):
-                if l.startswith('#'):
-                    continue
-                s, n, h = l.rstrip('\n').split('\t')
-                if int(h) * 2 < int(n):
-                    _SKIP.add(s)
-    return _SKIP
-
-
-def names(rec, all_kinds=False):
+def names(rec):
     """Person and place names the analyzer reads (UniDic 固有名詞, not organisations) with their readings."""
     out = []
     for t in rec.get('toks', []):
         ud = t.get('ud', '')
-        if ud.startswith('名詞-固有名詞') and not ud.startswith('名詞-固有名詞-組織') and t.get('reading') and \
-                (all_kinds or t['surf'] not in _skip()):
+        if ud.startswith('名詞-固有名詞') and not ud.startswith('名詞-固有名詞-組織') and t.get('reading'):
             out.append(dict(surf=t['surf'], reading=t['reading'], kind=ud.split('-')[2] if ud.count('-') >= 2 else ''))
     return out
 
 
-def load_decisions(path, feats=None, table=None):
-    """Decider classes per line: {line index: [(src byte, family, class, probabilities, realised)]}.
-    With feats (hd8decide --dump --docs output), negation and voice points are scored here from the tables:
-    the negation function (negfn.tsv), whether references write it as a negative (negreal.tsv), and the voice
-    of れる/られる (the W4 table, read without its 0.7.x feature: the gate judges any output on its own).
-    Without feats, path is hd8decide --decide --docs output."""
-    out = {}
-    if feats is None:
-        for l in open(path, encoding='utf-8'):
-            d = json.loads(l)
-            di = int(d['case'].split(':')[0])
-            out.setdefault(di, []).append((d['src'], d['family'], d['top'], {d['top']: d.get('margin', 1.0)}, None))
-        return out
-    import negfn
-    real = negfn.Table(negfn.REAL)
-    voice = negfn.Table(negfn.VOICE)
-    for l in open(feats, encoding='utf-8'):
-        key, tok, fam, src, fs = l.rstrip('\n').split('\t')
-        di = int(key.split(':')[0])
-        f = fs.split(' ')
-        if fam == 'neg':
-            p = table.probs(f)
-            out.setdefault(di, []).append((int(src), 'neg', max(p, key=p.get), p, real.probs(f)['NEG']))
-        elif fam == 'voice':
-            p = voice.probs(f)
-            out.setdefault(di, []).append((int(src), 'voice', max(p, key=p.get), p, None))
-    return out
-
-
-def expectations(rec, decisions=()):
-    """Per-line expectations: sentences and clause facts. decisions: the learned deciders' classes at their
-    points in this line ((src byte, family, class, margin) …), attached to the clause that holds the point."""
+def expectations(rec):
+    """Per-line expectations: sentences and clause facts (the features the L rules decided)."""
     if rec is None:
         return None
     sents = sentences(rec['src'])
@@ -188,31 +137,14 @@ def expectations(rec, decisions=()):
         end = toks[tk[-1]]['src'][1] if tk and tk[-1] < len(toks) else 0
         sent = next((k for k, (a, b) in enumerate(sents) if a < end <= b), len(sents) - 1)
         clauses.append(dict(
-            idx=ci, sent=sent, root='parent' not in c,
+            idx=ci, sent=sent,
             link=c.get('link', 'final'), pol=c.get('pol', 'pos'), negFn=c.get('negFn', 'none'),
             force=c.get('force', 'decl'), tense=c.get('tense', 'nonpast'), voice=c.get('voice', 'active'),
             bene=c.get('bene', 'none'), polite=c.get('polite', 'plain'), modality=c.get('modality', []),
+            linkSub=c.get('linkSub', ''),
             toks=[toks[k]['surf'] for k in tk if k < len(toks)]))
-    tokclause = {}
-    for c in clauses:
-        for k in clause_tokens(rec, rec['clauses'][c['idx']]):
-            tokclause.setdefault(k, c)
-    for c in clauses:
-        c['dec'] = {}
-    negs = []     # negation points: (sentence, class, clause index or -1, surface)
-    for b, fam, cls, probs, realised in decisions:
-        k = next((i for i, t in enumerate(toks) if t['src'][0] == b), None)
-        c = tokclause.get(k)
-        if c is not None:
-            c['dec'].setdefault(fam, cls)
-            c.setdefault('probs', {}).setdefault(fam, probs)
-        if fam == 'neg':
-            sent = next((j for j, (x, y) in enumerate(sents) if x <= b < y), len(sents) - 1)
-            negs.append(dict(sent=sent, cls=cls, probs=probs, realised=realised, clause=c['idx'] if c else -1,
-                             surf=toks[k]['surf'] if k is not None else ''))
     q = [any(ch in '？?' for ch in rec['src'].encode()[a:b].decode('utf-8', 'replace')) for a, b in sents]
     for c in clauses:
         c['qmark'] = q[c['sent']] if c['sent'] < len(q) else False
         c['rare'] = any(t in ('れ', 'られ', 'れる', 'られる', 'れれ') for t in c['toks'])
-    return dict(src=rec['src'], sents=sents, clauses=clauses, numbers=numbers(rec), names=names(rec), negs=negs,
-                learned='neg' in {d[1] for d in decisions})
+    return dict(src=rec['src'], sents=sents, clauses=clauses, numbers=numbers(rec), names=names(rec))

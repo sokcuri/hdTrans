@@ -1,0 +1,38 @@
+#! check
+# QE checks (G): what a Korean line must realise, given the Japanese clause features the rules decided (L: aux.tsv
+# folding, links, negFn). A row flags a line; it never reroutes. Spec: spec/checks.md. Cases: check.cases.tsv.
+# No learned input: the Japanese side is the IR clause, the Korean side the sentence facts of qe/ko.py.
+#
+# Columns
+#   id      family.name-n
+#   spec    rule id in spec/checks.md
+#   check   the flag it raises
+#   scope   unit (the Korean sentence aligned with the clause's sentence, else the whole line) | last (the
+#           sentence that closes the unit) | line (numbers and names of the whole line)
+#   when    clause atoms joined by &: c.feat=v|w, c.feat!=v, c.flag, !c.flag; feats pol negFn force voice bene
+#           polite link linkSub mod (modality list); flags rare (れる/られる in the clause), qmark (？ in its sentence),
+#           final (no clause link: the clause ends its sentence)
+#   unless  unit atoms joined by | (any one exempts): any.feat=v (some clause of the unit has it); - for none
+#   ko      Korean atoms joined by | (any one satisfies the check): neg, pot_neg, pot (either potential), jana, oblig,
+#           prohib, q, hon, calque, plain_neg (a negative that is not 잖 and not a question), neg1 (exactly one
+#           negative), before (-기 전에); !atom = must not hold; line scope: numbers, names
+# For one clause, among the rows of one spec id that match, the most specific (most when atoms) decides: an
+# exception is a row of the same spec with more atoms.
+id	spec	check	scope	when	unless	ko	st	prov	note
+neg.missing-1	CHK-1	neg-missing	unit	c.pol=neg	-	neg|pot_neg|jana|oblig	m	own	a negated clause needs a negative in its sentence (안, 않다, 못, 없다, 아니다, 모르다), a potential negative, -잖아 or an obligation
+neg.before-1	CHK-1	neg-missing	unit	c.pol=neg & c.link=time & c.linkSub=uchi	-	neg|before	m	own	ないうちに (before it cools) is -기 전에 as well as -지 않을 때
+neg.pot-1	CHK-2	pot-missing	unit	c.negFn=potential-neg & !c.rare	-	pot_neg|oblig	m	own	a potential negative (行けない, 読めない) needs -ㄹ 수 없다 or 못
+neg.prohib-1	CHK-3	prohib-missing	unit	c.negFn=prohibitive	-	prohib	m	own	a prohibition (するな, ちゃだめ, てはいけない) needs -지 마, -면 안 되다
+neg.prohib-2	CHK-3	prohib-missing	unit	c.force=prohib	-	prohib	m	own	same, decided as the clause's force
+neg.permit-1	CHK-3	neg-missing	unit	c.negFn=prohibitive & c.mod=may	-	neg	m	own	なくてもいい is "need not" (-지 않아도 되다), not a prohibition: it needs the negative only
+neg.oblig-1	CHK-4	oblig-missing	unit	c.negFn=obligation	-	oblig	m	own	なければならない, なきゃ need -어야 하다/되다
+neg.oblig-2	CHK-4	oblig-missing	unit	c.mod=must	-	oblig	m	own	same, decided as the clause's modality
+neg.rhet-1	CHK-5	rhet-as-neg	unit	c.negFn=rhetorical	any.pol=neg	!plain_neg|prohib	m	own	a rhetorical じゃない(か) is a confirmation: a plain negative statement flips it
+neg.double-1	CHK-6	double-as-neg	unit	c.negFn=double	any.pol=neg	!neg1|!plain_neg	m	own	a double negation (ないわけではない) is positive: one plain negative flips it
+neg.vol-1	CHK-7	vol-as-neg	unit	c.negFn=archaic-vol	any.pol=neg	!neg	m	own	archaic volitional ん (行かん) is "let's", not a negation
+force.q-1	CHK-8	q-missing	last	c.final & c.force=q & c.qmark & c.negFn!=rhetorical	-	q	m	own	a question that ends its sentence with ？ is asked in Korean too
+force.imp-1	CHK-9	imp-as-pot	unit	c.final & c.force=imp	any.voice=potential|any.negFn=potential-neg	!pot	m	own	an imperative is not "can": no -ㄹ 수 있다/없다 unless the Japanese has a potential
+hon.sonkei-1	CHK-10	hon-missing	unit	c.polite=sonkei & c.force!=imp|request|prohib	-	hon	m	own	an honorific predicate (いらっしゃる, お〜になる) needs -시- or an honorific verb
+bene.morau-1	CHK-11	morau-calque	unit	c.bene=receive	-	!calque	m	own	てもらう is not -어 받다 (a calque)
+num.missing-1	CHK-12	num-missing	line	-	-	numbers	m	own	every number of the source appears in the Korean (digits, Sino-Korean or native numerals)
+name.missing-1	CHK-13	name-missing	line	-	-	names	m	own	every person or place name the analyzer reads appears, transliterated

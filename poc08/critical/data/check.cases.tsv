@@ -1,0 +1,43 @@
+#! check-cases
+# Fix and keep cases of check.tsv. A fix case must raise the row's check (the Korean misses what the row asks for);
+# a keep case must not. ja is one source line; ko is a translation of it. Run: qe/cases.py.
+id	kind	ja	ko
+neg.missing-1	fix	今出てくれば俺たちは手出しはせん！	지금 나오면 우리는 손찌검!
+neg.missing-1	keep	今出てくれば俺たちは手出しはせん！	지금 나오면 우리는 손대지 않아!
+neg.missing-1	fix	それこそ伝承だ。“そんなもの”在りはせん。	그야말로 전승이다. “그런 것”현존.
+neg.missing-1	keep	それこそ伝承だ。“そんなもの”在りはせん。	그야말로 전승이다. “그런 것”은 없어.
+neg.before-1	keep	冷めないうちに召し上がれ！	식기 전에 드세요!
+neg.before-1	fix	冷めないうちに召し上がれ！	식을 때 드세요!
+neg.pot-1	fix	憂鬱な気分を隠せないまま、窓の外へと目を向けて。	우울한 기분을 숨기지 없는 채, 창 밖으로 눈길을 돌려.
+neg.pot-1	keep	憂鬱な気分を隠せないまま、窓の外へと目を向けて。	우울한 기분을 숨길 수 없는 채, 창 밖으로 눈길을 돌려.
+neg.prohib-1	fix	この悪魔の甘言に耳を傾けてはなりません	이 악마의 감언에 귀를 기울여 되지 않습니다
+neg.prohib-1	keep	この悪魔の甘言に耳を傾けてはなりません	이 악마의 감언에 귀를 기울여서는 안 됩니다
+neg.prohib-1	fix	死者の庭からは何も持ち出してはなりません。	죽은 자의 뜰에서는 아무것도 꺼내 되지 않습니다.
+neg.prohib-1	keep	死者の庭からは何も持ち出してはなりません。	죽은 자의 뜰에서는 아무것도 가지고 나가면 안 됩니다.
+neg.permit-1	keep	とにかく死ななくてもいい。	어쨌든 죽지 않아도 된다.
+neg.permit-1	keep	そう落ち込まなくてもいいですよ。	그렇게 낙담하지 않아도 괜찮아요.
+neg.permit-1	fix	そう落ち込まなくてもいいですよ。	그렇게 낙담해도 괜찮아요.
+neg.oblig-1	fix	仕事も探さねばならんし。	일도 찾지 않으면 되지 않아 해.
+neg.oblig-1	keep	仕事も探さねばならんし。	일도 찾아야 하고.
+neg.oblig-2	fix	我が儘を言ってはいけないと、相応しくあらなければならないと	떼를 써선 안되면 걸맞고 거친 차면 안되면
+neg.oblig-2	keep	我が儘を言ってはいけないと、相応しくあらなければならないと	떼를 써선 안 되고, 걸맞아야 한다고
+neg.rhet-1	fix	テメェ笑ってんじゃねぇーーーー！！	네놈 웃고 있는 것이 아니야!!
+neg.rhet-1	keep	テメェ笑ってんじゃねぇーーーー！！	네놈 웃지 마!!
+neg.double-1	fix	行きたくないわけではない。	가고 싶은 것은 아니다.
+neg.double-1	keep	行きたくないわけではない。	가고 싶지 않은 것은 아니다.
+force.q-1	fix	お前、本当にそれでいいのか？	너, 정말로 그걸로 된다.
+force.q-1	keep	お前、本当にそれでいいのか？	너, 정말로 그걸로 괜찮아?
+force.imp-1	fix	早く行け！	빨리 갈 수 있어!
+force.imp-1	keep	早く行け！	빨리 가!
+hon.sonkei-1	fix	雇って下さっただけでも十分です。	고용해 준 것만으로도 충분합니다.
+hon.sonkei-1	keep	雇って下さっただけでも十分です。	고용해 주신 것만으로도 충분합니다.
+bene.morau-1	fix	お姉様はあまり公の場に出して貰えなかった。	누님은 그다지 국가 기관에 내 받을 수 없었다.
+bene.morau-1	keep	お姉様はあまり公の場に出して貰えなかった。	누님은 공식 자리에 별로 나가지 못했다.
+num.missing-1	fix	こっちは二一世紀の科学技術などで品種改良がなされた野菜。	여기는 2 일세기의 과학기술 등으로 품종 개량이 된 야채.
+num.missing-1	keep	こっちは二一世紀の科学技術などで品種改良がなされた野菜。	여기는 21세기 과학기술 등으로 품종 개량된 야채.
+name.missing-1	fix	秀吉は自分の手を見た。	히데키치는 자신의 손을 보았다.
+name.missing-1	keep	秀吉は自分の手を見た。	히데요시는 자신의 손을 보았다.
+neg.prohib-2	fix	それに触るな！	그것에 만져!
+neg.prohib-2	keep	それに触るな！	그거 만지지 마!
+neg.vol-1	fix	鋭く意志を貫かんとする	날카롭게 의지를 관철하지 않는다
+neg.vol-1	keep	鋭く意志を貫かんとする	날카롭게 의지를 관철하려 한다

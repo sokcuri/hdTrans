@@ -202,8 +202,12 @@ def features(toks):
             f['hon'] = True
         if tag == 'EF' and ('세요' in form or '십시오' in form or '셔요' in form or '십니' in form):
             f['hon'] = True
-        if tag == 'NNG' and form == '전' and prev is not None and prev.tag == 'ETN' and prev.form == '기':
-            f['before'] = True        # -기 전에 (ないうちに: "before … not yet")
+        if tag == 'NNG' and form == '전':
+            k = i - 1
+            while k >= 0 and toks[k].tag.startswith('J'):
+                k -= 1
+            if k >= 0 and toks[k].tag == 'ETN' and toks[k].form == '기':
+                f['before'] = True    # -기 전에, -기도 전에 (ないうちに: "before … not yet")
         if form in ('계시', '드시', '주무시', '말씀', '여쭈', '뵙', '드리') and tag[0] in 'VN':
             f['hon'] = True
         if form == '바라' and tag.startswith('VV'):
