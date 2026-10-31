@@ -1,16 +1,16 @@
 # 규칙: SPC-6
 rule	input	expected	kind	layer
-dict:gram:de-ii:5	「末期の言葉はそれでいいのか？」	「말기의 말은 그거면 되는 거야?」	fix	local
+dict:gram:de-ii:5	「末期の言葉はそれでいいのか？」	has:그거면 되는 거야?	fix	local
 dict:gram:de-ii:5	「お姉様、それでいいの？	「누님, 그거면 되는 거야?	fix	local
-dict:gram:de-ii:5	彼女が幸せだったなら、僕もそれでいい。	그녀가 행복했던이라면, 나도 그거면 된다.	fix	local
-dict:gram:de-ii:5	「先に見つけたほうに入ろう。それでいいだろ」	「먼저 찾아내는 편에 들어가자. 그거면 되지」	fix	local
-dict:gram:de-ii:5	「焼きそばを食べに来たから、わたしはそれでいいんだよ」	「야끼소바를 먹으러 왔으니까, 나는 그거면 돼」	fix	local
+dict:gram:de-ii:5	彼女が幸せだったなら、僕もそれでいい。	has:나도 그거면 된다.	fix	local
+dict:gram:de-ii:5	「先に見つけたほうに入ろう。それでいいだろ」	has:그거면 되지	fix	local
+dict:gram:de-ii:5	「焼きそばを食べに来たから、わたしはそれでいいんだよ」	has:나는 그거면 돼	fix	local
 dict:gram:de-ii:5	二人で歩き回ってみる。それでいい？」	둘이서 걸어 다녀 본다. 그거면 돼?」	fix	local
 dict:gram:de-ii:1	だが、これでいい。	하지만, 이거면 된다.	fix	local
-dict:gram:de-ii:1	「まったくうるさいわね・・・ほら、これでいいでしょ」	「완전히 시끄럽네···자, 이거면 되지」	fix	local
+dict:gram:de-ii:1	「まったくうるさいわね・・・ほら、これでいいでしょ」	has:이거면 되지	fix	local
 dict:gram:de-ii:1	「美味しいいい。これでいいじゃん！」	「맛있어. 이거면 되잖아!」	fix	local
 dict:gram:de-ii:1	今はとりあえずこれでいい。	지금은 우선 이거면 된다.	fix	local
-dict:gram:de-ii:1	「当家の考えはこんなところだが、これでいいかな？」	「저희 집 생각은 이런 곳이지만, 이거면 될까?」	fix	local
+dict:gram:de-ii:1	「当家の考えはこんなところだが、これでいいかな？」	has:이거면 될까?	fix	local
 dict:gram:de-ii:1	「雨も小降りになったし、ここでいいよ」	「비도 보슬비가 됐고, 여기면 돼」	fix	local
 dict:gram:de-ii:1	「ハノン。ここでいいのか？」	「하논. 여기면 되는 거야?」	fix	local
 dict:gram:de-ii:1	「ここでいい？」	「여기면 돼?」	fix	local
@@ -18,12 +18,12 @@ dict:gram:de-ii:1	うん、ここでいいだろう。	응, 여기면 될 것이
 dict:gram:de-ii:1	「親分、あれでいいんですか。」	「두목, 저거면 됩니까.」	fix	local
 dict:gram:de-ii:1	もう、あれでいいんだ。	이제, 저거면 된다.	fix	local
 dict:gram:de-ii:3	それで良いのか？	그거면 되는 건가?	fix	local
-dict:gram:de-ii:3	「……もうそれで良いからよこせ」	「……이제 그거면 되니까 보내라」	fix	local
+dict:gram:de-ii:3	「……もうそれで良いからよこせ」	has:그거면 되니까	fix	local
 dict:gram:de-ii:3	これで良いのだ。	이거면 되는 것이다.	fix	local
 dict:gram:de-ii:3	色々と可怪しいが、これで良いらしい。	여러모로 이상하지만, 이거면 되는 것 같다.	fix	local
 cx:demonstrative-myeon:10	「や、あれでいい。	「야, 저거면 된다.	fix	rewrites
-dict:gram:de-ii:1	それはそれでいいが、誰と交代させよう？	그건 그것대로 좋지만, 누구와 교대시키자?	keep	local
-dict:gram:de-ii:1	なあ、あれはあれでいいんだよな。	저기, 저것은 저것대로 좋은 것 같아.	keep	local
+dict:gram:de-ii:1	それはそれでいいが、誰と交代させよう？	has:그건 그것대로 좋지만	keep	local
+dict:gram:de-ii:1	なあ、あれはあれでいいんだよな。	has:저것은 저것대로 좋	keep	local
 dict:gram:de-ii:5	「あんたがそれでいいなら、あたしは何も言わないわ」	「네가 그걸로 좋으면, 나는 아무것도 말하지 않아」	keep	local
 dict:gram:de-ii:1	それにここでいいところを見せないと格好がつかない。	게다가 여기서 좋은 곳을 보이지 않으면 모양이 나지 않는다.	keep	local
 dict:gram:de-ii:1	君の家の車庫でいい物を見つけたんだ	네 집의 차고에서 좋은 것을 찾아낸 거야	keep	local
@@ -31,7 +31,17 @@ dict:gram:de-ii:3	まあそれならそれで良いか。	뭐 그렇다면 그�
 dict:gram:de-ii:1	ここでいい加減に返答したら	여기서 적당히 대답하면	keep	local
 cx:demonstrative-myeon:10	これで終わりだ。	!rule:cx:demonstrative-myeon:10	keep	rewrites
 cx:demonstrative-myeon:10	それはそれでいいが、誰と交代させよう？	!rule:cx:demonstrative-myeon:10	keep	rewrites
-dict:gram:de-ii:6	「あなたが、私たちのことを忘れずにいてくれればそれでいい。」	「당신이, 우리를 잊지 않고 있어 준다면 그걸로 좋아.」	keep	local
-dict:gram:de-ii:6	「えっと、任せるよ。魔力のコントロールをし易くしてくれたら、それでいいよ」	「음, 맡겨. 마력의 컨트롤을 하기 쉽게 해 주면, 그걸로 좋아」	keep	local
-dict:gram:de-ii:6	「いや……。俺の杞憂だったら、それでいい」	「아니……. 내 기우라면, 그걸로 좋아」	keep	local
-dict:gram:de-ii:7	彼が幸せならそれで良いと、必死に自分に言い聞かせた。	그가 행복하면 그것으로 좋다고, 필사적으로 자신에게 타일렀다.	keep	local
+dict:gram:de-ii:5	「あなたが、私たちのことを忘れずにいてくれればそれでいい。」	「당신이, 우리를 잊지 않고 있어 준다면 그거면 돼.」	fix	local
+dict:gram:de-ii:5	「えっと、任せるよ。魔力のコントロールをし易くしてくれたら、それでいいよ」	「음, 맡겨. 마력의 컨트롤을 하기 쉽게 해 주면, 그거면 돼」	fix	local
+dict:gram:de-ii:5	「いや……。俺の杞憂だったら、それでいい」	「아니……. 내 기우라면, 그거면 돼」	fix	local
+dict:gram:de-ii:5	「いや、２人が無事ならそれでいい」	「아니, 2명이 무사하면 그거면 돼」	fix	local
+dict:gram:de-ii:5	「お前はそれでいいのか？」	「너는 그거면 되는 거야?」	fix	local
+dict:gram:de-ii:3	彼が幸せならそれで良いと、必死に自分に言い聞かせた。	그가 행복하면 그거면 된다고, 필사적으로 자신에게 타일렀다.	fix	local
+dict:gram:de-ii:1	３０ｋｍ出るのであればこれでいいか・・・	30km 나온다면 이거면 되나···	fix	local
+dict:gram:de-ii:4	「まあ……もうこれでよいか」	「뭐……이제 이거면 되나」	fix	local
+dict:gram:de-ii:4	「ん、これでよいか？」	「응, 이거면 되나?」	fix	local
+dict:gram:de-ii:4	魔に堕ちたとて真理を掴めばそれでよい。	has:잡으면 그거면 된다.	fix	local
+dict:gram:de-ii:4	ヒキガエルどうしはそれでよい。	has:그거면 된다.	fix	local
+dict:gram:de-ii:1	「師匠、これでいいよね！」	「스승, 이거면 되지!」	fix	local
+dict:gram:de-ii:1	「でも、これはこれでいいよね」	has:이건 이것대로 좋	keep	local
+dict:gram:de-ii:1	ここはここでいい。	lacks:여기면	keep	local
