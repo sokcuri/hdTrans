@@ -1,0 +1,132 @@
+# 규칙: LEX-1050
+rule	input	expected	kind	layer
+normalize:predicate-variant	足を止めそうになった俺の背中で、仁が慌てた様にイチに言う。	has:당황한 것처럼	fix	normalize
+normalize:predicate-variant	時が止まった様にみえた	has:멈춘 것처럼	fix	normalize
+normalize:predicate-variant	それを見届けてから堰を切った様に	has:터진 것처럼	fix	normalize
+normalize:predicate-variant	私は思い出した様に夢ちゃんに聞いた。	has:생각해 낸 것처럼	fix	normalize
+normalize:predicate-variant	おおますは豹変した様に陽気な感じになる	has:표변한 것처럼	fix	normalize
+normalize:predicate-variant	感情が爆発した様にまくし立ててくる。	has:폭발한 것처럼	fix	normalize
+normalize:predicate-variant	台の上に置かれた刀を見て呆れた様にため息をつく	has:기가 막힌 것처럼	fix	normalize
+normalize:predicate-variant	醜い者は驚いた様に顔を上げた	has:놀란 것처럼	fix	normalize
+normalize:predicate-variant	瞬間、砂に刺した様にすんなり	has:찌른 것처럼	fix	normalize
+normalize:predicate-variant	前述した様に、サークルや同好会には入っていなかった。	has:전술한 것처럼,	fix	normalize
+normalize:predicate-variant	無理矢理引き千切られた様になっている。	has:잡아뜯어진 것처럼	fix	normalize
+normalize:predicate-variant	どう考えても浮気現場を抑えられた様にしか見えなくね？	has:당한 것처럼밖에	fix	normalize
+normalize:predicate-variant	その顔がすぐ目の前に見えた様に感じた瞬間、	has:보인 것처럼	fix	normalize
+normalize:predicate-variant	心の底から楽しそうに、スクナは狂った様に笑っていた。	has:미친 것처럼	fix	normalize
+normalize:predicate-variant	思いついた様に鳳凰が言った。	has:생각해 낸 것처럼	fix	normalize
+normalize:predicate-variant	うふふ、とからかう様に微笑むこの女性。	has:놀리는 것처럼	keep	normalize
+normalize:predicate-variant	そのまま跳ねる様に二、三歩歩く。	has:뛰는 것처럼	keep	normalize
+normalize:predicate-variant	彼女の浅ましい願いを叶える様に、	has:실현하는 것처럼,	keep	normalize
+normalize:predicate-variant	そう思った時、ハルトは自ら起きあがる様に、	has:일어나는 것처럼,	keep	normalize
+normalize:predicate-variant	そして大抵はそうなる様に画策し、	has:되는 것처럼	keep	normalize
+normalize:predicate-variant	それに少しでも似合う男になる様に。	has:되는 것처럼.	keep	normalize
+normalize:predicate-variant	右手に持っている刀の刃を大猿の首に当てる様にする。	has:대는 것처럼 한다	keep	normalize
+normalize:predicate-variant	優しく言い聞かせる様に言ってくれたブルーの言葉に、	has:타이르는 것처럼	keep	normalize
+normalize:predicate-variant	笛はもし何かあった時、人を呼べる様に買った。	has:부를 수 있는 것처럼	keep	normalize
+normalize:predicate-variant	魔法も使える様になるなら使ってみたい。	has:쓸 수 있게 된다면	fix	normalize
+normalize:predicate-variant	それはまるで太陽の様な存在だ。	has:태양과 같은	fix	normalize
+normalize:predicate-variant	瞳の色は翆玉の様な緑	has:취옥과 같은	fix	normalize
+normalize:predicate-variant	読経の様な低く、厳かな声が夜の公園に響き渡る。	has:독경 같은	fix	normalize
+normalize:predicate-variant	は冗談の様な僅かな被害で済んだと言う……。	has:농담과 같은	fix	normalize
+normalize:predicate-variant	夏の様な暑い陽射しと	has:여름 같은	fix	normalize
+normalize:predicate-variant	殿の様な御方には得難い側室じゃぞ」	has:전과 같은	fix	normalize
+normalize:predicate-variant	並んでいる人を探しても誰一人、私の様な獣人はいませんでした……。	has:저와 같은	fix	normalize
+normalize:predicate-variant	それは出入口を守る狛犬の様なポジションだ。	has:고마이누와 같은	fix	normalize
+normalize:predicate-variant	俺にも師匠の様な絵が描けるでしょうか？	has:스승과 같은	fix	normalize
+normalize:predicate-variant	少し、良い意味での不思議ちゃんの様な気がした。	has:불가사의짱 같은	fix	normalize
+normalize:predicate-variant	いくらお前の様な美少女のものとはいえ、	has:너와 같은	fix	normalize
+normalize:predicate-variant	あの方は私たちにとっては慈悲と無慈悲を与える神様の様な方なのです。	has:신과 같은	fix	normalize
+normalize:predicate-variant	確かにその様な計画があると耳にしている。	has:그러한 계획	fix	normalize
+normalize:predicate-variant	またこの様な形で再会するとは思いませんでした」	has:이러한 형태	fix	normalize
+normalize:predicate-variant	そうですね……できたらあの様な子達が欲しいですね」	has:그와 같은 아이들	fix	normalize
+normalize:predicate-variant	では、どの様な方法が有るのか。	has:어떠한 방법	fix	normalize
+normalize:predicate-variant	その声は透き通るようで美しい音色の様だ。	has:음색 같다.	fix	normalize
+normalize:predicate-variant	まるで猿の腕の様だ。	has:팔 같다.	fix	normalize
+normalize:predicate-variant	どうやら下の妹は無事の様だ。	has:무사 같다.	fix	normalize
+normalize:predicate-variant	自身は脱け殻の様だった絶えぬ苦しみ、	has:빈 껍질 같았던	fix	normalize
+normalize:predicate-variant	それはまるで悠理の様だと感じたからだ。	has:유리 같다고	fix	normalize
+normalize:predicate-variant	ケースに入っていたのは、指輪の様だった。	has:반지 같았다.	fix	normalize
+normalize:predicate-variant	今度は私が口を結ぶ番の様だ。	has:차례 같다.	fix	normalize
+normalize:predicate-variant	まるで廃墟の様だ。	has:폐허 같다.	fix	normalize
+normalize:predicate-variant	窓から外を見ると、そこは庭園の様だった。	has:정원 같았다.	fix	normalize
+normalize:predicate-variant	ククッ…凄いな噴水の様だ」	has:분수 같다」	fix	normalize
+normalize:predicate-variant	ただの水の様だ……。	has:물 같아	fix	normalize
+normalize:predicate-variant	高くて女の子の声の様だ。	has:목소리 같다.	fix	normalize
+normalize:predicate-variant	見た目は普通の女性の様だ。	has:여성 같다.	fix	normalize
+normalize:predicate-variant	この二人はどうやら後者の様だ。	has:후자 같다.	fix	normalize
+normalize:predicate-variant	どうやら俺の勝ちの様だな」	has:승리 같네」	fix	normalize
+normalize:predicate-variant	ユーリンは虐められるのが好きな様だ。	has:좋아하는 것 같다.	fix	normalize
+normalize:predicate-variant	漫画だけでなく、映画、アニメも大好きな様だ。	has:좋아하는 것 같다.	fix	normalize
+normalize:predicate-variant	勉強が嫌いな様だ。	has:싫은 것 같다.	fix	normalize
+normalize:predicate-variant	うん、効果の程は確かな様だ。	has:확실한 것 같다.	fix	normalize
+normalize:predicate-variant	きちんとその強制力が働いているのは確かな様だ。	has:확실한 것 같다.	fix	normalize
+normalize:predicate-variant	どうやら、運転手はかなり桜吹雪が好きな様だ。	has:좋아하는 것 같다.	fix	normalize
+normalize:predicate-variant	彼は…君の笑顔が好きな様だからな」	has:좋아하는 것 같으니까	fix	normalize
+normalize:predicate-variant	燃料補給、まさにその表現がぴったりな様だった。	has:딱 맞는 것 같았다.	fix	normalize
+normalize:predicate-variant	フフフ・・・聖女は存外に戦いがお好きな様だ。	has:좋아하는 것 같다.	fix	normalize
+normalize:predicate-variant	期待しているより自分の脳は性能が控えめな様だ。	has:조심스러운 것 같다.	fix	normalize
+normalize:predicate-variant	なんとも哀れな様だ。	has:불쌍한 것 같다.	fix	normalize
+normalize:predicate-variant	辺りを見回せば、美咲も、アイラも、意識を失ってる様だがちゃんといる。	has:잃고 있는 것 같지만	fix	normalize
+normalize:predicate-variant	ススム様が元気になられた様で何よりです	has:신 것 같아서 다행	fix	normalize
+normalize:predicate-variant	話を聞くと、彼は周囲に溶け込めない様だった。	has:없는 것 같았다.	fix	normalize
+normalize:predicate-variant	帝国中の空で灰色のオーロラが発生と共に見知らぬ地へ転移した様なのです。	has:전이한 것 같습니다	fix	normalize
+normalize:predicate-variant	例えるなら油絵で描かれた様な」	has:그려진 것 같은	fix	normalize
+normalize:predicate-variant	自白した様なもんじゃないか！	has:자백한 것 같은	fix	normalize
+normalize:predicate-variant	取り繕った様な笑みが、顔から零れる。	has:꾸민 것 같은	fix	normalize
+normalize:predicate-variant	美しいを体現した様な女性である。	has:체현한 것 같은	fix	normalize
+normalize:predicate-variant	この人、何処かで見た様な	has:본 것 같은	fix	normalize
+normalize:predicate-variant	凛はなぜか勝ち誇った様な顔で、俺を見下ろしてきた。	has:우쭐거린 것 같은	fix	normalize
+normalize:predicate-variant	いやはや、まるで神にでもなったかの様だ。	has:된 것 같다.	fix	normalize
+normalize:predicate-variant	まるで、時間稼ぎをしているかの様だった。	has:하고 있는 것 같았다.	fix	normalize
+normalize:predicate-variant	魔王様の納得したかの様な声を出す。	has:납득한 것 같은	fix	normalize
+normalize:predicate-variant	不吉をそのまま表したかの様な色である。	has:나타낸 것 같은	fix	normalize
+normalize:predicate-variant	地を舐めるかの様な低空飛行は地上から五ｍ程度。	has:핥는 것 같은	fix	normalize
+normalize:predicate-variant	嘲笑うかの様に何処かの鳥が鳴いた。	has:비웃는 것처럼	fix	normalize
+normalize:predicate-variant	梓は目の光を失ったかの様に膝から崩れ落ち、固まった。	has:잃은 것처럼	fix	normalize
+normalize:predicate-variant	女性はまるで自分の家に帰ってきたかの様にドアを開けた。	has:돌아온 것처럼	fix	normalize
+normalize:predicate-variant	看守が捨て台詞の様に俺に言う。	has:대사처럼	fix	normalize
+normalize:predicate-variant	噴水の様に噴き出している。	has:분수처럼	fix	normalize
+normalize:predicate-variant	細胞内に存在するミトコンドリアの様に。	has:미토콘드리아처럼.	fix	normalize
+normalize:predicate-variant	なるべく考えない様にしていたが、正直不安だった。	has:생각하지 않게 하고	keep	normalize
+normalize:predicate-variant	故に誰にも聞かれない様に、小さな声で呟き、	has:않게,	keep	normalize
+normalize:predicate-variant	それならボロを出さない様にすればいい！	has:않게 하면	keep	normalize
+normalize:predicate-variant	寝室に入ると二人共まだ寝ている様だ、	has:자고 있는 것 같다,	keep	normalize
+normalize:predicate-variant	それどころか、逆に苦悩している様だ。	has:고뇌하고 있는 것 같다.	keep	normalize
+normalize:predicate-variant	どうやらこの町は正常に機能している様だ。	has:기능하고 있는 것 같다.	keep	normalize
+normalize:predicate-variant	正論を言っている様だが、今回は動じないぞ。	has:말하는 것 같지만	keep	normalize
+normalize:predicate-variant	まるで二人が一国の王をからかっている様だった。	has:놀리고 있는 것 같았다.	keep	normalize
+normalize:predicate-variant	俺に少し怯えているのか、目が少し潤んでいる様に見える。	has:띠고 있는 것처럼 보인다	keep	normalize
+normalize:predicate-variant	半分はふざけている様にも聞こえるフィフスの態度。	has:장난치고 있는 것처럼도	keep	normalize
+normalize:predicate-variant	黒田官兵衛はまだ、何か隠している様に感じた。	has:숨기고 있는 것처럼 느꼈다	keep	normalize
+normalize:predicate-variant	ご覧の様に、柵は大きく形を歪めています。	has:보시는 것처럼,	keep	normalize
+normalize:predicate-variant	今ご覧の様に、大変良い物が揃っています」	has:보시는 것처럼,	keep	normalize
+normalize:predicate-variant	「私はカレー屋で食い逃げしている所をみなみ様に助けてもらいました。	has:미나미님	keep	normalize
+normalize:predicate-variant	「な、何を仰ってるんですか？ひなた様は正真正銘僕達の子供ですよ？」	has:히나타님은	keep	normalize
+normalize:predicate-variant	「は、はい！もちろんであります！あかり様は我等が第２の主として	has:아카리님은	keep	normalize
+normalize:predicate-variant	俺は王様について、部屋に入った。	has:임금님	keep	normalize
+normalize:predicate-variant	「私は、皆様に愛される王妃になります！	has:여러분	keep	normalize
+normalize:predicate-variant	今も奥様の部屋に飾られている。	has:사모님의 방	keep	normalize
+normalize:predicate-variant	たとえあなた様にはそのように思えなくても」	has:귀하에게는	keep	normalize
+normalize:predicate-variant	あなた様が生きていただけで私は嬉しい。	has:귀하가	keep	normalize
+normalize:predicate-variant	それはお互い様だろ？	has:피차일반	keep	normalize
+normalize:predicate-variant	お互い様よ。	has:피차일반	keep	normalize
+normalize:predicate-variant	本当の事を言ってないのはお互い様でしょ？	has:피차일반	keep	normalize
+normalize:predicate-variant	すれ違い様に三人の盗賊の首を切り落とす。	lacks:것처럼	keep	normalize
+normalize:predicate-variant	「ゼファー、すれ違い様に高度を少し下げて！」	lacks:것처럼	keep	normalize
+normalize:predicate-variant	その様は彼が人の上に立つ人だと実感させられる。	has:그 모양은	keep	normalize
+normalize:predicate-variant	傷一つなく、凛と立つその様は勇者か。	has:그 모양은	keep	normalize
+normalize:predicate-variant	音声は切ってあるらしく、無音のまま散っていくその様に翔太郎は世の無常を感じていた。	lacks:그렇게	keep	normalize
+normalize:predicate-variant	３人の様子を特に気にもせず、翼は羽を動かした。	has:모습을	keep	normalize
+normalize:predicate-variant	オヅマは息をひそめて、男の様子を見ていた。	has:상태를	keep	normalize
+normalize:predicate-variant	様々な種族とつきあうのだから」	has:여러 가지 종족	keep	normalize
+normalize:predicate-variant	今このサイトに様々なバトンが飛び交っています。	has:여러 가지 배턴	keep	normalize
+normalize:predicate-variant	それが結局この様だ。	lacks:것 같	keep	normalize
+normalize:predicate-variant	最も得意な発火能力でさえも、この様だ。	lacks:것 같	keep	normalize
+normalize:predicate-variant	そんな様だった。	lacks:것 같	keep	normalize
+normalize:predicate-variant	いぜい足掻く様を見せてくれ」	has:발버둥치는 모양을	keep	normalize
+normalize:predicate-variant	どちら様が僕に何の用ですか？	has:어느 분이	keep	normalize
+normalize:predicate-variant	「なるほどの、戦と言うものはこの様に状況に応じて、千差万別に変化させるのだな。」	has:이와 같이 상황에	fix	normalize
+normalize:predicate-variant	「た、確かにその様です」	has:그와 같습니다」	fix	normalize
+normalize:predicate-variant	これからアナタは、どの様に生きてく？」	has:어떻게 살아가?」	keep	normalize
+normalize:predicate-variant	どうやら強い衝撃を受けた様じゃな。	has:받은 같군.	keep	normalize

@@ -562,6 +562,9 @@ void CommitSettings(App& app, const hdTrans::internal::Config& settings) {
     if (app.settings.reference != settings.reference) app.settings.reference = settings.reference;
     if (app.settings.speech != settings.speech) app.settings.speech = settings.speech;
     if (app.settings.wrapped != settings.wrapped) app.settings.wrapped = settings.wrapped;
+    if (app.settings.predicateVariants != settings.predicateVariants) {
+        app.settings.predicateVariants = settings.predicateVariants;
+    }
 }
 
 bool ReadDictionaries(App& app, const hdTrans::internal::ConfigResult& config, const std::string& dir,
@@ -714,6 +717,7 @@ gui::TranslationOptions ConfiguredOptions(const App& app, gui::TranslationOption
     options.misread = app.settings.misread;
     options.speech = app.settings.speech;
     options.wrapped = app.settings.wrapped;
+    options.predicateVariants = app.settings.predicateVariants;
     return options;
 }
 

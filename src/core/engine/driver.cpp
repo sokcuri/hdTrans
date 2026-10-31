@@ -168,6 +168,7 @@ struct RespellLookup {
     const dict::Snapshot& snap;
     const dict::LookupContext& lookup;
     const pipeline::LineContext* line = nullptr;  // for EndsInVerb
+    bool predicateVariants = true;                // word::Improvements::predicateVariants
 };
 
 dict::Candidates Find(const RespellLookup& d, std::string_view text) {
@@ -186,6 +187,78 @@ bool Grammar(const dict::Candidate& c) { return c.codes != nullptr && c.codes->p
 // looked up with this many bytes after it; a longer key around a variant is not seen.
 constexpr int kLookBackRunes = 4;
 constexpr size_t kLookAheadBytes = 192;
+constexpr int kPredicateRunes = 48;
+
+// Whether the kanji variant at line[at] of spelling.variant-after-predicate is the grammatical word
+// (様 read as よう, spec LEX-1050): a word of the class's next starts follows it (not 様子, 様々), no
+// dictionary word that starts before it holds it whose respelled text is no key (あなた様, お互い様),
+// and the analysis of the text before it ends in an adjective or a verb in an adnominal form (慌てた,
+// 静かな, 失ってる) or the particle の; a phrase of spelling.variant-after-predicate-phrase (その様な)
+// is the grammatical word too. After a noun or a name (ひなた様, 王様) or a word of
+// spelling.variant-after-predicate-kept-after (そんな様) it stays.
+bool StandsAfterPredicate(const RespellLookup& d, std::string_view line, size_t at, std::string_view variant,
+                          std::string_view spelling) {
+    const size_t end = at + variant.size();
+    const std::string_view rest = line.substr(end);
+    if (dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-next"), rest) == 0) return false;
+    if (dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-kept-after"), line.substr(0, at)) > 0) {
+        return false;
+    }
+    for (const std::string_view phrase : dict::ClassMembers(HDTRANS_CLASS("spelling.variant-after-predicate-phrase"))) {
+        const size_t k = phrase.find(variant);
+        if (k != std::string_view::npos && k <= at && line.substr(at - k).starts_with(phrase)) return true;
+    }
+    const auto respelledKey = [&](size_t start, std::string_view source) {
+        std::string respelled(source.substr(0, at - start));
+        respelled += spelling;
+        respelled += source.substr(end - start);
+        return HasKey(d, respelled) || EndingKey(d.snap, respelled);
+    };
+    size_t start = at;
+    for (int back = 0; back < kLookBackRunes && start > 0; back++) {
+        start -= pipeline::internal::LastRune(line.substr(0, start)).size;
+        for (const dict::Candidate& c : Find(d, line.substr(start)).list) {
+            if (start + c.source.size() >= end && !respelledKey(start, c.source)) return false;
+        }
+    }
+    // The text of the clause before the variant, as the word stage reads it (at most kPredicateRunes
+    // runes, so a long line costs no more than a short one).
+    size_t from = at;
+    for (int runes = 0; from > 0 && runes < kPredicateRunes; runes++) {
+        const text::Rune last = pipeline::internal::LastRune(line.substr(0, from));
+        if (std::u32string_view(U"。！？!?「」『』、，,\n").find(last.cp) != std::u32string_view::npos) break;
+        from -= last.size;
+    }
+    if (from == at) return false;
+    tokenizer::Tokens tokens;
+    tokenizer::Tokenize(line.substr(from, at - from), tokens);
+    word::Settings settings;
+    settings.text = true;
+    word::Arena arena;
+    word::Analysis analysis;
+    word::Analyze(tokens, d.snap, d.lookup, settings, arena, analysis);
+    if (analysis.sentences.empty()) return false;
+    const word::Item* last = analysis.sentences.back().chain.head;
+    while (last != nullptr && last->next != nullptr) last = last->next;
+    if (last == nullptr || last->IsNameItem()) return false;
+    // A verb in an adnominal form (慌てた, 言う, 寝ている, 行かない), not its stem (すれ違い様, 振り向き様).
+    // Before に only the past form or なる follows: the present form there reads 것처럼 as written
+    // (踊る様に 춤추는 것처럼), where its kana form takes the purpose 도록.
+    // An adjective follows the same rule before に (痛い様に言う 아프게 말하다, not 아프도록).
+    const std::string_view written =
+        last->text.substr(static_cast<size_t>(last->start), static_cast<size_t>(last->length));
+    const bool past = dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-past"), written) > 0;
+    const bool beforeNi = rest.starts_with("に") &&
+                          dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-naru"), rest) == 0;
+    if (last->detail->cls == word::kDetailVerb) {
+        if (past) return true;
+        if (beforeNi) return false;
+        return dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-end"), written) > 0;
+    }
+    if (last->detail->Yougo()) return past || !beforeNi;
+    const std::string_view surface = last->group->surface;
+    return surface == "の" && last->Code(last->selected < 0 ? 0 : last->selected).starts_with("2");
+}
 
 // Whether a dictionary word cuts across line[at, end) or holds it (pipeline::RespellVariants): a word
 // that starts before it and ends inside it, one that starts inside it and ends past it, or one that
@@ -195,6 +268,9 @@ constexpr size_t kLookAheadBytes = 192;
 bool WordKeepsVariant(const void* context, std::string_view line, size_t at, std::string_view variant,
                       std::string_view spelling) {
     const auto& d = *static_cast<const RespellLookup*>(context);
+    if (dict::InClass(HDTRANS_CLASS("spelling.variant-after-predicate"), variant)) {
+        return !d.predicateVariants || !StandsAfterPredicate(d, line, at, variant, spelling);
+    }
     const size_t end = at + variant.size();
     const bool toKana = !text::IsKanji(text::DecodeRune(spelling).cp);
     const auto keeps = [&](size_t start) {
@@ -925,7 +1001,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    const RespellLookup respell{snap, ctx.lookup, &ctx};
+    const RespellLookup respell{snap, ctx.lookup, &ctx, options.wordImprovements.predicateVariants};
     const auto normalize = [&](std::string_view text) {
         std::string normalized = pipeline::JoinBraceRuby(
             pipeline::Normalize(text, ctx,
