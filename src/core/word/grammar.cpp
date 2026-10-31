@@ -2313,14 +2313,12 @@ std::string_view LastLemmaWord(std::string_view lemma) {
 // the past sentence ending at last (振り返ると彼女がいた, 見に行ったら彼がいた): the verb before
 // it is no state of いる or ある (the いる of ている goes on: 考え事をしていると) and no なる
 // (秋になると), nor 言う after か or から or quoting (というと, から言うと); no other と but a step,
-// no quoting word, no link after a present, for と one without a subject of its own (来ると
-// 騒がしいから, つっこんだら話が長引くので; 開けると彼がいるので goes on) and no mark of supposition stands between it and the end
+// no quoting word, no link after a present (来ると騒がしいから, 押すと音が鳴るので) and no mark of supposition stands between it and the end
 // (離れすぎると信号が拾えないという欠点), nor a word of saying or thinking before any other verb,
 // which takes the clause as its quotation (可能性があると深く理解していた, 行くと涙ながらに訴えた;
 // 話すと先輩は顔色を変えて謝ってきた goes on); and a past copula at the end follows only seeing or
 // noticing, or tells a nominalised past (笑うのだった).
 bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
-    const bool to = it->DirectSurface() == "と";
     const std::string full = output::Lemma(it->EntryText(it->selected), f.families);
     const std::string_view lemma = LastLemmaWord(full);
     const bool progressive = AfterTeForm(it) || full.ends_with("고 있다") || full.ends_with("어 있다") ||
@@ -2341,7 +2339,6 @@ bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
         return false;
     }
     bool verbSeen = false;
-    bool subject = false;
     for (const Item* x = it->After(); x != nullptr; x = x->next) {
         if (x->selected < 0) return false;
         if (!verbSeen && !BareSuru(f, x) && !Subject(x) &&
@@ -2349,8 +2346,7 @@ bool FollowedEvent(Flusher& f, const Item* it, const Item* last) {
             return false;
         }
         if (x->detail->cls == kDetailVerb) verbSeen = true;
-        if (x->group->surface == "が") subject = true;
-        if (x != last && (QuotingAfter(x) || ((!subject || !to) && PresentLink(x)))) return false;
+        if (x != last && (QuotingAfter(x) || PresentLink(x))) return false;
         if (x != last && x->DirectIndex() >= 0 && x->DirectSurface().ends_with("と") && !Step(x)) return false;
         for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("mark.supposed"))) {
             if (SupposedMark(x, m)) return false;
@@ -2374,7 +2370,7 @@ bool HabitOfClause(const Item* x) {
 }
 
 // Whether the sentence around item it, up to last, makes its と or たら a condition rather than
-// a step: a word of supposition before it in its clause or right before a comma (もし、あの時
+// a step: a word of supposition before it in its sentence, up to a clause link (もしあの時、
 // 断っていたら死んでいた), a word of habit in its clause or after it (いつも彼と話していると、
 // 時間を忘れた, 夕暮れになると子どもたちは必ず通った), a verb that frames what follows (比べると,
 // 言い換えると) or a point of view (私からすると, 俺からしたら), a なる after a word of manner
@@ -2410,19 +2406,21 @@ bool ConditionAround(Flusher& f, const Item* it, const Item* last) {
     }
     if (next != nullptr && next->group->surface == kJaComma) next = next->next;
     if (next != nullptr && (next->group->surface == "と" || next->group->surface == "って")) return true;
-    // Back through its clause: a comma or a link ends it, past a word of supposition right before
-    // the comma (もし、).
+    // Back to the start of the sentence, the last clause link (行かないと決めていたが、) or a quotation
+    // that closes before it (なかったら……と想像すると): a word of
+    // supposition there counts across commas (もしあの時、開けたら), a word of habit only before the
+    // first comma.
+    bool clause = true;
     for (const Item* x = it->prev; x != nullptr && x->group->surface != "。" && !InSet(kSentenceEndItems, x->group->surface);
          x = x->prev) {
         if (InSet(kCommaItems, x->group->surface)) {
-            if (x->prev != nullptr && dict::InClass(HDTRANS_CLASS("adverb.suppose"), x->prev->group->surface)) return true;
-            break;
+            clause = false;
+            continue;
         }
         const Item* pred = nullptr;
-        if (!LinkText(x, pred).empty()) break;
-        if (dict::InClass(HDTRANS_CLASS("adverb.suppose"), x->group->surface) || HabitOfClause(x)) return true;
+        if (!LinkText(x, pred).empty() || x->group->surface == "と" || QuotingAfter(x)) break;
+        if (dict::InClass(HDTRANS_CLASS("adverb.suppose"), x->group->surface) || (clause && HabitOfClause(x))) return true;
     }
-    // A word of habit after it counts unless a clause in と closes it first (必ず目にしようと決めた).
     // Right after it, a word of habit in a modifier takes it into that modifier (眠ると必ず見る夢).
     if (const Item* x = it->After(); x != nullptr && dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), x->group->surface) &&
                                      x->next != nullptr && x->next->detail->Yougo() && ModifierAfter(x)) {
@@ -2646,18 +2644,21 @@ bool QuoteVerbFollows(const Item* it) {
     if (it == nullptr) return false;
     if (it->group->surface == "聞") return true;
     if (dict::StartsWithMember(HDTRANS_CLASS("verb.quote-start"), it->group->surface) > 0) return true;
-    if (!dict::InClass(HDTRANS_CLASS("verb.quote-word"), it->group->surface)) return false;
-    // A word of verb.quote-word quotes as a verb, not as the adverb 決まって (決まっている is the
-    // verb), or as a verbal noun
-    // before its verb or a comma (予想していた, 察し、; not 想像以上, 予想に反して).
-    if (it->detail->Yougo()) {
-        const std::string whole = std::string(it->group->surface) + std::string(it->DirectIndex() >= 0 ? it->DirectSurface() : "");
-        const bool auxiliary = it->next != nullptr && AfterTeForm(it->next) &&
-                           dict::InClass(HDTRANS_CLASS("verb.te-state-aux"), it->next->group->surface);
-        return auxiliary || !dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), whole);
+    if (dict::StartsWithMember(HDTRANS_CLASS("verb.quote-stem"), it->group->surface) == 0) return false;
+    // Another word that starts like one, read with its ending and the two words after it
+    // (想像以上, 想像を絶する, 仰天, 決まりきった, 気付かないうちに), quotes nothing, nor the adverb
+    // 決まって (決まっている is the verb).
+    std::string span;
+    const Item* x = it;
+    for (int n = 0; n < 3 && x != nullptr; n++, x = x->next) {
+        span += x->group->surface;
+        if (x->DirectIndex() >= 0) span += std::string(x->DirectSurface());
     }
-    const Item* next = it->next;
-    return next != nullptr && (next->detail->Yougo() || InSet(kCommaItems, next->group->surface));
+    if (dict::StartsWithMember(HDTRANS_CLASS("word.quote-stem-other"), span) > 0) return false;
+    const std::string whole = std::string(it->group->surface) + std::string(it->DirectIndex() >= 0 ? it->DirectSurface() : "");
+    const bool auxiliary = it->next != nullptr && AfterTeForm(it->next) &&
+                           dict::InClass(HDTRANS_CLASS("verb.te-state-aux"), it->next->group->surface);
+    return auxiliary || !dict::InClass(HDTRANS_CLASS("adverb.habit-clause"), whole);
 }
 
 namespace {

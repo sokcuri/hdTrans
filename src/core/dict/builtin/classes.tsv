@@ -20,8 +20,9 @@
 //= particle.after-quote-to	Particles right after a と that make it a quotation, not a condition or a step (病気になるとさえされていた, 行くとも言った).
 //= particle.final-after-past	Final particles that may stand alone in the ending of a past whose た is in the conjugation (立っていたよ, ぼやいてたぞ).
 //= particle.quoting-after	Words that quote or frame the clause before them after a predicate or a mark (捨てられるぞと脅された, 半分になる﹀という掟, 使えるか分からなかった), so a と or たら inside it is no step of the sentence.
-//= verb.quote-word	Whole words of saying, thinking or noticing that take a quotation before them only as a verb, or a verbal noun before its verb or a comma (と気付いた, と予想していた, と察し、); not as a noun or an adverb (予想以上, 想像を絶する, 決まって, 察しがつく).
+//= verb.quote-stem	Stems of verbs of thinking, noticing or deciding that also start other words (気付, 察, 想像, 決め, 仰): a word that starts with one takes a quotation before it (と決めつけた, と察知した, と勘違いされ), unless it is one of word.quote-stem-other or the adverb 決まって.
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
+//= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
 //= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
@@ -2547,24 +2548,58 @@ adverb.habit-clause	度々
 adverb.habit-clause	たびたび
 adverb.habit-clause	普段
 adverb.habit-clause	ふだん
-verb.quote-word	気付
-verb.quote-word	気づ
-verb.quote-word	気が付
-verb.quote-word	気がつ
-verb.quote-word	自覚
-verb.quote-word	悟
-verb.quote-word	察
-verb.quote-word	仰
-verb.quote-word	想像
-verb.quote-word	妄想
-verb.quote-word	予想
-verb.quote-word	ぼや
-verb.quote-word	決め
-verb.quote-word	決ま
-verb.quote-word	勘違い
-verb.quote-word	察し
-verb.quote-word	決め込
-verb.quote-word	決まってい
+verb.quote-stem	気付
+verb.quote-stem	気づ
+verb.quote-stem	気が付
+verb.quote-stem	気がつ
+verb.quote-stem	自覚
+verb.quote-stem	悟
+verb.quote-stem	察
+verb.quote-stem	仰
+verb.quote-stem	想像
+verb.quote-stem	妄想
+verb.quote-stem	予想
+verb.quote-stem	ぼや
+verb.quote-stem	決め
+verb.quote-stem	決ま
+verb.quote-stem	勘違い
+word.quote-stem-other	予想通り
+word.quote-stem-other	予想外
+word.quote-stem-other	予想以上
+word.quote-stem-other	予想より
+word.quote-stem-other	予想に反
+word.quote-stem-other	想像以上
+word.quote-stem-other	想像を絶
+word.quote-stem-other	想像より
+word.quote-stem-other	想像だけ
+word.quote-stem-other	想像通り
+word.quote-stem-other	仰天
+word.quote-stem-other	仰向け
+word.quote-stem-other	仰け反
+word.quote-stem-other	ぼやけ
+word.quote-stem-other	察しがつ
+word.quote-stem-other	察しが付
+word.quote-stem-other	決まりき
+word.quote-stem-other	気付かないうち
+word.quote-stem-other	気づかないうち
+word.quote-stem-other	気が付かないうち
+word.quote-stem-other	気がつかないうち
+word.quote-stem-other	気付かぬうち
+word.quote-stem-other	気づかぬうち
+word.quote-stem-other	勘違いだ
+word.quote-stem-other	勘違いで
+word.quote-stem-other	勘違いや
+word.quote-stem-other	仰ぎ
+word.quote-stem-other	仰いだ
+word.quote-stem-other	仰いで
+word.quote-stem-other	仰が
+word.quote-stem-other	仰げ
+word.quote-stem-other	決め台詞
+word.quote-stem-other	決めゼリフ
+word.quote-stem-other	決め手
+word.quote-stem-other	決め顔
+word.quote-stem-other	決めポーズ
+word.quote-stem-other	決め技
 verb.te-state-aux	い
 verb.te-state-aux	居
 verb.te-state-aux	お

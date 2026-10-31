@@ -20,7 +20,6 @@ rewrite:past-sequence	もし彼が来たらどうしようと悩んでいたが�
 rewrite:past-sequence	戦いが始まると彼は逃げ出した。	has:시작되니	fix	rewrites
 rewrite:past-sequence	荷物をまとめると部屋を出た。	has:정리하니	fix	rewrites
 rewrite:past-sequence	荷物をまとめると、部屋を出た。	has:정리하니	fix	rewrites
-rewrite:past-sequence	扉を開けると彼がいるので驚いた。	has:열자	fix	rewrites
 rewrite:past-sequence	振り返ると素晴らしい景色が広がっていた。	has:돌아보니	fix	rewrites
 rewrite:past-sequence	扉を開けるといやらしい笑みを浮かべた男がいた。	has:열자	fix	rewrites
 rewrite:past-sequence	部屋に入ると普段は無口な彼が笑っていた。	has:들어가니	fix	rewrites
