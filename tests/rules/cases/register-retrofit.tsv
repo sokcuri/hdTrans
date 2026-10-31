@@ -63,7 +63,11 @@ register:REG-21	「やめろ、殴られるっ！」	「그만둬라, 맞아!」
 register:REG-21	「行くねっ！」	「갈게!」	keep	register
 register:REG-21	「行こうっ！」	「가자!」	keep	register
 register:REG-21	「行くっ？」	「가?」	keep	register
-register:REG-21	「その本、貸してやるっ！」	「그 책, 빌려 줄게!」	fix	register
+register:REG-21	「その本、貸してやるっ！」	「그 책, 빌려 준다!」	keep	register
+register:REG-21	「お前に貸してやるっ！」	「너에게 빌려 줄게!」	fix	register
+register:REG-21	「お前に教えてやるっ！」	「너에게 가르쳐 줄게!」	fix	register
+register:REG-21	「殺してやるっ！」	「죽여준다!」	keep	register
+register:REG-21	「ぶっ飛ばしてやるっ！」	「날려 버려 준다!」	keep	register
 register:REG-21	「わかった、やってみる」	「알았다, 해 볼게」	fix	register
 register:REG-22	「私はもう帰る」	「나는 이제 돌아가」	fix	register
 register:REG-22	「明日は雨が降りそうだ」	「내일은 비가 올 것 같아」	fix	register

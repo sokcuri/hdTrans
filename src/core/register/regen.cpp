@@ -865,7 +865,8 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                 const bool keep = (perQuote ? quoteAt(q).keep : dec.keep) || thinkOf(q) || nested[q] || trail || trailing ||
                                   declared;
                 // REG-21: a plain 주다, or 보다 after a verb or for てみる, at the end (빌려 준다, 해 본다) has in 해체 the
-                // form that asks (빌려 줘, 해 봐): the speaker's own will (貸してやる, してみる) is a promise, -ㄹ게; any other keeps -다
+                // form that asks (빌려 줘, 해 봐): the speaker's own will (てあげる, てみる, お前に貸してやる) is a promise, -ㄹ게;
+                // any other keeps -다 (殺してやる: a threat, not 죽여 줄게)
                 const bool auxSee = nodes[q].lemma == "보다" &&
                                     (dec.giveDecl || (q > 0 && nodes[q - 1].kind == Kind::V && nodes[q - 1].ctype == CType::conn));
                 const bool give = (nodes[q].lemma == "주다" || auxSee) && nodes[q].ctype == CType::final_ &&

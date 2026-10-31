@@ -181,7 +181,7 @@ struct Cues {
     bool honSonkei = false, honGive = false;  // REG-16
     bool declZo = false;      // REG-17: a plain statement declared with ぞ or ぜ
     bool declBang = false;    // REG-21: a verb's dictionary form cut off with っ or exclaimed with ！ (出るっ, イクよっ！)
-    bool giveDecl = false;    // REG-21: the speaker's own will, てやる, てあげる or てみる bare or with よ (貸してやるっ！, してみる)
+    bool giveDecl = false;    // REG-21: the speaker's own will, てあげる, てみる or a benign てやる to someone (お前に貸してやる)
     bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ
     std::vector<std::pair<std::size_t, std::size_t>> authParts;  // parts of speaker auth rows found (row, part)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
@@ -432,8 +432,20 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (!question && (!tailStripped || (stages.size() == 2 && firstTail == U"よ"))) {
             std::u32string v = stages[tailStripped ? 1 : 0];
             while (!v.empty() && (v.back() == U'っ' || v.back() == U'ッ' || v.back() == U'ー')) v.pop_back();
-            for (const std::u32string_view give : {U"てやる", U"でやる", U"てあげる", U"であげる", U"てみる", U"でみる"})
+            for (const std::u32string_view give : {U"てあげる", U"であげる", U"てみる", U"でみる"})
                 if (EndsWith(v, give)) c.giveDecl = true;
+            // てやる is also the threat (殺してやる): a promise only with a beneficiary named by に (お前に貸してやる)
+            // and no harm in the verb
+            if (EndsWith(v, U"てやる") || EndsWith(v, U"でやる")) {
+                bool harm = false;
+                for (const std::u32string_view h : {U"殺", U"潰", U"殴", U"叩", U"ぶっ", U"ぶん", U"思い知", U"後悔", U"懲ら",
+                                                     U"犯", U"壊", U"消し", U"倒し", U"痛い目", U"地獄", U"呪"})
+                    if (v.find(h) != std::u32string::npos) harm = true;
+                const std::size_t te = v.size() - 3;
+                const std::size_t ni = v.rfind(U'に', te);
+                const bool beneficiary = ni != std::u32string::npos && ni > 0;
+                c.giveDecl = beneficiary && !harm;
+            }
             constexpr std::u32string_view kVerbEnds = U"うくぐすつぬぶむるウクグスツヌブムル";
             constexpr std::u32string_view kARow = U"あかがさざただなはばぱまやらわ";
             const bool vol = v.size() >= 2 && v.back() == U'う' && kORow.find(v[v.size() - 2]) != std::u32string_view::npos;
