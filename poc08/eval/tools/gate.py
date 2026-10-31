@@ -262,11 +262,13 @@ def third_on_all(rep12, rep3, x, y):
     l2 = rep12["pairs"][pname][m2]["lines"]
     l3 = rep3["pairs"].get(pname, {}).get(m3, {}).get("lines", {})
     maj = collections.Counter()
-    worse2 = []
+    worse2, worse3 = [], []
     for i in l1:
         v = [l1[i], l2.get(i, 0), l3.get(i, 0)]
         if v.count(-1) >= 2:
             worse2.append(i)
+        if v.count(-1) == 3:
+            worse3.append(i)
         c = collections.Counter(v)
         top, k = c.most_common(1)[0]
         maj[{1: "win", 0: "tie", -1: "loss"}[top] if k >= 2 else "tie"] += 1
@@ -282,7 +284,7 @@ def third_on_all(rep12, rep3, x, y):
          "j1-j3": kappa2([c1[q] for q in keys], [c3[q] for q in keys]),
          "j2-j3": kappa2([c2[q] for q in keys], [c3[q] for q in keys])}
     return {"majority": {kk: maj[kk] for kk in ("win", "tie", "loss")}, "kappas": k, "n_outputs": len(keys),
-            "worse_2of3": sorted(worse2)}
+            "worse_2of3": sorted(worse2), "worse_all3": sorted(worse3)}
 
 
 def pair_stats(rep, x, y):
@@ -317,12 +319,16 @@ def slice_verdict(st, n_changed):
         why.append(f"2:1 not enforced ({w}:{l_}, < {MIN_DECISIVE} decisive)")
     k = st["kappa"]
     if st.get("third_all"):
-        # policy (2026-10-31 12:15 KST): judge 3 judged every changed line, so the verdict is the 3-judge
-        # majority, "worse" = worse by at least 2 of the 3 judges (must be 0), and kappa is information only
+        # policy (2026-10-31, corrected): judge 3 judged every changed line, so the verdict is the 3-judge
+        # majority (2:1 as above), "worse" = worse by all three judges (must be 0), lines worse by 2 of 3 are a
+        # warning list, and kappa is information only
+        w3 = st["third_all"].get("worse_all3", [])
         w2 = st["third_all"].get("worse_2of3", [])
-        if w2:
+        if w3:
             ok = False
-            why.append(f"{len(w2)} worse by >= 2 of 3")
+            why.append(f"{len(w3)} worse by all 3")
+        if w2:
+            why.append(f"warning: {len(w2)} worse by 2 of 3")
         ks = ", ".join(f"{p} {'–' if v is None else round(v, 2)}" for p, v in st["third_all"]["kappas"].items())
         why.append(f"3-judge majority; kappa for information ({ks})")
     elif st["worse_by_both"]:
@@ -398,7 +404,7 @@ def reverdict(gdir):
     fails = [k for k in G["slices"] if not k.endswith("-aware") and G["slices"][k].get("verdict") == "FAIL"]
     ok = not fails and G["dev_pooled"]["verdict"] != "FAIL" and not G.get("flip", {}).get("lost")
     G["verdict"], G["failed"] = ("PASS" if ok else "FAIL"), fails
-    G["reverdict"] = datetime.datetime.now(KST).strftime("%Y%m%d-%H%M") + " (policy: 3-judge majority when judge 3 judged all lines)"
+    G["reverdict"] = datetime.datetime.now(KST).strftime("%Y%m%d-%H%M") + " (policy: 3-judge slices pass on 2:1 and 0 lines worse by all 3)"
     with open(os.path.join(gdir, "gate-reverdict.json"), "w", encoding="utf-8") as f:
         json.dump(G, f, ensure_ascii=False, indent=1)
     md = render(G) + f"\n\nRe-issued {G['reverdict']} from the saved judge reports (no new judging)."
@@ -576,8 +582,10 @@ def render(G):
         o.append(f"- speaker tags passed to both engines (【name】 before the quote): "
                  + ", ".join(f"{k} {s['speaker_tagged']}" for k, s in G["slices"].items() if s.get("speaker_tagged")))
     for k, s in G["slices"].items():
+        if s.get("third_all", {}).get("worse_all3"):
+            o.append(f"- worse by all 3 judges on {k}: {', '.join(s['third_all']['worse_all3'][:40])}")
         if s.get("third_all", {}).get("worse_2of3"):
-            o.append(f"- worse by >= 2 of 3 on {k}: {', '.join(s['third_all']['worse_2of3'][:40])}")
+            o.append(f"- warning, worse by 2 or 3 of 3 on {k}: {', '.join(s['third_all']['worse_2of3'][:40])}")
     for k, s in G["slices"].items():
         if s.get("worse_by_both") and not s.get("third_all"):
             o.append(f"- worse by both on {k}: {', '.join(s['worse_by_both'][:40])}")
@@ -628,11 +636,13 @@ def self_test():
           "mqm": {"d": {"c": {"lines": {"1": [0, 0, 0, 0, 0], "2": [0, 0, 0, 0, 0]}}}}}
     t = third_on_all(r12, r3, "c", "b")
     assert t["majority"] == {"win": 2, "tie": 0, "loss": 1}, t
-    assert t["worse_2of3"] == ["2"]
+    assert t["worse_2of3"] == ["2"] and t["worse_all3"] == []
     st3 = {"majority": t["majority"], "worse_by_both": ["2"], "kappa": 0.1, "kappa_n": 100, "third_all": t}
+    assert slice_verdict(st3, 3)["verdict"] == "PASS"   # 2 of 3 is a warning; kappa 0.1 is information only
+    st3["third_all"] = dict(t, worse_all3=["2"])
     assert slice_verdict(st3, 3)["verdict"] == "FAIL"
-    st3["third_all"] = dict(t, worse_2of3=[])
-    assert slice_verdict(st3, 3)["verdict"] == "PASS"   # kappa 0.1 is information only
+    st3["third_all"], st3["majority"] = dict(t), {"win": 19, "tie": 0, "loss": 10}
+    assert slice_verdict(st3, 29)["verdict"] == "FAIL"
     print("gate self-test OK")
     return 0
 
