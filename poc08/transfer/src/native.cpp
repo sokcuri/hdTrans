@@ -1415,7 +1415,8 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 std::string counted;
                 for (int b = static_cast<int>(i) - 1; b >= 0 && b >= static_cast<int>(i) - 3; b--)
                     if (x.tk[static_cast<size_t>(b)].content && IsNounPos(x.tk[static_cast<size_t>(b)].epos)) {
-                        counted = x.tk[static_cast<size_t>(b)].lemma;
+                        const Tk& cn = x.tk[static_cast<size_t>(b)];
+                        counted = cn.entry ? cn.entry->ja : cn.lemma;
                         break;
                     }
                 for (const Sense& sn : k.counter->senses) {

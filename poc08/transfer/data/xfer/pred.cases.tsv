@@ -55,3 +55,4 @@ pred.nai.exist.mo	fix	本もない。	책도 없다.	inv
 pred.nai.exist.mo	keep	本もある。	책도 있다.	inv
 pred.nai.exist.wa	fix	「時間はない。」	「시간은 없어.」	inv
 pred.nai.exist.wa	keep	「時間はある。」	「시간은 있어.」	inv
+pred.cop.wh.hold	keep	「これは何ですか。」	「이건 뭐예요?」	inv

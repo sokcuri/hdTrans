@@ -5,8 +5,6 @@ pol.neg.short	keep	本を読まない。	책을 읽지 않는다.	inv
 pol.neg.long	fix	本を読まない。	책을 읽지 않는다.	inv
 pol.neg.long	keep	「本を読まない。」	「책을 안 읽어.」	inv
 pol.neg.short	fix	「毎日、勉強しない。」	「매일, 공부 안 해.」	inv
-pol.mou.neg	fix	もうパンを食べない。	더 이상 빵을 먹지 않는다.	inv
-pol.mou.neg	keep	もうパンを食べた。	벌써 빵을 먹었다.	inv
 adv.mou.ii	fix	「もういいです」	「이제 됐어요」	inv
 adv.mou.ii	keep	「部屋が静かです」	「방이 조용해요」	inv
 adv.sou.alone	fix	「……そう……」	「……그래……」	inv
