@@ -49,6 +49,7 @@ inline std::string_view LoadInfoKind(dict::LoadFileKind kind) {
     case Kind::MemoryEhndPostFilter: return "Ehnd 후처리 필터, 메모리";
     case Kind::MemoryEhndSkipLayer: return "Ehnd 레이어 조건, 메모리";
     case Kind::MemoryEhndUserDict: return "Ehnd 사용자 사전, 메모리";
+    case Kind::HostUserDict: return "아네모네 사용자 사전";
     case Kind::EhndDisabled: return {};
     }
     return {};

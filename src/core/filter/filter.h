@@ -40,6 +40,9 @@ struct Source {
     std::string text;
     // A file of a dictionary folder, where a line starting with "#" is a comment too.
     bool native = false;
+    // A user dictionary of the host program (SetHostUserDicts): name is its path, and bad
+    // rows are skipped even in strict mode.
+    bool host = false;
 };
 
 enum class ErrorKind : uint8_t { BadRow, IgnoredShortFields };

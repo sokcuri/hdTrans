@@ -23,6 +23,7 @@ enum class LoadFileKind : std::uint8_t {
     MemoryEhndPostFilter,
     MemoryEhndSkipLayer,
     MemoryEhndUserDict,
+    HostUserDict,
     EhndDisabled,
 };
 
