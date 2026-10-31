@@ -202,7 +202,7 @@ bool HiraganaHonorificAt(std::string_view s) {
 // that spoken emphasis puts inside a verb (落っちろ, 行っちゃう).
 bool ConjugatedAfter(const dict::Candidate& c, std::string_view after) {
     const std::string_view part = c.codes->partText;
-    if (part.size() != 4 || part[0] != 'M' || after.starts_with("っ")) return true;
+    if (part.size() != 4 || after.starts_with("っ")) return true;
     for (int branch = 0; branch < kConjugationBranches; branch++) {
         const std::string_view conj = Conjugation(part[3] - '0', branch);
         if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && after.starts_with(conj)) return true;
@@ -212,13 +212,16 @@ bool ConjugatedAfter(const dict::Candidate& c, std::string_view after) {
 
 // Whether c is a verb or adjective as long as source, or longer, that reads the word
 // rather than a name before an honorific: not a verb stem that the honorific's kana do not
-// conjugate (空ちゃん, 祭ちゃん), nor an adjective stem before an honorific other than く, or before
-// くん that a particle, a break or the end follows (幸さん, 碧くんが: not the 碧く of 碧い).
+// conjugate (空ちゃん, 祭ちゃん), nor an adjective stem before an honorific other than く or さま, or
+// before くん that a particle, a break or the end follows (幸さん, 碧くんが: not the 碧く of 碧い; the
+// さ of 安さまで is the noun of the adjective).
 bool PredicateBlocks(const dict::Candidate& c, std::string_view source, std::string_view after) {
     if (c.codes == nullptr || !AnyOf("478", c.codes->part.ClassDigit()) || c.source.size() < source.size()) return false;
     if (c.source.size() > source.size()) return true;
     if (c.codes->part.Tag() == 'M') return ConjugatedAfter(c, after);
-    if (c.codes->part.Tag() == 'H' && HonorificAt(after, false)) return after.starts_with("く") && !HiraganaHonorificAt(after);
+    if (c.codes->part.Tag() == 'H' && HonorificAt(after, false)) {
+        return after.starts_with("さま") || (after.starts_with("く") && !HiraganaHonorificAt(after));
+    }
     return true;
 }
 

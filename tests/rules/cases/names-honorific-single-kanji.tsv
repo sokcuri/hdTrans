@@ -31,13 +31,17 @@ constraint:honorific-kanji-name	案内役のオウル、アミルさん一家、
 constraint:honorific-kanji-name	咲夜「！？望さん！？」	사쿠야 「!? 노조미 씨!?」	keep	lookup
 constraint:honorific-kanji-name	「で、どこまで歩くんだ？」	「그래서, 어디까지 걷는 거야?」	keep	lookup
 constraint:honorific-kanji-name	︿飛ばしてどこへ行くんです？	︿날려 어디에 갑니까?	keep	lookup
-constraint:honorific-kanji-name	自分を差し置いて雄太と勝負するとは許さんぞ	자신을 그대로 두어 유타와 승부한다고는 용서하지 않아	keep	lookup
-constraint:honorific-kanji-name	「おっちゃん、喧嘩を売りに行くんじゃないよ？」	「있으면, 싸움을 걸러 가지 않아?」	keep	lookup
+constraint:honorific-kanji-name	自分を差し置いて雄太と勝負するとは許さんぞ	has:용서하지 않아	keep	lookup
+constraint:honorific-kanji-name	「おっちゃん、喧嘩を売りに行くんじゃないよ？」	has:걸러 가지	keep	lookup
 constraint:honorific-kanji-name	手伝いに来てくれた稔君と共に、部屋を掃除し始める。	도우러 와 준 미노루 군과 함께, 방을 청소하기 시작한다.	keep	lookup
 constraint:honorific-kanji-name	な事するのね！」とか言って、ゲラゲラ笑ってたロノアは許さん。	일 하는구나!」든지 말해, 껄껄 웃던 로노아는 용서하지 않는다.	keep	lookup
 constraint:honorific-kanji-name	心配なんだけどね。私とルークに仕事がなかったら一緒に行くんだけど……」	걱정인데. 나와 루크에 일이 없었으면 함께 가는데……」	keep	lookup
-constraint:honorific-kanji-name	始まって、Ｅ↓Ｄ↓Ｃ↓Ｂ↓Ａ↓Ｓの順番に繰り上がって行くんだって。	시작되어, E↓D↓C↓B↓A↓S의 차례로 감아 간대.	keep	lookup
+constraint:honorific-kanji-name	始まって、Ｅ↓Ｄ↓Ｃ↓Ｂ↓Ａ↓Ｓの順番に繰り上がって行くんだって。	has:간대	keep	lookup
 constraint:honorific-kanji-name	「ねえ、恵さん」	「있잖아, 메구미 씨」	keep	lookup
 constraint:honorific-kanji-name	進さんといるのは嫌いではない。	스스무 씨와 있는 것은 싫지 않다.	keep	lookup
 constraint:honorific-kanji-name	家に茜さんの香りを持って帰ろうとしたのに。	집에 아카네 씨의 향기를 가지고 돌아가려고 했는데.	keep	lookup
 constraint:honorific-kanji-name	守君のことは大家さんに任せ、悠夏は守君の母親に連絡した。	마모루 군은 집주인에 맡겨 하루카는 마모루 군의 어머니에게 연락했다.	keep	lookup
+constraint:honorific-kanji-name	値段の安さまで同じだった。	has:쌈까지	keep	lookup
+constraint:honorific-kanji-name	その潔さまで見事だ。	lacks:님	keep	lookup
+constraint:honorific-kanji-name	彼の偉さまでは分からない。	lacks:님	keep	lookup
+constraint:honorific-kanji-name	光ちゃんと届いてる？	has:미츠루짱과	current	lookup
