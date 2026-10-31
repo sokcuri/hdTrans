@@ -183,8 +183,12 @@ std::string_view ScriptOf(std::u32string_view s) {
 }
 
 bool HasKatakana(std::string_view s) {
-  for (char32_t c : ToU32(s))
-    if (IsKataLetter(c)) return true;
+  // U+30A1..U+30F6 in UTF-8: E3 82 A1..BF, E3 83 80..B6
+  for (size_t i = 0; i + 2 < s.size(); ++i) {
+    auto b0 = static_cast<unsigned char>(s[i]), b1 = static_cast<unsigned char>(s[i + 1]),
+         b2 = static_cast<unsigned char>(s[i + 2]);
+    if (b0 == 0xE3 && ((b1 == 0x82 && b2 >= 0xA1) || (b1 == 0x83 && b2 <= 0xB6))) return true;
+  }
   return false;
 }
 
@@ -987,49 +991,60 @@ class Reader {
   // keeps such a space splits a word (rp.bad.space-in-word).
   void FindCrossable() {
     size_t n = ws_->core.size();
-    cross_.assign(n + 1, 0);
-    if (R_.spaceInWord.empty() || !R_.ops[static_cast<size_t>(RepairOp::space)].on || layout_) return;
-    const auto& core = ws_->core;
-    auto jp = [](char32_t c) { return IsHiragana(c) || IsKatakana(c) || IsKanji(c); };
-    std::vector<uint8_t> after(n + 1, 0);  // the current reading ends an interjection or a final particle here
-    std::vector<uint8_t> afterFunction(n + 1, 0);  // … a particle or an auxiliary
-    std::vector<uint8_t> beforeContent(n + 1, 0);  // … and starts a content word here
+    cross_.assign(n + 1, 0);  // 0 not judged yet, 1 no, 2 a word spans the space
+    crossOn_ = !R_.spaceInWord.empty() && R_.ops[static_cast<size_t>(RepairOp::space)].on && !layout_;
+    if (!crossOn_) return;
+    after_.assign(n + 1, 0);
+    afterFunction_.assign(n + 1, 0);
+    beforeContent_.assign(n + 1, 0);
     for (uint32_t ai : ws_->path) {
       const Arc& a = ws_->arcs[ai];
       uint16_t cls = a.kind == ArcKind::lex ? m_.pforms[a.form].cls : a.lcls;
       if (a.kind == ArcKind::longUnit) continue;
       std::string_view ud = m_.udNames[m_.classes[cls].ud];
-      if (HasPrefix(R_.pauseUd, ud) && a.e - a.b >= 2) after[a.e] = 1;
-      if (HasPrefix(R_.phraseEndUd, ud)) afterFunction[a.e] = 1;
-      else if (!HasPrefix(R_.functionUd, ud)) beforeContent[a.b] = 1;
+      if (HasPrefix(R_.pauseUd, ud) && a.e - a.b >= 2) after_[a.e] = 1;
+      if (HasPrefix(R_.phraseEndUd, ud)) afterFunction_[a.e] = 1;
+      else if (!HasPrefix(R_.functionUd, ud)) beforeContent_[a.b] = 1;
     }
-    for (uint32_t k = 1; k < n; ++k) {
-      if (!ws_->spaceBefore[k] || !single_[k] || ws_->joinable[k] || !jp(core[k - 1]) || !jp(core[k])) continue;
-      if (after[k]) continue;  // ああ あっし, よ そして: a pause after an interjection or a final particle
-      if (afterFunction[k] && beforeContent[k]) continue;  // そばに いて: a space between a particle and a content word parts phrases
-      Workspace tmp;
-      for (uint32_t x = 0; x < ws_->nchars.size(); ++x)
-        if (x <= ws_->coreN[k - 1] || x >= ws_->coreN[k]) tmp.nchars.push_back(ws_->nchars[x]);
-      BuildLattice(m_, &tmp, opt_);
-      RunViterbi(m_, &tmp, false);
-      // a spaced repeat or stutter (はい はい, ハァ ハァ, ど どうした) keeps its space
-      for (uint32_t ai : tmp.path) {
-        const Arc& a = tmp.arcs[ai];
-        if (a.b >= k || a.e <= k || a.kind != ArcKind::lex) continue;  // a long unit is words (もう ちょっと)
-        if (k - a.b <= a.e - k && std::equal(core.begin() + a.b, core.begin() + k, core.begin() + k)) continue;
-        bool one = true;  // one letter repeated (あああ)
-        for (uint32_t x = a.b + 1; x < a.e; ++x) one = one && core[x] == core[a.b];
-        if (one) continue;
-        cross_[k] = 1;
-      }
+  }
+
+  // Whether a dictionary word spans the space before core position k (judged once, when first asked).
+  bool Cross(uint32_t k) const {
+    if (!crossOn_ || k == 0 || k >= cross_.size()) return false;
+    if (cross_[k]) return cross_[k] == 2;
+    cross_[k] = 1;
+    size_t n = ws_->core.size();
+    const auto& core = ws_->core;
+    auto jp = [](char32_t c) { return IsHiragana(c) || IsKatakana(c) || IsKanji(c); };
+    if (!ws_->spaceBefore[k] || !single_[k] || ws_->joinable[k] || !jp(core[k - 1]) || !jp(core[k])) return false;
+    if (after_[k]) return false;  // ああ あっし, よ そして: a pause after an interjection or a final particle
+    if (afterFunction_[k] && beforeContent_[k]) return false;  // そばに いて: a space between a particle and a content word parts phrases
+    // the analyzer's reading of the text around the space (twelve letters each side) with the space dropped
+    const uint32_t lo = k > 12 ? k - 12 : 0, hi = std::min<uint32_t>(static_cast<uint32_t>(n), k + 12);
+    Workspace tmp;
+    for (uint32_t x = ws_->coreN[lo]; x <= ws_->coreN[hi - 1]; ++x)
+      if (x <= ws_->coreN[k - 1] || x >= ws_->coreN[k]) tmp.nchars.push_back(ws_->nchars[x]);
+    BuildLattice(m_, &tmp, opt_);
+    RunViterbi(m_, &tmp, false);
+    // a spaced repeat or stutter (はい はい, ハァ ハァ, ど どうした) keeps its space
+    for (uint32_t ai : tmp.path) {
+      const Arc& t = tmp.arcs[ai];
+      uint32_t b = t.b + lo, e = t.e + lo;
+      if (b >= k || e <= k || t.kind != ArcKind::lex) continue;  // a long unit is words (もう ちょっと)
+      if (k - b <= e - k && std::equal(core.begin() + b, core.begin() + k, core.begin() + k)) continue;
+      bool one = true;  // one letter repeated (あああ)
+      for (uint32_t x = b + 1; x < e; ++x) one = one && core[x] == core[b];
+      if (one) continue;
+      cross_[k] = 2;
     }
+    return cross_[k] == 2;
   }
 
   bool LongKata(uint32_t p) const { return p < longKata_.size() && longKata_[p]; }
 
   // A kept space a dictionary word spans, before core position p (not at the edge of the span read).
   int SpaceBad(uint32_t p, const RepairArc* next) const {
-    if (p >= cross_.size() || !cross_[p]) return 0;
+    if (!Cross(p)) return 0;
     if (next)
       for (auto& e : next->edits)
         if (e.spaceOnly && e.pos == p) return 0;
@@ -1223,7 +1238,9 @@ class Reader {
   const RepairRules& R_;
   Workspace* ws_;
   Options opt_;
-  std::vector<uint8_t> cross_, single_, triple_, dup_;
+  mutable std::vector<uint8_t> cross_;
+  std::vector<uint8_t> single_, triple_, dup_, after_, afterFunction_, beforeContent_;
+  bool crossOn_ = false;
   std::vector<uint32_t> wordRun_;
   std::vector<uint8_t> longKata_, unknown_;
   bool layout_ = false;
