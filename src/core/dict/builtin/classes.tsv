@@ -1,7 +1,7 @@
 // Word classes the passes test words against (dict::InClass, dict::ClassMembers):
 // SET <TAB> MEMBER [<TAB> NOTE]. A set is its rows in file order, and a member appears once
 // in it. Every set is named once below by "//= SET <TAB> what it is for".
-//= adverb.at-last	Adverbs of something reached at last (ついに, とうとう), after which a やった is a success (ついにやった 드디어 해냈다).
+//= adverb.at-last	Adverbs of something reached at last (ついに, とうとう), after which a やった is a success (ついにやった 드디어 해냈다) and the られ of an ichidan verb may be the potential, so a passive voice row of a pack does not apply (やっと彼女に話しかけられた).
 //= adverb.degree-feeling	Degree adverbs that may stand between the て form and the word of feeling (来てくれて本当に 嬉しい).
 //= adverb.noun-reading	Adverbs of amount or fit the dictionary also reads as nouns before です or だ (たっぷり, ぴったり), which stay adverbs after a degree word (すごいたっぷり 엄청 듬뿍).
 //= adverb.forcing	Starts of the words of doing something against one's will (無理やり, 強制的に, 強制労働), which already say the 억지로 of a causative-passive in their clause.

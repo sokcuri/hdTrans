@@ -1,0 +1,164 @@
+# 규칙: GRM-3060
+# 규칙: GRM-3061
+# 규칙: GRM-3062
+# 규칙: GRM-3063
+# 규칙: GRM-3064
+# 규칙: GRM-3065
+# 규칙: GRM-3066
+# 규칙: GRM-3067
+# 규칙: GRM-3068
+# 규칙: GRM-3069
+# 규칙: GRM-3070
+# 규칙: GRM-3071
+# 규칙: GRM-3072
+rule	input	expected	kind	layer
+grammar:書くように前へ出た	大きな目を涙に潤ませた少女は、ディートリヒを庇うように前へ出た。	has:감싸듯이 앞으로 나섰다	fix	lookup
+grammar:書くように前へ出て	そして対峙する少女は四人を庇うように前へ出て、お札を構えていた。	has:감싸듯이 앞으로 나서	fix	lookup
+grammar:書くように前へ出る	女性は、子供達を庇うように前へ出る。	has:감싸듯이 앞으로 나선다	fix	lookup
+grammar:書くように前へ出た	代表として一歩を踏み、皆を庇うようにして前へ出でて、荒ぶる聖女様と対峙する。	lacks:감싸듯이 앞으로	keep	lookup
+grammar:書くように前へ出た	俺は反射的に、ルキアシエルを庇うように前へと出て、彼女の手を握る。	lacks:감싸듯이 앞으로	keep	lookup
+grammar:書くように前へ出た	柴田先輩の言葉を守り、コロ太は俺を庇うように前へと立ちはだかった。	lacks:감싸듯이 앞으로	keep	lookup
+pack:clause-patterns:1	「あまり会われていないヤルド様とセスト様のお名前までご存知なのですか？」	has:만나시지 않은	fix	packs
+pack:clause-patterns:1	「このマーメイドの国の女王様よ。是非一度会われるといいわ」	has:만나시면	fix	packs
+pack:clause-patterns:1	「だったら、今度会われたときに」	has:만나셨을 때	fix	packs
+pack:clause-patterns:1	「アレン様、本当に会われるのですか？」	has:만나십니까	keep	packs
+pack:clause-patterns:1	「会われますか？呼びますよ」	has:만나시겠습니까	keep	packs
+pack:clause-patterns:1	会合ではアジアの分割について話しあわれてイギリスは東進をしないことを約束し、	!rule:pack:clause-patterns:1	keep	packs
+grammar:書きおったか	「おお、来おったか」	has:왔는가	fix	lookup
+grammar:書きおったか	「くっ、とうとうここまで来おったか」	has:왔는가	fix	lookup
+grammar:書きおったか	「来おったか……！」	has:왔는가	fix	lookup
+grammar:書きおったか	角田は相変わらず毛の生えたところを撫でたりさすったりして、ときおりからかうように毛を引っ張ってくる。	lacks:는가	keep	lookup
+grammar:書きおったか	ときおりかき混ぜながら煮込むこと数時間。	has:때때로	keep	lookup
+grammar:書きおったか	「ふぅーー。ようやっと来おったかい」	lacks:왔는가	keep	lookup
+grammar:書いちゃうと思うから	いや、他のギルドのトップが反応しちゃうと思うから、よくはないと思う……。	has:반응해 버릴 것 같으니까	fix	lookup
+grammar:書いちゃうと思うから	「ただ、育てるとしたら室内でね。外だと寒くて枯れちゃうと思うから」	has:시들어 버릴 것 같으니까	fix	lookup
+grammar:書いちゃうと思う	「たぶん、なんとかなっちゃうと思う」	has:돼 버릴 것 같아	fix	lookup
+grammar:書いちゃうと思う	大精霊が四体も集まるとまた注目されてしまうと思ったからだ。	has:주목받아버릴 것이라고	keep	lookup
+grammar:書いちゃうと思う	「どちらもとても恐れているの。相手にやられてしまうと思っているの。どうしたら、不安をぬぐうことができるの？」	has:당해버릴 것이라고	keep	lookup
+grammar:書いちゃうと思う	この熱が逃げてしまうと思ったら、とても動く気にはなれない。	has:도망쳐버릴 것이라고	keep	lookup
+grammar:書けないでいる	一方の辰巳は固まって、次の質問を口から出せないでいる。	has:못하고 있다	fix	lookup
+grammar:書けないでいる	その内容の過激な意味不明ぶりに、さしものエミリアも驚きを隠せないでいる。	has:못하고 있다	fix	lookup
+grammar:書けないでいる	カミやモノは、存在しているけれど、祀れないでいる。	has:못하고 있다	fix	lookup
+grammar:書けないでいる	が川上先生は動かないでいる。	has:움직이지 않고 있다	keep	lookup
+grammar:書けないでいる	「やっぱり、アニス様は、この二人のお子様なのね。何も言わないでいるけど、その顔がこういう時のご両親そっくりだもの。」	has:말하지 않고 있	keep	lookup
+grammar:書けないでいる	従兄弟や叔父にはその時になるまで、話はしないでいる。	has:하지 않	keep	lookup
+pack:clause-patterns:2	「机で……用紙見てたら、話しかけられて……」	lacks:말을 걸어져	fix	packs
+pack:clause-patterns:2	急に話しかけられて体がビクッと飛び跳ねてしまった。	lacks:말을 걸어져	fix	packs
+pack:clause-patterns:2	突然話しかけられて何を言い出すのだろうと探る様に大地が答える。	lacks:말을 걸어져	fix	packs
+pack:clause-patterns:2	単純になかなか私がお客さんに話しかけられないでいるからだ。	!rule:pack:clause-patterns:2	keep	packs
+pack:clause-patterns:2	なので周りからあまり話しかけられず、しかも一部の男子生徒によって和人はオタクのレッテルを張らている。	!rule:pack:clause-patterns:2	keep	packs
+pack:clause-patterns:2	それだけでなく、話しかけられることも増えたのだが相変わらず逃げてしまっている。	!rule:pack:clause-patterns:2	keep	packs
+pack:clause-patterns:2	友達に話しかけられた。	has:친구가 말을 걸어왔다.	fix	packs
+pack:clause-patterns:2	先生に話しかけられて驚いた。	has:선생님이 말을 걸어와	fix	packs
+pack:clause-patterns:2	やっと彼女に話しかけられた。	lacks:그녀가 말을	keep	packs
+pack:clause-patterns:2	やっと彼女に話しかけられた。	!rule:pack:clause-patterns:2	keep	packs
+grammar:書くのが許せない	椿は美緒が幸せになるのが許せない。その執念だけが彼女の生きる理由になっていた。	has:것을 용서할 수 없다	fix	lookup
+grammar:書くのが許せない	皓と付き合うのが許せない。	has:사귀는 것을 용서할 수 없다	fix	lookup
+grammar:書くのが許せない	そのことが許せなくて、アリサの中で怒りのボルテージがぐんぐん上がっていった。	has:그것을 용서할 수 없어서	keep	lookup
+grammar:書くのが許せなかった	聖域に踏み込んだことが許せなかった。	lacks:것을 용서할 수 없었다	keep	lookup
+grammar:書くのが許せなかった	正確には保護であるのだが、理人にとっては仄暗い牢の中に入れられたことが許せなかった。	lacks:것을 용서할 수 없었다	keep	lookup
+grammar:書いてやろうということ	後は実際にやって見せてやろうということだ。	has:보여 주겠다는 것이다	fix	lookup
+grammar:書いてやろうということ	聞くだけ聞いてやろうということだ。	has:들어 주겠다는 것이다	fix	lookup
+grammar:書いてやろうということ	我がお主の伴侶となってやろうということだ	has:되어 주겠다는 것이다	fix	lookup
+grammar:書いてやろうということ	それをしなかったということは、何もせずにアルバを味わわせてやろうということだったのか。	has:그것을 하지 않았다는 것은	keep	lookup
+grammar:書いてやろうということ	ネットやなんかで知れ渡ってしまう前に、せいぜいカモってやろうということだったんだ。	has:등쳐먹어 주겠다는 것이었다	fix	lookup
+grammar:書かない分、	ワイバーンの無い軍隊は、ワイバーンの火力支援が受けられない分、弱い。	has:받게 되지 않는 만큼,	fix	lookup
+grammar:書く分、	責任も多くなる分、疲れてしまうかもしれない。	has:많아지는 만큼,	fix	lookup
+grammar:書く分、	「僕が記憶を食べる分、モモの苦しみが薄れるんだね」	has:먹는 만큼,	fix	lookup
+grammar:書いている分、	むしろ無理をさせられて野宿を強いられている分、僕のほうが状況は悲惨かも。	has:있는 만큼,	fix	lookup
+grammar:書いていた分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:당하고 있던 만큼	keep	lookup
+grammar:書いていた分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:있던 만큼,	keep	lookup
+grammar:書いた分、	これまで迷惑をかけられた分、かなり重い罰則を設けてしまったが自業自得だと思って諦めてほしい。	has:끼쳐진 만큼	keep	lookup
+grammar:書かないでくださいまし	「白々しいことをおっしゃらないでくださいまし！」	has:말아 주세요	fix	lookup
+grammar:書かないでくださいまし	「白々しいことをおっしゃらないでくださいまし！」	lacks:지금 해	fix	lookup
+grammar:書かないでくださいまし	「やだっ、触らないで下さい。」	has:만지지 마세요	keep	lookup
+grammar:書かないでくださいまし	茶化さないで下さい！	has:놀리지 마세요	keep	lookup
+grammar:書かないでくださいまし	「気にしないでください。飛鳥先輩のせいだなんて思ってないですし」	has:신경 쓰지 마세요	keep	lookup
+grammar:書かぬ限り	そして、それを解かぬ限り勝利することは難しいだろう、と。	has:않는 한 승리하는	fix	lookup
+grammar:書かぬ限り	「知っておる。積もるとそれを取り除かぬ限り身動きが取れぬそうじゃな」	has:않는 한 꼼짝이	fix	lookup
+grammar:書かぬ限り	俺の志しが途絶えぬ限り。	has:않는 한.	fix	lookup
+grammar:書かぬ限り	ギブンは即死であっても、魔力が尽きぬ限り瞬間再生される。	has:않는 한 순간	fix	lookup
+grammar:書かぬ限り	死者でない者は、リリスが止めぬ限り、地上へ上がってゆく。	has:않는 한, 지상에	fix	lookup
+grammar:書かぬ限り	「安心しろ。貴様がその態度を忘れぬ限り鞭打ちは勘弁してやる」	has:않는 한 채찍질은	fix	lookup
+grammar:書かぬ限り	陛下を見捨てぬ限り、私もそれに従うつもりです」	has:않는 한, 저도	fix	lookup
+grammar:知らぬ限り	あらゆる幸せを知らぬ限りは、他の者たちを幸せに導くことはできぬ・・・	has:모르는 한은, 다른	fix	lookup
+grammar:書かぬ限り	薪の焔消えぬ限り、常しえに火を生み出さ	has:않는 한, 영원하게	fix	lookup
+grammar:書かぬ限り	捨て去らぬ限りそれは希望なのだから。	has:않는 한 그것은	fix	lookup
+grammar:書かぬ限り	俺が許さぬ限り自由など得られるはずもない。	has:않는 한 자유	fix	lookup
+grammar:書かぬ限り	『エノクが結界を解かぬ限りは、此処から出れぬ……』	has:한은, 여기에서	fix	lookup
+grammar:書かぬ限り	そいつを倒さぬ限り魔力の封印は解けないと、	has:않는 한 마력	fix	lookup
+grammar:書かぬ限り	フランツが死にでもしない限り、次の皇帝は彼に決まっている。	has:않는 한, 다음	keep	lookup
+grammar:書かぬ限り	群れが追加で攻めてこない限り、しばらくは持ち堪えるだろうよ」	has:않는 한, 당분간은	keep	lookup
+grammar:書かぬ限り	同じことが出来る者が出て来ない限り、ランキング一位は揺るがぬだろう。	has:않는 한, 랭킹	keep	lookup
+grammar:書かぬ限り	寒くない限り、彼女は外で食事を摂る。	has:않은 한, 그녀는	keep	lookup
+grammar:書かぬ限り	遠方を見る方法とセットで実現しない限り、実用的な運用は困難と思われる。	has:않는 한, 실용적인	keep	lookup
+grammar:書かぬ限り	話を聞きたくても神殿を出ない限りはゆっくり話すことは難しいだろう。	has:않는 한은 천천히	keep	lookup
+grammar:書かぬ限り	まあ、急所に当たらない限りは大丈夫だけども	has:않는 한 괜찮지만	keep	lookup
+grammar:書かぬ限り	彼と添い遂げるには誘拐でもされない限りはありえない未来だろう。	has:되지 않는 한 있을	keep	lookup
+grammar:書かぬ限り	できる限り外を出歩いてみるべきというのが、２人の考えだった。	has:수 있는 한 밖을	keep	lookup
+grammar:書くといいね	「三人とも同じクラスになるといいねー」	has:되면 좋겠네~」	fix	lookup
+grammar:書くといいね	「まあ、頑張って生きてよ。安楽死ができるといいねって聞こえてないか」	has:좋겠네는 들리지	fix	lookup
+grammar:書くといいね	妃夏「また明日、その数が増えるといいね」	has:늘어나면 좋겠네」	fix	lookup
+grammar:書くといいけど	まだ庶民と関わりたがらない人もいるだろけど、何とかなるといいけど……。	has:되면 좋겠는데…….	fix	lookup
+grammar:書くといいけどな	『そうだな…。忘れられるといいけどな』	has:있으면 좋겠는데』	fix	lookup
+grammar:書くといいんだけど	居てくれるといいんだけど︾	has:주면 좋겠는데 ︾	fix	lookup
+grammar:書かないといいけど	『あの猫と遭遇してないといいけど。』	has:않으면 좋겠는데.』	fix	lookup
+grammar:書かないといいけど	出くわさないといいけど。	has:않으면 좋겠는데.	fix	lookup
+grammar:書かないといいけど	あくまで予定なので気が変わらないといいけど。	has:변함없으면 좋겠는데.	fix	lookup
+grammar:書かないといいな	「ゆ、雪があまり積もらないといいな」	has:눈이 너무 쌓이지 않으면 좋겠다」	fix	lookup
+grammar:書かないといいな	できるだけ壊すなと言っておいたけど壊さないといいな……。	has:않으면 좋겠다…….	fix	lookup
+grammar:書くといいのに	その笑顔が自分にだけ向けられるといいのに。	has:보내지면 좋을 텐데.	fix	lookup
+grammar:書くといいのに	アヤメにも、そんな時間が来るといいのに。	has:오면 좋을 텐데.	fix	lookup
+grammar:書いたらいいのに	あぁ、こんな風景、どこかに行ってしまったらいいのに・・・。	has:좋을 텐데···.	fix	lookup
+grammar:書いたらいいのに	「はぁ……模擬戦でも使えたらいいのになぁ……」	has:좋을 텐데……」	fix	lookup
+grammar:書いたらいいのに	ナイジェルが首輪をくれたらいいのにな。	has:주면 좋을 텐데.	fix	lookup
+grammar:書くといいんですが	「いいですよ。お口に合うといいんですが」	has:맞으면 좋겠는데요」	fix	lookup
+grammar:学生だといいんですが	「そうだといいんですが・・・あ、あれは！」	has:「그러면 좋겠는데요···아,	fix	lookup
+grammar:書いたらいいね	「同じクラスになれたらいいね」	has:있으면 좋겠네」	fix	lookup
+grammar:書いたらいいね	時には立ち向かっていけたらいいね	has:있으면 좋겠네	fix	lookup
+grammar:書くといいね	フェルスが、ぶつぶつといいながら、興味をしめしている。	lacks:좋겠	keep	lookup
+grammar:書くといいね	こんな偏狭といいながらも、少年の表情は笑みに包まれていた。	lacks:좋겠	keep	lookup
+grammar:書くといいのに	「気にせずめいっぱい休めばいいのにな。それができたら苦労しないしな」	has:쉬면 좋을 텐데.	keep	lookup
+grammar:書くといいのに	「種族差なんて無くなればいいのにね」	has:없어지면 좋을 텐데」	keep	lookup
+grammar:書くといいのに	「そうよね、いいことしてるなら放っておけばいいのに」	has:두면 좋을 텐데」	keep	lookup
+grammar:書くといいね	例えるならば、真っ白な部屋に黒い箱が置いてあるのを想像するといい。	has:상상하면 좋다.	keep	lookup
+grammar:書くといいね	「まだ暴れ足りないのかい？僕は止めないから好きにするといいよ。」	has:마음대로 하면 좋아.」	keep	lookup
+grammar:書くといいね	「唇にはしないから、安心するといいよ」	has:안심하면 좋아」	keep	lookup
+grammar:書くといいですね	「では、私も。また会える時があるといいですね。」	has:있으면 좋겠네요.」	keep	lookup
+grammar:書くといいですね	また会えるといいですね。」	has:있으면 좋겠네요.」	keep	lookup
+grammar:書くといいね	「話聞いてくれるといいが」	has:주면 좋겠지만」	keep	lookup
+grammar:書くといいね	というかそもそも夜の相手の意味を分かっているといいが。	has:있으면 좋겠지만.	keep	lookup
+grammar:書くといいな	――ギルさん、受けてくれるといいな。	has:받아 주면 좋겠다.	keep	lookup
+grammar:書くといいな	頭硬い人じゃなくて気軽に話せるといいなぁ。	has:있으면 좋겠다.	keep	lookup
+grammar:書くといいけど	自分がいけばいいけど、あまりでたくなかったから。	has:가면 좋지만, 그다지	keep	lookup
+grammar:書いたらいいんだけど	忙しかったらいいんだけどさ	lacks:좋겠는데	keep	lookup
+grammar:書いたらいいんだけど	言いたくなかったらいいんだけどさ	lacks:좋겠는데	keep	lookup
+grammar:書いたらいいんだけど	イヤだったらいいんだけど	lacks:좋겠는데	keep	lookup
+grammar:書くといいんだが	さえ止めればいいんだが	lacks:좋겠는데	keep	lookup
+grammar:書くといいんですけど	これを押せばいいんですけど、なかなか押せなくて	lacks:좋겠는데	keep	lookup
+grammar:お使いになる	えっ、今お使いになるのですか？	has:지금 쓰십니까?	fix	lookup
+grammar:お帰りになる	「お兄様はお帰りになられたのですね」	has:「오라버니는 돌아오셨군요」	fix	lookup
+grammar:お喜びになる	”あなたが正しい騎士になれば女神様もお喜びになられるでしょう”	has:여신님도 기뻐하시겠죠”	fix	lookup
+grammar:お召し上がりになる	「夕食にお召し上がりになりますか？」	has:드시겠습니까?」	fix	lookup
+grammar:お召し上がりになる	「焼きリンゴ、作って来ましたけど、食べ……お召し上がりになられますか？」	has:먹고……드시겠습니까?」	fix	lookup
+grammar:お許しになる	「そうであろうな……エリーゼ様が私をお許しになるわけがない」	has:나를 허락하실 리가	fix	lookup
+grammar:お疲れになる	どころかお疲れになってしまうではないか。	has:지치셔	fix	lookup
+grammar:お答えになる	陛下は、その唐突な問いに間を置かずにお答えになった。	has:않고 대답하셨다.	fix	lookup
+grammar:お答えになる	すぐにお答えになる若様に、奈瑠はぎょっとした。	has:대답하시는 도련님에게,	fix	lookup
+grammar:お尋ねになる	穏やかな微笑で、とんでもない事をお尋ねになってくる。	has:물으셔	fix	lookup
+grammar:お急ぎになる	「お急ぎになった方が良いかもしれませんね」	has:「서두르시는 것이	fix	lookup
+grammar:お急ぎになる	「皆さま随分とお急ぎになって、どちらへ向かったのでしょう？」	has:상당히 서두르셔,	fix	lookup
+grammar:お急ぎになる	「ああ、お急ぎにならなくてもよろしいですよ。」と、書類を差し出した。	has:「아, 서두르시지	fix	lookup
+grammar:お売りになる	「わかりました、また家をお売りになるときはギルドにご連絡ください」	has:집을 파실 때는	fix	lookup
+grammar:お使いになる	最近休校で部活も何もなく、運動不足でお使いに行ったりしていました。	has:운동부족으로 심부름	keep	lookup
+grammar:お使いになる	それはさながら、初めてお使いに行く子供のようであった。	has:처음으로 심부름	keep	lookup
+grammar:お使いになる	…という事で、お使いに行って貰えますか？	has:…그래서, 심부름	keep	lookup
+grammar:お帰りになる	「お帰りなさいませ、タケル♡」	has:「어서 오세요,	keep	lookup
+grammar:お帰りになる	「お帰りなさい」	has:「어서 오세요」	keep	lookup
+grammar:お帰りになる	「愛海お嬢様、お帰りなさいませ」	has:아가씨, 어서 오세요」	keep	lookup
+grammar:お疲れになる	「お疲れ様。何か飲む？」	has:「수고하셨습니다.	keep	lookup
+grammar:お疲れになる	「……由良さん、お疲れ様です」	has:씨, 수고하셨습니다」	keep	lookup
+grammar:お使いになる	「気にせずお休みになってくださいまし。明日はわたくしの魔法で癒して差し上げましてよ」	has:않고 쉬셔 주세요.	keep	lookup
+grammar:お使いになる	「舞花様は自室でお休みになっておられますので、今日の所はお帰りいただけますか」	has:방에서 쉬시고 계시기	keep	lookup
+grammar:書かぬ限り	左手の指輪を見ない限り、全く人妻には見えない。	has:보지 않는 이상	keep	lookup
+grammar:書かぬ限り	村の掟を破らない限り、衣食住の保障がされること。	has:어기지 않는 이상	keep	lookup

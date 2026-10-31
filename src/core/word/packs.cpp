@@ -788,7 +788,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
 
 }  // namespace
 
-const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voice& v) {
+const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voice& v, bool atLast) {
     const dict::PackTable& t = f.w.snapshot.Packs();
     if (t.Empty() || it->Fixed()) return nullptr;
     const std::string_view decided = v == Voice::Passive       ? "passive"
@@ -801,6 +801,7 @@ const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voic
     if (best < 0 && stem != it->group->surface) best = BestRow(f, t, it, stem, dict::PackSlot::Voice, decided);
     if (best < 0) return nullptr;
     const dict::PackRow& r = t.rows[static_cast<std::size_t>(best)];
+    if (atLast && r.target.starts_with("passive")) return nullptr;
     it->packRows.push_back(r.global);
     if (r.target == "-") return nullptr;
     v = r.target == "passive"       ? Voice::Passive
