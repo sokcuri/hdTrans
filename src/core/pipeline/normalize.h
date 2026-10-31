@@ -20,6 +20,9 @@ struct RunLookup {
     WordHoldsRun holds = nullptr;
     size_t (*start)(const void* context, std::string_view line, size_t at) = nullptr;
     const void* context = nullptr;
+    // Whether text ends with the dictionary form of a dictionary verb that starts at a word boundary
+    // (SpokenForms: the verb of a rebuke in んじゃない); null to take every such form as a verb.
+    bool (*verb)(const void* context, std::string_view text) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
@@ -150,7 +153,7 @@ std::string CollapseDoubledWo(std::string_view text);
 // ねえ after は or も, the contracted ている and いる, じゃない of an appeal (じゃん) or a
 // prohibition (なよ), a clipped adjective (怖っ！ 怖い！), the negative ん (知らん 知らない),
 // できぬ; the ね or ん after a sentence-final かしら is dropped (どうしてかしらね).
-std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false);
+std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false, const RunLookup& runs = {});
 
 // あれ (also drawn out, あれ～？) and え at the start of a sentence before 、，！？…‥ or a
 // dash with a small っ (あれ、 あれっ、, え―― えっ――, えぇ？ えっ？), but not あれ when a

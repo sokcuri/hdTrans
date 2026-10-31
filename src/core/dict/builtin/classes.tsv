@@ -243,6 +243,7 @@
 //= noun.suffered-act	Nouns of what is done to someone (こと, 何): a bare される right after one, or after its を, is the passive of する, 당하다 (どんなことされたの 어떤 일을 당했어), unless GRM-10 reads it respectful.
 //= noun.time-end	Ends of the words of time before から, which then reads 부터 (三時から, 昔から, 少し前から).
 //= noun.title-word	Words that start with an honorific: after a name they are the title (殿下, 様子).
+//= particle.verb-boundary	Particles after which a kana verb starts as its own word (気を抜く, 誰かが行く, そこにいる): EndsInDictionaryVerb takes a verb there, not one that starts inside a kana word (spec MNG-6).
 //= particle.after-letter	Particles after which, or before which after a kanji or katakana, a single Latin letter of mark.laughter is a word, not laughter (変数wの値, のwキー).
 //= numeral.lead	Numerals that start a number with its counter in one word (一匹, 二人, 数本, 1回).
 //= numeral.many	Numerals of numeral.lead that start a count of more than one (10 to 19 start the numbers of two or more digits that begin with 1), after which もう before a past verb is the count reached (もう二人来た 벌써 두 사람 왔다).
@@ -3728,6 +3729,16 @@ noun.title-word	君主
 noun.title-word	君臨
 noun.title-word	氏族
 
+particle.verb-boundary	が
+particle.verb-boundary	を
+particle.verb-boundary	に
+particle.verb-boundary	で
+particle.verb-boundary	と
+particle.verb-boundary	も
+particle.verb-boundary	へ
+particle.verb-boundary	は
+particle.verb-boundary	や
+particle.verb-boundary	の
 particle.after-letter	の
 particle.after-letter	を
 particle.after-letter	が

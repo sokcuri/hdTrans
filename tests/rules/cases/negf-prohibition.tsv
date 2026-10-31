@@ -41,3 +41,21 @@ normalize:prohibition-janai	家にはいるんじゃない！	has:들어가지 �
 normalize:prohibition-janai	俺は逃げるんじゃない。戦略的撤退だ。	lacks:지 마	keep	normalize
 normalize:prohibition-janai	遊びで来てるんじゃないぞ！	lacks:지 마	keep	normalize
 normalize:prohibition-janai	遊んでるんじゃないぞ！	has:놀지 마!	fix	normalize
+normalize:prohibition-janai	「あら、おーしまくんじゃない。」	lacks:지 마	fix	normalize
+normalize:prohibition-janai	「あれは彩くんじゃない！ただの怪人だ！」	has:채 군이 아니야!	fix	normalize
+normalize:prohibition-janai	「あら、橘くんじゃない。」	has:타치바나 군이 아니야.	fix	normalize
+normalize:prohibition-janai	あらっ、豊くんじゃないっ。	has:유타카 군이 아니	fix	normalize
+normalize:prohibition-janai	あら、たくみくんじゃない！	has:타쿠미 군이 아니야!	fix	normalize
+normalize:prohibition-janai	翔くんじゃない！	has:군이 아니야!	fix	normalize
+normalize:prohibition-janai	「キモオタ。近づくんじゃない！」	has:가까워지지 마!	keep	normalize
+normalize:prohibition-janai	「お前、嘘をつくんじゃない。」	has:하지 마.	keep	normalize
+normalize:prohibition-janai	「くっ、こっこらっ、くっつくんじゃない！」	has:붙지 마!	keep	normalize
+normalize:prohibition-janai	「うるさい！召使いのくせに偉そうな口をきくんじゃないっ！」	has:지 마!	keep	normalize
+normalize:prohibition-janai	「ジビエにもなれない熊が調子づくんじゃない！！」	has:지 마!!	keep	normalize
+normalize:prohibition-janai	「大丈夫、大丈夫だからまとわりつくんじゃない、暑苦しい」	lacks:군이	keep	normalize
+normalize:prohibition-janai	「こら、あんまりがっつくんじゃない。」	has:지 마.	keep	normalize
+normalize:prohibition-janai	「な、情けないよ！わめくんじゃない！」	lacks:군이	keep	normalize
+normalize:prohibition-janai	わがままを言って、義姉を困らせるんじゃない」	has:곤란하게 하지 마	keep	normalize
+normalize:prohibition-janai	だから待てって！そう急ぐんじゃねぇよ。	has:서두르지 마.	keep	normalize
+normalize:prohibition-janai	へ、変なところ触るんじゃないっ！	has:만지지 마!	keep	normalize
+normalize:prohibition-janai	『ふかしこくんじゃねーよ!!	has:지 마!!	keep	normalize
