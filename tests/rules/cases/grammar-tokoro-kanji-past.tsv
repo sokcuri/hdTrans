@@ -1,0 +1,18 @@
+# 규칙: GRM-95
+rule	input	expected	kind	layer
+cx:tokoro-kanji-past:10	試しに投稿されている小説をクリックしてみた所、普通に内容を読めた。	has:클릭해 보았는데, 보통으로	fix	rewrites
+cx:tokoro-kanji-past:10	一ヶ月かけて、各地を回った所、一つの募集に目が着いた。	has:각지를 돌았는데,	fix	rewrites
+cx:tokoro-kanji-past:10	それを受けて調査した所、支持率が下がりました	has:조사했는데,	fix	rewrites
+cx:tokoro-kanji-past:10	来る前にセリカに相談してみた所、	has:상담해 보았는데,	fix	rewrites
+cx:tokoro-kanji-past:10	部屋の中をざっと見回した所、ノートパソコンだけ確認できた。	has:둘러보았는데,	fix	rewrites
+cx:tokoro-kanji-past:10	パートナーの情報を探ってみた所、表の顔は判明した	has:찾아 보았는데,	fix	rewrites
+cx:tokoro-kanji-past:10	後に聞いた所、所長から話が行っていたみたい。	has:들었는데,	fix	rewrites
+cx:tokoro-kanji-past:10	それとなく話してみた所、わりと好評だったわ	has:이야기해 보았는데,	fix	rewrites
+cx:tokoro-kanji-past:10	マニフェストを拝見した所、比率を減らすようですが	has:보았는데,	fix	rewrites
+cx:tokoro-kanji-past:10	苦労話をした所、この対応だ。	has:했는데,	fix	rewrites
+cx:tokoro-kanji-past:10	彼が住んでいた所、今は空き地だ	!rule:cx:tokoro-kanji-past:10	keep	rewrites
+cx:tokoro-kanji-past:10	私が見た所、問題はない	!rule:cx:tokoro-kanji-past:10	keep	rewrites
+cx:tokoro-kanji-past:10	今日は危うく大怪我する所だった	!rule:cx:tokoro-kanji-past:10	keep	rewrites
+cx:tokoro-kanji-past:10	昨日行った所はとても綺麗だった。	!rule:cx:tokoro-kanji-past:10	keep	rewrites
+cx:tokoro-kanji-past:10	ちょうど着いた所で電話が鳴った。	!rule:cx:tokoro-kanji-past:10	keep	rewrites
+cx:tokoro-kanji-past:10	治療のため眠っていた所、発見されました	!rule:cx:tokoro-kanji-past:10	keep	rewrites

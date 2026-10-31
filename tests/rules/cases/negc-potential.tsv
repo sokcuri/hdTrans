@@ -1,0 +1,37 @@
+# 규칙: GRM-50, GRM-10, MNG-15
+rule	input	expected	kind	layer
+voice:lexical-negative-potential	その要望は今すぐには決められない。	has:결정할 수 없다	fix	voice
+voice:lexical-negative-potential	だって、自分じゃ決められないんでしょ？	has:결정할 수 없는	fix	voice
+voice:lexical-negative-potential	だが、それ以上を続けられなかった。	has:계속할 수 없었다	fix	voice
+voice:lexical-negative-potential	なかなか続けられなくてね	has:계속할 수 없어	fix	voice
+voice:lexical-negative-potential	ゆるんだ姿を見せられないってことか	has:보일 수 없다는	fix	voice
+voice:lexical-negative-potential	自分では、この扉を開けられないということか…	has:열 수 없다는	fix	voice
+voice:lexical-negative-potential	でも、扉を、開けられなかった…	has:열 수 없었다	fix	voice
+voice:lexical-negative-potential	廃部なんて……絶対に受け入れられないっ！	has:받아들일 수 없어	fix	voice
+voice:lexical-negative-potential	裏の取れてない記事は選挙期間中に載せられないと…	has:실을 수 없	fix	voice
+voice:lexical-negative-potential	記事すら紙面に載せられないって	has:실을 수 없다고	fix	voice
+voice:lexical-negative-potential	今朝の爆竹も仕掛けられないか…	has:장치할 수 없는가	fix	voice
+voice:lexical-negative-potential	上の暴走も止められず…	has:멈출 수 없고	fix	voice
+voice:lexical-negative-potential	銃を支えられなくなったその手に、	has:지탱할 수 없게	fix	voice
+voice:lexical-negative-potential	すべての人に、同じ結果は与えられません	has:줄 수 없습니다	fix	voice
+voice:lexical-negative-potential	軍事的に影響があるとは考えられません。	has:생각할 수 없습니다	fix	voice
+voice:lexical-negative-potential	普通なら考えられん交渉だな	lacks:생각할 수 있는	keep	voice
+voice:lexical-negative-potential	食事が与えられず、	has:식사가 주어지지 않고	keep	voice
+voice:lexical-negative-potential	準備時間を与えられなかったので、	has:주어지지 않았기	keep	voice
+voice:lexical-negative-potential	わずかな喜びしか与えられなかった。	has:주어지지 않았다	keep	voice
+voice:lexical-negative-potential	特別な事情がない限り、例外は認められない	has:인정되지 않는다	keep	voice
+voice:lexical-negative-potential	体温が感じられないのよね	has:느껴지지 않아	keep	voice
+voice:lexical-negative-potential	盾に守られながら	lacks:수 있	keep	voice
+voice:lexical-negative-potential	とても痛くて、耐えられない。	has:견딜 수 없다	keep	voice
+voice:lexical-negative-potential	鍵が開けられないか試してみるわ	lacks:열 수	keep	voice
+voice:lexical-negative-potential	彼女は決められた道を歩いた。	lacks:수 있	keep	voice
+cx:neg-clause-potential:10	そう思うことでしか、この場に立っていられなかった。	has:서 있을 수 없었다	fix	voice
+cx:neg-clause-potential:10	好きじゃなきゃ一緒に居れないし	has:있을 수 없고	fix	voice
+cx:neg-clause-potential:10	日本じゃありえないような犬。	lacks:수 않	fix	voice
+cx:neg-clause-potential:10	とてもじゃないが、待っていられない。	has:기다리고 있을 수 없다	keep	voice
+cx:neg-clause-potential:10	みな怖くて動けない。	has:움직일 수 없다	keep	voice
+cx:neg-clause-potential:20	憂鬱な気分を隠せないまま、	has:숨길 수 없는 채	fix	voice
+cx:neg-clause-potential:20	本心を聞けないままでは、気を休められない。	has:들을 수 없는 채	fix	voice
+cx:neg-clause-potential:20	そう言い返せないまま、俺は手を放した。	has:수 없는 채	fix	voice
+cx:neg-clause-potential:20	決着をつけないまま付き合うと、	has:내지 않은 채	keep	voice
+cx:neg-clause-potential:20	犯行声明は出されないまま、	has:나오지 않은 채	keep	voice

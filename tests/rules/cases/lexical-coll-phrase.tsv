@@ -1,0 +1,38 @@
+# 규칙: LEX-151
+rule	input	expected	kind	layer
+cx:coll-verb:70	会長が部室を後にして、数十分。	회장이 동아리방을 떠나고, 수십 분.	fix	rewrites
+cx:coll-verb:70	先生の家を後にして、銀地町の繁華街へ	has:집을 떠나고,	fix	rewrites
+cx:coll-verb:70	上機嫌で部室を後にした。	has:동아리방을 떠났다	fix	rewrites
+cx:coll-verb:70	その話は後にして、まずは香奈を病院に戻してください	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	同僚にそう挨拶して、俺は会社を後にした。	has:회사를 떠났다	fix	rewrites
+cx:coll-verb:70	俺はソファーから立ちあがり、リビングを後にした。	has:거실을 떠났다	fix	rewrites
+cx:coll-verb:70	「その話は後にしよう」	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	「レイチェルちゃん。ちょっと後にして。」	!rule:cx:coll-verb:70	keep	rewrites
+phrase:coll	そうなるように事を運んでおられた	has:일을 진행하고	fix	builtin-phrase
+phrase:coll	私は足をすすめる。	has:발걸음을 옮긴다	fix	builtin-phrase
+phrase:coll	そう決意して、さらに足を進めると、	has:발걸음을 옮기	fix	builtin-phrase
+phrase:coll	娘の屋敷へ十幾たびも足を運びましたが	has:발길을 옮겼	keep	lookup
+phrase:coll	英知と栄華の欠片を掻き集め、長い時を掛けて人類社会を再構築した。	has:긴 시간을 들여	fix	builtin-phrase
+phrase:coll	長い時間をかけて、ゆっくり返すんなら	has:긴 시간을 들여	keep	lookup
+phrase:coll	たまにマリアローゼ様に苦言を呈されてもいる。	has:쓴소리를 들	fix	builtin-phrase
+phrase:coll	征服者の名を冠するその部隊	has:이름을 따는	fix	builtin-phrase
+phrase:coll	言葉の途中で、意外なところからダメ出しを食らった。	has:지적을 받았다	fix	builtin-phrase
+phrase:coll	みいちゃんが俺にいつものダメ出しをした。	has:지적을 했다	keep	lookup
+phrase:coll	「もう、お嫁にいけなくなる」	has:시집갈 수 없게 	fix	builtin-phrase
+phrase:coll	「うううう……もうお嫁に行けない……」	has:시집갈 수 없	fix	builtin-phrase
+phrase:coll	ほとぼりが冷めた頃に、適当な理由で婚約を解消してしまえば	has:잠잠해졌을 무렵에	fix	builtin-phrase
+phrase:coll	確かに君と僕は 15も年が離れてる	has:나이 차이가 난다	fix	builtin-phrase
+phrase:coll	俺とはだいぶ年も離れてるのに、	has:나이 차이도 나는데	fix	builtin-phrase
+phrase:coll	年の離れた兄が両親を養っており、	has:나이 차이가 나는 형	keep	lookup
+phrase:coll	つい熱くなって、声に出してしまった。	has:소리 내버렸다	fix	builtin-phrase
+phrase:coll	思わず、声を出してうなってしまった。	has:소리를 내	keep	lookup
+phrase:coll	トニーは後ろをついて回ってその勘定を払った	has:뒤를 따라다녀	fix	builtin-phrase
+cx:coll-verb:70	宿題を後にして	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	その話を後にしよう	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	食事を後にする	!rule:cx:coll-verb:70	keep	rewrites
+cx:coll-verb:70	言いながら、彼らはテラス側から食堂を後にした。	has:식당을 떠났다	fix	rewrites
+cx:coll-verb:70	そう言ってから、その場を後にした。	has:그 자리를 떠났다	fix	rewrites
+cx:coll-verb:70	この街を後にした	has:거리를 떠났다	fix	rewrites
+cx:coll-verb:70	王都を後にする	has:왕도를 떠난다	fix	rewrites
+cx:coll-verb:70	ギルドを後にした	has:길드를 떠났다	fix	rewrites
+cx:coll-verb:70	仕事を後にして	!rule:cx:coll-verb:70	keep	rewrites

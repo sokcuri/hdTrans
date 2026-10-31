@@ -1,0 +1,37 @@
+# 규칙: GRM-81
+rule	input	expected	kind	layer
+cx:lc-quote-request:20	食品部が試食してみてくれって	has:시식해 봐 달라고	fix	rewrites
+cx:lc-quote-request:20	日本国籍、せめて日本語が堪能な人にしてくれって。	has:해 달라고.	fix	rewrites
+cx:lc-quote-request:20	「のぞみ、バイトが遅くなるからご飯は食べててくれって」	has:먹고 있어 달라고	fix	rewrites
+cx:lc-quote-request:20	辛くなったときは、きちんと伝えてくれって、未散に言ってあります	has:전해 달라고,	fix	rewrites
+cx:lc-quote-request:20	秘書にこの服に合うテッポー買ってきてくれって言ったら	has:사 와 달라고 말	fix	rewrites
+cx:lc-quote-request:20	向こうは更新してくれって言ってる	has:갱신해 달라고 말하고	fix	rewrites
+cx:lc-quote-request:20	おいミドリ、こっちも助けてくれって言ってるだろ	has:도와 달라고 말하고	fix	rewrites
+cx:lc-quote-request:20	狙ってくれって言ってるようなものなの！	has:노려 달라고	fix	rewrites
+cx:lc-quote-request:20	え？ もっと喋ってくれって？	has:말해 달라고?	fix	rewrites
+cx:lc-quote-request:20	おーい、こいつに何か言ってくれって！	has:말해 달라고!	fix	rewrites
+cx:lc-quote-request:20	「ラピスに頼まれたんだ。おまえが死にそうだから助けてくれって」	has:도와 달라고	fix	rewrites
+cx:lc-quote-request:20	それとも、疲れたから休憩させてくれって、敵にお願いするか？	has:시켜 달라고,	fix	rewrites
+cx:lc-quote-request:10	サプライズでスピーチしてくれって依頼が来た	has:스피치해 달라는 의뢰	fix	rewrites
+cx:lc-quote-request:30	あの 俺も撮ってよってたまに話すんですけどね	has:찍어 달라고	fix	rewrites
+cx:lc-quote-request:50	「いいから。少し寝てろって」	has:자라고	fix	rewrites
+cx:lc-quote-request:50	「かえって邪魔んなるから下がってろって！」	has:내려가라고!	fix	rewrites
+cx:lc-quote-request:50	「千里が今にも連れ去られそうってときに、黙ってみてろってかっ！？」	has:보라는 건가	fix	rewrites
+cx:lc-quote-request:55	とりあえず待ってろって感じだった	has:기다리라는 느낌	fix	rewrites
+cx:lc-quote-request:60	大丈夫、落ち着けって！	has:진정하라고!	fix	rewrites
+cx:lc-quote-request:60	「そんなことひと言も言ってないだろ？　少しは落ち着けって」	has:진정하라고	fix	rewrites
+cx:lc-quote-request:60	「なにかあったら、電話しなさいって、上の弟に言っておいたんですけど」	has:전화하라고,	fix	rewrites
+cx:lc-quote-request:60	多分おめでとうってお祝いしないといけない状況で。	!rule:cx:lc-quote-request:60	keep	rewrites
+cx:lc-quote-request:60	今安静にしてるのも念のためってだけで、ホントはもう動けるのよ	!rule:cx:lc-quote-request:60	keep	rewrites
+cx:lc-quote-request:50	向こうも俺に気づき、すたたっと駆けよってくる。	!rule:cx:lc-quote-request:50	keep	rewrites
+cx:lc-quote-request:20	「手紙を書いてくれ」と言った。	!rule:cx:lc-quote-request:20	keep	rewrites
+cx:lc-quote-request:20	早く来てくれと言った。	!rule:cx:lc-quote-request:20	keep	rewrites
+cx:lc-quote-request:30	「やめてよ」って言った。	!rule:cx:lc-quote-request:30	keep	rewrites
+cx:lc-quote-request:10	助けてくれって頼まれた。	!rule:cx:lc-quote-request:10	keep	rewrites
+cx:lc-quote-request:65	「こんなときなんだら、自重しなさいって感じよね」	has:자중하라는 느낌	fix	rewrites
+cx:lc-quote-request:65	いい感じだって感じ	!rule:cx:lc-quote-request:65	keep	rewrites
+cx:lc-quote-request:55	「邪魔だからどけって感じでしたよ」	!rule:cx:lc-quote-request:55	keep	rewrites
+cx:lc-quote-request:40	「下がってろって！」	!rule:cx:lc-quote-request:40	keep	rewrites
+cx:lc-quote-request:40	黙ってろって言葉が聞こえた。	has:다물라는 말이	fix	rewrites
+cx:lc-quote-request:35	そこで待ってろってことか。	has:기다리라는 건가	fix	rewrites
+cx:lc-quote-request:35	少し寝てろって。	!rule:cx:lc-quote-request:35	keep	rewrites

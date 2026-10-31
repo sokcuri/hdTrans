@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:jisjk:237572	人工放射性元素を調べる。	인공 방사성 원소를 조사한다.	fix	defaults
 dict:jisjk:237572	人工放射性元素の研究。	인공 방사성 원소의 연구.	fix	defaults
 dict:jisjk:237572	人工放射性元素がある。	인공 방사성 원소가 있다.	fix	defaults
-dict:jisjk:237572	「人工放射性元素を調べた」	「인공 방사성 원소를 조사했다」	fix	defaults
+dict:jisjk:237572	「人工放射性元素を調べた」	「인공 방사성 원소를 조사했어」	fix	defaults
 dict:jisjk:237572	人工放射能を調べる。	인공방사능을 조사한다.	keep	defaults
 dict:jisjk:237572	人工放射線を調べる。	인공 방사선을 조사한다.	keep	defaults
 dict:jisjk:237572	放射性元素を調べる。	방사성 원소를 조사한다.	keep	defaults
@@ -13,47 +13,47 @@ dict:jisjk:31328	足跡を調べる。	발자국을 조사한다.	keep	defaults
 dict:jisjk:160652	介助者を呼ぶ。	도우미를 부른다.	fix	defaults
 dict:jisjk:160652	介助者に頼む。	도우미에게 부탁한다.	fix	defaults
 dict:jisjk:160652	介助者が来た。	도우미가 왔다.	fix	defaults
-dict:jisjk:160652	「介助者を呼んだ」	「도우미를 불렀다」	fix	defaults
+dict:jisjk:160652	「介助者を呼んだ」	「도우미를 불렀어」	fix	defaults
 dict:jisjk:160652	介助を頼む。	시중을 부탁한다.	keep	defaults
 dict:jisjk:160652	改造者を呼ぶ。	개조자를 부른다.	keep	defaults
 dict:jisjk:233407	仕上げ代を残す。	다듬질 여유를 남긴다.	fix	defaults
 dict:jisjk:233407	仕上げ代を測る。	다듬질 여유를 측정한다.	fix	defaults
 dict:jisjk:233407	仕上げ代が必要だ。	다듬질 여유가 필요하다.	fix	defaults
-dict:jisjk:233407	「仕上げ代を残した」	「다듬질 여유를 남겼다」	fix	defaults
+dict:jisjk:233407	「仕上げ代を残した」	「다듬질 여유를 남겼어」	fix	defaults
 dict:jisjk:233407	仕上げを確認する。	마무리를 확인한다.	keep	defaults
 dict:jisjk:233407	加工代を払う。	가공대를 지불한다.	keep	defaults
 dict:jisjk:108920	彼は仕事中毒だ。	그는 일 중독이다.	fix	defaults
 dict:jisjk:108920	仕事中毒を治す。	일 중독을 고친다.	fix	defaults
 dict:jisjk:108920	仕事中毒になった。	일 중독이 되었다.	fix	defaults
-dict:jisjk:108920	「仕事中毒だと思う」	「일 중독이라고 생각한다」	fix	defaults
+dict:jisjk:108920	「仕事中毒だと思う」	「일 중독이라고 생각해」	fix	defaults
 dict:jisjk:108920	仕事中毒者だ。	일중독자다.	keep	defaults
 dict:jisjk:108920	薬物中毒を治す。	약물 중독을 고친다.	keep	defaults
 dict:jisjk:108920	仕事中だ。	업무중이다.	keep	defaults
 dict:jisjk:363532	仕入戻り高を計算する。	매입 반품액을 계산한다.	fix	defaults
 dict:jisjk:363532	仕入戻り高が増えた。	매입 반품액이 늘어났다.	fix	defaults
 dict:jisjk:363532	仕入戻り高を調べる。	매입 반품액을 조사한다.	fix	defaults
-dict:jisjk:363532	「仕入戻り高を確認した」	「매입 반품액을 확인했다」	fix	defaults
+dict:jisjk:363532	「仕入戻り高を確認した」	「매입 반품액을 확인했어」	fix	defaults
 dict:jisjk:363532	売上高を計算する。	매출액을 계산한다.	keep	defaults
 dict:jisjk:363532	仕入高を調べる。	매입액을 조사한다.	keep	defaults
 dict:jisjk:363532	仕入割戻しを計算する。	매입공제를 계산한다.	keep	defaults
 dict:jisjk:71741	仕掛かり在庫を減らす。	재공품 재고를 줄인다.	fix	defaults
 dict:jisjk:71741	仕掛かり在庫を確認する。	재공품 재고를 확인한다.	fix	defaults
 dict:jisjk:71741	仕掛かり在庫が増えた。	재공품 재고가 늘어났다.	fix	defaults
-dict:jisjk:71741	「仕掛かり在庫を減らした」	「재공품 재고를 줄였다」	fix	defaults
+dict:jisjk:71741	「仕掛かり在庫を減らした」	「재공품 재고를 줄였어」	fix	defaults
 dict:jisjk:71741	在庫水準を確認する。	재고 수준을 확인한다.	keep	defaults
 dict:jisjk:71741	仕掛品を調べる。	재공품을 조사한다.	keep	defaults
 dict:jisjk:71741	在庫を減らす。	재고를 줄인다.	keep	defaults
 dict:jisjk:242128	代数和を求める。	대수합을 구한다.	fix	defaults
 dict:jisjk:242128	代数和を計算する。	대수합을 계산한다.	fix	defaults
 dict:jisjk:242128	代数和はゼロだ。	대수합은 제로다.	fix	defaults
-dict:jisjk:242128	「代数和を求めた」	「대수합을 구했다」	fix	defaults
+dict:jisjk:242128	「代数和を求めた」	「대수합을 구했어」	fix	defaults
 dict:jisjk:242128	代数学を学ぶ。	대수학을 배운다.	keep	defaults
 dict:jisjk:242128	代数方程式を解く。	대수방정식을 푼다.	keep	defaults
 dict:jisjk:242128	代数式を調べる。	대수식을 조사한다.	keep	defaults
 dict:jisjk:242122	代数関数を学ぶ。	대수함수를 배운다.	fix	defaults
 dict:jisjk:242122	代数関数の性質。	대수함수의 성질.	fix	defaults
 dict:jisjk:242122	代数関数を調べる。	대수함수를 조사한다.	fix	defaults
-dict:jisjk:242122	「代数関数を学んだ」	「대수함수를 배웠다」	fix	defaults
+dict:jisjk:242122	「代数関数を学んだ」	「대수함수를 배웠어」	fix	defaults
 dict:jisjk:242122	代数曲線を調べる。	대수곡선을 조사한다.	keep	defaults
 dict:jisjk:242122	関数を調べる。	함수를 조사한다.	keep	defaults
 dict:jisjk:31328	人足が途絶えた。	인적이 끊어졌다.	keep	defaults

@@ -1,0 +1,44 @@
+# 규칙: GRM-92
+rule	input	expected	kind	layer
+cx:kimatteru:10	あたしと美冬が、親友だからに決まってるでしょっ！	has:이기 때문일 게 뻔하지	fix	rewrites
+cx:kimatteru:20	また『内申点が』って言われるに決まってるし……	has:들을 게 뻔하고	fix	rewrites
+cx:kimatteru:60	「千莉が躍るんだ、最高に決まってる」	has:최고일 게 뻔해	fix	rewrites
+cx:kimatteru:50	「お弁当はきっとパンの耳に決まってますわ〜！」	has:가장자리일 게 뻔해요	fix	rewrites
+cx:kimatteru:50	…そんなの、北上さんのところに決まってるじゃないのっ!	has:씨일 게 뻔하잖아	fix	rewrites
+cx:kimatteru:50	「ナシに決まってんだろ！」	「없음일 게 뻔하지!」	fix	rewrites
+cx:kimatteru:40	「もちろんハニー、きみの方が大事に決まってるさ！」	has:소중할 게 뻔해	fix	rewrites
+cx:kimatteru:50	このあたしがいっちばんに決まってるじゃん！	has:제일일 게 뻔하잖아	fix	rewrites
+cx:kimatteru:50	「なにとぼけてんのよ、美冬のことに決まってるじゃない」	has:미후유일 게 뻔하잖아	fix	rewrites
+cx:kimatteru:30	「なにしにって、手伝うために決まってるでしょ！」	has:돕기 위해서일 게 뻔하지	fix	rewrites
+cx:kimatteru:50	アレといったら、『大島ロール』のことに決まってますっ！	has:』일 게 뻔합니다	fix	rewrites
+cx:kimatteru:20	「ですよねー、素晴らしいに決まってますよねー」	has:훌륭할 게 뻔하죠	fix	rewrites
+cx:kimatteru:60	「あそこと言ったらあそこに決まってます」	has:저기일 게 뻔합니다	fix	rewrites
+cx:kimatteru:20	サッちんを助けに行くに決まってるのよさ！	has:갈 게 뻔해	fix	rewrites
+cx:kimatteru-end:70	「美冬のことに決まってるじゃない」	rule:cx:kimatteru-end:70=1잖아	fix	rewrites
+cx:kimatteru-end:90	「あそこに決まってます」	rule:cx:kimatteru-end:90=7니다	fix	rewrites
+cx:kimatteru-end:120	「ナシに決まってんだろ！」	rule:cx:kimatteru-end:120=1지	fix	rewrites
+cx:kimatteru-end:10	「最高に決まってる」	rule:cx:kimatteru-end:10=1다	fix	rewrites
+cx:kimatteru-end:20	「きみの方が大事に決まってるさ！」	rule:cx:kimatteru-end:20=6	fix	rewrites
+cx:kimatteru-end:100	言われるに決まってるし……	rule:cx:kimatteru-end:100=1고	fix	rewrites
+cx:kimatteru-end:30	「パンの耳に決まってますわ〜！」	rule:cx:kimatteru-end:30=6요	fix	rewrites
+cx:kimatteru-end:40	「親友だからに決まってるでしょっ！」	rule:cx:kimatteru-end:40=1지	fix	rewrites
+cx:kimatteru-end:50	「素晴らしいに決まってますよねー」	rule:cx:kimatteru-end:50=1지요	fix	rewrites
+cx:kimatteru:50	会議は月曜に決まっている。	!rule:cx:kimatteru:50	keep	rewrites
+cx:kimatteru:50	クロパパの名前はクロに決まった。	!rule:cx:kimatteru:50	keep	rewrites
+cx:kimatteru:20	演説の順番はくじ引きで最後に決まった。	!rule:cx:kimatteru:20	keep	rewrites
+cx:kimatteru:50	「もう決まってるよ」	!rule:cx:kimatteru:50	keep	rewrites
+cx:kimatteru:60	集合場所はあそこに決まっている。	!rule:cx:kimatteru:60	keep	rewrites
+cx:kimatteru:20	行き先は話し合いで決まっている。	!rule:cx:kimatteru:20	keep	rewrites
+cx:kimatteru-end:10	会議は月曜に決まっている。	!rule:cx:kimatteru-end:10	keep	rewrites
+cx:kimatteru-end:20	「順番ならもう決まってるさ」	!rule:cx:kimatteru-end:20	keep	rewrites
+cx:kimatteru-end:30	「日程はもう決まってますわ」	!rule:cx:kimatteru-end:30	keep	rewrites
+cx:kimatteru-end:40	「答えは決まってるでしょ」	!rule:cx:kimatteru-end:40	keep	rewrites
+cx:kimatteru-end:50	「席は決まってますよね」	!rule:cx:kimatteru-end:50	keep	rewrites
+cx:kimatteru-end:70	「名前ならもう決まってるじゃない」	!rule:cx:kimatteru-end:70	keep	rewrites
+cx:kimatteru-end:90	「予定は決まってます」	!rule:cx:kimatteru-end:90	keep	rewrites
+cx:kimatteru-end:100	「場所も決まってるし……」	!rule:cx:kimatteru-end:100	keep	rewrites
+cx:kimatteru-end:120	「そんなの決まってんだろ」	!rule:cx:kimatteru-end:120	keep	rewrites
+cx:kimatteru:10	「だからもう決まってるでしょ」	!rule:cx:kimatteru:10	keep	rewrites
+cx:kimatteru:30	「そのために決まってる規則だ」	!rule:cx:kimatteru:30	keep	rewrites
+cx:kimatteru:40	時間は正確に決まっている。	!rule:cx:kimatteru:40	keep	rewrites
+cx:kimatteru:40	開始の時刻はきれいに決まっている。	!rule:cx:kimatteru:40	keep	rewrites

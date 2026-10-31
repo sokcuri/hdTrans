@@ -1,4 +1,5 @@
 // UTF-8 CLI. The whole input is one session unless --each or --raw is given.
+#include <cctype>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -23,8 +24,10 @@
 #include "core/config/cache.h"
 #include "core/engine.h"
 #include "core/dict/folders.h"
+#include "core/dict/pack.h"
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
+#include "core/register/retrofit.h"
 #include "core/engine/rules.h"
 #include "core/engine/user_watch.h"
 #include "core/engine/load_info.h"
@@ -159,6 +162,9 @@ void Usage(std::FILE* file) {
                "  --each, --raw          each line on its own (as text hooks send it), or word-pipeline-only lines\n"
                "  --speech LEVEL         strict (default): keep -다 but where the Japanese marks casual speech;\n"
                "                         soft: 해체 in 「」 and on bare lines that read as speech\n"
+               "  --speech-levels MODE   auto (default): dialogue lines take the speech level of spec/register.md;\n"
+               "                         keep: the translation's own levels\n"
+               "  --speech-report FILE   the lines the speech levels changed (TSV: line, rule, cue, source, before, after)\n"
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
@@ -259,6 +265,7 @@ std::string Decided(const hdTrans::word::Selection& s, bool ending) {
     case Provenance::Scorer: return "scorers\t";
     case Provenance::Misread: return "misread\t";
     case Provenance::Cg: return "cg-lite\t";
+    case Provenance::Pack: return "packs\tpack:" + hdTrans::dict::PackRowById(s.id).id;
     }
     return "\t";
 }
@@ -296,6 +303,17 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
                 std::fprintf(why.trace, "\t%d\t%s\t%s\n", e.ruleId,
                              e.fixed ? "fixed" : "", e.field.empty() ? "" : std::string(e.field).c_str());
             }
+        }
+        // The pack rows that decided a slot of the word: id, slot and target (docs/packs.md).
+        for (const int row : it->packRows) {
+            const hdTrans::dict::PackRowLabel label = hdTrans::dict::PackRowById(row);
+            std::fprintf(stderr, "WHY-PACK\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex, it->start);
+            PrintEscaped(it->group ? std::string_view(it->group->surface) : std::string_view{});
+            std::fputc('\t', stderr);
+            PrintEscaped(label.id);
+            std::fprintf(stderr, "\t%s\t", label.slot.c_str());
+            PrintEscaped(label.target);
+            std::fputc('\n', stderr);
         }
         for (const hdTrans::word::ShadowChoice& shadow : it->shadowChoices) {
             std::fprintf(stderr, "SHADOW\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex,
@@ -371,6 +389,8 @@ int RunMain(int argc, char** argv) {
     bool selectShadow = false;
     bool misread = false;
     std::optional<std::string> speechArg;
+    std::optional<std::string> speechLevelsArg;
+    std::string speechReportPath;
     bool wrapped = false;
     std::string contextPath;
     bool noCg = false;
@@ -412,6 +432,7 @@ int RunMain(int argc, char** argv) {
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
             || option == "-dump-rules" || option == "-speech" || option == "-context"
+            || option == "-speech-levels" || option == "-speech-report"
 #ifdef HDTRANS_POC08_HOOKS
             || option == "-poc08" || option == "-poc08-data" || option == "-poc08-why" || option == "-poc08-stages"
             || option == "-poc08-misses" || option == "-poc08-reselections" || option == "-poc08-rule-pre"
@@ -455,6 +476,8 @@ int RunMain(int argc, char** argv) {
         else if (option == "-select-shadow") selectShadow = true;
         else if (option == "-misread") misread = true;
         else if (option == "-speech") speechArg = *value;
+        else if (option == "-speech-levels") speechLevelsArg = *value;
+        else if (option == "-speech-report") speechReportPath = *value;
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
         else if (option == "-no-cg") noCg = true;
@@ -494,7 +517,8 @@ int RunMain(int argc, char** argv) {
         return 1;
     }
     for (const auto& diagnostic : config.diagnostics) {
-        std::fprintf(stderr, "hdtrans: %s:%zu: %s\n", configPath.c_str(), diagnostic.line, diagnostic.message.c_str());
+        if (diagnostic.environment) std::fprintf(stderr, "hdtrans: %s\n", diagnostic.message.c_str());
+        else std::fprintf(stderr, "hdtrans: %s:%zu: %s\n", configPath.c_str(), diagnostic.line, diagnostic.message.c_str());
     }
     if (!userPathsArg && config.settings.userdict) userPathsArg = config.settings.userdict;
     if (!ehndArg && config.settings.ehnd) ehndArg = config.settings.ehnd;
@@ -528,6 +552,14 @@ int RunMain(int argc, char** argv) {
 #endif
     if (speechArg && !hdTrans::internal::SpeechOf(*speechArg, speech)) {
         std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
+        return 2;
+    }
+    hdTrans::SpeechLevels speechLevels = config.settings.speechLevels;
+    if (speechLevelsArg) {
+        for (char& ch : *speechLevelsArg) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    }
+    if (speechLevelsArg && !hdTrans::internal::SpeechLevelsOf(*speechLevelsArg, speechLevels)) {
+        std::fprintf(stderr, "hdtrans: --speech-levels takes auto or keep\n");
         return 2;
     }
     noCg = noCg || !config.settings.cg;
@@ -706,6 +738,7 @@ int RunMain(int argc, char** argv) {
     options.filters = filters.get();
     options.wordImprovements.misreadFilter = misread;
     options.speech = speech;
+    options.speechLevels = speechLevels;
     options.wrapped = wrapped;
 #ifdef HDTRANS_POC08_HOOKS
     hd08::bridge::Options poc08Options;
@@ -787,6 +820,27 @@ int RunMain(int argc, char** argv) {
         return ok;
     };
 #endif
+    std::vector<hdTrans::reg::Change> levelChanges;
+    std::string speechReport;
+    if (!speechReportPath.empty()) options.levelChanges = &levelChanges;
+    if (!speechReportPath.empty() && (reference || speechLevels == hdTrans::SpeechLevels::Keep))
+        std::fprintf(stderr, "hdtrans: speech levels are off (%s); the speech report is empty\n",
+                     reference ? "--reference" : "keep");
+    // The changed lines of one call, numbered from base.
+    const auto reportChanges = [&](size_t base) {
+        for (const hdTrans::reg::Change& c : levelChanges) {
+            speechReport += std::to_string(base + c.line + 1) + "\t" + c.spec + "\t" + c.key;
+            for (const std::string* text : {&c.source, &c.before, &c.after}) {
+                speechReport += '\t';
+                for (const char ch : *text) {
+                    if (ch == '\r') continue;
+                    speechReport += ch == '\t' || ch == '\n' ? ' ' : ch;
+                }
+            }
+            speechReport += '\n';
+        }
+        levelChanges.clear();
+    };
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
@@ -841,6 +895,10 @@ int RunMain(int argc, char** argv) {
     };
     auto finish = [&] {
         if (stages && !stagerecords::Dump(stagesDir, collector)) return 1;
+        if (!speechReportPath.empty() && !WriteText(speechReportPath, speechReport)) {
+            std::fprintf(stderr, "hdtrans: cannot write %s\n", speechReportPath.c_str());
+            return 1;
+        }
         if (!dumpRulesPath.empty()) {
             const std::string rules = hdTrans::internal::RuleProgramText(*snapshot);
             if (rules.empty() || !WriteText(dumpRulesPath, rules)) {
@@ -901,6 +959,7 @@ int RunMain(int argc, char** argv) {
         const std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
 #endif
+        reportChanges(0);
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");
@@ -933,6 +992,7 @@ int RunMain(int argc, char** argv) {
                 out = one.front();
             }
 #endif
+            reportChanges(static_cast<size_t>(whyContext.lineBase));
         }
         if (stages) {
             stagerecords::AddOutput(collector, collector.caseBase + 1, out);

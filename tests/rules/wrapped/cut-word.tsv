@@ -38,7 +38,7 @@ wrapped:cut-word	このままじ\nゃ大損よぉ。	이대로는\n대손해야.
 wrapped:cut-word	みらいフ\nァクトリー	미래\n팩토리	fix	driver
 wrapped:cut-word	国王は盛大なパーテ\nィーを開催した。	국왕은 성대한 파티를\n개최했다.	fix	driver
 wrapped:cut-word	ばあち\nゃんそれをよく分かってるから	할머니\n그것을 잘 알고 있으니까	fix	driver
-wrapped:cut-word	他の３人は思わぬラストギ\nャンブルにごくりと唾を飲みこむ。	다른 3명은 생각하지 않는 라스트\n도박에 꿀꺽 침을 삼킨다.	fix	driver
+wrapped:cut-word	他の３人は思わぬラストギ\nャンブルにごくりと唾を飲みこむ。	다른 3명은 생각하지 못한 라스트\n도박에 꿀꺽 침을 삼킨다.	fix	driver
 wrapped:cut-word	とタチア\nナも追随する。	라고 타티아나도\n추종한다.	fix	driver
 wrapped:cut-word	木材、角材、ベニ\nヤ板。	목재, 각재, 베니어판\n.	fix	driver
 wrapped:cut-word	遊んでるバ\nヤイじゃねぇ！	놀고 있는\n경우가 아니야!	fix	driver
@@ -67,7 +67,7 @@ wrapped:cut-word	含まれております\nよ～う　考えた	포함되어 �
 wrapped:cut-word	処刑されます\nそ… そんな！	처형당합니다\n소… 그런!	keep	driver
 wrapped:cut-word	キスしたくせに\n（るな）しおちゃん差し入れ　持ってきたよ～。	키스했으면서\n(루인) 시오짱 간식 가져왔어~.	keep	driver
 wrapped:cut-word	彼はゲームを始め\n\nるとか、そういう話。	그는 게임을 시작해\n\n루라든지, 그런 이야기.	keep	driver
-wrapped:cut-word	もう逃\n「げるしかない」	이제 도\n「밖에 없다」	keep	driver
+wrapped:cut-word	もう逃\n「げるしかない」	이제 도\n「밖에 없어」	keep	driver
 wrapped:cut-word	試合が始ま\nりです	시합이 시작\n입니다	keep	driver
 wrapped:cut-word	「…始ま\nりです」	「…시작\n입니다」	fix	driver
 wrapped:cut-word	テーブ\nルでしょう。	테이블\n이죠.	fix	driver

@@ -6,10 +6,10 @@ dict:jisjk:342862	ございません	없습니다	fix	local
 dict:jisjk:342862	はい、ございません	네, 없습니다	fix	local
 dict:jisjk:342862	はい、ございます	네, 있습니다	keep	local
 dict:jisjk:359324	「ある日、雪が降った」	「어느 날, 눈이 내렸다」	keep	local
-dict:jisjk:359324	「ある店もある」	「있는 가게도 있다」	keep	local
+dict:jisjk:359324	「ある店もある」	「있는 가게도 있어」	keep	local
 dict:jisjk:265218	「あと、これもお願い」	「그리고, 이것도 부탁」	keep	local
-dict:jisjk:265218	「あと友達も来る」	「그리고 친구도 온다」	fix	local
+dict:jisjk:265218	「あと友達も来る」	「그리고 친구도 와」	fix	local
 dict:jisjk:265218	あとは任せた。	나머지는 맡겼다.	fix	local
 dict:jisjk:115361	「あと一つだけ」	「더 하나만」	fix	local
-dict:jisjk:115361	「あと三日で終わる」	「앞으로 3일에 끝난다」	keep	local
+dict:jisjk:115361	「あと三日で終わる」	「앞으로 3일에 끝나」	keep	local
 dict:jisjk:267030	「ですが、無理です」	「그렇지만, 무리입니다」	fix	local

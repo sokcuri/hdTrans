@@ -30,6 +30,10 @@ namespace hdTrans::filter {
 class Filters;
 }
 
+namespace hdTrans::reg {
+struct Change;
+}
+
 namespace hdTrans::internal {
 
 // Receives the outputs of the stages as they are made. A null member is not called. The
@@ -112,6 +116,10 @@ struct TranslationOptions {
     const filter::Filters* filters = nullptr;
     // The speech level of the text inside 「」; Strict with reference.
     Speech speech = Speech::Strict;
+    // The speech-level stage after the translation (Session::SetSpeechLevels); off with reference.
+    SpeechLevels speechLevels = SpeechLevels::Auto;
+    // When set, gets the lines the speech-level stage changes, numbered from 0 after the context.
+    std::vector<reg::Change>* levelChanges = nullptr;
     // Lines may break in the middle of a sentence (Session::SetWrapped).
     bool wrapped = false;
     // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).

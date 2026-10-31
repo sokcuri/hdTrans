@@ -1,0 +1,51 @@
+# 규칙: GRM-57, GRM-58, GRM-59
+rule	input	expected	kind	layer
+cx:neg-clause-archaic:10	心配をかけまいとウソをついている	has:끼치지 않으려고	fix	rewrites
+cx:neg-clause-archaic:10	倒れまいとペースを落とす	has:쓰러지지 않으려고	fix	rewrites
+cx:neg-clause-archaic:10	置いていかれまいと走ってきた	has:않으려고	fix	rewrites
+cx:neg-clause-archaic:10	ごまかしも見逃すまいとするように	has:놓치지 않으려고	fix	rewrites
+cx:neg-clause-archaic:10	動きを一つも見逃すまいと	has:놓치지 않으려고	fix	rewrites
+cx:neg-clause-archaic:10	負けまいと必死だった	has:지지 않으려고	fix	rewrites
+cx:neg-clause-archaic:10	もう二度と会うまいと決めた	has:만나지 않으려고	fix	rewrites
+cx:neg-clause-archaic:10	誰にも気づかれまいと	has:않으려고	fix	rewrites
+cx:neg-clause-archaic:10	信じようと信じまいと、	!rule:cx:neg-clause-archaic:10	keep	rewrites
+cx:neg-clause-archaic:10	それを望もうと望むまいと、ね	!rule:cx:neg-clause-archaic:10	keep	rewrites
+cx:neg-clause-archaic:10	行こうが行くまいが勝手だ	!rule:cx:neg-clause-archaic:10	keep	rewrites
+cx:neg-clause-archaic:20	右のカードにまさに触れんとした瞬間	has:접하려고 한 순간	fix	rewrites
+cx:neg-clause-archaic:20	まぁ、言わんとしてることはわかるぞ？	has:말하려고 하고	fix	rewrites
+cx:neg-clause-archaic:20	まさに立ち去らんとした時	has:떠나려고 했을	fix	rewrites
+cx:neg-clause-archaic:20	意志を貫かんとする	!rule:cx:neg-clause-archaic:20	keep	rewrites
+cx:neg-clause-archaic:20	知らんと言った	!rule:cx:neg-clause-archaic:20	keep	rewrites
+cx:neg-clause-archaic:20	行かんとするなら	!rule:cx:neg-clause-archaic:20	keep	rewrites
+cx:neg-clause-tari:10	思うように死ねたりはしない。	has:죽을 수 있지는 않는다	fix	rewrites
+cx:neg-clause-tari:10	昨日の失敗を繰り返したりはしない。	has:반복하지는 않는다	fix	rewrites
+cx:neg-clause-tari:10	決して走ったりはしない。	has:달리지는 않는다	fix	rewrites
+cx:neg-clause-tari:10	このくらいで傷ついたりはしないわ。	has:상처받지는 않아	fix	rewrites
+cx:neg-clause-tari:10	だから、やめたりはしない。	has:그만두지는 않는다	fix	rewrites
+cx:neg-clause-tari:10	絶対にへこんだりはしない。	has:패이지는 않는다	fix	rewrites
+cx:neg-clause-tari:10	でも、俺を押しのけたりはしない。	has:밀치지는 않는다	fix	rewrites
+cx:neg-clause-tari:10	ここまで運んだりはしないでしょう？	has:옮기지는 않을	fix	rewrites
+cx:neg-clause-tari:10	無理に飲ませたりはしないわ	has:먹이지는 않아	fix	rewrites
+cx:neg-clause-tari:10	泣いたり笑ったりしない	!rule:cx:neg-clause-tari:10	keep	rewrites
+cx:neg-clause-tari:10	逃げたりはせず、	!rule:cx:neg-clause-tari:10	keep	rewrites
+cx:neg-clause-tari:20	逃げたりはしません	has:도망치지는 않습니다	fix	rewrites
+cx:neg-clause-tari:20	泣いたりしません	!rule:cx:neg-clause-tari:20	keep	rewrites
+cx:neg-clause-tari:30	脅されたりはしませんでした？	has:협박당하지는 않았습니다	fix	rewrites
+cx:neg-clause-tari:30	脅されたりしませんでした	!rule:cx:neg-clause-tari:30	keep	rewrites
+cx:neg-clause-mazu:10	関わる事もまずなく、	has:거의 없고	fix	rewrites
+cx:neg-clause-mazu:10	警戒を緩める事はまずないな、	has:거의 없	fix	rewrites
+cx:neg-clause-mazu:10	事故なんてまずないけど。	has:거의 없는데	fix	rewrites
+cx:neg-clause-mazu:10	買い物する機会はまずないんだけど	has:거의 없는데	fix	rewrites
+cx:neg-clause-mazu:10	普段はまずわからないわね	has:거의 모르	fix	rewrites
+cx:neg-clause-mazu:10	不採用はまずないから安心しろ	has:거의 없으니까	fix	rewrites
+cx:neg-clause-mazu:10	負けることなどまずありえない。	has:거의 있을 수 없다	fix	rewrites
+cx:neg-clause-mazu:10	まず勝てない相手だ	has:거의 이길 수 없는	fix	rewrites
+cx:neg-clause-mazu:10	まず成功しないだろう	has:거의 성공하지 않을	fix	rewrites
+cx:neg-clause-mazu:10	まず助からない	has:거의 살아나지 않는다	fix	rewrites
+cx:neg-clause-mazu:10	まず間違いなく言えますが、	!rule:cx:neg-clause-mazu:10	keep	rewrites
+cx:neg-clause-mazu:10	まずは選挙に勝たないと…	!rule:cx:neg-clause-mazu:10	keep	rewrites
+cx:neg-clause-mazu:10	まず、行かない	!rule:cx:neg-clause-mazu:10	keep	rewrites
+cx:neg-clause-mazu:10	まず行かなくては	!rule:cx:neg-clause-mazu:10	keep	rewrites
+cx:neg-clause-mazu:10	まず変わることはありません	!rule:cx:neg-clause-mazu:10	keep	rewrites
+cx:neg-clause-mazu:10	まず来ないと思う	!rule:cx:neg-clause-mazu:10	keep	rewrites
+cx:neg-clause-mazu:10	まず彼に会わないで	!rule:cx:neg-clause-mazu:10	keep	rewrites

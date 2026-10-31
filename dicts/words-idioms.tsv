@@ -928,7 +928,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 機が熟すのを待	때가 무르익기를 기다&AA@	M424		Pn	GN				llm			i:923
 危険を冒	위험을 무릅&AF@	M423		Pn	GN				llm			i:924
 危険をおか	위험을 무릅&AF@	M423		Pn	GN				llm			i:925
-機嫌を損ね	&M8@	M427		Pn	GN							i:926
+機嫌を損ね	기분을 상하게 &AV@	M427		Pn	GN			LEX-128				i:926
 期限を延ば	기한을 연장&AV@	M423		Pn	GN				llm			i:927
 帰国の途につ	귀국길에 &E6@	M421			GN				llm			i:928
 帰国の途に就	귀국길에 &E6@	M421			GN				llm			i:929

@@ -3,6 +3,7 @@
 #include <string_view>
 #include <utility>
 
+#include "core/dict/pack.h"
 #include "core/engine/rules.h"
 #include "core/word/constructions.h"
 #include "core/word/select.h"
@@ -67,6 +68,10 @@ TraceSelection Selection(const word::Selection& selection, int index, std::strin
     case Provenance::Scorer: out.layer = "scorers"; break;
     case Provenance::Misread: out.layer = "misread"; break;
     case Provenance::Cg: out.layer = "cg-lite"; break;
+    case Provenance::Pack:
+        out.layer = "packs";
+        out.source = "pack:" + dict::PackRowById(selection.id).id;
+        break;
     }
     return out;
 }

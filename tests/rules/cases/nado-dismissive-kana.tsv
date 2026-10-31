@@ -1,0 +1,19 @@
+# 규칙: LEX-54
+rule	input	expected	kind	layer
+lookup:nanka-kana	はー、なんかいい天気よね。	하아, 왠지 좋은 날씨지.	fix	lookup
+lookup:nanka-kana	「で、なんかいい案ない？」	has:좋은 안	fix	lookup
+lookup:nanka-kana	この季節、なんかいいよなぁ。	has:왠지 좋	fix	lookup
+lookup:nanka-kana	あっ、なんかいい匂いだ！	has:왠지 좋은 냄새	fix	lookup
+lookup:nanka-kana	あんたが言うとなんかいやらしく聞こえるわ	has:왠지 야하게 들려	fix	lookup
+lookup:nanka-kana	「あぁ、なんかいけそうなのに……！」	has:왠지 갈 수 있	fix	lookup
+lookup:nanka-kana	ということは、兄弟なんかいらないってこと？	lacks:몇 번	fix	lookup
+lookup:nanka-kana	これに喜びを感じない男なんかいない。	has:남자 같은 건 없다	fix	lookup
+lookup:nanka-kana	部室の扉をわざわざノックする奴なんかいないし……	has:놈 같은 건 없고	fix	lookup
+lookup:nanka-kana	びょうしつで、なんかいも、きいたから……	has:몇 번이나	keep	lookup
+lookup:nanka-kana	なんかいめだっけ？	has:몇 번째	keep	lookup
+lookup:nanka-kana	なんかい目の挑戦	has:몇 번째	keep	lookup
+lookup:nanka-kana	なんかいでも言うよ	has:몇 번이라도	keep	lookup
+lookup:nanka-kana	ここはなんかいですか？	has:몇 번입니까	keep	lookup
+lookup:nanka-kana	エレベーターでなんかいに行く？	has:몇 층에	keep	lookup
+lookup:nanka-kana	「なんかいくら寝ても疲れが抜けないのよねぇ……」	has:왠지 아무리 자도	keep	lookup
+lookup:nanka-kana	なんかいかがですか？	has:어떻습니까	keep	lookup

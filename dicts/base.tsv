@@ -7603,7 +7603,7 @@ ttt	ttt	K110			GN				jisjk:201744
 お心当たり	짐작	N110			GN				jisjk:368421		
 お心添え	충고	I110			GN				jisjk:40623		
 お心遣い	배려	N110			GN				jisjk:372117		
-お忍び	미행	I110			GN				jisjk:40641		
+お忍び	잠행	I110			GN			LEX-130	jisjk:40641		
 お忘れなく	잊지 말고 	E300			GN				jisjk:349763		
 お忘れなく	잊지 마세요	E300			GN	3875	||1 G+0== "Ow"	お忘れなく는 문장 오른쪽 경계에서 요청 표현 ‘잊지 마세요’로 고른다.	jisjk:349764		
 お忙しいことと存じ	바쁘실 것이라고 생각&AV@	M427		Pn	GN				jisjk:374898		
@@ -24606,7 +24606,6 @@ ttt	ttt	K110			GN				jisjk:201744
 しんばり	버팀목	I110			GN				jisjk:111970		
 しんばりぼう	버팀목	N110	VPe		GN				jisjk:193013		-1
 しんばり棒	버팀목	I110			GN				jisjk:41153		
-しんぱい	심폐	N110	VBpQHP		GN				jisjk:161645		
 しんぱい	걱정	N110	SFl	Hd	GN	1679	||2 &&2 S+1== "する" P+1== "4**" &&2 P+1== "4**" G+1== "Sk"	しんぱい는 다음 동사가 する이거나 Sk 문법 코드를 가지면 명사 ‘걱정’을 고른다.	jisjk:193018		-1
 しんぱい	신사 참배	N110		Hd	GN				jisjk:193020		-1
 しんぱいごと	걱정거리	N110			GN				jisjk:193021		-1
@@ -32913,7 +32912,6 @@ ttt	ttt	K110			GN				jisjk:201744
 つれづれ	무료%A1@	G8U0			GN				jisjk:140912		
 つれづれなる	무료한	E0H0			GN				jisjk:123562		
 つれてい	데려&A1@	M44?			GN				jisjk:262100		
-つれてきて	데리고 와서	E300			GN				jisjk:149328		
 つれて行	데려&A1@	M42?			GN				jisjk:141211		
 つれな	무정$AB@	H7U0			GN				jisjk:5201		
 つれな	인정이 $FA@	H7N0	SFl		GN				jisjk:121655		
@@ -35988,7 +35986,7 @@ ttt	ttt	K110			GN				jisjk:201744
 なにもな	아무것도 $FA@	H7N0			GN				jisjk:137465		
 なにやら	어쩐지	E311			GN				jisjk:943		
 なによう日	무슨 요일	N110	UMe		GN				jisjk:346373		
-なにより	최상	N110			GN	4051	||1 &&3 U-1== "で" Y-1= "6서" D+0= "다행"	앞말의 어미가 で인 なにより는 ‘다행’으로 바꾸고 앞 어미를 ‘-아서/어서’로 잇는다.	jisjk:356264		
+なにより	무엇보다	N110		Nn	GN	4051	||1 &&3 U-1== "で" Y-1= "6서" D+0= "다행"	앞말의 어미가 で인 なにより는 ‘다행’으로 바꾸고 앞 어미를 ‘-아서/어서’로 잇는다.	jisjk:356264		
 なにより	무엇보다도	N110		Nn	GN	4063	||1 P+1== "1**7**8**"	명사·형용사·형용동사 앞의 'なにより'를 '무엇보다도'로 고른다.	jisjk:356899		
 なによりと存じ	무엇보다 다행으로 생각&AV@	H447			GN				jisjk:268123		
 なによりも	무엇보다도	E311			GN				jisjk:944		
@@ -36252,9 +36250,7 @@ ttt	ttt	K110			GN				jisjk:201744
 なわけ	3 리가	U500			GN	6209	||2 &&3 ||2 S+1== "な" S+1== "無" P+1== "7**" D+1= "$FA@" &&4 S+1== "が" ||2 S+2== "な" S+2== "無" P+2== "7**" Y+0= "3 리"	용언 뒤의 わけ(訳)에 ない나 がない가 이어지면 ‘-을 리가 없다’로 고른다(来るわけないよ 올 리가 없어).	gram:wakenai:なわけ		
 なんか	(은)는	P251			GN	4229	||1 P-1== "1**"	なんか는 명사 뒤에서 보조사 '(은)는'을 고른다.	jisjk:362210		
 なんか	뭔가	P251			GN	4787	||2 &&2 ||2 S+1== "起き" S+1== "起こ" P+1== "4**" &&2 G+0== "Hz" P+1== "1**"	동사 起き·起こ 바로 앞이나 문두의 명사 앞의 なんか를 비하 조사가 아닌 부정 대명사 '뭔가'로 고른다 (なんか飲み物 뭔가 음료).	jisjk:373541		
-なんかい	몇번 	N110		Ct	GN				jisjk:346381		
-なんかい	몇층	N110		Ct	GN				jisjk:346382		
-なんかいな	같은 것 $FA@	H7U0			GN				jisjk:354009		
+なんかいな	같은 건 $FA@	H7U0			GN				jisjk:354009		
 なんかが	등이	P200			GN				jisjk:343006		
 なんかこわ	왠지 무$GE@	H7U0		Pj	GN				jisjk:344322		
 なんかさ、	웬인지 모르게	E110			GN				jisjk:263477		
@@ -164219,7 +164215,7 @@ ttt	ttt	K110			GN				jisjk:201744
 堪忍	인내	N110	UFl	Hd	GN				jisjk:14603		
 堪忍袋	인내심	I110			GN				jisjk:60416		
 堪能	능숙	N110			GN				jisjk:96298		
-堪能	통달%A1@	G8U0			GN				jisjk:119655		
+堪能	능숙%A1@	G8U0			GN			LEX-129	jisjk:119655		
 堪能	만끽&AV@	M449			GN				jisjk:138257		
 堪能させていただ	만족&AV@	M421	SFl		GN				jisjk:138255		
 堪能していただこうと	만족하&AE@	M449	SFl		GN				jisjk:138256		
@@ -185579,7 +185575,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小出雲	코이즈모	N130	QPN	Wb	GN				jisjk:276990		
 小出雲	오이즈모	N130	QCTVPl		GN				jisjk:345504		
 小出龍	고이데 류	N130	VHn		GN				jisjk:214779		
-小刀	창칼	N110	VTw		GN				jisjk:26721		
+小刀	작은 칼	N110	VTw		GN			LEX-130	jisjk:26721		
 小刀細工	잔꾀	N110			GN				jisjk:181704		
 小刀細工を弄	잔꾀를 부&AA@	M449			GN				jisjk:119253		
 小分け	소구분	I110		Hd	GN				jisjk:106174		
@@ -218056,7 +218052,7 @@ ttt	ttt	K110			GN				jisjk:201744
 放し飼い	방목	I110			GN				jisjk:69771		
 放ち出で	작은 방	N110	VBl		GN				jisjk:249940		
 放ち飼い	방목	N110		Hd	GN				jisjk:249941		
-放ってお	방치&AV@	M441			GN				jisjk:264502		
+放ってお	내버려 &C7@	M441			GN			LEX-123	jisjk:264502		
 放ってお	그대로 &C7@	M441			GN	4766	||2 M+0== "540" A-2-= "VHn"	특정 활용형이거나 앞쪽에 사람 의미의 말이 있으면 '放ってお'를 '그대로 두다'로 고른다.	jisjk:373489		
 放り出	내던&AL@	M443			GN				jisjk:260357		
 放れ	풀&AA@	M417			GN				jisjk:92995		
@@ -249850,7 +249846,7 @@ ttt	ttt	K110			GN				jisjk:201744
 止められ	끊&A2@	M427			GN	3731	||1 ||3 S-2== "電気" S-2== "水道" S-2== "ガス"	앞쪽에 電気·水道·ガス가 있으면 止められ를 끊기다로 고른다.	jisjk:346320		
 止められ	세울 수 &HN@	M427		MaKe	GN	3790	||2 &&3 U+0== "Lません" A-2== "VTp" D+0= "세울 수 &M9@" A-2== "VTp"	두 단어 앞이 교통수단 의미이면 「止められ」를 ‘세울 수 있다’로 고르고 「ません」 어미에서는 ‘세울 수 없다’로 바꾼다. (미발동: rare-context)	jisjk:346620		
 止められな	멈출 수 $FA@	H7N0			GN				jisjk:137362		
-止めを刺	급소를 &E9@	M413			GN				jisjk:95039		
+止めを刺	결정타를 날&AA@	M413			GN			LEX-120	jisjk:95039		
 止め付け	고정&AV@	M447			GN				jisjk:143256		
 止め具	고정 도구	N110			GN				jisjk:163660		
 止め弁	스톱 밸브	N110			GN				jisjk:162170		
@@ -266323,7 +266319,7 @@ ttt	ttt	K110			GN				jisjk:201744
 潅膓器	관장기	I110			GN				jisjk:62075		
 潅頂ヶ浜	간초가하마	N130	VPl		GN				jisjk:213770		
 潔	$D5@	H7U0			GN				jisjk:5358		
-潔	깨끗$AB@	H7U0			GN				jisjk:5359		
+潔	깨끗$AB@	H7U0			GN			LEX-129	jisjk:5359		1
 潔	키요시	N130	QPN	Wb	GN				jisjk:115653		
 潔	결	N110	XXX	On	GN				jisjk:258739		
 潔しとしな	떳떳하게 여기지 $DH@	H7N0			GN				jisjk:121653		
@@ -329032,7 +329028,7 @@ ttt	ttt	K110			GN				jisjk:201744
 財間	자이마	N130	QPN	Wa	GN				jisjk:10893		
 財閥	재벌	N110	VHn		GN				jisjk:32404		
 財閥解体	재벌 해체	N110	VMo		GN				jisjk:233306		
-貢	헌상&AV@	M432			GN				jisjk:91967		
+貢	바&AO@	M432			GN			LEX-129	jisjk:91967		
 貢	미츠구	N130	QPN	Wb	GN				jisjk:118525		
 貢	공	N110	XXX	On	GN				jisjk:259406		
 貢ぎ	공물	N110			GN				jisjk:252459		
@@ -334322,7 +334318,7 @@ ttt	ttt	K110			GN				jisjk:201744
 辻番所	쓰지반쇼	N110	VBl		GN				jisjk:243927		
 辻直四郎	쓰지 나오시로	N130	VHn		GN				jisjk:218030		
 辻社	길가 사당	N110	VBl		GN				jisjk:243931		
-辻立ち	거리 행상인	N110	VHnUAq		GN				jisjk:243924		
+辻立ち	길거리 유세	N110	VHnUAq		GN			LEX-131	jisjk:243924		
 辻維岳	쓰지 이가쿠	N130	VHn		GN				jisjk:218021		
 辻聴花	쓰지 조카	N130	VHn		GN				jisjk:218027		
 辻興屋	츠지코우야	N130	QCTVPl		GN				jisjk:309458		
@@ -336307,7 +336303,6 @@ ttt	ttt	K110			GN				jisjk:201744
 連れていかれ	데려가&AL@	M427			GN				jisjk:344655		
 連れていったはず	데리고 갔을 터	N110			GN				jisjk:152755		
 連れていった際	데리고 갔을 때	N110	UMe		GN				jisjk:152753		
-連れてきて	데리고 와서	E300			GN				jisjk:149327		
 連れて行	데려&A1@	M46?			GN				jisjk:103502		
 連れて行ってくれ	데려가 &CJ@	M427			GN				jisjk:141213		
 連れの	일행인	C0D1			GN				jisjk:4674		
@@ -338476,7 +338471,7 @@ ttt	ttt	K110			GN				jisjk:201744
 選球	선구	N110	VRw		GN				jisjk:239282		
 選球眼	선구안	I110	VBp		GN				jisjk:74385		
 選科	선과	N110			GN				jisjk:26394		
-選管	선거관리	N110			GN				jisjk:100919		
+選管	선관위	N110			GN			LEX-131	jisjk:100919		
 選管委	선거관리위원회	I110	VGt		GN				jisjk:74383		
 選管委員長	선관위 위원장	N110	VMoVHn		GN				jisjk:198847		
 選考	전형	N110		Hd	GN				jisjk:26392		
@@ -353928,7 +353923,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鞍掛鼻	구라카케하나	N130	VPl		GN				jisjk:214535		
 鞍掛鼻	구라카케하나	N130	VPl		GN				jisjk:214536		
 鞍擦れ	상처	N110	VBp		GN				jisjk:176501		
-鞍替え	전업	N110		Hd	BZ				jisjk:362085		
+鞍替え	갈아타기	N110		Hd	BZ			LEX-152 지지나 소속을 바꾸는 일	jisjk:362085		
 鞍瀬	쿠라세	N130	QCTVPl		GN				jisjk:291182		
 鞍部	안부	N120	VPl		GN				jisjk:125063		
 鞍馬	안마	N110	VRw		GN				jisjk:28480		
@@ -364110,7 +364105,7 @@ ttt	ttt	K110			GN				jisjk:201744
 黒藻	검정말	N110	QAL		GN				jisjk:203737		
 黒蟻	흑 개미	N110	QAAQAE		GN				jisjk:40148		
 黒血	검은 피	N110	VBp		GN				jisjk:176719		
-黒衣	승복	N110	VCp		GN				jisjk:181749		
+黒衣	검은 옷	N110	VCp		GN			LEX-130	jisjk:181749		
 黒袴町	쿠로바카마쵸	N130	QCTVPl		GN				jisjk:291591		
 黒装束	검은 복장	N110	VCp		GN				jisjk:176704		
 黒西	고쿠세이	N130			GN				jisjk:104842		

@@ -9,6 +9,7 @@
 
 #include "core/dict/snapshot.h"
 #include "core/tokenizer/token.h"
+#include "core/word/attach.h"
 #include "core/word/item.h"
 #include "core/word/select.h"
 
@@ -111,6 +112,8 @@ struct Settings {
     const void* hookChunk = nullptr;
     bool (*hookFits)(const void* chunk, uint32_t begin, uint32_t end, char part) = nullptr;
 #endif
+    // Attachment annotations for the packs layer (attach.h); null: the layer reads its own context.
+    const AttachProvider* attach = nullptr;
 };
 #ifdef HDTRANS_POC08_HOOKS
 }  // namespace hooked

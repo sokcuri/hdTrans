@@ -1,0 +1,19 @@
+# 규칙: GRM-35
+rule	input	expected	kind	layer
+cx:neg-clause-hoshii:10	勘違いしないでほしい	has:착각하지 말았으면 좋겠다	fix	rewrites
+cx:neg-clause-hoshii:32	無理しないでほしいな	has:무리하지 말았으면	fix	rewrites
+cx:neg-clause-hoshii:10	邪魔しないでほしいの	has:말았으면	fix	rewrites
+cx:neg-clause-hoshii:10	若い後妻を娶るのと一緒にしないでほしい。	has:함께 하지 말았으면 좋겠다	fix	rewrites
+cx:neg-clause-hoshii:10	なんていいわけは、もうしないでほしい…	has:하지 말았으면 좋겠다	fix	rewrites
+cx:neg-clause-hoshii:10	私は好きでやっているんだ、気にしないでほしい	!rule:cx:neg-clause-hoshii:10	keep	rewrites
+cx:neg-clause-hoshii:10	行かないでほしい。	has:가지 말았으면 좋겠다	keep	rewrites
+cx:neg-clause-hoshii:20	心配しないでほしいです	has:걱정하지 말았으면 좋겠습니다	fix	rewrites
+cx:neg-clause-hoshii:20	来てほしいです	!rule:cx:neg-clause-hoshii:20	keep	rewrites
+cx:neg-clause-hoshii:30	心配しないでほしいですよ	has:걱정하지 말았으면 좋겠어요	fix	rewrites
+cx:neg-clause-hoshii:30	来てほしいですよ	!rule:cx:neg-clause-hoshii:30	keep	rewrites
+cx:neg-clause-hoshii:32	勘違いしないでほしいのだけれど	has:착각하지 말았으면 좋겠는데	fix	rewrites
+cx:neg-clause-hoshii:32	教えてほしいのだけれど	!rule:cx:neg-clause-hoshii:32	keep	rewrites
+cx:neg-clause-hoshii:34	あんまりいじめる人を刺激しないでほしいのよ	has:자극하지 말았으면 좋겠어	fix	rewrites
+cx:neg-clause-hoshii:34	早く来てほしいよ	!rule:cx:neg-clause-hoshii:34	keep	rewrites
+cx:neg-clause-hoshii:40	なでなでしないでほしい人形。	has:하지 말았으면 하는	fix	rewrites
+cx:neg-clause-hoshii:40	これがほしい人形。	!rule:cx:neg-clause-hoshii:40	keep	rewrites

@@ -1,0 +1,34 @@
+# 규칙: GRM-75
+rule	input	expected	kind	layer
+cx:youto-concessive:10	凡百の脳がいくつ集まろうと、ヘザー博士の脳一つには敵わない	has:몇개 모이든,	fix	rewrites
+cx:youto-concessive:10	事態がどうなろうと、必ず朝は来る。	has:어떻게 되든,	fix	rewrites
+cx:youto-concessive:10	聖女様がどちらに行こうと、我がバーゲル家は支援しますわ！	has:어느 쪽으로 가든,	fix	rewrites
+cx:youto-concessive:10	死んだ後に何を言われようと、どう思われようと、どうでもいいじゃない。	has:어떻게 생각되든,	fix	rewrites
+cx:youto-concessive:10	誰があなたを王妃に望もうと、あなたが望まないのなら	has:바라든,	fix	rewrites
+cx:youto-concessive:10	俺が誰と手を組もうと、千里にとやかく言われる筋合いはない	has:손을 잡든,	fix	rewrites
+cx:youto-concessive:10	ふたりがどうなろうと、結局は他人事だ。	has:어떻게 되든,	fix	rewrites
+cx:youto-concessive:10	私たちがどう思おうと、青海さん的には大変なのよ	has:어떻게 생각하든,	fix	rewrites
+cx:youto-concessive:10	誰に何と言われようと、自分の信念を曲げない	has:뭐라고 듣든,	fix	rewrites
+cx:youto-concessive:5	どんなに仲間が増えようと、俺を超える者はいない	has:아무리 동료가 늘어나도,	fix	rewrites
+cx:youto-concessive:20	まあ、何年生だろうと、来る者拒まずのクラブだけどね。	has:몇학년이든,	fix	rewrites
+cx:youto-concessive:20	この基地へ接近する船は、どこの船籍だろうと、容赦なく沈めろ	has:어디의 선적이든,	fix	rewrites
+cx:youto-concessive:30	それは動物だろうが虫だろうが同じだ。	has:동물이든 벌레든	fix	rewrites
+cx:youto-concessive:30	男だろうが女だろうが関係ない。	has:남자든 여자든	fix	rewrites
+cx:youto-concessive:31	偶然だろうが奇跡だろうが、青海さんが来てくれたのは嬉しい。	has:우연이든 기적이든,	fix	rewrites
+cx:youto-concessive:31	乙女だろうがオカメだろうが、これだけは譲れない	has:소녀든 오카메든,	fix	rewrites
+cx:youto-concessive:31	面白ければMMOだろうがWCOだろうが、どっちでもいい。	has:MMO든 WCO든,	fix	rewrites
+cx:youto-concessive:32	公爵家だろうがなんだろうが知ったことじゃない。	has:공작가든 뭐든	fix	rewrites
+cx:youto-concessive:10	部室に戻ろうと、踵を返した	!rule:cx:youto-concessive:10	keep	rewrites
+cx:youto-concessive:10	かすかに聞こえる音声を聞き取ろうと、ベンチから立ち上がった	has:알아 들으려고,	keep	rewrites
+cx:youto-concessive:10	俺にチョコを受け取らせようと、さらにこちらへ手を伸ばす	!rule:cx:youto-concessive:10	keep	rewrites
+cx:youto-concessive:10	アヤメを安心させようと、グランツが微笑みかけた	!rule:cx:youto-concessive:10	keep	rewrites
+cx:youto-concessive:10	ゆうくんが必死に私のスペースを確保しようと、 頑張ってくれた	!rule:cx:youto-concessive:10	keep	rewrites
+cx:youto-concessive:10	なにはどうあれ、下の人が皐月を当選させようと、一生懸命動いている	has:당선시키려고,	keep	rewrites
+cx:youto-concessive:10	会おうと思った。	has:만나려고 했다.	keep	rewrites
+cx:youto-concessive:5	だが、記録をいくら消そうとも、記憶を消すことはできない	!rule:cx:youto-concessive:5	keep	rewrites
+cx:youto-concessive:5	部室に戻ろうと、踵を返した	!rule:cx:youto-concessive:5	keep	rewrites
+cx:youto-concessive:20	嫌だと思うだろうと、楽観していた	!rule:cx:youto-concessive:20	keep	rewrites
+cx:youto-concessive:20	これが夢だろうと、俺の心が癒やされるなら	!rule:cx:youto-concessive:20	keep	rewrites
+cx:youto-concessive:30	気になるだろうが、後で説明する。	!rule:cx:youto-concessive:30	keep	rewrites
+cx:youto-concessive:31	事情はあったんだろうが、ドタキャンは困るな。	!rule:cx:youto-concessive:31	keep	rewrites
+cx:youto-concessive:32	なんだろうが、気にするな。	!rule:cx:youto-concessive:32	keep	rewrites

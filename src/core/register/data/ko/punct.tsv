@@ -1,0 +1,48 @@
+#! punct
+# Punctuation by kind and source mark. `attach` says which side the mark joins without a space.
+#
+# Columns
+#   kind    comma pause end q excl qopen qclose ellipsis dash mark
+#   jaMark  the source mark or - (any)
+#   ko      the Korean mark (- = drop)
+#   attach  left | right | both (no space on either side: ……큰일이야) | none
+kind	jaMark	ko	attach	note
+comma	、	,	left
+comma	，	,	left
+comma	,	,	left
+comma	-	,	left
+end	。	.	left
+end	．	.	left
+end	-	.	left
+q	？	?	left
+q	?	?	left
+q	-	?	left
+excl	！	!	left
+excl	!	!	left
+excl	-	!	left
+qopen	「	「	right
+qopen	『	『	right
+qopen	（	(	right
+qopen	(	(	right
+qopen	【	【	right
+qopen	“	“	right
+qopen	-	「	right
+qclose	」	」	left
+qclose	』	』	left
+qclose	）	)	left
+qclose	)	)	left
+qclose	】	】	left
+qclose	”	”	left
+qclose	-	」	left
+ellipsis	…	…	left
+ellipsis	-	…	left
+pause	・	·	none
+pause	-	·	none
+dash	―	―	left
+dash	ー	―	left
+dash	-	―	left
+mark	～	~	left
+mark	〜	~	left
+mark	♪	♪	left
+mark	♥	♥	left
+mark	-	-	none

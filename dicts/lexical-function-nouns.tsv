@@ -67,3 +67,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 元	근원	N110			GN	8312	||1 P-1== "4**"	동사가 꾸미는 元는 무엇이 생겨나는 근원이다(魔物を生み出す元となる 마물을 만들어 내는 근원이 된다).				function-nouns:70
 真面目	성실함	N110			GN							function-nouns:71
 場	장소	N110	VPl		GN	8313	||1 &&2 P-1== "4**" ||9 S-1== "L出入" S-1== "Lでき" S-1== "L入" S-1== "L行" S-1== "L来" S-1== "L住" S-1== "L隠" S-1== "L逃" S-1== "L休"	드나들고 머무는 동사가 꾸미는 場는 장소다(自由に出入りできる場 자유롭게 출입할 수 있는 장소).				function-nouns:72
+なんかいも	몇 번이나	E300			GN			LEX-54 何回も의 가나 표기.				function-nouns:74
+なんかいめ	몇 번째	N110			GN			LEX-54 何回目의 가나 표기.				function-nouns:75
+なんかい目	몇 번째	N110			GN			LEX-54 何回目의 가나 표기.				function-nouns:76
+なんかいでも	몇 번이라도	E300			GN			LEX-54 何回でも의 가나 표기.				function-nouns:77
+なんかいに	몇 층에	E300			GN			LEX-54 何階に의 가나 표기.				function-nouns:79
+なんかいですか	몇 번입니까	A9H1			GN			LEX-54 何回ですか의 가나 표기.				function-nouns:80

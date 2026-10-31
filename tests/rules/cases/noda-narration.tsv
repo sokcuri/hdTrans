@@ -20,6 +20,6 @@ cx:noda-narration:10	だから理解する。ここでの悪ふざけは、日�
 cx:noda-narration:10	「行こう」と言った。いかんせん今この場は“私を断罪する場”なのだ。	has:”인 것이다.	fix	rewrites
 cx:noda-narration:10	「行こう」と言った。怒られるのは25日後なのだ。	has:후인 것이다.	fix	rewrites
 cx:noda-narration:10	「行こう」と言った。それは嘘なのだ。	「가자」라고 말했다. 그것은 거짓말인 것이다.	fix	rewrites
-cx:noda-narration:10	「それは嘘なのだ」	「그건 거짓말이다」	keep	rewrites
+cx:noda-narration:10	「それは嘘なのだ」	「그건 거짓말이야」	keep	rewrites
 cx:noda-narration:10	「行こう」と言った。（なんなのだ？この小屋は…）	lacks:것이다	keep	rewrites
 cx:noda-narration:10	「行こう」と言った。草を育てるだけなのだ。	lacks:것이다	keep	rewrites

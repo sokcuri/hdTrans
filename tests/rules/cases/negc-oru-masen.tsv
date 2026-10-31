@@ -1,0 +1,35 @@
+# 규칙: GRM-62, MNG-16
+rule	input	expected	kind	layer
+cx:neg-clause-oru:10	外には兵士がおりません	has:병사가 없습니다	fix	rewrites
+cx:neg-clause-oru:10	城にはもう誰もおりません	has:아무도 없습니다	fix	rewrites
+cx:neg-clause-oru:10	残念ながら騎士はおりません	has:기사는 없습니다	fix	rewrites
+cx:neg-clause-oru:30	この部屋には誰もおりませんでした	has:아무도 없었습니다	fix	rewrites
+cx:neg-clause-oru:10	バスは誰もおりません	!rule:cx:neg-clause-oru:10	keep	rewrites
+cx:neg-clause-masen:10	反対しませんが	has:반대하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	強制しませんが、	has:강제하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	期待しませんが	has:기대하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	説明しませんが	has:설명하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	参加しませんが	has:참가하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	説明しますが	!rule:cx:neg-clause-masen:10	keep	rewrites
+cx:neg-clause-masen:10	失礼しますが	!rule:cx:neg-clause-masen:10	keep	rewrites
+cx:neg-clause-oru:10	魔王や魔獣はおりません。	has:마수는 없습니다	fix	rewrites
+cx:neg-clause-oru:10	今は誰もおりません	has:아무도 없습니다	fix	rewrites
+cx:neg-clause-oru:10	そのような者はおりません	has:없습니다	fix	rewrites
+cx:neg-clause-oru:10	ここには魔物がおりません	has:없습니다	fix	rewrites
+cx:neg-clause-oru:10	階段をおりません	!rule:cx:neg-clause-oru:10	keep	rewrites
+cx:neg-clause-oru:10	電車からおりません	!rule:cx:neg-clause-oru:10	keep	rewrites
+cx:neg-clause-oru:10	なんにも出来てはおりません	!rule:cx:neg-clause-oru:10	keep	rewrites
+cx:neg-clause-oru:10	父はおりません	!rule:cx:neg-clause-oru:10	keep	rewrites
+cx:neg-clause-oru:20	ここにはおりませんよ	has:여기에는 없어요	fix	rewrites
+cx:neg-clause-oru:20	もう誰もおりませんよ	has:없어요	fix	rewrites
+cx:neg-clause-oru:20	車からはおりませんよ	!rule:cx:neg-clause-oru:20	keep	rewrites
+cx:neg-clause-oru:30	誰もおりませんでした	has:아무도 없었습니다	fix	rewrites
+cx:neg-clause-oru:30	階段をおりませんでした	!rule:cx:neg-clause-oru:30	keep	rewrites
+cx:neg-clause-masen:10	「劇薬……それは、はい。否定しませんが」	has:부정하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	展開予想は現状禁止しておりませんが、	has:금지하고 있지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	その点は否定しませんが、	has:부정하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	深くは追及しませんが	!rule:cx:neg-clause-masen:10	keep	rewrites
+cx:neg-clause-masen:10	細かい相場までは分かりませんが	!rule:cx:neg-clause-masen:10	keep	rewrites
+cx:neg-clause-masen:10	問題ありませんが	!rule:cx:neg-clause-masen:10	keep	rewrites
+cx:neg-clause-masen:10	申し訳ありませんが、	!rule:cx:neg-clause-masen:10	keep	rewrites
+cx:neg-clause-masen:10	容姿を売り物にはしておりませんが	!rule:cx:neg-clause-masen:10	keep	rewrites

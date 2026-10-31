@@ -35,7 +35,7 @@ HD_TEST(word_bare_adjectival_noun_stem) {
         {"花が綺麗…", "꽃이 예뻐…"},
         {"花が綺麗♪", "꽃이 예쁘다♪"},
         {"花が綺麗っ！", "꽃이 예뻐!"},
-        {"「花が綺麗」", "「꽃이 예쁘다」"},
+        {"「花が綺麗」", "「꽃이 예뻐」"},  // a dialogue line in 해체 (spec REG-2)
         {"花が綺麗？", "꽃이 예뻐?"},
         {"綺麗、花", "예쁘다, 꽃"},
         {"綺麗、綺麗、花", "예쁘다, 예쁘다, 꽃"},
@@ -47,4 +47,11 @@ HD_TEST(word_bare_adjectival_noun_stem) {
         HD_REQUIRE(out.size() == 1);
         HD_CHECK_EQ(out[0], std::string(c.want));
     }
+    // keep: the translation's own level
+    hdTrans::internal::TranslationOptions keep;
+    keep.speechLevels = hdTrans::SpeechLevels::Keep;
+    const std::string quoted = "「花が綺麗」";
+    const auto kept = hdTrans::internal::TranslateDocument(*loaded.snapshot, *generated, {&quoted, 1}, {}, keep);
+    HD_REQUIRE(kept.size() == 1);
+    HD_CHECK_EQ(kept[0], std::string("「꽃이 예쁘다」"));
 }

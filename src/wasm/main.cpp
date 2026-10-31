@@ -74,6 +74,7 @@ public:
         }
         session_ = std::make_unique<hdTrans::Session>(*engine_);
         session_->SetSpeech(speech_);
+        session_->SetSpeechLevels(speechLevels_);
         session_->SetWrapped(wrapped_);
         dictionaryVersion_ = hdTrans::frontend::DictionaryVersion(directories_);
         error_.clear();
@@ -107,6 +108,16 @@ public:
             return false;
         }
         if (session_) session_->SetSpeech(speech_);
+        return true;
+    }
+
+    // auto or keep: the speech levels of the dialogue lines of later translations.
+    bool SetSpeechLevels(const std::string& levels) {
+        if (!hdTrans::internal::SpeechLevelsOf(levels, speechLevels_)) {
+            error_ = "hdtrans: speechLevels takes auto or keep";
+            return false;
+        }
+        if (session_) session_->SetSpeechLevels(speechLevels_);
         return true;
     }
 
@@ -214,6 +225,7 @@ private:
     std::unique_ptr<hdTrans::Engine> engine_;
     std::unique_ptr<hdTrans::Session> session_;
     hdTrans::Speech speech_ = hdTrans::Speech::Strict;
+    hdTrans::SpeechLevels speechLevels_ = hdTrans::SpeechLevels::Auto;
     bool wrapped_ = false;
     std::string error_;
     std::string dictionaryVersion_;
@@ -231,6 +243,7 @@ EMSCRIPTEN_BINDINGS(hdtrans) {
         .function("translateJson", &Translator::TranslateJson)
         .function("reset", &Translator::Reset)
         .function("setSpeech", &Translator::SetSpeech)
+        .function("setSpeechLevels", &Translator::SetSpeechLevels)
         .function("setWrapped", &Translator::SetWrapped)
         .function("setUserDict", &Translator::SetUserDict)
         .function("setUserDictRaw", &Translator::SetUserDictRaw)

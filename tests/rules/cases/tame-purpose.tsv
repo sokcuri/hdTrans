@@ -1,0 +1,59 @@
+# 규칙: GRM-70
+rule	input	expected	kind	layer
+cx:tame-purpose:10	クロードは両親に報告するため、実家へとひとり旅をしていた。	has:보고하기 위해,	fix	rewrites
+cx:tame-purpose:10	決勝に進む2組を選ぶため、2周目に突入することになった。	has:선택하기 위해,	fix	rewrites
+cx:tame-purpose:10	踏み荒さないように注意する為、畑の周囲を少し盛り上げる。	has:주의하기 위해,	fix	rewrites
+cx:tame-purpose:10	理想を現実にするため、必死になって働く。	has:하기 위해,	fix	rewrites
+cx:tame-purpose:10	リシュランの評判を調べるため、アンケート用紙を配布することにした。	has:조사하기 위해,	fix	rewrites
+cx:tame-purpose:10	回収のヘリに位置を報せるため信号弾を打ち上げる。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	一発でも多く銃弾を撃ち込むため、敵に向かっていくだろう。	has:발사하기 위해,	fix	rewrites
+cx:tame-purpose:10	東雲さんを通すため、側近の人が道を作る。	has:통하기 위해,	fix	rewrites
+cx:tame-purpose:10	その感触をもっと味わうため、ふとももを舐め回していく。	has:맛보기 위해,	fix	rewrites
+cx:tame-purpose:10	文字を覚えるため、家の本を読み漁った。	has:배우기 위해,	fix	rewrites
+cx:tame-purpose:10	提督、私はあなたを護るため、どんどん強くなってあげる！	has:지키기 위해,	fix	rewrites
+cx:tame-purpose:10	俺はメンテナンスを受けるため、検査台に横になる。	has:받기 위해,	fix	rewrites
+cx:tame-purpose:10	終末を乗り越えるため、強い個体を作る。	has:극복하기 위해,	fix	rewrites
+cx:tame-purpose:10	逃げるワゴンを確実に止めるため、多少のリスクを冒した。	has:세우기 위해,	fix	rewrites
+cx:tame-purpose:10	シンダリオンの支配率を下げさせるため、攻撃を仕掛けています。	has:하기 위해,	fix	rewrites
+cx:tame-purpose:10	戦闘を避けるため、離れていたから。	has:피하기 위해,	fix	rewrites
+cx:tame-purpose:10	焼き色をつけるため、オーブンの設定を調整した。	has:칠하기 위해,	fix	rewrites
+cx:tame-purpose:10	俺を感じさせるため、ぎゅっと千里の身体を抱きしめた。	has:하기 위해,	fix	rewrites
+cx:tame-purpose:10	俺たちは、今日も緊急会議を開くため、部室に集まっていた。	has:열기 위해,	fix	rewrites
+cx:tame-purpose:10	休み時間、トイレに行くため廊下に出た。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	親戚を黙らせるため、父はあたしを引き取った。	has:하기 위해,	fix	rewrites
+cx:tame-purpose:10	しかし、聴衆が騒いでいるため、全然声が通らない。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	しかし、聴衆が騒いでいるため、全然声が通らない。	has:있기 때문에,	keep	rewrites
+cx:tame-purpose:10	相手が誰かわかりきっているため、お互い名前も確認しない。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	相手が誰かわかりきっているため、お互い名前も確認しない。	has:있기 때문에,	keep	rewrites
+cx:tame-purpose:10	魔術演算領域というPCがあるため、エルは疑問に思うでもない。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	魔術演算領域というPCがあるため、エルは疑問に思うでもない。	has:있기 때문에,	keep	rewrites
+cx:tame-purpose:10	使役モンスターにも経験値が割り振られるため、敬遠される。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	使役モンスターにも経験値が割り振られるため、敬遠される。	has:할당되기 때문에,	keep	rewrites
+cx:tame-purpose:10	数が多すぎるため、都市を何個か放棄しなければならない。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	数が多すぎるため、都市を何個か放棄しなければならない。	has:많기 때문에,	keep	rewrites
+cx:tame-purpose:10	中盤以降必須になるため、取得しておいた。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	中盤以降必須になるため、取得しておいた。	has:되기 때문에,	keep	rewrites
+cx:tame-purpose:10	「七人ミサキ」に数で勝るため、八体にした。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	「七人ミサキ」に数で勝るため、八体にした。	has:우수하기 때문에,	keep	rewrites
+cx:tame-purpose:10	神秘的な美少女であるため、羨望の眼差しで見られている。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	神秘的な美少女であるため、羨望の眼差しで見られている。	has:미소녀이기 때문에,	keep	rewrites
+cx:tame-purpose:10	純血瑞鸞生のみで構成される為、途中入学生は入れない。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	純血瑞鸞生のみで構成される為、途中入学生は入れない。	has:구성되기 때문에,	keep	rewrites
+cx:tame-purpose:10	そこにいる魔物を倒すと瘴気は薄くなるため、魔物を倒し続ける。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	そこにいる魔物を倒すと瘴気は薄くなるため、魔物を倒し続ける。	has:옅어지기 때문에,	keep	rewrites
+cx:tame-purpose:10	常に火炎弾の驚異にさらされ続けるため、精神力が持たない。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	常に火炎弾の驚異にさらされ続けるため、精神力が持たない。	has:노출되기 때문에,	keep	rewrites
+cx:tame-purpose:10	年の離れた兄弟がいるために、小さな子の扱いにも慣れていた。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	年の離れた兄弟がいるために、小さな子の扱いにも慣れていた。	has:있어서,	keep	rewrites
+cx:tame-purpose:10	自分の身を守るために、みんなが嫌がっている。	has:지키기 위해,	keep	rewrites
+cx:tame-purpose:10	自分の身を守るために、みんなが嫌がっている。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	3組もすべて泥水に入ったため、2周目に突入した。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	3組もすべて泥水に入ったため、2周目に突入した。	has:들어갔기 때문에,	keep	rewrites
+cx:tame-purpose:10	代行バスは定員に限りがあるため、時間がかかります。	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	代行バスは定員に限りがあるため、時間がかかります。	has:있기 때문에,	keep	rewrites
+cx:tame-purpose:10	理攻めで畳み込むため、製作者には結構煙たがられていた	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	会議を開くため、部屋を使えない	has:열기 때문에,	keep	rewrites
+cx:tame-purpose:10	〈溶血性貧血を引き起こすため人間以外の動物が食べると〉	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	超軟水で大豆の風味を引き出すため豆腐作りに適しているそうです	!rule:cx:tame-purpose:10	keep	rewrites
+cx:tame-purpose:10	クロードは両親に報告するため、実家へとひとり旅をしていた。	rule:cx:tame-purpose:10=1기 위해	fix	rewrites
+cx:tame-purpose:10	点検を行うため、運休します	has:실시하기 위해,	fix	rewrites

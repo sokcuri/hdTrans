@@ -1,11 +1,14 @@
 #include "core/config/config.h"
 
 #include <chrono>
+#include <cstdlib>
+#include <optional>
 #include <filesystem>
 #include <fstream>
 #include <string>
 #include <string_view>
 #include <system_error>
+#include <utility>
 
 #include "hdtest.h"
 
@@ -124,6 +127,55 @@ HD_TEST(ConfigSpeech) {
         HD_CHECK(result.diagnostics.empty());
         HD_CHECK(result.settings.speech == test.want);
     }
+}
+
+// Sets an environment variable (or clears it with nullopt) for one scope.
+struct ScopedEnv {
+    std::string name;
+    std::optional<std::string> saved;
+    ScopedEnv(std::string variable, const std::optional<std::string>& value) : name(std::move(variable)) {
+        if (const char* old = std::getenv(name.c_str())) saved = old;
+        Set(value);
+    }
+    ~ScopedEnv() { Set(saved); }
+    ScopedEnv(const ScopedEnv&) = delete;
+    ScopedEnv& operator=(const ScopedEnv&) = delete;
+    void Set(const std::optional<std::string>& value) const {
+#ifdef _WIN32
+        _putenv_s(name.c_str(), value ? value->c_str() : "");
+#else
+        if (value) setenv(name.c_str(), value->c_str(), 1);
+        else unsetenv(name.c_str());
+#endif
+    }
+};
+
+HD_TEST(ConfigSpeechLevels) {
+    TempConfig file;
+    const ScopedEnv cleared("HDTRANS_SPEECH_LEVELS", std::nullopt);
+    HD_CHECK(file.Load("").settings.speechLevels == hdTrans::SpeechLevels::Auto);
+    HD_CHECK(file.Load("speech_levels: keep\n").settings.speechLevels == hdTrans::SpeechLevels::Keep);
+    HD_CHECK(file.Load("speech_levels: Auto\n").settings.speechLevels == hdTrans::SpeechLevels::Auto);
+    const auto bad = file.Load("speech_levels: off\n");
+    HD_REQUIRE(bad.diagnostics.size() == 1);
+    HD_CHECK_EQ(bad.diagnostics[0].message, "speech_levels: expected auto or keep");
+    HD_CHECK(!bad.diagnostics[0].environment);
+}
+
+HD_TEST(ConfigSpeechLevelsEnvironment) {
+    TempConfig file;
+    {
+        const ScopedEnv keep("HDTRANS_SPEECH_LEVELS", "Keep");
+        const auto result = file.Load("speech_levels: auto\n");
+        HD_CHECK(result.diagnostics.empty());
+        HD_CHECK(result.settings.speechLevels == hdTrans::SpeechLevels::Keep);
+    }
+    const ScopedEnv bad("HDTRANS_SPEECH_LEVELS", "off");
+    const auto result = file.Load("speech_levels: keep\n");
+    HD_REQUIRE(result.diagnostics.size() == 1);
+    HD_CHECK(result.diagnostics[0].environment);
+    HD_CHECK(result.settings.speechLevels == hdTrans::SpeechLevels::Keep);
+    HD_CHECK_EQ(hdTrans::internal::ConfigErrors(result, "config.yaml"), "HDTRANS_SPEECH_LEVELS: expected auto or keep");
 }
 
 HD_TEST(ConfigPaths) {

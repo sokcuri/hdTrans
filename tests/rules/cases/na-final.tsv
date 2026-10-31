@@ -11,4 +11,4 @@ ending:高いんだな	「お前も眠いんだな」	「너도 졸리구나」	
 ending:学生だよな	「明日は雨だよな」	「내일은 비지」	fix	builtin-ending
 ending:書いてたよな	「昨日の店、混んでたよな」	「어제의 가게, 혼잡했지」	fix	builtin-ending
 phrase:そうだな	「そうだな」	「그래」	fix	builtin-phrase
-dict:jisjk:346446	「きれいだなって思った」	「예쁘다라고 생각했다」	keep	lookup
+dict:jisjk:346446	「きれいだなって思った」	「예쁘다라고 생각했어」	keep	lookup

@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 dict:lexical-novel-idioms	いきなり話を振られたビリー様は、ちょっとあわあわしてから、	갑자기 말을 건네받은 비리님은, 조금 허둥지둥 하고 나서,	fix	lookup
 dict:lexical-novel-idioms	突然話を振られたヤルドは慌てて振り向き、口を開く。	갑자기 말을 건네받은 야르드는 황급히 뒤돌아 봐, 입을 연다.	fix	lookup
-dict:lexical-novel-idioms	思わぬタイミングで話を振られたらしく、レナは赤面する。	생각하지 않는 타이밍에 말을 건네받은 것 같고, 레나는 빨간 얼굴한다.	fix	lookup
+dict:lexical-novel-idioms	思わぬタイミングで話を振られたらしく、レナは赤面する。	생각하지 못한 타이밍에 말을 건네받은 것 같고, 레나는 빨간 얼굴한다.	fix	lookup
 dict:lexical-novel-idioms	「……今までお心を砕いて頂いた事、全てを無駄にして申し訳ございませんでした」	「……지금까지 마음을 써 주신 일, 모든 걸 쓸데없게 해서 죄송했습니다」	fix	lookup
 dict:lexical-novel-idioms	上様方にはどうか政にお心を砕いて頂きたく。	귀하편에게는 제발 정에 마음을 써 주셨으면 하고.	fix	lookup
 dict:lexical-novel-idioms	「ゲームの椿とは似ても似つかないけど」と呟いていた。	「게임의 츠바키와는 딴판인데」라고 중얼거리고 있었다.	fix	lookup

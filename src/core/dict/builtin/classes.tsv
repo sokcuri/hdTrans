@@ -9,6 +9,13 @@
 //= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.habit	Adverbs of habit and frequency: a ますか question with one of them asks what someone usually does, not an offer (毎日勉強しますか 매일 공부합니까).
 //= adverb.negative-polarity	Adverbs that need a negative after them (二度と, 決して, 到底): with an affirmative verb in a quotation before a sentence-final 思うな the な is the negative, a prohibition (二度と会えると思うな 두 번 다시 만날 수 있다고 생각하지 마).
+//= adverb.fact-question	Adverbs before a sentence-final negative question that ask whether something is so, not for an act (まだ来ない？ 아직 오지 않아?, 全然食べないの？): no invitation (spec MNG-7).
+//= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
+//= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
+//= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
+//= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
+//= noun.felt-ga	Starts of a word or phrase of a feeling in が (気が, 小腹が, お腹が), whose negative question asks how one feels: no invitation (気がしないか？ 그런 생각이 들지 않아?; spec MNG-7).
+//= word.invite-not	Stems of predicates of a feeling or a happening that no one invites to (気にしない？ 신경 쓰이지 않아?, 生まれない？): a negative question after one asks, it invites to nothing (spec MNG-7).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
@@ -61,6 +68,7 @@
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.rare-negative	The negative forms after られ, which make a dictionary word in the られ of くる the potential (連れてこられない, 連れてこられません).
+//= ending.lexical-potential-negative	The negative forms after られ that make a dictionary word in the られ of another ichidan verb the potential (決められない, 続けられなかった, 与えられません, 見せられず; spec GRM-50): not な of ながら or なさい, nor ん, which may be the る said short (考えられんの).
 //= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= ending.voice-condition	Conditions and concessions after (ら)れ: when the main clause is a trouble of stem.adverse-outcome the (ら)れ is the passive (見られたら困る), and a word of word.ability-scope before one makes no potential (誰だってそう言われたら).
@@ -69,6 +77,8 @@
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
+//= follower.prohibition-janai	Sentence particles after the んじゃない or んじゃねえ of a rebuke (泣くんじゃないよ, 気を抜くんじゃないぞ, なめた口をきいているんじゃないわよ): the prohibition 지 마 (spec MNG-6).
+//= follower.prohibition-janai-teru	The particles of follower.prohibition-janai after which the てるんじゃない of a て form forbids too, not only before ！ (ビビってんじゃねぇぞ, きいているんじゃないわよ; spec MNG-6).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
 //= follower.count	What follows a count of things to say how they are shared or measured: ずつ, 分 and the times sign (二面ずつ 두 면씩, 四面分 네 면분, 四面×四面 네 면×네 면).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
@@ -213,6 +223,7 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
+//= noun.quoted-clause	The nouns that a quotation in って fused into the ending of a predicate describes (行くって話 간다는 이야기, やめろって意味 그만두라는 의미).
 //= noun.quote-request	Verbal nouns of asking, wishing, answering and ordering whose する takes what is asked or wished with って (静かにってお願いした 조용히라고 부탁했다, 場所って希望した 장소라고 희망했다).
 //= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
 //= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
@@ -259,6 +270,7 @@
 //= pronoun.rough-second-person	Second-person pronouns of rough or scornful speech, alone and plural (お前, 貴様, てめえ, あんた): the subject of a quotation before a sentence-final 思うな, which then forbids (お前が勝てると思うな 네가 이길 수 있다고 생각하지 마).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
 //= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
+//= pronoun.third-person	Pronouns of a person who is neither the speaker nor the listener (彼, 彼女, あいつ, 奴): a sentence that starts with one and a comma asks about that person (彼、来ない？ 그, 오지 않아?), no invitation (spec MNG-7).
 //= pronoun.listener	Second-person pronouns, alone and plural, by which the speaker names the listener (あなた, 君, お前, 貴公ら, そなた): a recipient in に of one of them is the one spoken to.
 //= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
@@ -310,6 +322,11 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
+//= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
+//= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
+//= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
+//= verb.janai-saying	て forms of verbs of saying (言っ, 話し) whose てるんじゃない after word.janai-correction corrects what was said and forbids nothing (そういうこと言ってるんじゃないわよ 그런 걸 말하는 게 아니야; spec MNG-6).
+//= word.janai-correction	Words that point at what was said (そういう, そんな), before a verb of verb.janai-saying in てるんじゃない (spec MNG-6).
 //= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
 //= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
@@ -354,6 +371,9 @@
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.involuntary	Verbs of what happens to one rather than what one does (出る, 死ぬ, 遅れる, 負ける, 忘れる): their ちゃう that ends a line is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아), not a resolve.
+//= verb.spared-event	Verbs of what befalls one rather than what one chooses to do (失う, 死ぬ, 傷つく, 落とす), by dictionary form: their ずに済む is being spared it, not being let off doing it, and stays (spec GRM-55).
+//= noun.casual-lacked	Nouns of what one has or lacks (救い, 金, 時間, 意味), after which が and the casual ねえ before ！ or a final particle is the negative ない (救いがねぇ！ 구원이 없어!); after any other word the ねえ is the particle of storytelling (こいつがねぇ！).
+//= noun.spared-event	Verbal nouns of what befalls one (怪我, 負傷, 犠牲), whose する in ずに済む is the same as verb.spared-event.
 //= verb.spontaneous	Ichidan stems whose られ is a feeling that comes by itself, never the potential (将来が案じられる, 気配が感じられる).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
@@ -371,6 +391,7 @@
 //= verb.unit-operation	Starts of the verbs and verbal nouns of a military operation or a joint task that a group in で carries out (出撃, 突撃, 攻略, 達成): the first predicate after the で decides.
 //= verb.writing	Stems of the verbs of writing, whose てある is what stands written (書いてある 써 있다).
 //= word.belittling	Words after a noun that belittle it (ごとき, なんか, 風情): a subject in が after one, in a quotation before a sentence-final 思うな, makes it forbid (お前ごときが勝てると思うな).
+//= word.dismissal	Starts of the predicates that brush something aside without a negative ending (嫌い, どうでもいい): a など, なんか or なんて after a noun before one belittles it (spec LEX-90, LEX-91).
 //= word.ability-scope	Words that make the (ら)れ of their clause the potential: anyone, any time or anywhere, or by oneself (誰でも着られる, 自分で決められる).
 //= word.iru-form	Words of the dictionary that a form of いる or いらっしゃる starts (いろ 色, いよう 異様, いたって 至って, いたみ 痛み, いらっしゃい 어서 오세요): right after a て form the text is that いる or いらっしゃる (待っていろよ, 何していようかな, 悔しがっていたみたい, 洗っていらっしゃい).
 //= word.arena-predicate	Words of standing out or doing one's part (活躍, 頑張る, 有名, 最強): a でも right before one after a noun that is no person is 에서도, where it holds (フランス海軍でも活躍した 프랑스 해군에서도 활약했다).
@@ -393,6 +414,7 @@
 //= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
 //= word.inclusive	Words that put the speaker together with others (一緒に, みんなで, 私たち, 我ら): a volitional in their sentence invites, 자 (われらの力を見せよう 우리들의 힘을 보여 주자).
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
+//= word.reciprocal-to	Starts of the verbs and verbal nouns of doing something with a partner (fighting, marrying, meeting, exchanging, discussing), before which a と after a quotation is the partner, not the quoting (『男友達みたいな女』と浮気してた 와 바람피우던).
 //= word.pause-filler	Fillers read apart before a source space; a longer word containing them is not a member.
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.denial-lead	Interjections that may lead a denial or a correction (いや、違う 아니, 아니야; え、違うの？).
@@ -1153,6 +1175,16 @@ ending.rare-negative	ぬ
 ending.rare-negative	ん
 ending.rare-negative	ませ
 
+ending.lexical-potential-negative	ない
+ending.lexical-potential-negative	なかっ
+ending.lexical-potential-negative	なく
+ending.lexical-potential-negative	なけれ
+ending.lexical-potential-negative	ねえ
+ending.lexical-potential-negative	ねぇ
+ending.lexical-potential-negative	ず
+ending.lexical-potential-negative	ぬ
+ending.lexical-potential-negative	ませ
+
 ending.rare-potential	な
 ending.rare-potential	ず
 ending.rare-potential	ぬ
@@ -1205,6 +1237,11 @@ follower.contracted-iru	じゃ
 
 follower.contracted-teru	じゃ
 follower.contracted-teru	だろ
+follower.prohibition-janai	よ
+follower.prohibition-janai	ぞ
+follower.prohibition-janai	わよ
+follower.prohibition-janai-teru	ぞ
+follower.prohibition-janai-teru	わよ
 
 follower.ita	い
 follower.ita	か
@@ -3252,6 +3289,66 @@ noun.quoted	子
 noun.quoted	娘
 noun.quoted	噂
 noun.quoted	もん
+noun.quoted-clause	こと	GRM-80
+noun.quoted-clause	事	GRM-80
+noun.quoted-clause	もの	GRM-80
+noun.quoted-clause	物	GRM-80
+noun.quoted-clause	もん	GRM-80
+noun.quoted-clause	奴	GRM-80
+noun.quoted-clause	やつ	GRM-80
+noun.quoted-clause	ヤツ	GRM-80
+noun.quoted-clause	人	GRM-80
+noun.quoted-clause	子	GRM-80
+noun.quoted-clause	感じ	GRM-80
+noun.quoted-clause	カンジ	GRM-80
+noun.quoted-clause	話	GRM-80
+noun.quoted-clause	噂	GRM-80
+noun.quoted-clause	言葉	GRM-80
+noun.quoted-clause	意味	GRM-80
+noun.quoted-clause	約束	GRM-80
+noun.quoted-clause	気持ち	GRM-80
+noun.quoted-clause	気分	GRM-80
+noun.quoted-clause	名前	GRM-80
+noun.quoted-clause	理由	GRM-80
+noun.quoted-clause	表情	GRM-80
+noun.quoted-clause	態度	GRM-80
+noun.quoted-clause	雰囲気	GRM-80
+noun.quoted-clause	様子	GRM-80
+noun.quoted-clause	連絡	GRM-80
+noun.quoted-clause	メール	GRM-80
+noun.quoted-clause	手紙	GRM-80
+noun.quoted-clause	電話	GRM-80
+noun.quoted-clause	知らせ	GRM-80
+noun.quoted-clause	命令	GRM-80
+noun.quoted-clause	指示	GRM-80
+noun.quoted-clause	依頼	GRM-80
+noun.quoted-clause	お願い	GRM-80
+noun.quoted-clause	願い	GRM-80
+noun.quoted-clause	意見	GRM-80
+noun.quoted-clause	考え	GRM-80
+noun.quoted-clause	評判	GRM-80
+noun.quoted-clause	条件	GRM-80
+noun.quoted-clause	ルール	GRM-80
+noun.quoted-clause	予定	GRM-80
+noun.quoted-clause	計画	GRM-80
+noun.quoted-clause	説	GRM-80
+noun.quoted-clause	返事	GRM-80
+noun.quoted-clause	答え	GRM-80
+noun.quoted-clause	文句	GRM-80
+noun.quoted-clause	台詞	GRM-80
+noun.quoted-clause	セリフ	GRM-80
+noun.quoted-clause	合図	GRM-80
+noun.quoted-clause	メッセージ	GRM-80
+noun.quoted-clause	話題	GRM-80
+noun.quoted-clause	設定	GRM-80
+noun.quoted-clause	イメージ	GRM-80
+noun.quoted-clause	思い	GRM-80
+noun.quoted-clause	想い	GRM-80
+noun.quoted-clause	自信	GRM-80
+noun.quoted-clause	証拠	GRM-80
+noun.quoted-clause	主張	GRM-80
+noun.quoted-clause	説明	GRM-80
+noun.quoted-clause	報告	GRM-80
 
 noun.realm-compound	国境
 noun.realm-compound	国内
@@ -3871,6 +3968,20 @@ pronoun.speaker	俺ら
 pronoun.speaker	我々
 pronoun.speaker	うちら
 pronoun.speaker	ウチら
+pronoun.third-person	彼
+pronoun.third-person	彼女
+pronoun.third-person	彼ら
+pronoun.third-person	彼女ら
+pronoun.third-person	あいつ
+pronoun.third-person	こいつ
+pronoun.third-person	そいつ
+pronoun.third-person	あいつら
+pronoun.third-person	こいつら
+pronoun.third-person	そいつら
+pronoun.third-person	奴
+pronoun.third-person	やつ
+pronoun.third-person	奴ら
+pronoun.third-person	やつら
 
 pronoun.topic-wa	こっち
 pronoun.topic-wa	そっち
@@ -4857,6 +4968,67 @@ verb.observed-state	あり得
 verb.observed-state	間に合
 verb.observed-state	でき
 verb.observed-state	出来
+verb.unwilled	ある
+verb.unwilled	有る
+verb.unwilled	在る
+verb.unwilled	いる
+verb.unwilled	居る
+verb.unwilled	おる
+verb.unwilled	知る
+verb.unwilled	分かる
+verb.unwilled	わかる
+verb.unwilled	判る
+verb.unwilled	解る
+verb.unwilled	見える
+verb.unwilled	聞こえる
+verb.unwilled	思う
+verb.unwilled	想う
+verb.unwilled	できる
+verb.unwilled	出来る
+verb.unwilled	違う
+verb.unwilled	似る
+verb.unwilled	足りる
+verb.unwilled	要る
+verb.unwilled	気づく
+verb.unwilled	気付く
+verb.unwilled	終わる
+verb.unwilled	終る
+verb.unwilled	降る
+verb.unwilled	開く
+verb.unwilled	見つかる
+verb.unwilled	壊れる
+verb.unwilled	割れる
+verb.unwilled	鳴る
+verb.unwilled	届く
+verb.unwilled	消える
+verb.unwilled	治る
+verb.unwilled	起こる
+verb.unwilled	間に合う
+verb.unwilled	困る
+verb.unwilled	疲れる
+verb.unwilled	晴れる
+verb.unwilled	曇る
+verb.unwilled	光る
+verb.janai-state	あ
+verb.janai-state	有
+verb.janai-state	在
+verb.janai-state	い
+verb.janai-state	居
+verb.janai-quote	って言
+verb.janai-quote	ってい
+verb.janai-quote	とい
+verb.janai-saying	言っ
+verb.janai-saying	いっ
+verb.janai-saying	話し
+verb.janai-saying	はなし
+verb.janai-saying	喋っ
+verb.janai-saying	しゃべっ
+word.janai-correction	そういう
+word.janai-correction	そんな
+word.janai-correction	こういう
+word.janai-correction	こんな
+word.janai-correction	ああいう
+word.janai-correction	あんな
 verb.causative-passive	気づかされ
 verb.causative-passive	あやまらされ
 verb.causative-passive	受けもたされ
@@ -5462,6 +5634,9 @@ verb.quote-start	望
 verb.quote-start	命じ
 verb.quote-start	言い聞かせ
 verb.quote-start	感じ
+verb.quote-start	聞か	GRM-83
+verb.quote-start	聞い	GRM-83
+verb.quote-start	聞き	GRM-83
 
 verb.receiver-passive	許
 verb.receiver-passive	任
@@ -6363,6 +6538,44 @@ word.partner-to	同時
 word.partner-to	どうじ
 word.partner-to	同様
 word.partner-to	等し
+
+word.reciprocal-to	戦	GRM-86
+word.reciprocal-to	闘	GRM-86
+word.reciprocal-to	争	GRM-86
+word.reciprocal-to	喧嘩	GRM-86
+word.reciprocal-to	けんか	GRM-86
+word.reciprocal-to	結婚	GRM-86
+word.reciprocal-to	婚約	GRM-86
+word.reciprocal-to	浮気	GRM-86
+word.reciprocal-to	付き合	GRM-86
+word.reciprocal-to	つきあ	GRM-86
+word.reciprocal-to	交際	GRM-86
+word.reciprocal-to	別れ	GRM-86
+word.reciprocal-to	わかれ	GRM-86
+word.reciprocal-to	引き替え	GRM-86
+word.reciprocal-to	引き換え	GRM-86
+word.reciprocal-to	交換	GRM-86
+word.reciprocal-to	協議	GRM-86
+word.reciprocal-to	相談	GRM-86
+word.reciprocal-to	話し合	GRM-86
+word.reciprocal-to	握手	GRM-86
+word.reciprocal-to	合流	GRM-86
+word.reciprocal-to	対戦	GRM-86
+word.reciprocal-to	対決	GRM-86
+word.reciprocal-to	再会	GRM-86
+word.reciprocal-to	出会	GRM-86
+word.reciprocal-to	出逢	GRM-86
+word.reciprocal-to	知り合	GRM-86
+word.reciprocal-to	すれ違	GRM-86
+word.reciprocal-to	ぶつか	GRM-86
+word.reciprocal-to	会	GRM-86
+word.reciprocal-to	逢	GRM-86
+word.reciprocal-to	遊	GRM-86
+word.reciprocal-to	踊	GRM-86
+word.reciprocal-to	共演	GRM-86
+word.reciprocal-to	連絡	GRM-86
+word.reciprocal-to	契約	GRM-86
+word.reciprocal-to	取引	GRM-86
 word.pause-filler	あ
 word.pause-filler	え
 word.pause-filler	ええ
@@ -7236,6 +7449,11 @@ word.belittling	風情
 word.belittling	なんか
 word.belittling	なんぞ
 word.belittling	程度
+word.dismissal	嫌い
+word.dismissal	大嫌い
+word.dismissal	きらい
+word.dismissal	だいきらい
+word.dismissal	どうでも
 ending.no-exclamation-na	言う
 ending.no-exclamation-na	思う
 ending.no-exclamation-na	よう
@@ -7255,6 +7473,74 @@ adverb.negative-polarity	少しも
 adverb.negative-polarity	ちっとも
 adverb.negative-polarity	微塵も
 adverb.negative-polarity	毛頭
+adverb.fact-question	まだ
+adverb.fact-question	未だ
+adverb.fact-question	もう
+adverb.fact-question	全然
+adverb.fact-question	ぜんぜん
+adverb.fact-question	全く
+adverb.fact-question	まったく
+adverb.fact-question	あまり
+adverb.fact-question	あんまり
+adverb.fact-question	いつも
+adverb.fact-question	普段
+adverb.fact-question	最近
+adverb.fact-question	ずっと
+adverb.fact-question	本当に
+adverb.fact-question	ほんとに
+adverb.fact-question	ほんとうに
+adverb.fact-question	普通
+adverb.fact-question	ふつう
+adverb.fact-question	たまに
+adverb.fact-question	よく
+adverb.realization	やっぱり
+adverb.realization	やっぱ
+adverb.realization	やはり
+adverb.realization	結局
+adverb.realization	けっきょく
+adverb.realization	案の定
+word.scold	こら
+word.scold	コラ
+word.scold	こらこら
+word.scold	コラコラ
+word.scold	こらっ
+word.scold	コラッ
+word.someone	誰か
+word.someone	だれか
+word.someone	誰かさん
+noun.sensed	音
+noun.sensed	物音
+noun.sensed	足音
+noun.sensed	匂い
+noun.sensed	におい
+noun.sensed	臭い
+noun.sensed	味
+noun.sensed	声
+noun.sensed	気配
+noun.sensed	感じ
+noun.sensed	予感
+noun.sensed	気
+noun.sensed	寒気
+noun.sensed	吐き気
+noun.sensed	めまい
+noun.sensed	目眩
+noun.sensed	頭痛
+noun.sensed	胸騒ぎ
+noun.sensed	音色
+noun.felt-ga	気が
+noun.felt-ga	小腹が
+noun.felt-ga	お腹が
+noun.felt-ga	おなかが
+noun.felt-ga	腹が
+noun.felt-ga	喉が
+noun.felt-ga	のどが
+noun.felt-ga	頭が
+noun.felt-ga	胸が
+word.invite-not	気に
+word.invite-not	生まれ
+word.invite-not	存在
+word.invite-not	死な
+word.invite-not	浮上
 ko-verb.person-object	이기다
 ko-verb.person-object	만나다
 ko-verb.person-object	따라잡다
@@ -7527,3 +7813,103 @@ script.chinese-han	灵
 script.chinese-han	帮
 script.chinese-han	阳
 script.chinese-han	极
+
+verb.spared-event	失う
+verb.spared-event	死ぬ
+verb.spared-event	傷つく
+verb.spared-event	沈む
+verb.spared-event	落ちる
+verb.spared-event	落とす
+verb.spared-event	迷う
+verb.spared-event	掛かる
+verb.spared-event	かかる
+verb.spared-event	壊れる
+verb.spared-event	負ける
+verb.spared-event	倒れる
+verb.spared-event	溺れる
+verb.spared-event	濡れる
+verb.spared-event	遅れる
+verb.spared-event	困る
+verb.spared-event	苦しむ
+verb.spared-event	流れる
+verb.spared-event	流す
+verb.spared-event	汚れる
+verb.spared-event	消える
+verb.spared-event	捕まる
+verb.spared-event	見つかる
+verb.spared-event	巻き込まれる
+
+noun.spared-event	怪我
+noun.spared-event	けが
+noun.spared-event	負傷
+noun.spared-event	犠牲
+noun.spared-event	遅刻
+noun.spared-event	失敗
+noun.spared-event	損
+
+noun.casual-lacked	救い
+noun.casual-lacked	金
+noun.casual-lacked	お金
+noun.casual-lacked	時間
+noun.casual-lacked	暇
+noun.casual-lacked	余裕
+noun.casual-lacked	意味
+noun.casual-lacked	価値
+noun.casual-lacked	理由
+noun.casual-lacked	証拠
+noun.casual-lacked	自信
+noun.casual-lacked	興味
+noun.casual-lacked	関係
+noun.casual-lacked	必要
+noun.casual-lacked	元気
+noun.casual-lacked	力
+noun.casual-lacked	気
+noun.casual-lacked	用
+noun.casual-lacked	方法
+noun.casual-lacked	手
+noun.casual-lacked	仕方
+noun.casual-lacked	勝ち目
+noun.casual-lacked	希望
+noun.casual-lacked	逃げ場
+noun.casual-lacked	出口
+noun.casual-lacked	答え
+noun.casual-lacked	心配
+noun.casual-lacked	遠慮
+noun.casual-lacked	容赦
+noun.casual-lacked	問題
+noun.casual-lacked	文句
+noun.casual-lacked	才能
+noun.casual-lacked	根性
+noun.casual-lacked	度胸
+noun.casual-lacked	未来
+noun.casual-lacked	愛
+noun.casual-lacked	欲
+noun.casual-lacked	土地勘
+noun.casual-lacked	物
+
+//= verb.tame-state	Verbs of a state, of what happens to something or of what something brings about, after which a ため is the cause, not an aim (数で勝るため 수로 우수하기 때문에, 時間がかかるため 시간이 걸리기 때문에, 貧血を引き起こすため 빈혈을 일으키기 때문에); as the predicate after a ため they are no act aimed at (豆腐作りに適している).
+verb.tame-state	勝る
+verb.tame-state	優る
+verb.tame-state	要る
+verb.tame-state	違う
+verb.tame-state	異なる
+verb.tame-state	起こる
+verb.tame-state	起きる
+verb.tame-state	生じる
+verb.tame-state	降る
+verb.tame-state	困る
+verb.tame-state	足りる
+verb.tame-state	かかる
+verb.tame-state	掛かる
+verb.tame-state	含む
+verb.tame-state	続く
+verb.tame-state	増える
+verb.tame-state	減る
+verb.tame-state	消える
+verb.tame-state	残る
+verb.tame-state	存在する
+verb.tame-state	属する
+verb.tame-state	当たる
+verb.tame-state	引き起こす
+verb.tame-state	もたらす
+verb.tame-state	適する

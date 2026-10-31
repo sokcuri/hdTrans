@@ -1,0 +1,14 @@
+# 규칙: GRM-85
+rule	input	expected	kind	layer
+cx:lc-quote-count-to:10	第一競技では、棄権した4番と、2番の『真実の愛その2』が脱落し、終了となった。	has:4번과, 2번의	fix	rewrites
+cx:lc-quote-count-to:10	畑に侵入した牙の生えた兎が六羽と、子犬サイズのネズミが一匹、畑の肥料になった。	has:여섯 마리와, 강아지	fix	rewrites
+cx:lc-quote-count-to:10	「えーと、隊員は、ユメくん、森下さん、青海さんの３人と、私でいいのかな？」	has:3명과,	fix	rewrites
+cx:lc-quote-count-to:10	でも、感想をくれた92人と、完結を待っているそれ以上の何人かのために、”終わり”は必要だった。	has:92명과,	fix	rewrites
+cx:lc-quote-count-to:10	「サーロインの１２０ｇと、この海鮮のコースを」	has:g와,	fix	rewrites
+cx:lc-quote-count-to:10	≪そして──万が一の時に対応するＳＯＲＤの５チームと、ＣＩＲＳの上層部だ≫	has:5팀과,	fix	rewrites
+cx:lc-quote-count-to:10	賞金宙賊の賞金一九〇〇〇エネルと、情報提供料一五〇〇〇〇エネルが速やかに支払われた。	has:에넬과,	fix	rewrites
+cx:lc-quote-count-to:10	今年も十八駆と、陽炎型をどうぞよろしくね！	has:18구와,	fix	rewrites
+cx:lc-quote-count-to:10	百円と、千円を出した。	!rule:cx:lc-quote-count-to:10	keep	rewrites
+cx:lc-quote-count-to:10	社員は幹部が三人と、平社員の構成員がコヨイを含めて五人。	!rule:cx:lc-quote-count-to:10	keep	rewrites
+cx:lc-quote-count-to:10	しかし、相手は三人。護送車の荷台に乗っていた二人と、運転席にいた一人。	!rule:cx:lc-quote-count-to:10	keep	rewrites
+cx:lc-quote-count-to:10	三人と話した。	!rule:cx:lc-quote-count-to:10	keep	rewrites

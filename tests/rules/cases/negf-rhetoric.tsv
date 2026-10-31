@@ -1,0 +1,31 @@
+# 규칙: MNG-9
+rule	input	expected	kind	layer
+pack:negf:iinja	んーやっぱあたし？ま、いいんじゃない！	has:뭐, 좋잖아!	fix	packs
+pack:negf:iinja	I got it! 良いんじゃない。	I got it! 좋잖아.	fix	packs
+pack:negf:iinja	「だからいいんじゃない。いくわよ！」	has:그러니까 좋잖아.	fix	packs
+pack:negf:iinja	「んー、ま、いいんじゃない。どうせ後でまとめてやっちゃうから」	has:뭐, 좋잖아.	fix	packs
+pack:negf:iinja	あら、普通にあたりまえだけど。良いんじゃない。	has:좋잖아.	fix	packs
+pack:negf:iinja	節分ね、いいんじゃない！ 鬼は…	has:좋잖아!	fix	packs
+pack:negf:iinja	別に…いいんじゃない。	has:좋잖아.	fix	packs
+pack:negf:iinja	いいんじゃない？	좋지 않아?	keep	packs
+pack:negf:iinja	「その答えでいいんじゃない？」	「그 대답이면 되지 않아?」	keep	packs
+pack:negf:iinja	いいんじゃないかな	좋지 않을까	keep	packs
+pack:negf:iinja	「しかしこの子は、冷たいんじゃない。ただ知らないだけなんだ。」	!rule:pack:negf:iinja	keep	packs
+cx:neg-final-rhetoric:20	「じゃあやっぱりあの修正液はあんたがやったんじゃない！！」	has:네가 한 거잖아!!	fix	rewrites
+cx:neg-final-rhetoric:20	「なによー、結局あんたも興味あるんじゃない」	has:흥미 있는 거잖아	fix	rewrites
+cx:neg-final-rhetoric:25	「なんだ、やっぱり気になるんじゃない」	has:신경 쓰이는 거잖아	fix	rewrites
+cx:neg-final-rhetoric:20	「……やっぱり、君が連れて帰るしかないんじゃない？」	!rule:cx:neg-final-rhetoric:20	keep	rewrites
+cx:neg-final-rhetoric:20	「あいつ、もう帰ったんじゃない？」	has:돌아간 거 아니야?	keep	rewrites
+cx:neg-final-rhetoric:20	「オマエに用があるんじゃない。おい、そこの犬」	!rule:cx:neg-final-rhetoric:20	keep	rewrites
+cx:neg-final-rhetoric:30	「やっぱりアンタ、ツンデレなんじゃない！　大人しく認めなさいよ！」	has:츤데레잖아!	fix	rewrites
+cx:neg-final-rhetoric:30	やっぱり彼が犯人なんじゃない！	has:범인이잖아!	fix	rewrites
+cx:neg-final-rhetoric:30	彼が犯人なんじゃない？	!rule:cx:neg-final-rhetoric:30	keep	rewrites
+cx:neg-final-rhetoric:30	やっぱり彼が犯人なんじゃないか？	!rule:cx:neg-final-rhetoric:30	keep	rewrites
+pack:negf:iinja	んーやっぱあたし？ま、いいんじゃない！	rule:pack:negf:iinja=1잖아	fix	packs
+pack:negf:iinja	去年ので良くない！	!rule:pack:negf:iinja	keep	packs
+cx:neg-final-rhetoric:25	「田中さんなら、コスプレ作戦すれば、相当稼げるんじゃない？」	!rule:cx:neg-final-rhetoric:25	keep	rewrites
+cx:neg-final-rhetoric:25	それが自然と思うんじゃない。	!rule:cx:neg-final-rhetoric:25	keep	rewrites
+pack:negf:iinja	いいんじゃない ？	!rule:pack:negf:iinja	keep	packs
+pack:negf:iinja-suggest	そっちは慎んだ方が良いんじゃない。	rule:pack:negf:iinja-suggest=-	keep	packs
+pack:negf:iinja	事前に一言頂戴してもよかったのではないかと	!rule:pack:negf:iinja	keep	packs
+pack:negf:iinja	もっと早く言ってくれてもよかったんじゃない	!rule:pack:negf:iinja	keep	packs

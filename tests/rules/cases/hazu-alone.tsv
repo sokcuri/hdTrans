@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-phrase:はず	「――はずだ」	「――그럴 것이다」	fix	sound
+phrase:はず	「――はずだ」	「――그럴 것이야」	fix	sound
 phrase:はず	彼は勝った……はずです。	그는 이긴……그럴 것입니다.	fix	sound
 phrase:はず	全部うまくいく――はずだった。	전부 잘되는――그럴 것이었다.	fix	sound
 phrase:はず	彼は来るはずだ。	그는 올 것이다.	keep	sound

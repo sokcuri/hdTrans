@@ -7,4 +7,4 @@ dict.suites      dict/snapshot_file_test.cpp:SnapshotSuiteDoesNotWriteDefaultCac
 word             word/
 dict             dict/
 engine           engine/
-stages           config/ filter/ gui/ names/ output/ pipeline/ rules/ text/ tokenizer/ userdict/
+stages           config/ filter/ gui/ names/ output/ pipeline/ register/ rules/ text/ tokenizer/ userdict/

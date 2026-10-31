@@ -1,0 +1,43 @@
+# 규칙: LEX-91
+rule	input	expected	kind	layer
+cx:nado-dismissive:40	「いなかったら、絶対ハンバーガーなんか買わないくせに」	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	でも 修理費なんか１円も出さないんですよ	하지만 수리비 같은 건 1엔도 내지 않아요	fix	rewrites
+cx:nado-dismissive:40	それに、薬なんか飲まなくても……	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	「中学なんか行ってねーよ。	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	すでに、全速力で走る力なんか残ってない……	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	照明なんか持ってない。	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	ロクにご飯なんか食べないわよ」	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	「こんなところでウソなんかつかないわよ」	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	「うん、風邪なんか引いてないよ」	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	当然返事なんか戻ってきていない。	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	「口止め料なんか要求しないって……」	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	「お金なんかいらないですよっ！」	「돈 같은 건 필요 없어요!」	fix	rewrites
+cx:nado-dismissive:40	そんな、礼なんかいらねえっす！	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	悪かったけどもう万引きなんてしてないよ。	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	あっ、はい！ お返しなんて要りません。	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	この店は…味なんかどうでもいいことなのかもしれない。	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	予備校で居眠りなんてしたことなかったのに……	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	「ふざっけんな……おまえなんか大嫌いだ……！！！！」	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:40	もう宿題なんかやらねーよ！	rule:cx:nado-dismissive:40= 같은 건	fix	rewrites
+cx:nado-dismissive:10	言葉なんか信じるものか。	말 따위 믿을까 보냐.	fix	rewrites
+cx:nado-dismissive:10	もう、終業式なんか知るもんか。	이제, 종업식 따위 알까 보냐.	fix	rewrites
+cx:nado-dismissive:10	嫉妬なんてするもんか！	rule:cx:nado-dismissive:10= 따위	fix	rewrites
+cx:nado-dismissive:10	そのような女と、婚約などしていられるものか！	rule:cx:nado-dismissive:10= 따위	fix	rewrites
+cx:nado-dismissive:10	そんなゲームを了承するヤツなどいるものか！	rule:cx:nado-dismissive:10= 따위	fix	rewrites
+cx:nado-dismissive:10	この勝負に最後まで油断などあるものかッ！！！	rule:cx:nado-dismissive:10= 따위	fix	rewrites
+cx:nado-dismissive:10	こんな輩に、まともな神経など通っているものか	rule:cx:nado-dismissive:10= 따위	fix	rewrites
+cx:nado-dismissive:40	価値なんか自分で見つけられる。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	あの子がしたことなんて可愛いものでしょ。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	夢なんて忘れて。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	場所がどこで、相手が誰かなんて関係ない。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	俺っちがあんなことするなんて。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	ということは、兄弟なんかいらないってこと？	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	もし、あの景色が俺の幻想なんかじゃなくって……	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	俺っちにわからないことなんてないっす！	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	食器や家具なんかも粗末な木製だ。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	薬なんか飲まない人が多い。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	宿題なんかしないと怒られる。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	猫なんか嫌いじゃない。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:40	ちょっと、他のことなんてどうでもいいか。	!rule:cx:nado-dismissive:40	keep	rewrites
+cx:nado-dismissive:10	そんなこと、なんて言った？	!rule:cx:nado-dismissive:10	keep	rewrites
+cx:nado-dismissive:10	なんて綺麗な花だ。	!rule:cx:nado-dismissive:10	keep	rewrites

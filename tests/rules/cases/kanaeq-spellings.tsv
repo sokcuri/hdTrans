@@ -1,0 +1,32 @@
+# 규칙: LEX-93
+rule	input	expected	kind	layer
+lookup:kana-spelling	今日のところはこのへんと言ったところですか	has:이 근처라고	fix	lookup
+lookup:kana-spelling	それとも、このへんに用事があった？	그렇지 않으면, 이 근처에 용무가 있었어?	fix	lookup
+lookup:kana-spelling	選挙の話は、このへんにしておきましょう。	has:이 근처로 해 둡시다	fix	lookup
+lookup:kana-spelling	お相撲さんとか？　このへん、相撲部屋が多いし……	has:이 근처, 스모베야가	fix	lookup
+lookup:kana-spelling	このへんを、下着の上から触っても、あまり感じないということか……	has:이 근처를,	fix	lookup
+lookup:kana-spelling	このへんのコメントでも読んで落ち着け	has:이 근처의 코멘트	fix	lookup
+lookup:kana-spelling	「まいど」	「매번」	fix	lookup
+lookup:kana-spelling	まいど！	매번!	fix	lookup
+lookup:kana-spelling	途中で事務所に立ち寄り、桶とひしゃくを借りて、水を汲んだ。	has:국자를 빌리고	fix	lookup
+lookup:kana-spelling	桶とひしゃくを手に取る。	통과 국자를 손에 든다.	fix	lookup
+lookup:kana-spelling	みすみす、情報を得る機会を捨てるわけにはいかない。	뻔히, 정보를 얻을 기회를 버릴 수는 없다.	fix	lookup
+lookup:kana-spelling	約束したのに……ゆびきり、したのに……	약속했는데……약속, 했는데……	fix	lookup
+lookup:kana-spelling	ほんとの、ほんとね？そいじゃ、ゆびきり！	has:약속!	fix	lookup
+lookup:kana-spelling	だけど、いつもどおり、結構遅くなると思うけど……	has:평소처럼, 상당히	fix	lookup
+lookup:kana-spelling	今日も「いつもどおり」を繰り返していたら	has:「평소처럼」을	fix	lookup
+lookup:kana-spelling	ふとももに塗りつけると、ひんやりとした感触に	has:허벅지에 바르면	fix	lookup
+lookup:kana-spelling	生クリームまみれのふとももを舐め回していく。	생크림 투성이의 허벅지를 핥고 돌려 간다.	fix	lookup
+lookup:kana-spelling	もじもじとふとももをこすり合わせる。	has:허벅지를	fix	lookup
+lookup:kana-spelling	さっきから赤信号にいっこも引っかからないし	has:적신호에 한 개도	fix	lookup
+lookup:kana-spelling	「よくないから……ばちが当たったんだ……」	「좋지 않으니까……벌이 맞은 거야……」	fix	lookup
+dict:jisjk:193018	しんぱいだなぁ	걱정이구나	fix	defaults
+dict:jisjk:193018	「しんぱいだから」	「걱정이니까」	fix	defaults
+dict:jisjk:193018	「ずっとしんぱいしてたんだ」	「계속 걱정하고 있었어」	keep	local
+lookup:kana-spelling	学園で彼女をいじめ、馬鹿にして笑い	학원에서 그녀를 괴롭혀 무시해 웃음	keep	lookup
+lookup:kana-spelling	いじめたら損をするって……話……したよな？	괴롭히면 손해 본다는……이야기……했지?	keep	lookup
+lookup:kana-spelling	じゃあ、このへんでお別れかな？	has:쯤에서	keep	lookup
+lookup:kana-spelling	いっこうに勝てる気配のない	전혀 이길 수 있는 기색이 없다	keep	lookup
+lookup:kana-spelling	「水くさいことはいいっこなしですぞ」	lacks:한 개	keep	lookup
+lookup:kana-spelling	どうする？　おばちゃんに任せてみる？	어떻게 해? 아줌마에게 맡겨 봐?	keep	lookup
+lookup:kana-spelling	「……タコスのおばちゃん？」	「……타코스의 아줌마?」	keep	lookup

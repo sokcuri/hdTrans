@@ -12402,7 +12402,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 手をひ	손을 &C8@	M421	QCTQHPQIDQMSVGt	Pn	GN	2386	||3 &&2 S-1== "から" P-1== "2**" &&2 S-1== "は" S-2== "から" S-1== "に関しては"	手を引는 から·からは·に関しては 뒤에서 관용 표현 ‘손을 떼다’로 고른다.				jisjk:265724
 電話を掛け	전화를 &L1@	M427			GN							jisjk:142639
 問いを掛け	질문&AV@	M447			GN							jisjk:142671
-とどめを刺	급소를 &E9@	M413			GN							jisjk:95039
+とどめを刺	결정타를 날&AA@	M413			GN			LEX-120				jisjk:95039
 共布	같은 천	N110	VCp		GN							jisjk:246115
 ど真中	한가운데	N110	VPl		GN							jisjk:153839
 ド真中	한가운데	N110	VPl		GN							jisjk:153839
@@ -20638,3 +20638,17 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お兄たん	오빠	N110	VHn		GN						おにいたん	variant:babytalk:oniitan
 お姉たん	언니	N110	VHn		GN						おねえたん	variant:babytalk:oneetan
 まっしろ	새%CC@	G8U0			GN							jisjk:3709
+しょうち	&K6@	M469			GN							w:28975
+トドメを刺	결정타를 날&AA@	M413			GN			LEX-120				variant:todome:katakana
+今の内に	지금	E311			GN			LEX-100 今のうちに의 한자 표기			いまのうちに	variant:lc-cx:imanouchini
+分かっていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:1
+分かってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:2
+わかってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:3
+判っていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:4
+判ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:5
+解っていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:6
+解ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:7
+分っていな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:8
+分ってな	$C4@	H7U0		XnAv	GN			GRM-71 わかっていな의 다른 표기: 알다의 ている 부정은 모르다				variant:wakaru-neg:9
+よく分かっていな	잘 $C4@	H7U0		XnAv	GN			GRM-71 よく分からな처럼: 알다의 ている 부정은 모르다				variant:wakaru-neg:10
+よく分かってな	잘 $C4@	H7U0		XnAv	GN			GRM-71 よく分からな처럼: 알다의 ている 부정은 모르다				variant:wakaru-neg:11

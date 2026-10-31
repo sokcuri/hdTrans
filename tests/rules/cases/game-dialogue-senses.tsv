@@ -7,16 +7,16 @@ dict:jisjk:263984	こっちの方がずっといい。	여기가 훨씬 좋다.	
 dict:jisjk:263984	前よりずっと強くなった。	전보다 훨씬 강해졌다.	keep	local
 dict:jisjk:263984	これでずっと簡単だ。	이것으로 훨씬 간단하다.	keep	local
 dict:variant:atashi:1	「アタシを置いていくな」	「나를 두고 가지 마」	fix	local
-dict:variant:atashi:2	「アタシが行く」	「내가 간다」	fix	local
+dict:variant:atashi:2	「アタシが行く」	「내가 가」	fix	local
 dict:jisjk:1204	「あたしを見て」	「나를 봐」	fix	local
 dict:jisjk:1204	「あたしに任せて」	「나에게 맡겨」	fix	local
-dict:jisjk:1204	「あたしが行く」	「내가 간다」	keep	local
+dict:jisjk:1204	「あたしが行く」	「내가 가」	keep	local
 dict:variant:atashitachi:1	「あたしたちの家だよ」	「우리의 집이야」	fix	lookup
 dict:jisjk:144074	敵を撃った。	적을 쏘았다.	fix	lookup
 dict:jisjk:144074	「撃って」	「쏘아」	fix	lookup
 conj:kuru	「来い」	「와라」	fix	conjugation
 conj:kuru	「早く来い！」	「빨리 와라!」	fix	conjugation
-conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안된다」	keep	conjugation
+conj:kuru	「こっちに来ちゃダメだ」	「여기에 오면 안돼」	keep	conjugation
 conj:kuru	来たかった。	오고 싶었다.	keep	conjugation
 conj:kuru	友達が来た。	친구가 왔다.	keep	conjugation
 conj:kuru	誰も来ない。	아무도 오지 않는다.	keep	conjugation
@@ -56,6 +56,6 @@ dict:jisjk:201961	「誕生日おめでとう！」	「생일 축하해!」	fix	
 dict:jisjk:201961	「おめでとうございます」	「축하합니다」	keep	defaults
 dict:onegai-ne:1	「お願いね」	「부탁해」	fix	defaults
 constraint:kotoshi-suru	「そんなことしないもん！」	「그런 일 하지 않는 걸!」	fix	lookup
-constraint:kotoshi-suru	「ことしの夏は暑い」	「금년 여름은 덥다」	keep	lookup
+constraint:kotoshi-suru	「ことしの夏は暑い」	「금년 여름은 더워」	keep	lookup
 dict:chikushou:1	ああちくしょう	아 젠장	fix	defaults
 dict:jisjk:2304	「エッチな本」	「야한 책」	fix	defaults

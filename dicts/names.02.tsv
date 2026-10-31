@@ -49879,7 +49879,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 第1航空師団	제1항공사단	N130	VGt		GN							names.677032
 第1航空機動旅団	제1공중기동여단	N130	VGt		GN							names.677033
 第1航空群	제1항공군	N130	VGt		GN							names.677034
-第1艦隊	미국 제1함대	N130	VGt		GN							names.677035
+第1艦隊	제1함대	N130	VGt		GN			LEX-132				names.677035
 第1衛生旅団	제1의무여단	N130	VGt		GN							names.677036
 第1装甲軍	제1기갑군	N130	VGt		GN							names.677037
 第1親衛戦車軍	제1근위전차군	N130	VGt		GN							names.677038
@@ -50502,7 +50502,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 第4航空艦隊	제4공군함대	N130	VGt		GN							names.677661
 第4航空連隊	제4항공연대	N130	VGt		GN							names.677662
 第4航空防空軍団	제4항공 및 방공군사령부	N130	VGt		GN							names.677663
-第4艦隊	미국 제4함대	N130	VGt		GN							names.677664
+第4艦隊	제4함대	N130	VGt		GN			LEX-132				names.677664
 第4装甲師団	제4기갑사단	N130	VGt		GN							names.677665
 第4装甲軍	제4기갑군	N130	VGt		GN							names.677666
 第4護衛隊群	제4호위대군	N130	VGt		GN							names.677667
@@ -50606,7 +50606,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 第5航空団	제5항공단	N130	VGt		GN							names.677766
 第5航空母艦群	제5항공모함타격단	N130	VGt		GN							names.677767
 第5航空群	제5항공군	N130	VGt		GN							names.677768
-第5艦隊	미국 제5함대	N130	VGt		GN							names.677769
+第5艦隊	제5함대	N130	VGt		GN			LEX-132				names.677769
 第5装甲軍	제5기갑군	N130	VGt		GN							names.677770
 第5話	제5화	N110			GN							names.677771
 第5軍	제5군	N130	VGt		GN							names.677772
@@ -50685,7 +50685,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 第6空挺旅団	제6공수여단	N130	VGt		GN							names.677845
 第6章	제6장	N130	QWK		GN							names.677846
 第6航空軍	제6항공방공군	N130	VGt		GN							names.677847
-第6艦隊	미국 제6함대	N130	VGt		GN							names.677848
+第6艦隊	제6함대	N130	VGt		GN			LEX-132				names.677848
 第6落下傘軽歩兵旅団	알모가바르 낙하산병여단	N130	VGt		GN							names.677849
 第6話	제6화	N110			GN							names.677850
 第6軍	제6군	N130	VGt		GN							names.677851
@@ -50779,7 +50779,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 第7章	제7장	N130	QWK		GN							names.677940
 第7航空団	제7항공단	N130	VGt		GN							names.677941
 第7航空母艦群	제7항공모함타격단	N130	VGt		GN							names.677942
-第7艦隊	미국 제7함대	N130	VGt		GN							names.677943
+第7艦隊	제7함대	N130	VGt		GN			LEX-132				names.677943
 第7親衛空挺師団	제7근위산악공중강습사단	N130	VGt		GN							names.677944
 第7話	제7화	N110			GN							names.677945
 第7軍	제7군	N130	VGt		GN							names.677946

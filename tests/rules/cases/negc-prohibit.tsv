@@ -1,0 +1,25 @@
+# 규칙: GRM-52, MNG-3, MNG-15
+rule	input	expected	kind	layer
+cx:neg-clause-prohibit:10	この悪魔の甘言に耳を傾けてはなりません	has:기울여서는 안됩니다	fix	rewrites
+cx:neg-clause-prohibit:10	死者の庭からは何も持ち出してはなりません。	has:꺼내서는 안됩니다	fix	rewrites
+cx:neg-clause-prohibit:10	見てはなりません	has:봐서는 안됩니다	fix	rewrites
+cx:neg-clause-prohibit:10	廊下を走ってはいけません!	has:달려서는 안됩니다	keep	rewrites
+cx:neg-clause-prohibit:10	書き直さなくてはなりません。	has:고쳐 써야 합니다	keep	rewrites
+cx:neg-clause-prohibit:10	有名にはなりません	!rule:cx:neg-clause-prohibit:10	keep	rewrites
+cx:neg-clause-prohibit:20	それに触れてはなりませんよ	has:접해서는 안돼요	fix	rewrites
+cx:neg-clause-prohibit:20	それはなりませんよ	!rule:cx:neg-clause-prohibit:20	keep	rewrites
+cx:neg-clause-prohibit:30	何も持ち出してはなりませんでした	has:꺼내서는 안되었습니다	fix	rewrites
+cx:neg-clause-prohibit:30	雨にはなりませんでした	!rule:cx:neg-clause-prohibit:30	keep	rewrites
+cx:neg-clause-prohibit:40	運行管理者以外はここに近づいてはならん！	has:가까워져서는 안돼	fix	rewrites
+cx:neg-clause-prohibit:40	扉を開けてはならん	has:열어서는 안돼	fix	rewrites
+cx:neg-clause-prohibit:40	見てはならない	has:봐서는 안된다	keep	rewrites
+cx:neg-clause-prohibit:50	ここで笑ってはならぬ。	has:웃어서는 안된다	fix	rewrites
+cx:neg-clause-prohibit:50	お前は行ってはならぬ	has:가서는 안된다	fix	rewrites
+cx:neg-clause-prohibit:50	行ってはならない	has:가서는 안된다	keep	rewrites
+cx:neg-clause-prohibit:60	おのれ、言ってはならんことを	has:말해서는 안되는 일을	fix	rewrites
+cx:neg-clause-prohibit:60	言ってはならないことを	!rule:cx:neg-clause-prohibit:60	keep	rewrites
+cx:neg-clause-prohibit:70	あいつを信用してはいけませんぞ！	has:신용해서는 안됩니다	fix	rewrites
+cx:neg-clause-prohibit:70	あんまり無理しちゃあいけませんぜ。	lacks:안되지 않	fix	rewrites
+cx:neg-clause-prohibit:70	人を傷つけてはいけません	has:상처 입혀서는 안됩니다	keep	rewrites
+cx:neg-clause-prohibit:72	呪いのビデオを取りに行かなきゃいけないんスよー	lacks:않아요	fix	rewrites
+cx:neg-clause-prohibit:72	まだまだいけんだろうよ！	!rule:cx:neg-clause-prohibit:72	keep	rewrites

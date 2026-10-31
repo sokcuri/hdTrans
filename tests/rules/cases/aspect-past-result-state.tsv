@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 rewrite:result-state-past	元々、父同士が決めての婚約だったし、その父も亡くなっているから	원래, 아버지끼리가 결정한 약혼이었고, 그 아버지도 돌아가셨으니까	fix	rewrites
-rewrite:result-state-past	「その３年後に事故で亡くなっているみたい」	「그 3년 후에 사고로 죽은 것 같다」	fix	rewrites
+rewrite:result-state-past	「その３年後に事故で亡くなっているみたい」	「그 3년 후에 사고로 죽은 거 같아」	fix	rewrites
 rewrite:result-state-past	父も亡くなっている人だ。	아버지도 돌아가신 사람이다.	fix	rewrites
 rewrite:result-state-past	父が亡くなった。	아버지가 돌아가셨다.	keep	rewrites
 rewrite:result-state-compound	根性が曲がっているから。	심보가 비뚤어져 있으니까.	fix	rewrites

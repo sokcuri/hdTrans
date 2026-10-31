@@ -11,8 +11,8 @@ lookup:ending-rows-conj	「仕事の道具を持ってるんだったら、泊�
 lookup:ending-rows-conj	「寵妃の願いとあらば、必ずや見つけねばならぬな」	「총비의 소원이라면, 반드시 찾아내지 않으면 되지 않는」	fix	lookup
 lookup:ending-rows-conj	もちろん任務とあらば出撃するよ。	물론 임무라면 출격할게.	fix	lookup
 lookup:ending-rows-conj	いや、俺もネトゲプロの端くれ、必要とあらば不眠で六日間狩りをし続ける事もできた男だ。	아니, 나도 온라인 게임 프로의 토막, 필요라면 불면으로 엿새간 사냥을 계속 하는 일도 할 수 있던 남자다.	fix	lookup
-lookup:ending-rows-conj	「お止めください。ご自身とは言えど、お父様を卑下する言葉など聞きたくありません！」	「멈추어 주세요. 자신이라고는 해도, 아버님을 비하하는 말 등 듣고 싶지는 않습니다!」	fix	lookup
-lookup:ending-rows-conj	「ところでエルは、シンダリオンと会った事はないんだったな？」	「그런데 엘은, 신다리온과 만난 일은 없었다?」	fix	lookup
+lookup:ending-rows-conj	「お止めください。ご自身とは言えど、お父様を卑下する言葉など聞きたくありません！」	「멈추어 주세요. 자신이라고는 해도, 아버님을 비하하는 말 따위 듣고 싶지는 않습니다!」	fix	lookup
+lookup:ending-rows-conj	「ところでエルは、シンダリオンと会った事はないんだったな？」	「그런데 엘은, 신다리온과 만난 일은 없었네?」	fix	lookup
 lookup:ending-rows-conj	行くんだったら	가려면	keep	lookup
 lookup:ending-rows-conj	見たんだ	본 거야	keep	lookup
 lookup:ending-rows-conj	見たんだっけ	본 거지	keep	lookup

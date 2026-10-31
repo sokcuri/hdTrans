@@ -1,0 +1,6 @@
+#! layer=pack-classes
+# Words of the classes of the sample pack.
+lemma	classes
+本	@thing
+手紙	@thing
+山	@thing

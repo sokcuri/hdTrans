@@ -87,6 +87,10 @@ constexpr ConstraintRule kRules[] = {
      "て, で 바로 뒤에서 た가 이어지는 い는 いい의 어간이 아니라 いる (待っていたって 기다려도 좋아도 → 기다리고 있어도)", {}},
     {"hashi-before-te", ConstraintWord::Source, "はし", ConstraintContext::AfterWordBeforeTe, ConstraintReject::Word,
      "앞에 말이 있고 て가 바로 이어지는 はし는 箸나 橋가 아니라 は와 する의 て형 (感じはしていた 느낌 젓가락이라고 있었다 → 느낌은 하고 있었다)", {}},
+    {"runa-before-ra", ConstraintWord::EndsInSource, "るな", ConstraintContext::BeforeRa, ConstraintReject::Word,
+     "ら 앞에서 るな로 끝나는 말은 금지가 아니라 동사와 조건 なら (気にするなら 신경 쓰지 마들 → 신경 쓴다면)", {}},
+    {"shika-before-negative", ConstraintWord::Source, "しかし", ConstraintContext::AfterWordBeforeNegative, ConstraintReject::Word,
+     "앞에 말이 있고 부정 어미가 바로 이어지는 しかし는 접속사 하지만이 아니라 しか와 する의 부정 (予感しかしない 예감 하지만 없다 → 예감밖에 안 든다)", {}},
     {"teiru-before-irassharu", ConstraintWord::EndsInSource, "てい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
      "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
     {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
@@ -338,6 +342,12 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         // The word before may be Korean already and spaced off (ソワソワ written 안절부절 by the sound stage).
         return after.starts_with("て") &&
                (NameClassOf(adjacent) != kClassOther || HangulText(adjacent) || adjacent == " ");
+    case ConstraintContext::BeforeRa:
+        return after.starts_with("ら");
+    case ConstraintContext::AfterWordBeforeNegative: {
+        static constexpr std::string_view kNegative[] = {"ない", "なかっ", "なく", "なけれ", "ません"};
+        return StartsWithAny(after, kNegative) && NameClassOf(adjacent) != kClassOther;
+    }
     case ConstraintContext::BeforeRassharu:
         return after.starts_with("らっしゃ");
     case ConstraintContext::BeforeNasai:

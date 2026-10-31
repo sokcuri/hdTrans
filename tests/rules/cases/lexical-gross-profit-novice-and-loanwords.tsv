@@ -46,13 +46,13 @@ dict:jisjk:121398	腰弱な人だ。	배짱이 없는 사람이다.	fix	defaults
 dict:jisjk:121398	腰弱だった。	배짱이 없었다.	fix	defaults
 dict:jisjk:121398	剛腹	배짱이 두둑하다	keep	defaults
 dict:jisjk:121398	馬追虫	베짱이	keep	defaults
-dict:jisjk:348463	「売上高総利益率は低い。」	「매출 총이익률은 낮다.」	fix	defaults
+dict:jisjk:348463	「売上高総利益率は低い。」	「매출 총이익률은 낮아.」	fix	defaults
 dict:jisjk:348463	「売上高」	「매출액」	keep	defaults
-dict:jisjk:194155	「若輩者には難しい。」	「풋내기에게는 어렵다.」	fix	defaults
+dict:jisjk:194155	「若輩者には難しい。」	「풋내기에게는 어려워.」	fix	defaults
 dict:jisjk:50906	「テレヴィジョンで見た。」	「텔레비전으로 보았다.」	fix	defaults
-dict:jisjk:43753	「インフルエンザが流行している。」	「인플루엔자가 유행하고 있다.」	fix	defaults
-dict:jisjk:113772	「モスパワートランジスターが必要だ。」	「MOS 파워 트랜지스터가 필요하다.」	fix	defaults
-dict:jisjk:84484	「中林建設へ行く。」	「나카바야시 건설에 간다.」	fix	defaults
+dict:jisjk:43753	「インフルエンザが流行している。」	「인플루엔자가 유행하고 있어.」	fix	defaults
+dict:jisjk:113772	「モスパワートランジスターが必要だ。」	「MOS 파워 트랜지스터가 필요해.」	fix	defaults
+dict:jisjk:84484	「中林建設へ行く。」	「나카바야시 건설에 가.」	fix	defaults
 dict:jisjk:84484	「建設会社」	「건설회사」	keep	defaults
 dict:jisjk:137946	「前照灯をつけてください。」	「전조등을 켜 주세요.」	fix	defaults
 dict:jisjk:137946	「電灯をつけた。」	「전등을 켰다.」	keep	defaults

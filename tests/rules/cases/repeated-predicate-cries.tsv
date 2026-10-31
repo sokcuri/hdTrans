@@ -26,7 +26,7 @@ cx:copies:36	長い長い夜だった。	긴 긴 밤이었다.	keep	rewrites
 cx:copies:36	「怖い怖いお化け」	「무서운 무서운 도깨비」	keep	rewrites
 cx:copies:36	固い固い、決意のこもった握手だった。	!rule:cx:copies:36	keep	rewrites
 cx:copies:36	凄い凄いと言って食べさせ	!rule:cx:copies:36	keep	rewrites
-cx:copies:36	「痛かった痛かった」	「아팠다 아팠다」	keep	rewrites
+cx:copies:36	「痛かった痛かった」	「아팠어 아팠어」	keep	rewrites
 cx:copies:36	「やばいやばい……」	!rule:cx:copies:36	keep	rewrites
 cx:copies:36	痛い。	아프다.	keep	rewrites
 cx:copies:36	「痛い」	「아프다」	keep	rewrites

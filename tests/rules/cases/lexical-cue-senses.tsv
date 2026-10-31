@@ -1,0 +1,52 @@
+# 규칙: LEX-140, LEX-141, LEX-143, LEX-144, LEX-145, LEX-146, LEX-147, LEX-148, LEX-149
+rule	input	expected	kind	layer
+cx:cue-sense:20	「ば、馬鹿な……男爵令嬢だぞ!?」	has:말도 안돼……남작 영애다	fix	rewrites
+cx:cue-sense:20	「ば、馬鹿な……あれだけ素っ気なくしていたのに」	has:말도 안돼……	fix	rewrites
+cx:cue-sense:20	なんて馬鹿な娘だろうか。	!rule:cx:cue-sense:20	keep	rewrites
+cx:cue-sense:20	「馬鹿なことを二度も言うな！」	!rule:cx:cue-sense:20	keep	rewrites
+cx:cue-sense:30	千里とおしゃべりしてるうちに、	has:이야기 하고 있는 동안에,	fix	rewrites
+cx:cue-sense:30	それを見てるうちに・	그것을 보고 있는 동안에·	fix	rewrites
+cx:cue-sense:30	五分もしないうちに帰ってくる王子。	!rule:cx:cue-sense:30	keep	rewrites
+cx:cue-sense:35	あれこれ考えてるうちにスピードがあがった。	has:생각하고 있는 동안에 스피드가	fix	rewrites
+cx:cue-sense:35	ちょっと気を逸らしてるうちに、話が斜め上に行っていた。	has:돌리고 있는 동안에,	fix	rewrites
+cx:cue-sense:35	そんな態度を気づかないうちにとっているかもしれない。	!rule:cx:cue-sense:35	keep	rewrites
+cx:cue-sense:50	皆さんも耐え切れず、お腹を抱えて	has:다 참을 수 없고,	fix	rewrites
+cx:cue-sense:50	抑え切れず、笑った。	has:다 억제할 수 없고,	fix	rewrites
+cx:cue-sense:50	大きいとは言い切れない控えめの胸のサイズだが	!rule:cx:cue-sense:50	keep	rewrites
+cx:cue-sense:55	とうとう耐え切れなくなった母は	has:다 참을 수 없게 된 어머니는	fix	rewrites
+cx:cue-sense:55	ついに耐え切れなくなった騎士たちが	has:다 참을 수 없게 된 기사들이	fix	rewrites
+cx:cue-sense:55	皆さんも耐え切れず、お腹を抱えて	!rule:cx:cue-sense:55	keep	rewrites
+cx:cue-sense:60	エリザベスと婚約している手前、想いを打ち明けることもできず	has:약혼하고 있는 이상,	fix	rewrites
+cx:cue-sense:60	昨夜に守ると誓った手前、無理に突き放す	has:맹세한 이상,	fix	rewrites
+cx:cue-sense:60	本格的に苦しくなる手前で解放された。	!rule:cx:cue-sense:60	keep	rewrites
+cx:cue-sense:70	あんたにさんざん言った手前もあるし……	has:말한 체면도 있고	fix	rewrites
+cx:cue-sense:70	本格的に苦しくなる手前で解放された。	!rule:cx:cue-sense:70	keep	rewrites
+cx:cue-sense:80	年齢が近く、共通の秘密を周囲に対して抱えていた二人	has:연령이 가깝고,	fix	rewrites
+cx:cue-sense:80	けど、家も近く、同じクラスになる事も多かった	has:집도 가깝고,	fix	rewrites
+cx:cue-sense:80	真後ろのグループと距離が近く、向こうの会話が耳に入る。	has:거리가 가깝고,	fix	rewrites
+cx:cue-sense:80	焚き火の近くに招いたが、近付いてこなかった。	!rule:cx:cue-sense:80	keep	rewrites
+cx:cue-sense:90	すぐに闇に飲まれて見えなくなる。	has:어둠에 삼켜져	fix	rewrites
+cx:cue-sense:90	不時着時に起きた波に飲まれた可能性は否定できないわね	has:물결에 삼켜진	fix	rewrites
+cx:cue-sense:90	上から水を飲む	!rule:cx:cue-sense:90	keep	rewrites
+cx:cue-sense:100	あの子達のことを舐めていると痛い目に遭うわよ？	has:아이들을 얕보고 있으면	fix	rewrites
+cx:cue-sense:100	「こいつはな、特別なキャンディなんだ。舐めてると、痛みとか恐怖心を忘れられる」	!rule:cx:cue-sense:100	keep	rewrites
+cx:cue-sense:110	さっきから何だ、何が、《ユニークスキル『大賢者』》だ。舐めてるのか？	has:얕보고 있는 거야?	fix	rewrites
+cx:cue-sense:110	「こいつはな、特別なキャンディなんだ。舐めてると、痛みとか恐怖心を忘れられる」	!rule:cx:cue-sense:110	keep	rewrites
+cx:cue-sense:120	「それじゃ、あたしは出かけなきゃならないから……後は、ふたりでよく話し合ってね」	has:나머지는, 둘이서	fix	rewrites
+cx:cue-sense:120	「これで３人……後は……」	has:나머지는……	fix	rewrites
+cx:cue-sense:120	その後は、何もなかった。	!rule:cx:cue-sense:120	keep	rewrites
+cx:cue-sense:130	目の前が黒から白に変わり、やがて色がつく……	has:검은색으로부터 흰색으로	fix	rewrites
+cx:cue-sense:130	黒を基調としたメイド服	has:검은색을 기조로 한	fix	rewrites
+cx:cue-sense:130	黒に近くて良かったと思うべきか	has:검은색에 가깝고	fix	rewrites
+cx:cue-sense:130	「おかげで博士が黒とわかり」	!rule:cx:cue-sense:130	keep	rewrites
+cx:cue-sense:140	大きなタッセル型イヤリングと黒の扇を装備。	has:검은 부채를	fix	rewrites
+cx:cue-sense:140	真っ黒のローブをかぶった男が王に向かってささやく。	!rule:cx:cue-sense:140	keep	rewrites
+cx:cue-sense:150	すらりと伸びた長身の彼女に似合っている。	has:쭉 뻗은 장신의	fix	rewrites
+cx:cue-sense:150	背が伸びた。	!rule:cx:cue-sense:150	keep	rewrites
+cx:cue-sense:160	白い太ももがすらりと伸びているのが目に入った。	has:쭉 뻗고 있는	fix	rewrites
+cx:cue-sense:160	背が伸びた。	!rule:cx:cue-sense:160	keep	rewrites
+dict:w:22357	臥せっていたお母上もそれを読んで覚醒。	has:앓아눕던 어머님도	fix	defaults
+dict:w:22357	体調が悪くて臥せってるってことだから	has:앓아눕고 있다는	fix	defaults
+dict:w:22357	床に伏せた。	lacks:앓아	keep	defaults
+cx:cue-sense:130	実は腹黒で性格は歪みぎみ。	!rule:cx:cue-sense:130	keep	rewrites
+cx:cue-sense:140	中身はかなり腹黒のドＳな設定だった。	!rule:cx:cue-sense:140	keep	rewrites

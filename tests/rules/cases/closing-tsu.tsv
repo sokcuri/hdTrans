@@ -1,4 +1,4 @@
 rule	input	expected	kind	layer
-compose:closing-tsu	「そんなの我慢できないっ」	「그런 거 참을 수 없다」	fix	local-ending
+compose:closing-tsu	「そんなの我慢できないっ」	「그런 거 참을 수 없어」	fix	local-ending
 compose:closing-tsu	「急がないと遅れちゃうっ」	「서두르지 않으면 늦을 것 같아」	fix	local-ending
-compose:closing-tsu	「本当に行くっ！」	「정말 간다!」	keep	local-ending
+compose:closing-tsu	「本当に行くっ！」	「정말 가!」	keep	local-ending

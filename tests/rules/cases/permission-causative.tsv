@@ -8,7 +8,7 @@ cx:permission:30	その本、読ませてもらいました。	그 책, 읽었�
 cx:permission:30	友達にノートを見せてもらいました。	친구가 노트를 보여 주었습니다.	keep	rewrites
 cx:permission:40	参加させてもらった。	참가했다.	fix	rewrites
 cx:permission:40	先生に読ませてもらった。	선생님이 읽게 해 주었다.	keep	rewrites
-cx:permission:50	「やらせてもらう」	「하겠다」	fix	rewrites
+cx:permission:50	「やらせてもらう」	「하겠어」	fix	rewrites
 cx:permission:50	子供に本を読ませてもらう。	!rule:cx:permission:50	keep	rewrites
 cx:permission:60	やらせてもらえますか？	해도 될까요?	fix	rewrites
 cx:permission:60	手伝ってもらえますか？	!rule:cx:permission:60	keep	rewrites

@@ -1,0 +1,20 @@
+# 규칙: MNG-15
+rule	input	expected	kind	layer
+constraint:shika-before-negative	「……嫌な予感しかしないが、	has:예감밖에	fix	lookup
+constraint:shika-before-negative	はっきり言って、嫌な予感しかしない。	has:예감밖에	fix	lookup
+constraint:shika-before-negative	でも残念、既にボクの味しかしないのだ！	has:맛밖에	fix	lookup
+constraint:shika-before-negative	漠然とした伝わり方しかしないから	has:밖에	fix	lookup
+constraint:shika-before-negative	嫌な予感しかしないわ	has:예감밖에	fix	lookup
+constraint:shika-before-negative	面倒なことになる予感しかしない。	has:예감밖에	fix	lookup
+constraint:shika-before-negative	怖い…なんか嫌な予感しかしない	has:예감밖에	fix	lookup
+constraint:shika-before-negative	彼は勉強しかしない	has:공부밖에	fix	lookup
+constraint:shika-before-negative	それしかしなかった	has:그것밖에	fix	lookup
+constraint:shika-before-negative	嫌な予感しかしませんが、	has:예감밖에	keep	lookup
+constraint:shika-before-negative	いや、しかしなあ	has:하지만	keep	lookup
+constraint:shika-before-negative	しかし、ないものはない	has:하지만	keep	lookup
+constraint:shika-before-negative	しかし、彼は来なかった。	has:하지만	keep	lookup
+constraint:shika-before-negative	だがしかし、それは違う。	has:하지만	keep	lookup
+constraint:shika-before-negative	しかしながら、	lacks:밖에	keep	lookup
+constraint:shika-before-negative	まあしかしねえ、困ったもんだ	has:하지만	keep	lookup
+constraint:shika-before-negative	まあしかしずいぶん遅いな	has:하지만	keep	lookup
+constraint:shika-before-negative	まあしかしぬるいな	has:하지만	keep	lookup

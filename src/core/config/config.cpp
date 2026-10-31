@@ -2,9 +2,11 @@
 
 #include <yaml.h>
 
+#include <cctype>
 #include <cerrno>
 #include <charconv>
 #include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <filesystem>
 #include <system_error>
@@ -150,6 +152,12 @@ public:
                 Error("speech: expected soft or strict");
                 return Skip();
             }
+        } else if (key == "speech_levels") {
+            if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::String ||
+                !SpeechLevelsOf(Lower(Scalar(event_)), result_.settings.speechLevels)) {
+                Error("speech_levels: expected auto or keep");
+                return Skip();
+            }
         } else if (key == "cg" || key == "misread" || key == "reference" || key == "wrapped" || key == "strict_dict") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::Bool ||
                 (Lower(Scalar(event_)) != "true" && Lower(Scalar(event_)) != "false")) {
@@ -213,7 +221,16 @@ bool SpeechOf(std::string_view name, Speech& out) {
     return false;
 }
 
-ConfigResult LoadConfig(std::string_view path) {
+bool SpeechLevelsOf(std::string_view name, SpeechLevels& out) {
+    if (name == "auto") out = SpeechLevels::Auto;
+    else if (name == "keep") out = SpeechLevels::Keep;
+    else return false;
+    return true;
+}
+
+namespace {
+
+ConfigResult LoadConfigFile(std::string_view path) {
     ConfigResult result;
     dict::internal::FileStamp stamp;
     if (dict::internal::ReadStamp(path, stamp)) result.sourceStamp = stamp;
@@ -242,11 +259,25 @@ ConfigResult LoadConfig(std::string_view path) {
     return result;
 }
 
+}  // namespace
+
+ConfigResult LoadConfig(std::string_view path) {
+    ConfigResult result = LoadConfigFile(path);
+    if (const char* levels = std::getenv("HDTRANS_SPEECH_LEVELS"); levels != nullptr && *levels != '\0') {
+        std::string name(levels);
+        for (char& ch : name) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+        if (!SpeechLevelsOf(name, result.settings.speechLevels))
+            result.diagnostics.push_back({0, "HDTRANS_SPEECH_LEVELS: expected auto or keep", true});
+    }
+    return result;
+}
+
 std::string ConfigErrors(const ConfigResult& result, std::string_view path) {
     std::string errors;
     for (const auto& diagnostic : result.diagnostics) {
         if (!errors.empty()) errors += '\n';
-        errors += std::string(path) + ":" + std::to_string(diagnostic.line) + ": " + diagnostic.message;
+        if (diagnostic.environment) errors += diagnostic.message;
+        else errors += std::string(path) + ":" + std::to_string(diagnostic.line) + ": " + diagnostic.message;
     }
     return errors;
 }

@@ -201,6 +201,9 @@ HD_TEST(pipeline_sound) {
         {"お…お兄ちゃん", "\xEE\x80\x80" "…お兄ちゃん"},
         {"だっ……大丈夫", "\xEE\x80\x80" "……大丈夫"},
         {"えっ……本当", "えっ……本当"},
+        // A run of two or more . or ． separates as an ellipsis does; one . does not.
+        {"し..しつれいします", "\xEE\x80\x80" "..しつれいします"},
+        {"こ．．こんにちは", "\xEE\x80\x80" "．．こんにちは"},
         {"「わ、わ、私は……」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、私は……」"},
         // A syllable said twice is a stutter even where it alone is a word (さ、 well).
         {"「さ、さ、最低」", "「\xEE\x80\x80" "、\xEE\x80\x80" "、最低」"},
@@ -1328,6 +1331,8 @@ HD_TEST(pipeline_contracted_n) {
         {"やんなよ", "やんなよ"},              // no prohibition from a lone kana there
         {"待たんか？", "待たないか？"},        // a godan negative stem with a kanji before か
         {"待たんか！", "待たんか！"},          // the reproach, left to the end rows of んか
+        {"吐かんかッ!!", "吐かんかッ!!"},      // also past a clipped or drawn kana before the mark
+        {"歩かんかぁ！", "歩かんかぁ！"},
         {"知らんし", "知らないし"},
         {"知らんけど", "知らないけど"},
         {"知らんわ", "知らんわ"},

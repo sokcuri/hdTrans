@@ -77,13 +77,13 @@ lookup:lexical-cleanup-10	アップロード	업로드	keep	lookup
 lookup:lexical-cleanup-10	ポップ・アート	팝 아트	keep	lookup
 dict:jisjk:244497	「鉄拳制裁だ。」	「철권 제재다.」	fix	lookup
 dict:jisjk:244497	鉄拳制裁は嫌だ。	철권 제재는 싫다.	fix	lookup
-dict:names.458948	「修士(神学)だ。」	「신학 석사다.」	fix	lookup
+dict:names.458948	「修士(神学)だ。」	「신학 석사야.」	fix	lookup
 dict:names.458948	修士(神学)を取得した。	신학 석사를 취득했다.	fix	lookup
 dict:names.458948	これは修士(神学)です。	이것은 신학 석사입니다.	fix	lookup
 dict:names.629268	「洋三郎だ。」	「요사부로다.」	fix	lookup
 dict:names.629268	洋三郎さんが来た。	요사부로 씨가 왔다.	fix	lookup
 dict:names.629268	洋三郎の手紙だ。	요사부로의 편지다.	fix	lookup
-dict:jisjk:262973	「ポップ・アップだ。」	「팝업이다.」	fix	lookup
+dict:jisjk:262973	「ポップ・アップだ。」	「팝업이야.」	fix	lookup
 dict:jisjk:262973	ポップ・アップを表示する。	팝업을 표시한다.	fix	lookup
 dict:jisjk:262973	ポップ・アップを閉じた。	팝업을 닫았다.	fix	lookup
 lookup:lexical-cleanup-10	鉄拳を振るう。	철권을 휘두른다.	keep	lookup

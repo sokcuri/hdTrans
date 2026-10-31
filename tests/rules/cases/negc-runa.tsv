@@ -1,0 +1,12 @@
+# 규칙: MNG-17
+rule	input	expected	kind	layer
+constraint:runa-before-ra	そんなことを気にするならそもそも死ななきゃいい。	has:신경 쓴다면	fix	lookup
+constraint:runa-before-ra	もし気にするならやめておけ	has:신경 쓴다면	fix	lookup
+constraint:runa-before-ra	そんなに気にするなら	has:신경 쓴다면	fix	lookup
+constraint:runa-before-ra	気にするならば	has:신경 쓴다면	fix	lookup
+constraint:runa-before-ra	それを気にするなら最初から言え	has:신경 쓴다면	fix	lookup
+constraint:runa-before-ra	気にするな	has:신경 쓰지 마	keep	lookup
+constraint:runa-before-ra	気にするなよ	has:신경 쓰지 마	keep	lookup
+constraint:runa-before-ra	気にするな、俺は平気だ	has:신경 쓰지 마	keep	lookup
+constraint:runa-before-ra	もう気にするな。	has:신경 쓰지 마	keep	lookup
+constraint:runa-before-ra	気にするなって	lacks:신경 쓴다면	keep	lookup
