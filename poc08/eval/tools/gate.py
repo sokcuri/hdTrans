@@ -11,11 +11,15 @@ dir and HDTRANS_CACHE_DIR=off. The flip suite runs `--flip-cand` (default: CMD +
 The baseline is 0.7.6 (--base, default below); its outputs are cached per (command, binary hash, input hash).
 
 What runs:
-1. Every slice is translated by base and candidate. Dev slices (frozen copies of the rule-dev2 slices): game
-   (4,000 lines with human references), fiction (4,000), captions (4,000). The hold-out sample (600 reviewed
-   lines of the held-out title, with three lines of scene context) is translated twice: cast-aware (as given)
-   and cast-blind (environment HD08_CAST_OFF = the manifest's cast.tsv; an engine with name rows or voices
-   authored from the main title must drop the listed keys).
+1. Every slice is translated by base and candidate. Dev slices: game (gc 32001-36000, 4,000 lines with human
+   references) and captions (4,000), frozen copies of the rule-dev2 slices; fiction = the web-novel dev chapters
+   (two sources, one document per chapter, Japanese only; it contains every line of the older rule-dev2 fiction
+   slice, still callable as `fiction-rd2`). Hold-outs: the VN sample (600 reviewed lines of the held-out title
+   with three lines of scene context), translated twice, cast-aware (as given) and cast-blind (environment
+   HD08_CAST_OFF = the manifest's cast.tsv; an engine with name rows or voices authored from the main title must
+   drop the listed keys); and `fiction-held`, five held-out chapters of a web novel whose other chapters are dev.
+   Fiction slices are judged with the house narration rules appended to the rubric (notes/narration.txt).
+   `fiction-c2` (a further 45 chapters, overlap-checked) is available but not run by default.
 2. Changed lines (output differs from base) are judged blind by judge.py: judge 1 (sonnet) and judge 2 (opus) on
    every changed line (MQM-lite for both outputs, pairwise for the pair), judge 3 on their disagreements.
    --sample N judges a fixed-seed sample of N changed lines per slice instead (reported as such).
@@ -29,10 +33,11 @@ Verdict (DESIGN-v3 §4.3, PLAN-v3 §0):
   lines (W + L) the 2:1 test is reported but not enforced; with fewer than 40 judged outputs kappa is reported
   but not enforced. No changed line = n/a.
 - dev pooled (game + fiction + captions): W >= 2 L on the summed majority counts.
-- hold-out: the cast-blind run is binding (the grammar result); cast-aware is reported beside it. Hold-out lines
-  are never printed, only counts and ids.
+- hold-out: the cast-blind run is binding (the grammar result); cast-aware is reported beside it. fiction-held
+  is binding. Hold-out lines are never printed, only counts and ids.
 - flip: no item lost; every cat and sub is reported.
-- PASS = dev pooled passes, every enforced slice passes (cast-blind for the hold-out), flip loses nothing.
+- PASS = dev pooled passes, every slice run passes (cast-blind for the VN hold-out; cast-aware is reported
+  only), flip loses nothing.
 Exit code 0 = PASS, 1 = FAIL, 2 = error. Writes OUT/gate.md, OUT/gate.json, OUT/changed/<dev slice>.tsv
 (id, ja, base, cand, judge 1, judge 2, majority) and the judge sets and reports under OUT/judge/.
 """
@@ -60,7 +65,10 @@ DEV = os.path.join(V08, "wsB", "dev")
 GATES = os.path.join(V08, "wsB", "gates")
 LEVELS = os.path.join(V08, "wsB", "levels")
 BASE = ("/Users/sokcuri/hdwork/wt/fix-hare/build/mac/hdtrans --dicts /Users/sokcuri/hdwork/wt/fix-hare/dicts")
-DEV_SLICES = ["game", "fiction", "captions"]
+DEV_SLICES = ["game", "fiction", "captions"]          # pooled for the dev verdict
+FILE_SLICES = {"game": "game", "captions": "captions", "fiction-rd2": "fiction"}   # frozen copies in wsB/dev
+FICTION = os.path.join(V08, "wsB", "fiction", "sets")
+NARRATION_NOTE = os.path.join(HERE, "notes", "narration.txt")
 MIN_DECISIVE, MIN_KAPPA_N, KAPPA = 10, 40, 0.6
 KST = datetime.timezone(datetime.timedelta(hours=9))
 
@@ -140,13 +148,19 @@ def load_slices(names, level=""):
     with open(CONF, encoding="utf-8") as f:
         c = json.load(f)
     for s in names:
-        if s in DEV_SLICES:
-            ja = read_lines(os.path.join(DEV, f"{s}.ja"))
-            ref_p = os.path.join(DEV, f"{s}.ref")
+        if s in FILE_SLICES:
+            ja = read_lines(os.path.join(DEV, f"{FILE_SLICES[s]}.ja"))
+            ref_p = os.path.join(DEV, f"{FILE_SLICES[s]}.ref")
             ref = read_lines(ref_p) if os.path.exists(ref_p) else [""] * len(ja)
             rows = [{"id": f"{s}:{i + 1}", "doc": s, "ja": t, "ref": r, "meta": ""} for i, (t, r) in
                     enumerate(zip(ja, ref))]
             sl[s] = {"rows": rows, "scored": [i for i, r in enumerate(rows) if r["ja"].strip()], "holdout": False}
+            if s == "fiction-rd2":
+                sl[s]["note"] = NARRATION_NOTE
+        elif s in ("fiction", "fiction-held", "fiction-c2"):
+            rows, scored = read_set(os.path.join(FICTION, {"fiction": "dev", "fiction-held": "held",
+                                                           "fiction-c2": "c2"}[s], "lines.tsv"))
+            sl[s] = {"rows": rows, "scored": scored, "holdout": s == "fiction-held", "note": NARRATION_NOTE}
         elif s == "holdout":
             hd = c["holdout_dir"]
             p = os.path.join(LEVELS, level, "holdout", "lines.tsv") if level else os.path.join(hd, "set", "lines.tsv")
@@ -174,10 +188,13 @@ def write_judge_set(d, rows, judged):
                     f"{r['meta']}\n")
 
 
-def run_judge(set_dir, systems, jobs, log_path):
+def run_judge(set_dir, systems, jobs, log_path, note="", rubric="v3"):
     """systems: [(name, [ko per judged line])]; the last one is the baseline."""
     args = [sys.executable, os.path.join(HERE, "judge.py"), "--set", set_dir, "--frac2", "1", "--no-human",
             "--jobs", str(jobs), "--baselines", systems[-1][0], "--out", os.path.join(set_dir, "report.json")]
+    args += ["--rubric", rubric]
+    if note:
+        args += ["--style-note", note]
     for name, outs in systems:
         p = os.path.join(set_dir, f"{name}.ko")
         write_lines(p, outs)
@@ -267,8 +284,8 @@ def main(argv=None):
     ap.add_argument("--cand", required=True)
     ap.add_argument("--flip-cand", default="")
     ap.add_argument("--base", default=BASE)
-    ap.add_argument("--slices", default="", help="default game,fiction,captions,holdout; with --level "
-                    "pool,holdout,game,fiction,captions")
+    ap.add_argument("--slices", default="", help="default game,fiction,captions,holdout,fiction-held; with --level "
+                    "pool,holdout,game,fiction,captions,fiction-held; also fiction-rd2, fiction-c2")
     ap.add_argument("--level", default="", help="level gate (PLAN-v3 §1.3): the pool and hold-out slices hold "
                     "lines at or below this level (wsB/levels/<LEVEL>)")
     ap.add_argument("--out", default="")
@@ -276,15 +293,19 @@ def main(argv=None):
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--dry-run", action="store_true", help="translate, count changed lines and run flip; no judging")
     ap.add_argument("--no-flip", action="store_true")
+    ap.add_argument("--rubric", default="v3", choices=["v1", "v2", "v3"], help="judge rubric (judge.py): v3 = natural "
+                    "Korean within faithfulness bounds (default); v2 = literal target; v1 = the frozen eval runs")
     a = ap.parse_args(argv)
     stamp = datetime.datetime.now(KST).strftime("%Y%m%d-%H%M")
     out = a.out or os.path.join(GATES, f"{a.name}-{stamp}")
     os.makedirs(os.path.join(out, "changed"), exist_ok=True)
     log = lambda m: print(m, file=sys.stderr, flush=True)  # noqa: E731
-    names = a.slices or ("pool,holdout,game,fiction,captions" if a.level else "game,fiction,captions,holdout")
+    names = a.slices or ("pool,holdout,game,fiction,captions,fiction-held" if a.level
+                         else "game,fiction,captions,holdout,fiction-held")
     slices = load_slices([s for s in names.split(",") if s], a.level)
     G = {"name": a.name, "time_kst": stamp, "cand": a.cand, "base": a.base, "slices": {}, "sample": a.sample,
-         "level": a.level}
+         "level": a.level, "rubric": rubric_label(a.rubric), "rubrics": {},
+         "holdout_leaks": leak_count()}
     pooled = {"win": 0, "loss": 0, "tie": 0}
     for sname, S in slices.items():
         rows, scored = S["rows"], S["scored"]
@@ -292,11 +313,12 @@ def main(argv=None):
         log(f"{sname}: translating {len(src)} lines")
         b_all = cached_base(a.base, sname, src)
         runs = {"cand": translate(a.cand, src)}
-        if S["holdout"]:
+        cast = S["holdout"] and S.get("cast")
+        if cast:
             runs = {"blind": translate(a.cand, src, {"HD08_CAST_OFF": S["cast"]}), "aware": runs["cand"]}
         changed = sorted({i for i in scored for o in runs.values() if o[i] != b_all[i]})
         info = {"lines": len(scored), "changed": len(changed)}
-        if S["holdout"]:
+        if cast:
             info["blind_equals_aware"] = runs["blind"] == runs["aware"]
             info["changed_blind"] = sum(runs["blind"][i] != b_all[i] for i in scored)
             info["changed_aware"] = sum(runs["aware"][i] != b_all[i] for i in scored)
@@ -313,7 +335,9 @@ def main(argv=None):
         sd = os.path.join(out, "judge", sname)
         write_judge_set(sd, rows, judged)
         systems = [(k, [runs[k][i] for i in judged]) for k in runs] + [("base", [b_all[i] for i in judged])]
-        rep = run_judge(sd, systems, a.jobs, os.path.join(out, "judge", f"{sname}.log"))
+        rep = run_judge(sd, systems, a.jobs, os.path.join(out, "judge", f"{sname}.log"), S.get("note", ""),
+                        a.rubric)
+        G["rubrics"][sname] = rep.get("rubric", "?")
         for k in runs:
             st = pair_stats(rep, k, "base")
             key = sname if k == "cand" else f"{sname}-{k}"
@@ -333,7 +357,7 @@ def main(argv=None):
                         j1, j2 = st["lines_j1"].get(lid, ""), st["lines_j2"].get(lid, "")
                         hint = j1 if j1 == j2 else "3rd"
                         f.write(f"{lid}\t{rows[i]['ja']}\t{b_all[i]}\t{runs[k][i]}\t{j1}\t{j2}\t{hint}\n")
-        if S["holdout"]:
+        if cast:
             G["slices"].pop(sname, None)
     # pooled dev verdict
     dev_dec = pooled["win"] + pooled["loss"]
@@ -342,8 +366,7 @@ def main(argv=None):
     if not a.no_flip:
         log("flip suite")
         G["flip"] = run_flip(a.base, a.flip_cand or (a.cand + " --each"))
-    binding = [k for k in G["slices"] if k in DEV_SLICES or k.startswith("pool-") or
-               (k.startswith("holdout") and k.endswith("-blind"))]
+    binding = [k for k in G["slices"] if not k.endswith("-aware")]
     fails = [k for k in binding if G["slices"][k].get("verdict") == "FAIL"]
     if a.dry_run:
         verdict = "DRY-RUN"
@@ -361,10 +384,26 @@ def main(argv=None):
     return 0 if verdict in ("PASS", "DRY-RUN") else 1
 
 
+def rubric_label(r):
+    import judge  # noqa: E402 (only for the version label)
+    return {"v1": "mqm-v1", "v2": "mqm-v2", "v3": judge.VERSION}[r]
+
+
+def leak_count():
+    p = os.path.join(GATES, "LEAKS.log")
+    if not os.path.exists(p):
+        return 0
+    with open(p, encoding="utf-8") as f:
+        return sum(1 for line in f if line.strip())
+
+
 def render(G):
     lv = f", level gate {G['level']}" if G.get("level") else ""
     o = [f"# Gate {G['name']} ({G['time_kst']} KST{lv}): **{G['verdict']}**", "",
-         f"- candidate: `{G['cand']}`", f"- base: `{G['base']}`"]
+         f"- candidate: `{G['cand']}`", f"- base: `{G['base']}`",
+         f"- judge rubric: {G['rubric']}" + (" (per slice: " + ", ".join(f"{k} {v}" for k, v in G["rubrics"].items())
+                                             + ")" if G.get("rubrics") else ""),
+         f"- hold-out leak log: {G.get('holdout_leaks', 0)} disclosure(s) recorded (wsB/gates/LEAKS.log)"]
     if G.get("sample"):
         o.append(f"- judged a sample of {G['sample']} changed lines per slice")
     o += ["", "| slice | lines | changed | majority W:T:L | judge 1 W:T:L | judge 2 W:T:L | worse by both | "

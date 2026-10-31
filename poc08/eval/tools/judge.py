@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Blind judging harness for the frozen held-out sets (evaluation only).
 
-  judge.py --set EVALDIR/SET --sys NAME=KO.txt [--sys ...] [--baselines A,B,...] [--out RUN.json]
+  judge.py --set EVALDIR/SET --sys NAME=KO.txt [--sys ...] [--baselines A,B,...] [--out RUN.json] [--style-note F]
            [--model1 claude-sonnet-5-5] [--model2 claude-opus-5-5] [--frac2 0.2] [--jobs 8]
            [--batch 12] [--no-human] [--dry-run] [--no-pairs]
   judge.py --self-test
@@ -53,11 +53,12 @@ RUNS = "/Users/sokcuri/hdwork/v08/eval-runs"
 CACHE = os.path.join(RUNS, "cache")
 ANCHORS = os.path.join(RUNS, "anchors", "anchors.tsv")
 VENV_PY = os.path.join(RUNS, "venv", "bin", "python")
-VERSION = "mqm-v1"
+VERSION = "mqm-v3.1"
 W = {"critical": 25, "major": 5, "minor": 1}
 CATS = ["accuracy", "omission", "addition", "fluency", "style", "terminology"]
 
-MQM_RUBRIC = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
+# mqm-v1: the rubric of the frozen eval runs (natural fluent Korean first after meaning); kept for --rubric v1.
+MQM_RUBRIC_V1 = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
 sometimes the previous source lines as context, sometimes a human reference translation as an anchor
 (it may itself be imperfect; other correct renderings are fine), and ONE Korean translation to judge.
 Items come from different people and programs in random order; judge each on its own merits.
@@ -77,13 +78,111 @@ Do not count legitimate alternatives (word order, synonyms, a freer but faithful
 Accept any reasonable reading of an ambiguous line. Then give a 0-100 score (100 = what a skilled human
 translator would publish). Return one result per item id."""
 
-PAIR_RUBRIC = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
+PAIR_RUBRIC_V1 = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
 sometimes the previous source lines as context, sometimes a human reference translation as an anchor
 (it may itself be imperfect), and two Korean translations A and B from different people or programs,
 in random order. Say which one a Korean reader should get: meaning first (a meaning error outweighs
 any amount of polish), then natural, fluent Korean, then style and speech level fitting the line.
 Answer "same" only when they are equally good or equally bad; length is not a quality.
 Return one result per item id."""
+
+# mqm-v2 (2026-10-31): the target is a faithful literal translation (STYLE-v3 §0).
+TARGET_V2 = """The target is a faithful literal translation (직역) in correct, readable Korean: it follows the source's
+structure, word order, punctuation and nuance wherever Korean grammar allows. It does not paraphrase, and it
+never adds or drops content or punctuation. A freer or more polished paraphrase is not an improvement.
+The reference, when one is shown, was made freer than the target: it shows the meaning, not the target style.
+Do not prefer an output because it matches the reference's wording, and do not count a faithful rendering as
+wrong because it differs from the reference."""
+
+MQM_RUBRIC_V2 = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
+sometimes the previous source lines as context, sometimes a reference translation as an anchor, and ONE Korean
+translation to judge. Items come from different people and programs in random order; judge each on its own
+merits.
+
+""" + TARGET_V2 + """
+
+List the translation's errors (MQM-lite). Each error has a category, a severity and the short Korean span (or
+"(missing)" for an omission).
+Categories: accuracy (mistranslation, wrong sense, flipped negation/tense/voice/direction, wrong name or number,
+a paraphrase that drifts from the source's meaning or nuance), omission (dropped content, and dropped
+punctuation the source has: …, ！, ？, ―, commas, quotes), addition (added content, and punctuation the source
+does not have), fluency (broken grammar or conjugation, wrong particles, Korean a reader cannot follow), style
+(a speech level the source does not signal, register wrong for the line), terminology (name or term rendered
+wrongly or inconsistently with the context).
+Severity:
+- critical: the reader comes away believing something false that matters (opposite meaning, wrong actor or
+  direction, wrong number), or the line is unusable;
+- major: meaning distorted or unclear, content added or dropped, a question or exclamation lost, or Korean
+  broken enough that the reader must reread;
+- minor: meaning intact but a visible flaw (a dropped or added comma or ellipsis, a small particle or spacing
+  issue, a needless paraphrase that keeps the meaning).
+Source word order and structure kept in grammatical Korean is not an error; neither is literal but correct
+wording. Accept any reasonable reading of an ambiguous line. Then give a 0-100 score (100 = a faithful,
+grammatical, readable rendering of exactly the source). Return one result per item id."""
+
+PAIR_RUBRIC_V2 = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
+sometimes the previous source lines as context, sometimes a reference translation as an anchor, and two Korean
+translations A and B from different people or programs, in random order.
+
+""" + TARGET_V2 + """
+
+Say which one is the better translation by this target: first meaning (no mistranslation, nothing added or
+dropped, punctuation as in the source), then correct Korean (grammar, conjugation, particles, the speech level
+the source signals), then readability. When both are faithful and correct and differ only in polish or wording,
+answer "same". When one is a freer paraphrase that drifts from the source, adds or drops content or
+punctuation, prefer the faithful one. Length is not a quality. Return one result per item id."""
+
+# mqm-v3 (2026-10-31, STYLE-v3 §0 as corrected): natural, fluent translator's Korean within strict bounds;
+# a correct literal rendering where a natural one is not safe.
+TARGET = """The target is natural, fluent Korean as a skilled translator writes it, within strict bounds: no change of
+meaning, nuance, attitude or register, and no content or punctuation added or dropped. Rewording is fine inside
+those bounds; where a natural rendering is not safely possible, a correct literal translation is the target.
+So a faithful natural rendering beats a stiff literal one; a paraphrase that drifts in meaning or nuance, or adds
+or drops content, is worse than a faithful one; adding or dropping punctuation the source has (…, ！, ？, ―,
+commas, quotes) is an error.
+The reference, when one is shown, shows the meaning; it is not the target style. Do not prefer an output because
+it matches the reference's wording, and do not count a faithful rendering as wrong because it differs from it."""
+
+MQM_RUBRIC = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
+sometimes the previous source lines as context, sometimes a reference translation as an anchor, and ONE Korean
+translation to judge. Items come from different people and programs in random order; judge each on its own
+merits.
+
+""" + TARGET + """
+
+List the translation's errors (MQM-lite). Each error has a category, a severity and the short Korean span (or
+"(missing)" for an omission).
+Categories: accuracy (mistranslation, wrong sense, flipped negation/tense/voice/direction, wrong name or number,
+rewording that shifts meaning, nuance or attitude), omission (dropped content or dropped punctuation), addition
+(added content or added punctuation), fluency (broken grammar or conjugation, wrong particles, stiff or
+unnatural Korean, 번역투 a reader stumbles on), style (a speech level or register the source does not signal),
+terminology (name or term rendered wrongly or inconsistently with the context).
+Severity:
+- critical: the reader comes away believing something false that matters (opposite meaning, wrong actor or
+  direction, wrong number), or the line is unusable;
+- major: meaning or nuance distorted or unclear, content added or dropped, a question or exclamation lost, or
+  Korean broken enough that the reader must reread;
+- minor: meaning intact but a visible flaw (a dropped or added comma or ellipsis, stiff literal wording where
+  natural Korean was safe, a small particle or spacing issue).
+Faithful rewording, synonyms and Korean word order are not errors. Accept any reasonable reading of an ambiguous
+line. Then give a 0-100 score (100 = what a skilled translator would publish within these bounds). Return one
+result per item id."""
+
+PAIR_RUBRIC = """You are a blind reviewer of Japanese-to-Korean translations. Each item has a Japanese source line,
+sometimes the previous source lines as context, sometimes a reference translation as an anchor, and two Korean
+translations A and B from different people or programs, in random order.
+
+""" + TARGET + """
+
+Decide in this order, and stop at the first step that separates them:
+1. Compare each output with the source, word by word: does it add anything (a word, clause, interjection,
+   emphasis) or drop anything (a word, clause, or punctuation mark: …, ！, ？, ―, a comma, a quote)? Does it
+   change meaning, nuance or attitude? An output that does any of this loses to one that does not, however
+   natural it reads, and even when it matches the reference.
+2. Correct Korean: grammar, conjugation, particles, the speech level the source signals.
+3. Natural, fluent Korean over stiff literal wording.
+Answer "same" only when they are equally good or equally bad; length is not a quality. Return one result per
+item id."""
 
 MQM_SCHEMA = {
     "type": "object",
@@ -440,7 +539,22 @@ def main(argv=None):
     ap.add_argument("--model3", default="claude-opus-4-8",
                     help="third judge on the double-judged items where judges 1 and 2 disagree; '' = none")
     ap.add_argument("--effort3", default="medium")
+    ap.add_argument("--rubric", default="v3", choices=["v1", "v2", "v3"], help="v3 (default): natural fluent "
+                    "Korean within strict faithfulness bounds; v2: literal target (superseded); v1: the frozen eval runs")
+    ap.add_argument("--style-note", default="", help="file whose text is appended to both rubrics (house style "
+                    "for the set, e.g. narration rules); judgments are cached apart from the plain rubric")
     a = ap.parse_args(argv)
+    global MQM_RUBRIC, PAIR_RUBRIC, VERSION
+    if a.rubric == "v1":
+        MQM_RUBRIC, PAIR_RUBRIC, VERSION = MQM_RUBRIC_V1, PAIR_RUBRIC_V1, "mqm-v1"
+    elif a.rubric == "v2":
+        MQM_RUBRIC, PAIR_RUBRIC, VERSION = MQM_RUBRIC_V2, PAIR_RUBRIC_V2, "mqm-v2"
+    if a.style_note:
+        with open(a.style_note, encoding="utf-8") as f:
+            note = f.read().strip()
+        MQM_RUBRIC = MQM_RUBRIC + "\n\n" + note
+        PAIR_RUBRIC = PAIR_RUBRIC + "\n\n" + note
+        VERSION = VERSION + "+" + h(note)[:12]
     log = lambda m: print(m, file=sys.stderr, flush=True)  # noqa: E731
 
     set_name = os.path.basename(os.path.normpath(a.set))
@@ -513,7 +627,7 @@ def main(argv=None):
         run_batches("pair", m, eff, pq, caches[m], anchors, a.jobs, a.batch, log)
 
     # ------------------------------------------------ collect
-    rep = {"set": set_name, "lines": len(lines), "systems": names, "baselines": base,
+    rep = {"set": set_name, "rubric": VERSION, "lines": len(lines), "systems": names, "baselines": base,
            "judges": [{"model": m, "effort": e, "frac": f} for m, e, f in judges], "mqm": {}, "pairs": {},
            "chrf": {}, "agreement": {}, "anchors": {}, "position": {}}
     mq = {}  # (judge, sys, li) -> summary

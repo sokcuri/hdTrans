@@ -1,0 +1,8 @@
+House style for this set (decided by the project; judge against it). Lines outside 「」/『』 quotes are narration:
+- narration ends in plain 해라체 -다 (먹었다, 간다, 것이다), never in 해체 or 해요체 endings (먹었어, 가요);
+- narration lists nouns with 와/과, not 하고 or (이)랑;
+- narration marks the recipient with 에게, not 한테;
+- narration negates with the long form (-지 않는다); short 안 belongs to dialogue.
+Dialogue inside quotes follows the speaker's level: casual speech in 해체, です/ます speech in 해요체.
+A narration line that breaks these rules has a style error; prefer the output that follows them when meaning and
+fluency are otherwise equal. Meaning still comes first.
