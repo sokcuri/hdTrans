@@ -563,6 +563,7 @@ HD_TEST(tokenize_space_parts_words) {
     HD_CHECK_EQ(scan("私 先 行くね"), std::string("24:私 +24:先 +24:行くね 9:"));
     HD_CHECK_EQ(scan("紅 白ってある"), std::string("24:紅白ってある 9:"));
     HD_CHECK_EQ(scan("金 貸して"), std::string("24:金 7:  24:貸して 9:"));
+    HD_CHECK_EQ(scan("1紅 白ってある"), std::string("24:1紅 +24:白ってある 9:"));
     HD_CHECK_EQ(scan("通 知 展 開は"), std::string("24:通知展開は 9:"));
     HD_CHECK_EQ(scan("あ な た"), std::string("24:あなた 9:"));
     HD_CHECK_EQ(scan("あ の 人"), std::string("24:あの人 9:"));

@@ -142,6 +142,13 @@ private:
         return (*joins_)(before, after, word);
     }
 
+    // Whether the character before at is a mark: not a space, a digit or a letter (1人 間 is a count).
+    bool MarkBefore(size_t at) const {
+        const char32_t c = s_[at - 1];
+        const char32_t a = c >= U'！' && c <= U'～' ? c - 0xFEE0 : c;
+        return !text::IsSpace(c) && !(a >= U'0' && a <= U'9') && !(a >= U'A' && a <= U'Z') && !(a >= U'a' && a <= U'z');
+    }
+
     // SpaceWord::Spelled (or word) on the text from the piece at from to the space at i and the text
     // after it, which reaches over single spaces.
     bool Spelled(size_t from, size_t i, SpaceWord word = SpaceWord::Spelled) const {
@@ -203,11 +210,10 @@ private:
             wordAfter = to - from > 1;
         }
         if (run >= (kanji ? 2u : 3u) && (!kanji || !wordAfter || Spelled(kanjiStart, i))) return false;
-        // A kanji standing alone before the space, not after another space, that starts a kanji noun
-        // of the dictionary ending in the piece after it (紅 白って 홍백) spells that noun out
-        // (SpaceWord::Compound).
-        if (kanji && run == 1 && i - start == 1 && wordAfter && (start == 0 || !blank(s_[start - 1])) &&
-            Spelled(start, i, SpaceWord::Compound)) {
+        // A kanji standing alone at the start or right after a mark before the space, that starts a
+        // kanji noun of the dictionary ending in the piece after it (紅 白って 홍백), spells that
+        // noun out (SpaceWord::Compound).
+        if (kanji && run == 1 && (start == 0 || MarkBefore(start)) && Spelled(start, i, SpaceWord::Compound)) {
             return false;
         }
         if (Joins(i, SpaceWord::Filler)) return true;

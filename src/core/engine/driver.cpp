@@ -847,16 +847,21 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         if (word == SpaceWord::Ending) return dict::InClass(HDTRANS_CLASS("particle.after-space"), after);
         if (word == SpaceWord::Compound) {
             // The kanji before the space is no word of its own (a pronoun, an adverb, a row read not
-            // as a bare noun: 私 学校, 今 風が), and the piece after it starts with no verb (先 行って).
+            // as a bare noun: 私 学校, 今 風が), and the piece after it starts with no conjugated verb
+            // (先 行って, 右 上がり).
             for (const dict::Candidate& c : snap.GetWordInfo(head, dict::LookupMode::General, lookup).list) {
                 if (c.source == head && c.codes != nullptr &&
                     (ClassOf(c) == '3' || (ClassOf(c) == '1' && c.codes->part.Sub() == '2') || c.codes->gram.HasCode("Nn"))) {
                     return false;
                 }
             }
-            const std::string_view first = after.substr(0, text::DecodeRune(after).size);
             for (const dict::Candidate& c : snap.GetWordInfo(after, dict::LookupMode::General, lookup).list) {
-                if (c.source == first && ClassOf(c) == '4') return false;
+                if (ClassOf(c) != '4' || !after.starts_with(c.source)) continue;
+                const std::string_view rest = after.substr(c.source.size());
+                for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+                    const std::string_view form = word::Conjugation(c.codes->part.VerbKind(), branch);
+                    if (!form.empty() && rest.starts_with(form)) return false;
+                }
             }
         }
         if (word == SpaceWord::Filler) {
@@ -934,7 +939,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     const std::string_view rest = std::string_view(query).substr(c.source.size());
                     const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
                     const bool japanese = text::IsKanji(next) || (next >= U'ぁ' && next <= U'ヿ');
-                    compound = kanji && (!japanese || rest.starts_with("って") ||
+                    compound = kanji && (!japanese || rest.starts_with("って") || rest.starts_with("じゃ") ||
                                          std::u32string_view(U"がをはもでとへのにやかだ").find(next) != std::u32string_view::npos);
                 }
                 const bool fits = word == SpaceWord::Any || spelled || compound ||

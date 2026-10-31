@@ -6,13 +6,17 @@ segment:kanji-spelled-compound	人 間の意思 と は 何の関係もな く	h
 segment:kanji-spelled-compound	人 間性を否定 し た の であ る	has:인간성을	fix	segment
 segment:kanji-spelled-compound	日 本の	has:일본의	fix	segment
 segment:kanji-spelled-compound	道 家の進むべき道(みち)を行けばよいのだ	has:도가의	fix	segment
+segment:kanji-spelled-compound	人 生は	인생은	fix	segment
+segment:kanji-spelled-compound	権 利は	권리는	fix	segment
+segment:kanji-spelled-compound	人 間じゃない	인간이 아니다	fix	segment
 segment:kanji-spelled-compound	先 行ってて｡	앞 가고 있어.	keep	segment
 segment:kanji-spelled-compound	私 行って来ます｡	저 다녀오겠습니다.	keep	segment
 segment:kanji-spelled-compound	私 学校の先生になって よかった~!	나 학교의 선생님이 되어 다행이다~!	keep	segment
 segment:kanji-spelled-compound	僕の心に、今 風が戻ってきた!	내 마음에, 지금 바람이 돌아왔다!	keep	segment
-segment:kanji-spelled-compound	千 千です	천 천입니다	keep	segment
 segment:kanji-spelled-compound	明 家が 存続する限り -	명가가 존속하는 한 -	keep	segment
 segment:kanji-spelled-compound	すぐ行くから 先 入ってな。	바로 가니까 앞 들어와서 말이야.	keep	segment
 segment:kanji-spelled-compound	今 行事をしていただきました。	지금 행사를 해 주셨습니다.	keep	segment
 segment:kanji-spelled-compound	干せるように 紐 持っていきます。	말릴 수 있도록 끈 가져갑니다.	keep	segment
 segment:kanji-spelled-compound	《なぜ… 私 竜妃なのに…》	《왜… 나 용비인데…》	keep	segment
+segment:kanji-spelled-compound	私 学校って	has:나 학교	keep	segment
+segment:kanji-spelled-compound	1人 間に合った	1명 늦지 않았다	keep	segment
