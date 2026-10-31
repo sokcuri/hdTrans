@@ -302,6 +302,19 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     Cues c;
     const Utt u = Utterance(ToU32(ja));
     c.narr = u.narr;
+    // REG-1: the text after the quote is narration, unless it is itself spoken: a casual sentence-final particle at
+    // its end (「…」じゃねーわ！！ — the narrator's own outburst) makes the line speech
+    if (c.narr) {
+        const std::u32string all = ToU32(ja);
+        const size_t close = all.find_last_of(U"」』≫");
+        if (close != std::u32string::npos) {
+            std::u32string after = LastSentence(all.substr(close + 1));
+            while (!after.empty() && IsMark(after.back())) after.pop_back();
+            while (after.size() >= 2 && (after.back() == U'ぁ' || after.back() == U'ぇ' || after.back() == U'ー')) after.pop_back();
+            for (const auto& tail : t.tails)
+                if (tail.strong && EndsInTail(after, tail)) c.narr = false;
+        }
+    }
     bool word = false;
     for (char32_t ch : u.text)
         if (IsWordChar(ch)) word = true;
