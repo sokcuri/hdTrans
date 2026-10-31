@@ -123,6 +123,10 @@ int main(int argc, char** argv) {
     hd8::LoadPersons(ReadFile(dataDir + "/persons.tsv"), data);
     hd8::LoadZeroWeights(ReadFile(dataDir + "/zero.tsv"), data);
     hd8::LoadBareObject(ReadFile(dataDir + "/bareobj.tsv"), data);
+    if (!noHeads && !hd8::LoadHeadRules(ReadFile(dataDir + "/heads.tsv"), data, err)) {
+        std::fprintf(stderr, "data: %s\n", err.c_str());
+        return 1;
+    }
     std::ios::sync_with_stdio(false);
     std::string s;
     if (!trainGold.empty() || !evalGold.empty()) {
