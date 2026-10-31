@@ -26,3 +26,7 @@ cx:lc2d-kosoga:10	それこそが男の目的だった。	!rule:cx:lc2d-kosoga:1
 cx:lc2d-kosoga:10	「彼女こそ本物だ」	!rule:cx:lc2d-kosoga:10	keep	rewrites
 cx:lc2d-kosoga:10	今度こそ、薄い唇が言葉をつむいだ。	!rule:cx:lc2d-kosoga:10	keep	rewrites
 cx:lc2d-kosoga:10	“こちらこそ”	!rule:cx:lc2d-kosoga:10	keep	rewrites
+cx:lc2d-kosoga:5	全体的に鋭利に纏まっている男、彼こそがグランツ・マゼンタ公爵その人であった。	has:그가 바로 그란츠	fix	rewrites
+cx:lc2d-kosoga:5	彼こそが村に駐屯している騎士団の隊長ディーノである。	has:그가 바로 마을에	fix	rewrites
+cx:lc2d-kosoga:5	ーー彼女こそが転生者で、ゲーム通りの展開を防ごうと暗躍したのではないか？	!rule:cx:lc2d-kosoga:5	keep	rewrites
+cx:lc2d-kosoga:5	「そうか……あれこそが俺の本質……」	!rule:cx:lc2d-kosoga:5	keep	rewrites
