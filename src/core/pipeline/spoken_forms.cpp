@@ -117,10 +117,14 @@ bool EndGroup(std::string_view s, size_t p, std::u32string_view set, Match& m) {
     return true;
 }
 
-// ([うくぐすつぬぶむる])んじゃ(ない|ね[えぇー])よ?([！!」』]|$): the prohibition said as a rebuke
-// (泣くんじゃない！, 来るんじゃねぇ！, 泣くんじゃないよ). After the てる of a て form ない without ！ tells what
-// is not so (一般論を言ってるんじゃない, 言ってるんじゃないよ) and stays. Not the honorific くん
-// after katakana, two kanji, う, ん, ー or a small kana (田中くんじゃない！), nor a てく or でく.
+// ([うくぐすつぬぶむる])んじゃ(ない|ね[えぇー]+)(よ|ぞ|わよ)?[ーっッぇ]*([！!」』。]|$): the prohibition said as
+// a rebuke (泣くんじゃない！, 来るんじゃねぇ！, 泣くんじゃないよ, 気を抜くんじゃないぞ！, 口出しするんじゃねえッ！; spec
+// MNG-6), the particle one of follower.prohibition-janai. After the てる or ている of a て form, ない tells what is not so
+// (一般論を言ってるんじゃない, 言ってるんじゃないよ) and stays unless ！ or a particle of follower.prohibition-janai-teru
+// follows. Not after a verb no one does on purpose (verb.observed-state, verb.janai-state: 分かるんじゃない,
+// 興味あるんじゃない), a quoting verb (verb.janai-quote: って言うんじゃない) or an adverb of adverb.realization in the
+// sentence (やっぱり気になるんじゃない), nor where a verb of saying corrects what was said (そういうこと言ってるんじゃない！),
+// nor the honorific くん after katakana, two kanji, う, ん, ー or a small kana (田中くんじゃない！), nor a てく or でく.
 bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     if (!OneOf(s, p, U"うくぐすつぬぶむる")) return false;
@@ -133,7 +137,8 @@ bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
             return false;
         }
     }
-    const text::Rune last = pos > 0 ? LastRune(s.substr(0, pos)) : text::Rune{};
+    const std::string_view before = s.substr(0, pos);
+    const text::Rune last = pos > 0 ? LastRune(before) : text::Rune{};
     const char32_t b = last.cp;
     // うん is the answer (うんうんじゃねえよ), not a verb in う.
     if (m.group[1] == "う" && !IsKanjiClass(b) && (!IsHiraganaRune(b) || In(b, U"うん"))) return false;
@@ -148,16 +153,95 @@ bool ProhibitionJanai(std::string_view s, size_t pos, Match& m) {
     bool nee = false;
     if (!Lit(s, p, "ない")) {
         if (!Lit(s, p, "ね") || !OneOf(s, p, U"えぇー")) return false;
+        while (OneOf(s, p, U"えぇー")) {
+        }
         nee = true;
     }
-    const bool teru = m.group[1] == "る" && pos >= 3 && In(LastRune(s.substr(0, pos)).cp, U"てで");
-    size_t q = p;
-    Lit(s, q, "よ");
-    if (teru && !nee) {
-        size_t r = q;
-        if (!OneOf(s, r, U"！!")) return false;
+    const bool teru = m.group[1] == "る" && pos >= 3 &&
+                      (In(b, U"てで") || (b == U'い' && In(LastRune(before.substr(0, pos - last.size)).cp, U"てで")));
+    // ある and いる (verb.janai-state) as words of their own: after a particle other than は (はいる is 入る),
+    // a kanji, katakana or the start, not inside a kana word
+    const std::size_t state = dict::EndsWithMember(HDTRANS_CLASS("verb.janai-state"), before);
+    const bool stateWord = state > 0 && [&] {
+        if (state == before.size()) return true;
+        const char32_t c = LastRune(before.substr(0, before.size() - state)).cp;
+        return !IsHiraganaRune(c) || In(c, U"がもにでとをへ");
+    }();
+    if (!teru && (dict::EndsWithMember(HDTRANS_CLASS("verb.observed-state"), before) > 0 || stateWord ||
+                  dict::EndsWithMember(HDTRANS_CLASS("verb.janai-quote"), before) > 0)) {
+        return false;
     }
-    return EndGroup(s, q, U"！!」』", m);
+    // The sentence before the verb: after an adverb of adverb.realization the んじゃない affirms what was found
+    // (やっぱり気になるんじゃない 역시 신경 쓰이는 거잖아), and the てる of a verb of verb.janai-saying after a word of
+    // word.janai-correction corrects what was said (そういうこと言ってるんじゃないわよっ！ 그런 거 말하는 게 아니야).
+    const size_t lineStart = before.find_last_of('\n');
+    std::string_view sentence = lineStart == std::string_view::npos ? before : before.substr(lineStart + 1);
+    for (std::string_view mark : {"。", "！", "？", "!", "?", "「", "『"}) {
+        const size_t at = sentence.rfind(mark);
+        if (at != std::string_view::npos) sentence = sentence.substr(at + mark.size());
+    }
+    const auto inSentence = [&](std::string_view w) { return sentence.find(w) != std::string_view::npos; };
+    // the speaker as topic or subject tells what the speaker does not do (俺は逃げるんじゃない。 나는 도망치는 게 아니다)
+    for (const std::string_view w : dict::ClassMembers(HDTRANS_CLASS("pronoun.first-person"))) {
+        for (const std::string_view mark : {"は", "が"}) {
+            const std::size_t at = sentence.find(w);
+            if (at != std::string_view::npos && sentence.substr(at + w.size()).starts_with(mark)) return false;
+        }
+    }
+    if (teru && !nee) {
+        std::string_view stem = before.substr(0, pos - last.size);
+        if (b == U'い') stem = stem.substr(0, stem.size() - LastRune(stem).size);
+        if (dict::EndsWithMember(HDTRANS_CLASS("verb.janai-saying"), stem) > 0 &&
+            std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("word.janai-correction")), inSentence)) {
+            return false;
+        }
+    }
+    size_t q = p;
+    std::string_view particle;
+    for (std::string_view w : dict::ClassMembers(HDTRANS_CLASS("follower.prohibition-janai"))) {
+        size_t r = p;
+        if (w.size() > particle.size() && Lit(s, r, w)) {
+            particle = w;
+            q = r;
+        }
+    }
+    while (OneOf(s, q, U"ーっッぇ")) {
+    }
+    size_t r = q;
+    const bool exclaimed = OneOf(s, r, U"！!");
+    if (teru && !nee && !exclaimed && !dict::InClass(HDTRANS_CLASS("follower.prohibition-janai-teru"), particle)) {
+        return false;
+    }
+    // an adverb of adverb.realization makes a plain んじゃない affirm what was found; with ！, ぞ or わよ it stays
+    // a rebuke (やっぱり、無理するんじゃない！ 역시, 무리하지 마!)
+    if (!exclaimed && !dict::InClass(HDTRANS_CLASS("follower.prohibition-janai-teru"), particle) &&
+        std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("adverb.realization")), inSentence)) {
+        return false;
+    }
+    // a て form after a noun with で tells how or why one is there, not a rebuke (遊びで来てるんじゃないぞ！ 놀이로 온
+    // 게 아니야): the stem of the て form, one kanji or up to two kana, right after で
+    if (teru && !nee) {
+        std::string_view v = before;
+        if (v.ends_with("い")) v.remove_suffix(std::string_view("い").size());
+        if (v.ends_with("て") || v.ends_with("で")) v.remove_suffix(std::string_view("て").size());
+        for (const std::string_view e : {"っ", "ん", "い"})
+            if (v.ends_with(e)) {
+                v.remove_suffix(e.size());
+                break;
+            }
+        const text::Rune stemEnd = LastRune(v);
+        if (stemEnd.size > 0 && IsKanjiClass(stemEnd.cp)) {
+            v.remove_suffix(stemEnd.size);
+        } else {
+            for (int n = 0; n < 2 && !v.empty() && IsHiraganaRune(LastRune(v).cp) && !v.ends_with("で"); n++)
+                v.remove_suffix(LastRune(v).size);
+        }
+        // the で of a noun, not that of a て form (急いで, 読んで)
+        if (v.ends_with("で") && v.size() > std::string_view("で").size() &&
+            !In(LastRune(v.substr(0, v.size() - std::string_view("で").size())).cp, U"んい"))
+            return false;
+    }
+    return EndGroup(s, q, U"！!」』。", m);
 }
 
 // (..[いたる])じゃない([！!。、…‥」』]|$)

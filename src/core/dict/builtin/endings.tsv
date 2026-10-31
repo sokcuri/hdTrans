@@ -776,3 +776,10 @@
 学生じゃないかと	학생이 아닐까 합니다	end
 学生ではないかと思います	학생이 아닐까 합니다	end
 学生じゃないかと思います	학생이 아닐까 합니다	end
+
+// MNG-6: the rebuke of ているんじゃない(わよ) forbids, 지 마 (spoken forms: 書いているなよ); a dictionary form
+// before a sentence-final んじゃない that forbids nothing asks: after ある or いる 〜는 거 아니야, else 〜지 않아
+// (勝つんじゃない？ 이기지 않아?, 稼げるんじゃない？ 벌 수 있지 않아?)
+書いているなよ	쓰지 마	end	prio=-1
+書くんじゃない	쓰는 거 아니야	end	stative prio=-1
+書くんじゃない	쓰지 않아	end	prio=-1

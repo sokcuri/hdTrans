@@ -1,0 +1,34 @@
+# 규칙: GRM-45, GRM-46, GRM-47
+rule	input	expected	kind	layer
+pattern:negf-hazu	あなたのおばあちゃんに瓶の知識なんてあるはずないじゃない」	has:있을 리가 없잖아	fix	builtin-pattern
+pattern:negf-hazu	ママの薬をおまえが持ってるはずないだろ」	has:가지고 있을 리가 없잖아	fix	builtin-pattern
+pattern:negf-hazu	あたしが作ったクッキー、マズいはずないじゃない」	has:리가 없잖아	fix	builtin-pattern
+pattern:negf-hazu	あたりまえです、俺がこんなことするはずないじゃないですか」	has:할 리가 없잖아요	fix	builtin-pattern
+pattern:negf-hazu	いなくなるはずないだろ……常識的に	has:없어질 리가 없잖아……	fix	builtin-pattern
+pattern:negf-hazu	いや、でも……受かるはずないだろ……」	has:합격할 리가 없잖아	fix	builtin-pattern
+pattern:negf-hazu	うっ……でも、あんな事テロリストがしてくるはずないし……」	has:해 올 리가 없고	fix	builtin-pattern
+pattern:negf-hazu	うん……負けるはずない」	has:질 리가 없다	fix	builtin-pattern
+pattern:negf-hazu	そーよ、こんなのが彼氏なはずないじゃないっ！	has:남자친구일 리가 없잖아	fix	builtin-pattern
+pattern:negf-hazu	それは……いや、生徒会長なんて、できるはずないよ……素人だし…	has:할 수 있을 리가 없어	fix	builtin-pattern
+pattern:negf-hazu	……まあ、あの人が私にヘンなことするはずないか」	has:할 리가 없나	fix	builtin-pattern
+pattern:negf-hazu	……後悔なんか、するはずないさ」	has:할 리가 없어	fix	builtin-pattern
+pattern:negf-hazu	残り数週間だから、補選をやるはずないし」	has:할 리가 없고	fix	builtin-pattern
+pattern:negf-hazu	みんながジロジロ見るような傷、キレイなはずないじゃないっ！	has:깨끗할 리가 없잖아	fix	builtin-pattern
+pattern:negf-hazu	取り下げるはずないじゃない！	철회할 리가 없잖아!	fix	builtin-pattern
+pattern:negf-hazu	師匠が受け入れるはずないじゃん！	has:받아들일 리가 없잖아!	fix	builtin-pattern
+pattern:negf-hazu	どう考えても、一人だけお手伝いを免れるはずがない。	has:면할 리가 없다	keep	builtin-pattern
+pattern:negf-hazu	そんな指導が許されるはずがない」	has:허락될 리가 없다	keep	builtin-pattern
+pattern:negf-hazu	彼が来るはずだ	그가 올 것이다	keep	builtin-pattern
+pattern:negf-hazu	年下と言われても不思議ではない。	연하라고 해도 이상하지 않다.	keep	builtin-pattern
+pattern:negf-past-noda	「……領地の税を引き上げればよかったのではないか」	has:좋았던 건 아닌가	fix	builtin-pattern
+pattern:negf-past-noda	「いっそ仮死状態のうちに女装させてあげたほうがよかったのではないでしょうか」	has:좋았던 건 아닐까요	fix	builtin-pattern
+pattern:negf-past-noda	「それにしたって事前に一言頂戴してもよかったのではないかと戸惑っているのです」	has:괜찮았던 건 아닐까	fix	builtin-pattern
+pattern:negf-past-noda	ああすれば良かったのではないか、こうすれば良かったのではないかと	has:좋았던 것은 아닌가	fix	builtin-pattern
+pattern:negf-past-noda	あの時は楽しかったのではないでしょうか	has:즐거웠던 것은 아닐까요	fix	builtin-pattern
+pattern:negf-past-noda	もう帰ったのではないか。	벌써 돌아간 것은 아닌가.	keep	builtin-pattern
+pattern:negf-past-noda	高いのではないか	높은 것이 아닌가	keep	builtin-pattern
+pattern:negf-past-noda	よかったので、また行きたい。	lacks:아닌가	keep	builtin-pattern
+cx:neg-final-sou:10	「あれ、あそこにいるのそうじゃない？」	has:있는 거 그렇지 않아?	fix	rewrites
+cx:neg-final-sou:10	あそこに立ってるのそうじゃない？	has:그렇지 않아?	fix	rewrites
+cx:neg-final-sou:10	雨が降るそうです	!rule:cx:neg-final-sou:10	keep	rewrites
+cx:neg-final-sou:10	彼も来るそうじゃない？	!rule:cx:neg-final-sou:10	keep	rewrites

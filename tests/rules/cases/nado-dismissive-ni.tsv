@@ -5,7 +5,7 @@ cx:nado-dismissive:55	「真面目な子なんだから、不良になんかな�
 cx:nado-dismissive:55	これでワクワクしないやつはニートになんかならない。	rule:cx:nado-dismissive:55= 따위	fix	rewrites
 cx:nado-dismissive:55	「……おまえたちの餌になんかならないぞ。」	rule:cx:nado-dismissive:55= 따위	fix	rewrites
 cx:nado-dismissive:55	「おまえは悪魔になんかならないって。」	rule:cx:nado-dismissive:55= 따위	fix	rewrites
-cx:nado-dismissive:50	「邪魔になんかなるはずないよっ！」	「방해 따위가 될 리 없어!」	fix	rewrites
+cx:nado-dismissive:50	「邪魔になんかなるはずないよっ！」	「방해 따위가 될 리가 없어!」	fix	rewrites
 cx:nado-dismissive:50	ただ、個を殺してまで王になんてなりたくない。	rule:cx:nado-dismissive:50= 따위	fix	rewrites
 cx:nado-dismissive:60	部室になんか行く暇なんてない。	rule:cx:nado-dismissive:60= 따위	fix	rewrites
 cx:nado-dismissive:60	「おまえの下着の色になんか興味はない。好きにしろ」	has:색 따위에 흥미는 없다	fix	rewrites

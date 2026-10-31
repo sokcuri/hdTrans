@@ -1,0 +1,8 @@
+#! layer=pack
+# 부정 물음의 기능(나무람, 다지는 말)을 정하는 팩 행: 동사나 형용사 한 단어의 부정 어미 칸
+id	lemma	pos	slot	cond	target	spec	prov	note
+negf:reproach	*	v	polarity	form=neg final=か！ subj=- voice=none	1지 못해	MNG-8		느낌표 앞 부정 물음 ないか, んか, ぬか는 다그치는 말: 吐かんかッ!! 토하지 못해!!
+negf:reproach-polite	*	v	polarity	form=neg final=か！ subj=- voice=none register=polite	-	MNG-8		높임말의 ませんか！는 놀란 물음 그대로
+negf:reproach-unwilled	@verb.unwilled	v	polarity	form=neg final=か！	-	MNG-8		일부러 하지 않는 동사(있다, 알다, 보이다)의 ないか！는 물음 그대로: 誰かいないか！
+negf:iinja	いい|良い|よい	adj	polarity	form=nja final=-|！|。	1잖아	MNG-9		묻지 않는 いいんじゃない는 좋잖아: ま、いいんじゃない！
+negf:iinja-suggest	いい|良い|よい	adj	polarity	form=nja final=-|！|。 after=が	-	MNG-9		方がいいんじゃない는 권하는 물음: 慎んだ方がいいんじゃない 삼가는 게 좋지 않을까

@@ -14,7 +14,7 @@ cx:souda-recall:10	あ、そうだ！ 訓練しましょう	아, 맞아요! 훈�
 cx:souda-recall:10	「あ、そうだ！　ちょうどいいところに……」	rule:cx:souda-recall:10=%Dn@	fix	rewrites
 cx:souda-recall:10	「あ、そうだ、その人、出身はどこ？」	「아, 맞다, 그 사람, 출신은 어디?」	fix	rewrites
 cx:souda-recall:10	あの…あ、そうだ！ お茶をお淹れしますね？	rule:cx:souda-recall:10=%Dn@	fix	rewrites
-cx:souda-recall:10	なんで怒ってるの？ あ、そうだ！ 飲みに行かない？	왜 화내? 아, 맞아! 마시러 가지 않아?	fix	rewrites
+cx:souda-recall:10	なんで怒ってるの？ あ、そうだ！ 飲みに行かない？	왜 화내? 아, 맞아! 마시러 가지 않을래?	fix	rewrites
 cx:souda-recall:10	護衛？あ、そうだ！まずお茶淹れますね。	rule:cx:souda-recall:10=%Dn@	fix	rewrites
 cx:souda-recall:10	「そうですね……あ、そうだ……」	「그렇네요……아, 맞아요……」	fix	rewrites
 cx:souda-recall:10	ああっ……あっ、そうだ！ 私と組もう？	아앗……앗, 맞아! 나와 짜자?	fix	rewrites

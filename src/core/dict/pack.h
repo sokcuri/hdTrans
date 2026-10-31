@@ -44,9 +44,13 @@ struct PackAtom {
 struct PackRow {
     std::string id, file, spec, prov;
     PackSlot slot = PackSlot::Sense;
-    std::string key;        // the dictionary key of the words it applies to
+    std::string key;        // the dictionary key of the words it applies to ("" for lemma * and @class)
     char classDigit = 0;    // their class digit (part code byte 1)
-    std::string target;     // compiled target (sense, name), voice name, or ending text
+    std::string lemmaClass; // lemma @class: the words of that pack class or classes.tsv set; "" with key "" is lemma *
+    // lemma @class: the dictionary keys a member can have (the member, without its last kana or する),
+    // each with its members (CheckPackClasses)
+    std::unordered_map<std::string, std::vector<std::string>, StringHash, std::equal_to<>> lemmaKeys;
+    std::string target;     // compiled target (sense, name), voice name, or ending text; "-" keeps the slot
     std::string written;    // the target column as written
     std::string lexeme;     // a voice row's compiled Korean verb (passive:혼나다), "" for none
     bool adjective = false; // a noun target in 하다 (the root of a 하다 adjective), as in senses
@@ -60,6 +64,8 @@ struct PackRow {
 struct PackTable {
     std::vector<PackRow> rows;  // in load order
     std::unordered_map<std::string, std::vector<int>, StringHash, std::equal_to<>> byKey;
+    // the rows of lemma * and lemma @class, which no key names, by OpenIndex(slot, class digit)
+    std::unordered_map<int, std::vector<int>> open;
     std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> parent;              // @class → parent
     std::unordered_map<std::string, std::vector<std::string>, StringHash, std::equal_to<>> classes; // lemma → @classes
     std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> ids;                  // row id → file:line
@@ -87,6 +93,8 @@ void ParsePackClasses(std::string_view file, std::string_view text, PackTable& t
 void CheckPackClasses(PackTable& table, std::vector<PackError>& errors);
 
 const char* PackSlotName(PackSlot slot);
+// The key of PackTable::open for the rows of a slot and a class digit.
+inline int OpenIndex(PackSlot slot, char classDigit) { return static_cast<int>(slot) * 256 + static_cast<unsigned char>(classDigit); }
 
 // What -why prints for a row: its id, slot and target, by the process-wide id that
 // ParsePackRows gives each row (rows of every snapshot loaded in the process).
