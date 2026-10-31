@@ -175,6 +175,7 @@ std::string_view ScriptOf(std::u32string_view s) {
   }
   if (marks) return "mark";
   if (mixed) return "mixed";
+  if (kanji && (hira || kata) && !other && !sym) return "jp";  // kanji with kana: 考える, 目をやる
   int kinds = hira + kata + kanji + other + sym;
   if (kinds == 0) return s.empty() ? "sym" : "kata";
   if (kinds > 1) return "other";

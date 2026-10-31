@@ -22,7 +22,8 @@
 # `when` holds and `require` does not (require - : invalid whenever `when` holds). Atoms are joined by &,
 # alternatives of require by ||: [!]side.field=v1|v2 (exact), side.field^=v1|v2 (prefix) or side.field$=v1|v2 (suffix).
 # Fields: ud ctype cform lemma surf pos (UniDic and IR names), arc (lex unk long stutter repair edge),
-# derive (ja/derive.tsv row), script (hira kata kanji mixed sym other), lemmascript (kata other),
+# derive (ja/derive.tsv row), script (hira kata kanji jp: kanji with kana, mixed: katakana after hiragana in
+# one word, mark: only ー 〜 っ, sym other), lemmascript (kata other),
 # space is 1 only for a single space in a line not laid out with spaces (two or more between Japanese
 # letters); the space operation joins only those.
 # triple (1: the token keeps the third letter of a run of one kanji or hiragana letter in running text),
@@ -61,7 +62,7 @@ rp.space	REP-5	space	1	-	-	m	own	だったら しい → だったらしい; 嬉
 rp.dakuten	REP-6	dakuten	2	-	-	m	own	とうしたんた → どうしたんだ; ごさいます → ございます
 rp.swap	REP-7	swap	3	minlen=4	-	m	own	どうたしんだ → どうしたんだ; らいし → らしい
 rp.edit1	REP-8	edit1	4	minlen=4	-	m	own	one kana off in a long kana word
-rp.bad.unknown	REP-9	bad.tok	-	t.arc=unk & t.script=hira|kata|kanji|mixed|mark	-	m	own	no dictionary word in Japanese letters: デドアガ, ドーーア (digits and Latin are not judged)
+rp.bad.unknown	REP-9	bad.tok	-	t.arc=unk & t.script=hira|kata|kanji|jp|mixed|mark	-	m	own	no dictionary word in Japanese letters: デドアガ, ドーーア (digits and Latin are not judged)
 rp.bad.mixed	REP-9	bad.tok	-	t.script=mixed	-	m	own	katakana after hiragana inside one word: れル, すグ
 rp.bad.kana-variant	REP-9	bad.tok	-	t.script=kata & t.lemmascript=other & t.arc=lex|long|repair & t.wordrun=0 & !t.surf=ス|ッス	t.prevcc=kata|kanji|mark|sym|edge|other & t.nextcc=kata|kanji|mark|sym|edge|other	m	own	a katakana spelling of a native word glued to hiragana, as part of a longer katakana run: すグニ, 怖イんです; a whole katakana word (バカな, ヘンな, マシだ) stays
 rp.bad.kana-function	REP-9	bad.tok	-	t.script=kata & t.ud^=助詞|助動詞 & !t.surf=ス|ッス	-	m	own	a particle or an auxiliary spelt in katakana: デドアガ (で, が); the spoken ス of っス, んス stays
@@ -109,9 +110,9 @@ rp.bad.copula-twice	REP-9	bad.pair	-	l.ctype=助動詞-ダ & r.ctype=助動詞-�
 rp.bad.suffix	REP-9	valid.pair	-	r.ud^=接尾辞	!l.ud^=助詞|助動詞	m	own	a suffix after a particle or an auxiliary: かららら
 rp.bad.prefix	REP-9	bad.pair	-	l.ud=接頭辞	!r.ud^=助詞|助動詞|補助記号 & !r.arc=edge	m	own	a prefix before a particle, an auxiliary, punctuation or the end
 rp.bad.space-in-word	REP-9	bad.space	-	-	-	m	own	a space inside a word: だったら しい (らしい), 実 力不足 (実力), ど うですか (どう)
-rp.bad.space-punct	REP-9	bad.pair	-	r.space=1 & r.surf=。|、|」|』|）|】|》|〉 & l.script=hira|kata|kanji|mixed	-	m	own	a space before 。、」: つく 。, です 」
+rp.bad.space-punct	REP-9	bad.pair	-	r.space=1 & r.surf=。|、|」|』|）|】|》|〉|？|！ & l.script=hira|kata|kanji|jp|mixed	-	m	own	a space before 。、」: つく 。, です 」
 rp.bad.space-open	REP-9	bad.pair	-	r.space=1 & l.ud=補助記号-括弧開	-	m	own	a space after 「: 「 はいはい
 rp.bad.space-dots	REP-9	bad.pair	-	r.space=1 & r.surf^=…|‥ & !l.ud^=補助記号|記号	-	m	own	a space before … after a word: いいっ ……
 rp.bad.space-same	REP-9	bad.pair	-	r.space=1 & same=surf & l.surf^=…|‥	-	m	own	one mark split by a space: … …
-rp.bad.space-letter	REP-9	bad.pair	-	r.space=1 & r.len=1 & r.script=hira & !r.ud^=接頭辞 & l.script=hira|kata|kanji|mixed & !l.ud^=助詞|助動詞|感動詞	-	m	own	a one-letter hiragana word after a stray space after a content word: 目 が合う (が read as a conjunction); そばに いて stays
-rp.bad.space-dep	REP-9	bad.pair	-	r.space=1 & l.script=hira|kata|kanji|mixed	!r.pos=aux|p_case|p_topic|p_conj|p_final|p_adv|suf	m	own	a space before a particle, an auxiliary or a suffix: 並ん で歩く, くれ ないか
+rp.bad.space-letter	REP-9	bad.pair	-	r.space=1 & r.len=1 & r.script=hira & !r.ud^=接頭辞 & l.script=hira|kata|kanji|jp|mixed & !l.ud^=助詞|助動詞|感動詞	-	m	own	a one-letter hiragana word after a stray space after a content word: 目 が合う (が read as a conjunction); そばに いて stays
+rp.bad.space-dep	REP-9	bad.pair	-	r.space=1 & l.script=hira|kata|kanji|jp|mixed	!r.pos=aux|p_case|p_topic|p_conj|p_final|p_adv|suf	m	own	a space before a particle, an auxiliary or a suffix: 並ん で歩く, くれ ないか
