@@ -193,7 +193,7 @@ struct Run {
         if ((c != "ク" && c != "グ" && c != "プ" && c != "ブ") || At(j + 1) != kMarkRu) return false;
         const std::string_view next = At(j + 2);
         if (next.empty() || (next == kMarkTsu && At(j + 3).empty())) return true;
-        constexpr std::string_view kNoOnset = "アイウエオンッーヲヴァィゥェォャュョヮヵヶ";
+        constexpr std::string_view kNoOnset = "アイウエオンッーヲァィゥェォャュョヮヵヶ";
         return KatakanaCell(next) && kNoOnset.find(next) == std::string_view::npos;
     }
 

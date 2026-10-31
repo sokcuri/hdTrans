@@ -8,15 +8,16 @@ segmentation:katakana-cover	都市内の大企業トップスリーに入る受�
 segmentation:katakana-cover	「そういえば、五、六年生を差し置いて四年生に学園トップスリーが揃うなんて変なもんだな。」	has:학원 톱 쓰리가	fix	lookup
 segmentation:katakana-cover	あー、ゲーム内でも人気キャラ投票トップスリーの貴方達かー。	has:투표 톱 쓰리의	fix	lookup
 segmentation:katakana-cover	国のトップスリーによる強行視察を先日終えて、やっとこさ戻って来た日常。	has:나라의 톱 쓰리에 의한	fix	lookup
-segmentation:katakana-cover	春香の前に２つのドーナツとアイスミルクティーを置く健司がその横に座った。	has:아이스 밀크티를	fix	lookup
-segmentation:katakana-cover	碓氷は普段はコーヒー派だが、今回はパンケーキもアイスミルクティーも竹ノ内がチョイスしたのだ。	has:아이스 밀크티도	fix	lookup
-segmentation:katakana-cover	アマレロにアイスミルクティーを出してもらい、のんびりと召喚リストを見ていた。	has:아이스 밀크티를	fix	lookup
-segmentation:katakana-cover	飲み物は３人ともアイスミルクティーだ。	has:아이스 밀크티다	fix	lookup
-segmentation:katakana-cover	このボディスポンジを使ったのだろうか。	has:보디 스펀지를	fix	lookup
-segmentation:katakana-cover	俺はボディスポンジにボディソープを染み込ませた。	has:보디 스펀지에	fix	lookup
-segmentation:katakana-cover	シングルスターのパーティだったらしい。	has:싱글 스타의	fix	lookup
-segmentation:katakana-cover	オールドレインとは、与えたダメージに応じて回復するパッシブスキルだ。	has:올 드레인이란	fix	lookup
-segmentation:katakana-cover	蜥蜴は、ビックリザード、ハイリザード、ダッシュリザード、の３種、悩んだが、ハイリザードで。	has:빅 리자드	fix	lookup
+segmentation:katakana-cover	その笑顔はとてつもなくだらしないが、うちの高校でトップスリーを争うイケメンだ。	has:톱 쓰리를	fix	lookup
+segmentation:katakana-cover	そんな世界の城の中でもトップスリーに入るくらいに大好きなのがシュノンソー城！	has:톱 쓰리에	fix	lookup
+segmentation:katakana-cover	実際、トップスリーの人達には驚かされた。	has:톱 쓰리의	fix	lookup
+segmentation:katakana-cover	トップスリーとは恐れ入る。	has:톱 쓰리란	fix	lookup
+segmentation:katakana-cover	「セラスス……安心しろ。俺の定期テストは学年でトップスリーだから。」	has:톱 쓰리니까	fix	lookup
+segmentation:katakana-cover	この３人は、世界で、トップスリーに入る実力だった。	has:톱 쓰리에	fix	lookup
+segmentation:katakana-cover	全国模試トップスリーの人間が、そんなヘマをするはずがない。	has:톱 쓰리의	fix	lookup
+segmentation:katakana-cover	「トップスリーって何さ？」	has:톱 쓰리는	fix	lookup
+segmentation:katakana-cover	人生でトップスリーに入る無駄な時間だったぜ。	has:톱 쓰리에	fix	lookup
+segmentation:katakana-cover	大会トップスリー常連	has:대회 톱 쓰리 단골	fix	lookup
 segmentation:katakana-cover	「ブ……ブルーローズ！？」	has:블루 로즈	keep	lookup
 segmentation:katakana-cover	怒りを胸に押さえ込み、俺はじっとブルースターという花を見る。	has:블루스타라는	keep	lookup
 segmentation:katakana-cover	突然始まったご夫人方とのコールアンドレスポンスに、子供達は耳を塞いでいた。	has:콜 앤 리스폰스에	keep	lookup
@@ -30,3 +31,4 @@ segmentation:katakana-cover	「ファイアボール」	「파이어볼」	keep	
 segmentation:katakana-cover	スリーサイズ不明。	has:쓰리 사이즈	keep	lookup
 segmentation:katakana-cover	「光魔法………サウザンドホワイトレイ！！」	has:화이트 레이	keep	lookup
 segmentation:katakana-cover	シャンプーや、ボディソープの香りだけではない、嗅いでいるとふわふわ、どこかに連れて行かれそうな香り。	has:바디 워시	keep	lookup
+segmentation:katakana-cover	サクライフリースリー	사쿠라이 프리 쓰리	fix	lookup

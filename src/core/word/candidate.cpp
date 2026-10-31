@@ -526,16 +526,27 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
 
 bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
 
-// LEX-95: where the longest first word of a katakana run is no name and leaves, beside common words, a
-// word the dictionary reads only as a person's name (フリースリーカード: フリース, リー, カード), a shorter first
-// word goes first when common words of three or more kana cover the run with as many words
-// (フリー, スリー, カード); of those first words the longest. Words are dictionary keys inside the
-// run, of two or more kana. A run of names only (バート, ラム) keeps its words.
-Record* KatakanaCoverFirst(const dict::Snapshot& snapshot, const dict::LookupContext& ctx, Record* records,
-                           std::string_view text) {
-    if (records == nullptr) return records;
-    std::vector<std::size_t> bounds{0};  // rune boundaries of the run
-    for (std::string_view s = text; !s.empty() && bounds.size() <= 25;) {
+// LEX-95: where the longest word at a point of a katakana run is no name and leaves, beside common
+// words, a word the dictionary reads only as a person's name (フリースリーカード: フリース, リー, カード),
+// a shorter word goes first when common words of three or more kana cover the rest of the run with as
+// many words (フリー, スリー, カード); of those words the longest. Words are dictionary keys inside the
+// run, of two or more kana, as the lookup of the word stage finds them. A plain word with force keeps
+// its place, and so does every word of a run longer than 24 kana. records holds the words at full[cursor:], longest first.
+Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_view full, std::size_t cursor) {
+    constexpr std::size_t kMaxRun = 24;
+    if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    // The kana of the run before the cursor, and the rune boundaries of the run from it.
+    std::size_t before = 0;
+    for (std::size_t at = cursor; at > 0 && before <= kMaxRun;) {
+        std::size_t start = at - 1;
+        while (start > 0 && (static_cast<unsigned char>(full[start]) & 0xC0) == 0x80) start--;
+        if (!KatakanaWordRune(text::DecodeRune(full.substr(start)).cp)) break;
+        at = start;
+        before++;
+    }
+    const std::string_view text = full.substr(cursor);
+    std::vector<std::size_t> bounds{0};
+    for (std::string_view s = text; !s.empty() && before + bounds.size() <= kMaxRun + 1;) {
         const text::Rune r = text::DecodeRune(s);
         if (!KatakanaWordRune(r.cp)) break;
         bounds.push_back(bounds.back() + r.size);
@@ -543,8 +554,11 @@ Record* KatakanaCoverFirst(const dict::Snapshot& snapshot, const dict::LookupCon
     }
     const std::size_t run = bounds.back();
     const std::size_t greedy = records->source.size();
-    // Runs of more than 24 kana (a sound held long) are left to the longest words.
-    if (bounds.size() < 5 || bounds.size() > 25 || greedy >= run || !std::binary_search(bounds.begin(), bounds.end(), greedy)) {
+    if (bounds.size() < 5 || before + bounds.size() > kMaxRun + 1 || greedy >= run ||
+        !std::binary_search(bounds.begin(), bounds.end(), greedy)) {
+        return records;
+    }
+    if (const std::string_view rest = text.substr(run); !rest.empty() && KatakanaWordRune(text::DecodeRune(rest).cp)) {
         return records;
     }
     constexpr int kNone = 1 << 20;
@@ -558,8 +572,7 @@ Record* KatakanaCoverFirst(const dict::Snapshot& snapshot, const dict::LookupCon
     };
     std::vector<std::vector<Piece>> pieces(n);
     for (std::size_t i = 0; i + 2 < n; i++) {
-        const dict::Candidates found =
-            snapshot.GetWordInfo(text.substr(bounds[i], run - bounds[i]), dict::LookupMode::General, ctx);
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i], run - bounds[i]), kModeGeneral);
         for (std::size_t j = i + 2; j < n; j++) {
             const std::size_t length = bounds[j] - bounds[i];
             bool any = false, person = true, proper = false;
@@ -579,40 +592,41 @@ Record* KatakanaCoverFirst(const dict::Snapshot& snapshot, const dict::LookupCon
     std::vector<std::vector<int>> persons(n, std::vector<int>(n, kNone));
     persons[n - 1][0] = 0;
     for (std::size_t i = n - 1; i-- > 0;) {
-        for (const auto& [j, person, common] : pieces[i]) {
+        for (const Piece& p : pieces[i]) {
             for (std::size_t w = 0; w + 1 < n; w++) {
-                if (persons[j][w] == kNone) continue;
-                persons[i][w + 1] = std::min(persons[i][w + 1], persons[j][w] + (person ? 1 : 0));
+                if (persons[p.end][w] == kNone) continue;
+                persons[i][w + 1] = std::min(persons[i][w + 1], persons[p.end][w] + (p.person ? 1 : 0));
             }
         }
     }
-    // The cover of the longest first word, by its fewest words.
+    // The cover after the longest word, a word that is no name, by its fewest words.
     std::size_t words = 0;
     int greedyPersons = kNone;
-    for (const auto& [j, person, common] : pieces[0]) {
-        if (bounds[j] != greedy || person) continue;
+    for (const Piece& p : pieces[0]) {
+        if (bounds[p.end] != greedy || p.person) continue;
         for (std::size_t w = 0; w + 1 < n && greedyPersons == kNone; w++) {
-            if (persons[j][w] != kNone) {
+            if (persons[p.end][w] != kNone) {
                 words = w + 1;
-                greedyPersons = persons[j][w] + (person ? 1 : 0);
+                greedyPersons = persons[p.end][w];
             }
         }
     }
-    if (greedyPersons == kNone || greedyPersons == 0 || greedyPersons == static_cast<int>(words)) return records;
+    if (greedyPersons == kNone || greedyPersons == 0) return records;
     // covered[i][w]: whether common words of three or more kana cover the run from bounds[i] by w
     // words.
     std::vector<std::vector<char>> covered(n, std::vector<char>(n, 0));
     covered[n - 1][0] = 1;
     for (std::size_t i = n - 1; i-- > 0;) {
-        for (const auto& [j, person, common] : pieces[i]) {
-            if (!common || j - i < 3) continue;
-            for (std::size_t w = 0; w + 1 < n; w++) covered[i][w + 1] |= covered[j][w];
+        for (const Piece& p : pieces[i]) {
+            if (!p.common || p.end - i < 3) continue;
+            for (std::size_t w = 0; w + 1 < n; w++) covered[i][w + 1] |= covered[p.end][w];
         }
     }
-    // A shorter first word whose cover has as many words, all common words of three or more kana.
     std::size_t chosen = 0;
-    for (const auto& [j, person, common] : pieces[0]) {
-        if (bounds[j] < greedy && bounds[j] > chosen && common && j >= 3 && covered[j][words - 1]) chosen = bounds[j];
+    for (const Piece& p : pieces[0]) {
+        if (bounds[p.end] < greedy && bounds[p.end] > chosen && p.common && p.end >= 3 && covered[p.end][words - 1]) {
+            chosen = bounds[p.end];
+        }
     }
     if (chosen == 0) return records;
     Record* front = nullptr;
@@ -2004,7 +2018,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
-    if (settings.text) records = KatakanaCoverFirst(snapshot, lookupContext, records, From(full, cursor));
+    if (settings.text) records = KatakanaCoverFirst(*this, records, full, static_cast<std::size_t>(cursor));
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;
