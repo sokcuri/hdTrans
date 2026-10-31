@@ -44,7 +44,7 @@
 | compose | 항목을 오른쪽에서 왼쪽으로 | 조사 형태, 활용 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateChunk` `s.composer.Compose(` |
 | cleanup | 모두 적용 | 출력 텍스트 | 없음 | 코드 | `src/core/engine/driver.cpp` `TranslateBody` `output::Cleanup(sentences, gaps)` |
 | restore | 차례로. `cleanup.tsv`는 위치마다 파일 순서의 첫 행 | 출력 텍스트 | 없음 | `src/core/dict/builtin/extra/cleanup.tsv` | `src/core/engine/driver.cpp` `TranslateBody` `pipeline::RestoreAll(` |
-| register | 문서의 대사 줄마다, 말투 수준이 바뀌는 줄만(spec REG-10~REG-12) | 대사 줄의 말투, 그 줄의 입말 꼴 | 자막 문서와 `-reference`는 건너뜀 | `src/core/register/data/` | `src/core/engine/driver.cpp` `TranslateDocument` `reg::Retrofit(` |
+| register | 문서의 대사 줄마다, 말투 수준이 바뀌는 줄만(spec REG-10~REG-12) | 대사 줄의 말투, 그 줄의 입말 꼴 | `-speech-levels keep`(기본), 자막 문서와 `-reference`는 건너뜀 | `src/core/register/data/` | `src/core/engine/driver.cpp` `TranslateDocument` `reg::Retrofit(` |
 | postfilter | 모든 행 적용 | 출력 줄 | 없음 | Ehnd 폴더의 postfilter | `src/core/engine/driver.cpp` `TranslateDocument` `filter::Stage::Post` |
 
 `local`부터 `global-last`까지는 `Flush`가 부르는 `CleanupSelectors` 안에서, `senses`와 `scorers`는 `Select`

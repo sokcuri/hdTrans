@@ -110,7 +110,7 @@ struct TranslationOptions {
     // The speech level of the text inside 「」; Strict with reference.
     Speech speech = Speech::Strict;
     // The speech-level stage after the translation (Session::SetSpeechLevels); off with reference.
-    SpeechLevels speechLevels = SpeechLevels::Auto;
+    SpeechLevels speechLevels = SpeechLevels::Keep;
     // When set, gets the lines the speech-level stage changes, numbered from 0 after the context.
     std::vector<reg::Change>* levelChanges = nullptr;
     // The name list of the document (Session::SetNames), compiled for the snapshot; null for none.

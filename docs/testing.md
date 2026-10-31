@@ -60,7 +60,7 @@ ctest는 단위 테스트를 `tests/unit/shards.txt`의 줄마다 `unit.<이름>
 ## 규칙 사례 (tests/rules/cases/)
 
 주제마다 표 하나(`tests/rules/cases/<주제>.tsv`)로 규칙의 단어 선택을 확인합니다. 열은 `rule input expected kind layer`이고
-입력 한 줄을 한 세션으로 번역합니다(`-each -why`). 실패는 `layer`별로 묶어 보입니다.
+입력 한 줄을 한 세션으로 번역합니다(`-each -why -speech-levels auto`). 실패는 `layer`별로 묶어 보입니다.
 
 - `rule`: 사례가 겨냥하는 규칙. 지역 규칙은 그 규칙을 이름한 사전 행의 id(`dict:jisjk:848`), 전역 규칙은 PRIO(`G330`),
   그 밖의 단계는 `<단계>:<이름>`(`sense:お盆`, `cx:noun-to:10`)
@@ -110,7 +110,7 @@ tools/variants.py build/mac/hdtrans --base "$BASE/build/mac/hdtrans" "$BASE/dict
 
 `examples/`에는 짧은 일본어 문서와 번역 결과가 있습니다.
 
-- `<case>.ja.txt`: 첫 줄은 사례를 설명하는 `#` 줄, 그다음은 한 문서로 번역할 입력
+- `<case>.ja.txt`: 첫 줄은 사례를 설명하는 `#` 줄, 그다음은 한 문서로 번역할 입력(`-speech-levels auto`)
 - `<case>.ko.txt`: 같은 `#` 줄, 그다음은 검토를 마친 현재 엔진 출력
 
 ```sh

@@ -105,8 +105,8 @@ hdtrans [--json] [--version] [--verbose] [--config FILE] [--dicts PATH,...] [--u
 | `--misread` | 오독 필터(`misreadFilter`)를 켬: 모델이 오독으로 점수를 매긴 선택 후보를 대안으로 바꿈 ([misread-classifier.md](misread-classifier.md)) |
 | `--no-cg` | CG-lite 손 규칙(`cgRules`, 기본 켬)을 끔: 오독 결정의 후보를 지우거나 고르는 규칙표 |
 | `--cg-learned` | 학습 규칙(`cgLearned`, 기본 끔)도 켬 |
-| `--speech LEVEL` | 대사의 말투. `strict`(기본): 번역의 `-다`를 그대로 두되, 일본어가 반말 표지(문장 끝 よ, ね, わ, じゃん, さ, もん, って, かな, かしら, 축약 ちゃう, てる, とく, ねえ)를 가진 「」 대사는 상태와 과거, 판단(다르다 → 달라, 했다 → 했어, 학생이다 → 학생이야)과 것, 무엇(것은 → 건, 무엇을 → 뭘)만 해체로 씀. ！, ？, 문장 끝 말줄임 앞의 서술어는 「」 밖에서도 해체(暑い！ → 더워!). `soft`: 「」 안(앞 줄에서 열린 「」 포함)의 `-다`를 해체로 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야). 「」를 쓰지 않는 글의 줄도 대사로 보이면 해체로 씀: 반말 문장 끝 조사가 있거나, 。, ！, ？, 말줄임, 쉼표, 줄표로 끝나지 않는 줄(それは違う → 그건 달라). 。로 끝나고 조사가 없는 줄, 전각 공백으로 들여쓴 줄, `이름：설명` 같은 줄은 `-다`로 두고, 끝으로만 대사로 본 줄의 동작 현재형도 그대로 둠(もう帰る → 이제 돌아간다). 두 값 모두 평서형 의문문은 해체로 묻고(大丈夫か？ → 괜찮아?, 行っただろう？ → 갔지?), 공손체(です, ます)와 고풍 말투(ておる, じゃ), 『』 안, 인용한 말(「…」という)은 그대로 둠. 「」로 시작하는 대사 줄은 두 값 모두 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙이 말투를 다시 정함(soft면 soft의 말투가 들어온 말투). `--reference`에서는 `strict`이고 그 규칙도 돌지 않음 |
-| `--speech-levels MODE` | 대사 줄의 말투 수준. `auto`(기본): 「」로 시작하는 대사 줄을 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙으로 다시 씀. `keep`: 번역의 말투를 그대로 둠(그 단계가 돌지 않음). 대소문자는 가리지 않음. 설정 파일의 `speech_levels`, 환경 변수 `HDTRANS_SPEECH_LEVELS`보다 앞섬 |
+| `--speech LEVEL` | 대사의 말투. `strict`(기본): 번역의 `-다`를 그대로 두되, 일본어가 반말 표지(문장 끝 よ, ね, わ, じゃん, さ, もん, って, かな, かしら, 축약 ちゃう, てる, とく, ねえ)를 가진 「」 대사는 상태와 과거, 판단(다르다 → 달라, 했다 → 했어, 학생이다 → 학생이야)과 것, 무엇(것은 → 건, 무엇을 → 뭘)만 해체로 씀. ！, ？, 문장 끝 말줄임 앞의 서술어는 「」 밖에서도 해체(暑い！ → 더워!). `soft`: 「」 안(앞 줄에서 열린 「」 포함)의 `-다`를 해체로 씀(간다 → 갈 거야, 다르다 → 달라, 학생이다 → 학생이야). 「」를 쓰지 않는 글의 줄도 대사로 보이면 해체로 씀: 반말 문장 끝 조사가 있거나, 。, ！, ？, 말줄임, 쉼표, 줄표로 끝나지 않는 줄(それは違う → 그건 달라). 。로 끝나고 조사가 없는 줄, 전각 공백으로 들여쓴 줄, `이름：설명` 같은 줄은 `-다`로 두고, 끝으로만 대사로 본 줄의 동작 현재형도 그대로 둠(もう帰る → 이제 돌아간다). 두 값 모두 평서형 의문문은 해체로 묻고(大丈夫か？ → 괜찮아?, 行っただろう？ → 갔지?), 공손체(です, ます)와 고풍 말투(ておる, じゃ), 『』 안, 인용한 말(「…」という)은 그대로 둠. `--speech-levels auto`이면 「」로 시작하는 대사 줄은 두 값 모두 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙이 말투를 다시 정함(soft면 soft의 말투가 들어온 말투). `--reference`에서는 `strict`이고 그 규칙도 돌지 않음 |
+| `--speech-levels MODE` | 대사 줄의 말투 수준. `keep`(기본): 번역의 말투를 그대로 둠(그 단계가 돌지 않음). `auto`: 「」로 시작하는 대사 줄을 번역한 뒤 [대사의 말투 수준](../spec/register.md) 규칙으로 다시 씀. 대소문자는 가리지 않음. 설정 파일의 `speech_levels`, 환경 변수 `HDTRANS_SPEECH_LEVELS`보다 앞섬 |
 | `--speech-report FILE` | `auto`가 바꾼 줄을 TSV로 씀: 입력의 줄 번호(1부터, `--context` 줄은 세지 않음), 규칙(REG), 단서, 원문, 바꾸기 전, 바꾼 뒤. `keep`이나 `--reference`이면 빈 파일을 쓰고 stderr에 그 까닭을 적음 |
 | `--stages DIR` | 단계 기록을 DIR에 씀 ([testing.md](testing.md#한-입력-살펴보기-단계-기록--stages)) |
 | `--rule-counts FILE` | 선택 규칙과 구문 표의 행마다 실행 횟수와 참이 된 횟수를 FILE에 TSV로 씀: `kind`(L, G, cx), `index`(전역 규칙은 PRIO, 구문 표는 행 id), `pumsa`, `number`, `ugan`, `runs`, `fires` ([rule-language.md](rule-language.md#사용-횟수)) |
@@ -151,7 +151,7 @@ CLI 플래그가 파일보다 우선합니다.
 | `misread` | bool, 기본 `false`. `true`는 `--misread` |
 | `reference` | bool, 기본 `false`. `true`는 `--reference` |
 | `speech` | `strict`(기본) 또는 `soft`, `--speech`와 같음 |
-| `speech_levels` | `auto`(기본) 또는 `keep`, `--speech-levels`와 같음. 환경 변수 `HDTRANS_SPEECH_LEVELS`가 있으면 그 값(잘못된 값은 환경 변수 오류로 알리고 파일 값을 씀) |
+| `speech_levels` | `keep`(기본) 또는 `auto`, `--speech-levels`와 같음. 환경 변수 `HDTRANS_SPEECH_LEVELS`가 있으면 그 값(잘못된 값은 환경 변수 오류로 알리고 파일 값을 씀) |
 | `wrapped` | bool, 기본 `false`. 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. `true`는 `--wrapped` |
 | `strict_dict` | bool. [잘못된 줄 처리](dictionary-files.md#잘못된-줄-처리) |
 
@@ -186,7 +186,7 @@ UTF-8 BOM으로 저장합니다. 줄바꿈은 원문의 첫 줄바꿈(CRLF, LF �
 - 문자열은 모두 UTF-8입니다.
 - 프로세스에 엔진 하나, 세션 하나입니다. 호출마다 따로 번역하므로 앞에서 번역한 텍스트가 다음 결과를 바꾸지 않습니다.
   한 호출에 여러 줄(`\n`)을 넣으면 그 안에서만 앞뒤 줄을 참고합니다.
-- 말투는 설정 파일의 `speech`(`strict` 기본, `soft`)와 `speech_levels`(`auto` 기본, `keep`)로 정하며 `hdTrans_Reload`에서 다시 읽습니다. 호출마다 바꾸는 함수는 없습니다.
+- 말투는 설정 파일의 `speech`(`strict` 기본, `soft`)와 `speech_levels`(`keep` 기본, `auto`)로 정하며 `hdTrans_Reload`에서 다시 읽습니다. 호출마다 바꾸는 함수는 없습니다.
 - 잘린 입력은 설정 파일의 `wrapped`로 알리며 `hdTrans_Reload`에서 다시 읽습니다. `wrapped: true`: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨.
 - 앞 호출의 줄을 참고하려면 `hdTrans_TranslateContext`에 그 줄을 함께 넘깁니다.
 - 작품의 이름은 `hdTrans_SetNames`로 줍니다. 목록은 각 호출의 문서에 쓰이고 사전은 바꾸지 않습니다.
@@ -328,7 +328,7 @@ std::string ko = session.Translate("今日はいい天気ですね。");
 | `Translate(text, context)` | `context`(`\n`으로 나눈 줄)를 `text` 앞에 오는 같은 문서로 읽고 `text`의 줄만 돌려줌. 문맥 줄은 단서와, `SetWrapped(true)`이면 `text`가 이어 가는 문장의 앞부분으로만 씀. 빈 `context`는 `Translate(text)`와 같음 |
 | `Reset()` | 엔진의 지금 사전을 가져옴. 번역 결과는 바꾸지 않음 |
 | `SetSpeech(Speech)` | 다음 번역부터 대사의 말투(`Strict`(기본), `Soft`, `--speech`와 같음). 기준 모드에서는 효과 없음 |
-| `SetSpeechLevels(SpeechLevels)` | 다음 번역부터 대사 줄의 말투 수준(`Auto`(기본), `Keep`, `--speech-levels`와 같음). 기준 모드에서는 `Keep` |
+| `SetSpeechLevels(SpeechLevels)` | 다음 번역부터 대사 줄의 말투 수준(`Keep`(기본), `Auto`, `--speech-levels`와 같음). 기준 모드에서는 `Keep` |
 | `SetWrapped(bool)` | 다음 번역부터: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 기본 `false`, `--wrapped`와 같음. 빈 줄은 늘 문장 경계 |
 | `SetNames(text)` | 다음 번역부터 호출마다 그 문서에 쓸 이름 목록([dictionary-files.md](dictionary-files.md#문서-이름-목록) 형식, `--names`와 같음). 빈 `text`는 목록을 뗌. 잘못된 줄이나 컴파일되지 않는 이름이 있으면 `false`, 나머지 줄은 씀. 목록은 여기서, 그리고 세션이 새 사전을 받을 때 한 번 컴파일됨 |
 

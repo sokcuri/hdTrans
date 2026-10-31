@@ -28,7 +28,8 @@
 # fails every row whose kind is current (tests/rules/critical/ takes fix and keep only).
 # --documents translates each input as a document of its own, its lines written \n in the input and
 # in the expected output (tests/rules/wrapped/); its rows check the whole output only. The words
-# after -- are passed to the CLI (--speech strict).
+# after -- are passed to the CLI (--speech strict). The cases run with --speech-levels auto unless
+# those words say keep.
 # Exit: 0 all rows pass, 1 a row fails, 2 invalid arguments or failed CLI.
 set -eu
 LC_ALL=C; export LC_ALL
@@ -79,11 +80,11 @@ if [ -n "$documents" ]; then
     : > "$tmp/why.txt"
     while IFS= read -r row; do
         printf '%s\n' "$row" | awk '{ gsub(/\\n/, "\n"); printf "%s", $0 }' > "$tmp/doc.txt"
-        "$cli" -dicts "$dicts" "$@" -in "$tmp/doc.txt" > "$tmp/doc.out" || { echo "CLI failed" >&2; exit 2; }
+        "$cli" -dicts "$dicts" -speech-levels auto "$@" -in "$tmp/doc.txt" > "$tmp/doc.out" || { echo "CLI failed" >&2; exit 2; }
         awk 'NR > 1 { printf "\\n" } { printf "%s", $0 } END { print "" }' "$tmp/doc.out" >> "$tmp/out.txt"
     done < "$tmp/in.txt"
 else
-    "$cli" -dicts "$dicts" -each -why "$@" -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
+    "$cli" -dicts "$dicts" -each -why -speech-levels auto "$@" -in "$tmp/in.txt" > "$tmp/out.txt" 2> "$tmp/why.txt" ||
         { echo "CLI failed" >&2; exit 2; }
 fi
 # The dictionary row id names the rule a row carries; a case may use either.

@@ -189,7 +189,7 @@ public:
     // writes Speech::Strict.
     void SetSpeech(Speech speech) { speech_ = speech; }
 
-    // The speech levels of the dialogue lines of later translations; SpeechLevels::Auto until set.
+    // The speech levels of the dialogue lines of later translations; SpeechLevels::Keep until set.
     // Reference mode keeps the translation's levels.
     void SetSpeechLevels(SpeechLevels levels) { speechLevels_ = levels; }
 
@@ -217,7 +217,7 @@ private:
     const bool cg_;
     const bool misread_;
     Speech speech_ = Speech::Strict;
-    SpeechLevels speechLevels_ = SpeechLevels::Auto;
+    SpeechLevels speechLevels_ = SpeechLevels::Keep;
     bool wrapped_ = false;
     std::shared_ptr<const names::List> nameList_;
     // nameList_ compiled for namesSnapshot_; rebuilt when snapshot_ is another.

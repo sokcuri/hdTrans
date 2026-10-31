@@ -1,6 +1,6 @@
 #!/bin/sh
-# Translates each examples/<case>.ja.txt as one document into build/examples/<case>.ko.txt and
-# diffs it against examples/<case>.ko.txt.
+# Translates each examples/<case>.ja.txt as one document (--speech-levels auto) into
+# build/examples/<case>.ko.txt and diffs it against examples/<case>.ko.txt.
 #   tools/examples.sh CLI DICTS [--accept]
 # The first line of each input is a `#` description of the case; it is not translated and is
 # copied as the first line of the output. --accept copies the outputs over examples/*.ko.txt.
@@ -21,7 +21,7 @@ for ja in "$src"/*.ja.txt; do
     body=$out/$name.body.ja.txt
     head -n 1 "$ja" | grep -q '^#' || { echo "$name: first line is not a # description" >&2; exit 2; }
     tail -n +2 "$ja" > "$body"
-    { head -n 1 "$ja"; "$cli" -dicts "$dicts" -in "$body"; } > "$ko" ||
+    { head -n 1 "$ja"; "$cli" -dicts "$dicts" -speech-levels auto -in "$body"; } > "$ko" ||
         { echo "$name: CLI failed" >&2; exit 1; }
     rm "$body"
     if [ "$accept" = --accept ]; then

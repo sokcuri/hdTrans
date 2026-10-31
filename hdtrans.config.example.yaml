@@ -10,5 +10,5 @@ cg: true
 misread: false
 reference: false
 speech: strict  # 번역의 -다를 그대로. soft: 「」 안 대사의 딱딱한 -다를 해체로 부드럽게
-speech_levels: auto  # 대사 줄의 말투 수준을 규칙으로 다시 씀. keep: 번역의 말투 그대로
+speech_levels: keep  # 번역의 말투 그대로. auto: 대사 줄의 말투 수준을 규칙으로 다시 씀
 wrapped: false  # true: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨.

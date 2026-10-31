@@ -22,7 +22,7 @@ struct Config {
     bool misread = false;
     bool reference = false;
     Speech speech = Speech::Strict;
-    SpeechLevels speechLevels = SpeechLevels::Auto;
+    SpeechLevels speechLevels = SpeechLevels::Keep;
     bool wrapped = false;
 };
 

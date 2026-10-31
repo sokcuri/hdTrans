@@ -47,8 +47,8 @@ export interface TranslationResult {
  *  without 「」 that read as speech. */
 export type Speech = 'soft' | 'strict';
 
-/** The speech levels of dialogue lines: 'auto' (the default) writes a line that 「」 opens again at the
- *  level its cues give after the translation; 'keep' keeps the translation's own levels. */
+/** The speech levels of dialogue lines: 'keep' (the default) keeps the translation's own levels; 'auto'
+ *  writes a line that 「」 opens again at the level its cues give after the translation. */
 export type SpeechLevels = 'auto' | 'keep';
 
 /** Options of one translate() call; speech and wrapped apply to this call only. */
@@ -125,7 +125,7 @@ export class HdTrans {
   private dictionaryVersion_ = '';
   private userDictRaw_ = '';
   private speech_: Speech = 'strict';
-  private speechLevels_: SpeechLevels = 'auto';
+  private speechLevels_: SpeechLevels = 'keep';
   private wrapped_ = false;
 
   private constructor(binding: Binding, version: string) {
@@ -217,7 +217,7 @@ export class HdTrans {
     this.speech_ = speech;
   }
 
-  /** The speech levels of the dialogue lines of later translations; 'auto' until set. */
+  /** The speech levels of the dialogue lines of later translations; 'keep' until set. */
   setSpeechLevels(levels: SpeechLevels): void {
     const binding = this.binding();
     if (!binding.setSpeechLevels(levels)) throw new Error(binding.error);

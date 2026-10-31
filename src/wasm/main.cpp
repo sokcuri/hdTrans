@@ -225,7 +225,7 @@ private:
     std::unique_ptr<hdTrans::Engine> engine_;
     std::unique_ptr<hdTrans::Session> session_;
     hdTrans::Speech speech_ = hdTrans::Speech::Strict;
-    hdTrans::SpeechLevels speechLevels_ = hdTrans::SpeechLevels::Auto;
+    hdTrans::SpeechLevels speechLevels_ = hdTrans::SpeechLevels::Keep;
     bool wrapped_ = false;
     std::string error_;
     std::string dictionaryVersion_;

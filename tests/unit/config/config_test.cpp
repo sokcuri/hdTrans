@@ -153,7 +153,7 @@ struct ScopedEnv {
 HD_TEST(ConfigSpeechLevels) {
     TempConfig file;
     const ScopedEnv cleared("HDTRANS_SPEECH_LEVELS", std::nullopt);
-    HD_CHECK(file.Load("").settings.speechLevels == hdTrans::SpeechLevels::Auto);
+    HD_CHECK(file.Load("").settings.speechLevels == hdTrans::SpeechLevels::Keep);
     HD_CHECK(file.Load("speech_levels: keep\n").settings.speechLevels == hdTrans::SpeechLevels::Keep);
     HD_CHECK(file.Load("speech_levels: Auto\n").settings.speechLevels == hdTrans::SpeechLevels::Auto);
     const auto bad = file.Load("speech_levels: off\n");
