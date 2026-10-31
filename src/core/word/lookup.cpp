@@ -205,8 +205,7 @@ std::size_t Worker::CopyUnit(std::string_view text) const {
     return tokens.CopyUnitAt(static_cast<std::size_t>(current), static_cast<std::size_t>(text.data() - own.data()));
 }
 
-Lookup Worker::DoLookup(std::string_view query, int mode) {
-    if (fault) return {};
+dict::Candidates Worker::WordInfo(std::string_view query, int mode) const {
     dict::LookupContext ctx = lookupContext;
     SkipContext sc{this, query};
     ctx.skip.fn = [](const void* c, const dict::UserEntry& e) {
@@ -215,7 +214,12 @@ Lookup Worker::DoLookup(std::string_view query, int mode) {
     };
     ctx.skip.context = &sc;
     if (current + 1 < TokenCount()) ctx.after = Tok(current + 1).text;
-    dict::Candidates found = snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
+    return snapshot.GetWordInfo(query, static_cast<dict::LookupMode>(mode), ctx);
+}
+
+Lookup Worker::DoLookup(std::string_view query, int mode) {
+    if (fault) return {};
+    dict::Candidates found = WordInfo(query, mode);
     if (!found.names.empty()) {
         if (arena.namesUsed == arena.names.size()) arena.names.emplace_back();
         arena.names[arena.namesUsed++].swap(found.names);

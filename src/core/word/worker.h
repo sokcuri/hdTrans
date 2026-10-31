@@ -104,6 +104,9 @@ public:
 
     // Dictionary lookup with the plain-entry filters of the word stage.
     Lookup DoLookup(std::string_view query, int mode);
+    // The dictionary candidates of query as DoLookup finds them, before its constraints, given
+    // names and drops; no observer call.
+    dict::Candidates WordInfo(std::string_view query, int mode) const;
     // The bytes of the copy written apart from the one next to it (tokenizer::CopySpace) that starts
     // text, a view into the current token; 0 for none.
     std::size_t CopyUnit(std::string_view text) const;
