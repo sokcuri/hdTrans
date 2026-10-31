@@ -54,7 +54,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 味わう	あじわう	v5	2	음미하다				u	b	rule:1455 +unmapped
 味わう	あじわう	v5	3	맛으로	next=で			u	b	
 与り知る	あずかりしる	v5	1	관련이 있다				u	b	
-預ける	あずける	v1	1	맡기다				u	b	
 焦る	あせる	v5	1	초조해하다				u	wl	
 焦る	あせる	v5	2	서두르다				u	b	
 焦る	あせる	v5	3	재촉하다				u	b	
@@ -67,9 +66,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 あたける	あたける	v1	1	날뛰다				u	b	
 温まる	あたたまる	v5	1	따뜻해 지다				u	b	
 温まる	あたたまる	v5	2	따뜻해지다				u	b	
-温める	あたためる	v1	1	데우다				u	wl	
-温める	あたためる	v1	2	따뜻하게 하다				u	b	
-温める	あたためる	v1	3	녹이다				u	b	rule:760 +unmapped
 当たり散らす	あたりちらす	v5	1	화를 내다				u	w	
 当たり散らす	あたりちらす	v5	2	마구 화풀이하다				u	b	
 扱う	あつかう	v5	1	다루다				u	b	
@@ -602,13 +598,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 打っちゃる	うっちゃる	v5	1	내던지다				u	b	
 打っちゃる	うっちゃる	v5	2	던져버리다				u	b	
 打っちゃらかす	うっちゃらかす	v5	1	팽개치다				u	b	
-移る	うつる	v5	1	옮기다				u	b	
-移る	うつる	v5	2	찍히다				u	b	
-移る	うつる	v5	3	지나다				u	b	
-移る	うつる	v5	4	바래다				u	b	
-移る	うつる	v5	5	바뀌다				u	b	rule:2418 +unmapped
-写す	うつす	v5	1	찍다				u	b	
-写す	うつす	v5	2	베끼다				u	b	
 移し替える	うつしかえる	v1	1	바꾸다				u	w	
 映し出す	うつしだす	v5	1	비추다				u	w	
 映し出す	うつしだす	v5	2	부각시키다				u	w	
@@ -1154,7 +1143,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 嗅ぎ当てる	かぎあてる	v1	1	알아내다				u	b	
 匿う	かくまう	v5	1	숨겨 주다				u	wl	
 匿う	かくまう	v5	2	숨겨두다				u	b	
-隠れる	かくれる	v1	1	숨다				u	w	
 掛け合う	かけあう	v5	1	흥정하다				u	b	
 掛け合う	かけあう	v5	2	서로 붓다				u	b	
 掛け合わす	かけあわす	v5	1	합하다				u	b	
@@ -1180,8 +1168,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 翳す	かざす	v5	2	치켜들다				u	wl	
 翳す	かざす	v5	3	가리다				u	wl	
 翳す	かざす	v5	4	비추다				u	b	
-飾る	かざる	v5	1	장식하다				u	b	
-飾る	かざる	v5	2	진열하다				u	b	rule:1234 +unmapped
 炊ぐ	かしぐ	v5	1	기울다				u	b	
 齧る	かじる	v5	1	베다				u	w	
 齧る	かじる	v5	2	조금 배우다				u	wl	
@@ -1276,8 +1262,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 枯れる	かれる	v1	4	원숙해지다				u	b	
 躱す	かわす	v5	1	피하다				u	wl	
 躱す	かわす	v5	2	주고 받다				u	b	
-乾く	かわく	v5	1	목마르다				u	wl	
-乾く	かわく	v5	2	마르다				u	b	
 甲走る	かんばしる	v5	1	울리다				u	b	
 がさつく	がさつく	v5	1	덜렁대다				u	b	
 がたつく	がたつく	v5	1	덜컹거리다				u	b	
@@ -1618,12 +1602,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 転がり込む	ころがりこむ	v5	1	굴러 들어오다				u	b	
 転がり込む	ころがりこむ	v5	2	굴러 들어가다				u	b	
 転げる	ころげる	v1	1	구르다				u	b	
-壊す	こわす	v5	1	깨뜨리다				u	b	
-壊す	こわす	v5	2	망가뜨리다				u	b	
-壊す	こわす	v5	3	바꾸다				u	b	
-壊す	こわす	v5	4	부수다				u	b	
-壊す	こわす	v5	5	파괴하다				u	b	
-壊す	こわす	v5	6	일으키다	arg=腹			u	x	senses
 強張る	こわばる	v5	1	굳어지다				u	x	
 強張る	こわばる	v5	2	뻣뻣해지다				u	b	
 こんがらかる	こんがらかる	v5	1	얽히다				u	x	
@@ -1720,8 +1698,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 囁く	ささやく	v5	1	속삭이다				u	b	
 囁き合う	ささやきあう	v5	1	서로 속삭이다				u	b	
 さざめく	さざめく	v5	1	떠들다				u	b	
-差し上げる	さしあげる	v1	1	드리다				u	w	
-差し上げる	さしあげる	v1	2	바치다				u	w	
 差し当たる	さしあたる	v5	1	당면하다				u	w	
 差し当たる	さしあたる	v5	2	직면하다				u	w	
 差し入る	さしいる	v5	1	들이비치다				u	b	
@@ -1910,8 +1886,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 仕入れる	しいれる	v1	1	사들이다				u	b	
 仕入れる	しいれる	v1	2	매입하다				u	b	
 仕入れる	しいれる	v1	3	입수하다	arg=情報|噂|ねた|知識			u	x	senses
-冷える	ひえる	v1	1	할 수 있다				u	b	
-冷える	ひえる	v1	2	차가워지다				u	b	
 萎れる	しおれる	v1	1	풀이 죽다				u	w	
 萎れる	しおれる	v1	2	시들다				u	w	
 仕掛かる	しかかる	v5	1	시작하다				u	b	
@@ -2142,8 +2116,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 撓る	しわる	v5	1	휘어지다				u	b	
 仕分ける	しわける	v1	1	구분하다				u	b	
 皺める	しわめる	v1	1	찌푸리다				u	b	
-信ずる	しんずる	v1	1	믿다				u	b	
-信ずる	しんずる	v1	2	드리다				u	b	
 為違える	しちがえる	v1	1	잘못하다				u	b	
 辞する	じする	vs	1	떠나다				u	b	
 辞する	じする	vs	2	유지하다				u	b	
@@ -2267,8 +2239,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 拗ねる	すねる	v1	1	등지다				u	b	
 拗ねる	すねる	v1	2	비뚤어지다				u	b	
 拗ねる	すねる	v1	3	토라지다				u	b	
-滑る	すべる	v5	1	미끄러 지다				u	b	
-滑る	すべる	v5	2	미끄러지다				u	b	
 統べ括る	すべくくる	v5	1	통솔하다				u	b	
 統べ括る	すべくくる	v5	2	단속하다				u	b	
 滑らす	すべらす	v5	1	헛디디다				u	b	
@@ -2562,8 +2532,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 蔵する	ぞうする	vs	2	소장하다				u	b	
 属する	ぞくする	v5	1	속하다				u	b	
 ぞめく	ぞめく	v5	1	떠들다				u	b	
-存ずる	ぞんずる	v1	1	알다				u	wl	
-存ずる	ぞんずる	v1	2	생각하다				u	b	
 存じ上げる	ぞんじあげる	v1	1	알다				u	b	
 足す	たす	v5	1	채우다				u	b	
 足す	たす	v5	2	더하다				u	b	
@@ -2621,8 +2589,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 猛る	たける	v5	4	지어지다				u	b	
 哮り立つ	たけりたつ	v5	1	흥분하여 고함지르다				u	b	
 哮り立つ	たけりたつ	v5	2	몹시 흥분하다				u	b	
-確かめる	たしかめる	v1	1	확인하다				u	b	
-確かめる	たしかめる	v1	2	확실시 하다				u	b	
 確かめ合う	たしかめあう	v5	1	서로 확인하다				u	b	
 嗜む	たしなむ	v5	1	즐기다				u	b	
 窘める	たしなめる	v1	1	나무라다				u	b	
@@ -2633,9 +2599,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 携える	たずさえる	v1	3	데리고 가다				u	b	
 携える	たずさえる	v1	4	잡다				u	b	
 携わる	たずさわる	v5	1	종사하다				u	b	
-尋ねる	たずねる	v1	1	묻다				u	w	
-尋ねる	たずねる	v1	2	찾다				u	b	
-尋ねる	たずねる	v1	3	방문하다				u	b	rule:583 +unmapped
 尋ね当てる	たずねあてる	v1	1	찾아내다				u	b	
 尋ね合わせる	たずねあわせる	v1	1	문의하다				u	b	
 畳む	たたむ	v5	1	접다				u	wl	
@@ -3160,10 +3123,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 突っ撥ねる	つっぱねる	v1	1	딱 잘라 거절하다				u	b	
 突っ撥ねる	つっぱねる	v1	2	퇴짜놓다				u	b	
 突っ伏す	つっぷす	v5	1	푹 엎드리다				u	b	
-包む	つつむ	v5	1	감싸다				u	wl	
-包む	つつむ	v5	2	싸다				u	b	
-包む	つつむ	v5	3	싸서 주다				u	b	
-包む	つつむ	v5	4	감추다				u	b	
 突く	つつく	v5	1	쿡쿡 찌르다				u	b	
 突く	つつく	v5	2	쪼아 먹다				u	b	
 突く	つつく	v5	3	들쑤시어 먹다				u	b	
@@ -3816,11 +3775,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 萎える	なえる	v1	1	쇠약해지다				u	b	
 萎える	なえる	v1	2	시들다				u	b	
 萎える	なえる	v1	3	후줄근해지다				u	b	
-直る	なおる	v5	1	낫다				u	b	
-直る	なおる	v5	2	회복되다				u	b	
-直る	なおる	v5	3	완쾌되다				u	b	
-直る	なおる	v5	4	가라앉다				u	b	
-直る	なおる	v5	5	고쳐지다				u	b	rule:1548 +unmapped
 泣かす	なかす	v5	1	울리다				u	b	
 長引く	ながびく	v5	1	길어지다				u	b	
 長引く	ながびく	v5	2	지연되다				u	b	
@@ -3859,9 +3813,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 薙ぎ伏せる	なぎふせる	v1	1	베어서 쓰러뜨리다				u	b	
 薙ぎ払う	なぎはらう	v5	1	베어 넘기다				u	w	
 薙ぎ払う	なぎはらう	v5	2	쓰러뜨리다				u	w	
-無くす	なくす	v5	1	없애다				u	b	
-無くす	なくす	v5	2	잃다				u	b	
-無くす	なくす	v5	3	잃어버리다	next=しま			u	b	rule:2591 +unmapped assigns-neighbour
 慰める	なぐさめる	v1	1	위로하다				u	b	
 殴り掛かる	なぐりかかる	v5	1	때리려 하다				u	b	
 殴り返す	なぐりかえす	v5	1	되받아 치다				u	b	
@@ -3944,7 +3895,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 塗り付ける	ぬりつける	v1	1	바르다				u	b	
 塗り付ける	ぬりつける	v1	2	덮어 씌우다				u	b	
 塗り付ける	ぬりつける	v1	3	처바르다				u	b	
-濡れる	ぬれる	v1	1	젖다				u	b	
 労う	ねぎらう	v5	1	위로하다				u	b	
 寝込む	ねこむ	v5	1	잠들다				u	b	
 寝込む	ねこむ	v5	2	드러눕다				u	b	
@@ -3994,11 +3944,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 飲み込む	のみこむ	v5	5	받아들이다	arg=状況|事態|事情|現状|話|説明			u	x	senses
 のめり込む	のめりこむ	v5	1	빠지다				u	b	
 のめり込む	のめりこむ	v5	2	빠져들다				u	b	
-乗り換える	のりかえる	v1	1	갈아 타다				u	b	
-乗り換える	のりかえる	v1	2	바꾸어 사다				u	b	
-乗り換える	のりかえる	v1	3	갈아타다				u	b	
-乗り換える	のりかえる	v1	4	바꿔 타다				u	b	
-乗り換える	のりかえる	v1	5	바꾸다				u	b	rule:536 +unmapped
 乗り越える	のりこえる	v1	1	극복하다				u	wl	
 乗り越える	のりこえる	v1	2	넘어서다				u	b	
 乗り越える	のりこえる	v1	3	넘다				u	b	
@@ -4125,7 +4070,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぱくる	ぱくる	v5	2	검거하다				u	b	
 ぱくる	ぱくる	v5	3	사취하다				u	b	
 ぱらつく	ぱらつく	v5	1	뿌리다				u	w	
-光る	ひかる	v5	1	빛나다				u	b	
 控える	ひかえる	v1	1	삼가다				u	wl	
 控える	ひかえる	v1	2	삼가하다				u	b	
 控える	ひかえる	v1	3	대기시키다				u	b	
@@ -4198,13 +4142,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 翻る	ひるがえる	v5	1	뒤집히다				u	b	
 翻る	ひるがえる	v5	2	바뀌다				u	b	
 翻す	ひるがえす	v5	1	바꾸다				u	b	
-拾う	ひろう	v5	1	줍다				u	wl	
-拾う	ひろう	v5	2	잡아타다				u	b	
-拾う	ひろう	v5	3	태우다				u	b	
-拾う	ひろう	v5	4	잡다				u	b	rule:1165 +unmapped
-広げる	ひろげる	v1	1	펼치다				u	wl	
-広げる	ひろげる	v1	2	넓히다				u	b	
-広げる	ひろげる	v1	3	벌리다				u	b	
 広まる	ひろまる	v5	1	넓어지다				u	b	
 広まる	ひろまる	v5	2	퍼지다				u	b	
 ひん曲げる	ひんまげる	v1	1	꽉 꾸부리다				u	b	
@@ -4257,7 +4194,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 踏まえる	ふまえる	v1	3	밟다				u	b	
 踏まえる	ふまえる	v1	4	발판으로 하다				u	b	
 踏まえる	ふまえる	v1	5	감안하다	after=も			u	b	rule:4263 +unmapped
-増やす	ふやす	v5	1	늘리다				u	b	
 ふやける	ふやける	v1	1	붇다				u	b	
 降らす	ふらす	v5	1	흔들리게 하다				u	b	
 降らす	ふらす	v5	2	내리게 하다				u	b	
@@ -4389,8 +4325,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 勝る	まさる	v5	3	좋게 생각되다				u	b	
 交じる	まじる	v5	1	섞이다				u	b	
 交える	まじえる	v1	1	섞다				u	b	
-交ぜる	まぜる	v1	1	섞다				u	wl	
-交ぜる	まぜる	v1	2	혼합하다				u	b	
 跨ぐ	またぐ	v5	1	넘다				u	b	
 跨がる	またがる	v5	1	걸치다				u	b	
 跨がる	またがる	v5	2	올라타다				u	b	
@@ -4474,9 +4408,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 儲ける	もうける	v1	2	돈을 벌다				u	b	
 儲ける	もうける	v1	3	마련하다				u	b	rule:2286 +unmapped
 儲ける	もうける	v1	4	받다				u	b	rule:3694 +unmapped
-燃える	もえる	v1	1	타다				u	b	
-燃える	もえる	v1	2	불타다				u	b	
-燃える	もえる	v1	3	피어오르다				u	b	rule:1258 +unmapped
 もがく	もがく	v5	1	발버둥 치다				u	wl	
 もぎる	もぎる	v5	1	비틀어 떼다				u	b	
 もぎ取る	もぎとる	v5	1	빼앗다				u	b	
@@ -4533,13 +4464,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 漏れる	もれる	v1	1	빠지다				u	b	
 漏れる	もれる	v1	2	새다				u	b	
 漏れる	もれる	v1	3	비추다				u	b	
-止む	やむ	v5	1	그치다				u	b	
 焼き払う	やきはらう	v5	1	다 태우다				u	b	
-焼ける	やける	v1	1	타다				u	wl	
-焼ける	やける	v1	2	달아오르다				u	w	
-焼ける	やける	v1	3	질투나다				u	b	
-焼ける	やける	v1	4	구워지다				u	b	
-焼ける	やける	v1	5	뜨거워지다				u	b	
 弥次る	やじる	v5	1	야유하다				u	wl	
 安らぐ	やすらぐ	v5	1	평온해지다				u	b	
 安らぐ	やすらぐ	v5	2	편안해지다				u	b	
@@ -4600,7 +4525,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 緩む	ゆるむ	v5	4	풀리다	arg=頬			u	x	senses
 緩める	ゆるめる	v1	1	완화하다				u	b	
 緩める	ゆるめる	v1	2	느슨하게하다				u	b	
-揺れる	ゆれる	v1	1	흔들리다				u	b	
 揺る	ゆる	v5	1	왼손	next=で			u	b	
 止す	よす	v5	1	그만두다				u	b	
 止す	よす	v5	2	중지하다				u	b	
@@ -4613,9 +4537,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 寄越す	よこす	v5	2	건네주다				u	wl	
 寄越す	よこす	v5	3	오다				u	wl	
 寄越す	よこす	v5	4	넘기다				u	b	
-汚す	よごす	v5	1	보내다				u	b	
-汚す	よごす	v5	2	더럽히다				u	b	
-汚れる	よごれる	v1	1	더러워지다				u	b	
 捩る	よじる	v5	1	비틀다				u	b	
 捩る	よじる	v5	2	비비 꼬다				u	b	
 捩る	よじる	v1	1	뒤틀리다				u	b	
@@ -4651,8 +4572,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 弱める	よわめる	v1	2	약한	next=の			u	b	
 力む	りきむ	v5	1	배에 힘주다				u	b	
 力む	りきむ	v5	2	힘주다				u	b	
-沸かす	わかす	v5	1	끓이다				u	b	
-沸かす	わかす	v5	2	데우다	arg=風呂			u	x	senses
 分かり合う	わかりあう	v1	1	서로 이해할 수 있다				u	b	rule:1696 +unmapped assigns-neighbour
 分かれる	わかれる	v1	1	헤어지다				u	b	
 分かれる	わかれる	v1	2	나뉘다				u	b	
@@ -4671,8 +4590,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 脇挟む	わきばさむ	v5	1	겨드랑이에 끼다				u	b	
 沸き立つ	わきたつ	v5	1	끓어오르다				u	b	
 沸き立つ	わきたつ	v5	2	들끓다				u	b	
-分ける	わける	v1	1	나누다				u	b	
-分ける	わける	v1	2	비기다				u	b	rule:4653 +unmapped
 患う	わずらう	v5	1	고민하다				u	b	
 患う	わずらう	v5	2	병을 앓다				u	b	
 患う	わずらう	v5	3	앓다				u	b	rule:4710 +unmapped
@@ -4680,14 +4597,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 蟠る	わだかまる	v5	1	엉클어지다				u	b	
 詫びる	わびる	v1	1	사죄하다				u	b	
 詫びる	わびる	v1	2	사과하다				u	b	
-割れる	われる	v1	1	깨지다				u	wl	
-割れる	われる	v1	2	다치다				u	b	
-割れる	われる	v1	3	갈라지다				u	b	rule:384 +unmapped assigns-neighbour
-割れる	われる	v1	4	분열되다				u	b	rule:1220 +unmapped
-割れる	われる	v1	5	판명되다				u	b	rule:5039 +unmapped
-割れる	われる	v1	6	붕괴하다	after=円			u	b	rule:3997 +unmapped
-割れる	われる	v1	7	붕괴하다	after=ドル			u	b	rule:3997 +unmapped
-割れる	われる	v1	8	붕괴하다	after=R台			u	b	rule:3997 +unmapped
 ダブる	だぶる	v5	1	겹치다				u	b	
 テロる	てろる	v5	1	테러행위를 하다				u	b	
 デモる	でもる	v5	1	데모하다				u	b	
@@ -4871,8 +4780,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 冷める	さめる	v1	1	식다				u	b	
 冷める	さめる	v1	2	바래지다				u	b	
 冷める	さめる	v1	3	바래다				u	b	
-冷やす	ひやす	v5	1	차게 하다				u	b	
-冷やす	ひやす	v5	2	냉각시키다				u	b	
 凄む	すごむ	v5	1	위협하다				u	b	
 凍る	こおる	v5	1	얼다				u	b	rule:668 +unmapped assigns-neighbour
 凍る	こおる	v5	2	오싹해지다	arg=背筋			u	x	senses
@@ -5010,11 +4917,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 沿う	そう	v5	1	더해지다				u	b	
 沿う	そう	v5	2	따르다				u	b	
 沿う	そう	v5	3	곁에 따르다				u	b	
-割る	わる	v5	1	나누다				u	b	rule:409 +unmapped assigns-neighbour
-割る	わる	v5	2	밑돌다				u	b	rule:410 +unmapped
-割る	わる	v5	3	끼어들다				u	b	rule:1154 +unmapped
-割る	わる	v5	4	깨다				u	b	rule:1185 +unmapped
-割る	わる	v5	5	하락하다				u	b	rule:3996 +unmapped assigns-neighbour
 裂く	さく	v5	1	할애하다				u	b	
 裂く	さく	v5	2	찢다				u	b	
 割り当てる	わりあてる	v1	1	할당하다				u	b	
@@ -5108,7 +5010,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 喚く	わめく	v5	2	아우성치다				u	b	
 召し上げる	めしあげる	v1	1	몰수하다				u	b	
 召し上げる	めしあげる	v1	2	소집하다				u	b	
-叱る	しかる	v5	1	꾸짖다				u	b	
 叱する	しっする	vs	1	꾸짖다				u	b	
 吊り下げる	つりさげる	v1	1	매달다				u	w	
 同ずる	どうずる	v1	1	동의하다				u	b	
@@ -5532,7 +5433,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 引っ掻く	ひっかく	v5	1	긁다				u	w	
 引っ掻く	ひっかく	v5	2	세게 긁다				u	b	
 引き被る	ひきかぶる	v5	1	뒤집어 쓰다				u	b	
-引っ越す	ひっこす	v5	1	이사하다				u	b	rule:779 +unmapped assigns-neighbour
 弱る	よわる	v5	1	약해지다				u	b	
 弱まる	よわまる	v5	1	약해지다				u	b	
 張り上げる	はりあげる	v1	1	지르다				u	b	
@@ -5727,21 +5627,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 投ずる	とうずる	v1	2	투여하다				u	b	
 投ずる	とうずる	v1	3	투자하다				u	b	rule:1516 +unmapped
 抗する	こうする	vs	1	저항하다				u	b	
-折る	おる	v5	1	꺾다				u	b	
-折る	おる	v5	2	부러뜨리다				u	b	
-折る	おる	v5	3	접다				u	b	rule:3813 +unmapped
 折り込む	おりこむ	v5	1	끼워 넣다				u	b	
 折り込む	おりこむ	v5	2	끼워넣다				u	b	
 折り取る	おりとる	v5	1	꺾다				u	b	
 折り曲がる	おりまがる	v5	1	꺾여 구부러지다				u	b	
 折り畳む	おりたたむ	v5	1	작게 접다				u	b	
-折れる	おれる	v1	1	부러지다				u	wl	
-折れる	おれる	v1	2	접히다				u	b	
-折れる	おれる	v1	3	꺾어지다				u	b	
-折れる	おれる	v1	4	꺾이다	arg=心			u	x	senses
-折れる	おれる	v1	5	양보하다	arg=父|母|親|相手|先方|向こう			u	x	senses
-折れる	おれる	v1	6	양보하다	next=形			u	x	senses
-折れる	おれる	v1	7	꺾이다	arg=心|気|意志|プライド			u	x	senses
 折れ曲がる	おれまがる	v5	1	구부러지다				u	b	
 抜かす	ぬかす	v5	1	빠뜨리다				u	b	
 抜き出す	ぬきだす	v5	1	발췌하다				u	w	
@@ -5968,7 +5858,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 散り交う	ちりかう	v5	1	어지러이 떨어지다				u	b	
 敬する	けいする	vs	1	공경하다				u	b	
 敬う	うやまう	v5	1	존경하다				u	b	
-数える	かぞえる	v1	1	세다				u	b	
 数え上げる	かぞえあげる	v1	1	열거하다				u	b	
 数え立てる	かぞえたてる	v1	1	열거하다				u	b	
 敵う	かなう	v5	1	당해 내다				u	b	
@@ -6079,9 +5968,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 案ずる	あんずる	v1	1	염려하다				u	b	
 梱る	こる	v5	1	짐을 꾸리다				u	b	
 梳る	けずる	v5	1	빗다				u	b	
-植える	うえる	v1	1	심다				u	b	
-植える	うえる	v1	2	이식하다				u	b	
-植える	うえる	v1	3	접종하다				u	b	
 植え込む	うえこむ	v5	1	심다				u	b	
 植え育てる	うえそだてる	v1	1	심어 기르다				u	b	
 検する	けんする	vs	1	검사하다				u	b	
@@ -6208,7 +6094,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 済ます	すます	v5	1	끝내다				u	b	
 減ずる	げんずる	vs	1	줄이다				u	b	
 減ずる	げんずる	v1	1	줄이다				u	b	
-減らす	へらす	v5	1	줄이다				u	b	
 渡り合う	わたりあう	v5	1	서로 싸우다				u	b	
 渡り歩く	わたりあるく	v5	1	떠돌아 다니다				u	b	
 温む	ぬるむ	v5	1	미지근해지다				u	b	
@@ -6276,7 +6161,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 照らし出す	てらしだす	v5	1	비추다				u	b	
 照り合う	てりあう	v5	1	대응하다				u	b	
 照り込む	てりこむ	v5	1	오래 가물다				u	b	
-煮る	にる	v1	1	익히다				u	b	
 煮える	にえる	v1	1	익다				u	b	
 煮え上がる	にえあがる	v5	1	끓다				u	b	
 煮え返る	にえかえる	v5	1	끓어오르다				u	b	
@@ -6347,8 +6231,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 用いる	もちいる	v1	2	고용하다				u	b	rule:764 +unmapped
 用立つ	ようだつ	v5	1	쓸모있다				u	b	rule:765 +unmapped assigns-neighbour
 用立てる	ようだてる	v1	1	유용하게 하다				u	b	
-申し込む	もうしこむ	v5	1	말하다				u	b	
-申し込む	もうしこむ	v5	2	신청하다				u	b	
 申し付ける	もうしつける	v1	1	말하다				u	b	
 申し入れる	もうしいれる	v1	1	요청하다				u	wl	
 申し入れる	もうしいれる	v1	2	신청하다				u	b	
@@ -6412,7 +6294,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 眺め入る	ながめいる	v5	2	유심히 바라보다				u	b	
 着する	ちゃくする	vs	1	착용하다				u	b	
 着する	ちゃくする	vs	2	도착하다				u	b	
-着替える	きかえる	v1	1	갈아입다				u	b	
 着込む	きこむ	v5	1	껴입다				u	b	
 着せる	きせる	v1	1	입히다				u	wl	
 着せる	きせる	v1	2	덮어 씌우다				u	b	
@@ -6937,7 +6818,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 訂する	ていする	vs	1	고치다				u	b	
 計らう	はからう	v5	1	조처하다				u	b	
 託つ	かこつ	v5	1	구실삼다				u	b	
-訪ねる	たずねる	v1	1	방문하다				u	b	
 訪ね歩く	たずねあるく	v5	1	찾아 다니다				u	b	
 設ける	もうける	v1	1	마련하다				u	b	
 設ける	もうける	v1	2	제정하다				u	b	
@@ -7112,10 +6992,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 跳ね返す	はねかえす	v5	1	튕겨내다				u	wl	
 跳ね返す	はねかえす	v5	2	뒤집다				u	w	
 跳ね返す	はねかえす	v5	3	튕기다				u	w	
-踏む	ふむ	v5	1	운을 맞추다				u	wl	
-踏む	ふむ	v5	2	밟다				u	b	
-踏む	ふむ	v5	3	어림잡다				u	b	rule:660 +unmapped
-踏む	ふむ	v5	4	구르다	arg=地団駄			u	x	senses
 踏み込む	ふみこむ	v5	1	발을 들이다				u	wl	
 踏み込む	ふみこむ	v5	2	빠지다				u	b	
 踏み込む	ふみこむ	v5	3	발을 디디다				u	b	
@@ -7159,7 +7035,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 輝かす	かがやかす	v5	1	빛내다				u	b	
 輝く	かがやく	v1	1	빛나다				u	b	
 辱しめる	はずかしめる	v1	1	손상시키다				u	b	
-込む	こむ	v5	1	붐비다				u	b	
 迎え入れる	むかえいれる	v1	1	맞아들이다				u	b	
 迎え打つ	むかえうつ	v5	1	맞아 싸우다				u	b	
 返り咲く	かえりざく	v5	1	복귀하다				u	b	
@@ -7232,8 +7107,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 選る	える	v5	2	뽑다				u	b	
 選び出す	えらびだす	v5	1	골라내다				u	b	
 鄙びる	ひなびる	v1	1	시골티나다				u	b	
-配る	くばる	v5	1	나눠주다				u	b	
-配る	くばる	v5	2	배부하다				u	b	
 配する	はいする	vs	1	배치하다				u	b	
 酔う	よう	v5	1	중독되다				u	b	
 酔う	よう	v5	2	취하다				u	b	rule:841 +unmapped
