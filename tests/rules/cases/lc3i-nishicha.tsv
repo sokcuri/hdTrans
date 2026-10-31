@@ -1,0 +1,54 @@
+# 규칙: GRM-205
+rule	input	expected	kind	layer
+cx:lc3i-nishicha:10	アンタにしちゃ珍しい	has:너치고는	fix	rewrites
+cx:lc3i-nishicha:10	古着にしちゃ綺麗だぞ。	has:옷치고는	fix	rewrites
+cx:lc3i-nishicha:10	人間族にしちゃやるな。	has:인간족치고는	fix	rewrites
+cx:lc3i-nishicha:10	悦郎にしちゃやるじゃねえか	has:에츠오치고는	fix	rewrites
+cx:lc3i-nishicha:10	ＲＵＩにしちゃ珍しいな、ユウ	has:RUI치고는	fix	rewrites
+cx:lc3i-nishicha:10	冗談にしちゃタチが悪すぎるぞ！	has:농담치고는	fix	rewrites
+cx:lc3i-nishicha:10	………学院にしちゃ、でかくないか？	has:………학원치고는	fix	rewrites
+cx:lc3i-nishicha:10	お前らにしちゃ随分早ぇじゃねぇか。	has:너희들치고는	fix	rewrites
+cx:lc3i-nishicha:10	というか、ぶっちゃけ本にしちゃ薄い。	has:책치고는	fix	rewrites
+cx:lc3i-nishicha:10	大人数内容にしちゃあ報酬は良かったと思	has:내용치고는	fix	rewrites
+cx:lc3i-nishicha:10	まあ人間にしちゃあ珍しく正しい判断だ。	has:인간치고는	fix	rewrites
+cx:lc3i-nishicha:10	昼寝にしちゃ、ちょうどいい時間かもな。	has:낮잠치고는	fix	rewrites
+cx:lc3i-nishicha:10	イヅル〜、お前にしちゃ随分やるじゃねぇか！	has:너치고는	fix	rewrites
+cx:lc3i-nishicha:10	てめぇ……冗談にしちゃぁ気が利いてねぇぞ…！	has:너……농담치고는	fix	rewrites
+cx:lc3i-nishicha:10	なぁ、お前は小学生にしちゃ達観しすぎてないか？	has:초등학생치고는	fix	rewrites
+cx:lc3i-nishicha:10	……レプリカにしちゃ、随分とでかくなったもんで	has:……레플리카치고는	fix	rewrites
+cx:lc3i-nishicha:10	つまり、人型にしちゃあやたら弱かったってことか？	has:모양치고는	fix	rewrites
+cx:lc3i-nishicha:10	暴走族にしちゃ、ジャッドって、他に名前があるだろうに	has:폭주족치고는	fix	rewrites
+cx:lc3i-nishicha:10	おい……革鎧にしちゃ、めちゃくちゃ手が込んでないか！？	has:이봐……가죽갑옷치고는	fix	rewrites
+cx:lc3i-nishicha:10	異族の女にしちゃ、美人だ……、でも、淡い瞳じゃ、すべて台無しだ……。	has:여자치고는	fix	rewrites
+cx:lc3i-nishicha:20	でも、それにしちゃおかしい。	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:20	それにしちゃ、ダサい柄だな。	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:20	それにしちゃこの状況はおかしいです	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:20	それにしちゃーいっぱい声を出していたな。	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:20	それにしちゃお前らも本気じゃなかっただろ？	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:20	それにしちゃ眼光鋭すぎって言うか、目つき悪すぎって言うか。	has:그런 것치고는	fix	rewrites
+cx:lc3i-nishicha:18	それにしちゃあ、大分重装備だがな	lacks:치고는 아	fix	rewrites
+cx:lc3i-nishicha:18	それにしちゃあ綺麗にできすぎだろ。	lacks:치고는 아	fix	rewrites
+cx:lc3i-nishicha:18	でもそれにしちゃあ良いケツしてやがる…	lacks:치고는 아	fix	rewrites
+cx:lc3i-nishicha:18	それにしちゃあ結構会話してくれてると思うけど？	lacks:치고는 아	fix	rewrites
+cx:lc3i-nishicha:18	それにしちゃあ、床が不自然なほど真っ平らで感触も硬い。	lacks:치고는 아	fix	rewrites
+cx:lc3i-nishicha:10	なにしちゃってんの	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	ぐちゃにしちゃっても♡	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	僕の性奴隷にしちゃうよ	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	私の歌の虜にしちゃうぞ☆	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	私をズタズタにしちゃったの	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	だが誰も気にしちゃいない。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	これで終わりにしちゃダメだよ	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	ごめんね、変な空気にしちゃって	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	まったく、こんなにしちゃって。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	廊下もボロボロにしちゃったし。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	それを原因にしちゃ、駄目だよ。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	海に落っこちたって事にしちゃ、ダメかな。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	「そのへんにしちゃくれねえか」	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	あー、駄目だぞケイくん。乱暴にしちゃ	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	武器にしちゃいけないんだけど、背に腹はかえられない。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:20	もうそれにしちゃう？	!rule:cx:lc3i-nishicha:20	keep	rewrites
+cx:lc3i-nishicha:20	見本が美味しそうだったからついそれにしちゃった！	!rule:cx:lc3i-nishicha:20	keep	rewrites
+cx:lc3i-nishicha:20	いいや、じゃあ、それにしちゃおう。	!rule:cx:lc3i-nishicha:20	keep	rewrites
+cx:lc3i-nishicha:18	もうそれにしちゃう？	!rule:cx:lc3i-nishicha:18	keep	rewrites
+cx:lc3i-nishicha:18	見本が美味しそうだったからついそれにしちゃった！	!rule:cx:lc3i-nishicha:18	keep	rewrites
+cx:lc3i-nishicha:18	いいや、じゃあ、それにしちゃおう。	!rule:cx:lc3i-nishicha:18	keep	rewrites

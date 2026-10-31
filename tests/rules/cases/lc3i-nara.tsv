@@ -1,0 +1,44 @@
+# 규칙: GRM-203, LEX-229
+rule	input	expected	kind	layer
+lookup:nara-ii	どこまでならいいんだ	has:어디까지라면 좋다	fix	lookup
+lookup:nara-ii	死んでからならいいが	has:나서라면 좋겠지만	fix	lookup
+lookup:nara-ii	何歳からならいいんだ？	has:살부터라면 좋아	fix	lookup
+lookup:nara-ii	見るだけならいいじゃん。	has:뿐이라면 좋잖아	fix	lookup
+lookup:nara-ii	ここでならいい暮らしができる	has:여기서라면 좋은	fix	lookup
+lookup:nara-ii	たまにならいいけど毎日は無理だ	has:이따금이라면 좋지만 매일은	fix	lookup
+lookup:nara-ii	ま…まあ、少しぐらいならいいか…	has:조금이라면 좋은가	fix	lookup
+lookup:nara-ii	それぐらいならいいだろうという事か	has:정도라면 좋을 것이라고	fix	lookup
+lookup:nara-ii	ちょっと見せてもらうだけならいいよな？	has:뿐이라면 좋지	fix	lookup
+lookup:nara-ii	殴ってくるだけならいいんだけど、毒はずるいよ！	has:뿐이라면 좋은데	fix	lookup
+lookup:nara-ii	いや、だからって腹とかならいいって問題でも無いんだよ？	has:배라든지라면 좋다는	fix	lookup
+lookup:nara-ii	私あんまり教えるのうまくないですけど、師匠にならいいですよ	has:스승에게라면 좋아요	fix	lookup
+lookup:nara-ii	そりゃ驚いたけれども、理由があったことならいいと俺は思うのに。	has:것이라면 좋다고	fix	lookup
+lookup:nara-ii	食べるつもりならいつでも俺は食われるだろう。	has:생각이라면 언제라도	fix	lookup
+lookup:nara-ii	通常フィールドからならいつでもログアウト自体は可能だった。	has:필드에서라면 언제라도	fix	lookup
+lookup:nara-ii	勝負をするつもりならいつでも受けてやる、と告げさせるために。	has:생각이라면 언제라도	fix	lookup
+lookup:nai-nara	殺してないなら、	has:않으면	fix	lookup
+lookup:nai-nara	友井が嘘を吐いてないなら。	has:않으면	fix	lookup
+lookup:nai-nara	被害が出てないなら、隠す必要もないだろ。	has:않으면	fix	lookup
+lookup:nai-nara	結果が伴ってないなら必要ないと思いますよ？	has:않으면	fix	lookup
+lookup:nai-nara	本人が気にしてないならいいんだが…無理はするなよ	has:않으면	fix	lookup
+lookup:nai-nara	まぁ…まだ見てないならいいんだ。	has:않으면 된다	fix	lookup
+cx:lc3i-nara:10	ふふ、ならいいや	has:그렇다면 좋아	fix	rewrites
+cx:lc3i-nara:10	ならいったい誰が？	has:그렇다면 도대체	fix	rewrites
+cx:lc3i-nara:10	そーかそーか、ならいいんだ！	has:그렇다면 좋아	fix	rewrites
+cx:lc3i-nara:10	ならいまから行くか、早い方がいい	has:그렇다면	fix	rewrites
+cx:lc3i-nara:10	ならいらない心なんてどうでもいいじゃないですか	has:그렇다면 필요	fix	rewrites
+cx:lc3i-nara:10	そうか、ならいいんだが、余計なことはするなよ	has:그렇다면 좋은데	fix	rewrites
+cx:lc3i-nara:10	へへ、ならいいけどな！	has:그렇다면 좋지만	fix	rewrites
+cx:lc3i-nara:20	まぁならいいんだけど…	has:뭐 그렇다면 좋은데	fix	rewrites
+lookup:nara-ii	ここならいいかな	has:여기라면 좋을까	keep	lookup
+lookup:nara-ii	あ…嫌ならいいんだ	has:싫으면	keep	lookup
+lookup:nara-ii	ひとまず元気ならいい。	has:건강하면 좋다	keep	lookup
+lookup:nara-ii	これならいける気がする。	has:이것이라면 갈 수 있는	keep	lookup
+lookup:nara-ii	いや、喜んでもらえるならいいのか？	has:기뻐하실 수 있다면 좋은	keep	lookup
+lookup:nara-ii	ゼロ距離ならいくらなんでも避けられないだろ！	has:제로 거리라면 아무리 그래도	keep	lookup
+lookup:nara-ii	痛めつけた後ならいろいろ簡単に教えてくれそうだし。	has:후라면 여러 가지	keep	lookup
+cx:lc3i-nara:10	ならいいや	!rule:cx:lc3i-nara:10	keep	rewrites
+cx:lc3i-nara:10	それならいいんだけど．．．。	!rule:cx:lc3i-nara:10	keep	rewrites
+cx:lc3i-nara:10	ここならいいかな	!rule:cx:lc3i-nara:10	keep	rewrites
+cx:lc3i-nara:20	ひとまず元気ならいい。	!rule:cx:lc3i-nara:20	keep	rewrites
+cx:lc3i-nara:20	あ…嫌ならいいんだ	!rule:cx:lc3i-nara:20	keep	rewrites

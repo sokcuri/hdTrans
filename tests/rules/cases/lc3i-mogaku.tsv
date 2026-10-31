@@ -1,0 +1,28 @@
+# 규칙: GRM-202
+rule	input	expected	kind	layer
+lookup:youtomo-mogaku	目を開けようともがく。	has:뜨려고 발버둥 친다	fix	lookup
+lookup:youtomo-mogaku	基弥は、這い上がろうともがいてみた。	has:기어오르려고 발버둥 쳐	fix	lookup
+lookup:youtomo-mogaku	残土から抜けようともがいている間に．．	has:빠지려고 발버둥 치고	fix	lookup
+lookup:youtomo-mogaku	なんとか離れようともがくが、びくともしない。	has:떨어지려고 발버둥 치지만	fix	lookup
+lookup:youtomo-mogaku	必死に体を動かしこの場所から這い出ようともがく。	has:나오려고 발버둥 친다	fix	lookup
+lookup:youtomo-mogaku	直義の目の前で、多治見はシールドを壊そうともがく。	has:부수려고 발버둥 친다	fix	lookup
+lookup:youtomo-mogaku	起き上がろうともがいてるっぽいが、全く動けていない。	has:일어나려고 발버둥 치고	fix	lookup
+lookup:youtomo-mogaku	ユリウスから離れようともがくロゼに、彼は声を張り上げた。	has:멀어지려고 발버둥 치는	fix	lookup
+lookup:youtomo-mogaku	必死で体を動かそうともがくも、体をよじる程度しか動かない。	has:움직이려고 발버둥 치는	fix	lookup
+lookup:youtomo-mogaku	ツグミコは最期まで命乞いをすることなく、逃げようともがく。	has:도망치려고 발버둥 친다	fix	lookup
+lookup:youtomo-mogaku	逃げようともがいていたアスモデウスだが、煙に捕食されていく。	has:도망치려고 발버둥 치던	fix	lookup
+lookup:youtomo-mogaku	拘束を抜け出そうともがく男の胴体に、木刀を思い切り突き立てる。	has:나오려고 발버둥 치는	fix	lookup
+lookup:youtomo-mogaku	動きを封じられ、それでもどうにか身体を動かそうともがくお兄さん。	has:움직이려고 발버둥 치는	fix	lookup
+lookup:youtomo-mogaku	ここはプッチンプリンの魅力を永遠のものにしようともがく男の部屋だ。	has:하려고 발버둥 치는	fix	lookup
+lookup:youtomo-mogaku	暫く、腕を離そうともがく朔也と捕まえようとする私とで揉み合になった。	has:놓으려고 발버둥 치는	fix	lookup
+lookup:youtomo-mogaku	立ち上がってはいても腰は引けているし、少しでも離れようともがいていた。	has:떨어지려고 발버둥 치고	fix	lookup
+lookup:youtomo-mogaku	翼を失ったグラスクロウは地面に墜落し、立ち上がろうともがき続けている。	has:일어서려고 계속 발버둥 치고	fix	lookup
+lookup:youtomo-mogaku	リット艦隊は何とか罠を食い破ろうともがいたが、その間にも被害が続出した。	has:물어뜯으려고 발버둥 쳤지만	fix	lookup
+lookup:youtomo-mogaku	その事に驚き声を出たが、直ぐ様に根を解こうともがくが一切抵抗が出来なかった。	has:풀려고 발버둥 치지만	fix	lookup
+lookup:youtomo-mogaku	止めようともしない。	has:멈추려고도 하지	keep	lookup
+lookup:youtomo-mogaku	幾ら海が荒れようともものともしない。	has:거칠어져도	keep	lookup
+lookup:youtomo-mogaku	だから期待なんかしないし、説得しようとも思わない』	has:설득하려고도	keep	lookup
+lookup:youtomo-mogaku	少年は特に阻止しようともせずにこちらをじっと見続けている。	has:저지하려고도 하지 않고	keep	lookup
+lookup:youtomo-mogaku	きっと、父子を助けなかった、助けようともしなかった己への罰なのだ。	has:도우려고도 하지 않았던	keep	lookup
+lookup:youtomo-mogaku	どんなに人が定めた指標があろうとも、徳や善行を積み、祈りを捧げようとも。	has:올려도	keep	lookup
+lookup:youtomo-mogaku	アポロンは避けようともせず、寧ろ自分から当たる様に動き切っ先を首に誘導した。	has:피하려고도 하지 않고	keep	lookup

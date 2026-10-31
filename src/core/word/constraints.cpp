@@ -88,6 +88,8 @@ constexpr ConstraintRule kRules[] = {
      "て, で 바로 뒤에서 た가 이어지는 い는 いい의 어간이 아니라 いる (待っていたって 기다려도 좋아도 → 기다리고 있어도)", {}},
     {"hashi-before-te", ConstraintWord::Source, "はし", ConstraintContext::AfterWordBeforeTe, ConstraintReject::Word,
      "앞에 말이 있고 て가 바로 이어지는 はし는 箸나 橋가 아니라 は와 する의 て형 (感じはしていた 느낌 젓가락이라고 있었다 → 느낌은 하고 있었다)", {}},
+    {"tara-before-shii", ConstraintWord::EndsInSource, "たら", ConstraintContext::BeforeShii, ConstraintReject::Word,
+     "しい, しく, しかっ 앞에서 たら로 끝나는 말은 쓰지 않음: 그 ら는 らしい의 첫 글자 (気付いたらしい 정신을 차려 보니 해 있고 → 눈치챈 것 같다, 気がついたらしく)", {}},
     {"runa-before-ra", ConstraintWord::EndsInSource, "るな", ConstraintContext::BeforeRa, ConstraintReject::Word,
      "ら 앞에서 るな로 끝나는 말은 금지가 아니라 동사와 조건 なら (気にするなら 신경 쓰지 마들 → 신경 쓴다면)", {}},
     {"shika-before-negative", ConstraintWord::Source, "しかし", ConstraintContext::AfterWordBeforeNegative, ConstraintReject::Word,
@@ -396,6 +398,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return source.ends_with("ち") && after.starts_with("ゃん") && !after.starts_with("ゃんと");
     case ConstraintContext::BeforeRai:
         return after.starts_with("らい");
+    case ConstraintContext::BeforeShii: {
+        static constexpr std::string_view kShii[] = {"しい", "しく", "しかっ", "しき", "しさ"};
+        return StartsWithAny(after, kShii);
+    }
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),
                            [&](std::string_view e) { return lead.ends_with(e); });

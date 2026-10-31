@@ -1,7 +1,7 @@
 # 규칙: LEX-28
 rule	input	expected	kind	layer
 cx:more-count:10	「もう一枚、焼いてこようか？」	「한 장 더, 구워 올까?」	fix	rewrites
-cx:more-count:10	ならもう一本要るか。	라면 한 개 더 필요할까.	fix	rewrites
+cx:more-count:10	ならもう一本要るか。	그렇다면 한 개 더 필요할까.	fix	rewrites
 cx:more-count:10	念のためもう一発出してみたら、気絶してしまった。	만약을 위해 한 방 더 내 보았더니, 기절해버렸다.	fix	rewrites
 cx:more-count:10	もう一本、どうぞ。	한 개 더, 어서.	fix	rewrites
 cx:more-count:10	ワイン、もう一本開けようか？	와인, 한 병 더 열까?	fix	rewrites
