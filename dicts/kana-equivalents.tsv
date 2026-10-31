@@ -1,0 +1,11 @@
+#! layer=kana
+# 사전에 한자로 오른 낱말의 가나 표기 (LEX-93): 가나, 한자 키, 활용 부류, 행 id와 규칙과 출처(hand: 손으로 적음)
+このへん	この辺		kanaeq:1 LEX-93 hand
+ふともも	太もも		kanaeq:2 LEX-93 hand
+ひしゃく	柄杓		kanaeq:3 LEX-93 hand
+ゆびきり	指切り		kanaeq:4 LEX-93 hand
+まいど	毎度		kanaeq:5 LEX-93 hand
+みすみす	見す見す		kanaeq:6 LEX-93 hand
+いっこ	一個		kanaeq:7 LEX-93 hand
+いつもどおり	いつも通り		kanaeq:8 LEX-93 hand
+ばち	罰		kanaeq:9 LEX-93 hand
