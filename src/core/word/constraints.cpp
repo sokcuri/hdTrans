@@ -399,8 +399,8 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::BeforeRai:
         return after.starts_with("らい");
     case ConstraintContext::BeforeShii: {
-        static constexpr std::string_view kShii[] = {"しい", "しく", "しかっ", "しき", "しさ"};
-        return StartsWithAny(after, kShii);
+        static constexpr std::string_view kShii[] = {"しい", "しく", "しかっ"};
+        return StartsWithAny(after, kShii) || (after.starts_with("しき") && !after.starts_with("しきり"));
     }
     case ConstraintContext::AfterPredicate:
         return std::any_of(std::begin(kPredicateEnds), std::end(kPredicateEnds),

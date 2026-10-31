@@ -38,3 +38,20 @@ constraint:tara-before-shii	モカも私と同じ事に気づいたらしい。	
 constraint:tara-before-shii	そのことに、アイゼルはようやく気が付いたらしい。	has:깨달은 것 같다	keep	lookup
 constraint:tara-before-shii	さっき自分が言ったことが変態発言だと気が付いたらしい。	has:깨달은 것 같다	keep	lookup
 constraint:tara-before-shii	父さんの言葉に、おじさんはようやく私の存在に気づいたらしい。	has:눈치챈 것 같다	keep	lookup
+cx:lc3i-kigatsuku:10	気が付いたら連絡して	has:깨달으면 연락해	fix	rewrites
+cx:lc3i-kigatsuku:10	気付いたら教えてくれ	has:깨달으면 가르쳐 줘	fix	rewrites
+cx:lc3i-kigatsuku:10	千歳が気付いたらこれを渡してください	has:깨달으면 이것을	fix	rewrites
+cx:lc3i-kigatsuku:10	気付いたら、そこから離れなさい	has:깨달으면, 거기에서	fix	rewrites
+cx:lc3i-kigatsuku:10	気がついたら教えてね	has:깨달으면 가르쳐	fix	rewrites
+cx:lc3i-kigatsuku:10	気づいたら、自然とハグをして、キスをして。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気がついたら突き飛ばされて、頭がグワングワンして。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気が付いたら着てて…ごめんなさい！	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気付いたら時間がたりなくなったのごめんなさい！	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気づいたらいなくなっておりまして	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	私も分からない……気が付いたら此処に居て	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気が付いたら其処にいたとしか言いようが無い。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+cx:lc3i-kigatsuku:10	気がついたら履かされてたというか、そんな感じで。	!rule:cx:lc3i-kigatsuku:10	keep	rewrites
+constraint:tara-before-shii	そしたらしきりに頷いた。	has:그랬더니 끊임없이	keep	lookup
+constraint:tara-before-shii	予備も併せて大目に買ったらしきりに恐縮していた。	has:끊임없이 황송해하고	keep	lookup
+constraint:tara-before-shii	これも北原のおかげだなと言ったらしきりに照れていた。	has:끊임없이 수줍어하고	keep	lookup
+cx:lc3i-kigatsuku:10	頭重くて、何も考えられなくて、気づいたら何時間も経ってたりして。	has:정신을 차려 보니 몇 시간이나	keep	rewrites

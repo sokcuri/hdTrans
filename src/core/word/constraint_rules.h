@@ -57,7 +57,8 @@ enum class ConstraintContext : uint8_t {
     BeforeAru,          // ある, あり, あっ, あれ or あろ follows and every sense of the word is a noun
                         // (歳であり: the copula である; not まである)
     BeforeRai,          // らい follows, so the word's last く starts くらい (したくらい, きたくらい)
-    BeforeShii,         // しい, しく, しかっ, しき or しさ follows, so the word's last ら starts らしい (気付いたらしい)
+    BeforeShii,         // しい, しく, しかっ or しき (not しきり) follows, so the word's last ら starts らしい
+                        // (気付いたらしい, 気づいたらしき; not そしたら + しきりに)
     NounSlot,           // not right after を, に, へ or で, and punctuation, the end, a particle, a copula,
                         // ある or ない follows the word rather than a verb ending (わけ。, わけで, わけあって,
                         // not わけて, わけた, わけよう)

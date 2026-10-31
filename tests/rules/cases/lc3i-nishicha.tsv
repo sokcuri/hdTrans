@@ -52,3 +52,13 @@ cx:lc3i-nishicha:20	いいや、じゃあ、それにしちゃおう。	!rule:cx
 cx:lc3i-nishicha:18	もうそれにしちゃう？	!rule:cx:lc3i-nishicha:18	keep	rewrites
 cx:lc3i-nishicha:18	見本が美味しそうだったからついそれにしちゃった！	!rule:cx:lc3i-nishicha:18	keep	rewrites
 cx:lc3i-nishicha:18	いいや、じゃあ、それにしちゃおう。	!rule:cx:lc3i-nishicha:18	keep	rewrites
+cx:lc3i-nishicha:10	名前をタマにしちゃどう？	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	名前をタマにしちゃどう？	has:타마로 하면 어때	keep	rewrites
+cx:lc3i-nishicha:10	とりあえず、俺たちが稽古を済ませてからにしちゃどうだ？	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	もう呑んでるから明日にしちゃどうだ	has:내일로 하면 어때	keep	rewrites
+cx:lc3i-nishicha:10	陣地を縦層にしちゃどうですかね？	has:세로층으로 하면 어떻습니까	keep	rewrites
+cx:lc3i-nishicha:10	ハル、どれか一頭自分のにしちゃどうだ？	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	まあ、そんなこと、こっちにしちゃどうでもいいわな	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	戦争したい奴らにしちゃどうでもいいんだよ、あれは。	!rule:cx:lc3i-nishicha:10	keep	rewrites
+cx:lc3i-nishicha:10	春にしちゃどうも暑い	has:봄치고는	fix	rewrites
+cx:lc3i-nishicha:20	それにしちゃどうも行動が不釣り合いだが	has:그런 것치고는	fix	rewrites
