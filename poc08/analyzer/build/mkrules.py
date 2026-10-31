@@ -167,7 +167,8 @@ def arc_feats_raw(g, cf, s, goshu, row=None):
     # UniDic word-form fields: a word-initial voiced (rendaku) form, which only ends a compound (ごめ for 込む);
     # a short or altered word form of the lemma (して for そして)
     # a clipped spelling of a longer lemma: okurigana omitted (持 for 持ち) or a part of it (彼 for 彼処)
-    f['okuri'] = g[6] == '*' and f['kanji'] and lemma != s and lemma.startswith(s)
+    base = lemma.split('-')[0]
+    f['okuri'] = g[6] == '*' and f['kanji'] and base != s and base.startswith(s)
     if row:
         # a function word spelled other than its lemma's form (が for か, てい for たい, だって for たって)
         # a voiced spelling of a particle (が for か, だって for たって) or an altered conclusive form (てい for たい)
@@ -185,7 +186,8 @@ def arc_feats_raw(g, cf, s, goshu, row=None):
             f['pvariant'] = row[8] == '*' and g[2] == '助詞' and a != b and not f['pshort'] and not f.get('fvariant') \
                 and not (len(a) == len(b) and VOICED.get(b[0]) == a[0] and a[1:] == b[1:])
             # ... and of those, one whose first letter changes other than by a contraction (ん/じゃ/ちゃ/っ)
-            f['pletter'] = f['pvariant'] and a[:1] != b[:1] and a[:1] not in 'ンジチッ'
+            f['pletter'] = a != b and a[:1] != b[:1] and a[:1] not in 'ンジチッ' and not f.get('fvariant') \
+                and not (len(a) == len(b) and VOICED.get(b[0]) == a[0] and a[1:] == b[1:]) and row[0] not in ('で', 'だ')
             # a lengthened non-final particle (てえ for て): lengthening belongs to final particles
             f['pelong'] = row[8] == '*' and g[3] != '終助詞' and len(a) > len(b) and a.startswith(b) \
                 and all(c in 'アイウエオァィゥェォー' for c in a[len(b):])
@@ -196,6 +198,11 @@ def arc_feats_raw(g, cf, s, goshu, row=None):
             spoken = row[25].endswith('イ') and row[24][-1:] in ('エ', 'ェ', 'ー')
             f['ivariant'] = bool(stem) and not row[24].startswith(stem) and 'ウ音便' not in row[9] and not spoken \
                 and not (row[18] != '*' and row[18] != '基本形')
+        # an inflected word whose spelling group drops okurigana of its lemma (立る for 立てる: 立 as 立て)
+        if g[6] != '*':
+            ob, lm = row[14], lemma.split('-')[0]
+            kj = lambda t: ''.join(ch for ch in t if is_kanji(ch))
+            f['okuri'] = ob != lm and len(ob) < len(lm) and kj(ob) == kj(lm) and kj(ob) != ''
         # an inflected word in a contracted word form of its lemma (なる as a form of なさる)
         f['wvariant'] = g[6] != '*' and g[6] not in IRREGULAR and not g[6].startswith('文語') and len(row[27]) < len(row[10])
         y = hira_of(row[10])

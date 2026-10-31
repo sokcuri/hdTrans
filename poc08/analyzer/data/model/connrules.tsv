@@ -34,7 +34,14 @@ ud=接続詞	ud=助動詞 / lemma=無い	100000000000000000	cn.conj-aux
 ud=形容詞 & cform=終止形|連体形	ud=助詞-格助詞 & lemma=が|を	100000000000000000	cn.adj-case
 cform=連用形-イ音便 & !lemma=下さる|為さる|御座る|いらっしゃる|仰る|てらっしゃる|おっしゃる	ud=助動詞 & lemma=ます	100000000000000000	cn.onbin-masu
 ud=接頭辞 & !lemma=御	ud=動詞|形容詞	100000000000000000	cn.prefix-verb
+cform=連体形	ud=動詞-非自立可能	100000000000000000	cn.rentai-aux-verb
+ud=助詞-格助詞 & lemma=で	lemma=有る|御座る	100000000000000000	cn.de-aru
 ud=助詞-終助詞	ud=名詞|動詞|形容詞|形状詞|副詞|連体詞|代名詞|接頭辞	1000	pf.final-content
 ud=名詞-固有名詞	ud=動詞-非自立可能	1000000000	pf.name-aux
 ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	1000000000	pf.intj-mid
 ud=形容詞 & cform=連用形-ウ音便 & !lemma=めでたい	!lemma=御座る|存ずる|存じる	1000000000	pf.adj-u
+ud=助詞-接続助詞 & lemma=て	ud=形容詞	1000	pf.te-adj
+ud=助動詞|形容詞 & cform=終止形	ud=動詞-非自立可能	1000000000	pf.final-aux-verb
+ud=名詞|代名詞	ud=名詞-普通名詞	1	pf.noun-noun
+ud=動詞 & cform=連用形-一般	ud=助詞-格助詞 & lemma=を|が|は|も|の	1	pf.renyo-case
+ud=助詞-副助詞 & lemma=か	bos / ud=補助記号-句点	1	pf.ka-final
