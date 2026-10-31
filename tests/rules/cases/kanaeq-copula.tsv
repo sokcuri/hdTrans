@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 lookup:kana-copula	「うん……じゃあ、ゆびきりだ」	「응……그럼, 약속이야」	fix	lookup
 lookup:kana-copula	「しんでしまうとはなにごとだ！」	「죽어버린다고는 무슨 일이야!」	fix	lookup
-lookup:kana-copula	“ここはへいわだ”って	“여기는 평화롭다”는	fix	lookup
+lookup:kana-copula	“ここはへいわだ”って	“여기는 평화롭다”라고	fix	lookup
 lookup:kana-copula	……ソシテワタシノ…ハカバダッ！	has:묘지야	fix	lookup
 lookup:kana-copula	コレカラガソノモンノ ジゴクダヨ！	has:지옥이야	fix	lookup
 lookup:kana-copula	ゆらいだ心を正せる気がして。	흔들린 마음을 바로잡을 수 있을 것 같아.	fix	lookup
