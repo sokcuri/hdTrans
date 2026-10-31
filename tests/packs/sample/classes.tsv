@@ -1,0 +1,5 @@
+#! layer=pack-classes
+# Classes of the sample pack.
+class	parent	note
+@entity		root
+@thing	@entity	

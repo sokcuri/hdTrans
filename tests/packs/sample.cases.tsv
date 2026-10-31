@@ -1,0 +1,21 @@
+# The sample pack (tests/packs/sample, docs/packs.md): one case per slot and per step of the resolution.
+rule	input	expected	kind	layer
+pack:s.takai.thing	この本は高い。	이 책은 비싸다.	fix	packs
+pack:s.takai.thing	この本は高い。	rule:pack:s.takai.thing=비싸다	fix	packs
+pack:s.takai.thing-low	この本は高い。	!rule:pack:s.takai.thing-low	keep	packs
+pack:s.takai.mountain	山が高い。	rule:pack:s.takai.mountain=높다	keep	packs
+pack:s.takai.thing	空が高い。	하늘이 높다.	keep	packs
+pack:s.takai.thing	空が高い。	!rule:pack:s.takai.thing	keep	packs
+pack:s.yomu.active	手紙を読まれた。	편지를 읽었다.	fix	packs
+pack:s.yomu.active	手紙を読まれた。	rule:pack:s.yomu.active=active	fix	packs
+pack:s.taberu.potential	これなら食べられる。	rule:pack:s.taberu.potential=potential	keep	packs
+pack:s.iku.invite	明日は行かない？	내일은 가지 않을래?	fix	packs
+pack:s.iku.invite	明日は行きませんか？	!rule:pack:s.iku.invite	keep	packs
+pack:s.ciel	シエルが来た。	씨엘이 왔다.	fix	packs
+pack:s.ciel	シエルが来た。	rule:pack:s.ciel=씨엘	fix	packs
+pack:s.kiwotsukeru	気をつけて。	!rule:pack:s.kiwotsukeru	keep	packs
+pack:s.iu.respectful	先生が言われた。	선생님이 말씀하셨다.	keep	packs
+pack:s.iu.respectful	先生が言われた。	rule:pack:s.iu.respectful=respectful	keep	packs
+pack:s.iu.heard	彼に言われた。	그에게 들었다.	keep	packs
+pack:s.iu.heard	彼に言われた。	rule:pack:s.iu.heard=passive:듣다	keep	packs
+pack:s.iu.heard	先生が言われた。	!rule:pack:s.iu.heard	keep	packs

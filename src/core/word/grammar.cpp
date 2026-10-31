@@ -1325,7 +1325,25 @@ void DecideVoice(Flusher& f) {
         const bool passive = form == VoiceForm::Godan || (form == VoiceForm::Rare && PassiveReading(f.w, it, rest));
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
-        const Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
+        Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
+        const dict::PackRow* packed = PackVoice(f, it, stem, v);
+        if (packed != nullptr && (v == Voice::None || !packed->lexeme.empty())) {
+            // A pack row reads the verb in the active, or as the Korean verb it names (docs/packs.md):
+            // the verb it is made from, no passive, potential or respectful form written.
+            if (form == VoiceForm::Lexical || form == VoiceForm::Shorter) ReadAsBaseVerb(f, it, spelled);
+            it->detail->record = 0;
+            it->detail->voice = v;
+            for (Entry* e : it->group->entries) {
+                if (e->gattr.ends_with("Pi") || e->gattr.ends_with("Ka")) e->gattr.resize(e->gattr.size() - 2);
+            }
+            if (!packed->lexeme.empty()) {
+                it->lexical = true;
+                for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+                    it->AssignEntrySurface(slot, packed->lexeme, {Provenance::Pack, packed->global});
+                }
+            }
+            continue;
+        }
         if (it->detail->record == 5 && it->detail->syntheticCausative) {
             it->detail->voice = v == Voice::Potential ? Voice::Potential : Voice::Passive;
             if (CausativeEnding(it, v == Voice::Potential)) it->detail->record = 2;

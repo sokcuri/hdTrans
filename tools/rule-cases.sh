@@ -10,10 +10,14 @@
 #   rule:L<n>=<target>           the same with the local rule number;
 #   rule:cx:<family>:<prio>=<target>  some word or ending of the line takes that target from the
 #                                construction row (src/core/dict/builtin/constructions.tsv);
-#   !rule:dict:<row id>, !rule:cx:<family>:<prio>  that rule or row chooses nothing in the line;
+#   rule:pack:<id>=<value>       some word of the line takes that value from the pack row <id>
+#                                (its slot's value as the row writes it, docs/packs.md);
+#   !rule:dict:<row id>, !rule:cx:<family>:<prio>, !rule:pack:<id>  that rule or row chooses
+#                                nothing in the line;
 #   has:<text>, lacks:<text>     the whole output holds <text>, or does not.
+# DICTS may be a comma-separated list of folders (dicts,PACKDIR loads a pack after the dictionaries).
 # `rule` names what the row tests: dict:<row id> or L<n> for a local rule, G<prio> for a global
-# rule, cx:<family>:<prio> for a construction row, else <stage>:<name> (sound:, constraint:,
+# rule, cx:<family>:<prio> for a construction row, pack:<id> for a pack row, else <stage>:<name> (sound:, constraint:,
 # rewrite:, compose:, normalize:, sense:, ...).
 # kind is fix, keep or current. layer is the execution layer that decides the line
 # (docs/pipeline-layers.md: local, local-ending, global-stem, global-last, global-ending, lookup,
@@ -43,7 +47,9 @@ while [ $# -gt 0 ]; do
     shift
 done
 [ -e "$cases" ] || { echo "no cases at $cases" >&2; exit 2; }
-[ -d "$dicts" ] || { echo "no dictionaries at $dicts" >&2; exit 2; }
+for d in $(printf '%s' "$dicts" | tr ',' ' '); do
+    [ -d "$d" ] || { echo "no dictionaries at $d" >&2; exit 2; }
+done
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-rules.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
 trap 'exit 2' HUP INT TERM
@@ -79,7 +85,7 @@ else
         { echo "CLI failed" >&2; exit 2; }
 fi
 # The dictionary row id names the rule a row carries; a case may use either.
-awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "$dicts"/*.tsv > "$tmp/rule-by-id.tsv"
+awk -F '\t' 'FNR == 1 { seen = 0 } !/^#/ && !seen++ { for (i = 1; i <= NF; i++) c[$i] = i; next } /^#/ { next } $c["rule"] != "" && $c["id"] != "" { print $c["id"] "\t" "L" $c["rule"] }' "${dicts%%,*}"/*.tsv > "$tmp/rule-by-id.tsv"
 awk -F '\t' -v OFS='\t' -v accept="$accept" -v nocurrent="$nocurrent" -v fixed="$tmp/fixed.tsv" \
     -f "$here/tools/rule-cases.awk" \
  "$tmp/why.txt" "$tmp/out.txt" "$tmp/rule-by-id.tsv" "$cases" || status=$?

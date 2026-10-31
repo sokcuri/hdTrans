@@ -1,4 +1,6 @@
 FILENAME == ARGV[1] {
+        # A pack row names itself with the value it wrote (docs/packs.md).
+        if ($1 == "WHY-PACK") { why[$2] = why[$2] "\n" "pack:" $7 "=" $9; next }
         if ($1 != "WHY") next
         if ($8 == "LocalRule") why[$2] = why[$2] "\n" "L" $9 "=" $10
         # A construction row names itself as the source of the word (15) or of the ending (17).
@@ -19,7 +21,7 @@ FILENAME == ARGV[1] {
         }
         if (!($5 in failed)) { failed[$5] = 0; order[++layers] = $5 }
         negate = 0
-        if ($3 ~ /^!rule:(dict|cx):/) { negate = 1; $3 = substr($3, 2) }
+        if ($3 ~ /^!rule:(dict|cx|pack):/) { negate = 1; $3 = substr($3, 2) }
         if ($3 ~ /^rule:dict:/) {
             rest = substr($3, 11)
             at = index(rest, "=")
@@ -37,7 +39,7 @@ FILENAME == ARGV[1] {
                 report[$5] = report[$5] sprintf("%s: %s\n  expected no %s\n  actual   %s\n", $1, $2, target, got)
                 failed[$5]++; bad++
             }
-        } else if ($3 ~ /^rule:(L[0-9]+|cx:[a-z0-9-]+:[0-9]+)=/) {
+        } else if ($3 ~ /^rule:(L[0-9]+|cx:[a-z0-9-]+:[0-9]+|pack:[^=]+)=/) {
             want = substr($3, 6)
             if (index(why[n] "\n", "\n" want "\n") == 0) {
                 got = substr(why[n], 2); gsub(/\n/, "; ", got)

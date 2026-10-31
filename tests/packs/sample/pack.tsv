@@ -1,0 +1,13 @@
+#! layer=pack
+# Sample pack: one row per slot and the resolution order (docs/packs.md).
+id	slot	lemma	pos	kind	cond	target	pri	spec	prov	note
+s.takai.thing	sense	高い/たかい/adj	adj	frame	subj=@thing	비싸다	0		sample	a thing that costs
+s.takai.thing-low	sense	高い	adj	frame	subj=@thing	값비싸다	-1		sample	same cue, lower pri: never wins
+s.takai.mountain	sense	高い	adj	frame	subj=山	높다	0		sample	a lemma beats its class
+s.yomu.active	voice	読む	v5	frame	obj=@thing	active	0		sample	
+s.taberu.potential	voice	食べる	v1	frame	obj=-	potential	0		sample	
+s.iku.invite	polarity	行く	v5	frame	form=neg register=casual	1지 않을래	0		sample	a plain negative question as an invitation
+s.ciel	name	シエル	n	frame	*	씨엘	0		sample	
+s.kiwotsukeru	sense	気をつける	v1	colloc	気をつける	조심하다	0		sample	read, not applied
+s.iu.respectful	voice	言う	v5	frame	voice=respectful	respectful	0		sample	the reading the chain decided is a cue
+s.iu.heard	voice	言う	v5	frame	dat=*	passive:듣다	0		sample	a passive said by another Korean verb
