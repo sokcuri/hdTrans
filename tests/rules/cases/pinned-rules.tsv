@@ -17,7 +17,7 @@ sense:高い	その服は高くないですよ。	그 옷은 비싸지 않아요
 sense:話す	私は日本語を話すことができます。	저는 일본어를 할 수가 있습니다.	current	senses
 dict:jisjk:202389	台風による被害が大きかった。	태풍에 의한 피해가 컸다.	current	local-ending
 dict:jisjk:257566	ひが昇る。	rule:dict:jisjk:257566=히	current	local
-dict:jisjk:260433	大変なことになった。	rule:dict:jisjk:260433=것이 &C6@	current	local
+dict:jisjk:260433	大事なことになった。	rule:dict:jisjk:260433=것이 &C6@	current	local
 sense:入れる	お茶を入れます？	차를 끓입니까?	current	senses
 dict:jisjk:342916	彼がそんなことを言うなんてあり得ない。	그가 그런 말을 한다고 있을 수 없다.	current	local-ending
 dict:jisjk:263220	学生として、ルールは守ります。	rule:dict:jisjk:263220=(으)로서	current	local

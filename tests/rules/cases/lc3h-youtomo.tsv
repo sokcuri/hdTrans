@@ -1,0 +1,31 @@
+# 규칙: GRM-200
+rule	input	expected	kind	layer
+cx:lc3h-youtomo:10	けで助けようともしない。	has:도우려고도	fix	rewrites
+cx:lc3h-youtomo:15	止めようとも助けを呼ぼうともしない。	has:멈추려고도 도움을 청하려고도	fix	rewrites
+cx:lc3h-youtomo:20	悪巫山戯しようとも互いにプロ。	has:해도	fix	rewrites
+cx:lc3h-youtomo:30	たとえ︐何を言われようとも。	has:들어도	fix	rewrites
+cx:lc3h-youtomo:10	全く避けようともしないし。	has:피하려고도	fix	rewrites
+cx:lc3h-youtomo:15	「だからって直そうとも気にしようともしないのは腹立つ」	has:고치려고도 신경 쓰려고도	fix	rewrites
+cx:lc3h-youtomo:20	いくら剣が折れようとも何度でも。	has:부러져도	fix	rewrites
+cx:lc3h-youtomo:30	どれだけ不安が押し寄せようとも	has:밀어닥쳐도	fix	rewrites
+cx:lc3h-youtomo:10	目を合わせようともしない。	has:맞추려고도	fix	rewrites
+cx:lc3h-youtomo:15	リヴァイアもリヴァイアで助けようとも手伝おうともしない。	has:도우려고도 도우려고도	fix	rewrites
+cx:lc3h-youtomo:20	いや、誰が止めようとも僕は言う。	has:막아도	fix	rewrites
+cx:lc3h-youtomo:30	たとえ――この身を捧げようとも。	has:바쳐도	fix	rewrites
+cx:lc3h-youtomo:10	そんな絶景を見ようともしていない	has:보려고도	fix	rewrites
+cx:lc3h-youtomo:15	今まで聞こうとも調べようともせず、その真実から目を背けてきたのだ。	has:들으려고도 조사하려고도	fix	rewrites
+cx:lc3h-youtomo:20	足掻いて忘れようともダメだった。	has:잊어도	fix	rewrites
+cx:lc3h-youtomo:30	どれだけ綺麗事を並び立てようとも	has:세워도	fix	rewrites
+cx:lc3h-youtomo:10	解消、しようとも思ってたんだけど。	has:하려고도	fix	rewrites
+cx:lc3h-youtomo:20	どれだけの時が経ようとも彼女は「こう」	has:경과해도	fix	rewrites
+cx:lc3h-youtomo:30	例え将来、捨てられようとも・・・	has:버려져도···	fix	rewrites
+cx:lc3h-youtomo:10	顔を膝の間に埋め、上げようともしない。	has:올리려고도	fix	rewrites
+cx:lc3h-youtomo:20	いくら分割しようとも根元は一本という事。	has:분할해도	fix	rewrites
+cx:lc3h-youtomo:30	これではいくら俺等が奮闘しようとも	has:분투해도	fix	rewrites
+cx:lc3h-youtomo:10	そして横にも興奮を抑えようともしない奴が一人	has:억제하려고도	fix	rewrites
+cx:lc3h-youtomo:20	耳から血が出ようともいつかお願いしたい。	has:나와도	fix	rewrites
+cx:lc3h-youtomo:10	「人の道を外れようとも」	!rule:cx:lc3h-youtomo:10	keep	rewrites
+cx:lc3h-youtomo:15	大粒の雨に体を叩かれようとも。	!rule:cx:lc3h-youtomo:15	keep	rewrites
+cx:lc3h-youtomo:20	頭の中で理解しようともがいた。	!rule:cx:lc3h-youtomo:20	keep	rewrites
+cx:lc3h-youtomo:10	今度は逃げようともがき始めた。	!rule:cx:lc3h-youtomo:10	keep	rewrites
+cx:lc3h-youtomo:30	大粒の雨に体を叩かれようとも。	!rule:cx:lc3h-youtomo:30	keep	rewrites

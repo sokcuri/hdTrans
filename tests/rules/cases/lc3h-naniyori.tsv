@@ -1,0 +1,25 @@
+# 규칙: LEX-121
+rule	input	expected	kind	layer
+cx:lc3h-naniyori:10	「ご無事で何よりです、吉岡さん」	has:무사해서 다행입니다	fix	rewrites
+cx:lc3h-naniyori:20	卓「健康で何より…」	has:건강해서 다행이야	fix	rewrites
+cx:lc3h-naniyori:21	仲良しで何より。	has:좋아서 다행이다	fix	rewrites
+cx:lc3h-naniyori:10	「ご無事で何よりですわ、ゼレット様」	has:무사해서 다행이네요	fix	rewrites
+cx:lc3h-naniyori:20	「家康、息災で何より」	has:무탈해서 다행이야	fix	rewrites
+cx:lc3h-naniyori:21	楽しそうで何より。	has:해서 다행이다	fix	rewrites
+cx:lc3h-naniyori:10	「…お口に合ったようで何よりですわ、殿下」	has:같아서 다행이네요	fix	rewrites
+cx:lc3h-naniyori:20	アキラ「無事で何より」	has:무사해서 다행이야	fix	rewrites
+cx:lc3h-naniyori:10	元気そうで何よりだが、何となく素直に喜べない。	has:보여서 다행이지만	fix	rewrites
+cx:lc3h-naniyori:20	「そうですか。楽しそうで何より……」	has:해서 다행이야	fix	rewrites
+cx:lc3h-naniyori:10	「││やあ。思ったより元気そうで何よりだ、明凛」	has:보여서 다행이다	fix	rewrites
+cx:lc3h-naniyori:20	「順調で何より。何か問題はなかった？」	has:순조로워서 다행이야	fix	rewrites
+cx:lc3h-naniyori:10	楽しそうで何よりです、と僕は水槽から一歩引いた。	has:해서 다행입니다	fix	rewrites
+cx:lc3h-naniyori:20	「や、やぁ、久しぶりだねぇ。元気そうで何より」	has:보여서 다행이야	fix	rewrites
+cx:lc3h-naniyori:10	「おっと、コレは失礼。お元気そうで何よりです、町長」	has:보여서 다행입니다	fix	rewrites
+cx:lc3h-naniyori:10	何より、悔しかった。	!rule:cx:lc3h-naniyori:10	keep	rewrites
+cx:lc3h-naniyori:20	何より、大切な妹が居るん	!rule:cx:lc3h-naniyori:20	keep	rewrites
+cx:lc3h-naniyori:21	何より、アレス＝ラハードに知ら	!rule:cx:lc3h-naniyori:21	keep	rewrites
+cx:lc3h-naniyori:10	何より、肌が瑞々しい。	!rule:cx:lc3h-naniyori:10	keep	rewrites
+cx:lc3h-naniyori:20	何より、オーラが違った。	!rule:cx:lc3h-naniyori:20	keep	rewrites
+cx:lc3h-naniyori:21	貴方が君が何よりも愛しい。	!rule:cx:lc3h-naniyori:21	keep	rewrites
+cx:lc3h-naniyori:10	だが怒れば怖いぞ、何よりもな。	!rule:cx:lc3h-naniyori:10	keep	rewrites
+cx:lc3h-naniyori:20	今は何よりもそれが優先的だ。	!rule:cx:lc3h-naniyori:20	keep	rewrites
