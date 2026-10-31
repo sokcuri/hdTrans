@@ -1,0 +1,17 @@
+# 규칙: GRM-77
+rule	input	expected	kind	layer
+cx:tewa-dame:10	しかし余計なことを言っては不味いと判断出来る分別はあったようだ。	has:말을 해서는 곤란	fix	rewrites
+cx:tewa-dame:10	あまり根を詰めて仕事してはダメ、少し休んで。	has:일해서는 안돼,	fix	rewrites
+cx:tewa-dame:10	慢心してはダメ。全力で行きましょう！	has:자만심해서는 안돼.	fix	rewrites
+cx:tewa-dame:10	藤波さん…こっちに来てはダメ…よ	has:와서는 안돼	fix	rewrites
+cx:tewa-dame:10	あまり、あっさりと倒してはダメですよ。	has:넘어뜨려서는 안돼요.	fix	rewrites
+cx:tewa-dame:10	これ以上、うちひしがれていてはダメだ。	has:있어서는 안된다.	fix	rewrites
+cx:tewa-dame:10	いつまでも、行政三部の出身者に自治生徒会を任せておいてはダメなんです	has:맡겨 두어서는 안됩니다	fix	rewrites
+cx:tewa-dame:10	でも、ここから離れてはダメ……	has:떠나서는 안돼……	fix	rewrites
+cx:tewa-dame:10	食べちゃダメ	!rule:cx:tewa-dame:10	keep	rewrites
+cx:tewa-dame:10	見てもダメだった	!rule:cx:tewa-dame:10	keep	rewrites
+cx:tewa-dame:10	それではダメだ	!rule:cx:tewa-dame:10	keep	rewrites
+cx:tewa-dame:10	ここで諦めてはいけない。	has:포기해선 안된다.	keep	rewrites
+cx:tewa-dame:10	私と、同じと思ってもらっては困ります。	!rule:cx:tewa-dame:10	keep	rewrites
+cx:tewa-dame:10	この勝利で慢心しては駄目。	has:자만심해선 안된다.	keep	rewrites
+cx:tewa-dame:10	傲慢になってはだめよ。	has:오만하게 되어서는 안돼요.	keep	rewrites

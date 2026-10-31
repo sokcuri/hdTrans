@@ -17,7 +17,7 @@ compose:ani-quote	夢だからってなんでもできるわけじゃないっ�
 compose:ani-quote	現実じゃないんだって、わかってる。	현실이 아니라고, 알고 있다.	fix	compose
 compose:ani-quote	「屁理屈じゃないって」	「억지 이론이 아니라고」	fix	compose
 compose:ani-quote	さっき、できなくもないって言わなかった？	조금 전, 할 수 없는 것도 아니라고 말하지 않았어?	fix	compose
-compose:ani-quote	魔法が万能なもんじゃないってのもお約束か。	has:아니라고	fix	compose
+compose:ani-quote	魔法が万能なもんじゃないってのもお約束か。	has:아니라는	fix	compose
 compose:ani-quote	嘘ではないのなら、	거짓말이 아니라면,	fix	compose
 compose:ani-quote	一人じゃないって……仲間が	has:아니라는	fix	compose
 compose:ani-quote	学生ではないという	학생이 아니라고 한다	keep	compose

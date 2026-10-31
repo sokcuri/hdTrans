@@ -10,7 +10,7 @@ rewrite:wondering-darou	ま、悪いことじゃないだろう。	뭐, 나쁜 �
 rewrite:wondering-darou	なぜなら彼は来るだろう。	왜냐하면 그는 올 것이다.	fix	rewrites
 rewrite:wondering-darou	何しろ彼は来るだろう。	어쨌든 그는 올 것이다.	fix	rewrites
 rewrite:wondering-darou	どっちみち雨だろう。	결국은 비일 것이다.	fix	rewrites
-rewrite:wondering-darou	何を言われようと、俺は行くだろう。	무슨 말을 들으려고, 나는 갈 것이다.	fix	rewrites
+rewrite:wondering-darou	何を言われようと、俺は行くだろう。	무슨 말을 듣든, 나는 갈 것이다.	fix	rewrites
 rewrite:wondering-darou	真崎新へのなんらかの処分は必要となるだろう。	마사키 아라타에게로의 하등의 처분은 필요할 것이다.	fix	rewrites
 rewrite:wondering-darou	彼女に会うのはいつ以来だろう。	그녀를 만나는 것은 얼마 만일까.	keep	rewrites
 rewrite:wondering-darou	どっちのほうがいいだろう。	어느 쪽 쪽이 좋을까.	fix	rewrites
