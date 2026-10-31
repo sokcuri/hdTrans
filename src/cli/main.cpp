@@ -642,6 +642,13 @@ int RunMain(int argc, char** argv) {
     }
 
     const auto snapshot = engine.Dictionaries();
+    std::unique_ptr<hdTrans::pipeline::DocumentNames> documentNames;
+    if (!names.names.empty()) {
+        std::vector<std::string> errors;
+        hdTrans::pipeline::CompileNames(*snapshot, names, documentNames, &errors);
+        for (const std::string& error : errors)
+            std::fprintf(stderr, "hdtrans: error: %s:%s\n", namesPath.c_str(), error.c_str());
+    }
     const auto generated = hdTrans::internal::NewGenerated(*snapshot);
     const hdTrans::word::Scorer diagnosticScorers[] = {{"shortest-target", hdTrans::word::ShortestTargetScore}};
     const auto filters = engine.Filters();
@@ -673,7 +680,7 @@ int RunMain(int argc, char** argv) {
         }
         levelChanges.clear();
     };
-    if (!names.names.empty()) options.names = &names;
+    options.names = documentNames.get();
     if (noCg) options.wordImprovements.cgRules = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {

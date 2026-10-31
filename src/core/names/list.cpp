@@ -29,9 +29,12 @@ std::vector<std::string_view> Fields(std::string_view line) {
     for (;;) {
         const std::size_t tab = line.find('\t');
         out.push_back(internal::TrimSpace(line.substr(0, tab)));
-        if (tab == std::string_view::npos) return out;
+        if (tab == std::string_view::npos) break;
         line.remove_prefix(tab + 1);
     }
+    // A spreadsheet writes trailing tabs.
+    while (out.size() > 1 && out.back().empty()) out.pop_back();
+    return out;
 }
 
 }  // namespace
@@ -65,6 +68,12 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
             fail(number, "more than four fields");
             continue;
         }
+        // The JA is one word of the dictionaries: a pack lemma splits at | and cuts at /.
+        if (std::string_view::npos != f[0].find_first_of("|/") ||
+            !internal::AllRunes(f[0], [](char32_t r) { return !internal::IsSpace(r); })) {
+            fail(number, "JA holds white space, | or /");
+            continue;
+        }
         Listed name{std::string(f[0]), std::string(f[1])};
         name.line = static_cast<int>(number);
         if (f.size() > 2 && !f[2].empty()) {
@@ -87,6 +96,10 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
                 fail(number, "unknown option " + std::string(opt));
                 good = false;
             }
+        }
+        if (good && name.honorificOnly && !PersonKind(name.kind)) {
+            fail(number, "hon is an option of person names");
+            good = false;
         }
         if (!good) continue;
         std::erase_if(out.names, [&](const Listed& n) { return n.ja == name.ja; });

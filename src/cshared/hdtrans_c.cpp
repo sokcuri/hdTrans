@@ -268,10 +268,9 @@ int hdTrans_TranslateContext(const char* context, size_t cn, const char* text, s
 int hdTrans_SetNames(const char* text, size_t n) {
     AdminLock lock;
     g_names = text ? std::string(text, n) : std::string();
+    if (g_session) return g_session->SetNames(g_names) ? 0 : -1;
     hdTrans::names::List list;
-    const bool ok = hdTrans::names::ParseList(g_names, list);
-    if (g_session) static_cast<void>(g_session->SetNames(g_names));
-    return ok ? 0 : -1;
+    return hdTrans::names::ParseList(g_names, list) ? 0 : -1;
 }
 
 int hdTrans_Reset(void) {

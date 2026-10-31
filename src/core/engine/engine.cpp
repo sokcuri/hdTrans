@@ -924,6 +924,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
                                        std::string_view context) {
     if (engine_.watch_->automatic) internal::Access::Refresh(engine_, snapshot_, generated_, filters_);
     if (!snapshot_) return {};
+    if (nameList_ && namesSnapshot_ != snapshot_) static_cast<void>(CompileNames());
     std::vector<std::string> lines;
     std::size_t contextLines = 0;
     // One "\n" that ends the context ends its last line.
@@ -955,11 +956,19 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
 bool Session::SetNames(std::string_view text) {
     auto list = std::make_shared<names::List>();
     const bool ok = names::ParseList(text, *list);
-    if (list->names.empty()) {
-        names_.reset();
-    } else {
-        names_ = std::move(list);
-    }
+    names_.reset();
+    namesSnapshot_.reset();
+    nameList_.reset();
+    if (!list->names.empty()) nameList_ = std::move(list);
+    return CompileNames() && ok;
+}
+
+bool Session::CompileNames() {
+    if (!nameList_ || !snapshot_) return true;
+    std::unique_ptr<pipeline::DocumentNames> compiled;
+    const bool ok = pipeline::CompileNames(*snapshot_, *nameList_, compiled);
+    names_ = std::move(compiled);
+    namesSnapshot_ = snapshot_;
     return ok;
 }
 

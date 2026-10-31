@@ -128,7 +128,7 @@ void Registry::SetName(std::string_view t, std::string_view kr) {
     }
 }
 
-void Registry::List(const Listed& name) {
+void Registry::AddListed(const Listed& name) {
     if (name.ja.empty() || name.ko.empty()) return;
     scoresValid_ = false;
     listed_[name.ja] = name;

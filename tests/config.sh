@@ -156,7 +156,7 @@ grep -F 'names:2: a name needs JA and KO' "$tmp/errors" > /dev/null
 grep -F 'pack:names:1' "$tmp/errors" > /dev/null
 grep "^WHY-PACK.*$(printf '\t')names:1$(printf '\t')name$(printf '\t')네코\$" "$tmp/errors" > /dev/null
 printf 'surface\n猫\n' > "$tmp/cast-off"
-[ "$(HD08_CAST_OFF="$tmp/cast-off" "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -in "$tmp/input" 2> /dev/null)" != 네코 ]
+[ "$(HD08_CAST_OFF="$tmp/cast-off" "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" -in "$tmp/input" 2> /dev/null)" = 고양이 ]
 printf 'ルルさん、おはよう。\nルルさん、またね。\n' > "$tmp/called"
 "$cli" -dicts "$tmp/settings/first" --names "$tmp/names" --propose-names -in "$tmp/called" > "$tmp/out" 2> "$tmp/errors"
 [ "$(cat "$tmp/out")" = "$(printf 'ルル\t룰\tgiven')" ]

@@ -29,6 +29,9 @@ HD_TEST(names_list_parse) {
         {"星見町\t호시미초\tplace\n星見学園\t호시미 학원\torg\n星見祭\t호시미제\ttitle",
          "星見町\t호시미초\tplace|星見学園\t호시미 학원\torg|星見祭\t호시미제\ttitle"},
         {"若葉\t새잎\n若葉\t와카바", "若葉\t와카바\tgiven"},  // the later line of a name replaces the earlier
+        {"若葉\t와카바\t\t\n黒沢\t쿠로사와\tfamily\t\t\t", "若葉\t와카바\tgiven|黒沢\t쿠로사와\tfamily"},  // trailing tabs
+        {"\xE3\x80\x80若葉\xE3\x80\x80\t와카바\xE3\x80\x80", "若葉\t와카바\tgiven"},  // full-width spaces around a field
+        {"みみ\t미미\tnick\thon  ", "みみ\t미미\tnick\thon"},
     };
     for (const auto& [text, want] : cases) {
         names::List list;
@@ -44,6 +47,12 @@ HD_TEST(names_list_errors) {
         {"# 주석\n若葉\t와카바\tperson", "2: unknown kind person"},
         {"若葉\t와카바\tgiven\tforce", "1: unknown option force"},
         {"若葉\t와카바\tgiven\thon\tx", "1: more than four fields"},
+        {"黒沢\xE3\x80\x80若葉\t쿠로사와 와카바\tfull", "1: JA holds white space, | or /"},
+        {"黒沢 若葉\t쿠로사와 와카바\tfull", "1: JA holds white space, | or /"},
+        {"若葉|わかば\t와카바", "1: JA holds white space, | or /"},
+        {"若葉/わかば\t와카바", "1: JA holds white space, | or /"},
+        {"星見町\t호시미초\tplace\thon", "1: hon is an option of person names"},
+        {"星見祭\t호시미제\ttitle\thon", "1: hon is an option of person names"},
     };
     for (const auto& [text, want] : cases) {
         names::List list;
@@ -52,4 +61,10 @@ HD_TEST(names_list_errors) {
         HD_CHECK(errors.size() == 1 && errors[0] == want);
         HD_CHECK_EQ(Lines(list), std::string("睦月\t무츠키\tgiven"));  // the other lines are kept
     }
+    // A bad later line of a name keeps the earlier line.
+    names::List list;
+    std::vector<std::string> errors;
+    HD_CHECK(!names::ParseList("若葉\t와카바\n若葉\t새잎\tperson", list, &errors));
+    HD_CHECK(errors.size() == 1 && errors[0] == "2: unknown kind person");
+    HD_CHECK_EQ(Lines(list), std::string("若葉\t와카바\tgiven"));
 }

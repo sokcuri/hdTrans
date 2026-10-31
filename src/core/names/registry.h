@@ -83,7 +83,7 @@ public:
     bool LoadReadings(std::string_view text);
     // Takes a listed name: a person (PersonKind) is an accepted name written name.ko, any
     // other kind no accepted name. The lines' evidence is read as without it.
-    void List(const Listed& name);
+    void AddListed(const Listed& name);
     // Reads the evidence of one line.
     void Add(std::string_view line);
 

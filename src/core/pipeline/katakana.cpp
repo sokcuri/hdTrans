@@ -1167,9 +1167,9 @@ bool ClauseVerb(std::string_view name, const dict::Snapshot& snap) {
 // modifies (いつかちゃんと, もっとちゃんと) or a verb ending a clause (しろちゃんと), or
 // after a common word before a verb that conjugates (りんごちゃんと遊ぶ). After a name of
 // no other word, a proper noun included, ちゃん and と are the honorific and the particle
-// (りこちゃんと目が合う, りこちゃんと遊ぶ, ふたばちゃんと遊ぶ).
-bool ChantoAdverb(std::string_view name, std::string_view rest, const dict::Snapshot& snap) {
-    if (!LayerPerson(name, snap) || ClauseVerb(name, snap)) return true;
+// (りこちゃんと目が合う, りこちゃんと遊ぶ, ふたばちゃんと遊ぶ). A listed name is a person.
+bool ChantoAdverb(std::string_view name, std::string_view rest, const dict::Snapshot& snap, bool listed) {
+    if ((!listed && !LayerPerson(name, snap)) || ClauseVerb(name, snap)) return true;
     bool word = false;
     for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
         if (c.codes == nullptr || c.codes->part.Empty() || c.codes->sem.Text().starts_with("QPN")) continue;
@@ -1226,6 +1226,50 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const d
     return std::string_view::npos;
 }
 
+// Whether the kana of lead read as words, longest first: dictionary words of two kana or more
+// and one-kana particles (もしもし, した, には).
+bool ReadsAsWords(std::string_view lead, const dict::Snapshot& snap) {
+    while (!lead.empty()) {
+        size_t take = 0;
+        for (size_t e = lead.size(); e > 0 && take == 0;) {
+            const std::string_view w = lead.substr(0, e);
+            if (CountRunes(w, [](char32_t) { return true; }) < 2) break;
+            if (!snap.RetrieveRecords(w, dict::LookupMode::General).empty()) take = e;
+            e -= std::max<size_t>(1, LastRune(w).size);
+        }
+        if (take == 0) {
+            const text::Rune r = text::DecodeRune(lead);
+            if (!RuneIn(r.cp, kParticleRunes)) return false;
+            take = std::max<size_t>(1, r.size);
+        }
+        lead.remove_prefix(std::min(take, lead.size()));
+    }
+    return true;
+}
+
+// Whether s ends in a verb in its dictionary or past form, which may modify a name after it
+// (謝る, かばった, している).
+bool EndsInVerb(std::string_view s, const dict::Snapshot& snap) {
+    for (size_t from = 0; from < s.size(); from += std::max<size_t>(1, text::DecodeRune(s.substr(from)).size)) {
+        const std::string_view w = s.substr(from);
+        for (int group = 1; group <= 3; group++) {
+            if (word::PrefixForm(50 * group) == w || word::PrefixForm(50 * group + 6) == w) return true;
+        }
+        dict::LookupContext lookup;
+        lookup.plain = &snap.Plain();
+        for (const dict::Candidate& c : snap.GetWordInfo(w, dict::LookupMode::General, lookup).list) {
+            if (c.user != nullptr || c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M' ||
+                c.source.size() > w.size()) {
+                continue;
+            }
+            const std::string_view tail = w.substr(c.source.size());
+            const int kind = c.codes->partText[3] - '0';
+            if (!tail.empty() && (word::Conjugation(kind, 0) == tail || word::Conjugation(kind, 6) == tail)) return true;
+        }
+    }
+    return false;
+}
+
 void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx, const dict::Snapshot& snap, output::Pieces& out) {
     size_t at = 0;
     for (size_t i = 0; i < text.size();) {
@@ -1239,35 +1283,44 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         }
         const size_t end = i;
         i += honorific.size();
-        // A listed kana name before the honorific is the name, written as listed (にはみみちゃん,
-        // もしもしみみちゃん), but a kin term stays one (にいちゃん).
-        bool listed = false;
+        size_t start = NicknameStart(text, end, spanBefore && at == 0, snap);
+        // The longest listed kana name before the honorific is the name, written as listed, where
+        // a name starts: at the start of the kana run, where NicknameStart starts one, after kana
+        // that read as words (もしもしみみちゃん, にはみみちゃん) or after a verb that modifies it
+        // (謝るみみちゃん); not ゆき in みゆきちゃん.
+        std::string_view listed;
         if (ctx.listed != nullptr) {
-            size_t from = end;
-            while (from > at) {
-                const text::Rune r = LastRune(text.substr(0, from));
-                if (!NicknameRune(r.cp) || r.size == 0 || r.size > from) break;
-                from -= r.size;
+            size_t run = end;
+            while (run > at) {
+                const text::Rune r = LastRune(text.substr(0, run));
+                if (!NicknameRune(r.cp) || r.size == 0 || r.size > run) break;
+                run -= r.size;
             }
-            for (; from < end; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
+            for (size_t from = run; from < end; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
                 const auto l = ctx.listed->find(text.substr(from, end - from));
                 if (l == ctx.listed->end()) continue;
-                if (dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), l->first)) break;
-                if (from > at) output::Add(out, text.substr(at, from - at));
-                out.push_back({l->second, output::SpanWord});
-                at = end;
-                listed = true;
+                size_t word = run;  // the kanji before the run start the verb
+                for (text::Rune r; word > 0 && (r = LastRune(text.substr(0, word))).size > 0 && r.size <= word &&
+                                   IsKanjiRune(r.cp);) {
+                    word -= r.size;
+                }
+                if (from == run || from == start || ReadsAsWords(text.substr(run, from - run), snap) ||
+                    EndsInVerb(text.substr(word, from - word), snap)) {
+                    start = from;
+                    listed = l->second;
+                }
                 break;
             }
         }
-        if (listed) continue;
-        const size_t start = NicknameStart(text, end, spanBefore && at == 0, snap);
         if (start == std::string_view::npos || start < at) continue;
         const std::string_view name = text.substr(start, end - start);
         const std::string_view rest = text.substr(i);
         if (name.starts_with("お") || name.starts_with("ご") || name.starts_with("ー")) continue;
         const bool kin = dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), name);
-        if (kin || (honorific == "ちゃん" && rest.starts_with("と") && ChantoAdverb(name, text.substr(end), snap))) continue;
+        if (kin || (honorific == "ちゃん" && rest.starts_with("と") &&
+                    ChantoAdverb(name, text.substr(end), snap, !listed.empty()))) {
+            continue;
+        }
         // An animal called with the honorific is the animal (ねこちゃん 고양이).
         bool animal = false;
         for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
@@ -1310,7 +1363,7 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         // Long vowels are dropped as a Korean name drops them (ゆうくん 유군, みーちゃん 미짱).
         std::string kana(name);
         for (size_t p; (p = kana.find("ー")) != std::string::npos;) kana.erase(p, std::string_view("ー").size());
-        const std::string hangul = text::FromKana(kana, text::Preset::FanShort);
+        const std::string hangul = listed.empty() ? text::FromKana(kana, text::Preset::FanShort) : std::string(listed);
         if (hangul.empty()) continue;
         if (start > at) output::Add(out, text.substr(at, start - at));
         out.push_back({hangul, output::SpanWord});

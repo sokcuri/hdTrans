@@ -1296,7 +1296,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     const std::unique_ptr<pipeline::DocumentContext> doc = pipeline::BuildDocument(
         snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin, options.names);
     TranslationOptions named = options;
-    named.documentPacks = doc->packs.get();
+    named.documentPacks = doc->packs;
 
     Scratch s;
     word::SessionSenses senses;

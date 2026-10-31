@@ -22,6 +22,10 @@ namespace names {
 struct List;
 }
 
+namespace pipeline {
+struct DocumentNames;
+}
+
 namespace internal {
 struct Access;
 struct Generated;
@@ -198,13 +202,15 @@ public:
     // The names of the documents of later translations, as the lines of a name list
     // (docs/api.md): JA <TAB> KO [<TAB> KIND [<TAB> OPTIONS]]. The list applies to each call
     // on its own, beside the names the call's lines show; empty text drops it. Returns false
-    // when a line is malformed; the other lines are kept.
+    // when a line is malformed or its name does not compile; the other lines are kept. The list
+    // is compiled here and again when the session takes new dictionaries.
     bool SetNames(std::string_view text);
 
 private:
     friend struct internal::Access;
     std::string TranslateObserved(std::string_view text, const internal::StageObserver& observer,
                                   std::string_view context = {});
+    bool CompileNames();
 
     const Engine& engine_;
     const bool reference_;
@@ -213,7 +219,10 @@ private:
     Speech speech_ = Speech::Strict;
     SpeechLevels speechLevels_ = SpeechLevels::Auto;
     bool wrapped_ = false;
-    std::shared_ptr<const names::List> names_;
+    std::shared_ptr<const names::List> nameList_;
+    // nameList_ compiled for namesSnapshot_; rebuilt when snapshot_ is another.
+    std::shared_ptr<const pipeline::DocumentNames> names_;
+    std::shared_ptr<const dict::Snapshot> namesSnapshot_;
     std::shared_ptr<const dict::Snapshot> snapshot_;
     std::shared_ptr<internal::Generated> generated_;
     std::shared_ptr<const filter::Filters> filters_;

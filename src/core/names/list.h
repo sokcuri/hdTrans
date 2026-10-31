@@ -2,8 +2,10 @@
 // The name list of a document: names a caller gives with their Korean for the lines of one
 // translation (Session::SetNames). One name per line, "#" starts a comment:
 //   JA <TAB> KO [<TAB> KIND [<TAB> OPTIONS]]
-// KIND is given (default), family, full, nick, place, org or title. The option hon makes
-// JA a name only before an honorific or inside a longer name of the registry.
+// KIND is given (default), family, full, nick, place, org or title; OPTIONS are separated by
+// ASCII spaces. The option hon, of persons only, makes JA a name only before an honorific or
+// inside a longer name of the registry. JA holds no white space, | or /; trailing empty fields
+// are ignored.
 #include <string>
 #include <string_view>
 #include <vector>

@@ -907,10 +907,10 @@ HD_TEST(names_listed) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     names::Registry r = Scan(snap, Repeat("柚葉さん", 2));
-    r.List({"桃花", "모모카"});
-    r.List({"高森", "타카모리", names::ListKind::Family});
-    r.List({"ひかり", "히카리", names::ListKind::Nick, true});
-    r.List({"星見町", "호시미초", names::ListKind::Place});
+    r.AddListed({"桃花", "모모카"});
+    r.AddListed({"高森", "타카모리", names::ListKind::Family});
+    r.AddListed({"ひかり", "히카리", names::ListKind::Nick, true});
+    r.AddListed({"星見町", "호시미초", names::ListKind::Place});
     HD_CHECK(r.Names() == std::vector<std::string>({"ひかり", "柚葉", "桃花", "高森"}));
     HD_CHECK_EQ(r.Render("桃花"), std::string("모모카"));
     HD_CHECK(r.Dict().find("高森\t타카모리\tname\n") != std::string::npos);
@@ -920,12 +920,12 @@ HD_TEST(names_listed) {
     HD_CHECK(r.Named("桃花") && !r.Named("星見町"));
 
     names::Registry alone = Scan(snap, Repeat("みか「おはよう」", 3));
-    alone.List({"みか", "미카", names::ListKind::Given, true});
+    alone.AddListed({"みか", "미카", names::ListKind::Given, true});
     HD_CHECK(alone.HonorificOnlyNames().empty());
 
     // A listed name renders as listed inside a learned full name.
     names::Registry full = Scan(snap, Repeat("高森恭平「おはよう」", 3));
-    full.List({"恭平", "교헤이"});
+    full.AddListed({"恭平", "교헤이"});
     HD_CHECK_EQ(full.Render("高森恭平"), std::string("타카모리 교헤이"));
 }
 
@@ -934,7 +934,7 @@ HD_TEST(names_proposed) {
     const dict::Snapshot* snap = Dictionary();
     HD_REQUIRE(snap != nullptr);
     names::Registry r = Scan(snap, Repeat("高森恭平「おはよう」", 3) + Repeat("恭平くん", 2));
-    r.List({"恭平", "쿄헤이"});
+    r.AddListed({"恭平", "쿄헤이"});
     std::string lines;
     for (const names::Listed& n : r.Proposed()) lines += names::ListLine(n) + "\n";
     HD_CHECK_EQ(lines, std::string("高森\t타카모리\tfamily\n高森恭平\t타카모리 쿄헤이\tfull\n"));
