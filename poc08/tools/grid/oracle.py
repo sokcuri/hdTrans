@@ -5,15 +5,28 @@ The Korean is composed from the spec tables of this folder (ko-*.tsv: one table 
 Korean value), the fixed gloss of each controlled lemma (vocab.tsv), the Korean paradigm of the generator
 (`hd8gen batch`, one predicate word per question) and the generator's realization tables for the spoken forms
 (ko/spoken.tsv fusions, ko/particles.tsv person particles; STYLE §7: the generator tables are the house style).
-It reads nothing of the engine's transfer data.
+Each lemma's Korean, its Korean class and its ている realization (te) come from the N5 lexicon (levels/n5.tsv and
+the sense rows of lexicon/curriculum.tsv), the sense picked by the lexicon's own reference rule (tools/senses.py)
+from the grid's context; disputes.tsv keeps the house form where the grid and the lexicon disagree. It reads
+nothing of the engine's transfer data.
 
 A cell spec (made by grid.py) holds the block, the predicate lemma, the argument slots and the dimension values d.
 """
 import os
 import subprocess
+import sys
+import types
 
 FRAME_KO = {'을': '을/를', '를': '을/를', '이': '이/가', '가': '이/가'}
 KASE = {'이/가': 'subj', '은/는': 'top', '을/를': 'obj', '(으)로': 'instr'}
+# Japanese particle → the lexicon's argument slot (senses.py ARG_SLOTS)
+ARG_OF = {'が': 'subj', 'は': 'subj', 'を': 'obj', 'に': 'dat', 'で': 'loc', 'と': 'with', 'から': 'from', 'へ': 'to',
+          'まで': 'to'}
+ROLE_ARG = {'subj': 'subj', 'top': 'subj', 'obj': 'obj', 'dat': 'dat', 'loc': 'loc', 'goal': 'to', 'path': 'obj',
+            'com': 'with', 'src': 'from'}
+TE_OF_ASP = {'activity': 'go', 'change': 'eo', 'change-past': 'past', 'state': 'simple'}
+VERB_GCLS = {'godan-u', 'godan-ku', 'godan-ku-iku', 'godan-gu', 'godan-su', 'godan-tsu', 'godan-nu', 'godan-bu',
+             'godan-mu', 'godan-ru', 'ichidan', 'suru', 'kuru', 'sahen', 'naru'}
 
 
 def read_tsv(here, name):
@@ -67,8 +80,19 @@ class PW:
 
 
 class Oracle:
-    def __init__(self, hd8gen, here, gendata):
+    def __init__(self, hd8gen, here, gendata, lexdir):
         self.here = here
+        sys.path.insert(0, os.path.join(lexdir, '..', 'tools'))
+        import senses  # the lexicon's reference sense choice
+        self.senses = senses
+
+        def reader(path):
+            return read_tsv(os.path.dirname(path), os.path.basename(path))
+        self.classes, self.sense_rows = senses.load(lexdir, reader)
+        self.lex = {(r['ja'], r['pos']): r for r in read_tsv(os.path.join(lexdir, 'levels'), 'n5.tsv')}
+        self.disputes = read_tsv(here, 'disputes.tsv')
+        self.cc = None  # the clause being composed: pred, args, forms, register
+        self.used = {}  # (ja, ko, source) → count
         self.spoken = read_tsv(gendata, 'spoken.tsv')
         self.gen_particles = read_tsv(gendata, 'particles.tsv')
         self.cur_level = 'haera'
@@ -138,11 +162,109 @@ class Oracle:
         if not isinstance(ja, str) or ja not in self.vocab:
             return {}
         out = {}
-        for a in self.row(ja)['frame'].split():
+        r = self.row(ja)
+        lr = self.lexrow(r)
+        for a in (lr['frame'] if lr else r['frame']).split():
             if '=' in a:
                 k, v = a.split('=', 1)
                 out[k] = FRAME_KO.get(v, v)
         return out
+
+    # ------------------------------------------------------------ lexicon senses
+
+    def clause(self, pred, slots, forms, d, extra_args=None):
+        """Set the clause context the sense choice reads: the predicate, its arguments by slot, its forms."""
+        args = {}
+        for role, jpart, np in slots:
+            if role in ('adv', 'advadj', 'qty'):
+                continue
+            slot = ARG_OF.get(jpart) or ROLE_ARG.get(role)
+            if slot:
+                args.setdefault(slot, []).extend(self.np_nouns(np))
+        for k, v in (extra_args or {}).items():
+            args.setdefault(k, []).extend(v)
+        counted = [n for s in ('obj', 'subj') for n in args.get(s, [])]
+        self.cc = {'pred': pred if isinstance(pred, str) else None, 'args': args, 'forms': set(forms),
+                   'register': 'polite' if d['polite'] == 'masu' else 'casual', 'counted': counted[:1]}
+
+    @staticmethod
+    def np_nouns(np):
+        k = np[0]
+        if k == 'n':
+            return [np[1]]
+        if k == 'list':
+            return [np[1], np[3]]
+        if k == 'poss':
+            return [np[3]]
+        if k in ('adnom', 'adj'):
+            return [np[2]]
+        return []
+
+    def gloss(self, ja, gcls=None, forms=None, head=None, nexts=(), args=None, preds=None, why=False):
+        """The Korean of a lemma: the lexicon sense the context selects (senses.choose), else the vocab gloss."""
+        r = self.row(ja, gcls)
+        cc = self.cc or {'pred': None, 'args': {}, 'forms': set(), 'register': 'casual'}
+        key = (r['ja'], r['yomi'], r['pos'])
+        cue = ''
+        if key in self.sense_rows:
+            ctx = types.SimpleNamespace(
+                args=cc['args'] if args is None else args, head=head, mods=[], nexts=list(nexts), afters=[],
+                preds=([cc['pred']] if cc['pred'] else []) if preds is None else list(preds),
+                forms=cc['forms'] if forms is None else set(forms), domain='', register=cc['register'], main_vol='')
+            _, ko, cue = self.senses.choose([(n, k, c) for n, k, c, _ in self.sense_rows[key]], ctx, self.classes)
+            ko = ko.split(':')[0]
+            src = 'lexicon'
+            for dsp in self.disputes:
+                if dsp['ja'] == r['ja'] and dsp['field'] == 'ko' and dsp['lexicon'] == ko:
+                    ko, src = dsp['house'], 'disputed'
+        else:
+            ko, src = r['ko'], 'vocab'
+        k = (r['ja'], ko, src)
+        self.used[k] = self.used.get(k, 0) + 1
+        return (ko, cue) if why else ko
+
+    def animate(self, ja):
+        r = self.row(ja)
+        lr = self.lexrow(r)
+        return (lr['anim'] == '+') if lr is not None and lr.get('anim') else 'anim=+' in r['feat']
+
+    def pred_forms(self, pred, d, link=None, v1tense=None):
+        """The lexicon form names (lexcheck FORMS) of a predicate in the grid cell."""
+        nominal = isinstance(pred, tuple) and pred[0] == 'cop' or \
+            isinstance(pred, str) and self.row(pred)['gcls'] in ('noun', 'noun-cop', 'pron', 'qword', 'na-adj')
+        f = {'cop'} if nominal else set()
+        if link is not None:  # the first predicate of a two-clause line
+            if link in ('te', 'tekara'):
+                f.add('te')
+            elif link == 'nagara':
+                f.add('renyou')
+            elif link in ('ato', 'tari') or v1tense == 'past':
+                f.add('ta')
+            return f
+        f.add('no-attr')
+        if d['tense'] == 'past' or d['mod'] in ('hougaii', 'takoto') and d['pol'] == 'pos':
+            f.add('ta')
+        if d['pol'] == 'neg':
+            f.add('neg')
+        if d['aspect'] == 'teiru' or d['mod'] in ('temoii', 'tewaikenai'):
+            f.add('te')
+        if d['stype'] == 'request':
+            f.add('te-request')
+        if d['stype'].startswith('invite'):
+            f.add('vol')
+        return f
+
+    def lexrow(self, r):
+        return self.lex.get((r['ja'], r['pos']))
+
+    def te(self, r):
+        """How ている realises for a verb (go, eo, past, simple): the lexicon's te, else the vocab asp."""
+        lr = self.lexrow(r)
+        te = lr['te'] if lr and lr.get('te') else TE_OF_ASP[self.feats(r)['asp']]
+        for dsp in self.disputes:
+            if dsp['ja'] == r['ja'] and dsp['field'] == 'te' and dsp['lexicon'] in (te, '*'):
+                te = dsp['house']
+        return te
 
     # ------------------------------------------------------------ noun phrases
 
@@ -152,9 +274,9 @@ class Oracle:
                 return r['ko']
         return None
 
-    def noun(self, ja, level):
+    def noun(self, ja, level, nexts=(), forms=()):
         c = self.contracted(ja, level, '-')
-        return c if c is not None else self.row(ja)['ko']
+        return c if c is not None else self.gloss(ja, forms=forms, nexts=nexts, args={})
 
     def fusion(self, host, nxt, level):
         """The generator's spoken.tsv row for host + next (subj top obj instr COP -), if it applies at the level:
@@ -231,56 +353,59 @@ class Oracle:
         if k == 'adnom':
             adn = {'この': '此の', 'その': '其の', 'あの': '彼の', 'どの': '何の'}[np[1]]
             b, _ = self.np(('n', np[2]), level)
-            return self.row(adn)['ko'] + ' ' + b, None
+            return self.gloss(adn, head=np[2], forms=(), args={}) + ' ' + b, None
         if k == 'adj':
             r = self.row(np[1])
             b, _ = self.np(('n', np[2]), level)
-            return self.conj(r['ko'], self.kpos(r), '', ['-는']) + ' ' + b, None
+            ko = self.gloss(np[1], forms=('attr',), head=np[2], args={'subj': [np[2]]})
+            return self.conj(ko, self.kpos(r), '', ['-는']) + ' ' + b, None
         if k == 'num':
             return self.number(np[1], np[2]), None
         if k == 'clause':
             _, verb, part, noun = np
             n, nja = self.np(('n', noun), level)
             r = self.row(verb)
-            v = self.conj(self.kverb(r), 'V', '', ['-는'])
+            v = self.conj(self.kverb(r, self.gloss(verb, forms=('attr',), args={'obj': [noun]}, preds=[])), 'V', '',
+                          ['-는'])
             return self.with_particle(nja, n, self.ko_particle(part, 'obj', level), level) + ' ' + v + ' 것', None
         raise ValueError(np)
 
     def number(self, num, counter):
         c = self.row(counter, 'counter')
+        head = self.cc['counted'][0] if self.cc and self.cc['counted'] else None
+        cko = self.gloss(counter, 'counter', head=head, forms=(), args={})
         if num.isdigit():
-            return num + ('개' if counter == 'つ' else c['ko'])
+            return num + cko
         n = self.num[num]
         if counter == 'つ':
-            return '하나' if n['value'] == '1' else n['native'] + ' ' + c['ko']
-        kind = self.feats(c).get('num', 'native')
-        return (n['native'] if kind == 'native' else n['sino']) + ' ' + c['ko']
+            return '하나' if n['value'] == '1' else n['native'] + ' ' + cko
+        lr = self.lexrow(c)
+        kind = lr['num'] if lr and lr.get('num') else self.feats(c).get('num', 'native')
+        return (n['native'] if kind == 'native' else n['sino']) + ' ' + cko
 
     def slot(self, slot, level, frame, clause):
         role, jpart, np = slot
         if role == 'adv':
             return self.adverb(np[1], clause)
         if role == 'advadj':
-            for r in self.vocab[np[1]]:
-                if 'form=adv' in r['cue']:
-                    return r['ko']
             r = self.row(np[1])
-            return self.conj(r['ko'], self.kpos(r), '', ['-게'])
-        ko, ja = self.np(np, level)
+            ko, cue = self.gloss(np[1], forms=('adv',), args={}, why=True)
+            if 'form=' in cue and 'adv' in cue:
+                return ko  # a lexicalised adverb sense
+            return self.conj(ko, self.kpos(r), '', ['-게'])
+        if np[0] == 'n':
+            ko, ja = self.noun(np[1], level, nexts=[jpart] if jpart != '-' else []), np[1]
+        else:
+            ko, ja = self.np(np, level)
         if jpart in frame and role in ('obj', 'dat'):
             part = frame[jpart]
         else:
-            anim = np[0] == 'n' and 'anim=+' in self.row(np[1])['feat']
+            anim = np[0] == 'n' and self.animate(np[1])
             part = self.ko_particle(jpart, role, level, anim)
         return self.with_particle(ja, ko, part, level)
 
     def adverb(self, ja, clause):
-        for r in self.adv:
-            if r['ja'] != ja:
-                continue
-            if all(r[k] in ('*', clause[k]) for k in ('pol', 'tense', 'aspect')):
-                return r['ko']
-        return self.row(ja)['ko']
+        return self.gloss(ja, args={})
 
     def adverb_then(self, slots, clause):
         for role, _, np in slots:
@@ -299,14 +424,14 @@ class Oracle:
         if g in ('i-adj', 'hoshii', 'advadj'):
             return 'A'
         if g == 'na-adj':
-            return 'V' if r['kcls'] == 'V' else 'A'
+            return 'V' if r['kpos'] == 'V' else 'A'
         if g in ('aru', 'iru'):
             return 'X'
         return 'V'
 
     @staticmethod
-    def kverb(r):
-        return r['ko'] + '하다' if r['gcls'] == 'sahen' else r['ko']
+    def kverb(r, ko):
+        return ko + '하다' if r['gcls'] == 'sahen' else ko
 
     def base(self, pred, level):
         """The predicate before aspect, modality, polarity and tense: a list of literal words and PWs."""
@@ -318,23 +443,26 @@ class Oracle:
             if kind == 'naru':
                 r = self.row(arg)
                 if r['gcls'] in ('i-adj', 'na-adj'):
-                    stem = self.conj(r['ko'], 'A', '', ['-어'])
+                    stem = self.conj(self.gloss(arg, forms=('renyou',)), 'A', '', ['-어'])
                     return [PW(stem + '지다', 'V')]
-                return [attach(self.noun(arg, level), '이/가'), PW('되다', 'V')]
+                return [attach(self.noun(arg, level, nexts=['に']), '이/가'), PW('되다', 'V')]
             raise ValueError(pred)
         r = self.row(pred)
         g = r['gcls']
         neg = self.feats(r).get('neg', '')
         if g in ('noun', 'noun-cop', 'pron', 'qword'):
-            return [PW('이다', 'C', host=self.noun(pred, level))]
+            return [PW('이다', 'C', host=self.noun(pred, level, forms=('cop',)))]
         if g == 'hoshii':
-            *lit, last = r['ko'].split(' ')
+            *lit, last = self.gloss(pred).split(' ')
             return lit + [PW(last, 'A')]
         if g in ('aru', 'iru'):
             return [PW('있다', 'X', neg=neg)]
-        ko = self.kverb(r)
+        ko = self.kverb(r, self.gloss(pred))
         split = ''
-        if r['kcls'] == '하다' and ko.endswith('하다'):
+        lr = self.lexrow(r)
+        # a verb whose Korean is a noun + 하다 lets 안 in between (공부 안 해, N5-H1); an adjective does not (안 조용해)
+        if g in VERB_GCLS and ko.endswith('하다') and len(ko) > 2 and \
+                (g == 'sahen' or (lr is not None and lr['kcls'] == 'HA')):
             split = ko[:-2]
         return [PW(ko, self.kpos(r), split=split, neg=neg)]
 
@@ -418,8 +546,10 @@ class Oracle:
         if steps_first:
             self.steps(items, steps_first)
         if aspect == 'teiru':
-            f = self.feats(self.row(pred))
-            st = next(a['steps'] for a in self.aspect if a['asp'] == f['asp']
+            r = self.row(pred)
+            f = self.feats(r)
+            te = self.te(r)
+            st = next(a['steps'] for a in self.aspect if a['te'] == te
                       and a['pclass'] in ('*', f.get('pclass', '-')) and a['pol'] in ('*', d['pol']))
             if st == 'past':
                 tense = 'past'
@@ -473,6 +603,7 @@ class Oracle:
             text, punct = self.link_line(spec, d, level)
         else:
             pred, slots = spec['pred'], spec['slots']
+            self.clause(pred, slots, self.pred_forms(pred, d), d)
             frame = self.frame_map(pred)
             clause = {'pol': d['pol'], 'tense': d['tense'], 'aspect': d['aspect']}
             words = [self.slot(s, level, frame, clause) for s in slots]
@@ -504,6 +635,7 @@ class Oracle:
             raise KeyError('no link row for %s %s %s' % (link, d['v1tense'], main))
         frame1, frame2 = self.frame_map(p['pred1']), self.frame_map(p['pred2'])
         clause = {'pol': 'pos', 'tense': d['tense'], 'aspect': 'simple'}
+        self.clause(p['pred1'], spec['slots1'], self.pred_forms(p['pred1'], d, link, d['v1tense']), d)
         w1 = [self.slot(s, level, frame1, clause) for s in spec['slots1']]
         items1 = self.base(p['pred1'], level)
         self.steps(items1, row['steps'])
@@ -511,6 +643,8 @@ class Oracle:
         if link in ('kara', 'ga', 'kedo'):
             first += self.punct['、']
         clause2 = {'pol': d['pol'], 'tense': d['tense'], 'aspect': 'simple'}
+        shared = {'obj': self.cc['args'].get('obj', [])} if p['shared'] == '1' else None
+        self.clause(p['pred2'], spec['slots2'], self.pred_forms(p['pred2'], d), d, shared)
         w2 = [self.slot(s, level, frame2, clause2) for s in spec['slots2']]
         if link == 'tari':
             items, punct = self.predicate('為る', d, level, [], items=self.base(p['pred2'], level),

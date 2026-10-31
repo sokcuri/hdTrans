@@ -1,11 +1,11 @@
 #! grid-ko-aspect
-# ている by the verb's asp feature (N5-32, N5-33) and, for change verbs, the polarity (proposed N5-H15). steps as
-# in ko-final.tsv; "simple" keeps the verb; "past" makes the clause past, with one -었- only (結婚している,
-# 結婚していた → 결혼했다; 来ていない, 来ていなかった → 오지 않았다; no -었었- in N5, STYLE §8).
-asp	pclass	pol	steps	spec
-activity	*	*	-고 +있다/X	N5-32
-change	posture	*	-어 +있다/X	N5-33
-change	*	pos	-어 +있다/X	N5-33
-change	*	neg	past	N5-H15
-change-past	*	*	past	N5-33
-state	*	*	simple	N5-33
+# ている by the verb's te value (the lexicon's te: go, eo, past, simple; N5-32, N5-33) and, for eo verbs, the
+# polarity (N5-H15). steps as in ko-final.tsv; "simple" keeps the verb; "past" makes the clause past, with one -었-
+# only (結婚している, 結婚していた → 결혼했다; 来ていない, 来ていなかった → 오지 않았다; no -었었- in N5, STYLE §8).
+te	pclass	pol	steps	spec
+go	*	*	-고 +있다/X	N5-32
+eo	posture	*	-어 +있다/X	N5-33
+eo	*	pos	-어 +있다/X	N5-33
+eo	*	neg	past	N5-H15
+past	*	*	past	N5-33
+simple	*	*	simple	N5-33
