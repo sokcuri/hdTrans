@@ -86,3 +86,10 @@ case.wa.aru	fix	「時間はある。」	「시간은 있어.」	inv
 case.wa.aru	keep	「時間がある。」	「시간이 있어.」	inv
 case.no.det	fix	「何の本ですか。」	「무슨 책이에요?」	inv
 case.no.det	keep	「先生の本です。」	「선생님의 책이에요.」	inv
+case.ka.or	keep	「何か問題がある？」	「뭔가 문제가 있어?」	inv
+case.ni.saki	fix	「先に行く。」	「먼저 가.」	inv
+case.ni.saki	keep	「学校に行く。」	「학교에 가.」	inv
+case.ni.mukete	fix	学校に向かって歩く。	학교를 향해 걷는다.	inv
+case.ni.mukete	keep	学校に行って歩く。	학교에 가서 걷는다.	inv
+case.ka.nanika	fix	「何か問題がある？」	「뭔가 문제가 있어?」	inv
+case.ka.nanika	keep	「パンかりんごを食べる。」	「빵이나 사과를 먹어.」	inv

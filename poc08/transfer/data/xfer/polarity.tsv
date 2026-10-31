@@ -10,3 +10,5 @@ adv.sou.cop	N5-53	{C} [role=cop]	C.lemma=そう	C.lemma=그렇다;C.kind=V	-	m	o
 adv.sou.final	N5-53	{C}	C.lemma=そう next.kind=final	C.lemma=그래	-	m	own	そうよ → 그래
 adv.sou.cop.ne	N5-53	{C} [role=cop] ね/p_final	C.lemma=そう	C.lemma=그렇다;C.kind=V;C.eomi=ji	-	m	own	そうだね → 그렇지
 adv.dou.cop	N5-54	{C} [role=cop]	C.lemma=どう	C.lemma=어떻다;C.kind=V	-	m	own	どうでしたか → 어땠어요?
+pol.neg.notice.short	N5-H1	[pol=neg]	utt=dialogue pred.lemma=気付く	pred.neg=mot	-	m	own	気付かなかった(「」) → 못 알아차렸어 (notice: failing is 못)
+pol.neg.notice.long	N5-H1	[pol=neg]	utt=narration pred.lemma=気付く	pred.neg=ji-mot	-	m	own	気付かなかった → 알아차리지 못했다

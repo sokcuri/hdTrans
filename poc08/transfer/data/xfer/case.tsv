@@ -31,7 +31,7 @@ case.de.language	N5-16	{N:@language} [kase=de]	-	-	P:instr	m	own	日本語で話
 case.no.na	N5-H9	{NP} [kase=no]	NP.ko=나	NP.lemma=내	-	m	own	私の本 → 내 책
 case.no.jeo	N5-H9	{NP} [kase=no]	NP.ko=저	NP.lemma=제	-	m	own	私の本(です/ます) → 제 책
 case.no.neo	N5-H9	{NP} [kase=no]	NP.ko=너	NP.lemma=네	-	m	own	君の本 → 네 책
-case.ka.or	N5-22	{NP} [aux.p.ka.adv]	next.pos=n|pn NP.cls!=@question	-	P:=(이)나	m	own	パンかりんご → 빵이나 사과
+case.ka.or	N5-22	{NP} [aux.p.ka.adv]	next.pos=n|pn NP.cls!=@question NP.lemma!=何	-	P:=(이)나	m	own	パンかりんご → 빵이나 사과
 case.mo.aru	N5-07	{NP} [kase=mo] [aux.aru.cop]	-	-	P:=도 V:있다	m	own	時計もある (ある read as the copula's) → 시계도 있다
 case.de.pron	N5-16	{NP} [kase=de]	NP.field=pronoun NP.cls=@entity NP.cls!=@place	-	P:instr	m	own	これでいい → 이걸로 좋다
 case.de.time	N5-16	{N:@time} [kase=de]	-	-	P:instr	m	own	今日で終わり → 오늘로 끝
@@ -44,3 +44,6 @@ case.mo.cop.hold	N5-18	[kase=mo] [role=cop]	-	line.route=fallback	-	m	own	私も
 case.mo.naku.hold	N5-18	[kase=mo] [aux.nai.adj,form.role=renyo]	-	line.route=fallback	-	m	own	間もなく (without): held for 0.7.x
 case.wa.aru	N5-07	{NP} [kase=wa] [aux.aru.cop]	-	-	P:top V:있다	m	own	時間はある (ある read as the copula's) → 시간은 있다
 case.no.det	N5-54	{NP} [kase=no]	NP.ko=무슨	-	-	m	own	何の用 → 무슨 볼일
+case.ni.saki	N5-42	先 [kase=ni]	-	-	Adv:먼저	m	own	先に → 먼저
+case.ni.mukete	N5-14	{NP} [kase=ni] 向かう [link=te]	-	-	P:obj V:향하다{ctype=conn,eomi=-어}	m	own	目的に向かって → 목적을 향해
+case.ka.nanika	N5-54	{NP} [aux.p.ka.adv]	NP.lemma=何	-	-	m	own	何か → 뭔가 (the sense holds the か)

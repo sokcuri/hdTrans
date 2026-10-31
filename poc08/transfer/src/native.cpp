@@ -1781,6 +1781,10 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 nd.glue = true;
             }
         }
+        // a repeated interjection right after itself is written as one word (はいはい → 네네)
+        if (nd.kind == KK::Intj && !line.kir.empty() && line.kir.back().kind == KK::Intj &&
+            line.kir.back().lemma == nd.lemma && line.kir.back().src.end == nd.src.begin)
+            nd.glue = true;
         nd.id = static_cast<uint32_t>(line.kir.size() + 1);
         const Tk& k = x.tk[static_cast<size_t>(p.ptok)];
         nd.utt = k.utt;
