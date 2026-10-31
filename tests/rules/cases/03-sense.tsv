@@ -9,7 +9,7 @@ dict:jisjk:267272	書いており、読んでいる。	쓰고 있어 읽고 있�
 dict:jisjk:267272	読んでおりません。	rule:dict:jisjk:267272=&HN@	keep	local
 dict:jisjk:265218	あと二人必要だ。	!rule:dict:jisjk:265218	keep	local
 dict:jisjk:265218	あと、窓も閉める。	그리고, 창도 닫는다.	fix	local
-dict:jisjk:265218	あと本を読む。	그리고책을 읽는다.	fix	local
+dict:jisjk:265218	あと本を読む。	그리고 책을 읽는다.	fix	local
 dict:jisjk:370773	二本のバラを買う。	두 송이의 장미를 산다.	fix	local
 dict:jisjk:370773	二本のチューリップを買う。	두 송이의 튤립을 산다.	fix	local
 dict:jisjk:3994	石から火線が飛んだ。	rule:dict:jisjk:3994=에서	keep	local

@@ -28,7 +28,7 @@ rewrite:offer-promise	仕方ない。私、付いてってあげる！	어쩔 �
 rewrite:offer-promise	見せてやる！	보여 준다!	keep	rewrites
 rewrite:offer-promise	今ここでケリ付けてやる！	지금 여기서 끝장 내 준다!	keep	rewrites
 rewrite:offer-promise	母が作ってあげる！	어머니가 만들어 준다!	keep	rewrites
-rewrite:offer-promise	毎日猫にご飯をあげる！	매일고양이에게 밥을 준다!	keep	rewrites
+rewrite:offer-promise	毎日猫にご飯をあげる！	매일 고양이에게 밥을 준다!	keep	rewrites
 rewrite:offer-promise	夕立がね、ステキな悪夢、たっぷり見せてあげる！	소나기가, 멋진 악몽, 듬뿍 보여 줄게!	fix	rewrites
 rewrite:offer-promise	リベもお祝いしてあげる！	리베도 축하해 줄게!	fix	rewrites
 rewrite:offer-promise	今日はあたし、Jervisが色々Serviceしてあげる！	오늘은 나, Jervis가 여러 가지 Service 해 줄게!	fix	rewrites
