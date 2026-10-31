@@ -5,7 +5,9 @@
 //   retro/     words of the word stage's endings and particle notations the reader takes apart
 //   reader.tsv the reader of the translation and the dialogue and caption detectors
 //   keigo.tsv  the keigo and command-form rows of reader.tsv as the word stage's words spell them
+#include <cstdint>
 #include <map>
+#include <memory>
 #include <set>
 #include <string>
 #include <string_view>
@@ -153,11 +155,16 @@ struct Data {
     RetroWords retro;
     Reader reader;
     std::vector<KeigoWord> keigo;
+    // A number of its own for each load in the process (never 0 for loaded tables): what keeps their readings
+    // apart from those of tables loaded before, which may have had the same address.
+    std::uint64_t loadId = 0;
 };
 
 // The compiled-in tables; null when one of them does not read (DataError says why).
 const Data* LoadedData();
 const std::string& DataError();
+// The compiled-in tables loaded again, apart from LoadedData (tests of a reload); null when they do not read.
+std::unique_ptr<Data> LoadData();
 
 // Splits s at every sep.
 std::vector<std::string> Split(std::string_view s, char sep);

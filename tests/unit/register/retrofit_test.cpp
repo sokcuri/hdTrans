@@ -1,7 +1,9 @@
 // The stage on lines the word stage translated (regen.cases.tsv: the line, its translation and what the word
 // stage resolved): the regenerated text, the lines the stage replaces, and the detectors of dialogue lines,
 // caption documents, keigo and commands.
+#include <cstdint>
 #include <cstdio>
+#include <memory>
 #include <span>
 #include <string>
 #include <vector>
@@ -91,6 +93,35 @@ HD_TEST(register_regenerated_lines) {
             if (out[0] != c.expected) hdtest::Fail(__FILE__, __LINE__, c.ja + ": " + out[0] + " vs " + c.expected);
         }
     }
+}
+
+// Tables loaded again after the first ones are let go (they may take the same address): the readings a thread
+// keeps between calls belong to the first tables and are not used for the second.
+HD_TEST(register_tables_loaded_again) {
+    const std::vector<Case> cases = Cases();
+    HD_REQUIRE(!cases.empty());
+    const auto regenerate = [&](const reg::Data& d) {
+        std::vector<std::string> out;
+        for (const Case& c : cases) {
+            if (c.kind != "gen") continue;
+            const bool dialogue = reg::DialogueLine(d.reader, c.ja);
+            const std::vector<reg::PreLine> lines = {reg::ReadLine(d, 0, c.ja, c.out, c.capture, dialogue, 0)};
+            const auto regen = reg::Regenerate(d, lines, {true}, {});
+            out.push_back(regen.empty() ? "" : regen[0].gen);
+        }
+        return out;
+    };
+    std::unique_ptr<reg::Data> first = reg::LoadData();
+    HD_REQUIRE(first != nullptr);
+    const std::uint64_t firstLoad = first->loadId;
+    const std::vector<std::string> before = regenerate(*first);
+    first.reset();
+    const std::unique_ptr<reg::Data> second = reg::LoadData();
+    HD_REQUIRE(second != nullptr);
+    HD_CHECK(second->loadId != firstLoad);
+    HD_CHECK(second->loadId != 0);
+    HD_CHECK(regenerate(*second) == before);
+    HD_CHECK(regenerate(*reg::LoadedData()) == before);
 }
 
 HD_TEST(register_off_keeps_the_translation) {

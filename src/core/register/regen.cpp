@@ -740,10 +740,16 @@ std::string Splice(const Tables& t, const std::string& before, const std::vector
 }
 
 // The readings of a thread's calls, kept between calls (as bounded as within one), so that a caller sending
-// one line per call (a text hook) does not conjugate the same lemmas again for each line.
+// one line per call (a text hook) does not conjugate the same lemmas again for each line. They are kept by
+// the load of the tables, not by their address alone: tables loaded again may take the address of tables let
+// go, which the readings kept point into. Tables of no load (loadId 0) get new readings for each call.
 Words& ThreadWords(const Data& d) {
     thread_local std::unique_ptr<Words> words;
-    if (!words || &words->t != &d.ko || &words->rw != &d.retro) words = std::make_unique<Words>(Words{d.ko, d.retro, {}, {}});
+    thread_local std::uint64_t load = 0;
+    if (!words || d.loadId == 0 || load != d.loadId || &words->t != &d.ko || &words->rw != &d.retro) {
+        words = std::make_unique<Words>(Words{d.ko, d.retro, {}, {}});
+        load = d.loadId;
+    }
     return *words;
 }
 

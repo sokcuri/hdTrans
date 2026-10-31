@@ -1304,7 +1304,11 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             if (k < context) continue;
             if (!pieces.empty()) {
                 // the joined translation is read under its first line: the lines after it have no reading of
-                // their own
+                // their own. The continuation lines of a joined group are read without items; before the
+                // stage read each line from the pass that keeps its translation, they were read with the
+                // items of their alone pass.
+                // TODO: when pieceLine is set and pieces k-1 and k belong to one cut long line, the items of
+                // k are not cleared.
                 if (observer.levelsOnly && k > i && observer.line) observer.line(observer.context, static_cast<int>(k - context));
                 const LineParts& p = parts[k - i];
                 std::string piece = pieces[k - i];

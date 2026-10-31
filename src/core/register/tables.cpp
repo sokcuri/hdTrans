@@ -1,6 +1,7 @@
 #include "core/register/tables.h"
 
 #include <algorithm>
+#include <atomic>
 #include <memory>
 #include <span>
 
@@ -473,8 +474,10 @@ struct Loaded {
 };
 
 Loaded Load() {
+    static std::atomic<std::uint64_t> loads{0};
     Loaded l;
     auto d = std::make_unique<Data>();
+    d->loadId = ++loads;
     if (LoadKo(d->ko, l.error) && LoadLevels(d->levels, l.error) && LoadRetro(d->ko, d->retro, l.error) &&
         LoadReader(d->reader, l.error) && LoadKeigo(d->reader, d->keigo, l.error))
         l.data = std::move(d);
@@ -490,5 +493,6 @@ const Loaded& Once() {
 
 const Data* LoadedData() { return Once().data.get(); }
 const std::string& DataError() { return Once().error; }
+std::unique_ptr<Data> LoadData() { return Load().data; }
 
 }  // namespace hdTrans::reg
