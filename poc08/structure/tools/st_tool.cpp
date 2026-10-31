@@ -122,6 +122,7 @@ int main(int argc, char** argv) {
     }
     hd8::LoadPersons(ReadFile(dataDir + "/persons.tsv"), data);
     hd8::LoadZeroWeights(ReadFile(dataDir + "/zero.tsv"), data);
+    hd8::LoadBareObject(ReadFile(dataDir + "/bareobj.tsv"), data);
     std::ios::sync_with_stdio(false);
     std::string s;
     if (!trainGold.empty() || !evalGold.empty()) {

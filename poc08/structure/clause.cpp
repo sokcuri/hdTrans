@@ -206,7 +206,7 @@ Decision MakeDecision(Strings& st, const Path& path, const Clause& c, Ev kind, c
 
 }  // namespace
 
-void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>& info, Path& path,
+void BuildClauses(const StructureData& data, Strings& st, const std::vector<TokInfo>& info, Path& path,
                   std::vector<Decision>& decisions) {
     path.clauses.clear();
     const int nb = static_cast<int>(path.buns.size());
@@ -574,6 +574,19 @@ void BuildClauses(const StructureData&, Strings& st, const std::vector<TokInfo>&
             if ((bu.flags & CommaAfter) && IsNounLike(info[bu.content].wc) && bu.type == 'N') {
                 role = Role::topic;
                 how = static_cast<uint8_t>(ArgHow::topic);
+                ok = true;
+            }
+        }
+        // a bare noun right before its verb is the object (迷惑かけた, 責任取って); time and adverbial nouns
+        // (今日行く) and nouns before an adjective or copula are not
+        if (!ok && bu.kase == Case::none && bu.last == bu.content && !(bu.flags & CommaAfter) && h == b + 1 &&
+            h == static_cast<int>(path.clauses[ci].pred)) {
+            const Wc nw = info[bu.content].wc, vw = info[path.buns[h].content].wc;
+            const bool barred = data.noBareObject.count(std::string(st.Get(path.toks[path.buns[h].content].lemma))) != 0;
+            if ((nw == Wc::noun || nw == Wc::propn || nw == Wc::pron || nw == Wc::person) &&
+                (vw == Wc::verb || vw == Wc::verb_dep) && !barred) {
+                role = Role::obj;
+                how = static_cast<uint8_t>(ArgHow::bare);
                 ok = true;
             }
         }

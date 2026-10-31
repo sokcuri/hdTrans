@@ -4,6 +4,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "ir_view.h"
@@ -57,7 +58,11 @@ struct StructureData {
     std::vector<std::pair<std::string, float>> headWeights;  // sorted by feature name
     std::unordered_map<std::string, std::string> persons;     // data/persons.tsv: lemma → speaker|addressee|third
     std::unordered_map<std::string, std::array<float, 6>> zeroWeights;  // data/zero.tsv: feature → weight per class
+    std::unordered_set<std::string> noBareObject;  // data/bareobj.tsv: verbs a bare noun before them is not the object of
 };
+
+// data/bareobj.tsv rows (lemma, note) into out.noBareObject.
+void LoadBareObject(std::string_view tsv, StructureData& out);
 
 // Per-token facts shared by C and L.
 struct TokInfo {

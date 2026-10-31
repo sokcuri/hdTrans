@@ -1,0 +1,11 @@
+#! bareobj
+# Verbs that a bare noun right before them is not the object of: the light verb (勉強する), existence and change
+# (本ある, 医者なる: the noun is the subject or the result), and potential できる.
+lemma	note
+為る	light verb: the noun and する are one predicate
+致す	humble light verb
+為さる	honorific light verb
+有る	existence: a bare noun before it is the subject
+居る	existence: a bare noun before it is the subject
+成る	change: the noun is the result
+出来る	potential: the noun is the subject of the ability
