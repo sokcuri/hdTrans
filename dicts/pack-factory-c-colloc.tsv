@@ -1,0 +1,15 @@
+#! layer=pack
+# 공장에서 만든 팩 행
+id	lemma	pos	slot	kind	cond	target	agent	pri	spec	prov	note
+fac:c:でる:行動にでる	でる	v1	sense	colloc	行動にでる	행동에 나서다		50	LEX-801	factory	行動にでる → 행동에 나서다
+fac:c:伸びる:blowko	伸びる	v1	sense	colloc	殴られて伸びる	맞고 뻗다		50	LEX-802	factory	殴られて伸びる → 맞고 뻗다
+fac:c:やる:元気で	やる	v5	sense	colloc	元気でやる	잘 지내다		50	LEX-803	factory	元気でやる → 잘 지내다
+fac:c:縁ある:en	ある	v5:규칙	sense	colloc	縁ある|縁有る	인연이 닿다		50	LEX-804	factory	縁あって → 인연이 닿아
+fac:c:従う:te-iru	いる	v1	sense	colloc	従っている	따르고 있다		50	LEX-805	factory	従っている → 따르고 있다 (て形は -고)
+fac:c:そうしている:aspect	いる	v1	sense	colloc	そうしている	그렇게 하고 있다		50	LEX-806	factory	そうしている → 그렇게 하고 있다
+fac:c:望む:妻に	望む	v5	sense	colloc	{X}を妻に望む	{X}을 아내로 원하다		50	LEX-807	factory	{X}を妻に望む → {X}을 아내로 원하다
+fac:c:方:隅の方	方	n	sense	colloc	隅の方	구석 쪽		50	LEX-808	factory	隅の方 → 구석 쪽
+fac:c:方:股間の方	方	n	sense	colloc	股間の方	가랑이 쪽		50	LEX-808	factory	股間の方 → 가랑이 쪽
+fac:c:方:扉の方	方	n	sense	colloc	扉の方	문 쪽		50	LEX-808	factory	扉の方 → 문 쪽
+fac:c:させる:変形に	させる	v1	sense	colloc	{X}に変形させる	{X}으로 변형시키다		50	LEX-809	factory	{X}に変形させる → {X}으로 변형시키다
+fac:c:程度:見える	程度	n	sense	colloc	見える程度	보이는 정도		50	LEX-810	factory	見える程度 → 보이는 정도
