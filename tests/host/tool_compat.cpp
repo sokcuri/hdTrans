@@ -138,9 +138,22 @@ bool TranslatesTo(TranslateWFn translate, FreeMemFn freeMem, const wchar_t* inpu
     return copied == expected;
 }
 
-// Anemone's dictionary: anedic.txt next to the executable, read only while the process
-// shows Anemone's window. Anemone calls J2K_ReloadUserDict only when the file changes.
-bool RunAnemoneDictionary(HMODULE module, bool window) {
+HWND CreateAnemoneWindow() {
+    WNDCLASSW windowClass{};
+    windowClass.lpfnWndProc = DefWindowProcW;
+    windowClass.hInstance = GetModuleHandleW(nullptr);
+    windowClass.lpszClassName = L"AneParentClass";
+    if (!RegisterClassW(&windowClass)) return nullptr;
+    return CreateWindowExW(WS_EX_TOOLWINDOW, L"AneParentClass", L"", WS_POPUP, 0, 0, 0, 0, nullptr, nullptr,
+                           windowClass.hInstance, nullptr);
+}
+
+// Anemone's dictionary: anedic.txt next to the executable, read only while the process shows
+// Anemone's window. Anemone creates the window before InitializeEx (anemone-dict); a window
+// created later is found at the first translation (anemone-late) or on J2K_ReloadUserDict
+// (anemone-nowindow, which translates without it first). Anemone calls J2K_ReloadUserDict only
+// when the file changes.
+bool RunAnemoneDictionary(HMODULE module, const wchar_t* mode) {
     wchar_t exePath[MAX_PATH]{};
     const DWORD n = GetModuleFileNameW(nullptr, exePath, MAX_PATH);
     if (n == 0 || n >= static_cast<DWORD>(MAX_PATH)) return false;
@@ -155,24 +168,24 @@ bool RunAnemoneDictionary(HMODULE module, bool window) {
     const auto freeMem = Export<FreeMemFn>(module, "J2K_FreeMem");
     const auto reload = Export<void(__stdcall*)()>(module, "J2K_ReloadUserDict");
     if (!initialize || !translate || !freeMem || !reload) return false;
+    HWND hwnd = nullptr;
+    if (std::wcscmp(mode, L"anemone-dict") == 0) ok = Check((hwnd = CreateAnemoneWindow()) != nullptr, "Anemone's window") && ok;
     ok = Check(initialize("CSUSER123455", "C:\\missing\\Dat") != 0, "InitializeEx") && ok;
-    if (!window) {
+    if (std::wcscmp(mode, L"anemone-nowindow") == 0) {
         ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"안녕하세요"), "without Anemone's window anedic.txt is not read") && ok;
         reload();
         ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"일본어"), "nor after J2K_ReloadUserDict") && ok;
-        DeleteFileW(aneDic.c_str());
-        return ok;
+        ok = Check((hwnd = CreateAnemoneWindow()) != nullptr, "Anemone's window after the first translation") && ok;
+        reload();
+        ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"니혼고"), "J2K_ReloadUserDict finds the window") && ok;
+    } else {
+        if (!hwnd) ok = Check((hwnd = CreateAnemoneWindow()) != nullptr, "Anemone's window after InitializeEx") && ok;
+        ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"곤니치와"), "the first translation applies anedic.txt") && ok;
+        ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"니혼고"), "noun row of anedic.txt") && ok;
     }
-    WNDCLASSW windowClass{};
-    windowClass.lpfnWndProc = DefWindowProcW;
-    windowClass.hInstance = GetModuleHandleW(nullptr);
-    windowClass.lpszClassName = L"AneParentClass";
-    const HWND hwnd = RegisterClassW(&windowClass) ? CreateWindowExW(WS_EX_TOOLWINDOW, L"AneParentClass", L"",
-        WS_POPUP, 0, 0, 0, 0, nullptr, nullptr, windowClass.hInstance, nullptr) : nullptr;
-    ok = Check(hwnd != nullptr, "Anemone's window class after InitializeEx") && ok;
-    ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"곤니치와"), "the first translation reads anedic.txt") && ok;
-    ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"니혼고"), "noun row of anedic.txt") && ok;
-    ok = Check(WriteBytes(aneDic, Encode(L"こんにちは\t안녕\t0\n", CP_UTF8)), "edited anedic.txt") && ok;
+    const std::wstring edited = L"\xFEFFこんにちは\t안녕\t0\r\n";
+    ok = Check(WriteBytes(aneDic, std::string(reinterpret_cast<const char*>(edited.data()), edited.size() * sizeof(wchar_t))),
+               "edited anedic.txt in UTF-16LE with a byte order mark") && ok;
     reload();
     ok = Check(TranslatesTo(translate, freeMem, L"こんにちは", L"안녕"), "J2K_ReloadUserDict reads anedic.txt again") && ok;
     ok = Check(TranslatesTo(translate, freeMem, L"日本語", L"일본어"), "removed row no longer applies") && ok;
@@ -370,7 +383,7 @@ bool RunWeb(HMODULE module) {
 
 int wmain(int argc, wchar_t** argv) {
     if (argc != 3) {
-        std::puts("usage: tool_compat <luna|luna-ansi|anemone|anemone-ansi|anemone-dict|anemone-nowindow|aral02|aral03|vnr|vnr-ansi|eztransserver|eztransweb> <DLL>");
+        std::puts("usage: tool_compat <luna|luna-ansi|anemone|anemone-ansi|anemone-dict|anemone-late|anemone-nowindow|aral02|aral03|vnr|vnr-ansi|eztransserver|eztransweb> <DLL>");
         return 2;
     }
     wchar_t cwd[MAX_PATH]{};
@@ -394,8 +407,9 @@ int wmain(int argc, wchar_t** argv) {
         ok = RunNative(module, missingDat, std::wcscmp(argv[1], L"luna-ansi") == 0, false);
     } else if (std::wcscmp(argv[1], L"anemone") == 0 || std::wcscmp(argv[1], L"anemone-ansi") == 0) {
         ok = RunNative(module, missingDat, std::wcscmp(argv[1], L"anemone-ansi") == 0, true);
-    } else if (std::wcscmp(argv[1], L"anemone-dict") == 0 || std::wcscmp(argv[1], L"anemone-nowindow") == 0) {
-        ok = RunAnemoneDictionary(module, std::wcscmp(argv[1], L"anemone-dict") == 0);
+    } else if (std::wcscmp(argv[1], L"anemone-dict") == 0 || std::wcscmp(argv[1], L"anemone-late") == 0 ||
+               std::wcscmp(argv[1], L"anemone-nowindow") == 0) {
+        ok = RunAnemoneDictionary(module, argv[1]);
     } else if (std::wcscmp(argv[1], L"eztransserver") == 0) {
         ok = RunServer(module, missingDat);
     } else if (std::wcscmp(argv[1], L"eztransweb") == 0) {

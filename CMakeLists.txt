@@ -473,7 +473,7 @@ elseif(WIN32)
             LABELS tool-compat TIMEOUT 120)
     endforeach()
     # Copies of the host in their own folders, which the tests give an anedic.txt.
-    foreach(tool anemone-dict anemone-nowindow)
+    foreach(tool anemone-dict anemone-late anemone-nowindow)
         set(toolDir "${CMAKE_CURRENT_BINARY_DIR}/tool-compat-${tool}")
         file(MAKE_DIRECTORY "${toolDir}")
         add_custom_command(TARGET tool_compat POST_BUILD

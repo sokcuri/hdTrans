@@ -64,7 +64,7 @@ std::weak_ptr<const hdTrans::dict::Snapshot> g_loggedSnapshot;
 std::weak_ptr<const hdTrans::filter::Filters> g_loggedFilters;
 std::optional<std::uint64_t> g_loggedDiagnosticsVersion;
 std::atomic<bool> g_anemone{false};  // Anemone's window was found in this process
-bool g_anemoneProbed = false;        // the engine was checked for it at its first translation
+bool g_anemoneProbed = false;        // the engine was checked for it after it opened
 
 // Queued state changes run before new translations.
 class AdminLock {
@@ -87,7 +87,7 @@ void LogLoadErrors(const hdTrans::Engine& engine, bool force = true, bool loaded
 
 void Log(const std::string& text) { OutputDebugStringW(WideFromUtf8("J2KEngine: " + text + "\n").c_str()); }
 
-// Whether this process shows Anemone's main window: the first window of the first of its two
+// Whether this process shows Anemone's parent window: the first window of the first of its two
 // class names that exists belongs to this process.
 bool InAnemone() {
     HWND w = FindWindowW(L"AneParentClass", nullptr);
@@ -96,8 +96,8 @@ bool InAnemone() {
     return w && GetWindowThreadProcessId(w, &pid) && pid == GetCurrentProcessId();
 }
 
-// Anemone's AneDic.txt next to the executable, a UTF-8 file in the Ehnd UserDict format
-// (docs/ehnd-compat.md); none when it is missing or not UTF-8.
+// Anemone's AneDic.txt next to the executable in the Ehnd UserDict format (docs/ehnd-compat.md):
+// UTF-16LE after its byte order mark, otherwise UTF-8. None when it is missing or not UTF-8.
 std::vector<hdTrans::filter::Source> AneDic() {
     std::wstring exe(MAX_PATH, L'\0');
     for (;;) {
@@ -113,16 +113,16 @@ std::vector<hdTrans::filter::Source> AneDic() {
     std::ifstream in(std::filesystem::path(WideFromUtf8(path)), std::ios::binary);
     if (!in) return {};
     const std::string bytes((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
-    if (in.bad() || !hdTrans::dict::internal::ValidUtf8(bytes)) {
+    if (in.bad() || (!bytes.starts_with("\xFF\xFE") && !hdTrans::dict::internal::ValidUtf8(bytes))) {
         Log(path + ": cannot be read as UTF-8; not loaded");
         return {};
     }
     Log("Anemone: reading " + path);
-    return {{hdTrans::filter::Source::Kind::UserDict, path, hdTrans::filter::EhndText(bytes), false, true}};
+    return {{hdTrans::filter::Source::Kind::UserDict, path, hdTrans::filter::EhndText(bytes)}};
 }
 
-// Runs at the first translation of an engine, when the host's windows exist: Anemone calls
-// J2K_ReloadUserDict only when AneDic.txt changes.
+// Runs at the first translation of an engine opened without the window found, as a host may
+// create it later; Anemone calls J2K_ReloadUserDict only when AneDic.txt changes.
 void ProbeAnemone() {
     g_anemoneProbed = true;
     if (!g_anemone && !InAnemone()) return;
@@ -229,6 +229,8 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     const hdTrans::dict::UserSource ehndSource{
         settings.useEhnd ? settings.ehnd.value_or(hdTrans::dict::EhndFolder(dir)) : "",
         true, false, settings.ehnd.has_value()};
+    if (!g_anemone && InAnemone()) g_anemone = true;
+    auto aneDic = g_anemone ? AneDic() : std::vector<hdTrans::filter::Source>{};
     {
         AdminLock lock;
         if (generation != g_generation) return 0;
@@ -240,13 +242,14 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     const hdTrans::EngineOptions dictionaryOptions{std::nullopt, false, configPath};
     auto e = std::make_unique<hdTrans::Engine>(settings.reference, hdTrans::CacheWrite::Off,
                                             hdTrans::UserReload::Auto, dictionaryOptions);
+    hdTrans::internal::SetHostUserDicts(*e, std::move(aneDic));
     static_cast<void>(hdTrans::internal::OpenEhndSource(*e, ehndSource, config));
     const bool loaded = hdTrans::internal::OpenUserSources(*e, dirs, false, requestedUserSources, config);
     AdminLock lock;
     if (generation != g_generation) return 0;
     LogLoadErrors(*e, true, loaded);
     if (!loaded) return 0;
-    g_anemoneProbed = false;
+    g_anemoneProbed = g_anemone;
     g_engine = std::move(e);
     g_session = std::make_unique<hdTrans::Session>(*g_engine, false, settings.cg, settings.misread);
     g_session->SetSpeech(settings.speech);
