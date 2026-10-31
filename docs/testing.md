@@ -110,7 +110,7 @@ tools/variants.py build/mac/hdtrans --base "$BASE/build/mac/hdtrans" "$BASE/dict
 
 `examples/`에는 짧은 일본어 문서와 번역 결과가 있습니다.
 
-- `<case>.ja.txt`: 첫 줄은 사례를 설명하는 `#` 줄, 그다음은 한 문서로 번역할 입력(`-speech-levels auto`)
+- `<case>.ja.txt`: 첫 줄은 사례를 설명하는 `#` 줄, 그다음은 한 문서로 번역할 입력
 - `<case>.ko.txt`: 같은 `#` 줄, 그다음은 검토를 마친 현재 엔진 출력
 
 ```sh
@@ -226,6 +226,7 @@ export HDTRANS_TESTDATA=/path/to/testdata                            # 테스트
 tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts            # 기대 출력과 비교
 tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts --accept   # 새 출력을 받아들임
 tools/e2e.sh <cliA|runA> build/mac/hdtrans dicts                    # 두 빌드 비교
+tools/e2e.sh --expected "$HDTRANS_TESTDATA" build/mac/hdtrans dicts -- --speech-levels auto   # CLI 옵션을 붙여 번역
 ctest --preset mac -R testdata                                       # --expected를 ctest로
 ```
 
@@ -236,6 +237,8 @@ ctest --preset mac -R testdata                                       # --expecte
 - `e2e.sh A B DICTS [DATA]`: 같은 문서를 두 빌드로 번역해 `build/e2e/<폴더>/`(B)와
   `build/e2e/base/<폴더>/`(A)에 쓰고 비교합니다. A에는 CLI 대신 `snapshot.sh` 기록 폴더를 줄 수 있으며,
   그러면 입력이 같은 문서 세트를 A로 씁니다. `HDTRANS_DICTS_A`는 A에 다른 사전 폴더를 줍니다.
+- `--` 뒤의 낱말은 CLI를 돌릴 때마다 옵션으로 넘깁니다(`--speech-levels keep`). `snapshot.sh` 기록 폴더 A는 기록된
+  출력 그대로입니다.
 - `DATA`가 비었거나 없으면 `HDTRANS_TESTDATA`를 씁니다. 둘 다 없으면 77로 끝나며, ctest의 `testdata`는
   이를 건너뜀으로 처리합니다. `testdata`는 저장소의 `dicts/`를 씁니다.
 - 종료 코드: 0 같음 또는 받아들임, 1 바뀜, 2 잘못된 인자, 데이터, CLI 실패, 비교한 문서 없음, 77 테스트

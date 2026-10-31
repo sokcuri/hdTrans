@@ -662,9 +662,11 @@ int RunMain(int argc, char** argv) {
     std::vector<hdTrans::reg::Change> levelChanges;
     std::string speechReport;
     if (!speechReportPath.empty()) options.levelChanges = &levelChanges;
-    if (!speechReportPath.empty() && (reference || speechLevels == hdTrans::SpeechLevels::Keep))
-        std::fprintf(stderr, "hdtrans: speech levels are off (%s); the speech report is empty\n",
-                     reference ? "--reference" : "keep");
+    if (!speechReportPath.empty() && reference)
+        std::fprintf(stderr, "hdtrans: speech levels are off (--reference); the speech report is empty\n");
+    else if (!speechReportPath.empty() && speechLevels == hdTrans::SpeechLevels::Keep)
+        std::fprintf(stderr, "hdtrans: speech levels are off (keep); the speech report is empty. Use --speech-levels auto "
+                             "(or speech_levels: auto) to turn them on\n");
     // The changed lines of one call, numbered from base.
     const auto reportChanges = [&](size_t base) {
         for (const hdTrans::reg::Change& c : levelChanges) {

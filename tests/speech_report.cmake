@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 # --speech-report with --speech-levels auto: one row per changed line, numbered from 1 in the input (context
-# lines not counted); keep (the default, any case) changes nothing and says why the report is empty.
+# lines not counted); keep (the default, any case) changes nothing, says why the report is empty and how to
+# turn auto on.
 if(NOT DEFINED CLI OR NOT DEFINED DICTS OR NOT DEFINED WORK)
     message(FATAL_ERROR "CLI, DICTS and WORK are required")
 endif()
@@ -53,8 +54,9 @@ foreach(keep IN ITEMS default Keep)
     else()
         run_cli(keep.tsv --speech-levels ${keep})
     endif()
-    if(NOT text STREQUAL "" OR NOT error MATCHES "speech report is empty" OR output MATCHES "${after}")
-        message(FATAL_ERROR "keep (${keep}) must change nothing and say so: ${text} / ${error}")
+    if(NOT text STREQUAL "" OR NOT error MATCHES "speech report is empty" OR NOT error MATCHES "--speech-levels auto"
+            OR NOT error MATCHES "speech_levels: auto" OR output MATCHES "${after}")
+        message(FATAL_ERROR "keep (${keep}) must change nothing and say how to turn auto on: ${text} / ${error}")
     endif()
 endforeach()
 run_cli(reference.tsv --speech-levels auto --reference)

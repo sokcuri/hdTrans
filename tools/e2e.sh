@@ -1,11 +1,12 @@
 #!/bin/sh
 # Translates the test-data documents and reports the lines that differ, either from the expected
 # outputs in the data or between two builds.
-#   tools/e2e.sh --expected DATA CLI DICTS [--accept]
-#   tools/e2e.sh A B DICTS [DATA]
+#   tools/e2e.sh --expected DATA CLI DICTS [--accept] [-- CLI-OPTIONS...]
+#   tools/e2e.sh A B DICTS [DATA] [-- CLI-OPTIONS...]
 # DATA is the test-data folder; empty or omitted, HDTRANS_TESTDATA is used, and without either the
 # run is skipped (77). Each DATA/<source>/<name>.ja.txt starts with a `#` line naming the document;
-# the rest is translated as one document with default settings. Outputs repeat that line, then
+# the rest is translated as one document with default settings, or with the CLI-OPTIONS after --
+# (--speech-levels keep) given to every CLI run; a snapshot run A is taken as recorded. Outputs repeat that line, then
 # hold the translation: build/e2e/<source>/<name>.ko.txt for CLI or B, and
 # build/e2e/base/<source>/<name>.ko.txt for A.
 # --expected compares CLI against DATA/<source>/<name>.ko.txt (A in the report); --accept then
@@ -18,12 +19,13 @@
 # compared, 77 no test data.
 set -eu
 usage() {
-    echo 'usage: tools/e2e.sh --expected <data> <cli> <dicts> [--accept]' >&2
-    echo '       tools/e2e.sh <cliA|runA> <cliB> <dicts> [data]' >&2
+    echo 'usage: tools/e2e.sh --expected <data> <cli> <dicts> [--accept] [-- <cli-options>...]' >&2
+    echo '       tools/e2e.sh <cliA|runA> <cliB> <dicts> [data] [-- <cli-options>...]' >&2
     exit 2
 }
 mode=pair accept=0 data=
-n=$# i=0
+# The arguments are rotated: the positional ones first, then the cliOptions CLI options after --.
+n=$# i=0 cliOptions=0
 while [ "$i" -lt "$n" ]; do
     arg=$1; shift; i=$((i + 1))
     case $arg in
@@ -31,16 +33,22 @@ while [ "$i" -lt "$n" ]; do
         --expected)
             [ "$i" -lt "$n" ] || usage
             mode=expected data=$1; shift; i=$((i + 1)) ;;
+        --)
+            cliOptions=$((n - i))
+            while [ "$i" -lt "$n" ]; do set -- "$@" "$1"; shift; i=$((i + 1)); done ;;
         *) set -- "$@" "$arg" ;;
     esac
 done
+positional=$(($# - cliOptions))
 if [ "$mode" = expected ]; then
-    [ $# -eq 2 ] || usage
+    [ "$positional" -eq 2 ] || usage
     a= b=$1 dictsArg=$2
 else
-    [ "$accept" -eq 0 ] && { [ $# -eq 3 ] || [ $# -eq 4 ]; } || usage
-    a=$1 b=$2 dictsArg=$3 data=${4-}
+    [ "$accept" -eq 0 ] && { [ "$positional" -eq 3 ] || [ "$positional" -eq 4 ]; } || usage
+    a=$1 b=$2 dictsArg=$3 data=
+    [ "$positional" -eq 3 ] || data=$4
 fi
+shift "$positional"
 data=${data:-${HDTRANS_TESTDATA-}}
 [ -n "$data" ] || { echo 'no test data (HDTRANS_TESTDATA is not set); skipping'; exit 77; }
 [ -d "$data" ] || { echo "no test data at $data" >&2; exit 2; }
@@ -70,10 +78,11 @@ sha() {
     if command -v sha256sum > /dev/null; then sha256sum "$1"; else shasum -a 256 "$1"; fi |
         awk '{print $1}'
 }
-# translate CLI DICTS CACHEDIR HEADER OUT: the body in $tmp/body.txt, as one document.
+# translate CLI DICTS CACHEDIR HEADER OUT [CLI-OPTIONS...]: the body in $tmp/body.txt, as one document.
 translate() {
-    { printf '%s\n' "$4"; HDTRANS_CACHE_DIR=$3 "$1" -dicts "$2" -in "$tmp/body.txt"; } > "$5" ||
-        { echo "$name: $1 failed" >&2; exit 2; }
+    cli=$1 dicts=$2 cache=$3 title=$4 target=$5; shift 5
+    { printf '%s\n' "$title"; HDTRANS_CACHE_DIR=$cache "$cli" -dicts "$dicts" "$@" -in "$tmp/body.txt"; } > "$target" ||
+        { echo "$name: $cli failed" >&2; exit 2; }
 }
 docs=0 changedSets=0 changedLines=0 printed=0 accepted=0 missing=
 for ja in "$data"/*/*.ja.txt; do
@@ -99,9 +108,9 @@ for ja in "$data"/*/*.ja.txt; do
     else
         mkdir -p "$out/base/$folder"
         expected=$out/base/$folder/$name.ko.txt
-        translate "$a" "$dictsA" "$tmp/cacheA" "$header" "$expected"
+        translate "$a" "$dictsA" "$tmp/cacheA" "$header" "$expected" "$@"
     fi
-    translate "$b" "$dictsB" "$tmp/cacheB" "$header" "$out/$folder/$name.ko.txt"
+    translate "$b" "$dictsB" "$tmp/cacheB" "$header" "$out/$folder/$name.ko.txt" "$@"
     docs=$((docs + 1))
     awk -v name="$name" -v budget=$((200 - printed)) -v counts="$tmp/counts" '
         FILENAME == ARGV[1] {a[FNR] = $0; if (FNR > n) n = FNR; next}
