@@ -84,6 +84,9 @@ struct Settings {
     bool poiTic = false;
     // Text path: the document writes its speech in 「」, so its text outside them is narration.
     bool narrated = false;
+    // Text path: the name rows of the document's name list, applied with the snapshot's packs; null
+    // for none.
+    const dict::PackTable* documentPacks = nullptr;
     // Empty by default; the list and its names outlive the analysis.
     std::span<const Scorer> scorers;
     std::span<const Scorer> shadowScorers;  // recorded only when selectShadow is set

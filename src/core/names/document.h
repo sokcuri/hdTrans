@@ -55,8 +55,8 @@ struct DocumentContext {
     // The plain entries of the registry, the listed names and the historical names, before the
     // skip filter. The entries of listed names have file kListedFile.
     std::vector<dict::UserEntry> extra;
-    // The Korean of the listed names that stand alone (not hon).
-    std::map<std::string, std::string, std::less<>> listed;
+    // The name-slot pack rows of the listed names (docs/packs.md), null without a list.
+    std::unique_ptr<dict::PackTable> packs;
     // The Korean of the listed persons, hon ones too.
     std::map<std::string, std::string, std::less<>> listedPersons;
     struct CachedLookup {
@@ -96,7 +96,7 @@ struct LineLookup {
 inline constexpr int kListedFile = 1 << 30;
 
 // Builds the context of the lines of a document (each may end in "\r"), with the names of
-// list (null for none).
+// list (null for none) but those that HD08_CAST_OFF names (dict::CastOffNames).
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
                                                bool extraBuiltin = false, const names::List* list = nullptr);
 

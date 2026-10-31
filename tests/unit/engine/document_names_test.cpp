@@ -9,6 +9,7 @@
 #include "core/dict/folders.h"
 #include "core/engine.h"
 #include "core/engine/driver.h"
+#include "core/names/document.h"
 #include "hdtest.h"
 
 using namespace hdTrans;
@@ -58,6 +59,19 @@ HD_TEST(engine_document_names) {
         {"察したみみちゃんが来た。", "헤아린 미미짱이 왔다."},
     };
     for (const auto& [line, want] : cases) HD_CHECK_EQ(translate(line, &list), want);
+
+    // The listed names are the document's name rows (docs/packs.md): id names:LINE, a hon name
+    // only before an honorific.
+    const std::string called = "恋さんに渡した。";
+    const auto doc = pipeline::BuildDocument(*loaded.snapshot, {&called, 1}, false, &list);
+    HD_REQUIRE(doc->packs != nullptr);
+    std::string rows;
+    for (const dict::PackRow& r : doc->packs->rows) {
+        rows += r.id + " " + r.key + " " + r.target + " " + std::to_string(r.atoms.size()) + "\n";
+    }
+    HD_CHECK_EQ(rows, std::string("names:1 睦月 무츠키 0\nnames:2 若葉 와카바 0\nnames:3 暁 아카츠키 0\n"
+                                  "names:4 黒沢 쿠로사와 0\nnames:5 恋 렌 1\nnames:6 みみ 미미 1\nnames:7 星見町 호시미초 0\n"));
+    HD_CHECK(pipeline::BuildDocument(*loaded.snapshot, {&called, 1}, false, nullptr)->packs == nullptr);
     HD_CHECK_EQ(translate("睦月は笑った。", nullptr), std::string("1월은 웃었다."));
     HD_CHECK_EQ(translate("もしもしみみちゃん？", nullptr), std::string("여보세요 귀짱?"));
 

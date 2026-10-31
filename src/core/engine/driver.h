@@ -114,6 +114,8 @@ struct TranslationOptions {
     std::vector<reg::Change>* levelChanges = nullptr;
     // The names of the document (Session::SetNames); null for none.
     const names::List* names = nullptr;
+    // The name rows of the document's name list (DocumentContext::packs); set per document.
+    const dict::PackTable* documentPacks = nullptr;
     // Lines may break in the middle of a sentence (Session::SetWrapped).
     bool wrapped = false;
     // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).

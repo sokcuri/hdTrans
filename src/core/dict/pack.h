@@ -24,6 +24,7 @@
 // the header line "class parent" (more columns are ignored) the classes with their parents,
 // as the lexicon's classes.tsv, or under "lemma classes" the classes of words joined by |.
 #include <cstdint>
+#include <set>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -115,6 +116,10 @@ void CheckPackClasses(PackTable& table, std::vector<PackError>& errors);
 const char* PackSlotName(PackSlot slot);
 // The key of PackTable::open for the rows of a slot and a class digit.
 inline int OpenIndex(PackSlot slot, char classDigit) { return static_cast<int>(slot) * 256 + static_cast<unsigned char>(classDigit); }
+
+// The cast-blind contract of evaluation: when the environment variable HD08_CAST_OFF names a TSV
+// file, the surfaces of its first column, whose name rows are not loaded; empty otherwise.
+std::set<std::string, std::less<>> CastOffNames();
 
 // What -why prints for a row: its id, slot and target, by the process-wide id that
 // ParsePackRows gives each row (rows of every snapshot loaded in the process).

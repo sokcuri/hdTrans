@@ -20,6 +20,8 @@
 #include "core/pipeline/normalize.h"
 #include "core/dict/builtin.h"
 #include "core/dict/classes.h"
+#include "core/dict/names.h"
+#include "core/dict/pack.h"
 #include "core/dict/char_readings.h"
 #include "core/text/hangul.h"
 #include "core/text/kana.h"
@@ -164,6 +166,22 @@ const std::vector<names::NameCue>& CuesOf(DocumentContext& doc, std::string_view
     return found->second;
 }
 
+// The listed names as pack name rows, id names:LINE: of any word of the name's key, or for a hon
+// name of one an honorific follows.
+std::string ListPackRows(const names::List& list) {
+    std::string honorific = "next=";
+    for (const std::string_view h : dict::internal::kNameHonorifics) {
+        if (honorific.size() > 5) honorific += '|';
+        honorific += h;
+    }
+    std::string out = "id\tlemma\tpos\tcond\ttarget\tslot\n";
+    for (const names::Listed& l : list.names) {
+        out += "names:" + std::to_string(l.line) + "\t" + l.ja + "\tn\t" + (l.honorificOnly ? honorific : "*") + "\t" +
+               l.ko + "\tname\n";
+    }
+    return out;
+}
+
 }  // namespace
 
 std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::span<const std::string> lines,
@@ -183,13 +201,18 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
     doc->codes = std::make_unique<dict::CodeTable>();
     doc->registry = std::make_unique<names::Registry>(doc->data->registry);
     names::Registry& r = *doc->registry;
+    names::List kept;
+    if (const std::set<std::string, std::less<>> off = dict::CastOffNames(); list != nullptr && !off.empty()) {
+        kept = *list;
+        std::erase_if(kept.names, [&](const names::Listed& l) { return off.contains(l.ja); });
+        list = &kept;
+    }
     // The rows of the listed places, organizations and titles; the persons join the registry.
     std::string listedRows;
     std::set<std::string> listedKeys;
     if (list != nullptr) {
         for (const names::Listed& l : list->names) {
             listedKeys.insert(l.ja);
-            if (!l.honorificOnly) doc->listed[l.ja] = l.ko;
             r.List(l);
             if (names::PersonKind(l.kind)) {
                 doc->listedPersons[l.ja] = l.ko;
@@ -267,6 +290,12 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         for (const names::Listed& l : list->names) doc->key += std::string("\0listed\0", 8) + names::ListLine(l);
     }
     for (dict::UserEntry& e : userdict::Parse(doc->historical, -1, ctx).entries) doc->extra.push_back(std::move(e));
+    if (list != nullptr && !list->names.empty()) {
+        doc->packs = std::make_unique<dict::PackTable>();
+        std::vector<dict::PackError> errors;
+        dict::ParsePackRows("names", ListPackRows(*list), &snap.Base(), doc->families, *doc->packs, errors);
+        if (doc->packs->Empty()) doc->packs.reset();
+    }
     FinishCodes(*doc->codes);
     return doc;
 }
@@ -502,11 +531,6 @@ LineFacts ReadLine(DocumentContext& doc, std::string_view line) {
     facts.persons = internal::PersonPlaces(*doc.snap, cues, doc.registry.get(), &doc.persons_);
     std::sort(facts.persons.begin(), facts.persons.end());
     facts.wholeLine = WholeLineOf(doc.data->wholeLines, facts.text);
-    // A listed name alone on its line is read as listed.
-    if (const auto l = doc.listed.find(names::internal::TrimLineSpace(facts.text)); !facts.wholeLine && l != doc.listed.end()) {
-        const std::size_t at = facts.text.find(l->first);
-        facts.wholeLine = facts.text.substr(0, at) + l->second + facts.text.substr(at + l->first.size());
-    }
     if (!facts.wholeLine) facts.wholeLine = NameLine(*doc.snap, facts.text);
     // A name alone on its line is read by a reading written over it where the dictionary's name
     // spells another (龍生《たつき》 타츠키, not 타츠오).

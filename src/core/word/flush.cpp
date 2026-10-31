@@ -201,7 +201,9 @@ void Flush(Flusher& f) {
     if (f.w.settings.text && (f.w.settings.improvements.cgRules || f.w.settings.improvements.cgLearned)) {
         Run(f, {"FilterCg", FilterCg});
     }
-    if (f.w.settings.text && !f.w.snapshot.Packs().Empty()) Run(f, {"ApplyPacks", ApplyPacks});
+    if (f.w.settings.text && (!f.w.snapshot.Packs().Empty() || f.w.settings.documentPacks != nullptr)) {
+        Run(f, {"ApplyPacks", ApplyPacks});
+    }
 }
 
 }  // namespace hdTrans::word

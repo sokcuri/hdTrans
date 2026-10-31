@@ -16,6 +16,7 @@ struct Listed {
     std::string ja, ko;
     ListKind kind = ListKind::Given;
     bool honorificOnly = false;
+    int line = 0;  // its 1-based line in the list text
 };
 
 struct List {

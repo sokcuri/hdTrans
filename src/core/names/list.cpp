@@ -66,6 +66,7 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
             continue;
         }
         Listed name{std::string(f[0]), std::string(f[1])};
+        name.line = static_cast<int>(number);
         if (f.size() > 2 && !f[2].empty()) {
             const auto kind = std::find_if(kKinds.begin(), kKinds.end(), [&](const auto& k) { return k.second == f[2]; });
             if (kind == kKinds.end()) {

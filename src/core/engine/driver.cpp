@@ -595,6 +595,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
         s.misreadModel = options.misreadModel;
     }
     s.sessionSenses = text ? sessionSenses : nullptr;
+    s.documentPacks = text ? options.documentPacks : nullptr;
     s.ruleTally = options.ruleTally;
     if (options.filters != nullptr) s.filterMarks = options.filters->Marks();
     s.filterWritten = options.filterWritten;
@@ -1294,6 +1295,8 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     }
     const std::unique_ptr<pipeline::DocumentContext> doc = pipeline::BuildDocument(
         snap, sourceLines, !options.reference && options.wordImprovements.extraBuiltin, options.names);
+    TranslationOptions named = options;
+    named.documentPacks = doc->packs.get();
 
     Scratch s;
     word::SessionSenses senses;
@@ -1303,7 +1306,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
     QuoteCarry carry;
     const std::vector<bool> closed = ClosedCarries(lines, carry);
     if (options.wrapped) {
-        out = TranslateWrapped(snap, *doc, lines, closed, s, generated, observer, options, context);
+        out = TranslateWrapped(snap, *doc, lines, closed, s, generated, observer, named, context);
     } else {
         for (std::size_t i = 0; i < lines.size(); i++) {
             const StageObserver& watch = i < context ? StageObserver{} : observer;
@@ -1313,7 +1316,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             // A quote left open counts on a line only when the line or a later one closes it.
             const LineQuotes quotes = QuotesOf(lines[i], carry);
             const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
-            std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, options);
+            std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, named);
             carry = quotes.end;
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             if (cr) translated += '\r';
