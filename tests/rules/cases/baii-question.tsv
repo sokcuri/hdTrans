@@ -36,5 +36,5 @@ dict:jisjk:342502	晴れればいいのに。	개면 좋을 텐데.	keep	local
 dict:jisjk:342502	早く帰ればいいのにね	빨리 돌아가면 좋을 텐데	keep	local
 dict:jisjk:342502	これでいいの？	!rule:dict:jisjk:342502	keep	local
 dict:jisjk:342502	お口に合えばいいのですが。	입맛에 맞으면 좋겠습니다만.	keep	local
-dict:jisjk:342502	手伝えればいいのだが	도울 수 있으면 좋지만	keep	local
+dict:jisjk:342502	手伝えればいいのだが	도울 수 있으면 좋은데	keep	local
 dict:jisjk:342502	わかればいいのです。	알면 됩니다.	fix	local

@@ -38,4 +38,4 @@ lexical:saki-place	赴任先から戻った。	부임지에서 돌아왔다.	fix
 lexical:saki-place	ターゲットの潜伏先を包囲できません	타겟의 은신처를 포위할 수 없습니다	fix	lookup
 lexical:saki-place	就職先を選ぶのはあなたでしょう	취직처를 선택하는 것은 당신이지요	keep	lookup
 lexical:saki-place	転居先を教えてください。	이사할 곳을 가르쳐 주세요.	fix	lookup
-lexical:saki-place	就職先としては悪くないのだが	취직처로서는 나쁘지 않지만	keep	lookup
+lexical:saki-place	就職先としては悪くないのだが	취직처로서는 나쁘지 않은데	keep	lookup
