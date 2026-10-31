@@ -162,6 +162,7 @@ struct Cues {
     bool trailConj = false;   // the last clause trails off after a conjunction (けど……, が……, て……)
     bool honSonkei = false, honGive = false;  // REG-16
     bool declZo = false;      // REG-17: a plain statement declared with ぞ or ぜ
+    bool declBang = false;    // REG-21: an action verb in its dictionary form exclaimed with ！ (行くよっ！)
     bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ
     std::vector<std::pair<std::size_t, std::size_t>> authParts;  // parts of speaker auth rows found (row, part)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
@@ -223,6 +224,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     }
     std::vector<std::u32string> stages{last};
     bool tailStripped = false;
+    std::u32string firstTail;  // the outermost tail particle stripped
     for (int guard = 0; guard < 6; ++guard) {
         const std::u32string s = stages.back();
         const TailRow* best = nullptr;
@@ -231,6 +233,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (!best) break;
         if (stages.size() == 1 && best->strong) c.lastStrong = true;
         if (stages.size() == 1 && best->text == U"か") c.lastKa = true;
+        if (stages.size() == 1) firstTail = best->text;
         if (stages.size() == 1) {
             std::u32string rest = s.substr(0, s.size() - best->text.size());
             PopMarks(rest);
@@ -381,6 +384,15 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         const bool volitional = x.size() >= 2 && x.back() == U'う' && kORow.find(x[x.size() - 2]) != std::u32string_view::npos &&
                                 !EndsWith(x, U"だろう") && !EndsWith(x, U"であろう");  // conjecture, not volition
         c.plainDecl = !question && !volitional && !tailStripped && !x.empty() && kEnds.find(x.back()) != std::u32string_view::npos;
+        // REG-21: the last sentence is a verb's dictionary form, bare or with よ alone, before ！ (行くっ！, 始めるよっ！)
+        const bool bang = !raw.empty() && (raw.back() == U'！' || raw.back() == U'!');
+        if (bang && (!tailStripped || (stages.size() == 2 && firstTail == U"よ"))) {
+            std::u32string v = stages[tailStripped ? 1 : 0];
+            while (!v.empty() && (v.back() == U'っ' || v.back() == U'ッ' || v.back() == U'ー')) v.pop_back();
+            constexpr std::u32string_view kVerbEnds = U"うくぐすつぬぶむるウクグスツヌブムル";
+            const bool vol = v.size() >= 2 && v.back() == U'う' && kORow.find(v[v.size() - 2]) != std::u32string_view::npos;
+            c.declBang = v.size() >= 2 && !vol && kVerbEnds.find(v.back()) != std::u32string_view::npos;
+        }
     }
     // REG-13: an exclamation of discovery or realisation: bare predicates alone (見つけた！, 面白い。, みっけ……あれ？),
     // with no sentence-final particle; a piece without a predicate (あれ？) may stand beside them
@@ -513,6 +525,7 @@ std::string Key(const Cues& c) {
     if (c.pany) return "polite-any";
     if (c.stiff) return "stiff";
     if (c.cend && c.declZo) return "decl-zo";
+    if (c.cend && c.declBang) return "decl-bang";
     if (c.cend && c.exclaimNe) return "exclaim-ne";
     if (c.exclaim && !c.strongTail) return "exclaim";
     if (c.cend) return "casual";
@@ -680,7 +693,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             // the decision of one utterance (the line, or one of its quotes) from its cues
             const auto decide = [&](const Cues& c, std::string key, RegDecision& r) {
                 // REG-14: a plain statement without a sentence-final particle from an authoritative voice keeps -다
-                if (key == "casual" && c.plainDecl && (c.auth || authSpeaker)) key = "auth-plain";
+                if ((key == "casual" || key == "decl-bang") && c.plainDecl && (c.auth || authSpeaker)) key = "auth-plain";
                 // REG-20: in prose fiction a plain statement without a casual cue keeps -다
                 else if (prose && key == "casual" && c.plainDecl && !c.casualMark && !casualNeighbour(k)) key = "prose-plain";
                 r.key = key;

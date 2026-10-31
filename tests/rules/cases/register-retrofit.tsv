@@ -1,4 +1,4 @@
-# 규칙: REG-1, REG-2, REG-3, REG-6, REG-10, REG-11, REG-12, REG-13, REG-14, REG-15, REG-17, REG-18
+# 규칙: REG-1, REG-2, REG-3, REG-6, REG-10, REG-11, REG-12, REG-13, REG-14, REG-15, REG-17, REG-18, REG-21
 rule	input	expected	kind	layer
 register:REG-2	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	fix	register
 register:REG-10	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keep	register
@@ -37,3 +37,7 @@ register:REG-3	「態度というなら、改めるべきはお前の方だ。�
 register:REG-14	「父上には後で承諾を頂く」	「아버님에게는 나중에 승낙을 받는다」	keep	register
 register:REG-1	「よろしくお願いします」じゃねーわ！！	「잘 부탁드립니다」가 아니야!!	keep	register
 register:REG-12	「そうじゃないですけど……	「그렇지 않지만……	keep	register
+register:REG-21	「行くよっ！」	「간다!」	fix	register
+register:REG-21	「始めるよっ！」	「시작한다!」	fix	register
+register:REG-21	「行くねっ！」	「갈게!」	keep	register
+register:REG-21	「行くよ」	「가」	keep	register

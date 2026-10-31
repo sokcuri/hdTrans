@@ -217,3 +217,10 @@ r20-n11	REG-20	keep	p3		yes	「うん」	-	-
 r20-n12	REG-20	keep	p3		no	陽菜	-	-
 r20-n13	REG-20	keep	p3		yes	「そう」	-	-
 r14-22	REG-14	keep	d142		yes	「絶対イヤよ、そんなの許さない」	hae	-
+r21-1	REG-21	fix	d210		yes	「行くよっ！」	haera	-
+r21-2	REG-21	fix	d211		yes	「始めるよっ！」	haera	-
+r21-3	REG-21	fix	d212		yes	「行くっ！」	haera	-
+r21-4	REG-21	keep	d213		yes	「行くねっ！」	hae	-
+r21-5	REG-21	keep	d214		yes	「行くよ」	hae	-
+r21-6	REG-21	keep	d215		yes	「行こう！」	hae	-
+r21-7	REG-21	keep	d216		yes	「行く？」	hae	-

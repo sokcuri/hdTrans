@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:voiced-mark	「う゛ー……」	「으으……」	fix	normalize
 normalize:voiced-mark	「う゛ぅ――――……」	「으으――――……」	fix	normalize
-normalize:voiced-mark	「あ゛っ、やってくれる！」	「앗, 해 줘!」	fix	normalize
+normalize:voiced-mark	「あ゛っ、やってくれる！」	「앗, 해 준다!」	fix	normalize
 normalize:voiced-mark	「あ゛…そこ…ですか？」	「아…거기…입니까?」	fix	normalize
 normalize:voiced-mark	「え゛っ！？」	「어!?」	fix	normalize
 normalize:voiced-mark	「え゛、私！？」	「어, 나!?」	fix	normalize
