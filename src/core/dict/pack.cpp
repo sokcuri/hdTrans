@@ -337,7 +337,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         r.agent = col(f, "agent");
         if (!r.agent.empty() && r.slot != PackSlot::Voice) return fail("agent is read on voice rows only");
         for (const char32_t ch : userdict::internal::Runes(r.agent))
-            if (ch < 0xAC00 || ch > 0xD7A3)
+            if ((ch < 0xAC00 || ch > 0xD7A3) && ch != U' ')
                 return fail("agent " + userdict::internal::Quote(r.agent) + " is not a Korean particle in Hangul");
         // A target - keeps the slot as the chain decided it: the row wins over less specific rows and writes nothing.
         const bool keep = target == "-";
