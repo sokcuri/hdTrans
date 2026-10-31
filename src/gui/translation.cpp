@@ -81,6 +81,7 @@ std::string TranslateText(const hdTrans::Engine& engine, std::string_view text,
         Session session(engine, false, options.cg, options.misread);
         session.SetSpeech(options.speech);
         session.SetWrapped(options.wrapped);
+        session.SetPredicateVariants(options.predicateVariants);
         translated = session.Translate(text);
     } else {
         const auto lines = DocumentLines(text);
@@ -91,6 +92,8 @@ std::string TranslateText(const hdTrans::Engine& engine, std::string_view text,
                 Session session(engine, false, options.cg, options.misread);
                 session.SetSpeech(options.speech);
                 session.SetWrapped(options.wrapped);
+                session.SetPredicateVariants(options.predicateVariants);
+        session.SetPredicateVariants(options.predicateVariants);
                 translated += session.Translate(lines[i]);
             }
             if (cancelled.load(std::memory_order_relaxed)) return {};

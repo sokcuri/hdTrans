@@ -304,6 +304,13 @@
 //= spelling.old-form	Old forms of kanji that the Jōyō kanji table gives with their new forms, and variant forms with the form Japanese text uses (說 説, 嚙 噛, 𠮷 吉), OLD=NEW: an old form that no dictionary word holds, not even on its own, is written in its new form before lookup, so that both read alike (格好惡い 格好悪い, 隱れる 隠れる; 赤澤 of a name stays).
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
+//= spelling.variant-after-predicate	Kanji variants of spelling.variant that are the grammatical word only after an inflected word or the particle の as the analysis reads the text before them, and before a word of spelling.variant-after-predicate-next (慌てた様に 慌てたように, 太陽の様な 太陽のような); after a noun or a name they stay (ひなた様に, あなた様に).
+//= spelling.variant-after-predicate-end	Ends of the ending of a verb before which a variant of spelling.variant-after-predicate is the grammatical word: an adnominal form (慌てた様に, 言う様に, 行かない様に), not the stem (すれ違い様に, 振り向き様に).
+//= spelling.variant-after-predicate-past	Ends of the past form of a verb, after which a variant of spelling.variant-after-predicate is the grammatical word before に too (慌てた様に 慌てたように); after the other adnominal forms it is respelled before に only when なる follows (使える様になる).
+//= spelling.variant-after-predicate-naru	The forms of なる after に, before which a variant of spelling.variant-after-predicate after a present form is the grammatical word (使える様になる).
+//= spelling.variant-after-predicate-next	Starts of the text after a variant of spelling.variant-after-predicate that let it be the grammatical word: a copula, に, な, a pause or the end (怒った様だ, 海の様で。); before は, が, を it is the noun of a look or a sight (その様は).
+//= spelling.variant-after-predicate-kept-after	Words after which a variant of spelling.variant-after-predicate is the noun of a look or a state and stays (そんな様だった, 死闘のような様だ).
+//= spelling.variant-after-predicate-phrase	Phrases of a demonstrative and a variant of spelling.variant-after-predicate that read as the grammatical word (その様な そのような, どの様に どのように); その様に, あの様に and この様だ may be the sight or the sorry state and stay.
 //= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
 //= spelling.variant-kept	Contexts in which a variant of spelling.variant is another word and stays: 位 of rank after の or before が, を (神の位, 位が下げられる), 等 read ら after a pronoun (それ等, あいつ等), the verb 為す or 為る (何を為そう), and 程 after the adnominal な, which the kana rows read as an attached 만큼 (同数な程).
 //= stem.adverse-outcome	Stems of predicates of trouble or embarrassment, which make the (ら)れ of a condition before them the passive (見られたら困る, 見つめられたら照れる).
@@ -4717,8 +4724,53 @@ spelling.variant	位=くらい
 spelling.variant	等=など
 spelling.variant	為=ため
 spelling.variant	迄=まで
+spelling.variant	様=よう
 spelling.variant	とき=時
 spelling.variant-after-word	程
+spelling.variant-after-predicate	様
+spelling.variant-after-predicate-kept-after	ような
+spelling.variant-after-predicate-kept-after	そんな
+spelling.variant-after-predicate-kept-after	こんな
+spelling.variant-after-predicate-kept-after	あんな
+spelling.variant-after-predicate-kept-after	どんな
+spelling.variant-after-predicate-phrase	その様な
+spelling.variant-after-predicate-phrase	この様な
+spelling.variant-after-predicate-phrase	あの様な
+spelling.variant-after-predicate-phrase	どの様な
+spelling.variant-after-predicate-phrase	この様に
+spelling.variant-after-predicate-phrase	どの様に
+spelling.variant-after-predicate-phrase	その様です
+spelling.variant-after-predicate-end	う
+spelling.variant-after-predicate-end	く
+spelling.variant-after-predicate-end	ぐ
+spelling.variant-after-predicate-end	す
+spelling.variant-after-predicate-end	つ
+spelling.variant-after-predicate-end	ぬ
+spelling.variant-after-predicate-end	ぶ
+spelling.variant-after-predicate-end	む
+spelling.variant-after-predicate-end	る
+spelling.variant-after-predicate-end	ない
+spelling.variant-after-predicate-end	たい
+spelling.variant-after-predicate-past	た
+spelling.variant-after-predicate-past	だ
+spelling.variant-after-predicate-naru	になる
+spelling.variant-after-predicate-naru	になっ
+spelling.variant-after-predicate-naru	になり
+spelling.variant-after-predicate-naru	になれ
+spelling.variant-after-predicate-naru	になら
+spelling.variant-after-predicate-naru	になろ
+spelling.variant-after-predicate-next	に
+spelling.variant-after-predicate-next	な
+spelling.variant-after-predicate-next	だ
+spelling.variant-after-predicate-next	で
+spelling.variant-after-predicate-next	。
+spelling.variant-after-predicate-next	、
+spelling.variant-after-predicate-next	」
+spelling.variant-after-predicate-next	』
+spelling.variant-after-predicate-next	）
+spelling.variant-after-predicate-next	！
+spelling.variant-after-predicate-next	？
+spelling.variant-after-predicate-next	…
 spelling.variant-kana-after	た
 spelling.variant-kana-after	だ
 spelling.variant-kana-after	る

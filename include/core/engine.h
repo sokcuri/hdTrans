@@ -199,6 +199,10 @@ public:
     // is split back at the breaks, one line out for each line in.
     void SetWrapped(bool wrapped) { wrapped_ = wrapped; }
 
+    // Whether later translations read a kanji spelling of a grammatical word after a predicate as
+    // its kana (慌てた様に as 慌てたように, spec LEX-1050); true until set.
+    void SetPredicateVariants(bool on) { predicateVariants_ = on; }
+
     // The names of the documents of later translations, as the lines of a name list
     // (docs/api.md): JA <TAB> KO [<TAB> KIND [<TAB> OPTIONS]]. The list applies to each call
     // on its own, beside the names the call's lines show; empty text drops it. Returns false
@@ -219,6 +223,7 @@ private:
     Speech speech_ = Speech::Strict;
     SpeechLevels speechLevels_ = SpeechLevels::Auto;
     bool wrapped_ = false;
+    bool predicateVariants_ = true;
     std::shared_ptr<const names::List> nameList_;
     // nameList_ compiled for namesSnapshot_; rebuilt when snapshot_ is another.
     std::shared_ptr<const pipeline::DocumentNames> names_;

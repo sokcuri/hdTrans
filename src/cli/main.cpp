@@ -112,6 +112,7 @@ void Usage(std::FILE* file) {
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --names FILE           names of the input document: JA<TAB>KO[<TAB>KIND[<TAB>hon]] per line\n"
                "  --propose-names        print the names the input document shows, in the --names format\n"
+               "  --no-predicate-variants  keep kanji spellings of grammatical words as written (様 after a predicate)\n"
                "  --reference, --misread, --no-cg, --cg-learned, --select-shadow\n"
                "  --verify-dicts, --compile-dicts, --compile-snapshot FILE, --no-cache\n"
                "  --stages DIR, --rule-counts FILE, --dump-rules FILE\n"
@@ -327,6 +328,7 @@ int RunMain(int argc, char** argv) {
     std::string namesPath;
     bool proposeNames = false;
     bool noCg = false;
+    bool noPredicateVariants = false;
     bool cgLearned = false;
     bool reference = false;
     bool verifyDicts = false;
@@ -407,6 +409,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-names") namesPath = *value;
         else if (option == "-propose-names") proposeNames = true;
         else if (option == "-no-cg") noCg = true;
+        else if (option == "-no-predicate-variants") noPredicateVariants = true;
         else if (option == "-cg-learned") cgLearned = true;
         else {
             std::fprintf(stderr, "hdtrans: unknown option %s\n", argv[i]);
@@ -459,6 +462,7 @@ int RunMain(int argc, char** argv) {
         return 2;
     }
     noCg = noCg || !config.settings.cg;
+    noPredicateVariants = noPredicateVariants || !config.settings.predicateVariants;
     hdTrans::internal::ConfigCache configCache;
     if (!configCache.Apply(config.settings.cache)) {
         std::fprintf(stderr, "hdtrans: cannot set cache directory\n");
@@ -682,6 +686,7 @@ int RunMain(int argc, char** argv) {
     };
     options.names = documentNames.get();
     if (noCg) options.wordImprovements.cgRules = false;
+    if (noPredicateVariants) options.wordImprovements.predicateVariants = false;
     options.wordImprovements.cgLearned = cgLearned;
     if (selectShadow) {
         options.shadowScorers = diagnosticScorers;

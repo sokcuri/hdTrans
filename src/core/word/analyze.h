@@ -28,6 +28,7 @@ struct SessionSenses;
     X(causativePassive, true)         /* Short causative-passive verb endings. */ \
     X(exclamationNa, true)            /* Exclamatory な after predicates. */ \
     X(dialectForms, true)             /* Colloquial negative and contracted verb forms. */ \
+    X(predicateVariants, true)        /* Kanji spellings of grammatical words after a predicate (様 よう). */ \
     X(documentSenses, false)          /* Reuse trusted lexical senses within a session. */ \
     X(desireWindow, false)            /* Eight-character lookahead for desire endings. */ \
     X(expandedGroups, true)           /* Allow more than 100 entries in a group. */ \

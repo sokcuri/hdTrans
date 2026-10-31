@@ -158,7 +158,8 @@ public:
                 Error("speech_levels: expected auto or keep");
                 return Skip();
             }
-        } else if (key == "cg" || key == "misread" || key == "reference" || key == "wrapped" || key == "strict_dict") {
+        } else if (key == "cg" || key == "misread" || key == "reference" || key == "wrapped" || key == "strict_dict" ||
+                   key == "predicate_variants") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::Bool ||
                 (Lower(Scalar(event_)) != "true" && Lower(Scalar(event_)) != "false")) {
                 Error(key + ": expected a boolean (true or false)");
@@ -169,6 +170,7 @@ public:
             else if (key == "misread") result_.settings.misread = value;
             else if (key == "wrapped") result_.settings.wrapped = value;
             else if (key == "strict_dict") result_.settings.strictDict = value;
+            else if (key == "predicate_variants") result_.settings.predicateVariants = value;
             else result_.settings.reference = value;
         } else {
             Error("unknown key: " + key);

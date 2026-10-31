@@ -194,6 +194,7 @@ int __stdcall J2K_Initialize(char* /*dicPath*/) {
     g_session->SetSpeech(settings.speech);
     g_session->SetSpeechLevels(settings.speechLevels);
     g_session->SetWrapped(settings.wrapped);
+    g_session->SetPredicateVariants(settings.predicateVariants);
     ++g_generation;
     return 1;
 }
@@ -285,6 +286,7 @@ void __stdcall J2K_ReloadUserDict() {
     g_session->SetSpeech(settings.speech);
     g_session->SetSpeechLevels(settings.speechLevels);
     g_session->SetWrapped(settings.wrapped);
+    g_session->SetPredicateVariants(settings.predicateVariants);
     ++g_generation;
 }
 void __stdcall J2K_SetField(int) {}

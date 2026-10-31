@@ -24,6 +24,7 @@ struct Config {
     Speech speech = Speech::Strict;
     SpeechLevels speechLevels = SpeechLevels::Auto;
     bool wrapped = false;
+    bool predicateVariants = true;
 };
 
 struct ConfigDiagnostic {

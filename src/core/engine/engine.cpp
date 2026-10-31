@@ -941,6 +941,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     options.speech = speech_;
     options.speechLevels = speechLevels_;
     options.wrapped = wrapped_;
+    options.wordImprovements.predicateVariants = predicateVariants_;
     options.names = names_.get();
     options.filters = filters_.get();
     const std::vector<std::string> translated =
