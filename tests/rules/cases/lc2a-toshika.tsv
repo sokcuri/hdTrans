@@ -1,0 +1,36 @@
+# 규칙: GRM-105
+rule	input	expected	kind	layer
+cx:lc2a-toshika:10	奇跡としか言いようがない。	has:기적이라고밖에 말할	fix	rewrites
+cx:lc2a-toshika:10	お主はおいとしか言えんのか？	has:이봐라고밖에 말할	fix	rewrites
+cx:lc2a-toshika:10	気まぐれとしか言いようがない。	has:변덕이라고밖에 말할	fix	rewrites
+cx:lc2a-toshika:10	ご愁傷様としか言いようがない。	has:안됐습니다라고밖에	fix	rewrites
+cx:lc2a-toshika:20	哀れとしかいいようがない男。	has:가련이라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:20	ラッキーとしかいいようがない	has:럭키라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:20	必然としかいいようがないのである	has:필연이라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:20	画期的な動きとしかいいようがない。	has:움직임이라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:25	にゃー（何と言われたも私は私だ、こういう存在だとしかいいようがないよ）	has:존재라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:30	凄いとしか言えないよね？	has:굉장하다고밖에 말할	fix	rewrites
+cx:lc2a-toshika:30	惨いとしか言いようがない。	has:잔혹하다고밖에 말할	fix	rewrites
+cx:lc2a-toshika:30	運が悪いとしか言えなかった	has:나쁘다고밖에 말할	fix	rewrites
+cx:lc2a-toshika:30	仕方ないとしか言いようがない。	has:없다고밖에 말할	fix	rewrites
+cx:lc2a-toshika:35	そうだとしかいいようがないな	has:그렇다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:35	運が悪いとしかいいようがない。	has:나쁘다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:35	マクロプロスの処方箋は素晴らしいとしかいいようがない。	has:훌륭하다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:35	先程のこともあって、恥ずかしいとしかいいようがなかった。	has:부끄럽다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:40	そうだとしかいいようがないな	has:그렇다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:40	運が悪いとしかいいようがない。	has:나쁘다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:40	運が良かったとしかいいようがない。	has:말할 수 없다	fix	rewrites
+cx:lc2a-toshika:40	マクロプロスの処方箋は素晴らしいとしかいいようがない。	has:훌륭하다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:10	この人数で挑むのは無謀としか言えない。	has:무모라고밖에 말할	fix	rewrites
+cx:lc2a-toshika:30	じわじわと体が出来上がっていく感覚は気持ち悪いとしか言いようがない。	has:나쁘다고밖에 말할	fix	rewrites
+cx:lc2a-toshika:20	……運命のいたずらとしかいいようがない。	has:장난이라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:25	こういう存在だとしかいいようがないよ	has:존재라고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:35	凄いとしかいいようがない。	has:굉장하다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:40	凄いとしかいいようがない。	has:굉장하다고밖에 말할 수	fix	rewrites
+cx:lc2a-toshika:10	子供としか見えない。	!rule:cx:lc2a-toshika:10	keep	rewrites
+cx:lc2a-toshika:10	罠としか思えない。	!rule:cx:lc2a-toshika:10	keep	rewrites
+cx:lc2a-toshika:20	いいとしか思わない。	!rule:cx:lc2a-toshika:20	keep	rewrites
+cx:lc2a-toshika:25	本当に運が良かったとしか言いようがない。	!rule:cx:lc2a-toshika:25	keep	rewrites
+cx:lc2a-toshika:30	頑張るとしか言えない。	!rule:cx:lc2a-toshika:30	keep	rewrites
+cx:lc2a-toshika:40	今日はいい天気だ。	!rule:cx:lc2a-toshika:40	keep	rewrites
+cx:lc2a-toshika:35	分からないとしか言えない。	!rule:cx:lc2a-toshika:35	keep	rewrites

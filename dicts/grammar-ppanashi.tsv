@@ -1,0 +1,6 @@
+#! layer=base
+# GRM-103 동사 연용형 뒤 っぱなしの, っぱなしに: 그 상태로 둔 `-(으)ㄴ 채인`, `-(으)ㄴ 채로`
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+っぱなしの	8 채인	S580			GN			GRM-103	lc2a:ppanashi:1		
+っぱなしに	8 채로	S580			GN			GRM-103	lc2a:ppanashi:2		
+っぱなしに	8 채로	S5:0			GN			GRM-103	lc2a:ppanashi:3		

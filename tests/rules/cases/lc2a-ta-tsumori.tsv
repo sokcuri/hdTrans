@@ -1,0 +1,33 @@
+# 규칙: GRM-104
+rule	input	expected	kind	layer
+cx:lc2a-ta-tsumori:10	いや、止めたつもりでいた。	has:멈추었다고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:10	強くなったつもりでいた・・・。	has:강해졌다고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:10	彼らのことを理解したつもりでいた。	has:이해했다고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:10	彼は今まで死をわかったつもりでいた。	has:알았다고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:20	、と聞いたつもりであった。	has:들었다고 생각했다	fix	rewrites
+cx:lc2a-ta-tsumori:20	軽く冗談を返したつもりであったが。	has:돌려주었다고 생각했지만	fix	rewrites
+cx:lc2a-ta-tsumori:20	彼としては隠してきたつもりであった。	has:왔다고 생각했다	fix	rewrites
+cx:lc2a-ta-tsumori:20	だからこそ、あの時心をくじいたつもりであった。	has:꺾었다고 생각했다	fix	rewrites
+cx:lc2a-ta-tsumori:30	大人になったつもりでも	has:되었다고 생각해도	fix	rewrites
+cx:lc2a-ta-tsumori:30	どれだけ脇道に逸れたつもりでも。	has:벗어났다고 생각해도	fix	rewrites
+cx:lc2a-ta-tsumori:30	秘密にしていたつもりでも、だめ。	has:있었다고 생각해도	fix	rewrites
+cx:lc2a-ta-tsumori:30	多少は軍務に励んできたつもりだが	has:왔다고 생각하지만	fix	rewrites
+cx:lc2a-ta-tsumori:40	ヤバイ…抑えたつもりなのに。	has:큰일이다…억제했다고 생각하는데	fix	rewrites
+cx:lc2a-ta-tsumori:40	親切でやってあげたつもりなのに	has:주었다고 생각하는데	fix	rewrites
+cx:lc2a-ta-tsumori:40	俺なりに、頑張ったつもりなのに。	has:노력했다고 생각하는데	fix	rewrites
+cx:lc2a-ta-tsumori:40	今、ちょっと良いこと言ったつもりなのに……	has:했다고 생각하는데	fix	rewrites
+cx:lc2a-ta-tsumori:50	正義のつもりで行動してきたこと。	has:정의라고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:50	見送りのつもりで手のひらを向ける。	has:전송이라고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:50	営業事務のつもりで応募したが、配属は営業。	has:사무라고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:50	そこでクルッと首を左に向けると、低姿勢のつもりで、	has:저자세라고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:10	随分走ったつもりでいたが、同じ館内を回っていただけのようである。	has:달렸다고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:20	担当医はわかりやすく解説したつもりであったが、亜希子にはよくわからなかった。	has:해설했다고 생각했지만	fix	rewrites
+cx:lc2a-ta-tsumori:30	遠回しにそう言ったつもりだが、通用しなかった。	has:말했다고 생각하지만	fix	rewrites
+cx:lc2a-ta-tsumori:50	あれは、仕返しのつもりで言っただけです。	has:보복이라고 생각하고	fix	rewrites
+cx:lc2a-ta-tsumori:10	明日行くつもりでいる。	!rule:cx:lc2a-ta-tsumori:10	keep	rewrites
+cx:lc2a-ta-tsumori:20	彼は帰るつもりであった。	!rule:cx:lc2a-ta-tsumori:20	keep	rewrites
+cx:lc2a-ta-tsumori:30	どこに行くつもりですか？	!rule:cx:lc2a-ta-tsumori:30	keep	rewrites
+cx:lc2a-ta-tsumori:40	今日中に終わらせるつもりなのに。	!rule:cx:lc2a-ta-tsumori:40	keep	rewrites
+cx:lc2a-ta-tsumori:50	「一応、そのつもりで準備しよう」	!rule:cx:lc2a-ta-tsumori:50	keep	rewrites
+cx:lc2a-ta-tsumori:50	嘘をついたつもりはない。	!rule:cx:lc2a-ta-tsumori:50	keep	rewrites
+cx:lc2a-ta-tsumori:30	彼女を守るつもりだ。	!rule:cx:lc2a-ta-tsumori:30	keep	rewrites

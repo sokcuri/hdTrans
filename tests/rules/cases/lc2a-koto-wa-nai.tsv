@@ -1,0 +1,26 @@
+# 규칙: GRM-108
+rule	input	expected	kind	layer
+cx:lc2a-koto-wa-nai:10	謝ることはないよ	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	怯えることはないよ	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	謝ることはないよ。	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	気にすることはないよ	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	慌てることはないよ。	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	心配することはないよ。	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	気にすることはないよ。	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	壊れることはないが……	has:일은 없겠지만	fix	rewrites
+cx:lc2a-koto-wa-nai:10	気にすることはないだろう。	has:일은 없을 것이다	fix	rewrites
+cx:lc2a-koto-wa-nai:10	手を止めることはないだろう。	has:일은 없을 것이다	fix	rewrites
+cx:lc2a-koto-wa-nai:10	ふふ、遠慮することはないよ？	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	いや、気にすることはないよ。	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	勿論、拒否することはないよな？	has:일은 없지	fix	rewrites
+cx:lc2a-koto-wa-nai:10	決して叶うことはないのだから。	has:일은 없으니까	fix	rewrites
+cx:lc2a-koto-wa-nai:10	まず失敗することはないだろう。	has:일은 없을 것이다	fix	rewrites
+cx:lc2a-koto-wa-nai:10	今更、何か言うことはないけど。	has:일은 없는데	fix	rewrites
+cx:lc2a-koto-wa-nai:10	だから、気にすることはないよ。	has:일은 없어	fix	rewrites
+cx:lc2a-koto-wa-nai:10	よもや違えることはないだろう。	has:일은 없을 것이다	fix	rewrites
+cx:lc2a-koto-wa-nai:10	由弦は普段は祖父母と顔を合わせることはないが、実家に帰る時には顔を合わせる。	has:일은 없지만	fix	rewrites
+cx:lc2a-koto-wa-nai:10	確かに、額の一センチ程度の傷が結婚に影響することはないだろう。	has:일은 없을 것이다	fix	rewrites
+cx:lc2a-koto-wa-nai:10	悪いことがずっと続くことはない。	!rule:cx:lc2a-koto-wa-nai:10	keep	rewrites
+cx:lc2a-koto-wa-nai:10	行けないことはないが、遠い。	!rule:cx:lc2a-koto-wa-nai:10	keep	rewrites
+cx:lc2a-koto-wa-nai:10	一度も見たことはないだろう。	!rule:cx:lc2a-koto-wa-nai:10	keep	rewrites
+cx:lc2a-koto-wa-nai:10	そんなことはないよ。	!rule:cx:lc2a-koto-wa-nai:10	keep	rewrites
