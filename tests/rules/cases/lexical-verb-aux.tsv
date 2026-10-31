@@ -1,0 +1,21 @@
+# 규칙: LEX-168
+rule	input	expected	kind	layer
+cx:verb-aux:10	仕留め損ねたか。	잡지 못했나.	fix	rewrites
+cx:verb-aux:10	食べ損ねた	먹지 못했다	fix	rewrites
+cx:verb-aux:10	言い損ねた	말하지 못했다	fix	rewrites
+cx:verb-aux:10	機嫌を損ねた	!rule:cx:verb-aux:10	keep	rewrites
+cx:verb-aux:10	気分を損ねてしまった	!rule:cx:verb-aux:10	keep	rewrites
+cx:verb-aux:20	松井さんのどこが好きですかと聞きましたら	has:좋아합니까라고 물으면	fix	rewrites
+cx:verb-aux:20	何をしているのかと聞いた	has:물었다	fix	rewrites
+cx:verb-aux:20	彼が来ると聞いた	!rule:cx:verb-aux:20	keep	rewrites
+cx:verb-aux:20	噂を聞いた	!rule:cx:verb-aux:20	keep	rewrites
+cx:verb-aux:30	どんな味になっているのか気になりますよね。	has:궁금하죠	fix	rewrites
+cx:verb-aux:30	明日は晴れるのか気になる。	has:궁금하다	fix	rewrites
+cx:verb-aux:30	一緒に行く気になった	!rule:cx:verb-aux:30	keep	rewrites
+cx:verb-aux:30	やる気になった	!rule:cx:verb-aux:30	keep	rewrites
+cx:verb-aux:40	「今日は自分が封筒を持っていってあげよう」と思い立ち、	has:라고 마음먹어	fix	rewrites
+cx:verb-aux:40	旅に出ようと思い立った	has:마음먹었다	fix	rewrites
+cx:verb-aux:40	ふと思い立ったように言った。	!rule:cx:verb-aux:40	keep	rewrites
+cx:verb-aux:40	今になって思い立ったが、	!rule:cx:verb-aux:40	keep	rewrites
+cx:verb-aux:40	建物に何か使えそうな物は無いかと思い立ち、	!rule:cx:verb-aux:40	keep	rewrites
+cx:verb-aux:40	スーパーに買いに行こう、と思い立って、	has:라고 마음먹어	fix	rewrites

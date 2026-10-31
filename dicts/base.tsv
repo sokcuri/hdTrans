@@ -26833,7 +26833,6 @@ ttt	ttt	K110			GN				jisjk:201744
 すてがね	헛돈	N110	VMy		GN				jisjk:196762		-1
 すてがね	돈 낭비	N110			GN				jisjk:196763		-1
 すてき	멋%C1@	G8U0			GN				jisjk:2194		
-すてき	다 버&AA@	M447			GN				jisjk:137613		
 すてきに	아주	E311			GN				jisjk:539		
 すてさ	떨쳐버&AA@	M448			GN				jisjk:137616		
 すてぜりふ	즉흥적 대사	N110	UTs		GN				jisjk:196766		-1
@@ -30639,7 +30638,7 @@ ttt	ttt	K110			GN				jisjk:201744
 たたき起こ	흔들어 깨&AI@	M443			GN				jisjk:139476		
 たたき込	주입&AV@	M445			GN				jisjk:139497		
 たたされ	처해&AL@	M427			GN				jisjk:139527		
-たたず	잠시 멈춰&AD@	M445	VTp		GN				jisjk:139529		
+たたず	우두커니 &AD@	M445	VTp	Dx	GN			LEX-165	jisjk:139529		
 たたずまい	모습	I110			GN				jisjk:111909		
 たたま	접어&AL@	M427			GN				jisjk:139532		
 たたみかけ	다그&AO@	M427			GN				jisjk:139536		
@@ -78274,7 +78273,6 @@ ttt	ttt	K110			GN				jisjk:201744
 ピンからキリまで	최하에서 최고까지	A9D0			GN				jisjk:117977		
 ピンからキリまで	처음부터 끝까지	N110		Nn	GN				jisjk:133174		
 ピンとこな	감이 오지 $DH@	H7N0			GN				jisjk:138509		
-ピンと来な	이해가 안 $KX@	H7N0			GN				jisjk:138508		
 ピンぼけ	흐린 핀트	N110			GN				jisjk:54424		
 ピンぼけの	엉뚱한	E0H0			GN				jisjk:123738		
 ピンイン	핑인	N110	UTs		GN				jisjk:133176		
@@ -267361,6 +267359,7 @@ ttt	ttt	K110			GN				jisjk:201744
 火食	화식	N110	VFd	Hd	GN				jisjk:168254		
 灯	등불	N110	XXX		GN				jisjk:123967		
 灯	켜&AL@	M428			GN				jisjk:145758		
+灯	&AP@	M433			GN			LEX-165	lex:165001		
 灯	토보시	N130	QCTVPl		GN				jisjk:259431		
 灯	등	N110		OnZ7	GN				jisjk:311916		
 灯がとも	등불이 켜&AL@	M428			GN				jisjk:143703		

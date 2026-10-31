@@ -29,7 +29,7 @@ compose:speech-unquoted	攻撃魔術：相手を攻撃する	공격 마술：상
 compose:speech-unquoted	連絡があるみたいだぞ。	연락이 있는 것 같다.	keep	compose
 compose:speech-unquoted	痛え。	아파.	fix	compose
 compose:speech-unquoted	おもしれえ。	재미있어.	fix	compose
-compose:speech-unquoted	うぜえ。	시끄러워.	fix	compose
+compose:speech-unquoted	うぜえ。	짜증스러워.	fix	compose
 compose:speech-unquoted	分かんねえんだ。	몰라.	fix	compose
 compose:speech-unquoted	冷てえ。	차가워.	fix	compose
 compose:speech-unquoted	知らねえ。	몰라.	fix	compose
