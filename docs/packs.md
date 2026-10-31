@@ -147,7 +147,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 
 - `voice` 행: `voice` 층(`DecideVoice`) 안에서, 신호가 정한 읽기를 바꿉니다. `agent` 조사의 행위자 구는 그 층이 찾은 행위자, 없으면
   절 안의 사람·동물 뒤 `から`이고, 조사와 `:한국어 동사`는 `packs` 층에서 다시 써서 뒤 층이 바꾸지 못합니다.
-  같은 절에 `adverb.at-last`의 부사(やっと, ようやく)가 있으면 (ら)れ가 가능일 수 있으므로 `passive` 행은 적용하지 않습니다.
+  같은 절에 `adverb.at-last`의 부사가 있으면 1단 동사의 られ는 가능일 수 있으므로 `passive` 행은 적용하지 않습니다.
 - 나머지 행: 단어 단계의 마지막 층 `packs`(`cg-lite` 뒤, `compose` 앞)에서 왼쪽 단어부터 적용합니다.
 - 텍스트 경로가 아니면(`-raw`) 돌지 않습니다.
 

@@ -86,6 +86,7 @@ HD_TEST(dict_pack_errors) {
         {"x\tsense\t本\tn\t\t책\nx\tsense\t紙\tn\t\t종이", "3: row id \"x\" is also at p.tsv:2"},
         {"x\tsense\t本\tn\t\t책\t에게", "2: agent is read on voice rows only"},
         {"x\tvoice\t読む\tv5\t\tpassive\tby", "2: agent \"by\" is not a Korean particle in Hangul"},
+        {"x\tvoice\t読む\tv5\t\tpassive\t가(이)", "2: agent \"가(이)\" is not a Korean particle in Hangul"},
     };
     for (const auto& c : cases) {
         Families families;
@@ -97,15 +98,20 @@ HD_TEST(dict_pack_errors) {
     Families families;
     PackTable t;
     std::vector<PackError> errors;
-    // an agent particle may name the form that follows the final consonant
-    PackTable a;
-    ParsePackRows("a.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\tagent\nx\tvoice\t読む\tv5\t\tpassive\t(이)가\n", nullptr,
-                  families, a, errors);
-    HD_CHECK_EQ(Errors(errors), std::string());
-    HD_REQUIRE(a.rows.size() == 1);
-    HD_CHECK_EQ(a.rows[0].agent, std::string("(이)가"));
     ParsePackRows("p.tsv", "id\tlemma\tpos\ttarget\n", nullptr, families, t, errors);
     HD_CHECK_EQ(Errors(errors), std::string("1: the header has no column cond"));
+}
+
+HD_TEST(dict_pack_agent_final_consonant) {
+    // a leading (이) in the agent particle follows the final consonant of the agent (친구가, 선생님이)
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("a.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\tagent\nx\tvoice\t読む\tv5\t\tpassive\t(이)가\n", nullptr,
+                  families, t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_REQUIRE(t.rows.size() == 1);
+    HD_CHECK_EQ(t.rows[0].agent, std::string("(이)가"));
 }
 
 HD_TEST(dict_pack_classes) {

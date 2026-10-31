@@ -919,9 +919,6 @@ Item* AnimateAgent(const Item* it, std::string_view stem, bool& ni) {
     return nullptr;
 }
 
-// Whether a word of word.ability-scope (誰でも, 自分で), or a particle of particle.even-person after a
-// person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
-// condition.
 // Whether a word of noun.ability-condition with なら stands before item it in its clause: the
 // situation that makes the act possible (これなら, ここなら).
 bool AbilityCondition(const Item* it) {
@@ -935,7 +932,7 @@ bool AbilityCondition(const Item* it) {
 }
 
 // Whether an adverb of adverb.at-last (やっと, ようやく) stands before item it in its clause, after which
-// a (ら)れ may say what one at last managed to do (やっと彼女に話しかけられた).
+// the られ of an ichidan verb may say what one at last managed to do (やっと彼女に話しかけられた).
 bool AtLastBefore(const Item* it) {
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
         if (dict::InClass(HDTRANS_CLASS("adverb.at-last"), p->group->surface)) return true;
@@ -943,6 +940,9 @@ bool AtLastBefore(const Item* it) {
     return false;
 }
 
+// Whether a word of word.ability-scope (誰でも, 自分で), or a particle of particle.even-person after a
+// person (子供でも), stands before item it in its clause, whose (ら)れ, followed by rest, is no
+// condition.
 bool AbilityScope(const Item* it, std::string_view rest) {
     if (dict::StartsWithMember(HDTRANS_CLASS("ending.voice-condition"), rest) > 0) return false;
     for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
@@ -1425,7 +1425,7 @@ void DecideVoice(Flusher& f) {
         bool ni = false;
         Item* agent = AnimateAgent(it, stem, ni);
         Voice v = VoiceOf(f, it, form, stem, rest, passive, ichidan, agent);
-        const dict::PackRow* packed = PackVoice(f, it, stem, v, AtLastBefore(it));
+        const dict::PackRow* packed = PackVoice(f, it, stem, v, ichidan && AtLastBefore(it));
         if (packed != nullptr && !packed->agent.empty()) {
             // The agent phrase of the row's reading: the animate agent the voice step found (に, によって,
             // により), else the nearest から after an animate noun in the verb's clause, not a quote's.

@@ -76,6 +76,7 @@ dict:verb-object-senses:w7	気が利く奴だな	lacks:없	keep	defaults
 pack:verb-object-senses:14	サファイアはエメラルドに掴まれた手首を振りほどいた。	has:잡힌 손목	fix	voice
 pack:verb-object-senses:14	「コヨイ、俺に掴まれるか……？」	has:매달릴 수 있을까	keep	voice
 pack:verb-object-senses:14	掴まれていた手は離される。	lacks:잡을 수	keep	voice
+pack:verb-object-senses:14	やっと掴まれた腕が痛い。	has:잡힌 팔	keep	voice
 pack:verb-object-senses:15	ソファに腰を沈めた	has:소파에 깊숙이 앉았다	fix	packs
 pack:verb-object-senses:15	丸眼鏡の男がカウチに腰を沈めると、	has:카우치에 깊숙이 앉으면	fix	packs
 pack:verb-object-senses:15	グリオがどっかりと椅子に腰を沈めた。	has:의자에 깊숙이 앉았다	fix	packs

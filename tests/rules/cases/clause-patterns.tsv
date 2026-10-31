@@ -50,6 +50,7 @@ pack:clause-patterns:2	なので周りからあまり話しかけられず、し
 pack:clause-patterns:2	それだけでなく、話しかけられることも増えたのだが相変わらず逃げてしまっている。	!rule:pack:clause-patterns:2	keep	packs
 pack:clause-patterns:2	友達に話しかけられた。	has:친구가 말을 걸어왔다.	fix	packs
 pack:clause-patterns:2	先生に話しかけられて驚いた。	has:선생님이 말을 걸어와	fix	packs
+pack:clause-patterns:2	やっと彼女に話しかけられた。	lacks:그녀가 말을	keep	packs
 pack:clause-patterns:2	やっと彼女に話しかけられた。	!rule:pack:clause-patterns:2	keep	packs
 grammar:書くのが許せない	椿は美緒が幸せになるのが許せない。その執念だけが彼女の生きる理由になっていた。	has:것을 용서할 수 없다	fix	lookup
 grammar:書くのが許せない	皓と付き合うのが許せない。	has:사귀는 것을 용서할 수 없다	fix	lookup
@@ -61,13 +62,13 @@ grammar:書いてやろうということ	聞くだけ聞いてやろうとい�
 grammar:書いてやろうということ	我がお主の伴侶となってやろうということだ	has:되어 주겠다는 것이다	fix	lookup
 grammar:書いてやろうということ	それをしなかったということは、何もせずにアルバを味わわせてやろうということだったのか。	has:그것을 하지 않았다는 것은	keep	lookup
 grammar:書いてやろうということ	ネットやなんかで知れ渡ってしまう前に、せいぜいカモってやろうということだったんだ。	has:등쳐먹어 주겠다는 것이었다	fix	lookup
-grammar:書く分、	ワイバーンの無い軍隊は、ワイバーンの火力支援が受けられない分、弱い。	has:받게 되지 않는 만큼,	fix	lookup
+grammar:書かない分、	ワイバーンの無い軍隊は、ワイバーンの火力支援が受けられない分、弱い。	has:받게 되지 않는 만큼,	fix	lookup
 grammar:書く分、	責任も多くなる分、疲れてしまうかもしれない。	has:많아지는 만큼,	fix	lookup
 grammar:書く分、	「僕が記憶を食べる分、モモの苦しみが薄れるんだね」	has:먹는 만큼,	fix	lookup
-grammar:書く分、	むしろ無理をさせられて野宿を強いられている分、僕のほうが状況は悲惨かも。	has:있는 만큼,	fix	lookup
-grammar:書く分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:당하고 있던 만큼	keep	lookup
-grammar:書く分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:있던 만큼,	keep	lookup
-grammar:書く分、	これまで迷惑をかけられた分、かなり重い罰則を設けてしまったが自業自得だと思って諦めてほしい。	has:끼쳐진 만큼	keep	lookup
+grammar:書いている分、	むしろ無理をさせられて野宿を強いられている分、僕のほうが状況は悲惨かも。	has:있는 만큼,	fix	lookup
+grammar:書いていた分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:당하고 있던 만큼	keep	lookup
+grammar:書いていた分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:있던 만큼,	keep	lookup
+grammar:書いた分、	これまで迷惑をかけられた分、かなり重い罰則を設けてしまったが自業自得だと思って諦めてほしい。	has:끼쳐진 만큼	keep	lookup
 grammar:書かないでくださいまし	「白々しいことをおっしゃらないでくださいまし！」	has:말아 주세요	fix	lookup
 grammar:書かないでくださいまし	「白々しいことをおっしゃらないでくださいまし！」	lacks:지금 해	fix	lookup
 grammar:書かないでくださいまし	「やだっ、触らないで下さい。」	has:만지지 마세요	keep	lookup
@@ -80,7 +81,7 @@ grammar:書かぬ限り	ギブンは即死であっても、魔力が尽きぬ�
 grammar:書かぬ限り	死者でない者は、リリスが止めぬ限り、地上へ上がってゆく。	has:않는 한, 지상에	fix	lookup
 grammar:書かぬ限り	「安心しろ。貴様がその態度を忘れぬ限り鞭打ちは勘弁してやる」	has:않는 한 채찍질은	fix	lookup
 grammar:書かぬ限り	陛下を見捨てぬ限り、私もそれに従うつもりです」	has:않는 한, 저도	fix	lookup
-grammar:書かぬ限り	あらゆる幸せを知らぬ限りは、他の者たちを幸せに導くことはできぬ・・・	has:모르는 한은, 다른	fix	lookup
+grammar:知らぬ限り	あらゆる幸せを知らぬ限りは、他の者たちを幸せに導くことはできぬ・・・	has:모르는 한은, 다른	fix	lookup
 grammar:書かぬ限り	薪の焔消えぬ限り、常しえに火を生み出さ	has:않는 한, 영원하게	fix	lookup
 grammar:書かぬ限り	捨て去らぬ限りそれは希望なのだから。	has:않는 한 그것은	fix	lookup
 grammar:書かぬ限り	俺が許さぬ限り自由など得られるはずもない。	has:않는 한 자유	fix	lookup
