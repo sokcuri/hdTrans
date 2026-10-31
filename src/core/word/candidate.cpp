@@ -524,6 +524,114 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
     return front != nullptr ? front : back;
 }
 
+bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
+
+// LEX-95: where the longest first word of a katakana run is no name and leaves, beside common words, a
+// word the dictionary reads only as a person's name (フリースリーカード: フリース, リー, カード), a shorter first
+// word goes first when common words of three or more kana cover the run with as many words
+// (フリー, スリー, カード); of those first words the longest. Words are dictionary keys inside the
+// run, of two or more kana. A run of names only (バート, ラム) keeps its words.
+Record* KatakanaCoverFirst(const dict::Snapshot& snapshot, const dict::LookupContext& ctx, Record* records,
+                           std::string_view text) {
+    if (records == nullptr) return records;
+    std::vector<std::size_t> bounds{0};  // rune boundaries of the run
+    for (std::string_view s = text; !s.empty() && bounds.size() <= 25;) {
+        const text::Rune r = text::DecodeRune(s);
+        if (!KatakanaWordRune(r.cp)) break;
+        bounds.push_back(bounds.back() + r.size);
+        s.remove_prefix(r.size);
+    }
+    const std::size_t run = bounds.back();
+    const std::size_t greedy = records->source.size();
+    // Runs of more than 24 kana (a sound held long) are left to the longest words.
+    if (bounds.size() < 5 || bounds.size() > 25 || greedy >= run || !std::binary_search(bounds.begin(), bounds.end(), greedy)) {
+        return records;
+    }
+    constexpr int kNone = 1 << 20;
+    const std::size_t n = bounds.size();
+    // The words at bounds[i]: the index in bounds of the end, whether the dictionary reads the
+    // word only as a person's name, and whether it is a common word (no reading as a proper noun
+    // nor in Latin letters, such as ホワイ WHY).
+    struct Piece {
+        std::size_t end;
+        bool person, common;
+    };
+    std::vector<std::vector<Piece>> pieces(n);
+    for (std::size_t i = 0; i + 2 < n; i++) {
+        const dict::Candidates found =
+            snapshot.GetWordInfo(text.substr(bounds[i], run - bounds[i]), dict::LookupMode::General, ctx);
+        for (std::size_t j = i + 2; j < n; j++) {
+            const std::size_t length = bounds[j] - bounds[i];
+            bool any = false, person = true, proper = false;
+            for (const dict::Candidate& c : found.list) {
+                if (c.source.size() != length || c.codes == nullptr) continue;
+                any = true;
+                person = person && c.codes->partText == "N130" && c.codes->sem.Text().find("QPN") != std::string_view::npos;
+                proper = proper || c.codes->partText == "N130" ||
+                         std::any_of(c.target.begin(), c.target.end(), [](char ch) {
+                             return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
+                         });
+            }
+            if (any) pieces[i].push_back({j, person, !proper});
+        }
+    }
+    // persons[i][w]: the fewest person words of a cover of the run from bounds[i] by w words.
+    std::vector<std::vector<int>> persons(n, std::vector<int>(n, kNone));
+    persons[n - 1][0] = 0;
+    for (std::size_t i = n - 1; i-- > 0;) {
+        for (const auto& [j, person, common] : pieces[i]) {
+            for (std::size_t w = 0; w + 1 < n; w++) {
+                if (persons[j][w] == kNone) continue;
+                persons[i][w + 1] = std::min(persons[i][w + 1], persons[j][w] + (person ? 1 : 0));
+            }
+        }
+    }
+    // The cover of the longest first word, by its fewest words.
+    std::size_t words = 0;
+    int greedyPersons = kNone;
+    for (const auto& [j, person, common] : pieces[0]) {
+        if (bounds[j] != greedy || person) continue;
+        for (std::size_t w = 0; w + 1 < n && greedyPersons == kNone; w++) {
+            if (persons[j][w] != kNone) {
+                words = w + 1;
+                greedyPersons = persons[j][w] + (person ? 1 : 0);
+            }
+        }
+    }
+    if (greedyPersons == kNone || greedyPersons == 0 || greedyPersons == static_cast<int>(words)) return records;
+    // covered[i][w]: whether common words of three or more kana cover the run from bounds[i] by w
+    // words.
+    std::vector<std::vector<char>> covered(n, std::vector<char>(n, 0));
+    covered[n - 1][0] = 1;
+    for (std::size_t i = n - 1; i-- > 0;) {
+        for (const auto& [j, person, common] : pieces[i]) {
+            if (!common || j - i < 3) continue;
+            for (std::size_t w = 0; w + 1 < n; w++) covered[i][w + 1] |= covered[j][w];
+        }
+    }
+    // A shorter first word whose cover has as many words, all common words of three or more kana.
+    std::size_t chosen = 0;
+    for (const auto& [j, person, common] : pieces[0]) {
+        if (bounds[j] < greedy && bounds[j] > chosen && common && j >= 3 && covered[j][words - 1]) chosen = bounds[j];
+    }
+    if (chosen == 0) return records;
+    Record* front = nullptr;
+    Record* back = nullptr;
+    Record** frontTail = &front;
+    Record** backTail = &back;
+    for (Record* r = records; r != nullptr;) {
+        Record* next = r->child;
+        r->child = nullptr;
+        Record**& tail = r->source.size() == chosen ? frontTail : backTail;
+        *tail = r;
+        tail = &r->child;
+        r = next;
+    }
+    if (front == nullptr) return records;
+    *frontTail = back;
+    return front;
+}
+
 Record* LongerNounFirst(const dict::Snapshot& snapshot, Record* records, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
@@ -1896,6 +2004,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         if (settings.text) records = SuffixAfterNoun(*parent, records);
         if (settings.text) records = HonorificAfterNoun(*parent, records, snapshot);
     }
+    if (settings.text) records = KatakanaCoverFirst(snapshot, lookupContext, records, From(full, cursor));
     const std::string_view text = From(full, cursor);
     Item* candidate = InsertLateCandidate(full, cursor, token, records);
     Record* from = records;

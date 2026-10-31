@@ -1,0 +1,32 @@
+# 규칙: LEX-95
+rule	input	expected	kind	layer
+segmentation:katakana-cover	となれば、ここはフリースリーカードで、これからの展望と未来を占う。	has:프리 쓰리 카드	fix	lookup
+segmentation:katakana-cover	そして国内トップスリーに入るギルドのマスターときたもんだ。	has:국내 톱 쓰리에	fix	lookup
+segmentation:katakana-cover	街のトップスリーギルドそれぞれのマスターが、そこに来ていた。	has:톱 쓰리 길드	fix	lookup
+segmentation:katakana-cover	数少ない弱点の中でもトップスリーに入る嫌な物を持って来られたのだから。	has:톱 쓰리에	fix	lookup
+segmentation:katakana-cover	都市内の大企業トップスリーに入る受付所。	has:대기업 톱 쓰리에	fix	lookup
+segmentation:katakana-cover	「そういえば、五、六年生を差し置いて四年生に学園トップスリーが揃うなんて変なもんだな。」	has:학원 톱 쓰리가	fix	lookup
+segmentation:katakana-cover	あー、ゲーム内でも人気キャラ投票トップスリーの貴方達かー。	has:투표 톱 쓰리의	fix	lookup
+segmentation:katakana-cover	国のトップスリーによる強行視察を先日終えて、やっとこさ戻って来た日常。	has:나라의 톱 쓰리에 의한	fix	lookup
+segmentation:katakana-cover	春香の前に２つのドーナツとアイスミルクティーを置く健司がその横に座った。	has:아이스 밀크티를	fix	lookup
+segmentation:katakana-cover	碓氷は普段はコーヒー派だが、今回はパンケーキもアイスミルクティーも竹ノ内がチョイスしたのだ。	has:아이스 밀크티도	fix	lookup
+segmentation:katakana-cover	アマレロにアイスミルクティーを出してもらい、のんびりと召喚リストを見ていた。	has:아이스 밀크티를	fix	lookup
+segmentation:katakana-cover	飲み物は３人ともアイスミルクティーだ。	has:아이스 밀크티다	fix	lookup
+segmentation:katakana-cover	このボディスポンジを使ったのだろうか。	has:보디 스펀지를	fix	lookup
+segmentation:katakana-cover	俺はボディスポンジにボディソープを染み込ませた。	has:보디 스펀지에	fix	lookup
+segmentation:katakana-cover	シングルスターのパーティだったらしい。	has:싱글 스타의	fix	lookup
+segmentation:katakana-cover	オールドレインとは、与えたダメージに応じて回復するパッシブスキルだ。	has:올 드레인이란	fix	lookup
+segmentation:katakana-cover	蜥蜴は、ビックリザード、ハイリザード、ダッシュリザード、の３種、悩んだが、ハイリザードで。	has:빅 리자드	fix	lookup
+segmentation:katakana-cover	「ブ……ブルーローズ！？」	has:블루 로즈	keep	lookup
+segmentation:katakana-cover	怒りを胸に押さえ込み、俺はじっとブルースターという花を見る。	has:블루스타라는	keep	lookup
+segmentation:katakana-cover	突然始まったご夫人方とのコールアンドレスポンスに、子供達は耳を塞いでいた。	has:콜 앤 리스폰스에	keep	lookup
+segmentation:katakana-cover	「久しぶり、クリスハルト。元気だった？」	has:크리스하르트	keep	lookup
+segmentation:katakana-cover	「あらためまして、サクライオリです」	has:사쿠라이 오리	keep	lookup
+segmentation:katakana-cover	私が考えたルイザの設定が、バートラムおじさんの同意を得られたみたいだった。	has:바트람 아저씨	keep	lookup
+segmentation:katakana-cover	「ここにアクアソルジャーが来る事はあるかい？」	has:아쿠아 솔저가	keep	lookup
+segmentation:katakana-cover	なんか、王冠を頭に乗せてるキングスライムとかいそう……。	has:킹슬라임	keep	lookup
+segmentation:katakana-cover	「ブラックドラゴン……圧倒的なその力、チートの勇者を倒すには不可欠だよ」	has:블랙 드래곤	keep	lookup
+segmentation:katakana-cover	「ファイアボール」	「파이어볼」	keep	lookup
+segmentation:katakana-cover	スリーサイズ不明。	has:쓰리 사이즈	keep	lookup
+segmentation:katakana-cover	「光魔法………サウザンドホワイトレイ！！」	has:화이트 레이	keep	lookup
+segmentation:katakana-cover	シャンプーや、ボディソープの香りだけではない、嗅いでいるとふわふわ、どこかに連れて行かれそうな香り。	has:바디 워시	keep	lookup
