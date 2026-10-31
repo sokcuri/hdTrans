@@ -1,0 +1,7 @@
+#! layer=base
+# 거주 구역을 뜻하는 居住区: 땅이름 이스미구가 아닌 거주구
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+居住区	거주구	N110	VPl		GN			LEX-3000				hx11-1
+居住区域	거주 구역	N110	VPl		GN			LEX-3000				hx11-2
+居住区内	거주구 내	N110	VPl		GN			LEX-3000				hx11-3
+居住区画	거주구획	N110	VPl		GN			LEX-3000				hx11-4

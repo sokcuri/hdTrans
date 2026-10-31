@@ -1,0 +1,25 @@
+# 규칙: LEX-3000
+rule	input	expected	kind	layer
+dict:hx11-1	居住区か…なるほど。	has:거주구	fix	lookup
+dict:hx11-1	「まずは居住区を案内するな。」	has:거주구를	fix	lookup
+dict:hx11-1	宇宙船の居住区にこもるむっとした臭いが鼻を突く。	has:거주구에	fix	lookup
+dict:hx11-1	居住区のドアを出て、	has:거주구의	fix	lookup
+dict:hx11-1	木でできた柵が、外と強制居住区との境目だ。	has:거주구와	fix	lookup
+dict:hx11-1	この辺りは富裕層の居住区になっている。	has:거주구가	fix	lookup
+dict:hx11-1	戦闘地域も、民間居住区を除く場所で展開されている	lacks:이스미	fix	lookup
+dict:hx11-1	居住区でペットが行方不明になったらしい。	has:거주구에서	fix	lookup
+dict:hx11-3	何故ケンタウルスの居住区内で殺る？	has:거주구 내	fix	lookup
+dict:hx11-1	西側には貴族居住区があり、	lacks:이스미	fix	lookup
+dict:hx11-4	エルフや妖精の居住区画も壁で仕切られていて入れない。	has:거주구획	fix	lookup
+dict:hx11-2	噂の幽霊屋敷は貴族の居住区域の端っこに建っていた。	has:거주 구역	keep	lookup
+dict:hx11-1	いずれは居住地を移すつもりだ。	has:거주지를	keep	lookup
+dict:hx11-1	亜人が居住している。	has:거주하고	keep	lookup
+dict:hx11-1	王宮に居住する王族	has:거주하는	keep	lookup
+dict:hx11-1	聞いた限りではメリットしかない居住空間の方を。	has:거주 공간	keep	lookup
+dict:hx11-1	居住まいを正した。	has:자세를 바로잡았다	keep	lookup
+dict:hx11-1	庶民の居住区、宿泊街、城壁に近いところに工業区になっている。	has:공업구	keep	lookup
+dict:hx11-1	さらに商業区、	has:상업구	keep	lookup
+dict:hx11-1	研究所２階、研究員の居住場所。	has:거주 장소	keep	lookup
+dict:hx11-1	王族居住区の北棟に向かいます。	has:거주구	fix	lookup
+dict:hx11-1	居住者たちが集まった。	has:거주자들이	keep	lookup
+dict:hx11-1	居住地区に住む。	has:거주 지구에	keep	lookup
