@@ -378,7 +378,7 @@
 //= verb.spared-event	Verbs of what befalls one rather than what one chooses to do (失う, 死ぬ, 傷つく, 落とす), by dictionary form: their ずに済む is being spared it, not being let off doing it, and stays (spec GRM-55).
 //= noun.casual-lacked	Nouns of what one has or lacks (救い, 金, 時間, 意味), after which が and the casual ねえ before ！ or a final particle is the negative ない (救いがねぇ！ 구원이 없어!); after any other word the ねえ is the particle of storytelling (こいつがねぇ！).
 //= noun.spared-event	Verbal nouns of what befalls one (怪我, 負傷, 犠牲), whose する in ずに済む is the same as verb.spared-event.
-//= verb.spontaneous	Ichidan stems whose られ is a feeling that comes by itself, never the potential (将来が案じられる, 気配が感じられる).
+//= verb.spontaneous	Ichidan stems whose られ is a feeling or a sight that comes by itself, never the potential (将来が案じられる, 気配が感じられる, 迷いは見受けられない 망설임은 보이지 않는다).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
 //= verb.teach	Verbs of teaching and telling that take what is taught with って (しないようにって教えた, 42って教えた); a と after a noun before one is the partner (友達と教えた), so they are no verb.naming.
@@ -5967,6 +5967,7 @@ verb.involuntary	飛ぶ
 
 verb.spontaneous	案じ
 verb.spontaneous	感じ
+verb.spontaneous	見受け
 
 verb.state-teiru	見え
 verb.state-teiru	聞こえ

@@ -1,0 +1,40 @@
+# 규칙: GRM-10, GRM-50
+rule	input	expected	kind	layer
+voice:spontaneous	傲慢なところなど全く見受けられない	has:전혀 보이지 않는다	fix	voice
+voice:spontaneous	特に動く影は見受けられない。	has:그림자는 보이지 않는다.	fix	voice
+voice:spontaneous	その様子に苦しそうな仕草は見受けられない。	has:몸짓은 보이지 않는다.	fix	voice
+voice:spontaneous	選挙の結果に不満があるようには見受けられない。	has:보이지 않는다.	fix	voice
+voice:spontaneous	そこに先日見たような暗い翳りは見受けられない。	has:음영은 보이지 않는다.	fix	voice
+voice:spontaneous	ダニエルほどの幼稚さは見受けられないことくらいか。	has:유치함은 보이지 않는 것	fix	voice
+voice:spontaneous	出入口の類は見受けられず、	has:보이지 않고	fix	voice
+voice:spontaneous	人工的に作られたようなものは一切見受けられない。	has:일절 보이지 않는다.	fix	voice
+voice:spontaneous	殺人未遂の罪悪感はかけらも見受けられない。	has:조금도 보이지 않는다.	fix	voice
+voice:spontaneous	それらとの差異は見受けられない。	has:차이는 보이지 않는다.	fix	voice
+voice:spontaneous	規則性らしきものは見受けられない。	has:보이지 않는다.	fix	voice
+voice:spontaneous	さっきまで戦っていた勇姿は全く見受けられませんでした。	has:전혀 보이지 않았습니다.	fix	voice
+voice:spontaneous	テーブルに座る冒険者も見受けられない。	has:모험가도 보이지 않는다.	fix	voice
+voice:spontaneous	特別問題も見受けられなかったから、	has:보이지 않았으니까	fix	voice
+voice:spontaneous	全く損傷の見受けられない、	has:손상이 보이지 않는	fix	voice
+voice:spontaneous	家には経年劣化から来る汚れしか見受けられない。	has:더러움밖에 보이지 않는다.	fix	voice
+voice:spontaneous	不審な動きをした給仕は見受けられませんでした。	has:보이지 않았습니다.	fix	voice
+dict:jisjk:260611	誰が見ても違いが見受けられないが魔王本人から見ると完成度が異なるようで	has:차이가 보이지 않지만	fix	defaults
+dict:jisjk:260611	ている部分の多くに異常が見受けられる。	has:이상이 보인다.	fix	defaults
+dict:jisjk:260611	ここにも、多くのヒビ割れが見受けられる。	has:보인다.	fix	defaults
+dict:jisjk:260611	奇妙な動きをみせる星々が所々に見受けられた。	has:곳곳에 보였다.	fix	defaults
+dict:jisjk:260611	だいぶ落ち着いたように見受けられます	has:것처럼 보입니다	fix	defaults
+dict:jisjk:260611	最近首都でも見受けられるようになったあの麻薬。	has:보이게 된	fix	defaults
+dict:jisjk:260611	一部では批判も見受けられたが、	has:비판도 보였지만	fix	defaults
+dict:jisjk:91817	旅の方と見受けますが……	has:봅니다만	fix	defaults
+dict:jisjk:91817	「剛毅な方だとお見受けしました」	has:보았습니다	fix	defaults
+dict:jisjk:91817	こういう出で立ちの人も多く見受けたが、	has:많이 보았지만	fix	defaults
+dict:jisjk:91817	「巡礼の方とお見受けします。」	lacks:판단	fix	defaults
+voice:lexical-negative-potential	その要望は今すぐには決められない。	has:결정할 수 없다	keep	voice
+voice:lexical-negative-potential	だが、それ以上を続けられなかった。	has:계속할 수 없었다	keep	voice
+voice:lexical-negative-potential	とても痛くて、耐えられない。	has:견딜 수 없다	keep	voice
+voice:lexical-negative-potential	ゆるんだ姿を見せられないってことか	has:보일 수 없다는	keep	voice
+voice:lexical-negative-potential	軍事的に影響があるとは考えられません。	has:생각할 수 없습니다	keep	voice
+voice:lexical-negative-potential	クレアにとっては考えられないことだった	has:생각할 수 없는	keep	voice
+voice:lexical-negative-potential	熱の感じられない微笑を。	has:느껴지지 않는	keep	voice
+voice:lexical-negative-potential	敵意はまったく感じられない。	has:느껴지지 않는다.	keep	voice
+voice:lexical-negative-potential	とても、只人とは思われない。	has:생각되지 않는다.	keep	voice
+voice:lexical-negative-potential	今だってまともに顔が見られない。	has:얼굴을 볼 수 없다.	keep	voice
