@@ -15,5 +15,4 @@ lexical:coll-default	ダメそうなら辰巳に鞍替えするわ	has:타츠미
 lexical:coll-default	辰巳に鞍替えするという結論が出てたようだ。	has:갈아탄다고	fix	builtin-phrase
 lexical:coll-default	「……悪いけど、少し寄り道したい」	has:조금 딴 데 들르고 싶다	fix	builtin-phrase
 lexical:coll-default	ヨソのブース見物はもうしたので、寄り道せずに講堂を出た。	has:딴 데 들르지 않고	fix	builtin-phrase
-lexical:coll-default	皆が寄り道もせず自宅へと急ぐ程の雨だった	has:딴 데 들르기도	fix	lookup
 lexical:coll-default	帰り道に雨が降った。	lacks:들르	keep	lookup

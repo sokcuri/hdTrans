@@ -14,3 +14,4 @@ lexical:coll-attitude	「私も同じ意見だが、相手があのアールな�
 lexical:coll-attitude	ふらふらしていた、っていうなら話は別だけど……	has:이야기가 다르지만	fix	builtin-phrase
 lexical:coll-attitude	「大切な人のことを丁重に弔うのなら話は別よ」	has:이야기가 달라	fix	builtin-phrase
 lexical:coll-attitude	それとこれとは別の話だ。	lacks:다르다	keep	lookup
+cx:coll-verb:50	友達の恋人ってのが余計たち悪いと思う・・・	!rule:cx:coll-verb:50	keep	rewrites
