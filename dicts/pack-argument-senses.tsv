@@ -43,3 +43,4 @@ argument-senses:46	離れる	v1	sense	from=頭|脳裏|記憶|耳	떠나다	LEX-3
 argument-senses:38	打つ	v5	sense	obj=武器|刀剣|名刀|業物	벼리다	LEX-3471		武器を打つ 무기를 벼리다		
 argument-senses:40	打つ	v5	sense	obj=武器|刀剣|名刀|業物 next=つける|付ける|込む|こむ|合う|あう|砕く|落とす|返す	-	LEX-3471		武器を打ちつける(그대로)		
 argument-senses:41	離れる	v1	sense	from=@place	-	LEX-3471		家から離れる(그대로)		
+argument-senses:49	近づける	v1	voice	obj=@body	active	LEX-3471		急に顔を近づけられた 갑자기 얼굴을 가까이 대었으니까		
