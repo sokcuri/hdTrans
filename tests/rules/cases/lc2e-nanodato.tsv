@@ -1,0 +1,23 @@
+# 규칙: GRM-165
+rule	input	expected	kind	layer
+cx:lc2e-nanodato:10	自業自得なのだと。	has:자업자득이라고	fix	rewrites
+cx:lc2e-nanodato:10	ような女なのだと。	has:여자라고	fix	rewrites
+cx:lc2e-nanodato:10	死刑はまだ軽い方なのだと。	has:편이라고	fix	rewrites
+cx:lc2e-nanodato:10	彼女はとても良い子なのだと。	has:아이라고	fix	rewrites
+cx:lc2e-nanodato:10	自分は、一人ぼっちなのだと。	has:외톨이라고	fix	rewrites
+cx:lc2e-nanodato:10	女の子に多い冷え性なのだと。	has:냉한체질이라고	fix	rewrites
+cx:lc2e-nanodato:10	自分にはこれが精一杯なのだと。	has:힘껏이라고	fix	rewrites
+cx:lc2e-nanodato:10	本当に真面目な人なのだと感心する。	has:사람이라고	fix	rewrites
+cx:lc2e-nanodato:10	い位置に座する存在なのだとッッッ！！！	has:존재라고	fix	rewrites
+cx:lc2e-nanodato:10	箱や多面体の側面なのだと少女は言った。	has:측면이라고	fix	rewrites
+cx:lc2e-nanodato:10	違う、私は父なのだと自分に言い聞かせる。	has:아버지라고	fix	rewrites
+cx:lc2e-nanodato:10	そう、この少女は夜宵を試すつもりなのだと。	has:생각이라고	fix	rewrites
+cx:lc2e-nanodato:10	ノルド皇帝の行いとはそういうことなのだと。	has:것이라고	fix	rewrites
+cx:lc2e-nanodato:10	舐める事が快感なのだと頭に擦りこまれていく。	has:쾌감이라고	fix	rewrites
+cx:lc2e-nanodato:10	これは自分が一人隠し続けていた感情なのだと。	has:감정이라고	fix	rewrites
+cx:lc2e-nanodato:10	浮浪者なのだと思った。	!rule:cx:lc2e-nanodato:10	keep	rewrites
+cx:lc2e-nanodato:10	そのまま受けろと言うことなのだと思う。	!rule:cx:lc2e-nanodato:10	keep	rewrites
+cx:lc2e-nanodato:10	これはきっと、初恋なのだと思う。	!rule:cx:lc2e-nanodato:10	keep	rewrites
+cx:lc2e-nanodato:10	終わったあと、これは魔法なのだと思った。	!rule:cx:lc2e-nanodato:10	keep	rewrites
+cx:lc2e-nanodato:10	それなのだと思えた。	!rule:cx:lc2e-nanodato:10	keep	rewrites
+cx:lc2e-nanodato:10	そこに巨大な穴があいているのだと、カスミは錯覚せずにはいられなかった。	!rule:cx:lc2e-nanodato:10	keep	rewrites

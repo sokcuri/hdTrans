@@ -44,7 +44,7 @@ register:REG-3	「お先にどうぞ」	「먼저 하세요」	keep	register
 register:REG-3	「どうぞ」	「자」	keep	register
 register:REG-3	「ちゃんと待っててくださぁい」	「제대로 기다리고 있어 주세요」	keep	register
 register:REG-3	「もう行きますってば」	「이제 간다니까요」	keep	register
-register:REG-3	「だから言ったでしょうが！」	「그러니까 말했겠지만!」	keep	register
+register:REG-3	「だから言ったでしょうが！」	「그러니까 말했잖아!」	keep	register
 register:REG-5	「陛下はそうおっしゃった」	「폐하는 그렇게 말씀하셨어」	fix	register
 register:REG-5	「その件は社長がおっしゃった通りだ」	「그 건은 사장이 말씀하신 대로야」	fix	register
 register:REG-5	「嘘おっしゃい」	「거짓말 마」	keep	register

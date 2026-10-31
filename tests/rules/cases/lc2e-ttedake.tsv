@@ -1,0 +1,20 @@
+# 규칙: GRM-164
+rule	input	expected	kind	layer
+cx:lc2e-ttedake:10	「化物ってだけだ」	has:괴물이라는 것뿐이야	fix	rewrites
+cx:lc2e-ttedake:10	一番早い飛びってだけだ	has:일이라는 것뿐이다	fix	rewrites
+cx:lc2e-ttedake:10	ホントに女ってだけで疲れる。	has:여자라는 것만으로	fix	rewrites
+cx:lc2e-ttedake:10	年下ってだけで却下してきたから	has:연하라는 것만으로	fix	rewrites
+cx:lc2e-ttedake:10	闇属性ってだけで彼女に怯えてる	has:속성이라는 것만으로	fix	rewrites
+cx:lc2e-ttedake:10	給料１４万台ってだけでも、どうよ？	has:14만대라는 것만으로도,	fix	rewrites
+cx:lc2e-ttedake:10	俺にとってだけは万々歳な出来事だった。	!rule:cx:lc2e-ttedake:10	keep	rewrites
+cx:lc2e-ttedake:10	一軒家ってだけあって屋上も	!rule:cx:lc2e-ttedake:10	keep	rewrites
+cx:lc2e-ttedake:20	強さと肉の旨さ、あと絶死の森にいるからってだけなんだけど。	has:있다는 것만이지만.	fix	rewrites
+cx:lc2e-ttedake:20	「だってよく知らねぇもん。可愛いからってだけで付き合えねぇよ」	has:귀엽다는 것만으로	fix	rewrites
+cx:lc2e-ttedake:20	土曜日の昼前ってだけあって客足は多い。	!rule:cx:lc2e-ttedake:20	keep	rewrites
+cx:lc2e-ttedake:20	俺が前に住んでいたマンションを引き払う時は、友達と住むって言っただけだし。	!rule:cx:lc2e-ttedake:20	keep	rewrites
+cx:lc2e-ttedake:30	ただ否定してないってだけで	has:않다는 것만으로	fix	rewrites
+cx:lc2e-ttedake:30	「……似ているってだけよ」	has:……비슷하다는 것만	fix	rewrites
+cx:lc2e-ttedake:30	「ただ分かりやすいってだけだぞ」	has:쉽다는 것만이다	fix	rewrites
+cx:lc2e-ttedake:30	ギリギリ一線超えてないってだけで。	has:않다는 것만으로.	fix	rewrites
+cx:lc2e-ttedake:30	（暗いってだけで、こんなかよ……）	has:어둡다는 것만으로,	fix	rewrites
+cx:lc2e-ttedake:30	やっぱり首都ってだけあって、人が多いな。	!rule:cx:lc2e-ttedake:30	keep	rewrites

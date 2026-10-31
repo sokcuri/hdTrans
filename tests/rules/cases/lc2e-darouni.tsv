@@ -1,0 +1,24 @@
+# 규칙: GRM-160
+rule	input	expected	kind	layer
+cx:lc2e-darouni:10	いるだろうに。	has:텐데	fix	rewrites
+cx:lc2e-darouni:10	決まっているだろうに！」	has:텐데	fix	rewrites
+cx:lc2e-darouni:10	自分でだって分かってるだろうに	has:텐데	fix	rewrites
+cx:lc2e-darouni:10	そんなに慌てなくても良いだろうに。	!rule:cx:lc2e-darouni:10	keep	rewrites
+cx:lc2e-darouni:10	現実的に何も出来ないだろうに。	!rule:cx:lc2e-darouni:10	keep	rewrites
+cx:lc2e-darouni:16	「もちろん、決まってるでしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:16	さぞかわいいだろうに。	!rule:cx:lc2e-darouni:16	keep	rewrites
+cx:lc2e-darouni:16	ヒヒイロガネ製だから冷たいだろうに。	!rule:cx:lc2e-darouni:16	keep	rewrites
+cx:lc2e-darouni:18	「委員長なら力ずくでも奪えたでしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:18	きっとサルちゃんなら振り払うこともできたでしょうに。	has:텐데요	fix	rewrites
+cx:lc2e-darouni:18	「……って、なんで普通車なんですか。装甲車あったでしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:18	どうせ味覚は無いだろうに。	!rule:cx:lc2e-darouni:18	keep	rewrites
+cx:lc2e-darouni:20	「必要ないでしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:20	「なら断ればいいでしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:20	「何かすまん、歯痒いでしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:20	２人でも３人でも変わらないだろうに。	!rule:cx:lc2e-darouni:20	keep	rewrites
+cx:lc2e-darouni:30	「命あっての金だろうに、ねえ！」	has:텐데	fix	rewrites
+cx:lc2e-darouni:30	可哀想に、まだ食事をしていないだろうに。	!rule:cx:lc2e-darouni:30	keep	rewrites
+cx:lc2e-darouni:40	「馬場なのは貴方でしょうに」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:40	「お互い様でしょうに。貴方も」	has:텐데요	fix	rewrites
+cx:lc2e-darouni:40	そんな事言ったら貴方は魔王陛下でしょうに	has:텐데요	fix	rewrites
+cx:lc2e-darouni:40	最期の言葉もないだろうに。	!rule:cx:lc2e-darouni:40	keep	rewrites
