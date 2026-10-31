@@ -27172,3 +27172,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おにぃさん	오빠	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29116
 おにぃちゃん	오빠	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29117
 おにぃさま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29118
+頭に浮かべ	머릿속에 떠올&AA@	M447			GN			LEX-190 頭に浮かべる 떠올리다			あたまにうかべ	word:lex190:atamani
+脳裏に浮かべ	뇌리에 떠올&AA@	M447			GN			LEX-190 脳裏に浮かべる 떠올리다			のうりにうかべ	word:lex190:nouri

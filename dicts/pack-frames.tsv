@@ -24,3 +24,37 @@ id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
 引く#2	引く/ひく/v5	v5	sense	frame	obj=油	두르다	40	LEX-160	ledger	引く obj=油 → 두르다
 引く#5	引く/ひく/v5	v5	sense	frame	subj=@illness obj=-	가라앉다	20	LEX-160	review	引く subj=@illness obj=- → 가라앉다
 締め上げる#2	締め上げる/しめあげる/v1	v1	sense	frame	arg=心臓|胸	옥죄다	50	LEX-160	ledger	締め上げる arg=心臓|胸 → 옥죄다
+気付く#5	気付く|気づく	v5	sense	frame	after=-|、|「|『|…|…… dat=- obj=- final=、	정신을 차려 보다	50	LEX-160	review	気付く|気づく after=-|、|「|『|…|…… dat=- obj=- final=、 → 정신을 차려 보다
+気付く#5x	気付く|気づく	v5	sense	frame	after=-|、|「|『|…|…… dat=- obj=- final=、 form=ta|neg|te|vol	-	50	LEX-160	review	気付く|気づく after=-|、|「|『|…|…… dat=- obj=- final=、 form=ta|neg|te|vol → -
+続ける#2	続ける/つづける/v1	v1	sense	frame	obj=言葉	잇다	50	LEX-160	review	続ける obj=言葉 → 잇다
+答える#3	答える|応える	v1	sense	frame	dat=期待|ご期待|信頼	부응하다	50	LEX-160	review	答える|応える dat=期待|ご期待|信頼 → 부응하다
+書く#2	書く/かく/v5	v5	sense	frame	obj=@figure	그리다	50	LEX-160	review	書く obj=@figure → 그리다
+頂く#2	頂く|いただく	v5	sense	frame	obj=@food|@meal	먹다	50	LEX-160	review	頂く|いただく obj=@food|@meal → 먹다
+頂く#3	頂く|いただく	v5	sense	frame	obj=@drink	마시다	50	LEX-160	review	頂く|いただく obj=@drink → 마시다
+頂く#2h	頂く|いただく	v5	sense	frame	obj=@food|@meal head=*	-	50	LEX-160	review	頂く|いただく obj=@food|@meal head=* → -
+頂く#3h	頂く|いただく	v5	sense	frame	obj=@drink head=*	-	50	LEX-160	review	頂く|いただく obj=@drink head=* → -
+頂く#2f	頂く|いただく	v5	sense	frame	obj=@food|@meal from=*	-	50	LEX-160	review	頂く|いただく obj=@food|@meal from=* → -
+頂く#3f	頂く|いただく	v5	sense	frame	obj=@drink from=*	-	50	LEX-160	review	頂く|いただく obj=@drink from=* → -
+頂く#2d	頂く|いただく	v5	sense	frame	obj=@food|@meal dat=@person	-	50	LEX-160	review	頂く|いただく obj=@food|@meal dat=@person → -
+頂く#3d	頂く|いただく	v5	sense	frame	obj=@drink dat=@person	-	50	LEX-160	review	頂く|いただく obj=@drink dat=@person → -
+頂く#4	頂く|いただく	v5	sense	frame	loc=@tableware	먹다	50	LEX-160	review	頂く|いただく loc=@tableware → 먹다
+送る#2	送る/おくる/v5	v5	sense	frame	obj=@person to=* form=ta|te|te-request|neg|vol	바래다주다	50	LEX-160	review	送る obj=@person to=* form=ta|te|te-request|neg|vol → 바래다주다
+送る#3	送る/おくる/v5	v5	sense	frame	subj=-|@person obj=- to=* form=ta|te|te-request|neg|vol	바래다주다	40	LEX-160	review	送る subj=-|@person obj=- to=* form=ta|te|te-request|neg|vol → 바래다주다
+送る#7	送って来る|送ってくる	vk	sense	frame	obj=@gaze|合図	보내 오다	50	LEX-160	review	送って来る|送ってくる obj=@gaze|合図 → 보내 오다
+送る#5	送って来る|送ってくる	vk	sense	frame	obj=人生|生涯|一生|半生	살아오다	50	LEX-160	review	送って来る|送ってくる obj=人生|生涯|一生|半生 → 살아오다
+近付く#7	近付く|近づく	v5	sense	frame	head=@sound	다가오다	50	LEX-160	review	近付く|近づく head=@sound → 다가오다
+近付く#9	近付く|近づく	v5	sense	frame	dat=@person|@furniture|@book	다가가다	40	LEX-160	review	近付く|近づく dat=@person|@furniture|@book → 다가가다
+近付く#9s	近付く|近づく	v5	sense	frame	dat=自分|俺|私|僕|あたし|わたし|わたくし|こちら|こっち	다가오다	50	LEX-160	review	近付く dat=自分|俺|私|僕|あたし|わたし|わたくし|こちら|こっち → 다가오다
+開ける#3	開ける/あける/v1	v1	sense	frame	obj=口 form=te|te-request	벌리다	50	LEX-160	review	開ける obj=口 form=te|te-request → 벌리다
+浮かべる#3	浮かべる/うかべる/v1	v1	sense	frame	obj=@emotion	띠다	50	LEX-160	review	浮かべる obj=@emotion → 띠다
+浮かべる#5	浮かべる/うかべる/v1	v1:규칙	sense	colloc	汗を浮かべる	땀이 맺히다	50	LEX-160	review	浮かべる 汗を浮かべる → 땀이 맺히다
+浮かべる#6	浮かべる/うかべる/v1	v1	sense	frame	dat=頭|脳裏	떠올리다	60	LEX-160	review	浮かべる dat=頭|脳裏 → 떠올리다
+寝る#2	寝る/ねる/v1	v1:ㅂ	sense	frame	dat=@place|@furniture|@bedding|@stance|隣	눕다	50	LEX-160	review	寝る dat=@place|@furniture|@bedding|@stance|隣 → 눕다
+寝る#2a	寝る/ねる/v1	v1:ㅂ	sense	frame	after=仰向けに|うつ伏せに|俯せに|横向きに|大の字に	눕다	50	LEX-160	review	寝る after=仰向けに|うつ伏せに|俯せに|横向きに|大の字に → 눕다
+寝る#2t	寝る/ねる/v1	v1	tense	frame	dat=@place|@furniture|@bedding|@stance|隣 form=te	6	50	LEX-160	review	寝る dat=@place|@furniture|@bedding|@stance|隣 form=te → 6
+寝る#2at	寝る/ねる/v1	v1	tense	frame	after=仰向けに|うつ伏せに|俯せに|横向きに|大の字に form=te	6	50	LEX-160	review	寝る after=仰向けに|うつ伏せに|俯せに|横向きに|大の字に form=te → 6
+放す#6	放す/はなす/v5	v5	sense	frame	obj=@animal	풀어 주다	50	LEX-160	review	放す obj=@animal → 풀어 주다
+構う#5	構う/かまう/v5	v5	sense	frame	form=te next=くれる|呉れる|欲しい|ほしい	상대하다	50	LEX-160	review	構う form=te next=くれる|呉れる|欲しい|ほしい → 상대하다
+付き合う#2	付き合う|付きあう|つき合う	v5	sense	frame	after=にも form=te next=くれる|呉れる|もらう|貰う|ほしい|欲しい	어울리다	40	LEX-160	review	付き合う|付きあう|つき合う after=にも form=te next=くれる|呉れる|もらう|貰う|ほしい|欲しい → 어울리다
+付き合う#3	付き合う|付きあう|つき合う	v5	sense	frame	to=最後|最期	함께하다	50	LEX-160	review	付き合う|付きあう|つき合う to=最後|最期 → 함께하다
+付き合う#5	付き合う|付きあう|つき合う	v5	sense	frame	after=わがままに|我儘に	어울리다	50	LEX-160	review	付き合う|付きあう|つき合う after=わがままに|我儘に → 어울리다

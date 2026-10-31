@@ -1,0 +1,5 @@
+#! layer=pack
+# 気付かれる를 들키다로 읽는 태 행
+id	lemma	pos	slot	kind	cond	target	agent	pri	spec	prov	note
+noticed:2	に気付く|に気づく	v5	voice	frame	after=@person|@animal voice=passive	passive:에게 들키다		50	LEX-190	review	사람에게 気付かれる → 에게 들키다
+noticed:2n	に気付く|に気づく	v5	voice	frame	after=@person|@animal voice=passive next=な|に	passive		50	LEX-190	review	사람에게 気付かれない → passive

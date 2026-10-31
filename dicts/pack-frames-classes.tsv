@@ -25,17 +25,22 @@ class	parent
 @device	@machine
 @dirt	@material
 @document	@thing
+@drink	@food
 @duty	@task
+@emotion	@abstract
 @entity	
 @event	@abstract
 @exam	@event
 @expression	@abstract
 @eyewear	@clothing
 @facility	@building
+@figure	@shape
 @firearm	@weapon
 @fist	@body
+@food	@thing
 @furniture	@entity
 @game	@activity
+@gaze	@abstract
 @group	@entity
 @guess	@idea
 @hair	@body
@@ -99,6 +104,7 @@ class	parent
 @tableware	@container
 @task	@event
 @thing	@entity
+@time	@abstract
 @tool	@thing
 @town	@place
 @trouble	@abstract

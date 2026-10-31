@@ -1,0 +1,26 @@
+# 규칙: LEX-190
+rule	input	expected	kind	layer
+lexical:verb-set-phrases	知らずのうちに、拳を握りしめる。	has:모르는 사이에	fix	lookup
+lexical:verb-set-phrases	サラは知らずのうちに手綱を握る手を強めた。	has:모르는 사이에	fix	lookup
+lexical:verb-set-phrases	慣れない環境で知らず知らずのうちに疲労していたようだ。	has:자기도 모르는 사이에	fix	lookup
+lexical:verb-set-phrases	どうやら知らず知らずのうちに心配をかけてしまったようだ。	has:자기도 모르는 사이에	fix	lookup
+lexical:verb-set-phrases	「俺が知るか！魔剣が欲しいっていうから叩いてやったらコレだ！」	has:내가 알 게 뭐야!	fix	lookup
+lexical:verb-set-phrases	「知るか！！」	has:알 게 뭐야	fix	lookup
+lexical:verb-set-phrases	俺が知るかよ？	lacks:알 게 뭐야	keep	lookup
+lexical:verb-set-phrases	全てを知るかのように。	lacks:알 게 뭐야	keep	lookup
+lexical:verb-set-phrases	顔に笑みを浮かべたまま表紙をめくる。	lacks:의아한	keep	lookup
+lexical:verb-set-phrases	「もう、容赦しない。今度こそ、あの世に送ってやる！」	has:저승으로 보내	fix	lookup
+lexical:verb-set-phrases	こうやって彼らの魂を成仏させて、あの世へ送っているの。	has:저승으로 보내고	fix	lookup
+lexical:verb-set-phrases	そのままオークにあの世へ送迎されてしまうわけで。	lacks:저승으로 보내	keep	lookup
+dict:word:lex190:atamani	ちょうど俺が頭に浮かべた人物からの電話だった。	has:머릿속에 떠올린	fix	lookup
+dict:word:lex190:atamani	それを、もう一度頭に浮かべる。	has:머릿속에 떠올린다	fix	lookup
+dict:word:lex190:nouri	その老人の顔を脳裏に浮かべながら、女性は言う。	has:뇌리에 떠올리면서	fix	lookup
+dict:word:lex190:nouri	それを聞いたとき、あの時の事を脳裏に浮かべた。	has:뇌리에 떠올렸다	fix	lookup
+dict:word:lex190:nouri	ふと脳裏に浮かんだ顔があった。	lacks:떠올린	keep	lookup
+pack:noticed:2	俺達は既に、敵に気付かれている	has:적에게 들키고	fix	voice
+pack:noticed:2	ほぼ始めから大半の人に気づかれていたってことか…	has:사람에게 들키고	fix	voice
+pack:noticed:2	僕に気付かれてしまった。	has:나에게 들켜	fix	voice
+pack:noticed:2n	敵に気付かれないようにエンジン切ってあるから	lacks:들키지 못하	keep	voice
+pack:noticed:2	見つめてた事に気付かれたのが恥ずかしくて	lacks:에게 들켰	keep	voice
+pack:noticed:2	その状況に気づかれない程度に顔をしかめた。	lacks:에게 들키	keep	voice
+pack:noticed:2	うそ！気づかれた！？	lacks:에게 들켰	keep	voice

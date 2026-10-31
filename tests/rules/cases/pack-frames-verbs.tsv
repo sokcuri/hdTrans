@@ -1,0 +1,92 @@
+# 규칙: LEX-160
+rule	input	expected	kind	layer
+pack:続ける#2	彼は少し考えてから言葉を続けた。	has:이었다	fix	packs
+pack:答える#3	「では、ご期待に応えて盛り上げていきますよー」	has:부응해	fix	packs
+pack:付き合う#5	私のわがままに付き合ってくれるお礼よ	has:어울려	fix	packs
+pack:付き合う#2	シミュレーションにも付き合ってくれたし……	has:어울려	fix	packs
+pack:書く#2	６００の下に矢印を書いて	has:그려	fix	packs
+pack:書く#2	地面に大きな丸を書く。	has:그린다	fix	packs
+pack:頂く#3	俺も遠慮なくお茶をいただく。	has:마신다	fix	packs
+pack:頂く#4	これを……割り箸でいただくのが	has:먹는	fix	packs
+pack:頂く#3	食後にコーヒーをいただいた。	has:마셨다	fix	packs
+pack:頂く#2	朝食をいただくことにする。	has:먹기로	fix	packs
+pack:頂く#2	おにぎりをいただきつつ	has:먹으면서	fix	packs
+pack:送る#7	冷たい視線を送ってくる御園。	has:보내	fix	packs
+pack:送る#7	ちらりと俺に視線を送ってきた。	has:보내	fix	packs
+pack:送る#5	「これだけの人生を送ってきたら、普通は	has:살아오면	fix	packs
+pack:送る#5	これまで平穏無事な人生を送ってきたとは	has:살아왔다니	fix	packs
+pack:送る#2	友達を駅まで送った。	has:바래다주었다	fix	packs
+pack:近付く#9	呟きながら、高峰が男子生徒に近づいた。	has:다가갔다	fix	packs
+pack:近付く#9	床に置いてあった本に近づく。	has:다가간다	fix	packs
+pack:近付く#7	近づく足音に顔をあげる。	has:다가오는	fix	packs
+pack:近付く#9	見知った顔がベンチに近づいていく。	has:다가간다	fix	packs
+pack:開ける#3	「筧くん、口を開けて。あ～んっ」	has:벌려	fix	packs
+pack:開ける#3	限界まで口を開けて	has:벌려	fix	packs
+pack:浮かべる#5	彼女は額に汗を浮かべながら	has:땀이 맺히면서	fix	packs
+pack:浮かべる#3	驚愕と羞恥を浮かべる表情に	has:띠는	fix	packs
+pack:浮かべる#3	顔に戸惑いを浮かべる。	has:띤다	fix	packs
+pack:浮かべる#5	額にうっすらと汗を浮かべている。	has:땀이 맺히고	fix	packs
+pack:浮かべる#6	脳裏に彼女の笑顔を浮かべる。	has:떠올린다	fix	packs
+pack:寝る#2	なにも言わずに隣に寝て、抱き寄せた。	has:누워	fix	packs
+pack:寝る#2	床に寝ている素足が見えた。	has:누워	fix	packs
+pack:寝る#2	ソファに寝て天井を見上げた。	has:누워	fix	packs
+pack:放す#6	捕まえた魚を川に放した。	has:풀어 주었다	fix	packs
+pack:放す#6	鳥を空に放す。	has:풀어 준다	fix	packs
+pack:構う#5	構ってほしい、のだろうか。	has:상대해	fix	packs
+pack:寝る#2a	仰向けに寝ている俺からは	has:누워	fix	packs
+pack:送る#3	「最後に、家まで送るよ」	lacks:바래다줘	keep	packs
+pack:送る#3	「……家まで送るよ」	lacks:바래다줘	keep	packs
+pack:送る#2	家族に手紙を送ったんだろうか。	lacks:바래다	keep	packs
+pack:送る#2	子どもができた手紙を送ってくるのを	lacks:바래다	keep	packs
+pack:送る#2	この配達員は荷物を送り届けただけだ。	lacks:바래다	keep	packs
+pack:送る#2	好きなタイミングで荷物を送ってくれ」	lacks:바래다	keep	packs
+pack:気付く#5	柔らかいものが毛布だと気付くと、力が抜けた。	lacks:정신을 차리	keep	packs
+pack:気付く#5	その原因が彼女だと気付くと、若者たちは逃げていく。	lacks:정신을 차리	keep	packs
+pack:気付く#5	呼ばれていたことに気付いて、はっと我に返る。	lacks:정신을 차리	keep	packs
+pack:気付く#5	その人物もこちらに気付いて、手を振る。	lacks:정신을 차리	keep	packs
+pack:開ける#3	（自室のドアを開けて）	lacks:벌려	keep	packs
+pack:開ける#3	仕方なくドアを開けて頭を下げた。	lacks:벌려	keep	packs
+pack:頂く#2	陛下に優しいお言葉をいただくことができた。	lacks:먹	keep	packs
+pack:頂く#2	「陛下からお言葉をいただいている」	lacks:먹	keep	packs
+pack:頂く#2	「本当に、何よりのプレゼントをいただきました」	lacks:먹	keep	packs
+pack:頂く#2	手にしたプレゼントをいただく催しだ。	lacks:먹	keep	packs
+pack:書く#2	取次いでもらっているから手紙を書きますね」	lacks:그리	keep	packs
+pack:書く#2	何度も何度も手紙を書きました。	lacks:그리	keep	packs
+pack:浮かべる#3	彼があの胡散臭い笑みを浮かべていると確信した。	lacks:띠	keep	packs
+pack:浮かべる#3	白い顔に仄かな笑みを浮かべて	lacks:띠	keep	packs
+pack:浮かべる#3	すると彼女は目に涙を浮かべにっこりと笑い。	lacks:띠	keep	packs
+pack:浮かべる#3	目に涙を浮かべて語った	lacks:띠	keep	packs
+pack:寝る#2	ちゃんとベッドで寝ていてくれるし	lacks:누	keep	packs
+pack:寝る#2	この様なベッドで寝るのは、初めてではないだろうか。	lacks:누	keep	packs
+pack:寝る#2	その夜、俺は早く寝つき、朝を待った。	lacks:누	keep	packs
+pack:寝る#2	「早く寝なさい」と言ってもあかねちゃんはママにべったり。	lacks:누	keep	packs
+pack:付き合う#2	「……俺は彼女と付き合いが長いんだよ。	lacks:어울	keep	packs
+pack:付き合う#2	そういえば彼女と付き合い始めたのもこのころだ。	lacks:어울	keep	packs
+pack:続ける#2	接穂は首を傾げると、話を続ける。	lacks:이었	keep	packs
+pack:続ける#2	対して霊夢は平然とした表情で話を続ける。	lacks:이었	keep	packs
+pack:答える#3	「おめぇ等の質問に答えたんだから	lacks:부응	keep	packs
+pack:答える#3	何であんたの質問に答えないといけないの？	lacks:부응	keep	packs
+pack:放す#6	慌てて彼女から手を放すリチャード。	lacks:풀어	keep	packs
+pack:放す#6	武器から手を放し、白兵戦に持ち込む。	lacks:풀어	keep	packs
+pack:気付く#5	「気付くと、どこかに捨てて	has:정신을 차려 보	fix	packs
+pack:気付く#5	「気付くと、もう折り返しか。	has:정신을 차려 보	fix	packs
+pack:気付く#5	「気付くと、もう朝になっていた」	has:정신을 차려 보	fix	packs
+pack:気付く#5	ふと気付くと、顔を覗き込んでいた。	lacks:정신을 차리	keep	packs
+pack:気付く#5	ふと気付くと、銃撃の音が止んで居ました。	lacks:정신을 차리	keep	packs
+pack:気付く#5	ふと気付くと、目の前に少女が立っている。	lacks:정신을 차리	keep	packs
+pack:送る#3	家まで送るよ。	lacks:바래다줘	keep	packs
+pack:送る#2	荷物を家まで送った。	lacks:바래다	keep	packs
+pack:気付く#5	「アイツが変だと気付くと、逃げた」	lacks:정신을 차리	keep	packs
+pack:開ける#3	私は口を唖然と開けた。	lacks:벌렸	keep	packs
+pack:頂く#2f	先輩からお弁当を頂いてしまって…。	has:받아	keep	packs
+pack:頂く#3f	いい緑茶を先輩から少しいただいたのです。	has:받았	keep	packs
+pack:気付く#5	そこでふと気付き、俺は苦笑した。	lacks:정신을 차리	keep	packs
+pack:構う#5	そんな私に構わず、殿下は一気に捲し立てる。	lacks:상대	keep	packs
+pack:構う#5	司令官？構ってくれるなんて優しいのね	has:상대해 주다니	fix	packs
+pack:送る#3	荷物は実家まで送った。	lacks:바래다	keep	packs
+pack:付き合う#2	彼女にも付き合っている人がいる。	lacks:어울	keep	packs
+pack:付き合う#4c	ちょっと付き合ってた時期がある。	lacks:어울	keep	packs
+pack:頂く#2d	先生にお菓子を頂いた。	has:받았	keep	packs
+pack:書く#2	円を書いた。	lacks:그렸	keep	packs
+pack:近付く#9s	見知らぬ誰かが自分に近付こうとしている。	has:다가오려	fix	packs
+pack:近付く#9	我慢の限界が近づく。	lacks:다가	keep	packs
