@@ -8,14 +8,13 @@
 id	spec	when	class	note
 z.imp	Z-1	force=imp|request|prohib	addressee	a command, request or prohibition is addressed to the listener
 z.prop	Z-1	force=prop	speaker	しよう/しましょう: the speaker (with the listener)
-z.want	Z-2	mod=want|volitional & !force=q	speaker	たい and the volitional in a statement: the speaker
-z.want.q	Z-2	mod=want|volitional & force=q	addressee	たい in a question: the listener (行きたい?)
+z.want	Z-2	mod=want|volitional & !force=q & sp=Q	speaker	たい and the volitional in a spoken statement: the speaker (in narration the subject is whoever the narration follows)
 z.kenjo	Z-3	polite=kenjo	speaker	humble verbs (参る, 申す, いたす): the speaker
 z.sonkei.q	Z-3	polite=sonkei & force=q	addressee	a respectful verb in a question: the listener
 z.sonkei	Z-3	polite=sonkei & sp=Q	addressee	a respectful verb in speech is never the speaker; the listener by default
 z.kureru	Z-4	bene=give-in	third	くれる/くださる: the giver is not the speaker
 z.kureru.q	Z-4	bene=give-in & force=q|request	addressee	～てくれる? / ～てください: the listener gives
-z.hearsay	Z-5	mod=hearsay|likeness & sp=Q	third	evidentials (らしい, そうだ, ようだ) report someone else
 z.topic.person	Z-6	person=speaker	speaker	a topic person word (俺は) names the subject
 z.topic.addressee	Z-6	person=addressee	addressee	a topic person word (お前は) names the subject
 z.topic.third	Z-6	person=third	third	a topic name or person word names the subject
+z.experience	Z-7	lemma=思う|考える|感じる|気付く|分かる|知る|覚える|忘れる|驚く|困る|嬉しい|寂しい|楽しい|悲しい|怖い|欲しい|眠い|疲れる|信ずる|信じる|思い出す|願う|祈る|迷う|悩む|恥ずかしい|悔しい|辛い|苦しい|見える|聞こえる & force=decl & !mod=conjecture|hearsay|likeness & !pol=neg	speaker	a thought, feeling or perception stated without a subject is the speaker's (or the narrator's)
