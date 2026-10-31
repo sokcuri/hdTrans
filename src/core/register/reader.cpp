@@ -393,6 +393,9 @@ void Capture::Line(int piece) {
         l = piece >= 0 && static_cast<std::size_t>(piece) < pieceLine.size() ? pieceLine[static_cast<std::size_t>(piece)] : -1;
         first = piece <= 0 || pieceLine[static_cast<std::size_t>(piece) - 1] != l;
     }
+    // the line left keeps only the room its items take
+    if (line_ >= 0 && line_ != l && static_cast<std::size_t>(line_) < items.size())
+        items[static_cast<std::size_t>(line_)].shrink_to_fit();
     line_ = l;
     if (l < 0) return;
     if (items.size() <= static_cast<std::size_t>(l)) items.resize(static_cast<std::size_t>(l) + 1);
@@ -466,6 +469,8 @@ bool CaptionDocument(const Reader& r, const std::vector<std::string>& ja) {
     if (tagged * 5 >= lines || marked * 5 >= lines) return true;
     return shortLines * 2 >= lines && quoted * 10 <= lines;
 }
+
+std::string LineSpeaker(const Reader& r, const std::string& ja) { return SpeakerTag(r, ToU32(ja)); }
 
 PreLine ReadLine(const Data& data, std::size_t i, const std::string& ja, const std::string& out, const Capture& capture,
                  bool dialogue, uint32_t scene) {

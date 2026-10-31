@@ -86,7 +86,8 @@ HD_TEST(register_regenerated_lines) {
         } else {
             const std::string source[] = {c.ja};
             std::string out[] = {c.out};
-            reg::Retrofit(source, c.capture, out);
+            reg::Capture capture = c.capture;
+            reg::Retrofit(source, capture, out);
             if (out[0] != c.expected) hdtest::Fail(__FILE__, __LINE__, c.ja + ": " + out[0] + " vs " + c.expected);
         }
     }
@@ -97,7 +98,8 @@ HD_TEST(register_off_keeps_the_translation) {
     for (const Case& c : cases) {
         const std::string source[] = {c.ja};
         std::string out[] = {c.out};
-        reg::Retrofit(source, c.capture, out, {false});
+        reg::Capture capture = c.capture;
+        reg::Retrofit(source, capture, out, {false});
         HD_CHECK_EQ(out[0], c.out);
     }
 }

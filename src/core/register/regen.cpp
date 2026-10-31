@@ -740,23 +740,31 @@ std::string Splice(const Tables& t, const std::string& before, const std::vector
 
 }  // namespace
 
-std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lines, const std::vector<bool>& build,
-                                  const RegenOptions& options) {
-    const Tables& t = d.ko;
-    Words r{t, d.retro, {}, {}};
-    std::vector<RegDecision> decided;
-    const std::vector<RegDecision>* given = options.decisions;
-    if (given == nullptr || given->size() != lines.size()) {
-        std::vector<RegLine> rl;
-        for (const PreLine& l : lines) rl.push_back({l.ja, l.speaker, l.scene, l.dialogue});
-        decided = DecideLevels(d.levels, rl);
-        given = &decided;
+struct Regenerator::State {
+    Words r;
+    std::vector<RegDecision> decided;  // the decisions made here, when the options give none for the lines
+    const std::vector<RegDecision>* decisions = nullptr;
+};
+
+Regenerator::Regenerator(const Data& d, const std::vector<RegLine>& lines, const RegenOptions& options)
+    : d_(d), options_(options), state_(std::make_unique<State>(State{Words{d.ko, d.retro, {}, {}}, {}, nullptr})) {
+    state_->decisions = options.decisions;
+    if (state_->decisions == nullptr || state_->decisions->size() != lines.size()) {
+        state_->decided = DecideLevels(d.levels, lines);
+        state_->decisions = &state_->decided;
     }
-    const std::vector<RegDecision>& decisions = *given;
-    std::vector<RegenLine> out(lines.size());
-    for (std::size_t li = 0; li < lines.size(); ++li) {
-        if (li >= build.size() || !build[li]) continue;
-        const PreLine& line = lines[li];
+}
+
+Regenerator::~Regenerator() = default;
+
+RegenLine Regenerator::Line(std::size_t li, const PreLine& line) {
+    const Data& d = d_;
+    const RegenOptions& options = options_;
+    const Tables& t = d.ko;
+    Words& r = state_->r;
+    const std::vector<RegDecision>& decisions = *state_->decisions;
+    RegenLine out;
+    {
         std::vector<Node> nodes;
         bool lineOk = BuildAligned(r, line, nodes);
         SplitNounCopula(t, nodes);
@@ -996,7 +1004,7 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         std::size_t lead = 0;
         while (lead < line.out.size() && line.out[lead] == ' ') ++lead;
         g = line.out.substr(0, lead) + g;
-        RegenLine& o = out[li];
+        RegenLine& o = out;
         o.out = lineOk ? spliced : line.out;
         o.gen = g;
         o.ok = lineOk;
@@ -1005,6 +1013,17 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
         o.spec = dec.spec;
         o.key = dec.key;
     }
+    return out;
+}
+
+std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lines, const std::vector<bool>& build,
+                                  const RegenOptions& options) {
+    std::vector<RegLine> rl;
+    for (const PreLine& l : lines) rl.push_back({l.ja, l.speaker, l.scene, l.dialogue});
+    Regenerator regen(d, rl, options);
+    std::vector<RegenLine> out(lines.size());
+    for (std::size_t li = 0; li < lines.size(); ++li)
+        if (li < build.size() && build[li]) out[li] = regen.Line(li, lines[li]);
     return out;
 }
 

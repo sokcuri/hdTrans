@@ -46,14 +46,14 @@ SourceDecisions DecideSource(std::span<const std::string> source) {
     uint32_t scene = 0;
     for (std::size_t i = 0; i < ja.size(); i++) {
         if (Blank(ja[i])) ++scene;
-        lines.push_back({ja[i], ReadLine(*d, i, ja[i], "", Capture{}, false, scene).speaker, scene, dialogue[i]});
+        lines.push_back({ja[i], LineSpeaker(d->reader, ja[i]), scene, dialogue[i]});
     }
     out.lines = DecideLevels(d->levels, lines);
     out.dialogue = std::move(dialogue);
     return out;
 }
 
-void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
+void Retrofit(std::span<const std::string> source, Capture& capture, std::span<std::string> out,
               const Switches& switches, std::vector<Change>* changes, const SourceDecisions* decided) {
     const Data* d = LoadedData();
     if (d == nullptr || !switches.levels || source.size() != out.size()) return;
@@ -63,28 +63,33 @@ void Retrofit(std::span<const std::string> source, const Capture& capture, std::
         decided = &own;
     }
     if (decided->lines.empty()) return;
-    const std::vector<bool>& dialogue = decided->dialogue;
-    std::vector<std::string> ja;
-    ja.reserve(source.size());
-    for (const std::string& s : source) ja.push_back(WithoutCr(s));
-    std::vector<PreLine> lines;
+    // the levels are decided over the whole document; then each dialogue line is read and written again on
+    // its own, and its captured items are let go
+    std::vector<RegLine> lines(source.size());
+    for (std::size_t i = 0; i < source.size(); i++) {
+        lines[i].ja = WithoutCr(source[i]);
+        lines[i].dialogue = decided->dialogue[i];
+    }
     uint32_t scene = 0;
-    for (std::size_t i = 0; i < ja.size(); i++) {
-        if (Blank(ja[i])) ++scene;
-        lines.push_back(ReadLine(*d, i, ja[i], WithoutCr(out[i]), capture, dialogue[i], scene));
+    for (RegLine& l : lines) {
+        if (Blank(l.ja)) ++scene;
+        l.speaker = LineSpeaker(d->reader, l.ja);
+        l.scene = scene;
     }
     RegenOptions options;
     options.levels = switches.levels;
     options.decisions = &decided->lines;
-    const std::vector<RegenLine> regen = Regenerate(*d, lines, dialogue, options);
-    for (std::size_t i = 0; i < regen.size(); i++) {
-        const RegenLine& r = regen[i];
+    Regenerator regen(*d, lines, options);
+    for (std::size_t i = 0; i < lines.size(); i++) {
+        if (!lines[i].dialogue) continue;
+        const RegenLine r = regen.Line(i, ReadLine(*d, i, lines[i].ja, WithoutCr(out[i]), capture, true, lines[i].scene));
+        if (i < capture.items.size()) std::vector<Capture::Item>().swap(capture.items[i]);
         // only a change of speech level is worth the rewrite: a line at the same level keeps its text, and so
         // does a line whose sentences would end at different levels
-        if (!dialogue[i] || !r.ok || r.mixedLevels || !r.levelChanged) continue;
+        if (!r.ok || r.mixedLevels || !r.levelChanged) continue;
         const bool cr = out[i].ends_with('\r');
         if (changes != nullptr && r.out != WithoutCr(out[i]))
-            changes->push_back({i, ja[i], WithoutCr(out[i]), r.out, r.spec, r.key});
+            changes->push_back({i, lines[i].ja, WithoutCr(out[i]), r.out, r.spec, r.key});
         out[i] = r.out + (cr ? "\r" : "");
     }
 }
