@@ -24,6 +24,7 @@
 | `names.00.tsv` ~ `names.02.tsv` | `names` | 인명, 캐릭터, 지명, 단체, 작품 이름 (키 순으로 세 파일로 나눔) |
 | `names-places.tsv` | `names` | 일본 지명: 역, 노선, 도도부현, 시정촌, 명소 |
 | `kana.tsv` | `kana` | 한자 단어의 히라가나 표기 |
+| `kana-equivalents.tsv` | `kana` | 사전에 없던 가나 표기를 한자 단어에 잇는 손으로 적은 행(LEX-93). 넷째 열은 행 id, 규칙, 출처 |
 
 `pos`, `sem`, `gram` 열의 코드 뜻과 예는 [dictionary-codes.md](dictionary-codes.md), 사전 행을 고쳐 오역을 바로잡는 방법은
 [fixing-translations.md](fixing-translations.md#사전-행)에 있습니다.

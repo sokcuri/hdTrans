@@ -27154,3 +27154,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 半ばかり	반 정도	N110		Tu	GN	8643	||2 &&2 G-1== "Ct" G-2== "NjNdCt" &&2 S-1== "R年" G-1== "NjNd"	수량 뒤의 半ばかり는 그 수량에 붙여 쓰는 ‘반 정도’로 고른다(三年半ばかり 3년반 정도).				w:28966
 半ばかり	반 정도	N110	XXX		GN							w:28967
 承太郎	죠타로	N130	QPNVHn	Wb	GN							w:28974
+ゆら	흔들&AA@	M442			GN			LEX-94: 가나로 쓴 揺らぐ의 어간(ゆらいだ 흔들렸다)			ゆらぐ	w:28975
