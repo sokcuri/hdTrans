@@ -1,0 +1,5 @@
+#! layer=pack
+# 뒤 말과 목적어로 뜻을 고르는 팩 행: メドが立つ 전망이 서다, 髪をかきわける 머리카락을 넘기다
+id	lemma	pos	slot	cond	target	spec	prov	note	kind
+loanword-and-phrase-glosses:p1	メド|めど|目処	n	sense	next=が|は|も	전망	LEX-2911	audit	メドが立つ 전망이 서다	
+loanword-and-phrase-glosses:p2	かきわける|かき分ける|掻き分ける	v1	sense	obj=髪|前髪|髪の毛|後ろ髪|横髪	넘기다	LEX-2911	audit	髪をかきわける 머리카락을 넘기다	

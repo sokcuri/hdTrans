@@ -1,0 +1,27 @@
+#! layer=base
+# 외래어 표기와 굳은 말의 뜻: トルソー 토르소, パーカッション 퍼커션, お品書き 메뉴, お流れ 무산, かきわけ 헤치다
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+トルソー	토르소	N110			GN			LEX-2910	loanword-and-phrase-glosses:1
+パーカッション	퍼커션	N110			GN			LEX-2910	loanword-and-phrase-glosses:2
+パーソナリティー	퍼스낼리티	N110			GN			LEX-2910	loanword-and-phrase-glosses:3
+パーソナリティ	퍼스낼리티	N110			GN			LEX-2910	loanword-and-phrase-glosses:4
+ブリーダー	브리더	N110			GN			LEX-2910	loanword-and-phrase-glosses:5
+プラセンタ	플라센타	N110			GN			LEX-2910	loanword-and-phrase-glosses:6
+ベーキングパウダー	베이킹파우더	N110			GN			LEX-2910	loanword-and-phrase-glosses:7
+ミニチュア	미니어처	N110			GN			LEX-2910	loanword-and-phrase-glosses:8
+ボストンバッグ	보스턴백	N110			GN			LEX-2910	loanword-and-phrase-glosses:9
+プードル	푸들	N130			GN			LEX-2910	loanword-and-phrase-glosses:10
+フォークロア	포클로어	N110			GN			LEX-2910	loanword-and-phrase-glosses:11
+マイナーな	마이너한	N110			GN			LEX-2910	loanword-and-phrase-glosses:12
+ハーモニック	하모닉	N110			GN			LEX-2910	loanword-and-phrase-glosses:13
+トムヤム	똠얌	N110			GN			LEX-2910	loanword-and-phrase-glosses:14
+スキーモービル	스키모빌	N110			GN			LEX-2910	loanword-and-phrase-glosses:15
+ブラッシュアップ	브러시업	N110			GN			LEX-2910	loanword-and-phrase-glosses:16
+お品書き	메뉴	N110			GN			LEX-2911	loanword-and-phrase-glosses:17
+パン屋さん	빵집	N110			GN			LEX-2911	loanword-and-phrase-glosses:18
+お流れ	무산	N110			GN			LEX-2911	loanword-and-phrase-glosses:19
+お流れにな	무산&C6@	M418		Dx	GN			LEX-2911	loanword-and-phrase-glosses:20
+お流れにされ	무산&C6@	M427			GN			LEX-2911	loanword-and-phrase-glosses:21
+かきわけ	헤&AO@	M437			GN			LEX-2911	loanword-and-phrase-glosses:22
+ペンを取り出	펜을 꺼&A6@	C433			GN			LEX-2911	loanword-and-phrase-glosses:23
+お願いしようと	부탁드리려고	N110		Nn	GN			LEX-2911	loanword-and-phrase-glosses:25
