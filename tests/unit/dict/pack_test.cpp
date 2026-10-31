@@ -195,6 +195,8 @@ HD_TEST(dict_pack_collocs) {
         {"x\t元\tn\tcolloc\t{Y}の元\t{X} 곁", "2: a slot is {X} or {X:@class}, not \"{Y}\""},
         {"x\t元\tn\tcolloc\t{X}の元|{X}のもと\t{X} 곁", "2: a pattern with a slot has one spelling"},
         {"x\t元\tn\tcolloc\t元に\t{X} 곁", "2: the target \"{X} 곁\" has {X} but the pattern has no slot"},
+        {"x\t彼\tn\tcolloc\t彼の{X}\t그의 {X}", "2: a colloc pattern ends with words after its slot, not with the slot"},
+        {"x\t元\tn\tcolloc\t{X}を元に戻す\t다시 {X}을 되돌리다", "2: the target \"다시 {X}을 되돌리다\" has Korean before {X} but the pattern starts with the slot"},
     };
     for (const auto& c : cases) {
         Families own;

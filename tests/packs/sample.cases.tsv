@@ -32,3 +32,6 @@ pack:s.tomeru.parked	多くの車が止められた駐車場。	많은 차가 �
 pack:s.tomeru.parked	車を止めた。	!rule:pack:s.tomeru.parked	keep	packs
 pack:s.iku.invite	行くしかない？	!rule:pack:s.iku.invite	keep	packs
 pack:s.iku.invite	行ったじゃないか？	!rule:pack:s.iku.invite	keep	packs
+pack:s.igai	猫以外は来た。	고양이를 빼고는 왔다.	fix	packs
+pack:s.igai	先生以外は来た。	선생님을 빼고는 왔다.	fix	packs
+pack:s.igai	以外と簡単だ。	!rule:pack:s.igai	keep	packs

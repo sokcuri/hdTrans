@@ -161,11 +161,14 @@ std::string CompileColloc(std::string_view pattern, std::string_view target, std
         if (c.after.find("{X") != std::string::npos) return "a colloc pattern has one slot";
     }
     if (c.befores.empty() || (c.befores.size() == 1 && c.befores[0].empty() && c.after.empty())) return "an empty colloc pattern";
+    if (c.slot && c.after.empty()) return "a colloc pattern ends with words after its slot, not with the slot";
     std::string_view rest = target;
     if (c.slot) {
         const std::size_t at = target.find("{X}");
         if (at == std::string_view::npos) return "the target " + userdict::internal::Quote(target) + " has no {X}";
         c.lead = TrimSpace(target.substr(0, at));
+        if (!c.lead.empty() && c.befores[0].empty())
+            return "the target " + userdict::internal::Quote(target) + " has Korean before {X} but the pattern starts with the slot";
         rest = target.substr(at + 3);
         c.spaced = rest.starts_with(' ');
         // a particle right after the slot's Korean goes with the word after the slot
