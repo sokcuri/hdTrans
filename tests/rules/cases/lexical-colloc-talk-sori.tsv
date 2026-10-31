@@ -1,0 +1,36 @@
+# 규칙: LEX-223
+rule	input	expected	kind	layer
+cx:colloc-noun-verb:310	ナメたこと言ってんじゃねぇぞ、クォラ？	has:얕보는 소리	fix	rewrites
+cx:colloc-noun-verb:310	舐めた態度を取るな。	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:312	舐めたことは言わないでくれ。	has:얕보는 소리는 하지	fix	rewrites
+cx:colloc-noun-verb:310	ナメたことを抜かすな。	has:얕보는 소리를 지껄이지	fix	rewrites
+cx:colloc-noun-verb:310	舐めたことも言うもんだな。	has:얕보는 소리도 하는	fix	rewrites
+cx:colloc-noun-verb:320	ふざけたことを言ってきたのだ。	has:웃기는 소리를 해 왔다	fix	rewrites
+cx:colloc-noun-verb:320	ふざけたことを考えるな。	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:330	なに寝ぼけたこと言ってんだ！	has:잠이 덜 깬 소리 하는	fix	rewrites
+cx:colloc-noun-verb:330	寝ぼけたことを言わないで下さい。	has:잠이 덜 깬 소리를 하지 마세요	fix	rewrites
+cx:colloc-noun-verb:335	そう堅いことは言わずに！	has:딱딱한 소리는 하지	fix	rewrites
+cx:colloc-noun-verb:335	堅いことは抜きにするわ！	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:340	甘いことを言うな。	has:안이한 소리를 하지	fix	rewrites
+cx:colloc-noun-verb:340	甘いことを考える。	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:350	何馬鹿なこと言ってんのよ！	has:바보같은 소리 해	fix	rewrites
+cx:colloc-noun-verb:350	変なことを言って、すまない	has:이상한 소리를 하고	fix	rewrites
+cx:colloc-noun-verb:350	生意気なことを言うな。	has:건방진 소리를 하지	fix	rewrites
+cx:colloc-noun-verb:350	くだらないこと言ってないで行くぞ。	has:시시한 소리 하지	fix	rewrites
+cx:colloc-noun-verb:350	余計なことを言ってしまった。	has:쓸데없는 말을	keep	rewrites
+cx:colloc-noun-verb:350	本当のことを言う。	has:사실을 말한다	keep	rewrites
+cx:colloc-noun-verb:350	堅いことをする。	has:딱딱한 일을 한다	keep	rewrites
+cx:colloc-noun-verb:350	甘いものを言う。	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:360	よくも舐めた真似をしてくれた。	has:얕보는 짓을 해	fix	rewrites
+cx:colloc-noun-verb:365	舐めた真似はするな。	has:얕보는 짓은 하지	fix	rewrites
+cx:colloc-noun-verb:365	ナメたマネをするなら敵に回す覚悟をしておけ	has:얕보는 짓을 한다면	fix	rewrites
+cx:colloc-verb-partner:420	ナメたこと言ってくれんじゃん。	has:얕보는 소리 해	fix	rewrites
+cx:colloc-verb-partner:420	馬鹿なことを言うな。	has:바보같은 소리를 하지	fix	rewrites
+cx:colloc-verb-partner:430	ふざけたことを抜かすな。	has:웃기는 소리를 지껄이지	fix	rewrites
+cx:colloc-verb-partner:430	余計なことを言ってしまった。	lacks:지껄	keep	rewrites
+cx:colloc-noun-verb:335	甘いことは言ってられない	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:365	舐めたマネしてんじゃねぇぞ	lacks:얕보는 지 마	keep	rewrites
+cx:colloc-noun-verb:312	舐めたことはない。	has:핥았던 적은 없다	keep	rewrites
+cx:colloc-noun-verb:330	寝ぼけたことをする。	lacks:소리	keep	rewrites
+cx:colloc-noun-verb:360	猫の真似をした。	has:흉내를 냈다	keep	rewrites
+cx:colloc-verb-partner:420	そんなこと言うな。	has:그런 말 하지 마	keep	rewrites

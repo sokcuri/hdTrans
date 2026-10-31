@@ -191,6 +191,14 @@
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
+//= noun.feeling-suru	Nouns of a feeling or a hunch before which する after が, も, は, すら, さえ, しか or こそ is 들다 (嫌な予感がする 불길한 예감이 든다, 気もしない 기분도 들지 않는다; spec LEX-218).
+//= noun.cry-rises	Nouns of a cry or a voice whose 上がる is bursting out, 터져 나오다 (叫び声が上がった 비명이 터져 나왔다); a plain 声 there comes out, 나오다 (spec LEX-219).
+//= noun.shout-flies	Nouns of a shout or a scolding whose 飛ぶ flies at someone, 날아들다 (怒声が飛んだ 고함이 날아들었다; spec LEX-219).
+//= noun.contributing-cause	Nouns of a state or a feeling that with も or が before 手伝う adds to a result, 한몫하다, not help (疲れも手伝って 피로도 한몫해; spec LEX-222).
+//= noun.amenity	Nouns of a facility, a room or an extra, not a thing that is switched on or a bonus, that with が, も or は before 付く comes with something, 딸리다 (露天風呂もついています 노천탕도 딸려 있습니다; spec LEX-225).
+//= noun.meal-included	Nouns of a meal or a drink that with が, も or は before 付く is included, 포함되다 (朝食がついています 아침 식사가 포함되어 있습니다; spec LEX-225).
+//= word.evaluative-talk	Dictionary forms of adjectives, na adjectives and verbs that judge what someone says, before こと and 言う, 抜かす or ほざく: the こと is 소리 (堅いことは言うな 딱딱한 소리는 하지 마; spec LEX-223).
+//= verb.belittle	Dictionary forms of 舐める, whose past before こと or 真似 is belittling, 얕보는 (舐めた真似をしやがって 얕보는 짓을 하다니; spec LEX-223).
 //= noun.ability-condition	Words that with なら name the situation that makes an act possible (これなら, ここなら): before a derived causative in られよう they make it the potential.
 //= noun.arrival-suru	Verbal nouns of moving to a post or a place whose する in the て form before 来る says the arrival (転属してきている 전속해 와 있다, 帰国してきている 귀국해 와 있다).
 //= noun.coming-flow	Nouns of what keeps coming, whose 来ている comes on rather than has arrived (いい風きてる 좋은 바람 오고 있어, 波が来ている 파도가 오고 있다).
@@ -8361,3 +8369,151 @@ adverb.noun-reading	そっくり
 adverb.noun-reading	ばっちり
 adverb.noun-reading	ぎりぎり
 adverb.noun-reading	ギリギリ
+
+noun.feeling-suru	気
+noun.feeling-suru	予感
+noun.feeling-suru	嫌な予感
+noun.feeling-suru	心地
+noun.cry-rises	声
+noun.cry-rises	叫び声
+noun.cry-rises	喚き声
+noun.cry-rises	歓声
+noun.cry-rises	悲鳴
+noun.cry-rises	どよめき
+noun.cry-rises	怒号
+noun.cry-rises	絶叫
+noun.cry-rises	奇声
+noun.cry-rises	笑い声
+noun.cry-rises	雄叫び
+noun.cry-rises	雄たけび
+noun.shout-flies	怒声
+noun.shout-flies	罵声
+noun.shout-flies	野次
+noun.shout-flies	ヤジ
+noun.shout-flies	やじ
+noun.shout-flies	怒号
+noun.shout-flies	叱責
+noun.shout-flies	叱咤
+noun.shout-flies	罵倒
+noun.shout-flies	檄
+noun.contributing-cause	疲れ
+noun.contributing-cause	疲労
+noun.contributing-cause	酔い
+noun.contributing-cause	酒
+noun.contributing-cause	お酒
+noun.contributing-cause	アルコール
+noun.contributing-cause	緊張
+noun.contributing-cause	寝不足
+noun.contributing-cause	睡眠不足
+noun.contributing-cause	興奮
+noun.contributing-cause	好奇心
+noun.contributing-cause	空腹
+noun.contributing-cause	眠気
+noun.contributing-cause	焦り
+noun.contributing-cause	不安
+noun.contributing-cause	安心感
+noun.contributing-cause	安堵
+noun.contributing-cause	暑さ
+noun.contributing-cause	寒さ
+noun.contributing-cause	天気
+noun.contributing-cause	陽気
+noun.contributing-cause	若さ
+noun.contributing-cause	性格
+noun.contributing-cause	勢い
+noun.contributing-cause	物珍しさ
+noun.contributing-cause	珍しさ
+noun.contributing-cause	気安さ
+noun.contributing-cause	雰囲気
+noun.contributing-cause	解放感
+noun.contributing-cause	開放感
+noun.contributing-cause	満腹感
+noun.contributing-cause	疲労感
+noun.contributing-cause	達成感
+noun.contributing-cause	油断
+noun.contributing-cause	暗さ
+noun.contributing-cause	人見知り
+noun.contributing-cause	苛立ち
+noun.contributing-cause	怒り
+noun.contributing-cause	悔しさ
+noun.contributing-cause	寂しさ
+noun.contributing-cause	恥ずかしさ
+noun.contributing-cause	照れ
+noun.contributing-cause	熱
+noun.amenity	露天風呂
+noun.amenity	温泉
+noun.amenity	浴室
+noun.amenity	浴槽
+noun.amenity	バスルーム
+noun.amenity	シャワー
+noun.amenity	シャワールーム
+noun.amenity	トイレ
+noun.amenity	洗面所
+noun.amenity	キッチン
+noun.amenity	台所
+noun.amenity	駐車場
+noun.amenity	ベランダ
+noun.amenity	バルコニー
+noun.amenity	テラス
+noun.amenity	庭
+noun.amenity	書斎
+noun.amenity	寝室
+noun.amenity	客室
+noun.amenity	個室
+noun.amenity	サウナ
+noun.amenity	プール
+noun.amenity	暖炉
+noun.amenity	おまけ
+noun.amenity	オマケ
+noun.amenity	付録
+noun.amenity	景品
+noun.meal-included	朝食
+noun.meal-included	夕食
+noun.meal-included	昼食
+noun.meal-included	食事
+noun.meal-included	朝ご飯
+noun.meal-included	朝ごはん
+noun.meal-included	晩ご飯
+noun.meal-included	晩ごはん
+noun.meal-included	夕飯
+noun.meal-included	朝飯
+noun.meal-included	三食
+noun.meal-included	まかない
+noun.meal-included	賄い
+noun.meal-included	ドリンク
+
+word.evaluative-talk	堅い
+word.evaluative-talk	固い
+word.evaluative-talk	硬い
+word.evaluative-talk	馬鹿
+word.evaluative-talk	バカ
+word.evaluative-talk	ばか
+word.evaluative-talk	変
+word.evaluative-talk	おかしな
+word.evaluative-talk	妙
+word.evaluative-talk	勝手
+word.evaluative-talk	生意気
+word.evaluative-talk	偉そう
+word.evaluative-talk	えらそう
+word.evaluative-talk	くだらない
+word.evaluative-talk	下らない
+word.evaluative-talk	無茶
+word.evaluative-talk	無責任
+word.evaluative-talk	適当
+word.evaluative-talk	呑気
+word.evaluative-talk	のんき
+word.evaluative-talk	能天気
+word.evaluative-talk	寂しい
+word.evaluative-talk	悲しい
+word.evaluative-talk	恐ろしい
+word.evaluative-talk	情けない
+word.evaluative-talk	青臭い
+word.evaluative-talk	生ぬるい
+word.evaluative-talk	ふざける
+word.evaluative-talk	寝ぼける
+word.evaluative-talk	寝惚ける
+word.evaluative-talk	舐める
+word.evaluative-talk	なめる
+word.evaluative-talk	ナメる
+verb.belittle	舐める
+verb.belittle	なめる
+verb.belittle	ナメる

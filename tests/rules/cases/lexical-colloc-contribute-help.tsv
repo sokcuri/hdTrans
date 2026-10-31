@@ -1,0 +1,25 @@
+# 규칙: LEX-222
+rule	input	expected	kind	layer
+cx:colloc-verb-partner:110	手持無沙汰なのも手伝って、のんびりと外へ出て来た。	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:110	い性格なのも手伝って打ち解けている。	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:110	昼前なのも手伝ってか、往来には	has:한몫	fix	rewrites
+cx:colloc-verb-partner:110	春の体重が後方に移動したのも手伝って、鍾乳洞の奥へ	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:110	入院していたため追試が免除になっていたのも手伝って一週間休んだ	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:110	家を見つけるのも手伝うし、家賃は全面的にもつ。	has:돕고	keep	rewrites
+cx:colloc-verb-partner:110	荷物持つのも手伝ってくれて助かった。	has:도와	keep	rewrites
+cx:colloc-verb-partner:110	柿を取るのも手伝ってもろうて	lacks:한몫	keep	rewrites
+cx:colloc-verb-partner:110	引っ越しの手伝いをした。	lacks:한몫	keep	rewrites
+cx:colloc-verb-partner:120	酒の勢いも手伝ってか、もうやる気になっている。	has:한몫	fix	rewrites
+cx:colloc-verb-partner:120	叶も軽く飲んでおり、酔いも手伝ってか濃厚に愛し合った	has:한몫	fix	rewrites
+cx:colloc-verb-partner:120	昼間の子育て疲れも手伝って、スーッと眠りに落ちて行った	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:120	酔いも手伝って気が大きくなったオレは	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:120	飲んだ勢いも手伝って話す…。	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:120	酔いも手伝って２人でそっと窓際に移動し	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:120	緊張も手伝って、うまく話せなかった。	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:120	疲れが手伝って、すぐに眠ってしまった。	has:한몫해	fix	rewrites
+cx:colloc-verb-partner:120	仕事を手伝う。	has:일을 돕는다	keep	rewrites
+cx:colloc-verb-partner:120	友達に手伝ってもらった。	has:도와	keep	rewrites
+cx:colloc-verb-partner:120	母も手伝って夕食を作った。	has:도와	keep	rewrites
+cx:colloc-verb-partner:120	弟も手伝っている。	has:돕고	keep	rewrites
+cx:colloc-verb-partner:120	オレも手伝います	lacks:한몫	keep	rewrites
+cx:colloc-verb-partner:120	お前らも手伝え。	lacks:한몫	keep	rewrites
