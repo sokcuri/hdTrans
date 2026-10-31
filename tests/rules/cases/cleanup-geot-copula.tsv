@@ -1,3 +1,3 @@
 rule	input	expected	kind	layer
 cleanup:geot-copula	あの人は何を考えているのだろうか。	그 사람은 무엇을 생각하고 있는 걸까.	fix	restore
-cleanup:geot-copula	「本当にそれでいいのか？」	「정말 그걸로 좋은 거야?」	fix	restore
+cleanup:geot-copula	「本当にそれでいいのか？」	「정말 그거면 되는 거야?」	fix	restore
