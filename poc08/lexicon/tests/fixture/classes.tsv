@@ -1,0 +1,8 @@
+#! classes
+# Fixture.
+class	parent	codes	members (examples)
+@entity			
+@clothing	@entity		服
+@headwear	@clothing		帽子
+@picture	@entity		写真
+@person	@entity		人

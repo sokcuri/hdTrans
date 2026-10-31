@@ -1,0 +1,11 @@
+#! lexicon
+# Fixture.
+ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
+取る	とる	v5	1	잡다			vol=+ asp=activity	m	b	手を取る → 손을 잡다
+取る	とる	v5	2	찍다	obj=写真|映像|@picture			m	b	写真を取る → 사진을 찍다
+取る	とる	v5	3	벗다	obj=@headwear obj-of=-			m	r	帽子を取る → 모자를 벗다
+聞く	きく	v5	1	듣다:ㄷ				m	b	音楽を聞く → 음악을 듣다
+方	かた	n	1	분			cls=@person anim=+	m	x
+方	ほう	n	1	쪽				m	b
+出来る	できる	v1	1	할 수 있다		が=을		m	b
+宿題提出	しゅくだいていしゅつ	n	1	숙제 제출			lu	u	b

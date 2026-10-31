@@ -19,7 +19,7 @@ class	parent	codes	members (examples)
 @body	@entity	QHP	手, 足, 頭, 顔, 目, 口, 胸, 背中, 指
 @illness	@abstract	UTi QHp	病気, 風邪, 怪我, 熱, 傷
 @body.output	@body		涙, 汗, 血, 鼻血, 咳, くしゃみ, 欠伸, ため息
-@body.mark	@body		傷, 痣, しわ, にきび, 跡
+@body.mark	@mark		傷, 痣, しわ, にきび, 跡
 @hair	@body		髪, 髪の毛, ひげ, 前髪
 @thing	@entity		物, 荷物, 本, 鞄, 傘, 鍵, 箱, プレゼント
 @food	@thing		ご飯, パン, 肉, 料理, 弁当, 菓子, ケーキ
@@ -125,3 +125,43 @@ class	parent	codes	members (examples)
 @thing.made	@entity		作品, 料理, 建物, 道具, 店
 @object.long	@entity		剣, 棒, 槍, 指, 舌, ペン, 髪, 糸
 @crime	@event	HGu UGu UPp	犯罪, 罪, 盗み, 殺人, 罰
+@counter	@number		人, 個, 回, 枚, 本, 匹, 歳, 円 (counter suffixes after a numeral)
+@sign	@abstract		気配, 兆し, 様子, 動き, 隙 (an outward sign someone or something shows)
+@motion	@abstract		動き, 反応, 速度, 動作, 歩み, ペース (a movement whose speed or manner is judged)
+@bottle	@container		缶, 瓶, ボトル, 缶詰, 樽 (sealed containers)
+@tobacco	@thing		タバコ, 煙草, 葉巻, 煙管 (smoking products)
+@mist	@weather		霧, 靄, 霞, 湯気, 煙 (haze, fog, steam)
+@stance	@abstract		態度, 姿勢, ポーズ, 体勢, 構え, 措置, 立場, 態勢, 行動, 戦法 (a posture, attitude or course of action one adopts: 取る 취하다)
+@rest	@activity		休憩, 休息, 小休止, 休止, 仮眠, 睡眠, 一休み, 休養, 昼寝 (a pause or rest one takes)
+@record	@info		メモ, 記録, アンケート, 点呼, 採決, 多数決, 出欠 (notes, records and polls one takes)
+@score	@result		点, 点数, 成績, 得点, 満点, 評価, 赤点, 百点, 偏差値, 評点 (a mark or grade one gets or gives)
+@price	@money		値段, 価格, 値, 定価, 相場, 単価, 値打ち (the price or value put on something)
+@brew	@drink		茶, お茶, 紅茶, 緑茶, コーヒー, ココア, 抹茶, 麦茶, ほうじ茶, 番茶, カフェオレ, ハーブティー (hot drinks one makes by steeping or brewing)
+@cosmetic	@thing		クリーム, 化粧水, 乳液, 口紅, リップ, 日焼け止め, ファンデーション, マニキュア, ローション (things one puts on the skin)
+@settlement	@abstract		けじめ, 区切り, 決着, 結末, 落ち, けり, 始末, 区別, 片 (a closure or decision one settles: 付ける 짓다)
+@personal.info	@info		名前, 住所, 年齢, 電話番号, 連絡先, 誕生日, 好み, 都合, 予定, 趣味, 職業, 身長, 体重, 血液型
+@readiness	@abstract		準備, 用意, 支度, 覚悟, 心構え, 身支度, 段取り
+@character	@abstract		性格, 個性, 本性, 本音, 人柄, 性分, 地
+@dirt	@material		泥, 汚れ, 埃, インク, ペンキ, 墨, 煤, 染み, 絵の具, 口紅
+@mark	@entity		跡, 傷, 傷跡, 焦げ目, 折り目, 皺, 寝癖, 痕, 凹み, ひび
+@attachment	@thing		フリル, リボン, レース, ボタン, ポケット, 飾り, 鈴, フード, 紐, 取っ手, タグ, 名札
+@side	@abstract		味方, 敵, 側, 陣営, 派, どっち, どちら, 敵側, 味方側
+@post	@abstract		役職, ポスト, 職務, 役目, 持ち場, 要職
+@guess	@idea		想像, 予想, 予測, 察し, 見当, 目星, 区別, 見分け, 判別, 推測
+@call	@speech		通話, 通信, 回線, 交信, 放送
+@wrapping	@thing		封, 包装, 包み, 包装紙, 包装フィルム, 袋, 封筒, パッケージ, ラップ
+@attention	@abstract		注意, 興味, 関心, 注目, 人目, 視線, 同情, 好奇心, 歓心
+@firearm	@weapon		銃, 拳銃, 鉄砲, ライフル, ハンドガン, ピストル, 狙撃銃, 機関銃, 大砲, ショットガン
+@ammunition	@weapon		弾, 弾丸, 銃弾, 砲弾, ミサイル
+@protest	@speech		異論, 異議, 反対, 反論, 不満, 苦情, 批判, 抗議, 文句, 要望, 声明, 犯行声明
+@control	@thing		電源, スイッチ, アラーム, タイマー, ディスプレイ, モニター, 画面, 無線, ブレーカー
+@harm	@damage		被害, 損害, ダメージ, 打撃, 損失, 痛手, 重傷, 深手, 傷
+@blow	@damage		弾, 銃弾, 弾丸, 矢, 蹴り, パンチ, 一撃, 砲弾, 直撃弾, 流れ弾, 平手, ビンタ
+@abuse	@damage		暴力, 嫌がらせ, いじめ, 虐待, 暴行, 拷問, セクハラ, パワハラ, 迫害, 仕打ち
+@lecture	@lesson		授業, 講義, 講座, 補習, セミナー, ゼミ
+@wind	@weather		風, 夜風, 潮風, そよ風, 北風, 隙間風, 外気, 夜気, 冷気
+@lottery	@abstract		くじ, 宝くじ, 福引き, 抽選, 懸賞, 一等, 二等, 特賞, 賞品, 景品
+@duty	@task		サポート, 支援, 援護, 応援, 補佐, 裏方, 守り, 司会, 見張り, 警備, 護衛, 説得, 斥候, 偵察, 広報, 雑務
+@heard	@speech		説明, 話, 言葉, 忠告, 説教, 小言, 助言, アドバイス
+@hand	@body		手, 指, 指先, 手のひら, 掌, 手の甲, 人差し指, 親指, 中指, 小指, 素手
+@life.stage	@period		子供, 学生, 青春, 小学, 中学, 現役 (a stage of one's life; 時代 after it reads 시절)
