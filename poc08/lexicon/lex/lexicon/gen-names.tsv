@@ -3,7 +3,7 @@
 ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 薺	なずな	n	1	냉이				u	c+b	from-names
 納豆	なっとう	n	1	낫토				u	c+b	from-names
-アイリス	あいりす	n	1	아이리스				u	c+b	from-names
+アイリス	あいりす	n	1	아이리스			name=+	u	c+b	from-names
 アウロス	あうろす	n	1	아우로스				u	c+b	from-names
 アオザイ	あおざい	n	1	아오자이				u	c+b	from-names
 アスタチン	あすたちん	n	1	아스타틴				u	c+b	from-names
@@ -12,7 +12,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 アセチルコリン	あせちるこりん	n	1	아세틸콜린				u	c+b	from-names
 アデノイド	あでのいど	n	1	아데노이드				u	c+b	from-names
 アデノシン	あでのしん	n	1	아데노신				u	c+b	from-names
-アビ	あび	n	1	아비				u	c+b	from-names
+アビ	あび	n	1	아비			name=+	u	c+b	from-names
 アミノ	あみの	n	1	아미노				u	c+b	from-names
 アラビアン	あらびあん	n	1	아라비안				u	c+b	from-names
 アルゴン	あるごん	n	1	아르곤				u	c+b	from-names
@@ -62,10 +62,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ゲルマニウム	げるまにうむ	n	2	저마늄				u	c+nw	from-names
 小鰭	こはだ	n	1	전어				u	c+b	from-names
 コパ	こぱ	n	1	코파				u	c+b	from-names
-小松	こまつ	n	1	코마츠				u	c+b	from-names
+小松	こまつ	n	1	코마츠			name=+	u	c+b	from-names
 コムタン	こむたん	n	1	곰탕				u	c+b	from-names
 コムタン	こむたん	n	2	곰국				u	c+nw	from-names
-コヨーテ	こよーて	n	1	코요테				u	c+b	from-names
+コヨーテ	こよーて	n	1	코요테			name=+	u	c+b	from-names
 コンフェデ	こんふぇで	n	1	컨페더레이션스 컵				u	c+b	from-names
 サムゲタン	さむげたん	n	1	삼계탕				u	c+b	from-names
 サラミ	さらみ	n	1	살라미				u	c+b	from-names
@@ -88,8 +88,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 シビック	しびっく	n	1	시빅				u	c+b	from-names
 癪	しゃく	n	1	샤크				u	c+b	from-names
 シャンタン	しゃんたん	n	1	샨탄				u	c+b	from-names
-シュラウド	しゅらうど	n	1	슈라우드				u	c+b	from-names
-シュリ	しゅり	n	1	쉬리				u	c+b	from-names
+シュラウド	しゅらうど	n	1	슈라우드			name=+	u	c+b	from-names
+シュリ	しゅり	n	1	쉬리			name=+	u	c+b	from-names
 シンタックス	しんたっくす	n	1	구문				u	c+b	from-names
 シーア	しーあ	n	1	시아파				u	c+b	from-names
 ジェクト	じぇくと	n	1	젝트				u	c+b	from-names
@@ -99,7 +99,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ジャカランダ	じゃからんだ	n	1	자카란다				u	c+b	from-names
 ジャカランダ	じゃからんだ	n	2	하카란다				u	c+np	from-names
 尺	しゃく	n	1	잭				u	c+b	from-names
-ジャッカル	じゃっかる	n	1	쟈칼				u	c+b	from-names
+ジャッカル	じゃっかる	n	1	쟈칼			name=+	u	c+b	from-names
 ジュビロ	じゅびろ	n	1	쥬빌로				u	c+b	from-names
 ジュビロ	じゅびろ	n	2	주빌로				u	c+np	from-names
 ジョイント	じょいんと	n	1	조인트				u	c+b	from-names
@@ -113,7 +113,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ソシオ	そしお	n	1	소시오				u	c+b	from-names
 ソニック	そにっく	n	1	소닉				u	c+b	from-names
 ダッカルビ	だっかるび	n	1	닭갈비				u	c+b	from-names
-ダリア	だりあ	n	1	달리아				u	c+b	from-names
+ダリア	だりあ	n	1	달리아			name=+	u	c+b	from-names
 チヂミ	ちぢみ	n	1	부침개 지짐				u	c+b	from-names
 チヂミ	ちぢみ	n	2	부침개				u	c+nw	from-names
 鶫	つぐみ	n	1	개똥지빠귀				u	c+b	from-names
@@ -137,21 +137,21 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 バイオ	ばいお	n	1	바이오				u	c+b	from-names
 バドミントン	ばどみんとん	n	1	배드민턴				u	c+b	from-names
 バルト	ばると	n	1	발트				u	c+b	from-names
-バロー	ばろー	n	1	발로				u	c+b	from-names
+バロー	ばろー	n	1	발로			name=+	u	c+b	from-names
 バンコマイシン	ばんこまいしん	n	1	밴코마이신				u	c+b	from-names
 パシフィコ	ぱしふぃこ	n	1	파시피코				u	c+b	from-names
 パジェロ	ぱじぇろ	n	1	파제로				u	c+b	from-names
 パンサー	ぱんさー	n	1	판사				u	c+b	from-names
 ヒッキー	ひっきー	n	1	히키				u	c+b	from-names
-豹	ひょう	n	1	표범				u	c+b	from-names
-ピジョン	ぴじょん	n	1	피존				u	c+b	from-names
+豹	ひょう	n	1	표범			name=+	u	c+b	from-names
+ピジョン	ぴじょん	n	1	피존			name=+	u	c+b	from-names
 ファミコン	ふぁみこん	n	1	패밀리 컴퓨터				u	c+b	from-names
 ファーマシー	ふぁーましー	n	1	활마시아				u	c+b	from-names
 フィリバスター	ふぃりばすたー	n	1	필리버스터				u	c+b	from-names
 フェデラル	ふぇでらる	n	1	페데랄				u	c+b	from-names
 フェニックス	ふぇにっくす	n	1	피닉스				u	c+b	from-names
 フレックス	ふれっくす	n	1	플렉스				u	c+b	from-names
-ブリトー	ぶりとー	n	1	브리토				u	c+b	from-names
+ブリトー	ぶりとー	n	1	브리토			name=+	u	c+b	from-names
 ブレーブ	ぶれーぶ	n	1	브레이브스				u	c+np	from-names
 ブレーブ	ぶれーぶ	n	2	블레이브스				u	c+b	from-names
 プリウス	ぷりうす	n	1	토요타 프리우스				u	c+nw	from-names
@@ -162,7 +162,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 プロレス	ぷろれす	n	2	프로레슬링				u	c+b	from-names
 プードル	ぷーどる	n	1	푸들				u	c+nw	from-names
 プードル	ぷーどる	n	2	뿌드르				u	c+b	from-names
-ヘリ	へり	n	1	헬리콥터				u	c+b	from-names
+ヘリ	へり	n	1	헬리콥터			cls=@vehicle	u	c+b	from-names
 ベルガモット	べるがもっと	n	1	베르가못 오렌지				u	c+nw	from-names
 ベルガモット	べるがもっと	n	2	벨가모드				u	c+b	from-names
 ペリカン	ぺりかん	n	1	사다새과				u	c+np	from-names
@@ -175,26 +175,26 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ボロン	ぼろん	n	1	붕소				u	c+b	from-names
 ポケモン	ぽけもん	n	1	포켓몬스터				u	c+nw	from-names
 ポケモン	ぽけもん	n	2	포케몬				u	c+b	from-names
-ポプラ	ぽぷら	n	1	파퓰러				u	c+b	from-names
+ポプラ	ぽぷら	n	1	파퓰러			name=+	u	c+b	from-names
 丸一	まるいち	n	1	마루이치				u	c+b	from-names
 マルシェ	まるしぇ	n	1	마르셰				u	c+np	from-names
 マルシェ	まるしぇ	n	2	마르쉐				u	c+b	from-names
 マーカンティリズム	まーかんてぃりずむ	n	1	중상주의				u	c+b	from-names
-マーシャル	まーしゃる	n	1	마셜				u	c+b	from-names
+マーシャル	まーしゃる	n	1	마셜			name=+	u	c+b	from-names
 ミューチュアル	みゅーちゅある	n	1	뮤츄얼				u	c+b	from-names
-ミール	みーる	n	1	미르				u	c+b	from-names
+ミール	みーる	n	1	미르			name=+	u	c+b	from-names
 ムック	むっく	n	1	무크				u	c+b	from-names
 モンデックス	もんでっくす	n	1	몬덱스				u	c+b	from-names
 ユベントス	ゆべんとす	n	1	유벤투스				u	c+b	from-names
 ラムネ	らむね	n	1	라무네				u	c+b	from-names
 リクルート	りくるーと	n	1	리크루트				u	c+b	from-names
-リトル	りとる	n	1	리틀				u	c+b	from-names
+リトル	りとる	n	1	리틀			name=+	u	c+b	from-names
 リブロ	りぶろ	n	1	리브로				u	c+b	from-names
 リベルタドーレス	りべるたどーれす	n	1	리베르타도레스				u	c+b	from-names
 ルビ	るび	n	1	루비				u	c+b	from-names
-ルビー	るびー	n	1	루비				u	c+b	from-names
+ルビー	るびー	n	1	루비			name=+	u	c+b	from-names
 レアル	れある	n	1	레알				u	c+b	from-names
-レーカー	れーかー	n	1	레이커스				u	c+b	from-names
+レーカー	れーかー	n	1	레이커스			name=+	u	c+b	from-names
 レイズ	れいず	n	1	래이즈				u	c+b	from-names
 レジ	れじ	n	1	레지				u	c+b	from-names
 レプトン	れぷとん	n	1	렙톤				u	c+b	from-names
@@ -203,9 +203,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ワイナリー	わいなりー	n	2	와이너리				u	c+nw	from-names
 ワラビー	わらびー	n	1	왈라비				u	c+b	from-names
 三顧	さんこ	n	1	삼고				u	c+b	from-names
-上宮	じょうぐう	n	1	우에노미야				u	c+b	from-names
+上宮	じょうぐう	n	1	우에노미야			name=+	u	c+b	from-names
 丑年	うしどし	n	1	축년				u	c+b	from-names
-丸本	まるほん	n	1	마루모토				u	c+b	from-names
+丸本	まるほん	n	1	마루모토			name=+	u	c+b	from-names
 亀船	きせん	n	1	거북선				u	c+b	from-names
 亥年	いどし	n	1	해년				u	c+b	from-names
 今上	きんじょう	n	1	이마우에				u	c+b	from-names
@@ -214,7 +214,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 光復	こうふく	n	1	광복				u	c+b	from-names
 八紘	はっこう	n	1	핫코				u	c+b	from-names
 内店	うちみせ	n	1	우치 지점				u	c+b	from-names
-冥王	めいおう	n	1	명왕				u	c+b	from-names
+冥王	めいおう	n	1	명왕			name=+	u	c+b	from-names
 冷麺	れいめん	n	1	냉면				u	c+b	from-names
 分署	ぶんしょ	n	1	분서				u	c+b	from-names
 創新	そうしん	n	1	창신				u	c+b	from-names
@@ -224,19 +224,19 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 卯年	うどし	n	1	묘년				u	c+b	from-names
 古馬	こば	n	1	코마				u	c+b	from-names
 名神	めいしん	n	1	나고야와 코베				u	c+b	from-names
-大川	おおかわ	n	1	대천				u	c+b	from-names
+大川	おおかわ	n	1	대천			name=+	u	c+b	from-names
 女島	おんなじま	n	1	메시마				u	c+b	from-names
 妻籠	つまごめ	n	1	쓰마고				u	c+b	from-names
 子年	ねどし	n	1	자년				u	c+b	from-names
 実籾	みもみ	n	1	미노미				u	c+b	from-names
 寅年	とらどし	n	1	인년				u	c+b	from-names
 将監	しょうげん	n	1	쇼겐				u	c+b	from-names
-山家	さんか	n	1	얀베				u	c+b	from-names
+山家	さんか	n	1	얀베			name=+	u	c+b	from-names
 山桜	やまざくら	n	1	산벚나무				u	c+b	from-names
 山笠	やまかさ	n	1	산도롱				u	c+b	from-names
 巳年	みどし	n	1	사년				u	c+b	from-names
-平出	へいしゅつ	n	1	히라이데				u	c+b	from-names
-弥生	やよい	n	1	3월				u	c+b	from-names
+平出	へいしゅつ	n	1	히라이데			name=+	u	c+b	from-names
+弥生	やよい	n	1	3월			name=+	u	c+b	from-names
 後山	あとやま	n	1	우시로야마				u	c+b	from-names
 愛顧	あいこ	n	1	관심어린 애정				u	c+b	from-names
 戌年	いぬどし	n	1	술년				u	c+b	from-names
@@ -249,15 +249,15 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 新陽	しんよう	n	1	신요				u	c+b	from-names
 日の丸	ひのまる	n	1	일장기				u	c+b	from-names
 日豊	にっぽう	n	1	닛포				u	c+b	from-names
-明神	みょうじん	n	1	묘진				u	c+b	from-names
+明神	みょうじん	n	1	묘진			name=+	u	c+b	from-names
 星林	せいりん	n	1	호시바야시				u	c+b	from-names
 未年	ひつじどし	n	1	미년				u	c+b	from-names
 杣山	そまやま	n	1	소마산				u	c+b	from-names
-来島	らいとう	n	1	우쿠루시마				u	c+b	from-names
+来島	らいとう	n	1	우쿠루시마			name=+	u	c+b	from-names
 東邦	とうほう	n	1	도호				u	c+b	from-names
 栗石	くりいし	n	1	모오리돌				u	c+b	from-names
 水仕事	みずしごと	n	1	부엌일				u	c+b	from-names
-水無月	みなづき	n	1	6월				u	c+b	from-names
+水無月	みなづき	n	1	6월			name=+	u	c+b	from-names
 湾頭	わんとう	n	1	만두				u	c+b	from-names
 濃飛	のうひ	n	1	노히				u	c+b	from-names
 猪牙	ちょき	n	1	이노키				u	c+b	from-names
@@ -278,9 +278,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 興信	こうしん	n	1	고신				u	c+b	from-names
 船外	せんがい	n	1	선외				u	c+b	from-names
 花石	かせき	n	1	하나이시				u	c+b	from-names
-若竹	わかたけ	n	1	약죽				u	c+b	from-names
+若竹	わかたけ	n	1	약죽			name=+	u	c+b	from-names
 華中	かちゅう	n	1	화중				u	c+b	from-names
-葉月	はづき	n	1	8월				u	c+b	from-names
+葉月	はづき	n	1	8월			name=+	u	c+b	from-names
 薩長	さっちょう	n	1	호우쵸				u	c+b	from-names
 蘭方	らんぽう	n	1	네델란드 의술				u	c+b	from-names
 見仏	けんぶつ	n	1	겐부쓰				u	c+b	from-names
@@ -288,7 +288,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 贈答	ぞうとう	n	1	증답				u	c+b	from-names
 越河	えっか	n	1	고스고우				u	c+b	from-names
 辰年	たつどし	n	1	진년				u	c+b	from-names
-郡司	ぐんじ	n	1	쿠니지				u	c+b	from-names
+郡司	ぐんじ	n	1	쿠니지			name=+	u	c+b	from-names
 都大路	みやこおおじ	n	1	도대로				u	c+b	from-names
 酉年	とりどし	n	1	유년				u	c+b	from-names
 酢の物	すのもの	n	1	초절임				u	c+b	from-names
@@ -303,7 +303,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 防長	ぼうちょう	n	1	보초				u	c+b	from-names
 雲梯	うんてい	n	1	운제				u	c+nw	from-names
 雲梯	うんてい	n	2	우나테				u	c+b	from-names
-霜月	しもつき	n	1	11월				u	c+b	from-names
+霜月	しもつき	n	1	11월			name=+	u	c+b	from-names
 韓牛	かんぎゅう	n	1	한우				u	c+b	from-names
 頭光	ずこう	n	1	쓰무리노 히카루				u	c+b	from-names
 駅家	えきか	n	1	에키야				u	c+b	from-names
@@ -312,18 +312,18 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 黄石	こうせき	n	1	황스				u	c+b	from-names
 龍飛	りょうひ	n	1	용비				u	c+nw	from-names
 龍飛	りょうひ	n	2	닷피				u	c+b	from-names
-二人組	ふたりぐみ	n	1	듀오				u	c+nw	from-names
+二人組	ふたりぐみ	n	1	듀오			cls=@group	u	c+nw	from-names
 Ｚ旗	ぜっとき	n	1	Z기				u	c+np	from-names
 絡繰屋敷	からくりやしき	n	1	가라쿠리 저택				u	c+np	from-names
 鯨雲	くじらぐも	n	1	구름고래				u	c+np	from-names
 剣	つるぎ	n	1	쓰루기				u	c+np?	from-names
 ぱふぱふ	ぱふぱふ	n	1	파프파프				u	c+np	from-names
 ふにゃふにゃ	ふにゃふにゃ	na	1	흐물흐물				u	c+np	from-names
-プリン	ぷりん	n	1	푸린 라라 모드				u	c+np	from-names
+プリン	ぷりん	n	1	푸린 라라 모드			name=+	u	c+np	from-names
 めちゃイケ	めちゃいけ	n	1	메차 × 2 이케 테루!				u	c+np	from-names
 餅搗き	もちつき	n	1	모찌				u	c+np	from-names
 アイギス	あいぎす	n	1	아이기스				u	c+nw	from-names
-アイ	あい	n	1	아이즈				u	c+np?	from-names
+アイ	あい	n	1	아이즈			name=+	u	c+np?	from-names
 アイト	あいと	n	1	아이트				u	c+np	from-names
 アイマス	あいます	n	1	아이마스				u	c+np	from-names
 アイモ	あいも	n	1	아이모				u	c+np	from-names
@@ -388,7 +388,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 アラザン	あらざん	n	1	아라잔				u	c+np	from-names
 アラフィフ	あらふぃふ	n	1	아라피프				u	c+np	from-names
 アラフォー	あらふぉー	n	1	아라포				u	c+np	from-names
-蘭	あららぎ	n	1	주목				u	c+np	from-names
+蘭	あららぎ	n	1	주목			name=+	u	c+np	from-names
 アリウープ	ありうーぷ	n	1	앨리웁				u	c+np	from-names
 アリエッタ	ありえった	n	1	아리에타				u	c+np	from-names
 アルター	あるたー	n	1	알터				u	c+np	from-names
@@ -550,7 +550,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 カティー	かてぃー	n	1	케이티				u	c+np	from-names
 カブ	かぶ	n	1	컵스				u	c+np	from-names
 カプリン	かぷりん	n	1	카푸린				u	c+np	from-names
-神風	かみかぜ	n	1	신풍				u	c+nw	from-names
+神風	かみかぜ	n	1	신풍			name=+	u	c+nw	from-names
 神風	かみかぜ	n	2	카미카제				u	c+np	from-names
 カミセン	かみせん	n	1	카미센				u	c+np	from-names
 カラコン	からこん	n	1	컬러 렌즈				u	c+np	from-names
@@ -603,7 +603,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 キャリパー	きゃりぱー	n	1	캘리퍼				u	c+np	from-names
 キューレット	きゅーれっと	n	1	큐렛				u	c+np	from-names
 キリム	きりむ	n	1	키림				u	c+np	from-names
-金	きん	n	1	킨			cls=@money	u	c+nw	from-names
+金	きん	n	1	킨			name=+ cls=@money	u	c+nw	from-names
 きんき	きんき	n	1	킨키				u	c+np	from-names
 キンダー	きんだー	n	1	킨더				u	c+np	from-names
 ギミー	ぎみー	n	1	기미				u	c+np	from-names
@@ -634,7 +634,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 クローザー	くろーざー	n	1	마무리 투수				u	c+np	from-names
 クアトロ	くあとろ	n	1	콰트로				u	c+nw	from-names
 クーリッシュ	くーりっしゅ	n	1	쿨리시				u	c+np	from-names
-グッドマン	ぐっどまん	n	1	굿맨				u	c+nq	from-names
+グッドマン	ぐっどまん	n	1	굿맨			name=+	u	c+nq	from-names
 グラコロ	ぐらころ	n	1	그라코로				u	c+np	from-names
 グラシアス	ぐらしあす	n	1	그라시아스				u	c+np?	from-names
 グラップラー	ぐらっぷらー	n	1	그래플러				u	c+np	from-names
@@ -647,11 +647,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 グリセリド	ぐりせりど	n	1	글리세리드				u	c+np	from-names
 グルッペン	ぐるっぺん	n	1	그루펜				u	c+np	from-names
 グーク	ぐーく	n	1	구크				u	c+np	from-names
-グース	ぐーす	n	1	구스				u	c+nq	from-names
+グース	ぐーす	n	1	구스			name=+	u	c+nq	from-names
 グール	ぐーる	n	1	구울				u	c+nw	from-names
 ケイデンス	けいでんす	n	1	케이던스				u	c+np	from-names
 ケイブ	けいぶ	n	1	케이브				u	c+np?	from-names
-ケサランパサラン	けさらんぱさらん	n	1	케세란파사란				u	c+np	from-names
+ケサランパサラン	けさらんぱさらん	n	1	케세란파사란			name=+	u	c+np	from-names
 ケチャ	けちゃ	n	1	께짝				u	c+np	from-names
 けつ穴	けつあな	n	1	똥구멍				u	c+np	from-names
 ケミー	けみー	n	1	케미				u	c+np	from-names
@@ -671,7 +671,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 コミケ	こみけ	n	1	코믹마켓				u	c+nw	from-names
 コミティア	こみてぃあ	n	1	코미티아				u	c+np	from-names
 コレウス	これうす	n	1	콜레우스				u	c+np	from-names
-コリー	こりー	n	1	콜리				u	c+nw	from-names
+コリー	こりー	n	1	콜리			name=+	u	c+nw	from-names
 コルサ	こるさ	n	1	콜루사				u	c+np	from-names
 コルドン	こるどん	n	1	코르동				u	c+np	from-names
 コレー	これー	n	1	코레				u	c+np	from-names
@@ -682,7 +682,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 コンス	こんす	n	1	콘수				u	c+nw	from-names
 コンスル	こんする	n	1	집정관				u	c+np	from-names
 コンセプション	こんせぷしょん	n	1	컨셉션				u	c+np	from-names
-コンテ	こんて	n	1	콩테				u	c+nw	from-names
+コンテ	こんて	n	1	콩테			name=+	u	c+nw	from-names
 コンティニュー	こんてぃにゅー	n	1	컨티뉴				u	c+np	from-names
 コンテンダー	こんてんだー	n	1	컨텐더				u	c+np	from-names
 コンパチ	こんぱち	n	1	컴퍼터블				u	c+np	from-names
@@ -753,7 +753,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 シュピーゲル	しゅぴーげる	n	1	슈피겔				u	c+nq?	from-names
 シュプリーム	しゅぷりーむ	n	1	슈프림				u	c+np?	from-names
 シュバリエ	しゅばりえ	n	1	슈발리에				u	c+nq	from-names
-シュー	しゅー	n	1	슈				u	c+nw	from-names
+シュー	しゅー	n	1	슈			name=+	u	c+nw	from-names
 ショッカー	しょっかー	n	1	쇼커				u	c+np	from-names
 ショーター	しょーたー	n	1	쇼터				u	c+nq	from-names
 シラン	しらん	n	1	실레인				u	c+np	from-names
@@ -825,7 +825,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 スポッター	すぽったー	n	1	스포터				u	c+np	from-names
 スラップ	すらっぷ	n	1	슬랩				u	c+nw?	from-names
 スランバー	すらんばー	n	1	무서운 꿈				u	c+np	from-names
-スリーピー	すりーぴー	n	1	슬리피				u	c+np	from-names
+スリーピー	すりーぴー	n	1	슬리피			name=+	u	c+np	from-names
 スレ	すれ	n	1	스레				u	c+np	from-names
 スワロー	すわろー	n	1	스왈로우				u	c+np	from-names
 スワロー	すわろー	n	2	도쿄 야쿠르트 스왈로스				u	c+np	from-names
@@ -1072,7 +1072,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 バックパッカー	ばっくぱっかー	n	1	백패커				u	c+np	from-names
 バッテラ	ばってら	n	1	밧테라				u	c+np	from-names
 バトスピ	ばとすぴ	n	1	바토스피				u	c+np	from-names
-バトラー	ばとらー	n	1	집사				u	c+nw	from-names
+バトラー	ばとらー	n	1	집사			name=+	u	c+nw	from-names
 バトラー	ばとらー	n	2	버틀러				u	c+nq	from-names
 バブリー	ばぶりー	n	1	버블리				u	c+np	from-names
 バラクーダ	ばらくーだ	n	1	바라쿠다				u	c+nw?	from-names
@@ -1093,7 +1093,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 パニエ	ぱにえ	n	1	파니에				u	c+np	from-names
 パニッシャー	ぱにっしゃー	n	1	퍼니셔				u	c+np?	from-names
 パフィオペディルム	ぱふぃおぺでぃるむ	n	1	파피오페딜럼				u	c+np	from-names
-パラ	ぱら	n	1	파라				u	c+nq	from-names
+パラ	ぱら	n	1	파라			name=+	u	c+nq	from-names
 パライソ	ぱらいそ	n	1	파라이소				u	c+np?	from-names
 パラジクロロベンゼン	ぱらじくろろべんぜん	n	1	1,4-다이클로로벤젠				u	c+nw	from-names
 パラライズ	ぱららいず	n	1	파라라이즈				u	c+np	from-names
@@ -1115,7 +1115,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ひらひら	ひらひら	na	1	팔랑팔랑				u	c+np	from-names
 平虫	ひらむし	n	1	편형동물				u	c+np	from-names
 ビカリア	びかりあ	n	1	비카리아				u	c+np	from-names
-ビショップ	びしょっぷ	n	1	비숍				u	c+nw	from-names
+ビショップ	びしょっぷ	n	1	비숍			name=+	u	c+nw	from-names
 ビスキュイ	びすきゅい	n	1	비스퀴				u	c+np	from-names
 ビデ	びで	n	1	비데				u	c+nw	from-names
 ビバーナム	びばーなむ	n	1	비버넘				u	c+np	from-names
@@ -1125,7 +1125,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ビリーブ	びりーぶ	n	1	빌리브				u	c+np	from-names
 ビルジ	びるじ	n	1	빌지				u	c+np	from-names
 ビーガン	びーがん	n	1	비건				u	c+np	from-names
-ビノ	びの	n	1	비노				u	c+np	from-names
+ビノ	びの	n	1	비노			name=+	u	c+np	from-names
 ピアッサー	ぴあっさー	n	1	피서				u	c+np	from-names
 ピアニカ	ぴあにか	n	1	피아니카				u	c+np	from-names
 ピエタ	ぴえた	n	1	피에타				u	c+nw	from-names
@@ -1148,12 +1148,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ファンネル	ふぁんねる	n	1	펀넬				u	c+np	from-names
 ファーマ	ふぁーま	n	1	파마				u	c+np	from-names
 ファーマー	ふぁーまー	n	1	파머				u	c+np	from-names
-フィオレンティーナ	ふぃおれんてぃーな	n	1	피오렌티나				u	c+np	from-names
+フィオレンティーナ	ふぃおれんてぃーな	n	1	피오렌티나			name=+	u	c+np	from-names
 フィサリス	ふぃさりす	n	1	피살리스				u	c+np	from-names
 フィッシャーマン	ふぃっしゃーまん	n	1	피셔맨				u	c+np	from-names
 フィニッシャー	ふぃにっしゃー	n	1	피니셔				u	c+np	from-names
 フィフス	ふぃふす	n	1	호죠 레이스케				u	c+np	from-names
-フィリー	ふぃりー	n	1	필라델피아 필리스				u	c+np	from-names
+フィリー	ふぃりー	n	1	필라델피아 필리스			name=+	u	c+np	from-names
 フィルス	ふぃるす	n	1	필스				u	c+np	from-names
 フィロソマ	ふぃろそま	n	1	필로소마				u	c+np	from-names
 フィーカ	ふぃーか	n	1	피카				u	c+np	from-names
@@ -1162,7 +1162,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 フォトン	ふぉとん	n	1	광자				u	c+np	from-names
 フォレスター	ふぉれすたー	n	1	스바루 포레스터				u	c+np	from-names
 フォレスト	ふぉれすと	n	1	포레스트				u	c+nq	from-names
-フォージャー	ふぉーじゃー	n	1	야코블레프 Yak-38				u	c+nw	from-names
+フォージャー	ふぉーじゃー	n	1	야코블레프 Yak-38			name=+	u	c+nw	from-names
 フォーリミ	ふぉーりみ	n	1	포리미				u	c+np	from-names
 フォールアウト	ふぉーるあうと	n	1	폴아웃				u	c+np	from-names
 フクイサウルス	ふくいさうるす	n	1	후쿠이사우루스				u	c+nw	from-names
@@ -1234,7 +1234,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 別珍	べっちん	n	1	베치				u	c+np	from-names
 ベホマラー	べほまらー	n	1	베호마라				u	c+np	from-names
 ベリタス	べりたす	n	1	베리타스				u	c+np	from-names
-ベリー	べりー	n	1	벨리즈				u	c+np	from-names
+ベリー	べりー	n	1	벨리즈			name=+	u	c+np	from-names
 ベルテ	べるて	n	1	벨테				u	c+np	from-names
 ベルーガ	べるーが	n	1	벨루가				u	c+np	from-names
 ぺこぺこ	ぺこぺこ	na	1	페코페코				u	c+np	from-names
@@ -1345,7 +1345,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 メラゾーマ	めらぞーま	n	1	메라조마				u	c+np	from-names
 メルカバ	めるかば	n	1	메르카바				u	c+nw	from-names
 メンテ	めんて	n	1	정비				u	c+np	from-names
-メイ	めい	n	1	메에				u	c+np	from-names
+メイ	めい	n	1	메에			name=+	u	c+np	from-names
 メーベ	めーべ	n	1	메이브				u	c+np	from-names
 モイスト	もいすと	n	1	모이스트				u	c+np	from-names
 モック	もっく	n	1	목				u	c+np	from-names
@@ -1385,7 +1385,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ラリアット	らりあっと	n	1	라리아트				u	c+np	from-names
 ランエボ	らんえぼ	n	1	미쓰비시 랜서 에볼루션				u	c+nw	from-names
 ランクル	らんくる	n	1	토요타 랜드크루저				u	c+nw	from-names
-ラング	らんぐ	n	1	랑그				u	c+nw	from-names
+ラング	らんぐ	n	1	랑그			name=+	u	c+nw	from-names
 ラング・ド・シャ	らんぐどしゃ	n	1	랑그드샤				u	c+np	from-names
 ラングラー	らんぐらー	n	1	랭글러				u	c+np	from-names
 ランチタイム	らんちたいむ	n	1	런치타임				u	c+np	from-names
@@ -1437,13 +1437,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 レミーラ	れみーら	n	1	레미라				u	c+np	from-names
 レーシー	れーしー	na	1	레시				u	c+nw	from-names
 ロッチ	ろっち	n	1	롯치				u	c+np	from-names
-ロハス	ろはす	n	1	로하스				u	c+nw	from-names
+ロハス	ろはす	n	1	로하스			name=+	u	c+nw	from-names
 ロボロフスキー	ろぼろふすきー	n	1	로보로프스키				u	c+np	from-names
 ロマンチカ	ろまんちか	n	1	로만치카				u	c+np	from-names
 ロリス	ろりす	n	1	로리스				u	c+np	from-names
 ロンブー	ろんぶー	n	1	론부				u	c+np	from-names
 ローカスト	ろーかすと	n	1	로커스트				u	c+np	from-names
-ローチ	ろーち	n	1	로치				u	c+nw	from-names
+ローチ	ろーち	n	1	로치			name=+	u	c+nw	from-names
 ローパー	ろーぱー	n	1	로퍼				u	c+nq	from-names
 ロービジ	ろーびじ	n	1	로비지				u	c+np	from-names
 ローライズ	ろーらいず	n	1	로라이즈				u	c+np	from-names
@@ -1456,7 +1456,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ワンレン	わんれん	n	1	원렝스				u	c+np	from-names
 ワーホリ	わーほり	n	1	워홀				u	c+np	from-names
 バディス	ばでぃす	n	1	바디스				u	c+np	from-names
-バータ	ばーた	n	1	바타				u	c+np	from-names
+バータ	ばーた	n	1	바타			name=+	u	c+np	from-names
 ビクセン	びくせん	n	1	빅슨				u	c+nq	from-names
 ビマーナ	びまーな	n	1	비마나				u	c+nw	from-names
 ビラン	びらん	n	1	빌런즈				u	c+np	from-names
@@ -1526,7 +1526,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 協和	きょうわ	n	1	협화				u	c+np	from-names
 卿	きょう	n	1	경				u	c+nw	from-names
 厄	やく	n	1	액				u	c+np	from-names
-櫛笥	くしげ	n	1	리				u	c+nw	from-names
+櫛笥	くしげ	n	1	리			name=+	u	c+nw	from-names
 双塔	そうとう	n	1	쌍탑				u	c+np	from-names
 双龍	そうりゅう	n	1	쌍룡				u	c+np	from-names
 口淫	こういん	n	1	구강성교				u	c+np	from-names
@@ -1537,29 +1537,29 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 唐僧	とうそう	n	1	당승				u	c+np	from-names
 喪	も	n	1	상				u	c+nw	from-names
 国画	こくが	n	1	국화				u	c+np	from-names
-国造	こくぞう	n	1	국조				u	c+nw	from-names
+国造	こくぞう	n	1	국조			name=+	u	c+nw	from-names
 園庭	えんてい	n	1	원정				u	c+np	from-names
 園服	えんぷく	n	1	원복				u	c+np	from-names
 地デジ	ちでじ	n	1	지상파 디지털 방송				u	c+np	from-names
 坎	かん	n	1	감				u	c+np	from-names
-城市	じょうし	n	1	성시				u	c+np	from-names
+城市	じょうし	n	1	성시			name=+	u	c+np	from-names
 堅守	けんしゅ	n	1	견수				u	c+np	from-names
 壁穴	かべあな	n	1	벽 구멍				u	c+np	from-names
 壬	みずのえ	n	1	임				u	c+nw	from-names
-壬寅	じんいん	n	1	임인				u	c+nw	from-names
+壬寅	じんいん	n	1	임인			name=+	u	c+nw	from-names
 多頭	たとう	n	1	다두				u	c+np	from-names
 夜尿	やにょう	n	1	야뇨				u	c+np	from-names
 夜市	よるいち	n	1	야시장				u	c+nw	from-names
 夢魂	むこん	n	1	몽혼				u	c+np	from-names
 大明	だいみん	n	1	대명				u	c+nw	from-names
-大蔵	おおくら	n	1	다이조				u	c+nw	from-names
+大蔵	おおくら	n	1	다이조			name=+	u	c+nw	from-names
 大虎	おおとら	n	1	대호				u	c+np	from-names
 大輪	たいりん	n	1	대륜				u	c+np	from-names
 大銀杏	おおいちょう	n	1	오이초				u	c+np	from-names
 大霊	だいれい	n	1	대령				u	c+np	from-names
 天冠	てんがん	n	1	천관				u	c+np	from-names
-太一	たいいつ	n	1	태일				u	c+nw	from-names
-太夫	たゆう	n	1	타유				u	c+nw	from-names
+太一	たいいつ	n	1	태일			name=+	u	c+nw	from-names
+太夫	たゆう	n	1	타유			name=+	u	c+nw	from-names
 太白	たいはく	n	1	타이바이				u	c+nw	from-names
 奇祭	きさい	n	1	기이한 축제				u	c+np	from-names
 奇譚	きたん	n	1	기담				u	c+np	from-names
@@ -1579,16 +1579,16 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 孤食	こしょく	n	1	고식				u	c+np	from-names
 孤高	ここう	n	1	고고				u	c+np	from-names
 学活	がっかつ	n	1	학급활동				u	c+np	from-names
-完	かん	n	1	완				u	c+nw	from-names
+完	かん	n	1	완			name=+	u	c+nw	from-names
 宗師	そうし	n	1	종사				u	c+np	from-names
 宝箱	たからばこ	n	1	보물상자				u	c+np	from-names
 宝蓮	ほうれん	n	1	보련				u	c+np	from-names
 実艦	じっかん	n	1	실함				u	c+np	from-names
 宮司	ぐうじ	n	1	궁사				u	c+np	from-names
 寺社	じしゃ	n	1	사사				u	c+np	from-names
-尋	ひろ	n	1	심				u	c+nw	from-names
+尋	ひろ	n	1	심			name=+	u	c+nw	from-names
 導尿	どうにょう	n	1	도뇨				u	c+np	from-names
-小木	こぎ	n	1	오기				u	c+nw	from-names
+小木	こぎ	n	1	오기			name=+	u	c+nw	from-names
 尾高	おだか	n	1	미고형				u	c+nw	from-names
 尿意	にょうい	n	1	요의				u	c+np	from-names
 居合	いあい	n	1	거합				u	c+np	from-names
@@ -1615,7 +1615,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 弾切れ	たまぎれ	n	1	탄절				u	c+np	from-names
 弾速	だんそく	n	1	탄속				u	c+np	from-names
 役牌	やくはい	n	1	역패				u	c+np	from-names
-律	りつ	n	1	율				u	c+nw	from-names
+律	りつ	n	1	율			name=+	u	c+nw	from-names
 復縁	ふくえん	n	1	복연				u	c+np	from-names
 微差	びさ	n	1	미세한 차이				u	c+np	from-names
 微糖	びとう	n	1	미당				u	c+np	from-names
@@ -1676,7 +1676,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 棒	ぼう	n	1	봉				u	c+nw	from-names
 棒銀	ぼうぎん	n	1	봉은				u	c+np	from-names
 極太	ごくぶと	n	1	극태				u	c+np	from-names
-橋下	きょうか	n	1	하시모토				u	c+nw	from-names
+橋下	きょうか	n	1	하시모토			name=+	u	c+nw	from-names
 機心	きしん	n	1	기심				u	c+np	from-names
 鬱	うつ	n	1	울				u	c+np	from-names
 次鋒	じほう	n	1	차봉				u	c+np	from-names
@@ -1692,7 +1692,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 水偵	すいてい	n	1	수상정찰기				u	c+np	from-names
 水妖	すいよう	n	1	수요				u	c+np	from-names
 水怪	すいかい	n	1	수괴				u	c+np	from-names
-水沢	すいたく	n	1	미즈사와				u	c+nw	from-names
+水沢	すいたく	n	1	미즈사와			name=+	u	c+nw	from-names
 水龍	すいりゅう	n	1	수룡				u	c+np	from-names
 決め技	きめわざ	n	1	결정기				u	c+np	from-names
 河伯	かはく	n	1	하백				u	c+nw	from-names
@@ -1798,8 +1798,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 縹色	はなだいろ	n	1	하나다색				u	c+np	from-names
 美大	びだい	n	1	미대				u	c+np	from-names
 美形	びけい	n	1	미형				u	c+np	from-names
-義和	ぎわ	n	1	의화				u	c+nw	from-names
-義子	ぎし	n	1	의붓자식				u	c+np	from-names
+義和	ぎわ	n	1	의화			name=+	u	c+nw	from-names
+義子	ぎし	n	1	의붓자식			name=+	u	c+np	from-names
 老王	ろうおう	n	1	노왕				u	c+np	from-names
 聖帝	せいてい	n	1	성제				u	c+np	from-names
 聖櫃	せいき	n	1	성궤				u	c+np	from-names
@@ -1881,7 +1881,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 邪竜	じゃりゅう	n	1	사룡				u	c+np	from-names
 酩酊	めいてい	n	1	명정				u	c+np	from-names
 金印	きんいん	n	1	금인				u	c+np	from-names
-金山	きんざん	n	1	금광				u	c+nw	from-names
+金山	きんざん	n	1	금광			name=+	u	c+nw	from-names
 金蚕	きんさん	n	1	금잠				u	c+np	from-names
 金閣	きんかく	n	1	금각				u	c+np	from-names
 金鯱	きんしゃち	n	1	금 샤치호코				u	c+np	from-names
@@ -1890,7 +1890,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 針子	はりこ	n	1	침모				u	c+np	from-names
 鉄血	てっけつ	n	1	철혈				u	c+np	from-names
 銀歯	ぎんば	n	1	은니				u	c+np	from-names
-銚子	ちょうし	n	1	조시				u	c+nl	from-names
+銚子	ちょうし	n	1	조시			name=+	u	c+nl	from-names
 鍼	はり	n	1	침				u	c+np	from-names
 長蛇	ちょうだ	n	1	장사				u	c+np	from-names
 開脚	かいきゃく	n	1	개각				u	c+np	from-names
@@ -1903,21 +1903,21 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 隼鷹	じゅんよう	n	1	준요				u	c+nw	from-names
 雨師	うし	n	1	우사				u	c+nw	from-names
 雪蓮	せつれん	n	1	설련				u	c+np	from-names
-雪風	せっぷう	n	1	유키카제				u	c+nw	from-names
+雪風	せっぷう	n	1	유키카제			name=+	u	c+nw	from-names
 雷紋	らいもん	n	1	뇌문				u	c+np	from-names
 電視	でんし	n	1	전시				u	c+np	from-names
 電飾	でんしょく	n	1	전식				u	c+np	from-names
 霊体	れいたい	n	1	영체				u	c+np	from-names
 霊視	れいし	n	1	영시				u	c+np	from-names
 霊訓	れいくん	n	1	영훈				u	c+np	from-names
-霜降	そうこう	n	1	상강				u	c+nw	from-names
+霜降	そうこう	n	1	상강			name=+	u	c+nw	from-names
 青箱	あおはこ	n	1	청상자				u	c+np	from-names
 青紫	あおむらさき	n	1	청자색				u	c+np	from-names
 青鹿毛	あおかげ	n	1	청록모				u	c+np	from-names
 顔彩	がんさい	n	1	안채				u	c+np	from-names
 風伯	ふうはく	n	1	풍백				u	c+nw	from-names
 食育	しょくいく	n	1	식육				u	c+np	from-names
-香菜	こうさい	n	1	고수				u	c+nw	from-names
+香菜	こうさい	n	1	고수			name=+	u	c+nw	from-names
 馬腹	ばふく	n	1	마복				u	c+np	from-names
 駐禁	ちゅうきん	n	1	주차 금지				u	c+np	from-names
 高家	こうけ	n	1	고케				u	c+np	from-names
@@ -1936,7 +1936,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 黒化	こっか	n	1	흑화				u	c+np	from-names
 黒巫女	くろみこ	n	1	흑무녀				u	c+np	from-names
 黒薔薇	くろばら	n	1	흑장미				u	c+np	from-names
-黒鉄	こくてつ	n	1	쿠로가네				u	c+nw	from-names
+黒鉄	こくてつ	n	1	쿠로가네			name=+	u	c+nw	from-names
 黒飴	くろあめ	n	1	흑설탕 사탕				u	c+np	from-names
 黒馬	くろうま	n	1	흑마				u	c+np	from-names
 鼻背	びはい	n	1	비배				u	c+np	from-names
