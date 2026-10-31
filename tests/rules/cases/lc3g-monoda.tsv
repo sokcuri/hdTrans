@@ -52,3 +52,7 @@ cx:lc3g-monoda:77	量としては大したものではない。	!rule:cx:lc3g-mo
 cx:lc3g-monoda:78	そう、大したものではない。	!rule:cx:lc3g-monoda:78	keep	rewrites
 cx:lc3g-monoda:80	まぁそんな大したものではない」	!rule:cx:lc3g-monoda:80	keep	rewrites
 cx:lc3g-monoda:30	あったとしても大したものではないんじゃないか？	!rule:cx:lc3g-monoda:30	keep	rewrites
+cx:lc3g-monoda:74	それだけの仕事こなせてりゃ大したもんだよ。	!rule:cx:lc3g-monoda:74	keep	rewrites
+cx:lc3g-monoda:74	それだけの仕事こなせてりゃ大したもんだよ。	has:대단한 거야	keep	rewrites
+cx:lc3g-monoda:70	これを計算尽くでやっているなら大したものだ。	!rule:cx:lc3g-monoda:70	keep	rewrites
+cx:lc3g-monoda:70	あれだけ攻撃を受け切っただけでも大したもんだ。	!rule:cx:lc3g-monoda:70	keep	rewrites

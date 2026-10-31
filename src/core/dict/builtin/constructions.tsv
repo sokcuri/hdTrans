@@ -1504,7 +1504,8 @@ cx:lc3g-kano:20	GRM-187	&&7 D+0== "의" F+0== "quoted" ||2 F+0== "quote-end" F+0
 cx:lc3g-kano:30	GRM-187	&&5 D+0== "의" F+0== "quoted" ||2 F+0== "quote-end" F+0== "utterance-end" S-1== "どうか" ||2 D-1== "제발" D-1== "아무쪼록"	set-target@-1 "어떤가" set-target ""	それはどうかの 그건 어떤가
 cx:lc3g-kano:31	GRM-187	&&5 D+0== "의" F+0== "quoted" ||2 F+0== "quote-end" F+0== "utterance-end" S-1== "、どうか" ||2 D-1== ", 제발" D-1== ", 아무쪼록"	set-target@-1 ", 어떤가" set-target ""	さて、どうかの 자, 어떤가
 cx:lc3g-kano:25	GRM-187	&&5 D+0== "의" F+0== "quoted" ||2 F+0== "quote-end" F+0== "utterance-end" S-1== "か" ||2 S-2== "とい" S-2== "と言"	set-target ""	連絡通路といったところかの 연락 통로라고 할까
-//= lc3g-monoda	after OfferPromise 1271	困ったもの, 大したもの before a copula that ends the predicate is the speaker's judgement of the thing: the adjective 곤란하다, 대단하다 in the copula's form (本当に困ったものですね 정말 곤란하군요, 困ったものだ 곤란하다, 君も大したものだね 너도 대단하구나, 速攻は大したものだが 속공은 대단하지만), not 곤란한 것이다 or 대단한 것이다. 大したものではない, 大したものがない stay.
+//: lc3g-event-judged	<0 ||5 Y+0== "~면" Y+0== "~만으로" I+0== "Rりゃ" I+0== "Rれば" S+0== "Lだけで" S+0== "00。！？!?「」『』"	A condition or a だけで before the word in its sentence: the thing judged is an event, which Korean names as 대단한 것 (それだけの仕事こなせてりゃ大したもんだよ 해낼 수 있으면 대단한 거야).
+//= lc3g-monoda	after OfferPromise 1271	困ったもの, 大したもの before a copula that ends the predicate is the speaker's judgement of the thing: the adjective 곤란하다, 대단하다 in the copula's form (本当に困ったものですね 정말 곤란하군요, 困ったものだ 곤란하다, 君も大したものだね 너도 대단하구나, 速攻は大したものだが 속공은 대단하지만), not 곤란한 것이다 or 대단한 것이다. 大したものではない, 大したものがない stay, and so does 大したもの after a condition or だけで in its sentence, which judges an event (해낼 수 있으면 대단한 거야).
 cx:lc3g-monoda:10	GRM-186	&&4 F+0== "conjugating" S+0== "困" Y+0== "8 것" S+1== "だ"	set-ending "4다" set-target@+1 ""	困ったものだ 곤란하
 cx:lc3g-monoda:11	GRM-186	&&4 F+0== "conjugating" S+0== "困" Y+0== "8 것" S+1== "だな"	set-ending "1네" set-target@+1 ""	困ったものだな 곤란하
 cx:lc3g-monoda:12	GRM-186	&&4 F+0== "conjugating" S+0== "困" Y+0== "8 것" S+1== "だね"	set-ending "1구나" set-target@+1 ""	困ったものだね 곤란하
@@ -1521,15 +1522,15 @@ cx:lc3g-monoda:41	GRM-186	&&5 F+0== "conjugating" S+0== "困" Y+0== "8" S+1== "�
 cx:lc3g-monoda:42	GRM-186	&&5 F+0== "conjugating" S+0== "困" Y+0== "8" S+1== "もん" S+2== "だね"	set-ending "1구나" set-target@+1 "" set-target@+2 ""	困ったもんだね 곤란하
 cx:lc3g-monoda:44	GRM-186	&&5 F+0== "conjugating" S+0== "困" Y+0== "8" S+1== "もん" S+2== "だよ"	set-ending "6" set-target@+1 "" set-target@+2 ""	困ったもんだよ 곤란하
 cx:lc3g-monoda:50	GRM-186	&&5 F+0== "conjugating" S+0== "困" Y+0== "8" S+1== "もん" S+2== "だと"	set-ending "4다고" set-target@+1 "" set-target@+2 " "	困ったもんだと 곤란하
-cx:lc3g-monoda:70	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だ"	set-target "대단하다" set-target@+1 "" set-target@+2 ""	大したものだ 대단하다
-cx:lc3g-monoda:71	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だな"	set-target "대단하네" set-target@+1 "" set-target@+2 ""	大したものだな 대단하네
-cx:lc3g-monoda:72	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だね"	set-target "대단하구나" set-target@+1 "" set-target@+2 ""	大したものだね 대단하구나
-cx:lc3g-monoda:74	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だよ"	set-target "대단해" set-target@+1 "" set-target@+2 ""	大したものだよ 대단해
-cx:lc3g-monoda:75	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だった"	set-target "대단했다" set-target@+1 "" set-target@+2 ""	大したものだった 대단했다
-cx:lc3g-monoda:76	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だが"	set-target "대단하지만" set-target@+1 "" set-target@+2 ""	大したものだが 대단하지만
-cx:lc3g-monoda:77	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "です"	set-target "대단합니다" set-target@+1 "" set-target@+2 ""	大したものです 대단합니다
-cx:lc3g-monoda:78	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "ですね"	set-target "대단하군요" set-target@+1 "" set-target@+2 ""	大したものですね 대단하군요
-cx:lc3g-monoda:80	GRM-186	&&3 S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だと"	set-target "대단하다고" set-target@+1 "" set-target@+2 ""	大したものだと 대단하다고
+cx:lc3g-monoda:70	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だ"	set-target "대단하다" set-target@+1 "" set-target@+2 ""	大したものだ 대단하다
+cx:lc3g-monoda:71	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だな"	set-target "대단하네" set-target@+1 "" set-target@+2 ""	大したものだな 대단하네
+cx:lc3g-monoda:72	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だね"	set-target "대단하구나" set-target@+1 "" set-target@+2 ""	大したものだね 대단하구나
+cx:lc3g-monoda:74	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だよ"	set-target "대단해" set-target@+1 "" set-target@+2 ""	大したものだよ 대단해
+cx:lc3g-monoda:75	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だった"	set-target "대단했다" set-target@+1 "" set-target@+2 ""	大したものだった 대단했다
+cx:lc3g-monoda:76	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だが"	set-target "대단하지만" set-target@+1 "" set-target@+2 ""	大したものだが 대단하지만
+cx:lc3g-monoda:77	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "です"	set-target "대단합니다" set-target@+1 "" set-target@+2 ""	大したものです 대단합니다
+cx:lc3g-monoda:78	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "ですね"	set-target "대단하군요" set-target@+1 "" set-target@+2 ""	大したものですね 대단하군요
+cx:lc3g-monoda:80	GRM-186	&&4 !1 :lc3g-event-judged S+0== "大した" ||2 S+1== "もの" S+1== "もん" S+2== "だと"	set-target "대단하다고" set-target@+1 "" set-target@+2 ""	大したものだと 대단하다고
 cx:lc3g-monoda:30	GRM-186	&&4 F+0== "conjugating" S+0== "困" Y+0== "8 것" S+1== "であ"	set-ending "4다" set-target@+1 "" set-ending@+1 ""	困ったものである 곤란하다
 //: lc3g-tkr-word	&&3 F+0== "conjugating" Y+0== "5더니" ||4 I+0== "Rたところで" I+0== "Rだところで" I+0== "Rた所で" I+0== "Rだ所で"	A past before ところで that the word stage read -었더니.
 //: lc3g-tkr-adv	<0 ||16 S+0== "いくら" S+0== "幾ら" S+0== "どんなに" S+0== "いかに" S+0== "どれだけ" S+0== "どれほど" S+0== "どう" S+0== "何度" S+0== "今更" S+0== "いまさら" S+0== "これ以上" S+0== "それ以上" S+0== "仮に" S+0== "たとえ" S+0== "例え" S+0== "何を" S+0== "00。！？!?「」『』"	An adverb of concession or of any degree stands before the word in its sentence (いくら, どんなに, どう, 今更, これ以上, たとえ).
