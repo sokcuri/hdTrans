@@ -425,7 +425,7 @@ std::string WriteDropped(std::string_view s) {
     return out;
 }
 
-size_t StutterSeparator(std::u32string_view rs, size_t i) {
+size_t internal::StutterSeparator(std::u32string_view rs, size_t i) {
     if (i >= rs.size()) return 0;
     switch (rs[i]) {
         case U'、':
@@ -466,14 +466,19 @@ std::string WriteStutters(std::string_view s) {
         while (i + marks < rs.size() && rs[i + marks] == kStutterMark) marks++;
         while (i + marks + rest < rs.size() && rs[i + marks + rest] == kStutterRest) rest++;
         i += marks + rest - 1;
-        const size_t k = StutterSeparator(rs, i + 1);
+        const size_t k = internal::StutterSeparator(rs, i + 1);
         std::u32string sep = rs.substr(i + 1, k);
         if (sep == U"、" || sep == U"，") sep = U", ";
         i += k;
         size_t j = i + 1;
-        while (j < rs.size() && (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest ||
-                                 StutterSeparator(rs, j) > 0)) {
-            j++;
+        while (j < rs.size()) {
+            if (rs[j] == U' ' || rs[j] == kStutterMark || rs[j] == kStutterRest) {
+                j++;
+            } else if (const size_t step = internal::StutterSeparator(rs, j); step > 0) {
+                j += step;
+            } else {
+                break;
+            }
         }
         size_t word = 0;
         while (j + word < rs.size() && IsSyllable(rs[j + word])) word++;

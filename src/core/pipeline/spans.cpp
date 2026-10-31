@@ -109,17 +109,18 @@ Match MarkerSpan(std::string_view s, std::span<const std::string> markers) {
 
 // The stutter marks of one stutter with their separators, within its first 64 bytes.
 Match StutterSpan(std::string_view s) {
-    std::vector<text::Rune> rs;
-    for (std::string_view w = s.substr(0, 64); !w.empty();) {
-        rs.push_back(text::DecodeRune(w));
-        w.remove_prefix(rs.back().size);
-    }
     std::u32string cps;
-    for (const text::Rune& r : rs) cps.push_back(r.cp);
+    std::vector<size_t> sizes;
+    for (std::string_view w = s.substr(0, 64); !w.empty();) {
+        const text::Rune r = text::DecodeRune(w);
+        cps.push_back(r.cp);
+        sizes.push_back(r.size);
+        w.remove_prefix(r.size);
+    }
     size_t n = 0;
-    while (n < rs.size() && (rs[n].cp == kStutterMark || rs[n].cp == kStutterRest)) n += 1 + StutterSeparator(cps, n + 1);
+    while (n < cps.size() && (cps[n] == kStutterMark || cps[n] == kStutterRest)) n += 1 + StutterSeparator(cps, n + 1);
     size_t bytes = 0;
-    for (size_t k = 0; k < n; k++) bytes += rs[k].size;
+    for (size_t k = 0; k < n && k < sizes.size(); k++) bytes += sizes[k];
     return {bytes, output::SpanOpen};
 }
 
