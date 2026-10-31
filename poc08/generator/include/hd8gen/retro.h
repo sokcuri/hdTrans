@@ -25,6 +25,7 @@ struct RetroLine {
     bool ok = false;
     bool levelChanged = false;  // the line's last sentence end changes speech level (inner sentences alone do not count)
     bool mixedLevels = false;   // the sentences of the line would end at different speech levels
+    std::string ends;           // the speech level (+ for -시-) of each sentence end after the rewrite rules
     std::vector<std::string> fired;
 };
 
@@ -34,6 +35,9 @@ struct RetroStats {
 
 // Runs the retrofit over the lines of one input (R reads them as one document per work). False on a
 // malformed line (err says which).
+// The ids of the rewrite rules the retrofit knows.
+std::vector<std::string> RetroRuleIds(const RetroSystem& sys);
+
 bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const RetroOptions& opt,
               std::vector<RetroLine>& out, RetroStats* stats, std::string& err);
 

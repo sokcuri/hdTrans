@@ -82,6 +82,10 @@ def load(path=TABLE):
             r.ko = [_ko_atom(a) for a in _atoms(d['ko'], '|')]
             if not r.ko:
                 raise ValueError('empty ko')
+            if (r.scope == 'line') != any(a in ('numbers', 'names') for a, _ in r.ko):
+                raise ValueError('numbers and names are the atoms of line rows, and only of them')
+            if r.scope == 'line' and (r.when or any(neg for _, neg in r.ko)):
+                raise ValueError('a line row has no when and no negated atom')
         except (ValueError, KeyError) as e:
             raise SystemExit(f'{path}:{n}: {e}')
         rows.append(r)

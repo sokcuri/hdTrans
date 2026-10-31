@@ -218,10 +218,8 @@ keigo-prefix	御	致す
 # word in it keeps 0.7.x's 해라체 commands (봐라, 쫓아라): orders from kings and officers read naturally in 해라.
 command-form	命令形
 # rewrite rules (generator/data/ko/rewrite/rules.tsv) that passed their gate alone (blind pairwise 2:1, no line
-# worse by both judges; spec/rewrite.md); the others stay off
-rewrite	comma.conj-1
-rewrite	comma.topic-1
-rewrite	comma.conn-2
+# worse by both judges; spec/rewrite.md); the others stay off. Comma rules are off by decision: a comma that follows
+# the source's 、 is kept (the source punctuation stays)
 rewrite	gen.chain-1
 rewrite	like.deut-1
 rewrite	like.deut-2

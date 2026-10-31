@@ -17,10 +17,11 @@
 #           prohib, q, hon, calque, plain_neg (a negative that is not 잖 and not a question), neg1 (exactly one
 #           negative), before (-기 전에); !atom = must not hold; line scope: numbers, names
 # For one clause, among the rows of one spec id that match, the most specific (most when atoms) decides: an
-# exception is a row of the same spec with more atoms.
+# exception is a row of the same spec with more atoms. A row left out by its unless or its scope does not compete, so
+# the general row of the spec decides again there.
 id	spec	check	scope	when	unless	ko	st	prov	note
 neg.missing-1	CHK-1	neg-missing	unit	c.pol=neg	-	neg|pot_neg|jana|oblig	m	own	a negated clause needs a negative in its sentence (안, 않다, 못, 없다, 아니다, 모르다), a potential negative, -잖아 or an obligation
-neg.before-1	CHK-1	neg-missing	unit	c.pol=neg & c.link=time & c.linkSub=uchi	-	neg|before	m	own	ないうちに (before it cools) is -기 전에 as well as -지 않을 때
+neg.before-1	CHK-1	neg-missing	unit	c.pol=neg & c.link=time & c.linkSub=uchi	-	neg|pot_neg|jana|oblig|before	m	own	ないうちに (before it cools) is -기 전에 as well as -지 않을 때
 neg.pot-1	CHK-2	pot-missing	unit	c.negFn=potential-neg & !c.rare	-	pot_neg|oblig	m	own	a potential negative (行けない, 読めない) needs -ㄹ 수 없다 or 못
 neg.prohib-1	CHK-3	prohib-missing	unit	c.negFn=prohibitive	-	prohib	m	own	a prohibition (するな, ちゃだめ, てはいけない) needs -지 마, -면 안 되다
 neg.prohib-2	CHK-3	prohib-missing	unit	c.force=prohib	-	prohib	m	own	same, decided as the clause's force

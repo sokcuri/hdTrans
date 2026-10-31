@@ -44,6 +44,9 @@ def main():
         subprocess.run([a.ir, '--dicts', a.dicts, '--each', '--stages', d], input='\n'.join(srcs) + '\n', text=True,
                        env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
         recs = ja.load_ir(os.path.join(d, 'ir.jsonl'))
+    if len(recs) != len(srcs):
+        print(f'hdtrans08-ir wrote {len(recs)} line records for {len(srcs)} source lines')
+        return 1
     exp = {s: ja.expectations(r) for s, r in zip(srcs, recs)}
     ids = {r.id for r in rows}
     seen = {i: set() for i in ids}

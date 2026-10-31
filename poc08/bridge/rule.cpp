@@ -612,6 +612,14 @@ bool Transplant(const std::string& o8, const std::string& r08, const std::string
         for (size_t k = a0; k < h.a1; k++) key += w0[k];
         const size_t f = so.find(key);
         if (f == std::u32string::npos || so.find(key, f + 1) != std::u32string::npos) return false;
+        // the run must be the same occurrence as in r0: once in r0 too, and with r0's neighbouring words (or the line's
+        // start and end) right around it in o, spaces ignored
+        std::u32string s0r;
+        for (const auto& w : w0) s0r += w;
+        if (const size_t g = s0r.find(key); g == std::u32string::npos || s0r.find(key, g + 1) != std::u32string::npos) return false;
+        if (a0 == 0 ? f != 0 : (f < w0[a0 - 1].size() || so.compare(f - w0[a0 - 1].size(), w0[a0 - 1].size(), w0[a0 - 1]) != 0)) return false;
+        const size_t fe = f + key.size();
+        if (h.a1 == n ? fe != so.size() : so.compare(fe, w0[h.a1].size(), w0[h.a1]) != 0) return false;
         const size_t s0 = at[f], s1 = at[f + key.size() - 1] + 1;
         if (s0 < done || !boundary(s0) || !(s1 >= o.size() || o[s1] == U' ')) return false;
         // the retrofit may space more than 0.7.x (돌려 버렸다 for 돌려버렸다) but never less (우선, 들 → 우선,들)
@@ -704,6 +712,13 @@ std::shared_ptr<const RuleData> LoadRule(const std::string& dataRoot, std::strin
     }
     d->retro = hd8gen::LoadRetro(dataRoot + "/generator/data", err);
     if (!d->retro) return nullptr;
+    // a rewrite id must name a rule (the retrofit selects rules by id prefix, so a typo would leave it silently off)
+    const std::vector<std::string> known = hd8gen::RetroRuleIds(*d->retro);
+    for (const std::string& id : d->rewrites)
+        if (std::find(known.begin(), known.end(), id) == known.end()) {
+            err = path + ": rewrite " + id + " is not a rule of generator/data/ko/rewrite/rules.tsv";
+            return nullptr;
+        }
     return d;
 }
 
@@ -740,7 +755,7 @@ void RuleCapture::Resolved(int chunk, int sentence, const hdTrans::word::Chain& 
                 x.person = e->attr.find(kPersonCode) != std::string_view::npos || (e->user != nullptr && e->user->name);
                 // a katakana word may be a name the dictionaries do not know (コヨイ, ナオ): never a known thing
                 const std::u32string su = U32(x.surface);
-                const bool kana = !su.empty() && std::all_of(su.begin(), su.end(), [](char32_t c) { return (c >= 0x30A1 && c <= 0x30FA) || c == 0x30FC || c == 0x30FB; });
+                const bool kana = !su.empty() && std::all_of(su.begin(), su.end(), [](char32_t c) { return (c >= 0x30A1 && c <= 0x30FE) || (c >= 0xFF66 && c <= 0xFF9F); });
                 // a word with a person or name sense among its candidates (千里: 천리, and the name 치사토) is not a
                 // known thing either
                 bool personSense = false;
@@ -894,8 +909,10 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
         // a rewrite rule changes the line: taken whole where the line is replaced anyway; elsewhere only the words
         // the rules changed move onto 0.7.x's text (so nothing but the rule moves)
         const hd8gen::RetroLine* w = nullptr;
+        // a rule must not change a sentence end's speech level (ends: the levels after the rewrite); a line whose sentences
+        // end at different levels gets no rewrite
         if (i < rewritten.size() && rewritten[i].ok && !rewritten[i].fired.empty() && rewritten[i].out != lines[i].out &&
-            !rewritten[i].mixedLevels && rewritten[i].levelChanged == lines[i].levelChanged)
+            !lines[i].mixedLevels && rewritten[i].ends == lines[i].ends)
             w = &rewritten[i];
         const bool level = dialogue[i] && !lines[i].mixedLevels && lines[i].levelChanged;
         if (w != nullptr && !level) {
@@ -907,7 +924,7 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
                 w = nullptr;
             }
             if (w != nullptr) {
-                counts.rewritten++;
+                if (t != o075) counts.rewritten++;
                 out[i] = t + (cr ? "\r" : "");
                 continue;
             }

@@ -2,7 +2,8 @@
 # Korean rewrite rules (W) over kir nodes. They edit nodes and features, never text. Phases run disc then ko;
 # inside a phase rules run in id order, each at most once per site. Cases: rules.cases.tsv (fix and keep); each
 # case runs with its rule alone. Each rule is gated alone (spec/rewrite.md); --poc08 rule turns on only the rules
-# listed in bridge/data/reader.tsv (`rewrite` rows).
+# listed in bridge/data/reader.tsv (`rewrite` rows). A rewrite may paraphrase only when meaning, nuance and register
+# stay and no content or punctuation is added or dropped (STYLE-v3 §0); a note starting [off: …] says why a row is off.
 #
 # Columns
 #   id         family.name-n
@@ -21,11 +22,11 @@ aspect.fold-1	RW-9	ko	any	[V {ctype=conn,eomi=-고}]:v [V 있다 {aux}]:a	v.aux=
 compl.beorida-1	RW-11	ko	any	[V {ctype=conn,eomi=-어}]:v [V 버리다 {aux}]:a	v.aux=0 & a.ctype!=final & v.lemma!=잊다	copy v.tense=a.tense; copy v.mood=a.mood; copy v.ctype=a.ctype; copy v.rel=a.rel; copy v.eomi=a.eomi; copy v.neg=a.neg; copy v.modal=a.modal; copy v.level=a.level; copy v.hon=a.hon; del a	-어 버리다 (てしまう, ちゃう) only ends a sentence (가 버렸다, 끊겨 버렸다); inside one, before a noun, 것 or a connective it is dropped (사 버리면 → 사면, 교환해 버린 걸 → 교환한 걸). 잊어버리다 is one word
 compl.beorida-2	RW-11	ko	any	[V {ctype=conn,eomi=-어}]:v [V 버리다 {aux}]:a	v.aux=0 & a.ctype=conn & a.eomi=-면	copy v.tense=a.tense; copy v.mood=a.mood; copy v.ctype=a.ctype; copy v.rel=a.rel; copy v.eomi=a.eomi; copy v.neg=a.neg; copy v.modal=a.modal; copy v.level=a.level; copy v.hon=a.hon; del a	in a condition -어 버리면 is -면 (들어가 버리면 → 들어가면, 사고를 내 버리면 → 내면)
 compl.beorida-3	RW-11	ko	any	[V {ctype=conn,eomi=-어}]:v [V 버리다 {aux}]:a	v.aux=0 & v.class=nonagent	copy v.tense=a.tense; copy v.mood=a.mood; copy v.ctype=a.ctype; copy v.rel=a.rel; copy v.eomi=a.eomi; copy v.neg=a.neg; copy v.modal=a.modal; copy v.level=a.level; copy v.hon=a.hon; del a	a change that happens to the subject needs no 버리다 (정해져 버렸다 → 정해졌다, 더러워져 버렸지만 → 더러워졌지만); an action keeps it (가 버렸다, 태워 버릴 거야)
-comma.conj-1	RW-1	ko	any	^ [* 하지만|그래도|그러니까|그래서|그런데|그럼|그러면|그리고|그러나|게다가|근데|하긴|역시|결국|일단|우선|사실|확실히|분명|혹시|솔직히|어쨌든|아무튼|애초에|물론|오히려]:a [Punct comma]:c	-	del c	K1: no comma after a line-initial conjunction or sentence adverb (refs: 하지만 9%, 그리고 2%, 그럼 12% with a comma); interjections keep it (네 90%, 아 100%)
-comma.conn-1	RW-5	ko	any	[V {ctype=conn}]:v [Punct comma]:c	v.aux=0	del c	K1: no comma after a connective clause (refs 8-10% with a comma, 0.7.5 28-46%)
-comma.conn-2	RW-3	ko	any	[V {ctype=conn,eomi=-어서}]:v [Punct comma]:c	v.aux=0 & c.next.lemma!=하지만|그러나|그런데|그래도	del c	no comma after a cause or tight-sequence -어서 clause (가서 산다, 몰라서 물었다); a conjunction that opens the next clause keeps it (하고 싶어서, 하지만); contrast and condition connectives keep theirs (comma.conn-1 lost 56.7%: -지만 10:44)
-comma.nosrc-1	RW-6	ko	any	[Punct comma {jaMark=}]:c	-	del c	a comma the source does not have
-comma.topic-1	RW-2	ko	any	[N]:n [P top]:t [Punct comma]:c	!n.prev.ctype=adn & c.next.lemma!=@n.lemma	del c	K1: no comma after a topic (refs 1%, 0.7.5 18%); a topic headed by a relative clause keeps it (끝낸 나는, 가지는 것은,), and so does a topic said twice (겨울은, 겨울은)
+comma.conj-1	RW-1	ko	any	^ [* 하지만|그래도|그러니까|그래서|그런데|그럼|그러면|그리고|그러나|게다가|근데|하긴|역시|결국|일단|우선|사실|확실히|분명|혹시|솔직히|어쨌든|아무튼|애초에|물론|오히려]:a [Punct comma]:c	-	del c	[off: a comma after the source 、 is kept] K1: no comma after a line-initial conjunction or sentence adverb (refs: 하지만 9%, 그리고 2%, 그럼 12% with a comma); interjections keep it (네 90%, 아 100%)
+comma.conn-1	RW-5	ko	any	[V {ctype=conn}]:v [Punct comma]:c	v.aux=0	del c	[off: a comma after the source 、 is kept] K1: no comma after a connective clause (refs 8-10% with a comma, 0.7.5 28-46%)
+comma.conn-2	RW-3	ko	any	[V {ctype=conn,eomi=-어서}]:v [Punct comma]:c	v.aux=0 & c.next.lemma!=하지만|그러나|그런데|그래도	del c	[off: a comma after the source 、 is kept] no comma after a cause or tight-sequence -어서 clause (가서 산다, 몰라서 물었다); a conjunction that opens the next clause keeps it (하고 싶어서, 하지만); contrast and condition connectives keep theirs (comma.conn-1 lost 56.7%: -지만 10:44)
+comma.nosrc-1	RW-6	ko	any	[Punct comma {jaMark=}]:c	-	del c	[off: fires on no dev line] a comma the source does not have
+comma.topic-1	RW-2	ko	any	[N]:n [P top]:t [Punct comma]:c	!n.prev.ctype=adn & c.next.lemma!=@n.lemma	del c	[off: a comma after the source 、 is kept] K1: no comma after a topic (refs 1%, 0.7.5 18%); a topic headed by a relative clause keeps it (끝낸 나는, 가지는 것은,), and so does a topic said twice (겨울은, 겨울은)
 from.robuteo-1	RW-7	ko	any	[N]:n [P (으)로부터]:p	p.next.kase!=gen	set p.kase=src	(으)로부터 → 에서, after a person 에게서 (한테서 in speech); G chooses by the noun's class. Not before 의 (씨로부터의 의뢰 → 에게서의 is worse)
 from.robuteo-2	RW-7	ko	any	[N {sem=thing}]:n [P (으)로부터]:p	p.next.kind!=P & n.class!=person	set p.kase=src	(으)로부터 after a dictionary noun that is not a person (포켓, 결과, 정문) → 에서; not before another particle (씨로부터의, 취득으로부터가: a starting point)
 from.robuteo-3	RW-7	ko	any	[N {sem=person}]:n [P (으)로부터]:p	p.next.kind!=P	set p.kase=src	(으)로부터 after a person (씨, 선생님, 그들) → 에게서, 한테서 in speech

@@ -1,3 +1,4 @@
+#include <iterator>
 #include "ir_json.h"
 
 namespace hd8gen {
@@ -41,7 +42,7 @@ bool NodeFromJson(const json::Value& v, Node& n, std::string& err) {
     n.vpos = v.Str("vpos");
     if (const json::Value* s = v.Get("sem")) {
         for (const auto& x : s->arr)
-            for (size_t i = 0; i < 9; ++i)
+            for (size_t i = 0; i < std::size(kSems); ++i)
                 if (x.str == kSems[i]) n.sem |= 1u << i;
     }
     n.tense = v.Str("tense") == "past" ? Tense::past : Tense::nonpast;
@@ -104,7 +105,7 @@ json::Value NodeToJson(const Node& n) {
     if (n.sem) {
         json::Value s;
         s.t = json::Value::T::Arr;
-        for (size_t i = 0; i < 9; ++i)
+        for (size_t i = 0; i < std::size(kSems); ++i)
             if (n.sem & (1u << i)) s.arr.push_back(json::S(kSems[i]));
         v.Set("sem", s);
     }

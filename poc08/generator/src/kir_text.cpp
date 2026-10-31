@@ -1,3 +1,4 @@
+#include <iterator>
 #include "kir_text.h"
 
 #include "ir_json.h"
@@ -60,7 +61,7 @@ bool SetFeature(Node& n, const std::string& k, const std::string& v) {
     else if (k == "sem") {
         n.sem = 0;
         for (const auto& s : Split(v, '|'))
-            for (size_t i = 0; i < 9; ++i)
+            for (size_t i = 0; i < std::size(kSems); ++i)
                 if (s == kSems[i]) n.sem |= 1u << i;
     } else return false;
     return true;
@@ -91,7 +92,7 @@ std::string GetFeature(const Node& n, const std::string& k) {
     if (k == "punct") return kPuncts[static_cast<int>(n.punct)];
     if (k == "sem") {
         std::string s;
-        for (size_t i = 0; i < 9; ++i)
+        for (size_t i = 0; i < std::size(kSems); ++i)
             if (n.sem & (1u << i)) s += (s.empty() ? "" : "|") + std::string(kSems[i]);
         return s;
     }

@@ -772,6 +772,8 @@ std::shared_ptr<const RetroSystem> LoadRetro(const std::string& data, std::strin
     return s;
 }
 
+std::vector<std::string> RetroRuleIds(const RetroSystem& sys) { return RuleIds(*sys.rules); }
+
 bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const RetroOptions& opt,
               std::vector<RetroLine>& outLines, RetroStats* stats, std::string& err) {
     const Tables* tablesPtr = sys.tables.get();
@@ -984,6 +986,13 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         for (auto& n : nodes) n.decision = 0;
         const RewriteResult rw = Rewrite(*rules, *tablesPtr, nodes, reg, {u}, only, skip);
+        // the speech level (and -시-) of every sentence end after the rewrite: a rule must leave them as they were
+        std::string ends;
+        for (const Node& n : rw.kir2) {
+            if (n.kind != Kind::V || n.ctype != CType::final_) continue;
+            for (const auto& g : rw.reg)
+                if (g.node == n.id) ends += std::string(Name(g.level)) + (g.hon ? "+" : "") + " ";
+        }
         GenResult g = Generate(*tablesPtr, rw.kir2, rw.reg, {u});
         // a stutter (ど、どういう) repeats the first syllable of the next word: \x01, 어떤 → 어, 어떤
         for (size_t pos = g.out.find('\x01'); pos != std::string::npos; pos = g.out.find('\x01')) {
@@ -1013,6 +1022,7 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         o.ok = lineOk;
         o.levelChanged = levelChanged;
         o.mixedLevels = mixedLevels;
+        o.ends = ends;
         o.level = Name(u.level);
         o.key = d.key;
         for (const auto& f : rw.fired) o.fired.push_back(f.rule);

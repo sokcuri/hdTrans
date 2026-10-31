@@ -163,6 +163,12 @@ bool ParseCond(const std::string& c, std::vector<Atom>& out, std::string& err) {
             err = "bad condition " + a;
             return false;
         }
+        // @y.feat names another node's own feature (no prev./next. hop), and stands alone
+        for (const auto& v : t.values)
+            if (!v.empty() && v[0] == '@' && (std::count(v.begin(), v.end(), '.') != 1 || t.values.size() != 1)) {
+                err = "bad node reference " + v + " (write @y.feat, alone)";
+                return false;
+            }
         out.push_back(t);
     }
     return true;
@@ -271,6 +277,7 @@ std::string Feature(const Ctx& c, size_t i, const std::string& name) {
 bool FeatOk(const Ctx& c, size_t i, const FeatTest& f) {
     const std::string v = Feature(c, i, f.name);
     bool any = false;
+    // sem and class hold several values joined by |: a test holds when one of them is wanted
     if (f.name == "sem" || f.name == "class") {
         for (const auto& want : f.values)
             for (const auto& have : Split(v, '|'))
@@ -650,7 +657,7 @@ LintReport Lint(const RuleSet& rs, const Tables& t) {
     auto checkClass = [&](const std::string& rule, const std::string& feat, const std::vector<std::string>& values) {
         if (feat != "class") return;
         for (const auto& v : values)
-            if (!t.classNames.count(v)) rep.problems.push_back(rule + ": unknown class " + v);
+            if (!v.empty() && v[0] != '@' && !t.classNames.count(v)) rep.problems.push_back(rule + ": unknown class " + v);
     };
     for (const auto& r : rs.rules) {
         for (const auto& m : r.m)
@@ -668,13 +675,18 @@ LintReport Lint(const RuleSet& rs, const Tables& t) {
         cr.kind = cs.kind;
         cr.input = cs.input;
         cr.expected = cs.expected;
-        if (!counts.count(cs.rule)) {
+        // a case of rules that only work together names them joined by + (aspect.fold-1+prog.state-2): they run
+        // together and the last one is the rule the case is about
+        std::vector<std::string> on = Split(cs.rule, '+');
+        const std::string own = on.back();
+        bool unknown = false;
+        for (const auto& id : on) unknown = unknown || !counts.count(id);
+        if (unknown) {
             rep.problems.push_back("case for unknown rule " + cs.rule);
             continue;
         }
-        if (cs.kind == "fix") ++counts[cs.rule].first;
-        else if (cs.kind == "keep") ++counts[cs.rule].second;
-        else rep.problems.push_back(cs.rule + ": case kind must be fix or keep");
+        if (cs.kind != "fix" && cs.kind != "keep") rep.problems.push_back(cs.rule + ": case kind must be fix or keep");
+        else if (on.size() == 1) ++(cs.kind == "fix" ? counts[own].first : counts[own].second);
         std::vector<Node> nodes;
         std::string err;
         if (!ParseKirText(cs.input, nodes, err)) {
@@ -691,11 +703,12 @@ LintReport Lint(const RuleSet& rs, const Tables& t) {
         if (u.narration) u.level = Level::haera;
         // a rule is gated alone, so its cases run with only that rule on; the overlap check below runs them with
         // every rule on
-        const RewriteResult rr = Run(rs, t, nodes, {}, {u}, {cs.rule}, {}, nullptr);
+        const RewriteResult rr = Run(rs, t, nodes, {}, {u}, on, {}, nullptr);
         std::map<std::string, std::vector<Edit>> edits;
-        Run(rs, t, nodes, {}, {u}, {}, {}, &edits);
+        // (a case of rules meant to run together is a composition, not an overlap)
+        if (on.size() == 1) Run(rs, t, nodes, {}, {u}, {}, {}, &edits);
         for (const auto& f : rr.fired)
-            if (f.rule == cs.rule) cr.fired = true;
+            if (f.rule == own) cr.fired = true;
         const GenResult g = Generate(t, rr.kir2, rr.reg, {u});
         cr.got = g.out;
         cr.pass = cr.got == cs.expected && (cs.kind == "fix" ? cr.fired : !cr.fired);

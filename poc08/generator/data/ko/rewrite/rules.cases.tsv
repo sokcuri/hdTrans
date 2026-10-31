@@ -1,6 +1,7 @@
 #! rewrite-cases
 # Fix and keep cases of rules.tsv. input is kir text (src/kir_text.h); level is the utterance level, or narr.
-# A fix case must fire its rule and generate expected; a keep case must not fire it and generate expected.
+# A fix case must fire its rule and generate expected; a keep case must not fire it and generate expected. A case runs
+# with its rule alone; rules that only work together are named a+b (both on, the case is about b).
 id	kind	level	input	expected
 aspect.fold-1	fix	hae	V:알다{ctype=conn,eomi=-고} V:있다{aux=1,tense=past}	알고 있었어
 aspect.fold-1	fix	narr	V:보다{ctype=conn,eomi=-고} V:있다{aux=1,ctype=adn}	보고 있는
@@ -79,3 +80,6 @@ from.robuteo-3	keep	narr	N:씨{sem=person} P:lex=(으)로부터 P:gen N:의뢰	�
 from.robuteo-2	keep	narr	N:취득{sem=thing} P:lex=(으)로부터 P:subj V:되다	취득으로부터가 된다
 from.robuteo-4	fix	hae	N:언니{sem=thing} P:lex=(으)로부터 N:전화 P:subj V:있다{tense=past}	언니한테서 전화가 있었어
 from.robuteo-4	keep	narr	N:창{sem=thing} P:lex=(으)로부터 N:빛 P:subj V:들어오다{tense=past}	창으로부터 빛이 들어왔다
+aspect.fold-1+prog.state-2	fix	hae	V:기억하다{ctype=conn,eomi=-고} V:있다{aux=1}	기억해
+aspect.fold-1+prog.state-2	fix	hapsyo	V:기억하다{ctype=conn,eomi=-고} V:있다{aux=1}	기억합니다
+aspect.fold-1+prog.state-2	keep	hae	V:알다{ctype=conn,eomi=-고} V:있다{aux=1}	알고 있어
