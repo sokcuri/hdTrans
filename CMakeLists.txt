@@ -512,7 +512,7 @@ option(HDTRANS_POC08 "Build the 0.8 proof of concept (hdtrans08)" ON)
 if(HDTRANS_POC08 AND NOT EMSCRIPTEN)
     add_library(hdtrans_hooked STATIC ${HDTRANS_SOURCES}
         "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp"
-        "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
+        ${HDTRANS_REGISTER_SOURCES} "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
     target_compile_definitions(hdtrans_hooked PUBLIC HDTRANS_POC08_HOOKS)
     if(HDTRANS_INTERPRET_RULES)
         target_compile_definitions(hdtrans_hooked PRIVATE HDTRANS_INTERPRET_RULES)
@@ -523,7 +523,7 @@ if(HDTRANS_POC08 AND NOT EMSCRIPTEN)
     # One target runs the generators, so that no build tool runs a generator twice at once for the two
     # libraries that compile its output.
     add_custom_target(hdtrans_generated DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/builtin_gen.cpp"
-        "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp"
+        "${CMAKE_CURRENT_BINARY_DIR}/builtin_extra_gen.cpp" ${HDTRANS_REGISTER_SOURCES} "${CMAKE_CURRENT_BINARY_DIR}/rules_gen.cpp"
         "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h")
     add_dependencies(hdtrans hdtrans_generated)
     add_dependencies(hdtrans_hooked hdtrans_generated)
