@@ -297,7 +297,9 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             r.pri = std::atoi(std::string(pri).c_str());
         }
         const std::string_view cond = col(f, "cond");
-        for (const std::string_view atom : Split(r.colloc || cond == "*" ? std::string_view() : cond, ' ')) {
+        // A colloc row's cue atoms (column cue) are read on the last word of its span.
+        const std::string_view cue = r.colloc ? col(f, "cue") : cond;
+        for (const std::string_view atom : Split(cue == "*" ? std::string_view() : cue, ' ')) {
             if (atom.empty()) continue;
             const std::size_t eq = atom.find('=');
             if (eq == std::string_view::npos || eq == 0 || eq + 1 == atom.size())

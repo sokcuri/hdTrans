@@ -4,7 +4,7 @@ cx:ne-promise:10	「違うね」	「아니네」	fix	rewrites
 cx:ne-promise:10	「静かだね」	!rule:cx:ne-promise:10	keep	rewrites
 cx:ne-promise:20	「感じるね」	「느끼네」	fix	rewrites
 cx:ne-promise:20	「燃えるねぇ」	「불타네」	fix	rewrites
-cx:ne-promise:20	「頼りになるね」	「의지가 되네」	fix	rewrites
+cx:ne-promise:20	「頼りになるね」	「믿음직하네」	fix	rewrites
 cx:ne-promise:20	「ここにあるね」	「여기에 있네」	fix	rewrites
 cx:ne-promise:20	「潜れるね！」	「잠수할 수 있네!」	fix	rewrites
 cx:ne-promise:20	「冷えるねぇ」	「차가워지네」	fix	rewrites

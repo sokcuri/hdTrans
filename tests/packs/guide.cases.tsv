@@ -16,6 +16,6 @@ pack:g.tenitoru	試作品を手に取った。	시제품을 집어 들었다.	fi
 pack:g.tenitoru	御園の手を取ってみる。	!rule:pack:g.tenitoru	keep	packs
 pack:negf:iinja-suggest	慎んだ方がいいんじゃない。	조심하는 것이 좋지 않아.	keep	packs
 pack:g.modosu	話を元に戻そう。	이야기를 원래대로 되돌리자.	fix	packs
-pack:g.soba	青海さんの元に飛び込んだ。	아오미 씨 곁으로 뛰어들었다.	fix	packs
+pack:g.soba	母の元に向かった。	어머니의 곁으로 향했다.	keep	packs
 pack:g.betsuni	別にいいじゃない。	괜찮잖아.	fix	packs
 pack:g.betsuni	それでいいじゃない。	!rule:pack:g.betsuni	keep	packs
