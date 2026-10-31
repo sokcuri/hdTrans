@@ -16,7 +16,7 @@ cx:soreto-initial:10	それと、こいつを受け取ってくれ。	그리고,
 cx:soreto-initial:10	今日はもう休んだほうがいいわ。それと、この街の生活にも早く慣れることね	rule:cx:soreto-initial:10=그리고	fix	rewrites
 cx:soreto-initial:10	「それと、もうひとつ、お願いがあるんだけど」	rule:cx:soreto-initial:10=그리고	fix	rewrites
 cx:soreto-initial:10	それと、俺は囚人じゃねえよ。	rule:cx:soreto-initial:10=그리고	fix	rewrites
-cx:soreto-initial:10	「お疲れ様でした。それと、予備選挙通過、おめでとうございます！」	has:그리고, 경선 통과	fix	rewrites
+cx:soreto-initial:10	「お疲れ様でした。それと、予備選挙通過、おめでとうございます！」	has:그리고, 예비 선거 통과	fix	rewrites
 cx:soreto-initial:10	「――それと、いつまでも松之助では格好がつかぬ。」	has:――그리고,	fix	rewrites
 cx:soreto-initial:10	「プラスチック爆薬で壁を破壊されています。それと、争った形跡も」	has:그리고, 싸운 형적도	fix	rewrites
 cx:soreto-initial:10	これとそれと、あれをください。	!rule:cx:soreto-initial:10	keep	rewrites

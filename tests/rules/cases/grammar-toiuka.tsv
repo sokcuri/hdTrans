@@ -1,0 +1,35 @@
+# 규칙: GRM-97
+rule	input	expected	kind	layer
+cx:toiuka:10	「というか、なくなったら困るわ」	「그보다, 없어지면 곤란해」	fix	rewrites
+cx:toiuka:10	というか、絶対、そうなる。	그보다, 절대, 그렇게 된다.	fix	rewrites
+cx:toiuka:10	というか、俺も気になる。	그보다, 나도 신경 쓰인다.	fix	rewrites
+cx:toiuka:10	というか、できない。	그보다, 할 수 없다.	fix	rewrites
+cx:toiuka:10	「というか、何か用があって来たんじゃないのか？」	has:「그보다, 무슨 볼일이	fix	rewrites
+cx:toiuka:10	というか、壇上にあがってからの記憶が、ほとんどない。	has:그보다, 단상에	fix	rewrites
+cx:toiuka:10	「国の利益には絶対なるよ。というか、する」	has:돼. 그보다, 해	fix	rewrites
+cx:toiuka:10	れば、多少我慢できると思う。というか、我慢する。	has:생각한다. 그보다, 참는다.	fix	rewrites
+cx:toiuka:10	「ところで……どうしてこの部屋に？　というか、この部屋はなんですか？」	has:그보다, 이 방은	fix	rewrites
+cx:toiuka:10	（というか、散々わたし達に偉そうなことを言っておいて、自分は逃げるつもり？）	has:(그보다, 실컷	fix	rewrites
+cx:toiuka:10	「回ってます。というか、今ちょうど、回り終えました」	has:돌고 있습니다. 그보다, 지금	fix	rewrites
+cx:toiuka:10	ここ最近……というか、毎日森下さんの姿を見かける。	has:최근……그보다, 매일	fix	rewrites
+cx:toiuka:10	「……というか、いつの間に盗撮した」	「……그보다, 어느새 도촬했어」	fix	rewrites
+cx:toiuka:10	これは断れない……というか、断るという選択肢がない。	has:……그보다, 거절한다고	fix	rewrites
+cx:toiuka:10	「べ、別に……っていうか、勝手に入ってくるなよっ！！」	has:……그보다, 마음대로	fix	rewrites
+cx:toiuka:10	「うん……っていうか、ウソつくようなことじゃないし……」	has:「응……그보다,	fix	rewrites
+cx:toiuka:10	「そ、そんな、ぜんぜん……っていうか、いくら言ったって直らない人がほとんどなのに……」	has:전혀……그보다, 아무리	fix	rewrites
+cx:toiuka:10	たぶん……というか、ほぼ間違いなく、森下さんもダメだと思うから……	has:아마……그보다, 거의	fix	rewrites
+cx:toiuka:20	「温室というか、サウナというか」	「온실이라고 할까, 사우나라고 할까」	fix	rewrites
+cx:toiuka:20	恐竜っていうか、竜じゃね？	has:공룡이라고 할까, 용	fix	rewrites
+cx:toiuka:20	まあ、妥当というか、当然だろう。	has:타당이라고 할까, 당연할	fix	rewrites
+cx:toiuka:20	「今というか、ずっとフリーよ」	has:「지금이라고 할까, 계속	fix	rewrites
+cx:toiuka:20	やっぱりというか、皐月の方が上手か……	has:역시라고 할까,	fix	rewrites
+cx:toiuka:20	すごく色白で、肌がミルク色というか、アルビノみたいです	has:밀크색이라고 할까, 알비노	fix	rewrites
+cx:toiuka:20	「嘘というか、誇張ですよ」	has:거짓말이라고 할까, 과장이에요	fix	rewrites
+cx:toiuka:20	幸いというか、別に関わりがないので	has:다행이라고 할까,	fix	rewrites
+cx:toiuka:10	なんというか、一方的に避けられている状態に近い。	!rule:cx:toiuka:10	keep	rewrites
+cx:toiuka:10	なんというか……とても、ありがたい仲間たちだ。	has:뭐랄까……무척	keep	rewrites
+cx:toiuka:10	「ふたりだけ？　っていうか、俺が候補者なのに」	has:그보다, 내가 후보자인데	keep	rewrites
+cx:toiuka:10	あの…私…、す…好き…というか…その…	has:좋아…라고 할까…	keep	rewrites
+cx:toiuka:20	「いや、そうするべきというか……」	!rule:cx:toiuka:20	keep	rewrites
+cx:toiuka:20	「気もそぞろで集中していないというか……」	!rule:cx:toiuka:20	keep	rewrites
+cx:toiuka:10	肝試しに行ったとき、走って逃げたっていうか	!rule:cx:toiuka:10	keep	rewrites

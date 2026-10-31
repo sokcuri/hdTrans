@@ -7,14 +7,14 @@ cx:kara-suru:20	たしかに、今の話からすると、納得してしまい�
 cx:kara-suru:10	「ま……ゆうくんからしてみれば、おばさんだもんね……」	has:군 입장에서 보면,	fix	rewrites
 cx:kara-suru:10	笑い事じゃないだろうけどなｗ本人からしたらｗ	has:본인 입장에서 보면	fix	rewrites
 cx:kara-suru:20	先日エルから受けた報告からすると、おおよその察しはつくが……。	has:보고로 보면,	fix	rewrites
-cx:kara-suru:10	「俺からしたら、架子はただの夢って気がしなくて……」	has:나 입장에서 보면,	fix	rewrites
+cx:kara-suru:10	「俺からしたら、架子はただの夢って気がしなくて……」	has:내 입장에서 보면,	fix	rewrites
 cx:kara-suru:20	「…この魔力からすると、村の誰かが使った魔法ではないわね…」	has:마력으로 보면,	fix	rewrites
 cx:kara-suru:10	他の貴族のご令嬢からしたらまさに夢のような出来事だろう。	has:영애 입장에서 보면 그야말로	fix	rewrites
 cx:kara-suru:10	「料理が得意じゃない人からしたら、それなりに手間に感じるんじゃない？」	has:사람 입장에서 보면,	fix	rewrites
 cx:kara-suru:20	立地からすると考えられないくらいに賃料が安い	has:입지로 보면 생각할 수 없을	fix	rewrites
-cx:kara-suru:30	しかし私からしたら……たかだか一センチ程度の傷だ。	has:나 입장에서 보면……	fix	rewrites
-cx:kara-suru:30	私からすれば、読書量も十分尊敬に値するよ	has:나 입장에서 보면,	fix	rewrites
-cx:kara-suru:30	「私からすればユフィリア嬢の方が恐ろしいんだけどね」	has:나 입장에서 보면	fix	rewrites
+cx:kara-suru:30	しかし私からしたら……たかだか一センチ程度の傷だ。	has:내 입장에서 보면……	fix	rewrites
+cx:kara-suru:30	私からすれば、読書量も十分尊敬に値するよ	has:내 입장에서 보면,	fix	rewrites
+cx:kara-suru:30	「私からすればユフィリア嬢の方が恐ろしいんだけどね」	has:내 입장에서 보면	fix	rewrites
 cx:kara-suru-verb:10	「ま……ゆうくんからしてみれば、おばさんだもんね」	rule:cx:kara-suru-verb:10=	fix	rewrites
 cx:kara-suru-verb:20	「俺からしたら、ただの夢って気がしなくて……」	rule:cx:kara-suru-verb:20=&AY@	fix	rewrites
 cx:kara-suru-verb:20	立地からすると考えられないくらいに安い	rule:cx:kara-suru-verb:20=2면	fix	rewrites
