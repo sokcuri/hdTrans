@@ -1,0 +1,50 @@
+#! layer=base
+# 잘못 옮긴 외래어 표기와 뜻을 바로잡은 낱말
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ポプラ	포플러	N130			GN			// LEX-3260				loanword-glosses:2
+ポプラの木	포플러 나무	N130	QAL		GN			// LEX-3260				loanword-glosses:3
+ポプラ並木	포플러 가로수	N130			GN			// LEX-3260				loanword-glosses:4
+ポリイソシアヌレート	폴리이소시아누레이트	N110			GN			// LEX-3260				loanword-glosses:5
+ポリシロキサンフィルム	폴리실록산 필름	N110			GN			// LEX-3260				loanword-glosses:6
+ポンピング	펌핑	N110			GN			// LEX-3260				loanword-glosses:8
+マクシミン	맥시민	N110			GN			// LEX-3260				loanword-glosses:9
+マスタスケジュール	마스터 스케줄	N110			GN			// LEX-3260				loanword-glosses:10
+マゾヒズム	마조히즘	N110			GN			// LEX-3260				loanword-glosses:11
+マネー・ローンダリング	자금 세탁	N110			BZ			// LEX-3261				loanword-glosses:12
+マメージメント	매니지먼트	N110			GN			// LEX-3260				loanword-glosses:13
+マラゲーニャ	말라게냐	N110			GN			// LEX-3260				loanword-glosses:14
+マルチメディアチップ	멀티미디어 칩	N110			IT			// LEX-3260				loanword-glosses:15
+マルチメディアプレイヤー	멀티미디어 플레이어	N110			IT			// LEX-3260				loanword-glosses:16
+マルチメディア通信	멀티미디어 통신	N110			IT			// LEX-3260				loanword-glosses:17
+マルチリンガル	멀티링구얼	N110			IT			// LEX-3260				loanword-glosses:18
+ムーブェント	무브먼트	N110			GN			// LEX-3260				loanword-glosses:19
+メタセコイヤ	메타세쿼이아	N110			GN			// LEX-3260				loanword-glosses:20
+メディアラボ	미디어 랩	N110			IT			// LEX-3260				loanword-glosses:21
+メモリマップド	메모리 매핑	N110			GN			// LEX-3260				loanword-glosses:22
+メルティングポイント	멜팅 포인트	N110			GN			// LEX-3260				loanword-glosses:23
+メンタルエコノミー	멘탈 이코노미	N110			GN			// LEX-3260				loanword-glosses:24
+モデレーテッドメーリングリスト	모더레이티드 메일링 리스트	N110			GN			// LEX-3260				loanword-glosses:25
+モンタージュ写真	몽타주 사진	N110			GN			// LEX-3260				loanword-glosses:26
+モールス	모스	N110			GN			// LEX-3260				loanword-glosses:27
+モールスふごう	모스 부호	N110			GN			// LEX-3260				loanword-glosses:28
+モールス符号	모스 부호	N110	VSpVSw		GN			// LEX-3260				loanword-glosses:29
+ケアマネジメント	케어 매니지먼트	N110			GN			// LEX-3260				loanword-glosses:30
+光磁気メディア	광자기 미디어	K110			IT			// LEX-3260				loanword-glosses:31
+かいばしら	조개관자	N110	VAmVFd		GN			// LEX-3261		-1		loanword-glosses:32
+マダニ	진드기	N130			GN			// LEX-3261				loanword-glosses:33
+マネタリスト	통화주의자	N110			BZ			// LEX-3261				loanword-glosses:34
+マネタリズム	통화주의	N110	USm		BZ			// LEX-3261				loanword-glosses:35
+マルチメディア拡張機能	멀티미디어 확장 기능	N110			IT			// LEX-3260				loanword-glosses:36
+マーケットセンター	마켓 센터	N110	VBlVMo		GN			// LEX-3261				loanword-glosses:37
+ミキシンググラス	믹싱 글라스	N110			GN			// LEX-3261				loanword-glosses:38
+ミニコミ雑誌	미니코미 잡지	N110	VCmVBkVSw		GN			// LEX-3261				loanword-glosses:39
+ミルクファイバーライス	밀크 파이버 라이스	N110	VFd		GN			// LEX-3261				loanword-glosses:40
+メイプルリーフ金貨	메이플리프 금화	N110	VMy		GN			// LEX-3261				loanword-glosses:41
+メイルクローン	메일 클론	N110	VHn		GN			// LEX-3261				loanword-glosses:42
+メカニカルデザイナー	메커니컬 디자이너	N110	VHn		GN			// LEX-3261				loanword-glosses:43
+メタ言語	메타 언어	N110	UTs		IT			// LEX-3261				loanword-glosses:44
+メッセージエリア	메시지 영역	N110	VPl		GN			// LEX-3261				loanword-glosses:45
+メモリ管理	메모리 관리	I110			IT			// LEX-3261				loanword-glosses:46
+メール・ボム	메일 폭탄	N110			IT			// LEX-3261				loanword-glosses:47
+モデム規格	모뎀 규격	I110			IT			// LEX-3261				loanword-glosses:48
+サディズム	사디즘	N110			GN			// LEX-3260				loanword-glosses:49
