@@ -9,6 +9,7 @@
 
 #include "core/dict/snapshot.h"
 #include "core/tokenizer/token.h"
+#include "core/word/attach.h"
 #include "core/word/item.h"
 #include "core/word/select.h"
 
@@ -102,6 +103,8 @@ struct Settings {
     // The characters the loaded pre-filter writes before kana (filter::Filters::Written), sorted:
     // kana right after one is text the pre-filter wrote, not an unknown stem to read by sound.
     std::span<const char32_t> filterWritten;
+    // Attachment annotations for the packs layer (attach.h); null: the layer reads its own context.
+    const AttachProvider* attach = nullptr;
 };
 
 // Called after every dictionary lookup with the token being processed (-1 before the

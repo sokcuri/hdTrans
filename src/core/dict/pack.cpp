@@ -309,9 +309,18 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             constexpr std::string_view kSlots[] = {"subj", "obj",  "dat", "loc",  "with", "from",     "to",       "arg",
                                                    "head", "mod",  "pred", "next", "after", "form",   "register", "domain",
                                                    "main.vol", "voice", "final"};
-            if (std::find(std::begin(kSlots), std::end(kSlots), a.slot) == std::end(kSlots))
+            // with an attachment also: how, <argument slot>.how, cl.<feature>, main.<feature>
+            static constexpr std::string_view kArgs[] = {"subj", "obj", "dat", "loc", "with", "from", "to", "arg"};
+            const std::size_t dot = a.slot.find('.');
+            const std::string_view first = std::string_view(a.slot).substr(0, dot);
+            const std::string_view tail = dot == std::string::npos ? std::string_view() : std::string_view(a.slot).substr(dot + 1);
+            const bool attached = a.slot == "how" || ((first == "cl" || first == "main") && !tail.empty()) ||
+                                  (tail == "how" && std::find(std::begin(kArgs), std::end(kArgs), first) != std::end(kArgs));
+            if (!attached && std::find(std::begin(kSlots), std::end(kSlots), a.slot) == std::end(kSlots))
                 return fail("cue slot " + userdict::internal::Quote(a.slot) + " is not one of the cue DSL");
             for (const std::string_view v : Split(atom.substr(eq + 1), '|')) {
+                if (attached && (v == "-" || v == "*"))
+                    return fail("cue value " + userdict::internal::Quote(v) + " of " + a.slot + ": the attachment atoms take values");
                 if (v.empty() || (v != "-" && v != "*" && !KnownValue(a.slot, v)))
                     return fail("cue value " + userdict::internal::Quote(v) + " of " + a.slot + " is not one the host reads");
                 a.values.emplace_back(v);
