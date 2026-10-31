@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 
+#include "core/register/levels.h"
 #include "core/register/regen.h"
 
 namespace hdTrans::reg {
@@ -19,16 +20,41 @@ bool Blank(const std::string& s) { return s.find_first_not_of(" \t\r\xe3\x80\x80
 
 }  // namespace
 
-void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
-              const Switches& switches, std::vector<Change>* changes) {
+SourceDecisions DecideSource(std::span<const std::string> source) {
+    SourceDecisions out;
     const Data* d = LoadedData();
-    if (d == nullptr || !switches.levels || source.size() != out.size()) return;
+    if (d == nullptr) return out;
     std::vector<std::string> ja;
     ja.reserve(source.size());
     for (const std::string& s : source) ja.push_back(WithoutCr(s));
     std::vector<bool> dialogue(ja.size());
     for (std::size_t i = 0; i < ja.size(); i++) dialogue[i] = DialogueLine(d->reader, ja[i]);
-    if (std::none_of(dialogue.begin(), dialogue.end(), [](bool b) { return b; }) || CaptionDocument(d->reader, ja)) return;
+    if (std::none_of(dialogue.begin(), dialogue.end(), [](bool b) { return b; }) || CaptionDocument(d->reader, ja)) return out;
+    std::vector<RegLine> lines;
+    uint32_t scene = 0;
+    for (std::size_t i = 0; i < ja.size(); i++) {
+        if (Blank(ja[i])) ++scene;
+        lines.push_back({ja[i], ReadLine(*d, i, ja[i], "", Capture{}, false, scene).speaker, scene, dialogue[i]});
+    }
+    out.lines = DecideLevels(d->levels, lines);
+    out.dialogue = std::move(dialogue);
+    return out;
+}
+
+void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
+              const Switches& switches, std::vector<Change>* changes, const SourceDecisions* decided) {
+    const Data* d = LoadedData();
+    if (d == nullptr || !switches.levels || source.size() != out.size()) return;
+    SourceDecisions own;
+    if (decided == nullptr || (!decided->lines.empty() && decided->lines.size() != source.size())) {
+        own = DecideSource(source);
+        decided = &own;
+    }
+    if (decided->lines.empty()) return;
+    const std::vector<bool>& dialogue = decided->dialogue;
+    std::vector<std::string> ja;
+    ja.reserve(source.size());
+    for (const std::string& s : source) ja.push_back(WithoutCr(s));
     std::vector<PreLine> lines;
     uint32_t scene = 0;
     for (std::size_t i = 0; i < ja.size(); i++) {
@@ -37,6 +63,7 @@ void Retrofit(std::span<const std::string> source, const Capture& capture, std::
     }
     RegenOptions options;
     options.levels = switches.levels;
+    options.decisions = &decided->lines;
     const std::vector<RegenLine> regen = Regenerate(*d, lines, dialogue, options);
     for (std::size_t i = 0; i < regen.size(); i++) {
         const RegenLine& r = regen[i];

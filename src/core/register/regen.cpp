@@ -729,9 +729,15 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                                   const RegenOptions& options) {
     const Tables& t = d.ko;
     Words r{t, d.retro, {}, {}};
-    std::vector<RegLine> rl;
-    for (const PreLine& l : lines) rl.push_back({l.ja, l.speaker, l.scene, l.dialogue});
-    const std::vector<RegDecision> decisions = DecideLevels(d.levels, rl);
+    std::vector<RegDecision> decided;
+    const std::vector<RegDecision>* given = options.decisions;
+    if (given == nullptr || given->size() != lines.size()) {
+        std::vector<RegLine> rl;
+        for (const PreLine& l : lines) rl.push_back({l.ja, l.speaker, l.scene, l.dialogue});
+        decided = DecideLevels(d.levels, rl);
+        given = &decided;
+    }
+    const std::vector<RegDecision>& decisions = *given;
     std::vector<RegenLine> out(lines.size());
     for (std::size_t li = 0; li < lines.size(); ++li) {
         if (li >= build.size() || !build[li]) continue;

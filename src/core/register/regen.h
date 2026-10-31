@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "core/register/levels.h"
 #include "core/register/reader.h"
 #include "core/register/tables.h"
 
@@ -13,6 +14,9 @@ namespace hdTrans::reg {
 struct RegenOptions {
     // The levels of spec/register.md; false keeps the level each predicate has in the translation.
     bool levels = true;
+    // The decisions of DecideLevels for the lines, made before the translation (DecideSource); null to
+    // decide them here.
+    const std::vector<RegDecision>* decisions = nullptr;
 };
 
 struct RegenLine {

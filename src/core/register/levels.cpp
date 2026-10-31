@@ -771,6 +771,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 }
             };
             decide(cues[k - i], keys[k - i], d);
+            d.authoritative = cues[k - i].auth || authSpeaker;
+            d.prose = prose;
             d.trail = cues[k - i].trail;
             d.holdQuote = cues[k - i].outburst;
             d.trailConj = cues[k - i].trailConj;

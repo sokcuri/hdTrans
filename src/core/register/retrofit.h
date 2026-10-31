@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include "core/register/ir.h"
+#include "core/register/levels.h"
 #include "core/register/reader.h"
 
 namespace hdTrans::reg {
@@ -23,9 +25,19 @@ struct Switches {
     bool levels = true;  // the levels of the rules; false keeps every line as the translation wrote it
 };
 
+// The decisions of the stage for the lines of source from the Japanese alone, one per line, and which lines
+// are dialogue lines, the ones it writes; both empty where it leaves the document as the translation writes
+// it (no dialogue line, a document that reads as captions, or no data of the stage).
+struct SourceDecisions {
+    std::vector<RegDecision> lines;
+    std::vector<bool> dialogue;
+};
+SourceDecisions DecideSource(std::span<const std::string> source);
+
 // Rewrites out (the translation of source, one line each, each with its "\r" when the source has one).
-// changes, when given, gets the lines written again.
+// changes, when given, gets the lines written again. decided, when given, holds DecideSource(source).
 void Retrofit(std::span<const std::string> source, const Capture& capture, std::span<std::string> out,
-              const Switches& switches = {}, std::vector<Change>* changes = nullptr);
+              const Switches& switches = {}, std::vector<Change>* changes = nullptr,
+              const SourceDecisions* decided = nullptr);
 
 }  // namespace hdTrans::reg

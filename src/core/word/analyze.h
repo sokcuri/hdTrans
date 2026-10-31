@@ -80,6 +80,20 @@ struct Settings {
     std::string_view before;
     // Text path: the depth of 「」 and 『』 open at the start of the chunk.
     int quoteDepth = 0;
+    // Text path: the quotes of the line opened outside any quote before the chunk, and the styles
+    // of the line's quotes (pipeline::QuoteStyles with output::kCasualSpeech: element 0 the text
+    // outside quotes, element k the k-th quote), read by the construction feature casual-level.
+    int quoteCount = 0;
+    std::span<const std::uint8_t> quoteStyles;
+    // Text path: the speech level the speech-level stage decides for the line from the source
+    // (spec/register.md); none where the stage does not write the line.
+    enum class LineLevel : std::uint8_t { none, plain, casual, polite, formal, other };
+    LineLevel lineLevel = LineLevel::none;
+    // With lineLevel: the line speaks in an authoritative voice (spec REG-14); the document is prose
+    // fiction (spec REG-20); the levels of the quotes of a line of several quotes, in order (REG-15).
+    bool authoritative = false;
+    bool prose = false;
+    std::span<const LineLevel> quoteLevels;
     // Text path: the line uses the tic ぽい (PoiTicLine).
     bool poiTic = false;
     // Text path: the document writes its speech in 「」, so its text outside them is narration.

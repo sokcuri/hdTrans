@@ -340,7 +340,41 @@ struct Scratch {
     std::vector<tokenizer::ControlMarker> markers;
     output::Composer composer;
     word::SessionSenses* sessionSenses = nullptr;
+    // The decision of the speech-level stage for the line being translated when the stage writes it
+    // (UseDecision), and the levels of its quotes.
+    const reg::RegDecision* decision = nullptr;
+    std::vector<word::Settings::LineLevel> quoteLevels;
 };
+
+word::Settings::LineLevel LineLevelOf(reg::Level level) {
+    using L = word::Settings::LineLevel;
+    switch (level) {
+        case reg::Level::none: return L::none;
+        case reg::Level::haera: return L::plain;
+        case reg::Level::hae: return L::casual;
+        case reg::Level::haeyo: return L::polite;
+        case reg::Level::hapsyo: return L::formal;
+        default: return L::other;
+    }
+}
+
+// Sets the decision of the stage for lines [first, last] after the context: that of the line, for a run of
+// lines the one they all share, none where the stage does not write them.
+void UseDecision(Scratch& s, const reg::SourceDecisions* d, std::size_t first, std::size_t last) {
+    s.decision = nullptr;
+    s.quoteLevels.clear();
+    if (d == nullptr || last >= d->lines.size() || last >= d->dialogue.size()) return;
+    const reg::RegDecision& one = d->lines[first];
+    for (std::size_t k = first; k <= last; k++) {
+        const reg::RegDecision& x = d->lines[k];
+        if (!d->dialogue[k] || x.narration || x.level != one.level || x.authoritative != one.authoritative ||
+            x.prose != one.prose || (first != last && !x.quotes.empty())) {
+            return;
+        }
+    }
+    s.decision = &one;
+    for (const reg::RegDecision::Quote& q : one.quotes) s.quoteLevels.push_back(LineLevelOf(q.level));
+}
 
 // The pieces of the output as the tokenizer reads them (the span kinds are the same numbers).
 std::vector<tokenizer::Piece> TokenizerPieces(const output::Pieces& pieces) {
@@ -810,6 +844,14 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
     settings.before = before;
     settings.quoteDepth = speech.quotes.depth;
+    settings.quoteCount = speech.quotes.count;
+    settings.quoteStyles = speech.styles;
+    if (s.decision != nullptr) {
+        settings.lineLevel = LineLevelOf(s.decision->level);
+        settings.authoritative = s.decision->authoritative;
+        settings.prose = s.decision->prose;
+        settings.quoteLevels = s.quoteLevels;
+    }
     settings.poiTic = speech.poiTic;
     settings.narrated = speech.narrated;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
@@ -1150,6 +1192,10 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                                           Scratch& s, Generated& generated, const StageObserver& observer,
                                           const TranslationOptions& options, std::size_t context) {
     const auto narratedOf = [](std::string_view text) { return text.find("「") != std::string_view::npos; };
+    // The decision of the speech-level stage for lines [first, last] of the call.
+    const auto use = [&](std::size_t first, std::size_t last) {
+        UseDecision(s, first >= context ? options.sourceDecisions : nullptr, first - context, last - context);
+    };
     // The lines are translated as AloneText; their translations keep the arrows they end with.
     std::vector<std::string> bare(lines.size()), alone(lines.size());
     std::vector<std::string_view> arrows(lines.size());
@@ -1166,6 +1212,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
+        use(i, i);
         alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
@@ -1193,6 +1240,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         joinedOptions.ruleTally = nullptr;
         word::SessionSenses* const senses = s.sessionSenses;
         s.sessionSenses = nullptr;
+        use(k, k + 1);
         TranslateRubyBody(snap, doc, texts[0] + texts[1], used[k], s, generated, cutObserver, joinedOptions,
                           narratedOf(lines[k]) || narratedOf(lines[k + 1]), texts);
         s.sessionSenses = senses;
@@ -1229,6 +1277,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             joinedOptions.joinedLines = true;
             joinedOptions.cutBreaks = cuts;
             if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
+            use(i, j);
             pieces = SplitAtBreaks(
                 TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
                 j - i + 1);
@@ -1248,6 +1297,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 // The stages of the line on its own, for the observer; the translation stays the one made
                 // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
+                use(k, k);
                 TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
                               narratedOf(lines[k]));
             }
@@ -1259,6 +1309,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 out[k] = WithArrow(alone[k], arrows[k]);
             } else {
                 // The stages did not keep kGoesOn at the end: the line without it.
+                use(k, k);
                 out[k] = WithArrow(
                     TranslateRubyBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
                     arrows[k]);
@@ -1293,6 +1344,17 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         TranslationOptions unwrapped = options;
         unwrapped.wrapped = false;
         const std::size_t boundedContext = context > 0 ? ends[context - 1] : 0;
+        // Each piece of a line takes the line's decision.
+        reg::SourceDecisions pieceDecisions;
+        if (const reg::SourceDecisions* d = options.sourceDecisions; d != nullptr && !d->lines.empty()) {
+            for (std::size_t i = context; i < lines.size() && i - context < d->lines.size(); i++) {
+                for (std::size_t piece = i > 0 ? ends[i - 1] : 0; piece < ends[i]; piece++) {
+                    pieceDecisions.lines.push_back(d->lines[i - context]);
+                    pieceDecisions.dialogue.push_back(d->dialogue[i - context]);
+                }
+            }
+        }
+        unwrapped.sourceDecisions = &pieceDecisions;
         const auto translated =
             TranslateDocumentPieces(snap, generated, bounded, observer, unwrapped, sourceLines, boundedContext);
         if (translated.size() != bounded.size()) return std::vector<std::string>(lines.begin(), lines.end());
@@ -1318,6 +1380,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         out = TranslateWrapped(snap, *doc, lines, closed, s, generated, observer, named, context);
     } else {
         for (std::size_t i = 0; i < lines.size(); i++) {
+            UseDecision(s, i >= context ? options.sourceDecisions : nullptr, i - context, i - context);
             const StageObserver& watch = i < context ? StageObserver{} : observer;
             if (watch.line) watch.line(watch.context, static_cast<int>(i - context));
             // ReadLine takes the line without its one trailing "\r"; the "\r" is written back.
@@ -1332,6 +1395,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             out.push_back(std::move(translated));
         }
     }
+    UseDecision(s, nullptr, 0, 0);
     if (!snap.Healthy()) {
         const auto [fallback, replacement] = FallbackOf(snap);
         if (!fallback) return std::vector<std::string>(lines.begin(), lines.end());
@@ -1504,8 +1568,12 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
                 FilterSnapshot(observer, "PRE", lines[i]);
             }
         }
-        auto out = TranslateDocumentPieces(snap, generated, lines, watched, options, lines, context);
-        if (levels) reg::Retrofit(lines.subspan(context), levelWatch.capture, translated(out), {}, options.levelChanges);
+        const reg::SourceDecisions decided = levels ? reg::DecideSource(lines.subspan(context)) : reg::SourceDecisions{};
+        TranslationOptions decidedOptions = options;
+        decidedOptions.sourceDecisions = &decided;
+        auto out = TranslateDocumentPieces(snap, generated, lines, watched, decidedOptions, lines, context);
+        if (levels)
+            reg::Retrofit(lines.subspan(context), levelWatch.capture, translated(out), {}, options.levelChanges, &decided);
         if (observer.filterLog) {
             for (std::size_t i = context; i < out.size() && i < lines.size(); ++i) {
                 if (!logged(i)) continue;
@@ -1536,12 +1604,15 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     }
     TranslationOptions writtenOptions = options;
     writtenOptions.filterWritten = written;
+    const reg::SourceDecisions decided =
+        levels ? reg::DecideSource(std::span<const std::string>(filtered).subspan(context)) : reg::SourceDecisions{};
+    writtenOptions.sourceDecisions = &decided;
     if (levels) levelWatch.capture.pieceLine = PieceLines(filtered, context);
     std::vector<std::string> out =
         TranslateDocumentPieces(snap, generated, filtered, watched, writtenOptions, filtered, context);
     if (levels)
         reg::Retrofit(std::span<const std::string>(filtered).subspan(context), levelWatch.capture, translated(out), {},
-                      options.levelChanges);
+                      options.levelChanges, &decided);
     // An empty input line is not post-filtered either.
     for (std::size_t i = context; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {
