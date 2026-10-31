@@ -1,4 +1,4 @@
-# 규칙: MNG-1, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46
+# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46
 rule	input	expected	kind	layer
 verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
 verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
@@ -70,6 +70,30 @@ dict:jisjk:138705	その場に在り合わない物だ。	has:있지 않은	fix	
 dict:jisjk:138705	在り合う物を使う。	has:마침 있는	keep	compose
 dict:jisjk:139107	それは言兼ねる。	has:말할 수 없다	fix	compose
 dict:jisjk:201724	あるのではない。	has:있는 것은 아니다	keep	compose
+voice:lexical-negative-potential	その要望は今すぐには決められない。	has:결정할 수 없다	fix	voice
+voice:lexical-negative-potential	だが、それ以上を続けられなかった。	has:계속할 수 없었다	fix	voice
+voice:lexical-negative-potential	普通なら考えられん交渉だな	lacks:생각할 수 있는	keep	voice
+voice:lexical-negative-potential	体温が感じられないのよね	has:느껴지지 않아	keep	voice
+cx:neg-clause-potential:10	そう思うことでしか、この場に立っていられなかった。	has:있을 수 없었다	fix	rewrites
+cx:neg-clause-noda:10	彼らは何もしなかったのではありません。	has:하지 않았던 것은 아닙니다	fix	rewrites
+cx:neg-clause-noda:20	コンテストで勝つために依頼を受けたんじゃないよ	has:받은 게 아니야	fix	rewrites
+cx:neg-clause-noda:20	あんたがやったんじゃない！！	lacks:한 게 아니	keep	rewrites
+cx:neg-clause-nanka:10	別に困ってなんかないよね？	lacks:왠지 없	fix	rewrites
+constraint:shika-before-negative	はっきり言って、嫌な予感しかしない。	has:예감밖에	fix	lookup
+constraint:shika-before-negative	しかし、ないものはない	has:하지만	keep	lookup
+cx:neg-clause-sumu:10	殿下の顔は見ずに済んだ	has:보지 않아도 되었다	fix	rewrites
+cx:neg-clause-sumu:20	消化試合のようにならないで済みました	has:되지 않고	keep	rewrites
+voice:lexical-negative-potential	一人じゃここまで連れてこれません	has:데려올 수 없습니다	keep	voice
+voice:lexical-negative-potential	結局は守られなかった約束を、	has:지켜지지 않았던	keep	voice
+cx:neg-clause-masen:10	「劇薬……それは、はい。否定しませんが」	has:부정하지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	展開予想は現状禁止しておりませんが、	has:있지 않습니다만	fix	rewrites
+cx:neg-clause-masen:10	細かい相場までは分かりませんが	has:모릅니다만	keep	rewrites
+normalize:casual-negative-nee	ノーマルENDでも救いがねぇ！	has:구원이 없	fix	normalize
+normalize:casual-negative-nee	血は一滴も流れてねえもん。	has:흐르지 않	fix	normalize
+dict:delete-tsuretekite	子どもは連れてきてないので	has:데려오지 않	fix	lookup
+dict:delete-tsuretekite	ここに連れてきて、学友に見せびらかす	lacks:않	keep	lookup
+cx:neg-clause-oru:10	魔王や魔獣はおりません。	has:없습니다	fix	rewrites
+cx:neg-clause-oru:10	階段をおりません	has:내리지 않습니다	keep	rewrites
 cx:neg-final-invite:10	「ね、明日、カフェ行かない？」	has:가지 않을래?	fix	rewrites
 cx:neg-final-invite:10	「どうせ食べるならさ、見晴らしのいいところで食べない？」	has:먹지 않을래?	fix	rewrites
 cx:neg-final-invite:30	あっ　学校帰りに　うち来ない？	has:오지 않을래?	fix	rewrites
@@ -90,3 +114,4 @@ pattern:negf-hazu	あなたのおばあちゃんに瓶の知識なんてある�
 pattern:negf-hazu	うん……負けるはずない」	has:질 리가 없다	fix	builtin-pattern
 pattern:negf-past-noda	「……領地の税を引き上げればよかったのではないか」	has:좋았던 건 아닌가	fix	builtin-pattern
 pack:negf:reproach	ま、行くっきゃないか！	lacks:못해	keep	packs
+cx:neg-clause-noda:10	事前に一言頂戴してもよかったのではないかと戸惑っている	has:괜찮았던 것은 아닐까	fix	rewrites

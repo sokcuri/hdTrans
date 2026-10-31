@@ -62,6 +62,9 @@ enum class ConstraintContext : uint8_t {
                         // not わけて, わけた, わけよう)
     BeforeNasai,        // なさい or なさいませ follows (お待ちなさい)
     AfterWordBeforeTe,  // a word right before and て after (感じはしていた; not はしで食べる)
+    BeforeRa,           // ら follows (気にするなら: the なら of a condition, not the prohibition な)
+    AfterWordBeforeNegative,  // a word right before and ない, なかっ, なく, なけれ or ません after (予感しかしない,
+                              // 味しかしません; not いや、しかしなあ, まあしかしねえ, まあしかしずいぶん)
     BeforeRassharu,     // らっしゃ follows (座っていらっしゃる: the い starts いらっしゃる)
     BeforeCopula,       // だ, で, じゃ, に, の, か or なん follows, or no letter, which no verb stem
                         // takes (いただけだ, いただけなんです, いただけ〜)

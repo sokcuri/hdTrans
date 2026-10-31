@@ -1,0 +1,45 @@
+# 규칙: GRM-60, GRM-61
+rule	input	expected	kind	layer
+cx:neg-clause-naito:10	住所が無いと書けない、と聞いた	has:주소가 없으면 쓸 수 없다	fix	rewrites
+cx:neg-clause-naito:10	奴がいないと、会話が持たない。	has:놈이 없으면	fix	rewrites
+cx:neg-clause-naito:10	立候補者がいないと話にならない	has:입후보자가 없으면	fix	rewrites
+cx:neg-clause-naito:10	お金がないと困る	has:돈이 없으면	fix	rewrites
+cx:neg-clause-naito:10	鍵がないと開けられない	has:열쇠가 없으면	fix	rewrites
+cx:neg-clause-naito:10	時間がないと危ない	has:시간이 없으면	fix	rewrites
+cx:neg-clause-naito:10	自信がないと言った	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	気持ちがないとは言えない	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	感情がないというか	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	何かがないとも限らない	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	証拠がないと答えた	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	時間がないと嘆いた	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	興味がないと断った	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	価値がないと見なされた	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	余裕がないと告げた	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	権利がないと主張した	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	理由がないと書いてある	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:10	答えがないと叫んだ	!rule:cx:neg-clause-naito:10	keep	rewrites
+cx:neg-clause-naito:20	マニフェストがないと、政策を訴えられない	has:마니페스트가 없으면,	fix	rewrites
+cx:neg-clause-naito:20	時間がないと、彼は言った	!rule:cx:neg-clause-naito:20	keep	rewrites
+cx:neg-clause-naito:20	関係がないと、思った	!rule:cx:neg-clause-naito:20	keep	rewrites
+cx:neg-clause-ii:5	そもそも死ななきゃいい。	has:죽지 않으면 된다	fix	rewrites
+cx:neg-clause-ii:5	なら、忘れなきゃいい。	has:잊지 않으면 된다	fix	rewrites
+cx:neg-clause-ii:5	怖い人だったら、近づかなければいい	has:않으면 된다	fix	rewrites
+cx:neg-clause-ii:5	嫌なら行かなければいい	has:가지 않으면 된다	fix	rewrites
+cx:neg-clause-ii:5	それなら言わなければいいんだ	has:않으면 된다	fix	rewrites
+cx:neg-clause-ii:5	行かなければならない	!rule:cx:neg-clause-ii:5	keep	rewrites
+cx:neg-clause-ii:5	雨が降らなければいいのに	!rule:cx:neg-clause-ii:5	keep	rewrites
+cx:neg-clause-ii:7	邪魔さえされなきゃいいか。	has:되지 않으면 되나	fix	rewrites
+cx:neg-clause-ii:7	これでいいか。	!rule:cx:neg-clause-ii:7	keep	rewrites
+cx:neg-clause-ii:10	動かなきゃいいじゃない	has:움직이지 않으면 되잖아	fix	rewrites
+cx:neg-clause-ii:10	場所で口にしなければいいのです	has:말하지 않으면 됩니다	fix	rewrites
+cx:neg-clause-ii:10	行かなきゃいいよ	has:가지 않으면 돼	fix	rewrites
+cx:neg-clause-ii:10	行かなきゃいいから	has:가지 않으면 되니까	fix	rewrites
+cx:neg-clause-ii:10	カブれなければいいが…	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	影響しなければいいんだけど…	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	絵が気に入らなければいいんですけど	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	雨、降らなければいいね	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	え、食べなきゃいいって？	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	行かなきゃいいと思う	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	行かなきゃいいだけだ	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	行かなきゃいいことだ	!rule:cx:neg-clause-ii:10	keep	rewrites
+cx:neg-clause-ii:10	行かなきゃいいのか	!rule:cx:neg-clause-ii:10	keep	rewrites

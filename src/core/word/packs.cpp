@@ -221,9 +221,13 @@ Context ContextOf(const Flusher& f, const Item* it) {
                          std::string_view("かがさたなばまらわせこ").find(form.substr(form.size() - 6, 3)) != std::string_view::npos)) {
         c.forms.insert("neg");
     }
-    // nja: the predicate negated through the の of んじゃない, のではない (いいんじゃない, 行くのではない)
+    // nja: the non-past predicate negated through the の of んじゃない, のではない (いいんじゃない, 行くのではない);
+    // a past before the の (よかったのではないか) asks about what happened and is not nja
     for (const std::string_view nja : {"んじゃな", "のじゃな", "のではな", "んではな"}) {
-        if (ending.find(nja) != std::string_view::npos) c.forms.insert("nja");
+        const std::size_t at = ending.find(nja);
+        if (at == std::string_view::npos) continue;
+        const std::string_view before = std::string_view(ending).substr(0, at);
+        if (!before.ends_with("た") && !before.ends_with("だ")) c.forms.insert("nja");
     }
     if (form.ends_with("て") || form.ends_with("で")) {
         c.forms.insert("te");

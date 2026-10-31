@@ -18,7 +18,7 @@ compose:joined-aux	切り捨てた	버렸다	keep	compose
 compose:joined-aux	ゴミを捨てる	쓰레기를 버린다	keep	compose
 compose:joined-aux	捨てた	버렸다	keep	compose
 compose:joined-before-doe	「部員の依頼はダメですか？」	「부원의 의뢰는 안됩니까?」	fix	compose
-compose:joined-before-doe	降りかかる火の粉は…払わないといけませんね！	닥치는 불똥은…털지 않으면 안되겠네요!	fix	compose
+compose:joined-before-doe	降りかかる火の粉は…払わないといけませんね！	닥치는 불똥은…털어야 하겠네요!	fix	compose
 compose:joined-before-doe	「……もう、だめかも……」	「……이제, 안될지도……」	fix	compose
 compose:joined-before-doe	「ダメじゃん！」と柏木。	「안되잖아!」라고 카시와기.	fix	compose
 compose:joined-before-doe	カケル、思い込みで友人を失ったら駄目だぞ	카케루, 선입견으로 친구를 잃으면 안된다	fix	compose

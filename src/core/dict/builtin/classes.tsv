@@ -68,6 +68,7 @@
 //= ending.rare-passive	Forms after られ that make the られ of a transitive or listed verb the passive (られている, られてる, られており, られてた, the おる of western speech after the て said と: られとる, and ちゃう, which happens to one: 忘れられちゃった).
 //= ending.rare-potential	Forms after られ that make it the potential: negative, conditional, volitional and the polite non-past (られない, られれば, られよう, られます).
 //= ending.rare-negative	The negative forms after られ, which make a dictionary word in the られ of くる the potential (連れてこられない, 連れてこられません).
+//= ending.lexical-potential-negative	The negative forms after られ that make a dictionary word in the られ of another ichidan verb the potential (決められない, 続けられなかった, 与えられません, 見せられず; spec GRM-50): not な of ながら or なさい, nor ん, which may be the る said short (考えられんの).
 //= ending.taunt	Sulky tags after a sentence particle drawn out with its ー (分かりましたよーだ, 知らないもんねーっだ): what follows the ー is tone, not a copula, and is dropped.
 //= ending.taunt-not-after	The kana after which よーだ of ending.taunt is ようだ spelled long, not a sulky tag (夢のよーだ, 静かなよーだ).
 //= ending.voice-condition	Conditions and concessions after (ら)れ: when the main clause is a trouble of stem.adverse-outcome the (ら)れ is the passive (見られたら困る), and a word of word.ability-scope before one makes no potential (誰だってそう言われたら).
@@ -370,6 +371,9 @@
 //= verb.say-teiru	Stems of the verbs of talking and going out with someone that keep the progressive of ている in the plain present and in 지 (付き合っている人 사귀는 사람); a stem ending in 言 or 云 counts too.
 //= verb.speech	Starts of the verbs of speaking after a quotation in って (って言った, って叫ぶ).
 //= verb.involuntary	Verbs of what happens to one rather than what one does (出る, 死ぬ, 遅れる, 負ける, 忘れる): their ちゃう that ends a line is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아), not a resolve.
+//= verb.spared-event	Verbs of what befalls one rather than what one chooses to do (失う, 死ぬ, 傷つく, 落とす), by dictionary form: their ずに済む is being spared it, not being let off doing it, and stays (spec GRM-55).
+//= noun.casual-lacked	Nouns of what one has or lacks (救い, 金, 時間, 意味), after which が and the casual ねえ before ！ or a final particle is the negative ない (救いがねぇ！ 구원이 없어!); after any other word the ねえ is the particle of storytelling (こいつがねぇ！).
+//= noun.spared-event	Verbal nouns of what befalls one (怪我, 負傷, 犠牲), whose する in ずに済む is the same as verb.spared-event.
 //= verb.spontaneous	Ichidan stems whose られ is a feeling that comes by itself, never the potential (将来が案じられる, 気配が感じられる).
 //= verb.state-teiru	Stems of the verbs of thinking and perceiving whose ている reads as the simple form (見えている 보인다); a stem ending in 思 counts too.
 //= verb.to-person	Verbs of giving, handing, telling or asking whose に is the person the act goes to (渡す, あげる, 言う, 頼む).
@@ -1170,6 +1174,16 @@ ending.rare-negative	ず
 ending.rare-negative	ぬ
 ending.rare-negative	ん
 ending.rare-negative	ませ
+
+ending.lexical-potential-negative	ない
+ending.lexical-potential-negative	なかっ
+ending.lexical-potential-negative	なく
+ending.lexical-potential-negative	なけれ
+ending.lexical-potential-negative	ねえ
+ending.lexical-potential-negative	ねぇ
+ending.lexical-potential-negative	ず
+ending.lexical-potential-negative	ぬ
+ending.lexical-potential-negative	ませ
 
 ending.rare-potential	な
 ending.rare-potential	ず
@@ -7799,3 +7813,76 @@ script.chinese-han	灵
 script.chinese-han	帮
 script.chinese-han	阳
 script.chinese-han	极
+
+verb.spared-event	失う
+verb.spared-event	死ぬ
+verb.spared-event	傷つく
+verb.spared-event	沈む
+verb.spared-event	落ちる
+verb.spared-event	落とす
+verb.spared-event	迷う
+verb.spared-event	掛かる
+verb.spared-event	かかる
+verb.spared-event	壊れる
+verb.spared-event	負ける
+verb.spared-event	倒れる
+verb.spared-event	溺れる
+verb.spared-event	濡れる
+verb.spared-event	遅れる
+verb.spared-event	困る
+verb.spared-event	苦しむ
+verb.spared-event	流れる
+verb.spared-event	流す
+verb.spared-event	汚れる
+verb.spared-event	消える
+verb.spared-event	捕まる
+verb.spared-event	見つかる
+verb.spared-event	巻き込まれる
+
+noun.spared-event	怪我
+noun.spared-event	けが
+noun.spared-event	負傷
+noun.spared-event	犠牲
+noun.spared-event	遅刻
+noun.spared-event	失敗
+noun.spared-event	損
+
+noun.casual-lacked	救い
+noun.casual-lacked	金
+noun.casual-lacked	お金
+noun.casual-lacked	時間
+noun.casual-lacked	暇
+noun.casual-lacked	余裕
+noun.casual-lacked	意味
+noun.casual-lacked	価値
+noun.casual-lacked	理由
+noun.casual-lacked	証拠
+noun.casual-lacked	自信
+noun.casual-lacked	興味
+noun.casual-lacked	関係
+noun.casual-lacked	必要
+noun.casual-lacked	元気
+noun.casual-lacked	力
+noun.casual-lacked	気
+noun.casual-lacked	用
+noun.casual-lacked	方法
+noun.casual-lacked	手
+noun.casual-lacked	仕方
+noun.casual-lacked	勝ち目
+noun.casual-lacked	希望
+noun.casual-lacked	逃げ場
+noun.casual-lacked	出口
+noun.casual-lacked	答え
+noun.casual-lacked	心配
+noun.casual-lacked	遠慮
+noun.casual-lacked	容赦
+noun.casual-lacked	問題
+noun.casual-lacked	文句
+noun.casual-lacked	才能
+noun.casual-lacked	根性
+noun.casual-lacked	度胸
+noun.casual-lacked	未来
+noun.casual-lacked	愛
+noun.casual-lacked	欲
+noun.casual-lacked	土地勘
+noun.casual-lacked	物

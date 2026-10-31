@@ -41,7 +41,7 @@ dict:function-nouns:32	時の賢者達があらゆる術を検証した。	당�
 dict:function-nouns:32	時の流れは速い。	시간의 흐름은 빠르다.	keep	defaults
 dict:function-nouns:32	その時の顔が忘れられない。	그 때의 얼굴을 잊을 수 없다.	keep	local
 sense:五分	実力は五分だ。	실력은 대등이다.	fix	senses
-sense:五分	五分もしないうちに着いた。	5분도 하지 않는 동안에 도착했다.	fix	senses
+sense:五分	五分もしないうちに着いた。	5분도 되기 전에 도착했다.	fix	senses
 dict:function-nouns:14	例え今この盤面が詰みだとしても、悪手を選ぶつもりはない。	설령 지금 이 반면이 외통수라고 해도, 악수를 선택할 생각은 없다.	fix	defaults
 dict:function-nouns:14	例えの話だ。	비유 이야기다.	keep	defaults
 dict:function-nouns:14	例えば、こういうことだ。	예를 들면, 이런 것이다.	keep	defaults

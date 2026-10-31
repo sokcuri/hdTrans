@@ -1,0 +1,36 @@
+# 규칙: GRM-54, GRM-55
+rule	input	expected	kind	layer
+cx:neg-clause-uchi:10	五分もしないうちに帰ってくる王子。	has:5분도 되기 전에	fix	rewrites
+cx:neg-clause-uchi:10	五分もしないうちに、入り口の	has:5분도 되기 전에	fix	rewrites
+cx:neg-clause-uchi:10	一時間もしないうちに	has:1시간도 되기 전에	fix	rewrites
+cx:neg-clause-uchi:10	三日もしないうちに	has:3일도 되기 전에	fix	rewrites
+cx:neg-clause-uchi:10	二十分もしないうちに戻ってきた	has:20분도 되기 전에	fix	rewrites
+cx:neg-clause-uchi:10	何もしないうちに終わった	!rule:cx:neg-clause-uchi:10	keep	rewrites
+cx:neg-clause-uchi:10	一ヶ月も学校に通わないうちに	!rule:cx:neg-clause-uchi:10	keep	rewrites
+cx:neg-clause-uchi:20	ばれないうちに一度こっそり	has:발각되기 전에	fix	rewrites
+cx:neg-clause-uchi:20	悪化までしないうちに病院行けて	has:하기 전에	fix	rewrites
+cx:neg-clause-uchi:20	見つからないうちに逃げよう	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-uchi:20	冷めないうちに食べて	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-uchi:20	知らないうちに	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-uchi:20	気づかないうちに眠っていた	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-uchi:20	忘れないうちに書き留めておく	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-uchi:20	密談が終わらないうちに予鈴が鳴った	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-uchi:20	活動が固まらないうちに	!rule:cx:neg-clause-uchi:20	keep	rewrites
+cx:neg-clause-sumu:10	殿下の顔は見ずに済んだのに……	has:보지 않아도 되었는데	fix	rewrites
+cx:neg-clause-sumu:10	戦わずに済む人々が	has:싸우지 않아도 되는 사람들	fix	rewrites
+cx:neg-clause-sumu:10	そんな内職もせずに済む	has:하지 않아도 된다	fix	rewrites
+cx:neg-clause-sumu:10	クラスを回らずに済みそうだ。	has:돌지 않아도 될 것 같다	fix	rewrites
+cx:neg-clause-sumu:10	新しい合い鍵作らずに済みますー	has:않아도 됩	fix	rewrites
+cx:neg-clause-sumu:10	何も言わずに済んだ	has:말하지 않아도 되었다	fix	rewrites
+cx:neg-clause-sumu:10	腕と命を失わずに済んだ	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:10	誰一人死なずに済んだ。	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:10	怪我をせずに済んだ	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:10	誰も負傷せずに済んだ	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:10	蹂躙を受けずにすんでいた	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:10	何も言わずに済ませた	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:10	港を沈められずに済むわ	!rule:cx:neg-clause-sumu:10	keep	rewrites
+cx:neg-clause-sumu:20	行かないで済む	has:가지 않아도 된다	fix	rewrites
+cx:neg-clause-sumu:20	あいつに会わないで済んだ	has:만나지 않아도 되었다	fix	rewrites
+cx:neg-clause-sumu:20	瓶を落とさないで済んだ。	!rule:cx:neg-clause-sumu:20	keep	rewrites
+cx:neg-clause-sumu:20	試合のようにならないで済みました	!rule:cx:neg-clause-sumu:20	keep	rewrites
+cx:neg-clause-sumu:20	足手まといにならないで済みそう	!rule:cx:neg-clause-sumu:20	keep	rewrites

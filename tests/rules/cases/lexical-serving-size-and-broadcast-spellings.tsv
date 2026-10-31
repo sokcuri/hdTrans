@@ -65,7 +65,7 @@ lookup:jisjk:67276	東海テレビを見た。	도카이TV를 보았다.	keep	de
 lookup:jisjk:136469	死ななきゃいけない。	죽지 않으면 안된다.	fix	defaults
 lookup:jisjk:136469	死ななきゃいけなかった。	죽지 않으면 안되었다.	fix	defaults
 lookup:jisjk:136469	死ななきゃいけなくなる。	죽지 않으면 안되게 된다.	fix	defaults
-lookup:jisjk:136469	死ななきゃいけません。	죽지 않으면 안됩니다.	keep	defaults
+lookup:jisjk:136469	死ななきゃいけません。	죽어야 합니다.	keep	defaults
 lookup:jisjk:136469	死んではいけない。	죽어선 안된다.	keep	defaults
 lookup:jisjk:136469	生きなきゃいけない。	살아야 한다.	keep	defaults
 lookup:jisjk:136469	死ななくてもいい。	죽지 않아도 된다.	keep	defaults
