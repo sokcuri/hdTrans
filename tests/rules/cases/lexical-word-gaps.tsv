@@ -63,6 +63,7 @@ lexical:kaku-kana	すでに手に冷や汗をかいて少し震えている。	h
 lexical:kaku-kana	降り注ぐ太陽の熱線すら忘れ、冷や汗をかいた。	has:흘렸	fix	senses
 lexical:kaku-kana	汗もかいた。	has:땀도 흘렸다	fix	senses
 lexical:kaku-kana	あぐらをかいて座る。	has:책상다리를 해	fix	senses
+lexical:kaku-kana	あぐらもかいた。	has:책상다리도 했다	fix	senses
 lexical:kaku-kana	手紙をかいた。	has:편지를 썼다	fix	senses
 lexical:kaku-kana	背中をかいた。	has:등을 긁었다	fix	senses
 lexical:kaku-kana	絵をかいた。	has:그림을 그렸다	fix	senses
@@ -194,7 +195,7 @@ lexical:shimeru	「黙って食べなさい。オシメ買ってあげないわ�
 lexical:shimeru	ネクタイを締める。	lacks:혼내	keep	senses
 lexical:shimeru	ミシミシメキメキッ	lacks:혼내	keep	senses
 lexical:garu	ベルが鬱陶しがる理由が少しわかる。	has:귀찮아하	fix	fixed
-lexical:garu	逆に文化系教師からは鬱陶しがられる。	has:귀찮아해	fix	fixed
+lexical:garu	逆に文化系教師からは鬱陶しがられる。	has:귀찮게 여겨진다	fix	fixed
 lexical:garu	ユユ姫はなぜ彼を嫌うのかと不思議がった。	has:이상하게 여	fix	fixed
 lexical:garu	「ウルオッサ、面倒臭がっている場合では無いわ」	has:귀찮아하	fix	fixed
 lexical:garu	親をうっとうしがる息子に、マスターズは苦笑いだ。	has:귀찮아하	fix	fixed
@@ -214,7 +215,7 @@ lexical:garu	嫌がる猫。	has:싫어하는	keep	fixed
 lexical:garu	痛がる。	has:아파한다	keep	fixed
 lexical:garu	恥ずかしがる。	has:부끄러워한다	keep	fixed
 lexical:garu	欲しがる。	has:갖고 싶어한다	keep	fixed
-lexical:garu	寂しがっていた。	has:쓸쓸해 하고	keep	fixed
+lexical:garu	寂しがっていた。	has:쓸쓸해	keep	fixed
 lexical:garu	寂しがり屋だ。	has:외로움을 잘 타는	keep	fixed
 lexical:garu	ありがたがっていた。	has:고마워하고	fix	fixed
 lexical:garu	不安がっていた。	has:불안해하고	keep	fixed
@@ -225,14 +226,17 @@ lexical:garu	有難がられている。	has:고맙게 여겨지고 있다	fix	f
 lexical:garu	皆に珍しがられた。	has:신기하게 여겨졌다	fix	fixed
 lexical:garu	煩わしがられる。	has:귀찮게 여겨진다	fix	fixed
 lexical:garu	わずらわしがられていた。	has:귀찮게 여겨지고 있었다	fix	fixed
+lexical:garu	うっとうしがられた。	has:귀찮게 여겨졌다	fix	fixed
+lexical:garu	面倒くさがられる。	has:귀찮게 여겨진다	fix	fixed
+lexical:garu	懐かしがられる。	has:그립게 여겨진다	fix	fixed
 lexical:garu	ありがたく思われる。	has:고맙게 생각된다	keep	fixed
 lexical:garu	珍しいものだ。	has:희귀한 것이다	keep	fixed
 lexical:garu	煩わしい手続きだ。	has:번거로운 수속이다	keep	fixed
-lexical:garu	誰からも嫌がられる。	has:미움 받는다	keep	fixed
-lexical:garu	嘆くように、寂しがるように、アグラカトラは柔和に呟いた。	has:쓸쓸해 하	keep	fixed
-lexical:garu	一二三が寂しがる子犬のようにこちらを見つめた。	has:쓸쓸해 하	keep	fixed
-lexical:garu	「キャロも寂しがっているようなので、今日は川の字で寝ましょう。あなたは真ん中ですよ。」	has:쓸쓸해 하	keep	fixed
-lexical:garu	他人を避けながらも、寂しがる僕の性格はもうどうしようもないな、と心の中で嘲笑してしまった。	has:쓸쓸해 하	keep	fixed
+lexical:garu	誰からも嫌がられる。	has:미움	keep	fixed
+lexical:garu	嘆くように、寂しがるように、アグラカトラは柔和に呟いた。	has:쓸쓸해	keep	fixed
+lexical:garu	一二三が寂しがる子犬のようにこちらを見つめた。	has:쓸쓸해	keep	fixed
+lexical:garu	「キャロも寂しがっているようなので、今日は川の字で寝ましょう。あなたは真ん中ですよ。」	has:쓸쓸해	keep	fixed
+lexical:garu	他人を避けながらも、寂しがる僕の性格はもうどうしようもないな、と心の中で嘲笑してしまった。	has:쓸쓸해	keep	fixed
 lexical:tatakiwaru	皇女は鏡を叩き割った。	has:깨부수	fix	fixed
 lexical:tatakiwaru	苛ついて机を叩き割る。	has:깨부순	fix	fixed
 lexical:tatakiwaru	あ、叩き割ってみようかな。	has:깨부수	fix	fixed
@@ -266,7 +270,7 @@ lexical:biri	ビリになった。	has:꼴찌가	fix	fixed
 lexical:biri	ビリっけつだ。	has:꼴찌다	fix	fixed
 lexical:biri	ビリビリする。	has:찌릿찌릿	keep	fixed
 lexical:biri	リハビリの専門家も何人も尋ねた。	has:재활	keep	fixed
-lexical:biri	此処なら人の目もないし、ノンビリできるし。	has:빈둥거릴	keep	fixed
+lexical:biri	此処なら人の目もないし、ノンビリできるし。	lacks:꼴찌	keep	fixed
 lexical:biri	「新人イビリだよー？」	lacks:꼴찌	keep	fixed
 lexical:biri	どいつもこいつもビビリやがって……！」	lacks:꼴찌	keep	fixed
 lexical:biri	「わー！エールとバルトありがとうっ！！あのビリビリ治って良かったねっ！！」	lacks:꼴찌	keep	fixed
