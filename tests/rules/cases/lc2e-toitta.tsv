@@ -1,0 +1,22 @@
+# 규칙: GRM-170
+rule	input	expected	kind	layer
+cx:lc2e-toitta:5	射撃はセリカよりマシという程度……といったところか	has:정도……인가	fix	rewrites
+cx:lc2e-toitta:5	その辺は流石魔女といったところか。	!rule:cx:lc2e-toitta:5	keep	rewrites
+cx:lc2e-toitta:5	さすがといったところか。	!rule:cx:lc2e-toitta:5	keep	rewrites
+cx:lc2e-toitta:10	二十人といったところか。	has:20명 정도인가.	fix	rewrites
+cx:lc2e-toitta:10	銃まで１ｍといったところか。	has:m 정도인가.	fix	rewrites
+cx:lc2e-toitta:10	３０代の半ばといったところ。	has:반 정도.	fix	rewrites
+cx:lc2e-toitta:10	二十秒といったところだろう。	has:20초 정도일	fix	rewrites
+cx:lc2e-toitta:10	０枚と言ったところなのですよ。	has:0장 정도인	fix	rewrites
+cx:lc2e-toitta:10	年齢も三十代といったところか。	has:30대 정도인가.	fix	rewrites
+cx:lc2e-toitta:10	走って１５分と言ったところか。	has:15분 정도인가.	fix	rewrites
+cx:lc2e-toitta:10	十代半ばといったところだろう。	has:중반 정도일	fix	rewrites
+cx:lc2e-toitta:10	歳は四十前と言ったところだろう。	has:전 정도일	fix	rewrites
+cx:lc2e-toitta:10	年の頃は３０代といったところか。	has:30대 정도인가.	fix	rewrites
+cx:lc2e-toitta:10	残り１０分と言ったところだろう。	has:10분 정도일	fix	rewrites
+cx:lc2e-toitta:10	「あと１０人といったところか。」	has:10명 정도인가.	fix	rewrites
+cx:lc2e-toitta:10	流石のティナさんといったところだろうか。	!rule:cx:lc2e-toitta:10	keep	rewrites
+cx:lc2e-toitta:10	そこはさすがロボットといったところか。	!rule:cx:lc2e-toitta:10	keep	rewrites
+cx:lc2e-toitta:20	年は二十台半ば、といったところだろうか。	has:반 정도일까	fix	rewrites
+cx:lc2e-toitta:20	さすがは女神様といったところか。	!rule:cx:lc2e-toitta:20	keep	rewrites
+cx:lc2e-toitta:20	さながら、天使の弓といったところだ。	!rule:cx:lc2e-toitta:20	keep	rewrites

@@ -1,0 +1,22 @@
+# 규칙: GRM-166
+rule	input	expected	kind	layer
+cx:lc2e-dakedearu:10	と言うだけである。	has:말하는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	と問い質しただけであった。	has:추궁한 것뿐이었다.	fix	rewrites
+cx:lc2e-dakedearu:10	再び庶民の身に戻るだけである。	has:돌아가는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	黒歴史が一つ増えただけである。	has:늘어난 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	後はスイッチをいれるだけである。	has:넣는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	楽しいからやっているだけである。	has:있는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	無駄に食料を浪費するだけである。	has:낭비하는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	使ってひたすら走っただけである。	has:달린 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	ただ、扉が並んでいるだけである。	has:있는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	ただ、穏やかに笑うだけであった。	has:웃는 것뿐이었다.	fix	rewrites
+cx:lc2e-dakedearu:10	目に付いた場所を曲がっただけである。	has:돈 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	士をただじっと見ているだけであった。	has:있는 것뿐이었다.	fix	rewrites
+cx:lc2e-dakedearu:10	ただ、漏れてしまっているだけである。	has:있는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	ただ、向いていないというだけである。	has:하는 것뿐이다.	fix	rewrites
+cx:lc2e-dakedearu:10	集まってくるのは孤児だけである。	!rule:cx:lc2e-dakedearu:10	keep	rewrites
+cx:lc2e-dakedearu:10	居間にはかれんと杜生と監督だけである。	!rule:cx:lc2e-dakedearu:10	keep	rewrites
+cx:lc2e-dakedearu:10	ちなみに褌なのは、皮膚だけである。	!rule:cx:lc2e-dakedearu:10	keep	rewrites
+cx:lc2e-dakedearu:10	と言うことは僕と安藤の２人だけである。	!rule:cx:lc2e-dakedearu:10	keep	rewrites
+cx:lc2e-dakedearu:10	二人を繋げるのは一本の伝声管だけである。	!rule:cx:lc2e-dakedearu:10	keep	rewrites
+cx:lc2e-dakedearu:10	違うのは規模だけである。	!rule:cx:lc2e-dakedearu:10	keep	rewrites

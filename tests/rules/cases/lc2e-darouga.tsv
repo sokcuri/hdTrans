@@ -1,0 +1,27 @@
+# 규칙: GRM-161
+rule	input	expected	kind	layer
+cx:lc2e-darouga:10	「おいゆう。最初のは余計だろうが！！」	has:쓸데없잖아	fix	rewrites
+cx:lc2e-darouga:10	「当たり前だ。そう書いてあるだろうが！」	has:있잖아	fix	rewrites
+cx:lc2e-darouga:10	今思えばだいぶ無理をしていたのだろうが。	!rule:cx:lc2e-darouga:10	keep	rewrites
+cx:lc2e-darouga:10	「まぁこの魔力だとろうそくに火をつけるくらいしかできないでしょうが。」	!rule:cx:lc2e-darouga:10	keep	rewrites
+cx:lc2e-darouga:12	「入学式の日は、案内板が立ってただろうが？」	has:서 있었잖아	fix	rewrites
+cx:lc2e-darouga:12	無論、それだけではないのだろうが。	!rule:cx:lc2e-darouga:12	keep	rewrites
+cx:lc2e-darouga:12	「ほとんど覚えてないでしょうが」	!rule:cx:lc2e-darouga:12	keep	rewrites
+cx:lc2e-darouga:15	「否定しても仕方ないだろうが」	has:없잖아	fix	rewrites
+cx:lc2e-darouga:15	「夢だったら痛くないだろうが」	has:않잖아	fix	rewrites
+cx:lc2e-darouga:15	「それは今とは関係ないだろうが！」	has:관계없잖아	fix	rewrites
+cx:lc2e-darouga:15	話が飲み込めないのだろうが。	!rule:cx:lc2e-darouga:15	keep	rewrites
+cx:lc2e-darouga:30	「席を外すから呼ぶようにお願いしたんでしょうが！」	has:부탁했잖아	fix	rewrites
+cx:lc2e-darouga:30	「なにって、あんたがクラス出し物で考案したんでしょうが。蜂蜜キャラメル」	has:고안했잖아	fix	rewrites
+cx:lc2e-darouga:30	「あなたが始めたんでしょうが。止めたいってのなら、まず襲った訳を教えなさいよ」	has:시작했잖아	fix	rewrites
+cx:lc2e-darouga:30	まあ、だから素手だったのだろうが。	!rule:cx:lc2e-darouga:30	keep	rewrites
+cx:lc2e-darouga:40	「気分など、悪いに決まってるだろうが！このロープをほどけ！」	has:뻔하잖아	fix	rewrites
+cx:lc2e-darouga:40	身なりを整える時間でもあったのだろうが。	!rule:cx:lc2e-darouga:40	keep	rewrites
+cx:lc2e-darouga:50	「他人事だろうが」	has:일이잖아	fix	rewrites
+cx:lc2e-darouga:50	「普通逆だろうが。」	has:보통반대잖아	fix	rewrites
+cx:lc2e-darouga:50	「お前が詳しいのは、二次元の話だろうが」	has:이야기잖아	fix	rewrites
+cx:lc2e-darouga:50	お前が脱線させたのだろうが。	!rule:cx:lc2e-darouga:50	keep	rewrites
+cx:lc2e-darouga:55	「先生も元は学生でしょうが。」	has:학생이잖아	fix	rewrites
+cx:lc2e-darouga:55	「引かせたのは陛下でしょうが。」	has:폐하잖아	fix	rewrites
+cx:lc2e-darouga:55	「アンタが覗くからでしょうが！！」	has:때문이잖아	fix	rewrites
+cx:lc2e-darouga:55	ついでに燃費も悪くなるのだろうが。	!rule:cx:lc2e-darouga:55	keep	rewrites
