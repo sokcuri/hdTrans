@@ -14,7 +14,7 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
 | `web/src/translator.ts` | 공용 [TypeScript API](typescript-api.md). 문자열 번역, 사용자 사전과 Ehnd 설정, JSON 선택 기록 |
 | `web/src/dictionaries.ts` | 사전 목록(IndexedDB), 데스크톱 파일 가져오기와 내보내기, 적용할 사전 합치기 |
 | `web/src/grid.ts` | 사용자 사전, 이름 표 편집기 (탭 구분 표, 붙여 넣기, 파일 열기, 저장) |
-| `web/src/names.ts` | 이름 표를 이름 목록으로 (종류가 없으면 `full`), 내보낼 때는 사용자 사전 줄로 (품사가 없으면 `name`) 바꿈 |
+| `web/src/names.ts` | 이름 표를 이름 목록으로 (종류가 없으면 `full`), 내보낼 때는 사용자 사전 줄로 (종류는 `name`, `surname`, `n`으로, `hon`은 뺌) 바꿈 |
 | `web/examples/`, `web/examples.tsv` | 예제 텍스트와 메뉴 이름 |
 | `web/build.mjs` | 네이티브 CLI로 `dicts.hdsnap`을 컴파일하고 사이트를 `build/web/dist`에 만듦 |
 | `web/check.mjs` | 헤드리스 Chrome으로 사이트를 확인 |
@@ -30,7 +30,7 @@ https://trans.kuri.kr 의 웹 데모는 `web/`에 있습니다. 번역은 모두
   잘못된 줄은 사전 이름과 행으로 알리고, 잘못된 판이면 이전에 적용한 사전을 유지합니다.
 - 사전은 IndexedDB(`hdtrans` 데이터베이스)에 둡니다. 처음 열 때 이전 판이 localStorage에 둔 사용자 사전과 이름 표를
   **기본 사용자 사전**으로 옮깁니다(localStorage 값은 지우지 않음).
-- 가져오기와 내보내기는 데스크톱 파일 형식입니다. hdTrans 사전은 `userdict-이름.txt`(이름 표는 `name` 줄로 붙임)로 `user/`에,
+- 가져오기와 내보내기는 데스크톱 파일 형식입니다. hdTrans 사전은 `userdict-이름.txt`(이름 표는 `name`, `surname`, `n` 줄로 붙임)로 `user/`에,
   Ehnd 사전은 `UserDict_이름.txt`로 Ehnd 폴더에 둡니다. 가져올 때는 셋째 열(Ehnd는 숫자, hdTrans는 품사)로, 정하지 못하면 파일 이름
   (`UserDict…`)으로 형식을 정합니다. 위 **내보내기**는 체크한 사전을 우선순위대로 합친 `userdict.txt`(Ehnd 사전이 있으면
   `UserDict.txt`와 함께 ZIP)입니다.

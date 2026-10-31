@@ -190,8 +190,8 @@ hdTrans.translate("衣更は今日も元気だ。", { names: "衣更\t이사라"
 - `HdTrans.init({ names })`나 `setNames(text)`는 다음 번역부터, `translate(text, { names })`는 그 호출에만 적용합니다.
 - 목록은 `setNames`에서 컴파일하므로 줄마다가 아니라 문서마다 한 번 줍니다. `translate`의 `names`는 호출마다 그 목록과 원래 목록을
   다시 컴파일하므로, 같은 목록을 여러 번 쓰면 `setNames`로 둡니다.
-- 잘못된 줄이나 컴파일되지 않는 이름이 있으면 나머지 줄을 적용한 뒤 `Error`를 던집니다. 메시지는 `hdtrans: name list:` 다음 줄부터
-  `줄: 이유`입니다. `getNames()`는 마지막으로 준 원문을 돌려줍니다.
+- 잘못된 줄이나 컴파일되지 않는 이름이 있으면 `setNames`와 `translate`는 나머지 줄을 적용한 뒤 `Error`를 던지고, `init`은 실패합니다.
+  메시지는 `hdtrans: name list:` 다음 줄부터 `줄: 이유`입니다. `getNames()`는 마지막으로 준 원문을 돌려줍니다.
 - 목록은 `setUserDict`, `setUserDictRaw`, `setEhnd`, `reset()` 뒤에도 유지됩니다.
 
 ## Ehnd 필터를 실행 중에 바꾸기

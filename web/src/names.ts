@@ -1,7 +1,12 @@
+// The part of speech of a user dictionary row for each kind of a name list.
+const kindPos: Record<string, string> = {
+  given: 'name', full: 'name', nick: 'name', family: 'surname', place: 'n', org: 'n', title: 'n',
+};
+
 /**
  * Returns a names table as a plain dictionary: a line without a part of
- * speech gets name, and a line without a tab is split at its first run of
- * spaces.
+ * speech gets name, a kind becomes its part of speech, the option hon is
+ * dropped, and a line without a tab is split at its first run of spaces.
  */
 export function namesDict(text: string): string {
   return text
@@ -17,6 +22,11 @@ export function namesDict(text: string): string {
       }
       if (f.length === 2) f.push('name');
       else if (f.length > 2 && f[2].trim() === '') f[2] = 'name';
+      else f[2] = kindPos[f[2].trim()] ?? f[2];
+      if (f.length > 3) {
+        f[3] = f[3].split(' ').filter((o) => o !== 'hon').join(' ');
+        while (f.length > 3 && f[f.length - 1].trim() === '') f.pop();
+      }
       return f.join('\t');
     })
     .join('\n');
