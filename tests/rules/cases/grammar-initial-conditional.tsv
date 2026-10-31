@@ -1,0 +1,35 @@
+# 규칙: GRM-96
+rule	input	expected	kind	layer
+cx:initial-conditional:30	「となれば、あとは最新データが反映されるのを待つだけ」	has:「그렇게 되면,	fix	rewrites
+cx:initial-conditional:10	あれはトビだろうか。だとしたら、屍肉を漁るたぐいの鳥だ。	has:일까. 그렇다면, 송장	fix	rewrites
+cx:initial-conditional:10	「だとしたら、ほとんど休みなく働いてきたってことだよね」	has:「그렇다면,	fix	rewrites
+cx:initial-conditional:10	「……だとしたら、オレたちが置き去りにされたのは間違いないだろうな」	has:「……그렇다면,	fix	rewrites
+cx:initial-conditional:30	となれば、今回は有間さんの部屋から一番遠い──	has:그렇게 되면,	fix	rewrites
+cx:initial-conditional:10	「だとすれば、このネタは、メンバーを見てやらないとね」	has:「그렇다면,	fix	rewrites
+cx:initial-conditional:10	「だとすると、他の二人が甘いだけかもしれない」	has:「그렇다면,	fix	rewrites
+cx:initial-conditional:10	「ふーん……そうですかぁ。だとしたら、本人がモルモットになってもいいよ	has:그렇습니까. 그렇다면,	fix	rewrites
+cx:initial-conditional:10	だとすると、この二人を連れて遭遇したくない。	그렇다면, 이 두 사람을 데려 조우하고 싶지 않다.	fix	rewrites
+cx:initial-conditional:10	「とすると、襲撃してきたのはＳＯＲＤという事になりますね」	has:「그렇다면,	fix	rewrites
+cx:initial-conditional:10	だとすると、今までの会話はなんだったんだ。	has:그렇다면, 지금까지의	fix	rewrites
+cx:initial-conditional:10	だとしたら……	그렇다면……	fix	rewrites
+cx:initial-conditional:10	だとしたら、いったいなにが現れるんだろう？	has:그렇다면, 도대체	fix	rewrites
+cx:initial-conditional:10	「だとすると……会長が最初に票読みした分の何割かは	has:「그렇다면……	fix	rewrites
+cx:initial-conditional:10	また誤情報を掴まされた可能性がある。だとすると、人物は他の場所にいる	has:있다. 그렇다면,	fix	rewrites
+cx:initial-conditional:20	「ふむ……であれば、公約にしてしまいましょう」	has:「흠……그렇다면,	fix	rewrites
+cx:initial-conditional:10	とすると、発言にも信憑性が出てくる。	has:그렇다면, 발언에도	fix	rewrites
+cx:initial-conditional:10	「だとしたら、それは良い傾向かもしれません」	has:「그렇다면,	fix	rewrites
+cx:initial-conditional:10	「んー……だとしたら、今日は終わりかな？」	has:「음……그렇다면,	fix	rewrites
+cx:initial-conditional:10	だとすれば、傭兵として自由に生きられるのではないだろうか？	has:그렇다면, 용병으로서	fix	rewrites
+cx:initial-conditional:10	「はぁ。だとしたら、もっと感じてください」	has:하아. 그렇다면,	fix	rewrites
+cx:initial-conditional:30	「となれば、当然私たちの出番ということになる」	has:「그렇게 되면,	fix	rewrites
+cx:initial-conditional:10	「……タナトスじゃない……としたら、誰だあいつ？」	has:……그렇다면,	fix	rewrites
+cx:initial-conditional:30	となれば……そうだな、傭兵にしよう。	has:그렇게 되면……	fix	rewrites
+cx:initial-conditional:30	となったら、もう逃げるしかない	has:그렇게 되면,	fix	rewrites
+cx:initial-conditional:20	「であれば！　であればまだ方法があります！」	!rule:cx:initial-conditional:20	keep	rewrites
+cx:initial-conditional:10	彼が犯人だとしたら、困る	!rule:cx:initial-conditional:10	keep	rewrites
+cx:initial-conditional:20	学生であれば、無料です	!rule:cx:initial-conditional:20	keep	rewrites
+cx:initial-conditional:30	春になれば、花が咲く。	!rule:cx:initial-conditional:30	keep	rewrites
+cx:initial-conditional:30	「となると、ご本人に話を聞くことが出来ませんね」	!rule:cx:initial-conditional:30	keep	rewrites
+cx:initial-conditional:10	と、すると目の前に扉が現れた。	!rule:cx:initial-conditional:10	keep	rewrites
+cx:initial-conditional:10	それを試すとしたら、今しかない	!rule:cx:initial-conditional:10	keep	rewrites
+cx:initial-conditional:20	それが本当であれば、問題だ。	!rule:cx:initial-conditional:20	keep	rewrites

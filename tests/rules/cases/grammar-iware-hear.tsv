@@ -2,7 +2,7 @@ rule	input	expected	kind	layer
 dict:gram:iware:hear-default	「毎日のように言われてるよ」	「거의 매일 듣고 있어」	fix	local
 dict:gram:iware:hear-default	五月頭の連休には必ず言われるだろうし、	5월초 연휴에는 반드시 들을 테고,	fix	local
 dict:gram:iware:hear-default	今まで何度となく言われてきた言葉。	지금까지 여러 번 들어 온 말.	fix	local
-dict:gram:iware:hear-default	それと、必ずお酒のことは言われます。	그것과 반드시 술은 듣습니다.	fix	local
+dict:gram:iware:hear-default	それと、必ずお酒のことは言われます。	그리고, 반드시 술은 듣습니다.	fix	local
 dict:gram:iware:speaker	言われるまでもなく、彼は	말할 것도 없이, 그는	keep	local
 dict:gram:iware:speaker	「……言われなくても分かってる」	「……말하지 않아도 알고 있어」	keep	local
 dict:gram:iware:speaker	言われるまま、帽子を脱いだ。	말하는 대로, 모자를 벗었다.	keep	local

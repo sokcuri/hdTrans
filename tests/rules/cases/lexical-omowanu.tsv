@@ -1,0 +1,23 @@
+# 규칙: LEX-101
+rule	input	expected	kind	layer
+cx:omowanu:10	「思わぬ盲点って……」	has:생각하지 못한 맹점	fix	rewrites
+cx:omowanu:10	だが、実戦で思わぬ状況に陥る事はよくある。	has:생각하지 못한 상황에	fix	rewrites
+cx:omowanu:10	他の３人は思わぬラストギャンブルにごくりと唾を飲みこむ。	has:생각하지 못한 라스트	fix	rewrites
+cx:omowanu:10	魅音からの思わぬ発言。	has:생각하지 못한 발언	fix	rewrites
+cx:omowanu:10	思わぬ盲点だったのです」	has:생각하지 못한 맹점이었던	fix	rewrites
+cx:omowanu:10	思わぬところから、声がかかった。	has:생각하지 못한 곳	fix	rewrites
+cx:omowanu:10	思わぬタイミングで話を振られたらしく	has:생각하지 못한 타이밍	fix	rewrites
+cx:omowanu:10	思わぬところで恥をかいてしまいました	has:생각하지 못한 곳에서	fix	rewrites
+cx:omowanu:10	果物屋を覗きこんだわたしは、思わぬ物を見つけて	has:생각하지 못한	fix	rewrites
+cx:omowanu:10	夢にも思わぬ出来事が起きた。	has:꿈에도 생각하지 못한 사건	fix	rewrites
+cx:omowanu:10	思わぬ形で再会した。	has:생각하지 못한	fix	rewrites
+cx:omowanu:10	思わぬ方向に話が進む	has:생각하지 못한 방향	fix	rewrites
+cx:omowanu:10	思わぬ反撃を受けた。	has:생각하지 못한 반격	fix	rewrites
+cx:omowanu:10	思わぬ収穫があった。	has:생각하지 못한 수확	fix	rewrites
+cx:omowanu:10	思わぬ事態になった。	has:생각하지 못한 사태	fix	rewrites
+cx:omowanu:10	わしはそうは思わぬ。	!rule:cx:omowanu:10	keep	rewrites
+cx:omowanu:10	そう思わぬ者もいる	!rule:cx:omowanu:10	keep	rewrites
+cx:omowanu:10	思わない人もいる	!rule:cx:omowanu:10	keep	rewrites
+cx:omowanu:10	誰も思わぬだろう	!rule:cx:omowanu:10	keep	rewrites
+cx:omowanu:10	それを悪いと思わぬ連中だ	!rule:cx:omowanu:10	keep	rewrites
+cx:omowanu:10	思わず笑ってしまった。	!rule:cx:omowanu:10	keep	rewrites

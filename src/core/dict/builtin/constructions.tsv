@@ -937,3 +937,55 @@ cx:neg-clause-ii:10	GRM-61	&&7 S+0== "い" L+0== "좋다" F-1== "conjugating" Y-
 cx:neg-clause-oru:10	GRM-62	&&2 :oru-exists Y+0== "1지 않습니다"	set-target "&M9@" set-ending "7니다"	魔獣はおりません 마수는 없습니다
 cx:neg-clause-oru:20	GRM-62	&&2 :oru-exists Y+0== "1지 않아요"	set-target "&M9@" set-ending "6요"	ここにはおりませんよ 여기에는 없어요
 cx:neg-clause-oru:30	GRM-62	&&2 :oru-exists Y+0== "1지 않았습니다"	set-target "&M9@" set-ending "5습니다"	誰もおりませんでした 아무도 없었습니다
+//= soreto-initial	after OfferPromise 18	A それと with a comma that opens its sentence adds what follows to what was said before: 그리고 (それと、もうひとつ 그리고, 또 하나). Not inside a list (これとそれと、あれ 이것과 그것과, 저것), nor without the comma (それとこれとは 그것과 이것과는).
+cx:soreto-initial:10	GRM-90	&&3 S+0== "それ" S+1== "と、" ||3 F+0== "opens-line" F+0== "after-pause" S-1== "00「『（(“"	set-target "그리고" set-target@+1 ","	それと、もうひとつ 그리고, 또 하나
+//= dake-atte	after OfferPromise 28	A predicate with the ending だけ before あって (ある in its て form) gives the reason one expects what follows: its adnominal with 만큼 and no 있다 (訓練を積んでいるだけあって 훈련을 쌓고 있는 만큼, 能力が高いだけあって 능력이 높은 만큼, 王宮と言うだけあって 왕궁이라고 말하는 만큼). A past keeps its tense (スパイ教育を受けただけあって 스파이 교육을 받은 만큼). After a noun it stays 답게 (読書家だけあって 독서가답게); a だけ that is no ending keeps ある (これだけあって 이만큼 있어).
+cx:dake-atte:10	GRM-91	&&4 S+0== "あ" ||2 U+0== "って" U+0== "て" U-1== "Rるだけ" Y-1== "R있을 뿐"	replace-ending-tail@-1 "있을 뿐" "있는 만큼" set-target "" set-ending ""	積んでるだけあって 쌓고 있는 만큼
+cx:dake-atte:20	GRM-91	&&5 S+0== "あ" ||2 U+0== "って" U+0== "て" U-1== "Rだけ" P-1== "4**" ||2 I-1== "Rただけ" I-1== "Rだだけ"	set-ending@-1 "8 만큼" set-target "" set-ending ""	受けただけあって 받은 만큼
+cx:dake-atte:25	GRM-91	&&4 S+0== "あ" ||2 U+0== "って" U+0== "て" U-1== "Rだけ" P-1== "7**8**"	set-ending@-1 "4 만큼" set-target "" set-ending ""	高いだけあって 높은 만큼
+cx:dake-atte:30	GRM-91	&&4 S+0== "あ" ||2 U+0== "って" U+0== "て" U-1== "Rだけ" P-1== "4**"	set-ending@-1 "0 만큼" set-target "" set-ending ""	言うだけあって 말하는 만큼
+//~ possessive-pronoun	나=내 저=제 너=네	The possessive form of a pronoun before a noun it owns (내 입장, 제 입장, 네 입장).
+//: kara-suru-if	||4 I+1== "すると" I+1== "したら" I+1== "すれば" &&2 I+1== "して" S+2== "み"	The する after から is a condition (すると, したら, すれば) or して before みる.
+//: kara-person	||4 D+0== "에게서" A-1== "VHn" S-1== @honorific.name &&2 F-1== "katakana" G-1== "Nm"	The から follows a person.
+//= kara-suru	after OfferPromise 48	A noun with からすると, からしたら, からすれば or からしてみれば names the standpoint a judgement is made from: after a person 입장에서 보다, a pronoun in its possessive form (俺からしたら 내 입장에서 보면), else (으)로 보다 (性格からすると 성격으로 보면); the する is 보다, and before みる the みる is that 보다 and the する is dropped (ゆうくんからしてみれば 유 군 입장에서 보면). Not a して of an act that starts from the noun (青海さんからしてきた, マッサージからしてやろう), nor a から of the time an act starts (来週からすると決めた 다음 주부터 하기로 결정했다).
+cx:kara-suru:10	GRM-93	&&5 S+0== "から" D+0!= "부터" S+1== "する" :kara-suru-if :kara-person	set-target " 입장에서" map-lemma@-1 @possessive-pronoun	俺からしたら 내 입장에서 보면
+cx:kara-suru:20	GRM-93	&&5 S+0== "から" D+0!= "부터" S+1== "する" :kara-suru-if !1 :kara-person	set-target "(으)로"	性格からすると 성격으로 보면
+cx:kara-suru:30	GRM-93	&&3 S+0== "私から" S+1== "する" :kara-suru-if	set-target "내 입장에서"	私からすれば 내 입장에서 보면
+//= kara-suru-verb	after OfferPromise 58	The する of a standpoint (kara-suru) is 보다 in its condition 면 (立地からすると考えられない 입지로 보면 생각할 수 없다, not 본다고); before みる the みる is that 보다 and the する is dropped.
+cx:kara-suru-verb:10	GRM-93	&&5 S+0== "する" S-1== "Rから" ||2 D-1== "R입장에서" D-1== "(으)로" I+0== "して" S+1== "み"	set-target "" set-ending ""	ゆうくんからしてみれば 유 군 입장에서 보면
+cx:kara-suru-verb:20	GRM-93	&&4 S+0== "する" S-1== "Rから" ||2 D-1== "R입장에서" D-1== "(으)로" ||3 I+0== "すると" I+0== "すれば" I+0== "したら"	set-target "&AY@" set-ending "2면"	立地からすると考えられない 입지로 보면 생각할 수 없는
+//= koto-nonai	after OfferPromise 68	A dictionary form with こと before のない (or のなかった) describing a noun says the act does not happen: (으)ㄹ 일이 없는 (途切れることのない快楽 끊길 일이 없는 쾌락), not the impossibility 리가 없는. A past keeps 적이 없는 (見たことのない 본 적이 없는).
+cx:koto-nonai:10	GRM-94	&&2 Y+0== "3리" S+1== "のな"	set-ending "3 일"	途切れることのない快楽 끊길 일이 없는 쾌락
+//= tokoro-kanji-past	after OfferPromise 78	The 所 after a past verb before a comma is the formal noun ところ of what one found on doing it, as the kana spelling reads: the verb takes 는데 and the 所 is dropped (試しにクリックしてみた所、普通に読めた 시험 삼아 클릭해 보았는데, 보통으로 읽을 수 있었다). Not after a progressive, where 所 is the place (住んでいた所、 살고 있던 곳,).
+cx:tokoro-kanji-past:10	GRM-95	&&5 S+0== "所" S+1== "、" Y-1== "8" ||2 I-1== "Rた" I-1== "Rだ" !1 ||2 S-1== "い" S-1== "居"	set-ending@-1 "5는데" set-target ""	各地を回った所、 각지를 돌았는데,
+//: kimatteru-end	||10 Y+0== "6 있다" Y+0== "6 있어" Y+0== "6 있어요" Y+0== "6 있지" Y+0== "6 있지요" Y+0== "6 있잖아" Y+0== "6 있습니다" Y+0== "6 있고" Y+0== "0 거지" Y+0== "6"	The ending of 決まって(い)る before a final that the kimatteru-end family rewrites.
+//: kimatteru-sure	&&4 S+0== "決ま" D+0== "정해&AL@" I+0== "L決まって" :kimatteru-end	A 決まって(い)る whose ending kimatteru-end knows.
+//: kimatteru-said	||2 F+0== "quoted" Y+0!= "6 있다"	The 決まってる is said (in 「」, or with a final other than the plain one).
+//~ kimatteru-noun	에=일 로=일 으로=일	A word ending in a particle of place or means before に決まってる, as the noun the 일 makes a predicate of (あそこに 저기일, 最高に 최고일).
+//= kimatteru	after OfferPromise 88	What stands before に決まってる (決まっている, 決まってんだ…) is what is sure to be so: it ends in the adnominal (으)ㄹ or 일 and 決まってる is 게 뻔하다 (高いに決まってる 비쌀 게 뻔하다, ナシに決まってんだろ 없음일 게 뻔하지, 親友だからに決まってるでしょ 절친이기 때문일 게 뻔하지, 手伝うために決まってる 돕기 위해서일 게 뻔해). After a noun or a 形容動詞 the line must be said (in 「」 or with a final), since 会議は月曜に決まっている and 時間は正確に決まっている are decisions: 정해져 있다.
+cx:kimatteru:10	GRM-92	&&3 :kimatteru-sure S-1== "に" S-2== "だから"	set-target "게 뻔&AV@" set-target@-1 "일" set-target@-2 "이기 때문"	親友だからに決まってる 절친이기 때문일 게 뻔하다
+cx:kimatteru:20	GRM-92	&&4 :kimatteru-sure S-1== "に" F-2== "conjugating" ||2 Y-2== "0" Y-2== "4"	set-target "뻔&AV@" set-target@-1 " 게" set-ending@-2 "3"	言われるに決まってる 들을 게 뻔하다
+cx:kimatteru:30	GRM-92	&&2 :kimatteru-sure Y-1== "R기 위해"	set-target "게 뻔&AV@" set-ending@-1 "1기 위해서일"	手伝うために決まってる 돕기 위해서일 게 뻔하다
+cx:kimatteru:40	GRM-92	&&3 :kimatteru-sure Y-1== "1게" :kimatteru-said	set-target "뻔&AV@" set-ending@-1 "3 게"	大事に決まってる 소중할 게 뻔하다
+cx:kimatteru:50	GRM-92	&&5 :kimatteru-sure S-1== "に" !1 F-2== "conjugating" !1 S-2== "00、。,「」『』！？!?" :kimatteru-said	set-target "게 뻔&AV@" set-target@-1 "일"	ナシに決まってんだろ 없음일 게 뻔하지
+cx:kimatteru:60	GRM-92	&&5 :kimatteru-sure S-1== "Rに" S-1!= "に" !1 F-1== "conjugating" :kimatteru-said	set-target "게 뻔&AV@" map-target-tail@-1 @kimatteru-noun	あそこに決まってます 저기일 게 뻔합니다
+//= kimatteru-end	after OfferPromise 98	The ending of a 게 뻔하다 that kimatteru wrote from 決まってる: the final without 있다 on 뻔하다 (6 있잖아 → 뻔하잖아).
+cx:kimatteru-end:10	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있다"	set-ending "1다"	最高に決まってる 최고일 게 뻔하다
+cx:kimatteru-end:20	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있어"	set-ending "6"	大事に決まってるさ 소중할 게 뻔해
+cx:kimatteru-end:30	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있어요"	set-ending "6요"	パンの耳に決まってますわ 빵 가장자리일 게 뻔해요
+cx:kimatteru-end:40	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있지"	set-ending "1지"	親友だからに決まってるでしょ 절친이기 때문일 게 뻔하지
+cx:kimatteru-end:50	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있지요"	set-ending "1지요"	素晴らしいに決まってますよね 훌륭할 게 뻔하죠
+cx:kimatteru-end:70	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있잖아"	set-ending "1잖아"	美冬のことに決まってるじゃない 미후유일 게 뻔하잖아
+cx:kimatteru-end:90	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있습니다"	set-ending "7니다"	あそこに決まってます 저기일 게 뻔합니다
+cx:kimatteru-end:100	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "6 있고"	set-ending "1고"	言われるに決まってるし 들을 게 뻔하고
+cx:kimatteru-end:120	GRM-92	&&2 ||2 D+0== "게 뻔&AV@" D+0== "뻔&AV@" Y+0== "0 거지"	set-ending "1지"	ナシに決まってんだろ 없음일 게 뻔하지
+//: opens-sentence	||3 F+0== "opens-line" F+0== "after-pause" S-1== "00「『（(“"	The word opens its sentence (after a sentence end, an opening bracket or a pause).
+//= initial-conditional	after OfferPromise 108	A conditional of a copula or a quote that opens its sentence with nothing before it (だとしたら, だとすると, だとすれば, とすると, としたら, であれば, before a comma, an exclamation or a pause) takes up what was just said: 그렇다면 (だとしたら、その人には理由はない 그렇다면, 그 사람에게는 이유는 없다); となれば and となったら are 그렇게 되면, as となると already reads. The する after the quote is dropped.
+cx:initial-conditional:10	GRM-96	&&4 ||2 S+0== "だと" S+0== "と" :opens-sentence ||3 I+1== "すると" I+1== "したら" I+1== "すれば" ||3 S+2== "00、，,！!―" F+2== "after-pause" F+1== "utterance-end"	set-target "그렇다면" set-target@+1 "" set-ending@+1 ""	だとしたら、 그렇다면,
+cx:initial-conditional:20	GRM-96	&&4 S+0== "であ" :opens-sentence ||3 I+0== "であれば" I+0== "であるなら" I+0== "であるならば" ||3 S+1== "00、，,！!―" F+1== "after-pause" F+0== "utterance-end"	set-target "그렇%C5@" set-ending "1다면"	であれば、 그렇다면,
+cx:initial-conditional:30	GRM-96	&&4 S+0== "とな" :opens-sentence ||2 I+0== "となれば" I+0== "となったら" ||3 S+1== "00、，,！!―" F+1== "after-pause" F+0== "utterance-end"	set-target "그렇게 &C6@"	となれば、 그렇게 되면,
+//= omowanu	after OfferPromise 118	A 思わぬ describing a noun with no object or quote of 思う before it is "unexpected": 생각지 못한, written 생각하지 못한 (思わぬ盲点 생각하지 못한 맹점, 夢にも思わぬ出来事 꿈에도 생각하지 못한 사건). Not when it negates a thought (そう思わぬ者 그렇게 생각하지 않는 자, 誰がそう思わぬか).
+cx:omowanu:10	LEX-101	&&5 S+0== "思" I+0== "思わぬ" Y+0== "1지 않는" ||2 P+1== "1**" S+1== "Lところ" !1 ||8 S-1== "そう" S-1== "こう" S-1== "とは" S-1== "って" S-1== "を" S-1== "が" I-1== "Rと" &&2 S-1== "は" ||2 S-2== "そう" S-2== "こう"	set-ending "1지 못한"	思わぬ盲点 생각하지 못한 맹점
+//= toiuka	after OfferPromise 128	A というか or っていうか (the quoting いう with the ending か) before a comma or an ellipsis that opens its sentence sharpens or corrects what was said before: 그보다, as an opening っていうか already reads (というか、なくなったら困るわ 그보다, 없어지면 곤란해). After a word of its sentence it names a way of putting that word, 라고 할까 (温室というか、 온실이라고 할까,), not the indirect question 라고 하는지.
+cx:toiuka:10	GRM-97	&&4 ||2 S+0== "とい" S+0== "ってい" ||2 I+0== "というか" I+0== "っていうか" :opens-sentence S+1== "00、，,…‥"	set-target "그보다    " set-ending ""	というか、なくなったら困る 그보다, 없어지면 곤란해
+cx:toiuka:20	GRM-97	&&5 ||2 S+0== "とい" S+0== "ってい" ||2 I+0== "というか" I+0== "っていうか" Y+0== "0지" !1 :opens-sentence S+1== "00、，,…‥"	set-ending "3까"	温室というか、 온실이라고 할까,

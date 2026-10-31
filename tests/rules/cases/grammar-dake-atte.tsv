@@ -1,0 +1,32 @@
+# 규칙: GRM-91
+rule	input	expected	kind	layer
+cx:dake-atte:25	コミュニケーション能力が高いだけあって、すぐに打ち解けているようだな。	has:능력이 높은 만큼,	fix	rewrites
+cx:dake-atte:10	飛車角落ちのハンデをもらってるだけあって、序盤は有利だ。	has:받고 있는 만큼, 초반은	fix	rewrites
+cx:dake-atte:30	まかせて、と言うだけあってマッサージはとても気持ちいい。	has:라고 말하는 만큼	fix	rewrites
+cx:dake-atte:30	さすがに母親が違うだけあって、ほとんど正反対だよなあ	has:어머니가 다른 만큼, 거의	fix	rewrites
+cx:dake-atte:30	修行を積んでいるだけあって回復力も高い	has:수행을 쌓고 있는 만큼 회복력도	fix	rewrites
+cx:dake-atte:10	山岳での戦闘訓練を積んでるだけあって、地の利を生かすのが上手いですね	has:쌓고 있는 만큼, 지리적	fix	rewrites
+cx:dake-atte:20	スパイ教育を受けただけあって、察知するのが早いんだな	has:교육을 받은 만큼,	fix	rewrites
+cx:dake-atte:30	師走って言うだけあって、みんな忙しそうですなぁ	has:이라고 말하는 만큼,	fix	rewrites
+cx:dake-atte:30	俺を元にしているだけあって、顔には俺の特徴が僅かにある。	has:하고 있는 만큼, 얼굴에는	fix	rewrites
+cx:dake-atte:30	王宮と言うだけあって、その庭園は果てしなく広い。	has:왕궁이라고 말하는 만큼, 그 정원은	fix	rewrites
+cx:dake-atte:20	長く生きただけあって、物知りだ。	has:산 만큼,	fix	rewrites
+cx:dake-atte:20	私が仕込んだだけあって、腕がいい。	has:가르친 만큼,	fix	rewrites
+cx:dake-atte:20	彼が作っただけあって、うまい。	has:만든 만큼,	fix	rewrites
+cx:dake-atte:25	静かなだけあって、よく眠れる。	has:조용한 만큼,	fix	rewrites
+cx:dake-atte:25	有名なだけあって、客が多い。	has:유명한 만큼,	fix	rewrites
+cx:dake-atte:25	値段が高いだけあって、味はいい。	has:비싼 만큼,	fix	rewrites
+cx:dake-atte:30	毎日練習しているだけあって、上手だ。	has:연습하고 있는 만큼,	fix	rewrites
+cx:dake-atte:30	プロを目指しているだけあって、真剣だ。	has:목표로 하고 있는 만큼,	fix	rewrites
+cx:dake-atte:30	財閥だけあってコーヒーは美味しい。	!rule:cx:dake-atte:30	keep	rewrites
+cx:dake-atte:30	「ＳＯＲＤだけあって、みんなすごいのよさ」	!rule:cx:dake-atte:30	keep	rewrites
+cx:dake-atte:30	確率がどんだけあるかって指針みたいな方程式のことですわ。	!rule:cx:dake-atte:30	keep	rewrites
+cx:dake-atte:10	でも……これだけあって、目が覚めないって	!rule:cx:dake-atte:10	keep	rewrites
+cx:dake-atte:20	でも……これだけあって、目が覚めないって	!rule:cx:dake-atte:20	keep	rewrites
+cx:dake-atte:30	筋肉がどれだけあるのか、直に触って確かめてみたかった	!rule:cx:dake-atte:30	keep	rewrites
+cx:dake-atte:30	さすがに休日だけあって、昼でも人通りがかなりある。	!rule:cx:dake-atte:30	keep	rewrites
+cx:dake-atte:25	「京太郎は読書家だけあって、さすがに妄想が得意ですね」	!rule:cx:dake-atte:25	keep	rewrites
+cx:dake-atte:25	「風見さんって姉弟なだけあって風見くんと似てるところがあるじゃない」	!rule:cx:dake-atte:25	keep	rewrites
+cx:dake-atte:25	そうであってほしいけど……。	!rule:cx:dake-atte:25	keep	rewrites
+cx:dake-atte:25	充実感みたいなのがあって、気分はいいのよね	!rule:cx:dake-atte:25	keep	rewrites
+cx:dake-atte:20	私が徹底的に仕込んだだけある	!rule:cx:dake-atte:20	keep	rewrites

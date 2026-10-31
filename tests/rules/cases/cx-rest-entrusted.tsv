@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:rest-entrusted:10	総員退去！ あとは…後は頼んだわ！	총원 퇴거! 나머지는…나머지는 부탁했어!	fix	rewrites
 cx:rest-entrusted:10	仲間……あとは……頼んだぜ……	동료……나머지는……부탁했다구……	fix	rewrites
-cx:rest-entrusted:10	それと、後は頼んだぞ。	그것과 나머지는 부탁했어.	fix	rewrites
+cx:rest-entrusted:10	それと、後は頼んだぞ。	그리고, 나머지는 부탁했어.	fix	rewrites
 cx:rest-entrusted:10	後を頼む。	나머지를 부탁한다.	fix	rewrites
 cx:rest-entrusted:10	もう……後は……任せた……わ。	rule:cx:rest-entrusted:10=나머지	fix	rewrites
 cx:rest-entrusted:10	後を任せた。	rule:cx:rest-entrusted:10=나머지	fix	rewrites
