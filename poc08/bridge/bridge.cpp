@@ -8,6 +8,7 @@
 
 #include "driver/driver.h"
 #include "hd8/stage_hints.h"
+#include "bridge/attach.h"
 #include "driver/report.h"
 #include "ir/ir_json.h"
 #include "core/word/item.h"
@@ -21,7 +22,7 @@ namespace {
 // One sentence as last written: the compose stage may run a line more than once (trial passes),
 // and only the last pass counts.
 struct SentenceRecord {
-    std::string why, stages, reselections;
+    std::string why, stages, reselections, attach;
     uint64_t points = 0, overrides = 0, reselected = 0;
     bool generated = false;
     uint64_t lifted = 0;
@@ -57,7 +58,7 @@ struct Bridge {
     std::atomic<uint64_t> sentences{0}, generated{0}, kept{0}, liftedItems{0}, failedItems{0}, normalized{0},
         segmentedChunks{0}, refits{0}, points{0}, overrides{0}, reselected{0};
     std::mutex mu;  // guards the fields below
-    std::string why, stages, reselections;
+    std::string why, stages, reselections, attachments;
     std::map<std::pair<std::string, std::string>, uint64_t> misses;
 };
 
@@ -79,7 +80,7 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
     ds->fromSel.assign(lines.size(), 0);
     if (b.rule) ds->caption = CaptionDocument(*b.rule, std::vector<std::string>(lines.begin(), lines.end()));
     ds->lastSel.assign(lines.size(), {-1, -1});
-    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect) {
+    if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect || b.opt.attach) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
         const Config& cfg = b.engine.cfg;
         const std::vector<ForcedSpan> none;
@@ -121,6 +122,7 @@ void EndDocument(void* context, void* doc) {
             b.overrides += r.overrides;
             b.reselected += r.reselected;
             b.reselections += r.reselections;
+            b.attachments += r.attach;
         }
     }
     b.why += why;
@@ -344,6 +346,16 @@ bool Reselect(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     SentenceLine(b, ds, s, ds.fromSel[lineIndex], sent, misses, &spans);
     std::vector<hdTrans::word::Item*> items;
     for (hdTrans::word::Item* it = chain.head; it != nullptr; it = it->next) items.push_back(it);
+    if (b.opt.attach) {
+        // The whole line's analysis: a clause may reach past the sentence 0.7.x cut (the final 。 is a sentence of
+        // its own), and the items find their tokens by their spans anyway.
+        const Line& whole = ds.doc.lines[lineIndex];
+        const Attachment att = AttachItems(whole, spans);
+        Line named = whole;
+        named.name = sent.name;
+        ds.records[lineIndex][{s.chunk, s.index}].attach = AttachmentJson(ds.doc, named, spans, att) + '\n';
+    }
+    if (!b.opt.reselect) return false;
     SentenceRecord rec;
     bool changed = false;
     for (const PointDecision& p : DecidePoints(*b.engine.transfer, b.engine.cfg, ds.doc, sent)) {
@@ -425,7 +437,7 @@ bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
 }  // namespace
 
 bool ParseParts(std::string_view list, Options& out, std::string& err) {
-    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = false;
+    out.normalize = out.segment = out.generate = out.decide = out.reselect = out.rule = out.attach = false;
     if (list == "none") return true;
     if (list == "all") {
         out.normalize = out.segment = out.generate = out.decide = true;
@@ -438,12 +450,13 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
         const std::string_view part = list.substr(at, comma - at);
         if (part == "normalize") out.normalize = true;
         else if (part == "segment") out.segment = true;
+        else if (part == "attach") out.attach = true;
         else if (part == "generate") out.generate = true;
         else if (part == "decide") out.decide = true;
         else if (part == "reselect") out.reselect = true;
         else if (part == "rule") out.rule = out.segment = true;
         else {
-            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, all, none)";
+            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, attach, all, none)";
             return false;
         }
         at = comma + 1;
@@ -456,7 +469,8 @@ Bridge* Create(const Options& options, std::string& err) {
     b->opt = options;
     // Only the components a part needs are loaded: segment and normalize need the analyzer alone, so 0.8-rule
     // loads no structure, discourse or transfer table.
-    const bool full = options.generate || options.decide || options.reselect || options.sideIr || options.lift;
+    const bool full = options.generate || options.decide || options.reselect || options.sideIr || options.lift ||
+                      options.attach;
     if (full) {
         if (!LoadEngine(options.cfg, b->engine, err)) return nullptr;
     } else {
@@ -486,7 +500,7 @@ Bridge* Create(const Options& options, std::string& err) {
     }
     // The lift and the side IR run whenever a part, --why or --stages needs them.
     if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift) b->hooks.generate = Generate;
-    if (b->opt.reselect) b->hooks.reselect = Reselect;
+    if (b->opt.reselect || b->opt.attach) b->hooks.reselect = Reselect;
     return b.release();
 }
 
@@ -509,6 +523,7 @@ std::string ActiveParts(const Bridge* b) {
     add(b->opt.decide, "decide");
     add(b->opt.reselect, "reselect");
     add(b->opt.rule, "rule");
+    add(b->opt.attach, "attach");
     return s;
 }
 
@@ -558,6 +573,11 @@ std::vector<SourceToken> AnalyzeSource(const Bridge* b, std::string_view text) {
 std::string TakeReselections(Bridge* b) {
     std::lock_guard<std::mutex> lock(b->mu);
     return std::exchange(b->reselections, {});
+}
+
+std::string TakeAttachments(Bridge* b) {
+    std::lock_guard<std::mutex> lock(b->mu);
+    return std::exchange(b->attachments, {});
 }
 
 std::string TakeStages(Bridge* b) {

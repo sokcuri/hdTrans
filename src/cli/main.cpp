@@ -176,6 +176,7 @@ void Usage(std::FILE* file) {
                "  --poc08-stages FILE    the side IR as JSON Lines (IR.md)\n"
                "  --poc08-misses FILE    the lift's missing table keys, most frequent first\n"
                "  --poc08-reselections FILE  the overrides of --poc08 reselect, realised or not\n"
+               "  --poc08-attach FILE    attachment of the chain items, one JSON line per sentence (--poc08 attach)\n"
                "  --poc08-rule-pre FILE  the retrofit's input lines of --poc08 rule (JSON Lines)\n"
                "  --poc08-stats          counts of the replaced stages to stderr\n", file);
 #endif
@@ -381,6 +382,7 @@ int RunMain(int argc, char** argv) {
     bool noCache = false;
 #ifdef HDTRANS_POC08_HOOKS
     std::string poc08Parts = "none", poc08Data, poc08Why, poc08Stages, poc08Misses, poc08Reselections, poc08RulePre;
+    std::string poc08Attach;
     bool poc08Stats = false;
 #endif
     for (int i = 1; i < argc; i++) {
@@ -414,7 +416,7 @@ int RunMain(int argc, char** argv) {
             || option == "-dump-rules" || option == "-speech" || option == "-context"
 #ifdef HDTRANS_POC08_HOOKS
             || option == "-poc08" || option == "-poc08-data" || option == "-poc08-why" || option == "-poc08-stages"
-            || option == "-poc08-misses" || option == "-poc08-reselections" || option == "-poc08-rule-pre"
+            || option == "-poc08-misses" || option == "-poc08-reselections" || option == "-poc08-attach" || option == "-poc08-rule-pre"
 #endif
             ;
         if (takesValue && !value) {
@@ -466,6 +468,7 @@ int RunMain(int argc, char** argv) {
         else if (option == "-poc08-stages") poc08Stages = *value;
         else if (option == "-poc08-misses") poc08Misses = *value;
         else if (option == "-poc08-reselections") poc08Reselections = *value;
+        else if (option == "-poc08-attach") poc08Attach = *value;
         else if (option == "-poc08-rule-pre") poc08RulePre = *value;
         else if (option == "-poc08-stats") poc08Stats = true;
 #endif
@@ -761,6 +764,7 @@ int RunMain(int argc, char** argv) {
         ok = write(poc08Stages, hd08::bridge::TakeStages(poc08.bridge)) && ok;
         ok = write(poc08Misses, hd08::bridge::LiftMisses(poc08.bridge, 100000)) && ok;
         ok = write(poc08Reselections, hd08::bridge::TakeReselections(poc08.bridge)) && ok;
+        ok = write(poc08Attach, hd08::bridge::TakeAttachments(poc08.bridge)) && ok;
         ok = write(poc08RulePre, rulePre) && ok;
         if (poc08Stats && ruleData)
             std::fprintf(stderr,

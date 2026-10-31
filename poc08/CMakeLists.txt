@@ -37,7 +37,7 @@ target_link_libraries(hdtrans08_ir PRIVATE hd08_driver Threads::Threads)
 set_target_properties(hdtrans08_ir PROPERTIES OUTPUT_NAME hdtrans08-ir)
 
 # hdtrans08: the 0.7.x CLI on the hooked engine, with the 0.8 components at the hook points.
-add_library(hd08_bridge STATIC bridge/bridge.cpp bridge/lift.cpp bridge/rule.cpp)
+add_library(hd08_bridge STATIC bridge/bridge.cpp bridge/lift.cpp bridge/rule.cpp bridge/attach.cpp)
 target_link_libraries(hd08_bridge PUBLIC hd08_driver hdtrans_hooked hd8gen)
 add_executable(hdtrans08 ${HDTRANS_CLI_SOURCES})
 target_compile_definitions(hdtrans08 PRIVATE "HDTRANS_VERSION_TEXT=\"${HDTRANS_VERSION_TEXT} poc08\""
