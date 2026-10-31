@@ -1,0 +1,26 @@
+#! grid-links
+# Two-clause lines: first predicate + link + second predicate. slots: role:particle:noun, as in points.tsv; the
+# second clause's slots follow the link. shared=1: the second verb takes the first verb's object, which the Japanese
+# does not repeat (N5-H2). pol: the second clause's polarity. limit: extra validity terms for the pair.
+id	group	pred1	slots1	pred2	slots2	shared	pol	limit
+s01	seq	行く	goal:へ:学校	勉強	-	0	pos	link!=nagara
+s02	seq	座る	loc:に:椅子	話す	com:と:友達	0	pos	-
+s03	seq	買う	obj:を:パン	食べる	-	1	pos	link!=nagara|toki|mae
+s04	seq	食べる	obj:を:御飯	寝る	-	0	pos	link!=nagara|toki
+s05	seq	洗う	obj:を:手	食べる	obj:を:御飯	0	pos	link!=nagara|toki|tari
+s06	seq	読む	obj:を:本	書く	obj:を:手紙	0	pos	-
+s07	seq	聞く	obj:を:音楽	歩く	path:を:道	0	pos	-
+s08	seq	作る	obj:を:料理	食べる	-	1	pos	link!=nagara|toki|mae
+s09	seq	帰る	goal:へ:家	休む	-	0	pos	link!=nagara
+s10	seq	入る	goal:に:部屋	見る	obj:を:テレビ	0	pos	link!=nagara|tari
+s11	seq	見る	obj:を:テレビ	食べる	obj:を:御飯	0	pos	-
+s12	seq	歩く	path:を:道	話す	com:と:友達	0	pos	-
+r01	reason	暑い	top:は:今日	開ける	obj:を:窓	0	pos	-
+r02	reason	高い	top:は:この+鞄	買う	-	0	neg	-
+r03	reason	学生	top:は:友達	勉強	-	0	pos	-
+r04	reason	為る	obj:を:宿題	遊ぶ	loc:で:公園	0	pos	v1tense=past
+r05	reason	忙しい	top:は:母	手伝う	obj:を:母	0	pos	-
+c01	contrast	高い	top:は:この+時計	買う	-	0	pos	-
+c02	contrast	難しい	top:は:日本語	楽しい	-	0	pos	-
+c03	contrast	読む	obj:を:本	分かる	-	0	neg	stype=statement
+c04	contrast	来る	subj:は:友達	来る	subj:は:先生	0	neg	-

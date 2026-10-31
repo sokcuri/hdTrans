@@ -1,0 +1,61 @@
+#! grid-frames
+# Argument frames of the grid predicates. One row per slot, in Japanese word order; a frame is filled twice
+# (fill 1, fill 2) with nouns of the slot's class. role: subj (dropped in requests, prohibitions and invitations),
+# obj, dat (person + に), goal (に/へ), loc (place of action で, place of existence or contact に), path (を),
+# com (と), src (から), cmp (より). ja1/ja2: the Japanese particle of fill 1 / fill 2.
+gframe	role	cls	ja1	fill1	ja2	fill2
+o-buy	obj	@thing	を	傘	を	時計
+d-meet	dat	@person	に	友達	に	先生
+o-song	obj	@music	を	歌	を	歌
+o-wash	obj	@body	を	手	を	顔
+o-help	obj	@person	を	母	を	先生
+o-write	obj	@document	を	手紙	を	名前
+o-listen	obj	@music	を	音楽	を	歌
+g-place	goal	@place	へ	学校	に	駅
+p-path	path	@place	を	公園	を	道
+l-work	loc	@place	で	会社	で	店
+l-swim	loc	@place	で	海	で	川
+o-light	obj	@device	を	電気	を	テレビ
+o-person	obj	@person	を	友達	を	先生
+s-person	subj	@person	が	友達	が	先生
+s-animal	subj	@animal	が	犬	が	猫
+l-play	loc	@place	で	公園	で	公園
+o-read	obj	@document	を	本	を	新聞
+o-drink	obj	@drink	を	水	を	コーヒー
+l-live	loc	@place	に	東京	に	大阪
+l-rest	loc	@place	で	家	で	部屋
+o-make	obj	@food	を	料理	を	ケーキ
+l-sit	loc	@furniture	に	椅子	に	椅子
+g-home	goal	@place	へ	家	に	家
+g-room	goal	@place	に	部屋	に	店
+o-know	obj	@language	が	日本語	が	日本語
+s-illness	subj	@illness	が	風邪	が	風邪
+o-food	obj	@food	を	パン	を	林檎
+o-watch	obj	@show	を	映画	を	写真
+dt-teach	dat	@person	に	子供	に	友達
+dt-teach	obj	@language	を	日本語	を	日本語
+src-borrow	src	@person	から	友達	から	先生
+src-borrow	obj	@thing	を	本	を	傘
+o-task	obj	@task	を	宿題	を	掃除
+l-study	loc	@place	で	図書館	で	家
+d-phone	dat	@person	に	母	に	友達
+s-top	subj	@person	は	友達	は	母
+s-price	subj	@thing	は	本	は	傘
+s-size	subj	@thing	は	鞄	は	部屋
+s-weather	subj	@time	は	今日	は	部屋
+s-task	subj	@task	は	日本語	は	宿題
+s-fun	subj	@place	は	学校	は	映画
+s-busy	subj	@person	は	母	は	先生
+s-good	subj	@weather	が	天気	が	天気
+s-far	subj	@place	は	駅	は	学校
+s-color	subj	@thing	は	鞄	は	紙
+s-fast	subj	@vehicle	は	車	は	車
+s-quiet	subj	@place	は	図書館	は	公園
+s-famous	subj	@place	は	店	は	東京
+o-like	subj	@person	は	友達	は	先生
+o-like	obj	@animal	が	犬	が	猫
+o-want	obj	@thing	が	車	が	時計
+e-thing	loc	@place	に	部屋	に	店
+e-thing	subj	@thing	が	本	が	傘
+e-anim	loc	@place	に	公園	に	家
+e-anim	subj	@animal	が	犬	が	猫

@@ -51,6 +51,12 @@ target_include_directories(hd08_tests PRIVATE "${CMAKE_SOURCE_DIR}/tests/unit")
 target_compile_definitions(hd08_tests PRIVATE "HD08_SOURCE_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}\"")
 target_link_libraries(hd08_tests PRIVATE hd08_driver)
 add_test(NAME poc08.unit COMMAND hd08_tests)
+find_program(HD08_PYTHON python3)
+if(HD08_PYTHON AND TARGET hd8gen_cli)
+    # the N5 grid file is what grid.py and its tables generate (the engine-pass test is separate)
+    add_test(NAME poc08.grid.n5 COMMAND "${HD08_PYTHON}" -I "${CMAKE_CURRENT_SOURCE_DIR}/tools/grid/grid.py"
+        --hd8gen $<TARGET_FILE:hd8gen_cli> --check "${CMAKE_CURRENT_SOURCE_DIR}/tests/grid/n5.tsv")
+endif()
 if(HDTRANS_SH)
     add_test(NAME poc08.cli COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli.sh" $<TARGET_FILE:hdtrans08_ir>)
     add_test(NAME poc08.hooks COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/hooks.sh" $<TARGET_FILE:hdtrans_cli>

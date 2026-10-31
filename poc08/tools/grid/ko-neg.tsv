@@ -1,0 +1,9 @@
+#! grid-ko-neg
+# Negation by level (N5-H1): long = -지 않다 on the predicate word, short = 안 before it (a 하다 verb of kcls 하다
+# splits: 공부 안 해). The lexical negatives win at every level: a gflags neg=WORD lemma (ある/いる → 없다,
+# 分かる/知る → 모르다) and the copula (이/가 아니다). pred: a pred class with its own method (ほしい as たい).
+level	pred	method	spec
+haera	*	long	N5-H1
+hae	*	short	N5-H1
+haeyo	*	short	N5-H1
+*	hoshii	long	N5-H18
