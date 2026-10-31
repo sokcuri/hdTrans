@@ -1,0 +1,33 @@
+# 규칙: GRM-135
+rule	input	expected	kind	layer
+cx:lc2c-kanenai:10	世界の全てが崩壊しかねないからだ。	has:수도 있기	fix	rewrites
+cx:lc2c-kanenai:10	陰陽の均衡が崩れれば、世界の全てが崩壊しかねないからだ。	has:수도 있기	fix	rewrites
+cx:lc2c-kanenai:11	呼ばわりされてしまいかねないからです。	has:수도 있기	fix	rewrites
+cx:lc2c-kanenai:20	殺すことになりかねないから。	has:수도 있으니까.	fix	rewrites
+cx:lc2c-kanenai:20	それこそ力が暴走して移転者が世界を破滅させることにもなりかねないから！	has:수도 있으니까!	fix	rewrites
+cx:lc2c-kanenai:21	「ああ、雑念が多いと、死にかねないからね。」	has:수도 있으니까.」	fix	rewrites
+cx:lc2c-kanenai:21	「お前ならマジで作りかねないから困るんだけど、えっと、ジョークの方だよな？」	has:수도 있으니까	fix	rewrites
+cx:lc2c-kanenai:30	あまり焦らしすぎると梢が目を開けかねないし。	has:수도 있고.	fix	rewrites
+cx:lc2c-kanenai:40	なりかねないけど。	has:수도 있지만.	fix	rewrites
+cx:lc2c-kanenai:40	「抱き潰しかねないけど」	has:수도 있지만」	fix	rewrites
+cx:lc2c-kanenai:42	よくわかると逆に寿命が縮みかねないけどさ。	has:수도 있지만.	fix	rewrites
+cx:lc2c-kanenai:55	「あいつならやりかねないな」	has:수도 있겠네」	fix	rewrites
+cx:lc2c-kanenai:55	こんなところを一人でウロついてたら妖怪に襲われかねないな……。	has:수도 있겠네…….	fix	rewrites
+cx:lc2c-kanenai:56	「そーかなー？　裕樹ならやりかねないわー」	has:수도 있어~」	fix	rewrites
+cx:lc2c-kanenai:56	下手なことをすると、かえってお姉さんに迷惑がかかりかねないぜ。	has:수도 있어.	fix	rewrites
+cx:lc2c-kanenai:57	「俺が何とかしないと全滅しかねないですよ。モモちゃんの射撃に期待します」	has:수도 있어요.	fix	rewrites
+cx:lc2c-kanenai:60	それこそ、今までの魔道学の常識を覆しかねない程のね。	has:수도 있을	fix	rewrites
+cx:lc2c-kanenai:60	今、襲われれば、背中から転倒しかねないほどに身体の重心を崩されてしまった。	has:수도 있을	fix	rewrites
+cx:lc2c-kanenai:41	海のいい奴ら風に思われかねないけど、海賊なんて略奪と破壊が基本だし。	has:수도 있지만,	fix	rewrites
+cx:lc2c-kanenai:10	指示に従わなければその場で斬り殺されかねない、覇気。	!rule:cx:lc2c-kanenai:10	keep	rewrites
+cx:lc2c-kanenai:11	己の存在を脅かしかねない、たった一人の少年。	!rule:cx:lc2c-kanenai:11	keep	rewrites
+cx:lc2c-kanenai:42	放っておけば村を襲いかねない。	!rule:cx:lc2c-kanenai:42	keep	rewrites
+cx:lc2c-kanenai:20	伝え方を間違えれば不要な争いにもなりかねないのだ。	!rule:cx:lc2c-kanenai:20	keep	rewrites
+cx:lc2c-kanenai:21	指示に従わなければその場で斬り殺されかねない、覇気。	!rule:cx:lc2c-kanenai:21	keep	rewrites
+cx:lc2c-kanenai:30	己の存在を脅かしかねない、たった一人の少年。	!rule:cx:lc2c-kanenai:30	keep	rewrites
+cx:lc2c-kanenai:40	放っておけば村を襲いかねない。	!rule:cx:lc2c-kanenai:40	keep	rewrites
+cx:lc2c-kanenai:41	伝え方を間違えれば不要な争いにもなりかねないのだ。	!rule:cx:lc2c-kanenai:41	keep	rewrites
+cx:lc2c-kanenai:55	指示に従わなければその場で斬り殺されかねない、覇気。	!rule:cx:lc2c-kanenai:55	keep	rewrites
+cx:lc2c-kanenai:56	己の存在を脅かしかねない、たった一人の少年。	!rule:cx:lc2c-kanenai:56	keep	rewrites
+cx:lc2c-kanenai:57	放っておけば村を襲いかねない。	!rule:cx:lc2c-kanenai:57	keep	rewrites
+cx:lc2c-kanenai:60	伝え方を間違えれば不要な争いにもなりかねないのだ。	!rule:cx:lc2c-kanenai:60	keep	rewrites

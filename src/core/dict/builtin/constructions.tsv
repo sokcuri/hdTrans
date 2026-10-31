@@ -1192,3 +1192,83 @@ cx:lc2a-doushita-monoka-to:10	GRM-109	&&3 ||6 S+0== "どうしたもんか" S+0=
 //= lc2a-kanoyou-iru	after OfferPromise 781	The word いるかのよう (있는 것과 같다) after a て form word whose Korean already holds the 있다 of ている (撫でて 쓰다듬고 있다) repeats 있다 and reads the likeness 것과 같다 (spec GRM-101): the て form word takes the adnominal 는 and いるかのよう is 것 같다, or 것 같이 when it is read 같게 before a verb (子猫を撫でているかのようだ 새끼 고양이를 쓰다듬고 있는 것 같다, 撫でているかのように笑う 쓰다듬고 있는 것 같이 웃는다).
 cx:lc2a-kanoyou-iru:10	GRM-101	&&4 S+0== "いるかのよう" Y+0== "1게" D-1== "R&HN@" F-1== "conjugating"	set-ending@-1 "0" set-target "것 %B3@" set-ending "1이"	撫でているかのように笑う 쓰다듬고 있는 것 같이 웃는다
 cx:lc2a-kanoyou-iru:20	GRM-101	&&3 S+0== "いるかのよう" D-1== "R&HN@" F-1== "conjugating"	set-ending@-1 "0" set-target "것 %B3@"	子猫を撫でているかのようだ 새끼 고양이를 쓰다듬고 있는 것 같다
+//= lc2c-yainaya	after OfferPromise 901	A verb before や否や, やいなや says that what follows came the moment it happened: -자마자 on the verb, with や否や dropped (見るや否や飛びつく 보자마자 달려든다, 座るやいなや 앉자마자), not 보는 하자마자 or 앉자 마자.
+cx:lc2c-yainaya:10	GRM-136	&&2 S+0== "や否や" F-1== "conjugating"	set-ending@-1 "1자마자" set-target ""	見るや否や 보자마자
+cx:lc2c-yainaya:20	GRM-136	&&2 F+0== "conjugating" Y+0== "R자 마자"	replace-ending-tail "자 마자" "자마자"	座るやいなや 앉자마자
+//= lc2c-itatte	after OfferPromise 911	に至っては after a noun singles it out as the extreme case of what is said: 에 이르러서는 (ＭＰに至っては２５倍だ MP에 이르러서는 25배다), not 에 이르러, which reads as arriving at it.
+cx:lc2c-itatte:10	GRM-140	&&3 S+0== "に至" Y+0== "6" I+0== "Rっては"	set-ending "6서는"	ＭＰに至っては２５倍だ MP에 이르러서는 25배다
+//= lc2c-naimademo	after OfferPromise 921	A denied predicate before までも (ないまでも) grants that it does not go that far and says the lesser thing still holds: -더라도 (勝てないまでも負けない戦い 이길 수 없더라도 지지 않는 싸움, 真夏とは言わないまでも 한여름이라고는 말하지 않더라도), and とはいかないまでも, とまではいかないまでも is 까지는 아니더라도 (快晴とはいかないまでも 쾌청까지는 아니더라도), not -지 않아도 or 와는 가지 않아도.
+cx:lc2c-naimademo:10	GRM-139	&&4 S+0== "いかな" Y+0== "6도" I+0== "Rないまでも" S-1== "とは"	set-target@-1 "까지는 아니더라도" set-target "" set-ending ""	精いっぱいとはいかないまでも 힘껏까지는 아니더라도
+cx:lc2c-naimademo:15	GRM-139	&&5 S+0== "いかな" Y+0== "6도" I+0== "Rないまでも" S-1== "は" S-2== "まで"	set-target@-1 "(은)는 아니더라도" set-target "" set-ending ""	そこまではいかないまでも 거기까지는 아니더라도
+cx:lc2c-naimademo:20	GRM-139	&&3 Y+0== "6도" I+0== "Rないまでも" ||3 D+0== "R$DH@" D+0== "R$FA@" D+0== "R$D7@"	set-ending "1더라도"	勝てないまでも 이길 수 없더라도
+//= lc2c-tsutsuaru	after OfferPromise 931	A verb before つつある (つつあった, つつあり) is a change under way: -고 있다 (赤く染まりつつある 붉게 물들고 있는, 戻りつつある 돌아오고 있다), not the state after it, -어 있다.
+cx:lc2c-tsutsuaru:10	GRM-132	&&4 F+0== "conjugating" I+0== "Rつつ" !1 Y+0== "1고" ||2 S+1== "あ" S+1== "有"	set-ending "1고"	染まりつつある 물들고 있는
+cx:lc2c-tsutsuaru:20	GRM-132	&&3 F+0== "conjugating" Y+0== "6" S+1== "つつあ"	set-ending "1고"	覆されつつある 뒤집어지고 있다
+cx:lc2c-tsutsuaru:30	GRM-132	&&3 F+0== "conjugating" I+0== "Rつつあり" Y+0== "6 있고"	set-ending "1고 있고"	集まりつつあり 모이고 있고
+//= lc2c-kkonai	after OfferPromise 941	A potential verb before っこない that the word stage split into でき + こな (오지 않다) or read 수 있는 + こな says it cannot possibly happen: -(으)ㄹ 수 있을 리가 없다 (倒すことはできっこない 넘어뜨릴 수 있을 리가 없다, 勝てっこない 이길 수 있을 리가 없다), not 할 수 있고 오지 않는다; a 리가 없다 before です is 리가 없어요.
+cx:lc2c-kkonai:10	GRM-138	&&2 ||2 S+0== "できっこな" S+0== "出来っこな" D+0== "L잘 될리가"	set-target "할 수 있을 리가 $FA@"	できっこない 할 수 있을 리가 없다
+cx:lc2c-kkonai:15	GRM-138	&&6 S+0== "こな" !1 P+1== "1" D+0== "오지 $DH@" ||4 Y+0== "1다" Y+0== "1는다" Y+0== "4" Y+0== "4다" ||2 S-1== "でき" S-1== "出来" ||2 D-1== "할 수 &HN@" D-1== "&HN@"	set-ending@-1 "3 리가 없다" set-target "" set-ending ""	倒すことはできっこない。 넘어뜨릴 수 있을 리가 없다.
+cx:lc2c-kkonai:16	GRM-138	&&6 S+0== "こな" !1 P+1== "1" D+0== "오지 $DH@" Y+0== "R다고" ||2 S-1== "でき" S-1== "出来" ||2 D-1== "할 수 &HN@" D-1== "&HN@"	set-ending@-1 "3 리가 없다고" set-target "" set-ending ""	出来っこないと思っていた 할 수 있을 리가 없다고 생각했다
+cx:lc2c-kkonai:20	GRM-138	&&4 S+0== "こな" D+0== "오지 $DH@" ||2 S-1== "でき" S-1== "出来" ||2 D-1== "할 수 &HN@" D-1== "&HN@"	set-ending@-1 "3" take-target " 리가 $FA@"	女子一人でできっこないよ 여자 혼자서 할 수 있을 리가 없어
+cx:lc2c-kkonai:25	GRM-138	&&5 S+0== "こな" !1 P+1== "1" D+0== "오지 $DH@" Y-1== "3 수 있는" ||4 Y+0== "1다" Y+0== "1는다" Y+0== "4" Y+0== "4다"	set-ending@-1 "3 수 있을 리가 없다" set-target "" set-ending ""	勝てっこない。 이길 수 있을 리가 없다.
+cx:lc2c-kkonai:26	GRM-138	&&5 S+0== "こな" !1 P+1== "1" D+0== "오지 $DH@" Y-1== "3 수 있는" Y+0== "R다고"	set-ending@-1 "3 수 있을 리가 없다고" set-target "" set-ending ""	勝てっこないと思う 이길 수 있을 리가 없다고 생각한다
+cx:lc2c-kkonai:30	GRM-138	&&3 S+0== "こな" D+0== "오지 $DH@" Y-1== "3 수 있는"	set-ending@-1 "3 수 있을" take-target " 리가 $FA@"	勝てっこないよ 이길 수 있을 리가 없어
+cx:lc2c-kkonai:60	GRM-138	&&3 F+0== "conjugating" Y+0== "3 리가 없다" ||2 S+1== "です" S+1== "ですよ"	set-ending "3 리가 없어요" set-target@+1 ""	敵いっこないですよ 당해 낼 리가 없어요
+//= lc2c-zujimai	after OfferPromise 951	A verb denied by ず before じまい (read じ + まい, 떠나지 않든지) says it ended without happening: -지 못한 채, -지 않은 채, a potential in 수 없다 -ㄹ 수 없는 채 (会えずじまいだった 만나지 못한 채였다, 解けずじまい 풀 수 없는 채), and the に after it is 로 (言わずじまいに終わる 말하지 않은 채로 끝나다).
+//~ zujimai-pot	&HN@=&M9@	The 있다 of a potential in 수 있다 as the verb 없다, which a ずじまい denies.
+cx:lc2c-zujimai:5	GRM-137	&&5 S+0== "じ" D+0== "떠&A5@" F-1== "conjugating" D-1== "R수 &HN@" Y-1== "1지 않고"	map-target-tail@-1 @zujimai-pot set-ending@-1 "0 채" set-target "" set-ending ""	謎は解けずじまい 수수께끼는 풀 수 없는 채
+cx:lc2c-zujimai:10	GRM-137	&&4 S+0== "じ" D+0== "떠&A5@" F-1== "conjugating" Y-1== "R지 못하고"	replace-ending-tail@-1 "못하고" "못한 채" set-target "" set-ending ""	会えずじまいだった 만나지 못한 채였다
+cx:lc2c-zujimai:20	GRM-137	&&4 S+0== "じ" D+0== "떠&A5@" F-1== "conjugating" Y-1== "R지 않고"	replace-ending-tail@-1 "않고" "않은 채" set-target "" set-ending ""	帰らずじまいだった 돌아가지 않은 채였다
+cx:lc2c-zujimai:30	GRM-137	&&4 S+0== "に" S-1== "じ" D-1== "" ||3 Y-2== "R못한 채" Y-2== "R않은 채" Y-2== "R없는 채"	set-target "로"	言わずじまいに終わる 말하지 않은 채로 끝나다
+//= lc2c-nishiro	after OfferPromise 961	にしろ read as the order に + しろ (로 해라) is the concessive "whether" in a pair in its sentence (漫画にしろ小説にしろ 만화든 소설이든), after どっち, どちら, どれ, 誰 (どっちにしろ 어느 쪽이든), after 何, なん before a comma or the end (何にしろ、 어쨌든), and after a predicate in ない or its adnominal form, in a pair -든 (行くにしろ行かないにしろ 가든 가지 않든) and alone before a comma -더라도 (人間じゃないにしろ、 인간이 아니더라도) unless a quote follows; a noun alone before にしろ stays the order (好きにしろ 마음대로 해라).
+//: lc2c-shiro-next	&&2 S+1== "する" I+1== "しろ"	The next word is the しろ of する.
+//: lc2c-shiro-pair	||2 >0 &&3 S+0== "に" I+1== "しろ" S+1== "する" S+0== "00。！？!?」』" <0 &&3 S+0== "に" I+1== "しろ" S+1== "する" S+0== "00。！？!?「『"	Another に + しろ stands in the same sentence, after or before the word.
+cx:lc2c-nishiro:10	GRM-130	&&4 S+0== "に" :lc2c-shiro-next !1 F-1== "conjugating" ||2 :lc2c-shiro-pair &&3 ||4 S-1== "どっち" S-1== "どちら" S-1== "どれ" S-1== "誰" F+2== "exists" !1 S+2== "00。！？!?」』…‥"	set-target "(이)든" set-target@+1 "" set-ending@+1 ""	漫画にしろ小説にしろ 만화든 소설이든
+cx:lc2c-nishiro:20	GRM-130	&&5 S+0== "に" :lc2c-shiro-next ||3 S-1== "何" S-1== "なん" S-1== "なに" &&2 F+2== "exists" !1 S+2== "00。！？!?」』…‥" !1 F-1== "conjugating"	set-target@-1 "어쨌든" set-target "" set-target@+1 "" set-ending@+1 ""	何にしろ、 어쨌든,
+cx:lc2c-nishiro:30	GRM-130	&&6 S+0== "に" :lc2c-shiro-next F-1== "conjugating" ||2 I-1== "Rない" Y-1== "0" :lc2c-shiro-pair ||2 S+2== "00、。！？!?」』…" !1 F+2== "exists"	set-ending@-1 "1든" set-target "" set-target@+1 "" set-ending@+1 ""	行くにしろ行かないにしろ、 가든 가지 않든,
+cx:lc2c-nishiro:31	GRM-130	&&5 S+0== "に" :lc2c-shiro-next F-1== "conjugating" ||2 I-1== "Rない" Y-1== "0" :lc2c-shiro-pair	set-ending@-1 "1든" set-target "" set-target@+1 "" set-ending@+1 "" prepend-target@+2 " "	行くにしろ行かないにしろ 가든 가지 않든
+cx:lc2c-nishiro:40	GRM-130	&&6 S+0== "に" :lc2c-shiro-next F-1== "conjugating" ||2 I-1== "Rない" Y-1== "0" S+2== "、" !1 ||2 S+3== "と" S+3== "って"	set-ending@-1 "1더라도" set-target "" set-target@+1 "" set-ending@+1 ""	知らないにしろ、 모르더라도,
+//= lc2c-katoomou	after OfferPromise 971	かと思うと, かと思えば, かと思ったら after a past verb (read 었는지 + 라고 생각하면) says the next thing came at once: -었나 싶더니 (抱きしめられたかと思うと 안겼나 싶더니), unless a word of feeling follows in the sentence, where one thinks it (喜ばせたかと思うと腹が立つ); after a noun with かと or after 誰か, 何か it says what one took it for: (이)ㄴ가 했더니 (中かと思えば庭だった 안인가 했더니 뜰이었다, 誰かと思ったら 누군가 했더니); after a present verb read -ㄹ까 하고 -나 했더니 (何を言うかと思ったら 무슨 말을 하나 했더니); opening a sentence 그런가 했더니.
+//: lc2c-omou-if	||4 I+0== "思うと" I+0== "思ったら" I+0== "思えば" I+0== "思うたら"	The verb 思 in 思うと, 思ったら, 思えば (思うたら).
+//: lc2c-omou-feel	>0 ||24 S+0== "L腹" S+0== "L悲し" S+0== "L嬉し" S+0== "L寂し" S+0== "L淋し" S+0== "L切な" S+0== "L怖" S+0== "L恐ろし" S+0== "L苦し" S+0== "L辛" S+0== "Lつら" S+0== "L憂鬱" S+0== "L恥ずかし" S+0== "L悔し" S+0== "Lゾッと" S+0== "Lぞっと" S+0== "L胸" S+0== "L気が重" S+0== "L不安" S+0== "L情けな" S+0== "L申し訳" S+0== "L心が" S+0== "L涙" S+0== "L泣け" S+0== "00。！？!?」』"	A word of feeling later in the sentence (腹が立つ, 悲しい, 怖い, 胸が, 涙 …): what one feels when one thinks it.
+cx:lc2c-katoomou:10	GRM-131	&&6 S+0== "思" :lc2c-omou-if S-1== "と" F-2== "conjugating" Y-2== "R는지" !1 :lc2c-omou-feel	replace-ending-tail@-2 "는지" "나" set-target@-1 " 싶더니" set-target "" set-ending ""	抱きしめられたかと思うと 안겼나 싶더니
+cx:lc2c-katoomou:20	GRM-131	&&4 S+0== "思" :lc2c-omou-if S-1== "かと" !1 F-2== "conjugating"	set-target@-1 "인가 했더니" set-target "" set-ending ""	台座の紋様かと思ったら 받침대의 무늬인가 했더니
+cx:lc2c-katoomou:25	GRM-131	&&4 S+0== "思" :lc2c-omou-if S-1== "と" ||3 S-2== "誰か" S-2== "何か" S-2== "なにか"	set-target@-1 " 했더니" set-target "" set-ending ""	誰かと思ったら 누군가 했더니
+cx:lc2c-katoomou:26	GRM-131	&&3 S+0== "思" :lc2c-omou-if S-1== "何かと"	set-target@-1 "뭔가 했더니" set-target "" set-ending ""	何かと思えば 뭔가 했더니
+cx:lc2c-katoomou:30	GRM-131	&&5 S+0== "思" ||2 I+0== "思ったら" I+0== "思うたら" F-1== "conjugating" Y-1== "3까 하고" !1 :lc2c-omou-feel	set-ending@-1 "1나 했더니" set-target "" set-ending ""	何を言うかと思ったら 무슨 말을 하나 했더니
+cx:lc2c-katoomou:40	GRM-131	&&4 S+0== "かと思" ||3 I+0== "かと思えば" I+0== "かと思ったら" I+0== "かと思うと" :lc2b-opens S+1== "、"	set-target "그런가 &AV@" set-ending "5더니"	かと思えば、 그런가 싶더니,
+cx:lc2c-katoomou:41	GRM-131	&&4 S+0== "かと思" ||3 I+0== "かと思えば" I+0== "かと思ったら" I+0== "かと思うと" :lc2b-opens F+1== "exists"	set-target "그런가 &AV@" set-ending "5더니"	かと思ったらいきなり叫び出す 그런가 싶더니 갑자기 지른다
+//= lc2c-bayokatta	after OfferPromise 981	A condition in ば or たら read (으)면 before よかった says what one wishes one had done: (았)더라면, with よかった in the form of what follows it: と 좋았을 거라고, かな 좋았을까, のだ, んだ 좋았을 것이다, かもしれない 좋았을지도, the end 좋았을 텐데, ですね 좋았을 텐데요, ものを 좋았을 것을, けど 좋았겠지만 (売ればよかったと後悔した 팔았더라면 좋았을 거라고 후회했다), not 팔면 좋았다고; not in a sentence with an interrogative (どうすればよかったんだ) or before a question mark.
+//: lc2c-ba-if	&&6 !1 G+0== "Qw" S+0== "よ" D+0== "$DE@" F-1== "conjugating" ||3 Y-1== "2면" Y-1== "2면(자)" Y-1== "5더라면" ||3 I-1== "Rば" I-1== "Rたら" I-1== "Rだら"	よかった (よ read 좋다) after a condition in ば or たら read (으)면, in a sentence with no interrogative.
+cx:lc2c-bayokatta:10	GRM-133	&&2 :lc2c-ba-if Y+0== "5다고"	set-ending@-1 "5더라면" set-ending "5을 거라고"	返してやればよかったと 돌려줬더라면 좋았을 거라고
+cx:lc2c-bayokatta:20	GRM-133	&&2 :lc2c-ba-if ||4 Y+0== "5나" Y+0== "5냐" Y+0== "5던 걸까" Y+0== "5던 것일까"	set-ending@-1 "5더라면" set-ending "5을까"	こっちやればよかったかな 여기 했더라면 좋았을까
+cx:lc2c-bayokatta:30	GRM-133	&&2 :lc2c-ba-if Y+0== "5던 것이다"	set-ending@-1 "5더라면" set-ending "5을 것이다"	尋ねてみればよかったのだ 물어 봤더라면 좋았을 것이다
+cx:lc2c-bayokatta:35	GRM-133	&&2 :lc2c-ba-if ||2 Y+0== "5던 것일지도" Y+0== "5던 걸지도"	set-ending@-1 "5더라면" set-ending "5을지도"	食べればよかったかもしれない 먹었더라면 좋았을지도 모른다
+cx:lc2c-bayokatta:40	GRM-133	&&3 :lc2c-ba-if Y+0== "5다" ||2 I+0== "Rんだ" I+0== "Rのだ"	set-ending@-1 "5더라면" set-ending "5을 것이다"	聞けばよかったんだ 들었더라면 좋았을 것이다
+cx:lc2c-bayokatta:45	GRM-133	&&4 !1 F+0== "question-after" :lc2c-ba-if ||3 Y+0== "5다" Y+0== "5어" Y+0== "5네" ||2 S+1== "00、。！？!?」』…‥―" !1 F+1== "exists"	set-ending@-1 "5더라면" set-ending "5을 텐데"	麻酔を持ってきたらよかった 마취를 가져왔더라면 좋았을 텐데
+cx:lc2c-bayokatta:50	GRM-133	&&2 :lc2c-ba-if Y+0== "5지요"	set-ending@-1 "5더라면" set-ending "5을 텐데요"	来ていればよかったですね 와 있었더라면 좋았을 텐데요
+cx:lc2c-bayokatta:55	GRM-133	&&3 :lc2c-ba-if Y+0== "5던" S+1== "もの"	set-ending@-1 "5더라면" set-ending "5을"	しまっておけばよかったものを 넣어 두었더라면 좋았을 것을
+cx:lc2c-bayokatta:60	GRM-133	&&2 :lc2c-ba-if Y+0== "5지만"	set-ending@-1 "5더라면" set-ending "5겠지만"	手が伸びればよかったけれど 손이 뻗었더라면 좋았겠지만
+cx:lc2c-bayokatta:90	GRM-133	&&2 :lc2c-ba-if Y+0== "L5을"	set-ending@-1 "5더라면"	頭があればよかったのだろうけど 머리가 있었더라면 좋았을 테지만
+//= lc2c-kanenai	after OfferPromise 985	The adnominal -(으)ㄹ 수도 있는 that the word stage gives かねない off the right edge of a sentence takes the form of what follows when that is no noun: から 있으니까 (からだ 있기 때문이다), し 있고, けど, が 있지만, な, ね 있겠네, ぜ, ぞ, よ, わ 있어, です 있어요, the end of the sentence 있다, ほど 있을 (破滅させかねないから 파멸시킬 수도 있으니까), not 있는으로부터.
+//: lc2c-kane	&&2 F+0== "conjugating" Y+0== "3 수도 있는 "	A verb read with the adnominal ending 3 수도 있는 of かねない.
+cx:lc2c-kanenai:10	GRM-135	&&2 :lc2c-kane S+1== "からだ"	set-ending "3 수도 있기 때문" set-target@+1 "이다"	崩壊しかねないからだ 붕괴할 수도 있기 때문이다
+cx:lc2c-kanenai:11	GRM-135	&&3 :lc2c-kane S+1== "から" ||2 S+2== "です" S+2== "でした"	set-ending "3 수도 있기 때문" set-target@+1 ""	呼ばわりされてしまいかねないからです 취급을 당해버릴 수도 있기 때문입니다
+cx:lc2c-kanenai:20	GRM-135	&&3 :lc2c-kane S+1== "から" ||2 S+2== "00、。！？!?」』…‥―" !1 F+2== "exists"	set-ending "3 수도 있으니까" set-target@+1 ""	死にかねないから。 죽을 수도 있으니까.
+cx:lc2c-kanenai:21	GRM-135	&&2 :lc2c-kane S+1== "から"	set-ending "3 수도 있으니까" set-target@+1 " "	作りかねないから困る 만들 수도 있으니까 곤란하다
+cx:lc2c-kanenai:30	GRM-135	&&2 :lc2c-kane ||2 S+1== "し" &&2 S+1== "する" I+1== "し"	set-ending "3 수도 있고" set-target@+1 "" set-ending@+1 ""	目を開けかねないし 눈을 뜰 수도 있고
+cx:lc2c-kanenai:40	GRM-135	&&2 :lc2c-kane ||4 S+1== "けど" S+1== "けれど" S+1== "けれども" S+1== "が"	set-ending "3 수도 있지만" set-target@+1 ""	思われかねないけど 생각될 수도 있지만
+cx:lc2c-kanenai:41	GRM-135	&&2 :lc2c-kane ||3 S+1== "けど、" S+1== "けれど、" S+1== "けれども、"	set-ending "3 수도 있지만" set-target@+1 ","	思われかねないけど、 생각될 수도 있지만,
+cx:lc2c-kanenai:42	GRM-135	&&2 :lc2c-kane ||2 S+1== "Lけど" S+1== "Lけれど"	set-ending "3 수도 있지만" set-target@+1 ""	縮みかねないけどさ 줄어들 수도 있지만
+cx:lc2c-kanenai:55	GRM-135	&&3 :lc2c-kane ||4 S+1== "な" S+1== "ね" S+1== "なぁ" S+1== "なあ" ||2 S+2== "00、。！？!?」』…‥―" !1 F+2== "exists"	set-ending "3 수도 있겠네" set-target@+1 ""	やりかねないな 할 수도 있겠네
+cx:lc2c-kanenai:56	GRM-135	&&3 :lc2c-kane ||4 S+1== "ぜ" S+1== "ぞ" S+1== "よ" S+1== "わ" ||2 S+2== "00、。！？!?」』…‥―" !1 F+2== "exists"	set-ending "3 수도 있어" set-target@+1 ""	かかりかねないぜ 걸릴 수도 있어
+cx:lc2c-kanenai:57	GRM-135	&&2 :lc2c-kane ||2 S+1== "です" S+1== "ですよ"	set-ending "3 수도 있어요" set-target@+1 ""	全滅しかねないですよ 전멸할 수도 있어요
+cx:lc2c-kanenai:60	GRM-135	&&2 :lc2c-kane ||4 S+1== "L程" S+1== "Lほど" S+1== "程" S+1== "ほど"	set-ending "3 수도 있을" prepend-target@+1 " "	覆しかねない程の 뒤집을 수도 있을 정도의
+//= lc2c-kurainara	after OfferPromise 991	A verb before くらいなら, ぐらいなら (ならば) prefers what follows to doing it: -(으)ㄹ 바에야 (死を待つくらいなら動いた方がマシだ 죽음을 기다릴 바에야 움직인 편이 낫다), not 정도로라면; not when the rest of the sentence allows it as little enough (問題ない, 簡単, いい, 構わない, できる, 必要) or a word of little stands before it in the clause (少し見ていくくらいなら 조금 봐 갈 정도로라면).
+//: lc2c-kurai-little	<0 ||6 S+0== "少し" S+0== "ちょっと" S+0== "少しだけ" S+0== "ちょっとだけ" S+0== "一口" S+0== "少々" S+0== "00、。！？!?「『"	A word of little (少し, ちょっと, 一口, 少々) before the word in its clause.
+//: lc2c-kurai-ok	>0 ||19 S+0== "既に" S+0== "すでに" S+0== "L問題" S+0== "L簡単" S+0== "L構わ" S+0== "L大丈夫" S+0== "L平気" S+0== "L必要" S+0== "Lオッケー" S+0== "OK" S+0== "L許" L+0== "괜찮다" S+0== "L余裕" S+0== "L可能" S+0== "L楽勝" S+0== "Lでき" S+0== "L出来" S+0== "L朝飯前" &&3 ||8 S+0== "Lよさ" S+0== "L良さ" S+0== "Lいい" S+0== "L良い" S+0== "Lイイ" L+0== "좋다" L+0== "되다" D+0== "됐" !1 &&2 S-1== "が" ||4 S-2== "方" S-2== "ほう" I-2== "R方" I-2== "Rほう" !1 ||2 Y-1== "2면" Y-1== "2면(자)" S+0== "00。！？!?」』"	A word later in the sentence that allows what is little enough (問題, 簡単, 構わない, 大丈夫, 平気, 必要, できる, 楽勝, 既に …, or いい, よさそう not in 方がいい nor after a condition in ば).
+cx:lc2c-kurainara:10	GRM-134	&&6 ||2 S+0== "なら" S+0== "ならば" D+0== "(이)라면" F-1== "conjugating" Y-1== "3 정도로" !1 :lc2c-kurai-ok !1 :lc2c-kurai-little	set-ending@-1 "3" set-target " 바에야"	死を待つくらいなら動いていた方がマシだ 죽음을 기다릴 바에야 움직이고 있는 편이 낫다
+cx:lc2c-kurainara:20	GRM-134	&&7 ||2 S+0== "なら" S+0== "ならば" D+0== "(이)라면" ||2 S-1== "くらい" S-1== "ぐらい" F-2== "conjugating" Y-2== "0" !1 :lc2c-kurai-ok !1 :lc2c-kurai-little	set-ending@-2 "3" set-target@-1 "" set-target " 바에야"	行かせるぐらいなら私が行きます 가게 할 바에야 제가 갑니다
+//= lc2c-furi	after OfferPromise 995	の between a noun and ふり (ふりをする, ふりして) names who or what one pretends to be: N인 척 (直也のふりをした 나오야인 척했다, 他人のふりして 타인인 척 하고), not the possessive 의 or the subject 이; not after まま.
+cx:lc2c-furi:10	GRM-141	&&6 S+0== "の" ||3 S+1== "Lふりを" S+1== "Lフリを" S+1== "L振りを" ||2 D+1== "L척" D+1== "L체" !1 F-1== "conjugating" P-1== "1" !1 S-1== "まま"	set-target "인"	直也のふりをした 나오야인 척했다
+cx:lc2c-furi:20	GRM-141	&&6 S+0== "の" ||3 S+1== "ふり" S+1== "フリ" S+1== "振り" ||2 D+1== "L척" D+1== "L체" !1 F-1== "conjugating" P-1== "1" !1 S-1== "まま"	set-target "인" prepend-target@+1 " "	他人のふりして 타인인 척해

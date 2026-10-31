@@ -1,0 +1,19 @@
+# 규칙: GRM-140
+rule	input	expected	kind	layer
+cx:lc2c-itatte:10	車に至っては	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	波瑠に至っては「え？	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	俺に至っては人生初だ。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	男子に至ってはガン見だ。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	ＭＰに至っては２５倍だ。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	俺に至っては記憶がない。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	これに至っては何が何やら。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	凛に至っては１５歳なんだ。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	しかも二ルヴに至っては常に	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	ジーナに至っては耳まで赤い。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	チハヤに至っては人ではない。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	ウィッグに至っては行方不明だ。	has:이르러서는	fix	rewrites
+cx:lc2c-itatte:10	多忙と暇を繰り返し貯蓄も余り無く今日に至った。	!rule:cx:lc2c-itatte:10	keep	rewrites
+cx:lc2c-itatte:10	ブランちゃんも同じ結論に至っていたようだ。	!rule:cx:lc2c-itatte:10	keep	rewrites
+cx:lc2c-itatte:10	小学生の頃から今日に至るまでいつも男の人は姉を好きになるのだ。	!rule:cx:lc2c-itatte:10	keep	rewrites
+cx:lc2c-itatte:10	柚希に至っても満足だったらしい。	!rule:cx:lc2c-itatte:10	keep	rewrites
+cx:lc2c-itatte:10	警備隊に至っては、完全に座り込んでしまっている。	!rule:cx:lc2c-itatte:10	keep	rewrites

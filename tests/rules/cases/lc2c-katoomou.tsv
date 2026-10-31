@@ -1,0 +1,38 @@
+# 규칙: GRM-131
+rule	input	expected	kind	layer
+cx:lc2c-katoomou:10	軽く頭を振ったかと思うと	has:흔들었나 싶더니	fix	rewrites
+cx:lc2c-katoomou:10	無表情になったかと思うと	has:되었나 싶더니	fix	rewrites
+cx:lc2c-katoomou:10	男が舌打ちをしたかと思うと	has:찼나 싶더니	fix	rewrites
+cx:lc2c-katoomou:10	じっと見つめていたかと思うと、	has:있었나 싶더니	fix	rewrites
+cx:lc2c-katoomou:20	中かと思えば、庭だった。	has:안인가 했더니	fix	rewrites
+cx:lc2c-katoomou:20	どんな作戦かと思えば、ただの小細工か。	has:작전인가 했더니	fix	rewrites
+cx:lc2c-katoomou:20	この蜘蛛男、ただの下衆野郎かと思ったら。	has:놈인가 했더니	fix	rewrites
+cx:lc2c-katoomou:20	何事かと思えば、ペットの自慢話であった。	has:일인가 했더니	fix	rewrites
+cx:lc2c-katoomou:25	誰かと思ったら菜々美だった。	has:누군가 했더니	fix	rewrites
+cx:lc2c-katoomou:25	「あーら、誰かと思ったら蘇昭容じゃない」	has:누군가 했더니	fix	rewrites
+cx:lc2c-katoomou:25	誰かと思ったらあいつ【剣聖】じゃねーかっ！	has:누군가 했더니	fix	rewrites
+cx:lc2c-katoomou:25	「あ〜、誰かと思うたら品恵か。どうしたんや、急に」	has:누군가 했더니	fix	rewrites
+cx:lc2c-katoomou:26	急に何かと思えばそんなことを。	has:뭔가 했더니	fix	rewrites
+cx:lc2c-katoomou:26	「……何かと思えばそんな事ですか」	has:「……뭔가 했더니	fix	rewrites
+cx:lc2c-katoomou:26	すっと差し出され、何かと思えば温かいコーヒー。	has:뭔가 했더니	fix	rewrites
+cx:lc2c-katoomou:26	何かと思えば、女の子たちが黄色い声を上げている。	has:뭔가 했더니	fix	rewrites
+cx:lc2c-katoomou:30	早朝だし過疎ってるかと思ったら皆待ってたんだね	has:과소비치나 했더니	fix	rewrites
+cx:lc2c-katoomou:30	何を言い出すかと思ったら．．．弟子にしてくれだと？	has:시작하나 했더니	fix	rewrites
+cx:lc2c-katoomou:30	スムーズに行くかと思ったら、魔力の上昇がしばらく停滞。	has:가나 했더니	fix	rewrites
+cx:lc2c-katoomou:30	ひょっこり本から顔を半分出して何を言うかと思ったら下ネタかい。	has:하나 했더니	fix	rewrites
+cx:lc2c-katoomou:40	かと思えば、オルカが言うのだ。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:40	かと思ったら、目の前に小さな少年がいた。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:40	かと思えば、先方から来た人に飛び付いた。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:40	かと思えば、一度引いた血の気がまたぐわっと顔に満ちていく。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:41	かと思えば動きが止まる。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:41	かと思ったら雨足は強まり、	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:41	かと思ったらいきなり叫び出す。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:41	かと思ったら次はセリメがドロっと溶けた。	has:그런가 했더니	fix	rewrites
+cx:lc2c-katoomou:10	抱きしめられたかと思うと、そっと頬を撫でられる。	has:안겼나 싶더니	fix	rewrites
+cx:lc2c-katoomou:10	こいつらの吐く息を吸っているのかと思うと、	!rule:cx:lc2c-katoomou:10	keep	rewrites
+cx:lc2c-katoomou:20	この男を喜ばせたかと思うと、自分の迂闊さに腹が立つ。	!rule:cx:lc2c-katoomou:20	keep	rewrites
+cx:lc2c-katoomou:25	いつまた、アヴェが攻めてくるかと思うと安心して寝られないよ……。	!rule:cx:lc2c-katoomou:25	keep	rewrites
+cx:lc2c-katoomou:26	科学技術部なんだから自分で解決したらどうかと思う。	!rule:cx:lc2c-katoomou:26	keep	rewrites
+cx:lc2c-katoomou:30	電話に出たかと思えば、数日ぶりのハイテンションの勝吉がいた。	!rule:cx:lc2c-katoomou:30	keep	rewrites
+cx:lc2c-katoomou:40	脇腹が潰れたかと思うほどの一撃。	!rule:cx:lc2c-katoomou:40	keep	rewrites
+cx:lc2c-katoomou:41	こいつらの吐く息を吸っているのかと思うと、	!rule:cx:lc2c-katoomou:41	keep	rewrites
