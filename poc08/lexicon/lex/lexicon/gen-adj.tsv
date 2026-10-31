@@ -236,7 +236,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 雄々しい	おおしい	adj	1	용감하다				u	w	
 雄々しい	おおしい	adj	2	씩씩하다				u	b	
 大っぴら	おおっぴら	na	1	공공연하다				u	b	
-大幅	おおはば	na	1	대폭				u	b	
+大幅	おおはば	na	1	대폭			cls=@degree	u	b	
 大幅	おおはば	na	2	대폭적이다				u	b	
 大振り	おおぶり	na	1	큰 스윙				u	wl	
 大振り	おおぶり	na	2	큼직하다				u	wl	
@@ -327,7 +327,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 角々しい	かどかどしい	adj	1	신경질적이다				u	w	
 金臭い	かなくさい	adj	1	쇳내가 많다				u	b	
 金臭い	かなくさい	adj	2	쇳내투성이다				u	b	
-可成	かなり	na	1	상당한	next=の			u	b	
+可成	かなり	na	1	상당한	next=の		cls=@degree	u	b	
 黴臭い	かびくさい	adj	1	퀴퀴하다				u	w	
 黴臭い	かびくさい	adj	2	곰팡내가 많다				u	b	
 黴臭い	かびくさい	adj	3	곰팡이 냄새가 나다				u	b	
@@ -518,7 +518,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 厳格	げんかく	na	1	엄격하다				u	b	
 厳格	げんかく	na	2	엄격				u	b	
 厳格	げんかく	na	3	환각				u	b	
-現金	げんきん	na	1	현금				u	b	
+現金	げんきん	na	1	현금			cls=@money	u	b	
 現金	げんきん	na	2	엄금				u	b	
 厳酷	げんこく	na	1	엄혹				u	b	
 厳酷	げんこく	na	2	원고				u	b	
@@ -828,7 +828,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 壮大	そうだい	na	1	장대하다				u	b	
 壮大	そうだい	na	2	장대				u	b	
 壮大	そうだい	na	3	총대표				u	b	
-相当	そうとう	na	1	상당하다				u	b	
+相当	そうとう	na	1	상당하다			cls=@degree	u	b	
 相当	そうとう	na	2	총통				u	b	
 相当	そうとう	na	3	상당				u	b	
 相当	そうとう	na	4	소탕				u	b	
@@ -1101,7 +1101,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 腹黒い	はらぐろい	adj	1	엉큼하다				u	b	
 腹黒い	はらぐろい	adj	2	음험하다				u	b	
 腹立たしい	はらだたしい	adj	1	화가 나다				u	b	
-遥か	はるか	na	1	아득하다				u	b	
+遥か	はるか	na	1	아득하다			cls=@degree	u	b	
 腫れぼったい	はれぼったい	adj	1	부석부석하다				u	b	
 晴れやか	はれやか	na	1	화려하다				u	b	
 晴れやか	はれやか	na	2	밝다				u	b	

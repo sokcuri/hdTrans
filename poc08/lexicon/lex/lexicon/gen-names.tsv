@@ -162,7 +162,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 プロレス	ぷろれす	n	2	프로레슬링				u	c+b	from-names
 プードル	ぷーどる	n	1	푸들				u	c+nw	from-names
 プードル	ぷーどる	n	2	뿌드르				u	c+b	from-names
-ヘリ	へり	n	1	헬리콥터				u	c+b	from-names
+ヘリ	へり	n	1	헬리콥터			cls=@vehicle	u	c+b	from-names
 ベルガモット	べるがもっと	n	1	베르가못 오렌지				u	c+nw	from-names
 ベルガモット	べるがもっと	n	2	벨가모드				u	c+b	from-names
 ペリカン	ぺりかん	n	1	사다새과				u	c+np	from-names
@@ -312,7 +312,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 黄石	こうせき	n	1	황스				u	c+b	from-names
 龍飛	りょうひ	n	1	용비				u	c+nw	from-names
 龍飛	りょうひ	n	2	닷피				u	c+b	from-names
-二人組	ふたりぐみ	n	1	듀오				u	c+nw	from-names
+二人組	ふたりぐみ	n	1	듀오			cls=@group	u	c+nw	from-names
 Ｚ旗	ぜっとき	n	1	Z기				u	c+np	from-names
 絡繰屋敷	からくりやしき	n	1	가라쿠리 저택				u	c+np	from-names
 鯨雲	くじらぐも	n	1	구름고래				u	c+np	from-names

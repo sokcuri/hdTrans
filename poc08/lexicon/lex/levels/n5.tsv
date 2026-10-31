@@ -689,8 +689,8 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 休む	やすむ	v5	休む	verb	쉬다	REG			+	activity	go				ga=@person		y	五段-マ行	1
 会う	あう	v5	会う	verb	만나다	REG			+	change	go				ga=@person ni=@person	に=을	y	五段-ワア行	2
 住む	すむ	v5	住む	verb	살다	L			+	activity	go				ga=@person ni=@place		y	五段-マ行	1
-作る	つくる	v5	作る	verb	만들다	L			+	activity	go				ga=@person o=@thing.made		y	五段-ラ行	3
-使う	つかう	v5	使う	verb	쓰다	EU			+	activity	go				ga=@person o=@thing		y	五段-ワア行	2
+作る	つくる	v5	作る	verb	만들다	L			+	activity	go				ga=@person o=@thing.made		y	五段-ラ行	13
+使う	つかう	v5	使う	verb	쓰다	EU			+	activity	go				ga=@person o=@thing		y	五段-ワア行	5
 借りる	かりる	v1	借りる	verb	빌리다	REG			+	change	past				ga=@person o=@thing ni=@person		y	上一段-ラ行	1
 働く	はたらく	v5	働く	verb	일하다	HA			+	activity	go				ga=@person		y	五段-カ行	2
 入る	はいる	v5	入る	verb	들어가다	REG			+	change	eo				ga=@person ni=@place		y	五段-ラ行	7
@@ -699,7 +699,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 出る	でる	v1	出る	verb	나가다	REG			+	change	eo				ga=@person o=@place		y	下一段-ダ行	8
 出掛ける	でかける	v1	出かける	verb	나가다	REG			+	change	eo				ga=@person to=@person		y	下一段-カ行	1
 出来る	できる	v1	できる	verb	할 수 있다	EXIST			-	state	simple				ni=@person ga=@activity	が=을	y	上一段-カ行	3
-分かる	わかる	v5	分かる	verb	알다	L			-	state	go	모르다			ga=@info	が=을	y	五段-ラ行	2
+分かる	わかる	v5	分かる	verb	알다	L			-	state	go	모르다			ga=@info	が=을	y	五段-ラ行	3
 切る	きる	v5	切る	verb	자르다	REU			+	activity	go				ga=@person o=@thing		y	五段-ラ行	9
 勝つ	かつ	v5	勝つ	verb	이기다	REG			+	change	go				ga=@person ni=@person		y	五段-タ行	1
 勤める	つとめる	v1	勤める	verb	맡다	REG			+	activity	go				ga=@person o=@person.role		y	下一段-マ行	2
@@ -747,7 +747,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 歌う	うたう	v5	歌う	verb	노래하다	HA			+	activity	go				ga=@person o=@music		y	五段-ワア行	2
 止まる	とまる	v5	止まる	verb	멈추다	REG			-	change	eo				ga=@thing		y	五段-ラ行	3
 止める	やめる	v1	やめる	verb	그만두다	REG			+	change	past				ga=@person o=@activity		y	下一段-マ行	4
-止める	とめる	v1	止める	verb	멈추다	REG			+	change	go				ga=@person o=@thing		y	下一段-マ行	7
+止める	とめる	v1	止める	verb	멈추다	REG			+	change	go				ga=@person o=@thing		y	下一段-マ行	8
 歩く	あるく	v5	歩く	verb	걷다:ㄷ	D			+	activity	go				ga=@person		y	五段-カ行	1
 死ぬ	しぬ	v5	死ぬ	verb	죽다	REG			-	change	eo				ga=@person|@animal		y	五段-ナ行	1
 決める	きめる	v1	決める	verb	정하다	HA			+	change	past				ga=@person o=@thing		y	下一段-マ行	2
@@ -759,7 +759,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 消す	けす	v5	消す	verb	지우다	REG			+	change	go				ga=@person o=@thing		y	五段-サ行	4
 済む	すむ	v5	済む	verb	끝나다	REG			-	change	past				ga=@task		y	五段-マ行	1
 渡す	わたす	v5	渡す	verb	건네다	REG			+	activity	go				ga=@person ni=@person o=@thing		y	五段-サ行	1
-為る	する	vs	する	verb	하다	HA			+	activity	go				ga=@person o=@activity		y	サ行変格	3
+為る	する	vs	する	verb	하다	HA			+	activity	go				ga=@person o=@activity		y	サ行変格	10
 無くなる	なくなる	v5	なくなる	verb	없어지다	REG			-	change	past				ga=@thing		y	五段-ラ行	1
 焼く	やく	v5	焼く	verb	굽다:ㅂ	B			+	activity	go				ga=@person o=@food		y	五段-カ行	2
 生まれる	うまれる	v1	生まれる	verb	태어나다	REG			-	change	past				ga=@person|@animal		y	下一段-ラ行	2
@@ -773,12 +773,12 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 立つ	たつ	v5	立つ	verb	서다	REG			+	change	eo				ga=@person ni=@place		n	五段-タ行	6
 笑う	わらう	v5	笑う	verb	웃다	REG			+	activity	go				ga=@person		y	五段-ワア行	3
 答える	こたえる	v1	答える	verb	대답하다	HA			+	activity	go				ga=@person ni=@question		y	下一段-ア行	2
-終わる	おわる	v5	終わる	verb	끝나다	REG			-	change	past				ga=@event|@task		y	五段-ラ行	2
+終わる	おわる	v5	終わる	verb	끝나다	REG			-	change	past				ga=@event|@task		y	五段-ラ行	4
 締まる	しまる	v5	閉まる	verb	닫히다	REG			-	change	eo				ga=@opening		y	五段-ラ行	2
 締める	しめる	v1	閉める	verb	닫다	REG			+	change	go				ga=@person o=@opening		y	下一段-マ行	6
-置く	おく	v5	置く	verb	놓다	REG			+	change	go				ga=@person o=@thing ni=@place		y	五段-カ行	2
+置く	おく	v5	置く	verb	놓다	REG			+	change	go				ga=@person o=@thing ni=@place		y	五段-カ行	7
 習う	ならう	v5	習う	verb	배우다	REG			+	activity	go				ga=@person ni=@person o=@skill		y	五段-ワア行	1
-考える	かんがえる	v1	考える	verb	생각하다	HA			+	activity	go				ga=@person o=@idea		y	下一段-ア行	1
+考える	かんがえる	v1	考える	verb	생각하다	HA			+	activity	go				ga=@person o=@idea		y	下一段-ア行	3
 聞く	きく	v5	聞く	verb	듣다:ㄷ	D			+	activity	go				ga=@person o=@info		y	五段-カ行	6
 聞こえる	きこえる	v1	聞こえる	verb	들리다	REG			-	state	simple				ga=@sound ni=@person		y	下一段-ア行	1
 脱ぐ	ぬぐ	v5	脱ぐ	verb	벗다	REG			+	change	go				ga=@person o=@clothing		y	五段-ガ行	1
@@ -788,20 +788,20 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 被る	かぶる	v5	かぶる	verb	쓰다	EU			+	change	go				ga=@person o=@headwear		y	五段-ラ行	3
 要る	いる	v5	要る	verb	필요하다	HA			-	state	simple				ga=@thing ni=@person		y	五段-ラ行	1
 見える	みえる	v1	見える	verb	보이다	REG			-	state	simple				ga=@thing		y	下一段-ア行	1
-見せる	みせる	v1	見せる	verb	보여 주다	REG			+	activity	go				ga=@person ni=@person o=@thing		y	下一段-サ行	2
-見る	みる	v1	見る	verb	보다	REG			+	activity	go				ga=@person o=@thing		y	上一段-マ行	1
+見せる	みせる	v1	見せる	verb	보여 주다	REG			+	activity	go				ga=@person ni=@person o=@thing		y	下一段-サ行	7
+見る	みる	v1	見る	verb	보다	REG			+	activity	go				ga=@person o=@thing		y	上一段-マ行	2
 見付ける	みつける	v1	見つける	verb	찾다	REG			+	change	past				ga=@person o=@thing		y	下一段-カ行	2
-覚える	おぼえる	v1	覚える	verb	기억하다	HA			+	change	go				ga=@person o=@thing		y	下一段-ア行	4
+覚える	おぼえる	v1	覚える	verb	기억하다	HA			+	change	go				ga=@person o=@thing		y	下一段-ア行	6
 触る	さわる	v5	触る	verb	만지다	REG			+	activity	go				ga=@person ni=@thing	に=을	y	五段-ラ行	1
-言う	いう	v5	言う	verb	말하다	HA			+	activity	go				ga=@person o=@speech ni=@person		y	五段-ワア行	1
-話す	はなす	v5	話す	verb	이야기하다	HA			+	activity	go				ga=@person to=@person o=@topic		y	五段-サ行	3
-読む	よむ	v5	読む	verb	읽다	REG			+	activity	go				ga=@person o=@document		y	五段-マ行	2
+言う	いう	v5	言う	verb	말하다	HA			+	activity	go				ga=@person o=@speech ni=@person		y	五段-ワア行	2
+話す	はなす	v5	話す	verb	이야기하다	HA			+	activity	go				ga=@person to=@person o=@topic		y	五段-サ行	5
+読む	よむ	v5	読む	verb	읽다	REG			+	activity	go				ga=@person o=@document		y	五段-マ行	1
 調べる	しらべる	v1	調べる	verb	조사하다	HA			+	activity	go				ga=@person o=@thing|@info		y	下一段-バ行	2
 負ける	まける	v1	負ける	verb	지다	REG			-	change	go				ga=@person ni=@person		y	下一段-カ行	2
 貰う	もらう	v5	もらう	verb	받다	REG			+	change	past				ga=@person ni=@person o=@thing	に=에게서	y	五段-ワア行	1
 買う	かう	v5	買う	verb	사다	REG			+	change	past				ga=@person o=@thing		y	五段-ワア行	1
 貸す	かす	v5	貸す	verb	빌려주다	REG			+	change	past				ga=@person ni=@person o=@thing		y	五段-サ行	1
-走る	はしる	v5	走る	verb	달리다	REG			+	activity	go				ga=@person|@animal|@vehicle		y	五段-ラ行	3
+走る	はしる	v5	走る	verb	달리다	REG			+	activity	go				ga=@person|@animal|@vehicle		y	五段-ラ行	7
 起きる	おきる	v1	起きる	verb	일어나다	REG			+	change	go				ga=@person		y	上一段-カ行	5
 足りる	たりる	v1	足りる	verb	충분하다	HA			-	state	simple	부족하다			ga=@thing		y	上一段-ラ行	1
 踊る	おどる	v5	踊る	verb	춤추다	REG			+	activity	go				ga=@person		y	五段-ラ行	2
@@ -813,7 +813,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 遅れる	おくれる	v1	遅れる	verb	늦다	REG			-	change	past				ga=@person|@vehicle ni=@event		y	下一段-ラ行	2
 遊ぶ	あそぶ	v5	遊ぶ	verb	놀다	L			+	activity	go				ga=@person to=@person		y	五段-バ行	1
 運ぶ	はこぶ	v5	運ぶ	verb	옮기다	REG			+	activity	go				ga=@person o=@thing ni=@place		y	五段-バ行	3
-違う	ちがう	v5	違う	verb	다르다	REU			-	state	simple				ga=@thing to=@thing		y	五段-ワア行	3
+違う	ちがう	v5	違う	verb	다르다	REU			-	state	simple				ga=@thing to=@thing		y	五段-ワア行	5
 選ぶ	えらぶ	v5	選ぶ	verb	고르다	REU			+	change	go				ga=@person o=@thing		y	五段-バ行	3
 開く	ひらく	v5	開く	verb	열다	L			+	change	eo				ga=@person o=@thing		y	五段-カ行	14
 開ける	あける	v1	開ける	verb	열다	L			+	change	go				ga=@person o=@opening		y	下一段-カ行	5
@@ -822,10 +822,10 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 集まる	あつまる	v5	集まる	verb	모이다	REG			+	change	eo				ga=@person|@group ni=@place		y	五段-ラ行	1
 頂く	いただく	v5	いただく	verb	받다	REG			+	change	past				ga=@person o=@thing		y	五段-カ行	2
 頑張る	がんばる	v5	頑張る	verb	열심히 하다	HA			+	activity	go				ga=@person		y	五段-ラ行	4
-頼む	たのむ	v5	頼む	verb	부탁하다	HA			+	change	go				ga=@person ni=@person o=@thing	に=에게	y	五段-マ行	2
+頼む	たのむ	v5	頼む	verb	부탁하다	HA			+	change	past				ga=@person ni=@person o=@thing	に=에게	y	五段-マ行	2
 飛ぶ	とぶ	v5	飛ぶ	verb	날다	L			+	activity	go				ga=@animal|@vehicle		y	五段-バ行	2
 食べる	たべる	v1	食べる	verb	먹다	REG			+	activity	go				ga=@person o=@food		y	下一段-バ行	1
-飲む	のむ	v5	飲む	verb	마시다	REG			+	activity	go				ga=@person o=@drink		y	五段-マ行	4
+飲む	のむ	v5	飲む	verb	마시다	REG			+	activity	go				ga=@person o=@drink		y	五段-マ行	6
 驚く	おどろく	v5	驚く	verb	놀라다	REG			-	change	past				ga=@person		y	五段-カ行	1
 鳴く	なく	v5	鳴く	verb	울다	L			+	activity	go				ga=@animal		y	五段-カ行	1
 バイト	ばいと	n	バイト	work	아르바이트		@activity										y		2

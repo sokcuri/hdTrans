@@ -4,8 +4,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 さん	さん	suf	1	씨				m	r	田中さん → 다나카 씨
 さん	さん	suf	2	님	after=提督|師匠|博士|教授|神父|運転手|店長|@person.higher			m	r	提督さん → 제독님
 あっ	あっ	intj	1	앗				m	r	あっ、忘れた → 앗, 깜빡했다
-遣る	やる	v5	1	하다			vol=+ asp=activity	m	r	仕事をやる → 일을 하다
-遣る	やる	v5	2	주다	dat=@person|@animal obj=@food|@drink|@thing.made|@money			m	r	犬にえさをやる → 개에게 먹이를 주다
 ああ	ああ	intj	1	아				m	r	ああ、そうか → 아, 그렇구나
 ちゃん	ちゃん	suf	1	짱				m	r	さよりちゃん → 사요리 짱
 達	たち	suf	1	들				m	r	子供たち → 아이들
@@ -101,7 +99,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 そんな	そんな	na	1	그런				m	r	そんな人 → 그런 사람
 そんな	そんな	na	2	그렇게	next=に form=adv			m	r	そんなに強い → 그렇게 강하다
 そんな	そんな	na	3	그런 것	next=の form=adv			m	r	そんなの関係ない → 그런 건 상관없다
-目	め	suf	1	째				m	r	3日目 → 3일째
+目	め	suf	1	째			cls=@gaze	m	r	3日目 → 3일째
 目	め	suf	2	번째	after=回|度|人|番|発|本			m	r	二回目 → 두 번째
 よし	よし	intj	1	좋아				m	r	よし、行くぞ → 좋아, 가자
 存在	そんざい	n	1	존재			cls=@abstract	m	r	聖なる存在 → 성스러운 존재
@@ -119,12 +117,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 積り	つもり	n	1	생각				m	r	そのつもり → 그럴 생각
 積り	つもり	n	2	속셈	mod=何の|どういう			m	r	何のつもりだ → 무슨 속셈이냐
 官	かん	suf	1	관				m	r	司令官 → 사령관
-つく	つく	v5	1	붙다			vol=- asp=change	m	r	目につく → 눈에 띄다
-つく	つく	v5	2	쉬다	obj=溜め息|ため息|息			m	r	溜め息をつく → 한숨을 쉬다
-つく	つく	v5	3	하다	obj=嘘|うそ			m	r	嘘をつく → 거짓말을 하다
-つく	つく	v5	4	꿇다	obj=膝			m	r	膝をつく → 무릎을 꿇다
-つく	つく	v5	5	찌르다	obj=隙|弱点			m	r	隙をつく → 틈을 찌르다
-つく	つく	v5	6	대하다	dat=事|件|其れ|@topic|状況|事件 form=te			m	r	その件について → 그 건에 대해
 駆逐	くちく	n	1	구축			cls=@abstract	m	r	駆逐艦 → 구축함
 機	き	n	1	기체			cls=@machine	m	r	私の機 → 내 기체
 機	き	n	2	기회	pred=逃す|見る|うかがう|待つ			m	r	機を逃す → 기회를 놓치다
@@ -147,7 +139,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 後	ご	suf	1	후				m	r	放課後 → 방과 후
 笑い	わらい	n	1	웃음			cls=@emotion|@sound	m	r	笑いを堪える → 웃음을 참다
 笑い	わらい	n	2	ㅋㅋ	next=w|ｗ|ww|ｗｗ			m	r	マジかよｗ → 진짜냐 ㅋㅋ
-作戦	さくせん	n	1	작전			cls=@task|@plan	m	r	作戦を練る → 작전을 짜다
+作戦	さくせん	n	1	작전			cls=@task|@plan|@scheme	m	r	作戦を練る → 작전을 짜다
 婚約	こんやく	n	1	약혼			cls=@event	m	r	婚約者 → 약혼자
 出撃	しゅつげき	n	1	출격			cls=@activity	m	r	出撃する → 출격하다
 まじ	まじ	na	1	진짜				m	r	マジで → 진짜로
@@ -163,20 +155,20 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 園	えん	suf	1	원				m	r	幼稚園 → 유치원
 ううん	ううん	intj	1	아니				m	r	ううん、違う → 아니, 아니야
 ううん	ううん	intj	2	음	next=…|、|。			m	r	うーん、物置？ → 음, 창고?
-姿	すがた	n	1	모습			cls=@abstract	m	r	姿を見せる → 모습을 보이다
+姿	すがた	n	1	모습			cls=@abstract|@sign	m	r	姿を見せる → 모습을 보이다
 姿	すがた	n	2	차림	mod=@clothing			m	r	浴衣姿 → 유카타 차림
 魔法	まほう	n	1	마법			cls=@magic	m	r	魔法を使う → 마법을 쓰다
 わし	わし	n	1	나			anim=+ cls=@person	m	r	わしは知らん → 나는 모른다
 うー	うー	intj	1	으				m	r	うー、雨の日が続くね → 으, 비 오는 날이 계속되네
 員	いん	suf	1	원				m	r	審査員 → 심사위원
-元	もと	n	1	원래				m	r	元のまま → 원래대로
+元	もと	n	1	원래			cls=@state	m	r	元のまま → 원래대로
 元	もと	n	2	전	next=@person|@person.role			m	r	元暴力団員 → 전 폭력단원
 元	もと	n	3	곁	pred=戻る|行く|来る|帰る mod=@person			m	r	俺の元へ戻る → 내 곁으로 돌아오다
 元	もと	n	4	근원	pred=成る|生み出す			m	r	元となる → 근원이 되다
 あれ	あれ	intj	1	어				m	r	あれ？おじいちゃん！ → 어? 할아버지!
 あれ	あれ	intj	2	저것	form=no-attr|cop			m	r	あれは何？ → 저건 뭐야?
 拍手	はくしゅ	n	1	박수			cls=@sound	m	r	拍手が湧き起こる → 박수가 터져 나오다
-此奴	こいつ	n	1	이 녀석			anim=+	m	r	こいつは面白い → 이 녀석은 재밌어
+此奴	こいつ	n	1	이 녀석			anim=+ cls=@person	m	r	こいつは面白い → 이 녀석은 재밌어
 此奴	こいつ	n	2	이놈	register=casual subj=@person			m	r	こいつめ → 이놈
 得る	える	v1	1	얻다			vol=+ asp=instant	m	r	情報を得る → 정보를 얻다
 ふっ	ふっ	adv	1	후				m	r	フッ… 正解だ → 훗… 정답이다
@@ -235,7 +227,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 格好	かっこう	n	4	괄호	next=内|書き			m	r	カッコ内 → 괄호 안
 めでたい	めでたい	adj	1	경사스럽다				m	r	めでたい日 → 경사스러운 날
 感	かん	n	1	감			cls=@emotion	m	r	劣等感 → 열등감
-役	やく	n	1	역할			cls=@task	m	r	役を演じる → 역할을 연기하다
+役	やく	n	1	역할			cls=@task|@post	m	r	役を演じる → 역할을 연기하다
 役	やく	n	2	역	pred=演ずる|為る|遣る			m	r	鬼役 → 도깨비 역
 こんな	こんな	na	1	이런				m	r	こんな所 → 이런 곳
 感ずる	かんずる	vs	1	느끼다			vol=- asp=state	m	r	限界を感じる → 한계를 느끼다
@@ -269,7 +261,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 想像	そうぞう	n	1	상상			cls=@abstract|@guess	m	r	想像もつかない → 상상도 못 하다
 えーと	えーと	intj	1	음				m	r	えーと… → 음…
 思い	おもい	n	1	마음			cls=@emotion	m	r	その想いが膨らむ → 그 마음이 부풀다
-記憶	きおく	n	1	기억			cls=@abstract	m	r	記憶を失う → 기억을 잃다
+記憶	きおく	n	1	기억			cls=@abstract|@faculty	m	r	記憶を失う → 기억을 잃다
 仕様	しよう	n	1	사양			cls=@document	m	r	仕様変更 → 사양 변경
 共	とも	n	1	함께				m	r	共に戦う → 함께 싸우다
 共	とも	n	2	모두	after=男女|両者|両方|双方			m	r	男女ともに → 남녀 모두
@@ -386,10 +378,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ホワット	ほわっと	n	1	왓				m	r	ホワット → 왓
 名	な	n	1	이름			cls=@info	m	r	名を呼ぶ → 이름을 부르다
 名	な	n	2	명	after=@number			m	r	三名 → 3명
-向ける	むける	v1	1	향하다			vol=+ asp=instant	m	r	こちらに向ける → 이쪽으로 향하게 하다
-向ける	むける	v1	2	겨누다	obj=@weapon|銃口|刃|切っ先|矛先			m	r	銃を向ける → 총을 겨누다
-向ける	むける	v1	3	돌리다	obj=視線|目|顔|背|身体|足			m	r	視線を向ける → 시선을 돌리다
-向ける	むける	v1	4	기울이다	obj=意識|注意|関心|耳			m	r	意識を向ける → 의식을 기울이다
 小	しょう	pref	1	소				m	r	小惑星 → 소행성
 貴族	きぞく	n	1	귀족			cls=@person.role anim=+	m	r	貴族の家 → 귀족 집안
 瞬間	しゅんかん	n	1	순간			cls=@time	m	r	その瞬間 → 그 순간
@@ -408,7 +396,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 目茶	めちゃ	adv	1	엄청				m	r	めっちゃ旨い → 엄청 맛있다
 死	し	n	1	죽음			cls=@abstract	m	r	死を思う → 죽음을 생각하다
 同じ	おなじ	na	1	같다				m	r	同じだ → 같다
-表情	ひょうじょう	n	1	표정			cls=@abstract	m	r	表情を浮かべる → 표정을 짓다
+表情	ひょうじょう	n	1	표정			cls=@abstract|@expression	m	r	表情を浮かべる → 표정을 짓다
 超	ちょう	pref	1	초				m	r	超音波 → 초음파
 由	よし	n	1	까닭				m	r	知る由もない → 알 까닭도 없다
 取れる	とれる	v1	1	떨어지다			vol=- asp=change	m	r	ボタンが取れる → 단추가 떨어지다
@@ -463,7 +451,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 場	ば	n	2	분위기	pred=和む|白ける|盛り上がる|静まる|凍る			m	r	場がなごむ → 분위기가 누그러지다
 礼	れい	n	1	감사 인사			cls=@speech	m	r	お礼を言う → 감사 인사를 하다
 礼	れい	n	2	예의	pred=尽くす|欠く|失する|弁える			m	r	礼を尽くす → 예의를 다하다
-現実	げんじつ	n	1	현실			cls=@abstract	m	r	現実になる → 현실이 되다
+現実	げんじつ	n	1	현실			cls=@abstract|@state	m	r	現実になる → 현실이 되다
 ああ	ああ	adv	1	저렇게				m	r	ああ言う → 저렇게 말하다
 見事	みごと	na	1	훌륭하다				m	r	見事な腕前 → 훌륭한 솜씨
 狙う	ねらう	v5	1	노리다			vol=+ asp=activity	m	r	命を狙う → 목숨을 노리다
@@ -511,7 +499,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 実際	じっさい	n	1	실제			cls=@abstract	m	r	実際は違う → 실제로는 다르다
 一応	いちおう	n	1	일단				m	r	一応確認する → 일단 확인하다
 バイ	ばい	n	1	바이				m	r	バイバイ → 바이바이
-視線	しせん	n	1	시선			cls=@abstract|@attention	m	r	視線を向ける → 시선을 향하다
+視線	しせん	n	1	시선			cls=@abstract|@attention|@gaze	m	r	視線を向ける → 시선을 향하다
 館	かん	suf	1	관				m	r	図書館 → 도서관
 店	てん	suf	1	점			cls=@organization	m	r	二号店 → 2호점
 フィア	ふぃあ	n	1	피아			anim=+	m	r	アニスフィア → 아니스피아
@@ -521,7 +509,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 抜錨	ばつびょう	n	1	출항			cls=@activity	m	r	抜錨します → 출항합니다
 未だ未だ	まだまだ	adv	1	아직				m	r	まだまだ暑い → 아직 덥다
 未だ未だ	まだまだ	adv	2	계속	next=続く|行く|続ける			m	r	まだまだ続く → 계속 이어지다
-意識	いしき	n	1	의식			cls=@abstract	m	r	意識を失う → 의식을 잃다
+意識	いしき	n	1	의식			cls=@abstract|@attention|@faculty	m	r	意識を失う → 의식을 잃다
 愛する	あいする	vs	1	사랑하다			vol=+ asp=state	m	r	妻を愛する → 아내를 사랑하다
 相	あい	pref	1	서로				m	r	相次ぐ → 잇따르다
 ビー	びー	n	1	비			cls=@entity	m	r	ビー玉 → 비비탄
@@ -582,7 +570,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 きゃあ	きゃあ	intj	1	꺄악				m	r	きゃあ！ → 꺄악!
 あらゆる	あらゆる	adn	1	모든				m	r	あらゆる物 → 모든 것
 扉	とびら	n	1	문			cls=@building|@opening	m	r	扉が開く → 문이 열리다
-動き	うごき	n	1	움직임				m	r	手の動き → 손의 움직임
+動き	うごき	n	1	움직임			cls=@motion|@sign	m	r	手の動き → 손의 움직임
 オール	おーる	n	1	올				m	r	オール・オア・ナッシング → 올 오어 나싱
 人々	ひとびと	n	1	사람들			cls=@group anim=+	m	r	人々を救う → 사람들을 구하다
 中	じゅう	suf	1	온				m	r	世界中 → 온 세계
@@ -600,8 +588,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 クリア	くりあ	n	1	클리어				m	r	ゲームをクリアする → 게임을 클리어하다
 井戸	いど	n	1	우물			cls=@facility	m	r	井戸の底 → 우물 바닥
 其方	そなた	n	1	그대			anim=+ cls=@direction	m	r	そなたの子じゃ → 그대의 아이로다
-反応	はんのう	n	1	반응				m	r	反応を見せる → 반응을 보이다
-担当	たんとう	n	1	담당				m	r	担当の先生 → 담당 선생님
+反応	はんのう	n	1	반응			cls=@sign	m	r	反応を見せる → 반응을 보이다
+担当	たんとう	n	1	담당			cls=@post	m	r	担当の先生 → 담당 선생님
 アウト	あうと	n	1	아웃				m	r	アウト！ → 아웃!
 すっ	すっ	adv	1	쓱				m	r	すっと立つ → 쓱 일어서다
 おー	おー	intj	1	오				m	r	おー！ → 오!
@@ -663,7 +651,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 社	しゃ	n	1	회사			cls=@organization	m	r	社の取引先 → 회사 거래처
 社	しゃ	n	2	사	after=@number			m	r	3社 → 3사
 同	どう	n	1	해당				m	r	同海域 → 해당 해역
-展開	てんかい	n	1	전개			cls=@activity	m	r	艦隊を展開 → 함대를 전개
+展開	てんかい	n	1	전개			cls=@activity|@trend	m	r	艦隊を展開 → 함대를 전개
 具	ぐ	n	1	건더기			cls=@food	m	r	具だくさん → 건더기가 풍부함
 事情	じじょう	n	1	사정			cls=@abstract|@info	m	r	事情がある → 사정이 있다
 漸く	ようやく	adv	1	드디어				m	r	ようやく会えた → 드디어 만났다
@@ -676,9 +664,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 トップ	とっぷ	n	1	선두			cls=@abstract	m	r	現在トップ → 현재 선두
 トップ	とっぷ	n	2	수장	mod=ギルド|財閥|会社|@organization			m	r	ギルドのトップ → 길드의 수장
 再	さい	pref	1	재				m	r	再編成 → 재편성
-シナリオ	しなりお	n	1	시나리오			cls=@document	m	r	シナリオを書く → 시나리오를 쓰다
+シナリオ	しなりお	n	1	시나리오			cls=@document|@scheme|@writing	m	r	シナリオを書く → 시나리오를 쓰다
 線	せん	n	1	선			cls=@shape	m	r	黄色い線 → 노란 선
-其奴	そいつ	n	1	그 녀석			anim=+	m	r	そいつ誰？ → 그 녀석 누구야?
+其奴	そいつ	n	1	그 녀석			anim=+ cls=@person	m	r	そいつ誰？ → 그 녀석 누구야?
 グッド	ぐっど	n	1	굿				m	r	グッドモーニング → 굿모닝
 早速	さっそく	adv	1	곧바로				m	r	さっそく読んでみる → 곧바로 읽어 본다
 ハイ	はい	n	1	하이				m	r	ハイテンション → 하이텐션
@@ -713,18 +701,18 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 垣	かき	n	1	울타리			cls=@object.long	m	r	垣を作る → 울타리를 치다
 連中	れんじゅう	n	1	녀석들			cls=@group anim=+	m	r	他の連中 → 다른 녀석들
 連中	れんじゅう	n	2	사람들	mod=会|組|課|部隊|内			m	r	課の連中 → 과 사람들
-溜め息	ためいき	n	1	한숨			cls=@sound	m	r	ため息が漏れる → 한숨이 새어 나오다
+溜め息	ためいき	n	1	한숨			cls=@sound|@breath	m	r	ため息が漏れる → 한숨이 새어 나오다
 追う	おう	v5	1	쫓다			vol=+ asp=activity	m	r	後を追う → 뒤를 쫓다
 追う	おう	v5	2	좇다	obj=夢|理想|真理|流行			m	r	夢を追う → 꿈을 좇다
 蓋	ふた	n	1	뚜껑			cls=@container|@opening	m	r	蓋を開ける → 뚜껑을 열다
 イヤー	いやー	n	1	이어				m	r	ラストイヤー → 라스트 이어
-事実	じじつ	n	1	사실			cls=@abstract	m	r	事実を認める → 사실을 인정하다
+事実	じじつ	n	1	사실			cls=@abstract|@info	m	r	事実を認める → 사실을 인정하다
 誕生	たんじょう	n	1	탄생			cls=@event	m	r	新時代の誕生 → 새 시대의 탄생
 振り	ふり	n	1	척			cls=@abstract	m	r	寝たふり → 자는 척
 表	ひょう	n	1	표			cls=@document|@position	m	r	表にまとめる → 표로 정리하다
 距離	きょり	n	1	거리			cls=@quantity	m	r	距離を置く → 거리를 두다
 証拠	しょうこ	n	1	증거			cls=@info	m	r	証拠がない → 증거가 없다
-臭い	くさい	suf	1	스럽다				m	r	年寄りくさい → 늙은이 같다
+臭い	くさい	suf	1	스럽다			cls=@smell	m	r	年寄りくさい → 늙은이 같다
 多く	おおく	n	1	많은			cls=@quantity	m	r	多くの人 → 많은 사람
 多く	おおく	n	2	대부분	next=は|が			m	r	多くは失敗する → 대부분은 실패한다
 和	わ	n	1	화			cls=@abstract	m	r	和を結ぶ → 화의를 맺다
@@ -738,7 +726,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 瞳	ひとみ	n	1	눈동자			cls=@body	m	r	青い瞳 → 푸른 눈동자
 悲鳴	ひめい	n	1	비명			cls=@sound|@shout	m	r	悲鳴を上げる → 비명을 지르다
 先程	さきほど	n	1	조금 전			cls=@time	m	r	先ほどの事件 → 조금 전의 사건
-会長	かいちょう	n	1	회장			cls=@person.role anim=+	m	r	生徒会長 → 학생회장
+会長	かいちょう	n	1	회장			anim=+ cls=@person.role|@post	m	r	生徒会長 → 학생회장
 一言	ひとこと	n	1	한마디			cls=@speech	m	r	ひと言お願いします → 한마디 부탁드립니다
 新た	あらた	na	1	새롭다				m	r	新たな発見 → 새로운 발견
 竜	りゅう	n	1	용			cls=@monster anim=+	m	r	竜を倒す → 용을 쓰러뜨리다
@@ -972,7 +960,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 機動	きどう	n	1	기동			cls=@activity	m	r	機動部隊 → 기동 부대
 下	もと	n	1	아래			cls=@place|@position	m	r	名のもとに → 이름 아래
 下	もと	n	2	곁	mod=@person			m	r	貴方のもとへ → 당신 곁으로
-条件	じょうけん	n	1	조건			cls=@rule	m	r	条件を満たす → 조건을 충족하다
+条件	じょうけん	n	1	조건			cls=@rule|@request	m	r	条件を満たす → 조건을 충족하다
 進める	すすめる	v1	1	진행하다			vol=+ asp=activity	m	r	作業を進める → 작업을 진행하다
 進める	すすめる	v1	2	옮기다	obj=駒|足|歩			m	r	駒を進める → 말을 옮기다
 デート	でーと	n	1	데이트			cls=@event	m	r	デートに誘う → 데이트에 초대하다
@@ -1007,7 +995,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大した	たいした	adn	1	대단한				m	r	大した男 → 대단한 남자
 大した	たいした	adn	2	별	head=事|問題|傷|量|差|物			m	r	大した事ない → 별일 아니다
 手伝い	てつだい	n	1	도움			cls=@activity	m	r	手伝いに来る → 도우러 오다
-成長	せいちょう	n	1	성장			cls=@abstract	m	r	成長が止まる → 성장이 멈추다
+成長	せいちょう	n	1	성장			cls=@abstract|@trend	m	r	成長が止まる → 성장이 멈추다
 真似	まね	n	1	흉내			cls=@activity	m	r	真似をする → 흉내를 내다
 真似	まね	n	2	짓	mod=はしたない|卑怯|無茶|馬鹿|危険|余計|酷い|危ない|愚か|無礼|汚い|非道|そんな|こんな|あんな|何の|みっともない			m	r	そんな真似 → 그런 짓
 子	し	suf	1	자				m	r	遺伝子 → 유전자
@@ -1087,7 +1075,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 騒ぐ	さわぐ	v5	2	웅성거리다	subj=人々|群衆|観客|周り|皆			m	r	人々が騒ぐ → 사람들이 웅성거리다
 難い	にくい	suf	1	어렵다				m	r	読みにくい → 읽기 어렵다
 銀	ぎん	n	1	은			cls=@material	m	r	銀の入手 → 은의 입수
-感覚	かんかく	n	1	감각			cls=@abstract	m	r	体の感覚がない → 몸의 감각이 없다
+感覚	かんかく	n	1	감각			cls=@abstract|@faculty|@sensation	m	r	体の感覚がない → 몸의 감각이 없다
 おっと	おっと	intj	1	이런				m	r	おっと、余計なことはさせないよ → 이런, 쓸데없는 짓은 못 하게 해야지
 おっと	おっと	intj	2	어이쿠	next=と			m	r	おっとと → 어이쿠
 夕日	ゆうひ	n	1	석양			cls=@nature|@light	m	r	夕日が綺麗 → 석양이 아름답다
@@ -1195,7 +1183,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 えい	えい	intj	2	영차	next=ほ			m	r	えいほ えいほ → 영차 영차
 地元	じもと	n	1	지역			cls=@place	m	r	地元の食材 → 지역 식재료
 地元	じもと	n	2	고향	pred=帰る|戻る|帰省			m	r	地元に帰る → 고향에 돌아가다
-決定	けってい	n	1	결정			cls=@abstract	m	r	決定を下す → 결정을 내리다
+決定	けってい	n	1	결정			cls=@abstract|@plan	m	r	決定を下す → 결정을 내리다
 逮捕	たいほ	n	1	체포			cls=@crime	m	r	犯人の逮捕 → 범인 체포
 召喚	しょうかん	n	1	소환			cls=@magic	m	r	異世界召喚 → 이세계 소환
 流れ	ながれ	n	1	흐름			cls=@abstract	m	r	川の流れ → 강의 흐름
@@ -1274,13 +1262,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 魚雷	ぎょらい	n	1	어뢰			cls=@weapon	m	r	魚雷戦 → 어뢰전
 一方	いっぽう	n	1	한편				m	r	一方、その夜 → 한편 그날 밤
 一方	いっぽう	n	2	뿐	form=attr next=だ|です|じゃ			m	r	重なる一方だ → 겹칠 뿐이다
-態度	たいど	n	1	태도			cls=@abstract|@stance	m	r	態度を示す → 태도를 보이다
+態度	たいど	n	1	태도			cls=@abstract|@stance|@sign	m	r	態度を示す → 태도를 보이다
 終える	おえる	v1	1	마치다			vol=+ asp=instant	m	r	仕事を終える → 일을 마치다
 終える	おえる	v1	2	끝내다	obj=刑期|話|支度|改装			m	r	支度を終える → 준비를 끝내다
-台詞	せりふ	n	1	대사			cls=@speech	m	r	セリフを言う → 대사를 말하다
+台詞	せりふ	n	1	대사			cls=@speech|@rote	m	r	セリフを言う → 대사를 말하다
 えへへ	えへへ	intj	1	에헤헤				m	r	えへへ、頑張る → 에헤헤, 열심히 할게
 王子	おうじ	n	1	왕자			cls=@person.role anim=+	m	r	第二王子 → 제2왕자
-真実	しんじつ	n	1	진실			cls=@abstract	m	r	真実を話す → 진실을 말하다
+真実	しんじつ	n	1	진실			cls=@abstract|@info	m	r	真実を話す → 진실을 말하다
 放つ	はなつ	v5	1	발하다			vol=+ asp=instant	m	r	光を放つ → 빛을 발하다
 放つ	はなつ	v5	2	쏘다	obj=矢|弾|魔法|攻撃|斬撃|@weapon			m	r	矢を放つ → 화살을 쏘다
 放つ	はなつ	v5	3	내뿜다	obj=オーラ|殺気|気配|香り|匂い|熱|冷気|威圧感|芳香			m	r	殺気を放つ → 살기를 내뿜다
@@ -1362,7 +1350,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 対応	たいおう	n	1	대응			cls=@activity|@task	m	r	迅速な対応 → 신속한 대응
 刀	かたな	n	1	칼			cls=@weapon	m	r	刀を抜く → 칼을 뽑다
 魔王	まおう	n	1	마왕			cls=@monster anim=+	m	r	魔王を倒す → 마왕을 쓰러뜨리다
-衝撃	しょうげき	n	1	충격			cls=@event	m	r	衝撃を受ける → 충격을 받다
+衝撃	しょうげき	n	1	충격			cls=@event|@sensation	m	r	衝撃を受ける → 충격을 받다
 トラック	とらっく	n	1	트럭			cls=@vehicle	m	r	トラックの運転手 → 트럭 운전수
 トラック	とらっく	n	2	트랙	domain=sports|music|@music			m	r	陸上トラック → 육상 트랙
 Д		n	1	Д				m	r	(ﾟДﾟ) → (ﾟДﾟ)
