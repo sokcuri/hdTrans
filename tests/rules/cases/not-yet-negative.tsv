@@ -6,7 +6,7 @@ rewrite:not-yet	気付かないうちに眠っていた。	has:깨닫지 못하�
 rewrite:not-yet	本人は全く気付いてないけど。	has:깨닫지 못했는데.	fix	rewrites
 rewrite:not-yet	半開きにされたのには気付いてないようで、	has:깨닫지 못한 것 같아서,	fix	rewrites
 rewrite:not-yet	幸せはそこにある。気づいてない人たちもいるけど、	has:눈치채지 못한 사람들도	fix	rewrites
-rewrite:not-yet	「読まずに喋ってるだろ。気づいてないのか？」	has:눈치채지 못한 건가?	fix	rewrites
+rewrite:not-yet	「読まずに喋ってるだろ。気づいてないのか？」	has:눈치채지 못한 거야?	fix	rewrites
 rewrite:not-yet	彼は全然気付かない。	has:깨닫지 못한다.	keep	rewrites
 rewrite:not-yet	これに気付かないでいると危ない。	has:알아차리지 않고	keep	rewrites
 rewrite:not-yet	全然覚えない子	has:기억하지 않는	keep	rewrites

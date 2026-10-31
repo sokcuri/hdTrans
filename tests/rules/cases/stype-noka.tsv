@@ -1,0 +1,32 @@
+# 규칙: SPC-20
+rule	input	expected	kind	layer
+cx:stype-noka:20	「もしかして、今日も調子悪いのか？」	rule:cx:stype-noka:20=4 거야	fix	rewrites
+cx:stype-noka:20	「これでいいのか？」	「이걸로 좋은 거야?」	fix	rewrites
+cx:stype-noka:20	「まさか、死んだふりをしているのか？」	rule:cx:stype-noka:20=0 거야	fix	rewrites
+cx:stype-noka:20	「そこに誰かいるのか？」	「거기에 누군가 있는 거야?」	fix	rewrites
+cx:stype-noka:20	「どうした、お前もやりたくなったのか？」	rule:cx:stype-noka:20=8 거야	fix	rewrites
+cx:stype-noka:20	「そうしたら彼女に勝てるのか？」	rule:cx:stype-noka:20=0 거야	fix	rewrites
+cx:stype-noka:20	「誰かに命令されたのか？」	「누군가에게 명령받은 거야?」	fix	rewrites
+cx:stype-noka:20	「何か秘訣はあるのか？」	「뭔가 비결은 있는 거야?」	fix	rewrites
+cx:stype-noka:20	「繋がらないのか？」	「연결되지 않는 거야?」	fix	rewrites
+cx:stype-noka:20	「おまえは双子を守ってやらなかったのか？」	rule:cx:stype-noka:20=1지 않은 거야	fix	rewrites
+cx:stype-noka:20	「彼がいないのか」	!rule:cx:stype-noka:20	keep	rewrites
+cx:stype-noka:20	「ああ、なるほど。普通のバターを使ったから、しょっぱくなったのか」	!rule:cx:stype-noka:20	keep	rewrites
+cx:stype-noka:20	「誰に託せば、一番可能性があるのか……」	!rule:cx:stype-noka:20	keep	rewrites
+cx:stype-noka:20	「わしは知っておる。お前は行くのか？」	「나는 알고 있다. 너는 가는 건가?」	keep	rewrites
+cx:stype-noka:20	「皆まだ闘っているのに僕は死んでしまったのか！？」	!rule:cx:stype-noka:20	keep	rewrites
+cx:stype-noka:15	「最近、疲れてるんじゃないのか？」	rule:cx:stype-noka:15=6 있는 거 아니야	fix	rewrites
+cx:stype-noka:15	「心当たりのひとつやふたつ、あるんじゃないのか？」	rule:cx:stype-noka:15=0 거 아니야	fix	rewrites
+cx:stype-noka:15	「最近、疲れてるんじゃないのか……」	!rule:cx:stype-noka:15	keep	rewrites
+cx:stype-noka:10	「……なにか、用があって、待ってたんじゃないのか？」	「……뭔가, 용무가 있어, 기다리고 있었던 거 아니야?」	fix	rewrites
+cx:stype-noka:10	「……なにか、用があって、待ってたんじゃないのか」	!rule:cx:stype-noka:10	keep	rewrites
+cx:stype-noka:30	「台所はそこまで苦しいものなのか？」	「부엌은 거기까지 괴로운 거야?」	fix	rewrites
+cx:stype-noka:30	「台所はそこまで苦しいものなのか」	!rule:cx:stype-noka:30	keep	rewrites
+cx:stype-noka:35	「え？　まさか断るつもりなのか？」	「어? 설마 거절할 생각이야?」	fix	rewrites
+cx:stype-noka:35	「え？　まさか断るつもりなのか」	!rule:cx:stype-noka:35	keep	rewrites
+cx:stype-noka:40	「元々コッチだったんじゃないのか？」	「원래 콧치였던 거 아니야?」	fix	rewrites
+cx:stype-noka:40	「元々コッチだったんじゃないのか」	「원래 콧치였던 거 아니야」	fix	rewrites
+cx:stype-noka:40	「お待ちください。元々コッチだったんじゃないのか」	!rule:cx:stype-noka:40	keep	rewrites
+cx:stype-noka:50	「で、１位は彼女だったのか？」	「그래서, 1위는 그녀였던 거야?」	fix	rewrites
+cx:stype-noka:50	「あそこは何だよ。ダムの工事現場だったのか？」	rule:cx:stype-noka:50=(이었)였던 거야	fix	rewrites
+cx:stype-noka:50	「あそこは何だよ。ダムの工事現場だったのか」	!rule:cx:stype-noka:50	keep	rewrites

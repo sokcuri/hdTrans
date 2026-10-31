@@ -29,6 +29,7 @@ class Filters;
 
 namespace hdTrans::reg {
 struct Change;
+struct SourceDecisions;
 }
 
 namespace hdTrans::internal {
@@ -116,6 +117,9 @@ struct TranslationOptions {
     const pipeline::DocumentNames* names = nullptr;
     // The name rows of the document's name list (DocumentNames::packs); set per document.
     const dict::PackTable* documentPacks = nullptr;
+    // The decisions of the speech-level stage for the lines after the context (reg::DecideSource), which
+    // the word stage reads; set by TranslateDocument.
+    const reg::SourceDecisions* sourceDecisions = nullptr;
     // Lines may break in the middle of a sentence (Session::SetWrapped).
     bool wrapped = false;
     // The text is wrapped lines joined with kBreakMark (core/engine/wrapped.h).

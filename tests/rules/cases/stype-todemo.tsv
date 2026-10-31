@@ -1,0 +1,19 @@
+# 규칙: SPC-23
+rule	input	expected	kind	layer
+cx:stype-todemo:10	「こんな良い条件の助手候補を私が見逃すとでも!?」	「이런 좋은 조건의 조수 후보를 내가 놓칠 줄 알았어!?」	fix	rewrites
+cx:stype-todemo:10	「テロを起こすと言ってるやつに手を貸すとでも？」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
+cx:stype-todemo:10	「それであの子たちが幸せになれるとでも？」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
+cx:stype-todemo:10	「そう尋ねられて正直に答えるとでも……」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
+cx:stype-todemo:10	「あっはは！面白いなぁ。逃げられるとでも？」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
+cx:stype-todemo:10	「この俺が負けるとでも？」	「이 내가 질 줄 알았어?」	fix	rewrites
+cx:stype-todemo:10	「そんな話を信じるとでも!?」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
+cx:stype-todemo:10	「黙って待つとでも」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
+cx:stype-todemo:10	「だいたい、彼女が学校にチクるとでも思ってるの？」	「대체로, 그녀가 학교에 고자질한다고 생각해?」	keep	rewrites
+cx:stype-todemo:10	「あんたは彼女が死ぬとでも思ってるの？」	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	我が索敵機から逃げられるとでも思ったか！	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	まるで自分の方が傷つけられたとでも言うように。	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	「自分たちは、関係ないとでも思っているんですか！」	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	「世界各国が同時に宣戦布告もなく戦争を始めたとでも？」	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	「口ではどうとでも言える」	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	「なんとでも言え」	!rule:cx:stype-todemo:10	keep	rewrites
+cx:stype-todemo:10	そんなインチキアイテムにこの俺が心をときめかすとでも？	!rule:cx:stype-todemo:10	keep	rewrites

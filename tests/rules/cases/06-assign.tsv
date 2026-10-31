@@ -56,8 +56,8 @@ dict:jisjk:35	いかがですか。	!rule:dict:jisjk:35	keep	local
 dict:jisjk:388	このままにしておいてください。	이대로 해 두어 주세요.	fix	local
 dict:jisjk:388	このままにしておいてください。	rule:dict:jisjk:388=이대	keep	local
 dict:jisjk:388	このままでいい。	!rule:dict:jisjk:388	keep	local
-dict:jisjk:348598	日程のどれを選んだ。	일정의 어느 것을 선택했다.	fix	local
-dict:jisjk:348598	どれを買った。	어떤 것을 샀다.	fix	local
+dict:jisjk:348598	日程のどれを選んだ。	일정의 어느 것을 선택했나.	fix	local
+dict:jisjk:348598	どれを買った。	어떤 것을 샀나.	fix	local
 dict:jisjk:356264	元気でなによりです。	건강해서 다행입니다.	fix	local
 dict:jisjk:356264	なによりも大事だ。	무엇보다도 소중하다.	fix	local
 dict:jisjk:3926	私は私が好きです。	저는 저를 좋아합니다.	fix	local

@@ -28,6 +28,10 @@ struct RegDecision {
     bool byProfile = false;    // the speaker's lines in the scene changed the level
     bool firstPerson = false;  // the source names the speaker (私, 俺 …): the subject is not the addressee
     bool keep = false;         // levels.tsv keep: the level the translation already has, haera without one
+    // Set whatever the line ends with: the line speaks in an authoritative voice (REG-14), the document is
+    // prose fiction (REG-20).
+    bool authoritative = false;
+    bool prose = false;
     struct Quote {             // REG-15: one per quote of a line of several quotes
         Level level = Level::none;
         bool keep = false;
