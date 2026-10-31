@@ -1778,7 +1778,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あみをやぶ	그물을 &HW@	M428			GN				jisjk:142851		
 あみーゴ	아미고	N130			GN				jisjk:353321		
 あみ出	&AM@	M433	VCpVAc		GN				jisjk:90380		
-あみ出され	짜여&AL@	M417			GN				jisjk:90381		
+あみ出され	짜&AJ@	M417			GN			GRM-700	jisjk:90381		
 あめ	엿	N110	VFd		GN				jisjk:124827		
 あめあがり	비가 갠뒤	N110	VSsUMe		GN				jisjk:124828		
 あめあし	빗발	N110	VSs		GN				jisjk:124829		
@@ -4411,7 +4411,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うかが	&J8@	M420			GN	4913	||1 &&4 S-1== "で" S-2== "件" S+1== "た" P+1== "7**"	件와 で 뒤에서 형용사 た가 뒤따르는 うかが를 '뵙다'로 고른다. (미발동: rare-context)	jisjk:374675		
 うかがい	의향	N110			GN				jisjk:126561		
 うかがい知れな	짐작할 수 $FA@	H7N0			GN				jisjk:121885		
-うかがわれ	엿보여&AL@	M427			GN				jisjk:145308		
+うかがわれ	엿보&AJ@	M427			GN			GRM-700	jisjk:145308		
 うかされ	마음이 들&A8@	M427	SFl		GN				jisjk:141240		
 うかし	건더기	N110	VFd		GN				jisjk:126563		
 うかつ	우활	I110			GN				jisjk:106606		
@@ -34287,7 +34287,7 @@ ttt	ttt	K110			GN				jisjk:201744
 とじこめられ	갇히게 &C6@	M427			GN				jisjk:143204		
 とじこも	두문불출&AV@	M418	VPl		GN				jisjk:91127		
 とじまり	문단속	N110			GN				jisjk:153753		
-とじられ	닫혀&AL@	M427			GN				jisjk:148314		
+とじられ	닫&AW@	M427			GN			GRM-700	jisjk:148314		
 とじ手段	차단 수단	I110			GN				jisjk:113009		
 とじ目	철한 곳	I110			GN				jisjk:106809		
 とすぐ	1자마자	S500			GN				jisjk:263781		
@@ -34553,7 +34553,7 @@ ttt	ttt	K110			GN				jisjk:201744
 とみな	(으)로 간주&AV@	M443		TuPj	GN				jisjk:147969		
 とみなしう	(으)로 간주할 수 &C6@	M428		Tu	GN				jisjk:148119		
 とみに	갑자기	E300			GN				jisjk:149368		
-とみられ	(으)로 보여&AL@	M427		TuPj 	GN				jisjk:148031		
+とみられ	(으)로 보&AJ@	M427		TuPj 	GN			GRM-700	jisjk:148031		
 とみんファクター	토민 팩터	I130	QIDVGt		GN				jisjk:41348		
 とみんリース	토민 리스	I130	QIDVGt		GN				jisjk:41349		
 とむじゅん	(와)과 모순&C6@	M429		Tu	GN				jisjk:148157		
@@ -34979,7 +34979,7 @@ ttt	ttt	K110			GN				jisjk:201744
 と拡大	로 확대	I110		HdPjTu	GN				jisjk:106816		
 と推計され	(이)라고 추계&C6@	M427		Tu	GN				jisjk:202402		
 と断定	(으)로 단정	I110		HdTu	GN				jisjk:106858		
-と書かれ	(이)라고 쓰여&AL@	M427		Tu	GN				jisjk:261773		
+と書かれ	(이)라고 쓰&AJ@	M427		TuDx	GN			GRM-700	jisjk:261773		
 と期待	(이)라고 기대&AV@	M429		Tu	GN				jisjk:202697		
 と比べ	(와)과 비교&AV@	M427		PjTu	GN	2449	||1 &&4 S-1== "の" P-1== "2**" P-2== "1**" D-1= "의 것"	명사와 조사 の 뒤에서 と比べ를 와과 비교하다로 고르고 の를 의 것으로 바꾼다. (미발동: rare-context)	jisjk:265993		
 と比較	(와)과 비교&AV@	M429		PjTu	GN				jisjk:265694		
@@ -37309,9 +37309,9 @@ ttt	ttt	K110			GN				jisjk:201744
 に見え	(으)로 보&AJ@	M427		PjTu	GN				jisjk:265433		
 に見え	에 보&AJ@	M427		PjTu	GN	4873	||1 S-1== "目"	바로 앞이 「目」이면 「に見え」를 ‘에 보이다’로 고른다. (미발동: rare-context)	jisjk:373982		
 に見せかけ	(으)로 가장&AV@	M437		Tu	GN				jisjk:91230		
-に見られ	(으)로 보여&AL@	M427		TuPj	GN				jisjk:268247		
+に見られ	(으)로 보&AJ@	M427		TuPj	GN			GRM-700	jisjk:268247		
 に見られ	에게 보&AJ@	M417		TuPj	GN	5321	||1 &&10 A-1== "VHnVQwVQmVGnVAmQPNQNPUAqUQf" S-1!= "容疑者" S-1!= "犯人" S-1!= "子供" S-1!= "子ども" S-1!= "大人" S-1!= "年下" S-1!= "年上" S-1!= "女" S-1!= "男"	사람 뒤의 に見られ는 수동 ‘에게 보이다’를 고른다. 容疑者, 子供, 年下처럼 ‘(으)로 보이다’가 되는 말 뒤는 제외한다.	gram:mirare-passive:2		
-に覚えられ	에게 암송되어&AL@	M427		TuPj	GN				jisjk:265676		
+に覚えられ	에게 암송&C6@	M427		TuPj	GN			GRM-700	jisjk:265676		
 に託	(을)를 빙자&AV@	M419		TuPj	GN				jisjk:91275		
 に託	(을)를 빌어 나타&A6@	M419		TuPj	GN	4387	||1 ||3 S-1== "R標" S-1== "R表" S-1== "R計"	標·表·計로 끝나는 말 뒤에서 に託를 를 빌어 나타내다로 고른다. (미발동: rare-context)	jisjk:364165		
 に認めてもら	(으)로 인정&FD@	M4U0		PjTu	GN				jisjk:342439		
@@ -37607,8 +37607,8 @@ ttt	ttt	K110			GN				jisjk:201744
 ねら	겨냥&AV@	M430			GN				jisjk:91298		
 ねらい	목적	N110			GN				jisjk:103793		
 ねらいうち	저격	N110		Hd	MI				jisjk:345864		
-ねらいが込められ	목적이 담겨&AL@	M427			GN				jisjk:261809		
-ねらいが込められてい	목적이 담겨져 &HN@	M427			GN				jisjk:261808		
+ねらいが込められ	목적이 담&A2@	M427			GN			GRM-700	jisjk:261809		
+ねらいが込められてい	목적이 담겨 &HN@	M427			GN			GRM-700	jisjk:261808		
 ねらいもあ	목적도 &HN@	M428			GN				jisjk:374845		
 ねらいをつけ	겨냥&AV@	M447			GN				jisjk:147701		
 ねらい所	목표	I110	VPl		GN				jisjk:41440		
@@ -38620,7 +38620,7 @@ ttt	ttt	K110			GN				jisjk:201744
 はしゃ	&E4@	M412			GN				jisjk:91331		
 はしゃ	까불며 떠&L4@	M422	XXX		GN				jisjk:116959		
 はしり	달리기	N110			GN				jisjk:264893		
-はしをのせ	젓가락이 놓여&AL@	M427			GN				jisjk:148274		
+はしをのせ	젓가락이 놓&AJ@	M427			GN			GRM-700	jisjk:148274		
 はしを持	젓가락을 &CK@	M424			GN				jisjk:201779		
 はし休め	입가심	I110			GN				jisjk:41479		
 はし切れ	자투리	I110			GN				jisjk:113049		
@@ -40934,7 +40934,7 @@ ttt	ttt	K110			GN				jisjk:201744
 まきせんき	코일기	N110			GN				jisjk:162453		
 まきせんわく	코일 틀	N110			GN				jisjk:162473		
 まきつけよう	휘감기용	N110			GN				jisjk:161836		
-まきつけられ	휘감겨&AL@	M427			GN				jisjk:148782		
+まきつけられ	휘감&A2@	M427			GN			GRM-700	jisjk:148782		
 まきと	&F1@	M448			GN				jisjk:141466		
 まきの木台	마키노키다이	I130	QCTVPl		GN				jisjk:329008		
 まきわく	감는 틀	N110			GN				jisjk:162455		
@@ -42610,7 +42610,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ものとしてとらえられう	 것으로서 파악될 수 &HN@	M428			GN				jisjk:148032		
 ものとはいいえ	 것이라고는 말할 수 &HN@	M427		PnMa	GN	1595	||1 &&2 U+0== "Lません" D+0= "것이라고는 말할 수 &M9@"	ものとはいいえ는 어미가 ません으로 시작하면 것이라고는 말할 수 없다로 바꾼다. (미발동: rare-word)	jisjk:148285		
 ものとはいい得	 것이라고는 말할 수 &HN@	M427		PnMa	GN	1594	||1 &&2 U+0== "Lません" D+0= "것이라고는 말할 수 &M9@"	어미가 「ません」으로 시작하면 「ものとはいい得」를 ‘것이라고는 말할 수 없다’로 바꾼다. (미발동: rare-word)	jisjk:148284		
-ものとみられ	 것으로 보여&AL@	M427			GN				jisjk:147156		
+ものとみられ	 것으로 보&AJ@	M427			GN			GRM-700	jisjk:147156		
 ものともしな	아랑곳하지 $DH@	H7U0		JsAv	GN				jisjk:365220		
 ものともせず	아랑곳하지 않고	A9D0			GN				jisjk:365219		
 ものともせずに	아랑곳하지 않고	A9D0			GN				jisjk:353382		
@@ -43774,7 +43774,7 @@ ttt	ttt	K110			GN				jisjk:201744
 よぼうちゅうしゃ	예방 주사	N110	QHP		GN				jisjk:156231		
 よぼよぼ	비틀비틀	E301			GN				jisjk:1377		
 よまつり	밤 축제	N110	VRw		GN				jisjk:156233		
-よまれ	읽혀&AL@	M427			GN				jisjk:147552		
+よまれ	읽&AW@	M427			GN			GRM-700	jisjk:147552		
 よみあげ	&HK@	M437			GN				jisjk:91570		
 よみあげ	소리내어 &HK@	M427			GN				jisjk:147558		
 よみうり	요미우리	N130			GN				jisjk:103360		
@@ -124090,10 +124090,10 @@ ttt	ttt	K110			GN				jisjk:201744
 使わないです	사용하지 않고 끝&A5@	M425			GN				jisjk:140447		
 使わなくても	사용하지 않아도	N110		Nn	GN				jisjk:151421		
 使われ	사용&C6@	M417			GN				jisjk:93277		
-使われ	쓰여&AL@	M427			GN				jisjk:140463		
+使われ	쓰&AJ@	M427			GN			GRM-700	jisjk:140463		
 使われかねな	사용될지 $C4@	H7N0		Av	GN				jisjk:137072		
 使われているに過ぎ	사용되고 있음에 지&A5@	M427			GN				jisjk:140457		
-使われ方	쓰여지는 방법	N110			GN				jisjk:151422		
+使われ方	쓰이는 방법	N110			GN			GRM-700	jisjk:151422		
 使丁	사정	N110	VHn		GN				jisjk:187954		
 使動	사동	N110			GN				jisjk:24989		
 使君子	사군자과 덩쿨성 상록저목	N110	VPt		GN				jisjk:233631		
@@ -147734,7 +147734,7 @@ ttt	ttt	K110			GN				jisjk:201744
 危な絵	선정적인 우키요에	N110			GN				jisjk:227497		
 危ぶ	의심&AV@	M435			GN				jisjk:94295		
 危ぶ	걱정&AV@	M445			GN				jisjk:138540		
-危ぶまれ	의심되어&AL@	M427			GN				jisjk:265903		
+危ぶまれ	의심&C6@	M427			GN			GRM-700	jisjk:265903		
 危め	다치게 &AV@	M447			GN				jisjk:138550		
 危地	위험한 곳	N110	VPl		GN				jisjk:30560		
 危害	위해	N110			GN				jisjk:30561		
@@ -154191,7 +154191,7 @@ ttt	ttt	K110			GN				jisjk:201744
 名刺判	명함판	N110			GN				jisjk:155527		
 名刺受け	명함 받이	N110	VPe		GN				jisjk:253333		
 名前	이름	N110	UQf	Oq	GN				jisjk:21686		
-名前が読み上げられ	이름이 불려&AL@	M4U7		Pn	GN				jisjk:365795		
+名前が読み上げられ	이름이 불&AA@	M4U7		Pn	GN			GRM-700	jisjk:365795		
 名前を呼びかけ	이름을 &EE@	M427		Pn	GN				jisjk:268210		
 名前を売	이름을 떨&AO@	M448			GN				jisjk:144547		
 名前略	이름 생략	N110			GN				jisjk:159908		
@@ -158579,7 +158579,7 @@ ttt	ttt	K110			GN				jisjk:201744
 噛合	서로 맞물림	N110			GN				jisjk:162500		
 噛合い	맞물림	N110			GN				jisjk:162229		
 噛合い係合	맞물림 계합	N110		Hd	GN				jisjk:163654		
-噛合され	서로 맞물려&AL@	M427			GN				jisjk:148643		
+噛合され	서로 맞물&AA@	M427			GN			GRM-700	jisjk:148643		
 噛合わせ	서로 맞물림	N110			GN				jisjk:164448		
 噛合部	맞물림부	N110	VBl		GN				jisjk:162226		
 噛煙草	씹는 담배	N110	VFd		GN				jisjk:169471		
@@ -159626,7 +159626,7 @@ ttt	ttt	K110			GN				jisjk:201744
 困難さ	곤란함	N110	SFl		GN				jisjk:183325		
 困難とな	곤란해&AL@	M418			GN				jisjk:91946		
 困難との	곤란하다는	E0H0			GN				jisjk:149872		
-困難とみられ	곤란하다고 보여&AL@	M427			GN				jisjk:119688		
+困難とみられ	곤란하다고 보&AJ@	M427			GN			GRM-700	jisjk:119688		
 困難なもの	곤란한 것	N110			GN				jisjk:152638		
 困難ならしめ	곤란하게 &AV@	M427			GN				jisjk:148050		
 困難にな	곤란해&AL@	M428			GN				jisjk:119687		
@@ -195714,7 +195714,7 @@ ttt	ttt	K110			GN				jisjk:201744
 差し繰	변통&AV@	M438	VMo		GN				jisjk:95173		
 差し置	그대로 &C7@	M431			GN				jisjk:95182		
 差し置	내버려 &C7@	M441			GN				jisjk:120986		
-差し置かれ	놓여&AL@	M427			GN				jisjk:148106		
+差し置かれ	놓&AJ@	M427			GN			GRM-700	jisjk:148106		
 差し薬	눈약	I110	VPaVMd		GN				jisjk:85534		
 差し許	허락&AV@	M443			GN				jisjk:121349		
 差し詰ま	육박&AV@	M428	UMe		GN				jisjk:121222		
@@ -195929,7 +195929,7 @@ ttt	ttt	K110			GN				jisjk:201744
 巻	권	N110		On	GN				jisjk:259625		
 巻	올&AA@	M461			GN	2844	||1 &&5 U+0== "方" Y+0== "0 방법" M+0== "5:*" P-1== "2**" P-2== "1**"	巻가 명사와 조사 뒤에서 方 어미로 활용되면 올리는 방법에 해당하는 후보를 고른다. (미발동: rare-context)	jisjk:268305		
 巻かなくな	감지 않게 &C6@	M448			GN				jisjk:148462		
-巻かれ	감겨&AL@	M427			GN				jisjk:148641		
+巻かれ	감&A2@	M427			GN			GRM-700	jisjk:148641		
 巻き	권	N110			GN				jisjk:104601		
 巻きあげ	감아올&AA@	M437			GN				jisjk:92108		
 巻きかえ	반격&AV@	M433			GN				jisjk:92109		
@@ -195948,8 +195948,8 @@ ttt	ttt	K110			GN				jisjk:201744
 巻き付	감&A2@	M411			GN				jisjk:92116		
 巻き付け	휘&F1@	M447			GN				jisjk:148785		
 巻き付けてお	감아 &C7@	M441			GN				jisjk:148635		
-巻き付けられ	휘감겨&AL@	M427			GN				jisjk:148554		
-巻き付けられてい	감겨져 &HN@	M427			GN				jisjk:148632		
+巻き付けられ	휘감&A2@	M427			GN			GRM-700	jisjk:148554		
+巻き付けられてい	감겨 &HN@	M427			GN			GRM-700	jisjk:148632		
 巻き付け用	휘감기용	N110			GN				jisjk:161835		
 巻き付け角	접촉각	N110			GN				jisjk:164522		
 巻き出	감기 시작&AV@	M443			GN				jisjk:143014		
@@ -196000,8 +196000,8 @@ ttt	ttt	K110			GN				jisjk:201744
 巻二	2권	N110			GN				jisjk:97291		
 巻付け	휘&F1@	M447			GN				jisjk:148786		
 巻付けてお	감아 &C7@	M441			GN				jisjk:148636		
-巻付けられ	휘감겨&AL@	M427			GN				jisjk:148781		
-巻付けられてい	감겨져 &HN@	M427			GN				jisjk:148633		
+巻付けられ	휘감&A2@	M427			GN			GRM-700	jisjk:148781		
+巻付けられてい	감겨 &HN@	M427			GN			GRM-700	jisjk:148633		
 巻付け角	접촉각	N110			GN				jisjk:164523		
 巻先端	감는 머리	I110			GN				jisjk:63165		
 巻十	10권	N110			GN				jisjk:97289		
@@ -196015,7 +196015,7 @@ ttt	ttt	K110			GN				jisjk:201744
 巻司	마키모토	N130	QPN		GN				jisjk:97287		
 巻各	각권	N110			GN				jisjk:97279		
 巻回	감아 돌&AA@	M443			GN				jisjk:142730		
-巻回され	감겨&AL@	M427			GN				jisjk:148568		
+巻回され	감&A2@	M427			GN			GRM-700	jisjk:148568		
 巻堀	마키보리	N130	QCTVPl		GN				jisjk:329038		
 巻尺	줄자	N110	VPe		GN				jisjk:17167		
 巻尾	권미	N110	VBkVSw		GN				jisjk:170758		
@@ -214301,7 +214301,7 @@ ttt	ttt	K110			GN				jisjk:201744
 抱きかかえるようにして	끌어안다시피 해서	E300			GN				jisjk:149297		
 抱きしめ	꼭 껴&FH@	M437			GN				jisjk:95777		
 抱きすくめ	꽉 껴&FH@	M447			GN				jisjk:140962		
-抱きとめられ	끌어 안겨&AL@	M427			GN				jisjk:260774		
+抱きとめられ	끌어안&A2@	M427			GN			GRM-700	jisjk:260774		
 抱き上げ	안아 올&AA@	M437			GN				jisjk:95779		
 抱き付	달라&HC@	M421			GN				jisjk:140969		
 抱き取	받아 &FH@	M448			GN				jisjk:140989		
@@ -229702,8 +229702,8 @@ ttt	ttt	K110			GN				jisjk:201744
 書いてほし	써 주길 바$KT@	H7N0			GN				jisjk:138885		
 書かされ	쓰게 &C6@	M447			GN				jisjk:347146		
 書かれ	쓰여&AL@	M427	UTsUSe	Dx	GN				jisjk:142188		
-書かれたいわば	쓰여진 이른바	E0H0			GN				jisjk:150323		
-書かれて	쓰여져 &AH@	M41;		UMv	GN				jisjk:266168		
+書かれたいわば	쓰인 이른바	E0H0			GN			GRM-700	jisjk:150323		
+書かれて	쓰여 &AH@	M41;		UMv	GN			GRM-700	jisjk:266168		
 書き	쓰기	N110			GN				jisjk:341315		
 書きいれ	기입	I110			GN				jisjk:110261		
 書きおく	써 보&A6@	M448			GN				jisjk:142306		
@@ -295512,7 +295512,7 @@ ttt	ttt	K110			GN				jisjk:201744
 箸	저	N110		On	GN				jisjk:259153		
 箸で挟	젓가락으로 &Hb@	M435			GN				jisjk:94655		
 箸の上げ下ろし	젓가락질	I110			GN				jisjk:82525		
-箸を乗せ	젓가락이 놓여&AL@	M427			GN				jisjk:148273		
+箸を乗せ	젓가락이 놓&AJ@	M427			GN			GRM-700	jisjk:148273		
 箸中	하시나카	N130	QCTVPl		GN				jisjk:320068		
 箸作権	저작권	I110	URt		GN				jisjk:82526		
 箸初め	초반례	N110			GN				jisjk:249525		
@@ -301381,8 +301381,8 @@ ttt	ttt	K110			GN				jisjk:201744
 締め切	마감&AV@	M448	UMe		GN				jisjk:136183		
 締め切	늘 닫아 &C7@	M448	VBl		GN				jisjk:136188		
 締め切り	마감	N110	UMe		GN				jisjk:188604		
-締め切り	굳게 닫혀진 상태	N110			GN				jisjk:266343		
-締め切り	굳게 닫혀진 상태	N110			GN	2525	||1 &&3 P-1== "2**" ||2 S-2== "ドア" S-2== "門" P-2== "1**"	締め切り를 ドア·門과 조사 뒤에서 굳게 닫혀진 상태로 고른다. (미발동: rare-context)	jisjk:266344		
+締め切り	굳게 닫힌 상태	N110			GN			GRM-700	jisjk:266343		
+締め切り	굳게 닫힌 상태	N110			GN	2525	||1 &&3 P-1== "2**" ||2 S-2== "ドア" S-2== "門" P-2== "1**"	GRM-700 締め切り를 ドア, 門과 조사 뒤에서 굳게 닫힌 상태로 고른다. (미발동: rare-context)	jisjk:266344		
 締め切り日	마감일	N110	UMe		GN				jisjk:188609		
 締め太鼓	북	N110	USoQMU		GN				jisjk:234402		
 締め括り	매듭	N110			GN				jisjk:188613		
@@ -301442,9 +301442,9 @@ ttt	ttt	K110			GN				jisjk:201744
 編み目	뜨개질 코	I110			GN				jisjk:87809		
 編み目記号	편물 기호	N110			GN				jisjk:227633		
 編み立て	&A8@	M447			GN				jisjk:143037		
-編み立てられてい	짜여져 &HN@	M427			GN				jisjk:148845		
+編み立てられてい	짜여 &HN@	M427			GN			GRM-700	jisjk:148845		
 編み笠茶屋	삿갓 대여점	N110	VBl		GN				jisjk:227614		
-編み込まれ	짜여&AL@	M427			GN				jisjk:148848		
+編み込まれ	짜&AJ@	M427			GN			GRM-700	jisjk:148848		
 編み込み模様	그물뜨기 모양	N110			GN				jisjk:227617		
 編み針	뜨개바늘	N110	VPe		GN				jisjk:124817		
 編上げ	목달이 구두	I110	VAc		GN				jisjk:87812		
@@ -301461,7 +301461,7 @@ ttt	ttt	K110			GN				jisjk:201744
 編物	편물	N110	VCp		GN				jisjk:37540		
 編目	코	N110	VCpVPe		GN				jisjk:124821		
 編立て	&A8@	M447			GN				jisjk:143039		
-編立てられてい	짜여져 &HN@	M427			GN				jisjk:148846		
+編立てられてい	짜여 &HN@	M427			GN			GRM-700	jisjk:148846		
 編笠山	아미가사산	N110	VPl		GN				jisjk:210705		
 編笠山	아미가사산	N110	VPl		GN				jisjk:210706		
 編笠百合	백합과 다년초	N110	VPt		GN				jisjk:227615		
@@ -301475,7 +301475,7 @@ ttt	ttt	K110			GN				jisjk:201744
 編輯症	편집증	N110	UTi		GN				jisjk:202841		
 編輯症患者	편집증환자	N110	VHn		GN				jisjk:202975		
 編輯賞	편집상	N110	UPp		GN				jisjk:202840		
-編込まれ	짜여&AL@	M427			GN				jisjk:148849		
+編込まれ	짜&AJ@	M427			GN			GRM-700	jisjk:148849		
 編隊	편대	N110	VGt		GN				jisjk:37539		
 編集	편집	N110		Hd	GN				jisjk:37549		
 編集人	편집인	N110	VHnUAq		GN				jisjk:154839		
@@ -302276,13 +302276,13 @@ ttt	ttt	K110			GN				jisjk:201744
 罫線	괘선	N110			GN				jisjk:16530		
 置	&C7@	M431			GN	844	||1 &&4 M+0== "57*" P+1== "4**" A+1== "UMv" Y+0= "1고"	置는 현재 어미가 57*이고 다음 동사에 이동 의미 코드 UMv가 있으면 어미를 ‘-고’로 바꾸고 ‘두다’를 고른다.	jisjk:95556		
 置いて	두고 &AH@	E4U;			GN				jisjk:263856		
-置いてあ	놓여져 &HN@	M428			GN				jisjk:257723		
+置いてあ	놓여 &HN@	M428			GN			GRM-700	jisjk:257723		
 置いてあった	놓여있던	B9H0			GN				jisjk:103201		
 置いてお	놓아&C7@	M451			GN				jisjk:95557		
 置いておけなくな	둘 수 없게 &C6@	M428			GN				jisjk:148302		
 置いてきぼり	따돌림	I110			GN				jisjk:110563		
 置いと	놔 &C7@	M441			GN				jisjk:145330		
-置かれ	놓여&AL@	M417		Dx	GN				jisjk:95558		
+置かれ	놓&AJ@	M417		Dx	GN			GRM-700	jisjk:95558		
 置きかえ	바꾸기	N110			GN				jisjk:268143		
 置きかえ	바&C3@	M437			GN				jisjk:268144		
 置きかわ	옮겨&AL@	M418			GN				jisjk:356255		
@@ -322869,7 +322869,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見られ	볼 수 &HN@	M447		KeMa	GN	2265	||5 &&2 U+0== "ように" Y+0== "1게" U+0== "んじゃ" &&2 U+0== "Lません" D+0= "볼 수 &M9@" &&3 S+1== "なくな" P+1== "4**" Y+0= "" &&2 M+0== "590" D+0= "&AY@"	「見られ」는 일부 양태·부정 문맥에서 ‘볼 수 있다’를 고르고 공손 부정형이면 ‘볼 수 없다’로 바꾸며 지정된 어미형에서는 ‘보다’로 바꾼다.	jisjk:265223		
 見られ	보여&AL@	M427	UTh		GN	2480	||4 &&2 S+1== "い" P+1== "4**" S-1== "と" &&2 P-1== "4**" U-1== "と" S+1== "もよう"	見られ를 동사 い 앞이나 인용 と 뒤 또는 もよう 앞에서 '보여지다'로 선택한다.	jisjk:266172		
 見られ	보&AJ@	M417			GN	5320	||4 S-1== "誰かに" S-1== "誰にも" &&2 ||4 S-1== "に" S-1== "には" S-1== "にも" S-1== "にまで" A-2== "VHnVQwVQmVGnVAmQPNQNPUAqUQf" &&3 S-1== "まで" S-2== "に" A-3== "VHnVQwVQmVGnVAmQPNQNPUAqUQf"	見られ는 사람 뒤 に, には, にも, にまで나 誰かに 뒤에서 수동 ‘보이다’를 고른다.	gram:mirare-passive:1		
-見られていな	보여지지 $DH@	H7U0		AvJs	GN				jisjk:355867		
+見られていな	보이지 $DH@	H7U0		AvJs	GN			GRM-700	jisjk:355867		
 見られてしま	들켜버&AA@	M460			GN				jisjk:341322		
 見られ始め	보이기 시작&AV@	M427	UTh		GN				jisjk:342554		
 見るなの座敷	미루나노자시키	N110			GN				jisjk:252822		
@@ -322940,7 +322940,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見取図	배치 약도	I110			GN				jisjk:60893		
 見取町	미도리쵸	N130	QCTVPl		GN				jisjk:331268		
 見受け	&AY@	M4U7			GN				jisjk:91817		
-見受けられ	보&AJ@	M427			CT				jisjk:260611		
+見受けられ	보&AJ@	M427			CT			GRM-700	jisjk:260611		
 見台	받침대	N110	VPeVBkVSw		GN				jisjk:178519		
 見合	중매	N110			GN				jisjk:155213		
 見合	알&FB@	M420			GN				jisjk:344057		
@@ -325905,7 +325905,7 @@ ttt	ttt	K110			GN				jisjk:201744
 認められ	인정&FD@	M437			GN	781	||1 S-1== "を"	認められ는 を 뒤에서 피동 표현 ‘인정받다’로 고른다.	jisjk:94527		
 認められねばならぬようにな	인정되지 않으면 안 되게 &C6@	M428		Dx	GN				jisjk:148030		
 認められるかとい	인정되는가 &AV@	M420			GN				jisjk:147987		
-認められるようになったか	인정되어지게 되었는가	N110			GN				jisjk:152727		
+認められるようになったか	인정받게 되었는가	N110			GN			GRM-700	jisjk:152727		
 認めるに等し	인정함과 $DF@	H7N0			GN				jisjk:138858		
 認めるべきでな	인정되어서는 안 $AF@	H7N0			GN				jisjk:138643		
 認め印	도장	I110	VSw		GN				jisjk:80241		
@@ -326287,7 +326287,7 @@ ttt	ttt	K110			GN				jisjk:201744
 読ませ	읽게 &AV@	M437			GN				jisjk:92418		
 読ませていただ	&HK@	M441			GN				jisjk:264370		
 読ませて頂	&HK@	M441			GN				jisjk:264371		
-読まれ	읽혀&AL@	M427			GN				jisjk:147550		
+読まれ	읽&AW@	M427			GN			GRM-700	jisjk:147550		
 読み	읽기	N110			GN				jisjk:341747		
 読みあげ	&HK@	M437			GN				jisjk:92419		
 読みあげさん	호산	I110			GN				jisjk:66230		
@@ -334344,8 +334344,8 @@ ttt	ttt	K110			GN				jisjk:201744
 込み入	복잡하게 얽&AW@	M427	SFl		GN				jisjk:120240		
 込み合	혼잡&Mf@	M420	VTp	Va	GN				jisjk:120209		
 込め	&M6@	M447			GN				jisjk:120805		
-込められてい	담겨져 &HN@	M427			GN				jisjk:267577		
-込められて居	담겨져 &HN@	M427			GN				jisjk:342343		
+込められてい	담겨 &HN@	M427			GN			GRM-700	jisjk:267577		
+込められて居	담겨 &HN@	M427			GN			GRM-700	jisjk:342343		
 込め物	충전물	N110			GN				jisjk:267980		
 込上げ	복받&AO@	M427			GN				jisjk:120238		
 込之上	코미노우에	N130	QCTVPl		GN				jisjk:294098		
@@ -346899,7 +346899,7 @@ ttt	ttt	K110			GN				jisjk:201744
 閉ざされ	닫&AW@	M417			GN				jisjk:95749		
 閉ざされ	싸&AJ@	M417	UFl		GN				jisjk:95750		
 閉ざされ	잠&A2@	M427			GN				jisjk:143117		
-閉ざされてしま	닫혀져버&AA@	M420			GN				jisjk:148415		
+閉ざされてしま	닫혀버&AA@	M420			GN			GRM-700	jisjk:148415		
 閉じ	&F1@	M437			GN				jisjk:95751		
 閉じ	&FQ@	M457	XXX		GN				jisjk:95752		
 閉じ	&Hj@	M437	VSw		GN				jisjk:95753		
@@ -346908,9 +346908,9 @@ ttt	ttt	K110			GN				jisjk:201744
 閉じ	&FQ@	M447			GN				jisjk:145293		
 閉じこめ	감금&AV@	M437			GN				jisjk:95756		
 閉じこめ	가&C7@	M447			GN				jisjk:145277		
-閉じこめられ	갇혀&AL@	M427			GN				jisjk:118878		
+閉じこめられ	갇&AW@	M427			GN			GRM-700	jisjk:118878		
 閉じこも	두문불출&AV@	M418			GN				jisjk:95757		
-閉じられ	닫혀&AL@	M427			GN				jisjk:148313		
+閉じられ	닫&AW@	M427			GN			GRM-700	jisjk:148313		
 閉じ合わせ	서로 덮음	N110			GN				jisjk:164795		
 閉じ合わせ	서로 덮음	N110			GN				jisjk:164796		
 閉じ篭	두문불출&AV@	M418			GN				jisjk:95758		

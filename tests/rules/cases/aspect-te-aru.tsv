@@ -4,7 +4,7 @@ rewrite:prepared-state	「あ、もうルールまで考えてあるんだ？」
 rewrite:prepared-state	≪ホテル全体の見取り図を各端末に送ってあるから確認して≫	≪호텔 전체의 약식도를 각 단말에 보내 두었으니까 확인해≫	fix	rewrites
 rewrite:prepared-state	「一応、特殊な鍵にしてあるし、人のロッカーを漁る人間なんていないでしょ」	「일단, 특수한 열쇠로 해 뒀고, 사람의 로커를 뒤지는 인간 같은 건 없지」	fix	rewrites
 rewrite:prepared-state	雑誌に書いてありました	잡지에 써 있었습니다	keep	rewrites
-rewrite:prepared-state	『えるるん、ようこそＤ組へ！』と書かれてある。	『에루룬, 어서 오십시오 D조에!』라고 쓰여져 있다.	keep	rewrites
+rewrite:prepared-state	『えるるん、ようこそＤ組へ！』と書かれてある。	『에루룬, 어서 오십시오 D조에!』라고 쓰여 있다.	keep	rewrites
 rewrite:prepared-state	「お昼ごはん、フライパンにやきそば作ってあるから。じゃあね」	「점심밥, 프라이팬에 야끼 소바 만들어 뒀으니까. 그럼 안녕」	fix	rewrites
 rewrite:prepared-state	窓が開けてある。	창이 열려 있다.	fix	rewrites
 rewrite:prepared-state	ポスターが貼ってある。	포스터가 붙여 있다.	fix	rewrites
