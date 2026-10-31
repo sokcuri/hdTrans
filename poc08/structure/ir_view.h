@@ -88,7 +88,7 @@ struct Bunsetsu {
 };
 
 enum class Role : uint8_t { subj, obj, dat, loc, from, with, to, cmp, topic, head };
-enum class ArgHow : uint8_t { marked, topic, relhead, omitted };
+enum class ArgHow : uint8_t { marked, topic, relhead, omitted, bare };
 
 struct Arg {
     Role role = Role::subj;

@@ -380,4 +380,20 @@ std::vector<const char*> JregNames(uint16_t bits) {
     return out;
 }
 
+void LoadBareObject(std::string_view tsv, StructureData& out) {
+    size_t p = 0;
+    bool header = false;
+    while (p < tsv.size()) {
+        size_t e = tsv.find('\n', p);
+        std::string_view line = tsv.substr(p, e == std::string_view::npos ? std::string_view::npos : e - p);
+        p = e == std::string_view::npos ? tsv.size() : e + 1;
+        if (line.empty() || line[0] == '#') continue;
+        if (!header) {
+            header = true;
+            continue;
+        }
+        out.noBareObject.insert(std::string(line.substr(0, line.find('\t'))));
+    }
+}
+
 }  // namespace hd8
