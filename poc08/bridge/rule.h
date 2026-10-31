@@ -2,8 +2,8 @@
 // 0.8-rule (--poc08 rule): the generator's Korean-side retrofit on 0.7.x's own output, in the binary. The CLI
 // captures what 0.7.x resolved and cleaned for every line (RuleCapture, fed by the stage observer); after a
 // document is translated, RuleRewrite reads each line into the retrofit's pre-IR (the port of the retrofit
-// reader), runs the retrofit (speech level and generation; its rewrite rules are off) and replaces the lines
-// the dialogue detector accepts whose speech level changes. Nothing here reads a table trained on model labels.
+// reader), runs the retrofit (speech level and generation) and replaces the lines the dialogue detector accepts whose
+// speech level changes; rewrite rules run only when they passed their gate alone (reader.tsv `rewrite` rows). Nothing here reads a table trained on model labels.
 #include <memory>
 #include <string>
 #include <vector>
@@ -48,7 +48,8 @@ struct RuleCapture {
 };
 
 struct RuleCounts {
-    uint64_t lines = 0, dialogue = 0, read = 0, replaced = 0, captionDocs = 0, keigo = 0, sameLevel = 0, mixed = 0;
+    uint64_t lines = 0, dialogue = 0, read = 0, replaced = 0, captionDocs = 0, keigo = 0, sameLevel = 0, mixed = 0, rewritten = 0,
+             rewriteBlocked = 0;
 };
 
 // Whether a line is speech by its shape: a quote that starts the line (after white space and an optional
@@ -68,7 +69,9 @@ std::string PreLine(const RuleData& data, size_t i, const std::string& ja, const
 // pre, when given, gets the retrofit's input lines (for the reader check).
 // 0.7.x's 합쇼체 is never lowered. bridge, when given, analyzes the dialogue lines for keigo: there 0.7.x's
 // polite level (해요체 too) is kept.
-// Only lines whose speech level the retrofit changes are replaced.
+// Only lines whose speech level the retrofit changes are replaced, and lines a rewrite rule that is on
+// (reader.tsv `rewrite` rows; HD08_RULE_REWRITES overrides them) changes where the retrofit without rules gives
+// back 0.7.x's text.
 void RuleRewrite(const RuleData& data, const std::vector<std::string>& ja, const RuleCapture& capture,
                  std::vector<std::string>& out, RuleCounts& counts, std::string* pre = nullptr,
                  const Bridge* bridge = nullptr);

@@ -1,6 +1,7 @@
 #include "rule.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <map>
 #include <set>
 
@@ -78,6 +79,7 @@ struct RuleData {
     std::vector<Keigo> keigo;
     std::vector<std::pair<std::string, std::string>> keigoPrefix;  // 御 + verb (+ に) + 成る / 為る / 致す
     std::vector<std::string> commandForms;  // conjugation forms of a command (命令形: 見ろ, 追え, 捕らえろ)
+    std::vector<std::string> rewrites;      // the retrofit's rewrite rules (W) that are on, each gated alone
     std::shared_ptr<const hd8gen::RetroSystem> retro;
 };
 
@@ -568,9 +570,21 @@ std::shared_ptr<const RuleData> LoadRule(const std::string& dataRoot, std::strin
             d->keigo.push_back({U8(c[1]), col(2), col(3), col(4)});
         } else if (kind == "keigo-prefix" && c.size() >= 3) d->keigoPrefix.push_back({U8(c[1]), U8(c[2])});
         else if (kind == "command-form") d->commandForms.push_back(U8(c[1]));
+        else if (kind == "rewrite") d->rewrites.push_back(U8(c[1]));
         else {
             err = path + ": unknown row kind " + kind;
             return nullptr;
+        }
+    }
+    // measurement switch for the one-rule-at-a-time gate: HD08_RULE_REWRITES=none | ID,ID replaces the list
+    if (const char* env = std::getenv("HD08_RULE_REWRITES")) {
+        d->rewrites.clear();
+        const std::string v = env;
+        for (size_t a = 0; a < v.size();) {
+            size_t c = v.find(',', a);
+            if (c == std::string::npos) c = v.size();
+            if (c > a && v.substr(a, c - a) != "none") d->rewrites.push_back(v.substr(a, c - a));
+            a = c + 1;
         }
     }
     d->retro = hd8gen::LoadRetro(dataRoot + "/generator/data", err);
@@ -724,17 +738,41 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
     }
     if (preOut)
         for (const std::string& l : pre) *preOut += l + "\n";
-    std::vector<hd8gen::RetroLine> lines;
+    std::vector<hd8gen::RetroLine> lines, rewritten;
     std::string err;
-    // the retrofit changes speech levels only: its rewrite rules (comma removal, aspect folding …) are off
+    // the retrofit's speech-level pass runs without rewrite rules; the rules that passed their gate run in a
+    // second pass, and their effect is all that differs between the two
     hd8gen::RetroOptions opt;
     opt.only = {"-none-"};
     // 합쇼체 is never lowered: 합쇼 → 해요 tied in game and lost in fiction on two dev slices; 해라 → 해 is the gain
     opt.keepHapsyo = true;
     if (!hd8gen::RunRetro(*d.retro, pre, opt, lines, nullptr, err)) return;
+    if (!d.rewrites.empty()) {
+        hd8gen::RetroOptions wopt = opt;
+        wopt.only = d.rewrites;
+        if (!hd8gen::RunRetro(*d.retro, pre, wopt, rewritten, nullptr, err)) rewritten.clear();
+    }
     for (size_t i = 0; i < lines.size() && i < out.size(); i++) {
         if (!lines[i].ok) continue;
         counts.read++;
+        const bool cr = !out[i].empty() && out[i].back() == '\r';
+        const std::string o075 = cr ? out[i].substr(0, out[i].size() - 1) : out[i];
+        // a rewrite rule changes the line: taken where the line is replaced anyway, or where the pass without
+        // rules gives back 0.7.x's text exactly (so nothing but the rule moves)
+        const hd8gen::RetroLine* w = nullptr;
+        if (i < rewritten.size() && rewritten[i].ok && !rewritten[i].fired.empty() && rewritten[i].out != lines[i].out &&
+            !rewritten[i].mixedLevels && rewritten[i].levelChanged == lines[i].levelChanged)
+            w = &rewritten[i];
+        const bool level = dialogue[i] && !lines[i].mixedLevels && lines[i].levelChanged;
+        if (w != nullptr && !level && lines[i].out != o075) {
+            counts.rewriteBlocked++;
+            w = nullptr;
+        }
+        if (w != nullptr && !level) {
+            counts.rewritten++;
+            out[i] = w->out + (cr ? "\r" : "");
+            continue;
+        }
         if (!dialogue[i]) continue;
         // only a change of speech level is worth the rewrite: a line at the same level keeps 0.7.x's text, and
         // so does a line whose sentences would end at different levels
@@ -743,12 +781,13 @@ void RuleRewrite(const RuleData& d, const std::vector<std::string>& ja, const Ru
             continue;
         }
         if (!lines[i].levelChanged) {
-            counts.sameLevel += lines[i].out != out[i];
+            counts.sameLevel += lines[i].out != o075;
             continue;
         }
-        const bool cr = !out[i].empty() && out[i].back() == '\r';
-        if (lines[i].out != out[i]) counts.replaced++;
-        out[i] = lines[i].out + (cr ? "\r" : "");
+        const std::string& lo = w != nullptr ? w->out : lines[i].out;
+        if (w != nullptr) counts.rewritten++;
+        if (lo != o075) counts.replaced++;
+        out[i] = lo + (cr ? "\r" : "");
     }
 }
 

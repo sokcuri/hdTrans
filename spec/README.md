@@ -15,3 +15,5 @@
 | [sounds.md](sounds.md) | 소리 (`SND`) |
 | [grammar.md](grammar.md) | 문법 (`GRM`) |
 | [meaning.md](meaning.md) | 뜻 (`MNG`): 뜻이 뒤집히는 오역, 실패가 없어야 하는 사례 |
+| [rewrite.md](rewrite.md) | 0.8 번역투 고치기 (`RW`): 쉼표, 의 연쇄, 당신, -고 있다 |
+| [checks.md](checks.md) | 0.8 출력 점검 (`CHK`): 부정, 금지, 의무, 물음, 높임, 숫자, 이름 |

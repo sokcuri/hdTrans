@@ -19,8 +19,13 @@ out	「年の差なんて！　たかだか十六歳差ではありませんか�
 out	「どこへ行かれますか」	「어디에 가십니까」	a question without ? keeps its level
 out	「どこへ行かれますか？」	「어디에 가십니까?」	합쇼체 is never lowered
 retro	「どこへ行かれますか？」	가세요?	가시다 is 가다 + honorific 시 in 해요체 (was 가셔요)
-out	「しかし、陛下もご多忙の身であらせられます」	「하지만, 폐하도 다망의 몸이십니다」	keigo (あらせられる) keeps 합쇼체
+out	「しかし、陛下もご多忙の身であらせられます」	「하지만 폐하도 다망의 몸이십니다」	keigo (あらせられる) keeps 합쇼체; no comma after a line-initial conjunction (RW-1)
 out	「奇天烈な名じゃ。まぁよい、用は済んだ。行ってよいぞ」	「괴상한 이름이야. 뭐 좋은, 용무는 끝났다. 가도 좋아」	the last sentence end keeps its level: inner sentences stay as 0.7.x wrote them (was 끝났어)
 out	「この場を以て宣言する。私はユフィリア・マゼンタとの婚約を破棄すると！」	「이 자리에서 선언한다. 나는 유필리아 마젠타와의 약혼을 파기한다고!」	the line ends in a quote, not at another level: 0.7.x text (was 선언해. 난)
 out	「アニスフィア王女を捕まえろ！　逃がすな、追え！」	「아니스피아 왕녀를 잡아라! 놓치지 마, 쫓아라!」	命令形 in the source: 0.7.x's 해라체 commands stay (was 잡아! 쫓아!)
 out	「うるせえ。彼女持ちは黙ってろ」	「시끄러. 여친 있는 사람은 입을 다물어라」	てろ (命令形 of the auxiliary): 다물어라 stays
+out	「とりあえず、雨宿りできるところに……」	「우선 비를 피할 수 있는 곳에……」	RW-1: no comma after a line-initial sentence adverb
+out	「そういや、青海さんって、家、どこなの？」	「그러고 보니, 아오미 씨는 집, 어디야?」	RW-2: no comma after a topic
+out	「ここの目覚ましのスイッチ、全部消しておいてくれない？」	「여기 자명종의 스위치, 전부 지워 둬 주지 않겠어?」	RW-4: A의 B의 C → A B의 C
+out	「先生、いろいろアドバイスをくれて、ありがとうございました」	「선생님, 여러 가지 조언을 줘서 감사합니다」	RW-3: no comma after -어서
+out	「データを作るのはかまわないけど、肝心のシールは……？」	「데이터를 만드는 건 상관없지만, 중요한 씰은……?」	RW-3: a contrast connective keeps its comma

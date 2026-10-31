@@ -765,11 +765,12 @@ int RunMain(int argc, char** argv) {
         if (poc08Stats && ruleData)
             std::fprintf(stderr,
                          "hdtrans08 rule: lines=%llu caption_docs=%llu dialogue=%llu keigo=%llu read=%llu replaced=%llu "
-                         "same_level=%llu mixed=%llu\n",
+                         "same_level=%llu mixed=%llu rewritten=%llu rewrite_blocked=%llu\n",
                          static_cast<unsigned long long>(ruleCounts.lines), static_cast<unsigned long long>(ruleCounts.captionDocs),
                          static_cast<unsigned long long>(ruleCounts.dialogue), static_cast<unsigned long long>(ruleCounts.keigo),
                          static_cast<unsigned long long>(ruleCounts.read), static_cast<unsigned long long>(ruleCounts.replaced),
-                         static_cast<unsigned long long>(ruleCounts.sameLevel), static_cast<unsigned long long>(ruleCounts.mixed));
+                         static_cast<unsigned long long>(ruleCounts.sameLevel), static_cast<unsigned long long>(ruleCounts.mixed),
+                         static_cast<unsigned long long>(ruleCounts.rewritten), static_cast<unsigned long long>(ruleCounts.rewriteBlocked));
         if (poc08Stats) {
             const hd08::bridge::Counts c = hd08::bridge::CountsOf(poc08.bridge);
             const std::string parts = hd08::bridge::ActiveParts(poc08.bridge);

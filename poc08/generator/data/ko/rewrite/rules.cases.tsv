@@ -14,15 +14,23 @@ comma.conj-1	keep	narr	N:나 P:top N:하지만 Punct:comma{jaMark=、} V:가다	
 comma.conn-1	fix	narr	V:생각하다{ctype=conn,eomi=-어서} Punct:comma{jaMark=、} N:나 P:top N:방 P:obj V:나오다{tense=past}	생각해서 나는 방을 나왔다
 comma.conn-1	fix	narr	N:문 P:obj N:조용히 V:닫다{ctype=conn,eomi=-고} Punct:comma{jaMark=、} N:나 P:top V:나가다{tense=past}	문을 조용히 닫고 나는 나갔다
 comma.conn-1	keep	narr	V:크다{ctype=adn} Punct:comma{jaMark=、} V:붉다{ctype=adn} N:꽃	큰, 붉은 꽃
+comma.conn-2	fix	narr	V:생각하다{ctype=conn,eomi=-어서} Punct:comma{jaMark=、} N:나 P:top N:방 P:obj V:나오다{tense=past}	생각해서 나는 방을 나왔다
+comma.conn-2	keep	narr	V:하다{ctype=conn,eomi=-어서} Punct:comma{jaMark=、} N:하지만 N:곳 P:top V:없다	해서, 하지만 곳은 없다
+comma.conn-2	keep	narr	V:좋다{ctype=conn,eomi=-지만} Punct:comma{jaMark=、} N:나 P:top V:가다{tense=past}	좋지만, 나는 갔다
 comma.nosrc-1	fix	narr	N:그 Punct:comma N:사람 P:subj V:오다{tense=past}	그 사람이 왔다
 comma.nosrc-1	keep	narr	N:그 Punct:comma{jaMark=、} N:사람 P:subj V:오다{tense=past}	그, 사람이 왔다
 comma.topic-1	fix	narr	N:나 P:top Punct:comma{jaMark=、} V:싫다	나는 싫다
 comma.topic-1	keep	narr	N:사과 P:lex=도 Punct:comma{jaMark=、} N:배 P:lex=도 V:좋다	사과도, 배도 좋다
+comma.topic-1	keep	narr	V:끝내다{ctype=adn,tense=past} N:나 P:top Punct:comma{jaMark=、} N:역시 V:화나다{tense=past}	끝낸 나는, 역시 화났다
+comma.topic-1	fix	narr	N:미치루 P:top Punct:comma{jaMark=、} N:나 P:lex=에게 V:붙다{tense=past}	미치루는 나에게 붙었다
 from.robuteo-1	fix	narr	N:냉장고 P:lex=로부터 N:우유 P:obj V:꺼내다{tense=past}	냉장고에서 우유를 꺼냈다
 from.robuteo-1	fix	narr	N:친구{sem=person} P:lex=로부터 N:편지 P:obj V:받다{tense=past}	친구에게서 편지를 받았다
 from.robuteo-1	keep	narr	N:냉장고 P:lex=에서 N:우유 P:obj V:꺼내다{tense=past}	냉장고에서 우유를 꺼냈다
 gen.chain-1	fix	narr	N:학교 P:gen N:옥상 P:gen N:문 P:subj V:열리다{tense=past}	학교 옥상의 문이 열렸다
 gen.chain-1	keep	narr	N:나 P:gen N:친구 P:gen N:집 P:goal V:가다{tense=past}	나의 친구의 집에 갔다
+gen.chain-1	keep	narr	V:마치다{ctype=adn,tense=past} N:느낌 P:gen N:학교 P:gen N:학생 P:subj V:보다{tense=past}	마친 느낌의 학교의 학생이 봤다
+gen.chain-1	keep	narr	N:자신 P:gen N:일족 P:gen N:뿌리 P:obj V:보이다{tense=past}	자신의 일족의 뿌리를 보였다
+gen.chain-1	fix	narr	N:선생님 P:gen N:입술 P:gen N:감촉	선생님 입술의 감촉
 gen.chain-1	keep	narr	N:선배{sem=person} P:gen N:동생 P:gen N:책 P:obj V:읽다{tense=past}	선배의 동생의 책을 읽었다
 pron.anata-1	fix	hae	N:당신 P:subj V:하다{tense=past,mood=q}	네가 했어
 pron.anata-1	keep	narr	N:당신 P:subj V:하다{tense=past}	당신이 했다

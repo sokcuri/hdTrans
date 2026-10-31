@@ -1,9 +1,12 @@
 #! rewrite
 # Korean rewrite rules (W) over kir nodes. They edit nodes and features, never text. Phases run disc then ko;
-# inside a phase rules run in id order, each at most once per site. Cases: rules.cases.tsv (fix and keep).
+# inside a phase rules run in id order, each at most once per site. Cases: rules.cases.tsv (fix and keep); each
+# case runs with its rule alone. Each rule is gated alone (spec/rewrite.md); --poc08 rule turns on only the rules
+# listed in bridge/data/reader.tsv (`rewrite` rows).
 #
 # Columns
 #   id         family.name-n
+#   spec       rule id in spec/rewrite.md (RW-n)
 #   phase      disc | ko
 #   scope      any | quote (utterance) | narr (narration)
 #   pattern    node matchers [Kind lemma|lemma {feat=v|w,feat!=v}]:name, `?` optional, `...` gap inside the
@@ -12,14 +15,15 @@
 #              utt.level=v, utt.narration, utt.quote; `!` negates an atom
 #   action     `;`-joined: set x.feat=v | copy x.feat=y.feat | del x | replace x [Kind lemma {feats}] |
 #              insert-after x [Kind lemma {feats}]
-id	phase	scope	pattern	condition	action	note
-aspect.fold-1	ko	any	[V {ctype=conn,eomi=-고}]:v [V 있다 {aux}]:a	v.aux=0	copy v.tense=a.tense; copy v.mood=a.mood; copy v.ctype=a.ctype; copy v.rel=a.rel; copy v.eomi=a.eomi; copy v.neg=a.neg; copy v.modal=a.modal; set v.aspect=prog; del a	-고 있다 is the progressive aspect of the verb (D §2.1): rules and G see one predicate
-comma.conj-1	ko	any	^ [* 하지만|그래도|그러니까|그래서|그런데|그럼|그러면|그리고|그러나|게다가|근데|하긴|역시|결국|일단|우선|사실|확실히|분명|혹시|솔직히|어쨌든|아무튼|애초에|물론|오히려]:a [Punct comma]:c	-	del c	K1: no comma after a line-initial conjunction or sentence adverb (refs: 하지만 9%, 그리고 2%, 그럼 12% with a comma); interjections keep it (네 90%, 아 100%)
-comma.conn-1	ko	any	[V {ctype=conn}]:v [Punct comma]:c	v.aux=0	del c	K1: no comma after a connective clause (refs 8-10% with a comma, 0.7.5 28-46%)
-comma.nosrc-1	ko	any	[Punct comma {jaMark=}]:c	-	del c	a comma the source does not have
-comma.topic-1	ko	any	[N]:n [P top]:t [Punct comma]:c	-	del c	K1: no comma after a topic (refs 1%, 0.7.5 18%)
-from.robuteo-1	ko	any	[N]:n [P 로부터]:p	-	set p.kase=src	로부터 → 에서 / 에게서 (G chooses by animacy; 34× overuse)
-gen.chain-1	ko	any	[N]:a [P gen]:g [N]:b [P gen]:h [N]:c	a.sem!=person & a.dep=0 & b.dep=0 & a.lemma!=나|너|저|우리|저희|그|그녀|당신|자네|그대|이|그것|이것|저것	del g	의-chains: A의 B의 C → A B의 C when A is not a person
-pron.anata-1	ko	quote	[N 당신]:n	utt.level=hae|haera	set n.lemma=너	casual speech says 너, not 당신 (6.2 vs 2.0 per 1,000 lines)
-pron.anata-2	ko	quote	[N 당신]:n [P subj|top]:p	utt.level=haeyo|hapsyo	del n; del p	polite speech drops the addressee pronoun
-prog.state-1	ko	any	[V {aspect=prog,tense=nonpast}]:v	v.lemma=알다|모르다|기억하다|믿다|원하다|바라다|사랑하다|좋아하다|싫어하다|닮다	set v.aspect=simple	K5: state verbs do not take -고 있다 in the present (알고 있어 → 알아)
+id	spec	phase	scope	pattern	condition	action	note
+aspect.fold-1	RW-9	ko	any	[V {ctype=conn,eomi=-고}]:v [V 있다 {aux}]:a	v.aux=0	copy v.tense=a.tense; copy v.mood=a.mood; copy v.ctype=a.ctype; copy v.rel=a.rel; copy v.eomi=a.eomi; copy v.neg=a.neg; copy v.modal=a.modal; copy v.level=a.level; copy v.hon=a.hon; set v.aspect=prog; del a	-고 있다 is the progressive aspect of the verb (D §2.1): rules and G see one predicate
+comma.conj-1	RW-1	ko	any	^ [* 하지만|그래도|그러니까|그래서|그런데|그럼|그러면|그리고|그러나|게다가|근데|하긴|역시|결국|일단|우선|사실|확실히|분명|혹시|솔직히|어쨌든|아무튼|애초에|물론|오히려]:a [Punct comma]:c	-	del c	K1: no comma after a line-initial conjunction or sentence adverb (refs: 하지만 9%, 그리고 2%, 그럼 12% with a comma); interjections keep it (네 90%, 아 100%)
+comma.conn-1	RW-5	ko	any	[V {ctype=conn}]:v [Punct comma]:c	v.aux=0	del c	K1: no comma after a connective clause (refs 8-10% with a comma, 0.7.5 28-46%)
+comma.conn-2	RW-3	ko	any	[V {ctype=conn,eomi=-어서}]:v [Punct comma]:c	v.aux=0 & c.next.lemma!=하지만|그러나|그런데|그래도	del c	no comma after a cause or tight-sequence -어서 clause (가서 산다, 몰라서 물었다); a conjunction that opens the next clause keeps it (하고 싶어서, 하지만); contrast and condition connectives keep theirs (comma.conn-1 lost 56.7%: -지만 10:44)
+comma.nosrc-1	RW-6	ko	any	[Punct comma {jaMark=}]:c	-	del c	a comma the source does not have
+comma.topic-1	RW-2	ko	any	[N]:n [P top]:t [Punct comma]:c	!n.prev.ctype=adn	del c	K1: no comma after a topic (refs 1%, 0.7.5 18%); a topic headed by a relative clause keeps it (끝낸 나는, 가지는 것은,)
+from.robuteo-1	RW-7	ko	any	[N]:n [P 로부터]:p	-	set p.kase=src	로부터 → 에서 / 에게서 (G chooses by animacy; 34× overuse)
+gen.chain-1	RW-4	ko	any	[N]:a [P gen]:g [N]:b [P gen]:h [N]:c	a.sem!=person & a.dep=0 & b.dep=0 & !a.prev.ctype=adn & a.lemma!=나|너|저|우리|저희|그|그녀|당신|자네|그대|이|그것|이것|저것|자신|자기	del g	의-chains: A의 B의 C → A B의 C when A is not a person or a pronoun and no relative clause modifies A (마친 느낌의 학교의)
+pron.anata-1	RW-8	ko	quote	[N 당신]:n	utt.level=hae|haera	set n.lemma=너	casual speech says 너, not 당신 (6.2 vs 2.0 per 1,000 lines)
+pron.anata-2	RW-8	ko	quote	[N 당신]:n [P subj|top]:p	utt.level=haeyo|hapsyo	del n; del p	polite speech drops the addressee pronoun
+prog.state-1	RW-9	ko	any	[V {aspect=prog,tense=nonpast}]:v	v.lemma=알다|모르다|기억하다|믿다|원하다|바라다|사랑하다|좋아하다|싫어하다|닮다	set v.aspect=simple	K5: state verbs do not take -고 있다 in the present (알고 있어 → 알아)

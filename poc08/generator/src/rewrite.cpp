@@ -587,7 +587,7 @@ std::shared_ptr<const RuleSet> LoadRules(const std::string& dir, std::string& er
     const std::string p = dir + "/rules.tsv";
     if (!ReadTsv(p, t, err)) return nullptr;
     const int ci = t.Col("id"), cp = t.Col("phase"), cs = t.Col("scope"), cpat = t.Col("pattern"), cc = t.Col("condition"),
-              ca = t.Col("action"), cn = t.Col("note");
+              ca = t.Col("action"), cn = t.Col("note"), csp = t.Col("spec");
     if (ci < 0 || cp < 0 || cs < 0 || cpat < 0 || cc < 0 || ca < 0) {
         err = p + ": missing column";
         return nullptr;
@@ -598,6 +598,7 @@ std::shared_ptr<const RuleSet> LoadRules(const std::string& dir, std::string& er
         RuleRow row{r[ci], r[cp], r[cs], r[cpat], r[cc], r[ca], cn >= 0 ? r[cn] : "", {}, {}, {}};
         std::string e;
         if (!ids.insert(row.id).second) e = "duplicate id";
+        else if (csp >= 0 && r[csp].rfind("RW-", 0) != 0) e = "spec must be a rule id RW-n of spec/rewrite.md";
         else if (row.phase != "disc" && row.phase != "ko") e = "phase must be disc or ko";
         else if (row.scope != "any" && row.scope != "quote" && row.scope != "narr") e = "scope must be any, quote or narr";
         else if (!ParsePattern(row.pattern, row.m, e) || !ParseCond(row.condition, row.cond, e) || !ParseActions(row.action, row.act, e)) {
@@ -662,8 +663,11 @@ LintReport Lint(const RuleSet& rs, const Tables& t) {
             continue;
         }
         if (u.narration) u.level = Level::haera;
+        // a rule is gated alone, so its cases run with only that rule on; the overlap check below runs them with
+        // every rule on
+        const RewriteResult rr = Run(rs, t, nodes, {}, {u}, {cs.rule}, {}, nullptr);
         std::map<std::string, std::vector<Edit>> edits;
-        const RewriteResult rr = Run(rs, t, nodes, {}, {u}, {}, {}, &edits);
+        Run(rs, t, nodes, {}, {u}, {}, {}, &edits);
         for (const auto& f : rr.fired)
             if (f.rule == cs.rule) cr.fired = true;
         const GenResult g = Generate(t, rr.kir2, rr.reg, {u});
