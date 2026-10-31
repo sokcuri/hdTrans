@@ -1,0 +1,31 @@
+# 규칙: LEX-1
+rule	input	expected	kind	layer
+sound:katakana-syllabic-l	アイラは腰に提げているピックルでどうにか壁に貼り付いていたが、その壁もすぐに崩れ落ちてしまうだろう。	has:피클로	fix	sound
+sound:katakana-syllabic-l	「サンドピックルは波打ちぎわの砂浜の中に潜っていることが多い。	has:산드피클은	fix	sound
+sound:katakana-syllabic-l	ピックルボール	피클볼	fix	sound
+sound:katakana-syllabic-l	「ミリアタックル！！」	has:미리아타클	fix	sound
+sound:katakana-syllabic-l	「まずはあたしから、ギガントナックル！」	has:기간트나클	fix	sound
+sound:katakana-syllabic-l	「イノブタの脂もあるし、これでパイナップルグミが作れるはずです」	has:파이나플그미	fix	sound
+sound:katakana-syllabic-l	「パイナップルグミってなに？」	has:파이나플그미	fix	sound
+sound:katakana-syllabic-l	リッカーさんの好みのピンクのサイドバックルも我慢することにします。	has:사이드바클도	fix	sound
+sound:katakana-syllabic-l	サイドバックルへと手をかける。	has:사이드바클로	fix	sound
+sound:katakana-syllabic-l	イチャイチャカップルよりいらいらするよ。	has:이차이차카플보다	fix	sound
+sound:katakana-syllabic-l	（バーサークグラップル）のリーダー。	has:바서크그라플	fix	sound
+sound:katakana-syllabic-l	「その人、ベイトタックルで釣りしてませんでしたか？」	has:베이트타클로	fix	sound
+sound:katakana-syllabic-l	第２４５話「完熟レモップル消費期限はたった１日！？」	has:완숙 레모플	fix	sound
+sound:katakana-syllabic-l	僕の言葉に周りが非常にざわめく……レモップルの腐った表皮の話は有名らしい。	has:레모플이	fix	sound
+sound:katakana-syllabic-l	「チャージナックルッ！！」	has:챠지나클	fix	sound
+sound:katakana-syllabic-l	「くらええぇッ！ニトロタックルッ！！」	has:니트로타클	fix	sound
+sound:katakana-syllabic-l	『「ブレイジングナックルッ！！」』	has:브레이징나클	fix	sound
+sound:katakana-syllabic-l	首をブルルッて振ったけど。	has:부르르	keep	sound
+sound:katakana-syllabic-l	プルップルッ！！！	탱글 탱글!!!	keep	sound
+sound:katakana-syllabic-l	犬の身震いの様に『ブルッブルッ』と横に震える。	has:부르르 부르르	keep	sound
+sound:katakana-syllabic-l	急に恥ずかしくなった僕はぐったりとした店長の顔面を蹴っ飛ばした後、バックルームに戻った。	has:백룸으로	keep	sound
+sound:katakana-syllabic-l	施設中枢、パニックルーム	시설 중추, 패닉 룸	keep	sound
+sound:katakana-syllabic-l	でも、あたしらみたいな若いカップルってのはいない。	has:젊은 커플	keep	sound
+sound:katakana-syllabic-l	狼が意を決してストーカーにタックルを決めた。	has:태클을	keep	sound
+sound:katakana-syllabic-l	「ああ。今朝食べたアップルパイの香りだ」	has:애플 파이	keep	sound
+sound:katakana-syllabic-l	・ナックルダスター	·너클 더스터	keep	sound
+sound:katakana-syllabic-l	「ハックルベリーフィン達は贅沢な奴らだ」	has:허클베리핀	keep	sound
+sound:katakana-syllabic-l	外見の特徴を一言で言うとコロポックルである。	has:코로폭쿠루	keep	sound
+sound:katakana-syllabic-l	ハッブル宇宙望遠鏡の画像を見た時、似たような光が円状に映っている写真。	has:허블 우주 망원경	keep	sound

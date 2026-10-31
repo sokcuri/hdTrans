@@ -185,6 +185,27 @@ struct Run {
         return true;
     }
 
+    // Whether cells[j] is ク, グ, プ or ブ and a ル after it ends the word: the run ends there or after
+    // a cut ッ (ナックルッ), or a kana that starts a syllable with a consonant follows (not ー, ン, ッ, a
+    // small kana or a vowel).
+    bool SyllabicL(long j) const {
+        const std::string_view c = At(j);
+        if ((c != "ク" && c != "グ" && c != "プ" && c != "ブ") || At(j + 1) != kMarkRu) return false;
+        const std::string_view next = At(j + 2);
+        if (next.empty() || (next == kMarkTsu && At(j + 3).empty())) return true;
+        constexpr std::string_view kNoOnset = "アイウエオンッーヲヴァィゥェォャュョヮヵヶ";
+        return KatakanaCell(next) && kNoOnset.find(next) == std::string_view::npos;
+    }
+
+    // Whether the ッ at cells[j] (not yet edited) parts a sound said again: ル or the kana after the
+    // ッ comes right before it (プルップル, ブルッブル, グッグルル).
+    bool SaidAgain(long j) const {
+        const long k = static_cast<long>(source.size()) - (Size() - j);
+        if (k < 1 || k + 1 >= static_cast<long>(source.size())) return false;
+        return source[static_cast<std::size_t>(k - 1)] == kMarkRu ||
+               source[static_cast<std::size_t>(k - 1)] == source[static_cast<std::size_t>(k + 1)];
+    }
+
     void ApplyFinal(long i, int row);
     void AddFinal(long i, int final, std::string_view mark);
     void AddFinalN(long i);
@@ -232,6 +253,15 @@ void Run::ApplyFinal(long i, int row) {
             Replace(i, At(i), v);
             Replace(i + 1, kMarkN, "");
         }
+    } else if (std::string_view v10; after == kMarkTsu && SyllabicL(i + 2) && !SaidAgain(i + 1) && variant(10, v10)) {
+        // LEX-1: ッ before ク, グ, プ or ブ and a ル that ends the word is English -ckle, -ggle,
+        // -pple or -bble: the syllable takes no final, and the ル is the ㄹ of the next syllable
+        // (ピックル 피클, ナックルボール 나클볼).
+        const int index = KanaMatrixIndex(At(i + 2));
+        Replace(i, At(i), Keep(WithFinal(v10, -1, 0)));
+        Replace(i + 1, kMarkTsu, "");
+        Replace(i + 1, At(i + 1), Keep(FinalL(KanaCell(index / 5, 2), -1)));
+        Replace(i + 2, kMarkRu, "");
     } else if (after == kMarkTsu) {
         const std::string_view following = At(i + 2);
         int n = 35;
