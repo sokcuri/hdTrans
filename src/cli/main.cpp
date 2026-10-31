@@ -23,6 +23,7 @@
 #include "core/config/cache.h"
 #include "core/engine.h"
 #include "core/dict/folders.h"
+#include "core/dict/pack.h"
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
 #include "core/engine/rules.h"
@@ -188,6 +189,7 @@ std::string Decided(const hdTrans::word::Selection& s, bool ending) {
     case Provenance::Scorer: return "scorers\t";
     case Provenance::Misread: return "misread\t";
     case Provenance::Cg: return "cg-lite\t";
+    case Provenance::Pack: return "packs\tpack:" + hdTrans::dict::PackRowById(s.id).id;
     }
     return "\t";
 }
@@ -225,6 +227,17 @@ void WhyResolved(void* context, int chunk, int sentence, const hdTrans::word::Ch
                 std::fprintf(why.trace, "\t%d\t%s\t%s\n", e.ruleId,
                              e.fixed ? "fixed" : "", e.field.empty() ? "" : std::string(e.field).c_str());
             }
+        }
+        // The pack rows that decided a slot of the word: id, slot and target (docs/packs.md).
+        for (const int row : it->packRows) {
+            const hdTrans::dict::PackRowLabel label = hdTrans::dict::PackRowById(row);
+            std::fprintf(stderr, "WHY-PACK\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex, it->start);
+            PrintEscaped(it->group ? std::string_view(it->group->surface) : std::string_view{});
+            std::fputc('\t', stderr);
+            PrintEscaped(label.id);
+            std::fprintf(stderr, "\t%s\t", label.slot.c_str());
+            PrintEscaped(label.target);
+            std::fputc('\n', stderr);
         }
         for (const hdTrans::word::ShadowChoice& shadow : it->shadowChoices) {
             std::fprintf(stderr, "SHADOW\t%zu\t%d\t%d\t%d:%d\t", why.line, chunk, sentence, it->tokenIndex,

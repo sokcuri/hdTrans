@@ -516,7 +516,8 @@ bool internal::ReadLayer(std::string_view text, FileLayer& layer) {
     while (!line.empty() && (line.front() == ' ' || line.front() == '\t')) line.remove_prefix(1);
     if (!line.starts_with("layer=")) return false;
     line.remove_prefix(6);
-    constexpr std::string_view kNames[] = {"base", "words", "names", "user", "kana", "readings", "prefilter", "postfilter"};
+    constexpr std::string_view kNames[] = {"base", "words", "names", "user", "kana", "readings", "prefilter", "postfilter",
+                                           "pack", "pack-classes"};
     for (std::size_t i = 0; i < std::size(kNames); i++) {
         if (line == kNames[i]) {
             layer = static_cast<FileLayer>(i);
@@ -636,12 +637,14 @@ bool SnapshotLoader::ReadLayers() {
             }
             if (!filter) f.layer = column ? FileLayer::User : FileLayer::Base;
         } else if (!internal::ReadLayer(f.text, f.layer)) {
-            message = "the first line is not #! layer=base|words|names|user|kana|readings|prefilter|postfilter";
+            message = "the first line is not #! layer=base|words|names|user|kana|readings|prefilter|postfilter|pack|pack-classes";
         } else if (f.layer != FileLayer::Base) {
             const bool plainLayer = f.layer == FileLayer::Kana || f.layer == FileLayer::Readings ||
-                                    f.layer == FileLayer::PreFilter || f.layer == FileLayer::PostFilter;
+                                    f.layer == FileLayer::PreFilter || f.layer == FileLayer::PostFilter ||
+                                    f.layer == FileLayer::Pack || f.layer == FileLayer::PackClasses;
             const bool column = Column(f);
-            if (column && plainLayer) message = "a column file cannot be of the layer kana, readings, prefilter or postfilter";
+            if (column && plainLayer)
+                message = "a column file cannot be of the layer kana, readings, prefilter, postfilter, pack or pack-classes";
             if (!column && !plainLayer) message = "a plain file cannot be of the layer words, names or user";
         }
         if (message) {
@@ -678,6 +681,10 @@ bool SnapshotLoader::CompilePlain(const std::vector<std::size_t>& rest) {
             continue;
         }
         if (files[i].layer == FileLayer::PreFilter || files[i].layer == FileLayer::PostFilter) continue;
+        if (files[i].layer == FileLayer::Pack || files[i].layer == FileLayer::PackClasses) {
+            s.sourceInfo_.push_back({files[i].name, LoadFileKind::Shipped, {}});
+            continue;
+        }
         if (files[i].layer == FileLayer::Kana) {
             std::vector<UserEntry> k = userdict::KanaSpellings(text, s.base_, s.codes_);
             std::move(k.begin(), k.end(), std::back_inserter(kana));
@@ -697,6 +704,21 @@ bool SnapshotLoader::CompilePlain(const std::vector<std::size_t>& rest) {
     }
     if (!ok || !senses.errors.empty()) return false;
     s.senses_ = std::move(senses.table);
+    // The pack files, after the sense table: they add marker families only when there are packs.
+    std::vector<PackError> packErrors;
+    for (const std::size_t i : rest) {
+        const std::string_view text = internal::WithoutHeader(files[i].text);
+        if (files[i].layer == FileLayer::PackClasses) ParsePackClasses(files[i].name, text, s.packs_, packErrors);
+    }
+    for (const std::size_t i : rest) {
+        const std::string_view text = internal::WithoutHeader(files[i].text);
+        if (files[i].layer == FileLayer::Pack) ParsePackRows(files[i].name, text, &s.base_, s.families_, s.packs_, packErrors);
+    }
+    CheckPackClasses(s.packs_, packErrors);
+    for (PackError& e : packErrors) {
+        errors.push_back({std::move(e.file), LoadErrorKind::Plain, e.line, TsvErrorKind::Read, std::move(e.message)});
+    }
+    if (!packErrors.empty()) return false;
 
     std::vector<UserEntry> rawView, textView;
     rawView.reserve(endings.size() + entries.size());

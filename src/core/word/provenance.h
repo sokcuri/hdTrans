@@ -6,12 +6,12 @@ namespace hdTrans::word {
 
 enum class Provenance : uint8_t {
     None, Fixed, LocalRule, GlobalRule, Single, FirstXxx, Digit,
-    Sense, SenseDefault, Initial, Rewrite, Scorer, Misread, Cg,
+    Sense, SenseDefault, Initial, Rewrite, Scorer, Misread, Cg, Pack,
 };
 
 struct Selection {
     Provenance layer = Provenance::None;
-    int id = -1;  // rule number, 1-based sense row, or scorer index
+    int id = -1;  // rule number, 1-based sense row, scorer index, or pack row (dict::PackRowById)
 };
 
 struct ShadowChoice {

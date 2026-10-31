@@ -155,9 +155,10 @@ TSV만 고칩니다. `extra/kanji_on.tsv`(한자의 첫 음독, Unihan에서 `to
 | `kana` | 일반 파일 | `가나<TAB>한자 키<TAB>부류` 줄. 기본 사전 단어의 가나 표기 |
 | `readings` | 일반 파일 | `일본어<TAB>읽기` 줄. 이름 읽기 표 (가나 또는 한글) |
 | `prefilter`, `postfilter` | 일반 파일 | 번역 전 일본어와 번역 후 한국어를 고치는 필터 행. Ehnd 필터 형식([필터와 Ehnd 사전](#필터와-ehnd-사전)) |
+| `pack`, `pack-classes` | 일반 파일 | 단어 단계가 끝난 뒤 단어의 결정 한 칸을 덮는 행과 그 단서의 명사 부류([packs.md](packs.md)) |
 
 열 파일인지는 내용으로 정합니다. 빈 줄과 `#` 주석이 아닌 첫 줄이 `key`로 시작하는 머리글이면 열
-파일입니다. `kana`, `readings`, `prefilter`, `postfilter`는 일반 파일만, `base`가 아닌 나머지는 열
+파일입니다. `kana`, `readings`, `prefilter`, `postfilter`, `pack`, `pack-classes`는 일반 파일만, `base`가 아닌 나머지는 열
 파일만 가능합니다.
 정의: `src/core/dict/snapshot.h`.
 
