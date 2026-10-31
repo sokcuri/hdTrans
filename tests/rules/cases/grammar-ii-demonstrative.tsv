@@ -29,3 +29,5 @@ dict:gram:de-ii:1	それにここでいいところを見せないと格好が�
 dict:gram:de-ii:1	君の家の車庫でいい物を見つけたんだ	네 집의 차고에서 좋은 것을 찾아낸 거야	keep	local
 dict:gram:de-ii:3	まあそれならそれで良いか。	뭐 그렇다면 그런 대로 좋은가.	keep	local
 dict:gram:de-ii:1	ここでいい加減に返答したら	여기서 적당히 대답하면	keep	local
+cx:demonstrative-myeon:10	これで終わりだ。	!rule:cx:demonstrative-myeon:10	keep	rewrites
+cx:demonstrative-myeon:10	それはそれでいいが、誰と交代させよう？	!rule:cx:demonstrative-myeon:10	keep	rewrites
