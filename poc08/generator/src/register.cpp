@@ -289,6 +289,7 @@ struct Cues {
     bool exclaim = false;     // every sentence is a bare predicate alone or has no predicate (REG-13)
     bool auth = false;        // the line has an authoritative voice cue (voices.tsv auth, REG-14)
     bool trail = false;       // the last sentence trails off after a て-form (言われて……)
+    bool outburst = false;    // REG-1: the cues are those of the narrator's outburst after a quote
     bool honSonkei = false, honGive = false;  // REG-16 (hon.tsv back rows)
     bool declZo = false;      // REG-17: a plain statement declared with ぞ or ぜ (行くぞ, やるぜ)
     bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ (寒いなぁ)
@@ -303,16 +304,28 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     const Utt u = Utterance(ToU32(ja));
     c.narr = u.narr;
     // REG-1: the text after the quote is narration, unless it is itself spoken: a casual sentence-final particle at
-    // its end (「…」じゃねーわ！！ — the narrator's own outburst) makes the line speech
+    // its end (「…」じゃねーわ！！ — the narrator's own outburst) makes the line speech. The outburst then decides the
+    // line's cues, and the quote is another voice whose level the retrofit keeps (RegDecision.holdQuote).
     if (c.narr) {
         const std::u32string all = ToU32(ja);
         const size_t close = all.find_last_of(U"」』≫");
         if (close != std::u32string::npos) {
-            std::u32string after = LastSentence(all.substr(close + 1));
-            while (!after.empty() && IsMark(after.back())) after.pop_back();
-            while (after.size() >= 2 && (after.back() == U'ぁ' || after.back() == U'ぇ' || after.back() == U'ー')) after.pop_back();
+            const std::u32string afterAll = all.substr(close + 1);
+            std::u32string after = LastSentence(afterAll);
+            for (bool again = true; again;) {
+                again = false;
+                while (!after.empty() && (IsMark(after.back()) || after.back() == U'ー')) { after.pop_back(); again = true; }
+                if (after.size() >= 2 && std::u32string(U"ぁぃぅぇぉ").find(after.back()) != std::u32string::npos &&
+                    after[after.size() - 2] >= U'ぁ' && after[after.size() - 2] <= U'ゖ') { after.pop_back(); again = true; }
+            }
+            bool spoken = false;
             for (const auto& tail : t.tails)
-                if (tail.strong && EndsInTail(after, tail)) c.narr = false;
+                if (tail.strong && EndsInTail(after, tail)) spoken = true;
+            if (spoken && afterAll.find_first_of(U"「『≪") == std::u32string::npos) {
+                Cues o = Scan(t, ToU8(afterAll));
+                o.outburst = true;
+                return o;
+            }
         }
     }
     bool word = false;
@@ -779,6 +792,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             };
             decide(cues[k - i], keys[k - i], d);
             d.trail = cues[k - i].trail;
+            d.holdQuote = cues[k - i].outburst;
             d.firstPerson = !cues[k - i].first.empty();
             d.narration = d.key == "narr";
             // REG-15: a line of several quotes gets a level per quote; the line's own decision is its last quote's

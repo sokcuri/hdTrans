@@ -906,7 +906,7 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                     ++depth;
                 }
                 quoteOf[q] = k;
-                nested[q] = depth >= 2;
+                nested[q] = depth >= 2 || (d.holdQuote && depth >= 1);
                 if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qclose && depth > 0) --depth;
             }
         }
