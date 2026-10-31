@@ -17878,7 +17878,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 晴々	후련&AV@	M429			GN				xxx llm		はればれ	w:17834
 晴々	화창&AV@	M429			GN				llm		はればれ	w:17835
 晴々し	해$D5@	H7U0			GN						はればれしい	w:17836
-晴れて	정식으로	E300			GN				llm			w:17837
 晴れやかな笑顔	환한 미소	N110			GN				llm		はれやかなえがお	w:17838
 晴晴	후련&AV@	M429			GN				xxx llm		はればれ	w:17839
 晴晴	화창&AV@	M429			GN				llm		はればれ	w:17840
@@ -20435,7 +20434,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 登載	등재	N110		Hd	GN				xxx	1	とうさい	w:20387
 登録番号	등록번호	N110			GN				llm		とうろくばんごう	w:20388
 登龍門	등용문	N110			GN						とうりゅうもん	w:20389
-白々し	속이 뻔히 보$AH@	H7U0			GN				llm			w:20390
+白々し	속이 빤$AB@	H7U0			GN			LEX-161	llm			w:20390
 白あり	흰개미	N110			GN						しろあり	w:20391
 白いんげん豆	흰강낭콩	N110			GN						しろいんげんまめ	w:20392
 白くま	백곰	N110			GN						しろくま	w:20393
@@ -21156,7 +21155,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 穴ぐら	움막	N110			GN						あなぐら	w:21107
 穴熊	오소리	N110	VAm		GN				llm		あなぐま	w:21108
 空えずき	헛구역질	N110	UTi		GN						からえずき	w:21109
-空き	빈	N110			GN				xxx llm	1		w:21110
+空き	빈자리	N110			GN			LEX-161	xxx llm	1		w:21110
 空しく	한갓되이	E300			GN						むなしく	w:21111
 空にな	&Ad@	M428			GN				xxx llm	1		w:21112
 空中分解	공중분해	N110		Hd	GN				llm		くうちゅうぶんかい	w:21113

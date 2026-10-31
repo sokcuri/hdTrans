@@ -325,6 +325,8 @@
 //= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
 //= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
 //= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
+//= verb.harming	Dictionary forms of verbs that harm what they act on (殺す, 殴る, 壊す): with てやる and no beneficiary they threaten (殺してやる 죽여 버릴 거야), not do a favour.
+//= verb.harming-causative	Dictionary forms of causatives that make someone learn a hard lesson (思い知らせる, わからせる): with てやる they threaten (思い知らせてやる 깨닫게 하겠어).
 //= verb.janai-saying	て forms of verbs of saying (言っ, 話し) whose てるんじゃない after word.janai-correction corrects what was said and forbids nothing (そういうこと言ってるんじゃないわよ 그런 걸 말하는 게 아니야; spec MNG-6).
 //= word.janai-correction	Words that point at what was said (そういう, そんな), before a verb of verb.janai-saying in てるんじゃない (spec MNG-6).
 //= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
@@ -7913,3 +7915,34 @@ verb.tame-state	当たる
 verb.tame-state	引き起こす
 verb.tame-state	もたらす
 verb.tame-state	適する
+
+verb.harming	殺す
+verb.harming	ぶっ殺す
+verb.harming	ブッ殺す
+verb.harming	ぶち殺す
+verb.harming	ぶっころす
+verb.harming	殴る
+verb.harming	ぶん殴る
+verb.harming	ぶっ飛ばす
+verb.harming	ぶっとばす
+verb.harming	潰す
+verb.harming	ぶっ潰す
+verb.harming	叩き潰す
+verb.harming	捻り潰す
+verb.harming	踏み潰す
+verb.harming	握り潰す
+verb.harming	壊す
+verb.harming	ぶっ壊す
+verb.harming	ぶち壊す
+verb.harming	叩き壊す
+verb.harming	叩きのめす
+verb.harming	倒す
+verb.harming	ぶっ倒す
+verb.harming	斬る
+verb.harming	切り刻む
+verb.harming	痛めつける
+verb.harming	蹴り飛ばす
+verb.harming	ぶちのめす
+verb.harming-causative	思い知らせる
+verb.harming-causative	わからせる
+verb.harming-causative	分からせる

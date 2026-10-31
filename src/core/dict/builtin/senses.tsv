@@ -1009,6 +1009,9 @@
 下げる	차다	剣,刀	before	v1
 押す	밀다	ワゴン	before	v5
 いれる	타다	お茶,コーヒー,紅茶	before	v1
+// LEX-162: 下りる before 来る is 내려오다, after a rank or a role 물러나다.
+下りる	내려오다	来る,くる,き,きる,来	after	v1
+下りる	물러나다	王位,地位,役,座,職,役職,表舞台,一線,勝負,ゲーム	before	v1
 下りる	내려오다	山	before	v1
 つく	나다	傷	before	v5
 背	등받이	椅子	before	n
@@ -1498,3 +1501,12 @@
 またがる	올라타다	自転車,チャリ,チャリンコ,バイク,オートバイ,スクーター,原付,馬,ロバ,箒,ほうき	sentence	v5
 // LEX-153: 渇いた before 喉 is 마른.
 渇く	마르다	喉,のど	after	v5
+// LEX-162: a verb or adjective read by the word it pairs with: 目を回す after a spinning adverb is 눈이 핑핑 돌다; かます after a blow, a dash or a greeting is 날리다 and after a gag or a wedge 물리다; 切れる before a card is 꺼낼 수 있다; ものすごい before 形相 is 무시무시하다.
+目を回す	눈이 핑핑 돌다	ぐるぐる,ぐるぐると,くるくる,くるくると,グルグル,グルグルと,クルクル,クルクルと,ぐるんぐるん,ぐわんぐわん	before	v5
+かます	물리다	猿轡,猿ぐつわ,さるぐつわ,轡,くつわ,楔,くさび	before	v5
+かます	날리다	タックル,ダッシュ,チョップ,キック,パンチ,ビンタ,一発,ハイタッチ,挨拶,ストンピング,アタック,蹴り,頭突き,張り手,膝蹴り,肘打ち,エルボー,ラリアット,ドロップキック,スタートダッシュ,不意打ち,先制,一撃,ジャブ,アッパー	before	v5
+切れる	꺼낼 수 있다	カード,手札,切り札,札	after	v1
+物凄い	무시무시하다	形相	after	adj
+ものすごい	무시무시하다	形相	after	adj
+// LEX-161: 適正 before a level, a place, a price or an amount is 적정; elsewhere it stays 적성 (魔法適正).
+適正	적정	狩場,狩り場,レベル,価格,値段,体重,範囲,量,人数,距離,温度,水準,規模,年齢,配置,処理,手続き,評価,値	after	n
