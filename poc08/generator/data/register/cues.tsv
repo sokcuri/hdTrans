@@ -197,10 +197,27 @@ exclaim	-	見っけ
 exclaim	-	めっけ
 archaic	end	なり	かきと	the old copula なり (騎士団なり); not かなり, いきなり, となり
 stiff	end	てみよ		the old imperative of みる (申してみよ)
-quotative	-	と		a polite form before と is quoted speech (許してくださいと詫びる)
-casual	end	く		a verb in its dictionary form (頂く, 任せる → る row)
+# a polite form before と + a verb of saying is quoted (許してくださいと詫びる); not ですとも, ですとか, ますと
+quotative	-	と詫
+quotative	-	と謝
+quotative	-	と頼
+quotative	-	と叫
+quotative	-	と答
+quotative	-	と聞
+quotative	-	と呟
+quotative	-	と囁
+quotative	-	と告
+quotative	-	と命
+quotative	-	と怒鳴
+quotative	-	と泣
+quotative	-	と懇願
+quotative	-	と訴
+quotative	-	と懇
+quotative	-	と言わ
+quotative	-	と申
+casual	end	く	しよかたらすき早遅強弱高低深浅長短広狭多少近遠暗明熱冷寒暑重軽固細太新古若薄厚濃全	a verb in its dictionary form (頂く); not an adverb (早く, よく, まったく, しばらく)
 casual	end	す		a verb in its dictionary form (頂く, 任せる → る row)
 casual	end	つ		a verb in its dictionary form (頂く, 任せる → る row)
 casual	end	ぶ		a verb in its dictionary form (頂く, 任せる → る row)
 casual	end	む		a verb in its dictionary form (頂く, 任せる → る row)
-casual	end	ぐ		a verb in its dictionary form (頂く, 任せる → る row)
+casual	end	ぐ	す	a verb in its dictionary form (急ぐ); not すぐ

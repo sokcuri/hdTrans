@@ -151,3 +151,10 @@ r9-7	REG-9	fix	d126		no	わかってるよ	-	-
 r3-11	REG-3	keep	d127		yes	「意気地のない男ですまなかった」	hae	-
 r3-12	REG-3	keep	d128		yes	「許してくださいと詫びる気はないのか？」	hae	-
 r2-9	REG-2	fix	d129		yes	「来春、小田原へ出る」	hae	-
+r3-13	REG-3	fix	d130		yes	「そうですとも」	haeyo	-
+r3-14	REG-3	fix	d131		yes	「お茶ですとか、お菓子ですとか」	haeyo	-
+r8-13	REG-8	fix	d132	乙	yes	「はい、そうです」	-	-
+r8-14	REG-8	fix	d132	乙	yes	「ほら、早く」	-	-
+r8-15	REG-8	fix	d132	乙	yes	「ええと、もうすぐ」	-	-
+r8-16	REG-8	fix	d132	乙	yes	「えっと、この本」	haeyo	-
+r13-17	REG-13	keep	d133		yes	「まったく」	hae	-

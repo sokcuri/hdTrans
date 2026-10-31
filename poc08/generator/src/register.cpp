@@ -536,7 +536,10 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             if (!pred && p.size() >= 3 && p.back() == U'だ' && (kanjiPrev || kataPrev || p == U"そうだ")) pred = true;
             // a verb's dictionary form when it is the whole utterance: 断る
             static const std::u32string kVerbEnd = U"うくぐすつぬぶむる";
-            if (!pred && pieces.size() == 1 && p.size() >= 2 && kVerbEnd.find(p.back()) != std::u32string::npos &&
+            // an adverb in -く or -ぐ is no verb (早く, まったく, しばらく, すぐ): cues.tsv casual rows say the same
+            static const std::u32string kAdvKu = U"しよかたらすき早遅強弱高低深浅長短広狭多少近遠暗明熱冷寒暑重軽固細太新古若薄厚濃全";
+            const bool adverb = (p.back() == U'く' || p.back() == U'ぐ') && kAdvKu.find(prev) != std::u32string::npos;
+            if (!pred && !adverb && pieces.size() == 1 && p.size() >= 2 && kVerbEnd.find(p.back()) != std::u32string::npos &&
                 (kanjiPrev || (prev >= U'ぁ' && prev <= U'ゖ')) && p != U"そう" && p != U"どう")
                 pred = true;
             if (asked[pi]) pred = false;  // a question asks, it does not exclaim (読んでいい？, できた？)

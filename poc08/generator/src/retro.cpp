@@ -999,9 +999,18 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 // REG-12: the source trails off after a て-form (言われて……): 0.7.x's -어 is not a command to raise
                 const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
                 const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail;
-                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !raise && !raisePlain && !jaCommand &&
-                    !(command && d.key.rfind("scene-speech", 0) == 0))
+                const bool held = mixed || inner || keep || keigo || askedByEnding || hapsyo || raise || jaCommand ||
+                                  (command && d.key.rfind("scene-speech", 0) == 0);
+                if (!held && raisePlain) {
+                    // the plain end stays plain, at the dialogue level of REG-2 (해), not raised to 해요
+                    for (auto& g : reg)
+                        if (g.node == nodes[q].id) {
+                            g.level = Level::hae;
+                            g.hon = false;
+                        }
                     continue;
+                }
+                if (!held) continue;
                 for (auto& g : reg)
                     if (g.node == nodes[q].id && nodes[q].decision) {
                         g.level = static_cast<Level>(nodes[q].decision);
