@@ -1,0 +1,23 @@
+# 규칙: SPC-22
+rule	input	expected	kind	layer
+cx:stype-vocative:10	見てください、2人の世界ですよ、どうします父上！	봐 주세요, 2명의 세계예요, 어떻게 합니까 아버님!	fix	rewrites
+cx:stype-vocative:10	見ます人	!rule:cx:stype-vocative:10	keep	rewrites
+cx:stype-vocative:20	「し、失礼いたします博士……！」	rule:cx:stype-vocative:20=7니다	fix	rewrites
+cx:stype-vocative:20	「え、…遠慮しますご主人様……。」	rule:cx:stype-vocative:20=7니다	fix	rewrites
+cx:stype-vocative:20	それとこれとは 違いますエエイ！	그것과 이것과는 다릅니다 에잇!	fix	rewrites
+cx:stype-vocative:20	「次々来ますッ」	「차례차례 옵니다」	fix	rewrites
+cx:stype-vocative:20	見ます人	보는 사람	keep	rewrites
+cx:stype-vocative:20	「ご案内します商品はこちらです」	!rule:cx:stype-vocative:20	keep	rewrites
+cx:stype-vocative:20	本日ご紹介します商品！	!rule:cx:stype-vocative:20	keep	rewrites
+cx:stype-vocative:20	新しく発売します商品	!rule:cx:stype-vocative:20	keep	rewrites
+cx:stype-vocative:20	間もなく到着します電車	머지않아 도착하는 전철	keep	rewrites
+cx:stype-vocative:20	「次に停まります駅」	!rule:cx:stype-vocative:20	keep	rewrites
+cx:stype-vocative:20	こちらでお待ちします。	!rule:cx:stype-vocative:20	keep	rewrites
+cx:stype-vocative:30	「あら、聞きました奥さま？」	「어머, 들었습니까 사모님?」	fix	rewrites
+cx:stype-vocative:30	「こんなところで、どうされましたカーネル殿」	rule:cx:stype-vocative:30=5습니까	fix	rewrites
+cx:stype-vocative:30	お届けしました料理	!rule:cx:stype-vocative:30	keep	rewrites
+cx:stype-vocative:40	「受け賜りましたマスター」	「받았습니다 마스터」	fix	rewrites
+cx:stype-vocative:40	「…わ、わかりましたご主人様…。」	rule:cx:stype-vocative:40=5습니다	fix	rewrites
+cx:stype-vocative:40	戻ってきました…ふぅ、ふふふ。	rule:cx:stype-vocative:40=5습니다	fix	rewrites
+cx:stype-vocative:40	「申し訳ございませんマスター……」	!rule:cx:stype-vocative:40	keep	rewrites
+cx:stype-vocative:40	マル急計画で建造されました。	!rule:cx:stype-vocative:40	keep	rewrites
