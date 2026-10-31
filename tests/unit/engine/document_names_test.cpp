@@ -61,6 +61,7 @@ HD_TEST(engine_document_names) {
         {"察したみみちゃんが来た。", "헤아린 미미짱이 왔다."},
         {"手を振るみみちゃん。", "손을 흔드는 미미짱."},  // after a verb that modifies it
         {"笑ったみみちゃんが来た。", "웃은 미미짱이 왔다."},
+        {"謝るみみちゃん。", "사과하는 미미짱."},
     };
     for (const auto& [line, want] : cases) HD_CHECK_EQ(translate(line, list.get()), want);
 
@@ -81,15 +82,20 @@ HD_TEST(engine_document_names) {
     HD_CHECK_EQ(translate("みみが来た。", list.get()), std::string("귀가 왔다."));
 
     // A listed kana name starts where a name starts, and the guards of nicknames hold for it: a
-    // shorter listed name does not split a longer one, nor a verb before くんだ.
+    // shorter listed name does not split a longer one, nor a verb before くんだ; ちゃん and と
+    // after it are the honorific and the particle.
     names::List kanaParsed;
-    HD_REQUIRE(names::ParseList("ゆき\t유키\nある\t아루\n", kanaParsed));
+    HD_REQUIRE(names::ParseList("ゆき\t유키\nある\t아루\nしろ\t시로\tnick\n", kanaParsed));
     std::unique_ptr<pipeline::DocumentNames> kana;
     HD_REQUIRE(pipeline::CompileNames(*loaded.snapshot, kanaParsed, kana));
     HD_CHECK_EQ(translate("みゆきちゃん", kana.get()), std::string("미유키짱"));
     HD_CHECK_EQ(translate("まだあるくんだ", kana.get()), std::string("아직 걷는 거야"));
     HD_CHECK_EQ(translate("それでゆきちゃん", kana.get()), std::string("그래서 유키짱"));
     HD_CHECK_EQ(translate("それでゆきちゃん", nullptr), std::string("그래서 가"));
+    HD_CHECK_EQ(translate("ともゆきくんが来た。", kana.get()), std::string("토모유키 군이 왔다."));
+    HD_CHECK_EQ(translate("あのゆきちゃんが来た。", kana.get()), std::string("그 유키짱이 왔다."));
+    HD_CHECK_EQ(translate("今日はゆきちゃんと遊んだ。", kana.get()), std::string("오늘은 유키짱과 놀았다."));
+    HD_CHECK_EQ(translate("しろちゃんと遊ぶ。", kana.get()), std::string("시로짱과 논다."));
 
     HD_CHECK_EQ(translate("睦月は笑った。", nullptr), std::string("1월은 웃었다."));
     HD_CHECK_EQ(translate("もしもしみみちゃん？", nullptr), std::string("여보세요 귀짱?"));

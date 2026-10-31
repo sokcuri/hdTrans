@@ -1167,9 +1167,11 @@ bool ClauseVerb(std::string_view name, const dict::Snapshot& snap) {
 // modifies (いつかちゃんと, もっとちゃんと) or a verb ending a clause (しろちゃんと), or
 // after a common word before a verb that conjugates (りんごちゃんと遊ぶ). After a name of
 // no other word, a proper noun included, ちゃん and と are the honorific and the particle
-// (りこちゃんと目が合う, りこちゃんと遊ぶ, ふたばちゃんと遊ぶ). A listed name is a person.
+// (りこちゃんと目が合う, りこちゃんと遊ぶ, ふたばちゃんと遊ぶ). After a listed name, they are
+// always the honorific and the particle (ゆきちゃんと遊んだ, しろちゃんと遊ぶ).
 bool ChantoAdverb(std::string_view name, std::string_view rest, const dict::Snapshot& snap, bool listed) {
-    if ((!listed && !LayerPerson(name, snap)) || ClauseVerb(name, snap)) return true;
+    if (listed) return false;
+    if (!LayerPerson(name, snap) || ClauseVerb(name, snap)) return true;
     bool word = false;
     for (const dict::Candidate& c : snap.RetrieveRecords(name, dict::LookupMode::General)) {
         if (c.codes == nullptr || c.codes->part.Empty() || c.codes->sem.Text().starts_with("QPN")) continue;
@@ -1247,6 +1249,14 @@ bool ReadsAsWords(std::string_view lead, const dict::Snapshot& snap) {
     return true;
 }
 
+// Whether w is a word that modifies the noun after it (あの, その).
+bool Determiner(std::string_view w, const dict::Snapshot& snap) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(w, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.codes->part.ClassDigit() == '0') return true;
+    }
+    return false;
+}
+
 // Whether s ends in a verb in its dictionary or past form, which may modify a name after it
 // (謝る, かばった, している).
 bool EndsInVerb(std::string_view s, const dict::Snapshot& snap) {
@@ -1287,7 +1297,8 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         // The longest listed kana name before the honorific is the name, written as listed, where
         // a name starts: at the start of the kana run, where NicknameStart starts one, after kana
         // that read as words (もしもしみみちゃん, にはみみちゃん) or after a verb that modifies it
-        // (謝るみみちゃん); not ゆき in みゆきちゃん.
+        // (謝るみみちゃん); not ゆき in みゆきちゃん. Where NicknameStart reads the whole run as
+        // one nickname, only after a word that modifies a noun (あのゆきちゃん, not ともゆきくん).
         std::string_view listed;
         if (ctx.listed != nullptr) {
             size_t run = end;
@@ -1296,16 +1307,19 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
                 if (!NicknameRune(r.cp) || r.size == 0 || r.size > run) break;
                 run -= r.size;
             }
+            const bool whole = start == run;
             for (size_t from = run; from < end; from += std::max<size_t>(1, text::DecodeRune(text.substr(from)).size)) {
                 const auto l = ctx.listed->find(text.substr(from, end - from));
                 if (l == ctx.listed->end()) continue;
-                size_t word = run;  // the kanji before the run start the verb
-                for (text::Rune r; word > 0 && (r = LastRune(text.substr(0, word))).size > 0 && r.size <= word &&
-                                   IsKanjiRune(r.cp);) {
-                    word -= r.size;
+                size_t verbFrom = run;  // the kanji before the run start the verb
+                for (text::Rune r{}; verbFrom > 0 && (r = LastRune(text.substr(0, verbFrom))).size > 0 && r.size <= verbFrom &&
+                                     IsKanjiRune(r.cp);) {
+                    verbFrom -= r.size;
                 }
-                if (from == run || from == start || ReadsAsWords(text.substr(run, from - run), snap) ||
-                    EndsInVerb(text.substr(word, from - word), snap)) {
+                const std::string_view lead = text.substr(run, from - run);
+                if (whole ? from == run || Determiner(lead, snap)
+                          : from == run || from == start || ReadsAsWords(lead, snap) ||
+                                EndsInVerb(text.substr(verbFrom, from - verbFrom), snap)) {
                     start = from;
                     listed = l->second;
                 }
