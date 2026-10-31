@@ -672,7 +672,7 @@ int CmdHints(const Args& a) {
 }
 
 // ---- cases ---------------------------------------------------------------------------------------
-// CASES.tsv rows: id, kind (fix|keep), input, expect, note. expect is a run of tokens, each surf or surf[lemma],
+// CASES.tsv rows: id, kind (fix|keep|todo), input, expect, note. A todo case is reported, not failed. expect is a run of tokens, each surf or surf[lemma],
 // separated by spaces; the case passes when the analysis of input contains that run.
 int CmdCases(const Args& a) {
   if (a.pos.size() < 2) return Die("cases CORE.bin|DATA_DIR CASES.tsv");
@@ -690,7 +690,7 @@ int CmdCases(const Args& a) {
   opt.margins = false;
   auto ws = NewWorkspace();
   Analysis r;
-  int n = 0, failed = 0;
+  int n = 0, failed = 0, todo = 0;
   if (!ReadTsv(a.pos[1], [&](const std::vector<std::string>& f) {
         if (f.size() < 4) return;
         ++n;
@@ -708,6 +708,10 @@ int CmdCases(const Args& a) {
             ok = got[i + k].first == surf && (lemma.empty() || got[i + k].second == lemma);
           }
         }
+        if (!ok && f[1] == "todo") {
+          ++todo;
+          return;
+        }
         if (!ok) {
           ++failed;
           std::string s;
@@ -716,7 +720,7 @@ int CmdCases(const Args& a) {
         }
       }, &err))
     return Die(err);
-  std::printf("%d cases, %d failed\n", n, failed);
+  std::printf("%d cases, %d failed, %d todo not yet passing\n", n, failed, todo);
   return failed ? 1 : 0;
 }
 

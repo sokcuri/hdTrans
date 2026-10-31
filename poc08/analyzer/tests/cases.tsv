@@ -31,4 +31,6 @@ c.elong.2	keep	いいいい加減にして	いいいい[良い] 加減	lengthene
 c.intj.1	fix	「あ、それはあとでいいのよさ！」	それ は あと	は + あと, not the interjection はあ
 c.intj.2	fix	消灯時間まではあともうちょっとある	まで は あと	まで + は + あと
 c.tomo.1	fix	「ふたりともおはよー」	ふたり[二人]	ふたり is 二人 written in kana, not ふ + たり
-c.youna.1	keep	漫画のようなあかんべーをして	の よう[様]	のような
+c.youna.1	todo	漫画のようなあかんべーをして	の よう[様]	のような
+c.youna.2	todo	漫画のようなあかんべーをして	の よう[様] な[だ]	the adnominal copula after よう
+c.tomo.2	keep	「ふたりともおはよー」	ふたり と も	a lengthened greeting after とも

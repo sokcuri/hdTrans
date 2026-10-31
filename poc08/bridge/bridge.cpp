@@ -169,19 +169,43 @@ char Vowel(uint32_t c) {
     return c >= 0x3041 && c <= 0x3093 ? kVowels[c - 0x3041] : '-';
 }
 
+// A wave dash (U+301C, U+FF5E) right after a kana becomes the long-vowel mark U+30FC.
+std::string LengtheningMarks(std::string_view text) {
+    std::string out(text);
+    uint32_t prev = 0;
+    for (size_t i = 0; i + 3 <= out.size();) {
+        const unsigned char c0 = static_cast<unsigned char>(out[i]);
+        const size_t n = c0 < 0x80 ? 1 : (c0 >> 5) == 0x6 ? 2 : (c0 >> 4) == 0xE ? 3 : 4;
+        const uint32_t c = n == 3 ? CodePoint(std::string_view(out).substr(i, 3)) : 0;
+        const bool kana = prev >= 0x3041 && prev <= 0x30FA;
+        if ((c == 0x301C || c == 0xFF5E) && kana) {
+            out[i] = static_cast<char>(0xE3);
+            out[i + 1] = static_cast<char>(0x83);
+            out[i + 2] = static_cast<char>(0xBC);
+        } else {
+            prev = c;
+        }
+        i += n;
+    }
+    return out;
+}
+
 void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
     auto& b = *static_cast<Bridge*>(context);
     if (!b.opt.segment || (doc != nullptr && static_cast<DocState*>(doc)->caption)) return nullptr;
+    // 0.7.x's own normalization has written a lengthening ー after kana as a wave dash; the analyzer reads the
+    // mark it was (same byte length, so the offsets stay the chunk's)
+    const std::string analysed = LengtheningMarks(text);
     Doc d;
     Line l;
-    l.src = text;
+    l.src = analysed;
     StageN(*b.engine.analyzer, b.engine.cfg, d, l);
     StageA(*b.engine.analyzer, b.engine.cfg, d, l, {});
     auto* cs = new ChunkState;
     cs->refits = &b.refits;
     // Only the boundaries that connection rules or the rank 1-3 preferences decided bind 0.7.x; a cut that
     // the fewest-units rank or a tie-breaker chose is left to 0.7.x's own segmentation.
-    AnalyzerAllowedEnds(*b.engine.analyzer, text, kTieSlackUnits, &cs->ends);
+    AnalyzerAllowedEnds(*b.engine.analyzer, analysed, kTieSlackUnits, &cs->ends);
     for (const Token& t : l.toks) {
         cs->ends.push_back(t.src.end);
         // a lengthening at the end of a word may be cut off it (ね|ぇ, から|ぁ), so that 0.7.x keeps its

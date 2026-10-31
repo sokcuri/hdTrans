@@ -51,7 +51,7 @@ pf.pletter	ANA-P3	3	arc	pletter	-	a particle whose first letter differs from its
 pf.dialect-final	ANA-P3	3	arc	ud=助詞-終助詞 & lemma=え|ばい|けん|べ|がな|のう|ぞい|たい / ud=助動詞 & lemma=や|じゃ|どす|へん|ひん|はる|やん	-	dialect final particles and auxiliaries (え, たい, ばい, のう; copula や, じゃ) only where no standard reading exists (飲み+てえ, not 飲み+て+え; 今+やっ+て, not や)	1
 pf.vowel-run-cut	ANA-P2	2	cut	vowelrun	*	a cut inside a run of three or more same-vowel letters counts like a derived word: the run is one lengthened word (かわいいいい)	1
 pf.name-aux	ANA-P3	3	pair	ud=名詞-固有名詞	ud=動詞-非自立可能	a name followed directly by an auxiliary verb (風吹+い+た) only where nothing else reads the span: the kanji usually belong to a verb	1
-pf.intj-mid	ANA-P3	3	pair	ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	an interjection right after a noun or a non-final particle (それは+あと, not それ+はあ+と) only where nothing else reads the span	1
+pf.intj-mid	ANA-P3	3	pair	ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞|形状詞-助動詞語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	an interjection right after a noun or a non-final particle (それは+あと, not それ+はあ+と) only where nothing else reads the span	1
 pf.adj-u	ANA-P3	3	pair	ud=形容詞 & cform=連用形-ウ音便 & !lemma=めでたい	!lemma=御座る|存ずる|存じる	the ウ音便 of an adjective (よう, 早う) stands before ございます/存じます; elsewhere (dialect) only where nothing else reads the span (のよう+な is 様, not 良い)	1
 pf.kana1-noun	ANA-P3	3	arc	hira & len=1 & ud=名詞-普通名詞	-	a one-kana common noun (ま for 間, め for 目) only where no function word reads it	1
 pf.te-adj	ANA-P5	5	pair	ud=助詞-接続助詞 & lemma=て	ud=形容詞	after the te-form an auxiliary verb follows (て+いく, not the adjective いい), on a tie	1

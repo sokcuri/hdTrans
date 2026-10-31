@@ -40,3 +40,4 @@ cn.onbin-masu	ANA-C32	cform=連用形-イ音便 & !lemma=@hon-ra	ud=助動詞 & 
 cn.prefix-verb	ANA-C33	ud=接頭辞 & !lemma=御	ud=動詞|形容詞	only the honorific お/ご prefixes a verb (お+願い); other prefixes take nouns (本+読み is 本 + 読む)
 cn.rentai-aux-verb	ANA-C34	cform=連体形	ud=動詞-非自立可能	an attributive form is not followed by an auxiliary verb (いい+し is the listing particle, not する)
 cn.de-aru	ANA-C35	ud=助詞-格助詞 & lemma=で	lemma=有る|御座る	で before ある/ござる is the copula (話であれば, 学生である), not the case particle
+cn.you-final	ANA-C36	ud=形状詞-助動詞語幹 & !lemma=みたい	ud=助詞-終助詞	the stems よう and そう take the copula before a final particle (のよう+な is だ, not the final なあ); みたい takes it directly
