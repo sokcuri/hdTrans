@@ -519,12 +519,10 @@ bool AttachesToNoun(std::string_view surface, std::string_view korean) {
 }
 
 // Whether a noun's Korean is an adverb, which forms no compound with the noun after it (結局昼
-// 결국 낮, 正直頭 솔직히 머리): a word of ko.adverb-noun or one that ends in the adverb suffix
-// 히 or 마다 (당연히, 날마다).
-bool AdverbKorean(std::string_view korean) {
+// 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn) or a word of ko.adverb-noun.
+bool AdverbKorean(std::string_view korean, std::string_view tags) {
     if (!HangulWord(korean) || text::RuneCount(korean) < 2) return false;
-    return dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean) || korean.ends_with("히") ||
-           korean.ends_with("마다");
+    return Contains(tags, "Nn") || dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
 }
 
 // Whether the item continues a number or a range of numbers written before it (第2回,
@@ -1468,7 +1466,8 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             if (f.korean == "등" && (IsDigit(First(t)) || nd(tags))) break;
             return Result(std::move(t), true);
         }
-        if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && AdverbKorean(t) &&
+        if (settings_.literal && nextKind == '1' && !Code(item).starts_with("13") && AdverbKorean(t, tags) &&
+            !Contains(nextTags, "Ct") && !(Code(item).starts_with("12") && Contains(nextTags, "Z7")) &&
             HangulWord(nextEntry)) {
             return Result(std::move(t), true);
         }
