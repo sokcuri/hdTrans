@@ -4,8 +4,8 @@ mod.tai	fix	パンを食べたい。	빵을 먹고 싶다.	inv
 mod.tai	keep	パンを食べる。	빵을 먹는다.	inv
 mod.tai.neg	fix	「パンを食べたくない。」	「빵을 먹고 싶지 않아.」	inv
 mod.tai.neg	keep	「パンを食べない。」	「빵을 안 먹어.」	inv
-mod.hoshii	fix	「本がほしい。」	「책을 갖고 싶어.」	inv
-mod.hoshii	keep	「本が高い。」	「책이 비싸.」	inv
+mod.hoshii	fix	「本がほしい。」	「책을 갖고 싶다.」	inv
+mod.hoshii	keep	「本が高い。」	「책이 비싸다.」	inv
 mod.desho	fix	「明日は雨が降るでしょう。」	「내일은 비가 내릴 거예요.」	inv
 mod.desho	keep	「明日は雨が降ります。」	「내일은 비가 내려요.」	inv
 mod.desho.na	fix	「部屋は静かでしょう。」	「방은 조용할 거예요.」	inv
@@ -44,7 +44,7 @@ mod.tai	fix	毎日、勉強したい。	매일, 공부하고 싶다.	inv
 mod.daro	fix	学校に行かないだろう。	학교에 가지 않을 것이다.	inv
 mod.tsumori	fix	学校に行かないつもりだ。	학교에 가지 않을 생각이다.	inv
 mod.hoshii.neg	fix	「本がほしくない。」	「책을 갖고 싶지 않아.」	inv
-mod.hoshii.neg	keep	「本がほしい。」	「책을 갖고 싶어.」	inv
+mod.hoshii.neg	keep	「本がほしい。」	「책을 갖고 싶다.」	inv
 mod.teii	fix	「学校に行っていい？」	「학교에 가도 돼?」	inv
 mod.teii	keep	「学校に行ってもいい？」	「학교에 가도 돼?」	inv
 mod.daro.confirm	fix	「先生は来なかっただろう？」	「선생님은 안 왔지?」	inv
@@ -62,7 +62,7 @@ mod.daro.ka.n	keep	雨だろう。	비일 것이다.	inv
 mod.noda.hold	fix	死ぬのか？	-	inv
 mod.noda.hold	keep	死ぬ。	죽는다.	inv
 mod.noda.cop.hold	fix	「いるのだ」	-	inv
-mod.noda.cop.hold	keep	「いる」	「있어」	inv
+mod.noda.cop.hold	keep	「いる」	「있다」	inv
 mod.desho.ka	fix	「雨が降るでしょうか。」	「비가 내릴까요?」	inv
 mod.desho.ka	keep	「雨が降るでしょう。」	「비가 내릴 거예요.」	inv
 mod.desho.ka.n	fix	「雨でしょうか。」	「비일까요?」	inv

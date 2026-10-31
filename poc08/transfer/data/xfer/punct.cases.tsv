@@ -12,7 +12,7 @@ punct.q	fix	「本を読む？」	「책을 읽어?」	inv
 punct.q	keep	「本を読む。」	「책을 읽어.」	inv
 punct.excl	fix	「本を読む！」	「책을 읽어!」	inv
 punct.excl	keep	「本を読む。」	「책을 읽어.」	inv
-punct.end.ka	fix	「学校に行きませんか。」	「학교에 가지 않으실래요?」	inv
+punct.end.ka	fix	「学校に行きませんか。」	「학교에 가지 않을래요?」	inv
 punct.end.ka	keep	「学校に行きません。」	「학교에 안 가요.」	inv
 punct.ellipsis	fix	「……本がある。」	「……책이 있어.」	inv
 punct.ellipsis	keep	「本がある。」	「책이 있어.」	inv

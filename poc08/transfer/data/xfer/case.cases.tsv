@@ -64,12 +64,12 @@ case.ka.or	fix	パンかりんごを食べる。	빵이나 사과를 먹는다.	
 case.ka.or	keep	パンとりんごを食べる。	빵과 사과를 먹는다.	inv
 case.mo.aru	fix	部屋に時計もある。	방에 시계도 있다.	inv
 case.mo.aru	keep	部屋に時計がある。	방에 시계가 있다.	inv
-case.de.pron	fix	「これでいい。」	「이걸로 좋아.」	inv
+case.de.pron	fix	「これでいい。」	「이걸로 좋다.」	inv
 case.de.pron	keep	「ここで遊ぶ。」	「여기에서 놀아.」	inv
 case.de.time	fix	「今日で終わる。」	「오늘로 끝나.」	inv
 case.de.time	keep	「学校で終わる。」	「학교에서 끝나.」	inv
 case.sore.hold	fix	「それで、学校に行った。」	-	inv
-case.sore.hold	keep	「これで、学校に行った。」	「이걸로, 학교에 갔어.」	inv
+case.sore.hold	keep	「これで、学校に行った。」	「이걸로, 학교에 갔다.」	inv
 case.sore.kara.hold	fix	それから、学校に行く。	-	inv
 case.sore.kara.hold	keep	学校から来る。	학교에서 온다.	inv
 case.sore.ni.hold	fix	それに、学校に行く。	-	inv

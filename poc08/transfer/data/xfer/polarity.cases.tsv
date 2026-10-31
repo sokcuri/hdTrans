@@ -10,13 +10,13 @@ adv.mou.ii	keep	「部屋が静かです」	「방이 조용해요」	inv
 adv.sou.alone	fix	「……そう……」	「……그래……」	inv
 adv.sou.alone	keep	「そう言う。」	「그렇게 말해.」	inv
 adv.sou.eol	fix	そう	그래	inv
-adv.sou.eol	keep	「そう言う」	「그렇게 말해」	inv
+adv.sou.eol	keep	「そう言う」	「그렇게 말한다」	inv
 adv.sou.cop	fix	「そうです」	「그래요」	inv
-adv.sou.cop	keep	「そう言う」	「그렇게 말해」	inv
+adv.sou.cop	keep	「そう言う」	「그렇게 말한다」	inv
 adv.sou.final	fix	「そうよ！」	「그래!」	inv
 adv.sou.final	keep	「そう言うよ」	「그렇게 말해」	inv
 adv.sou.cop.ne	fix	「そうだね」	「그렇지」	inv
-adv.sou.cop.ne	keep	「そうだ」	「그래」	inv
+adv.sou.cop.ne	keep	「そうだ」	「그렇다」	inv
 adv.dou.cop	fix	「学校はどうでしたか」	「학교는 어땠어요?」	inv
 adv.dou.cop	keep	「どうする？」	「어떻게 해?」	inv
 pol.neg.notice.short	fix	「私も気付きませんでした」	「저도 못 알아차렸어요」	inv

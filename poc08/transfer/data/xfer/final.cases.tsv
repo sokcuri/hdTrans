@@ -3,6 +3,6 @@ id	kind	ja	ko	src
 final.yo	fix	「学校に行くよ。」	「학교에 가.」	inv
 final.yo	keep	「学校に行く。」	「학교에 가.」	inv
 final.ne	fix	「本が高いね。」	「책이 비싸네.」	inv
-final.ne	keep	「本が高い。」	「책이 비싸.」	inv
+final.ne	keep	「本が高い。」	「책이 비싸다.」	inv
 final.yone	fix	「本が高いですよね」	「책이 비싸죠」	inv
 final.yone	keep	「本が高いですね」	「책이 비싸네요」	inv
