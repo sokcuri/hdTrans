@@ -213,6 +213,8 @@ std::vector<XNode> Expand(const Tables& t, const std::vector<Node>& in, const st
             adv.n.lemma = t.G(n.neg == Neg::an ? "neg.an" : "neg.mot");
             adv.n.id = adv.n.origin = x.n.origin;
             adv.n.utt = n.utt;
+            // 안 takes the word's place: it attaches where the word did (……안 했어), unless a noun split off before it
+            adv.n.glue = x.n.lemma == ha ? false : x.n.glue;
             out.push_back(adv);
             x.n.neg = Neg::none;
             x.n.glue = false;  // 공부 + 안 + 하다: 안 stands between the noun and the light verb (공부 안 해)

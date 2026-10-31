@@ -22,9 +22,14 @@ pred.nominal	N5-57	{V} [role=nomi]	-	V.ctype=adn:nonpast	N:것{dep}	m	own	読む
 pred.na.ja.aru	N5-05	{Na} [role=cop-ja] 有る	-	-	-	m	own	静かじゃありません → 안 조용해요
 pred.na.dewa.aru	N5-05	{Na} [role=cop-te] [kase=wa] 有る	-	-	-	m	own	静かではありません → 조용하지 않습니다
 pred.cop.neg.dewa.te	N5-02	{N} [role=cop-te] [kase=wa] [pol=neg]	-	-	P:subj V:아니다	m	own	会社員ではない → 회사원이 아니다
-pred.cop.q	N5-H20	{N} [aux.punct.q]	N.ispred=+	-	V:이다{glue,mood=q} Punct:q	m	own	学生？ → 학생이야?
+pred.cop.q	N5-H20	{N} [aux.punct.q]	N.ispred=+	-	Punct:q	m	own	学生？ → 학생?
 pred.na.q	N5-H20	{Na} [aux.punct.q]	-	Na.mood=q	Punct:q	m	own	便利？ → 편리해?
 pred.cop.q.wh	N5-H20	{N:@question} [aux.punct.q]	-	-	Punct:q	m	own	何？ → 뭐?
 pred.cop.wh.hold	N5-54	{N:@question} [aux.da]	-	line.route=fallback	-	m	own	何だ (exclamation or question): held for 0.7.x
 pred.nai.exist.mo	N5-07	{NP} [kase=mo] [aux.nai.adj]	-	-	P:=도 V:없다	m	own	本もない → 책도 없다
 pred.nai.exist.wa	N5-07	{NP} [kase=wa] [aux.nai.adj]	-	-	P:top V:없다	m	own	本はない → 책은 없다
+pred.dem.sou	N5-53	そう 言う	next.pos=n	-	Det:그런	m	own	そういうこと → 그런 것
+pred.dem.dou	N5-53	どう 言う	next.pos=n	-	Det:어떤	m	own	どういう意味 → 어떤 의미
+pred.dem.kou	N5-53	こう 言う	next.pos=n	-	Det:이런	m	own	こういう本 → 이런 책
+pred.dem.aa	N5-53	ああ 言う	next.pos=n	-	Det:저런	m	own	ああいう人 → 저런 사람
+pred.na.end.hold	N5-06	{N} [aux.da,form.role=adn]	next.kind=punct	line.route=fallback	-	m	own	ゴメンな (な ends the line): held for 0.7.x

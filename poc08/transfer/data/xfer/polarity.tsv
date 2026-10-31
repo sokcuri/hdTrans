@@ -8,3 +8,5 @@ adv.sou.alone	N5-53	{C}	C.lemma=そう next.kind=punct	C.lemma=그래	-	m	own	�
 adv.sou.eol	N5-53	{C}	C.lemma=そう next.pos=absent	C.lemma=그래	-	m	own	そう → 그래
 adv.sou.cop	N5-53	{C} [role=cop]	C.lemma=そう	C.lemma=그렇다;C.kind=V	-	m	own	そうです → 그래요
 adv.sou.final	N5-53	{C}	C.lemma=そう next.kind=final	C.lemma=그래	-	m	own	そうよ → 그래
+adv.sou.cop.ne	N5-53	{C} [role=cop] ね/p_final	C.lemma=そう	C.lemma=그렇다;C.kind=V;C.eomi=ji	-	m	own	そうだね → 그렇지
+adv.dou.cop	N5-54	{C} [role=cop]	C.lemma=どう	C.lemma=어떻다;C.kind=V	-	m	own	どうでしたか → 어땠어요?

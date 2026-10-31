@@ -63,3 +63,9 @@ mod.noda.hold	fix	死ぬのか？	-	inv
 mod.noda.hold	keep	死ぬ。	죽는다.	inv
 mod.noda.cop.hold	fix	「いるのだ」	-	inv
 mod.noda.cop.hold	keep	「いる」	「있어」	inv
+mod.desho.ka	fix	「雨が降るでしょうか。」	「비가 내릴까요?」	inv
+mod.desho.ka	keep	「雨が降るでしょう。」	「비가 내릴 거예요.」	inv
+mod.desho.ka.n	fix	「雨でしょうか。」	「비일까요?」	inv
+mod.desho.ka.n	keep	「雨でしょう。」	「비일 거예요.」	inv
+mod.yokatta.hold	fix	「よかった」	-	inv
+mod.yokatta.hold	keep	「天気がよかった」	「날씨가 좋았어」	inv

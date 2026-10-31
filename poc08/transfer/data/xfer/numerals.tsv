@@ -1,7 +1,7 @@
 #! numerals
 # Korean numerals (N5-55, N5-56). native: the counting word; adn: its form before a counter; sino: Sino-Korean.
 # A counter's num feature (lexicon) picks native or sino; native numerals stop at 99, higher numbers are Sino-Korean.
-# Rows: value N native adn sino; digit KANJI N; unit KANJI N (十 百 千); alone COUNTER N: the counter is dropped and
+# Rows: value N native adn sino; digit KANJI N; wago KANA N (ひと, ふた: native numerals before つ); unit KANJI N (十 百 千); alone COUNTER N: the counter is dropped and
 # the counting word stands alone (一つ → 하나); predicate KO: the ending of a Korean predicate lemma (a noun sense
 # with it reads as a predicate).
 kind	key	a	b	c
@@ -35,6 +35,15 @@ digit	六	6
 digit	七	7
 digit	八	8
 digit	九	9
+wago	ひと	1
+wago	ふた	2
+wago	みっ	3
+wago	よっ	4
+wago	いつ	5
+wago	むっ	6
+wago	なな	7
+wago	やっ	8
+wago	ここの	9
 unit	十	10
 unit	百	100
 unit	千	1000

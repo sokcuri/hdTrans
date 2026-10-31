@@ -26,7 +26,7 @@ case.to.plain	fix	「友達と遊ぶ。」	「친구랑 놀아.」	inv
 case.to.plain	keep	「友達と遊びます。」	「친구하고 놀아요.」	inv
 case.mo	fix	私も学生だ。	나도 학생이다.	inv
 case.mo	keep	私は学生だ。	나는 학생이다.	inv
-case.no	fix	先生の本を読む。	선생님 책을 읽는다.	inv
+case.no	fix	先生の本を読む。	선생님의 책을 읽는다.	inv
 case.no	keep	先生と本を読む。	선생님과 책을 읽는다.	inv
 case.kara.src	fix	学校から来る。	학교에서 온다.	inv
 case.kara.src	keep	明日から読む。	내일부터 읽는다.	inv
@@ -55,7 +55,7 @@ case.de.vehicle	keep	部屋で書く。	방에서 쓴다.	inv
 case.de.language	fix	日本語で話す。	일본어로 이야기한다.	inv
 case.de.language	keep	公園で話す。	공원에서 이야기한다.	inv
 case.no.na	fix	私の本を読む。	내 책을 읽는다.	inv
-case.no.na	keep	先生の本を読む。	선생님 책을 읽는다.	inv
+case.no.na	keep	先生の本を読む。	선생님의 책을 읽는다.	inv
 case.no.jeo	fix	「私の本を読みます。」	「제 책을 읽어요.」	inv
 case.no.jeo	keep	「私の本を読む。」	「내 책을 읽어.」	inv
 case.no.neo	fix	「君の本を読む。」	「네 책을 읽어.」	inv

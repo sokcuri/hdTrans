@@ -15,3 +15,7 @@ adv.sou.cop	fix	「そうです」	「그래요」	inv
 adv.sou.cop	keep	「そう言う」	「그렇게 말해」	inv
 adv.sou.final	fix	「そうよ！」	「그래!」	inv
 adv.sou.final	keep	「そう言うよ」	「그렇게 말해」	inv
+adv.sou.cop.ne	fix	「そうだね」	「그렇지」	inv
+adv.sou.cop.ne	keep	「そうだ」	「그래」	inv
+adv.dou.cop	fix	「学校はどうでしたか」	「학교는 어땠어요?」	inv
+adv.dou.cop	keep	「どうする？」	「어떻게 해?」	inv

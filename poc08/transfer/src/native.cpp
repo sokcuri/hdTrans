@@ -169,7 +169,7 @@ void LoadRows(const std::string& path, Data& d) {
     if (text.starts_with("#! numerals")) {
         Rows(text, [&](const std::vector<std::string>& f, size_t) {
             if (f.size() >= 5 && f[0] == "value") d.numerals[std::atoi(f[1].c_str())] = {f[2], f[3], f[4]};
-            else if (f.size() >= 3 && f[0] == "digit") d.digits[f[1]] = std::atoi(f[2].c_str());
+            else if (f.size() >= 3 && (f[0] == "digit" || f[0] == "wago")) d.digits[f[1]] = std::atoi(f[2].c_str());
             else if (f.size() >= 3 && f[0] == "unit") d.units[f[1]] = std::atoi(f[2].c_str());
             else if (f.size() >= 3 && f[0] == "alone") d.alone[f[1]] = std::atoi(f[2].c_str());
             else if (f.size() >= 2 && f[0] == "predicate") d.predicateEnd = f[1];
@@ -961,6 +961,7 @@ int NumberValue(const Data& d, std::string_view s, bool& digits) {
         digits = true;
         return v > 1000000 ? -1 : static_cast<int>(v);
     }
+    if (auto w = d.digits.find(std::string(s)); w != d.digits.end()) return w->second;  // ひと, ふた
     // kanji numerals by the table's digit and unit rows (三, 二十, 百五十)
     long total = 0, part = 0;
     for (size_t i = 0; i < s.size();) {
@@ -1247,6 +1248,24 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         if (line.toks[i].pos != Pos::sym &&
             (line.toks[i].flags & (tokflag::Unknown | tokflag::Fallback | tokflag::Spoken | tokflag::Elongated)))
             line.unmatched.push_back(doc.I(std::string(line.Src(line.toks[i].src)) + "/spoken"));
+    // A stutter (そ、それ), a prolonged mark inside a word that is not a noun (いただきまーす), or a quote opened or
+    // closed on another line: the VN speech stage and S read these, so the line stays with 0.7.x for now.
+    {
+        int open = 0, close = 0;
+        for (size_t i = 0; i < n; i++) {
+            const Tk& k = x.tk[i];
+            const auto& f = k.aux->facts;
+            if (std::find(f.begin(), f.end(), "role=open") != f.end()) open++;
+            if (std::find(f.begin(), f.end(), "role=close") != f.end()) close++;
+            if (i + 2 < n && std::find(x.tk[i + 1].aux->facts.begin(), x.tk[i + 1].aux->facts.end(), "role=comma") !=
+                                 x.tk[i + 1].aux->facts.end() &&
+                !k.surf.empty() && k.surf.size() < x.tk[i + 2].surf.size() && x.tk[i + 2].surf.starts_with(k.surf))
+                line.unmatched.push_back(doc.I(k.surf + "/stutter"));
+            if (k.t->pos != Pos::sym && !IsNounPos(k.t->pos) && k.surf.find("\xE3\x83\xBC") != std::string::npos)  // ー
+                line.unmatched.push_back(doc.I(k.surf + "/prolonged"));
+        }
+        if (open != close) line.unmatched.push_back(doc.I("quote/unbalanced"));
+    }
     for (size_t i = 0; i < n; i++) {
         Tk& k = x.tk[i];
         if (!k.entry) continue;
@@ -1528,6 +1547,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         // a sense chosen by form=adv is an adverb (早く → 빨리)
         if (nd.kind == KK::V && k.senseWhy.find("form=adv") != std::string::npos) nd.kind = KK::Adv;
         if (pos == Pos::adj) nd.vpos = vpos::A;
+        if (x.TokKey(static_cast<int>(i), "kcls") == "EXIST") nd.vpos = vpos::X_;  // 재미있다: adnominal -는
         if (const std::string kc = x.TokKey(static_cast<int>(i), "kcls"); !kc.empty()) SetField(nd, doc, "kcls", kc);
         if (const std::string vp = x.TokKey(static_cast<int>(i), "vpos"); !vp.empty()) SetField(nd, doc, "vpos", vp);
         if (pos == Pos::suf) nd.glue = true;
@@ -1663,6 +1683,8 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
                 auto it = c.slots.find(s.target);
                 if (it != c.slots.end()) node = wordNode[static_cast<size_t>(it->second)];
             }
+            // a clause row whose predicate word another row consumed (そう + いう → 그런): that row speaks for it
+            if (node < 0 && r.atoms.empty() && c.anchor >= 0 && owner[static_cast<size_t>(c.anchor)] >= 0) continue;
             if (node < 0) {
                 // the feature has no node to land on: it would be lost, so the line is not covered
                 line.decisions[candDecision[a] - 1].because.push_back(doc.I("unset=" + s.target + "." + s.field));

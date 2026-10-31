@@ -14,7 +14,7 @@ case.to.narr	N5-17	{NP} [kase=to]	utt=narration	-	P:com	m	own	友達と → 친�
 case.to.polite	N5-17	{NP} [kase=to]	utt=dialogue utt.level=desu-masu|keigo	-	P:=하고	m	own	友達と(です/ます) → 친구하고
 case.to.plain	N5-17	{NP} [kase=to]	utt=dialogue utt.level!=desu-masu|keigo	-	P:=(이)랑	m	own	友達と(plain) → 친구랑
 case.mo	N5-18	{NP} [kase=mo]	-	-	P:=도	m	own	私も → 나도
-case.no	N5-19	{NP} [kase=no]	-	-	-	m	own	日本語の本 → 일본어 책 (N5-H9)
+case.no	N5-H9	{NP} [kase=no]	-	-	P:gen	m	own	友達の本 → 친구의 책 (pronouns take their possessive form)
 case.kara.src	N5-20	{NP} [kase=kara]	-	-	P:src	m	own	家から → 집에서
 case.kara.time	N5-20	{N:@time} [kase=kara]	-	-	P:=부터	m	own	明日から → 내일부터
 case.kara.person	N5-20	{N:@person} [kase=kara]	-	-	P:src	m	own	友達から → 친구에게서

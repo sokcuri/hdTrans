@@ -43,12 +43,12 @@ pred.na.dewa.aru	fix	「部屋は静かではありません。」	「방은 안
 pred.na.dewa.aru	keep	「部屋は静かです。」	「방은 조용해요.」	inv
 pred.cop.neg.dewa.te	fix	友達は会社員ではない。	친구는 회사원이 아니다.	inv
 pred.cop.neg.dewa.te	keep	友達は会社員だ。	친구는 회사원이다.	inv
-pred.cop.q	fix	「学生？」	「학생이야?」	inv
+pred.cop.q	fix	「学生？」	「학생?」	inv
 pred.cop.q	keep	「学生だ。」	「학생이야.」	inv
 pred.na.q	fix	「車は便利？」	「차는 편리해?」	inv
 pred.na.q	keep	「車は便利だ。」	「차는 편리해.」	inv
 pred.cop.q.wh	fix	「何？」	「뭐?」	inv
-pred.cop.q.wh	keep	「学生？」	「학생이야?」	inv
+pred.cop.q.wh	keep	「学生だ？」	「학생이야?」	inv
 pred.cop.wh.hold	fix	「何だ、これ？」	-	inv
 pred.cop.wh.hold	keep	「これは本だ。」	「이건 책이야.」	inv
 pred.nai.exist.mo	fix	本もない。	책도 없다.	inv
@@ -56,3 +56,13 @@ pred.nai.exist.mo	keep	本もある。	책도 있다.	inv
 pred.nai.exist.wa	fix	「時間はない。」	「시간은 없어.」	inv
 pred.nai.exist.wa	keep	「時間はある。」	「시간은 있어.」	inv
 pred.cop.wh.hold	keep	「これは何ですか。」	「이건 뭐예요?」	inv
+pred.dem.sou	fix	「そういう本はない。」	「그런 책은 없어.」	inv
+pred.dem.sou	keep	「そう言う。」	「그렇게 말해.」	inv
+pred.dem.dou	fix	「どういう本ですか。」	「어떤 책이에요?」	inv
+pred.dem.dou	keep	「どう言う？」	「어떻게 말해?」	inv
+pred.dem.kou	fix	「こういう本はない。」	「이런 책은 없어.」	inv
+pred.dem.kou	keep	「こう言う。」	「이렇게 말해.」	inv
+pred.dem.aa	fix	「ああいう人がいない。」	「저런 사람이 없어.」	inv
+pred.dem.aa	keep	「こう言う。」	「이렇게 말해.」	inv
+pred.na.end.hold	fix	「ゴメンな……」	-	inv
+pred.na.end.hold	keep	「静かな部屋だ。」	「조용한 방이야.」	inv
