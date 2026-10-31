@@ -893,8 +893,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 for (auto& g : reg) g.level = Level::haera;
             // a word 0.7.x wrote with a level the reader could not take apart: changing the others would mix levels
             bool mixed = false;
+            // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다)
             for (const auto& n : nodes) {
-                if (n.kind != Kind::Raw) continue;
+                if (n.kind != Kind::Raw && n.kind != Kind::N) continue;
                 for (const char* key : {"mixed.hapsyo", "mixed.haeyo"})
                     for (const auto& e : Split(tablesPtr->G(key), '|'))
                         if (n.lemma.size() >= e.size() && n.lemma.compare(n.lemma.size() - e.size(), e.size(), e) == 0) mixed = true;

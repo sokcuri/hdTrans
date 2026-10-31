@@ -39,7 +39,7 @@ tail	strong	ぞ	う	どうぞ is a word, not どう + ぞ
 tail	strong	ぜ
 tail	strong	さ
 polite	end	です
-polite	end	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩	ぶちかます, 済ます are not polite
+polite	end	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩、	ぶちかます, 済ます are not polite
 polite	end	ました	覚醒冷済澄励悩	目を覚ました, 済ました are the plain past of 覚ます, 済ます
 polite	end	でした
 polite	end	ません
@@ -57,9 +57,10 @@ polite	end	ございません
 polite	end	ごめんなさい
 polite	end	すみません
 polite-any	any-not-quoted	です
-polite-any	any-not-quoted	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩
+polite-any	any-not-quoted	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩、
 polite-any	any-not-quoted	ました	覚醒冷済澄励悩
 polite-any	any-not-quoted	でした
+polite-any	any-not-quoted	でしょう。		a stated でしょう。 inside the line is polite; でしょう？ is the casual tag question (= でしょ)
 polite-any	any-not-quoted	ません
 polite-any	any-not-quoted	ましょう
 polite-any	any-not-quoted	ください

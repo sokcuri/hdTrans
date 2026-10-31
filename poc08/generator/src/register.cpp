@@ -188,6 +188,7 @@ std::u32string LastSentence(const std::u32string& u) {
 struct Cues {
     bool strongTail = false;  // a sentence of the line ends in よ, ね, ぞ …
     bool lastStrong = false;  // the last sentence ends in one of them (its outermost tail particle)
+    bool lastKa = false;      // the last sentence ends in the question particle か
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
          cend = false;
     std::string first;
@@ -220,6 +221,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             if ((!best || tail.text.size() > best->text.size()) && EndsInTail(s, tail)) best = &tail;
         if (!best) break;
         if (stages.size() == 1 && best->strong) c.lastStrong = true;
+        if (stages.size() == 1 && best->text == U"か") c.lastKa = true;
         std::u32string next = s.substr(0, s.size() - best->text.size());
         while (!next.empty() && IsMark(next.back())) next.pop_back();
         stages.push_back(next);
@@ -247,7 +249,8 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     for (const auto& r : t.cues) {
         bool hit = false;
         auto before = [&](const std::u32string& str, size_t at) {
-            return at > 0 && !r.notAfter.empty() && r.notAfter.find(str[at - 1]) != std::u32string::npos;
+            // a row with notafter is an auxiliary (ます): it cannot start the utterance either (ますます)
+            return !r.notAfter.empty() && (at == 0 || r.notAfter.find(str[at - 1]) != std::u32string::npos);
         };
         if (r.mode == "end") {
             for (const auto& s : stages)
@@ -286,7 +289,7 @@ std::string Key(const Cues& c) {
     if (c.set && !c.cend) return "set";
     if (c.keigo && c.pend) return "keigo-pend";
     if (c.pend) return "pend";
-    if (c.keigo) return c.lastStrong ? "keigo-casual" : "keigo";
+    if (c.keigo) return c.lastStrong || c.lastKa ? "keigo-casual" : "keigo";
     if (c.arch) return "archaic";
     if (c.pany) return "polite-any";
     if (c.stiff) return "stiff";

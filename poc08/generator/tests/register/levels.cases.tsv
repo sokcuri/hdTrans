@@ -21,6 +21,9 @@ r3-1	REG-3	fix	d12		yes	「か、帰っちゃいましたね」	haeyo
 r3-2	REG-3	fix	d13		yes	「ひどいですよ、それ」	haeyo
 r3-3	REG-3	fix	d14		yes	「半信半疑です……」	haeyo
 r3-4	REG-3	fix	d15		yes	「看病して下さった御礼です。差し入れということで」	haeyo
+r3-7	REG-3	fix	d47		yes	「ところで、博士はどうして裏切ったのでしょう。報酬や待遇に不満でも？」	haeyo
+r3-9	REG-3	keep	d50		yes	「生徒があなたに頼んで来たわけじゃないでしょう？　所詮は自己満足じゃない？」	hae
+r3-8	REG-3	keep	d48		yes	「ますます怪しいなぁ……」	hae
 r3-5	REG-3	keep	d16		yes	「明日行きますって言ってた」	hae
 r3-6	REG-3	keep	d17		yes	「それでは、失礼します」	hapsyo
 r4-1	REG-4	fix	d18		yes	「粗茶でございます」	hapsyo
@@ -33,6 +36,7 @@ r5-1	REG-5	fix	d24		yes	「はい、いらっしゃい」	haeyo
 r5-2	REG-5	fix	d25		yes	「とにかく、今から伺いますので」	haeyo
 r5-3	REG-5	fix	d26		yes	「嬉野さん、今はいらっしゃるの？」	hae
 r5-4	REG-5	fix	d27		yes	「やって頂戴。覚悟ならできているわ」	hae
+r5-8	REG-5	fix	d49		yes	「一つ、キミの意見を伺いたいんだが、悪に育つと思うか？」	hae
 r5-5	REG-5	keep	d28		yes	「粗茶でございます」	hapsyo
 r5-6	REG-5	keep	d29		yes	「いらっしゃいませ」	hapsyo
 r5-7	REG-5	keep	d30		yes	「おっしゃあ、来いっ」	hae
