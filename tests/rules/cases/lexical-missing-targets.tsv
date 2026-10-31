@@ -111,10 +111,17 @@ lexical:suki-katte	好き勝手なことを言う。	has:제멋대로인 것을	
 lexical:suki-katte	好き勝手な真似はさせない。	has:제멋대로인 흉내는	keep	lookup
 lexical:set-adverbials	常ならぬ気配がした。	has:범상치 않은 기색	fix	lookup
 lexical:set-adverbials	常ならぬ気配がした。	lacks:평소라면	keep	lookup
-lexical:set-adverbials	常ならない様子だ。	lacks:평소라면	keep	lookup
-cx:nanyori:10	それは何よりだ。	has:그것은 다행이다	fix	rewrites
-cx:nanyori:10	無事で何よりです。	has:다행입니다	fix	rewrites
-cx:nanyori:10	何より嬉しかった。	has:무엇보다 기뻤다	keep	rewrites
+cx:nanyori:16	それは何よりだ。	has:그것은 다행이다	fix	rewrites
+cx:nanyori:14	無事で何よりです。	has:무사해서 다행입니다	fix	rewrites
+cx:nanyori:16	何より嬉しかった。	has:무엇보다 기뻤다	keep	rewrites
 cx:nanyori:20	何よりの証拠だ。	has:최고의 증거	fix	rewrites
 cx:nanyori:20	何よりも大切だ。	has:무엇보다도 중요하다	keep	rewrites
 lexical:set-adverbials	常ならば、何も言わずに去るはずだ。	lacks:범상치	keep	lookup
+cx:nanyori:14	無事で何よりです、けれど	!rule:cx:nanyori:14	keep	rewrites
+cx:nanyori:16	何よりね、あの子が心配なの。	lacks:다행	keep	rewrites
+cx:nanyori:16	何よりねえ、君が一番だよ。	lacks:다행	keep	rewrites
+cx:nanyori:16	それは何よりだ……	has:그것은 다행	fix	rewrites
+cx:nanyori:10	なによりね、あの子が心配なの。	lacks:다행	keep	rewrites
+cx:nanyori:10	なによりねえ、君が一番だよ。	lacks:다행	keep	rewrites
+cx:nanyori:10	「それは何よりね」	has:다행이네	fix	rewrites
+lexical:set-adverbials	常なら、もう寝ている時間だ。	has:평소라면, 이미	fix	lookup
