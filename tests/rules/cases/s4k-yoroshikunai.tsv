@@ -1,4 +1,4 @@
-# 규칙: GRM-169
+# 규칙: GRM-251
 rule	input	expected	kind	layer
 cx:s4k-yoroshikunai:10	この流れはよろしくない。	has:좋지 않다.	fix	rewrites
 cx:s4k-yoroshikunai:10	この世界でのクロの発育は明らかによろしくない。	has:분명하게 좋지 않다.	fix	rewrites
@@ -35,3 +35,6 @@ cx:s4k-yoroshikunai:50	「陰口はよろしくありませんわね。	has:험�
 cx:s4k-yoroshikunai:50	「あらあこんばんは、おヒナちゃん。よろしくねえ」	!rule:cx:s4k-yoroshikunai:50	keep	rewrites
 cx:s4k-yoroshikunai:55	イザークの性格は……その、あまりよろしくありませんし。	has:좋지 않고.	fix	rewrites
 cx:s4k-yoroshikunai:55	「それじゃあ５００ロト。うん、毎度あり。またよろしくねぇ」	!rule:cx:s4k-yoroshikunai:55	keep	rewrites
+cx:s4k-yoroshikunai:50	無理強いはよろしくありませんでしたわ…」	has:좋지 않았어요…」	fix	rewrites
+cx:s4k-yoroshikunai:30	そういえばベッドもあまりよろしくありませんでした。	has:좋지 않았습니다.	fix	rewrites
+cx:s4k-yoroshikunai:40	「皇帝陛下は、ここ数年ご体調があまりよろしくございませんでした。	!rule:cx:s4k-yoroshikunai:40	keep	rewrites

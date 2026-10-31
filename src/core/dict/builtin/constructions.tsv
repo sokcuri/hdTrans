@@ -1442,18 +1442,18 @@ cx:lc2e-toitta:20	GRM-170	&&7 ||2 S+0== "と言" S+0== "とい" ||2 I+0== "Rっ�
 cx:lc2e-nonichigai:10	GRM-171	&&4 F+0== "conjugating" I+0== "Rのに" Y+0== "0데" S+1== "違いな"	set-ending "0 것이"	焚いているのに違いない 피우고 있는 것이 틀림없다
 cx:lc2e-nonichigai:20	GRM-171	&&4 F+0== "conjugating" I+0== "Rのに" Y+0== "5는데" S+1== "違いな"	set-ending "8 것이"	皆がそう思ったのに違いない 모두가 그렇게 생각한 것이 틀림없다
 cx:lc2e-nonichigai:30	GRM-171	&&2 S+0== "思ったのに" S+1== "違いな"	set-target "생각한 것이"	良からぬことを思ったのに違いない 나쁜 일을 생각한 것이 틀림없다
-//= s4k-yoroshikunai	after OfferPromise 3190	The negative of よろしい that the word stage read as the greeting adverb よろしく before ない, なく, なかった, ありません or ございません (아무쪼록 없다, 잘 없습니다) is 좋지 않다 in every form (調子がよろしくない 상태가 좋지 않다, よろしくなくて 좋지 않아서, よろしくありません 좋지 않습니다); the greeting and request stay (よろしくお願いします, よろしく頼む, よろしくねぇ).
-cx:s4k-yoroshikunai:10	GRM-169	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "な" D+1== "$FA@"	set-target "좋지" set-target@+1 "$D7@"	調子がよろしくない 상태가 좋지 않다
-cx:s4k-yoroshikunai:20	GRM-169	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "なさそう" D+1== "L없을 "	set-target "좋지" replace-head@+1 "없을" "않을"	よろしくなさそうだ 좋지 않을 것 같다
-cx:s4k-yoroshikunai:30	GRM-169	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "あ" D+1== "&M9@" I+1== "Lありませ"	set-target "좋지" set-verb@+1 "않다"	よろしくありません 좋지 않습니다
-cx:s4k-yoroshikunai:40	GRM-169	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "ござ" I+1== "Lございませ"	set-target "좋지" set-verb@+1 "않다" set-ending@+1 "7니다"	よろしくございません 좋지 않습니다
-cx:s4k-yoroshikunai:50	GRM-169	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L없"	set-target "좋지" replace-head@+1 "없어" "않아" replace-head@+1 "없" "않"	顔色がよろしくありませんわ 안색이 좋지 않아요
-cx:s4k-yoroshikunai:55	GRM-169	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L않"	set-target "좋지"	あまりよろしくありませんし 그다지 좋지 않고
-//= s4k-ndaga	after OfferPromise 3000	The -는데 that an explanatory の or ん before が reads (spec GRM-160: 思ったんだが 생각했는데, 金属だったのだが 금속이었는데) is written in the form of the Korean word it ends: the 하다 of 주었으면 하다 (ほしいんだが) is a verb, -는데, not 한데, and the 않다 of a verb's negative (飲み散らかしてないんだが 마셔 어지르지 않는데) is the 않다 of a verb, not 않은데 (있지 않은데 stays). A wish in ばよかった before such a -는데 is (았)더라면 좋았겠는데, as lc2c-bayokatta reads it before けれど. なんだが after a verb in ては or ちゃ is the hedge of the のもなんだが row: -기는 좀 그렇지만 (言ってはなんだが 말하기는 좀 그렇지만).
+//= s4k-yoroshikunai	after OfferPromise 3190	The negative of よろしい that the word stage read as the greeting adverb よろしく before ない, なく, なかった, なさそう, ありません or ございません (아무쪼록 없다, 잘 없습니다) is 좋지 않다 in every form (調子がよろしくない 상태가 좋지 않다, よろしくなくて 좋지 않아서, よろしくありません 좋지 않습니다); the greeting and request stay (よろしくお願いします, よろしく頼む, よろしくねぇ).
+cx:s4k-yoroshikunai:10	GRM-251	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "な" D+1== "$FA@"	set-target "좋지" set-target@+1 "$D7@"	調子がよろしくない 상태가 좋지 않다
+cx:s4k-yoroshikunai:20	GRM-251	&&3 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "なさそう" D+1== "L없을 "	set-target "좋지" replace-head@+1 "없을" "않을"	よろしくなさそうだ 좋지 않을 것 같다
+cx:s4k-yoroshikunai:30	GRM-251	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "あ" D+1== "&M9@" I+1== "Lありませ"	set-target "좋지" set-verb@+1 "않다"	よろしくありません 좋지 않습니다
+cx:s4k-yoroshikunai:40	GRM-251	&&5 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "ござ" I+1== "Lございませ" !1 I+1== "Lございませんでし" !1 I+1== "Rか"	set-target "좋지" set-verb@+1 "않다" set-ending@+1 "7니다"	よろしくございません 좋지 않습니다
+cx:s4k-yoroshikunai:50	GRM-251	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L없"	set-target "좋지" replace-head@+1 "없었" "않았" replace-head@+1 "없어" "않아" replace-head@+1 "없" "않"	顔色がよろしくありませんわ 안색이 좋지 않아요
+cx:s4k-yoroshikunai:55	GRM-251	&&4 ||2 S+0== "よろしく" S+0== "宜しく" S+1== "Lありませ" !1 F+1== "conjugating" D+1== "L않"	set-target "좋지"	あまりよろしくありませんし 그다지 좋지 않고
+//= s4k-ndaga	after OfferPromise 3000	The -는데 that an explanatory の or ん before が reads (spec GRM-250: 思ったんだが 생각했는데, 金属だったのだが 금속이었는데) is written in the form of the Korean word it ends: the 하다 of 주었으면 하다 (ほしいんだが) is a verb, -는데, not 한데, and the 않다 of a verb's negative (飲み散らかしてないんだが 마셔 어지르지 않는데) is the 않다 of a verb, not 않은데 (있지 않은데 stays). A wish in ばよかった before such a -는데 is (았)더라면 좋았겠는데, as lc2c-bayokatta reads it before けれど. なんだが after a verb in ては or ちゃ is the hedge of the のもなんだが row: -기는 좀 그렇지만 (言ってはなんだが 말하기는 좀 그렇지만).
 //: ndaga-ending	||4 U+0== "Rんだが" U+0== "Rのだが" U+0== "Rんですが" U+0== "Rのですが"	The ending is an explanatory の or ん before が or ですが.
 //~ ndaga-want	$AB@=$Kz@	The 하다 of 주었으면 하다 as a verb.
 //~ ndaga-neg	$D7@=$DH@	The 않다 after an adjective as the 않다 after a verb.
-cx:s4k-ndaga:10	GRM-160	&&4 F+0== "conjugating" D+0== "R주었으면 $AB@" ||2 Y+0== "4데" Y+0== "4데요" :ndaga-ending	map-target-tail @ndaga-want	チェックをしてほしいんだが 체크를 해 주었으면 하는데
-cx:s4k-ndaga:20	GRM-160	&&7 F+0== "conjugating" D+0== "R$D7@" ||2 Y+0== "4데" Y+0== "4데요" :ndaga-ending F-1== "verb" Y-1== "R지" !1 ||2 Y-1== "R있지" D-1== "R&HN@"	map-target-tail @ndaga-neg	飲み散らかしてないんだが 마셔 어지르지 않는데
-cx:s4k-ndaga:30	GRM-160	&&3 :lc2c-ba-if Y+0== "5는데" :ndaga-ending	set-ending@-1 "5더라면" set-ending "5겠는데"	縛りでもあればよかったんだが 제약이라도 있었더라면 좋았겠는데
-cx:s4k-ndaga:40	GRM-160	&&3 S+0== "なんだが" F-1== "conjugating" ||6 U-1== "Rては" U-1== "Rでは" U-1== "Rちゃ" U-1== "Rじゃ" I-1== "Rては" I-1== "Rでは"	set-ending@-1 "1기는" set-target " 좀 그렇지만"	こういってはなんだが 이렇게 말하기는 좀 그렇지만
+cx:s4k-ndaga:10	GRM-250	&&4 F+0== "conjugating" D+0== "R주었으면 $AB@" ||2 Y+0== "4데" Y+0== "4데요" :ndaga-ending	map-target-tail @ndaga-want	チェックをしてほしいんだが 체크를 해 주었으면 하는데
+cx:s4k-ndaga:20	GRM-250	&&7 F+0== "conjugating" D+0== "R$D7@" ||2 Y+0== "4데" Y+0== "4데요" :ndaga-ending F-1== "verb" Y-1== "R지" !1 ||2 Y-1== "R있지" D-1== "R&HN@"	map-target-tail @ndaga-neg	飲み散らかしてないんだが 마셔 어지르지 않는데
+cx:s4k-ndaga:30	GRM-250	&&3 :lc2c-ba-if Y+0== "5는데" :ndaga-ending	set-ending@-1 "5더라면" set-ending "5겠는데"	縛りでもあればよかったんだが 제약이라도 있었더라면 좋았겠는데
+cx:s4k-ndaga:40	GRM-250	&&4 S+0== "なんだが" F-1== "conjugating" F-1== "verb" ||6 U-1== "Rては" U-1== "Rでは" U-1== "Rちゃ" U-1== "Rじゃ" I-1== "Rては" I-1== "Rでは"	set-ending@-1 "1기는" set-target " 좀 그렇지만"	こういってはなんだが 이렇게 말하기는 좀 그렇지만
