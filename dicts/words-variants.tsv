@@ -12402,7 +12402,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 手をひ	손을 &C8@	M421	QCTQHPQIDQMSVGt	Pn	GN	2386	||3 &&2 S-1== "から" P-1== "2**" &&2 S-1== "は" S-2== "から" S-1== "に関しては"	手を引는 から·からは·に関しては 뒤에서 관용 표현 ‘손을 떼다’로 고른다.				jisjk:265724
 電話を掛け	전화를 &L1@	M427			GN							jisjk:142639
 問いを掛け	질문&AV@	M447			GN							jisjk:142671
-とどめを刺	급소를 &E9@	M413			GN							jisjk:95039
+とどめを刺	결정타를 날&AA@	M413			GN			LEX-120				jisjk:95039
 共布	같은 천	N110	VCp		GN							jisjk:246115
 ど真中	한가운데	N110	VPl		GN							jisjk:153839
 ド真中	한가운데	N110	VPl		GN							jisjk:153839
@@ -20639,3 +20639,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お姉たん	언니	N110	VHn		GN						おねえたん	variant:babytalk:oneetan
 まっしろ	새%CC@	G8U0			GN							jisjk:3709
 しょうち	&K6@	M469			GN							w:28975
+トドメを刺	결정타를 날&AA@	M413			GN			LEX-120				variant:todome:katakana
