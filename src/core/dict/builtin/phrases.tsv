@@ -1473,3 +1473,47 @@
 // LEX-127 おかまいなく said on its own: 신경 쓰지 마세요 (人目もおかまいなく 상관없이 stays).
 おかまいなく	신경 쓰지 마세요	intj	final
 お構いなく	신경 쓰지 마세요	intj	final
+
+
+// LEX-151: set collocations read as the Korean collocation of the same use.
+事を運ぶ	일을 진행하다	v5
+ことを運ぶ	일을 진행하다	v5
+足を進める	발걸음을 옮기다	v1
+足をすすめる	발걸음을 옮기다	v1
+時を掛ける	시간을 들이다	v1:규칙
+時をかける	시간을 들이다	v1:규칙
+苦言を呈する	쓴소리를 하다	v
+苦言を呈される	쓴소리를 듣다	v1
+名を冠する	이름을 따다	v
+ダメ出しを食らう	지적을 받다	v5
+駄目出しを食らう	지적을 받다	v5
+嫁に行く	시집가다	v5
+嫁にいく	시집가다	v5
+ほとぼりが冷める	잠잠해지다	v1
+年が離れる	나이 차이가 나다	v1
+年が離れている	나이 차이가 나다	v1
+年が離れてる	나이 차이가 나다	v1
+年も離れている	나이 차이도 나다	v1
+年も離れてる	나이 차이도 나다	v1
+声に出す	소리 내다	v5
+ついて回る	따라다니다	v5
+付いて回る	따라다니다	v5
+// LEX-152: verbal nouns whose する verb is no 하다 verb.
+鞍替えする	갈아타다	v
+寄り道する	딴 데 들르다	v
+// LEX-153: modifier collocations.
+浮いた存在	겉도는 존재	n
+思い切りの良さ	과감함	n
+得意不得意	잘하고 못하는 것	n
+目下の者	아랫사람	n
+目下のもの	아랫사람	n
+目上の者	윗사람	n
+目上のもの	윗사람	n
+意匠設計	의장 설계	n
+// LEX-154: 話は別 before a copula or the end says the case at hand does not follow the rule just said; 話は別に before a verb is 따로, 話は別にして and 話は別として set it aside.
+話は別	이야기가 다르다	na
+話は別に	이야기는 따로	phrase
+話は別にして	이야기는 별개로 하고	phrase
+話は別にすれば	이야기는 별개로 하면	phrase
+話は別として	이야기는 별개로 하고	phrase
+
