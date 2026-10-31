@@ -1,0 +1,66 @@
+# 규칙: LEX-90
+rule	input	expected	kind	layer
+cx:nado-dismissive:30	言葉など信じない。	말 따위 믿지 않는다.	fix	rewrites
+cx:nado-dismissive:30	私はジンクスなど信じていない」	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	「いい、お前の反論など聞きたくもない」	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	お父様を卑下する言葉など聞きたくありません！	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	今更、道徳の授業など受けたくはない	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	警告などせずに既に撃っている。	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	口答えなどしないものだ！	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	命など惜しくはありませんが	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	絶対に、婚約を解消などいたしません」	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	逃げる隙など与えません！	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	本来護衛など要らんのだが	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	心臓に、自由意志など必要ない」	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	だが世間はそんな事情など気にしない。	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	深読みなどせず、右を選んでおけば……！	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	庶民が出入りする酒場など足を踏み入れたこともなかった	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:30	そんなものなどどうでもいい。	rule:cx:nado-dismissive:30= 따위	fix	rewrites
+cx:nado-dismissive:35	会議では予算など議論されなかった。	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
+cx:nado-dismissive:35	この地域では米など作られていない。	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
+cx:nado-dismissive:35	先生は報酬など受け取られませんでした。	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
+cx:nado-dismissive:35	結婚相手に家柄の良さなど求めていらっしゃいません。	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
+cx:nado-dismissive:35	安全な後方で護られていた方に心配などされたくありません	rule:cx:nado-dismissive:35= 같은 건	fix	rewrites
+cx:nado-dismissive:20	ダメです。考える余地などありません。	안됩니다. 생각하는 여지 같은 건 없습니다.	fix	rewrites
+cx:nado-dismissive:20	子育てに正解など無い、と言っていた	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	落ち度など無し！	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	「愚か者など私の娘にはいない。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	役に立つ確率などほとんどない。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	ハンターを名乗れる実力など無い。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	遭遇した際のマニュアルなど何もない。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	今の装備では勝ち目など無い。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	冗談を言っている時間などありません	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	問題などございません。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	金を手に入れる手段など他には存在しない。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	生まれ育った世界に財閥など存在しない。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:20	ご不明な点などございません。	rule:cx:nado-dismissive:20= 같은 건	fix	rewrites
+cx:nado-dismissive:25	今からかわりのモデルなど手配できるはずもなく……	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	タイムスリップした理由など見つかるはずもなかった。	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	地球でこんなものが見られるポイントなどあるはずが無い。	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	要人のスケジュールなど民間人に話して良いわけないのであるが	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	急な補充など見込めるはずもなく	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	婚約破棄など申し出られるわけがない	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	普通の人間は自分など相手にするはずがないのだ。	rule:cx:nado-dismissive:25= 같은 건	fix	rewrites
+cx:nado-dismissive:25	言葉など信じない。	!rule:cx:nado-dismissive:25	keep	rewrites
+cx:nado-dismissive:30	果物など食べない人が多い。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	雪など降らない地方に住んでいる。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	子供など入れない場所だ。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	宿題などしないと怒られる。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	猫など飼っていないので静かだ。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	怪我などしないように気をつけて。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	雨など降らないといいね。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	地震など起きないことを祈る。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	猫など嫌いではない。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	乗組員にけが人などは出ていないようです。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	身内に犯罪者などもいない	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	データや各種ファイルなどは、暗号処理もかけられず	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	昼から年齢に合わせた教育と剣術などを習う。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	テイマーは魔獣などを使役できる職業だ。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	二人で相談事などをするときによく利用する	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	「彼を賞品に据えるなど、非常識すぎます」	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:30	パンなどは食べない。	!rule:cx:nado-dismissive:30	keep	rewrites
+cx:nado-dismissive:35	言葉など信じない。	!rule:cx:nado-dismissive:35	keep	rewrites
+cx:nado-dismissive:20	彼女など居ないと困る。	!rule:cx:nado-dismissive:20	keep	rewrites
+cx:nado-dismissive:20	質問などございませんか。	!rule:cx:nado-dismissive:20	keep	rewrites
+cx:nado-dismissive:20	りんごやみかんなどはない。	!rule:cx:nado-dismissive:20	keep	rewrites
+cx:nado-dismissive:20	本、雑誌、新聞などない。	!rule:cx:nado-dismissive:20	keep	rewrites

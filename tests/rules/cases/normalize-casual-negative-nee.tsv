@@ -1,6 +1,6 @@
 rule	input	expected	kind	layer
 normalize:casual-negative-nee	そんな仕事、俺はやらねぇよ。	그런 일, 나는 하지 않아.	fix	normalize
-normalize:casual-negative-nee	もう宿題なんかやらねーよ！	이제 숙제는 하지 않아!	fix	normalize
+normalize:casual-negative-nee	もう宿題なんかやらねーよ！	이제 숙제 같은 건 하지 않아!	fix	normalize
 normalize:casual-negative-nee	この店はもう二度とやらねぇ。	이 가게는 이제 두 번 다시 하지 않는다.	fix	normalize
 normalize:casual-negative-nee	今すぐ行かなきゃならねえんだ。	당장 가야 한다.	fix	normalize
 normalize:casual-negative-nee	知らねぇよ。	몰라.	keep	normalize
