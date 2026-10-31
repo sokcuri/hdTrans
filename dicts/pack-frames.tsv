@@ -1,0 +1,30 @@
+#! layer=pack
+# 동사의 뜻 칸을 덮는 틀 행(LEX-160): 같은 절의 논항이 정해진 부류나 낱말일 때만 0.7.x의 뜻을 바꿈
+id	lemma	pos	slot	kind	cond	target	pri	spec	prov	note
+止める/とめる/v1#3	止める/とめる/v1	v1	sense	frame	obj=@person	막다	50	LEX-160	corpus	俺を止めたの？ → 나를 막았어?
+止める/とめる/v1#4	止める/とめる/v1	v1	sense	frame	subj=@person obj=-	말리다	40	LEX-160	ledger	王子は何度も止めてきました → 왕자는 몇 번이나 말려 왔어요
+止める/とめる/v1#5	止める/とめる/v1	v1	sense	frame	subj=警備|警備員 obj=-	제지하다	60	LEX-160	ledger	警備が止めて → 경비가 제지해
+止める/とめる/v1#6	止める/とめる/v1	v1	sense	frame	obj=@vehicle	세우다	45	LEX-160	review	逃げるワゴンを止める → 달아나는 승합차를 세운다
+伸びる#5	伸びる/のびる/v1	v1	sense	frame	subj=背筋|背中	펴지다	50	LEX-160	corpus	玉藻の背筋が伸びた → 타마모의 등이 꼿꼿이 펴졌다
+閉じる#3	閉じる/とじる/v1	v1	sense	frame	obj=口|唇	다물다	50	LEX-160	review	桜庭は口を閉じ → 사쿠라바는 입을 다물고
+閉じる#4	閉じる/とじる/v1	v1	sense	frame	obj=@book	덮다	50	LEX-160	review	パズルの本を閉じる → 퍼즐 책을 덮는다
+閉じる#5	閉じる/とじる/v1	v1	sense	frame	obj=扇子|扇	접다	50	LEX-160	review	扇子をパチリと閉じる → 부채를 탁 접는다
+閉じる#7	閉じる/とじる/v1	v1	sense	frame	obj=足|脚	오므리다	50	LEX-160	corpus	足を閉じたら → 다리를 오므리면
+受ける#3	受ける/うける/v1	v1	sense	frame	obj=@blow	맞다	50	LEX-160	review	銃弾を受けて倒れた → 총탄을 맞고 쓰러진
+受ける#4	受ける/うける/v1	v1	sense	frame	obj=@harm	입다	50	LEX-160	review	損害を受けても → 피해를 입어도
+出す#5	出す/だす/v5	v5	sense	frame	obj=@container|@tool	꺼내다	40	LEX-160	corpus	机の上に携帯を出す → 휴대폰을 꺼내다
+出す#6	出す/だす/v5	v5	sense	frame	obj=感情|表情	드러내다	50	LEX-160	review	感情をほとんど表に出さない → 감정을 드러내지 않다
+絡む#1	絡む/からむ/v5	v5	sense	frame	dat=@person	시비를 걸다	60	LEX-160	ledger	酔っぱらって兵士に絡んで → 병사에게 시비를 걸어
+絡む#3	絡む/からむ/v5	v5	sense	frame	subj=@body	얽히다	40	LEX-160	corpus	舌が絡む度に → 혀가 얽힐 때마다
+絡む#4	絡む/からむ/v5	v5	sense	frame	dat=@event	관련되다	50	LEX-160	corpus	選挙に絡んだ文言 → 선거에 관련된 문구
+絡む#5	絡む/からむ/v5	v5	sense	frame	with=@person	어울리다	50	LEX-160	corpus	顔を出した友人と絡んでいる → 친구와 어울리고 있다
+取る#3	取る/とる/v5	v5	sense	frame	obj=@material|@container	집다	40	LEX-160	ledger	紙切れを一枚取ってみる → 종잇조각을 한 장 집어 보다
+取る#3g	取る/とる/v5	v5	sense	frame	obj=@container next=に	가지다	40	LEX-160	review	財布を取りに戻る → 지갑을 가지러 돌아가다
+作る#2	作る/つくる/v5	v5	sense	frame	obj=@bedding|@place	만들다	30	LEX-160	ledger	木の幹に作った寝床 → 나무줄기에 만든 잠자리
+作る#4	作る/つくる/v5	v5	sense	frame	obj=顔	하다	20	LEX-160	review	真剣な顔を作る → 진지한 얼굴을 하다
+作る#5	作る/つくる/v5	v5	sense	frame	obj=@fist	쥐다	20	LEX-160	review	握り拳を作る → 주먹을 쥐다
+作る#6	作る/つくる/v5	v5	sense	frame	obj=ガッツポーズ	취하다	25	LEX-160	corpus	ガッツポーズを作る → 가츠 포즈를 취하다
+作る#7	作る/つくる/v5	v5	sense	frame	obj=@writing	쓰다	20	LEX-160	review	原稿を作る → 원고를 쓰다
+引く#2	引く/ひく/v5	v5	sense	frame	obj=油	두르다	40	LEX-160	ledger	油を引く → 기름을 두르다
+引く#5	引く/ひく/v5	v5	sense	frame	subj=@illness obj=-	가라앉다	20	LEX-160	review	痛みが引く → 통증이 가라앉다
+締め上げる#2	締め上げる/しめあげる/v1	v1	sense	frame	arg=心臓|胸	옥죄다	50	LEX-160	ledger	心臓が締め上げられるような → 심장이 옥죄이는 듯한

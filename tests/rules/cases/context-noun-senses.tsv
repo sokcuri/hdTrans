@@ -9,7 +9,7 @@ sense:伸びる	能力が飛躍的に伸びる。	능력이 비약적으로 자�
 sense:伸びる	髪が肩まで伸びた。	머리카락이 어깨까지 자랐다.	keep	senses
 sense:足	それは地面を踏む足の感覚。	그것은 땅을 밟는 발의 감각.	fix	senses
 sense:お盆	お盆の料理を作る。	추석의 요리를 만든다.	fix	senses
-sense:お盆	お盆の上の皿を取る。	쟁반 위의 접시를 잡는다.	keep	senses
+sense:お盆	お盆の上の皿を取る。	쟁반 위의 접시를 집는다.	keep	senses
 sense:角	角に額をぶつけた。	모퉁이에 이마를 부딪쳤다.	fix	senses
 sense:角	頭に生えた二本の角	머리에 난 두 개의 뿔	keep	senses
 sense:角	額に生えている角	이마에 나 있는 뿔	fix	senses
