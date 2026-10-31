@@ -1,10 +1,14 @@
 #! layer=pack
-# 앞뒤 말로 흔한 낱말의 뜻을 고르는 팩 행: 下手になる, 下手に出る 서투르게, なんとも言えない 뭐라고, 振りをする 척하다
+# 앞뒤 말로 흔한 낱말의 뜻을 고르는 팩 행: 下手になる 서투르게, 下手に出る 저자세로, なんとも言えない 뭐라고, 振りをする 척하다
 id	lemma	pos	slot	cond	target	spec	prov	note	kind
-everyday-sense-glosses:p1	下手に	adv	sense	next=なる|出る	서투르게	LEX-3472		下手になった 서투르게 되었다	
+everyday-sense-glosses:p1	下手に	adv	sense	next=なる	서투르게	LEX-3472		下手になった 서투르게 되었다	
+everyday-sense-glosses:p11	下手に	adv	sense	next=出る	저자세로	LEX-3472		下手に出る 저자세로 나오다	
 everyday-sense-glosses:p2	なんとも	adv	sense	next=言う|言える|言え|言えな	뭐라고	LEX-3472		なんとも言えない 뭐라고 말할 수 없다	
 everyday-sense-glosses:p4	する	vs	sense	振りをする	척하다	LEX-3472		書き込む振りをする 적는 척하다	colloc
 everyday-sense-glosses:p5	目を向ける	v1	voice	form=ta|te	passive:눈길을 받다	LEX-3472		冷たい目を向けられた 차가운 눈길을 받았다	
-everyday-sense-glosses:p6	共に	p	sense	after=が|は|も next=生きる|行く|いく|来る|くる|戦う|過ごす|いる|居る|ある|歩む|暮らす|笑う|育つ|消える|逝く|旅する|行動する|生活する|闘う|飲み込む|持つ|過ごす|泣く|喜ぶ|死ぬ|住む|食べる|眠る|寝る|潜り抜ける|くぐり抜ける|乗り越える|生きていく|生きて行く|歩んでいく|過ごしていく|戦っていく|旅|行動|生活|暮らし	함께	LEX-3472		母子が共に生きていく 모자가 함께 살아가다	
+everyday-sense-glosses:p6	共に	p	sense	after=が|は|も next=生きる|行く|いく|来る|くる|戦う|過ごす|いる|居る|ある|歩む|暮らす|笑う|育つ|消える|逝く|旅する|行動する|生活する|闘う|飲み込む|持つ|泣く|喜ぶ|死ぬ|住む|食べる|眠る|寝る|潜り抜ける|くぐり抜ける|乗り越える|生きていく|生きて行く|歩んでいく|過ごしていく|戦っていく|旅|行動|生活|暮らし	함께	LEX-3472		母子が共に生きていく 모자가 함께 살아가다	
 everyday-sense-glosses:p7	今度	n	sense	next=から|からは	다음	LEX-3472		今度からは 다음부터는	
 everyday-sense-glosses:p8	術	n	sense	pred=無い|ない|無し|ある|有る	방법	LEX-3472		推測する以外に術は無かった 추측하는 것 외에 방법은 없었다	
+everyday-sense-glosses:p9	迷うことなく|迷うこと無く|迷う事なく|迷う事無く	adv	sense	after=で	헤매는 일 없이	LEX-3472		森で迷うことなく城に着いた 숲에서 헤매는 일 없이 성에 도착했다	
+everyday-sense-glosses:p10	迷うことなく|迷うこと無く|迷う事なく|迷う事無く	adv	sense	after=に	헤매는 일 없이	LEX-3472		道に迷うことなく 길에 헤매는 일 없이	
+everyday-sense-glosses:p12	風	n	sense	after=どんな|あんな|こういう|ああいう|そういう next=に|な|だ|なの|なん|に見える|に見え|にする|にし	식	LEX-3472		どんな風に 어떤 식으로	

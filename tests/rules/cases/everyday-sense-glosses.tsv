@@ -7,16 +7,16 @@ pack:everyday-sense-glosses:p1	下手になっちゃった〜	rule:pack:everyday
 dict:everyday-sense-glosses:3	あたし達は我先に料理へかじりついた。	has:앞다투어	fix	defaults
 dict:everyday-sense-glosses:4	メインはおじい様だけど、俺もターゲットとのこと。	has:할아버님이지만	fix	defaults
 dict:everyday-sense-glosses:7	お婆様達のいる方へ振り返りニッコリと笑った。	has:할머님들	fix	defaults
-dict:everyday-sense-glosses:9	細長い身体と、大き目のはさみが特徴で、	has:큼직한 가위	fix	defaults
-dict:everyday-sense-glosses:10	掌にはグミのような感触の大きめの乳首の存在が感じられました。	has:큼직한	fix	defaults
-dict:everyday-sense-glosses:11	一人酒を楽しむと言った。	has:혼술을	fix	defaults
-dict:everyday-sense-glosses:12	梅雨の季節は、あまりお外に行けないね。	has:바깥에	fix	defaults
-dict:everyday-sense-glosses:13	名残惜しそうにベットから出てくる。	has:아쉬운 듯이	fix	defaults
-dict:everyday-sense-glosses:13	なんだか、名残惜しかったけど、いつまでもこうしてはいられない。	has:아쉬웠지만	fix	defaults
-dict:everyday-sense-glosses:14	帰り支度をしていると、未来が隣に立っていた。	has:돌아갈 채비를	fix	defaults
-dict:everyday-sense-glosses:15	綾波型10番艦の潮です。レイテ沖海戦などの激戦を潜り抜け、	has:격전을 빠져나가	fix	defaults
-dict:everyday-sense-glosses:16	右手で丸眼鏡のフレームを抑えつつ	has:동그란 안경	fix	defaults
-dict:everyday-sense-glosses:18	勢力争いが行われていくのは間違いなさそうです。	has:틀림없을 것 같습니다	fix	defaults
+dict:everyday-sense-glosses:8	細長い身体と、大き目のはさみが特徴で、	has:큼직한 가위	fix	defaults
+dict:everyday-sense-glosses:9	掌にはグミのような感触の大きめの乳首の存在が感じられました。	has:큼직한	fix	defaults
+dict:everyday-sense-glosses:10	一人酒を楽しむと言った。	has:혼술을	fix	defaults
+dict:everyday-sense-glosses:11	梅雨の季節は、あまりお外に行けないね。	has:바깥에	fix	defaults
+dict:everyday-sense-glosses:12	名残惜しそうにベットから出てくる。	has:아쉬운 듯이	fix	defaults
+dict:everyday-sense-glosses:12	なんだか、名残惜しかったけど、いつまでもこうしてはいられない。	has:아쉬웠지만	fix	defaults
+dict:everyday-sense-glosses:13	帰り支度をしていると、未来が隣に立っていた。	has:돌아갈 채비를	fix	defaults
+dict:everyday-sense-glosses:14	綾波型10番艦の潮です。レイテ沖海戦などの激戦を潜り抜け、	has:격전을 빠져나가	fix	defaults
+dict:everyday-sense-glosses:15	右手で丸眼鏡のフレームを抑えつつ	has:동그란 안경	fix	defaults
+dict:everyday-sense-glosses:17	勢力争いが行われていくのは間違いなさそうです。	has:틀림없을 것 같습니다	fix	defaults
 dict:everyday-sense-glosses:19	その小剣は迷うこと無くナナの首筋目掛けて振るわれた。	has:망설임 없이	fix	defaults
 dict:everyday-sense-glosses:18	ここは迷うことなくレア職業に突撃！	has:망설임 없이 레어	fix	defaults
 dict:jisjk:260787	無理矢理笑顔を作って、そう言って見せた。	has:억지로 웃음	fix	defaults
@@ -43,3 +43,10 @@ pack:everyday-sense-glosses:p7	さあ、今度こそ勝負だ！	!rule:pack:ever
 pack:everyday-sense-glosses:p8	全ては数億年の過去の彼方の出来事であり、推測する以外に術は無かった。	rule:pack:everyday-sense-glosses:p8=방법	fix	packs
 pack:everyday-sense-glosses:p8	だが彼にはその術がなく。	rule:pack:everyday-sense-glosses:p8=방법	fix	packs
 pack:everyday-sense-glosses:p8	俺は改竄術を発動させる。	!rule:pack:everyday-sense-glosses:p8	keep	packs
+pack:everyday-sense-glosses:p11	下手に出る。	rule:pack:everyday-sense-glosses:p11=저자세로	fix	packs
+pack:everyday-sense-glosses:p12	今まで僕の事、どんな風に見てたの？	rule:pack:everyday-sense-glosses:p12=식	fix	packs
+pack:everyday-sense-glosses:p12	どんな風に見える？	has:어떤 식으로	fix	packs
+pack:everyday-sense-glosses:p12	どんな風が吹くのだろうな。	!rule:pack:everyday-sense-glosses:p12	keep	packs
+pack:everyday-sense-glosses:p12	どういう風の吹きまわしだ？	!rule:pack:everyday-sense-glosses:p12	keep	packs
+pack:everyday-sense-glosses:p9	これで迷うことなく街にたどり着く	rule:pack:everyday-sense-glosses:p9=헤매는 일 없이	fix	packs
+pack:everyday-sense-glosses:p9	ここは迷うことなくレア職業に突撃！	!rule:pack:everyday-sense-glosses:p9	keep	packs
