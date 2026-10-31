@@ -116,6 +116,90 @@ bool KnownValue(std::string_view slot, std::string_view v) {
     return true;
 }
 
+// The 0.7.x notation of a Korean particle that follows a slot: the pair forms the composer
+// picks by the slot's last syllable.
+std::string ParticleNotation(std::string_view p) {
+    static constexpr std::pair<std::string_view, std::string_view> kPairs[] = {
+        {"을", "(을)를"}, {"를", "(을)를"}, {"이", "(이)가"}, {"가", "(이)가"},   {"은", "(은)는"}, {"는", "(은)는"},
+        {"과", "(와)과"}, {"와", "(와)과"}, {"으로", "(으)로"}, {"로", "(으)로"}, {"이나", "(이)나"}, {"나", "(이)나"},
+        {"이랑", "(이)랑"}, {"랑", "(이)랑"}};
+    for (const auto& [plain, notation] : kPairs)
+        if (p == plain) return std::string(notation);
+    return std::string(p);
+}
+
+// Whether s is a Korean particle a slot may take in a colloc target.
+bool SlotParticle(std::string_view s) {
+    static constexpr std::string_view kParticles[] = {"을", "를", "이", "가", "은", "는", "과", "와", "으로", "로",
+                                                      "이나", "나", "이랑", "랑", "에", "에게", "에게서", "에서",
+                                                      "의", "도", "만", "부터", "까지", "보다", "처럼", "한테"};
+    return std::find(std::begin(kParticles), std::end(kParticles), s) != std::end(kParticles);
+}
+
+std::string CompileColloc(std::string_view pattern, std::string_view target, std::string_view kclass, const Dict* base,
+                          userdict::Families& families, Colloc& c) {
+    const std::size_t open = pattern.find("{X");
+    if (const std::size_t brace = pattern.find('{'); brace != std::string_view::npos && brace != open) {
+        const std::size_t close = pattern.find('}', brace);
+        return "a slot is {X} or {X:@class}, not " +
+               userdict::internal::Quote(pattern.substr(brace, close == std::string_view::npos ? close : close - brace + 1));
+    }
+    c.slot = open != std::string_view::npos;
+    if (!c.slot) {
+        for (const std::string_view one : Split(pattern, '|'))
+            if (!one.empty()) c.befores.emplace_back(one);
+    } else {
+        const std::size_t close = pattern.find('}', open);
+        if (close == std::string_view::npos) return "the slot of " + userdict::internal::Quote(pattern) + " is not closed";
+        const std::string_view inside = pattern.substr(open + 2, close - open - 2);
+        if (!inside.empty() && !(inside.starts_with(":@") && inside.size() > 2))
+            return "a slot is {X} or {X:@class}, not " + userdict::internal::Quote(pattern.substr(open, close - open + 1));
+        if (!inside.empty()) c.slotClass = inside.substr(1);
+        c.befores.emplace_back(pattern.substr(0, open));
+        c.after = pattern.substr(close + 1);
+        if (pattern.find('|') != std::string_view::npos) return "a pattern with a slot has one spelling";
+        if (c.after.find("{X") != std::string::npos) return "a colloc pattern has one slot";
+    }
+    if (c.befores.empty() || (c.befores.size() == 1 && c.befores[0].empty() && c.after.empty())) return "an empty colloc pattern";
+    if (c.slot && c.after.empty()) return "a colloc pattern ends with words after its slot, not with the slot";
+    std::string_view rest = target;
+    if (c.slot) {
+        const std::size_t at = target.find("{X}");
+        if (at == std::string_view::npos) return "the target " + userdict::internal::Quote(target) + " has no {X}";
+        c.lead = TrimSpace(target.substr(0, at));
+        if (!c.lead.empty() && c.befores[0].empty())
+            return "the target " + userdict::internal::Quote(target) + " has Korean before {X} but the pattern starts with the slot";
+        rest = target.substr(at + 3);
+        c.spaced = rest.starts_with(' ');
+        // a particle right after the slot's Korean goes with the word after the slot
+        const std::size_t space = rest.find(' ');
+        if (const std::string_view first = rest.substr(0, space); SlotParticle(first)) {
+            c.particle = ParticleNotation(first);
+            rest = space == std::string_view::npos ? std::string_view() : rest.substr(space + 1);
+        }
+    } else if (target.find("{X") != std::string_view::npos) {
+        return "the target " + userdict::internal::Quote(target) + " has {X} but the pattern has no slot";
+    }
+    rest = TrimSpace(rest);
+    if (rest.empty() && c.particle.empty()) return "the target " + userdict::internal::Quote(target) + " says nothing";
+    c.headRaw = rest;
+    if (rest.ends_with("다")) {
+        // the phrase as a verb, an adjective and a な adjective; a class the phrase does not conjugate as stays empty
+        const struct {
+            std::string_view jp, pos;
+            std::string* out;
+        } models[] = {{"見る", "v1", &c.headVerb}, {"良い", "adj", &c.headAdjective}, {"静か", "na", &c.headNa}};
+        for (const auto& m : models) {
+            std::vector<userdict::internal::Rec> recs;
+            const std::string err = userdict::internal::Compile(m.jp, rest, m.pos, kclass, false, base, families, recs);
+            if (err.empty() && !recs.empty()) *m.out = recs[0].target;
+            // a verb whose class the Korean does not show must be named (pos v5:규칙)
+            if (m.out == &c.headVerb && err.ends_with("name the class")) return err + " (pos POS:class)";
+        }
+    }
+    return {};
+}
+
 }  // namespace
 
 PackRowLabel PackRowById(int global) {
@@ -190,7 +274,11 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         r.line = n;
         r.written = col(f, "target");
         std::string_view lemma = col(f, "lemma");
-        const std::string_view pos = PlainPos(col(f, "pos")), target = col(f, "target");
+        // pos:class names the Korean conjugation class of the target (v5:규칙), as the sense table does
+        const std::string_view posColumn = col(f, "pos");
+        const std::size_t colon = posColumn.find(':');
+        const std::string_view kclass = colon == std::string_view::npos ? std::string_view() : posColumn.substr(colon + 1);
+        const std::string_view pos = PlainPos(posColumn.substr(0, colon)), target = col(f, "target");
         // A lexicon id (ja/yomi/pos) names its written form.
         if (const std::size_t slash = lemma.find('/'); slash != std::string_view::npos) lemma = lemma.substr(0, slash);
         if (r.id.empty() || lemma.empty() || pos.empty() || target.empty()) return fail("empty id, lemma, pos or target");
@@ -266,10 +354,13 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             return;
         }
         if (r.colloc) {
-            // read for the format, not applied: no key
+            Colloc c;
+            if (std::string err = CompileColloc(cond, target, kclass, base, families, c); !err.empty()) return fail(err);
+            c.row = static_cast<int>(table.rows.size());
             r.target = target;
             r.global = Register(r);
             table.rows.push_back(std::move(r));
+            table.collocs.push_back(std::move(c));
             return;
         }
         for (const std::string_view jp : Split(lemma, '|')) {
@@ -279,13 +370,13 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             if (adjective) kr = kr.substr(0, kr.size() - std::string_view("하다").size());
             adjective = adjective && !kr.empty();
             std::vector<userdict::internal::Rec> recs;
-            if (std::string err = userdict::internal::Compile(jp, kr, unconjugated ? "n" : pos, "", false, base, families, recs);
+            if (std::string err = userdict::internal::Compile(jp, kr, unconjugated ? "n" : pos, word ? kclass : std::string_view(), false, base, families, recs);
                 !err.empty() || recs.empty())
                 return fail(err.empty() ? "no record" : err);
             PackRow one = r;
             if (!lexeme.empty()) {
                 std::vector<userdict::internal::Rec> own;
-                if (std::string err = userdict::internal::Compile(jp, lexeme, pos, "", false, base, families, own);
+                if (std::string err = userdict::internal::Compile(jp, lexeme, pos, kclass, false, base, families, own);
                     !err.empty() || own.empty())
                     return fail(err.empty() ? "no record for the voice verb" : err);
                 one.lexeme = own[0].target;
@@ -367,6 +458,10 @@ void CheckPackClasses(PackTable& table, std::vector<PackError>& errors) {
         }
         for (const std::string_view lemma : ClassMembers(builtin)) addKeys(r, lemma);
     }
+    for (const Colloc& c : table.collocs)
+        if (!c.slotClass.empty() && !declared(c.slotClass))
+            errors.push_back({table.rows[static_cast<std::size_t>(c.row)].file, table.rows[static_cast<std::size_t>(c.row)].line,
+                              "the class " + c.slotClass + " is not a class of the pack-classes files"});
     for (const PackRow& r : table.rows) {
         for (const PackAtom& a : r.atoms)
             for (const std::string& v : a.values)

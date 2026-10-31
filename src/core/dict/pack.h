@@ -15,8 +15,11 @@
 // row in dictionary form, passive, potential, respectful, spontaneous or active for voice (with
 // the Korean verb that says it after a colon: passive:혼나다),
 // and the ending text for polarity and tense (a form code and Korean, as endings rows write
-// it: 1잖아, 5었다). kind is frame (the default) or colloc; colloc rows are read and not
-// applied by this host.
+// it: 1잖아, 5었다). kind is frame (the default) or colloc: the cond of a colloc row is a
+// Japanese pattern, as written, whose last word may be conjugated and which may hold one
+// slot {X} or {X:@class} (one noun), and its target the Korean phrase of the whole pattern,
+// {X} where the slot's Korean stands (首を縦に振る 고개를 끄덕이다, {X}を元に戻す {X}을 원래대로 되돌리다).
+// A pattern without a slot may give its spellings joined by | (別に良い|別にいい).
 // A file with the header "#! layer=pack-classes" holds the noun classes the cues name: under
 // the header line "class parent" (more columns are ignored) the classes with their parents,
 // as the lexicon's classes.tsv, or under "lemma classes" the classes of words joined by |.
@@ -58,7 +61,22 @@ struct PackRow {
     int pri = 0;
     int line = 0;           // 1-based line in its file
     int global = 0;         // its id in the process-wide row registry (PackRowLabel)
-    bool colloc = false;    // a colloc row: read, not applied
+    bool colloc = false;    // a colloc row (Colloc)
+};
+
+// A colloc row compiled: the pattern around its slot and the Korean of the span. The last
+// word of the span takes head (by its class: a verb, an adjective, a な adjective, else
+// raw), the word right after the slot takes particle, the first word takes lead, and the
+// other words of the span, but the slot, are left empty.
+struct Colloc {
+    int row = 0;                     // index in PackTable::rows
+    std::vector<std::string> befores;  // the spellings of the pattern before the slot (all of it without one)
+    std::string after;                 // the pattern after the slot
+    bool slot = false;
+    bool spaced = false;             // the target has a space right after {X}
+    std::string slotClass;           // @class of the slot, "" for any noun
+    std::string lead, particle;      // Korean before the slot's, and the particle after it (0.7.x notation)
+    std::string headRaw, headVerb, headAdjective, headNa;  // the rest, raw and compiled per class
 };
 
 struct PackTable {
@@ -69,6 +87,7 @@ struct PackTable {
     std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> parent;              // @class → parent
     std::unordered_map<std::string, std::vector<std::string>, StringHash, std::equal_to<>> classes; // lemma → @classes
     std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> ids;                  // row id → file:line
+    std::vector<Colloc> collocs;  // in load order
 
     bool Empty() const { return rows.empty(); }
     // The depth of a class (a root is 1); 0 for an unknown class.

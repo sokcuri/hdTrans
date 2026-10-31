@@ -14,6 +14,8 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/dict/codes.h"
+#include "core/userdict/compile.h"
 #include "core/dict/pack.h"
 #include "core/dict/snapshot.h"
 #include "core/text/utf8.h"
@@ -396,6 +398,231 @@ int BestRow(const Flusher& f, const dict::PackTable& t, const Item* it, std::str
     return best;
 }
 
+// The text an item reads in its token: its surface and its conjugation ending.
+std::string_view Segment(const Item* it) {
+    const std::size_t start = static_cast<std::size_t>(std::max(it->start, 0));
+    if (start >= it->text.size()) return it->group->surface;
+    return it->text.substr(start, static_cast<std::size_t>(std::max(it->length, 0)));
+}
+
+// Whether the words from items[i] on read text, text's last word in any conjugated form: the
+// span ends with the item past the last one read (end).
+bool ReadsText(const std::vector<Item*>& items, std::size_t i, std::string_view text, std::size_t& end) {
+    while (!text.empty()) {
+        if (i >= items.size()) return false;
+        const Item* x = items[i];
+        if (x->group == nullptr || x->selected < 0) return false;
+        const std::string_view seg = Segment(x);
+        // the last word: written as it is, or in a form of the dictionary form text ends with
+        if (seg == text || x->group->surface == text || IsWord(x, text)) {
+            end = i + 1;
+            return true;
+        }
+        if (seg.empty() || !text.starts_with(seg)) return false;
+        text.remove_prefix(seg.size());
+        i++;
+    }
+    end = i;
+    return true;
+}
+
+// Whether x names a person in the engine's own codes: a name, or a word with a person sense.
+bool PersonWord(const Item* x) {
+    const Entry* e = x->group->At(x->selected);
+    if (e != nullptr && e->user != nullptr && (e->user->name || e->user->nameLayer)) return true;
+    const dict::SemCodes sem(x->Attr(x->selected));
+    for (const std::string_view code : {"QPN", "QNP", "VHn", "VQw", "VQm", "UAq", "UQf"})
+        if (sem.HasCode(code)) return true;
+    return false;
+}
+
+// Whether noun (the word x, or its noun part) is of class cls: by the pack-classes files, and for
+// @person and the classes above it also by the engine's person codes.
+bool OfClass(const dict::PackTable& t, const Item* x, std::string_view noun, std::string_view cls) {
+    if (t.Member(noun, cls)) return true;
+    // @person or a class above it (its parent chain reaches cls)
+    bool covers = false;
+    std::string_view c = "@person";
+    for (int guard = 0; guard < 32 && !c.empty() && !covers; guard++) {
+        covers = c == cls;
+        const auto p = t.parent.find(c);
+        if (p == t.parent.end()) break;
+        c = p->second;
+    }
+    return covers && PersonWord(x);
+}
+
+// The honorific suffixes that stay with the noun of a slot (青海さん, オクタヴィア様).
+bool SlotSuffix(const Item* x) {
+    static constexpr std::string_view kSuffixes[] = {"さん", "様", "さま", "ちゃん", "くん", "君", "殿", "先生", "先輩", "氏"};
+    return x->group != nullptr && x->selected >= 0 &&
+           std::find(std::begin(kSuffixes), std::end(kSuffixes), x->group->surface) != std::end(kSuffixes);
+}
+
+// The span of colloc c that starts at items[i]: [i, end), the slot's words [slot, slotEnd) (none
+// without a slot); absorbed: the slot's last word holds the start of the text after the slot.
+bool MatchColloc(const dict::PackTable& t, const dict::Colloc& c, std::string_view before,
+                 const std::vector<Item*>& items, std::size_t i, std::size_t& end, std::size_t& slot,
+                 std::size_t& slotEnd, bool& absorbed) {
+    slot = slotEnd = static_cast<std::size_t>(-1);
+    absorbed = false;
+    if (!c.slot) return ReadsText(items, i, before, end) && end > i;
+    std::size_t at = i;
+    if (!before.empty() && !ReadsText(items, i, before, at)) return false;
+    // ReadsText ends a span on a conjugated word; before the slot the text must end on a word boundary
+    if (!before.empty()) {
+        std::size_t len = 0;
+        for (std::size_t k = i; k < at; k++) len += Segment(items[k]).size();
+        if (len != before.size()) return false;
+    }
+    if (at >= items.size()) return false;
+    const Item* x = items[at];
+    if (x->group == nullptr || x->selected < 0) return false;
+    slot = at;
+    std::size_t last = at;
+    while (last + 1 < items.size() && SlotSuffix(items[last + 1])) last++;
+    slotEnd = last + 1;
+    // The text after the slot read from the word after it; else the slot's last word may hold its
+    // start (最後の of {X}の一体), and that part is read.
+    if (ClassOf(x) == '1' && (c.slotClass.empty() || OfClass(t, x, x->group->surface, c.slotClass)) &&
+        ReadsText(items, slotEnd, c.after, end) && end > slotEnd)
+        return true;
+    std::string_view after = c.after;
+    const std::string_view seg = Segment(items[last]);
+    for (std::size_t q = std::min(after.size(), seg.size() > 0 ? seg.size() - 1 : 0); q > 0; q--) {
+        if (q < after.size() && (static_cast<unsigned char>(after[q]) & 0xC0) == 0x80) continue;  // inside a letter
+        if (seg.ends_with(after.substr(0, q))) {
+            after.remove_prefix(q);
+            absorbed = true;
+            break;
+        }
+    }
+    // The slot is a noun, or a word that holds a noun with the text after it (最後の).
+    if (ClassOf(x) != '1' && !(absorbed && last == at)) return false;
+    if (!c.slotClass.empty()) {
+        std::string_view noun = x->group->surface;
+        const std::string_view read = std::string_view(c.after).substr(0, c.after.size() - after.size());
+        if (absorbed && last == at && noun.size() > read.size() && noun.ends_with(read)) noun.remove_suffix(read.size());
+        if (!OfClass(t, x, noun, c.slotClass)) return false;
+    }
+    if (after.empty()) {
+        end = slotEnd;
+        return true;
+    }
+    return ReadsText(items, slotEnd, after, end) && end > slotEnd;
+}
+
+// Writes target over word x (its ending emptied with an empty target).
+void Write(Item* x, std::string_view target, Selection source) {
+    if (x->selected < 0) return;
+    TakeTarget(x, ClassOf(x), target, source);
+    if (target.empty() && x->DirectIndex() >= 0) x->AssignDirectSlot(x->DirectIndex(), "", source);
+}
+
+// The colloc rows, left to right: at each word the longest pattern that reads the words from it
+// (then pri, then load order). The words of a span take no other pack row.
+// The particle notation (을)를 … for a word whose Korean ends in text: the form its last syllable takes.
+std::string ResolvedParticle(std::string_view text, std::string_view notation) {
+    if (!notation.starts_with("(")) return std::string(notation);
+    const std::size_t close = notation.find(')');
+    if (close == std::string_view::npos) return std::string(notation);
+    const std::string_view withFinal = notation.substr(1, close - 1), plain = notation.substr(close + 1);
+    char32_t last = 0;
+    for (const char32_t ch : userdict::internal::Runes(text))
+        if (ch >= 0xAC00 && ch <= 0xD7A3) last = ch;
+    if (last == 0) return std::string(plain);
+    const int final = static_cast<int>((last - 0xAC00) % 28);
+    // (으)로 takes 로 after ㄹ (final 8) as after a vowel
+    if (final == 0 || (notation == "(으)로" && final == 8)) return std::string(plain);
+    if (notation == "(으)로") return "으로";
+    return std::string(withFinal);
+}
+
+// One match of a colloc row: its span [begin, end), the slot's words [slot, slotEnd), and the
+// Korean its head takes.
+struct CollocMatch {
+    const dict::Colloc* c = nullptr;
+    std::size_t end = 0, slot = 0, slotEnd = 0, length = 0;
+    bool absorbed = false;
+    std::string_view head;  // compiled for the head's class, or raw
+    bool conjugates = false;
+};
+
+// Whether the match can be written: no user word in it but in the slot, no word another span took,
+// a head outside the slot, and a predicate head only with a phrase of its class.
+bool Applicable(const std::vector<Item*>& items, std::size_t i, const std::set<const Item*>& taken, CollocMatch& m) {
+    const dict::Colloc& c = *m.c;
+    for (std::size_t k = i; k < m.end; k++) {
+        const bool inSlot = c.slot && k >= m.slot && k < m.slotEnd;
+        if (!inSlot && (items[k]->Fixed() || taken.contains(items[k]))) return false;
+    }
+    if (c.slot && m.end == m.slotEnd) return false;
+    const char cls = ClassOf(items[m.end - 1]);
+    const std::string& compiled = cls == '4' ? c.headVerb : cls == '7' ? c.headAdjective : cls == '8' ? c.headNa : c.headRaw;
+    m.conjugates = !compiled.empty() && Predicate(cls);
+    m.head = compiled.empty() ? std::string_view(c.headRaw) : std::string_view(compiled);
+    return m.conjugates || !Predicate(cls);
+}
+
+// The colloc rows, left to right: at each word the longest applicable pattern that reads the words
+// from it (then pri, then load order). The words of a span take no other pack row.
+void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& taken) {
+    std::vector<Item*> items;
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next)
+        if (it->group != nullptr) items.push_back(it);
+    for (std::size_t i = 0; i < items.size(); i++) {
+        CollocMatch best;
+        for (const dict::Colloc& c : t.collocs) {
+            for (const std::string& before : c.befores) {
+                CollocMatch m;
+                m.c = &c;
+                if (!MatchColloc(t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
+                if (!Applicable(items, i, taken, m)) continue;
+                m.length = before.size() + c.after.size();
+                const int pri = t.rows[static_cast<std::size_t>(c.row)].pri;
+                if (best.c == nullptr || m.length > best.length ||
+                    (m.length == best.length && pri > t.rows[static_cast<std::size_t>(best.c->row)].pri))
+                    best = m;
+            }
+        }
+        if (best.c == nullptr) continue;
+        const dict::Colloc& c = *best.c;
+        const dict::PackRow& r = t.rows[static_cast<std::size_t>(c.row)];
+        const Selection source{Provenance::Pack, r.global};
+        Item* head = items[best.end - 1];
+        for (std::size_t k = i; k < best.end; k++) {
+            Item* x = items[k];
+            if (c.slot && k >= best.slot && k < best.slotEnd) continue;
+            const bool afterSlot = c.slot && k == best.slotEnd && !best.absorbed;
+            if (x == head) {
+                std::string text(best.head);
+                if (afterSlot && !c.particle.empty()) {
+                    // the head right after the slot: the slot's particle is written after the slot's word
+                    Item* own = items[best.slotEnd - 1];
+                    own->appended += ResolvedParticle(own->EntryText(own->selected), c.particle);
+                } else if (c.slot && c.spaced && c.particle.empty() && k >= best.slotEnd) {
+                    // the space the target puts after the slot's Korean
+                    text.insert(0, " ");
+                }
+                // the space before the span, when its first words are left empty and the head is written joined
+                if (!c.slot && k > i && i > 0 && c.lead.empty()) text.insert(0, " ");
+                Write(x, text, source);
+                // a phrase that does not conjugate keeps none of the word's ending
+                if (!best.conjugates && x->DirectIndex() >= 0) x->AssignDirectSlot(x->DirectIndex(), "", source);
+            } else if (afterSlot) {
+                Write(x, c.particle, source);
+            } else if (k == i && !c.lead.empty()) {
+                Write(x, c.lead, source);
+            } else {
+                Write(x, "", source);
+            }
+            taken.insert(x);
+        }
+        head->packRows.push_back(r.global);
+        i = best.end - 1;
+    }
+}
+
 }  // namespace
 
 const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voice& v) {
@@ -424,8 +651,11 @@ const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voic
 void ApplyPacks(Flusher& f) {
     const dict::PackTable& t = f.w.snapshot.Packs();
     if (t.Empty()) return;
+    std::set<const Item*> taken;
+    if (!t.collocs.empty()) ApplyCollocs(f, t, taken);
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (it->group == nullptr || it->selected < 0 || it->selected >= static_cast<int>(it->group->entries.size()))
+        if (it->group == nullptr || it->selected < 0 || it->selected >= static_cast<int>(it->group->entries.size()) ||
+            taken.contains(it))
             continue;
         // A fixed word (a user's word, a span the sound stage wrote) keeps its decisions; a name of the
         // name layer takes name rows.

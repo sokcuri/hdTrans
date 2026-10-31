@@ -8,7 +8,12 @@ s.yomu.active	voice	読む	v5	frame	obj=@thing	active	0		sample
 s.taberu.potential	voice	食べる	v1	frame	obj=-	potential	0		sample	
 s.iku.invite	polarity	行く	v5	frame	form=neg register=casual	1지 않을래	0		sample	a plain negative question as an invitation
 s.ciel	name	シエル	n	frame	*	씨엘	0		sample	
-s.kiwotsukeru	sense	気をつける	v1	colloc	気をつける	조심하다	0		sample	read, not applied
+s.unazuku	sense	振る	v5:규칙	colloc	首を縦に振る	고개를 끄덕이다	0		sample	a phrase over several words
+s.modosu	sense	元	n	colloc	{X}を元に戻す	{X}을 원래대로 되돌리다	0		sample	a slot and its particle
+s.soba	sense	元	n	colloc	{X:@person}の元に	{X} 곁으로	0		sample	a person slot by the engine's codes
+s.ittai	sense	一体	n	colloc	{X}の一体	{X} 하나	0		sample	the slot's word holds の
+s.betsuni	sense	良い	adj	colloc	別に良い|別にいい	괜찮다	0		sample	spellings of one pattern
 s.iu.respectful	voice	言う	v5	frame	voice=respectful	respectful	0		sample	the reading the chain decided is a cue
 s.iu.heard	voice	言う	v5	frame	dat=*	passive:듣다	0		sample	a passive said by another Korean verb
 s.tomeru.parked	voice	止める	v1	frame	voice=potential|none form=ta head=*	passive:세워지다	0		sample	a passive said by its own Korean verb
+s.igai	sense	以外	n	colloc	{X}以外	{X}을 빼고	0		sample	the head right after the slot

@@ -43,7 +43,7 @@ HD_TEST(dict_pack_rows) {
         "b\t\t本\tn\t\t*\t책\t\t\n"
         "c\tvoice\t読む\tv5\tframe\tobj=手紙|本 form=ta\tactive\t-1\t\n"
         "d\tpolarity\t行く\tv5\tframe\tform=neg\t1지 않을래\t\t\n"
-        "e\tsense\t気をつける\tv1\tcolloc\t気をつける\t조심하다\t\t\n";
+        "e\tsense\t気をつける\tv1\tcolloc\t気をつける|気を付ける\t조심하다\t\t\n";
     Families families;
     PackTable t;
     std::vector<PackError> errors;
@@ -162,5 +162,60 @@ HD_TEST(dict_pack_open_rows) {
         ParsePackRows("p.tsv", std::string("id\tslot\tlemma\tpos\tcond\ttarget\n") + c.row, nullptr, own, u, errs);
         CheckPackClasses(u, errs);
         HD_CHECK_EQ(Errors(errs), std::string(c.want));
+    }
+}
+
+HD_TEST(dict_pack_collocs) {
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("c.tsv",
+                  "id\tlemma\tpos\tkind\tcond\ttarget\n"
+                  "a\t元\tn\tcolloc\t{X:@person}を元に戻す\t{X}을 원래대로 되돌리다\n"
+                  "b\t一体\tn\tcolloc\t{X}の一体\t{X} 하나\n"
+                  "c\t良い\tadj\tcolloc\t別に良い|別にいい\t괜찮다\n",
+                  nullptr, families, t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_REQUIRE(t.collocs.size() == 3);
+    const Colloc& a = t.collocs[0];
+    HD_CHECK(a.slot && a.befores.size() == 1 && a.befores[0].empty());
+    HD_CHECK_EQ(a.after, std::string("を元に戻す"));
+    HD_CHECK_EQ(a.slotClass, std::string("@person"));
+    HD_CHECK_EQ(a.particle, std::string("(을)를"));
+    HD_CHECK_EQ(a.headRaw, std::string("원래대로 되돌리다"));
+    HD_CHECK(!a.headVerb.empty());
+    HD_CHECK(t.collocs[1].spaced && t.collocs[1].particle.empty());
+    HD_CHECK_EQ(t.collocs[1].headRaw, std::string("하나"));
+    HD_CHECK(!t.collocs[2].slot && t.collocs[2].befores.size() == 2);
+    const struct {
+        const char* row;
+        const char* want;
+    } cases[] = {
+        {"x\t元\tn\tcolloc\t{X}の元\t곁", "2: the target \"곁\" has no {X}"},
+        {"x\t元\tn\tcolloc\t{Y}の元\t{X} 곁", "2: a slot is {X} or {X:@class}, not \"{Y}\""},
+        {"x\t元\tn\tcolloc\t{X}の元|{X}のもと\t{X} 곁", "2: a pattern with a slot has one spelling"},
+        {"x\t元\tn\tcolloc\t元に\t{X} 곁", "2: the target \"{X} 곁\" has {X} but the pattern has no slot"},
+        {"x\t彼\tn\tcolloc\t彼の{X}\t그의 {X}", "2: a colloc pattern ends with words after its slot, not with the slot"},
+        {"x\t元\tn\tcolloc\t{X}を元に戻す\t다시 {X}을 되돌리다", "2: the target \"다시 {X}을 되돌리다\" has Korean before {X} but the pattern starts with the slot"},
+    };
+    for (const auto& c : cases) {
+        Families own;
+        PackTable v;
+        std::vector<PackError> e;
+        ParsePackRows("c.tsv", std::string("id\tlemma\tpos\tkind\tcond\ttarget\n") + c.row, nullptr, own, v, e);
+        HD_CHECK_EQ(Errors(e), std::string(c.want));
+    }
+    {
+        Families own;
+        PackTable v;
+        std::vector<PackError> e;
+        ParsePackRows("c.tsv", "id\tlemma\tpos\tkind\tcond\ttarget\nx\t振る\tv5\tcolloc\t首を縦に振る\t고개를 끄덕이다\n",
+                      nullptr, own, v, e);
+        HD_CHECK(e.size() == 1 && e[0].message.ends_with("name the class (pos POS:class)"));
+        e.clear();
+        PackTable w;
+        ParsePackRows("c.tsv", "id\tlemma\tpos\tkind\tcond\ttarget\nx\t振る\tv5:규칙\tcolloc\t首を縦に振る\t고개를 끄덕이다\n",
+                      nullptr, own, w, e);
+        HD_CHECK_EQ(Errors(e), std::string());
     }
 }
