@@ -1,5 +1,5 @@
 // A と or たら before a past main clause is a step of the story, -니, -자 or -었더니, not the
-// condition -면 (PastSequence, spec GRM-175..178), unless its sentence makes it a condition.
+// condition -면 (PastSequence, spec GRM-175..179), unless its sentence makes it a condition.
 #include <string>
 #include <string_view>
 
@@ -29,7 +29,8 @@ constexpr std::string_view kRows =
     "入\t들어&A1@\tM418\tXXX\t\tGN\t0\t15\n"
     "もし\t만약\tP351\t\t\tGN\t0\t16\n"
     "決め\t결정&AV@\tM437\tXXX\t\tGN\t0\t17\n"
-    "た\t5다\tS570\t\tJ2Sh\tGN\t0\t18\n";
+    "た\t5다\tS570\t\tJ2Sh\tGN\t0\t18\n"
+    "、\t,\tN600\t\tMk\tGN\t0\t19\n";
 
 std::string Translate(std::string_view text) {
     static const auto loaded = dict::Load({{0, "base.tsv", std::string(kRows)}});
@@ -56,4 +57,12 @@ HD_TEST(word_past_sequence_keeps_conditions) {
     HD_CHECK_EQ(Translate("もしドアを開けたら男が入った。"), "만약 문을 열면 남자가 들어갔다.");
     HD_CHECK_EQ(Translate("もしドアを開けると男が入った。"), "만약 문을 열면 남자가 들어갔다.");
     HD_CHECK_EQ(Translate("ドアを開けると決めた。"), "문을 연다고 결정했다.");
+}
+
+HD_TEST(word_past_sequence_other_subject_and_clauses) {
+    // Another's act before たら takes -자 (GRM-179); a word of supposition, also right before a
+    // comma, keeps the condition (GRM-177).
+    HD_CHECK_EQ(Translate("男がドアを開けたら彼が入った。"), "남자가 문을 열자 그가 들어갔다.");
+    HD_CHECK_EQ(Translate("もし、ドアを開けたら男が入った。"), "만약, 문을 열면 남자가 들어갔다.");
+    HD_CHECK_EQ(Translate("もし男が入ったら、彼が待っていた。"), "만약 남자가 들어가면, 그가 기다리고 있었다.");
 }
