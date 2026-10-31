@@ -20,7 +20,7 @@ namespace hd08 {
     X(p_final, "p_final") X(p_adv, "p_adv") X(sym, "sym") X(unk, "unk")
 #define HD08_TOKFLAG(X) X(Unknown, "unknown") X(Fallback, "fallback") X(LongUnit, "long-unit") X(UserArc, "user-arc") \
     X(NameCand, "name-cand") X(Spoken, "spoken") X(Elongated, "elongated") X(SpaceBefore, "space-before") \
-    X(SinoReading, "sino-reading")
+    X(SinoReading, "sino-reading") X(Repaired, "repaired")
 #define HD08_EDIT(X) X(width, "width") X(elong, "elong") X(spoken, "spoken") X(join, "join") X(ruby, "ruby")
 #define HD08_SRCLEVEL(X) X(plain, "plain") X(desu_masu, "desu-masu") X(keigo, "keigo") X(archaic, "archaic") \
     X(casual, "casual")
@@ -206,6 +206,7 @@ struct Token {
     uint16_t alt = 0, nAlt = 0;    // range in Line.alts
     uint32_t derive = 0;           // v2b: interned ja/derive.tsv row that produced this arc
     uint32_t removedBy = 0;        // v2b: Line.alts entries only: interned ja/constraints.tsv row that removed it
+    uint32_t repair = 0;           // v2g: interned ja/repair.tsv edits that gave this reading (flag Repaired), 0 = none
 };
 
 // §4 discourse scope

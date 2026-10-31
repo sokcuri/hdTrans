@@ -141,6 +141,20 @@ std::string WhyRecords(const Engine& e, const Doc& doc, const Line& line, const 
         SpanValue(o, src);
         Key(o, "ja");
         AppendJsonString(o, line.Src(src));
+        // v2g: the ja/repair.tsv edits that gave a token of the span its reading.
+        bool repaired = false;
+        for (const Token& t : line.toks) {
+            if (!(t.flags & tokflag::Repaired) || !t.repair || t.src.end <= src.begin || t.src.begin >= src.end) continue;
+            if (repaired) {
+                o += ',';
+            } else {
+                Key(o, "repair");
+                o += '[';
+                repaired = true;
+            }
+            AppendJsonString(o, doc.S(t.repair));
+        }
+        if (repaired) o += ']';
         Key(o, "by");
         AppendJsonString(o, d ? doc.S(d->rule) : std::string_view());
         Key(o, "ev");
