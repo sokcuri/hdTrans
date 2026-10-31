@@ -981,12 +981,18 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                     }
                 }
                 const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;  // REG-10: 합쇼체 is never lowered
+                // REG-10: nor is 0.7.x's 해요체 raised to 합쇼체 (a set phrase beside a です/ます sentence): between the
+                // two polite levels the retrofit keeps 0.7.x's choice
+                Level target = Level::none;
+                for (const auto& g : reg)
+                    if (g.node == nodes[q].id) target = g.level;
+                const bool raise = opt.keepHapsyo && was == Level::haeyo && target == Level::hapsyo;
                 // REG-11: the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
                 // REG-12: the source trails off after a て-form (言われて……): 0.7.x's -어 is not a command to raise
                 const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
                 const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail;
-                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
+                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !raise && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
                 for (auto& g : reg)
