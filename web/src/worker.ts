@@ -1,8 +1,9 @@
 // The engine runs here, off the page's thread.
 // in: init with engine URL, compiled module and snapshot;
-//     translate with id, mode, speech, lines, userdict and ehnd (the text of an
-//     Ehnd UserDict file).
-// out: ready/fatal, result/error, with skipped dictionary lines reported as warnings.
+//     translate with id, mode, speech, lines, userdict, ehnd (the text of an
+//     Ehnd UserDict file) and names (a name list).
+// out: ready/fatal, result/error, with skipped dictionary and name list lines
+//      reported as warnings.
 import { HdTrans, type WasmModule } from './translator.js';
 
 interface Module extends WasmModule {
@@ -14,6 +15,8 @@ let m: Module | undefined;
 let translator: HdTrans | undefined;
 let loaded = '';
 let loadedEhnd = '';
+let loadedNames = '';
+let namesWarning: string[] = []; // "LINE: message" of the loaded name list
 
 self.onmessage = async (ev: MessageEvent) => {
   const msg = ev.data;
@@ -32,6 +35,8 @@ self.onmessage = async (ev: MessageEvent) => {
       translator = await HdTrans.init({ module: e, directories: ['/dicts.hdsnap'], strictDict: false });
       loaded = '';
       loadedEhnd = '';
+      loadedNames = '';
+      namesWarning = [];
       m = e;
       postMessage({ type: 'ready', ms: performance.now() - t0, memory: e.HEAPU8.length });
     } catch (err) {
@@ -53,6 +58,16 @@ self.onmessage = async (ev: MessageEvent) => {
       t.setEhnd(ehnd === '' ? {} : { 'UserDict.txt': ehnd + '\n' });
       loadedEhnd = ehnd;
     }
+    const names: string = msg.names ?? '';
+    if (names !== loadedNames) {
+      loadedNames = names;
+      namesWarning = [];
+      try {
+        t.setNames(names);
+      } catch (err) {
+        namesWarning = String(err instanceof Error ? err.message : err).split('\n').slice(1);
+      }
+    }
     t.setSpeech(msg.speech);
     let lines: string[];
     if (msg.mode === 'document') {
@@ -66,7 +81,7 @@ self.onmessage = async (ev: MessageEvent) => {
     }
     const warning = t.userDictError.replace(/^userdict\.tsv:/gm, '');
     const ehndWarning = ehnd === '' ? [] : t.filterErrors;
-    postMessage({ type: 'result', id: msg.id, lines, ms: performance.now() - t0, warning, ehndWarning, memory: e.HEAPU8.length });
+    postMessage({ type: 'result', id: msg.id, lines, ms: performance.now() - t0, warning, ehndWarning, namesWarning, memory: e.HEAPU8.length });
   } catch (err) {
     postMessage({ type: 'error', id: msg.id, message: String(err) });
   }

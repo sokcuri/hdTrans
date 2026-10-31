@@ -18,7 +18,8 @@ struct Listed {
     std::string ja, ko;
     ListKind kind = ListKind::Given;
     bool honorificOnly = false;
-    int line = 0;  // its 1-based line in the list text
+    int line = 0;        // its 1-based line in the list text
+    std::string source{};  // the file name of the list; empty for the list of the session
 };
 
 struct List {
@@ -30,9 +31,16 @@ inline bool PersonKind(ListKind k) {
     return k == ListKind::Given || k == ListKind::Family || k == ListKind::Full || k == ListKind::Nick;
 }
 
-// Parses a name list. A malformed line is left out and reported in errors as
+// Parses a name list. A malformed line, or one that is not UTF-8, is left out and reported in errors as
 // "LINE: message"; returns whether every line parsed.
-bool ParseList(std::string_view text, List& out, std::vector<std::string>* errors = nullptr);
+bool ParseList(std::string_view text, List& out, std::vector<std::string>* errors = nullptr,
+               std::string_view source = {});
+
+// Adds the names of over to into; a name of over replaces the name of the same JA.
+void Merge(List& into, const List& over);
+
+// Where a name stands: "SOURCE:LINE", or "LINE" for the list of the session.
+std::string Where(const Listed& name);
 
 // The line of a name in the list format, without "\n".
 std::string ListLine(const Listed& name);

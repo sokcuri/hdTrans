@@ -59,8 +59,8 @@ HDTRANS_API int hdTrans_TranslateContext(const char* context, size_t cn, const c
                                          char** out, size_t* outn);
 
 /* Sets the name list of the following translations, text[0..n) in the format of
- * Session::SetNames (docs/api.md): each call's document reads its names beside the names
- * its lines show. NULL or n 0 drops the list; Initialize and Reload keep it, Terminate
+ * Session::SetNames (docs/api.md), over the name files of the user folders: each call's
+ * document reads its names beside the names its lines show. NULL or n 0 drops the list; Initialize and Reload keep it, Terminate
  * drops it. Returns 0, or -1 when a line is malformed or its name does not compile (before
  * Initialize only the lines are checked); the other lines are kept. */
 HDTRANS_API int hdTrans_SetNames(const char* text, size_t n);

@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <system_error>
+#include <utility>
 
 #include "core/dict/runes.h"
 #include "core/dict/mapped_file.h"
@@ -131,7 +132,7 @@ std::vector<std::string> UserFiles(const std::vector<std::string>& paths, std::v
 }
 
 std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::vector<UserSource>& sources,
-                                   std::vector<std::string>* readFailures) {
+                                   std::vector<std::string>* readFailures, std::vector<std::string>* nameFiles) {
     std::vector<std::string> files;
     for (const auto& input : paths) {
         const std::string& path = input.path;
@@ -153,7 +154,7 @@ std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::ve
             sources.push_back(source);
             continue;
         }
-        std::vector<std::string> names;
+        std::vector<std::string> names, lists;
         std::filesystem::directory_iterator entries(PathOf(path), error), end;
         while (!error && entries != end) {
             const auto filename = Utf8(entries->path().filename());
@@ -167,6 +168,7 @@ std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::ve
                         if (readFailures) readFailures->push_back(Utf8(entries->path()));
                     }
                     if (selected) names.push_back(filename);
+                    else if (lower.starts_with("names")) lists.push_back(filename);
                 }
                 if (kindError) error = kindError;
             }
@@ -175,13 +177,35 @@ std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::ve
         source.available = !error;
         sources.push_back(source);
         if (!source.available) continue;
-        std::sort(names.begin(), names.end(), [](const std::string& left, const std::string& right) {
+        const auto byLower = [](const std::string& left, const std::string& right) {
             const auto lowerLeft = Lower(left), lowerRight = Lower(right);
             return lowerLeft == lowerRight ? left < right : lowerLeft < lowerRight;
-        });
+        };
+        std::sort(names.begin(), names.end(), byLower);
         for (const std::string& name : names) files.push_back(Utf8(PathOf(path) / PathOf(name)));
+        if (nameFiles) {
+            std::sort(lists.begin(), lists.end(), byLower);
+            for (const std::string& name : lists) nameFiles->push_back(Utf8(PathOf(path) / PathOf(name)));
+        }
     }
     return files;
+}
+
+bool ReadUserFile(std::string_view utf8, std::string& out) {
+    std::FILE* file = internal::OpenShared(PathOf(utf8));
+    if (!file) return false;
+    std::string text;
+    char buffer[1 << 14];
+    bool ok = true;
+    for (;;) {
+        const auto n = std::fread(buffer, 1, sizeof buffer, file);
+        text.append(buffer, n);
+        if (std::ferror(file)) { ok = false; break; }
+        if (n < sizeof buffer) break;
+    }
+    std::fclose(file);
+    if (ok) out = std::move(text);
+    return ok;
 }
 
 std::vector<std::string> UserPaths(std::string_view programDir) {

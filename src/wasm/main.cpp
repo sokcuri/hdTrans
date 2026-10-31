@@ -76,6 +76,7 @@ public:
         session_->SetSpeech(speech_);
         session_->SetSpeechLevels(speechLevels_);
         session_->SetWrapped(wrapped_);
+        static_cast<void>(session_->SetNames(names_));
         dictionaryVersion_ = hdTrans::frontend::DictionaryVersion(directories_);
         error_.clear();
         return true;
@@ -124,6 +125,21 @@ public:
     void SetWrapped(bool wrapped) {
         wrapped_ = wrapped;
         if (session_) session_->SetWrapped(wrapped_);
+    }
+
+    // The name list of later translations (Session::SetNames); "" drops it. False with the
+    // malformed lines in error; the other lines are kept.
+    bool SetNames(const std::string& text) {
+        names_ = text;
+        if (!session_) return true;
+        std::vector<std::string> errors;
+        if (session_->SetNames(names_, &errors)) {
+            error_.clear();
+            return true;
+        }
+        error_ = "hdtrans: name list:";
+        for (const auto& e : errors) error_ += "\n" + e;
+        return false;
     }
 
     bool SetUserDict(const val& rows, const val& strict) {
@@ -227,6 +243,7 @@ private:
     hdTrans::Speech speech_ = hdTrans::Speech::Strict;
     hdTrans::SpeechLevels speechLevels_ = hdTrans::SpeechLevels::Auto;
     bool wrapped_ = false;
+    std::string names_;
     std::string error_;
     std::string dictionaryVersion_;
 };
@@ -245,6 +262,7 @@ EMSCRIPTEN_BINDINGS(hdtrans) {
         .function("setSpeech", &Translator::SetSpeech)
         .function("setSpeechLevels", &Translator::SetSpeechLevels)
         .function("setWrapped", &Translator::SetWrapped)
+        .function("setNames", &Translator::SetNames)
         .function("setUserDict", &Translator::SetUserDict)
         .function("setUserDictRaw", &Translator::SetUserDictRaw)
         .function("getUserDict", &Translator::GetUserDict)

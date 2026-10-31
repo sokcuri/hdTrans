@@ -18,6 +18,7 @@ C:\hdTrans\
     dicts.txt
     user\
       userdict.example.txt
+      names.example.txt
       hdtrans.config.example.yaml
     ehnd\
       README.txt

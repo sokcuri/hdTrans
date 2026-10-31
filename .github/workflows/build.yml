@@ -42,7 +42,7 @@ env:
   CCACHE_DIR: ${{ github.workspace }}/build/ccache
   CCACHE_MAXSIZE: 1G
   EMSDK_VERSION: 4.0.22
-  HDTRANS_USER_FILES: hdtrans.config.example.yaml user/userdict.example.txt
+  HDTRANS_USER_FILES: hdtrans.config.example.yaml user/userdict.example.txt user/names.example.txt
 
 jobs:
   # Skips the matrix for the release bot's version commit (the tag pipeline tests it) and for

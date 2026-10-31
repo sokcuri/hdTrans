@@ -136,6 +136,34 @@ async function checkRuntime(HdTrans, dictionaryVersion) {
     } finally {
       configured.close();
     }
+
+    const story = '衣更は今日も元気だ。\n「衣更、こっちに来て」';
+    const plain = translator.translate(story);
+    assert.doesNotMatch(plain, /이사라/);
+    const listed = '# 이름 목록\n衣更\t이사라\n';
+    const named = await HdTrans.init({ names: listed });
+    try {
+      assert.equal(named.getNames(), listed);
+      assert.equal(named.translate(story), '이사라는 오늘도 건강하다.\n「이사라, 여기에 와」');
+      assert.equal(named.translate('衣更、おはよう。').startsWith('이사라'), true, 'the list applies to each call');
+      named.setNames('');
+      assert.equal(named.getNames(), '');
+      assert.equal(named.translate(story), plain);
+    } finally {
+      named.close();
+    }
+    assert.equal(translator.translate(story, { names: listed }), '이사라는 오늘도 건강하다.\n「이사라, 여기에 와」');
+    assert.equal(translator.getNames(), '');
+    assert.equal(translator.translate(story), plain, 'names of one call do not stay');
+    translator.setNames(listed);
+    translator.setUserDictRaw('学生\t동료\tn\n');
+    assert.match(translator.translate(story), /^이사라는/, 'the list stays across user dictionary changes');
+    translator.clearUserDict();
+    assert.throws(() => translator.setNames('衣更\t이사라\n睦月|暁\t무츠키\n'), /name list:\n2: /);
+    assert.match(translator.translate(story), /^이사라는/, 'the good lines of a rejected list apply');
+    translator.setNames('');
+    assert.equal(translator.translate(story), plain);
+    assert.throws(() => translator.setNames(1), TypeError);
     return { translated: ordinary, engineVersion: translator.version };
   } finally {
     translator.close();

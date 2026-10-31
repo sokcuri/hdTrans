@@ -25,6 +25,7 @@
 #include "core/engine.h"
 #include "core/dict/folders.h"
 #include "core/dict/pack.h"
+#include "core/dict/runes.h"
 #include "core/dict/snapshot_file.h"
 #include "core/engine/driver.h"
 #include "core/register/retrofit.h"
@@ -425,8 +426,8 @@ int RunMain(int argc, char** argv) {
         std::fputs("hdtrans: --wrapped and --context cannot be combined with --each or --raw\n", stderr);
         return 2;
     }
-    if ((!namesPath.empty() || proposeNames) && (each || raw)) {
-        std::fputs("hdtrans: --names and --propose-names cannot be combined with --each or --raw\n", stderr);
+    if ((!namesPath.empty() && raw) || (proposeNames && (each || raw))) {
+        std::fputs("hdtrans: --names cannot be combined with --raw, --propose-names with --each or --raw\n", stderr);
         return 2;
     }
 
@@ -630,7 +631,10 @@ int RunMain(int argc, char** argv) {
     }
 
     hdTrans::names::List names;
+    const auto nameFiles = hdTrans::internal::NameFiles(engine);
+    if (nameFiles) names = nameFiles->list;
     if (!namesPath.empty()) {
+        hdTrans::names::List listed;
         std::string text;
         std::FILE* f = OpenFile(namesPath, false);
         const bool read = f && ReadAll(f, text);
@@ -640,18 +644,28 @@ int RunMain(int argc, char** argv) {
             return 1;
         }
         std::vector<std::string> errors;
-        hdTrans::names::ParseList(text, names, &errors);
+        if (!hdTrans::dict::internal::ValidUtf8(text)) {
+            std::fprintf(stderr, "hdtrans: error: %s: invalid UTF-8\n", namesPath.c_str());
+            text.clear();
+        }
+        hdTrans::names::ParseList(text, listed, &errors);
         for (const std::string& error : errors)
             std::fprintf(stderr, "hdtrans: warning: %s:%s\n", namesPath.c_str(), error.c_str());
+        hdTrans::names::Merge(names, listed);
     }
 
     const auto snapshot = engine.Dictionaries();
-    std::unique_ptr<hdTrans::pipeline::DocumentNames> documentNames;
-    if (!names.names.empty()) {
+    std::shared_ptr<const hdTrans::pipeline::DocumentNames> documentNames;
+    if (namesPath.empty()) {
+        documentNames = nameFiles;
+    } else if (!names.names.empty()) {
+        std::unique_ptr<hdTrans::pipeline::DocumentNames> compiled;
         std::vector<std::string> errors;
-        hdTrans::pipeline::CompileNames(*snapshot, names, documentNames, &errors);
+        hdTrans::pipeline::CompileNames(*snapshot, names, compiled, &errors);
+        // The names of the user folders compiled when they loaded, so the errors are of --names.
         for (const std::string& error : errors)
             std::fprintf(stderr, "hdtrans: error: %s:%s\n", namesPath.c_str(), error.c_str());
+        documentNames = std::move(compiled);
     }
     const auto generated = hdTrans::internal::NewGenerated(*snapshot);
     const hdTrans::word::Scorer diagnosticScorers[] = {{"shortest-target", hdTrans::word::ShortestTargetScore}};

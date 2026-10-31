@@ -16,6 +16,7 @@ C:\hdTrans\
     dicts.txt
     user\
       userdict.example.txt
+      names.example.txt
       hdtrans.config.example.yaml
 ```
 
@@ -141,6 +142,26 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
 
 기본 주소는 `http://localhost:8000/`입니다. DLL 경로를 직접 지정하려면 terminal 버전을 씁니다.
 
+## 작품의 이름 적기
+
+등장인물, 지명처럼 작품의 이름은 `C:\hdTrans\hdtrans-data\user\names.txt`에 한 줄에 하나씩 적습니다.
+일본어, 한국어, 종류(선택)를 탭으로 구분합니다. 형식은 `names.example.txt`와
+[dictionary-files.md](dictionary-files.md#문서-이름-목록)에 있습니다.
+
+```text
+衣更	이사라
+黒沢	쿠로사와	family
+みみ	미미	nick	hon
+```
+
+- 이름 목록은 사용자 사전과 달리 이름으로 읽으므로 경칭, 조사, 띄어쓰기가 맞습니다(`衣更さんに` 이사라 씨에게).
+- `J2KEngine.dll`과 `hdTransEngine.dll`은 사용자 사전과 함께 읽고, 게임을 하는 동안 고쳐 저장하면 다음 줄부터 반영합니다.
+  한 줄씩 보내는 후킹 도구에서도 줄마다 쓰입니다.
+- 보통 낱말과 같은 히라가나 이름(はな, ひかり)은 넷째 칸에 `hon`을 적어 경칭 앞에서만 이름으로 읽게 합니다.
+- 작품마다 나누려면 `user\games\작품\`에 그 작품의 `userdict.txt`와 `names.txt`를 두고 `user\hdtrans.config.yaml`에
+  `userdict: [., games/작품]`을 적습니다. 작품을 바꿀 때 이 줄을 고치고 도구를 다시 시작하거나 다시 읽기를 하면 사전과 이름이 함께 바뀝니다.
+- 잘못된 줄은 건너뛰고 hdTrans 프로그램의 로그 탭에 나옵니다.
+
 ## 번역 결과에 영향을 주는 것
 
 텍스트 후커, 번역 모음 도구, 플러그인, C DLL, npm과 웹 API에 모두 해당합니다.
@@ -150,7 +171,7 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
   「」 대사가 있는 대본과 함께 보내면 `그것은 다르다`.
 - **도구나 엔진을 다시 시작하기, reset 부르기:** 0.5.5부터 번역 결과를 바꾸지 않습니다. 앞에서 번역한 줄이 다음 줄에 남지
   않기 때문입니다. 다시 시작은 사전을 새로 읽을 뿐입니다.
-- **사전 바꾸기:** 사용자 사전(`user/userdict*.txt`)은 저장하면 다음 번역부터 반영됩니다. 설정 파일과 기본 사전은 도구를
+- **사전 바꾸기:** 사용자 사전(`user/userdict*.txt`)과 이름 목록(`user/names*.txt`)은 저장하면 다음 번역부터 반영됩니다. 설정 파일과 기본 사전은 도구를
   다시 시작하거나 다시 읽기(`J2K_ReloadUserDict`, `hdTrans_Reload`)를 하면 반영됩니다.
 - **사전 진단:** 번역이 이상하면 hdTrans 프로그램의 로그 탭(또는 `hdtrans --verify-dicts`)에서 사전 경고를 확인합니다.
 - **말투 설정:** `J2KEngine.dll`과 C API는 설정 파일의 `speech`로 엔진 전체에 정합니다. TypeScript는 `setSpeech()`로

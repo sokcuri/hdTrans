@@ -98,12 +98,13 @@ UserVersion UserVersionOf(const std::vector<dict::UserSource>& paths, std::strin
                           std::uint64_t optionsRevision) {
     UserVersion version;
     version.optionsRevision = optionsRevision;
-    std::vector<std::string> failed;
-    for (const std::string& file : dict::UserFiles(paths, version.sources, &failed)) {
+    std::vector<std::string> failed, names;
+    for (const std::string& file : dict::UserFiles(paths, version.sources, &failed, &names)) {
         auto found = VersionOf(file);
         found.headerProbeFailed = std::find(failed.begin(), failed.end(), file) != failed.end();
         version.files.emplace_back(file, found);
     }
+    for (const std::string& file : names) version.names.emplace_back(file, VersionOf(file));
     version.config = VersionOf(configPath);
     return version;
 }

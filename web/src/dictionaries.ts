@@ -3,7 +3,7 @@
 // tab-separated text, a names table (hdTrans only), whether it is applied and
 // its place in the list; the first is the highest priority.
 import { decodeText } from './documents.js';
-import { namesDict } from './names.js';
+import { namesDict, namesList } from './names.js';
 
 export type Format = 'hdtrans' | 'ehnd';
 
@@ -134,12 +134,22 @@ interface Part {
 }
 
 /**
- * The engine's user dictionary from the applied dictionaries of list (in
- * list order): userdict holds the entries of each hdTrans dictionary, then
- * their names tables; ehnd the entries of each Ehnd dictionary. In a text an
- * earlier line ranks first among equal keys.
+ * The engine's user dictionary and name list from the applied dictionaries of
+ * list (in list order): userdict holds the entries of each hdTrans dictionary,
+ * ehnd the entries of each Ehnd dictionary; in them an earlier line ranks first
+ * among equal keys. names holds the names tables of the hdTrans dictionaries
+ * (namesList) in reverse order, as a later line of a name list replaces an
+ * earlier one of the same name. userdictFile is the userdict.txt the desktop
+ * reads: the entries, then the names tables as name rows (namesDict).
  */
-export function overlay(list: Dictionary[]): { userdict: string; ehnd: string; where: (ehnd: boolean, line: number) => string } {
+export function overlay(list: Dictionary[]): {
+  userdict: string;
+  ehnd: string;
+  names: string;
+  userdictFile: string;
+  where: (ehnd: boolean, line: number) => string;
+  namesWhere: (line: number) => string;
+} {
   const on = list.filter((d) => d.on);
   const join = (texts: [string, string][]) => {
     const parts: Part[] = [];
@@ -151,20 +161,23 @@ export function overlay(list: Dictionary[]): { userdict: string; ehnd: string; w
     }
     return { text: kept.join('\n'), parts };
   };
-  const user = join([
-    ...on.filter((d) => d.format === 'hdtrans').map((d): [string, string] => [`${d.name} 사용자 사전`, d.entries]),
-    ...on.filter((d) => d.format === 'hdtrans').map((d): [string, string] => [`${d.name} 이름 표`, namesDict(d.names)]),
-  ]);
+  const hdtrans = on.filter((d) => d.format === 'hdtrans');
+  const user = join(hdtrans.map((d): [string, string] => [`${d.name} 사용자 사전`, d.entries]));
+  const names = join([...hdtrans].reverse().map((d): [string, string] => [`${d.name} 이름 표`, namesList(d.names)]));
   const ehnd = join(on.filter((d) => d.format === 'ehnd').map((d): [string, string] => [d.name, d.entries]));
+  const locate = (parts: Part[], line: number) => {
+    for (const p of parts) {
+      if (line <= p.lines) return `${p.label} ${line}행`;
+      line -= p.lines;
+    }
+    return `${line}행`;
+  };
   return {
     userdict: user.text,
     ehnd: ehnd.text,
-    where(isEhnd, line) {
-      for (const p of (isEhnd ? ehnd : user).parts) {
-        if (line <= p.lines) return `${p.label} ${line}행`;
-        line -= p.lines;
-      }
-      return `${line}행`;
-    },
+    names: names.text,
+    userdictFile: [user.text, ...hdtrans.map((d) => namesDict(d.names))].filter((t) => t.trim() !== '').join('\n'),
+    where: (isEhnd, line) => locate((isEhnd ? ehnd : user).parts, line),
+    namesWhere: (line) => locate(names.parts, line),
   };
 }

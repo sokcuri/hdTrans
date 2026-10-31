@@ -53,6 +53,7 @@ HD_TEST(names_list_errors) {
         {"若葉/わかば\t와카바", "1: JA holds white space, | or /"},
         {"星見町\t호시미초\tplace\thon", "1: hon is an option of person names"},
         {"星見祭\t호시미제\ttitle\thon", "1: hon is an option of person names"},
+        {"\x8E\xE1\x97\x74\t\xBF\xCD\xC4\xAB\xB9\xD9", "1: invalid UTF-8"},  // a legacy code page
     };
     for (const auto& [text, want] : cases) {
         names::List list;

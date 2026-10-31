@@ -37,6 +37,12 @@ async function check() {
   translator.setSpeechLevels('off');
   const continued: string | TranslationResult = translator.translate('ならない。', callOptions);
   translator.setWrapped(false);
+  translator.setNames('衣更\t이사라\n');
+  const names: string = translator.getNames();
+  const namedCall: string = translator.translate('衣更', { names: '衣更\t이사라' });
+  const namedInit: Promise<HdTrans> = HdTrans.init({ names: '衣更\t이사라' });
+  // @ts-expect-error A name list is text.
+  translator.setNames(['衣更']);
   const wrappedInit: Promise<HdTrans> = HdTrans.init({ speech, wrapped: true });
   const pos: UserDictPos = 'v:ㄷ';
   const rows: UserDictEntry[] = [{ ja: '聞く', ko: '듣다', pos }];
@@ -80,7 +86,8 @@ async function check() {
   const selection: ChoiceSelection | undefined = choice?.choice;
   const logs: string[] = explained.logs;
   void [inspected, info, version, infoDictionary, infoRuntime, native,
-    plain, explicitPlain, dynamic, continued, wrappedInit, active, raw, dictionaryVersion, runtime, error, errors, selection, logs];
+    plain, explicitPlain, dynamic, continued, wrappedInit, names, namedCall, namedInit, active, raw, dictionaryVersion, runtime, error,
+    errors, selection, logs];
 
   // @ts-expect-error Engine implementation switches are not public npm options.
   await HdTrans.init({ reference: true });

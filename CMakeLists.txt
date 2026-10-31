@@ -175,6 +175,8 @@ if(NOT EMSCRIPTEN)
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${HDTRANS_USER_STAGE}"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/user/userdict.example.txt"
             "${HDTRANS_USER_STAGE}/userdict.example.txt"
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/user/names.example.txt"
+            "${HDTRANS_USER_STAGE}/names.example.txt"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/hdtrans.config.example.yaml"
             "${HDTRANS_USER_STAGE}/hdtrans.config.example.yaml"
         COMMAND "${CMAKE_COMMAND}" -E copy_directory "${CMAKE_CURRENT_SOURCE_DIR}/ehnd"
