@@ -1,0 +1,31 @@
+# 규칙: GRM-119
+rule	input	expected	kind	layer
+cx:lc2b-tokitara:10	「全くデル・エールの女神ときたら、一体何を考えているのかしら」	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	だが少し抜いてみた中身ときたら、鏡のようにぴかぴかしている。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	そしてイヌ、サル、キジときたら忘れてはいけない男が来る。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	なのに麗ときたら、俯いてしまっている。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	やっぱりファンタジーときたら剣でしょ！	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	アルテアのテクニックや肉体ときたら素晴らしいものでな、	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	一方の九重ときたら、まず第一に屋敷から出ることが殆んどない。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	ニコリ、部長はまあまあの美人で、その笑顔ときたら美しい。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	に父様ときたら、私が心配だからって理由で学校にもＳＰをつけて」	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	なのにウィリスときたら、キチンと好きだと言ってくれた事が無い。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	その時のサラときたら、ものすごくおもしろいことになった。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	なのにあの連中ときたら、寄ってタカッて小さなタマを追いかけっこ。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	しかも早口ときたら聞き取れないって…	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	しかもその客ときたら両刀使いでな。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	なのにモリセンときたら、お構いなしに僕を職員室に呼び出したのだ。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	ドワーフときたらゴーレムと戦っている殿を殺して滅ぼしたい	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	俺ときたら、今更のように同室になった頃の裕翔を思い出してる。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	なんせ、奴らの重量ときたら２００キロはある。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	「まったく、部長ときたら、また無理な売上目標を設定してきた。」	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	「孤島ときたら、これだよね。うん」	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	ハートに菱形、クローバーときたらスペードか？	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	ここの食堂ときたらすごいんだ。	has:로 말하자면	fix	rewrites
+cx:lc2b-tokitara:10	「ホント……キミときたら……」	!rule:cx:lc2b-tokitara:10	keep	rewrites
+cx:lc2b-tokitara:10	まったく、この子ときたら……	!rule:cx:lc2b-tokitara:10	keep	rewrites
+cx:lc2b-tokitara:10	「それなのに柊ときたら……」	!rule:cx:lc2b-tokitara:10	keep	rewrites
+cx:lc2b-tokitara:10	それに比べてあたしときたら…	!rule:cx:lc2b-tokitara:10	keep	rewrites
+cx:lc2b-tokitara:10	「ハオは地図をちゃんと用意してるってのにフェイときたら・・・」	!rule:cx:lc2b-tokitara:10	keep	rewrites
+cx:lc2b-tokitara:10	サラと奈緒子もピンときたらしい。	!rule:cx:lc2b-tokitara:10	keep	rewrites
+cx:lc2b-tokitara:10	あの、長年のもやもや（と言っても生まれてまだ数年ですが）が解消された時の快感ときたら、なかったね。	!rule:cx:lc2b-tokitara:10	keep	rewrites

@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:terms:1	小屋というよりは倉だな。	오두막이라는 것보다는 창고네.	fix	defaults
+dict:terms:1	小屋というよりは倉だな。	오두막이라기보다는 창고네.	fix	defaults
 dict:terms:1	倉庫に入れる。	창고에 들어갈 수 있다.	keep	defaults
 dict:terms:2	柵の外側に堀を作る。	울타리의 바깥쪽에 해자를 만든다.	fix	defaults
 dict:terms:2	堀さんが来た。	호리 씨가 왔다.	keep	defaults

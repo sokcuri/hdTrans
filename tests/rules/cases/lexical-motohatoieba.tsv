@@ -1,0 +1,15 @@
+# 규칙: LEX-170
+rule	input	expected	kind	layer
+lookup:motohatoieba	「元はといえばゼロさんが――！」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	「……元はといえば、あんたが原因だろ」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	元はといえば、その声の主が悪い。	has:따지고 보면	fix	lookup
+lookup:motohatoieba	もとはといえばあたしがいいだしたことだ。	has:따지고 보면	fix	lookup
+lookup:motohatoieba	もとはといえば、あなたのせいなんだから」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	もとはといえばこんなクエストだったのだ。	has:따지고 보면	fix	lookup
+lookup:motohatoieba	「もとはといえば秋吉が、俺を……」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	「もとはと言えばパトリツィアが……！」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	「「もとはと言えば、お前のせいだよ！」」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	もとはと言えばお父様が悪いのに」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	「もとはと言えばあんたたちが……」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	「も、もとはと言えばキミが…！」	has:따지고 보면	fix	lookup
+lookup:motohatoieba	元はと言えば、お前のせいだ。	has:따지고 보면	keep	lookup
