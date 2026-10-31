@@ -3083,6 +3083,58 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
 
 }  // namespace
 
+bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    // the hiragana that end text: the okurigana of a verb in kanji or katakana, or a verb in kana
+    constexpr int kLongestKanaRun = 8;  // runes
+    size_t kana = text.size();
+    for (int n = 0; n < kLongestKanaRun && kana > 0 &&
+                    (IsHiraganaRune(LastRune(text.substr(0, kana)).cp) || LastRune(text.substr(0, kana)).cp == U'ー');
+         n++)
+        kana -= LastRune(text.substr(0, kana)).size;
+    const size_t okurigana = text::RuneCount(text.substr(kana));
+    if (okurigana == 0) return false;
+    const char32_t before = kana == 0 ? 0 : LastRune(text.substr(0, kana)).cp;
+    if (kana > 0 && (IsKanjiRune(before) || IsKatakanaRune(before))) {
+        // a verb of the dictionary whose stem ends in the kanji or katakana (気を抜く, ビビる, 盛り上がる), or
+        // a longer form of a kanji verb (困らせる); not a name and one kana (翔く of 翔くん)
+        size_t start = kana;
+        for (int n = 0; n < 4 && start > 0; n++) {
+            const char32_t c = LastRune(text.substr(0, start)).cp;
+            if (!IsKanjiRune(c) && !IsKatakanaRune(c)) break;
+            start -= LastRune(text.substr(0, start)).size;
+            if (VerbFormIs(text.substr(start), kDictionaryForm, AnyKind, ctx, snap)) return true;
+        }
+        for (size_t at = kana; at < text.size(); at += text::DecodeRune(text.substr(at)).size)
+            if (VerbFormIs(text.substr(at), kDictionaryForm, AnyKind, ctx, snap)) return true;
+        return okurigana >= 2 && !snap.NamePerson(text.substr(0, text.size() - LastRune(text).size).substr(start));
+    }
+    // a verb in kana of three kana or more anywhere in the kana run (そんなせっつく), or a shorter one that starts
+    // the run or follows a particle of particle.verb-boundary (ふざける, 冗談を言う); not two kana inside a longer kana
+    // word (まく of おーしまく, a name and くん)
+    for (size_t at = kana; at < text.size(); at += text::DecodeRune(text.substr(at)).size) {
+        const bool boundary = at == kana || text::RuneCount(text.substr(at)) >= 3 ||
+                              dict::InClassRune(HDTRANS_CLASS("particle.verb-boundary"), LastRune(text.substr(0, at)).cp);
+        if (boundary && VerbFormIs(text.substr(at), kDictionaryForm, AnyKind, ctx, snap)) return true;
+    }
+    // A kana verb the dictionary lacks still counts (がっつく, わめく), but not where the kana before the last
+    // one end in a person's name of the name layer or hold a long-vowel mark, as a name before くん does
+    // (ゆきあくん, おーしまくん).
+    const std::string_view head = text.substr(0, text.size() - LastRune(text).size);
+    if (head.substr(kana).find("ー") != std::string_view::npos) return false;
+    for (size_t at = head.size(); at > kana;) {
+        at -= LastRune(head.substr(0, at)).size;
+        const std::string_view name = head.substr(at);
+        // the name starts the kana run or follows a particle (あら、ゆきあ|くん; not しこ inside ふかしこく)
+        if (text::RuneCount(name) < 2 ||
+            (at != kana && !dict::InClassRune(HDTRANS_CLASS("particle.verb-boundary"), LastRune(head.substr(0, at)).cp)))
+            continue;
+        if (snap.NamePerson(name)) return false;
+        const std::vector<std::size_t> person = snap.PersonKeysAt(name);
+        if (std::find(person.begin(), person.end(), name.size()) != person.end()) return false;
+    }
+    return true;
+}
+
 std::string RewriteContractedN(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     constexpr std::string_view kN = "ん", kSmallTsu = "っ", kNai = "ない";
     const std::span<const std::string_view> kara = dict::ClassMembers(HDTRANS_CLASS("contraction.tsu-ru"));

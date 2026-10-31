@@ -255,6 +255,13 @@ std::string RewriteCasualAdjectives(std::string_view text, const LineContext& ct
 // Whether RewriteCasualAdjectives rewrites text, found at its first match.
 bool HoldsCasualAdjective(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// Whether text ends with a verb: the dictionary form of a dictionary verb whose stem ends in a kanji or
+// katakana (気を抜く, ビビる) or a longer form of a kanji verb (困らせる), or a verb in kana (する and くる
+// included) of three kana or more, or a shorter one that starts the kana run or follows a particle of
+// particle.verb-boundary (ふざける, 冗談を言う); not a kanji name and one kana (翔く of 翔くん) nor two kana
+// inside a longer kana word (まく of おーしまく).
+bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
 // katakana or two or more hiragana that are no verb continuative (圭ちゃ～ん, 田中さぁあん,
 // アルくぅん; not かみつきさあん) is the honorific with the lengthening mark after it; a longer

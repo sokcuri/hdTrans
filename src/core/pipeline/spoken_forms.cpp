@@ -848,7 +848,7 @@ std::string Group1Plus(const Match& m, std::string_view mid) { return Cat({m.gro
 
 }  // namespace
 
-std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectForms) {
+std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectForms, const RunLookup& runs) {
     std::string text(in);
     if (Contains(text, "かしら")) text = ReplaceAll(text, KashiraNe, [](const Match&) { return std::string("かしら"); });
     if (Contains(text, "ワケ")) text = ReplaceAll(text, KataWake, [](const Match&) { return std::string("わけ"); });
@@ -894,7 +894,20 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         });
     }
     if (Contains(text, "じゃない") || Contains(text, "じゃね")) {
-        text = ReplaceAll(text, ProhibitionJanai, [](const Match& m) { return Group1Plus(m, "なよ"); });
+        // The rebuke needs a verb of the dictionary before んじゃない, not kana that only end like one (the
+        // name and honorific of おーしまくんじゃない); a する read from す and a て form of てる are verbs.
+        const std::string_view source = text;
+        text = ReplaceAll(text, ProhibitionJanai, [&](const Match& m) {
+            if (runs.verb != nullptr && m.group[1] != "する") {
+                // group 1 is the last kana of the verb, at the start of the match
+                const std::string_view verb = source.substr(0, m.begin + m.group[1].size());
+                const std::string_view stem = verb.substr(0, m.begin);
+                const bool teru = m.group[1] == "る" && (stem.ends_with("て") || stem.ends_with("で") ||
+                                                         stem.ends_with("てい") || stem.ends_with("でい"));
+                if (!teru && !runs.verb(runs.context, verb)) return std::string(m.group[0]);
+            }
+            return Group1Plus(m, "なよ");
+        });
         text = ReplaceAll(text, AppealJanai, [](const Match& m) {
             const Match g = Rematch(m, AppealJanai);
             if (NotAppeal(g.group[1])) return std::string(m.group[0]);

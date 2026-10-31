@@ -374,6 +374,16 @@ HD_TEST(pipeline_spoken_forms) {
     Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
 }
 
+// SpokenForms asks the lookup whether a verb ends before んじゃない: no rebuke without one (the name and
+// honorific of おーしまくんじゃない).
+HD_TEST(pipeline_spoken_forms_rebuke_verb) {
+    RunLookup runs;
+    runs.verb = [](const void*, std::string_view text) { return !text.ends_with("おーしまく"); };
+    HD_CHECK_EQ(SpokenForms("あら、おーしまくんじゃない。", false, false, runs), std::string("あら、おーしまくんじゃない。"));
+    HD_CHECK_EQ(SpokenForms("気を抜くんじゃないぞ！", false, false, runs), std::string("気を抜くなよ！"));
+    HD_CHECK_EQ(SpokenForms("邪魔すんじゃねえ！", false, false, runs), std::string("邪魔するなよ！"));  // する, no lookup
+}
+
 HD_TEST(pipeline_rewrite_interjections) {
     const Case cases[] = {
         {"あれ、アルくん！"sv, "あれっ、アルくん！"sv},
