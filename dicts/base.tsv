@@ -38880,7 +38880,7 @@ ttt	ttt	K110			GN				jisjk:201744
 はるやまチェーン	하루야마 체인	I130	QIDVGt		GN				jisjk:41495		
 はるやま商事	하루야마 트레이딩	I130	QIDVGt		GN				jisjk:41496		
 はるよ	하루요	I130	QPN		GN				jisjk:103710		
-はれ	개&AJ@	M427			GN				jisjk:346396		
+はれ	&MT@	M427			GN			LEX-164	jisjk:346396		
 はれ	&JG@	M427	VBp		GN				jisjk:346397		
 はれがまし	화려$AB@	H7N0			GN				jisjk:122494		
 はればれし	환$AB@	H7N0	SFl		GN				jisjk:122500		
@@ -228851,7 +228851,7 @@ ttt	ttt	K110			GN				jisjk:201744
 晴ら	개게 &AV@	M433	VFr		GN				jisjk:95276		
 晴れ	맑음	N110	VFr		GN				jisjk:12581		
 晴れ	공식적인 자리	N110	VPl		GN				jisjk:12582		
-晴れ	개&AJ@	M427	VFr	Dx	GN				jisjk:12583		
+晴れ	&MT@	M427	VFr	Dx	GN			LEX-164	jisjk:12583		
 晴れがまし	화려$AB@	H7U0			GN				jisjk:5955		
 晴れぎ	나들이옷	I110	VCpVAc		GN				jisjk:86157		
 晴れすがた	장한 모습	I110			GN				jisjk:86158		
@@ -322854,7 +322854,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見にく	보기 어$G8@	H7U0			GN				jisjk:5351		
 見まね	눈썰미	N110	UTt		GN				jisjk:203441		
 見まわ	둘러 &AY@	M448			GN				jisjk:375044		
-見まわ	둘러&AY@	M433			GN			LEX-161	lex161:mimawasu		
+見まわ	둘러&AY@	M433			GN			LEX-161	lex161-mimawasu:1		
 見もの	볼거리	N110			GN				jisjk:267055		
 見や	바라&AY@	M438			GN				jisjk:91785		
 見やす	보기 $GF@	H7U0			GN				jisjk:5352		

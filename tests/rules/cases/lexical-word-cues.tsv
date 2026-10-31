@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:word-cue:10	はれてミカヅキ工房が完成した	has:정식으로 미카즈키 공방이	fix	rewrites
 cx:word-cue:10	それで今日、晴れて入学式を迎えた――のだが。	has:정식으로 입학식을	fix	rewrites
-cx:word-cue:10	空は晴れていた。	하늘은 개여 있었다.	fix	rewrites
+cx:word-cue:10	空は晴れていた。	하늘은 개 있었다.	fix	rewrites
 cx:word-cue:10	「ああ、晴れて今は俺の娘よ！」	has:정식으로 지금은	fix	rewrites
 cx:word-cue:10	外は晴れているはずだ。	!rule:cx:word-cue:10	keep	rewrites
 cx:word-cue:10	いつの間にか夜空は晴れている。	!rule:cx:word-cue:10	keep	rewrites

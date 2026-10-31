@@ -22,8 +22,8 @@ analysis:noun-before-copula	曇りだった	흐림이었다	keep	analysis
 analysis:noun-before-copula	晴れの舞台	화려한 무대	keep	analysis
 analysis:noun-before-copula	晴れて合格	정식으로 합격	keep	analysis
 analysis:noun-before-copula	晴れた空	맑은 하늘	keep	analysis
-analysis:noun-before-copula	明日は晴れる	내일은 개인다	keep	analysis
-analysis:noun-before-copula	よく晴れたこと｡	has:개인	keep	analysis
+analysis:noun-before-copula	明日は晴れる	내일은 갠다	keep	analysis
+analysis:noun-before-copula	よく晴れたこと｡	has:갠	keep	analysis
 analysis:noun-before-copula	食べ過ぎて動けない。	과식해 움직일 수 없다.	keep	analysis
 analysis:noun-before-copula	爆発しただと	has:폭발했다	keep	analysis
 analysis:noun-before-copula	甲21号作戦は失敗しただの	has:실패했다	keep	analysis
