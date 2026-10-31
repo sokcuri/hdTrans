@@ -240,6 +240,7 @@ struct Cues {
     bool plainDecl = false;   // the last sentence ends in a plain statement (だ, る, た, い, ん), no particle, no ？
     bool exclaim = false;     // every sentence is a bare predicate alone or has no predicate (REG-13)
     bool auth = false;        // the line has an authoritative voice cue (voices.tsv auth, REG-14)
+    bool trail = false;       // the last sentence trails off after a て-form (言われて……)
     std::vector<std::pair<size_t, size_t>> authParts;  // parts of speaker auth rows found (row, part)
     bool narr = false, empty = false, set = false, keigo = false, pend = false, pany = false, arch = false, stiff = false,
          cend = false;
@@ -256,6 +257,11 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
     c.empty = !word;
     // stages of the last sentence: closing marks stripped, then 0..n tail particles stripped
     std::u32string last = LastSentence(u.text);
+    // closing marks, then a small vowel that lengthens the last kana (なぁ, よぉ, ねぇ), then marks again
+    while (!last.empty() && IsMark(last.back())) last.pop_back();
+    while (last.size() >= 2 && (last.back() == U'ぁ' || last.back() == U'ぃ' || last.back() == U'ぅ' || last.back() == U'ぇ' ||
+                                last.back() == U'ぉ') && last[last.size() - 2] >= U'ぁ' && last[last.size() - 2] <= U'ゖ')
+        last.pop_back();
     while (!last.empty() && IsMark(last.back())) last.pop_back();
     // an elongation mark between kana is not part of the word (でーす, ますぅ): drop it for matching
     for (size_t k = 1; k + 1 < last.size();) {
@@ -331,7 +337,52 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         else if (r.cue == "casual") casualEnd = true;
         else if (r.cue.rfind("first:", 0) == 0 && c.first.empty()) c.first = r.cue.substr(6);
     }
+    // the last sentence has no end cue (a name called out: 落ち着きなさい！ 森下っ！！): the nearest earlier sentence
+    // with one decides
+    if (!c.pend && !casualEnd) {
+        std::vector<std::u32string> sents;
+        std::u32string cur;
+        for (char32_t ch : u.text) {
+            if (IsSentenceEnd(ch)) {
+                sents.push_back(cur);
+                cur.clear();
+            } else {
+                cur.push_back(ch);
+            }
+        }
+        sents.push_back(cur);
+        while (!sents.empty()) {  // drop the last sentence with a word (the one already read)
+            bool w = false;
+            for (char32_t ch : sents.back())
+                if (IsWordChar(ch)) w = true;
+            sents.pop_back();
+            if (w) break;
+        }
+        for (auto it = sents.rbegin(); it != sents.rend() && !c.pend && !casualEnd; ++it) {
+            std::u32string x = *it;
+            while (!x.empty() && IsMark(x.back())) x.pop_back();
+            if (x.empty()) continue;
+            bool tail = false;
+            for (const auto& tr : t.tails)
+                if (EndsInTail(x, tr)) tail = true;
+            for (const auto& r : t.cues) {
+                if (r.mode != "end" || !EndsWith(x, r.text) || x.size() <= r.text.size()) continue;
+                if (!r.notAfter.empty() && r.notAfter.find(x[x.size() - r.text.size() - 1]) != std::u32string::npos) continue;
+                if (r.cue == "polite") c.pend = true;
+                else if (r.cue == "casual") casualEnd = true;
+            }
+            if (tail) casualEnd = true;
+        }
+    }
     c.cend = casualEnd && !c.pend;
+    {
+        std::u32string raw = LastSentence(u.text);
+        size_t e = raw.size();
+        while (e > 0 && (raw[e - 1] == U' ' || raw[e - 1] == U'　' || raw[e - 1] == U'」' || raw[e - 1] == U'』')) --e;
+        size_t dots = e;
+        while (dots > 0 && (raw[dots - 1] == U'…' || raw[dots - 1] == U'‥')) --dots;
+        c.trail = dots < e && dots > 0 && (raw[dots - 1] == U'て' || raw[dots - 1] == U'で');
+    }
     // REG-14: a plain statement without a sentence-final particle (思えない, ファンだ, 戦ってみたかった)
     {
         std::u32string raw = LastSentence(u.text);
@@ -392,9 +443,19 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             static const std::u32string kPastPrev = U"いきぎしじちぢにひびぴみりえけげせぜてでねへべぺめれっ";
             if (!pred && p.size() >= 2 && p.back() == U'た' && (kanjiPrev || kPastPrev.find(prev) != std::u32string::npos))
                 pred = true;
-            // adjective: 面白い, 怖い, 楽しい, いい (not なさい, ない, お願い, りょうかい, はい)
+            // adjective: 面白い, 怖い, 楽しい, いい, しょっぱい, すごい (not なさい, ない, お願い, りょうかい, はい)
+            static const std::u32string kAdjPrev = U"しいぱごどずぶまる";
             if (!pred && p.size() >= 2 && p.back() == U'い' && !honorificNoun &&
-                (kanjiPrev || prev == U'し' || prev == U'い') && std::find(kInterj.begin(), kInterj.end(), p) == kInterj.end())
+                (kanjiPrev || kAdjPrev.find(prev) != std::u32string::npos) &&
+                std::find(kInterj.begin(), kInterj.end(), p) == kInterj.end())
+                pred = true;
+            // a noun and だ of realisation: ホントだ, そうだ (not the explanatory んだ)
+            const bool kataPrev = prev >= U'ァ' && prev <= U'ヺ';
+            if (!pred && p.size() >= 3 && p.back() == U'だ' && (kanjiPrev || kataPrev || p == U"そうだ")) pred = true;
+            // a verb's dictionary form when it is the whole utterance: 断る
+            static const std::u32string kVerbEnd = U"うくぐすつぬぶむる";
+            if (!pred && pieces.size() == 1 && p.size() >= 2 && kVerbEnd.find(p.back()) != std::u32string::npos &&
+                (kanjiPrev || (prev >= U'ぁ' && prev <= U'ゖ')) && p != U"そう" && p != U"どう")
                 pred = true;
             if (asked[pi]) pred = false;  // a question asks, it does not exclaim (読んでいい？, できた？)
             if (pred) any = true;
@@ -579,6 +640,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
                 }
             };
             decide(cues[k - i], keys[k - i], d);
+            d.trail = cues[k - i].trail;
             d.firstPerson = !cues[k - i].first.empty();
             d.narration = d.key == "narr";
             // REG-15: a line of several quotes gets a level per quote; the line's own decision is its last quote's

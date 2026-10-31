@@ -35,6 +35,7 @@ struct RegDecision {
         std::string key, spec;
     };
     std::vector<Quote> quotes;
+    bool trail = false;       // the utterance trails off after a て-form (言われて……): no command at its end
 };
 
 struct RegOptions {

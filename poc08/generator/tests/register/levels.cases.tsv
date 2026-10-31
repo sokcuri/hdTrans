@@ -94,3 +94,17 @@ r15-1	REG-15	fix	d75		yes	「了解なのよ」 「了解」 「かしこま」	
 r15-2	REG-15	fix	d76		yes	「はい、そうです」 「行くよ」	hae
 r15-3	REG-15	keep	d77		yes	「了解。かしこま」	haeyo
 r15-4	REG-15	keep	d78		yes	「行きます」と言った「待って」	haeyo
+r8-7	REG-8	keep	d80	丙	yes	「はい、わかりました」	-
+r8-8	REG-8	keep	d80	丙	yes	「……やっぱり持ってくればよかったなぁ……」	hae
+r8-9	REG-8	keep	d80	丙	yes	「陣中見舞い……と、称した偵察……かしら……」	hae
+r8-10	REG-8	keep	d80	丙	yes	「せっかく頑張って来たのに……」	hae
+r8-11	REG-8	keep	d80	丙	yes	「落ち着きなさい！　森下っ！！」	hae
+r8-12	REG-8	keep	d80	丙	yes	「えっと、この本」	hae
+r13-10	REG-13	fix	d81		yes	「あ、ホントだ」	haera
+r13-11	REG-13	fix	d82		yes	「……しょっぱい」	haera
+r13-12	REG-13	fix	d83		yes	「断る」	haera
+r13-13	REG-13	keep	d84		yes	「あだだだっ、死ぬっ！」	hae
+r13-14	REG-13	keep	d85		yes	「そう」	hae
+r6-11	REG-6	fix	d86		yes	『我等、近衛騎士団なり!!』	hae
+r6-12	REG-6	fix	d87		yes	「ほう。申してみよ」	hae
+r6-13	REG-6	keep	d88		yes	「かなり」	hae

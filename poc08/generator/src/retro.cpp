@@ -879,10 +879,20 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         uint32_t id = 0;
         for (auto& n : nodes) n.id = n.origin = ++id;
+        // REG-12: a command read where none can be leaves the line as 0.7.x wrote it: an adjective has no imperative
+        // (진지하게 is the adverb), and a command right before another predicate (선택하지 말았으면 좋겠다) is not one
+        for (size_t q = 0; q < nodes.size(); ++q) {
+            const Node& n = nodes[q];
+            if (n.kind != Kind::V || n.ctype != CType::final_ || n.mood != Mood::imp) continue;
+            std::string pos = n.vpos;
+            if (pos.empty()) pos = LookupPredicate(*tablesPtr, n.lemma).pos;
+            if (pos == "A" || (q + 1 < nodes.size() && nodes[q + 1].kind == Kind::V)) lineOk = false;
+        }
         // R
         RegDecision d = decisions[li];
         // REG-15: a line of several quotes (「了解」 「かしこま」) has a level per quote; quoteOf maps a node to its quote
         std::vector<size_t> quoteOf(nodes.size(), 0);
+        std::vector<bool> nested(nodes.size(), false);  // inside a quote within the quote (『…』 in 「…」): another voice
         {
             int depth = 0;
             size_t k = 0;
@@ -894,10 +904,23 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                     ++depth;
                 }
                 quoteOf[q] = k;
+                nested[q] = depth >= 2;
                 if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qclose && depth > 0) --depth;
             }
         }
         const bool perQuote = d.quotes.size() >= 2;
+        // REG-12: -ㄹ까 before 하다 (추가할까 하고, 아닐까 합니다) is the construction "think of", not a sentence end
+        auto thinkOf = [&](size_t q) {
+            if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || q + 1 >= nodes.size()) return false;
+            const Node& nx = nodes[q + 1];
+            // -다니 right before a noun quotes what the noun says (얻게 되다니 소문), it does not end a sentence
+            if (nodes[q].eomi == "dani") return nx.kind == Kind::N || nx.kind == Kind::Raw;
+            if (nodes[q].eomi != "lkka") return false;
+            if (nx.kind != Kind::V && nx.kind != Kind::N && nx.kind != Kind::Raw) return false;
+            for (const char* h : {"하", "합", "한", "했", "해"})
+                if (nx.lemma.rfind(h, 0) == 0) return true;
+            return false;
+        };
         auto quoteAt = [&](size_t q) -> const RegDecision::Quote& {
             return d.quotes[std::min(quoteOf[q], d.quotes.size() - 1)];
         };
@@ -952,7 +975,9 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;  // REG-10: 합쇼체 is never lowered
                 // REG-11: the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
-                const bool keep = perQuote ? quoteAt(q).keep : d.keep;
+                // REG-12: the source trails off after a て-form (言われて……): 0.7.x's -어 is not a command to raise
+                const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
+                const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail;
                 if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
@@ -985,7 +1010,7 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             for (size_t q = 0; q < nodes.size(); ++q) {
                 const Node& n = nodes[q];
                 if (quoteOf[q] != qi) continue;
-                if (n.kind != Kind::V || n.ctype != CType::final_) continue;
+                if (n.kind != Kind::V || n.ctype != CType::final_ || thinkOf(q) || nested[q]) continue;
                 Level now = Level::none;
                 for (const auto& g : reg)
                     if (g.node == n.id) now = g.level;

@@ -39,6 +39,8 @@ tail	-	よお
 tail	strong	ぞ	う	どうぞ is a word, not どう + ぞ
 tail	strong	ぜ
 tail	strong	さ
+tail	strong	かしら		a casual sentence-final particle (偵察かしら)
+tail	-	のに		頑張って来たのに……: a casual end
 polite	end	です
 polite	end	ます	かさたなはまやらわがざだばぱおこそとのほもよろごぞどぼぽうくすつぬふむゆるぐずづぶぷ覚醒冷済澄励悩、	ぶちかます, 済ます are not polite
 polite	end	ました	覚醒冷済澄励悩	目を覚ました, 済ました are the plain past of 覚ます, 済ます
@@ -190,3 +192,5 @@ first:watashi	any	わたし
 exclaim	-	みっけ		見つけた, clipped (ー removed before matching)
 exclaim	-	見っけ
 exclaim	-	めっけ
+archaic	end	なり	かきと	the old copula なり (騎士団なり); not かなり, いきなり, となり
+stiff	end	てみよ		the old imperative of みる (申してみよ)
