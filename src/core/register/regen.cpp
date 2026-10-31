@@ -597,14 +597,21 @@ bool OpenQuote(const std::string& ja) {
 }
 
 // REG-23: the end of each sentence of the source's quote, the marks after it and a sentence-final よ, ね
-// left out; sentences end at a run of 。．！？ outside an inner quote. Empty for a line of several quotes.
+// left out; sentences end at a run of 。．！？ outside an inner quote. Empty unless the line is one quote
+// (its first quote, closed where its depth comes back to 0, with no quote after it).
 std::vector<std::u32string> SourceSentenceEnds(const std::string& ja) {
     const std::u32string u = ToU32(ja);
     const std::size_t open = u.find_first_of(U"「『");
     if (open == std::u32string::npos) return {};
-    const char32_t close = u[open] == U'「' ? U'」' : U'』';
-    const std::size_t end = u.rfind(close);
-    if (end == std::u32string::npos || end < open || u.find_first_of(U"「『", end) != std::u32string::npos) return {};
+    std::size_t end = std::u32string::npos;
+    for (std::size_t i = open, depth = 0; i < u.size(); ++i) {
+        if (u[i] == U'「' || u[i] == U'『') ++depth;
+        if ((u[i] == U'」' || u[i] == U'』') && depth > 0 && --depth == 0) {
+            end = i;
+            break;
+        }
+    }
+    if (end == std::u32string::npos || u.find_first_of(U"「『", end) != std::u32string::npos) return {};
     const auto isEnd = [](char32_t c) { return c == U'。' || c == U'．' || c == U'！' || c == U'？' || c == U'!' || c == U'?'; };
     std::vector<std::u32string> out;
     std::u32string cur;
@@ -633,10 +640,27 @@ std::vector<std::u32string> SourceSentenceEnds(const std::string& ja) {
 }
 
 // REG-23: whether a source sentence end is the explanatory んです after the plain form of a predicate
-// (来たんです, いるんです, 好きなんです), not a noun in ん (おばあちゃんです, ハヤテさんです).
+// (来たんです, いるんです, 好きなんです, 行くんです, 遊ぶんです), not a noun in ん (おばあちゃんです, ハヤテさんです,
+// イチくんです, じゅうぶんです): く not after katakana, ぶ only after a kanji.
 bool ExplanatoryEnd(std::u32string_view e) {
     if (!e.ends_with(U"んです") || e.size() < 4) return false;
-    return std::u32string_view(U"るただいなうすつぬぶむぐ").find(e[e.size() - 4]) != std::u32string_view::npos;
+    const char32_t c = e[e.size() - 4];
+    const char32_t before = e.size() >= 5 ? e[e.size() - 5] : U'\0';
+    const bool katakana = before >= U'ァ' && before <= U'ヿ';
+    const bool kanji = (before >= U'一' && before <= U'鿿') || before == U'々';
+    if (c == U'く') return !katakana;
+    if (c == U'ぶ') return kanji;
+    return std::u32string_view(U"るただいなうすつぬむぐ").find(c) != std::u32string_view::npos;
+}
+
+// REG-23: whether the word before node q is the honorific 군 of a name (田中くんです → 다나카 군입니다).
+bool AfterKun(const std::vector<Node>& nodes, std::size_t q) {
+    for (std::size_t k = q; k-- > 0;) {
+        if (nodes[k].kind == Kind::Punct) return false;
+        if (nodes[k].kind == Kind::N || nodes[k].kind == Kind::Raw) return nodes[k].lemma == "군";
+        if (nodes[k].kind != Kind::P) return false;
+    }
+    return false;
 }
 
 // The text Generate wrote for each node, by node id (bytes; the spaces between a node's pieces included).
@@ -874,21 +898,23 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                            (nodes[k].punct == Punct::end || nodes[k].punct == Punct::q || nodes[k].punct == Punct::excl);
                 };
                 // the translation's sentences (a run of marks ends one) must be the source's, one for one
+                // (a run of marks before any word, 「！？　…, ends none)
                 std::size_t runs = 0;
                 bool tail = false;
+                std::vector<std::size_t> sentenceOf(nodes.size(), 0);
                 for (std::size_t k = 0; k < nodes.size(); ++k) {
                     if (boundary(k)) {
-                        if (k == 0 || !boundary(k - 1)) ++runs;
+                        if (tail) ++runs;
                         tail = false;
                     } else if (nodes[k].kind != Kind::Punct) {
                         tail = true;
                     }
+                    sentenceOf[k] = runs;
                 }
                 if (runs + (tail ? 1 : 0) == jaEnds.size()) {
                     bool seen = false;
-                    std::size_t sentence = 0;
                     for (std::size_t q = 0; q < nodes.size(); ++q) {
-                        if (boundary(q) && (q == 0 || !boundary(q - 1))) ++sentence;
+                        const std::size_t sentence = sentenceOf[q];
                         const Node& n = nodes[q];
                         if (n.kind != Kind::V || n.ctype != CType::final_ || nested[q] || thinkOf(q)) continue;
                         bool end = true;  // the sentence's last word
@@ -897,7 +923,7 @@ std::vector<RegenLine> Regenerate(const Data& d, const std::vector<PreLine>& lin
                         if (!end) continue;
                         // the aligned sentence must end in a 합쇼체 statement (입니다, 합니다) in the translation too
                         if (seen && n.was == Level::hapsyo && n.mood == Mood::decl && sentence < jaEnds.size() &&
-                            ExplanatoryEnd(jaEnds[sentence]) && n.to > n.from &&
+                            ExplanatoryEnd(jaEnds[sentence]) && n.to > n.from && !AfterKun(nodes, q) &&
                             std::u32string_view(out32).substr(n.from, n.to - n.from).ends_with(U"니다"))
                             lower[q] = true;
                         // a statement the source ends in です or ます sets the quote's level; a request (ください) or
