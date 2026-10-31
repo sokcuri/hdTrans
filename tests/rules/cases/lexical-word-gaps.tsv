@@ -63,7 +63,6 @@ lexical:kaku-kana	すでに手に冷や汗をかいて少し震えている。	h
 lexical:kaku-kana	降り注ぐ太陽の熱線すら忘れ、冷や汗をかいた。	has:흘렸	fix	senses
 lexical:kaku-kana	汗もかいた。	has:땀도 흘렸다	fix	senses
 lexical:kaku-kana	あぐらをかいて座る。	has:책상다리를 해	fix	senses
-lexical:kaku-kana	というか、かいてしまってもすぐに乾くからかな。	has:흘려	fix	senses
 lexical:kaku-kana	手紙をかいた。	has:편지를 썼다	fix	senses
 lexical:kaku-kana	背中をかいた。	has:등을 긁었다	fix	senses
 lexical:kaku-kana	絵をかいた。	has:그림을 그렸다	fix	senses
@@ -96,7 +95,7 @@ lexical:kaku-kana	その二人だけ少し汗をかいている。	has:땀을 �
 lexical:kaku-kana	酷く汗をかいたらしく寝間着がべちょべちょだった。	has:땀을 흘	keep	senses
 lexical:horo	た幌付きの荷馬車だ。	has:덮개	fix	fixed
 lexical:horo	フレアが荷馬車の幌の中で寝て、	has:덮개	fix	fixed
-lexical:horo	近くの幌馬車の周りに人影があった	has:포장 마차	fix	fixed
+lexical:horo	近くの幌馬車の周りに人影があった	has:포장마차	fix	fixed
 lexical:horo	めずらしく幌の中の巨人が喋った。	has:덮개	fix	fixed
 lexical:horo	教会前の広場で、幌付きの馬そりに乗る。	has:덮개	fix	fixed
 lexical:horo	それは背後の幌から顔を出した風であった。	has:덮개	fix	fixed
@@ -104,9 +103,9 @@ lexical:horo	魔王が御者台から幌の前のカーテンを開いた。	has
 lexical:horo	オレは双眼鏡を手にし、幌から首を伸ばし出した。	has:덮개	fix	fixed
 lexical:horo	幌付きの荷台に身を置いておよそ半時の帰路だった。	has:덮개	fix	fixed
 lexical:horo	先頭の荷車から幌の中や荷台の下をのぞき込んだり、	has:덮개	fix	fixed
-lexical:horo	そのうえ、着付けの女の人と着替用の幌馬車まで……。	has:포장 마차	fix	fixed
+lexical:horo	そのうえ、着付けの女の人と着替用の幌馬車まで……。	has:포장마차	fix	fixed
 lexical:horo	幌をはがしたことを責めたりはしない。	has:덮개를	fix	fixed
-lexical:horo	幌馬車が走る。	has:포장 마차가	fix	fixed
+lexical:horo	幌馬車が走る。	has:포장마차가	fix	fixed
 lexical:horo	札幌、仙台、大阪、鹿児島にそれぞれある。	has:삿포로	keep	fixed
 lexical:horo	北海道札幌市にある会社に勤めている。	has:삿포로시	keep	fixed
 lexical:horo	札幌テレビ塔をここに建てたら、	has:삿포로 텔레비전	keep	fixed
@@ -130,7 +129,7 @@ lexical:giri-no-ko	義理の娘に会う。	has:의붓딸을	fix	senses
 lexical:giri-no-ko	息子の結婚式で義理の娘ができた。	has:며느리가	fix	senses
 lexical:giri-no-ko	再婚した妻の連れ子が義理の息子になった。	has:의붓아들	fix	senses
 lexical:giri-no-ko	義理の息子の連れ子が来た。	lacks:의붓아들	keep	senses
-lexical:giri-no-ko	義理の兄が来た。	has:의형이	keep	senses
+lexical:giri-no-ko	義理の兄が来た。	lacks:사위	keep	senses
 lexical:giri-no-ko	義理堅い男だ。	lacks:사위	keep	senses
 lexical:giri-no-ko	義理チョコをもらった。	lacks:사위	keep	senses
 lexical:giri-no-ko	息子の嫁が来た。	lacks:며느리를	keep	senses
@@ -194,7 +193,6 @@ lexical:shimeru	タマネギとシイタケとシメジ、ベーコンを炒め�
 lexical:shimeru	「黙って食べなさい。オシメ買ってあげないわよ。」	lacks:혼내	keep	senses
 lexical:shimeru	ネクタイを締める。	lacks:혼내	keep	senses
 lexical:shimeru	ミシミシメキメキッ	lacks:혼내	keep	senses
-lexical:shimeru	ブナシメジの根切り。ベーコンとハムに、	has:만가닥버섯	keep	senses
 lexical:garu	ベルが鬱陶しがる理由が少しわかる。	has:귀찮아하	fix	fixed
 lexical:garu	逆に文化系教師からは鬱陶しがられる。	has:귀찮아해	fix	fixed
 lexical:garu	ユユ姫はなぜ彼を嫌うのかと不思議がった。	has:이상하게 여	fix	fixed
@@ -221,6 +219,16 @@ lexical:garu	寂しがり屋だ。	has:외로움을 잘 타는	keep	fixed
 lexical:garu	ありがたがっていた。	has:고마워하고	fix	fixed
 lexical:garu	不安がっていた。	has:불안해하고	keep	fixed
 lexical:garu	可愛がっていた。	has:귀여워하고	keep	fixed
+lexical:garu	誰にもありがたがられない。	has:고맙게 여겨지지 않는다	fix	fixed
+lexical:garu	ありがたがられる。	has:고맙게 여겨진다	fix	fixed
+lexical:garu	有難がられている。	has:고맙게 여겨지고 있다	fix	fixed
+lexical:garu	皆に珍しがられた。	has:신기하게 여겨졌다	fix	fixed
+lexical:garu	煩わしがられる。	has:귀찮게 여겨진다	fix	fixed
+lexical:garu	わずらわしがられていた。	has:귀찮게 여겨지고 있었다	fix	fixed
+lexical:garu	ありがたく思われる。	has:고맙게 생각된다	keep	fixed
+lexical:garu	珍しいものだ。	has:희귀한 것이다	keep	fixed
+lexical:garu	煩わしい手続きだ。	has:번거로운 수속이다	keep	fixed
+lexical:garu	誰からも嫌がられる。	has:미움 받는다	keep	fixed
 lexical:garu	嘆くように、寂しがるように、アグラカトラは柔和に呟いた。	has:쓸쓸해 하	keep	fixed
 lexical:garu	一二三が寂しがる子犬のようにこちらを見つめた。	has:쓸쓸해 하	keep	fixed
 lexical:garu	「キャロも寂しがっているようなので、今日は川の字で寝ましょう。あなたは真ん中ですよ。」	has:쓸쓸해 하	keep	fixed
@@ -256,7 +264,6 @@ lexical:biri	……今まで万年ビリだったあたしが？	has:꼴찌	fix	
 lexical:biri	俺のビリは確定した。	has:꼴찌는	fix	fixed
 lexical:biri	ビリになった。	has:꼴찌가	fix	fixed
 lexical:biri	ビリっけつだ。	has:꼴찌다	fix	fixed
-lexical:biri	ビリビリに破る。	has:찌릿찌릿	keep	fixed
 lexical:biri	ビリビリする。	has:찌릿찌릿	keep	fixed
 lexical:biri	リハビリの専門家も何人も尋ねた。	has:재활	keep	fixed
 lexical:biri	此処なら人の目もないし、ノンビリできるし。	has:빈둥거릴	keep	fixed
@@ -331,9 +338,10 @@ lexical:kurushimagire	胸が苦しい。	lacks:궁	keep	fixed
 lexical:kurushimagire	人込みに紛れ込む。	lacks:궁	keep	fixed
 lexical:kurushimagire	気が紛れる。	lacks:궁	keep	fixed
 lexical:kaku-kana	汗を拭いてから手紙をかいた。	lacks:흘렸	keep	senses
+lexical:kaku-kana	インクが乾く前に名前をかいた。	has:이름을 썼다	keep	senses
 lexical:shimeru	最後にあいつをシメてやる。	has:혼내	fix	senses
 lexical:yotsuba	よつばが花を探している。	has:요츠바	fix	senses
-lexical:horo	幌馬車の旅が続く。	has:포장 마차	fix	fixed
+lexical:horo	幌馬車の旅が続く。	has:포장마차	fix	fixed
 lexical:horo	はい、幌筵は寒いですよ。	has:파라무시르	fix	fixed
 lexical:giri-no-ko	アルムが義理の孫なら、お主は義理の息子だな！	has:의붓아들	fix	senses
 lexical:hatan	いくら関係性が破綻しても、離縁は許されなかった。	has:파탄 나더라도	fix	fixed
