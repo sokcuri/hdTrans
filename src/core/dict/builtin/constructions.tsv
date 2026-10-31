@@ -741,11 +741,11 @@ cx:ending-presumptive-rare:10	GRM-10	&&6 F+0== "conjugating" U+0== "よう" Y+0=
 cx:doumo-greeting:10	LEX-73	&&2 S+0== "どうも" ||5 S+1== "ありがとう" S+1== "ありがとうございます" S+1== "ありがと" S+1== "すみません" S+1== "失礼"	set-target "정말"	どうもありがとう 정말 고마워
 cx:doumo-greeting:20	LEX-73	&&2 S+0== "どうも" ||2 S+1== "初めまして" S+1== "はじめまして"	set-target "안녕하세요"	どうも初めまして 안녕하세요 처음 뵙겠습니다
 //= cue-sense	after Select 17	A word whose sense a word, ending or mark right next to it decides (spec LEX-140 to LEX-149): 馬鹿な standing alone is 말도 안 돼; うち after a progressive before に is 동안; the verb before 切れ read 수 있다 takes 을 (다 참을 수 없고), and なくなる after it is 없게 되다; 手前 after a past or progressive before a comma is 이상, before も 체면; 近く after が or も before a comma is 가깝고; a passive 飲む after に is 삼키다; 舐める of a person (のことを) or in a progressive question with no object is 얕보다; 後 before は after a pause is 나머지; 黒 alone (not after a noun) before a particle is 검은색, before の and a noun 검은; すらりと before 伸びる is 쭉 and that 伸びる 뻗다.
-cx:cue-sense:20	LEX-140	&&4 S+0== "馬鹿" I+0== "馬鹿な" !1 F+0== "described-noun" ||3 F+0== "utterance-end" F+0== "sentence-end" F+1== "after-pause"	set-target "말도 안 돼" set-ending ""	馬鹿な……嘘だろ 말도 안 돼……
+cx:cue-sense:20	LEX-140	&&4 S+0== "馬鹿" I+0== "馬鹿な" !1 F+0== "described-noun" ||3 F+0== "utterance-end" F+0== "sentence-end" F+1== "after-pause"	set-target "말도 안 돼    " set-ending ""	馬鹿な……嘘だろ 말도 안 돼……
 cx:cue-sense:30	LEX-141	&&4 S+0== "うち" L+0== "집" S+1== "に" Y-1== "R고 있는"	set-target "동안"	考えてるうちに 생각하고 있는 동안에
-cx:cue-sense:35	LEX-141	&&5 S+0== "う" U+0== "ち" F+0== "verb" S+1== "に" Y-1== "R고 있는"	set-target "동안" set-ending ""	考えてるうちに 생각하고 있는 동안에
+cx:cue-sense:35	LEX-141	&&5 S+0== "う" U+0== "ち" F+0== "verb" S+1== "に" Y-1== "R고 있는"	set-target "동안    " set-ending ""	考えてるうちに 생각하고 있는 동안에
 cx:cue-sense:50	LEX-143	&&4 F+0== "verb" S+1== "切れ" L+1== "수 있다" Y+0== "6"	set-ending "3"	耐え切れず 다 참을 수 없고
-cx:cue-sense:55	LEX-143	&&4 S+0== "なくな" D+0== "않게 &C6@" S-1== "切れ" L-1== "수 있다"	set-target "없게 &C6@" set-target@-1 "수" set-ending@-1 ""	耐え切れなくなった 다 참을 수 없게 되었다
+cx:cue-sense:55	LEX-143	&&4 S+0== "なくな" D+0== "않게 &C6@" S-1== "切れ" L-1== "수 있다"	set-target "없게 &C6@" set-target@-1 "수    " set-ending@-1 ""	耐え切れなくなった 다 참을 수 없게 되었다
 cx:cue-sense:60	LEX-144	&&4 S+0== "手前" L+0== "앞" S+1== "、" ||4 I-1== "Rた" I-1== "Rだ" I-1== "Rている" I-1== "Rてる"	set-target "이상"	誓った手前、 맹세한 이상,
 cx:cue-sense:70	LEX-144	&&4 S+0== "手前" L+0== "앞" S+1== "Lも" ||4 I-1== "Rた" I-1== "Rだ" I-1== "Rている" I-1== "Rてる"	set-target "체면"	言った手前もある 말한 체면도 있다
 cx:cue-sense:80	LEX-145	&&4 S+0== "近く" ||2 S-1== "が" S-1== "も" P-2== "1" ||2 S+1== "、" S+1== "，"	set-target "가깝고"	年齢が近く、 나이가 가깝고,
