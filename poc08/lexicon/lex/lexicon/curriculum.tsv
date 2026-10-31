@@ -159,7 +159,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 良く	よく	adv	1	잘				r	r	よく聞け → 잘 들어
 良く	よく	adv	2	자주	pred=来る|行く			r	r	よく来る → 자주 오다
 一人	ひとり	n	1	혼자			cls=@quantity	r	r	一人で行く → 혼자 가다
-一人	ひとり	n	2	한 명	head=@person|@group|@organization			r	r	一人の女性 → 한 명의 여성
+一人	ひとり	n	2	1명	head=@person|@group|@organization			r	r	一人の学生 → 1명의 학생
 彼	かれ	n	1	그			anim=+ cls=@person	r	r	彼は来た → 그는 왔다
 又	また	adv	1	또				r	r	また来る → 또 오다
 時	じ	n	1	시			num=native	r	r	十時 → 10시
@@ -347,6 +347,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 猫	ねこ	n	1	고양이			cls=@animal anim=+	r	r	猫がいる → 고양이가 있다
 車	くるま	n	1	차			cls=@vehicle	r	r	車に乗る → 차를 타다
 大変	たいへん	na	1	힘들다				r	r	仕事が大変だ → 일이 힘들다
+大変	たいへん	na	2	큰일	form=cop subj=-			r	r	大変だ！ → 큰일이다
 円	えん	n	1	엔			cls=@money num=sino	r	r	百円 → 백 엔
 円	えん	n	2	원	pred=描く			r	r	円を描く → 원을 그리다
 遅い	おそい	adj	1	늦다				r	r	帰りが遅い → 귀가가 늦다
@@ -944,7 +945,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 醤油	しょうゆ	n	1	간장			cls=@seasoning	r	r	醤油をつける → 간장을 찍다
 朝御飯	あさごはん	n	1	아침밥			cls=@meal	r	r	朝ご飯を食べる → 아침밥을 먹다
 昼御飯	ひるごはん	n	1	점심			cls=@meal	r	r	昼ご飯を食べる → 점심을 먹다
-晩御飯	ばんごはん	n	1	저녁밥			cls=@meal	r	r	晩ご飯を作る → 저녁밥을 만들다
+晩御飯	ばんごはん	n	1	저녁			cls=@meal	r	r	晩ご飯を作る → 저녁을 만들다
 食べ物	たべもの	n	1	음식			cls=@food	r	r	食べ物を買う → 음식을 사다
 牛肉	ぎゅうにく	n	1	소고기			cls=@food	r	r	牛肉を使う → 소고기를 쓰다
 豚肉	ぶたにく	n	1	돼지고기			cls=@food	r	r	豚肉を焼く → 돼지고기를 굽다
@@ -1059,28 +1060,28 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 週	しゅう	n	1	주			cls=@period	r	r	週が明ける → 새 주가 시작되다
 週	しゅう	n	2	일주일	next=に			r	r	週に三回 → 일주일에 세 번
 夕べ	ゆうべ	n	1	어젯밤			cls=@time.point ni=-	r	r	夕べ寝られなかった → 어젯밤에 잠을 못 잤다
-一月	いちがつ	n	1	일월			cls=@time.point lu	r	r	一月に行く → 일월에 가다
-二月	にがつ	n	1	이월			cls=@time.point lu	r	r	二月に行く → 이월에 가다
-三月	さんがつ	n	1	삼월			cls=@time.point lu	r	r	三月に行く → 삼월에 가다
-四月	しがつ	n	1	사월			cls=@time.point lu	r	r	四月に行く → 사월에 가다
-五月	ごがつ	n	1	오월			cls=@time.point lu	r	r	五月に行く → 오월에 가다
-六月	ろくがつ	n	1	유월			cls=@time.point lu	r	r	六月に行く → 유월에 가다
-七月	しちがつ	n	1	칠월			cls=@time.point lu	r	r	七月に行く → 칠월에 가다
-八月	はちがつ	n	1	팔월			cls=@time.point lu	r	r	八月に行く → 팔월에 가다
-九月	くがつ	n	1	구월			cls=@time.point lu	r	r	九月に行く → 구월에 가다
-十月	じゅうがつ	n	1	시월			cls=@time.point lu	r	r	十月に行く → 시월에 가다
-十一月	じゅういちがつ	n	1	십일월			cls=@time.point lu	r	r	十一月に行く → 십일월에 가다
-十二月	じゅうにがつ	n	1	십이월			cls=@time.point lu	r	r	十二月に行く → 십이월에 가다
-二日	ふつか	n	1	이틀			cls=@duration lu	r	r	二日かかる → 이틀 걸리다
-三日	みっか	n	1	사흘			cls=@duration lu	r	r	三日かかる → 사흘 걸리다
-四日	よっか	n	1	나흘			cls=@duration lu	r	r	四日かかる → 나흘 걸리다
-五日	いつか	n	1	닷새			cls=@duration lu	r	r	五日かかる → 닷새 걸리다
-六日	むいか	n	1	엿새			cls=@duration lu	r	r	六日かかる → 엿새 걸리다
-七日	なのか	n	1	이레			cls=@duration lu	r	r	七日かかる → 이레 걸리다
-八日	ようか	n	1	여드레			cls=@duration lu	r	r	八日かかる → 여드레 걸리다
-九日	ここのか	n	1	아흐레			cls=@duration lu	r	r	九日かかる → 아흐레 걸리다
-十日	とおか	n	1	열흘			cls=@duration lu	r	r	十日かかる → 열흘 걸리다
-二十日	はつか	n	1	스무날			cls=@duration lu	r	r	二十日かかる → 스무날 걸리다
+一月	いちがつ	n	1	1월			cls=@time.point lu	r	r	一月 → 1월 (digits)
+二月	にがつ	n	1	2월			cls=@time.point lu	r	r	二月 → 2월 (digits)
+三月	さんがつ	n	1	3월			cls=@time.point lu	r	r	三月 → 3월 (digits)
+四月	しがつ	n	1	4월			cls=@time.point lu	r	r	四月 → 4월 (digits)
+五月	ごがつ	n	1	5월			cls=@time.point lu	r	r	五月 → 5월 (digits)
+六月	ろくがつ	n	1	6월			cls=@time.point lu	r	r	六月 → 6월 (digits)
+七月	しちがつ	n	1	7월			cls=@time.point lu	r	r	七月 → 7월 (digits)
+八月	はちがつ	n	1	8월			cls=@time.point lu	r	r	八月 → 8월 (digits)
+九月	くがつ	n	1	9월			cls=@time.point lu	r	r	九月 → 9월 (digits)
+十月	じゅうがつ	n	1	10월			cls=@time.point lu	r	r	十月 → 10월 (digits)
+十一月	じゅういちがつ	n	1	11월			cls=@time.point lu	r	r	十一月 → 11월 (digits)
+十二月	じゅうにがつ	n	1	12월			cls=@time.point lu	r	r	十二月 → 12월 (digits)
+二日	ふつか	n	1	2일			cls=@time.point|@duration lu	r	r	二日 → 2일 (digits)
+三日	みっか	n	1	3일			cls=@time.point|@duration lu	r	r	三日 → 3일 (digits)
+四日	よっか	n	1	4일			cls=@time.point|@duration lu	r	r	四日 → 4일 (digits)
+五日	いつか	n	1	5일			cls=@time.point|@duration lu	r	r	五日 → 5일 (digits)
+六日	むいか	n	1	6일			cls=@time.point|@duration lu	r	r	六日 → 6일 (digits)
+七日	なのか	n	1	7일			cls=@time.point|@duration lu	r	r	七日 → 7일 (digits)
+八日	ようか	n	1	8일			cls=@time.point|@duration lu	r	r	八日 → 8일 (digits)
+九日	ここのか	n	1	9일			cls=@time.point|@duration lu	r	r	九日 → 9일 (digits)
+十日	とおか	n	1	10일			cls=@time.point|@duration lu	r	r	十日 → 10일 (digits)
+二十日	はつか	n	1	20일			cls=@time.point|@duration lu	r	r	二十日 → 20일 (digits)
 匹	ひき	suf	1	마리			num=native	r	r	猫が三匹いる → 고양이가 세 마리 있다
 杯	はい	n	1	잔			num=native	r	r	お酒を一杯飲む → 술을 한 잔 마시다
 杯	はい	n	2	그릇	head=@food			r	r	ご飯を一杯 → 밥 한 그릇
@@ -1190,29 +1191,29 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大勢	おおぜい	n	2	많은	next=の			r	r	大勢の人 → 많은 사람
 大勢	おおぜい	n	3	여럿이서	next=で			r	r	大勢で行く → 여럿이서 가다
 外国語	がいこくご	n	1	외국어			cls=@language lu	r	r	外国語を勉強する → 외국어를 공부하다
-一	いち	num	1	일			cls=@number	r	r	一月 → 일월
-二	に	num	1	이			cls=@number	r	r	二月 → 이월
-三	さん	num	1	삼			cls=@number	r	r	三月 → 삼월
-四	よん	num	1	사			cls=@number	r	r	四月 → 사월
+一	いち	num	1	일			cls=@number num=sino	r	r	一月 → 일월
+二	に	num	1	이			cls=@number num=sino	r	r	二月 → 이월
+三	さん	num	1	삼			cls=@number num=sino	r	r	三月 → 삼월
+四	よん	num	1	사			cls=@number num=sino	r	r	四月 → 사월
 四	よん	num	2	넷	next=つ			r	r	四つ → 네 개
-五	ご	num	1	오			cls=@number	r	r	五月 → 오월
-六	ろく	num	1	육			cls=@number	r	r	六角形 → 육각형
-七	なな	num	1	칠			cls=@number	r	r	七月 → 칠월
-八	はち	num	1	팔			cls=@number	r	r	八月 → 팔월
-九	きゅう	num	1	구			cls=@number	r	r	九月 → 구월
-十	じゅう	num	1	십			cls=@number	r	r	十円 → 십 엔
-百	ひゃく	num	1	백			cls=@number	r	r	百円 → 백 엔
-千	せん	num	1	천			cls=@number	r	r	千円 → 천 엔
-万	まん	num	1	만			cls=@number lu	r	r	一万円 → 만 엔
-一	ひと	num	1	하나			cls=@number lu	r	r	一つ → 하나
-二	ふた	num	1	둘			cls=@number lu	r	r	二つ → 둘
-三	み	num	1	셋			cls=@number lu	r	r	三つ → 셋
-五	いつ	num	1	다섯			cls=@number lu	r	r	五つ → 다섯
-六	む	num	1	여섯			cls=@number lu	r	r	六つ → 여섯
-八	や	num	1	여덟			cls=@number lu	r	r	八つ → 여덟
-九	ここの	num	1	아홉			cls=@number lu	r	r	九つ → 아홉
-十	とお	num	1	열			cls=@number lu	r	r	十 → 열
-二十	はつ	num	1	스물			cls=@number lu	r	r	二十日経つ → 스무 날이 지나다
+五	ご	num	1	오			cls=@number num=sino	r	r	五月 → 오월
+六	ろく	num	1	육			cls=@number num=sino	r	r	六角形 → 육각형
+七	なな	num	1	칠			cls=@number num=sino	r	r	七月 → 칠월
+八	はち	num	1	팔			cls=@number num=sino	r	r	八月 → 팔월
+九	きゅう	num	1	구			cls=@number num=sino	r	r	九月 → 구월
+十	じゅう	num	1	십			cls=@number num=sino	r	r	十円 → 십 엔
+百	ひゃく	num	1	백			cls=@number num=sino	r	r	百円 → 백 엔
+千	せん	num	1	천			cls=@number num=sino	r	r	千円 → 천 엔
+万	まん	num	1	만			cls=@number lu num=sino	r	r	一万円 → 만 엔
+一	ひと	num	1	하나			cls=@number lu num=native	r	r	一つ → 하나
+二	ふた	num	1	둘			cls=@number lu num=native	r	r	二つ → 둘
+三	み	num	1	셋			cls=@number lu num=native	r	r	三つ → 셋
+五	いつ	num	1	다섯			cls=@number lu num=native	r	r	五つ → 다섯
+六	む	num	1	여섯			cls=@number lu num=native	r	r	六つ → 여섯
+八	や	num	1	여덟			cls=@number lu num=native	r	r	八つ → 여덟
+九	ここの	num	1	아홉			cls=@number lu num=native	r	r	九つ → 아홉
+十	とお	num	1	열			cls=@number lu num=native	r	r	十 → 열
+二十	はつ	num	1	스물			cls=@number lu num=native	r	r	二十日経つ → 스무 날이 지나다
 何	なん	num	1	몇			cls=@number lu	r	r	何人 → 몇 명
 手洗い	てあらい	n	1	화장실			cls=@room lu	r	r	お手洗いはどこですか → 화장실이 어디예요
 手洗い	てあらい	n	2	손 씻기	pred=する|できる			r	r	手洗いをする → 손 씻기를 하다
@@ -2340,26 +2341,33 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 切る	きる	v5	7	헐떡이다	obj=息			r	r	息を切らせる → 숨을 헐떡이다
 切る	きる	v5	8	뜯다	obj=@wrapping			r	r	封を切る → 봉투를 뜯다
 切る	きる	v5	9	꺾다	obj=ハンドル|舵			r	r	ハンドルを切る → 핸들을 꺾다
-引く	ひく	v5	1	당기다			vol=+ asp=activity te=go	r	r	引き金を引く → 방아쇠를 당기다
-引く	ひく	v5	2	걸리다	mod=風邪	を=에		r	r	風邪を引く → 감기에 걸리다
-引く	ひく	v5	3	끌다	obj=@attention|手			r	r	注意を引く → 주의를 끌다
-引く	ひく	v5	4	끌다	next=れる|られる			r	r	彼女に惹かれる → 그녀에게 끌리다
-引く	ひく	v5	5	긋다	obj=@shape			r	r	線を引く → 선을 긋다
-引く	ひく	v5	6	빼다	obj=@body|@number|@money			r	r	身を引く → 몸을 빼다
-引く	ひく	v5	7	당기다	obj=@hair|腕			r	r	腕を引く → 팔을 당기다
-引く	ひく	v5	8	잇다	obj=血			r	r	血を引く → 피를 잇다
-引く	ひく	v5	9	가시다	subj=@emotion|@illness|血の気 obj=-			r	r	痛みが引く → 통증이 가시다
-引く	ひく	v5	10	물러나다	obj=-			r	r	一歩引く → 한발 물러나다
-打つ	うつ	v5	1	치다			vol=+ asp=activity te=go	r	r	相づちを打つ → 맞장구를 치다
-打つ	うつ	v5	2	쏘다	arg=@firearm|@ammunition			r	r	銃を撃つ → 총을 쏘다
-打つ	うつ	v5	3	쏘다	mod=@firearm|@ammunition			r	r	銃なんて撃った → 총을 쐈다
-打つ	うつ	v5	4	쏘다	obj=@person|@monster|@animal			r	r	人を撃つ → 사람을 쏘다
-打つ	うつ	v5	5	부딪치다	obj=@body			r	r	頭を打った → 머리를 부딪쳤다
-打つ	うつ	v5	6	뛰다	obj=脈|脈拍	を=이		r	r	脈を打つ → 맥이 뛰다
-打つ	うつ	v5	7	놓다	obj=@medicine|注射|点滴			r	r	注射を打つ → 주사를 놓다
-打つ	うつ	v5	8	쓰다	obj=@message|手			r	r	メールを打つ → 메일을 쓰다
-打つ	うつ	v5	9	갚다	obj=仇			r	r	仇を討つ → 원수를 갚다
-打つ	うつ	v5	10	쏘다	obj=-			r	r	撃て → 쏴
+引く	ひく	v5	1	당기다			vol=+ asp=activity te=go	r	r	ロープを引く → 밧줄을 당기다
+引く	ひく	v5	2	걸리다	mod=風邪	を=에		r	r	風邪引いた → 감기에 걸렸다
+引く	ひく	v5	3	걸리다	obj=@illness	を=에		r	r	風邪を引く → 감기에 걸리다
+引く	ひく	v5	4	끌다	obj=@attention|手			r	r	注意を引く → 주의를 끌다
+引く	ひく	v5	5	끌다	next=れる|られる			r	r	心を引かれる → 마음이 끌리다
+引く	ひく	v5	6	긋다	obj=@shape			r	r	線を引く → 선을 긋다
+引く	ひく	v5	7	빼다	obj=@body|@number|@money			r	r	腰を引く → 허리를 빼다
+引く	ひく	v5	8	당기다	obj=@hair|腕			r	r	腕を引く → 팔을 당기다
+引く	ひく	v5	9	잇다	obj=血			r	r	血を引く → 피를 잇다
+引く	ひく	v5	10	물러나다	obj=-			r	r	引いてください → 물러나 주세요
+引く	ひく	v5	11	물러나다	obj=身			r	r	身を引く → 물러나다
+引く	ひく	v5	12	물러나다	mod=一歩			r	r	一歩引く → 한 걸음 물러나다
+引く	ひく	v5	13	내리다	subj=熱 obj=-			r	r	熱が引く → 열이 내리다
+引く	ひく	v5	14	가라앉다	subj=@illness obj=-			r	r	腫れが引く → 붓기가 가라앉다
+引く	ひく	v5	15	가시다	subj=@emotion|血の気 obj=-			r	r	血の気が引く → 핏기가 가시다
+引く	ひく	v5	16	빠지다	subj=潮|水 obj=-			r	r	潮が引く → 물이 빠지다
+引く	ひく	v5	17	질리다	obj=- dat=@person form=ta			r	r	あいつに引いた → 걔한테 질렸다
+引く	ひく	v5	18	질리다	obj=- next=わ			r	r	さすがに引くわ → 진짜 질린다
+引く	ひく	v5	19	질리다	obj=- mod=ドン			r	r	ドン引く → 질리다
+打つ	うつ	v5	1	치다			vol=+ asp=activity te=go	r	r	ボールを打つ → 공을 치다
+打つ	うつ	v5	2	쏘다	arg=@firearm|@ammunition			r	r	銃で打つ → 총으로 쏘다
+打つ	うつ	v5	3	쏘다	mod=@firearm|@ammunition			r	r	銃打つ → 총 쏘다
+打つ	うつ	v5	4	부딪치다	obj=@body			r	r	頭を打つ → 머리를 부딪치다
+打つ	うつ	v5	5	뛰다	obj=脈|脈拍	を=이		r	r	脈を打つ → 맥이 뛰다
+打つ	うつ	v5	6	놓다	obj=@medicine|注射|点滴			r	r	注射を打つ → 주사를 놓다
+打つ	うつ	v5	7	쓰다	obj=@message|手			r	r	メールを打つ → 메일을 쓰다
+打つ	うつ	v5	8	갚다	obj=仇			r	r	仇を打つ → 원수를 갚다
 受ける	うける	v1	1	받다			vol=+ asp=activity te=go	r	r	依頼を受ける → 의뢰를 받다
 受ける	うける	v1	2	듣다	obj=@lecture			r	r	授業を受ける → 수업을 듣다
 受ける	うける	v1	3	보다	obj=@exam			r	r	試験を受ける → 시험을 보다
@@ -2461,3 +2469,4 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 下げる	さげる	v1	3	낮추다	obj=@quantity|@sound			r	r	ハードルを下げる → 기준을 낮추다
 下げる	さげる	v1	4	치우다	obj=@tableware|@food			r	r	食器を下げる → 식기를 치우다
 下げる	さげる	v1	5	걸다	from=首|肩	から=에		r	r	首から下げる → 목에 걸다
+大変	たいへん	adv	1	정말				r	r	大変おいしい → 정말 맛있다

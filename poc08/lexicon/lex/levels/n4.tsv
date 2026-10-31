@@ -524,7 +524,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 新幹線	しんかんせん	n	新幹線	transport	신칸센		@vehicle										y		1
 特急	とっきゅう	n	特急	transport	특급		@vehicle										y		1
 下がる	さがる	v5	下がる	verb	내려가다	REG			+	change	eo				ga=@thing		y	五段-ラ行	3
-下げる	さげる	v1	下げる	verb	내리다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ガ行	4
+下げる	さげる	v1	下げる	verb	내리다	REG			+	change	go				ga=@person o=@thing		y	下一段-ガ行	5
 乗り換える	のりかえる	v1	乗り換える	verb	갈아타다	REG			+	change	go				ga=@person ni=@vehicle	に=으로	y	下一段-ア行	1
 乾く	かわく	v5	乾く	verb	마르다	REU			-	change	eo				ga=@thing		y	五段-カ行	1
 亡くなる	なくなる	v5	亡くなる	verb	세상을 떠나다	REG			-	change	past				ga=@person		y	五段-ラ行	3
@@ -555,14 +555,14 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 動く	うごく	v5	動く	verb	움직이다	REG			+	activity	go				ga=@person		y	五段-カ行	1
 勧める	すすめる	v1	勧める	verb	권하다	HA			+	activity	go				ga=@person ni=@person o=@thing		y	下一段-マ行	2
 包む	つつむ	v5	包む	verb	싸다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	2
-受ける	うける	v1	受ける	verb	받다	REG			+	activity	go				ga=@person o=@thing		y	下一段-カ行	5
+受ける	うける	v1	受ける	verb	받다	REG			+	activity	go				ga=@person o=@thing		y	下一段-カ行	10
 受け取る	うけとる	v5	受け取る	verb	받다	REG			+	change	go				ga=@person o=@thing		y	五段-ラ行	2
 叱る	しかる	v5	叱る	verb	혼내다	REG			+	activity	go				ga=@person o=@person		y	五段-ラ行	1
 合う	あう	v5	合う	verb	맞다	REG			-	state	simple				ga=@thing ni=@thing		y	五段-ワア行	3
 合わせる	あわせる	v1	合わせる	verb	맞추다	REG			+	activity	go				ga=@person o=@thing		y	下一段-サ行	2
 向かう	むかう	v5	向かう	verb	향하다	HA			+	activity	go				ga=@person ni=@place	に=으로	y	五段-ワア行	2
 回す	まわす	v5	回す	verb	돌리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
-回る	まわる	v5	回る	verb	돌다	L			+	activity	go				ga=@person|@thing		y	五段-ラ行	5
+回る	まわる	v5	回る	verb	돌다	L			+	activity	go				ga=@person|@thing		y	五段-ラ行	11
 増える	ふえる	v1	増える	verb	늘다	L			-	change	past				ga=@thing		y	下一段-ア行	1
 増やす	ふやす	v5	増やす	verb	늘리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
 壊す	こわす	v5	壊す	verb	부수다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	3
@@ -576,7 +576,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 広がる	ひろがる	v5	広がる	verb	퍼지다	REG			-	change	eo				ga=@thing		y	五段-ラ行	4
 広げる	ひろげる	v1	広げる	verb	펼치다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ガ行	3
 引っ越す	ひっこす	v5	引っ越す	verb	이사하다	HA			+	change	past				ga=@person ni=@place	に=으로	y	五段-サ行	1
-当たる	あたる	v5	当たる	verb	맞다	REG			-	change	past				ga=@thing ni=@thing		y	五段-ラ行	4
+当たる	あたる	v5	当たる	verb	맞다	REG			-	change	past				ga=@thing ni=@thing		y	五段-ラ行	14
 悩む	なやむ	v5	悩む	verb	고민하다	HA			-	activity	go				ga=@person		y	五段-マ行	1
 感ずる	かんずる	v1	感じる	verb	느끼다	REG			-	activity	go				ga=@person o=@emotion		y	上一段-ザ行	1
 慌てる	あわてる	v1	慌てる	verb	당황하다	HA			-	change	go				ga=@person		y	下一段-タ行	2
@@ -646,7 +646,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 追い掛ける	おいかける	v1	追いかける	verb	쫓아가다	REG			+	activity	go				ga=@person o=@person		y	下一段-カ行	2
 逃げる	にげる	v1	逃げる	verb	도망치다	REG			+	activity	go				ga=@person|@animal		y	下一段-ガ行	1
 連れる	つれる	v1	連れる	verb	데리다	REG			+	activity	go				ga=@person o=@person|@animal		n	下一段-ラ行	1
-進む	すすむ	v5	進む	verb	나아가다	REG			+	activity	go				ga=@person ni=@place		y	五段-マ行	4
+進む	すすむ	v5	進む	verb	나아가다	REG			+	activity	go				ga=@person ni=@place		y	五段-マ行	6
 過ぎる	すぎる	v1	過ぎる	verb	지나다	REG			-	change	past				ga=@time		y	上一段-ガ行	1
 過ごす	すごす	v5	過ごす	verb	보내다	REG			+	activity	go				ga=@person o=@time		y	五段-サ行	2
 配る	くばる	v5	配る	verb	나눠주다	REG			+	activity	go				ga=@person ni=@person o=@document		y	五段-ラ行	1
