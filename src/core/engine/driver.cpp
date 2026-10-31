@@ -845,6 +845,20 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     const tokenizer::SpaceJoins joins = [&](std::string_view head, std::string_view after, tokenizer::SpaceWord word) {
         using tokenizer::SpaceWord;
         if (word == SpaceWord::Ending) return dict::InClass(HDTRANS_CLASS("particle.after-space"), after);
+        if (word == SpaceWord::Compound) {
+            // The kanji before the space is no word of its own (a pronoun, an adverb, a row read not
+            // as a bare noun: 私 学校, 今 風が), and the piece after it starts with no verb (先 行って).
+            for (const dict::Candidate& c : snap.GetWordInfo(head, dict::LookupMode::General, lookup).list) {
+                if (c.source == head && c.codes != nullptr &&
+                    (ClassOf(c) == '3' || (ClassOf(c) == '1' && c.codes->part.Sub() == '2') || c.codes->gram.HasCode("Nn"))) {
+                    return false;
+                }
+            }
+            const std::string_view first = after.substr(0, text::DecodeRune(after).size);
+            for (const dict::Candidate& c : snap.GetWordInfo(after, dict::LookupMode::General, lookup).list) {
+                if (c.source == first && ClassOf(c) == '4') return false;
+            }
+        }
         if (word == SpaceWord::Filler) {
             if (dict::InClass(HDTRANS_CLASS("word.pause-filler"), head)) return true;
             const dict::Candidates found = snap.GetWordInfo(head, dict::LookupMode::General, lookup);
@@ -903,7 +917,28 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                     const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
                     spelled = !(next >= U'ぁ' && next <= U'ゖ') || std::u32string_view(U"がをはもでとへのにやかだじ").find(next) != std::u32string_view::npos;
                 }
-                const bool fits = word == SpaceWord::Any || spelled || (word == SpaceWord::Binding && (name || bound)) || phrase;
+                bool compound = false;
+                if (word == SpaceWord::Compound && start == 0 && ClassOf(c) == '1') {
+                    // A word of kanji read in Sino-Korean, each kanji by its own syllable (紅白 홍백, 人間 인간).
+                    std::string_view key = c.source;
+                    std::string sino;
+                    bool kanji = true;
+                    while (!key.empty() && kanji) {
+                        const text::Rune r = text::DecodeRune(key);
+                        const auto written = dict::Written(r.cp);
+                        kanji = text::IsKanji(r.cp) && written.has_value();
+                        if (kanji) text::AppendRune(sino, *written);
+                        key.remove_prefix(r.size);
+                    }
+                    kanji = kanji && c.target == sino && !after.starts_with(head);
+                    const std::string_view rest = std::string_view(query).substr(c.source.size());
+                    const char32_t next = rest.empty() ? 0 : text::DecodeRune(rest).cp;
+                    const bool japanese = text::IsKanji(next) || (next >= U'ぁ' && next <= U'ヿ');
+                    compound = kanji && (!japanese || rest.starts_with("って") ||
+                                         std::u32string_view(U"がをはもでとへのにやかだ").find(next) != std::u32string_view::npos);
+                }
+                const bool fits = word == SpaceWord::Any || spelled || compound ||
+                                  (word == SpaceWord::Binding && (name || bound)) || phrase;
                 if (fits) return true;
             }
             start += std::max<std::size_t>(1, text::DecodeRune(left).size);
