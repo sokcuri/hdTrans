@@ -27,3 +27,7 @@ mod.daro.confirm	N5-46	[aux.da.daro] [aux.punct.q]	-	pred.eomi=ji;pred.mood=q	Pu
 mod.desho.confirm	N5-46	[aux.desu.desho] [aux.punct.q]	-	pred.eomi=ji;pred.mood=q	Punct:q	m	own	行くでしょう？ → 가죠?
 mod.daro.confirm.n	N5-46	{N} [aux.da.daro] [aux.punct.q]	-	-	V:이다{glue,eomi=ji,mood=q} Punct:q	m	own	学生だろ？ → 학생이지?
 mod.daro.wh.q	N5-54	{N:@question} [aux.da.daro] [aux.punct.q]	-	-	V:이다{glue,eomi=lkka,mood=q} Punct:q	m	own	何だろう？ → 뭘까?
+mod.daro.ka	N5-46	[aux.da.daro] [aux.f.ka]	-	pred.eomi=lkka;pred.mood=q	-	m	own	降るだろうか → 내릴까
+mod.daro.ka.n	N5-46	{N} [aux.da.daro] [aux.f.ka]	-	-	V:이다{glue,eomi=lkka,mood=q}	m	own	喧嘩だろうか → 싸움일까
+mod.noda.hold	N5-57	[role=nomi] [aux.f.ka]	-	line.route=fallback	-	m	own	のか (explanatory, N4): held for 0.7.x
+mod.noda.cop.hold	N5-57	[role=nomi] [role=cop]	-	line.route=fallback	-	m	own	のだ (explanatory, N4): held for 0.7.x

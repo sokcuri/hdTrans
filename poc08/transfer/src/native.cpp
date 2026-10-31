@@ -617,6 +617,7 @@ struct Ctx {
         if (i < 0 || i >= static_cast<int>(tk.size())) return "";
         const Tk& k = tk[static_cast<size_t>(i)];
         if (key == "lemma") return k.lemma;
+        if (key == "ispred") return PredTok(k.clause) == i ? "+" : "";
         if (key == "pos") return k.pos;
         if (key == "form") return k.form;
         if (key == "surf") return k.surf;
@@ -813,6 +814,17 @@ struct Ctx {
         for (const Sense& s : e.senses)
             if (!first || s.sense < first->sense) first = &s;
         return first;
+    }
+
+    // The unit is followed by a copula (だ, な, です, で, じゃ, だろう) or by で + は.
+    bool Copular(size_t i) const {
+        if (i + 1 >= tk.size()) return false;
+        const Tk& nx = tk[i + 1];
+        auto has = [&](const Tk& t, const char* f) {
+            return std::find(t.aux->facts.begin(), t.aux->facts.end(), f) != t.aux->facts.end();
+        };
+        return has(nx, "role=cop") || has(nx, "role=cop-ja") || has(nx, "role=cop-te") || has(nx, "role=cop-ni") ||
+               has(nx, "role=daro") || (has(nx, "kase=de") && i + 2 < tk.size() && has(tk[i + 2], "kase=wa"));
     }
 
     int PredTok(int c) const {
@@ -1236,7 +1248,7 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
         k.sense = x.Choose(i, k.senseWhy);
         // a noun whose chosen sense is a predicate (便利 → 편리하다 by form=cop) is read as a な-adjective
         if (k.sense && IsNounPos(k.epos) && !d.predicateEnd.empty() && k.sense->ko.ends_with(d.predicateEnd) &&
-            k.senseWhy.find("form=") != std::string::npos)
+            (k.senseWhy.find("form=") != std::string::npos || x.Copular(i)))
             k.epos = Pos::na;
     }
 
@@ -1366,6 +1378,9 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
     }
     for (size_t i = 0; i < n; i++) {
         const Tk& k = x.tk[i];
+        // a 一段 form of a 五段 lemma is its potential (なれる of 成る): voice is N4, so the line stays with 0.7.x
+        if (k.content && owner[i] < 0 && k.entry && k.entry->pos == "v5" && k.t->pos == Pos::v1)
+            line.unmatched.push_back(doc.I(k.surf + "/potential"));
         if (!k.content || owner[i] >= 0 || formRead[i]) continue;
         static const std::set<std::string> always{"meirei", "ishi", "katei-fused", "izen"};
         static const std::set<std::string> stem{"renyo", "mizen", "gokan", "katei"};

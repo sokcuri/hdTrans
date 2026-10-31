@@ -36,7 +36,7 @@ pred.naru.n	fix	私は先生になる。	나는 선생님이 된다.	inv
 pred.naru.n	keep	私は友達に話す。	나는 친구에게 이야기한다.	inv
 pred.nominal	fix	本を読むのが好きだ。	책을 읽는 것을 좋아한다.	inv
 pred.nominal	keep	本が好きだ。	책을 좋아한다.	inv
-pred.adn	keep	「何だ、ここ……」	「뭐야, 여기……」	inv
+pred.adn	keep	「本だ、ここ……」	「책이야, 여기……」	inv
 pred.na.ja.aru	fix	「部屋は静かじゃありません。」	「방은 안 조용해요.」	inv
 pred.na.ja.aru	keep	「部屋は静かです。」	「방은 조용해요.」	inv
 pred.na.dewa.aru	fix	「部屋は静かではありません。」	「방은 안 조용해요.」	inv
@@ -47,3 +47,7 @@ pred.cop.q	fix	「学生？」	「학생이야?」	inv
 pred.cop.q	keep	「学生だ。」	「학생이야.」	inv
 pred.na.q	fix	「車は便利？」	「차는 편리해?」	inv
 pred.na.q	keep	「車は便利だ。」	「차는 편리해.」	inv
+pred.cop.q.wh	fix	「何？」	「뭐?」	inv
+pred.cop.q.wh	keep	「学生？」	「학생이야?」	inv
+pred.cop.wh.hold	fix	「何だ、これ？」	-	inv
+pred.cop.wh.hold	keep	「これは本だ。」	「이건 책이야.」	inv
