@@ -1,4 +1,4 @@
-# 규칙: MNG-3, GRM-8
+# 규칙: MNG-3, MNG-6, GRM-8
 rule	input	expected	kind	layer
 cx:omou-na:10	お前ごときが私に勝てると思うな	has:생각하지 마	fix	rewrites
 cx:omou-na:10	貴様ごときが私に勝てると思うな！	has:생각하지 마	fix	rewrites
@@ -94,3 +94,12 @@ normalize:prohibition-janai	泣かしてんじゃねえよ！	has:울리지 마	
 normalize:prohibition-janai	さあ　泣くんじゃないよ	has:울지 마	fix	normalize
 normalize:prohibition-janai	そういう一般論を言ってるんじゃない	lacks:지 마	keep	normalize
 normalize:prohibition-janai	怒ってんじゃねえよ、心配してんだ	lacks:지 마	keep	normalize
+normalize:prohibition-janai	砲撃戦も気を抜くんじゃないぞ！	has:방심하지 마!	fix	normalize
+normalize:prohibition-janai	夜戦突入だ！ビビってんじゃねぇぞ！	has:위축되지 마!	fix	normalize
+normalize:prohibition-janai	「おい、ガキが、なめた口をきいているんじゃないわよ」	has:하지 마	fix	normalize
+normalize:prohibition-janai	テメェ笑ってんじゃねぇーーーー！！	has:웃지 마!!	fix	normalize
+normalize:prohibition-janai	「俺のやり方に口出しするんじゃねえッッッ！！」	has:말참견하지 마!!	fix	normalize
+normalize:prohibition-janai	「不満そうにするんじゃない。ニンジャの仕事でしょうが」	has:하지 마	fix	normalize
+normalize:prohibition-janai	「そういうこと言ってるんじゃないわよっ！」	lacks:지 마	keep	normalize
+normalize:prohibition-janai	「なによー、結局あんたも興味あるんじゃない」	lacks:지 마	keep	normalize
+normalize:prohibition-janai	こっちは遊びでやってるんじゃないんだから。	lacks:지 마	keep	normalize

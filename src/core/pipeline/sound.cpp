@@ -2968,6 +2968,23 @@ bool AnyKind(int, const dict::Codes*) { return true; }
 bool IchidanKind(int kind, const dict::Codes*) { return kind == kIchidan; }
 bool RaGodanKind(int kind, const dict::Codes*) { return kind == kRaGodan; }
 bool IchidanOrKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuruKanji; }
+// Whether rest is か, then drawn or clipped kana (kana.drawn-out, mark.clip), then an exclamation
+// mark (か！, かッ!!, かぁ！).
+bool ReproachKa(std::string_view rest) {
+    if (!rest.starts_with("か")) return false;
+    rest.remove_prefix(std::string_view("か").size());
+    for (;;) {
+        const std::size_t size = text::DecodeRune(rest).size;
+        if (size == 0) return false;
+        const std::string_view rune = rest.substr(0, size);
+        if (rune == "！" || rune == "!") return true;
+        if (!dict::InClass(HDTRANS_CLASS("kana.drawn-out"), rune) && !dict::InClass(HDTRANS_CLASS("mark.clip"), rune)) {
+            return false;
+        }
+        rest.remove_prefix(size);
+    }
+}
+
 // The verbs whose dictionary form a ん before な says: not a godan verb in る, whose ん before な is as
 // often the imperative り (頑張んなよ 頑張りなよ).
 bool ProhibitedKind(int kind, const dict::Codes*) { return kind == kIchidan || kind == kSuru || kind == kKuru || kind == kKuruKanji; }
@@ -3118,8 +3135,9 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             const bool godanNegative = !nai && VerbFormIs(stem, kNegativeStem, Godan, ctx, snap);
             if (!tsu && (VerbFormIs(stem, kDictionaryForm, AnyKind, ctx, snap) || godanNegative)) {
                 // The question of an old speaker and the reproach before ！ keep their ん for the end
-                // rows of んか (始まらんかのう, 黙らんか！).
-                const bool endRow = rest.starts_with("かの") || rest.starts_with("か！") || rest.starts_with("か!");
+                // rows of んか (始まらんかのう, 黙らんか！), also with a drawn or clipped kana before the
+                // mark (吐かんかッ!!, 持ってこんかぁ！).
+                const bool endRow = rest.starts_with("かの") || ReproachKa(rest);
                 if (godanNegative && kanji && !inWord && says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") &&
                     !rest.starts_with("かて") && !endRow) {
                     kana = kNai;

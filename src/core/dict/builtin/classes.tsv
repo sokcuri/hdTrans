@@ -9,6 +9,13 @@
 //= adverb.habitual	Words of frequency before a past verb with ものだ, which make it what one used to do (昔は遊んだものだ 옛날에는 놀곤 했다).
 //= adverb.habit	Adverbs of habit and frequency: a ますか question with one of them asks what someone usually does, not an offer (毎日勉強しますか 매일 공부합니까).
 //= adverb.negative-polarity	Adverbs that need a negative after them (二度と, 決して, 到底): with an affirmative verb in a quotation before a sentence-final 思うな the な is the negative, a prohibition (二度と会えると思うな 두 번 다시 만날 수 있다고 생각하지 마).
+//= adverb.fact-question	Adverbs before a sentence-final negative question that ask whether something is so, not for an act (まだ来ない？ 아직 오지 않아?, 全然食べないの？): no invitation (spec MNG-7).
+//= adverb.realization	Adverbs of a thing found to be so as one thought (やっぱり, 結局, 案の定): a sentence-final んじゃない after one that asks nothing affirms it, 〜잖아 (やっぱりあんたがやったんじゃない！ 역시 네가 한 거잖아!), and forbids nothing (spec MNG-9).
+//= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
+//= word.someone	The indefinite pronoun of a person (誰か); 何か is as often an object (何か飲みませんか): one before a negative question in its sentence is its subject, so the question asks whether it happens and invites no one (誰か来ませんか？ 누군가 오지 않습니까?; spec MNG-7, MNG-8).
+//= noun.sensed	Nouns of what one senses or feels, before which する is 나다 or 들다, not an act (変な音しない？ 이상한 소리 나지 않아?, 匂いしませんか): no invitation (spec MNG-7).
+//= noun.felt-ga	Starts of a word or phrase of a feeling in が (気が, 小腹が, お腹が), whose negative question asks how one feels: no invitation (気がしないか？ 그런 생각이 들지 않아?; spec MNG-7).
+//= word.invite-not	Stems of predicates of a feeling or a happening that no one invites to (気にしない？ 신경 쓰이지 않아?, 生まれない？): a negative question after one asks, it invites to nothing (spec MNG-7).
 //= adverb.observation	Adverbs of frequency, degree and judgement before which a present verb with ね is what the speaker sees, not a promise (よく食べるね 잘 먹네, なかなかやるね).
 //= aru.after-de	The forms of ある after the で of である (であり, である, であった, であれば, であろう).
 //= aux.morau	The spellings of the stem of もらう that follow a て form as the benefactive (見せてもらう, 見せて貰う).
@@ -69,6 +76,8 @@
 //= follower.polite-masu	Starts of the polite ます that only a verb form takes, before which a longer word that spells the continuative or the potential stem of a verb is that verb (喜びます, 急ぎます, 頑張れます).
 //= follower.contracted-iru	What follows the ん of a contracted いる after a particle (にいんの, でいんだ).
 //= follower.contracted-teru	What follows the ん of a contracted ている (てんじゃ, てんだろ).
+//= follower.prohibition-janai	Sentence particles after the んじゃない or んじゃねえ of a rebuke (泣くんじゃないよ, 気を抜くんじゃないぞ, なめた口をきいているんじゃないわよ): the prohibition 지 마 (spec MNG-6).
+//= follower.prohibition-janai-teru	The particles of follower.prohibition-janai after which the てるんじゃない of a て form forbids too, not only before ！ (ビビってんじゃねぇぞ, きいているんじゃないわよ; spec MNG-6).
 //= follower.ita	What follows いた as an adjective ending (見ていたい) or as 致す and 頂く (でいたします, ていただく).
 //= follower.count	What follows a count of things to say how they are shared or measured: ずつ, 分 and the times sign (二面ずつ 두 면씩, 四面分 네 면분, 四面×四面 네 면×네 면).
 //= follower.kata-adjective	The particles and predicates after which a katakana spelling of an adjective reads as the word (ウルサイって, スゴイじゃ).
@@ -259,6 +268,7 @@
 //= pronoun.rough-second-person	Second-person pronouns of rough or scornful speech, alone and plural (お前, 貴様, てめえ, あんた): the subject of a quotation before a sentence-final 思うな, which then forbids (お前が勝てると思うな 네가 이길 수 있다고 생각하지 마).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
 //= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
+//= pronoun.third-person	Pronouns of a person who is neither the speaker nor the listener (彼, 彼女, あいつ, 奴): a sentence that starts with one and a comma asks about that person (彼、来ない？ 그, 오지 않아?), no invitation (spec MNG-7).
 //= pronoun.listener	Second-person pronouns, alone and plural, by which the speaker names the listener (あなた, 君, お前, 貴公ら, そなた): a recipient in に of one of them is the one spoken to.
 //= pronoun.topic-wa	The pronouns and words after which わ is the topic は spelled as it sounds (こっちわ, お前わ).
 //= question.copula	Question words before a copula だ that ends a quote or stands before 、 (何だ, 誰だ).
@@ -310,6 +320,11 @@
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
+//= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
+//= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
+//= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
+//= verb.janai-saying	て forms of verbs of saying (言っ, 話し) whose てるんじゃない after word.janai-correction corrects what was said and forbids nothing (そういうこと言ってるんじゃないわよ 그런 걸 말하는 게 아니야; spec MNG-6).
+//= word.janai-correction	Words that point at what was said (そういう, そんな), before a verb of verb.janai-saying in てるんじゃない (spec MNG-6).
 //= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
 //= verb.condition	Stems of verbs of a state that befalls someone (疲れる, 困る, 驚く), whose て form before ちょっと explains and asks for nothing.
 //= verb.cp-experience	Verbs and verbal nouns whose causative-passive is something one goes through, not an act one is made to do (待たされる 기다리게 되다, 驚かされる, 考えさせられる, 心配させられる); dictionary forms for the analysed verbs, the surfaces of dictionary rows in される.
@@ -1206,6 +1221,11 @@ follower.contracted-iru	じゃ
 
 follower.contracted-teru	じゃ
 follower.contracted-teru	だろ
+follower.prohibition-janai	よ
+follower.prohibition-janai	ぞ
+follower.prohibition-janai	わよ
+follower.prohibition-janai-teru	ぞ
+follower.prohibition-janai-teru	わよ
 
 follower.ita	い
 follower.ita	か
@@ -3872,6 +3892,20 @@ pronoun.speaker	俺ら
 pronoun.speaker	我々
 pronoun.speaker	うちら
 pronoun.speaker	ウチら
+pronoun.third-person	彼
+pronoun.third-person	彼女
+pronoun.third-person	彼ら
+pronoun.third-person	彼女ら
+pronoun.third-person	あいつ
+pronoun.third-person	こいつ
+pronoun.third-person	そいつ
+pronoun.third-person	あいつら
+pronoun.third-person	こいつら
+pronoun.third-person	そいつら
+pronoun.third-person	奴
+pronoun.third-person	やつ
+pronoun.third-person	奴ら
+pronoun.third-person	やつら
 
 pronoun.topic-wa	こっち
 pronoun.topic-wa	そっち
@@ -4858,6 +4892,67 @@ verb.observed-state	あり得
 verb.observed-state	間に合
 verb.observed-state	でき
 verb.observed-state	出来
+verb.unwilled	ある
+verb.unwilled	有る
+verb.unwilled	在る
+verb.unwilled	いる
+verb.unwilled	居る
+verb.unwilled	おる
+verb.unwilled	知る
+verb.unwilled	分かる
+verb.unwilled	わかる
+verb.unwilled	判る
+verb.unwilled	解る
+verb.unwilled	見える
+verb.unwilled	聞こえる
+verb.unwilled	思う
+verb.unwilled	想う
+verb.unwilled	できる
+verb.unwilled	出来る
+verb.unwilled	違う
+verb.unwilled	似る
+verb.unwilled	足りる
+verb.unwilled	要る
+verb.unwilled	気づく
+verb.unwilled	気付く
+verb.unwilled	終わる
+verb.unwilled	終る
+verb.unwilled	降る
+verb.unwilled	開く
+verb.unwilled	見つかる
+verb.unwilled	壊れる
+verb.unwilled	割れる
+verb.unwilled	鳴る
+verb.unwilled	届く
+verb.unwilled	消える
+verb.unwilled	治る
+verb.unwilled	起こる
+verb.unwilled	間に合う
+verb.unwilled	困る
+verb.unwilled	疲れる
+verb.unwilled	晴れる
+verb.unwilled	曇る
+verb.unwilled	光る
+verb.janai-state	あ
+verb.janai-state	有
+verb.janai-state	在
+verb.janai-state	い
+verb.janai-state	居
+verb.janai-quote	って言
+verb.janai-quote	ってい
+verb.janai-quote	とい
+verb.janai-saying	言っ
+verb.janai-saying	いっ
+verb.janai-saying	話し
+verb.janai-saying	はなし
+verb.janai-saying	喋っ
+verb.janai-saying	しゃべっ
+word.janai-correction	そういう
+word.janai-correction	そんな
+word.janai-correction	こういう
+word.janai-correction	こんな
+word.janai-correction	ああいう
+word.janai-correction	あんな
 verb.causative-passive	気づかされ
 verb.causative-passive	あやまらされ
 verb.causative-passive	受けもたされ
@@ -7261,6 +7356,74 @@ adverb.negative-polarity	少しも
 adverb.negative-polarity	ちっとも
 adverb.negative-polarity	微塵も
 adverb.negative-polarity	毛頭
+adverb.fact-question	まだ
+adverb.fact-question	未だ
+adverb.fact-question	もう
+adverb.fact-question	全然
+adverb.fact-question	ぜんぜん
+adverb.fact-question	全く
+adverb.fact-question	まったく
+adverb.fact-question	あまり
+adverb.fact-question	あんまり
+adverb.fact-question	いつも
+adverb.fact-question	普段
+adverb.fact-question	最近
+adverb.fact-question	ずっと
+adverb.fact-question	本当に
+adverb.fact-question	ほんとに
+adverb.fact-question	ほんとうに
+adverb.fact-question	普通
+adverb.fact-question	ふつう
+adverb.fact-question	たまに
+adverb.fact-question	よく
+adverb.realization	やっぱり
+adverb.realization	やっぱ
+adverb.realization	やはり
+adverb.realization	結局
+adverb.realization	けっきょく
+adverb.realization	案の定
+word.scold	こら
+word.scold	コラ
+word.scold	こらこら
+word.scold	コラコラ
+word.scold	こらっ
+word.scold	コラッ
+word.someone	誰か
+word.someone	だれか
+word.someone	誰かさん
+noun.sensed	音
+noun.sensed	物音
+noun.sensed	足音
+noun.sensed	匂い
+noun.sensed	におい
+noun.sensed	臭い
+noun.sensed	味
+noun.sensed	声
+noun.sensed	気配
+noun.sensed	感じ
+noun.sensed	予感
+noun.sensed	気
+noun.sensed	寒気
+noun.sensed	吐き気
+noun.sensed	めまい
+noun.sensed	目眩
+noun.sensed	頭痛
+noun.sensed	胸騒ぎ
+noun.sensed	音色
+noun.felt-ga	気が
+noun.felt-ga	小腹が
+noun.felt-ga	お腹が
+noun.felt-ga	おなかが
+noun.felt-ga	腹が
+noun.felt-ga	喉が
+noun.felt-ga	のどが
+noun.felt-ga	頭が
+noun.felt-ga	胸が
+word.invite-not	気に
+word.invite-not	生まれ
+word.invite-not	存在
+word.invite-not	死な
+word.invite-not	浮上
 ko-verb.person-object	이기다
 ko-verb.person-object	만나다
 ko-verb.person-object	따라잡다
