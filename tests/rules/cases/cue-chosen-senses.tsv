@@ -1,0 +1,80 @@
+# 규칙: LEX-3473
+rule	input	expected	kind	layer
+pack:cue-chosen-senses:1	頬を伝う涙がポタポタと、ナインの体に落ちる。	rule:pack:cue-chosen-senses:1=타고 흐르다	fix	packs
+pack:cue-chosen-senses:1	嫌な汗が背筋を伝う。	has:등을 타고 흐른다	fix	packs
+pack:cue-chosen-senses:1	柚姫の額を、脂汗が伝う。	has:비지땀이 타고 흐른다	fix	packs
+pack:cue-chosen-senses:1	首をことりと動かした拍子に涙が頬を伝い、慌てて拭う。	has:뺨을 타고 흐르고	fix	packs
+pack:cue-chosen-senses:1	それは伝って指から滴り落ちるほどの出血量だ。	!rule:pack:cue-chosen-senses:1	keep	packs
+pack:cue-chosen-senses:2	口元からはこぼれた唾液が首を伝って床へと流れる。	has:목을 타 바닥으로 흐른다	keep	packs
+pack:cue-chosen-senses:3	口は笑っているが、目は笑っていない。	has:입은 웃고 있지만, 눈은 웃지 않았다	fix	packs
+pack:cue-chosen-senses:3	それなのに目は笑っていない。	rule:pack:cue-chosen-senses:3=웃다	fix	packs
+pack:cue-chosen-senses:3	――汝、顔が笑っておるぞ。	has:얼굴이 웃고	fix	packs
+pack:cue-chosen-senses:4	エレンは、悲しそうな顔で笑った。	has:얼굴로 웃었다	fix	packs
+pack:cue-chosen-senses:4	ゴブリンはこちらの全身を見た後、馬鹿にした顔で笑う。	rule:pack:cue-chosen-senses:4=웃다	fix	packs
+pack:cue-chosen-senses:3	膝が笑いそうになるのを必死に堪える。	has:무릎이 후들거릴	keep	packs
+pack:cue-chosen-senses:3	さすがの忍びでも、これでは足が笑って立てない。	!rule:pack:cue-chosen-senses:3	keep	packs
+pack:cue-chosen-senses:5	閃いた！	번뜩였어!	fix	packs
+pack:cue-chosen-senses:5	銀色の刃がギラギラと閃いていた。	has:칼날이 이글이글 번뜩이고	fix	packs
+pack:cue-chosen-senses:6	名案が閃いた。	rule:pack:cue-chosen-senses:6=떠오르다	fix	packs
+pack:cue-chosen-senses:6	その時、脳裏にある考えが閃いた。	has:생각이 떠올랐다	fix	packs
+pack:cue-chosen-senses:7	最低にみっともない起死回生の一策を閃いてしまう。	has:일책을 떠올려	fix	packs
+pack:cue-chosen-senses:8	室内に閃いた白光の矢が、漆黒の鎧をまとった『詩子様』を貫いた。	!rule:pack:cue-chosen-senses:7	keep	packs
+pack:cue-chosen-senses:9	顎を狙うのは、俺の眼鏡を割らないように配慮してのことだ。	has:안경을 깨지 않도록	fix	packs
+pack:cue-chosen-senses:9	「なんてことだ……ガラスを割ってしまったか」	has:유리를 깨어버렸나	keep	packs
+pack:cue-chosen-senses:10	神殿内で薪を割るには、まず、錆びついた斧の手入れから始めなければならない。	has:장작을 패려면	fix	packs
+pack:cue-chosen-senses:9	「なかなか口を割りませんね。」	has:자백하지 않아요	keep	packs
+pack:cue-chosen-senses:11	俺はチャンスと想い機会を伺っていたんだ。	has:기회를 엿봐	fix	packs
+pack:cue-chosen-senses:12	ちらちらとユクシーの動きを伺いながら、耳打ちする。	has:움직임을 살피면서	fix	packs
+pack:cue-chosen-senses:12	横目で表情を伺えば、暗い顔で脂汗を流している。	has:표정을 살피면	fix	packs
+pack:cue-chosen-senses:12	わたしの顔色を伺ったサクラに、小さく首を振って答えた。	has:눈치를 본	keep	packs
+pack:cue-chosen-senses:13	飯を食い終わった俺たちに、ユナは冷やしたハーブティーを振る舞った。	has:허브티를 대접했다	fix	packs
+pack:cue-chosen-senses:13	仕事では無く誰かに料理を振る舞うのはいつぶりだろう…	has:요리를 대접하는	fix	packs
+pack:cue-chosen-senses:13	王女らしく振る舞うのがバカらしくなっちゃった。	has:왕녀답게 행동하는	keep	packs
+pack:cue-chosen-senses:14	カラフルな上着とズボンに、頭には三角帽を被っている。	has:삼각모를 쓰고 있다	fix	packs
+pack:cue-chosen-senses:15	するすると荷台へ登って毛布を頭から被り横になった。	has:담요를 머리에서 뒤집어써	fix	packs
+pack:cue-chosen-senses:14	溜息をついて、王子の仮面を被り部屋を出た。	has:가면을 써	keep	packs
+pack:cue-chosen-senses:16	エプロンを身につけた俺を見たローコルが、ほほほと破顔した。	has:에이프런을 몸에 걸친	fix	packs
+pack:cue-chosen-senses:17	そいつは所々破損した金色の鎧を身に付け、	has:갑옷을 몸에 걸쳐	fix	packs
+pack:cue-chosen-senses:16	「一般教養を身につけるため、とかいって家庭教師と二人きりかな」	has:교양을 익히기	keep	packs
+pack:cue-chosen-senses:18	気迫の声を上げて必死に拳を繰り出す由里香。	has:주먹을 날리는	fix	packs
+pack:cue-chosen-senses:18	鋼にすら切り傷を刻みこんでいくほどの斬撃を繰り出す狂人。	has:참격을 날리는	fix	packs
+pack:cue-chosen-senses:19	さっそく忍さんが先制攻撃を繰り出します。	has:선제공격을 펼칩니다	fix	packs
+pack:cue-chosen-senses:20	カレンのバイトも終わり、ボク達は町に繰り出した。	has:마을에 나섰다	fix	packs
+pack:cue-chosen-senses:22	裁判が母親の優勢に傾いてくると、示談での口論はさらに熾烈を極めた。	has:치열을 극했다	fix	packs
+pack:cue-chosen-senses:22	テロの発生した直後の時点では、全く状況を把握できず、混乱を極めた。	has:혼란을 극했다	fix	packs
+pack:cue-chosen-senses:22	俺もいつかは、観客を魅了する演奏家として音楽を極めたいものである。	!rule:pack:cue-chosen-senses:22	keep	packs
+pack:cue-chosen-senses:23	葛巻は美咲の背中を壁に押し付け、	has:등을 벽에 눌러	fix	packs
+pack:cue-chosen-senses:23	だけどそれを許さず、フェンスに押し付けるようにして捕獲した。	has:펜스에 누르듯이	fix	packs
+pack:cue-chosen-senses:23	宰相さんの部下に押し付けてるんだろうな。	has:부하에게 강요하	keep	packs
+pack:cue-chosen-senses:24	左居が口元に笑みを浮かべ、目に鋭い光を宿す。	has:날카로운 빛을 품는다	fix	packs
+pack:cue-chosen-senses:24	冷然な光を宿す瞳は、深海の底を思わせる蒼穹。	rule:pack:cue-chosen-senses:24=품다	fix	packs
+pack:cue-chosen-senses:24	「子を宿した時に生え変わります」	!rule:pack:cue-chosen-senses:24	keep	packs
+pack:cue-chosen-senses:25	その万感の想いが籠った一撃は黒騎士の妄執を打ち砕くよう。	has:마음이 담긴 일격	fix	packs
+pack:cue-chosen-senses:26	不意を突かれた彼の声色からは、感情がこもっていた。	has:감정이 담겨	fix	packs
+pack:cue-chosen-senses:28	眉間に力が籠っている訳ではない。	has:힘이 들어가	fix	packs
+pack:cue-chosen-senses:28	先輩の腕に思いっきり力がこもった。	has:힘이 들어갔다	fix	packs
+pack:cue-chosen-senses:29	殺意の籠った手紙を送る者もいた。	has:살의가 담긴 편지	fix	packs
+pack:cue-chosen-senses:30	そして、いきなり憎悪の篭った目で僕らを睨みつけて言った。	has:증오가 담긴 눈	fix	packs
+pack:cue-chosen-senses:31	湿気の籠った部屋。	has:습기가 가득찬 방	keep	packs
+pack:cue-chosen-senses:33	しゃもじが怒りのこもった声で呪詛のごとく繰り返した。	has:분노가 담긴 목소리	fix	packs
+pack:cue-chosen-senses:33	振り返りもせず、低く殺意のこもった声で発せられたその一言が、	has:살의가 담긴 목소리	fix	packs
+pack:cue-chosen-senses:34	それらは万遍なく降りかかり、舞い上がった煙が視界を曇らせる。	has:날아오른 연기	fix	packs
+pack:cue-chosen-senses:35	老騎士が上空に舞い上がり、千の刃を放つ。	has:상공에 날아올라	fix	packs
+pack:cue-chosen-senses:36	グェー、夜空へ舞い上がるシルフィ。	has:밤하늘에 날아오르는	fix	packs
+pack:cue-chosen-senses:34	タケルの言葉に、すっかり舞い上がってしまうプリムラ。	has:들떠버리는	keep	packs
+pack:cue-chosen-senses:37	ロマーナは二十の特区から成る。	has:특구로부터 이루어진다	fix	packs
+pack:cue-chosen-senses:37	フソウ国は３つの島から成っているので、多くの貨物は船で運ばれている。	has:섬에서 이루어져	fix	packs
+pack:cue-chosen-senses:39	今はどちらも決まりがない。	has:규칙이 없다	fix	packs
+pack:cue-chosen-senses:39	すると人々は恩恵にのみ与り、この町の決まりを守るのだ。	has:규칙을 지킨다	fix	packs
+pack:cue-chosen-senses:40	現在エルフと人間は仲が悪く、お互いに領土に入ってはいけないという決まりがある。	has:규칙이 있다	fix	packs
+pack:cue-chosen-senses:39	今日のオカズはこれで決まりだ。	has:이것으로 결정이다	keep	packs
+pack:cue-chosen-senses:39	こちらも決まりが悪そうにヘスティアも頷いた。	has:민망한 듯이	keep	packs
+pack:cue-chosen-senses:41	お許しが出た。	허락이 나왔다.	fix	packs
+pack:cue-chosen-senses:41	黙々と勉強をやり終え、なんとかユダのお許しも得たので	has:허락도 얻었으므로	fix	packs
+pack:cue-chosen-senses:41	「お、お許しください！」	has:용서해 주세요	keep	packs
+pack:cue-chosen-senses:42	人の姿ばかり写真に収め続けている。	has:사진에 계속 담아내고	fix	packs
+pack:cue-chosen-senses:42	今の佐紀の様子を写真に収め、二時間くらい観察していたい。	rule:pack:cue-chosen-senses:42=담아내다	fix	packs
+pack:cue-chosen-senses:42	それを視界に収めた瞬間、アキラの身体が勝手に動く。	has:시야에 넣은 순간	keep	packs
+pack:cue-chosen-senses:43	再びスパイ狩りの嵐が吹き荒れたとき、そこには必ず、その名前が現れたのだった。	has:폭풍우가 휘몰아쳤을 때	fix	packs
+pack:cue-chosen-senses:43	爆炎と灼熱の風が吹き荒れた後、そこには焼け焦げた大地以外何も残っていなかった。	has:바람이 휘몰아친 후	fix	packs
+pack:cue-chosen-senses:43	身なりの荒れた男が立っていた。	!rule:pack:cue-chosen-senses:43	keep	packs
