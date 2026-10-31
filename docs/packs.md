@@ -43,7 +43,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 | `voice` | `passive`, `potential`, `respectful`, `spontaneous`, `active`, 또는 `읽기:한국어 동사`(`passive:세워지다`) | (ら)れ가 있는 동사의 태 읽기를 정함(`voice` 층 안에서, 신호가 정한 읽기를 바꿈). `passive` `potential` `respectful` `spontaneous`는 뒤 처리(수동 낱말, 행위자 `에게`, 후보 남기기)가 그 읽기를 따름. `active`와 `:한국어 동사`는 그 처리를 건너뛰고 동사만 씀: `active`는 바탕 동사를 능동으로(読まれた 읽었다), `:한국어 동사`는 그 동사를 활용해 씀(止められた駐車場 세워진 주차장, 어지다를 더하지 않음, 뒤 층이 바꾸지 못함; `respectful:오다`는 -시-를 붙여 오셨다). 조사는 0.7.x가 읽은 그대로이고, 바꾸려면 `agent` 열에 조사를 씀(上司から聞かれた, `passive:질문을 받다`, agent `에게서`) |
 | `polarity` | 어미 텍스트: 형태 코드 + 한국어(`1잖아`, `1안 가?`) | 고른 어미의 번역을 바꾸고 바로 뒤 부정 보조 항목을 비움. 그 항목이 `않다`가 아니라 `없다`, `못하다`로 읽혔으면(가능의 부정: 信じられないか) 바꾸지 않음 |
 | `tense` | 어미 텍스트(`5었다`) | 같음. 한 단어에 `polarity`가 먼저 맞으면 `tense`는 건너뜀 |
-| 모든 칸 | `-` | 그 칸을 0.7.x가 정한 그대로 둠. 덜 구체적인 행(`*` 행 등)을 막는 데 씀. `polarity`의 `-`는 그 단어의 `tense` 행도 막음 |
+| `voice`와 연어 행 밖의 모든 칸 | `-` | 그 칸을 0.7.x가 정한 그대로 둠. 덜 구체적인 행(`*` 행 등)을 막는 데 씀. `polarity`의 `-`는 그 단어의 `tense` 행도 막음 |
 
 형태 코드는 어미 행의 첫 글자(`0`–`9`, `A`, `B`)입니다([dictionary-codes.md](dictionary-codes.md)).
 
@@ -69,7 +69,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 | `voice` | `voice` `polarity` `tense` 행에서: 팩 전에 신호가 정한 읽기 `none` `passive` `potential` `respectful` `spontaneous`(`polarity` `tense` 행에서는 voice 층이 정한 읽기와 사전의 가능형; 이웃·형태 원자로 셈) |
 | `how` | 단어가 논항일 때 그 쓰임(`marked` `topic` `bare` `omitted` `relhead` …), 부착 정보가 있을 때만 |
 | `subj.how` `obj.how` … `arg.how` | 술어의 그 칸 논항의 쓰임(`obj.how=bare`: 迷惑かけた), 부착 정보가 있을 때만 |
-| `cl.자질`, `main.자질` | 단어의 절, 그 절이 걸리는 맨 위 절(주절)의 자질(`cl.tense=past`, `main.vol=+`, `main.force=imp`), 부착 정보가 있을 때만. 값은 제공자가 쓰는 이름(0.8 IR의 이름: force `decl` `q` `imp` `prohib` `prop` `excl` `request`, tense `nonpast` `past`, pol `pos` `neg`) |
+| `cl.자질`, `main.자질` | 단어의 절, 그 절이 걸리는 맨 위 절(주절)의 자질(`cl.tense=past`, `main.vol=+`, `main.force=imp`), 부착 정보가 있을 때만. 값은 제공자가 쓰는 이름(0.8 IR의 이름: force `decl` `q` `imp` `prohib` `prop` `excl` `request`, tense `nonpast` `past`, pol `pos` `neg`, link `te` `tara` `ba` `nara` `kara` `node` `noni` `adn` …) |
 | `domain` | 이 호스트에는 그런 자질이 없어 늘 맞지 않음 |
 
 ## 연어 행 (`colloc`)
@@ -79,7 +79,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 - `cond`는 일본어 패턴입니다. 원문에 적힌 대로 맞추고, 마지막 단어만 활용형도 맞습니다(`首を縦に振る`는 首を縦に振ってくれない에
   맞음). 빈칸이 없는 패턴은 `|`로 표기를 여럿 둘 수 있습니다(`別に良い|別にいい`).
 - 빈칸 `{X}` 또는 `{X:@부류}`는 명사 하나입니다. 뒤에 붙은 호칭(さん 様 ちゃん くん 君 殿 先生 先輩 氏)도 빈칸에 듭니다.
-  `@person`과 그 위 부류는 `pack-classes`의 단어 말고도 엔진의 사람 의미 코드와 이름 항목으로도 맞습니다. 빈칸의 단어가
+  (`さま`도) `@person`과 그 위 부류는 `pack-classes`의 단어 말고도 엔진의 사람 의미 코드와 이름 항목으로도 맞습니다. 빈칸의 단어가
   패턴의 다음 글자까지 품고 있으면(最後の의 の) 그 글자는 읽힌 것으로 치고, 그때 `{X}` 뒤 조사는 쓰지 않습니다(그 단어의 번역이
   이미 읽음). 패턴은 빈칸 뒤에 단어가 있어야 하고, 빈칸으로 시작하면 `{X}` 앞에 한국어를 둘 수 없습니다.
 - `target`은 덩어리 전체의 한국어이고, 빈칸이 있으면 `{X}` 자리에 빈칸 단어의 번역이 그대로 남습니다(`{X}을 원래대로 되돌리다`).
@@ -91,7 +91,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
   (元に의 元)은 맞지 않습니다.
 - 사용자 단어(`Fixed`)가 덩어리 안에 있으면 적용하지 않습니다(빈칸은 예외).
 - 해결: 왼쪽부터, 각 단어에서 시작해 맞고 쓸 수 있는 행 가운데 패턴이 가장 긴 행, 그다음 `pri`, 그다음 읽은 순서. 덩어리의 단어에는 다른
-  팩 행이 적용되지 않습니다.
+  `sense` `name` `polarity` `tense` 행과 `agent` 조사가 적용되지 않습니다(`voice` 행은 그보다 먼저 `voice` 층에서 돕니다).
 - 한계: 패턴의 마지막 단어가 부정형이면(劣らぬ) 어미의 부정과 겹칩니다. 패턴은 긍정 사전형으로 끝내고 부정은 어미에 맡깁니다.
 
 ### 부착 정보
@@ -155,15 +155,136 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 `tools/rule-cases.sh`의 기대값 `rule:pack:<id>=<값>`은 그 줄의 어떤 단어가 그 행으로 그 값을 받았는지 보고,
 `!rule:pack:<id>`는 그 행이 그 줄에서 아무것도 정하지 않았는지 봅니다.
 
+## 팩 쓰기 안내
+
+팩 행을 쓰는 사람을 위한 안내입니다. 칸별 예제의 행은 `tests/packs/guide/`의 행이거나(`polarity`는 실린 `dicts/pack-negation.tsv`의 행)
+`dicts`와 함께 실어 돌려 본 것이고, 오른쪽 열이 그때의 출력입니다(`ユイ` 행과 부착 원자 행은 형식만 보임).
+
+### 순서
+
+1. **단어를 본다.** `hdtrans -dicts dicts -each -why -in in.txt`의 `WHY` 줄 여섯째 열이 0.7.x 단어의 표면(사전 키)이고,
+   열째 열이 고른 후보, 마지막 열이 어미입니다. 행의 `lemma`와 `pos`는 이 키로 컴파일되어야 맞습니다(동사는 어간 키
+   `読`, 형용사는 い를 뗀 키 `高`). 한 단어로 묶인 구(`首を縦に振`, `元に`, `最後の`)도 여기서 보입니다.
+2. **행을 쓴다.** 칸 하나, 조건 하나. 넓은 기본값(`*`)보다 좁은 조건을 먼저 씁니다. 규칙 id(`spec`)와 출처(`prov`)를 적습니다.
+3. **사례를 쓴다.** 행마다 고쳐지는 줄(fix)과 그대로여야 하는 줄(keep)을 짧은 실제 발췌로 씁니다. 사례 파일은 팩 폴더
+   **밖**에 둡니다(폴더 안의 `.tsv`는 사전으로 읽힘).
+4. **돌린다.** 사례, 기존 규칙 사례(이월), 게이트 순서입니다([검사](#검사)).
+
+### 칸별 예제
+
+**sense** — 같은 부류의 그 번역 후보를 고르거나 고른 후보의 번역을 바꿉니다.
+
+| 행 (`slot lemma pos kind cond target`) | 입력 | 출력 |
+|---|---|---|
+| `sense 高い adj frame subj=@book 비싸다` | この本は高い。 | 이 책은 비싸다. |
+| (같은 행, 맞지 않음: 山은 `@book`이 아님) | 山が高い。 | 산이 높다. |
+| `sense 高い adj frame subj=@book form=adv -` | この本は高く売れた。 | (위 행도 맞지만 원자가 더 많은 `-` 행이 이겨 0.7.x 그대로) |
+
+**name** — 이름의 표기. 문서마다 다른 표기는 폴더 팩보다 문서 이름 목록에 씁니다.
+
+| 행 | 입력 | 출력 |
+|---|---|---|
+| `name シエル n frame * 씨엘` | シエルが来た。 | 씨엘이 왔다. |
+| `name ユイ n frame next=さん\|ちゃん 유이` | (경칭 앞에서만) | |
+
+**voice** — (ら)れ의 읽기. `:한국어 동사`는 그 동사를 씁니다(어지다를 붙이지 않음).
+
+| 행 | 입력 | 출력 |
+|---|---|---|
+| `voice 読む v5 frame obj=@message active` | 手紙を読まれた。 | 편지를 읽었다. |
+| `voice 止める v1 frame voice=potential\|none form=ta head=* passive:세워지다` | 多くの車が止められた駐車場。 | 많은 차가 세워진 주차장. |
+| `voice 参る v5 frame * respectful:오다` | 何用で参られたのです？ | 무슨 일로 오셨습니까? |
+
+**agent** — voice 행의 `agent` 열. 짝이 되는 조사 행을 따로 쓰지 않습니다.
+
+| 행 | 입력 | 출력 |
+|---|---|---|
+| `voice 殴る v5 frame * passive:맞다`, agent `한테` | 兄から殴られた。 | 형한테 맞았다. |
+| (같은 행: 장소의 から는 행위자가 아님) | 後ろから殴られた。 | 뒤에서 맞았다. |
+
+**polarity** — 부정 어미의 기능. 실린 `dicts/pack-negation.tsv`의 행이 본보기입니다.
+
+| 행 | 입력 | 출력 |
+|---|---|---|
+| `polarity * v frame form=neg final=か！ subj=- voice=none 1지 못해` | 吐かんかッ!! | 토하지 못해!! |
+| `polarity いい\|良い\|よい adj frame form=nja final=-\|！\|。 after=が -` | 慎んだ方がいいんじゃない。 | 조심하는 것이 좋지 않아. (아래 행을 막음) |
+| `polarity いい\|良い\|よい adj frame form=nja final=-\|！\|。 1잖아` | ま、いいんじゃない！ | 뭐, 좋잖아! |
+
+**tense** — 시제 어미. `polarity`가 먼저 맞은 단어는 건너뜁니다.
+
+| 행 | 입력 | 출력 |
+|---|---|---|
+| `tense 分かる v5 frame form=ta final=！ register=casual 1겠어` | 分かった！ | 알겠어! |
+| `tense 分かる v5 frame form=ta final=。 register=casual 1겠어` | うん、分かった。 | 응, 알겠어. |
+
+**colloc** — 여러 단어의 연어. 마지막 단어가 덩어리의 한국어를 받습니다.
+
+| 행 (`pos kind cond target`) | 입력 | 출력 |
+|---|---|---|
+| `v5 colloc 手に取る 집어 들다` | 試作品を手に取った。 | 시제품을 집어 들었다. |
+| `n colloc {X}を元に戻す {X}을 원래대로 되돌리다` | 話を元に戻そう。 | 이야기를 원래대로 되돌리자. |
+| `n colloc {X:@person}の元に {X} 곁으로` | 青海さんの元に飛び込んだ。 | 아오미 씨 곁으로 뛰어들었다. |
+| `adj colloc 別に良い\|別にいい 괜찮다` | 別にいいじゃない。 | 괜찮잖아. |
+
+### 연어 패턴 쓰는 법
+
+- **표기를 다 적는다.** 패턴은 원문 글자 그대로 맞습니다(읽기나 사전형으로 맞추지 않음). 가나와 한자 표기가 갈리면 `|`로 다
+  씁니다: `別に良い|別にいい`, `そんな事は良い|そんなことはいい`, `嫌な顔をする|いやな顔をする`. `|`는 빈칸이 없는 패턴에만 씁니다.
+  빈칸이 있으면 표기마다 행을 하나씩 씁니다.
+- **0.7.x 단어 경계에서 끝낸다.** 패턴의 끝(빈칸 앞 부분의 끝도)은 0.7.x 단어의 끝과 같아야 합니다. `元に`가 한 단어이므로
+  `{X}の元`은 맞지 않고 `{X}の元に`(→ `{X} 곁으로`)로 씁니다. 마지막 단어만 활용형이 맞으므로, 활용하는 말은 패턴의 끝에
+  사전형으로 둡니다.
+- **빈칸 하나, 그 뒤에 말이 있게.** `{X}`는 명사 하나(뒤 경칭 포함)이고 패턴은 빈칸 뒤 말로 끝나야 합니다(`彼の{X}`는 오류).
+  `{X}` 바로 뒤에 띄어 쓴 조사(`{X}을 원래대로`)는 빈칸 뒤 단어가 받고, 짝 조사(을/를, 이/가, 은/는, 와/과, (으)로, (이)나,
+  (이)랑)는 받침에 맞게 바뀝니다(`{X}을` → 이야기를).
+- **부정은 어미에 맡긴다.** 패턴 끝을 부정형(劣らぬ)으로 쓰면 어미의 부정과 겹칩니다. 긍정 사전형으로 끝내고 한국어도 긍정으로
+  씁니다.
+- **동사 부류.** 한국어 동사의 활용이 한국어만으로 정해지지 않으면(끄덕이다) `pos`에 부류를 씁니다(`v5:규칙`, `何よりだ`의
+  `다행이다`는 `n:이다`). 안 쓰면 불러오기 오류가 그렇게 알려 줍니다.
+- **고정 단어.** 덩어리(빈칸 밖)에 `-why`에서 `Fixed`로 보이는 단어가 있으면 행이 맞지 않습니다(首を縦に振, 声に出처럼 0.7.x가
+  이미 한 단어로 옮기는 구, 소리 단계가 쓴 말). 그런 줄은 행이 필요 없거나 다른 칸에서 고칩니다. 한 단어여도 고정이 아니면
+  (`元に`) 맞습니다.
+- **`-`는 없다.** 연어 행의 `target` `-`는 그대로 두라는 뜻이 아니라 글자 `-`입니다.
+
+### 부착 원자 (부착 정보를 주는 호스트에서)
+
+분석기가 부착 정보를 주는 호스트에서만 맞는 원자입니다([부착 정보](#부착-정보)). 엔진만 쓰는 `hdtrans`에서는 늘 맞지 않으므로,
+이런 행의 사례는 그 호스트로 돌립니다.
+
+| 행 | 뜻 |
+|---|---|
+| `sense かける v1 frame obj=迷惑 obj.how=bare 끼치다` | 조사 없이 붙은 목적어(迷惑かけた) |
+| `polarity * v frame form=neg cl.link=te main.force=imp -` | 명령하는 주절 안 て절의 부정은 그대로 |
+| `sense 来る vk frame subj=@person subj.how=omitted 오다` | 생략된 사람 주어 |
+
+### 해결 순서 요약
+
+1. `voice` 행은 `voice` 층에서 먼저 돕니다. 그다음 연어 행이 덩어리를 잡고(왼쪽부터, 가장 긴 패턴), 덩어리 단어에는 다른
+   `sense` `name` `polarity` `tense` 행과 `agent` 조사가 붙지 않습니다.
+2. 단어마다 칸마다: 문서 이름 목록 행 > 단어를 이름한 행 > `@부류` 행 > `*` 행.
+3. 그 안에서 구체성 다섯 수(어휘 > 부류 깊이 > 이웃·형태 > 등급 > 원자 수), 그다음 `pri`, 그다음 읽은 순서.
+4. `target` `-`는 이기되 아무것도 쓰지 않습니다. 넓은 행의 예외를 이렇게 씁니다.
+5. 사용자 단어와 이웃 규칙이 정한 후보는 덮지 않습니다(이름층 이름의 `name` 행과 문서 이름 목록 행은 예외).
+
 ## 검사
 
+사례 파일은 머리줄 `rule input expected kind layer`의 TSV입니다. `rule`은 `pack:<id>`, `kind`는 `fix` 또는 `keep`, `layer`는 `packs`입니다.
+`rule`과 `layer`는 보고에 쓰는 이름입니다(비어 있지만 않으면 됨). `expected`는 다음 가운데 하나입니다.
+
+- 줄 전체의 출력.
+- `has:<글자>`, `lacks:<글자>`: 출력에 그 글자가 있음, 없음.
+- `rule:pack:<id>=<값>`: 그 행이 그 줄의 어떤 단어에 그 값(행에 적힌 `target` 그대로)을 썼음.
+- `!rule:pack:<id>`: 그 행이 그 줄에서 아무것도 정하지 않았음.
+
 ```sh
-# 팩의 fix/keep 사례
-tools/rule-cases.sh build/mac/hdtrans dicts,PACKDIR PACKDIR/cases.tsv
+# 팩의 fix/keep 사례 (사례 파일은 팩 폴더 밖에)
+tools/rule-cases.sh build/mac/hdtrans dicts,PACKDIR PACKCASES.tsv
 # 기존 규칙 사례가 팩을 실은 채로도 그대로인지(이월)
 tools/rule-cases.sh build/mac/hdtrans dicts,PACKDIR tests/rules/cases
 tools/rule-cases.sh build/mac/hdtrans dicts,PACKDIR tests/rules/critical --no-current
 ```
 
-`tests/packs/sample/`은 형식과 해결 정책의 예제 팩이고 `ctest`의 `rules.packs`가 그 사례를 돌립니다.
-불러오기 오류(모르는 칸, 형태 코드가 없는 어미, 컴파일되지 않는 단어)는 파일과 줄을 적고 불러오기를 실패시킵니다.
+`dicts/`에 넣을 팩은 사례를 `tests/rules/cases/`의 `.tsv`(예: `pack-<이름>.tsv`)로 두면 `rules.cases.themes`가 돕니다.
+`tests/packs/sample/`은 형식과 해결 정책의 예제 팩이고 `ctest`의 `rules.packs`가, 이 안내의 예제 행(`tests/packs/guide/`)은 `rules.packs.guide`가 돌립니다.
+불러오기 오류(모르는 칸이나 값, 형태 코드가 없는 어미, 선언되지 않은 부류, 겹치는 id, 컴파일되지 않는 단어)는 불러오기를
+실패시킵니다. 행의 오류는 파일과 줄을, 부류 파일의 오류(선언되지 않은 부모나 단어의 부류)는 `pack-classes:0`을 적습니다.

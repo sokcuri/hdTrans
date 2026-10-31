@@ -1,0 +1,16 @@
+#! layer=pack
+# docs/packs.md 「팩 쓰기 안내」의 예제 행: 문서의 표와 같게 둠
+id	slot	lemma	pos	kind	cond	target	agent	pri	spec	prov	note
+g.takai.price	sense	高い	adj	frame	subj=@book	비싸다				guide	값이 나가는 물건
+g.takai.adv	sense	高い	adj	frame	subj=@book form=adv	-				guide	高く는 그대로
+g.ciel	name	シエル	n	frame	*	씨엘				guide	작품의 표기
+g.yomu.active	voice	読む	v5	frame	obj=@message	active				guide	편지를 읽혔다 → 읽었다
+g.tomeru.parked	voice	止める	v1	frame	voice=potential|none form=ta head=*	passive:세워지다				guide	세워진 주차장
+g.mairu	voice	参る	v5	frame	*	respectful:오다				guide	오셨다
+g.naguru	voice	殴る	v5	frame	*	passive:맞다	한테			guide	형한테 맞았다
+g.wakaru.ack	tense	分かる	v5	frame	form=ta final=！ register=casual	1겠어				guide	분부 받는 말
+g.wakaru.ack2	tense	分かる	v5	frame	form=ta final=。 register=casual	1겠어				guide	분부 받는 말
+g.tenitoru	sense	取る	v5	colloc	手に取る	집어 들다				guide
+g.modosu	sense	元	n	colloc	{X}を元に戻す	{X}을 원래대로 되돌리다				guide
+g.soba	sense	元	n	colloc	{X:@person}の元に	{X} 곁으로				guide
+g.betsuni	sense	良い	adj	colloc	別に良い|別にいい	괜찮다				guide
