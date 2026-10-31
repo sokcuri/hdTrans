@@ -1,0 +1,465 @@
+# Construction table of the VN index: raw key pattern → family, curriculum level, kind.
+# First matching row wins, so specific rows come before general ones. Patterns are shell globs over the raw
+# keys of index.py. family "-" = known key that is no construction (lexical, or a feature read from tokens).
+# kind: g grammar (sets the line level), s speech/VN phenomenon (sets the line level), x counted only.
+# Levels follow PLAN-v3 §1.1/§1.4 (the level scope); where §2.4's seed list differs, §1.1/§1.4 win:
+# mod.darou and mod.permit N5 (§1.4 N5-46, N5-49/50), link.tokoro N4 (§1.1), link.adn N5 (adnominal, N5-04–10).
+pattern	family	level	kind	note
+# ---------------------------------------------------------------- N5
+p.case:が	case.ga	N5	g	N5-12
+cx:case.ga.frame	case.ga	N5	g
+p.case:を	case.wo	N5	g	N5-13
+cx:case.wo.frame	case.wo	N5	g
+cx:case.ni.taishite	case.ni.taishite	N2	g	に対して
+cx:case.ni.tsuite	case.ni.tsuite	N3	g	について
+cx:case.ni.yotte	case.ni.yotte	N3	g	によって
+p.case:に	case.ni	N5	g	N5-14
+cx:case.ni.*	case.ni	N5	g
+p.case:へ	case.he	N5	g	N5-15
+p.case:で	case.de	N5	g	N5-16
+cx:case.de.*	case.de	N5	g
+p.case:と	case.to	N5	g	N5-17
+p.case:から	case.kara	N5	g	N5-21
+cx:case.kara.*	case.kara	N5	g
+cx:case.made.ni	case.madeni	N4	g	までに
+p.adv:まで	case.made	N5	g	N5-22
+cx:link.made	case.made	N5	g
+p.case:より	case.yori	N5	g	N5-24
+cx:case.yori	case.yori	N5	g
+p.adv:や	case.ya	N5	g	N5-23
+p.case:の	np.no	N5	g	N5-20
+cx:np.no.*	np.no	N5	g
+p.nom:の	np.nominal	N5	g	N5-56 の nominaliser
+f.link:nom	np.nominal	N5	g
+p.bind:は	topic.wa	N5	g	N5-11
+p.bind:も	topic.mo	N5	g	N5-18
+p.adv:だけ	case.dake	N5	g	N5-58
+cx:case.dake.*	case.dake	N5	g
+p.adv:か	case.ka.indef	N5	g	誰か, embedded か
+suf:さん	np.suffix	N5	g	さん/ちゃん/君/様
+suf:ちゃん	np.suffix	N5	g
+suf:君	np.suffix	N5	g
+suf:様	np.suffix	N5	g
+suf:達	np.plural	N5	g	たち/ら/ども
+suf:等	np.plural	N5	g
+suf:共	np.plural	N5	g
+aux:だ/仮定形	link.nara	N4	g	なら
+aux:だ/意志推量形	mod.darou	N5	g	だろう (§1.4 N5-46)
+aux:です/意志推量形	mod.darou	N5	g	でしょう
+aux:た/意志推量形	mod.darou	N5	g	たろう
+cx:mod.darou.*	mod.darou	N5	g
+aux:だ/*	pred.copula	N5	g	N5-01–03
+aux:です/*	pred.copula	N5	g
+aux:ます/意志推量形	force.prop	N5	g	ましょう (N5-28/29)
+aux:ます/命令形	keigo.sonkei	N4	g	ませ
+aux:ます/*	polite.masu	N5	g	N5-08
+aux:た/仮定形	link.tara	N4	g	たら
+aux:た/*	tense.past	N5	g	N5-09
+aux:ない/仮定形	-
+aux:ない/*	pol.neg	N5	g	N5-08–10
+aux:ず/連用形	link.zuni	N3	g	ずに
+aux:ず/仮定形	mod.must	N4	g	ねば
+aux:ず/*	pol.neg	N5	g	ません, ん
+sv:無い	pol.neg	N5	g	てない
+f.force:q	force.q	N5	g	N5-25
+p.final:か	mod.ka	N5	g	N5-25
+cx:mod.ka.final	mod.ka	N5	g
+cx:mod.ka.dou.ka	mod.kadouka	N4	g	かどうか
+cx:mod.ka.embedded	-			the matcher fires on なんか/なんだか; not used
+p.final:よ	mod.yo/ne	N5	g	N5-24 ね/よ
+p.final:ね	mod.yo/ne	N5	g
+cx:mod.yo.ne.fem	-
+cx:mod.yo.ne.*	mod.yo/ne	N5	g
+sv:下さる	force.request	N5	g	てください (N5-26)
+kv:下さる	force.request	N5	g
+cx:bene.tekure.req	force.request	N5	g	てくれ as a request
+cx:link.naide.req	force.request	N5	g	ないでください (N5-27)
+p.conj:て	link.te	N5	g	N5-31
+p.conj:で	link.te	N5	g
+f.link:te	link.te	N5	g
+cx:link.te.*	link.te	N5	g
+cx:link.nakute	link.te	N5	g
+f.aspect:te-iru	asp.teiru	N5	g	N5-32
+sv:居る	asp.teiru	N5	g
+cx:asp.teiru.*	asp.teiru	N5	g
+f.linkSub:toki	link.toki	N5	g	N5-37 とき
+fn:時	link.toki	N5	g
+f.linkSub:mae	link.mae	N5	g	N5-35 前に
+fn:前	link.mae	N5	g
+cx:link.mae	link.mae	N5	g
+f.linkSub:ato	link.ato	N5	g	N5-36 後で
+fn:後	link.ato	N5	g
+cx:link.ato	link.ato	N5	g
+p.conj:たり	link.tari	N5	g	N5-38
+p.adv:たり	link.tari	N5	g
+f.link:tari	link.tari	N5	g
+cx:link.tari	link.tari	N5	g
+p.conj:ながら	link.nagara	N5	g	N5-39
+f.link:nagara	link.nagara	N5	g
+cx:link.nagara.*	link.nagara	N5	g
+cx:link.kara.koso	link.karakoso	N2	g	からこそ
+p.conj:から	link.kara	N5	g	N5-40
+f.link:kara	link.kara	N5	g
+cx:link.kara.*	link.kara	N5	g
+p.conj:が	link.kedo	N5	g	N5-41
+p.conj:けれど	link.kedo	N5	g
+p.conj:ど	link.kedo	N5	g
+f.link:ga	link.kedo	N5	g
+cx:link.kedo.*	link.kedo	N5	g
+f.link:adn	link.adn	N5	g	relative clause
+cx:link.adn.*	link.adn	N5	g
+sv:成る	pred.naru	N5	g	N5-43 くなる/になる
+sv:為る	pred.suru	N5	g	くする/にする
+aux:たい/*	mod.tai	N5	g	N5-44
+cx:mod.tai	mod.tai	N5	g
+cx:mod.tehoshii	mod.tehoshii	N4	g	てほしい
+sv:欲しい	mod.tehoshii	N4	g
+fn:積り	mod.tsumori	N5	g	N5-47
+cx:mod.tsumori*	mod.tsumori	N5	g
+cx:mod.hougaii	mod.hougaii	N5	g	N5-48 方がいい
+fn:方	mod.hougaii	N5	g
+cx:mod.nakutemoii	mod.nakutemoii	N4	g	なくてもいい
+f.mod:may	mod.permit	N5	g	N5-49/50 てもいい, てはいけない
+cx:mod.temoii	mod.permit	N5	g
+cx:mod.tewaikenai	mod.permit	N5	g
+sv:良い	mod.permit	N5	g
+cx:mod.koto.ga.aru	mod.kotogaaru	N5	g	N5-51 たことがある
+cx:pol.amari.neg	pol.amari	N5	g	N5-52
+# ---------------------------------------------------------------- N4
+f.voice:caus-pass	voice.saserareru	N3	g	させられる
+cx:voice.caus.pass	voice.saserareru	N3	g
+aux:れる/*	voice.rare	N4	g	passive, potential, honorific
+aux:られる/*	voice.rare	N4	g
+f.voice:rare	voice.rare	N4	g
+f.voice:passive	voice.rare	N4	g
+f.voice:potential	voice.rare	N4	g
+f.voice:honorific	voice.rare	N4	g
+f.voice:spontaneous	voice.rare	N4	g
+cx:voice.sasete.morau	voice.saseru	N4	g
+cx:voice.caus*	voice.saseru	N4	g
+cx:voice.*	voice.rare	N4	g
+aux:せる/*	voice.saseru	N4	g
+aux:させる/*	voice.saseru	N4	g
+f.voice:causative	voice.saseru	N4	g
+sv:出来る	mod.dekiru	N4	g	ことができる
+cx:mod.koto.ga.dekiru	mod.dekiru	N4	g
+f.link:quote	quote.to	N4	g	と思う/と言う
+cx:quote.to.shite	case.toshite	N3	g	として
+cx:quote.to.*	quote.to	N4	g
+cx:quote.ka.to.omou	quote.to	N4	g
+f.mod:explanatory	mod.noda	N4	g	のだ/んです
+cx:mod.noda.*	mod.noda	N4	g
+p.final:の	mod.noda	N4	g	final の
+p.conj:と	link.to	N4	g
+f.link:to	link.to	N4	g
+cx:link.to.omottara	link.toomottara	N3	g	と思ったら
+cx:link.to.bakari.ni	link.tobakarini	N1	g	とばかりに
+cx:link.to.*	link.to	N4	g
+f.link:tara	link.tara	N4	g
+cx:link.tara.*	link.tara	N4	g
+cx:link.ba.hodo	link.bahodo	N3	g	ば〜ほど
+p.conj:ば	link.ba	N4	g
+f.link:ba	link.ba	N4	g
+cx:link.ba.*	link.ba	N4	g
+f.link:nara	link.nara	N4	g
+cx:link.nara	link.nara	N4	g
+f.mod:likeness	mod.likeness	N4	g	そう (look), よう, みたい
+cx:mod.youda	mod.likeness	N4	g
+cx:mod.mitai.*	mod.likeness	N4	g
+fn:様	mod.likeness	N4	g
+cx:mod.rashii.typical	mod.rashii.typical	N3	g	〜らしい (typical of)
+suf:らしい	mod.rashii.typical	N3	g
+f.mod:hearsay	mod.hearsay	N4	g	らしい, そうだ (hearsay)
+aux:らしい/*	mod.hearsay	N4	g
+cx:mod.rashii.*	mod.hearsay	N4	g
+f.aspect:te-shimau	asp.teshimau	N4	g
+sv:仕舞う	asp.teshimau	N4	g
+cx:asp.teshimau.*	asp.teshimau	N4	g
+f.aspect:te-oku	asp.teoku	N4	g
+sv:置く	asp.teoku	N4	g
+cx:asp.teoku	asp.teoku	N4	g
+f.aspect:te-aru	asp.tearu	N4	g
+sv:有る	asp.tearu	N4	g
+cx:asp.tearu	asp.tearu	N4	g
+f.aspect:te-kuru	asp.tekuru	N4	g
+sv:来る	asp.tekuru	N4	g
+cx:asp.tekuru*	asp.tekuru	N4	g
+f.aspect:te-iku	asp.teiku	N4	g
+sv:行く	asp.teiku	N4	g
+cx:asp.teiku	asp.teiku	N4	g
+f.aspect:te-miru	asp.temiru	N4	g
+sv:見る	asp.temiru	N4	g
+cx:asp.temiru	asp.temiru	N4	g
+sv:呉れる	bene.kureru	N4	g
+cx:bene.tekureru	bene.kureru	N4	g
+sv:上げる	bene.ageru	N4	g
+sv:遣る	bene.ageru	N4	g
+sv:差し上げる	bene.ageru	N4	g
+cx:bene.teageru	bene.ageru	N4	g
+sv:貰う	bene.morau	N4	g
+cx:bene.temorau*	bene.morau	N4	g
+sv:頂く	bene.teitadaku	N3	g	ていただく
+cx:bene.teitadaku	bene.teitadaku	N3	g
+kv:頂く	bene.teitadaku	N3	g
+kv:戴く	bene.teitadaku	N3	g
+cx:link.naide	link.naide	N4	g	ないで
+f.mod:must	mod.must	N4	g	なければならない, ないと
+f.negFn:obligation	mod.must	N4	g
+cx:mod.nakereba	mod.must	N4	g
+cx:link.nai.to	mod.must	N4	g
+fn:筈	mod.hazu	N4	g
+cx:mod.hazu.*	mod.hazu	N4	g
+cx:mod.kamoshirenai	mod.kamoshirenai	N4	g
+cx:asp.sugiru	asp.sugiru	N4	g
+sv:過ぎる	asp.sugiru	N4	g
+suf:過ぎ	asp.sugiru	N4	g
+cx:asp.yasui	asp.yasui	N4	g	やすい/にくい
+suf:易い	asp.yasui	N4	g
+suf:難い	asp.yasui	N4	g
+suf:辛い	asp.yasui	N4	g
+cx:mod.ou.to.suru	mod.outosuru	N3	g	ようとする
+form:vol	mod.ou	N4	g	plain volitional
+cx:mod.ou.*	mod.ou	N4	g
+p.conj:のに	link.noni	N4	g
+f.link:noni	link.noni	N4	g
+cx:link.noni.*	link.noni	N4	g
+f.link:node	link.node	N4	g	ので
+cx:link.node	link.node	N4	g
+fn:為	link.tame	N4	g
+f.link:tame	link.tame	N4	g
+cx:link.tame.*	link.tame	N4	g
+f.link:you-ni	link.youni	N4	g	ように/ようになる/ようにする
+cx:link.youni.*	link.youni	N4	g
+cx:mod.kana	mod.kana	N4	g	かな
+cx:mod.tagaru	mod.tagaru	N4	g
+aux:たがる/*	mod.tagaru	N4	g
+p.conj:し	link.shi	N4	g
+f.link:shi	link.shi	N4	g
+cx:link.shi	link.shi	N4	g
+p.conj:たって	link.temo	N4	g	ても/たって
+p.conj:とも	link.temo	N4	g
+f.link:temo	link.temo	N4	g
+cx:link.temo*	link.temo	N4	g
+f.link:renyo	link.renyou	N4	g	連用中止
+cx:link.renyou	link.renyou	N4	g
+form:imp	force.imp	N4	g	命令形
+p.final:な	final.na	N4	g	な (prohibition or exclamation)
+f.linkSub:mama	link.mama	N4	g	まま
+fn:侭	link.mama	N4	g
+cx:asp.mama	link.mama	N4	g
+fn:所	link.tokoro	N4	g	ところ (§1.1 N4)
+cx:link.tokoro.*	link.tokoro	N4	g
+fn:場合	link.baai	N4	g
+fn:事	np.koto	N4	g	こと
+cx:np.koto.*	np.koto	N4	g
+p.adv:くらい	case.kurai	N4	g	くらい/ぐらい
+p.adv:ずつ	case.zutsu	N4	g
+sv:始める	v.compound	N4	g	compound verbs
+sv:出す	v.compound	N4	g
+sv:続ける	v.compound	N4	g
+sv:終わる	v.compound	N4	g
+sv:終える	v.compound	N4	g
+cx:asp.hajimeru	v.compound	N4	g
+cx:asp.tsuzukeru	v.compound	N4	g
+sv:切る	v.compound	N4	g
+sv:直す	v.compound	N4	g
+sv:合う	v.compound	N4	g
+sv:回る	v.compound	N4	g
+sv:掛ける	v.compound	N4	g
+sv:掛かる	v.compound	N4	g
+sv:慣れる	v.compound	N4	g
+sv:抜く	v.compound	N4	g
+sv:渡る	v.compound	N4	g
+sv:尽くす	v.compound	N4	g
+sv:捲る	v.compound	N4	g
+sv:見せる	v.compound	N4	g
+sv:いらっしゃる	keigo.sonkei	N4	g
+sv:参る	keigo.kenjo	N3	g
+sv:給う-尊敬	persona.archaic	VN	s
+sv:得る	voice.uru	N2	g	得る
+kv:いらっしゃる	keigo.sonkei	N4	g	basic 敬語 (§1.1 N4)
+kv:おっしゃる	keigo.sonkei	N4	g
+kv:召し上がる	keigo.sonkei	N4	g
+kv:為さる	keigo.sonkei	N4	g
+sv:為さる	keigo.sonkei	N4	g
+keigo:o-ninaru	keigo.sonkei	N4	g
+keigo:o-kudasai	keigo.sonkei	N4	g
+kv:御座る	keigo.teinei	N4	g	ございます, おります
+sv:御座る	keigo.teinei	N4	g
+kv:おる	keigo.teinei	N4	g
+kv:参る	keigo.kenjo	N3	g	extended 敬語 (§1.1 N3)
+kv:申す	keigo.kenjo	N3	g
+kv:申し上げる	keigo.kenjo	N3	g
+kv:致す	keigo.kenjo	N3	g
+sv:致す	keigo.kenjo	N3	g
+kv:伺う	keigo.kenjo	N3	g
+kv:存じる	keigo.kenjo	N3	g
+kv:存ずる	keigo.kenjo	N3	g
+kv:承る	keigo.kenjo	N3	g
+kv:畏まる	keigo.kenjo	N3	g
+kv:差し上げる	keigo.kenjo	N3	g
+keigo:o-suru	keigo.kenjo	N3	g
+# ---------------------------------------------------------------- N3
+p.adv:って	quote.tte	N3	g	って (quote, topic)
+cx:quote.tte.*	quote.tte	N3	g
+p.adv:なんて	quote.nante	N3	g
+cx:quote.nante*	quote.nante	N3	g
+cx:quote.toiu.*	quote.toiu	N3	g	という, ということ
+cx:mod.janai.neg	pol.neg	N5	g	plain じゃない (the matcher's neg reading)
+f.negFn:rhetorical	mod.janai	N3	g	じゃない(か) rhetorical
+cx:mod.janai.*	mod.janai	N3	g
+cx:mod.njanai.*	mod.janai	N3	g
+fn:訳	mod.wake	N3	g
+cx:mod.wake.niwa.ikanai	mod.wakeniwaikanai	N2	g	わけにはいかない
+cx:mod.wake.*	mod.wake	N3	g
+cx:mod.mono.da	mod.monoda	N2	g	ものだ
+cx:mod.mono.ka	mod.monoka	N2	g	ものか
+fn:物	mod.mono	N3	g
+cx:mod.mono.*	mod.mono	N3	g
+p.final:もの	mod.mono	N3	g	final もの/もん
+cx:link.tokorode.*	link.tokorode	N3	g	ところで
+p.adv:など	case.nado	N3	g
+cx:case.nado	case.nado	N3	g
+p.adv:なんか	case.nado	N3	g
+p.adv:しか	pol.npi	N3	g	しか〜ない
+cx:case.shika.nai	pol.npi	N3	g
+cx:mod.shikanai	pol.npi	N3	g
+cx:pol.*	pol.npi	N3	g	全然, まったく
+f.negFn:double	-			L reads 仕方ないじゃない as double; not used
+cx:mod.koto.wa.nai	mod.kotowanai	N3	g
+cx:mod.kotoka	mod.kotoka	N2	g	ことか
+cx:mod.koto.ni.*	mod.kotoninaru	N3	g	ことにする/なる
+cx:mod.koto.da	mod.kotoda	N3	g
+p.adv:ほど	case.hodo	N3	g
+cx:case.hodo	case.hodo	N3	g
+cx:case.demo	case.demo	N3	g
+cx:case.bakari	case.bakari	N3	g
+p.adv:ばかり	case.bakari	N3	g
+cx:asp.tabakari	case.bakari	N3	g
+p.bind:こそ	case.koso	N3	g
+cx:case.koso	case.koso	N3	g
+f.link:zu	link.zuni	N3	g
+cx:link.zuni	-			the matcher fires on ません; not used
+f.linkSub:uchi	link.uchini	N3	g	うちに
+fn:内	link.uchini	N3	g
+cx:link.uchini*	link.uchini	N3	g
+fn:途端	link.totan	N3	g	たとたん
+cx:link.totan	link.totan	N3	g
+fn:所為	link.sei	N3	g	せいで
+cx:link.sei	link.sei	N3	g
+fn:癖	link.kuseni	N3	g	くせに
+cx:link.kuseni	link.kuseni	N3	g
+cx:mod.beki*	mod.beki	N3	g	べき
+aux:べし/連体形	mod.beki	N3	g
+p.final:け	mod.kke	N3	g	っけ
+fn:通り	link.toori	N3	g
+fn:代わり	link.kawari	N3	g
+fn:度	link.tabi	N3	g
+fn:最中	link.saichuu	N3	g
+fn:際	link.sai	N3	g
+fn:振り	mod.furi	N3	g
+suf:振り	mod.furi	N3	g
+suf:っぽい	mod.ppoi	N3	g
+suf:ぽい	mod.ppoi	N3	g
+suf:がる	mod.garu	N3	g
+cx:asp.kakeru	asp.kakeru	N3	g	かける (half done)
+# ---------------------------------------------------------------- N2 / N1
+cx:link.monono	link.monono	N2	g
+cx:link.ni.mo.kakawarazu	link.nimokakawarazu	N2	g
+cx:link.dokoroka	link.dokoroka	N2	g
+p.adv:どころ	link.dokoroka	N2	g
+cx:link.ijou	link.ijou	N2	g	以上(は)
+fn:以上	link.ijou	N2	g
+fn:限り	link.kagiri	N2	g
+fn:次第	link.shidai	N2	g
+fn:末	link.sue	N2	g
+aux:まい/*	mod.mai	N2	g
+suf:兼ねる	mod.kaneru	N2	g	かねる/かねない
+p.adv:さえ	case.sae	N2	g
+cx:case.sae	case.sae	N2	g
+p.adv:やら	case.yara	N2	g
+p.adv:きり	case.kiri	N2	g
+p.adv:のみ	case.nomi	N2	g
+p.adv:しも	case.shimo	N2	g
+p.conj:つつ	link.tsutsu	N2	g
+p.adv:すら	case.sura	N1	g
+p.conj:なり	link.nari	N1	g	なり (as soon as)
+aux:べし/*	mod.beshi	N1	g	べく, べし
+aux:ごとし/*	mod.gotoshi	N1	g
+aux:しめる/*	voice.shimeru	N1	g
+aux:まじ/*	mod.beshi	N1	g
+sv:*	v.compound	N4	g	other V+V compounds
+p.case:にて	case.de	N5	g
+p.case:とて	persona.archaic	VN	s
+p.adv:なんぞ	case.nado	N3	g
+p.adv:なり	case.nari	N2	g	メールなり
+p.adv:だに	case.sura	N1	g
+p.final:ねん	dialect	VN	s
+# ---------------------------------------------------------------- VN-specific
+aux:てる/*	contr.teru	VN	s	ている → てる
+aux:ちゃう/*	contr.chau	VN	s	てしまう → ちゃう
+aux:ちまう/*	contr.chau	VN	s
+aux:とく/*	contr.toku	VN	s	ておく → とく
+aux:てく/*	contr.teku	VN	s	ていく → てく
+aux:たげる/*	contr.tageru	VN	s	てあげる → たげる
+aux:てらっしゃる/*	contr.teru	VN	s
+aux:つう/連体形	-			the analyzer reads なんて as な + つう; not used
+aux:つう/*	contr.tsuu	VN	s	という/って → つう
+form:cond-fused	contr.cha	VN	s	なきゃ, ちゃ
+dv:dv.n-r*	contr.n	VN	s	ら行 → ん (分かんない)
+dv:dv.ee-ai.*	contr.ee	VN	s	ai → ee (すげえ, ねえ)
+p.final:じゃん	contr.jan	VN	s
+p.adv:たら	contr.ttara	VN	s	ったら
+dv:dv.ssu	persona.ssu	VN	s	っす
+f.jreg:ssu	persona.ssu	VN	s
+f.jreg:desuwa	final.wa	VN	s	L marks every わ final
+f.jreg:old	persona.old	VN	s	じゃ, のう
+aux:じゃ/*	persona.old	VN	s
+f.jreg:rough	persona.rough	VN	s	やがる, ねえ
+aux:やがる/*	persona.rough	VN	s
+f.jreg:archaic	persona.archaic	VN	s	classical endings
+aux:なり-断定/*	persona.archaic	VN	s
+aux:たり-断定/*	persona.archaic	VN	s
+aux:たり-完了/*	persona.archaic	VN	s
+aux:き/*	persona.archaic	VN	s
+aux:けり/*	persona.archaic	VN	s
+aux:り/*	persona.archaic	VN	s
+aux:む/*	persona.archaic	VN	s
+aux:や/*	dialect	VN	s	Kansai and other dialects
+aux:へん/*	dialect	VN	s
+aux:はる/*	dialect	VN	s
+aux:どす/*	dialect	VN	s
+aux:やんす/*	dialect	VN	s
+aux:ざんす/*	dialect	VN	s
+aux:よる/*	dialect	VN	s
+aux:とる/*	dialect	VN	s
+aux:たる/*	dialect	VN	s
+aux:ちゃる/*	dialect	VN	s
+aux:なんだ/*	dialect	VN	s
+p.conj:すけ	-			a nickname suffix the analyzer reads as a particle
+p.final:べい	dialect	VN	s
+p.final:で	dialect	VN	s
+p.final:わ	final.wa	VN	s	character finals
+p.final:ぜ	final.ze	VN	s
+p.final:ぞ	final.zo	VN	s
+p.final:さ	final.sa	VN	s
+p.final:かしら	final.kashira	VN	s
+p.adv:かしら	final.kashira	VN	s
+p.final:い	final.i	VN	s	かい, だい
+p.final:や	final.ya	VN	s
+intj	intj	VN	x	interjections (vocabulary)
+dv:dv.elong	spoken.elong	VN	x	elongation (analysis, WS-G)
+dv:dv.small.*	spoken.smallkana	VN	x
+dv:dv.stutter	spoken.stutter	VN	x
+dv:dv.sokuon-mimetic	spoken.mimetic	VN	x	onomatopoeia with っ
+dv:*	spoken.other	VN	x
+tok:unknown	tok.unknown	VN	x	unknown word (lexicon)
+tok:*	-
+# ---------------------------------------------------------------- known, not constructions
+f.*	-
+cx:*	-
+unf:*	-
+fn:気	-
+fn:頃	-
+suf:*	-
+pref:*	-
