@@ -152,6 +152,12 @@ public:
                 Error("speech: expected soft or strict");
                 return Skip();
             }
+        } else if (key == "attachment") {
+            if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::String ||
+                !AttachmentOf(Lower(Scalar(event_)), result_.settings.attachment)) {
+                Error("attachment: expected auto or off");
+                return Skip();
+            }
         } else if (key == "speech_levels") {
             if (Type() != YAML_SCALAR_EVENT || ScalarKind(event_) != Kind::String ||
                 !SpeechLevelsOf(Lower(Scalar(event_)), result_.settings.speechLevels)) {
@@ -221,6 +227,13 @@ bool SpeechOf(std::string_view name, Speech& out) {
     return false;
 }
 
+bool AttachmentOf(std::string_view name, Attachment& out) {
+    if (name == "auto") out = Attachment::Auto;
+    else if (name == "off") out = Attachment::Off;
+    else return false;
+    return true;
+}
+
 bool SpeechLevelsOf(std::string_view name, SpeechLevels& out) {
     if (name == "auto") out = SpeechLevels::Auto;
     else if (name == "keep") out = SpeechLevels::Keep;
@@ -268,6 +281,12 @@ ConfigResult LoadConfig(std::string_view path) {
         for (char& ch : name) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
         if (!SpeechLevelsOf(name, result.settings.speechLevels))
             result.diagnostics.push_back({0, "HDTRANS_SPEECH_LEVELS: expected auto or keep", true});
+    }
+    if (const char* attachment = std::getenv("HDTRANS_ATTACHMENT"); attachment != nullptr && *attachment != '\0') {
+        std::string name(attachment);
+        for (char& ch : name) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+        if (!AttachmentOf(name, result.settings.attachment))
+            result.diagnostics.push_back({0, "HDTRANS_ATTACHMENT: expected auto or off", true});
     }
     return result;
 }

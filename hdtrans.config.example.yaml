@@ -10,5 +10,6 @@ cg: true
 misread: false
 reference: false
 speech: strict  # 번역의 -다를 그대로. soft: 「」 안 대사의 딱딱한 -다를 해체로 부드럽게
+attachment: auto  # 팩 행이 묻는 절과 논항을 규칙 분석기로 만듦(analysis.bin). off: 만들지 않음
 speech_levels: auto  # 대사 줄의 말투 수준을 규칙으로 다시 씀. keep: 번역의 말투 그대로
 wrapped: false  # true: 입력이 문장 중간에서 잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨.

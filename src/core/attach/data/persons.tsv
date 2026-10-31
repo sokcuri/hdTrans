@@ -1,0 +1,37 @@
+#! persons
+# Person words that tell who an argument is, for the class of an omitted subject. class: speaker, addressee, third.
+lemma	class	note
+俺	speaker
+僕	speaker
+私	speaker
+あたし	speaker
+わたし	speaker
+我	speaker
+わし	speaker
+拙者	speaker
+あたい	speaker
+吾輩	speaker
+儂	speaker
+自分	speaker	reflexive; mostly the speaker in dialogue
+我々	speaker
+私達	speaker
+貴方	addressee
+あなた	addressee
+お前	addressee
+御前	addressee
+おまえ	addressee
+君	addressee
+貴様	addressee
+あんた	addressee
+そなた	addressee
+汝	addressee
+てめえ	addressee
+手前	addressee
+彼	third
+彼女	third
+彼ら	third
+あいつ	third
+こいつ	third
+そいつ	third
+奴	third
+彼奴	third

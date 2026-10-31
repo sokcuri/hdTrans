@@ -69,7 +69,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 | `voice` | `voice` `polarity` `tense` 행에서: 팩 전에 신호가 정한 읽기 `none` `passive` `potential` `respectful` `spontaneous`(`polarity` `tense` 행에서는 voice 층이 정한 읽기와 사전의 가능형; 이웃·형태 원자로 셈) |
 | `how` | 단어가 논항일 때 그 쓰임(`marked` `topic` `bare` `omitted` `relhead` …), 부착 정보가 있을 때만 |
 | `subj.how` `obj.how` … `arg.how` | 술어의 그 칸 논항의 쓰임(`obj.how=bare`: 迷惑かけた), 부착 정보가 있을 때만 |
-| `cl.자질`, `main.자질` | 단어의 절, 그 절이 걸리는 맨 위 절(주절)의 자질(`cl.tense=past`, `main.vol=+`, `main.force=imp`), 부착 정보가 있을 때만. 값은 제공자가 쓰는 이름(0.8 IR의 이름: force `decl` `q` `imp` `prohib` `prop` `excl` `request`, tense `nonpast` `past`, pol `pos` `neg`) |
+| `cl.자질`, `main.자질` | 단어의 절, 그 절이 걸리는 맨 위 절(주절)의 자질(`cl.tense=past`, `main.vol=+`, `main.force=imp`), 부착 정보가 있을 때만. 값은 제공자가 쓰는 이름([부착 정보 제공자](attachment.md#하는-일): force `decl` `q` `imp` `prohib` `prop` `excl` `request`, tense `nonpast` `past`, pol `pos` `neg`) |
 | `domain` | 이 호스트에는 그런 자질이 없어 늘 맞지 않음 |
 
 ## 연어 행 (`colloc`)
@@ -96,8 +96,8 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 
 ### 부착 정보
 
-호스트 프로그램(분석기)이 문장의 단어 사슬에 부착 정보를 주면(`word::Settings::attach`, `src/core/word/attach.h`) 단서는 그것을
-읽습니다. 단어마다 절, 술어 여부, 논항이면 그 절·술어·역할·쓰임(how), 꾸미는 명사를, 절마다 술어 단어, 부모 절, 자질(이름=값),
+부착 정보가 있으면(`word::Settings::attach`, `src/core/word/attach.h`) 단서는 그것을 읽습니다. 엔진은 부착 정보를
+읽는 행이 있고 사전 폴더에 `analysis.bin`이 있으면 규칙 분석기로 부착 정보를 만듭니다([부착 정보 제공자](attachment.md)). 단어마다 절, 술어 여부, 논항이면 그 절·술어·역할·쓰임(how), 꾸미는 명사를, 절마다 술어 단어, 부모 절, 자질(이름=값),
 논항(생략된 것 포함, 그 명사와 부류)을 줍니다. 그러면
 
 - 논항 칸(`subj` … `arg`)은 분석기가 준 논항을 읽고, 생략된 논항은 그 명사와 부류(`subj=@person`)로 맞습니다. `topic`은 `subj`입니다.
@@ -106,8 +106,8 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 - `next`, `after`, `form`, `final`, `register`, `voice`는 부착 정보가 있어도 위 표의 가까운 문맥을 읽습니다.
 - 부착 정보는 사슬의 단어마다 하나씩, 모든 단어를 셉니다. 수가 맞지 않으면 쓰지 않습니다.
 
-부착 정보가 없으면(엔진만 쓸 때) 단서는 위 표의 가까운 문맥을 읽고, `how`, `X.how`, `cl.*`, `main.*` 원자는 맞지 않습니다.
-그런 원자가 있는 행은 부착 정보를 주는 호스트에서만 적용됩니다.
+부착 정보가 없으면(`analysis.bin`이 없거나 `attachment: off`일 때, 스냅샷 파일만 쓸 때) 단서는 위 표의 가까운 문맥을
+읽고, `how`, `X.how`, `cl.*`, `main.*` 원자는 맞지 않습니다.
 
 ## 해결: 한 가지 정책
 

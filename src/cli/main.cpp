@@ -108,6 +108,8 @@ void Usage(std::FILE* file) {
                "  --speech-levels MODE   auto (default): dialogue lines take the speech level of spec/register.md;\n"
                "                         keep: the translation's own levels\n"
                "  --speech-report FILE   the lines the speech levels changed (TSV: line, rule, cue, source, before, after)\n"
+               "  --attachment MODE      auto (default): pack rows that ask for clauses and arguments read the rule\n"
+               "                         analyzer (analysis.bin in a dictionary folder); off: they never do\n"
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --names FILE           names of the input document: JA<TAB>KO[<TAB>KIND[<TAB>hon]] per line\n"
@@ -321,6 +323,8 @@ int RunMain(int argc, char** argv) {
     bool misread = false;
     std::optional<std::string> speechArg;
     std::optional<std::string> speechLevelsArg;
+    std::optional<std::string> attachmentArg;
+    std::string compileAnalysis;
     std::string speechReportPath;
     bool wrapped = false;
     std::string contextPath;
@@ -361,7 +365,7 @@ int RunMain(int argc, char** argv) {
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
             || option == "-dump-rules" || option == "-speech" || option == "-context"
-            || option == "-speech-levels" || option == "-speech-report" || option == "-names";
+            || option == "-speech-levels" || option == "-speech-report" || option == "-attachment" || option == "-compile-analysis" || option == "-names";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -401,6 +405,8 @@ int RunMain(int argc, char** argv) {
         else if (option == "-misread") misread = true;
         else if (option == "-speech") speechArg = *value;
         else if (option == "-speech-levels") speechLevelsArg = *value;
+        else if (option == "-attachment") attachmentArg = *value;
+        else if (option == "-compile-analysis") compileAnalysis = *value;
         else if (option == "-speech-report") speechReportPath = *value;
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
@@ -450,6 +456,14 @@ int RunMain(int argc, char** argv) {
         std::fprintf(stderr, "hdtrans: --speech takes soft or strict\n");
         return 2;
     }
+    hdTrans::Attachment attachment = config.settings.attachment;
+    if (attachmentArg) {
+        for (char& ch : *attachmentArg) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    }
+    if (attachmentArg && !hdTrans::internal::AttachmentOf(*attachmentArg, attachment)) {
+        std::fprintf(stderr, "hdtrans: --attachment takes auto or off\n");
+        return 2;
+    }
     hdTrans::SpeechLevels speechLevels = config.settings.speechLevels;
     if (speechLevelsArg) {
         for (char& ch : *speechLevelsArg) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
@@ -490,6 +504,18 @@ int RunMain(int argc, char** argv) {
     if (!dictsArg && config.settings.dicts) {
         dicts.clear();
         for (const auto& folder : folders) dicts += (dicts.empty() ? "" : ",") + folder;
+    }
+    if (!compileAnalysis.empty()) {
+        // The analyzer model folder (classes, lexicon, connrules … .tsv) into the snapshot the attachment
+        // provider loads (analysis.bin in a dictionary folder).
+        std::string error;
+        const std::string bytes = hdTrans::attach::CompileAnalysis(compileAnalysis, error);
+        if (bytes.empty() || outPath.empty() || !WriteText(outPath, bytes)) {
+            std::fprintf(stderr, "hdtrans: cannot compile the analysis %s: %s\n", compileAnalysis.c_str(),
+                         error.empty() ? "--out FILE is needed" : error.c_str());
+            return 1;
+        }
+        return 0;
     }
     if (snapshotOut) {
         if (!hdTrans::dict::CompileSnapshot(folders, *snapshotOut)) {
@@ -541,7 +567,7 @@ int RunMain(int argc, char** argv) {
     const char* verifyEnv = std::getenv("HDTRANS_VERIFY_DICTS");
     verifyDicts = verifyDicts || (verifyEnv && std::string_view(verifyEnv) == "1");
     const hdTrans::EngineOptions dictionaryOptions{
-        verifyDicts ? std::optional<bool>(true) : std::nullopt, false, configPath};
+        verifyDicts ? std::optional<bool>(true) : std::nullopt, false, configPath, attachment};
     hdTrans::Engine engine(reference, hdTrans::CacheWrite::Sync, hdTrans::UserReload::Off, dictionaryOptions);
     const std::string ehnd = ehndArg ? *ehndArg : config.settings.useEhnd ? hdTrans::dict::EhndFolder(programDir) : "";
     std::vector<hdTrans::dict::UserSource> userSources;
@@ -658,6 +684,8 @@ int RunMain(int argc, char** argv) {
     options.wordImprovements.misreadFilter = misread;
     options.speech = speech;
     options.speechLevels = speechLevels;
+    const auto attachData = hdTrans::internal::AttachmentData(engine);
+    if (attachment == hdTrans::Attachment::Auto && !reference) options.attach = attachData.get();
     options.wrapped = wrapped;
     std::vector<hdTrans::reg::Change> levelChanges;
     std::string speechReport;

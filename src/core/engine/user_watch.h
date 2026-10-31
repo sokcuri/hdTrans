@@ -20,6 +20,10 @@
 #include "core/dict/snapshot.h"
 #include "core/engine.h"
 
+namespace hdTrans::attach {
+struct Data;
+}
+
 namespace hdTrans::internal {
 
 // What a check finds at a path: whether a regular file is there, and its stamp.
@@ -165,6 +169,8 @@ bool StartUserFileCheck(const Engine& e);
 // The errors and skipped-row warnings of the last user dictionary load.
 std::vector<dict::LoadError> UserFileErrors(const Engine& e);
 bool FilterFileFailed(const Engine& e);
+// The attachment provider's data of the current dictionaries (Generated::attach), null for none.
+std::shared_ptr<const attach::Data> AttachmentData(const Engine& e);
 // Wrapper-serialized observation; an automatic reload in progress has no completed ticket.
 std::optional<std::uint64_t> LoadDiagnosticsVersion(const Engine& e);
 

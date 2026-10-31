@@ -1,0 +1,5 @@
+#! layer=pack-classes
+# Classes of the attachment pack.
+class	parent	note
+@entity		root
+@person	@entity	

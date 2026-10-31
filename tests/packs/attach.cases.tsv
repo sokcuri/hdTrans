@@ -1,0 +1,15 @@
+# The attachment pack (tests/packs/attach, docs/attachment.md): each atom fires only with the rule analyzer's
+# annotations; tests/attach.sh checks the same rows with --attachment off.
+rule	input	expected	kind	layer
+pack:a.bare	ご飯食べた？	rule:pack:a.bare=들다	fix	packs
+pack:a.bare	ご飯を食べた？	!rule:pack:a.bare	keep	packs
+pack:a.past	昨日、本を読んだ。	rule:pack:a.past=낭독하다	fix	packs
+pack:a.past	明日、本を読む。	!rule:pack:a.past	keep	packs
+pack:a.nonpast	手紙書いたよ。	!rule:pack:a.nonpast	keep	packs
+pack:a.nonpast	手紙を書く。	rule:pack:a.nonpast=적다	fix	packs
+pack:a.person	「公園まで走ろう」と彼は言った。	rule:pack:a.person=뛰다	fix	packs
+pack:a.person	犬が走った。	!rule:pack:a.person	keep	packs
+pack:a.vol	いいわ、私が行く。	rule:pack:a.vol=다니다	fix	packs
+pack:a.plain	お茶飲む？	rule:pack:a.plain=들이켜다	keep	packs
+pack:a.drink.person	お茶飲む？	!rule:pack:a.drink.person	keep	packs
+pack:a.drink.person	お茶を飲む。	!rule:pack:a.drink.person	keep	packs

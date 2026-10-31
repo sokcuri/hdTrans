@@ -114,6 +114,10 @@ void ParsePackClasses(std::string_view file, std::string_view text, PackTable& t
 void CheckPackClasses(PackTable& table, std::vector<PackError>& errors);
 
 const char* PackSlotName(PackSlot slot);
+
+// Whether a row of table reads attachment annotations (core/word/attach.h): an atom how, X.how, cl.* or
+// main.*. Only then does the engine load the attachment provider.
+bool ReadsAttachment(const PackTable& table);
 // The key of PackTable::open for the rows of a slot and a class digit.
 inline int OpenIndex(PackSlot slot, char classDigit) { return static_cast<int>(slot) * 256 + static_cast<unsigned char>(classDigit); }
 

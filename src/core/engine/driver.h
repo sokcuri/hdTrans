@@ -9,6 +9,7 @@
 #include <string_view>
 #include <vector>
 
+#include "core/attach/provider.h"
 #include "core/dict/snapshot.h"
 #include "core/engine.h"
 #include "core/output/families.h"
@@ -75,6 +76,9 @@ struct Generated {
     // built-in program runs.
     rules::Program rules;
     bool hasRules = false;
+    // The attachment provider's data (core/attach), loaded when a pack row reads attachment atoms and a
+    // dictionary folder has an analysis.bin (LoadAttachment); null otherwise.
+    std::shared_ptr<const attach::Data> attach;
 };
 
 // The rules program text a loaded dictionary assembles: the header, one L line per rule
@@ -84,6 +88,13 @@ std::string RuleProgramText(const dict::Snapshot& snap);
 
 // The marker families of a loaded dictionary, with the families the dictionaries made at load.
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap);
+
+// The attachment provider's data for snap loaded from folders: null unless a pack row of snap reads
+// attachment atoms (dict::ReadsAttachment) and a folder has an analysis.bin that loads (err says why not);
+// previous again when it came from the same unchanged file.
+std::shared_ptr<const attach::Data> LoadAttachment(const std::vector<std::string>& folders, const dict::Snapshot& snap,
+                                                   const std::shared_ptr<const attach::Data>& previous,
+                                                   std::string& err);
 
 // What a session keeps between its calls.
 // The quotes a line leaves open for the lines after it (「明日行く。 then 明後日も行く」), and
@@ -110,6 +121,9 @@ struct TranslationOptions {
     Speech speech = Speech::Strict;
     // The speech-level stage after the translation (Session::SetSpeechLevels); off with reference.
     SpeechLevels speechLevels = SpeechLevels::Auto;
+    // The attachment provider of the packs layer (Generated::attach when Session::SetAttachment is Auto);
+    // null: the packs layer reads its own nearer context.
+    const attach::Data* attach = nullptr;
     // When set, gets the lines the speech-level stage changes, numbered from 0 after the context.
     std::vector<reg::Change>* levelChanges = nullptr;
     // The name list of the document (Session::SetNames), compiled for the snapshot; null for none.

@@ -101,6 +101,11 @@ hdtrans_builtin_source(register_retro_gen.cpp "${HDTRANS_REGISTER_DATA}/retro" k
 set(HDTRANS_REGISTER_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/register_reader_gen.cpp"
     "${CMAKE_CURRENT_BINARY_DIR}/register_ko_gen.cpp" "${CMAKE_CURRENT_BINARY_DIR}/register_levels_gen.cpp"
     "${CMAKE_CURRENT_BINARY_DIR}/register_retro_gen.cpp")
+# The structure tables of the attachment provider, src/core/attach/data/*.tsv, compiled in.
+set(HDTRANS_ATTACH_DATA "${CMAKE_CURRENT_SOURCE_DIR}/src/core/attach/data")
+file(GLOB HDTRANS_ATTACH_TSV CONFIGURE_DEPENDS "${HDTRANS_ATTACH_DATA}/*.tsv")
+hdtrans_builtin_source(attach_gen.cpp "${HDTRANS_ATTACH_DATA}" kAttachFiles AttachTables HDTRANS_ATTACH_TSV)
+list(APPEND HDTRANS_REGISTER_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/attach_gen.cpp")
 # The set names of the word classes, checked when a source names a class.
 add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/classes_gen.h"
     COMMAND "${CMAKE_COMMAND}" "-DCLASSES=${HDTRANS_BUILTIN_DIR}/classes.tsv"
@@ -228,6 +233,8 @@ if(NOT EMSCRIPTEN)
     if(UNIX)
         add_test(NAME cli.config COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/config.sh" "$<TARGET_FILE:hdtrans_cli>")
         add_test(NAME cli.why COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/why.sh" "$<TARGET_FILE:hdtrans_cli>")
+        add_test(NAME cli.attach COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/attach.sh" "$<TARGET_FILE:hdtrans_cli>"
+            "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         add_test(NAME sound.long-line COMMAND sh "${CMAKE_CURRENT_SOURCE_DIR}/tests/long_line.sh" "$<TARGET_FILE:hdtrans_cli>"
             "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
         set_tests_properties(sound.long-line PROPERTIES TIMEOUT 60)
@@ -296,8 +303,12 @@ if(NOT EMSCRIPTEN)
         add_test(NAME rules.packs COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
             $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts,${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/sample"
             "${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/sample.cases.tsv" --no-current)
+        # The attachment pack (docs/attachment.md): rows that read the rule analyzer's annotations.
+        add_test(NAME rules.packs.attach COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/rule-cases.sh"
+            $<TARGET_FILE:hdtrans_cli> "${CMAKE_CURRENT_SOURCE_DIR}/dicts,${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/attach"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tests/packs/attach.cases.tsv" --no-current)
         set_tests_properties(rules.critical rules.cases.themes rules.cases.speech-soft rules.cases.speech-strict
-            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents rules.packs
+            rules.cases.wrapped rules.cases.wrapped-soft rules.cases.documents rules.packs rules.packs.attach
             PROPERTIES TIMEOUT 300 ENVIRONMENT "HDTRANS_CACHE_DIR=${CMAKE_CURRENT_BINARY_DIR}/examples-cache")
         # No input of the rule cases or of tests/rules/drops/ loses a word, but for the known gaps
         # (where python3 is found, as for the tools.* tests).

@@ -28,6 +28,7 @@
 | [테스트](testing.md) | 단위 테스트, 예제, 기준선과 엔드투엔드 테스트 |
 | [사전 파일](dictionary-files.md) | 기본 사전 원본, 스냅샷, 사용자 사전과 캐시 |
 | [번역 파이프라인](pipeline-layers.md) | 처리 단계, 사전과 규칙 적용 순서, 진단 출력 |
+| [부착 정보 제공자](attachment.md) | 팩 조건이 읽는 절과 논항, 규칙 분석기, `analysis.bin`과 끄는 법 |
 | [규칙 언어](rule-language.md) | 단어 선택 규칙의 형식과 연산자 |
 | [사전 코드](dictionary-codes.md) | 품사, 의미와 문법 코드 일람 |
 | [규칙 컴파일러](rule-compiler.md) | `hdrulec` 검사와 C++ 코드 생성 |

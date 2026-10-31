@@ -178,6 +178,28 @@ HD_TEST(ConfigSpeechLevelsEnvironment) {
     HD_CHECK_EQ(hdTrans::internal::ConfigErrors(result, "config.yaml"), "HDTRANS_SPEECH_LEVELS: expected auto or keep");
 }
 
+HD_TEST(ConfigAttachment) {
+    TempConfig file;
+    const ScopedEnv cleared("HDTRANS_ATTACHMENT", std::nullopt);
+    HD_CHECK(file.Load("").settings.attachment == hdTrans::Attachment::Auto);
+    HD_CHECK(file.Load("attachment: off\n").settings.attachment == hdTrans::Attachment::Off);
+    HD_CHECK(file.Load("attachment: Auto\n").settings.attachment == hdTrans::Attachment::Auto);
+    const auto bad = file.Load("attachment: keep\n");
+    HD_REQUIRE(bad.diagnostics.size() == 1);
+    HD_CHECK_EQ(bad.diagnostics[0].message, "attachment: expected auto or off");
+    {
+        const ScopedEnv off("HDTRANS_ATTACHMENT", "Off");
+        const auto result = file.Load("attachment: auto\n");
+        HD_CHECK(result.diagnostics.empty());
+        HD_CHECK(result.settings.attachment == hdTrans::Attachment::Off);
+    }
+    const ScopedEnv wrong("HDTRANS_ATTACHMENT", "keep");
+    const auto result = file.Load("attachment: off\n");
+    HD_REQUIRE(result.diagnostics.size() == 1);
+    HD_CHECK(result.diagnostics[0].environment);
+    HD_CHECK(result.settings.attachment == hdTrans::Attachment::Off);
+}
+
 HD_TEST(ConfigPaths) {
     TempConfig file;
     const struct Case { const char* yaml; const char* path; } cases[] = {

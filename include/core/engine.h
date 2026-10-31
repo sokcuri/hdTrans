@@ -54,11 +54,18 @@ enum class Speech {
 // at the level its cues give after the translation; Keep keeps the translation's own levels.
 enum class SpeechLevels { Auto, Keep };
 
+// The attachment annotations of the packs layer (docs/attachment.md): Auto reads them from the rule analyzer
+// when a pack row asks for them and a dictionary folder has its analysis.bin; Off never does, so the packs
+// read their nearer context only.
+enum class Attachment { Auto, Off };
+
 // Dictionary parsing at load time; explicit strictDict takes precedence over the config.
 struct EngineOptions {
     std::optional<bool> strictDict{};
     bool defaultStrictDict = true;
     std::string configPath{};
+    // Off: the attachment provider's data is not loaded (nor is it when the config's attachment is off).
+    Attachment attachment = Attachment::Auto;
     bool operator==(const EngineOptions&) const = default;
 };
 
@@ -193,6 +200,9 @@ public:
     // Reference mode keeps the translation's levels.
     void SetSpeechLevels(SpeechLevels levels) { speechLevels_ = levels; }
 
+    // The attachment annotations of later translations; Attachment::Auto until set. Reference mode reads none.
+    void SetAttachment(Attachment attachment) { attachment_ = attachment; }
+
     // Whether the lines of later translations may break in the middle of a sentence
     // (captions, hooked text); false until set. Wrapped, a line that ends where a sentence
     // cannot end is translated as one sentence with the lines after it, and the translation
@@ -218,6 +228,7 @@ private:
     const bool misread_;
     Speech speech_ = Speech::Strict;
     SpeechLevels speechLevels_ = SpeechLevels::Auto;
+    Attachment attachment_ = Attachment::Auto;
     bool wrapped_ = false;
     std::shared_ptr<const names::List> nameList_;
     // nameList_ compiled for namesSnapshot_; rebuilt when snapshot_ is another.

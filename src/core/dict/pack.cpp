@@ -207,6 +207,13 @@ PackRowLabel PackRowById(int global) {
     return rows[static_cast<std::size_t>(global) - 1];
 }
 
+bool ReadsAttachment(const PackTable& table) {
+    for (const PackRow& r : table.rows)
+        for (const PackAtom& a : r.atoms)
+            if (a.slot == "how" || a.slot.find('.') != std::string::npos) return true;
+    return false;
+}
+
 const char* PackSlotName(PackSlot slot) {
     switch (slot) {
         case PackSlot::Sense: return "sense";

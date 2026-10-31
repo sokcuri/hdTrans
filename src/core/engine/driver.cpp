@@ -801,6 +801,18 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
     word::Analysis analysis;
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
+    // The attachment provider over the chunk's text, the text the tokens' source offsets count in; it
+    // analyses the text when the packs layer first asks.
+    std::string chunkText;
+    attach::ChunkAttach chunkAttach;
+    word::AttachProvider attachProvider;
+    if (text && options.attach != nullptr && !options.reference) {
+        for (const tokenizer::Piece& p : pieces) chunkText += p.text;
+        chunkAttach.data = options.attach;
+        chunkAttach.text = chunkText;
+        attachProvider = chunkAttach.Provider();
+        settings.attach = &attachProvider;
+    }
     settings.before = before;
     settings.quoteDepth = speech.quotes.depth;
     settings.poiTic = speech.poiTic;

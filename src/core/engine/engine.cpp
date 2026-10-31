@@ -249,6 +249,14 @@ std::string RuleProgramText(const dict::Snapshot& snap) {
     return RuleText(snap.RuleBodies(), RulesProgram());
 }
 
+std::shared_ptr<const attach::Data> LoadAttachment(const std::vector<std::string>& folders, const dict::Snapshot& snap,
+                                                   const std::shared_ptr<const attach::Data>& previous,
+                                                   std::string& err) {
+    err.clear();
+    if (!dict::ReadsAttachment(snap.Packs())) return nullptr;
+    return attach::LoadFolders(folders, previous, err);
+}
+
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap) {
     auto generated = std::make_shared<Generated>();
     CopyGenerated(snap.GeneratedFamilies(), generated->families);
@@ -267,7 +275,7 @@ struct Access {
     static bool Finish(Engine& e, std::uint64_t ticket, const UserVersion& version, dict::LoadResult r,
                        std::vector<dict::LoadError> userErrors, FilterLoad filters, bool keepFailed,
                        MemoryInput memory, const dict::UserSource& ehndSource,
-                       const std::vector<dict::UserSource>& requested) {
+                       const std::vector<dict::UserSource>& requested, std::shared_ptr<const attach::Data> attach) {
         if (ticket < e.current_) return Loaded(r);
         UserWatch& w = *e.watch_;
         const bool filterFailed = !filters.read || !filters.valid;
@@ -334,6 +342,7 @@ struct Access {
         e.current_ = ticket;
         e.snapshot_ = std::move(r.snapshot);
         e.generated_ = NewGenerated(*e.snapshot_);
+        e.generated_->attach = std::move(attach);
         e.filters_ = std::move(filters.filters);
         e.filterErrors_ = std::move(filters.errors);
         w.ehnd.loaded = std::move(filters.version);
@@ -482,6 +491,17 @@ struct Access {
         std::vector<dict::LoadError> userErrors;
         dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
         FilterLoad filters = FiltersOf(r, ehnd, ehndStrict, memory, knownEhnd, verify);
+        std::shared_ptr<const attach::Data> attach;
+        if (r.snapshot) {
+            std::shared_ptr<const attach::Data> previous;
+            {
+                std::lock_guard<std::mutex> lock(e.mu_);
+                if (e.generated_) previous = e.generated_->attach;
+            }
+            std::string attachError;
+            if (options.attachment == Attachment::Auto && config.settings.attachment == Attachment::Auto)
+                attach = LoadAttachment(dirs, *r.snapshot, previous, attachError);
+        }
         if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
             UserVersionOf(requested, options.configPath, revision) != version) {
             userErrors.push_back({requested.empty() ? std::string() : requested.front().path,
@@ -490,7 +510,7 @@ struct Access {
         }
         std::lock_guard<std::mutex> lock(e.mu_);
         if (!Finish(e, ticket, version, std::move(r), std::move(userErrors), std::move(filters), active || !open,
-                    std::move(memory), ehnd, requested)) return false;
+                    std::move(memory), ehnd, requested, std::move(attach))) return false;
         if (open && ticket == e.current_) {
             e.dirs_ = dirs;
             e.verifyDicts_ = verify;
@@ -528,7 +548,8 @@ struct Access {
                                     revision = w.optionsRevision, accepted = w.acceptedSources,
                                     memory = MemoryInput{w.memoryUser, w.memoryEhnd, w.memoryEhndStrict,
                                         w.memoryEhndStrictOverride, w.userStrictOverride, w.ehndStrictOverride},
-                                    cacheWrite = e.cacheWrite_ == CacheWrite::Sync]() mutable {
+                                    cacheWrite = e.cacheWrite_ == CacheWrite::Sync,
+                                    previousAttach = e.generated_ ? e.generated_->attach : nullptr]() mutable {
             const UserVersion version = UserVersionOf(paths, options.configPath, revision);
             const ConfigResult config = options.configPath.empty() ? ConfigResult{} : LoadConfig(options.configPath);
             const bool baseStrict = StrictDict(options, verify, config);
@@ -538,6 +559,10 @@ struct Access {
             std::vector<dict::LoadError> userErrors;
             dict::LoadResult r = LoadUsers(dirs, verify, cacheWrite, version, accepted, strict, memory.user, userErrors);
             FilterLoad filters = FiltersOf(r, ehndSource, ehndStrict, memory, knownEhnd, verify);
+            std::shared_ptr<const attach::Data> attach;
+            std::string attachError;
+            if (r.snapshot && options.attachment == Attachment::Auto && config.settings.attachment == Attachment::Auto)
+                attach = LoadAttachment(dirs, *r.snapshot, previousAttach, attachError);
             if ((!options.configPath.empty() && !ConfigMatches(config, version.config)) ||
                 UserVersionOf(paths, options.configPath, revision) != version) {
                 userErrors.push_back({paths.empty() ? std::string() : paths.front().path,
@@ -549,7 +574,7 @@ struct Access {
             Engine& engine = *target->engine;
             std::lock_guard<std::mutex> lock(engine.mu_);
             Finish(engine, ticket, version, std::move(r), std::move(userErrors), std::move(filters), true,
-                   std::move(memory), ehndSource, paths);
+                   std::move(memory), ehndSource, paths, std::move(attach));
             engine.watch_->running = false;
             engine.watch_->done.notify_all();
         });
@@ -598,6 +623,10 @@ struct Access {
         return e.loads_;
     }
 
+    static std::shared_ptr<const attach::Data> AttachData(const Engine& e) {
+        std::lock_guard<std::mutex> lock(e.mu_);
+        return e.generated_ ? e.generated_->attach : nullptr;
+    }
     static bool FilterFailed(const Engine& e) {
         std::lock_guard<std::mutex> lock(e.mu_);
         return e.watch_->filterFailed;
@@ -722,6 +751,7 @@ bool StartUserFileCheck(const Engine& e) { return Access::CheckNow(e, false); }
 std::vector<dict::LoadError> UserFileErrors(const Engine& e) { return Access::Errors(e); }
 
 bool FilterFileFailed(const Engine& e) { return Access::FilterFailed(e); }
+std::shared_ptr<const attach::Data> AttachmentData(const Engine& e) { return Access::AttachData(e); }
 
 std::optional<std::uint64_t> LoadDiagnosticsVersion(const Engine& e) { return Access::DiagnosticsVersion(e); }
 
@@ -940,6 +970,7 @@ std::string Session::TranslateObserved(std::string_view text, const internal::St
     options.wordImprovements.misreadFilter = misread_;
     options.speech = speech_;
     options.speechLevels = speechLevels_;
+    if (attachment_ == Attachment::Auto && generated_) options.attach = generated_->attach.get();
     options.wrapped = wrapped_;
     options.names = names_.get();
     options.filters = filters_.get();
