@@ -683,8 +683,14 @@ struct CollocMatch {
 
 // Whether the match can be written: no user word in it but in the slot, no word another span took,
 // a head outside the slot, and a predicate head only with a phrase of its class.
-bool Applicable(const std::vector<Item*>& items, std::size_t i, const std::set<const Item*>& taken, CollocMatch& m) {
+bool Applicable(Flusher& f, const dict::PackTable& t, const std::vector<Item*>& items, std::size_t i,
+                const std::set<const Item*>& taken, CollocMatch& m) {
     const dict::Colloc& c = *m.c;
+    // the row's cue atoms hold for the last word of the span (head=- : it modifies no noun)
+    if (const dict::PackRow& r = t.rows[static_cast<std::size_t>(c.row)]; !r.atoms.empty()) {
+        std::array<int, 5> spec{};
+        if (!Holds(t, r, ContextOf(f, items[m.end - 1]), spec)) return false;
+    }
     for (std::size_t k = i; k < m.end; k++) {
         const bool inSlot = c.slot && k >= m.slot && k < m.slotEnd;
         if (!inSlot && (items[k]->Fixed() || taken.contains(items[k]))) return false;
@@ -711,7 +717,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                 CollocMatch m;
                 m.c = &c;
                 if (!MatchColloc(t, c, before, items, i, m.end, m.slot, m.slotEnd, m.absorbed)) continue;
-                if (!Applicable(items, i, taken, m)) continue;
+                if (!Applicable(f, t, items, i, taken, m)) continue;
                 m.length = before.size() + c.after.size();
                 const int pri = t.rows[static_cast<std::size_t>(c.row)].pri;
                 if (best.c == nullptr || m.length > best.length ||
@@ -724,6 +730,9 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
         const dict::PackRow& r = t.rows[static_cast<std::size_t>(c.row)];
         const Selection source{Provenance::Pack, r.global};
         Item* head = items[best.end - 1];
+        // the particle after the slot is left out when the slot's word already reads it (俺の 내)
+        const bool particleLeft = c.slot && !c.particle.empty() && !best.absorbed && best.slotEnd < best.end &&
+                                  items[best.slotEnd]->EntryText(items[best.slotEnd]->selected).empty();
         for (std::size_t k = i; k < best.end; k++) {
             Item* x = items[k];
             if (c.slot && k >= best.slot && k < best.slotEnd) continue;
@@ -734,7 +743,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                     // the head right after the slot: the slot's particle is written after the slot's word
                     Item* own = items[best.slotEnd - 1];
                     own->appended += ResolvedParticle(own->EntryText(own->selected), c.particle);
-                } else if (c.slot && c.spaced && c.particle.empty() && k >= best.slotEnd) {
+                } else if (c.slot && ((c.spaced && c.particle.empty()) || particleLeft) && k >= best.slotEnd) {
                     // the space the target puts after the slot's Korean
                     text.insert(0, " ");
                 }
@@ -744,7 +753,8 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                 // a phrase that does not conjugate keeps none of the word's ending
                 if (!best.conjugates && x->DirectIndex() >= 0) x->AssignDirectSlot(x->DirectIndex(), "", source);
             } else if (afterSlot) {
-                Write(x, c.particle, source);
+                // a particle the slot's word already reads (俺の 내: の left empty) stays empty
+                Write(x, particleLeft ? std::string_view() : std::string_view(c.particle), source);
             } else if (k == i && !c.lead.empty()) {
                 Write(x, c.lead, source);
             } else {

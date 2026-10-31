@@ -9,7 +9,7 @@ pack:良い/よい/adj#2	「ふふふ、何だか、いいことをした気が�
 pack:良い/よい/adj#3	「別にいいじゃない。ただの練習なんだから」	rule:pack:良い/よい/adj#3=괜찮다	fix	packs
 pack:良い/よい/adj#3	「てきぱきしてて頭もよくて	!rule:pack:良い/よい/adj#3	keep	packs
 pack:良い/よい/adj#3	「いいよ、いつまででも」	!rule:pack:良い/よい/adj#3	keep	packs
-pack:一体/いったい/n#1	その最後の一体が泡になったのを確認し、クエスト画面を開く。	rule:pack:一体/いったい/n#1={X} 하나	fix	packs
+pack:一体/いったい/n#1	その最後の一体が泡になったのを確認し、クエスト画面を開く。	rule:pack:一体/いったい/n#1={X} 하나가	fix	packs
 pack:一体/いったい/n#1	あれは一体どういう夢なんだろう……。	!rule:pack:一体/いったい/n#1	keep	packs
 pack:一体/いったい/n#1	「何なんですか、一体」	!rule:pack:一体/いったい/n#1	keep	packs
 pack:一体/いったい/n#2	佳奈すけと一体になってしまったかのようだ。	rule:pack:一体/いったい/n#2=하나가 되다	fix	packs
@@ -53,10 +53,10 @@ pack:取る#2	白崎は俺の手を取り、そっと頬に当てた。	!rule:pa
 pack:元#1	青海さんの元に飛び込んだ。	rule:pack:元#1={X}의 품으로 뛰어들다	fix	packs
 pack:元#1	すぐさま、俺は有明の元に向かう。	!rule:pack:元#1	keep	packs
 pack:元#1	御園を引っ張って、芹沢さんの元に向かう。	!rule:pack:元#1	keep	packs
-pack:元#2b	お姉様にはオクタヴィア様の元で私が何をするのかをきちんと伝えた。	rule:pack:元#2b={X} 곁에서	fix	packs
-pack:元#2a	翌日には寝不足になりながらオクタヴィア様の元に向かって出発した。	rule:pack:元#2a={X} 곁으로	fix	packs
-pack:元#2	別れを告げ、ナナイさんの元を離れる。	rule:pack:元#2={X} 곁	fix	packs
-pack:元#2	教職員の席から葉月先生が立ち上がり、俺の元までやってきた。	rule:pack:元#2={X} 곁	fix	packs
+pack:元#2b	お姉様にはオクタヴィア様の元で私が何をするのかをきちんと伝えた。	rule:pack:元#2b={X}의 곁에서	fix	packs
+pack:元#2a	翌日には寝不足になりながらオクタヴィア様の元に向かって出発した。	rule:pack:元#2a={X}의 곁으로	fix	packs
+pack:元#2	別れを告げ、ナナイさんの元を離れる。	rule:pack:元#2={X}의 곁을	fix	packs
+pack:元#2c	教職員の席から葉月先生が立ち上がり、俺の元までやってきた。	rule:pack:元#2c={X}의 곁까지	fix	packs
 pack:元#2	携帯を元の位置に戻す。	!rule:pack:元#2	keep	packs
 pack:元#2	「それはもちろん、元部長ですから」	!rule:pack:元#2	keep	packs
 pack:元#2	「でもあれって、顔のバランスを元に算出した値段よ？」	!rule:pack:元#2	keep	packs
@@ -82,11 +82,9 @@ pack:振る#4	音叉を振ると、御園の目がわずかに見開かれた。
 pack:振る#5	エルは俺の胸の中で首を振る。	rule:pack:振る#5=고개를 젓다	fix	packs
 pack:振る#5	桜庭は小さく首を横に振った。	!rule:pack:振る#5	keep	packs
 pack:振る#5	「私もそう思うんだけど、なかなか首を縦に振ってくれなくて」	!rule:pack:振る#5	keep	packs
-pack:さあ#1	「さあ、どれがいい？」	!rule:pack:さあ#1	keep	packs
-pack:さあ#1	「さあ、勇気を出して、カモンっ！」	!rule:pack:さあ#1	keep	packs
 pack:さあ#2	「さあ、どうぞ」	!rule:pack:さあ#2	keep	packs
 pack:さあ#2	「さあ、約束してください、『８割規定』の廃止は公約にし――」	!rule:pack:さあ#2	keep	packs
-pack:頼り#1	「ありがと、頼りにしてるわ」	rule:pack:頼り#1=믿다	fix	packs
+pack:頼り#1	「ありがと、頼りにしてるわ」	rule:pack:頼り#1=의지하다	fix	packs
 pack:頼り#1	なにかで得た知識を頼りに、指を引き抜いて、花弁の付け根に触れた。	!rule:pack:頼り#1	keep	packs
 pack:頼り#1	「さすがは、後援会長と、副会長、頼りになるわね」	!rule:pack:頼り#1	keep	packs
 pack:頼り#2	で、図書部は、頼りになる助っ人として、様々な団体から引っ張りだこだった。	rule:pack:頼り#2=믿음직하다	fix	packs
@@ -95,14 +93,13 @@ pack:頼り#3	そんな小さな手掛かりを頼りに私のことを探しに
 pack:頼り#3	なにかで得た知識を頼りに、指を引き抜いて、花弁の付け根に触れた。	rule:pack:頼り#3={X}에 의지해	fix	packs
 pack:頼り#3	「わたし、あの、その……すごく筧くんのこと、頼りにしてるよ？」	!rule:pack:頼り#3	keep	packs
 pack:頼り#3	「いざって時、頼りになるかどうかだよ、男は」	!rule:pack:頼り#3	keep	packs
-pack:こう#1	こうして、一回目の婚約破棄交渉は大失敗に終わった。	rule:pack:こう#1=이렇게 해서,	fix	packs
 pack:良し#1	ボーナスポイントは150以上ならよしとするつもりだ。	rule:pack:良し#1=좋다고 여기다	fix	packs
 pack:声掛け#1	あわよくば殿下方にお声掛けして貰おう	rule:pack:声掛け#1=말을 걸다	fix	packs
 pack:声掛け#1	まさかの声かけ事案	!rule:pack:声掛け#1	keep	packs
 pack:声掛け#1	初めての円陣に、初めての声かけ。	!rule:pack:声掛け#1	keep	packs
 pack:迷惑#1	はた迷惑なことに、そんな儀式で喚び出されました。	rule:pack:迷惑#1=민폐스럽게도	fix	packs
-pack:輝き#1	イリアが目の輝きを死なせた状態でぽつりと呟いた。	rule:pack:輝き#1=빛을 잃다	fix	packs
-pack:見#1	クラリス様は演劇の中でしか見れないような見事な二度見をする。	rule:pack:見#1=두 번 쳐다보기를 하다	fix	packs
+pack:輝き#1	イリアが目の輝きを死なせた状態でぽつりと呟いた。	rule:pack:輝き#1=빛을 꺼뜨리다	fix	packs
+pack:見#1	クラリス様は演劇の中でしか見れないような見事な二度見をする。	rule:pack:見#1=다시 한번 쳐다보다	fix	packs
 pack:そっくり#1	そっくりさんとか偽物さんとかじゃなくて、本物？	rule:pack:そっくり#1=닮은 사람	fix	packs
 pack:偽物#1	そっくりさんとか偽物さんとかじゃなくて、本物？	rule:pack:偽物#1=가짜	fix	packs
 pack:適正#1	「あ、適正狩場は、その……」	rule:pack:適正#1=적정 사냥터	fix	packs
@@ -113,8 +110,6 @@ pack:適正#2	でも適正はなかった。	!rule:pack:適正#2	keep	packs
 pack:適正#2	エルは適正がないとされ、今は美浜にいる。	!rule:pack:適正#2	keep	packs
 pack:常#1	とても暑がりらしく、常に薄着でいる。	!rule:pack:常#1	keep	packs
 pack:常#1	汐美学園に来るまでの私は、常にトップだった。	!rule:pack:常#1	keep	packs
-pack:常#3	背後に感じる気配は、常に俺と一定の距離を保っていた。	!rule:pack:常#3	keep	packs
-pack:常#3	俺は常に持ち歩いているメディカルキットで応急処置をする。	!rule:pack:常#3	keep	packs
 pack:得意#2	若い女官たちとの野遊びがお得意なようだからね	!rule:pack:得意#2	keep	packs
 pack:得意#2	心を見抜かれたのかと思ったが、桜庭お得意の『見えた』だった。	!rule:pack:得意#2	keep	packs
 pack:得意#3	小嶺さんは家事がお得意なんですか？	!rule:pack:得意#3	keep	packs
@@ -122,12 +117,13 @@ pack:得意#3	料理が得意じゃない人からしたら	!rule:pack:得意#3	
 pack:得意#4	それぞれに得意分野が異なる才能の持ち主だった。	!rule:pack:得意#4	keep	packs
 pack:得意#4	嬉野を見てしまったら、得意とは言えない	!rule:pack:得意#4	keep	packs
 pack:ほわ#1	なんだか、ほわっとした幸福感が胸に訪れる。	rule:pack:ほわ#1=포근하다	fix	packs
-pack:内#1	それじゃ、そのうち、機会があれば教えてあげるよ	!rule:pack:内#1	keep	packs
-pack:内#2a	それじゃ、そのうち、機会があれば教えてあげるよ	rule:pack:内#2a=머지않아,	fix	packs
 pack:箱入り#1	箱入りで育ったお母上はそれを疑うこともなく	rule:pack:箱入り#1=곱게 자라다	fix	packs
-pack:白#1	銀木犀は白っぽい黄色の落花を	rule:pack:白#1=희끄무레하다	fix	packs
 pack:ナビ#1	妖精のような姿のサポートナビに手伝ってもらいながら	rule:pack:ナビ#1=서포트 내비	fix	packs
 pack:床#1	床ドンと壁ドンをマスターし、	rule:pack:床#1=바닥쿵	fix	packs
 pack:構い#1	おかまいなく。婚約破棄を続けてください	!rule:pack:構い#1	keep	packs
 pack:用足し#1	ギミックダンジョン御用達盾を。	!rule:pack:用足し#1	keep	packs
-pack:用足し#2	ギミックダンジョン御用達盾を。	rule:pack:用足し#2=단골	fix	packs
+pack:良い/よい/adj#3	彼は別にいい人じゃない	!rule:pack:良い/よい/adj#3	keep	packs
+pack:良い/よい/adj#3	別にいいことなんてない	!rule:pack:良い/よい/adj#3	keep	packs
+pack:一体/いったい/n#1	君の一体何がわかるんだ	!rule:pack:一体/いったい/n#1	keep	packs
+pack:元#2c	叔父の元婚約者が好んだ花。	!rule:pack:元#2c	keep	packs
+pack:元#2	寝床は、俺の元寝床である大きな木の上。	!rule:pack:元#2	keep	packs

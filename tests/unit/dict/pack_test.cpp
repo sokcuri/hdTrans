@@ -189,6 +189,17 @@ HD_TEST(dict_pack_collocs) {
     HD_CHECK(t.collocs[1].spaced && t.collocs[1].particle.empty());
     HD_CHECK_EQ(t.collocs[1].headRaw, std::string("하나"));
     HD_CHECK(!t.collocs[2].slot && t.collocs[2].befores.size() == 2);
+    {
+        // a colloc row's cue atoms (column cue) are read for its last word
+        Families own;
+        PackTable u;
+        std::vector<PackError> e;
+        ParsePackRows("c.tsv", "id\tlemma\tpos\tkind\tcond\tcue\ttarget\nq\t良い\tadj\tcolloc\t別にいい\thead=-\t괜찮다\n",
+                      nullptr, own, u, e);
+        HD_CHECK_EQ(Errors(e), std::string());
+        HD_REQUIRE(u.rows.size() == 1);
+        HD_CHECK(u.rows[0].atoms.size() == 1 && u.rows[0].atoms[0].slot == "head");
+    }
     const struct {
         const char* row;
         const char* want;

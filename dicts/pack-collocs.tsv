@@ -1,78 +1,71 @@
 #! layer=pack
 # 여러 단어에 걸친 연어와 관용구를 한 덩어리로 옮기는 행(LEX-200)
-id	slot	lemma	pos	kind	cond	target	pri	spec	prov	note
-遣る/やる/v5#4	sense	遣る/やる/v5	v5	colloc	目をやる	눈을 돌리다	70	LEX-200	corpus	目をやる → 눈을 돌리다
-良い/よい/adj#2	sense	良い/よい/adj	adj	colloc	そんな事は良い|そんなことはいい|そんなことは良い|そんな事はいい	그런 건 됐다	70	LEX-200	fault	そんな事は良い|そんなことはいい|そんなことは良い|そんな事はいい → 그런 건 됐다
-良い/よい/adj#3	sense	良い/よい/adj	adj	colloc	別に良い|別にいい	괜찮다	70	LEX-200	fault	別に良い|別にいい → 괜찮다
-一体/いったい/n#1	sense	一体/いったい/n	n	colloc	{X}の一体	{X} 하나	70	LEX-200	fault	{X}の一体 → {X} 하나
-一体/いったい/n#2	sense	一体/いったい/n	n	colloc	一体になる	하나가 되다	60	LEX-200	corpus	一体になる → 하나가 되다
-一体/いったい/n#3	sense	一体/いったい/n	n	colloc	一体となる	하나가 되다	60	LEX-200	corpus	一体となる → 하나가 되다
-伸びる#4	sense	伸びる/のびる/v1	v1	frame	after=食らう	뻗다	90	LEX-200	fault	after=食らう → 뻗다
-伸びる#9	sense	伸びる/のびる/v1	v1	colloc	褒められて伸びる	칭찬받으면 성장하다	90	LEX-200	corpus	褒められて伸びる → 칭찬받으면 성장하다
-閉じる#8	sense	閉じる/とじる/v1	v1	colloc	幕を閉じる	막을 내리다	90	LEX-200	review	幕を閉じる → 막을 내리다
-嫌#2	sense	嫌/いや/na	na	colloc	そんなのいや|そんなの嫌	그런 건 싫다	90	LEX-200	fault	そんなのいや|そんなの嫌 → 그런 건 싫다
-嫌#4	sense	嫌/いや/na	na	colloc	嫌な顔をする	싫은 표정을 짓다	90	LEX-200	corpus	嫌な顔をする → 싫은 표정을 짓다
-出す#1	sense	出す/だす/v5	v5	colloc	町を出す	마을 밖으로 내보내다	90	LEX-200	fault	町を出す → 마을 밖으로 내보내다
-出す#2	sense	出す/だす/v5	v5	colloc	声に出す	소리 내어 말하다	90	LEX-200	fault	声に出す → 소리 내어 말하다
-取る#1	sense	取る/とる/v5	v5	colloc	{X}と取られる	{X}로 받아들여지다	90	LEX-200	fault	{X}と取られる → {X}로 받아들여지다
-取る#2	sense	取る/とる/v5	v5	colloc	手に取る	집어 들다	80	LEX-200	corpus	手に取る → 집어 들다
-元#1	sense	元/もと/n	n	colloc	{X:@person}の元に飛び込む	{X}의 품으로 뛰어들다	90	LEX-200	fault	{X:@person}の元に飛び込む → {X}의 품으로 뛰어들다
-元#2	sense	元/もと/n	n	colloc	{X:@person}の元	{X} 곁	80	LEX-200	fault	{X:@person}の元 → {X} 곁
-元#3	sense	元/もと/n	n	colloc	{X}を元に戻す	{X}을 원래대로 되돌리다	70	LEX-200	corpus	{X}を元に戻す → {X}을 원래대로 되돌리다
-元#4	sense	元/もと/n	n	colloc	{X}を元に	{X}을 바탕으로	60	LEX-200	corpus	{X}を元に → {X}을 바탕으로
-振る#1	sense	振る/ふる/v5	v5:규칙	colloc	首を縦に振る	고개를 끄덕이다	50	LEX-200	fault	首を縦に振る → 고개를 끄덕이다
-振る#2	sense	振る/ふる/v5	v5:규칙	colloc	首を縦には振る	고개를 끄덕이다	50	LEX-200	fault	首を縦には振る → 고개를 끄덕이다
-振る#3	sense	振る/ふる/v5	v5	colloc	首を横に振る	고개를 젓다	50	LEX-200	corpus	首を横に振る → 고개를 젓다
-振る#4	sense	振る/ふる/v5	v5	colloc	顔を横に振る	고개를 젓다	50	LEX-200	corpus	顔を横に振る → 고개를 젓다
-振る#5	sense	振る/ふる/v5	v5	colloc	首を振る	고개를 젓다	40	LEX-200	corpus	首を振る → 고개를 젓다
-さあ#1	sense	さあ/さあ/intj	intj	colloc	さあ…	글쎄	50	LEX-200	fault	さあ… → 글쎄
-さあ#2	sense	さあ/さあ/intj	intj	colloc	さあ？	글쎄	50	LEX-200	corpus	さあ？ → 글쎄
-頼り#1	sense	頼り/たより/n	n	colloc	頼りにする	믿다	50	LEX-200	corpus	頼りにする → 믿다
-頼り#2	sense	頼り/たより/n	n	colloc	頼りになる	믿음직하다	50	LEX-200	corpus	頼りになる → 믿음직하다
-頼り#3	sense	頼り/たより/n	n	colloc	{X}を頼りに	{X}에 의지해	40	LEX-200	fault	{X}を頼りに → {X}에 의지해
-こう#1	sense	こう/こう/adv	adv	colloc	こうして、	이렇게 해서,	60	LEX-200	fault	こうして、 → 이렇게 해서,
-前置き#1	sense	前置き/まえおき/n	n	colloc	と前置きする	하고 운을 떼다	60	LEX-200	fault	と前置きする → 하고 운을 떼다
-じと#1	sense	じと/じと/adv	adv	colloc	じとりと半目になる	게슴츠레한 눈이 되다	60	LEX-200	fault	じとりと半目になる → 게슴츠레한 눈이 되다
-良し#1	sense	良し/よし/n	n	colloc	良しとする|よしとする	좋다고 여기다	60	LEX-200	fault	良しとする|よしとする → 좋다고 여기다
-段#1	sense	段/だん/n	n	colloc	ダン！と	쾅! 하고	60	LEX-200	fault	ダン！と → 쾅! 하고
-段#2	sense	段/だん/n	n	colloc	ダン、と	쾅, 하고	60	LEX-200	fault	ダン、と → 쾅, 하고
-有る#1	sense	有る/ある/v5	v5	colloc	で、あるからして	그러므로	60	LEX-200	fault	で、あるからして → 그러므로
-思い切り#1	sense	思い切り/おもいきり/n	n	colloc	思い切りの良さ	과감함	70	LEX-200	fault	思い切りの良さ → 과감함
-思い切り#2	sense	思い切り/おもいきり/n	n	colloc	思い切りが良い	과감하다	60	LEX-200	fault	思い切りが良い → 과감하다
-思い切り#3	sense	思い切り/おもいきり/n	n	colloc	思い切りの良い	과감하다	60	LEX-200	fault	思い切りの良い → 과감하다
-声掛け#1	sense	声掛け/こえかけ/n	n	colloc	声掛けする|お声掛けする	말을 걸다	60	LEX-200	fault	声掛けする|お声掛けする → 말을 걸다
-何れ#1	sense	何れ/いずれ/adv	adv	colloc	いずれ劣らぬ	하나같이 뒤지지 않다	60	LEX-200	fault	いずれ劣らぬ → 하나같이 뒤지지 않다
-ぼこぼこ#1	sense	ぼこぼこ/ぼこぼこ/na	na	colloc	ぼこぼこにする	흠씬 두들기다	60	LEX-200	fault	ぼこぼこにする → 흠씬 두들기다
-女手#1	sense	女手/おんなで/n	n	colloc	女手一つで	여자 혼자 힘으로	60	LEX-200	fault	女手一つで → 여자 혼자 힘으로
-迷惑#1	sense	迷惑/めいわく/n	n	colloc	はた迷惑なことに	민폐스럽게도	70	LEX-200	fault	はた迷惑なことに → 민폐스럽게도
-迷惑#2	sense	迷惑/めいわく/n	n	colloc	はた迷惑だ	민폐스럽다	60	LEX-200	fault	はた迷惑だ → 민폐스럽다
-関わり合う#1	sense	関わり合う/かかわりあう/v5	v5	colloc	関わり合いになる	얽히다	60	LEX-200	fault	関わり合いになる → 얽히다
-輝き#1	sense	輝き/かがやき/n	n	colloc	輝きを死なせる	빛을 잃다	60	LEX-200	fault	輝きを死なせる → 빛을 잃다
-足#1	sense	足/あし/n	n	colloc	足を進める	발을 내디디다	60	LEX-200	fault	足を進める → 발을 내디디다
-見#1	sense	見/み/n	n	colloc	二度見をする	두 번 쳐다보기를 하다	60	LEX-200	fault	二度見をする → 두 번 쳐다보기를 하다
-そっくり#1	sense	そっくり/そっくり/na	na	colloc	そっくりさん	닮은 사람	60	LEX-200	fault	そっくりさん → 닮은 사람
-偽物#1	sense	偽物/にせもの/n	n	colloc	偽物さん	가짜	60	LEX-200	fault	偽物さん → 가짜
-適正#1	sense	適正/てきせい/na	na	colloc	適正狩場	적정 사냥터	60	LEX-200	fault	適正狩場 → 적정 사냥터
-適正#2	sense	適正/てきせい/na	na	colloc	適正値	적정치	60	LEX-200	corpus	適正値 → 적정치
-食い意地#1	sense	食い意地/くいいじ/n	n	colloc	食い意地が張る	식탐이 많다	60	LEX-200	fault	食い意地が張る → 식탐이 많다
-常#1	sense	常/つね/n	n	colloc	常ならば	평소라면	60	LEX-200	fault	常ならば → 평소라면
-常#3	sense	常/つね/n	n	colloc	常ならぬ	심상치 않다	70	LEX-200	review	常ならぬ → 심상치 않다
-得意#2	sense	得意/とくい/n	n	colloc	お得意様	단골손님	70	LEX-200	review	お得意様 → 단골손님
-得意#3	sense	得意/とくい/n	n	colloc	お得意さん	단골손님	70	LEX-200	review	お得意さん → 단골손님
-得意#4	sense	得意/とくい/n	n	colloc	お得意先	거래처	70	LEX-200	review	お得意先 → 거래처
-ほわ#1	sense	ほわ/ほわ/adv	adv	colloc	ほわっとする	포근하다	60	LEX-200	fault	ほわっとする → 포근하다
-内#1	sense	内/うち/n	n	colloc	そのうちの	그중	70	LEX-200	review	そのうちの → 그중
-箱入り#1	sense	箱入り/はこいり/n	n	colloc	箱入りで育つ	곱게 자라다	60	LEX-200	fault	箱入りで育つ → 곱게 자라다
-箱入り#2	sense	箱入り/はこいり/n	n	colloc	箱入り娘	곱게 자란 아가씨	60	LEX-200	corpus	箱入り娘 → 곱게 자란 아가씨
-白#1	sense	白/しろ/n	n	colloc	白っぽい	희끄무레하다	60	LEX-200	fault	白っぽい → 희끄무레하다
-ナビ#1	sense	ナビ/なび/n	n	colloc	サポートナビ	서포트 내비	60	LEX-200	fault	サポートナビ → 서포트 내비
-床#1	sense	床/ゆか/n	n	colloc	床ドン	바닥쿵	60	LEX-200	fault	床ドン → 바닥쿵
-経口#1	sense	経口/けいこう/n	n	colloc	経口摂取	경구 섭취	60	LEX-200	fault	経口摂取 → 경구 섭취
-構い#1	sense	構い/かまい/n	n	colloc	{X}にお構いなく	{X}에 아랑곳하지 않고	70	LEX-200	corpus	{X}にお構いなく → {X}에 아랑곳하지 않고
-構い#2	sense	構い/かまい/n	n	colloc	お構いなく	신경 쓰지 마세요	60	LEX-200	fault	お構いなく → 신경 쓰지 마세요
-用足し#1	sense	用足し/ようたし/n	n	colloc	王室御用達	왕실 납품	70	LEX-200	review	王室御用達 → 왕실 납품
-用足し#2	sense	用足し/ようたし/n	n	colloc	御用達	단골	60	LEX-200	fault	御用達 → 단골
-元#2a	sense	元/もと/n	n	colloc	{X:@person}の元に	{X} 곁으로	80	LEX-200	review	{X:@person}の元に → {X} 곁으로
-元#2b	sense	元/もと/n	n	colloc	{X:@person}の元で	{X} 곁에서	80	LEX-200	review	{X:@person}の元で → {X} 곁에서
-内#2a	sense	内/うち/n	n	colloc	そのうち、	머지않아,	60	LEX-200	review	そのうち、 → 머지않아,
-内#3	sense	内/うち/n	n	colloc	そのうちでも	그중에서도	70	LEX-200	review	そのうちでも → 그중에서도
+id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
+遣る/やる/v5#4	sense	遣る/やる/v5	v5	colloc	目をやる		눈을 돌리다	70	LEX-200	corpus	目をやる → 눈을 돌리다
+良い/よい/adj#2	sense	良い/よい/adj	adj	colloc	そんな事は良い|そんなことはいい|そんなことは良い|そんな事はいい		그런 건 됐다	70	LEX-200	fault	そんな事は良い|そんなことはいい|そんなことは良い|そんな事はいい → 그런 건 됐다
+良い/よい/adj#3	sense	良い/よい/adj	adj	colloc	別に良い|別にいい	head=-	괜찮다	70	LEX-200	fault	別に良い|別にいい → 괜찮다
+一体/いったい/n#1	sense	一体/いったい/n	n	colloc	{X}の一体が		{X} 하나가	70	LEX-200	fault	{X}の一体が → {X} 하나가
+一体/いったい/n#2	sense	一体/いったい/n	n	colloc	一体になる		하나가 되다	60	LEX-200	corpus	一体になる → 하나가 되다
+一体/いったい/n#3	sense	一体/いったい/n	n	colloc	一体となる		하나가 되다	60	LEX-200	corpus	一体となる → 하나가 되다
+伸びる#4	sense	伸びる/のびる/v1	v1	frame	after=食らう		뻗다	90	LEX-200	fault	after=食らう → 뻗다
+伸びる#9	sense	伸びる/のびる/v1	v1	colloc	褒められて伸びる		칭찬받으면 성장하다	90	LEX-200	corpus	褒められて伸びる → 칭찬받으면 성장하다
+閉じる#8	sense	閉じる/とじる/v1	v1	colloc	幕を閉じる		막을 내리다	90	LEX-200	review	幕を閉じる → 막을 내리다
+嫌#2	sense	嫌/いや/na	na	colloc	そんなのいや|そんなの嫌		그런 건 싫다	90	LEX-200	fault	そんなのいや|そんなの嫌 → 그런 건 싫다
+嫌#4	sense	嫌/いや/na	na	colloc	嫌な顔をする		싫은 표정을 짓다	90	LEX-200	corpus	嫌な顔をする → 싫은 표정을 짓다
+出す#1	sense	出す/だす/v5	v5	colloc	町を出す		마을 밖으로 내보내다	90	LEX-200	fault	町を出す → 마을 밖으로 내보내다
+出す#2	sense	出す/だす/v5	v5	colloc	声に出す		소리 내어 말하다	90	LEX-200	fault	声に出す → 소리 내어 말하다
+取る#1	sense	取る/とる/v5	v5	colloc	{X}と取られる		{X}로 받아들여지다	90	LEX-200	fault	{X}と取られる → {X}로 받아들여지다
+取る#2	sense	取る/とる/v5	v5	colloc	手に取る		집어 들다	80	LEX-200	corpus	手に取る → 집어 들다
+元#1	sense	元/もと/n	n	colloc	{X:@person}の元に飛び込む		{X}의 품으로 뛰어들다	90	LEX-200	fault	{X:@person}の元に飛び込む → {X}의 품으로 뛰어들다
+元#2	sense	元/もと/n	n	colloc	{X:@person}の元を		{X}의 곁을	80	LEX-200	fault	{X:@person}の元を → {X}의 곁을
+元#3	sense	元/もと/n	n	colloc	{X}を元に戻す		{X}을 원래대로 되돌리다	70	LEX-200	corpus	{X}を元に戻す → {X}을 원래대로 되돌리다
+元#4	sense	元/もと/n	n	colloc	{X}を元に		{X}을 바탕으로	60	LEX-200	corpus	{X}を元に → {X}을 바탕으로
+振る#1	sense	振る/ふる/v5	v5:규칙	colloc	首を縦に振る		고개를 끄덕이다	50	LEX-200	fault	首を縦に振る → 고개를 끄덕이다
+振る#2	sense	振る/ふる/v5	v5:규칙	colloc	首を縦には振る		고개를 끄덕이다	50	LEX-200	fault	首を縦には振る → 고개를 끄덕이다
+振る#3	sense	振る/ふる/v5	v5	colloc	首を横に振る		고개를 젓다	50	LEX-200	corpus	首を横に振る → 고개를 젓다
+振る#4	sense	振る/ふる/v5	v5	colloc	顔を横に振る		고개를 젓다	50	LEX-200	corpus	顔を横に振る → 고개를 젓다
+振る#5	sense	振る/ふる/v5	v5	colloc	首を振る		고개를 젓다	40	LEX-200	corpus	首を振る → 고개를 젓다
+さあ#2	sense	さあ/さあ/intj	intj	colloc	さあ？		글쎄	50	LEX-200	corpus	さあ？ → 글쎄
+頼り#1	sense	頼り/たより/n	n	colloc	頼りにする		의지하다	50	LEX-200	corpus	頼りにする → 의지하다
+頼り#2	sense	頼り/たより/n	n	colloc	頼りになる		믿음직하다	50	LEX-200	corpus	頼りになる → 믿음직하다
+頼り#3	sense	頼り/たより/n	n	colloc	{X}を頼りに		{X}에 의지해	40	LEX-200	fault	{X}を頼りに → {X}에 의지해
+前置き#1	sense	前置き/まえおき/n	n	colloc	と前置きする		하고 운을 떼다	60	LEX-200	fault	と前置きする → 하고 운을 떼다
+じと#1	sense	じと/じと/adv	adv	colloc	じとりと半目になる		눈을 가늘게 뜨고 흘겨보다	60	LEX-200	fault	じとりと半目になる → 눈을 가늘게 뜨고 흘겨보다
+良し#1	sense	良し/よし/n	n	colloc	良しとする|よしとする		좋다고 여기다	60	LEX-200	fault	良しとする|よしとする → 좋다고 여기다
+有る#1	sense	有る/ある/v5	v5	colloc	で、あるからして		그러므로	60	LEX-200	fault	で、あるからして → 그러므로
+思い切り#1	sense	思い切り/おもいきり/n	n	colloc	思い切りの良さ		과감함	70	LEX-200	fault	思い切りの良さ → 과감함
+思い切り#2	sense	思い切り/おもいきり/n	n	colloc	思い切りが良い		과감하다	60	LEX-200	fault	思い切りが良い → 과감하다
+思い切り#3	sense	思い切り/おもいきり/n	n	colloc	思い切りの良い		과감하다	60	LEX-200	fault	思い切りの良い → 과감하다
+声掛け#1	sense	声掛け/こえかけ/n	n	colloc	声掛けする|お声掛けする		말을 걸다	60	LEX-200	fault	声掛けする|お声掛けする → 말을 걸다
+ぼこぼこ#1	sense	ぼこぼこ/ぼこぼこ/na	na	colloc	ぼこぼこにする		흠씬 두들기다	60	LEX-200	fault	ぼこぼこにする → 흠씬 두들기다
+女手#1	sense	女手/おんなで/n	n	colloc	女手一つで		여자 혼자 힘으로	60	LEX-200	fault	女手一つで → 여자 혼자 힘으로
+迷惑#1	sense	迷惑/めいわく/n	n	colloc	はた迷惑なことに		민폐스럽게도	70	LEX-200	fault	はた迷惑なことに → 민폐스럽게도
+迷惑#2	sense	迷惑/めいわく/n	n	colloc	はた迷惑だ		민폐스럽다	60	LEX-200	fault	はた迷惑だ → 민폐스럽다
+関わり合う#1	sense	関わり合う/かかわりあう/v5	v5	colloc	関わり合いになる		얽히다	60	LEX-200	fault	関わり合いになる → 얽히다
+輝き#1	sense	輝き/かがやき/n	n	colloc	輝きを死なせる		빛을 꺼뜨리다	60	LEX-200	fault	輝きを死なせる → 빛을 꺼뜨리다
+足#1	sense	足/あし/n	n	colloc	足を進める		발을 내디디다	60	LEX-200	fault	足を進める → 발을 내디디다
+見#1	sense	見/み/n	n	colloc	二度見をする		다시 한번 쳐다보다	60	LEX-200	fault	二度見をする → 다시 한번 쳐다보다
+そっくり#1	sense	そっくり/そっくり/na	na	colloc	そっくりさん		닮은 사람	60	LEX-200	fault	そっくりさん → 닮은 사람
+偽物#1	sense	偽物/にせもの/n	n	colloc	偽物さん		가짜	60	LEX-200	fault	偽物さん → 가짜
+適正#1	sense	適正/てきせい/na	na	colloc	適正狩場		적정 사냥터	60	LEX-200	fault	適正狩場 → 적정 사냥터
+適正#2	sense	適正/てきせい/na	na	colloc	適正値		적정치	60	LEX-200	corpus	適正値 → 적정치
+食い意地#1	sense	食い意地/くいいじ/n	n	colloc	食い意地が張る		식탐이 많다	60	LEX-200	fault	食い意地が張る → 식탐이 많다
+常#1	sense	常/つね/n	n	colloc	常ならば		평소라면	60	LEX-200	fault	常ならば → 평소라면
+得意#2	sense	得意/とくい/n	n	colloc	お得意様		단골손님	70	LEX-200	review	お得意様 → 단골손님
+得意#3	sense	得意/とくい/n	n	colloc	お得意さん		단골손님	70	LEX-200	review	お得意さん → 단골손님
+得意#4	sense	得意/とくい/n	n	colloc	お得意先		거래처	70	LEX-200	review	お得意先 → 거래처
+ほわ#1	sense	ほわ/ほわ/adv	adv	colloc	ほわっとする		포근하다	60	LEX-200	fault	ほわっとする → 포근하다
+箱入り#1	sense	箱入り/はこいり/n	n	colloc	箱入りで育つ		곱게 자라다	60	LEX-200	fault	箱入りで育つ → 곱게 자라다
+箱入り#2	sense	箱入り/はこいり/n	n	colloc	箱入り娘		곱게 자란 아가씨	60	LEX-200	corpus	箱入り娘 → 곱게 자란 아가씨
+ナビ#1	sense	ナビ/なび/n	n	colloc	サポートナビ		서포트 내비	60	LEX-200	fault	サポートナビ → 서포트 내비
+床#1	sense	床/ゆか/n	n	colloc	床ドン		바닥쿵	60	LEX-200	fault	床ドン → 바닥쿵
+経口#1	sense	経口/けいこう/n	n	colloc	経口摂取		경구 섭취	60	LEX-200	fault	経口摂取 → 경구 섭취
+構い#1	sense	構い/かまい/n	n	colloc	{X}にお構いなく		{X}에 아랑곳하지 않고	70	LEX-200	corpus	{X}にお構いなく → {X}에 아랑곳하지 않고
+構い#2	sense	構い/かまい/n	n	colloc	お構いなく		신경 쓰지 마세요	60	LEX-200	fault	お構いなく → 신경 쓰지 마세요
+用足し#1	sense	用足し/ようたし/n	n	colloc	王室御用達		왕실 납품	70	LEX-200	review	王室御用達 → 왕실 납품
+元#2a	sense	元/もと/n	n	colloc	{X:@person}の元に		{X}의 곁으로	80	LEX-200	review	{X:@person}の元に → {X}의 곁으로
+元#2b	sense	元/もと/n	n	colloc	{X:@person}の元で		{X}의 곁에서	80	LEX-200	review	{X:@person}の元で → {X}의 곁에서
+一体/いったい/n#1b	sense	一体/いったい/n	n	colloc	{X}の一体を		{X} 하나를	70	LEX-200	review	{X}の一体を → {X} 하나를
+元#2c	sense	元/もと/n	n	colloc	{X:@person}の元まで		{X}의 곁까지	80	LEX-200	review	{X:@person}の元まで → {X}의 곁까지
+元#2d	sense	元/もと/n	n	colloc	{X:@person}の元へ		{X}의 곁으로	80	LEX-200	review	{X:@person}の元へ → {X}의 곁으로
+内#3	sense	内/うち/n	n	colloc	そのうちでも		그중에서도	70	LEX-200	review	そのうちでも → 그중에서도
