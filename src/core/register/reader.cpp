@@ -214,19 +214,18 @@ std::vector<PreItem> ConvertLine(const Reader& d, const std::u32string& ja, cons
     for (const Row& r : rows) {
         long p = -1;
         if (!r.surf.empty()) {
-            const std::size_t f = ja.find(r.surf, cursor);
-            if (f != std::u32string::npos && f - cursor <= 60) p = static_cast<long>(f);
+            const std::size_t f = std::u32string_view(ja).substr(0, cursor + 60 + r.surf.size()).find(r.surf, cursor);
+            if (f != std::u32string::npos) p = static_cast<long>(f);
         }
         pos.push_back(p);
         if (p >= 0) cursor = static_cast<std::size_t>(p) + r.surf.size();
     }
-    std::vector<std::pair<std::size_t, std::size_t>> covered;
+    std::vector<bool> covered(ja.size());
     for (std::size_t n = 0; n < rows.size(); n++)
         if (pos[n] >= 0)
-            covered.push_back({static_cast<std::size_t>(pos[n]), static_cast<std::size_t>(pos[n]) + rows[n].surf.size()});
-    const auto cov = [&](std::size_t i) {
-        return std::any_of(covered.begin(), covered.end(), [&](const auto& c) { return c.first <= i && i < c.second; });
-    };
+            for (std::size_t k = static_cast<std::size_t>(pos[n]); k < static_cast<std::size_t>(pos[n]) + rows[n].surf.size(); k++)
+                covered[k] = true;
+    const auto cov = [&](std::size_t i) { return covered[i]; };
     // uncovered marks, symbols and stutters in source order
     std::vector<std::pair<std::size_t, PreItem>> runs;
     for (std::size_t i = 0; i < ja.size(); i++) {
@@ -469,14 +468,15 @@ PreLine ReadLine(const Data& data, std::size_t i, const std::string& ja, const s
     line.scene = scene;
     line.dialogue = dialogue;
     const std::u32string ja32 = ToU32(ja);
+    line.speaker = SpeakerTag(d, ja32);  // a tagged line without a quote is dialogue too
+    if (!dialogue) return line;  // only dialogue lines are written again
     std::vector<Row> rows;
     if (i < capture.items.size()) {
         for (const auto& x : capture.items[i]) rows.push_back({x.sentence, x.token, ToU32(x.surface), ToU32(x.target), ToU32(x.ending)});
-        if (dialogue) KeigoAndCommand(data, ja32, capture.items[i], line.keigo, line.command);
+        KeigoAndCommand(data, ja32, capture.items[i], line.keigo, line.command);
     }
     line.items = ConvertLine(d, ja32, rows);
     line.imp = Imperative(d, ja32);
-    line.speaker = SpeakerTag(d, ja32);  // a tagged line without a quote is dialogue too
     return line;
 }
 

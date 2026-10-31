@@ -186,18 +186,14 @@ ParadigmIndex::ParadigmIndex(const Tables& t, const std::string& lemma, const st
     pos_ = posIn.empty() ? info.pos : posIn;
     cls_ = clsIn.empty() ? info.cls : clsIn;
     shape_ = &ShapeOf(t, pos_, cls_ == "COP");
-    surfaces_.resize(shape_->readings.size());
-    realized_.resize(shape_->readings.size());
 }
 
 Bundle ParadigmIndex::BundleOf(const ParadigmShape::Reading& r) const { return MakeBundle(t_, r, lemma_, pos_, cls_); }
 
 const std::string& ParadigmIndex::SurfaceOf(std::size_t i) {
-    if (!realized_[i]) {
-        surfaces_[i] = Realize(t_, BundleOf(shape_->readings[i]), host_);
-        realized_[i] = true;
-    }
-    return surfaces_[i];
+    auto it = surfaces_.find(i);
+    if (it == surfaces_.end()) it = surfaces_.emplace(i, Realize(t_, BundleOf(shape_->readings[i]), host_)).first;
+    return it->second;
 }
 
 std::vector<Bundle> ParadigmIndex::Find(const std::string& surface) {

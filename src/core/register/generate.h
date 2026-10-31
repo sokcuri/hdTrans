@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 
@@ -82,8 +83,7 @@ private:
     const Tables& t_;
     std::string lemma_, pos_, cls_, host_;
     const ParadigmShape* shape_ = nullptr;
-    std::vector<std::string> surfaces_;
-    std::vector<bool> realized_;
+    std::unordered_map<std::size_t, std::string> surfaces_;  // by reading, those generated so far
 };
 
 // Orders readings that share one surface, best first.

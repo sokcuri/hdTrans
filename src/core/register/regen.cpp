@@ -17,6 +17,7 @@ using hangul::ToU8;
 
 // The readings of the words of one call, by lemma, pos, class, host and surface.
 struct Words {
+    static constexpr std::size_t kKeptLemmas = 1024, kKeptWords = 32768;
     const Tables& t;
     const RetroWords& rw;
     std::unordered_map<std::string, std::unique_ptr<ParadigmIndex>> paradigms;
@@ -27,6 +28,9 @@ struct Words {
         const std::string key = lemma + "|" + pos + "|" + cls + "|" + h.host;
         auto f = found.find(key + "|" + surface);
         if (f == found.end()) {
+            // the readings are kept for the lemmas of a few hundred lines, so that a long document's memory stays bounded
+            if (paradigms.size() >= kKeptLemmas) paradigms.clear();
+            if (found.size() >= kKeptWords) found.clear();
             auto& index = paradigms[key];
             if (!index) index = std::make_unique<ParadigmIndex>(t, lemma, pos, cls, h.host);
             f = found.emplace(key + "|" + surface, index->Find(surface)).first;
@@ -272,8 +276,8 @@ struct Aligner {
     bool Text(const std::string& t, Kind k) {
         const std::u32string u = ToU32(t);
         if (u.empty()) return false;
-        const std::size_t p = o.find(u, c);
-        if (p == std::u32string::npos || p - c > kWindow) return false;
+        const std::size_t p = std::u32string_view(o).substr(0, c + kWindow + u.size()).find(u, c);
+        if (p == std::u32string::npos) return false;
         Gap(p);
         Node n = MakeNode(k, t);
         n.glue = !SpaceBefore(p);

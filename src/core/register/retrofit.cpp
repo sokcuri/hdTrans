@@ -1,5 +1,6 @@
 #include "core/register/retrofit.h"
 
+#include <algorithm>
 #include <vector>
 
 #include "core/register/regen.h"
@@ -25,13 +26,13 @@ void Retrofit(std::span<const std::string> source, const Capture& capture, std::
     std::vector<std::string> ja;
     ja.reserve(source.size());
     for (const std::string& s : source) ja.push_back(WithoutCr(s));
-    if (CaptionDocument(d->reader, ja)) return;
-    std::vector<PreLine> lines;
     std::vector<bool> dialogue(ja.size());
+    for (std::size_t i = 0; i < ja.size(); i++) dialogue[i] = DialogueLine(d->reader, ja[i]);
+    if (std::none_of(dialogue.begin(), dialogue.end(), [](bool b) { return b; }) || CaptionDocument(d->reader, ja)) return;
+    std::vector<PreLine> lines;
     uint32_t scene = 0;
     for (std::size_t i = 0; i < ja.size(); i++) {
         if (Blank(ja[i])) ++scene;
-        dialogue[i] = DialogueLine(d->reader, ja[i]);
         lines.push_back(ReadLine(*d, i, ja[i], WithoutCr(out[i]), capture, dialogue[i], scene));
     }
     RegenOptions options;

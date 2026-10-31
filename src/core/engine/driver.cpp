@@ -1479,7 +1479,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     // The speech-level stage, after the translation of the call and before the post-filter.
     const bool levels = !options.reference;
     LevelWatch levelWatch;
-    if (levels) levelWatch.capture.pieceLine = PieceLines(lines, context);
+    if (levels && !options.filters) levelWatch.capture.pieceLine = PieceLines(lines, context);
     const StageObserver watched = levels ? WatchLevels(levelWatch, observer) : observer;
     const auto translated = [&](std::span<std::string> out) {
         return out.size() >= context ? out.subspan(context) : std::span<std::string>();
@@ -1524,6 +1524,7 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     }
     TranslationOptions writtenOptions = options;
     writtenOptions.filterWritten = written;
+    if (levels) levelWatch.capture.pieceLine = PieceLines(filtered, context);
     std::vector<std::string> out =
         TranslateDocumentPieces(snap, generated, filtered, watched, writtenOptions, filtered, context);
     if (levels) reg::Retrofit(std::span<const std::string>(filtered).subspan(context), levelWatch.capture, translated(out));

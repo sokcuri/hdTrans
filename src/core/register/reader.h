@@ -63,7 +63,7 @@ bool DialogueLine(const Reader& r, std::string_view ja);
 // marks on a fifth of its lines, or mostly short lines without quotes.
 bool CaptionDocument(const Reader& r, const std::vector<std::string>& ja);
 
-// Line i of the capture as the regeneration reads it; keigo and command only for dialogue lines.
+// Line i of the capture as the regeneration reads it; a line that is no dialogue line gets no items.
 PreLine ReadLine(const Data& d, std::size_t i, const std::string& ja, const std::string& out, const Capture& capture,
                  bool dialogue, uint32_t scene);
 
