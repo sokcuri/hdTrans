@@ -527,14 +527,18 @@ Record* CopulaPredicateFirst(Record* records, std::string_view text) {
 bool KatakanaWordRune(char32_t r) { return (r >= U'ァ' && r <= U'ヶ') || r == U'ー'; }
 
 // LEX-95: where the longest word at a point of a katakana run is no name and leaves, beside common
-// words, a word the dictionary reads only as a person's name (フリースリーカード: フリース, リー, カード),
-// a shorter word goes first when common words of three or more kana cover the rest of the run with as
-// many words (フリー, スリー, カード); of those words the longest. Words are dictionary keys inside the
-// run, of two or more kana, as the lookup of the word stage finds them. A plain word with force keeps
-// its place, and so does every word of a run longer than 24 kana. records holds the words at full[cursor:], longest first.
+// words, a stray piece: a word the dictionary reads only as a person's name, or kana no dictionary
+// word starts at, read by their sound (フリースリーカード: フリース, リー, カード; アイスミルクティー:
+// アイスミルク, ティー), a shorter word goes first when common words of three or more kana cover the
+// rest of the run with no more words (フリー, スリー, カード; アイス, ミルクティー); of those words the
+// longest. Words are dictionary keys of two or more kana inside the run, as the lookup of the word
+// stage finds them. A plain word with force keeps its place, and so does every word of a run longer
+// than 24 kana. records holds the words at full[cursor:], longest first.
 Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_view full, std::size_t cursor) {
     constexpr std::size_t kMaxRun = 24;
     if (records == nullptr || (records->user != nullptr && records->user->force)) return records;
+    cursor = std::min(cursor, full.size());
+    if (cursor == full.size() || !KatakanaWordRune(text::DecodeRune(full.substr(cursor)).cp)) return records;
     // The kana of the run before the cursor, and the rune boundaries of the run from it.
     std::size_t before = 0;
     for (std::size_t at = cursor; at > 0 && before <= kMaxRun;) {
@@ -572,7 +576,7 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     };
     std::vector<std::vector<Piece>> pieces(n);
     for (std::size_t i = 0; i + 2 < n; i++) {
-        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i], run - bounds[i]), kModeGeneral);
+        const dict::Candidates found = worker.WordInfo(text.substr(bounds[i]), kModeGeneral);
         for (std::size_t j = i + 2; j < n; j++) {
             const std::size_t length = bounds[j] - bounds[i];
             bool any = false, person = true, proper = false;
@@ -587,6 +591,18 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
             }
             if (any) pieces[i].push_back({j, person, !proper});
         }
+    }
+    // Kana no dictionary word starts at are read by their sound up to where a word starts (or the
+    // run ends). Such a piece of two or more kana counts as a stray piece, as a name-only word does;
+    // one kana, or a piece that starts with ー, ン or a small kana, belongs to the word before it
+    // (ジャーニー|ズ, データベースサーバ|ー, フルーティ|ング).
+    for (std::size_t i = 0; i + 1 < n; i++) {
+        if (!pieces[i].empty()) continue;
+        std::size_t j = i + 1;
+        while (j + 1 < n && pieces[j].empty()) j++;
+        const char32_t r = text::DecodeRune(text.substr(bounds[i])).cp;
+        const bool bound = r == U'ー' || std::u32string_view(U"ンァィゥェォッャュョヮヵヶ").find(r) != std::u32string_view::npos;
+        pieces[i].push_back({j, j - i >= 2 && !bound, false});
     }
     // persons[i][w]: the fewest person words of a cover of the run from bounds[i] by w words.
     std::vector<std::vector<int>> persons(n, std::vector<int>(n, kNone));
@@ -624,8 +640,9 @@ Record* KatakanaCoverFirst(const Worker& worker, Record* records, std::string_vi
     }
     std::size_t chosen = 0;
     for (const Piece& p : pieces[0]) {
-        if (bounds[p.end] < greedy && bounds[p.end] > chosen && p.common && p.end >= 3 && covered[p.end][words - 1]) {
-            chosen = bounds[p.end];
+        if (bounds[p.end] >= greedy || bounds[p.end] <= chosen || !p.common || p.end < 3) continue;
+        for (std::size_t w = 0; w < words; w++) {
+            if (covered[p.end][w]) chosen = bounds[p.end];
         }
     }
     if (chosen == 0) return records;
