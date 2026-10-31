@@ -1,0 +1,5 @@
+#! lexfilter
+# UniDic rows the analyzer does not load (build/mkrules.py). Selectors as in ja/prefs.tsv arc rows.
+id	spec	select	note
+lf.alnum	ANA-L1	alnum	Latin letters and digits are read by character category, one token per run (rb, ４５, TALK), never from dictionary rows of single letters
+lf.symbol-kana	ANA-L1	ud=補助記号 & kana & !surf=っ|ッ|ー|ゝ|ゞ|ヽ|ヾ|ぁ|ぃ|ぅ|ぇ|ぉ|ァ|ィ|ゥ|ェ|ォ	symbol rows spelled with kana (を as a symbol); the lengthening marks っ and ー and small vowels stay symbols

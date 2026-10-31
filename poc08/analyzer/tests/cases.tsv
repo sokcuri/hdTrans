@@ -1,0 +1,34 @@
+#! analyzer-cases
+# Fix and keep cases of the rule analyzer (hd8ana cases; ctest poc08.analyzer.cases). expect: a run of tokens
+# surf or surf[lemma] that the analysis of input contains. Short excerpts and invented minimal pairs.
+id	kind	input	expect	note
+c.nante.1	fix	「なんてことだ」	なんて[なんて]	なんて is the adverbial particle, not な + つう
+c.nante.2	keep	彼女なんて知らない。	彼女 なんて[なんて] 知ら	なんて after a noun
+c.suke.1	fix	佳奈すけが、がばりと顔を上げる。	佳奈 すけ[すけ]	a nickname + すけ: the suffix, not the dialect particle
+c.ne.1	fix	「へー……キレイな人ねぇ……」	人 ねぇ	the final particle ね lengthened
+c.kaicho.1	keep	「お、生徒会長」	生徒 会長	compound noun in short units
+c.utsu.1	fix	銃を撃った	撃っ[撃つ]	the written kanji lemma, not 打つ
+c.toru.1	fix	写真を撮った	撮っ[撮る]	撮る, not 取る
+c.kaeru.1	fix	家に帰った	帰っ[帰る]	帰る, not 返る
+c.hiku.1	fix	ピアノを弾いた	弾い[弾く]	弾く keeps its kanji
+c.kyodai.1	fix	兄妹で遊んだ	兄妹[兄妹]	兄妹, not 兄弟
+c.teta.1	fix	ずっと見てた	見 て[てる] た	てた keeps the contracted いる (てる)
+c.tete.1	fix	見ててね	見 て[てる] て[て] ね	てて = ていて
+c.kanji-cut.1	fix	「でも……割と後悔してる」	後悔 し てる	no cut inside 後悔
+c.kanji-cut.2	fix	「森下さんがいないのか」	森下 さん	a name + さん, not 森 + 下さる
+c.kata.1	fix	ヴァーゲルディアス家としても賛成します	ヴァーゲルディアス 家	an unknown katakana name stays whole
+c.join.1	fix	通 知 表をもらった	通知 表	a spaced run that one word covers is joined
+c.shita.1	keep	部屋を飛び出していた。	飛び出し て い た	し+た is the verb and auxiliary, not 下
+c.iu.1	keep	金は欲しいということだ。	と いう こと	と+いう, not an interjection
+c.nai.1	fix	普通大問題なんじゃないの	じゃ ない[無い] の	ない after じゃ is the adjective, not なさる
+c.te.1	fix	誰か人を呼んで来ます	呼ん で[て] 来	で is the conjunctive particle
+c.yo.1	fix	よく俺のこと見てたよね	よ[よ] ね	the final particle よ, not 様
+c.kedo.1	fix	男爵家の子息だけど、休日に	だ けど	だ + けど, not だけ + ど
+c.ganbaru.1	keep	「ドアが吹き飛んだっ！？」	吹き飛ん だ	the verb chain
+c.tai.1	fix	静かに飲みてえってときに	飲み てえ[たい]	てえ is the spoken たい
+c.elong.1	fix	かわいいいい	かわいいいい[可愛い]	a vowel run that ends a word with a doubled vowel is its lengthening
+c.elong.2	keep	いいいい加減にして	いいいい[良い] 加減	lengthened いい
+c.intj.1	fix	「あ、それはあとでいいのよさ！」	それ は あと	は + あと, not the interjection はあ
+c.intj.2	fix	消灯時間まではあともうちょっとある	まで は あと	まで + は + あと
+c.tomo.1	fix	「ふたりともおはよー」	ふたり[二人]	ふたり is 二人 written in kana, not ふ + たり
+c.youna.1	keep	漫画のようなあかんべーをして	の よう[様]	のような

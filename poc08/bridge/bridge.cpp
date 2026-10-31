@@ -7,6 +7,7 @@
 #include <mutex>
 
 #include "driver/driver.h"
+#include "hd8/stage_hints.h"
 #include "driver/report.h"
 #include "ir/ir_json.h"
 #include "core/word/item.h"
@@ -138,6 +139,34 @@ bool Normalize(void* context, void*, int, std::string_view text, std::string& ou
     return true;
 }
 
+// A cut within this many units of the best path is free for 0.7.x: everything below one rank-2 count (only
+// connection rules, unknown words and derived or fallback words bind).
+constexpr float kTieSlackUnits = 999.0f;
+
+// Small vowel kana, the long-vowel mark and wave dashes: the marks that lengthen a spoken word.
+uint32_t CodePoint(std::string_view ch);
+
+bool IsLengthening(std::string_view ch) {
+    const uint32_t c = CodePoint(ch);
+    const bool smallHira = c >= 0x3041 && c <= 0x3049 && (c - 0x3041) % 2 == 0;
+    const bool smallKata = c >= 0x30A1 && c <= 0x30A9 && (c - 0x30A1) % 2 == 0;
+    return smallHira || smallKata || c == 0x30FC || c == 0x301C || c == 0xFF5E;
+}
+
+uint32_t CodePoint(std::string_view ch) {
+    if (ch.size() != 3) return 0;
+    return (static_cast<uint32_t>(static_cast<unsigned char>(ch[0]) & 0x0F) << 12) |
+           (static_cast<uint32_t>(static_cast<unsigned char>(ch[1]) & 0x3F) << 6) |
+           (static_cast<uint32_t>(static_cast<unsigned char>(ch[2]) & 0x3F));
+}
+
+// Vowel of a hiragana letter (U+3041..U+3093), '-' for none.
+char Vowel(uint32_t c) {
+    static constexpr char kVowels[] =
+        "aaiiuueeooaaiiuueeooaaiiuueeooaaii-uueeooaiueoaaaiiiuuueeeoooaiueoaauuooaiueoaaieo-";
+    return c >= 0x3041 && c <= 0x3093 ? kVowels[c - 0x3041] : '-';
+}
+
 void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
     auto& b = *static_cast<Bridge*>(context);
     if (!b.opt.segment || (doc != nullptr && static_cast<DocState*>(doc)->caption)) return nullptr;
@@ -148,8 +177,51 @@ void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
     StageA(*b.engine.analyzer, b.engine.cfg, d, l, {});
     auto* cs = new ChunkState;
     cs->refits = &b.refits;
-    for (const Token& t : l.toks) cs->ends.push_back(t.src.end);
+    // Only the boundaries that connection rules or the rank 1-3 preferences decided bind 0.7.x; a cut that
+    // the fewest-units rank or a tie-breaker chose is left to 0.7.x's own segmentation.
+    AnalyzerAllowedEnds(*b.engine.analyzer, text, kTieSlackUnits, &cs->ends);
+    for (const Token& t : l.toks) {
+        cs->ends.push_back(t.src.end);
+        // a lengthening at the end of a word may be cut off it (ね|ぇ, から|ぁ), so that 0.7.x keeps its
+        // reading of the word itself
+        uint32_t cut = t.src.end;
+        while (cut > t.src.begin) {
+            uint32_t at = cut - 1;
+            while (at > t.src.begin && (static_cast<unsigned char>(text[at]) & 0xC0) == 0x80) at--;
+            if (!IsLengthening(text.substr(at, cut - at))) break;
+            cut = at;
+        }
+        if (cut > t.src.begin && cut < t.src.end) cs->ends.push_back(cut);
+        // a final small tsu marks a clipped, emphatic ending (ないの|っ, いい|っ) unless it is a verb or adjective's
+        // sound-changed form (行っ+て)
+        const bool inflecting = t.pos == Pos::v1 || t.pos == Pos::v5 || t.pos == Pos::vs || t.pos == Pos::vk ||
+                                t.pos == Pos::vz || t.pos == Pos::adj || t.pos == Pos::aux;
+        if (!inflecting && t.src.end - t.src.begin >= 6) {
+            const uint32_t last = CodePoint(text.substr(t.src.end - 3, 3));
+            if (last == 0x3063 || last == 0x30C3) cs->ends.push_back(t.src.end - 3);
+        }
+        // a particle or auxiliary lengthened by its own vowel (ね|え, よ|お)
+        const bool function = t.pos == Pos::aux || t.pos == Pos::p_case || t.pos == Pos::p_topic ||
+                              t.pos == Pos::p_conj || t.pos == Pos::p_final || t.pos == Pos::p_adv;
+        if (function && t.src.end - t.src.begin >= 6) {
+            const uint32_t last = CodePoint(text.substr(t.src.end - 3, 3)), prev = CodePoint(text.substr(t.src.end - 6, 3));
+            const bool plainVowel = last == 0x3042 || last == 0x3044 || last == 0x3046 || last == 0x3048 || last == 0x304A;
+            if (plainVowel && Vowel(last) != '-' && Vowel(last) == Vowel(prev)) cs->ends.push_back(t.src.end - 3);
+        }
+    }
+    // Inside a compound noun (a run of noun, prefix and suffix tokens) the analyzer's short units say nothing
+    // about how 0.7.x should split it: 0.7.x keeps its own compound keys (生徒会 + 長 as well as 生徒 + 会長).
+    auto nominal = [](Pos p) { return p == Pos::n || p == Pos::pn || p == Pos::num || p == Pos::pref || p == Pos::suf; };
+    for (size_t i = 0; i < l.toks.size();) {
+        size_t j = i;
+        while (j < l.toks.size() && nominal(l.toks[j].pos) && (j == i || l.toks[j].src.begin == l.toks[j - 1].src.end)) j++;
+        if (j > i + 1)
+            for (uint32_t at = l.toks[i].src.begin + 1; at < l.toks[j - 1].src.end; at++)
+                if ((static_cast<unsigned char>(text[at]) & 0xC0) != 0x80) cs->ends.push_back(at);
+        i = j > i ? j : i + 1;
+    }
     std::sort(cs->ends.begin(), cs->ends.end());
+    cs->ends.erase(std::unique(cs->ends.begin(), cs->ends.end()), cs->ends.end());
     b.segmentedChunks++;
     return cs;
 }

@@ -266,7 +266,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
           a.b = static_cast<uint16_t>(i);
           a.e = static_cast<uint16_t>(i + len);
           a.lcls = a.rcls = u.cls;
-          a.cost = u.cost + u.perChar * static_cast<int32_t>(len);
+          a.cost = u.cost + u.perChar * static_cast<int64_t>(len);
           a.kind = ArcKind::unk;
           a.ref = (static_cast<uint32_t>(ci) << 8) | k;
           a.flags = Unknown;
@@ -313,6 +313,9 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
           }
           if (q > p && !CondAll(r.cond, *ws, static_cast<uint32_t>(p), static_cast<uint32_t>(q))) q = p;
           if (q > p) sites.push_back({static_cast<uint32_t>(p), static_cast<uint32_t>(q - p), {}, ri, true});
+          // a vowel run may also keep two letters, for words that end in a doubled vowel (かわいいいい → かわいい)
+          if (q > p + 1 && !IsLong(core[p]))
+            sites.push_back({static_cast<uint32_t>(p + 1), static_cast<uint32_t>(q - p - 1), {}, ri, true});
         }
       }
     }
@@ -347,7 +350,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
           map.clear();
           der.clear();
           size_t pos = i;
-          int32_t extra = 0;
+          int64_t extra = 0;
           int16_t lastRule = -1;
           bool anyElong = false, anyLit = false;
           size_t firstMod = SIZE_MAX;
@@ -371,7 +374,7 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
               der.push_back(1);
             }
             pos = st.p + st.len;
-            extra += m.rules[static_cast<size_t>(st.rule)].cost;
+            extra += m.deriveCost;
             lastRule = st.rule;
             (st.elong ? anyElong : anyLit) = true;
           }
@@ -431,12 +434,38 @@ void BuildLattice(const Model& m, Workspace* ws, const Options& opt) {
       a.b = static_cast<uint16_t>(i);
       a.e = static_cast<uint16_t>(i + len);
       a.lcls = a.rcls = m.stutterCls;
-      a.cost = m.rules[static_cast<size_t>(m.stutterRule)].cost;
+      a.cost = m.deriveCost;
       a.kind = ArcKind::stutter;
       a.flags = Spoken;
       a.rule = m.stutterRule;
       if (spaceOk(a)) ws->arcs.push_back(a);
     }
+  }
+
+  // cut rows: the cost of a token boundary between two character classes goes to the arc that starts there
+  if (!m.cuts.empty()) {
+    std::vector<int64_t> cut(n + 1, 0);
+    // positions inside a run of three or more letters with the same vowel (かわいいいい, すごーー)
+    std::vector<uint8_t> inRun(n + 1, 0);
+    for (size_t p = 0; p < n;) {
+      size_t q = p + 1;
+      int v = IsKana(core[p]) ? VowelChar(core[p]) : 0;
+      while (v && q < n && !ws->spaceBefore[q] && (VowelChar(core[q]) == v || IsLong(core[q]))) ++q;
+      if (v && q - p >= 3)
+        for (size_t k = p + 1; k < q; ++k) inRun[k] = 1;
+      p = q;
+    }
+    for (size_t p = 1; p < n; ++p) {
+      if (ws->spaceBefore[p]) continue;
+      for (auto& c : m.cuts) {
+        if (c.left & ccVowelRun) {
+          if (inRun[p]) cut[p] += c.cost;
+          continue;
+        }
+        if ((ws->cc[p - 1] & c.left) && (ws->cc[p] & c.right)) cut[p] += c.cost;
+      }
+    }
+    for (auto& a : ws->arcs) a.cost += cut[a.b];
   }
 
   // constraints remove arcs; a rule that would leave a start position without arcs is ignored there
@@ -476,14 +505,15 @@ void RunViterbi(const Model& m, Workspace* ws, bool backward) {
   for (size_t pos = 0; pos < n; ++pos) {
     for (uint32_t k = ws->beginStart[pos]; k < ws->beginStart[pos + 1]; ++k) {
       Arc& a = A[ws->byBegin[k]];
-      int32_t best = kInf, bp = -1;
+      int64_t best = kInf;
+      int32_t bp = -1;
       if (pos == 0) {
         best = m.Conn(0, a.lcls);
       } else {
         for (uint32_t j = ws->endStart[pos]; j < ws->endStart[pos + 1]; ++j) {
           const Arc& p = A[ws->byEnd[j]];
           if (p.fwd >= kInf) continue;
-          int32_t v = p.fwd + m.Conn(p.rcls, a.lcls);
+          int64_t v = p.fwd + m.Conn(p.rcls, a.lcls);
           if (v < best) {
             best = v;
             bp = static_cast<int32_t>(ws->byEnd[j]);
@@ -494,11 +524,12 @@ void RunViterbi(const Model& m, Workspace* ws, bool backward) {
       a.bp = bp;
     }
   }
-  int32_t best = kInf, last = -1;
+  int64_t best = kInf;
+  int32_t last = -1;
   for (uint32_t j = ws->endStart[n]; j < ws->endStart[n + 1]; ++j) {
     const Arc& p = A[ws->byEnd[j]];
     if (p.fwd >= kInf) continue;
-    int32_t v = p.fwd + m.Conn(p.rcls, 0);
+    int64_t v = p.fwd + m.Conn(p.rcls, 0);
     if (v < best) {
       best = v;
       last = static_cast<int32_t>(ws->byEnd[j]);
@@ -511,14 +542,15 @@ void RunViterbi(const Model& m, Workspace* ws, bool backward) {
   for (size_t pos = n; pos-- > 0;) {
     for (uint32_t k = ws->beginStart[pos]; k < ws->beginStart[pos + 1]; ++k) {
       Arc& a = A[ws->byBegin[k]];
-      int32_t bw = kInf, np = -1;
+      int64_t bw = kInf;
+      int32_t np = -1;
       if (a.e == n) {
         bw = m.Conn(a.rcls, 0);
       } else {
         for (uint32_t j = ws->beginStart[a.e]; j < ws->beginStart[a.e + 1]; ++j) {
           const Arc& q = A[ws->byBegin[j]];
           if (q.bwd >= kInf) continue;
-          int32_t v = m.Conn(a.rcls, q.lcls) + q.cost + q.bwd;
+          int64_t v = m.Conn(a.rcls, q.lcls) + q.cost + q.bwd;
           if (v < bw) {
             bw = v;
             np = static_cast<int32_t>(ws->byBegin[j]);
@@ -536,20 +568,22 @@ void SubPath(const Model& m, const Workspace& wsr, uint16_t s, uint16_t t, uint1
   const Workspace* ws = &wsr;
   auto& A = ws->arcs;
   out->clear();
-  std::vector<int32_t> f(A.size(), kInf), bp(A.size(), -1);
+  std::vector<int64_t> f(A.size(), kInf);
+  std::vector<int32_t> bp(A.size(), -1);
   for (size_t pos = s; pos < t; ++pos) {
     for (uint32_t k = ws->beginStart[pos]; k < ws->beginStart[pos + 1]; ++k) {
       uint32_t ai = ws->byBegin[k];
       const Arc& a = A[ai];
       if (a.e > t || a.kind == ArcKind::longUnit) continue;
-      int32_t best = kInf, b = -1;
+      int64_t best = kInf;
+      int32_t b = -1;
       if (pos == s) {
         best = m.Conn(startCls, a.lcls);
       } else {
         for (uint32_t j = ws->endStart[pos]; j < ws->endStart[pos + 1]; ++j) {
           uint32_t pi = ws->byEnd[j];
           if (f[pi] >= kInf || A[pi].b < s) continue;
-          int32_t v = f[pi] + m.Conn(A[pi].rcls, a.lcls);
+          int64_t v = f[pi] + m.Conn(A[pi].rcls, a.lcls);
           if (v < best) {
             best = v;
             b = static_cast<int32_t>(pi);
@@ -562,11 +596,12 @@ void SubPath(const Model& m, const Workspace& wsr, uint16_t s, uint16_t t, uint1
       }
     }
   }
-  int32_t best = kInf, last = -1;
+  int64_t best = kInf;
+  int32_t last = -1;
   for (uint32_t j = ws->endStart[t]; j < ws->endStart[t + 1]; ++j) {
     uint32_t pi = ws->byEnd[j];
     if (f[pi] >= kInf || A[pi].b < s) continue;
-    int32_t v = f[pi] + m.Conn(A[pi].rcls, endCls);
+    int64_t v = f[pi] + m.Conn(A[pi].rcls, endCls);
     if (v < best) {
       best = v;
       last = static_cast<int32_t>(pi);

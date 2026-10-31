@@ -44,11 +44,10 @@ uint32_t ParseMask(const std::string& s) {
     else if (t == "sym") m |= ccSym;
     else if (t == "other") m |= ccOther;
     else if (t == "end") m |= ccEnd;
+    else if (t == "vowelrun") m |= ccVowelRun;
   }
   return m;
 }
-
-int32_t Nats(const std::string& s) { return static_cast<int32_t>(std::lround(std::atof(s.c_str()) * 100.0)); }
 
 bool ParseConds(const std::string& s, std::vector<Model::Cond>* out, std::string* err) {
   if (s.empty() || s == "-") return true;
@@ -214,7 +213,7 @@ bool LoadTsvDir(const std::string& dir, Model* m, std::string* err) {
             g.read = m->Intern(f[1]);
           }
         }
-        g.cost = std::atoi(f[6].c_str());
+        g.cost = std::strtoll(f[6].c_str(), nullptr, 10);
         // paradigm instance: template forms with their classes
         std::vector<uint32_t> key{static_cast<uint32_t>(tid)};
         std::vector<Model::PForm> forms;
@@ -268,31 +267,21 @@ bool LoadTsvDir(const std::string& dir, Model* m, std::string* err) {
   if (!ok) return fail("lexicon.tsv: " + bad);
 
   // connection
-  if (!ReadTsv(dir + "/model/conn.tsv", [&](const std::vector<std::string>& f) {
-        if (f.size() < 3) return;
-        Model::Pair p;
-        int l = std::atoi(f[0].c_str()), r = std::atoi(f[1].c_str());
-        if (l < 0 || r < 0 || static_cast<size_t>(l) >= n || static_cast<size_t>(r) >= n) {
+  if (!ReadTsv(dir + "/model/connrules.tsv", [&](const std::vector<std::string>& f) {
+        if (!ok || f.size() < 3) return;
+        Model::ConnRule c;
+        c.left = f[0];
+        c.right = f[1];
+        c.cost = std::strtoll(f[2].c_str(), nullptr, 10);
+        if (!ParseSel(c.left, &c.l) || !ParseSel(c.right, &c.r)) {
           ok = false;
+          bad = f[0] + " -> " + f[1];
           return;
         }
-        p.l = static_cast<uint16_t>(l);
-        p.r = static_cast<uint16_t>(r);
-        p.cost = std::atoi(f[2].c_str());
-        m->pairs.push_back(p);
+        m->connRules.push_back(std::move(c));
       }, &e))
     return fail(e);
-  if (!ok) return fail("conn.tsv: class out of range");
-  m->boLeft.assign(n, 0);
-  m->uniRight.assign(n, 0);
-  if (!ReadTsv(dir + "/model/backoff.tsv", [&](const std::vector<std::string>& f) {
-        if (f.size() < 3) return;
-        size_t c = static_cast<size_t>(std::atoi(f[0].c_str()));
-        if (c >= n) return;
-        m->boLeft[c] = std::atoi(f[1].c_str());
-        m->uniRight[c] = std::atoi(f[2].c_str());
-      }, &e))
-    return fail(e);
+  if (!ok) return fail("connrules.tsv: bad selector " + bad);
 
   // characters and unknown words
   std::vector<std::vector<std::string>> rangeRows;
@@ -331,8 +320,8 @@ bool LoadTsvDir(const std::string& dir, Model* m, std::string* err) {
           if (c.name == f[0]) {
             Model::UnkArc a;
             a.cls = static_cast<uint16_t>(std::atoi(f[1].c_str()));
-            a.cost = std::atoi(f[2].c_str());
-            a.perChar = std::atoi(f[3].c_str());
+            a.cost = std::strtoll(f[2].c_str(), nullptr, 10);
+            a.perChar = std::strtoll(f[3].c_str(), nullptr, 10);
             if (a.cls < n) c.arcs.push_back(a);
           }
       }, &e))
@@ -346,7 +335,6 @@ bool LoadTsvDir(const std::string& dir, Model* m, std::string* err) {
         r.kind = f[1] == "elong" ? 1 : f[1] == "stutter" ? 2 : 0;
         r.from = ToU32(f[2] == "-" ? "" : f[2]);
         r.to = ToU32(f[3] == "-" ? "" : f[3]);
-        r.cost = Nats(f[4]);
         std::string ce;
         if (!ParseConds(f[5], &r.cond, &ce)) {
           ok = false;
@@ -398,7 +386,17 @@ bool LoadTsvDir(const std::string& dir, Model* m, std::string* err) {
   // parameters
   if (!ReadTsv(dir + "/model/params.tsv", [&](const std::vector<std::string>& f) {
         if (f.size() < 2) return;
-        if (f[0] == "join_cost") m->joinCost = Nats(f[1]);
+        if (f[0] == "cut") {  // value: LEFT RIGHT COST (char classes joined by |)
+          auto parts = SplitOn(f[1], ' ');
+          if (parts.size() == 3) m->cuts.push_back({ParseMask(parts[0]), ParseMask(parts[1]),
+                                                    std::strtoll(parts[2].c_str(), nullptr, 10)});
+          return;
+        }
+        int64_t v = std::strtoll(f[1].c_str(), nullptr, 10);
+        if (f[0] == "join_cost") m->joinCost = v;
+        else if (f[0] == "derive_cost") m->deriveCost = v;
+        else if (f[0] == "forbid_cost") m->forbidCost = v;
+        else if (f[0] == "unit_cost") m->unitCost = v > 0 ? v : 1;
         else if (f[0] == "stutter_ud") {
           int c = findClass(f[1], "*", "*", "");
           if (c >= 0) m->stutterCls = static_cast<uint16_t>(c);
@@ -437,7 +435,7 @@ bool LoadLongTsv(const std::string& path, Model* m, std::string* err) {
         l.pos = p;
         l.lcls = static_cast<uint16_t>(std::atoi(f[2].c_str()));
         l.rcls = static_cast<uint16_t>(std::atoi(f[3].c_str()));
-        l.cost = std::atoi(f[4].c_str());
+        l.cost = std::strtoll(f[4].c_str(), nullptr, 10);
         int ud = udId(f[5]);
         int ct = f[6] == "*" ? 0 : Index(m->ctypeNames, f[6]);
         int cf = f[7] == "*" ? 0 : Index(m->cformNames, f[7]);

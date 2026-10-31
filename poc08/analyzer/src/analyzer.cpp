@@ -108,7 +108,7 @@ struct Emitter {
     auto surf = Core(a.b, a.e);
     for (char32_t c : surf) AppendUtf8(t.surf, c);
     t.flags = a.flags;
-    t.cost = static_cast<float>(a.cost) / 100.0f;
+    t.cost = static_cast<float>(static_cast<double>(a.cost) / static_cast<double>(m.unitCost));
     if (a.rule >= 0) t.derive = m.rules[static_cast<size_t>(a.rule)].id;
     if (a.removedBy >= 0) t.removedBy = m.constraints[static_cast<size_t>(a.removedBy)].id;
     switch (a.kind) {
@@ -245,13 +245,18 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
 
   // margins, same-span alternatives and path 1
   const auto& A = ws->arcs;
-  int32_t tau = static_cast<int32_t>(opt.altTau * 100.0f);
-  int32_t minMargin = kInf;
+  // costs are in units of one token (ja/prefs.tsv pf.units); a margin below one unit was decided by a class
+  // preference only, a margin of 0 is a tie
+  const double unit = static_cast<double>(m.unitCost);
+  auto units = [unit](int64_t c) { return static_cast<float>(static_cast<double>(c) / unit); };
+  int64_t tau = static_cast<int64_t>(static_cast<double>(opt.altTau) * unit);
+  int64_t minMargin = kInf;
   int32_t minArc = -1;
   size_t ti = 0;
   for (size_t pi = 0; pi < ws->path.size(); ++pi) {
     const Arc& x = A[ws->path[pi]];
-    int32_t margin = kInf, arg = -1;
+    int64_t margin = kInf;
+    int32_t arg = -1;
     while (ti < tokPath.size() && tokPath[ti] < pi) ++ti;
     Token* tok = ti < tokPath.size() && tokPath[ti] == pi ? &out->toks[ti] : nullptr;
     uint16_t altFirst = static_cast<uint16_t>(out->alts.size());
@@ -267,14 +272,14 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
         continue;
       }
       if (y.fwd >= kInf || y.bwd >= kInf) continue;
-      int32_t pc = y.fwd + y.bwd - ws->best;
+      int64_t pc = y.fwd + y.bwd - ws->best;
       if (pc < margin) {
         margin = pc;
         arg = static_cast<int32_t>(yi);
       }
       if (y.b == x.b && y.e == x.e && pc < tau && tok) {
         Token t = em.Make(y);
-        t.margin = static_cast<float>(pc) / 100.0f;
+        t.margin = units(pc);
         out->alts.push_back(std::move(t));
       }
     }
@@ -282,7 +287,7 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
       tok->alt = altFirst;
       tok->nAlt = static_cast<uint16_t>(out->alts.size() - altFirst);
       for (size_t k = ti; k < tokPath.size() && tokPath[k] == pi; ++k)
-        out->toks[k].margin = margin >= kInf ? 99.0f : static_cast<float>(margin) / 100.0f;
+        out->toks[k].margin = margin >= kInf ? 1e9f : units(margin);
     }
     if (margin < minMargin) {
       minMargin = margin;
@@ -296,7 +301,7 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
     for (int32_t a = A[static_cast<size_t>(minArc)].np; a >= 0; a = A[static_cast<size_t>(a)].np)
       p1.push_back(static_cast<uint32_t>(a));
     em.Emit(p1, &out->alt, false, opt, ws);
-    out->altMargin = static_cast<float>(minMargin) / 100.0f;
+    out->altMargin = units(minMargin);
   }
 }
 
@@ -342,7 +347,7 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, floa
   opt.margins = false;
   BuildLattice(m, ws, opt);
   RunViterbi(m, ws, true);
-  const int32_t slack = static_cast<int32_t>(slackNats * 100.0f);
+  const int64_t slack = static_cast<int64_t>(static_cast<double>(slackNats) * static_cast<double>(m.unitCost));
   auto through = [&](const Arc& a) {
     return a.fwd >= kInf || a.bwd >= kInf ? kInf : a.fwd + a.bwd - ws->best;
   };
@@ -430,7 +435,7 @@ void Analyzer::Hints(std::string_view text, SegHints* out, Workspace* wsIn, floa
     if (it == m.kanjiGroups.end()) continue;
     uint16_t cls = m.pforms[x.form].cls;
     std::string best;
-    int32_t bestCost = kInf;
+    int64_t bestCost = kInf;
     for (uint32_t g : it->second) {
       const auto& gr = m.groups[g];
       if (gr.ud != m.groups[x.ref].ud || gr.ctype != m.groups[x.ref].ctype) continue;

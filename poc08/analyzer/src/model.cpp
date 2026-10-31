@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <cstring>
+#include <map>
+#include <unordered_map>
 
 #include "utf8.h"
 
@@ -184,7 +186,7 @@ uint32_t AppendCps(Model* m, std::string_view utf8) {
 
 constexpr char kMagic[] = "HD8A";
 constexpr char kMagicLong[] = "HD8L";
-constexpr uint64_t kVersion = 1;
+constexpr uint64_t kVersion = 2;  // 2: rule-compiled int64 costs, no backoff
 
 void WriteNames(Writer& w, const std::vector<std::string>& v) {
   w.U(v.size());
@@ -201,16 +203,129 @@ bool ReadNames(Reader& r, std::vector<std::string>* v) {
 
 }  // namespace
 
+namespace {
+
+bool AtomHolds(const Model& m, const Model::SelAtom& a, uint32_t cls) {
+  const auto& c = m.classes[cls];
+  bool r = false;
+  if (a.key == 4) {
+    r = cls == 0;
+  } else {
+    std::string_view v = a.key == 0 ? std::string_view(m.udNames[c.ud])
+                         : a.key == 1 ? std::string_view(m.ctypeNames[c.ctype])
+                         : a.key == 2 ? std::string_view(m.cformNames[c.cform])
+                                      : m.S(c.lemma);
+    if (cls == 0 && a.key != 3) v = a.key == 0 ? std::string_view("BOS/EOS") : std::string_view();
+    for (auto& x : a.vals) {
+      if (a.key == 3 ? v == x : (v.substr(0, x.size()) == x)) {
+        r = true;
+        break;
+      }
+    }
+  }
+  return a.neg ? !r : r;
+}
+
+bool SelHolds(const Model& m, const Model::Sel& s, uint32_t cls) {
+  if (s.alts.empty()) return true;
+  for (auto& alt : s.alts) {
+    bool all = true;
+    for (auto& a : alt) all = all && AtomHolds(m, a, cls);
+    if (all) return true;
+  }
+  return false;
+}
+
+// Classes that match the same rules on the left (right) side share one row (column) of the matrix.
+void CompileConn(Model* m) {
+  size_t n = m->classes.size(), k = m->connRules.size();
+  auto sigs = [&](bool left, std::vector<uint16_t>* out) {
+    std::map<std::vector<bool>, uint16_t> ids;
+    out->assign(n, 0);
+    std::vector<std::vector<bool>> rep;
+    for (size_t c = 0; c < n; ++c) {
+      std::vector<bool> sig(k);
+      for (size_t r = 0; r < k; ++r)
+        sig[r] = SelHolds(*m, left ? m->connRules[r].l : m->connRules[r].r, static_cast<uint32_t>(c));
+      auto it = ids.find(sig);
+      if (it == ids.end()) {
+        it = ids.emplace(sig, static_cast<uint16_t>(rep.size())).first;
+        rep.push_back(sig);
+      }
+      (*out)[c] = it->second;
+    }
+    return rep;
+  };
+  auto L = sigs(true, &m->connL), R = sigs(false, &m->connR);
+  m->nConnR = static_cast<uint32_t>(R.size());
+  m->conn.assign(L.size() * R.size(), 0);
+  for (size_t i = 0; i < L.size(); ++i)
+    for (size_t j = 0; j < R.size(); ++j) {
+      int64_t c = 0, forbid = 0;
+      for (size_t r = 0; r < k; ++r) {
+        if (!L[i][r] || !R[j][r]) continue;
+        // forbidden pairs count once; preferences add up
+        if (m->connRules[r].cost >= m->forbidCost && m->forbidCost > 0) forbid = m->connRules[r].cost;
+        else c += m->connRules[r].cost;
+      }
+      m->conn[i * R.size() + j] = c + forbid;
+    }
+}
+
+}  // namespace
+
+bool ParseSel(const std::string& text, Model::Sel* out) {
+  out->alts.clear();
+  if (text.empty() || text == "*" || text == "-") return true;
+  size_t start = 0;
+  while (start <= text.size()) {
+    size_t slash = text.find(" / ", start);
+    std::string alt = text.substr(start, slash == std::string::npos ? std::string::npos : slash - start);
+    std::vector<Model::SelAtom> atoms;
+    size_t p = 0;
+    while (p <= alt.size()) {
+      size_t amp = alt.find('&', p);
+      std::string t = alt.substr(p, amp == std::string::npos ? std::string::npos : amp - p);
+      size_t a = t.find_first_not_of(' '), b = t.find_last_not_of(' ');
+      t = a == std::string::npos ? std::string() : t.substr(a, b - a + 1);
+      Model::SelAtom at;
+      if (!t.empty() && t[0] == '!') {
+        at.neg = true;
+        t = t.substr(1);
+      }
+      size_t eq = t.find('=');
+      std::string key = eq == std::string::npos ? t : t.substr(0, eq);
+      if (key == "ud") at.key = 0;
+      else if (key == "ctype") at.key = 1;
+      else if (key == "cform") at.key = 2;
+      else if (key == "lemma") at.key = 3;
+      else if (key == "bos") at.key = 4;
+      else return false;
+      if (eq != std::string::npos) {
+        std::string v = t.substr(eq + 1);
+        size_t q = 0;
+        while (q <= v.size()) {
+          size_t bar = v.find('|', q);
+          at.vals.push_back(v.substr(q, bar == std::string::npos ? std::string::npos : bar - q));
+          if (bar == std::string::npos) break;
+          q = bar + 1;
+        }
+      }
+      atoms.push_back(std::move(at));
+      if (amp == std::string::npos) break;
+      p = amp + 1;
+    }
+    out->alts.push_back(std::move(atoms));
+    if (slash == std::string::npos) break;
+    start = slash + 3;
+  }
+  return true;
+}
+
 void Finalize(Model* m) {
   m->nClass = static_cast<uint32_t>(m->classes.size());
   size_t n = m->nClass;
-  m->conn.assign(n * n, 0);
-  for (size_t a = 0; a < n; ++a)
-    for (size_t b = 0; b < n; ++b) {
-      int v = m->boLeft[a] + m->uniRight[b];
-      m->conn[a * n + b] = static_cast<int16_t>(std::clamp(v, -32000, 32000));
-    }
-  for (auto& p : m->pairs) m->conn[static_cast<size_t>(p.l) * n + p.r] = static_cast<int16_t>(std::clamp(p.cost, -32000, 32000));
+  CompileConn(m);
   BuildTrie(&m->trie, m->groups.size(), [m](size_t i) { return m->C(m->groups[i].stem, m->groups[i].stemLen); });
   m->bmpPrimary.assign(0x10000, 0);
   m->bmpMask.assign(0x10000, 1);
@@ -302,17 +417,12 @@ std::string Serialize(const Model& m) {
   }
   for (auto& x : g) w.Bytes(m.S(x.lemma));
   for (auto& x : g) w.I(x.cost);
-  w.U(m.pairs.size());
-  uint32_t pl = 0, pr = 0;
-  for (auto& p : m.pairs) {
-    w.U(p.l - pl);
-    w.U(p.l == pl ? p.r - pr : p.r);
-    pl = p.l;
-    pr = p.r;
+  w.U(m.connRules.size());
+  for (auto& r : m.connRules) {
+    w.Bytes(r.left);
+    w.Bytes(r.right);
+    w.I(r.cost);
   }
-  for (auto& p : m.pairs) w.I(p.cost);
-  for (auto v : m.boLeft) w.I(v);
-  for (auto v : m.uniRight) w.I(v);
   w.U(m.cats.size());
   for (auto& c : m.cats) {
     w.Bytes(c.name);
@@ -348,7 +458,6 @@ std::string Serialize(const Model& m) {
     w.U(r.kind);
     w.U32(r.from);
     w.U32(r.to);
-    w.I(r.cost);
     writeConds(r.cond);
     w.Bytes(r.id);
   }
@@ -364,6 +473,15 @@ std::string Serialize(const Model& m) {
     writeConds(c.unless);
   }
   w.I(m.joinCost);
+  w.I(m.deriveCost);
+  w.I(m.forbidCost);
+  w.I(m.unitCost);
+  w.U(m.cuts.size());
+  for (auto& c : m.cuts) {
+    w.U(c.left);
+    w.U(c.right);
+    w.I(c.cost);
+  }
   w.U(m.stutterCls);
   return w.b;
 }
@@ -441,27 +559,22 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
     if (x.readKind == 1) x.read = Append(m, r.Bytes());
   }
   for (auto& x : m->groups) x.lemma = Append(m, r.Bytes());
-  for (auto& x : m->groups) x.cost = static_cast<int32_t>(r.I());
+  for (auto& x : m->groups) x.cost = r.I();
   n = r.U();
   if (!r.ok || n > bytes.size()) {
-    *err = "bad pair count";
+    *err = "bad connection rule count";
     return false;
   }
-  m->pairs.resize(n);
-  uint32_t pl = 0, pr = 0;
-  for (auto& p : m->pairs) {
-    uint32_t dl = static_cast<uint32_t>(r.U());
-    uint32_t v = static_cast<uint32_t>(r.U());
-    p.l = static_cast<uint16_t>(pl + dl);
-    p.r = static_cast<uint16_t>(dl == 0 ? pr + v : v);
-    pl = p.l;
-    pr = p.r;
+  m->connRules.resize(n);
+  for (auto& c : m->connRules) {
+    c.left = std::string(r.Bytes());
+    c.right = std::string(r.Bytes());
+    c.cost = r.I();
+    if (!ParseSel(c.left, &c.l) || !ParseSel(c.right, &c.r)) {
+      *err = "bad connection selector";
+      return false;
+    }
   }
-  for (auto& p : m->pairs) p.cost = static_cast<int32_t>(r.I());
-  m->boLeft.resize(m->classes.size());
-  m->uniRight.resize(m->classes.size());
-  for (auto& v : m->boLeft) v = static_cast<int32_t>(r.I());
-  for (auto& v : m->uniRight) v = static_cast<int32_t>(r.I());
   n = r.U();
   m->cats.resize(r.ok && n < 256 ? n : 0);
   for (auto& c : m->cats) {
@@ -473,8 +586,8 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
     for (uint64_t i = 0; i < k && r.ok; ++i) {
       Model::UnkArc a;
       a.cls = static_cast<uint16_t>(r.U());
-      a.cost = static_cast<int32_t>(r.I());
-      a.perChar = static_cast<int32_t>(r.I());
+      a.cost = r.I();
+      a.perChar = r.I();
       c.arcs.push_back(a);
     }
   }
@@ -505,7 +618,6 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
     ru.kind = static_cast<uint8_t>(r.U());
     ru.from = internal::ToU32(r.Bytes());
     ru.to = internal::ToU32(r.Bytes());
-    ru.cost = static_cast<int32_t>(r.I());
     readConds(&ru.cond);
     ru.id = std::string(r.Bytes());
     m->rules.push_back(ru);
@@ -523,7 +635,19 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
     readConds(&c.unless);
     m->constraints.push_back(std::move(c));
   }
-  m->joinCost = static_cast<int32_t>(r.I());
+  m->joinCost = r.I();
+  m->deriveCost = r.I();
+  m->forbidCost = r.I();
+  m->unitCost = r.I();
+  if (m->unitCost <= 0) m->unitCost = 1;
+  n = r.U();
+  for (uint64_t i = 0; i < n && r.ok && i < 64; ++i) {
+    Model::Cut c;
+    c.left = static_cast<uint32_t>(r.U());
+    c.right = static_cast<uint32_t>(r.U());
+    c.cost = r.I();
+    m->cuts.push_back(c);
+  }
   m->stutterCls = static_cast<uint16_t>(r.U());
   if (!r.ok) {
     *err = "truncated snapshot";
@@ -543,11 +667,6 @@ bool Deserialize(std::string_view bytes, Model* m, std::string* err) {
   for (auto& x : m->groups)
     if (x.paradigm >= m->paradigms.size() || x.ud >= m->udNames.size()) {
       *err = "group out of range";
-      return false;
-    }
-  for (auto& p : m->pairs)
-    if (p.l >= m->classes.size() || p.r >= m->classes.size()) {
-      *err = "pair out of range";
       return false;
     }
   for (auto& c : m->cats)
@@ -634,7 +753,7 @@ bool DeserializeLongs(std::string_view bytes, Model* m, std::string* err) {
   for (auto& x : m->longs) x.ctype = static_cast<uint8_t>(r.U());
   for (auto& x : m->longs) x.cform = static_cast<uint8_t>(r.U());
   for (auto& x : m->longs) x.pos = static_cast<Pos>(r.U());
-  for (auto& x : m->longs) x.cost = static_cast<int32_t>(r.I());
+  for (auto& x : m->longs) x.cost = r.I();
   for (auto& x : m->longs) {
     uint64_t p = r.U();
     x.paradigm = p == 0 ? UINT32_MAX : static_cast<uint32_t>(p - 1);

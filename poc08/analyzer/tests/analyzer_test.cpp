@@ -125,11 +125,12 @@ HD_TEST(analyze_spoken_derived) {
   const Analyzer* a = Shared();
   if (!a) HD_SKIP("no analyzer data");
   Analysis r;
-  a->Analyze("静かに飲みてえってときに", Options{}, &r);
-  const Token* t = Find(r, "てえ");
+  // a lengthened word is a derived arc: the run collapses onto the dictionary word
+  a->Analyze("いいいい加減にして", Options{}, &r);
+  const Token* t = Find(r, "いいいい");
   HD_REQUIRE(t != nullptr);
-  HD_CHECK_EQ(t->lemma, std::string("たい"));
-  HD_CHECK(t->flags & Spoken);
+  HD_CHECK_EQ(t->lemma, std::string("良い"));
+  HD_CHECK(t->flags & Elongated);
   HD_CHECK(!t->derive.empty());
 }
 

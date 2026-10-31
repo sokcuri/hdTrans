@@ -14,7 +14,7 @@ enum class ArcKind : uint8_t { lex, unk, longUnit, stutter };
 struct Arc {
   uint16_t b = 0, e = 0;  // core positions
   uint16_t lcls = 0, rcls = 0;
-  int32_t cost = 0;
+  int64_t cost = 0;
   ArcKind kind = ArcKind::lex;
   bool joined = false;    // crosses a source space inside a spaced run
   uint16_t flags = 0;     // TokFlag bits
@@ -22,11 +22,11 @@ struct Arc {
   uint32_t form = 0;      // lex: index into Model::pforms
   int16_t rule = -1;      // derive rule
   int16_t removedBy = -1; // constraint
-  int32_t fwd = 0, bwd = 0;
+  int64_t fwd = 0, bwd = 0;
   int32_t bp = -1, np = -1;  // best previous / next arc, -1 = BOS / EOS
 };
 
-constexpr int32_t kInf = 1 << 29;
+constexpr int64_t kInf = int64_t{1} << 61;
 
 struct Workspace {
   std::vector<internal::NChar> nchars;
@@ -43,7 +43,7 @@ struct Workspace {
   std::vector<uint32_t> bufMap;
   std::vector<uint8_t> derived;        // buffer position modified
   std::vector<uint32_t> path, path1;
-  int32_t best = 0;
+  int64_t best = 0;
 };
 
 // Fills ws->core etc. from ws->nchars and builds all arcs (constraints applied, removed arcs kept with removedBy).

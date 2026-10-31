@@ -1,0 +1,7 @@
+#! lexadd
+# Own lexicon rows in UniDic's shape, for words UniDic lacks. ud: pos1-pos4 joined by -; ctype/cform * for
+# uninflected words; reading in katakana.
+id	spec	surf	ud	ctype	cform	lemma	reading	goshu	note
+la.suke	ANA-L3	すけ	接尾辞-名詞的-一般	*	*	すけ	スケ	和	nickname suffix (佳奈すけ); the dialect conjunctive particle すけ never follows a noun
+la.azassu	ANA-L3	あざっす	感動詞-一般	*	*	ありがとうございます	アザッス	和	clipped thanks (ありがとうございます)
+la.azasu	ANA-L3	あざす	感動詞-一般	*	*	ありがとうございます	アザス	和	clipped thanks
