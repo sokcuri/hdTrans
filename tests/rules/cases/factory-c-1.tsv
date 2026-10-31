@@ -1,0 +1,59 @@
+# 규칙: LEX-801, LEX-802, LEX-803, LEX-804, LEX-805, LEX-806, LEX-807, LEX-808, LEX-809, LEX-810
+rule	input	expected	kind	layer
+pack:fac:c:でる:行動にでる	唐突にそんな行動にでた事に、きょとんとしている。	has:행동에 나선 일	fix	packs
+pack:fac:c:でる:行動にでる	ここまでくる道中で過去を振り返り途方もなく歩いてきたが、生きる意味をなくしひたすらモンスターに近寄り今のような行動にでるが一向に食べられることはなく現在に至るのである。	has:행동에 나서	fix	packs
+pack:fac:c:でる:行動にでる	唐突にそんな行動にでた事に、きょとんとしている。	lacks:하러 나온	fix	packs
+pack:fac:c:でる:行動にでる	私の言葉を即座に理解し、素早く行動に出るロローナちゃん。	has:행동을 취하는	keep	packs
+pack:fac:c:でる:行動にでる	的として行動に出ていたが、その差は俺の想像以上に大きかったようだ。	!rule:pack:fac:c:でる:行動にでる	keep	packs
+pack:fac:c:でる:行動にでる	ここで断たなければ、次にどんな行動に出るか解ったものではない。	!rule:pack:fac:c:でる:行動にでる	keep	packs
+pack:fac:c:伸びる:blowko	んでオレに殴られて伸びてるコイツは奥内	has:맞고 뻗	fix	packs
+pack:fac:c:伸びる:blowko	「春藤さん。さっきは放ったらかしにしてごめんなさい。先生から聞きました。レオンに殴られて伸びていた二人の男子生徒を、春藤さんが介抱してくれたって」	has:맞고 뻗	fix	packs
+pack:fac:c:伸びる:blowko	幾許もしないうちに、部屋に居た四人は全員、千早の拳を喰らって床に伸びていた。	!rule:pack:fac:c:伸びる:blowko	keep	packs
+pack:fac:c:伸びる:blowko	遊園地にて、しばらくはしゃいでいた冬だが……現在、暑さにやられて、ベンチで伸びている。	!rule:pack:fac:c:伸びる:blowko	keep	packs
+pack:fac:c:伸びる:blowko	それは行く途中にいきなり後ろから殴られて、のびてたところをここへ運ばれてきたらしい。	!rule:pack:fac:c:伸びる:blowko	keep	packs
+pack:fac:c:やる:元気で	久しぶり 元気でやってる？	has:잘 지내	fix	packs
+pack:fac:c:やる:元気で	「……そういやあいつ、元気でやってるのか？」	has:잘 지내	fix	packs
+pack:fac:c:やる:元気で	君の愛する姉エルナは元気でやっています。	has:잘 지내	fix	packs
+pack:fac:c:やる:元気で	元気でやってたか？」	has:잘 지내	fix	packs
+pack:fac:c:やる:元気で	「兄よ、１７年間お世話になりました。向こうの世界に行っても元気でやってください。がんばって信者増やしてください。お布施詐欺して警察に捕まる事だけはやめて下さい。私に迷惑がかかるので」	has:신자 늘려 주세요	keep	packs
+pack:fac:c:やる:元気で	同梱されていた付箋には、元気でやっているのか、とか、健康には気をつけろ、とか、いつものことが書かれていた。	has:건강에는 조심해라	keep	packs
+pack:fac:c:縁ある:en	いいえ私たちは縁あって親子になったわけでしょ？	has:인연이 닿아	fix	packs
+pack:fac:c:縁ある:en	朝風さんはハムの人と縁あって結婚している。	has:인연이 닿아	fix	packs
+pack:fac:c:縁ある:en	縁あって家族になったからには胸を張って『私が義母です』と言えるような存在になりたいのです。	has:인연이 닿아	fix	packs
+pack:fac:c:縁ある:en	この会社が好きだし、縁あって繋がってくれた人たちにもこの会社を好きになってもらえたら嬉しい。	has:인연이 닿아	fix	packs
+pack:fac:c:縁ある:en	朝風さんはハムの人と縁あって結婚している。	has:결혼했다	keep	packs
+pack:fac:c:縁ある:en	私は飽海市の神さまではないけれど、縁あって窓口を置いているのだから、地元貢献にもなる。	has:창구를 두고 있으니까	keep	packs
+pack:fac:c:縁ある:en	縁あって家族になったからには胸を張って『私が義母です』と言えるような存在になりたいのです。	has:가족이 된 이상에는	keep	packs
+pack:fac:c:従う:te-iru	典礼にもなれた吉良様の指導に浅野様も従っていたそうだ。	has:따르고 있었다고 한다	fix	packs
+pack:fac:c:従う:te-iru	人々は当初、罰則怖さにしぶしぶながら従っていたそうだが、次第にその状況に慣れていき、気が付けば現在のように常識として誰もが認知するに至ったそうだ。	has:따르고 있었다고 하지만	fix	packs
+pack:fac:c:従う:te-iru	無茶苦茶な要求ではあったが、合同パーティーのリーダーでもあり、実力者である彼を怒らせるのはマズイと思い、嫌々ながら従っていたそうだ。	has:따르고 있었다고 한다	fix	packs
+pack:fac:c:従う:te-iru	彼らは向日葵を人質にされ、仕方なく白神の命令に従っていたそうだ。	has:따르고 있었다고 한다	keep	packs
+pack:fac:c:従う:te-iru	５０年くらい前から魔王に従っているそうだ。	has:따르고 있다고 한다	keep	packs
+pack:fac:c:従う:te-iru	「メイドよ。おまえは俺に従っている。そうだな？」	has:따르고 있다	keep	packs
+pack:fac:c:そうしている:aspect	俺と似たような境遇でそうしている奴はたくさんいた。	has:그렇게 하고 있는 놈	fix	packs
+pack:fac:c:そうしている:aspect	数秒は、そうしていただろう。	has:그렇게 하고 있었을 것이다	fix	packs
+pack:fac:c:そうしている:aspect	そうしていると、何処からか慟哭が聞こえる。	has:통곡이 들린다	keep	packs
+pack:fac:c:そうしている:aspect	どれぐらい、そうしていただろう。	has:어느 정도	keep	packs
+pack:fac:c:そうしている:aspect	どのくらいそうしていたのか、先に動いたのは蓮君だった。	has:먼저 움직인 것은 렌 군이었다	keep	packs
+pack:fac:c:望む:妻に	私はあなたの娘御を妻に望んでいます	has:아내로 원하고	fix	packs
+pack:fac:c:望む:妻に	私はあなたの娘御を妻に望んでいます	lacks:아내에게 바라보고	fix	packs
+pack:fac:c:望む:妻に	私はあなたの娘御を妻に望んでいます	lacks:바라보고 있습니다	fix	packs
+pack:fac:c:望む:妻に	俺は先輩がそう望むならすぐにリタイアしようと考えていた。	!rule:pack:fac:c:望む:妻に	keep	packs
+pack:fac:c:望む:妻に	明日は彼女の望みを出来るだけ聞いてやろう。	!rule:pack:fac:c:望む:妻に	keep	packs
+pack:fac:c:方:隅の方	俺は部屋の隅の方で一畳分ぐらいをスコップで柔らかくしてやった。	has:구석 쪽에서	fix	packs
+pack:fac:c:方:隅の方	だから、あたしの方ですでにそれに対する防御策を立てさせて貰った訳だ。	!rule:pack:fac:c:方:隅の方	keep	packs
+pack:fac:c:方:股間の方	俺の股間の方で、茜が声をあげた。	has:가랑이 쪽에서	fix	packs
+pack:fac:c:方:股間の方	駅からずっと後ろの方にいたんだよ！」	!rule:pack:fac:c:方:股間の方	keep	packs
+pack:fac:c:方:扉の方	イヤホンを耳から外し、私の方に向き直す佑月。	!rule:pack:fac:c:方:扉の方	keep	packs
+pack:fac:c:させる:変形に	【万能農具】で絞るような道具に変形させる？	has:도구로 변형시켜	fix	packs
+pack:fac:c:させる:変形に	俺の掛け声ですぐにショットガンモードに変形させてすぐに離脱した。	has:모드로 변형시키	fix	packs
+pack:fac:c:させる:変形に	そう言ってジュースを飲み干して空き缶を簡単にくしゃくしゃのちっちゃな球体に変形させてゴミ箱に投げ捨てた。	has:구체로 변형시켜	fix	packs
+pack:fac:c:させる:変形に	苦しくて苦しくて││でもそれが雅樹の愛の重さだと知ったら、その苦しささえも快感に変換される。	has:쾌감에 변환된다	keep	packs
+pack:fac:c:させる:変形に	一階と二階は、ローグライクな感じで、形が常に変化するフロア。	has:변화하는 플로어	keep	packs
+pack:fac:c:させる:変形に	触手の動きが明らかに変化する。	has:변화한다	keep	packs
+pack:fac:c:程度:見える	他の家はまばらで、一面の小麦畑の中に、２～３軒見える程度。	has:보이는 정도	fix	packs
+pack:fac:c:程度:見える	他の家はまばらで、一面の小麦畑の中に、２～３軒見える程度。	lacks:보이는 만큼도	fix	packs
+pack:fac:c:程度:見える	他の家はまばらで、一面の小麦畑の中に、２～３軒見える程度。	has:채 보이는 정도	fix	packs
+pack:fac:c:程度:見える	「笑止。まさかその程度でこの私を倒せると思っていたのか」	!rule:pack:fac:c:程度:見える	keep	packs
+pack:fac:c:程度:見える	腕に力を入れて失礼にならない程度で、優太は押し返して離れる。	has:정도로	keep	packs
+pack:fac:c:程度:見える	職業柄こういう緊急事態に備えてある程度バッグの中に用意してあるのだ。	has:어느 정도	keep	packs
