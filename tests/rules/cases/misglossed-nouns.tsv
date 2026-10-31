@@ -1,0 +1,63 @@
+# 규칙: LEX-3340
+# 규칙: LEX-3341
+rule	input	expected	kind	layer
+dict:misglossed-nouns:2	俺が提案した内容は建売住宅と同じ考えであった。	has:분양 주택	fix	defaults
+dict:misglossed-nouns:1	安物の建売と中古しか知らないもんで	has:분양 주택과	fix	defaults
+dict:misglossed-nouns:1	新築の住宅を買った。	has:주택	keep	defaults
+dict:misglossed-nouns:4	そしてその弁舌はゲーム内でも有効である。	has:언변	fix	defaults
+dict:misglossed-nouns:4	裁判官達にも弁舌を振るった。	has:언변을	fix	defaults
+dict:misglossed-nouns:4	彼の話し方は丁寧だ。	lacks:언변	keep	defaults
+dict:misglossed-nouns:5	「優秀な弓師だな」	has:궁수	fix	defaults
+dict:misglossed-nouns:5	異世界弓師は遅れてる！	has:궁수	fix	defaults
+dict:misglossed-nouns:5	弓を引く。	lacks:궁수	keep	defaults
+dict:misglossed-nouns:6	サラダは彩りがよく、	has:색감이	fix	defaults
+dict:misglossed-nouns:6	彩りは失われ、	has:색감은	fix	defaults
+dict:misglossed-nouns:7	最短距離（後書	has:후기	fix	defaults
+dict:misglossed-nouns:8	後書きを読んだ。	has:후기를	fix	defaults
+dict:misglossed-nouns:9	あとがき	has:후기	fix	defaults
+dict:misglossed-nouns:10	「……後片づけ、手伝おうか？」	has:뒷정리	fix	defaults
+dict:misglossed-nouns:10	私とナシュナで後片づけをした。	has:뒷정리를	fix	defaults
+dict:misglossed-nouns:10	後片付けをする。	has:뒷정리	keep	defaults
+dict:misglossed-nouns:11	不可能とは思わないが徒労感が強い。	has:허무감이	fix	defaults
+dict:misglossed-nouns:11	アカネとリアは徒労感を覚える。	has:허무감을	fix	defaults
+dict:misglossed-nouns:12	念写機は貴重なものだ。	has:염사기	fix	defaults
+dict:misglossed-nouns:12	写真を撮った。	lacks:염사	keep	defaults
+dict:misglossed-nouns:13	本当に思い遣りがあって、	has:배려가	fix	defaults
+dict:misglossed-nouns:13	思いやりのある子だ。	has:배려	keep	defaults
+dict:misglossed-nouns:14	急患がきたから戻ってきて	has:응급 환자가	fix	defaults
+dict:misglossed-nouns:14	外来は急患もなく	has:응급 환자도	fix	defaults
+dict:misglossed-nouns:14	患者が多い。	lacks:응급	keep	defaults
+dict:misglossed-nouns:15	全て恭順の意を示しております。	has:순종의	fix	defaults
+dict:misglossed-nouns:15	グラニスの指示に恭順し、	has:순종해	fix	defaults
+dict:misglossed-nouns:16	まだお互いに情報開示していない	has:정보 공개	fix	defaults
+dict:misglossed-nouns:16	犯人の情報開示を求められた。	has:정보 공개가	fix	defaults
+dict:misglossed-nouns:16	情報を集める。	has:정보를	keep	defaults
+dict:misglossed-nouns:17	確かにひとそれぞれ感じ方は違う。	has:느끼는 방식은	fix	defaults
+dict:misglossed-nouns:18	慇懃な物言いで進言する	has:정중한	fix	defaults
+dict:misglossed-nouns:18	慇懃な言葉に、	has:정중한 말에	fix	defaults
+dict:misglossed-nouns:19	慇懃無礼な詫びの言葉	lacks:은근	keep	defaults
+dict:misglossed-nouns:21	新しいギターが心の拠り所になれるように	has:마음의 버팀목이	keep	defaults
+dict:misglossed-nouns:21	民の信仰の拠り所であり、	has:버팀목이며	fix	defaults
+dict:misglossed-nouns:21	支配の拠り所にしている	has:버팀목으로	fix	defaults
+dict:misglossed-nouns:20	なにを心のよりどころにしたらいいか	has:버팀목	keep	defaults
+dict:misglossed-nouns:22	あなたさっき私を手篭め	has:겁탈	fix	defaults
+dict:misglossed-nouns:24	新入生を手篭めにし、	has:겁탈하고	fix	defaults
+dict:misglossed-nouns:24	彼女一人だけを、手篭めにしたわけではない	has:겁탈한	fix	defaults
+dict:misglossed-nouns:25	いったい幾人の女性を手籠めにするんでしょうか？	has:겁탈하는	fix	defaults
+dict:misglossed-nouns:27	かつてルシアに手籠めにされた恨み	has:겁탈당한	fix	defaults
+dict:misglossed-nouns:26	手篭めにされそうになった。	has:겁탈당할	fix	defaults
+dict:misglossed-nouns:22	竹で編んだ籠を持つ。	lacks:겁탈	keep	defaults
+dict:misglossed-nouns:28	クルトはさらに一歩踏み込む。	has:한 걸음 더	fix	defaults
+dict:misglossed-nouns:28	彼女は階段をさらに一歩上り、	has:한 걸음 더	fix	defaults
+dict:misglossed-nouns:28	一歩踏み出す。	has:한 걸음	keep	defaults
+dict:misglossed-nouns:29	「イーリス様の御状態を……ですか？	has:상태를	fix	defaults
+dict:misglossed-nouns:29	体の状態を見る。	has:상태를	keep	defaults
+dict:misglossed-nouns:30	技術家庭科室などが一つずつある。	has:기술가정과실	fix	defaults
+dict:misglossed-nouns:30	技術者になりたい。	has:기술자	keep	defaults
+dict:misglossed-nouns:31	望まぬ肉悦に興奮し、	has:육체의 쾌락에	fix	defaults
+dict:misglossed-nouns:31	肉を焼く。	has:고기	keep	defaults
+dict:misglossed-nouns:32	僕には強火ファンがたくさんいるからね。	has:열성 팬이	fix	defaults
+dict:misglossed-nouns:32	強火で炒める。	lacks:열성	keep	defaults
+dict:misglossed-nouns:6	彩りを添えていた。	has:흥취를 더하고	keep	defaults
+dict:misglossed-nouns:3	普通の建売物件と思っていた	has:분양 주택이라고	fix	defaults
+dict:misglossed-nouns:17	感じ方が違う。	has:느끼는 방식이	fix	defaults
