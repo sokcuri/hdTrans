@@ -37,6 +37,23 @@ ud=接頭辞 & !lemma=御	ud=動詞|形容詞	100000000000000000	cn.prefix-verb
 cform=連体形	ud=動詞-非自立可能	100000000000000000	cn.rentai-aux-verb
 ud=助詞-格助詞 & lemma=で	lemma=有る|御座る	100000000000000000	cn.de-aru
 ud=形状詞-助動詞語幹 & !lemma=みたい	ud=助詞-終助詞	100000000000000000	cn.you-final
+cform=終止形	ud=助詞-格助詞 & lemma=から|が	100000000000000000	cn.final-kara-ga
+!lemma=を	ud=助詞-係助詞 & lemma=ば	100000000000000000	cn.ba-topic
+ud=動詞|形容詞|助動詞 & cform=終止形 & !lemma=ます|です	ud=助詞-終助詞 & lemma=の	100000000000000000	cn.final-no
+ud=助詞-終助詞 & lemma=な	lemma=の	100000000000000000	cn.na-no
+ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-終助詞 & lemma=よ|か|ね|な|わ|ぞ|ぜ|さ|け|もの|かしら|い|じゃん	100000000000000000	cn.rentai-final
+ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-接続助詞 & lemma=から|が|けれど|けど|し|と|て	100000000000000000	cn.rentai-conj
+ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-格助詞 & lemma=から|が|と	100000000000000000	cn.rentai-kaku
+ud=動詞|形容詞|助動詞	lemma=だ & cform=連体形-撥音便	100000000000000000	cn.da-n
+cform=終止形	ud=助詞-副助詞 & lemma=し	100000000000000000	cn.shushi-shi
+cform=終止形	ud=助詞-係助詞 & lemma=ぞ	100000000000000000	cn.shushi-zo
+lemma=だ & cform=終止形	lemma=だ	100000000000000000	cn.da-da
+ud=助動詞 & lemma=だ|です & cform=連体形	ud=助詞-格助詞|助詞-接続助詞|助詞-係助詞 & !lemma=の|ので|のに / ud=助詞-副助詞 & lemma=し|か|ぞ	100000000000000000	cn.da-rentai
+ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-副助詞 & lemma=し	100000000000000000	cn.rentai-shi
+ud=動詞|形容詞|助動詞 & cform=終止形	ud=助詞-準体助詞	100000000000000000	cn.shushi-juntai
+lemma=てる & cform=連用形	ud=名詞|動詞|形容詞|形状詞-一般|副詞|代名詞|補助記号|感動詞|連体詞|接頭辞|接続詞|助詞-係助詞|助詞-格助詞|助詞-終助詞 / ud=助詞-副助詞 & !lemma=たり / bos	100000000000000000	cn.teru-next
+lemma=てる	lemma=居る	100000000000000000	cn.teru-iru
+ud=助動詞 & lemma=た|たい|らしい|まい|う|よう	ud=助詞-接続助詞 & lemma=と	100000000000000000	cn.ta-to
 ud=助詞-終助詞	ud=名詞|動詞|形容詞|形状詞|副詞|連体詞|代名詞|接頭辞	1000	pf.final-content
 ud=名詞-固有名詞	ud=動詞-非自立可能	1000000000	pf.name-aux
 ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞|形状詞-助動詞語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	1000000000	pf.intj-mid
@@ -46,3 +63,8 @@ ud=助動詞|形容詞 & cform=終止形	ud=動詞-非自立可能	1000000000	pf
 ud=名詞|代名詞	ud=名詞-普通名詞	1	pf.noun-noun
 ud=動詞 & cform=連用形-一般	ud=助詞-格助詞 & lemma=を|が|は|も|の	1	pf.renyo-case
 ud=助詞-副助詞 & lemma=か	bos / ud=補助記号-句点	1	pf.ka-final
+ud=形状詞|名詞-普通名詞-形状詞可能|名詞-普通名詞-サ変形状詞可能	ud=助詞-格助詞 & lemma=で	1	pf.copula-de
+ud=助詞-準体助詞 / ud=助詞-副助詞 & lemma=か|ぞ / ud=助詞-係助詞 & lemma=ぞ / lemma=だ & cform=連体形	ud=補助記号-句点 / ud=補助記号-括弧閉	3	pf.end-final
+ud=助詞-副助詞 & lemma=か / lemma=だ & cform=連体形	ud=助詞-終助詞 & !lemma=の	3	pf.ka-final-final
+ud=動詞|形容詞 & cform=終止形 / ud=助動詞 & lemma=ない|れる|られる|せる|させる|ます|ちゃう|ず|てる|ぬ & cform=終止形	ud=助詞-格助詞 & lemma=と	3	pf.to-conj
+ud=助詞-接続助詞 & lemma=と	lemma=思う|成る|見る|来る|見做す|呼ぶ|言う|為る|考える|聞く|感ずる|感じる|教える|仰る|願う|決める|申す|叫ぶ|呟く|答える|信じる|祈る|誓う|告げる|伝える|書く|笑う / ud=助詞 & lemma=か|は|の|も / ud=補助記号-句点 / bos	5	pf.to-quote

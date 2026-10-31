@@ -41,3 +41,20 @@ cn.prefix-verb	ANA-C33	ud=接頭辞 & !lemma=御	ud=動詞|形容詞	only the ho
 cn.rentai-aux-verb	ANA-C34	cform=連体形	ud=動詞-非自立可能	an attributive form is not followed by an auxiliary verb (いい+し is the listing particle, not する)
 cn.de-aru	ANA-C35	ud=助詞-格助詞 & lemma=で	lemma=有る|御座る	で before ある/ござる is the copula (話であれば, 学生である), not the case particle
 cn.you-final	ANA-C36	ud=形状詞-助動詞語幹 & !lemma=みたい	ud=助詞-終助詞	the stems よう and そう take the copula before a final particle (のよう+な is だ, not the final なあ); みたい takes it directly
+cn.final-kara-ga	ANA-C37	cform=終止形	ud=助詞-格助詞 & lemma=から|が	after a conclusive form から and が are conjunctive (ないから, ですが), not case particles
+cn.ba-topic	ANA-C38	!lemma=を	ud=助詞-係助詞 & lemma=ば	the topic ば only in をば; after a conditional form ば is conjunctive
+cn.final-no	ANA-C39	ud=動詞|形容詞|助動詞 & cform=終止形 & !lemma=ます|です	ud=助詞-終助詞 & lemma=の	the final の takes the attributive form (行くの？); ますの/ですの are the polite exceptions
+cn.na-no	ANA-C40	ud=助詞-終助詞 & lemma=な	lemma=の	な before の is the copula (なの), not the final particle
+cn.rentai-final	ANA-C41	ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-終助詞 & lemma=よ|か|ね|な|わ|ぞ|ぜ|さ|け|もの|かしら|い|じゃん	final particles take the conclusive form (行くよ, 行くか); the attributive form before them is the same spelling read wrong
+cn.rentai-conj	ANA-C42	ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-接続助詞 & lemma=から|が|けれど|けど|し|と|て	the conjunctive から, が, けれど, し and と take the conclusive form
+cn.rentai-kaku	ANA-C43	ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-格助詞 & lemma=から|が|と	the case から and が follow nouns; after a predicate they are conjunctive
+cn.da-n	ANA-C44	ud=動詞|形容詞|助動詞	lemma=だ & cform=連体形-撥音便	the copula ん (なんだ) follows nouns and stems; after a predicate ん is the nominalizer (言ったんだ)
+cn.shushi-shi	ANA-C45	cform=終止形	ud=助詞-副助詞 & lemma=し	after a conclusive form し is the listing conjunctive particle (怖いし, ですし)
+cn.shushi-zo	ANA-C46	cform=終止形	ud=助詞-係助詞 & lemma=ぞ	after a conclusive form ぞ is the final particle (行くぞ, だぞ)
+cn.da-da	ANA-C47	lemma=だ & cform=終止形	lemma=だ	the copula does not follow the copula: だな is だ and the final な
+cn.da-rentai	ANA-C48	ud=助動詞 & lemma=だ|です & cform=連体形	ud=助詞-格助詞|助詞-接続助詞|助詞-係助詞 & !lemma=の|ので|のに / ud=助詞-副助詞 & lemma=し|か|ぞ	the attributive copula (な, です) modifies a noun or takes の, ので, のに; before a case, conjunctive or topic particle it is the conclusive form (だから, ですし)
+cn.rentai-shi	ANA-C49	ud=動詞|形容詞|助動詞 & cform=連体形-一般 & !lemma=つう|り|だ|なり-断定|たり-断定|べし	ud=助詞-副助詞 & lemma=し	the listing し takes the conclusive form
+cn.shushi-juntai	ANA-C50	ud=動詞|形容詞|助動詞 & cform=終止形	ud=助詞-準体助詞	the nominalizer の/ん takes the attributive form (行くの, 言ったんだ)
+cn.teru-next	ANA-C51	lemma=てる & cform=連用形	ud=名詞|動詞|形容詞|形状詞-一般|副詞|代名詞|補助記号|感動詞|連体詞|接頭辞|接続詞|助詞-係助詞|助詞-格助詞|助詞-終助詞 / ud=助詞-副助詞 & !lemma=たり / bos	the contracted てる in its continuative form (し+て+た) is followed by an auxiliary, て, たり or a stem like そう; before anything else て is the conjunctive particle (していい)
+cn.teru-iru	ANA-C52	lemma=てる	lemma=居る	てる already holds いる: て+いる is the conjunctive て and いる
+cn.ta-to	ANA-C53	ud=助動詞 & lemma=た|たい|らしい|まい|う|よう	ud=助詞-接続助詞 & lemma=と	the conditional と takes a non-past form; after た, たい, らしい or the volitional, と quotes (行ったと思う)

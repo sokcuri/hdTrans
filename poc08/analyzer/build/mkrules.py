@@ -55,6 +55,7 @@ CLASSES = {}  # ja/classes.tsv: @name → lemmas
 IRREGULAR = {'助動詞-ダ', '助動詞-タ', '助動詞-デス', '助動詞-ジャ', '助動詞-ヌ', 'カ行変格', 'サ行変格'}
 VOICED = dict(zip('カキクケコサシスセソタチツテトハヒフヘホ', 'ガギグゲゴザジズゼゾダヂヅデドバビブベボ'))
 KEYS = set()  # surface keys of the 0.7.x dictionaries
+PRONOUN_SURF = set()  # surfaces of pronoun rows
 KNOWN = set()  # (lemma, hiragana reading) of the translation lexicon
 
 
@@ -160,6 +161,7 @@ def arc_feats_raw(g, cf, s, goshu, row=None):
     f['hiraspell'] = f['hira'] and not all(is_hira(c) or c in '-' for c in lemma)
     # the form's kanji are not the lemma's (当に for 正に)
     f['variant'] = any(is_kanji(c) for c in lemma) and any(is_kanji(c) and c not in lemma for c in s)
+    f['prohom'] = g[2] != '代名詞' and s in PRONOUN_SURF
     f['key'] = s in KEYS or (g[6] != '*' and g[7] in KEYS)  # inflected words by their written base form
     f['basekey'] = bool(row) and (row[14] in KEYS or lemma.split('-')[0] in KEYS)
     f['goshu'] = goshu
@@ -183,7 +185,9 @@ def arc_feats_raw(g, cf, s, goshu, row=None):
             f['pshort'] = row[8] == '*' and g[2] == '助詞' and len(row[27]) < len(row[10])
             # a particle written with other letters than its lemma, not by voicing or clipping (て for と, てえ for て)
             a, b = row[27], row[10]
+            # the nominalizer ん for の is the regular spoken contraction (言ったんだ), like ん for ぬ
             f['pvariant'] = row[8] == '*' and g[2] == '助詞' and a != b and not f['pshort'] and not f.get('fvariant') \
+                and not (g[3] == '準体助詞' and a == 'ン') \
                 and not (len(a) == len(b) and VOICED.get(b[0]) == a[0] and a[1:] == b[1:])
             # ... and of those, one whose first letter changes other than by a contraction (ん/じゃ/ちゃ/っ)
             f['pletter'] = a != b and a[:1] != b[:1] and a[:1] not in 'ンジチッ' and not f.get('fvariant') \
@@ -328,6 +332,11 @@ def main():
         meta[g] = {'goshu': row[16]}
         meta[(g, cf, r['surf'])] = row
         KNOWN.add((r['lemma'], hira_of(r['reading'])))
+    # surfaces that are also a pronoun: another reading of them is a tie-break loser (私, 何, これ)
+    for g, forms in groups.items():
+        if g[2] == '代名詞':
+            for cf, s, k in forms:
+                PRONOUN_SURF.add(s)
     print('groups', len(groups), 'dropped by ja/lexfilter.tsv', dict(dropped), file=sys.stderr)
 
     # --- classes -------------------------------------------------------------------------------------

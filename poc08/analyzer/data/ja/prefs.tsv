@@ -39,7 +39,7 @@ pf.ivariant	ANA-P3	3	arc	ivariant	-	an inflected form spelled unlike its base (�
 pf.kana-pron1	ANA-P3	3	arc	ud=代名詞 & hiraspell & len=1	-	a one-kana pronoun (か for 彼) only where nothing else reads it	1
 pf.pshort	ANA-P6	6	arc	pshort	-	on a tie, a particle in its full spelling (よ as the final particle, not short より)	1
 pf.archaic-do	ANA-P3	3	arc	ud=助詞-接続助詞 & lemma=ど|ども	-	the classical concessive ど/ども only where no modern reading exists (だ+けど, not だけ+ど)	1
-pf.marked-form	ANA-P3	3	arc	cform=連用形-省略|連体形-省略|終止形-撥音便|連体形-撥音便|終止形-促音便|終止形-融合|未然形-補助|連体形-補助|終止形-補助|ク語法|已然形 & !lemma=ず|てる|だ	-	contracted or classical inflected forms (悔し for 悔しく, 下さん for 下さる) only where the standard form cannot be read	1
+pf.marked-form	ANA-P3	3	arc	cform=連用形-省略|連体形-省略|終止形-撥音便|連体形-撥音便|終止形-促音便|終止形-融合|未然形-補助|連体形-補助|終止形-補助|ク語法|已然形 & !lemma=ず|てる|だ / lemma=成る|だ & cform=連用形-撥音便	-	contracted or classical inflected forms (悔し for 悔しく, 下さん for 下さる) only where the standard form cannot be read	1
 pf.kanji-cut	ANA-P5	5	cut	kanji	kanji	on a tie, no cut inside a run of kanji that a dictionary word covers (後悔+し, not 後+悔し; 森下+さん)	2
 pf.fallback-word	ANA-P5	5	arc	!known & !basekey & !ud=助詞|助動詞|補助記号|空白|名詞-固有名詞|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|接尾辞|接頭辞|名詞-数詞|代名詞|接続詞|連体詞 & !lemma=@formal-noun|@kana-noun|@kana-verb	-	a word that neither the translation lexicon nor the 0.7.x dictionaries know is a fallback reading, a tie-breaker: on a tie, the reading through words the translation lexicon or the 0.7.x dictionaries know	1
 pf.wvariant	ANA-P3	3	arc	wvariant	-	an inflected word in a contracted word form (なる for なさる) only where the plain reading cannot be	1
@@ -48,7 +48,7 @@ pf.kata-cut	ANA-P1	1	cut	kata	kata	a cut inside a katakana run counts like an un
 pf.pelong	ANA-P3	3	arc	pelong	-	a lengthened non-final particle (てえ for て) only where nothing else reads the span; lengthening belongs to final particles	1
 pf.pvariant	ANA-P6	6	arc	pvariant	-	on a tie, a particle in its own letters (not て for と)	2
 pf.pletter	ANA-P3	3	arc	pletter	-	a particle whose first letter differs from its lemma other than by contraction (てえ for って, て for と) only where nothing else reads the span	1
-pf.dialect-final	ANA-P3	3	arc	ud=助詞-終助詞 & lemma=え|ばい|けん|べ|がな|のう|ぞい|たい / ud=助動詞 & lemma=や|じゃ|どす|へん|ひん|はる|やん	-	dialect final particles and auxiliaries (え, たい, ばい, のう; copula や, じゃ) only where no standard reading exists (飲み+てえ, not 飲み+て+え; 今+やっ+て, not や)	1
+pf.dialect-final	ANA-P3	3	arc	ud=助詞-終助詞 & lemma=え|ばい|けん|べ|がな|のう|ぞい|たい|て / ud=助動詞 & lemma=や|じゃ|どす|へん|ひん|はる|やん	-	dialect final particles and auxiliaries (え, たい, ばい, のう; copula や, じゃ) only where no standard reading exists (飲み+てえ, not 飲み+て+え; 今+やっ+て, not や)	1
 pf.vowel-run-cut	ANA-P2	2	cut	vowelrun	*	a cut inside a run of three or more same-vowel letters counts like a derived word: the run is one lengthened word (かわいいいい)	1
 pf.name-aux	ANA-P3	3	pair	ud=名詞-固有名詞	ud=動詞-非自立可能	a name followed directly by an auxiliary verb (風吹+い+た) only where nothing else reads the span: the kanji usually belong to a verb	1
 pf.intj-mid	ANA-P3	3	pair	ud=名詞|代名詞|助詞-副助詞|助詞-係助詞|助詞-格助詞|形状詞-助動詞語幹	ud=感動詞 & !lemma=有り難う|御免|今日は|今晩は|御早う|宜しく	an interjection right after a noun or a non-final particle (それは+あと, not それ+はあ+と) only where nothing else reads the span	1
@@ -59,3 +59,9 @@ pf.final-aux-verb	ANA-P3	3	pair	ud=助動詞|形容詞 & cform=終止形	ud=動�
 pf.noun-noun	ANA-P6	6	pair	ud=名詞|代名詞	ud=名詞-普通名詞	on a tie, after a noun the suffix reading of the next word (２名+様, 大島+くん), not a second noun	1
 pf.renyo-case	ANA-P6	6	pair	ud=動詞 & cform=連用形-一般	ud=助詞-格助詞 & lemma=を|が|は|も|の	on a tie, a continuative before を/が/は/も/の is the noun of the verb (締めを), not the verb	1
 pf.ka-final	ANA-P6	6	pair	ud=助詞-副助詞 & lemma=か	bos / ud=補助記号-句点	on a tie, か at the end of a sentence is the final particle	1
+pf.prohom	ANA-P6	6	arc	prohom	-	on a tie, a word spelled like a pronoun is the pronoun (私, 何, これ)	1
+pf.copula-de	ANA-P6	6	pair	ud=形状詞|名詞-普通名詞-形状詞可能|名詞-普通名詞-サ変形状詞可能	ud=助詞-格助詞 & lemma=で	on a tie, で after a na-adjective stem is the copula (静かで、), not the case particle	1
+pf.end-final	ANA-P6	6	pair	ud=助詞-準体助詞 / ud=助詞-副助詞 & lemma=か|ぞ / ud=助詞-係助詞 & lemma=ぞ / lemma=だ & cform=連体形	ud=補助記号-句点 / ud=補助記号-括弧閉	on a tie, a particle right before the sentence's closing punctuation is the final particle (行くの？, そうなの？, だな。), not the nominalizer, the inner か or the attributive copula	3
+pf.ka-final-final	ANA-P6	6	pair	ud=助詞-副助詞 & lemma=か / lemma=だ & cform=連体形	ud=助詞-終助詞 & !lemma=の	on a tie, か and な before another final particle are final particles themselves (かな, かね, なよ)	3
+pf.to-conj	ANA-P6	6	pair	ud=動詞|形容詞 & cform=終止形 / ud=助動詞 & lemma=ない|れる|られる|せる|させる|ます|ちゃう|ず|てる|ぬ & cform=終止形	ud=助詞-格助詞 & lemma=と	on a tie, と after a non-past conclusive form is the conditional (行くと、, 来ないと); after だ it is case-marked, as the tagging has it; a quoting verb or particle after it overrides (pf.to-quote)	3
+pf.to-quote	ANA-P6	6	pair	ud=助詞-接続助詞 & lemma=と	lemma=思う|成る|見る|来る|見做す|呼ぶ|言う|為る|考える|聞く|感ずる|感じる|教える|仰る|願う|決める|申す|叫ぶ|呟く|答える|信じる|祈る|誓う|告げる|伝える|書く|笑う / ud=助詞 & lemma=か|は|の|も / ud=補助記号-句点 / bos	on a tie, と before a verb of saying or thinking, before か, は, の, も or at the sentence end quotes (行くと思う, 行くとは)	5
