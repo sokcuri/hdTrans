@@ -1338,8 +1338,13 @@ void DecideVoice(Flusher& f) {
             }
             if (!packed->lexeme.empty()) {
                 it->lexical = true;
+                it->packLexeme = packed->lexeme;
+                // A respectful reading writes its Korean verb with -시- (respectful:오다 오셨다).
+                if (v == Voice::Respectful) {
+                    if (std::string honorific = HonorificTarget(f, packed->lexeme); !honorific.empty()) it->packLexeme = honorific;
+                }
                 for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
-                    it->AssignEntrySurface(slot, packed->lexeme, {Provenance::Pack, packed->global});
+                    if (At(it->Code(slot), 0) == '4') it->AssignEntrySurface(slot, it->packLexeme, {Provenance::Pack, packed->global});
                 }
             }
             continue;

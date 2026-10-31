@@ -11,3 +11,4 @@ s.ciel	name	シエル	n	frame	*	씨엘	0		sample
 s.kiwotsukeru	sense	気をつける	v1	colloc	気をつける	조심하다	0		sample	read, not applied
 s.iu.respectful	voice	言う	v5	frame	voice=respectful	respectful	0		sample	the reading the chain decided is a cue
 s.iu.heard	voice	言う	v5	frame	dat=*	passive:듣다	0		sample	a passive said by another Korean verb
+s.tomeru.parked	voice	止める	v1	frame	voice=potential|none form=ta head=*	passive:세워지다	0		sample	a passive said by its own Korean verb

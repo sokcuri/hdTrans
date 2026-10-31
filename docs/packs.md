@@ -22,9 +22,9 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 
 | 열 | 필수 | 뜻 |
 |---|---|---|
-| `id` | 예 | 행 id. `-why`가 이 id를 보입니다 |
+| `id` | 예 | 행 id. `-why`가 이 id를 보입니다. 불러온 팩 전체에서 하나뿐이어야 합니다 |
 | `lemma` | 예 | 단어의 일본어 사전형. `|`로 여럿. 어휘 id(`ja/yomi/pos`)를 쓰면 `ja`를 읽습니다 |
-| `pos` | 예 | `n`(`pn` `suf` `pref` `num`도 명사), `v`(`vs` `vk`), `v1`, `v5`, `adj`, `na`, `adv`, `intj`, `p` |
+| `pos` | 예 | `n`(`pn` `suf` `pref` `num`도 명사), `v`(`vs` `vk` `vz`), `v1`, `v5`, `adj`, `na`, `adv`, `intj`, `p` |
 | `cond` | 예 | 조건. 아래 단서 DSL. 비우거나 `*`이면 늘 맞음 |
 | `target` | 예 | 칸의 값(아래) |
 | `slot` | 아니요 | `sense`(기본), `name`, `voice`, `polarity`, `tense` |
@@ -39,7 +39,7 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 |---|---|---|
 | `sense` | 한국어 사전형(`비싸다`, `조심하다`, `책`) | 같은 부류에서 그 번역의 후보를 고르고, 없으면 고른 후보의 번역을 바꿈(`senses.tsv`와 같음). 명사 `…하다`는 하다 형용사의 뿌리 |
 | `name` | 한국어 | `sense`와 같고, 이름 행임을 표시 |
-| `voice` | `passive`, `potential`, `respectful`, `spontaneous`, `active`, 또는 `읽기:한국어 동사`(`passive:혼나다`) | (ら)れ가 있는 동사의 태 읽기를 정함(`voice` 층 안에서, 신호가 정한 읽기를 바꿈). 뒤 처리(수동 낱말, 행위자 `에게`, 후보 남기기)는 그 읽기를 따름. `active`는 바탕 동사를 능동으로(読まれた 읽었다). `:한국어 동사`가 있으면 그 동사를 능동 활용으로 씀(叱られた 혼났다, 어지다를 더하지 않음) |
+| `voice` | `passive`, `potential`, `respectful`, `spontaneous`, `active`, 또는 `읽기:한국어 동사`(`passive:세워지다`) | (ら)れ가 있는 동사의 태 읽기를 정함(`voice` 층 안에서, 신호가 정한 읽기를 바꿈). `passive` `potential` `respectful` `spontaneous`는 뒤 처리(수동 낱말, 행위자 `에게`, 후보 남기기)가 그 읽기를 따름. `active`와 `:한국어 동사`는 그 처리를 건너뛰고 동사만 씀: `active`는 바탕 동사를 능동으로(読まれた 읽었다), `:한국어 동사`는 그 동사를 활용해 씀(止められた駐車場 세워진 주차장, 어지다를 더하지 않음, 뒤 층이 바꾸지 못함; `respectful:오다`는 -시-를 붙여 오셨다). 조사(に의 `에게` 등)는 0.7.x가 읽은 그대로이므로 필요하면 그 조사의 `sense` 행을 함께 씀 |
 | `polarity` | 어미 텍스트: 형태 코드 + 한국어(`1잖아`, `1안 가?`) | 고른 어미의 번역을 바꿈 |
 | `tense` | 어미 텍스트(`5었다`) | 같음. 한 단어에 `polarity`가 먼저 맞으면 `tense`는 건너뜀 |
 
@@ -50,6 +50,8 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 `cond`는 공백으로 나눈 원자 `칸=값|값`입니다. 원자가 모두 맞아야 행이 맞습니다. 값 `-` 하나는 "그 칸이 비었음",
 `*` 하나는 "그 칸에 무엇이든 있음"입니다.
 값이 `@`로 시작하면 부류이고, 단어가 그 부류나 그 아래 부류에 들면 맞습니다. 그 밖의 값은 단어의 키나 사전형입니다.
+`form`, `voice`, `register`의 값과 부류 이름은 불러올 때 검사합니다. 모르는 값, `pack-classes` 파일에 없는 부류(부모, 단어의
+부류 포함), 겹치는 행 id는 불러오기 오류입니다.
 
 | 칸 | 읽는 단어 |
 |---|---|
@@ -57,9 +59,9 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 | `arg` | 위 칸 아무것 |
 | `head` | 술어 바로 뒤에서 그것이 꾸미는 명사 |
 | `mod` | 명사 바로 앞에서 그것을 꾸미는 단어 |
-| `pred` | 단어의 구가 걸리는 단어(명사는 조사 뒤 술어, 꾸미는 술어는 그 명사) |
+| `pred` | 단어의 구가 걸리는 단어(명사는 조사 뒤의 첫 술어나 명사(N の N), 꾸미는 술어는 그 명사) |
 | `next`, `after` | 바로 뒤 단어, 바로 앞 단어 |
-| `form` | `ta` `neg` `te` `te-request` `vol` `cop` `attr` `adv` |
+| `form` | `ta`(과거 た·だ로 끝남, だ는 동사만), `neg`(어간 뒤의 ない·ません·ず·ぬ, 바로 뒤 부정 보조 항목 포함), `te`, `te-request`(て 뒤 ください·くれ), `vol`(よう·ましょう·오단 う), `cop`(명사·な형용사 뒤 だ·です 등), `attr`(뒤 な), `adv`(형용사 く 뒤 술어). 끝의 조사(か よ ね…)는 떼고 봄 |
 | `register` | `polite`(문장에 です·ます), `casual`·`plain`(없음) |
 | `voice` | `voice` 행에서만: 팩 전에 신호가 정한 읽기 `none` `passive` `potential` `respectful` `spontaneous`(이웃·형태 원자로 셈) |
 | `domain`, `main.vol` | 이 호스트에는 그런 자질이 없어 늘 맞지 않음 |
@@ -77,6 +79,11 @@ hdtrans -dicts dicts,packs/frames -why -in in.txt
 다섯 수가 같으면 `pri`가 높은 행, 그다음 먼저 읽은 행(폴더 순서, 파일 이름 순서, 줄 순서)입니다. 가중치는 없습니다.
 조건이 빈 행은 다섯 수가 모두 0이라 그 단어의 기본값이 됩니다. 사용자 단어(`Fixed`)와 이웃 규칙이 번역을 준 후보는
 덮지 않습니다.
+
+## 평가용 스위치
+
+환경 변수 `HD08_CAST_OFF`가 TSV 파일을 가리키면, 그 첫 열에 있는 일본어의 `name` 행은 불러오지 않습니다(평가에서
+등장인물 이름 없이 돌리는 계약). 다른 행은 그대로입니다.
 
 ## 실행 위치
 

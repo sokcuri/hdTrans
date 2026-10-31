@@ -19,3 +19,5 @@ pack:s.iu.respectful	先生が言われた。	rule:pack:s.iu.respectful=respectf
 pack:s.iu.heard	彼に言われた。	그에게 들었다.	keep	packs
 pack:s.iu.heard	彼に言われた。	rule:pack:s.iu.heard=passive:듣다	keep	packs
 pack:s.iu.heard	先生が言われた。	!rule:pack:s.iu.heard	keep	packs
+pack:s.tomeru.parked	多くの車が止められた駐車場。	많은 차가 세워진 주차장.	fix	packs
+pack:s.tomeru.parked	車を止めた。	!rule:pack:s.tomeru.parked	keep	packs

@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
+#include <map>
 #include <mutex>
 #include <set>
 
@@ -69,23 +70,45 @@ std::set<std::string, std::less<>> CastOff() {
 }
 
 std::mutex registryMutex;
-std::vector<PackRowLabel>& Registry() {
-    static std::vector<PackRowLabel> rows;
-    return rows;
+struct RegistryData {
+    std::vector<PackRowLabel> rows;
+    std::map<std::string, int, std::less<>> ids;  // file, line, id and target: a reloaded row keeps its id
+};
+RegistryData& Registry() {
+    static RegistryData data;
+    return data;
 }
 
 int Register(const PackRow& r) {
+    const std::string key = r.file + '\n' + std::to_string(r.line) + '\n' + r.id + '\n' + r.written;
     const std::lock_guard<std::mutex> lock(registryMutex);
-    Registry().push_back({r.id, PackSlotName(r.slot), r.written});
-    return static_cast<int>(Registry().size());
+    RegistryData& d = Registry();
+    if (const auto it = d.ids.find(key); it != d.ids.end()) return it->second;
+    d.rows.push_back({r.id, PackSlotName(r.slot), r.written});
+    const int id = static_cast<int>(d.rows.size());
+    d.ids.emplace(key, id);
+    return id;
+}
+
+// The values a cue atom of these slots may take.
+bool KnownValue(std::string_view slot, std::string_view v) {
+    static constexpr std::string_view kForms[] = {"ta", "neg", "te", "te-request", "vol", "cop", "attr", "adv"};
+    static constexpr std::string_view kVoices[] = {"none", "passive", "potential", "respectful", "spontaneous"};
+    static constexpr std::string_view kRegisters[] = {"polite", "casual", "plain"};
+    auto in = [&](const auto& set) { return std::find(std::begin(set), std::end(set), v) != std::end(set); };
+    if (slot == "form") return in(kForms);
+    if (slot == "voice") return in(kVoices);
+    if (slot == "register") return in(kRegisters);
+    return true;
 }
 
 }  // namespace
 
 PackRowLabel PackRowById(int global) {
     const std::lock_guard<std::mutex> lock(registryMutex);
-    if (global < 1 || static_cast<std::size_t>(global) > Registry().size()) return {};
-    return Registry()[static_cast<std::size_t>(global) - 1];
+    const std::vector<PackRowLabel>& rows = Registry().rows;
+    if (global < 1 || static_cast<std::size_t>(global) > rows.size()) return {};
+    return rows[static_cast<std::size_t>(global) - 1];
 }
 
 const char* PackSlotName(PackSlot slot) {
@@ -157,6 +180,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         // A lexicon id (ja/yomi/pos) names its written form.
         if (const std::size_t slash = lemma.find('/'); slash != std::string_view::npos) lemma = lemma.substr(0, slash);
         if (r.id.empty() || lemma.empty() || pos.empty() || target.empty()) return fail("empty id, lemma, pos or target");
+        if (const auto [at, fresh] = table.ids.emplace(r.id, std::string(file) + ":" + std::to_string(n)); !fresh)
+            return fail("row id " + userdict::internal::Quote(r.id) + " is also at " + at->second);
         if (const std::string_view slot = col(f, "slot"); !slot.empty() && !ParseSlot(slot, r.slot))
             return fail("slot " + userdict::internal::Quote(slot) + ", want sense, name, voice, polarity or tense");
         if (const std::string_view kind = col(f, "kind"); !kind.empty() && kind != "frame" && kind != "colloc")
@@ -184,7 +209,12 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                                                    "main.vol", "voice"};
             if (std::find(std::begin(kSlots), std::end(kSlots), a.slot) == std::end(kSlots))
                 return fail("cue slot " + userdict::internal::Quote(a.slot) + " is not one of the cue DSL");
-            for (const std::string_view v : Split(atom.substr(eq + 1), '|')) a.values.emplace_back(v);
+            for (const std::string_view v : Split(atom.substr(eq + 1), '|')) {
+                if (v.empty() || (v != "-" && v != "*" && !KnownValue(a.slot, v)))
+                    return fail("cue value " + userdict::internal::Quote(v) + " of " + a.slot + " is not one the host reads");
+                a.values.emplace_back(v);
+            }
+            if (a.slot == "voice" && r.slot != PackSlot::Voice) return fail("a voice= atom is read on voice rows only");
             r.atoms.push_back(std::move(a));
         }
         const bool word = r.slot == PackSlot::Sense || r.slot == PackSlot::Name;
@@ -266,6 +296,21 @@ void ParsePackClasses(std::string_view file, std::string_view text, PackTable& t
         for (const std::string_view c : Split(b, '|'))
             if (!TrimSpace(c).empty()) own.emplace_back(TrimSpace(c));
     });
+}
+
+void CheckPackClasses(PackTable& table, std::vector<PackError>& errors) {
+    auto declared = [&](std::string_view c) { return table.parent.find(c) != table.parent.end(); };
+    for (const auto& [cls, parent] : table.parent)
+        if (!parent.empty() && !declared(parent))
+            errors.push_back({"pack-classes", 0, "the parent " + parent + " of " + cls + " is not a class"});
+    for (const auto& [lemma, own] : table.classes)
+        for (const std::string& c : own)
+            if (!declared(c)) errors.push_back({"pack-classes", 0, "the class " + c + " of " + lemma + " is not a class"});
+    for (const PackRow& r : table.rows)
+        for (const PackAtom& a : r.atoms)
+            for (const std::string& v : a.values)
+                if (v.starts_with("@") && !declared(v))
+                    errors.push_back({r.file, r.line, "the class " + v + " is not a class of the pack-classes files"});
 }
 
 }  // namespace hdTrans::dict

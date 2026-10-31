@@ -47,9 +47,11 @@ while [ $# -gt 0 ]; do
     shift
 done
 [ -e "$cases" ] || { echo "no cases at $cases" >&2; exit 2; }
-for d in $(printf '%s' "$dicts" | tr ',' ' '); do
+old_ifs=$IFS; IFS=,; set -f
+for d in $dicts; do
     [ -d "$d" ] || { echo "no dictionaries at $d" >&2; exit 2; }
 done
+set +f; IFS=$old_ifs
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/hdtrans-rules.XXXXXX")
 trap 'rm -rf "$tmp"' EXIT
 trap 'exit 2' HUP INT TERM

@@ -81,6 +81,9 @@ HD_TEST(dict_pack_errors) {
         {"x\ttense\t読む\tv5\t\t었다", "2: ending \"었다\" does not start with a form code (0-9, A, B)"},
         {"\tsense\t本\tn\t\t책", "2: empty id, lemma, pos or target"},
         {"x\tvoice\t本\tn\t\tpassive:혼나다", "2: a voice verb (\"passive:혼나다\") needs a verb row and a Korean verb"},
+        {"x\tsense\t本\tn\tform=past\t책", "2: cue value \"past\" of form is not one the host reads"},
+        {"x\tsense\t本\tn\tvoice=passive\t책", "2: a voice= atom is read on voice rows only"},
+        {"x\tsense\t本\tn\t\t책\nx\tsense\t紙\tn\t\t종이", "3: row id \"x\" is also at p.tsv:2"},
     };
     for (const auto& c : cases) {
         Families families;
@@ -106,6 +109,9 @@ HD_TEST(dict_pack_classes) {
     HD_CHECK_EQ(t.Depth("@person.kin"), 3);
     HD_CHECK(t.Member("母", "@person.kin") && t.Member("母", "@person") && t.Member("母", "@entity"));
     HD_CHECK(!t.Member("母", "@thing") && t.Member("本", "@entity") && !t.Member("犬", "@entity"));
+    CheckPackClasses(t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string("0: the class @thing of 本 is not a class"));
+    errors.clear();
     ParsePackClasses("x.tsv", "key\tvalue\n", t, errors);
     HD_CHECK_EQ(Errors(errors), std::string("1: the header is neither class, parent nor lemma, classes"));
 }

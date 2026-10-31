@@ -105,19 +105,35 @@ Context ContextOf(const Flusher& f, const Item* it) {
         ending += aux->DirectSurface();
     }
     const std::string_view after = c.next != nullptr ? std::string_view(c.next->group->surface) : std::string_view();
-    if ((ending.find("た") != std::string_view::npos || ending.find("だ") != std::string_view::npos) &&
-        ending.find("たい") == std::string_view::npos && ending.find("たく") == std::string_view::npos &&
-        ending.find("だろ") == std::string_view::npos) {
-        c.forms.insert("ta");
+    // the conjugated form without the sentence particles after it (行ったか, 行こうよ)
+    std::string_view form = ending;
+    for (bool cut = true; cut;) {
+        cut = false;
+        for (const std::string_view p : {"か", "よ", "ね", "ぜ", "ぞ", "わ", "な", "の", "っけ"}) {
+            if (form.size() > p.size() && form.ends_with(p)) {
+                form.remove_suffix(p.size());
+                cut = true;
+            }
+        }
     }
-    for (const std::string_view neg : {"ない", "なかっ", "なく", "ず", "ぬ", "ません"})
-        if (ending.find(neg) != std::string_view::npos) c.forms.insert("neg");
-    if (ending.ends_with("て") || ending.ends_with("で")) {
+    // ta: the past auxiliary closes the form (行った, 読んだ, 高かった, 行ったら); not the た of a stem (待たない)
+    // (the だ forms only on verbs: 静かだ is the copula)
+    for (const std::string_view ta : {"た", "たら", "たり", "たろう", "だ", "だら", "だり"}) {
+        if (form.ends_with(ta) && (ta.starts_with("た") || cls == '4')) c.forms.insert("ta");
+    }
+    // neg: a negative auxiliary after the stem (行かない, 高くない, 行きません, 知らず, 知らぬ); not the ぬ of 死ぬ
+    for (const std::string_view neg : {"ない", "なかっ", "なく", "なけれ", "ません", "ず", "ぬ"}) {
+        const std::size_t at = ending.find(neg);
+        if (at != std::string_view::npos && at > 0) c.forms.insert("neg");
+    }
+    if (form.ends_with("て") || form.ends_with("で")) {
         c.forms.insert("te");
         if (after.starts_with("くださ") || after.starts_with("下さ") || after.starts_with("くれ")) c.forms.insert("te-request");
     }
-    if (ending.find("よう") != std::string_view::npos || ending.find("おう") != std::string_view::npos ||
-        ending.find("ましょう") != std::string_view::npos) {
+    // vol: よう, ましょう, or う after an o-row kana (行こう), at the end of the form
+    if (form.ends_with("よう") || form.ends_with("ましょう") ||
+        (form.ends_with("う") && form.size() >= 6 &&
+         std::string_view("おこごそぞとどのぼぽもろ").find(form.substr(form.size() - 6, 3)) != std::string_view::npos)) {
         c.forms.insert("vol");
     }
     if (cls == '1' || cls == '8') {
@@ -272,6 +288,14 @@ void ApplyPacks(Flusher& f) {
         const bool nameOnly = it->Fixed();
         if (nameOnly && (chosen->user == nullptr || !chosen->user->nameLayer)) continue;
         const char cls = ClassOf(it);
+        // A voice row's Korean verb holds against the passes after the voice layer.
+        if (!it->packLexeme.empty() && cls == '4') {
+            it->detail->record = 0;
+            it->lexical = true;
+            const Selection source{Provenance::Pack, it->packRows.front()};
+            it->AssignEntrySurface(it->selected, it->packLexeme, source);
+            it->choice = source;
+        }
         for (const dict::PackSlot slot :
              {dict::PackSlot::Sense, dict::PackSlot::Name, dict::PackSlot::Polarity, dict::PackSlot::Tense}) {
             if (nameOnly && slot != dict::PackSlot::Name) continue;
@@ -288,7 +312,9 @@ void ApplyPacks(Flusher& f) {
                 it->adjectival = r.adjective;
             } else {
                 // Polarity and tense rows both write the ending; the first that applies holds it.
-                if (it->DirectIndex() < 0 || it->directChoice.layer == Provenance::Pack) continue;
+                if (it->DirectIndex() < 0 || it->directChoice.layer == Provenance::Pack ||
+                    it->DirectEntry(it->DirectIndex())->neighbourAssigned)
+                    continue;
                 it->AssignDirectSlot(it->DirectIndex(), r.target, source);
                 it->directChoice = source;
                 // A polarity row writes the whole negation: the negative auxiliary after the word

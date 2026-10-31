@@ -150,6 +150,7 @@ public:
     bool lexical = false;
     std::string appended;  // Korean written right after the word, outside its count and conjugation (append-target)
     std::vector<int> packRows;  // the pack rows that decided a slot of the word (dict::PackRowById ids)
+    std::string packLexeme;     // the Korean verb a voice row writes for the word, "" for none
 
     // Entry accessors: i is an entry of the group; outside it (-1) they read empty.
     std::string_view EntryText(int i) const;

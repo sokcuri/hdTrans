@@ -62,6 +62,7 @@ struct PackTable {
     std::unordered_map<std::string, std::vector<int>, StringHash, std::equal_to<>> byKey;
     std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> parent;              // @class → parent
     std::unordered_map<std::string, std::vector<std::string>, StringHash, std::equal_to<>> classes; // lemma → @classes
+    std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> ids;                  // row id → file:line
 
     bool Empty() const { return rows.empty(); }
     // The depth of a class (a root is 1); 0 for an unknown class.
@@ -82,6 +83,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                    PackTable& table, std::vector<PackError>& errors);
 // Adds the classes and memberships of one pack-classes file.
 void ParsePackClasses(std::string_view file, std::string_view text, PackTable& table, std::vector<PackError>& errors);
+// After every pack file: each parent, each class of a word and each class a cue names is declared.
+void CheckPackClasses(PackTable& table, std::vector<PackError>& errors);
 
 const char* PackSlotName(PackSlot slot);
 

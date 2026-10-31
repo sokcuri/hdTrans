@@ -714,6 +714,7 @@ bool SnapshotLoader::CompilePlain(const std::vector<std::size_t>& rest) {
         const std::string_view text = internal::WithoutHeader(files[i].text);
         if (files[i].layer == FileLayer::Pack) ParsePackRows(files[i].name, text, &s.base_, s.families_, s.packs_, packErrors);
     }
+    CheckPackClasses(s.packs_, packErrors);
     for (PackError& e : packErrors) {
         errors.push_back({std::move(e.file), LoadErrorKind::Plain, e.line, TsvErrorKind::Read, std::move(e.message)});
     }
