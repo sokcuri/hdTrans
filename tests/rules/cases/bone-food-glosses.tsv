@@ -1,0 +1,40 @@
+# 규칙: LEX-3360
+# 규칙: LEX-3361
+# 규칙: LEX-3362
+# 규칙: LEX-3363
+rule	input	expected	kind	layer
+dict:bone-food-glosses:1	作物を食い荒らす獣は害獣ですけど	has:마구 뜯어 먹는	fix	defaults
+dict:bone-food-glosses:1	魔物は肉を食い荒らしている。	has:마구 뜯어 먹고 있다	fix	defaults
+dict:bone-food-glosses:1	食い荒らされた地下都市の姿だった。	has:마구 뜯어 먹힌	fix	defaults
+dict:bone-food-glosses:1	炎の獣に食い荒らされたあとだった。	has:마구 뜯어 먹힌	fix	defaults
+dict:bone-food-glosses:1	樹木の根を食い荒らし、	has:마구 뜯어 먹고	fix	defaults
+dict:bone-food-glosses:1	食料が食い荒らされてしまい、	lacks:들쑤셔	fix	defaults
+dict:bone-food-glosses:4	畑をくいあらす猪。	has:마구 뜯어 먹는	fix	defaults
+dict:bone-food-glosses:1	そんな木、全て刹那で喰い荒らしてやる	has:먹어 망쳐	keep	defaults
+dict:bone-food-glosses:1	鋼の肉が喰い荒らされる。	has:먹어 망쳐진다	keep	defaults
+dict:bone-food-glosses:1	民家は食い尽くされ、	lacks:뜯어	keep	defaults
+dict:bone-food-glosses:8	骨張った顔。	has:뼈가 도드라진 얼굴	fix	defaults
+dict:bone-food-glosses:8	骨張った青白い手。	has:뼈가 도드라진 창백한 손	fix	defaults
+dict:bone-food-glosses:8	肉の少ない骨張った足の硬い感触	has:뼈가 도드라진 다리	fix	defaults
+dict:bone-food-glosses:9	骨ばった女性の手。	has:뼈가 도드라진 여성의 손	fix	defaults
+dict:bone-food-glosses:9	骨ばった指がこめかみを掻いた。	has:뼈가 도드라진 손가락	fix	defaults
+dict:bone-food-glosses:6	なんで肋骨ばかり虐めるんだ	has:늑골만	keep	defaults
+dict:bone-food-glosses:6	それは皮と骨ばかりというわけではなく	has:뼈만	keep	defaults
+dict:bone-food-glosses:14	久々に障害を飛越し、	has:뛰어넘고	fix	defaults
+dict:bone-food-glosses:15	時間を飛越えてなかったら。	has:뛰어넘지	fix	defaults
+dict:bone-food-glosses:14	馬術障害飛越競技で金メダルを獲得した	lacks:뛰어넘	keep	defaults
+dict:bone-food-glosses:14	飛越地震を利用して、	has:히에쓰 지진	keep	defaults
+dict:bone-food-glosses:16	試運転の飛行先は、王家直轄領	has:비행 목적지	fix	defaults
+dict:bone-food-glosses:18	雑草三割、薬草二割、食草四割	has:먹이 식물	fix	defaults
+dict:bone-food-glosses:18	肉食草食関係なく無頓着だ。	has:초식	keep	defaults
+dict:bone-food-glosses:19	あの偏食鳥？	lacks:식용	keep	defaults
+dict:bone-food-glosses:19	声を上げる火食鳥のように見える。	has:화식새	keep	defaults
+dict:bone-food-glosses:20	飯蛸を食べる	has:주꾸미	fix	defaults
+dict:bone-food-glosses:22	馬草を刈る	has:말먹이 풀	fix	defaults
+dict:bone-food-glosses:22	馬草桶に水を入れる	has:구유	keep	defaults
+dict:bone-food-glosses:23	骨節が痛む	has:뼈마디	fix	defaults
+dict:bone-food-glosses:12	顔は骨張っており、	has:뼈가 도드라져 있어	fix	defaults
+dict:bone-food-glosses:17	食添の表示	has:식품 첨가물	fix	defaults
+dict:bone-food-glosses:21	馬刀貝を掘る	has:맛조개	fix	defaults
+dict:bone-food-glosses:9	月華の骨ばった腰を逃がさないように掴む。	has:월화의 뼈가 도드라진 허리	fix	defaults
+dict:bone-food-glosses:8	彼の骨張った手が伸びた。	has:그의 뼈가 도드라진 손	fix	defaults

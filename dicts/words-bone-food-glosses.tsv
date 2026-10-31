@@ -1,0 +1,26 @@
+#! layer=base
+# 뜻풀이가 틀린 기본 사전 낱말: 食い荒らす 마구 뜯어 먹다, 骨張る 뼈가 도드라지다, 飛越す 뛰어넘다, 음식과 생물 이름씨
+key	ko	pos	sem	gram	note	id
+食い荒ら	마구 뜯어 &HU@	M433			// LEX-3360	bone-food-glosses:1
+食い荒	마구 뜯어 &HU@	M433			// LEX-3360	bone-food-glosses:2
+くい荒ら	마구 뜯어 &HU@	M433			// LEX-3360	bone-food-glosses:3
+くいあら	마구 뜯어 &HU@	M433			// LEX-3360	bone-food-glosses:4
+骨張	뼈가 도드라&AL@	M418			// LEX-3361	bone-food-glosses:5
+骨ば	뼈가 도드라&AL@	M418			// LEX-3361	bone-food-glosses:6
+ほねば	뼈가 도드라&AL@	M418			// LEX-3361	bone-food-glosses:7
+骨張った	뼈가 도드라진	C0D1			// LEX-3361	bone-food-glosses:8
+骨ばった	뼈가 도드라진	C0D1			// LEX-3361	bone-food-glosses:9
+骨張ってい	뼈가 도드라져 &HN@	M427			// LEX-3361	bone-food-glosses:10
+骨ばってい	뼈가 도드라져 &HN@	M427			// LEX-3361	bone-food-glosses:11
+骨張ってお	뼈가 도드라져 &HN@	M418			// LEX-3361	bone-food-glosses:12
+骨ばってお	뼈가 도드라져 &HN@	M418			// LEX-3361	bone-food-glosses:13
+飛越	뛰어&H4@	M443			// LEX-3362	bone-food-glosses:14
+飛越え	뛰어&H4@	M427			// LEX-3362	bone-food-glosses:15
+飛行先	비행 목적지	I110	VPl		// LEX-3363	bone-food-glosses:16
+食添	식품 첨가물	N110			// LEX-3363	bone-food-glosses:17
+食草	먹이 식물	N110	VPt		// LEX-3363	bone-food-glosses:18
+食鳥	식용 조류	N110			// LEX-3363	bone-food-glosses:19
+飯蛸	주꾸미	N110	VAm		// LEX-3363	bone-food-glosses:20
+馬刀貝	맛조개	I110			// LEX-3363	bone-food-glosses:21
+馬草	말먹이 풀	N110			// LEX-3363	bone-food-glosses:22
+骨節	뼈마디	N110	VBp		// LEX-3363	bone-food-glosses:23
