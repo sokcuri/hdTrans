@@ -21,7 +21,7 @@ cx:lc2b-koshita:30	情報は多いに越したことはない。	has:많은 게 
 cx:lc2b-koshita:10	何事もなければそれに越したことはない。	has:그보다 좋은 건 없다.	fix	rewrites
 cx:lc2b-koshita:40	用心に越したことはない。	has:조심보다 좋은 건 없다.	keep	rewrites
 cx:lc2b-koshita:40	健康に越したことはない。	has:건강보다 좋은 건 없다.	keep	rewrites
-cx:lc2b-koshita-end:15	わかるはずもないのだが、ここは用心に越したことはないだろう。	has:알 리도 없지만, 여기는 조심보다 좋은 건 없을 것이다.	fix	rewrites
+cx:lc2b-koshita-end:15	わかるはずもないのだが、ここは用心に越したことはないだろう。	has:알 리도 없는데, 여기는 조심보다 좋은 건 없을 것이다.	fix	rewrites
 cx:lc2b-koshita-end:16	「だが、用心に越したことはないだろ」	has:「하지만, 조심보다 좋은 건 없지」	fix	rewrites
 cx:lc2b-koshita-end:16	（まぁ用心に越したことはないだろ。）	has:(뭐 조심보다 좋은 건 없지.)	fix	rewrites
 cx:lc2b-koshita:10	用心に越したことはない。	!rule:cx:lc2b-koshita:10	keep	rewrites
