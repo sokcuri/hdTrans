@@ -1,0 +1,27 @@
+# 규칙: GRM-90
+rule	input	expected	kind	layer
+cx:soreto-initial:10	「それと、これはオマケや」	「그리고, 이건 덤이야」	fix	rewrites
+cx:soreto-initial:10	「はい！それと、頻繁には無理ですが	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	そんな約束をした覚えはない。それと、くだらない冗談を言うから	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	それと、主砲発射に備えて甲板機銃員を待避させておけ！	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	体格はそのまま強さになる。それと、負けん気。	체격은 그대로 강함이 된다. 그리고, 승부욕.	fix	rewrites
+cx:soreto-initial:10	「それと、家に送った時点で、１回あたしに電話入れること」	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	後は私達に任せて下さい。それと、貴方達は今夜闘技場に行ってください。	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	「ここまで運んでくれてありがとね。それと、みんなにもよろしく言っといて」	has:고마워. 그리고, 모두에게도	fix	rewrites
+cx:soreto-initial:10	それと、２８Ｇの貸し！	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	「……それと、もう一点、よろしいですか？」	has:……그리고,	fix	rewrites
+cx:soreto-initial:10	「それと、これ、青海さんから」	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	「もうちょっと愛想よくしよう。それと、笑顔も忘れずに」	has:하자. 그리고, 웃는 얼굴도	fix	rewrites
+cx:soreto-initial:10	それと、こいつを受け取ってくれ。	그리고, 이 녀석을 받아 줘.	fix	rewrites
+cx:soreto-initial:10	今日はもう休んだほうがいいわ。それと、この街の生活にも早く慣れることね	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	「それと、もうひとつ、お願いがあるんだけど」	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	それと、俺は囚人じゃねえよ。	rule:cx:soreto-initial:10=그리고	fix	rewrites
+cx:soreto-initial:10	「お疲れ様でした。それと、予備選挙通過、おめでとうございます！」	has:그리고, 경선 통과	fix	rewrites
+cx:soreto-initial:10	「――それと、いつまでも松之助では格好がつかぬ。」	has:――그리고,	fix	rewrites
+cx:soreto-initial:10	「プラスチック爆薬で壁を破壊されています。それと、争った形跡も」	has:그리고, 싸운 형적도	fix	rewrites
+cx:soreto-initial:10	これとそれと、あれをください。	!rule:cx:soreto-initial:10	keep	rewrites
+cx:soreto-initial:10	「それと同じだ」	!rule:cx:soreto-initial:10	keep	rewrites
+cx:soreto-initial:10	それとこれとは話が別だ。	!rule:cx:soreto-initial:10	keep	rewrites
+cx:soreto-initial:10	「それとも、帰る？」	!rule:cx:soreto-initial:10	keep	rewrites
+cx:soreto-initial:10	パンとそれと、牛乳を買った。	!rule:cx:soreto-initial:10	keep	rewrites
+cx:soreto-initial:10	それとなく尋ねた事もある。	!rule:cx:soreto-initial:10	keep	rewrites

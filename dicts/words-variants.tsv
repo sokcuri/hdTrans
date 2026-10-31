@@ -20640,3 +20640,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 まっしろ	새%CC@	G8U0			GN							jisjk:3709
 しょうち	&K6@	M469			GN							w:28975
 トドメを刺	결정타를 날&AA@	M413			GN			LEX-120				variant:todome:katakana
+今の内に	지금	E311			GN			LEX-100 今のうちに의 한자 표기			いまのうちに	variant:lc-cx:imanouchini

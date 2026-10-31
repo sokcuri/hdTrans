@@ -20,7 +20,7 @@ ending:space-before-mark	ゴムだから チューブ伸びるじゃないです
 ending:space-before-mark	（ 男性 ） 今のところ 大丈夫っす 。	(남성 ) 지금으로선 괜찮아요 .	fix	builtin-ending
 ending:space-before-mark	（ アキ ） 大丈夫です 。	(아키 ) 괜찮습니다 .	keep	builtin-ending
 ending:space-before-mark	（スタッフ） なるほど 。 やっぱり すごいっすね 。	(스탭) 그렇구나 . 역시 대단하네요 .	keep	builtin-ending
-ending:space-before-mark	そうっすね いやだから息子さんからしたら	그렇네요 싫으니까 아들에게서 하면	keep	builtin-ending
+ending:space-before-mark	そうっすね いやだから息子さんからしたら	그렇네요 싫으니까 아들 입장에서 보면	keep	builtin-ending
 ending:space-before-mark	（ 男性 ） そうっすね 。	(남성 ) 그렇네요 .	keep	builtin-ending
 ending:space-before-mark	命の恩人だっけ ?	생명의 은인이었나 ?	fix	builtin-ending
 ending:space-before-mark	命の恩人だっけ？	생명의 은인이었나?	keep	builtin-ending

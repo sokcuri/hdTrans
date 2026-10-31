@@ -1,0 +1,9 @@
+# 규칙: LEX-100
+rule	input	expected	kind	layer
+lookup:imanouchini	……今の内に逃げちゃおうかな？	……지금 도망쳐버릴까?	fix	lookup
+lookup:imanouchini	あんたも今の内に離れた方がいいぜ。	lacks:지금 중에	fix	lookup
+lookup:imanouchini	今の内にやっておこう。	lacks:중에	fix	lookup
+lookup:imanouchini	今の内に準備しておきなさい。	lacks:중에	fix	lookup
+lookup:imanouchini	今のうちに逃げてください。	has:지금 도망쳐	keep	lookup
+lookup:imanouchini	内の中に入る。	lacks:지금	keep	lookup
+lookup:imanouchini	家の内に入る。	lacks:지금	keep	lookup

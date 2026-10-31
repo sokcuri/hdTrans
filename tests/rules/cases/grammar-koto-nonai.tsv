@@ -1,0 +1,27 @@
+# 규칙: GRM-94
+rule	input	expected	kind	layer
+cx:koto-nonai:10	俺は隠すことのない本心を紡ぐ。	has:숨길 일이 없는 본심	fix	rewrites
+cx:koto-nonai:10	知り合うことのないたくさんの人々。	알게 될 일이 없는 많은 사람들.	fix	rewrites
+cx:koto-nonai:10	そんな自分を顧みることのないフィリップの責任	has:돌아볼 일이 없는	fix	rewrites
+cx:koto-nonai:10	もう二度と人の訪れることのないホテルを後にした。	has:방문할 일이 없는 호텔	fix	rewrites
+cx:koto-nonai:10	途切れることのない快楽に襲われて	has:끊길 일이 없는 쾌락	fix	rewrites
+cx:koto-nonai:10	交わることのないはずの死者と生者	has:일이 없	fix	rewrites
+cx:koto-nonai:10	命すらも顧みられることのない危険な活動	rule:cx:koto-nonai:10=3 일	fix	rewrites
+cx:koto-nonai:10	決して消えることのない傷	has:사라질 일이 없는 상처	fix	rewrites
+cx:koto-nonai:10	誰にも知られることのなかった秘密	has:알려질 일이 없었던 비밀	fix	rewrites
+cx:koto-nonai:10	二度と戻ることのない日々	has:돌아갈 일이 없는 날들	fix	rewrites
+cx:koto-nonai:10	終わることのない戦い	has:끝날 일이 없는 싸움	fix	rewrites
+cx:koto-nonai:10	止まることのない雨	has:일이 없는 비	fix	rewrites
+cx:koto-nonai:10	変わることのない想い	has:바뀔 일이 없는 마음	fix	rewrites
+cx:koto-nonai:10	揺らぐことのない決意	has:일이 없는 결의	fix	rewrites
+cx:koto-nonai:10	目覚めることのない眠り	has:일이 없는 잠	fix	rewrites
+cx:koto-nonai:10	見たことのない色の海。	본 적이 없는 색의 바다.	keep	rewrites
+cx:koto-nonai:10	彼女は、俺が出会ったことのないタイプの人間だ。	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	「ヘイディオ……聞いたことのない名前だわ」	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	一度も見せたことのない顔	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	会うことのできない人	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	部隊を率いる事のない、後方勤務への。	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	二度と会うことはないだろう	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	怒ることはない	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	彼は負けることがない。	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	今まで感じたことのないぞくぞくがある	!rule:cx:koto-nonai:10	keep	rewrites
