@@ -1,0 +1,16 @@
+# 규칙: LEX-154
+rule	input	expected	kind	layer
+cx:coll-verb:50	「……流石に悪いと思ってる……」	has:미안하다고 생각해	fix	rewrites
+cx:coll-verb:50	悪いとは思ってるよ？　ただ、わかってても止まれないだけで。	has:미안하다고는 생각해	fix	rewrites
+cx:coll-verb:50	「うん……私も悪いと思うんだけど……」	has:나도 미안하다고 생각하는데	fix	rewrites
+cx:coll-verb:50	「周防さん達を置いていくのは悪いと思って、ここで待ってたのよ」	has:미안하다고 생각해	fix	rewrites
+cx:coll-verb:50	悪いと思っているのなら、説明してくれればいいんじゃないか	has:미안하다고 생각한다면	fix	rewrites
+cx:coll-verb:50	どこが悪いと思う？	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	彼が悪いと思う。	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	機嫌が悪いと執事に当たり散らし、	!rule:cx:coll-verb:50	keep	rewrites
+cx:coll-verb:50	これだからお義姉様が気持ち悪いと言うのよ。	!rule:cx:coll-verb:50	keep	rewrites
+lexical:coll-attitude	だが、――実家の事となれば話は別だ。	has:이야기가 다르다	fix	builtin-phrase
+lexical:coll-attitude	「私も同じ意見だが、相手があのアールなら話は別だ」	has:이야기가 다르다	fix	builtin-phrase
+lexical:coll-attitude	ふらふらしていた、っていうなら話は別だけど……	has:이야기가 다르지만	fix	builtin-phrase
+lexical:coll-attitude	「大切な人のことを丁重に弔うのなら話は別よ」	has:이야기가 달라	fix	builtin-phrase
+lexical:coll-attitude	それとこれとは別の話だ。	lacks:다르다	keep	lookup

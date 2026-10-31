@@ -1,0 +1,19 @@
+# 규칙: LEX-152
+rule	input	expected	kind	layer
+cx:coll-verb:10	俺の奥底に潜むもの……	has:깊은 속에 숨는 것	fix	rewrites
+cx:coll-verb:10	「落ち着け。敵が潜んでないか周囲を警戒しろ」	has:적이 숨	fix	rewrites
+cx:coll-verb:10	それぞれ物陰に潜みながら戦闘し、	has:그늘에 숨으면서	fix	rewrites
+cx:coll-verb:10	≪待ち伏せだ！　西の広場に敵が潜んでいた！≫	has:적이 숨어 있었다	fix	rewrites
+cx:coll-verb:10	半年前に潜り、そのまま、戻ってきていない。	!rule:cx:coll-verb:10	keep	rewrites
+cx:coll-verb:10	ベッドに潜り込んでから、数十分――	!rule:cx:coll-verb:10	keep	rewrites
+lexical:coll-default	家のチャリを駐輪場から引っ張り出し、またがった。	has:올라탔다	fix	senses
+lexical:coll-default	青海さんは俺の自転車にまたがった。	has:자전거에 올라탔다	fix	senses
+lexical:coll-default	続いて、俺も猿江の後ろにまたがる。	has:올라탄다	fix	senses
+lexical:coll-default	二つの年度にまたがる計画	lacks:올라타	keep	senses
+lexical:coll-default	「おかげで、討論会が終わるまでは、鞍替えを思いとどまってくれたからな」	has:갈아타기를 단념해	fix	lookup
+lexical:coll-default	ダメそうなら辰巳に鞍替えするわ	has:타츠미에 갈아탈	fix	builtin-phrase
+lexical:coll-default	辰巳に鞍替えするという結論が出てたようだ。	has:갈아탄다고	fix	builtin-phrase
+lexical:coll-default	「……悪いけど、少し寄り道したい」	has:조금 딴 데 들르고 싶다	fix	builtin-phrase
+lexical:coll-default	ヨソのブース見物はもうしたので、寄り道せずに講堂を出た。	has:딴 데 들르지 않고	fix	builtin-phrase
+lexical:coll-default	皆が寄り道もせず自宅へと急ぐ程の雨だった	has:딴 데 들르기도	fix	lookup
+lexical:coll-default	帰り道に雨が降った。	lacks:들르	keep	lookup

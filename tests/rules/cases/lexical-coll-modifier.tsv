@@ -1,0 +1,20 @@
+# 규칙: LEX-153
+rule	input	expected	kind	layer
+cx:coll-verb:30	変わった人だけど人事部だけじゃなくていろんな所に顔が利く	has:특이한 사람이지만	fix	rewrites
+cx:coll-verb:30	「ウチはちょっと変わった子が多いかもしれないけど」	has:특이한 아이가	fix	rewrites
+cx:coll-verb:30	「……なんか、変わった娘ね」	has:특이한	fix	rewrites
+cx:coll-verb:30	ちょっと変わった条件付きなんだけどさ	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:30	「モードが、変わったみたいね」	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:30	国王の顔色も変わった。	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:40	成績上位なのにこの問題児集団に溶け込んでる、ちょっと変わった方だ。	has:조금 특이한 분이다	fix	rewrites
+cx:coll-verb:40	考え方が変わった方がいい	!rule:cx:coll-verb:40	keep	rewrites
+lexical:coll-modifier	早速、演説で渇いた喉を潤した。	has:마른 목을 축였다	fix	senses
+lexical:coll-modifier	渇いた全身に、水分が巡る。	has:목마른 전신	keep	senses
+lexical:coll-modifier	「はい、喉が渇いてたので、冷たい方が」	has:목이 말랐	keep	lookup
+lexical:coll-modifier	結果、みいちゃんは、クラスで浮いた存在になった。	has:반에서 겉도는 존재가	fix	builtin-phrase
+lexical:coll-modifier	周りの人は、みんな年下……私は浮いた存在だって	has:겉도는 존재	fix	builtin-phrase
+lexical:coll-modifier	空に浮いてるってだけなら花の種だってそうだ。	has:하늘에 떠 있다	keep	builtin-phrase
+lexical:coll-modifier	何より、その思い切りの良さが衝撃だった。	has:그 과감함이 충격	fix	builtin-phrase
+lexical:coll-modifier	得意不得意はあっても使える魔法を	has:잘하고 못하는 것은 있어도	fix	builtin-phrase
+lexical:coll-modifier	どう見ても目下のものに、実名を呼ばれる事は	has:아랫사람에	fix	builtin-phrase
+lexical:coll-modifier	花形の意匠設計でも、派手な大型物件でもない。	has:의장 설계	fix	builtin-phrase

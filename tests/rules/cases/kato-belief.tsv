@@ -21,7 +21,7 @@ cx:kato-belief:20	「同級生だから仲いい方がいいかと思って」	!
 cx:kato-belief:30	提督、あの……どうかと思ったのですが	!rule:cx:kato-belief:30	keep	rewrites
 cx:kato-belief:20	最初は難しいかと思ったけど、すぐ慣れた。	처음은 어려운 줄 알았지만, 바로 익숙해졌다.	fix	rewrites
 cx:kato-belief:20	楽しいかと思って誘った。	!rule:cx:kato-belief:20	keep	rewrites
-cx:kato-belief:15	最初は植物状態にでもなって夢でも見ているのかと思っていたが	처음은 식물상태라도 되어 꿈이라도 보고 있는 줄 알았지만	fix	rewrites
+cx:kato-belief:15	最初は植物状態にでもなって夢でも見ているのかと思っていたが	처음은 식물상태라도 되어 꿈이라도 꾸고 있는 줄 알았지만	fix	rewrites
 cx:kato-belief:15	……なんじゃ……息子が帰って来たのかと思ったよ。	……뭐냐……아들이 돌아온 줄 알았어.	fix	rewrites
 cx:kato-belief:15	隠れた名店はどこにあるのかと思ったら……。	!rule:cx:kato-belief:15	keep	rewrites
 cx:kato-belief:20	よほど優秀なのではないかと思った。	!rule:cx:kato-belief:20	keep	rewrites

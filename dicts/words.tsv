@@ -15191,7 +15191,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 寄りきり	요리키리	N110			GN				llm		よりきり	w:15149
 寄り合い	모임	N110			GN				xxx	1	よりあい	w:15150
 寄り添	곁에 &HN@	M420			GN				xxx llm	1		w:15151
-寄り道	들렀다 가기	I110			GN				xxx llm	1		w:15152
+寄り道	딴 데 들르기	I110			GN			LEX-152 가는 길에 다른 곳에 들르는 일	xxx llm	1		w:15152
 寄切り	요리키리	N110			GN				llm		よりきり	w:15153
 寄合い	모임	I110			GN				xxx	1	よりあい	w:15154
 寄合所帯	혼성 집단	N110	VGt		GN				llm		よりあいじょたい	w:15155

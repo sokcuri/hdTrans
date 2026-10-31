@@ -764,3 +764,10 @@ cx:cue-sense:150	LEX-149	&&2 S+0== "すらりと" B+1== "伸びる"	set-target "
 cx:cue-sense:160	LEX-149	&&3 B+0== "伸びる" S-1== "すらりと" C+0== "뻗다"	select-lemma "뻗다"	すらりと伸びた 쭉 뻗은
 //= chinyu-narration	after Select 115	The 親友 read 절친 in a dialogue is 친한 친구 in the narration of a document that writes its dialogue in 「」 (house style: 절친 is a spoken word).
 cx:chinyu-narration:10	LEX-3	&&3 S+0== "親友" D+0== "절친" F+0== "narration"	set-target "친한 친구"	親友の家に行った。 친한 친구의 집에 갔다.
+//= coll-verb	after Select 18	A verb whose Korean is decided by one word it is paired with, where the sense table cannot see the pair: 潜む shares its stem with 潜る and is 숨다 (奥底に潜むもの 깊은 속에 숨은 것); a passive 揉まれる after a noun of waves and に is 휩쓸리다 (波に揉まれてきた 물결에 휩쓸려 왔다); 変わった before a person is 특이하다 (変わった人 특이한 사람); 見る after 夢 and a particle that stresses or limits it (は, も, ばかり, でも and the like) is 꾸다, while 夢に, 夢で and 夢として are where one sees (夢ばかり見ていた 꿈만 꾸고 있었다, 夢で見た 꿈에서 봤다); 悪い before と or とは and a verb of thinking, with no が before it, is the speaker's regret 미안하다 (悪いと思ってる 미안하다고 생각해).
+cx:coll-verb:10	LEX-152	&&2 S+0== "潜" ||5 I+0== "L潜む" I+0== "L潜ん" I+0== "L潜み" I+0== "L潜ま" I+0== "L潜め"	set-verb "숨다"	奥底に潜むもの 깊은 속에 숨는 것
+cx:coll-verb:20	LEX-150	&&4 S+0== "揉" F+0== "passive" S-1== "に" S-2== "R波"	set-active set-verb "휩쓸리다"	波に揉まれてきた 물결에 휩쓸려 왔다
+cx:coll-verb:30	LEX-153	&&3 S+0== "変わ" U+0== "った" ||11 S+1== "人" S+1== "方" S+1== "子" S+1== "奴" S+1== "やつ" S+1== "ヤツ" S+1== "男" S+1== "女" S+1== "娘" S+1== "人間" S+1== "連中"	set-verb "특이하다"	変わった人だ 특이한 사람이다
+cx:coll-verb:40	LEX-153	&&3 S+0== "変わ" I+0== "変わった方" !1 S+1== "が"	set-verb "특이하다" set-ending "8 분"	変わった方だ 특이한 분이다
+cx:coll-verb:50	LEX-154	&&5 S+0== "悪" ||2 I+0== "悪いと" I+0== "悪いとは" B+1== "思う" !1 S-1== "が" !1 G+0== "Qw"	set-verb "미안하다"	悪いとは思ってる 미안하다고는 생각해
+cx:coll-verb:60	LEX-150	&&3 B+0== "見る" S-2== "夢" ||10 S-1== "は" S-1== "も" S-1== "ばかり" S-1== "さえ" S-1== "すら" S-1== "なんか" S-1== "なんて" S-1== "だけ" S-1== "しか" S-1== "でも"	set-verb "꾸다"	夢ばかり見ていた 꿈만 꾸고 있었다
