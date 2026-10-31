@@ -992,6 +992,7 @@ class Reader {
     auto jp = [](char32_t c) { return IsHiragana(c) || IsKatakana(c) || IsKanji(c); };
     std::vector<uint8_t> after(n + 1, 0);  // the current reading ends an interjection or a final particle here
     std::vector<uint8_t> afterFunction(n + 1, 0);  // … a particle or an auxiliary
+    std::vector<uint8_t> beforeContent(n + 1, 0);  // … and starts a content word here
     for (uint32_t ai : ws_->path) {
       const Arc& a = ws_->arcs[ai];
       uint16_t cls = a.kind == ArcKind::lex ? m_.pforms[a.form].cls : a.lcls;
@@ -999,11 +1000,12 @@ class Reader {
       std::string_view ud = m_.udNames[m_.classes[cls].ud];
       if (HasPrefix(R_.pauseUd, ud) && a.e - a.b >= 2) after[a.e] = 1;
       if (HasPrefix(R_.phraseEndUd, ud)) afterFunction[a.e] = 1;
+      else if (!HasPrefix(R_.functionUd, ud)) beforeContent[a.b] = 1;
     }
     for (uint32_t k = 1; k < n; ++k) {
       if (!ws_->spaceBefore[k] || !single_[k] || ws_->joinable[k] || !jp(core[k - 1]) || !jp(core[k])) continue;
       if (after[k]) continue;  // ああ あっし, よ そして: a pause after an interjection or a final particle
-      if (afterFunction[k]) continue;  // そばに いて: a space after a particle or an auxiliary parts phrases
+      if (afterFunction[k] && beforeContent[k]) continue;  // そばに いて: a space between a particle and a content word parts phrases
       Workspace tmp;
       for (uint32_t x = 0; x < ws_->nchars.size(); ++x)
         if (x <= ws_->coreN[k - 1] || x >= ws_->coreN[k]) tmp.nchars.push_back(ws_->nchars[x]);
