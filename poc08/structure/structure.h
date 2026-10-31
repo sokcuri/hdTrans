@@ -55,7 +55,20 @@ struct StructureData {
     std::vector<AuxRow> aux;
     std::vector<std::pair<std::string, Wc>> ud;      // longest prefix wins
     std::vector<std::pair<std::string, Form>> forms; // longest prefix wins
-    std::vector<std::pair<std::string, float>> headWeights;  // sorted by feature name
+    std::vector<std::pair<std::string, float>> headWeights;  // (unused since data/heads.tsv; kept for --train-heads)
+    // data/heads.tsv: rule heads. A row's dep atoms test the dependent bunsetsu; the most specific matching row
+    // names the head it takes (see heads.cpp). Level rows map a clause link to its scope level (A < B < C < D).
+    struct HeadAtom {
+        std::string key;
+        std::vector<std::string> vals;
+        bool neg = false;
+    };
+    struct HeadRule {
+        std::string id;
+        std::vector<HeadAtom> dep;
+        std::string head;  // noun | pred | pred>=A|B|C|D | next | final | level=A|B|C|D
+    };
+    std::vector<HeadRule> headRules;
     std::unordered_map<std::string, std::string> persons;     // data/persons.tsv: lemma → speaker|addressee|third
     std::unordered_map<std::string, std::array<float, 6>> zeroWeights;  // data/zero.tsv: feature → weight per class
     std::unordered_set<std::string> noBareObject;  // data/bareobj.tsv: verbs a bare noun before them is not the object of
@@ -92,6 +105,8 @@ std::vector<int> SentenceEnds(const std::vector<TokInfo>& info, const Path& path
 
 // Per-bunsetsu facts the head model reads.
 enum class Dt : uint8_t { adn, topic, pred, kase, adv, conj, other };
+const char* DtName(Dt d);
+const char* CaseName(Case k);
 struct HeadFacts {
     Dt dt = Dt::other;
     bool hasNoun = false, hasPred = false, endsSentence = false, comma = false, opens = false, closes = false;
@@ -99,7 +114,13 @@ struct HeadFacts {
     Case kase = Case::none;
     int depthIn = 0, depthOut = 0, sentEnd = 0;
     std::string last, form, cwc, clemma;
+    std::string link;  // the clause link the bunsetsu ends in (aux.tsv link names), "adn", "renyo" or "final"
+    char level = 0;    // scope level of that link (data/heads.tsv level rows), 0 = not a clause end
+    bool nextNoun = false;  // the next bunsetsu is a noun
 };
+
+// data/heads.tsv rows into out.headRules; false and err on a malformed row.
+bool LoadHeadRules(std::string_view tsv, StructureData& out, std::string& err);
 std::vector<HeadFacts> ComputeHeadFacts(const StructureData& data, const Strings& strings, const std::vector<TokInfo>& info,
                                         const Path& path);
 

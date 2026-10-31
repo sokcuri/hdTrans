@@ -82,6 +82,10 @@ StructureData* LoadStructure(const Config& cfg, std::string& err) {
         return nullptr;
     }
     hd8::LoadBareObject(ReadFile(dir + "bareobj.tsv"), data->tables);
+    if (!hd8::LoadHeadRules(ReadFile(dir + "heads.tsv"), data->tables, err)) {
+        delete data;
+        return nullptr;
+    }
     if (data->tables.aux.empty()) {
         err = "structure: no aux rows in " + dir;
         delete data;
