@@ -168,28 +168,28 @@ n5-vfinal-0166	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=invite-m
 n5-vfinal-0167	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「歌を歌いましょうか。」	「노래를 부를까요?」
 n5-vfinal-0168	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「歌を歌いませんか。」	「노래를 부르지 않을래요?」
 n5-vfinal-0169	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	手を洗う。	손을 씻는다.
-n5-vfinal-0170	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達は顔を洗う。	친구는 얼굴을 씻는다.
+n5-vfinal-0170	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達は顔を洗う。	친구는 세수한다.
 n5-vfinal-0171	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	手を洗っている。	손을 씻고 있다.
 n5-vfinal-0172	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	手を洗わない。	손을 씻지 않는다.
-n5-vfinal-0173	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	友達は顔を洗わない。	친구는 얼굴을 씻지 않는다.
+n5-vfinal-0173	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	友達は顔を洗わない。	친구는 세수하지 않는다.
 n5-vfinal-0174	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	手を洗っていない。	손을 씻고 있지 않다.
 n5-vfinal-0175	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	手を洗った。	손을 씻었다.
-n5-vfinal-0176	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達は顔を洗った。	친구는 얼굴을 씻었다.
+n5-vfinal-0176	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達は顔を洗った。	친구는 세수했다.
 n5-vfinal-0177	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	手を洗っていた。	손을 씻고 있었다.
 n5-vfinal-0178	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	手を洗わなかった。	손을 씻지 않았다.
-n5-vfinal-0179	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は顔を洗わなかった。	친구는 얼굴을 씻지 않았다.
+n5-vfinal-0179	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は顔を洗わなかった。	친구는 세수하지 않았다.
 n5-vfinal-0180	block=vfinal;pred=godan-u;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	手を洗っていなかった。	손을 씻고 있지 않았다.
 n5-vfinal-0181	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「手を洗う。」	「손을 씻어.」
-n5-vfinal-0182	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は顔を洗う。」	「친구는 얼굴을 씻어.」
+n5-vfinal-0182	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は顔を洗う。」	「친구는 세수해.」
 n5-vfinal-0183	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「手を洗っている。」	「손을 씻고 있어.」
 n5-vfinal-0184	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「手を洗わない。」	「손을 안 씻어.」
-n5-vfinal-0185	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は顔を洗わない。」	「친구는 얼굴을 안 씻어.」
+n5-vfinal-0185	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は顔を洗わない。」	「친구는 세수 안 해.」
 n5-vfinal-0186	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「手を洗っていない。」	「손을 안 씻고 있어.」
 n5-vfinal-0187	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「手を洗った。」	「손을 씻었어.」
-n5-vfinal-0188	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達は顔を洗った。」	「친구는 얼굴을 씻었어.」
+n5-vfinal-0188	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達は顔を洗った。」	「친구는 세수했어.」
 n5-vfinal-0189	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「手を洗っていた。」	「손을 씻고 있었어.」
 n5-vfinal-0190	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「手を洗わなかった。」	「손을 안 씻었어.」
-n5-vfinal-0191	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は顔を洗わなかった。」	「친구는 얼굴을 안 씻었어.」
+n5-vfinal-0191	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は顔を洗わなかった。」	「친구는 세수 안 했어.」
 n5-vfinal-0192	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「手を洗っていなかった。」	「손을 안 씻고 있었어.」
 n5-vfinal-0193	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「手を洗う？」	「손을 씻어?」
 n5-vfinal-0194	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「手を洗っている？」	「손을 씻고 있어?」
@@ -200,16 +200,16 @@ n5-vfinal-0198	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=questio
 n5-vfinal-0199	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「手を洗わなかった？」	「손을 안 씻었어?」
 n5-vfinal-0200	block=vfinal;pred=godan-u;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「手を洗っていなかった？」	「손을 안 씻고 있었어?」
 n5-vfinal-0201	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「手を洗います。」	「손을 씻어요.」
-n5-vfinal-0202	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は顔を洗います。」	「친구는 얼굴을 씻어요.」
+n5-vfinal-0202	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は顔を洗います。」	「친구는 세수해요.」
 n5-vfinal-0203	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「手を洗っています。」	「손을 씻고 있어요.」
 n5-vfinal-0204	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「手を洗いません。」	「손을 안 씻어요.」
-n5-vfinal-0205	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は顔を洗いません。」	「친구는 얼굴을 안 씻어요.」
+n5-vfinal-0205	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は顔を洗いません。」	「친구는 세수 안 해요.」
 n5-vfinal-0206	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「手を洗っていません。」	「손을 안 씻고 있어요.」
 n5-vfinal-0207	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「手を洗いました。」	「손을 씻었어요.」
-n5-vfinal-0208	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は顔を洗いました。」	「친구는 얼굴을 씻었어요.」
+n5-vfinal-0208	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は顔を洗いました。」	「친구는 세수했어요.」
 n5-vfinal-0209	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「手を洗っていました。」	「손을 씻고 있었어요.」
 n5-vfinal-0210	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「手を洗いませんでした。」	「손을 안 씻었어요.」
-n5-vfinal-0211	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は顔を洗いませんでした。」	「친구는 얼굴을 안 씻었어요.」
+n5-vfinal-0211	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は顔を洗いませんでした。」	「친구는 세수 안 했어요.」
 n5-vfinal-0212	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「手を洗っていませんでした。」	「손을 안 씻고 있었어요.」
 n5-vfinal-0213	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「手を洗いますか。」	「손을 씻어요?」
 n5-vfinal-0214	block=vfinal;pred=godan-u;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「手を洗っていますか。」	「손을 씻고 있어요?」
