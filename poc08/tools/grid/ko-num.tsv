@@ -1,0 +1,16 @@
+#! grid-ko-num
+# Numerals before a counter (N5-55, N5-56, N5-H22): the counter's num feature (vocab.tsv) picks native or Sino-Korean;
+# digits stay digits, attached to the counter (3人 → 3명). つ: 一つ alone → 하나, else native + 개.
+ja	value	native	sino
+一	1	한	일
+二	2	두	이
+三	3	세	삼
+四	4	네	사
+五	5	다섯	오
+六	6	여섯	육
+七	7	일곱	칠
+八	8	여덟	팔
+九	9	아홉	구
+十	10	열	십
+二十	20	스무	이십
+百	100	백	백

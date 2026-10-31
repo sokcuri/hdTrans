@@ -1,0 +1,113 @@
+#! grid-points
+# Small blocks for the particle points (N5-11..24) and the points N5-06, N5-42..58 that the main blocks do not
+# cover. Each row is one sentence frame, enumerated over the contexts and tenses of dims.tsv (block point) and
+# filtered by valid.tsv plus the row's limit.
+#   pred    a vocab lemma; cop:NP = noun predicate (NP + copula); naru:NP = NP + に/く + なる
+#   slots   role:particle:NP joined by "; ", in Japanese order. NP: a noun lemma; A+と+B, A+や+B, A+か+B (listing);
+#           A+の+B (N5-19); この+B (adnominal demonstrative); ADJ~B (adjective before a noun, N5-06); 三+つ (number +
+#           counter; role qty, particle -); {VERB/particle/NOUN} (a clause nominalised by の, N5-57). Roles as in
+#           frames.tsv, plus top (は), time, instr (で), cmp (より), qty, adv (an adverb lemma), advadj (an
+#           adjective used adverbially, N5-42).
+#   stype, pol, aspect: fixed values of the row
+id	point	pred	slots	stype	pol	aspect	limit
+p11a	N5-11	読む	top:は:友達; obj:を:本	statement	pos	simple	-
+p11b	N5-11	学生	top:は:私	statement	pos	simple	-
+p12a	N5-12	来る	subj:が:先生	statement	pos	simple	-
+p12b	N5-12	好き	top:は:私; obj:が:猫	statement	pos	simple	-
+p12c	N5-12	分かる	top:は:友達; obj:が:日本語	statement	pos	simple	-
+p13a	N5-13	飲む	obj:を:牛乳	statement	pos	simple	-
+p14a	N5-14	行く	goal:に:図書館	statement	pos	simple	-
+p14b	N5-14	行く	time:に:日曜日; goal:へ:公園	statement	pos	simple	-
+p14c	N5-14	教える	dat:に:友達; obj:を:日本語	statement	pos	simple	-
+p14d	N5-14	有る	loc:に:部屋; subj:が:鞄	statement	pos	simple	-
+p14e	N5-14	会う	dat:に:先生	statement	pos	simple	-
+p15a	N5-15	行く	goal:へ:東京	statement	pos	simple	-
+p15b	N5-15	帰る	goal:へ:家	statement	pos	simple	-
+p16a	N5-16	勉強	loc:で:学校	statement	pos	simple	-
+p16b	N5-16	書く	instr:で:ペン; obj:を:名前	statement	pos	simple	-
+p16c	N5-16	行く	instr:で:車; goal:へ:駅	statement	pos	simple	-
+p16d	N5-16	話す	instr:で:日本語	statement	pos	simple	-
+p17a	N5-17	遊ぶ	com:と:友達	statement	pos	simple	-
+p17b	N5-17	買う	obj:を:パン+と+牛乳	statement	pos	simple	-
+p17c	N5-17	食べる	obj:を:肉+と+パン	statement	pos	simple	-
+p17d	N5-17	話す	com:と:先生	statement	pos	simple	-
+p18a	N5-18	来る	subj:も:先生	statement	pos	simple	-
+p18b	N5-18	読む	obj:も:新聞	statement	pos	simple	-
+p18c	N5-18	有る	loc:に:部屋; subj:も:時計	statement	pos	simple	-
+p19a	N5-19	読む	obj:を:友達+の+本	statement	pos	simple	-
+p19b	N5-19	読む	obj:を:私+の+本	statement	pos	simple	-
+p19c	N5-19	買う	obj:を:日本語+の+本	statement	pos	simple	-
+p19d	N5-19	見る	obj:を:母+の+写真	statement	pos	simple	-
+p20a	N5-20	帰る	src:から:学校; goal:へ:家	statement	pos	simple	-
+p20b	N5-20	働く	time:から:朝	statement	pos	simple	-
+p20c	N5-20	借りる	src:から:先生; obj:を:傘	statement	pos	simple	-
+p21a	N5-21	歩く	goal:まで:駅	statement	pos	simple	-
+p21b	N5-21	勉強	time:まで:夜	statement	pos	simple	-
+p22a	N5-22	買う	obj:を:パン+や+牛乳	statement	pos	simple	-
+p22b	N5-22	食べる	obj:を:パン+か+林檎	statement	pos	simple	-
+p23a	N5-23	高い	top:は:車; cmp:より:時計	statement	pos	simple	-
+p23b	N5-23	速い	top:は:車; cmp:より:自転車	statement	pos	simple	-
+pt1	§3	行く	time:-:明日; goal:へ:学校	statement	pos	simple	-
+pt2	§3	行く	time:-:昨日; goal:へ:学校	statement	pos	simple	-
+pt3	§3	歩く	time:-:毎日; path:を:公園	statement	pos	simple	-
+pt4	§3	寒い	top:は:昨日	statement	pos	simple	-
+pt5	§3	来る	time:-:明日; subj:が:友達	statement	neg	simple	-
+p06a	N5-06	買う	obj:を:高い~本	statement	pos	simple	-
+p06b	N5-06	cop:静か~部屋	top:は:此処	statement	pos	simple	-
+p06c	N5-06	有る	loc:に:部屋; subj:が:白い~鞄	statement	pos	simple	-
+p06d	N5-06	読む	obj:を:難しい~本	statement	pos	simple	-
+p06e	N5-06	cop:有名~店	top:は:彼処	statement	pos	simple	-
+p42a	N5-42	話す	advadj:-:静か	statement	pos	simple	-
+p42b	N5-42	書く	obj:を:名前; advadj:-:大きい	statement	pos	simple	-
+p42c	N5-42	来る	advadj:-:早い	statement	pos	simple	-
+p42d	N5-42	書く	obj:を:名前; advadj:-:小さい	statement	pos	simple	-
+p43a	N5-43	naru:高い	top:は:林檎	statement	pos	simple	-
+p43b	N5-43	naru:静か	top:は:部屋	statement	pos	simple	-
+p43c	N5-43	naru:暑い	top:は:部屋	statement	pos	simple	-
+p43d	N5-43	naru:先生	top:は:友達	statement	pos	simple	-
+p43e	N5-43	naru:医者	top:は:子供	statement	pos	simple	-
+p52a	N5-52	食べる	obj:を:肉; adv:-:余り	statement	neg	simple	-
+p52b	N5-52	読む	obj:を:新聞; adv:-:余り	statement	neg	simple	-
+p52c	N5-52	食べる	adv:-:未だ; obj:を:御飯	statement	neg	teiru	tense=nonpast
+p52d	N5-52	為る	adv:-:未だ; obj:を:宿題	statement	neg	teiru	tense=nonpast
+p52e	N5-52	為る	adv:-:もう; obj:を:宿題	statement	pos	simple	tense=past
+p52f	N5-52	来る	adv:-:もう	statement	neg	simple	tense=nonpast
+p53a	N5-53	cop:本	top:は:此れ	statement	pos	simple	-
+p53b	N5-53	cop:傘	top:は:其れ	statement	pos	simple	-
+p53c	N5-53	cop:学校	top:は:彼れ	statement	pos	simple	-
+p53d	N5-53	高い	top:は:この+本	statement	pos	simple	-
+p53e	N5-53	静か	top:は:その+部屋	statement	pos	simple	-
+p53f	N5-53	有名	top:は:あの+店	statement	pos	simple	-
+p53g	N5-53	有る	loc:に:此処; subj:が:本	statement	pos	simple	-
+p53h	N5-53	居る	loc:に:其処; subj:が:猫	statement	pos	simple	-
+p53i	N5-53	cop:駅	top:は:彼処	statement	pos	simple	-
+p53j	N5-53	見る	obj:を:此れ	statement	pos	simple	-
+p53k	N5-53	買う	obj:を:どの+本	question	pos	simple	tense=nonpast
+p54a	N5-54	食べる	obj:を:何	question	pos	simple	-
+p54b	N5-54	来る	subj:が:誰	question	pos	simple	-
+p54c	N5-54	行く	goal:へ:何処	question	pos	simple	-
+p54d	N5-54	来る	time:-:何時	question	pos	simple	tense=nonpast
+p54e	N5-54	為る	adv:-:如何	question	pos	simple	tense=nonpast
+p54f	N5-54	行く	adv:-:如何して	question	neg	simple	-
+p54g	N5-54	来る	adv:-:何故	question	neg	simple	tense=past
+p54h	N5-54	cop:幾ら	top:は:此れ	question	pos	simple	tense=nonpast
+p54i	N5-54	cop:何	top:は:此れ	question	pos	simple	tense=nonpast
+p54j	N5-54	有る	top:は:林檎; subj:-:幾つ	question	pos	simple	tense=nonpast
+p55a	N5-55	買う	obj:を:林檎; qty:-:三+つ	statement	pos	simple	-
+p55b	N5-55	買う	obj:を:林檎; qty:-:一+つ	statement	pos	simple	-
+p55c	N5-56	居る	loc:に:教室; subj:が:学生; qty:-:三+人	statement	pos	simple	-
+p55d	N5-56	買う	obj:を:紙; qty:-:二+枚	statement	pos	simple	-
+p55e	N5-56	読む	obj:を:本; qty:-:二+冊	statement	pos	simple	-
+p55f	N5-56	行く	goal:へ:東京; qty:-:三+回	statement	pos	simple	-
+p55g	N5-56	来る	time:に:三+時	statement	pos	simple	-
+p55h	N5-56	待つ	obj:を:友達; qty:-:十+分	statement	pos	simple	-
+p55i	N5-56	cop:百+円	top:は:この+本	statement	pos	simple	-
+p55j	N5-56	cop:二十+歳	top:は:友達	statement	pos	simple	-
+p55k	N5-56	買う	obj:を:ペン; qty:-:二+本	statement	pos	simple	-
+p55l	N5-55	居る	loc:に:公園; subj:が:子供; qty:-:3+人	statement	pos	simple	-
+p55m	N5-55	来る	time:に:5+時	statement	pos	simple	-
+p55n	N5-55	cop:100+円	top:は:この+パン	statement	pos	simple	-
+p57a	N5-57	好き	top:は:私; obj:が:{読む/を/本}	statement	pos	simple	-
+p57b	N5-57	好き	top:は:母; obj:が:{作る/を/料理}	statement	pos	simple	-
+p58a	N5-58	飲む	obj:だけ:水	statement	pos	simple	-
+p58b	N5-58	食べる	obj:だけ:パン	statement	pos	simple	-

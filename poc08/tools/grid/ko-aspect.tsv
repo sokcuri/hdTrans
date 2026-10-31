@@ -1,0 +1,11 @@
+#! grid-ko-aspect
+# ている by the verb's asp feature (N5-32, N5-33) and, for change verbs, the polarity (proposed N5-H15). steps as
+# in ko-final.tsv; "simple" keeps the verb; "past" adds one past (結婚している → 결혼했다, 結婚していた → 결혼했었다,
+# 来ていない → 오지 않았다).
+asp	pclass	pol	steps	spec
+activity	*	*	-고 +있다/X	N5-32
+change	posture	*	-어 +있다/X	N5-33
+change	*	pos	-어 +있다/X	N5-33
+change	*	neg	past	N5-H15
+change-past	*	*	past	N5-33
+state	*	*	simple	N5-33

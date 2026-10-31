@@ -1,0 +1,7 @@
+#! grid-ko-punct
+# Punctuation (N5-H7): 。 by the sentence end (ko-final.tsv punct), the rest one to one; 「」 stay.
+ja	ko
+、	,
+？	?
+「	「
+」	」

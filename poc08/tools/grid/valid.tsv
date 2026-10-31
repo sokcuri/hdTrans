@@ -1,0 +1,34 @@
+#! grid-valid
+# Validity of grid cells (N5 §3). A cell is generated only if, for every row whose `if` holds, `then` holds.
+# Terms are space-separated and all must hold; key=a|b: the key has one of the values; key!=a|b: it has none.
+# Keys: the dimensions of dims.tsv (block is one too); the predicate's features vol, asp, pclass (vocab feat), kind
+# (verb, adj, nominal, exist; from gcls) and flag (its gflags atoms); time (the time= flags of the sentence's
+# nouns); rank (the lemma's place among the vocab.tsv lemmas of its class, from 1); for two-clause lines group
+# (links.tsv), and the predicate is the second one. The `limit` column of a points.tsv or links.tsv
+# row adds its terms to every `then`. A dimension a block does not have takes its first value in dims.tsv order
+# (aspect=simple, mod=none, sfp=none, pol=pos).
+id	if	then	spec
+v01	ctx.polite=narration.plain	stype=statement	N5-H5; §3 narration has statements only
+v02	stype=question	ctx.polite=dialogue.plain|dialogue.masu	§3 a question in dialogue only
+v03	stype=request|prohibition|invite-mashou|invite-mashouka|invite-masenka	ctx.polite=dialogue.masu vol=+ aspect=simple tense=nonpast pol=pos flag!=noimp	§3 request, prohibition, invitation
+v04	aspect=teiru	kind=verb flag!=noteiru	N5-32, N5-33
+v05	flag=teiru-pos pol=pos	aspect=teiru	N5-33 知っている
+v06	flag=teiru-pos pol=neg	aspect=simple	N5-33 知らない
+v07	mod=tai|tsumori|hougaii|temoii|tewaikenai|takoto	kind=verb	N5-44..51 verbs only
+v08	mod=tai|tsumori|hougaii	vol=+	N5-44, N5-47, N5-48
+v09	mod=darou|tsumori|hougaii|tewaikenai|takoto	stype=statement	N5-46..51
+v10	mod=hougaii|temoii|tewaikenai|takoto	tense=nonpast	N5-48..51
+v11	mod=temoii|tewaikenai	pol=pos	N5-49, N5-50
+v12	time=past	tense=past	§3 昨日
+v13	time=future	tense=nonpast	§3 明日
+v14	block=sfp	kind=adj|nominal|exist stype=statement	N5-H11
+v15	group=seq	link=te|tekara|mae|ato|toki|tari|nagara	N5-31..39
+v16	group=reason	link=kara	N5-40
+v17	group=contrast	link=ga|kedo	N5-41
+v18	link=te|tekara|mae|ato|tari|nagara	v1tense=-	N5-31..39 the first clause has no tense
+v19	link=toki|kara|ga|kedo	v1tense=nonpast|past	N5-37, N5-40, N5-41
+v20	block=link stype=question	tense=nonpast	N5-25 in a two-clause line
+v21	block=link link=te|tekara|mae|ato|toki|tari|nagara	stype=statement	N5-31..39 statements
+v22	fill=2	stype=statement aspect=simple mod=none	fill 2 on statements only (§1.2 ×2 fillers)
+v23	block=vmod	rank=1	one lemma per class for the modality block
+v24	block=vfinal|link polite=masu pol=neg tense=nonpast vol=+ aspect=simple mod=none	stype!=question	N5-H19 ませんか is the invitation

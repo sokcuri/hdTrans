@@ -1,0 +1,8 @@
+#! grid-ko-adv
+# Adverbs whose Korean depends on the clause (N5-52). pol, tense, aspect: the Japanese clause values (* = any).
+# ko: the adverb; then: what the clause becomes (simple-past = ている → simple past, the polarity kept).
+ja	pol	tense	aspect	ko	then	spec
+余り	neg	*	*	별로	-	N5-52
+未だ	neg	nonpast	teiru	아직	simple-past	N5-52
+もう	pos	past	*	벌써	-	N5-H23
+もう	neg	*	*	더 이상	-	N5-52

@@ -1,0 +1,483 @@
+#!/usr/bin/env python3
+"""N5 grid oracle: the expected Korean of a grid cell.
+
+The Korean is composed from the spec tables of this folder (ko-*.tsv: one table per dimension, Japanese value →
+Korean value), the fixed gloss of each controlled lemma (vocab.tsv) and the Korean paradigm of the generator
+(`hd8gen batch`, one predicate word per question). It reads nothing of the engine's transfer data.
+
+A cell spec (made by grid.py) holds the block, the predicate lemma, the argument slots and the dimension values d.
+"""
+import os
+import subprocess
+
+FRAME_KO = {'을': '을/를', '를': '을/를', '이': '이/가', '가': '이/가'}
+
+
+def read_tsv(here, name):
+    rows, header = [], None
+    with open(os.path.join(here, name), encoding='utf-8') as f:
+        for line in f:
+            line = line.rstrip('\n')
+            if not line or line.startswith('#'):
+                continue
+            cols = line.split('\t')
+            if header is None:
+                header = cols
+                continue
+            rows.append(dict(zip(header, cols)))
+    return rows
+
+
+def has_final(word, rieul_as_vowel=False):
+    """Whether the last Hangul syllable of word has a final consonant."""
+    for ch in reversed(word):
+        c = ord(ch)
+        if 0xAC00 <= c <= 0xD7A3:
+            jong = (c - 0xAC00) % 28
+            if rieul_as_vowel and jong == 8:
+                return False
+            return jong != 0
+        if ch.isdigit():
+            # digits are read in Sino-Korean: 0 영, 1 일, 3 삼, 6 육, 7 칠, 8 팔, 10 십 end in a consonant
+            return ch in '013678'
+    return False
+
+
+def attach(word, particle):
+    """Attach a particle pair A/B (after a consonant / after a vowel); (으)로 counts ㄹ as a vowel."""
+    if particle in ('-', ''):
+        return word
+    if particle == '(으)로':
+        return word + ('으로' if has_final(word, rieul_as_vowel=True) else '로')
+    if '/' in particle:
+        a, b = particle.split('/')
+        return word + (a if has_final(word) else b)
+    return word + particle
+
+
+class PW:
+    """A predicate word: a lemma conjugated by hd8gen with the endings gathered in forms."""
+
+    def __init__(self, lemma, pos, host='', split='', neg=''):
+        self.lemma, self.pos, self.host, self.split, self.neg = lemma, pos, host, split, neg
+        self.forms = []
+
+
+class Oracle:
+    def __init__(self, hd8gen, here):
+        self.here = here
+        self.cmd = [hd8gen, 'batch']
+        self.proc = None
+        self.cache = {}
+        self.vocab = {}
+        for r in read_tsv(here, 'vocab.tsv'):
+            self.vocab.setdefault(r['ja'], []).append(r)
+        self.level = {(r['ctx'], r['polite']): r['level'] for r in read_tsv(here, 'ko-level.tsv')}
+        self.final = {(r['level'], r['stype'], r['sfp']): r for r in read_tsv(here, 'ko-final.tsv')}
+        self.neg = read_tsv(here, 'ko-neg.tsv')
+        self.aspect = read_tsv(here, 'ko-aspect.tsv')
+        self.mod = read_tsv(here, 'ko-mod.tsv')
+        self.link = read_tsv(here, 'ko-link.tsv')
+        self.particle = read_tsv(here, 'ko-particle.tsv')
+        self.contract = read_tsv(here, 'ko-contract.tsv')
+        self.adv = read_tsv(here, 'ko-adv.tsv')
+        self.num = {r['ja']: r for r in read_tsv(here, 'ko-num.tsv')}
+        self.punct = {r['ja']: r['ko'] for r in read_tsv(here, 'ko-punct.tsv')}
+
+    # ------------------------------------------------------------ paradigm
+
+    def conj(self, lemma, pos, host, forms):
+        key = (lemma, pos, host, tuple(forms))
+        if key in self.cache:
+            return self.cache[key]
+        if self.proc is None:
+            self.proc = subprocess.Popen(self.cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True,
+                                         encoding='utf-8')
+        line = '\t'.join([lemma, pos or '-', 'COP' if pos == 'C' else ('NC' if pos == 'N' else '-'), host or '-',
+                          ' '.join(forms) if forms else '-'])
+        self.proc.stdin.write(line + '\n')
+        self.proc.stdin.flush()
+        out = self.proc.stdout.readline().rstrip('\n')
+        if not forms:
+            out = (host or '') + lemma if pos == 'C' else lemma
+        self.cache[key] = out
+        return out
+
+    def close(self):
+        if self.proc:
+            self.proc.stdin.close()
+            self.proc.wait()
+            self.proc = None
+
+    # ------------------------------------------------------------ lexicon
+
+    def row(self, ja, gcls=None):
+        rows = self.vocab[ja]
+        if gcls:
+            for r in rows:
+                if r['gcls'] == gcls:
+                    return r
+        return rows[0]
+
+    def feats(self, r):
+        f = dict(a.split('=', 1) for a in r['feat'].split() if '=' in a)
+        for a in r['gflags'].split():
+            if '=' in a:
+                k, v = a.split('=', 1)
+                f.setdefault(k, v)
+        return f
+
+    def frame_map(self, ja):
+        """The lexicon frame of a predicate: Japanese particle → Korean particle (が=을)."""
+        if not isinstance(ja, str) or ja not in self.vocab:
+            return {}
+        out = {}
+        for a in self.row(ja)['frame'].split():
+            if '=' in a:
+                k, v = a.split('=', 1)
+                out[k] = FRAME_KO.get(v, v)
+        return out
+
+    # ------------------------------------------------------------ noun phrases
+
+    def contracted(self, ja, level, particle):
+        for r in self.contract:
+            if r['ja'] == ja and r['particle'] == particle and (r['level'] == '*' or level in r['level'].split('|')):
+                return r['ko']
+        return None
+
+    def noun(self, ja, level):
+        c = self.contracted(ja, level, '-')
+        return c if c is not None else self.row(ja)['ko']
+
+    def with_particle(self, ja, ko, particle, level):
+        if ja is not None:
+            c = self.contracted(ja, level, particle)
+            if c is not None:
+                head, _, _ = ko.rpartition(' ')
+                return head + ' ' + c if head else c
+        return attach(ko, particle)
+
+    def ko_particle(self, jpart, role, level, anim=False):
+        if jpart == '-':
+            return '-'
+        if role == 'src' and anim:
+            role = 'srcp'
+        best = None
+        for r in self.particle:
+            if r['ja'] != jpart:
+                continue
+            if r['role'] not in ('*', role) or r['level'] not in ('*', level):
+                continue
+            score = (r['role'] != '*') * 2 + (r['level'] != '*')
+            if best is None or score > best[0]:
+                best = (score, r['ko'])
+        if best is None:
+            raise KeyError('no Korean particle for %s (%s, %s)' % (jpart, role, level))
+        return best[1]
+
+    def np(self, np, level):
+        """Korean of a noun phrase and the lemma whose contracted forms apply (None for a compound phrase)."""
+        k = np[0]
+        if k == 'n':
+            return self.noun(np[1], level), np[1]
+        if k == 'list':
+            a, _ = self.np(('n', np[1]), level)
+            b, bja = self.np(('n', np[3]), level)
+            return attach(a, self.ko_particle(np[2], 'list', level)) + ' ' + b, None
+        if k == 'poss':
+            a = self.contracted(np[1], level, 'poss') or self.noun(np[1], level)
+            b, _ = self.np(('n', np[3]), level)
+            return a + ' ' + b, None
+        if k == 'adnom':
+            adn = {'この': '此の', 'その': '其の', 'あの': '彼の', 'どの': '何の'}[np[1]]
+            b, _ = self.np(('n', np[2]), level)
+            return self.row(adn)['ko'] + ' ' + b, None
+        if k == 'adj':
+            r = self.row(np[1])
+            b, _ = self.np(('n', np[2]), level)
+            return self.conj(r['ko'], self.kpos(r), '', ['-는']) + ' ' + b, None
+        if k == 'num':
+            return self.number(np[1], np[2]), None
+        if k == 'clause':
+            _, verb, part, noun = np
+            n, nja = self.np(('n', noun), level)
+            r = self.row(verb)
+            v = self.conj(self.kverb(r), 'V', '', ['-는'])
+            return attach(n, self.ko_particle(part, 'obj', level)) + ' ' + v + ' 것', '것'
+        raise ValueError(np)
+
+    def number(self, num, counter):
+        c = self.row(counter, 'counter')
+        if num.isdigit():
+            return num + ('개' if counter == 'つ' else c['ko'])
+        n = self.num[num]
+        if counter == 'つ':
+            return '하나' if n['value'] == '1' else n['native'] + ' ' + c['ko']
+        kind = self.feats(c).get('num', 'native')
+        return (n['native'] if kind == 'native' else n['sino']) + ' ' + c['ko']
+
+    def slot(self, slot, level, frame, clause):
+        role, jpart, np = slot
+        if role == 'adv':
+            return self.adverb(np[1], clause)
+        if role == 'advadj':
+            for r in self.vocab[np[1]]:
+                if 'form=adv' in r['cue']:
+                    return r['ko']
+            r = self.row(np[1])
+            return self.conj(r['ko'], self.kpos(r), '', ['-게'])
+        ko, ja = self.np(np, level)
+        if jpart in frame and role in ('obj', 'dat'):
+            part = frame[jpart]
+        else:
+            anim = np[0] == 'n' and 'anim=+' in self.row(np[1])['feat']
+            part = self.ko_particle(jpart, role, level, anim)
+        return self.with_particle(ja, ko, part, level)
+
+    def adverb(self, ja, clause):
+        for r in self.adv:
+            if r['ja'] != ja:
+                continue
+            if all(r[k] in ('*', clause[k]) for k in ('pol', 'tense', 'aspect')):
+                return r['ko']
+        return self.row(ja)['ko']
+
+    def adverb_then(self, slots, clause):
+        for role, _, np in slots:
+            if role != 'adv':
+                continue
+            for r in self.adv:
+                if r['ja'] == np[1] and all(r[k] in ('*', clause[k]) for k in ('pol', 'tense', 'aspect')):
+                    return r['then']
+        return '-'
+
+    # ------------------------------------------------------------ predicates
+
+    @staticmethod
+    def kpos(r):
+        g = r['gcls']
+        if g in ('i-adj', 'hoshii', 'advadj'):
+            return 'A'
+        if g == 'na-adj':
+            return 'V' if r['kcls'] == 'V' else 'A'
+        if g in ('aru', 'iru'):
+            return 'X'
+        return 'V'
+
+    @staticmethod
+    def kverb(r):
+        return r['ko'] + '하다' if r['gcls'] == 'sahen' else r['ko']
+
+    def base(self, pred, level):
+        """The predicate before aspect, modality, polarity and tense: a list of literal words and PWs."""
+        if isinstance(pred, tuple):
+            kind, arg = pred
+            if kind == 'cop':
+                host, _ = self.np(arg, level)
+                return [PW('이다', 'C', host=host)]
+            if kind == 'naru':
+                r = self.row(arg)
+                if r['gcls'] in ('i-adj', 'na-adj'):
+                    stem = self.conj(r['ko'], 'A', '', ['-어'])
+                    return [PW(stem + '지다', 'V')]
+                return [attach(self.noun(arg, level), '이/가'), PW('되다', 'V')]
+            raise ValueError(pred)
+        r = self.row(pred)
+        g = r['gcls']
+        neg = self.feats(r).get('neg', '')
+        if g in ('noun', 'noun-cop', 'pron', 'qword'):
+            return [PW('이다', 'C', host=self.noun(pred, level))]
+        if g == 'hoshii':
+            *lit, last = r['ko'].split(' ')
+            return lit + [PW(last, 'A')]
+        if g in ('aru', 'iru'):
+            return [PW('있다', 'X', neg=neg)]
+        ko = self.kverb(r)
+        split = ''
+        if r['kcls'] == '하다' and ko.endswith('하다'):
+            split = ko[:-2]
+        return [PW(ko, self.kpos(r), split=split, neg=neg)]
+
+    @staticmethod
+    def last_pw(items):
+        for x in reversed(items):
+            if isinstance(x, PW):
+                return x
+        raise ValueError('no predicate word')
+
+    def steps(self, items, steps):
+        """Apply a steps string: -ending on the current word, +LEMMA/POS[@HOST] a new word, else a literal."""
+        for t in steps.split():
+            if t.startswith('-'):
+                self.last_pw(items).forms.append(t)
+            elif t.startswith('+'):
+                lp, _, host = t[1:].partition('@')
+                lemma, _, pos = lp.partition('/')
+                items.append(PW(lemma, pos, host=host))
+            else:
+                items.append(t)
+
+    def negate(self, items, base, method):
+        if base.pos == 'C':
+            i = items.index(base)
+            items[i:i + 1] = [attach(base.host, '이/가'), PW('아니다', 'N')]
+            for f in base.forms:
+                items[i + 1].forms.append(f)
+            return items[i + 1]
+        if method.startswith('supp'):
+            word = method.split(':', 1)[1] if ':' in method else base.neg
+            base.lemma = word
+            if word in ('없다',):
+                base.pos = 'X'
+            return base
+        if base.neg and method != 'long-outer':
+            base.lemma = base.neg
+            if base.neg == '없다':
+                base.pos = 'X'
+            return base
+        if method == 'short':
+            i = items.index(base)
+            if base.split:
+                items[i:i + 1] = [base.split, '안', base]
+                base.lemma = '하다'
+            else:
+                items.insert(i, '안')
+            return base
+        # long: -지 않다 on the current last word
+        last = self.last_pw(items)
+        self.steps(items, '-지 +않다/%s' % ('V' if last.pos == 'V' else 'A'))
+        return base
+
+    def neg_method(self, level, pclass):
+        best = None
+        for r in self.neg:
+            if r['level'] in ('*', level) and r['pred'] in ('*', pclass):
+                score = (r['pred'] != '*') * 2 + (r['level'] != '*')
+                if best is None or score > best[0]:
+                    best = (score, r['method'])
+        return best[1]
+
+    def pred_class(self, pred):
+        if isinstance(pred, tuple):
+            return pred[0]
+        return self.row(pred)['gcls']
+
+    def predicate(self, pred, d, level, slots, items=None, steps_first=None):
+        """The Korean predicate words of a final clause."""
+        clause = {'pol': d['pol'], 'tense': d['tense'], 'aspect': d['aspect']}
+        then = self.adverb_then(slots, clause)
+        tense, aspect = d['tense'], d['aspect']
+        if then == 'simple-past':
+            tense, aspect = 'past', 'simple'
+        items = list(items or []) + self.base(pred, level)
+        base = self.last_pw(items)
+        if steps_first:
+            self.steps(items, steps_first)
+        extra_past = 0
+        if aspect == 'teiru':
+            f = self.feats(self.row(pred))
+            st = next(a['steps'] for a in self.aspect if a['asp'] == f['asp']
+                      and a['pclass'] in ('*', f.get('pclass', '-')) and a['pol'] in ('*', d['pol']))
+            if st == 'past':
+                extra_past = 1
+            elif st != 'simple':
+                self.steps(items, st)
+        stype, mod = d['stype'], d['mod']
+        pclass = self.pred_class(pred)
+        method = self.neg_method(level, pclass)
+        if mod != 'none':
+            m = [r for r in self.mod if r['mod'] == mod and r['level'] in ('*', level)]
+            m = sorted(m, key=lambda r: r['level'] == '*')[0]
+            if d['pol'] == 'neg' and m['neg'].startswith('inner'):
+                self.negate(items, base, 'long' if m['neg'] == 'inner-long' else method)
+            if tense == 'past' and m['tense'] == 'inner':
+                self.last_pw(items).forms.append('-었-')
+            self.steps(items, m['steps'])
+            if d['pol'] == 'neg' and m['neg'].startswith('outer'):
+                last = self.last_pw(items)
+                if m['neg'].startswith('outer-supp'):
+                    last.lemma = m['neg'].split(':', 1)[1]
+                else:
+                    self.negate(items, last, 'long')
+            if tense == 'past' and m['tense'] == 'outer':
+                self.last_pw(items).forms.append('-었-')
+        else:
+            if d['pol'] == 'neg':
+                self.negate(items, base, method)
+            if tense == 'past' or extra_past:
+                last = self.last_pw(items)
+                last.forms.extend(['-었-'] * ((tense == 'past') + extra_past))
+        f = self.final[(level, stype, d['sfp'])]
+        self.steps(items, f['steps'])
+        return items, f['punct']
+
+    def render(self, items):
+        out = []
+        for x in items:
+            if isinstance(x, PW):
+                out.append(self.conj(x.lemma, x.pos, x.host, x.forms))
+            else:
+                out.append(x)
+        return ' '.join(out)
+
+    # ------------------------------------------------------------ lines
+
+    def ko(self, spec):
+        d = spec['d']
+        level = self.level[(d['ctx'], d['polite'])]
+        if spec['block'] == 'link':
+            text, punct = self.link_line(spec, d, level)
+        else:
+            pred, slots = spec['pred'], spec['slots']
+            frame = self.frame_map(pred)
+            clause = {'pol': d['pol'], 'tense': d['tense'], 'aspect': d['aspect']}
+            words = [self.slot(s, level, frame, clause) for s in slots]
+            items, punct = self.predicate(pred, d, level, slots)
+            text = ' '.join(words + [self.render(items)])
+        text += punct
+        if d['ctx'] == 'dialogue':
+            text = self.punct['「'] + text + self.punct['」']
+        return text
+
+    def link_line(self, spec, d, level):
+        p = spec['pair']
+        link = d['link']
+        main = 'statement' if d['stype'] == 'statement' else 'q'
+        r1 = self.row(p['pred1'])
+        f1 = self.feats(r1)
+        cond = {'pclass': f1.get('pclass', '-'), 'shared': p['shared']}
+        row = None
+        for r in self.link:
+            if r['link'] != link or r['v1tense'] not in ('-', d['v1tense']) or r['main'] not in ('*', main):
+                continue
+            if r['cond'] != '*':
+                k, v = r['cond'].split('=')
+                if cond.get(k) != v:
+                    continue
+            row = r
+            break
+        if row is None:
+            raise KeyError('no link row for %s %s %s' % (link, d['v1tense'], main))
+        frame1, frame2 = self.frame_map(p['pred1']), self.frame_map(p['pred2'])
+        clause = {'pol': 'pos', 'tense': d['tense'], 'aspect': 'simple'}
+        w1 = [self.slot(s, level, frame1, clause) for s in spec['slots1']]
+        items1 = self.base(p['pred1'], level)
+        self.steps(items1, row['steps'])
+        first = ' '.join(w1 + [self.render(items1)])
+        if link in ('kara', 'ga', 'kedo'):
+            first += self.punct['、']
+        clause2 = {'pol': d['pol'], 'tense': d['tense'], 'aspect': 'simple'}
+        w2 = [self.slot(s, level, frame2, clause2) for s in spec['slots2']]
+        if link == 'tari':
+            items, punct = self.predicate('為る', d, level, [], items=self.base(p['pred2'], level),
+                                          steps_first=None)
+            # the second verb takes -거나 too; 하다 carries the end
+            v2 = items[0]
+            v2.forms.insert(0, '-거나')
+            items = [v2] + items[1:]
+            second = ' '.join(w2 + [self.render(items)])
+        else:
+            items, punct = self.predicate(p['pred2'], d, level, spec['slots2'])
+            second = ' '.join(w2 + [self.render(items)])
+        return first + ' ' + second, punct

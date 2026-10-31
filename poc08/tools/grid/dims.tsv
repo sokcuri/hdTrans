@@ -1,0 +1,39 @@
+#! grid-dims
+# The grid's dimensions and their N5 values (PLAN §1.2), per block. A cell is one value per dimension; valid.tsv
+# removes the cells that are not generated. pred values are vocab.tsv gcls classes (every lemma of the class is a
+# filler); fill: the two argument fillers of frames.tsv. kind (verb, adj, nominal, exist) follows from gcls.
+block	dim	values
+vfinal	pred	godan-u godan-ku godan-ku-iku godan-gu godan-su godan-tsu godan-nu godan-bu godan-mu godan-ru ichidan suru kuru sahen
+vfinal	ctx.polite	narration.plain dialogue.plain dialogue.masu
+vfinal	stype	statement question request prohibition invite-mashou invite-mashouka invite-masenka
+vfinal	tense	nonpast past
+vfinal	pol	pos neg
+vfinal	aspect	simple teiru
+vfinal	fill	1 2
+vmod	pred	godan-u godan-ku godan-ku-iku godan-gu godan-su godan-tsu godan-nu godan-bu godan-mu godan-ru ichidan suru kuru sahen
+vmod	mod	tai darou tsumori hougaii temoii tewaikenai takoto
+vmod	ctx.polite	narration.plain dialogue.plain dialogue.masu
+vmod	stype	statement question
+vmod	tense	nonpast past
+vmod	pol	pos neg
+vmod	fill	1
+pfinal	pred	i-adj na-adj noun-cop aru iru hoshii
+pfinal	ctx.polite	narration.plain dialogue.plain dialogue.masu
+pfinal	stype	statement question
+pfinal	tense	nonpast past
+pfinal	pol	pos neg
+pfinal	mod	none darou
+pfinal	fill	1 2
+sfp	pred	i-adj na-adj noun-cop aru iru
+sfp	ctx.polite	dialogue.plain dialogue.masu
+sfp	sfp	ne yo
+sfp	tense	nonpast past
+sfp	pol	pos neg
+sfp	fill	1
+link	link	te tekara mae ato toki tari nagara kara ga kedo
+link	v1tense	- nonpast past
+link	ctx.polite	narration.plain dialogue.plain dialogue.masu
+link	stype	statement question request
+link	tense	nonpast past
+point	ctx.polite	narration.plain dialogue.plain dialogue.masu
+point	tense	nonpast past

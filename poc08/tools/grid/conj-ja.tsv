@@ -1,0 +1,102 @@
+#! grid-conj-ja
+# Japanese conjugation (UniDic cType x cForm) of the grid's predicates and auxiliaries. A lemma's stem is its
+# written form minus `strip`; a form is stem + ending. form keys: dict (終止形), adn (連体形), neg (未然形, before
+# ない), cont (連用形, before ます/たい/ながら), ta (the form before た/て/たり), plus aux-only keys. voiced=1: a
+# following た/て/たり is voiced (だ/で/だり). A row whose ctype is a lemma overrides its class.
+ctype	strip	form	cform	ending	voiced
+五段-ワア行	う	dict	終止形-一般	う	0
+五段-ワア行	う	adn	連体形-一般	う	0
+五段-ワア行	う	neg	未然形-一般	わ	0
+五段-ワア行	う	cont	連用形-一般	い	0
+五段-ワア行	う	ta	連用形-促音便	っ	0
+五段-カ行	く	dict	終止形-一般	く	0
+五段-カ行	く	adn	連体形-一般	く	0
+五段-カ行	く	neg	未然形-一般	か	0
+五段-カ行	く	cont	連用形-一般	き	0
+五段-カ行	く	ta	連用形-イ音便	い	0
+五段-ガ行	ぐ	dict	終止形-一般	ぐ	0
+五段-ガ行	ぐ	adn	連体形-一般	ぐ	0
+五段-ガ行	ぐ	neg	未然形-一般	が	0
+五段-ガ行	ぐ	cont	連用形-一般	ぎ	0
+五段-ガ行	ぐ	ta	連用形-イ音便	い	1
+五段-サ行	す	dict	終止形-一般	す	0
+五段-サ行	す	adn	連体形-一般	す	0
+五段-サ行	す	neg	未然形-一般	さ	0
+五段-サ行	す	cont	連用形-一般	し	0
+五段-サ行	す	ta	連用形-一般	し	0
+五段-タ行	つ	dict	終止形-一般	つ	0
+五段-タ行	つ	adn	連体形-一般	つ	0
+五段-タ行	つ	neg	未然形-一般	た	0
+五段-タ行	つ	cont	連用形-一般	ち	0
+五段-タ行	つ	ta	連用形-促音便	っ	0
+五段-ナ行	ぬ	dict	終止形-一般	ぬ	0
+五段-ナ行	ぬ	adn	連体形-一般	ぬ	0
+五段-ナ行	ぬ	neg	未然形-一般	な	0
+五段-ナ行	ぬ	cont	連用形-一般	に	0
+五段-ナ行	ぬ	ta	連用形-撥音便	ん	1
+五段-バ行	ぶ	dict	終止形-一般	ぶ	0
+五段-バ行	ぶ	adn	連体形-一般	ぶ	0
+五段-バ行	ぶ	neg	未然形-一般	ば	0
+五段-バ行	ぶ	cont	連用形-一般	び	0
+五段-バ行	ぶ	ta	連用形-撥音便	ん	1
+五段-マ行	む	dict	終止形-一般	む	0
+五段-マ行	む	adn	連体形-一般	む	0
+五段-マ行	む	neg	未然形-一般	ま	0
+五段-マ行	む	cont	連用形-一般	み	0
+五段-マ行	む	ta	連用形-撥音便	ん	1
+五段-ラ行	る	dict	終止形-一般	る	0
+五段-ラ行	る	adn	連体形-一般	る	0
+五段-ラ行	る	neg	未然形-一般	ら	0
+五段-ラ行	る	cont	連用形-一般	り	0
+五段-ラ行	る	ta	連用形-促音便	っ	0
+行く	く	ta	連用形-促音便	っ	0
+一段	る	dict	終止形-一般	る	0
+一段	る	adn	連体形-一般	る	0
+一段	る	neg	未然形-一般		0
+一段	る	cont	連用形-一般		0
+一段	る	ta	連用形-一般		0
+サ行変格	する	dict	終止形-一般	する	0
+サ行変格	する	adn	連体形-一般	する	0
+サ行変格	する	neg	未然形-一般	し	0
+サ行変格	する	cont	連用形-一般	し	0
+サ行変格	する	ta	連用形-一般	し	0
+カ行変格	る	dict	終止形-一般	る	0
+カ行変格	る	adn	連体形-一般	る	0
+カ行変格	る	neg	未然形-一般		0
+カ行変格	る	cont	連用形-一般		0
+カ行変格	る	ta	連用形-一般		0
+形容詞	い	dict	終止形-一般	い	0
+形容詞	い	adn	連体形-一般	い	0
+形容詞	い	cont	連用形-一般	く	0
+形容詞	い	ta	連用形-促音便	かっ	0
+良い	いい	dict	終止形-一般	いい	0
+良い	いい	adn	連体形-一般	いい	0
+良い	いい	cont	連用形-一般	よく	0
+良い	いい	ta	連用形-促音便	よかっ	0
+aux:ます	-	neg	未然形-一般	ませ	0
+aux:ます	-	cont	連用形-一般	まし	0
+aux:ます	-	dict	終止形-一般	ます	0
+aux:ます	-	vol	意志推量形	ましょう	0
+aux:ない	-	dict	終止形-一般	ない	0
+aux:ない	-	adn	連体形-一般	ない	0
+aux:ない	-	ta	連用形-促音便	なかっ	0
+aux:無い	-	dict	終止形-一般	ない	0
+aux:無い	-	adn	連体形-一般	ない	0
+aux:無い	-	ta	連用形-促音便	なかっ	0
+aux:た	-	dict	終止形-一般	た	0
+aux:た	-	adn	連体形-一般	た	0
+aux:ず	-	dict	終止形-撥音便	ん	0
+aux:です	-	dict	終止形-一般	です	0
+aux:です	-	cont	連用形-一般	でし	0
+aux:です	-	vol	意志推量形	でしょう	0
+aux:だ	-	dict	終止形-一般	だ	0
+aux:だ	-	ta	連用形-促音便	だっ	0
+aux:だ	-	fused	連用形-融合	じゃ	0
+aux:だ	-	cont	連用形-一般	で	0
+aux:だ	-	vol	意志推量形	だろう	0
+aux:だ	-	adn	連体形-一般	な	0
+aux:だ	-	ni	連用形-ニ	に	0
+aux:たい	-	dict	終止形-一般	たい	0
+aux:たい	-	cont	連用形-一般	たく	0
+aux:たい	-	ta	連用形-促音便	たかっ	0
+aux:下さる	-	imp	命令形	ください	0

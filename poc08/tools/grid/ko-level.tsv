@@ -1,0 +1,6 @@
+#! grid-ko-level
+# Speech level of a grid line (N5-H5): context x politeness. です/ます narration is not in the grid (N5-H6).
+ctx	polite	level	spec
+narration	plain	haera	N5-H5
+dialogue	plain	hae	N5-H5
+dialogue	masu	haeyo	N5-H5
