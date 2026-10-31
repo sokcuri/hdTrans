@@ -115,6 +115,43 @@ void StageC(const StructureData& s, const Config&, Doc& doc, Line& line, int pat
     AddDecisions(doc, line, l, path);
 }
 
+std::vector<TokAux> AuxOf(const StructureData& s, const Doc& doc, const std::vector<Token>& toks) {
+    Local l;
+    ToLocal(s, doc, toks, l);
+    std::vector<TokAux> out(toks.size());
+    auto facts = [&](const hd8::AuxRow& r, std::vector<std::string>& f) {
+        static const char* const kKinds[] = {"form", "voice", "tense", "link", "cop", "modal", "polite", "neg",
+                                             "aspect", "jreg", "quote", "bene", "force", "aux", "light", "case",
+                                             "topic", "focus", "final", "nom", "fn", "suffix", "prefix", "punct"};
+        f.push_back(std::string("kind=") + kKinds[static_cast<int>(r.kind)]);
+        size_t at = 0;
+        while (at <= r.setsText.size()) {
+            size_t semi = r.setsText.find(';', at);
+            if (semi == std::string::npos) semi = r.setsText.size();
+            std::string item = r.setsText.substr(at, semi - at);
+            const size_t plus = item.find("+=");
+            if (plus != std::string::npos) item.erase(plus, 1);
+            if (!item.empty() && item != "-") f.push_back(item);
+            at = semi + 1;
+        }
+    };
+    for (size_t i = 0; i < toks.size(); ++i) {
+        const hd8::TokInfo& t = l.info[i];
+        if (t.row) {
+            out[i].row = l.st.Get(t.row->id);
+            facts(*t.row, out[i].facts);
+        }
+        if (t.frow) {
+            out[i].form = l.st.Get(t.frow->id);
+            std::vector<std::string> ff;
+            facts(*t.frow, ff);
+            for (std::string& x : ff)
+                if (!x.starts_with("kind=")) out[i].facts.push_back("form." + x);
+        }
+    }
+    return out;
+}
+
 void StageL(const StructureData& s, const Config&, Doc& doc, Line& line, int path) {
     PathRef p = PathOf(line, path);
     Local l;

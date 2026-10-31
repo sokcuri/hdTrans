@@ -51,6 +51,14 @@ void StageS(const DiscourseData& d, const Config& cfg, Doc& doc, std::vector<For
 void StageC(const StructureData& s, const Config& cfg, Doc& doc, Line& line, int path);
 // L: toks, buns → clauses (all fields but subj and beneTo).
 void StageL(const StructureData& s, const Config& cfg, Doc& doc, Line& line, int path);
+// The aux.tsv reading of a token sequence (C and L read the same): per token its morpheme row id and its form
+// row id ("aux:<id>", empty when none) and the facts the rows set ("pol=neg", "mod=want", "role=cop", "kind=neg").
+// T reads them to match rows over features; it writes nothing.
+struct TokAux {
+    std::string row, form;
+    std::vector<std::string> facts;
+};
+std::vector<TokAux> AuxOf(const StructureData& s, const Doc& doc, const std::vector<Token>& toks);
 // Z: clauses → Clause.subj, Clause.beneTo.
 void StageZ(const DiscourseData& d, const Config& cfg, Doc& doc, Line& line, int path);
 // T: everything above → kir, chosen.

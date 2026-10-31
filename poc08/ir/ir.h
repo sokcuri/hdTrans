@@ -78,7 +78,8 @@ namespace hd08 {
 #define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq") \
     X(sonkei, "sonkei")
 #define HD08_KASE(X) X(subj, "subj") X(top, "top") X(obj, "obj") X(gen, "gen") X(dat, "dat") X(src, "src") \
-    X(loc, "loc") X(instr, "instr") X(com, "com") X(quot, "quot") X(voc, "voc") X(LEX, "LEX")
+    X(loc, "loc") X(instr, "instr") X(com, "com") X(quot, "quot") X(voc, "voc") X(LEX, "LEX") \
+    X(goal, "goal")
 #define HD08_PUNCT(X) X(comma, "comma") X(pause, "pause") X(end, "end") X(q, "q") X(excl, "excl") X(qopen, "qopen") \
     X(qclose, "qclose") X(ellipsis, "ellipsis") X(dash, "dash") X(mark, "mark")
 #define HD08_LEVEL(X) X(haera, "haera") X(hae, "hae") X(haeyo, "haeyo") X(hapsyo, "hapsyo") X(hao, "hao") \
@@ -190,6 +191,7 @@ struct Decision {
     uint8_t path = 0;   // v2: analysis path the winner used
     uint32_t flip = 0;  // v2b: interned smallest feature change that flips the winner, 0 none
     uint8_t st = 0;     // hd08::st value: lexicon row status of `rule` (r, m, u), set by T
+    uint32_t spec = 0;  // v3: interned spec id of the rule (N5-31, VOI-3), 0 none
 };
 
 // §3 analyzer
@@ -308,6 +310,8 @@ struct Line {
     std::vector<OutSpan> spans;   // G
     std::vector<Flag> flags;      // A (fallback), G (invariant kinds), check (--check)
     std::vector<Decision> decisions;  // all, append only
+    uint8_t route = 0;                // v3, T: 0 not routed, 1 native (every form consumed), 2 fallback (0.7.x)
+    std::vector<uint32_t> unmatched;  // v3, T: interned "<surface>/<kind>" of the tokens no native row consumed
 
     // Appends a decision and returns its 1-based id for KNode/Mention/KReg/UttLevel/Scene.decision.
     uint32_t Decide(Decision d) { decisions.push_back(std::move(d)); return static_cast<uint32_t>(decisions.size()); }

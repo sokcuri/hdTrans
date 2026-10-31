@@ -44,4 +44,8 @@ void StageL(const StructureData&, const Config&, Doc&, Line& line, int path) {
     p.clauses.push_back(c);
 }
 
+std::vector<TokAux> AuxOf(const StructureData&, const Doc&, const std::vector<Token>& toks) {
+    return std::vector<TokAux>(toks.size());
+}
+
 }  // namespace hd08

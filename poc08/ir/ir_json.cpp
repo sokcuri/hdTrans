@@ -552,6 +552,7 @@ template <class V> void Fields(V& v, Decision& x) {
     v.Int("path", x.path);
     v.Interned("flip", x.flip);
     v.Enum("st", x.st, F::st);
+    v.Interned("spec", x.spec);
 }
 
 void WriteToks(Writer& w, const Line& line, const std::vector<Token>& toks) {
@@ -661,6 +662,10 @@ std::string LineJson(const Doc& doc, const Line& constLine, uint32_t parts) {
     }
     if (parts & kPartFlags) w.Vec("flags", line.flags);
     if (parts & kPartDecisions) w.Vec("decisions", line.decisions);
+    if (parts & kPartKir) {
+        w.Int("route", line.route);
+        w.Strs("unmatched", line.unmatched);
+    }
     o += '}';
     return o;
 }
@@ -718,6 +723,8 @@ bool ReadLine(const Json& record, Doc& doc, Line& line, std::string& err) {
     r.Vec("spans", line.spans);
     r.Vec("flags", line.flags);
     r.Vec("decisions", line.decisions);
+    r.Int("route", line.route);
+    r.Strs("unmatched", line.unmatched);
     return err.empty();
 }
 

@@ -143,6 +143,10 @@ std::string WhyRecords(const Engine& e, const Doc& doc, const Line& line, const 
         AppendJsonString(o, line.Src(src));
         Key(o, "by");
         AppendJsonString(o, d ? doc.S(d->rule) : std::string_view());
+        if (d && d->spec) {
+            Key(o, "spec");
+            AppendJsonString(o, doc.S(d->spec));
+        }
         Key(o, "ev");
         AppendJsonString(o, d ? Name(F::ev, static_cast<unsigned>(d->kind)) : std::string_view("untraced"));
         if (d) {
@@ -213,6 +217,10 @@ std::string WhyRecords(const Engine& e, const Doc& doc, const Line& line, const 
         o += '"';
         Key(o, "by");
         AppendJsonString(o, doc.S(d.rule));
+        if (d.spec) {
+            Key(o, "spec");
+            AppendJsonString(o, doc.S(d.spec));
+        }
         Key(o, "ev");
         AppendJsonString(o, Name(F::ev, static_cast<unsigned>(d.kind)));
         Key(o, "src");

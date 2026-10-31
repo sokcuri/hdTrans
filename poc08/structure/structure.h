@@ -47,6 +47,7 @@ struct AuxRow {
     std::vector<std::pair<std::string, std::string>> afters;
     AuxKind kind = AuxKind::aux;
     AuxSets sets;
+    std::string setsText;  // the sets column as written (read by T as facts)
     int spec = 0;
 };
 

@@ -270,6 +270,7 @@ bool LoadStructureData(std::string_view auxTsv, std::string_view udTsv, std::str
             return;
         }
         r.kind = static_cast<AuxKind>(k);
+        r.setsText = std::string(f[8]);
         if (!ParseSets(f[8], r.sets, err)) {
             err = std::string(f[0]) + ": " + err;
             ok = false;
