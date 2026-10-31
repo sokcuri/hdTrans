@@ -108,6 +108,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 こう	こう	adv	1	이렇게				r	r	こうする → 이렇게 하다
 早い	はやい	adj	1	빠르다				r	r	足が速い → 발이 빠르다
 早い	はやい	adj	2	이르다	subj=@time|@period			r	r	時間が早い → 시간이 이르다
+早い	はやい	adj	3	빨리	form=adv			r	r	早く起きる → 빨리 일어나다
 貰う	もらう	v5	1	받다		に=에게서	vol=+ asp=change te=past	r	r	プレゼントをもらう → 선물을 받다
 ええ	ええ	intj	1	네				r	r	ええ、そうです → 네, 그래요
 一緒	いっしょ	n	1	함께			cls=@abstract	r	r	一緒に行く → 함께 가다
@@ -2470,3 +2471,20 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 下げる	さげる	v1	4	치우다	obj=@tableware|@food			r	r	食器を下げる → 식기를 치우다
 下げる	さげる	v1	5	걸다	from=首|肩	から=에		r	r	首から下げる → 목에 걸다
 大変	たいへん	adv	1	정말				r	r	大変おいしい → 정말 맛있다
+治る	なおる	v5	1	낫다			vol=- asp=change te=past	r	r	風邪が治る → 감기가 낫다
+速い	はやい	adj	1	빠르다				r	r	足が速い → 발이 빠르다
+速い	はやい	adj	2	빨리	form=adv			r	r	速く走る → 빨리 달리다
+便利	べんり	na	1	편리하다				r	r	便利な道具 → 편리한 도구
+明日	あした	n	1	내일			cls=@time.point ni=-	r	r	明日行く → 내일 가다
+私	わたし	n	1	나			anim=+ cls=@person	r	r	私が行く → 내가 가다
+私	わたし	n	2	저	register=polite			r	r	私は学生です → 저는 학생이에요
+帰る	かえる	v5	1	돌아가다			vol=+ asp=change te=eo	r	r	国に帰る → 고향에 돌아가다 alias of 返る/かえる/v5
+帰る	かえる	v5	2	가다	dat=@house|@room			r	r	家に帰る → 집에 가다 alias of 返る/かえる/v5
+帰る	かえる	v5	3	돌아오다	subj=@message|@info|@speech			r	r	返事が返ってくる → 답장이 돌아오다 alias of 返る/かえる/v5
+如何	どう	adv	1	어떻게				r	r	どうする → 어떻게 하다 alias of どう/どう/adv
+如何	どう	adv	2	어때	form=cop			r	r	調子はどう → 상태는 어때 alias of どう/どう/adv
+如何して	どうして	adv	1	왜			lu	r	r	どうして行かないの → 왜 안 가? alias of どうして/どうして/adv
+回	かい	suf	1	번			num=native	r	r	三回 → 세 번 alias of 回/かい/n
+回	かい	suf	2	회	after=第			r	r	第一回 → 제1회 alias of 回/かい/n
+時	じ	suf	1	시			num=native	r	r	十時 → 10시 alias of 時/じ/n
+分	ふん	suf	1	분			cls=@duration num=sino	r	r	五分 → 5분 alias of 分/ふん/n

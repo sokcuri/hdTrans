@@ -40,8 +40,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 んっ	んっ	intj	1	응				m	r	んっ？ → 응?
 んっ	んっ	intj	2	음	next=…|、			m	r	んっ…… → 음……
 おい	おい	intj	1	이봐				m	r	おい、何やってんだ → 이봐, 뭐 하는 거야
-私	わたし	n	1	나			anim=+ cls=@person	m	r	私は行く → 나는 간다
-私	わたし	n	2	저	register=polite			m	r	私は学生です → 저는 학생입니다
 内	うち	n	1	우리			cls=@place|@house	m	r	うちの子 → 우리 아이
 内	うち	n	2	사이	mod=無い|居る|為る|今の|其の			m	r	知らないうちに → 모르는 사이에
 内	うち	n	3	집	pred=来る|帰る|返る|戻る|泊まる|遊ぶ			m	r	うちに帰る → 집에 돌아가다
@@ -1085,7 +1083,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 指揮	しき	n	1	지휘			cls=@activity|@task	m	r	艦隊の指揮 → 함대의 지휘
 戦力	せんりょく	n	1	전력			cls=@abstract	m	r	敵戦力 → 적 전력
 警備	けいび	n	1	경비			cls=@activity|@duty|@task	m	r	警備員 → 경비원
-明日	あした	n	1	내일			cls=@time	m	r	あしたから働く → 내일부터 일하다
 騒ぐ	さわぐ	v5	1	떠들다			vol=+ asp=activity	m	r	飲んで騒ぐ → 마시고 떠들다
 騒ぐ	さわぐ	v5	2	웅성거리다	subj=人々|群衆|観客|周り|皆			m	r	人々が騒ぐ → 사람들이 웅성거리다
 難い	にくい	suf	1	어렵다				m	r	読みにくい → 읽기 어렵다
