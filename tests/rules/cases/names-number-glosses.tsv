@@ -1,0 +1,18 @@
+# 규칙: LEX-3
+rule	input	expected	kind	layer
+lookup:name-number-gloss	「ハーシェル……」	「허셜……」	fix	lookup
+lookup:name-number-gloss	ハーシェル	허셜	fix	lookup
+lookup:name-number-gloss	名前はジェームス・ボンドから。	이름은 제임스 본드로부터.	fix	lookup
+lookup:name-number-gloss	母・エルザ	어머니·엘사	fix	lookup
+lookup:name-number-gloss	アポフィス軌道急変	아포피스 궤도 급변	fix	lookup
+lookup:name-number-gloss	闇と混沌の邪神アポフィスの加護	어둠과 혼돈의 재앙의 신 아포피스의 가호	fix	lookup
+lookup:name-number-gloss	マルティン・ルターだ。」	마르틴 루터다.」	fix	lookup
+lookup:name-number-gloss	（マルティン・ルター）	(마르틴 루터)	fix	lookup
+lookup:name-number-gloss	エルザの言葉に、	엘사의 말에,	fix	lookup
+lookup:name-number-gloss	思わず呟いた俺に、イレーネが応えてくれた。	무심코 중얼거린 나에게, 이레네가 응해 주었다.	fix	lookup
+lookup:name-number-gloss	俺はエルザの頬を思いっきりビンタする。	나는 엘사의 뺨을 마음껏 따귀를 때린다.	fix	lookup
+lookup:name-number-gloss	「い……いくらユノちゃんでも、彩花さんはあげないんだから！」	「아……아무리 유노짱이라도, 아야카 씨는 주지 않을 거니까!」	fix	lookup
+lookup:name-number-gloss	連邦民主共和国↓エチオピア	연방 민주공화국↓에치오피아	keep	lookup
+lookup:name-number-gloss	西エチオピア南端の地名。	서에치오피아 남단의 지명.	keep	lookup
+lookup:name-number-gloss	「惑星プシケのプシケ語？	「행성 프시케의 프시케어?	keep	lookup
+lookup:name-number-gloss	吾がプシケから	내가 프시케로부터	keep	lookup

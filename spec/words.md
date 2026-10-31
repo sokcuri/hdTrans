@@ -59,6 +59,8 @@
 사전 행의 번역은 짧은 한국어 낱말이나 구로 쓴다. 풀이하는 정의, 괄호 속 영어, 뜻 목록, 옮기지 않은 영어를 넣지
 않는다.
 
+이름 행의 번역에 키에 없는 번호(소행성 번호, 목록 번호, 시리즈 번호)를 붙이지 않는다(ハーシェル 허셜, ジェームス・ボンド 제임스 본드). 키가 그 수를 말하는 이름(サーティー・セカンズ・トゥ・マーズ 30 세컨즈 투 마스)은 수를 쓴다.
+
 | 원문 | 출력 | 구분 |
 |---|---|---|
 | これが三種の神器だ。 | 이것이 삼종 신기다. | 고침 |
@@ -67,7 +69,7 @@
 | 黒枠の眼鏡をかけた男。 | 검은 테두리의 안경을 쓴 남자. | 고침 |
 | 唖然とする佳奈すけ。 | 아연실색하는 카나스케. | 고침 |
 
-사례: `tests/rules/cases/short-terms-for-glosses.tsv`, `tests/rules/cases/glosses-everyday-words.tsv`,
+사례: `tests/rules/cases/names-number-glosses.tsv`, `tests/rules/cases/short-terms-for-glosses.tsv`, `tests/rules/cases/glosses-everyday-words.tsv`,
 `tests/rules/cases/lexical-gloss-cleanup.tsv`, `tests/rules/cases/lexical-idiom-glosses.tsv`,
 `tests/rules/cases/lexical-azen.tsv`
 

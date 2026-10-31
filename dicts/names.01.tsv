@@ -7399,7 +7399,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 フォルト	폴트	N130	QPNVHn	Wb	GN						フォルト	names.305262
 フォルト!!	폴트!!	N130	QWK		GN							names.305263
 フォルト=シェフチェンコ	포르트솁첸코	N130	QCTVPl		GN							names.305264
-フォルトゥナ	19 포르투나	N110			GN						ふぉるとぅな	names.305265
+フォルトゥナ	포르투나	N110			GN						ふぉるとぅな	names.305265
 フォルトゥナの瞳	포르투나의 눈동자	N130	QWK		GN							names.305266
 フォルトゥナ・シッタート	포르튀나 시타르트	N130	VGt		GN							names.305267
 フォルトゥナ・デュッセルドルフ	포르투나 뒤셀도르프	N130	VGt		GN							names.305268
@@ -20841,7 +20841,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プシェムィスワフ・ゴシェフスキ	프셰미스와프 고시에프스키	N130	QPNVHn		GN							names.318891
 プシェロフ郡	프르제로프구	N130	QCTVPl		GN							names.318892
 プシェヴォルスキ	프셰발스키	N130	QPNVHn	Wb	GN						ぷしぇゔぉるすき	names.318893
-プシケ	16 프시케	N130	QPNVHn		GN						ぷしけ	names.318894
+プシケ	프시케	N130	QPNVHn		GN						ぷしけ	names.318894
 プシスハ	프시수하	N130	QCTVPl		GN							names.318895
 プシファー	푸시퍼	N130	VGt		GN							names.318896
 プシャスヌィシュ郡	프샤스니시군	N130	QCTVPl		GN							names.318897
@@ -21074,7 +21074,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プトラ・モスク	푸트라 모스크	N130	VGt		GN							names.319128
 プトラー	푸틀러	N130	QWK		GN							names.319129
 プトレ	푸트레	N130	QCTVPl		GN							names.319130
-プトレマイオス	4001 프톨레마이오스	N110			GN						ぷとれまいおす	names.319131
+プトレマイオス	프톨레마이오스	N110			GN						ぷとれまいおす	names.319131
 プトレマイオス	프톨레마이오스	N110			GN						プトレマイオス	names.319132
 プトレマイオス10世	프톨레마이오스 10세	N130	QPNVHn		GN							names.319133
 プトレマイオス11世	프톨레마이오스 11세	N130	QPNVHn		GN							names.319134
@@ -27950,7 +27950,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ベジーモン	베지몬	N110			GN						べじーもん	names.326102
 ベス	베스	N130	QPNVHn	Wb	GN							names.326103
 ベスキディ山脈	베스키디산맥	N130	QCTVPl		GN							names.326104
-ベスタ	4 베스타	N110			GN						べすた	names.326105
+ベスタ	베스타	N110			GN						べすた	names.326105
 ベスタ	베스타	N110			GN						ベスタ	names.326106
 ベスタニャ	베스타냐	N130	QPNVHn	Wb	GN						べすたにゃ	names.326107
 ベスタニヤ	베스타니아	N130	QPNVHn	Wb	GN						べすたにや	names.326108
@@ -56655,7 +56655,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 マルティン・リネス	마르틴 린네스	N130	QPNVHn		GN							names.355195
 マルティン・リヒャルト	마르틴 리하르트	N130	QPNVHn		GN							names.355196
 マルティン・リーベルス	마르틴 리버스	N130	QPNVHn		GN							names.355197
-マルティン・ルター	7100 마르틴 루터	N110			GN						マルティン・ルター	names.355198
+マルティン・ルター	마르틴 루터	N110			GN						マルティン・ルター	names.355198
 マルティン・ルター大学ハレ・ヴィッテンベルク	할레 비텐베르크 마르틴 루터 대학교	N130	VGt		GN							names.355199
 マルティン・ルチンスキー	마르틴 루친스키	N130	QPNVHn		GN							names.355200
 マルティン・レアンドロ・カストロジョヴァンニ	마르틴 카스트로조반니	N130	QPNVHn		GN							names.355201
@@ -79364,7 +79364,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ユネス・カーブニ	유네스 카부니	N130	QPNVHn		GN							names.378180
 ユネス・ベランダ	유네스 벨랑다	N130	QPNVHn		GN							names.378181
 ユネル・エスコバー	유넬 에스코바르	N130	QPNVHn		GN							names.378182
-ユノ	3 유노	N130	QPNVHn		GN						ゆの	names.378183
+ユノ	유노	N130	QPNVHn		GN						ゆの	names.378183
 ユノ	유노	N130	QPNVHn	Wb	GN						ユノ	names.378184
 ユノア	유노아	N130	QPNVHn	Wb	GN						ゆのあ	names.378185
 ユノキルーム	유노키 룸	N110			GN						ゆのきるーむ	names.378186
@@ -111673,7 +111673,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロシアの軍艦よ、くたばれ	러시아 군함, 가서 엿이나 처먹어라	N130	QWK		GN							names.410883
 ロシアはウクライナについて何をすべきか	러시아는 우크라이나에 대하여 무엇을 해야 하는가	N130	QWK		GN							names.410885
 ロシアは永遠にここにある	러시아는 영원히 여기 있습니다	N130	VGt		GN							names.410886
-ロシアより愛をこめて	007 위기일발	N130	QPNVHn		GN							names.410888
+ロシアより愛をこめて	위기일발	N130	QPNVHn		GN							names.410888
 ロシアエネルギー省	러시아 에너지부	N130	VGt		GN							names.410889
 ロシアオリンピック委員会	러시아 올림픽 위원회	N130	VGt		GN							names.410890
 ロシアキャラ	러시아 캐릭터	N110			GN						ろしあきゃら	names.410891
@@ -112303,7 +112303,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ロスト・フライト	플레인	N130	QWK		GN							names.411526
 ロスト・フリクエンシーズ	로스트 프리퀀시스	N130	QPNVHn		GN							names.411527
 ロスト・ボディ	더 바디	N130	QWK		GN							names.411529
-ロスト・メモリーズ	2009 로스트 메모리즈	N130	QWK		GN							names.411530
+ロスト・メモリーズ	로스트 메모리즈	N130	QWK		GN							names.411530
 ロスト・ユニバース	로스트 유니버스	N130	QWK		GN						ロスト・ユニバース	names.411531
 ロスト・リバー	로스트 리버	N130	QWK		GN							names.411532
 ロスト・ルーム	로스트 룸	N130	QWK		GN							names.411533
@@ -121751,7 +121751,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヴァルター・ヴィルタネン	발테르 비르타넨	N130	QPNVHn		GN							names.421127
 ヴァルター・ヴェンク	발터 벵크	N130	QPNVHn		GN							names.421128
 ヴァルタ川	바르타강	N130	QCTVPl		GN							names.421129
-ヴァルダ	174567 바르다	N130	QPNVHn		GN						ゔぁるだ	names.421130
+ヴァルダ	바르다	N130	QPNVHn		GN						ゔぁるだ	names.421130
 ヴァルダイ	발다이	N130	QCTVPl		GN							names.421131
 ヴァルダイ丘陵	발다이 구릉	N130	QCTVPl		GN							names.421132
 ヴァルダイ湖	발다이호	N130	QCTVPl		GN							names.421133
@@ -122268,7 +122268,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヴァングネクス	뱅 넥스	N130	QPNVHn		GN						ゔぁんぐねくす	names.421645
 ヴァングレイ	뱅 레이	N130	QPNVHn		GN						ゔぁんぐれい	names.421646
 ヴァンケー駅	반케역	N130	QCTVPl		GN							names.421647
-ヴァンゲリス	6354 방겔리스	N110			GN						ゔぁんげりす	names.421648
+ヴァンゲリス	방겔리스	N110			GN						ゔぁんげりす	names.421648
 ヴァンゲリス・パヴリディス	방겔리스 파블리디스	N130	QPNVHn		GN							names.421649
 ヴァンゲリス・ムリキス	방겔리스 무리키스	N130	QPNVHn		GN							names.421650
 ヴァンゲリス・モラス	방겔리스 모라스	N130	QPNVHn		GN							names.421651
@@ -124827,7 +124827,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヴェスクロム	베스크롬	N130	QPNVHn	Wb	GN						ゔぇすくろむ	names.424219
 ヴェスケル	베스켈	N130	QPNVHn	Wb	GN							names.424220
 ヴェスコヴァーナ	베스코바나	N130	QCTVPl		GN							names.424221
-ヴェスタ	4 베스타	N130	QPNVHn		GN						ゔぇすた	names.424222
+ヴェスタ	베스타	N130	QPNVHn		GN						ゔぇすた	names.424222
 ヴェスタの火	베스타의 불	N130	QWK		GN							names.424223
 ヴェスタリアサーガ	베스타리아 사가	N110			GN						ゔぇすたりあさーが	names.424224
 ヴェスタル	USS 베스탈	N130	QPNVHn		GN						ゔぇすたる	names.424225
