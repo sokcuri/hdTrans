@@ -1,0 +1,13 @@
+#! persona
+# Ending variants of a character voice. When R gives a predicate a persona and the predicate has the plain
+# ending family, G uses the family of the first matching row instead (eomi.tsv rows of that family).
+#
+# Columns
+#   persona  rough old-male lady formal pompous archaic grand
+#   level    the utterance level the row applies to
+#   mood     decl q imp prop excl | -
+#   family   the eomi family to use
+persona	level	mood	family	note
+old-male	hage	excl	gumeon	좋구먼 (わし…のう)
+old-male	hae	excl	gumeon	좋구먼
+old-male	haera	excl	gumeon	좋구먼

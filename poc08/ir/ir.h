@@ -33,7 +33,10 @@ namespace hd08 {
 #define HD08_HOW(X) X(marked, "marked") X(topic, "topic") X(relhead, "relhead") X(omitted, "omitted")
 #define HD08_LINK(X) X(final, "final") X(te, "te") X(tara, "tara") X(to, "to") X(ba, "ba") X(nara, "nara") \
     X(node, "node") X(kara, "kara") X(noni, "noni") X(tame, "tame") X(you_ni, "you-ni") X(nagara, "nagara")  \
-    X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote")
+    X(tari, "tari") X(adn, "adn") X(nom, "nom") X(quote, "quote") X(ga, "ga") X(temo, "temo") X(shi, "shi") \
+    X(zu, "zu") X(renyo, "renyo") X(time, "time")
+// v2d: the kind of a `time` link (Clause.linkSub).
+#define HD08_TIMESUB(X) X(none, "none") X(uchi, "uchi") X(toki, "toki") X(mae, "mae") X(ato, "ato") X(mama, "mama")
 #define HD08_TENSE(X) X(nonpast, "nonpast") X(past, "past")
 #define HD08_JASPECT(X) X(none, "none") X(te_iru, "te-iru") X(te_aru, "te-aru") X(te_shimau, "te-shimau") \
     X(te_oku, "te-oku") X(te_kuru, "te-kuru") X(te_iku, "te-iku") X(te_miru, "te-miru")
@@ -62,16 +65,22 @@ namespace hd08 {
     X(dir_come, "dir-come") X(dir_go, "dir-go") X(try_, "try") X(give, "give")
 #define HD08_MOOD(X) X(decl, "decl") X(q, "q") X(imp, "imp") X(prop, "prop") X(excl, "excl")
 #define HD08_CTYPE(X) X(final, "final") X(conn, "conn") X(adn_nonpast, "adn:nonpast") X(adn_past, "adn:past") \
-    X(adn_fut, "adn:fut") X(nom_m, "nom:m") X(nom_gi, "nom:gi") X(nom_geot, "nom:geot")
+    X(adn_fut, "adn:fut") X(nom_m, "nom:m") X(nom_gi, "nom:gi") X(nom_geot, "nom:geot") X(quote, "quote") \
+    X(quote_adn, "quote:adn") X(stem, "stem") X(adn_retro, "adn:retro") X(adn_past_retro, "adn:past-retro")
 #define HD08_REL(X) X(seq, "seq") X(and_, "and") X(cause, "cause") X(cond, "cond") X(concess, "concess") \
-    X(purpose, "purpose") X(while_, "while") X(when, "when") X(quote, "quote")
+    X(purpose, "purpose") X(while_, "while") X(when, "when") X(quote, "quote") X(like, "like") X(sothat, "sothat") \
+    X(even_try, "even-try") X(reason, "reason") X(bg, "bg") X(purpose_motion, "purpose-motion") X(switch_, "switch") \
+    X(until, "until") X(result, "result") X(neg, "neg") X(as_if, "as-if") X(cause_gi, "cause-gi") \
+    X(if_quote, "if-quote") X(after, "after") X(as_soon, "as-soon") X(despite, "despite") X(even_if, "even-if") \
+    X(whether, "whether") X(the_more, "the-more") X(manner, "manner") X(or_, "or")
 #define HD08_KNEG(X) X(none, "none") X(an, "an") X(ji_anh, "ji-anh") X(mot, "mot") X(ji_mot, "ji-mot") \
     X(ji_ma, "ji-ma")
-#define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq")
+#define HD08_JAFACT(X) X(te_iru, "te-iru") X(past_state, "past-state") X(likeness, "likeness") X(link_seq, "link-seq") \
+    X(sonkei, "sonkei")
 #define HD08_KASE(X) X(subj, "subj") X(top, "top") X(obj, "obj") X(gen, "gen") X(dat, "dat") X(src, "src") \
     X(loc, "loc") X(instr, "instr") X(com, "com") X(quot, "quot") X(voc, "voc") X(LEX, "LEX")
 #define HD08_PUNCT(X) X(comma, "comma") X(pause, "pause") X(end, "end") X(q, "q") X(excl, "excl") X(qopen, "qopen") \
-    X(qclose, "qclose") X(ellipsis, "ellipsis") X(dash, "dash")
+    X(qclose, "qclose") X(ellipsis, "ellipsis") X(dash, "dash") X(mark, "mark")
 #define HD08_LEVEL(X) X(haera, "haera") X(hae, "hae") X(haeyo, "haeyo") X(hapsyo, "hapsyo") X(hao, "hao") \
     X(hage, "hage")
 #define HD08_PERSONA(X) X(none, "none") X(rough, "rough") X(old_male, "old-male") X(lady, "lady") X(formal, "formal") \
@@ -80,6 +89,9 @@ namespace hd08 {
     X(residue, "residue") X(carry, "carry") X(unmatched_form, "unmatched-form") X(check, "check")
 #define HD08_REFKIND(X) X(none, "none") X(overt, "overt") X(speaker, "speaker") X(addressee, "addressee") \
     X(third, "third") X(generic, "generic")
+// v2f (W5): what the generator needs beyond IR v1.
+#define HD08_VPOS(X) X(none, "") X(V, "V") X(A, "A") X(X_, "X") X(C, "C") X(N, "N")
+#define HD08_MODAL(X) X(none, "") X(gess, "gess")
 // Lexicon row status of the row a T decision used (Decision.st); none when no lexicon row.
 #define HD08_ST(X) X(none, "") X(r, "r") X(m, "m") X(u, "u")
 
@@ -102,6 +114,7 @@ HD08_ENUM(buntype, HD08_BUNTYPE)
 HD08_BITS(bunflag, HD08_BUNFLAG)
 HD08_ENUM(how, HD08_HOW)
 HD08_ENUM(link, HD08_LINK)
+HD08_ENUM(timesub, HD08_TIMESUB)
 HD08_ENUM(tense, HD08_TENSE)
 HD08_ENUM(jaspect, HD08_JASPECT)
 HD08_ENUM(pol, HD08_POL)
@@ -127,12 +140,14 @@ HD08_ENUM(persona, HD08_PERSONA)
 HD08_ENUM(flag, HD08_FLAG)
 HD08_ENUM(st, HD08_ST)
 HD08_ENUM(refkind, HD08_REFKIND)
+HD08_ENUM(vpos, HD08_VPOS)
+HD08_ENUM(modal, HD08_MODAL)
 
 // The enum-like fields, for Name/Parse.
 enum class F : uint8_t {
     ev, pos, tokflag, edit, srclevel, kase_ja, buntype, bunflag, role, how, link, tense, jaspect, pol, negfn, voice,
     bene, modality, force, polite, jreg, kk, kcls, sem, kaspect, mood, ctype, rel, kneg, jafact, kase, punct, level,
-    persona, flag, st, refkind
+    persona, flag, st, refkind, timesub, vpos, modal
 };
 std::string_view Name(F field, unsigned value);  // empty when out of range
 bool Parse(F field, std::string_view name, unsigned& value);
@@ -147,6 +162,9 @@ struct Strings {
     Strings();
     Strings(const Strings& other);
     Strings& operator=(const Strings& other);
+    // Moving a deque keeps its elements in place, so the index keys stay valid.
+    Strings(Strings&&) noexcept = default;
+    Strings& operator=(Strings&&) noexcept = default;
 
 private:
     std::deque<std::string> all;  // stable addresses for the index keys
@@ -206,7 +224,8 @@ struct Speaker {
     uint8_t persona = 0;
 };
 struct Scene { uint32_t firstLine = 0, lastLine = 0; uint32_t decision = 0; };  // line indexes in Doc.lines
-// A name span S hands back to A for one line (the single feedback loop).
+// A name span S hands back to A for one line (the single feedback loop). line is the 0-based index
+// in Doc.lines, context lines included (not Line.id).
 struct ForcedSpan { uint32_t line = 0; Span src; uint32_t entity = 0; };
 
 // §5 structure
@@ -227,7 +246,9 @@ struct Referent {                 // v2, writer Z
 };
 struct Clause {
     uint16_t pred = 0, firstBun = 0, lastBun = 0; int16_t parent = -1;
-    uint8_t link = 0, tense = 0, aspect = 0, pol = 0, negFn = 0, voice = 0, bene = 0;
+    uint8_t link = 0;
+    uint8_t linkSub = 0;  // v2d: timesub value when link is time
+    uint8_t tense = 0, aspect = 0, pol = 0, negFn = 0, voice = 0, bene = 0;
     uint32_t modality = 0;
     uint8_t force = 0, polite = 0;
     uint16_t jreg = 0;
@@ -248,6 +269,11 @@ struct KNode {
     uint32_t sem = 0;
     uint8_t tense = 0, aspect = 0, mood = 0, ctype = 0, rel = 0, neg = 0;
     uint8_t aux : 1 = 0, dep : 1 = 0, passive : 1 = 0, causative : 1 = 0;
+    uint8_t potential : 1 = 0, spont : 1 = 0;  // v2e: -ㄹ 수 있다; -어지다 (spontaneous)
+    uint8_t glue : 1 = 0;   // v2f: written without a space after the previous word
+    uint8_t vpos = 0;       // v2f: V: verb A adjective X 있다/없다 C copula N 아니다 ("" = from the stem tables)
+    uint8_t modal = 0;      // v2f: -겠- (gess)
+    uint32_t eomi = 0;      // v2f: interned explicit ending ("-는데") or final family ("ne", "ji"); 0 = by features
     uint16_t ja = 0;
     uint8_t kase = 0;
     uint8_t punct = 0; uint32_t jaMark = 0;
@@ -309,6 +335,15 @@ struct Doc {
 struct PathRef { std::vector<Token>& toks; std::vector<Bunsetsu>& buns; std::vector<Clause>& clauses; };
 inline PathRef PathOf(Line& line, int path) {
     if (path == 0) return {line.toks, line.buns, line.clauses};
+    return {line.alt.toks, line.alt.buns, line.alt.clauses};
+}
+struct ConstPathRef {
+    const std::vector<Token>& toks;
+    const std::vector<Bunsetsu>& buns;
+    const std::vector<Clause>& clauses;
+};
+inline ConstPathRef PathOf(const Line& line, int path) {
+    if (path == 0 || line.alt.toks.empty()) return {line.toks, line.buns, line.clauses};
     return {line.alt.toks, line.alt.buns, line.alt.clauses};
 }
 

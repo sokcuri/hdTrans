@@ -212,3 +212,102 @@ HD_TEST(poc08_v2_fields_round_trip) {
 }
 
 }  // namespace
+
+namespace {
+
+using namespace hd08;
+
+HD_TEST(poc08_review_fixes) {
+    std::string err;
+    // An alternative whose fields are zero where the main token's are not keeps its zeros.
+    Doc d;
+    Line l;
+    l.src = l.norm = "ab";
+    Token main;
+    main.src = {0, 2};
+    main.lex = d.I("lex:ab/ab/n#1");
+    main.flags = tokflag::LongUnit;
+    main.cost = 1.25f;
+    main.pos = Pos::n;
+    Token alt;
+    alt.src = {0, 2};
+    alt.pos = Pos::unk;
+    l.alts.push_back(alt);
+    main.alt = 0;
+    main.nAlt = 1;
+    l.toks.push_back(main);
+    std::vector<Doc> docs;
+    HD_REQUIRE(ReadJsonl(LineJson(d, l), docs, err));
+    const Line& back = docs[0].lines[0];
+    HD_REQUIRE(back.alts.size() == 1);
+    HD_CHECK_EQ(back.alts[0].lex, 0u);
+    HD_CHECK_EQ(unsigned{back.alts[0].flags}, 0u);
+    HD_CHECK(back.alts[0].cost == 0.0f);
+    HD_CHECK(back.toks[0].cost == 1.25f);
+    // norm defaults to src, map to identity.
+    HD_CHECK_EQ(back.norm, std::string("ab"));
+    HD_CHECK_EQ(back.map.size(), size_t{3});
+
+    // Numbers out of range are errors, not casts.
+    docs.clear();
+    HD_CHECK(!ReadJsonl(R"({"line":1,"decisions":[{"kind":200}]})", docs, err));
+    docs.clear();
+    HD_CHECK(!ReadJsonl(R"({"line":1,"toks":[{"src":[-1,2]}]})", docs, err));
+    docs.clear();
+    HD_CHECK(!ReadJsonl(R"({"line":1,"clauses":[{"modality":1e30}]})", docs, err));
+
+    // Floats round-trip.
+    std::string num;
+    AppendJsonNumber(num, 1234.5678f);
+    Json j;
+    HD_REQUIRE(ParseJson(num, j, err));
+    HD_CHECK(static_cast<float>(j.n) == 1234.5678f);
+
+    // A lone surrogate becomes U+FFFD; a pair becomes one code point.
+    HD_REQUIRE(ParseJson(R"("\ud800A😀")", j, err));
+    HD_CHECK_EQ(j.s, std::string("\xEF\xBF\xBD" "A" "\xF0\x9F\x98\x80"));
+
+    // Context lines keep id 0; a document record after lines starts a new document.
+    docs.clear();
+    HD_REQUIRE(ReadJsonl("{\"doc\":\"\"}\n{\"src\":\"x\",\"context\":true}\n{\"src\":\"y\"}\n{\"doc\":\"\"}\n{\"src\":\"z\"}\n",
+                         docs, err));
+    HD_REQUIRE(docs.size() == 2);
+    HD_CHECK_EQ(docs[0].lines[0].id, 0u);
+    HD_CHECK_EQ(docs[0].lines[1].id, 1u);
+    HD_CHECK_EQ(docs[1].lines[0].id, 1u);
+}
+
+HD_TEST(poc08_invariants_split_runs_and_path) {
+    Doc d;
+    InvariantData data;
+    Line l;
+    l.src = "HP100";
+    l.out = "HP 100";
+    std::vector<Flag> flags;
+    CheckInvariants(d, l, data, flags);
+    HD_CHECK(flags.empty());
+
+    // With path 1 chosen, the clause and tokens of line.alt are checked.
+    Line n;
+    n.src = "ない";
+    Token t;
+    t.src = {0, 6};
+    t.pos = Pos::v5;
+    n.toks.push_back(t);  // path 0: a content token with no node would be 'dropped'
+    Token a = t;
+    a.pos = Pos::aux;
+    n.alt.toks.push_back(a);
+    n.alt.buns.push_back(Bunsetsu{});
+    n.alt.clauses.push_back(Clause{});
+    n.chosen.path = 1;
+    n.out = "x";
+    KNode v;
+    v.id = 1;
+    v.kind = KK::V;
+    n.kir2.push_back(v);
+    flags.clear();
+    CheckInvariants(d, n, data, flags);
+    for (const Flag& f : flags) HD_CHECK(f.kind != flag::dropped);
+}
+
+}  // namespace

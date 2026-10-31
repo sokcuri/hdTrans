@@ -56,31 +56,29 @@ void StageS(const DiscourseData&, const Config&, Doc& doc, std::vector<ForcedSpa
 
 void StageZ(const DiscourseData&, const Config&, Doc&, Line&, int) {}
 
-void StageR(const DiscourseData&, const Config& cfg, Doc& doc) {
-    for (Line& line : doc.lines) {
-        line.reg.clear();
-        line.lev.clear();
-        Decision d;
-        d.stage = 'R';
-        d.kind = Ev::Default;
-        d.rule = doc.I("code:stub-register");
-        d.src = {0, static_cast<uint32_t>(line.src.size())};
-        const uint32_t id = line.Decide(d);
-        for (uint16_t u = 0; u < line.utts.size(); u++) {
-            UttLevel lv;
-            lv.utt = u;
-            lv.level = LevelFor(cfg, line.utts[u].depth > 0);
-            lv.decision = id;
-            line.lev.push_back(lv);
-        }
-        for (const KNode& n : line.kir) {
-            if (n.kind != KK::V) continue;
-            KReg r;
-            r.node = n.id;
-            r.level = LevelFor(cfg, false);
-            r.decision = id;
-            line.reg.push_back(r);
-        }
+void StageR(const DiscourseData&, const Config& cfg, Doc& doc, Line& line) {
+    line.reg.clear();
+    line.lev.clear();
+    Decision d;
+    d.stage = 'R';
+    d.kind = Ev::Default;
+    d.rule = doc.I("code:stub-register");
+    d.src = {0, static_cast<uint32_t>(line.src.size())};
+    const uint32_t id = line.Decide(d);
+    for (uint16_t u = 0; u < line.utts.size(); u++) {
+        UttLevel lv;
+        lv.utt = u;
+        lv.level = LevelFor(cfg, line.utts[u].depth > 0);
+        lv.decision = id;
+        line.lev.push_back(lv);
+    }
+    for (const KNode& n : line.kir) {
+        if (n.kind != KK::V) continue;
+        KReg r;
+        r.node = n.id;
+        r.level = LevelFor(cfg, false);
+        r.decision = id;
+        line.reg.push_back(r);
     }
 }
 

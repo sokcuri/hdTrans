@@ -37,6 +37,14 @@
 
 namespace hdTrans::internal {
 
+#ifdef HDTRANS_POC08_HOOKS
+// The hooks' line: the index of line k of the call (or of piece k of its long lines).
+#define HDTRANS_HOOK_LINE(options, k) \
+    do { if ((options).hookRun != nullptr) (options).hookRun->line = (options).hookRun->LineOf(k); } while (0)
+#else
+#define HDTRANS_HOOK_LINE(options, k) static_cast<void>(0)
+#endif
+
 namespace {
 
 // The class digit of a dictionary candidate ('4' a verb, '1' a noun, '2' a particle).
@@ -799,6 +807,20 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
 
     word::Analysis analysis;
     word::Settings settings = AnalysisSettings(text, verse, options, s.sessionSenses);
+#ifdef HDTRANS_POC08_HOOKS
+    const hooks::Run* run = text ? options.hookRun : nullptr;
+    void* hookChunk = nullptr;
+    std::string chunkText;
+    if (run != nullptr && (run->hooks->beginChunk != nullptr || run->hooks->generate != nullptr)) {
+        for (const tokenizer::Piece& p : pieces) chunkText += p.text;
+        if (run->hooks->beginChunk != nullptr)
+            hookChunk = run->hooks->beginChunk(run->hooks->context, run->doc, run->line, index, chunkText);
+    }
+    if (hookChunk != nullptr) {
+        settings.hookChunk = hookChunk;
+        settings.hookFits = run->hooks->fits;
+    }
+#endif
     settings.before = before;
     settings.quoteDepth = speech.quotes.depth;
     settings.poiTic = speech.poiTic;
@@ -842,11 +864,67 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
             const bool joined = JoinAfterSpace(s.tokens, sentence.first, last, s.texts, s.items, s.markers);
             s.composer.Compose(s.items, s.texts, sentence.first, last, s.markers, composeSettings,
                                generated.families, done.pieces);
+#ifdef HDTRANS_POC08_HOOKS
+            // A sentence whose pieces hold spans (tags, markers, column gaps) keeps its composition: the
+            // generator writes text only.
+            const bool plain = std::all_of(done.pieces.begin(), done.pieces.end(),
+                                           [](const output::Piece& p) { return p.span == output::SpanText; });
+            std::string composed;
+            const auto sentenceView = [&] {
+                composed = output::String(done.pieces);
+                hooks::Sentence hs;
+                hs.line = run->line;
+                hs.chunk = index;
+                hs.index = static_cast<int>(k);
+                hs.chunkText = chunkText;
+                hs.tokens = &s.tokens;
+                hs.firstToken = sentence.first;
+                hs.lastToken = last;
+                hs.items = s.items;
+                hs.chain = &sentence.chain;
+                hs.composed = composed;
+                hs.casual = composeSettings.casual;
+                hs.asked = composeSettings.asked;
+                hs.narrated = composeSettings.narrated;
+                hs.spoken = composeSettings.spoken;
+                hs.quoteDepth = composeSettings.quotes.depth;
+                return hs;
+            };
+            // Re-selection: the hook may change the selections of the chain (an ending candidate 0.7.x
+            // already had); the sentence is then composed again from them.
+            if (run != nullptr && run->hooks->reselect != nullptr && plain &&
+                run->hooks->reselect(run->hooks->context, run->doc, hookChunk, sentenceView(),
+                                     analysis.sentences[k].chain)) {
+                ResolvedItems(sentence.chain, s.items);
+                MarkCopySpaces(snap, lookup, s.tokens, s.items);
+                s.texts.clear();
+                BuildTexts(s.tokens, analysis, sentence.first, sentence.last, s.texts);
+                s.markers.assign(s.tokens.markers.begin() + sentence.markerBegin,
+                                 s.tokens.markers.begin() + sentence.markerEnd);
+                last = sentence.last;
+                const bool joinedAgain = JoinAfterSpace(s.tokens, sentence.first, last, s.texts, s.items, s.markers);
+                done.pieces.clear();
+                s.composer.Compose(s.items, s.texts, sentence.first, last, s.markers, composeSettings,
+                                   generated.families, done.pieces);
+                if (joinedAgain) s.texts.clear();
+            }
+            if (run != nullptr && run->hooks->generate != nullptr && plain) {
+                const hooks::Sentence hs = sentenceView();
+                std::string replaced;
+                if (run->hooks->generate(run->hooks->context, run->doc, hookChunk, hs, replaced)) {
+                    done.pieces.clear();
+                    output::Add(done.pieces, replaced);
+                }
+            }
+#endif
             if (joined) s.texts.clear();
         }
         if (observer.composed) observer.composed(observer.context, index, static_cast<int>(k), done.pieces);
         out.push_back(std::move(done));
     }
+#ifdef HDTRANS_POC08_HOOKS
+    if (hookChunk != nullptr && run->hooks->endChunk != nullptr) run->hooks->endChunk(run->hooks->context, hookChunk);
+#endif
 }
 
 // Whether observer takes any stage of a line.
@@ -876,6 +954,13 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
 
     const RespellLookup respell{snap, ctx.lookup};
     const auto normalize = [&](std::string_view text) {
+#ifdef HDTRANS_POC08_HOOKS
+        if (const hooks::Run* run = options.hookRun; run != nullptr && run->hooks->normalize != nullptr) {
+            std::string replaced;
+            if (run->hooks->normalize(run->hooks->context, run->doc, run->line, text, replaced))
+                return pipeline::JoinBraceRuby(replaced, ReadBase, &snap);
+        }
+#endif
         std::string normalized = pipeline::JoinBraceRuby(
             pipeline::Normalize(text, ctx, {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell}),
             ReadBase, &snap);
@@ -1155,6 +1240,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         StageObserver edgeObserver;
         edgeObserver.context = &watch;
         edgeObserver.resolved = WatchEdges;
+        HDTRANS_HOOK_LINE(options, i);
         alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
@@ -1182,6 +1268,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         joinedOptions.ruleTally = nullptr;
         word::SessionSenses* const senses = s.sessionSenses;
         s.sessionSenses = nullptr;
+        HDTRANS_HOOK_LINE(options, k);
         TranslateRubyBody(snap, doc, texts[0] + texts[1], used[k], s, generated, cutObserver, joinedOptions,
                           narratedOf(lines[k]) || narratedOf(lines[k + 1]), texts);
         s.sessionSenses = senses;
@@ -1218,6 +1305,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             joinedOptions.joinedLines = true;
             joinedOptions.cutBreaks = cuts;
             if (observer.line) observer.line(observer.context, static_cast<int>(std::max(i, context) - context));
+            HDTRANS_HOOK_LINE(options, i);
             pieces = SplitAtBreaks(
                 TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
                 j - i + 1);
@@ -1237,6 +1325,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 // The stages of the line on its own, for the observer; the translation stays the one made
                 // before the joined lines.
                 if (observer.line) observer.line(observer.context, static_cast<int>(k - context));
+                HDTRANS_HOOK_LINE(options, k);
                 TranslateRubyBody(snap, doc, AloneText(lines[k]), used[k], s, generated, observer, options,
                               narratedOf(lines[k]));
             }
@@ -1248,6 +1337,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
                 out[k] = WithArrow(alone[k], arrows[k]);
             } else {
                 // The stages did not keep kGoesOn at the end: the line without it.
+                HDTRANS_HOOK_LINE(options, k);
                 out[k] = WithArrow(
                     TranslateRubyBody(snap, doc, bare[k], used[k], s, generated, StageObserver{}, options, narratedOf(lines[k])),
                     arrows[k]);
@@ -1282,8 +1372,22 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
         TranslationOptions unwrapped = options;
         unwrapped.wrapped = false;
         const std::size_t boundedContext = context > 0 ? ends[context - 1] : 0;
+#ifdef HDTRANS_POC08_HOOKS
+        std::vector<int> outerLines;
+        if (options.hookRun != nullptr) {
+            outerLines = options.hookRun->pieceLine;
+            std::vector<int> pieceLine;
+            for (std::size_t i = 0, piece = 0; i < ends.size(); i++) {
+                while (piece < ends[i]) pieceLine.push_back(options.hookRun->LineOf(i)), piece++;
+            }
+            options.hookRun->pieceLine = std::move(pieceLine);
+        }
+#endif
         const auto translated =
             TranslateDocumentPieces(snap, generated, bounded, observer, unwrapped, sourceLines, boundedContext);
+#ifdef HDTRANS_POC08_HOOKS
+        if (options.hookRun != nullptr) options.hookRun->pieceLine = std::move(outerLines);
+#endif
         if (translated.size() != bounded.size()) return std::vector<std::string>(lines.begin(), lines.end());
         std::vector<std::string> joined(lines.size());
         for (std::size_t i = 0, piece = 0; i < ends.size(); i++) {
@@ -1312,6 +1416,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             // A quote left open counts on a line only when the line or a later one closes it.
             const LineQuotes quotes = QuotesOf(lines[i], carry);
             const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
+            HDTRANS_HOOK_LINE(options, i);
             std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, options);
             carry = quotes.end;
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
@@ -1403,6 +1508,18 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
                                            std::span<const std::string> lines,
                                            const StageObserver& observer, const TranslationOptions& options,
                                            std::size_t context) {
+#ifdef HDTRANS_POC08_HOOKS
+    if (options.hooks != nullptr && options.hookRun == nullptr) {
+        hooks::Run run;
+        run.hooks = options.hooks;
+        if (run.hooks->beginDocument) run.doc = run.hooks->beginDocument(run.hooks->context, lines);
+        TranslationOptions hooked = options;
+        hooked.hookRun = &run;
+        std::vector<std::string> out = TranslateDocument(snap, generated, lines, observer, hooked, context);
+        if (run.hooks->endDocument) run.hooks->endDocument(run.hooks->context, run.doc);
+        return out;
+    }
+#endif
     context = std::min(context, lines.size());
     // The filter log of the lines translated: the context lines are read only.
     const auto logged = [&](std::size_t i) { return i >= context && !lines[i].empty() && lines[i] != "\r"; };

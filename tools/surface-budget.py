@@ -296,9 +296,16 @@ def main(argv):
     if argv == ["--self-test"]:
         return self_test()
     tree = "src/core"
-    if len(argv) >= 2 and argv[-2] == "--tree":
-        tree = argv[-1]
-        argv = argv[:-2]
+    if "--tree" in argv:
+        i = argv.index("--tree")
+        if i + 1 >= len(argv):
+            print(__doc__.strip(), file=sys.stderr)
+            return 2
+        tree = argv[i + 1]
+        argv = argv[:i] + argv[i + 2:]
+        if not (ROOT / tree).is_dir():
+            print(f"surface-budget: no directory {tree}", file=sys.stderr)
+            return 2
     if argv in ([], ["--report"]):
         return report(ROOT, tree)
     print(__doc__.strip(), file=sys.stderr)

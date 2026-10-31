@@ -1,0 +1,23 @@
+#! levels
+# Speech level of an utterance from its cue key (R, decision order step 1 and 4 of DESIGN.md §4.4).
+# The share column is the share of dev game dialogue lines with this key whose human translation has the
+# level (5 works, scenes outside the held-out set; 76,553 lines), so a row can be re-derived and audited.
+#
+# Columns
+#   key     the first cue key that holds, in this order: narr (a quote inside a narration line), empty (no
+#           word), set, keigo-pend, pend, keigo, archaic, polite-any, stiff, casual, bare
+#   level   haera hae haeyo hapsyo
+#   keep    yes: when the input already has a level (0.7.x's own ending, the bridge), keep it instead
+#   profile yes: when the speaker's scoped profile is polite (share of polite lines > threshold), use haeyo
+key	level	profile	keep	share	note
+narr	haera	no	no	81	「…」と言った: the line ends in narration
+empty	hae	yes	no	-	……, ！？
+set	hapsyo	no	no	66	失礼します → 실례하겠습니다
+keigo-pend	hapsyo	no	no	62	いらっしゃいます → 계십니다
+pend	haeyo	no	no	80	です/ます at the end
+keigo	haeyo	yes	no	44	keigo without a polite end
+archaic	hae	no	yes	84	old speech: games use 해 (84%), period drama keeps 0.7.x's plain -다/-라 (いかぬ → 않는다, 来い → 와라); keep the input's level
+polite-any	haeyo	yes	no	65	です/ます inside the line, plain end
+stiff	hae	no	yes	79	である, 諸君: keep the input's level
+casual	hae	no	no	92	plain endings and sentence-final particles
+bare	hae	yes	no	83	no cue (nouns, interjections)

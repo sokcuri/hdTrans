@@ -11,7 +11,7 @@ struct LineReport {
     std::vector<Flag> flags;          // line.flags plus canary flags G did not write
     uint32_t outBytes = 0;            // non-space bytes of out
     uint32_t tracedBytes = 0;         // of those, inside a span whose node resolves to a decision
-    uint32_t evidence[9] = {};        // decisions per Ev
+    uint32_t evidence[9] = {};        // decisions per Ev (Count(F::ev) entries)
     uint32_t multi = 0;               // decisions with more than one candidate
     uint32_t multiContrib = 0;        // of those, with contributions (G11)
     uint32_t stU = 0;                 // T decisions on a lexicon row with st=u

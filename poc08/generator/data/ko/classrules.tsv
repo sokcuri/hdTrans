@@ -1,0 +1,24 @@
+#! classrules
+# The conjugation class of a lemma that stems.tsv does not list. The first matching row wins.
+# stems.tsv is consulted first: a whole-lemma row, then the longest lemma suffix it lists
+# (알아듣다 takes the class of 듣다).
+#
+# Columns
+#   match   lemma=X: the lemma is X | suffix=X: the lemma ends in X | final=J: the stem's last
+#           syllable has the final J (0 = none) | vowel=J: the stem's last vowel is J | syl=X: the
+#           stem's last syllable is X
+#   pos     V | A | X | * (the pos of the lemma)
+#   class   the conjugation class
+match	pos	class	note
+lemma=이다	*	COP	copula
+suffix=이다	A	COP	-적이다, 학생이다: a noun with the copula
+lemma=아니다	*	NC	아니다 (pos N)
+suffix=있다	*	EXIST	맛있다, 재미있다
+suffix=없다	*	EXIST	상관없다, 재미없다
+suffix=하다	*	HA	공부하다, 조용하다
+final=ㄹ	*	L	살다, 만들다, 길다
+syl=르	*	REU	모르다, 부르다, 빠르다 (따르다, 치르다, 들르다 are EU in stems.tsv)
+vowel=ㅡ	*	EU	쓰다, 크다, 바쁘다 (stem without a final)
+final=ㅂ	A	B	덥다, 고맙다, 아름답다 (좁다, 수줍다 are REG in stems.tsv)
+final=ㅎ	A	H	파랗다, 그렇다 (좋다 is REG in stems.tsv)
+-	*	REG	everything else (ㄷ ㅅ ㅂ verbs are regular unless stems.tsv lists them)

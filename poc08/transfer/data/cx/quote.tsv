@@ -1,0 +1,31 @@
+#! cx
+# Quotation frames: と言う, と思う, って, という, なんて, として, とか.
+id	match	when	set	ko	pol	prio	spec	note
+quote.to.iu	{X} と @speech	-	-	{V ctype=quote}	keep	0	SPC-12	行くと言った → 간다고 했다
+quote.to.iu	「 ... 」 と @speech	-	-	P:quot	keep	0	SPC-12	「行く」と言った → "간다"라고 했다
+quote.to.omou	{X} と @thought	-	-	{V ctype=quote}	keep	0	XFR-60	無理だと思う → 무리라고 생각한다
+quote.to.omou.seem	{X} と 思う @fin	host.tense=nonpast inq=+	-	{V ctype=adn} N:것[dep] V:같다^	keep	1	XFR-60	無理だと思う → 무리인 것 같다
+quote.ka.to.omou	{X} か と 思う	host.tense=past	-	{V ctype=adn} N:줄[dep] V:알다^	keep	2	GRM-24	死ぬかと思った → 죽는 줄 알았다
+quote.tte.quote	{X} って/p_adv	-	-	{V ctype=quote}	keep	0	SPC-12	行くって言ってた → 간다고 했어
+quote.tte.final	{X} って/p_adv @fin	-	-	{V ctype=final,fin=hearsay}	keep	1	SPC-12	行くって → 간대
+quote.tte.final	{X} ってば|ったら/p_final @fin	-	-	{V ctype=final,fin=insist}	keep	1	SPC-12	違うってば → 아니라니까
+quote.tte.topic	{N} って/p_adv	next.pos!=sym main.lemma!=言う|話す|聞く|思う|叫ぶ	-	{N} P:top	keep	1	GRM-22	恋って何 → 사랑이란 뭐야
+quote.toiu.n	{X} と 言う {N}	V.link!=final	-	{V ctype=quote,adn=1}	keep	0	XFR-61	田中という人 → 다나카라는 사람
+quote.toiu.n	{X} と 言う @nom.no|物|事	-	-	{V ctype=quote,adn=1}	keep	0	XFR-61	来るということ → 온다는 것
+quote.toiu.noha	{X} と 言う @nom.no は	-	-	{V ctype=quote,adn=1} N:것[dep] P:top	keep	1	XFR-61	愛というのは → 사랑이라는 것은
+quote.toiu.noha	{N} と は/p_topic	next.pos!=sym	-	{N} P:이란	keep	0	XFR-61	愛とは → 사랑이란
+quote.nante	{N} なんて|なんか	-	-	{N} V:같다[ctype=adn] N:것[dep]	keep	0	LEX-8	幽霊なんていない → 유령 같은 건 없다
+quote.nante.excl	{V} なんて/p_adv @fin	-	-	{V ctype=final,fin=dismay}	keep	1	XFR-62	負けるなんて → 지다니
+quote.nante.excl	{X} なんて/p_adv	V.pos!=n|pn	-	{V ctype=final,fin=dismay}	keep	0	XFR-62	あんなことを言うなんて信じられない → 그런 말을 하다니 믿을 수 없다
+quote.to.shite	{N} と 為る て/p_conj	-	-	{N} P:로서	keep	0	XFR-63	教師として → 교사로서
+quote.to.shite	{N} と 為る て/p_conj は|も	-	-	{N} P:로서	keep	0	XFR-63	教師としては → 교사로서는
+quote.to.ka	{X} とか	-	-	{V ctype=quote,fin=list}	keep	0	XFR-64	本とか → 책 같은 거
+quote.to.ka	{X} と か	-	-	{V ctype=quote,fin=list}	keep	0	XFR-64	本とか読む → 책 같은 걸 읽는다
+quote.to.iu	{X} と	main.@speech=+	-	{V ctype=quote}	keep	-1	SPC-12	行くと小さく言った → 간다고 작게 말했다
+quote.to.omou	{X} と	main.@thought=+	-	{V ctype=quote}	keep	-1	XFR-60	無理だと誰もが思った → 무리라고 모두가 생각했다
+quote.toiu.n	[{X}] と 言う {N}	-	-	{V ctype=quote,adn=1}	keep	-1	XFR-61	嫌いだよという方 → 싫다는 분
+quote.tte.quote	[{X}] って/p_adv	next.pos!=sym	-	{V ctype=quote}	keep	-1	SPC-12	そんなことないよって → 그렇지 않다고
+quote.to.iu	[{X}] と @speech	-	-	{V ctype=quote}	keep	-1	SPC-12	何だよと言った → 뭐냐고 했다
+quote.to.omou	[{X}] と @thought	-	-	{V ctype=quote}	keep	-1	XFR-60	そうかなと思った → 그런가 하고 생각했다
+quote.to.omou	[{X}] と も|は @thought	-	-	{V ctype=quote}	keep	0	XFR-60	とも思ったが → 라고도 생각했지만
+quote.to.iu	[{X}] と も|は @speech	-	-	{V ctype=quote}	keep	0	SPC-12	とは言ったが → 라고는 했지만

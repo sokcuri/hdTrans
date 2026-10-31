@@ -1,0 +1,126 @@
+#! retro-words
+# Words that follow a predicate inside a 0.7.x ending row, and 0.7.x particle notations.
+#   type   dep (a dependent noun) | pred (a predicate lemma) | particle (surface or 0.7.x notation → kase or lex:form)
+type	word	value
+dep	것
+dep	거
+dep	수
+dep	줄
+dep	데
+dep	때
+dep	때문
+dep	뿐
+dep	만큼
+dep	대로
+dep	듯
+dep	척
+dep	체
+dep	채
+dep	적
+dep	바
+dep	리
+dep	지
+dep	터
+dep	김
+dep	중
+dep	뻔
+dep	모양
+dep	셈
+dep	법
+dep	편
+dep	참
+dep	따름
+pred	있다
+pred	없다
+pred	하다
+pred	되다
+pred	보다
+pred	주다
+pred	버리다
+pred	않다
+pred	못하다
+pred	싶다
+pred	같다
+pred	말다
+pred	가다
+pred	오다
+pred	두다
+pred	놓다
+pred	내다
+pred	계시다
+pred	드리다
+pred	지다
+pred	대다
+pred	보이다
+pred	척하다
+pred	듯하다
+pred	뻔하다
+pred	모르다
+pred	몰라
+particle	(이)가	subj
+particle	(은)는	top
+particle	(을)를	obj
+particle	의	gen
+particle	(와)과	com
+particle	(으)로	instr
+particle	에서	loc
+particle	(이)라고	quot
+particle	로부터	lex:로부터
+particle	(이)나	lex:(이)나
+particle	(이)랑	lex:(이)랑
+particle	(이)라도	lex:(이)라도
+particle	(이)야	lex:(이)야
+particle	(이)든지	lex:(이)든지
+particle	(이)든	lex:(이)든
+particle	(이)여	lex:(이)여
+particle	(아)야	voc
+particle	(이)라는	lex:(이)라는
+particle	(이)란	lex:(이)란
+particle	(이)며	lex:(이)며
+particle	(으)로서	lex:(으)로서
+particle	(으)로써	lex:(으)로써
+particle	(으)로는	lex:(으)로는
+particle	(으)로도	lex:(으)로도
+particle	가	subj
+particle	이	subj
+particle	는	top
+particle	은	top
+particle	를	obj
+particle	을	obj
+particle	에	lex:에
+particle	로	instr
+particle	으로	instr
+particle	도	lex:도
+particle	만	lex:만
+particle	까지	lex:까지
+particle	부터	lex:부터
+particle	처럼	lex:처럼
+particle	보다	lex:보다
+particle	이나	lex:(이)나
+particle	나	lex:(이)나
+particle	이라도	lex:(이)라도
+particle	라도	lex:(이)라도
+particle	에는	lex:에는
+particle	에도	lex:에도
+particle	에서는	lex:에서는
+particle	으로는	lex:(으)로는
+particle	로는	lex:(으)로는
+dep	동안
+pred	아니다
+particle	뿐	lex:뿐
+particle	만이	lex:만이
+particle	만은	lex:만은
+particle	마저	lex:마저
+particle	조차	lex:조차
+particle	이라든가	lex:(이)라든가
+jima	마	hae
+jima	마라	haera
+jima	마요	haeyo
+jima	마세요	haeyo
+jima	마십시오	hapsyo
+fused	건	top
+fused	걸	obj
+fused	게	subj
+fused	겁	cop
+pred	어떻다
+pred	나다

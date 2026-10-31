@@ -72,7 +72,7 @@ void StageA(const AnalyzerData&, const Config&, Doc& doc, Line& line, const std:
         t.src = {line.map[begin], line.map[i]};
         t.surf = t.lemma = doc.I(s.substr(begin, i - begin));
         t.pos = PosOf(c, digits && c == kAlnum);
-        t.flags = tokflag::Fallback | tokflag::Unknown | (spaceBefore ? tokflag::SpaceBefore : 0);
+        t.flags = static_cast<uint16_t>(tokflag::Fallback | tokflag::Unknown | (spaceBefore ? tokflag::SpaceBefore : 0u));
         spaceBefore = false;
         line.toks.push_back(t);
         Flag f;

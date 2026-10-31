@@ -1,0 +1,95 @@
+#! cx
+# Modality and sentence-final constructions: のだ, わけ, はず, だろう, か, じゃない, sentence-final particles …
+id	match	when	set	ko	pol	prio	spec	note
+mod.noda.q	{X} @nom.no [@cop] @q	-	-	{V ctype=final,mood=q,fin=expl}	keep	1	XFR-20	何してるんですか → 뭐 하는 거예요?
+mod.noda.q	{X} @nom.no @fin	host.force=q	-	{V ctype=final,mood=q,fin=expl}	keep	0	XFR-20	どこ行くの? → 어디 가는 거야?
+mod.noda.narr	{X} @nom.no @cop @fin	inq=-	-	{V ctype=adn} N:것[dep] V:이다[cop]^	keep	0	GRM-31	彼は知っていたのだ → 그는 알고 있었던 것이다
+mod.noda.expl	{X} @nom.no @cop @fin	inq=+	-	{V fin=expl}	keep	0	XFR-20	行くんだ → 가는 거야 / 간다
+mod.noda.expl	{X} @nom.no @cop @fin	-	-	{V fin=expl}	keep	-1	XFR-20	(a quote-less line: dialogue reading)
+mod.noda.ndesu.ga	{X} @nom.no @cop が|けれど|けど/p_conj	-	-	{V ctype=conn,rel=bg}	keep	2	XFR-20	聞きたいんですが → 묻고 싶은데요
+mod.noda.excl	{X} @nom.no だ/aux な/p_final	-	-	{V ctype=final,fin=excl}	keep	2	GRM-20	そうだったんだな → 그랬구나
+mod.wake.da	{X} 訳 @cop	-	-	{V ctype=adn} N:셈[dep] V:이다^	keep	0	XFR-21	だから遅れたわけだ → 그래서 늦은 셈이다
+mod.wake.ganai	[{X}] 訳 [が|は] @neg	-	-	{V ctype=adn,adn=fut} N:리[dep] P:subj V:없다^	absorb	1	XFR-21	知るわけがない → 알 리가 없다
+mod.wake.dewanai	{X} 訳 @de.cop|だ [は] @neg	-	-	{V ctype=adn} N:것[dep] P:top V:아니다^	absorb	1	XFR-21	嫌いなわけじゃない → 싫은 건 아니다
+mod.wake.niwa.ikanai	{V:pos} 訳 に は 行く @neg	-	-	{V ctype=adn,adn=fut} N:수[dep] P:는 V:없다^	absorb	2	XFR-21	負けるわけにはいかない → 질 수는 없다
+mod.wake.niwa.ikanai	{V:neg} 訳 に は 行く @neg	-	-	{V ctype=adn,adn=fut,neg=ji-anh} N:수[dep] V:없다^	absorb	3	XFR-21	行かないわけにはいかない → 가지 않을 수 없다
+mod.hazu.da	{X} 筈 @cop	-	-	{V ctype=adn,adn=fut} N:것[dep] V:이다^	keep	0	XFR-22	来るはずだ → 올 거다
+mod.hazu.ganai	[{X}] 筈 [が|は] @neg	-	-	{V ctype=adn,adn=fut} N:리[dep] P:subj V:없다^	absorb	1	XFR-22	そんなはずがない → 그럴 리가 없다
+mod.hazu.datta	{X} 筈 だ/aux @past	-	-	{V ctype=adn,adn=fut} N:터[dep] V:이다[tense=past]^	keep	1	XFR-22	来るはずだった → 올 터였다
+mod.hazu.datta	{X} 筈 @nom.no|な に/p_case	-	-	{V ctype=adn,adn=fut} N:텐데[dep]	keep	1	XFR-22	来るはずなのに → 올 텐데
+mod.darou.conj	{X} @darou	-	-	{V mod=conj}	keep	0	XFR-23	明日は晴れるだろう → 내일은 맑을 것이다
+mod.darou.confirm	[{X}] [@nom.no] @darou ？|?|ね	-	-	{V ctype=final,fin=confirm}	keep	1	XFR-23	言っただろう? → 말했지?
+mod.darou.confirm	{V:ta} @darou @fin	inq=+	-	{V ctype=final,fin=reproach}	keep	1	XFR-23	言っただろう → 말했잖아
+mod.darou.q	{X} [@nom.no] @darou か	-	-	{V ctype=final,mood=q,fin=wonder}	keep	2	XFR-23	そんなことがあるだろうか → 그런 일이 있을까
+mod.darou.q	@wh ... {X} [@nom.no] @darou	-	-	{V ctype=final,mood=q,fin=wonder}	keep	2	XFR-23	どうしたんだろう → 어떻게 된 걸까
+mod.kamoshirenai	{X} か も 知れる @neg	-	-	{V ctype=adn,adn=fut} N:지도[dep] V:모르다^	absorb	2	XFR-24	雨かもしれない → 비일지도 모른다
+mod.kana	{X} かな|かしら/p_final	-	-	{V ctype=final,mood=q,fin=wonder}	keep	0	XFR-24	来るかな → 올까
+mod.kana	{X} か な|しら/p_final	-	-	{V ctype=final,mood=q,fin=wonder}	keep	0	XFR-24	来るかな → 올까
+mod.ka.final	{X} か|かい/p_final @end	-	-	{V ctype=final,mood=q}	keep	0	XFR-25	本当か → 정말이냐
+mod.ka.final	{X} か @end	-	-	{V ctype=final,mood=q}	keep	0	XFR-25	本当か → 정말이냐
+mod.ka.embedded	{X} か	final=- next.pos!=sym	-	{V ctype=quote,mood=q,emb=1}	keep	0	XFR-25	何をするか決める → 뭘 할지 정한다
+mod.ka.dou.ka	{X} か どう か	-	-	{V ctype=quote,mood=q,emb=1} V:어떻다[ctype=quote,mood=q,emb=1]	keep	2	XFR-25	来るかどうか → 올지 어떨지
+mod.janai.ka	{V:vadj} [@nom.no] だ/aux [は] @neg か|の/p_final	-	-	{V ctype=final,fin=reproach}	absorb	2	GRM-17	言ったじゃないか → 말했잖아
+mod.janai.ka	{V:vadj} @de.cop|だ [は] @neg @fin	host.force!=q	-	{V ctype=final,fin=reproach}	absorb	1	GRM-17	いいじゃない → 좋잖아
+mod.janai.ka	{X} だ/aux [は] @neg か|p_adv	-	-	{V ctype=final,fin=reproach}	absorb	1	GRM-17	いい天気じゃないか → 좋은 날씨잖아
+mod.janai.neg	{N} @de.cop|だ [は] @neg	-	-	{N} P:subj V:아니다^	keep	0	XFR-26	嘘じゃない → 거짓말이 아니다
+mod.njanai.prohib	{V:dict,verb} @nom.no だ/aux [は] @neg @fin	V.vol=+ inq=+ host.force!=q	-	{V ctype=final,mood=imp,neg=ji-ma}	absorb	2	XFR-26	触るんじゃない → 만지지 마
+mod.njanai.conj	{X} @nom.no だ/aux [は] @neg ？|?|か	-	-	{V ctype=adn} N:것[dep] V:아니다[mood=q]^	absorb	2	XFR-26	疲れてるんじゃない? → 피곤한 거 아냐?
+mod.yo.ne.confirm	{X} よ ね|な	-	-	{V ctype=final,fin=confirm}	keep	1	SPC-5	いいよね → 좋지
+mod.yo.ne.confirm	{X} ね|ねえ/p_final @end	host.force=decl	-	{V ctype=final,fin=confirm}	keep	0	SPC-5	そうですね → 그렇네요
+mod.yo.ne.assert	{X} よ|ぞ|ぜ/p_final	-	-	{V ctype=final,fin=assert}	keep	0	SPC-7	行くよ → 갈게 / 간다
+mod.yo.ne.excl	{X:adj} な|なあ/p_final @end	-	-	{V ctype=final,fin=excl}	keep	0	SPC-7	すごいな → 대단하네
+mod.yo.ne.excl	{V:ta} な|なあ/p_final @end	-	-	{V ctype=final,fin=excl}	keep	0	SPC-7	やったな → 해냈구나
+mod.yo.ne.prohib	{V:dict,verb,bare} な/p_final @end	V.vol=+	-	{V ctype=final,mood=imp,neg=ji-ma}	keep	1	GRM-43	来るな → 오지 마
+mod.yo.ne.fem	{X} わ|わよ/p_final	-	-	{V ctype=final,fin=assert}	keep	0	SPC-17	行くわ → 갈게
+mod.souda.hearsay	{X} そう伝聞 @cop	-	-	{V ctype=quote} V:하다[aux]^	keep	0	XFR-27	雨が降るそうだ → 비가 온다고 한다
+mod.souda.look	{A} そう/形状詞-助動詞語幹	-	-	{V ctype=conn,rel=tight} V:보이다[aux]^	keep	0	XFR-27	美味しそう → 맛있어 보여
+mod.souda.look	{V:renyou} そう/形状詞-助動詞語幹	-	-	{V ctype=adn,adn=fut} N:것[dep] V:같다^	keep	0	XFR-27	雨が降りそうだ → 비가 올 것 같다
+mod.souda.look	{X:noun} そう/形状詞-助動詞語幹	-	-	{V ctype=conn,rel=tight} V:보이다[aux]^	keep	0	XFR-27	元気そう → 건강해 보여
+mod.souda.look	@neg さ そう/形状詞-助動詞語幹	-	-	{V ctype=adn,neg=an} N:것[dep] V:같다^	keep	1	XFR-27	知らなさそう → 모르는 것 같다
+mod.youda	{X} 様 @cop	-	-	{V ctype=adn} N:것[dep] V:같다^	keep	0	XFR-28	誰もいないようだ → 아무도 없는 것 같다
+mod.youda	{X} みたい @cop	-	-	{V ctype=adn} N:것[dep] V:같다^	keep	0	XFR-28	誰もいないみたい → 아무도 없는 것 같다
+mod.mitai.like	{N} みたい な|だ/aux	next.pos=n|pn|pref	-	{N} V:같다[ctype=adn]	keep	1	XFR-28	夢みたいな話 → 꿈같은 이야기
+mod.mitai.like	{N} みたい @ni.cop	-	-	{N} P:처럼	keep	1	XFR-28	子供みたいに泣く → 아이처럼 운다
+mod.mono.da	{V:ta} 物 @cop	-	-	{V ctype=conn,rel=habit} V:하다[aux,tense=past]^	keep	1	GRM-4	よく遊んだものだ → 자주 놀곤 했다
+mod.mono.ka	{X} 物 か|p_adv	-	-	{V ctype=final,mood=q,fin=rhet-neg}	keep	1	XFR-29	負けるもんか → 질까 보냐
+mod.mono.reason	{X} 物 @end	inq=+	-	{V ctype=final,fin=excuse}	keep	0	XFR-29	だって眠いもん → 졸린걸
+mod.mono.reason	{X} 物 @fin	inq=+	-	{V ctype=final,fin=excuse}	keep	-1	XFR-29	だって眠いもんね → 졸린걸
+mod.temoii	{V:te} も/p_topic 良い|いい|構う	-	-	{V ctype=conn,rel=even} V:되다^	keep	1	SPC-6	帰ってもいい → 돌아가도 돼
+mod.nakutemoii	{V:neg} て/p_conj も/p_topic 良い|いい|構う	-	-	{V ctype=conn,rel=even,neg=an} V:되다^	absorb	2	SPC-6	来なくてもいい → 안 와도 된다
+mod.tewaikenai	{V:te} は/p_topic 行ける|いける|駄目|ならない|成る	-	-	{V ctype=conn,rel=cond} Adv:안 V:되다^	absorb	1	XFR-30	触ってはいけない → 만지면 안 된다
+mod.tewaikenai	{V} て|ちゃ/p_conj 駄目|だめ	-	-	{V ctype=conn,rel=cond} Adv:안 V:되다^	absorb	1	XFR-30	触っちゃだめ → 만지면 안 돼
+mod.nakereba	{V:neg} ば/p_conj 成る|なる @neg	-	-	{V ctype=conn,rel=must} V:하다[aux]^	absorb	2	GRM-12	行かなければならない → 가야 한다
+mod.nakereba	{V} @nai.katei	-	-	{V ctype=conn,rel=must} V:하다[aux]^	absorb	1	GRM-12	行かなきゃ → 가야 해
+mod.nakereba	{V:neg} て|ちゃ/p_conj @fin	-	-	{V ctype=conn,rel=must} V:하다[aux]^	absorb	1	GRM-12	しなくちゃ → 해야 해
+mod.koto.wa.nai	{V:dict,pos} 事 は @neg	-	-	{V ctype=adn,adn=fut} N:필요[dep] P:는 V:없다^	absorb	1	XFR-31	謝ることはない → 사과할 필요는 없다
+mod.koto.wa.nai	{V:neg} 事 は @neg	-	-	{V ctype=adn,adn=fut,neg=ji-mot} N:것[dep] P:도 V:없다^	absorb	2	XFR-31	できないことはない → 못할 것도 없다
+mod.kotoka	{X} 事 か	-	-	{V ctype=final,fin=excl-q}	keep	1	XFR-32	どれほど待ったことか → 얼마나 기다렸는지
+mod.tehoshii	{V:te} 欲しい	-	-	{V ctype=conn,rel=tight} V:주다[aux,tense=past,ctype=conn,rel=cond] V:좋다^	keep	1	GRM-35	来てほしい → 와 줬으면 좋겠다
+mod.tai	{V} たい/aux	-	-	{V ctype=conn,rel=seq} V:싶다[aux]^	keep	0	XFR-33	帰りたい → 돌아가고 싶다
+mod.ou.to.suru	{V:vol} と 為る	-	-	{V ctype=conn,rel=intent} V:하다[aux]^	keep	1	XFR-34	逃げようとした → 도망치려고 했다
+mod.ou.to.omou	{V:vol} と 思う	-	-	{V ctype=conn,rel=intent} V:하다[aux]^	keep	1	XFR-34	行こうと思う → 가려고 한다
+mod.vol	{V:vol,verb} @fin	-	-	{V ctype=final,mood=prop}	keep	0	XFR-34	行こう → 가자
+mod.youda	{X} みたい @fin	-	-	{V ctype=adn} N:것[dep] V:같다^	keep	0	XFR-28	誰もいないみたい → 아무도 없는 것 같다
+mod.beki	{V:dict} べし/aux [@cop]	-	-	{V ctype=conn,rel=must} V:하다[aux]^	keep	0	XFR-35	謝るべきだ → 사과해야 한다
+mod.beki.neg	{V:dict} べし/aux @de.cop|だ [は] @neg	-	-	{V ctype=conn,rel=cond} Adv:안 V:되다^	absorb	1	XFR-35	言うべきではない → 말하면 안 된다
+mod.hougaii	{V} 方 が 良い|いい	-	-	{V ctype=adn} N:것[dep] P:subj V:좋다^	keep	0	XFR-36	休んだほうがいい → 쉬는 게 좋다
+mod.shikanai	{V:dict} しか @neg	-	-	{V ctype=adn,adn=fut} N:수밖에[dep] V:없다^	absorb	1	XFR-36	待つしかない → 기다릴 수밖에 없다
+mod.koto.ga.aru	{V:ta} 事 [が|は|も] 有る	-	-	{V ctype=adn,adn=past} N:적[dep] P:subj V:있다^	keep	1	XFR-37	見たことがある → 본 적이 있다
+mod.koto.ga.dekiru	{V:dict} 事 [が|は|も] 出来る	-	-	{V ctype=adn,adn=fut} N:수[dep] P:subj V:있다^	keep	1	XFR-37	話すことができる → 말할 수 있다
+mod.koto.ni.naru	{V} 事 に @naru	-	-	{V ctype=conn,rel=sothat} V:되다[aux]^	keep	1	XFR-37	行くことになった → 가게 되었다
+mod.koto.ni.suru	{V} 事 に @suru.v	-	-	{V ctype=nom,nom=gi} P:로 V:하다^	keep	1	XFR-37	やめることにした → 그만두기로 했다
+mod.koto.da	{V:dict} 事 @cop @fin	-	-	{V ctype=adn} N:것[dep] P:subj V:좋다^	keep	0	XFR-37	早く寝ることだ → 일찍 자는 게 좋다
+mod.tsumori	{V:dict} 積り @cop	-	-	{V ctype=adn,adn=fut} N:생각[dep] V:이다^	keep	0	XFR-38	行くつもりだ → 갈 생각이다
+mod.tsumori.past	{V:ta} 積り	-	-	{V ctype=adn,adn=past} N:셈[dep]	keep	0	XFR-38	言ったつもり → 말한 셈
+mod.tagaru	{V} たがる/aux	-	-	{V ctype=conn,rel=seq} V:싶어하다[aux]^	keep	0	XFR-33	会いたがる → 만나고 싶어한다
+mod.rashii.hearsay	{X} らしい/aux	-	-	{V ctype=quote} V:하다[aux]^	keep	0	XFR-27	結婚するらしい → 결혼한대
+mod.rashii.typical	{N} らしい/suf	-	-	{N} V:답다^	keep	0	XFR-27	男らしい → 남자답다
+mod.yo.ne.excl	[{X}] な|なあ|なぁ/p_final @end	-	-	{V ctype=final,fin=excl}	keep	-1	SPC-7	当たり前だな → 당연하지
+mod.yo.ne.assert	[{X}] さ|とも/p_final @end	-	-	{V ctype=final,fin=assert}	keep	-1	SPC-7	話したさ → 말했지
+mod.yo.ne.assert	[{X}] よ|ぞ|ぜ/p_final	-	-	{V ctype=final,fin=assert}	keep	-1	SPC-7	そうだぞ → 그렇다고
+mod.yo.ne.confirm	[{X}] よ ね|な/p_final	-	-	{V ctype=final,fin=confirm}	keep	0	SPC-5	作れないんだよなぁ → 못 만들거든
+mod.yo.ne.confirm	[{X}] ね|ねえ/p_final @end	-	-	{V ctype=final,fin=confirm}	keep	-1	SPC-5	そうですね → 그렇네요
+mod.janai.neg	@de.cop|だ [は] 有る @polite @neg	-	-	V:아니다^	absorb	1	XFR-26	宮殿にではありません → 궁전이 아닙니다
+mod.janai.neg	@de.cop|だ [は|すら|も] @neg	-	-	V:아니다^	keep	-1	XFR-26	問題なのはそこではない → 문제는 거기가 아니다
+mod.mono.reason	[{X}] もの|もん/p_final @fin	-	-	{V ctype=final,fin=excuse}	keep	0	XFR-29	厳しいもんね → 엄격하잖아

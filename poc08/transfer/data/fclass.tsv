@@ -1,0 +1,78 @@
+#! fclass
+# Function-word classes the matcher and the cx patterns name (@class). A token is in a class if one line
+# matches: pos (IR pos or *), ud prefix (UniDic POS, - = any), cform/ctype prefixes, and the lemma (* = any).
+# The C++ code names only the classes, never the words (surface-literal ratchet).
+class	pos	ud	cform	ctype	lemmas	note
+unit	p_conj	-	-	-	て	て inside a predicate unit (読んで|いる)
+unit	*	動詞-非自立可能	-	-	*	a non-independent verb after て or a continuative (ている, てもらう, 出す)
+unit	*	形容詞-非自立可能	-	-	*	ない after く or で, ほしい after て
+unit	suf	接尾辞-動詞的	-	-	*	がる, めく
+unit	suf	接尾辞-形容詞的	-	-	*	っぽい, やすい
+suru	*	動詞	-	-	為る|出来る|致す|為さる|頂く	a verbal noun's する
+neg	aux	-	-	-	ない|ぬ|ず|ん|ねえ|へん|ひん	negative auxiliaries (colloquial forms carry the lemma ない)
+neg	adj	形容詞-非自立可能	-	-	無い	ない after く, で, じゃ
+past	aux	-	-	-	た	past た (katei form = たら is excluded by the matcher)
+te	p_conj	-	-	-	て	て and で
+cop	aux	-	終止形	-	だ|です|である|や|じゃ	copula (not だろう, でしょう)
+cop	aux	-	連体形	-	だ|です|である|や|じゃ	copula
+cop	aux	-	連用形	-	だ|です|である|や|じゃ	copula (だっ, で, じゃ)
+polite	aux	-	-	-	ます|です	polite auxiliaries
+pass	aux	-	-	-	れる|られる	passive, potential, honorific, spontaneous
+caus	aux	-	-	-	せる|させる|す|さす	causative
+vol	aux	-	意志推量形	-	う|よう|だ|です|ます	volitional/conjectural form (行こう, だろう, ましょう)
+vol	*	動詞	意志推量形	-	*	a verb in its volitional form (行こう)
+darou	aux	-	意志推量形	-	だ|です	だろう, でしょう
+q	p_final	-	-	-	か|かい|かな|かしら|っけ	question particles
+q	p_adv	-	-	-	か	か after a predicate
+q	sym	-	-	-	？|?	question mark
+final	p_final	-	-	-	*	sentence-final particles (よ ね な わ ぞ ぜ さ の か かな かしら っけ)
+final	p_adv	-	-	-	か	か
+final	sym	-	-	-	！|!|？|?|…|‥|ー|～|〜|-|―|♪|☆|★|♡|♥	marks that may close a sentence before its end
+sentend	sym	-	-	-	。|！|？|!|?|」|』|…|‥|）|)|．|.|】|”|"|〉|》|―|─	sentence or quote end
+qopen	sym	-	-	-	「|『|“|（|(|【	opening quote or bracket
+qclose	sym	-	-	-	」|』|”|）|)|】	closing quote or bracket
+teiru	*	動詞-非自立可能	-	-	居る|いる	いる after て
+teiru	aux	-	-	-	てる	contracted ている (読んでる, 知ってる)
+tearu	*	動詞-非自立可能	-	-	有る|ある	ある after て
+teshimau	*	動詞-非自立可能	-	-	仕舞う|しまう	しまう after て
+teshimau	aux	-	-	-	ちゃう|ちまう|じゃう|ちゃ|ちゃん	contracted てしまう
+teoku	*	動詞-非自立可能	-	-	置く|おく	おく after て
+teoku	aux	-	-	-	とく|どく	contracted ておく
+teiku	*	動詞-非自立可能	-	-	行く|いく	いく after て
+tekuru	*	動詞-非自立可能	-	-	来る|くる	くる after て
+temiru	*	動詞-非自立可能	-	-	見る|みる	みる after て
+morau	*	動詞-非自立可能	-	-	貰う|もらう	もらう after て
+morau.pot	*	動詞-非自立可能	-	下一段	貰う|もらう	もらえる (potential of もらう)
+kureru	*	動詞-非自立可能	-	-	呉れる|くれる	くれる after て
+ageru	*	動詞-非自立可能	-	-	上げる|あげる|遣る|やる|差し上げる	あげる, やる after て
+itadaku	*	動詞-非自立可能	-	-	頂く|戴く|いただく	いただく after て
+kudasaru	*	動詞-非自立可能	-	-	下さる|くださる	くださる after て
+freq	*	-	-	-	毎日|毎朝|毎晩|毎週|毎年|毎回|毎度|いつも|何時も|普段|時々|偶に|よく|良く|常に|日頃|ずっと|未だ	frequency and duration adverbs (habit, continuing state)
+wh	*	-	-	-	何|誰|何処|何時|如何|どう|何故|どうして|何で|どんな|どれ|どちら|いくら|幾ら|幾つ|どの	question words
+speech	*	動詞	-	-	言う|話す|叫ぶ|呟く|囁く|告げる|答える|返す|尋ねる|聞く|問う|命じる|頼む|伝える|書く|怒鳴る|喚く|述べる|説明|申す|仰る|言い出す|繰り返す|笑う|頷く	verbs that take a quote
+thought	*	動詞	-	-	思う|考える|信じる|感じる|思い込む|疑う|知る|分かる|気付く|願う|祈る|期待|予想|想像|覚悟|決める	verbs that take a thought complement
+request	*	動詞	-	-	言う|頼む|命じる|伝える|注意|指示|命令|お願い|願う|祈る|求める|促す|勧める|言い聞かせる|申し付ける	verbs of requesting (ように 言う)
+naru	*	動詞	-	-	成る|なる	なる
+suru.v	*	動詞	-	-	為る|する	する
+tara	aux	-	仮定形	-	た	たら, だら
+de.cop	aux	-	連用形	-	だ	で of ので, では (copula continuative)
+ni.cop	aux	-	連用形-ニ	-	だ	に of ように, みたいに
+nai.katei	aux	-	仮定形	-	ない	なきゃ, なければ
+nom.no	p_case	助詞-準体助詞	-	-	の|ん	nominalizer の, ん
+cls.person.name	pn	名詞-固有名詞-人名	-	-	*	a person name is @person (until lexicon classes)
+cls.place.name	pn	名詞-固有名詞-地名	-	-	*	a place name is @place
+nara	aux	-	仮定形	-	だ	なら (copula conditional)
+neg.te	aux	-	終止形	-	ない	ない before で (ないで)
+neg.te	aux	-	連体形	-	ない	ない before で (ないで)
+neg.ku	aux	-	連用形	-	ない	なく before て (なくて)
+kureru.imp	*	動詞-非自立可能	連用形	-	呉れる|くれる	くれ as a request (待ってくれ)
+kureru.imp	*	動詞-非自立可能	命令形	-	呉れる|くれる|下さる|くださる	くれ, ください
+darou	*	動詞-非自立可能	意志推量形	-	有る	あろう of であろう
+hon.suffix.higher	suf	-	-	-	様|さま|殿|殿下|陛下|閣下|先生|氏|公|卿|猊下	honorific suffixes that make the noun a higher person
+hon.suffix	suf	-	-	-	さん|君|くん|ちゃん|たん|氏	name suffixes that make the noun a person
+dp.tame	n	-	-	-	為	ため (decision point of the ため decider)
+dp.youni	na	形状詞-助動詞語幹	-	-	様	よう before に (decision point of the ように decider)
+dp.tokoro	n	-	-	-	所	ところ before で (decision point of the ところで decider)
+dp.de	p_case	-	-	-	で	で after ところ
+dp.ni	p_case	-	-	-	に	に after ため
+hon.prefix	pref	-	-	-	御	お, ご before a verb (お〜になる)

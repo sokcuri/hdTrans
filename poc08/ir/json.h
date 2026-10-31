@@ -22,7 +22,7 @@ struct Json {
 bool ParseJson(std::string_view text, Json& out, std::string& err);
 // Appends text as a JSON string literal.
 void AppendJsonString(std::string& out, std::string_view text);
-// Appends a number in its shortest round-trip form.
+// Appends a number: integers exactly, others with 9 significant digits (a float round-trips).
 void AppendJsonNumber(std::string& out, double value);
 
 }  // namespace hd08

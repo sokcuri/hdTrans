@@ -57,6 +57,9 @@ struct Improvements {
 };
 
 // The switches the word stage reads.
+#ifdef HDTRANS_POC08_HOOKS
+inline namespace hooked {  // another layout in the hooked build (see TranslationOptions)
+#endif
 struct Settings {
     Improvements improvements;
     SessionSenses* sessionSenses = nullptr;
@@ -102,7 +105,16 @@ struct Settings {
     // The characters the loaded pre-filter writes before kana (filter::Filters::Written), sorted:
     // kana right after one is text the pre-filter wrote, not an unknown stem to read by sound.
     std::span<const char32_t> filterWritten;
+#ifdef HDTRANS_POC08_HOOKS
+    // The segmentation of the chunk (hooks::Hooks::fits); a word whose source bytes do not fit gives
+    // way to a shorter candidate that does. Null for none.
+    const void* hookChunk = nullptr;
+    bool (*hookFits)(const void* chunk, uint32_t begin, uint32_t end, char part) = nullptr;
+#endif
 };
+#ifdef HDTRANS_POC08_HOOKS
+}  // namespace hooked
+#endif
 
 // Called after every dictionary lookup with the token being processed (-1 before the
 // first), the query, the mode and the candidates after the filters.

@@ -1,0 +1,77 @@
+#! cases
+# Clause features after C and L. pred: the clause whose predicate text starts with it ($ = the last clause).
+# expect: features that must hold (k=v; modality+=x and jreg+=x test one bit; arg=role:lemma tests an argument).
+id	ja	pred	expect
+neg-plain	明日は学校に行かない。	$	pol=neg negFn=plain tense=nonpast link=final arg=topic:明日 arg=dat:学校
+neg-past	昨日は何も食べなかった。	$	pol=neg negFn=plain tense=past
+neg-polite	そんなことは知りません。	$	pol=neg polite=desu-masu
+neg-zu	彼は一言も話さずに帰った。	話さ	pol=neg link=zu
+neg-zu-main	彼は一言も話さずに帰った。	$	pol=pos tense=past
+neg-nu-adn	誰も来ぬ夜だった。	来ぬ	pol=neg link=adn
+neg-n	俺はそんなこと言わん。	$	pol=neg negFn=plain
+neg-nee	あいつは来ねえよ。	$	pol=neg jreg+=rough
+neg-noun	これは私のじゃない。	$	pol=neg negFn=plain
+neg-double	行かないわけではない。	$	pol=pos negFn=double
+neg-shika	水しか飲まなかった。	$	pol=neg tense=past
+neg-prohib-ikenai	ここで走ってはいけません。	$	pol=neg negFn=prohibitive polite=desu-masu
+neg-obligation	明日までに終わらせなければならない。	$	pol=pos negFn=obligation modality+=must voice=causative
+neg-teiru	まだ終わっていない。	$	pol=neg aspect=te-iru
+neg-potential	もう二度と会えない。	$	pol=neg negFn=potential-neg voice=potential
+neg-request	その本は読まないでください。	$	pol=neg negFn=prohibitive force=request
+neg-adj	怖くないよ。	$	pol=neg
+neg-na	あまり好きではない。	$	pol=neg
+neg-exist	一度も負けたことがない。	$	pol=neg
+pos-plain	明日は学校に行く。	$	pol=pos negFn=none tense=nonpast
+pos-teiru	そのことは知っています。	$	pol=pos aspect=te-iru polite=desu-masu
+pos-cop	これは私のだ。	$	pol=pos
+pos-yo	きっと来るよ。	$	pol=pos force=decl
+tense-past	彼は手紙を書いた。	$	tense=past aspect=none arg=topic:彼 arg=obj:手紙
+tense-prog	彼は手紙を書いている。	$	tense=nonpast aspect=te-iru
+tense-prog-past	彼は手紙を書いていた。	$	tense=past aspect=te-iru
+tense-shimau	もう全部食べてしまった。	$	tense=past aspect=te-shimau
+tense-adj-past	あの日は寒かった。	$	tense=past
+tense-desu-past	あの人は先生でした。	$	tense=past polite=desu-masu
+q-no	明日も来るの？	$	force=q
+q-desuka	これは誰の本ですか？	$	force=q polite=desu-masu
+q-mark	もう食べた？	$	force=q tense=past
+q-noka	本当にそれでいいのか？	$	force=q
+q-ndesuka	どこへ行くんですか。	$	force=q modality+=explanatory
+stmt-yo	明日も来るよ。	$	force=decl
+stmt-desu	これは私の本です。	$	force=decl polite=desu-masu
+voice-rare	先生に褒められた。	$	voice=rare tense=past arg=dat:先生
+voice-active	先生が褒めた。	$	voice=active arg=subj:先生
+bene-receive	友達に本を貸してもらった。	$	bene=receive tense=past link=final arg=dat:友達 arg=obj:本
+bene-give-out	友達に本を貸してあげた。	$	bene=give-out
+voice-causative	弟に部屋を掃除させた。	$	voice=causative arg=dat:弟
+voice-rare-pot	このキノコは食べられる。	$	voice=rare
+voice-rare-steal	財布を盗まれた。	$	voice=rare arg=obj:財布
+bene-give-in	母が弁当を作ってくれた。	$	bene=give-in arg=subj:母
+link-tara	雨が降ったら中止だ。	降っ	link=tara
+link-ba	急げば間に合う。	急げ	link=ba
+link-ba-yokatta	行けばよかった。	行け	link=ba
+link-noni	知っていれば教えたのに。	$	link=noni
+link-temo	食べたくても食べられない。	食べ	link=temo modality+=want
+prohib-na	「頼むから怒るなよ」	怒る	force=prohib pol=neg negFn=prohibitive
+prohib-nja	「なめた口をきいているんじゃない！」	$	negFn=prohibitive force=prohib
+rhet-janaika	ただのバカじゃないか。	$	negFn=rhetorical pol=pos force=q
+rhet-pred-janai	「だから言ったじゃない」	$	negFn=rhetorical pol=pos
+nja-question	雨が降るんじゃない？	$	negFn=rhetorical force=q
+archaic-vol	敵を討たんとする。	討た	negFn=archaic-vol pol=pos
+pot-neg-verb	近づけない。	$	negFn=potential-neg pol=neg
+kamo	雨かもしれない。	$	pol=pos modality+=conjecture
+may	行ってもいい。	$	modality+=may pol=pos
+want	水が飲みたい。	$	modality+=want
+quote-link	「行く」と言った。	行く	link=quote
+adn-link	昨日読んだ本は面白い。	読ん	link=adn tense=past arg=head:本
+tame-link	健康のために走る。	$	pol=pos
+tame-v	勝つために練習する。	勝つ	link=tame
+te-trailing-neg	「信じられなくて」	$	link=te pol=neg force=decl
+te-trailing-adj	「優しくて……」	$	link=te force=decl
+te-request	「待って！」	$	force=request link=final
+na-after-copula	「残念だなぁ……」	$	force=decl pol=pos
+obligation-chau	「行かなくちゃ」	$	negFn=obligation pol=pos
+node-link	疲れたので寝た。	疲れ	link=node
+to-cond	行かないと困る。	行か	link=to
+to-quote	彼は来ると言った。	来る	link=quote
+nominal-tame	元々は平民のため罵られる。	ため	link=tame
+particle-yotte	ナイフによって刺された。	$	voice=rare arg=dat:ナイフ

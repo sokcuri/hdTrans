@@ -1,6 +1,7 @@
 #include "ir_json.h"
 
 #include <cmath>
+#include <limits>
 #include <type_traits>
 
 namespace hd08 {
@@ -14,6 +15,7 @@ struct Writer {
     const Doc& doc;
     std::string& o;
     bool first = true;
+    bool all = false;  // write zero fields too (alternative tokens are read as deltas)
 
     void Key(const char* k) {
         if (!first) o += ',';
@@ -22,19 +24,19 @@ struct Writer {
         o += ':';
     }
     template <class I> void Int(const char* k, I& v, long long def = 0) {
-        if (static_cast<long long>(v) == def) return;
+        if (!all && static_cast<long long>(v) == def) return;
         Key(k);
         o += std::to_string(static_cast<long long>(v));
     }
     void Float(const char* k, float& v) {
-        if (v == 0) return;
+        if (!all && v == 0) return;
         Key(k);
         AppendJsonNumber(o, v);
     }
     void Bool(const char* k, bool& v) {
-        if (!v) return;
+        if (!all && !v) return;
         Key(k);
-        o += "true";
+        o += v ? "true" : "false";
     }
     void Char(const char* k, uint8_t& v) {
         if (!v) return;
@@ -42,7 +44,7 @@ struct Writer {
         AppendJsonString(o, std::string_view(reinterpret_cast<const char*>(&v), 1));
     }
     void Interned(const char* k, uint32_t& v) {
-        if (!v) return;
+        if (!all && !v) return;
         Key(k);
         AppendJsonString(o, doc.S(v));
     }
@@ -53,12 +55,12 @@ struct Writer {
     }
     template <class E> void Enum(const char* k, E& v, F f, bool always = false) {
         const auto u = static_cast<unsigned>(v);
-        if (!u && !always) return;
+        if (!u && !always && !all) return;
         Key(k);
         AppendJsonString(o, Name(f, u));
     }
     template <class B> void Bits(const char* k, B& v, F f) {
-        if (!v) return;
+        if (!all && !v) return;
         Key(k);
         o += '[';
         bool firstBit = true;
@@ -71,12 +73,12 @@ struct Writer {
         o += ']';
     }
     void SpanF(const char* k, Span& s, bool always = false) {
-        if (!always && s.begin == 0 && s.end == 0) return;
+        if (!always && !all && s.begin == 0 && s.end == 0) return;
         Key(k);
         o += '[' + std::to_string(s.begin) + ',' + std::to_string(s.end) + ']';
     }
     template <class I> void Table(const char* k, I& v, Strings Doc::*table) {
-        if (!v) return;
+        if (!all && !v) return;
         Key(k);
         AppendJsonString(o, (doc.*table).Str(v));
     }
@@ -90,9 +92,10 @@ struct Writer {
         }
         o += ']';
     }
-    template <class T> void Object(T& x) {
+    template <class T> void Object(T& x, bool everything = false) {
         o += '{';
         Writer sub{doc, o};
+        sub.all = everything;
         Fields(sub, x);
         o += '}';
     }
@@ -155,20 +158,36 @@ struct Reader {
     int pendingRel = -1;  // "ctype":"conn:<rel>"
 
     const Json* Find(const char* k) const { return obj.type == Json::Obj ? obj.Get(k) : nullptr; }
+    // A JSON number that is an integer within the range of I.
+    template <class I> bool ToInt(const char* k, const Json& j, I& out) {
+        if (j.type != Json::Num || !std::isfinite(j.n) || j.n != std::floor(j.n) ||
+            j.n < static_cast<double>(std::numeric_limits<I>::min()) ||
+            j.n > static_cast<double>(std::numeric_limits<I>::max())) {
+            Bad(k, "expected an integer in range");
+            return false;
+        }
+        out = static_cast<I>(j.n);
+        return true;
+    }
+    float ToFloat(const char* k, const Json& j) {
+        if (j.type != Json::Num || !std::isfinite(j.n)) {
+            Bad(k, "expected a finite number");
+            return 0;
+        }
+        return static_cast<float>(j.n);
+    }
     void Bad(const char* k, const char* why) {
         if (err.empty()) err = std::string(k) + ": " + why;
     }
     template <class I> void Int(const char* k, I& v, long long = 0) {
         const Json* j = Find(k);
         if (!j) return;
-        if (j->type != Json::Num) return Bad(k, "expected a number");
-        v = static_cast<I>(std::llround(j->n));
+        ToInt(k, *j, v);
     }
     void Float(const char* k, float& v) {
         const Json* j = Find(k);
         if (!j) return;
-        if (j->type != Json::Num) return Bad(k, "expected a number");
-        v = static_cast<float>(j->n);
+        v = ToFloat(k, *j);
     }
     void Bool(const char* k, bool& v) {
         const Json* j = Find(k);
@@ -198,7 +217,11 @@ struct Reader {
     }
     bool EnumValue(const char* k, const Json& j, F f, unsigned& u) {
         if (j.type == Json::Num) {
-            u = static_cast<unsigned>(j.n);
+            if (!ToInt(k, j, u)) return false;
+            if (u >= Count(f)) {
+                Bad(k, "value out of range");
+                return false;
+            }
             return true;
         }
         if (j.type == Json::Str) {
@@ -231,7 +254,10 @@ struct Reader {
         const Json* j = Find(k);
         if (!j) return;
         if (j->type == Json::Num) {
-            v = static_cast<B>(j->n);
+            uint64_t bits = 0;
+            if (!ToInt(k, *j, bits)) return;
+            if (bits >> Count(f)) return Bad(k, "unknown bit");
+            v = static_cast<B>(bits);
             return;
         }
         if (j->type != Json::Arr) return Bad(k, "expected an array of names");
@@ -247,18 +273,16 @@ struct Reader {
         if (!j) return;
         if (j->type != Json::Arr || j->a.size() != 2 || j->a[0].type != Json::Num || j->a[1].type != Json::Num)
             return Bad(k, "expected [begin,end]");
-        s.begin = static_cast<uint32_t>(j->a[0].n);
-        s.end = static_cast<uint32_t>(j->a[1].n);
+        if (!ToInt(k, j->a[0], s.begin) || !ToInt(k, j->a[1], s.end)) return;
+        if (s.end < s.begin) Bad(k, "span ends before it begins");
     }
     template <class I> void Table(const char* k, I& v, Strings Doc::*table) {
         const Json* j = Find(k);
         if (!j) return;
-        if (j->type == Json::Num) {
-            v = static_cast<I>(j->n);
-            return;
-        }
-        if (j->type != Json::Str) return Bad(k, "expected a string");
-        v = static_cast<I>((doc.*table).Intern(j->s));
+        if (j->type != Json::Str) return Bad(k, "expected a name");
+        const uint32_t id = (doc.*table).Intern(j->s);
+        if (id > std::numeric_limits<I>::max()) return Bad(k, "too many distinct names");
+        v = static_cast<I>(id);
     }
     template <class T> void Vec(const char* k, std::vector<T>& vec) {
         const Json* j = Find(k);
@@ -283,10 +307,10 @@ struct Reader {
         if (!j) return;
         v.clear();
         if (j->type == Json::Obj) {
-            for (const auto& [name, value] : j->o) v.emplace_back(doc.I(name), static_cast<float>(value.n));
+            for (const auto& [name, value] : j->o) v.emplace_back(doc.I(name), ToFloat(k, value));
         } else if (j->type == Json::Arr) {  // [[name, value], …]
             for (const Json& e : j->a)
-                if (e.type == Json::Arr && e.a.size() == 2) v.emplace_back(doc.I(e.a[0].s), static_cast<float>(e.a[1].n));
+                if (e.type == Json::Arr && e.a.size() == 2) v.emplace_back(doc.I(e.a[0].s), ToFloat(k, e.a[1]));
         } else {
             Bad(k, "expected an object of contributions");
         }
@@ -296,20 +320,31 @@ struct Reader {
         if (!j) return;
         if (j->type != Json::Arr) return Bad(k, "expected an array");
         v.clear();
-        for (const Json& e : j->a) v.push_back(static_cast<I>(e.n));
+        for (const Json& e : j->a) {
+            I x{};
+            if (!ToInt(k, e, x)) return;
+            v.push_back(x);
+        }
     }
     void Strs(const char* k, std::vector<uint32_t>& v) {
         const Json* j = Find(k);
         if (!j) return;
         if (j->type != Json::Arr) return Bad(k, "expected an array");
         v.clear();
-        for (const Json& e : j->a) v.push_back(doc.I(e.s));
+        for (const Json& e : j->a) {
+            if (e.type != Json::Str) return Bad(k, "expected strings");
+            v.push_back(doc.I(e.s));
+        }
     }
     template <class I, size_t N> void IntArr(const char* k, I (&arr)[N]) {
         const Json* j = Find(k);
         if (!j) return;
         if (j->type != Json::Arr) return Bad(k, "expected an array");
-        for (size_t i = 0; i < N; i++) arr[i] = i < j->a.size() ? static_cast<I>(j->a[i].n) : I{0};
+        if (j->a.size() > N) return Bad(k, "too many values");
+        for (size_t i = 0; i < N; i++) {
+            arr[i] = I{0};
+            if (i < j->a.size() && !ToInt(k, j->a[i], arr[i])) return;
+        }
     }
 };
 
@@ -407,6 +442,7 @@ template <class V> void Fields(V& v, Clause& x) {
     v.Int("lastBun", x.lastBun);
     v.Int("parent", x.parent, -1);
     v.Enum("link", x.link, F::link);
+    v.Enum("linkSub", x.linkSub, F::timesub);
     v.Enum("tense", x.tense, F::tense);
     v.Enum("aspect", x.aspect, F::jaspect);
     v.Enum("pol", x.pol, F::pol);
@@ -442,15 +478,25 @@ template <class V> void Fields(V& v, KNode& x) {
     v.Enum("ctype", x.ctype, F::ctype);
     v.Enum("rel", x.rel, F::rel);
     v.Enum("neg", x.neg, F::kneg);
-    bool aux = x.aux, dep = x.dep, passive = x.passive, causative = x.causative;
+    bool aux = x.aux, dep = x.dep, passive = x.passive, causative = x.causative, potential = x.potential,
+         spont = x.spont, glue = x.glue;
+    v.Bool("glue", glue);
+    x.glue = glue;
+    v.Enum("vpos", x.vpos, F::vpos);
+    v.Enum("modal", x.modal, F::modal);
+    v.Interned("eomi", x.eomi);
     v.Bool("aux", aux);
     v.Bool("dep", dep);
     v.Bool("passive", passive);
     v.Bool("causative", causative);
+    v.Bool("potential", potential);
+    v.Bool("spont", spont);
     x.aux = aux;
     x.dep = dep;
     x.passive = passive;
     x.causative = causative;
+    x.potential = potential;
+    x.spont = spont;
     v.Bits("ja", x.ja, F::jafact);
     v.Enum("kase", x.kase, F::kase);
     v.Enum("punct", x.punct, F::punct);
@@ -525,7 +571,7 @@ void WriteToks(Writer& w, const Line& line, const std::vector<Token>& toks) {
             for (uint32_t k = 0; k < tok.nAlt && tok.alt + k < line.alts.size(); k++) {
                 if (k) o += ',';
                 Token a = line.alts[tok.alt + k];
-                sub.Object(a);
+                sub.Object(a, true);
             }
             o += ']';
         }
@@ -642,6 +688,11 @@ bool ReadLine(const Json& record, Doc& doc, Line& line, std::string& err) {
     r.Bool("context", line.context);
     r.Text("src", line.src);
     r.Text("norm", line.norm);
+    if (!record.Get("norm")) line.norm = line.src;  // writers omit norm and map when norm equals src
+    if (line.map.empty() && !record.Get("map") && line.norm == line.src && !line.src.empty()) {
+        line.map.resize(line.src.size() + 1);
+        for (uint32_t i = 0; i <= line.src.size(); i++) line.map[i] = i;
+    }
     r.Ints("map", line.map);
     r.Vec("edits", line.edits);
     if (const Json* toks = record.Get("toks")) {
@@ -698,13 +749,14 @@ bool ReadJsonl(std::string_view text, std::vector<Doc>& docs, std::string& err) 
         }
         const Json* docKey = j.Get("doc");
         const std::string docId = docKey && docKey->type == Json::Str ? docKey->s : std::string();
-        if (docs.empty() || (docKey && docs.back().id != docId)) {
+        const bool isLine = j.Get("line") || j.Get("src") || j.Get("toks") || j.Get("kir") || j.Get("kir2") ||
+                            j.Get("case");
+        // A document record starts a new document unless the current one has no lines yet.
+        if (docs.empty() || (docKey && docs.back().id != docId) || (!isLine && !docs.back().lines.empty())) {
             docs.emplace_back();
             docs.back().id = docId;
         }
         Doc& doc = docs.back();
-        const bool isLine = j.Get("line") || j.Get("src") || j.Get("toks") || j.Get("kir") || j.Get("kir2") ||
-                            j.Get("case");
         if (!isLine) {
             if (!ReadDoc(j, doc, e)) {
                 err = "line " + std::to_string(lineNo) + ": " + e;
@@ -713,12 +765,15 @@ bool ReadJsonl(std::string_view text, std::vector<Doc>& docs, std::string& err) 
             continue;
         }
         Line line;
-        line.id = static_cast<uint32_t>(doc.lines.size() + 1);
         if (!ReadLine(j, doc, line, e)) {
             err = "line " + std::to_string(lineNo) + ": " + e;
             return false;
         }
-        if (line.norm.empty() && !line.src.empty() && !j.Get("norm")) line.norm = line.src;
+        if (!j.Get("line") && !line.context) {  // ids default to the position among non-context lines
+            uint32_t n = 1;
+            for (const Line& l : doc.lines) n += !l.context;
+            line.id = n;
+        }
         doc.lines.push_back(std::move(line));
     }
     return true;

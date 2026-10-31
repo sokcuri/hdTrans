@@ -1,0 +1,202 @@
+#! aux
+# Japanese function morphemes → clause features. match: UniDic lemma (a|b), * any, ~x lemma ending. surf: surface. ud, form, ctype: UniDic POS / cForm / cType prefixes.
+# after: conditions on the previous token (prev= lemma, prevud=, prevform=, prevrole=), any one holds. sets: features; role= names the morpheme for the clause folder.
+id	match	surf	ud	form	ctype	after	kind	sets	prov	note
+aux.form.mizen	*	*	動詞|形容詞|助動詞	未然形	*	*	form	-	own	before ない/ず/れる/せる
+aux.form.renyo	*	*	動詞|形容詞|助動詞	連用形	*	*	form	role=renyo	own	bare 連用形 at a clause end is the 中止 link
+aux.form.shushi	*	*	動詞|形容詞|助動詞	終止形	*	*	form	role=final	own
+aux.form.rentai	*	*	動詞|形容詞|助動詞	連体形	*	*	form	role=adn	own
+aux.form.katei	*	*	動詞|形容詞|助動詞	仮定形-一般	*	*	form	-	own	before ば
+aux.form.katei-fused	*	*	動詞|形容詞|助動詞	仮定形-融合	*	*	form	link=ba	own	書きゃ, なきゃ
+aux.form.meirei	*	*	動詞|形容詞|助動詞	命令形	*	*	form	force=imp	own
+aux.form.ishi	*	*	動詞|形容詞|助動詞	意志推量形	*	*	form	mod+=volitional;role=vol	own	行こう; だろう/でしょう rows set conjecture instead
+aux.form.gokan	*	*	形容詞	語幹	*	*	form	-	own	高そう, 高さ
+aux.form.izen	*	*	動詞|形容詞|助動詞	已然形	*	*	form	-	own	archaic ど/ども
+aux.pot-verb	~う|~く|~ぐ|~す|~つ|~ぬ|~ぶ|~む	*	動詞	*	下一段	*	voice	voice=potential;role=pot	own	下一段 inflection of a 五段 lemma: 書ける, 近づける
+aux.pot-verb.ru	~る	@stem+れ	動詞	未然形|連用形|終止形|連体形	下一段	*	voice	voice=potential;role=pot	own	走れる, 食べれる: the stem followed by れ
+aux.ta	た	*	助動詞	連用形|連体形|終止形|意志推量形	*	*	tense	tense=past	own	だろ/たろう: past + conjecture through the form row
+aux.ta.tara	た	*	助動詞	仮定形	*	*	link	link=tara;role=cond	own	書いたら
+aux.da	だ	*	助動詞	終止形|連体形	*	*	cop	role=cop	own
+aux.da.te	だ	*	助動詞	連用形-一般	*	*	cop	role=cop-te	own	で: copula te-form / である / でございます
+aux.da.ni	だ	*	助動詞	連用形-ニ	*	*	cop	role=cop-ni	own	ように, みたいに, 静かに
+aux.da.ja	だ	*	助動詞	連用形-融合	*	*	cop	role=cop-ja	own	じゃ (じゃない)
+aux.da.tta	だ	*	助動詞	連用形-促音便	*	*	cop	role=cop	own	だっ+た
+aux.da.daro	だ	*	助動詞	意志推量形	*	*	modal	mod+=conjecture;role=daro	own	だろう
+aux.da.nara	だ	*	助動詞	仮定形	*	*	link	link=nara;role=cond	own	なら(ば)
+aux.da.mizen	だ	*	助動詞	未然形	*	*	cop	role=cop	own	だろ
+aux.desu	です	*	助動詞	終止形|連体形|連用形	*	*	polite	polite=desu-masu;role=cop	own	っす sets jreg by the next row
+aux.desu.ssu	です	っす|す	助動詞	*	*	*	polite	polite=desu-masu;jreg+=ssu;role=cop	own	っす
+aux.desu.desho	です	*	助動詞	意志推量形|未然形	*	*	modal	polite=desu-masu;mod+=conjecture;role=daro	own	でしょう
+aux.masu	ます	*	助動詞	*	*	*	polite	polite=desu-masu	own	ませ+ん: neg by aux.zu
+aux.masu.mashou	ます	*	助動詞	意志推量形	*	*	modal	polite=desu-masu;mod+=volitional;role=vol	own	ましょう
+aux.masu.imp	ます	*	助動詞	命令形	*	*	polite	polite=desu-masu;force=request	own	いらっしゃいませ
+aux.nai	ない	*	助動詞	*	*	*	neg	pol=neg;role=neg	own
+aux.nai.rough	ない	ねえ|ねぇ|ねー|ねェ	助動詞	*	*	*	neg	pol=neg;jreg+=rough;role=neg	own
+aux.nai.adj	無い	*	形容詞-非自立可能	*	*	prevrole=cop-ja|prevrole=cop-te|prevrole=renyo|prev=は|prev=も|prevrole=wa|prev=で|prevrole=adj-ku	neg	pol=neg;role=neg	own	じゃない, ではない, 高くない
+aux.nai.adj-ku	無い	*	形容詞-非自立可能	*	*	prevud=形容詞|prevud=助動詞	neg	pol=neg;role=neg	own	高くない (prev 連用形)
+aux.zu	ず	*	助動詞	*	*	*	neg	pol=neg;role=neg	own	ず ぬ ん ざる ね
+aux.zu.n	ず|む	ん	助動詞|文語助動詞	*	*	*	neg	pol=neg;role=neg-n	own	ん: plain negative, or archaic volitional before と
+aux.zu.ni	ず	*	助動詞	連用形	*	*	neg	pol=neg;role=zu	own	ずに: link without (resolved with the next に)
+aux.mu	む	*	文語助動詞-ム	*	*	*	neg	pol=neg;role=neg-n	own	ん after 未然形: plain neg, or archaic volitional before と
+aux.mu.aux	む	*	助動詞	*	*	*	neg	pol=neg;role=neg-n	own
+aux.mai	まい	*	助動詞	*	*	*	neg	pol=neg;mod+=volitional;role=neg	own	行くまい
+aux.hen	へん	*	助動詞	*	*	*	neg	pol=neg;jreg+=rough;role=neg	own	dialect negative
+aux.nanda	なんだ	*	助動詞	*	*	*	neg	pol=neg;tense=past;role=neg	own	old past negative
+aux.reru	れる|られる	*	助動詞	*	*	*	voice	voice=rare;role=rare	own	T resolves passive/potential/honorific
+aux.seru	せる|させる	*	助動詞	*	*	*	voice	voice=causative;role=caus	own	causative; + られる → caus-pass
+aux.su.caus	す|さす	*	助動詞	*	*	*	voice	voice=causative;role=caus	own	spoken short causative
+aux.tai	たい	*	助動詞	*	*	*	modal	mod+=want	own
+aux.tagaru	たがる	*	助動詞	*	*	*	modal	mod+=want	own	third person
+aux.rashii	らしい	*	助動詞|接尾辞-形容詞的	*	*	*	modal	mod+=hearsay	own	らしい: hearsay/conjecture
+aux.sou.youtai	そう-様態	*	形状詞-助動詞語幹	*	*	*	modal	mod+=likeness;role=sou	own	looks like (高そう)
+aux.sou.denbun	そう-伝聞	*	名詞-助動詞語幹|形状詞-助動詞語幹	*	*	*	modal	mod+=hearsay	own	I hear
+aux.mitai	みたい	*	形状詞-助動詞語幹	*	*	*	modal	mod+=likeness;role=you	own
+aux.mitai.casual	みたい	みてえ|みてぇ	形状詞-助動詞語幹	*	*	*	modal	mod+=likeness;jreg+=casual-final;role=you	own
+aux.you	様	*	形状詞-助動詞語幹	*	*	*	modal	mod+=likeness;role=you	own	ようだ, ように (link with だ-ニ)
+aux.gotoshi	ごとし	*	助動詞	*	*	*	modal	mod+=likeness;jreg+=archaic	own
+aux.beshi	べし	*	助動詞	*	*	*	modal	mod+=must	own	べき, べく, べからず (+ず → prohib)
+aux.teru	てる	*	助動詞	*	*	*	aspect	aspect=te-iru	own	contracted ている/でる
+aux.toku	とく	*	助動詞	*	*	*	aspect	aspect=te-oku	own	contracted ておく
+aux.chau	ちゃう|ちまう	*	助動詞	*	*	*	aspect	aspect=te-shimau	own	contracted てしまう
+aux.yagaru	やがる	*	助動詞	*	*	*	jreg	jreg+=rough	own
+aux.tsu	つう	*	助動詞	*	*	*	quote	role=quote	own	って/っちゅう quoting
+aux.ja	じゃ	*	助動詞	*	*	*	cop	jreg+=old;role=cop	own	archaic copula
+aux.nari	なり-断定	*	助動詞	*	*	*	cop	jreg+=archaic;role=cop	own
+aux.ki	き|けり	*	助動詞	*	*	*	tense	tense=past;jreg+=archaic	own
+aux.ri	り|たり-完了	*	助動詞	*	*	*	tense	tense=past;jreg+=archaic	own
+aux.ran	らむ|けむ|べらなり	*	助動詞	*	*	*	modal	mod+=conjecture;jreg+=archaic	own
+aux.dosu	どす|やす|はる	*	助動詞	*	*	*	polite	polite=desu-masu	own	dialect polite
+aux.iru	居る	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-iru	own	ている, ておる (polite: おる humble by code)
+aux.aru	有る	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-aru	own	てある
+aux.aru.cop	有る	*	動詞-非自立可能	*	*	prevrole=cop-te|prev=は|prev=も|prevrole=adj-ku|prevrole=renyo	cop	role=cop	own	である, ではある, 高くはある
+aux.gozaru	御座る	*	動詞-非自立可能	*	*	*	polite	polite=gozaimasu;role=cop	own	でございます, ございます
+aux.shimau	仕舞う	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-shimau	own
+aux.oku	置く	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-oku	own
+aux.kuru	来る	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-kuru	own
+aux.iku	行く	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-iku	own
+aux.miru	見る	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-miru	own
+aux.morau	貰う	*	動詞-非自立可能	*	*	prevrole=te	bene	bene=receive	own
+aux.itadaku	頂く	*	動詞-非自立可能	*	*	prevrole=te	bene	bene=receive;polite=kenjo	own
+aux.kureru	呉れる	*	動詞-非自立可能	*	*	prevrole=te	bene	bene=give-in	own
+aux.kudasaru	下さる	*	動詞-非自立可能	*	*	prevrole=te	bene	bene=give-in;polite=sonkei;force=request	own	てください
+aux.ageru	上げる|差し上げる|遣る	*	動詞-非自立可能	*	*	prevrole=te	bene	bene=give-out	own	てあげる, てやる
+aux.hoshii	欲しい	*	形容詞-非自立可能	*	*	prevrole=te	modal	mod+=want	own	てほしい
+aux.choudai	頂戴	*	名詞-普通名詞-サ変可能	*	*	prevrole=te	force	force=request	own	てちょうだい
+aux.nasaru	為さる	*	動詞-非自立可能	命令形	*	*	force	force=imp;polite=sonkei	own	なさい
+aux.irassharu	いらっしゃる	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-iru;polite=sonkei	own
+aux.mairu	参る	*	動詞-非自立可能	*	*	prevrole=te	aspect	aspect=te-kuru;polite=kenjo	own
+aux.oide	出でる	*	動詞-一般	*	*	prev=御	force	force=request;polite=sonkei	own	ておいで
+aux.kudasaru.bare	下さる	*	動詞-非自立可能	命令形	*	prev=御|prevform=連用形	force	force=request;polite=sonkei	own	お待ちください
+aux.nai.exist	無い	*	形容詞	*	*	*	neg	pol=neg;role=neg	own	ない as the predicate (existence)
+aux.dekiru	出来る	*	動詞-非自立可能	*	*	prev=が|prev=は|prev=も	voice	voice=potential;role=pot	own	ことができる
+aux.dekiru.main	出来る	*	動詞-非自立可能	*	*	*	voice	voice=potential;role=pot	own	できる as the main verb
+aux.uru	得る	*	動詞-非自立可能	*	*	prevform=連用形|prev=を	voice	voice=potential;role=pot	own	ありうる, ざるを得ない
+aux.kaneru	兼ねる	*	接尾辞-動詞的|動詞-非自立可能	*	*	*	modal	mod+=cannot;role=kaneru	own	かねる (cannot), かねない (may)
+aux.shireru	知れる	*	動詞-一般	*	*	prev=も	modal	mod+=conjecture;role=absorb-neg	own	かもしれない: the following ない is part of the form
+aux.chigai	違い	*	名詞-普通名詞-一般	*	*	prev=に	modal	mod+=must;role=absorb-neg	own	に違いない
+aux.naru.eval	成る	*	動詞-非自立可能	*	*	prevrole=cond|prevrole=wa|prev=ば|prev=と|prevrole=te	modal	role=eval	own	ならない after a conditional or ては
+aux.ikeru.eval	行ける	*	動詞-非自立可能	*	*	prevrole=cond|prevrole=wa|prev=ば|prev=と|prevrole=te	modal	role=eval	own	いけない (lemma 行ける)
+aux.iku.eval	行く	*	動詞-非自立可能	*	*	prevrole=cond|prevrole=wa|prev=ば|prev=と|prevrole=te	modal	role=eval	own	いけない (UniDic lemma 行く)
+aux.dame.eval	駄目	*	名詞-普通名詞-形状詞可能|形状詞-一般	*	*	prevrole=cond|prevrole=wa|prev=ば|prev=と|prevrole=te	modal	role=eval-neg	own	てはだめ, なきゃだめ
+aux.ii.eval	良い|宜しい|構う	*	形容詞-非自立可能|形容詞-一般|動詞-一般	*	*	prevrole=wa|prev=も	modal	mod+=may;role=eval-ok	own	てもいい, てもかまわない
+aux.sumu	済む	*	動詞-一般	*	*	prevrole=zu-ni|prev=で	modal	role=sumu	own	ずに済む
+aux.irareru	居る	*	動詞-非自立可能	未然形	*	prev=は|prevrole=zu-ni	modal	role=irareru	own	ずにはいられない
+aux.naru.become	成る	*	動詞-非自立可能	*	*	prev=に|prevrole=cop-ni|prevrole=adj-ku	aux	role=naru	own	ようになる, 高くなる: change of state, the verb is the head
+aux.suru.light	為る|致す|為さる|遊ばす	*	動詞-非自立可能	*	*	prevud=名詞|prevud=接尾辞-名詞的|prevud=形状詞|prevrole=cop-ni|prevrole=adj-ku|prevrole=vol	light	role=light	own	勉強する, 静かにする, 高くする, 行こうとする
+aux.cp.yotte	因る	*	動詞	連用形	*	prev=に	case	kase=ni	own	によって: the agent of a passive, the means
+aux.cp.yoru	因る	*	動詞	連体形	*	prev=に	case	kase=no	own	による (adnominal)
+aux.cp.taishite	対する	*	動詞	連用形	*	prev=に	case	kase=ni	own	に対して
+aux.cp.tsuite	つく|付く|就く	*	動詞	連用形	*	prev=に	case	kase=ni	own	について
+aux.cp.oite	於く|置く	*	動詞	連用形	*	prev=に	case	kase=de	own	において
+aux.cp.toshite	為る	*	動詞	連用形	*	prev=と	case	kase=to	own	として
+aux.cp.mukete	向ける	*	動詞	連用形	*	prev=に	case	kase=ni	own	に向けて
+aux.p.ga	が	*	助詞-格助詞	*	*	*	case	kase=ga	own
+aux.p.wo	を	*	助詞-格助詞	*	*	*	case	kase=wo	own
+aux.p.ni	に	*	助詞-格助詞	*	*	*	case	kase=ni;role=ni	own	after ず: ずに (link zu)
+aux.p.de	で	*	助詞-格助詞	*	*	*	case	kase=de;role=de	own
+aux.p.to	と	*	助詞-格助詞	*	*	*	case	kase=to;role=to	own	after a predicate: quote (と言う) or と-condition by code
+aux.p.kara	から	*	助詞-格助詞	*	*	*	case	kase=kara	own
+aux.p.made	まで	*	助詞-格助詞|助詞-副助詞	*	*	*	case	kase=made	own
+aux.p.yori	より	*	助詞-格助詞	*	*	*	case	kase=yori	own
+aux.p.he	へ	*	助詞-格助詞	*	*	*	case	kase=he	own
+aux.p.no	の	*	助詞-格助詞	*	*	*	case	kase=no	own
+aux.p.tte	って|て	*	助詞-格助詞	*	*	*	quote	kase=quote;role=quote	own	spoken quote
+aux.p.nite	にて|して|をもって	*	助詞-格助詞	*	*	*	case	kase=de;jreg+=archaic	own
+aux.p.wa	は	*	助詞-係助詞	*	*	*	topic	kase=wa;role=wa	own
+aux.p.mo	も	*	助詞-係助詞	*	*	*	topic	kase=mo;role=mo	own
+aux.p.koso	こそ|ぞ|なむ|や|か	*	助詞-係助詞	*	*	*	topic	-	own	focus
+aux.p.shika	しか	*	助詞-副助詞	*	*	*	focus	role=shika	own	しか…ない: exclusive, the negation is kept
+aux.p.dake	だけ|ばかり|のみ|きり|ほど|くらい|ぐらい|など|なんて|なんか|なぞ|さえ|すら|まで|やら|ずつ|こそ|でも|だって|とか|どころ|ばっか	*	助詞-副助詞|助詞-係助詞	*	*	*	focus	-	own
+aux.p.ka.adv	か	*	助詞-副助詞	*	*	*	focus	role=ka	own	embedded question, かも, かどうか
+aux.p.tte.adv	って|ったら|たら|てば|ってば	*	助詞-副助詞	*	*	*	topic	kase=wa;role=quote	own	って as topic or quote
+aux.p.tari	たり|だり	*	助詞-副助詞	*	*	*	link	link=tari	own
+aux.p.ya	や|やら|に|と	*	助詞-副助詞|助詞-並立助詞	*	*	*	focus	-	own
+aux.c.te	て|で	*	助詞-接続助詞	*	*	*	link	link=te;role=te	own
+aux.c.cha	て|で	ちゃ|じゃ|ちゃあ|じゃあ	助詞-接続助詞	*	*	*	link	link=te;role=wa	own	ちゃ/じゃ = ては/では
+aux.c.ba	ば	*	助詞-接続助詞	*	*	*	link	link=ba;role=cond	own
+aux.c.to	と	*	助詞-接続助詞	*	*	*	link	link=to;role=cond	own
+aux.c.kara	から	*	助詞-接続助詞	*	*	*	link	link=kara	own
+aux.c.node	ので|んで	*	助詞-接続助詞	*	*	*	link	link=node	own
+aux.c.noni	のに	*	助詞-接続助詞	*	*	*	link	link=noni	own
+aux.c.ga	が|けれど|けど|けども|けれども|ものの|ところが|ども|ど|ものを	*	助詞-接続助詞	*	*	*	link	link=ga	own	contrast/concession
+aux.c.temo	ても|とも|たって|とて|ったって|だって	*	助詞-接続助詞	*	*	*	link	link=temo	own	concessive
+aux.c.shi	し	*	助詞-接続助詞	*	*	*	link	link=shi	own
+aux.c.nagara	ながら|つつ	*	助詞-接続助詞	*	*	*	link	link=nagara	own
+aux.c.tari	たり|だり	*	助詞-接続助詞	*	*	*	link	link=tari	own
+aux.c.ya	や|や否や|なり	*	助詞-接続助詞	*	*	*	link	link=te	own	sequence
+aux.c.de	で|んで	*	接続詞	*	*	*	link	link=te	own	spoken んで
+aux.n.no	の	*	助詞-準体助詞	*	*	*	nom	role=nomi	own	のだ: explanatory (by code with the copula)
+aux.f.ka	か	*	助詞-終助詞	*	*	*	final	force=q;role=q	own
+aux.f.kashira	かしら|かな|かね|っけ|け	*	助詞-終助詞	*	*	*	final	force=q;role=q	own	wondering, recall
+aux.f.no	の	*	助詞-終助詞	*	*	*	final	role=fin-no	own	statement or question by the mark
+aux.f.na	な	*	助詞-終助詞	*	*	prevverb=終止形	final	force=prohib;role=na-prohib	own	行くな; after a verb 終止形 only
+aux.f.na.excl	な|なあ|なぁ|のう|わい	*	助詞-終助詞	*	*	*	final	jreg+=casual-final	own
+aux.f.yo	よ|ね|ねえ|ねぇ|さ|ぞ|ぜ|わ|い|や|ってば|もん|もの|じゃん|ねん|で|がな|べ|ばい|たい|ちゃ|っしょ|ずら|け|のよ|かい|よね|わね|こと	*	助詞-終助詞	*	*	*	final	jreg+=casual-final	own
+aux.f.wa	わ	*	助詞-終助詞	*	*	prevrole=cop|prevud=助動詞	final	jreg+=desuwa	own	ですわ
+aux.f.jan	じゃん	*	助詞-終助詞	*	*	*	final	role=jan	own	rhetorical confirm
+aux.fn.koto	事	*	名詞-普通名詞-一般	*	*	*	fn	role=nomi	own	nominalizer こと
+aux.fn.mono	物|もの	*	名詞-普通名詞-一般|名詞-普通名詞-サ変可能|助詞-終助詞	*	*	*	fn	role=mono	own	ものだ, もん
+aux.fn.wake	訳	*	名詞-普通名詞-一般	*	*	*	fn	mod+=explanatory;role=wake	own	わけ
+aux.fn.hazu	筈	*	名詞-普通名詞-一般	*	*	*	fn	mod+=conjecture;role=hazu	own	はず
+aux.fn.tame	為	*	名詞-普通名詞-副詞可能	*	*	*	fn	link=tame	own	ため(に)
+aux.fn.tokoro	所	*	名詞-普通名詞-副詞可能|名詞-普通名詞-一般	*	*	*	fn	role=tokoro	own	ところ(だ/で/に)
+aux.fn.mama	侭	*	名詞-普通名詞-副詞可能	*	*	*	fn	link=time:mama	own	まま
+aux.fn.uchi	内|間|最中|中	*	名詞-普通名詞-副詞可能|接尾辞-名詞的-副詞可能	*	*	*	fn	link=time:uchi	own	うちに, 間に, 最中に
+aux.fn.toki	時|際|頃|折|途端|度|節|矢先|拍子|弾み|場合	*	名詞-普通名詞-副詞可能|名詞-普通名詞-一般|名詞-普通名詞-助数詞可能	*	*	*	fn	link=time:toki	own	とき, 際, たびに, 途端に
+aux.fn.mae	前|以前	*	名詞-普通名詞-副詞可能	*	*	*	fn	link=time:mae	own	前に
+aux.fn.ato	後|以後|以来|挙げ句|末|次第	*	名詞-普通名詞-副詞可能|名詞-普通名詞-一般	*	*	*	fn	link=time:ato	own	後で, 以来, 挙げ句, 次第
+aux.fn.rel	上|限り|序で|代わり|他|通り|程|分|一方	*	名詞-普通名詞-副詞可能|名詞-普通名詞-一般|名詞-普通名詞-助数詞可能	*	*	*	fn	-	own	relational formal nouns: no clause link
+aux.fn.tsumori	積り	*	名詞-普通名詞-一般	*	*	*	fn	mod+=want	own	つもり
+aux.fn.sei	所為|故|癖|甲斐|せい	*	名詞-普通名詞-一般|名詞-普通名詞-副詞可能	*	*	*	fn	link=kara	own	せい, ゆえ, くせに, かい
+aux.fn.hou	方	*	名詞-普通名詞-一般	*	*	prevform=連体形|prevform=終止形|prevud=助動詞	fn	role=hou	own	方がいい: advice by code
+aux.fn.you	様	*	名詞-普通名詞-一般	*	*	*	fn	mod+=likeness	own
+aux.fn.mitai	見たい	*	形状詞-一般	*	*	*	fn	mod+=likeness	own
+aux.fn.ka	か	*	助詞-副助詞	*	*	*	fn	role=ka	own
+aux.fn.dou	どう|如何	*	副詞	*	*	prev=か	fn	role=ka	own	かどうか
+aux.fn.nani	何	*	代名詞	*	*	prev=か|prev=と	fn	-	own	とかなんとか, かなにか
+aux.qverb	言う|思う|考える|叫ぶ|呟く|尋ねる|聞く|答える|告げる|話す|感じる|信じる|願う|書く|頼む|命じる|伝える|述べる|怒鳴る|囁く|返す|名乗る|呼ぶ|思える|決める|約束|祈る|疑う|主張|説明|報告|返事|断る|笑う|泣く|知る|分かる|聞こえる|見える|思い込む|言い出す|言い返す|申す|仰る|存じる|ぼやく|喚く|促す|答え|誓う|宣言|判断|記す	*	動詞|名詞-普通名詞-サ変可能	*	*	*	quote	role=say	own	verbs that take a quote with と
+aux.fn.iu	言う	*	動詞-一般	*	*	prev=と|prev=って|prevrole=quote	quote	role=say	own	という, っていう, とか言って
+aux.fn.omou	思う	*	動詞-一般	*	*	prev=と|prevrole=quote	quote	role=say	own	と思う
+aux.fn.yoshi	由	*	名詞-普通名詞-一般	*	*	*	fn	mod+=hearsay	own	との由: I hear
+aux.fn.tomo	共|同時|伴	*	名詞-普通名詞-一般	*	*	prev=と	fn	link=time:toki	own	とともに, と同時に
+aux.fn.sugu	直ぐ	*	副詞	*	*	prev=と|prev=たら|prevud=接尾辞	fn	link=time:toki	own	とすぐ(に)
+aux.fn.wari	割	*	名詞-普通名詞-助数詞可能	*	*	prevform=連体形|prevud=助動詞	fn	link=ga	own	わりに: for (concessive)
+aux.fn.baai	場合	*	名詞-普通名詞-副詞可能	*	*	*	fn	link=time:toki	own	場合: in case
+aux.fn.ina	否	*	名詞-普通名詞-一般	*	*	prev=か	fn	role=ka	own	か否か
+aux.fn.goran	御覧	*	名詞-普通名詞-一般	*	*	*	fn	aspect=te-miru;force=request	own	てごらん
+aux.fn.choudai.bare	頂戴	*	名詞-普通名詞-サ変可能	*	*	prevform=連用形	force	force=request	own	ちょうだい after a 連用形
+aux.f.zo.adv	ぞ	*	助詞-副助詞	*	*	prevud=助動詞	final	jreg+=casual-final	own	だぞ (tagged 副助詞)
+aux.fn.nani.mo	何	*	代名詞	*	*	prev=も	fn	-	own	もなにも
+aux.sfx.sa	さ|み	*	接尾辞-名詞的-一般	*	*	*	suffix	-	own	高さ
+aux.sfx.gachi	勝ち|っぽい|臭い|げ|らしい|放し|がる|めく|ぶる|っこい	*	接尾辞-形状詞的|接尾辞-形容詞的|接尾辞-動詞的|接尾辞-名詞的-一般	*	*	*	suffix	-	own
+aux.sfx.kata	方|等|達|共|ども|ら|ごと|毎|目|形|中|然	*	接尾辞-名詞的-一般|接尾辞-名詞的-副詞可能	*	*	*	suffix	-	own
+aux.sfx.sugiru	過ぎる|始める|出す|続ける|終わる|直す|合う|切る|込む|掛ける|得る|兼ねる|損なう|まくる|続く|付く	*	動詞-非自立可能|動詞-一般|接尾辞-動詞的	*	*	prevform=連用形	suffix	role=compound	own	compound verb second part; content stays with the first verb
+aux.pref.o	御	*	接頭辞	*	*	*	prefix	role=hon-prefix	own	お/ご: sonkei with になる/なさる, kenjo with する
+aux.punct.comma	、|，|,	*	補助記号-読点	*	*	*	punct	role=comma	own
+aux.punct.q	*	？|?|⁉|⁈|？！|！？|?!|!?	補助記号	*	*	*	punct	force=q;role=q	own	question mark
+aux.punct.excl	*	！|!|‼	補助記号	*	*	*	punct	role=excl	own
+aux.punct.end	。|．|…|‥	*	補助記号	*	*	*	punct	role=end	own
+aux.punct.close	」|』|）|)|】|〉|》|"	*	補助記号-括弧閉	*	*	*	punct	role=close	own
+aux.punct.open	「|『|（|(|【|〈|《	*	補助記号-括弧開	*	*	*	punct	role=open	own
+aux.punct.other	*	*	補助記号|記号|空白	*	*	*	punct	-	own	～ ー ・ and spaces
+aux.intj.filler	*	*	感動詞-フィラー	*	*	*	punct	-	own	え, あの: no feature

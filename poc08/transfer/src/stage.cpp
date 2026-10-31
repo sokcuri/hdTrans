@@ -1,0 +1,257 @@
+// Stage T entry points (ir/stages.h). The construction matcher runs on every line and records one
+// Decision per winning construction (rule cx:<id>, the facts it read, the runner-up and margin).
+// Until the sense chart and the lexicon (W3) are wired in, content tokens are still emitted as Raw
+// nodes with fallback evidence, as the driver stub did; the constructions' Korean node templates are
+// in the decisions' because facts (ko=…) and in hd8xfer's JSON output.
+#include <fstream>
+#include <sstream>
+
+#include "decide.h"
+#include "ir/file.h"
+#include "ir/stages.h"
+#include "transfer.h"
+
+namespace hd08 {
+
+// R1: how 0.7.x's own decision at a point is read as a decider class, from the facts the 0.7.x bridge
+// records on its lifted decisions (t075.voice=…, t075.ko=<target>|<ending>). Rows of
+// data/decide/base075.tsv, first match per family wins.
+struct BaseRow {
+  std::string family, source, pattern, cls;  // source: voice, marker, jlem (equal); ko, real (substring); * any
+};
+
+struct TransferData {
+  xfer::Table table;
+  xfer::DecideData deciders;
+  std::vector<BaseRow> base;
+};
+
+namespace {
+
+bool LoadBase(const std::string& path, std::vector<BaseRow>& out) {
+  std::string text;
+  if (!ReadWholeFile(path, text)) return false;
+  std::istringstream in(text);
+  std::string l;
+  while (std::getline(in, l)) {
+    if (!l.empty() && l.back() == '\r') l.pop_back();
+    if (l.empty() || l[0] == '#') continue;
+    std::istringstream s(l);
+    BaseRow r;
+    std::getline(s, r.family, '\t');
+    std::getline(s, r.source, '\t');
+    std::getline(s, r.pattern, '\t');
+    std::getline(s, r.cls, '\t');
+    if (!r.cls.empty()) out.push_back(r);
+  }
+  return !out.empty();
+}
+
+// The class base075.tsv reads from facts ("t075.<kind>=<value>").
+std::string ClassOf(const TransferData& t, const std::string& family, const std::vector<std::string_view>& facts,
+                    std::string_view jlem) {
+  std::vector<std::string_view> voices, kos, reals, markers;
+  for (const std::string_view s : facts) {
+    if (s.starts_with("t075.voice=")) voices.push_back(s.substr(11));
+    else if (s.starts_with("t075.ko=")) kos.push_back(s.substr(8));
+    else if (s.starts_with("t075.real=")) reals.push_back(s.substr(10));
+    else if (s.starts_with("t075.marker=")) markers.push_back(s.substr(12));
+  }
+  if (voices.empty() && kos.empty()) return "";
+  for (const BaseRow& r : t.base) {
+    if (r.family != family) continue;
+    if (r.source == "*") return r.cls;
+    if (r.source == "jlem") {
+      if (jlem == r.pattern) return r.cls;
+      continue;
+    }
+    if (r.source == "real") {
+      for (std::string_view k : reals)
+        if (k.find(r.pattern) != std::string_view::npos) return r.cls;
+    } else if (r.source == "marker") {
+      for (std::string_view k : markers)
+        if (k == r.pattern) return r.cls;
+    } else if (r.source == "voice") {
+      for (std::string_view v : voices)
+        if (v == r.pattern) return r.cls;
+    } else if (r.source == "ko") {
+      for (std::string_view k : kos)
+        if (r.pattern == "*" || k.find(r.pattern) != std::string_view::npos) return r.cls;
+    }
+  }
+  return "";
+}
+
+// 0.7.x's class at a point: the facts of the T decisions whose span overlaps the point's token.
+// jlem is the lemma of the token before the point (the verb of a voice point).
+std::string Base075(const TransferData& t, const Doc& doc, const Line& line, const std::string& family, Span at,
+                    std::string_view jlem) {
+  std::vector<std::string_view> facts;
+  for (const Decision& d : line.decisions) {
+    if (d.stage != 'T' || !Overlaps(d.src, at)) continue;
+    for (uint32_t f : d.because) facts.push_back(doc.S(f));
+  }
+  return ClassOf(t, family, facts, jlem);
+}
+
+// Writes a decider's class into the slots of the predicate nodes over the point; returns how many nodes
+// took it (0 when the class has no slot or no predicate node covers the point).
+int Apply(const std::string& family, const std::string& cls, Line& line, Span at) {
+  int changed = 0;
+  for (KNode& n : line.kir) {
+    if (!Overlaps(n.src, at) || n.kind != KK::V) continue;
+    const KNode before = n;
+    if (family == "voice") {
+      n.passive = cls == "PASSIVE";
+      n.potential = cls == "POTENTIAL";
+      n.spont = cls == "SPONTANEOUS";
+      if (cls == "HONORIFIC") n.ja |= jafact::sonkei;
+      else n.ja &= static_cast<uint16_t>(~jafact::sonkei);
+    } else if (family == "tame") {
+      if (cls == "PURPOSE") n.rel = rel::purpose;
+      else if (cls == "CAUSE") n.rel = rel::cause;
+    } else if (family == "youni") {
+      if (cls == "LIKE") n.rel = rel::like;
+      else if (cls == "PURPOSE") n.rel = rel::sothat;
+    } else if (family == "tokorode") {
+      if (cls == "CONCESSIVE") n.rel = rel::even_try;
+    }
+    changed += before.passive != n.passive || before.potential != n.potential || before.spont != n.spont ||
+               before.ja != n.ja || before.rel != n.rel;
+  }
+  return changed;
+}
+
+}  // namespace
+
+TransferData* LoadTransfer(const Config& cfg, std::string& err) {
+  auto* d = new TransferData;
+  xfer::LoadTable(cfg.data + "/transfer/data", d->table);
+  xfer::LoadDeciders(cfg.data + "/transfer/data", d->deciders);
+  if (!d->deciders.errors.empty()) {
+    err = "transfer: " + d->deciders.errors.front();
+    delete d;
+    return nullptr;
+  }
+  if (!LoadBase(cfg.data + "/transfer/data/decide/base075.tsv", d->base)) {
+    err = "transfer: cannot read the rows of " + cfg.data + "/transfer/data/decide/base075.tsv";
+    delete d;
+    return nullptr;
+  }
+  if (d->table.rows.empty()) {
+    err = "transfer: no construction rows under " + cfg.data + "/transfer/data/cx";
+    delete d;
+    return nullptr;
+  }
+  return d;
+}
+
+void FreeTransfer(TransferData* data) { delete data; }
+
+void StageT(const TransferData& t, const Config&, Doc& doc, Line& line) {
+  line.kir.clear();
+  xfer::LineIR view = xfer::MakeView(doc, line, t.table);
+  xfer::Result r = xfer::Transfer(t.table, view);
+  for (size_t i = 0; i < r.chosen.size(); ++i) {
+    const xfer::Match& m = r.chosen[i];
+    const xfer::Row& row = t.table.rows[m.row];
+    const xfer::Decision& x = r.decisions[i];
+    Decision d;
+    d.stage = 'T';
+    d.kind = x.kind == "default" ? Ev::Default : Ev::Cued;
+    d.rule = doc.I(x.rule);
+    d.src.begin = x.src.begin;
+    d.src.end = x.src.end;
+    d.score = static_cast<float>(x.score);
+    d.margin = static_cast<float>(x.margin);
+    d.nAlt = static_cast<uint8_t>(x.nAlt > 255 ? 255 : x.nAlt);
+    if (!x.runnerUp.empty()) d.runnerUp = doc.I(x.runnerUp);
+    for (const auto& b : x.because) d.because.push_back(doc.I(b));
+    d.because.push_back(doc.I("ko=" + row.ko));
+    if (row.pol != "keep") d.because.push_back(doc.I("pol=" + row.pol));
+    if (x.nAlt > 1) d.contrib.emplace_back(doc.I("specificity"), static_cast<float>(x.score));
+    line.Decide(std::move(d));
+  }
+  const uint32_t rule = doc.I("code:stub-transfer");
+  for (const Token& tok : line.toks) {
+    Decision d;
+    d.stage = 'T';
+    d.kind = Ev::Fallback;
+    d.rule = rule;
+    d.src = tok.src;
+    KNode n;
+    n.id = static_cast<uint32_t>(line.kir.size() + 1);
+    n.kind = KK::Raw;
+    n.lemma = doc.I(line.Src(tok.src));
+    n.src = tok.src;
+    n.decision = line.Decide(d);
+    line.kir.push_back(n);
+  }
+}
+
+// D: the deciders over the lifted kir (stages.h). One Decision per point: rule dec:<family>@<version>,
+// Cued when it overrode 0.7.x, Default when it kept it; runnerUp t075:<0.7.x class>.
+std::vector<PointDecision> DecidePoints(const TransferData& t, const Config&, Doc& doc, Line& line) {
+  std::vector<PointDecision> out;
+  if (t.deciders.byFamily.empty()) return out;
+  const xfer::LineIR view = xfer::MakeView(doc, line, t.table);
+  for (const xfer::DecisionPoint& p : xfer::FindPoints(t.table, view)) {
+    const auto dec = t.deciders.byFamily.find(p.family);
+    if (dec == t.deciders.byFamily.end()) continue;
+    const xfer::Tok& tok = view.toks[static_cast<size_t>(p.tok)];
+    const Span at{tok.src.begin, tok.src.end};
+    // A point no 0.7.x word of this line covers belongs to another sentence of it.
+    bool covered = false;
+    for (const Decision& x : line.decisions)
+      if (x.stage == 'T' && Overlaps(x.src, at) && !doc.S(x.rule).starts_with("dec:")) covered = true;
+    if (!covered) continue;
+    const std::string_view jlem = p.tok > 0 ? std::string_view(view.toks[static_cast<size_t>(p.tok - 1)].lemma) : "";
+    const std::string base = Base075(t, doc, line, p.family, at, jlem);
+    const xfer::DeciderResult r = xfer::Decide(dec->second, xfer::Features(t.table, view, p), base);
+    Decision d;
+    d.stage = 'T';
+    d.kind = r.overridden ? Ev::Cued : Ev::Default;
+    d.rule = doc.I("dec:" + dec->second.id);
+    d.src = at;
+    d.margin = r.margin;
+    d.score = r.pTop;
+    d.nAlt = static_cast<uint8_t>(std::min<size_t>(dec->second.classes.size(), 255));
+    d.runnerUp = doc.I("t075:" + (base.empty() ? std::string("NONE") : base));
+    d.because.push_back(doc.I("class=" + r.chosen));
+    d.because.push_back(doc.I("jlem=" + std::string(jlem)));
+    for (const xfer::Contribution& c : r.because) d.contrib.emplace_back(doc.I(c.feature), c.weight);
+    PointDecision pd;
+    pd.family = p.family;
+    pd.cls = r.chosen;
+    pd.base = base.empty() ? "NONE" : base;
+    pd.at = at;
+    pd.overridden = r.overridden;
+    pd.decision = line.Decide(std::move(d));
+    out.push_back(pd);
+  }
+  return out;
+}
+
+std::string ClassOfFacts(const TransferData& t, const std::string& family, const std::vector<std::string>& facts,
+                         std::string_view jlem) {
+  std::vector<std::string_view> views(facts.begin(), facts.end());
+  return ClassOf(t, family, views, jlem);
+}
+
+// D: the deciders over the lifted kir (stages.h): an override a predicate node can take is written into its
+// slots, and its decision says so (overrode=<0.7.x class>, Cued); otherwise the decision stays Default
+// (unrealised=<class> when the decider overrode but no node took it).
+void StageD(const TransferData& t, const Config& cfg, Doc& doc, Line& line) {
+  for (const PointDecision& p : DecidePoints(t, cfg, doc, line)) {
+    if (!p.overridden) continue;
+    Decision& d = line.decisions[p.decision - 1];
+    if (Apply(p.family, p.cls, line, p.at) > 0) {
+      d.because.push_back(doc.I("overrode=" + p.base));
+    } else {
+      d.kind = Ev::Default;
+      d.because.push_back(doc.I("unrealised=" + p.cls));
+    }
+  }
+}
+
+}  // namespace hd08

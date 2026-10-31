@@ -1,0 +1,54 @@
+#! spoken
+# Fusions of a noun with what follows it. Rows marked replace/fuse apply inside utterances (not in narration);
+# rows marked always apply everywhere.
+# 0.7.x did this with string tables after composition; here G reads the noun and the next node.
+#
+# Columns
+#   host    the noun lemma
+#   next    the next node: a particle case (subj top obj instr), COP (the copula 이다), or - (anything else
+#           that is not a particle, including nothing)
+#   result  the fused form. With `fuse` the host takes the copula's 이 into itself (거+ㄴ데 → 건데, 거+ㅂ니다 → 겁니다)
+#   mode    replace: result replaces host and particle; fuse: result replaces the host, the copula fuses;
+#           always: like replace, in narration too (obligatory forms); always-fuse: fuse, in narration too
+host	next	result	mode	example
+것	subj	게	replace	그런 것이 → 그런 게
+것	top	건	replace	그런 것은 → 그런 건
+것	obj	걸	replace	그런 것을 → 그런 걸
+것	instr	걸로	replace	그런 것으로 → 그런 걸로
+것	COP	거	fuse	할 것이다 → 할 거다, 할 것입니다 → 할 겁니다
+것	-	거	replace	그런 것 → 그런 거
+이것	subj	이게	replace	이것이 → 이게
+이것	top	이건	replace	이것은 → 이건
+이것	obj	이걸	replace	이것을 → 이걸
+이것	-	이거	replace	이것 → 이거
+그것	subj	그게	replace	그것이 → 그게
+그것	top	그건	replace	그것은 → 그건
+그것	obj	그걸	replace	그것을 → 그걸
+그것	-	그거	replace	그것 → 그거
+저것	subj	저게	replace	저것이 → 저게
+저것	top	저건	replace	저것은 → 저건
+저것	obj	저걸	replace	저것을 → 저걸
+저것	-	저거	replace	저것 → 저거
+이거	subj	이게	replace	이거가 → 이게
+이거	top	이건	replace	이거는 → 이건
+이거	obj	이걸	replace	이거를 → 이걸
+그거	subj	그게	replace	그거가 → 그게
+그거	top	그건	replace	그거는 → 그건
+그거	obj	그걸	replace	그거를 → 그걸
+저거	subj	저게	replace	저거가 → 저게
+저거	top	저건	replace	저거는 → 저건
+저거	obj	저걸	replace	저거를 → 저걸
+거	subj	게	replace	거가 → 게
+거	top	건	replace	거는 → 건
+거	obj	걸	replace	거를 → 걸
+터	COP	테	always-fuse	할 터인데 → 할 텐데, 할 터이니 → 할 테니 (standard contraction)
+무엇	obj	뭘	replace	무엇을 → 뭘
+무엇	subj	뭐가	replace	무엇이 → 뭐가
+무엇	COP	뭐	fuse	무엇이야 → 뭐야
+무엇	-	뭐	replace	무엇 → 뭐
+나	top	난	replace	나는 → 난
+너	top	넌	replace	너는 → 넌
+나	subj	내가	always	나가 is not Korean: the pronoun fuses with 가 in every style
+너	subj	네가	always	너가 → 네가
+저	subj	제가	always	저가 → 제가
+누구	subj	누가	always	누구가 → 누가

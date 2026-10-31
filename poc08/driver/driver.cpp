@@ -1,5 +1,7 @@
 #include "driver.h"
 
+#include "ir/file.h"
+
 #include <chrono>
 #include <cstdio>
 
@@ -10,21 +12,11 @@ namespace {
 // Prior risk per evidence kind until a calibration table replaces it (DESIGN §6).
 constexpr std::array<float, 9> kDefaultRisk = {0.05f, 0.06f, 0.20f, 0.50f, 0.50f, 0.50f, 0.30f, 0.02f, 0.10f};
 
-bool ReadText(const std::string& path, std::string& out) {
-    std::FILE* f = std::fopen(path.c_str(), "rb");
-    if (!f) return false;
-    char buf[4096];
-    size_t n;
-    while ((n = std::fread(buf, 1, sizeof buf, f)) > 0) out.append(buf, n);
-    std::fclose(f);
-    return true;
-}
-
 bool LoadRisk(const std::string& root, std::array<float, 9>& risk, std::string& err) {
     risk = kDefaultRisk;
     const std::string path = root + "/driver/data/risk.tsv";
     std::string text;
-    if (!ReadText(path, text)) return true;
+    if (!ReadWholeFile(path, text)) return true;
     size_t start = 0;
     int lineNo = 0;
     while (start < text.size()) {
@@ -62,7 +54,7 @@ struct Timer {
 }  // namespace
 
 const char* StageName(int stage) {
-    static const char* const kNames[kStages] = {"N", "A", "S", "A2", "C", "L", "Z", "T", "R", "W", "G"};
+    static const char* const kNames[kStages] = {"N", "A", "S", "A2", "C", "L", "Z", "T", "D", "R", "W", "G"};
     return stage >= 0 && stage < kStages ? kNames[stage] : "?";
 }
 
@@ -174,9 +166,13 @@ void RunDoc(const Engine& e, Doc& doc, const RunOptions& o) {
         Timer t(o.times, kT);
         StageT(*e.transfer, cfg, doc, line);
     }
-    {
+    for (Line& line : doc.lines) {
+        {
+            Timer t(o.times, kD);
+            StageD(*e.transfer, cfg, doc, line);
+        }
         Timer t(o.times, kR);
-        StageR(*e.discourse, cfg, doc);
+        StageR(*e.discourse, cfg, doc, line);
     }
     for (Line& line : doc.lines) {
         {

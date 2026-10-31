@@ -2,6 +2,10 @@
 // implement exits with 2.
 #include <chrono>
 #include <cstdio>
+#ifdef _WIN32
+#include <fcntl.h>
+#include <io.h>
+#endif
 #include <cstdlib>
 #include <cstring>
 #include <optional>
@@ -11,6 +15,7 @@
 #include <vector>
 
 #include "driver.h"
+#include "ir/file.h"
 #include "ir/ir_json.h"
 #include "report.h"
 
@@ -48,16 +53,15 @@ void Usage(std::FILE* f) {
 }
 
 bool ReadFile(const std::string& path, std::string& out) {
-    std::FILE* f = path == "-" ? stdin : std::fopen(path.c_str(), "rb");
-    if (!f) return false;
+    if (path != "-") return ReadWholeFile(path, out);
     char buf[1 << 16];
     size_t n;
-    while ((n = std::fread(buf, 1, sizeof buf, f)) > 0) out.append(buf, n);
-    const bool ok = std::ferror(f) == 0;
-    if (f != stdin) std::fclose(f);
-    return ok;
+    while ((n = std::fread(buf, 1, sizeof buf, stdin)) > 0) out.append(buf, n);
+    return std::ferror(stdin) == 0;
 }
 
+// Lines split at '\n' ('\r' before it dropped). A final newline ends the last line; it does not
+// start an empty one.
 std::vector<std::string> SplitLines(const std::string& text) {
     std::vector<std::string> lines;
     size_t start = 0;
@@ -70,7 +74,6 @@ std::vector<std::string> SplitLines(const std::string& text) {
         if (end == text.size()) break;
         start = end + 1;
     }
-    // A final newline ends the last line; it does not start an empty one.
     if (!text.empty() && text.back() == '\n') lines.pop_back();
     return lines;
 }
@@ -94,6 +97,7 @@ struct Outputs {
     std::string why;    // --why / --trace records
     std::string stages; // --stages records
     uint64_t lines = 0, covered = 0, tracedBytes = 0, outBytes = 0, flagged = 0;
+    bool started = false;  // a line was written (document mode puts '\n' between lines)
 };
 
 struct Wants {
@@ -102,7 +106,6 @@ struct Wants {
 
 void Collect(const Engine& engine, const Doc& doc, const Wants& w, Outputs& o, bool each) {
     if (w.stages) o.stages += DocJson(doc) + '\n';
-    bool firstOut = o.text.empty() && !each;
     for (const Line& line : doc.lines) {
         if (w.stages) o.stages += LineJson(doc, line) + '\n';
         if (line.context) continue;
@@ -110,8 +113,8 @@ void Collect(const Engine& engine, const Doc& doc, const Wants& w, Outputs& o, b
             o.text += line.out;
             o.text += '\n';
         } else {
-            if (!firstOut) o.text += '\n';
-            firstOut = false;
+            if (o.started) o.text += '\n';
+            o.started = true;
             o.text += line.out;
         }
         const LineReport r = Report(engine, doc, line);
@@ -148,13 +151,19 @@ void KeepAnalysis(Line& l) {
 }
 
 bool WriteFile(const std::string& path, const std::string& text) {
-    std::FILE* f = std::fopen(path.c_str(), "wb");
+    std::FILE* f = OpenFile(path, true);
     if (!f) return false;
     const bool ok = std::fwrite(text.data(), 1, text.size(), f) == text.size();
     return std::fclose(f) == 0 && ok;
 }
 
 int Run(int argc, char** argv) {
+#ifdef _WIN32
+    // Bytes in and out as they are: no CRLF translation, no end at 0x1A.
+    _setmode(_fileno(stdin), _O_BINARY);
+    _setmode(_fileno(stdout), _O_BINARY);
+    _setmode(_fileno(stderr), _O_BINARY);
+#endif
     const auto t0 = std::chrono::steady_clock::now();
     Config cfg;
     cfg.data = HD08_DEFAULT_DATA;
@@ -281,9 +290,11 @@ int Run(int argc, char** argv) {
 
     // Build the documents.
     std::vector<Doc> docs;
+    bool finalNewline = false;
     std::vector<std::string> eachLines;  // --each text input: one Doc per line, built when translated
     const bool fromToks = !toksPath.empty();
     if (fromToks) {
+        finalNewline = !each;  // a toks file has no final-newline bit; end like --each does
         std::string jsonl;
         if (!ReadFile(toksPath, jsonl)) {
             std::fprintf(stderr, "hdtrans08: cannot read %s\n", toksPath.c_str());
@@ -352,6 +363,8 @@ int Run(int argc, char** argv) {
             }
             context = SplitLines(c);
         }
+        // Like 0.7.x, document output ends with a newline when the input did.
+        finalNewline = !each && !input.empty() && input.back() == '\n';
         std::vector<std::string> lines = SplitLines(input);
         if (each) {
             eachLines = std::move(lines);
@@ -424,6 +437,7 @@ int Run(int argc, char** argv) {
         }
     }
     const auto tEnd = std::chrono::steady_clock::now();
+    if (finalNewline) out.text += '\n';
 
     int status = 0;
     if (why) std::fwrite(out.why.data(), 1, out.why.size(), stderr);
@@ -459,7 +473,7 @@ int Run(int argc, char** argv) {
         std::fprintf(stderr,
                      "hdtrans08 stats: lines=%llu startup_s=%.3f translate_s=%.3f lines_per_s=%.0f covered=%llu "
                      "covered_pct=%.1f traced_pct=%.2f flagged_lines=%llu threads=%u stubs=%s\n",
-                     static_cast<unsigned long long>(out.lines), load, secs, secs > 0 ? out.lines / secs : 0.0,
+                     static_cast<unsigned long long>(out.lines), load, secs, secs > 0 ? static_cast<double>(out.lines) / secs : 0.0,
                      static_cast<unsigned long long>(out.covered),
                      out.lines ? 100.0 * static_cast<double>(out.covered) / static_cast<double>(out.lines) : 0.0,
                      out.outBytes ? 100.0 * static_cast<double>(out.tracedBytes) / static_cast<double>(out.outBytes)
@@ -479,7 +493,6 @@ int Run(int argc, char** argv) {
 }  // namespace
 
 #ifdef _WIN32
-#include <windows.h>
 int wmain(int argc, wchar_t** argv) {
     std::vector<std::string> storage;
     for (int i = 0; i < argc; i++) {

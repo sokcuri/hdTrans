@@ -11,6 +11,8 @@
 
 namespace hd08 {
 
+static_assert(static_cast<unsigned>(Ev::Example) + 1 == 9, "per-Ev tables have 9 entries");
+
 struct Engine {
     Config cfg;
     AnalyzerData* analyzer = nullptr;
@@ -29,7 +31,7 @@ void FreeEngine(Engine& engine);
 std::string StubComponents();
 
 // Per-stage wall time in nanoseconds, indexed by StageIndex; summed over calls.
-enum StageIndex { kN, kA, kS, kA2, kC, kL, kZ, kT, kR, kW, kG, kStages };
+enum StageIndex { kN, kA, kS, kA2, kC, kL, kZ, kT, kD, kR, kW, kG, kStages };
 using StageTimes = std::array<uint64_t, kStages>;
 const char* StageName(int stage);
 

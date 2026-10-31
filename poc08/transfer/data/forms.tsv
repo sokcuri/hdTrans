@@ -1,0 +1,12 @@
+#! forms
+# UniDic cForm prefix → the form class that cx slot forms test (dict, renyou, mizen, katei, adn …).
+cform	form
+未然形	mizen
+連用形	renyou
+終止形	shushi
+連体形	rentai
+仮定形	katei
+已然形	katei
+命令形	meirei
+意志推量形	ishi
+語幹	gokan

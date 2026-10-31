@@ -18,6 +18,9 @@
 #include "core/tokenizer/token.h"
 #include "core/word/analyze.h"
 #include "core/word/document_senses.h"
+#ifdef HDTRANS_POC08_HOOKS
+#include "core/engine/hooks.h"
+#endif
 
 namespace hdTrans {
 class Session;
@@ -89,6 +92,11 @@ struct QuoteCarry {
     int lines = 0;
 };
 
+#ifdef HDTRANS_POC08_HOOKS
+// The hooked build lays these options out differently; the inline namespace gives every function that
+// takes them another symbol, so that code built for one layout never links against the other.
+inline namespace hooked {
+#endif
 struct TranslationOptions {
     bool reference = false;
     word::Improvements wordImprovements;
@@ -113,7 +121,16 @@ struct TranslationOptions {
     // The characters the pre-filter writes before kana (filter::Filters::Written) that none of the
     // call's lines held before it; TranslateDocument sets them.
     std::span<const char32_t> filterWritten;
+#ifdef HDTRANS_POC08_HOOKS
+    // The stages the 0.8 proof of concept replaces (core/engine/hooks.h); null for none.
+    const hooks::Hooks* hooks = nullptr;
+    // Set by TranslateDocument for the stages of its call.
+    hooks::Run* hookRun = nullptr;
+#endif
 };
+#ifdef HDTRANS_POC08_HOOKS
+}  // namespace hooked
+#endif
 
 // Translates the lines of one call as one document. Nothing is kept from one call to the
 // next: the names, speech and senses of a call come from its own lines. The first context
