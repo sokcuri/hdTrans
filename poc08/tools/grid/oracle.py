@@ -2,8 +2,10 @@
 """N5 grid oracle: the expected Korean of a grid cell.
 
 The Korean is composed from the spec tables of this folder (ko-*.tsv: one table per dimension, Japanese value →
-Korean value), the fixed gloss of each controlled lemma (vocab.tsv) and the Korean paradigm of the generator
-(`hd8gen batch`, one predicate word per question). It reads nothing of the engine's transfer data.
+Korean value), the fixed gloss of each controlled lemma (vocab.tsv), the Korean paradigm of the generator
+(`hd8gen batch`, one predicate word per question) and the generator's realization tables for the spoken forms
+(ko/spoken.tsv fusions, ko/particles.tsv person particles; STYLE §7: the generator tables are the house style).
+It reads nothing of the engine's transfer data.
 
 A cell spec (made by grid.py) holds the block, the predicate lemma, the argument slots and the dimension values d.
 """
@@ -11,6 +13,7 @@ import os
 import subprocess
 
 FRAME_KO = {'을': '을/를', '를': '을/를', '이': '이/가', '가': '이/가'}
+KASE = {'이/가': 'subj', '은/는': 'top', '을/를': 'obj', '(으)로': 'instr'}
 
 
 def read_tsv(here, name):
@@ -64,8 +67,11 @@ class PW:
 
 
 class Oracle:
-    def __init__(self, hd8gen, here):
+    def __init__(self, hd8gen, here, gendata):
         self.here = here
+        self.spoken = read_tsv(gendata, 'spoken.tsv')
+        self.gen_particles = read_tsv(gendata, 'particles.tsv')
+        self.cur_level = 'haera'
         self.cmd = [hd8gen, 'batch']
         self.proc = None
         self.cache = {}
@@ -150,19 +156,50 @@ class Oracle:
         c = self.contracted(ja, level, '-')
         return c if c is not None else self.row(ja)['ko']
 
+    def fusion(self, host, nxt, level):
+        """The generator's spoken.tsv row for host + next (subj top obj instr COP -), if it applies at the level:
+        replace/fuse rows in dialogue only, always/always-fuse rows everywhere."""
+        for r in self.spoken:
+            if r['host'] == host and r['next'] == nxt:
+                if r['mode'].startswith('always') or level != 'haera':
+                    return r
+        return None
+
     def with_particle(self, ja, ko, particle, level):
         if ja is not None:
             c = self.contracted(ja, level, particle)
             if c is not None:
-                head, _, _ = ko.rpartition(' ')
-                return head + ' ' + c if head else c
+                return c
+        head, _, last = ko.rpartition(' ')
+        r = self.fusion(last, KASE.get(particle, '-' if particle in ('-', '') else None), level)
+        if r is not None and r['mode'] in ('replace', 'always'):
+            return (head + ' ' if head else '') + r['result']
         return attach(ko, particle)
+
+    def cop_host(self, host, level):
+        head, _, last = host.rpartition(' ')
+        r = self.fusion(last, 'COP', level)
+        if r is not None and r['mode'] in ('fuse', 'always-fuse'):
+            return (head + ' ' if head else '') + r['result']
+        return host
+
+    def gen_particle(self, kase, anim, level):
+        """The generator's particles.tsv form of a case: the first row whose conditions hold (hon is never set in
+        the N5 grid; spoken holds in dialogue)."""
+        have = {'anim'} if anim else set()
+        if level != 'haera':
+            have.add('spoken')
+        for r in self.gen_particles:
+            if r['kase'] != kase:
+                continue
+            when = set() if r['when'] == '-' else set(r['when'].split(','))
+            if when <= have:
+                return r['form']
+        raise KeyError('no generator particle for ' + kase)
 
     def ko_particle(self, jpart, role, level, anim=False):
         if jpart == '-':
             return '-'
-        if role == 'src' and anim:
-            role = 'srcp'
         best = None
         for r in self.particle:
             if r['ja'] != jpart:
@@ -174,6 +211,8 @@ class Oracle:
                 best = (score, r['ko'])
         if best is None:
             raise KeyError('no Korean particle for %s (%s, %s)' % (jpart, role, level))
+        if best[1].startswith('@'):
+            return self.gen_particle(best[1][1:], anim, level)
         return best[1]
 
     def np(self, np, level):
@@ -204,7 +243,7 @@ class Oracle:
             n, nja = self.np(('n', noun), level)
             r = self.row(verb)
             v = self.conj(self.kverb(r), 'V', '', ['-는'])
-            return attach(n, self.ko_particle(part, 'obj', level)) + ' ' + v + ' 것', '것'
+            return self.with_particle(nja, n, self.ko_particle(part, 'obj', level), level) + ' ' + v + ' 것', None
         raise ValueError(np)
 
     def number(self, num, counter):
@@ -315,6 +354,10 @@ class Oracle:
                 lp, _, host = t[1:].partition('@')
                 lemma, _, pos = lp.partition('/')
                 items.append(PW(lemma, pos, host=host))
+            elif t.startswith('='):
+                noun, _, kase = t[1:].partition('/')
+                part = {v: k for k, v in KASE.items()}[kase]
+                items.append(self.with_particle(None, noun, part, self.cur_level))
             else:
                 items.append(t)
 
@@ -374,13 +417,12 @@ class Oracle:
         base = self.last_pw(items)
         if steps_first:
             self.steps(items, steps_first)
-        extra_past = 0
         if aspect == 'teiru':
             f = self.feats(self.row(pred))
             st = next(a['steps'] for a in self.aspect if a['asp'] == f['asp']
                       and a['pclass'] in ('*', f.get('pclass', '-')) and a['pol'] in ('*', d['pol']))
             if st == 'past':
-                extra_past = 1
+                tense = 'past'
             elif st != 'simple':
                 self.steps(items, st)
         stype, mod = d['stype'], d['mod']
@@ -405,9 +447,8 @@ class Oracle:
         else:
             if d['pol'] == 'neg':
                 self.negate(items, base, method)
-            if tense == 'past' or extra_past:
-                last = self.last_pw(items)
-                last.forms.extend(['-었-'] * ((tense == 'past') + extra_past))
+            if tense == 'past':
+                self.last_pw(items).forms.append('-었-')
         f = self.final[(level, stype, d['sfp'])]
         self.steps(items, f['steps'])
         return items, f['punct']
@@ -416,7 +457,8 @@ class Oracle:
         out = []
         for x in items:
             if isinstance(x, PW):
-                out.append(self.conj(x.lemma, x.pos, x.host, x.forms))
+                host = self.cop_host(x.host, self.cur_level) if x.pos == 'C' and x.host else x.host
+                out.append(self.conj(x.lemma, x.pos, host, x.forms))
             else:
                 out.append(x)
         return ' '.join(out)
@@ -426,6 +468,7 @@ class Oracle:
     def ko(self, spec):
         d = spec['d']
         level = self.level[(d['ctx'], d['polite'])]
+        self.cur_level = level
         if spec['block'] == 'link':
             text, punct = self.link_line(spec, d, level)
         else:

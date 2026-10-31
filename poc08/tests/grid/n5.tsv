@@ -514,7 +514,7 @@ n5-vfinal-0512	block=vfinal;pred=godan-ku-iku;ctx.polite=narration.plain;stype=s
 n5-vfinal-0513	block=vfinal;pred=godan-ku-iku;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	学校へ行っていた。	학교에 가 있었다.
 n5-vfinal-0514	block=vfinal;pred=godan-ku-iku;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	学校へ行かなかった。	학교에 가지 않았다.
 n5-vfinal-0515	block=vfinal;pred=godan-ku-iku;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は駅に行かなかった。	친구는 역에 가지 않았다.
-n5-vfinal-0516	block=vfinal;pred=godan-ku-iku;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	学校へ行っていなかった。	학교에 가지 않았었다.
+n5-vfinal-0516	block=vfinal;pred=godan-ku-iku;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	学校へ行っていなかった。	학교에 가지 않았다.
 n5-vfinal-0517	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「学校へ行く。」	「학교에 가.」
 n5-vfinal-0518	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は駅に行く。」	「친구는 역에 가.」
 n5-vfinal-0519	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「学校へ行っている。」	「학교에 가 있어.」
@@ -526,7 +526,7 @@ n5-vfinal-0524	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=st
 n5-vfinal-0525	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「学校へ行っていた。」	「학교에 가 있었어.」
 n5-vfinal-0526	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「学校へ行かなかった。」	「학교에 안 갔어.」
 n5-vfinal-0527	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は駅に行かなかった。」	「친구는 역에 안 갔어.」
-n5-vfinal-0528	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「学校へ行っていなかった。」	「학교에 안 갔었어.」
+n5-vfinal-0528	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「学校へ行っていなかった。」	「학교에 안 갔어.」
 n5-vfinal-0529	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「学校へ行く？」	「학교에 가?」
 n5-vfinal-0530	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「学校へ行っている？」	「학교에 가 있어?」
 n5-vfinal-0531	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「学校へ行かない？」	「학교에 안 가?」
@@ -534,7 +534,7 @@ n5-vfinal-0532	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=qu
 n5-vfinal-0533	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「学校へ行った？」	「학교에 갔어?」
 n5-vfinal-0534	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「学校へ行っていた？」	「학교에 가 있었어?」
 n5-vfinal-0535	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「学校へ行かなかった？」	「학교에 안 갔어?」
-n5-vfinal-0536	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「学校へ行っていなかった？」	「학교에 안 갔었어?」
+n5-vfinal-0536	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「学校へ行っていなかった？」	「학교에 안 갔어?」
 n5-vfinal-0537	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「学校へ行きます。」	「학교에 가요.」
 n5-vfinal-0538	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は駅に行きます。」	「친구는 역에 가요.」
 n5-vfinal-0539	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「学校へ行っています。」	「학교에 가 있어요.」
@@ -546,14 +546,14 @@ n5-vfinal-0544	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=sta
 n5-vfinal-0545	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「学校へ行っていました。」	「학교에 가 있었어요.」
 n5-vfinal-0546	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「学校へ行きませんでした。」	「학교에 안 갔어요.」
 n5-vfinal-0547	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は駅に行きませんでした。」	「친구는 역에 안 갔어요.」
-n5-vfinal-0548	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「学校へ行っていませんでした。」	「학교에 안 갔었어요.」
+n5-vfinal-0548	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「学校へ行っていませんでした。」	「학교에 안 갔어요.」
 n5-vfinal-0549	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「学校へ行きますか。」	「학교에 가요?」
 n5-vfinal-0550	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「学校へ行っていますか。」	「학교에 가 있어요?」
 n5-vfinal-0551	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「学校へ行っていませんか。」	「학교에 안 갔어요?」
 n5-vfinal-0552	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「学校へ行きましたか。」	「학교에 갔어요?」
 n5-vfinal-0553	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「学校へ行っていましたか。」	「학교에 가 있었어요?」
 n5-vfinal-0554	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「学校へ行きませんでしたか。」	「학교에 안 갔어요?」
-n5-vfinal-0555	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「学校へ行っていませんでしたか。」	「학교에 안 갔었어요?」
+n5-vfinal-0555	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「学校へ行っていませんでしたか。」	「학교에 안 갔어요?」
 n5-vfinal-0556	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「学校へ行ってください。」	「학교에 가 주세요.」
 n5-vfinal-0557	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「学校へ行かないでください。」	「학교에 가지 마세요.」
 n5-vfinal-0558	block=vfinal;pred=godan-ku-iku;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「学校へ行きましょう。」	「학교에 가죠.」
@@ -886,7 +886,7 @@ n5-vfinal-0884	block=vfinal;pred=godan-nu;ctx.polite=narration.plain;stype=state
 n5-vfinal-0885	block=vfinal;pred=godan-nu;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	犬が死んでいた。	개가 죽어 있었다.
 n5-vfinal-0886	block=vfinal;pred=godan-nu;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	犬が死ななかった。	개가 죽지 않았다.
 n5-vfinal-0887	block=vfinal;pred=godan-nu;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	猫が死ななかった。	고양이가 죽지 않았다.
-n5-vfinal-0888	block=vfinal;pred=godan-nu;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	犬が死んでいなかった。	개가 죽지 않았었다.
+n5-vfinal-0888	block=vfinal;pred=godan-nu;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	犬が死んでいなかった。	개가 죽지 않았다.
 n5-vfinal-0889	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「犬が死ぬ。」	「개가 죽어.」
 n5-vfinal-0890	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「猫が死ぬ。」	「고양이가 죽어.」
 n5-vfinal-0891	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「犬が死んでいる。」	「개가 죽어 있어.」
@@ -898,7 +898,7 @@ n5-vfinal-0896	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statem
 n5-vfinal-0897	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「犬が死んでいた。」	「개가 죽어 있었어.」
 n5-vfinal-0898	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「犬が死ななかった。」	「개가 안 죽었어.」
 n5-vfinal-0899	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「猫が死ななかった。」	「고양이가 안 죽었어.」
-n5-vfinal-0900	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「犬が死んでいなかった。」	「개가 안 죽었었어.」
+n5-vfinal-0900	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「犬が死んでいなかった。」	「개가 안 죽었어.」
 n5-vfinal-0901	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「犬が死ぬ？」	「개가 죽어?」
 n5-vfinal-0902	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「犬が死んでいる？」	「개가 죽어 있어?」
 n5-vfinal-0903	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「犬が死なない？」	「개가 안 죽어?」
@@ -906,7 +906,7 @@ n5-vfinal-0904	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=questi
 n5-vfinal-0905	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「犬が死んだ？」	「개가 죽었어?」
 n5-vfinal-0906	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「犬が死んでいた？」	「개가 죽어 있었어?」
 n5-vfinal-0907	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「犬が死ななかった？」	「개가 안 죽었어?」
-n5-vfinal-0908	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「犬が死んでいなかった？」	「개가 안 죽었었어?」
+n5-vfinal-0908	block=vfinal;pred=godan-nu;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「犬が死んでいなかった？」	「개가 안 죽었어?」
 n5-vfinal-0909	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「犬が死にます。」	「개가 죽어요.」
 n5-vfinal-0910	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「猫が死にます。」	「고양이가 죽어요.」
 n5-vfinal-0911	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「犬が死んでいます。」	「개가 죽어 있어요.」
@@ -918,7 +918,7 @@ n5-vfinal-0916	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=stateme
 n5-vfinal-0917	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「犬が死んでいました。」	「개가 죽어 있었어요.」
 n5-vfinal-0918	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「犬が死にませんでした。」	「개가 안 죽었어요.」
 n5-vfinal-0919	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「猫が死にませんでした。」	「고양이가 안 죽었어요.」
-n5-vfinal-0920	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「犬が死んでいませんでした。」	「개가 안 죽었었어요.」
+n5-vfinal-0920	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「犬が死んでいませんでした。」	「개가 안 죽었어요.」
 n5-vfinal-0921	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「犬が死にますか。」	「개가 죽어요?」
 n5-vfinal-0922	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「犬が死んでいますか。」	「개가 죽어 있어요?」
 n5-vfinal-0923	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=simple	「犬が死にませんか。」	「개가 안 죽어요?」
@@ -926,7 +926,7 @@ n5-vfinal-0924	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=questio
 n5-vfinal-0925	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「犬が死にましたか。」	「개가 죽었어요?」
 n5-vfinal-0926	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「犬が死んでいましたか。」	「개가 죽어 있었어요?」
 n5-vfinal-0927	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「犬が死にませんでしたか。」	「개가 안 죽었어요?」
-n5-vfinal-0928	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「犬が死んでいませんでしたか。」	「개가 안 죽었었어요?」
+n5-vfinal-0928	block=vfinal;pred=godan-nu;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「犬が死んでいませんでしたか。」	「개가 안 죽었어요?」
 n5-vfinal-0929	block=vfinal;pred=godan-bu;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	公園で遊ぶ。	공원에서 논다.
 n5-vfinal-0930	block=vfinal;pred=godan-bu;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達は公園で遊ぶ。	친구는 공원에서 논다.
 n5-vfinal-0931	block=vfinal;pred=godan-bu;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	公園で遊んでいる。	공원에서 놀고 있다.
@@ -1397,7 +1397,7 @@ n5-vfinal-1395	block=vfinal;pred=godan-ru;ctx.polite=narration.plain;stype=state
 n5-vfinal-1396	block=vfinal;pred=godan-ru;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	部屋に入っていた。	방에 들어가 있었다.
 n5-vfinal-1397	block=vfinal;pred=godan-ru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	部屋に入らなかった。	방에 들어가지 않았다.
 n5-vfinal-1398	block=vfinal;pred=godan-ru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は店に入らなかった。	친구는 가게에 들어가지 않았다.
-n5-vfinal-1399	block=vfinal;pred=godan-ru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	部屋に入っていなかった。	방에 들어가지 않았었다.
+n5-vfinal-1399	block=vfinal;pred=godan-ru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	部屋に入っていなかった。	방에 들어가지 않았다.
 n5-vfinal-1400	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「部屋に入る。」	「방에 들어가.」
 n5-vfinal-1401	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は店に入る。」	「친구는 가게에 들어가.」
 n5-vfinal-1402	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「部屋に入っている。」	「방에 들어가 있어.」
@@ -1409,7 +1409,7 @@ n5-vfinal-1407	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statem
 n5-vfinal-1408	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「部屋に入っていた。」	「방에 들어가 있었어.」
 n5-vfinal-1409	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「部屋に入らなかった。」	「방에 안 들어갔어.」
 n5-vfinal-1410	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は店に入らなかった。」	「친구는 가게에 안 들어갔어.」
-n5-vfinal-1411	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「部屋に入っていなかった。」	「방에 안 들어갔었어.」
+n5-vfinal-1411	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「部屋に入っていなかった。」	「방에 안 들어갔어.」
 n5-vfinal-1412	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「部屋に入る？」	「방에 들어가?」
 n5-vfinal-1413	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「部屋に入っている？」	「방에 들어가 있어?」
 n5-vfinal-1414	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「部屋に入らない？」	「방에 안 들어가?」
@@ -1417,7 +1417,7 @@ n5-vfinal-1415	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=questi
 n5-vfinal-1416	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「部屋に入った？」	「방에 들어갔어?」
 n5-vfinal-1417	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「部屋に入っていた？」	「방에 들어가 있었어?」
 n5-vfinal-1418	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「部屋に入らなかった？」	「방에 안 들어갔어?」
-n5-vfinal-1419	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「部屋に入っていなかった？」	「방에 안 들어갔었어?」
+n5-vfinal-1419	block=vfinal;pred=godan-ru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「部屋に入っていなかった？」	「방에 안 들어갔어?」
 n5-vfinal-1420	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「部屋に入ります。」	「방에 들어가요.」
 n5-vfinal-1421	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は店に入ります。」	「친구는 가게에 들어가요.」
 n5-vfinal-1422	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「部屋に入っています。」	「방에 들어가 있어요.」
@@ -1429,14 +1429,14 @@ n5-vfinal-1427	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=stateme
 n5-vfinal-1428	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「部屋に入っていました。」	「방에 들어가 있었어요.」
 n5-vfinal-1429	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「部屋に入りませんでした。」	「방에 안 들어갔어요.」
 n5-vfinal-1430	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は店に入りませんでした。」	「친구는 가게에 안 들어갔어요.」
-n5-vfinal-1431	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「部屋に入っていませんでした。」	「방에 안 들어갔었어요.」
+n5-vfinal-1431	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「部屋に入っていませんでした。」	「방에 안 들어갔어요.」
 n5-vfinal-1432	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「部屋に入りますか。」	「방에 들어가요?」
 n5-vfinal-1433	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「部屋に入っていますか。」	「방에 들어가 있어요?」
 n5-vfinal-1434	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「部屋に入っていませんか。」	「방에 안 들어갔어요?」
 n5-vfinal-1435	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「部屋に入りましたか。」	「방에 들어갔어요?」
 n5-vfinal-1436	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「部屋に入っていましたか。」	「방에 들어가 있었어요?」
 n5-vfinal-1437	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「部屋に入りませんでしたか。」	「방에 안 들어갔어요?」
-n5-vfinal-1438	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「部屋に入っていませんでしたか。」	「방에 안 들어갔었어요?」
+n5-vfinal-1438	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「部屋に入っていませんでしたか。」	「방에 안 들어갔어요?」
 n5-vfinal-1439	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「部屋に入ってください。」	「방에 들어가 주세요.」
 n5-vfinal-1440	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「部屋に入らないでください。」	「방에 들어가지 마세요.」
 n5-vfinal-1441	block=vfinal;pred=godan-ru;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「部屋に入りましょう。」	「방에 들어가죠.」
@@ -1736,50 +1736,50 @@ n5-vfinal-1734	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statem
 n5-vfinal-1735	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	子供に日本語を教えなかった。	아이에게 일본어를 가르치지 않았다.
 n5-vfinal-1736	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	母は友達に日本語を教えなかった。	어머니는 친구에게 일본어를 가르치지 않았다.
 n5-vfinal-1737	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	子供に日本語を教えていなかった。	아이에게 일본어를 가르치고 있지 않았다.
-n5-vfinal-1738	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教える。」	「아이에게 일본어를 가르쳐.」
-n5-vfinal-1739	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に日本語を教える。」	「어머니는 친구에게 일본어를 가르쳐.」
-n5-vfinal-1740	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えている。」	「아이에게 일본어를 가르치고 있어.」
-n5-vfinal-1741	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「子供に日本語を教えない。」	「아이에게 일본어를 안 가르쳐.」
-n5-vfinal-1742	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に日本語を教えない。」	「어머니는 친구에게 일본어를 안 가르쳐.」
-n5-vfinal-1743	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていない。」	「아이에게 일본어를 안 가르치고 있어.」
-n5-vfinal-1744	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「子供に日本語を教えた。」	「아이에게 일본어를 가르쳤어.」
-n5-vfinal-1745	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に日本語を教えた。」	「어머니는 친구에게 일본어를 가르쳤어.」
-n5-vfinal-1746	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていた。」	「아이에게 일본어를 가르치고 있었어.」
-n5-vfinal-1747	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「子供に日本語を教えなかった。」	「아이에게 일본어를 안 가르쳤어.」
-n5-vfinal-1748	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に日本語を教えなかった。」	「어머니는 친구에게 일본어를 안 가르쳤어.」
-n5-vfinal-1749	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていなかった。」	「아이에게 일본어를 안 가르치고 있었어.」
-n5-vfinal-1750	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教える？」	「아이에게 일본어를 가르쳐?」
-n5-vfinal-1751	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えている？」	「아이에게 일본어를 가르치고 있어?」
-n5-vfinal-1752	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「子供に日本語を教えない？」	「아이에게 일본어를 안 가르쳐?」
-n5-vfinal-1753	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていない？」	「아이에게 일본어를 안 가르치고 있어?」
-n5-vfinal-1754	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「子供に日本語を教えた？」	「아이에게 일본어를 가르쳤어?」
-n5-vfinal-1755	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていた？」	「아이에게 일본어를 가르치고 있었어?」
-n5-vfinal-1756	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「子供に日本語を教えなかった？」	「아이에게 일본어를 안 가르쳤어?」
-n5-vfinal-1757	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていなかった？」	「아이에게 일본어를 안 가르치고 있었어?」
-n5-vfinal-1758	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えます。」	「아이에게 일본어를 가르쳐요.」
-n5-vfinal-1759	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に日本語を教えます。」	「어머니는 친구에게 일본어를 가르쳐요.」
-n5-vfinal-1760	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えています。」	「아이에게 일본어를 가르치고 있어요.」
-n5-vfinal-1761	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「子供に日本語を教えません。」	「아이에게 일본어를 안 가르쳐요.」
-n5-vfinal-1762	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に日本語を教えません。」	「어머니는 친구에게 일본어를 안 가르쳐요.」
-n5-vfinal-1763	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていません。」	「아이에게 일본어를 안 가르치고 있어요.」
-n5-vfinal-1764	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「子供に日本語を教えました。」	「아이에게 일본어를 가르쳤어요.」
-n5-vfinal-1765	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に日本語を教えました。」	「어머니는 친구에게 일본어를 가르쳤어요.」
-n5-vfinal-1766	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていました。」	「아이에게 일본어를 가르치고 있었어요.」
-n5-vfinal-1767	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「子供に日本語を教えませんでした。」	「아이에게 일본어를 안 가르쳤어요.」
-n5-vfinal-1768	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に日本語を教えませんでした。」	「어머니는 친구에게 일본어를 안 가르쳤어요.」
-n5-vfinal-1769	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていませんでした。」	「아이에게 일본어를 안 가르치고 있었어요.」
-n5-vfinal-1770	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えますか。」	「아이에게 일본어를 가르쳐요?」
-n5-vfinal-1771	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えていますか。」	「아이에게 일본어를 가르치고 있어요?」
-n5-vfinal-1772	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていませんか。」	「아이에게 일본어를 안 가르치고 있어요?」
-n5-vfinal-1773	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「子供に日本語を教えましたか。」	「아이에게 일본어를 가르쳤어요?」
-n5-vfinal-1774	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていましたか。」	「아이에게 일본어를 가르치고 있었어요?」
-n5-vfinal-1775	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「子供に日本語を教えませんでしたか。」	「아이에게 일본어를 안 가르쳤어요?」
-n5-vfinal-1776	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていませんでしたか。」	「아이에게 일본어를 안 가르치고 있었어요?」
-n5-vfinal-1777	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えてください。」	「아이에게 일본어를 가르쳐 주세요.」
-n5-vfinal-1778	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えないでください。」	「아이에게 일본어를 가르치지 마세요.」
-n5-vfinal-1779	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えましょう。」	「아이에게 일본어를 가르치죠.」
-n5-vfinal-1780	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えましょうか。」	「아이에게 일본어를 가르칠까요?」
-n5-vfinal-1781	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えませんか。」	「아이에게 일본어를 가르치지 않을래요?」
+n5-vfinal-1738	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教える。」	「아이한테 일본어를 가르쳐.」
+n5-vfinal-1739	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に日本語を教える。」	「어머니는 친구한테 일본어를 가르쳐.」
+n5-vfinal-1740	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えている。」	「아이한테 일본어를 가르치고 있어.」
+n5-vfinal-1741	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「子供に日本語を教えない。」	「아이한테 일본어를 안 가르쳐.」
+n5-vfinal-1742	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に日本語を教えない。」	「어머니는 친구한테 일본어를 안 가르쳐.」
+n5-vfinal-1743	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていない。」	「아이한테 일본어를 안 가르치고 있어.」
+n5-vfinal-1744	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「子供に日本語を教えた。」	「아이한테 일본어를 가르쳤어.」
+n5-vfinal-1745	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に日本語を教えた。」	「어머니는 친구한테 일본어를 가르쳤어.」
+n5-vfinal-1746	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていた。」	「아이한테 일본어를 가르치고 있었어.」
+n5-vfinal-1747	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「子供に日本語を教えなかった。」	「아이한테 일본어를 안 가르쳤어.」
+n5-vfinal-1748	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に日本語を教えなかった。」	「어머니는 친구한테 일본어를 안 가르쳤어.」
+n5-vfinal-1749	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていなかった。」	「아이한테 일본어를 안 가르치고 있었어.」
+n5-vfinal-1750	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教える？」	「아이한테 일본어를 가르쳐?」
+n5-vfinal-1751	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えている？」	「아이한테 일본어를 가르치고 있어?」
+n5-vfinal-1752	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「子供に日本語を教えない？」	「아이한테 일본어를 안 가르쳐?」
+n5-vfinal-1753	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていない？」	「아이한테 일본어를 안 가르치고 있어?」
+n5-vfinal-1754	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「子供に日本語を教えた？」	「아이한테 일본어를 가르쳤어?」
+n5-vfinal-1755	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていた？」	「아이한테 일본어를 가르치고 있었어?」
+n5-vfinal-1756	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「子供に日本語を教えなかった？」	「아이한테 일본어를 안 가르쳤어?」
+n5-vfinal-1757	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていなかった？」	「아이한테 일본어를 안 가르치고 있었어?」
+n5-vfinal-1758	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えます。」	「아이한테 일본어를 가르쳐요.」
+n5-vfinal-1759	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に日本語を教えます。」	「어머니는 친구한테 일본어를 가르쳐요.」
+n5-vfinal-1760	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えています。」	「아이한테 일본어를 가르치고 있어요.」
+n5-vfinal-1761	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「子供に日本語を教えません。」	「아이한테 일본어를 안 가르쳐요.」
+n5-vfinal-1762	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に日本語を教えません。」	「어머니는 친구한테 일본어를 안 가르쳐요.」
+n5-vfinal-1763	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていません。」	「아이한테 일본어를 안 가르치고 있어요.」
+n5-vfinal-1764	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「子供に日本語を教えました。」	「아이한테 일본어를 가르쳤어요.」
+n5-vfinal-1765	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に日本語を教えました。」	「어머니는 친구한테 일본어를 가르쳤어요.」
+n5-vfinal-1766	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていました。」	「아이한테 일본어를 가르치고 있었어요.」
+n5-vfinal-1767	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「子供に日本語を教えませんでした。」	「아이한테 일본어를 안 가르쳤어요.」
+n5-vfinal-1768	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に日本語を教えませんでした。」	「어머니는 친구한테 일본어를 안 가르쳤어요.」
+n5-vfinal-1769	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていませんでした。」	「아이한테 일본어를 안 가르치고 있었어요.」
+n5-vfinal-1770	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えますか。」	「아이한테 일본어를 가르쳐요?」
+n5-vfinal-1771	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「子供に日本語を教えていますか。」	「아이한테 일본어를 가르치고 있어요?」
+n5-vfinal-1772	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「子供に日本語を教えていませんか。」	「아이한테 일본어를 안 가르치고 있어요?」
+n5-vfinal-1773	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「子供に日本語を教えましたか。」	「아이한테 일본어를 가르쳤어요?」
+n5-vfinal-1774	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「子供に日本語を教えていましたか。」	「아이한테 일본어를 가르치고 있었어요?」
+n5-vfinal-1775	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「子供に日本語を教えませんでしたか。」	「아이한테 일본어를 안 가르쳤어요?」
+n5-vfinal-1776	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「子供に日本語を教えていませんでしたか。」	「아이한테 일본어를 안 가르치고 있었어요?」
+n5-vfinal-1777	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えてください。」	「아이한테 일본어를 가르쳐 주세요.」
+n5-vfinal-1778	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えないでください。」	「아이한테 일본어를 가르치지 마세요.」
+n5-vfinal-1779	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えましょう。」	「아이한테 일본어를 가르치죠.」
+n5-vfinal-1780	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えましょうか。」	「아이한테 일본어를 가르칠까요?」
+n5-vfinal-1781	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「子供に日本語を教えませんか。」	「아이한테 일본어를 가르치지 않을래요?」
 n5-vfinal-1782	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	開ける。	연다.
 n5-vfinal-1783	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達は開ける。	친구는 연다.
 n5-vfinal-1784	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	開けない。	열지 않는다.
@@ -1828,50 +1828,50 @@ n5-vfinal-1826	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statem
 n5-vfinal-1827	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達から本を借りなかった。	친구에게서 책을 빌리지 않았다.
 n5-vfinal-1828	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は先生から傘を借りなかった。	친구는 선생님에게서 우산을 빌리지 않았다.
 n5-vfinal-1829	block=vfinal;pred=ichidan;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	友達から本を借りていなかった。	친구에게서 책을 빌리고 있지 않았다.
-n5-vfinal-1830	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りる。」	「친구에게서 책을 빌려.」
-n5-vfinal-1831	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は先生から傘を借りる。」	「친구는 선생님에게서 우산을 빌려.」
-n5-vfinal-1832	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている。」	「친구에게서 책을 빌리고 있어.」
-n5-vfinal-1833	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りない。」	「친구에게서 책을 안 빌려.」
-n5-vfinal-1834	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は先生から傘を借りない。」	「친구는 선생님에게서 우산을 안 빌려.」
-n5-vfinal-1835	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない。」	「친구에게서 책을 안 빌리고 있어.」
-n5-vfinal-1836	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達から本を借りた。」	「친구에게서 책을 빌렸어.」
-n5-vfinal-1837	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達は先生から傘を借りた。」	「친구는 선생님에게서 우산을 빌렸어.」
-n5-vfinal-1838	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた。」	「친구에게서 책을 빌리고 있었어.」
-n5-vfinal-1839	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達から本を借りなかった。」	「친구에게서 책을 안 빌렸어.」
-n5-vfinal-1840	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は先生から傘を借りなかった。」	「친구는 선생님에게서 우산을 안 빌렸어.」
-n5-vfinal-1841	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった。」	「친구에게서 책을 안 빌리고 있었어.」
-n5-vfinal-1842	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りる？」	「친구에게서 책을 빌려?」
-n5-vfinal-1843	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている？」	「친구에게서 책을 빌리고 있어?」
-n5-vfinal-1844	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りない？」	「친구에게서 책을 안 빌려?」
-n5-vfinal-1845	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない？」	「친구에게서 책을 안 빌리고 있어?」
-n5-vfinal-1846	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「友達から本を借りた？」	「친구에게서 책을 빌렸어?」
-n5-vfinal-1847	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた？」	「친구에게서 책을 빌리고 있었어?」
-n5-vfinal-1848	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「友達から本を借りなかった？」	「친구에게서 책을 안 빌렸어?」
-n5-vfinal-1849	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった？」	「친구에게서 책을 안 빌리고 있었어?」
-n5-vfinal-1850	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達から本を借ります。」	「친구에게서 책을 빌려요.」
-n5-vfinal-1851	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は先生から傘を借ります。」	「친구는 선생님에게서 우산을 빌려요.」
-n5-vfinal-1852	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りています。」	「친구에게서 책을 빌리고 있어요.」
-n5-vfinal-1853	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りません。」	「친구에게서 책을 안 빌려요.」
-n5-vfinal-1854	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は先生から傘を借りません。」	「친구는 선생님에게서 우산을 안 빌려요.」
-n5-vfinal-1855	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていません。」	「친구에게서 책을 안 빌리고 있어요.」
-n5-vfinal-1856	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達から本を借りました。」	「친구에게서 책을 빌렸어요.」
-n5-vfinal-1857	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は先生から傘を借りました。」	「친구는 선생님에게서 우산을 빌렸어요.」
-n5-vfinal-1858	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていました。」	「친구에게서 책을 빌리고 있었어요.」
-n5-vfinal-1859	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達から本を借りませんでした。」	「친구에게서 책을 안 빌렸어요.」
-n5-vfinal-1860	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は先生から傘を借りませんでした。」	「친구는 선생님에게서 우산을 안 빌렸어요.」
-n5-vfinal-1861	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでした。」	「친구에게서 책을 안 빌리고 있었어요.」
-n5-vfinal-1862	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りますか。」	「친구에게서 책을 빌려요?」
-n5-vfinal-1863	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りていますか。」	「친구에게서 책을 빌리고 있어요?」
-n5-vfinal-1864	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていませんか。」	「친구에게서 책을 안 빌리고 있어요?」
-n5-vfinal-1865	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「友達から本を借りましたか。」	「친구에게서 책을 빌렸어요?」
-n5-vfinal-1866	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていましたか。」	「친구에게서 책을 빌리고 있었어요?」
-n5-vfinal-1867	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「友達から本を借りませんでしたか。」	「친구에게서 책을 안 빌렸어요?」
-n5-vfinal-1868	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでしたか。」	「친구에게서 책을 안 빌리고 있었어요?」
-n5-vfinal-1869	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りてください。」	「친구에게서 책을 빌려 주세요.」
-n5-vfinal-1870	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りないでください。」	「친구에게서 책을 빌리지 마세요.」
-n5-vfinal-1871	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りましょう。」	「친구에게서 책을 빌리죠.」
-n5-vfinal-1872	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りましょうか。」	「친구에게서 책을 빌릴까요?」
-n5-vfinal-1873	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りませんか。」	「친구에게서 책을 빌리지 않을래요?」
+n5-vfinal-1830	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りる。」	「친구한테서 책을 빌려.」
+n5-vfinal-1831	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は先生から傘を借りる。」	「친구는 선생님한테서 우산을 빌려.」
+n5-vfinal-1832	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている。」	「친구한테서 책을 빌리고 있어.」
+n5-vfinal-1833	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りない。」	「친구한테서 책을 안 빌려.」
+n5-vfinal-1834	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は先生から傘を借りない。」	「친구는 선생님한테서 우산을 안 빌려.」
+n5-vfinal-1835	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない。」	「친구한테서 책을 안 빌리고 있어.」
+n5-vfinal-1836	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達から本を借りた。」	「친구한테서 책을 빌렸어.」
+n5-vfinal-1837	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達は先生から傘を借りた。」	「친구는 선생님한테서 우산을 빌렸어.」
+n5-vfinal-1838	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた。」	「친구한테서 책을 빌리고 있었어.」
+n5-vfinal-1839	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達から本を借りなかった。」	「친구한테서 책을 안 빌렸어.」
+n5-vfinal-1840	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は先生から傘を借りなかった。」	「친구는 선생님한테서 우산을 안 빌렸어.」
+n5-vfinal-1841	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった。」	「친구한테서 책을 안 빌리고 있었어.」
+n5-vfinal-1842	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りる？」	「친구한테서 책을 빌려?」
+n5-vfinal-1843	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りている？」	「친구한테서 책을 빌리고 있어?」
+n5-vfinal-1844	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りない？」	「친구한테서 책을 안 빌려?」
+n5-vfinal-1845	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていない？」	「친구한테서 책을 안 빌리고 있어?」
+n5-vfinal-1846	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「友達から本を借りた？」	「친구한테서 책을 빌렸어?」
+n5-vfinal-1847	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていた？」	「친구한테서 책을 빌리고 있었어?」
+n5-vfinal-1848	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「友達から本を借りなかった？」	「친구한테서 책을 안 빌렸어?」
+n5-vfinal-1849	block=vfinal;pred=ichidan;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていなかった？」	「친구한테서 책을 안 빌리고 있었어?」
+n5-vfinal-1850	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達から本を借ります。」	「친구한테서 책을 빌려요.」
+n5-vfinal-1851	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は先生から傘を借ります。」	「친구는 선생님한테서 우산을 빌려요.」
+n5-vfinal-1852	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りています。」	「친구한테서 책을 빌리고 있어요.」
+n5-vfinal-1853	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達から本を借りません。」	「친구한테서 책을 안 빌려요.」
+n5-vfinal-1854	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「友達は先生から傘を借りません。」	「친구는 선생님한테서 우산을 안 빌려요.」
+n5-vfinal-1855	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていません。」	「친구한테서 책을 안 빌리고 있어요.」
+n5-vfinal-1856	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達から本を借りました。」	「친구한테서 책을 빌렸어요.」
+n5-vfinal-1857	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は先生から傘を借りました。」	「친구는 선생님한테서 우산을 빌렸어요.」
+n5-vfinal-1858	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「友達から本を借りていました。」	「친구한테서 책을 빌리고 있었어요.」
+n5-vfinal-1859	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達から本を借りませんでした。」	「친구한테서 책을 안 빌렸어요.」
+n5-vfinal-1860	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は先生から傘を借りませんでした。」	「친구는 선생님한테서 우산을 안 빌렸어요.」
+n5-vfinal-1861	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでした。」	「친구한테서 책을 안 빌리고 있었어요.」
+n5-vfinal-1862	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りますか。」	「친구한테서 책을 빌려요?」
+n5-vfinal-1863	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達から本を借りていますか。」	「친구한테서 책을 빌리고 있어요?」
+n5-vfinal-1864	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達から本を借りていませんか。」	「친구한테서 책을 안 빌리고 있어요?」
+n5-vfinal-1865	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「友達から本を借りましたか。」	「친구한테서 책을 빌렸어요?」
+n5-vfinal-1866	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「友達から本を借りていましたか。」	「친구한테서 책을 빌리고 있었어요?」
+n5-vfinal-1867	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「友達から本を借りませんでしたか。」	「친구한테서 책을 안 빌렸어요?」
+n5-vfinal-1868	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「友達から本を借りていませんでしたか。」	「친구한테서 책을 안 빌리고 있었어요?」
+n5-vfinal-1869	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りてください。」	「친구한테서 책을 빌려 주세요.」
+n5-vfinal-1870	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りないでください。」	「친구한테서 책을 빌리지 마세요.」
+n5-vfinal-1871	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りましょう。」	「친구한테서 책을 빌리죠.」
+n5-vfinal-1872	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りましょうか。」	「친구한테서 책을 빌릴까요?」
+n5-vfinal-1873	block=vfinal;pred=ichidan;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「友達から本を借りませんか。」	「친구한테서 책을 빌리지 않을래요?」
 n5-vfinal-1874	block=vfinal;pred=suru;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	宿題をする。	숙제를 한다.
 n5-vfinal-1875	block=vfinal;pred=suru;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達は掃除をする。	친구는 청소를 한다.
 n5-vfinal-1876	block=vfinal;pred=suru;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	宿題をしている。	숙제를 하고 있다.
@@ -1939,7 +1939,7 @@ n5-vfinal-1937	block=vfinal;pred=kuru;ctx.polite=narration.plain;stype=statement
 n5-vfinal-1938	block=vfinal;pred=kuru;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	友達が来ていた。	친구가 와 있었다.
 n5-vfinal-1939	block=vfinal;pred=kuru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達が来なかった。	친구가 오지 않았다.
 n5-vfinal-1940	block=vfinal;pred=kuru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	先生が来なかった。	선생님이 오지 않았다.
-n5-vfinal-1941	block=vfinal;pred=kuru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	友達が来ていなかった。	친구가 오지 않았었다.
+n5-vfinal-1941	block=vfinal;pred=kuru;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	友達が来ていなかった。	친구가 오지 않았다.
 n5-vfinal-1942	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達が来る。」	「친구가 와.」
 n5-vfinal-1943	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「先生が来る。」	「선생님이 와.」
 n5-vfinal-1944	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達が来ている。」	「친구가 와 있어.」
@@ -1951,7 +1951,7 @@ n5-vfinal-1949	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;
 n5-vfinal-1950	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「友達が来ていた。」	「친구가 와 있었어.」
 n5-vfinal-1951	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達が来なかった。」	「친구가 안 왔어.」
 n5-vfinal-1952	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「先生が来なかった。」	「선생님이 안 왔어.」
-n5-vfinal-1953	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「友達が来ていなかった。」	「친구가 안 왔었어.」
+n5-vfinal-1953	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「友達が来ていなかった。」	「친구가 안 왔어.」
 n5-vfinal-1954	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達が来る？」	「친구가 와?」
 n5-vfinal-1955	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達が来ている？」	「친구가 와 있어?」
 n5-vfinal-1956	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「友達が来ない？」	「친구가 안 와?」
@@ -1959,7 +1959,7 @@ n5-vfinal-1957	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;t
 n5-vfinal-1958	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「友達が来た？」	「친구가 왔어?」
 n5-vfinal-1959	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「友達が来ていた？」	「친구가 와 있었어?」
 n5-vfinal-1960	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「友達が来なかった？」	「친구가 안 왔어?」
-n5-vfinal-1961	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「友達が来ていなかった？」	「친구가 안 왔었어?」
+n5-vfinal-1961	block=vfinal;pred=kuru;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「友達が来ていなかった？」	「친구가 안 왔어?」
 n5-vfinal-1962	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達が来ます。」	「친구가 와요.」
 n5-vfinal-1963	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「先生が来ます。」	「선생님이 와요.」
 n5-vfinal-1964	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「友達が来ています。」	「친구가 와 있어요.」
@@ -1971,14 +1971,14 @@ n5-vfinal-1969	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;t
 n5-vfinal-1970	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「友達が来ていました。」	「친구가 와 있었어요.」
 n5-vfinal-1971	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達が来ませんでした。」	「친구가 안 왔어요.」
 n5-vfinal-1972	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「先生が来ませんでした。」	「선생님이 안 왔어요.」
-n5-vfinal-1973	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「友達が来ていませんでした。」	「친구가 안 왔었어요.」
+n5-vfinal-1973	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「友達が来ていませんでした。」	「친구가 안 왔어요.」
 n5-vfinal-1974	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「友達が来ますか。」	「친구가 와요?」
 n5-vfinal-1975	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「友達が来ていますか。」	「친구가 와 있어요?」
 n5-vfinal-1976	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「友達が来ていませんか。」	「친구가 안 왔어요?」
 n5-vfinal-1977	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「友達が来ましたか。」	「친구가 왔어요?」
 n5-vfinal-1978	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「友達が来ていましたか。」	「친구가 와 있었어요?」
 n5-vfinal-1979	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「友達が来ませんでしたか。」	「친구가 안 왔어요?」
-n5-vfinal-1980	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「友達が来ていませんでしたか。」	「친구가 안 왔었어요?」
+n5-vfinal-1980	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「友達が来ていませんでしたか。」	「친구가 안 왔어요?」
 n5-vfinal-1981	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「来てください。」	「와 주세요.」
 n5-vfinal-1982	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「来ないでください。」	「오지 마세요.」
 n5-vfinal-1983	block=vfinal;pred=kuru;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「来ましょう。」	「오죠.」
@@ -2048,10 +2048,10 @@ n5-vfinal-2046	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statemen
 n5-vfinal-2047	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	結婚していない。	결혼하지 않았다.
 n5-vfinal-2048	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	結婚した。	결혼했다.
 n5-vfinal-2049	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達は結婚した。	친구는 결혼했다.
-n5-vfinal-2050	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	結婚していた。	결혼했었다.
+n5-vfinal-2050	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=teiru	結婚していた。	결혼했다.
 n5-vfinal-2051	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	結婚しなかった。	결혼하지 않았다.
 n5-vfinal-2052	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	友達は結婚しなかった。	친구는 결혼하지 않았다.
-n5-vfinal-2053	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	結婚していなかった。	결혼하지 않았었다.
+n5-vfinal-2053	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	結婚していなかった。	결혼하지 않았다.
 n5-vfinal-2054	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「結婚する。」	「결혼해.」
 n5-vfinal-2055	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は結婚する。」	「친구는 결혼해.」
 n5-vfinal-2056	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「結婚している。」	「결혼했어.」
@@ -2060,18 +2060,18 @@ n5-vfinal-2058	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement
 n5-vfinal-2059	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「結婚していない。」	「결혼 안 했어.」
 n5-vfinal-2060	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「結婚した。」	「결혼했어.」
 n5-vfinal-2061	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達は結婚した。」	「친구는 결혼했어.」
-n5-vfinal-2062	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「結婚していた。」	「결혼했었어.」
+n5-vfinal-2062	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「結婚していた。」	「결혼했어.」
 n5-vfinal-2063	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「結婚しなかった。」	「결혼 안 했어.」
 n5-vfinal-2064	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「友達は結婚しなかった。」	「친구는 결혼 안 했어.」
-n5-vfinal-2065	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「結婚していなかった。」	「결혼 안 했었어.」
+n5-vfinal-2065	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「結婚していなかった。」	「결혼 안 했어.」
 n5-vfinal-2066	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「結婚する？」	「결혼해?」
 n5-vfinal-2067	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「結婚している？」	「결혼했어?」
 n5-vfinal-2068	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「結婚しない？」	「결혼 안 해?」
 n5-vfinal-2069	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「結婚していない？」	「결혼 안 했어?」
 n5-vfinal-2070	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「結婚した？」	「결혼했어?」
-n5-vfinal-2071	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「結婚していた？」	「결혼했었어?」
+n5-vfinal-2071	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「結婚していた？」	「결혼했어?」
 n5-vfinal-2072	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「結婚しなかった？」	「결혼 안 했어?」
-n5-vfinal-2073	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「結婚していなかった？」	「결혼 안 했었어?」
+n5-vfinal-2073	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「結婚していなかった？」	「결혼 안 했어?」
 n5-vfinal-2074	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「結婚します。」	「결혼해요.」
 n5-vfinal-2075	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達は結婚します。」	「친구는 결혼해요.」
 n5-vfinal-2076	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「結婚しています。」	「결혼했어요.」
@@ -2080,17 +2080,17 @@ n5-vfinal-2078	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;
 n5-vfinal-2079	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「結婚していません。」	「결혼 안 했어요.」
 n5-vfinal-2080	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「結婚しました。」	「결혼했어요.」
 n5-vfinal-2081	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は結婚しました。」	「친구는 결혼했어요.」
-n5-vfinal-2082	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「結婚していました。」	「결혼했었어요.」
+n5-vfinal-2082	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「結婚していました。」	「결혼했어요.」
 n5-vfinal-2083	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「結婚しませんでした。」	「결혼 안 했어요.」
 n5-vfinal-2084	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「友達は結婚しませんでした。」	「친구는 결혼 안 했어요.」
-n5-vfinal-2085	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「結婚していませんでした。」	「결혼 안 했었어요.」
+n5-vfinal-2085	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「結婚していませんでした。」	「결혼 안 했어요.」
 n5-vfinal-2086	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「結婚しますか。」	「결혼해요?」
 n5-vfinal-2087	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「結婚していますか。」	「결혼했어요?」
 n5-vfinal-2088	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「結婚していませんか。」	「결혼 안 했어요?」
 n5-vfinal-2089	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「結婚しましたか。」	「결혼했어요?」
-n5-vfinal-2090	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「結婚していましたか。」	「결혼했었어요?」
+n5-vfinal-2090	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「結婚していましたか。」	「결혼했어요?」
 n5-vfinal-2091	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「結婚しませんでしたか。」	「결혼 안 했어요?」
-n5-vfinal-2092	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「結婚していませんでしたか。」	「결혼 안 했었어요?」
+n5-vfinal-2092	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「結婚していませんでしたか。」	「결혼 안 했어요?」
 n5-vfinal-2093	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「結婚してください。」	「결혼해 주세요.」
 n5-vfinal-2094	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「結婚しないでください。」	「결혼하지 마세요.」
 n5-vfinal-2095	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「結婚しましょう。」	「결혼하죠.」
@@ -2220,50 +2220,50 @@ n5-vfinal-2218	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statemen
 n5-vfinal-2219	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	母に電話しなかった。	어머니에게 전화하지 않았다.
 n5-vfinal-2220	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=simple	母は友達に電話しなかった。	어머니는 친구에게 전화하지 않았다.
 n5-vfinal-2221	block=vfinal;pred=sahen;ctx.polite=narration.plain;stype=statement;tense=past;pol=neg;aspect=teiru	母に電話していなかった。	어머니에게 전화하고 있지 않았다.
-n5-vfinal-2222	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母に電話する。」	「어머니에게 전화해.」
-n5-vfinal-2223	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に電話する。」	「어머니는 친구에게 전화해.」
-n5-vfinal-2224	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「母に電話している。」	「어머니에게 전화하고 있어.」
-n5-vfinal-2225	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母に電話しない。」	「어머니에게 전화 안 해.」
-n5-vfinal-2226	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に電話しない。」	「어머니는 친구에게 전화 안 해.」
-n5-vfinal-2227	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「母に電話していない。」	「어머니에게 전화 안 하고 있어.」
-n5-vfinal-2228	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母に電話した。」	「어머니에게 전화했어.」
-n5-vfinal-2229	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に電話した。」	「어머니는 친구에게 전화했어.」
-n5-vfinal-2230	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「母に電話していた。」	「어머니에게 전화하고 있었어.」
-n5-vfinal-2231	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「母に電話しなかった。」	「어머니에게 전화 안 했어.」
-n5-vfinal-2232	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に電話しなかった。」	「어머니는 친구에게 전화 안 했어.」
-n5-vfinal-2233	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「母に電話していなかった。」	「어머니에게 전화 안 하고 있었어.」
-n5-vfinal-2234	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「母に電話する？」	「어머니에게 전화해?」
-n5-vfinal-2235	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「母に電話している？」	「어머니에게 전화하고 있어?」
-n5-vfinal-2236	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「母に電話しない？」	「어머니에게 전화 안 해?」
-n5-vfinal-2237	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「母に電話していない？」	「어머니에게 전화 안 하고 있어?」
-n5-vfinal-2238	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「母に電話した？」	「어머니에게 전화했어?」
-n5-vfinal-2239	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「母に電話していた？」	「어머니에게 전화하고 있었어?」
-n5-vfinal-2240	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「母に電話しなかった？」	「어머니에게 전화 안 했어?」
-n5-vfinal-2241	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「母に電話していなかった？」	「어머니에게 전화 안 하고 있었어?」
-n5-vfinal-2242	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母に電話します。」	「어머니에게 전화해요.」
-n5-vfinal-2243	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に電話します。」	「어머니는 친구에게 전화해요.」
-n5-vfinal-2244	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「母に電話しています。」	「어머니에게 전화하고 있어요.」
-n5-vfinal-2245	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母に電話しません。」	「어머니에게 전화 안 해요.」
-n5-vfinal-2246	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に電話しません。」	「어머니는 친구에게 전화 안 해요.」
-n5-vfinal-2247	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「母に電話していません。」	「어머니에게 전화 안 하고 있어요.」
-n5-vfinal-2248	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母に電話しました。」	「어머니에게 전화했어요.」
-n5-vfinal-2249	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に電話しました。」	「어머니는 친구에게 전화했어요.」
-n5-vfinal-2250	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「母に電話していました。」	「어머니에게 전화하고 있었어요.」
-n5-vfinal-2251	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「母に電話しませんでした。」	「어머니에게 전화 안 했어요.」
-n5-vfinal-2252	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に電話しませんでした。」	「어머니는 친구에게 전화 안 했어요.」
-n5-vfinal-2253	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「母に電話していませんでした。」	「어머니에게 전화 안 하고 있었어요.」
-n5-vfinal-2254	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「母に電話しますか。」	「어머니에게 전화해요?」
-n5-vfinal-2255	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「母に電話していますか。」	「어머니에게 전화하고 있어요?」
-n5-vfinal-2256	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「母に電話していませんか。」	「어머니에게 전화 안 하고 있어요?」
-n5-vfinal-2257	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「母に電話しましたか。」	「어머니에게 전화했어요?」
-n5-vfinal-2258	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「母に電話していましたか。」	「어머니에게 전화하고 있었어요?」
-n5-vfinal-2259	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「母に電話しませんでしたか。」	「어머니에게 전화 안 했어요?」
-n5-vfinal-2260	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「母に電話していませんでしたか。」	「어머니에게 전화 안 하고 있었어요?」
-n5-vfinal-2261	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「母に電話してください。」	「어머니에게 전화해 주세요.」
-n5-vfinal-2262	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「母に電話しないでください。」	「어머니에게 전화하지 마세요.」
-n5-vfinal-2263	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「母に電話しましょう。」	「어머니에게 전화하죠.」
-n5-vfinal-2264	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「母に電話しましょうか。」	「어머니에게 전화할까요?」
-n5-vfinal-2265	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「母に電話しませんか。」	「어머니에게 전화하지 않을래요?」
+n5-vfinal-2222	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母に電話する。」	「어머니한테 전화해.」
+n5-vfinal-2223	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に電話する。」	「어머니는 친구한테 전화해.」
+n5-vfinal-2224	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「母に電話している。」	「어머니한테 전화하고 있어.」
+n5-vfinal-2225	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母に電話しない。」	「어머니한테 전화 안 해.」
+n5-vfinal-2226	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に電話しない。」	「어머니는 친구한테 전화 안 해.」
+n5-vfinal-2227	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「母に電話していない。」	「어머니한테 전화 안 하고 있어.」
+n5-vfinal-2228	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母に電話した。」	「어머니한테 전화했어.」
+n5-vfinal-2229	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に電話した。」	「어머니는 친구한테 전화했어.」
+n5-vfinal-2230	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=teiru	「母に電話していた。」	「어머니한테 전화하고 있었어.」
+n5-vfinal-2231	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「母に電話しなかった。」	「어머니한테 전화 안 했어.」
+n5-vfinal-2232	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に電話しなかった。」	「어머니는 친구한테 전화 안 했어.」
+n5-vfinal-2233	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=neg;aspect=teiru	「母に電話していなかった。」	「어머니한테 전화 안 하고 있었어.」
+n5-vfinal-2234	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=simple	「母に電話する？」	「어머니한테 전화해?」
+n5-vfinal-2235	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=pos;aspect=teiru	「母に電話している？」	「어머니한테 전화하고 있어?」
+n5-vfinal-2236	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=simple	「母に電話しない？」	「어머니한테 전화 안 해?」
+n5-vfinal-2237	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=nonpast;pol=neg;aspect=teiru	「母に電話していない？」	「어머니한테 전화 안 하고 있어?」
+n5-vfinal-2238	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=simple	「母に電話した？」	「어머니한테 전화했어?」
+n5-vfinal-2239	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=pos;aspect=teiru	「母に電話していた？」	「어머니한테 전화하고 있었어?」
+n5-vfinal-2240	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=simple	「母に電話しなかった？」	「어머니한테 전화 안 했어?」
+n5-vfinal-2241	block=vfinal;pred=sahen;ctx.polite=dialogue.plain;stype=question;tense=past;pol=neg;aspect=teiru	「母に電話していなかった？」	「어머니한테 전화 안 하고 있었어?」
+n5-vfinal-2242	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母に電話します。」	「어머니한테 전화해요.」
+n5-vfinal-2243	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「母は友達に電話します。」	「어머니는 친구한테 전화해요.」
+n5-vfinal-2244	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=teiru	「母に電話しています。」	「어머니한테 전화하고 있어요.」
+n5-vfinal-2245	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母に電話しません。」	「어머니한테 전화 안 해요.」
+n5-vfinal-2246	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=simple	「母は友達に電話しません。」	「어머니는 친구한테 전화 안 해요.」
+n5-vfinal-2247	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg;aspect=teiru	「母に電話していません。」	「어머니한테 전화 안 하고 있어요.」
+n5-vfinal-2248	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母に電話しました。」	「어머니한테 전화했어요.」
+n5-vfinal-2249	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「母は友達に電話しました。」	「어머니는 친구한테 전화했어요.」
+n5-vfinal-2250	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=teiru	「母に電話していました。」	「어머니한테 전화하고 있었어요.」
+n5-vfinal-2251	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「母に電話しませんでした。」	「어머니한테 전화 안 했어요.」
+n5-vfinal-2252	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=simple	「母は友達に電話しませんでした。」	「어머니는 친구한테 전화 안 했어요.」
+n5-vfinal-2253	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg;aspect=teiru	「母に電話していませんでした。」	「어머니한테 전화 안 하고 있었어요.」
+n5-vfinal-2254	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=simple	「母に電話しますか。」	「어머니한테 전화해요?」
+n5-vfinal-2255	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=pos;aspect=teiru	「母に電話していますか。」	「어머니한테 전화하고 있어요?」
+n5-vfinal-2256	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=nonpast;pol=neg;aspect=teiru	「母に電話していませんか。」	「어머니한테 전화 안 하고 있어요?」
+n5-vfinal-2257	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=simple	「母に電話しましたか。」	「어머니한테 전화했어요?」
+n5-vfinal-2258	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=pos;aspect=teiru	「母に電話していましたか。」	「어머니한테 전화하고 있었어요?」
+n5-vfinal-2259	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=simple	「母に電話しませんでしたか。」	「어머니한테 전화 안 했어요?」
+n5-vfinal-2260	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=question;tense=past;pol=neg;aspect=teiru	「母に電話していませんでしたか。」	「어머니한테 전화 안 하고 있었어요?」
+n5-vfinal-2261	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=request;tense=nonpast;pol=pos;aspect=simple	「母に電話してください。」	「어머니한테 전화해 주세요.」
+n5-vfinal-2262	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=prohibition;tense=nonpast;pol=pos;aspect=simple	「母に電話しないでください。」	「어머니한테 전화하지 마세요.」
+n5-vfinal-2263	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-mashou;tense=nonpast;pol=pos;aspect=simple	「母に電話しましょう。」	「어머니한테 전화하죠.」
+n5-vfinal-2264	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-mashouka;tense=nonpast;pol=pos;aspect=simple	「母に電話しましょうか。」	「어머니한테 전화할까요?」
+n5-vfinal-2265	block=vfinal;pred=sahen;ctx.polite=dialogue.masu;stype=invite-masenka;tense=nonpast;pol=pos;aspect=simple	「母に電話しませんか。」	「어머니한테 전화하지 않을래요?」
 n5-vmod-2266	block=vmod;pred=godan-u;mod=tai;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	傘を買いたい。	우산을 사고 싶다.
 n5-vmod-2267	block=vmod;pred=godan-u;mod=tai;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	傘を買いたくない。	우산을 사고 싶지 않다.
 n5-vmod-2268	block=vmod;pred=godan-u;mod=tai;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos	傘を買いたかった。	우산을 사고 싶었다.
@@ -2308,8 +2308,8 @@ n5-vmod-2306	block=vmod;pred=godan-u;mod=tsumori;ctx.polite=dialogue.masu;stype=
 n5-vmod-2307	block=vmod;pred=godan-u;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「傘を買わないつもりです。」	「우산을 안 살 생각이에요.」
 n5-vmod-2308	block=vmod;pred=godan-u;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「傘を買うつもりでした。」	「우산을 살 생각이었어요.」
 n5-vmod-2309	block=vmod;pred=godan-u;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「傘を買わないつもりでした。」	「우산을 안 살 생각이었어요.」
-n5-vmod-2310	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	傘を買った方がいい。	우산을 사는 게 좋다.
-n5-vmod-2311	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	傘を買わない方がいい。	우산을 사지 않는 게 좋다.
+n5-vmod-2310	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	傘を買った方がいい。	우산을 사는 것이 좋다.
+n5-vmod-2311	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	傘を買わない方がいい。	우산을 사지 않는 것이 좋다.
 n5-vmod-2312	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「傘を買った方がいい。」	「우산을 사는 게 좋아.」
 n5-vmod-2313	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「傘を買わない方がいい。」	「우산을 사지 않는 게 좋아.」
 n5-vmod-2314	block=vmod;pred=godan-u;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「傘を買った方がいいです。」	「우산을 사는 게 좋아요.」
@@ -2372,8 +2372,8 @@ n5-vmod-2370	block=vmod;pred=godan-ku;mod=tsumori;ctx.polite=dialogue.masu;stype
 n5-vmod-2371	block=vmod;pred=godan-ku;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「手紙を書かないつもりです。」	「편지를 안 쓸 생각이에요.」
 n5-vmod-2372	block=vmod;pred=godan-ku;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「手紙を書くつもりでした。」	「편지를 쓸 생각이었어요.」
 n5-vmod-2373	block=vmod;pred=godan-ku;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「手紙を書かないつもりでした。」	「편지를 안 쓸 생각이었어요.」
-n5-vmod-2374	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	手紙を書いた方がいい。	편지를 쓰는 게 좋다.
-n5-vmod-2375	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	手紙を書かない方がいい。	편지를 쓰지 않는 게 좋다.
+n5-vmod-2374	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	手紙を書いた方がいい。	편지를 쓰는 것이 좋다.
+n5-vmod-2375	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	手紙を書かない方がいい。	편지를 쓰지 않는 것이 좋다.
 n5-vmod-2376	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「手紙を書いた方がいい。」	「편지를 쓰는 게 좋아.」
 n5-vmod-2377	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「手紙を書かない方がいい。」	「편지를 쓰지 않는 게 좋아.」
 n5-vmod-2378	block=vmod;pred=godan-ku;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「手紙を書いた方がいいです。」	「편지를 쓰는 게 좋아요.」
@@ -2436,8 +2436,8 @@ n5-vmod-2434	block=vmod;pred=godan-ku-iku;mod=tsumori;ctx.polite=dialogue.masu;s
 n5-vmod-2435	block=vmod;pred=godan-ku-iku;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「学校へ行かないつもりです。」	「학교에 안 갈 생각이에요.」
 n5-vmod-2436	block=vmod;pred=godan-ku-iku;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「学校へ行くつもりでした。」	「학교에 갈 생각이었어요.」
 n5-vmod-2437	block=vmod;pred=godan-ku-iku;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「学校へ行かないつもりでした。」	「학교에 안 갈 생각이었어요.」
-n5-vmod-2438	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	学校へ行った方がいい。	학교에 가는 게 좋다.
-n5-vmod-2439	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	学校へ行かない方がいい。	학교에 가지 않는 게 좋다.
+n5-vmod-2438	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	学校へ行った方がいい。	학교에 가는 것이 좋다.
+n5-vmod-2439	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	学校へ行かない方がいい。	학교에 가지 않는 것이 좋다.
 n5-vmod-2440	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「学校へ行った方がいい。」	「학교에 가는 게 좋아.」
 n5-vmod-2441	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「学校へ行かない方がいい。」	「학교에 가지 않는 게 좋아.」
 n5-vmod-2442	block=vmod;pred=godan-ku-iku;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「学校へ行った方がいいです。」	「학교에 가는 게 좋아요.」
@@ -2500,8 +2500,8 @@ n5-vmod-2498	block=vmod;pred=godan-gu;mod=tsumori;ctx.polite=dialogue.masu;stype
 n5-vmod-2499	block=vmod;pred=godan-gu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「海で泳がないつもりです。」	「바다에서 수영 안 할 생각이에요.」
 n5-vmod-2500	block=vmod;pred=godan-gu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「海で泳ぐつもりでした。」	「바다에서 수영할 생각이었어요.」
 n5-vmod-2501	block=vmod;pred=godan-gu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「海で泳がないつもりでした。」	「바다에서 수영 안 할 생각이었어요.」
-n5-vmod-2502	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	海で泳いだ方がいい。	바다에서 수영하는 게 좋다.
-n5-vmod-2503	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	海で泳がない方がいい。	바다에서 수영하지 않는 게 좋다.
+n5-vmod-2502	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	海で泳いだ方がいい。	바다에서 수영하는 것이 좋다.
+n5-vmod-2503	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	海で泳がない方がいい。	바다에서 수영하지 않는 것이 좋다.
 n5-vmod-2504	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「海で泳いだ方がいい。」	「바다에서 수영하는 게 좋아.」
 n5-vmod-2505	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「海で泳がない方がいい。」	「바다에서 수영하지 않는 게 좋아.」
 n5-vmod-2506	block=vmod;pred=godan-gu;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「海で泳いだ方がいいです。」	「바다에서 수영하는 게 좋아요.」
@@ -2564,8 +2564,8 @@ n5-vmod-2562	block=vmod;pred=godan-su;mod=tsumori;ctx.polite=dialogue.masu;stype
 n5-vmod-2563	block=vmod;pred=godan-su;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「話さないつもりです。」	「이야기 안 할 생각이에요.」
 n5-vmod-2564	block=vmod;pred=godan-su;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「話すつもりでした。」	「이야기할 생각이었어요.」
 n5-vmod-2565	block=vmod;pred=godan-su;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「話さないつもりでした。」	「이야기 안 할 생각이었어요.」
-n5-vmod-2566	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	話した方がいい。	이야기하는 게 좋다.
-n5-vmod-2567	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	話さない方がいい。	이야기하지 않는 게 좋다.
+n5-vmod-2566	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	話した方がいい。	이야기하는 것이 좋다.
+n5-vmod-2567	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	話さない方がいい。	이야기하지 않는 것이 좋다.
 n5-vmod-2568	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「話した方がいい。」	「이야기하는 게 좋아.」
 n5-vmod-2569	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「話さない方がいい。」	「이야기하지 않는 게 좋아.」
 n5-vmod-2570	block=vmod;pred=godan-su;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「話した方がいいです。」	「이야기하는 게 좋아요.」
@@ -2628,8 +2628,8 @@ n5-vmod-2626	block=vmod;pred=godan-tsu;mod=tsumori;ctx.polite=dialogue.masu;styp
 n5-vmod-2627	block=vmod;pred=godan-tsu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「友達を待たないつもりです。」	「친구를 안 기다릴 생각이에요.」
 n5-vmod-2628	block=vmod;pred=godan-tsu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「友達を待つつもりでした。」	「친구를 기다릴 생각이었어요.」
 n5-vmod-2629	block=vmod;pred=godan-tsu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「友達を待たないつもりでした。」	「친구를 안 기다릴 생각이었어요.」
-n5-vmod-2630	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	友達を待った方がいい。	친구를 기다리는 게 좋다.
-n5-vmod-2631	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	友達を待たない方がいい。	친구를 기다리지 않는 게 좋다.
+n5-vmod-2630	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	友達を待った方がいい。	친구를 기다리는 것이 좋다.
+n5-vmod-2631	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	友達を待たない方がいい。	친구를 기다리지 않는 것이 좋다.
 n5-vmod-2632	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「友達を待った方がいい。」	「친구를 기다리는 게 좋아.」
 n5-vmod-2633	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「友達を待たない方がいい。」	「친구를 기다리지 않는 게 좋아.」
 n5-vmod-2634	block=vmod;pred=godan-tsu;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「友達を待った方がいいです。」	「친구를 기다리는 게 좋아요.」
@@ -2718,8 +2718,8 @@ n5-vmod-2716	block=vmod;pred=godan-bu;mod=tsumori;ctx.polite=dialogue.masu;stype
 n5-vmod-2717	block=vmod;pred=godan-bu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「公園で遊ばないつもりです。」	「공원에서 안 놀 생각이에요.」
 n5-vmod-2718	block=vmod;pred=godan-bu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「公園で遊ぶつもりでした。」	「공원에서 놀 생각이었어요.」
 n5-vmod-2719	block=vmod;pred=godan-bu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「公園で遊ばないつもりでした。」	「공원에서 안 놀 생각이었어요.」
-n5-vmod-2720	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	公園で遊んだ方がいい。	공원에서 노는 게 좋다.
-n5-vmod-2721	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	公園で遊ばない方がいい。	공원에서 놀지 않는 게 좋다.
+n5-vmod-2720	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	公園で遊んだ方がいい。	공원에서 노는 것이 좋다.
+n5-vmod-2721	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	公園で遊ばない方がいい。	공원에서 놀지 않는 것이 좋다.
 n5-vmod-2722	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「公園で遊んだ方がいい。」	「공원에서 노는 게 좋아.」
 n5-vmod-2723	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「公園で遊ばない方がいい。」	「공원에서 놀지 않는 게 좋아.」
 n5-vmod-2724	block=vmod;pred=godan-bu;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「公園で遊んだ方がいいです。」	「공원에서 노는 게 좋아요.」
@@ -2782,8 +2782,8 @@ n5-vmod-2780	block=vmod;pred=godan-mu;mod=tsumori;ctx.polite=dialogue.masu;stype
 n5-vmod-2781	block=vmod;pred=godan-mu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「本を読まないつもりです。」	「책을 안 읽을 생각이에요.」
 n5-vmod-2782	block=vmod;pred=godan-mu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「本を読むつもりでした。」	「책을 읽을 생각이었어요.」
 n5-vmod-2783	block=vmod;pred=godan-mu;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「本を読まないつもりでした。」	「책을 안 읽을 생각이었어요.」
-n5-vmod-2784	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	本を読んだ方がいい。	책을 읽는 게 좋다.
-n5-vmod-2785	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	本を読まない方がいい。	책을 읽지 않는 게 좋다.
+n5-vmod-2784	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	本を読んだ方がいい。	책을 읽는 것이 좋다.
+n5-vmod-2785	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	本を読まない方がいい。	책을 읽지 않는 것이 좋다.
 n5-vmod-2786	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「本を読んだ方がいい。」	「책을 읽는 게 좋아.」
 n5-vmod-2787	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「本を読まない方がいい。」	「책을 읽지 않는 게 좋아.」
 n5-vmod-2788	block=vmod;pred=godan-mu;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「本を読んだ方がいいです。」	「책을 읽는 게 좋아요.」
@@ -2846,8 +2846,8 @@ n5-vmod-2844	block=vmod;pred=godan-ru;mod=tsumori;ctx.polite=dialogue.masu;stype
 n5-vmod-2845	block=vmod;pred=godan-ru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「料理を作らないつもりです。」	「요리를 안 만들 생각이에요.」
 n5-vmod-2846	block=vmod;pred=godan-ru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「料理を作るつもりでした。」	「요리를 만들 생각이었어요.」
 n5-vmod-2847	block=vmod;pred=godan-ru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「料理を作らないつもりでした。」	「요리를 안 만들 생각이었어요.」
-n5-vmod-2848	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	料理を作った方がいい。	요리를 만드는 게 좋다.
-n5-vmod-2849	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	料理を作らない方がいい。	요리를 만들지 않는 게 좋다.
+n5-vmod-2848	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	料理を作った方がいい。	요리를 만드는 것이 좋다.
+n5-vmod-2849	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	料理を作らない方がいい。	요리를 만들지 않는 것이 좋다.
 n5-vmod-2850	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「料理を作った方がいい。」	「요리를 만드는 게 좋아.」
 n5-vmod-2851	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「料理を作らない方がいい。」	「요리를 만들지 않는 게 좋아.」
 n5-vmod-2852	block=vmod;pred=godan-ru;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「料理を作った方がいいです。」	「요리를 만드는 게 좋아요.」
@@ -2910,8 +2910,8 @@ n5-vmod-2908	block=vmod;pred=ichidan;mod=tsumori;ctx.polite=dialogue.masu;stype=
 n5-vmod-2909	block=vmod;pred=ichidan;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「パンを食べないつもりです。」	「빵을 안 먹을 생각이에요.」
 n5-vmod-2910	block=vmod;pred=ichidan;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「パンを食べるつもりでした。」	「빵을 먹을 생각이었어요.」
 n5-vmod-2911	block=vmod;pred=ichidan;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「パンを食べないつもりでした。」	「빵을 안 먹을 생각이었어요.」
-n5-vmod-2912	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	パンを食べた方がいい。	빵을 먹는 게 좋다.
-n5-vmod-2913	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	パンを食べない方がいい。	빵을 먹지 않는 게 좋다.
+n5-vmod-2912	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	パンを食べた方がいい。	빵을 먹는 것이 좋다.
+n5-vmod-2913	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	パンを食べない方がいい。	빵을 먹지 않는 것이 좋다.
 n5-vmod-2914	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「パンを食べた方がいい。」	「빵을 먹는 게 좋아.」
 n5-vmod-2915	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「パンを食べない方がいい。」	「빵을 먹지 않는 게 좋아.」
 n5-vmod-2916	block=vmod;pred=ichidan;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「パンを食べた方がいいです。」	「빵을 먹는 게 좋아요.」
@@ -2974,8 +2974,8 @@ n5-vmod-2972	block=vmod;pred=suru;mod=tsumori;ctx.polite=dialogue.masu;stype=sta
 n5-vmod-2973	block=vmod;pred=suru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「宿題をしないつもりです。」	「숙제를 안 할 생각이에요.」
 n5-vmod-2974	block=vmod;pred=suru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「宿題をするつもりでした。」	「숙제를 할 생각이었어요.」
 n5-vmod-2975	block=vmod;pred=suru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「宿題をしないつもりでした。」	「숙제를 안 할 생각이었어요.」
-n5-vmod-2976	block=vmod;pred=suru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	宿題をした方がいい。	숙제를 하는 게 좋다.
-n5-vmod-2977	block=vmod;pred=suru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	宿題をしない方がいい。	숙제를 하지 않는 게 좋다.
+n5-vmod-2976	block=vmod;pred=suru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	宿題をした方がいい。	숙제를 하는 것이 좋다.
+n5-vmod-2977	block=vmod;pred=suru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	宿題をしない方がいい。	숙제를 하지 않는 것이 좋다.
 n5-vmod-2978	block=vmod;pred=suru;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「宿題をした方がいい。」	「숙제를 하는 게 좋아.」
 n5-vmod-2979	block=vmod;pred=suru;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「宿題をしない方がいい。」	「숙제를 하지 않는 게 좋아.」
 n5-vmod-2980	block=vmod;pred=suru;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「宿題をした方がいいです。」	「숙제를 하는 게 좋아요.」
@@ -3038,8 +3038,8 @@ n5-vmod-3036	block=vmod;pred=kuru;mod=tsumori;ctx.polite=dialogue.masu;stype=sta
 n5-vmod-3037	block=vmod;pred=kuru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「来ないつもりです。」	「안 올 생각이에요.」
 n5-vmod-3038	block=vmod;pred=kuru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「来るつもりでした。」	「올 생각이었어요.」
 n5-vmod-3039	block=vmod;pred=kuru;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「来ないつもりでした。」	「안 올 생각이었어요.」
-n5-vmod-3040	block=vmod;pred=kuru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	友達が来た方がいい。	친구가 오는 게 좋다.
-n5-vmod-3041	block=vmod;pred=kuru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	友達が来ない方がいい。	친구가 오지 않는 게 좋다.
+n5-vmod-3040	block=vmod;pred=kuru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	友達が来た方がいい。	친구가 오는 것이 좋다.
+n5-vmod-3041	block=vmod;pred=kuru;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	友達が来ない方がいい。	친구가 오지 않는 것이 좋다.
 n5-vmod-3042	block=vmod;pred=kuru;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「友達が来た方がいい。」	「친구가 오는 게 좋아.」
 n5-vmod-3043	block=vmod;pred=kuru;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「友達が来ない方がいい。」	「친구가 오지 않는 게 좋아.」
 n5-vmod-3044	block=vmod;pred=kuru;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「友達が来た方がいいです。」	「친구가 오는 게 좋아요.」
@@ -3102,8 +3102,8 @@ n5-vmod-3100	block=vmod;pred=sahen;mod=tsumori;ctx.polite=dialogue.masu;stype=st
 n5-vmod-3101	block=vmod;pred=sahen;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=neg	「図書館で勉強しないつもりです。」	「도서관에서 공부 안 할 생각이에요.」
 n5-vmod-3102	block=vmod;pred=sahen;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos	「図書館で勉強するつもりでした。」	「도서관에서 공부할 생각이었어요.」
 n5-vmod-3103	block=vmod;pred=sahen;mod=tsumori;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=neg	「図書館で勉強しないつもりでした。」	「도서관에서 공부 안 할 생각이었어요.」
-n5-vmod-3104	block=vmod;pred=sahen;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	図書館で勉強した方がいい。	도서관에서 공부하는 게 좋다.
-n5-vmod-3105	block=vmod;pred=sahen;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	図書館で勉強しない方がいい。	도서관에서 공부하지 않는 게 좋다.
+n5-vmod-3104	block=vmod;pred=sahen;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos	図書館で勉強した方がいい。	도서관에서 공부하는 것이 좋다.
+n5-vmod-3105	block=vmod;pred=sahen;mod=hougaii;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=neg	図書館で勉強しない方がいい。	도서관에서 공부하지 않는 것이 좋다.
 n5-vmod-3106	block=vmod;pred=sahen;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos	「図書館で勉強した方がいい。」	「도서관에서 공부하는 게 좋아.」
 n5-vmod-3107	block=vmod;pred=sahen;mod=hougaii;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=neg	「図書館で勉強しない方がいい。」	「도서관에서 공부하지 않는 게 좋아.」
 n5-vmod-3108	block=vmod;pred=sahen;mod=hougaii;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos	「図書館で勉強した方がいいです。」	「도서관에서 공부하는 게 좋아요.」
@@ -5117,14 +5117,14 @@ n5-point-5115	block=point;point=N5-11;row=p11a;ctx.polite=dialogue.masu;stype=st
 n5-point-5116	block=point;point=N5-11;row=p11a;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達は本を読みました。」	「친구는 책을 읽었어요.」
 n5-point-5117	block=point;point=N5-11;row=p11b;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	私は学生だ。	나는 학생이다.
 n5-point-5118	block=point;point=N5-11;row=p11b;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	私は学生だった。	나는 학생이었다.
-n5-point-5119	block=point;point=N5-11;row=p11b;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は学生だ。」	「나는 학생이야.」
-n5-point-5120	block=point;point=N5-11;row=p11b;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私は学生だった。」	「나는 학생이었어.」
+n5-point-5119	block=point;point=N5-11;row=p11b;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は学生だ。」	「난 학생이야.」
+n5-point-5120	block=point;point=N5-11;row=p11b;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私は学生だった。」	「난 학생이었어.」
 n5-point-5121	block=point;point=N5-11;row=p11b;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は学生です。」	「저는 학생이에요.」
 n5-point-5122	block=point;point=N5-11;row=p11b;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「私は学生でした。」	「저는 학생이었어요.」
 n5-point-5123	block=point;point=N5-12;row=p12b;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	私は猫が好きだ。	나는 고양이를 좋아한다.
 n5-point-5124	block=point;point=N5-12;row=p12b;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	私は猫が好きだった。	나는 고양이를 좋아했다.
-n5-point-5125	block=point;point=N5-12;row=p12b;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は猫が好きだ。」	「나는 고양이를 좋아해.」
-n5-point-5126	block=point;point=N5-12;row=p12b;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私は猫が好きだった。」	「나는 고양이를 좋아했어.」
+n5-point-5125	block=point;point=N5-12;row=p12b;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は猫が好きだ。」	「난 고양이를 좋아해.」
+n5-point-5126	block=point;point=N5-12;row=p12b;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私は猫が好きだった。」	「난 고양이를 좋아했어.」
 n5-point-5127	block=point;point=N5-12;row=p12b;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は猫が好きです。」	「저는 고양이를 좋아해요.」
 n5-point-5128	block=point;point=N5-12;row=p12b;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「私は猫が好きでした。」	「저는 고양이를 좋아했어요.」
 n5-point-5129	block=point;point=N5-13;row=p13a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	牛乳を飲む。	우유를 마신다.
@@ -5147,10 +5147,10 @@ n5-point-5145	block=point;point=N5-14;row=p14b;ctx.polite=dialogue.masu;stype=st
 n5-point-5146	block=point;point=N5-14;row=p14b;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「日曜日に公園へ行きました。」	「일요일에 공원에 갔어요.」
 n5-point-5147	block=point;point=N5-14;row=p14c;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	友達に日本語を教える。	친구에게 일본어를 가르친다.
 n5-point-5148	block=point;point=N5-14;row=p14c;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	友達に日本語を教えた。	친구에게 일본어를 가르쳤다.
-n5-point-5149	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達に日本語を教える。」	「친구에게 일본어를 가르쳐.」
-n5-point-5150	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達に日本語を教えた。」	「친구에게 일본어를 가르쳤어.」
-n5-point-5151	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達に日本語を教えます。」	「친구에게 일본어를 가르쳐요.」
-n5-point-5152	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達に日本語を教えました。」	「친구에게 일본어를 가르쳤어요.」
+n5-point-5149	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達に日本語を教える。」	「친구한테 일본어를 가르쳐.」
+n5-point-5150	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「友達に日本語を教えた。」	「친구한테 일본어를 가르쳤어.」
+n5-point-5151	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「友達に日本語を教えます。」	「친구한테 일본어를 가르쳐요.」
+n5-point-5152	block=point;point=N5-14;row=p14c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「友達に日本語を教えました。」	「친구한테 일본어를 가르쳤어요.」
 n5-point-5153	block=point;point=N5-14;row=p14d;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	部屋に鞄がある。	방에 가방이 있다.
 n5-point-5154	block=point;point=N5-14;row=p14d;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	部屋に鞄があった。	방에 가방이 있었다.
 n5-point-5155	block=point;point=N5-14;row=p14d;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「部屋に鞄がある。」	「방에 가방이 있어.」
@@ -5273,10 +5273,10 @@ n5-point-5271	block=point;point=N5-20;row=p20b;ctx.polite=dialogue.masu;stype=st
 n5-point-5272	block=point;point=N5-20;row=p20b;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「朝から働きました。」	「아침부터 일했어요.」
 n5-point-5273	block=point;point=N5-20;row=p20c;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	先生から傘を借りる。	선생님에게서 우산을 빌린다.
 n5-point-5274	block=point;point=N5-20;row=p20c;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	先生から傘を借りた。	선생님에게서 우산을 빌렸다.
-n5-point-5275	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「先生から傘を借りる。」	「선생님에게서 우산을 빌려.」
-n5-point-5276	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「先生から傘を借りた。」	「선생님에게서 우산을 빌렸어.」
-n5-point-5277	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「先生から傘を借ります。」	「선생님에게서 우산을 빌려요.」
-n5-point-5278	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「先生から傘を借りました。」	「선생님에게서 우산을 빌렸어요.」
+n5-point-5275	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「先生から傘を借りる。」	「선생님한테서 우산을 빌려.」
+n5-point-5276	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「先生から傘を借りた。」	「선생님한테서 우산을 빌렸어.」
+n5-point-5277	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「先生から傘を借ります。」	「선생님한테서 우산을 빌려요.」
+n5-point-5278	block=point;point=N5-20;row=p20c;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「先生から傘を借りました。」	「선생님한테서 우산을 빌렸어요.」
 n5-point-5279	block=point;point=N5-21;row=p21a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	駅まで歩く。	역까지 걷는다.
 n5-point-5280	block=point;point=N5-21;row=p21a;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	駅まで歩いた。	역까지 걸었다.
 n5-point-5281	block=point;point=N5-21;row=p21a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「駅まで歩く。」	「역까지 걸어.」
@@ -5615,8 +5615,8 @@ n5-point-5613	block=point;point=N5-55;row=p55n;ctx.polite=dialogue.masu;stype=st
 n5-point-5614	block=point;point=N5-55;row=p55n;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「このパンは100円でした。」	「이 빵은 100엔이었어요.」
 n5-point-5615	block=point;point=N5-57;row=p57a;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	私は本を読むのが好きだ。	나는 책을 읽는 것을 좋아한다.
 n5-point-5616	block=point;point=N5-57;row=p57a;ctx.polite=narration.plain;stype=statement;tense=past;pol=pos;aspect=simple	私は本を読むのが好きだった。	나는 책을 읽는 것을 좋아했다.
-n5-point-5617	block=point;point=N5-57;row=p57a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は本を読むのが好きだ。」	「나는 책을 읽는 걸 좋아해.」
-n5-point-5618	block=point;point=N5-57;row=p57a;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私は本を読むのが好きだった。」	「나는 책을 읽는 걸 좋아했어.」
+n5-point-5617	block=point;point=N5-57;row=p57a;ctx.polite=dialogue.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は本を読むのが好きだ。」	「난 책을 읽는 걸 좋아해.」
+n5-point-5618	block=point;point=N5-57;row=p57a;ctx.polite=dialogue.plain;stype=statement;tense=past;pol=pos;aspect=simple	「私は本を読むのが好きだった。」	「난 책을 읽는 걸 좋아했어.」
 n5-point-5619	block=point;point=N5-57;row=p57a;ctx.polite=dialogue.masu;stype=statement;tense=nonpast;pol=pos;aspect=simple	「私は本を読むのが好きです。」	「저는 책을 읽는 걸 좋아해요.」
 n5-point-5620	block=point;point=N5-57;row=p57a;ctx.polite=dialogue.masu;stype=statement;tense=past;pol=pos;aspect=simple	「私は本を読むのが好きでした。」	「저는 책을 읽는 걸 좋아했어요.」
 n5-point-5621	block=point;point=N5-57;row=p57b;ctx.polite=narration.plain;stype=statement;tense=nonpast;pol=pos;aspect=simple	母は料理を作るのが好きだ。	어머니는 요리를 만드는 것을 좋아한다.
