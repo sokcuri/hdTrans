@@ -617,13 +617,12 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             const char32_t p = u.text[v - 1];
             static const std::u32string kTitle = U"将王帝卿殿様師長官者君神";
             // a katakana name of three or more characters, not a casual katakana word (ダメよ、, ウソよ、, マジよ、)
+            // a katakana name (ー included) right after a title or rank in kanji (副将アデム, 騎士団長レオン): casual
+            // katakana words (ダメよ、, ゴメンよ、) never follow a title
             size_t run = v;
-            while (run > 0 && u.text[run - 1] >= U'ァ' && u.text[run - 1] <= U'ヺ') --run;
-            const std::u32string kata = u.text.substr(run, v - run);
-            static const std::vector<std::u32string> kCasualKata = {U"ダメ", U"ウソ", U"イヤ", U"ムリ", U"マジ", U"ホント", U"ヤダ",
-                                                                    U"オッケー", U"ステキ", U"サイコー", U"サイテー", U"ヘン", U"ズルイ"};
-            const bool name = kata.size() >= 3 && std::find(kCasualKata.begin(), kCasualKata.end(), kata) == kCasualKata.end();
-            if (name || kTitle.find(p) != std::u32string::npos) c.auth = true;
+            while (run > 0 && ((u.text[run - 1] >= U'ァ' && u.text[run - 1] <= U'ヺ') || u.text[run - 1] == U'ー')) --run;
+            const bool titled = run < v && run > 0 && u.text[run - 1] >= 0x4E00 && u.text[run - 1] <= 0x9FFF;
+            if (titled || kTitle.find(p) != std::u32string::npos) c.auth = true;
         }
     }
     for (const auto& [kind, text] : t.honBack)
@@ -698,8 +697,18 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
     auto blank = [&](size_t k) { return lines[k].ja.find_first_not_of(" \t\r\xe3\x80\x80") == std::string::npos; };
     {
         size_t blanks = 0, narration = 0, dialogue = 0, named = 0;
+        // a name line: a short line without sentence punctuation right before a quote line (筧 / 「おはよう」)
+        auto nameLine = [&](size_t k) {
+            if (k + 1 >= lines.size() || !lines[k + 1].dialogue || lines[k].dialogue) return false;
+            const std::u32string x = ToU32(lines[k].ja);
+            if (x.empty() || x.size() > 12) return false;
+            for (char32_t ch : x)
+                if (ch == U'。' || ch == U'、' || ch == U'！' || ch == U'？' || ch == U'…' || ch == U'「') return false;
+            return true;
+        };
         for (size_t k = 0; k < lines.size(); ++k) {
             if (blank(k)) ++blanks;
+            else if (nameLine(k)) ++named;
             else if (!lines[k].dialogue) ++narration;
             else ++dialogue;
             if (!lines[k].speaker.empty()) ++named;

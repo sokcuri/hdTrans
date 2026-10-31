@@ -201,3 +201,18 @@ r20-38	REG-20	keep	p1		no		-	-
 r20-39	REG-20	keep	p2		yes	「来春、小田原へ出る」	hae	-
 r20-40	REG-20	keep	p2		yes	「そうか」	-	-
 r14-20	REG-14	keep	d140		yes	「ダメよ、そんなの許さない」	hae	-
+r14-21	REG-14	keep	d141		yes	「ゴメンよ、もう行かない」	hae	-
+r20-n0	REG-20	keep	p3		no	筧	-	-
+r20-n1	REG-20	keep	p3		yes	「おはよう」	-	-
+r20-n2	REG-20	keep	p3		no	陽菜	-	-
+r20-n3	REG-20	keep	p3		yes	「ああ、おはよう」	-	-
+r20-n4	REG-20	keep	p3		no		-	-
+r20-n5	REG-20	keep	p3		no	筧	-	-
+r20-n6	REG-20	keep	p3		yes	「明日は町へ行く」	hae	-
+r20-n7	REG-20	keep	p3		no	陽菜	-	-
+r20-n8	REG-20	keep	p3		yes	「そうなんだ」	-	-
+r20-n9	REG-20	keep	p3		no		-	-
+r20-n10	REG-20	keep	p3		no	筧	-	-
+r20-n11	REG-20	keep	p3		yes	「うん」	-	-
+r20-n12	REG-20	keep	p3		no	陽菜	-	-
+r20-n13	REG-20	keep	p3		yes	「そう」	-	-
