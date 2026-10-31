@@ -1,6 +1,7 @@
 #! grid-ko-particle
 # Japanese particle (and slot role) → Korean particle; A/B = after a consonant / after a vowel ((으)로: 로 also
-# after ㄹ). level * = any. A verb's frame column (が=을, に=을) maps the Japanese particle first.
+# after ㄹ). level * = any. @CASE: the generator's ko/particles.tsv row of the case (person: 에게/에게서 in narration,
+# 한테/한테서 in dialogue; otherwise 에/에서). A verb's frame column (が=을, に=을) maps the Japanese particle first.
 ja	role	level	ko	spec
 は	*	*	은/는	N5-11
 が	*	*	이/가	N5-12
@@ -8,7 +9,7 @@ ja	role	level	ko	spec
 に	goal	*	에	N5-14
 に	loc	*	에	N5-14
 に	time	*	에	N5-14
-に	dat	*	에게	N5-H10
+に	dat	*	@dat	N5-H10
 へ	*	*	에	N5-15
 で	loc	*	에서	N5-16
 で	instr	*	(으)로	N5-16
@@ -19,8 +20,7 @@ ja	role	level	ko	spec
 と	list	hae	이랑/랑	N5-H4
 と	list	haeyo	하고	N5-H4
 も	*	*	도	N5-18
-から	src	*	에서	N5-20
-から	srcp	*	에게서	N5-H10
+から	src	*	@src	N5-20, N5-H10
 から	time	*	부터	N5-20
 まで	*	*	까지	N5-21
 や	list	*	이나/나	N5-22

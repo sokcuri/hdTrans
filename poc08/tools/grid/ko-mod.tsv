@@ -1,15 +1,14 @@
 #! grid-ko-mod
 # Modality (and the N5-49..51 constructions). steps: endings on the predicate, then words; @HOST = the host of a
-# copula word, a bare word is literal. tense: inner = -었- on the predicate before the steps, outer = on the last
+# copula word, =NOUN/CASE = a noun with its particle (spoken fusions apply: 것이 → 게 in dialogue), a bare word
+# is literal. tense: inner = -었- on the predicate before the steps, outer = on the last
 # word. neg: where and how the polarity goes (inner-level = on the predicate, long or short by level; inner-long,
 # outer-long = -지 않다; outer-supp = the last word's lexical negative).
 mod	level	steps	tense	neg	spec
 tai	*	-고 +싶다/A	outer	outer-long	N5-44
-darou	haera	-ㄹ +이다/C@것	inner	inner-level	N5-H14
-darou	hae	-ㄹ +이다/C@거	inner	inner-level	N5-H14
-darou	haeyo	-ㄹ +이다/C@거	inner	inner-level	N5-H14
+darou	*	-ㄹ +이다/C@것	inner	inner-level	N5-H14
 tsumori	*	-ㄹ +이다/C@생각	outer	inner-level	N5-47
-hougaii	*	-는 게 +좋다/A	outer	inner-long	N5-48
+hougaii	*	-는 =것/subj +좋다/A	outer	inner-long	N5-48, STYLE §7
 temoii	*	-어도 +되다/V	outer	-	N5-49
 tewaikenai	*	-면 안 +되다/V	outer	-	N5-50
 takoto	*	-ㄴ 적이 +있다/X	outer	outer-supp:없다	N5-51

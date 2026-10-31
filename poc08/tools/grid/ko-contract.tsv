@@ -1,31 +1,12 @@
 #! grid-ko-contract
-# Word forms of pronouns, demonstratives and question words by level, and their fused particle forms (N5-H9,
-# N5-H12, N5-H16, N5-H17). particle - = the bare word; poss = the word before a noun for N の.
+# Word forms of pronouns and question words by level (N5-H9, N5-H12, N5-H16). particle - = the word itself; poss =
+# the word before a noun for N の. Fused forms with a particle (이건, 뭘, 난, 내가, 누가, 걸) are not here: they come
+# from the generator's ko/spoken.tsv (STYLE §7), dialogue only except its always rows.
 ja	level	particle	ko	spec
 私	haera	-	나	N5-H16
 私	hae	-	나	N5-H16
 私	haeyo	-	저	N5-H16
-私	haera	이/가	내가	N5-H16
-私	hae	이/가	내가	N5-H16
-私	haeyo	이/가	제가	N5-H16
 私	haera	poss	내	N5-H9
 私	hae	poss	내	N5-H9
 私	haeyo	poss	제	N5-H9
-此れ	haera	-	이것	N5-H12
-此れ	*	-	이거	N5-H12
-此れ	hae|haeyo	은/는	이건	N5-H12
-此れ	hae|haeyo	을/를	이걸	N5-H12
-其れ	haera	-	그것	N5-H12
-其れ	*	-	그거	N5-H12
-其れ	hae|haeyo	은/는	그건	N5-H12
-其れ	hae|haeyo	을/를	그걸	N5-H12
-彼れ	haera	-	저것	N5-H12
-彼れ	*	-	저거	N5-H12
-彼れ	hae|haeyo	은/는	저건	N5-H12
-彼れ	hae|haeyo	을/를	저걸	N5-H12
-何	haera	-	무엇	N5-H12
-何	*	-	뭐	N5-H12
-何	hae|haeyo	을/를	뭘	N5-H12
-誰	*	이/가	누가	N5-54
-것	hae|haeyo	을/를	걸	N5-H17
-것	hae|haeyo	은/는	건	N5-H17
+何	*	-	무엇	N5-H12

@@ -840,6 +840,8 @@ def roundtrip(rows, analyzer, fail_out):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[1])
     ap.add_argument('--hd8gen', default=os.environ.get('HD8GEN', os.path.join(REPO, 'build/mac/poc08/generator/hd8gen')))
+    ap.add_argument('--gen-data', default=os.path.join(REPO, 'poc08/generator/data/ko'),
+                    help="the generator's Korean tables (spoken.tsv, particles.tsv)")
     ap.add_argument('--out', default=os.path.join(REPO, 'poc08/tests/grid/n5.tsv'))
     ap.add_argument('--cells', help='write the row count of every cell to this file')
     ap.add_argument('--analyzer', help='hdtrans08-ir binary: run the round-trip check')
@@ -848,7 +850,7 @@ def main():
     a = ap.parse_args()
     v = Vocab()
     rows = generate(v)
-    orc = oracle.Oracle(a.hd8gen, HERE)
+    orc = oracle.Oracle(a.hd8gen, HERE, a.gen_data)
     for r in rows:
         r.ko = orc.ko(r.spec)
     for kept, dropped in DUPLICATES:
