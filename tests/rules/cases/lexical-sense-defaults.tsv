@@ -13,9 +13,9 @@ dict:w:26722	「ちょっと待て」	「잠깐 기다려」	fix	local
 dict:w:26722	「ちょっと待って下さいね」	「잠깐 기다려 주세요」	fix	local
 dict:w:26722	ちょっと来てください	rule:dict:w:26722=잠깐	fix	local
 dict:w:26722	「ちょっと痛いかも」	!rule:dict:w:26722	keep	local
-phrase:ちょっと待った	「……ちょっと待った、恥ずかしすぎる」	「……잠깐만, 너무 부끄럽다」	fix	builtin-phrase
+phrase:ちょっと待った	「……ちょっと待った、恥ずかしすぎる」	「……잠깐만, 너무 부끄러워」	fix	builtin-phrase
 dict:jisjk:374181	「待たせて悪い」	「기다리게 해 미안하다」	fix	local
-dict:jisjk:374181	「引き留めて悪かった」	「만류해 미안했다」	fix	local
+dict:jisjk:374181	「引き留めて悪かった」	「만류해 미안했어」	fix	local
 dict:jisjk:374181	知りすぎて悪い情報なんかない	!rule:dict:jisjk:374181	keep	local
 dict:jisjk:5143	「ずるいぞ」	「치사해」	fix	lookup
 dict:jisjk:5143	「御園、その質問はずるいだろ」	「미소노, 그 질문은 치사하지」	fix	lookup

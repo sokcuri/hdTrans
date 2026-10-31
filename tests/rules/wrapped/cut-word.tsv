@@ -67,7 +67,7 @@ wrapped:cut-word	含まれております\nよ～う　考えた	포함되어 �
 wrapped:cut-word	処刑されます\nそ… そんな！	처형당합니다\n소… 그런!	keep	driver
 wrapped:cut-word	キスしたくせに\n（るな）しおちゃん差し入れ　持ってきたよ～。	키스했으면서\n(루인) 시오짱 간식 가져왔어~.	keep	driver
 wrapped:cut-word	彼はゲームを始め\n\nるとか、そういう話。	그는 게임을 시작해\n\n루라든지, 그런 이야기.	keep	driver
-wrapped:cut-word	もう逃\n「げるしかない」	이제 도\n「밖에 없다」	keep	driver
+wrapped:cut-word	もう逃\n「げるしかない」	이제 도\n「밖에 없어」	keep	driver
 wrapped:cut-word	試合が始ま\nりです	시합이 시작\n입니다	keep	driver
 wrapped:cut-word	「…始ま\nりです」	「…시작\n입니다」	fix	driver
 wrapped:cut-word	テーブ\nルでしょう。	테이블\n이죠.	fix	driver

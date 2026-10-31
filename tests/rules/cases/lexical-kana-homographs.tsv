@@ -7,7 +7,7 @@ lookup:kana-homograph	本格ピザ？うーん、材料あるかな？はい、�
 lookup:kana-homograph	まだあるくんだ。	아직 걷는 거야.	keep	lookup
 lookup:kana-homograph	一緒にあるこう。	함께 걷자.	keep	lookup
 lookup:kana-homograph	あるいは、内部を確認したかもしれない。	혹은, 내부를 확인했을지도 모른다.	keep	lookup
-lookup:kana-homograph	「三角テントだったら２人じゃきつかったかもしれない」	「삼각 텐트라면 2명은 힘들었던 걸지도 모른다」	fix	lookup
+lookup:kana-homograph	「三角テントだったら２人じゃきつかったかもしれない」	「삼각 텐트라면 2명은 힘들었던 걸지도 몰라」	fix	lookup
 lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이야!	fix	lookup
 lookup:kana-homograph	あ、今はね、マルヒトマルマルよ。	has:지금은 말이야	fix	lookup
 lookup:kana-homograph	車にはねられた。	차에 받혔다.	keep	lookup

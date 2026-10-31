@@ -31,9 +31,9 @@ compose:speech-mark	艦隊が帰投いたしました！	함대가 귀환했습�
 compose:speech-mark	ありがたい…これでまた戦える。	고맙다…이것으로 또 싸울 수 있다.	keep	compose
 compose:speech-mark	調べた結果、扉には罠は無い…鍵すらかかっていないことは確認済みだ。	조사한 결과, 문에는 함정은 없다…열쇠조차 잠기지 않은 것은 확인이 끝난 상태다.	keep	compose
 compose:speech-mark	どこを見ている？私はここだぞ？	어디를 보고 있어? 나는 여기다?	keep	compose
-compose:speech-mark	「明日、海に行く」	「내일, 바다에 간다」	keep	compose
+compose:speech-mark	「明日、海に行く」	「내일, 바다에 가」	keep	compose
 compose:speech-mark	痛いいいい、やめて	아프다아아아, 그만해	keep	compose
-compose:speech-mark	「ならぬ！これは私なりの誠意なのだ！」	「되지 않는다! 이것은 나나름의 성의다!」	keep	compose
+compose:speech-mark	「ならぬ！これは私なりの誠意なのだ！」	「되지 않아! 이건 나나름의 성의야!」	keep	compose
 compose:speech-mark	司令官、どうするー？	사령관, 어떻게 해~?	fix	compose
 compose:speech-mark	あっ、香取～！ また一緒に踊る～？	앗, 카토리~! 또 함께 춤춰~?	fix	compose
 compose:speech-mark	なにかを思い出すかのようにとても哀しい……	뭔가를 생각해 내는 것처럼 무척 슬퍼……	fix	compose

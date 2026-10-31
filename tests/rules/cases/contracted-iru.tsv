@@ -1,6 +1,6 @@
 # 규칙: LEX-34
 rule	input	expected	kind	layer
-lookup:contracted-iru	「別に。おれは、ただ見てただけだ。」	「별로. 나는, 다만 보고 있었을 뿐이다.」	fix	lookup
+lookup:contracted-iru	「別に。おれは、ただ見てただけだ。」	「별로. 난, 다만 보고 있었을 뿐이야.」	fix	lookup
 lookup:contracted-iru	分からない俺は道を歩いてただけだ	모르는 나는 길을 걷고 있었을 뿐이다	fix	lookup
 lookup:contracted-iru	覚悟はしてたが罪悪感で胸が締め付けられるからやめろ！	각오는 하고 있었지만 죄책감으로 가슴이 단단히 조여지기 때문 그만두어라!	fix	lookup
 lookup:contracted-iru	午前3時。今寝てたぞ	오전 3시. 지금 자고 있었어	fix	lookup

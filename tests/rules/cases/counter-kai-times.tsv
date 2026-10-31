@@ -28,22 +28,22 @@ dict:jisjk:115519	「第１０回、納涼カラオケ大会！」	「제10회, 
 dict:jisjk:344600	『第１回チキチキ、いったい誰の真似なのよ？』	『제1회 치키치키, 도대체 누구의 흉내야?』	keep	defaults
 dict:jisjk:344600	「1回戦で負けちまったのさ」	「1회전에서 져버렸어」	keep	defaults
 dict:jisjk:344600	「１回２錠で１０回分あります。」	「1회 2정으로 10회분 있습니다.」	keep	defaults
-dict:jisjk:344600	「部内で行うだけでなく、年に１回は近くの学校と合同で行う。」	「부내에서 실시할 뿐만 아니라, 1년에 한 번은 근처 학교와 합동으로 실시한다.」	keep	compose
+dict:jisjk:344600	「部内で行うだけでなく、年に１回は近くの学校と合同で行う。」	「부내에서 실시할 뿐만 아니라, 1년에 한 번은 근처 학교와 합동으로 실시해.」	keep	compose
 dict:jisjk:344600	「１回も勝てなかった」	!rule:dict:jisjk:344600	keep	local
 compose:native-count	実際、会うのはこれで2回目なんすけど	실제, 만나는 것은 이것으로 2번째인데요	keep	compose
 compose:native-count	毎年来てるんだ。これで3回目さ。	매년 오고 있어. 이것으로 3번째야.	keep	compose
 dict:jisjk:115519	何回も言った。	몇 번이나 말했다.	keep	defaults
 dict:jisjk:115519	第2回も開催された。	rule:dict:jisjk:115519=회	keep	local
 dict:jisjk:115519	「第3回も中止だ」	rule:dict:jisjk:115519=회	keep	local
-dict:jisjk:115519	「2回か3回は言った」	「2회나 3회는 말했다」	keep	local
-dict:jisjk:115519	「5回中4回は負けた」	「5회 중 4회는 졌다」	keep	local
+dict:jisjk:115519	「2回か3回は言った」	「2회나 3회는 말했어」	keep	local
+dict:jisjk:115519	「5回中4回は負けた」	「5회 중 4회는 졌어」	keep	local
 dict:jisjk:115519	「1回、2回、3回と数えた」	「1회, 2회, 3회로 세었다」	keep	local
 dict:jisjk:344600	「3回のうち1回は負ける」	rule:dict:jisjk:344600=1회	keep	local
-dict:jisjk:344600	「第1回も中止だ」	「제1회도 중지다」	fix	local
+dict:jisjk:344600	「第1回も中止だ」	「제1회도 중지야」	fix	local
 dict:jisjk:344600	「1回でも勝てば」	rule:dict:jisjk:344600=1번	fix	local
-dict:jisjk:115519	「3回攻撃する」	「3회 공격한다」	keep	global-stem
+dict:jisjk:115519	「3回攻撃する」	「3회 공격해」	keep	global-stem
 dict:jisjk:115519	2回まで使用可能。	2회까지 사용 가능.	keep	global-stem
 dict:jisjk:115519	1日3回まで挑戦できる。	1일 3회까지 도전할 수 있다.	keep	global-stem
 dict:jisjk:115519	3回言った。	3회 말했다.	keep	global-stem
-dict:jisjk:115519	「大会で3回勝った」	「대회에서 3번 이겼다」	fix	local
+dict:jisjk:115519	「大会で3回勝った」	「대회에서 3번 이겼어」	fix	local
 dict:jisjk:115519	「再会して2回も泣いた」	rule:dict:jisjk:115519=번	fix	local

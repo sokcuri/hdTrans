@@ -8,11 +8,11 @@ compose:speech-casual-marked	「これは僕の本だよ。昨日買った」	�
 compose:speech-casual-marked	「何か落ちてるよ。君のものか」	「뭔가 떨어져 있어. 네 건가」	fix	compose
 compose:speech-casual-marked	「家に帰るよ。疲れた」	「집에 돌아가. 지쳤어」	fix	compose
 compose:speech-casual-marked	「いいもん。一人で行くもん。平気だ」	「좋은 걸. 혼자서 가는걸. 괜찮아」	fix	compose
-compose:speech-casual-marked	「明日は早く起きるよ。もう寝る」	「내일은 일찍 일어나. 이제 잔다」	keep	compose
+compose:speech-casual-marked	「明日は早く起きるよ。もう寝る」	「내일은 일찍 일어나. 이제 자」	keep	compose
 compose:speech-casual-marked	「ありがとうね。助かった」	「고마워. 살았어」	fix	compose
 compose:speech-casual-marked	「ごめんなさいね。助かった」	「미안해요. 살았다」	keep	compose
 compose:speech-casual-marked	「君の言う通りだわ。私が悪かった」	「네가 말하는 대로야. 내가 나빴어」	keep	compose
-compose:speech-casual-marked	「余計なことを言うな。分かっているのだ」	「쓸데없는 말을 하지 마. 알고 있다」	keep	compose
+compose:speech-casual-marked	「余計なことを言うな。分かっているのだ」	「쓸데없는 말을 하지 마. 알고 있어」	keep	compose
 compose:speech-casual-marked	「我々の勝利は決まった。諦めるがいいさ」	「우리 승리는 정해졌다. 포기하는 게 좋아」	keep	compose
 compose:speech-casual-marked	「『もう遅い』って書いてあったよ」	「『이미 늦다』라고 써 있었어」	keep	compose
 compose:speech-casual-marked	「彼は来ない、と言ってたよ」	「그는 오지 않는다, 라고 말했어」	keep	compose
@@ -24,5 +24,5 @@ compose:speech-casual-marked	「うめえ」	「맛있어」	fix	compose
 compose:speech-casual-marked	「ハードル高えな、完全無茶ぶりだ」	「허들 높아, 완전 무리한 요구야」	fix	compose
 compose:speech-casual-marked	「キャリア浅っ」	「캐리어 얕아」	fix	compose
 compose:speech-casual-marked	「冷てえ！」	「차가워!」	fix	compose
-compose:speech-casual-marked	「考えがある」	「생각이 있다」	keep	compose
-compose:speech-casual-marked	「答えだ」	「대답이다」	keep	compose
+compose:speech-casual-marked	「考えがある」	「생각이 있어」	keep	compose
+compose:speech-casual-marked	「答えだ」	「대답이야」	keep	compose

@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
-dict:jisjk:344556	「聞くな、耳が穢れる」	「듣지 마, 귀가 더럽혀진다」	fix	local-ending
-dict:jisjk:344556	「あまり見るな、恥ずかしい」	「너무 보지 마, 부끄럽다」	fix	local-ending
-dict:jisjk:344556	「こら、邪魔するな、上手く動けないだろう」	「이봐, 방해하지 마, 잘 움직일 수 없을 것이다」	fix	local-ending
+dict:jisjk:344556	「聞くな、耳が穢れる」	「듣지 마, 귀가 더럽혀져」	fix	local-ending
+dict:jisjk:344556	「あまり見るな、恥ずかしい」	「너무 보지 마, 부끄러워」	fix	local-ending
+dict:jisjk:344556	「こら、邪魔するな、上手く動けないだろう」	「이봐, 방해하지 마, 잘 움직일 수 없을 거야」	fix	local-ending
 dict:jisjk:344556	ふざけるな、負けるかよっ！	장난치지 마, 질까 보냐!	fix	local-ending
 dict:jisjk:344556	絶対にはぐれるな、そこを動くな、	절대로 놓치지 마, 거기를 움직이지 마,	fix	local-ending
 dict:jisjk:344556	行くな。	가지 마.	keep	local-ending

@@ -26,6 +26,7 @@
 #include "core/pipeline/segment.h"
 #include "core/pipeline/sound.h"
 #include "core/pipeline/speech.h"
+#include "core/register/retrofit.h"
 #include "core/tokenizer/tokenize.h"
 #include "core/text/hangul.h"
 #include "core/text/lines.h"
@@ -1399,6 +1400,75 @@ void Filter(const filter::Filters& f, filter::Stage stage, std::string& line, fi
 
 }  // namespace
 
+namespace {
+
+// What the speech-level stage reads of a call: the resolved chains of the lines after the context,
+// taken ahead of the caller's observer.
+struct LevelWatch {
+    reg::Capture capture;
+    StageObserver inner;
+};
+
+LevelWatch& Watched(void* context) { return *static_cast<LevelWatch*>(context); }
+
+StageObserver WatchLevels(LevelWatch& w, const StageObserver& inner) {
+    w.inner = inner;
+    StageObserver o = inner;
+    o.context = &w;
+    o.line = [](void* c, int line) {
+        LevelWatch& lw = Watched(c);
+        lw.capture.Line(line);
+        if (lw.inner.line) lw.inner.line(lw.inner.context, line);
+    };
+    o.resolved = [](void* c, int chunk, int sentence, const word::Chain& chain) {
+        LevelWatch& lw = Watched(c);
+        lw.capture.Resolved(sentence, chain);
+        if (lw.inner.resolved) lw.inner.resolved(lw.inner.context, chunk, sentence, chain);
+    };
+    if (inner.text)
+        o.text = [](void* c, std::string_view tag, std::string_view text) {
+            Watched(c).inner.text(Watched(c).inner.context, tag, text);
+        };
+    if (inner.pieces)
+        o.pieces = [](void* c, std::string_view tag, int chunk, const output::Pieces& pieces) {
+            Watched(c).inner.pieces(Watched(c).inner.context, tag, chunk, pieces);
+        };
+    if (inner.tokens)
+        o.tokens = [](void* c, int chunk, const tokenizer::Tokens& tokens) {
+            Watched(c).inner.tokens(Watched(c).inner.context, chunk, tokens);
+        };
+    if (inner.analysis)
+        o.analysis = [](void* c, int chunk, const tokenizer::Tokens& tokens, const word::Analysis& analysis) {
+            Watched(c).inner.analysis(Watched(c).inner.context, chunk, tokens, analysis);
+        };
+    if (inner.composed)
+        o.composed = [](void* c, int chunk, int sentence, const output::Pieces& pieces) {
+            Watched(c).inner.composed(Watched(c).inner.context, chunk, sentence, pieces);
+        };
+    if (inner.cleaned)
+        o.cleaned = [](void* c, const output::Pieces& pieces) { Watched(c).inner.cleaned(Watched(c).inner.context, pieces); };
+    if (inner.restored)
+        o.restored = [](void* c, const pipeline::RestoreSteps& steps) {
+            Watched(c).inner.restored(Watched(c).inner.context, steps);
+        };
+    if (inner.filterLog)
+        o.filterLog = [](void* c, std::string_view message) { Watched(c).inner.filterLog(Watched(c).inner.context, message); };
+    return o;
+}
+
+// The line of each piece after the context when a line of the call is cut into pieces
+// (text::kMaxLineBytes), else empty: the observer then counts pieces.
+std::vector<int> PieceLines(std::span<const std::string> lines, std::size_t context) {
+    std::vector<int> out;
+    if (std::none_of(lines.begin(), lines.end(), [](const std::string& l) { return l.size() > text::kMaxLineBytes; }))
+        return out;
+    for (std::size_t i = context; i < lines.size(); i++)
+        out.insert(out.end(), text::TranslationPieces(lines[i]).size(), static_cast<int>(i - context));
+    return out;
+}
+
+}  // namespace
+
 std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated& generated,
                                            std::span<const std::string> lines,
                                            const StageObserver& observer, const TranslationOptions& options,
@@ -1406,6 +1476,14 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     context = std::min(context, lines.size());
     // The filter log of the lines translated: the context lines are read only.
     const auto logged = [&](std::size_t i) { return i >= context && !lines[i].empty() && lines[i] != "\r"; };
+    // The speech-level stage, after the translation of the call and before the post-filter.
+    const bool levels = !options.reference;
+    LevelWatch levelWatch;
+    if (levels) levelWatch.capture.pieceLine = PieceLines(lines, context);
+    const StageObserver watched = levels ? WatchLevels(levelWatch, observer) : observer;
+    const auto translated = [&](std::span<std::string> out) {
+        return out.size() >= context ? out.subspan(context) : std::span<std::string>();
+    };
     if (!options.filters) {
         if (observer.filterLog) {
             for (std::size_t i = 0; i < lines.size(); ++i) {
@@ -1414,7 +1492,8 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
                 FilterSnapshot(observer, "PRE", lines[i]);
             }
         }
-        auto out = TranslateDocumentPieces(snap, generated, lines, observer, options, lines, context);
+        auto out = TranslateDocumentPieces(snap, generated, lines, watched, options, lines, context);
+        if (levels) reg::Retrofit(lines.subspan(context), levelWatch.capture, translated(out));
         if (observer.filterLog) {
             for (std::size_t i = context; i < out.size() && i < lines.size(); ++i) {
                 if (!logged(i)) continue;
@@ -1446,7 +1525,8 @@ std::vector<std::string> TranslateDocument(const dict::Snapshot& snap, Generated
     TranslationOptions writtenOptions = options;
     writtenOptions.filterWritten = written;
     std::vector<std::string> out =
-        TranslateDocumentPieces(snap, generated, filtered, observer, writtenOptions, filtered, context);
+        TranslateDocumentPieces(snap, generated, filtered, watched, writtenOptions, filtered, context);
+    if (levels) reg::Retrofit(std::span<const std::string>(filtered).subspan(context), levelWatch.capture, translated(out));
     // An empty input line is not post-filtered either.
     for (std::size_t i = context; i < out.size() && i < lines.size(); i++) {
         if (!lines[i].empty() && lines[i] != "\r") {

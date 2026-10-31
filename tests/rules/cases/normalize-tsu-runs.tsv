@@ -5,7 +5,7 @@ normalize:tsu-run	やっっっと会えた	드으으디어 만날 수 있었다	
 normalize:tsu-run	ちょっっっと待って	자아암깐 기다려	fix	normalize
 normalize:tsu-run	「行っっっくぞ！」	「가겠어!」	fix	normalize
 normalize:tsu-run	「とっってもいい天気だね」	「매우 좋은 날씨구나」	fix	normalize
-normalize:tsu-run	「いっっぱい食べた」	「많이 먹었다」	fix	normalize
+normalize:tsu-run	「いっっぱい食べた」	「많이 먹었어」	fix	normalize
 normalize:tsu-run	すっっっごい！	대애애단해!	fix	normalize
 normalize:tsu-run	ほんっっとうに、何故こんな男を一時でも好きだと思ったのかしら？	has:저어엉말로, 왜	fix	normalize
 normalize:tsu-run	あたし的には、とっってもOKです！	has:매우 OK입니다!	keep	normalize

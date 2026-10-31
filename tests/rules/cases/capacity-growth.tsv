@@ -19,8 +19,8 @@ sense:capacity-growth	免疫力をつける。	면역력을 기른다.	fix	sense
 sense:capacity-growth	経済力をつけた。	경제력을 길렀다.	fix	senses
 sense:capacity-growth	語学力をつける。	어학 실력을 기른다.	fix	senses
 sense:capacity-growth	実力をつけさせる。	실력을 기르게 한다.	fix	senses
-sense:capacity-growth	「国力をもっとつけたい」	「국력을 좀 더 기르고 싶다」	fix	senses
-sense:capacity-growth	「もっと力をつけなきゃ」	「좀 더 힘을 길러야 한다」	fix	senses
+sense:capacity-growth	「国力をもっとつけたい」	「국력을 좀 더 기르고 싶어」	fix	senses
+sense:capacity-growth	「もっと力をつけなきゃ」	「좀 더 힘을 길러야 해」	fix	senses
 dict:w:27327	敵をつけ狙う。	적을 노린다.	fix	defaults
 sense:capacity-growth	体力をつける。	체력을 기른다.	keep	senses
 sense:capacity-growth	体力をつけない。	체력을 기르지 않는다.	keep	senses

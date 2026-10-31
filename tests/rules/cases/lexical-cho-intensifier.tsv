@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:cho-intensifier:10	ちょｗｗかわいいｗ	완전ㅋㅋ 귀엽다 ㅋ	fix	rewrites
 cx:cho-intensifier:10	ちょｗｗｗかわいい	완전ㅋㅋㅋ 귀엽다	fix	rewrites
 cx:cho-intensifier:10	ちょwwwかわいい	완전ㅋㅋㅋ 귀엽다	fix	rewrites
-cx:cho-intensifier:10	「ちょｗｗ可愛い」	「완전ㅋㅋ 귀엽다」	fix	rewrites
+cx:cho-intensifier:10	「ちょｗｗ可愛い」	「완전ㅋㅋ 귀여워」	fix	rewrites
 cx:cho-intensifier:10	ちょｗ優しい	has:완전ㅋ	fix	rewrites
 cx:cho-intensifier:10	ちょ…かわいい	완전…귀엽다	fix	rewrites
 cx:cho-intensifier:10	ちょっ…眠い	완전…졸리다	fix	rewrites

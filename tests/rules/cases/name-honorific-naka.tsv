@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-dict:jisjk:116031	「里奈さんの中が熱い」	「리나 씨 안이 뜨겁다」	fix	lookup
-dict:jisjk:116031	「里奈すけの中が熱い」	「리나스케 안이 뜨겁다」	fix	lookup
+dict:jisjk:116031	「里奈さんの中が熱い」	「리나 씨 안이 뜨거워」	fix	lookup
+dict:jisjk:116031	「里奈すけの中が熱い」	「리나스케 안이 뜨거워」	fix	lookup
 dict:jisjk:116031	先生の中で一番優しい。	선생님 중에서 제일 다정하다.	keep	lookup
 dict:jisjk:116031	社員の中で一番若い。	사원 중에서 제일 젊다.	keep	lookup
