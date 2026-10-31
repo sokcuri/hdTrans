@@ -14,6 +14,7 @@
 #include "core/text/unicode.h"
 #include "core/text/utf8.h"
 #include "core/word/constraint_rules.h"
+#include "core/word/conjugation.h"
 #include "core/word/worker.h"
 
 namespace hdTrans::word {
@@ -197,13 +198,31 @@ bool HiraganaHonorificAt(std::string_view s) {
     return false;
 }
 
+// Whether after starts with a conjugation of the verb c (行 of 行くんだ, 許 of 許さん) or with the っ
+// that spoken emphasis puts inside a verb (落っちろ, 行っちゃう).
+bool ConjugatedAfter(const dict::Candidate& c, std::string_view after) {
+    const std::string_view part = c.codes->partText;
+    if (part.size() != 4 || after.starts_with("っ")) return true;
+    for (int branch = 0; branch < kConjugationBranches; branch++) {
+        const std::string_view conj = Conjugation(part[3] - '0', branch);
+        if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && after.starts_with(conj)) return true;
+    }
+    return false;
+}
+
 // Whether c is a verb or adjective as long as source, or longer, that reads the word
-// rather than a name before an honorific: not an adjective stem before くん that a particle,
-// a break or the end follows (碧くんが: not the 碧く of 碧い).
+// rather than a name before an honorific: not a verb stem that the honorific's kana do not
+// conjugate (空ちゃん, 祭ちゃん), nor an adjective stem before an honorific other than く or さま, or
+// before くん that a particle, a break or the end follows (幸さん, 碧くんが: not the 碧く of 碧い; the
+// さ of 安さまで is the noun of the adjective).
 bool PredicateBlocks(const dict::Candidate& c, std::string_view source, std::string_view after) {
     if (c.codes == nullptr || !AnyOf("478", c.codes->part.ClassDigit()) || c.source.size() < source.size()) return false;
-    return !(c.codes->part.Tag() == 'H' && c.source.size() == source.size() && after.starts_with("くん") &&
-             HiraganaHonorificAt(after));
+    if (c.source.size() > source.size()) return true;
+    if (c.codes->part.Tag() == 'M') return ConjugatedAfter(c, after);
+    if (c.codes->part.Tag() == 'H' && HonorificAt(after, false)) {
+        return after.starts_with("さま") || (after.starts_with("く") && !HiraganaHonorificAt(after));
+    }
+    return true;
 }
 
 bool NameSense(const dict::Codes& c) {
@@ -501,7 +520,9 @@ std::vector<std::size_t>::const_iterator NameAmong(const ConstraintRule& rule, c
     });
     const bool blocked =
         std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return PredicateBlocks(c, source, after); }) ||
-        std::any_of(same.begin(), same.end(), [&](std::size_t k) { return PersonNoun(codes(k)) || list[k].user != nullptr; }) ||
+        std::any_of(same.begin(), same.end(), [&](std::size_t k) {
+            return (PersonNoun(codes(k)) && !NameSense(codes(k))) || list[k].user != nullptr;
+        }) ||
         std::all_of(same.begin(), same.end(), [&](std::size_t k) { return NameSense(codes(k)); }) ||
         (rule.reject == ConstraintReject::NonNameBesidePlace && !std::all_of(same.begin(), same.end(), [&](std::size_t k) {
              return NameSense(codes(k)) || codes(k).sem.HasCode("QCT") || codes(k).sem.HasCode("QNN");
@@ -744,7 +765,7 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                     if (blocked) break;
                     records = snapshot.NameRecords(source);
                     for (const dict::Record& r : records) {
-                        if (r.codes == nullptr || !r.codes->sem.HasPrefix("QPN") || !HangulText(r.target) ||
+                        if (r.codes == nullptr || !r.codes->sem.HasCode("QPN") || !HangulText(r.target) ||
                             TranslatedName(list, same, source, r.target)) {
                             continue;
                         }

@@ -118,6 +118,6 @@ normalize:prohibition-janai	「そういうこと言ってるんじゃないわ�
 normalize:prohibition-janai	「なによー、結局あんたも興味あるんじゃない」	lacks:지 마	keep	normalize
 normalize:prohibition-janai	こっちは遊びでやってるんじゃないんだから。	lacks:지 마	keep	normalize
 normalize:prohibition-janai	「あら、おーしまくんじゃない。」	lacks:지 마	fix	normalize
-normalize:prohibition-janai	「あれは彩くんじゃない！ただの怪人だ！」	has:채 군이 아니야!	fix	normalize
+normalize:prohibition-janai	「あれは彩くんじゃない！ただの怪人だ！」	has: 군이 아니야!	fix	normalize
 normalize:prohibition-janai	「キモオタ。近づくんじゃない！」	has:가까워지지 마!	keep	normalize
 normalize:prohibition-janai	「お前、嘘をつくんじゃない。」	has:하지 마.	keep	normalize

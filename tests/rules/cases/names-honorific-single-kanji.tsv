@@ -1,0 +1,47 @@
+# 규칙: LEX-29
+rule	input	expected	kind	layer
+constraint:honorific-kanji-name	歩君は首を傾げる。	has:아유무 군	fix	lookup
+constraint:honorific-kanji-name	「あっ、空さん！」	has:소라 씨	fix	lookup
+constraint:honorific-kanji-name	「光くん、こっち」	has:미츠루 군	fix	lookup
+constraint:honorific-kanji-name	「望くん、それ……」	has:노조미 군	fix	lookup
+constraint:honorific-kanji-name	「仁くん、おはよう」	has:히토시 군	fix	lookup
+constraint:honorific-kanji-name	「祭ちゃん、待って」	has:마츠리짱	fix	lookup
+constraint:honorific-kanji-name	あの子が望くんの好きな人？	has:노조미 군이	fix	lookup
+constraint:honorific-kanji-name	空ちゃん、バッカじゃない！」	has:소라짱	fix	lookup
+constraint:honorific-kanji-name	そもそもどうやって瞬君がここへ？	has:슌 군	fix	lookup
+constraint:honorific-kanji-name	…幸さんが元気になってよかったよ。	has:사치 씨	fix	lookup
+constraint:honorific-kanji-name	「幸ちゃんのおじさまとおばさまは？」	has:사치짱이	fix	lookup
+constraint:honorific-kanji-name	「あ、修くん、陽葵ちゃん。おっは〜♪」	has:오사무 군	fix	lookup
+constraint:honorific-kanji-name	「いやぁ、悪いね、勇くん、子守させちゃって」	has:유우 군	fix	lookup
+constraint:honorific-kanji-name	もう１人の幼な子が健さんの息子である悟くんと私の息子	has:사토루 군	fix	lookup
+constraint:honorific-kanji-name	「空君、どこへ行くんだい？次は外で体育じゃないか。」	has:소라 군	fix	lookup
+constraint:honorific-kanji-name	「わ、分かった。お兄様は……空さんの話、信じてるの？」	has:소라 씨	fix	lookup
+constraint:honorific-kanji-name	「……幸ちゃん、なんでもう少し我慢できなかったんですか？」	has:사치짱	fix	lookup
+constraint:honorific-kanji-name	まさか彼女にも祭さんがうつったとは思わないが、馬鹿にしてい②嘲笑	has:마츠리 씨	fix	lookup
+constraint:honorific-kanji-name	やけに八島さんはどうでもいいような表情するし、幸ちゃんは無表情だ。	has:사치짱은	fix	lookup
+constraint:honorific-kanji-name	「空君がいるところで私の年齢を言わない。兄さん。私は二十歳ですべて	has:소라 군이	fix	lookup
+constraint:honorific-kanji-name	「え、このお部屋じゃないんですか？こ、幸ちゃん、お外は駄目ですよ！」	has:사, 사치짱	fix	lookup
+constraint:honorific-kanji-name	「もしもの時は修くんが守ってくれるのだろ？まさか守ってあげないのか？」	has:오사무 군	fix	lookup
+constraint:honorific-kanji-name	そして次の日…悟くんは昨日あんな事したのに私の前でいつも通りの子供だった	has:사토루 군	fix	lookup
+constraint:honorific-kanji-name	「昨日、お客さんと学くんが話しているところを見て、すごく辛かった。しかも幼	has:마나부 군	fix	lookup
+constraint:honorific-kanji-name	受け取った空ちゃんはこの剣を褒めていることをまるで我が子を褒められたように喜び	has:소라짱은	fix	lookup
+constraint:honorific-kanji-name	何度か確認すればと望くんが店長に言っても、ここで待ってると言って僕に連絡はいれなかっ	has:노조미 군	fix	lookup
+constraint:honorific-kanji-name	「洞窟を封印した事がギミックの解除。空君がティナちゃんを迎えるため館を作るスキルをイベント報酬として	has:소라 군	fix	lookup
+constraint:honorific-kanji-name	案内役のオウル、アミルさん一家、ガイさんとアライさん、乾君と光さんと小父様とヴァネッサ達とネージュ、私と狗神君になった。	has:이누이 군	fix	lookup
+constraint:honorific-kanji-name	咲夜「！？望さん！？」	사쿠야 「!? 노조미 씨!?」	keep	lookup
+constraint:honorific-kanji-name	「で、どこまで歩くんだ？」	「그래서, 어디까지 걷는 거야?」	keep	lookup
+constraint:honorific-kanji-name	︿飛ばしてどこへ行くんです？	︿날려 어디에 갑니까?	keep	lookup
+constraint:honorific-kanji-name	自分を差し置いて雄太と勝負するとは許さんぞ	has:용서하지 않아	keep	lookup
+constraint:honorific-kanji-name	「おっちゃん、喧嘩を売りに行くんじゃないよ？」	has:걸러 가지	keep	lookup
+constraint:honorific-kanji-name	手伝いに来てくれた稔君と共に、部屋を掃除し始める。	도우러 와 준 미노루 군과 함께, 방을 청소하기 시작한다.	keep	lookup
+constraint:honorific-kanji-name	な事するのね！」とか言って、ゲラゲラ笑ってたロノアは許さん。	일 하는구나!」든지 말해, 껄껄 웃던 로노아는 용서하지 않는다.	keep	lookup
+constraint:honorific-kanji-name	心配なんだけどね。私とルークに仕事がなかったら一緒に行くんだけど……」	걱정인데. 나와 루크에 일이 없었으면 함께 가는데……」	keep	lookup
+constraint:honorific-kanji-name	始まって、Ｅ↓Ｄ↓Ｃ↓Ｂ↓Ａ↓Ｓの順番に繰り上がって行くんだって。	has:간대	keep	lookup
+constraint:honorific-kanji-name	「ねえ、恵さん」	「있잖아, 메구미 씨」	keep	lookup
+constraint:honorific-kanji-name	進さんといるのは嫌いではない。	스스무 씨와 있는 것은 싫지 않다.	keep	lookup
+constraint:honorific-kanji-name	家に茜さんの香りを持って帰ろうとしたのに。	집에 아카네 씨의 향기를 가지고 돌아가려고 했는데.	keep	lookup
+constraint:honorific-kanji-name	守君のことは大家さんに任せ、悠夏は守君の母親に連絡した。	마모루 군은 집주인에 맡겨 하루카는 마모루 군의 어머니에게 연락했다.	keep	lookup
+constraint:honorific-kanji-name	値段の安さまで同じだった。	has:쌈까지	keep	lookup
+constraint:honorific-kanji-name	その潔さまで見事だ。	lacks:님	keep	lookup
+constraint:honorific-kanji-name	彼の偉さまでは分からない。	lacks:님	keep	lookup
+constraint:honorific-kanji-name	光ちゃんと届いてる？	has:미츠루짱과	current	lookup
