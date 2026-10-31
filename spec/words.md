@@ -782,6 +782,9 @@
   작은 모음이나 같은 모음으로 늘여도 같다(さくらさ〜ん `사쿠라 씨~`, かえでさぁん `카에데 씨~`). お姉さん, お兄さん을 입말로
   적은 꼴(LEX-13) 앞도 같다(ななこおねいさ〜ん `나나코 언니~`). 이름 층의 사람이
   아닌 앞말(知らないおねえさん, そうだおにーちゃん)은 이름이 아니다.
+- 경칭 앞의 한자 낱말은 동사나 형용사의 어간이기도 해도 경칭의 가나가 그 낱말을 활용하지 않으면 이름 사전의 인명으로 읽는다(空ちゃん
+  `소라짱`, 祭さん `마츠리 씨`, 幸さん `사치 씨`, 瞬君 `슌 군`). 활용하면(行くんだ, 許さん, 続くんだ) 또는 っ로 힘주어 이으면(落っちろ)
+  동사다. 사람 뜻 코드를 함께 적은 인명 행(仁 진)은 사람 명사가 아니라 인명이다(仁くん `히토시 군`).
 - 동사나 형용사로 시작하는 히라가나 이름(つむぎ, つぐみ)은 발화 첫머리에서 쉼표 앞에 부른 이름(つむぎ、こっちに来て)이나
   です, よ 앞의 자기소개(쉼표 뒤도: わたし、つむぎです)일 때만 그 줄에서 이름으로 읽는다. 히라가나 이름은 이 두 단서로
   읽고, 사전 낱말(いつか、)이나 낱말 또는 기본형 서술어에 끝 조사가 붙은 말(ここね、, いくよ、)은 단서가 되지 않는다.
@@ -830,6 +833,8 @@
 | 「かれんおねえさん。」 | 「카렌 언니.」 | 고침 |
 | 「さくらさ〜ん、待って！」 | 「사쿠라 씨~, 기다려!」 | 고침 |
 | 知らないおねえさんにだかれていた。 | 모르는 언니에게 만여지고 있었다. | 유지 |
+| 「あっ、空さん！」 | 「앗, 소라 씨!」 | 고침 |
+| 「で、どこまで歩くんだ？」 | 「그래서, 어디까지 걷는 거야?」 | 유지 |
 | （アヤメ）待って | (아야메) 기다려 | 고침 |
 | ⚟（青木）待って | ⚟(아오키) 기다려 | 고침 |
 | （島田）では皆さん | (시마다) 그럼 여러분 | 고침 |
@@ -875,7 +880,8 @@
 `tests/rules/cases/names-given-from-full-name.tsv`, `tests/rules/cases/names-caption-labels.tsv`,
 `tests/rules/cases/names-caption-inline-reading.tsv`, `tests/rules/cases/names-caption-reading-parts.tsv`,
 `tests/rules/cases/names-ro-given.tsv`, `tests/rules/cases/names-ro-given-kana.tsv`,
-`tests/rules/cases/names-inline-reading-wins.tsv`, `tests/rules/cases/names-kana-kinship.tsv`
+`tests/rules/cases/names-inline-reading-wins.tsv`, `tests/rules/cases/names-kana-kinship.tsv`,
+`tests/rules/cases/names-honorific-single-kanji.tsv`
 
 
 ## LEX-30 이름 뒤의 애칭 ちゃん, たん, っち는 붙여 쓴 짱, 치다

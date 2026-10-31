@@ -27,7 +27,7 @@ const dict::Snapshot* Dictionary() {
          "翼\t츠바사\tN110\tQPN\tWb\tGN\t7\n"
          "妹\t여동생\tN110\tVHn\t\tGN\t8\n"
          "妹\t이모토\tN110\tQPN\tWb\tGN\t9\n"
-         "続\t계속되&AA@\tM418\t\t\tGN\t10\n"
+         "続\t계속되&AA@\tM411\t\t\tGN\t10\n"
          "続\t츠즈키\tN130\tQPN\tWa\tGN\t11\n"
          "太郎\t타로\tN130\tQPN\tWb\tGN\t12\n"
          "太郎\t타로\tN130\tQCTVPl\t\tGN\t13\n"
@@ -122,7 +122,9 @@ const dict::Snapshot* Dictionary() {
          "だ\t(이)다\tP200\t\t\tGN\t122\n"
          "だ\t만&AJ@\tM4U1\t\t\tGN\t123\n"
          "だけ\t만\tP211\t\t\tGN\t124\n"
-         "バレ\t들&AA@\tM417\t\t\tGN\t120\n"},
+         "バレ\t들&AA@\tM417\t\t\tGN\t120\n"
+         "仁\t인\tN110\tXXX\tOn\tGN\t125\n"
+         "仁\t진\tN130\tVHnQPN\tWb\tGN\t126\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -231,7 +233,9 @@ HD_TEST(constraint_honorific_hiragana) {
 // when it has one and no person sense. A verb as long, a person noun, a word without a name
 // sense, a name reading that is a Korean word of the word (태양, 정보제공자), a word after
 // お and a word inside a kanji run stay. An adjective stem blocks no name before くん and a
-// particle (碧くんが), only before its own ending (碧くない).
+// particle (碧くんが), only before its own ending (碧くない). A verb stem blocks only where the
+// honorific's kana conjugate it (続くんだ; not 続ちゃん), and a name row that also codes a person
+// (VHnQPN) is the name sense, no person noun (仁くん).
 HD_TEST(constraint_honorific_kanji) {
     CheckCases({
         {"翼くんが", "翼くんが", "翼", "츠바사!"},
@@ -250,6 +254,9 @@ HD_TEST(constraint_honorific_kanji) {
         {"翼が", "翼が", "翼", "날개 츠바사"},
         {"碧くんが", "碧くんが", "碧", "아오이!"},
         {"碧くない", "碧くない", "碧", "$C2@ 아오이"},
+        {"碧さんが", "碧さんが", "碧", "아오이!"},
+        {"続ちゃんが", "続ちゃんが", "続", "츠즈키!"},
+        {"仁くんが", "仁くんが", "仁", "진!"},
     });
 }
 
