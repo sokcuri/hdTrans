@@ -1,0 +1,39 @@
+# 규칙: REG-1, REG-2, REG-3, REG-6, REG-10, REG-11, REG-12, REG-13, REG-14, REG-15, REG-17, REG-18
+rule	input	expected	kind	layer
+register:REG-2	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	fix	register
+register:REG-10	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keep	register
+register:REG-10	「……あら、ご覧になって」	「……어머나, 보세요」	keep	register
+register:REG-10	「娘を買っていただきました。そのことによって金銭を得たのでございます」	「딸을 사 주셨습니다. 그것에 의해 금전을 얻은 것입니다」	keep	register
+register:REG-12	「醜聞なんてものじゃないと思うんだが」	「추문 같은 건 것이 아니라고 생각하는데」	keep	register
+register:REG-12	「わたくしはそんな話知りません、聞いてません！　絶対認めませんから！」	「저는 그런 이야기 모릅니다, 듣지 않았습니다! 절대 인정하지 않으니까요!」	keep	register
+register:REG-10	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	「약혼을 파기한다고 선언하는 등, 저까지 깎아내리려 하고 있다고밖에 생각되지 않습니다」	keep	register
+register:REG-12	「年の差なんて！　たかだか十六歳差ではありませんか。」	「나이 차이 따위! 고작 16세차가 아닙니까.」	keep	register
+register:REG-12	「どこへ行かれますか」	「어디에 가십니까」	keep	register
+register:REG-10	「どこへ行かれますか？」	「어디에 가십니까?」	keep	register
+register:REG-10	「しかし、陛下もご多忙の身であらせられます」	「하지만, 폐하도 다망의 몸이십니다」	keep	register
+register:REG-12	「奇天烈な名じゃ。まぁよい、用は済んだ。行ってよいぞ」	「괴상한 이름이야. 뭐 좋은, 용무는 끝났다. 가도 좋아」	keep	register
+register:REG-12	「この場を以て宣言する。私はユフィリア・マゼンタとの婚約を破棄すると！」	「이 자리에서 선언한다. 나는 유필리아 마젠타와의 약혼을 파기한다고!」	keep	register
+register:REG-11	「アニスフィア王女を捕まえろ！　逃がすな、追え！」	「아니스피아 왕녀를 잡아라! 놓치지 마, 쫓아라!」	keep	register
+register:REG-11	「うるせえ。彼女持ちは黙ってろ」	「시끄러. 여친 있는 사람은 입을 다물어라」	keep	register
+register:REG-6	「敵であるアールを助けた事も、幼少期に研究員を射殺した事も、嫌疑を色濃くしている」	「적인 아르를 도운 일도, 어린 시절에 연구원을 사살한 일도, 혐의를 짙게 하고 있어」	fix	register
+register:REG-12	「でしたら、私が感謝を示す場面かと」	「그렇다면, 내가 감사를 표하는 장면이 아닐까 합니다」	keep	register
+register:REG-13	「みーっけ……あれ？」	「찾았다……어?」	keep	register
+register:REG-14	「フム、よくわからんが問題ない」	「흠, 잘 모르지만 문제없다」	keep	register
+register:REG-15	「了解なのよ」 「了解」 「かしこま」	「알아」 「알았어」 「알았어요」	keep	register
+register:REG-12	「あとは必要なものを追加しようかと」	「나머지는 필요한 걸 추가할까 하고」	keep	register
+register:REG-12	「一部には、部員の親族が取って変わり、利権にありつくなんて噂も流れていますが……」	「일부에는, 부원의 친족이 취해 바뀌어, 이권을 얻게 되다니 소문도 흐르고 있습니다만……」	keep	register
+register:REG-12	「言いましたよ。でも『青海はカウンターの方が向いてるから！』って、店長に言われて……」	「말했어요. 하지만 『아오미는 카운터가 향하고 있으니까!』는, 점장에게 들어……」	keep	register
+register:REG-12	「もっと真剣にーっ！！」	「좀 더 진지하게~!!」	keep	register
+register:REG-12	「いつもの軽いノリで、候補者を選んでほしくない」	「평소의 가벼운 김으로, 후보자를 선택하지 말았으면 좋겠다」	keep	register
+register:REG-13	「あ、ホントだ」	「아, 진짜다」	keep	register
+register:REG-6	「ほう。申してみよ」	「호오. 말해 봐라」	keep	register
+register:REG-18	「はぁ、今日は寒いなぁ」	「하아, 오늘은 춥네」	fix	register
+register:REG-17	「よ、よし、それじゃ行くぞっ！」	「조, 좋아, 그럼 간다!」	keep	register
+register:REG-12	「それは報告を聞いてから判断する。……それで？」	「그건 보고를 듣고 나서 판단한다. ……그래서?」	keep	register
+register:REG-18	「……今日はがんばったし……ご褒美、ほしいな……」	「……오늘은 열심히 했고……상, 가지고 싶은데……」	keep	register
+register:REG-12	「いいえ、楽になさってください。体調がすぐれないようでしたら出直しますから、決して無理はなさらないよう……」	「아니요, 편하게 하셔 주세요. 컨디션이 시원치 않은 것 같다면 다시 오기 때문에, 결코 무리는 하시지 않게……」	keep	register
+register:REG-12	「けれど、その最先端に浸れば。……そうですね、確かに一度得たものを手放すのは難しいのかもしれない」	「하지만, 그 최첨단에 잠기면. ……그렇네요, 확실히 한 번 얻은 걸 손에서 놓는 건 어려운 건지도 모른다」	keep	register
+register:REG-3	「態度というなら、改めるべきはお前の方だ。僕に追いすがり、許してくださいと詫びる気はないのか？」	「태도라고 한다면, 고쳐야 하는 건 네 쪽이다. 나에게 바싹 뒤따라, 용서해 주세요 하고 사과할 생각은 없는 건가?」	keep	register
+register:REG-14	「父上には後で承諾を頂く」	「아버님에게는 나중에 승낙을 받는다」	keep	register
+register:REG-1	「よろしくお願いします」じゃねーわ！！	「잘 부탁드립니다」가 아니야!!	keep	register
+register:REG-12	「そうじゃないですけど……	「그렇지 않지만……	keep	register

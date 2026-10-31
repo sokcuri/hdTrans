@@ -1,0 +1,140 @@
+#! stems
+# Conjugation exceptions: lemmas whose class the rules in classrules.tsv do not give. A row also applies to
+# lemmas that end in it (알아듣다 → 듣다), unless a longer row matches. Homographs carry the class
+# inline in the lexicon (묻다:REG "bury"); the row here is the more frequent reading.
+#
+# Columns
+#   lemma   the lemma
+#   pos     V | A | X | N
+#   class   REG HA D B BWA S H REU REO U EU L COP EXIST NC
+#   flags   hon-si: the lemma ends in the honorific 시 (계세요, not only 계셔요); ae: an ㅎ stem whose vowel becomes ㅐ (그렇다 → 그래); whole: the row matches only the whole
+#           lemma, not a suffix (죽이다 is not the copula)
+lemma	pos	class	flags	note
+# ㄷ irregular
+듣다	V	D		들어, 들으면
+걷다	V	D		걸어 (walk; 걷다 "roll up" is REG)
+묻다	V	D		물어 (ask; 묻다 "bury" is REG)
+싣다	V	D		실어
+깨닫다	V	D		깨달아
+일컫다	V	D		일컬어
+붇다	V	D		불어
+긷다	V	D		길어
+눋다	V	D		눌어
+파묻다	V	REG		파묻어 (bury)
+# ㅂ irregular verbs and the ㅂ adjectives that are regular
+눕다	V	B		누워
+줍다	V	B		주워
+굽다	V	B		구워 (roast; 굽다 "bend" is REG)
+깁다	V	B		기워
+여쭙다	V	B		여쭈워
+돕다	V	BWA		도와
+곱다	A	BWA		고와
+좁다	A	REG		좁아
+비좁다	A	REG		비좁아
+수줍다	A	REG		수줍어
+# ㅅ irregular
+짓다	V	S		지어
+낫다	V	S		나아 (heal; 낫다 "better" is also S)
+붓다	V	S		부어
+잇다	V	S		이어
+긋다	V	S		그어
+젓다	V	S		저어
+잣다	V	S		자아
+# ㅎ: regular adjective, and the 그렇다 group
+좋다	A	REG		좋아
+그렇다	A	H	ae	그래
+이렇다	A	H	ae	이래
+저렇다	A	H	ae	저래
+어떻다	A	H	ae	어때
+아무렇다	A	H	ae	아무래
+# 르: 으-class stems, 러 irregular
+따르다	V	EU		따라
+치르다	V	EU		치러
+들르다	V	EU		들러
+다다르다	V	EU		다다라
+우러르다	V	EU		우러러
+푸르다	A	REO		푸르러
+노르다	A	REO		노르러
+# 우 irregular
+푸다	V	U		퍼
+# existentials and the copula
+있다	X	EXIST		있어
+없다	X	EXIST		없어
+계시다	V	REG	hon-si	계셔, 계세요
+이다	C	COP	whole	이야
+아니다	N	NC		아니야
+# frequent adjectives (pos), class by rule
+같다	A	REG		같아
+싫다	A	REG		싫어
+많다	A	REG		많아
+괜찮다	A	REG		괜찮아
+작다	A	REG		작아
+높다	A	REG		높아
+낮다	A	REG		낮아
+넓다	A	REG		넓어
+짧다	A	REG		짧아
+얇다	A	REG		얇아
+옳다	A	REG		옳아
+젊다	A	REG		젊어
+늦다	A	REG		늦어 (late; 늦다 also a verb)
+맑다	A	REG		맑아
+밝다	A	REG		밝아
+붉다	A	REG		붉어
+굵다	A	REG		굵어
+깊다	A	REG		깊어
+싶다	A	REG		싶어
+크다	A	EU		커
+바쁘다	A	EU		바빠
+예쁘다	A	EU		예뻐
+기쁘다	A	EU		기뻐
+슬프다	A	EU		슬퍼
+아프다	A	EU		아파
+나쁘다	A	EU		나빠
+고프다	A	EU		고파
+빠르다	A	REU		빨라
+다르다	A	REU		달라
+게으르다	A	REU		게을러
+배부르다	A	REU		배불러
+길다	A	L		길어
+멀다	A	L		멀어
+달다	A	L		달아
+힘들다	A	L		힘들어
+둥글다	A	L		둥글어
+드물다	A	L		드물어
+가늘다	A	L		가늘어
+덥다	A	B		더워
+춥다	A	B		추워
+쉽다	A	B		쉬워
+어렵다	A	B		어려워
+맵다	A	B		매워
+밉다	A	B		미워
+가깝다	A	B		가까워
+고맙다	A	B		고마워
+반갑다	A	B		반가워
+즐겁다	A	B		즐거워
+무섭다	A	B		무서워
+귀엽다	A	B		귀여워
+아름답다	A	B		아름다워
+부드럽다	A	B		부드러워
+무겁다	A	B		무거워
+가볍다	A	B		가벼워
+노랗다	A	H		노래
+파랗다	A	H		파래
+빨갛다	A	H		빨개
+하얗다	A	H		하얘
+까맣다	A	H		까매
+누렇다	A	H		누레
+커다랗다	A	H		커다래
+조그맣다	A	H		조그매
+동그랗다	A	H		동그래
+# productive adjective suffixes (ㅂ irregular): a lemma that ends in them takes their class and, when the
+# lemma is not in lemmas.tsv, their pos
+스럽다	A	B		자연스러워, 혼란스러웠다
+롭다	A	B		새로워, 자유로워
+답다	A	B		아름다워, 쿠키다운
+주무시다	V	REG	hon-si	주무세요
+드시다	V	REG	hon-si	드세요
+잡수시다	V	REG	hon-si	잡수세요
+비다	V	NC		비어 (벼 is not used)
+꼬시다	V	REG	whole	시 is the stem (꼬셔요), not the honorific
+적시다	V	REG	whole	시 is the stem (적셔요), not the honorific
