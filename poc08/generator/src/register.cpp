@@ -697,13 +697,15 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
     std::vector<bool> casualAt(lines.size(), false);
     auto blank = [&](size_t k) { return lines[k].ja.find_first_not_of(" \t\r\xe3\x80\x80") == std::string::npos; };
     {
-        size_t blanks = 0, narration = 0;
-        bool tagged = false;
+        size_t blanks = 0, narration = 0, dialogue = 0, named = 0;
         for (size_t k = 0; k < lines.size(); ++k) {
             if (blank(k)) ++blanks;
             else if (!lines[k].dialogue) ++narration;
-            if (!lines[k].speaker.empty()) tagged = true;
+            else ++dialogue;
+            if (!lines[k].speaker.empty()) ++named;
         }
+        // a script names its speakers on many lines; a few bracketed headings in a novel (【第一章】…) do not count
+        const bool tagged = named * 10 >= dialogue && named > 0;
         // (a document of a few lines is no evidence: at least 10 lines and 2 blank ones; and prose has narration: at
         // least 3 in 10 of its lines that are not blank)
         prose = !tagged && lines.size() >= 10 && blanks >= 2 && blanks * 20 >= lines.size() &&
