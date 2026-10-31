@@ -110,9 +110,11 @@ hdTrans 자체가 Unicode API를 제공하며 Ehnd 데이터는 DLL 옆 `Ehnd/`�
   Win32 전용입니다. `Dat` 경로는 문자열을 바이트로 단순 축소하므로 비ASCII 경로를 보장하지 않습니다.
 - **사용자 사전:** W export가 있는 엔진에서 아네모네는 `AneDic.txt`를 `Dat\UserDict.jk`에 쓰지 않고, 파일이 바뀔 때
   `J2K_ReloadUserDict`만 부릅니다([소스][anemone-text]). 그래서 `J2KEngine.dll`(Windows)이 아네모네 안에서만 실행 파일 옆
-  `AneDic.txt`(UTF-16LE BOM으로 시작하면 UTF-16LE, 아니면 UTF-8, 이름의 대소문자 무관)를 읽습니다. 아네모네 창(`AneParentClass`, `AnemoneParentWndClass`)이 같은 프로세스에
-  있는지를 엔진을 열 때(없으면 첫 번역 때)와 `J2K_ReloadUserDict` 때 확인합니다. 형식과 처리는 [Ehnd UserDict](ehnd-compat.md)와 같고,
-  `user/`의 `userdict*` 항목보다 뒤, Ehnd 폴더의 `UserDict*.txt`보다 앞입니다. 잘못된 줄은 건너뛰고 디버거 출력에 남습니다. 다른 도구, C API, CLI, 번역 창은 읽지 않습니다.
+  `AneDic.txt`를 읽습니다. UTF-16LE BOM으로 시작하면 UTF-16LE, 아니면 UTF-8이고 이름의 대소문자는 가리지 않습니다.
+  아네모네 창(`AneParentClass`, `AnemoneParentWndClass`)이 같은 프로세스에 있는지를 엔진을 열 때(없으면 첫 번역 때)와
+  `J2K_ReloadUserDict` 때 확인합니다. 형식과 처리는 [Ehnd UserDict](ehnd-compat.md)와 같고, `user/`의 `userdict*` 항목보다 뒤,
+  Ehnd 폴더의 `UserDict*.txt`보다 앞입니다. 잘못된 줄은 건너뛰고 디버거 출력에 남습니다. 다른 도구, C API, CLI, 번역 창은
+  읽지 않습니다.
 - **CI:** `host.anemone`, `host.anemone-ansi`, `host.anemone-dict`와 `host.anemone-late`(창이 있을 때 `anedic.txt` 적용과
   다시 읽기), `host.anemone-nowindow`(창이 없으면 적용하지 않음). 클립보드 감시, 창 출력과 실제 사전 편집은 수동 확인이 필요합니다.
 

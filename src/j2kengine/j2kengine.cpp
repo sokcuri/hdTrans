@@ -97,7 +97,8 @@ bool InAnemone() {
 }
 
 // Anemone's AneDic.txt next to the executable in the Ehnd UserDict format (docs/ehnd-compat.md):
-// UTF-16LE after its byte order mark, otherwise UTF-8. None when it is missing or not UTF-8.
+// UTF-16LE after its byte order mark, otherwise UTF-8. None when it is missing, unreadable or
+// invalid UTF-8.
 std::vector<hdTrans::filter::Source> AneDic() {
     std::wstring exe(MAX_PATH, L'\0');
     for (;;) {
@@ -114,7 +115,7 @@ std::vector<hdTrans::filter::Source> AneDic() {
     if (!in) return {};
     const std::string bytes((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
     if (in.bad() || (!bytes.starts_with("\xFF\xFE") && !hdTrans::dict::internal::ValidUtf8(bytes))) {
-        Log(path + ": cannot be read as UTF-8; not loaded");
+        Log(path + ": cannot be read or is not UTF-8; not loaded");
         return {};
     }
     Log("Anemone: reading " + path);
