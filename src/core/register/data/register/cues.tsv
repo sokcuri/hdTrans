@@ -13,6 +13,7 @@
 #   mode    tail rows: strong marks a particle that makes an unbracketed line speech (inner monologue ending
 #           in よ/ね/ぞ is 해, not narration -다: spec/register.md REG-7); notafter as below; other rows:
 #           end: the last sentence ends in text, after any number of tail particles and closing marks;
+#           end-after: as end, with a word before text in the sentence (お先にどうぞ, not どうぞ alone);
 #           any: text anywhere in the utterance; any-not-quoted: anywhere, unless a quotative follows it
 #   text    the Japanese string
 #   notbefore  any rows: strings that must not follow text, | separated (男ですまない is 男で + すまない)
@@ -272,3 +273,5 @@ polite	end	んス		(katakana ス after ん: 一緒じゃないんスか)
 polite	end	ンス
 polite	end	デス		デース (ー between kana is dropped)
 polite	end	マス
+polite	end-after	どうぞ		お先にどうぞ, これどうぞ: a polite offer (먼저 하세요); どうぞ alone is any level
+polite	end	ごゆっくり		ごゆっくりどうぞ, ごゆっくり: a polite wish

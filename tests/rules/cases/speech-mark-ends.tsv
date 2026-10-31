@@ -33,7 +33,7 @@ compose:speech-mark	調べた結果、扉には罠は無い…鍵すらかかっ
 compose:speech-mark	どこを見ている？私はここだぞ？	어디를 보고 있어? 나는 여기다?	keep	compose
 compose:speech-mark	「明日、海に行く」	「내일, 바다에 가」	keep	compose
 compose:speech-mark	痛いいいい、やめて	아프다아아아, 그만해	keep	compose
-compose:speech-mark	「ならぬ！これは私なりの誠意なのだ！」	「되지 않아! 이건 나나름의 성의야!」	keep	compose
+compose:speech-mark	「ならぬ！これは私なりの誠意なのだ！」	「되지 않아! 이것은 나나름의 성의야!」	keep	compose
 compose:speech-mark	司令官、どうするー？	사령관, 어떻게 해~?	fix	compose
 compose:speech-mark	あっ、香取～！ また一緒に踊る～？	앗, 카토리~! 또 함께 춤춰~?	fix	compose
 compose:speech-mark	なにかを思い出すかのようにとても哀しい……	뭔가를 생각해 내는 것처럼 무척 슬퍼……	fix	compose

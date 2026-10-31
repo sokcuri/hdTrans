@@ -18,10 +18,10 @@ dict:w:28450	「じゃあどんな人だっていうのよっ？」	「그럼 �
 dict:w:28450	「どうして私がこんな目に遭うのよ！」	「왜 내가 이런 변을 당하는 거야!」	fix	local-ending
 dict:jisjk:342458	「とにかく、今は一刻を争うのっ！！」	rule:dict:jisjk:342458=	current	local
 dict:jisjk:342458	「放してっ、クスリがいるのっ」	rule:dict:jisjk:342458=	current	local
-dict:jisjk:342458	「行くよっ！」	「가!」	keep	local
-dict:jisjk:342458	「始めるよっ！」	「시작해!」	keep	local
+dict:jisjk:342458	「行くよっ！」	「간다!」	keep	local
+dict:jisjk:342458	「始めるよっ！」	「시작한다!」	keep	local
 dict:jisjk:342458	「よろしくねっ！」	「잘 부탁해!」	keep	local
-dict:jisjk:342458	「行くっ！」	「가!」	keep	local
+dict:jisjk:342458	「行くっ！」	「간다!」	keep	local
 dict:jisjk:342458	「違うっ！」	「아니야!」	keep	local
 dict:w:28450	「何するの？」	「뭐하는 거야?」	keep	local-ending
 dict:w:28450	「何する？」	「뭐해?」	keep	local-ending
@@ -35,7 +35,7 @@ dict:w:28450	「どうすんのよこれ！」	「어떻게 해 이거!」	keep	
 dict:w:28450	「なんで一番肝心なとこ忘れるのよ」	「왜 제일 중요한 곳 잊는 거야」	fix	local-ending
 dict:w:28450	「たとえばどんなのがヤバイっていうのよ？」	「예를 들어 어떤 게 위험하다고 말하는 거야?」	fix	local-ending
 dict:jisjk:342458	「次は私が払うからねっ」	「다음은 내가 지불하니까」	fix	local
-dict:jisjk:342458	「みんな！　いーい、やるよっ！」	「모두! 좋아, 해!」	keep	local
+dict:jisjk:342458	「みんな！　いーい、やるよっ！」	「모두! 좋아, 한다!」	keep	local
 dict:jisjk:342458	じゃあいくよっ！	그럼 간다!	keep	local
 dict:jisjk:342458	あたしも行くよっ！	나도 간다!	keep	local
 dict:jisjk:342458	伸していくよっ！	때려눕혀 간다!	keep	local

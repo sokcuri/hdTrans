@@ -31,8 +31,16 @@ std::string RealizeParticle(const std::string& form, std::u32string_view prev);
 // The ending form (eomi.tsv notation) the generator writes a V node with at level; honIncl: the form holds -시-.
 std::string EndingForm(const Tables& t, const Node& n, Level level, Persona persona, bool& honIncl);
 
-// The text of nodes at the levels of reg (one per V node) and of the utterance.
-std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std::vector<Reg>& reg, const UttLevel& utt);
+// Where Generate wrote a node: bytes [begin, end) of its text, the spaces between its pieces included.
+struct OutSpan {
+    std::size_t begin = 0, end = 0;
+    uint32_t node = 0;
+};
+
+// The text of nodes at the levels of reg (one per V node) and of the utterance; spans, when given, gets
+// the bytes of each node.
+std::string Generate(const Tables& t, const std::vector<Node>& nodes, const std::vector<Reg>& reg, const UttLevel& utt,
+                     std::vector<OutSpan>* spans = nullptr);
 
 // One reading of a predicate word: a V node with lemma, ctype, mood, tense, modal, rel and eomi.
 struct Bundle {

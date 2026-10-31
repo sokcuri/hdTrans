@@ -23,7 +23,7 @@ dict:causative:karamaseru	千里は、濡れた舌をペニスに絡ませた。
 dict:causative:karamaseru	葵が反対側の腕に両手を絡ませてくる。	아오이가 반대쪽의 팔에 양손을 얽히게 해 온다.	fix	local
 dict:causative:karamaseru	彼は事件に絡んでいる。	!rule:dict:causative:karamaseru	keep	local
 dict:causative:karamaseru	しつこく絡んでくる。	!rule:dict:causative:karamaseru	keep	local
-dict:causative:hikaseru	『馬車？』を引かせていた巨大なトカゲは、馬より一回りは大きかっただろうか。	『마차?』를 끌게 하고 있던 거대한 도마뱀은, 말보다 한 치수는 컸던 것일까.	fix	local
+dict:causative:hikaseru	『馬車？』を引かせていた巨大なトカゲは、馬より一回りは大きかっただろうか。	『마차?』를 끌게 하고 있던 거대한 도마뱀은, 말보다 한 치수는 컸던 걸까.	fix	local
 dict:causative:hikaseru	みんなで何枚かメモに書いて敗者に引かせるってのはどうかな。	모두 몇 장이나 메모에 써 패자에게 끌게 한다는 것은 어떨까.	fix	local
 dict:causative:hikaseru	ではどぎつ〜いのを書いて圭一さんに引かせてやりますわぁ！	그럼 강렬한 것을 써 케이이치 씨에게 끌게 해 줘요!	fix	local
 dict:causative:hikaseru	ロープを引く。	!rule:dict:causative:hikaseru	keep	local

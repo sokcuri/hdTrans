@@ -1,4 +1,4 @@
-# 규칙: REG-1, REG-2, REG-3, REG-6, REG-10, REG-11, REG-12, REG-13, REG-14, REG-15, REG-17, REG-18
+# 규칙: REG-1, REG-2, REG-3, REG-5, REG-6, REG-10, REG-11, REG-12, REG-13, REG-14, REG-15, REG-17, REG-18, REG-19, REG-21, REG-22
 rule	input	expected	kind	layer
 register:REG-2	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	fix	register
 register:REG-10	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keep	register
@@ -37,3 +37,36 @@ register:REG-3	「態度というなら、改めるべきはお前の方だ。�
 register:REG-14	「父上には後で承諾を頂く」	「아버님에게는 나중에 승낙을 받는다」	keep	register
 register:REG-1	「よろしくお願いします」じゃねーわ！！	「잘 부탁드립니다」가 아니야!!	keep	register
 register:REG-12	「そうじゃないですけど……	「그렇지 않지만……	keep	register
+register:REG-1	「わかった」と彼は言った。	「알았다」라고 그는 말했다.	keep	register
+register:REG-1	「行くよ」と言って走った。	「가」라고 말해 달렸다.	keep	register
+register:REG-1	「まだ終わってない	「아직 끝나지 않다	keep	register
+register:REG-3	「お先にどうぞ」	「먼저 하세요」	keep	register
+register:REG-3	「どうぞ」	「자」	keep	register
+register:REG-3	「ちゃんと待っててくださぁい」	「제대로 기다리고 있어 주세요」	keep	register
+register:REG-3	「もう行きますってば」	「이제 간다니까요」	keep	register
+register:REG-3	「だから言ったでしょうが！」	「그러니까 말했겠지만!」	keep	register
+register:REG-5	「陛下はそうおっしゃった」	「폐하는 그렇게 말씀하셨어」	fix	register
+register:REG-5	「その件は社長がおっしゃった通りだ」	「그 건은 사장이 말씀하신 대로야」	fix	register
+register:REG-5	「嘘おっしゃい」	「거짓말 마」	keep	register
+register:REG-17	「よし、イクぞっ」	「좋아, 간다」	keep	register
+register:REG-18	「疲れてるでしょ？　休んでいきなさいな」	「지쳐 있지? 쉬어 가」	keep	register
+register:REG-19	「これは私のものだ」	「이건 내 거야」	fix	register
+register:REG-21	「行くよっ！」	「간다!」	keep	register
+register:REG-21	「出るっ」	「나온다」	keep	register
+register:REG-21	「もう、出るっ」	「이제, 나온다」	keep	register
+register:REG-21	「もう、イクよっ！」	「이제, 간다!」	keep	register
+register:REG-21	「入るよっ！」	「들어간다!」	keep	register
+register:REG-21	「来るっ！」	「온다!」	keep	register
+register:REG-21	「私も行くっ！」	「나도 가!」	fix	register
+register:REG-21	「俺も好きだっ」	「나도 좋아해」	fix	register
+register:REG-21	「やめろ、殴られるっ！」	「그만둬라, 맞아!」	fix	register
+register:REG-21	「行くねっ！」	「갈게!」	keep	register
+register:REG-21	「行こうっ！」	「가자!」	keep	register
+register:REG-21	「行くっ？」	「가?」	keep	register
+register:REG-21	「その本、貸してやるっ！」	「그 책, 빌려 줄게!」	fix	register
+register:REG-21	「わかった、やってみる」	「알았다, 해 볼게」	fix	register
+register:REG-22	「私はもう帰る」	「나는 이제 돌아가」	fix	register
+register:REG-22	「明日は雨が降りそうだ」	「내일은 비가 올 것 같아」	fix	register
+register:REG-22	「痛かった痛かった」	「아팠어 아팠어」	fix	register
+register:REG-22	「しかし、概要くらいは話してほしいものだ」	「하지만, 개요 정도는 이야기해 줬으면 하는 것이다」	keep	register
+register:REG-22	「流石だエル君。本当に君は強くなった」	「역시다 엘 군. 정말 너는 강해졌다」	keep	register
