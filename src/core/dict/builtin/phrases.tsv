@@ -1470,3 +1470,6 @@
 突然の	갑작스러운	phrase
 なぞる	더듬다	v5
 秘所	은밀한 곳	n
+// LEX-127 おかまいなく said on its own: 신경 쓰지 마세요 (人目もおかまいなく 상관없이 stays).
+おかまいなく	신경 쓰지 마세요	intj	final
+お構いなく	신경 쓰지 마세요	intj	final

@@ -12,4 +12,4 @@ dict:idiom	もったいない。	아깝다.	keep	lookup
 dict:compound	辻立ち演説を聞く。	가두연설을 듣는다.	fix	lookup
 dict:compound	辻立ち演説をする。	가두연설을 한다.	fix	lookup
 dict:compound	街頭演説を聞く。	가두연설을 듣는다.	keep	lookup
-dict:compound	辻立ちがいる。	거리 행상인이 있다.	keep	lookup
+dict:compound	辻立ちがいる。	길거리 유세가 있다.	keep	lookup

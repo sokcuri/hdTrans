@@ -11395,7 +11395,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 了い	채	N110		Z7	GN				llm		じまい	w:11388
 了知	요지	N110		Hd	GN						りょうち	w:11389
 了知	요지&AV@	M429			GN						りょうち	w:11390
-予備選挙	경선	N110			GN						よびせんきょ	w:11391
+予備選挙	예비 선거	N110			GN			LEX-131			よびせんきょ	w:11391
 予告篇	예고편	N110			GN						よこくへん	w:11392
 予定日	예정일	N110			GN						よていび	w:11393
 予定表	일정표	N110			GN						よていひょう	w:11394
