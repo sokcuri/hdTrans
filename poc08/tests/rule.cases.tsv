@@ -8,19 +8,35 @@ retro	「黙れっ。お前がさっさと聖女をものにしていれば良�
 retro	「お前が聖女をものにしていれば良かったのだ」	좋았던 것이다	text glued onto 것 that G does not realize keeps 것 (was 거이다)
 retro	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	파기한다고 선언	a quote before a noun is not a sentence end (was 파기한다고요 선언)
 retro	「クロード様に感謝していると言いながら、どうしてそのようなことを……！！」	있다고 말하면서	a quote before a verb is not a sentence end (was 있다고요 말하면서)
-out	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	the adjective family 0.7.x used decides the class (was 우수한다고); 해라 → 해
-out	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keigo (いらっしゃる) keeps 합쇼체
-out	「……あら、ご覧になって」	「……어머나, 보세요」	keigo (ご覧) keeps 0.7.x's 해요체
-out	「娘を買っていただきました。そのことによって金銭を得たのでございます」	「딸을 사 주셨습니다. 그것에 의해 금전을 얻은 것입니다」	keigo; same level: 0.7.x text
-out	「醜聞なんてものじゃないと思うんだが」	「추문 같은 건 것이 아니라고 생각하는데」	same level: 0.7.x text, no other rewrite
-out	「わたくしはそんな話知りません、聞いてません！　絶対認めませんから！」	「저는 그런 이야기 모릅니다, 듣지 않았습니다! 절대 인정하지 않으니까요!」	sentences would end at different levels: 0.7.x text
-out	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	「약혼을 파기한다고 선언하는 등, 저까지 깎아내리려 하고 있다고밖에 생각되지 않습니다」	합쇼체 is never lowered
-out	「年の差なんて！　たかだか十六歳差ではありませんか。」	「나이 차이 따위! 고작 16세차가 아닙니까.」	a question asked by its ending alone keeps its level (아니에요. would state the negation)
-out	「どこへ行かれますか」	「어디에 가십니까」	a question without ? keeps its level
-out	「どこへ行かれますか？」	「어디에 가십니까?」	합쇼체 is never lowered
+out	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	REG-2: the adjective family 0.7.x used decides the class (was 우수한다고); 해라 → 해
+out	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	REG-10: keigo (いらっしゃる) keeps 합쇼체
+out	「……あら、ご覧になって」	「……어머나, 보세요」	REG-10: keigo (ご覧) keeps 0.7.x's 해요체
+out	「娘を買っていただきました。そのことによって金銭を得たのでございます」	「딸을 사 주셨습니다. 그것에 의해 금전을 얻은 것입니다」	REG-10: keigo; same level: 0.7.x text
+out	「醜聞なんてものじゃないと思うんだが」	「추문 같은 건 것이 아니라고 생각하는데」	REG-12: same level: 0.7.x text, no other rewrite
+out	「わたくしはそんな話知りません、聞いてません！　絶対認めませんから！」	「저는 그런 이야기 모릅니다, 듣지 않았습니다! 절대 인정하지 않으니까요!」	REG-12: sentences would end at different levels: 0.7.x text
+out	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	「약혼을 파기한다고 선언하는 등, 저까지 깎아내리려 하고 있다고밖에 생각되지 않습니다」	REG-10: 합쇼체 is never lowered
+out	「年の差なんて！　たかだか十六歳差ではありませんか。」	「나이 차이 따위! 고작 16세차가 아닙니까.」	REG-12: a question asked by its ending alone keeps its level (아니에요. would state the negation)
+out	「どこへ行かれますか」	「어디에 가십니까」	REG-12: a question without ? keeps its level
+out	「どこへ行かれますか？」	「어디에 가십니까?」	REG-10: 합쇼체 is never lowered
 retro	「どこへ行かれますか？」	가세요?	가시다 is 가다 + honorific 시 in 해요체 (was 가셔요)
-out	「しかし、陛下もご多忙の身であらせられます」	「하지만, 폐하도 다망의 몸이십니다」	keigo (あらせられる) keeps 합쇼체
-out	「奇天烈な名じゃ。まぁよい、用は済んだ。行ってよいぞ」	「괴상한 이름이야. 뭐 좋은, 용무는 끝났다. 가도 좋아」	the last sentence end keeps its level: inner sentences stay as 0.7.x wrote them (was 끝났어)
-out	「この場を以て宣言する。私はユフィリア・マゼンタとの婚約を破棄すると！」	「이 자리에서 선언한다. 나는 유필리아 마젠타와의 약혼을 파기한다고!」	the line ends in a quote, not at another level: 0.7.x text (was 선언해. 난)
-out	「アニスフィア王女を捕まえろ！　逃がすな、追え！」	「아니스피아 왕녀를 잡아라! 놓치지 마, 쫓아라!」	命令形 in the source: 0.7.x's 해라체 commands stay (was 잡아! 쫓아!)
-out	「うるせえ。彼女持ちは黙ってろ」	「시끄러. 여친 있는 사람은 입을 다물어라」	てろ (命令形 of the auxiliary): 다물어라 stays
+out	「しかし、陛下もご多忙の身であらせられます」	「하지만, 폐하도 다망의 몸이십니다」	REG-10: keigo (あらせられる) keeps 합쇼체
+out	「奇天烈な名じゃ。まぁよい、用は済んだ。行ってよいぞ」	「괴상한 이름이야. 뭐 좋은, 용무는 끝났다. 가도 좋아」	REG-12: the last sentence end keeps its level: inner sentences stay as 0.7.x wrote them (was 끝났어)
+out	「この場を以て宣言する。私はユフィリア・マゼンタとの婚約を破棄すると！」	「이 자리에서 선언한다. 나는 유필리아 마젠타와의 약혼을 파기한다고!」	REG-12: the line ends in a quote, not at another level: 0.7.x text (was 선언해. 난)
+out	「アニスフィア王女を捕まえろ！　逃がすな、追え！」	「아니스피아 왕녀를 잡아라! 놓치지 마, 쫓아라!」	REG-11: 命令形 in the source: 0.7.x's 해라체 commands stay (was 잡아! 쫓아!)
+out	「うるせえ。彼女持ちは黙ってろ」	「시끄러. 여친 있는 사람은 입을 다물어라」	REG-11: てろ (命令形 of the auxiliary): 다물어라 stays
+out	「敵であるアールを助けた事も、幼少期に研究員を射殺した事も、嫌疑を色濃くしている」	「적인 아르를 도운 일도, 어린 시절에 연구원을 사살한 일도, 혐의를 짙게 하고 있어」	REG-6: an adnominal である is not stiff speech, so 해라 → 해 (REG-2)
+out	「でしたら、私が感謝を示す場面かと」	「그렇다면, 내가 감사를 표하는 장면이 아닐까 합니다」	REG-12: a word kept literally with a level (합니다) keeps the line as 0.7.x wrote it (was 아닐까요 합니다)
+out	「みーっけ……あれ？」	「찾았다……어?」	REG-13: a bare discovery keeps 0.7.x's -다 (was 찾았어)
+out	「フム、よくわからんが問題ない」	「흠, 잘 모르지만 문제없다」	REG-14: a gruff ん negative keeps the plain statement's -다 (was 문제없어)
+out	「了解なのよ」 「了解」 「かしこま」	「알아」 「알았어」 「알았어요」	REG-15: each quote keeps its own level (was 알았어 for かしこま)
+out	「あとは必要なものを追加しようかと」	「나머지는 필요한 걸 추가할까 하고」	REG-12: -ㄹ까 before 하다 is not a sentence end (was 추가할까요 하고)
+out	「一部には、部員の親族が取って変わり、利権にありつくなんて噂も流れていますが……」	「일부에는, 부원의 친족이 취해 바뀌어, 이권을 얻게 되다니 소문도 흐르고 있습니다만……」	REG-12: -다니 before a noun is not a sentence end (was 되다니요 소문)
+out	「言いましたよ。でも『青海はカウンターの方が向いてるから！』って、店長に言われて……」	「말했어요. 하지만 『아오미는 카운터가 향하고 있으니까!』는, 점장에게 들어……」	REG-12: an inner quote keeps its voice, and a て-form trailing off is no command (was 있으니까요, 들으세요)
+out	「もっと真剣にーっ！！」	「좀 더 진지하게~!!」	REG-12: an adjective has no imperative (was 진지해)
+out	「いつもの軽いノリで、候補者を選んでほしくない」	「평소의 가벼운 김으로, 후보자를 선택하지 말았으면 좋겠다」	REG-12: a command right before another predicate is no command (was 선택했지 마 좋겠어)
+out	「あ、ホントだ」	「아, 진짜다」	REG-13: realisation keeps -다 (was 진짜야)
+out	「ほう。申してみよ」	「호오. 말해 봐라」	REG-6: the old imperative てみよ keeps 0.7.x (was 말해 봐)
+out	「はぁ、今日は寒いなぁ」	「하아, 오늘은 춥네」	REG-18: exclamatory なぁ is 해체 -네 (was 춥다)
+out	「よ、よし、それじゃ行くぞっ！」	「조, 좋아, 그럼 간다!」	REG-17: a declaration with ぞ keeps -다
+out	「それは報告を聞いてから判断する。……それで？」	「그건 보고를 듣고 나서 판단한다. ……그래서?」	REG-12: a word after the changed end (그래서?) ends the line: 0.7.x text (was 판단해)
+out	「……今日はがんばったし……ご褒美、ほしいな……」	「……오늘은 열심히 했고……상, 가지고 싶은데……」	REG-18: な after a wish is not an exclamation (was 가지고 싶네)

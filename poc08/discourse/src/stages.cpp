@@ -70,11 +70,14 @@ bool IsSceneMark(const std::string& s) {
     return n == 0 || marks == n;
 }
 
-uint8_t SourceLevelOf(const std::string& key) {
+uint8_t SourceLevelOf(std::string key) {
+    if (key.rfind("quotes-", 0) == 0) key = key.substr(7);  // REG-15: the line's last quote
     if (key == "pend" || key == "polite-any") return srclevel::desu_masu;
-    if (key == "keigo-pend" || key == "keigo" || key == "set") return srclevel::keigo;
+    if (key == "keigo-pend" || key == "keigo" || key == "keigo-casual" || key == "set") return srclevel::keigo;
     if (key == "archaic") return srclevel::archaic;
-    if (key == "casual" || key == "stiff") return srclevel::casual;
+    if (key == "casual" || key == "stiff" || key == "auth-plain" || key == "decl-zo" ||
+        key == "exclaim-ne" || key == "exclaim")
+        return srclevel::casual;
     return srclevel::plain;
 }
 
@@ -257,15 +260,17 @@ void StageR(const DiscourseData& d, const Config& cfg, Doc& doc, Line& line) {
     hd8gen::RegDecision dec = idx - first < ds.size() ? ds[idx - first] : hd8gen::RegDecision{};
     if (cfg.speech == Speech::Strict) {
         // 0.7.x meaning: plain speech is -다, です/ます is 합쇼
-        const std::string& k = dec.key;
-        dec.level = (k == "pend" || k == "keigo-pend" || k == "set" || k == "keigo" || k == "polite-any") ? hd8gen::Level::hapsyo
-                                                                                                             : hd8gen::Level::haera;
+        const std::string k = dec.key.rfind("quotes-", 0) == 0 ? dec.key.substr(7) : dec.key;
+        dec.level = (k == "pend" || k == "keigo-pend" || k == "set" || k == "keigo" || k == "keigo-casual" || k == "polite-any")
+                        ? hd8gen::Level::hapsyo
+                        : hd8gen::Level::haera;
     }
     const hd8gen::Level forced = Forced(cfg.speech);
     if (forced != hd8gen::Level::none && !dec.narration) dec.level = forced;
     Decision rd;
     rd.stage = 'R';
-    rd.kind = dec.byProfile ? Ev::Cued : (dec.key == "bare" || dec.key == "empty" ? Ev::Default : Ev::Cued);
+    const bool noCue = dec.key == "bare" || dec.key == "empty" || dec.key == "quotes-bare" || dec.key == "quotes-empty";
+    rd.kind = dec.byProfile ? Ev::Cued : (noCue ? Ev::Default : Ev::Cued);
     rd.rule = doc.I("code:register/" + dec.key);
     rd.src = {0, static_cast<uint32_t>(line.src.size())};
     const uint32_t id = line.Decide(rd);
@@ -299,6 +304,12 @@ void StageR(const DiscourseData& d, const Config& cfg, Doc& doc, Line& line) {
         }
         nodes.push_back(n);
     }
+    // REG-16: Z's constraint rules back the addressee as subject (an omitted subject classed addressee by a rule,
+    // not by default): a polite question of that clause may take -시- as with an honorific verb
+    for (const Clause& c : line.clauses)
+        if (c.subj.kind == static_cast<uint8_t>(refkind::addressee) && c.subj.decision > 0 &&
+            c.subj.decision <= line.decisions.size() && line.decisions[c.subj.decision - 1].kind != Ev::Default)
+            dec.honSonkei = true;
     const std::vector<hd8gen::Reg> regs = hd8gen::AssignRegister(*d.reg, nodes, dec, dec.firstPerson, d.gen.get());
     for (const auto& g : regs) {
         KReg r;

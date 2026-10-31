@@ -1,15 +1,18 @@
 #! voices
 # Character voice (persona) cues and name suffixes, read by S and R. A speaker's persona is the voice of the
 # most frequent cue among its lines in the scene; R passes it to G, which picks ending variants from
-# data/ko/persona.tsv (old-male: 좋구먼). Levels are not changed by a voice here: the dev games show 해 for
-# 84% of old-speech lines.
+# data/ko/persona.tsv (old-male: 좋구먼). Levels are not changed by a voice here (spec/register.md REG-6:
+# personas and 하오/하게 come with the VN stage).
 #
 # Columns
 #   type   first (a first-person pronoun), final (a sentence-final form), suffix (an honorific name suffix: the word
-#          before it is a name, S's scene registry)
+#          before it is a name, S's scene registry), auth (an authoritative or stiff voice, spec/register.md REG-14;
+#          key parts joined by + must all occur, | separates alternatives of a part; value speaker: the row marks the speaker in the scene
+#          (any of its lines), line: only the line itself)
 #   key    the Japanese string
-#   value  persona: none rough old-male lady formal pompous archaic grand
-type	key	value	note
+#   value  persona: none rough old-male lady formal pompous archaic grand (auth rows: speaker or line)
+#   notafter  auth rows: characters that must not come right before a part (お嬢, 令嬢 are not 〜嬢)
+type	key	value	notafter	note
 first	わし	old-male
 first	ワシ	old-male
 first	儂	old-male
@@ -36,3 +39,34 @@ suffix	さま	-
 suffix	先輩	-
 suffix	先生	-
 suffix	殿	-
+auth	わしは|わしが|わしの|わしも|わしに|わしを	speaker		first person of an old or authoritative man
+auth	ワシは|ワシが|ワシの|ワシも|ワシに|ワシを	speaker
+auth	儂	speaker
+auth	我が	speaker		我 as the first person (我が国, 我は)
+auth	我は	speaker
+auth	我の	speaker
+auth	我ら	speaker
+auth	拙者	speaker
+auth	それがし	speaker
+auth	余は	speaker		余 as the first person (not 余裕)
+auth	余が	speaker
+auth	余の	speaker
+auth	朕	speaker
+auth	私は|私が|私の|私も|私に|私を|私、|私だ|私で|私と+おまえ	speaker		私 for oneself and おまえ for the addressee: a superior speaking down (officer, interrogator)
+auth	私は|私が|私の|私も|私に|私を|私、|私だ|私で|私と+お前	speaker
+auth	私は|私が|私の|私も|私に|私を|私、|私だ|私で|私と+貴様	speaker
+auth	わたしは|わたしが|わたしの+おまえ|お前	speaker
+auth	分からん	line		the plain ん negative of a gruff voice
+auth	わからん	line
+auth	知らん	line
+auth	しれん	line
+auth	構わん	line
+auth	かまわん	line
+auth	いかん	line
+auth	許さん	line
+auth	足らん	line
+auth	父上	line		noble family terms: a formal, high-born voice
+auth	母上	line
+auth	兄上	line
+auth	姉上	line
+auth	嬢、|嬢。|嬢！|嬢,|嬢 |嬢　	line	お令	〜嬢 calling a lady by name (ララティーナ嬢、): an elder or superior; not お嬢様, 令嬢

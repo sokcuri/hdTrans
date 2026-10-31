@@ -1,6 +1,7 @@
 // The retrofit (hd8gen/retro.h): pre-IR lines of 0.7.x output → kir (analysis by synthesis) → R, W, G.
 #include "hd8gen/retro.h"
 
+#include <algorithm>
 #include <cstdio>
 #include <map>
 #include <string>
@@ -878,8 +879,55 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         uint32_t id = 0;
         for (auto& n : nodes) n.id = n.origin = ++id;
+        // REG-12: a command read where none can be leaves the line as 0.7.x wrote it: an adjective has no imperative
+        // (진지하게 is the adverb), and a command right before another predicate (선택하지 말았으면 좋겠다) is not one
+        for (size_t q = 0; q < nodes.size(); ++q) {
+            const Node& n = nodes[q];
+            if (n.kind != Kind::V || n.ctype != CType::final_ || n.mood != Mood::imp) continue;
+            std::string pos = n.vpos;
+            if (pos.empty()) pos = LookupPredicate(*tablesPtr, n.lemma).pos;
+            if (pos == "A" || (q + 1 < nodes.size() && nodes[q + 1].kind == Kind::V)) lineOk = false;
+        }
         // R
         RegDecision d = decisions[li];
+        // REG-15: a line of several quotes (「了解」 「かしこま」) has a level per quote; quoteOf maps a node to its quote
+        std::vector<size_t> quoteOf(nodes.size(), 0);
+        std::vector<bool> nested(nodes.size(), false);  // inside a quote within the quote (『…』 in 「…」): another voice
+        {
+            int depth = 0;
+            size_t k = 0;
+            bool opened = false;
+            for (size_t q = 0; q < nodes.size(); ++q) {
+                if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qopen) {
+                    if (depth == 0 && opened) ++k;
+                    opened = true;
+                    ++depth;
+                }
+                quoteOf[q] = k;
+                nested[q] = depth >= 2;
+                if (nodes[q].kind == Kind::Punct && nodes[q].punct == Punct::qclose && depth > 0) --depth;
+            }
+        }
+        // per quote only when R decided per quote and 0.7.x's text has as many quotes; else the line is one group
+        const bool perQuote = d.quotes.size() >= 2 && !nodes.empty() && quoteOf.back() + 1 == d.quotes.size();
+        // R decided per quote but 0.7.x's text has another number of quotes: the levels cannot be placed, keep 0.7.x
+        if (d.quotes.size() >= 2 && !perQuote) lineOk = false;
+        if (!perQuote) std::fill(quoteOf.begin(), quoteOf.end(), 0);
+        // REG-12: -ㄹ까 before 하다 (추가할까 하고, 아닐까 합니다) is the construction "think of", not a sentence end
+        auto thinkOf = [&](size_t q) {
+            if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || q + 1 >= nodes.size()) return false;
+            const Node& nx = nodes[q + 1];
+            // -다니 right before a noun quotes what the noun says (얻게 되다니 소문), it does not end a sentence
+            if (nodes[q].eomi == "dani") return nx.kind == Kind::N || nx.kind == Kind::Raw;
+            if (nodes[q].eomi != "lkka") return false;
+            if (nx.kind != Kind::V && nx.kind != Kind::N && nx.kind != Kind::Raw) return false;
+            for (const char* h : {"하", "합", "한", "했", "해"})
+                if (nx.lemma.rfind(h, 0) == 0) return true;
+            return false;
+        };
+        auto quoteAt = [&](size_t q) -> const RegDecision::Quote& {
+            return d.quotes[std::min(quoteOf[q], d.quotes.size() - 1)];
+        };
         std::vector<Reg> reg;
         UttLevel u;
         u.utt = 0;
@@ -891,11 +939,23 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             reg = AssignRegister(*rtab, nodes, d, first, tablesPtr);
             if (u.narration)
                 for (auto& g : reg) g.level = Level::haera;
+            if (perQuote && !u.narration)
+                for (auto& g : reg)
+                    for (size_t q = 0; q < nodes.size(); ++q)
+                        if (nodes[q].id == g.node) {
+                            g.level = quoteAt(q).level;
+                            if (g.level != Level::haeyo && g.level != Level::hapsyo) g.hon = false;
+                        }
             // a word 0.7.x wrote with a level the reader could not take apart: changing the others would mix levels
             bool mixed = false;
+            // (REG-12; a Hangul word kept literally counts too: 아닐까 합니다)
             for (const auto& n : nodes) {
-                if (n.kind != Kind::Raw) continue;
-                for (const char* key : {"mixed.hapsyo", "mixed.haeyo"})
+                if (n.kind != Kind::Raw && n.kind != Kind::N) continue;
+                // a noun ending in 요 (필요, 중요) is no polite end: a kept Hangul word counts by mixed.word endings
+                const std::initializer_list<const char*> keys = n.kind == Kind::Raw
+                                                                     ? std::initializer_list<const char*>{"mixed.hapsyo", "mixed.haeyo"}
+                                                                     : std::initializer_list<const char*>{"mixed.hapsyo", "mixed.word"};
+                for (const char* key : keys)
                     for (const auto& e : Split(tablesPtr->G(key), '|'))
                         if (n.lemma.size() >= e.size() && n.lemma.compare(n.lemma.size() - e.size(), e.size(), e) == 0) mixed = true;
             }
@@ -906,11 +966,11 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                                    nodes[q + 1].punct == Punct::comma;
                 // in a caption scene a plain command 0.7.x wrote as -어라 (来い → 와라) stays one
                 const bool command = nodes[q].mood == Mood::imp && static_cast<Level>(nodes[q].decision) == Level::haera;
-                // honorific or humble source (いらっしゃる, 申す, おります, ご覧になって): 0.7.x's polite level
+                // REG-10: honorific or humble source (いらっしゃる, 申す, おります, ご覧になって): 0.7.x's polite level
                 // (합쇼체, or 해요체 for ご覧になって → 보세요) stays; R would lower it from the sentence end alone
                 const Level was = static_cast<Level>(nodes[q].decision);
                 const bool keigo = v.Bool("keigo") && (was == Level::hapsyo || was == Level::haeyo);
-                // a question 0.7.x asked by its ending alone (아닙니까. 가십니까): no ? follows, and the 해요체 or
+                // REG-12: a question 0.7.x asked by its ending alone (아닙니까. 가십니까): no ? follows, and the 해요체 or
                 // 해체 question is the statement's form (아니에요. 가세요), so another level would stop asking
                 bool askedByEnding = false;
                 if (nodes[q].mood == Mood::q && nodes[q].ctype == CType::final_) {
@@ -920,10 +980,13 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                         if (nodes[k].punct == Punct::q) askedByEnding = false;
                     }
                 }
-                const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;
-                // the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
+                const bool hapsyo = opt.keepHapsyo && was == Level::hapsyo;  // REG-10: 합쇼체 is never lowered
+                // REG-11: the source commands with an imperative verb (見ろ, 追え): 0.7.x's 해라체 command stays (봐라)
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
-                if (!mixed && !inner && !d.keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
+                // REG-12: the source trails off after a て-form (言われて……): 0.7.x's -어 is not a command to raise
+                const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
+                const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail;
+                if (!mixed && !inner && !keep && !keigo && !askedByEnding && !hapsyo && !jaCommand &&
                     !(command && d.key.rfind("scene-speech", 0) == 0))
                     continue;
                 for (auto& g : reg)
@@ -945,14 +1008,35 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
         }
         // the speech level of each sentence end, before and after: whether the line changes level, and whether
         // its sentences would end at different levels (a polite end inside the line counts too: 모릅니다, …어요)
-        bool levelChanged = false, mixedLevels = false;
-        {
+        // REG-18: an exclamation with な on a predicate (寒いなぁ) ends in 해체 -네 (춥네): the last sentence end
+        bool neChanged = false;
+        if (levelMode == "auto" && d.exclaimNe && !d.narration) {
+            for (size_t q = nodes.size(); q-- > 0;) {
+                if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) continue;
+                Level now = Level::none;
+                for (const auto& g : reg)
+                    if (g.node == nodes[q].id) now = g.level;
+                bool lastWord = true;
+                for (size_t k = q + 1; k < nodes.size(); ++k)
+                    if (nodes[k].kind != Kind::Punct) lastWord = false;
+                if (now == Level::hae && nodes[q].mood == Mood::decl && nodes[q].eomi.empty() && lastWord) {
+                    nodes[q].eomi = "ne";
+                    neChanged = true;
+                }
+                break;
+            }
+        }
+        // (per quote when the line has several: each quote's last end may change, and its own ends must agree)
+        bool levelChanged = neChanged, mixedLevels = false;
+        const size_t quoteCount = nodes.empty() ? 1 : quoteOf.back() + 1;
+        for (size_t qi = 0; qi < quoteCount; ++qi) {
             Level end = Level::none;
-            bool lastChanged = false;  // the line's last sentence end (a V node, not a Raw word) changes level
+            bool lastChanged = false;  // the quote's last sentence end (a V node, not a Raw word) changes level
             std::vector<Level> innerPolite;
             for (size_t q = 0; q < nodes.size(); ++q) {
                 const Node& n = nodes[q];
-                if (n.kind != Kind::V || n.ctype != CType::final_) continue;
+                if (quoteOf[q] != qi) continue;
+                if (n.kind != Kind::V || n.ctype != CType::final_ || thinkOf(q) || nested[q]) continue;
                 Level now = Level::none;
                 for (const auto& g : reg)
                     if (g.node == n.id) now = g.level;
@@ -970,13 +1054,14 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
             }
             for (Level l : innerPolite)
                 if (end != Level::none && l != end) mixedLevels = true;
-            // a later word the reader could not take apart ends the line: its level is 0.7.x's, not known here
+            // REG-12: the quote's last word must be that sentence end; a later word (그래서?, 사실이야? 유필리아, a word
+            // the reader could not take apart, a connective) ends it at a level not known here
             for (size_t q = nodes.size(); q-- > 0;) {
-                if (nodes[q].kind == Kind::Punct) continue;
-                if (nodes[q].kind != Kind::V) lastChanged = lastChanged && nodes[q].kind != Kind::Raw;
+                if (quoteOf[q] != qi || nodes[q].kind == Kind::Punct) continue;
+                if (nodes[q].kind != Kind::V || nodes[q].ctype != CType::final_ || nested[q] || thinkOf(q)) lastChanged = false;
                 break;
             }
-            levelChanged = lastChanged;
+            levelChanged = levelChanged || lastChanged;
         }
         for (auto& n : nodes) n.decision = 0;
         const RewriteResult rw = Rewrite(*rules, *tablesPtr, nodes, reg, {u}, only, skip);

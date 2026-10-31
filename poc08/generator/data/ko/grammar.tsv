@@ -38,3 +38,4 @@ conn.caus	-게
 lit.ends	다요까죠	last syllables of a word that 0.7.x wrote literally and the retrofit reads as a predicate
 mixed.hapsyo	니다|니까	0.7.x words the retrofit could not read that carry 합쇼체; the line then keeps 0.7.x's levels
 mixed.haeyo	요|죠	same for 해요체
+mixed.word	어요|아요|에요|예요|해요|세요|까요|네요|데요|군요|래요|게요|나요|가요|지요|죠	해요체 ends of a Hangul word the reader kept whole (not 필요, 중요)

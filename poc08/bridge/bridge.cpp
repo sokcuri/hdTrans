@@ -385,8 +385,9 @@ bool ParseParts(std::string_view list, Options& out, std::string& err) {
         else if (part == "reselect") out.reselect = true;
         else if (part == "rule") out.rule = out.segment = true;
         else if (part == "native") out.native = true;
+        else if (part == "retrofit") out.rule = true;  // the speech retrofit of rule without the analyzer segmentation
         else {
-            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, native, all, none)";
+            err = "unknown part " + std::string(part) + " (normalize, segment, generate, decide, reselect, rule, retrofit, native, all, none)";
             return false;
         }
         at = comma + 1;

@@ -49,3 +49,5 @@ endif()
 add_test(NAME poc08.generator.gold COMMAND hd8gen_cli --data ${CMAKE_CURRENT_SOURCE_DIR}/data gold ${CMAKE_CURRENT_SOURCE_DIR}/tests/gold/gold.tsv)
 add_test(NAME poc08.generator.gen COMMAND hd8gen_cli --data ${CMAKE_CURRENT_SOURCE_DIR}/data gen ${CMAKE_CURRENT_SOURCE_DIR}/tests/gen/cases.jsonl)
 add_test(NAME poc08.generator.lint COMMAND hd8gen_cli --data ${CMAKE_CURRENT_SOURCE_DIR}/data lint)
+add_test(NAME poc08.generator.levels COMMAND hd8gen_cli --data ${CMAKE_CURRENT_SOURCE_DIR}/data levelcases
+         ${CMAKE_CURRENT_SOURCE_DIR}/tests/register/levels.cases.tsv --spec ${CMAKE_CURRENT_SOURCE_DIR}/../../spec/register.md)
