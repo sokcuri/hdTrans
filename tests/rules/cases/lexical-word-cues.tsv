@@ -33,3 +33,6 @@ cx:word-cue:35	静寂な図書室に二人きり。	고요한 도서실에 단�
 cx:word-cue:35	二人だけの静寂な夜が訪れた。	has:고요한 밤이	fix	rewrites
 cx:word-cue:35	完全なる静寂だった。	!rule:cx:word-cue:35	keep	rewrites
 cx:word-cue:35	チャイムの音が静寂に染みた。	!rule:cx:word-cue:35	keep	rewrites
+cx:word-cue:10	今日は晴れて日差しが強い	has:오늘은 개	fix	rewrites
+cx:word-cue:10	明日は晴れて暑くなるでしょう	lacks:정식으로	fix	rewrites
+cx:word-cue:10	晴れて入学式を迎えた	has:정식으로 입학식을	keep	rewrites

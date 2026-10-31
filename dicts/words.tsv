@@ -19505,7 +19505,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 火蓋	화문 덮개	N110	VPe		GN				llm		ひぶた	w:19458
 火蟻	열마디개미속	N110			GN						ひあり	w:19459
 火車	화차	N110			GN						かしゃ	w:19460
-灯し	등불	N110	VPe		GN				llm		あかし	w:19461
 灯し火	불빛	N110			GN						ともしび	w:19462
 灯り	등불	N110	VEl		GN				xxx llm			w:19463
 灯り	전등불	N110			GN						あかり	w:19464

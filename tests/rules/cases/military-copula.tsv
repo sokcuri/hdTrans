@@ -1,7 +1,7 @@
 # 규칙: SPC-8
 rule	input	expected	kind	layer
 dict:military-copula	「安心させてあげたいであります」	「안심시켜 주고 싶습니다」	fix	lookup
-dict:military-copula	「でも……それ以上に、最後の最後に『ウザい』って思われたくないであります」	「하지만……그 이상으로, 마지막의 마지막에 『시끄럽다』라고 생각되고 싶지 않습니다」	fix	lookup
+dict:military-copula	「でも……それ以上に、最後の最後に『ウザい』って思われたくないであります」	「하지만……그 이상으로, 마지막의 마지막에 『짜증스럽다』라고 생각되고 싶지 않습니다」	fix	lookup
 dict:military-copula	「遠慮なく頼って欲しいであります！」	「거리낌 없이 의지했으면 좋습니다!」	fix	lookup
 dict:military-copula	「そうかもしれないでありますが……」	「그럴지도 모릅니다만……」	fix	lookup
 dict:military-copula	「もちろん死んで欲しくないでありますよ？」	「물론 죽기를 원하지 않습니다?」	fix	lookup
