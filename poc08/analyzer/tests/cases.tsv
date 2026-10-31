@@ -34,3 +34,6 @@ c.tomo.1	fix	「ふたりともおはよー」	ふたり[二人]	ふたり is �
 c.youna.1	todo	漫画のようなあかんべーをして	の よう[様]	のような
 c.youna.2	todo	漫画のようなあかんべーをして	の よう[様] な[だ]	the adnominal copula after よう
 c.tomo.2	keep	「ふたりともおはよー」	ふたり と も	a lengthened greeting after とも
+c.ocha.1	fix	お茶を飲む	お 茶[茶/名詞-普通名詞]	the honorific お before a common noun, not a given name
+c.ocha.2	fix	お茶が好き	茶[茶/名詞-普通名詞] が	the same in a subject
+c.ocha.3	keep	茶々さんがいた	茶々	a name without the honorific stays a name

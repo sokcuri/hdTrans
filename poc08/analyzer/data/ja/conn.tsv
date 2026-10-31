@@ -58,3 +58,4 @@ cn.shushi-juntai	ANA-C50	ud=動詞|形容詞|助動詞 & cform=終止形	ud=助�
 cn.teru-next	ANA-C51	lemma=てる & cform=連用形	ud=名詞|動詞|形容詞|形状詞-一般|副詞|代名詞|補助記号|感動詞|連体詞|接頭辞|接続詞|助詞-係助詞|助詞-格助詞|助詞-終助詞 / ud=助詞-副助詞 & !lemma=たり / bos	the contracted てる in its continuative form (し+て+た) is followed by an auxiliary, て, たり or a stem like そう; before anything else て is the conjunctive particle (していい)
 cn.teru-iru	ANA-C52	lemma=てる	lemma=居る	てる already holds いる: て+いる is the conjunctive て and いる
 cn.ta-to	ANA-C53	ud=助動詞 & lemma=た|たい|らしい|まい|う|よう	ud=助詞-接続助詞 & lemma=と	the conditional と takes a non-past form; after た, たい, らしい or the volitional, と quotes (行ったと思う)
+cn.prefix-name	ANA-C54	ud=接頭辞 & lemma=御	ud=名詞-固有名詞-人名	the honorific お/ご does not take a personal name (お茶 is tea, not a person named 茶)

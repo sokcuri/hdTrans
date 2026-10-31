@@ -672,8 +672,8 @@ int CmdHints(const Args& a) {
 }
 
 // ---- cases ---------------------------------------------------------------------------------------
-// CASES.tsv rows: id, kind (fix|keep|todo), input, expect, note. A todo case is reported, not failed. expect is a run of tokens, each surf or surf[lemma],
-// separated by spaces; the case passes when the analysis of input contains that run.
+// CASES.tsv rows: id, kind (fix|keep|todo), input, expect, note. A todo case is reported, not failed. expect is a run of tokens, each surf, surf[lemma] or
+// surf[lemma/ud] (ud a prefix of the token's UniDic POS), separated by spaces; the case passes when the analysis of input contains that run.
 int CmdCases(const Args& a) {
   if (a.pos.size() < 2) return Die("cases CORE.bin|DATA_DIR CASES.tsv");
   Analyzer an;
@@ -696,8 +696,9 @@ int CmdCases(const Args& a) {
         ++n;
         an.Analyze(f[2], opt, &r, ws.get());
         std::vector<std::string> want = SplitOn(f[3], ' ');
-        std::vector<std::pair<std::string, std::string>> got;
-        for (auto& t : r.toks) got.push_back({t.surf, t.lemma});
+        struct Got { std::string surf, lemma, ud; };
+        std::vector<Got> got;
+        for (auto& t : r.toks) got.push_back({t.surf, t.lemma, std::string(an.UdName(t.ud))});
         bool ok = false;
         for (size_t i = 0; i + want.size() <= got.size() && !ok; ++i) {
           ok = true;
@@ -705,7 +706,13 @@ int CmdCases(const Args& a) {
             const std::string& w = want[k];
             auto lb = w.find('[');
             std::string surf = w.substr(0, lb), lemma = lb == std::string::npos ? "" : w.substr(lb + 1, w.size() - lb - 2);
-            ok = got[i + k].first == surf && (lemma.empty() || got[i + k].second == lemma);
+            std::string ud;
+            if (auto sl = lemma.find('/'); sl != std::string::npos) {
+              ud = lemma.substr(sl + 1);
+              lemma.resize(sl);
+            }
+            const Got& g = got[i + k];
+            ok = g.surf == surf && (lemma.empty() || g.lemma == lemma) && g.ud.compare(0, ud.size(), ud) == 0;
           }
         }
         if (!ok && f[1] == "todo") {
@@ -715,7 +722,7 @@ int CmdCases(const Args& a) {
         if (!ok) {
           ++failed;
           std::string s;
-          for (auto& g : got) s += " " + g.first + "[" + g.second + "]";
+          for (auto& g : got) s += " " + g.surf + "[" + g.lemma + "/" + g.ud + "]";
           std::fprintf(stderr, "FAIL %s (%s): want %s, got%s\n", f[0].c_str(), f[1].c_str(), f[3].c_str(), s.c_str());
         }
       }, &err))
