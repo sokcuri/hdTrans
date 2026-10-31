@@ -256,35 +256,55 @@ void RecordRepairs(const Model& m, const RepairRules& R, const Workspace& ws, st
     const auto& ra = ws.rarcs[a.ref];
     Token& t = out->toks[ti];
     t.flags |= Repaired;
+    bool foldCharged = false, swapCharged = false;
     for (size_t k = 0; k < ra.edits.size(); ++k) {
       const RepairEdit& e = ra.edits[k];
       Repair r;
       if (e.spaceOnly) {
-        r.src = {byteE(e.pos - 1u), byteB(e.pos)};
+        // only the space characters: a ruby reading the normaliser took out stays in the text
+        uint32_t first = ws.coreN[e.pos - 1u] + 1, last = ws.coreN[e.pos];
+        while (first < last && !internal::IsSpace(ws.nchars[first].c)) ++first;
+        uint32_t end = first;
+        while (end < last && internal::IsSpace(ws.nchars[end].c)) ++end;
+        r.src = first < end ? Span{ws.nchars[first].sb, ws.nchars[end - 1].se} : Span{byteB(e.pos), byteB(e.pos)};
       } else if (e.len == 0) {
-        r.src = {byteB(e.pos), byteB(e.pos)};
+        uint32_t at = e.pos > 0 ? byteE(e.pos - 1u) : byteB(e.pos);  // an insertion sits right after the letter before
+        r.src = {at, at};
       } else {
         r.src = {byteB(e.pos), byteE(e.pos + e.len - 1u)};
       }
+      // the cost charged: per letter, a run of drops once, a katakana fold and a swap once per word
+      int32_t cost = R.ops[static_cast<size_t>(e.op)].cost;
+      if (e.op == RepairOp::kataFold) {
+        cost = foldCharged ? 0 : cost;
+        foldCharged = true;
+      } else if (e.op == RepairOp::swap) {
+        cost = swapCharged ? 0 : cost;
+        swapCharged = true;
+      }
       // a run of one operation over adjacent letters is one repair
-      if (!out->repairs.empty() && out->repairs.back().tok == ti && out->repairs.back().src.end == r.src.begin &&
-          out->repairs.back().op == RepairOpId(R, e.op) && !e.spaceOnly) {
+      if (!out->repairs.empty() && out->repairs.back().tok == static_cast<uint16_t>(ti) &&
+          out->repairs.back().src.end == r.src.begin && out->repairs.back().op == RepairOpId(R, e.op) && !e.spaceOnly) {
         auto& b = out->repairs.back();
         b.src.end = r.src.end;
         b.from = std::string(src.substr(b.src.begin, b.src.end - b.src.begin));
         for (char32_t c : e.to) AppendUtf8(b.to, c);
+        if (e.op == RepairOp::dakuten || e.op == RepairOp::smallBig || e.op == RepairOp::edit1)
+          b.cost = static_cast<uint16_t>(b.cost + cost);
         continue;
       }
       r.from = std::string(src.substr(r.src.begin, r.src.end - r.src.begin));
       for (char32_t c : e.to) AppendUtf8(r.to, c);
       r.op = std::string(RepairOpId(R, e.op));
-      r.cost = static_cast<uint16_t>(R.ops[static_cast<size_t>(e.op)].cost);
+      r.cost = static_cast<uint16_t>(cost);
       r.tok = static_cast<uint16_t>(ti);
       out->repairs.push_back(std::move(r));
+      if (e.spaceOnly && e.pos == a.b) t.flags = static_cast<uint16_t>(t.flags & ~SpaceBefore);  // it took the space in
     }
   }
-  std::sort(out->repairs.begin(), out->repairs.end(),
-            [](const Repair& x, const Repair& y) { return x.src.begin < y.src.begin; });
+  std::stable_sort(out->repairs.begin(), out->repairs.end(), [](const Repair& x, const Repair& y) {
+    return x.src.begin != y.src.begin ? x.src.begin < y.src.begin : x.src.end < y.src.end;
+  });
   size_t at = 0;
   for (const Repair& r : out->repairs) {
     if (r.src.begin < at) continue;
@@ -315,6 +335,9 @@ void Analyzer::Analyze(std::string_view src, const Options& opt, Analysis* out, 
   out->alts.clear();
   out->alt.clear();
   out->altMargin = 0;
+  out->repairs.clear();
+  out->repaired.clear();
+  out->checks.clear();
   if (!model_) return;
   const Model& m = *model_;
   internal::Normalize(src, &ws->nchars, &ws->edits);

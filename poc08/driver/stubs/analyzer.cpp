@@ -82,4 +82,10 @@ void StageA(const AnalyzerData&, const Config&, Doc& doc, Line& line, const std:
     }
 }
 
+// input repair (poc08/analyzer, hd8/stage_repair.h): nothing to repair without the analyzer
+bool EnableRepair(AnalyzerData*) { return false; }
+bool EnableStageRepair(AnalyzerData*) { return false; }
+bool RepairEnabled(const AnalyzerData&) { return false; }
+bool RepairText(const AnalyzerData&, std::string_view, std::string*, std::string*) { return false; }
+
 }  // namespace hd08

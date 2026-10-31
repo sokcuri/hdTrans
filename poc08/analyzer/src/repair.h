@@ -48,6 +48,8 @@ struct RepairRules {
 
   // param rows
   std::vector<std::string> coreUd;      // closed classes: always core
+  std::u32string digraphs;              // small ャュョ: a katakana run with them is never read as hiragana
+  std::vector<std::string> inflecting;  // IR Pos of words with an inflection (a swap may sit in it)
   std::vector<std::string> functionUd;  // UniDic POS prefixes of function words (fold, swap)
   std::vector<std::string> foldWordUd;  // a katakana word as written folds only into these
   std::vector<std::string> noEditUd;    // never edited by edit1 (names)

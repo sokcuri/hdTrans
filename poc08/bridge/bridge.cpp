@@ -15,6 +15,12 @@
 #include "lift.h"
 #include "rule.h"
 
+namespace hd08 {
+// input repair of the analyzer component (poc08/analyzer/include/hd8/stage_repair.h; stubbed without it)
+bool EnableRepair(AnalyzerData* data);
+bool RepairText(const AnalyzerData& data, std::string_view src, std::string* out, std::string* why);
+}  // namespace hd08
+
 namespace hd08::bridge {
 
 namespace {
@@ -72,6 +78,11 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
         l.id = static_cast<uint32_t>(i + 1);
         l.src = lines[i];
         if (!l.src.empty() && l.src.back() == '\r') l.src.pop_back();
+        // the side IR reads the line as 0.7.x does: with the repaired spans (offsets into that text)
+        if (b.opt.repair) {
+            std::string fixed;
+            if (RepairText(*b.engine.analyzer, l.src, &fixed, nullptr)) l.src = std::move(fixed);
+        }
         ds->doc.lines.push_back(std::move(l));
     }
     ds->from.assign(lines.size(), 0);

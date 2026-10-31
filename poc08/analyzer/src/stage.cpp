@@ -15,7 +15,8 @@ namespace hd08 {
 
 struct AnalyzerData {
   hd8::ana::Analyzer analyzer;
-  bool repair = false;  // EnableRepair: StageA reads noisy spans again (ja/repair.tsv)
+  bool repair = false;       // EnableRepair: RepairText reads noisy spans again (ja/repair.tsv)
+  bool stageRepair = false;  // EnableStageRepair: StageA too (the native route; Token.repair, flag Repaired)
 };
 
 namespace {
@@ -108,6 +109,12 @@ bool EnableRepair(AnalyzerData* data) {
   return true;
 }
 
+bool EnableStageRepair(AnalyzerData* data) {
+  if (!EnableRepair(data)) return false;
+  data->stageRepair = true;
+  return true;
+}
+
 bool RepairEnabled(const AnalyzerData& data) { return data.repair; }
 
 bool RepairText(const AnalyzerData& data, std::string_view src, std::string* out, std::string* why) {
@@ -150,7 +157,7 @@ void StageN(const AnalyzerData&, const Config&, Doc& doc, Line& line) {
 void StageA(const AnalyzerData& a, const Config&, Doc& doc, Line& line, const std::vector<ForcedSpan>&) {
   hd8::ana::Analysis r;
   hd8::ana::Options opt;
-  opt.repair = a.repair;
+  opt.repair = a.stageRepair;
   a.analyzer.Analyze(line.src, opt, &r, ThreadWorkspace());
   line.toks.clear();
   line.alts.clear();

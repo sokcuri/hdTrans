@@ -9,9 +9,11 @@ namespace hd08 {
 
 struct AnalyzerData;
 
-// Turns input repair on for StageA and RepairText. Call once after LoadAnalyzer, before any stage runs;
-// false when the analyzer data has no ja/repair.tsv.
+// Turns input repair on for RepairText (EnableRepair) or for StageA as well (EnableStageRepair, the native route:
+// repaired tokens get Token.repair and the Repaired flag). Call once after LoadAnalyzer, before any stage runs;
+// false when the analyzer data has no ja/repair.tsv. The bridge also declares these (the analyzer stub defines them).
 bool EnableRepair(AnalyzerData* data);
+bool EnableStageRepair(AnalyzerData* data);
 bool RepairEnabled(const AnalyzerData& data);
 
 // src with only its repaired spans replaced by their repaired spelling. Returns false, and leaves out

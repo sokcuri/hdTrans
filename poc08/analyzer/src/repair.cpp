@@ -1,6 +1,7 @@
 #include "repair.h"
 
 #include <algorithm>
+#include <cstdlib>
 #include <unordered_map>
 
 #include "tsv.h"
@@ -47,7 +48,7 @@ bool ParseAtom(std::string x, bool pairRow, RepairRules::Atom* a, std::string* e
     *err = "bad side in '" + x + "'";
     return false;
   }
-  a->side = side == "r" ? 1 : 0;
+  a->side = static_cast<uint8_t>(side == "r" ? 1 : 0);
   a->prefix = eq > 0 && x[eq - 1] == '^';
   a->suffix = eq > 0 && x[eq - 1] == '$';
   std::string field = x.substr(dot + 1, (a->prefix || a->suffix ? eq - 1 : eq) - dot - 1);
@@ -64,6 +65,10 @@ bool ParseAtom(std::string x, bool pairRow, RepairRules::Atom* a, std::string* e
 
 bool ParseConj(const std::string& s, bool pairRow, RepairRules::Conj* out, std::string* err) {
   out->clear();
+  if (s.find("||") != std::string::npos) {
+    *err = "|| only in require: '" + s + "'";
+    return false;
+  }
   if (Trim(s) == "-" || Trim(s).empty()) return true;
   for (auto& part : SplitOn(s, '&')) {
     RepairRules::Atom a;
@@ -132,6 +137,7 @@ char32_t HalfVoiced(char32_t c) {
 }
 
 std::string_view CcName(char32_t c) {
+  if (c == 0x30FB) return "sym";  // ・
   if (IsLongMark(c) || IsSokuon(c)) return "mark";
   if (IsHiragana(c)) return "hira";
   if (IsKatakana(c)) return "kata";
@@ -166,6 +172,8 @@ std::string_view ScriptOf(std::u32string_view s) {
     if (!IsLongMark(c) && !IsSokuon(c)) marks = false;
     if (IsHiragana(c)) hira = true;
     else if (c == U'ー') {
+    } else if (c == 0x30FB) {
+      sym = true;
     } else if (IsKatakana(c)) {
       // a big katakana letter after hiragana: れル, すグ (あッ, がぁッ are spoken marks)
       if (hira && !IsSmall(c)) mixed = true;
@@ -539,11 +547,13 @@ struct Gen {
     } else if (inLong) {
     } else if (IsSokuon(c) && j + 1 < core.size()) {
       try1(RepairOp::elong);
-    } else if (IsHiragana(c) && IsVowelLetter(c) && Vowel(c) == Vowel(prod.back())) {
-      try1(RepairOp::elong);
+    } else if (IsHiragana(c) && IsVowelLetter(c) && Vowel(c) == Vowel(prod.back()) && c != core[j - 1]) {
+      try1(RepairOp::elong);  // a vowel repeated as a letter (ええ) is a stutter below, never both
     }
     bool dropOk = !inLong || (dup && (*dup)[j]);
-    if (j > 0 && c == core[j - 1] && dropOk && (IsKana(c) || IsKanji(c) || R.repeatMarks.find(c) != std::u32string::npos))
+    // a repeat drops only as the tail of its run: the letter after it is not kept once one is dropped
+    if (j > 0 && c == core[j - 1] && dropOk && !IsLongMark(c) && !IsSokuon(c) &&
+        (IsKana(c) || IsKanji(c) || R.repeatMarks.find(c) != std::u32string::npos))
       try1(RepairOp::stutter);
   }
 
@@ -555,8 +565,8 @@ struct Gen {
       char32_t c = core[j];
       fn(c, j + 1);
       if (longKata && (*longKata)[j]) return;
-      bool digraph = IsKatakana(c) && ((j + 1 < core.size() && (core[j + 1] == U'ャ' || core[j + 1] == U'ュ' || core[j + 1] == U'ョ')) ||
-                                       c == U'ャ' || c == U'ュ' || c == U'ョ');
+      bool digraph = IsKatakana(c) && ((j + 1 < core.size() && R.digraphs.find(core[j + 1]) != std::u32string::npos) ||
+                                       R.digraphs.find(c) != std::u32string::npos);
       auto variants = [&](char32_t base, bool folded) {
         if (On(RepairOp::smallBig))  // big read as small (だつた → だった); a small kana is never read big
           if (char32_t s = SmallBig(base); s && IsSmall(s)) Alt(j, s, RepairOp::smallBig, folded, fn);
@@ -971,9 +981,9 @@ class Reader {
         triple_[p] = 3;
     for (size_t b = 0; b + 1 < R_.brackets.size(); b += 2) {
       char32_t open = R_.brackets[b], close = R_.brackets[b + 1];
-      long opens = std::count(core.begin(), core.end(), open), closes = std::count(core.begin(), core.end(), close);
+      const auto opens = std::count(core.begin(), core.end(), open), closes = std::count(core.begin(), core.end(), close);
       char32_t extra = opens > closes ? open : close;
-      long excess = opens > closes ? opens - closes : closes - opens;
+      auto excess = opens > closes ? opens - closes : closes - opens;
       for (size_t p = 1; p < core.size() && excess > 0; ++p)
         if (core[p] == extra && core[p - 1] == extra && !ws_->spaceBefore[p]) {
           triple_[p] = 3;
@@ -1265,8 +1275,7 @@ class Reader {
       if (a.arc.kind == ArcKind::lex) stem = m_.groups[a.arc.ref].stemLen;
       else if (a.rarc >= 0) stem = m_.groups[rarcs[static_cast<size_t>(a.rarc)].group].stemLen;
       else return false;
-      bool infl = a.info.pos == "v1" || a.info.pos == "v5" || a.info.pos == "vs" || a.info.pos == "vk" ||
-                  a.info.pos == "adj";
+      bool infl = std::find(R_.inflecting.begin(), R_.inflecting.end(), a.info.pos) != R_.inflecting.end();
       if (!infl || p + k < a.arc.b + stem) return false;
     }
     return true;
@@ -1324,6 +1333,8 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
       else if (name == "phrase-end-ud") out->phraseEndUd = list;
       else if (name == "censor-marks") out->censor = letters;
       else if (name == "core-ud") out->coreUd = list;
+      else if (name == "digraphs") out->digraphs = letters;
+      else if (name == "inflecting") out->inflecting = list;
       else if (name == "sound-end") out->soundEnd = letters;
       else if (name == "voiced-words") out->voicedWords = letters;
       else if (name == "brackets") out->brackets = letters;
@@ -1369,6 +1380,8 @@ bool ParseRepairTsv(std::string_view text, RepairRules* out, std::string* err) {
         }
       }
       for (auto& a : c.when) c.space = c.space || a.field == fSpace;
+      for (auto& conj : c.require)
+        for (auto& a : conj) c.space = c.space || a.field == fSpace;
       (c.pair ? out->pair : out->tok).push_back(std::move(c));
       continue;
     }
@@ -1424,7 +1437,7 @@ std::string_view RepairOpId(const RepairRules& rules, RepairOp op) { return rule
 
 bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Options& opt, std::string* why) {
   auto& P = ws->path;
-  if (P.empty()) return false;
+  if (P.empty() || ws->core.size() > 0xFFFF) return false;  // positions are 16-bit
   Reader reader(m, R, ws, opt);
   std::vector<uint8_t> mark;
   reader.Marks(&mark);
@@ -1517,7 +1530,7 @@ bool RepairPath(const Model& m, const RepairRules& R, Workspace* ws, const Optio
             e.to = std::u32string(1, best.core[p + k]);
             e.op = RepairOp::swap;
             bool dup = false;
-            for (auto& x2 : ra.edits) dup = dup || (x2.pos == e.pos && !x2.spaceOnly);
+            for (auto& x2 : ra.edits) dup = dup || (!x2.spaceOnly && x2.len > 0 && x2.pos <= e.pos && e.pos < x2.pos + x2.len);
             if (!dup) ra.edits.push_back(e);
           }
         std::sort(ra.edits.begin(), ra.edits.end(),

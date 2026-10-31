@@ -39,6 +39,8 @@
 # (POS prefixes joined by |, or a string of letters).
 id	spec	kind	cost	when	require	st	prov	note
 rp.param.core-ud	REP-9	param	-	助詞|助動詞|補助記号|記号|接尾辞|接頭辞|代名詞|連体詞|接続詞|感動詞|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|名詞-数詞	-	m	own	closed classes, always in the core lexicon
+rp.param.digraphs	REP-1	param	-	ャュョ	-	m	own	a katakana letter with these (キャ, シュ) spells a loanword or a name and is never read as hiragana
+rp.param.inflecting	REP-7	param	-	v1|v5|vs|vk|vz|adj	-	m	own	IR Pos of words whose inflection a transposition may sit in
 rp.param.function-ud	REP-1	param	-	助詞|助動詞|接尾辞|動詞-非自立可能|形容詞-非自立可能|形状詞-助動詞語幹|名詞-助動詞語幹|補助記号	-	m	own	function words: katakana in them may be read as hiragana; a transposition may sit in them
 rp.param.fold-word-ud	REP-1	param	-	助詞|助動詞	-	m	own	a katakana run that is a word as written is read as hiragana only as one of these (カラ → から)
 rp.param.no-edit-ud	REP-8	param	-	名詞-固有名詞	-	m	own	one edit never yields a name
