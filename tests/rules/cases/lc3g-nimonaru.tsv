@@ -1,0 +1,31 @@
+# 규칙: GRM-184
+rule	input	expected	kind	layer
+cx:lc3g-nimonaru:10	倍にもなる。	has:배나	fix	rewrites
+cx:lc3g-nimonaru:10	三日目にもなると慣れた物だ。	has:3일째나	fix	rewrites
+cx:lc3g-nimonaru:10	誤差次第で、２万年にもなる。	has:2만년이나	fix	rewrites
+cx:lc3g-nimonaru:10	もう３度目にもなることを思う。	has:3번째나	fix	rewrites
+cx:lc3g-nimonaru:10	タンジア亀は最大３ｍにもなる。	has:m나	fix	rewrites
+cx:lc3g-nimonaru:15	「ええ、私が率いることになる部隊ですもの。そりゃ気にもなるわよ」	has:신경도 쓰일	fix	rewrites
+cx:lc3g-nimonaru:20	とても贅沢をした気分にもなる	has:기분이 들기도 한다	fix	rewrites
+cx:lc3g-nimonaru:20	懐かしい気持ちにもなるのだ。	has:기분이 들기도 한다	fix	rewrites
+cx:lc3g-nimonaru:20	その事実に少しだけ嫌な気分にもなる。	has:기분이 들기도 한다	fix	rewrites
+cx:lc3g-nimonaru:20	諦めるものを思えば切ない気にもなる。	has:기분이 들기도 한다	fix	rewrites
+cx:lc3g-nimonaru:20	なにも恐れるものはないという気分にもなる。	has:기분이 들기도 한다	fix	rewrites
+cx:lc3g-nimonaru:25	高校生にもなると公園なんてなかなか来ない。	has:고교생쯤	fix	rewrites
+cx:lc3g-nimonaru:25	中位クラスにもなると並の魔法使いでも分が悪い。	has:반쯤	fix	rewrites
+cx:lc3g-nimonaru:25	なかったが、中学生にもなると、いろいろわかってしまう。	has:중학생쯤	fix	rewrites
+cx:lc3g-nimonaru:25	大学生にもなると男の自慰視聴もお手の物なのかもしれない。	has:대학생쯤	fix	rewrites
+cx:lc3g-nimonaru:25	Ｃランクにもなると魔物はある程度知能をつけ、気配を消すこともできる。	has:C랭크쯤	fix	rewrites
+cx:lc3g-nimonaru:30	負い目にもなる。	has:빚이 되기도 한다	fix	rewrites
+cx:lc3g-nimonaru:30	復習にもなるしな。	has:복습이 되기도 하고	fix	rewrites
+cx:lc3g-nimonaru:30	ぶっつけ本番にもなる！！」	has:실전이 되기도 한다	fix	rewrites
+cx:lc3g-nimonaru:30	その時、この男は鬼にもなる。	has:귀신이 되기도 한다	fix	rewrites
+cx:lc3g-nimonaru:30	ハサミやスプーンにもなった。	has:스푼이 되기도 했다	fix	rewrites
+cx:lc3g-nimonaru:10	内容が悪ければ再度講習を受けることにもなるのだ。	!rule:cx:lc3g-nimonaru:10	keep	rewrites
+cx:lc3g-nimonaru:15	でも、そうなるとかなりヤバいことにもなる。	!rule:cx:lc3g-nimonaru:15	keep	rewrites
+cx:lc3g-nimonaru:20	あんなことにもなるはずだわ。	!rule:cx:lc3g-nimonaru:20	keep	rewrites
+cx:lc3g-nimonaru:25	を直接敵に回すことにもなる。	!rule:cx:lc3g-nimonaru:25	keep	rewrites
+cx:lc3g-nimonaru:30	ファビアンも馬鹿にすることにもなるわ。	!rule:cx:lc3g-nimonaru:30	keep	rewrites
+cx:lc3g-nimonaru:10	凄まじいことにもなるな…。	!rule:cx:lc3g-nimonaru:10	keep	rewrites
+cx:lc3g-nimonaru:15	リュカにしてやれることにもなるし。	!rule:cx:lc3g-nimonaru:15	keep	rewrites
+cx:lc3g-nimonaru:20	相手にもならないと思う。	!rule:cx:lc3g-nimonaru:20	keep	rewrites

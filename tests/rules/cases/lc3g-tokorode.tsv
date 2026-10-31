@@ -1,0 +1,34 @@
+# 규칙: GRM-188
+rule	input	expected	kind	layer
+cx:lc3g-tokorode:10	これ以上言ったところで暖簾に腕押しだ。	has:말해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	どう表現したところでおぞましい姿としか言えない。	has:표현해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	いくら力が無いと言ったところで彼女は︿天魔﹀なのだ。	has:말해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	今更修道者を信用するなといったところで住民は聞き入れない。	has:해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	いくら俺が気にしていないといったところで、起こっちまった事は戻らない。	has:해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	これではいくらレドリックが抵抗したところで、力で叶うはずもないわけだ。	has:저항해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	いくら思入れが無いと言ったところで、実際は、色々と思う所があるのだろう。	has:말해 봤자	fix	rewrites
+cx:lc3g-tokorode:10	いくら相手との実力差があったところでなんの躊躇いもなく立ち向かってくる。	has:있어 봤자	fix	rewrites
+cx:lc3g-tokorode:20	わかったところで今更だと思う。	has:알아 봤자	fix	rewrites
+cx:lc3g-tokorode:20	これに勝てたところで意味は無いな。	has:있어 봤자	fix	rewrites
+cx:lc3g-tokorode:20	「凄んだところでどうにもならないぞ」	has:위협해 봤자	fix	rewrites
+cx:lc3g-tokorode:20	僕が出たところで、不利になるだけだから。	has:나와 봤자	fix	rewrites
+cx:lc3g-tokorode:20	力尽きたところで封印の術をかけるだけだ。	has:다해 봤자	fix	rewrites
+cx:lc3g-tokorode:20	いや、覗いたところで千里しかいないわけで……	has:봐 봤자	fix	rewrites
+cx:lc3g-tokorode:20	不規則な恵みが無くなったところで、困るだけだ。	has:없어져 봤자	fix	rewrites
+cx:lc3g-tokorode:20	俺程度が何かしたところで、結末など変わらない。	has:해 봤자	fix	rewrites
+cx:lc3g-tokorode:30	考えたところで解は出ないだろう。	has:생각해 봤자	fix	rewrites
+cx:lc3g-tokorode:30	「拗ねたところで事態は変わらんよ」	has:삐쳐 봤자	fix	rewrites
+cx:lc3g-tokorode:30	拷問にかけたところで、情報は出さない	has:가해 봤자	fix	rewrites
+cx:lc3g-tokorode:30	と言ったところで何も起こらないのだろう。	has:말해 봤자	fix	rewrites
+cx:lc3g-tokorode:30	ログアウトしたところで状況は変化しない。	has:로그아웃해 봤자	fix	rewrites
+cx:lc3g-tokorode:30	どうせ今から帰ったところで、やる事はない。	has:돌아가 봤자	fix	rewrites
+cx:lc3g-tokorode:30	星に願ったところで、何にも叶うはずもない。	has:바라 봤자	fix	rewrites
+cx:lc3g-tokorode:30	二度、三度揉めたところでそれほど問題はない。	has:다투어 봤자	fix	rewrites
+cx:lc3g-tokorode:10	冗談半分、本気半分、といったところでしょうか。	!rule:cx:lc3g-tokorode:10	keep	rewrites
+cx:lc3g-tokorode:20	少年は待ってましたといったところです。	!rule:cx:lc3g-tokorode:20	keep	rewrites
+cx:lc3g-tokorode:30	「……まあ、隙を見てといったところですね。私一人な	!rule:cx:lc3g-tokorode:30	keep	rewrites
+cx:lc3g-tokorode:10	実力は５０歩１００歩といったところであるし	!rule:cx:lc3g-tokorode:10	keep	rewrites
+cx:lc3g-tokorode:20	お父様のお手つきの子――といったところでしょうか？）	!rule:cx:lc3g-tokorode:20	keep	rewrites
+cx:lc3g-tokorode:30	――といったところで車は止まった。	!rule:cx:lc3g-tokorode:30	keep	rewrites
+cx:lc3g-tokorode:10	神永たちが全員了承したところで、最後に俺に訊く。	!rule:cx:lc3g-tokorode:10	keep	rewrites
+cx:lc3g-tokorode:20	昼休みも半ばを過ぎたところで、僕等は力尽きた。	!rule:cx:lc3g-tokorode:20	keep	rewrites
