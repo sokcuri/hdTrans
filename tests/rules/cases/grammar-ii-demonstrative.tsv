@@ -31,3 +31,7 @@ dict:gram:de-ii:3	まあそれならそれで良いか。	뭐 그렇다면 그�
 dict:gram:de-ii:1	ここでいい加減に返答したら	여기서 적당히 대답하면	keep	local
 cx:demonstrative-myeon:10	これで終わりだ。	!rule:cx:demonstrative-myeon:10	keep	rewrites
 cx:demonstrative-myeon:10	それはそれでいいが、誰と交代させよう？	!rule:cx:demonstrative-myeon:10	keep	rewrites
+dict:gram:de-ii:6	「あなたが、私たちのことを忘れずにいてくれればそれでいい。」	「당신이, 우리를 잊지 않고 있어 준다면 그걸로 돼.」	fix	local
+dict:gram:de-ii:6	「えっと、任せるよ。魔力のコントロールをし易くしてくれたら、それでいいよ」	「음, 맡겨. 마력의 컨트롤을 하기 쉽게 해 주면, 그걸로 돼」	fix	local
+dict:gram:de-ii:6	「いや……。俺の杞憂だったら、それでいい」	「아니……. 내 기우라면, 그걸로 돼」	fix	local
+dict:gram:de-ii:3	彼が幸せならそれで良いと、必死に自分に言い聞かせた。	그가 행복하면 그것으로 된다고, 필사적으로 자신에게 타일렀다.	fix	local
