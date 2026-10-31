@@ -1,6 +1,7 @@
 // hd8gen: command-line driver of the 0.8 Korean side (generator, register, rewrite) for tests and experiments.
 //
 //   hd8gen [--data DIR] conj LEMMA FORM...          one predicate: 가다 -었- -어요 → 갔어요
+//   hd8gen [--data DIR] batch < LINES              lemma pos cls host forms per line (TAB) → one result per line
 //   hd8gen [--data DIR] gold FILE.tsv               gold paradigm set: id lemma pos cls forms expected
 //   hd8gen [--data DIR] gen FILE.jsonl              IR lines (kir2 + reg + lev [+ out]) → text
 #include <cstdio>
@@ -28,7 +29,7 @@ using namespace hd8gen;
 namespace {
 
 int Usage() {
-    std::fprintf(stderr, "usage: hd8gen [--data DIR] conj LEMMA FORM... | gold FILE.tsv | gen FILE.jsonl\n");
+    std::fprintf(stderr, "usage: hd8gen [--data DIR] conj LEMMA FORM... | batch | gold FILE.tsv | gen FILE.jsonl\n");
     return 2;
 }
 
@@ -80,6 +81,23 @@ int Gold(const Tables& t, const std::string& path, bool verbose) {
     std::printf("TOTAL\t%zu\texact\t%zu\tvariant\t%zu\tagree\t%.2f%%\n", n, exact, variant,
                 n ? 100.0 * static_cast<double>(exact + variant) / static_cast<double>(n) : 0.0);
     return exact + variant == n ? 0 : 1;
+}
+
+// One conjugation per stdin line: lemma TAB pos TAB cls TAB host TAB forms ("-" = none); one result per line.
+int Batch(const Tables& t, const GenOptions& opt) {
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        std::vector<std::string> f = Split(line, '\t');
+        if (f.size() != 5) {
+            std::fprintf(stderr, "batch: need 5 fields: %s\n", line.c_str());
+            return 1;
+        }
+        for (auto& s : f)
+            if (s == "-") s.clear();
+        std::printf("%s\n", ConjugateForms(t, f[0], f[1], f[2], Words(f[4]), f[3], opt).c_str());
+        std::fflush(stdout);  // a caller may keep one process and read each answer before the next question
+    }
+    return 0;
 }
 
 int Gen(const Tables& t, const std::string& path, const GenOptions& opt) {
@@ -218,6 +236,7 @@ int main(int argc, char** argv) {
         std::printf("%s\n", ConjugateForms(*tables, args[1], "", "", forms, "", opt).c_str());
         return 0;
     }
+    if (args[0] == "batch" && args.size() == 1) return Batch(*tables, opt);
     if (args[0] == "gold" && args.size() == 2) return Gold(*tables, args[1], verbose);
     if (args[0] == "gen" && args.size() == 2) return Gen(*tables, args[1], opt);
     if (args[0] == "lint" || args[0] == "rw") {
