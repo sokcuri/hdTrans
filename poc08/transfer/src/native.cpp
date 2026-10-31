@@ -588,7 +588,7 @@ struct Ctx {
         if (key == "frame") return k.sense ? k.sense->frame : "";
         if (key == "cls" && k.sense) {
             const std::string c = Get(k.sense->feat, "cls");
-            return c.empty() && k.entry ? Get(k.entry->feat, "cls") : c;
+            return c.empty() && k.entry && k.sense->sense == 1 ? Get(k.entry->feat, "cls") : c;
         }
         if (key == "kind" || key == "role" || key == "kase" || key == "link") {
             for (const std::string& f : k.aux->facts)
@@ -599,11 +599,12 @@ struct Ctx {
         if (key == "trans") {
             // a verb that takes an object: its case frame (args) names o=
             std::string a = Get(k.sense->feat, "args");
-            if (a.empty() && k.entry) a = Get(k.entry->feat, "args");
+            if (a.empty() && k.entry && k.sense->sense == 1) a = Get(k.entry->feat, "args");
             return (' ' + a).find(" o=") != std::string::npos ? "+" : "";
         }
         const std::string v = Get(k.sense->feat, key);
-        return v.empty() && k.entry ? Get(k.entry->feat, key) : v;
+        // a level list's columns describe sense 1
+        return v.empty() && k.entry && k.sense->sense == 1 ? Get(k.entry->feat, key) : v;
     }
 
     std::string ClauseKey(int c, const std::string& key) const {
@@ -681,9 +682,12 @@ struct Ctx {
                 return std::find(t.aux->facts.begin(), t.aux->facts.end(), f) != t.aux->facts.end();
             };
             if (has(nx, "role=cop") || has(nx, "role=cop-ja") || has(nx, "role=cop-te") || has(nx, "role=cop-ni") ||
+                has(nx, "role=daro") ||
                 (has(nx, "kase=de") && i + 2 < tk.size() && has(tk[i + 2], "kase=wa")))
                 forms.insert("cop");
             if (has(nx, "role=cop") && nx.form == "rentai") forms.insert("attr");
+            // a noun that ends its clause as a bare predicate (便利？) is read with its predicate sense too
+            if (has(nx, "role=q") && nx.t->pos == Pos::sym) forms.insert("cop");
         }
         // ta: the clause is in the past (もう + past → 벌써)
         if (cl >= 0 && line.clauses[static_cast<size_t>(cl)].tense == tense::past) forms.insert("ta");
@@ -1318,7 +1322,37 @@ void Transfer(const Data& d, Doc& doc, Line& line) {
             // N5-55, N5-56: a numeral with its counter; native numerals before native counters (세 개, 한 명),
             // Sino-Korean otherwise (백 엔); digits stay digits and the counter attaches (3명, 100엔); つ with 1 alone
             // is 하나
-            const Sense* cs = k.counter ? &k.counter->senses.front() : nullptr;
+            // the counter's sense: a head= cue reads the counted noun (the nearest noun before the numeral)
+            const Sense* cs = nullptr;
+            if (k.counter) {
+                std::string counted;
+                for (int b = static_cast<int>(i) - 1; b >= 0 && b >= static_cast<int>(i) - 3; b--)
+                    if (x.tk[static_cast<size_t>(b)].content && IsNounPos(x.tk[static_cast<size_t>(b)].epos)) {
+                        counted = x.tk[static_cast<size_t>(b)].lemma;
+                        break;
+                    }
+                for (const Sense& sn : k.counter->senses) {
+                    if (sn.cue.starts_with("head=")) {
+                        bool hit = false;
+                        for (const std::string& v : Split(sn.cue.substr(5), '|')) {
+                            if (v == counted) hit = true;
+                            if (v.starts_with("@")) {
+                                std::string cl;
+                                for (size_t ei : d.byLemma.count(counted) ? d.byLemma.at(counted) : std::vector<size_t>{})
+                                    for (const Sense& s2 : d.entries[ei].senses)
+                                        if (s2.sense == 1) cl += " " + Ctx::Get(s2.feat, "cls");
+                                std::replace(cl.begin(), cl.end(), '|', ' ');
+                                for (const std::string& one : Split(cl, ' '))
+                                    if (!one.empty() && d.IsA(one, v)) hit = true;
+                            }
+                        }
+                        if (hit) cs = &sn;
+                    }
+                }
+                if (!cs)
+                    for (const Sense& sn : k.counter->senses)
+                        if (!cs || sn.sense < cs->sense) cs = &sn;
+            }
             std::string numFeat = cs ? Ctx::Get(cs->feat, "num") : "";
             if (numFeat.empty() && k.counter) numFeat = Ctx::Get(k.counter->feat, "num");
             const bool native = numFeat == "native";

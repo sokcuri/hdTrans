@@ -21,3 +21,6 @@ pred.naru.n	N5-43	{N} [kase=ni] [role=naru]	-	-	P:subj V:되다	m	own	先生に�
 pred.nominal	N5-57	{V} [role=nomi]	-	V.ctype=adn:nonpast	N:것{dep}	m	own	読むのが好き → 읽는 것을 좋아하다
 pred.na.ja.aru	N5-05	{Na} [role=cop-ja] 有る	-	-	-	m	own	静かじゃありません → 안 조용해요
 pred.na.dewa.aru	N5-05	{Na} [role=cop-te] [kase=wa] 有る	-	-	-	m	own	静かではありません → 조용하지 않습니다
+pred.cop.neg.dewa.te	N5-02	{N} [role=cop-te] [kase=wa] [pol=neg]	-	-	P:subj V:아니다	m	own	会社員ではない → 회사원이 아니다
+pred.cop.q	N5-H20	{N} [aux.punct.q]	-	-	V:이다{glue,mood=q} Punct:q	m	own	学生？ → 학생이야?
+pred.na.q	N5-H20	{Na} [aux.punct.q]	-	Na.mood=q	Punct:q	m	own	便利？ → 편리해?

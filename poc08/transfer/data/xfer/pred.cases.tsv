@@ -41,3 +41,9 @@ pred.na.ja.aru	fix	「部屋は静かじゃありません。」	「방은 안 �
 pred.na.ja.aru	keep	「部屋は静かです。」	「방은 조용해요.」	inv
 pred.na.dewa.aru	fix	「部屋は静かではありません。」	「방은 안 조용해요.」	inv
 pred.na.dewa.aru	keep	「部屋は静かです。」	「방은 조용해요.」	inv
+pred.cop.neg.dewa.te	fix	友達は会社員ではない。	친구는 회사원이 아니다.	inv
+pred.cop.neg.dewa.te	keep	友達は会社員だ。	친구는 회사원이다.	inv
+pred.cop.q	fix	「学生？」	「학생이야?」	inv
+pred.cop.q	keep	「学生だ。」	「학생이야.」	inv
+pred.na.q	fix	「車は便利？」	「차는 편리해?」	inv
+pred.na.q	keep	「車は便利だ。」	「차는 편리해.」	inv
