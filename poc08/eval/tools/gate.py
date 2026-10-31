@@ -49,6 +49,7 @@ import hashlib
 import json
 import os
 import random
+import re
 import shlex
 import subprocess
 import sys
@@ -177,6 +178,34 @@ def load_slices(names, level=""):
     return sl
 
 
+TAG = re.compile(r"^【[^】]{1,40}】")
+QUOTE_OPEN = ("「", "『")
+
+
+def tagged_inputs(rows, on):
+    """Gate input: 【speaker】 before a quoted line whose source metadata names its speaker (the form --poc08 rule
+    reads); the judges and the reports keep the untagged line. Returns (lines, set of tagged indexes)."""
+    out, tagged = [], set()
+    for i, r in enumerate(rows):
+        t = r["ja"]
+        sp = ""
+        if on and r.get("meta"):
+            try:
+                sp = (json.loads(r["meta"]) or {}).get("speaker", "")
+            except ValueError:
+                sp = ""
+        if sp and "】" not in sp and t.startswith(QUOTE_OPEN):
+            out.append(f"【{sp}】{t}")
+            tagged.add(i)
+        else:
+            out.append(t)
+    return out, tagged
+
+
+def untag(outs, tagged):
+    return [TAG.sub("", o, count=1) if i in tagged else o for i, o in enumerate(outs)]
+
+
 def write_judge_set(d, rows, judged):
     """judge.py set: every row as context, scored = 1 on the judged lines."""
     os.makedirs(d, exist_ok=True)
@@ -188,10 +217,16 @@ def write_judge_set(d, rows, judged):
                     f"{r['meta']}\n")
 
 
-def run_judge(set_dir, systems, jobs, log_path, note="", rubric="v3"):
-    """systems: [(name, [ko per judged line])]; the last one is the baseline."""
+JUDGE3 = "claude-opus-4-8"
+
+
+def run_judge(set_dir, systems, jobs, log_path, note="", rubric="v3", model1="", out_name="report"):
+    """systems: [(name, [ko per judged line])]; the last one is the baseline. model1 replaces judge 1 (and then
+    no third judge runs): used to have judge 3 judge every line."""
     args = [sys.executable, os.path.join(HERE, "judge.py"), "--set", set_dir, "--frac2", "1", "--no-human",
-            "--jobs", str(jobs), "--baselines", systems[-1][0], "--out", os.path.join(set_dir, "report.json")]
+            "--jobs", str(jobs), "--baselines", systems[-1][0], "--out", os.path.join(set_dir, out_name + ".json")]
+    if model1:
+        args += ["--model1", model1, "--model3", ""]
     args += ["--rubric", rubric]
     if note:
         args += ["--style-note", note]
@@ -199,12 +234,51 @@ def run_judge(set_dir, systems, jobs, log_path, note="", rubric="v3"):
         p = os.path.join(set_dir, f"{name}.ko")
         write_lines(p, outs)
         args += ["--sys", f"{name}={p}"]
-    with open(log_path, "w", encoding="utf-8") as lg, open(os.path.join(set_dir, "report.md"), "w") as md:
+    with open(log_path, "w", encoding="utf-8") as lg, open(os.path.join(set_dir, out_name + ".md"), "w") as md:
         r = subprocess.run(args, stdout=md, stderr=lg)
     if r.returncode != 0:
         raise SystemExit(f"gate: judge.py failed (rc {r.returncode}); see {log_path}")
-    with open(os.path.join(set_dir, "report.json"), encoding="utf-8") as f:
+    with open(os.path.join(set_dir, out_name + ".json"), encoding="utf-8") as f:
         return json.load(f)
+
+
+def kappa2(a, b):
+    """Cohen's kappa of two boolean label lists."""
+    n = len(a)
+    if not n:
+        return None
+    po = sum(x == y for x, y in zip(a, b)) / n
+    pa, pb = sum(a) / n, sum(b) / n
+    pe = pa * pb + (1 - pa) * (1 - pb)
+    return None if pe == 1 else (po - pe) / (1 - pe)
+
+
+def third_on_all(rep12, rep3, x, y):
+    """Judge 3 on every changed line: 2-of-3 majority over all lines and the three pairwise kappas."""
+    m1, m2 = rep12["judges"][0]["model"], rep12["judges"][1]["model"]
+    m3 = rep3["judges"][0]["model"]
+    pname = f"{x} vs {y}"
+    l1 = rep12["pairs"][pname][m1]["lines"]
+    l2 = rep12["pairs"][pname][m2]["lines"]
+    l3 = rep3["pairs"].get(pname, {}).get(m3, {}).get("lines", {})
+    maj = collections.Counter()
+    for i in l1:
+        v = [l1[i], l2.get(i, 0), l3.get(i, 0)]
+        c = collections.Counter(v)
+        top, k = c.most_common(1)[0]
+        maj[{1: "win", 0: "tie", -1: "loss"}[top] if k >= 2 else "tie"] += 1
+    def cm(rep, m):
+        out = {}
+        for s, d in rep["mqm"].get(m, {}).items():
+            for lid, v in d["lines"].items():
+                out[(s, lid)] = (v[0] + v[1]) > 0
+        return out
+    c1, c2, c3 = cm(rep12, m1), cm(rep12, m2), cm(rep3, m3)
+    keys = sorted(set(c1) & set(c2) & set(c3))
+    k = {"j1-j2": kappa2([c1[q] for q in keys], [c2[q] for q in keys]),
+         "j1-j3": kappa2([c1[q] for q in keys], [c3[q] for q in keys]),
+         "j2-j3": kappa2([c2[q] for q in keys], [c3[q] for q in keys])}
+    return {"majority": {kk: maj[kk] for kk in ("win", "tie", "loss")}, "kappas": k, "n_outputs": len(keys)}
 
 
 def pair_stats(rep, x, y):
@@ -241,7 +315,14 @@ def slice_verdict(st, n_changed):
         ok = False
         why.append(f"{len(st['worse_by_both'])} worse by both")
     k = st["kappa"]
-    if st["kappa_n"] >= MIN_KAPPA_N:
+    if st.get("third_all"):
+        ks = sorted(v for v in st["third_all"]["kappas"].values() if v is not None)
+        med = ks[len(ks) // 2] if ks else None
+        why.append(f"kappa j1-j2 {k if k is None else round(k, 2)}: judge 3 on all lines, majority used, "
+                   f"median pairwise kappa {med if med is None else round(med, 2)}")
+        if st["kappa_n"] >= MIN_KAPPA_N and (med is None or med < KAPPA):
+            ok = False
+    elif st["kappa_n"] >= MIN_KAPPA_N:
         if k is None or k < KAPPA:
             ok = False
             why.append(f"kappa {k if k is None else round(k, 2)} < {KAPPA}")
@@ -293,6 +374,10 @@ def main(argv=None):
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--dry-run", action="store_true", help="translate, count changed lines and run flip; no judging")
     ap.add_argument("--no-flip", action="store_true")
+    ap.add_argument("--third-below", type=float, default=KAPPA, help="run judge 3 on all changed lines of a slice "
+                    "whose kappa(judge 1, judge 2) is below this (default 0.6)")
+    ap.add_argument("--no-speaker-tags", action="store_true", help="do not prefix 【speaker】 to quoted lines whose "
+                    "source metadata names the speaker")
     ap.add_argument("--rubric", default="v3", choices=["v1", "v2", "v3"], help="judge rubric (judge.py): v3 = natural "
                     "Korean within faithfulness bounds (default); v2 = literal target; v1 = the frozen eval runs")
     a = ap.parse_args(argv)
@@ -309,15 +394,16 @@ def main(argv=None):
     pooled = {"win": 0, "loss": 0, "tie": 0}
     for sname, S in slices.items():
         rows, scored = S["rows"], S["scored"]
-        src = [r["ja"] for r in rows]
-        log(f"{sname}: translating {len(src)} lines")
-        b_all = cached_base(a.base, sname, src)
-        runs = {"cand": translate(a.cand, src)}
+        src, tagged = tagged_inputs(rows, not a.no_speaker_tags)
+        log(f"{sname}: translating {len(src)} lines ({len(tagged)} with a speaker tag)")
+        b_all = untag(cached_base(a.base, sname, src), tagged)
+        runs = {"cand": untag(translate(a.cand, src), tagged)}
         cast = S["holdout"] and S.get("cast")
         if cast:
-            runs = {"blind": translate(a.cand, src, {"HD08_CAST_OFF": S["cast"]}), "aware": runs["cand"]}
+            runs = {"blind": untag(translate(a.cand, src, {"HD08_CAST_OFF": S["cast"]}), tagged),
+                    "aware": runs["cand"]}
         changed = sorted({i for i in scored for o in runs.values() if o[i] != b_all[i]})
-        info = {"lines": len(scored), "changed": len(changed)}
+        info = {"lines": len(scored), "changed": len(changed), "speaker_tagged": len(tagged & set(scored))}
         if cast:
             info["blind_equals_aware"] = runs["blind"] == runs["aware"]
             info["changed_blind"] = sum(runs["blind"][i] != b_all[i] for i in scored)
@@ -338,14 +424,25 @@ def main(argv=None):
         rep = run_judge(sd, systems, a.jobs, os.path.join(out, "judge", f"{sname}.log"), S.get("note", ""),
                         a.rubric)
         G["rubrics"][sname] = rep.get("rubric", "?")
+        rep3 = None
+        ag = rep.get("agreement", {})
+        if ag.get("cm_kappa") is not None and ag["cm_kappa"] < a.third_below:
+            log(f"{sname}: kappa {ag['cm_kappa']:.2f} < {a.third_below}: judge 3 on all {len(judged)} lines")
+            rep3 = run_judge(sd, systems, a.jobs, os.path.join(out, "judge", f"{sname}.j3.log"), S.get("note", ""),
+                             a.rubric, model1=JUDGE3, out_name="report-j3")
         for k in runs:
             st = pair_stats(rep, k, "base")
+            if rep3 is not None:
+                st["third_all"] = third_on_all(rep, rep3, k, "base")
+                st["majority"] = st["third_all"]["majority"]
             key = sname if k == "cand" else f"{sname}-{k}"
             n_ch = sum(runs[k][i] != b_all[i] for i in judged)
             v = slice_verdict(st, n_ch)
             G["slices"].setdefault(key, dict(info))
             G["slices"][key].update({kk: st[kk] for kk in ("j1", "j2", "majority", "worse_by_both", "better_by_both",
                                                             "kappa", "kappa_n", "cm_pct")}, **v)
+            if st.get("third_all"):
+                G["slices"][key]["third_all"] = st["third_all"]
             if not S["holdout"]:
                 if sname in DEV_SLICES:
                     for kk in pooled:
@@ -419,6 +516,17 @@ def render(G):
     d = G["dev_pooled"]
     o += ["", f"Dev pooled (majority): {d['win']}:{d['tie']}:{d['loss']} → {d['verdict']}"]
     for k, s in G["slices"].items():
+        if s.get("third_all"):
+            t = s["third_all"]
+            ks = ", ".join(f"{p} {'–' if v is None else f'{v:.2f}'}" for p, v in t["kappas"].items())
+            o.append(f"- {k}: kappa j1-j2 below the threshold, judge 3 judged all changed lines; majority "
+                     f"{t['majority']['win']}:{t['majority']['tie']}:{t['majority']['loss']}; kappas {ks} "
+                     f"(n {t['n_outputs']})")
+    tg = sum(s.get("speaker_tagged", 0) for s in G["slices"].values())
+    if tg:
+        o.append(f"- speaker tags passed to both engines (【name】 before the quote): "
+                 + ", ".join(f"{k} {s['speaker_tagged']}" for k, s in G["slices"].items() if s.get("speaker_tagged")))
+    for k, s in G["slices"].items():
         if s.get("worse_by_both"):
             o.append(f"- worse by both on {k}: {', '.join(s['worse_by_both'][:40])}")
     hb = next((v for k, v in G["slices"].items() if k.startswith("holdout") and k.endswith("-blind")), None)
@@ -454,6 +562,20 @@ def self_test():
            "agreement": {"cm_kappa": 0.8, "n_outputs": 4}, "mqm": {}}
     s = pair_stats(rep, "cand", "base")
     assert s["worse_by_both"] == ["2"] and s["majority"]["loss"] == 1
+    rows = [{"ja": "「はい」", "meta": json.dumps({"speaker": "甲"})}, {"ja": "地の文。", "meta": json.dumps({"speaker": "甲"})},
+            {"ja": "「ええ」", "meta": ""}]
+    src, tg = tagged_inputs(rows, True)
+    assert src == ["【甲】「はい」", "地の文。", "「ええ」"] and tg == {0}
+    assert untag(["【갑】「네」", "【x】y", "z"], {0}) == ["「네」", "【x】y", "z"]
+    assert tagged_inputs(rows, False)[1] == set()
+    r12 = {"judges": [{"model": "a"}, {"model": "b"}],
+           "pairs": {"c vs b": {"a": {"lines": {"1": 1, "2": -1, "3": 0}}, "b": {"lines": {"1": -1, "2": -1, "3": 1}}}},
+           "mqm": {"a": {"c": {"lines": {"1": [0, 1, 0, 0, 0], "2": [0, 0, 0, 0, 0]}}},
+                   "b": {"c": {"lines": {"1": [0, 1, 0, 0, 0], "2": [1, 0, 0, 0, 0]}}}}}
+    r3 = {"judges": [{"model": "d"}], "pairs": {"c vs b": {"d": {"lines": {"1": 1, "2": 0, "3": 1}}}},
+          "mqm": {"d": {"c": {"lines": {"1": [0, 0, 0, 0, 0], "2": [0, 0, 0, 0, 0]}}}}}
+    t = third_on_all(r12, r3, "c", "b")
+    assert t["majority"] == {"win": 2, "tie": 0, "loss": 1}, t
     print("gate self-test OK")
     return 0
 
