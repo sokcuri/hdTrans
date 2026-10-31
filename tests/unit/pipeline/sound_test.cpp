@@ -1342,6 +1342,12 @@ HD_TEST(pipeline_contracted_n) {
         {"負けんしゅ", "負けんしゅ"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    // the verb of a rebuke before んじゃない (spoken forms)
+    HD_CHECK(internal::EndsInDictionaryVerb("ここで待つ", ctx, *loaded.snapshot));
+    HD_CHECK(internal::EndsInDictionaryVerb("待たせる", ctx, *loaded.snapshot));       // a longer form of a kanji verb
+    HD_CHECK(!internal::EndsInDictionaryVerb("翔く", ctx, *loaded.snapshot));          // a name and one kana
+    HD_CHECK(!internal::EndsInDictionaryVerb("あら、おーしまく", ctx, *loaded.snapshot));  // a long-vowel mark: a name
+    HD_CHECK(internal::EndsInDictionaryVerb("あんまりがっつく", ctx, *loaded.snapshot));   // a kana verb the dictionary lacks
 }
 
 // The と or ど that a て form says for its て or で and the お of おる takes them back after the て

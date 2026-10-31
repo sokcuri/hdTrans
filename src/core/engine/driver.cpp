@@ -167,6 +167,7 @@ pipeline::BaseReading ReadBase(const void* context, std::string_view base, std::
 struct RespellLookup {
     const dict::Snapshot& snap;
     const dict::LookupContext& lookup;
+    const pipeline::LineContext* line = nullptr;  // for EndsInVerb
 };
 
 dict::Candidates Find(const RespellLookup& d, std::string_view text) {
@@ -295,6 +296,12 @@ bool KanjiNoun(const void* context, std::string_view line, size_t at, size_t end
         return true;
     }
     return false;
+}
+
+// Whether text ends with a verb (pipeline::RunLookup::verb, the rebuke of SpokenForms).
+bool EndsInVerb(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::EndsInDictionaryVerb(text, *d.line, d.snap);
 }
 
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
@@ -876,10 +883,12 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     ctx.exclamationNa = !options.reference && options.wordImprovements.exclamationNa;
     ctx.dialectForms = !options.reference && options.wordImprovements.dialectForms;
 
-    const RespellLookup respell{snap, ctx.lookup};
+    const RespellLookup respell{snap, ctx.lookup, &ctx};
     const auto normalize = [&](std::string_view text) {
         std::string normalized = pipeline::JoinBraceRuby(
-            pipeline::Normalize(text, ctx, {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell}),
+            pipeline::Normalize(text, ctx,
+                                {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
+                                 options.reference ? nullptr : EndsInVerb}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
