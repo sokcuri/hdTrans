@@ -1854,6 +1854,22 @@ Record* Worker::NounBeforeCompound(Record* records, std::string_view text) {
     return records;
 }
 
+// records without the readings settings.vetoes rules out at byte cursor of token.
+Record* Worker::DropVetoed(Record* records, int cursor, int token) const {
+    Record* head = records;
+    Record** link = &head;
+    while (*link != nullptr) {
+        const Record& r = **link;
+        const bool vetoed = std::any_of(settings.vetoes.begin(), settings.vetoes.end(), [&](const Veto& v) {
+            return v.token == token && v.start == cursor && static_cast<std::size_t>(v.length) == r.source.size() &&
+                   (v.cls == 0 || At(r.partCode, 1) == v.cls);
+        });
+        if (vetoed) *link = r.child;
+        else link = &(*link)->child;
+    }
+    return head;
+}
+
 // Whether a small kana starts full[cursor:]: the ending ends inside a contraction (ときゃ), not
 // before a word.
 bool SmallKanaAt(std::string_view full, int cursor) {
@@ -1884,6 +1900,7 @@ bool Worker::WordAt(std::string_view full, int cursor, int token) {
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
+    if (!settings.vetoes.empty()) records = DropVetoed(records, cursor, token);
     if (settings.text) records = LongerNounFirst(snapshot, records, From(full, cursor));
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));

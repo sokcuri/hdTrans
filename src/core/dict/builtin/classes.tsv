@@ -437,6 +437,20 @@
 //= wrap.te-word	Words without conjugation that follow a て form as an auxiliary, which a line broken after the て form starts with (見て / ください).
 //= wrap.open-ending	Endings of a verb or adjective that join it to what follows, which a line broken in the middle of a sentence ends with: connective particles (多いんですが / 差してない人も, 分かるので / 聞いてください) and a predicate made a noun before a case or binding particle (横断するのが / 最後の夢なんだ, 守るために / 今できることは).
 //= wrap.quote-start	Quotative particles that a line broken before them starts with, closing what the line before said (なってくる / と思います, 遅い / って言いたい).
+//= floor.okurigana-skip	Kana that a word drops by design after a kanji (お, ご, っ, small vowels, ー): their dropping is no lost okurigana (spec FLR-6).
+//= floor.dropped-suffix	Person suffixes whose dropping after a kanji is no lost okurigana (spec FLR-6).
+//= floor.continuative-kana	Last kana of a Japanese continuative form (こぼれ, 苦笑い, まばたき): a noun so spelled is a verb read as a noun (spec FLR-5).
+//= ko-floor.case-particle	Korean case particles, which no conjugated predicate takes (보는에, 않고의, 있고로; spec FLR-2).
+//= ko-floor.bound-particle	Korean particles a connective form takes (먹어도, 하고는, 먹어만) but no adnominal form (같은도; spec FLR-2).
+//= ko-floor.connective-end	Last syllables of Korean connective and final endings (하고, 먹어, 했어요, 할까): no case particle and no noun is written right after one (spec FLR-2, FLR-3).
+//= ko-floor.adnominal-end	Last syllables of Korean adnominal endings (하는, 같은, 했던, 쉬운): no particle follows one (spec FLR-2).
+//= ko-floor.core-case	Korean subject, object and genitive particles, after which no particle follows (의가, 이는 of a noun; spec FLR-2).
+//= ko-floor.adverbial-case	Korean adverbial and comitative particles (에, 에서, 로, 와), after which no subject, object, comitative or locative particle follows (에와, 에서가; spec FLR-2).
+//= ko-floor.after-adverbial	Particles no adverbial or comitative particle takes after it (에와, 에서가, 와에; spec FLR-2).
+//= ko-floor.light-verb	Starts of the Korean light verbs 하다 and 시키다, which a nominal -ㅁ form never takes (웃음하다, 뒤얽힘 시키면서; spec FLR-5).
+//= ko-floor.particle-start	Starts of a Korean word that begins with a particle or copula (이 있었다, 으로 하는, 인 것): no verb stem follows the noun there (spec FLR-5).
+//= ko-floor.noun-adnominal-end	Last syllables of a noun's Korean that end it in an adnominal form (붙어 있는, 넘치는): a dictionary gloss that is no noun, which takes no particle (spec FLR-2).
+//= ko-floor.pronoun-ga	Short Korean pronouns that only the particle 가 takes (내가, 네가, 제가): 내를, 내의 are no Korean (spec FLR-2).
 //= wrap.negative-start	Starts of the negative of the copula, which a line broken after じゃ or では starts with (いいんじゃ / ないかな, 嫌では / ないですけど).
 //= wrap.sentence-start	Interjections the dictionary has as nouns, which start a sentence of their own: a bare verb or adjective at the end of the line before one ends its sentence (分かった / はい).
 
@@ -7946,3 +7960,167 @@ verb.harming	ぶちのめす
 verb.harming-causative	思い知らせる
 verb.harming-causative	わからせる
 verb.harming-causative	分からせる
+floor.okurigana-skip	お
+floor.okurigana-skip	ご
+floor.okurigana-skip	っ
+floor.okurigana-skip	ぁ
+floor.okurigana-skip	ぃ
+floor.okurigana-skip	ぅ
+floor.okurigana-skip	ぇ
+floor.okurigana-skip	ぉ
+floor.okurigana-skip	ゃ
+floor.okurigana-skip	ゅ
+floor.okurigana-skip	ょ
+floor.okurigana-skip	ー
+floor.okurigana-skip	ゎ
+floor.dropped-suffix	さん
+floor.dropped-suffix	ちゃん
+floor.dropped-suffix	くん
+floor.dropped-suffix	さま
+floor.dropped-suffix	たん
+floor.continuative-kana	い
+floor.continuative-kana	き
+floor.continuative-kana	し
+floor.continuative-kana	ち
+floor.continuative-kana	に
+floor.continuative-kana	ひ
+floor.continuative-kana	み
+floor.continuative-kana	り
+floor.continuative-kana	ぎ
+floor.continuative-kana	じ
+floor.continuative-kana	び
+floor.continuative-kana	ぴ
+floor.continuative-kana	え
+floor.continuative-kana	け
+floor.continuative-kana	せ
+floor.continuative-kana	て
+floor.continuative-kana	ね
+floor.continuative-kana	へ
+floor.continuative-kana	め
+floor.continuative-kana	れ
+floor.continuative-kana	げ
+floor.continuative-kana	ぜ
+floor.continuative-kana	で
+floor.continuative-kana	べ
+floor.continuative-kana	ぺ
+floor.continuative-kana	イ
+floor.continuative-kana	キ
+floor.continuative-kana	シ
+floor.continuative-kana	チ
+floor.continuative-kana	ニ
+floor.continuative-kana	ヒ
+floor.continuative-kana	ミ
+floor.continuative-kana	リ
+floor.continuative-kana	ギ
+floor.continuative-kana	ジ
+floor.continuative-kana	ビ
+floor.continuative-kana	ピ
+floor.continuative-kana	エ
+floor.continuative-kana	ケ
+floor.continuative-kana	セ
+floor.continuative-kana	テ
+floor.continuative-kana	ネ
+floor.continuative-kana	ヘ
+floor.continuative-kana	メ
+floor.continuative-kana	レ
+floor.continuative-kana	ゲ
+floor.continuative-kana	ゼ
+floor.continuative-kana	デ
+floor.continuative-kana	ベ
+floor.continuative-kana	ペ
+ko-floor.case-particle	이
+ko-floor.case-particle	가
+ko-floor.case-particle	을
+ko-floor.case-particle	를
+ko-floor.case-particle	의
+ko-floor.case-particle	에
+ko-floor.case-particle	에서
+ko-floor.case-particle	에게
+ko-floor.case-particle	와
+ko-floor.case-particle	과
+ko-floor.case-particle	로
+ko-floor.case-particle	으로
+ko-floor.case-particle	들
+ko-floor.case-particle	께서
+ko-floor.case-particle	한테
+ko-floor.case-particle	이나
+ko-floor.case-particle	나
+ko-floor.bound-particle	도
+ko-floor.bound-particle	은
+ko-floor.bound-particle	는
+ko-floor.bound-particle	만
+ko-floor.connective-end	고
+ko-floor.connective-end	어
+ko-floor.connective-end	아
+ko-floor.connective-end	여
+ko-floor.connective-end	해
+ko-floor.connective-end	서
+ko-floor.connective-end	며
+ko-floor.connective-end	요
+ko-floor.connective-end	까
+ko-floor.connective-end	니
+ko-floor.connective-end	게
+ko-floor.adnominal-end	는
+ko-floor.adnominal-end	은
+ko-floor.adnominal-end	던
+ko-floor.adnominal-end	인
+ko-floor.adnominal-end	운
+ko-floor.core-case	이
+ko-floor.core-case	가
+ko-floor.core-case	을
+ko-floor.core-case	를
+ko-floor.core-case	의
+ko-floor.adverbial-case	에
+ko-floor.adverbial-case	에서
+ko-floor.adverbial-case	로
+ko-floor.adverbial-case	으로
+ko-floor.adverbial-case	와
+ko-floor.adverbial-case	과
+ko-floor.adverbial-case	에게
+ko-floor.adverbial-case	한테
+ko-floor.after-adverbial	이
+ko-floor.after-adverbial	가
+ko-floor.after-adverbial	을
+ko-floor.after-adverbial	를
+ko-floor.after-adverbial	와
+ko-floor.after-adverbial	과
+ko-floor.after-adverbial	에
+ko-floor.light-verb	시키
+ko-floor.light-verb	시켜
+ko-floor.light-verb	시킨
+ko-floor.light-verb	시켰
+ko-floor.light-verb	시킬
+ko-floor.light-verb	시킴
+ko-floor.light-verb	하
+ko-floor.light-verb	해
+ko-floor.light-verb	했
+ko-floor.light-verb	한
+ko-floor.light-verb	할
+ko-floor.light-verb	합
+ko-floor.light-verb	함
+ko-floor.particle-start	이라
+ko-floor.particle-start	이야
+ko-floor.particle-start	이다
+ko-floor.particle-start	이었
+ko-floor.particle-start	이
+ko-floor.particle-start	가
+ko-floor.particle-start	을
+ko-floor.particle-start	를
+ko-floor.particle-start	은
+ko-floor.particle-start	는
+ko-floor.particle-start	도
+ko-floor.particle-start	에
+ko-floor.particle-start	으로
+ko-floor.particle-start	로
+ko-floor.particle-start	의
+ko-floor.particle-start	과
+ko-floor.particle-start	와
+ko-floor.particle-start	인
+ko-floor.particle-start	처럼
+ko-floor.particle-start	만
+ko-floor.pronoun-ga	내
+ko-floor.pronoun-ga	네
+ko-floor.pronoun-ga	제
+ko-floor.noun-adnominal-end	는
+ko-floor.noun-adnominal-end	은
+ko-floor.noun-adnominal-end	던

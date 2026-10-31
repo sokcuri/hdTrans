@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
+#include <cstdio>
 #include <memory>
 #include <optional>
 #include <string>
@@ -16,6 +17,7 @@
 #include "core/engine/rules.h"
 #include "core/engine/wrapped.h"
 #include "core/filter/filter.h"
+#include "core/floor/floor.h"
 #include "core/names/document.h"
 #include "core/output/cleanup.h"
 #include "core/output/compose.h"
@@ -333,6 +335,30 @@ struct Scratch {
     std::vector<tokenizer::ControlMarker> markers;
     output::Composer composer;
     word::SessionSenses* sessionSenses = nullptr;
+    std::vector<FloorRow> floorRows;  // the floor faults of the line being translated
+};
+
+// A floor fault of a chunk: its sentence, the fault, the reading of its word as a veto, and the
+// Reading of the bytes [veto.start, end) of the token its span covers.
+struct ChunkFlag {
+    int sentence = 0;
+    floor::Flag flag;
+    word::Veto veto;
+    int end = 0;
+    floor::Reading reading;
+    floor::Reading sentenceReading;  // of all the words of its sentence
+};
+
+// What a run of a chunk reports to the floor retry: its faults, and the Reading of the span of
+// the fault being retried (span.end 0 for none).
+struct FloorRun {
+    std::vector<ChunkFlag> flags;
+    const ChunkFlag* span = nullptr;
+    floor::Reading reading;
+    floor::Reading sentenceReading;
+#ifdef HDTRANS_FLOOR_DEBUG
+    std::string debugWords;
+#endif
 };
 
 // The pieces of the output as the tokenizer reads them (the span kinds are the same numbers).
@@ -695,13 +721,191 @@ std::optional<output::Pieces> BreakAt(const output::Pieces& marked, std::span<co
     return out;
 }
 
-// Translates one chunk: its tokens, the word analysis, then per sentence the resolve stage
-// and the compose stage. The sentences are appended to out with the chunk index.
-// speech is read from the start of the chunk.
+// The Japanese each item covers in its token, read before compose writes the Korean there.
+std::vector<std::string> ItemSources(const std::vector<output::ResolvedItem>& items,
+                                     const std::vector<output::TokenText>& texts) {
+    std::vector<std::string> out;
+    out.reserve(items.size());
+    for (const output::ResolvedItem& it : items) {
+        std::string source;
+        if (it.tokenIndex >= 0 && static_cast<std::size_t>(it.tokenIndex) < texts.size()) {
+            const std::string& t = texts[static_cast<std::size_t>(it.tokenIndex)].text;
+            const auto at = static_cast<std::size_t>(std::max(it.offset, 0));
+            if (at <= t.size()) source = t.substr(at, std::min(static_cast<std::size_t>(std::max(it.length, 0)), t.size() - at));
+        }
+        out.push_back(std::move(source));
+    }
+    return out;
+}
+
+// Runs the floor checks over the sentence just composed (s.items, s.composer.inflected) and adds
+// its faults to flags; with options.floorWords also a row of its words (check "words").
+void CheckSentence(const Scratch& s, const std::vector<std::string>& sources, int sentence,
+                   const TranslationOptions& options, FloorRun& run) {
+    std::vector<ChunkFlag>& flags = run.flags;
+    std::vector<const output::Inflected*> byItem(s.items.size(), nullptr);
+    for (const output::Inflected& inf : s.composer.inflected) {
+        if (inf.item >= 0 && static_cast<std::size_t>(inf.item) < byItem.size()) byItem[static_cast<std::size_t>(inf.item)] = &inf;
+    }
+    std::vector<floor::Word> words(s.items.size());
+    for (std::size_t i = 0; i < s.items.size(); i++) {
+        floor::Word& w = words[i];
+        w.item = &s.items[i];
+        if (const output::Inflected* inf = byItem[i]) {
+            std::string_view ko = inf->spaced;
+            while (!ko.empty() && ko.back() == ' ') ko.remove_suffix(1);
+            w.ko = ko;
+            w.space = inf->space || ko.size() < inf->spaced.size();
+        }
+        if (i < sources.size()) w.source = sources[i];
+    }
+    std::vector<floor::Flag> found;
+    floor::Check(words, found);
+
+    for (floor::Flag& f : found) {
+        const floor::Word& at = words[static_cast<std::size_t>(f.word)];
+        const floor::Word& last = words[static_cast<std::size_t>(f.last)];
+        ChunkFlag flag{sentence, std::move(f), floor::VetoOf(at), 0, {}, {}};
+        flag.end = at.item->offset + static_cast<int>(at.source.size());
+        if (last.item->tokenIndex == at.item->tokenIndex) flag.end = last.item->offset + static_cast<int>(last.source.size());
+        flag.reading = floor::ReadingOf(words, flag.veto.token, flag.veto.start, flag.end);
+        flag.sentenceReading = floor::ReadingOf(words, -1, 0, 0);
+        flags.push_back(std::move(flag));
+    }
+    if (run.span != nullptr) {
+        const floor::Reading r = floor::ReadingOf(words, run.span->veto.token, run.span->veto.start, run.span->end);
+        run.reading.words += r.words;
+        run.reading.unread += r.unread;
+        run.reading.dropped += r.dropped;
+        if (sentence == run.span->sentence) run.sentenceReading = floor::ReadingOf(words, -1, 0, 0);
+#ifdef HDTRANS_FLOOR_DEBUG
+        if (sentence == run.span->sentence) run.debugWords = floor::Describe(words);
+#endif
+    }
+    if (options.floorWords) {
+        ChunkFlag row;
+        row.sentence = sentence;
+        row.flag.check = "words";
+        row.flag.ko = floor::Describe(words);
+        flags.push_back(std::move(row));
+    }
+}
+
+// Whether flags has a fault of check at ja.
+bool HasFault(const std::vector<ChunkFlag>& flags, const floor::Flag& f) {
+    return std::any_of(flags.begin(), flags.end(), [&](const ChunkFlag& g) {
+        return g.flag.check == f.check && g.flag.ja == f.ja;
+    });
+}
+
+// Whether a retry of the span of tried is kept: its faults are fewer than before and all were there
+// before, and the span and its sentence are read by no more words, none more without a dictionary
+// reading and none more dropped (a split or a spelled-out reading is no better reading).
+bool Better(const FloorRun& got, const std::vector<ChunkFlag>& before, const ChunkFlag& tried) {
+    const auto noWorse = [](const floor::Reading& a, const floor::Reading& b) {
+        return a.words <= b.words && a.unread <= b.unread && a.dropped <= b.dropped;
+    };
+    return got.flags.size() < before.size() &&
+           std::all_of(got.flags.begin(), got.flags.end(), [&](const ChunkFlag& g) { return HasFault(before, g.flag); }) &&
+           noWorse(got.reading, tried.reading) && noWorse(got.sentenceReading, tried.sentenceReading);
+}
+
+bool SameVeto(const word::Veto& a, const word::Veto& b) {
+    return a.token == b.token && a.start == b.start && a.length == b.length && a.cls == b.cls;
+}
+
+constexpr int kFloorTries = 3;  // retries of one chunk
+
+bool Observes(const StageObserver& o);
+
+void ComposeChunk(const dict::Snapshot& snap, const dict::LookupContext& lookup, const output::Pieces& chunk,
+                  int index, bool text, bool verse, std::string_view before, const LineSpeech& speech, Scratch& s,
+                  Generated& generated, const StageObserver& observer, const TranslationOptions& options,
+                  std::span<const word::Veto> vetoes, FloorRun* flags, std::vector<output::Sentence>& out);
+
+// Translates one chunk (ComposeChunk) on the text path with the floor retry (spec FLR-1): while a
+// floor check finds a fault, the chunk is read again without the reading of the word at fault, up to
+// kFloorTries times; a reading is kept when its faults are fewer and all were there before. The
+// faults of the first reading go to s.floorRows.
 void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& lookup, const output::Pieces& chunk,
                     int index, bool text, bool verse, std::string_view before, const LineSpeech& speech, Scratch& s,
                     Generated& generated, const StageObserver& observer, const TranslationOptions& options,
                     std::vector<output::Sentence>& out) {
+    if (!text || options.reference || !options.floor) {
+        ComposeChunk(snap, lookup, chunk, index, text, verse, before, speech, s, generated, observer, options, {},
+                     nullptr, out);
+        return;
+    }
+    // The observer and the rule counts see only the reading kept.
+    const bool watched = Observes(observer) || options.ruleTally != nullptr;
+    TranslationOptions trial = options;
+    trial.ruleTally = nullptr;
+    std::vector<output::Sentence> best;
+    FloorRun first;
+    ComposeChunk(snap, lookup, chunk, index, text, verse, before, speech, s, generated,
+                 watched ? StageObserver{} : observer, watched ? trial : options, {}, &first, best);
+    trial.floorWords = false;
+    std::vector<ChunkFlag> current;
+    for (const ChunkFlag& f : first.flags) {
+        if (f.flag.check != "words") current.push_back(f);
+    }
+    std::vector<word::Veto> accepted, tried;
+    for (int tries = 0; tries < kFloorTries;) {
+        const ChunkFlag* next = nullptr;
+        for (const ChunkFlag& f : current) {
+            if (std::none_of(tried.begin(), tried.end(), [&](const word::Veto& v) { return SameVeto(v, f.veto); })) {
+                next = &f;
+                break;
+            }
+        }
+        if (next == nullptr) break;
+        tried.push_back(next->veto);
+        std::vector<word::Veto> vetoes = accepted;
+        vetoes.push_back(next->veto);
+        std::vector<output::Sentence> got;
+        FloorRun run;
+        run.span = next;
+        tries++;
+        ComposeChunk(snap, lookup, chunk, index, text, verse, before, speech, s, generated, StageObserver{}, trial,
+                     vetoes, &run, got);
+#ifdef HDTRANS_FLOOR_DEBUG
+        {
+            std::string t;
+            for (const output::Sentence& g : got) t += output::String(g.pieces);
+            std::fprintf(stderr, "FLOOR try %s [%d:%d-%d cls %c] -> %zu faults (before %zu) words %d/%d unread %d/%d dropped %d/%d: %s\n",
+                         next->flag.ja.c_str(), next->veto.token, next->veto.start, next->end,
+                         next->veto.cls ? next->veto.cls : '-', run.flags.size(), current.size(), run.reading.words,
+                         next->reading.words, run.reading.unread, next->reading.unread, run.reading.dropped,
+                         next->reading.dropped, t.c_str());
+            std::fprintf(stderr, "FLOOR words %s\n", run.debugWords.c_str());
+            for (const ChunkFlag& g : run.flags) std::fprintf(stderr, "FLOOR fault %s %s\n", std::string(g.flag.check).c_str(), g.flag.ja.c_str());
+        }
+#endif
+        if (Better(run, current, *next)) {
+            accepted = std::move(vetoes);
+            best = std::move(got);
+            current = std::move(run.flags);
+        }
+    }
+    if (watched) {
+        best.clear();
+        ComposeChunk(snap, lookup, chunk, index, text, verse, before, speech, s, generated, observer, options,
+                     accepted, nullptr, best);
+    }
+    for (output::Sentence& sentence : best) out.push_back(std::move(sentence));
+    for (const ChunkFlag& f : first.flags) {
+        const bool words = f.flag.check == "words";
+        s.floorRows.push_back({0, std::string(f.flag.check), f.flag.ja, f.flag.ko, !words && !HasFault(current, f.flag)});
+    }
+}
+
+// Translates one chunk: its tokens, the word analysis, then per sentence the resolve stage
+// and the compose stage. The sentences are appended to out with the chunk index.
+// speech is read from the start of the chunk.
+void ComposeChunk(const dict::Snapshot& snap, const dict::LookupContext& lookup, const output::Pieces& chunk,
+                  int index, bool text, bool verse, std::string_view before, const LineSpeech& speech, Scratch& s,
+                  Generated& generated, const StageObserver& observer, const TranslationOptions& options,
+                  std::span<const word::Veto> vetoes, FloorRun* flags, std::vector<output::Sentence>& out) {
     s.texts.clear();
     // Joined wrapped lines: the break spans become break markers at their places in the tokens.
     std::vector<std::size_t> breaks;
@@ -805,6 +1009,7 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     settings.quoteDepth = speech.quotes.depth;
     settings.poiTic = speech.poiTic;
     settings.narrated = speech.narrated;
+    settings.vetoes = vetoes;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
 
@@ -842,8 +1047,12 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
                              s.tokens.markers.begin() + sentence.markerEnd);
             int last = sentence.last;
             const bool joined = JoinAfterSpace(s.tokens, sentence.first, last, s.texts, s.items, s.markers);
+            s.composer.record = flags != nullptr;
+            const std::vector<std::string> sources = flags != nullptr ? ItemSources(s.items, s.texts) : std::vector<std::string>{};
             s.composer.Compose(s.items, s.texts, sentence.first, last, s.markers, composeSettings,
                                generated.families, done.pieces);
+            if (flags != nullptr) CheckSentence(s, sources, static_cast<int>(k), options, *flags);
+            s.composer.record = false;
             if (joined) s.texts.clear();
         }
         if (observer.composed) observer.composed(observer.context, index, static_cast<int>(k), done.pieces);
@@ -962,6 +1171,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         }
     }
     const auto compose = [&](LineSpeech pass, const StageObserver& watch, const TranslationOptions& opts) {
+        s.floorRows.clear();
         std::vector<output::Sentence> sentences;
         std::string before;
         for (std::size_t i = 0; i < chunks.size(); i++) {
@@ -1131,6 +1341,17 @@ LineParts PartsOf(std::string_view line) {
     return p;
 }
 
+// Moves the floor rows of line i of a call (context lines before it are read only) to options.floorReport.
+void TakeFloorRows(Scratch& s, const TranslationOptions& options, std::size_t i, std::size_t context) {
+    if (options.floorReport != nullptr && i >= context) {
+        for (FloorRow& row : s.floorRows) {
+            row.line = static_cast<int>(i - context);
+            options.floorReport->push_back(std::move(row));
+        }
+    }
+    s.floorRows.clear();
+}
+
 // The text path over wrapped lines (TranslationOptions::wrapped). Each line is translated on its
 // own first, its narration read from its own text; a run of lines that go on in the next
 // (GoesOn) is then translated as one line, its breaks carried to the translation as kBreakMark,
@@ -1159,6 +1380,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
         edgeObserver.resolved = WatchEdges;
         alone[i] = TranslateRubyBody(snap, doc, AloneText(lines[i]), used[i], s, generated, edgeObserver, options,
                                  narratedOf(lines[i]));
+        TakeFloorRows(s, options, i, context);
         if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         edges[i] = std::move(watch.edges);
     }
@@ -1223,6 +1445,7 @@ std::vector<std::string> TranslateWrapped(const dict::Snapshot& snap, pipeline::
             pieces = SplitAtBreaks(
                 TranslateRubyBody(snap, doc, joined, used[i], s, generated, observer, joinedOptions, narrated, texts),
                 j - i + 1);
+            s.floorRows.clear();
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
         }
         for (std::size_t k = i; k <= j; k++) {
@@ -1317,6 +1540,7 @@ std::vector<std::string> TranslateDocumentPieces(const dict::Snapshot& snap, Gen
             const LineQuotes quotes = QuotesOf(lines[i], carry);
             const QuoteCarry used = closed[i] ? quotes.start : QuoteCarry{};
             std::string translated = TranslateRubyBody(snap, *doc, lines[i], used, s, generated, watch, named);
+            TakeFloorRows(s, options, i, context);
             carry = quotes.end;
             if (s.sessionSenses != nullptr) s.sessionSenses->FinishLine();
             if (cr) translated += '\r';

@@ -108,6 +108,8 @@ void Usage(std::FILE* file) {
                "  --speech-levels MODE   auto (default): dialogue lines take the speech level of spec/register.md;\n"
                "                         keep: the translation's own levels\n"
                "  --speech-report FILE   the lines the speech levels changed (TSV: line, rule, cue, source, before, after)\n"
+               "  --floor on|off         on (default): read a span again where the Korean is ill-formed (spec/floor.md)\n"
+               "  --floor-report FILE    the ill-formed spans found (TSV: line, check, fixed|left, Japanese, Korean)\n"
                "  --wrapped              input lines break mid-sentence (captions, hooked text); the line count is kept\n"
                "  --context FILE         UTF-8 lines read before the input as context, not output\n"
                "  --names FILE           names of the input document: JA<TAB>KO[<TAB>KIND[<TAB>hon]] per line\n"
@@ -322,6 +324,8 @@ int RunMain(int argc, char** argv) {
     std::optional<std::string> speechArg;
     std::optional<std::string> speechLevelsArg;
     std::string speechReportPath;
+    std::string floorReportPath;
+    std::optional<std::string> floorArg;
     bool wrapped = false;
     std::string contextPath;
     std::string namesPath;
@@ -361,7 +365,7 @@ int RunMain(int argc, char** argv) {
             || option == "-in" || option == "-out" || option == "-ehnd" || option == "-stages"
             || option == "-rule-counts" || option == "-compile-snapshot" || option == "-trace"
             || option == "-dump-rules" || option == "-speech" || option == "-context"
-            || option == "-speech-levels" || option == "-speech-report" || option == "-names";
+            || option == "-speech-levels" || option == "-speech-report" || option == "-floor-report" || option == "-floor" || option == "-names";
         if (takesValue && !value) {
             if (i + 1 == argc) {
                 std::fprintf(stderr, "hdtrans: %s requires a value\n", argv[i]);
@@ -402,6 +406,8 @@ int RunMain(int argc, char** argv) {
         else if (option == "-speech") speechArg = *value;
         else if (option == "-speech-levels") speechLevelsArg = *value;
         else if (option == "-speech-report") speechReportPath = *value;
+        else if (option == "-floor-report") floorReportPath = *value;
+        else if (option == "-floor") floorArg = *value;
         else if (option == "-wrapped") wrapped = true;
         else if (option == "-context") contextPath = *value;
         else if (option == "-names") namesPath = *value;
@@ -659,6 +665,27 @@ int RunMain(int argc, char** argv) {
     options.speech = speech;
     options.speechLevels = speechLevels;
     options.wrapped = wrapped;
+    if (floorArg && *floorArg != "on" && *floorArg != "off") {
+        std::fprintf(stderr, "hdtrans: --floor: expected on or off\n");
+        return 2;
+    }
+    options.floor = !floorArg || *floorArg == "on";
+    std::vector<hdTrans::internal::FloorRow> floorRows;
+    std::string floorReport;
+    if (!floorReportPath.empty()) options.floorReport = &floorRows;
+    options.floorWords = !floorReportPath.empty() && std::getenv("HDTRANS_FLOOR_WORDS") != nullptr;
+    const auto reportFloor = [&](size_t base) {
+        for (const hdTrans::internal::FloorRow& r : floorRows) {
+            floorReport += std::to_string(base + static_cast<size_t>(r.line) + 1) + "\t" + r.check + "\t" +
+                           (r.fixed ? "fixed" : "left");
+            for (const std::string* text : {&r.ja, &r.ko}) {
+                floorReport += '\t';
+                for (const char ch : *text) floorReport += ch == '\t' || ch == '\n' || ch == '\r' ? ' ' : ch;
+            }
+            floorReport += '\n';
+        }
+        floorRows.clear();
+    };
     std::vector<hdTrans::reg::Change> levelChanges;
     std::string speechReport;
     if (!speechReportPath.empty()) options.levelChanges = &levelChanges;
@@ -736,6 +763,10 @@ int RunMain(int argc, char** argv) {
             std::fprintf(stderr, "hdtrans: cannot write %s\n", speechReportPath.c_str());
             return 1;
         }
+        if (!floorReportPath.empty() && !WriteText(floorReportPath, floorReport)) {
+            std::fprintf(stderr, "hdtrans: cannot write %s\n", floorReportPath.c_str());
+            return 1;
+        }
         if (!dumpRulesPath.empty()) {
             const std::string rules = hdTrans::internal::RuleProgramText(*snapshot);
             if (rules.empty() || !WriteText(dumpRulesPath, rules)) {
@@ -791,6 +822,7 @@ int RunMain(int argc, char** argv) {
         const std::vector<std::string> translated =
             hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options, contextLines);
         reportChanges(0);
+        reportFloor(0);
         for (size_t i = 0; i < translated.size(); i++) {
             if (stages) stagerecords::AddOutput(collector, static_cast<int>(i) + 1, translated[i]);
             if (i > 0) emit("\n");
@@ -810,6 +842,7 @@ int RunMain(int argc, char** argv) {
             const std::string lines[] = {std::string(line)};
             out = hdTrans::internal::TranslateDocument(*snapshot, *generated, lines, observer, options).front();
             reportChanges(static_cast<size_t>(whyContext.lineBase));
+            reportFloor(static_cast<size_t>(whyContext.lineBase));
         }
         if (stages) {
             stagerecords::AddOutput(collector, collector.caseBase + 1, out);

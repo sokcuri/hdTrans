@@ -93,8 +93,25 @@ struct QuoteCarry {
     int lines = 0;
 };
 
+// A fault the floor checks found in a line (spec/floor.md): the line (numbered from 0 after the
+// context), the check, the span in Japanese and in Korean as first composed, and whether a retry
+// read the span without a fault.
+struct FloorRow {
+    int line = 0;
+    std::string check;
+    std::string ja;
+    std::string ko;
+    bool fixed = false;
+};
+
 struct TranslationOptions {
     bool reference = false;
+    // The floor checks and their retry (spec FLR-1); off with reference.
+    bool floor = true;
+    // When set, gets the faults the floor checks find; with floorWords also one row per sentence
+    // with its words (check "words").
+    std::vector<FloorRow>* floorReport = nullptr;
+    bool floorWords = false;
     word::Improvements wordImprovements;
     std::span<const word::Scorer> scorers;
     std::span<const word::Scorer> shadowScorers;

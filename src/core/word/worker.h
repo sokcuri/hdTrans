@@ -170,6 +170,7 @@ private:
     // the name that the name with 国 starts with moves to the front, when no longer word starts
     // after the name with 国 (越前国旗頭 stays 越前国 + 旗頭).
     Record* NounBeforeCompound(Record* records, std::string_view text);
+    Record* DropVetoed(Record* records, int cursor, int token) const;
     bool AnchorAround(int i) const;
     Item* ProtectedItem(int token);
     Item* HonorificItem(std::string_view full, int cursor, int token, Item* parent);

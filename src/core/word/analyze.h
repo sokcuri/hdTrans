@@ -57,6 +57,16 @@ struct Improvements {
     }
 };
 
+// A reading of a word that the floor retry rules out (spec FLR-1): no word whose dictionary
+// surface has length bytes and whose part code has class digit cls ('0'..'9'; 0 for any) is read
+// from byte start of the text of token.
+struct Veto {
+    int token = 0;
+    int start = 0;
+    int length = 0;
+    char cls = 0;
+};
+
 // The switches the word stage reads.
 struct Settings {
     Improvements improvements;
@@ -108,6 +118,8 @@ struct Settings {
     std::span<const char32_t> filterWritten;
     // Attachment annotations for the packs layer (attach.h); null: the layer reads its own context.
     const AttachProvider* attach = nullptr;
+    // Readings ruled out (Veto); empty by default.
+    std::span<const Veto> vetoes;
 };
 
 // Called after every dictionary lookup with the token being processed (-1 before the
