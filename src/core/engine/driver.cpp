@@ -812,7 +812,8 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     const hooks::Run* run = text ? options.hookRun : nullptr;
     void* hookChunk = nullptr;
     std::string chunkText;
-    if (run != nullptr && (run->hooks->beginChunk != nullptr || run->hooks->generate != nullptr)) {
+    if (run != nullptr &&
+        (run->hooks->beginChunk != nullptr || run->hooks->generate != nullptr || run->hooks->attach != nullptr)) {
         for (const tokenizer::Piece& p : pieces) chunkText += p.text;
         if (run->hooks->beginChunk != nullptr)
             hookChunk = run->hooks->beginChunk(run->hooks->context, run->doc, run->line, index, chunkText);
@@ -820,6 +821,21 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
     if (hookChunk != nullptr) {
         settings.hookChunk = hookChunk;
         settings.hookFits = run->hooks->fits;
+    }
+    // The attach hook as the packs layer's attachment provider for this chunk's sentences.
+    struct HookAttach {
+        const hooks::Run* run;
+        void* chunk;
+    } hookAttach{run, hookChunk};
+    word::AttachProvider attachProvider;
+    if (run != nullptr && run->hooks->attach != nullptr) {
+        attachProvider.context = &hookAttach;
+        attachProvider.attach = [](void* hc, const tokenizer::Tokens& chunkTokens, const word::Chain& sentenceChain,
+                                   word::Attachment& result) {
+            const auto& h = *static_cast<const HookAttach*>(hc);
+            return h.run->hooks->attach(h.run->hooks->context, h.run->doc, h.chunk, chunkTokens, sentenceChain, result);
+        };
+        settings.attach = &attachProvider;
     }
 #endif
     settings.before = before;

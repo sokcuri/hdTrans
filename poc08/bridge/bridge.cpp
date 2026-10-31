@@ -11,6 +11,7 @@
 #include "bridge/attach.h"
 #include "driver/report.h"
 #include "ir/ir_json.h"
+#include "core/word/attach.h"
 #include "core/word/item.h"
 #include "lift.h"
 #include "rule.h"
@@ -36,6 +37,9 @@ struct DocState {
     std::vector<std::map<std::pair<int, int>, SentenceRecord>> records;  // per line, by (chunk, sentence)
     std::vector<uint32_t> fromSel;  // per line: the lift cursor of reselect
     std::vector<std::pair<int, int>> lastSel;
+    // per line: where the search for the next chunk's text goes on, and the chunk anchored last (attach)
+    std::vector<uint32_t> chunkFrom;
+    std::vector<int> lastChunk;
     bool caption = false;  // 0.8-rule: the document reads as captions, so no part changes it
 };
 
@@ -44,6 +48,11 @@ constexpr size_t kMaxStructureBytes = 4096;
 struct ChunkState {
     std::vector<uint32_t> ends;  // token ends of the analyzer, sorted, in chunk bytes
     std::atomic<uint64_t>* refits = nullptr;
+    // attach: the chunk's line and where its text starts in the line's source (base), or in the line's
+    // normalised text when only that holds it (viaNorm, mapped to the source by Line.map); -1 when neither does
+    int line = -1;
+    int64_t base = -1;
+    bool viaNorm = false;
 };
 
 }  // namespace
@@ -80,6 +89,8 @@ void* BeginDocument(void* context, std::span<const std::string> lines) {
     ds->fromSel.assign(lines.size(), 0);
     if (b.rule) ds->caption = CaptionDocument(*b.rule, std::vector<std::string>(lines.begin(), lines.end()));
     ds->lastSel.assign(lines.size(), {-1, -1});
+    ds->chunkFrom.assign(lines.size(), 0);
+    ds->lastChunk.assign(lines.size(), -1);
     if (b.opt.sideIr || b.opt.decide || b.opt.generate || b.opt.reselect || b.opt.attach) {
         // The IR alongside: analysis, scope and structure of every line, read by D, R and --why.
         const Config& cfg = b.engine.cfg;
@@ -190,9 +201,46 @@ std::string LengtheningMarks(std::string_view text) {
     return out;
 }
 
-void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
+// attach: where the chunk's text stands in its line, searched forward from the chunk before it (the first
+// chunk of a pass starts over).
+void AnchorChunk(DocState& ds, ChunkState& cs, int line, int chunk, std::string_view text) {
+    if (line < 0 || static_cast<size_t>(line) >= ds.doc.lines.size()) return;
+    const auto li = static_cast<size_t>(line);
+    if (chunk <= ds.lastChunk[li]) ds.chunkFrom[li] = 0;
+    ds.lastChunk[li] = chunk;
+    cs.line = line;
+    const Line& l = ds.doc.lines[li];
+    const uint32_t from = ds.chunkFrom[li];
+    size_t at = from <= l.src.size() ? l.src.find(text, from) : std::string::npos;
+    if (at != std::string::npos) {
+        cs.base = static_cast<int64_t>(at);
+        ds.chunkFrom[li] = static_cast<uint32_t>(at + text.size());
+        return;
+    }
+    // the normalised text (the normalize part writes the chunk from it); the search goes on from the norm byte
+    // of the source cursor
+    if (l.map.size() != l.norm.size() + 1) return;
+    size_t nfrom = 0;
+    while (nfrom < l.norm.size() && l.map[nfrom] < from) nfrom++;
+    at = l.norm.find(text, nfrom);
+    if (at == std::string::npos) return;
+    cs.base = static_cast<int64_t>(at);
+    cs.viaNorm = true;
+    ds.chunkFrom[li] = l.map[std::min(at + text.size(), l.norm.size())];
+}
+
+void* BeginChunk(void* context, void* doc, int line, int chunk, std::string_view text) {
     auto& b = *static_cast<Bridge*>(context);
-    if (!b.opt.segment || (doc != nullptr && static_cast<DocState*>(doc)->caption)) return nullptr;
+    auto* ds = static_cast<DocState*>(doc);
+    const bool segment = b.opt.segment && !(ds != nullptr && ds->caption);
+    if (!segment && !b.opt.attach) return nullptr;
+    if (!segment) {
+        // attach alone: no ends, so Fits (when installed) holds everywhere
+        auto* cs = new ChunkState;
+        cs->refits = &b.refits;
+        if (ds != nullptr) AnchorChunk(*ds, *cs, line, chunk, text);
+        return cs;
+    }
     // 0.7.x's own normalization has written a lengthening ー after kana as a wave dash; the analyzer reads the
     // mark it was (same byte length, so the offsets stay the chunk's)
     const std::string analysed = LengtheningMarks(text);
@@ -203,6 +251,7 @@ void* BeginChunk(void* context, void* doc, int, int, std::string_view text) {
     StageA(*b.engine.analyzer, b.engine.cfg, d, l, {});
     auto* cs = new ChunkState;
     cs->refits = &b.refits;
+    if (b.opt.attach && ds != nullptr) AnchorChunk(*ds, *cs, line, chunk, text);
     // Only the boundaries that connection rules or the rank 1-3 preferences decided bind 0.7.x; a cut that
     // the fewest-units rank or a tie-breaker chose is left to 0.7.x's own segmentation.
     AnalyzerAllowedEnds(*b.engine.analyzer, analysed, kTieSlackUnits, &cs->ends);
@@ -424,6 +473,153 @@ bool Reselect(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s
     return changed;
 }
 
+// The volitionality of clause c (main.vol, cl.vol): as the transfer's deciders read it (a passive, potential or
+// spontaneous predicate is not volitional; a volitional, wish or imperative form is; then the predicate table,
+// and + for any other verb or verbal noun).
+std::string ClauseVolition(const Bridge& b, const Doc& doc, const Line& l, const Clause& c) {
+    if (c.voice == voice::passive || c.voice == voice::potential || c.voice == voice::rare ||
+        c.voice == voice::spontaneous)
+        return "-";
+    if ((c.modality & (modality::volitional | modality::want)) != 0 || c.force == force::imp) return "+";
+    if (c.pred >= l.buns.size()) return "-";
+    const Bunsetsu& pb = l.buns[c.pred];
+    if (pb.content >= l.toks.size()) return "-";
+    const Token& t = l.toks[pb.content];
+    const bool verb = t.pos == Pos::v1 || t.pos == Pos::v5 || t.pos == Pos::vs || t.pos == Pos::vk || t.pos == Pos::vz;
+    bool verbalNoun = false;
+    if (t.pos == Pos::n && pb.content + 1u <= pb.last && pb.content + 1u < l.toks.size()) {
+        const std::string_view next = doc.S(l.toks[pb.content + 1u].lemma);
+        verbalNoun = next == "為る" || next == "する";
+    }
+    if (!verb && !verbalNoun) return "-";
+    if (b.transferReal && b.engine.transfer != nullptr) {
+        const std::string v = PredicateVolition(*b.engine.transfer, doc.S(t.lemma));
+        if (!v.empty()) return v;
+    }
+    return "+";
+}
+
+// The source span of a chain item in its line: the token's source bytes when its text is them byte for byte (as
+// the segment hook reads them), else its surface searched forward from the item before (as the lift does).
+Span ItemSpan(const ChunkState& cs, const Line& l, const hdTrans::tokenizer::Tokens& tokens,
+              const hdTrans::word::Item& it, uint32_t& from) {
+    const auto toLine = [&](uint32_t at, uint32_t& out) {
+        if (cs.base < 0) return false;
+        const uint64_t p = static_cast<uint64_t>(cs.base) + at;
+        if (cs.viaNorm) {
+            if (p >= l.map.size()) return false;
+            out = l.map[p];
+        } else {
+            if (p > l.src.size()) return false;
+            out = static_cast<uint32_t>(p);
+        }
+        return true;
+    };
+    if (it.length <= 0 || it.start < 0) return {from, from};
+    const std::string_view surface = static_cast<size_t>(it.start) < it.text.size()
+                                         ? it.text.substr(static_cast<size_t>(it.start), static_cast<size_t>(it.length))
+                                         : std::string_view();
+    if (it.tokenIndex >= 0 && static_cast<size_t>(it.tokenIndex) < tokens.size()) {
+        const auto ti = static_cast<size_t>(it.tokenIndex);
+        const hdTrans::tokenizer::Token& t = tokens[ti];
+        if (t.sourceEnd - t.sourceBegin == it.text.size() && tokens.Raw(ti) == it.text) {
+            const uint32_t b0 = std::min(t.sourceBegin + static_cast<uint32_t>(it.start), t.sourceEnd);
+            const uint32_t e0 = std::min(b0 + static_cast<uint32_t>(it.length), t.sourceEnd);
+            uint32_t b1 = 0, e1 = 0;
+            if (toLine(b0, b1) && toLine(e0, e1) && b1 < e1 && e1 <= l.src.size()) {
+                from = e1;
+                return {b1, e1};
+            }
+        }
+    }
+    if (surface.empty()) return {from, from};
+    const size_t at = l.src.find(surface, from);
+    const size_t reach = std::max<size_t>(24, 4 * surface.size());
+    if (at == std::string::npos || at - from > reach) return {from, from};
+    from = static_cast<uint32_t>(at + surface.size());
+    return {static_cast<uint32_t>(at), from};
+}
+
+// The attach hook: C, L and Z of the whole line mapped onto the chain items, for the packs layer.
+bool AttachHook(void* context, void* doc, void* chunk, const hdTrans::tokenizer::Tokens& tokens,
+                const hdTrans::word::Chain& chain, hdTrans::word::Attachment& out) {
+    if (doc == nullptr || chunk == nullptr) return false;
+    const auto& b = *static_cast<const Bridge*>(context);
+    const auto& ds = *static_cast<const DocState*>(doc);
+    const auto& cs = *static_cast<const ChunkState*>(chunk);
+    if (cs.line < 0 || static_cast<size_t>(cs.line) >= ds.doc.lines.size()) return false;
+    const Line& whole = ds.doc.lines[static_cast<size_t>(cs.line)];
+    if (whole.clauses.empty()) return false;
+    std::vector<Span> spans;
+    uint32_t from = 0;
+    if (cs.base >= 0) {
+        const uint64_t p = static_cast<uint64_t>(cs.base);
+        from = cs.viaNorm ? (p < whole.map.size() ? whole.map[p] : 0) : static_cast<uint32_t>(std::min<uint64_t>(p, whole.src.size()));
+    }
+    for (const hdTrans::word::Item* it = chain.head; it != nullptr; it = it->next)
+        spans.push_back(ItemSpan(cs, whole, tokens, *it, from));
+    const Attachment att = AttachItems(whole, spans);
+    const Doc& d = ds.doc;
+    out.items.clear();
+    out.clauses.clear();
+    for (const ItemAttach& ia : att.items) {
+        hdTrans::word::AttachItem& o = out.items.emplace_back();
+        o.clause = ia.clause;
+        o.pred = ia.pred;
+        if (ia.isArg) {
+            o.argOf = ia.argOf;
+            o.headItem = ia.headItem;
+            o.role = Name(F::role, ia.role);
+            o.how = Name(F::how, ia.how);
+        }
+        o.modifies = ia.modifies;
+        o.modKind = ia.modKind;
+    }
+    for (const ClauseAttach& ca : att.clauses) {
+        const Clause& c = *ca.clause;
+        hdTrans::word::AttachClause& o = out.clauses.emplace_back();
+        o.predItem = ca.predItem;
+        o.parent = ca.parent;
+        auto feature = [&](const char* name, std::string_view value) {
+            if (!value.empty()) o.features.emplace_back(name, std::string(value));
+        };
+        feature("link", Name(F::link, c.link));
+        feature("tense", Name(F::tense, c.tense));
+        feature("aspect", Name(F::jaspect, c.aspect));
+        feature("pol", Name(F::pol, c.pol));
+        feature("negfn", Name(F::negfn, c.negFn));
+        feature("voice", Name(F::voice, c.voice));
+        feature("bene", Name(F::bene, c.bene));
+        feature("force", Name(F::force, c.force));
+        feature("polite", Name(F::polite, c.polite));
+        feature("vol", ClauseVolition(b, d, whole, c));
+        feature("subj", Name(F::refkind, c.subj.kind));
+        bool subject = false;
+        for (const ItemArg& ga : ca.args) {
+            hdTrans::word::AttachArg& g = o.args.emplace_back();
+            g.role = Name(F::role, ga.role);
+            g.how = Name(F::how, ga.how);
+            g.lemma = d.S(ga.lemma);
+            g.cls = d.S(ga.cls);
+            g.item = ga.how == how::omitted ? -1 : ga.item;
+            subject = subject || ga.role == static_cast<uint8_t>(Role::subj) || ga.role == static_cast<uint8_t>(Role::topic);
+        }
+        // The omitted subject the side IR leaves out of the clause's arguments: Z's class of it (a speaker,
+        // addressee or third person is @person), and the entity Z named, if any.
+        if (!subject && c.link != link::adn && c.subj.kind != refkind::overt) {
+            hdTrans::word::AttachArg& g = o.args.emplace_back();
+            g.role = "subj";
+            g.how = "omitted";
+            g.lemma = d.S(c.subj.entity);
+            const bool person = c.subj.kind == refkind::speaker || c.subj.kind == refkind::addressee ||
+                                c.subj.kind == refkind::third;
+            g.cls = person ? "@person" : "";
+            g.item = -1;
+        }
+    }
+    return true;
+}
+
 bool Generate(void* context, void* doc, void*, const hdTrans::hooks::Sentence& s, std::string& out) {
     auto& b = *static_cast<Bridge*>(context);
     auto& ds = *static_cast<DocState*>(doc);
@@ -523,11 +719,13 @@ Bridge* Create(const Options& options, std::string& err) {
     b->hooks.beginDocument = BeginDocument;
     b->hooks.endDocument = EndDocument;
     if (b->opt.normalize) b->hooks.normalize = Normalize;
-    if (b->opt.segment) {
+    if (b->opt.segment || b->opt.attach) {
         b->hooks.beginChunk = BeginChunk;
         b->hooks.endChunk = EndChunk;
-        b->hooks.fits = Fits;
     }
+    if (b->opt.segment) b->hooks.fits = Fits;
+    // attach: the side IR's attachment is the packs layer's provider (it reads it only when packs are loaded)
+    if (b->opt.attach) b->hooks.attach = AttachHook;
     // The lift and the side IR run whenever a part, --why or --stages needs them.
     if (b->opt.generate || b->opt.decide || b->opt.sideIr || b->opt.lift) b->hooks.generate = Generate;
     if (b->opt.reselect || b->opt.attach) b->hooks.reselect = Reselect;

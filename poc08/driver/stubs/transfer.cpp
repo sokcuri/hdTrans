@@ -14,6 +14,7 @@ std::vector<PointDecision> DecidePoints(const TransferData&, const Config&, Doc&
 std::string ClassOfFacts(const TransferData&, const std::string&, const std::vector<std::string>&, std::string_view) {
     return "";
 }
+std::string PredicateVolition(const TransferData&, std::string_view) { return ""; }
 
 void StageT(const TransferData&, const Config&, Doc& doc, Line& line) {
     line.kir.clear();

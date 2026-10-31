@@ -14,6 +14,7 @@
 
 namespace hdTrans::word {
 struct Chain;
+struct Attachment;
 }
 
 namespace hdTrans::hooks {
@@ -56,6 +57,11 @@ struct Hooks {
     bool (*reselect)(void* context, void* doc, void* chunk, const Sentence& sentence, word::Chain& chain) = nullptr;
     // G: the output of a sentence; false keeps what the compose stage wrote.
     bool (*generate)(void* context, void* doc, void* chunk, const Sentence& sentence, std::string& out) = nullptr;
+    // C, L, Z for the packs layer: the attachment of a sentence's chain (word::AttachProvider, attach.h), whose
+    // items stand in tokens of the chunk; asked by the word stage before resolve. false leaves the packs layer
+    // to its own context.
+    bool (*attach)(void* context, void* doc, void* chunk, const tokenizer::Tokens& tokens, const word::Chain& chain,
+                   word::Attachment& out) = nullptr;
 };
 
 // The hooks of one TranslateDocument call and where it is.

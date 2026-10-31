@@ -74,6 +74,9 @@ std::vector<PointDecision> DecidePoints(const TransferData& t, const Config& cfg
 // ("t075.voice=…", "t075.marker=…", "t075.ko=…", "t075.real=…") and the verb lemma before the point.
 std::string ClassOfFacts(const TransferData& t, const std::string& family, const std::vector<std::string>& facts,
                          std::string_view jlem);
+// The volitionality of a predicate lemma by the transfer's predicate table (pred.tsv): "+", "-", or "" when no
+// row gives it.
+std::string PredicateVolition(const TransferData& t, std::string_view lemma);
 // R: one line → reg, lev. The document state of S (Doc.scenes, Doc.speakers, utts) is read-only
 // here, so R runs per line, in line order, also on a line made of one sentence (the 0.7.x bridge).
 void StageR(const DiscourseData& d, const Config& cfg, Doc& doc, Line& line);

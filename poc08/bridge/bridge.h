@@ -30,7 +30,9 @@ struct Options {
     bool rule = false;    // 0.8-rule: segment plus the retrofit on dialogue (bridge/rule.h; run by the CLI)
     bool sideIr = false;  // keep the side IR records (--why, --stages); costs time
     bool lift = false;    // lift every sentence even when no part needs it (to count the misses)
-    bool attach = false;  // write the attachment of every sentence's chain items (TakeAttachments, bridge/attach.h)
+    // the attachment of every sentence's chain items (bridge/attach.h): the packs layer's provider (hooks attach)
+    // and the --poc08-attach lines (TakeAttachments)
+    bool attach = false;
 };
 
 // Reads a --poc08 list: "all", "none", or names from normalize, segment, generate, decide.

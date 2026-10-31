@@ -189,6 +189,11 @@ void StageT(const TransferData& t, const Config&, Doc& doc, Line& line) {
   }
 }
 
+std::string PredicateVolition(const TransferData& t, std::string_view lemma) {
+  const auto it = t.table.pred.find(std::string(lemma));
+  return it != t.table.pred.end() ? it->second.vol : std::string();
+}
+
 // D: the deciders over the lifted kir (stages.h). One Decision per point: rule dec:<family>@<version>,
 // Cued when it overrode 0.7.x, Default when it kept it; runnerUp t075:<0.7.x class>.
 std::vector<PointDecision> DecidePoints(const TransferData& t, const Config&, Doc& doc, Line& line) {

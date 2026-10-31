@@ -55,6 +55,8 @@ if(HDTRANS_SH)
     add_test(NAME poc08.cli COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/cli.sh" $<TARGET_FILE:hdtrans08_ir>)
     add_test(NAME poc08.hooks COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/hooks.sh" $<TARGET_FILE:hdtrans_cli>
         $<TARGET_FILE:hdtrans08> "${CMAKE_SOURCE_DIR}/dicts")
+    add_test(NAME poc08.attach COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/attach.sh" $<TARGET_FILE:hdtrans08>
+        "${CMAKE_SOURCE_DIR}/dicts")
     add_test(NAME poc08.segment COMMAND "${HDTRANS_SH}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/segment.sh" $<TARGET_FILE:hdtrans08>
         "${CMAKE_SOURCE_DIR}/dicts")
     if(TARGET hd8retro)
