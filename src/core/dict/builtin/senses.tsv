@@ -1492,7 +1492,8 @@
 付ける	짓다	けじめ,ケジメ	before	v1:ㅅ
 けじめ	매듭	つける,付ける	after	n
 ケジメ	매듭	つける,付ける	after	n
-// LEX-152: またがる is 걸치다 over a span; after a thing one rides, before it or earlier in the sentence, it is 올라타다.
+// LEX-152: またがる is 걸치다 over a span, also with a vehicle elsewhere in the sentence; after a thing one rides, before it or earlier in the sentence, it is 올라타다.
+またがる	걸치다	県,国,国境,州,地域,部署,分野,年,年度,期間,長期,時代,世代,両方,複数,日,月	before	v5
 またがる	올라타다	自転車,チャリ,チャリンコ,バイク,オートバイ,スクーター,原付,馬,ロバ,背,背中,後ろ,上,鞍,サドル,箒,ほうき,シート	before	v5
 またがる	올라타다	自転車,チャリ,チャリンコ,バイク,オートバイ,スクーター,原付,馬,ロバ,箒,ほうき	sentence	v5
 // LEX-153: 渇いた before 喉 is 마른.

@@ -22,3 +22,10 @@ cx:coll-verb:30	性格が変わった人	!rule:cx:coll-verb:30	keep	rewrites
 cx:coll-verb:30	すっかり変わった人になった	!rule:cx:coll-verb:30	keep	rewrites
 cx:coll-verb:30	名前が変わった娘	!rule:cx:coll-verb:30	keep	rewrites
 cx:coll-verb:40	彼はすっかり変わった方だ	!rule:cx:coll-verb:40	keep	rewrites
+cx:coll-verb:30	彼は変わった人だ	has:특이한 사람	fix	rewrites
+cx:coll-verb:30	あなたも変わった人ね	has:특이한 사람	fix	rewrites
+cx:coll-verb:30	君は変わった子だな	has:특이한 아이	fix	rewrites
+cx:coll-verb:30	あの人は変わった人だった	has:특이한 사람이었다	fix	rewrites
+cx:coll-verb:30	ずいぶん変わった子だね	has:특이한 아이	fix	rewrites
+cx:coll-verb:30	急に変わった人	!rule:cx:coll-verb:30	keep	rewrites
+cx:coll-verb:30	昔と変わった人だ	!rule:cx:coll-verb:30	keep	rewrites

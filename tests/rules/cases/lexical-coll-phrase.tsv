@@ -31,3 +31,8 @@ cx:coll-verb:70	宿題を後にして	!rule:cx:coll-verb:70	keep	rewrites
 cx:coll-verb:70	その話を後にしよう	!rule:cx:coll-verb:70	keep	rewrites
 cx:coll-verb:70	食事を後にする	!rule:cx:coll-verb:70	keep	rewrites
 cx:coll-verb:70	言いながら、彼らはテラス側から食堂を後にした。	has:식당을 떠났다	fix	rewrites
+cx:coll-verb:70	そう言ってから、その場を後にした。	has:그 자리를 떠났다	fix	rewrites
+cx:coll-verb:70	この街を後にした	has:거리를 떠났다	fix	rewrites
+cx:coll-verb:70	王都を後にする	has:왕도를 떠난다	fix	rewrites
+cx:coll-verb:70	ギルドを後にした	has:길드를 떠났다	fix	rewrites
+cx:coll-verb:70	仕事を後にして	!rule:cx:coll-verb:70	keep	rewrites

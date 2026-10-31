@@ -20,3 +20,4 @@ lexical:coll-default	国境にまたがる山脈	has:국경에 걸치는	keep	se
 lexical:coll-default	複数の部署にまたがる案件	has:부서에 걸치는	keep	senses
 lexical:coll-default	長期にまたがる計画	has:장기에 걸칠	keep	senses
 lexical:coll-default	ナオは無言でバイクにまたがると、	has:오토바이에 올라타	fix	senses
+lexical:coll-default	バイクで来て、二つの県にまたがる道	has:현에 걸치는	keep	senses

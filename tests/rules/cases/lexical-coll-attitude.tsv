@@ -24,3 +24,7 @@ cx:coll-verb:50	それは悪いと思う	!rule:cx:coll-verb:50	keep	rewrites
 lexical:coll-attitude	その話は別にして、本題に入ろう	has:그 이야기는 별개로 하고	keep	builtin-phrase
 lexical:coll-attitude	話は別に聞く	lacks:다르	keep	builtin-phrase
 lexical:coll-attitude	話は別として	has:이야기는 별개로	keep	builtin-phrase
+cx:coll-verb:50	「悪いと思ってる」	「미안하다고 생각해」	fix	rewrites
+cx:coll-verb:50	ごめん、悪いと思ってる。	has:미안하다고 생각	fix	rewrites
+cx:coll-verb:50	あ、悪いと思ってるよ。	has:미안하다고 생각	fix	rewrites
+cx:coll-verb:50	でも悪いと思う。	has:하지만 미안하다고	fix	rewrites
