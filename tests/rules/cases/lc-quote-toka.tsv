@@ -1,0 +1,45 @@
+# 규칙: GRM-82
+rule	input	expected	kind	layer
+cx:lc-quote-toka:10	「ええ。○○部長と浮気してるとか、△△君とデートしてたとかね！」	has:바람피고 있다든가,	fix	rewrites
+cx:lc-quote-toka:10	帰ったら家族全員死んでるとか生き残った方も地獄だろ	has:죽어 있다든가 살아남은	fix	rewrites
+cx:lc-quote-toka:10	あと、どうやって穴から出るのだろうとか思ってしまった。	has:나올 거라든가 생각	fix	rewrites
+cx:lc-quote-toka:10	たとえバレなくてもちゃんと投票するんだとか……」	has:투표한다든가……	fix	rewrites
+cx:lc-quote-toka:10	「ネトゲにハマってるとか、病気してるとか、結婚してから休載し始めたとか……いろんな噂があるよ」	has:빠져 있다든가, 병하고 있다든가	fix	rewrites
+cx:lc-quote-toka:10	「夏休みに遊ぶ約束してもさ、家に来たらフツーに寝てるとかあったじゃない？」	has:자고 있다든가 있었	fix	rewrites
+cx:lc-quote-toka:10	「携帯料金払ってなくて、時計が狂ってるとか？」	has:안 맞고 있다든가?	fix	rewrites
+cx:lc-quote-toka:10	「……あぁ。部屋が散らかってるとか、そういう理由ですか？」	has:흩어져 있다든가,	fix	rewrites
+cx:lc-quote-toka:10	お前ら無償で赤の他人を助けろとか本気で言ってんの？	has:도우라든가 진심으로	fix	rewrites
+cx:lc-quote-toka:10	刑事さんたちは怪しんでいるみたいで、スマホ貸せとか言い始めましたね	has:빌려 주라든가 말하기	fix	rewrites
+cx:lc-quote-toka:10	この間までキスレブを倒せとか言ってたくせに	has:넘어뜨리라든가 말했	fix	rewrites
+cx:lc-quote-toka:10	「じゃあ、結論が出たから映画を見てるとか？」	has:보고 있다든가?	fix	rewrites
+cx:lc-quote-toka:10	部活動の実績に応じて、予算を再配分するんだとか」	has:재배분한다든가」	fix	rewrites
+cx:lc-quote-toka:20	たった一人だったとかより千倍マシでしょ？	has:한 사람이었다든가 보다	fix	rewrites
+cx:lc-quote-toka:20	たしか払い戻しは50倍だったとか……	has:50배였다든가……	fix	rewrites
+cx:lc-quote-toka:20	「サンドイッチはサーモンとモッツァレラだったとか――」	has:모짜렐라였다든가	fix	rewrites
+cx:lc-quote-toka:20	あやうく畳まれるところだったとかｗ	has:곳이었다든가	fix	rewrites
+cx:lc-quote-toka:30	オクタヴィア様が嫁ぐ国では、真実の愛だとか、婚約破棄だとか、下位貴族の娘が暴れ回っているそうだ。	has:사랑이라든가, 파혼이라든가	fix	rewrites
+cx:lc-quote-toka:30	「生きることが尊いとか、死ぬことは悪いことだとか……」	has:나쁜 일이라든가……	fix	rewrites
+cx:lc-quote-toka:30	ＬＶだとかスキルだとかポイントだとか、ゲームみたいな世界だ。	has:LV라든가 스킬이라든가	fix	rewrites
+cx:lc-quote-toka:30	「趣味は狙撃で将来の夢は超Ａ級スナイパーだとか。」	has:스나이퍼라든가.	fix	rewrites
+cx:lc-quote-toka:30	「所有物だとか無茶言って、ときには、彼女ヅラして……」	has:소유물이라든가	fix	rewrites
+cx:lc-quote-toka:40	もう口も利かないってか……。	has:않는다는 건가……	fix	rewrites
+cx:lc-quote-toka:40	「配布しないと予備選挙は通らないってか？」	has:않다는 건가?	fix	rewrites
+cx:lc-quote-toka:40	「どうした？　枕が違うと寝られないってか？」	has:없다는 건가?	fix	rewrites
+cx:lc-quote-toka:40	「枕のかわり？　腕枕でもしろってか？　絶対イヤだぞ」	has:하라는 건가?	fix	rewrites
+cx:lc-quote-toka:50	「ハーレムってか。ある意味男の夢だよなあ」	has:할렘이라는 건가.	fix	rewrites
+cx:lc-quote-toka:50	「ドロップアイテムってか？……はは、なに言ってんだ俺」	has:아이템이라는 건가?	fix	rewrites
+cx:lc-quote-toka:50	「いやちょっと待てよ。散歩ってか？　屋根の上を、しかもそんな格好で？」	has:산책이라는 건가?	fix	rewrites
+cx:lc-quote-toka:50	腐ってもユーゲントってか。	has:이라는 건가.	fix	rewrites
+cx:lc-quote-toka:55	重いから帰ってきてくれってか？	has:돌아와 달라는 건가?	fix	rewrites
+cx:lc-quote-toka:55	「千里が今にも連れ去られそうってときに、黙ってみてろってかっ！？」	has:보라는 건가	fix	rewrites
+cx:lc-quote-toka:60	「いや、俺は大丈夫……ってか、どうみてもおかしいのはそっちじゃないかっ！」	has:괜찮아……그보다,	fix	rewrites
+cx:lc-quote-toka:60	「さ、さあ……ってか、ついてないでしょ、そんなモード」	has:자……그보다,	fix	rewrites
+cx:lc-quote-toka:60	「バーの？　そんなところから呼び出しって何者よ……ってか、まずは名乗りなさいよね！！」	has:누구야……그보다,	fix	rewrites
+cx:lc-quote-toka:30	これが違法奴隷とか、麻薬の類だとかなり危ない。	!rule:cx:lc-quote-toka:30	keep	rewrites
+cx:lc-quote-toka:50	「……あたしが犯人ってかい。だったら、わざわざ盗聴器なんか付けると思う？」	!rule:cx:lc-quote-toka:50	keep	rewrites
+cx:lc-quote-toka:10	本とか読む。	!rule:cx:lc-quote-toka:10	keep	rewrites
+cx:lc-quote-toka:40	それでも俺が問題提起をした甲斐があってか、機運が高まっている。	!rule:cx:lc-quote-toka:40	keep	rewrites
+cx:lc-quote-toka:60	「ってか、もう夏服着てんの？」	!rule:cx:lc-quote-toka:60	keep	rewrites
+cx:lc-quote-toka:20	妾候補とか何か？	!rule:cx:lc-quote-toka:20	keep	rewrites
+cx:lc-quote-toka:55	「少し寝てろって」	!rule:cx:lc-quote-toka:55	keep	rewrites
+cx:lc-quote-toka:30	火はできたが……野生の動物が火を怖がるのは迷信だとか聞いたことがあるしな。	has:미신이라고 들은 적이	keep	rewrites

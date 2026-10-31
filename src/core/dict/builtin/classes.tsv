@@ -222,6 +222,7 @@
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
 //= noun.prepass-place	Place and time nouns that start a word after a の the rules left untranslated (가게 안, 침대 아래, 아이 때).
 //= noun.quoted	The nouns that a quotation in って modifies (って奴 라는 녀석).
+//= noun.quoted-clause	The nouns that a quotation in って fused into the ending of a predicate describes (行くって話 간다는 이야기, やめろって意味 그만두라는 의미).
 //= noun.quote-request	Verbal nouns of asking, wishing, answering and ordering whose する takes what is asked or wished with って (静かにってお願いした 조용히라고 부탁했다, 場所って希望した 장소라고 희망했다).
 //= noun.realm-compound	Nouns in 国 that take the 国 of a country or province name before them (美濃国境 미노 국경, 日本国内 일본 국내); 国中, 国府 and 国主 keep the name with its 国.
 //= noun.realm-country	The modern countries of noun.realm-name, which noun.realm-province-compound does not split (日本国人).
@@ -409,6 +410,7 @@
 //= word.offer-cue	Words before a ますか that make it an offer or a proposal to the listener or to the speaker and the listener (with the first person plural: 私達も, みんなで): 까요 (さて、帰りますか 자, 돌아갈까요, お茶でも飲みますか 차라도 마실까요); an interjection read as a sound span is matched by its Korean (자, 그럼, 좋아).
 //= word.inclusive	Words that put the speaker together with others (一緒に, みんなで, 私たち, 我ら): a volitional in their sentence invites, 자 (われらの力を見せよう 우리들의 힘을 보여 주자).
 //= word.partner-to	Starts of the words of company, sameness, time or difference before which a と going on from the line before, or after a predicate that could end what was said, is the comitative (と一緒に行こう 와 함께 가자, と同じだ 와 같다, 来たと同時に).
+//= word.reciprocal-to	Starts of the verbs and verbal nouns of doing something with a partner (fighting, marrying, meeting, exchanging, discussing), before which a と after a quotation is the partner, not the quoting (『男友達みたいな女』と浮気してた 와 바람피우던).
 //= word.pause-filler	Fillers read apart before a source space; a longer word containing them is not a member.
 //= word.recall-interjection	Interjections of noticing or remembering after which a そうだ standing alone recalls something (あ、そうだ 아, 맞다; と、そうだ), not ああ or うん, which agree, nor えっと, which hesitates.
 //= word.denial-lead	Interjections that may lead a denial or a correction (いや、違う 아니, 아니야; え、違うの？).
@@ -3273,6 +3275,66 @@ noun.quoted	子
 noun.quoted	娘
 noun.quoted	噂
 noun.quoted	もん
+noun.quoted-clause	こと	GRM-80
+noun.quoted-clause	事	GRM-80
+noun.quoted-clause	もの	GRM-80
+noun.quoted-clause	物	GRM-80
+noun.quoted-clause	もん	GRM-80
+noun.quoted-clause	奴	GRM-80
+noun.quoted-clause	やつ	GRM-80
+noun.quoted-clause	ヤツ	GRM-80
+noun.quoted-clause	人	GRM-80
+noun.quoted-clause	子	GRM-80
+noun.quoted-clause	感じ	GRM-80
+noun.quoted-clause	カンジ	GRM-80
+noun.quoted-clause	話	GRM-80
+noun.quoted-clause	噂	GRM-80
+noun.quoted-clause	言葉	GRM-80
+noun.quoted-clause	意味	GRM-80
+noun.quoted-clause	約束	GRM-80
+noun.quoted-clause	気持ち	GRM-80
+noun.quoted-clause	気分	GRM-80
+noun.quoted-clause	名前	GRM-80
+noun.quoted-clause	理由	GRM-80
+noun.quoted-clause	表情	GRM-80
+noun.quoted-clause	態度	GRM-80
+noun.quoted-clause	雰囲気	GRM-80
+noun.quoted-clause	様子	GRM-80
+noun.quoted-clause	連絡	GRM-80
+noun.quoted-clause	メール	GRM-80
+noun.quoted-clause	手紙	GRM-80
+noun.quoted-clause	電話	GRM-80
+noun.quoted-clause	知らせ	GRM-80
+noun.quoted-clause	命令	GRM-80
+noun.quoted-clause	指示	GRM-80
+noun.quoted-clause	依頼	GRM-80
+noun.quoted-clause	お願い	GRM-80
+noun.quoted-clause	願い	GRM-80
+noun.quoted-clause	意見	GRM-80
+noun.quoted-clause	考え	GRM-80
+noun.quoted-clause	評判	GRM-80
+noun.quoted-clause	条件	GRM-80
+noun.quoted-clause	ルール	GRM-80
+noun.quoted-clause	予定	GRM-80
+noun.quoted-clause	計画	GRM-80
+noun.quoted-clause	説	GRM-80
+noun.quoted-clause	返事	GRM-80
+noun.quoted-clause	答え	GRM-80
+noun.quoted-clause	文句	GRM-80
+noun.quoted-clause	台詞	GRM-80
+noun.quoted-clause	セリフ	GRM-80
+noun.quoted-clause	合図	GRM-80
+noun.quoted-clause	メッセージ	GRM-80
+noun.quoted-clause	話題	GRM-80
+noun.quoted-clause	設定	GRM-80
+noun.quoted-clause	イメージ	GRM-80
+noun.quoted-clause	思い	GRM-80
+noun.quoted-clause	想い	GRM-80
+noun.quoted-clause	自信	GRM-80
+noun.quoted-clause	証拠	GRM-80
+noun.quoted-clause	主張	GRM-80
+noun.quoted-clause	説明	GRM-80
+noun.quoted-clause	報告	GRM-80
 
 noun.realm-compound	国境
 noun.realm-compound	国内
@@ -5558,6 +5620,9 @@ verb.quote-start	望
 verb.quote-start	命じ
 verb.quote-start	言い聞かせ
 verb.quote-start	感じ
+verb.quote-start	聞か	GRM-83
+verb.quote-start	聞い	GRM-83
+verb.quote-start	聞き	GRM-83
 
 verb.receiver-passive	許
 verb.receiver-passive	任
@@ -6459,6 +6524,44 @@ word.partner-to	同時
 word.partner-to	どうじ
 word.partner-to	同様
 word.partner-to	等し
+
+word.reciprocal-to	戦	GRM-86
+word.reciprocal-to	闘	GRM-86
+word.reciprocal-to	争	GRM-86
+word.reciprocal-to	喧嘩	GRM-86
+word.reciprocal-to	けんか	GRM-86
+word.reciprocal-to	結婚	GRM-86
+word.reciprocal-to	婚約	GRM-86
+word.reciprocal-to	浮気	GRM-86
+word.reciprocal-to	付き合	GRM-86
+word.reciprocal-to	つきあ	GRM-86
+word.reciprocal-to	交際	GRM-86
+word.reciprocal-to	別れ	GRM-86
+word.reciprocal-to	わかれ	GRM-86
+word.reciprocal-to	引き替え	GRM-86
+word.reciprocal-to	引き換え	GRM-86
+word.reciprocal-to	交換	GRM-86
+word.reciprocal-to	協議	GRM-86
+word.reciprocal-to	相談	GRM-86
+word.reciprocal-to	話し合	GRM-86
+word.reciprocal-to	握手	GRM-86
+word.reciprocal-to	合流	GRM-86
+word.reciprocal-to	対戦	GRM-86
+word.reciprocal-to	対決	GRM-86
+word.reciprocal-to	再会	GRM-86
+word.reciprocal-to	出会	GRM-86
+word.reciprocal-to	出逢	GRM-86
+word.reciprocal-to	知り合	GRM-86
+word.reciprocal-to	すれ違	GRM-86
+word.reciprocal-to	ぶつか	GRM-86
+word.reciprocal-to	会	GRM-86
+word.reciprocal-to	逢	GRM-86
+word.reciprocal-to	遊	GRM-86
+word.reciprocal-to	踊	GRM-86
+word.reciprocal-to	共演	GRM-86
+word.reciprocal-to	連絡	GRM-86
+word.reciprocal-to	契約	GRM-86
+word.reciprocal-to	取引	GRM-86
 word.pause-filler	あ
 word.pause-filler	え
 word.pause-filler	ええ
