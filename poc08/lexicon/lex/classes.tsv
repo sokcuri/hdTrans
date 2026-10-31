@@ -182,3 +182,10 @@ class	parent	codes	members (examples)
 @desk	@furniture		机, デスク, 勉強机, 学習机, 文机, 事務机, 書き物机, 仕事机 (a desk one sits at to work: 向かう 앉다)
 @computer	@device		パソコン, ＰＣ, PC, ノートＰＣ, ノートパソコン, コンピューター, コンピュータ, ラップトップ, タブレット, 端末, ワープロ
 @trend	@abstract		回復, 展開, 進展, 成長, 変化, 伸び, 上達, 推移, 傾向, 盛り上がり, 広がり, 悪化, 進歩 (a development or trend something shows: 見せる 보이다)
+@truth	@info		正体, 真相, 真実, 事実, 意味, 意図, 真意, 本心, 理由, 原因, 狙い, 正解 (the hidden truth, meaning or reason of something, which one realizes: 気付
+@figure	@picture		矢印, 丸, 線, 図形, 三角, 四角, ハート, 魔法陣, 星印, バツ印, グラフ (a figure or mark one draws: 書く 그리다; @shape also holds 穴, 点, 角, 形, which on
+@to.end	@abstract		最後, 最期, 終わり, とことん, 果て (to the end, all the way: 最後まで付き合う 끝까지 어울리다; no existing class holds these, @time and @period are 
+@lifetime	@period		人生, 一生, 生涯, 半生, 一生涯 (a whole life one lives through: 人生を送る 살다; @life.stage is one stage of a life and reads 시절 before 時代
+@leverage	@abstract		弱み, 弱点, 主導権, 実権, 権力, 覇権, 手綱, 証拠, 決定権 (a hold or advantage one has over others or a situation: 握る/掴む 잡다; @strength is one
+@rice.ball	@food		御握り, お結び, 握り飯, 寿司, 握り寿司 (rice pressed into shape by hand: 握る 만들다; @food is too wide, チョコを握る is 쥐다)
+@endpoint	@abstract		限界, 限度, 極限, 終わり, 最期, 死, 完成, ゴール, 目標, 理想, 頂点, 核心 (an end state, limit or goal that comes near or that one comes near: 限界が

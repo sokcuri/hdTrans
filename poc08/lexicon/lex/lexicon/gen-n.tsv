@@ -17,7 +17,6 @@ ttt		n	1	ttt				u	b
 合鍵	あいかぎ	n	2	곁쇠				u	b	
 合鍵	あいかぎ	n	3	여벌쇠				u	b	
 あいこ	あいこ	n	1	무승부			name=+	u	b	
-合図	あいず	n	1	신호				u	b	
 愛想	あいそ	n	1	붙임성				u	b	
 愛想	あいそ	n	2	애교				u	b	
 愛想	あいそ	n	3	애상				u	c+np	from-names
@@ -33,7 +32,6 @@ ttt		n	1	ttt				u	b
 青木	あおき	n	2	상록수				u	b	
 青桐	あおぎり	n	1	벽오동				u	wl	
 青桐	あおぎり	n	2	청동				u	b	
-青空	あおぞら	n	1	푸른 하늘			name=+	u	b	
 青二才	あおにさい	n	1	풋내기				u	b	
 青海苔	あおのり	n	1	파래				u	w	
 青海苔	あおのり	n	2	녹조류				u	b	
@@ -49,7 +47,7 @@ ttt		n	1	ttt				u	b
 青柳	あおやぎ	n	1	푸른 버드나무			name=+	u	b	
 煽り	あおり	n	1	선동				u	b	
 煽り	あおり	n	2	여파				u	b	
-仰向け	あおむけ	n	1	위를 향함				u	wl	
+仰向け	あおむけ	n	1	위를 향함			cls=@stance	u	wl	
 仰向け	あおむけ	n	2	위를 봄				u	b	
 仰向け	あおむけ	n	3	위를 보고	next=に			u	wl	
 仰向け	あおむけ	n	4	위로 향해	next=に			u	b	
@@ -72,17 +70,8 @@ ttt		n	1	ttt				u	b
 赤み	あかみ	n	1	붉은빛				u	b	
 赤み	あかみ	n	2	붉은 빛				u	b	
 赤芽	あかめ	n	1	충혈된 눈				u	b	
-明かり	あかり	n	1	등불			cls=@lighting	u	wl	
-明かり	あかり	n	2	전등불				u	w	
-明かり	あかり	n	3	불빛				u	b	
-明かり	あかり	n	4	빛				u	b	
-明かり	あかり	n	5	등				u	b	
-明かり	あかり	n	6	불	pred=付ける|付く|吐く|消す|消える			u	x	senses
 明かり取り	あかりとり	n	1	들창				u	w	
 明かり取り	あかりとり	n	2	채광용 들창				u	b	
-赤ん坊	あかんぼう	n	1	아기			cls=@person.child	u	w	
-赤ん坊	あかんぼう	n	2	갓난아기				u	b	
-赤ん坊	あかんぼう	n	3	갓난아이				u	b	
 垢抜け	あかぬけ	n	1	세련				u	b	
 足掻き	あがき	n	1	발버둥질				u	w	
 足掻き	あがき	n	2	발버둥				u	b	
@@ -150,7 +139,6 @@ ttt		n	1	ttt				u	b
 揚巻	あげまき	n	2	쌍상투				u	b	
 揚巻	あげまき	n	3	총각				u	b	
 揚げ物	あげもの	n	1	튀김				u	w	
-憧れ	あこがれ	n	1	동경				u	b	
 顎	あご	n	1	턱				u	b	
 顎	あご	n	2	악				u	b	
 顎髭	あごひげ	n	1	턱수염				u	w	
@@ -191,11 +179,6 @@ ttt		n	1	ttt				u	b
 足取り	あしどり	n	2	걸음				u	w	
 馬酔木	あせび	n	1	마취목				u	b	
 足踏み	あしぶみ	n	1	제자리 걸음				u	w	
-足元	あしもと	n	1	발밑				u	b	
-足元	あしもと	n	2	발걸음				u	b	
-足元	あしもと	n	3	주변				u	b	
-足元	あしもと	n	4	발 밑				u	b	
-足元	あしもと	n	5	눈앞				u	b	
 あしらい	あしらい	n	1	취급				u	b	
 紫陽花	あじさい	n	1	수국				u	wl	
 紫陽花	あじさい	n	2	자양화				u	b	
@@ -228,13 +211,9 @@ ttt		n	1	ttt				u	b
 仇	あだ	n	2	구				u	b	
 仇討ち	あだうち	n	1	복수				u	wl	
 仇討ち	あだうち	n	2	구토				u	b	
-渾名	あだな	n	1	별명				u	wl	
-渾名	あだな	n	2	헛소문				u	b	
 徒情け	あだなさけ	n	1	풋사랑				u	w	
 徒花	あだばな	n	1	열매 없는 꽃				u	b	
 徒花	あだばな	n	2	열매없는 꽃				u	b	
-彼方此方	あちらこちら	n	1	여기저기				u	b	
-彼方此方	あちらこちら	n	2	이곳 저곳				u	b	
 阿茶羅	あちゃら	n	1	아차라				u	b	
 あちゃらか	あちゃらか	n	1	익살극				u	b	
 彼方側	あちらがわ	n	1	저쪽편				u	b	
@@ -357,9 +336,6 @@ ttt		n	1	ttt				u	b
 編目	あみめ	n	2	그물코				u	b	
 編み物	あみもの	n	1	뜨개질				u	w	
 編み物	あみもの	n	2	편물				u	b	
-飴	あめ	n	1	엿				u	b	
-飴	あめ	n	2	사탕				u	b	
-飴	あめ	n	3	이				u	b	
 天地	あめつち	n	1	천지			name=+	u	b	
 雨降り	あめふり	n	1	강우				u	w	
 雨降り	あめふり	n	2	비				u	w	
@@ -392,11 +368,8 @@ ttt		n	1	ttt				u	b
 粗削り	あらけずり	n	3	손질을 덜하다				u	b	
 粗削り	あらけずり	n	4	거칠게 깎기				u	b	
 粗捜し	あらさがし	n	1	흠 꼬집기				u	b	
-嵐	あらし	n	1	폭풍우			name=+ cls=@weather	u	b	
-嵐	あらし	n	2	람				u	b	
 粗筋	あらすじ	n	1	줄거리				u	wl	
 粗筋	あらすじ	n	2	개요				u	w	
-争い	あらそい	n	1	분쟁				u	b	
 あらまし	あらまし	n	1	대강				u	b	
 霰	あられ	n	1	뻥튀기				u	b	
 霰	あられ	n	2	싸라기눈				u	b	
@@ -453,7 +426,7 @@ ttt		n	1	ttt				u	b
 餡こ	あんこ	n	1	소				u	w	
 餡こ	あんこ	n	2	속				u	wl	
 餡こ	あんこ	n	3	팥소				u	b	
-行灯	あんどん	n	1	호롱				u	b	
+行灯	あんどん	n	1	호롱			cls=@lighting	u	b	
 行灯	あんどん	n	2	사방등				u	b	
 行灯	あんどん	n	3	행등				u	b	
 塩梅	あんばい	n	1	적당히 처리함				u	b	
@@ -482,8 +455,6 @@ ttt		n	1	ttt				u	b
 言い回し	いいまわし	n	1	표현				u	w	
 言い回し	いいまわし	n	2	말표현				u	b	
 言い回し	いいまわし	n	3	말솜씨				u	b	
-言い訳	いいわけ	n	1	변명				u	b	
-言い訳	いいわけ	n	2	할 말				u	b	
 庵	いおり	n	1	암자			name=+	u	b	
 斑鳩	いかる	n	1	화내다				u	b	
 斑鳩	いかる	n	2	묻히다				u	b	
@@ -526,8 +497,6 @@ ttt		n	1	ttt				u	b
 行き来	いきき	n	1	왕래				u	b	
 経緯	いきさつ	n	1	경위			cls=@info	u	b	
 憤り	いきどおり	n	1	분노			cls=@emotion	u	b	
-生き物	いきもの	n	1	생물				u	b	
-生き物	いきもの	n	2	산 것				u	b	
 いきれ	いきれ	n	1	무더위				u	b	
 生き別れ	いきわかれ	n	1	생이별				u	b	
 戦	いくさ	n	1	전쟁				u	b	
@@ -601,7 +570,6 @@ ttt		n	1	ttt				u	b
 一押し	いちおし	n	2	강추				u	b	
 一押し	いちおし	n	3	추천				u	b	
 一概	いちがい	n	1	한 마디로	next=に			u	b	
-苺	いちご	n	1	딸기			name=+ cls=@food	u	b	
 一言	いちごん	n	1	한 마디				u	b	
 イチジク	いちじく	n	1	무화과나무				u	b	
 イチジク	いちじく	n	2	무화과				u	b	
@@ -624,8 +592,6 @@ ttt		n	1	ttt				u	b
 一挙	いっきょ	n	1	일거				u	b	
 一挙	いっきょ	n	2	단번에	next=に			u	b	
 一挙	いっきょ	n	3	한꺼번에	next=に			u	b	
-一斉	いっせい	n	1	일제				u	b	
-一斉	いっせい	n	2	일제히	next=に			u	b	
 一時	いっとき	n	1	동시				u	b	
 一風	いっぷう	n	1	색다른 격식				u	b	
 一風	いっぷう	n	2	풍격				u	b	
@@ -672,10 +638,6 @@ ttt		n	1	ttt				u	b
 茨	いばら	n	3	형				u	b	
 鼾	いびき	n	1	코골이				u	wl	
 鼾	いびき	n	2	코골기				u	b	
-今頃	いまごろ	n	1	이제				u	b	
-今頃	いまごろ	n	2	지금쯤				u	b	
-今頃	いまごろ	n	3	지금 쯤				u	b	
-今頃	いまごろ	n	4	이맘때				u	b	rule:440 +unmapped
 戒め	いましめ	n	1	훈계				u	b	
 今時	いまどき	n	1	요즘				u	wl	
 今時	いまどき	n	2	요즈음				u	b	
@@ -732,11 +694,6 @@ ttt		n	1	ttt				u	b
 鰯	いわし	n	2	약				u	b	
 岩清水	いわしみず	n	1	석간수			name=+	u	b	
 鰯雲	いわしぐも	n	1	조개구름				u	w	
-岩	いわ	n	1	바위				u	w	
-岩	いわ	n	2	암				u	b	
-岩	いわ	n	3	엄				u	b	
-岩	いわ	n	4	반				u	b	
-岩	いわ	n	5	바위 문	next=と			u	b	
 謂れ	いわれ	n	1	까닭				u	b	
 慇懃	いんぎん	n	1	정중하다				u	b	
 慇懃	いんぎん	n	2	정중				u	b	
@@ -770,8 +727,6 @@ ttt		n	1	ttt				u	b
 受け持ち	うけもち	n	1	담당함				u	w	
 受け持ち	うけもち	n	2	담당				u	b	
 憂さ	うさ	n	1	근심				u	b	
-兎	うさぎ	n	1	토끼			name=+	u	b	
-兎	うさぎ	n	2	토				u	b	
 丑	うし	n	1	소				u	b	
 丑	うし	n	2	충치				u	b	
 丑	うし	n	3	축				u	b	
@@ -833,7 +788,7 @@ ttt		n	1	ttt				u	b
 現	うつつ	n	1	제 정신			name=+	u	b	
 現	うつつ	n	2	현				u	b	
 現	うつつ	n	3	생시				u	b	
-うつ伏せ	うつぶせ	n	1	엎드려	next=で			u	b	
+うつ伏せ	うつぶせ	n	1	엎드려	next=で		cls=@stance	u	b	
 うつ伏せ	うつぶせ	n	2	엎드려	next=に			u	b	
 うつ伏せ	うつぶせ	n	3	엎드린	next=の			u	b	
 うつ伏せ寝	うつぶせね	n	1	엎드려 자기				u	w	
@@ -850,7 +805,7 @@ ttt		n	1	ttt				u	b
 独活	うど	n	1	두릅				u	b	
 鰻上り	うなぎのぼり	n	1	급격한 상승				u	w	
 鰻上り	うなぎのぼり	n	2	상승				u	b	
-項	うなじ	n	1	목덜미				u	b	
+項	うなじ	n	1	목덜미			cls=@body	u	b	
 海原	うなばら	n	1	넓은 바다			name=+	u	b	
 海原	うなばら	n	2	창해				u	b	
 唸り	うなり	n	1	신음소리				u	b	
@@ -899,7 +854,6 @@ ttt		n	1	ttt				u	b
 羽毛	うもう	n	1	깃털				u	b	
 うら	うら	n	1	안				u	b	
 裏表	うらおもて	n	1	표리				u	b	
-裏切り	うらぎり	n	1	배반				u	b	
 裏口	うらぐち	n	1	뒷문				u	b	
 末成り	うらなり	n	1	끝물				u	w	
 裏町	うらまち	n	1	뒷거리				u	b	
@@ -933,7 +887,6 @@ ttt		n	1	ttt				u	b
 鱗	うろこ	n	1	비늘				u	b	
 鱗	うろこ	n	2	린				u	b	
 鱗雲	うろこぐも	n	1	비늘 구름				u	w	
-浮気	うわき	n	1	바람기				u	b	
 譫言	うわごと	n	1	헛소리				u	w	
 譫言	うわごと	n	2	헛말				u	b	
 上澄み	うわずみ	n	1	윗물				u	b	
@@ -947,14 +900,8 @@ ttt		n	1	ttt				u	b
 蘊蓄	うんちく	n	3	온축				u	b	
 云々	うんぬん	n	1	운운				u	b	
 迂回	うかい	n	1	우회				u	b	
-永遠	えいえん	n	1	영원하다				u	b	
-永遠	えいえん	n	2	영원				u	b	
-永遠	えいえん	n	3	영원히	next=に			u	b	
 靨	えくぼ	n	1	보조개				u	b	
 依怙	えこ	n	1	불공평				u	b	
-餌	えさ	n	1	먹이			cls=@food	u	b	
-餌	えさ	n	2	이				u	b	
-餌	えさ	n	3	미끼				u	b	
 餌食	えじき	n	1	먹이				u	b	
 穢多	えた	n	1	천민				u	b	
 枝豆	えだまめ	n	1	풋콩				u	b	
@@ -963,7 +910,7 @@ ttt		n	1	ttt				u	b
 絵の具	えのぐ	n	1	물감			cls=@dirt	u	b	
 絵の具	えのぐ	n	2	그림도구				u	b	
 絵の具	えのぐ	n	3	그림물감				u	b	
-蝦	えび	n	1	새우				u	b	
+蝦	えび	n	1	새우			cls=@animal	u	b	
 蝦	えび	n	2	하				u	b	
 恵比須顔	えびすがお	n	1	싱글벙글 웃는 얼굴				u	w	
 海老天	えびてん	n	1	새우 튀김				u	b	
@@ -991,8 +938,6 @@ ttt		n	1	ttt				u	b
 エンジェル	えんじぇる	n	1	엔젤			name=+	u	b	
 エンジェル	えんじぇる	n	2	엔젤스				u	c+b	from-names
 エンジェル	えんじぇる	n	3	로스앤젤레스 에인절스				u	c+np	from-names
-エンジン	えんじん	n	1	연기와 먼지			name=+ cls=@machine	u	b	
-エンジン	えんじん	n	2	엔진				u	b	
 煙突	えんとつ	n	1	굴뚝				u	b	
 円安	えんやす	n	1	엔화 약세				u	b	
 円安	えんやす	n	2	엔저				u	b	
@@ -1021,9 +966,6 @@ ttt		n	1	ttt				u	b
 大慌て	おおあわて	n	2	매우 당황하다				u	w	
 大慌て	おおあわて	n	3	몹시 당황하며	next=で			u	b	
 覆い	おおい	n	1	덮개				u	b	
-狼	おおかみ	n	1	이리				u	b	
-狼	おおかみ	n	2	늑대				u	b	
-狼	おおかみ	n	3	랑				u	b	
 大熊	おおぐま	n	1	큰 곰			name=+	u	b	
 大事	おおごと	n	1	큰일				u	wl	
 大空	おおぞら	n	1	하늘			name=+	u	wl	
@@ -1085,13 +1027,9 @@ ttt		n	1	ttt				u	b
 奥方	おくがた	n	1	부인				u	wl	
 奥方	おくがた	n	2	영부인				u	b	
 奥方	おくがた	n	3	마님				u	b	
-屋上	おくじょう	n	1	옥상				u	b	
 奥手	おくて	n	1	늦벼				u	b	
 奥手	おくて	n	2	숙맥				u	b	
 噯気	おくび	n	1	트림				u	w	
-臆病	おくびょう	n	1	겁이 많다				u	w	
-臆病	おくびょう	n	2	겁쟁이				u	b	
-臆病	おくびょう	n	3	겁이 많음				u	b	
 臆面	おくめん	n	1	염치				u	b	
 臆面	おくめん	n	2	주눅				u	b	
 奥行き	おくゆき	n	1	안길이				u	b	
@@ -1113,8 +1051,6 @@ ttt		n	1	ttt				u	b
 驕り	おごり	n	3	교만				u	b	
 驕り	おごり	n	4	사치				u	b	
 幼心	おさなごころ	n	1	어린 마음				u	w	
-幼馴染み	おさななじみ	n	1	소꿉친구				u	wl	
-幼馴染み	おさななじみ	n	2	소꼽 친구				u	b	
 収まり	おさまり	n	1	수습				u	b	
 収まり	おさまり	n	2	해결				u	b	
 御座形	おざなり	n	1	무성의하다				u	w	
@@ -1197,18 +1133,16 @@ ttt		n	1	ttt				u	b
 脅かし	おどかし	n	2	협박				u	b	
 おどけ	おどけ	n	1	익살				u	b	
 踊り子	おどりこ	n	1	무희				u	b	
-驚き	おどろき	n	1	놀람				u	b	
+驚き	おどろき	n	1	놀람			cls=@emotion	u	b	
 驚き	おどろき	n	2	경				u	b	
 驚き	おどろき	n	3	놀라움				u	b	
 同い年	おないどし	n	1	동갑				u	b	
 おなら	おなら	n	1	방귀				u	b	
-御握り	おにぎり	n	1	주먹밥				u	b	
 鬼ごっこ	おにごっこ	n	1	술래잡기				u	b	
 鬼百合	おにゆり	n	1	참나리				u	b	
 お主	おぬし	n	1	그대				u	wl	
 お主	おぬし	n	2	너				u	b	
 御寝しょ	おねしょ	n	1	야뇨				u	b	
-各々	おのおの	n	1	각각				u	wl	
 御萩	おはぎ	n	1	인절미				u	b	
 御箱	おはこ	n	1	십팔번				u	w	
 御箱	おはこ	n	2	특기				u	b	
@@ -1249,7 +1183,7 @@ ttt		n	1	ttt				u	b
 趣	おもむき	n	1	취지				u	wl	
 趣	おもむき	n	2	모습				u	wl	
 趣	おもむき	n	3	정취				u	wl	
-面持ち	おももち	n	1	표정				u	wl	
+面持ち	おももち	n	1	표정			cls=@expression	u	wl	
 面持ち	おももち	n	2	용모				u	b	
 重り	おもり	n	1	추				u	b	
 思惑	おもわく	n	1	생각				u	b	
@@ -1257,7 +1191,6 @@ ttt		n	1	ttt				u	b
 慮り	おもんぱかり	n	1	생각				u	b	
 親方	おやかた	n	1	우두머리				u	wl	
 親方	おやかた	n	2	오야카타				u	b	rule:1767 +unmapped
-御八つ	おやつ	n	1	간식				u	x	
 親指	おやゆび	n	1	엄지			cls=@hand	u	w	
 折	おり	n	1	우리				u	b	
 折	おり	n	2	때				u	b	
@@ -1366,26 +1299,13 @@ ttt		n	1	ttt				u	b
 海底	かいてい	n	1	해저				u	b	
 海底	かいてい	n	2	개정				u	b	
 海底	かいてい	n	3	입문서				u	b	
-快適	かいてき	n	1	쾌적하다				u	b	
-快適	かいてき	n	2	쾌적				u	b	
 回転	かいてん	n	1	회전			cls=@motion	u	b	
 回転	かいてん	n	2	개점				u	b	
-回答	かいとう	n	1	회답				u	b	
-回答	かいとう	n	2	해답				u	b	
-回答	かいとう	n	3	잘 드는 칼				u	b	
-回答	かいとう	n	4	괴도				u	b	
-回答	かいとう	n	5	회장				u	b	
-回答	かいとう	n	6	쾌투				u	b	
-回答	かいとう	n	7	해동				u	b	
-回答	かいとう	n	8	당을 해산				u	b	
 街道	かいどう	n	1	회동				u	b	
 街道	かいどう	n	2	가도				u	b	
 街道	かいどう	n	3	회관				u	b	
 垣入	かいにゅう	n	1	개입				u	b	
 飼い猫	かいねこ	n	1	집고양이				u	wl	
-回復	かいふく	n	1	회복			cls=@trend	u	b	
-回復	かいふく	n	2	쾌유				u	b	
-回復	かいふく	n	3	개복				u	b	
 開物	かいぶつ	n	1	괴물				u	b	
 回文	かいぶん	n	1	회문				u	w	
 回文	かいぶん	n	2	회분				u	b	
@@ -1630,7 +1550,7 @@ ttt		n	1	ttt				u	b
 可聴	かちょう	n	4	꽃과 새				u	b	
 可聴	かちょう	n	5	가초				u	b	
 脚気	かっけ	n	1	각기				u	b	
-喝采	かっさい	n	1	갈채			cls=@sound	u	b	
+喝采	かっさい	n	1	갈채			cls=@sound|@shout	u	b	
 合戦	かっせん	n	1	전투				u	b	
 合戦	かっせん	n	2	교전				u	b	
 合戦	かっせん	n	3	밸브				u	b	
@@ -1722,7 +1642,6 @@ ttt		n	1	ttt				u	b
 上下	かみしも	n	1	상하				u	b	
 剃刀	かみそり	n	1	면도기				u	w	
 剃刀	かみそり	n	2	면도칼				u	b	
-髪の毛	かみのけ	n	1	머리카락			cls=@hair	u	b	
 噛み合い	かみあい	n	1	서로 물어 뜯기				u	b	
 噛み合い	かみあい	n	2	싸움				u	b	
 亀の子	かめのこ	n	1	거북이 새끼				u	b	
@@ -1883,11 +1802,9 @@ ttt		n	1	ttt				u	b
 観測	かんそく	n	1	관측				u	b	
 肝臓	かんぞう	n	1	간				u	b	
 肝臓	かんぞう	n	2	간장				u	b	
-勘違い	かんちがい	n	1	착각하다				u	b	
-勘違い	かんちがい	n	2	착각				u	b	
 姦通	かんつう	n	1	간통				u	b	
 姦通	かんつう	n	2	관통				u	b	
-缶詰め	かんづめ	n	1	통조림				u	w	
+缶詰め	かんづめ	n	1	통조림			cls=@bottle	u	w	
 寒天	かんてん	n	1	한천				u	b	
 寒天	かんてん	n	2	관점				u	b	
 勘当	かんどう	n	1	의절				u	b	
@@ -1903,11 +1820,8 @@ ttt		n	1	ttt				u	b
 疳の虫	かんのむし	n	2	감충				u	wl	
 疳の虫	かんのむし	n	3	짜증				u	b	
 顔ばせ	かおばせ	n	1	안색				u	b	
-看板	かんばん	n	1	간반				u	w	
-看板	かんばん	n	2	간판				u	b	
 関白	かんぱく	n	1	관백				u	b	
 甲板	かんぱん	n	1	갑판				u	b	
-看病	かんびょう	n	1	간병			cls=@task	u	b	
 干瓢	かんぴょう	n	1	박고지				u	b	
 干瓢	かんぴょう	n	2	간표				u	b	
 勘弁	かんべん	n	1	용서				u	b	
@@ -1929,9 +1843,6 @@ ttt		n	1	ttt				u	b
 灌水	かんすい	n	1	관수				u	b	
 涵養	かんよう	n	1	함양				u	b	
 箇国	かこく	n	1	개국				u	wl	
-箇所	かしょ	n	1	군데				u	w	
-箇所	かしょ	n	2	부분				u	w	
-箇所	かしょ	n	3	곳				u	b	rule:4981 +unmapped
 か行	かぎょう	n	1	카행				u	b	
 骸骨	がいこつ	n	1	해골				u	w	
 碍子	がいし	n	1	애자				u	w	
@@ -2028,10 +1939,6 @@ ttt		n	1	ttt				u	b
 傷跡	きずあと	n	2	상처 자국				u	w	
 傷跡	きずあと	n	3	상처자국				u	b	
 傷跡	きずあと	n	4	흉터				u	b	
-絆	きずな	n	1	유대			name=+	u	wl	
-絆	きずな	n	2	인연				u	b	
-絆	きずな	n	3	정				u	b	
-絆	きずな	n	4	반				u	b	
 着せ替え	きせかえ	n	1	갈아입히기				u	w	
 北風	きたかぜ	n	1	북풍			cls=@wind	u	b	
 着丈	きたけ	n	1	옷기장				u	b	
@@ -2054,8 +1961,6 @@ ttt		n	1	ttt				u	b
 生っ粋	きっすい	n	4	진짜	next=の			u	b	
 吃音	きつおん	n	1	말더듬이				u	b	
 啄木鳥	きつつき	n	1	딱따구리				u	wl	
-狐	きつね	n	1	여우				u	b	
-狐	きつね	n	2	호				u	b	
 狐火	きつねび	n	1	도깨비불				u	w	
 狐色	きつねいろ	n	1	갈색				u	w	
 狐色	きつねいろ	n	2	옅은 갈색				u	b	
@@ -2081,7 +1986,7 @@ ttt		n	1	ttt				u	b
 肝っ玉	きもったま	n	2	담력				u	b	
 客席	きゃくせき	n	1	객석				u	b	
 脚立	きゃたつ	n	1	접사다리			cls=@furniture	u	b	
-彼奴	きゃつ	n	1	그 놈				u	b	
+彼奴	きゃつ	n	1	그 놈			cls=@person	u	b	
 九官	きゅうかん	n	1	위급 환자				u	b	
 九官	きゅうかん	n	2	휴간				u	b	
 九官	きゅうかん	n	3	휴관				u	b	
@@ -2108,7 +2013,7 @@ ttt		n	1	ttt				u	b
 狭隘	きょうあい	n	1	협애하다				u	w	
 狭隘	きょうあい	n	2	협소				u	b	
 窮陰	きょういん	n	1	교사				u	b	
-驚愕	きょうがく	n	1	경악				u	w	
+驚愕	きょうがく	n	1	경악			cls=@emotion	u	w	
 驚愕	きょうがく	n	2	공학				u	b	
 驚愕	きょうがく	n	3	교육과 학문				u	b	
 競技	きょうぎ	n	1	경기				u	b	
@@ -2121,10 +2026,6 @@ ttt		n	1	ttt				u	b
 驕奢	きょうしゃ	n	1	교사				u	b	
 驕奢	きょうしゃ	n	2	유곽				u	b	
 驕奢	きょうしゃ	n	3	강자				u	b	
-恐縮	きょうしゅく	n	1	송구스럽다				u	b	
-恐縮	きょうしゅく	n	2	황송하다				u	b	
-恐縮	きょうしゅく	n	3	공축				u	b	
-恐縮	きょうしゅく	n	4	송구스럽게	next=に			u	b	
 狭小	きょうしょう	n	1	협소				u	b	
 狭小	きょうしょう	n	2	협상				u	b	
 教授	きょうじゅ	n	1	교수				u	b	
@@ -2133,10 +2034,6 @@ ttt		n	1	ttt				u	b
 強靭	きょうじん	n	2	강인하다				u	b	
 強靭	きょうじん	n	3	광인				u	b	
 教祖	きょうそ	n	1	교조				u	b	
-競争	きょうそう	n	1	경쟁				u	b	
-競争	きょうそう	n	2	경주				u	b	
-競争	きょうそう	n	3	미친 듯이 소란함				u	b	
-競争	きょうそう	n	4	강장				u	b	
 怯懦	きょうだ	n	1	겁약				u	b	
 怯懦	きょうだ	n	2	강타				u	b	
 狭長	きょうちょう	n	1	협장				u	b	
@@ -2280,7 +2177,7 @@ ttt		n	1	ttt				u	b
 食い物	くいもの	n	4	희생물				u	b	
 空虚	くうきょ	n	1	공허하다				u	b	
 空虚	くうきょ	n	2	공허				u	b	
-空襲	くうしゅう	n	1	공습				u	b	
+空襲	くうしゅう	n	1	공습			cls=@incident	u	b	
 空中	くうちゅう	n	1	공중				u	b	
 空白	くうはく	n	1	공백				u	b	
 枸櫞	くえん	n	1	구원				u	b	
@@ -2305,7 +2202,7 @@ ttt		n	1	ttt				u	b
 草花	くさばな	n	3	초화				u	c+np	from-names
 楔	くさび	n	1	쐐기				u	b	
 草笛	くさぶえ	n	1	풀피리			name=+	u	b	
-草叢	くさむら	n	1	풀숲				u	wl	
+草叢	くさむら	n	1	풀숲			cls=@nature	u	wl	
 嚔	くしゃみ	n	1	재채기			cls=@body.output	u	b	
 くさや	くさや	n	1	초가집				u	b	
 櫛	くし	n	1	꼬치				u	b	
@@ -2350,7 +2247,7 @@ ttt		n	1	ttt				u	b
 草臥れ儲け	くたびれもうけ	n	1	헛수고				u	b	
 管	くだ	n	1	관			name=+	u	b	
 果物屋	くだものや	n	1	과일 가게				u	b	
-件	くだり	n	1	내려감			cls=@topic	u	b	
+件	くだり	n	1	내려감			cls=@topic|@counter	u	b	
 口移し	くちうつし	n	1	구전				u	b	
 口移し	くちうつし	n	2	말의 흉내				u	b	
 口々	くちぐち	n	1	각각				u	b	
@@ -2363,8 +2260,6 @@ ttt		n	1	ttt				u	b
 嘴	くちばし	n	1	부리				u	w	
 嘴	くちばし	n	2	주둥이				u	w	
 口髭	くちひげ	n	1	콧수염				u	b	
-唇	くちびる	n	1	입술			cls=@body	u	b	
-唇	くちびる	n	2	순				u	b	
 口笛	くちぶえ	n	1	휘파람				u	w	
 口紅	くちべに	n	1	립스틱			cls=@cosmetic|@dirt	u	w	
 口紅	くちべに	n	2	루즈				u	b	
@@ -2384,10 +2279,9 @@ ttt		n	1	ttt				u	b
 国境	くにざかい	n	1	국경				u	w	
 首飾り	くびかざり	n	1	목걸이				u	b	
 軛	くびき	n	1	멍에				u	b	
-首筋	くびすじ	n	1	목덜미				u	b	
+首筋	くびすじ	n	1	목덜미			cls=@body	u	b	
 首吊り	くびつり	n	1	목을 매달아 자살				u	b	
 首吊り	くびつり	n	2	교수				u	b	
-工夫	くふう	n	1	궁리				u	b	
 窪地	くぼち	n	1	허방				u	w	
 窪地	くぼち	n	2	웅덩이				u	b	
 隈取り	くまどり	n	1	청홍분장				u	b	
@@ -2410,10 +2304,6 @@ ttt		n	1	ttt				u	b
 暗がり	くらがり	n	1	어둠				u	b	
 暗がり	くらがり	n	2	어둠 속				u	b	
 海月	くらげ	n	1	해파리				u	b	
-暮らし	くらし	n	1	일상 생활				u	b	
-暮らし	くらし	n	2	살림				u	b	
-暮らし	くらし	n	3	생활				u	b	
-暮らし	くらし	n	4	생활의	next=の			u	b	
 暮らし向き	くらしむき	n	1	형편				u	w	
 暮らし向き	くらしむき	n	2	살림살이				u	b	
 比べ	くらべ	n	1	비교				u	b	
@@ -2494,7 +2384,6 @@ ttt		n	1	ttt				u	b
 蛍光	けいこう	n	2	휴대				u	b	
 蛍光	けいこう	n	3	경구				u	b	
 蛍光	けいこう	n	4	경향				u	b	
-計算	けいさん	n	1	계산				u	b	
 形式	けいしき	n	1	형식				u	b	
 傾斜	けいしゃ	n	1	경사				u	b	
 継承	けいしょう	n	1	계승				u	b	
@@ -2573,12 +2462,7 @@ ttt		n	1	ttt				u	b
 潔癖	けっぺき	n	1	결벽하다				u	b	
 潔癖	けっぺき	n	2	결벽				u	b	
 結合	けつごう	n	1	결합				u	b	
-結論	けつろん	n	1	결론			cls=@result	u	b	
 蹴爪	けづめ	n	1	며느리발톱				u	b	
-気配	けはい	n	1	기색			cls=@sign	u	b	
-煙	けむり	n	1	내색			cls=@light	u	b	
-煙	けむり	n	2	연기				u	b	
-煙	けむり	n	3	연				u	b	
 蹴鞠	けまり	n	1	축구				u	b	
 蹴鞠	けまり	n	2	축국				u	b	
 獣	けもの	n	1	짐승				u	wl	
@@ -2666,7 +2550,7 @@ ttt		n	1	ttt				u	b
 げっぷ	げっぷ	n	1	트림				u	b	
 下手物	げてもの	n	1	별난것				u	w	
 下手物	げてもの	n	2	조잡한 물건				u	b	
-限界	げんかい	n	1	한계				u	b	
+限界	げんかい	n	1	한계			cls=@endpoint	u	b	
 限界	げんかい	n	2	경계				u	b	
 限界	げんかい	n	3	겐카이				u	b	
 玄宮	げんきゅう	n	1	언급				u	b	
@@ -2690,8 +2574,6 @@ ttt		n	1	ttt				u	b
 原料	げんりょう	n	1	원료				u	b	
 原料	げんりょう	n	2	감량				u	b	
 鯉こく	こいこく	n	1	잉어 된장국				u	w	
-子犬	こいぬ	n	1	강아지				u	w	
-子犬	こいぬ	n	2	작은 개				u	wl	
 鯉幟	こいのぼり	n	1	코이노보리				u	b	
 鯉幟	こいのぼり	n	2	잉어 드림				u	b	
 鯉口	こいぐち	n	1	칼집 아가리				u	b	
@@ -2715,10 +2597,6 @@ ttt		n	1	ttt				u	b
 高級	こうきゅう	n	3	높은 급료				u	b	
 高級	こうきゅう	n	4	후궁				u	b	
 高級	こうきゅう	n	5	고위급				u	b	
-光景	こうけい	n	1	광경				u	b	
-光景	こうけい	n	2	구경				u	b	
-光景	こうけい	n	3	후계				u	b	
-光景	こうけい	n	4	고위 고관				u	b	
 貢献	こうけん	n	1	공헌				u	b	
 貢献	こうけん	n	2	후견인				u	b	
 貢献	こうけん	n	3	고견				u	b	
@@ -2819,11 +2697,6 @@ ttt		n	1	ttt				u	b
 紅梅	こうばい	n	3	경사				u	b	
 紅梅	こうばい	n	4	붉은 매화				u	b	
 紅梅	こうばい	n	5	공매				u	b	
-幸福	こうふく	n	1	행복하다				u	b	
-幸福	こうふく	n	2	행복				u	b	
-幸福	こうふく	n	3	항복				u	b	
-興奮	こうふん	n	1	흥분			cls=@emotion	u	b	
-興奮	こうふん	n	2	화장				u	b	
 好物	こうぶつ	n	1	좋아하는 것				u	b	
 好物	こうぶつ	n	2	광물				u	b	
 好物	こうぶつ	n	3	좋아하는 음식				u	b	
@@ -2871,7 +2744,6 @@ ttt		n	1	ttt				u	b
 木枯らし	こがらし	n	3	초겨울의 찬바람				u	b	
 小刻み	こきざみ	n	1	조금씩				u	b	
 小刻み	こきざみ	n	2	잘게 썲				u	b	
-呼吸	こきゅう	n	1	호흡				u	b	
 酷薄	こくはく	n	1	각박하다				u	b	
 酷薄	こくはく	n	2	고백				u	b	
 穀類	こくるい	n	1	곡류				u	b	
@@ -2940,11 +2812,9 @@ ttt		n	1	ttt				u	b
 滑稽	こっけい	n	1	우스꽝스러움				u	wl	
 滑稽	こっけい	n	2	골계				u	b	
 滑稽	こっけい	n	3	해학				u	b	
-骨折	こっせつ	n	1	골절				u	b	
 骨董	こっとう	n	1	골동품				u	b	
 骨董	こっとう	n	2	골동				u	b	
-こつ	こつ	n	1	요령				u	b	
-小遣い	こづかい	n	1	용돈			cls=@reward	u	b	
+こつ	こつ	n	1	요령			cls=@skill	u	b	
 小槌	こづち	n	1	작은 망치				u	b	
 小包み	こづつみ	n	1	소포				u	b	
 事柄	ことがら	n	1	사항			cls=@topic	u	b	
@@ -2956,9 +2826,6 @@ ttt		n	1	ttt				u	b
 事始め	ことはじめ	n	2	착수				u	b	
 言葉付き	ことばつき	n	1	말투				u	b	
 言葉付き	ことばつき	n	2	말버릇				u	b	
-言葉遣い	ことばづかい	n	1	말씨				u	b	
-言葉遣い	ことばづかい	n	2	표현				u	b	
-言葉遣い	ことばづかい	n	3	말투				u	b	
 寿	ことぶき	n	1	축수				u	b	
 寿	ことぶき	n	2	수				u	b	
 寿	ことぶき	n	3	장수				u	b	
@@ -3110,7 +2977,6 @@ ttt		n	1	ttt				u	b
 ごまめ	ごまめ	n	1	마른 멸치 새끼				u	b	
 塵溜め	ごみため	n	1	쓰레기장				u	w	
 塵溜め	ごみため	n	2	쓰레기통				u	b	
-塵箱	ごみばこ	n	1	쓰레기통				u	b	
 鮴	ごり	n	1	독중개				u	b	
 御霊	ごりょう	n	1	오료				u	b	
 御霊	ごりょう	n	2	능				u	b	
@@ -3128,7 +2994,6 @@ ttt		n	1	ttt				u	b
 柵	さく	n	3	울타리				u	b	
 柵	さく	n	4	책				u	b	
 柵	さく	n	5	피다				u	b	rule:3572 +unmapped
-最悪	さいあく	n	1	최악				u	b	
 災害	さいがい	n	1	재해			cls=@incident	u	b	
 採掘	さいくつ	n	1	채굴				u	b	
 際限	さいげん	n	1	끝				u	b	
@@ -3145,15 +3010,8 @@ ttt		n	1	ttt				u	b
 最前	さいぜん	n	2	최선				u	b	
 催促	さいそく	n	1	재촉				u	b	
 催促	さいそく	n	2	세칙				u	b	
-最中	さいちゅう	n	1	도중				u	wl	
-最中	さいちゅう	n	2	한중간				u	b	
-最中	さいちゅう	n	3	한창				u	b	
 才槌	さいづち	n	1	나무망치				u	b	
 才槌	さいづち	n	2	나무 망치				u	b	
-最低	さいてい	n	1	최저				u	b	
-最低	さいてい	n	2	최악이다				u	b	
-最低	さいてい	n	3	재정				u	b	
-才能	さいのう	n	1	재능				u	b	
 采配	さいはい	n	1	지휘봉				u	b	
 采配	さいはい	n	2	지휘				u	b	
 采配	さいはい	n	3	재배				u	b	
@@ -3183,7 +3041,7 @@ ttt		n	1	ttt				u	b
 逆様	さかさま	n	2	역상				u	b	
 逆様	さかさま	n	3	역				u	b	
 逆さ睫	さかさまつげ	n	1	안쪽 속눈썹				u	w	
-杯	さかずき	n	1	술잔				u	b	
+杯	さかずき	n	1	술잔			cls=@tableware	u	b	
 杯	さかずき	n	2	배				u	b	
 杯	さかずき	n	3	잔				u	b	
 逆捩じ	さかねじ	n	1	역 나사				u	w	
@@ -3331,7 +3189,7 @@ ttt		n	1	ttt				u	b
 早蕨	さわらび	n	1	새싹 나온 고사리			name=+	u	b	
 触り	さわり	n	1	감촉				u	b	
 触り	さわり	n	2	촉감				u	b	
-三角	さんかく	n	1	삼각			name=+	u	b	
+三角	さんかく	n	1	삼각			name=+ cls=@figure	u	b	
 産業	さんぎょう	n	1	산업				u	b	
 産業	さんぎょう	n	2	찬앙				u	b	
 参考	さんこう	n	1	참고				u	b	
@@ -3345,7 +3203,7 @@ ttt		n	1	ttt				u	b
 山椒	さんしょう	n	5	저녁놀				u	b	
 山水	さんすい	n	1	산수				u	b	
 山水	さんすい	n	2	살수				u	b	
-算数	さんすう	n	1	산수				u	b	
+算数	さんすう	n	1	산수			cls=@subject.school	u	b	
 桟橋	さんばし	n	1	잔교				u	b	
 桟橋	さんばし	n	2	부두				u	b	
 散髪	さんぱつ	n	1	이발				u	wl	
@@ -3464,7 +3322,6 @@ ttt		n	1	ttt				u	b
 滴	しずく	n	2	물방울				u	b	
 滴	しずく	n	3	적				u	b	
 滴	しずく	n	4	우				u	b	
-支度	したく	n	1	준비			cls=@readiness	u	b	
 舌先	したさき	n	1	혀끝			cls=@body	u	b	
 舌舐り	したなめずり	n	1	입맛 다심				u	wl	
 舌舐り	したなめずり	n	2	군침 흘림				u	wl	
@@ -3491,14 +3348,12 @@ ttt		n	1	ttt				u	b
 質素	しっそ	n	2	검소				u	b	
 失踪	しっそう	n	1	실종				u	b	
 失踪	しっそう	n	2	질주				u	b	
-嫉妬	しっと	n	1	질투			cls=@emotion	u	b	
 失当	しっとう	n	1	부당하다				u	b	
 失当	しっとう	n	2	부당				u	b	
 失当	しっとう	n	3	집도				u	b	
 失当	しっとう	n	4	실투				u	b	
 竹篦	しっぺい	n	1	팔뚝 맞기				u	b	
 竹篦	しっぺい	n	2	질병				u	b	
-尻尾	しっぽ	n	1	꼬리			cls=@body	u	b	
 七宝	しっぽう	n	1	칠보			name=+	u	b	
 仕付け	しつけ	n	1	훈육				u	wl	
 仕付け	しつけ	n	2	교육				u	b	
@@ -3614,13 +3469,11 @@ ttt		n	1	ttt				u	b
 舅	しゅうと	n	1	시아버지				u	b	
 姑	しゅうとめ	n	1	시어머니				u	b	
 姑	しゅうとめ	n	2	고				u	b	
-収入	しゅうにゅう	n	1	수입				u	b	
 執念	しゅうねん	n	1	집념				u	b	
 執念	しゅうねん	n	2	주년				u	b	
 執念	しゅうねん	n	3	한평생				u	b	
 秀抜	しゅうばつ	n	1	뛰어나다				u	b	
 秀抜	しゅうばつ	n	2	목욕 재계				u	b	
-周辺	しゅうへん	n	1	주변				u	b	
 襲歩	しゅうほ	n	1	보수				u	b	
 秋霖	しゅうりん	n	1	가을 장마				u	b	
 秀麗	しゅうれい	n	1	수려하다				u	b	
@@ -3640,7 +3493,6 @@ ttt		n	1	ttt				u	b
 出世	しゅっせ	n	1	출세				u	b	
 撞木	しゅもく	n	1	당목				u	b	
 撞木	しゅもく	n	2	종목				u	b	
-主役	しゅやく	n	1	주역			cls=@post	u	b	
 腫瘍	しゅよう	n	1	종양				u	b	
 腫瘍	しゅよう	n	2	주요				u	b	
 腫瘤	しゅりゅう	n	1	주류				u	b	
@@ -3662,19 +3514,10 @@ ttt		n	1	ttt				u	b
 障害	しょうがい	n	5	상해				u	b	
 障害	しょうがい	n	6	생애				u	b	
 障害	しょうがい	n	7	장애물				u	b	rule:4705 +unmapped
-正気	しょうき	n	1	제정신			name=+ cls=@faculty|@state	u	b	
-正気	しょうき	n	2	정기				u	b	
-正気	しょうき	n	3	메탄가스				u	b	
-正気	しょうき	n	4	아산화 질소				u	b	
-正気	しょうき	n	5	좋은 기회				u	b	
 焼却	しょうきゃく	n	1	소각				u	b	
 焼却	しょうきゃく	n	2	상환				u	b	
 松琴	しょうきん	n	1	상금			name=+	u	b	
 松琴	しょうきん	n	2	현금				u	b	
-将棋	しょうぎ	n	1	쇼기				u	w	
-将棋	しょうぎ	n	2	장기				u	b	
-将棋	しょうぎ	n	3	성의				u	b	
-将棋	しょうぎ	n	4	창녀				u	b	
 将軍	しょうぐん	n	1	승전				u	b	
 将軍	しょうぐん	n	2	장군				u	b	
 昇降	しょうこう	n	1	승강				u	b	
@@ -3711,7 +3554,6 @@ ttt		n	1	ttt				u	b
 衝突	しょうとつ	n	1	충돌				u	b	
 樟脳	しょうのう	n	1	장뇌				u	b	
 樟脳	しょうのう	n	2	소뇌				u	b	
-商売	しょうばい	n	1	장사				u	b	
 相伴	しょうばん	n	1	동행				u	b	
 小便	しょうべん	n	1	오줌				u	w	
 小便	しょうべん	n	2	소변				u	b	
@@ -3740,7 +3582,6 @@ ttt		n	1	ttt				u	b
 所帯	しょたい	n	2	서체				u	b	
 所帯	しょたい	n	3	제대				u	b	
 触角	しょっかく	n	1	촉각				u	b	
-食器	しょっき	n	1	식기			cls=@tableware	u	b	
 初っ端	しょっぱな	n	1	처음				u	wl	
 初っ端	しょっぱな	n	2	애당초				u	b	
 所得	しょとく	n	1	소득				u	b	
@@ -3776,9 +3617,6 @@ ttt		n	1	ttt				u	b
 尻拭い	しりぬぐい	n	1	뒤처리				u	w	
 尻拭い	しりぬぐい	n	2	뒷치닥거리				u	b	
 尻餅	しりもち	n	1	엉덩방아				u	b	
-資料	しりょう	n	1	자료			cls=@document	u	b	
-資料	しりょう	n	2	사료				u	b	
-資料	しりょう	n	3	죽은 사람의 영혼				u	b	
 尻上がり	しりあがり	n	1	호조				u	b	
 尻切れ	しりきれ	n	1	중단				u	b	
 尻押し	しりおし	n	1	후원				u	b	
@@ -3789,8 +3627,6 @@ ttt		n	1	ttt				u	b
 印	しるし	n	1	표시				u	b	
 印	しるし	n	2	표				u	b	
 印	しるし	n	3	인				u	c+nw	from-names
-素人	しろうと	n	1	아마추어				u	b	
-素人	しろうと	n	2	초보				u	b	
 代掻き	しろかき	n	1	씨레질				u	w	
 銀	しろがね	n	1	은				u	b	
 白熊	しろくま	n	1	백곰				u	w	
@@ -3826,12 +3662,6 @@ ttt		n	1	ttt				u	b
 信金	しんきん	n	2	심근				u	b	
 信金	しんきん	n	3	신용 금고				u	b	
 信金	しんきん	n	4	신금				u	b	
-神経	しんけい	n	1	신경				u	b	
-神経	しんけい	n	2	신계				u	b	
-真剣	しんけん	n	1	진지				u	wl	
-真剣	しんけん	n	2	진지하다				u	b	
-真剣	しんけん	n	3	진검				u	b	
-真剣	しんけん	n	4	친권				u	b	
 森厳	しんげん	n	1	삼엄하다				u	b	
 森厳	しんげん	n	2	삼엄				u	b	
 森厳	しんげん	n	3	진원				u	b	
@@ -3840,8 +3670,6 @@ ttt		n	1	ttt				u	b
 新婚	しんこん	n	2	마음				u	b	
 震災	しんさい	n	1	지진 재해				u	b	
 震災	しんさい	n	2	재해				u	b	
-寝室	しんしつ	n	1	침실			cls=@room	u	b	
-寝室	しんしつ	n	2	심실				u	b	
 斟酌	しんしゃく	n	1	참작				u	b	
 真珠	しんじゅ	n	1	진주			name=+	u	b	
 しん薯	しんじょ	n	1	신조				u	b	
@@ -3865,14 +3693,6 @@ ttt		n	1	ttt				u	b
 真俗	しんぞく	n	2	친족				u	b	
 真鍮	しんちゅう	n	1	심중				u	b	
 真鍮	しんちゅう	n	2	놋쇠				u	b	
-慎重	しんちょう	n	1	신중하다				u	b	
-慎重	しんちょう	n	2	신중				u	b	
-慎重	しんちょう	n	3	신장				u	b	
-慎重	しんちょう	n	4	신조				u	b	
-慎重	しんちょう	n	5	심장				u	b	
-慎重	しんちょう	n	6	진장				u	b	
-慎重	しんちょう	n	7	청조				u	b	
-慎重	しんちょう	n	8	신쵸				u	b	
 心底	しんてい	n	1	진정				u	b	
 心底	しんてい	n	2	마음속				u	b	
 心底	しんてい	n	3	새로운 결정				u	b	
@@ -3902,7 +3722,6 @@ ttt		n	1	ttt				u	b
 親密	しんみつ	n	2	친밀				u	b	
 神明	しんめい	n	1	신명				u	b	
 神明	しんめい	n	2	인명				u	b	
-信頼	しんらい	n	1	신뢰				u	b	
 辛辣	しんらつ	n	1	신랄하다				u	b	
 辛辣	しんらつ	n	2	신랄				u	b	
 診療	しんりょう	n	1	진료				u	b	
@@ -3935,7 +3754,7 @@ ttt		n	1	ttt				u	b
 邪悪	じゃあく	n	2	사악				u	b	
 ジャガ芋	じゃがいも	n	1	감자				u	wl	
 ジャガ芋	じゃがいも	n	2	고구마				u	b	
-弱点	じゃくてん	n	1	약점				u	b	
+弱点	じゃくてん	n	1	약점			cls=@leverage	u	b	
 じゃじゃ馬	じゃじゃうま	n	1	말괄량이				u	wl	
 じゃじゃ馬	じゃじゃうま	n	2	난폭한 말				u	b	
 若干	じゃっかん	n	1	약간			cls=@degree	u	b	
@@ -3952,8 +3771,6 @@ ttt		n	1	ttt				u	b
 重厚	じゅうこう	n	3	총구				u	b	
 十全	じゅうぜん	n	1	만전				u	b	
 十全	じゅうぜん	n	2	종전				u	b	
-渋滞	じゅうたい	n	1	정체				u	b	
-渋滞	じゅうたい	n	2	중태				u	b	
 住宅	じゅうたく	n	1	주택			name=+	u	b	
 絨毯	じゅうたん	n	1	융단				u	b	
 重油	じゅうゆ	n	1	중유				u	b	
@@ -3967,7 +3784,6 @@ ttt		n	1	ttt				u	b
 綬章	じゅしょう	n	2	수상				u	b	
 入水	じゅすい	n	1	투신 자살				u	b	
 襦袢	じゅばん	n	1	속옷				u	b	
-寿命	じゅみょう	n	1	수명				u	b	
 呪文	じゅもん	n	1	주문			cls=@rote	u	b	
 寿林	じゅりん	n	1	수림				u	b	
 樹齢	じゅれい	n	1	수령				u	b	
@@ -4016,7 +3832,6 @@ ttt		n	1	ttt				u	b
 如才	じょさい	n	1	소홀하다				u	w	
 如才	じょさい	n	2	빈틈				u	w	
 助手	じょしゅ	n	1	조수				u	b	
-徐々	じょじょ	n	1	서서히	next=に			u	b	
 除虫	じょちゅう	n	1	여자 종업원				u	b	
 地竜	じりゅう	n	1	지룡				u	b	
 地竜	じりゅう	n	2	시류				u	b	
@@ -4054,7 +3869,7 @@ ttt		n	1	ttt				u	b
 膵臓	すいぞう	n	2	취장				u	b	
 水中	すいちゅう	n	1	수중			name=+	u	b	
 垂直	すいちょく	n	1	수직				u	b	
-水筒	すいとう	n	1	수두				u	b	
+水筒	すいとう	n	1	수두			cls=@container	u	b	
 水筒	すいとう	n	2	수통				u	b	
 水筒	すいとう	n	3	수전에 심는 벼				u	b	
 水筒	すいとう	n	4	출납				u	b	
@@ -4065,7 +3880,6 @@ ttt		n	1	ttt				u	b
 炊飯	すいはん	n	3	수범				u	b	
 水平	すいへい	n	1	수평			name=+	u	b	
 水平	すいへい	n	2	수병				u	b	
-睡眠	すいみん	n	1	수면			cls=@rest	u	b	
 水面	すいめん	n	1	수면				u	b	
 吸い物	すいもの	n	1	국				u	w	
 吸い物	すいもの	n	2	맑은 국				u	b	
@@ -4163,7 +3977,7 @@ ttt		n	1	ttt				u	b
 脛	すね	n	2	정강이				u	b	
 臑当て	すねあて	n	1	경갑				u	w	
 臑齧り	すねかじり	n	1	비보호자				u	b	
-術	すべ	n	1	방법				u	b	
+術	すべ	n	1	방법			cls=@skill	u	b	
 滑り	すべり	n	1	미끄럼				u	b	
 滑り	すべり	n	2	미끄러짐				u	b	
 滑り台	すべりだい	n	1	미끄럼틀				u	w	
@@ -4211,9 +4025,6 @@ ttt		n	1	ttt				u	b
 ずれ	ずれ	n	1	어긋남				u	wl	
 ずれ	ずれ	n	2	차이				u	b	
 ずれ	ずれ	n	3	엇갈림				u	b	
-正確	せいかく	n	1	정확하다				u	b	
-正確	せいかく	n	2	정확				u	b	
-正確	せいかく	n	3	성격				u	b	
 精強	せいきょう	n	1	정강하다				u	w	
 精強	せいきょう	n	2	정강				u	b	
 精強	せいきょう	n	3	정예				u	b	
@@ -4228,8 +4039,6 @@ ttt		n	1	ttt				u	b
 世系	せいけい	n	2	생계				u	b	
 世系	せいけい	n	3	정형				u	b	
 世系	せいけい	n	4	정경				u	b	
-清潔	せいけつ	n	1	청결하다				u	b	
-清潔	せいけつ	n	2	청결				u	b	
 制限	せいげん	n	1	제한				u	b	
 制限	せいげん	n	2	사인				u	b	
 精細	せいさい	n	1	세밀하다				u	b	
@@ -4245,8 +4054,6 @@ ttt		n	1	ttt				u	b
 性質	せいしつ	n	2	정실				u	b	
 静粛	せいしゅく	n	1	정숙하다				u	b	
 静粛	せいしゅく	n	2	정숙				u	b	
-誠実	せいじつ	n	1	성실하다				u	b	
-誠実	せいじつ	n	2	성실				u	b	
 聖者	せいじゃ	n	1	성자				u	b	
 静寂	せいじゃく	n	1	고요하다				u	b	
 静寂	せいじゃく	n	2	정적				u	b	
@@ -4350,8 +4157,6 @@ ttt		n	1	ttt				u	b
 専横	せんおう	n	1	전횡				u	b	
 旋回	せんかい	n	1	선회				u	b	
 詮方	せんかた	n	1	수단				u	b	
-選挙	せんきょ	n	1	선거				u	b	
-選挙	せんきょ	n	2	점거				u	b	
 千切り	せんぎり	n	1	채치기				u	b	
 尖圭	せんけい	n	1	부채꼴				u	b	
 繊月	せんげつ	n	1	지난달				u	b	
@@ -4433,12 +4238,6 @@ ttt		n	1	ttt				u	b
 前進	ぜんしん	n	1	전진				u	b	
 前進	ぜんしん	n	2	점진				u	b	
 前進	ぜんしん	n	3	전신				u	b	
-前日	ぜんじつ	n	1	전날				u	b	
-前日	ぜんじつ	n	2	전일				u	b	
-前日	ぜんじつ	n	3	하루 종일				u	b	
-全体	ぜんたい	n	1	도대체				u	b	
-全体	ぜんたい	n	2	원래				u	b	
-全体	ぜんたい	n	3	전체				u	b	
 然諾	ぜんだく	n	1	승낙				u	b	
 膳立て	ぜんだて	n	1	상차리기				u	b	
 全通	ぜんつう	n	1	전노선 개통				u	b	
@@ -4532,15 +4331,11 @@ ttt		n	1	ttt				u	b
 そっち退け	そっちのけ	n	1	무시				u	b	
 そっち退け	そっちのけ	n	2	뒷전으로 물림				u	b	
 そっぽ	そっぽ	n	1	딴 쪽				u	b	
-袖	そで	n	1	소매			cls=@clothing	u	b	
-袖	そで	n	2	수				u	b	
 袖刳り	そでぐり	n	1	진동 둘레				u	b	
 袖丈	そでたけ	n	1	소매 길이				u	b	
 袖付け	そでつけ	n	1	진동				u	b	
 袖無し	そでなし	n	1	소매 없는 옷				u	b	
 袖の下	そでのした	n	1	뇌물				u	b	
-外側	そとがわ	n	1	바깥쪽				u	wl	
-外側	そとがわ	n	2	외측				u	w	
 嫉み	そねみ	n	1	질투				u	b	
 蕎麦掻き	そばがき	n	1	메밀 수제비				u	b	
 蕎麦殻	そばがら	n	1	메밀겨				u	b	
@@ -4570,7 +4365,6 @@ ttt		n	1	ttt				u	b
 揃い踏み	そろいぶみ	n	2	총출동				u	b	
 算盤	そろばん	n	1	주판				u	b	
 損害	そんがい	n	1	손해			cls=@harm	u	b	
-尊敬	そんけい	n	1	존경				u	b	
 尊厳	そんげん	n	1	존엄하다				u	b	
 尊厳	そんげん	n	2	존엄				u	b	
 遜色	そんしょく	n	1	손색				u	b	
@@ -4588,12 +4382,6 @@ ttt		n	1	ttt				u	b
 ぞっき本	ぞっきぼん	n	1	덤핑 책				u	b	
 体当たり	たいあたり	n	1	전력투구				u	w	
 体当たり	たいあたり	n	2	전력 투구				u	b	
-体育	たいいく	n	1	체육				u	b	
-体温	たいおん	n	1	체온			cls=@quantity	u	b	
-退屈	たいくつ	n	1	지루함				u	wl	
-退屈	たいくつ	n	2	따분				u	b	
-退屈	たいくつ	n	3	지루하다				u	b	
-退屈	たいくつ	n	4	싫증				u	b	
 太鼓	たいこ	n	1	북				u	b	
 退治	たいじ	n	1	대치				u	b	
 退治	たいじ	n	2	퇴치				u	b	
@@ -4643,7 +4431,7 @@ ttt		n	1	ttt				u	b
 質	たち	n	2	들				u	b	rule:280 +unmapped
 立ち所	たちどころ	n	1	즉시	next=に			u	b	
 活計	たつき	n	1	생계				u	b	
-手綱	たづな	n	1	고삐				u	b	
+手綱	たづな	n	1	고삐			cls=@leverage	u	b	
 出来立て	できたて	n	1	갓 만든 것				u	x	
 出来立て	できたて	n	2	갓 만든				u	wl	
 出来立て	できたて	n	3	갓 만들어낸				u	b	
@@ -4710,10 +4498,6 @@ ttt		n	1	ttt				u	b
 単位	たんい	n	1	단위				u	b	
 啖呵	たんか	n	1	단가				u	b	
 啖呵	たんか	n	2	말				u	b	
-短気	たんき	n	1	성급하다				u	b	
-短気	たんき	n	2	성격이 급하다				u	b	
-短気	たんき	n	3	급한 성질				u	b	
-短気	たんき	n	4	단기				u	b	
 箪笥	たんす	n	1	서랍장			cls=@furniture	u	w	
 箪笥	たんす	n	2	장롱				u	b	
 箪笥	たんす	n	3	옷장				u	b	
@@ -4734,12 +4518,6 @@ ttt		n	1	ttt				u	b
 楕円	だえん	n	1	타원				u	b	
 駄洒落	だじゃれ	n	1	아재 개그			cls=@speech	u	js	
 駄洒落	だじゃれ	n	2	익살				u	b	
-種	たね	n	1	씨				u	b	
-種	たね	n	2	종				u	b	
-種	たね	n	3	종류				u	b	
-種	たね	n	4	그래				u	b	rule:1821 +unmapped
-種	たね	n	5	씨앗	after=ま			u	b	rule:5076 +unmapped
-種	たね	n	6	씨앗	next=ま			u	b	rule:5076 +unmapped
 だふ屋	だふや	n	1	암표상				u	b	
 ダブル	だぶる	n	1	겹치다				u	b	
 ダブル	だぶる	n	2	더블				u	b	
@@ -4756,8 +4534,6 @@ ttt		n	1	ttt				u	b
 団欒	だんらん	n	1	단란				u	b	
 拿捕	だほ	n	1	나포				u	b	
 だ行	だぎょう	n	1	다행				u	b	
-近頃	ちかごろ	n	1	요즈음				u	w	
-近頃	ちかごろ	n	2	최근				u	b	
 近々	ちかぢか	n	1	조만간				u	wl	
 近々	ちかぢか	n	2	일간				u	b	
 近々	ちかぢか	n	3	가까운 시일내에				u	b	
@@ -4766,7 +4542,6 @@ ttt		n	1	ttt				u	b
 乳首	ちくび	n	2	유두				u	b	
 竹輪	ちくわ	n	1	어묵				u	b	
 竹輪	ちくわ	n	2	치크와				u	b	
-チケット	ちけっと	n	1	티켓				u	w	
 稚拙	ちせつ	n	1	치졸하다				u	b	
 稚拙	ちせつ	n	2	치졸				u	c+np	from-names
 縮れ毛	ちぢれげ	n	1	곱슬머리				u	b	
@@ -4789,7 +4564,7 @@ ttt		n	1	ttt				u	b
 躊躇	ちゅうちょ	n	1	주저			cls=@sign	u	b	
 稠密	ちゅうみつ	n	1	조밀				u	b	
 彫刻	ちょうこく	n	1	조각				u	b	
-提灯	ちょうちん	n	1	초롱				u	wl	
+提灯	ちょうちん	n	1	초롱			cls=@lighting	u	wl	
 提灯	ちょうちん	n	2	콧물 방울				u	wl	
 直接	ちょくせつ	n	1	직접				u	b	
 直接	ちょくせつ	n	2	직접적인	next=の			u	b	
@@ -4827,9 +4602,6 @@ ttt		n	1	ttt				u	b
 突き	つき	n	2	찌르기				u	b	
 突き	つき	n	3	인화성				u	b	rule:2186 +unmapped assigns-neighbour
 突き	つき	n	4	다음	next=の			u	b	
-付き合い	つきあい	n	1	만남				u	w	
-付き合い	つきあい	n	2	교제				u	b	
-付き合い	つきあい	n	3	사교성				u	b	rule:1721 +unmapped
 突き当たり	つきあたり	n	1	막다른 곳				u	w	
 突き当たり	つきあたり	n	2	충돌				u	b	
 突き当たり	つきあたり	n	3	막다른	next=の			u	b	
@@ -4894,10 +4666,6 @@ ttt		n	1	ttt				u	b
 積み	つみ	n	1	죄				u	b	
 旋毛	つむじ	n	1	가마				u	b	
 旋毛曲がり	つむじまがり	n	1	비뚤어진 성격				u	w	
-爪	つめ	n	1	개째				u	b	
-爪	つめ	n	2	손톱				u	b	
-爪	つめ	n	3	조				u	b	
-爪	つめ	n	4	발톱	pred=研ぐ			u	x	senses
 爪痕	つめあと	n	1	손톱 자국				u	w	
 爪痕	つめあと	n	2	조흔				u	b	
 爪印	つめいん	n	1	손도장				u	b	
@@ -4949,8 +4717,6 @@ ttt		n	1	ttt				u	b
 天辺	てっぺん	n	2	윗모서리				u	b	
 手拭い	てぬぐい	n	1	수건				u	w	
 手拭い	てぬぐい	n	2	손수건				u	b	
-掌	てのひら	n	1	손바닥			cls=@hand	u	b	
-掌	てのひら	n	2	장				u	b	
 手引き	てびき	n	1	안내				u	w	
 手まめ	てまめ	n	1	부지런하다				u	b	
 癲癇	てんかん	n	1	간질				u	b	
@@ -5002,7 +4768,7 @@ ttt		n	1	ttt				u	b
 棘魚	とげうお	n	1	가시고기				u	b	
 棘魚	とげうお	n	2	큰가시고기				u	b	
 とこしえ	とこしえ	n	1	영원				u	b	
-とことん	とことん	n	1	완전				u	b	
+とことん	とことん	n	1	완전			cls=@to.end	u	b	
 とことん	とことん	n	2	최후				u	b	
 とことん	とことん	n	3	철저히				u	b	
 心太	ところてん	n	1	도코로텐				u	w	
@@ -5012,8 +4778,6 @@ ttt		n	1	ttt				u	b
 所々	ところどころ	n	3	곳곳에	next=に			u	w	
 綴じ目	とじめ	n	1	철한 곳				u	b	
 戸棚	とだな	n	1	찬장			cls=@furniture	u	w	
-疾っく	とっく	n	1	진작				u	wl	
-疾っく	とっく	n	2	벌써				u	b	
 咄嗟	とっさ	n	1	순간				u	b	
 咄嗟	とっさ	n	2	순간적으로	next=に			u	wl	
 取って置き	とっておき	n	1	뒀다쓰기				u	w	
@@ -5043,10 +4807,6 @@ ttt		n	1	ttt				u	b
 戸惑い	とまどい	n	1	망설임			cls=@emotion	u	b	
 戸惑い	とまどい	n	2	당혹감				u	b	
 戸惑い	とまどい	n	3	당황스러움				u	b	
-虎	とら	n	1	호랑이				u	b	
-虎	とら	n	2	트래디셔널				u	b	
-虎	とら	n	3	범				u	b	
-虎	とら	n	4	호				u	b	
 取り	とり	n	1	새				u	b	
 取り	とり	n	2	잡기				u	b	
 取り扱い	とりあつかい	n	1	취급				u	b	
@@ -5068,7 +4828,6 @@ ttt		n	1	ttt				u	b
 取り留め	とりとめ	n	1	두서				u	b	
 取り留め	とりとめ	n	2	정지				u	b	
 執り成し	とりなし	n	1	중재				u	w	
-取り引き	とりひき	n	1	거래				u	b	
 取り纏め	とりまとめ	n	1	정리				u	b	
 取り纏め	とりまとめ	n	2	모으기				u	b	
 取れ立て	とれたて	n	1	신선한	next=の			u	b	
@@ -5112,8 +4871,6 @@ ttt		n	1	ttt				u	b
 どら息子	どらむすこ	n	3	후레 자식				u	b	
 どら声	どらごえ	n	1	굵고 탁한 목소리				u	b	
 どら猫	どらねこ	n	1	도둑 고양이				u	b	
-泥	どろ	n	1	진흙			cls=@dirt	u	b	
-泥	どろ	n	2	니				u	b	
 泥塗れ	どろまみれ	n	1	흙투성이				u	b	
 泥塗れ	どろまみれ	n	2	진흙투성이				u	b	
 団栗	どんぐり	n	1	도토리				u	w	
@@ -5132,9 +4889,6 @@ ttt		n	1	ttt				u	b
 半ば	なかば	n	5	중반	after=歳			u	b	rule:922 +unmapped assigns-neighbour
 半ば	なかば	n	6	중반	after=年			u	b	rule:922 +unmapped assigns-neighbour
 半ば	なかば	n	7	중반	after=世紀			u	b	rule:922 +unmapped assigns-neighbour
-中身	なかみ	n	1	내용물				u	wl	
-中身	なかみ	n	2	알맹이				u	b	
-中身	なかみ	n	3	내용				u	b	
 亡骸	なきがら	n	1	시신				u	wl	
 亡骸	なきがら	n	2	시체				u	b	
 渚	なぎさ	n	1	물가			name=+	u	b	
@@ -5230,13 +4984,11 @@ ttt		n	1	ttt				u	b
 面皰	にきび	n	1	여드름			cls=@body.mark	u	b	
 握握	にぎにぎ	n	1	잼잼				u	b	
 握り拳	にぎりこぶし	n	1	주먹			cls=@fist	u	b	
-握り飯	にぎりめし	n	1	주먹밥				u	w	
+握り飯	にぎりめし	n	1	주먹밥			cls=@rice.ball	u	w	
 賑わい	にぎわい	n	1	성황				u	b	
 賑わい	にぎわい	n	2	활기				u	b	
 にこよん	にこよん	n	1	일용직 노동자				u	js	
 にこよん	にこよん	n	2	날품팔이꾼				u	b	
-虹	にじ	n	1	무지개				u	b	
-虹	にじ	n	2	홍				u	b	
 偽	にせ	n	1	가짜				u	b	
 偽	にせ	n	2	위				u	b	
 偽	にせ	n	3	위조	next=パスポート			u	b	rule:4559
@@ -5253,9 +5005,6 @@ ttt		n	1	ttt				u	b
 人参	にんじん	n	1	당근				u	wl	
 人参	にんじん	n	2	인삼				u	b	
 大蒜	にんにく	n	1	마늘				u	b	
-縫い包み	ぬいぐるみ	n	1	봉제완구				u	w	
-縫い包み	ぬいぐるみ	n	2	봉제인형				u	b	
-縫い包み	ぬいぐるみ	n	3	봉제 인형				u	b	
 ぬかるみ	ぬかるみ	n	1	진창				u	b	
 糠喜び	ぬかよろこび	n	1	헛된 기쁨				u	b	
 抜き打ち	ぬきうち	n	1	불시				u	b	
@@ -5288,9 +5037,6 @@ ttt		n	1	ttt				u	b
 捩れ	ねじれ	n	2	비틀림				u	b	
 螺子回し	ねじまわし	n	1	드라이버				u	w	
 螺子止め	ねじどめ	n	1	나사 고정				u	w	
-鼠	ねずみ	n	1	쥐				u	b	
-鼠	ねずみ	n	2	인쥐				u	b	
-鼠	ねずみ	n	3	서				u	b	
 鼠取り	ねずみとり	n	1	쥐잡기				u	w	
 捏造	ねつぞう	n	1	날조				u	w	
 捏造	ねつぞう	n	2	조작				u	b	
@@ -5299,7 +5045,7 @@ ttt		n	1	ttt				u	b
 寝巻き	ねまき	n	1	잠옷				u	w	
 眠り	ねむり	n	1	잠				u	b	
 眠気	ねむけ	n	1	졸음			cls=@emotion	u	b	
-狙い	ねらい	n	1	목적			cls=@plan	u	b	
+狙い	ねらい	n	1	목적			cls=@plan|@truth	u	b	
 狙い打ち	ねらいうち	n	1	저격				u	b	
 狙い打ち	ねらいうち	n	2	조준사격				u	b	
 狙い目	ねらいめ	n	1	목적				u	b	
@@ -5329,7 +5075,7 @@ ttt		n	1	ttt				u	b
 蚤の市	のみのいち	n	1	벼룩시장				u	w	
 蚤の市	のみのいち	n	2	고물 시장				u	b	
 蚤の市	のみのいち	n	3	벼룩 시장				u	b	
-乗り	のり	n	1	김				u	b	
+乗り	のり	n	1	김			cls=@mood	u	b	
 乗り	のり	n	2	타기				u	b	
 乗り	のり	n	3	풀				u	b	rule:1911 +unmapped
 乗り場	のりば	n	1	승강장				u	b	
@@ -5367,9 +5113,6 @@ ttt		n	1	ttt				u	b
 箱柳	はこやなぎ	n	1	포플러				u	wl	
 箱柳	はこやなぎ	n	2	고리보들				u	b	
 箱柳	はこやなぎ	n	3	사시나무				u	b	
-鋏	はさみ	n	1	가위				u	b	
-鋏	はさみ	n	2	끼우기				u	b	
-鋏	はさみ	n	3	협				u	b	
 挟み打ち	はさみうち	n	1	협공				u	w	
 挟み打ち	はさみうち	n	2	협격				u	b	
 麻疹	はしか	n	1	홍역				u	b	
@@ -5391,9 +5134,6 @@ ttt		n	1	ttt				u	b
 外れ	はずれ	n	2	변두리				u	b	
 外れ	はずれ	n	3	어긋남				u	b	
 叩き	はたき	n	1	먼지떨이				u	b	
-畑	はたけ	n	1	밭			name=+	u	b	
-畑	はたけ	n	2	영역				u	b	
-畑	はたけ	n	3	전				u	b	
 二十歳	はたち	n	1	스무살				u	b	
 働き	はたらき	n	1	활약				u	wl	
 働き	はたらき	n	2	기능				u	b	
@@ -5417,7 +5157,6 @@ ttt		n	1	ttt				u	b
 鼻毛	はなげ	n	2	콧털				u	b	
 噺家	はなしか	n	1	만담가				u	w	
 鼻血	はなぢ	n	1	코피			cls=@body.output	u	b	
-花弁	はなびら	n	1	꽃잎				u	b	
 鼻水	はなみず	n	1	콧물			cls=@body.output	u	w	
 餞	はなむけ	n	1	전별				u	b	
 離れ離れ	はなればなれ	n	1	따로따로				u	wl	
@@ -5533,16 +5272,12 @@ ttt		n	1	ttt				u	b
 轢き逃げ	ひきにげ	n	1	뺑소니				u	w	
 卑屈	ひくつ	n	1	비굴하다				u	b	
 卑屈	ひくつ	n	2	비굴				u	b	
-髭	ひげ	n	1	수염			cls=@hair	u	w	
-髭	ひげ	n	2	수				u	b	
 髭剃り	ひげそり	n	1	면도질				u	w	
 久々	ひさびさ	n	1	오랜만				u	wl	
 久々	ひさびさ	n	2	오랜만이다				u	wl	
 久々	ひさびさ	n	3	오래간만이다				u	b	
 久々	ひさびさ	n	4	오래간만				u	b	
 久々	ひさびさ	n	5	오래간만에	next=に			u	w	
-膝	ひざ	n	1	무릎			cls=@body	u	b	
-膝	ひざ	n	2	슬				u	b	
 膝掛け	ひざかけ	n	1	무릎 덮개				u	w	
 膝掛け	ひざかけ	n	2	무릅덮개				u	b	
 膝頭	ひざがしら	n	1	무릎				u	w	
@@ -5560,7 +5295,6 @@ ttt		n	1	ttt				u	b
 翡翠	ひすい	n	1	비취				u	b	
 歪み	ひずみ	n	1	기형적				u	w	
 歪み	ひずみ	n	2	폐해				u	b	
-額	ひたい	n	1	이마			cls=@body	u	b	
 浸し	ひたし	n	1	나물				u	b	
 直押し	ひたおし	n	1	밀어붙이기				u	b	
 日溜まり	ひだまり	n	1	양지				u	w	
@@ -5572,10 +5306,6 @@ ttt		n	1	ttt				u	b
 棺	ひつぎ	n	1	관				u	b	
 日照り	ひでり	n	1	가뭄				u	w	
 人柄	ひとがら	n	1	인품			cls=@character	u	b	
-一口	ひとくち	n	1	한 입				u	b	
-一口	ひとくち	n	2	한입				u	b	
-一口	ひとくち	n	3	한몫				u	b	
-一口	ひとくち	n	4	한마디로	next=に			u	b	
 人気	ひとけ	n	1	인기척				u	wl	
 人気	ひとけ	n	2	인간미				u	wl	
 他人事	ひとごと	n	1	남의 일				u	b	
@@ -5602,7 +5332,7 @@ ttt		n	1	ttt				u	b
 人となり	ひととなり	n	2	사람 됨				u	b	
 一握り	ひとにぎり	n	1	약간				u	b	
 一握り	ひとにぎり	n	2	한 줌				u	b	
-人前	ひとまえ	n	1	남 앞				u	wl	
+人前	ひとまえ	n	1	남 앞			cls=@counter	u	wl	
 人前	ひとまえ	n	2	남의 앞				u	b	
 人前	ひとまえ	n	3	체면				u	b	
 人前	ひとまえ	n	4	인분				u	b	rule:2997 +unmapped
@@ -5617,8 +5347,6 @@ ttt		n	1	ttt				u	b
 一目	ひとめ	n	5	한눈에	next=に			u	b	
 一儲け	ひともうけ	n	1	한탕				u	b	
 一儲け	ひともうけ	n	2	한밑천				u	b	
-独り言	ひとりごと	n	1	혼잣말				u	w	
-独り言	ひとりごと	n	2	혼자말				u	b	
 独り占め	ひとりじめ	n	1	독차지				u	wl	
 独り占め	ひとりじめ	n	2	독점				u	b	
 独り旅	ひとりたび	n	1	혼자 여행				u	wl	
@@ -5690,11 +5418,8 @@ ttt		n	1	ttt				u	b
 閃き	ひらめき	n	2	번쩍임				u	b	
 昼過ぎ	ひるすぎ	n	1	오후				u	w	
 昼寝	ひるね	n	1	낮잠			cls=@rest	u	b	
-昼休み	ひるやすみ	n	1	점심 시간				u	b	
-昼休み	ひるやすみ	n	2	점심시간				u	b	
 卑劣	ひれつ	n	1	비열하다				u	b	
 卑劣	ひれつ	n	2	비열				u	b	
-広場	ひろば	n	1	광장				u	b	
 広間	ひろま	n	1	홀				u	wl	
 広間	ひろま	n	2	넓은 방				u	b	
 広間	ひろま	n	3	객실				u	b	
@@ -5715,16 +5440,10 @@ ttt		n	1	ttt				u	b
 瀰漫	びまん	n	1	미만				u	b	
 屏風	びょうぶ	n	1	병풍				u	b	
 便箋	びんせん	n	1	편지지			cls=@document	u	b	
-貧乏	びんぼう	n	1	빈곤				u	b	
-貧乏	びんぼう	n	2	가난하다				u	b	
-貧乏	びんぼう	n	3	가난				u	b	
 ぴかどん	ぴかどん	n	1	원자폭탄				u	b	
 鞴	ふいご	n	1	풀무				u	b	
 風船	ふうせん	n	1	풍선				u	b	
 瘋癲	ふうてん	n	1	풍전				u	b	
-笛	ふえ	n	1	피리				u	b	
-不吉	ふきつ	n	1	불길하다				u	b	
-不吉	ふきつ	n	2	불길				u	b	
 蕗の薹	ふきのとう	n	1	머위꽃줄기				u	ji	
 蕗の薹	ふきのとう	n	2	머위의 새순				u	b	
 布巾	ふきん	n	1	행주				u	b	
@@ -5739,8 +5458,6 @@ ttt		n	1	ttt				u	b
 輻射	ふくしゃ	n	1	복사				u	b	
 襖	ふすま	n	1	장지문			cls=@opening	u	w	
 襖	ふすま	n	2	맹장지				u	b	
-双子	ふたご	n	1	쌍둥이				u	w	
-双子	ふたご	n	2	양쪽				u	b	
 縁取り	ふちどり	n	1	테두리				u	b	
 不出来	ふでき	n	1	미흡하다				u	wl	
 不出来	ふでき	n	2	신통치 않다				u	b	
@@ -5749,9 +5466,6 @@ ttt		n	1	ttt				u	b
 懐	ふところ	n	1	품				u	b	
 懐	ふところ	n	2	회				u	b	
 懐	ふところ	n	3	재산				u	b	
-太腿	ふともも	n	1	넓적다리			cls=@body	u	w	
-太腿	ふともも	n	2	엉덩이				u	wl	
-太腿	ふともも	n	3	허벅지				u	b	
 船端	ふなばた	n	1	뱃전				u	w	
 不慣れ	ふなれ	n	1	익숙치 않다				u	b	
 不慣れ	ふなれ	n	2	서툼				u	b	
@@ -5837,8 +5551,6 @@ ttt		n	1	ttt				u	b
 平易	へいい	n	2	평이				u	b	
 平坦	へいたん	n	1	평탄하다				u	b	
 平坦	へいたん	n	2	평탄				u	b	
-平凡	へいぼん	n	1	평범하다				u	b	
-平凡	へいぼん	n	2	평범				u	b	
 霹靂	へきれき	n	1	벽력				u	b	
 僻地	へきち	n	1	벽지				u	b	
 劈開	へきかい	n	1	벽개				u	w	
@@ -5856,8 +5568,6 @@ ttt		n	1	ttt				u	b
 へっぽこ	へっぽこ	n	1	돌팔이				u	b	
 へどろ	へどろ	n	1	슬러지				u	js	
 へどろ	へどろ	n	2	하수폐액				u	b	
-蛇	へび	n	1	뱀				u	b	
-蛇	へび	n	2	사				u	c+nw	from-names
 へぼ	へぼ	n	1	서투르다				u	b	
 へま	へま	n	1	눈치가 없다				u	b	
 偏頗	へんぱ	n	1	편파적이다				u	b	
@@ -5876,32 +5586,18 @@ ttt		n	1	ttt				u	b
 放逸	ほういつ	n	2	방자하다				u	b	
 放逸	ほういつ	n	3	방종하다				u	b	
 箒	ほうき	n	1	빗자루				u	wl	
-方向	ほうこう	n	1	방향				u	b	
 豊穣	ほうじょう	n	1	풍요롭다				u	b	
 方陣	ほうじん	n	1	해외주재 일본인				u	b	
 方陣	ほうじん	n	2	방진				u	b	
 包装	ほうそう	n	1	방송			cls=@wrapping	u	b	
 包装	ほうそう	n	2	포장				u	b	
 放題	ほうだい	n	1	마음껏				u	b	
-包丁	ほうちょう	n	1	식칼			cls=@weapon	u	w	
-包丁	ほうちょう	n	2	부엌칼				u	b	
 彷彿	ほうふつ	n	1	방불				u	wl	
 彷彿	ほうふつ	n	2	보물				u	b	
 焙烙	ほうろく	n	1	질냄비				u	b	
 幇助	ほうじょ	n	1	방조				u	w	
 硼素	ほうそ	n	1	붕소				u	b	
 硼酸	ほうさん	n	1	붕산				u	b	
-頬	ほお	n	1	뺨			cls=@body	u	b	
-頬	ほお	n	2	협				u	b	
-頬	ほお	n	3	호오	next=L…			u	x	rule:7701 +unmapped
-頬	ほお	n	4	호오	next=L‥			u	x	rule:7701 +unmapped
-頬	ほお	n	5	호오	next=L、			u	x	rule:7701 +unmapped
-頬	ほお	n	6	호오	next=L？			u	x	rule:7701 +unmapped
-頬	ほお	n	7	호오	next=L?			u	x	rule:7701 +unmapped
-頬	ほお	n	8	호오	next=L！			u	x	rule:7701 +unmapped
-頬	ほお	n	9	호오	next=L!			u	x	rule:7701 +unmapped
-頬	ほお	n	10	호오	next=L。			u	x	rule:7701 +unmapped
-頬	ほお	n	11	얼굴	pred=緩む			u	x	senses
 酸漿	ほおずき	n	1	꽈리				u	w	
 頬骨	ほおぼね	n	1	광대뼈				u	w	
 埃	ほこり	n	1	먼지			cls=@dirt	u	b	
@@ -5983,8 +5679,6 @@ ttt		n	1	ttt				u	b
 巻き	まき	n	1	장작				u	b	
 巻き	まき	n	2	권				u	b	
 巻き尺	まきじゃく	n	1	줄자				u	b	
-枕	まくら	n	1	베개			cls=@bedding	u	b	
-枕	まくら	n	2	침				u	b	
 枕元	まくらもと	n	1	머리맡				u	b	
 馬草	まぐさ	n	1	여물				u	b	
 まぐれ	まぐれ	n	1	우연				u	b	
@@ -6052,10 +5746,6 @@ ttt		n	1	ttt				u	b
 幻	まぼろし	n	2	환				u	b	
 継子	ままこ	n	1	의붓자식				u	b	
 まやかし	まやかし	n	1	속임수				u	b	
-眉	まゆ	n	1	눈썹				u	b	
-眉	まゆ	n	2	누에고치				u	b	
-眉	まゆ	n	3	미				u	b	
-眉	まゆ	n	4	미간	pred=寄せる			u	x	senses
 眉毛	まゆげ	n	1	눈섭				u	b	
 眉毛	まゆげ	n	2	눈썹				u	b	
 眉墨	まゆずみ	n	1	눈썹 연필				u	w	
@@ -6070,8 +5760,6 @@ ttt		n	1	ttt				u	b
 饅頭	まんじゅう	n	2	만쥬				u	b	
 饅頭	まんじゅう	n	3	만두				u	b	
 マンダラ	まんだら	n	1	만다라				u	wl	
-満腹	まんぷく	n	1	배부름				u	wl	
-満腹	まんぷく	n	2	만복				u	b	
 真ん前	まんまえ	n	1	바로앞				u	b	
 真ん前	まんまえ	n	2	정면				u	b	
 蔓延	まんえん	n	1	만연				u	b	
@@ -6124,9 +5812,6 @@ ttt		n	1	ttt				u	b
 蚯蚓脹れ	みみずばれ	n	2	채찍 자국				u	b	
 土産	みやげ	n	1	선물			cls=@reward	u	b	
 都	みやこ	n	1	도읍지			name=+	u	b	
-名字	みょうじ	n	1	성				u	w	
-名字	みょうじ	n	2	성씨				u	b	
-名字	みょうじ	n	3	명자				u	c+nw	from-names
 味醂	みりん	n	1	미림				u	b	
 昔語り	むかしがたり	n	1	옛날 이야기				u	b	
 昔話	むかしばなし	n	1	옛날이야기				u	w	
@@ -6150,9 +5835,6 @@ ttt		n	1	ttt				u	b
 虫歯	むしば	n	1	충치				u	b	
 狢	むじな	n	1	너구리				u	b	
 狢	むじな	n	2	오소리				u	b	
-無邪気	むじゃき	n	1	천진난만하다				u	wl	
-無邪気	むじゃき	n	2	순진하다				u	b	
-無邪気	むじゃき	n	3	천진난만				u	b	
 矛盾	むじゅん	n	1	모순				u	b	
 結び	むすび	n	1	결말				u	b	
 結び	むすび	n	2	매듭				u	b	
@@ -6200,8 +5882,6 @@ ttt		n	1	ttt				u	b
 鍍金	めっき	n	1	도금				u	b	
 めっけ物	めっけもの	n	1	횡재				u	b	
 目処	めど	n	1	목표				u	b	
-目眩	めまい	n	1	어지럼증			cls=@sensation|@symptom	u	w	
-目眩	めまい	n	2	현기증				u	w	
 面子	めんこ	n	1	딱지치기				u	b	
 面積	めんせき	n	1	면적				u	b	
 雌鳥	めんどり	n	1	암탉				u	w	
@@ -6213,8 +5893,6 @@ ttt		n	1	ttt				u	b
 面妖	めんよう	n	1	이상야릇하다				u	b	
 面妖	めんよう	n	2	기괴				u	b	
 麺類	めんるい	n	1	면류				u	b	
-儲け	もうけ	n	1	벌이				u	b	
-儲け	もうけ	n	2	수익				u	b	
 儲け物	もうけもの	n	1	횡재				u	b	
 儲け口	もうけぐち	n	1	돈벌이				u	w	
 毛布	もうふ	n	1	담요			cls=@bedding	u	wl	
@@ -6256,7 +5934,6 @@ ttt		n	1	ttt				u	b
 最中	もなか	n	1	모나카				u	b	
 物覚え	ものおぼえ	n	1	기억력				u	b	
 物覚え	ものおぼえ	n	2	기억				u	b	
-物語	ものがたり	n	1	이야기			cls=@writing	u	w	
 物心	ものごころ	n	1	철				u	wl	
 物心	ものごころ	n	2	물심				u	b	
 物事	ものごと	n	1	일			cls=@topic	u	wl	
@@ -6335,7 +6012,6 @@ ttt		n	1	ttt				u	b
 焼き物	やきもの	n	2	도자기				u	w	
 やくざ	やくざ	n	1	너절하다				u	b	
 やくざ	やくざ	n	2	야쿠자				u	b	
-役割	やくわり	n	1	역할			cls=@post	u	b	
 櫓	やぐら	n	1	망루				u	wl	
 櫓	やぐら	n	2	가설 무대				u	wl	
 櫓	やぐら	n	3	고타쓰 틀				u	wl	
@@ -6363,13 +6039,9 @@ ttt		n	1	ttt				u	b
 痩せ地	やせち	n	1	메마른 땅				u	b	
 痩せ腕	やせうで	n	1	연약한 힘				u	b	
 彌猛心	やたけごころ	n	1	불붙는 마음				u	b	
-厄介	やっかい	n	1	귀찮다			cls=@trouble	u	b	
-厄介	やっかい	n	2	폐				u	b	
-厄介	やっかい	n	3	귀찮음				u	b	
-厄介	やっかい	n	4	골칫거리	pred=ごと|事			u	x	senses
 躍起	やっき	n	1	열심이다				u	b	
 躍起	やっき	n	2	기를쓰고	next=に			u	b	
-奴	やっこ	n	1	하인				u	b	
+奴	やっこ	n	1	하인			cls=@person	u	b	
 やっさもっさ	やっさもっさ	n	1	시끌시끌				u	b	
 やっちゃ場	やっちゃば	n	1	야채 시장				u	b	
 八つ当たり	やつあたり	n	1	엉뚱한 화풀이				u	w	
@@ -6405,9 +6077,6 @@ ttt		n	1	ttt				u	b
 山々	やまやま	n	4	많은	next=の			u	b	
 山場	やまば	n	1	고비				u	w	
 山場	やまば	n	2	절정				u	b	
-闇	やみ	n	1	어둠				u	b	
-闇	やみ	n	2	암거래				u	b	
-闇	やみ	n	3	암				u	b	
 闇値	やみね	n	1	암시세				u	b	
 闇値	やみね	n	2	뒷거래 가격				u	b	
 闇屋	やみや	n	1	암거래상				u	b	
@@ -6441,10 +6110,6 @@ ttt		n	1	ttt				u	b
 遣り直し	やりなおし	n	1	다시 하기				u	wl	
 遣り直し	やりなおし	n	2	재시도				u	b	
 遣り直し	やりなおし	n	3	다시 고쳐 하기				u	b	
-遣る気	やるき	n	1	의욕			cls=@strength	u	wl	
-遣る気	やるき	n	2	의지				u	b	
-遣る気	やるき	n	3	할 마음				u	b	
-遣る気	やるき	n	4	하고 싶은 기분				u	b	
 やんちゃ	やんちゃ	n	1	장난				u	wl	
 やんちゃ	やんちゃ	n	2	개구쟁이				u	wl	
 やんちゃ	やんちゃ	n	3	탈선				u	wl	
@@ -6463,7 +6128,6 @@ ttt		n	1	ttt				u	b
 融通	ゆうずう	n	2	융통성				u	b	rule:2287 +unmapped
 夕立	ゆうだち	n	1	소나기			cls=@weather	u	b	
 昨夜	ゆうべ	n	1	어젯밤				u	b	
-夕焼け	ゆうやけ	n	1	저녁놀				u	w	
 由縁	ゆえん	n	1	연유				u	wl	
 由縁	ゆえん	n	2	근거				u	b	
 縁	ゆかり	n	1	연고			cls=@relation	u	b	
@@ -6471,7 +6135,6 @@ ttt		n	1	ttt				u	b
 歪み	ゆがみ	n	2	일그러짐				u	b	
 行き当たり	いきあたり	n	1	막다른 데				u	w	
 行き当たり	いきあたり	n	2	막다른 곳				u	b	
-行き先	いきさき	n	1	행선지				u	b	
 行き詰まり	いきづまり	n	1	교착				u	w	
 行き詰まり	いきづまり	n	2	막다름				u	b	
 行き詰まり	いきづまり	n	3	한계				u	b	
@@ -6489,8 +6152,6 @@ ttt		n	1	ttt				u	b
 茹蛸	ゆでだこ	n	2	삶은 낙지				u	b	
 ゆとり	ゆとり	n	1	여유				u	b	
 湯飲み	ゆのみ	n	1	찻잔			cls=@tableware	u	w	
-指先	ゆびさき	n	1	손가락 끝			cls=@body|@hand	u	b	
-指先	ゆびさき	n	2	손가락끝				u	b	
 指貫	ゆびぬき	n	1	골무				u	b	
 揺らぎ	ゆらぎ	n	1	움직임				u	b	
 揺らぎ	ゆらぎ	n	2	요동				u	b	
@@ -6508,10 +6169,6 @@ ttt		n	1	ttt				u	b
 横取り	よこどり	n	1	횡령				u	w	
 横取り	よこどり	n	2	가로채기				u	b	
 汚し	よごし	n	1	철야				u	b	
-汚れ	よごれ	n	1	장완흉상어			cls=@dirt	u	js	
-汚れ	よごれ	n	2	얼룩				u	b	
-汚れ	よごれ	n	3	더러움				u	b	
-汚れ	よごれ	n	4	더러운				u	b	rule:4988 +unmapped assigns-neighbour
 善し悪し	よしあし	n	1	좋음과 좋지 않음				u	w	
 善し悪し	よしあし	n	2	좋고 나쁨				u	b	
 善し悪し	よしあし	n	3	선악				u	b	
@@ -6566,7 +6223,6 @@ ttt		n	1	ttt				u	b
 喇叭	らっぱ	n	1	나팔				u	b	
 辣腕	らつわん	n	1	민완				u	b	
 ら行	らぎょう	n	1	라행				u	b	
-離婚	りこん	n	1	이혼				u	b	
 栗鼠	りす	n	1	다람쥐				u	x	
 律儀	りちぎ	n	1	성실하다				u	wl	
 律儀	りちぎ	n	2	의리가 있다				u	b	
@@ -6588,10 +6244,10 @@ ttt		n	1	ttt				u	b
 老巧	ろうこう	n	1	노련하다				u	b	
 老巧	ろうこう	n	2	노련				u	b	
 ろうず	ろうず	n	1	잔고품				u	b	
-蝋燭	ろうそく	n	1	초				u	w	
+蝋燭	ろうそく	n	1	초			cls=@lighting	u	w	
 蝋燭	ろうそく	n	2	양초				u	w	
 漏斗	ろうと	n	1	깔때기				u	b	
-狼狽	ろうばい	n	1	당황				u	b	
+狼狽	ろうばい	n	1	당황			cls=@emotion	u	b	
 狼狽	ろうばい	n	2	낭패				u	b	
 鑞付け	ろうづけ	n	1	납땜				u	w	
 聾者	ろうしゃ	n	1	청각장애인				u	wl	
@@ -6625,20 +6281,10 @@ ttt		n	1	ttt				u	b
 若葉	わかば	n	1	새 잎			name=+	u	b	
 若葉	わかば	n	2	새잎				u	b	
 若布	わかめ	n	1	미역				u	b	
-別れ	わかれ	n	1	이별				u	b	
-別れ	わかれ	n	2	분파				u	b	
 分かれ道	わかれみち	n	1	갈림길				u	w	
 分かれ道	わかれみち	n	2	별로				u	w	
 分かれ目	わかれめ	n	1	갈림길				u	w	
 分かれ目	わかれめ	n	2	분기점				u	b	
-我が儘	わがまま	n	1	제멋대로이다				u	wl	
-我が儘	わがまま	n	2	제멋대로				u	w	
-我が儘	わがまま	n	3	멋대로이다				u	b	
-我が儘	わがまま	n	4	이기적임				u	b	
-我が儘	わがまま	n	5	버릇없다				u	b	
-我が儘	わがまま	n	6	방자				u	b	
-我が儘	わがまま	n	7	자기 멋대로이다				u	b	
-我が儘	わがまま	n	8	자기 뜻				u	b	
 脇	わき	n	1	옆			name=+ cls=@position	u	b	
 脇	わき	n	2	협				u	b	
 脇	わき	n	3	겨드랑이				u	b	
@@ -6725,7 +6371,6 @@ ttt		n	1	ttt				u	b
 破子	わりご	n	1	칸막이 도시락				u	w	
 割り算	わりざん	n	1	나눗셈				u	w	
 悪気	わるぎ	n	1	악의				u	b	
-悪口	わるくち	n	1	욕				u	b	
 悪巧み	わるだくみ	n	1	간계				u	w	
 悪巧み	わるだくみ	n	2	나쁜 계략				u	b	
 悪巧み	わるだくみ	n	3	흉계				u	b	
@@ -6787,7 +6432,6 @@ ttt		n	1	ttt				u	b
 アイテイエスジャパン		n	1	아이테이에스재팬				u	b	
 アイテイテイキャノン		n	1	아이테이테이캐논				u	b	
 アイテム	あいてむ	n	1	아이템			cls=@thing	u	b	
-アイディア	あいでぃあ	n	1	아이디어			cls=@idea	u	b	
 アイディアリスト	あいでぃありすと	n	1	이상주의자				u	b	
 アイディアリズム	あいでぃありずむ	n	1	이상주의				u	b	
 アイディアリズム	あいでぃありずむ	n	2	관념론				u	b	
@@ -7246,8 +6890,6 @@ ttt		n	1	ttt				u	b
 アニマル	あにまる	n	1	애니멀				u	b	
 アニミズム	あにみずむ	n	1	애니미즘				u	b	
 アニムス	あにむす	n	1	애니머스			name=+	u	b	
-アニメ	あにめ	n	1	애니메이션			cls=@show	u	b	
-アニメ	あにめ	n	2	일본 애니메이션				u	c+nw	from-names
 アニメーター	あにめーたー	n	1	애니메이터				u	b	
 アニメーション	あにめーしょん	n	1	애니메이션				u	b	
 アニモ		n	1	아니모				u	b	
@@ -7344,9 +6986,6 @@ ttt		n	1	ttt				u	b
 ＡＰＧＡＲ	あぷがー	n	1	애프거				u	b	
 アプザイレン	あぷざいれん	n	1	어프자이렌				u	w	
 アプソーチ		n	1	어프로치				u	b	
-アプリ	あぷり	n	1	앱				u	wl	
-アプリ	あぷり	n	2	어플리				u	b	
-アプリ	あぷり	n	3	응용 소프트웨어				u	c+nw	from-names
 アプリエーション		n	1	감상				u	b	
 アプリオリ	あぷりおり	n	1	어 피리어리				u	w	
 アプリオリ	あぷりおり	n	2	선험적이다				u	w	
@@ -7505,7 +7144,6 @@ ttt		n	1	ttt				u	b
 アルドキシム	あるどきしむ	n	1	알독심				u	b	
 アルバイター	あるばいたー	n	1	아르바이터				u	b	
 アルバイター	あるばいたー	n	2	아르바이트				u	c+nw	from-names
-アルバイト	あるばいと	n	1	아르바이트			cls=@activity	u	b	
 アルバッククライオ		n	1	아루박크라이오				u	b	
 アルバトロス	あるばとろす	n	1	알바트로스				u	b	
 アルバトロス	あるばとろす	n	2	앨버트로스				u	c+nw	from-names
@@ -7912,7 +7550,7 @@ ttt		n	1	ttt				u	b
 イヤリング	いやりんぐ	n	2	귀걸이				u	c+np	from-names
 刺草	いらくさ	n	1	쐐기풀				u	b	
 イラショナル		n	1	이래셔널				u	b	
-イラスト	いらすと	n	1	일러스트				u	b	
+イラスト	いらすと	n	1	일러스트			cls=@picture	u	b	
 イラスト	いらすと	n	2	삽화				u	c+nw	from-names
 イラストレーション	いらすとれーしょん	n	1	일러스트레이션				u	b	
 イラストレーター	いらすとれーたー	n	1	일러스트레이터				u	b	
@@ -9645,8 +9283,6 @@ ttt		n	1	ttt				u	b
 カバー	かばー	n	2	카버				u	c+np	from-names
 カフ	かふ	n	1	카프				u	b	
 カフ	かふ	n	2	커프스				u	b	
-カフェ	かふぇ	n	1	카페				u	w	
-カフェ	かふぇ	n	2	커피집				u	c+nw	from-names
 カフェイン	かふぇいん	n	1	카페인				u	b	
 カフェオレ	かふぇおれ	n	1	카페오레			cls=@brew	u	w	
 カフェテリア	かふぇてりあ	n	1	카페테리아				u	w	
@@ -9684,7 +9320,6 @@ ttt		n	1	ttt				u	b
 カモミール	かもみーる	n	2	카밀레				u	b	
 茅	かや	n	1	모기장				u	b	
 カヤック	かやっく	n	1	카약				u	b	
-カラオケ	からおけ	n	1	가라오케				u	b	
 カラット	からっと	n	1	캐럿				u	b	
 カラムニスト		n	1	컬럼니스트				u	b	
 キャラメル	きゃらめる	n	1	캐러멜			name=+	u	wl	
@@ -9740,7 +9375,7 @@ ttt		n	1	ttt				u	b
 カルパイン		n	1	칼파인				u	b	
 カルパッチョ	かるぱっちょ	n	1	카파치오				u	b	
 カルパーズ		n	1	캘퍼스				u	b	
-カルビ	かるび	n	1	갈비			name=+	u	b	
+カルビ	かるび	n	1	갈비			name=+ cls=@food	u	b	
 カルビ	かるび	n	2	갈비구이				u	c+nw	from-names
 カルビ	かるび	n	3	카르피				u	c+np?	from-names
 カルボキシメチルセルローズ		n	1	카르복실 메틸 셀룰로오스				u	b	
@@ -9869,7 +9504,6 @@ ttt		n	1	ttt				u	b
 ガウン	がうん	n	1	가운				u	b	
 がざ	がざ	n	1	가자				u	b	
 がじゅまる	がじゅまる	n	1	뽕나무과 나무				u	b	
-ガス	がす	n	1	가스			name=+	u	b	
 ガスケット	がすけっと	n	1	개스킷				u	b	
 ガストホーフ		n	1	여관				u	b	
 ガストリノーマ		n	1	가스트리노마				u	b	
@@ -10347,7 +9981,6 @@ ttt		n	1	ttt				u	b
 クッカー	くっかー	n	1	조리 기구				u	b	
 クッキング	くっきんぐ	n	1	요리				u	b	
 クッキング	くっきんぐ	n	2	쿠킹				u	b	
-クッキー	くっきー	n	1	쿠키			cls=@food	u	b	
 クッション	くっしょん	n	1	쿠션				u	b	
 轡	くつわ	n	1	쿠츠와				u	b	
 轡	くつわ	n	2	재갈				u	b	
@@ -10408,7 +10041,6 @@ ttt		n	1	ttt				u	b
 クラフト	くらふと	n	2	크래프트				u	b	
 クラフト	くらふと	n	3	항공기 및 선박				u	c+nw	from-names
 クラフトマン	くらふとまん	n	1	숙련공				u	b	
-クラブ	くらぶ	n	1	클럽			cls=@group|@organization	u	b	
 クラミジア	くらみじあ	n	1	크래미디어				u	b	
 クラミジア	くらみじあ	n	2	클라미디아				u	c+np	from-names
 クラリネット	くらりねっと	n	1	클라리넷				u	b	
@@ -10463,7 +10095,7 @@ ttt		n	1	ttt				u	b
 クリティシズム	くりてぃしずむ	n	1	평론				u	b	
 クリティック	くりてぃっく	n	1	평론가				u	b	
 クリテリオン		n	1	비평 기준				u	b	
-クリトリス	くりとりす	n	1	클리토리스				u	b	
+クリトリス	くりとりす	n	1	클리토리스			cls=@body	u	b	
 クリトリス	くりとりす	n	2	음핵				u	c+nw	from-names
 クリニック	くりにっく	n	1	클리닉				u	b	
 クリニック	くりにっく	n	2	진료소				u	c+np	from-names
@@ -10658,7 +10290,7 @@ ttt		n	1	ttt				u	b
 グラビティ		n	1	그라비티				u	b	
 グラビティーモデル		n	1	그래비티 모텔				u	b	
 グラビメーター		n	1	중력계				u	b	
-グラフ	ぐらふ	n	1	그래프				u	b	
+グラフ	ぐらふ	n	1	그래프			cls=@figure	u	b	
 グラファイト	ぐらふぁいと	n	1	그래파이트				u	b	
 グラファイト	ぐらふぁいと	n	2	흑연				u	c+nw	from-names
 グラフィカル	ぐらふぃかる	n	1	그래피컬하다				u	b	
@@ -11304,7 +10936,6 @@ ttt		n	1	ttt				u	b
 コンパートメント	こんぱーとめんと	n	1	컴파트먼트				u	b	
 コンビ	こんび	n	1	콤비			cls=@group	u	b	
 コンビナート	こんびなーと	n	1	콤비나트				u	b	
-コンビニ	こんびに	n	1	편의점				u	b	
 コンビニエンス	こんびにえんす	n	1	컨비니언스				u	b	
 コンビニエントモニター		n	1	컨비니언트 모니터				u	b	
 コンビネーション	こんびねーしょん	n	1	콤비네이션				u	b	
@@ -11504,7 +11135,7 @@ ttt		n	1	ttt				u	b
 ゴースト	ごーすと	n	3	유령				u	b	
 ゴータビリティー		n	1	고터빌러티				u	b	
 ゴーフル	ごーふる	n	1	고프르				u	b	
-ゴール	ごーる	n	1	골				u	b	
+ゴール	ごーる	n	1	골			cls=@endpoint	u	b	
 ゴールデン	ごーるでん	n	1	골든			name=+	u	b	
 ゴールド	ごーるど	n	1	골드				u	b	
 サアイ	さあい	n	1	사아이				u	b	
@@ -11545,8 +11176,6 @@ ttt		n	1	ttt				u	b
 サイコロジスト	さいころじすと	n	1	심리학자				u	b	
 サイコロジー	さいころじー	n	1	심리학				u	b	
 サイジング	さいじんぐ	n	1	사이징				u	b	
-サイズ	さいず	n	1	사이즈				u	b	
-サイズ	さいず	n	2	크기				u	c+nw	from-names
 サイダー	さいだー	n	1	사이다				u	b	
 サイテーション	さいてーしょん	n	1	감사장				u	b	
 サイディング	さいでぃんぐ	n	1	사이딩				u	b	
@@ -11599,7 +11228,7 @@ ttt		n	1	ttt				u	b
 サキソホン	さきそほん	n	1	색소폰				u	wl	
 サキソホン	さきそほん	n	2	색스폰				u	b	
 サキュラ		n	1	서큘라			name=+	u	b	
-詐欺	さぎ	n	1	백로				u	b	
+詐欺	さぎ	n	1	백로			cls=@crime	u	b	
 詐欺	さぎ	n	2	사기				u	b	
 サクシネート	さくしねーと	n	1	석시네이트				u	b	
 サクション	さくしょん	n	1	석션				u	b	
@@ -11826,7 +11455,6 @@ ttt		n	1	ttt				u	b
 サントラ	さんとら	n	1	사운드 트랙				u	b	
 サンド	さんど	n	1	샌드			name=+	u	b	
 サンド	さんど	n	2	선즈				u	c+b	from-names
-サンドイッチ	さんどいっち	n	1	샌드위치			cls=@food	u	b	
 サンドバッグ	さんどばっぐ	n	1	샌드백				u	b	
 サンドペーパー	さんどぺーぱー	n	1	사포				u	b	
 サンノプコ		n	1	산노푸코				u	b	
@@ -12088,7 +11716,7 @@ ttt		n	1	ttt				u	b
 シマンティックス		n	1	어의론				u	b	
 シミュラクル		n	1	시뮬라크르				u	b	
 シミュレーショニズム	しみゅれーしょにずむ	n	1	시뮬레이션니즘				u	b	
-シミュレーション	しみゅれーしょん	n	1	시뮬레이션				u	b	
+シミュレーション	しみゅれーしょん	n	1	시뮬레이션			cls=@activity	u	b	
 シミュレーター	しみゅれーたー	n	1	시뮬레이터				u	b	
 シミュレート	しみゅれーと	n	1	시뮬레이트				u	b	
 シミューレーションシステム		n	1	시뮬레이션 시스템				u	b	
@@ -12241,9 +11869,6 @@ ttt		n	1	ttt				u	b
 シラバス	しらばす	n	1	강의 계획서				u	wl	
 シラブル	しらぶる	n	1	음절				u	b	
 虱	しらみ	n	1	이				u	b	
-尻	しり	n	1	엉덩이			cls=@body	u	b	
-尻	しり	n	2	고				u	b	
-尻	しり	n	3	손	pred=敷かれる			u	x	senses
 シリアライザ		n	1	시리얼라이저				u	b	
 シリアル	しりある	n	1	시리얼				u	b	
 シリアルストレージアーキテクチ		n	1	순차 저장 구조				u	b	
@@ -12635,11 +12260,11 @@ ttt		n	1	ttt				u	b
 ジョイン	じょいん	n	1	조인				u	b	
 尉鶲	じょうびたき	n	1	딱새				u	b	
 ジョガ		n	1	조거				u	b	
-ジョギング	じょぎんぐ	n	1	조깅				u	wl	
+ジョギング	じょぎんぐ	n	1	조깅			cls=@sport	u	wl	
 ジョグ	じょぐ	n	1	조깅				u	wl	
 ジョグ	じょぐ	n	2	지그				u	c+np	from-names
 ジョガー	じょがー	n	1	조거				u	b	
-ジョッキ	じょっき	n	1	조끼				u	b	
+ジョッキ	じょっき	n	1	조끼			cls=@tableware	u	b	
 ジョッキー	じょっきー	n	1	기수				u	b	
 ジョッギング		n	1	조깅				u	b	
 ジョッパーズ	じょっぱーず	n	1	승마 바지				u	w	
@@ -12699,9 +12324,6 @@ ttt		n	1	ttt				u	b
 ジーンズ	じーんず	n	1	청바지				u	b	
 スアミ		n	1	남편				u	b	
 スィク		n	1	시크				u	b	
-スイッチ	すいっち	n	1	스위치			cls=@control	u	wl	
-スイッチ	すいっち	n	2	스윗치				u	b	
-スイッチ	すいっち	n	3	닌텐도 스위치				u	c+np	from-names
 スィホン		n	1	쉬폰				u	b	
 スイープ	すいーぷ	n	1	스위프				u	b	
 西瓜	すいか	n	1	수박				u	b	
@@ -13012,8 +12634,6 @@ ttt		n	1	ttt				u	b
 ステークス	すてーくす	n	1	스테이크스				u	b	
 ステーショナリー	すてーしょなりー	n	1	문방구				u	b	
 ステーション	すてーしょん	n	1	스테이션				u	w	
-ステージ	すてーじ	n	1	스테이지				u	b	
-ステージ	すてーじ	n	2	레벨				u	c+nw	from-names
 ステージング	すてーじんぐ	n	1	스테이징				u	b	
 ステーター	すてーたー	n	1	고정자				u	b	
 ステータス	すてーたす	n	1	스테이터스				u	w	
@@ -13074,7 +12694,6 @@ ttt		n	1	ttt				u	b
 ストリーミング	すとりーみんぐ	n	1	스트리밍				u	b	
 ストリーム	すとりーむ	n	1	스트림				u	b	
 ストリーム	すとりーむ	n	2	개울				u	c+nw	from-names
-ストレス	すとれす	n	1	스트레스				u	b	
 ストレッチ	すとれっち	n	1	스트렛치				u	b	
 ストレッチ	すとれっち	n	2	스트레칭				u	c+nw	from-names
 ストレッチャ		n	1	스트레처				u	b	
@@ -13400,9 +13019,6 @@ ttt		n	1	ttt				u	b
 スーイングソサエティ		n	1	소송 사회				u	b	
 スーザホーン		n	1	수자폰				u	b	
 スーチ		n	1	수티				u	b	
-スーツ	すーつ	n	1	무늬			cls=@clothing	u	js	
-スーツ	すーつ	n	2	슈트				u	b	
-スーツ	すーつ	n	3	슈츠				u	c+nq	from-names
 スーツケース	すーつけーす	n	1	슈트 케이스				u	b	
 シュードラ	しゅーどら	n	1	수드라				u	w	
 スーパバイザオーバレイ		n	1	슈퍼바이저 오버레이				u	b	
@@ -13440,8 +13056,6 @@ ttt		n	1	ttt				u	b
 セオリー	せおりー	n	1	시어리				u	b	
 セオリー	せおりー	n	2	띠어리				u	c+nw	from-names
 セカンドハンド	せかんどはんど	n	1	중고품				u	b	
-咳	せき	n	1	기침			cls=@body.output	u	b	
-咳	せき	n	2	해				u	b	
 セキド		n	1	세키도				u	b	
 セキュアド		n	1	시큐어드				u	b	
 セキュリタイゼーション	せきゅりたいぜーしょん	n	1	증권화				u	b	
@@ -13691,7 +13305,7 @@ ttt		n	1	ttt				u	b
 蕎麦	そば	n	1	메밀국수				u	b	
 蕎麦	そば	n	2	소바				u	b	
 ソバージュ	そばーじゅ	n	1	소바주				u	wl	
-ソファー	そふぁー	n	1	소파			cls=@furniture	u	b	
+ソファー	そふぁー	n	1	소파			cls=@furniture|@seat	u	b	
 ソフィスティケーション	そふぃすてぃけーしょん	n	1	세련				u	wl	
 ソフィスティケーション	そふぃすてぃけーしょん	n	2	지성				u	b	
 ソフィスティケート	そふぃすてぃけーと	n	1	세련				u	wl	
@@ -13774,8 +13388,6 @@ ttt		n	1	ttt				u	b
 タイト	たいと	n	1	타이트하다				u	wl	
 タイト	たいと	n	2	부족하다				u	wl	
 タイト	たいと	n	3	타이트				u	b	
-タイトル	たいとる	n	1	타이틀				u	b	
-タイトル	たいとる	n	2	제목				u	c+np	from-names
 タイピスト	たいぴすと	n	1	타이피스트				u	b	
 タイピング	たいぴんぐ	n	1	타이핑				u	b	
 タイピング	たいぴんぐ	n	2	타자				u	c+nw	from-names
@@ -14048,8 +13660,6 @@ ttt		n	1	ttt				u	b
 ダンジネスクラブ		n	1	던지니스 크래브				u	b	
 ダンジョン	だんじょん	n	1	던전				u	wl	
 ダンジョン	だんじょん	n	2	지하감옥				u	c+nw	from-names
-ダンス	だんす	n	1	댄스				u	b	
-ダンス	だんす	n	2	춤				u	c+nw	from-names
 ダンテズ・ピーク		n	1	단테스 피크				u	b	
 ダンディズム	だんでぃずむ	n	1	댄디즘				u	b	
 ダンディー	だんでぃー	n	1	댄디				u	b	
@@ -14247,7 +13857,6 @@ ttt		n	1	ttt				u	b
 蝶	ちょう	n	1	나비				u	b	
 蝶	ちょう	n	2	접				u	b	
 チョゲサ		n	1	조계사				u	b	
-チョコレート	ちょこれーと	n	1	초콜릿			cls=@food	u	b	
 チョゴリ	ちょごり	n	1	저고리				u	b	
 チョッキ	ちょっき	n	1	조끼				u	b	
 チョック	ちょっく	n	1	초크				u	b	
@@ -14281,7 +13890,6 @@ ttt		n	1	ttt				u	b
 陳皮	ちんぴ	n	1	진피				u	b	
 ちんぽ	ちんぽ	n	1	자지				u	w	
 チーク	ちーく	n	1	치크				u	b	
-チーズ	ちーず	n	1	치즈				u	b	
 チーター	ちーたー	n	1	치타				u	b	
 チーター	ちーたー	n	2	치터	ctx=チート|ゲーム|運営|配信|対戦|スレ民|プレー			u	x	senses
 チーフ	ちーふ	n	1	치프				u	b	
@@ -14326,9 +13934,6 @@ ttt		n	1	ttt				u	b
 角	つの	n	1	뿔				u	b	
 燕	つばめ	n	1	제비				u	b	
 燕	つばめ	n	2	연				u	b	
-粒	つぶ	n	1	알맹이				u	b	
-粒	つぶ	n	2	알				u	b	
-粒	つぶ	n	3	립				u	b	
 ツベルクリン	つべるくりん	n	1	투베르쿨린				u	b	
 詰め	つめ	n	1	손톱				u	b	
 詰め	つめ	n	2	채우기				u	b	
@@ -14409,7 +14014,7 @@ ttt		n	1	ttt				u	b
 テクニクス	てくにくす	n	1	테크닉스				u	b	
 テクニシャン	てくにしゃん	n	1	테크니션				u	b	
 テクニシャン	てくにしゃん	n	2	기술자				u	c+nw	from-names
-テクニック	てくにっく	n	1	테크닉				u	b	
+テクニック	てくにっく	n	1	테크닉			cls=@skill	u	b	
 テクニック	てくにっく	n	2	기술				u	c+nw	from-names
 テクニックス		n	1	기법				u	b	
 テクノ	てくの	n	1	테크노				u	b	
@@ -14554,7 +14159,6 @@ ttt		n	1	ttt				u	b
 テーゼ	てーぜ	n	1	테제				u	b	
 テーパー	てーぱー	n	1	테이퍼				u	wl	
 テーピング	てーぴんぐ	n	1	테이핑				u	b	
-テープ	てーぷ	n	1	테이프				u	b	
 テープツウディスク		n	1	테이프 투 디스크				u	b	
 テープリミティッド		n	1	테이프 리미티드				u	b	
 ＴＢ	てぃーびー	n	1	폐결핵				u	b	
@@ -14780,8 +14384,6 @@ ttt		n	1	ttt				u	b
 デザイナー	でざいなー	n	1	디자이너				u	b	
 デザイニング	でざいにんぐ	n	1	디자이닝				u	b	
 デザイン	でざいん	n	1	디자인				u	b	
-デザート	でざーと	n	1	디저트				u	b	
-デザート	でざーと	n	2	후식				u	c+nw	from-names
 弟子	でし	n	1	데시				u	b	
 弟子	でし	n	2	제자				u	b	
 デシジョン		n	1	디시전				u	b	
@@ -15260,7 +14862,6 @@ ttt		n	1	ttt				u	b
 豚カツ	とんかつ	n	1	돈까스				u	b	
 トンキロ	とんきろ	n	1	톤 킬로				u	b	
 トンネリング	とんねりんぐ	n	1	터널링				u	b	
-トンネル	とんねる	n	1	터널				u	w	
 父	とう	n	1	발가락			cls=@person	u	b	
 トーア	とーあ	n	1	토아				u	b	
 トーイング	とーいんぐ	n	1	토잉				u	b	
@@ -15406,7 +15007,6 @@ ttt		n	1	ttt				u	b
 ドルチェ	どるちぇ	n	1	돌체				u	b	
 ドルフィン	どるふぃん	n	1	돌핀				u	b	
 ドレーン	どれーん	n	1	드레인				u	b	
-ドレス	どれす	n	1	드레스			cls=@clothing	u	b	
 ドレスメーカー	どれすめーかー	n	1	양장점				u	b	
 ドレッサー	どれっさー	n	1	드레서				u	b	
 ドレッシング	どれっしんぐ	n	1	드레싱			cls=@seasoning	u	b	
@@ -15789,7 +15389,7 @@ ttt		n	1	ttt				u	b
 ノイローゼ	のいろーぜ	n	1	노이로제				u	b	
 野兎	のうさぎ	n	1	산토끼				u	b	
 凌霄花	のうぜんかずら	n	1	능소화				u	b	
-ノウハウ	のうはう	n	1	노하우				u	b	
+ノウハウ	のうはう	n	1	노하우			cls=@skill	u	b	
 ノエル	のえる	n	1	노엘			name=+	u	b	
 ノカルジア	のかるじあ	n	1	노카르디아				u	b	
 ノカルジャー		n	1	노카르디아				u	b	
@@ -16083,18 +15683,14 @@ ttt		n	1	ttt				u	b
 ハンドメード	はんどめーど	n	2	핸드메이드				u	c+np	from-names
 ハンドラー	はんどらー	n	1	핸들러			name=+	u	b	
 ハンドリング	はんどりんぐ	n	1	핸들링				u	b	
-ハンドル	はんどる	n	1	핸들				u	b	
-ハンドル	はんどる	n	2	한돌				u	c+nw	from-names
 ハンバーガー	はんばーがー	n	1	햄버거			name=+ cls=@food	u	b	
-ハンバーグ	はんばーぐ	n	1	햄버그				u	x	
-ハンバーグ	はんばーぐ	n	2	햄버그 스테이크				u	c+nw	from-names
 ハンビット		n	1	한빛				u	b	
 ハンプ	はんぷ	n	1	험프				u	b	
 ハンマー	はんまー	n	1	해머				u	b	
 ハンマー	はんまー	n	2	망치				u	c+np	from-names
 ハンモック	はんもっく	n	1	해먹				u	b	
 ハーケン	はーけん	n	1	하켄			name=+	u	b	
-ハート	はーと	n	1	하트			name=+	u	b	
+ハート	はーと	n	1	하트			name=+ cls=@figure	u	b	
 ハートランド	はーとらんど	n	1	하트랜드				u	b	
 ハード	はーど	n	1	딱딱하다				u	b	
 ハード	はーど	n	2	하드				u	b	
@@ -16229,8 +15825,6 @@ ttt		n	1	ttt				u	b
 バゲット	ばげっと	n	1	바게트				u	wl	
 バゲット	ばげっと	n	2	버킷				u	b	
 バケツ	ばけつ	n	1	양동이				u	wl	
-化け物	ばけもの	n	1	괴물				u	wl	
-化け物	ばけもの	n	2	도깨비				u	b	
 バゲトラ		n	1	배기지 트러블				u	b	
 バゲージ	ばげーじ	n	1	베기지				u	w	
 バサロキック		n	1	바사로 킥				u	b	
@@ -16261,7 +15855,6 @@ ttt		n	1	ttt				u	b
 バスーン	ばすーん	n	1	바순				u	b	
 バタフライ	ばたふらい	n	1	버터플라이				u	b	
 バタフライ	ばたふらい	n	2	접영				u	c+nw	from-names
-バター	ばたー	n	1	버터				u	b	
 バチェラー	ばちぇらー	n	1	학사				u	b	
 バチルス	ばちるす	n	1	바칠루스				u	b	
 バッカス	ばっかす	n	1	바커스				u	b	
@@ -16754,8 +16347,6 @@ ttt		n	1	ttt				u	b
 パンちら	ぱんちら	n	1	판치라				u	w	
 パンちら	ぱんちら	n	2	팬티 엿보기				u	b	
 パンチング	ぱんちんぐ	n	1	펀칭				u	b	
-パンツ	ぱんつ	n	1	팬티				u	wl	
-パンツ	ぱんつ	n	2	팬츠				u	b	
 パンティー	ぱんてぃー	n	1	팬티				u	w	
 パント	ぱんと	n	1	팬트				u	b	
 パントマイム	ぱんとまいむ	n	1	판토마임				u	b	
@@ -17091,8 +16682,6 @@ ttt		n	1	ttt				u	b
 ビリオネア	びりおねあ	n	1	억만장자				u	b	
 ビリオン	びりおん	n	1	빌리언			name=+	u	b	
 ビリーフ	びりーふ	n	1	빌리프				u	b	
-ビル	びる	n	1	빌			name=+	u	b	
-ビル	びる	n	2	빌딩				u	b	
 ビルダー	びるだー	n	1	빌더				u	b	
 ビルダーリング	びるだーりんぐ	n	1	빌더링				u	b	
 ビルディング	びるでぃんぐ	n	1	빌딩				u	b	
@@ -17886,7 +17475,7 @@ ttt		n	1	ttt				u	b
 フルヤジュエリー		n	1	후루야주에리				u	b	
 フルロードエンリッチメント		n	1	풀 로드 인리치먼트				u	b	
 フルーイディックス		n	1	유체 공학				u	b	
-フルーツ	ふるーつ	n	1	과일				u	x	
+フルーツ	ふるーつ	n	1	과일			cls=@food	u	x	
 フルーツ	ふるーつ	n	2	프루츠				u	b	
 フルート	ふるーと	n	1	플루트				u	wl	
 フルート	ふるーと	n	2	플룻				u	w	
@@ -18134,8 +17723,6 @@ ttt		n	1	ttt				u	b
 ブレンド	ぶれんど	n	2	혼성어				u	c+nw	from-names
 ブレーカー	ぶれーかー	n	1	브레이커			cls=@control	u	b	
 ブレーカー	ぶれーかー	n	2	회로 차단기				u	c+nw	from-names
-ブレーキ	ぶれーき	n	1	브레이크				u	b	
-ブレーキ	ぶれーき	n	2	제동기				u	c+nw	from-names
 ブレークダウンプラズマー		n	1	브레이크다운 플라스마				u	b	
 ブレース	ぶれーす	n	1	브레이스				u	b	
 ブレード	ぶれーど	n	1	블레이드			name=+	u	w	
@@ -18221,7 +17808,6 @@ ttt		n	1	ttt				u	b
 プライス	ぷらいす	n	1	프라이스			name=+	u	b	
 プライスミータ		n	1	프라이스 미터				u	b	
 プライズ	ぷらいず	n	1	상품			name=+	u	b	
-プライド	ぷらいど	n	1	프라이드				u	b	
 プライバシー	ぷらいばしー	n	1	프라이버시			cls=@abstract	u	w	
 プライバタイゼーション		n	1	민영화				u	b	
 プライベート	ぷらいべーと	n	1	프라이빗				u	b	
@@ -18409,7 +17995,6 @@ ttt		n	1	ttt				u	b
 プログラマー	ぷろぐらまー	n	1	프로그래머				u	b	
 プログラマブルポスターミナル		n	1	프로그래머블 POS 터미널				u	b	
 プログラミング	ぷろぐらみんぐ	n	1	프로그래밍				u	b	
-プログラム	ぷろぐらむ	n	1	프로그램				u	b	
 プログラムスケジューラ		n	1	프로그램 스케줄러				u	b	
 プログラムスケジューラー		n	1	프로그램 스케줄러				u	b	
 プログラムチェッカ		n	1	프로그램 체커				u	b	
@@ -18721,7 +18306,7 @@ ttt		n	1	ttt				u	b
 ベンゾール	べんぞーる	n	1	벤졸				u	b	
 ベンダー	べんだー	n	1	벤더			name=+	u	wl	
 ベンダリゼーション		n	1	자동 판매기화				u	b	
-ベンチ	べんち	n	1	벤치				u	b	
+ベンチ	べんち	n	1	벤치			cls=@seat	u	b	
 ベンチァー		n	1	벤처				u	b	
 ベンチャー	べんちゃー	n	1	벤처				u	w	
 ベンチュリ		n	1	벤투리				u	b	
@@ -18807,7 +18392,7 @@ ttt		n	1	ttt				u	b
 ペナルティー	ぺなるてぃー	n	1	페널티				u	wl	
 ペナルティー	ぺなるてぃー	n	2	패널티				u	b	
 ペニシリン	ぺにしりん	n	1	페니실린				u	b	
-ペニス	ぺにす	n	1	페니스				u	b	
+ペニス	ぺにす	n	1	페니스			cls=@body	u	b	
 ペニス	ぺにす	n	2	음경				u	c+np	from-names
 ペニヒ	ぺにひ	n	1	페니히				u	b	
 ペニー	ぺにー	n	1	페니			name=+	u	b	
@@ -18987,7 +18572,6 @@ ttt		n	1	ttt				u	b
 ホワホワ		n	1	폭신폭신				u	b	
 ホワンホー		n	1	황하				u	b	
 ホンキー	ほんきー	n	1	백인				u	b	
-本音	ほんね	n	1	본심			cls=@character	u	b	
 ホヴァリング		n	1	호버링				u	b	
 ホーク	ほーく	n	1	호크				u	b	
 ホース	ほーす	n	1	호스				u	b	
@@ -18999,7 +18583,6 @@ ttt		n	1	ttt				u	b
 ホーペイ		n	1	허뻬이				u	b	
 ホーマー	ほーまー	n	1	호메로스				u	b	
 ホーミング	ほーみんぐ	n	1	호밍				u	b	
-ホーム	ほーむ	n	1	홈				u	b	
 ホームシック	ほーむしっく	n	1	향수병				u	b	
 ホームステイ	ほーむすてい	n	1	홈스테이				u	w	
 ホームストレッチ	ほーむすとれっち	n	1	홈스트레치				u	b	
@@ -19071,7 +18654,7 @@ ttt		n	1	ttt				u	b
 ボトラーズ		n	1	보틀러즈				u	b	
 ボトリソグラフィ		n	1	보트리소 그래피				u	b	
 ボトリング	ぼとりんぐ	n	1	보트링				u	b	
-ボトル	ぼとる	n	1	보틀				u	b	
+ボトル	ぼとる	n	1	보틀			cls=@bottle	u	b	
 ボトル	ぼとる	n	2	병				u	c+nw	from-names
 ボナビ		n	1	보나비				u	b	
 ボナンザグラム	ぼなんざぐらむ	n	1	보난자그램				u	b	
@@ -19143,8 +18726,6 @@ ttt		n	1	ttt				u	b
 ボードセーリング	ぼーどせーりんぐ	n	1	윈드 서핑				u	w	
 ボードビリアン	ぼーどびりあん	n	1	보드빌리안				u	b	
 ボードビル	ぼーどびる	n	1	보드빌				u	b	
-ボーナス	ぼーなす	n	1	보너스				u	b	
-ボーナス	ぼーなす	n	2	상여금				u	c+np	from-names
 ボーラー	ぼーらー	n	1	볼러				u	b	
 ボーリング	ぼーりんぐ	n	1	볼링				u	b	
 ボールト	ぼーると	n	1	볼트				u	w	
@@ -19185,7 +18766,6 @@ ttt		n	1	ttt				u	b
 ポジティブ	ぽじてぃぶ	n	2	포지티브				u	w	
 ポジャン		n	1	포장				u	b	
 ＰＯＳ	ぽす	n	1	POS				u	b	
-ポスター	ぽすたー	n	1	포스터				u	b	
 ポスト	ぽすと	n	1	우체통			cls=@post	u	wl	
 ポスト	ぽすと	n	2	포스트				u	b	rule:1190 +unmapped
 ポスト	ぽすと	n	3	지위	after=社会的			u	b	rule:2147 +unmapped
@@ -19458,7 +19038,6 @@ ttt		n	1	ttt				u	b
 マスキュリズム		n	1	남성주의				u	b	
 マスキュリン	ますきゅりん	n	1	남성적				u	b	
 マスキング	ますきんぐ	n	1	마스킹				u	b	
-マスク	ますく	n	1	마스크			name=+	u	b	
 マスコット	ますこっと	n	1	마스코트				u	b	
 マスコミ	ますこみ	n	1	매스컴				u	b	
 マスタクレリカルデータ		n	1	마스터 클레리컬 데이터				u	b	
@@ -19698,8 +19277,6 @@ ttt		n	1	ttt				u	b
 マングース	まんぐーす	n	1	몽구스				u	b	
 マンゴスチン	まんごすちん	n	1	망고스틴				u	b	
 マンゴー	まんごー	n	1	망고				u	b	
-マンション	まんしょん	n	1	맨션				u	b	
-マンション	まんしょん	n	2	콘도미니엄				u	c+nw	from-names
 マンスリー	まんすりー	n	1	먼슬리				u	b	
 マンダトリー		n	1	맨더트리				u	b	
 マンダリン	まんだりん	n	1	만다린			name=+	u	b	
@@ -19733,7 +19310,6 @@ ttt		n	1	ttt				u	b
 マーキング	まーきんぐ	n	2	노면표시				u	c+np	from-names
 マーキー	まーきー	n	1	마키			name=+	u	b	
 マルキーズ	まるきーず	n	1	마키즈				u	b	
-マーク	まーく	n	1	마크			name=+	u	b	
 マーケタイゼーション		n	1	시장화				u	b	
 マーケッタビリティー		n	1	시장성				u	b	
 マーケティング	まーけてぃんぐ	n	1	마케팅				u	b	
@@ -19964,7 +19540,6 @@ ttt		n	1	ttt				u	b
 メルアド	めるあど	n	2	전자 우편 주소				u	c+nw	from-names
 メーカー	めーかー	n	1	메이커				u	b	
 メーキング	めーきんぐ	n	1	메이킹				u	b	
-メーク	めーく	n	1	메이크				u	b	
 メイシヨク		n	1	메이시요쿠				u	b	
 メイズ	めいず	n	1	미로			name=+	u	b	
 メイテン		n	1	메이텐				u	b	
@@ -20082,12 +19657,10 @@ ttt		n	1	ttt				u	b
 メドレー	めどれー	n	1	메들리				u	b	
 メナー	めなー	n	1	매너				u	b	
 メニスカス	めにすかす	n	1	메니스커스				u	b	
-メニュー	めにゅー	n	1	메뉴			cls=@scheme	u	b	
 メヌエット	めぬえっと	n	1	미뉴에트				u	w	
 メヌエット	めぬえっと	n	2	미뉴엣				u	b	
 メネジリアルエコノミックス		n	1	관리 경제학				u	b	
 メネジリアルマーケティング		n	1	관리 마케팅				u	b	
-メモ	めも	n	1	메모			cls=@record	u	b	
 メモニュケーション		n	1	메모 커뮤니케이션				u	b	
 メモランダム	めもらんだむ	n	1	메모랜덤				u	b	
 メモリアル	めもりある	n	1	메모리얼				u	b	
@@ -20593,7 +20166,6 @@ ttt		n	1	ttt				u	b
 ライニクス		n	1	라이닉스				u	b	
 ライニング	らいにんぐ	n	1	라이닝				u	b	
 ライノタイプ	らいのたいぷ	n	1	라이노타이프				u	b	
-ライバル	らいばる	n	1	라이벌				u	b	
 ライフ	らいふ	n	1	라이프				u	b	
 ライフエレックス		n	1	라이프에렉크스				u	b	
 ライフォ		n	1	LIFO				u	b	
@@ -20847,7 +20419,7 @@ ttt		n	1	ttt				u	b
 リキャピタライゼーション		n	1	리캐피탈라이제이션				u	b	
 リキュール	りきゅーる	n	1	리큐어				u	b	
 リクエスター		n	1	리퀘스터				u	b	
-リクエスト	りくえすと	n	1	리퀘스트				u	b	
+リクエスト	りくえすと	n	1	리퀘스트			cls=@request	u	b	
 リクエストパラメタリスト		n	1	리퀘스트 파라메터 리스크				u	b	
 リクライニング	りくらいにんぐ	n	1	리클라이닝				u	b	
 リクライニング	りくらいにんぐ	n	2	리클라이너				u	c+nw	from-names
@@ -21131,8 +20703,6 @@ ttt		n	1	ttt				u	b
 リムーバー	りむーばー	n	1	리무버				u	b	
 リメーク	りめーく	n	1	리메이크				u	b	
 リメンバー	りめんばー	n	1	리멤버				u	b	
-リモコン	りもこん	n	1	리모콘				u	b	
-リモコン	りもこん	n	2	리모컨				u	c+nw	from-names
 リモート	りもーと	n	1	리모트				u	b	
 リモートジョプエントリ		n	1	리모트 잡 엔트리				u	b	
 リャオニン		n	1	랴오닝				u	b	
@@ -21227,7 +20797,6 @@ ttt		n	1	ttt				u	b
 リーセントチェンジログ		n	1	리센트 체인지 로그				u	b	
 リーセントチェンジロール		n	1	리센트 체인지 롤				u	b	
 リーゼント	りーぜんと	n	1	리젠트				u	b	
-リーダー	りーだー	n	1	리더			cls=@post	u	b	
 リーダビリティー	りーだびりてぃー	n	1	가독성				u	wl	
 リーダビリティー	りーだびりてぃー	n	2	리더빌리티				u	b	
 リーダビリティー	りーだびりてぃー	n	3	리드어빌러티				u	b	
@@ -21306,8 +20875,6 @@ ttt		n	1	ttt				u	b
 ルーメン	るーめん	n	1	루멘				u	b	
 ルーラル	るーらる	n	1	전원의				u	b	
 ルーラー	るーらー	n	1	룰러				u	b	
-ルール	るーる	n	1	룰			cls=@rule|@rote	u	b	
-ルール	るーる	n	2	루르				u	c+nw	from-names
 ルールオブロー		n	1	법치주의				u	wl	
 ルールドサーフェス		n	1	룰드 서피스				u	b	
 ルーレット	るーれっと	n	1	룰렛				u	w	
@@ -21713,8 +21280,6 @@ ttt		n	1	ttt				u	b
 ローブデュソワール		n	1	이브닝드레스				u	b	
 ローブドソワール		n	1	이브닝 드레스				u	b	
 ローブモンタント		n	1	로브 몽탕트				u	b	
-ロープ	ろーぷ	n	1	로프				u	w	
-ロープ	ろーぷ	n	2	롭				u	c+np	from-names
 ロープウエー	ろーぷうえー	n	1	로프웨이				u	b	
 ロープウエー	ろーぷうえー	n	2	삭도				u	c+nw	from-names
 ローマナイズ	ろーまないず	n	1	로마나이즈				u	b	
@@ -21770,7 +21335,7 @@ ttt		n	1	ttt				u	b
 ワゴン	わごん	n	1	웨건			cls=@vehicle	u	b	
 山葵	わさび	n	1	고추냉이				u	w	
 山葵	わさび	n	2	와사비				u	b	
-技	わざ	n	1	비결				u	b	
+技	わざ	n	1	비결			cls=@skill	u	b	
 技	わざ	n	2	기술				u	b	
 技	わざ	n	3	업				u	b	
 ワシマイヤー		n	1	와시마이야				u	b	
@@ -21898,8 +21463,6 @@ ttt		n	1	ttt				u	b
 一丸	いちがん	n	1	한 덩어리			name=+	u	wl	
 一丸	いちがん	n	2	일환				u	b	
 一事	いちじ	n	1	한가지 일				u	b	
-一人っ子	ひとりっこ	n	1	외동				u	wl	
-一人っ子	ひとりっこ	n	2	독자				u	b	
 独り住まい	ひとりずまい	n	1	독신 생활				u	w	
 一人息子	ひとりむすこ	n	1	외아들				u	w	
 一介	いっかい	n	1	일개				u	b	
@@ -22008,10 +21571,6 @@ ttt		n	1	ttt				u	b
 一昔	ひとむかし	n	1	옛날				u	wl	
 一昔	ひとむかし	n	2	한참 전				u	b	
 一昨	いっさく	n	1	지지난				u	b	
-一時	いちじ	n	1	한때				u	b	
-一時	いちじ	n	2	일시				u	b	rule:1791 +unmapped
-一時	いちじ	n	3	한꺼번에	next=に			u	w	
-一時	いちじ	n	4	1시	mod=深夜|夜中			u	x	senses
 一服	いっぷく	n	1	휴식				u	b	
 一服	いっぷく	n	2	소강상태				u	b	
 一望	いちぼう	n	1	일망				u	b	
@@ -22297,7 +21856,6 @@ ttt		n	1	ttt				u	b
 上り坂	のぼりざか	n	3	상승세				u	wl	
 上り線	のぼりせん	n	1	상행선				u	b	
 上り鮎	のぼりあゆ	n	1	봄에 상류하는 은어				u	b	
-上下	じょうげ	n	1	상하				u	b	
 上世	じょうせい	n	1	먼 옛날				u	b	
 上乗	じょうじょう	n	1	최상				u	b	
 上乗せ	うわのせ	n	1	추가				u	b	
@@ -22627,8 +22185,6 @@ ttt		n	1	ttt				u	b
 不具	ふぐ	n	1	불구				u	b	
 不凍	ふとう	n	1	부동				u	b	
 不出	ふしゅつ	n	1	불출				u	b	
-不利	ふり	n	1	불리하다				u	b	
-不利	ふり	n	2	불리				u	b	
 不労	ふろう	n	1	불로				u	b	
 不参	ふさん	n	1	불참				u	b	
 不可	ふか	n	1	불가				u	b	
@@ -22659,14 +22215,9 @@ ttt		n	1	ttt				u	b
 不実	ふじつ	n	1	부실하다				u	b	
 不実	ふじつ	n	2	부실				u	b	
 不実	ふじつ	n	3	부실한	next=の			u	b	
-不審	ふしん	n	1	의심				u	b	
-不審	ふしん	n	2	의심스럽다				u	b	
-不審	ふしん	n	3	수상한	next=の			u	b	
 不届き	ふとどき	n	1	괘씸함				u	b	
 不帰	ふき	n	1	불귀				u	b	
 不平	ふへい	n	1	불평				u	b	
-不幸	ふこう	n	1	불행하다				u	b	
-不幸	ふこう	n	2	불행				u	b	
 不幸せ	ふしあわせ	n	1	불행하다				u	w	
 不弁	ふべん	n	1	말이 서투르다				u	b	
 不得手	ふえて	n	1	서투투르다				u	b	
@@ -22676,7 +22227,6 @@ ttt		n	1	ttt				u	b
 不快	ふかい	n	1	불쾌하다				u	b	
 不快	ふかい	n	2	불쾌				u	b	
 不惑	ふわく	n	1	불혹				u	b	
-不意	ふい	n	1	불의				u	b	
 不感	ふかん	n	1	불감				u	b	
 不慮	ふりょ	n	1	의외				u	b	
 不慮	ふりょ	n	2	뜻하지 않은	next=の			u	b	
@@ -22714,7 +22264,6 @@ ttt		n	1	ttt				u	b
 不浄	ふじょう	n	2	부정				u	b	
 不渡り	ふわたり	n	1	부도				u	b	
 不測	ふそく	n	1	불측				u	b	
-不満	ふまん	n	1	불만			cls=@protest	u	b	
 不漁	ふりょう	n	1	흉어				u	b	
 不潔	ふけつ	n	1	불결하다				u	b	
 不潔	ふけつ	n	2	불결				u	b	
@@ -22755,9 +22304,6 @@ ttt		n	1	ttt				u	b
 不貞	ふてい	n	1	부정				u	b	
 不貞腐れ	ふてくされ	n	1	부루퉁함				u	b	
 不買	ふばい	n	1	불매				u	b	
-不足	ふそく	n	1	부족				u	b	rule:85 +unmapped
-不足	ふそく	n	2	부족하다				u	b	rule:1754 +unmapped assigns-neighbour
-不足	ふそく	n	3	불만				u	b	rule:3697 +unmapped
 不退	ふたい	n	1	불퇴				u	b	
 不通	ふつう	n	1	불통				u	b	
 不逞	ふてい	n	1	불령				u	b	
@@ -22823,10 +22369,6 @@ ttt		n	1	ttt				u	b
 世迷い言	よまいごと	n	2	횡설수설				u	b	
 世過ぎ	よすぎ	n	1	세상살이				u	b	
 世道	せどう	n	1	세도				u	b	
-世間	せけん	n	1	세상				u	b	
-丘	おか	n	1	언덕			name=+	u	b	
-丘	おか	n	2	구				u	b	
-丘	おか	n	3	강				u	b	
 丘陵	きゅうりょう	n	1	구릉				u	b	
 丙	へい	n	1	병				u	b	rule:6951 +unmapped
 丙午	ひのえうま	n	1	병오년				u	b	
@@ -22864,7 +22406,6 @@ ttt		n	1	ttt				u	b
 両得	りょうとく	n	1	양득				u	b	
 両性	りょうせい	n	1	양성				u	b	
 両所	りょうしょ	n	1	두 곳				u	b	
-両手	りょうて	n	1	양손			cls=@body	u	b	
 両方	りょうほう	n	1	양쪽 모두				u	b	
 両方	りょうほう	n	2	양방				u	b	
 両方	りょうほう	n	3	양자				u	b	
@@ -23248,7 +22789,6 @@ ttt		n	1	ttt				u	b
 乗り越し	のりこし	n	2	목적지를 지나치기				u	b	
 乗り逃げ	のりにげ	n	1	승차도주				u	w	
 乗務	じょうむ	n	1	승무				u	b	
-乗客	じょうきゃく	n	1	승객				u	b	
 乗数	じょうすう	n	1	승수				u	b	
 乗機	じょうき	n	1	탑승 비행기				u	b	
 乗法	じょうほう	n	1	곱셈				u	b	
@@ -23298,8 +22838,6 @@ ttt		n	1	ttt				u	b
 乱撃	らんげき	n	1	난격				u	b	
 乱数	らんすう	n	1	난수				u	b	
 乱文	らんぶん	n	1	난문				u	b	
-乱暴	らんぼう	n	1	난폭하다				u	w	
-乱暴	らんぼう	n	2	난폭				u	w	
 乱民	らんみん	n	1	난민				u	b	
 乱波	らっぱ	n	1	난파				u	w	
 乱流	らんりゅう	n	1	난류				u	b	
@@ -23415,7 +22953,6 @@ ttt		n	1	ttt				u	b
 予知	よち	n	1	예지				u	b	
 予科	よか	n	1	예과				u	b	
 予稿	よこう	n	1	예고				u	b	
-予算	よさん	n	1	예산			cls=@money	u	b	
 予納	よのう	n	1	예납				u	b	
 予行	よこう	n	1	예행				u	b	
 予見	よけん	n	1	예견				u	b	
@@ -23436,7 +22973,6 @@ ttt		n	1	ttt				u	b
 争議	そうぎ	n	1	쟁의				u	b	
 争闘	そうとう	n	1	투쟁				u	b	
 事々	ことごと	n	1	모든 일				u	w	
-事態	じたい	n	1	사태			cls=@topic	u	b	
 事例	じれい	n	1	사례				u	b	
 事典	じてん	n	1	사전				u	b	
 事前	じぜん	n	1	사전				u	b	
@@ -23490,7 +23026,6 @@ ttt		n	1	ttt				u	b
 互換	ごかん	n	1	호환				u	b	
 互替わり	かたみがわり	n	1	교대				u	b	
 互生	ごせい	n	1	호생				u	b	
-互角	ごかく	n	1	호각				u	b	
 互譲	ごじょう	n	1	호양				u	b	
 互選	ごせん	n	1	호선				u	b	
 五体	ごたい	n	1	오체				u	b	
@@ -23992,7 +23527,6 @@ ttt		n	1	ttt				u	b
 付設	ふせつ	n	1	부설				u	w	
 付説	ふせつ	n	1	부연 설명				u	b	
 付議	ふぎ	n	1	부의				u	b	
-付近	ふきん	n	1	부근				u	b	
 付随	ふずい	n	1	부수				u	w	
 仙丹	せんたん	n	1	선단				u	b	
 仙人	せんにん	n	1	선인				u	b	
@@ -24047,7 +23581,6 @@ ttt		n	1	ttt				u	b
 代議	だいぎ	n	1	대의				u	b	
 代赭	たいしゃ	n	1	대자				u	b	
 代走	だいそう	n	1	대주자				u	b	
-代金	だいきん	n	1	대금			cls=@money	u	b	
 代願	だいがん	n	1	대원				u	b	
 令	りょう	n	1	령			name=+	u	b	
 令兄	れいけい	n	1	형님				u	b	
@@ -24125,7 +23658,6 @@ ttt		n	1	ttt				u	b
 仮足	かそく	n	1	위족				u	b	
 仮需	かりじゅ	n	1	가수				u	b	
 仮需	かりじゅ	n	2	가수요				u	b	rule:3929 +unmapped
-仮面	かめん	n	1	가면			cls=@headwear	u	b	
 仮題	かだい	n	1	가제				u	b	
 仰せ	おおせ	n	1	분부				u	b	
 仰望	ぎょうぼう	n	1	존경				u	b	
@@ -24144,7 +23676,6 @@ ttt		n	1	ttt				u	b
 仲働き	なかばたらき	n	1	가정부				u	b	
 仲卸	なかおろし	n	1	구매 브로커				u	b	
 仲夏	ちゅうか	n	1	음력5월				u	b	
-仲直り	なかなおり	n	1	화해				u	b	
 仲秋	ちゅうしゅう	n	1	추석				u	b	
 仲秋	ちゅうしゅう	n	2	중추				u	c+np	from-names
 仲裁	ちゅうさい	n	1	중재				u	b	
@@ -24166,8 +23697,6 @@ ttt		n	1	ttt				u	b
 企及	ききゅう	n	1	필적				u	b	
 企図	きと	n	1	도모				u	w	
 企図	きと	n	2	기도				u	b	
-企業	きぎょう	n	1	기업				u	b	
-企画	きかく	n	1	기획			cls=@plan|@scheme	u	b	
 伊佐木	いさき	n	1	벤자리			name=+	u	b	
 伊達男	だておとこ	n	1	멋쟁이 남자				u	b	
 伊達締め	だてじめ	n	1	다테지메				u	b	
@@ -24264,7 +23793,6 @@ ttt		n	1	ttt				u	b
 伝法	でんぼう	n	1	난폭하다			name=+	u	b	
 伝灯	でんとう	n	1	전등				u	b	
 伝票	でんぴょう	n	1	전표				u	b	
-伝統	でんとう	n	1	전통				u	b	
 伝線	でんせん	n	1	올 풀림				u	wl	
 伝線	でんせん	n	2	전선				u	b	
 伝聞	でんぶん	n	1	전문				u	b	
@@ -24397,7 +23925,6 @@ ttt		n	1	ttt				u	b
 体内	たいない	n	1	체내				u	b	
 体刑	たいけい	n	1	체형				u	b	
 体制	たいせい	n	1	체제				u	b	
-体力	たいりょく	n	1	체력			cls=@strength	u	b	
 体勢	たいせい	n	1	몸의 자세			cls=@stance	u	b	
 体協	たいきょう	n	1	체육협회				u	b	
 体固め	たいがため	n	1	누르기				u	b	
@@ -24427,11 +23954,9 @@ ttt		n	1	ttt				u	b
 体表	たいひょう	n	1	체표				u	b	
 体言	たいげん	n	1	체언				u	b	
 体認	たいにん	n	1	체험 인식				u	b	
-体調	たいちょう	n	1	컨디션				u	b	
 体貌	たいぼう	n	1	용모				u	b	
 体質	たいしつ	n	1	체질				u	b	
 体躯	たいく	n	1	체구				u	w	
-体重	たいじゅう	n	1	체중			cls=@personal.info	u	b	
 体長	たいちょう	n	1	몸길이				u	wl	
 体長	たいちょう	n	2	체장				u	b	
 体面	たいめん	n	1	체면				u	b	
@@ -24439,8 +23964,6 @@ ttt		n	1	ttt				u	b
 何々	なになに	n	1	무엇 무엇				u	b	
 何々	なになに	n	2	무엇무엇				u	b	
 何々	なになに	n	3	무엇무엇인지	next=と			u	w	
-何事	なにごと	n	1	무슨 일			cls=@question	u	b	
-何事	なにごと	n	2	아무 일				u	b	rule:4629 +unmapped
 何物	なにもの	n	1	무엇				u	b	
 何奴	なにやつ	n	1	웬 놈				u	x	
 何奴	なにやつ	n	2	어떤 놈				u	b	
@@ -24562,7 +24085,7 @@ ttt		n	1	ttt				u	b
 作柄	さくがら	n	2	작황				u	b	
 作歌	さっか	n	1	시가 짓기				u	b	
 作況	さっきょう	n	1	작황				u	b	
-作法	さほう	n	1	예법				u	wl	
+作法	さほう	n	1	예법			cls=@skill	u	wl	
 作法	さほう	n	2	작법				u	b	
 作為	さくい	n	1	작위				u	b	
 作物	さくもつ	n	1	작물				u	b	
@@ -24741,9 +24264,6 @@ ttt		n	1	ttt				u	b
 侵犯	しんぱん	n	1	침범				u	b	
 侵略	しんりゃく	n	1	침략			cls=@incident	u	b	
 侵食	しんしょく	n	1	침식				u	w	
-便	びん	n	1	편				u	wl	
-便	びん	n	2	변				u	b	
-便	びん	n	3	편리하다				u	b	rule:1531 +unmapped assigns-neighbour
 便乗	びんじょう	n	1	편승				u	b	
 便器	べんき	n	1	변기				u	b	
 便宜	べんぎ	n	1	편리하다				u	b	
@@ -24929,7 +24449,6 @@ ttt		n	1	ttt				u	b
 修養	しゅうよう	n	1	수양				u	b	
 俯き	うつむき	n	1	고개를 숙임				u	b	
 俯瞰	ふかん	n	1	부감				u	b	
-俳優	はいゆう	n	1	배우				u	b	
 俳句	はいく	n	1	하이쿠				u	b	
 俳味	はいみ	n	1	하이카이의 특유의 풍취				u	b	
 俳聖	はいせい	n	1	하이쿠의 명인				u	b	
@@ -24948,12 +24467,11 @@ ttt		n	1	ttt				u	b
 蔵出し	くらだし	n	1	출고				u	b	
 倉卒	そうそつ	n	1	창졸				u	b	
 倉卒	そうそつ	n	2	황망히	next=に			u	b	
-倉庫	そうこ	n	1	창고				u	b	
 倉廩	そうりん	n	1	곳간				u	b	
 倉渡し	くらわたし	n	1	창고도				u	b	
 倉皇	そうこう	n	1	창황				u	w	
 倉荷	くらに	n	1	입고화물				u	b	
-個	こ	n	1	개				u	b	
+個	こ	n	1	개			cls=@counter	u	b	
 個々	ここ	n	1	개개				u	w	
 個体	こたい	n	1	개체				u	b	
 個別	こべつ	n	1	개별				u	b	
@@ -25023,8 +24541,6 @@ ttt		n	1	ttt				u	b
 借財	しゃくざい	n	1	빚				u	wl	
 借財	しゃくざい	n	2	차재				u	b	
 借貸	しゃくたい	n	1	대차				u	b	
-借金	しゃっきん	n	1	빚				u	b	
-借金	しゃっきん	n	2	부채				u	b	
 借銭	しゃくせん	n	1	빚				u	b	
 値打ち	ねうち	n	1	값			cls=@price	u	w	
 値打ち	ねうち	n	2	값어치				u	b	
@@ -25376,8 +24892,6 @@ ttt		n	1	ttt				u	b
 兄事	けいじ	n	1	형으로 모심				u	b	
 充填	じゅうてん	n	1	충전				u	b	
 充員	じゅういん	n	1	충원				u	b	
-充実	じゅうじつ	n	1	충실하다				u	b	
-充実	じゅうじつ	n	2	충실				u	b	
 充当	じゅうとう	n	1	충당				u	b	
 充放電	じゅうほうでん	n	1	충방전				u	b	
 充満	じゅうまん	n	1	충만				u	b	
@@ -25437,7 +24951,6 @@ ttt		n	1	ttt				u	b
 先攻	せんこう	n	1	선공				u	b	
 先方	せんぽう	n	1	상대방				u	b	
 先方	せんぽう	n	2	앞 쪽				u	b	
-先日	せんじつ	n	1	요전날				u	b	
 先晩	せんばん	n	1	전날 밤				u	b	
 先棒	さきぼう	n	1	앞잡이				u	wl	
 先棒	さきぼう	n	2	선봉				u	b	
@@ -25451,7 +24964,6 @@ ttt		n	1	ttt				u	b
 先登	せんとう	n	1	선봉				u	b	
 先皇	せんのう	n	1	선황				u	b	
 先着	せんちゃく	n	1	선착				u	b	
-先祖	せんぞ	n	1	선조				u	b	
 先秦	せんしん	n	1	선진				u	b	
 先端	せんたん	n	1	끝				u	wl	
 先端	せんたん	n	2	첨단				u	b	
@@ -25540,7 +25052,6 @@ ttt		n	1	ttt				u	b
 免税	めんぜい	n	1	면세				u	b	
 免罪	めんざい	n	1	면죄				u	b	
 免職	めんしょく	n	1	면직				u	b	
-免許	めんきょ	n	1	면허				u	b	
 免責	めんせき	n	1	면책				u	b	
 免除	めんじょ	n	1	면제				u	b	
 免震	めんしん	n	1	면진				u	b	
@@ -25832,8 +25343,6 @@ ttt		n	1	ttt				u	b
 公家	くげ	n	2	문신				u	b	
 公差	こうさ	n	1	공차				u	b	
 公布	こうふ	n	1	공포				u	b	
-公平	こうへい	n	1	공평하다			name=+	u	b	
-公平	こうへい	n	2	공평				u	b	
 公序	こうじょ	n	1	공서				u	b	
 公庫	こうこ	n	1	공고				u	b	
 公式	こうしき	n	1	공식			cls=@rote	u	b	
@@ -26041,7 +25550,6 @@ ttt		n	1	ttt				u	b
 内侍	ないし	n	1	내시				u	b	
 内供	ないぐ	n	1	고승				u	b	
 内借り	うちがり	n	1	가불				u	b	
-内側	うちがわ	n	1	안쪽				u	w	
 内債	ないさい	n	1	내채				u	b	
 内儀	ないぎ	n	1	마누라				u	b	
 内典	ないてん	n	1	내전				u	b	
@@ -26175,7 +25683,7 @@ ttt		n	1	ttt				u	b
 円建て	えんだて	n	1	엔화표시				u	b	
 円建て	えんだて	n	2	엔화기준				u	b	
 円弧	えんこ	n	1	원호				u	b	
-円形	えんけい	n	1	원형				u	b	
+円形	えんけい	n	1	원형			cls=@figure	u	b	
 円木	えんぼく	n	1	원목				u	b	
 円板	えんばん	n	1	원판				u	b	
 円柱	えんちゅう	n	1	원기둥				u	w	
@@ -26197,7 +25705,6 @@ ttt		n	1	ttt				u	b
 冊立	さくりつ	n	1	책봉				u	b	
 再三	さいさん	n	1	재삼				u	b	
 再任	さいにん	n	1	재임				u	b	
-再会	さいかい	n	1	재회				u	b	
 再々	さいさい	n	1	자주				u	wl	
 再々	さいさい	n	2	여러 번				u	b	
 再刊	さいかん	n	1	재간				u	b	
@@ -26385,8 +25892,6 @@ ttt		n	1	ttt				u	b
 冷酷	れいこく	n	2	냉혹				u	b	
 冷間	れいかん	n	1	냉간				u	b	
 冷雨	れいう	n	1	찬 비				u	b	
-冷静	れいせい	n	1	냉정하다			cls=@state	u	b	
-冷静	れいせい	n	2	냉정				u	b	
 冷風	れいふう	n	1	찬 바람				u	b	
 凄味	すごみ	n	1	무서움				u	b	
 凄味	すごみ	n	2	으름장				u	b	
@@ -26524,9 +26029,6 @@ ttt		n	1	ttt				u	b
 出京	しゅっきょう	n	2	출경				u	b	
 出仕	しゅっし	n	1	출근				u	b	
 出任せ	でまかせ	n	1	엉터리				u	w	
-出会い	であい	n	1	만남				u	w	
-出会い	であい	n	2	합류점				u	b	rule:4002 +unmapped assigns-neighbour
-出会い	であい	n	3	만남의	next=の			u	b	
 出作り	でづくり	n	1	농막 농사				u	b	
 出先	でさき	n	1	행선지			name=+	u	b	
 出入り	でいり	n	1	출입				u	b	
@@ -26628,7 +26130,6 @@ ttt		n	1	ttt				u	b
 出芽	しゅつが	n	1	출아				u	b	
 出荷	しゅっか	n	1	출하				u	b	
 出藍	しゅつらん	n	1	출람				u	b	
-出血	しゅっけつ	n	1	출혈				u	b	
 出講	しゅっこう	n	1	출강				u	b	
 出費	しゅっぴ	n	1	지출				u	b	
 出資	しゅっし	n	1	출자				u	b	
@@ -26901,15 +26402,7 @@ ttt		n	1	ttt				u	b
 列藩	れっぱん	n	1	몇개의 번				u	b	
 列記	れっき	n	1	나열				u	wl	
 列記	れっき	n	2	열기				u	b	
-列車	れっしゃ	n	1	열차				u	b	
 初っ切り	しょっきり	n	1	첫판				u	b	
-初め	はじめ	n	1	처음				u	b	
-初め	はじめ	n	2	효시				u	b	
-初め	はじめ	n	3	초	after=R年			u	b	rule:3990
-初め	はじめ	n	4	초	after=R年代			u	b	rule:3990
-初め	はじめ	n	5	초	after=R月			u	b	rule:3990
-初め	はじめ	n	6	초	after=R時代			u	b	rule:3990
-初め	はじめ	n	7	초	after=R期			u	b	rule:3990
 初中	しょちゅう	n	1	늘				u	b	
 初乗り	はつのり	n	1	최초구간				u	b	
 初乳	しょにゅう	n	1	초유				u	b	
@@ -26942,10 +26435,8 @@ ttt		n	1	ttt				u	b
 初年	しょねん	n	1	초년				u	b	
 初心	しょしん	n	1	초심				u	b	
 初志	しょし	n	1	초지				u	b	
-初恋	はつこい	n	1	첫사랑				u	b	
 初戦	しょせん	n	1	초전				u	b	
 初手	しょて	n	1	최초				u	b	
-初日	しょにち	n	1	첫날				u	b	
 初日の出	はつひので	n	1	설날 해돋이				u	b	
 初旬	しょじゅん	n	1	초순				u	b	
 初春	しょしゅん	n	1	초봄				u	b	
@@ -27118,7 +26609,6 @@ ttt		n	1	ttt				u	b
 利率	りりつ	n	1	이율				u	b	
 利生	りしょう	n	1	이생			name=+	u	b	
 利発	りはつ	n	1	영리하다				u	b	
-利益	りえき	n	1	이익				u	b	
 利運	りうん	n	1	호운				u	b	
 利金	りきん	n	1	이익금				u	b	
 利鈍	りどん	n	1	이둔				u	b	
@@ -27135,7 +26625,6 @@ ttt		n	1	ttt				u	b
 制圧	せいあつ	n	1	제압				u	b	
 制定	せいてい	n	1	제정				u	b	
 制帽	せいぼう	n	1	제모				u	b	
-制度	せいど	n	1	제도				u	b	
 制式	せいしき	n	1	제식				u	b	
 制札	せいさつ	n	1	금지 사항				u	b	
 制欲	せいよく	n	1	금욕				u	w	
@@ -27238,13 +26727,11 @@ ttt		n	1	ttt				u	b
 前庭	ぜんてい	n	2	전정				u	b	
 前引け	ぜんびけ	n	1	전장 마감				u	b	
 前弾き	まえびき	n	1	전주				u	b	
-前後	ぜんご	n	1	전후				u	b	
 前後ろ	まえうしろ	n	1	전후				u	b	
 前払い	まえばらい	n	1	선불				u	b	
 前掲	ぜんけい	n	1	전술				u	b	
 前提	ぜんてい	n	1	전제				u	b	
 前文	ぜんぶん	n	1	전문				u	b	
-前方	ぜんぽう	n	1	전방				u	b	
 前景	ぜんけい	n	1	전경				u	b	
 前書	ぜんしょ	n	1	머리말				u	wl	
 前書	ぜんしょ	n	2	전서				u	b	
@@ -27338,9 +26825,9 @@ ttt		n	1	ttt				u	b
 剣山	けんざん	n	1	쓰루기야마				u	b	
 剣法	けんぽう	n	1	검법				u	b	
 剣舞	けんぶ	n	1	칼춤				u	b	
-剣術	けんじゅつ	n	1	검술				u	b	
+剣術	けんじゅつ	n	1	검술			cls=@skill	u	b	
 剣豪	けんごう	n	1	검호				u	b	
-剣道	けんどう	n	1	검도				u	b	
+剣道	けんどう	n	1	검도			cls=@sport	u	b	
 剣難	けんなん	n	1	검난				u	b	
 剥き身	むきみ	n	1	얇게 저민 고기				u	b	
 剥げ	はげ	n	1	벗겨진 자리				u	b	
@@ -27398,7 +26885,7 @@ ttt		n	1	ttt				u	b
 割り石	わりいし	n	1	깬돌				u	b	
 割り符	わりふ	n	1	부절				u	wl	
 割り符	わりふ	n	2	할부				u	b	
-割り箸	わりばし	n	1	소독저				u	w	
+割り箸	わりばし	n	1	소독저			cls=@tableware	u	w	
 割り箸	わりばし	n	2	나무젓가락				u	b	
 割り込み	わりこみ	n	1	세치기				u	b	
 割り込み	わりこみ	n	2	끼어듦				u	b	
@@ -27439,7 +26926,6 @@ ttt		n	1	ttt				u	b
 剽窃	ひょうせつ	n	1	표절				u	b	
 剽竊		n	1	표절				u	b	
 画定	かくてい	n	1	확정				u	b	
-劇	げき	n	1	극			cls=@show	u	b	
 劇中	げきちゅう	n	1	극중				u	b	
 劇作	げきさく	n	1	극작				u	b	
 激務	げきむ	n	1	극무				u	b	
@@ -27664,7 +27150,6 @@ ttt		n	1	ttt				u	b
 勇往	ゆうおう	n	1	용왕				u	b	
 勇断	ゆうだん	n	1	용단				u	b	
 勇武	ゆうぶ	n	1	용맹				u	b	
-勇気	ゆうき	n	1	용기			cls=@strength	u	b	
 勇猛	ゆうもう	n	1	용맹하다				u	b	
 勇猛	ゆうもう	n	2	용맹				u	b	
 勇者	ゆうしゃ	n	1	용사				u	b	
@@ -27720,7 +27205,7 @@ ttt		n	1	ttt				u	b
 勝ち目	かちめ	n	2	승째				u	b	rule:2896 +unmapped
 勝ち組	かちぐみ	n	1	이긴 편				u	w	
 勝ち色	かちいろ	n	1	이길 기색				u	b	
-勝ち負け	かちまけ	n	1	승부				u	b	
+勝ち負け	かちまけ	n	1	승부			cls=@result	u	b	
 勝ち越し	かちこし	n	1	승리 우세				u	wl	
 勝ち越し	かちこし	n	2	리드				u	wl	
 勝ち越し	かちこし	n	3	승리의	next=の			u	b	
@@ -27730,7 +27215,7 @@ ttt		n	1	ttt				u	b
 勝報	しょうほう	n	1	승보				u	w	
 勝手口	かってぐち	n	1	부엌문				u	b	
 勝手向き	かってむき	n	1	형편				u	b	
-勝敗	しょうはい	n	1	승패				u	b	
+勝敗	しょうはい	n	1	승패			cls=@result	u	b	
 勝機	しょうき	n	1	이길 기회				u	b	
 勝算	しょうさん	n	1	승산				u	b	
 勝者	しょうしゃ	n	1	승자				u	b	
@@ -27820,7 +27305,6 @@ ttt		n	1	ttt				u	b
 化生	かせい	n	1	성장				u	b	
 化生	かせい	n	2	화생				u	b	
 化石	かせき	n	1	화석				u	b	
-化粧	けしょう	n	1	화장				u	b	
 化繊	かせん	n	1	화학 섬유				u	b	
 化育	かいく	n	1	화육				u	b	
 化膿	かのう	n	1	화농				u	b	
@@ -27893,7 +27377,6 @@ ttt		n	1	ttt				u	b
 医家	いか	n	2	의가				u	b	
 医専	いせん	n	1	의전				u	b	
 医局	いきょく	n	1	의국				u	b	
-医師	いし	n	1	의사				u	b	
 医方	いほう	n	1	의술				u	b	
 医書	いしょ	n	1	의학서				u	b	
 医業	いぎょう	n	1	의술업				u	b	
@@ -27974,7 +27457,7 @@ ttt		n	1	ttt				u	b
 半熟	はんじゅく	n	1	반숙				u	b	
 半片	はんぺら	n	1	반 조각				u	b	
 半球	はんきゅう	n	1	반구				u	b	
-半生	はんせい	n	1	반생				u	b	
+半生	はんせい	n	1	반생			cls=@lifetime	u	b	
 半納	はんのう	n	1	반납				u	b	
 半紙	はんし	n	1	반지				u	b	
 半纏	はんてん	n	1	일본식 겉옷				u	w	
@@ -27995,8 +27478,6 @@ ttt		n	1	ttt				u	b
 半面	はんめん	n	1	반면				u	b	
 半音	はんおん	n	1	반음				u	b	
 半額	はんがく	n	1	반액				u	b	
-卑怯	ひきょう	n	1	비겁				u	b	
-卑怯	ひきょう	n	2	비겁하다				u	b	
 卑下	ひげ	n	1	비하				u	b	
 卑俗	ひぞく	n	1	비속하다				u	b	
 卑俗	ひぞく	n	2	비속				u	b	
@@ -28187,7 +27668,6 @@ ttt		n	1	ttt				u	b
 危害	きがい	n	1	위해				u	b	
 危局	ききょく	n	1	위국				u	b	
 危急	ききゅう	n	1	위급				u	b	
-危機	きき	n	1	위기				u	b	
 危殆	きたい	n	1	위태하다				u	b	
 危殆	きたい	n	2	위험				u	b	
 危篤	きとく	n	1	위독				u	b	
@@ -28456,7 +27936,6 @@ ttt		n	1	ttt				u	b
 友国	ゆうこく	n	1	우방국				u	b	
 友好	ゆうこう	n	1	우호			name=+	u	b	
 友引	ともびき	n	1	도모비키				u	b	
-友情	ゆうじょう	n	1	우정			cls=@relation	u	b	
 友愛	ゆうあい	n	1	우애				u	b	
 友誼	ゆうぎ	n	1	우의				u	b	
 友軍	ゆうぐん	n	1	우군				u	b	
@@ -28523,7 +28002,6 @@ ttt		n	1	ttt				u	b
 反照	はんしょう	n	1	반조				u	b	
 反物	たんもの	n	1	피륙				u	b	
 反目	はんもく	n	1	반목				u	b	
-反省	はんせい	n	1	반성				u	b	
 反立	はんりつ	n	1	반립				u	b	
 反米	はんべい	n	1	반미				u	b	
 反芻	はんすう	n	1	반추				u	w	
@@ -28706,7 +28184,6 @@ ttt		n	1	ttt				u	b
 受難	じゅなん	n	1	수난				u	b	
 受電	じゅでん	n	1	수전				u	b	
 受領	じゅりょう	n	1	수령				u	b	
-受験	じゅけん	n	1	수험				u	b	
 叙事	じょじ	n	1	서사				u	b	
 叙位	じょい	n	1	서위				u	b	
 叙勲	じょくん	n	1	훈장수여				u	b	
@@ -28774,8 +28251,6 @@ ttt		n	1	ttt				u	b
 口演	こうえん	n	1	구연				u	b	
 口火	くちび	n	1	도화선				u	b	
 口熱	こうねつ	n	1	구열				u	b	
-口癖	くちぐせ	n	1	말버릇			cls=@habit	u	w	
-口癖	くちぐせ	n	2	말투				u	wl	
 口直し	くちなおし	n	1	입가심				u	b	
 口碑	こうひ	n	1	구비				u	b	
 口答	こうとう	n	1	말대꾸				u	b	
@@ -28798,7 +28273,6 @@ ttt		n	1	ttt				u	b
 口証	こうしょう	n	1	구두 증명				u	b	
 口話	こうわ	n	1	구화				u	b	
 口語	こうご	n	1	구어				u	b	
-口調	くちょう	n	1	어조				u	b	
 口論	こうろん	n	1	말다툼				u	b	
 口跡	こうせき	n	1	말투				u	b	
 口車	くちぐるま	n	1	감언이설				u	b	
@@ -28922,7 +28396,7 @@ ttt		n	1	ttt				u	b
 召電	しょうでん	n	1	소전				u	b	
 可動	かどう	n	1	가동				u	b	
 可及	かきゅう	n	1	가급				u	b	
-可否	かひ	n	1	가부				u	b	
+可否	かひ	n	1	가부			cls=@result	u	b	
 可塑	かそ	n	1	가소				u	b	
 可変	かへん	n	1	가변				u	b	
 可採	かさい	n	1	채취가능				u	b	
@@ -29001,7 +28475,7 @@ ttt		n	1	ttt				u	b
 右左	みぎひだり	n	1	좌우				u	b	
 右巻き	みぎまき	n	1	오른쪽 감기				u	b	
 右府	うふ	n	1	우의정				u	b	
-右手	みぎて	n	1	오른손			name=+ cls=@body	u	b	
+右手	みぎて	n	1	오른손			name=+ cls=@body|@hand	u	b	
 右折	うせつ	n	1	우회전				u	b	
 右文	ゆうぶん	n	1	우문				u	b	
 右方	みぎかた	n	1	우측				u	b	
@@ -29119,10 +28593,9 @@ ttt		n	1	ttt				u	b
 合印	あいいん	n	1	대조인				u	w	
 合同	ごうどう	n	1	합동				u	b	
 合名	ごうめい	n	1	합명				u	b	
-合否	ごうひ	n	1	합격 여부				u	b	
+合否	ごうひ	n	1	합격 여부			cls=@result	u	b	
 合壁	がっぺき	n	1	가까운 이웃				u	b	
 合字	ごうじ	n	1	합자				u	b	
-合宿	がっしゅく	n	1	합숙				u	b	
 合弁	ごうべん	n	1	합작				u	b	
 合従	がっしょう	n	1	합종				u	b	
 相性	あいしょう	n	1	궁합				u	b	
@@ -29189,7 +28662,6 @@ ttt		n	1	ttt				u	b
 同位	どうい	n	1	동위				u	b	
 同体	どうたい	n	1	동체				u	b	
 同値	どうち	n	1	동치				u	b	
-同僚	どうりょう	n	1	동료				u	b	
 同党	どうとう	n	1	동당				u	b	
 同列	どうれつ	n	1	동렬				u	b	
 同前	どうぜん	n	1	전과 동일				u	b	
@@ -29438,7 +28910,6 @@ ttt		n	1	ttt				u	b
 吐き気	はきけ	n	3	욕지기				u	b	
 吐出	としゅつ	n	1	토출				u	b	
 吐剤	とざい	n	1	구토제				u	b	
-吐息	といき	n	1	숨결			cls=@body.output|@breath	u	b	
 吐根	とこん	n	1	토근				u	b	
 吐瀉	としゃ	n	1	토사				u	b	
 吐物	とぶつ	n	1	토한 것				u	b	
@@ -29855,9 +29326,6 @@ ttt		n	1	ttt				u	b
 蜀黍	もろこし	n	1	수수				u	w	
 唖	おし	n	1	벙어리				u	b	
 唖	おし	n	2	아				u	b	
-唯一	ゆいいつ	n	1	유일하다				u	b	
-唯一	ゆいいつ	n	2	유일				u	b	
-唯一	ゆいいつ	n	3	유일한	next=の			u	b	
 唯心	ゆいしん	n	1	유심				u	b	
 唯物	ゆいぶつ	n	1	유물				u	b	
 唯識	ゆいしき	n	1	유식				u	b	
@@ -29877,7 +29345,6 @@ ttt		n	1	ttt				u	b
 商賈	しょうこ	n	1	상인				u	b	
 商務	しょうむ	n	1	상무				u	b	
 商号	しょうごう	n	1	상호				u	b	
-商品	しょうひん	n	1	상품				u	b	
 商圏	しょうけん	n	1	상권				u	b	
 商大	しょうだい	n	1	상대				u	b	
 商学	しょうがく	n	1	상학				u	b	
@@ -29994,14 +29461,12 @@ ttt		n	1	ttt				u	b
 営庭	えいてい	n	1	연병장				u	b	
 営所	えいしょ	n	1	군영				u	b	
 営林	えいりん	n	1	영림				u	b	
-営業	えいぎょう	n	1	영업				u	b	
 営為	えいい	n	1	영위				u	b	
 営繕	えいぜん	n	1	영선				u	b	
 営舎	えいしゃ	n	1	막사				u	b	
 営農	えいのう	n	1	영농				u	b	
 営造	えいぞう	n	1	조영				u	b	
 営門	えいもん	n	1	병영의 문				u	b	
-栄養	えいよう	n	1	영양				u	b	
 嗄れ声	しゃがれごえ	n	1	쉰 소리				u	w	
 嗄れ声	しゃがれごえ	n	2	쉰 목소리				u	b	
 嗄声	させい	n	1	쉰 목소리				u	b	
@@ -30070,7 +29535,7 @@ ttt		n	1	ttt				u	b
 囚徒	しゅうと	n	1	죄수				u	b	
 囚虜	しゅうりょ	n	1	포로				u	b	
 囚衣	しゅうい	n	1	죄수복				u	b	
-四つん這い	よつんばい	n	1	포복				u	b	
+四つん這い	よつんばい	n	1	포복			cls=@stance	u	b	
 四つん這い	よつんばい	n	2	납죽 엎드림				u	b	
 四つ角	よつかど	n	1	네거리				u	b	
 四つ角	よつかど	n	2	사각뿔				u	b	
@@ -30097,7 +29562,7 @@ ttt		n	1	ttt				u	b
 四股	しこ	n	1	발				u	b	
 四肢	しし	n	1	사지				u	b	
 四苦	しく	n	1	생로병사				u	b	
-四角	しかく	n	1	사각				u	b	
+四角	しかく	n	1	사각			cls=@figure	u	b	
 四辺	しへん	n	1	사방				u	b	
 四隅	よすみ	n	1	네 귀퉁이				u	b	
 四隣	しりん	n	1	사방의 이웃				u	b	
@@ -30160,18 +29625,15 @@ ttt		n	1	ttt				u	b
 因習	いんしゅう	n	1	인습				u	b	
 団	だん	n	1	단			name=+	u	b	
 団交	だんこう	n	1	단체 교섭				u	b	
-団体	だんたい	n	1	단체				u	b	
 団員	だんいん	n	1	단원				u	b	
 団地	だんち	n	1	단지				u	b	
 団塊	だんかい	n	1	단괴				u	b	
 団結	だんけつ	n	1	단결				u	b	
 団長	だんちょう	n	1	단장				u	b	
 困却	こんきゃく	n	1	난처				u	b	
-困惑	こんわく	n	1	곤혹				u	b	
+困惑	こんわく	n	1	곤혹			cls=@emotion	u	b	
 困窮	こんきゅう	n	1	곤궁				u	b	
 困苦	こんく	n	1	곤고				u	b	
-困難	こんなん	n	1	곤란				u	b	
-困難	こんなん	n	2	곤란하다				u	b	rule:76 +unmapped assigns-neighbour
 囲い	かこい	n	1	울타리				u	b	
 囲い地	かこいち	n	1	장물매매 시장				u	b	
 囲い米	かこいまい	n	1	저장미				u	b	
@@ -30181,7 +29643,7 @@ ttt		n	1	ttt				u	b
 囲碁	いご	n	1	바둑				u	b	
 囲繞	いじょう	n	1	위요				u	b	
 囲繞	いじょう	n	2	빙 두름				u	b	
-図	ず	n	1	그림				u	b	
+図	ず	n	1	그림			cls=@picture	u	b	
 図	ず	n	2	도				u	b	
 図上	ずじょう	n	1	도상				u	b	
 図中	ずちゅう	n	1	그림중				u	b	
@@ -30194,7 +29656,7 @@ ttt		n	1	ttt				u	b
 図工	ずこう	n	1	미술				u	wl	
 図工	ずこう	n	2	도공				u	b	
 図式	ずしき	n	1	도식				u	b	
-図形	ずけい	n	1	도형				u	b	
+図形	ずけい	n	1	도형			cls=@figure	u	b	
 図柄	ずがら	n	1	도안				u	b	
 図案	ずあん	n	1	도안				u	b	
 図様	ずよう	n	1	도안 모양				u	b	
@@ -30313,7 +29775,6 @@ ttt		n	1	ttt				u	b
 国訓	こっくん	n	1	훈				u	b	
 国記	こくき	n	1	국기				u	b	
 国訳	こくやく	n	1	국역				u	b	
-国語	こくご	n	1	국어			cls=@subject.school	u	w	
 国論	こくろん	n	1	국론				u	b	
 国警	こっけい	n	1	국가 지방 경찰				u	b	
 国費	こくひ	n	1	국비				u	b	
@@ -30504,8 +29965,7 @@ ttt		n	1	ttt				u	b
 地均し	じならし	n	1	땅 고르는 일				u	b	
 地均し	じならし	n	2	땅고르기				u	b	
 地響き	じひびき	n	1	땅울림				u	b	
-地べた	じべた	n	1	바닥				u	b	
-地上	ちじょう	n	1	지상				u	b	
+地べた	じべた	n	1	바닥			cls=@place	u	b	
 地下足袋	じかたび	n	1	지카타비				u	b	
 地中	ちちゅう	n	1	지중				u	b	
 地主	じぬし	n	1	지주				u	b	
@@ -30546,7 +30006,6 @@ ttt		n	1	ttt				u	b
 地団駄	じだんだ	n	2	발	pred=踏む			u	x	senses
 地圧	ちあつ	n	1	지압				u	b	
 地坪	じつぼ	n	1	땅의 평수				u	b	
-地域	ちいき	n	1	지역				u	b	
 地場	じば	n	1	그 지방			name=+	u	b	
 地塊	ちかい	n	1	지괴				u	b	
 地境	じざかい	n	1	지경				u	b	
@@ -30626,8 +30085,6 @@ ttt		n	1	ttt				u	b
 地雨	じあめ	n	1	장기간 강하게 내리는 비				u	b	
 地雷	じらい	n	1	지뢰				u	b	
 地霊	ちれい	n	1	지령				u	b	
-地面	じめん	n	1	땅				u	wl	
-地面	じめん	n	2	지면				u	b	
 地頭	じとう	n	1	생머리				u	b	
 地頭	じとう	n	2	지토				u	b	
 地顔	じがお	n	1	맨얼굴				u	b	
@@ -30693,8 +30150,6 @@ ttt		n	1	ttt				u	b
 垂線	すいせん	n	1	수선				u	b	
 垂訓	すいくん	n	1	수훈				u	b	
 垂迹	すいじゃく	n	1	수적				u	b	
-型	かた	n	1	형태				u	b	
-型	かた	n	2	형				u	b	
 型通り	かたどおり	n	1	판에 박은 듯함				u	w	
 型通り	かたどおり	n	2	판에 박은 듯한	next=の			u	b	
 型付け	かたつけ	n	1	형지 염색				u	b	
@@ -30858,8 +30313,6 @@ ttt		n	1	ttt				u	b
 場立ち	ばたち	n	1	대리인				u	b	
 場裡	じょうり	n	1	장내				u	w	
 場銭	ばせん	n	1	자릿값				u	b	
-場面	ばめん	n	1	경우				u	b	
-場面	ばめん	n	2	장면				u	b	
 堵列	とれつ	n	1	도열				u	b	
 塁	るい	n	1	루			name=+	u	b	
 塁壁	るいへき	n	1	성벽				u	b	
@@ -30948,7 +30401,6 @@ ttt		n	1	ttt				u	b
 塵外	じんがい	n	1	속세 밖				u	b	
 塵界	じんかい	n	1	속세				u	b	
 塵芥	じんかい	n	1	진개				u	b	
-塾	じゅく	n	1	학원				u	b	
 塾代	じゅくだい	n	1	학원비				u	b	
 塾帰り	じゅくがえり	n	1	학원에서 돌아오는 길				u	b	
 塾生	じゅくせい	n	1	학원생				u	b	
@@ -30960,8 +30412,6 @@ ttt		n	1	ttt				u	b
 境涯	きょうがい	n	1	환경과 생애				u	b	
 境界	きょうかい	n	1	경계				u	b	
 境遇	きょうぐう	n	1	처지				u	b	
-墓	はか	n	1	무덤				u	b	
-墓	はか	n	2	묘				u	b	
 墓前	ぼぜん	n	1	묘전				u	b	
 墓参	ぼさん	n	1	성묘				u	b	
 墓地	ぼち	n	1	묘지				u	b	
@@ -31111,7 +30561,7 @@ ttt		n	1	ttt				u	b
 声変わり	こえがわり	n	1	변성				u	b	
 声帯	せいたい	n	1	성대				u	b	
 声掛かり	こえがかり	n	1	소개				u	w	
-声援	せいえん	n	1	성원				u	b	
+声援	せいえん	n	1	성원			cls=@shout	u	b	
 声明	せいめい	n	1	고대 인도 학문			cls=@protest	u	b	
 声明	せいめい	n	2	성명				u	b	
 声望	せいぼう	n	1	명성과 인망				u	b	
@@ -31220,7 +30670,6 @@ ttt		n	1	ttt				u	b
 変体	へんたい	n	1	변체				u	b	
 変則	へんそく	n	1	변칙				u	b	
 変動	へんどう	n	1	변동				u	b	
-変化	へんか	n	1	변화			cls=@event|@trend	u	b	
 変名	へんめい	n	1	가명사용				u	b	
 変名	へんめい	n	2	변명				u	c+np	from-names
 変哲	へんてつ	n	1	별다름			name=+	u	b	
@@ -31323,8 +30772,6 @@ ttt		n	1	ttt				u	b
 夕映え	ゆうばえ	n	1	저녁노을				u	b	
 夕映え	ゆうばえ	n	2	저녁놀				u	b	
 夕景	ゆうけい	n	1	황혼				u	b	
-夕暮れ	ゆうぐれ	n	1	황혼				u	w	
-夕暮れ	ゆうぐれ	n	2	저녁				u	b	
 夕月	ゆうづき	n	1	초저녁달				u	b	
 夕潮	ゆうしお	n	1	저녁 조수				u	wl	
 夕潮	ゆうしお	n	2	석조				u	w	
@@ -31332,7 +30779,6 @@ ttt		n	1	ttt				u	b
 夕照	せきしょう	n	1	석조				u	b	
 夕菅	ゆうすげ	n	1	애기원추리				u	b	
 夕風	ゆうかぜ	n	1	저녁 바람				u	b	
-夕飯	ゆうはん	n	1	저녁			cls=@meal	u	b	
 夕鶴	ゆうづる	n	1	석학				u	b	
 外套	がいとう	n	1	외투				u	b	
 外回り	そとまわり	n	1	부근				u	w	
@@ -31471,7 +30917,6 @@ ttt		n	1	ttt				u	b
 多妻	たさい	n	1	다처				u	b	
 多孔	たこう	n	1	다공				u	b	
 多寡	たか	n	1	다과				u	b	
-多少	たしょう	n	1	다소			cls=@degree	u	b	
 多層	たそう	n	1	다층				u	b	
 多岐	たき	n	1	다방면				u	b	
 多年	たねん	n	1	다년				u	b	
@@ -31523,9 +30968,6 @@ ttt		n	1	ttt				u	b
 多面	ためん	n	1	다면				u	b	
 多項	たこう	n	1	다항				u	b	
 多額	たがく	n	1	고액				u	b	
-夜明け	よあけ	n	1	새벽				u	w	
-夜明け	よあけ	n	2	여명				u	b	
-夜明け	よあけ	n	3	요아케				u	b	
 夜さり	よさり	n	1	밤 중				u	b	
 夜すがら	よすがら	n	1	밤새도록				u	b	
 夜すがら	よすがら	n	2	한밤내내				u	b	
@@ -31565,7 +31007,6 @@ ttt		n	1	ttt				u	b
 夜直	やちょく	n	1	숙직				u	b	
 夜着	よぎ	n	1	잠옷				u	b	
 夜祭り	よまつり	n	1	밤 축제				u	b	
-夜空	よぞら	n	1	밤하늘				u	b	
 夜籠もり	よごもり	n	1	밤이 깊어짐				u	b	
 夜船	よふね	n	1	밤배				u	b	
 夜色	やしょく	n	1	밤 경치				u	b	
@@ -31621,7 +31062,7 @@ ttt		n	1	ttt				u	b
 大所	おおどころ	n	1	대가				u	b	
 大鍋	おおなべ	n	1	큰 냄비				u	b	
 大鍋	おおなべ	n	2	냄비				u	b	
-大の字	だいのじ	n	1	큰댓자				u	b	
+大の字	だいのじ	n	1	큰댓자			cls=@stance	u	b	
 大瓶	おおびん	n	1	큰 병				u	w	
 大瓶	おおびん	n	2	큰병				u	b	
 大振り	おおぶり	n	1	큼직한	next=の			u	b	
@@ -31697,7 +31138,6 @@ ttt		n	1	ttt				u	b
 大回り	おおまわり	n	2	우회				u	b	
 大国	たいこく	n	1	대국				u	b	
 大圏	たいけん	n	1	대권				u	b	
-大地	だいち	n	1	대지			name=+	u	b	
 大型	おおがた	n	1	대형				u	b	
 大域	たいいき	n	1	광역				u	b	
 大士	だいし	n	1	대사			name=+	u	b	
@@ -31872,7 +31312,6 @@ ttt		n	1	ttt				u	b
 大酒	おおざけ	n	1	과음				u	wl	
 大酒	おおざけ	n	2	대주				u	b	
 大酔	たいすい	n	1	대취				u	b	
-大金	たいきん	n	1	큰돈			cls=@money	u	b	
 大鑑	たいかん	n	1	대감				u	b	
 大降り	おおぶり	n	1	큰비				u	b	
 大陸	たいりく	n	1	대륙				u	b	
@@ -31910,12 +31349,9 @@ ttt		n	1	ttt				u	b
 天下り	あまくだり	n	2	낙하산 인사				u	b	
 天与	てんよ	n	1	천부				u	b	
 天主	てんしゅ	n	1	천주				u	b	
-天井	てんじょう	n	1	천장				u	wl	
-天井	てんじょう	n	2	최고치				u	b	rule:3961 +unmapped
 天人	てんじん	n	1	천인				u	b	
 天佑	てんゆう	n	1	천우				u	b	
 天体	てんたい	n	1	천체				u	b	
-天使	てんし	n	1	천사				u	b	
 天候	てんこう	n	1	날씨				u	wl	
 天候	てんこう	n	2	기후				u	b	
 天元	てんげん	n	1	천원				u	b	
@@ -31945,7 +31381,6 @@ ttt		n	1	ttt				u	b
 天意	てんい	n	1	천의				u	b	
 天成	てんせい	n	1	자연히 이루어짐				u	b	
 天成	てんせい	n	2	천성				u	c+nw	from-names
-天才	てんさい	n	1	천재				u	b	
 天授	てんじゅ	n	1	하늘이 부여함				u	b	
 天敵	てんてき	n	1	천적				u	b	
 天文	てんもん	n	1	천문				u	b	
@@ -32202,7 +31637,6 @@ ttt		n	1	ttt				u	b
 女人	にょにん	n	1	여인				u	b	
 女体	にょたい	n	1	여체				u	b	
 女傑	じょけつ	n	1	여걸				u	b	
-女優	じょゆう	n	1	여배우				u	b	
 女児	じょじ	n	1	여아				u	b	
 女医	じょい	n	1	여의사				u	wl	
 女医	じょい	n	2	여의				u	b	
@@ -32290,7 +31724,6 @@ ttt		n	1	ttt				u	b
 好尚	こうしょう	n	1	취미				u	b	
 好局	こうきょく	n	1	좋은 대국				u	b	
 好悪	こうお	n	1	좋고 싫음				u	b	
-好意	こうい	n	1	호의				u	b	
 好感	こうかん	n	1	호감				u	b	
 好戦	こうせん	n	1	호전				u	b	
 好手	こうしゅ	n	1	호수				u	b	
@@ -32396,7 +31829,6 @@ ttt		n	1	ttt				u	b
 妾宅	しょうたく	n	1	첩의 집				u	b	
 妾腹	しょうふく	n	1	첩자				u	b	
 妾腹	しょうふく	n	2	서자				u	b	
-姉妹	しまい	n	1	자매				u	b	
 姉娘	あねむすめ	n	1	큰딸				u	b	
 姉婿	あねむこ	n	1	자형				u	b	
 姉弟	してい	n	1	남매				u	wl	
@@ -32558,9 +31990,6 @@ ttt		n	1	ttt				u	b
 子持ち	こもち	n	2	아이 딸린 사람				u	b	
 子方	こかた	n	1	부하				u	b	
 子株	こかぶ	n	1	신주				u	b	
-子猫	こねこ	n	1	새끼 고양이				u	w	
-子猫	こねこ	n	2	새끼고양이				u	w	
-子猫	こねこ	n	3	작은 고양이				u	wl	
 子畜	しちく	n	1	자축				u	b	
 子癇	しかん	n	1	임신 중독증				u	b	
 子種	こだね	n	1	자식				u	b	
@@ -32658,8 +32087,6 @@ ttt		n	1	ttt				u	b
 孤影	こえい	n	1	외로운 그림자				u	b	
 孤愁	こしゅう	n	1	고수				u	b	
 孤灯	ことう	n	1	외등				u	b	
-孤独	こどく	n	1	고독하다				u	b	
-孤独	こどく	n	2	고독				u	b	
 孤立	こりつ	n	1	고립				u	b	
 孤絶	こぜつ	n	1	고립				u	b	
 孤舟	こしゅう	n	1	외로운 배				u	b	
@@ -32691,12 +32118,10 @@ ttt		n	1	ttt				u	b
 学外	がくがい	n	1	학외				u	b	
 学寮	がくりょう	n	1	학교 기숙사				u	b	
 学帽	がくぼう	n	1	학모				u	b	
-学年	がくねん	n	1	학년				u	b	
 学府	がくふ	n	1	학부				u	b	
 学徒	がくと	n	1	학도				u	b	
 学徳	がくとく	n	1	학덕			name=+	u	b	
 学才	がくさい	n	1	학재				u	b	
-学期	がっき	n	1	학기				u	b	
 学業	がくぎょう	n	1	학업				u	b	
 学歴	がくれき	n	1	학력				u	b	
 学殖	がくしょく	n	1	학식				u	b	
@@ -32776,7 +32201,6 @@ ttt		n	1	ttt				u	b
 安否	あんぴ	n	1	안부				u	b	
 安売り	やすうり	n	1	염가 판매				u	b	
 安売り	やすうり	n	2	염가판매				u	b	
-安定	あんてい	n	1	안정			name=+	u	b	
 安宿	やすやど	n	1	값싼 여인숙				u	b	
 安寧	あんねい	n	1	안녕				u	b	
 安居	あんご	n	1	안거			name=+	u	b	
@@ -32968,7 +32392,6 @@ ttt		n	1	ttt				u	b
 定速	ていそく	n	1	정속				u	b	
 定量	ていりょう	n	1	정량				u	b	
 定額	ていがく	n	1	정액				u	b	
-定食	ていしょく	n	1	정식			cls=@food	u	b	
 宝探し	たからさがし	n	1	보물찾기				u	b	
 宝探し	たからさがし	n	2	보물 찾기				u	b	
 宝位	ほうい	n	1	보위				u	b	
@@ -32979,11 +32402,9 @@ ttt		n	1	ttt				u	b
 宝塔	ほうとう	n	1	보탑				u	b	
 宝島	たからじま	n	1	보물섬				u	b	
 宝庫	ほうこ	n	1	보고				u	b	
-宝物	たからもの	n	1	보물				u	w	
 宝玉	ほうぎょく	n	1	보석				u	b	
 宝珠	ほうしゅ	n	1	보석				u	b	
 宝瓶	ほうべい	n	1	보병				u	b	
-宝石	ほうせき	n	1	보석				u	b	
 宝祚	ほうそ	n	1	황위				u	b	
 宝算	ほうさん	n	1	성수				u	b	
 宝船	たからぶね	n	1	보물선				u	b	
@@ -33003,7 +32424,6 @@ ttt		n	1	ttt				u	b
 実写	じっしゃ	n	1	실사				u	b	
 実刑	じっけい	n	1	실형				u	b	
 実利	じつり	n	1	실리				u	b	
-実力	じつりょく	n	1	실력			cls=@strength	u	b	
 実効	じっこう	n	1	실효				u	b	
 実動	じつどう	n	1	실제노동				u	b	
 実務	じつむ	n	1	실무				u	b	
@@ -33046,7 +32466,7 @@ ttt		n	1	ttt				u	b
 実梅	みうめ	n	1	청매				u	b	
 実検	じっけん	n	1	실검				u	b	
 実業	じつぎょう	n	1	실업				u	b	
-実権	じっけん	n	1	실권				u	b	
+実権	じっけん	n	1	실권			cls=@leverage	u	b	
 実歴	じつれき	n	1	실제 경력				u	b	
 実母	じつぼ	n	1	친어머니				u	b	
 実況	じっきょう	n	1	실황				u	b	
@@ -33133,7 +32553,6 @@ ttt		n	1	ttt				u	b
 宣言	せんげん	n	1	선언				u	b	
 宣誓	せんせい	n	1	선서				u	b	
 室	しつ	n	1	실			name=+	u	b	
-室内	しつない	n	1	실내				u	b	
 室員	しついん	n	1	실원				u	b	
 室外	しつがい	n	1	실외				u	b	
 室料	しつりょう	n	1	입실료				u	b	
@@ -33190,7 +32609,6 @@ ttt		n	1	ttt				u	b
 家中	かちゅう	n	1	집안			name=+	u	b	
 家主	やぬし	n	1	가장				u	b	
 家主	やぬし	n	2	집주인				u	b	
-家事	かじ	n	1	가사				u	b	
 家人	けにん	n	1	가족				u	wl	
 家人	けにん	n	2	가인				u	b	
 家付き	いえつき	n	1	집이 딸림				u	b	
@@ -33262,8 +32680,6 @@ ttt		n	1	ttt				u	b
 家訓	かくん	n	1	가훈				u	b	
 家譜	かふ	n	1	가보				u	b	
 家財	かざい	n	1	가재				u	b	
-家賃	やちん	n	1	방세				u	w	
-家賃	やちん	n	2	집세				u	b	
 家路	いえじ	n	1	귀로				u	b	
 家運	かうん	n	1	가운				u	b	
 家郷	かきょう	n	1	고향				u	b	
@@ -33527,7 +32943,7 @@ ttt		n	1	ttt				u	b
 寝坊	ねぼう	n	1	잠꾸러기				u	b	
 寝具	しんぐ	n	1	침구				u	b	
 寝刃	ねたば	n	1	무디어진 칼날				u	b	
-寝台	しんだい	n	1	침대				u	b	
+寝台	しんだい	n	1	침대			cls=@furniture	u	b	
 寝床	ねどこ	n	1	잠자리				u	wl	
 寝待ち	ねまち	n	1	음력 8월 19일 밤의 달				u	b	
 寝息	ねいき	n	1	숨소리				u	b	
@@ -33576,8 +32992,6 @@ ttt		n	1	ttt				u	b
 審級	しんきゅう	n	1	심급				u	b	
 審美	しんび	n	1	심미				u	b	
 審議	しんぎ	n	1	심의				u	b	
-寮	りょう	n	1	기숙사			name=+	u	b	
-寮	りょう	n	2	료				u	b	
 寮母	りょうぼ	n	1	요모				u	b	
 寮生	りょうせい	n	1	기숙사생				u	b	
 寮舎	りょうしゃ	n	1	기숙사				u	b	
@@ -34017,9 +33431,6 @@ ttt		n	1	ttt				u	b
 小麦	こむぎ	n	1	밀				u	b	
 小鼓	しょうこ	n	1	소고				u	b	
 小鼻	こばな	n	1	콧방울				u	b	
-少々	しょうしょう	n	1	조금				u	b	
-少々	しょうしょう	n	2	잠깐				u	b	
-少々	しょうしょう	n	3	약간				u	b	
 少佐	しょうさ	n	1	소령				u	wl	
 少佐	しょうさ	n	2	소좌				u	b	
 少壮	しょうそう	n	1	소장				u	b	
@@ -34150,7 +33561,6 @@ ttt		n	1	ttt				u	b
 居続け	いつづけ	n	1	연일 외박				u	b	
 居職	いじょく	n	1	좌업				u	b	
 居酒屋	いざかや	n	1	선술집				u	b	
-居間	いま	n	1	거실			cls=@room	u	b	
 居食い	いぐい	n	1	무위 도식				u	b	
 居館	きょかん	n	1	저택				u	b	
 屈伏	くっぷく	n	1	굴복				u	b	
@@ -34175,8 +33585,6 @@ ttt		n	1	ttt				u	b
 屋号	やごう	n	2	야고				u	wl	
 屋号	やごう	n	3	옥호				u	b	
 屋外	おくがい	n	1	옥외				u	b	
-館	やかた	n	1	저택				u	b	
-館	やかた	n	2	관				u	b	
 屋形舟	やかたぶね	n	1	지붕 있는 놀잇배				u	b	
 屋敷林	やしきりん	n	1	방풍림				u	b	
 屋敷町	やしきまち	n	1	고급 주택가				u	b	
@@ -34425,8 +33833,6 @@ ttt		n	1	ttt				u	b
 岳	たけ	n	3	봉				u	b	
 岳樺	だけかんば	n	1	고채목				u	b	
 岳父	がくふ	n	1	장인				u	b	
-岸	きし	n	1	기슭			name=+	u	b	
-岸	きし	n	2	안				u	b	
 岸壁	がんぺき	n	1	돌벽				u	b	
 岸壁	がんぺき	n	2	안벽				u	c+np	from-names
 岸辺	きしべ	n	1	물가			name=+	u	wl	
@@ -34559,8 +33965,6 @@ ttt		n	1	ttt				u	b
 巡邏	じゅんら	n	1	순찰				u	b	
 巡錫	じゅんしゃく	n	1	순석				u	b	
 巡閲	じゅんえつ	n	1	순열				u	b	
-巣	す	n	1	둥지				u	b	
-巣	す	n	2	소				u	b	
 巣窟	そうくつ	n	1	소굴				u	b	
 巣立ち	すだち	n	1	자립				u	b	
 巣箱	すばこ	n	1	새집				u	w	
@@ -34606,7 +34010,6 @@ ttt		n	1	ttt				u	b
 左利き	ひだりきき	n	1	왼손잡이				u	w	
 左前	さぜん	n	1	운이 나빠짐				u	b	
 左前	さぜん	n	2	왼쪽 앞	next=へ			u	b	rule:4650
-左右	さゆう	n	1	좌우				u	b	
 左向き	ひだりむき	n	1	좌향				u	b	
 左図	さず	n	1	왼쪽 그림				u	wl	
 左図	さず	n	2	좌도				u	b	
@@ -34616,7 +34019,7 @@ ttt		n	1	ttt				u	b
 左岸	さがん	n	1	좌안				u	b	
 左巻き	ひだりまき	n	1	왼쪽으로 감긴	next=の			u	b	
 左府	さふ	n	1	좌상의 당명				u	b	
-左手	ひだりて	n	1	왼손			cls=@body	u	b	
+左手	ひだりて	n	1	왼손			cls=@body|@hand	u	b	
 左投げ	ひだりなげ	n	1	좌투				u	b	
 左折	させつ	n	1	좌회전				u	b	
 左横	ひだりよこ	n	1	왼쪽 옆				u	wl	
@@ -34722,8 +34125,6 @@ ttt		n	1	ttt				u	b
 差し馬	さしうま	n	1	추입마				u	b	
 差し出し	さしだし	n	1	차출				u	b	
 差分	さぶん	n	1	차분				u	b	
-差別	さべつ	n	1	차별				u	b	
-差別	さべつ	n	2	차별의	next=の			u	b	
 差異	さい	n	1	차이				u	wl	
 差異	さい	n	2	차위				u	b	
 差益	さえき	n	1	차익				u	b	
@@ -35006,7 +34407,6 @@ ttt		n	1	ttt				u	b
 常習	じょうしゅう	n	1	상습				u	b	
 常設	じょうせつ	n	1	상설				u	b	
 常詰め	じょうづめ	n	1	상주 근무				u	b	
-常識	じょうしき	n	1	상식				u	b	
 常軌	じょうき	n	1	상궤				u	b	
 常連	じょうれん	n	1	단골				u	b	
 常道	じょうどう	n	1	상도				u	b	
@@ -35111,8 +34511,6 @@ ttt		n	1	ttt				u	b
 平皿	ひらざら	n	1	납작한 접시				u	b	
 平穏	へいおん	n	1	평온하다				u	w	
 平穏	へいおん	n	2	평온				u	b	
-平等	びょうどう	n	1	평등하다				u	b	
-平等	びょうどう	n	2	평등				u	b	
 平米	へいべい	n	1	평방 미터				u	b	
 平素	へいそ	n	1	평소				u	b	
 平素	へいそ	n	2	평소의	next=の			u	b	
@@ -35184,8 +34582,6 @@ ttt		n	1	ttt				u	b
 年月	としつき	n	2	년월				u	b	rule:4522 +unmapped
 年期	ねんき	n	1	연한				u	wl	
 年期	ねんき	n	2	연기				u	b	
-年末	ねんまつ	n	1	연말				u	b	
-年末	ねんまつ	n	2	년말				u	b	rule:3979 +unmapped
 年次	ねんじ	n	1	연차				u	b	
 年歯	ねんし	n	1	연령				u	b	
 年比	ねんひ	n	1	연비				u	b	
@@ -35280,7 +34676,6 @@ ttt		n	1	ttt				u	b
 幽谷	ゆうこく	n	1	유곡				u	b	
 幽門	ゆうもん	n	1	유문				u	b	
 幽閉	ゆうへい	n	1	유폐				u	b	
-幽霊	ゆうれい	n	1	유령				u	b	
 幽鬼	ゆうき	n	1	망령				u	b	
 幽魂	ゆうこん	n	1	유혼				u	b	
 幾何	きか	n	1	기하				u	b	
@@ -35461,7 +34856,6 @@ ttt		n	1	ttt				u	b
 座員	ざいん	n	1	극단단원				u	b	
 挫屈	ざくつ	n	1	좌굴				u	b	
 座州	ざす	n	1	좌초				u	wl	
-座席	ざせき	n	1	좌석				u	w	
 座所	ざしょ	n	1	거처				u	b	
 座持ち	ざもち	n	1	좌석의 흥취를 돋움				u	b	
 座方	ざかた	n	1	고용인				u	b	
@@ -35563,7 +34957,6 @@ ttt		n	1	ttt				u	b
 廉潔	れんけつ	n	1	청렴 결백				u	b	
 廉潔	れんけつ	n	2	염결				u	c+np	from-names
 廉直	れんちょく	n	1	결백하고 정직하다				u	b	
-廊下	ろうか	n	1	복도			cls=@room	u	b	
 廊廟	ろうびょう	n	1	낭묘				u	b	
 廓清	かくせい	n	1	숙청				u	b	
 廠舎	しょうしゃ	n	1	임시 막사				u	b	
@@ -35758,7 +35151,6 @@ ttt		n	1	ttt				u	b
 引け目	ひけめ	n	2	약점				u	b	
 引け際	ひけぎわ	n	1	끝날 때				u	b	
 引け際	ひけぎわ	n	2	마감시				u	b	
-引っ越し	ひっこし	n	1	이사				u	b	
 引っ込み	ひっこみ	n	1	물러남				u	wl	
 引っ込み	ひっこみ	n	2	퇴장				u	b	
 引っ張り	ひっぱり	n	1	끌어당기기				u	b	
@@ -35803,7 +35195,7 @@ ttt		n	1	ttt				u	b
 石弓	いしゆみ	n	2	석궁				u	b	
 弱	じゃく	n	1	미만				u	b	
 弱	じゃく	n	2	약				u	b	rule:5098 +unmapped
-弱み	よわみ	n	1	약점			cls=@sign	u	b	
+弱み	よわみ	n	1	약점			cls=@sign|@leverage	u	b	
 弱り	よわり	n	1	약해짐				u	b	
 弱り目	よわりめ	n	1	난처한 때				u	b	
 弱体	じゃくたい	n	1	약체				u	b	
@@ -35819,9 +35211,6 @@ ttt		n	1	ttt				u	b
 若年	じゃくねん	n	2	청년				u	b	
 弱志	じゃくし	n	1	약한 의지				u	b	
 弱敵	じゃくてき	n	1	약적				u	b	
-弱気	よわき	n	1	마음이 약하다				u	x	
-弱気	よわき	n	2	무기력				u	b	
-弱気	よわき	n	3	약세				u	b	
 弱火	よわび	n	1	약한 불				u	b	
 弱竹	なよたけ	n	1	눈물버섯				u	w	
 弱竹	なよたけ	n	2	여린 대				u	b	
@@ -35893,12 +35282,9 @@ ttt		n	1	ttt				u	b
 強敵	きょうてき	n	1	강적				u	b	
 強権	きょうけん	n	1	강권				u	b	
 強殺	ごうさつ	n	1	강도 살인				u	b	
-強気	つよき	n	1	강하다				u	b	
-強気	つよき	n	2	강경세				u	b	
-強気	つよき	n	3	강경한	next=の			u	b	
 強火	つよび	n	1	화력센 불				u	b	
 強熱	きょうねつ	n	1	강열				u	b	
-強盗	ごうとう	n	1	강도				u	b	
+強盗	ごうとう	n	1	강도			cls=@crime	u	b	
 強直	きょうちょく	n	1	강직하다				u	b	
 強直	きょうちょく	n	2	경직				u	b	
 強精	きょうせい	n	1	강정				u	b	
@@ -35926,8 +35312,6 @@ ttt		n	1	ttt				u	b
 強震	きょうしん	n	1	강진				u	b	
 強風	きょうふう	n	1	강풍				u	b	
 強飯	こわいい	n	1	찰밥				u	b	
-弾	たま	n	1	총알			name=+ cls=@ammunition|@blow	u	b	
-弾	たま	n	2	탄				u	b	
 弾き	ひき	n	1	연주				u	b	
 弾き手	ひきて	n	1	연주자				u	b	
 弾き豆	はじきまめ	n	1	볶으면 튀기는 콩				u	b	
@@ -35982,8 +35366,6 @@ ttt		n	1	ttt				u	b
 当今	とうこん	n	1	당금				u	b	
 当代	とうだい	n	1	당대				u	b	
 当会	とうかい	n	1	당회				u	b	
-当初	とうしょ	n	1	당초				u	b	
-当初	とうしょ	n	2	당초의	next=の			u	b	
 当否	とうひ	n	1	당부				u	b	
 当国	とうこく	n	1	당국				u	b	
 当地	とうち	n	1	이곳				u	wl	
@@ -36000,7 +35382,6 @@ ttt		n	1	ttt				u	b
 当惑	とうわく	n	1	당혹				u	b	
 当所	とうしょ	n	1	목적				u	b	
 当方	とうほう	n	1	이쪽				u	b	
-当日	とうじつ	n	1	당일				u	b	
 当月	とうげつ	n	1	당월				u	b	
 当期	とうき	n	1	당기				u	b	
 当流	とうりゅう	n	1	당류				u	b	
@@ -36091,7 +35472,6 @@ ttt		n	1	ttt				u	b
 役満	やくまん	n	1	역만				u	b	
 役牛	えきぎゅう	n	1	역우				u	b	
 役畜	えきちく	n	1	역축				u	b	
-役目	やくめ	n	1	역할			cls=@post	u	b	
 役者	やくしゃ	n	1	배우				u	b	
 役職	やくしょく	n	1	직책			cls=@post	u	wl	
 役職	やくしょく	n	2	직무				u	b	
@@ -36105,7 +35485,6 @@ ttt		n	1	ttt				u	b
 往反		n	1	왕복				u	b	
 往古	おうこ	n	1	아주 옛날				u	b	
 往年	おうねん	n	1	왕년				u	b	
-往復	おうふく	n	1	왕복				u	b	
 往日	おうじつ	n	1	지난일				u	b	
 往昔	おうせき	n	1	옛날				u	b	
 往時	おうじ	n	1	지난 날				u	b	
@@ -36214,7 +35593,6 @@ ttt		n	1	ttt				u	b
 後援	こうえん	n	1	후원				u	b	
 後攻	こうこう	n	1	후공				u	b	
 後攻め	あとぜめ	n	1	후공				u	b	
-後方	こうほう	n	1	후방				u	b	
 後日	ごじつ	n	1	후일				u	b	
 後景	こうけい	n	1	배경				u	b	
 後月	あとげつ	n	1	지난 달				u	b	
@@ -36691,7 +36069,6 @@ ttt		n	1	ttt				u	b
 忽諸	こっしょ	n	1	곧 없어짐				u	b	
 憤怒	ふんぬ	n	1	분노				u	b	
 怒濤	どとう	n	1	노도				u	w	
-怒り	いかり	n	1	분노			cls=@emotion	u	b	
 怒号	どごう	n	1	고함			cls=@shout	u	wl	
 怒号	どごう	n	2	꾸중				u	b	
 怒声	どせい	n	1	노성			cls=@shout	u	b	
@@ -36701,9 +36078,6 @@ ttt		n	1	ttt				u	b
 怖じ気	おじけ	n	1	공포심			cls=@sensation	u	b	
 怜悧	れいり	n	1	영리				u	b	
 怜悧	れいり	n	2	영리하다				u	b	
-思い切り	おもいきり	n	1	힘껏				u	js	
-思い切り	おもいきり	n	2	마음껏				u	b	
-思い切り	おもいきり	n	3	단념				u	b	
 思い込み	おもいこみ	n	1	선입견				u	wl	
 思い込み	おもいこみ	n	2	믿음				u	b	
 思い過ごし	おもいすごし	n	1	지나친생각				u	b	
@@ -36815,7 +36189,6 @@ ttt		n	1	ttt				u	b
 性癖	せいへき	n	2	버릇				u	b	
 性癖	せいへき	n	3	성벽				u	c+np	from-names
 性相	せいそう	n	1	성상				u	b	
-性能	せいのう	n	1	성능				u	b	
 性腺	せいせん	n	1	성선				u	b	
 性行	せいこう	n	1	성행				u	b	
 恨み言	うらみごと	n	1	원망하는 말				u	b	
@@ -36864,7 +36237,6 @@ ttt		n	1	ttt				u	b
 恐れ気	おそれげ	n	1	공포심				u	b	
 恐喝	きょうかつ	n	1	공갈				u	b	
 恐妻	きょうさい	n	1	공처				u	b	
-恐怖	きょうふ	n	1	공포			cls=@emotion	u	b	
 恐慌	きょうこう	n	1	공황				u	b	
 恒久	こうきゅう	n	1	항구				u	b	
 恒例	こうれい	n	1	관례				u	wl	
@@ -36881,8 +36253,6 @@ ttt		n	1	ttt				u	b
 恣意	しい	n	1	자의				u	b	
 恤兵	じゅっぺい	n	1	위문				u	b	
 恤民		n	1	휼민				u	b	
-恥	はじ	n	1	수치				u	b	
-恥	はじ	n	2	치				u	b	
 恥曝し	はじさらし	n	1	망신				u	w	
 恥曝し	はじさらし	n	2	수치스럽다				u	wl	
 羞じらい	はじらい	n	1	수줍음				u	w	
@@ -36901,8 +36271,6 @@ ttt		n	1	ttt				u	b
 恨み死に	うらみじに	n	1	한사				u	b	
 恨み顔	うらみがお	n	1	원한 품은 얼굴				u	b	
 恨事	こんじ	n	1	한				u	b	
-恩	おん	n	1	은혜			name=+	u	b	
-恩	おん	n	2	은				u	b	
 恩借	おんしゃく	n	1	차용				u	b	
 恩典	おんてん	n	1	혜택				u	b	
 恩命	おんめい	n	1	고마우신 분부				u	b	
@@ -36967,13 +36335,11 @@ ttt		n	1	ttt				u	b
 患い	わずらい	n	1	병				u	b	
 患い	わずらい	n	2	걱정				u	b	
 患家	かんか	n	1	환자의 집				u	b	
-患者	かんじゃ	n	1	환자				u	b	
 患部	かんぶ	n	1	환부				u	b	
 患難	かんなん	n	1	환난				u	b	
 悦	えつ	n	1	기쁨				u	b	
 悦	えつ	n	2	열				u	b	
 悦楽	えつらく	n	1	열락				u	b	
-悩み	なやみ	n	1	고민				u	b	
 悩み事	なやみごと	n	1	고민거리				u	w	
 悩み事	なやみごと	n	2	고민				u	b	
 悩殺	のうさつ	n	1	뇌쇄				u	b	
@@ -37068,7 +36434,6 @@ ttt		n	1	ttt				u	b
 悪食	あくじき	n	2	악식				u	c+np	from-names
 悪騒ぎ	わるさわぎ	n	1	마구 떠들어댐				u	b	
 悪鬼	あっき	n	1	악귀				u	b	
-悪魔	あくま	n	1	악마				u	b	
 悲傷	ひしょう	n	1	비상				u	b	
 悲劇	ひげき	n	1	비극				u	b	
 悲哀	ひあい	n	1	비애				u	b	
@@ -37188,8 +36553,6 @@ ttt		n	1	ttt				u	b
 愁眉	しゅうび	n	1	수미				u	b	
 愁色	しゅうしょく	n	1	수심의 빛				u	b	
 愁訴	しゅうそ	n	1	수소				u	b	
-愉快	ゆかい	n	1	유쾌하다				u	b	
-愉快	ゆかい	n	2	유쾌				u	b	
 愉悦	ゆえつ	n	1	유열				u	b	
 愉楽	ゆらく	n	1	유락				u	b	
 意	い	n	1	뜻				u	b	
@@ -37199,9 +36562,8 @@ ttt		n	1	ttt				u	b
 意匠	いしょう	n	1	생각				u	b	
 意匠	いしょう	n	2	디자인				u	b	
 意向	いこう	n	1	의향				u	b	
-意図	いと	n	1	의도			cls=@idea	u	b	
+意図	いと	n	1	의도			cls=@idea|@truth	u	b	
 意字	いじ	n	1	표의문자				u	b	
-意志	いし	n	1	의지				u	b	
 意思	いし	n	1	의사				u	b	
 意想	いそう	n	1	뜻과 생각				u	b	
 意欲	いよく	n	1	의욕				u	b	
@@ -37268,7 +36630,6 @@ ttt		n	1	ttt				u	b
 愛婿	あいせい	n	1	애서				u	b	
 愛嬢	あいじょう	n	1	사랑하는 딸				u	b	
 愛息	あいそく	n	1	사랑하는 아들				u	b	
-愛情	あいじょう	n	1	애정				u	b	
 愛惜	あいせき	n	1	애석				u	b	
 愛慕	あいぼ	n	1	애모				u	b	
 愛欲	あいよく	n	1	애욕				u	b	
@@ -37310,7 +36671,6 @@ ttt		n	1	ttt				u	b
 感傷	かんしょう	n	1	감상				u	b	
 感光	かんこう	n	1	감광				u	b	
 感冒	かんぼう	n	1	감기				u	b	
-感動	かんどう	n	1	감동			cls=@emotion	u	b	
 感化	かんか	n	1	감화				u	b	
 感受	かんじゅ	n	1	감수				u	b	
 感吟	かんぎん	n	1	감음				u	b	
@@ -37323,7 +36683,6 @@ ttt		n	1	ttt				u	b
 感応	かんのう	n	1	감응				u	b	
 感性	かんせい	n	1	감성				u	b	
 感恩	かんおん	n	1	감은				u	b	
-感想	かんそう	n	1	감상				u	b	
 感慨	かんがい	n	1	감개				u	b	
 感懐	かんかい	n	1	감회				u	b	
 感服	かんぷく	n	1	감복				u	b	
@@ -37400,7 +36759,7 @@ ttt		n	1	ttt				u	b
 慷概	こうがい	n	1	강개				u	b	
 欲望	よくぼう	n	1	욕망				u	b	
 欲求	よっきゅう	n	1	욕구				u	b	
-憂き目	うきめ	n	1	쓰라림				u	w	
+憂き目	うきめ	n	1	쓰라림			cls=@trouble	u	w	
 憂き身	うきみ	n	1	괴로운 신세				u	w	
 憂さ晴らし	うさばらし	n	1	기분 전환				u	w	
 憂さ晴らし	うさばらし	n	2	기분전환으로	next=に			u	b	
@@ -37515,7 +36874,7 @@ ttt		n	1	ttt				u	b
 成体	せいたい	n	1	성체				u	b	
 成分	せいぶん	n	1	성분				u	b	
 成句	せいく	n	1	성구				u	b	
-成否	せいひ	n	1	성공 여부				u	b	
+成否	せいひ	n	1	성공 여부			cls=@result	u	b	
 成員	せいいん	n	1	성원				u	b	
 成因	せいいん	n	1	성인				u	b	
 成型	せいけい	n	1	성형				u	b	
@@ -37773,8 +37132,6 @@ ttt		n	1	ttt				u	b
 手分け	てわけ	n	1	분담				u	b	
 手切れ	てぎれ	n	1	절연				u	b	
 手刷り	てずり	n	1	수동 인쇄				u	b	
-手前	てまえ	n	1	앞				u	b	
-手前	てまえ	n	2	전				u	b	
 手動	しゅどう	n	1	수동				u	b	
 手取り	てどり	n	1	실수령액				u	wl	
 手取り	てどり	n	2	수취				u	w	
@@ -37786,7 +37143,7 @@ ttt		n	1	ttt				u	b
 手向け	たむけ	n	1	전별				u	b	
 手向け	たむけ	n	2	공물				u	b	
 手向かい	てむかい	n	1	반항				u	b	
-手品	てじな	n	1	마술				u	b	
+手品	てじな	n	1	마술			cls=@skill	u	b	
 手回し	てまわし	n	1	수동식				u	x	
 手回し	てまわし	n	2	준비				u	x	
 手回り	てまわり	n	1	신변				u	b	
@@ -37797,7 +37154,6 @@ ttt		n	1	ttt				u	b
 手工	しゅこう	n	1	수공				u	b	
 手巻き	てまき	n	1	손으로 말기				u	b	
 手巾	しゅきん	n	1	손수건				u	b	
-手帳	てちょう	n	1	수첩			cls=@document	u	b	
 手弄り	てまさぐり	n	1	손끝으로 더듬어 찾음				u	w	
 手張り	てばり	n	1	스스로 붙임				u	b	
 手当て	てあて	n	1	수당				u	b	
@@ -38270,7 +37626,6 @@ ttt		n	1	ttt				u	b
 抽薹		n	1	추대				u	b	
 抽象	ちゅうしょう	n	1	추상				u	b	
 担ぎ屋	かつぎや	n	1	미신가				u	b	
-担任	たんにん	n	1	담임				u	b	
 担体	たんたい	n	1	담체				u	b	
 担保	たんぽ	n	1	담보				u	b	
 担信	たんしん	n	1	담신				u	b	
@@ -38360,8 +37715,6 @@ ttt		n	1	ttt				u	b
 拡販	かくはん	n	1	확대판매				u	b	
 括弧	かっこ	n	1	괄호				u	b	
 拱式		n	1	공식				u	b	
-拳	こぶし	n	1	주먹			name=+ cls=@body|@fist	u	b	
-拳	こぶし	n	2	권				u	b	
 拳法	けんぽう	n	1	권법				u	b	
 拳闘	けんとう	n	1	권투				u	b	
 拶双魚	さっぱ	n	1	밴댕이				u	b	
@@ -38504,7 +37857,7 @@ ttt		n	1	ttt				u	b
 挿入	そうにゅう	n	1	삽입				u	w	
 挿図	そうず	n	1	삽화				u	b	
 挿画	そうが	n	1	삽화				u	b	
-挿し絵	さしえ	n	1	삽화				u	w	
+挿し絵	さしえ	n	1	삽화			cls=@picture	u	w	
 挿話	そうわ	n	1	삽화				u	b	
 捌け口	さばけぐち	n	1	배출구				u	b	
 捕り物	とりもの	n	1	체포				u	wl	
@@ -38599,7 +37952,7 @@ ttt		n	1	ttt				u	b
 掌編	しょうへん	n	1	장편				u	b	
 掌紋	しょうもん	n	1	장문				u	b	
 掌蹠	しょうせき	n	1	장척				u	b	
-掏摸	すり	n	1	소매치기				u	b	
+掏摸	すり	n	1	소매치기			cls=@crime	u	b	
 排泄	はいせつ	n	1	배설				u	b	
 排他	はいた	n	1	배타				u	b	
 排便	はいべん	n	1	배변				u	w	
@@ -38806,11 +38159,9 @@ ttt		n	1	ttt				u	b
 提子	ひさげ	n	1	주전자				u	wl	
 提子	ひさげ	n	2	제				u	b	
 提供	ていきょう	n	1	제공				u	b	
-提出	ていしゅつ	n	1	제출				u	b	
 提唱	ていしょう	n	1	제창				u	b	
 提喩	ていゆ	n	1	제유법				u	b	
 提携	ていけい	n	1	제휴				u	w	
-提案	ていあん	n	1	제안			cls=@request	u	b	
 提琴	ていきん	n	1	바이올린				u	wl	
 提琴	ていきん	n	2	제금				u	b	
 提示	ていじ	n	1	제시				u	b	
@@ -38852,7 +38203,7 @@ ttt		n	1	ttt				u	b
 換言	かんげん	n	1	환언				u	b	
 換金	かんきん	n	1	환금				u	b	
 握り	にぎり	n	1	쥠				u	b	
-握り鮨	にぎりずし	n	1	초밥				u	wl	
+握り鮨	にぎりずし	n	1	초밥			cls=@rice.ball	u	wl	
 握り屋	にぎりや	n	1	구두쇠				u	b	
 握り箸	にぎりばし	n	1	젓가락 두개를 한데 쥠				u	b	
 握り鋏	にぎりばさみ	n	1	U자형 가위				u	w	
@@ -38878,8 +38229,6 @@ ttt		n	1	ttt				u	b
 揺蕩		n	1	요동				u	b	
 揺藻		n	1	요조				u	b	
 揺蚊		n	1	모기붙이				u	b	
-損	そん	n	1	손해				u	b	
-損	そん	n	2	손				u	b	
 損亡	そんもう	n	1	손실				u	b	
 損保	そんぽ	n	1	손해보험				u	b	
 損傷	そんしょう	n	1	손상				u	b	
@@ -39140,7 +38489,7 @@ ttt		n	1	ttt				u	b
 放水	ほうすい	n	1	방수				u	b	
 放流	ほうりゅう	n	1	방류				u	b	
 放浪	ほうろう	n	1	방랑				u	b	
-放火	ほうか	n	1	방화				u	b	
+放火	ほうか	n	1	방화			cls=@crime	u	b	
 放熱	ほうねつ	n	1	방열				u	b	
 放牧	ほうぼく	n	1	방목				u	b	
 放物	ほうぶつ	n	1	포물				u	b	
@@ -39170,7 +38519,6 @@ ttt		n	1	ttt				u	b
 政客	せいかく	n	1	정치가				u	b	
 政局	せいきょく	n	1	정국				u	b	
 政庁	せいちょう	n	1	정청				u	b	
-政府	せいふ	n	1	정부				u	b	
 政情	せいじょう	n	1	정황				u	b	
 政戦	せいせん	n	1	정전				u	b	
 政教	せいきょう	n	1	정치와 종교				u	b	
@@ -39203,7 +38551,6 @@ ttt		n	1	ttt				u	b
 故知	こち	n	1	옛사람의 지혜				u	w	
 故買	こばい	n	1	장물 매입				u	wl	
 故買	こばい	n	2	고매				u	b	
-故郷	こきょう	n	1	고향				u	b	
 故里	こり	n	1	고향				u	b	
 效		n	1	보람				u	b	
 效力		n	1	효력				u	b	
@@ -39296,7 +38643,6 @@ ttt		n	1	ttt				u	b
 教生	きょうせい	n	1	교생				u	b	
 教皇	きょうこう	n	1	교황				u	b	
 教示	きょうじ	n	1	교시				u	b	
-教科	きょうか	n	1	교과				u	b	
 教程	きょうてい	n	1	교정				u	b	
 教範	きょうはん	n	1	교범				u	b	
 教練	きょうれん	n	1	교련				u	b	
@@ -39524,10 +38870,6 @@ ttt		n	1	ttt				u	b
 料率	りょうりつ	n	2	료율				u	b	
 料紙	りょうし	n	1	용지				u	b	
 斜	しゃ	n	1	경사				u	b	
-斜め	ななめ	n	1	대각선				u	wl	
-斜め	ななめ	n	2	비스듬하다				u	b	
-斜め	ななめ	n	3	기울기				u	b	
-斜め	ななめ	n	4	비스듬히	next=に			u	b	
 斜め切り	ななめぎり	n	1	어슷썰기				u	b	
 斜かい	はすかい	n	1	비스듬함				u	b	
 斜光	しゃこう	n	1	사광				u	b	
@@ -39610,7 +38952,6 @@ ttt		n	1	ttt				u	b
 斯界	しかい	n	1	사계				u	b	
 新エネ	しんえね	n	1	신에너지				u	b	
 新京	しんきょう	n	1	신쿄				u	b	
-新人	しんじん	n	1	신인				u	b	
 新付	しんぷ	n	1	새로운 추종				u	b	
 新任	しんにん	n	1	신임				u	b	
 新体	しんたい	n	1	신체				u	b	
@@ -39743,8 +39084,6 @@ ttt		n	1	ttt				u	b
 方略	ほうりゃく	n	1	계략				u	b	
 方策	ほうさく	n	1	방책			cls=@scheme	u	b	
 方術	ほうじゅつ	n	1	기술				u	b	
-方角	ほうがく	n	1	방향				u	wl	
-方角	ほうがく	n	2	방위				u	b	
 方言	ほうげん	n	1	사투리			cls=@language	u	w	
 方言	ほうげん	n	2	방언				u	b	
 方途	ほうと	n	1	방도				u	b	
@@ -39853,13 +39192,10 @@ ttt		n	1	ttt				u	b
 既遂	きすい	n	1	기수				u	b	
 日柄	ひがら	n	1	일진				u	b	
 日柄	ひがら	n	2	일수				u	b	
-日暮れ	ひぐれ	n	1	저녁				u	b	
+日暮れ	ひぐれ	n	1	저녁			cls=@time	u	b	
 日暮れ	ひぐれ	n	2	저녁때				u	b	
 日頃	ひごろ	n	1	평소				u	b	
 日頃	ひごろ	n	2	일경				u	b	rule:1703 +unmapped
-日差し	ひざし	n	1	햇살			cls=@light	u	w	
-日差し	ひざし	n	2	햇볕				u	b	
-日差し	ひざし	n	3	햇빛				u	b	
 日付け	ひづけ	n	1	날짜				u	wl	
 日付け	ひづけ	n	2	일자				u	b	
 日付け	ひづけ	n	3	일부				u	b	rule:2615 +unmapped
@@ -39902,7 +39238,6 @@ ttt		n	1	ttt				u	b
 日工	にっこう	n	1	니코				u	b	
 日帝	にってい	n	1	일제				u	b	
 日帰り	ひがえり	n	1	당일치기				u	b	
-日常	にちじょう	n	1	일상			cls=@state	u	b	
 日延べ	ひのべ	n	1	연기				u	b	
 日当	にっとう	n	1	일당				u	b	
 日当たり	ひあたり	n	1	일조				u	w	
@@ -39950,7 +39285,6 @@ ttt		n	1	ttt				u	b
 日食	にっしょく	n	1	일식				u	b	
 日覆い	ひおおい	n	1	차양				u	w	
 日計	にっけい	n	1	일계				u	b	
-日記	にっき	n	1	일기				u	b	
 日誌	にっし	n	1	일지				u	b	
 日語	にちご	n	1	일어				u	b	
 日読み	ひよみ	n	1	달력				u	b	
@@ -40064,8 +39398,6 @@ ttt		n	1	ttt				u	b
 早打ち	はやうち	n	2	빨리 쏘기				u	b	
 早春	そうしゅん	n	1	이른 봄				u	b	
 早昼	はやひる	n	1	일찍 먹는 점심				u	b	
-早朝	そうちょう	n	1	아침 일찍				u	b	
-早朝	そうちょう	n	2	조조				u	b	
 早期	そうき	n	1	조기				u	b	
 早材	そうざい	n	1	초재				u	b	
 早桶	はやおけ	n	1	허름한 관				u	b	
@@ -40212,7 +39544,7 @@ ttt		n	1	ttt				u	b
 星屑	ほしくず	n	2	별가루				u	b	
 星人	せいじん	n	1	성인				u	b	
 星占い	ほしうらない	n	1	별점				u	b	
-星印	ほしじるし	n	1	별표				u	b	
+星印	ほしじるし	n	1	별표			cls=@figure	u	b	
 星合い	ほしあい	n	1	칠석날 밤				u	b	
 星回り	ほしまわり	n	1	운수				u	b	
 星団	せいだん	n	1	성단				u	b	
@@ -40421,7 +39753,6 @@ ttt		n	1	ttt				u	b
 晶出	しょうしゅつ	n	1	창출				u	b	
 智	ち	n	1	지			name=+	u	b	
 智弁	ちべん	n	1	지변				u	b	
-知恵	ちえ	n	1	지혜				u	w	
 智識	ちしき	n	1	지식				u	b	
 暁天	ぎょうてん	n	1	새벽 하늘				u	b	
 暁星	ぎょうせい	n	1	샛별				u	b	
@@ -40512,7 +39843,6 @@ ttt		n	1	ttt				u	b
 暴れ者	あばれもの	n	1	왈패				u	b	
 暴れ馬	あばれうま	n	1	난폭한 말				u	b	
 暴利	ぼうり	n	1	폭리				u	b	
-暴力	ぼうりょく	n	1	폭력			cls=@abuse	u	b	
 暴動	ぼうどう	n	1	폭동			cls=@incident	u	b	
 暴君	ぼうくん	n	1	폭군				u	b	
 暴圧	ぼうあつ	n	1	폭압				u	b	
@@ -40671,7 +40001,6 @@ ttt		n	1	ttt				u	b
 書道	しょどう	n	1	서예				u	b	
 書院	しょいん	n	1	서원				u	b	
 書面	しょめん	n	1	서면				u	b	
-書類	しょるい	n	1	서류			cls=@document	u	b	
 書風	しょふう	n	1	서풍				u	b	
 曹時	そうじ	n	1	조시				u	b	
 曹長	そうちょう	n	1	상사				u	b	
@@ -40698,12 +40027,10 @@ ttt		n	1	ttt				u	b
 最寄り	もより	n	2	가까운	next=の			u	b	
 最小	さいしょう	n	1	최소				u	b	
 最少	さいしょう	n	1	최소				u	b	
-最強	さいきょう	n	1	최강				u	b	
 最恵	さいけい	n	1	최혜				u	b	
 最愛	さいあい	n	1	최애				u	b	
 最愛	さいあい	n	2	가장 사랑하는	next=の			u	b	
-最新	さいしん	n	1	최신				u	b	
-最期	さいご	n	1	최후				u	b	
+最期	さいご	n	1	최후			cls=@endpoint|@to.end	u	b	
 最深	さいしん	n	1	최고 깊이				u	b	
 最盛	さいせい	n	1	전성				u	b	
 最短	さいたん	n	1	최단				u	b	
@@ -40810,7 +40137,6 @@ ttt		n	1	ttt				u	b
 有情	うじょう	n	1	유정				u	b	
 有意	ゆうい	n	1	유의				u	b	
 有意	ゆうい	n	2	의미가 있다				u	b	
-有料	ゆうりょう	n	1	유료				u	b	
 有望	ゆうぼう	n	1	유망하다				u	b	
 有望	ゆうぼう	n	2	유망				u	b	
 有期	ゆうき	n	1	유기				u	b	
@@ -40863,7 +40189,6 @@ ttt		n	1	ttt				u	b
 服用	ふくよう	n	1	복용				u	b	
 服罪	ふくざい	n	1	복역				u	b	
 服薬	ふくやく	n	1	복약				u	b	
-服装	ふくそう	n	1	복장				u	b	
 服飾	ふくしょく	n	1	복식				u	b	
 朔北	さくほく	n	1	북쪽				u	b	
 朔日	さくじつ	n	1	초하루				u	wl	
@@ -40880,7 +40205,7 @@ ttt		n	1	ttt				u	b
 朗誦	ろうしょう	n	1	낭송				u	b	
 朗読	ろうどく	n	1	낭독				u	b	
 望	もち	n	1	망			name=+	u	b	
-望み	のぞみ	n	1	소망				u	b	
+望み	のぞみ	n	1	소망			cls=@request	u	b	
 望み薄	のぞみうす	n	1	가망이 없다				u	b	
 望み薄	のぞみうす	n	2	희박				u	b	
 望蜀	ぼうしょく	n	1	망촉				u	b	
@@ -40931,7 +40256,6 @@ ttt		n	1	ttt				u	b
 期末	きまつ	n	1	기말				u	b	
 期近	きぢか	n	1	만기 임박				u	wl	
 期近	きぢか	n	2	기근				u	b	
-期限	きげん	n	1	기한				u	b	
 期首	きしゅ	n	1	기초				u	b	
 木こり	きこり	n	1	나뭇꾼				u	b	
 木こり	きこり	n	2	나무꾼				u	b	
@@ -41060,7 +40384,6 @@ ttt		n	1	ttt				u	b
 末	すえ	n	1	끝				u	b	
 末	すえ	n	2	말				u	b	
 末	すえ	n	3	끝에				u	b	rule:4094 +unmapped
-末っ子	すえっこ	n	1	막내				u	b	
 末つ方	すえつかた	n	1	말경				u	b	
 末の世	すえのよ	n	1	후세				u	b	
 末世	まっせ	n	1	말세				u	b	
@@ -41145,7 +40468,7 @@ ttt		n	1	ttt				u	b
 本店	ほんてん	n	1	본점				u	b	
 本式	ほんしき	n	1	정식				u	wl	
 本式	ほんしき	n	2	본식				u	b	
-本心	ほんしん	n	1	본심				u	b	
+本心	ほんしん	n	1	본심			cls=@truth	u	b	
 本志	ほんし	n	1	본지				u	b	
 本性	ほんしょう	n	1	본성			cls=@character	u	b	
 本意	ほんい	n	1	본의				u	b	
@@ -41527,12 +40850,12 @@ ttt		n	1	ttt				u	b
 林道	りんどう	n	2	임도				u	c+nw	from-names
 林野	りんや	n	1	임야			name=+	u	b	
 林間	りんかん	n	1	임간				u	b	
-枚	ばい	n	1	장				u	b	
+枚	ばい	n	1	장			cls=@counter	u	b	
 枚	ばい	n	2	매				u	b	
 枚数	まいすう	n	1	매수				u	b	
 果たし合い	はたしあい	n	1	결투				u	w	
 果たし状	はたしじょう	n	1	결투장				u	b	
-果て	はて	n	1	끝				u	w	
+果て	はて	n	1	끝			cls=@to.end	u	w	
 果て	はて	n	2	마지막				u	w	
 果てし	はてし	n	1	끝				u	b	
 果報	かほう	n	1	행운				u	wl	
@@ -41544,9 +40867,6 @@ ttt		n	1	ttt				u	b
 果糖	かとう	n	1	과당				u	b	
 果肉	かにく	n	1	과육				u	b	
 果菜	かさい	n	1	과채				u	b	
-枝	えだ	n	1	나무 가지				u	b	
-枝	えだ	n	2	가지				u	b	
-枝	えだ	n	3	지				u	b	
 枝分かれ	えだわかれ	n	1	분기				u	w	
 枝打ち	えだうち	n	1	가지치기				u	b	
 栞	しおり	n	1	사립문			name=+ cls=@thing	u	b	
@@ -41594,11 +40914,6 @@ ttt		n	1	ttt				u	b
 枸橘		n	1	탱자나무				u	w	
 枸橘		n	2	탱자				u	b	
 枸機		n	1	추기경				u	b	
-柄	がら	n	1	격				u	b	
-柄	がら	n	2	몸집				u	b	
-柄	がら	n	3	무늬				u	b	
-柄	がら	n	4	병				u	b	
-柄	がら	n	5	자루	mod=刀|剣|槍|斧|鎌|ナイフ			u	x	senses
 柄行	がらゆき	n	1	무늬				u	b	
 柄杓	ひしゃく	n	1	국자				u	b	
 柄物	がらもの	n	1	무늬 있는 물건				u	w	
@@ -41635,7 +40950,7 @@ ttt		n	1	ttt				u	b
 柔毛	じゅうもう	n	1	융모				u	b	
 柔肌	やわはだ	n	1	부드러운 살갗				u	b	
 柔術	じゅうじゅつ	n	1	유술				u	b	
-柔道	じゅうどう	n	1	유도				u	b	
+柔道	じゅうどう	n	1	유도			cls=@sport	u	b	
 柔順	じゅうじゅん	n	1	유순하다				u	b	
 柔順	じゅうじゅん	n	2	유순				u	b	
 柞蚕	さくさん	n	1	멧누에				u	b	
@@ -41723,7 +41038,6 @@ ttt		n	1	ttt				u	b
 校註	こうちゅう	n	1	교주				u	w	
 校章	こうしょう	n	1	교장				u	b	
 校紀	こうき	n	1	학교의 기풍				u	b	
-校舎	こうしゃ	n	1	교사				u	w	
 校規	こうき	n	1	교칙				u	b	
 校訂	こうてい	n	1	교정				u	b	
 校訓	こうくん	n	1	교훈				u	b	
@@ -41748,12 +41062,10 @@ ttt		n	1	ttt				u	b
 核	かく	n	1	핵				u	b	
 核力	かくりょく	n	1	원자력				u	b	
 核型	かくがた	n	1	핵형				u	b	
-核心	かくしん	n	1	핵심				u	b	
+核心	かくしん	n	1	핵심			cls=@endpoint	u	b	
 核種	かくしゅ	n	1	핵종				u	b	
 核質	かくしつ	n	1	핵질				u	b	
 核酸	かくさん	n	1	핵산				u	b	
-根	ね	n	1	뿌리				u	b	
-根	ね	n	2	근				u	b	
 根っ子	ねっこ	n	1	뿌리				u	b	
 根付け	ねつけ	n	1	뿌리 내리기				u	b	
 根元	ねもと	n	1	밑동				u	wl	
@@ -41879,8 +41191,6 @@ ttt		n	1	ttt				u	b
 梅酢	うめず	n	1	매실초				u	b	
 梅醤	うめびしお	n	1	달게 절인 매실 장아찌				u	b	
 梅鉢	うめばち	n	1	가문의 이름			name=+	u	b	
-梅雨	つゆ	n	1	장마				u	b	
-梅雨	つゆ	n	2	장마철				u	b	rule:960 +unmapped
 梅雨時	つゆどき	n	1	장마철				u	b	
 梅雨入り	つゆいり	n	1	장마철				u	b	
 梅雨冷え	つゆびえ	n	1	장마 추위				u	b	
@@ -42003,7 +41313,6 @@ ttt		n	1	ttt				u	b
 検挙	けんきょ	n	1	검거				u	b	
 検札	けんさつ	n	1	검표				u	b	
 検束	けんそく	n	1	검속				u	b	
-検査	けんさ	n	1	검사				u	b	
 検波	けんぱ	n	1	검파				u	b	
 検温	けんおん	n	1	체온				u	b	
 検温	けんおん	n	2	검온				u	c+np	from-names
@@ -42105,16 +41414,13 @@ ttt		n	1	ttt				u	b
 極洋	きょくよう	n	1	교쿠요				u	b	
 極点	きょくてん	n	1	극점				u	b	
 極秘	ごくひ	n	1	극비				u	b	
-極端	きょくたん	n	1	극단				u	b	
-極端	きょくたん	n	2	극단적이다				u	b	
-極端	きょくたん	n	3	극단적이고	next=で			u	b	
 極細	ごくぼそ	n	1	극세				u	b	
 極致	きょくち	n	1	극치				u	b	
 極言	きょくげん	n	1	극언				u	b	
 極論	きょくろん	n	1	극론				u	b	
 極貧	ごくひん	n	1	극빈				u	b	
 極量	きょくりょう	n	1	극량				u	b	
-極限	きょくげん	n	1	극한				u	b	
+極限	きょくげん	n	1	극한			cls=@endpoint	u	b	
 楼主	ろうしゅ	n	1	가루의 주인				u	b	
 楼台	ろうだい	n	1	누각				u	b	
 楼門	ろうもん	n	1	누문				u	b	
@@ -42126,7 +41432,6 @@ ttt		n	1	ttt				u	b
 楽勝	らくしょう	n	2	간단히 이기다				u	b	
 楽匠	がくしょう	n	1	뛰어난 음악가				u	b	
 楽員	がくいん	n	1	악원				u	b	
-楽器	がっき	n	1	악기				u	b	
 楽団	がくだん	n	1	악단				u	b	
 楽園	らくえん	n	1	낙원				u	b	
 楽土	らくど	n	1	낙토				u	b	
@@ -42243,8 +41548,7 @@ ttt		n	1	ttt				u	b
 模造	もぞう	n	1	모조				u	w	
 権	けん	n	1	권				u	b	
 権兵衛	ごんべえ	n	1	시골 사람				u	b	
-権利	けんり	n	1	권리				u	b	
-権力	けんりょく	n	1	권력				u	b	
+権力	けんりょく	n	1	권력			cls=@leverage	u	b	
 権助	ごんすけ	n	1	하인			name=+	u	b	
 権勢	けんせい	n	1	권세				u	b	
 権化	ごんげ	n	1	권화				u	b	
@@ -42262,7 +41566,7 @@ ttt		n	1	ttt				u	b
 権輿	けんよ	n	1	기원				u	b	
 権道	けんどう	n	1	임시 방편				u	b	
 権門	けんもん	n	1	권문				u	b	
-権限	けんげん	n	1	권한				u	b	
+権限	けんげん	n	1	권한			cls=@leverage	u	b	
 横合い	よこあい	n	1	옆쪽				u	b	
 横合い	よこあい	n	2	측면				u	b	
 横縞	よこじま	n	1	가로 줄무늬				u	b	
@@ -42284,7 +41588,7 @@ ttt		n	1	ttt				u	b
 横倒し	よこだおし	n	1	옆으로 쓰러짐				u	w	
 横列	おうれつ	n	1	횡렬				u	b	
 横割り	よこわり	n	1	가로로 가름				u	b	
-横向き	よこむき	n	1	옆쪽				u	b	
+横向き	よこむき	n	1	옆쪽			cls=@stance	u	b	
 横坑	よここう	n	1	옆으로 판 갱도				u	b	
 横好き	よこずき	n	1	못하는 주제에 덮어놓고 좋아함				u	b	
 横幅	よこはば	n	1	가로폭				u	b	
@@ -42401,7 +41705,6 @@ ttt		n	1	ttt				u	b
 機種	きしゅ	n	1	기종				u	b	
 機縁	きえん	n	1	기연				u	b	
 機織り	はたおり	n	1	베 짜기				u	b	
-機能	きのう	n	1	기능				u	b	
 機転	きてん	n	1	기지				u	wl	
 機転	きてん	n	2	재치				u	b	
 機転	きてん	n	3	기전				u	b	
@@ -42466,7 +41769,6 @@ ttt		n	1	ttt				u	b
 欠格	けっかく	n	1	결격				u	b	
 欠歯	けっし	n	1	결치				u	b	
 欠漏	けつろう	n	1	누락				u	b	
-欠点	けってん	n	1	결점				u	b	
 欠番	けつばん	n	1	결번				u	b	
 欠礼	けつれい	n	1	결례				u	b	
 欠航	けっこう	n	1	결항				u	b	
@@ -42553,7 +41855,6 @@ ttt		n	1	ttt				u	b
 歌姫	うたひめ	n	1	가희				u	b	
 歌学	かがく	n	1	시학				u	b	
 歌心	うたごころ	n	1	시심				u	b	
-歌手	かしゅ	n	1	가수				u	b	
 歌才	かさい	n	1	시짓는 재능				u	b	
 歌曲	かきょく	n	1	가곡				u	b	
 歌書	かしょ	n	1	시에 관한 책				u	b	
@@ -42601,7 +41902,6 @@ ttt		n	1	ttt				u	b
 正	せい	n	1	정			name=+	u	b	
 正丁	せいてい	n	1	정정				u	b	
 正中	せいちゅう	n	1	정중			name=+	u	b	
-正体	しょうたい	n	1	정체				u	b	
 正使	せいし	n	1	정사				u	b	
 正価	せいか	n	1	정가				u	b	
 正出	せいしゅつ	n	1	정출				u	b	
@@ -42713,7 +42013,7 @@ ttt		n	1	ttt				u	b
 武者	むしゃ	n	1	무사			name=+	u	b	
 武臣	ぶしん	n	1	무신			name=+	u	b	
 武芸	ぶげい	n	1	무예				u	b	
-武術	ぶじゅつ	n	1	무술				u	b	
+武術	ぶじゅつ	n	1	무술			cls=@skill	u	b	
 武装	ぶそう	n	1	무장				u	b	
 武運	ぶうん	n	1	무운				u	b	
 武道	ぶどう	n	1	무도				u	b	
@@ -42736,7 +42036,6 @@ ttt		n	1	ttt				u	b
 歩積み	ぶづみ	n	1	타율 예금				u	b	
 歩行	ほこう	n	1	보행				u	b	
 歩調	ほちょう	n	1	보조				u	b	
-歩道	ほどう	n	1	보도				u	b	
 歯屎	はくそ	n	1	이 똥				u	w	
 歯屎	はくそ	n	2	이똥				u	b	
 歯茎	はぐき	n	1	잇몸				u	b	
@@ -43006,8 +42305,6 @@ ttt		n	1	ttt				u	b
 毎々	まいまい	n	1	매번				u	w	
 毎分	まいふん	n	1	매분				u	b	
 毎号	まいごう	n	1	매호				u	b	
-毎回	まいかい	n	1	매번				u	wl	
-毎回	まいかい	n	2	매회				u	b	
 毎夕	まいゆう	n	1	매일저녁				u	b	
 毎夜	まいよ	n	1	매일 밤				u	b	
 毎度	まいど	n	1	매번				u	b	
@@ -43208,7 +42505,6 @@ ttt		n	1	ttt				u	b
 気鬱	きうつ	n	1	마음이 울적하다				u	w	
 気泡	きほう	n	1	기포				u	b	
 気流	きりゅう	n	1	기류				u	b	
-気温	きおん	n	1	기온				u	b	
 気炎	きえん	n	1	기염				u	wl	
 気球	ききゅう	n	1	기구				u	b	
 気疲れ	きづかれ	n	1	심로				u	b	
@@ -43219,7 +42515,6 @@ ttt		n	1	ttt				u	b
 気管	きかん	n	1	기관				u	b	
 気節	きせつ	n	1	계절				u	b	
 気組み	きぐみ	n	1	마음가짐				u	b	
-気絶	きぜつ	n	1	기절				u	b	
 気胸	ききょう	n	1	기흉				u	b	
 気脈	きみゃく	n	1	기맥				u	b	
 気腫	きしゅ	n	1	기종				u	b	
@@ -43275,7 +42570,6 @@ ttt		n	1	ttt				u	b
 水兵	すいへい	n	1	수병				u	b	
 水冷	すいれい	n	1	수냉				u	b	
 水出し	みずだし	n	1	냉침				u	b	
-水分	すいぶん	n	1	수분				u	b	
 水切り	みずきり	n	1	탈수				u	w	
 水利	すいり	n	1	수리				u	b	
 水制	すいせい	n	1	수제				u	b	
@@ -43500,7 +42794,7 @@ ttt		n	1	ttt				u	b
 汁液	じゅうえき	n	1	즙액				u	b	
 汁物	しるもの	n	1	국				u	x	
 汁物	しるもの	n	2	찌개				u	b	
-求め	もとめ	n	1	요구				u	b	
+求め	もとめ	n	1	요구			cls=@request	u	b	
 求人	きゅうじん	n	1	구인				u	b	
 求償	きゅうしょう	n	1	구상				u	b	
 求刑	きゅうけい	n	1	구형				u	b	
@@ -43671,7 +42965,6 @@ ttt		n	1	ttt				u	b
 油座	あぶらざ	n	1	아부라자				u	b	
 油彩	ゆさい	n	1	유채				u	b	
 油性	ゆせい	n	1	유성				u	b	
-油断	ゆだん	n	1	방심				u	b	
 油桐	あぶらぎり	n	1	유동				u	b	
 油槽	ゆそう	n	1	유조				u	b	
 油気	あぶらけ	n	1	기름기				u	b	
@@ -43708,7 +43001,6 @@ ttt		n	1	ttt				u	b
 治水	ちすい	n	1	치수				u	b	
 治産	ちさん	n	1	치산				u	b	
 治略	ちりゃく	n	1	치세의 방책				u	b	
-治療	ちりょう	n	1	치료				u	b	
 治癒	ちゆ	n	1	치유				u	b	
 治者	ちしゃ	n	1	통치자				u	b	
 治要	ちよう	n	1	치국의 요체				u	b	
@@ -43803,8 +43095,6 @@ ttt		n	1	ttt				u	b
 法難	ほうなん	n	1	법난				u	b	
 法面	のりめん	n	1	비탈면				u	b	
 泗上		n	1	공자의 학파				u	b	
-泡	あわ	n	1	거품				u	b	
-泡	あわ	n	2	포				u	b	
 泡ぶく	あわぶく	n	1	거품				u	b	
 泡吹き	あわふき	n	1	나도밤나무				u	b	
 泡沫	ほうまつ	n	1	포말				u	b	
@@ -43874,7 +43164,6 @@ ttt		n	1	ttt				u	b
 注力	ちゅうりょく	n	1	주력				u	b	
 注型	ちゅうけい	n	1	주형				u	b	
 注油	ちゅうゆ	n	1	주유				u	b	
-注目	ちゅうもく	n	1	주목			cls=@attention	u	b	rule:494 +unmapped assigns-neighbour
 注薬	ちゅうやく	n	1	안약				u	b	
 注視	ちゅうし	n	1	주시				u	b	
 注解	ちゅうかい	n	1	주해				u	w	
@@ -44201,12 +43490,9 @@ ttt		n	1	ttt				u	b
 海図	かいず	n	1	해도				u	b	
 海国	かいこく	n	1	해양국				u	b	
 海士	かいし	n	1	해사				u	b	
-海外	かいがい	n	1	해외				u	b	
 海女	あま	n	1	해녀				u	b	
 海女	あま	n	2	어부				u	b	
 海将	かいしょう	n	1	해장				u	b	
-海岸	かいがん	n	1	바닷가				u	w	
-海岸	かいがん	n	2	해안				u	b	
 海峡	かいきょう	n	1	해협			name=+	u	b	
 海幸	うみさち	n	1	해산물				u	b	
 海戦	かいせん	n	1	해전				u	b	
@@ -44388,7 +43674,6 @@ ttt		n	1	ttt				u	b
 深み	ふかみ	n	2	깊이				u	b	
 深入り	ふかいり	n	1	관계				u	b	
 深化	しんか	n	1	심화				u	b	
-深夜	しんや	n	1	심야				u	b	
 深奥	しんおう	n	1	심오				u	b	
 深層	しんそう	n	1	심층				u	b	
 深山	みやま	n	1	심산			name=+	u	b	
@@ -44752,7 +44037,6 @@ ttt		n	1	ttt				u	b
 満株	まんかぶ	n	1	만주				u	b	
 満水	まんすい	n	1	만수				u	b	
 満潮	まんちょう	n	1	만조				u	b	
-満点	まんてん	n	1	만점			cls=@score	u	b	
 満珠	まんじゅ	n	1	구슬				u	b	
 満目	まんもく	n	1	멀리보이는것				u	b	
 満票	まんぴょう	n	1	전표				u	b	
@@ -44924,7 +44208,6 @@ ttt		n	1	ttt				u	b
 演劇	えんげき	n	1	연극				u	b	
 演台	えんだい	n	1	연탁				u	b	
 演壇	えんだん	n	1	연단				u	b	
-演奏	えんそう	n	1	연주				u	b	
 演技	えんぎ	n	1	연극				u	b	
 演技	えんぎ	n	2	연기				u	b	
 演歌	えんか	n	1	엔카				u	wl	
@@ -44936,7 +44219,7 @@ ttt		n	1	ttt				u	b
 演義	えんぎ	n	1	연의				u	b	
 演舞	えんぶ	n	1	연무				u	b	
 演芸	えんげい	n	1	연예				u	b	
-演説	えんぜつ	n	1	연설			cls=@speech	u	b	
+演説	えんぜつ	n	1	연설			cls=@speech|@event	u	b	
 演題	えんだい	n	1	연제				u	b	
 漕手	そうしゅ	n	1	조수				u	b	
 漕艇	そうてい	n	1	조정				u	b	
@@ -45202,7 +44485,7 @@ ttt		n	1	ttt				u	b
 災殃	さいおう	n	1	재앙				u	b	
 災民	さいみん	n	1	이재민				u	b	
 災禍	さいか	n	1	재화				u	b	
-災難	さいなん	n	1	재난				u	b	
+災難	さいなん	n	1	재난			cls=@incident	u	b	
 炉	ろ	n	1	로				u	wl	
 炉	ろ	n	2	노				u	b	
 炉	ろ	n	3	용광로				u	b	
@@ -45220,8 +44503,6 @@ ttt		n	1	ttt				u	b
 炊煙	すいえん	n	1	밥 짓는 연기				u	wl	
 炊煙	すいえん	n	2	취연				u	b	
 炊爨	すいさん	n	1	취사				u	w	
-炎	ほのお	n	1	불길			cls=@light	u	b	
-炎	ほのお	n	2	염				u	b	
 炎上	えんじょう	n	1	염상				u	b	
 炎天	えんてん	n	1	염천				u	b	
 炎暑	えんしょ	n	1	혹서				u	b	
@@ -45252,7 +44533,6 @@ ttt		n	1	ttt				u	b
 炭素	たんそ	n	1	탄소				u	b	
 炭肺	たんはい	n	1	탄폐				u	b	
 炭質	たんしつ	n	1	탄질				u	b	
-炭酸	たんさん	n	1	탄산				u	b	
 炭鉱	たんこう	n	1	탄광				u	w	
 炯眼	けいがん	n	1	형안				u	b	
 炸楽		n	1	작약				u	b	
@@ -45322,8 +44602,6 @@ ttt		n	1	ttt				u	b
 無傷	むきず	n	4	상처가 없다				u	b	
 無償	むしょう	n	1	무상				u	b	
 無冠	むかん	n	1	무위				u	b	
-無力	むりょく	n	1	무력하다				u	b	
-無力	むりょく	n	2	무력				u	b	
 無効	むこう	n	1	무효				u	b	
 無勢	ぶぜい	n	1	무세				u	b	
 無印	むじるし	n	1	무인				u	b	
@@ -45441,10 +44719,6 @@ ttt		n	1	ttt				u	b
 無色	むしょく	n	1	무색				u	b	
 無芸	むげい	n	1	무재주				u	b	
 無芸	むげい	n	2	아무 재주도 없다				u	b	
-無茶	むちゃ	n	1	터무니없음				u	wl	
-無茶	むちゃ	n	2	무리하다				u	wl	
-無茶	むちゃ	n	3	엉뚱하다				u	b	
-無茶	むちゃ	n	4	도리에 맞지 않음				u	b	
 無茶苦茶	むちゃくちゃ	n	1	엉망진창이다				u	ji	
 無茶苦茶	むちゃくちゃ	n	2	지나침				u	b	
 無菌	むきん	n	1	무균				u	b	
@@ -45581,7 +44855,6 @@ ttt		n	1	ttt				u	b
 照尺	しょうしゃく	n	1	조준기				u	b	
 照度	しょうど	n	1	조도				u	b	
 照応	しょうおう	n	1	조응				u	b	
-照明	しょうめい	n	1	조명			cls=@lighting	u	b	
 照星	しょうせい	n	1	가늠쇠				u	b	
 照査	しょうさ	n	1	대조 조사				u	b	
 照準	しょうじゅん	n	1	조준				u	b	
@@ -45718,7 +44991,6 @@ ttt		n	1	ttt				u	b
 爆傷	ばくしょう	n	1	폭상				u	b	
 爆圧	ばくあつ	n	1	폭발 압력				u	wl	
 爆圧	ばくあつ	n	2	폭압				u	b	
-爆弾	ばくだん	n	1	폭탄				u	x	
 爆心	ばくしん	n	1	폭발의 중심지				u	b	
 爆撃	ばくげき	n	1	폭격				u	b	
 爆死	ばくし	n	1	폭사				u	b	
@@ -45778,7 +45050,7 @@ ttt		n	1	ttt				u	b
 片恋	かたこい	n	1	짝사랑				u	b	
 片恨み	かたうらみ	n	1	이유 없는 원망				u	b	
 片息	かたいき	n	1	어깻숨				u	b	
-片手	かたて	n	1	한 손				u	b	
+片手	かたて	n	1	한 손			cls=@hand	u	b	
 片手間	かたてま	n	1	부업				u	b	
 片手間	かたてま	n	2	여가				u	b	
 片時	へんじ	n	1	막간				u	b	
@@ -45897,7 +45169,6 @@ ttt		n	1	ttt				u	b
 物交	ぶっこう	n	1	물물 교환				u	b	
 物件	ぶっけん	n	1	물건				u	b	
 物体	ぶったい	n	1	물체				u	b	
-物価	ぶっか	n	1	물가				u	b	
 物入り	ものいり	n	1	출비				u	b	
 物入れ	ものいれ	n	1	가방				u	b	
 物別れ	ものわかれ	n	1	결렬				u	b	
@@ -45974,7 +45245,6 @@ ttt		n	1	ttt				u	b
 特定	とくてい	n	1	특정				u	b	
 特待	とくたい	n	1	특별 대우				u	wl	
 特待	とくたい	n	2	특대				u	b	
-特徴	とくちょう	n	1	특징				u	b	
 特性	とくせい	n	1	특성				u	b	
 特恵	とっけい	n	1	특혜				u	b	
 特技	とくぎ	n	1	특기				u	b	
@@ -46411,7 +45681,6 @@ ttt		n	1	ttt				u	b
 現下	げんか	n	1	현재				u	b	
 現世	げんせ	n	1	현세				u	b	
 現今	げんこん	n	1	현금				u	b	
-現代	げんだい	n	1	현대				u	b	
 現任	げんにん	n	1	현임				u	b	
 現価	げんか	n	1	시가				u	b	
 現像	げんぞう	n	1	현상				u	b	
@@ -46482,11 +45751,10 @@ ttt		n	1	ttt				u	b
 理工	りこう	n	1	이공				u	b	
 理念	りねん	n	1	이념				u	b	
 理性	りせい	n	1	이성			cls=@faculty	u	b	
-理想	りそう	n	1	이상				u	b	
 理数	りすう	n	1	이수				u	b	
 理法	りほう	n	1	이법				u	b	
 理知	りち	n	1	이지			name=+	u	w	
-理科	りか	n	1	과학			name=+	u	wl	
+理科	りか	n	1	과학			name=+ cls=@subject.school	u	wl	
 理科	りか	n	2	이과				u	b	
 理系	りけい	n	1	이과				u	b	
 理詰め	りづめ	n	1	이치따지기				u	b	
@@ -46616,7 +45884,6 @@ ttt		n	1	ttt				u	b
 生前	せいぜん	n	1	생전				u	b	
 生動	せいどう	n	1	생동				u	b	
 生協	せいきょう	n	1	생협				u	b	
-生命	せいめい	n	1	생명				u	b	
 生国	しょうごく	n	1	고향				u	wl	
 生国	しょうごく	n	2	출생국				u	b	
 生地	きじ	n	1	옷감			cls=@material	u	b	
@@ -46655,7 +45922,7 @@ ttt		n	1	ttt				u	b
 生気	せいき	n	1	생기				u	b	
 生没年	せいぼつねん	n	1	태어나고 죽은 해				u	b	
 生海苔	なまのり	n	1	생김				u	b	
-生涯	しょうがい	n	1	생애				u	b	
+生涯	しょうがい	n	1	생애			cls=@lifetime	u	b	
 生滅	しょうめつ	n	1	생멸				u	b	
 生漆	きうるし	n	1	생 옻칠				u	b	
 生焼け	なまやけ	n	1	설구워진 상태				u	b	
@@ -46831,7 +46098,7 @@ ttt		n	1	ttt				u	b
 甲虫	こうちゅう	n	2	투구벌레				u	b	
 甲骨	こうこつ	n	1	갑골				u	b	
 申	さる	n	1	신				u	b	
-申し込み	もうしこみ	n	1	신청				u	b	
+申し込み	もうしこみ	n	1	신청			cls=@request	u	b	
 申し付け	もうしつけ	n	1	분부				u	b	
 申し入れ	もうしいれ	n	1	신청				u	b	
 申し出	もうしで	n	1	신청			cls=@request	u	w	
@@ -46916,8 +46183,6 @@ ttt		n	1	ttt				u	b
 画	が	n	1	획				u	b	
 画	が	n	2	화				u	b	
 画伯	がはく	n	1	화백				u	b	
-画像	がぞう	n	1	이미지				u	wl	
-画像	がぞう	n	2	화상				u	b	
 画商	がしょう	n	1	화상				u	b	
 画嚢	がのう	n	1	화낭				u	b	
 画報	がほう	n	1	화보				u	b	
@@ -46960,7 +46225,6 @@ ttt		n	1	ttt				u	b
 画趣	がしゅ	n	1	그림같은 풍취				u	b	
 画道	がどう	n	1	그리는 기법				u	b	
 画集	がしゅう	n	1	화집				u	b	
-画面	がめん	n	1	화면			cls=@control	u	b	
 画題	がだい	n	1	화제				u	b	
 画風	がふう	n	1	화풍				u	b	
 画餅	がべい	n	1	그림의 떡				u	b	
@@ -47133,7 +46397,6 @@ ttt		n	1	ttt				u	b
 疎開	そかい	n	2	소개				u	c+np	from-names
 疎隔	そかく	n	1	소원				u	b	
 疎音	そいん	n	1	격조				u	b	
-疑問	ぎもん	n	1	의문				u	b	
 疑団	ぎだん	n	1	의심				u	b	
 疑心	ぎしん	n	1	의심				u	b	
 疑念	ぎねん	n	1	의심				u	wl	
@@ -47156,7 +46419,6 @@ ttt		n	1	ttt				u	b
 疱疹	ほうしん	n	1	포진				u	b	
 疱瘡	ほうそう	n	1	천연두				u	b	
 疲れ目	つかれめ	n	1	피곤한 눈				u	b	
-疲労	ひろう	n	1	피로				u	b	
 疲困		n	1	피곤				u	b	
 疲弊	ひへい	n	1	피폐				u	b	
 疼		n	1	아픔				u	b	
@@ -47209,7 +46471,6 @@ ttt		n	1	ttt				u	b
 病魔	びょうま	n	1	병마				u	b	
 症例	しょうれい	n	1	증례				u	b	
 症候	しょうこう	n	1	증후				u	b	
-症状	しょうじょう	n	1	증상				u	b	
 痔	じ	n	1	치질				u	b	
 痔核	じかく	n	1	치핵				u	b	
 痔疾	じしつ	n	1	치질				u	b	
@@ -47253,7 +46514,7 @@ ttt		n	1	ttt				u	b
 痴れ事	しれごと	n	1	헛소리				u	b	
 痴人	ちじん	n	1	치인				u	b	
 痴情	ちじょう	n	1	치정				u	b	
-痴漢	ちかん	n	1	치한				u	b	
+痴漢	ちかん	n	1	치한			cls=@crime	u	b	
 痴話	ちわ	n	1	남녀간의 정담				u	b	
 痺		n	1	마비				u	b	
 痺れ薬	しびれぐすり	n	1	마취제				u	w	
@@ -47359,7 +46620,6 @@ ttt		n	1	ttt				u	b
 発芽	はつが	n	1	발아				u	b	
 発行	はっこう	n	1	발행				u	b	
 発覚	はっかく	n	1	발각				u	b	
-発言	はつげん	n	1	발언			cls=@speech	u	b	
 発話	はつわ	n	1	발화				u	b	
 発語	はつご	n	1	발어				u	b	
 発議	はつぎ	n	1	발의				u	b	
@@ -47665,11 +46925,11 @@ ttt		n	1	ttt				u	b
 盗聴	とうちょう	n	1	도청				u	b	
 盗賊	とうぞく	n	1	도적				u	b	
 盜跖	とうせき	n	1	도척				u	b	
-盗難	とうなん	n	1	도난				u	b	
+盗難	とうなん	n	1	도난			cls=@crime	u	b	
 盛り切り	もりきり	n	1	가득 담음				u	b	
 盛り上がり	もりあがり	n	1	고조			cls=@trend	u	b	
 盛り付け	もりつけ	n	1	담음				u	b	
-盛り合わせ	もりあわせ	n	1	모둠				u	x	
+盛り合わせ	もりあわせ	n	1	모둠			cls=@food	u	x	
 盛り合わせ	もりあわせ	n	2	진열				u	w	
 盛り土	もりつち	n	1	성토				u	wl	
 盛り場	さかりば	n	1	번화가				u	b	
@@ -47737,7 +46997,7 @@ ttt		n	1	ttt				u	b
 目障り	めざわり	n	2	눈에 거슬림				u	b	
 目障り	めざわり	n	3	시큰둥하다				u	b	
 目障り	めざわり	n	4	눈엣가시				u	b	
-目付き	めつき	n	1	눈초리				u	w	
+目付き	めつき	n	1	눈초리			cls=@expression	u	w	
 目付き	めつき	n	2	눈				u	b	
 目潰し	めつぶし	n	1	눈 공격				u	wl	
 目潰し	めつぶし	n	2	눈 찌르기				u	wl	
@@ -47776,7 +47036,6 @@ ttt		n	1	ttt				u	b
 目星	めぼし	n	1	목표			cls=@guess	u	b	
 目木	めぎ	n	1	메기				u	b	
 目板	めいた	n	1	덧붙임판				u	b	
-目標	もくひょう	n	1	목표				u	b	
 目次	もくじ	n	1	목차				u	b	
 目減り	めべり	n	1	감소				u	b	
 目測	もくそく	n	1	눈짐작				u	b	
@@ -47840,7 +47099,6 @@ ttt		n	1	ttt				u	b
 直会	なおらい	n	1	음복 잔치				u	b	
 直入	ちょくにゅう	n	1	직입				u	b	
 直列	ちょくれつ	n	1	직렬				u	b	
-直前	ちょくぜん	n	1	직전				u	b	
 直参	じきさん	n	1	직속 가신				u	b	
 直喩	ちょくゆ	n	1	직유				u	b	
 直営	ちょくえい	n	1	직영				u	b	
@@ -47851,7 +47109,6 @@ ttt		n	1	ttt				u	b
 直巻き	ちょくまき	n	1	직파				u	b	
 直往	ちょくおう	n	1	곧바로 나아감				u	b	
 直径	ちょっけい	n	1	직경				u	b	
-直後	ちょくご	n	1	직후				u	b	
 直心	ちょくしん	n	1	진심				u	b	
 直感	ちょっかん	n	1	직감				u	b	
 直披	じきひ	n	1	친전				u	b	
@@ -47938,7 +47195,6 @@ ttt		n	1	ttt				u	b
 相撲	すもう	n	2	각력				u	b	
 相撲取り	すもうとり	n	1	씨름꾼				u	b	
 相撲部屋	すもうべや	n	1	스모베야				u	b	
-相棒	あいぼう	n	1	파트너				u	b	
 相物	あいもの	n	1	절인 생선				u	b	
 相違	そうい	n	1	차이				u	wl	
 相違	そうい	n	2	상이				u	b	
@@ -48006,13 +47262,11 @@ ttt		n	1	ttt				u	b
 県道	けんどう	n	2	현도				u	b	
 真っ向	まっこう	n	1	정면				u	b	
 真っ暗がり	まっくらがり	n	1	캄캄한 곳				u	b	
-真っ青	まっさお	n	1	시퍼렇다				u	b	
 真ん丸	まんまる	n	1	동그랗다				u	x	
 真ん丸	まんまる	n	2	동그라미				u	wl	
 真ん丸	まんまる	n	3	귀여움				u	wl	
 真ん丸	まんまる	n	4	귀엽다				u	wl	
 真ん丸	まんまる	n	5	동그란 모양				u	b	
-真上	まうえ	n	1	바로 위				u	b	
 真下	ました	n	1	바로 밑			name=+	u	b	
 真似鶫	まねしつぐみ	n	1	마네시쓰구미				u	b	
 真作	しんさく	n	1	진짜 작품				u	b	
@@ -48036,7 +47290,7 @@ ttt		n	1	ttt				u	b
 真後ろ	まうしろ	n	1	바로 뒤				u	b	
 真性	しんせい	n	1	진성				u	b	
 真情	しんじょう	n	1	진정				u	b	
-真意	しんい	n	1	진심				u	b	
+真意	しんい	n	1	진심			cls=@truth	u	b	
 真打ち	しんうち	n	1	인기 배우				u	b	
 真数	しんすう	n	1	진수				u	b	
 真昼	まひる	n	1	한낮				u	b	
@@ -48057,7 +47311,7 @@ ttt		n	1	ttt				u	b
 真理	しんり	n	1	진리			name=+	u	b	
 真症	しんしょう	n	1	진증				u	b	
 真皮	しんぴ	n	1	진피				u	b	
-真相	しんそう	n	1	진상			cls=@info	u	b	
+真相	しんそう	n	1	진상			cls=@info|@truth	u	b	
 真砂	まさご	n	1	잔모래			name=+	u	b	
 真空	しんくう	n	1	진공				u	b	
 真竹	まだけ	n	1	참대				u	b	
@@ -48135,7 +47389,7 @@ ttt		n	1	ttt				u	b
 眼識	がんしき	n	1	감식안				u	b	
 眼識	がんしき	n	2	안식				u	c+np	from-names
 眼間	まなかい	n	1	눈앞				u	w	
-着	き	n	1	벌				u	b	
+着	き	n	1	벌			cls=@counter	u	b	
 着	き	n	2	착				u	b	rule:4190 +unmapped
 着ぐるみ	きぐるみ	n	1	인형				u	b	
 着メロ	ちゃくめろ	n	1	착신 멜로디				u	b	
@@ -48167,8 +47421,6 @@ ttt		n	1	ttt				u	b
 着手	ちゃくしゅ	n	1	착수				u	b	
 着手	ちゃくしゅ	n	2	입을 사람				u	b	
 着払い	ちゃくばらい	n	1	수취인 지불				u	b	
-着替え	きがえ	n	1	갈아입기				u	b	
-着替え	きがえ	n	2	갈아입음				u	b	
 着服	ちゃくふく	n	1	착복				u	b	
 着果	ちゃっか	n	1	착과				u	b	
 着水	ちゃくすい	n	1	착수				u	b	
@@ -48220,7 +47472,7 @@ ttt		n	1	ttt				u	b
 矢先	やさき	n	1	참				u	wl	
 矢先	やさき	n	2	정면				u	b	
 矢先	やさき	n	3	화살촉				u	b	
-矢印	やじるし	n	1	화살표				u	b	
+矢印	やじるし	n	1	화살표			cls=@figure	u	b	
 矢叫び	やさけび	n	1	함성				u	b	
 矢場	やば	n	1	활터				u	b	
 矢数	やかず	n	1	화살의 수			name=+	u	b	
@@ -48415,7 +47667,7 @@ ttt		n	1	ttt				u	b
 砂嵐	すなあらし	n	1	모래폭풍				u	wl	
 砂嵐	すなあらし	n	2	사풍				u	b	
 砂州	さす	n	1	사주				u	b	
-砂浜	すなはま	n	1	모래 사장				u	b	
+砂浜	すなはま	n	1	모래 사장			cls=@nature	u	b	
 砂潜り	すなもぐり	n	1	모래무지				u	b	
 砂煙	すなけむり	n	1	모래 먼지				u	b	
 砂礫	されき	n	1	자갈				u	b	
@@ -48725,7 +47977,6 @@ ttt		n	1	ttt				u	b
 祖宗	そそう	n	1	조종				u	b	
 祖廟	そびょう	n	1	조묘				u	b	
 祖業	そぎょう	n	1	조업				u	b	
-祖父母	そふぼ	n	1	조부모				u	b	
 祖語	そご	n	1	조어				u	b	
 祖述	そじゅつ	n	1	조술				u	b	
 祝い	いわい	n	1	축하	next=に対			u	b	rule:377 +unmapped
@@ -48850,7 +48101,7 @@ ttt		n	1	ttt				u	b
 祠堂	しどう	n	1	사당				u	b	
 祠官	しかん	n	1	신관				u	b	
 祥月	しょうつき	n	1	일주기				u	b	
-票	ひょう	n	1	표				u	b	
+票	ひょう	n	1	표			cls=@counter	u	b	
 票固め	ひょうがため	n	1	표 굳히기				u	b	
 票数	ひょうすう	n	1	표수				u	b	
 票決	ひょうけつ	n	1	표결				u	b	
@@ -48988,7 +48239,6 @@ ttt		n	1	ttt				u	b
 私曲	しきょく	n	1	부정				u	b	
 私書	ししょ	n	1	사서				u	b	
 私有	しゆう	n	1	사유				u	b	
-私服	しふく	n	1	사복				u	b	
 私案	しあん	n	1	사안				u	b	
 私権	しけん	n	1	사권				u	b	
 私法	しほう	n	1	사법				u	b	
@@ -49071,7 +48321,6 @@ ttt		n	1	ttt				u	b
 科技	かぎ	n	1	과학기술				u	b	
 科挙	かきょ	n	1	과거				u	b	
 科料	かりょう	n	1	과료				u	b	
-科目	かもく	n	1	과목			cls=@subject.school	u	b	
 科研	かけん	n	1	과학연구소				u	b	
 科罰	かばつ	n	1	처벌				u	b	
 科長	かちょう	n	1	과장				u	b	
@@ -49081,7 +48330,7 @@ ttt		n	1	ttt				u	b
 秒間	びょうかん	n	1	초간				u	b	
 粃	しいな	n	1	벼쭉정이				u	b	
 秘	ひ	n	1	은밀하다				u	b	
-秘訣	ひけつ	n	1	비결				u	w	
+秘訣	ひけつ	n	1	비결			cls=@skill	u	w	
 秘し隠し	ひしかくし	n	1	비밀				u	b	
 秘め事	ひめごと	n	1	비밀				u	b	
 秘中	ひちゅう	n	1	극비				u	b	
@@ -49181,7 +48430,6 @@ ttt		n	1	ttt				u	b
 税目	ぜいもく	n	1	세목				u	b	
 税調	ぜいちょう	n	1	세금조사				u	b	
 税込み	ぜいこみ	n	1	세금 포함				u	b	
-税金	ぜいきん	n	1	세금			cls=@money	u	b	
 税関	ぜいかん	n	1	세관				u	b	
 稔性	ねんせい	n	1	임성				u	b	
 稚児	ちご	n	1	젖먹이				u	b	
@@ -49353,7 +48601,7 @@ ttt		n	1	ttt				u	b
 空席	くうせき	n	1	공석				u	b	
 空想	くうそう	n	1	공상				u	b	
 空戦	くうせん	n	1	공중전				u	b	
-空手	からて	n	1	가라테				u	b	
+空手	からて	n	1	가라테			cls=@sport	u	b	
 空押し	からおし	n	1	빈틀 찍기				u	b	
 空拳	くうけん	n	1	맨주먹				u	b	
 空振り	からぶり	n	1	헛손질				u	b	
@@ -49381,7 +48629,6 @@ ttt		n	1	ttt				u	b
 空箱	からばこ	n	1	빈 상자				u	b	
 空耳	そらみみ	n	1	환청				u	w	
 空腸	くうちょう	n	1	공장				u	b	
-空腹	くうふく	n	1	공복				u	b	
 空船	からぶね	n	1	빈배				u	b	
 空茶	からちゃ	n	1	차 마시기				u	b	
 空蝉	うつせみ	n	1	매미 허물				u	b	
@@ -49404,7 +48651,6 @@ ttt		n	1	ttt				u	b
 空輸	くうゆ	n	1	공수				u	b	
 空運	くううん	n	1	항공 운송				u	b	
 空釣り	からづり	n	1	미끼없이 하는 낚시질				u	b	
-空間	くうかん	n	1	공간				u	b	
 空陸	くうりく	n	1	공륙				u	b	
 空隙	くうげき	n	1	공극				u	b	
 空電	くうでん	n	1	공전			name=+	u	b	
@@ -49439,7 +48685,7 @@ ttt		n	1	ttt				u	b
 突飛	とっぴ	n	1	엉뚱함				u	b	
 突飛	とっぴ	n	2	엉뚱하다				u	b	
 窃取	せっしゅ	n	1	절취				u	b	
-窃盗	せっとう	n	1	절도				u	b	
+窃盗	せっとう	n	1	절도			cls=@crime	u	b	
 窒化	ちっか	n	1	질화				u	b	
 窒息	ちっそく	n	1	질식				u	b	
 窒死	ちっし	n	1	질식사				u	b	
@@ -49596,15 +48842,9 @@ ttt		n	1	ttt				u	b
 童謡	どうよう	n	1	동요				u	b	
 童貞	どうてい	n	1	동정				u	b	
 童顔	どうがん	n	1	동안				u	b	
-縦	たて	n	1	수직				u	b	
-縦	たて	n	2	수				u	b	
-縦	たて	n	3	세로				u	b	
-縦	たて	n	4	종				u	b	
 竪坑	たてこう	n	1	수갱				u	w	
 竪坑	たてこう	n	2	수직 갱				u	b	
 竪琴	たてごと	n	1	하프				u	w	
-端	はし	n	1	구석			cls=@position	u	b	
-端	はし	n	2	단				u	b	
 端々	はしばし	n	1	이모저모				u	b	
 端々	はしばし	n	2	사소한 부분				u	b	
 端くれ	はしくれ	n	1	토막				u	b	
@@ -49738,7 +48978,7 @@ ttt		n	1	ttt				u	b
 筆筒	ひっとう	n	1	필통				u	b	
 筆答	ひっとう	n	1	필답				u	b	
 筆算	ひっさん	n	1	필산				u	w	
-筆箱	ふでばこ	n	1	필통				u	b	
+筆箱	ふでばこ	n	1	필통			cls=@container	u	b	
 筆紙	ひっし	n	1	필지				u	b	
 筆者	ひっしゃ	n	1	필자				u	b	
 筆耕	ひっこう	n	1	필경				u	b	
@@ -49896,14 +49136,12 @@ ttt		n	1	ttt				u	b
 節々	ふしぶし	n	1	때때로				u	w	
 節々	ふしぶし	n	2	마디마디				u	w	
 節米	せつまい	n	1	절미				u	b	
-節約	せつやく	n	1	절약				u	b	
 節義	せつぎ	n	1	절개				u	b	
 節足	せっそく	n	1	절족				u	b	
 節酒	せっしゅ	n	1	절주				u	b	
 節電	せつでん	n	1	절전				u	b	
 節食	せっしょく	n	1	절식				u	b	
 範例	はんれい	n	1	범례				u	b	
-範囲	はんい	n	1	범위				u	b	
 範式	はんしき	n	1	규범				u	b	
 篆字	てんじ	n	1	전서체의 글씨				u	b	
 篆書	てんしょ	n	1	전서				u	b	
@@ -50135,7 +49373,6 @@ ttt		n	1	ttt				u	b
 精白	せいはく	n	1	정백				u	b	
 精確	せいかく	n	1	정확				u	b	
 精確	せいかく	n	2	정확하다				u	b	
-精神	せいしん	n	1	정신				u	b	
 精算	せいさん	n	1	정산				u	b	
 精管	せいかん	n	1	정관				u	b	
 精米	せいまい	n	1	정미				u	b	
@@ -50742,7 +49979,7 @@ ttt		n	1	ttt				u	b
 絶倒	ぜっとう	n	1	절도				u	b	
 絶勝	ぜっしょう	n	1	절승				u	b	
 絶句	ぜっく	n	1	절구				u	b	
-絶叫	ぜっきょう	n	1	절규				u	b	
+絶叫	ぜっきょう	n	1	절규			cls=@shout	u	b	
 絶命	ぜつめい	n	1	절명				u	b	
 絶品	ぜっぴん	n	1	일품				u	wl	
 絶品	ぜっぴん	n	2	절품				u	b	
@@ -51039,8 +50276,6 @@ ttt		n	1	ttt				u	b
 締め括り	しめくくり	n	2	매듭				u	b	
 締め出し	しめだし	n	1	폐쇄				u	b	
 締め出し	しめだし	n	2	근절				u	b	rule:4072 +unmapped
-締め切り	しめきり	n	1	마감				u	b	
-締め切り	しめきり	n	2	굳게 닫혀진 상태				u	b	
 締め日	しめび	n	1	마감일				u	w	
 締め日	しめび	n	2	마감 날				u	b	
 締め込み	しめこみ	n	1	샅바				u	w	
@@ -51300,7 +50535,6 @@ ttt		n	1	ttt				u	b
 置き台	おきだい	n	1	치대				u	w	
 置換	ちかん	n	1	치환				u	b	
 置酒	ちしゅ	n	1	주연				u	b	
-罰	ばつ	n	1	벌			cls=@crime	u	b	
 罰俸	ばっぽう	n	1	감봉				u	b	
 罰則	ばっそく	n	1	벌칙				u	b	
 罰杯	ばっぱい	n	1	벌주				u	b	
@@ -51337,7 +50571,6 @@ ttt		n	1	ttt				u	b
 羊蹄	ぎしぎし	n	1	참소루쟁이				u	b	
 羊飼い	ひつじかい	n	1	양치기			cls=@person.role	u	w	
 羊飼い	ひつじかい	n	2	목동				u	b	
-美人	びじん	n	1	미인				u	b	
 美人局	つつもたせ	n	1	사기				u	b	
 美俗	びぞく	n	1	미속				u	b	
 美化	びか	n	1	미화				u	b	
@@ -51364,7 +50597,6 @@ ttt		n	1	ttt				u	b
 美肌	びはだ	n	1	고운 피부				u	b	
 美育	びいく	n	1	미육				u	b	
 美色	びしょく	n	1	미색				u	b	
-美術	びじゅつ	n	1	미술				u	b	
 美装	びそう	n	1	히소				u	b	
 美観	びかん	n	1	미관				u	b	
 美言	びげん	n	1	감언				u	b	
@@ -51450,9 +50682,6 @@ ttt		n	1	ttt				u	b
 羯鼓	かっこ	n	1	갈고				u	w	
 羯鼓	かっこ	n	2	각고				u	b	
 羸痩	るいそう	n	1	이수				u	b	
-羽根	はね	n	1	날개			name=+	u	b	
-羽根	はね	n	2	우				u	b	
-羽根	はね	n	3	마리				u	b	rule:1853 +unmapped
 羽二重	はぶたえ	n	1	순백색비단				u	b	
 羽交い	はがい	n	1	날갯죽지				u	b	
 羽化	うか	n	1	우화				u	b	
@@ -51477,8 +50706,6 @@ ttt		n	1	ttt				u	b
 羽風	はかぜ	n	1	날갯바람				u	wl	
 羽風	はかぜ	n	2	날개 바람				u	b	
 翌年	よくねん	n	1	다음 해				u	b	
-翌日	よくじつ	n	1	다음날				u	b	
-翌日	よくじつ	n	2	익일				u	b	
 翌春	よくはる	n	1	이듬해 봄				u	b	
 翌晩	よくばん	n	1	다음날 밤				u	b	
 翌月	よくげつ	n	1	다음달				u	b	
@@ -51521,7 +50748,6 @@ ttt		n	1	ttt				u	b
 老い先	おいさき	n	1	여생				u	b	
 老い木	おいき	n	1	고목				u	b	
 老中	ろうじゅう	n	1	노중				u	b	
-老人	ろうじん	n	1	노인				u	b	
 老齢	ろうれい	n	1	노령				u	b	
 老体	ろうたい	n	1	노체				u	b	
 老健	ろうけん	n	1	노인보건시설				u	wl	
@@ -51786,7 +51012,6 @@ ttt		n	1	ttt				u	b
 職名	しょくめい	n	1	직명				u	b	
 職員	しょくいん	n	1	직원				u	b	
 職域	しょくいき	n	1	직역				u	b	
-職場	しょくば	n	1	직장				u	b	
 職安	しょくあん	n	1	공공 직업 안정소				u	b	
 職工	しょっこう	n	1	직공				u	b	
 職掌	しょくしょう	n	1	직무				u	b	
@@ -51812,7 +51037,6 @@ ttt		n	1	ttt				u	b
 肉付け	にくづけ	n	1	구체화				u	wl	
 肉付け	にくづけ	n	2	조형				u	wl	
 肉付け	にくづけ	n	3	잔손질				u	b	
-肉体	にくたい	n	1	육체				u	b	
 肉入れ	にくいれ	n	1	인주통				u	b	
 肉刑	にっけい	n	1	육형				u	b	
 肉声	にくせい	n	1	육성				u	b	
@@ -51879,7 +51103,7 @@ ttt		n	1	ttt				u	b
 股立ち	ももだち	n	1	좌우의 자락				u	b	
 腿肉	ももにく	n	1	허벅지살				u	w	
 股肱	ここう	n	1	손발				u	b	
-股間	こかん	n	1	가랑이				u	b	
+股間	こかん	n	1	가랑이			cls=@body	u	b	
 股間	こかん	n	2	사타구니				u	b	
 肢体	したい	n	1	몸			cls=@body	u	wl	
 肢体	したい	n	2	지체				u	b	
@@ -51988,8 +51212,6 @@ ttt		n	1	ttt				u	b
 背嚢	はいのう	n	1	배낭				u	w	
 背広	せびろ	n	1	양복				u	w	
 背広	せびろ	n	2	신사복				u	b	
-背後	はいご	n	1	뒤			cls=@position	u	wl	
-背後	はいご	n	2	배후				u	b	
 背徳	はいとく	n	1	배덕				u	b	
 背戸	せど	n	1	뒷문				u	b	
 背戻	はいれい	n	1	배반함				u	w	
@@ -52157,9 +51379,6 @@ ttt		n	1	ttt				u	b
 脈絡	みゃくらく	n	1	맥락				u	b	
 脊梁	せきりょう	n	1	척추				u	b	
 脊索	せきさく	n	1	척삭				u	b	
-脚	あし	n	1	다리			cls=@body	u	b	
-脚	あし	n	2	각				u	b	
-脚	あし	n	3	발	mod=手			u	x	senses
 脚下	きゃっか	n	1	발밑				u	b	
 脚光	きゃっこう	n	1	각광				u	b	
 脚力	きゃくりょく	n	1	각력				u	b	
@@ -52369,7 +51588,7 @@ ttt		n	1	ttt				u	b
 膠原	こうげん	n	1	교원				u	b	
 膠状	こうじょう	n	1	아교 상태				u	b	
 膠質	こうしつ	n	1	아교질				u	b	
-膣	ちつ	n	1	질				u	b	
+膣	ちつ	n	1	질			cls=@body	u	b	
 膣口	ちつこう	n	1	질구				u	w	
 膣炎	ちつえん	n	1	질염				u	w	
 膨らみ	ふくらみ	n	1	부푼 곳				u	b	
@@ -52465,7 +51684,6 @@ ttt		n	1	ttt				u	b
 自失	じしつ	n	1	자실				u	b	
 自存	じそん	n	1	자존				u	b	
 自学	じがく	n	1	자학				u	b	
-自宅	じたく	n	1	자택			cls=@house	u	b	
 自宗	じしゅう	n	1	자신이 속한 종교의 유파				u	b	
 自室	じしつ	n	1	자기 방				u	b	
 自害	じがい	n	1	자해				u	b	
@@ -52610,8 +51828,6 @@ ttt		n	1	ttt				u	b
 興趣	きょうしゅ	n	1	흥취				u	b	
 興醒まし	きょうざまし	n	1	흥이 깨지다				u	b	
 興隆	こうりゅう	n	1	융성				u	b	
-舌	した	n	1	혀			cls=@body	u	b	
-舌	した	n	2	설				u	b	
 舌癌	ぜつがん	n	1	설암				u	b	
 舌触り	したざわり	n	1	맛				u	b	
 舌代	しただい	n	1	말대신에				u	b	
@@ -52875,7 +52091,7 @@ ttt		n	1	ttt				u	b
 芝居気	しばいぎ	n	1	남앞에서 꾸미는 마음				u	b	
 芝海老	しばえび	n	1	보리새우				u	b	
 芝海老	しばえび	n	2	참새우				u	b	
-芝生	しばふ	n	1	잔디				u	b	
+芝生	しばふ	n	1	잔디			cls=@nature	u	b	
 芝草	しばくさ	n	1	잔디			name=+	u	b	
 芟除	さんじょ	n	1	베어버림				u	b	
 芥子和え	からしあえ	n	1	겨자무침				u	b	
@@ -53055,7 +52271,6 @@ ttt		n	1	ttt				u	b
 若禿	わかはげ	n	1	젊어서 대머리가 짐				u	w	
 若紫	わかむらさき	n	1	연보라빛				u	b	
 若緑	わかみどり	n	1	새잎				u	b	
-若者	わかもの	n	1	젊은이				u	b	
 若芽	わかめ	n	1	새싹				u	b	
 若菜	わかな	n	1	봄나물			name=+	u	b	
 若衆	わかしゅ	n	1	젊은이				u	b	
@@ -53444,7 +52659,7 @@ ttt		n	1	ttt				u	b
 落慶	らっけい	n	1	낙성된 기쁨				u	b	
 落日	らくじつ	n	1	낙양				u	b	
 落日	らくじつ	n	2	낙일				u	c+np	from-names
-落書き	らくがき	n	1	낙서				u	wl	
+落書き	らくがき	n	1	낙서			cls=@picture	u	wl	
 落月	らくげつ	n	1	낙월				u	b	
 落札	らくさつ	n	1	낙찰				u	b	
 落果	らっか	n	1	낙과				u	b	
@@ -53938,7 +53153,6 @@ ttt		n	1	ttt				u	b
 蜂起	ほうき	n	1	봉기				u	b	
 蜂鳥	はちどり	n	1	벌새				u	b	
 蜆貝	しじみがい	n	1	조개류				u	w	
-蜘蛛	くも	n	1	거미				u	b	
 蜘蛛手	くもで	n	1	거미발 모양				u	b	
 蜜吸	みつすい	n	1	홍작새				u	b	
 蜜月	みつげつ	n	1	밀월				u	b	
@@ -54150,7 +53364,7 @@ ttt		n	1	ttt				u	b
 衒い	てらい	n	1	성깔부림				u	b	
 衒学	げんがく	n	1	현학				u	b	
 衒気	げんき	n	1	현기				u	b	
-術	じゅつ	n	1	술법				u	wl	
+術	じゅつ	n	1	술법			cls=@skill	u	wl	
 術	じゅつ	n	2	방법				u	b	
 術	じゅつ	n	3	술				u	b	
 術中	じゅっちゅう	n	1	수술 중				u	b	
@@ -54196,7 +53410,6 @@ ttt		n	1	ttt				u	b
 衣桁	いこう	n	1	옷걸이				u	b	
 衣糧	いりょう	n	1	의복과 식량				u	b	
 衣蛾	いが	n	1	옷좀나방				u	b	
-衣装	いしょう	n	1	의상				u	b	
 衣鉢	いはつ	n	1	의발				u	b	
 衣類	いるい	n	1	의류				u	b	
 表作	おもてさく	n	1	앞갈이				u	b	
@@ -54219,7 +53432,6 @@ ttt		n	1	ttt				u	b
 表書き	おもてがき	n	2	겉봉의 주소				u	b	
 表替え	おもてがえ	n	1	다다미의 겉자리를 바꿈				u	b	
 表決	ひょうけつ	n	1	표결				u	b	
-表現	ひょうげん	n	1	표현				u	b	
 表白	ひょうはく	n	1	표명				u	b	
 表白	ひょうはく	n	2	표백				u	c+np	from-names
 表皮	ひょうひ	n	1	표피				u	b	
@@ -54568,7 +53780,7 @@ ttt		n	1	ttt				u	b
 要訣	ようけつ	n	1	비결				u	b	
 要説	ようせつ	n	1	요설				u	b	
 要談	ようだん	n	1	요담				u	b	
-要請	ようせい	n	1	요청				u	b	
+要請	ようせい	n	1	요청			cls=@request	u	b	
 要論	ようろん	n	1	요론				u	b	
 要諦	ようてい	n	1	요체				u	b	
 要路	ようろ	n	1	중요도로				u	b	
@@ -54584,7 +53796,7 @@ ttt		n	1	ttt				u	b
 覆試	ふくし	n	1	복시				u	b	
 覆面	ふくめん	n	1	복면				u	b	
 覇業	はぎょう	n	1	패업				u	b	
-覇権	はけん	n	1	패권				u	b	
+覇権	はけん	n	1	패권			cls=@leverage	u	b	
 覇気	はき	n	1	패기				u	b	
 覇王	はおう	n	1	패왕				u	b	
 覇者	はしゃ	n	1	패자				u	b	
@@ -54647,8 +53859,6 @@ ttt		n	1	ttt				u	b
 見習い	みならい	n	1	견습				u	b	
 見聞	けんぶん	n	1	견문				u	b	
 見聞き	みきき	n	1	견문				u	b	
-見舞い	みまい	n	1	문안				u	b	
-見舞い	みまい	n	2	문병				u	b	
 見落とし	みおとし	n	1	간과한 것				u	b	
 見落とし	みおとし	n	2	간과				u	b	
 見覚え	みおぼえ	n	1	본 기억				u	w	
@@ -54716,13 +53926,9 @@ ttt		n	1	ttt				u	b
 親分	おやぶん	n	1	두목				u	b	
 親分	おやぶん	n	2	친분				u	b	
 親勝り	おやまさり	n	1	부모보다 나은 자식				u	b	
-親友	しんゆう	n	1	절친			cls=@person.close	u	x	
-親友	しんゆう	n	2	친구				u	b	
 親告	しんこく	n	1	친고				u	b	
 親和	しんわ	n	1	친화				u	b	
 親善	しんぜん	n	1	친선			name=+	u	b	
-親子	おやこ	n	1	부모와 자식			name=+	u	b	
-親子	おやこ	n	2	친자				u	c+nw	from-names
 親字	おやじ	n	1	큰 표제의 한자				u	b	
 親局	おやきょく	n	1	키 스테이션				u	b	
 親展	しんてん	n	1	친전				u	b	
@@ -54956,7 +54162,6 @@ ttt		n	1	ttt				u	b
 託児	たくじ	n	1	탁아				u	b	
 託宣	たくせん	n	1	신탁				u	b	
 託送	たくそう	n	1	탁송				u	b	
-記事	きじ	n	1	기사			cls=@document|@writing	u	b	
 記入	きにゅう	n	1	기입				u	b	
 記号	きごう	n	1	기호				u	b	
 記名	きめい	n	1	기명				u	b	
@@ -55114,7 +54319,6 @@ ttt		n	1	ttt				u	b
 試錐	しすい	n	1	시추				u	b	
 試食	ししょく	n	1	시식				u	b	
 試飲	しいん	n	1	시음				u	b	
-詩	し	n	1	시			name=+ cls=@writing	u	b	
 詩人	しじん	n	1	시인				u	b	
 詩体	したい	n	1	시의 형식				u	b	
 詩作	しさく	n	1	작시				u	b	
@@ -55201,8 +54405,6 @@ ttt		n	1	ttt				u	b
 誄歌	るいか	n	1	뇌가				u	b	
 誄詞	るいし	n	1	뇌사				u	b	
 誅求	ちゅうきゅう	n	1	주구				u	b	
-誇り	ほこり	n	1	자랑				u	b	
-誇り	ほこり	n	2	긍지	pred=持つ|抱く			u	x	senses
 誇り顔	ほこりがお	n	1	자랑스러운 얼굴				u	b	
 誇張	こちょう	n	1	과장				u	b	
 誇示	こじ	n	1	과시				u	b	
@@ -55318,7 +54520,6 @@ ttt		n	1	ttt				u	b
 誤算	ごさん	n	1	오산				u	b	
 誤聞	ごぶん	n	1	오문				u	b	
 誤脱	ごだつ	n	1	오자와 탈자				u	b	
-誤解	ごかい	n	1	오해				u	b	
 誤記	ごき	n	1	오기				u	b	
 誤訳	ごやく	n	1	오역				u	b	
 誤診	ごしん	n	1	오진				u	b	
@@ -55691,7 +54892,6 @@ ttt		n	1	ttt				u	b
 議席	ぎせき	n	1	의석				u	b	
 議案	ぎあん	n	1	의안				u	b	
 議決	ぎけつ	n	1	의결				u	b	
-議論	ぎろん	n	1	논의			cls=@activity	u	b	
 議運委	ぎうんい	n	1	위원 운영 위원회				u	b	
 議長	ぎちょう	n	1	의장			cls=@post	u	b	
 議院	ぎいん	n	1	의원				u	b	
@@ -55722,8 +54922,6 @@ ttt		n	1	ttt				u	b
 讒臣	ざんしん	n	1	간신				u	b	
 讒謗	ざんぼう	n	1	비방				u	b	
 讖	しん	n	1	예언				u	b	
-谷	たに	n	1	골짜기			name=+	u	b	
-谷	たに	n	2	곡				u	b	
 谷地	やち	n	1	늪의 습지			name=+	u	b	
 谷底	たにそこ	n	1	골짜기 바닥				u	b	
 谷渡り	たにわたり	n	1	골짜기를 건너감				u	b	
@@ -55857,7 +55055,6 @@ ttt		n	1	ttt				u	b
 財政	ざいせい	n	1	재정				u	b	
 財源	ざいげん	n	1	재원				u	b	
 財物	ざいもつ	n	1	재물				u	b	
-財産	ざいさん	n	1	재산				u	b	
 財界	ざいかい	n	1	재계				u	b	
 財貨	ざいか	n	1	재화				u	b	
 財運	ざいうん	n	1	재수				u	b	
@@ -55919,7 +55116,6 @@ ttt		n	1	ttt				u	b
 貯炭	ちょたん	n	1	저탄				u	b	
 貯蓄	ちょちく	n	1	저축				u	b	
 貯蔵	ちょぞう	n	1	저장				u	b	
-貯金	ちょきん	n	1	저금				u	b	
 貰い	もらい	n	1	얻음				u	b	
 貰い乳	もらいちち	n	1	동냥젖				u	w	
 貰い年	もらいどし	n	1	보탠 나이				u	b	
@@ -56046,7 +55242,6 @@ ttt		n	1	ttt				u	b
 貸費	たいひ	n	1	학자금 대여				u	b	
 貸間	かしま	n	1	셋방				u	b	
 費消	ひしょう	n	1	소비				u	b	
-費用	ひよう	n	1	비용			cls=@money	u	b	
 費目	ひもく	n	1	비목				u	b	
 貼付	ちょうふ	n	1	첨부				u	b	
 貼着		n	1	첩착				u	b	
@@ -56184,7 +55379,6 @@ ttt		n	1	ttt				u	b
 賭け事	かけごと	n	2	내기				u	w	
 賭場	とば	n	1	도박장				u	b	
 賭物	とぶつ	n	1	내기에 거는 물건				u	b	
-購入	こうにゅう	n	1	구입				u	b	
 購座		n	1	파는자리				u	b	
 購求	こうきゅう	n	1	구매				u	b	
 購読	こうどく	n	1	구독				u	b	
@@ -56441,9 +55635,8 @@ ttt		n	1	ttt				u	b
 跪坐	きざ	n	1	꿇어 앉음				u	b	
 跪座		n	1	궤좌				u	b	
 跫音	きょうおん	n	1	발자국 소리				u	b	
-路上	ろじょう	n	1	노상				u	b	
+路上	ろじょう	n	1	노상			cls=@road	u	b	
 路傍	ろぼう	n	1	길가				u	b	
-路地	ろじ	n	1	골목				u	b	
 路床	ろしょう	n	1	노상				u	b	
 路村	ろそん	n	1	노촌				u	b	
 路標	ろひょう	n	1	노표				u	b	
@@ -56467,7 +55660,6 @@ ttt		n	1	ttt				u	b
 跳馬	ちょうば	n	2	도마				u	c+nw	from-names
 跳鼠	とびねずみ	n	1	날쥐				u	b	
 践祚	せんそ	n	1	천조				u	b	
-踊り	おどり	n	1	춤				u	b	
 踊り場	おどりば	n	1	층계참				u	b	
 踊り字	おどりじ	n	1	부호				u	b	
 踊り歌	おどりうた	n	1	무용가				u	w	
@@ -56554,8 +55746,6 @@ ttt		n	1	ttt				u	b
 身重	みおも	n	1	임신				u	b	
 身重	みおも	n	2	임신한	next=の			u	w	
 身銭	みぜに	n	1	자담금				u	b	
-身長	しんちょう	n	1	키			cls=@personal.info	u	wl	
-身長	しんちょう	n	2	신장				u	b	
 身障	しんしょう	n	1	신체 장애				u	b	
 身震い	みぶるい	n	1	몸부림				u	w	
 身頃	みごろ	n	1	길				u	b	
@@ -56571,7 +55761,6 @@ ttt		n	1	ttt				u	b
 車中	しゃちゅう	n	1	차안				u	b	
 車代	くるまだい	n	1	차비				u	b	
 車体	しゃたい	n	1	차체				u	b	
-車内	しゃない	n	1	차내				u	b	
 車券	しゃけん	n	1	차권				u	b	
 車台	しゃだい	n	1	차대				u	b	
 車外	しゃがい	n	1	차 밖				u	b	
@@ -56722,7 +55911,6 @@ ttt		n	1	ttt				u	b
 転戦	てんせん	n	1	전전				u	b	
 転折	てんせつ	n	1	전절				u	b	
 転換	てんかん	n	1	전환	after=へ			u	b	rule:491 +unmapped assigns-neighbour
-転校	てんこう	n	1	전학				u	b	
 転業	てんぎょう	n	1	전업				u	b	
 転機	てんき	n	1	전기				u	w	
 転機	てんき	n	2	전환기				u	b	
@@ -57136,7 +56324,6 @@ ttt		n	1	ttt				u	b
 退団	たいだん	n	1	탈퇴				u	b	
 退団	たいだん	n	2	퇴단				u	c+np	from-names
 退場	たいじょう	n	1	퇴장				u	b	
-退学	たいがく	n	1	퇴학				u	b	
 退官	たいかん	n	1	퇴관				u	b	
 退室	たいしつ	n	1	퇴실				u	b	
 退席	たいせき	n	1	퇴석				u	b	
@@ -57433,7 +56620,6 @@ ttt		n	1	ttt				u	b
 連れ込み	つれこみ	n	1	여자를 데리고 여관에 들어감				u	b	
 連ドラ	れんどら	n	1	연속 드라마				u	b	
 連乗	れんじょう	n	1	연승				u	b	
-連休	れんきゅう	n	1	연휴				u	b	
 連体	れんたい	n	1	연체				u	b	
 連作	れんさく	n	1	연작				u	b	
 連係	れんけい	n	1	연계				u	b	
@@ -57516,7 +56702,6 @@ ttt		n	1	ttt				u	b
 進呈	しんてい	n	1	증정				u	b	
 進塁	しんるい	n	1	진루				u	b	
 進境	しんきょう	n	1	진보한 경지				u	b	
-進学	しんがく	n	1	진학				u	b	
 進展	しんてん	n	1	진전			cls=@trend	u	b	
 進度	しんど	n	1	진도				u	b	
 進撃	しんげき	n	1	진격				u	b	
@@ -57532,7 +56717,6 @@ ttt		n	1	ttt				u	b
 進言	しんげん	n	1	진언				u	b	
 進講	しんこう	n	1	진강				u	b	
 進貢	しんこう	n	1	진공				u	b	
-進路	しんろ	n	1	진로				u	b	
 進軍	しんぐん	n	1	진군				u	b	
 進転	しんてん	n	1	진전				u	b	
 進退	しんたい	n	1	진퇴				u	b	
@@ -57853,7 +57037,7 @@ ttt		n	1	ttt				u	b
 適量	てきりょう	n	1	적당량				u	b	
 遭遇	そうぐう	n	1	조우				u	wl	
 遭遇	そうぐう	n	2	만남				u	b	
-遭難	そうなん	n	1	조난				u	b	
+遭難	そうなん	n	1	조난			cls=@incident	u	b	
 遮光	しゃこう	n	1	차광				u	b	
 遮音	しゃおん	n	1	차음				u	b	
 遵奉	じゅんぽう	n	1	준수				u	b	
@@ -58023,8 +57207,6 @@ ttt		n	1	ttt				u	b
 部別	ぶべつ	n	1	부별				u	b	
 部品	ぶひん	n	1	부품				u	b	
 部外	ぶがい	n	1	부외				u	b	
-部室	ぶしつ	n	1	동아리방			cls=@room	u	x	
-部室	ぶしつ	n	2	방				u	b	
 部局	ぶきょく	n	1	부서				u	wl	
 部局	ぶきょく	n	2	부국				u	b	
 部屋代	へやだい	n	1	방세				u	b	
@@ -58034,8 +57216,6 @@ ttt		n	1	ttt				u	b
 部数	ぶすう	n	1	부수				u	b	
 部族	ぶぞく	n	1	부족				u	b	
 部材	ぶざい	n	1	부재				u	b	
-部活	ぶかつ	n	1	동아리			cls=@organization	u	b	
-部活	ぶかつ	n	2	동아리 활동				u	b	
 部署	ぶしょ	n	1	부서				u	b	
 部落	ぶらく	n	1	부락				u	b	
 部門	ぶもん	n	1	부문				u	b	
@@ -58066,7 +57246,6 @@ ttt		n	1	ttt				u	b
 都たなご	みやこたなご	n	1	잉어과 담수어				u	b	
 都下	とか	n	1	수도 안				u	b	
 都人	とじん	n	1	도시사람				u	b	
-都会	とかい	n	1	도시				u	b	
 都内	とない	n	1	도내				u	b	
 都制	とせい	n	1	도제				u	b	
 都営	とえい	n	1	동경도 경영				u	b	
@@ -58184,7 +57363,6 @@ ttt		n	1	ttt				u	b
 酒食らい	さけくらい	n	1	술꾼				u	b	
 酒飲み	さけのみ	n	1	술꾼				u	wl	
 酒鬼	しゅき	n	1	술귀신				u	b	
-酔い	よい	n	1	취기				u	b	
 酔いどれ	よいどれ	n	1	주정꾼				u	b	
 酔い心地	よいごこち	n	1	얼근한 기분				u	b	
 酔い止め	よいどめ	n	1	멀미약				u	b	
@@ -58490,7 +57668,6 @@ ttt		n	1	ttt				u	b
 金平	きんぴら	n	2	용감한 사람				u	b	
 金庫	きんこ	n	1	금고			cls=@container	u	b	
 金扇	きんせん	n	1	금빛 부채				u	b	
-金持ち	かねもち	n	1	부자				u	b	
 鉄敷	かなしき	n	1	철침				u	b	
 鉄敷	かなしき	n	2	모루				u	b	
 金時	きんとき	n	1	긴토키				u	b	
@@ -58556,7 +57733,6 @@ ttt		n	1	ttt				u	b
 金隠し	きんかくし	n	1	가리개				u	b	
 金離れ	かねばなれ	n	1	돈쓰는 방법				u	b	
 金頭	かながしら	n	1	달강어				u	b	
-金額	きんがく	n	1	금액				u	b	
 金風	きんぷう	n	1	추풍				u	b	
 金高	きんだか	n	1	금액				u	b	
 釘打ち	くぎうち	n	1	못박기				u	b	
@@ -59018,7 +58194,6 @@ ttt		n	1	ttt				u	b
 長堤	ちょうてい	n	1	긴둑				u	b	
 長夜	ちょうや	n	1	긴긴 밤				u	b	
 長大	ちょうだい	n	1	장대하다				u	b	
-長女	ちょうじょ	n	1	장녀				u	b	
 長姉	ちょうし	n	1	장녀				u	b	
 長子	ちょうし	n	1	장자				u	b	
 長官	ちょうかん	n	1	장관				u	b	
@@ -59056,7 +58231,6 @@ ttt		n	1	ttt				u	b
 長生	ちょうせい	n	1	장생				u	b	
 長生き	ながいき	n	1	장수				u	b	
 長生き	ながいき	n	2	장수하는	next=の			u	b	
-長男	ちょうなん	n	1	장남				u	b	
 長病み	ながやみ	n	1	숙환				u	b	
 長目	ちょうもく	n	1	약간 긴 듯하다				u	b	
 長着	ながぎ	n	1	긴 일본옷				u	b	
@@ -59092,7 +58266,6 @@ ttt		n	1	ttt				u	b
 長駆	ちょうく	n	1	장구				u	b	
 長髪	ちょうはつ	n	1	긴 머리				u	wl	
 長髪	ちょうはつ	n	2	장발				u	b	
-門	もん	n	1	문			name=+ cls=@opening	u	b	
 門下	もんか	n	1	문하				u	b	
 門中	もんちゅう	n	1	문중				u	b	
 門人	もんじん	n	1	문하생				u	wl	
@@ -59430,7 +58603,7 @@ ttt		n	1	ttt				u	b
 降魔	こうま	n	1	항마				u	b	
 限外	げんがい	n	1	한계 밖				u	b	
 限局	げんきょく	n	1	국한				u	b	
-限度	げんど	n	1	한도				u	b	
+限度	げんど	n	1	한도			cls=@endpoint	u	b	
 限月	げんげつ	n	1	결제월				u	wl	
 限月	げんげつ	n	2	한월				u	b	
 院	いん	n	1	원				u	b	
@@ -59602,8 +58775,6 @@ ttt		n	1	ttt				u	b
 陽暦	ようれき	n	1	양력				u	b	
 陽極	ようきょく	n	1	양극				u	b	
 陽樹	ようじゅ	n	1	양수			name=+	u	b	
-陽気	ようき	n	1	날씨				u	b	
-陽気	ようき	n	2	양기				u	c+np	from-names
 陽画	ようが	n	1	양화				u	b	
 陽葉	ようよう	n	1	양엽				u	b	
 陽転	ようてん	n	1	양성 전환				u	wl	
@@ -59809,7 +58980,6 @@ ttt		n	1	ttt				u	b
 集め	あつめ	n	1	모음				u	b	
 集会	しゅうかい	n	1	집회				u	b	
 集信	しゅうしん	n	1	집신				u	b	
-集団	しゅうだん	n	1	집단				u	b	
 集塵	しゅうじん	n	1	먼지 수집				u	w	
 集大成	しゅうたいせい	n	1	집대성				u	b	
 集字	しゅうじ	n	1	집자				u	b	
@@ -60180,10 +59350,9 @@ ttt		n	1	ttt				u	b
 電機	でんき	n	1	전기				u	b	
 電波	でんぱ	n	1	전파				u	b	
 電流	でんりゅう	n	1	전류				u	b	
-電源	でんげん	n	1	전원			cls=@control	u	b	
 電灯	でんとう	n	1	전등			cls=@lighting	u	b	
 電熱	でんねつ	n	1	전열				u	b	
-電球	でんきゅう	n	1	전구				u	b	
+電球	でんきゅう	n	1	전구			cls=@lighting	u	b	
 電界	でんかい	n	1	전계				u	b	
 電略	でんりゃく	n	1	전신약호				u	b	
 電磁	でんじ	n	1	전자				u	b	
@@ -60288,8 +59457,6 @@ ttt		n	1	ttt				u	b
 霞網	かすみあみ	n	1	새그물				u	w	
 霞草	かすみそう	n	1	안개꽃				u	w	
 霞草	かすみそう	n	2	광대 나물				u	b	
-霧	きり	n	1	안개			name=+ cls=@weather	u	b	
-霧	きり	n	2	무				u	b	
 霧中	むちゅう	n	1	무중				u	b	
 霧散	むさん	n	1	무산				u	b	
 霧氷	むひょう	n	1	상고대				u	b	
@@ -60369,7 +59536,6 @@ ttt		n	1	ttt				u	b
 青息	あおいき	n	1	한숨				u	b	
 青房	あおぶさ	n	1	청색 술				u	b	
 青旗	あおはた	n	1	청색기				u	b	
-青春	せいしゅん	n	1	청춘				u	b	
 青書	せいしょ	n	1	청서				u	b	
 青服	あおふく	n	1	작업복				u	b	
 青服	あおふく	n	2	공장 노동자				u	b	
@@ -60612,7 +59778,7 @@ ttt		n	1	ttt				u	b
 頂	いただき	n	2	정				u	b	
 頂	いただき	n	3	내 차지				u	b	
 頂上	ちょうじょう	n	1	정상				u	b	
-頂点	ちょうてん	n	1	정점				u	b	
+頂点	ちょうてん	n	1	정점			cls=@endpoint	u	b	
 頂点	ちょうてん	n	2	정점으로	next=に			u	b	
 頂相	ちんぞう	n	1	선승 초상				u	b	
 頂礼	ちょうらい	n	1	정례				u	b	
@@ -60621,7 +59787,7 @@ ttt		n	1	ttt				u	b
 頂門	ちょうもん	n	1	정수리				u	b	
 頃おい	ころおい	n	1	무렵				u	b	
 頃日	けいじつ	n	1	최근				u	b	
-項	こう	n	1	항				u	b	
+項	こう	n	1	항			cls=@body	u	b	
 順	じゅん	n	1	순서			name=+	u	b	
 順	じゅん	n	2	순				u	b	
 順繰り	じゅんぐり	n	1	차례로				u	b	
@@ -60735,7 +59901,6 @@ ttt		n	1	ttt				u	b
 頭株	あたまかぶ	n	1	간부				u	b	
 頭注	とうちゅう	n	1	두주				u	b	
 頭状	とうじょう	n	1	두상				u	b	
-頭痛	ずつう	n	1	두통			cls=@illness|@symptom	u	b	
 頭皮	とうひ	n	1	두피				u	b	
 頭目	とうもく	n	1	두목				u	b	
 頭突き	ずつき	n	1	박치기				u	b	
@@ -60808,7 +59973,6 @@ ttt		n	1	ttt				u	b
 顔貌	かおかたち	n	2	용모				u	b	
 顔役	かおやく	n	1	세력				u	b	
 顔料	がんりょう	n	1	안료				u	b	
-顔色	かおいろ	n	1	안색				u	w	
 顔見世	かおみせ	n	1	첫선				u	b	
 顔見世	かおみせ	n	2	첫선을 보임				u	b	
 顔負け	かおまけ	n	1	무색함				u	b	
@@ -60907,7 +60071,6 @@ ttt		n	1	ttt				u	b
 風待ち	かざまち	n	1	순풍을 기다리며 정박				u	b	
 風情	ふぜい	n	1	따위				u	wl	
 風情	ふぜい	n	2	풍치				u	b	
-風景	ふうけい	n	1	풍경				u	b	
 風月	ふうげつ	n	1	풍월				u	b	
 風柄	ふうがら	n	1	인품				u	b	
 風格	ふうかく	n	1	풍격				u	b	
@@ -61027,7 +60190,6 @@ ttt		n	1	ttt				u	b
 食分	しょくぶん	n	2	식분				u	w	
 食券	しょっけん	n	1	식권				u	b	
 食前	しょくぜん	n	1	식전				u	b	
-食卓	しょくたく	n	1	식탁				u	b	
 食味	しょくみ	n	1	음식맛				u	b	
 食品	しょくひん	n	1	식품				u	b	
 食塩	しょくえん	n	1	식염				u	b	
@@ -61040,12 +60202,7 @@ ttt		n	1	ttt				u	b
 食性	しょくせい	n	1	식성				u	b	
 食感	しょっかん	n	1	식감				u	x	
 食感	しょっかん	n	2	먹을때의 느낌				u	b	
-食欲	しょくよく	n	1	식욕			cls=@faculty	u	b	
 食指	しょくし	n	1	식지				u	b	
-食料	しょくりょう	n	1	식량				u	wl	
-食料	しょくりょう	n	2	식료				u	b	
-食材	しょくざい	n	1	식재료				u	wl	
-食材	しょくざい	n	2	식품 재료				u	b	
 食気	しょっき	n	1	식욕				u	b	
 食物	しょくもつ	n	1	음식				u	b	
 食用	しょくよう	n	1	식용				u	b	
@@ -61090,7 +60247,6 @@ ttt		n	1	ttt				u	b
 飯蛸	いいだこ	n	2	반초				u	b	
 飲み	のみ	n	1	마시는 것				u	b	
 飲み代	のみしろ	n	1	술값				u	b	
-飲み会	のみかい	n	1	회식				u	w	
 飲み出	のみで	n	1	마실 분량이 많음				u	b	
 飲み助	のみすけ	n	1	술꾼				u	w	
 飲み口	のみくち	n	1	맛				u	w	
@@ -61305,8 +60461,6 @@ ttt		n	1	ttt				u	b
 駄馬	だば	n	1	짐말				u	b	
 駅亭	えきてい	n	1	역참				u	b	
 駅伝	えきでん	n	1	역전				u	b	
-駅前	えきまえ	n	1	역 앞				u	wl	
-駅前	えきまえ	n	2	역전				u	b	
 駅員	えきいん	n	1	역무원				u	b	
 駅売り	えきうり	n	1	역내판매				u	b	
 駅夫	えきふ	n	1	역부				u	b	
@@ -61539,7 +60693,6 @@ ttt		n	1	ttt				u	b
 髢	かもじ	n	1	머리털				u	b	
 髢草	かもじぐさ	n	1	볏과 월년초				u	b	
 髪上げ	かみあげ	n	1	머리 땋기				u	b	
-髪型	かみがた	n	1	머리 모양				u	b	
 髪床	かみどこ	n	1	이발소				u	b	
 髪毛	はつもう	n	1	머리털				u	b	
 髪油	かみあぶら	n	1	머릿기름				u	b	
@@ -66769,7 +65922,6 @@ ttt		n	1	ttt				u	b
 芽株	がしゅ	n	1	미역귀				u	w	
 苔桃	こけもも	n	1	월귤				u	w	
 苗床	なえどこ	n	1	묘상				u	w	
-苛々	いらいら	n	1	안달복달				u	w	
 苦参	くじん	n	1	클라라				u	w	
 苦塩	にがしお	n	1	간수				u	w	
 苦無	くない	n	1	쿠나이				u	w	

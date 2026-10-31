@@ -1,14 +1,9 @@
 #! lexicon
 # One row per sense; (ja, yomi, pos) is the lemma id and sense 1 is the default.
 ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
-割と	わりと	adv	1	꽤				u	wl	
-割と	わりと	adv	2	비교적				u	w	
-割と	わりと	adv	3	생각보다는				u	b	
 あむ	あむ	adv	1	짜다				u	b	
 生憎	あいにく	adv	1	공교롭게도				u	w	
 生憎	あいにく	adv	2	공교롭게				u	b	
-敢えて	あえて	adv	1	굳이				u	wl	
-敢えて	あえて	adv	2	감히				u	w	
 齷齪	あくせく	adv	1	악착같이				u	b	
 齷齪	あくせく	adv	2	열심히	next=と			u	b	
 飽くまで	あくまで	adv	1	어디까지나				u	b	
@@ -17,9 +12,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 あっけらかん	あっけらかん	adv	1	태평하다				u	wl	
 あっけらかん	あっけらかん	adv	2	태연하게	next=と			u	wl	
 あっけらかん	あっけらかん	adv	3	어이없이	next=と			u	b	
-あっさり	あっさり	adv	1	간단히				u	wl	
-あっさり	あっさり	adv	2	시원시럽게				u	b	
-あっさり	あっさり	adv	3	시원스럽게	next=と			u	b	
 あっぷあっぷ	あっぷあっぷ	adv	1	허위적 허위적				u	b	
 強ち	あながち	adv	1	반드시				u	b	
 数多	あまた	adv	1	무수히				u	b	
@@ -32,11 +24,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 予め	あらかじめ	adv	1	미리				u	b	
 ありあり	ありあり	adv	1	역력히				u	b	
 ありあり	ありあり	adv	2	또렷이	next=と			u	b	
-或いは	あるいは	conj	1	혹은				u	b	
 あわや	あわや	adv	1	하마터면				u	b	
 あわよくば	あわよくば	adv	1	잘 되면				u	b	
-案の定	あんのじょう	adv	1	생각한 대로				u	b	
-案の定	あんのじょう	adv	2	아니나 다를까				u	b	
 如何なる	いかなる	adn	1	어떠한				u	b	
 如何なる	いかなる	adn	2	어떤				u	b	
 如何に	いかに	adv	1	오죽이나				u	w	
@@ -51,11 +40,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 幾許	いくばく	adv	1	얼마간				u	b	
 些か	いささか	adv	1	조금				u	b	
 些か	いささか	adv	2	약간				u	b	
-いざ	いざ	intj	1	막상				u	b	
-何れ	いずれ	adv	1	언젠가				u	wl	
-何れ	いずれ	adv	2	머지않아				u	b	
-何れ	いずれ	adv	3	어차피				u	b	
-何れ	いずれ	adv	4	어느 것	next=にも			u	b	rule:6
 いそいそ	いそいそ	adv	1	허겁지겁				u	b	
 至って	いたって	adv	1	매우				u	b	
 逸早く	いちはやく	adv	1	재빨리				u	b	
@@ -66,11 +50,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 一向	いっこう	adv	1	매우				u	b	
 一向	いっこう	adv	2	전혀				u	b	
 一向	いっこう	adv	3	조금도				u	b	
-いっそ	いっそ	adv	1	차라리				u	b	
-いっそ	いっそ	adv	2	도리어				u	b	
-一層	いっそう	adv	1	한층 더				u	b	
-一層	いっそう	adv	2	한층				u	b	rule:1351 +unmapped
-一旦	いったん	adv	1	일단				u	b	
 一端	いっぱし	adv	1	남 못지 않게				u	b	
 いとど	いとど	adv	1	매우				u	b	
 最も	いとも	adv	1	아주				u	b	
@@ -101,14 +80,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 うっとり	うっとり	adv	1	넋을 잃고				u	b	
 うつうつ	うつうつ	adv	1	울적하게				u	b	
 うつらうつら	うつらうつら	adv	1	꾸벅꾸벅				u	b	
-うとうと	うとうと	adv	1	꾸벅꾸벅				u	b	
 うねうね	うねうね	adv	1	꾸불꾸불				u	b	
 うまうま	うまうま	adv	1	감쪽같이				u	b	
 うまうま	うまうま	adv	2	맘마				u	b	
 うまうま	うまうま	adv	3	교묘하게	next=と			u	b	
 うようよ	うようよ	adv	1	우글우글				u	b	
 うるうる	うるうる	adv	1	글썽 글썽				u	b	
-うろうろ	うろうろ	adv	1	우왕좌왕				u	b	
 うろちょろ	うろちょろ	adv	1	어정어정				u	b	
 うんざり	うんざり	adv	1	지긋지긋				u	b	
 うんざり	うんざり	adv	2	지긋지긋하다				u	b	
@@ -157,12 +134,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 思い思い	おもいおもい	adv	2	제각각				u	b	
 思い思い	おもいおもい	adv	3	각자 나름대로의	next=の			u	b	
 主な	おもな	adn	1	주된				u	b	
-主に	おもに	adv	1	주로				u	b	
 徐に	おもむろに	adv	1	천천히				u	wl	
 徐に	おもむろに	adv	2	조용히				u	b	
 徐に	おもむろに	adv	3	서서히				u	b	
-凡そ	およそ	adv	1	대략				u	b	
-凡そ	およそ	adv	2	전연				u	b	
 おろおろ	おろおろ	adv	1	허둥지둥				u	b	
 おろおろ	おろおろ	adv	2	엉엉				u	b	
 斯く	かく	adv	1	이렇게				u	wl	
@@ -174,9 +148,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 且つ	かつ	conj	3	이기다				u	b	rule:3507 +unmapped
 皆目	かいもく	adv	1	전혀				u	b	
 返す返す	かえすがえす	adv	1	거듭				u	b	
-却って	かえって	adv	1	오히려				u	b	
-却って	かえって	adv	2	돌아가서	after=に			u	b	rule:3681 +unmapped
-却って	かえって	adv	3	돌아가서	after=から			u	b	rule:3681 +unmapped
 斯く斯く	かくかく	adv	1	여차저차				u	b	
 斯く斯く	かくかく	adv	2	여차여차				u	b	
 斯く斯く	かくかく	adv	3	각각				u	b	
@@ -198,8 +169,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 かっきり	かっきり	adv	1	확연히				u	b	
 かったん	かったん	adv	1	갈탄				u	b	
 かっちり	かっちり	adv	1	꼭				u	b	
-かっと	かっと	adv	1	확확				u	b	
-かっと	かっと	adv	2	딱				u	b	
 かつかつ	かつかつ	adv	1	간신히				u	b	
 かつかつ	かつかつ	adv	2	빠듯하다				u	b	
 且且	かつがつ	adv	1	하나하나				u	b	
@@ -241,7 +210,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 がちゃがちゃ	がちゃがちゃ	adv	2	짤가닥짤가닥				u	b	
 がちゃり	がちゃり	adv	1	짤각				u	b	
 がちゃん	がちゃん	adv	1	쨍그랑				u	b	
-がっくり	がっくり	adv	1	푹				u	b	
 がっしり	がっしり	adv	1	튼튼				u	b	
 がっちり	がっちり	adv	1	단단히				u	b	
 がつがつ	がつがつ	adv	1	걸근걸근				u	b	
@@ -279,7 +247,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 きっちり	きっちり	adv	1	제대로				u	x	
 きっちり	きっちり	adv	2	빈틈없이				u	b	
 きっちり	きっちり	adv	3	딱				u	b	
-きっぱり	きっぱり	adv	1	단호히				u	b	
 きびきび	きびきび	adv	1	발랄히				u	b	
 九十	きゅうじゅう	num	1	구십				u	b	
 きゅっきゅっ	きゅっきゅっ	adv	1	삐걱삐걱				u	b	
@@ -288,13 +255,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 きょときょと	きょときょと	adv	1	두리번두리번				u	b	
 きょとん	きょとん	adv	1	어리둥절히	next=と			u	wl	
 きょとん	きょとん	adv	2	멍청히	next=と			u	b	
-きょろきょろ	きょろきょろ	adv	1	두리번두리번				u	b	
-きらきら	きらきら	adv	1	반짝반짝				u	b	
 きらり	きらり	adv	1	반짝			name=+	u	b	
 きりきり	きりきり	adv	1	쑥쑥				u	b	
 きりり	きりり	adv	1	꽉	next=と			u	b	
-極めて	きわめて	adv	1	극히				u	b	
-極めて	きわめて	adv	2	지극히				u	b	
 きんきん	きんきん	adv	1	머지않아				u	b	
 ぎいぎい	ぎいぎい	adv	1	삐걱삐걱				u	b	
 ぎくしゃく	ぎくしゃく	adv	1	불조화				u	b	
@@ -305,24 +268,16 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぎっしり	ぎっしり	adv	1	가득				u	b	
 ぎっちり	ぎっちり	adv	1	가득				u	b	
 ぎゅうぎゅう	ぎゅうぎゅう	adv	1	꽉꽉				u	b	
-ぎゅっ	ぎゅっ	adv	1	질끈	next=と			u	w	
-ぎゅっ	ぎゅっ	adv	2	꽉	next=と			u	b	
 ぎょっと	ぎょっと	adv	1	깜짝				u	wl	
 ぎょっと	ぎょっと	adv	2	오싹				u	b	
 ぎょろぎょろ	ぎょろぎょろ	adv	1	멀뚱멀뚱				u	b	
 ぎらぎら	ぎらぎら	adv	1	쨍쨍				u	b	
 ぎらぎら	ぎらぎら	adv	2	반짝반짝				u	b	
 ぎらり	ぎらり	adv	1	번쩍				u	b	
-ぎりぎり	ぎりぎり	adv	1	아슬아슬하게				u	wl	
-ぎりぎり	ぎりぎり	adv	2	빠듯이				u	b	
-ぎりぎり	ぎりぎり	adv	3	최대한의	next=の			u	b	
-ぎりぎり	ぎりぎり	adv	4	빠듯한	next=の			u	b	
 くう	くう	adv	1	먹다				u	b	
 くいくい	くいくい	adv	1	질질				u	b	
 くさくさ	くさくさ	adv	1	울적				u	b	
 奇しくも	くしくも	adv	1	기이하게도				u	b	
-くすくす	くすくす	adv	1	킥킥				u	b	
-くすくす	くすくす	adv	2	낄낄	next=と			u	b	
 くだくだ	くだくだ	adv	1	장황하게				u	b	
 くちゃくちゃ	くちゃくちゃ	adv	1	꾸깃꾸깃				u	b	
 くちゃくちゃ	くちゃくちゃ	adv	2	꼬깃해진	next=の			u	b	
@@ -340,8 +295,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 くらくら	くらくら	adv	1	어찔어찔				u	b	
 くらくら	くらくら	adv	2	어질 어질				u	b	
 くりくり	くりくり	adv	1	동글동글				u	b	
-くるくる	くるくる	adv	1	빙글빙글				u	b	
-くるくる	くるくる	adv	2	돌돌				u	b	
 くるりくるり	くるりくるり	adv	1	빙빙				u	b	
 くるり	くるり	adv	1	휙	next=と			u	b	
 呉々	くれぐれ	adv	1	아무쪼록				u	b	
@@ -353,10 +306,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぐしゃ	ぐしゃ	adv	1	바보				u	b	
 ぐしゃ	ぐしゃ	adv	2	아싹	next=と			u	b	
 ぐすぐす	ぐすぐす	adv	1	훌쩍 훌쩍				u	b	
-ぐずぐず	ぐずぐず	adv	1	우물쭈물				u	b	
-ぐずぐず	ぐずぐず	adv	2	중얼중얼				u	b	
 ぐっしょり	ぐっしょり	adv	1	흠뻑				u	b	
-ぐったり	ぐったり	adv	1	축				u	b	
 ぐつぐつ	ぐつぐつ	adv	1	부글부글				u	b	
 ぐどぐど	ぐどぐど	adv	1	투덜투덜				u	b	
 ぐにゃぐにゃ	ぐにゃぐにゃ	adv	1	누글누글				u	b	
@@ -367,9 +317,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぐらぐら	ぐらぐら	adv	2	부글부글				u	b	
 ぐら	ぐら	adv	1	기우뚱	next=と			u	b	
 ぐりぐり	ぐりぐり	adv	1	때굴때굴				u	b	
-ぐるぐる	ぐるぐる	adv	1	빙빙				u	b	
-ぐるぐる	ぐるぐる	adv	2	친친				u	b	
-ぐるぐる	ぐるぐる	adv	3	빙글빙글	next=と			u	b	
 ぐるり	ぐるり	adv	1	둘레				u	b	
 ぐんぐん	ぐんぐん	adv	1	쑥쑥				u	wl	
 ぐんぐん	ぐんぐん	adv	2	부쩍부쩍				u	b	
@@ -395,11 +342,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 小ぢんまり	こぢんまり	adv	1	조촐하고 아담				u	b	
 小ぢんまり	こぢんまり	adv	2	아담하게				u	b	
 こせこせ	こせこせ	adv	1	좀스럽게				u	b	
-こそこそ	こそこそ	adv	1	소곤소곤				u	b	
-こそこそ	こそこそ	adv	2	살금살금				u	b	
 こっくり	こっくり	adv	1	끄덕끄덕				u	b	
-こっそり	こっそり	adv	1	몰래				u	w	
-こっそり	こっそり	adv	2	남몰래	next=と			u	b	
 こってり	こってり	adv	1	몹시				u	b	
 こつこつ	こつこつ	adv	1	꾸준히				u	wl	
 こつこつ	こつこつ	adv	2	뚜벅뚜벅				u	b	
@@ -454,10 +397,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 毎	ごと	suf	8	매일	next=夜			u	b	rule:3576
 毎	ごと	suf	9	매일	next=R昼			u	b	rule:3576
 ごりごり	ごりごり	adv	1	삐걱삐걱				u	b	
-ごろごろ	ごろごろ	adv	1	데굴데굴				u	b	
-ごろごろ	ごろごろ	adv	2	덜그럭덜그럭				u	b	
-ごろごろ	ごろごろ	adv	3	빈둥빈둥				u	b	
-ごろごろ	ごろごろ	adv	4	우르릉우르릉				u	b	
 ごろり	ごろり	adv	1	벌렁	next=と			u	b	
 然る	さる	adn	1	떠나다				u	b	
 然る	さる	adn	2	가다				u	b	
@@ -528,7 +467,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 頻り	しきり	adv	6	무성	after=R声			u	b	rule:4237 +unmapped
 頻り	しきり	adv	7	무성	after=噂			u	b	rule:4237 +unmapped
 頻り	しきり	adv	8	무성	after=うわさ			u	b	rule:4237 +unmapped
-しくしく	しくしく	adv	1	훌쩍훌쩍				u	b	
 繁々	しげしげ	adv	1	빈번하게				u	w	
 繁々	しげしげ	adv	2	빈번히				u	b	
 繁々	しげしげ	adv	3	찬찬히				u	b	
@@ -578,7 +516,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 所詮	しょせん	adv	1	어차피				u	b	
 所詮	しょせん	adv	2	결국				u	b	
 所詮	しょせん	adv	3	서전				u	b	
-しょっちゅう	しょっちゅう	adv	1	언제나				u	b	
 しょぼしょぼ	しょぼしょぼ	adv	1	보슬보슬				u	b	
 しょぼん	しょぼん	adv	1	시무룩하게				u	wl	
 しょぼん	しょぼん	adv	2	쓸쓸히				u	b	
@@ -594,7 +531,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 じんと	じんと	adv	4	뭉클함				u	b	
 じくじく	じくじく	adv	1	질척질척				u	b	
 じたばた	じたばた	adv	1	바동바동				u	b	
-じっくり	じっくり	adv	1	차분히				u	b	
 じっとり	じっとり	adv	1	축축히				u	b	
 じとじと	じとじと	adv	1	축축하게				u	b	
 染みる	じみる	suf	1	같아 보이다			cls=@dirt	u	b	rule:1313 +unmapped
@@ -606,7 +542,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 順々	じゅんじゅん	adv	1	차례차례				u	w	
 順々	じゅんじゅん	adv	2	차례차례로	next=に			u	b	
 じりじり	じりじり	adv	1	조금씩				u	b	
-じろじろ	じろじろ	adv	1	빤히				u	b	
 じろり	じろり	adv	1	힐끗	next=と			u	b	
 じわじわ	じわじわ	adv	1	서서히				u	b	
 じわじわ	じわじわ	adv	2	천천히	next=と			u	b	
@@ -621,16 +556,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 すかさず	すかさず	adv	1	재빠르게				u	b	
 すがら	すがら	suf	1	내내				u	b	
 すくすく	すくすく	adv	1	무럭무럭				u	x	
-直様	すぐさま	adv	1	곧 바로				u	b	
 頗る	すこぶる	adv	1	대단히				u	b	
 すごすご	すごすご	adv	1	맥없이				u	b	
 すたすた	すたすた	adv	1	부리나케				u	b	
-すっきり	すっきり	adv	1	개운하게				u	wl	
-すっきり	すっきり	adv	2	깨끗이				u	b	
 擦った揉んだ	すったもんだ	adv	1	옥신각신				u	b	
 すっぽり	すっぽり	adv	1	푹				u	b	
 すとん	すとん	adv	1	쿵	next=と			u	b	
-即ち	すなわち	conj	1	즉				u	b	
 すぱすぱ	すぱすぱ	adv	1	뻐끔뻐끔				u	b	
 すぱすぱ	すぱすぱ	adv	2	싹둑싹둑				u	b	
 須らく	すべからく	adv	1	모름지기				u	w	
@@ -654,9 +585,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ずっしり	ずっしり	adv	2	묵직하게	next=と			u	b	
 ずっぷり	ずっぷり	adv	1	푹				u	b	
 ずばずば	ずばずば	adv	1	거침없이				u	b	
-ずらり	ずらり	adv	1	즐비하게				u	b	
-ずらり	ずらり	adv	2	죽	next=と			u	b	
-ずらり	ずらり	adv	3	줄줄이	next=と			u	b	rule:3079 +unmapped
 ずらー	ずらー	adv	1	쭉	next=と			u	b	
 ずりずり	ずりずり	adv	1	질질	next=と			u	b	
 ずるずる	ずるずる	adv	1	질질				u	b	
@@ -664,9 +592,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ずんぐりむっくり	ずんぐりむっくり	adv	1	땅딸막				u	b	
 ずんずん	ずんずん	adv	1	척척				u	b	
 ずんずん	ずんずん	adv	2	쑥쑥				u	b	
-精々	せいぜい	adv	1	기껏해야				u	wl	
-精々	せいぜい	adv	2	겨우				u	b	
-精々	せいぜい	adv	3	힘껏				u	b	rule:17 +unmapped
 せかせか	せかせか	adv	1	성급히				u	b	
 せかせか	せかせか	adv	2	성큼성큼				u	b	
 せっせと	せっせと	adv	1	부지런히				u	wl	
@@ -678,7 +603,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 そうこう	そうこう	adv	5	장행				u	b	
 そうこう	そうこう	adv	6	주행				u	b	
 そうこう	そうこう	adv	7	성공				u	b	
-相当	そうとう	adv	1	상당히				u	b	
 そうらん	そうらん	intj	1	소란				u	b	
 そうらん	そうらん	intj	2	총람				u	b	
 そこそこ	そこそこ	adv	1	안밖				u	b	rule:1425 +unmapped
@@ -689,19 +613,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 そ知らぬ	そしらぬ	adn	2	모르는 체하는				u	b	
 そそくさ	そそくさ	adv	1	허둥지둥				u	b	
 そっくり	そっくり	adv	1	전부				u	b	rule:2317
-そっと	そっと	adv	1	살며시				u	b	
 そよそよ	そよそよ	adv	1	산들산들				u	b	
 そろり	そろり	adv	1	살짝	next=と			u	b	
-そわそわ	そわそわ	adv	1	안절부절				u	b	
-そわそわ	そわそわ	adv	2	조마조마	next=と			u	b	
 沿い	そい	suf	1	주변				u	b	
 沿い	そい	suf	2	가				u	b	
-ぞくぞく	ぞくぞく	adv	1	오싹오싹				u	b	
-ぞくぞく	ぞくぞく	adv	2	잇따라				u	b	
-ぞくぞく	ぞくぞく	adv	3	속속	next=と			u	b	
 ぞくり	ぞくり	adv	1	속리				u	b	
 ぞっこん	ぞっこん	adv	1	홀딱				u	b	
-ぞっと	ぞっと	adv	1	오싹				u	wl	
 ぞろぞろ	ぞろぞろ	adv	1	우르르				u	b	
 ぞろり	ぞろり	adv	1	주렁주렁	next=と			u	b	
 大して	たいして	adv	1	그다지				u	b	
@@ -712,7 +629,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 高々	たかだか	adv	3	드높이	next=と			u	w	
 たじたじ	たじたじ	adv	1	비틀비틀				u	b	
 直ちに	ただちに	adv	1	즉시				u	b	
-忽ち	たちまち	adv	1	금세				u	wl	
 仮令	たとえ	adv	1	설령				u	x	
 仮令	たとえ	adv	2	비록				u	b	
 度々	たびたび	adv	1	자주				u	w	
@@ -720,9 +636,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 度々	たびたび	adv	3	종종				u	b	
 度々	たびたび	adv	4	여러 번				u	b	
 度々	たびたび	adv	5	언제나				u	b	rule:4931 +unmapped
-偶々	たまたま	adv	1	우연히				u	wl	
-偶々	たまたま	adv	2	가끔				u	b	
-偶々	たまたま	adv	3	가끔이다				u	b	
 たらふく	たらふく	adv	1	배불리				u	b	
 たらり	たらり	adv	1	축	next=と			u	b	
 単なる	たんなる	adn	1	단순한				u	b	
@@ -732,8 +645,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大それた	だいそれた	adn	3	엄청난				u	b	
 だくだく	だくだく	adv	1	줄줄				u	b	
 だぶだぶ	だぶだぶ	adv	1	헐렁헐렁				u	b	
-だらだら	だらだら	adv	1	줄줄				u	b	
-だらだら	だらだら	adv	2	질질				u	b	
 だらり	だらり	adv	1	축	next=と			u	b	
 段々	だんだん	adv	1	점점				u	w	
 段々	だんだん	adv	2	점차				u	b	
@@ -754,22 +665,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ちょこちょこ	ちょこちょこ	adv	3	이따금				u	b	
 ちょこちょこ	ちょこちょこ	adv	4	조금씩 조금씩	next=と			u	b	
 ちょこちょこ	ちょこちょこ	adv	5	조금조금씩	next=と			u	b	
-ちょっぴり	ちょっぴり	adv	1	조금				u	b	
 ちょび	ちょび	adv	1	조금	next=と			u	w	
 ちょろちょろ	ちょろちょろ	adv	1	졸졸				u	b	
 ちょろちょろ	ちょろちょろ	adv	2	홀홀				u	b	
 ちょろり	ちょろり	adv	1	조르르	next=と			u	b	
-ちらちら	ちらちら	adv	1	팔랑팔랑				u	b	
-ちらちら	ちらちら	adv	2	슬쩍슬쩍				u	b	
-ちらちら	ちらちら	adv	3	힐끔힐끔	next=と			u	wl	
-ちらちら	ちらちら	adv	4	반짝반짝	next=と			u	b	
-ちら	ちら	adv	1	슬쩍	next=と			u	w	
-ちら	ちら	adv	2	힐끗	next=と			u	b	
-ちら	ちら	adv	3	살짝	next=と			u	b	
 ちらほら	ちらほら	adv	1	하나둘씩				u	b	
 ちらりちらり	ちらりちらり	adv	1	언뜻언뜻				u	b	
-ちらり	ちらり	adv	1	힐끗				u	wl	
-ちらり	ちらり	adv	2	살짝	next=と			u	b	
 ちりちり	ちりちり	adv	1	오글오글				u	b	
 ちんと	ちんと	adv	1	침착하게				u	b	
 ついつい	ついつい	adv	1	그만				u	b	
@@ -779,10 +680,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 次いで	ついで	adv	4	겸				u	b	rule:4225 +unmapped assigns-neighbour
 ついと	ついと	adv	1	갑자기				u	b	
 つかつか	つかつか	adv	1	성큼성큼				u	b	
-次々	つぎつぎ	adv	1	차례차례				u	b	
-次々	つぎつぎ	adv	2	차례차례로	next=と			u	b	
-次々	つぎつぎ	adv	3	계속해서	next=に			u	b	
-次々	つぎつぎ	adv	4	차례차례로	next=に			u	b	
 熟	つくづく	adv	1	곰곰이	next=と			u	b	
 熟	つくづく	adv	2	절실히	next=感じ			u	b	rule:1321 +unmapped
 つくねん	つくねん	adv	1	멍하니	next=と			u	b	
@@ -812,16 +709,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 でかでか	でかでか	adv	1	커다랗게				u	b	
 でかでか	でかでか	adv	2	큼직큼직하게	next=と			u	b	
 とある	とある	adn	1	어떤				u	b	
-到底	とうてい	adv	1	도저히				u	b	
-到頭	とうとう	adv	1	드디어				u	b	
-到頭	とうとう	adv	2	이윽고				u	b	
-到頭	とうとう	adv	3	결국				u	b	
-到頭	とうとう	adv	4	도도히	next=と			u	b	
 兎角	とかく	adv	1	이러니저러니 하는				u	wl	
 兎角	とかく	adv	2	대체로				u	b	
 兎角	とかく	adv	3	이럭저럭				u	b	rule:3670 +unmapped
-時折	ときおり	adv	1	간간이				u	w	
-時折	ときおり	adv	2	때때로				u	b	
 とくとく	とくとく	adv	1	쪼로록				u	b	
 とことこ	とことこ	adv	1	종종걸음으로	next=と			u	b	
 とっくり	とっくり	adv	1	차분히				u	b	
@@ -833,8 +723,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 とぼとぼ	とぼとぼ	adv	1	터벅터벅				u	b	
 頓に	とみに	adv	1	갑자기				u	b	
 ともあれ	ともあれ	adv	1	여하튼				u	b	
-兎も角	ともかく	adv	1	어쨌든				u	b	
-兎も角	ともかく	adv	2	차치하고	after=は			u	b	rule:5056
 共々	ともども	adv	1	다 같이				u	w	
 共々	ともども	adv	2	함께	next=に			u	w	
 とやかく	とやかく	adv	1	이러쿵저러쿵				u	b	
@@ -852,7 +740,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 どき	どき	adv	1	움찔				u	b	
 どき	どき	adv	2	깜짝	next=と			u	wl	
 どき	どき	adv	3	철렁	next=と			u	wl	
-どきどき	どきどき	adv	1	두근두근				u	b	
 どきり	どきり	adv	1	덜컥	next=と			u	b	
 どぎまぎ	どぎまぎ	adv	1	허둥지둥				u	b	
 どぎまぎ	どぎまぎ	adv	2	당황				u	b	
@@ -885,13 +772,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 尚且つ	なおかつ	adv	1	더욱이				u	w	
 尚且つ	なおかつ	adv	2	또한				u	w	
 尚且つ	なおかつ	adv	3	게다가				u	b	
-尚更	なおさら	adv	1	더욱 더				u	w	
-尚更	なおさら	adv	2	더욱더				u	wl	
-尚更	なおさら	adv	3	한층				u	w	
-尚更	なおさら	adv	4	더더욱				u	wl	
-尚更	なおさら	adv	5	더욱더 그러하다				u	b	
 なかんずく	なかんずく	adv	1	특히				u	b	
-何しろ	なにしろ	adv	1	어쨌든				u	b	
 何せ	なにせ	adv	1	여하튼				u	b	
 何とぞ	なにとぞ	adv	1	부디				u	b	
 何とぞ	なにとぞ	adv	2	아무쪼록				u	b	
@@ -903,16 +784,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 なよなよ	なよなよ	adv	1	나긋나긋				u	b	
 成る丈	なるたけ	adv	1	되도록				u	b	
 何のその	なんのその	adv	1	아랑곳없이	next=と			u	b	
-にこにこ	にこにこ	adv	1	싱글벙글				u	b	
-にこにこ	にこにこ	adv	2	방글방글	next=と			u	b	
 にたにた	にたにた	adv	1	히죽히죽				u	b	
-にっこり	にっこり	adv	1	방긋				u	wl	
-にっこり	にっこり	adv	2	활짝				u	w	
-にっこり	にっこり	adv	3	생긋				u	b	
-にやにや	にやにや	adv	1	히죽히죽				u	wl	
-にやにや	にやにや	adv	2	능글능글				u	b	
-にやり	にやり	adv	1	씩				u	wl	
-にやり	にやり	adv	2	힐쭉	next=と			u	b	
 にゅう	にゅう	adv	1	불쑥	next=と			u	b	
 にゅっ	にゅっ	adv	1	불쑥	next=と			u	w	
 にゅっ	にゅっ	adv	2	쑥	next=と			u	b	
@@ -1005,10 +877,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぱちん	ぱちん	adv	2	찰싹	next=と			u	b	
 ぱっくり	ぱっくり	adv	1	빠끔히				u	b	
 ぱっちり	ぱっちり	adv	1	또렷하게				u	b	
-ぱっ	ぱっ	adv	1	확	next=と			u	wl	
-ぱっ	ぱっ	adv	2	화려하게	next=と			u	wl	
-ぱっ	ぱっ	adv	3	쫙	next=と			u	b	
-ぱっ	ぱっ	adv	4	신통	next=と			u	b	
 ぱっぱ	ぱっぱ	adv	1	척척	next=と			u	b	
 ぱらぱら	ぱらぱら	adv	1	훌훌				u	b	
 ぱらぱら	ぱらぱら	adv	2	호도독호도독				u	b	
@@ -1024,7 +892,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ひしひし	ひしひし	adv	1	바싹바싹				u	b	
 ひしひし	ひしひし	adv	2	오싹오싹				u	b	
 ひそひそ	ひそひそ	adv	1	소곤소곤				u	wl	
-只管	ひたすら	adv	1	오로지				u	wl	
 ひたひた	ひたひた	adv	1	바특이				u	b	
 ひたひた	ひたひた	adv	2	철썩철썩	next=と			u	b	
 ひっそり	ひっそり	adv	1	고요히				u	b	
@@ -1041,9 +908,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 一頻り	ひとしきり	adv	3	한 바탕				u	b	
 一頻り	ひとしきり	adv	4	한 차례				u	b	
 一肌	ひとはだ	adv	1	피부				u	w	
-一先ず	ひとまず	adv	1	우선				u	w	
-一先ず	ひとまず	adv	2	그런대로				u	wl	
-一先ず	ひとまず	adv	3	일단				u	b	
 冷や冷や	ひやひや	adv	1	조마조마				u	b	
 冷や冷や	ひやひや	adv	2	써늘하게				u	b	
 ひやり	ひやり	adv	1	섬뜩	next=と			u	b	
@@ -1061,7 +925,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ひりり	ひりり	adv	1	얼얼하게	next=と			u	b	
 ひんやり	ひんやり	adv	1	서늘하게				u	wl	
 ひんやり	ひんやり	adv	2	서늘				u	b	
-びくびく	びくびく	adv	1	벌벌				u	b	
 びくり	びくり	adv	1	움찔				u	wl	
 びくり	びくり	adv	2	움찍	next=と			u	b	
 びしびし	びしびし	adv	1	가차없이				u	b	
@@ -1074,10 +937,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 びょう	びょう	adv	1	초				u	b	
 びりびり	びりびり	adv	1	찌르르				u	b	
 ぴいぴい	ぴいぴい	adv	1	빽빽				u	b	
-ぴかぴか	ぴかぴか	adv	1	반짝반짝				u	b	
-ぴかぴか	ぴかぴか	adv	2	번쩍번쩍				u	b	
-ぴかぴか	ぴかぴか	adv	3	반짝이는	next=の			u	b	
-ぴかぴか	ぴかぴか	adv	4	반짝반짝 빛나는	next=の			u	b	
 ぴかり	ぴかり	adv	1	번쩍	next=と			u	b	
 ぴくぴく	ぴくぴく	adv	1	실룩실룩				u	b	
 ぴくぴく	ぴくぴく	adv	2	쫑긋쫑긋				u	b	
@@ -1096,7 +955,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぴちゃぴちゃ	ぴちゃぴちゃ	adv	1	철벅철벅				u	b	
 ぴちゃぴちゃ	ぴちゃぴちゃ	adv	2	철썩철썩				u	b	
 ぴちゃぴちゃ	ぴちゃぴちゃ	adv	3	할짝할짝				u	b	
-ぴったり	ぴったり	adv	1	딱				u	b	
 ぴっちり	ぴっちり	adv	1	딱				u	b	
 ぴっぴっ	ぴっぴっ	adv	1	싹싹	next=と			u	b	
 ぴゅうぴゅう	ぴゅうぴゅう	adv	1	우우				u	w	
@@ -1124,22 +982,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ふっくら	ふっくら	adv	1	포동포동한	next=と			u	b	
 ふっつり	ふっつり	adv	1	뚝				u	b	
 ふつふつ	ふつふつ	adv	1	부글부글				u	b	
-ふと	ふと	adv	1	문득				u	b	
-ふらふら	ふらふら	adv	1	휘청휘청				u	wl	
-ふらふら	ふらふら	adv	2	흔들흔들				u	b	
-ふらふら	ふらふら	adv	3	빙빙				u	b	
 ふらり	ふらり	adv	1	훌쩍	next=と			u	wl	
 ふらり	ふらり	adv	2	홱	next=と			u	b	
 ふわ	ふわ	adv	1	둥실	next=と			u	wl	
 ふわ	ふわ	adv	2	부드럽게	next=と			u	wl	
 ふわ	ふわ	adv	3	불안하게	next=と			u	wl	
 ふわ	ふわ	adv	4	가볍게	next=と			u	b	
-ふわふわ	ふわふわ	adv	1	푹신푹신				u	wl	
-ふわふわ	ふわふわ	adv	2	폭신폭신				u	wl	
-ふわふわ	ふわふわ	adv	3	두리둥실				u	w	
-ふわふわ	ふわふわ	adv	4	들썩들썩				u	wl	
-ふわふわ	ふわふわ	adv	5	뽀송뽀송하다				u	w	
-ふわふわ	ふわふわ	adv	6	둥실둥실				u	b	
 ふわり	ふわり	adv	1	살짝	next=と			u	b	
 ふんわり	ふんわり	adv	1	사뿐				u	b	
 ぶうぶう	ぶうぶう	adv	1	꿀꿀				u	w	
@@ -1147,15 +995,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぶくぶく	ぶくぶく	adv	1	뒤룩뒤룩				u	b	
 ぶくぶく	ぶくぶく	adv	2	부글부글				u	b	
 ぶすぶす	ぶすぶす	adv	1	투덜투덜				u	b	
-ぶつぶつ	ぶつぶつ	adv	1	중얼중얼				u	wl	
-ぶつぶつ	ぶつぶつ	adv	2	투덜투덜				u	b	
 ぶよぶよ	ぶよぶよ	adv	1	포동포동				u	b	
 ぶよぶよ	ぶよぶよ	adv	2	말랑말랑				u	b	
-ぶらぶら	ぶらぶら	adv	1	흔들흔들				u	b	
-ぶらぶら	ぶらぶら	adv	2	어슬렁어슬렁				u	b	
-ぶらぶら	ぶらぶら	adv	3	빈둥빈둥				u	b	
 ぶらり	ぶらり	adv	1	훌쩍				u	b	
-ぶるぶる	ぶるぶる	adv	1	부들부들				u	b	
 ぶんぶん	ぶんぶん	adv	1	윙윙				u	b	
 ぶんぶん	ぶんぶん	adv	2	빙빙				u	b	
 ぷーん	ぷーん	adv	1	물씬	next=と			u	b	
@@ -1191,15 +1033,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 べとべと	べとべと	adv	1	끈적끈적				u	b	
 べらべら	べらべら	adv	1	쫑알쫑알				u	b	
 べろべろ	べろべろ	adv	1	할짝할짝				u	b	
-ぺこぺこ	ぺこぺこ	adv	1	몹시 고픔				u	b	
-ぺこぺこ	ぺこぺこ	adv	2	굽실굽실				u	b	
-ぺこり	ぺこり	adv	1	움푹	next=と			u	b	
 ぺたり	ぺたり	adv	1	딱	next=と			u	b	
 ぺったり	ぺったり	adv	1	찰싹				u	b	
 ぺとぺと	ぺとぺと	adv	1	끈적끈적				u	b	
-ぺらぺら	ぺらぺら	adv	1	유창하게				u	wl	
-ぺらぺら	ぺらぺら	adv	2	줄줄				u	b	
-ぺらぺら	ぺらぺら	adv	3	흐르르				u	b	
 ぺろぺろ	ぺろぺろ	adv	1	날름날름				u	b	
 ほくほく	ほくほく	adv	1	희희락락				u	b	
 ほっそり	ほっそり	adv	1	호리호리한	next=と			u	b	
@@ -1208,7 +1044,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 仄々	ほのぼの	adv	2	따끈따끈				u	b	
 ほろほろ	ほろほろ	adv	1	나폴나폴				u	b	
 ほろほろ	ほろほろ	adv	2	폴폴				u	b	
-ぼうっと	ぼうっと	adv	1	뿌옇게				u	b	
 ぼけっと	ぼけっと	adv	1	멍하게				u	b	
 ぼさぼさ	ぼさぼさ	adv	1	부스스				u	wl	
 ぼさぼさ	ぼさぼさ	adv	2	빈둥빈둥				u	wl	
@@ -1224,8 +1059,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぼろぼろ	ぼろぼろ	adv	2	투두둑				u	b	
 ぼんぼん	ぼんぼん	adv	1	땡땡				u	b	
 ぼんぼん	ぼんぼん	adv	2	평범하다				u	b	
-ぼんやり	ぼんやり	adv	1	멍하니				u	b	
-ぼんやり	ぼんやり	adv	2	희미하게				u	b	
 ぽかぽか	ぽかぽか	adv	1	따끈따끈				u	b	
 ぽかぽか	ぽかぽか	adv	2	후끈후끈				u	b	
 ぽかぽか	ぽかぽか	adv	3	딱딱				u	b	
@@ -1249,7 +1082,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ぽつり	ぽつり	adv	3	툭하고	next=と			u	b	
 ぽつり	ぽつり	adv	4	불쑥	next=と			u	b	
 ぽとぽと	ぽとぽと	adv	1	똑똑				u	b	
-ぽろぽろ	ぽろぽろ	adv	1	뚝뚝				u	b	
 ぽろり	ぽろり	adv	1	똑	next=と			u	b	
 ぽん	ぽん	adv	1	개				u	b	
 ぽん	ぽん	adv	2	톡	next=と			u	w	
@@ -1301,8 +1133,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 無茶苦茶	むちゃくちゃ	adv	2	지독하게				u	b	
 むっくと	むっくと	adv	1	벌떡				u	b	
 むっつり	むっつり	adv	1	무뚝뚝하게				u	b	
-むっと	むっと	adv	1	발끈				u	wl	
-むっと	むっと	adv	2	불끈				u	b	
 むらむら	むらむら	adv	1	불끈불끈				u	b	
 無理矢理	むりやり	adv	1	억지로				u	b	
 無理矢理	むりやり	adv	2	무리하게				u	b	
@@ -1324,8 +1154,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 もぐもぐ	もぐもぐ	adv	1	우물우물				u	b	
 もごもご	もごもご	adv	1	우물우물				u	w	
 もごもご	もごもご	adv	2	우물쭈물				u	b	
-若しくは	もしくは	conj	1	혹은				u	b	
-もじもじ	もじもじ	adv	1	머뭇머뭇				u	b	
 もじゃもじゃ	もじゃもじゃ	adv	1	더부룩이				u	b	
 もぞもぞ	もぞもぞ	adv	1	스멀스멀				u	b	
 もたもた	もたもた	adv	1	우물쭈물				u	b	
@@ -1336,19 +1164,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 もとい	もとい	intj	1	토대				u	b	
 固より	もとより	adv	1	물론				u	w	
 固より	もとより	adv	2	원래				u	b	
-最早	もはや	adv	1	이제				u	w	
-最早	もはや	adv	2	더 이상				u	wl	
-最早	もはや	adv	3	이미				u	b	
 もやもや	もやもや	adv	1	찜찜하게				u	wl	
 もやもや	もやもや	adv	2	뿌옇게				u	wl	
 もやもや	もやもや	adv	3	답답함				u	wl	
 もやもや	もやもや	adv	4	뭉게뭉게				u	b	
 もりもり	もりもり	adv	1	와작와작				u	b	
 もりもり	もりもり	adv	2	많이				u	b	
-約	やく	pref	1	태우다				u	b	
-約	やく	pref	2	굽다				u	b	
 やおら	やおら	adv	1	천천히				u	b	
-軈て	やがて	adv	1	이윽고				u	b	
 やきもき	やきもき	adv	1	안달복달				u	b	
 易々	やすやす	adv	1	편안히				u	w	
 易々	やすやす	adv	2	거뜬히				u	b	
@@ -1363,8 +1185,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ゆさゆさ	ゆさゆさ	adv	1	흔들흔들				u	b	
 ゆったり	ゆったり	adv	1	낙낙하게				u	b	
 ゆったり	ゆったり	adv	2	느긋하게				u	b	
-ゆらゆら	ゆらゆら	adv	1	하늘하늘				u	b	
-ゆらゆら	ゆらゆら	adv	2	흔들흔들				u	b	
 ゆらり	ゆらり	adv	1	출렁하고	next=と			u	b	
 良く良く	よくよく	adv	1	자세히				u	wl	
 良く良く	よくよく	adv	2	차근차근				u	b	
@@ -1372,8 +1192,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 縦しんば	よしんば	adv	1	설령				u	b	
 よたよた	よたよた	adv	1	비틀비틀				u	b	
 よちよち	よちよち	adv	1	아장아장				u	b	
-余程	よほど	adv	1	상당히				u	b	
-余程	よほど	adv	2	상당한	next=の			u	b	
 よぼよぼ	よぼよぼ	adv	1	비틀비틀				u	b	
 よもや	よもや	adv	1	설마				u	b	
 よろよろ	よろよろ	adv	1	비틀비틀				u	b	
@@ -1388,8 +1206,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ろくろく	ろくろく	adv	1	변변히				u	b	
 わあわあ	わあわあ	adv	1	엉엉				u	b	
 わいわい	わいわい	adv	1	와글와글				u	b	
-わくわく	わくわく	adv	1	두근두근				u	wl	
-態と	わざと	adv	1	일부러				u	b	
 わなわな	わなわな	adv	1	후들후들				u	b	
 わんわん	わんわん	adv	1	멍멍				u	b	
 うぉん	うぉん	adv	1	원				u	b	
@@ -1409,7 +1225,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ごつん	ごつん	adv	2	퉁 하고	next=と			u	b	
 さくさく	さくさく	adv	1	바삭바삭				u	wl	
 さくさく	さくさく	adv	2	척척	next=と			u	b	
-さっぱり	さっぱり	adv	1	전혀				u	b	
 ざあ	ざあ	adv	1	쏴아하고	next=と			u	b	
 しゃき	しゃき	adv	1	꼿꼿이	next=と			u	w	
 しゃき	しゃき	adv	2	싱싱	next=と			u	b	
@@ -1421,16 +1236,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ひひーん	ひひーん	adv	1	히잉				u	b	
 ぴか	ぴか	adv	1	피카				u	b	
 ぴか	ぴか	adv	2	번쩍	next=と			u	b	
-ほっと	ほっと	adv	1	턱				u	w	
-ほっと	ほっと	adv	2	후				u	wl	
-ほっと	ほっと	adv	3	후유				u	b	
 ぼん	ぼん	adv	1	본				u	b	
 みんみん	みんみん	adv	1	맴맴				u	b	
 めえめえ	めえめえ	adv	1	맴맴				u	w	
 一千	いっせん	num	1	천				u	b	
 万々	ばんばん	adv	1	충분히				u	b	
 不日	ふじつ	adv	1	부일내				u	b	
-乃至	ないし	conj	1	내지				u	b	
 五十	ごじゅう	num	1	오십				u	b	
 付け	つけ	suf	1	첨부				u	b	
 付け	つけ	suf	2	부				u	b	
@@ -1446,14 +1257,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 何十	なんじゅう	num	1	몇십				u	b	
 何千	なんぜん	num	1	몇천				u	b	
 何百	なんびゃく	num	1	몇백				u	b	
-偶然	ぐうぜん	adv	1	우연히	next=と			u	b	
 十分	じゅうぶん	adv	1	충분히				u	b	
 冷え冷え	ひえびえ	adv	1	쌀쌀하게	next=と			u	b	
 刻々	こっこく	adv	1	시시 각각				u	w	
 刻々	こっこく	adv	2	시시각각	next=と			u	w	
 副	ふく	pref	1	부				u	b	
 協	きょう	suf	1	협				u	b	
-単に	たんに	adv	1	단지				u	b	
 即	そく	adv	1	바로	next=に			u	b	
 厳に	げんに	adv	1	엄하게				u	b	
 口ずから	くちずから	adv	1	자기 입으로				u	b	
@@ -1477,12 +1286,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 差し向き	さしむき	adv	1	당장				u	b	
 差し当たり	さしあたり	adv	1	당장				u	b	
 年来	ねんらい	adv	1	년간				u	b	
-幸い	さいわい	adv	1	다행히				u	wl	
-幸い	さいわい	adv	2	되다				u	b	
-幸い	さいわい	adv	3	다행이다				u	b	
-幸い	さいわい	adv	4	다행	next=Lと			u	b	rule:508
-幸い	さいわい	adv	5	좋다	after=いただけ			u	b	rule:3167 +unmapped assigns-neighbour
-幸い	さいわい	adv	6	좋다	after=頂			u	b	rule:3167 +unmapped assigns-neighbour
 幾	いく	num	1	얼마			name=+	u	b	
 幾	いく	num	2	기				u	b	
 広々	ひろびろ	adv	1	널찍함				u	b	
@@ -1544,7 +1347,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 殊の外	ことのほか	adv	1	의외로				u	w	
 長らく	ながらく	adv	1	오랫동안				u	b	
 決然	けつぜん	adv	1	결연히	next=と			u	b	
-況して	まして	adv	1	더구나				u	b	
 泣く泣く	なくなく	adv	1	마지못해				u	wl	
 泣く泣く	なくなく	adv	2	울면서				u	b	
 深々	ふかぶか	adv	1	깊이	next=と			u	wl	
@@ -1563,13 +1365,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 独りでに	ひとりでに	adv	1	저절로				u	b	
 猛然	もうぜん	adv	1	사납게	next=と			u	b	
 症	しょう	suf	1	증				u	b	
-益々	ますます	adv	1	점점				u	w	
-益々	ますます	adv	2	더욱 더				u	b	
-益々	ますます	adv	3	더욱더				u	b	
 着々	ちゃくちゃく	adv	1	착착				u	w	
 着々	ちゃくちゃく	adv	2	순조롭게	next=と			u	b	
-碌に	ろくに	adv	1	변변히				u	w	
-碌に	ろくに	adv	2	제대로				u	wl	
 確たる	かくたる	adn	1	확실한				u	b	
 秋毫	しゅうごう	adv	1	추호				u	b	
 穣	じょう	num	1	양			name=+	u	b	

@@ -1,0 +1,1418 @@
+#! level
+# N3 vocabulary: the controlled lemmas of the curriculum grid. Senses are in lexicon/curriculum.tsv; ko = sense 1. Columns: lemma id; orth = written form for the Japanese side; field; ko and kcls = sense 1 and its Korean class; cls, anim; verb features vol, asp, te, neg (suppletive negative); ni=- (time noun without に); num (counter numeral); args = case frame with filler classes; frame = Korean case remapping; grid = sense 1 safe with any filler; ctype = UniDic conjugation type; senses = sense count.
+ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ctype	senses
+しつこい	しつこい	adj	しつこい	adj	끈질기다	REG									ga=@thing		y	形容詞	2
+しょっぱい	しょっぱい	adj	しょっぱい	adj	짜다	REG									ga=@food		y	形容詞	2
+しんどい	しんどい	adj	しんどい	adj	힘들다	L									ga=@thing		y	形容詞	1
+でかい	でかい	adj	でかい	adj	크다	EU									ga=@thing		y	形容詞	1
+めでたい	めでたい	adj	めでたい	adj	경사스럽다	B									ga=@event		n	形容詞	1
+やばい	やばい	adj	やばい	adj	위험하다	HA									ga=@thing		y	形容詞	2
+久しい	ひさしい	adj	久しい	adj	오래다	REG											n	形容詞	1
+凄まじい	すさまじい	adj	凄まじい	adj	엄청나다	REG									ga=@thing		y	形容詞	1
+切ない	せつない	adj	切ない	adj	애틋하다	HA									ga=@emotion		y	形容詞	2
+力強い	ちからづよい	adj	力強い	adj	힘차다	REG									ga=@thing		y	形容詞	2
+危うい	あやうい	adj	危うい	adj	위태롭다	B									ga=@thing		y	形容詞	2
+可愛らしい	かわいらしい	adj	可愛らしい	adj	귀엽다	B									ga=@thing		y	形容詞	1
+図々しい	ずうずうしい	adj	図々しい	adj	뻔뻔하다	HA									ga=@person		y	形容詞	1
+嫌らしい	いやらしい	adj	いやらしい	adj	야하다	HA									ga=@thing		y	形容詞	2
+幼い	おさない	adj	幼い	adj	어리다	REG									ga=@person		y	形容詞	2
+弱々しい	よわよわしい	adj	弱々しい	adj	힘없다	EXIST									ga=@thing		y	形容詞	1
+微笑ましい	ほほえましい	adj	微笑ましい	adj	흐뭇하다	HA									ga=@thing		y	形容詞	1
+心地良い	ここちよい	adj	心地よい	adj	기분 좋다	REG									ga=@thing		y	形容詞	1
+心強い	こころづよい	adj	心強い	adj	든든하다	HA									ga=@thing		y	形容詞	1
+心細い	こころぼそい	adj	心細い	adj	불안하다	HA									ga=@person		y	形容詞	1
+怠い	だるい	adj	だるい	adj	나른하다	HA									ga=@body		y	形容詞	1
+怪しい	あやしい	adj	怪しい	adj	수상하다	HA									ga=@thing		y	形容詞	2
+恋しい	こいしい	adj	恋しい	adj	그립다	B									ga=@person|@thing		y	形容詞	1
+息苦しい	いきぐるしい	adj	息苦しい	adj	숨 막히다	REG									ga=@mood		y	形容詞	1
+情けない	なさけない	adj	情けない	adj	한심하다	HA									ga=@person		y	形容詞	1
+惜しい	おしい	adj	惜しい	adj	아깝다	B									ga=@thing		y	形容詞	1
+愛しい	いとしい	adj	愛しい	adj	사랑스럽다	B									ga=@person		y	形容詞	1
+慌ただしい	あわただしい	adj	慌ただしい	adj	분주하다	HA									ga=@time		y	形容詞	2
+憎い	にくい	adj	憎い	adj	밉다	B									ga=@person		y	形容詞	1
+憎らしい	にくらしい	adj	憎らしい	adj	얄밉다	B									ga=@person		y	形容詞	1
+渋い	しぶい	adj	渋い	adj	떫다	REG									ga=@thing		n	形容詞	3
+激しい	はげしい	adj	激しい	adj	격렬하다	HA									ga=@thing		y	形容詞	3
+物凄い	ものすごい	adj	物凄い	adj	엄청나다	REG									ga=@thing		y	形容詞	2
+狡い	ずるい	adj	ずるい	adj	치사하다	HA									ga=@person		y	形容詞	2
+甘酸っぱい	あまずっぱい	adj	甘酸っぱい	adj	새콤달콤하다	HA									ga=@food		y	形容詞	2
+痒い	かゆい	adj	痒い	adj	가렵다	B									ga=@body		y	形容詞	1
+相応しい	ふさわしい	adj	相応しい	adj	어울리다	REG									ga=@thing ni=@thing	に=에	y	形容詞	1
+眩しい	まぶしい	adj	眩しい	adj	눈부시다	REG									ga=@light		y	形容詞	1
+素っ気ない	そっけない	adj	素っ気ない	adj	무뚝뚝하다	HA									ga=@person		y	形容詞	2
+素早い	すばやい	adj	素早い	adj	재빠르다	REU									ga=@thing		y	形容詞	1
+緩い	ゆるい	adj	緩い	adj	느슨하다	HA									ga=@thing		y	形容詞	2
+荒い	あらい	adj	荒い	adj	거칠다	L									ga=@thing		y	形容詞	2
+薄暗い	うすぐらい	adj	薄暗い	adj	어두컴컴하다	HA									ga=@place		y	形容詞	2
+親しい	したしい	adj	親しい	adj	친하다	HA									ga=@person to=@person		y	形容詞	1
+貧しい	まずしい	adj	貧しい	adj	가난하다	HA									ga=@person		y	形容詞	1
+賢い	かしこい	adj	賢い	adj	똑똑하다	HA									ga=@person		y	形容詞	2
+醜い	みにくい	adj	醜い	adj	추하다	HA									ga=@thing		y	形容詞	2
+鈍い	にぶい	adj	鈍い	adj	둔하다	HA									ga=@thing		y	形容詞	3
+鋭い	するどい	adj	鋭い	adj	날카롭다	B									ga=@thing		y	形容詞	2
+険しい	けわしい	adj	険しい	adj	험하다	HA									ga=@road		y	形容詞	2
+青白い	あおじろい	adj	青白い	adj	창백하다	HA									ga=@body		y	形容詞	2
+頼もしい	たのもしい	adj	頼もしい	adj	믿음직하다	HA									ga=@person		y	形容詞	1
+頼り無い	たよりない	adj	頼りない	adj	미덥지 못하다	HA									ga=@person		y	形容詞	1
+馬鹿馬鹿しい	ばかばかしい	adj	馬鹿馬鹿しい	adj	바보 같다	REG									ga=@thing		y	形容詞	1
+馴れ馴れしい	なれなれしい	adj	馴れ馴れしい	adj	친한 척하다	HA									ga=@person		y	形容詞	1
+騒がしい	さわがしい	adj	騒がしい	adj	시끄럽다	B									ga=@place		y	形容詞	2
+鬱陶しい	うっとうしい	adj	鬱陶しい	adj	성가시다	REG									ga=@thing		y	形容詞	2
+あっさり	あっさり	adv	あっさり	adverb	쉽게												y		2
+いざ	いざ	intj	いざ	adverb	막상												n		1
+うとうと	うとうと	adv	うとうと	adverb	꾸벅꾸벅												y		1
+うろうろ	うろうろ	adv	うろうろ	adverb	이리저리												y		1
+かっと	かっと	adv	かっと	adverb	확												y		1
+がっくり	がっくり	adv	がっくり	adverb	푹												y		2
+きっぱり	きっぱり	adv	きっぱり	adverb	단호히												y		1
+きらきら	きらきら	adv	きらきら	adverb	반짝반짝												y		1
+ぎりぎり	ぎりぎり	adv	ぎりぎり	adverb	아슬아슬하게												y		3
+くすくす	くすくす	adv	くすくす	adverb	킥킥												y		1
+くるくる	くるくる	adv	くるくる	adverb	빙글빙글												y		2
+ぐっ	ぐっ	adv	ぐっと	adverb	꾹												y		3
+ぐったり	ぐったり	adv	ぐったり	adverb	축												n		1
+ぐるぐる	ぐるぐる	adv	ぐるぐる	adverb	빙빙												y		2
+こっそり	こっそり	adv	こっそり	adverb	몰래												y		1
+ごろごろ	ごろごろ	adv	ごろごろ	adverb	뒹굴뒹굴												y		3
+さっ	さっ	adv	さっと	adverb	재빨리												y		1
+さっさと	さっさと	adv	さっさと	adverb	얼른												y		1
+さっぱり	さっぱり	adv	さっぱり	adverb	전혀												n		1
+しょっちゅう	しょっちゅう	adv	しょっちゅう	adverb	자주												y		1
+じっくり	じっくり	adv	じっくり	adverb	차분히												y		4
+じろじろ	じろじろ	adv	じろじろ	adverb	빤히												y		1
+すっきり	すっきり	adv	すっきり	adverb	후련히												n		2
+ずらり	ずらり	adv	ずらり	adverb	죽												y		1
+せめて	せめて	adv	せめて	adverb	적어도												y		1
+そっと	そっと	adv	そっと	adverb	살며시												y		1
+そわそわ	そわそわ	adv	そわそわ	adverb	안절부절												y		1
+たっぷり	たっぷり	adv	たっぷり	adverb	듬뿍												y		4
+だらだら	だらだら	adv	だらだら	adverb	빈둥빈둥												y		2
+ちらちら	ちらちら	adv	ちらちら	adverb	힐끔힐끔												y		2
+ちらり	ちらり	adv	ちらり	adverb	힐끗												y		3
+どうせ	どうせ	adv	どうせ	adverb	어차피												y		1
+どきどき	どきどき	adv	どきどき	adverb	두근두근												n		1
+にこにこ	にこにこ	adv	にこにこ	adverb	싱글벙글												y		1
+にっこり	にっこり	adv	にっこり	adverb	방긋												y		1
+ひょっと	ひょっと	adv	ひょっと	adverb	혹시												y		1
+びくびく	びくびく	adv	びくびく	adverb	움찔움찔												y		1
+ぴかぴか	ぴかぴか	adv	ぴかぴか	adverb	반짝반짝												y		1
+ぴったり	ぴったり	adv	ぴったり	adverb	딱												y		2
+ふと	ふと	adv	ふと	adverb	문득												y		1
+ふらふら	ふらふら	adv	ふらふら	adverb	비틀비틀												y		2
+ふわふわ	ふわふわ	adv	ふわふわ	adverb	폭신폭신												y		2
+ぶつぶつ	ぶつぶつ	adv	ぶつぶつ	adverb	중얼중얼												y		1
+ぶらぶら	ぶらぶら	adv	ぶらぶら	adverb	어슬렁어슬렁												y		2
+ぺこぺこ	ぺこぺこ	adv	ぺこぺこ	adverb	꾸벅꾸벅												y		2
+ぺらぺら	ぺらぺら	adv	ぺらぺら	adverb	술술												y		3
+ほっと	ほっと	adv	ほっと	adverb	후유												n		1
+ぼうっと	ぼうっと	adv	ぼうっと	adverb	멍하니												y		2
+ぼんやり	ぼんやり	adv	ぼんやり	adverb	멍하니												y		2
+まあ	まあ	adv	まあ	adverb	뭐												y		1
+もじもじ	もじもじ	adv	もじもじ	adverb	쭈뼛쭈뼛												y		2
+ゆらゆら	ゆらゆら	adv	ゆらゆら	adverb	흔들흔들												y		1
+わくわく	わくわく	adv	わくわく	adverb	설렘												n		1
+一体	いったい	adv	一体	adverb	도대체												y		1
+一先ず	ひとまず	adv	ひとまず	adverb	일단												y		1
+一切	いっさい	n	一切	adverb	전혀		@quantity										n		3
+一層	いっそう	adv	一層	adverb	한층												y		1
+一応	いちおう	n	一応	adverb	일단												y		1
+一斉	いっせい	n	一斉	adverb	일제		@abstract										n		2
+一旦	いったん	adv	一旦	adverb	일단												y		1
+一気	いっき	n	一気	adverb	단숨		@abstract										y		1
+主に	おもに	adv	主に	adverb	주로												y		1
+今更	いまさら	adv	今更	adverb	이제 와서												y		1
+仲良く	なかよく	adv	仲良く	adverb	사이좋게												y		1
+何しろ	なにしろ	adv	何しろ	adverb	무엇보다												y		1
+何れ	いずれ	adv	いずれ	adverb	언젠가												y		1
+余程	よほど	adv	余程	adverb	어지간히												y		2
+偶々	たまたま	adv	たまたま	adverb	우연히												y		2
+偶然	ぐうぜん	adv	偶然	adverb	우연히												y		2
+僅か	わずか	adv	僅か	adverb	조금												y		2
+元々	もともと	adv	元々	adverb	원래												y		1
+兎も角	ともかく	adv	ともかく	adverb	어쨌든												y		1
+再び	ふたたび	adv	再び	adverb	다시												y		1
+凡そ	およそ	adv	およそ	adverb	대략												y		2
+到底	とうてい	adv	到底	adverb	도저히												n		1
+到頭	とうとう	adv	とうとう	adverb	마침내												y		1
+割と	わりと	adv	割と	adverb	제법												y		1
+単に	たんに	adv	単に	adverb	단순히												y		1
+却って	かえって	adv	却って	adverb	오히려												y		1
+取り敢えず	とりあえず	adv	とりあえず	adverb	일단												y		1
+唯	ただ	adv	ただ	adverb	다만												y		2
+嘗て	かつて	adv	かつて	adverb	예전에												y		2
+多少	たしょう	n	多少	adverb	조금		@quantity										y		1
+大分	だいぶ	adv	だいぶ	adverb	꽤												y		1
+実	じつ	n	実	adverb	사실		@abstract										y		3
+実際	じっさい	n	実際	adverb	실제		@abstract										y		2
+寧ろ	むしろ	adv	むしろ	adverb	오히려												y		1
+少々	しょうしょう	n	少々	adverb	조금		@quantity										y		2
+尚更	なおさら	adv	なおさら	adverb	더더욱												y		2
+常	つね	n	常	adverb	항상		@abstract										y		2
+幾ら	いくら	adv	いくら	adverb	아무리												y		2
+徐々	じょじょ	n	徐々	adverb	서서히		@abstract										y		1
+思い切り	おもいきり	n	思い切り	adverb	힘껏												y		2
+恐らく	おそらく	adv	恐らく	adverb	아마												y		1
+愈	いよいよ	adv	いよいよ	adverb	드디어												y		2
+態と	わざと	adv	わざと	adverb	일부러												y		1
+抑	そもそも	n	そもそも	adverb	애초에												y		2
+改めて	あらためて	adv	改めて	adverb	다시												y		2
+既に	すでに	adv	既に	adverb	이미												y		1
+早速	さっそく	adv	早速	adverb	곧바로												y		1
+時折	ときおり	adv	時折	adverb	가끔												y		1
+最も	もっとも	adv	最も	adverb	가장												y		1
+未だ	いまだ	adv	未だ	adverb	아직												y		2
+案の定	あんのじょう	adv	案の定	adverb	아니나 다를까												y		1
+極めて	きわめて	adv	極めて	adverb	극히												y		1
+次々	つぎつぎ	adv	次々	adverb	잇따라												y		1
+正に	まさに	adv	まさに	adverb	그야말로												y		3
+漸く	ようやく	adv	ようやく	adverb	드디어												y		2
+略	ほぼ	adv	ほぼ	adverb	거의												y		1
+疾っく	とっく	n	とっく	adverb	진작												y		1
+益々	ますます	adv	ますます	adverb	더욱												y		1
+相当	そうとう	adv	相当	adverb	상당히												y		1
+碌に	ろくに	adv	ろくに	adverb	제대로												n		1
+精々	せいぜい	adv	せいぜい	adverb	기껏해야												y		2
+約	やく	pref	約	adverb	약												y		1
+苛々	いらいら	n	いらいら	adverb	짜증		@emotion										y		1
+軈て	やがて	adv	やがて	adverb	이윽고												y		1
+亀	かめ	n	亀	animal	거북이		@animal	+									y		1
+兎	うさぎ	n	兎	animal	토끼		@animal	+									y		1
+子犬	こいぬ	n	子犬	animal	강아지		@animal	+									y		1
+子猫	こねこ	n	子猫	animal	새끼 고양이		@animal	+									y		1
+尻尾	しっぽ	n	尻尾	animal	꼬리		@body										y		1
+巣	す	n	巣	animal	둥지		@place										y		1
+狐	きつね	n	狐	animal	여우		@animal	+									y		1
+狼	おおかみ	n	狼	animal	늑대		@animal	+									y		1
+生き物	いきもの	n	生き物	animal	생물		@animal	+									y		1
+竜	りゅう	n	竜	animal	용		@monster	+									y		1
+羽根	はね	n	羽	animal	날개		@body										y		1
+虎	とら	n	虎	animal	호랑이		@animal	+									y		1
+蛇	へび	n	蛇	animal	뱀		@animal	+									y		1
+蜘蛛	くも	n	蜘蛛	animal	거미		@animal	+									y		1
+餌	えさ	n	餌	animal	먹이		@food										y		2
+鼠	ねずみ	n	鼠	animal	쥐		@animal	+									y		1
+両手	りょうて	n	両手	body	양손		@hand										y		1
+体温	たいおん	n	体温	body	체온		@quantity										y		1
+唇	くちびる	n	唇	body	입술		@body										y		1
+太腿	ふともも	n	太もも	body	허벅지		@body										y		1
+姿	すがた	n	姿	body	모습		@abstract										y		2
+尻	しり	n	尻	body	엉덩이		@body										y		1
+心臓	しんぞう	n	心臓	body	심장		@body										y		1
+拳	こぶし	n	拳	body	주먹		@hand										y		1
+指先	ゆびさき	n	指先	body	손끝		@body										y		1
+爪	つめ	n	爪	body	손톱		@body										y		2
+眉	まゆ	n	眉	body	눈썹		@body										y		1
+神経	しんけい	n	神経	body	신경		@body										y		1
+肉体	にくたい	n	肉体	body	육체		@body										y		1
+肌	はだ	n	肌	body	피부		@body										y		1
+脚	あし	n	脚	body	다리		@body										y		1
+脳	のう	n	脳	body	뇌		@body										y		1
+膝	ひざ	n	膝	body	무릎		@body										y		1
+舌	した	n	舌	body	혀		@body										y		1
+視線	しせん	n	視線	body	시선		@attention										y		1
+足元	あしもと	n	足元	body	발밑		@position										y		1
+足音	あしおと	n	足音	body	발소리		@sound										y		1
+身	み	n	身	body	몸		@body										y		1
+頬	ほお	n	頬	body	뺨		@body										y		2
+額	ひたい	n	額	body	이마		@body										y		1
+顔色	かおいろ	n	顔色	body	안색		@body										y		1
+髪の毛	かみのけ	n	髪の毛	body	머리카락		@hair										y		1
+スーツ	すーつ	n	スーツ	clothing	정장		@clothing										y		2
+ドレス	どれす	n	ドレス	clothing	드레스		@clothing										y		1
+パンツ	ぱんつ	n	パンツ	clothing	팬티		@clothing										y		1
+マスク	ますく	n	マスク	clothing	마스크		@clothing										y		1
+メーク	めーく	n	メイク	clothing	메이크업		@activity										y		1
+仮面	かめん	n	仮面	clothing	가면		@headwear										y		1
+化粧	けしょう	n	化粧	clothing	화장		@activity										y		1
+服装	ふくそう	n	服装	clothing	옷차림		@clothing										y		1
+格好	かっこう	n	格好	clothing	모습		@abstract										y		2
+着替え	きがえ	n	着替え	clothing	옷 갈아입기		@activity|@clothing										y		2
+私服	しふく	n	私服	clothing	사복		@clothing										y		1
+衣装	いしょう	n	衣装	clothing	의상		@clothing										y		1
+袖	そで	n	袖	clothing	소매		@clothing										y		1
+髪型	かみがた	n	髪型	clothing	머리 모양		@hair										y		1
+一方	いっぽう	n	一方	conj	한편		@side										y		1
+但し	ただし	conj	但し	conj	다만												y		1
+唯	ただ	conj	ただ	conj	다만												y		1
+或いは	あるいは	conj	あるいは	conj	혹은												y		1
+若しくは	もしくは	conj	もしくは	conj	혹은												y		1
+件	けん	n	件	counter	일		@topic							native			y		2
+号	ごう	n	号	counter	호		@counter							sino			y		1
+段	だん	n	段	counter	단		@counter							sino			y		1
+箇所	かしょ	n	箇所	counter	곳		@place							native			y		1
+粒	つぶ	n	粒	counter	알갱이		@thing							native			y		2
+上下	じょうげ	n	上下	direction	위아래		@direction										y		1
+前方	ぜんぽう	n	前方	direction	앞쪽		@direction										y		1
+左右	さゆう	n	左右	direction	좌우		@direction										y		1
+後方	こうほう	n	後方	direction	뒤쪽		@direction										y		2
+斜め	ななめ	n	斜め	direction	비스듬함		@direction										n		3
+方向	ほうこう	n	方向	direction	방향		@direction										y		1
+方角	ほうがく	n	方角	direction	방향		@direction										y		2
+真上	まうえ	n	真上	direction	바로 위		@direction										y		1
+縦	たて	n	縦	direction	세로		@direction										y		1
+乾杯	かんぱい	n	乾杯	drink	건배		@event										y		1
+二日酔い	ふつかよい	n	二日酔い	drink	숙취		@illness										y		1
+日本酒	にっぽんしゅ	n	日本酒	drink	사케		@drink										y		1
+水分	すいぶん	n	水分	drink	수분		@liquid										y		1
+炭酸	たんさん	n	炭酸	drink	탄산		@drink|@material										y		1
+酔い	よい	n	酔い	drink	취기												y		1
+一人っ子	ひとりっこ	n	一人っ子	family	외동		@person.kin	+									y		1
+兄貴	あにき	n	兄貴	family	형		@person.kin	+									y		1
+先祖	せんぞ	n	先祖	family	조상		@person.kin	+									y		1
+双子	ふたご	n	双子	family	쌍둥이		@person.kin	+									y		1
+奥様	おくさま	n	奥様	family	사모님		@person.kin	+									y		1
+姉妹	しまい	n	姉妹	family	자매		@person.kin	+									y		1
+嫁	よめ	n	嫁	family	아내		@person.kin	+									y		2
+末っ子	すえっこ	n	末っ子	family	막내		@person.kin	+									y		1
+祖父母	そふぼ	n	祖父母	family	조부모		@person.kin	+									y		1
+親子	おやこ	n	親子	family	부모 자식		@group	+									y		1
+親父	おやじ	n	親父	family	아버지		@person.kin	+									y		1
+長女	ちょうじょ	n	長女	family	장녀		@person.kin	+									y		1
+長男	ちょうなん	n	長男	family	장남		@person.kin	+									y		1
+プライド	ぷらいど	n	プライド	feeling	자존심		@emotion										y		1
+不満	ふまん	n	不満	feeling	불만		@emotion|@protest										y		1
+余裕	よゆう	n	余裕	feeling	여유		@abstract|@leisure										y		1
+信頼	しんらい	n	信頼	feeling	신뢰		@emotion										y		1
+初恋	はつこい	n	初恋	feeling	첫사랑		@emotion										y		1
+勇気	ゆうき	n	勇気	feeling	용기		@strength										y		1
+印象	いんしょう	n	印象	feeling	인상		@abstract										y		1
+友情	ゆうじょう	n	友情	feeling	우정		@relation										y		1
+反省	はんせい	n	反省	feeling	반성		@emotion|@activity										y		1
+尊敬	そんけい	n	尊敬	feeling	존경		@emotion										y		1
+後悔	こうかい	n	後悔	feeling	후회		@emotion										y		1
+怒り	いかり	n	怒り	feeling	분노		@emotion										y		1
+恐怖	きょうふ	n	恐怖	feeling	공포		@emotion										y		1
+悩み	なやみ	n	悩み	feeling	고민		@trouble										y		1
+悲鳴	ひめい	n	悲鳴	feeling	비명		@sound|@shout										y		1
+意地	いじ	n	意地	feeling	고집		@mood										y		1
+愛情	あいじょう	n	愛情	feeling	애정		@emotion										y		1
+感動	かんどう	n	感動	feeling	감동		@emotion										y		1
+感情	かんじょう	n	感情	feeling	감정		@emotion										y		1
+感想	かんそう	n	感想	feeling	감상		@idea										y		1
+感覚	かんかく	n	感覚	feeling	감각		@sensation										y		1
+態度	たいど	n	態度	feeling	태도		@stance										y		1
+文句	もんく	n	文句	feeling	불평		@speech|@protest										y		3
+本気	ほんき	n	本気	feeling	진심		@emotion										y		1
+機嫌	きげん	n	機嫌	feeling	기분		@mood										y		1
+気配	けはい	n	気配	feeling	기척		@sign										y		2
+油断	ゆだん	n	油断	feeling	방심		@attention										y		1
+溜め息	ためいき	n	溜め息	feeling	한숨		@sound										y		1
+癖	くせ	n	癖	feeling	버릇		@habit										y		1
+笑い	わらい	n	笑い	feeling	웃음		@emotion|@sound										y		1
+自信	じしん	n	自信	feeling	자신감		@emotion|@strength										y		1
+興奮	こうふん	n	興奮	feeling	흥분		@emotion										y		1
+苦労	くろう	n	苦労	feeling	고생		@trouble										y		2
+表情	ひょうじょう	n	表情	feeling	표정		@abstract										y		1
+覚悟	かくご	n	覚悟	feeling	각오		@emotion|@readiness										y		1
+遣る気	やるき	n	やる気	feeling	의욕		@strength										y		2
+雰囲気	ふんいき	n	雰囲気	feeling	분위기		@mood										y		1
+願い	ねがい	n	願い	feeling	소원		@abstract										y		2
+ご馳走	ごちそう	n	ご馳走	food	진수성찬		@food										n		1
+クッキー	くっきー	n	クッキー	food	쿠키		@food										y		1
+サンドイッチ	さんどいっち	n	サンドイッチ	food	샌드위치		@food										y		1
+チョコ	ちょこ	n	チョコ	food	초콜릿		@food										y		1
+チョコレート	ちょこれーと	n	チョコレート	food	초콜릿		@food										y		1
+チーズ	ちーず	n	チーズ	food	치즈		@food										y		1
+デザート	でざーと	n	デザート	food	디저트		@food										y		1
+ハンバーグ	はんばーぐ	n	ハンバーグ	food	함박스테이크		@food										y		1
+バター	ばたー	n	バター	food	버터		@food										y		1
+メニュー	めにゅー	n	メニュー	food	메뉴		@food|@document										y		1
+一口	ひとくち	n	一口	food	한입		@quantity										y		2
+夕飯	ゆうはん	n	夕飯	food	저녁		@meal										y		1
+定食	ていしょく	n	定食	food	정식		@food										y		1
+御八つ	おやつ	n	おやつ	food	간식		@food										y		1
+御握り	おにぎり	n	おにぎり	food	주먹밥		@food										y		1
+汁	しる	n	汁	food	국물		@food|@liquid										y		2
+満腹	まんぷく	n	満腹	food	배부름												y		2
+空腹	くうふく	n	空腹	food	배고픔												y		2
+苺	いちご	n	苺	food	딸기		@food										y		1
+食卓	しょくたく	n	食卓	food	식탁		@furniture										y		1
+食料	しょくりょう	n	食料	food	식량		@food										y		1
+食材	しょくざい	n	食材	food	식재료		@food										y		1
+食欲	しょくよく	n	食欲	food	식욕		@emotion										y		1
+飴	あめ	n	飴	food	사탕		@food										y		1
+ストレス	すとれす	n	ストレス	health	스트레스		@abstract										y		1
+体力	たいりょく	n	体力	health	체력		@strength										y		1
+体調	たいちょう	n	体調	health	몸 상태		@abstract										y		1
+体重	たいじゅう	n	体重	health	몸무게		@personal.info										y		2
+出血	しゅっけつ	n	出血	health	출혈		@illness										y		1
+呼吸	こきゅう	n	呼吸	health	호흡		@activity										y		1
+命	いのち	n	命	health	목숨		@abstract										y		2
+咳	せき	n	咳	health	기침		@body.output										y		1
+回復	かいふく	n	回復	health	회복		@abstract										y		1
+寿命	じゅみょう	n	寿命	health	수명		@duration										y		1
+栄養	えいよう	n	栄養	health	영양		@abstract										y		1
+検査	けんさ	n	検査	health	검사		@activity										y		1
+死	し	n	死	health	죽음		@abstract										y		1
+毒	どく	n	毒	health	독		@harm										y		1
+気絶	きぜつ	n	気絶	health	기절		@event										y		1
+治療	ちりょう	n	治療	health	치료		@activity										y		1
+生命	せいめい	n	生命	health	생명		@abstract										y		1
+疲労	ひろう	n	疲労	health	피로		@abstract										y		1
+症状	しょうじょう	n	症状	health	증상		@illness										y		1
+目眩	めまい	n	めまい	health	현기증		@illness										y		1
+看病	かんびょう	n	看病	health	간호		@activity										y		1
+睡眠	すいみん	n	睡眠	health	수면		@rest										y		1
+見舞い	みまい	n	見舞い	health	병문안		@activity										y		1
+身長	しんちょう	n	身長	health	키		@personal.info										y		1
+頭痛	ずつう	n	頭痛	health	두통		@illness										y		1
+骨折	こっせつ	n	骨折	health	골절		@illness										y		1
+アニメ	あにめ	n	アニメ	hobby	애니메이션		@show										y		1
+カラオケ	からおけ	n	カラオケ	hobby	노래방		@leisure										y		1
+グループ	ぐるーぷ	n	グループ	hobby	그룹		@group										y		1
+コース	こーす	n	コース	hobby	코스		@place										y		1
+シーン	しーん	n	シーン	hobby	장면		@show										y		1
+スタート	すたーと	n	スタート	hobby	시작		@event										y		2
+ダンス	だんす	n	ダンス	hobby	댄스		@activity										y		1
+チャンス	ちゃんす	n	チャンス	hobby	기회		@abstract										y		1
+ライブ	らいぶ	n	ライブ	hobby	라이브		@show										y		1
+作品	さくひん	n	作品	hobby	작품		@thing.made										y		1
+劇	げき	n	劇	hobby	연극		@show										y		1
+大会	たいかい	n	大会	hobby	대회		@competition										y		1
+将棋	しょうぎ	n	将棋	hobby	쇼기		@game										y		1
+撮影	さつえい	n	撮影	hobby	촬영		@activity										y		1
+曲	きょく	n	曲	hobby	곡		@music										y		1
+演奏	えんそう	n	演奏	hobby	연주		@activity										y		1
+物語	ものがたり	n	物語	hobby	이야기		@document										y		1
+芝居	しばい	n	芝居	hobby	연극		@show										y		2
+踊り	おどり	n	踊り	hobby	춤		@activity										y		1
+飲み会	のみかい	n	飲み会	hobby	술자리		@event										y		1
+ガス	がす	n	ガス	home	가스		@thing										y		1
+ノック	のっく	n	ノック	home	노크		@sound										y		1
+包丁	ほうちょう	n	包丁	home	식칼		@tool										y		1
+塵箱	ごみばこ	n	ゴミ箱	home	쓰레기통		@container										y		1
+天井	てんじょう	n	天井	home	천장		@position										y		1
+家	うち	n	うち	home	집		@house										y		3
+家事	かじ	n	家事	home	집안일		@task										y		1
+寝室	しんしつ	n	寝室	home	침실		@room										y		1
+居間	いま	n	居間	home	거실		@room										y		1
+引っ越し	ひっこし	n	引っ越し	home	이사		@event										y		1
+扉	とびら	n	扉	home	문		@opening										y		1
+支度	したく	n	支度	home	준비		@readiness										y		1
+日常	にちじょう	n	日常	home	일상		@abstract										y		1
+明かり	あかり	n	明かり	home	불		@lighting										y		2
+暮らし	くらし	n	暮らし	home	생활		@activity										y		1
+枕	まくら	n	枕	home	베개		@bedding										y		1
+洗濯物	せんたくもの	n	洗濯物	home	빨래		@clothing										y		1
+照明	しょうめい	n	照明	home	조명		@lighting										y		1
+生活	せいかつ	n	生活	home	생활		@activity										y		1
+自宅	じたく	n	自宅	home	집		@house										y		1
+蓋	ふた	n	蓋	home	뚜껑		@container										y		1
+食器	しょっき	n	食器	home	그릇		@tableware										y		1
+恐縮	きょうしゅく	n	恐縮	honorific	송구스러움		@emotion										y		2
+承る	うけたまわる	v5	承る	honorific	받다	REG			+	activity	go				ga=@person o=@request		y	五段-ラ行	3
+承知	しょうち	n	承知	honorific	승낙		@abstract										n		1
+ああ	ああ	intj	ああ	interjection	아												y		1
+あっ	あっ	intj	あっ	interjection	아												y		1
+あの	あの	intj	あの	interjection	저기												y		2
+あら	あら	intj	あら	interjection	어머												y		1
+あれ	あれ	intj	あれ	interjection	어라												y		1
+いえ	いえ	intj	いえ	interjection	아니요												y		1
+ううん	ううん	intj	ううん	interjection	음												y		1
+うわ	うわ	intj	うわ	interjection	우와												y		1
+えっ	えっ	intj	えっ	interjection	어												y		1
+えーと	えーと	intj	えーと	interjection	음												y		1
+おい	おい	intj	おい	interjection	야												y		1
+おお	おお	intj	おお	interjection	오												y		1
+おっと	おっと	intj	おっと	interjection	이런												y		1
+くそ	くそ	intj	くそ	interjection	젠장												y		1
+こら	こら	intj	こら	interjection	야												y		1
+さあ	さあ	intj	さあ	interjection	자												y		2
+なあ	なあ	intj	なあ	interjection	저기												y		1
+ねえ	ねえ	intj	ねえ	interjection	저기												y		1
+ふん	ふん	intj	ふん	interjection	흥												y		1
+へえ	へえ	intj	へえ	interjection	오												y		1
+ほら	ほら	intj	ほら	interjection	자												y		1
+やあ	やあ	intj	やあ	interjection	안녕												y		1
+やれ	やれ	intj	やれ	interjection	아휴												y		1
+よし	よし	intj	よし	interjection	좋아												y		1
+わあ	わあ	intj	わあ	interjection	와												y		1
+オーケー	おーけー	n	オーケー	interjection	오케이		@abstract										y		2
+了解	りょうかい	n	了解	interjection	알겠다		@abstract										n		2
+否	いや	intj	いや	interjection	아니												y		1
+否々	いやいや	intj	いやいや	interjection	아니 아니												y		2
+然う然う	そうそう	intj	そうそう	interjection	맞아 맞아												y		1
+タイトル	たいとる	n	タイトル	language	제목		@info										y		2
+一言	ひとこと	n	一言	language	한마디		@speech										y		1
+口癖	くちぐせ	n	口癖	language	말버릇		@habit										y		1
+口調	くちょう	n	口調	language	말투		@speech										y		1
+台詞	せりふ	n	台詞	language	대사		@speech										y		1
+合図	あいず	n	合図	language	신호		@sign										y		1
+名字	みょうじ	n	名字	language	성		@personal.info										y		1
+回答	かいとう	n	回答	language	답변		@speech										y		1
+悪口	わるくち	n	悪口	language	험담		@abuse										y		1
+渾名	あだな	n	あだ名	language	별명		@personal.info										y		1
+独り言	ひとりごと	n	独り言	language	혼잣말		@speech										y		1
+発言	はつげん	n	発言	language	발언		@speech										y		1
+知らせ	しらせ	n	知らせ	language	소식		@message										y		1
+表現	ひょうげん	n	表現	language	표현		@speech										y		1
+言い訳	いいわけ	n	言い訳	language	변명		@speech										y		1
+言葉遣い	ことばづかい	n	言葉遣い	language	말투		@speech										y		1
+詩	し	n	詩	language	시		@document										y		1
+議論	ぎろん	n	議論	language	논의		@activity										y		2
+代金	だいきん	n	代金	money	값		@money										y		1
+借金	しゃっきん	n	借金	money	빚		@money										y		1
+儲け	もうけ	n	儲け	money	이익		@money										y		1
+只	ただ	n	ただ	money	공짜		@abstract										y		2
+大金	たいきん	n	大金	money	큰돈		@money										y		1
+家賃	やちん	n	家賃	money	집세		@money										y		1
+小遣い	こづかい	n	小遣い	money	용돈		@money										y		1
+有料	ゆうりょう	n	有料	money	유료		@abstract										y		1
+物価	ぶっか	n	物価	money	물가		@price										y		1
+税金	ぜいきん	n	税金	money	세금		@money										y		1
+節約	せつやく	n	節約	money	절약		@activity										y		1
+財産	ざいさん	n	財産	money	재산		@money										y		1
+貯金	ちょきん	n	貯金	money	저금		@money										y		1
+購入	こうにゅう	n	購入	money	구매		@activity										y		1
+金持ち	かねもち	n	金持ち	money	부자		@person	+									y		1
+金額	きんがく	n	金額	money	금액		@money										y		1
+上品	じょうひん	na	上品	na-adj	품위 있다	EXIST									ga=@person		y		2
+下品	げひん	na	下品	na-adj	천박하다	HA									ga=@person		y		1
+不利	ふり	n	不利	na-adj	불리함		@abstract										n		2
+不可能	ふかのう	na	不可能	na-adj	불가능하다	HA									ga=@thing		y		1
+不吉	ふきつ	n	不吉	na-adj	불길함		@abstract										y		2
+不器用	ふきよう	na	不器用	na-adj	서투르다	REU									ga=@person		y		1
+不審	ふしん	n	不審	na-adj	수상함		@abstract										y		2
+不幸	ふこう	n	不幸	na-adj	불행		@abstract										y		2
+不明	ふめい	n	不明	na-adj	알 수 없다		@abstract										y		2
+不足	ふそく	n	不足	na-adj	부족하다		@abstract										y		2
+乱暴	らんぼう	n	乱暴	na-adj	폭행		@crime										y		2
+互角	ごかく	n	互角	na-adj	호각		@abstract										y		2
+余計	よけい	na	余計	na-adj	쓸데없다	EXIST									ga=@thing		y		2
+優秀	ゆうしゅう	na	優秀	na-adj	뛰어나다	REG									ga=@person		y		1
+充実	じゅうじつ	n	充実	na-adj	충실		@abstract										n		3
+公平	こうへい	n	公平	na-adj	공평		@abstract										n		3
+冷静	れいせい	n	冷静	na-adj	냉정		@mood										y		3
+卑怯	ひきょう	n	卑怯	na-adj	비겁함		@character										n		2
+単純	たんじゅん	na	単純	na-adj	단순하다	HA									ga=@thing		y		1
+厄介	やっかい	n	厄介	na-adj	골칫거리		@trouble										n		2
+同様	どうよう	na	同様	na-adj	마찬가지이다	REG									ga=@thing		y		1
+唯一	ゆいいつ	n	唯一	na-adj	유일		@abstract										n		2
+器用	きよう	na	器用	na-adj	손재주 좋다	REG									ga=@person		y		2
+困難	こんなん	n	困難	na-adj	어려움		@trouble										y		2
+夢中	むちゅう	na	夢中	na-adj	푹 빠지다	REG									ga=@person ni=@thing		y		2
+大胆	だいたん	na	大胆	na-adj	대담하다	HA									ga=@person		y		1
+大袈裟	おおげさ	na	大袈裟	na-adj	과장되다	REG									ga=@person		y		2
+大量	たいりょう	n	大量	na-adj	대량		@quantity										y		2
+妙	みょう	n	妙	na-adj	묘		@abstract										n		2
+安定	あんてい	n	安定	na-adj	안정		@abstract										y		1
+完全	かんぜん	na	完全	na-adj	완전하다	HA									ga=@thing		y		2
+完璧	かんぺき	n	完璧	na-adj	완벽		@abstract										y		2
+巨大	きょだい	na	巨大	na-adj	거대하다	HA									ga=@thing		y		1
+平凡	へいぼん	n	平凡	na-adj	평범함		@abstract										n		2
+平等	びょうどう	n	平等	na-adj	평등		@abstract										y		2
+幸い	さいわい	adv	幸い	na-adj	다행히												y		2
+幸福	こうふく	n	幸福	na-adj	행복		@emotion										y		2
+弱気	よわき	n	弱気	na-adj	나약함		@mood										y		2
+強力	きょうりょく	na	強力	na-adj	강력하다	HA									ga=@thing		y		1
+強気	つよき	n	強気	na-adj	당당함		@mood										n		2
+微か	かすか	na	微か	na-adj	희미하다	HA									ga=@thing		y		1
+微妙	びみょう	na	微妙	na-adj	미묘하다	HA									ga=@thing		y		1
+必死	ひっし	na	必死	na-adj	필사적이다	COP									ga=@person		y		1
+快適	かいてき	n	快適	na-adj	쾌적함		@abstract										y		2
+愉快	ゆかい	n	愉快	na-adj	유쾌함		@mood										y		2
+慎重	しんちょう	n	慎重	na-adj	신중함		@abstract										y		3
+懸命	けんめい	na	懸命	na-adj	열심이다	COP									ga=@person		y		1
+我が儘	わがまま	n	わがまま	na-adj	고집		@character										y		2
+手軽	てがる	na	手軽	na-adj	간편하다	HA									ga=@thing		y		1
+新た	あらた	na	新た	na-adj	새롭다	B									ga=@thing		y		2
+新鮮	しんせん	na	新鮮	na-adj	신선하다	HA									ga=@thing		y		1
+明らか	あきらか	na	明らか	na-adj	분명하다	HA									ga=@thing		y		1
+明確	めいかく	na	明確	na-adj	명확하다	HA									ga=@thing		y		1
+暢気	のんき	na	のんき	na-adj	태평하다	HA									ga=@person		y		1
+曖昧	あいまい	na	曖昧	na-adj	애매하다	HA									ga=@thing		y		1
+最低	さいてい	n	最低	na-adj	최악이다		@abstract										n		3
+最大	さいだい	n	最大	na-adj	최대		@quantity										y		1
+最悪	さいあく	n	最悪	na-adj	최악		@abstract										y		1
+有利	ゆうり	na	有利	na-adj	유리하다	HA									ga=@thing		y		1
+極端	きょくたん	n	極端	na-adj	극단		@abstract										n		2
+様々	さまざま	na	様々	na-adj	다양하다	HA									ga=@thing		y		2
+正気	しょうき	n	正気	na-adj	제정신		@abstract										y		1
+正確	せいかく	n	正確	na-adj	정확		@abstract										n		2
+気の毒	きのどく	na	気の毒	na-adj	딱하다	HA									ga=@person		y		1
+気楽	きらく	na	気楽	na-adj	마음 편하다	HA									ga=@person		y		1
+気軽	きがる	na	気軽	na-adj	부담 없다	EXIST									ga=@person		y		2
+深刻	しんこく	na	深刻	na-adj	심각하다	HA									ga=@thing		y		1
+清潔	せいけつ	n	清潔	na-adj	청결		@abstract										y		2
+無事	ぶじ	na	無事	na-adj	무사하다	HA									ga=@person		y		2
+無力	むりょく	n	無力	na-adj	무력함		@abstract										n		2
+無茶	むちゃ	n	無茶	na-adj	무리		@abstract										y		3
+無責任	むせきにん	n	無責任	na-adj	무책임		@character										n		2
+無邪気	むじゃき	n	無邪気	na-adj	천진함		@character										n		2
+爽やか	さわやか	na	爽やか	na-adj	상쾌하다	HA									ga=@thing		y		3
+特殊	とくしゅ	na	特殊	na-adj	특수하다	HA									ga=@thing		y		1
+生意気	なまいき	n	生意気	na-adj	건방		@character										n		2
+異常	いじょう	n	異常	na-adj	이상		@abstract										y		2
+盛ん	さかん	na	盛ん	na-adj	활발하다	HA									ga=@activity		y		1
+目茶苦茶	めちゃくちゃ	adv	めちゃくちゃ	na-adj	엄청												y		2
+真っ暗	まっくら	na	真っ暗	na-adj	깜깜하다	HA									ga=@place		y		1
+真っ白	まっしろ	na	真っ白	na-adj	새하얗다	H									ga=@thing		y		1
+真っ赤	まっか	na	真っ赤	na-adj	새빨갛다	H									ga=@thing		y		1
+真っ青	まっさお	n	真っ青	na-adj	새파란색		@color										n		2
+真っ黒	まっくろ	na	真っ黒	na-adj	새까맣다	H									ga=@thing		y		1
+真剣	しんけん	n	真剣	na-adj	진지함												y		3
+短気	たんき	n	短気	na-adj	다혈질		@character										n		2
+確実	かくじつ	na	確実	na-adj	확실하다	HA									ga=@thing		y		1
+穏やか	おだやか	na	穏やか	na-adj	온화하다	HA									ga=@person		y		2
+純粋	じゅんすい	na	純粋	na-adj	순수하다	HA									ga=@thing		y		1
+臆病	おくびょう	n	臆病	na-adj	겁		@character										n		2
+見事	みごと	na	見事	na-adj	훌륭하다	HA									ga=@thing		y		2
+誠実	せいじつ	n	誠実	na-adj	성실함		@abstract										y		2
+謙虚	けんきょ	na	謙虚	na-adj	겸손하다	HA									ga=@person		y		1
+豊か	ゆたか	na	豊か	na-adj	풍부하다	HA									ga=@thing		y		2
+豊富	ほうふ	na	豊富	na-adj	풍부하다	HA									ga=@thing		y		2
+貧乏	びんぼう	n	貧乏	na-adj	가난		@abstract										y		2
+貴重	きちょう	na	貴重	na-adj	귀중하다	HA									ga=@thing		y		1
+退屈	たいくつ	n	退屈	na-adj	심심하다		@mood										y		3
+透明	とうめい	na	透明	na-adj	투명하다	HA									ga=@thing		y		1
+適切	てきせつ	na	適切	na-adj	적절하다	HA									ga=@thing		y		1
+陽気	ようき	n	陽気	na-adj	날씨		@weather										y		2
+非常	ひじょう	na	非常	na-adj	매우												n		2
+順調	じゅんちょう	na	順調	na-adj	순조롭다	B									ga=@event		y		1
+頑固	がんこ	na	頑固	na-adj	고집 세다	REG									ga=@person		y		1
+丘	おか	n	丘	nature	언덕		@nature										y		1
+光景	こうけい	n	光景	nature	광경		@abstract										y		1
+地上	ちじょう	n	地上	nature	지상		@place										y		1
+地面	じめん	n	地面	nature	땅		@nature										y		1
+夕日	ゆうひ	n	夕日	nature	석양		@light										y		1
+夕焼け	ゆうやけ	n	夕焼け	nature	노을		@sky										y		1
+夜空	よぞら	n	夜空	nature	밤하늘		@sky										y		1
+大地	だいち	n	大地	nature	대지		@nature										y		1
+天	てん	n	天	nature	하늘		@sky										y		1
+実	み	n	実	nature	열매		@plant										y		1
+岩	いわ	n	岩	nature	바위		@nature										y		1
+岸	きし	n	岸	nature	물가		@nature										y		1
+嵐	あらし	n	嵐	nature	폭풍		@weather										y		1
+影	かげ	n	影	nature	그림자		@light										y		2
+日差し	ひざし	n	日差し	nature	햇살		@light										y		1
+朝日	あさひ	n	朝日	nature	아침 해		@light										y		2
+枝	えだ	n	枝	nature	나뭇가지		@plant										y		1
+根	ね	n	根	nature	뿌리		@plant										y		1
+梅雨	つゆ	n	梅雨	nature	장마		@season										y		1
+気温	きおん	n	気温	nature	기온		@weather										y		1
+泡	あわ	n	泡	nature	거품		@thing										y		1
+泥	どろ	n	泥	nature	진흙		@dirt										y		1
+流れ	ながれ	n	流れ	nature	흐름		@abstract										y		1
+海岸	かいがん	n	海岸	nature	바닷가		@nature										y		1
+潮	しお	n	潮	nature	조수		@nature										y		1
+煙	けむり	n	煙	nature	연기		@mist										y		1
+畑	はたけ	n	畑	nature	밭		@place										y		1
+種	たね	n	種	nature	씨앗		@plant										y		1
+花弁	はなびら	n	花びら	nature	꽃잎		@plant										y		1
+虹	にじ	n	虹	nature	무지개		@sky										y		1
+谷	たに	n	谷	nature	골짜기		@nature										y		1
+闇	やみ	n	闇	nature	어둠		@light										y		1
+霧	きり	n	霧	nature	안개		@mist										y		1
+青空	あおぞら	n	青空	nature	푸른 하늘		@sky										y		1
+風景	ふうけい	n	風景	nature	풍경		@nature										y		1
+パーセント	ぱーせんと	n	パーセント	number	퍼센트		@counter							sino			y		1
+あらゆる	あらゆる	adn	あらゆる	other	모든												y		1
+他	ほか	n	他	other	그 밖		@abstract										y		2
+例	れい	n	例	other	예		@abstract										y		2
+元	もと	n	元	other	원래		@abstract										y		3
+全力	ぜんりょく	n	全力	other	전력		@strength										y		1
+共	とも	n	共	other	함께		@abstract										y		2
+其々	それぞれ	n	それぞれ	other	각각		@abstract										y		2
+別	べつ	n	別	other	별개		@abstract										y		4
+因み	ちなみ	n	ちなみ	other	참고로												y		1
+多く	おおく	n	多く	other	다수		@quantity										y		2
+大した	たいした	adn	大した	other	대단한												y		2
+御陰	おかげ	n	おかげ	other	덕분		@abstract										y		1
+或る	ある	adn	ある	other	어떤												y		2
+次第	しだい	n	次第	other	경위		@abstract										y		3
+残り	のこり	n	残り	other	나머지		@quantity										y		1
+無し	なし	n	無し	other	없음		@abstract										y		2
+程度	ていど	n	程度	other	정도		@abstract										y		1
+色んな	いろんな	adn	色んな	other	여러												y		2
+限り	かぎり	n	限り	other	한계		@abstract										y		1
+風	ふう	n	風	other	식		@abstract										n		1
+お嬢さん	おじょうさん	n	お嬢さん	people	아가씨		@person	+									y		1
+お嬢様	おじょうさま	n	お嬢様	people	아가씨		@person	+									y		1
+お客様	おきゃくさま	n	お客様	people	손님		@person.role	+									y		1
+アイドル	あいどる	n	アイドル	people	아이돌		@person.role	+									y		1
+スタッフ	すたっふ	n	スタッフ	people	스태프		@person	+									y		1
+ファン	ふぁん	n	ファン	people	팬		@person	+									y		1
+プロ	ぷろ	n	プロ	people	프로		@person.role										y		1
+メンバー	めんばー	n	メンバー	people	멤버		@person	+									y		1
+リーダー	りーだー	n	リーダー	people	리더		@person.role	+									y		1
+主人公	しゅじんこう	n	主人公	people	주인공		@person	+									y		1
+主役	しゅやく	n	主役	people	주인공		@person.role	+									y		1
+乗客	じょうきゃく	n	乗客	people	승객		@person	+									y		1
+人々	ひとびと	n	人々	people	사람들		@group	+									y		1
+人物	じんぶつ	n	人物	people	인물		@person	+									y		1
+代表	だいひょう	n	代表	people	대표		@person.role	+									y		1
+会長	かいちょう	n	会長	people	회장		@person.role|@post	+									y		1
+俳優	はいゆう	n	俳優	people	배우		@person.role	+									y		1
+個人	こじん	n	個人	people	개인		@person	+									y		1
+兵士	へいし	n	兵士	people	병사		@person.role	+									y		1
+刑事	けいじ	n	刑事	people	형사		@person.role	+									y		1
+化け物	ばけもの	n	化け物	people	괴물		@monster	+									y		1
+医師	いし	n	医師	people	의사		@person.role	+									y		1
+同僚	どうりょう	n	同僚	people	동료		@person.role	+									y		1
+同級生	どうきゅうせい	n	同級生	people	동급생		@person.role	+									y		1
+天使	てんし	n	天使	people	천사		@entity	+									y		1
+天才	てんさい	n	天才	people	천재		@person	+									y		1
+女優	じょゆう	n	女優	people	여배우		@person.role	+									y		1
+女子	じょし	n	女子	people	여자		@person	+									y		1
+奴	やつ	n	奴	people	녀석		@person	+									y		2
+姫	ひめ	n	姫	people	공주		@person.higher	+									y		1
+少女	しょうじょ	n	少女	people	소녀		@person	+									y		1
+少年	しょうねん	n	少年	people	소년		@person	+									y		1
+幽霊	ゆうれい	n	幽霊	people	유령		@monster	+									y		1
+患者	かんじゃ	n	患者	people	환자		@person.role	+									y		1
+悪魔	あくま	n	悪魔	people	악마		@monster	+									y		1
+担任	たんにん	n	担任	people	담임		@person.role	+									y		1
+新人	しんじん	n	新人	people	신입		@person.role	+									y		1
+本人	ほんにん	n	本人	people	본인		@person	+									y		1
+歌手	かしゅ	n	歌手	people	가수		@person.role	+									y		1
+王様	おうさま	n	王様	people	왕		@person.higher	+									y		1
+男子	だんし	n	男子	people	남자		@person	+									y		1
+監督	かんとく	n	監督	people	감독		@person.role	+									y		1
+素人	しろうと	n	素人	people	아마추어		@person	+									y		1
+美人	びじん	n	美人	people	미인		@person	+									y		1
+老人	ろうじん	n	老人	people	노인		@person	+									y		1
+者	もの	n	者	people	사람		@person	+									y		1
+若者	わかもの	n	若者	people	젊은이		@person	+									y		1
+観客	かんきゃく	n	観客	people	관객		@person	+									y		1
+記者	きしゃ	n	記者	people	기자		@person.role	+									y		1
+警察官	けいさつかん	n	警察官	people	경찰관		@person.role	+									y		1
+赤ん坊	あかんぼう	n	赤ん坊	people	아기		@person.child	+									y		1
+転校生	てんこうせい	n	転校生	people	전학생		@person.role	+									y		1
+連中	れんじゅう	n	連中	people	녀석들		@group	+									y		1
+部下	ぶか	n	部下	people	부하		@person.role	+									y		1
+部員	ぶいん	n	部員	people	부원		@person.role	+									y		1
+青年	せいねん	n	青年	people	청년		@person	+									y		1
+馬鹿	ばか	n	馬鹿	people	바보		@person	+									y		1
+鬼	おに	n	鬼	people	도깨비		@monster	+									y		2
+カフェ	かふぇ	n	カフェ	place	카페		@shop										y		1
+コンビニ	こんびに	n	コンビニ	place	편의점		@shop										y		1
+ステージ	すてーじ	n	ステージ	place	스테이지		@place										y		1
+トンネル	とんねる	n	トンネル	place	터널		@road										y		1
+ビル	びる	n	ビル	place	빌딩		@building										y		1
+ホーム	ほーむ	n	ホーム	place	승강장		@place										y		1
+マンション	まんしょん	n	マンション	place	아파트		@building										y		1
+中央	ちゅうおう	n	中央	place	중앙		@position										y		1
+中心	ちゅうしん	n	中心	place	중심		@position										y		1
+付近	ふきん	n	付近	place	근처		@position										y		1
+位置	いち	n	位置	place	위치		@position										y		1
+倉庫	そうこ	n	倉庫	place	창고		@building										y		1
+内側	うちがわ	n	内側	place	안쪽		@position										y		1
+周囲	しゅうい	n	周囲	place	주위		@position										y		1
+周辺	しゅうへん	n	周辺	place	주변		@position										y		1
+地下	ちか	n	地下	place	지하		@place										y		1
+地元	じもと	n	地元	place	고향		@place										y		2
+基地	きち	n	基地	place	기지		@facility										y		1
+場	ば	n	場	place	자리		@place										y		2
+場面	ばめん	n	場面	place	상황		@event										y		2
+墓	はか	n	墓	place	무덤		@place										y		1
+外側	そとがわ	n	外側	place	바깥쪽		@position										y		1
+室内	しつない	n	室内	place	실내		@room										y		1
+寮	りょう	n	寮	place	기숙사		@building										y		1
+屋敷	やしき	n	屋敷	place	저택		@house										y		1
+広場	ひろば	n	広場	place	광장		@place										y		1
+彼方此方	あちらこちら	n	あちこち	place	여기저기		@place										y		1
+手前	てまえ	n	手前	place	앞		@position										y		1
+故郷	こきょう	n	故郷	place	고향		@place										y		1
+施設	しせつ	n	施設	place	시설		@facility										y		1
+本部	ほんぶ	n	本部	place	본부		@organization										y		1
+歩道	ほどう	n	歩道	place	인도		@road										y		1
+海外	かいがい	n	海外	place	해외		@place										y		1
+穴	あな	n	穴	place	구멍		@shape										y		1
+空間	くうかん	n	空間	place	공간		@place										y		1
+端	はし	n	端	place	끝		@position										y		2
+範囲	はんい	n	範囲	place	범위		@abstract										y		1
+背後	はいご	n	背後	place	뒤		@position										y		2
+舞台	ぶたい	n	舞台	place	무대		@place										y		1
+行き先	いきさき	n	行き先	place	목적지		@place										y		1
+街	まち	n	街	place	거리		@town										y		2
+警察署	けいさつしょ	n	警察署	place	경찰서		@facility										y		1
+距離	きょり	n	距離	place	거리		@quantity										y		1
+路地	ろじ	n	路地	place	골목		@road										y		1
+都会	とかい	n	都会	place	도시		@town										y		1
+門	もん	n	門	place	문		@opening										y		1
+駅前	えきまえ	n	駅前	place	역 앞		@place										y		1
+其奴	そいつ	n	そいつ	pronoun	그 녀석		@person	+									y		1
+各々	おのおの	n	各々	pronoun	각자		@person	+									y		1
+彼奴	あいつ	n	あいつ	pronoun	그 녀석		@person	+									y		1
+御前	おまえ	n	お前	pronoun	너		@person	+									y		1
+此奴	こいつ	n	こいつ	pronoun	이 녀석		@person	+									y		1
+自ら	みずから	n	自ら	pronoun	스스로												y		2
+自身	じしん	n	自身	pronoun	자신		@abstract										y		1
+何事	なにごと	n	何事	question	무슨 일		@question										n		1
+何者	なにもの	n	何者	question	누구		@person	+									y		1
+キス	きす	n	キス	relation	키스		@activity										y		1
+デート	でーと	n	デート	relation	데이트		@event										y		1
+ライバル	らいばる	n	ライバル	relation	라이벌		@person	+									y		1
+他人	たにん	n	他人	relation	남		@person	+									y		1
+付き合い	つきあい	n	付き合い	relation	교제		@relation										y		1
+仲	なか	n	仲	relation	사이		@relation										y		1
+仲直り	なかなおり	n	仲直り	relation	화해		@activity										y		1
+再会	さいかい	n	再会	relation	재회		@event										y		1
+出会い	であい	n	出会い	relation	만남		@event										y		1
+別れ	わかれ	n	別れ	relation	이별		@event										y		1
+告白	こくはく	n	告白	relation	고백		@speech										y		1
+味方	みかた	n	味方	relation	편		@side	+									y		1
+幼馴染み	おさななじみ	n	幼馴染	relation	소꿉친구		@person.close	+									y		1
+恋愛	れんあい	n	恋愛	relation	연애		@relation										y		1
+手伝い	てつだい	n	手伝い	relation	도움		@activity										y		1
+敵	てき	n	敵	relation	적		@person|@side	+									y		1
+浮気	うわき	n	浮気	relation	바람		@activity										y		1
+礼	れい	n	礼	relation	감사 인사		@speech										y		2
+結婚式	けっこんしき	n	結婚式	relation	결혼식		@ceremony										y		1
+裏切り	うらぎり	n	裏切り	relation	배신		@abstract										y		1
+親友	しんゆう	n	親友	relation	절친		@person.close	+									y		1
+離婚	りこん	n	離婚	relation	이혼		@event										y		1
+クラブ	くらぶ	n	クラブ	school	동아리		@organization										y		2
+体育	たいいく	n	体育	school	체육		@subject.school										y		1
+体育館	たいいくかん	n	体育館	school	체육관		@building										y		1
+保健室	ほけんしつ	n	保健室	school	보건실		@room										y		1
+修学旅行	しゅうがくりょこう	n	修学旅行	school	수학여행		@event										y		1
+受験	じゅけん	n	受験	school	입시		@exam										y		1
+合宿	がっしゅく	n	合宿	school	합숙		@event										y		1
+国語	こくご	n	国語	school	국어		@subject.school										y		1
+塾	じゅく	n	塾	school	학원		@school										y		1
+学園	がくえん	n	学園	school	학원		@school										y		1
+学年	がくねん	n	学年	school	학년		@period										y		1
+学期	がっき	n	学期	school	학기		@period										y		1
+屋上	おくじょう	n	屋上	school	옥상		@place										y		1
+廊下	ろうか	n	廊下	school	복도		@room										y		1
+放課後	ほうかご	n	放課後	school	방과 후		@time.point										y		1
+教科	きょうか	n	教科	school	과목		@subject.school										y		1
+教育	きょういく	n	教育	school	교육		@activity										y		1
+文化祭	ぶんかさい	n	文化祭	school	문화제		@event										y		1
+昼休み	ひるやすみ	n	昼休み	school	점심시간		@time.point										y		1
+校舎	こうしゃ	n	校舎	school	학교 건물		@building										y		1
+正解	せいかい	n	正解	school	정답		@question										y		1
+満点	まんてん	n	満点	school	만점		@score										y		1
+生徒会	せいとかい	n	生徒会	school	학생회		@organization										y		1
+科目	かもく	n	科目	school	과목		@subject.school										y		1
+組	くみ	n	組	school	반		@group										y		1
+美術	びじゅつ	n	美術	school	미술		@subject.school										y		1
+転校	てんこう	n	転校	school	전학		@event										y		1
+退学	たいがく	n	退学	school	퇴학		@event										y		1
+進学	しんがく	n	進学	school	진학		@event										y		1
+進路	しんろ	n	進路	school	진로		@direction										y		1
+部	ぶ	n	部	school	부		@organization										y		1
+部室	ぶしつ	n	部室	school	동아리방		@room										y		1
+部活	ぶかつ	n	部活	school	동아리		@organization										y		2
+青春	せいしゅん	n	青春	school	청춘		@life.stage										y		1
+サイト	さいと	n	サイト	society	사이트		@info										y		1
+ネット	ねっと	n	ネット	society	인터넷		@info										y		2
+メッセージ	めっせーじ	n	メッセージ	society	메시지		@message										y		1
+ルール	るーる	n	ルール	society	규칙		@rule										y		1
+世の中	よのなか	n	世の中	society	세상		@abstract										y		1
+世間	せけん	n	世間	society	세상		@group										y		1
+事態	じたい	n	事態	society	사태		@abstract										y		1
+人気	にんき	n	人気	society	인기		@abstract										y		1
+会	かい	n	会	society	모임		@group										y		2
+伝統	でんとう	n	伝統	society	전통		@abstract										y		1
+制度	せいど	n	制度	society	제도		@rule										y		1
+勝利	しょうり	n	勝利	society	승리		@result										y		1
+勝負	しょうぶ	n	勝負	society	승부		@competition										y		1
+協力	きょうりょく	n	協力	society	협력		@activity										y		1
+危機	きき	n	危機	society	위기		@trouble										y		1
+命令	めいれい	n	命令	society	명령		@order										y		1
+団体	だんたい	n	団体	society	단체		@group|@organization										y		1
+地域	ちいき	n	地域	society	지역		@place										y		1
+地獄	じごく	n	地獄	society	지옥		@place										y		1
+差別	さべつ	n	差別	society	차별		@abuse										y		1
+応援	おうえん	n	応援	society	응원		@activity										y		1
+戦い	たたかい	n	戦い	society	싸움		@event										y		1
+指示	しじ	n	指示	society	지시		@order										y		1
+支援	しえん	n	支援	society	지원		@activity										y		1
+攻撃	こうげき	n	攻撃	society	공격		@activity										y		1
+政府	せいふ	n	政府	society	정부		@organization										y		1
+暴力	ぼうりょく	n	暴力	society	폭력		@abuse										y		1
+権利	けんり	n	権利	society	권리		@abstract										y		1
+活動	かつどう	n	活動	society	활동		@activity										y		1
+犯罪	はんざい	n	犯罪	society	범죄		@crime										y		1
+環境	かんきょう	n	環境	society	환경		@abstract										y		1
+神	かみ	n	神	society	신		@person.higher	+									y		1
+神様	かみさま	n	神様	society	신		@person.higher	+									y		1
+競争	きょうそう	n	競争	society	경쟁		@competition										y		1
+組織	そしき	n	組織	society	조직		@organization										y		1
+罪	つみ	n	罪	society	죄		@crime										y		1
+罰	ばつ	n	罰	society	벌		@abstract										y		1
+被害	ひがい	n	被害	society	피해		@abstract|@harm										y		1
+訓練	くんれん	n	訓練	society	훈련		@activity										y		1
+記事	きじ	n	記事	society	기사		@document										y		1
+責任	せきにん	n	責任	society	책임		@abstract										y		1
+逮捕	たいほ	n	逮捕	society	체포		@activity										y		1
+選挙	せんきょ	n	選挙	society	선거		@event										y		1
+集団	しゅうだん	n	集団	society	집단		@group										y		1
+騒ぎ	さわぎ	n	騒ぎ	society	소동		@incident										y		1
+魔法	まほう	n	魔法	society	마법		@magic										y		1
+アプリ	あぷり	n	アプリ	thing	앱		@thing										y		1
+サイズ	さいず	n	サイズ	thing	사이즈		@quantity										y		2
+スイッチ	すいっち	n	スイッチ	thing	스위치		@device										y		1
+チケット	ちけっと	n	チケット	thing	티켓		@ticket										y		1
+テープ	てーぷ	n	テープ	thing	테이프		@tool										y		1
+データ	でーた	n	データ	thing	데이터		@info										y		1
+プログラム	ぷろぐらむ	n	プログラム	thing	프로그램		@info										y		1
+ポスター	ぽすたー	n	ポスター	thing	포스터		@picture										y		1
+マーク	まーく	n	マーク	thing	마크		@mark										y		1
+メモ	めも	n	メモ	thing	메모		@record										y		1
+リモコン	りもこん	n	リモコン	thing	리모컨		@device										y		1
+ロープ	ろーぷ	n	ロープ	thing	로프		@tool										y		1
+刀	かたな	n	刀	thing	칼		@weapon										y		1
+剣	けん	n	剣	thing	검		@weapon										y		1
+動画	どうが	n	動画	thing	동영상		@picture										y		1
+型	かた	n	型	thing	틀		@shape										y		2
+宝物	たからもの	n	宝物	thing	보물		@thing										y		1
+宝石	ほうせき	n	宝石	thing	보석		@thing										y		1
+弾	たま	n	弾	thing	총알		@ammunition										y		1
+形	かたち	n	形	thing	모양		@shape										y		1
+性能	せいのう	n	性能	thing	성능		@abstract										y		1
+手帳	てちょう	n	手帳	thing	수첩		@document										y		1
+日記	にっき	n	日記	thing	일기		@document										y		1
+映像	えいぞう	n	映像	thing	영상		@picture										y		1
+柄	がら	n	柄	thing	무늬		@shape										y		2
+楽器	がっき	n	楽器	thing	악기		@instrument										y		1
+機能	きのう	n	機能	thing	기능		@abstract										y		1
+武器	ぶき	n	武器	thing	무기		@weapon										y		1
+汚れ	よごれ	n	汚れ	thing	얼룩		@dirt										y		1
+油	あぶら	n	油	thing	기름		@liquid										y		1
+爆弾	ばくだん	n	爆弾	thing	폭탄		@weapon										y		1
+玉	たま	n	玉	thing	구슬		@thing										y		2
+画像	がぞう	n	画像	thing	이미지		@picture										y		1
+画面	がめん	n	画面	thing	화면		@device										y		1
+看板	かんばん	n	看板	thing	간판		@thing										y		1
+笛	ふえ	n	笛	thing	피리		@instrument										y		1
+縫い包み	ぬいぐるみ	n	ぬいぐるみ	thing	인형		@toy										y		1
+銃	じゅう	n	銃	thing	총		@firearm|@weapon										y		1
+鋏	はさみ	n	はさみ	thing	가위		@tool										y		1
+電源	でんげん	n	電源	thing	전원		@device										y		1
+アイディア	あいでぃあ	n	アイデア	thought	아이디어		@idea										y		1
+イメージ	いめーじ	n	イメージ	thought	이미지		@idea										y		1
+タイプ	たいぷ	n	タイプ	thought	타입		@abstract										y		1
+ポイント	ぽいんと	n	ポイント	thought	포인트		@abstract										y		3
+レベル	れべる	n	レベル	thought	수준		@abstract|@quantity										y		2
+一般	いっぱん	n	一般	thought	일반		@abstract										y		1
+中身	なかみ	n	中身	thought	내용물		@thing										y		2
+事実	じじつ	n	事実	thought	사실		@abstract|@info										y		1
+事情	じじょう	n	事情	thought	사정		@abstract|@info										y		1
+人生	じんせい	n	人生	thought	인생		@abstract										y		1
+作戦	さくせん	n	作戦	thought	작전		@plan|@task										y		1
+価値	かち	n	価値	thought	가치		@abstract										y		1
+全体	ぜんたい	n	全体	thought	전체		@abstract										y		1
+内容	ないよう	n	内容	thought	내용		@info										y		1
+判断	はんだん	n	判断	thought	판단		@idea										y		1
+動き	うごき	n	動き	thought	움직임		@motion										y		1
+勘違い	かんちがい	n	勘違い	thought	착각		@abstract										y		1
+勢い	いきおい	n	勢い	thought	기세		@abstract										y		1
+反応	はんのう	n	反応	thought	반응		@sign										y		1
+噂	うわさ	n	噂	thought	소문		@rumor										y		1
+基本	きほん	n	基本	thought	기본		@abstract										y		1
+報告	ほうこく	n	報告	thought	보고		@speech										y		1
+変化	へんか	n	変化	thought	변화		@event										y		1
+存在	そんざい	n	存在	thought	존재		@abstract										y		1
+完成	かんせい	n	完成	thought	완성		@event										y		1
+実力	じつりょく	n	実力	thought	실력		@skill|@strength										y		1
+工夫	くふう	n	工夫	thought	궁리		@activity										y		1
+常識	じょうしき	n	常識	thought	상식		@abstract										y		1
+影響	えいきょう	n	影響	thought	영향		@abstract										y		1
+思い	おもい	n	思い	thought	마음		@emotion										y		1
+想像	そうぞう	n	想像	thought	상상		@abstract|@guess										y		1
+意志	いし	n	意志	thought	의지		@abstract										y		1
+意識	いしき	n	意識	thought	의식		@abstract|@attention										y		1
+成長	せいちょう	n	成長	thought	성장		@abstract										y		1
+才能	さいのう	n	才能	thought	재능		@skill										y		1
+挑戦	ちょうせん	n	挑戦	thought	도전		@activity|@competition										y		1
+本物	ほんもの	n	本物	thought	진짜		@abstract										y		1
+条件	じょうけん	n	条件	thought	조건		@rule										y		1
+欠点	けってん	n	欠点	thought	단점		@abstract										y		1
+注目	ちゅうもく	n	注目	thought	주목		@attention										y		1
+爆発	ばくはつ	n	爆発	thought	폭발		@incident										y		1
+特徴	とくちょう	n	特徴	thought	특징		@abstract										y		1
+状態	じょうたい	n	状態	thought	상태		@abstract										y		1
+状況	じょうきょう	n	状況	thought	상황		@abstract										y		1
+現実	げんじつ	n	現実	thought	현실		@abstract										y		1
+理想	りそう	n	理想	thought	이상		@idea										y		1
+疑問	ぎもん	n	疑問	thought	의문		@question										y		1
+発見	はっけん	n	発見	thought	발견		@activity										y		1
+目標	もくひょう	n	目標	thought	목표		@plan										y		1
+真似	まね	n	真似	thought	흉내		@activity										y		2
+知恵	ちえ	n	知恵	thought	지혜		@abstract										y		1
+秘密	ひみつ	n	秘密	thought	비밀		@info										y		1
+移動	いどう	n	移動	thought	이동		@activity										y		1
+立場	たちば	n	立場	thought	입장		@abstract|@stance										y		1
+精神	せいしん	n	精神	thought	정신		@abstract										y		1
+納得	なっとく	n	納得	thought	납득		@abstract										y		1
+結論	けつろん	n	結論	thought	결론		@result										y		1
+能力	のうりょく	n	能力	thought	능력		@skill										y		1
+行動	こうどう	n	行動	thought	행동		@activity										y		1
+解決	かいけつ	n	解決	thought	해결		@abstract										y		1
+計算	けいさん	n	計算	thought	계산		@activity										y		1
+記憶	きおく	n	記憶	thought	기억		@abstract										y		1
+証拠	しょうこ	n	証拠	thought	증거		@info										y		1
+誤解	ごかい	n	誤解	thought	오해		@abstract										y		1
+調査	ちょうさ	n	調査	thought	조사		@activity|@task										y		1
+謎	なぞ	n	謎	thought	수수께끼		@abstract										y		2
+運命	うんめい	n	運命	thought	운명		@abstract										y		1
+選択	せんたく	n	選択	thought	선택		@activity										y		1
+部分	ぶぶん	n	部分	thought	부분		@abstract										y		1
+量	りょう	n	量	thought	양		@quantity										y		1
+開始	かいし	n	開始	thought	시작		@activity										y		1
+集中	しゅうちゅう	n	集中	thought	집중		@activity										y		1
+魅力	みりょく	n	魅力	thought	매력		@abstract										y		1
+一時	いちじ	n	一時	time	한때		@time										y		2
+一生	いっしょう	n	一生	time	평생		@period						-				y		2
+一瞬	いっしゅん	n	一瞬	time	순간		@duration						-				y		1
+今頃	いまごろ	n	今頃	time	지금쯤		@time						-				y		3
+以来	いらい	n	以来	time	이후		@time										y		3
+先日	せんじつ	n	先日	time	지난번		@time						-				y		1
+先程	さきほど	n	先程	time	아까		@time						-				y		1
+初め	はじめ	n	初め	time	처음		@period										y		2
+初日	しょにち	n	初日	time	첫날		@time										y		1
+前後	ぜんご	n	前後	time	앞뒤		@position										y		3
+前日	ぜんじつ	n	前日	time	전날		@time										y		1
+同時	どうじ	n	同時	time	동시		@time										y		1
+夕暮れ	ゆうぐれ	n	夕暮れ	time	해 질 녘		@time.point										y		1
+夜明け	よあけ	n	夜明け	time	새벽		@time.point										y		1
+始め	はじめ	n	始め	time	처음		@period										y		1
+帰り	かえり	n	帰り	time	돌아가는 길		@event										y		2
+年末	ねんまつ	n	年末	time	연말		@period										y		1
+当初	とうしょ	n	当初	time	처음		@period						-				y		2
+当日	とうじつ	n	当日	time	당일		@time										y		1
+当時	とうじ	n	当時	time	당시		@time										y		1
+日々	ひび	n	日々	time	나날		@period						-				y		2
+早朝	そうちょう	n	早朝	time	이른 아침		@period										y		1
+時刻	じこく	n	時刻	time	시각		@time.point										y		1
+時期	じき	n	時期	time	시기		@period										y		1
+最中	さいちゅう	n	最中	time	도중		@time										y		1
+最新	さいしん	n	最新	time	최신		@abstract										y		1
+最終	さいしゅう	n	最終	time	최종		@abstract										y		2
+期限	きげん	n	期限	time	기한		@time.point										y		1
+本日	ほんじつ	n	本日	time	오늘		@time						-				y		1
+毎回	まいかい	n	毎回	time	매번		@time						-				y		1
+永遠	えいえん	n	永遠	time	영원		@abstract										y		3
+深夜	しんや	n	深夜	time	심야		@period										y		2
+現代	げんだい	n	現代	time	현대		@period										y		1
+直前	ちょくぜん	n	直前	time	직전		@time.point										y		1
+直後	ちょくご	n	直後	time	직후		@time.point										y		1
+瞬間	しゅんかん	n	瞬間	time	순간		@time										y		1
+翌日	よくじつ	n	翌日	time	다음 날		@time						-				y		1
+近頃	ちかごろ	n	近頃	time	요즘		@time						-				y		1
+連休	れんきゅう	n	連休	time	연휴		@period										y		1
+間	ま	n	間	time	틈		@duration										y		1
+エンジン	えんじん	n	エンジン	transport	엔진		@machine										y		2
+トラック	とらっく	n	トラック	transport	트럭		@vehicle										y		2
+ハンドル	はんどる	n	ハンドル	transport	핸들		@tool										y		1
+ブレーキ	ぶれーき	n	ブレーキ	transport	브레이크		@tool										y		1
+便	びん	n	便	transport	편		@abstract										n		1
+免許	めんきょ	n	免許	transport	면허		@qualification										y		1
+列車	れっしゃ	n	列車	transport	열차		@vehicle										y		1
+座席	ざせき	n	座席	transport	좌석		@seat										y		1
+往復	おうふく	n	往復	transport	왕복		@motion										y		1
+渋滞	じゅうたい	n	渋滞	transport	정체		@incident										y		1
+車内	しゃない	n	車内	transport	차 안		@place										y		1
+からかう	からかう	v5	からかう	verb	놀리다	REG			+	activity	go				ga=@person o=@person		y	五段-ワア行	1
+ごまかす	ごまかす	v5	ごまかす	verb	얼버무리다	REG			+	change	past				ga=@person o=@thing		y	五段-サ行	2
+しゃがむ	しゃがむ	v5	しゃがむ	verb	쪼그려 앉다	REG			+	change	eo				ga=@person		y	五段-マ行	1
+ばれる	ばれる	v1	ばれる	verb	들키다	REG			-	change	past				ga=@info ni=@person	に=에게	y	下一段-ラ行	2
+ふざける	ふざける	v1	ふざける	verb	장난치다	REG			+	activity	go				ga=@person		y	下一段-カ行	2
+ぶつかる	ぶつかる	v5	ぶつかる	verb	부딪치다	REG			-	change	past				ga=@person|@thing ni=@person|@thing		y	五段-ラ行	2
+ぶつける	ぶつける	v1	ぶつける	verb	부딪치다	REG			+	change	past				ga=@person o=@thing ni=@thing		y	下一段-カ行	3
+下る	くだる	v5	下る	verb	내려가다	REG			+	change	go				ga=@person o=@road		y	五段-ラ行	2
+下ろす	おろす	v5	降ろす	verb	내리다	REG			+	change	go				ga=@person o=@thing		y	五段-サ行	4
+与える	あたえる	v1	与える	verb	주다	REG			+	change	go				ga=@person ni=@person o=@thing		y	下一段-ア行	4
+乗せる	のせる	v1	乗せる	verb	태우다	REG			+	change	go				ga=@person ni=@vehicle o=@person		y	下一段-サ行	3
+乗り越える	のりこえる	v1	乗り越える	verb	극복하다	HA			+	activity	go				ga=@person o=@trouble		y	下一段-ア行	2
+乗り込む	のりこむ	v5	乗り込む	verb	올라타다	REG			+	change	go				ga=@person ni=@vehicle		y	五段-マ行	2
+乱れる	みだれる	v1	乱れる	verb	흐트러지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	1
+乾かす	かわかす	v5	乾かす	verb	말리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
+争う	あらそう	v5	争う	verb	다투다	REG			+	activity	go				ga=@person with=@person		y	五段-ワア行	1
+仕舞う	しまう	v5	しまう	verb	치우다	REG			+	change	go				ga=@person o=@thing		y	五段-ワア行	3
+付け加える	つけくわえる	v1	付け加える	verb	덧붙이다	REG			+	activity	go				ga=@person o=@speech		y	下一段-ア行	1
+伸ばす	のばす	v5	伸ばす	verb	뻗다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	6
+余る	あまる	v5	余る	verb	남다	REG			-	change	eo				ga=@thing		y	五段-ラ行	1
+備える	そなえる	v1	備える	verb	대비하다	HA			+	activity	go				ga=@person ni=@event		y	下一段-ア行	2
+傷付く	きずつく	v5	傷付く	verb	상처받다	REG			-	change	past				ga=@person		y	五段-カ行	3
+傷付ける	きずつける	v1	傷付ける	verb	상처 주다	REG			+	change	past				ga=@person o=@person	を=에게	y	下一段-カ行	3
+傾く	かたむく	v5	傾く	verb	기울다	L			-	change	eo				ga=@thing		y	五段-カ行	1
+傾ける	かたむける	v1	傾ける	verb	기울이다	REG			+	activity	go				ga=@person o=@thing		y	下一段-カ行	2
+優れる	すぐれる	v1	優れる	verb	뛰어나다	REG			-	type4	simple				ga=@person|@thing		y	下一段-ラ行	1
+儲かる	もうかる	v5	儲かる	verb	돈을 벌다	L			-	change	go				ga=@person|@shop		y	五段-ラ行	2
+儲ける	もうける	v1	儲ける	verb	벌다	L			+	activity	go				ga=@person o=@money		y	下一段-カ行	2
+冷ます	さます	v5	冷ます	verb	식히다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
+冷める	さめる	v1	冷める	verb	식다	REG			-	change	past				ga=@thing		y	下一段-マ行	1
+凍る	こおる	v5	凍る	verb	얼다	L			-	change	eo				ga=@thing		y	五段-ラ行	2
+出迎える	でむかえる	v1	出迎える	verb	맞이하다	HA			+	change	go				ga=@person o=@person		y	下一段-ア行	1
+切り替える	きりかえる	v1	切り替える	verb	바꾸다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ア行	2
+利く	きく	v5	利く	verb	효과가 있다	EXIST			-	change	simple				ga=@medicine		y	五段-カ行	2
+刻む	きざむ	v5	刻む	verb	새기다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	2
+剃る	そる	v5	剃る	verb	깎다	REG			+	activity	go				ga=@person o=@body		y	五段-ラ行	2
+削る	けずる	v5	削る	verb	깎다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	3
+剥く	むく	v5	剥く	verb	벗기다	REG			+	activity	go				ga=@person o=@thing		y	五段-カ行	4
+加える	くわえる	v1	加える	verb	더하다	HA			+	change	go				ga=@person o=@thing ni=@thing		y	下一段-ア行	3
+加わる	くわわる	v5	加わる	verb	합류하다	HA			+	change	past				ga=@person ni=@group		y	五段-ラ行	2
+劣る	おとる	v5	劣る	verb	뒤떨어지다	REG			-	type4	simple				ga=@person|@thing		y	五段-ラ行	1
+励ます	はげます	v5	励ます	verb	격려하다	HA			+	activity	go				ga=@person o=@person		y	五段-サ行	1
+去る	さる	v5	去る	verb	떠나다	REG			+	change	past				ga=@person o=@place		y	五段-ラ行	2
+収める	おさめる	v1	納める	verb	넣다	REG			+	activity	go				ga=@person o=@thing ni=@container		y	下一段-マ行	6
+取り上げる	とりあげる	v1	取り上げる	verb	빼앗다	REG			+	change	past				ga=@person o=@thing		y	下一段-ガ行	4
+取り出す	とりだす	v5	取り出す	verb	꺼내다	REG			+	change	past				ga=@person o=@thing		y	五段-サ行	1
+取り戻す	とりもどす	v5	取り戻す	verb	되찾다	REG			+	change	past				ga=@person o=@thing		y	五段-サ行	2
+取り替える	とりかえる	v1	取り替える	verb	바꾸다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ア行	1
+取り消す	とりけす	v5	取り消す	verb	취소하다	HA			+	change	past				ga=@person o=@thing		y	五段-サ行	1
+取り組む	とりくむ	v5	取り組む	verb	임하다	HA			+	activity	go				ga=@person ni=@task|@activity		y	五段-マ行	1
+取れる	とれる	v1	取れる	verb	떨어지다	REG			-	change	eo				ga=@attachment		y	下一段-ラ行	5
+受かる	うかる	v5	受かる	verb	합격하다	HA			-	change	past				ga=@person ni=@exam		y	五段-ラ行	2
+受け入れる	うけいれる	v1	受け入れる	verb	받아들이다	REG			+	change	go				ga=@person o=@thing		y	下一段-ラ行	1
+受け止める	うけとめる	v1	受け止める	verb	받아들이다	REG			+	change	go				ga=@person o=@emotion		y	下一段-マ行	2
+受け継ぐ	うけつぐ	v5	受け継ぐ	verb	이어받다	REG			+	activity	go				ga=@person o=@thing		y	五段-ガ行	2
+叩く	たたく	v5	叩く	verb	두드리다	REG			+	activity	go				ga=@person o=@thing		y	五段-カ行	3
+叫ぶ	さけぶ	v5	叫ぶ	verb	외치다	REG			+	activity	go				ga=@person o=@speech		y	五段-バ行	1
+叶う	かなう	v5	叶う	verb	이루어지다	REG			-	change	past				ga=@thing		y	五段-ワア行	1
+叶える	かなえる	v1	叶える	verb	이루다	REG			+	activity	go				ga=@person o=@plan		y	下一段-ア行	2
+名乗る	なのる	v5	名乗る	verb	이름을 밝히다	REG			+	change	past				ga=@person		y	五段-ラ行	2
+名付ける	なづける	v1	名付ける	verb	이름 붙이다	REG			+	change	past				ga=@person o=@entity		y	下一段-カ行	1
+吐く	はく	v5	吐く	verb	토하다	HA			+	activity	go				ga=@person o=@thing		y	五段-カ行	5
+向き合う	むきあう	v5	向き合う	verb	마주하다	HA			+	change	go				ga=@person to=@person		y	五段-ワア行	1
+向く	むく	v5	向く	verb	향하다	HA			+	change	go				ga=@person ni=@direction		y	五段-カ行	4
+向ける	むける	v1	向ける	verb	향하다	REG			+	change	go				ga=@person ni=@entity o=@thing		y	下一段-カ行	6
+含む	ふくむ	v5	含む	verb	포함하다	HA			+	state	simple				ga=@thing o=@thing		y	五段-マ行	2
+含める	ふくめる	v1	含める	verb	포함하다	HA			+	activity	go				ga=@person o=@thing		y	下一段-マ行	1
+呆れる	あきれる	v1	呆れる	verb	어이없어하다	HA			-	change	go				ga=@person ni=@thing		y	下一段-ラ行	1
+告げる	つげる	v1	告げる	verb	말하다	HA			+	activity	go				ga=@person ni=@person o=@info		y	下一段-ガ行	2
+呟く	つぶやく	v5	呟く	verb	중얼거리다	REG			+	activity	go				ga=@person o=@speech		y	五段-カ行	1
+味わう	あじわう	v5	味わう	verb	맛보다	REG			+	activity	go				ga=@person o=@thing		y	五段-ワア行	2
+呼び出す	よびだす	v5	呼び出す	verb	불러내다	REG			+	change	past				ga=@person o=@person		y	五段-サ行	3
+呼び掛ける	よびかける	v1	呼びかける	verb	말을 걸다	L			+	activity	go				ga=@person ni=@person		y	下一段-カ行	2
+問う	とう	v5	問う	verb	묻다:ㄷ	REG			+	activity	go				ga=@person ni=@person o=@question		y	五段-ワア行	1
+喋る	しゃべる	v5	喋る	verb	말하다	HA			+	activity	go				ga=@person o=@language		y	五段-ラ行	1
+嗅ぐ	かぐ	v5	嗅ぐ	verb	냄새 맡다	REG			+	activity	go				ga=@person o=@thing		y	五段-ガ行	2
+嘗める	なめる	v1	舐める	verb	핥다	REG			+	activity	go				ga=@person o=@body		y	下一段-マ行	2
+噛み付く	かみつく	v5	噛み付く	verb	물다	L			+	change	go				ga=@animal ni=@body	に=을	y	五段-カ行	2
+噛む	かむ	v5	噛む	verb	씹다	REG			+	activity	go				ga=@person|@animal o=@thing		y	五段-マ行	4
+囁く	ささやく	v5	囁く	verb	속삭이다	REG			+	activity	go				ga=@person ni=@person o=@speech		y	五段-カ行	1
+囲む	かこむ	v5	囲む	verb	둘러싸다	REG			+	activity	go				ga=@person o=@person		y	五段-マ行	1
+固まる	かたまる	v5	固まる	verb	굳다	REG			-	change	eo				ga=@thing		y	五段-ラ行	2
+垂れる	たれる	v1	垂れる	verb	흘러내리다	REG			-	change	go				ga=@liquid		y	下一段-ラ行	4
+埋まる	うまる	v5	埋まる	verb	묻히다	REG			-	change	eo				ga=@thing		y	五段-ラ行	4
+埋める	うめる	v1	埋める	verb	묻다	REG			+	activity	go				ga=@person o=@thing		y	下一段-マ行	3
+塗る	ぬる	v5	塗る	verb	바르다	REU			+	activity	go				ga=@person o=@thing		y	五段-ラ行	2
+塞ぐ	ふさぐ	v5	塞ぐ	verb	막다	REG			+	activity	go				ga=@person o=@opening		y	五段-ガ行	2
+増す	ます	v5	増す	verb	늘어나다	REG			-	change	past				ga=@thing		y	五段-サ行	4
+売れる	うれる	v1	売れる	verb	팔리다	REG			-	change	go				ga=@thing		y	下一段-ラ行	1
+外れる	はずれる	v1	外れる	verb	빠지다	REG			-	change	past				ga=@thing		y	下一段-ラ行	3
+失う	うしなう	v5	失う	verb	잃다	REG			-	change	past				ga=@person o=@thing		y	五段-ワア行	2
+奪う	うばう	v5	奪う	verb	빼앗다	REG			+	change	go				ga=@person o=@thing		y	五段-ワア行	1
+嫌う	きらう	v5	嫌う	verb	싫어하다	HA			-	state	go				ga=@person o=@entity		y	五段-ワア行	1
+学ぶ	まなぶ	v5	学ぶ	verb	배우다	REG			+	activity	go				ga=@person o=@skill		y	五段-バ行	1
+実る	みのる	v5	実る	verb	결실을 맺다	REG			-	change	past				ga=@thing		y	五段-ラ行	3
+寄せる	よせる	v1	寄せる	verb	붙이다	REG			+	activity	go				ga=@person o=@body		y	下一段-サ行	3
+寄り添う	よりそう	v5	寄り添う	verb	바짝 붙다	REG			+	change	eo				ga=@person ni=@person		y	五段-ワア行	2
+寝かせる	ねかせる	v1	寝かせる	verb	재우다	REG			+	activity	go				ga=@person o=@person ni=@bedding		y	下一段-サ行	2
+察する	さっする	vs	察する	verb	알아채다	REG			+	activity	go				ga=@person o=@info		y	サ行変格	2
+導く	みちびく	v5	導く	verb	이끌다	L			+	activity	go				ga=@person o=@person		y	五段-カ行	1
+尽くす	つくす	v5	尽くす	verb	다하다	HA			+	activity	go				ga=@person o=@strength		y	五段-サ行	2
+崩す	くずす	v5	崩す	verb	무너뜨리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+崩れる	くずれる	v1	崩れる	verb	무너지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	2
+差し込む	さしこむ	v5	差し込む	verb	꽂다	REG			+	activity	go				ga=@person o=@thing ni=@opening		y	五段-マ行	3
+巻き込む	まきこむ	v5	巻き込む	verb	끌어들이다	REG			+	change	past				ga=@person o=@person		y	五段-マ行	2
+巻く	まく	v5	巻く	verb	감다	REG			+	activity	go				ga=@person o=@thing		y	五段-カ行	3
+干す	ほす	v5	干す	verb	말리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+庇う	かばう	v5	庇う	verb	감싸다	REG			+	activity	go				ga=@person o=@person		y	五段-ワア行	1
+引き出す	ひきだす	v5	引き出す	verb	끌어내다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+引き受ける	ひきうける	v1	引き受ける	verb	맡다	REG			+	change	go				ga=@person o=@task		y	下一段-カ行	2
+引き寄せる	ひきよせる	v1	引き寄せる	verb	끌어당기다	REG			+	activity	go				ga=@person o=@thing		y	下一段-サ行	1
+引き止める	ひきとめる	v1	引き止める	verb	붙잡다	REG			+	activity	go				ga=@person o=@person		y	下一段-マ行	1
+引き返す	ひきかえす	v5	引き返す	verb	되돌아가다	REG			+	activity	go				ga=@person ni=@place		y	五段-サ行	1
+引っ張る	ひっぱる	v5	引っ張る	verb	잡아당기다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	3
+引っ掛かる	ひっかかる	v5	引っ掛かる	verb	걸리다	REG			-	change	eo				ga=@person ni=@thing		y	五段-ラ行	3
+引っ込む	ひっこむ	v5	引っ込む	verb	들어가다	REG			+	change	eo				ga=@person ni=@place		y	五段-マ行	2
+弱る	よわる	v5	弱る	verb	약해지다	REG			-	change	past				ga=@person		y	五段-ラ行	1
+当てる	あてる	v1	当てる	verb	대다	REG			+	change	go				ga=@person o=@thing ni=@thing		y	下一段-タ行	4
+待ち合わせる	まちあわせる	v1	待ち合わせる	verb	만나다	REG			+	activity	go				ga=@person with=@person loc=@place		y	下一段-サ行	1
+従う	したがう	v5	従う	verb	따르다	EU			+	activity	go				ga=@person ni=@order	に=을	y	五段-ワア行	1
+得る	える	v1	得る	verb	얻다	REG			+	change	past				ga=@person o=@thing		y	下一段-ア行	2
+微笑む	ほほえむ	v5	微笑む	verb	미소 짓다	S			+	activity	go				ga=@person		y	五段-マ行	1
+怒鳴る	どなる	v5	怒鳴る	verb	고함치다	REG			+	activity	go				ga=@person ni=@person	に=에게	y	五段-ラ行	1
+思い付く	おもいつく	v5	思い付く	verb	생각해 내다	REG			-	change	past				ga=@person o=@idea		y	五段-カ行	1
+思い切る	おもいきる	v5	思い切る	verb	단념하다	HA			+	change	past				ga=@person o=@thing		y	五段-ラ行	2
+思い浮かべる	おもいうかべる	v1	思い浮かべる	verb	떠올리다	REG			+	activity	go				ga=@person o=@entity		y	下一段-バ行	1
+思い込む	おもいこむ	v5	思い込む	verb	굳게 믿다	REG			+	change	go				ga=@person		y	五段-マ行	1
+怠ける	なまける	v1	怠ける	verb	게으름 피우다	REG			+	activity	go				ga=@person		y	下一段-カ行	1
+恐れる	おそれる	v1	恐れる	verb	두려워하다	HA			-	state	go				ga=@person o=@thing		y	下一段-ラ行	1
+恨む	うらむ	v5	恨む	verb	원망하다	HA			-	state	go				ga=@person o=@person		y	五段-マ行	1
+悲しむ	かなしむ	v5	悲しむ	verb	슬퍼하다	HA			-	activity	go				ga=@person o=@event		y	五段-マ行	1
+惚れる	ほれる	v1	惚れる	verb	반하다	HA			-	change	past				ga=@person ni=@person	に=에게	y	下一段-ラ行	1
+愛する	あいする	vs	愛する	verb	사랑하다	HA			-	state	simple				ga=@person o=@person		y	サ行変格	1
+慰める	なぐさめる	v1	慰める	verb	위로하다	HA			+	activity	go				ga=@person o=@person		y	下一段-マ行	1
+憎む	にくむ	v5	憎む	verb	미워하다	HA			-	state	go				ga=@person o=@person		y	五段-マ行	1
+憧れる	あこがれる	v1	憧れる	verb	동경하다	HA			-	state	go				ga=@person ni=@person	に=을	y	下一段-ラ行	1
+戦う	たたかう	v5	戦う	verb	싸우다	REG			+	activity	go				ga=@person with=@person		y	五段-ワア行	2
+戸惑う	とまどう	v5	戸惑う	verb	당황하다	HA			-	change	go				ga=@person ni=@event		y	五段-ワア行	1
+打つ	うつ	v5	打つ	verb	치다	REG			+	activity	go				ga=@person o=@thing	を=이	y	五段-タ行	8
+扱う	あつかう	v5	扱う	verb	다루다	REG			+	activity	go				ga=@person o=@thing		y	五段-ワア行	3
+抜く	ぬく	v5	抜く	verb	뽑다	REG			+	change	past				ga=@person o=@thing		y	五段-カ行	4
+抜け出す	ぬけだす	v5	抜け出す	verb	빠져나오다	REG			+	change	past				ga=@person from=@place		y	五段-サ行	2
+抱える	かかえる	v1	抱える	verb	안다	REG			+	change	go				ga=@person o=@thing		y	下一段-ア行	6
+抱き付く	だきつく	v5	抱き付く	verb	안기다	REG			+	change	eo				ga=@person ni=@person		y	五段-カ行	2
+抱き締める	だきしめる	v1	抱きしめる	verb	껴안다	REG			+	change	go				ga=@person o=@person		y	下一段-マ行	1
+抱く	だく	v5	抱く	verb	안다	REG			+	activity	go				ga=@person o=@person		y	五段-カ行	1
+抱く	いだく	v5	抱く	verb	품다	REG			+	change	go				ga=@person o=@emotion		y	五段-カ行	2
+押さえる	おさえる	v1	押さえる	verb	누르다	REU			+	change	go				ga=@person o=@body		y	下一段-ア行	5
+招く	まねく	v5	招く	verb	부르다	REU			+	change	past				ga=@thing o=@trouble		y	五段-カ行	2
+拭く	ふく	v5	拭く	verb	닦다	REG			+	activity	go				ga=@person o=@thing		y	五段-カ行	1
+持ち上げる	もちあげる	v1	持ち上げる	verb	들어 올리다	REG			+	change	go				ga=@person o=@thing		y	下一段-ガ行	2
+持ち帰る	もちかえる	v5	持ち帰る	verb	가져가다	REG			+	change	past				ga=@person o=@thing		y	五段-ラ行	2
+挟む	はさむ	v5	挟む	verb	끼우다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	3
+振り向く	ふりむく	v5	振り向く	verb	돌아보다	REG			+	change	past				ga=@person ni=@sound	に=을	y	五段-カ行	1
+振り回す	ふりまわす	v5	振り回す	verb	휘두르다	REU			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
+振り返る	ふりかえる	v5	振り返る	verb	돌아보다	REG			+	change	past				ga=@person o=@entity		y	五段-ラ行	2
+振る	ふる	v5	振る	verb	흔들다	L			+	activity	go				ga=@person o=@thing		y	五段-ラ行	9
+捕まる	つかまる	v5	捕まる	verb	잡히다	REG			-	change	eo				ga=@person ni=@person		y	五段-ラ行	2
+捕らえる	とらえる	v1	捕らえる	verb	붙잡다	REG			+	change	go				ga=@person o=@person		y	下一段-ア行	3
+掃く	はく	v5	掃く	verb	쓸다	L			+	activity	go				ga=@person o=@place		y	五段-カ行	1
+掘る	ほる	v5	掘る	verb	파다	REG			+	activity	go				ga=@person o=@place		y	五段-ラ行	1
+探る	さぐる	v5	探る	verb	알아보다	REG			+	activity	go				ga=@person o=@info		y	五段-ラ行	3
+控える	ひかえる	v1	控える	verb	삼가다	REG			+	activity	go				ga=@person o=@activity		y	下一段-ア行	4
+掴む	つかむ	v5	掴む	verb	잡다	REG			+	change	go				ga=@person o=@thing		y	五段-マ行	3
+揃う	そろう	v5	揃う	verb	모이다	REG			-	change	eo				ga=@person|@thing		y	五段-ワア行	2
+揃える	そろえる	v1	揃える	verb	갖추다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ア行	3
+描く	えがく	v5	描く	verb	그리다	REG			+	activity	go				ga=@person o=@picture		y	五段-カ行	1
+握る	にぎる	v5	握る	verb	쥐다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	4
+揺らす	ゆらす	v5	揺らす	verb	흔들다	L			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
+撫でる	なでる	v1	撫でる	verb	쓰다듬다	REG			+	activity	go				ga=@person o=@body		y	下一段-ダ行	2
+擦る	こする	v5	こする	verb	문지르다	REU			+	activity	go				ga=@person o=@thing		y	五段-ラ行	2
+支える	ささえる	v1	支える	verb	지탱하다	HA			+	activity	go				ga=@person o=@entity		y	下一段-ア行	3
+支払う	しはらう	v5	支払う	verb	지불하다	HA			+	activity	go				ga=@person ni=@person o=@money		y	五段-ワア行	2
+放す	はなす	v5	離す	verb	놓다	REG			+	change	go				ga=@person o=@thing		y	五段-サ行	7
+放つ	はなつ	v5	放つ	verb	내뿜다	REG			+	change	go				ga=@person o=@light		y	五段-タ行	2
+放る	ほうる	v5	放る	verb	던지다	REG			+	change	go				ga=@person o=@thing		y	五段-ラ行	1
+救う	すくう	v5	救う	verb	구하다	HA			+	change	go				ga=@person o=@person		y	五段-ワア行	1
+教わる	おそわる	v5	教わる	verb	배우다	REG			+	activity	go				ga=@person ni=@person o=@skill		y	五段-ラ行	1
+散る	ちる	v5	散る	verb	흩어지다	REG			-	change	eo				ga=@person|@thing		y	五段-ラ行	3
+整う	ととのう	v5	整う	verb	갖춰지다	REG			-	change	eo				ga=@thing		y	五段-ワア行	3
+整える	ととのえる	v1	整える	verb	갖추다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ア行	5
+明かす	あかす	v5	明かす	verb	밝히다	REG			+	change	past				ga=@person ni=@person o=@info		y	五段-サ行	2
+映す	うつす	v5	映す	verb	비추다	REG			+	activity	go				ga=@person|@thing o=@thing		y	五段-サ行	2
+映る	うつる	v5	映る	verb	비치다	REG			-	change	go				ga=@thing ni=@thing		y	五段-ラ行	2
+暴れる	あばれる	v1	暴れる	verb	날뛰다	REG			+	activity	go				ga=@person|@animal		y	下一段-ラ行	1
+望む	のぞむ	v5	望む	verb	바라다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	2
+果たす	はたす	v5	果たす	verb	다하다	HA			+	activity	go				ga=@person o=@duty		y	五段-サ行	3
+枯れる	かれる	v1	枯れる	verb	시들다	L			-	change	eo				ga=@plant		y	下一段-ラ行	3
+構う	かまう	v5	構う	verb	상관하다	EU			-	activity	go	상관없다			ga=@person ni=@person		y	五段-ワア行	7
+構える	かまえる	v1	構える	verb	겨누다	REG			+	activity	go				ga=@person o=@weapon		y	下一段-ア行	4
+欠ける	かける	v1	欠ける	verb	빠지다	REG			-	change	eo				ga=@thing ni=@abstract	に=이	y	下一段-カ行	3
+歩き回る	あるきまわる	v5	歩き回る	verb	돌아다니다	REG			+	activity	go				ga=@person de=@place		y	五段-ラ行	1
+殴る	なぐる	v5	殴る	verb	때리다	REG			+	change	go				ga=@person o=@person		y	五段-ラ行	1
+殺す	ころす	v5	殺す	verb	죽이다	REG			+	change	past				ga=@person o=@person|@animal		y	五段-サ行	1
+気遣う	きづかう	v5	気遣う	verb	배려하다	HA			+	activity	go				ga=@person o=@person		y	五段-ワア行	1
+求める	もとめる	v1	求める	verb	원하다	HA			+	activity	go				ga=@person o=@thing		y	下一段-マ行	5
+決め付ける	きめつける	v1	決め付ける	verb	단정하다	HA			+	activity	go				ga=@person o=@info		y	下一段-カ行	1
+沈む	しずむ	v5	沈む	verb	가라앉다	REG			-	change	eo				ga=@thing		y	五段-マ行	2
+沈める	しずめる	v1	沈める	verb	가라앉히다	REG			+	activity	go				ga=@person o=@thing		y	下一段-マ行	1
+注ぐ	そそぐ	v5	注ぐ	verb	따르다	EU			+	activity	go				ga=@person o=@drink ni=@container		y	五段-ガ行	5
+流す	ながす	v5	流す	verb	흘리다	REG			+	activity	go				ga=@person o=@liquid		y	五段-サ行	4
+浮かぶ	うかぶ	v5	浮かぶ	verb	떠오르다	REU			-	change	eo				ga=@idea ni=@body		n	五段-バ行	3
+浮かべる	うかべる	v1	浮かべる	verb	짓다	S			+	change	go				ga=@person o=@expression		y	下一段-バ行	6
+浮く	うく	v5	浮く	verb	뜨다	EU			-	change	eo				ga=@thing		y	五段-カ行	3
+混ざる	まざる	v5	混ざる	verb	섞이다	REG			-	change	eo				ga=@thing		y	五段-ラ行	2
+温まる	あたたまる	v5	温まる	verb	따뜻해지다	REG			-	change	past				ga=@person|@thing		y	五段-ラ行	2
+満たす	みたす	v5	満たす	verb	채우다	REG			+	activity	go				ga=@person o=@container		y	五段-サ行	2
+満ちる	みちる	v1	満ちる	verb	가득 차다	REG			-	change	eo				ga=@place|@thing		y	上一段-タ行	2
+溜まる	たまる	v5	溜まる	verb	쌓이다	REG			-	change	eo				ga=@thing		y	五段-ラ行	3
+溜める	ためる	v1	溜める	verb	모으다	EU			+	activity	go				ga=@person o=@thing		y	下一段-マ行	3
+溢れる	あふれる	v1	溢れる	verb	넘치다	REG			-	change	eo				ga=@liquid|@emotion		y	下一段-ラ行	2
+溶かす	とかす	v5	溶かす	verb	녹이다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
+溶ける	とける	v1	溶ける	verb	녹다	REG			-	change	eo				ga=@thing		y	下一段-カ行	1
+溺れる	おぼれる	v1	溺れる	verb	빠지다	REG			-	change	eo				ga=@person		y	下一段-ラ行	2
+漂う	ただよう	v5	漂う	verb	떠다니다	REG			-	activity	go				ga=@thing		y	五段-ワア行	3
+漏らす	もらす	v5	漏らす	verb	흘리다	REG			+	activity	go				ga=@person o=@sound		y	五段-サ行	3
+漏れる	もれる	v1	漏れる	verb	새다	REG			-	change	go				ga=@liquid		y	下一段-ラ行	3
+潜む	ひそむ	v5	潜む	verb	숨다	REG			+	change	eo				ga=@person ni=@place		y	五段-マ行	1
+潜る	もぐる	v5	潜る	verb	잠수하다	HA			+	change	eo				ga=@person ni=@water.body		y	五段-ラ行	3
+潰す	つぶす	v5	潰す	verb	찌그러뜨리다	REG			+	activity	go				ga=@person o=@thing		n	五段-サ行	5
+潰れる	つぶれる	v1	潰れる	verb	찌그러지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	4
+濡らす	ぬらす	v5	濡らす	verb	적시다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
+炒める	いためる	v1	炒める	verb	볶다	REG			+	activity	go				ga=@person o=@food		y	下一段-マ行	1
+焚く	たく	v5	炊く	verb	짓다	S			+	activity	go				ga=@person o=@food		n	五段-カ行	4
+焦げる	こげる	v1	焦げる	verb	타다	REG			-	change	past				ga=@food		y	下一段-ガ行	1
+焦る	あせる	v5	焦る	verb	초조해하다	HA			-	change	go				ga=@person ni=@incident		y	五段-ラ行	3
+照らす	てらす	v5	照らす	verb	비추다	REG			+	activity	go				ga=@thing o=@place		y	五段-サ行	1
+照れる	てれる	v1	照れる	verb	쑥스러워하다	HA			-	change	go				ga=@person		y	下一段-ラ行	1
+燃やす	もやす	v5	燃やす	verb	태우다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+片付く	かたづく	v5	片付く	verb	끝나다	REG			-	change	past				ga=@task|@room		y	五段-カ行	3
+狂う	くるう	v5	狂う	verb	미치다	REG			-	change	past				ga=@person		y	五段-ワア行	4
+狙う	ねらう	v5	狙う	verb	노리다	REG			+	activity	go				ga=@person o=@thing		y	五段-ワア行	1
+現われる	あらわれる	v1	現れる	verb	나타나다	REG			-	change	eo				ga=@entity		y	下一段-ラ行	2
+甘える	あまえる	v1	甘える	verb	응석 부리다	REG			+	activity	go				ga=@person ni=@person	に=에게	y	下一段-ア行	2
+生える	はえる	v1	生える	verb	나다	REG			-	change	eo				ga=@plant|@body		y	下一段-ア行	2
+生かす	いかす	v5	生かす	verb	살리다	REG			+	activity	go				ga=@person o=@skill		y	五段-サ行	1
+生き残る	いきのこる	v5	生き残る	verb	살아남다	REG			+	change	past				ga=@person		y	五段-ラ行	1
+生き返る	いきかえる	v5	生き返る	verb	살아나다	REG			-	change	past				ga=@person|@animal		y	五段-ラ行	1
+生む	うむ	v5	生む	verb	낳다	REG			+	change	past				ga=@person|@thing o=@thing		y	五段-マ行	3
+申し出る	もうしでる	v1	申し出る	verb	제안하다	HA			+	change	past				ga=@person ni=@person o=@request		y	下一段-ダ行	2
+略す	りゃくす	v5	略す	verb	줄이다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+異なる	ことなる	v5	異なる	verb	다르다	REU			-	state	simple				ga=@thing		y	五段-ラ行	1
+畳む	たたむ	v5	畳む	verb	접다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	2
+疑う	うたがう	v5	疑う	verb	의심하다	HA			+	activity	go				ga=@person o=@info		y	五段-ワア行	1
+痛む	いたむ	v5	痛む	verb	아프다	EU			-	state	simple				ga=@body		y	五段-マ行	3
+痛める	いためる	v1	痛める	verb	다치다	REG			-	change	past				ga=@person o=@body		y	下一段-マ行	2
+目指す	めざす	v5	目指す	verb	목표로 하다	HA			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+目立つ	めだつ	v5	目立つ	verb	눈에 띄다	REG			-	state	simple				ga=@thing		y	五段-タ行	1
+目覚める	めざめる	v1	目覚める	verb	깨어나다	REG			-	change	past				ga=@person		y	下一段-マ行	2
+眺める	ながめる	v1	眺める	verb	바라보다	REG			+	activity	go				ga=@person o=@entity		y	下一段-マ行	2
+睨む	にらむ	v5	睨む	verb	노려보다	REG			+	activity	go				ga=@person o=@person		y	五段-マ行	2
+知り合う	しりあう	v5	知り合う	verb	알게 되다	REG			-	change	past				ga=@person with=@person		y	五段-ワア行	1
+破る	やぶる	v5	破る	verb	찢다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	4
+破れる	やぶれる	v1	破れる	verb	찢어지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	3
+示す	しめす	v5	示す	verb	보여 주다	REG			+	activity	go				ga=@person ni=@person o=@thing		y	五段-サ行	4
+祈る	いのる	v5	祈る	verb	빌다	L			+	activity	go				ga=@person o=@thing		y	五段-ラ行	2
+祝う	いわう	v5	祝う	verb	축하하다	HA			+	activity	go				ga=@person o=@event		y	五段-ワア行	1
+稼ぐ	かせぐ	v5	稼ぐ	verb	벌다	L			+	activity	go				ga=@person o=@money		y	五段-ガ行	2
+空ける	あける	v1	空ける	verb	비우다	REG			+	activity	go				ga=@person o=@place		y	下一段-カ行	3
+突き込む	つきこむ	v5	突っ込む	verb	찔러 넣다	REG			+	change	go				ga=@person o=@thing ni=@place		y	五段-マ行	2
+突く	つく	v5	突く	verb	찌르다	REU			+	change	go				ga=@person o=@thing		y	五段-カ行	3
+立ち上がる	たちあがる	v5	立ち上がる	verb	일어서다	REG			+	change	eo				ga=@person		y	五段-ラ行	2
+立ち去る	たちさる	v5	立ち去る	verb	떠나다	REG			+	change	past				ga=@person o=@place		y	五段-ラ行	1
+立ち向かう	たちむかう	v5	立ち向かう	verb	맞서다	REG			+	activity	go				ga=@person ni=@trouble|@person		y	五段-ワア行	1
+立ち寄る	たちよる	v5	立ち寄る	verb	들르다	EU			+	change	past				ga=@person ni=@place		y	五段-ラ行	1
+立ち止まる	たちどまる	v5	立ち止まる	verb	멈춰 서다	REG			+	change	eo				ga=@person		y	五段-ラ行	1
+終える	おえる	v1	終える	verb	마치다	REG			+	activity	past				ga=@person o=@task|@activity		y	下一段-ア行	1
+組む	くむ	v5	組む	verb	짜다	REG			+	activity	go				ga=@person o=@plan		y	五段-マ行	3
+結ぶ	むすぶ	v5	結ぶ	verb	묶다	REG			+	activity	go				ga=@person o=@thing		y	五段-バ行	5
+絞る	しぼる	v5	絞る	verb	짜다	REG			+	activity	go				ga=@person o=@thing		y	五段-ラ行	4
+絡む	からむ	v5	絡む	verb	얽히다	REG			-	change	eo				ga=@thing ni=@thing		y	五段-マ行	3
+縛る	しばる	v5	縛る	verb	묶다	REG			+	activity	go				ga=@person o=@person|@thing		y	五段-ラ行	1
+縮む	ちぢむ	v5	縮む	verb	줄어들다	L			-	change	past				ga=@thing		y	五段-マ行	1
+繋がる	つながる	v5	繋がる	verb	이어지다	REG			-	change	eo				ga=@thing		y	五段-ラ行	2
+繋ぐ	つなぐ	v5	繋ぐ	verb	연결하다	HA			+	change	go				ga=@person o=@thing		y	五段-ガ行	3
+繰り返す	くりかえす	v5	繰り返す	verb	반복하다	HA			+	activity	go				ga=@person o=@activity		y	五段-サ行	1
+纏まる	まとまる	v5	まとまる	verb	정리되다	REG			-	change	eo				ga=@thing		y	五段-ラ行	3
+纏める	まとめる	v1	まとめる	verb	정리하다	HA			+	activity	go				ga=@person o=@thing		y	下一段-マ行	3
+考え込む	かんがえこむ	v5	考え込む	verb	골똘히 생각하다	HA			+	activity	go				ga=@person		y	五段-マ行	1
+耐える	たえる	v1	耐える	verb	견디다	REG			+	activity	go				ga=@person ni=@thing	に=을	y	下一段-ア行	2
+背負う	せおう	v5	背負う	verb	짊어지다	REG			+	activity	go				ga=@person o=@thing		y	五段-ワア行	3
+腐る	くさる	v5	腐る	verb	썩다	REG			-	change	past				ga=@food		y	五段-ラ行	1
+膨らむ	ふくらむ	v5	膨らむ	verb	부풀다	L			-	change	eo				ga=@thing		y	五段-マ行	2
+至る	いたる	v5	至る	verb	이르다:러	REO			-	change	past				ga=@person|@thing ni=@result		y	五段-ラ行	1
+苛める	いじめる	v1	いじめる	verb	괴롭히다	REG			+	activity	go				ga=@person o=@person		y	下一段-マ行	1
+苦しむ	くるしむ	v5	苦しむ	verb	괴로워하다	HA			-	activity	go				ga=@person ni=@trouble		y	五段-マ行	2
+茹でる	ゆでる	v1	茹でる	verb	삶다	REG			+	activity	go				ga=@person o=@food		y	下一段-ダ行	1
+落ち込む	おちこむ	v5	落ち込む	verb	풀이 죽다	REG			-	change	eo				ga=@person		y	五段-マ行	3
+行う	おこなう	v5	行う	verb	하다	HA			+	activity	go				ga=@person o=@activity		y	五段-ワア行	3
+表わす	あらわす	v5	表す	verb	나타내다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	3
+裏切る	うらぎる	v5	裏切る	verb	배신하다	HA			+	change	go				ga=@person o=@person		y	五段-ラ行	2
+襲う	おそう	v5	襲う	verb	습격하다	HA			+	activity	go				ga=@person|@monster o=@person|@place		y	五段-ワア行	4
+見上げる	みあげる	v1	見上げる	verb	올려다보다	REG			+	activity	go				ga=@person o=@entity		y	下一段-ガ行	1
+見下ろす	みおろす	v5	見下ろす	verb	내려다보다	REG			+	activity	go				ga=@person o=@entity		y	五段-サ行	1
+見回す	みまわす	v5	見回す	verb	둘러보다	REG			+	activity	go				ga=@person o=@place		y	五段-サ行	1
+見守る	みまもる	v5	見守る	verb	지켜보다	REG			+	activity	go				ga=@person o=@person		y	五段-ラ行	1
+見張る	みはる	v5	見張る	verb	감시하다	HA			+	activity	go				ga=@person o=@person		y	五段-ラ行	2
+見抜く	みぬく	v5	見抜く	verb	간파하다	HA			+	change	go				ga=@person o=@info		y	五段-カ行	1
+見掛ける	みかける	v1	見かける	verb	보다	REG			-	change	past				ga=@person o=@person		y	下一段-カ行	1
+見直す	みなおす	v5	見直す	verb	다시 보다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+見詰める	みつめる	v1	見つめる	verb	바라보다	REG			+	activity	go				ga=@person o=@entity		y	下一段-マ行	2
+見送る	みおくる	v5	見送る	verb	배웅하다	HA			+	activity	go				ga=@person o=@person		y	五段-ラ行	3
+見逃す	みのがす	v5	見逃す	verb	놓치다	REG			+	change	past				ga=@person o=@thing		y	五段-サ行	2
+覗く	のぞく	v5	覗く	verb	들여다보다	REG			+	activity	go				ga=@person o=@place		y	五段-カ行	3
+覚める	さめる	v1	覚める	verb	깨다	REG			-	change	eo				ga=@person		y	下一段-マ行	2
+解く	とく	v5	解く	verb	풀다	L			+	activity	go				ga=@person o=@thing		y	五段-カ行	1
+触れる	ふれる	v1	触れる	verb	닿다	REG			+	change	eo				ga=@person ni=@thing	に=을	y	下一段-ラ行	11
+訪れる	おとずれる	v1	訪れる	verb	방문하다	HA			+	change	past				ga=@person o=@place		y	下一段-ラ行	2
+訴える	うったえる	v1	訴える	verb	호소하다	HA			+	activity	go				ga=@person ni=@person o=@info		y	下一段-ア行	3
+試す	ためす	v5	試す	verb	시험하다	HA			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+詰まる	つまる	v5	詰まる	verb	막히다	REG			-	change	eo				ga=@thing		y	五段-ラ行	3
+詰める	つめる	v1	詰める	verb	채우다	REG			+	activity	go				ga=@person o=@thing ni=@container		y	下一段-マ行	3
+話し合う	はなしあう	v5	話し合う	verb	의논하다	HA			+	activity	go				ga=@person with=@person o=@topic		y	五段-ワア行	1
+話し掛ける	はなしかける	v1	話しかける	verb	말을 걸다	L			+	activity	go				ga=@person ni=@person		y	下一段-カ行	1
+認める	みとめる	v1	認める	verb	인정하다	HA			+	change	go				ga=@person o=@thing		y	下一段-マ行	1
+誓う	ちかう	v5	誓う	verb	맹세하다	HA			+	change	past				ga=@person ni=@entity		y	五段-ワア行	1
+語る	かたる	v5	語る	verb	이야기하다	HA			+	activity	go				ga=@person o=@info		y	五段-ラ行	1
+譲る	ゆずる	v5	譲る	verb	양보하다	HA			+	change	past				ga=@person ni=@person o=@thing	に=에게	y	五段-ラ行	2
+責める	せめる	v1	責める	verb	탓하다	HA			+	activity	go				ga=@person o=@person		y	下一段-マ行	1
+走り回る	はしりまわる	v5	走り回る	verb	뛰어다니다	REG			+	activity	go				ga=@person de=@place		y	五段-ラ行	1
+起き上がる	おきあがる	v5	起き上がる	verb	일어나다	REG			+	change	past				ga=@person		y	五段-ラ行	1
+越える	こえる	v1	越える	verb	넘다	REG			+	change	past				ga=@person o=@nature		y	下一段-ア行	2
+跳ねる	はねる	v1	跳ねる	verb	뛰다	REG			+	activity	go				ga=@animal		y	下一段-ナ行	3
+蹴る	ける	v5	蹴る	verb	차다	REG			+	change	go				ga=@person o=@thing		y	五段-ラ行	2
+転がす	ころがす	v5	転がす	verb	굴리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+転がる	ころがる	v5	転がる	verb	구르다	REU			+	activity	go				ga=@thing		y	五段-ラ行	2
+転ぶ	ころぶ	v5	転ぶ	verb	넘어지다	REG			-	change	past				ga=@person		y	五段-バ行	1
+輝く	かがやく	v5	輝く	verb	빛나다	REG			-	activity	go				ga=@thing		y	五段-カ行	2
+込める	こめる	v1	込める	verb	담다	REG			+	change	go				ga=@person o=@emotion		y	下一段-マ行	2
+近付ける	ちかづける	v1	近付ける	verb	가까이 대다	REG			+	change	go				ga=@person o=@body ni=@thing		y	下一段-カ行	2
+迫る	せまる	v5	迫る	verb	다가오다	REG			+	change	go				ga=@person ni=@person		y	五段-ラ行	2
+述べる	のべる	v1	述べる	verb	말하다	HA			+	activity	go				ga=@person o=@idea		y	下一段-バ行	1
+追い付く	おいつく	v5	追い付く	verb	따라잡다	REG			+	change	past				ga=@person ni=@person	に=을	y	五段-カ行	1
+追い出す	おいだす	v5	追い出す	verb	쫓아내다	REG			+	change	past				ga=@person o=@person		y	五段-サ行	2
+追い越す	おいこす	v5	追い越す	verb	앞지르다	REU			+	change	past				ga=@person o=@person		y	五段-サ行	2
+追う	おう	v5	追う	verb	쫓다	REG			+	activity	go				ga=@person o=@entity		y	五段-ワア行	2
+逃がす	にがす	v5	逃がす	verb	놓치다	REG			+	change	past				ga=@person o=@person		y	五段-サ行	2
+逃げ出す	にげだす	v5	逃げ出す	verb	도망치다	REG			+	change	go				ga=@person kara=@place		y	五段-サ行	1
+逃す	のがす	v5	逃す	verb	놓치다	REG			+	change	past				ga=@person o=@thing		y	五段-サ行	1
+逆らう	さからう	v5	逆らう	verb	거스르다	REU			+	activity	go				ga=@person ni=@order	に=을	y	五段-ワア行	2
+通す	とおす	v5	通す	verb	통과시키다	REG			+	change	go				ga=@person o=@document		y	五段-サ行	4
+通ずる	つうずる	v1	通じる	verb	통하다	HA			-	change	simple				ga=@thing ni=@thing		y	上一段-ザ行	2
+通り過ぎる	とおりすぎる	v1	通り過ぎる	verb	지나가다	REG			+	change	past				ga=@person o=@place		y	上一段-ガ行	1
+進める	すすめる	v1	進める	verb	진행하다	HA			+	activity	go				ga=@person o=@task		y	下一段-マ行	2
+遣る	やる	v5	やる	verb	하다	HA			+	activity	go				ga=@person o=@thing		y	五段-ラ行	8
+避ける	さける	v1	避ける	verb	피하다	HA			+	change	past				ga=@person o=@thing		y	下一段-カ行	1
+重なる	かさなる	v5	重なる	verb	겹치다	REG			-	change	eo				ga=@thing		y	五段-ラ行	2
+重ねる	かさねる	v1	重ねる	verb	포개다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ナ行	2
+閉じる	とじる	v1	閉じる	verb	닫다	REG			+	activity	go				ga=@person o=@thing		y	上一段-ザ行	6
+間違う	まちがう	v5	間違う	verb	틀리다	REG			-	change	past				ga=@person o=@info		y	五段-ワア行	2
+関わる	かかわる	v5	関わる	verb	관련되다	REG			+	change	eo				ga=@person ni=@event	に=와	y	五段-ラ行	2
+雇う	やとう	v5	雇う	verb	고용하다	HA			+	activity	go				ga=@person o=@person		y	五段-ワア行	1
+零す	こぼす	v5	こぼす	verb	흘리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	4
+零れる	こぼれる	v1	こぼれる	verb	쏟아지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	4
+震える	ふるえる	v1	震える	verb	떨리다	REG			-	activity	go				ga=@body		y	下一段-ア行	3
+響く	ひびく	v5	響く	verb	울리다	REG			-	activity	go				ga=@sound		y	五段-カ行	2
+預かる	あずかる	v5	預かる	verb	맡다	REG			+	change	go				ga=@person o=@thing		y	五段-ラ行	1
+頷く	うなずく	v5	頷く	verb	고개를 끄덕이다	REG			+	activity	go				ga=@person		y	五段-カ行	1
+頼る	たよる	v5	頼る	verb	의지하다	HA			+	activity	go				ga=@person ni=@person	に=에게	y	五段-ラ行	1
+飛ばす	とばす	v5	飛ばす	verb	날리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	4
+飛び下りる	とびおりる	v1	飛び降りる	verb	뛰어내리다	REG			+	change	past				ga=@person from=@place		y	上一段-ラ行	1
+飛び出す	とびだす	v5	飛び出す	verb	뛰쳐나가다	REG			+	change	past				ga=@person from=@place		y	五段-サ行	2
+飛び込む	とびこむ	v5	飛び込む	verb	뛰어들다	L			+	change	past				ga=@person ni=@place		y	五段-マ行	1
+食う	くう	v5	食う	verb	먹다	REG			+	activity	go				ga=@person o=@food		y	五段-ワア行	2
+飲み込む	のみこむ	v5	飲み込む	verb	삼키다	REG			+	activity	go				ga=@person o=@food		y	五段-マ行	3
+駆け付ける	かけつける	v1	駆け付ける	verb	달려가다	REG			+	change	past				ga=@person ni=@place		y	下一段-カ行	1
+駆け寄る	かけよる	v5	駆け寄る	verb	달려가다	REG			+	change	past				ga=@person ni=@person	に=에게	y	五段-ラ行	1
+駆け込む	かけこむ	v5	駆け込む	verb	뛰어 들어가다	REG			+	change	past				ga=@person ni=@place		y	五段-マ行	1
+騒ぐ	さわぐ	v5	騒ぐ	verb	떠들다	L			+	activity	go				ga=@person		y	五段-ガ行	3
+騙す	だます	v5	騙す	verb	속이다	REG			+	activity	go				ga=@person o=@person		y	五段-サ行	1
+高まる	たかまる	v5	高まる	verb	높아지다	REG			-	change	past				ga=@thing		y	五段-ラ行	2
+鳴らす	ならす	v5	鳴らす	verb	울리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	3
+黙り込む	だまりこむ	v5	黙り込む	verb	입을 다물다	L			+	change	go				ga=@person		y	五段-マ行	1
+アルバイト	あるばいと	n	アルバイト	work	아르바이트		@activity										y		1
+サービス	さーびす	n	サービス	work	서비스		@activity										y		1
+システム	しすてむ	n	システム	work	시스템		@machine|@abstract										y		1
+チーム	ちーむ	n	チーム	work	팀		@group										y		1
+ボーナス	ぼーなす	n	ボーナス	work	보너스		@money										y		1
+予算	よさん	n	予算	work	예산		@money										y		1
+事務	じむ	n	事務	work	사무		@task										y		1
+交渉	こうしょう	n	交渉	work	협상		@activity										y		1
+任務	にんむ	n	任務	work	임무		@task										y		1
+企業	きぎょう	n	企業	work	기업		@organization										y		1
+企画	きかく	n	企画	work	기획		@plan										y		1
+依頼	いらい	n	依頼	work	의뢰		@request										y		1
+利益	りえき	n	利益	work	이익		@money|@abstract										y		1
+収入	しゅうにゅう	n	収入	work	수입		@money										y		1
+取り引き	とりひき	n	取引	work	거래		@activity										y		1
+商品	しょうひん	n	商品	work	상품		@thing										y		1
+商売	しょうばい	n	商売	work	장사		@activity										y		1
+営業	えいぎょう	n	営業	work	영업		@activity										y		1
+契約	けいやく	n	契約	work	계약		@document										y		1
+対応	たいおう	n	対応	work	대응		@activity										y		1
+役	やく	n	役	work	역할		@task|@post										y		2
+役割	やくわり	n	役割	work	역할		@duty										y		1
+役目	やくめ	n	役目	work	역할		@duty										y		1
+担当	たんとう	n	担当	work	담당		@duty										y		1
+提出	ていしゅつ	n	提出	work	제출		@activity										y		1
+提案	ていあん	n	提案	work	제안		@idea										y		1
+損	そん	n	損	work	손해		@damage										y		1
+書類	しょるい	n	書類	work	서류		@document										y		1
+本番	ほんばん	n	本番	work	실전		@event										y		1
+活躍	かつやく	n	活躍	work	활약		@activity										y		1
+現場	げんば	n	現場	work	현장		@place										y		1
+管理	かんり	n	管理	work	관리		@activity										y		1
+締め切り	しめきり	n	締め切り	work	마감		@time.point										y		1
+職場	しょくば	n	職場	work	직장		@place										y		1
+許可	きょか	n	許可	work	허가		@abstract										y		1
+費用	ひよう	n	費用	work	비용		@money										y		1
+資料	しりょう	n	資料	work	자료		@document										y		1

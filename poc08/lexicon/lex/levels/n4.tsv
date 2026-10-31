@@ -529,7 +529,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 乾く	かわく	v5	乾く	verb	마르다	REU			-	change	eo				ga=@thing		y	五段-カ行	1
 亡くなる	なくなる	v5	亡くなる	verb	세상을 떠나다	REG			-	change	past				ga=@person		y	五段-ラ行	3
 交ぜる	まぜる	v1	混ぜる	verb	섞다	REG			+	activity	go				ga=@person o=@thing		y	下一段-ザ行	1
-付き合う	つきあう	v5	付き合う	verb	사귀다	REG			+	activity	go				ga=@person to=@person		y	五段-ワア行	1
+付き合う	つきあう	v5	付き合う	verb	사귀다	REG			+	activity	go				ga=@person to=@person		y	五段-ワア行	3
 任せる	まかせる	v1	任せる	verb	맡기다	REG			+	activity	go				ga=@person ni=@person o=@thing		y	下一段-サ行	1
 伝える	つたえる	v1	伝える	verb	전하다	HA			+	activity	go				ga=@person ni=@person o=@speech		y	下一段-ア行	1
 伝わる	つたわる	v5	伝わる	verb	전해지다	REG			-	change	go				ga=@thing ni=@person		y	五段-ラ行	1
@@ -551,7 +551,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 割れる	われる	v1	割れる	verb	깨지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	3
 助かる	たすかる	v5	助かる	verb	도움이 되다	REG			-	change	go				ga=@thing		n	五段-ラ行	3
 助ける	たすける	v1	助ける	verb	돕다	BWA			+	activity	go				ga=@person o=@person		y	下一段-カ行	2
-動かす	うごかす	v5	動かす	verb	움직이다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
+動かす	うごかす	v5	動かす	verb	움직이다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	5
 動く	うごく	v5	動く	verb	움직이다	REG			+	activity	go				ga=@person		y	五段-カ行	2
 勧める	すすめる	v1	勧める	verb	권하다	HA			+	activity	go				ga=@person ni=@person o=@thing		y	下一段-マ行	2
 包む	つつむ	v5	包む	verb	싸다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	2
@@ -559,7 +559,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 受け取る	うけとる	v5	受け取る	verb	받다	REG			+	change	go				ga=@person o=@thing		y	五段-ラ行	2
 叱る	しかる	v5	叱る	verb	혼내다	REG			+	activity	go				ga=@person o=@person		y	五段-ラ行	1
 合う	あう	v5	合う	verb	맞다	REG			-	state	simple				ga=@thing ni=@thing		y	五段-ワア行	3
-合わせる	あわせる	v1	合わせる	verb	맞추다	REG			+	activity	go				ga=@person o=@thing		y	下一段-サ行	2
+合わせる	あわせる	v1	合わせる	verb	맞추다	REG			+	activity	go				ga=@person o=@thing		y	下一段-サ行	7
 向かう	むかう	v5	向かう	verb	향하다	HA			+	activity	go				ga=@person ni=@place	に=으로	y	五段-ワア行	8
 回す	まわす	v5	回す	verb	돌리다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
 回る	まわる	v5	回る	verb	돌다	L			+	activity	go				ga=@person|@thing		y	五段-ラ行	11
@@ -598,7 +598,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 残す	のこす	v5	残す	verb	남기다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
 残る	のこる	v5	残る	verb	남다	REG			+	change	eo				ga=@person|@thing ni=@place		y	五段-ラ行	1
 比べる	くらべる	v1	比べる	verb	비교하다	HA			+	activity	go				ga=@person o=@thing to=@thing		y	下一段-バ行	1
-気付く	きづく	v5	気付く	verb	알아차리다	REG			-	change	go				ga=@person ni=@thing	に=을	y	五段-カ行	2
+気付く	きづく	v5	気付く	verb	알아차리다	REG			-	change	go				ga=@person ni=@thing	に=을	y	五段-カ行	6
 汚す	よごす	v5	汚す	verb	더럽히다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	1
 汚れる	よごれる	v1	汚れる	verb	더러워지다	REG			-	change	eo				ga=@thing		y	下一段-ラ行	1
 決まる	きまる	v5	決まる	verb	정해지다	REG			-	change	eo				ga=@thing		y	五段-ラ行	1
@@ -625,7 +625,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 立てる	たてる	v1	立てる	verb	세우다	REG			+	change	go				ga=@person o=@thing		y	下一段-タ行	4
 経つ	たつ	v5	経つ	verb	지나다	REG			-	change	past				ga=@time		y	五段-タ行	1
 続く	つづく	v5	続く	verb	계속되다	REG			-	state	go				ga=@thing		y	五段-カ行	2
-続ける	つづける	v1	続ける	verb	계속하다	HA			+	activity	go				ga=@person o=@activity		y	下一段-カ行	1
+続ける	つづける	v1	続ける	verb	계속하다	HA			+	activity	go				ga=@person o=@activity		y	下一段-カ行	2
 育つ	そだつ	v5	育つ	verb	자라다	REG			-	change	past				ga=@person|@plant		y	五段-タ行	1
 育てる	そだてる	v1	育てる	verb	키우다	REG			+	activity	go				ga=@person o=@person|@animal|@plant		y	下一段-タ行	1
 落ち着く	おちつく	v5	落ち着く	verb	진정하다	HA			+	change	past				ga=@person		y	五段-カ行	4
@@ -641,7 +641,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 踏む	ふむ	v5	踏む	verb	밟다	REG			+	activity	go				ga=@person o=@thing		y	五段-マ行	1
 込む	こむ	v5	混む	verb	붐비다	REG			-	change	simple				ga=@place|@vehicle		y	五段-マ行	1
 迎える	むかえる	v1	迎える	verb	맞이하다	HA			+	activity	go				ga=@person o=@person		y	下一段-ア行	1
-近付く	ちかづく	v5	近付く	verb	다가가다	REG			+	change	go				ga=@person ni=@thing		y	五段-カ行	3
+近付く	ちかづく	v5	近付く	verb	다가가다	REG			+	change	go				ga=@person ni=@thing		y	五段-カ行	8
 迷う	まよう	v5	迷う	verb	망설이다	REG			-	activity	go				ga=@person ni=@thing	に=을	n	五段-ワア行	3
 追い掛ける	おいかける	v1	追いかける	verb	쫓아가다	REG			+	activity	go				ga=@person o=@person		y	下一段-カ行	2
 逃げる	にげる	v1	逃げる	verb	도망치다	REG			+	activity	go				ga=@person|@animal		y	下一段-ガ行	1

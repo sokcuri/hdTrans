@@ -5,11 +5,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 生憎	あいにく	na	1	공교롭다				u	b	
 生憎	あいにく	na	2	공교스럽다				u	b	
 生憎	あいにく	na	3	공교롭게	next=の			u	b	
-曖昧	あいまい	na	1	애매				u	w	
-曖昧	あいまい	na	2	어정쩡하다				u	w	
-曖昧	あいまい	na	3	수상하다				u	wl	
-曖昧	あいまい	na	4	모호하다				u	wl	
-曖昧	あいまい	na	5	애매하다				u	b	
 愛らしい	あいらしい	adj	1	귀엽다				u	b	
 愛らしい	あいらしい	adj	2	사랑스럽다				u	b	
 あえか	あえか	na	1	가냘프다				u	b	
@@ -18,8 +13,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 青臭い	あおくさい	adj	1	미숙하다				u	w	
 青臭い	あおくさい	adj	2	유치하다				u	w	
 青黒い	あおぐろい	adj	1	검푸르다				u	w	
-青白い	あおじろい	adj	1	창백하다				u	b	
-青白い	あおじろい	adj	2	파르스름하다				u	b	
 赤黒い	あかぐろい	adj	1	검붉다				u	b	
 あからさま	あからさま	na	1	명백하다				u	b	
 あくどい	あくどい	adj	1	칙칙하다				u	b	
@@ -38,18 +31,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 浅ましい	あさましい	adj	2	야비하다				u	b	
 あざとい	あざとい	adj	1	빈틈없다				u	b	
 あざとい	あざとい	adj	2	약삭빠르다				u	b	
-鮮やか	あざやか	na	1	생생하다				u	b	
-鮮やか	あざやか	na	2	멋지다				u	b	
-鮮やか	あざやか	na	3	선명하다				u	b	
-鮮やか	あざやか	na	4	그림같은				u	b	
 味気無い	あじきない	adj	1	따분하다				u	b	
 あたじけない	あたじけない	adj	1	인색하다				u	b	
 温か	あたたか	na	1	따뜻하다				u	b	
-呆気ない	あっけない	adj	1	허무하다				u	wl	
-呆気ない	あっけない	adj	2	어이없다				u	w	
 天晴	あっぱれ	na	1	훌륭하다				u	b	
-厚かましい	あつかましい	adj	1	뻔뻔하다				u	w	
-厚かましい	あつかましい	adj	2	뻔뻔스럽다				u	b	
 熱苦しい	あつくるしい	adj	1	숨막힐 듯이 덥다				u	w	
 厚ぼったい	あつぼったい	adj	1	두툼하다				u	b	
 誂え向き	あつらえむき	na	1	안성맞춤				u	wl	
@@ -62,14 +47,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 脂っこい	あぶらっこい	adj	3	기름기 많다				u	b	
 脂っこい	あぶらっこい	adj	4	끈덕지다				u	b	
 甘辛い	あまからい	adj	1	달짝지근하다				u	b	
-甘酸っぱい	あまずっぱい	adj	1	새콤달콤하다				u	w	
 甘ちょろい	あまちょろい	adj	1	안이하다				u	b	
 甘ったるい	あまったるい	adj	1	달콤하다				u	b	
-危うい	あやうい	adj	1	위험하다				u	b	
 あやふや	あやふや	na	1	애매모호하다				u	b	
-荒い	あらい	adj	1	거칠다				u	b	
-荒い	あらい	adj	2	난폭하다				u	b	
-荒い	あらい	adj	3	헤프다	arg=金遣い			u	x	senses
 荒々しい	あらあらしい	adj	1	사납다				u	w	
 荒々しい	あらあらしい	adj	2	매우 난폭하다				u	b	
 荒々しい	あらあらしい	adj	3	몹시 거칠다				u	b	
@@ -84,8 +64,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 淡い	あわい	adj	3	희미하다				u	b	
 淡い	あわい	adj	4	담백하다				u	b	
 淡い	あわい	adj	5	어렴풋하다				u	b	
-慌ただしい	あわただしい	adj	1	어수선하다				u	b	
-慌ただしい	あわただしい	adj	2	분주하다				u	b	
 暗鬱	あんうつ	na	1	암울하다				u	b	
 如何わしい	いかがわしい	adj	1	어정쩡하다				u	w	
 如何わしい	いかがわしい	adj	2	의심스럽다				u	b	
@@ -95,9 +73,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 厳めしい	いかめしい	adj	2	엄숙하다				u	b	
 厳めしい	いかめしい	adj	3	엄하다				u	b	
 いがらっぽい	いがらっぽい	adj	1	아릿하다				u	b	
-息苦しい	いきぐるしい	adj	1	답답하다				u	b	
-息苦しい	いきぐるしい	adj	2	가슴이 답답하다				u	b	
-息苦しい	いきぐるしい	adj	3	숨이 가쁘다				u	b	
 寝穢い	いぎたない	adj	1	잠꾸러기이다				u	b	
 いけぞんざい	いけぞんざい	na	1	돼먹지않다				u	b	
 いけ図図しい	いけずうずうしい	adj	1	너무 뻔뻔스럽다				u	b	
@@ -111,9 +86,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 いじらしい	いじらしい	adj	1	애처롭다				u	b	
 磯臭い	いそくさい	adj	1	바닷내가 섞여 있다				u	b	
 磯臭い	いそくさい	adj	2	비릿하다				u	b	
-痛々しい	いたいたしい	adj	1	안쓰럽다				u	wl	
-痛々しい	いたいたしい	adj	2	딱하다				u	b	
-痛々しい	いたいたしい	adj	3	애처롭다				u	b	
 悪戯好き	いたずらずき	na	1	장난스럽다				u	wl	
 悪戯好き	いたずらずき	na	2	장난 꾸러기				u	b	
 痛ましい	いたましい	adj	1	참혹하다				u	b	
@@ -126,8 +98,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 幼けない	いとけない	adj	1	어리다				u	wl	
 幼けない	いとけない	adj	2	순진하다				u	b	
 幼けない	いとけない	adj	3	앳되다				u	b	
-愛しい	いとしい	adj	1	귀엽다				u	b	
-愛しい	いとしい	adj	2	사랑스럽다				u	b	
 厭わしい	いとわしい	adj	1	싫다				u	b	
 歪	いびつ	na	1	찌그러지다				u	b	
 訝しい	いぶかしい	adj	1	의심스럽다				u	b	
@@ -141,8 +111,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 忌まわしい	いまわしい	adj	2	불길하다				u	b	
 卑しい	いやしい	adj	1	천하다				u	b	
 卑しい	いやしい	adj	2	저속하다				u	b	
-嫌らしい	いやらしい	adj	1	징그럽다				u	w	
-嫌らしい	いやらしい	adj	2	야하다				u	b	
 異様	いよう	na	1	이상하다				u	b	
 異様	いよう	na	2	색다른 모양				u	b	
 苛立たしい	いらだたしい	adj	1	초조하다				u	w	
@@ -169,8 +137,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 薄赤い	うすあかい	adj	1	발그스름하다				u	b	
 薄汚い	うすぎたない	adj	1	추레하다				u	b	
 薄汚い	うすぎたない	adj	2	누추하다				u	b	
-薄暗い	うすぐらい	adj	1	어슴푸레하다				u	w	
-薄暗い	うすぐらい	adj	2	어둑어둑하다				u	b	
 薄黒い	うすぐろい	adj	1	거무스름하다				u	b	
 薄黒い	うすぐろい	adj	2	약간 검다				u	b	
 薄白い	うすじろい	adj	1	희끄므레하다				u	b	
@@ -188,9 +154,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 鬱蒼	うっそう	na	2	울창				u	w	
 打って付け	うってつけ	na	1	안성맞춤				u	b	
 打って付け	うってつけ	na	2	최적				u	b	
-鬱陶しい	うっとうしい	adj	1	성가시다				u	wl	
-鬱陶しい	うっとうしい	adj	2	음울하다				u	b	
-鬱陶しい	うっとうしい	adj	3	찌뿌둥하다				u	b	
 虚ろ	うつろ	na	1	속이 비어 있다				u	b	
 虚ろ	うつろ	na	2	얼빠지다				u	b	
 疎い	うとい	adj	1	서먹하다				u	b	
@@ -227,9 +190,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 旺盛	おうせい	na	1	가득하다				u	b	
 旺盛	おうせい	na	2	왕성				u	b	
 旺盛	おうせい	na	3	왕성하다				u	b	
-大袈裟	おおげさ	na	1	야단스럽다				u	b	
-大袈裟	おおげさ	na	2	과장				u	b	
-大袈裟	おおげさ	na	3	과장되다				u	b	
 大雑把	おおざっぱ	na	1	조잡하다				u	b	
 大雑把	おおざっぱ	na	2	대충				u	b	
 大雑把	おおざっぱ	na	3	대략적이다				u	b	
@@ -252,14 +212,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 烏滸がましい	おこがましい	adj	1	우습다				u	b	
 烏滸がましい	おこがましい	adj	2	주제넘다				u	b	
 厳か	おごそか	na	1	엄숙하다				u	b	
-幼い	おさない	adj	1	어리다				u	b	
-惜しい	おしい	adj	1	아깝다				u	b	
 おしゃま	おしゃま	na	1	깜찍				u	b	
 恐れ多い	おそれおおい	adj	1	송구스럽다				u	w	
 悍ましい	おぞましい	adj	1	끔찍하다				u	wl	
 悍ましい	おぞましい	adj	2	무섭다				u	b	
-穏やか	おだやか	na	1	온화				u	b	
-穏やか	おだやか	na	2	온화하다				u	b	
 おっかない	おっかない	adj	1	무섭다				u	b	
 おっちょこちょい	おっちょこちょい	na	1	덜렁이				u	b	
 おっつかっつ	おっつかっつ	na	1	비슷비슷하다				u	b	
@@ -280,7 +236,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 重々しい	おもおもしい	adj	2	위엄스럽다				u	w	
 重々しい	おもおもしい	adj	3	정중하다				u	b	
 重々しい	おもおもしい	adj	4	무게가 있다				u	b	
-重苦しい	おもくるしい	adj	1	답답하다				u	b	
 面白おかしい	おもしろおかしい	adj	1	재미있다				u	wl	
 面白おかしい	おもしろおかしい	adj	2	재미있고도 우습다				u	b	
 面映ゆい	おもはゆい	adj	1	낯간지럽다				u	w	
@@ -300,9 +255,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 輝かしい	かがやかしい	adj	3	빛나다				u	b	
 限り無い	かぎりない	adj	1	한없다				u	w	
 限り無い	かぎりない	adj	2	끝없다				u	b	
-確実	かくじつ	na	1	확실하다				u	b	
-確実	かくじつ	na	2	확실				u	b	
-確実	かくじつ	na	3	격일				u	b	
 格安	かくやす	na	1	싼 편이다				u	b	
 格安	かくやす	na	2	저렴				u	b	
 格安	かくやす	na	3	저가				u	b	
@@ -311,11 +263,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 香しい	かぐわしい	adj	2	향기롭다				u	b	
 嵩高	かさだか	na	1	부피가 크다				u	b	
 嵩高	かさだか	na	2	거대				u	b	
-賢い	かしこい	adj	1	영리하다				u	b	
 姦しい	かしましい	adj	1	떠들석하다				u	b	
 姦しい	かしましい	adj	2	떠들썩하다				u	b	
-微か	かすか	na	1	희미하다				u	b	
-微か	かすか	na	2	미세하다				u	b	
 かすかす	かすかす	na	1	아슬아슬				u	b	
 頑な	かたくな	na	1	완고하다				u	b	
 堅苦しい	かたくるしい	adj	1	딱딱하다				u	w	
@@ -333,14 +282,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 黴臭い	かびくさい	adj	3	곰팡이 냄새가 나다				u	b	
 か細い	かぼそい	adj	1	가냘프다				u	b	
 喧しい	かまびすしい	adj	1	떠들썩하다				u	w	
-痒い	かゆい	adj	1	가렵다				u	b	
 斯様	かよう	na	1	이러하다				u	b	
 か弱い	かよわい	adj	1	연약하다				u	b	
 辛い	からい	adj	1	맵다				u	b	
 軽々しい	かるがるしい	adj	1	경솔하다				u	b	
 軽やか	かろやか	na	1	경쾌하다				u	b	
-可愛らしい	かわいらしい	adj	1	사랑스럽다				u	b	
-可愛らしい	かわいらしい	adj	2	예쁘다				u	b	rule:2196 +unmapped
 甲高い	かんだかい	adj	1	새되다				u	b	
 甲高い	かんだかい	adj	2	날카롭다				u	b	
 芳しい	かんばしい	adj	1	훌륭하다				u	b	
@@ -362,11 +308,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 がめつい	がめつい	adj	1	억척스럽다				u	b	
 がらがら	がらがら	na	1	딸랑이				u	b	
 がらがら	がらがら	na	2	텅 비어 있는	next=の			u	b	
-頑固	がんこ	na	1	완고하다				u	b	
-頑固	がんこ	na	2	완고				u	b	
-気軽	きがる	na	1	소탈				u	b	
-気軽	きがる	na	2	부담 없다				u	b	
-気軽	きがる	na	3	가볍다				u	b	
 気軽い	きがるい	adj	1	소탈하다				u	b	
 気軽い	きがるい	adj	2	가볍다				u	b	
 気さく	きさく	na	1	싹싹하다				u	wl	
@@ -383,7 +324,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 毅然	きぜん	na	2	의연히	next=と			u	b	
 汚らしい	きたならしい	adj	1	지저분하다				u	wl	
 汚らしい	きたならしい	adj	2	추접스럽다				u	b	
-几帳面	きちょうめん	na	1	꼼꼼하다				u	b	
 気遣わしい	きづかわしい	adj	1	궁금하다				u	w	
 気遣わしい	きづかわしい	adj	2	걱정스럽다				u	b	
 気強い	きづよい	adj	1	마음 든든하다				u	b	
@@ -391,10 +331,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 きな臭い	きなくさい	adj	1	어쩐지 수상하다				u	w	
 きな臭い	きなくさい	adj	2	탄내가 나다				u	w	
 きな臭い	きなくさい	adj	3	수상하다				u	b	
-気の毒	きのどく	na	1	불쌍함				u	w	
-気の毒	きのどく	na	2	딱하다				u	b	
-気の毒	きのどく	na	3	안되다				u	w	rule:77 +unmapped assigns-neighbour
-気の毒	きのどく	na	4	불쌍하다				u	w	rule:5042 +unmapped assigns-neighbour
 気恥ずかしい	きはずかしい	adj	1	부끄럽다				u	w	
 気恥ずかしい	きはずかしい	adj	2	멋적다				u	b	
 気まずい	きまずい	adj	1	서먹서먹하다				u	b	
@@ -502,10 +438,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 煙い	けむい	adj	2	거북하다				u	b	
 煙たい	けむたい	adj	1	거북하다				u	b	
 煙たい	けむたい	adj	2	맵다				u	b	
-険しい	けわしい	adj	1	험하다				u	b	
-謙虚	けんきょ	na	1	겸허하다				u	b	
-謙虚	けんきょ	na	2	겸허				u	b	
-謙虚	けんきょ	na	3	검거				u	b	
 堅固	けんご	na	1	굳건하다				u	b	
 堅固	けんご	na	2	견고				u	b	
 堅固	けんご	na	3	견고하다				u	b	
@@ -523,7 +455,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 厳酷	げんこく	na	1	엄혹				u	b	
 厳酷	げんこく	na	2	원고				u	b	
 厳酷	げんこく	na	3	가혹				u	b	
-恋しい	こいしい	adj	1	그립다				u	b	
 煌々	こうこう	na	1	휘황찬란하게	next=と			u	w	
 神々しい	こうごうしい	adj	1	거룩하다				u	w	
 広範	こうはん	na	1	광범				u	b	
@@ -549,15 +480,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 焦げ臭い	こげくさい	adj	2	단내가 많다				u	b	
 焦げ臭い	こげくさい	adj	3	탄내가 나다				u	b	
 焦げ臭い	こげくさい	adj	4	수상하다				u	b	
-心地良い	ここちよい	adj	1	상쾌하다				u	b	
-心地良い	ここちよい	adj	2	기분 좋다				u	b	
 心苦しい	こころぐるしい	adj	1	마음이 괴롭다				u	b	
-心強い	こころづよい	adj	1	든든하다				u	b	
 心無い	こころない	adj	1	분별없다				u	b	
 心無い	こころない	adj	2	철없다				u	b	
 心憎い	こころにくい	adj	1	얄밉다				u	b	
 心憎い	こころにくい	adj	2	얄미울 정도로 훌륭하다				u	b	
-心細い	こころぼそい	adj	1	불안하다				u	w	
 心許ない	こころもとない	adj	1	불안하다				u	wl	
 心許ない	こころもとない	adj	2	초조하다				u	b	
 心安い	こころやすい	adj	1	마음이 편안하다				u	b	
@@ -628,10 +555,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 最適	さいてき	na	1	최적				u	b	
 最適	さいてき	na	2	최적이다				u	b	
 賢しい	さかしい	adj	1	영리하다				u	b	
-盛ん	さかん	na	1	활발하다				u	wl	
-盛ん	さかん	na	2	번창하다				u	b	
-盛ん	さかん	na	3	번성하다				u	b	
-盛ん	さかん	na	4	왕성				u	b	
 さくい	さくい	adj	1	싹싹하다				u	b	
 細やか	ささやか	na	1	자그마하다				u	b	
 定か	さだか	na	1	분명하다				u	b	
@@ -651,12 +574,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 さり気無い	さりげない	adj	1	무심하다				u	wl	
 さり気無い	さりげない	adj	2	태연하다				u	b	
 さり気無い	さりげない	adj	3	아무렇지도 않은 듯				u	b	
-騒がしい	さわがしい	adj	1	소란하다				u	b	
-騒がしい	さわがしい	adj	2	소란스럽다				u	b	
-騒がしい	さわがしい	adj	3	시끄럽다				u	b	
-爽やか	さわやか	na	1	상쾌하다				u	b	
-爽やか	さわやか	na	2	상쾌				u	b	
-爽やか	さわやか	na	3	산뜻하다				u	b	rule:4530 +unmapped
 散々	さんざん	na	1	몹시 나쁘다				u	w	
 散々	さんざん	na	2	형편없다				u	b	
 燦然	さんぜん	na	1	찬연				u	w	
@@ -673,14 +590,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 しかつめらしい	しかつめらしい	adj	1	점잖은 체하다				u	b	
 しかつめらしい	しかつめらしい	adj	2	진지한 체하다				u	b	
 しがない	しがない	adj	1	보잘것없다				u	b	
-親しい	したしい	adj	1	친하다				u	b	
 強か	したたか	na	1	만만치 않다				u	wl	
 舌たるい	したたるい	adj	1	응석부리는 듯하다				u	b	
 慕わしい	したわしい	adj	1	그립다				u	b	
 しちくどい	しちくどい	adj	1	몹시 깐질기다				u	b	
 しち難しい	しちむずかしい	adj	1	몹시 까다롭다				u	b	
-しつこい	しつこい	adj	1	끈질기다				u	b	
-しつこい	しつこい	adj	2	느끼하다				u	b	
 執拗	しつよう	na	1	집요하다				u	b	
 執拗	しつよう	na	2	집요				u	b	
 しとど	しとど	na	1	흠뻑				u	b	
@@ -690,12 +604,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 しどけない	しどけない	adj	2	단정치 못하다				u	b	
 しどろもどろ	しどろもどろ	na	1	횡설수설하다				u	b	
 しなやか	しなやか	na	1	날씬하다				u	b	
-渋い	しぶい	adj	1	떫다				u	b	
-渋い	しぶい	adj	2	차분하다	next=格好			u	b	rule:2570 +unmapped
-渋い	しぶい	adj	3	떨떠름하다	next=顔|表情|顔付き			u	x	senses
-渋い	しぶい	adj	4	떨떠름하다	arg=顔|表情|顔付き			u	x	senses
-渋い	しぶい	adj	5	중후하다	next=声			u	x	senses
-渋い	しぶい	adj	6	중후하다	arg=声			u	x	senses
 しぶとい	しぶとい	adj	1	완고하다				u	b	
 しみったれ	しみったれ	na	1	구두쇠				u	b	
 湿っぽい	しめっぽい	adj	1	축축하다				u	b	
@@ -711,27 +619,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 瀟洒	しょうしゃ	na	2	상사				u	b	
 瀟洒	しょうしゃ	na	3	승자				u	b	
 瀟洒	しょうしゃ	na	4	부상자				u	b	
-しょっぱい	しょっぱい	adj	1	짜다				u	w	
-しょっぱい	しょっぱい	adj	2	인색하다				u	wl	
-しょっぱい	しょっぱい	adj	3	떨떠름하다				u	wl	
-しょっぱい	しょっぱい	adj	4	시시하다				u	wl	
-しょっぱい	しょっぱい	adj	5	찌푸리다				u	b	
 しょぼい	しょぼい	adj	1	초라하다				u	b	
 しょぼい	しょぼい	adj	2	맥풀리다				u	b	
-白々しい	しらじらしい	adj	1	속이 뻔히 보이다				u	wl	
-白々しい	しらじらしい	adj	2	속이 빤하다				u	b	
-白々しい	しらじらしい	adj	3	시치미를 떼다				u	b	
 吝い	しわい	adj	1	인색하다				u	b	
 深々	しんしん	na	1	심신				u	b	
 深々	しんしん	na	2	신진				u	b	
 深々	しんしん	na	3	오싹오싹	next=と			u	b	
 深々	しんしん	na	4	깊숙이	next=と			u	b	
-新鮮	しんせん	na	1	신찬				u	b	
-新鮮	しんせん	na	2	신선하다				u	b	
-新鮮	しんせん	na	3	신선				u	b	
-新鮮	しんせん	na	4	영묘한 샘				u	b	
-しんどい	しんどい	adj	1	힘들다				u	b	
-しんどい	しんどい	adj	2	피곤하다				u	b	
 神妙	しんみょう	na	1	진지하다				u	wl	
 神妙	しんみょう	na	2	온순하다				u	b	
 神妙	しんみょう	na	3	신기하다				u	b	
@@ -745,8 +639,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 地道	じみち	na	2	충실하다				u	b	
 柔軟	じゅうなん	na	1	유연하다				u	b	
 柔軟	じゅうなん	na	2	유연				u	b	
-純粋	じゅんすい	na	1	순수하다				u	b	
-純粋	じゅんすい	na	2	순수				u	b	
 冗長	じょうちょう	na	1	장황				u	b	
 冗長	じょうちょう	na	2	장황하다				u	b	
 冗長	じょうちょう	na	3	정조				u	b	
@@ -768,29 +660,17 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 清々しい	すがすがしい	adj	2	시원하다				u	b	
 すげない	すげない	adj	1	냉정하다				u	b	
 健やか	すこやか	na	1	건강하다				u	b	
-凄まじい	すさまじい	adj	1	굉장하다				u	b	
-凄まじい	すさまじい	adj	2	어이없다				u	b	
-凄まじい	すさまじい	adj	3	무섭다				u	b	
 すすどい	すすどい	adj	1	민첩하다				u	b	
 すばしこい	すばしこい	adj	1	재빠르다				u	b	
 すばしこい	すばしこい	adj	2	민첩하다				u	b	
-素早い	すばやい	adj	1	재빠르다				u	w	
-素早い	すばやい	adj	2	민첩하다				u	w	
-素早い	すばやい	adj	3	아주 빠르다				u	b	
 すべすべ	すべすべ	na	1	매끌매끌한	next=の			u	b	
 滑っこい	すべっこい	adj	1	매끄럽다				u	b	
 滑っこい	すべっこい	adj	2	미끄럽다				u	b	
-鋭い	するどい	adj	1	예리하다				u	b	
-鋭い	するどい	adj	2	날카롭다				u	b	
 擦れ擦れ	すれすれ	na	1	아슬아슬하다				u	b	
 擦れ擦れ	すれすれ	na	2	아슬아슬한	next=の			u	b	
-図々しい	ずうずうしい	adj	1	뻔뻔하다				u	w	
-図々しい	ずうずうしい	adj	2	뻔뻔스럽다				u	b	
 ずたずた	ずたずた	na	1	갈기갈기				u	b	
 図太い	ずぶとい	adj	1	유들유들하다				u	b	
 図太い	ずぶとい	adj	2	넉살좋다				u	b	
-狡い	ずるい	adj	1	치사하다				u	wl	
-狡い	ずるい	adj	2	교활하다				u	b	
 狡賢い	ずるがしこい	adj	1	교활하다				u	b	
 精悍	せいかん	na	1	다부지다				u	wl	
 精悍	せいかん	na	2	정한				u	w	
@@ -812,7 +692,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 せせこましい	せせこましい	adj	2	비좁다				u	b	
 切	せつ	na	1	설				u	b	
 切	せつ	na	2	절				u	b	
-切ない	せつない	adj	1	안타깝다				u	b	
 狭苦しい	せまくるしい	adj	1	옹색하다				u	b	
 狭苦しい	せまくるしい	adj	2	비좁아서 답답하다				u	b	
 忙しい	せわしい	adj	1	바쁘다				u	b	
@@ -839,10 +718,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 速急	そっきゅう	na	1	급속				u	w	
 速急	そっきゅう	na	2	속구				u	b	
 そっくり	そっくり	na	1	꼭 닮다	after=と			u	b	rule:1551 +unmapped
-素っ気ない	そっけない	adj	1	쌀쌀맞다				u	wl	
-素っ気ない	そっけない	adj	2	뚝뚝하다				u	w	
-素っ気ない	そっけない	adj	3	무정하다				u	b	
-素っ気ない	そっけない	adj	4	매정하다				u	b	
 粗末	そまつ	na	1	허술하다				u	b	
 空恐ろしい	そらおそろしい	adj	1	어쩐지 두렵다				u	b	
 空恐ろしい	そらおそろしい	adj	2	어쩐지 무섭다				u	b	
@@ -870,14 +745,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 たどたどしい	たどたどしい	adj	1	더듬거리다				u	b	
 頼み少ない	たのみすくない	adj	1	믿을 수 없다				u	b	
 頼み少ない	たのみすくない	adj	2	불안하다				u	b	
-頼もしい	たのもしい	adj	1	믿음직하다				u	w	
-頼もしい	たのもしい	adj	2	믿음직스럽다				u	w	
 容易い	たやすい	adj	1	손쉽다				u	wl	
 容易い	たやすい	adj	2	용이하다				u	w	
-頼り無い	たよりない	adj	1	불안하다				u	wl	
-頼り無い	たよりない	adj	2	믿음직스럽지 못하다				u	b	
-怠い	だるい	adj	1	느슨하다				u	b	
-怠い	だるい	adj	2	나른하다				u	b	
 たわいない	たわいない	adj	1	정신이 없다				u	b	
 たわわ	たわわ	na	1	휘어있다				u	b	
 だだっ広い	だだっぴろい	adj	1	휑하니 넓다				u	w	
@@ -888,9 +757,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 だらし無い	だらしない	adj	2	단정하지 못하다				u	b	
 近しい	ちかしい	adj	1	가깝다				u	wl	
 近しい	ちかしい	adj	2	친하다				u	b	
-力強い	ちからづよい	adj	1	힘차다				u	wl	
-力強い	ちからづよい	adj	2	강력하다				u	b	
-力強い	ちからづよい	adj	3	마음 든든하다				u	b	
 ちぐはぐ	ちぐはぐ	na	1	짝짝이				u	b	
 ちぐはぐ	ちぐはぐ	na	2	조화가 잘 안 되다				u	b	
 乳臭い	ちちくさい	adj	1	젖내나다				u	b	
@@ -931,9 +797,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 手重い	ておもい	adj	1	정중하다				u	b	
 手軽い	てがるい	adj	1	손쉽다				u	b	
 手軽い	てがるい	adj	2	간편하다				u	b	
-手軽	てがる	na	1	손쉽다				u	b	
-手軽	てがる	na	2	간편함				u	b	
-手軽	てがる	na	3	간편하다				u	b	
 適宜	てきぎ	na	1	적절하다				u	b	
 適宜	てきぎ	na	2	적당하다				u	b	
 適宜	てきぎ	na	3	적당				u	b	
@@ -959,7 +822,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 刺々しい	とげとげしい	adj	1	가시 돋치다				u	wl	
 刺々しい	とげとげしい	adj	2	험악하다				u	b	
 訥々	とつとつ	na	1	더듬더듬	next=と			u	b	
-乏しい	とぼしい	adj	1	부족하다				u	b	
 取々	とりどり	na	1	각양각색				u	b	
 とろい	とろい	adj	1	약하다				u	b	
 とろい	とろい	adj	2	둔하다				u	b	
@@ -985,8 +847,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 和やか	なごやか	na	1	온화하다				u	wl	
 和やか	なごやか	na	2	포근하다				u	b	
 和やか	なごやか	na	3	부드럽다				u	b	
-情けない	なさけない	adj	1	한심하다				u	b	
-情けない	なさけない	adj	2	무정하다				u	b	
 情け深い	なさけぶかい	adj	1	인정이 많다				u	w	
 馴染み深い	なじみぶかい	adj	1	아주 친숙하다				u	b	
 馴染み深い	なじみぶかい	adj	2	친숙하다				u	b	
@@ -1016,7 +876,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 悩ましい	なやましい	adj	1	괴롭다				u	b	
 なよやか	なよやか	na	1	나긋나긋하다				u	b	
 並び無い	ならびない	adj	1	유례없다				u	w	
-馴れ馴れしい	なれなれしい	adj	1	허물없다				u	w	
 似合わしい	にあわしい	adj	1	어울리다				u	wl	
 似合わしい	にあわしい	adj	2	잘 어울리다				u	b	
 似合わしい	にあわしい	adj	3	적합하다				u	b	
@@ -1030,17 +889,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 憎たらしい	にくたらしい	adj	2	밉살스럽다				u	b	
 憎々しい	にくにくしい	adj	1	밉살맞다				u	w	
 憎々しい	にくにくしい	adj	2	몹시 밉살스럽다				u	b	
-憎らしい	にくらしい	adj	1	얄밉다				u	b	
 にこやか	にこやか	na	1	상냥하다				u	b	
 似付かわしい	につかわしい	adj	1	어울리다				u	wl	
 似付かわしい	につかわしい	adj	2	적합하다				u	b	
-鈍い	にぶい	adj	1	둔하다				u	b	
-鈍い	にぶい	adj	2	느리다				u	b	
-鈍い	にぶい	adj	3	흐릿하다	next=光|輝く|光沢			u	x	senses
-鈍い	にぶい	adj	4	흐릿하다	arg=光|輝く|光沢			u	x	senses
-鈍い	にぶい	adj	5	둔탁하다	next=音|衝撃音|打撃音|金属音|響き|衝撃			u	x	senses
-鈍い	にぶい	adj	6	둔탁하다	arg=音|金属音|響き			u	x	senses
-鈍い	にぶい	adj	7	둔탁하다	next=音|響き|衝撃			u	x	senses
 俄か	にわか	na	1	졸지				u	w	
 俄か	にわか	na	2	아				u	w	
 俄か	にわか	na	3	갑작스럽다				u	wl	
@@ -1079,12 +930,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 野太い	のぶとい	adj	2	대담하다				u	b	
 鈍い	のろい	adj	1	느리다				u	b	
 のろま	のろま	na	1	굼벵이				u	b	
-暢気	のんき	na	1	태평				u	b	
-暢気	のんき	na	2	태평하다				u	b	
-暢気	のんき	na	3	한가하다				u	b	
-儚い	はかない	adj	1	무상하다				u	b	
-儚い	はかない	adj	2	덧없다				u	b	
-儚い	はかない	adj	3	입지 않다				u	b	
 捗々しい	はかばかしい	adj	1	순조롭다				u	w	
 歯痒い	はがゆい	adj	1	안타깝다				u	b	
 歯痒い	はがゆい	adj	2	답답하다				u	b	
@@ -1094,7 +939,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 甚だしい	はなはだしい	adj	1	심하다				u	w	
 華々しい	はなばなしい	adj	1	휼륭하다				u	w	
 華々しい	はなばなしい	adj	2	화려하다				u	w	
-華やか	はなやか	na	1	화려하다				u	b	
 幅広い	はばひろい	adj	1	폭넓다				u	b	
 腹穢い	はらぎたない	adj	1	마음이 나쁘다				u	w	
 腹穢い	はらぎたない	adj	2	심보가 더럽다				u	b	
@@ -1105,9 +949,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 腫れぼったい	はれぼったい	adj	1	부석부석하다				u	b	
 晴れやか	はれやか	na	1	화려하다				u	b	
 晴れやか	はれやか	na	2	밝다				u	b	
-馬鹿馬鹿しい	ばかばかしい	adj	1	어처구니없다				u	w	
-馬鹿馬鹿しい	ばかばかしい	adj	2	우스꽝스럽다				u	w	
-馬鹿馬鹿しい	ばかばかしい	adj	3	어이없다				u	b	
 漠然	ばくぜん	na	1	막연히				u	wl	
 漠然	ばくぜん	na	2	막연				u	b	
 漠然	ばくぜん	na	3	막연하다				u	b	
@@ -1148,8 +989,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 頻繁	ひんぱん	na	2	빈번하다				u	b	
 頻繁	ひんぱん	na	3	번민				u	b	
 美々しい	びびしい	adj	1	아름답다				u	w	
-微妙	びみょう	na	1	미묘				u	w	
-微妙	びみょう	na	2	미묘하다				u	wl	
 ぴったり	ぴったり	na	1	딱				u	wl	
 ぴったり	ぴったり	na	2	딱 맞다				u	b	
 ぴったり	ぴったり	na	3	꼭 맞다				u	b	
@@ -1164,10 +1003,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 福々しい	ふくぶくしい	adj	1	복스럽다				u	w	
 膨よか	ふくよか	na	1	포근하다				u	b	
 膨よか	ふくよか	na	2	포동포동하다				u	b	
-相応しい	ふさわしい	adj	1	걸맞다				u	wl	
-相応しい	ふさわしい	adj	2	적격이다				u	b	
-相応しい	ふさわしい	adj	3	적합하다				u	b	
-相応しい	ふさわしい	adj	4	적당하다				u	b	
 不確か	ふたしか	na	1	불확실하다				u	b	
 不確か	ふたしか	na	2	애매하다				u	b	
 不束	ふつつか	na	1	무례하다				u	b	
@@ -1202,7 +1037,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 程良い	ほどよい	adj	2	적당하다				u	b	
 仄か	ほのか	na	1	희미하다				u	b	
 仄か	ほのか	na	2	은은하다				u	b	
-微笑ましい	ほほえましい	adj	1	흐뭇하다				u	w	
 ほやほや	ほやほや	na	1	말랑말랑				u	b	
 ほやほや	ほやほや	na	2	따끈따끈한	next=の			u	b	
 ほろ苦い	ほろにがい	adj	1	씁쓰레하다				u	b	
@@ -1224,9 +1058,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 紛らわしい	まぎらわしい	adj	2	혼동하기 쉽다				u	b	
 紛らわしい	まぎらわしい	adj	3	헷갈리기 쉽다				u	b	
 増し	まし	na	1	좋다				u	b	
-貧しい	まずしい	adj	1	가난하다				u	b	
-貧しい	まずしい	adj	2	궁핍하다				u	b	
-貧しい	まずしい	adj	3	부족하다				u	b	rule:933 +unmapped
 まだるい	まだるい	adj	1	답답하다				u	b	
 まだるっこい	まだるっこい	adj	1	답답하다				u	b	
 待ち遠しい	まちどおしい	adj	1	기다려지다				u	wl	
@@ -1234,17 +1065,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 待ち遠しい	まちどおしい	adj	3	몹시 기다려 지다				u	b	
 まちまち	まちまち	na	1	가지각색				u	b	
 間近い	まぢかい	adj	1	아주 가깝다				u	b	
-真っ暗	まっくら	na	1	깜깜하다				u	w	
-真っ暗	まっくら	na	2	암흑				u	w	
-真っ暗	まっくら	na	3	캄캄하다				u	b	
-真っ黒	まっくろ	na	1	새까맣다				u	w	
-真っ黒	まっくろ	na	2	새까만	next=の			u	w	
 真っさら	まっさら	na	1	신품				u	b	
 真っ白い	まっしろい	adj	1	희디희다				u	w	
-真っ白	まっしろ	na	1	순백				u	w	
-真っ白	まっしろ	na	2	백지				u	wl	
-真っ白	まっしろ	na	3	새하얗다				u	w	
-真っ白	まっしろ	na	4	새하얀	next=の			u	b	
 真っ直ぐ	まっすぐ	na	1	곧다				u	b	
 真っ直ぐ	まっすぐ	na	2	꼿꼿하다				u	b	
 真っ直ぐ	まっすぐ	na	3	곧바로				u	b	
@@ -1258,7 +1080,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 眩い	まばゆい	adj	2	눈부실 정도이다				u	b	
 疎ら	まばら	na	1	드문드문하다				u	wl	
 疎ら	まばら	na	2	드물다				u	b	rule:5075 +unmapped
-眩しい	まぶしい	adj	1	눈부시다				u	b	
 まめ	まめ	na	1	부지런하다			name=+	u	b	
 まめやか	まめやか	na	1	충실하다				u	b	
 稀	まれ	na	1	보기 드물다				u	b	
@@ -1274,7 +1095,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 身軽	みがる	na	1	날렵하다				u	wl	
 身軽	みがる	na	2	간편하다				u	wl	
 身軽	みがる	na	3	홀가분하다				u	wl	
-見苦しい	みぐるしい	adj	1	보기 흉하다				u	b	
 惨め	みじめ	na	1	비참하다				u	b	
 見窄らしい	みすぼらしい	adj	1	험하다				u	w	
 見窄らしい	みすぼらしい	adj	2	초라하다				u	b	
@@ -1376,13 +1196,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 悠々	ゆうゆう	na	1	유유히				u	b	
 床しい	ゆかしい	adj	1	그윽하다				u	b	
 床しい	ゆかしい	adj	2	옛일이 그립다				u	b	
-豊か	ゆたか	na	1	풍부하다				u	b	
-豊か	ゆたか	na	2	풍				u	b	
-豊か	ゆたか	na	3	풍부				u	b	
 由々しい	ゆゆしい	adj	1	심각하다				u	wl	
 由々しい	ゆゆしい	adj	2	중대하다				u	b	
-緩い	ゆるい	adj	1	느슨하다				u	b	
-緩い	ゆるい	adj	2	완만하다				u	b	
 忽せ	ゆるがせ	na	1	소홀함				u	b	
 緩やか	ゆるやか	na	1	완만하다				u	b	
 緩々	ゆるゆる	na	1	천천히	next=と			u	b	
@@ -1394,14 +1209,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 よれよれ	よれよれ	na	1	구깃구깃하다				u	b	
 喜ばしい	よろこばしい	adj	1	즐겁다				u	b	
 喜ばしい	よろこばしい	adj	2	기쁘다				u	b	
-弱々しい	よわよわしい	adj	1	힘없다				u	wl	
-弱々しい	よわよわしい	adj	2	연약하다				u	b	
-弱々しい	よわよわしい	adj	3	허약하다				u	b	
-弱々しい	よわよわしい	adj	4	약하다				u	b	
 利口	りこう	na	1	영리하다				u	b	
 流暢	りゅうちょう	na	1	유창하다				u	b	
 流暢	りゅうちょう	na	2	유창				u	b	
-凛々しい	りりしい	adj	1	늠름하다				u	b	
 麗々しい	れいれいしい	adj	1	번지르르하다				u	w	
 麗々しい	れいれいしい	adj	2	요란하다				u	w	
 猥褻	わいせつ	na	1	외설				u	b	
@@ -1754,10 +1564,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 ワイルド	わいるど	na	1	와일드				u	b	
 上々	じょうじょう	na	1	최상				u	b	
 上がったり	あがったり	na	1	형편없다				u	b	
-上品	じょうひん	na	1	품위있다				u	b	
 下劣	げれつ	na	1	비열				u	b	
 下劣	げれつ	na	2	비열하다				u	b	
-下品	げひん	na	1	천하다				u	b	
 不揃い	ふぞろい	na	1	들쭉날쭉				u	wl	
 不揃い	ふぞろい	na	2	미비				u	b	
 不揃い	ふぞろい	na	3	고르지 않다				u	b	
@@ -1876,8 +1684,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 単一	たんいつ	na	1	단일				u	b	
 単独	たんどく	na	1	단독				u	b	
 単独	たんどく	na	2	단독으로	next=で			u	b	
-単純	たんじゅん	na	1	단순하다				u	b	
-単純	たんじゅん	na	2	단순				u	b	
 厚め	あつめ	na	1	도톰하다				u	b	
 厳い	いかい	adj	1	대단하다				u	b	
 厳い	いかい	adj	2	위엄있다				u	b	
@@ -1908,12 +1714,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 同一	どういつ	na	1	동일하다				u	b	
 同一	どういつ	na	2	동일				u	b	
 同一	どういつ	na	3	동일한	next=の			u	b	
-同様	どうよう	na	1	같이				u	b	
-同様	どうよう	na	2	같다				u	b	
-同様	どうよう	na	3	같은 모양				u	b	
-同様	どうよう	na	4	동양				u	c+np	from-names
-同様	どうよう	na	5	마찬가지	after=も			u	b	rule:4078 +unmapped assigns-neighbour
-同様	どうよう	na	6	같은	next=の			u	b	rule:233 +unmapped assigns-neighbour
 同等	どうとう	na	1	동등하다				u	b	
 名高い	なだかい	adj	1	유명하다				u	b	
 周到	しゅうとう	na	1	주도하다				u	b	
@@ -1926,7 +1726,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 唐突	とうとつ	na	3	당돌하다				u	b	
 唖然	あぜん	na	1	아연				u	w	
 唖然	あぜん	na	2	아연하게				u	w	
-器用	きよう	na	1	손재주가 있다				u	b	
 囂々	ごうごう	na	1	떠들썩하다				u	w	
 因業	いんごう	na	1	업보				u	b	
 地厚	じあつ	na	1	직물의 두께				u	b	
@@ -1958,9 +1757,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 多様	たよう	na	2	다양				u	b	
 多難	たなん	na	1	다난				u	b	
 多難	たなん	na	2	다난하다				u	b	
-夢中	むちゅう	na	1	꿈 속				u	b	
-夢中	むちゅう	na	2	열중하다				u	b	
-夢中	むちゅう	na	3	반하다				u	b	rule:3923 +unmapped
 大掛かり	おおがかり	na	1	대규모이다				u	b	
 大掛かり	おおがかり	na	2	대대적이다				u	b	
 大掛かり	おおがかり	na	3	대규모				u	b	
@@ -1977,12 +1773,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 大様	おおよう	na	1	의젓하다				u	b	
 大甘	おおあま	na	1	낙관적이다				u	b	
 大真面目	おおまじめ	na	1	아주 진지하다				u	b	
-大胆	だいたん	na	1	대담하다				u	b	
-大胆	だいたん	na	2	대담				u	b	
 太め	ふとめ	na	1	굵은 편				u	b	
 太め	ふとめ	na	2	굵은 듯한	next=の			u	b	
-奇妙	きみょう	na	1	기묘하다				u	b	
-奇妙	きみょう	na	2	기묘				u	b	
 奔放	ほんぽう	na	1	분방하다				u	b	
 奔放	ほんぽう	na	2	분방				u	b	
 奥深い	おくふかい	adj	1	깊다				u	b	
@@ -2069,8 +1861,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 廉価	れんか	na	1	염가				u	b	
 弱め	よわめ	na	1	약세				u	b	
 弱め	よわめ	na	2	약한	next=の			u	b	
-強力	きょうりょく	na	1	강력하다				u	b	
-強力	きょうりょく	na	2	강력				u	b	
 強引	ごういん	na	1	강행				u	b	
 強烈	きょうれつ	na	1	강렬하다				u	b	
 強烈	きょうれつ	na	2	강렬				u	c+np	from-names
@@ -2123,7 +1913,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 慧敏	けいびん	na	1	슬기롭다				u	b	
 憂わしい	うれわしい	adj	1	걱정스럽다				u	b	
 憂わしい	うれわしい	adj	2	한심스럽다				u	b	
-憎い	にくい	adj	1	밉다				u	b	
 憎体	にくてい	na	1	밉살스럽다				u	b	
 憤ろしい	いきどおろしい	adj	1	화가 나 참을 수 없다				u	b	
 憤然	ふんぜん	na	1	분연				u	w	
@@ -2163,15 +1952,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 明朗	めいろう	na	2	명랑				u	b	
 明白	めいはく	na	1	명백하다				u	b	
 明白	めいはく	na	2	명백				u	b	
-明確	めいかく	na	1	명확하다				u	b	
-明確	めいかく	na	2	명확				u	b	
 晴れがましい	はれがましい	adj	1	화려하다				u	b	
 暗然	あんぜん	na	1	암연				u	w	
 月並み	つきなみ	na	1	진부하다				u	b	
 月並み	つきなみ	na	2	월례				u	b	
-有利	ゆうり	na	1	유리하다				u	b	
-有利	ゆうり	na	2	유리				u	b	
-有利	ゆうり	na	3	유리하다고	next=と			u	b	
 有力	ゆうりょく	na	1	유력하다				u	b	
 有力	ゆうりょく	na	2	유력				u	b	
 有効	ゆうこう	na	1	유효하다				u	b	
@@ -2221,8 +2005,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 気丈	きじょう	na	1	다부지다				u	b	
 気持ちい	きもちい	adj	1	기분이 좋다				u	b	
 気早い	きばやい	adj	1	성급하다				u	b	
-気楽	きらく	na	1	마음 편하다				u	b	
-気楽	きらく	na	2	느긋함				u	b	
 気短	きみじか	na	1	성급하다				u	b	
 気短	きみじか	na	2	조급함				u	b	
 気長	きなが	na	1	느긋함				u	b	
@@ -2249,8 +2031,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 淡々	たんたん	na	1	담담하다				u	w	
 淡々	たんたん	na	2	담담				u	w	
 淡々	たんたん	na	3	담담하게	next=と			u	b	
-深刻	しんこく	na	1	심각하다				u	b	
-深刻	しんこく	na	2	심각				u	b	
 深長	しんちょう	na	1	심장				u	b	
 清か	さやか	na	1	뚜렷하다				u	b	
 清らか	きよらか	na	1	맑고 깨끗하다				u	b	
@@ -2293,11 +2073,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 物的	ぶってき	na	2	물적이다				u	b	
 物臭い	ものぐさい	adj	1	귀찮다				u	w	
 物遠い	ものどおい	adj	1	소원하다				u	b	
-物騒	ぶっそう	na	1	위험하다				u	wl	
-物騒	ぶっそう	na	2	뒤숭숭하다				u	b	
 特有	とくゆう	na	1	특유				u	b	
-特殊	とくしゅ	na	1	특수하다				u	b	
-特殊	とくしゅ	na	2	특수				u	b	
 犀利	さいり	na	1	예리				u	b	
 犬好き	いぬずき	na	1	개를 좋아하는	next=の			u	b	
 狂暴	きょうぼう	na	1	광포하다				u	b	
@@ -2305,11 +2081,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 狂暴	きょうぼう	na	3	광폭				u	c+np	from-names
 狡猾	こうかつ	na	1	교활하다				u	b	
 狡猾	こうかつ	na	2	교활				u	c+np	from-names
-独特	どくとく	na	1	독습				u	b	
-独特	どくとく	na	2	독특하다				u	b	
-独特	どくとく	na	3	독특				u	b	
-独特	どくとく	na	4	독특한	next=の			u	b	
-独特	どくとく	na	5	특유의	next=の			u	b	rule:4142 +unmapped
 独自	どくじ	na	1	독자				u	b	
 独自	どくじ	na	2	독자적인	next=の			u	b	
 猛烈	もうれつ	na	1	맹렬하다				u	b	
@@ -2348,9 +2119,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 直截	ちょくせつ	na	1	직재				u	b	
 真摯	しんし	na	1	진지하다				u	wl	
 真摯	しんし	na	2	진지				u	b	
-真っ赤	まっか	na	1	빨강				u	w	
-真っ赤	まっか	na	2	메카				u	w	
-真っ赤	まっか	na	3	새빨갛다				u	b	
 真率	しんそつ	na	1	진솔하다				u	b	
 真率	しんそつ	na	2	진솔				u	b	
 着実	ちゃくじつ	na	1	착실하다				u	b	
@@ -2475,8 +2243,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 誇大	こだい	na	2	과대				u	b	
 諄々	じゅんじゅん	na	1	차례차례				u	w	
 論外	ろんがい	na	1	논외				u	b	
-豊富	ほうふ	na	1	풍부하다				u	b	
-豊富	ほうふ	na	2	풍부				u	b	
 豪壮	ごうそう	na	1	크고 호화롭다				u	b	
 豪快	ごうかい	na	1	호쾌				u	b	
 豪快	ごうかい	na	2	호쾌하다				u	b	
@@ -2510,8 +2276,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 迅速	じんそく	na	1	신속하다				u	b	
 迅速	じんそく	na	2	신속				u	b	
 近め	ちかめ	na	1	가까움				u	b	
-透明	とうめい	na	1	투명하다				u	b	
-透明	とうめい	na	2	투명				u	b	
 速やか	すみやか	na	1	조속하다				u	b	
 連綿	れんめん	na	1	연면				u	b	
 連綿	れんめん	na	2	길게 연속				u	b	
@@ -2526,8 +2290,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 過酷	かこく	na	1	가혹하다				u	b	
 遠め	とおめ	na	1	멀리서 봄				u	b	
 遠遠しい	とおとおしい	adj	1	매우 멀다				u	b	
-適切	てきせつ	na	1	적절하다				u	b	
-適切	てきせつ	na	2	적절				u	b	
 適度	てきど	na	1	적당				u	b	
 適度	てきど	na	2	적당하다				u	b	
 遺憾	いかん	na	1	유감스럽다				u	b	
@@ -2537,7 +2299,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 酒臭い	さけくさい	adj	1	술내가 나다				u	b	
 酷	こく	na	1	가혹하다				u	b	
 酸い	すい	adj	1	시다				u	b	
-醜い	みにくい	adj	1	추악하다				u	b	
 釈然	しゃくぜん	na	1	석연				u	b	
 重たい	おもたい	adj	1	무겁다				u	b	
 重たるい	おもたるい	adj	1	어쩐지 느른하다				u	b	
@@ -2563,8 +2324,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 陽気	ようき	na	2	밝다				u	b	
 隠然	いんぜん	na	1	은연				u	b	
 雄大	ゆうだい	na	1	웅대			name=+	u	b	
-雑	ざつ	na	1	엉성하다				u	b	
-雑	ざつ	na	2	대강	next=と			u	b	
 雑多	ざった	na	1	잡다하다				u	b	
 雑多	ざった	na	2	잡다				u	c+np	from-names
 難い	かたい	adj	1	어렵다				u	b	rule:1420 +unmapped
@@ -2581,8 +2340,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 非凡	ひぼん	na	2	비범				u	b	
 順当	じゅんとう	na	1	당연하다				u	b	
 順当	じゅんとう	na	2	당연				u	b	
-順調	じゅんちょう	na	1	순조롭다				u	b	
-順調	じゅんちょう	na	2	순조				u	b	
 頑丈	がんじょう	na	1	튼튼하다				u	b	
 頑強	がんきょう	na	1	완강하다				u	b	
 風変わり	ふうがわり	na	1	이색적이다				u	w	

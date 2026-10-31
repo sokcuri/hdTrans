@@ -33,7 +33,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 物	もの	n	1	것			cls=@entity	r	r	食べるもの → 먹는 것
 物	もの	n	2	물건	pred=買う|探す			r	r	物を買う → 물건을 사다
 呉れる	くれる	v1	1	주다			vol=+ asp=change te=go	r	r	友達が本をくれる → 친구가 책을 주다
-人	ひと	n	1	사람			anim=+ cls=@person	r	r	優しい人 → 상냥한 사람
+人	ひと	n	1	사람			anim=+ cls=@person|@counter	r	r	優しい人 → 상냥한 사람
 今	いま	n	1	지금			cls=@time ni=-	r	r	今、行く → 지금 가다
 此処	ここ	n	1	여기			cls=@place	r	r	ここに来る → 여기에 오다
 一寸	ちょっと	adv	1	좀				r	r	ちょっと高い → 좀 비싸다
@@ -58,8 +58,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 前	まえ	n	1	앞			cls=@direction|@time|@position name=+	r	r	駅の前 → 역 앞
 前	まえ	n	2	전	mod=@time|@period|@number|@quantity|@event			r	r	三年前 → 3년 전
 有り難う	ありがとう	intj	1	고마워				r	r	ありがとう → 고마워
-待つ	まつ	v5	1	기다리다			vol=+ asp=activity te=go	r	r	友達を待つ → 친구를 기다리다
-知る	しる	v5	1	알다			vol=- asp=change neg=모르다 te=simple	r	r	答えを知る → 답을 알다
 音	おと	n	1	소리			cls=@sound	r	r	大きな音 → 큰 소리
 今日	きょう	n	1	오늘			cls=@time ni=-	r	r	今日行く → 오늘 가다
 誰	だれ	n	1	누구			cls=@question anim=+	r	r	誰が来た → 누가 왔다
@@ -72,7 +70,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 何時	いつ	n	1	언제			cls=@time ni=-	r	r	いつ来ますか → 언제 와요
 此方	こちら	n	1	이쪽			cls=@direction	r	r	こちらへどうぞ → 이쪽으로 오세요
 大丈夫	だいじょうぶ	na	1	괜찮다				r	r	大丈夫ですか → 괜찮아요
-年	ねん	n	1	년			cls=@period num=sino	r	r	三年前 → 3년 전
+年	ねん	n	1	년			num=sino cls=@period|@counter	r	r	三年前 → 3년 전
 年	ねん	n	2	학년	next=生			r	r	1年生 → 1학년
 手	て	n	1	손			cls=@body|@hand	r	r	手を洗う → 손을 씻다
 手	て	n	2	수	pred=指す|読む			r	r	次の手を読む → 다음 수를 읽다
@@ -129,10 +127,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 駄目	だめ	n	2	형편없다	head=@person			r	r	駄目な人 → 형편없는 사람
 声	こえ	n	1	목소리			cls=@sound	r	r	大きな声 → 큰 목소리
 声	こえ	n	2	소리	pred=上げる|殺す			r	r	声を上げる → 소리를 내다
-頂く	いただく	v5	1	받다			vol=+ asp=change te=past	r	r	お土産を頂く → 선물을 받다
-頂く	いただく	v5	2	먹다	obj=@food|@meal			r	r	ご飯を頂く → 밥을 먹다
 死ぬ	しぬ	v5	1	죽다			vol=- asp=change te=eo	r	r	犬が死ぬ → 개가 죽다
-人	にん	suf	1	명			num=native cls=@person	r	r	三人 → 세 명
+人	にん	suf	1	명			num=native cls=@person|@counter	r	r	三人 → 세 명
 人	にん	suf	2	인	next=分			r	r	十人分 → 10인분
 良く	よく	adv	1	잘				r	r	よく聞け → 잘 들어
 良く	よく	adv	2	자주	pred=来る|行く			r	r	よく来る → 자주 오다
@@ -154,12 +150,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 どうぞ	どうぞ	adv	1	어서				r	r	どうぞ入って → 어서 들어와
 どうぞ	どうぞ	adv	2	부디	pred=願う|許す			r	r	どうぞ許して → 부디 용서해
 女	おんな	n	1	여자			anim=+ cls=@person	r	r	女が来る → 여자가 오다
-会う	あう	v5	1	만나다		に=을	vol=+ asp=change te=go	r	r	友達に会う → 친구를 만나다
-会う	あう	v5	2	당하다	dat=@incident|@trouble|@damage			r	r	事故に遭う → 사고를 당하다
 然し	しかし	conj	1	하지만				r	r	しかし、違う → 하지만 아니다
 美味しい	おいしい	adj	1	맛있다				r	r	美味しい料理 → 맛있는 요리
 美味しい	おいしい	adj	2	짭짤하다	head=仕事|商売			r	r	美味しい仕事 → 짭짤한 일
-呼ぶ	よぶ	v5	1	부르다			vol=+ asp=activity te=go	r	r	名前を呼ぶ → 이름을 부르다
 欲しい	ほしい	adj	1	갖고 싶다		が=을		r	r	本が欲しい → 책을 갖고 싶다
 姉	ねえ	n	1	언니			anim=+ lu cls=@person.kin|@person	r	r	姉が来る → 언니가 오다
 花	はな	n	1	꽃			cls=@plant name=+	r	r	花が咲く → 꽃이 피다
@@ -169,8 +162,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 宜しく	よろしく	adv	1	잘				r	r	よろしく伝える → 잘 전하다
 宜しく	よろしく	adv	2	잘 부탁하다	pred=-			r	r	よろしく → 잘 부탁해
 若し	もし	adv	1	만약				r	r	もし来たら → 만약 오면
-忘れる	わすれる	v1	1	잊다			vol=- asp=change te=go	r	r	約束を忘れる → 약속을 잊다
-忘れる	わすれる	v1	2	까먹다	register=casual			r	r	宿題を忘れた → 숙제를 까먹었다
 先	さき	n	1	앞			cls=@direction	r	r	先に進む → 앞으로 나아가다
 先	さき	n	2	먼저	next=に			r	r	先に行く → 먼저 가다
 先	さき	n	3	끝	mod=@object.long|@body			r	r	指の先 → 손가락 끝
@@ -179,8 +170,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 もっと	もっと	adv	1	더				r	r	もっと食べる → 더 먹다
 ずっと	ずっと	adv	1	계속			lu	r	r	ずっと待つ → 계속 기다리다
 ずっと	ずっと	adv	2	훨씬	after=より			r	r	彼よりずっと大きい → 그보다 훨씬 크다
-書く	かく	v5	1	쓰다			vol=+ asp=activity te=go	r	r	手紙を書く → 편지를 쓰다
-書く	かく	v5	2	그리다	obj=@picture|@shape|線			r	r	絵を書く → 그림을 그리다
 金	かね	n	1	돈			lu cls=@money name=+	r	r	金がない → 돈이 없다
 娘	むすめ	n	1	딸			cls=@person.kin anim=+	r	r	娘が二人いる → 딸이 둘 있다
 娘	むすめ	n	2	아가씨	mod=若い|年頃			r	r	若い娘 → 젊은 아가씨
@@ -203,11 +192,10 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 頃	ころ	n	1	무렵			cls=@time	r	r	あの頃 → 그 무렵
 頃	ころ	n	2	시절	mod=若い|幼い			r	r	若い頃 → 젊은 시절
 頃	ころ	n	3	쯤	after=@time|@period|@number			r	r	三時頃 → 3시쯤
-始める	はじめる	v1	1	시작하다			vol=+ asp=change te=past	r	r	勉強を始める → 공부를 시작하다
 間	あいだ	n	1	동안			cls=@period name=+	r	r	留守の間 → 집을 비운 동안
 間	あいだ	n	2	사이	mod=@person|@group|@place|@body			r	r	二人の間 → 두 사람 사이
 何故	なぜ	adv	1	왜				r	r	なぜ来た → 왜 왔어
-意味	いみ	n	1	의미			cls=@abstract	r	r	意味がない → 의미가 없다
+意味	いみ	n	1	의미			cls=@abstract|@truth	r	r	意味がない → 의미가 없다
 強い	つよい	adj	1	강하다				r	r	強い人 → 강한 사람
 強い	つよい	adj	2	세다	subj=@weather|力|火			r	r	風が強い → 바람이 세다
 強い	つよい	adj	3	독하다	subj=酒|ウイスキー			r	r	酒が強い → 술이 독하다
@@ -222,11 +210,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 方	かた	n	2	들	after=@person			r	r	先生方 → 선생님들
 体	からだ	n	1	몸			cls=@body	r	r	体が痛い → 몸이 아프다
 どんな	どんな	adn	1	어떤				r	r	どんな人 → 어떤 사람
-寝る	ねる	v1	1	자다			vol=+ asp=change te=go	r	r	夜に寝る → 밤에 자다
-寝る	ねる	v1	2	눕다	dat=@bedding|@furniture			r	r	ベッドに寝る → 침대에 눕다
-教える	おしえる	v1	1	알려 주다			vol=+ asp=activity te=go	r	r	道を教える → 길을 알려 주다
-教える	おしえる	v1	2	가르치다	obj=@subject.school|@skill|@language|@sport|@music|@magic|@rule			r	r	英語を教える → 영어를 가르치다
-終わり	おわり	n	1	끝			cls=@abstract	r	r	終わりだ → 끝이다
+終わり	おわり	n	1	끝			cls=@abstract|@endpoint|@to.end	r	r	終わりだ → 끝이다
 問題	もんだい	n	1	문제			cls=@question	r	r	問題がある → 문제가 있다
 今度	こんど	n	1	이번에			cls=@time ni=-	r	r	今度は勝つ → 이번에는 이기다
 今度	こんど	n	2	이번	next=の			r	r	今度の試合 → 이번 시합
@@ -286,7 +270,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 色々	いろいろ	adv	2	여러모로	pred=ありがとう|世話			r	r	色々ありがとう → 여러모로 고마워
 昔	むかし	n	1	옛날			cls=@period ni=-	r	r	昔の話 → 옛날 이야기
 勿論	もちろん	adv	1	물론				r	r	勿論だ → 물론이다
-歳	さい	suf	1	살			num=native	r	r	5歳 → 다섯 살
+歳	さい	suf	1	살			num=native cls=@counter	r	r	5歳 → 다섯 살
 新しい	あたらしい	adj	1	새롭다				r	r	新しい本 → 새 책
 何方	どちら	n	1	어느 쪽			cls=@direction|@side	r	r	どちらがいい → 어느 쪽이 좋다
 何方	どちら	n	2	어디	pred=行く|来る			r	r	どちらへ行く → 어디로 가다
@@ -302,7 +286,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 車	くるま	n	1	차			cls=@vehicle name=+	r	r	車に乗る → 차를 타다
 大変	たいへん	na	1	힘들다				r	r	仕事が大変だ → 일이 힘들다
 大変	たいへん	na	2	큰일	form=cop subj=-			r	r	大変だ！ → 큰일이다
-円	えん	n	1	엔			cls=@money num=sino name=+	r	r	百円 → 백 엔
+円	えん	n	1	엔			num=sino cls=@money|@counter name=+	r	r	百円 → 백 엔
 円	えん	n	2	원	pred=描く			r	r	円を描く → 원을 그리다
 遅い	おそい	adj	1	늦다				r	r	帰りが遅い → 귀가가 늦다
 遅い	おそい	adj	2	느리다	subj=@motion|@vehicle			r	r	反応が遅い → 반응이 느리다
@@ -310,21 +294,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 咲く	さく	v5	1	피다			vol=- asp=change te=eo	r	r	花が咲く → 꽃이 피다
 夏	なつ	n	1	여름			cls=@season name=+	r	r	夏が来る → 여름이 오다
 大好き	だいすき	na	1	정말 좋아하다		が=을		r	r	犬が大好きだ → 개를 정말 좋아하다
-決める	きめる	v1	1	정하다			vol=+ asp=change te=past	r	r	日を決める → 날짜를 정하다
-決める	きめる	v1	2	결정하다	obj=@result			r	r	結果を決める → 결과를 결정하다
 友達	ともだち	n	1	친구			anim=+ cls=@person.close|@person	r	r	友達と遊ぶ → 친구와 놀다
 写真	しゃしん	n	1	사진			cls=@picture	r	r	写真を撮る → 사진을 찍다
 分	ふん	n	1	분			cls=@duration num=sino	r	r	五分 → 5분
-困る	こまる	v5	1	곤란하다			vol=- asp=change te=simple	r	r	困ったな → 곤란하네
 負ける	まける	v1	1	지다			vol=- asp=change te=go	r	r	試合に負ける → 경기에서 지다
 負ける	まける	v1	2	깎아 주다	form=te-request			r	r	少し負けて → 좀 깎아 줘
 会社	かいしゃ	n	1	회사			cls=@organization	r	r	会社に行く → 회사에 가다
 生徒	せいと	n	1	학생			anim=+ cls=@person.role|@person	r	r	生徒が来る → 학생이 오다
-開ける	あける	v1	1	열다			vol=+ asp=change te=go	r	r	窓を開ける → 창문을 열다
-開ける	あける	v1	2	따다	obj=@bottle|ワイン			r	r	缶を開ける → 캔을 따다
-開ける	あける	v1	3	뚫다	obj=穴|孔			r	r	穴を開ける → 구멍을 뚫다
-開ける	あける	v1	4	비우다	obj=@duration|席|予定			r	r	時間を開ける → 시간을 비우다
-開ける	あける	v1	5	벌리다	obj=口			r	r	口を開ける → 입을 벌리다
 外	そと	n	1	밖			cls=@position	r	r	外に出る → 밖에 나가다
 長い	ながい	adj	1	길다				r	r	髪が長い → 머리가 길다
 あんな	あんな	adn	1	저런				r	r	あんな人 → 저런 사람
@@ -381,8 +357,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 捨てる	すてる	v1	1	버리다			vol=+ asp=change te=past	r	r	ゴミを捨てる → 쓰레기를 버리다
 ゆっくり	ゆっくり	adv	1	천천히				r	r	ゆっくり歩く → 천천히 걷다
 ゆっくり	ゆっくり	adv	2	푹	pred=休む|寝る			r	r	ゆっくり休む → 푹 쉬다
-送る	おくる	v5	1	보내다			vol=+ asp=change te=go	r	r	手紙を送る → 편지를 보내다
-送る	おくる	v5	2	바래다주다	obj=@person to=@place			r	r	家まで送る → 집까지 바래다주다
 主人	しゅじん	n	1	주인			cls=@person.role anim=+	r	r	店の主人 → 가게 주인
 主人	しゅじん	n	2	남편	mod=私|うち			r	r	私の主人 → 우리 남편
 遊ぶ	あそぶ	v5	1	놀다			vol=+ asp=activity te=go	r	r	友達と遊ぶ → 친구와 놀다
@@ -411,16 +385,14 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 緑	みどり	n	1	초록			cls=@color name=+	r	r	緑の服 → 초록색 옷
 緑	みどり	n	2	미도리	next=さん|ちゃん			r	r	緑さん → 미도리 씨
 急ぐ	いそぐ	v5	1	서두르다			vol=+ asp=activity te=go	r	r	急いで行く → 서둘러 가다
-本	ほん	suf	1	개			num=native cls=@document	r	r	２本 → 두 개
+本	ほん	suf	1	개			num=native cls=@document|@counter	r	r	２本 → 두 개
 本	ほん	suf	2	병	head=@drink			r	r	ジュース１本 → 주스 한 병
 本	ほん	suf	3	자루	head=@writing.tool			r	r	鉛筆２本 → 연필 두 자루
 親	おや	n	1	부모			cls=@person.kin anim=+	r	r	親に話す → 부모님께 말씀드리다
 向こう	むこう	n	1	저쪽			cls=@direction|@position	r	r	向こうへ行く → 저쪽으로 가다
 向こう	むこう	n	2	너머	mod=@opening|@nature|@sky			r	r	山の向こう → 산 너머
 向こう	むこう	n	3	건너편	mod=@road|@water.body			r	r	道の向こう → 길 건너편
-本	ほん	n	1	책			cls=@document	r	r	本を読む → 책을 읽다
-消える	きえる	v1	1	사라지다			vol=- asp=change te=eo	r	r	姿が消える → 모습이 사라지다
-消える	きえる	v1	2	꺼지다	subj=@light|火			r	r	火が消える → 불이 꺼지다
+本	ほん	n	1	책			cls=@document|@counter	r	r	本を読む → 책을 읽다
 パン	ぱん	n	1	빵			cls=@food name=+	r	r	パンを食べる → 빵을 먹다
 村	むら	n	1	마을			cls=@town name=+	r	r	村に住む → 마을에 살다
 服	ふく	n	1	옷			cls=@clothing	r	r	服を着る → 옷을 입다
@@ -462,8 +434,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 驚く	おどろく	v5	1	놀라다			vol=- asp=change te=past	r	r	驚いて叫ぶ → 놀라서 소리치다
 午後	ごご	n	1	오후			cls=@time	r	r	午後に会う → 오후에 만나다
 駅	えき	n	1	역			cls=@facility	r	r	駅で待つ → 역에서 기다리다
-答える	こたえる	v1	1	대답하다			vol=+ asp=activity te=go	r	r	質問に答える → 질문에 대답하다
-答える	こたえる	v1	2	부응하다	dat=@request|期待			r	r	期待に応える → 기대에 부응하다
 日	にち	n	1	일			cls=@time num=sino	r	r	３日 → 3일
 日	にち	n	2	며칠	after=何|数			r	r	数日 → 며칠
 もしもし	もしもし	intj	1	여보세요				r	r	もしもし → 여보세요
@@ -493,7 +463,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 高校	こうこう	n	1	고등학교			cls=@school	r	r	高校に通う → 고등학교에 다니다
 社長	しゃちょう	n	1	사장			cls=@person.role anim=+	r	r	社長が来る → 사장이 오다
 残念	ざんねん	na	1	아쉽다				r	r	残念だ → 아쉽다
-枚	まい	suf	1	장			num=native	r	r	三枚 → 세 장
+枚	まい	suf	1	장			num=native cls=@counter	r	r	三枚 → 세 장
 熱い	あつい	adj	1	뜨겁다				r	r	熱いお茶 → 뜨거운 차
 風呂	ふろ	n	1	목욕			lu cls=@bath name=+	r	r	お風呂が好き → 목욕이 좋다
 風呂	ふろ	n	2	욕조	pred=浸かる			r	r	風呂に浸かる → 욕조에 몸을 담그다
@@ -567,7 +537,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 黒	くろ	n	1	검은색			cls=@color	r	r	黒とシルバー → 검은색과 은색
 集まる	あつまる	v5	1	모이다			vol=+ asp=change te=eo pclass=motion	r	r	人が集まる → 사람이 모이다
 星	ほし	n	1	별			cls=@sky name=+	r	r	星が見える → 별이 보이다
-年	とし	n	1	나이			cls=@period	r	r	年を取る → 나이를 먹다
+年	とし	n	1	나이			cls=@period|@counter	r	r	年を取る → 나이를 먹다
 年	とし	n	2	해	mod=次|生まれる			r	r	次の年 → 다음 해
 耳	みみ	n	1	귀			cls=@body name=+	r	r	耳が赤い → 귀가 빨갛다
 殆ど	ほとんど	n	1	거의				r	r	ほとんどない → 거의 없다
@@ -591,7 +561,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 休み	やすみ	n	3	휴가	pred=取る|貰う			r	r	休みをもらう → 휴가를 받다
 寒い	さむい	adj	1	춥다				r	r	今日は寒い → 오늘은 춥다
 寒い	さむい	adj	2	썰렁하다	head=ギャグ|冗談			r	r	寒いギャグ → 썰렁한 개그
-個	こ	suf	1	개			num=native	r	r	三個 → 세 개
+個	こ	suf	1	개			num=native cls=@counter	r	r	三個 → 세 개
 一日	ついたち	n	1	하루			cls=@duration ni=-	r	r	一日休む → 하루 쉬다
 一日	ついたち	n	2	1일	after=月			r	r	三月一日 → 3월 1일
 火	ひ	n	1	불			cls=@nature|@light	r	r	火をつける → 불을 붙이다
@@ -603,7 +573,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 古い	ふるい	adj	1	오래되다				r	r	古い本 → 오래된 책
 古い	ふるい	adj	2	낡다	head=@clothing|@vehicle|@furniture|@tool			r	r	古い車 → 낡은 차
 古い	ふるい	adj	3	오래다	head=@person.close|知り合い			r	r	古い友人 → 오랜 친구
-音楽	おんがく	n	1	음악			cls=@music	r	r	音楽を聴く → 음악을 듣다
+音楽	おんがく	n	1	음악			cls=@music|@subject.school	r	r	音楽を聴く → 음악을 듣다
 焼く	やく	v5	1	굽다:ㅂ			vol=+ asp=activity te=go	r	r	魚を焼く → 생선을 굽다
 焼く	やく	v5	2	태우다	obj=@building|@town|@document|@nature			r	r	手紙を焼く → 편지를 태우다
 白い	しろい	adj	1	하얗다				r	r	白い花 → 하얀 꽃
@@ -896,7 +866,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 豚肉	ぶたにく	n	1	돼지고기			cls=@food	r	r	豚肉を焼く → 돼지고기를 굽다
 鶏肉	けいにく	n	1	닭고기			cls=@food	r	r	鶏肉を焼く → 닭고기를 굽다
 味噌汁	みそしる	n	1	된장국			cls=@food lu	r	r	味噌汁を飲む → 된장국을 마시다
-寿司	すし	n	1	초밥			cls=@food	r	r	寿司を食べる → 초밥을 먹다
+寿司	すし	n	1	초밥			cls=@food|@rice.ball	r	r	寿司を食べる → 초밥을 먹다
 牛乳	ぎゅうにゅう	n	1	우유			cls=@drink	r	r	牛乳を飲む → 우유를 마시다
 紅茶	こうちゃ	n	1	홍차			cls=@drink|@brew	r	r	紅茶を飲む → 홍차를 마시다
 ジュース	じゅーす	n	1	주스			cls=@drink	r	r	ジュースを買う → 주스를 사다
@@ -1027,12 +997,12 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 九日	ここのか	n	1	9일			cls=@time.point|@duration lu	r	r	九日 → 9일 (digits)
 十日	とおか	n	1	10일			cls=@time.point|@duration lu	r	r	十日 → 10일 (digits)
 二十日	はつか	n	1	20일			cls=@time.point|@duration lu	r	r	二十日 → 20일 (digits)
-匹	ひき	suf	1	마리			num=native	r	r	猫が三匹いる → 고양이가 세 마리 있다
-杯	はい	n	1	잔			num=native	r	r	お酒を一杯飲む → 술을 한 잔 마시다
+匹	ひき	suf	1	마리			num=native cls=@counter	r	r	猫が三匹いる → 고양이가 세 마리 있다
+杯	はい	n	1	잔			num=native cls=@tableware	r	r	お酒を一杯飲む → 술을 한 잔 마시다
 杯	はい	n	2	그릇	head=@food			r	r	ご飯を一杯 → 밥 한 그릇
-冊	さつ	suf	1	권			num=native	r	r	本を二冊読む → 책을 두 권 읽다
+冊	さつ	suf	1	권			num=native cls=@counter	r	r	本を二冊読む → 책을 두 권 읽다
 足	そく	n	1	켤레			num=native lu cls=@body	r	r	靴二足 → 신발 두 켤레
-着	ちゃく	n	1	벌			num=native lu	r	r	服が二着ある → 옷이 두 벌 있다
+着	ちゃく	n	1	벌			num=native lu cls=@counter	r	r	服が二着ある → 옷이 두 벌 있다
 何方	どなた	n	1	누구			anim=+ cls=@person|@side	r	r	どなたですか → 누구세요
 何方	どなた	n	2	누군가	next=か			r	r	どなたか来てください → 누군가 와 주세요
 どうして	どうして	adv	1	왜			lu	r	r	どうして行かないの → 왜 안 가?
@@ -1127,7 +1097,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 スポーツ	すぽーつ	n	1	스포츠			cls=@sport	r	r	スポーツが好きだ → 스포츠를 좋아하다
 ギター	ぎたー	n	1	기타			cls=@instrument	r	r	ギターを弾く → 기타를 치다
 ピアノ	ぴあの	n	1	피아노			cls=@instrument name=+	r	r	ピアノを弾く → 피아노를 치다
-漫画	まんが	n	1	만화			cls=@document	r	r	漫画を読む → 만화를 읽다
+漫画	まんが	n	1	만화			cls=@document|@picture	r	r	漫画を読む → 만화를 읽다
 野球	やきゅう	n	1	야구			cls=@sport	r	r	野球をする → 야구를 하다
 サッカー	さっかー	n	1	축구			cls=@sport	r	r	サッカーをする → 축구를 하다
 日本語	にほんご	n	1	일본어			lu cls=@language	r	r	日本語を話す → 일본어를 말하다
@@ -1181,7 +1151,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 割る	わる	v5	3	쪼개다	obj=割り箸|薪			r	r	割り箸を割る → 나무젓가락을 쪼개다
 続く	つづく	v5	1	계속되다			vol=- asp=state te=go	r	r	雨が続く → 비가 계속되다
 続く	つづく	v5	2	뒤따르다	subj=@person			r	r	俺も続く → 나도 뒤따르다
-続ける	つづける	v1	1	계속하다			vol=+ asp=activity te=go	r	r	練習を続ける → 연습을 계속하다
 直る	なおる	v5	1	고쳐지다			vol=- asp=change te=past	r	r	機械が直る → 기계가 고쳐지다
 直る	なおる	v5	2	낫다	subj=@illness|@body|怪我			r	r	風邪が治る → 감기가 낫다
 直る	なおる	v5	3	풀리다	subj=@mood|機嫌			r	r	機嫌が直る → 기분이 풀리다
@@ -1198,8 +1167,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 減る	へる	v5	1	줄다			vol=- asp=change te=past	r	r	人が減る → 사람이 줄다
 減る	へる	v5	2	고프다	subj=腹|お腹			r	r	腹が減る → 배가 고프다
 減らす	へらす	v5	1	줄이다			vol=+ asp=activity te=go	r	r	量を減らす → 양을 줄이다
-動かす	うごかす	v5	1	움직이다			vol=+ asp=activity te=go	r	r	体を動かす → 몸을 움직이다
-動かす	うごかす	v5	2	작동시키다	obj=@machine			r	r	機械を動かす → 기계를 작동시키다
 起こす	おこす	v5	1	일으키다			vol=+ asp=activity te=go	r	r	問題を起こす → 문제를 일으키다
 起こす	おこす	v5	2	깨우다	obj=@person|@animal			r	r	子供を起こす → 아이를 깨우다
 起こす	おこす	v5	3	피우다	obj=火			r	r	火を起こす → 불을 피우다
@@ -1222,18 +1189,14 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 生きる	いきる	v1	1	살다			vol=+ asp=change te=eo	r	r	百歳まで生きる → 백 살까지 살다
 戻す	もどす	v5	1	돌려놓다			vol=+ asp=activity te=go	r	r	本を棚に戻す → 책을 선반에 돌려놓다
 戻す	もどす	v5	2	되돌리다	obj=@topic|@time			r	r	時間を戻す → 시간을 되돌리다
-残る	のこる	v5	1	남다			vol=+ asp=change te=eo	r	r	部室に残る → 부실에 남다
 残す	のこす	v5	1	남기다			vol=+ asp=activity te=go	r	r	食べ物を残す → 음식을 남기다
 助ける	たすける	v1	1	돕다			vol=+ asp=activity te=go	r	r	友達を助ける → 친구를 돕다
 助ける	たすける	v1	2	구하다	obj=命			r	r	命を助ける → 목숨을 구하다
 助かる	たすかる	v5	1	도움이 되다			vol=- asp=change te=go	r	r	助かります → 도움이 됩니다
 助かる	たすかる	v5	2	살아나다	subj=@person|命			r	r	患者が助かる → 환자가 살아나다
 助かる	たすかる	v5	3	덜 들다	subj=@money|@price|手間			r	r	手間が助かる → 수고가 덜 들다
-守る	まもる	v5	1	지키다			vol=+ asp=activity te=go	r	r	約束を守る → 약속을 지키다
 逃げる	にげる	v1	1	도망치다			vol=+ asp=activity te=go	r	r	犯人が逃げる → 범인이 도망치다
 任せる	まかせる	v1	1	맡기다			vol=+ asp=activity te=go	r	r	仕事を任せる → 일을 맡기다
-気付く	きづく	v5	1	알아차리다		に=을	vol=- asp=change te=go	r	r	間違いに気付く → 실수를 알아차리다
-気付く	きづく	v5	2	깨닫다	dat=@emotion|@idea			r	r	気持ちに気付く → 마음을 깨닫다
 連れる	つれる	v1	1	데리다			vol=+ asp=activity te=go	r	r	子供を連れる → 아이를 데리다
 伝える	つたえる	v1	1	전하다			vol=+ asp=activity te=go	r	r	気持ちを伝える → 마음을 전하다
 伝わる	つたわる	v5	1	전해지다			vol=- asp=change te=go	r	r	気持ちが伝わる → 마음이 전해지다
@@ -1243,10 +1206,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 落ち着く	おちつく	v5	2	차분하다	head=@mood|@sound|@color			r	r	落ち着いた雰囲気 → 차분한 분위기
 落ち着く	おちつく	v5	3	자리 잡다	dat=@place|@house			r	r	田舎に落ち着く → 시골에 자리 잡다
 落ち着く	おちつく	v5	4	가라앉다	subj=@incident|@trouble|@rumor			r	r	騒ぎが落ち着く → 소동이 가라앉다
-合わせる	あわせる	v1	1	맞추다			vol=+ asp=activity te=go	r	r	時間を合わせる → 시간을 맞추다
-合わせる	あわせる	v1	2	합치다	obj=力|声			r	r	力を合わせる → 힘을 합치다
 黙る	だまる	v5	1	입을 다물다			vol=+ asp=change te=go	r	r	彼は黙った → 그는 입을 다물었다
-付き合う	つきあう	v5	1	사귀다			vol=+ asp=activity te=go	r	r	彼女と付き合う → 그녀와 사귀다
 広がる	ひろがる	v5	1	퍼지다			vol=- asp=change te=eo	r	r	噂が広がる → 소문이 퍼지다
 広がる	ひろがる	v5	2	펼쳐지다	subj=@nature|@sky|@town			r	r	草原が広がる → 초원이 펼쳐지다
 広がる	ひろがる	v5	3	넓어지다	subj=範囲|視野			r	r	視野が広がる → 시야가 넓어지다
@@ -1269,9 +1229,6 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 慣れる	なれる	v1	1	익숙해지다			vol=- asp=change te=past	r	r	仕事に慣れる → 일에 익숙해지다
 抜ける	ぬける	v1	1	빠지다			vol=- asp=change te=past	r	r	力が抜ける → 힘이 빠지다
 抜ける	ぬける	v1	2	빠져나가다	obj=@place			r	r	森を抜ける → 숲을 빠져나가다
-近付く	ちかづく	v5	1	다가가다			vol=+ asp=change te=go	r	r	犬に近づく → 개에게 다가가다
-近付く	ちかづく	v5	2	다가오다	subj=@time|@season|@event			r	r	夏が近づく → 여름이 다가오다
-近付く	ちかづく	v5	3	가까워지다	dat=@abstract			r	r	完成に近づく → 완성에 가까워지다
 暮らす	くらす	v5	1	살다			vol=+ asp=activity te=go	r	r	田舎で暮らす → 시골에서 살다
 謝る	あやまる	v5	1	사과하다			vol=+ asp=activity te=go	r	r	先生に謝る → 선생님께 사과하다
 諦める	あきらめる	v1	1	포기하다			vol=+ asp=change te=past	r	r	夢を諦める → 꿈을 포기하다
@@ -1479,7 +1436,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 面接	めんせつ	n	1	면접			cls=@event|@exam vol=+ asp=activity te=go	r	r	面接を受ける → 면접을 보다
 休憩	きゅうけい	n	1	휴식			cls=@rest vol=+ asp=activity te=go	r	r	休憩を取る → 휴식을 취하다
 用事	ようじ	n	1	볼일			cls=@task	r	r	用事がある → 볼일이 있다
-社会	しゃかい	n	1	사회			cls=@group	r	r	社会に出る → 사회에 나가다
+社会	しゃかい	n	1	사회			cls=@group|@subject.school	r	r	社会に出る → 사회에 나가다
 経済	けいざい	n	1	경제			cls=@abstract	r	r	経済が良くなる → 경제가 좋아지다
 政治	せいじ	n	1	정치			cls=@abstract	r	r	政治に興味がある → 정치에 관심이 있다
 法律	ほうりつ	n	1	법률			cls=@rule	r	r	法律を守る → 법률을 지키다
@@ -1573,7 +1530,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 留学	りゅうがく	n	1	유학			cls=@activity vol=+ asp=activity te=go	r	r	留学に行く → 유학을 가다
 知識	ちしき	n	1	지식			cls=@info	r	r	知識がある → 지식이 있다
 実験	じっけん	n	1	실험			cls=@activity	r	r	実験をする → 실험을 하다
-発表	はっぴょう	n	1	발표			cls=@activity vol=+ asp=activity te=go	r	r	結果を発表する → 결과를 발표하다
+発表	はっぴょう	n	1	발표			cls=@activity|@event vol=+ asp=activity te=go	r	r	結果を発表する → 결과를 발표하다
 出席	しゅっせき	n	1	출석			cls=@activity vol=+ asp=activity te=go	r	r	出席を取る → 출석을 부르다
 欠席	けっせき	n	1	결석			cls=@activity vol=+ asp=activity te=go	r	r	今日は欠席だ → 오늘은 결석이다
 遅刻	ちこく	n	1	지각			cls=@activity vol=- asp=change te=past	r	r	遅刻したら困る → 지각하면 곤란하다
@@ -1619,8 +1576,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 針	はり	n	2	침	mod=蜂|毒			r	r	蜂の針 → 벌의 침
 布	ぬの	n	1	천			cls=@material name=+	r	r	布で包む → 천으로 싸다
 タオル	たおる	n	1	수건			cls=@thing lu	r	r	タオルで拭く → 수건으로 닦다
-瓶	びん	n	1	병			cls=@container	r	r	瓶を開ける → 병을 따다
-缶	かん	n	1	캔			cls=@container	r	r	缶を開ける → 캔을 따다
+瓶	びん	n	1	병			cls=@container|@bottle	r	r	瓶を開ける → 병을 따다
+缶	かん	n	1	캔			cls=@container|@bottle	r	r	缶を開ける → 캔을 따다
 缶	かん	n	2	통조림	mod=@food			r	r	鯖の缶 → 고등어 통조림
 袋	ふくろ	n	1	봉지			cls=@container|@wrapping	r	r	ビニール袋に入れる → 비닐봉지에 넣다
 袋	ふくろ	n	2	주머니	mod=巾着|布			r	r	布の袋 → 천 주머니
@@ -1733,7 +1690,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 様子	ようす	n	2	상태	pred=どう|いかが			r	r	様子はどうだ → 상태가 어떻다
 性格	せいかく	n	1	성격			cls=@abstract|@character	r	r	性格がいい → 성격이 좋다
 将来	しょうらい	n	1	장래			cls=@time	r	r	将来の夢 → 장래의 꿈
-最後	さいご	n	1	마지막			cls=@time	r	r	最後に → 마지막으로
+最後	さいご	n	1	마지막			cls=@time|@to.end	r	r	最後に → 마지막으로
 最初	さいしょ	n	1	처음			cls=@time	r	r	最初に → 처음에
 途中	とちゅう	n	1	도중			cls=@period name=+	r	r	途中で帰る → 도중에 돌아가다
 以前	いぜん	n	1	예전			cls=@time	r	r	以前の話 → 예전 이야기
@@ -1787,7 +1744,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 支払い	しはらい	n	1	지불			cls=@settlement lu	r	r	支払いが遅れる → 지불이 늦어지다
 反対	はんたい	n	1	반대			cls=@stance|@protest vol=+ asp=activity te=go	r	r	計画に反対する → 계획에 반대하다
 賛成	さんせい	n	1	찬성			cls=@stance vol=+ asp=activity te=go	r	r	君の意見に賛成だ → 네 의견에 찬성이다
-注文	ちゅうもん	n	1	주문			cls=@order vol=+ asp=activity te=go	r	r	注文を受ける → 주문을 받다
+注文	ちゅうもん	n	1	주문			cls=@order|@request vol=+ asp=activity te=go	r	r	注文を受ける → 주문을 받다
 準備	じゅんび	n	1	준비			cls=@task|@readiness vol=+ asp=activity te=go	r	r	旅行の準備をする → 여행 준비를 하다
 練習	れんしゅう	n	1	연습			cls=@activity vol=+ asp=activity te=go	r	r	毎日練習する → 매일 연습하다
 代わり	かわり	n	1	대신			cls=@abstract	r	r	私の代わりに行く → 나 대신 가다
@@ -1803,8 +1760,8 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 用	よう	n	1	볼일			cls=@task	r	r	用がある → 볼일이 있다
 考え	かんがえ	n	1	생각			cls=@idea	r	r	私の考え → 내 생각
 結果	けっか	n	1	결과			cls=@result	r	r	結果が出る → 결과가 나오다
-原因	げんいん	n	1	원인			cls=@abstract	r	r	事故の原因 → 사고의 원인
-理由	りゆう	n	1	이유			cls=@abstract|@info	r	r	理由を聞く → 이유를 묻다
+原因	げんいん	n	1	원인			cls=@abstract|@truth	r	r	事故の原因 → 사고의 원인
+理由	りゆう	n	1	이유			cls=@abstract|@info|@truth	r	r	理由を聞く → 이유를 묻다
 方法	ほうほう	n	1	방법			cls=@abstract	r	r	いい方法 → 좋은 방법
 都合	つごう	n	1	사정			cls=@abstract|@personal.info	r	r	都合で休む → 사정으로 쉬다
 目的	もくてき	n	1	목적			cls=@abstract	r	r	目的を達成する → 목적을 달성하다
@@ -1873,7 +1830,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 以下	いか	n	1	이하			cls=@quantity	r	r	千円以下 → 천 엔 이하
 以下	いか	n	2	다음	mod=- next=の			r	r	以下の五つ → 다음 다섯 가지
 以内	いない	n	1	안			cls=@quantity	r	r	三日以内に → 사흘 안에
-回	かい	n	1	번			num=native	r	r	三回 → 세 번
+回	かい	n	1	번			num=native cls=@counter	r	r	三回 → 세 번
 回	かい	n	2	회	after=第			r	r	第一回 → 제1회
 点	てん	n	1	점			num=sino cls=@abstract|@score	r	r	その点 → 그 점
 点	てん	n	2	점수	pred=取る|付ける			r	r	点を取る → 점수를 따다
@@ -2137,6 +2094,2190 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 すみません	すみません	intj	3	미안하다	register=friendly			r	r	すみません → 미안해요 (friendly polite)
 畏まりました	かしこまりました	intj	1	알겠다			lu	r	r	かしこまりました → 알겠습니다
 ようこそ	ようこそ	intj	1	환영하다			lu	r	r	ようこそ、我が家へ → 우리 집에 온 걸 환영해
+仕舞う	しまう	v5	1	치우다			vol=+ asp=change te=go	r	r	道具を片付けてしまう → 도구를 치우다
+仕舞う	しまう	v5	2	집어넣다	dat=@container|@furniture|ポケット			r	r	ポケットにしまう → 주머니에 집어넣다
+仕舞う	しまう	v5	3	닫다	obj=店			r	r	店をしまう → 가게를 닫다
+得る	える	v1	1	얻다			vol=+ asp=change te=past	r	r	情報を得る → 정보를 얻다
+得る	える	v1	2	받다	obj=許可|了承			r	r	許可を得る → 허락을 받다
+食う	くう	v5	1	먹다			vol=+ asp=activity te=go	r	r	飯を食う → 밥을 먹다
+食う	くう	v5	2	잡아먹다	subj=@animal|@monster obj=@person|@animal			r	r	狼が羊を食う → 늑대가 양을 잡아먹다
+行う	おこなう	v5	1	하다			vol=+ asp=activity te=go	r	r	訓練を行う → 훈련을 하다
+行う	おこなう	v5	2	열다	obj=@ceremony|@competition|@show			r	r	式を行う → 식을 열다
+行う	おこなう	v5	3	저지르다	obj=@crime|不正|悪事			r	r	犯罪を行う → 범죄를 저지르다
+繰り返す	くりかえす	v5	1	반복하다			vol=+ asp=activity te=go	r	r	同じ失敗を繰り返す → 같은 실수를 반복하다
+組む	くむ	v5	1	짜다			vol=+ asp=activity te=go	r	r	予定を組む → 일정을 짜다
+組む	くむ	v5	2	손잡다	with=@person|@organization|@group			r	r	あの会社と組む → 그 회사와 손잡다
+組む	くむ	v5	3	꼬다	obj=足|脚			r	r	足を組む → 다리를 꼬다
+取れる	とれる	v1	1	떨어지다			vol=- asp=change te=eo	r	r	ボタンが取れる → 단추가 떨어지다
+取れる	とれる	v1	2	잡히다	subj=魚|@animal			r	r	魚が取れる → 물고기가 잡히다
+取れる	とれる	v1	3	닿다	subj=連絡|コンタクト			r	r	連絡が取れる → 연락이 닿다
+取れる	とれる	v1	4	풀리다	subj=疲れ|凝り			r	r	疲れが取れる → 피로가 풀리다
+取れる	とれる	v1	5	가시다	subj=痛み|臭み			r	r	痛みが取れる → 통증이 가시다
+利く	きく	v5	1	효과가 있다			vol=- asp=change te=simple	r	r	薬が効く → 약이 효과가 있다
+利く	きく	v5	2	통하다	subj=@weapon|@magic			r	r	ミサイルは効かない → 미사일은 통하지 않다
+ばれる	ばれる	v1	1	들키다		に=에게	vol=- asp=change te=past	r	r	友達にばれる → 친구에게 들키다
+ばれる	ばれる	v1	2	들통나다	subj=@info|嘘 dat=-			r	r	嘘がばれる → 거짓말이 들통나다
+込める	こめる	v1	1	담다			vol=+ asp=change te=go	r	r	心を込める → 마음을 담다
+込める	こめる	v1	2	주다	obj=力			r	r	手に力を込める → 손에 힘을 주다
+噛み付く	かみつく	v5	1	물다		に=을	vol=+ asp=change te=go	r	r	犬が腕に噛みつく → 개가 팔을 물다
+噛み付く	かみつく	v5	2	대들다	subj=@person dat=@person|@group			r	r	上司に噛みつく → 상사에게 대들다
+下る	くだる	v5	1	내려가다			vol=+ asp=change te=go	r	r	階段を下る → 계단을 내려가다
+下る	くだる	v5	2	내려지다	subj=@order|判決|裁定			r	r	命令が下る → 명령이 내려지다
+目立つ	めだつ	v5	1	눈에 띄다			vol=- asp=state te=simple	r	r	目立たない服 → 눈에 띄지 않는 옷
+生き返る	いきかえる	v5	1	살아나다			vol=- asp=change te=past	r	r	死んだ人が生き返る → 죽은 사람이 살아나다
+絡む	からむ	v5	1	얽히다			vol=- asp=change te=eo	r	r	大金が絡む話 → 큰돈이 얽힌 이야기
+絡む	からむ	v5	2	시비를 걸다	subj=@person dat=@person			r	r	酔っ払いが客に絡む → 취객이 손님에게 시비를 걸다
+絡む	からむ	v5	3	마주치다	subj=@gaze			r	r	視線が絡む → 시선이 마주치다
+挟む	はさむ	v5	1	끼우다			vol=+ asp=activity te=go	r	r	本に栞を挟む → 책에 책갈피를 끼우다
+挟む	はさむ	v5	2	집다	with=指|箸			r	r	指で挟む → 손가락으로 집다
+挟む	はさむ	v5	3	사이에 두다	obj=@furniture|@place			r	r	テーブルを挟んで座る → 테이블을 사이에 두고 앉다
+眺める	ながめる	v1	1	바라보다			vol=+ asp=activity te=go	r	r	窓の外を眺める → 창밖을 바라보다
+眺める	ながめる	v1	2	훑어보다	obj=@document			r	r	新聞を眺める → 신문을 훑어보다
+見上げる	みあげる	v1	1	올려다보다			vol=+ asp=activity te=go	r	r	空を見上げる → 하늘을 올려다보다
+見下ろす	みおろす	v5	1	내려다보다			vol=+ asp=activity te=go	r	r	街を見下ろす → 거리를 내려다보다
+見回す	みまわす	v5	1	둘러보다			vol=+ asp=activity te=go	r	r	周りを見回す → 주위를 둘러보다
+見逃す	みのがす	v5	1	놓치다			vol=+ asp=change te=past	r	r	チャンスを見逃す → 기회를 놓치다
+見逃す	みのがす	v5	2	봐주다	obj=@person			r	r	今回は彼を見逃す → 이번엔 그를 봐주다
+見送る	みおくる	v5	1	배웅하다			vol=+ asp=activity te=go	r	r	友達を見送る → 친구를 배웅하다
+見送る	みおくる	v5	2	바라보다	obj=後ろ姿|背中			r	r	遠ざかる背中を見送る → 멀어지는 뒷모습을 바라보다
+見送る	みおくる	v5	3	보류하다	obj=@plan|@idea|@event			r	r	計画を見送る → 계획을 보류하다
+見掛ける	みかける	v1	1	보다			vol=- asp=change te=past	r	r	駅で見かけた → 역에서 봤다
+見守る	みまもる	v5	1	지켜보다			vol=+ asp=activity te=go	r	r	成長を見守る → 성장을 지켜보다
+見直す	みなおす	v5	1	다시 보다			vol=+ asp=activity te=go	r	r	彼を見直した → 그를 다시 봤다
+見直す	みなおす	v5	2	재검토하다	obj=@plan|@rule|@money			r	r	予算を見直す → 예산을 재검토하다
+見抜く	みぬく	v5	1	간파하다			vol=+ asp=change te=go	r	r	嘘を見抜く → 거짓말을 간파하다
+覗く	のぞく	v5	1	들여다보다			vol=+ asp=activity te=go	r	r	部屋を覗く → 방을 들여다보다
+覗く	のぞく	v5	2	엿보다	obj=@bath|着替え			r	r	風呂を覗く → 목욕하는 것을 엿보다
+覗く	のぞく	v5	3	보이다	obj=- subj=@body|@thing			r	r	胸元から肌が覗く → 가슴께로 살결이 보이다
+睨む	にらむ	v5	1	노려보다			vol=+ asp=activity te=go	r	r	彼を睨む → 그를 노려보다
+睨む	にらむ	v5	2	짐작하다	after=と			r	r	犯人だと睨む → 범인이라고 짐작하다
+思い付く	おもいつく	v5	1	생각해 내다			vol=- asp=change te=past	r	r	いい方法を思いつく → 좋은 방법을 생각해 내다
+思い込む	おもいこむ	v5	1	굳게 믿다			vol=+ asp=change te=go	r	r	自分が正しいと思い込む → 자기가 옳다고 굳게 믿다
+思い切る	おもいきる	v5	1	단념하다			vol=+ asp=change te=past	r	r	夢を思い切る → 꿈을 단념하다
+思い切る	おもいきる	v5	2	큰맘 먹다	form=te			r	r	思い切って誘う → 큰맘 먹고 권하다
+思い浮かべる	おもいうかべる	v1	1	떠올리다			vol=+ asp=activity te=go	r	r	彼の顔を思い浮かべる → 그의 얼굴을 떠올리다
+浮かぶ	うかぶ	v5	1	떠오르다			vol=- asp=change te=eo	r	r	いい考えが浮かぶ → 좋은 생각이 떠오르다
+浮かぶ	うかぶ	v5	2	뜨다	dat=@water.body|@sky|@liquid			r	r	海に浮かぶ島 → 바다에 떠 있는 섬
+浮かぶ	うかぶ	v5	3	맺히다	subj=@body.output			r	r	目に涙が浮かぶ → 눈에 눈물이 맺히다
+浮く	うく	v5	1	뜨다			vol=- asp=change te=eo	r	r	木の葉が水に浮く → 나뭇잎이 물에 뜨다
+浮く	うく	v5	2	남다	subj=@money|@price			r	r	交通費が浮く → 교통비가 남다
+浮く	うく	v5	3	겉돌다	subj=@person loc=@group|@school			r	r	クラスで浮く → 반에서 겉돌다
+恐れる	おそれる	v1	1	두려워하다			vol=- asp=state te=go	r	r	失敗を恐れる → 실패를 두려워하다
+悲しむ	かなしむ	v5	1	슬퍼하다			vol=- asp=activity te=go	r	r	友達の死を悲しむ → 친구의 죽음을 슬퍼하다
+苦しむ	くるしむ	v5	1	괴로워하다			vol=- asp=activity te=go	r	r	罪悪感に苦しむ → 죄책감으로 괴로워하다
+苦しむ	くるしむ	v5	2	시달리다	dat=@trouble|@illness			r	r	病気に苦しむ → 병에 시달리다
+憧れる	あこがれる	v1	1	동경하다		に=을	vol=- asp=state te=go	r	r	先輩に憧れる → 선배를 동경하다
+憎む	にくむ	v5	1	미워하다			vol=- asp=state te=go	r	r	敵を憎む → 적을 미워하다
+恨む	うらむ	v5	1	원망하다			vol=- asp=state te=go	r	r	運命を恨む → 운명을 원망하다
+嫌う	きらう	v5	1	싫어하다			vol=- asp=state te=go	r	r	彼を嫌う → 그를 싫어하다
+好む	このむ	v5	1	좋아하다			vol=- asp=state te=go	r	r	辛いものを好む → 매운 것을 좋아하다
+愛する	あいする	vs	1	사랑하다			vol=- asp=state te=simple	r	r	彼女を愛する → 그녀를 사랑하다
+惚れる	ほれる	v1	1	반하다		に=에게	vol=- asp=change te=past	r	r	彼女に惚れる → 그녀에게 반하다
+照れる	てれる	v1	1	쑥스러워하다			vol=- asp=change te=go	r	r	褒められて照れる → 칭찬을 받고 쑥스러워하다
+呆れる	あきれる	v1	1	어이없어하다			vol=- asp=change te=go	r	r	彼の態度に呆れる → 그의 태도에 어이없어하다
+焦る	あせる	v5	1	초조해하다			vol=- asp=change te=go	r	r	焦って失敗する → 초조해하다가 실패하다
+焦る	あせる	v5	2	당황하다	dat=@incident|@event|@speech			r	r	突然の質問に焦る → 갑작스러운 질문에 당황하다
+焦る	あせる	v5	3	서두르다	obj=@result			r	r	成果を焦る → 성과를 서두르다
+怯える	おびえる	v1	1	무서워하다		に=을	vol=- asp=state te=go	r	r	地震に怯える → 지진을 무서워하다
+怯える	おびえる	v1	2	겁먹다	arg=-			r	r	怯える少女 → 겁먹은 소녀
+戸惑う	とまどう	v5	1	당황하다			vol=- asp=change te=go	r	r	急な変化に戸惑う → 갑작스러운 변화에 당황하다
+疑う	うたがう	v5	1	의심하다			vol=+ asp=activity te=go	r	r	彼の話を疑う → 그의 말을 의심하다
+認める	みとめる	v1	1	인정하다			vol=+ asp=change te=go	r	r	実力を認める → 실력을 인정하다
+祈る	いのる	v5	1	빌다			vol=+ asp=activity te=go	r	r	幸せを祈る → 행복을 빌다
+祈る	いのる	v5	2	기도하다	dat=神|仏			r	r	神に祈る → 신에게 기도하다
+望む	のぞむ	v5	1	바라다			vol=+ asp=activity te=go	r	r	平和を望む → 평화를 바라다
+望む	のぞむ	v5	2	바라보다	obj=@nature|@water.body|景色			r	r	海を望む部屋 → 바다를 바라보는 방
+求める	もとめる	v1	1	원하다			vol=+ asp=activity te=go	r	r	愛を求める → 사랑을 원하다
+求める	もとめる	v1	2	청하다	obj=助け|許し			r	r	助けを求める → 도움을 청하다
+求める	もとめる	v1	3	요구하다	obj=@speech|@order			r	r	謝罪を求める → 사과를 요구하다
+求める	もとめる	v1	4	찾다	obj=@place|姿			r	r	居場所を求める → 있을 곳을 찾다
+求める	もとめる	v1	5	추구하다	obj=@idea|自由			r	r	自由を求める → 자유를 추구하다
+慰める	なぐさめる	v1	1	위로하다			vol=+ asp=activity te=go	r	r	友達を慰める → 친구를 위로하다
+励ます	はげます	v5	1	격려하다			vol=+ asp=activity te=go	r	r	友達を励ます → 친구를 격려하다
+落ち込む	おちこむ	v5	1	풀이 죽다			vol=- asp=change te=eo	r	r	失敗して落ち込む → 실패해서 풀이 죽다
+落ち込む	おちこむ	v5	2	떨어지다	subj=@money|@score			r	r	売上が落ち込む → 매출이 떨어지다
+落ち込む	おちこむ	v5	3	빠지다	dat=@opening|@water.body			r	r	穴に落ち込む → 구멍에 빠지다
+怒鳴る	どなる	v5	1	고함치다		に=에게	vol=+ asp=activity te=go	r	r	大声で怒鳴る → 크게 고함치다
+叫ぶ	さけぶ	v5	1	외치다			vol=+ asp=activity te=go	r	r	大声で叫ぶ → 큰 소리로 외치다
+微笑む	ほほえむ	v5	1	미소 짓다			vol=+ asp=activity te=go	r	r	優しく微笑む → 부드럽게 미소 짓다
+頷く	うなずく	v5	1	고개를 끄덕이다			vol=+ asp=activity te=go	r	r	黙って頷く → 말없이 고개를 끄덕이다
+震える	ふるえる	v1	1	떨리다			vol=- asp=activity te=go	r	r	声が震える → 목소리가 떨리다
+震える	ふるえる	v1	2	떨다	subj=@person			r	r	寒さで震える → 추위에 떨다
+震える	ふるえる	v1	3	진동하다	subj=@phone			r	r	携帯が震える → 휴대전화가 진동하다
+耐える	たえる	v1	1	견디다		に=을	vol=+ asp=activity te=go	r	r	痛みに耐える → 아픔을 견디다
+耐える	たえる	v1	2	참다	obj=@sound|痛み			r	r	声を堪える → 소리를 참다
+傷付く	きずつく	v5	1	상처받다			vol=- asp=change te=past	r	r	言葉に傷つく → 말에 상처받다
+傷付く	きずつく	v5	2	다치다	subj=@body			r	r	体が傷つく → 몸이 다치다
+傷付く	きずつく	v5	3	흠집이 나다	subj=@tool|@clothing|@furniture			r	r	家具が傷つく → 가구에 흠집이 나다
+傷付ける	きずつける	v1	1	상처 주다		を=에게	vol=+ asp=change te=past	r	r	彼を傷つける → 그에게 상처 주다
+傷付ける	きずつける	v1	2	다치게 하다	obj=@body			r	r	顔を傷つける → 얼굴을 다치게 하다
+傷付ける	きずつける	v1	3	훼손하다	obj=名誉|評判			r	r	名誉を傷つける → 명예를 훼손하다
+甘える	あまえる	v1	1	응석 부리다		に=에게	vol=+ asp=activity te=go	r	r	母に甘える → 엄마에게 응석 부리다
+甘える	あまえる	v1	2	받아들이다	dat=好意|親切			r	r	好意に甘える → 호의를 받아들이다
+譲る	ゆずる	v5	1	양보하다		に=에게	vol=+ asp=change te=past	r	r	席を譲る → 자리를 양보하다
+譲る	ゆずる	v5	2	넘겨주다	obj=@post|権利			r	r	地位を譲る → 지위를 넘겨주다
+嗅ぐ	かぐ	v5	1	냄새 맡다			vol=+ asp=activity te=go	r	r	嗅がないで → 냄새 맡지 마
+嗅ぐ	かぐ	v5	2	맡다	obj=@smell			r	r	花の匂いを嗅ぐ → 꽃 냄새를 맡다
+味わう	あじわう	v5	1	맛보다			vol=+ asp=activity te=go	r	r	苦しみを味わう → 괴로움을 맛보다
+味わう	あじわう	v5	2	음미하다	obj=余韻|感触			r	r	余韻を味わう → 여운을 음미하다
+覚める	さめる	v1	1	깨다			vol=- asp=change te=eo	r	r	夢から覚める → 꿈에서 깨다
+覚める	さめる	v1	2	식다	subj=頭|興奮			r	r	頭が醒める → 머리가 식다
+目覚める	めざめる	v1	1	깨어나다			vol=- asp=change te=past	r	r	朝に目覚める → 아침에 깨어나다
+目覚める	めざめる	v1	2	눈뜨다	dat=@skill|@emotion|@idea			r	r	力に目覚める → 힘에 눈뜨다
+語る	かたる	v5	1	이야기하다			vol=+ asp=activity te=go	r	r	夢を語る → 꿈을 이야기하다
+告げる	つげる	v1	1	말하다			vol=+ asp=activity te=go	r	r	真実を告げる → 진실을 말하다
+告げる	つげる	v1	2	알리다	subj=@thing|@sound			r	r	花火が開催を告げる → 폭죽이 개최를 알리다
+述べる	のべる	v1	1	말하다			vol=+ asp=activity te=go	r	r	意見を述べる → 의견을 말하다
+訴える	うったえる	v1	1	호소하다			vol=+ asp=activity te=go	r	r	情に訴える → 감정에 호소하다
+訴える	うったえる	v1	2	고소하다	obj=@person|@organization			r	r	会社を訴える → 회사를 고소하다
+訴える	うったえる	v1	3	신고하다	dat=警察			r	r	警察に訴える → 경찰에 신고하다
+呟く	つぶやく	v5	1	중얼거리다			vol=+ asp=activity te=go	r	r	独り言を呟く → 혼잣말을 중얼거리다
+囁く	ささやく	v5	1	속삭이다			vol=+ asp=activity te=go	r	r	耳元で囁く → 귓가에 속삭이다
+喋る	しゃべる	v5	1	말하다			vol=+ asp=activity te=go	r	r	日本語を喋る → 일본어를 말하다
+問う	とう	v5	1	묻다:ㄷ			vol=+ asp=activity te=go	r	r	理由を問う → 이유를 묻다
+頼る	たよる	v5	1	의지하다		に=에게	vol=+ asp=activity te=go	r	r	友達に頼る → 친구에게 의지하다
+誓う	ちかう	v5	1	맹세하다			vol=+ asp=change te=past	r	r	神に誓う → 신께 맹세하다
+責める	せめる	v1	1	탓하다			vol=+ asp=activity te=go	r	r	自分を責める → 자신을 탓하다
+騙す	だます	v5	1	속이다			vol=+ asp=activity te=go	r	r	人を騙す → 사람을 속이다
+裏切る	うらぎる	v5	1	배신하다			vol=+ asp=change te=go	r	r	仲間を裏切る → 동료를 배신하다
+裏切る	うらぎる	v5	2	저버리다	obj=期待|信頼			r	r	期待を裏切る → 기대를 저버리다
+従う	したがう	v5	1	따르다		に=을	vol=+ asp=activity te=go	r	r	命令に従う → 명령을 따르다
+逆らう	さからう	v5	1	거스르다		に=을	vol=+ asp=activity te=go	r	r	流れに逆らう → 흐름을 거스르다
+逆らう	さからう	v5	2	거역하다	dat=@person|@order			r	r	命令に逆らう → 명령을 거역하다
+争う	あらそう	v5	1	다투다			vol=+ asp=activity te=go	r	r	会長の座を争う → 회장 자리를 다투다
+戦う	たたかう	v5	1	싸우다			vol=+ asp=activity te=go	r	r	敵と戦う → 적과 싸우다
+戦う	たたかう	v5	2	치르다	obj=@competition|選挙戦			r	r	選挙戦を戦う → 선거전을 치르다
+救う	すくう	v5	1	구하다			vol=+ asp=change te=go	r	r	命を救う → 목숨을 구하다
+支える	ささえる	v1	1	지탱하다			vol=+ asp=activity te=go	r	r	体重を支える → 체중을 지탱하다
+支える	ささえる	v1	2	돕다	obj=@person			r	r	友達を支える → 친구를 돕다
+支える	ささえる	v1	3	받치다	obj=@body|屋根			r	r	肩を手で支える → 어깨를 손으로 받치다
+与える	あたえる	v1	1	주다			vol=+ asp=change te=go	r	r	快感を与える → 쾌감을 주다
+与える	あたえる	v1	2	내리다	obj=@order|@duty|罰			r	r	罰を与える → 벌을 내리다
+与える	あたえる	v1	3	부여하다	obj=@qualification|権利|権限			r	r	権限を与える → 권한을 부여하다
+与える	あたえる	v1	4	끼치다	obj=@harm|@damage			r	r	害を与える → 해를 끼치다
+奪う	うばう	v5	1	빼앗다			vol=+ asp=change te=go	r	r	金を奪う → 돈을 빼앗다
+預かる	あずかる	v5	1	맡다			vol=+ asp=change te=go	r	r	荷物を預かる → 짐을 맡다
+引き受ける	ひきうける	v1	1	맡다			vol=+ asp=change te=go	r	r	仕事を引き受ける → 일을 맡다
+引き受ける	ひきうける	v1	2	인수하다	obj=@organization|@shop			r	r	会社を引き受ける → 회사를 인수하다
+受け入れる	うけいれる	v1	1	받아들이다			vol=+ asp=change te=go	r	r	提案を受け入れる → 제안을 받아들이다
+受け止める	うけとめる	v1	1	받아들이다			vol=+ asp=change te=go	r	r	気持ちを受け止める → 마음을 받아들이다
+受け止める	うけとめる	v1	2	받아 내다	obj=@thing|@liquid|@blow			r	r	ボールを受け止める → 공을 받아 내다
+追う	おう	v5	1	쫓다			vol=+ asp=activity te=go	r	r	犯人を追う → 범인을 쫓다
+追う	おう	v5	2	좇다	obj=夢|理想			r	r	夢を追う → 꿈을 좇다
+追い出す	おいだす	v5	1	쫓아내다			vol=+ asp=change te=past	r	r	部屋から追い出す → 방에서 쫓아내다
+追い出す	おいだす	v5	2	떨쳐내다	obj=妄想|雑念			r	r	妄想を追い出す → 망상을 떨쳐내다
+追い付く	おいつく	v5	1	따라잡다		に=을	vol=+ asp=change te=past	r	r	彼に追いつく → 그를 따라잡다
+追い越す	おいこす	v5	1	앞지르다			vol=+ asp=change te=past	r	r	彼を追い越す → 그를 앞지르다
+追い越す	おいこす	v5	2	추월하다	subj=@vehicle			r	r	車が追い越す → 차가 추월하다
+知り合う	しりあう	v5	1	알게 되다			vol=- asp=change te=past	r	r	学校で彼女と知り合う → 학교에서 그녀와 알게 되다
+話し合う	はなしあう	v5	1	의논하다			vol=+ asp=activity te=go	r	r	計画を話し合う → 계획을 의논하다
+打ち明ける	うちあける	v1	1	털어놓다		に=에게	vol=+ asp=change te=past	r	r	秘密を打ち明ける → 비밀을 털어놓다
+言い返す	いいかえす	v5	1	되받아치다		に=에게	vol=+ asp=change te=past	r	r	強く言い返す → 강하게 되받아치다
+呼び出す	よびだす	v5	1	불러내다			vol=+ asp=change te=past	r	r	友達を呼び出す → 친구를 불러내다
+呼び出す	よびだす	v5	2	호출하다	obj=@device|@magic			r	r	魔術を呼び出す → 마법을 호출하다
+呼び出す	よびだす	v5	3	불러오다	obj=@info|@document			r	r	データを呼び出す → 데이터를 불러오다
+呼び掛ける	よびかける	v1	1	말을 걸다			vol=+ asp=activity te=go	r	r	彼に呼びかける → 그에게 말을 걸다
+呼び掛ける	よびかける	v1	2	호소하다	obj=@activity|@request|協力			r	r	協力を呼びかける → 협력을 호소하다
+申し出る	もうしでる	v1	1	제안하다			vol=+ asp=change te=past	r	r	協力を申し出る → 협력을 제안하다
+申し出る	もうしでる	v1	2	신청하다	obj=休暇|参加			r	r	参加を申し出る → 참가를 신청하다
+招く	まねく	v5	1	부르다			vol=+ asp=change te=past	r	r	大惨事を招く → 대참사를 부르다
+招く	まねく	v5	2	초대하다	obj=@person			r	r	友達を家に招く → 친구를 집에 초대하다
+訪れる	おとずれる	v1	1	방문하다			vol=+ asp=change te=past	r	r	京都を訪れる → 교토를 방문하다
+訪れる	おとずれる	v1	2	찾아오다	subj=@abstract|沈黙|静寂			r	r	沈黙が訪れる → 침묵이 찾아오다
+祝う	いわう	v5	1	축하하다			vol=+ asp=activity te=go	r	r	誕生日を祝う → 생일을 축하하다
+関わる	かかわる	v5	1	관련되다		に=와	vol=+ asp=change te=eo	r	r	事件に関わる → 사건과 관련되다
+関わる	かかわる	v5	2	엮이다	dat=@person			r	r	あの人に関わる → 그 사람과 엮이다
+巻き込む	まきこむ	v5	1	끌어들이다			vol=+ asp=change te=past	r	r	みんなを巻き込む → 모두를 끌어들이다
+巻き込む	まきこむ	v5	2	휘말리게 하다	dat=@incident|@trouble			r	r	事故に巻き込む → 사고에 휘말리게 하다
+加わる	くわわる	v5	1	합류하다			vol=+ asp=change te=past	r	r	仲間に加わる → 동료에 합류하다
+加わる	くわわる	v5	2	더해지다	subj=@abstract			r	r	混乱が加わる → 혼란이 더해지다
+加える	くわえる	v1	1	더하다			vol=+ asp=change te=go	r	r	一を加える → 일을 더하다
+加える	くわえる	v1	2	가하다	obj=@harm|@blow|@abuse|圧力			r	r	危害を加える → 위해를 가하다
+加える	くわえる	v1	3	넣다	obj=@food|@liquid|@person			r	r	牛乳を加える → 우유를 넣다
+間違う	まちがう	v5	1	틀리다			vol=- asp=change te=past	r	r	答えを間違う → 답을 틀리다
+間違う	まちがう	v5	2	잘못되다	subj=@idea|@plan|@speech			r	r	考えが間違っている → 생각이 잘못됐다
+話し掛ける	はなしかける	v1	1	말을 걸다			vol=+ asp=activity te=go	r	r	彼女に話しかける → 그녀에게 말을 걸다
+名乗る	なのる	v5	1	이름을 밝히다			vol=+ asp=change te=past	r	r	名乗らずに帰る → 이름을 밝히지 않고 돌아가다
+名乗る	なのる	v5	2	자칭하다	obj=@person.role|@post|@organization			r	r	羊飼いを名乗る → 양치기를 자칭하다
+名付ける	なづける	v1	1	이름 붙이다			vol=+ asp=change te=past	r	r	魔法の図書館と名付ける → 마법의 도서관이라고 이름 붙이다
+ごまかす	ごまかす	v5	1	얼버무리다			vol=+ asp=change te=past	r	r	笑ってごまかす → 웃으며 얼버무리다
+ごまかす	ごまかす	v5	2	속이다	obj=自分|@person			r	r	自分をごまかす → 자신을 속이다
+明かす	あかす	v5	1	밝히다			vol=+ asp=change te=past	r	r	正体を明かす → 정체를 밝히다
+明かす	あかす	v5	2	지새우다	obj=夜|一晩			r	r	夜を明かす → 밤을 지새우다
+嘗める	なめる	v1	1	핥다			vol=+ asp=activity te=go	r	r	指を舐める → 손가락을 핥다
+嘗める	なめる	v1	2	얕보다	obj=@person|@group|@organization			r	r	相手を舐める → 상대를 얕보다
+ふざける	ふざける	v1	1	장난치다			vol=+ asp=activity te=go	r	r	ふざけてばかりいる → 장난만 치다
+ふざける	ふざける	v1	2	터무니없다	form=attr head=@speech|@plan|@idea			r	r	ふざけた提案 → 터무니없는 제안
+からかう	からかう	v5	1	놀리다			vol=+ asp=activity te=go	r	r	友達をからかう → 친구를 놀리다
+苛める	いじめる	v1	1	괴롭히다			vol=+ asp=activity te=go	r	r	弱い者をいじめる → 약한 사람을 괴롭히다
+尽くす	つくす	v5	1	다하다			vol=+ asp=activity te=go	r	r	全力を尽くす → 전력을 다하다
+尽くす	つくす	v5	2	헌신하다	dat=@person|@organization|国			r	r	国に尽くす → 나라에 헌신하다
+庇う	かばう	v5	1	감싸다			vol=+ asp=activity te=go	r	r	友達を庇う → 친구를 감싸다
+向き合う	むきあう	v5	1	마주하다			vol=+ asp=change te=go	r	r	過去と向き合う → 과거와 마주하다
+寄り添う	よりそう	v5	1	바짝 붙다			vol=+ asp=change te=eo	r	r	彼に寄り添う → 그에게 바짝 붙다
+寄り添う	よりそう	v5	2	공감하다	dat=@emotion|悩み			r	r	気持ちに寄り添う → 마음에 공감하다
+気遣う	きづかう	v5	1	배려하다			vol=+ asp=activity te=go	r	r	相手を気遣う → 상대를 배려하다
+見張る	みはる	v5	1	감시하다			vol=+ asp=activity te=go	r	r	彼を見張る → 그를 감시하다
+見張る	みはる	v5	2	망을 보다	obj=-			r	r	見張っておけ → 망을 봐
+出迎える	でむかえる	v1	1	맞이하다			vol=+ asp=change te=go	r	r	客を出迎える → 손님을 맞이하다
+振り返る	ふりかえる	v5	1	돌아보다			vol=+ asp=change te=past	r	r	後ろを振り返る → 뒤를 돌아보다
+振り返る	ふりかえる	v5	2	되돌아보다	obj=@time|記憶|思い出			r	r	過去を振り返る → 과거를 되돌아보다
+振り向く	ふりむく	v5	1	돌아보다		に=을	vol=+ asp=change te=past	r	r	声に振り向く → 소리에 돌아보다
+向く	むく	v5	1	향하다			vol=+ asp=change te=go	r	r	窓が南を向く → 창이 남쪽을 향하다
+向く	むく	v5	2	보다	subj=@person obj=@direction			r	r	こっちを向く → 이쪽을 보다
+向く	むく	v5	3	맞다	dat=@person|@activity|@task|@skill			r	r	仕事に向く → 일에 맞다
+向く	むく	v5	4	내키다	subj=気			r	r	気が向く → 마음이 내키다
+近付ける	ちかづける	v1	1	가까이 대다			vol=+ asp=change te=go	r	r	顔を近づける → 얼굴을 가까이 대다
+近付ける	ちかづける	v1	2	접근시키다	obj=@person|@animal|@monster			r	r	敵を近づけない → 적을 접근시키지 않다
+放つ	はなつ	v5	1	내뿜다			vol=+ asp=change te=go	r	r	光を放つ → 빛을 내뿜다
+放つ	はなつ	v5	2	쏘다	obj=@ammunition|@magic|矢			r	r	矢を放つ → 화살을 쏘다
+放る	ほうる	v5	1	던지다			vol=+ asp=change te=go	r	r	ボールを放る → 공을 던지다
+飛び出す	とびだす	v5	1	뛰쳐나가다			vol=+ asp=change te=past	r	r	部屋を飛び出す → 방을 뛰쳐나가다
+飛び出す	とびだす	v5	2	튀어나오다	subj=@thing|@liquid|@vehicle			r	r	車が飛び出す → 차가 튀어나오다
+飛び込む	とびこむ	v5	1	뛰어들다			vol=+ asp=change te=past	r	r	海に飛び込む → 바다에 뛰어들다
+飛び下りる	とびおりる	v1	1	뛰어내리다			vol=+ asp=change te=past	r	r	橋から飛び降りる → 다리에서 뛰어내리다
+跳ねる	はねる	v1	1	뛰다			vol=+ asp=activity te=go	r	r	ぴょんぴょん跳ねる → 깡충깡충 뛰다
+跳ねる	はねる	v1	2	튀다	subj=@thing|@liquid|@ammunition			r	r	水が跳ねる → 물이 튀다
+跳ねる	はねる	v1	3	튀어 오르다	subj=@body			r	r	身体が跳ねる → 몸이 튀어 오르다
+駆け寄る	かけよる	v5	1	달려가다		に=에게	vol=+ asp=change te=past	r	r	友達に駆け寄る → 친구에게 달려가다
+駆け込む	かけこむ	v5	1	뛰어 들어가다			vol=+ asp=change te=past	r	r	家に駆け込む → 집으로 뛰어 들어가다
+駆け付ける	かけつける	v1	1	달려가다			vol=+ asp=change te=past	r	r	現場に駆けつける → 현장으로 달려가다
+這う	はう	v5	1	기다			vol=+ asp=activity te=go	r	r	床を這う → 바닥을 기다
+転ぶ	ころぶ	v5	1	넘어지다			vol=- asp=change te=past	r	r	道で転ぶ → 길에서 넘어지다
+転がる	ころがる	v5	1	구르다			vol=+ asp=activity te=go	r	r	ボールが転がる → 공이 구르다
+転がる	ころがる	v5	2	드러눕다	subj=@person dat=@bedding|@furniture|@seat			r	r	ベッドに転がる → 침대에 드러눕다
+立ち上がる	たちあがる	v5	1	일어서다			vol=+ asp=change te=eo	r	r	席から立ち上がる → 자리에서 일어서다
+立ち上がる	たちあがる	v5	2	뜨다	subj=ウィンドウ|画面			r	r	画面が立ち上がる → 화면이 뜨다
+立ち止まる	たちどまる	v5	1	멈춰 서다			vol=+ asp=change te=eo	r	r	道で立ち止まる → 길에서 멈춰 서다
+立ち去る	たちさる	v5	1	떠나다			vol=+ asp=change te=past	r	r	その場を立ち去る → 그 자리를 떠나다
+立ち寄る	たちよる	v5	1	들르다			vol=+ asp=change te=past	r	r	店に立ち寄る → 가게에 들르다
+起き上がる	おきあがる	v5	1	일어나다			vol=+ asp=change te=past	r	r	ベッドから起き上がる → 침대에서 일어나다
+潜る	もぐる	v5	1	잠수하다			vol=+ asp=change te=eo	r	r	海に潜る → 바다에 잠수하다
+潜る	もぐる	v5	2	파고들다	dat=@bedding|@furniture			r	r	布団に潜る → 이불 속으로 파고들다
+潜る	もぐる	v5	3	잠입하다	dat=@organization			r	r	組織に潜る → 조직에 잠입하다
+潜む	ひそむ	v5	1	숨다			vol=+ asp=change te=eo	r	r	物陰に潜む → 그늘에 숨다
+進める	すすめる	v1	1	진행하다			vol=+ asp=activity te=go	r	r	作業を進める → 작업을 진행하다
+進める	すすめる	v1	2	옮기다	obj=駒|足			r	r	足を進める → 발걸음을 옮기다
+去る	さる	v5	1	떠나다			vol=+ asp=change te=past	r	r	学園を去る → 학원을 떠나다
+去る	さる	v5	2	사라지다	subj=@abstract			r	r	危機が去る → 위기가 사라지다
+越える	こえる	v1	1	넘다			vol=+ asp=change te=past	r	r	山を越える → 산을 넘다
+越える	こえる	v1	2	건너다	obj=@water.body			r	r	川を越える → 강을 건너다
+通す	とおす	v5	1	통과시키다			vol=+ asp=change te=go	r	r	法案を通す → 법안을 통과시키다
+通す	とおす	v5	2	지나가게 하다	obj=@person|@place			r	r	ここは通さない → 여기는 지나가게 하지 않는다
+通す	とおす	v5	3	꿰다	obj=糸|腕			r	r	袖に腕を通す → 소매에 팔을 꿰다
+通す	とおす	v5	4	관철하다	obj=意見|主張			r	r	意見を通す → 의견을 관철하다
+通り過ぎる	とおりすぎる	v1	1	지나가다			vol=+ asp=change te=past	r	r	店の前を通り過ぎる → 가게 앞을 지나가다
+抜く	ぬく	v5	1	뽑다			vol=+ asp=change te=past	r	r	剣を抜く → 검을 뽑다
+抜く	ぬく	v5	2	빼다	obj=力|気			r	r	力を抜く → 힘을 빼다
+抜く	ぬく	v5	3	거르다	obj=@meal			r	r	朝食を抜く → 아침을 거르다
+抜く	ぬく	v5	4	앞지르다	obj=@person|@vehicle			r	r	前の車を抜く → 앞차를 앞지르다
+抜け出す	ぬけだす	v5	1	빠져나오다			vol=+ asp=change te=past	r	r	部室を抜け出す → 부실을 빠져나오다
+抜け出す	ぬけだす	v5	2	벗어나다	from=@abstract|@trouble			r	r	地獄から抜け出す → 지옥에서 벗어나다
+逃がす	にがす	v5	1	놓치다			vol=+ asp=change te=past	r	r	犯人を逃がす → 범인을 놓치다
+逃がす	にがす	v5	2	놓아주다	obj=@animal			r	r	鳥を逃がす → 새를 놓아주다
+逃す	のがす	v5	1	놓치다			vol=+ asp=change te=past	r	r	チャンスを逃す → 기회를 놓치다
+避ける	さける	v1	1	피하다			vol=+ asp=change te=past	r	r	危険を避ける → 위험을 피하다
+現われる	あらわれる	v1	1	나타나다			vol=- asp=change te=eo	r	r	男が現れる → 남자가 나타나다
+現われる	あらわれる	v1	2	드러나다	subj=@emotion|@character			r	r	感情が表れる → 감정이 드러나다
+表わす	あらわす	v5	1	나타내다			vol=+ asp=activity te=go	r	r	意味を表す → 의미를 나타내다
+表わす	あらわす	v5	2	드러내다	obj=姿|本性			r	r	姿を現す → 모습을 드러내다
+表わす	あらわす	v5	3	표현하다	obj=@emotion			r	r	喜びを表す → 기쁨을 표현하다
+示す	しめす	v5	1	보여 주다			vol=+ asp=activity te=go	r	r	誠意を示す → 성의를 보여 주다
+示す	しめす	v5	2	제시하다	obj=@plan|@info			r	r	手がかりを示す → 단서를 제시하다
+示す	しめす	v5	3	가리키다	obj=@direction			r	r	方向を示す → 방향을 가리키다
+示す	しめす	v5	4	표하다	obj=感謝|敬意			r	r	敬意を示す → 경의를 표하다
+乗せる	のせる	v1	1	태우다			vol=+ asp=change te=go	r	r	客を車に乗せる → 손님을 차에 태우다
+乗せる	のせる	v1	2	싣다	obj=@thing dat=@vehicle			r	r	荷物を車に載せる → 짐을 차에 싣다
+乗せる	のせる	v1	3	얹다	dat=@body|@tableware|@furniture			r	r	頭に手を乗せる → 머리에 손을 얹다
+下ろす	おろす	v5	1	내리다			vol=+ asp=change te=go	r	r	銃を下ろす → 총을 내리다
+下ろす	おろす	v5	2	내려놓다	obj=荷物|@container			r	r	段ボールを下ろす → 상자를 내려놓다
+下ろす	おろす	v5	3	찾다	obj=@money			r	r	お金を下ろす → 돈을 찾다
+下ろす	おろす	v5	4	지우다	obj=子|胎児			r	r	子を堕ろす → 아이를 지우다
+引っ張る	ひっぱる	v5	1	잡아당기다			vol=+ asp=activity te=go	r	r	手を引っ張る → 손을 잡아당기다
+引っ張る	ひっぱる	v5	2	이끌다	obj=@group|@organization			r	r	チームを引っ張る → 팀을 이끌다
+引っ張る	ひっぱる	v5	3	끌어들이다	dat=@group|@organization|仲間			r	r	仲間に引っ張る → 동료로 끌어들이다
+押さえる	おさえる	v1	1	누르다			vol=+ asp=change te=go	r	r	傷口を押さえる → 상처를 누르다
+押さえる	おさえる	v1	2	억누르다	obj=@emotion			r	r	怒りを抑える → 분노를 억누르다
+押さえる	おさえる	v1	3	붙잡다	obj=@person			r	r	犯人を押さえる → 범인을 붙잡다
+押さえる	おさえる	v1	4	가리다	obj=口|目			r	r	口を押さえる → 입을 가리다
+押さえる	おさえる	v1	5	잡다	obj=@place|@seat|@room			r	r	場所を押さえる → 자리를 잡다
+抱く	だく	v5	1	안다			vol=+ asp=activity te=go lu	r	r	赤ちゃんを抱く → 아기를 안다
+抱く	いだく	v5	1	품다			vol=+ asp=change te=go	r	r	希望を抱く → 희망을 품다
+抱く	いだく	v5	2	안다	obj=@person|@animal|@body|@thing			r	r	子供を抱く → 아이를 안다
+抱える	かかえる	v1	1	안다			vol=+ asp=change te=go	r	r	荷物を抱える → 짐을 안다
+抱える	かかえる	v1	2	감싸 쥐다	obj=頭			r	r	頭を抱える → 머리를 감싸 쥐다
+抱える	かかえる	v1	3	끌어안다	obj=膝			r	r	膝を抱える → 무릎을 끌어안다
+抱える	かかえる	v1	4	떠안다	obj=借金|責任			r	r	借金を抱える → 빚을 떠안다
+抱える	かかえる	v1	5	거느리다	obj=@person.role|@group			r	r	部下を抱える → 부하를 거느리다
+抱える	かかえる	v1	6	맡다	obj=@task|@request			r	r	依頼を抱える → 의뢰를 맡다
+抱き締める	だきしめる	v1	1	껴안다			vol=+ asp=change te=go	r	r	彼女を抱きしめる → 그녀를 껴안다
+抱き付く	だきつく	v5	1	안기다			vol=+ asp=change te=eo	r	r	彼に抱きつく → 그에게 안기다
+抱き付く	だきつく	v5	2	매달리다	dat=@body			r	r	腕に抱きつく → 팔에 매달리다
+掴む	つかむ	v5	1	잡다			vol=+ asp=change te=go	r	r	腕を掴む → 팔을 잡다
+掴む	つかむ	v5	2	파악하다	obj=@info			r	r	真相を掴む → 진상을 파악하다
+掴む	つかむ	v5	3	손에 넣다	obj=@result|栄光			r	r	勝利を掴む → 승리를 손에 넣다
+撫でる	なでる	v1	1	쓰다듬다			vol=+ asp=activity te=go	r	r	頭を撫でる → 머리를 쓰다듬다
+撫でる	なでる	v1	2	어루만지다	subj=@wind			r	r	風が頬を撫でる → 바람이 뺨을 어루만지다
+叩く	たたく	v5	1	두드리다			vol=+ asp=activity te=go	r	r	ドアを叩く → 문을 두드리다
+叩く	たたく	v5	2	치다	obj=手|@furniture			r	r	机を叩く → 책상을 치다
+叩く	たたく	v5	3	때리다	obj=@body|@person			r	r	頬を叩く → 뺨을 때리다
+殴る	なぐる	v5	1	때리다			vol=+ asp=change te=go	r	r	人を殴る → 사람을 때리다
+蹴る	ける	v5	1	차다			vol=+ asp=change te=go	r	r	ボールを蹴る → 공을 차다
+蹴る	ける	v5	2	거절하다	obj=@request			r	r	依頼を蹴る → 의뢰를 거절하다
+突く	つく	v5	1	찌르다			vol=+ asp=change te=go	r	r	弱点を突く → 약점을 찌르다
+突く	つく	v5	2	짚다	obj=手|杖			r	r	机に手をつく → 책상에 손을 짚다
+突く	つく	v5	3	꿇다	obj=膝			r	r	膝をつく → 무릎을 꿇다
+突き込む	つきこむ	v5	1	찔러 넣다			vol=+ asp=change te=go	r	r	ポケットに手を突っ込む → 주머니에 손을 찔러 넣다
+突き込む	つきこむ	v5	2	돌진하다	subj=@vehicle			r	r	車が店に突っ込む → 차가 가게로 돌진하다
+振り回す	ふりまわす	v5	1	휘두르다			vol=+ asp=activity te=go	r	r	剣を振り回す → 검을 휘두르다
+持ち上げる	もちあげる	v1	1	들어 올리다			vol=+ asp=change te=go	r	r	箱を持ち上げる → 상자를 들어 올리다
+持ち上げる	もちあげる	v1	2	치켜세우다	obj=@person.role|@person.higher			r	r	上司を持ち上げる → 상사를 치켜세우다
+持ち帰る	もちかえる	v5	1	가져가다			vol=+ asp=change te=past	r	r	書類を持ち帰る → 서류를 가져가다
+持ち帰る	もちかえる	v5	2	데려가다	obj=@person			r	r	人を持ち帰る → 사람을 데려가다
+取り出す	とりだす	v5	1	꺼내다			vol=+ asp=change te=past	r	r	ポケットから携帯を取り出す → 주머니에서 휴대전화를 꺼내다
+取り上げる	とりあげる	v1	1	빼앗다			vol=+ asp=change te=past	r	r	携帯を取り上げる → 휴대전화를 빼앗다
+取り上げる	とりあげる	v1	2	다루다	obj=@topic|@question|@incident			r	r	問題を取り上げる → 문제를 다루다
+取り上げる	とりあげる	v1	3	다루다	dat=@document|@info			r	r	新聞に取り上げられる → 신문에 다뤄지다
+取り上げる	とりあげる	v1	4	채택하다	obj=@idea|意見			r	r	意見を取り上げる → 의견을 채택하다
+取り戻す	とりもどす	v5	1	되찾다			vol=+ asp=change te=past	r	r	元気を取り戻す → 기운을 되찾다
+取り戻す	とりもどす	v5	2	만회하다	obj=遅れ|損失			r	r	遅れを取り戻す → 늦은 것을 만회하다
+取り消す	とりけす	v5	1	취소하다			vol=+ asp=change te=past	r	r	予約を取り消す → 예약을 취소하다
+取り替える	とりかえる	v1	1	바꾸다			vol=+ asp=activity te=go	r	r	ラバーを取り替える → 러버를 바꾸다
+取り組む	とりくむ	v5	1	임하다			vol=+ asp=activity te=go	r	r	問題に取り組む → 문제에 임하다
+差し出す	さしだす	v5	1	내밀다			vol=+ asp=activity te=go	r	r	手を差し出す → 손을 내밀다
+差し出す	さしだす	v5	2	넘기다	obj=@person			r	r	人質を差し出す → 인질을 넘기다
+差し出す	さしだす	v5	3	내놓다	obj=命|身			r	r	命を差し出す → 목숨을 내놓다
+引き出す	ひきだす	v5	1	끌어내다			vol=+ asp=activity te=go	r	r	情報を引き出す → 정보를 끌어내다
+引き出す	ひきだす	v5	2	찾다	obj=@money			r	r	お金を引き出す → 돈을 찾다
+引き返す	ひきかえす	v5	1	되돌아가다			vol=+ asp=activity te=go	r	r	来た道を引き返す → 온 길을 되돌아가다
+引き止める	ひきとめる	v1	1	붙잡다			vol=+ asp=activity te=go	r	r	帰る人を引き止める → 가려는 사람을 붙잡다
+引き寄せる	ひきよせる	v1	1	끌어당기다			vol=+ asp=activity te=go	r	r	体を引き寄せる → 몸을 끌어당기다
+引っ掛かる	ひっかかる	v5	1	걸리다			vol=- asp=change te=eo	r	r	赤信号に引っかかる → 빨간불에 걸리다
+引っ掛かる	ひっかかる	v5	2	마음에 걸리다	subj=@info|@speech			r	r	その一言が引っかかる → 그 한마디가 마음에 걸리다
+引っ掛かる	ひっかかる	v5	3	넘어가다	dat=@person			r	r	女に引っかかる → 여자한테 넘어가다
+引っ込む	ひっこむ	v5	1	들어가다			vol=+ asp=change te=eo	r	r	奥に引っ込む → 안쪽으로 들어가다
+引っ込む	ひっこむ	v5	2	빠지다	form=imp|te-request			r	r	引っ込んでろ → 빠져 있어
+立ち向かう	たちむかう	v5	1	맞서다			vol=+ asp=activity te=go	r	r	困難に立ち向かう → 어려움에 맞서다
+寄せる	よせる	v1	1	붙이다			vol=+ asp=activity te=go	r	r	体を寄せる → 몸을 붙이다
+寄せる	よせる	v1	2	찌푸리다	obj=眉|眉間			r	r	眉を寄せる → 눈썹을 찌푸리다
+寄せる	よせる	v1	3	보내다	obj=@speech|@message			r	r	祝福の言葉を寄せる → 축하의 말을 보내다
+乗り越える	のりこえる	v1	1	극복하다			vol=+ asp=activity te=go	r	r	困難を乗り越える → 어려움을 극복하다
+乗り越える	のりこえる	v1	2	넘다	obj=壁|@nature			r	r	壁を乗り越える → 벽을 넘다
+乗り込む	のりこむ	v5	1	올라타다			vol=+ asp=change te=go	r	r	ヘリに乗り込む → 헬기에 올라타다
+乗り込む	のりこむ	v5	2	쳐들어가다	dat=@place|@organization			r	r	敵地に乗り込む → 적지에 쳐들어가다
+逃げ出す	にげだす	v5	1	도망치다			vol=+ asp=change te=go	r	r	家から逃げ出す → 집에서 도망치다
+迫る	せまる	v5	1	다가오다			vol=+ asp=change te=go	r	r	敵が迫る → 적이 다가오다
+迫る	せまる	v5	2	요구하다	obj=@abstract			r	r	返事を迫る → 대답을 요구하다
+襲う	おそう	v5	1	습격하다			vol=+ asp=activity te=go	r	r	敵が村を襲う → 적이 마을을 습격하다
+襲う	おそう	v5	2	엄습하다	subj=@emotion|@illness			r	r	恐怖が襲う → 공포가 엄습하다
+襲う	おそう	v5	3	엄습하다	dat=@emotion|@illness			r	r	痛みに襲われる → 통증이 엄습하다
+襲う	おそう	v5	4	덮치다	subj=@incident|@weather			r	r	災害が町を襲う → 재해가 마을을 덮치다
+捕らえる	とらえる	v1	1	붙잡다			vol=+ asp=change te=go	r	r	犯人を捕らえる → 범인을 붙잡다
+捕らえる	とらえる	v1	2	포착하다	subj=@device|目			r	r	カメラが姿を捉える → 카메라가 모습을 포착하다
+捕らえる	とらえる	v1	3	받아들이다	obj=@abstract			r	r	前向きに捉える → 긍정적으로 받아들이다
+捕まる	つかまる	v5	1	잡히다			vol=- asp=change te=eo	r	r	泥棒が捕まる → 도둑이 잡히다
+捕まる	つかまる	v5	2	잡다	dat=@body|@hand|@object.long|手摺			r	r	手すりにつかまる → 난간을 잡다
+囲む	かこむ	v5	1	둘러싸다			vol=+ asp=activity te=go	r	r	三人が白崎を囲む → 세 사람이 시라사키를 둘러싸다
+歩き回る	あるきまわる	v5	1	돌아다니다			vol=+ asp=activity te=go	r	r	街を歩き回る → 거리를 돌아다니다
+走り回る	はしりまわる	v5	1	뛰어다니다			vol=+ asp=activity te=go	r	r	校内を走り回る → 교내를 뛰어다니다
+背負う	せおう	v5	1	짊어지다			vol=+ asp=activity te=go	r	r	責任を背負う → 책임을 짊어지다
+背負う	せおう	v5	2	업다	obj=@person			r	r	子供を背負う → 아이를 업다
+背負う	せおう	v5	3	메다	obj=@container			r	r	リュックを背負う → 배낭을 메다
+担ぐ	かつぐ	v5	1	메다			vol=+ asp=activity te=go	r	r	荷物を担ぐ → 짐을 메다
+担ぐ	かつぐ	v5	2	업다	obj=@person			r	r	怪我人を担ぐ → 부상자를 업다
+背ける	そむける	v1	1	돌리다			vol=+ asp=activity te=go	r	r	顔を背ける → 얼굴을 돌리다
+背ける	そむける	v1	2	외면하다	obj=目 from=@abstract			r	r	現実から目を背ける → 현실을 외면하다
+傾ける	かたむける	v1	1	기울이다			vol=+ asp=activity te=go	r	r	耳を傾ける → 귀를 기울이다
+傾ける	かたむける	v1	2	쏟다	obj=@emotion|@strength			r	r	情熱を傾ける → 열정을 쏟다
+傾く	かたむく	v5	1	기울다			vol=- asp=change te=eo	r	r	日が傾く → 해가 기울다
+しゃがむ	しゃがむ	v5	1	쪼그려 앉다			vol=+ asp=change te=eo pclass=posture	r	r	しゃがんで目線を合わせる → 쪼그려 앉아 눈높이를 맞추다
+伏せる	ふせる	v5	1	엎드리다			vol=+ asp=change te=eo	r	r	地面に伏せる → 땅에 엎드리다
+伏せる	ふせる	v5	2	숙이다	obj=顔|頭			r	r	顔を伏せる → 얼굴을 숙이다
+伏せる	ふせる	v5	3	내리깔다	obj=@gaze			r	r	目を伏せる → 눈을 내리깔다
+伏せる	ふせる	v5	4	숨기다	obj=@info|@personal.info|@plan			r	r	名前を伏せる → 이름을 숨기다
+揺らす	ゆらす	v5	1	흔들다			vol=+ asp=activity te=go	r	r	体を揺らす → 몸을 흔들다
+飛ばす	とばす	v5	1	날리다			vol=+ asp=activity te=go	r	r	ドローンを飛ばす → 드론을 날리다
+飛ばす	とばす	v5	2	튀기다	obj=@liquid|水しぶき|唾			r	r	水しぶきを飛ばす → 물보라를 튀기다
+飛ばす	とばす	v5	3	건너뛰다	obj=順番|ページ			r	r	順番を飛ばす → 순서를 건너뛰다
+飛ばす	とばす	v5	4	내리다	obj=@order			r	r	指示を飛ばす → 지시를 내리다
+転がす	ころがす	v5	1	굴리다			vol=+ asp=activity te=go	r	r	ボールを転がす → 공을 굴리다
+転がす	ころがす	v5	2	몰다	obj=@vehicle			r	r	バイクを転がす → 오토바이를 몰다
+伸ばす	のばす	v5	1	뻗다			vol=+ asp=activity te=go	r	r	手を伸ばす → 손을 뻗다
+伸ばす	のばす	v5	2	연장하다	obj=@time.point|@duration|期限			r	r	期限を延ばす → 기한을 연장하다
+伸ばす	のばす	v5	3	늘리다	obj=@score|@record|@quantity			r	r	得点を伸ばす → 득점을 늘리다
+伸ばす	のばす	v5	4	펴다	obj=背筋|腰			r	r	背筋を伸ばす → 등을 펴다
+伸ばす	のばす	v5	5	기르다	obj=@hair|髭|爪			r	r	髪を伸ばす → 머리를 기르다
+伸ばす	のばす	v5	6	키우다	obj=@skill			r	r	才能を伸ばす → 재능을 키우다
+縮む	ちぢむ	v5	1	줄어들다			vol=- asp=change te=past	r	r	シャツが縮む → 셔츠가 줄어들다
+高まる	たかまる	v5	1	높아지다			vol=- asp=change te=past	r	r	関心が高まる → 관심이 높아지다
+高まる	たかまる	v5	2	고조되다	subj=@emotion|@mood			r	r	緊張が高まる → 긴장이 고조되다
+固まる	かたまる	v5	1	굳다			vol=- asp=change te=eo	r	r	セメントが固まる → 시멘트가 굳다
+固まる	かたまる	v5	2	정해지다	subj=@plan|@idea			r	r	作戦が固まる → 작전이 정해지다
+溶ける	とける	v1	1	녹다			vol=- asp=change te=eo	r	r	氷が溶ける → 얼음이 녹다
+溶かす	とかす	v5	1	녹이다			vol=+ asp=activity te=go	r	r	バターを溶かす → 버터를 녹이다
+崩れる	くずれる	v1	1	무너지다			vol=- asp=change te=eo	r	r	バランスが崩れる → 균형이 무너지다
+崩れる	くずれる	v1	2	나빠지다	subj=@weather			r	r	天気が崩れる → 날씨가 나빠지다
+崩す	くずす	v5	1	무너뜨리다			vol=+ asp=activity te=go	r	r	計画を崩す → 계획을 무너뜨리다
+崩す	くずす	v5	2	잃다	obj=バランス|体勢			r	r	バランスを崩す → 균형을 잃다
+潰れる	つぶれる	v1	1	찌그러지다			vol=- asp=change te=eo	r	r	缶が潰れる → 캔이 찌그러지다
+潰れる	つぶれる	v1	2	망하다	subj=@shop|@organization			r	r	店が潰れる → 가게가 망하다
+潰れる	つぶれる	v1	3	무너지다	subj=@person			r	r	重圧で潰れる → 중압감에 무너지다
+潰れる	つぶれる	v1	4	구겨지다	subj=面子|体面			r	r	面子が潰れる → 체면이 구겨지다
+潰す	つぶす	v5	1	찌그러뜨리다			vol=+ asp=activity te=go	r	r	缶を潰す → 캔을 찌그러뜨리다
+潰す	つぶす	v5	2	으깨다	obj=@food			r	r	芋を潰す → 감자를 으깨다
+潰す	つぶす	v5	3	망치다	obj=@plan|@idea|可能性			r	r	作戦を潰す → 작전을 망치다
+潰す	つぶす	v5	4	없애다	obj=@organization|@shop			r	r	部を潰す → 동아리를 없애다
+潰す	つぶす	v5	5	때우다	obj=時間|暇			r	r	時間を潰す → 시간을 때우다
+破れる	やぶれる	v1	1	찢어지다			vol=- asp=change te=eo	r	r	紙が破れる → 종이가 찢어지다
+破れる	やぶれる	v1	2	깨지다	subj=夢|均衡			r	r	均衡が破れる → 균형이 깨지다
+破れる	やぶれる	v1	3	지다	dat=@competition|戦い			r	r	戦いに破れる → 싸움에 지다
+破る	やぶる	v5	1	찢다			vol=+ asp=activity te=go	r	r	紙を破る → 종이를 찢다
+破る	やぶる	v5	2	어기다	obj=@rule|約束			r	r	約束を破る → 약속을 어기다
+破る	やぶる	v5	3	깨다	obj=沈黙|@record			r	r	沈黙を破る → 침묵을 깨다
+破る	やぶる	v5	4	이기다	obj=@person|@organization			r	r	相手を破る → 상대를 이기다
+乾かす	かわかす	v5	1	말리다			vol=+ asp=activity te=go	r	r	髪を乾かす → 머리를 말리다
+濡らす	ぬらす	v5	1	적시다			vol=+ asp=activity te=go	r	r	タオルを濡らす → 수건을 적시다
+冷める	さめる	v1	1	식다			vol=- asp=change te=past	r	r	料理が冷める → 음식이 식다
+冷ます	さます	v5	1	식히다			vol=+ asp=activity te=go	r	r	お茶を冷ます → 차를 식히다
+温まる	あたたまる	v5	1	따뜻해지다			vol=- asp=change te=past	r	r	体が温まる → 몸이 따뜻해지다
+温まる	あたたまる	v5	2	데워지다	subj=@liquid|@food			r	r	スープが温まる → 국이 데워지다
+燃やす	もやす	v5	1	태우다			vol=+ asp=activity te=go	r	r	ごみを燃やす → 쓰레기를 태우다
+燃やす	もやす	v5	2	불태우다	obj=@emotion|闘志			r	r	闘志を燃やす → 투지를 불태우다
+焦げる	こげる	v1	1	타다			vol=- asp=change te=past	r	r	パンが焦げる → 빵이 타다
+腐る	くさる	v5	1	썩다			vol=- asp=change te=past	r	r	魚が腐る → 생선이 썩다
+枯れる	かれる	v1	1	시들다			vol=- asp=change te=eo	r	r	花が枯れる → 꽃이 시들다
+枯れる	かれる	v1	2	마르다	subj=@water.body|井戸			r	r	井戸が枯れる → 우물이 마르다
+枯れる	かれる	v1	3	쉬다	subj=声			r	r	声が枯れる → 목소리가 쉬다
+生える	はえる	v1	1	나다			vol=- asp=change te=eo	r	r	ひげが生える → 수염이 나다
+生える	はえる	v1	2	자라다	subj=@plant			r	r	草が生える → 풀이 자라다
+散る	ちる	v5	1	흩어지다			vol=- asp=change te=eo	r	r	人が散る → 사람들이 흩어지다
+散る	ちる	v5	2	지다	subj=@plant			r	r	桜が散る → 벚꽃이 지다
+散る	ちる	v5	3	튀다	subj=火花|血			r	r	火花が散る → 불꽃이 튀다
+輝く	かがやく	v5	1	빛나다			vol=- asp=activity te=go	r	r	星が輝く → 별이 빛나다
+輝く	かがやく	v5	2	환해지다	subj=表情|顔			r	r	表情が輝く → 표정이 환해지다
+照らす	てらす	v5	1	비추다			vol=+ asp=activity te=go	r	r	ライトで道を照らす → 손전등으로 길을 비추다
+沈む	しずむ	v5	1	가라앉다			vol=- asp=change te=eo	r	r	船が沈む → 배가 가라앉다
+沈む	しずむ	v5	2	지다	subj=@sky|日			r	r	日が沈む → 해가 지다
+沈める	しずめる	v1	1	가라앉히다			vol=+ asp=activity te=go	r	r	船を沈める → 배를 가라앉히다
+溢れる	あふれる	v1	1	넘치다			vol=- asp=change te=eo	r	r	水が溢れる → 물이 넘치다
+溢れる	あふれる	v1	2	흘러나오다	subj=@sound|@speech|ため息			r	r	ため息があふれる → 한숨이 흘러나오다
+満ちる	みちる	v1	1	가득 차다			vol=- asp=change te=eo	r	r	期待に満ちた目 → 기대에 가득 찬 눈
+満ちる	みちる	v1	2	차오르다	subj=潮			r	r	潮が満ちる → 밀물이 차오르다
+満たす	みたす	v5	1	채우다			vol=+ asp=activity te=go	r	r	コップを水で満たす → 컵을 물로 채우다
+満たす	みたす	v5	2	충족시키다	obj=条件|@request			r	r	条件を満たす → 조건을 충족시키다
+溜まる	たまる	v5	1	쌓이다			vol=- asp=change te=eo	r	r	疲れが溜まる → 피로가 쌓이다
+溜まる	たまる	v5	2	모이다	subj=@money			r	r	お金が貯まる → 돈이 모이다
+溜まる	たまる	v5	3	고이다	subj=@liquid|涙			r	r	涙が溜まる → 눈물이 고이다
+溜める	ためる	v1	1	모으다			vol=+ asp=activity te=go	r	r	お金を貯める → 돈을 모으다
+溜める	ためる	v1	2	쌓다	obj=ストレス|疲れ			r	r	ストレスを溜める → 스트레스를 쌓다
+溜める	ためる	v1	3	글썽이다	obj=涙			r	r	涙を溜める → 눈물을 글썽이다
+詰まる	つまる	v5	1	막히다			vol=- asp=change te=eo	r	r	鼻が詰まる → 코가 막히다
+詰まる	つまる	v5	2	가득 차다	dat=@container|@document|中			r	r	箱に詰まっている → 상자에 가득 차 있다
+詰まる	つまる	v5	3	좁혀지다	subj=間隔|距離			r	r	距離が詰まる → 거리가 좁혀지다
+詰める	つめる	v1	1	채우다			vol=+ asp=activity te=go	r	r	箱に荷物を詰める → 상자에 짐을 채우다
+詰める	つめる	v1	2	좁히다	obj=距離|間合い			r	r	距離を詰める → 거리를 좁히다
+詰める	つめる	v1	3	다듬다	obj=詳細|@plan			r	r	詳細を詰める → 세부를 다듬다
+埋まる	うまる	v5	1	묻히다			vol=- asp=change te=eo	r	r	砂に埋まる → 모래에 묻히다
+埋まる	うまる	v5	2	차다	subj=@seat|@plan|@time			r	r	席が埋まる → 자리가 차다
+埋まる	うまる	v5	3	좁혀지다	subj=差|距離			r	r	差が埋まる → 격차가 좁혀지다
+埋まる	うまる	v5	4	메워지다	subj=穴|隙間			r	r	穴が埋まる → 구멍이 메워지다
+埋める	うめる	v1	1	묻다			vol=+ asp=activity te=go	r	r	顔を埋める → 얼굴을 묻다
+埋める	うめる	v1	2	메우다	obj=穴|差			r	r	穴を埋める → 구멍을 메우다
+埋める	うめる	v1	3	채우다	obj=予定|空欄			r	r	空欄を埋める → 빈칸을 채우다
+空ける	あける	v1	1	비우다			vol=+ asp=activity te=go	r	r	家を空ける → 집을 비우다
+空ける	あける	v1	2	비켜 주다	obj=道			r	r	道を空ける → 길을 비켜 주다
+空ける	あける	v1	3	뚫다	obj=穴			r	r	穴を空ける → 구멍을 뚫다
+閉じる	とじる	v1	1	닫다			vol=+ asp=activity te=go	r	r	ブラウザを閉じる → 브라우저를 닫다
+閉じる	とじる	v1	2	감다	obj=目|瞳			r	r	目を閉じる → 눈을 감다
+閉じる	とじる	v1	3	덮다	obj=本|@document			r	r	本を閉じる → 책을 덮다
+閉じる	とじる	v1	4	접다	obj=傘|扇子			r	r	扇子を閉じる → 부채를 접다
+閉じる	とじる	v1	5	다물다	obj=口|唇			r	r	口を閉じる → 입을 다물다
+閉じる	とじる	v1	6	오므리다	obj=足|脚			r	r	足を閉じる → 다리를 오므리다
+塞ぐ	ふさぐ	v5	1	막다			vol=+ asp=activity te=go	r	r	口を塞ぐ → 입을 막다
+塞ぐ	ふさぐ	v5	2	가리다	obj=視界|目			r	r	視界を塞ぐ → 시야를 가리다
+膨らむ	ふくらむ	v5	1	부풀다			vol=- asp=change te=eo	r	r	風船が膨らむ → 풍선이 부풀다
+膨らむ	ふくらむ	v5	2	커지다	subj=@emotion|@mood|予算			r	r	期待が膨らむ → 기대가 커지다
+重なる	かさなる	v5	1	겹치다			vol=- asp=change te=eo	r	r	予定が重なる → 일정이 겹치다
+重なる	かさなる	v5	2	포개지다	subj=唇			r	r	唇が重なる → 입술이 포개지다
+重ねる	かさねる	v1	1	포개다			vol=+ asp=activity te=go	r	r	手を重ねる → 손을 포개다
+重ねる	かさねる	v1	2	거듭하다	obj=努力|失敗			r	r	努力を重ねる → 노력을 거듭하다
+混ざる	まざる	v5	1	섞이다			vol=- asp=change te=eo	r	r	色が混ざる → 색이 섞이다
+混ざる	まざる	v5	2	끼다	subj=@person dat=@group|@activity			r	r	仲間に混ざる → 무리에 끼다
+揃う	そろう	v5	1	모이다			vol=- asp=change te=eo	r	r	全員が揃う → 전원이 모이다
+揃う	そろう	v5	2	갖춰지다	subj=@thing|@info|条件			r	r	材料が揃う → 재료가 갖춰지다
+揃える	そろえる	v1	1	갖추다			vol=+ asp=activity te=go	r	r	道具を揃える → 도구를 갖추다
+揃える	そろえる	v1	2	맞추다	obj=足並み|端			r	r	足並みを揃える → 발을 맞추다
+揃える	そろえる	v1	3	모으다	obj=@body|@hand			r	r	指を揃える → 손가락을 모으다
+整う	ととのう	v5	1	갖춰지다			vol=- asp=change te=eo	r	r	体制が整う → 체제가 갖춰지다
+整う	ととのう	v5	2	정돈되다	subj=@hair|@room			r	r	部屋が整う → 방이 정돈되다
+整う	ととのう	v5	3	가라앉다	subj=息|呼吸			r	r	息が整う → 숨이 가라앉다
+整える	ととのえる	v1	1	갖추다			vol=+ asp=activity te=go	r	r	環境を整える → 환경을 갖추다
+整える	ととのえる	v1	2	다듬다	obj=@hair|髪型			r	r	髪型を整える → 머리를 다듬다
+整える	ととのえる	v1	3	고르다	obj=息|呼吸			r	r	呼吸を整える → 숨을 고르다
+整える	ととのえる	v1	4	맞추다	obj=味			r	r	味を調える → 간을 맞추다
+整える	ととのえる	v1	5	가다듬다	obj=@emotion|声			r	r	気持ちを整える → 마음을 가다듬다
+纏める	まとめる	v1	1	정리하다			vol=+ asp=activity te=go	r	r	意見をまとめる → 의견을 정리하다
+纏める	まとめる	v1	2	챙기다	obj=荷物|持ち物			r	r	荷物をまとめる → 짐을 챙기다
+纏める	まとめる	v1	3	모으다	obj=@group|@info|意見			r	r	情報をまとめる → 정보를 모으다
+纏まる	まとまる	v5	1	정리되다			vol=- asp=change te=eo	r	r	考えがまとまる → 생각이 정리되다
+纏まる	まとまる	v5	2	모이다	subj=@group|@sound			r	r	拍手がまとまる → 박수가 하나로 모이다
+纏まる	まとまる	v5	3	성사되다	subj=縁談|商談			r	r	縁談がまとまる → 혼담이 성사되다
+片付く	かたづく	v5	1	끝나다			vol=- asp=change te=past	r	r	仕事が片付く → 일이 끝나다
+片付く	かたづく	v5	2	정리되다	subj=@room|@house			r	r	部屋が片付く → 방이 정리되다
+片付く	かたづく	v5	3	해결되다	subj=@trouble|@incident			r	r	事件が片付く → 사건이 해결되다
+終える	おえる	v1	1	마치다			vol=+ asp=activity te=past	r	r	仕事を終える → 일을 마치다
+果たす	はたす	v5	1	다하다			vol=+ asp=activity te=go	r	r	役割を果たす → 역할을 다하다
+果たす	はたす	v5	2	이루다	obj=目的|夢			r	r	目的を果たす → 목적을 이루다
+果たす	はたす	v5	3	지키다	obj=約束			r	r	約束を果たす → 약속을 지키다
+叶う	かなう	v5	1	이루어지다			vol=- asp=change te=past	r	r	願いが叶う → 소원이 이루어지다
+叶える	かなえる	v1	1	이루다			vol=+ asp=activity te=go	r	r	夢を叶える → 꿈을 이루다
+叶える	かなえる	v1	2	들어주다	obj=@request			r	r	願いを叶える → 소원을 들어주다
+失う	うしなう	v5	1	잃다			vol=- asp=change te=past	r	r	記憶を失う → 기억을 잃다
+失う	うしなう	v5	2	놓치다	obj=機会|タイミング			r	r	チャンスを失う → 기회를 놓치다
+生む	うむ	v5	1	낳다			vol=+ asp=change te=past	r	r	子供を産む → 아이를 낳다
+生む	うむ	v5	2	불러일으키다	obj=@emotion|誤解			r	r	誤解を生む → 오해를 불러일으키다
+生む	うむ	v5	3	만들어 내다	obj=状況|価値			r	r	価値を生む → 가치를 만들어 내다
+殺す	ころす	v5	1	죽이다			vol=+ asp=change te=past	r	r	敵を殺す → 적을 죽이다
+乱れる	みだれる	v1	1	흐트러지다			vol=- asp=change te=eo	r	r	髪が乱れる → 머리가 흐트러지다
+狂う	くるう	v5	1	미치다			vol=- asp=change te=past	r	r	彼は狂った → 그는 미쳤다
+狂う	くるう	v5	2	틀어지다	subj=@plan|予定			r	r	予定が狂う → 예정이 틀어지다
+狂う	くるう	v5	3	고장 나다	subj=@machine			r	r	時計が狂う → 시계가 고장 나다
+狂う	くるう	v5	4	흐트러지다	subj=@faculty			r	r	調子が狂う → 페이스가 흐트러지다
+痛む	いたむ	v5	1	아프다			vol=- asp=state te=simple	r	r	頭が痛む → 머리가 아프다
+痛む	いたむ	v5	2	상하다	subj=@food			r	r	食べ物が傷む → 음식이 상하다
+痛む	いたむ	v5	3	낡다	subj=@tool|@clothing|@building			r	r	家が傷む → 집이 낡다
+痛める	いためる	v1	1	다치다			vol=- asp=change te=past	r	r	腰を痛める → 허리를 다치다
+痛める	いためる	v1	2	상하다	obj=喉|胃			r	r	喉を痛める → 목을 상하다
+弱る	よわる	v5	1	약해지다			vol=- asp=change te=past	r	r	体が弱る → 몸이 약해지다
+零す	こぼす	v5	1	흘리다			vol=+ asp=activity te=go	r	r	涙をこぼす → 눈물을 흘리다
+零す	こぼす	v5	2	쏟다	obj=@drink|@liquid			r	r	コーヒーをこぼす → 커피를 쏟다
+零す	こぼす	v5	3	늘어놓다	obj=愚痴|不満			r	r	愚痴をこぼす → 푸념을 늘어놓다
+零す	こぼす	v5	4	짓다	obj=@expression			r	r	笑みをこぼす → 미소를 짓다
+零れる	こぼれる	v1	1	쏟아지다			vol=- asp=change te=eo	r	r	水がこぼれる → 물이 쏟아지다
+零れる	こぼれる	v1	2	새어 나오다	subj=@sound|吐息|ため息			r	r	声がこぼれる → 소리가 새어 나오다
+零れる	こぼれる	v1	3	번지다	subj=@expression			r	r	笑みがこぼれる → 미소가 번지다
+零れる	こぼれる	v1	4	흘러내리다	subj=涙|雫			r	r	涙がこぼれる → 눈물이 흘러내리다
+漏れる	もれる	v1	1	새다			vol=- asp=change te=go	r	r	水が漏れる → 물이 새다
+漏れる	もれる	v1	2	새어 나오다	subj=@sound|@breath			r	r	声が漏れる → 목소리가 새어 나오다
+漏れる	もれる	v1	3	빠지다	from=@document			r	r	名簿から漏れる → 명단에서 빠지다
+漏らす	もらす	v5	1	흘리다			vol=+ asp=activity te=go	r	r	声を漏らす → 소리를 흘리다
+漏らす	もらす	v5	2	늘어놓다	obj=不満|愚痴			r	r	不満を漏らす → 불만을 늘어놓다
+漏らす	もらす	v5	3	싸다	obj=@body.output			r	r	おしっこを漏らす → 오줌을 싸다
+垂れる	たれる	v1	1	흘러내리다			vol=- asp=change te=go	r	r	汗が垂れる → 땀이 흘러내리다
+垂れる	たれる	v1	2	늘어지다	subj=@hair|@clothing			r	r	髪が垂れる → 머리카락이 늘어지다
+垂れる	たれる	v1	3	처지다	subj=@body			r	r	胸が垂れる → 가슴이 처지다
+垂れる	たれる	v1	4	숙이다	obj=頭|首			r	r	頭を垂れる → 고개를 숙이다
+舞う	まう	v5	1	흩날리다			vol=- asp=activity te=go	r	r	花びらが舞う → 꽃잎이 흩날리다
+舞う	まう	v5	2	춤추다	subj=@person			r	r	舞を舞う → 춤추다
+漂う	ただよう	v5	1	떠다니다			vol=- asp=activity te=go	r	r	海に漂う → 바다에 떠다니다
+漂う	ただよう	v5	2	풍기다	subj=@smell			r	r	香りが漂う → 향기가 풍기다
+漂う	ただよう	v5	3	감돌다	subj=@mood|@emotion|空気			r	r	不穏な空気が漂う → 불안한 기운이 감돌다
+差し込む	さしこむ	v5	1	꽂다			vol=+ asp=activity te=go	r	r	鍵を差し込む → 열쇠를 꽂다
+差し込む	さしこむ	v5	2	넣다	obj=@body|@hand			r	r	手を差し込む → 손을 넣다
+差し込む	さしこむ	v5	3	비쳐 들다	subj=@light			r	r	光が差し込む → 빛이 비쳐 들다
+凍る	こおる	v5	1	얼다			vol=- asp=change te=eo	r	r	水が凍る → 물이 얼다
+凍る	こおる	v5	2	얼어붙다	subj=@person|@mood|空気			r	r	空気が凍る → 공기가 얼어붙다
+実る	みのる	v5	1	결실을 맺다			vol=- asp=change te=past	r	r	努力が実る → 노력이 결실을 맺다
+実る	みのる	v5	2	여물다	subj=@plant			r	r	稲が実る → 벼가 여물다
+実る	みのる	v5	3	이루어지다	subj=恋|想い			r	r	恋が実る → 사랑이 이루어지다
+生かす	いかす	v5	1	살리다			vol=+ asp=activity te=go	r	r	長所を活かす → 장점을 살리다
+生き残る	いきのこる	v5	1	살아남다			vol=+ asp=change te=past	r	r	戦争で生き残る → 전쟁에서 살아남다
+増す	ます	v5	1	늘어나다			vol=- asp=change te=past	r	r	人数が増す → 인원이 늘어나다
+増す	ます	v5	2	강해지다	subj=勢い|@strength			r	r	勢いが増す → 기세가 강해지다
+増す	ます	v5	3	빨라지다	subj=スピード|回転			r	r	スピードが増す → 속도가 빨라지다
+増す	ます	v5	4	더하다	obj=@abstract|@quantity			r	r	説得力を増す → 설득력을 더하다
+劣る	おとる	v5	1	뒤떨어지다			vol=- asp=type4 te=simple	r	r	技術で劣る → 기술이 뒤떨어지다
+優れる	すぐれる	v1	1	뛰어나다			vol=- asp=type4 te=simple	r	r	優れた能力 → 뛰어난 능력
+異なる	ことなる	v5	1	다르다			vol=- asp=state te=simple	r	r	意見が異なる → 의견이 다르다
+響く	ひびく	v5	1	울리다			vol=- asp=activity te=go	r	r	音が響く → 소리가 울리다
+響く	ひびく	v5	2	와닿다	dat=心|胸			r	r	心に響く → 마음에 와닿다
+鳴らす	ならす	v5	1	울리다			vol=+ asp=activity te=go	r	r	ベルを鳴らす → 벨을 울리다
+鳴らす	ならす	v5	2	튕기다	obj=指			r	r	指を鳴らす → 손가락을 튕기다
+鳴らす	ならす	v5	3	내다	obj=音			r	r	音を鳴らす → 소리를 내다
+流す	ながす	v5	1	흘리다			vol=+ asp=activity te=go	r	r	涙を流す → 눈물을 흘리다
+流す	ながす	v5	2	틀다	obj=@music|@show			r	r	音楽を流す → 음악을 틀다
+流す	ながす	v5	3	퍼뜨리다	obj=@rumor			r	r	噂を流す → 소문을 퍼뜨리다
+流す	ながす	v5	4	넘기다	obj=@topic|@speech			r	r	話題を流す → 화제를 넘기다
+騒ぐ	さわぐ	v5	1	떠들다			vol=+ asp=activity te=go	r	r	教室で騒ぐ → 교실에서 떠들다
+騒ぐ	さわぐ	v5	2	웅성거리다	subj=@group			r	r	観客が騒ぐ → 관객이 웅성거리다
+騒ぐ	さわぐ	v5	3	술렁이다	subj=胸|心			r	r	胸が騒ぐ → 가슴이 술렁이다
+暴れる	あばれる	v1	1	날뛰다			vol=+ asp=activity te=go	r	r	酔って暴れる → 취해서 날뛰다
+余る	あまる	v5	1	남다			vol=- asp=change te=eo	r	r	お金が余る → 돈이 남다
+欠ける	かける	v1	1	빠지다		に=이	vol=- asp=change te=eo	r	r	メンバーが欠ける → 멤버가 빠지다
+欠ける	かける	v1	2	부족하다	dat=@abstract			r	r	正確性に欠ける → 정확성이 부족하다
+欠ける	かける	v1	3	이가 빠지다	subj=@tableware			r	r	茶碗が欠ける → 찻잔 이가 빠지다
+外れる	はずれる	v1	1	빠지다			vol=- asp=change te=past	r	r	チェーンが外れる → 체인이 빠지다
+外れる	はずれる	v1	2	빗나가다	subj=@ammunition|@guess|@plan			r	r	予想が外れる → 예상이 빗나가다
+外れる	はずれる	v1	3	벗어나다	from=@abstract|@road|@opening			r	r	道から外れる → 길에서 벗어나다
+ぶつかる	ぶつかる	v5	1	부딪치다			vol=- asp=change te=past	r	r	人にぶつかる → 사람과 부딪치다
+ぶつかる	ぶつかる	v5	2	맞닥뜨리다	dat=@trouble|疑問			r	r	壁にぶつかる → 벽에 맞닥뜨리다
+ぶつける	ぶつける	v1	1	부딪치다			vol=+ asp=change te=past	r	r	頭をぶつける → 머리를 부딪치다
+ぶつける	ぶつける	v1	2	쏟아붓다	obj=@emotion			r	r	怒りをぶつける → 분노를 쏟아붓다
+ぶつける	ぶつける	v1	3	내세우다	obj=@idea|意見			r	r	意見をぶつける → 의견을 내세우다
+擦る	こする	v5	1	문지르다			vol=+ asp=activity te=go	r	r	壁をこする → 벽을 문지르다
+擦る	こする	v5	2	비비다	obj=目|手			r	r	目をこする → 눈을 비비다
+繋ぐ	つなぐ	v5	1	연결하다			vol=+ asp=change te=go	r	r	ケーブルを繋ぐ → 케이블을 연결하다
+繋ぐ	つなぐ	v5	2	잡다	obj=手			r	r	手を繋ぐ → 손을 잡다
+繋ぐ	つなぐ	v5	3	잇다	obj=@relation|命			r	r	命を繋ぐ → 목숨을 잇다
+繋がる	つながる	v5	1	이어지다			vol=- asp=change te=eo	r	r	道が繋がる → 길이 이어지다
+繋がる	つながる	v5	2	연결되다	subj=@device|回線|ネット			r	r	電話が繋がる → 전화가 연결되다
+溺れる	おぼれる	v1	1	빠지다			vol=- asp=change te=eo	r	r	川で溺れる → 물에 빠지다
+溺れる	おぼれる	v1	2	빠져들다	dat=@person|@emotion|酒			r	r	酒に溺れる → 술에 빠져들다
+畳む	たたむ	v5	1	접다			vol=+ asp=activity te=go	r	r	傘を畳む → 우산을 접다
+畳む	たたむ	v5	2	개다	obj=@clothing|@bedding			r	r	服を畳む → 옷을 개다
+干す	ほす	v5	1	말리다			vol=+ asp=activity te=go	r	r	魚を干す → 생선을 말리다
+干す	ほす	v5	2	널다	obj=洗濯物|@clothing|@bedding			r	r	洗濯物を干す → 빨래를 널다
+拭く	ふく	v5	1	닦다			vol=+ asp=activity te=go	r	r	汗を拭く → 땀을 닦다
+拭う	ぬぐう	v5	1	닦다			vol=+ asp=activity te=go	r	r	涙を拭う → 눈물을 닦다
+拭う	ぬぐう	v5	2	떨치다	obj=@emotion|疑念|疑い			r	r	不安を拭う → 불안을 떨치다
+掃く	はく	v5	1	쓸다			vol=+ asp=activity te=go	r	r	床を掃く → 바닥을 쓸다
+剃る	そる	v5	1	깎다			vol=+ asp=activity te=go	r	r	髭を剃る → 수염을 깎다
+剃る	そる	v5	2	밀다	obj=頭|毛			r	r	頭を剃る → 머리를 밀다
+結ぶ	むすぶ	v5	1	묶다			vol=+ asp=activity te=go	r	r	髪を結ぶ → 머리를 묶다
+結ぶ	むすぶ	v5	2	맺다	obj=@relation|@rule|約束|契約			r	r	契約を結ぶ → 계약을 맺다
+結ぶ	むすぶ	v5	3	다물다	obj=口|唇			r	r	口を結ぶ → 입을 다물다
+結ぶ	むすぶ	v5	4	매다	obj=ネクタイ|帯			r	r	ネクタイを結ぶ → 넥타이를 매다
+結ぶ	むすぶ	v5	5	잇다	obj=@place			r	r	二つの町を結ぶ → 두 마을을 잇다
+解く	とく	v5	1	풀다			vol=+ asp=activity te=go	r	r	問題を解く → 문제를 풀다
+縛る	しばる	v5	1	묶다			vol=+ asp=activity te=go	r	r	手を縛る → 손을 묶다
+巻く	まく	v5	1	감다			vol=+ asp=activity te=go	r	r	包帯を巻く → 붕대를 감다
+巻く	まく	v5	2	두르다	obj=@clothing|@accessory			r	r	タオルを巻く → 수건을 두르다
+巻く	まく	v5	3	말다	obj=@food			r	r	海苔で巻く → 김으로 말다
+塗る	ぬる	v5	1	바르다			vol=+ asp=activity te=go	r	r	薬を塗る → 약을 바르다
+塗る	ぬる	v5	2	칠하다	obj=@room|壁|天井			r	r	壁を塗る → 벽을 칠하다
+削る	けずる	v5	1	깎다			vol=+ asp=activity te=go	r	r	鉛筆を削る → 연필을 깎다
+削る	けずる	v5	2	줄이다	obj=@time|@duration|趣味			r	r	時間を削る → 시간을 줄이다
+削る	けずる	v5	3	빼다	obj=@topic|@speech			r	r	話を削る → 이야기를 빼다
+掘る	ほる	v5	1	파다			vol=+ asp=activity te=go	r	r	穴を掘る → 구멍을 파다
+注ぐ	そそぐ	v5	1	따르다			vol=+ asp=activity te=go	r	r	ビールを注ぐ → 맥주를 따르다
+注ぐ	そそぐ	v5	2	붓다	obj=@liquid			r	r	お湯を注ぐ → 뜨거운 물을 붓다
+注ぐ	そそぐ	v5	3	쏟다	obj=@strength|愛情|力			r	r	全力を注ぐ → 전력을 쏟다
+注ぐ	そそぐ	v5	4	보내다	obj=@gaze			r	r	視線を注ぐ → 시선을 보내다
+注ぐ	そそぐ	v5	5	흘러들다	subj=@water.body			r	r	川が海に注ぐ → 강이 바다로 흘러들다
+焚く	たく	v5	1	짓다			vol=+ asp=activity te=go	r	r	ご飯を炊く → 밥을 짓다
+焚く	たく	v5	2	피우다	obj=@mist|火|香			r	r	煙幕を焚く → 연막을 피우다
+焚く	たく	v5	3	터뜨리다	obj=フラッシュ			r	r	フラッシュを焚く → 플래시를 터뜨리다
+焚く	たく	v5	4	데우다	obj=@bath			r	r	風呂を焚く → 목욕물을 데우다
+茹でる	ゆでる	v1	1	삶다			vol=+ asp=activity te=go	r	r	卵を茹でる → 달걀을 삶다
+炒める	いためる	v1	1	볶다			vol=+ asp=activity te=go	r	r	野菜を炒める → 채소를 볶다
+刻む	きざむ	v5	1	새기다			vol=+ asp=activity te=go	r	r	名前を刻む → 이름을 새기다
+刻む	きざむ	v5	2	썰다	obj=@food|@plant			r	r	野菜を刻む → 채소를 썰다
+剥く	むく	v5	1	벗기다			vol=+ asp=activity te=go	r	r	包装を剥く → 포장을 벗기다
+剥く	むく	v5	2	깎다	obj=@food			r	r	芋を剥く → 감자를 깎다
+剥く	むく	v5	3	부릅뜨다	obj=目			r	r	目を剥く → 눈을 부릅뜨다
+剥く	むく	v5	4	드러내다	obj=歯|牙			r	r	牙を剥く → 송곳니를 드러내다
+絞る	しぼる	v5	1	짜다			vol=+ asp=activity te=go	r	r	タオルを絞る → 수건을 짜다
+絞る	しぼる	v5	2	좁히다	obj=@place|範囲|候補			r	r	範囲を絞る → 범위를 좁히다
+絞る	しぼる	v5	3	줄이다	obj=ボリューム|音量			r	r	ボリュームを絞る → 볼륨을 줄이다
+絞る	しぼる	v5	4	당기다	obj=トリガー|引き金			r	r	引き金を絞る → 방아쇠를 당기다
+噛む	かむ	v5	1	씹다			vol=+ asp=activity te=go	r	r	ガムを噛む → 껌을 씹다
+噛む	かむ	v5	2	깨물다	obj=唇|舌			r	r	唇を噛む → 입술을 깨물다
+噛む	かむ	v5	3	물어뜯다	obj=爪			r	r	爪を噛む → 손톱을 물어뜯다
+噛む	かむ	v5	4	물다	subj=@animal			r	r	犬が噛む → 개가 물다
+飲み込む	のみこむ	v5	1	삼키다			vol=+ asp=activity te=go	r	r	唾を飲み込む → 침을 삼키다
+飲み込む	のみこむ	v5	2	이해하다	obj=状況|事情			r	r	状況を飲み込む → 상황을 이해하다
+飲み込む	のみこむ	v5	3	집어삼키다	subj=@water.body|@weather			r	r	波が船を飲み込む → 파도가 배를 집어삼키다
+吐く	はく	v5	1	토하다			vol=+ asp=activity te=go	r	r	食べた物を吐く → 먹은 것을 토하다
+吐く	はく	v5	2	내쉬다	obj=息|ため息			r	r	息を吐く → 숨을 내쉬다
+吐く	はく	v5	3	뱉다	obj=唾|痰			r	r	唾を吐く → 침을 뱉다
+吐く	はく	v5	4	내뿜다	obj=@mist|炎			r	r	煙を吐く → 연기를 내뿜다
+吐く	はく	v5	5	불다	obj=@info			r	r	隠し場所を吐く → 숨긴 곳을 불다
+寝かせる	ねかせる	v1	1	재우다			vol=+ asp=activity te=go	r	r	子供を寝かせる → 아이를 재우다
+寝かせる	ねかせる	v1	2	눕히다	dat=@bedding|@furniture|床			r	r	ベッドに寝かせる → 침대에 눕히다
+黙り込む	だまりこむ	v5	1	입을 다물다			vol=+ asp=change te=go	r	r	皆が黙り込む → 모두가 입을 다물다
+考え込む	かんがえこむ	v5	1	골똘히 생각하다			vol=+ asp=activity te=go	r	r	一人で考え込む → 혼자 골똘히 생각하다
+稼ぐ	かせぐ	v5	1	벌다			vol=+ asp=activity te=go	r	r	お金を稼ぐ → 돈을 벌다
+稼ぐ	かせぐ	v5	2	따다	obj=ポイント|点			r	r	ポイントを稼ぐ → 점수를 따다
+儲かる	もうかる	v5	1	돈을 벌다			vol=- asp=change te=go	r	r	皆が儲かる → 모두가 돈을 벌다
+儲かる	もうかる	v5	2	돈이 되다	subj=@activity|@task			r	r	この商売は儲かる → 이 장사는 돈이 되다
+儲ける	もうける	v1	1	벌다			vol=+ asp=activity te=go	r	r	お金を儲ける → 돈을 벌다
+儲ける	もうける	v1	2	두다	obj=@person.child			r	r	子供を儲ける → 자식을 두다
+雇う	やとう	v5	1	고용하다			vol=+ asp=activity te=go	r	r	人を雇う → 사람을 고용하다
+支払う	しはらう	v5	1	지불하다			vol=+ asp=activity te=go	r	r	代金を支払う → 대금을 지불하다
+支払う	しはらう	v5	2	치르다	obj=@price|代償|対価			r	r	代償を支払う → 대가를 치르다
+収める	おさめる	v1	1	넣다			vol=+ asp=activity te=go	r	r	箱に収める → 상자에 넣다
+収める	おさめる	v1	2	거두다	obj=@result|勝利|成功			r	r	勝利を収める → 승리를 거두다
+収める	おさめる	v1	3	내다	obj=@money|税金			r	r	税金を納める → 세금을 내다
+収める	おさめる	v1	4	다스리다	obj=国|@town			r	r	国を治める → 나라를 다스리다
+収める	おさめる	v1	5	수습하다	obj=場|@trouble|@incident			r	r	場を収める → 상황을 수습하다
+収める	おさめる	v1	6	가라앉히다	obj=@emotion|痛み			r	r	怒りを収める → 화를 가라앉히다
+受かる	うかる	v5	1	합격하다			vol=- asp=change te=past	r	r	試験に受かる → 시험에 합격하다
+受かる	うかる	v5	2	당선되다	dat=選挙			r	r	選挙に受かる → 선거에서 당선되다
+学ぶ	まなぶ	v5	1	배우다			vol=+ asp=activity te=go	r	r	日本語を学ぶ → 일본어를 배우다
+教わる	おそわる	v5	1	배우다			vol=+ asp=activity te=go	r	r	先生に教わる → 선생님께 배우다
+映す	うつす	v5	1	비추다			vol=+ asp=activity te=go	r	r	鏡が姿を映す → 거울이 모습을 비추다
+映す	うつす	v5	2	띄우다	obj=@picture|映像			r	r	映像を映す → 영상을 띄우다
+映る	うつる	v5	1	비치다			vol=- asp=change te=go	r	r	鏡に映る → 거울에 비치다
+映る	うつる	v5	2	나오다	dat=@device|@picture|画面			r	r	画面に映る → 화면에 나오다
+描く	えがく	v5	1	그리다			vol=+ asp=activity te=go	r	r	絵を描く → 그림을 그리다
+探る	さぐる	v5	1	알아보다			vol=+ asp=activity te=go	r	r	原因を探る → 원인을 알아보다
+探る	さぐる	v5	2	뒤지다	obj=@container|中			r	r	鞄の中を探る → 가방 안을 뒤지다
+探る	さぐる	v5	3	더듬다	with=@body|@hand			r	r	指先で探る → 손끝으로 더듬다
+扱う	あつかう	v5	1	다루다			vol=+ asp=activity te=go	r	r	道具を扱う → 도구를 다루다
+扱う	あつかう	v5	2	대하다	obj=@person			r	r	邪険に扱う → 매정하게 대하다
+扱う	あつかう	v5	3	취급하다	subj=@shop|@organization			r	r	この店は雑貨を扱う → 이 가게는 잡화를 취급하다
+操る	あやつる	v5	1	조종하다			vol=+ asp=activity te=go	r	r	人形を操る → 인형을 조종하다
+操る	あやつる	v5	2	구사하다	obj=@language|@magic			r	r	言葉を操る → 말을 구사하다
+試す	ためす	v5	1	시험하다			vol=+ asp=activity te=go	r	r	実力を試す → 실력을 시험하다
+試す	ためす	v5	2	써 보다	obj=方法|@tool			r	r	方法を試す → 방법을 써 보다
+怠ける	なまける	v1	1	게으름 피우다			vol=+ asp=activity te=go	r	r	勉強を怠ける → 공부를 게을리하다
+当てる	あてる	v1	1	대다			vol=+ asp=change te=go	r	r	手を額に当てる → 손을 이마에 대다
+当てる	あてる	v1	2	맞히다	obj=答え|@question			r	r	答えを当てる → 답을 맞히다
+当てる	あてる	v1	3	쓰다	obj=@time|@money			r	r	時間を読書に充てる → 시간을 독서에 쓰다
+当てる	あてる	v1	4	비추다	obj=@light			r	r	光を当てる → 빛을 비추다
+狙う	ねらう	v5	1	노리다			vol=+ asp=activity te=go	r	r	チャンスを狙う → 기회를 노리다
+目指す	めざす	v5	1	목표로 하다			vol=+ asp=activity te=go	r	r	優勝を目指す → 우승을 목표로 하다
+目指す	めざす	v5	2	향하다	obj=@place|@building|@facility			r	r	駅を目指す → 역으로 향하다
+至る	いたる	v5	1	이르다:러			vol=- asp=change te=past	r	r	結論に至る → 결론에 이르다
+含む	ふくむ	v5	1	포함하다			vol=+ asp=state te=simple	r	r	税を含む → 세금을 포함하다
+含む	ふくむ	v5	2	머금다	dat=口			r	r	口に含む → 입에 머금다
+含める	ふくめる	v1	1	포함하다			vol=+ asp=activity te=go	r	r	自分も含めて → 나까지 포함해서
+通ずる	つうずる	v1	1	통하다			vol=- asp=change te=simple	r	r	話が通じる → 말이 통하다
+通ずる	つうずる	v1	2	이어지다	subj=@road|@opening			r	r	駅に通じる道 → 역으로 이어지는 길
+付け加える	つけくわえる	v1	1	덧붙이다			vol=+ asp=activity te=go	r	r	一言付け加える → 한마디 덧붙이다
+導く	みちびく	v5	1	이끌다			vol=+ asp=activity te=go	r	r	未来へ導く → 미래로 이끌다
+悟る	さとる	v5	1	깨닫다			vol=- asp=change te=past	r	r	意味を悟る → 의미를 깨닫다
+察する	さっする	vs	1	알아채다			vol=+ asp=activity te=go	r	r	意図を察する → 의도를 알아채다
+察する	さっする	vs	2	헤아리다	obj=@emotion|気持ち			r	r	気持ちを察する → 마음을 헤아리다
+備える	そなえる	v1	1	대비하다			vol=+ asp=activity te=go	r	r	試験に備える → 시험에 대비하다
+備える	そなえる	v1	2	갖추다	obj=@thing			r	r	設備を備える → 설비를 갖추다
+構える	かまえる	v1	1	겨누다			vol=+ asp=activity te=go	r	r	銃を構える → 총을 겨누다
+構える	かまえる	v1	2	들다	obj=@weapon			r	r	盾を構える → 방패를 들다
+構える	かまえる	v1	3	차리다	obj=@shop|事務所			r	r	店を構える → 가게를 차리다
+構える	かまえる	v1	4	들이대다	obj=@device			r	r	カメラを構える → 카메라를 들이대다
+控える	ひかえる	v1	1	삼가다			vol=+ asp=activity te=go	r	r	外出を控える → 외출을 삼가다
+控える	ひかえる	v1	2	앞두다	obj=@exam|@competition|@ceremony			r	r	試験を控える → 시험을 앞두다
+控える	ひかえる	v1	3	대기하다	dat=@position			r	r	後ろに控える → 뒤에 대기하다
+控える	ひかえる	v1	4	적어 두다	obj=番号|@personal.info			r	r	番号を控える → 번호를 적어 두다
+待ち合わせる	まちあわせる	v1	1	만나다			vol=+ asp=activity te=go	r	r	駅で待ち合わせる → 역에서 만나다
+切り替える	きりかえる	v1	1	바꾸다			vol=+ asp=activity te=go	r	r	話題を切り替える → 화제를 바꾸다
+切り替える	きりかえる	v1	2	다잡다	obj=気持ち|心			r	r	気持ちを切り替える → 마음을 다잡다
+受け継ぐ	うけつぐ	v5	1	이어받다			vol=+ asp=activity te=go	r	r	意志を受け継ぐ → 뜻을 이어받다
+受け継ぐ	うけつぐ	v5	2	물려받다	obj=遺伝子|血			r	r	血を受け継ぐ → 피를 물려받다
+売れる	うれる	v1	1	팔리다			vol=- asp=change te=go	r	r	本が売れる → 책이 팔리다
+略す	りゃくす	v5	1	줄이다			vol=+ asp=activity te=go	r	r	長い名前を略す → 긴 이름을 줄이다
+略す	りゃくす	v5	2	생략하다	obj=@speech|説明			r	r	説明を略す → 설명을 생략하다
+決め付ける	きめつける	v1	1	단정하다			vol=+ asp=activity te=go	r	r	勝手に決めつける → 멋대로 단정하다
+承る	うけたまわる	v5	1	받다			vol=+ asp=activity te=go	r	r	ご注文を承る → 주문을 받다
+承る	うけたまわる	v5	2	듣다	obj=話|意見			r	r	お話を承る → 말씀을 듣다
+承る	うけたまわる	v5	3	받들다	obj=命令|仰せ			r	r	ご命令を承る → 명령을 받들다
+恐れ入る	おそれいる	v5	1	죄송하다			vol=- asp=state te=simple	r	r	恐れ入ります → 죄송합니다
+恐れ入る	おそれいる	v5	2	감탄하다	dat=@strength|@skill			r	r	強さに恐れ入る → 강함에 감탄하다
+承知	しょうち	n	1	승낙			cls=@abstract	r	r	親の承知を得る → 부모의 승낙을 얻다
+恐縮	きょうしゅく	n	1	송구스러움			cls=@emotion	r	r	恐縮の至り → 송구스러움을 금할 수 없다
+恐縮	きょうしゅく	n	2	죄송하다	form=cop			r	r	恐縮です → 죄송하다
+拝借	はいしゃく	n	1	빌림			cls=@abstract	r	r	電話を拝借 → 전화를 빌림
+召す	めす	v5	1	드시다			vol=+ asp=activity te=go	r	r	お召し上がり → 드심
+感情	かんじょう	n	1	감정			cls=@emotion	r	r	感情を表す → 감정을 드러내다
+感覚	かんかく	n	1	감각			cls=@sensation|@faculty	r	r	感覚がない → 감각이 없다
+感動	かんどう	n	1	감동			cls=@emotion	r	r	感動を覚える → 감동을 느끼다
+興奮	こうふん	n	1	흥분			cls=@emotion	r	r	興奮を抑える → 흥분을 가라앉히다
+怒り	いかり	n	1	분노			cls=@emotion	r	r	怒りを抑える → 분노를 억누르다
+恐怖	きょうふ	n	1	공포			cls=@emotion	r	r	恐怖を感じる → 공포를 느끼다
+不満	ふまん	n	1	불만			cls=@emotion|@protest	r	r	不満を言う → 불만을 말하다
+悩み	なやみ	n	1	고민			cls=@trouble lu	r	r	悩みがある → 고민이 있다
+孤独	こどく	n	1	고독			cls=@emotion	r	r	孤独は人を追い込む → 고독은 사람을 몰아넣는다
+孤独	こどく	n	2	외롭다	form=cop			r	r	孤独だった少女 → 외로웠던 소녀
+嫉妬	しっと	n	1	질투			cls=@emotion	r	r	女の嫉妬は怖い → 여자의 질투는 무섭다
+後悔	こうかい	n	1	후회			cls=@emotion	r	r	後悔はしない → 후회는 하지 않는다
+反省	はんせい	n	1	반성			cls=@emotion|@activity	r	r	反省している → 반성하고 있다
+覚悟	かくご	n	1	각오			cls=@emotion|@readiness	r	r	覚悟はできている → 각오는 되어 있다
+勇気	ゆうき	n	1	용기			cls=@strength	r	r	勇気を出す → 용기를 내다
+自信	じしん	n	1	자신감			cls=@emotion|@strength	r	r	自信を持つ → 자신감을 가지다
+誇り	ほこり	n	1	자부심			cls=@emotion	r	r	誇りを持つ → 자부심을 가지다
+プライド	ぷらいど	n	1	자존심			cls=@emotion	r	r	プライドが高い → 자존심이 세다
+恥	はじ	n	1	창피			cls=@emotion	r	r	恥をかく → 창피를 당하다
+好意	こうい	n	1	호의			cls=@emotion	r	r	好意に甘える → 호의를 받아들이다
+好意	こうい	n	2	호감	pred=持つ|抱く			r	r	好意を持つ → 호감을 가지다
+愛情	あいじょう	n	1	애정			cls=@emotion	r	r	愛情を注ぐ → 애정을 쏟다
+友情	ゆうじょう	n	1	우정			cls=@relation	r	r	友情が芽生える → 우정이 싹트다
+初恋	はつこい	n	1	첫사랑			cls=@emotion	r	r	初恋の人 → 첫사랑
+憧れ	あこがれ	n	1	동경			cls=@emotion	r	r	憧れがある → 동경이 있다
+本音	ほんね	n	1	본심			cls=@emotion|@character	r	r	本音を言う → 본심을 말하다
+本気	ほんき	n	1	진심			cls=@emotion	r	r	本気だ → 진심이다
+機嫌	きげん	n	1	기분			cls=@mood	r	r	機嫌がいい → 기분이 좋다
+意地	いじ	n	1	고집			cls=@mood	r	r	意地を張る → 고집을 부리다
+余裕	よゆう	n	1	여유			cls=@abstract|@leisure	r	r	余裕がない → 여유가 없다
+油断	ゆだん	n	1	방심			cls=@attention	r	r	油断するな → 방심하지 마
+笑い	わらい	n	1	웃음			cls=@emotion|@sound	r	r	笑いが起こる → 웃음이 터지다
+溜め息	ためいき	n	1	한숨			cls=@sound|@breath	r	r	ため息をつく → 한숨을 쉬다
+悲鳴	ひめい	n	1	비명			cls=@sound|@shout	r	r	悲鳴を上げる → 비명을 지르다
+表情	ひょうじょう	n	1	표정			cls=@abstract|@expression	r	r	表情が和らぐ → 표정이 누그러지다
+感想	かんそう	n	1	감상			cls=@idea	r	r	感想を聞く → 감상을 듣다
+印象	いんしょう	n	1	인상			cls=@abstract name=+	r	r	印象に残る → 인상에 남다
+雰囲気	ふんいき	n	1	분위기			cls=@mood	r	r	雰囲気が変わる → 분위기가 바뀌다
+尊敬	そんけい	n	1	존경			cls=@emotion	r	r	尊敬する → 존경하다
+信頼	しんらい	n	1	신뢰			cls=@emotion	r	r	信頼を得る → 신뢰를 얻다
+文句	もんく	n	1	불평			cls=@speech|@protest	r	r	文句を言う → 불평하다
+文句	もんく	n	2	불만	pred=ある|ない			r	r	文句があるなら → 불만이 있으면
+文句	もんく	n	3	문구	mod=決まり|謳い			r	r	謳い文句 → 홍보 문구
+願い	ねがい	n	1	소원			cls=@abstract|@request	r	r	願いが叶う → 소원이 이루어지다
+願い	ねがい	n	2	부탁	after=お|御			r	r	お願いがある → 부탁이 있다
+遣る気	やるき	n	1	의욕			cls=@strength	r	r	やる気が出る → 의욕이 생기다
+遣る気	やるき	n	2	할 생각	form=cop			r	r	こいつ、やる気だ → 이 녀석, 할 생각이다
+気配	けはい	n	1	기척			cls=@sign	r	r	人の気配 → 사람의 기척
+気配	けはい	n	2	기미	pred=見せる|見える			r	r	終わる気配が見えない → 끝날 기미가 보이지 않다
+態度	たいど	n	1	태도			cls=@stance|@sign	r	r	態度を示す → 태도를 보이다
+癖	くせ	n	1	버릇			cls=@habit	r	r	癖がつく → 버릇이 들다
+苦労	くろう	n	1	고생			cls=@trouble	r	r	苦労した → 고생했다
+苦労	くろう	n	2	수고	after=ご|御			r	r	ご苦労だった → 수고했다
+思い	おもい	n	1	마음			cls=@emotion	r	r	思いを伝える → 마음을 전하다
+意識	いしき	n	1	의식			cls=@abstract|@attention|@faculty	r	r	意識を失う → 의식을 잃다
+記憶	きおく	n	1	기억			cls=@abstract|@faculty	r	r	記憶に残る → 기억에 남다
+想像	そうぞう	n	1	상상			cls=@abstract|@guess	r	r	想像できる → 상상할 수 있다
+理想	りそう	n	1	이상			cls=@idea|@endpoint	r	r	理想を持つ → 이상을 품다
+現実	げんじつ	n	1	현실			cls=@abstract|@state	r	r	現実に戻る → 현실로 돌아가다
+事実	じじつ	n	1	사실			cls=@abstract|@info|@truth	r	r	それは事実だ → 그것은 사실이다
+真実	しんじつ	n	1	진실			cls=@abstract|@info|@truth name=+	r	r	真実を知る → 진실을 알다
+判断	はんだん	n	1	판단			cls=@idea	r	r	判断に困る → 판단하기 어렵다
+選択	せんたく	n	1	선택			cls=@activity	r	r	選択を誤る → 선택을 그르치다
+意志	いし	n	1	의지			cls=@abstract	r	r	意志が強い → 의지가 강하다
+目標	もくひょう	n	1	목표			cls=@plan|@endpoint	r	r	目標を立てる → 목표를 세우다
+疑問	ぎもん	n	1	의문			cls=@question	r	r	疑問が湧く → 의문이 들다
+解決	かいけつ	n	1	해결			cls=@abstract	r	r	問題を解決する → 문제를 해결하다
+納得	なっとく	n	1	납득			cls=@abstract	r	r	納得できない → 납득할 수 없다
+誤解	ごかい	n	1	오해			cls=@abstract	r	r	誤解を解く → 오해를 풀다
+勘違い	かんちがい	n	1	착각			cls=@abstract	r	r	勘違いだった → 착각이었다
+常識	じょうしき	n	1	상식			cls=@abstract	r	r	常識で考える → 상식적으로 생각하다
+知恵	ちえ	n	1	지혜			cls=@abstract	r	r	知恵を貸す → 지혜를 빌려주다
+アイディア	あいでぃあ	n	1	아이디어			cls=@idea	r	r	いいアイデアがある → 좋은 아이디어가 있다
+工夫	くふう	n	1	궁리			cls=@activity	r	r	工夫を凝らす → 궁리를 거듭하다
+計算	けいさん	n	1	계산			cls=@activity	r	r	計算が合う → 계산이 맞다
+注目	ちゅうもく	n	1	주목			cls=@attention	r	r	注目を集める → 주목을 받다
+価値	かち	n	1	가치			cls=@abstract	r	r	価値がある → 가치가 있다
+秘密	ひみつ	n	1	비밀			cls=@info	r	r	秘密にする → 비밀로 하다
+謎	なぞ	n	1	수수께끼			cls=@abstract	r	r	謎が解ける → 수수께끼가 풀리다
+謎	なぞ	n	2	정체불명	form=no-attr			r	r	謎のバイク → 정체불명의 오토바이
+証拠	しょうこ	n	1	증거			cls=@info|@leverage	r	r	証拠がある → 증거가 있다
+正体	しょうたい	n	1	정체			cls=@info|@truth	r	r	正体を現す → 정체를 드러내다
+集中	しゅうちゅう	n	1	집중			cls=@activity	r	r	集中する → 집중하다
+立場	たちば	n	1	입장			cls=@abstract|@stance	r	r	立場が逆になる → 입장이 바뀌다
+結論	けつろん	n	1	결론			cls=@result	r	r	結論を出す → 결론을 내다
+作戦	さくせん	n	1	작전			cls=@plan|@task|@scheme	r	r	作戦を立てる → 작전을 세우다
+基本	きほん	n	1	기본			cls=@abstract	r	r	基本に戻る → 기본으로 돌아가다
+条件	じょうけん	n	1	조건			cls=@rule|@request	r	r	条件がある → 조건이 있다
+一般	いっぱん	n	1	일반			cls=@abstract	r	r	一般の人 → 일반인
+特徴	とくちょう	n	1	특징			cls=@abstract	r	r	特徴がある → 특징이 있다
+状態	じょうたい	n	1	상태			cls=@abstract	r	r	良い状態 → 좋은 상태
+状況	じょうきょう	n	1	상황			cls=@abstract|@topic	r	r	状況が変わる → 상황이 바뀌다
+事情	じじょう	n	1	사정			cls=@abstract|@info	r	r	事情がある → 사정이 있다
+存在	そんざい	n	1	존재			cls=@abstract	r	r	存在する → 존재하다
+本物	ほんもの	n	1	진짜			cls=@abstract	r	r	本物の宝石 → 진짜 보석
+中身	なかみ	n	1	내용물			cls=@thing	r	r	箱の中身 → 상자의 내용물
+中身	なかみ	n	2	내용	mod=@document|@info|@activity			r	r	マニフェストの中身 → 공약의 내용
+内容	ないよう	n	1	내용			cls=@info	r	r	内容を説明する → 내용을 설명하다
+部分	ぶぶん	n	1	부분			cls=@abstract	r	r	この部分 → 이 부분
+全体	ぜんたい	n	1	전체			cls=@abstract	r	r	学園全体 → 학원 전체
+ポイント	ぽいんと	n	1	포인트			cls=@abstract	r	r	ポイントを貯める → 포인트를 모으다
+ポイント	ぽいんと	n	2	지점	after=狙撃|合流			r	r	合流ポイント → 합류 지점
+ポイント	ぽいんと	n	3	핵심	form=cop			r	r	ポイントは〜だ → 핵심은 〜이다
+欠点	けってん	n	1	단점			cls=@abstract	r	r	欠点を補う → 단점을 보완하다
+魅力	みりょく	n	1	매력			cls=@abstract	r	r	魅力がある → 매력이 있다
+才能	さいのう	n	1	재능			cls=@skill	r	r	才能がある → 재능이 있다
+能力	のうりょく	n	1	능력			cls=@skill	r	r	能力が高い → 능력이 높다
+実力	じつりょく	n	1	실력			cls=@skill|@strength	r	r	実力を出す → 실력을 발휘하다
+噂	うわさ	n	1	소문			cls=@rumor|@info	r	r	噂を聞く → 소문을 듣다
+イメージ	いめーじ	n	1	이미지			cls=@idea	r	r	イメージが良い → 이미지가 좋다
+精神	せいしん	n	1	정신			cls=@abstract	r	r	精神的に疲れる → 정신적으로 지치다
+調査	ちょうさ	n	1	조사			cls=@activity|@task	r	r	調査する → 조사하다
+報告	ほうこく	n	1	보고			cls=@speech	r	r	報告する → 보고하다
+発見	はっけん	n	1	발견			cls=@activity	r	r	発見する → 발견하다
+行動	こうどう	n	1	행동			cls=@activity|@stance	r	r	行動する → 행동하다
+反応	はんのう	n	1	반응			cls=@sign	r	r	反応が遅い → 반응이 느리다
+動き	うごき	n	1	움직임			cls=@motion|@sign	r	r	動きを止める → 움직임을 멈추다
+影響	えいきょう	n	1	영향			cls=@abstract	r	r	影響を与える → 영향을 주다
+変化	へんか	n	1	변화			cls=@event|@trend	r	r	変化がない → 변화가 없다
+成長	せいちょう	n	1	성장			cls=@abstract|@trend	r	r	成長する → 성장하다
+運命	うんめい	n	1	운명			cls=@abstract	r	r	運命が決まる → 운명이 결정되다
+真似	まね	n	1	흉내			cls=@activity	r	r	真似をする → 흉내를 내다
+真似	まね	n	2	짓	mod=そんな|こんな			r	r	こんな真似をする → 이런 짓을 하다
+挑戦	ちょうせん	n	1	도전			cls=@activity|@competition	r	r	挑戦する → 도전하다
+完成	かんせい	n	1	완성			cls=@event|@endpoint	r	r	完成する → 완성되다
+開始	かいし	n	1	시작			cls=@activity	r	r	開始する → 시작하다
+移動	いどう	n	1	이동			cls=@activity	r	r	移動する → 이동하다
+人生	じんせい	n	1	인생			cls=@abstract|@lifetime	r	r	人生を変える → 인생을 바꾸다
+組織	そしき	n	1	조직			cls=@organization	r	r	組織を作る → 조직을 만들다
+団体	だんたい	n	1	단체			cls=@group|@organization	r	r	団体で参加する → 단체로 참가하다
+集団	しゅうだん	n	1	집단			cls=@group	r	r	集団で行動する → 집단으로 행동하다
+世間	せけん	n	1	세상			cls=@group	r	r	世間の目 → 세상의 시선
+世の中	よのなか	n	1	세상			cls=@abstract	r	r	世の中は変わる → 세상은 변한다
+人類	じんるい	n	1	인류			cls=@group	r	r	人類の歴史 → 인류의 역사
+政府	せいふ	n	1	정부			cls=@organization	r	r	政府が発表する → 정부가 발표하다
+選挙	せんきょ	n	1	선거			cls=@event	r	r	選挙に勝つ → 선거에서 이기다
+権利	けんり	n	1	권리			cls=@abstract	r	r	権利がある → 권리가 있다
+責任	せきにん	n	1	책임			cls=@abstract	r	r	責任を取る → 책임지다
+制度	せいど	n	1	제도			cls=@rule	r	r	制度を変える → 제도를 바꾸다
+ルール	るーる	n	1	규칙			cls=@rule|@rote	r	r	ルールを守る → 규칙을 지키다
+犯罪	はんざい	n	1	범죄			cls=@crime	r	r	犯罪を犯す → 범죄를 저지르다
+被害	ひがい	n	1	피해			cls=@abstract|@harm	r	r	被害が出る → 피해가 나다
+逮捕	たいほ	n	1	체포			cls=@activity	r	r	逮捕する → 체포하다
+罪	つみ	n	1	죄			cls=@crime	r	r	罪を犯す → 죄를 짓다
+罰	ばつ	n	1	벌			cls=@abstract|@crime	r	r	罰を受ける → 벌을 받다
+暴力	ぼうりょく	n	1	폭력			cls=@abuse	r	r	暴力を振るう → 폭력을 휘두르다
+争い	あらそい	n	1	다툼			cls=@event	r	r	争いが絶えない → 다툼이 끊이지 않다
+戦い	たたかい	n	1	싸움			cls=@event	r	r	戦いに勝つ → 싸움에서 이기다
+軍	ぐん	n	1	군			cls=@organization	r	r	軍の階級 → 군 계급
+攻撃	こうげき	n	1	공격			cls=@activity	r	r	攻撃を受ける → 공격을 받다
+勝利	しょうり	n	1	승리			cls=@result name=+	r	r	勝利を収める → 승리를 거두다
+勝負	しょうぶ	n	1	승부			cls=@competition|@settlement	r	r	勝負に勝つ → 승부에서 이기다
+競争	きょうそう	n	1	경쟁			cls=@competition	r	r	競争が激しい → 경쟁이 치열하다
+協力	きょうりょく	n	1	협력			cls=@activity	r	r	協力する → 협력하다
+支援	しえん	n	1	지원			cls=@activity|@duty	r	r	支援を受ける → 지원을 받다
+応援	おうえん	n	1	응원			cls=@activity|@duty	r	r	応援する → 응원하다
+神	かみ	n	1	신			cls=@person.higher anim=+ name=+	r	r	神を信じる → 신을 믿다
+神様	かみさま	n	1	신			cls=@person.higher anim=+ lu	r	r	神様に祈る → 신에게 빌다
+伝統	でんとう	n	1	전통			cls=@abstract	r	r	伝統を守る → 전통을 지키다
+人気	にんき	n	1	인기			cls=@abstract	r	r	人気がある → 인기가 있다
+記事	きじ	n	1	기사			cls=@document|@writing	r	r	記事を書く → 기사를 쓰다
+ネット	ねっと	n	1	인터넷			cls=@info	r	r	ネットで調べる → 인터넷에서 찾아보다
+ネット	ねっと	n	2	네트	pred=越える|揺らす			r	r	ネットを越える → 네트를 넘다
+サイト	さいと	n	1	사이트			cls=@info|@document	r	r	サイトを更新する → 사이트를 갱신하다
+メッセージ	めっせーじ	n	1	메시지			cls=@message	r	r	メッセージを送る → 메시지를 보내다
+環境	かんきょう	n	1	환경			cls=@abstract	r	r	環境を整える → 환경을 갖추다
+事態	じたい	n	1	사태			cls=@abstract|@topic	r	r	事態を収拾する → 사태를 수습하다
+危機	きき	n	1	위기			cls=@trouble	r	r	危機を脱する → 위기를 넘기다
+騒ぎ	さわぎ	n	1	소동			cls=@incident	r	r	騒ぎが起こる → 소동이 일어나다
+差別	さべつ	n	1	차별			cls=@abuse	r	r	差別を受ける → 차별을 받다
+地域	ちいき	n	1	지역			cls=@place	r	r	地域の人々 → 지역 주민
+命令	めいれい	n	1	명령			cls=@order	r	r	命令に従う → 명령에 따르다
+指示	しじ	n	1	지시			cls=@order	r	r	指示を出す → 지시를 내리다
+活動	かつどう	n	1	활동			cls=@activity	r	r	活動を始める → 활동을 시작하다
+会	かい	n	1	모임			cls=@group	r	r	会に参加する → 모임에 참가하다
+会	かい	n	2	회	after=@person|@event|@activity|@task|@organization			r	r	反省会 → 반성회
+魔法	まほう	n	1	마법			cls=@magic	r	r	魔法をかける → 마법을 걸다
+地獄	じごく	n	1	지옥			cls=@place	r	r	地獄に落ちる → 지옥에 떨어지다
+仲	なか	n	1	사이			cls=@relation name=+	r	r	仲がいい → 사이가 좋다
+縁	えん	n	1	인연			cls=@relation	r	r	縁がある → 인연이 있다
+縁	えん	n	2	가장자리	mod=釣り鐘|@container|@thing.made			r	r	机の縁 → 책상 가장자리
+絆	きずな	n	1	유대			cls=@relation name=+	r	r	絆を深める → 유대를 깊게 하다
+付き合い	つきあい	n	1	교제			cls=@relation lu	r	r	付き合いが始まる → 교제가 시작되다
+親友	しんゆう	n	1	절친			anim=+ cls=@person.close	r	r	親友と会う → 절친을 만나다
+幼馴染み	おさななじみ	n	1	소꿉친구			cls=@person.close anim=+	r	r	幼なじみと会う → 소꿉친구를 만나다
+味方	みかた	n	1	편			anim=+ cls=@side|@person	r	r	味方になる → 편이 되다
+敵	てき	n	1	적			anim=+ cls=@person|@side	r	r	敵を倒す → 적을 쓰러뜨리다
+ライバル	らいばる	n	1	라이벌			cls=@person anim=+	r	r	ライバルに勝つ → 라이벌을 이기다
+相棒	あいぼう	n	1	파트너			cls=@person.close anim=+	r	r	相棒と組む → 파트너와 짝을 이루다
+他人	たにん	n	1	남			cls=@person anim=+	r	r	他人に言う → 남에게 말하다
+師匠	ししょう	n	1	스승			cls=@person.higher anim=+	r	r	師匠に学ぶ → 스승에게 배우다
+離婚	りこん	n	1	이혼			cls=@event	r	r	離婚する → 이혼하다
+仲直り	なかなおり	n	1	화해			cls=@activity	r	r	仲直りする → 화해하다
+別れ	わかれ	n	1	이별			cls=@event lu	r	r	つらい別れ → 괴로운 이별
+出会い	であい	n	1	만남			cls=@event	r	r	出会いがある → 만남이 있다
+再会	さいかい	n	1	재회			cls=@event	r	r	再会する → 재회하다
+裏切り	うらぎり	n	1	배신			cls=@abstract lu	r	r	裏切りに遭う → 배신을 당하다
+告白	こくはく	n	1	고백			cls=@speech	r	r	告白する → 고백하다
+デート	でーと	n	1	데이트			cls=@event	r	r	デートに行く → 데이트하러 가다
+キス	きす	n	1	키스			cls=@activity	r	r	キスをする → 키스하다
+恩	おん	n	1	은혜			cls=@abstract name=+	r	r	恩を返す → 은혜를 갚다
+結婚式	けっこんしき	n	1	결혼식			cls=@ceremony lu	r	r	結婚式を挙げる → 결혼식을 올리다
+恋愛	れんあい	n	1	연애			cls=@relation	r	r	恋愛をする → 연애를 하다
+礼	れい	n	1	감사 인사			cls=@speech name=+	r	r	お礼を言う → 감사 인사를 하다
+礼	れい	n	2	예의	pred=欠く|弁える			r	r	礼を欠く → 예의를 잃다
+手伝い	てつだい	n	1	도움			cls=@activity	r	r	手伝いを頼む → 도움을 청하다
+浮気	うわき	n	1	바람			cls=@activity	r	r	浮気をする → 바람을 피우다
+人物	じんぶつ	n	1	인물			cls=@person anim=+	r	r	重要な人物 → 중요한 인물
+人々	ひとびと	n	1	사람들			cls=@group anim=+	r	r	人々を守る → 사람들을 지키다
+連中	れんじゅう	n	1	녀석들			cls=@group anim=+	r	r	あの連中 → 저 녀석들
+奴	やつ	n	1	녀석			anim=+ cls=@person	r	r	変な奴 → 이상한 녀석
+奴	やつ	n	2	놈	mod=悪い|ムカつく			r	r	悪い奴 → 나쁜 놈
+者	もの	n	1	사람			cls=@person anim=+	r	r	働く者 → 일하는 사람
+若者	わかもの	n	1	젊은이			cls=@person anim=+	r	r	若者の街 → 젊은이의 거리
+少年	しょうねん	n	1	소년			cls=@person anim=+	r	r	少年の頃 → 소년 시절
+少女	しょうじょ	n	1	소녀			cls=@person anim=+	r	r	少女が笑う → 소녀가 웃다
+青年	せいねん	n	1	청년			cls=@person anim=+	r	r	青年が立つ → 청년이 서 있다
+老人	ろうじん	n	1	노인			cls=@person anim=+	r	r	老人が現れる → 노인이 나타나다
+女子	じょし	n	1	여자			cls=@person anim=+	r	r	女子生徒 → 여학생
+男子	だんし	n	1	남자			cls=@person anim=+	r	r	男子生徒 → 남학생
+赤ん坊	あかんぼう	n	1	아기			anim=+ cls=@person.child	r	r	赤ん坊が泣く → 아기가 울다
+美人	びじん	n	1	미인			cls=@person anim=+	r	r	美人だ → 미인이다
+主人公	しゅじんこう	n	1	주인공			cls=@person anim=+ lu name=+	r	r	物語の主人公 → 이야기의 주인공
+観客	かんきゃく	n	1	관객			cls=@person anim=+	r	r	観客が増える → 관객이 늘다
+乗客	じょうきゃく	n	1	승객			cls=@person anim=+	r	r	乗客が降りる → 승객이 내리다
+王様	おうさま	n	1	왕			cls=@person.higher anim=+ lu	r	r	王様に会う → 왕을 만나다
+姫	ひめ	n	1	공주			cls=@person.higher anim=+ name=+	r	r	姫と呼ぶな → 공주라고 부르지 마
+お嬢様	おじょうさま	n	1	아가씨			cls=@person anim=+ lu	r	r	お嬢様が来た → 아가씨가 왔다
+お嬢さん	おじょうさん	n	1	아가씨			cls=@person anim=+ lu	r	r	お嬢さん、どうぞ → 아가씨, 이쪽으로
+医師	いし	n	1	의사			cls=@person.role anim=+	r	r	医師の不足 → 의사 부족
+歌手	かしゅ	n	1	가수			cls=@person.role anim=+	r	r	オペラ歌手 → 오페라 가수
+俳優	はいゆう	n	1	배우			cls=@person.role anim=+	r	r	新人俳優 → 신인 배우
+女優	じょゆう	n	1	여배우			cls=@person.role anim=+	r	r	大女優 → 대배우
+アイドル	あいどる	n	1	아이돌			cls=@person.role anim=+	r	r	人気アイドル → 인기 아이돌
+ファン	ふぁん	n	1	팬			cls=@person anim=+	r	r	大ファン → 열렬한 팬
+監督	かんとく	n	1	감독			cls=@person.role anim=+	r	r	音響監督 → 음향 감독
+会長	かいちょう	n	1	회장			anim=+ cls=@person.role|@post	r	r	生徒会長 → 학생회장
+部員	ぶいん	n	1	부원			cls=@person.role anim=+	r	r	部員が多い → 부원이 많다
+新人	しんじん	n	1	신입			cls=@person.role anim=+	r	r	新人さん？ → 신입이야?
+素人	しろうと	n	1	아마추어			cls=@person anim=+	r	r	素人には無理だ → 아마추어에겐 무리다
+プロ	ぷろ	n	1	프로			cls=@person.role	r	r	プロ失格 → 프로 실격
+天才	てんさい	n	1	천재			cls=@person anim=+	r	r	天才だよ → 천재야
+馬鹿	ばか	n	1	바보			cls=@person anim=+	r	r	ばーか → 바보
+悪魔	あくま	n	1	악마			cls=@monster anim=+	r	r	悪魔の血 → 악마의 피
+幽霊	ゆうれい	n	1	유령			cls=@monster anim=+	r	r	幽霊が出る → 유령이 나오다
+化け物	ばけもの	n	1	괴물			cls=@monster anim=+	r	r	このバケモノめ → 이 괴물 자식
+鬼	おに	n	1	도깨비			cls=@monster anim=+	r	r	鬼は外 → 도깨비는 밖으로
+鬼	おに	n	2	술래	next=役			r	r	鬼役 → 술래
+天使	てんし	n	1	천사			cls=@entity anim=+	r	r	白衣の天使 → 백의의 천사
+担任	たんにん	n	1	담임			cls=@person.role anim=+	r	r	担任の先生 → 담임 선생님
+転校生	てんこうせい	n	1	전학생			cls=@person.role anim=+ lu	r	r	転校生が来た → 전학생이 왔다
+同級生	どうきゅうせい	n	1	동급생			cls=@person.role anim=+ lu	r	r	同級生と会う → 동급생을 만나다
+同僚	どうりょう	n	1	동료			cls=@person.role anim=+	r	r	職場の同僚 → 직장 동료
+部下	ぶか	n	1	부하			cls=@person.role anim=+	r	r	部下たち → 부하들
+本人	ほんにん	n	1	본인			cls=@person anim=+	r	r	本人に聞く → 본인에게 묻다
+個人	こじん	n	1	개인			cls=@person anim=+	r	r	個人の問題 → 개인의 문제
+兵士	へいし	n	1	병사			cls=@person.role anim=+	r	r	兵士を育てる → 병사를 길러내다
+警察官	けいさつかん	n	1	경찰관			cls=@person.role anim=+ lu	r	r	警察官になる → 경찰관이 되다
+患者	かんじゃ	n	1	환자			cls=@person.role anim=+	r	r	患者を救う → 환자를 구하다
+主役	しゅやく	n	1	주인공			anim=+ cls=@person.role|@post	r	r	今日の主役 → 오늘의 주인공
+お客様	おきゃくさま	n	1	손님			cls=@person.role anim=+ lu	r	r	お客様が来る → 손님이 오다
+代表	だいひょう	n	1	대표			cls=@person.role anim=+	r	r	図書部の代表 → 도서부 대표
+リーダー	りーだー	n	1	리더			anim=+ cls=@person.role|@post	r	r	組織のリーダー → 조직의 리더
+メンバー	めんばー	n	1	멤버			cls=@person anim=+	r	r	メンバー全員 → 멤버 전원
+スタッフ	すたっふ	n	1	스태프			cls=@person anim=+	r	r	協力スタッフ → 협력 스태프
+記者	きしゃ	n	1	기자			cls=@person.role anim=+	r	r	記者会見 → 기자 회견
+刑事	けいじ	n	1	형사			cls=@person.role anim=+	r	r	刑事ドラマ → 형사 드라마
+兄貴	あにき	n	1	형			cls=@person.kin anim=+	r	r	兄貴は先に行った → 형은 먼저 갔다
+親父	おやじ	n	1	아버지			cls=@person.kin anim=+	r	r	親父が笑った → 아버지가 웃었다
+長男	ちょうなん	n	1	장남			cls=@person.kin anim=+	r	r	長男が生まれた → 장남이 태어났다
+長女	ちょうじょ	n	1	장녀			cls=@person.kin anim=+	r	r	長女を産んだ → 장녀를 낳았다
+末っ子	すえっこ	n	1	막내			cls=@person.kin anim=+	r	r	百姓の末っ子 → 농부의 막내
+双子	ふたご	n	1	쌍둥이			cls=@person.kin anim=+	r	r	双子の姉妹 → 쌍둥이 자매
+一人っ子	ひとりっこ	n	1	외동			cls=@person.kin anim=+	r	r	私は一人っ子です → 저는 외동이에요
+親子	おやこ	n	1	부모 자식			cls=@group anim=+ name=+	r	r	仲のいい親子 → 사이좋은 부모 자식
+先祖	せんぞ	n	1	조상			cls=@person.kin anim=+	r	r	先祖に感謝する → 조상에게 감사하다
+嫁	よめ	n	1	아내			cls=@person.kin anim=+	r	r	嫁をもらう → 아내를 맞다
+嫁	よめ	n	2	며느리	mod=@person.kin			r	r	息子の嫁 → 아들의 며느리
+姉妹	しまい	n	1	자매			cls=@person.kin anim=+	r	r	姉妹で来る → 자매가 함께 오다
+奥様	おくさま	n	1	사모님			cls=@person.kin anim=+ lu	r	r	奥様、こちらへどうぞ → 사모님, 이쪽으로 오세요
+母さん	かあさん	n	1	엄마			cls=@person.kin anim=+ lu	r	r	母さん、ただいま → 엄마, 다녀왔어
+父さん	とうさん	n	1	아빠			cls=@person.kin anim=+ lu	r	r	父さん、ただいま → 아빠, 다녀왔어
+祖父母	そふぼ	n	1	조부모			cls=@person.kin anim=+	r	r	祖父母の家 → 조부모 댁
+学園	がくえん	n	1	학원			cls=@school	r	r	学園生活 → 학원 생활
+学年	がくねん	n	1	학년			cls=@period	r	r	同じ学年 → 같은 학년
+学期	がっき	n	1	학기			cls=@period	r	r	新学期 → 새 학기
+放課後	ほうかご	n	1	방과 후			cls=@time.point lu	r	r	放課後に会う → 방과 후에 만나다
+部活	ぶかつ	n	1	동아리			cls=@organization	r	r	部活に入る → 동아리에 들어가다
+部活	ぶかつ	n	2	동아리 활동	pred=する|やる			r	r	部活をする → 동아리 활동을 하다
+部	ぶ	n	1	부			cls=@organization	r	r	図書部 → 도서부
+クラブ	くらぶ	n	1	동아리			cls=@organization|@group	r	r	クラブ活動 → 동아리 활동
+クラブ	くらぶ	n	2	클럽	pred=働く|踊る			r	r	クラブで踊る → 클럽에서 춤추다
+組	くみ	n	1	반			cls=@group	r	r	Ｄ組の生徒 → D반 학생
+生徒会	せいとかい	n	1	학생회			lu cls=@organization	r	r	生徒会長 → 학생회장
+昼休み	ひるやすみ	n	1	점심시간			cls=@time.point	r	r	昼休みに会う → 점심시간에 만나다
+転校	てんこう	n	1	전학			cls=@event	r	r	転校することになった → 전학 가게 됐다
+文化祭	ぶんかさい	n	1	문화제			lu cls=@event	r	r	文化祭の準備 → 문화제 준비
+修学旅行	しゅうがくりょこう	n	1	수학여행			cls=@event lu	r	r	修学旅行に行く → 수학여행을 가다
+合宿	がっしゅく	n	1	합숙			cls=@event	r	r	合宿に行く → 합숙을 가다
+受験	じゅけん	n	1	입시			cls=@exam	r	r	大学受験 → 대학 입시
+満点	まんてん	n	1	만점			cls=@score	r	r	１００点満点 → 100점 만점
+教科	きょうか	n	1	과목			cls=@subject.school	r	r	選択教科 → 선택 과목
+科目	かもく	n	1	과목			cls=@subject.school	r	r	必修科目 → 필수 과목
+国語	こくご	n	1	국어			cls=@subject.school	r	r	国語の授業 → 국어 수업
+体育	たいいく	n	1	체육			cls=@subject.school	r	r	体育の授業 → 체육 수업
+美術	びじゅつ	n	1	미술			cls=@subject.school	r	r	美術部 → 미술부
+保健室	ほけんしつ	n	1	보건실			cls=@room lu	r	r	保健室に行く → 보건실에 가다
+校舎	こうしゃ	n	1	학교 건물			cls=@building	r	r	校舎を出る → 학교 건물을 나오다
+体育館	たいいくかん	n	1	체육관			cls=@building lu	r	r	体育館に集まる → 체육관에 모이다
+屋上	おくじょう	n	1	옥상			cls=@place	r	r	屋上に出る → 옥상으로 나가다
+廊下	ろうか	n	1	복도			cls=@room	r	r	廊下を歩く → 복도를 걷다
+退学	たいがく	n	1	퇴학			cls=@event	r	r	退学になる → 퇴학당하다
+教育	きょういく	n	1	교육			cls=@activity	r	r	教育を受ける → 교육을 받다
+塾	じゅく	n	1	학원			cls=@school	r	r	塾に行く → 학원에 가다
+部室	ぶしつ	n	1	동아리방			cls=@room	r	r	部室に戻る → 동아리방으로 돌아가다
+進学	しんがく	n	1	진학			cls=@event	r	r	大学に進学する → 대학에 진학하다
+進路	しんろ	n	1	진로			cls=@direction	r	r	卒業後の進路 → 졸업 후의 진로
+青春	せいしゅん	n	1	청춘			cls=@life.stage	r	r	青春を楽しむ → 청춘을 즐기다
+正解	せいかい	n	1	정답			cls=@question|@truth	r	r	正解です → 정답입니다
+職場	しょくば	n	1	직장			cls=@place	r	r	職場の同僚 → 직장 동료
+企業	きぎょう	n	1	기업			cls=@organization	r	r	大企業 → 대기업
+任務	にんむ	n	1	임무			cls=@task	r	r	任務を果たす → 임무를 완수하다
+役目	やくめ	n	1	역할			cls=@duty|@post	r	r	役目を果たす → 역할을 다하다
+役割	やくわり	n	1	역할			cls=@duty|@post	r	r	役割を分担する → 역할을 나누다
+役	やく	n	1	역할			cls=@task|@post	r	r	司会役 → 사회자 역할
+役	やく	n	2	배역	pred=演ずる|競う			r	r	役を競う → 배역을 두고 경쟁하다
+担当	たんとう	n	1	담당			cls=@duty|@post	r	r	入口の担当 → 입구 담당
+収入	しゅうにゅう	n	1	수입			cls=@money	r	r	収入が増える → 수입이 늘다
+ボーナス	ぼーなす	n	1	보너스			cls=@money	r	r	ボーナスゲーム → 보너스 게임
+営業	えいぎょう	n	1	영업			cls=@activity	r	r	営業時間 → 영업시간
+商売	しょうばい	n	1	장사			cls=@activity	r	r	商売をする → 장사를 하다
+取り引き	とりひき	n	1	거래			cls=@activity	r	r	取り引きを持ちかける → 거래를 제안하다
+契約	けいやく	n	1	계약			cls=@document	r	r	契約を結ぶ → 계약을 맺다
+書類	しょるい	n	1	서류			cls=@document	r	r	書類を出す → 서류를 내다
+資料	しりょう	n	1	자료			cls=@document	r	r	資料を読む → 자료를 읽다
+依頼	いらい	n	1	의뢰			cls=@request|@task	r	r	依頼を受ける → 의뢰를 받다
+交渉	こうしょう	n	1	협상			cls=@activity|@duty	r	r	値引き交渉 → 가격 협상
+締め切り	しめきり	n	1	마감			cls=@time.point|@time	r	r	締め切りは明日だ → 마감은 내일이다
+企画	きかく	n	1	기획			cls=@plan|@scheme	r	r	企画が通る → 기획이 통과되다
+予算	よさん	n	1	예산			cls=@money	r	r	予算が決まる → 예산이 정해지다
+費用	ひよう	n	1	비용			cls=@money	r	r	費用が掛かる → 비용이 들다
+利益	りえき	n	1	이익			cls=@money|@abstract	r	r	利益を守る → 이익을 지키다
+損	そん	n	1	손해			cls=@damage	r	r	損をする → 손해를 보다
+商品	しょうひん	n	1	상품			cls=@thing	r	r	商品を売る → 상품을 팔다
+システム	しすてむ	n	1	시스템			cls=@machine|@abstract	r	r	システムを止める → 시스템을 멈추다
+チーム	ちーむ	n	1	팀			cls=@group|@organization	r	r	チームを組む → 팀을 짜다
+アルバイト	あるばいと	n	1	아르바이트			cls=@activity	r	r	アルバイトをする → 아르바이트를 하다
+事務	じむ	n	1	사무			cls=@task	r	r	事務作業 → 사무 작업
+対応	たいおう	n	1	대응			cls=@activity|@task	r	r	対応に追われる → 대응에 쫓기다
+管理	かんり	n	1	관리			cls=@activity	r	r	体調管理 → 몸 관리
+提案	ていあん	n	1	제안			cls=@idea|@request	r	r	提案を受け入れる → 제안을 받아들이다
+提出	ていしゅつ	n	1	제출			cls=@activity	r	r	提出期限 → 제출 기한
+許可	きょか	n	1	허가			cls=@abstract	r	r	許可を得る → 허가를 받다
+サービス	さーびす	n	1	서비스			cls=@activity	r	r	サービスがいい → 서비스가 좋다
+活躍	かつやく	n	1	활약			cls=@activity	r	r	活躍する → 활약하다
+本番	ほんばん	n	1	실전			cls=@event	r	r	明日は本番だ → 내일은 실전이다
+体調	たいちょう	n	1	몸 상태			cls=@abstract	r	r	体調に問題はない → 몸 상태에 문제는 없다
+症状	しょうじょう	n	1	증상			cls=@illness	r	r	症状が出る → 증상이 나타나다
+頭痛	ずつう	n	1	두통			cls=@illness|@symptom	r	r	頭痛がする → 머리가 아프다
+骨折	こっせつ	n	1	골절			cls=@illness	r	r	骨折する → 뼈가 부러지다
+治療	ちりょう	n	1	치료			cls=@activity	r	r	治療を受ける → 치료를 받다
+検査	けんさ	n	1	검사			cls=@activity	r	r	検査を受ける → 검사를 받다
+体力	たいりょく	n	1	체력			cls=@strength	r	r	体力がある → 체력이 있다
+体重	たいじゅう	n	1	몸무게			cls=@personal.info	r	r	体重が増える → 몸무게가 늘다
+体重	たいじゅう	n	2	체중	pred=掛ける|乗せる			r	r	体重をかける → 체중을 싣다
+身長	しんちょう	n	1	키			cls=@personal.info	r	r	身長が高い → 키가 크다
+睡眠	すいみん	n	1	수면			cls=@rest	r	r	睡眠時間 → 수면 시간
+疲労	ひろう	n	1	피로			cls=@abstract	r	r	疲労がたまる → 피로가 쌓이다
+ストレス	すとれす	n	1	스트레스			cls=@abstract	r	r	ストレスがたまる → 스트레스가 쌓이다
+寿命	じゅみょう	n	1	수명			cls=@duration	r	r	寿命が縮む → 수명이 줄다
+命	いのち	n	1	목숨			cls=@abstract name=+	r	r	命を懸ける → 목숨을 걸다
+命	いのち	n	2	생명	mod=@animal|@plant			r	r	命の重さ → 생명의 무게
+生命	せいめい	n	1	생명			cls=@abstract	r	r	生命体 → 생명체
+死	し	n	1	죽음			cls=@abstract|@endpoint	r	r	死を恐れる → 죽음을 두려워하다
+呼吸	こきゅう	n	1	호흡			cls=@activity	r	r	呼吸が止まる → 호흡이 멈추다
+気絶	きぜつ	n	1	기절			cls=@event	r	r	気絶させる → 기절시키다
+咳	せき	n	1	기침			cls=@body.output	r	r	咳をする → 기침을 하다
+目眩	めまい	n	1	현기증			cls=@illness|@sensation|@symptom	r	r	目眩がする → 현기증이 나다
+出血	しゅっけつ	n	1	출혈			cls=@illness	r	r	出血が止まる → 출혈이 멎다
+回復	かいふく	n	1	회복			cls=@abstract|@trend	r	r	回復が早い → 회복이 빠르다
+看病	かんびょう	n	1	간호			cls=@activity|@task	r	r	看病する → 간호하다
+見舞い	みまい	n	1	병문안			cls=@activity	r	r	お見舞いに行く → 병문안을 가다
+栄養	えいよう	n	1	영양			cls=@abstract	r	r	栄養が足りない → 영양이 부족하다
+毒	どく	n	1	독			cls=@harm	r	r	毒を盛る → 독을 타다
+肉体	にくたい	n	1	육체			cls=@body	r	r	肉体と精神 → 육체와 정신
+額	ひたい	n	1	이마			lu cls=@body	r	r	額に汗が浮かぶ → 이마에 땀이 맺히다
+眉	まゆ	n	1	눈썹			cls=@body	r	r	眉を動かす → 눈썹을 움직이다
+瞳	ひとみ	n	1	눈동자			cls=@body name=+	r	r	瞳を閉じる → 눈을 감다
+心臓	しんぞう	n	1	심장			cls=@body	r	r	心臓が高鳴る → 심장이 두근거리다
+脳	のう	n	1	뇌			cls=@body	r	r	脳を調べる → 뇌를 검사하다
+爪	つめ	n	1	손톱			cls=@body	r	r	爪を切る → 손톱을 깎다
+爪	つめ	n	2	발톱	mod=@animal|@monster			r	r	クイーンの爪 → 퀸의 발톱
+指先	ゆびさき	n	1	손끝			cls=@body|@hand	r	r	指先で触れる → 손끝으로 만지다
+膝	ひざ	n	1	무릎			cls=@body	r	r	膝を抱える → 무릎을 끌어안다
+尻	しり	n	1	엉덩이			cls=@body	r	r	尻を蹴る → 엉덩이를 걷어차다
+身	み	n	1	몸			cls=@body	r	r	身を隠す → 몸을 숨기다
+姿	すがた	n	1	모습			cls=@abstract|@sign name=+	r	r	姿が見える → 모습이 보이다
+姿	すがた	n	2	차림	mod=@clothing			r	r	制服姿 → 교복 차림
+顔色	かおいろ	n	1	안색			cls=@body	r	r	顔色が悪い → 안색이 안 좋다
+舌	した	n	1	혀			cls=@body	r	r	舌を出す → 혀를 내밀다
+唇	くちびる	n	1	입술			cls=@body	r	r	唇を噛む → 입술을 깨물다
+頬	ほお	n	1	뺨			cls=@body	r	r	頬を撫でる → 뺨을 쓰다듬다
+頬	ほお	n	2	볼	pred=膨らます|膨らませる			r	r	頬を膨らませる → 볼을 부풀리다
+肌	はだ	n	1	피부			cls=@body	r	r	肌が荒れる → 피부가 거칠어지다
+神経	しんけい	n	1	신경			cls=@body	r	r	神経が通う → 신경이 통하다
+足元	あしもと	n	1	발밑			cls=@position	r	r	足元に落ちる → 발밑에 떨어지다
+視線	しせん	n	1	시선			cls=@attention|@gaze	r	r	視線を逸らす → 시선을 돌리다
+髪の毛	かみのけ	n	1	머리카락			cls=@hair	r	r	髪の毛を洗う → 머리를 감다
+髭	ひげ	n	1	수염			cls=@hair	r	r	髭が生える → 수염이 나다
+両手	りょうて	n	1	양손			cls=@hand|@body	r	r	両手で持つ → 양손으로 들다
+拳	こぶし	n	1	주먹			cls=@hand|@body|@fist name=+	r	r	拳を握る → 주먹을 쥐다
+掌	てのひら	n	1	손바닥			cls=@hand	r	r	掌に載せる → 손바닥에 올리다
+太腿	ふともも	n	1	허벅지			cls=@body	r	r	太ももに触れる → 허벅지를 만지다
+脚	あし	n	1	다리			cls=@body	r	r	脚を組む → 다리를 꼬다
+体温	たいおん	n	1	체온			cls=@quantity	r	r	体温を測る → 체온을 재다
+吐息	といき	n	1	숨결			cls=@body.output|@breath	r	r	熱い吐息 → 뜨거운 숨결
+足音	あしおと	n	1	발소리			cls=@sound	r	r	足音が近づく → 발소리가 다가오다
+気温	きおん	n	1	기온			cls=@weather	r	r	気温が低い → 기온이 낮다
+嵐	あらし	n	1	폭풍			cls=@weather name=+	r	r	嵐が来る → 폭풍이 오다
+霧	きり	n	1	안개			cls=@mist|@weather name=+	r	r	霧が出る → 안개가 끼다
+虹	にじ	n	1	무지개			cls=@sky	r	r	虹が出る → 무지개가 뜨다
+梅雨	つゆ	n	1	장마			cls=@season	r	r	梅雨に入る → 장마에 들어가다
+夕焼け	ゆうやけ	n	1	노을			cls=@sky	r	r	夕焼け空 → 노을 진 하늘
+朝日	あさひ	n	1	아침 해			cls=@light name=+	r	r	朝日が昇る → 아침 해가 뜨다
+朝日	あさひ	n	2	아침 햇살	pred=浴びる|受ける			r	r	朝日を浴びる → 아침 햇살을 받다
+夕日	ゆうひ	n	1	석양			cls=@light	r	r	夕日が沈む → 석양이 지다
+日差し	ひざし	n	1	햇살			cls=@light	r	r	日差しが強い → 햇살이 강하다
+影	かげ	n	1	그림자			cls=@light	r	r	影が伸びる → 그림자가 길어지다
+影	かげ	n	2	그늘	mod=@body|表情			r	r	顔の影 → 얼굴의 그늘
+闇	やみ	n	1	어둠			cls=@light	r	r	闇に紛れる → 어둠에 숨다
+炎	ほのお	n	1	불꽃			cls=@light	r	r	炎が燃え上がる → 불꽃이 타오르다
+煙	けむり	n	1	연기			cls=@mist|@light	r	r	煙が出る → 연기가 나다
+大地	だいち	n	1	대지			cls=@nature name=+	r	r	大地を踏む → 대지를 밟다
+地面	じめん	n	1	땅			cls=@nature|@place	r	r	地面に落ちる → 땅에 떨어지다
+泥	どろ	n	1	진흙			cls=@dirt	r	r	泥だらけ → 진흙투성이
+岩	いわ	n	1	바위			cls=@nature	r	r	岩に座る → 바위에 앉다
+海岸	かいがん	n	1	바닷가			cls=@nature	r	r	海岸を歩く → 바닷가를 걷다
+潮	しお	n	1	조수			cls=@nature name=+	r	r	潮が満ちる → 조수가 차오르다
+谷	たに	n	1	골짜기			cls=@nature name=+	r	r	深い谷 → 깊은 골짜기
+丘	おか	n	1	언덕			cls=@nature name=+	r	r	丘の上 → 언덕 위
+岸	きし	n	1	물가			cls=@nature lu name=+	r	r	岸に着く → 물가에 닿다
+畑	はたけ	n	1	밭			cls=@place name=+	r	r	畑に水をやる → 밭에 물을 주다
+枝	えだ	n	1	나뭇가지			cls=@plant	r	r	枝を折る → 나뭇가지를 꺾다
+根	ね	n	1	뿌리			cls=@plant	r	r	根を張る → 뿌리를 내리다
+種	たね	n	1	씨앗			cls=@plant lu	r	r	花の種 → 꽃씨
+実	み	n	1	열매			cls=@plant lu name=+	r	r	木の実 → 나무 열매
+花弁	はなびら	n	1	꽃잎			cls=@plant	r	r	花びらが散る → 꽃잎이 지다
+夜空	よぞら	n	1	밤하늘			cls=@sky	r	r	夜空を見上げる → 밤하늘을 올려다보다
+青空	あおぞら	n	1	푸른 하늘			cls=@sky name=+	r	r	青空が広がる → 푸른 하늘이 펼쳐지다
+風景	ふうけい	n	1	풍경			cls=@nature	r	r	風景を見る → 풍경을 보다
+光景	こうけい	n	1	광경			cls=@abstract	r	r	嫌な光景 → 끔찍한 광경
+地上	ちじょう	n	1	지상			cls=@place	r	r	地上に降りる → 지상으로 내려오다
+天	てん	n	1	하늘			cls=@sky	r	r	天を仰ぐ → 하늘을 올려다보다
+流れ	ながれ	n	1	흐름			cls=@abstract	r	r	話の流れ → 이야기의 흐름
+泡	あわ	n	1	거품			cls=@thing	r	r	泡が立つ → 거품이 일다
+生き物	いきもの	n	1	생물			cls=@animal anim=+	r	r	生き物を飼う → 생물을 기르다
+狐	きつね	n	1	여우			cls=@animal anim=+	r	r	狐の耳 → 여우 귀
+狼	おおかみ	n	1	늑대			cls=@animal anim=+	r	r	狼の群れ → 늑대 무리
+蜘蛛	くも	n	1	거미			cls=@animal anim=+	r	r	蜘蛛の巣 → 거미줄
+虎	とら	n	1	호랑이			cls=@animal anim=+	r	r	虎の尻尾 → 호랑이 꼬리
+竜	りゅう	n	1	용			cls=@monster anim=+ name=+	r	r	龍の旗 → 용 깃발
+蛇	へび	n	1	뱀			cls=@animal anim=+	r	r	蛇が出る → 뱀이 나오다
+亀	かめ	n	1	거북이			cls=@animal anim=+	r	r	亀が歩く → 거북이가 걷다
+兎	うさぎ	n	1	토끼			cls=@animal anim=+ name=+	r	r	兎を飼う → 토끼를 기르다
+鼠	ねずみ	n	1	쥐			cls=@animal anim=+	r	r	ネズミが出る → 쥐가 나오다
+子猫	こねこ	n	1	새끼 고양이			cls=@animal anim=+	r	r	子猫を拾う → 새끼 고양이를 줍다
+子犬	こいぬ	n	1	강아지			cls=@animal anim=+	r	r	子犬が鳴く → 강아지가 낑낑대다
+餌	えさ	n	1	먹이			cls=@food	r	r	餌をやる → 먹이를 주다
+餌	えさ	n	2	미끼	pred=釣る|誘う			r	r	餌で釣る → 미끼로 낚다
+巣	す	n	1	둥지			cls=@place	r	r	鳥の巣 → 새 둥지
+尻尾	しっぽ	n	1	꼬리			cls=@body	r	r	尻尾を振る → 꼬리를 흔들다
+羽根	はね	n	1	날개			cls=@body name=+	r	r	羽根が生える → 날개가 돋다
+瞬間	しゅんかん	n	1	순간			cls=@time	r	r	その瞬間 → 그 순간
+一瞬	いっしゅん	n	1	순간			cls=@duration ni=-	r	r	一瞬思った → 순간 생각했다
+時期	じき	n	1	시기			cls=@period	r	r	大切な時期 → 중요한 시기
+当時	とうじ	n	1	당시			cls=@time	r	r	当時の私 → 당시의 나
+以来	いらい	n	1	이후			cls=@time	r	r	テロ以来 → 테러 이후
+以来	いらい	n	2	뒤	after=それ|あれ			r	r	それ以来 → 그 뒤
+以来	いらい	n	3	그 뒤	after=-			r	r	以来、よく話す → 그 뒤 자주 이야기하다
+今頃	いまごろ	n	1	지금쯤			cls=@time ni=-	r	r	今頃寝ている → 지금쯤 자고 있다
+今頃	いまごろ	n	2	이맘때	mod=@time			r	r	去年の今頃 → 작년 이맘때
+今頃	いまごろ	n	3	이제야	pred=気づく|分かる			r	r	今頃気づいた → 이제야 알았다
+先程	さきほど	n	1	아까			cls=@time ni=-	r	r	先ほどの話 → 아까 한 이야기
+夜明け	よあけ	n	1	새벽			cls=@time.point|@time	r	r	夜明けまで → 새벽까지
+夕暮れ	ゆうぐれ	n	1	해 질 녘			cls=@time.point|@time	r	r	夕暮れが近づく → 해 질 녘이 다가오다
+深夜	しんや	n	1	심야			cls=@period	r	r	深夜番組 → 심야 방송
+深夜	しんや	n	2	새벽	next=@number			r	r	深夜3時 → 새벽 3시
+早朝	そうちょう	n	1	이른 아침			cls=@period	r	r	早朝に起きる → 이른 아침에 일어나다
+日々	ひび	n	1	나날			cls=@period ni=-	r	r	楽しい日々 → 즐거운 나날
+日々	ひび	n	2	날마다	form=adv			r	r	日々忙しい → 날마다 바쁘다
+一生	いっしょう	n	1	평생			ni=- cls=@period|@lifetime	r	r	一生大切にする → 평생 소중히 하다
+一生	いっしょう	n	2	일생	mod=@person			r	r	人の一生 → 사람의 일생
+現代	げんだい	n	1	현대			cls=@period	r	r	現代の文明 → 현대 문명
+時刻	じこく	n	1	시각			cls=@time.point	r	r	時刻は９時 → 시각은 9시
+期限	きげん	n	1	기한			cls=@time.point|@time	r	r	提出期限 → 제출 기한
+最中	さいちゅう	n	1	도중			cls=@time	r	r	食事の最中 → 식사 도중
+直後	ちょくご	n	1	직후			cls=@time.point	r	r	その直後 → 그 직후
+直前	ちょくぜん	n	1	직전			cls=@time.point	r	r	出る直前 → 나가기 직전
+前日	ぜんじつ	n	1	전날			cls=@time	r	r	前日に準備する → 전날 준비하다
+翌日	よくじつ	n	1	다음 날			cls=@time ni=-	r	r	翌日から → 다음 날부터
+当日	とうじつ	n	1	당일			cls=@time	r	r	当日は晴れ → 당일은 맑음
+毎回	まいかい	n	1	매번			cls=@time ni=-	r	r	毎回違う → 매번 다르다
+先日	せんじつ	n	1	지난번			cls=@time ni=-	r	r	先日はありがとう → 지난번에는 고마워
+近頃	ちかごろ	n	1	요즘			cls=@time ni=-	r	r	近頃の若者 → 요즘 젊은이
+最終	さいしゅう	n	1	최종			cls=@abstract	r	r	最終試験 → 최종 시험
+最終	さいしゅう	n	2	막차	pred=乗る|乗り遅れる			r	r	最終に乗り遅れる → 막차를 놓치다
+始め	はじめ	n	1	처음			cls=@period	r	r	始めから → 처음부터
+初め	はじめ	n	1	처음			cls=@period	r	r	初めから → 처음부터
+初め	はじめ	n	2	초	mod=@time.point|@season			r	r	9月の初め → 9월 초
+年末	ねんまつ	n	1	연말			cls=@period	r	r	年末の忙しさ → 연말의 바쁨
+一時	いちじ	n	1	한때			cls=@time	r	r	一時はどうなるかと思った → 한때는 어떻게 되나 했다
+一時	いちじ	n	2	일시	next=的			r	r	一時的に緩む → 일시적으로 느슨해지다
+初日	しょにち	n	1	첫날			cls=@time	r	r	初日に行く → 첫날에 가다
+永遠	えいえん	n	1	영원			cls=@abstract	r	r	永遠を信じる → 영원을 믿다
+永遠	えいえん	n	2	영원히	next=に			r	r	永遠に続く → 영원히 계속되다
+永遠	えいえん	n	3	영원하다	form=no-attr head=@time|@period			r	r	永遠の時 → 영원한 시간
+前後	ぜんご	n	1	앞뒤			cls=@position	r	r	前後に揺れる → 앞뒤로 흔들리다
+前後	ぜんご	n	2	안팎	after=@number|@quantity			r	r	3500人前後 → 3500명 안팎
+前後	ぜんご	n	3	전후	after=@event|@activity|@time			r	r	メイク前後 → 메이크업 전후
+最新	さいしん	n	1	최신			cls=@abstract	r	r	最新のデータ → 최신 데이터
+当初	とうしょ	n	1	처음			cls=@period ni=-	r	r	当初は警戒された → 처음에는 경계를 받았다
+当初	とうしょ	n	2	원래	head=@idea			r	r	当初の予定 → 원래 계획
+連休	れんきゅう	n	1	연휴			cls=@period	r	r	連休に入る → 연휴에 들어가다
+本日	ほんじつ	n	1	오늘			cls=@time ni=-	r	r	本日はよろしく → 오늘 잘 부탁드립니다
+間	ま	n	1	틈			cls=@duration name=+	r	r	尋ねる間もなく → 물어볼 틈도 없이
+帰り	かえり	n	1	돌아가는 길			cls=@event	r	r	帰りに買う → 돌아가는 길에 사다
+帰り	かえり	n	2	귀가	pred=遅い|早い			r	r	帰りが遅い → 귀가가 늦다
+同時	どうじ	n	1	동시			cls=@time	r	r	同時に始める → 동시에 시작하다
+屋敷	やしき	n	1	저택			cls=@house name=+	r	r	屋敷に住む → 저택에 살다
+館	やかた	n	1	저택			cls=@house	r	r	館に住む → 저택에 살다
+墓	はか	n	1	무덤			cls=@place	r	r	墓参り → 성묘
+広場	ひろば	n	1	광장			cls=@place	r	r	中央広場 → 중앙 광장
+都会	とかい	n	1	도시			cls=@town	r	r	都会に住む → 도시에 살다
+周辺	しゅうへん	n	1	주변			cls=@position	r	r	周辺の地図 → 주변 지도
+周囲	しゅうい	n	1	주위			cls=@position	r	r	周囲を見回す → 주위를 둘러보다
+付近	ふきん	n	1	근처			cls=@position	r	r	駅の付近 → 역 근처
+カフェ	かふぇ	n	1	카페			cls=@shop	r	r	カフェに行く → 카페에 가다
+コンビニ	こんびに	n	1	편의점			cls=@shop	r	r	コンビニに寄る → 편의점에 들르다
+警察署	けいさつしょ	n	1	경찰서			cls=@facility lu	r	r	警察署に行く → 경찰서에 가다
+駅前	えきまえ	n	1	역 앞			cls=@place	r	r	駅前で会う → 역 앞에서 만나다
+ホーム	ほーむ	n	1	승강장			cls=@place	r	r	ホームで待つ → 승강장에서 기다리다
+路地	ろじ	n	1	골목			cls=@road	r	r	路地に入る → 골목에 들어가다
+トンネル	とんねる	n	1	터널			cls=@road	r	r	トンネルを抜ける → 터널을 빠져나가다
+基地	きち	n	1	기지			cls=@facility	r	r	基地に戻る → 기지로 돌아가다
+施設	しせつ	n	1	시설			cls=@facility	r	r	施設に入る → 시설에 들어가다
+ビル	びる	n	1	빌딩			cls=@building name=+	r	r	ビルの屋上 → 빌딩 옥상
+倉庫	そうこ	n	1	창고			cls=@building	r	r	倉庫に運ぶ → 창고로 옮기다
+門	もん	n	1	문			cls=@opening name=+	r	r	門をくぐる → 문을 통과하다
+端	はし	n	1	끝			cls=@position	r	r	机の端 → 책상 끝
+端	はし	n	2	가장자리	mod=@clothing|@road			r	r	道路の端 → 도로 가장자리
+外側	そとがわ	n	1	바깥쪽			cls=@position	r	r	外側に開く → 바깥쪽으로 열리다
+内側	うちがわ	n	1	안쪽			cls=@position	r	r	内側に入る → 안쪽으로 들어가다
+舞台	ぶたい	n	1	무대			cls=@place	r	r	舞台に立つ → 무대에 서다
+ステージ	すてーじ	n	1	스테이지			cls=@place	r	r	ステージに立つ → 스테이지에 서다
+海外	かいがい	n	1	해외			cls=@place	r	r	海外に行く → 해외에 가다
+故郷	こきょう	n	1	고향			cls=@place	r	r	故郷へ帰る → 고향으로 돌아가다
+マンション	まんしょん	n	1	아파트			cls=@building	r	r	マンションに住む → 아파트에 살다
+寮	りょう	n	1	기숙사			cls=@building name=+	r	r	寮に戻る → 기숙사로 돌아가다
+穴	あな	n	1	구멍			cls=@shape	r	r	穴を開ける → 구멍을 뚫다
+本部	ほんぶ	n	1	본부			cls=@organization	r	r	本部に報告する → 본부에 보고하다
+地下	ちか	n	1	지하			cls=@place	r	r	地下に降りる → 지하로 내려가다
+中央	ちゅうおう	n	1	중앙			cls=@position	r	r	広場の中央 → 광장 중앙
+中心	ちゅうしん	n	1	중심			cls=@position	r	r	町の中心 → 마을의 중심
+範囲	はんい	n	1	범위			cls=@abstract	r	r	できる範囲で → 할 수 있는 범위에서
+空間	くうかん	n	1	공간			cls=@place	r	r	空間を作る → 공간을 만들다
+距離	きょり	n	1	거리			cls=@quantity	r	r	距離を取る → 거리를 두다
+位置	いち	n	1	위치			cls=@position	r	r	位置を変える → 위치를 바꾸다
+場	ば	n	1	자리			cls=@place	r	r	その場を離れる → 그 자리를 떠나다
+場	ば	n	2	분위기	pred=和む|白ける			r	r	場が和む → 분위기가 누그러지다
+場面	ばめん	n	1	상황			cls=@event	r	r	そういう場面 → 그런 상황
+場面	ばめん	n	2	장면	pred=見る|見せる			r	r	いい場面を見せる → 좋은 장면을 보여 주다
+行き先	いきさき	n	1	목적지			cls=@place	r	r	行き先を決める → 목적지를 정하다
+歩道	ほどう	n	1	인도			cls=@road	r	r	歩道を歩く → 인도를 걷다
+室内	しつない	n	1	실내			cls=@room	r	r	室内で遊ぶ → 실내에서 놀다
+手前	てまえ	n	1	앞			cls=@position	r	r	手前に引く → 앞으로 당기다
+背後	はいご	n	1	뒤			cls=@position	r	r	背後から → 등 뒤에서
+背後	はいご	n	2	배후	mod=@incident|@crime			r	r	事件の背後 → 사건의 배후
+街	まち	n	1	거리			cls=@town	r	r	街を歩く → 거리를 걷다
+街	まち	n	2	도시	pred=離れる|去る			r	r	街を離れる → 도시를 떠나다
+地元	じもと	n	1	고향			cls=@place	r	r	地元に帰る → 고향에 돌아가다
+地元	じもと	n	2	지역	head=@event|@food|@shop			r	r	地元の食材 → 지역 식재료
+彼方此方	あちらこちら	n	1	여기저기			cls=@place	r	r	あちこちに走る → 여기저기 뛰어다니다
+枕	まくら	n	1	베개			cls=@bedding	r	r	枕が変わる → 베개가 바뀌다
+照明	しょうめい	n	1	조명			cls=@lighting	r	r	照明をつける → 조명을 켜다
+明かり	あかり	n	1	불			cls=@lighting	r	r	明かりを消す → 불을 끄다
+明かり	あかり	n	2	불빛	pred=漏れる|見える			r	r	明かりが漏れる → 불빛이 새어 나오다
+包丁	ほうちょう	n	1	식칼			cls=@tool|@weapon	r	r	包丁を持つ → 식칼을 들다
+食器	しょっき	n	1	그릇			cls=@tableware	r	r	食器を並べる → 그릇을 놓다
+天井	てんじょう	n	1	천장			cls=@position	r	r	天井を見上げる → 천장을 올려다보다
+扉	とびら	n	1	문			cls=@opening	r	r	扉を開ける → 문을 열다
+居間	いま	n	1	거실			cls=@room	r	r	居間に集まる → 거실에 모이다
+寝室	しんしつ	n	1	침실			cls=@room	r	r	寝室で寝る → 침실에서 자다
+家事	かじ	n	1	집안일			cls=@task	r	r	家事をする → 집안일을 하다
+支度	したく	n	1	준비			cls=@readiness	r	r	支度をする → 준비를 하다
+ガス	がす	n	1	가스			cls=@thing name=+	r	r	ガスが漏れる → 가스가 새다
+洗濯物	せんたくもの	n	1	빨래			cls=@clothing lu	r	r	洗濯物を干す → 빨래를 널다
+塵箱	ごみばこ	n	1	쓰레기통			cls=@container	r	r	ゴミ箱に捨てる → 쓰레기통에 버리다
+暮らし	くらし	n	1	생활			cls=@activity lu	r	r	暮らしを変える → 생활을 바꾸다
+生活	せいかつ	n	1	생활			cls=@activity	r	r	学園生活 → 학원 생활
+日常	にちじょう	n	1	일상			cls=@abstract|@state	r	r	日常に戻る → 일상으로 돌아가다
+引っ越し	ひっこし	n	1	이사			cls=@event lu	r	r	引っ越しをする → 이사를 하다
+自宅	じたく	n	1	집			cls=@house	r	r	自宅に帰る → 집에 돌아가다
+蓋	ふた	n	1	뚜껑			cls=@container|@opening	r	r	蓋を開ける → 뚜껑을 열다
+ノック	のっく	n	1	노크			cls=@sound	r	r	ノックの音 → 노크 소리
+鋏	はさみ	n	1	가위			cls=@tool lu	r	r	ハサミで切る → 가위로 자르다
+テープ	てーぷ	n	1	테이프			cls=@tool	r	r	テープを貼る → 테이프를 붙이다
+ロープ	ろーぷ	n	1	로프			cls=@tool	r	r	ロープを張る → 로프를 치다
+宝石	ほうせき	n	1	보석			cls=@thing	r	r	宝石の指輪 → 보석 반지
+宝物	たからもの	n	1	보물			cls=@thing	r	r	宝物にする → 보물로 삼다
+縫い包み	ぬいぐるみ	n	1	인형			cls=@toy	r	r	ぬいぐるみを抱く → 인형을 안다
+画面	がめん	n	1	화면			cls=@device|@control	r	r	画面を見る → 화면을 보다
+電源	でんげん	n	1	전원			cls=@device|@control	r	r	電源を入れる → 전원을 켜다
+スイッチ	すいっち	n	1	스위치			cls=@device|@control	r	r	スイッチを押す → 스위치를 누르다
+リモコン	りもこん	n	1	리모컨			cls=@device	r	r	リモコンを押す → 리모컨을 누르다
+映像	えいぞう	n	1	영상			cls=@picture	r	r	映像を見る → 영상을 보다
+画像	がぞう	n	1	이미지			cls=@picture	r	r	画像を見る → 이미지를 보다
+動画	どうが	n	1	동영상			cls=@picture	r	r	動画を見る → 동영상을 보다
+楽器	がっき	n	1	악기			cls=@instrument	r	r	楽器を弾く → 악기를 연주하다
+笛	ふえ	n	1	피리			cls=@instrument	r	r	笛を吹く → 피리를 불다
+看板	かんばん	n	1	간판			cls=@thing	r	r	看板を掛ける → 간판을 걸다
+ポスター	ぽすたー	n	1	포스터			cls=@picture	r	r	ポスターを貼る → 포스터를 붙이다
+チケット	ちけっと	n	1	티켓			cls=@ticket	r	r	チケットを買う → 티켓을 사다
+剣	けん	n	1	검			cls=@weapon	r	r	剣を抜く → 검을 뽑다
+刀	かたな	n	1	칼			cls=@weapon	r	r	刀を抜く → 칼을 뽑다
+銃	じゅう	n	1	총			cls=@firearm|@weapon	r	r	銃を撃つ → 총을 쏘다
+弾	たま	n	1	총알			lu cls=@ammunition|@blow name=+	r	r	弾を撃つ → 총알을 쏘다
+爆弾	ばくだん	n	1	폭탄			cls=@weapon	r	r	爆弾を仕掛ける → 폭탄을 설치하다
+手帳	てちょう	n	1	수첩			cls=@document	r	r	手帳を開く → 수첩을 펴다
+日記	にっき	n	1	일기			cls=@document	r	r	日記をつける → 일기를 쓰다
+メモ	めも	n	1	메모			cls=@record	r	r	メモを取る → 메모하다
+マーク	まーく	n	1	마크			cls=@mark name=+	r	r	星のマーク → 별 마크
+柄	がら	n	1	무늬			cls=@shape	r	r	柄のシャツ → 무늬 있는 셔츠
+柄	がら	n	2	자루	mod=@weapon|@tool			r	r	剣の柄 → 검의 자루
+形	かたち	n	1	모양			cls=@shape	r	r	形を変える → 모양을 바꾸다
+型	かた	n	1	틀			cls=@shape lu	r	r	型にはまる → 틀에 박히다
+型	かた	n	2	형식	head=@vehicle|@machine			r	r	古い型の軍艦 → 오래된 형식의 군함
+サイズ	さいず	n	1	사이즈			cls=@quantity	r	r	サイズが合う → 사이즈가 맞다
+サイズ	さいず	n	2	크기	after=@thing			r	r	紙幣サイズの紙 → 지폐 크기의 종이
+汚れ	よごれ	n	1	얼룩			lu cls=@dirt	r	r	汚れを落とす → 얼룩을 지우다
+機能	きのう	n	1	기능			cls=@abstract	r	r	機能を追加する → 기능을 추가하다
+性能	せいのう	n	1	성능			cls=@abstract	r	r	性能が高い → 성능이 높다
+アプリ	あぷり	n	1	앱			cls=@thing	r	r	アプリを使う → 앱을 사용하다
+プログラム	ぷろぐらむ	n	1	프로그램			cls=@info	r	r	プログラムを作る → 프로그램을 만들다
+データ	でーた	n	1	데이터			cls=@info	r	r	データを送る → 데이터를 보내다
+武器	ぶき	n	1	무기			cls=@weapon	r	r	武器を持つ → 무기를 들다
+玉	たま	n	1	구슬			cls=@thing	r	r	玉を転がす → 구슬을 굴리다
+玉	たま	n	2	공	pred=投げる|蹴る			r	r	玉を投げる → 공을 던지다
+油	あぶら	n	1	기름			cls=@liquid	r	r	油で揚げる → 기름에 튀기다
+服装	ふくそう	n	1	옷차림			cls=@clothing	r	r	服装を整える → 옷차림을 가다듬다
+格好	かっこう	n	1	모습			cls=@abstract	r	r	変な格好 → 이상한 모습
+格好	かっこう	n	2	자세	pred=座る|寝る			r	r	大胆な格好で座る → 대담한 자세로 앉다
+衣装	いしょう	n	1	의상			cls=@clothing	r	r	衣装を着る → 의상을 입다
+私服	しふく	n	1	사복			cls=@clothing	r	r	私服に着替える → 사복으로 갈아입다
+ドレス	どれす	n	1	드레스			cls=@clothing	r	r	ドレスを着る → 드레스를 입다
+スーツ	すーつ	n	1	정장			cls=@clothing	r	r	スーツを着る → 정장을 입다
+スーツ	すーつ	n	2	슈트	after=防弾|戦闘			r	r	防弾スーツ → 방탄 슈트
+パンツ	ぱんつ	n	1	팬티			cls=@clothing	r	r	パンツが見える → 팬티가 보이다
+髪型	かみがた	n	1	머리 모양			cls=@hair	r	r	髪型を変える → 머리 모양을 바꾸다
+化粧	けしょう	n	1	화장			cls=@activity	r	r	化粧を直す → 화장을 고치다
+メーク	めーく	n	1	메이크업			cls=@activity	r	r	メイクをする → 메이크업을 하다
+着替え	きがえ	n	1	옷 갈아입기			cls=@activity|@clothing lu	r	r	着替えを始める → 옷 갈아입기를 시작하다
+着替え	きがえ	n	2	갈아입을 옷	pred=持つ|取る			r	r	着替えを取りに来た → 갈아입을 옷을 가지러 왔다
+袖	そで	n	1	소매			cls=@clothing	r	r	袖をつかむ → 소매를 잡다
+マスク	ますく	n	1	마스크			cls=@clothing name=+	r	r	マスクをする → 마스크를 쓰다
+仮面	かめん	n	1	가면			cls=@headwear	r	r	仮面をつける → 가면을 쓰다
+食料	しょくりょう	n	1	식량			cls=@food	r	r	食料を買う → 식량을 사다
+食材	しょくざい	n	1	식재료			cls=@food	r	r	食材を買う → 식재료를 사다
+ハンバーグ	はんばーぐ	n	1	함박스테이크			cls=@food	r	r	ハンバーグを食べる → 함박스테이크를 먹다
+サンドイッチ	さんどいっち	n	1	샌드위치			cls=@food	r	r	サンドイッチを食べる → 샌드위치를 먹다
+クッキー	くっきー	n	1	쿠키			cls=@food	r	r	クッキーを食べる → 쿠키를 먹다
+チョコレート	ちょこれーと	n	1	초콜릿			cls=@food	r	r	チョコレートを買う → 초콜릿을 사다
+チョコ	ちょこ	n	1	초콜릿			cls=@food	r	r	チョコをくれる → 초콜릿을 주다
+飴	あめ	n	1	사탕			cls=@food	r	r	飴を舐める → 사탕을 먹다
+苺	いちご	n	1	딸기			cls=@food name=+	r	r	苺のケーキ → 딸기 케이크
+バター	ばたー	n	1	버터			cls=@food	r	r	パンにバターを塗る → 빵에 버터를 바르다
+チーズ	ちーず	n	1	치즈			cls=@food	r	r	チーズケーキを食べる → 치즈케이크를 먹다
+空腹	くうふく	n	1	배고픔				r	r	空腹を我慢する → 배고픔을 참다
+空腹	くうふく	n	2	배고프다	form=cop			r	r	空腹だ → 배고프다
+満腹	まんぷく	n	1	배부름				r	r	満腹を越える → 배부름을 넘다
+満腹	まんぷく	n	2	배부르다	form=cop			r	r	もう満腹だ → 이제 배부르다
+食欲	しょくよく	n	1	식욕			cls=@emotion|@faculty	r	r	食欲がない → 식욕이 없다
+御八つ	おやつ	n	1	간식			cls=@food lu	r	r	おやつを食べる → 간식을 먹다
+夕飯	ゆうはん	n	1	저녁			cls=@meal	r	r	夕飯を作る → 저녁을 만들다
+メニュー	めにゅー	n	1	메뉴			cls=@food|@document|@scheme	r	r	メニューを見る → 메뉴를 보다
+御握り	おにぎり	n	1	주먹밥			lu cls=@food|@rice.ball	r	r	おにぎりを食べる → 주먹밥을 먹다
+デザート	でざーと	n	1	디저트			cls=@food	r	r	デザートを食べる → 디저트를 먹다
+定食	ていしょく	n	1	정식			cls=@food	r	r	唐揚げ定食 → 닭튀김 정식
+ご馳走	ごちそう	n	1	진수성찬			cls=@food lu	r	r	ご馳走を並べる → 진수성찬을 차리다
+一口	ひとくち	n	1	한입			cls=@quantity	r	r	ひと口食べる → 한입 먹다
+一口	ひとくち	n	2	한 모금	pred=飲む|啜る			r	r	紅茶をひと口飲む → 홍차를 한 모금 마시다
+食卓	しょくたく	n	1	식탁			cls=@furniture	r	r	食卓に料理を並べる → 식탁에 음식을 차리다
+汁	しる	n	1	국물			cls=@food|@liquid	r	r	汁をすする → 국물을 마시다
+汁	しる	n	2	즙	mod=@plant|果物			r	r	果物の汁 → 과일즙
+日本酒	にっぽんしゅ	n	1	사케			lu cls=@drink	r	r	日本酒を飲む → 사케를 마시다
+乾杯	かんぱい	n	1	건배			cls=@event	r	r	乾杯する → 건배하다
+水分	すいぶん	n	1	수분			cls=@liquid	r	r	水分を取る → 수분을 섭취하다
+酔い	よい	n	1	취기				r	r	酔いが覚める → 취기가 가시다
+二日酔い	ふつかよい	n	1	숙취			cls=@illness lu	r	r	二日酔いで起きられない → 숙취 때문에 못 일어나다
+炭酸	たんさん	n	1	탄산			cls=@drink|@material	r	r	炭酸が苦手 → 탄산을 싫어하다
+渋滞	じゅうたい	n	1	정체			cls=@incident	r	r	渋滞が発生する → 정체가 발생하다
+列車	れっしゃ	n	1	열차			cls=@vehicle	r	r	列車が到着する → 열차가 도착하다
+便	びん	n	1	편			cls=@abstract	r	r	電車の便が悪い → 전철편이 나쁘다
+座席	ざせき	n	1	좌석			cls=@seat	r	r	座席に座る → 좌석에 앉다
+車内	しゃない	n	1	차 안			cls=@place	r	r	車内を見る → 차 안을 보다
+ハンドル	はんどる	n	1	핸들			cls=@tool	r	r	ハンドルを切る → 핸들을 꺾다
+ブレーキ	ぶれーき	n	1	브레이크			cls=@tool	r	r	ブレーキを踏む → 브레이크를 밟다
+エンジン	えんじん	n	1	엔진			cls=@machine name=+	r	r	エンジンを切る → 엔진을 끄다
+エンジン	えんじん	n	2	시동	pred=かかる|かける			r	r	エンジンがかかる → 시동이 걸리다
+往復	おうふく	n	1	왕복			cls=@motion	r	r	往復の交通費 → 왕복 교통비
+免許	めんきょ	n	1	면허			cls=@qualification	r	r	免許を取る → 면허를 따다
+トラック	とらっく	n	1	트럭			cls=@vehicle	r	r	トラックを運転する → 트럭을 운전하다
+トラック	とらっく	n	2	트랙	mod=@music|@sport			r	r	音楽のトラック → 음악 트랙
+代金	だいきん	n	1	값			cls=@money	r	r	代金を払う → 값을 치르다
+貯金	ちょきん	n	1	저금			cls=@money	r	r	貯金がある → 저금이 있다
+借金	しゃっきん	n	1	빚			cls=@money	r	r	借金を返す → 빚을 갚다
+財産	ざいさん	n	1	재산			cls=@money	r	r	財産を残す → 재산을 남기다
+小遣い	こづかい	n	1	용돈			cls=@money|@reward	r	r	小遣いをもらう → 용돈을 받다
+儲け	もうけ	n	1	이익			cls=@money lu	r	r	儲けが出る → 이익이 나다
+大金	たいきん	n	1	큰돈			cls=@money	r	r	大金を稼ぐ → 큰돈을 벌다
+金額	きんがく	n	1	금액			cls=@money	r	r	金額が大きい → 금액이 크다
+有料	ゆうりょう	n	1	유료			cls=@abstract	r	r	有料の駐車場 → 유료 주차장
+購入	こうにゅう	n	1	구매			cls=@activity	r	r	購入を検討する → 구매를 고민하다
+節約	せつやく	n	1	절약			cls=@activity	r	r	節約が必要だ → 절약이 필요하다
+金持ち	かねもち	n	1	부자			cls=@person anim=+	r	r	金持ちの家 → 부잣집
+家賃	やちん	n	1	집세			cls=@money	r	r	家賃を払う → 집세를 내다
+税金	ぜいきん	n	1	세금			cls=@money	r	r	税金を払う → 세금을 내다
+物価	ぶっか	n	1	물가			cls=@price	r	r	物価が高い → 물가가 비싸다
+只	ただ	n	1	공짜			cls=@abstract	r	r	ただで貰う → 공짜로 받다
+只	ただ	n	2	그냥	next=の			r	r	ただの悪口 → 그냥 험담
+表現	ひょうげん	n	1	표현			cls=@speech	r	r	愛情表現 → 애정 표현
+タイトル	たいとる	n	1	제목			cls=@info	r	r	本のタイトル → 책 제목
+タイトル	たいとる	n	2	타이틀	pred=取る|奪う			r	r	タイトルを取る → 타이틀을 따다
+名字	みょうじ	n	1	성			cls=@personal.info	r	r	名字が違う → 성이 다르다
+渾名	あだな	n	1	별명			cls=@personal.info	r	r	あだ名を付ける → 별명을 붙이다
+合図	あいず	n	1	신호			cls=@sign	r	r	合図を送る → 신호를 보내다
+口調	くちょう	n	1	말투			cls=@speech	r	r	強い口調で言う → 단호한 말투로 말하다
+言い訳	いいわけ	n	1	변명			cls=@speech	r	r	言い訳を考える → 변명을 생각하다
+台詞	せりふ	n	1	대사			cls=@speech|@rote	r	r	臭い台詞 → 낯간지러운 대사
+言葉遣い	ことばづかい	n	1	말투			cls=@speech	r	r	言葉遣いを変える → 말투를 바꾸다
+口癖	くちぐせ	n	1	말버릇			cls=@habit	r	r	口癖のように言う → 말버릇처럼 말하다
+一言	ひとこと	n	1	한마디			cls=@speech	r	r	一言も言わない → 한마디도 말하지 않다
+悪口	わるくち	n	1	험담			cls=@abuse	r	r	人の悪口を言う → 남의 험담을 하다
+独り言	ひとりごと	n	1	혼잣말			cls=@speech	r	r	独り言を言う → 혼잣말을 하다
+議論	ぎろん	n	1	논의			cls=@activity	r	r	議論をする → 논의하다
+議論	ぎろん	n	2	논쟁	mod=熱い|激しい			r	r	激しい議論 → 격렬한 논쟁
+発言	はつげん	n	1	발언			cls=@speech	r	r	発言を取り消す → 발언을 취소하다
+回答	かいとう	n	1	답변			cls=@speech	r	r	回答を保留する → 답변을 보류하다
+詩	し	n	1	시			cls=@document|@writing name=+	r	r	詩を書く → 시를 쓰다
+知らせ	しらせ	n	1	소식			cls=@message	r	r	いい知らせ → 좋은 소식
+アニメ	あにめ	n	1	애니메이션			cls=@show	r	r	アニメを見る → 애니메이션을 보다
+ダンス	だんす	n	1	댄스			cls=@activity	r	r	ダンス部 → 댄스부
+踊り	おどり	n	1	춤			cls=@activity lu	r	r	踊りを踊る → 춤을 추다
+演奏	えんそう	n	1	연주			cls=@activity	r	r	演奏を聴く → 연주를 듣다
+物語	ものがたり	n	1	이야기			cls=@document|@writing	r	r	愛と友情の物語 → 사랑과 우정 이야기
+曲	きょく	n	1	곡			cls=@music	r	r	曲を作る → 곡을 만들다
+ライブ	らいぶ	n	1	라이브			cls=@show	r	r	ライブに行く → 라이브에 가다
+芝居	しばい	n	1	연극			cls=@show	r	r	芝居を見る → 연극을 보다
+芝居	しばい	n	2	연기	mod=@person			r	r	恋人のお芝居 → 애인 연기
+劇	げき	n	1	연극			cls=@show	r	r	劇に出る → 연극에 나오다
+大会	たいかい	n	1	대회			cls=@competition	r	r	大会に出る → 대회에 나가다
+将棋	しょうぎ	n	1	쇼기			cls=@game	r	r	将棋を指す → 쇼기를 두다
+カラオケ	からおけ	n	1	노래방			cls=@leisure|@activity	r	r	カラオケに行く → 노래방에 가다
+撮影	さつえい	n	1	촬영			cls=@activity	r	r	撮影を始める → 촬영을 시작하다
+飲み会	のみかい	n	1	술자리			cls=@event	r	r	飲み会に行く → 술자리에 가다
+作品	さくひん	n	1	작품			cls=@thing.made	r	r	作品を作る → 작품을 만들다
+シーン	しーん	n	1	장면			cls=@show name=+	r	r	告白シーン → 고백 장면
+コース	こーす	n	1	코스			cls=@place	r	r	ジョギングコース → 조깅 코스
+スタート	すたーと	n	1	시작			cls=@event	r	r	ゲームスタート → 게임 시작
+スタート	すたーと	n	2	출발	next=ライン|地点			r	r	スタートライン → 출발선
+グループ	ぐるーぷ	n	1	그룹			cls=@group	r	r	グループで行動する → 그룹으로 행동하다
+チャンス	ちゃんす	n	1	기회			cls=@abstract name=+	r	r	チャンスを逃す → 기회를 놓치다
+方向	ほうこう	n	1	방향			cls=@direction	r	r	同じ方向に進む → 같은 방향으로 나아가다
+方角	ほうがく	n	1	방향			cls=@direction	r	r	方角を確認する → 방향을 확인하다
+方角	ほうがく	n	2	쪽	mod=@place			r	r	街の方角に歩く → 시내 쪽으로 걷다
+左右	さゆう	n	1	좌우			cls=@direction	r	r	左右を確認する → 좌우를 확인하다
+上下	じょうげ	n	1	위아래			cls=@direction	r	r	上下に動かす → 위아래로 움직이다
+縦	たて	n	1	세로			cls=@direction	r	r	縦に切る → 세로로 자르다
+斜め	ななめ	n	1	비스듬함			cls=@direction	r	r	斜めの線 → 비스듬한 선
+斜め	ななめ	n	2	비스듬히	form=adv			r	r	斜めに構える → 비스듬히 들다
+斜め	ななめ	n	3	비스듬하다	form=cop			r	r	斜めだ → 비스듬하다
+真上	まうえ	n	1	바로 위			cls=@direction	r	r	真上に飛ぶ → 바로 위로 뛰다
+前方	ぜんぽう	n	1	앞쪽			cls=@direction	r	r	前方に見える → 앞쪽에 보이다
+後方	こうほう	n	1	뒤쪽			cls=@direction	r	r	後方から見守る → 뒤쪽에서 지켜보다
+後方	こうほう	n	2	후방	next=支援|勤務			r	r	後方支援 → 후방 지원
+件	けん	n	1	일			num=native cls=@topic|@counter	r	r	今回の件 → 이번 일
+件	けん	n	2	건	after=@number			r	r	二件 → 두 건
+頭	とう	suf	1	마리			num=native lu cls=@body	r	r	馬が一頭 → 말이 한 마리
+粒	つぶ	n	1	알갱이			cls=@thing num=native	r	r	光の粒 → 빛 알갱이
+粒	つぶ	n	2	알	after=@number			r	r	薬を二粒 → 약을 두 알
+箇所	かしょ	n	1	곳			cls=@place num=native	r	r	二か所 → 두 곳
+段	だん	n	1	단			cls=@counter num=sino	r	r	柔道三段 → 유도 3단
+号	ごう	n	1	호			cls=@counter num=sino name=+	r	r	303号室 → 303호실
+パーセント	ぱーせんと	n	1	퍼센트			cls=@counter num=sino	r	r	10パーセント → 10퍼센트
+御前	おまえ	n	1	너			cls=@person anim=+	r	r	お前が悪い → 네가 나쁘다
+彼奴	あいつ	n	1	그 녀석			anim=+ cls=@person	r	r	あいつは狙撃が下手だ → 그 녀석은 저격을 못한다
+此奴	こいつ	n	1	이 녀석			anim=+ cls=@person	r	r	こいつは強い → 이 녀석은 강하다
+其奴	そいつ	n	1	그 녀석			anim=+ cls=@person	r	r	そいつを捕まえろ → 그 녀석을 잡아라
+わし	わし	n	1	나			anim=+ cls=@person	r	r	わしが行く → 내가 가다
+我	われ	n	1	나			cls=@person anim=+	r	r	我は王なり → 나는 왕이다
+貴様	きさま	n	1	네놈			cls=@person anim=+	r	r	貴様は誰だ → 네놈은 누구냐
+自ら	みずから	n	1	스스로				r	r	自ら動く → 스스로 움직이다
+自ら	みずから	n	2	자신	next=の			r	r	自らの才能 → 자신의 재능
+各々	おのおの	n	1	각자			cls=@person anim=+	r	r	各々が選ぶ → 각자 고르다
+我ら	われら	n	1	우리			cls=@person anim=+ lu	r	r	我らの学校 → 우리 학교
+我が	わが	adn	1	우리				r	r	我が校 → 우리 학교
+我が	わが	adn	2	내	head=@person.close|@body			r	r	我が身 → 내 몸
+何者	なにもの	n	1	누구			cls=@person anim=+	r	r	何者だ → 누구냐
+何事	なにごと	n	1	무슨 일			cls=@question	r	r	何事だ → 무슨 일이냐
+激しい	はげしい	adj	1	격렬하다				r	r	激しい戦い → 격렬한 싸움
+激しい	はげしい	adj	2	거세다	head=@weather|@wind|@sound			r	r	激しい雨 → 거센 비
+激しい	はげしい	adj	3	심하다	subj=@harm|@damage|@trouble|@incident			r	r	渋滞が激しい → 정체가 심하다
+怪しい	あやしい	adj	1	수상하다				r	r	怪しい男 → 수상한 남자
+怪しい	あやしい	adj	2	요사스럽다	head=@light|@weapon			r	r	妖しい光 → 요사스러운 빛
+物凄い	ものすごい	adj	1	엄청나다				r	r	ものすごい力 → 엄청난 힘
+物凄い	ものすごい	adj	2	무시무시하다	head=形相			r	r	物凄い形相 → 무시무시한 표정
+めでたい	めでたい	adj	1	경사스럽다				r	r	めでたいこと → 경사스러운 일
+でかい	でかい	adj	1	크다				r	r	でかい家 → 큰 집
+鋭い	するどい	adj	1	날카롭다				r	r	鋭い目 → 날카로운 눈
+鋭い	するどい	adj	2	눈치 빠르다	subj=@person			r	r	彼は鋭い → 그는 눈치가 빠르다
+鈍い	にぶい	adj	1	둔하다				r	r	反応が鈍い → 반응이 둔하다
+鈍い	にぶい	adj	2	둔탁하다	head=@sound			r	r	鈍い音 → 둔탁한 소리
+鈍い	にぶい	adj	3	흐릿하다	head=@light			r	r	鈍い光 → 흐릿한 빛
+賢い	かしこい	adj	1	똑똑하다				r	r	賢い子 → 똑똑한 아이
+賢い	かしこい	adj	2	현명하다	subj=@activity|@plan|@idea			r	r	賢い選択 → 현명한 선택
+憎い	にくい	adj	1	밉다				r	r	彼が憎い → 그가 밉다
+憎らしい	にくらしい	adj	1	얄밉다				r	r	憎らしい相手 → 얄미운 상대
+可愛らしい	かわいらしい	adj	1	귀엽다				r	r	可愛らしい声 → 귀여운 목소리
+愛しい	いとしい	adj	1	사랑스럽다				r	r	愛しい恋人 → 사랑스러운 연인
+恋しい	こいしい	adj	1	그립다				r	r	妹が恋しい → 동생이 그립다
+切ない	せつない	adj	1	애틋하다				r	r	切ない気持ち → 애틋한 마음
+切ない	せつない	adj	2	애절하다	head=@sound|@music			r	r	切ない声 → 애절한 목소리
+情けない	なさけない	adj	1	한심하다				r	r	情けない顔 → 한심한 표정
+惜しい	おしい	adj	1	아깝다				r	r	時間が惜しい → 시간이 아깝다
+鬱陶しい	うっとうしい	adj	1	성가시다				r	r	鬱陶しい人 → 성가신 사람
+鬱陶しい	うっとうしい	adj	2	우중충하다	head=@weather|@season			r	r	鬱陶しい天気 → 우중충한 날씨
+心地良い	ここちよい	adj	1	기분 좋다				r	r	心地よい風 → 기분 좋은 바람
+心強い	こころづよい	adj	1	든든하다				r	r	心強い味方 → 든든한 아군
+心細い	こころぼそい	adj	1	불안하다				r	r	一人で心細い → 혼자라 불안하다
+頼もしい	たのもしい	adj	1	믿음직하다				r	r	頼もしい後輩 → 믿음직한 후배
+眩しい	まぶしい	adj	1	눈부시다				r	r	眩しい光 → 눈부신 빛
+薄暗い	うすぐらい	adj	1	어두컴컴하다				r	r	薄暗い部屋 → 어두컴컴한 방
+薄暗い	うすぐらい	adj	2	어둑어둑하다	subj=@time|@sky			r	r	空が薄暗くなる → 하늘이 어둑어둑해지다
+痒い	かゆい	adj	1	가렵다				r	r	背中が痒い → 등이 가렵다
+怠い	だるい	adj	1	나른하다				r	r	体がだるい → 몸이 나른하다
+醜い	みにくい	adj	1	추하다				r	r	醜い争い → 추한 다툼
+醜い	みにくい	adj	2	흉하다	head=@body.mark|@body			r	r	醜い傷 → 흉한 흉터
+しょっぱい	しょっぱい	adj	1	짜다				r	r	しょっぱい味 → 짠 맛
+しょっぱい	しょっぱい	adj	2	시시하다	head=@crime|@topic			r	r	しょっぱい話 → 시시한 이야기
+渋い	しぶい	adj	1	떫다				r	r	渋い柿 → 떫은 감
+渋い	しぶい	adj	2	떨떠름하다	head=顔|表情			r	r	渋い顔 → 떨떠름한 표정
+渋い	しぶい	adj	3	중후하다	head=声|@music			r	r	渋い声 → 중후한 목소리
+緩い	ゆるい	adj	1	느슨하다				r	r	緩い規則 → 느슨한 규칙
+緩い	ゆるい	adj	2	완만하다	head=坂|カーブ			r	r	緩い坂 → 완만한 언덕
+幼い	おさない	adj	1	어리다				r	r	幼い子供 → 어린 아이
+幼い	おさない	adj	2	앳되다	head=声|顔			r	r	幼い声 → 앳된 목소리
+騒がしい	さわがしい	adj	1	시끄럽다				r	r	騒がしい奴ら → 시끄러운 녀석들
+騒がしい	さわがしい	adj	2	소란스럽다	subj=@place			r	r	外が騒がしい → 밖이 소란스럽다
+慌ただしい	あわただしい	adj	1	분주하다				r	r	毎日が慌ただしい → 하루하루가 분주하다
+慌ただしい	あわただしい	adj	2	부산스럽다	subj=@person			r	r	みちるは慌ただしい → 미치루는 부산스럽다
+荒い	あらい	adj	1	거칠다				r	r	息が荒い → 숨이 거칠다
+荒い	あらい	adj	2	헤프다	subj=金遣い			r	r	金遣いが荒い → 씀씀이가 헤프다
+険しい	けわしい	adj	1	험하다				r	r	険しい山道 → 험한 산길
+険しい	けわしい	adj	2	험악하다	head=顔|表情			r	r	険しい顔 → 험악한 표정
+危うい	あやうい	adj	1	위태롭다				r	r	危うい立場 → 위태로운 입장
+危うい	あやうい	adj	2	아슬아슬하다	form=adv			r	r	危うくかわす → 아슬아슬하게 피하다
+貧しい	まずしい	adj	1	가난하다				r	r	貧しい家 → 가난한 집
+乏しい	とぼしい	adj	1	부족하다		に=이		r	r	経験に乏しい → 경험이 부족하다
+親しい	したしい	adj	1	친하다				r	r	親しい友達 → 친한 친구
+素早い	すばやい	adj	1	재빠르다				r	r	素早い動き → 재빠른 움직임
+力強い	ちからづよい	adj	1	힘차다				r	r	力強い声 → 힘찬 목소리
+力強い	ちからづよい	adj	2	든든하다	head=@person|表情			r	r	力強い味方 → 든든한 아군
+馬鹿馬鹿しい	ばかばかしい	adj	1	바보 같다				r	r	馬鹿馬鹿しい話 → 바보 같은 이야기
+図々しい	ずうずうしい	adj	1	뻔뻔하다				r	r	図々しい人 → 뻔뻔한 사람
+厚かましい	あつかましい	adj	1	뻔뻔하다				r	r	厚かましい人 → 뻔뻔한 사람
+厚かましい	あつかましい	adj	2	염치없다	head=@request			r	r	厚かましいお願い → 염치없는 부탁
+青白い	あおじろい	adj	1	창백하다				r	r	青白い顔 → 창백한 얼굴
+青白い	あおじろい	adj	2	푸르스름하다	head=@light			r	r	青白い光 → 푸르스름한 빛
+狡い	ずるい	adj	1	치사하다				r	r	ずるいぞ → 치사하다
+狡い	ずるい	adj	2	교활하다	head=@person			r	r	ずるい人間 → 교활한 인간
+凄まじい	すさまじい	adj	1	엄청나다				r	r	凄まじい速さ → 엄청난 속도
+しつこい	しつこい	adj	1	끈질기다				r	r	しつこい勧誘 → 끈질긴 권유
+しつこい	しつこい	adj	2	느끼하다	head=@food|味			r	r	しつこい味 → 느끼한 맛
+微笑ましい	ほほえましい	adj	1	흐뭇하다				r	r	微笑ましい光景 → 흐뭇한 광경
+嫌らしい	いやらしい	adj	1	야하다				r	r	いやらしい格好 → 야한 차림
+嫌らしい	いやらしい	adj	2	음흉하다	head=笑み|笑い			r	r	いやらしい笑み → 음흉한 미소
+儚い	はかない	adj	1	덧없다				r	r	儚い夢 → 덧없는 꿈
+素っ気ない	そっけない	adj	1	무뚝뚝하다				r	r	素っ気ない人 → 무뚝뚝한 사람
+素っ気ない	そっけない	adj	2	쌀쌀맞다	head=態度|対応			r	r	素っ気ない態度 → 쌀쌀맞은 태도
+呆気ない	あっけない	adj	1	허무하다				r	r	あっけなく死ぬ → 허무하게 죽다
+頼り無い	たよりない	adj	1	미덥지 못하다				r	r	頼りない人 → 미덥지 못한 사람
+息苦しい	いきぐるしい	adj	1	숨 막히다				r	r	息苦しい雰囲気 → 숨 막히는 분위기
+見苦しい	みぐるしい	adj	1	보기 흉하다				r	r	見苦しい姿 → 보기 흉한 모습
+重苦しい	おもくるしい	adj	1	무겁다				r	r	重苦しい雰囲気 → 무거운 분위기
+弱々しい	よわよわしい	adj	1	힘없다				r	r	弱々しい声 → 힘없는 목소리
+痛々しい	いたいたしい	adj	1	안쓰럽다				r	r	痛々しい傷 → 안쓰러운 상처
+白々しい	しらじらしい	adj	1	뻔하다				r	r	白々しい嘘 → 뻔한 거짓말
+馴れ馴れしい	なれなれしい	adj	1	친한 척하다				r	r	馴れ馴れしい態度 → 친한 척하는 태도
+凛々しい	りりしい	adj	1	늠름하다				r	r	凛々しい顔 → 늠름한 얼굴
+甘酸っぱい	あまずっぱい	adj	1	새콤달콤하다				r	r	甘酸っぱい香り → 새콤달콤한 향
+甘酸っぱい	あまずっぱい	adj	2	풋풋하다	head=青春|思い出			r	r	甘酸っぱい青春 → 풋풋한 청춘
+しんどい	しんどい	adj	1	힘들다				r	r	しんどい仕事 → 힘든 일
+相応しい	ふさわしい	adj	1	어울리다		に=에		r	r	会長にふさわしい → 회장에 어울리다
+久しい	ひさしい	adj	1	오래다				r	r	会わなくなって久しい → 만나지 않은 지 오래다
+やばい	やばい	adj	1	위험하다			lu	r	r	やばい状況 → 위험한 상황
+やばい	やばい	adj	2	큰일이다	subj=- register=casual			r	r	やばい → 큰일이다
+完全	かんぜん	na	1	완전하다				r	r	完全な勝利 → 완전한 승리
+完全	かんぜん	na	2	완전히	form=adv			r	r	完全に理解する → 완전히 이해하다
+見事	みごと	na	1	훌륭하다				r	r	見事な演奏 → 훌륭한 연주
+見事	みごと	na	2	멋지다	form=adv			r	r	見事に成功する → 멋지게 성공하다
+必死	ひっし	na	1	필사적이다				r	r	必死な顔 → 필사적인 얼굴
+余計	よけい	na	1	쓸데없다				r	r	余計なこと → 쓸데없는 일
+余計	よけい	na	2	더욱	form=adv			r	r	余計に悪い → 더욱 나쁘다
+様々	さまざま	na	1	다양하다				r	r	様々な意見 → 다양한 의견
+様々	さまざま	na	2	제각각이다	form=cop			r	r	性別は様々だ → 성별은 제각각이다
+新た	あらた	na	1	새롭다				r	r	新たな敵 → 새로운 적
+新た	あらた	na	2	새로	form=adv			r	r	新たに作る → 새로 만들다
+明らか	あきらか	na	1	분명하다				r	r	明らかな違い → 분명한 차이
+巨大	きょだい	na	1	거대하다				r	r	巨大な建物 → 거대한 건물
+優秀	ゆうしゅう	na	1	뛰어나다				r	r	優秀な人材 → 뛰어난 인재
+無事	ぶじ	na	1	무사하다				r	r	無事でよかった → 무사해서 다행이다
+無事	ぶじ	na	2	무사히	form=adv			r	r	無事に帰る → 무사히 돌아오다
+非常	ひじょう	na	1	매우				r	r	非常に大きい → 매우 크다
+非常	ひじょう	na	2	비상	next=@opening|階段			r	r	非常扉 → 비상문
+貴重	きちょう	na	1	귀중하다				r	r	貴重な時間 → 귀중한 시간
+懸命	けんめい	na	1	열심이다				r	r	懸命に働く → 열심히 일하다
+大量	たいりょう	n	1	대량			cls=@quantity	r	r	大量の水 → 대량의 물
+大量	たいりょう	n	2	많이	form=adv			r	r	大量に使う → 많이 쓰다
+妙	みょう	n	1	묘			cls=@abstract name=+	r	r	自然の妙 → 자연의 묘
+妙	みょう	n	2	묘하다	form=attr|cop|adv			r	r	妙な気分 → 묘한 기분
+完璧	かんぺき	n	1	완벽			cls=@abstract	r	r	完璧を求める → 완벽을 추구하다
+完璧	かんぺき	n	2	완벽하다	form=attr|cop|adv			r	r	完璧な演説 → 완벽한 연설
+特殊	とくしゅ	na	1	특수하다				r	r	特殊な経験 → 특수한 경험
+確実	かくじつ	na	1	확실하다				r	r	確実な方法 → 확실한 방법
+正確	せいかく	n	1	정확			cls=@abstract	r	r	正確を期す → 정확을 기하다
+正確	せいかく	n	2	정확하다	form=attr|cop|adv			r	r	正確な数字 → 정확한 숫자
+明確	めいかく	na	1	명확하다				r	r	明確な答え → 명확한 답
+曖昧	あいまい	na	1	애매하다				r	r	曖昧な態度 → 애매한 태도
+単純	たんじゅん	na	1	단순하다				r	r	単純な話 → 단순한 이야기
+困難	こんなん	n	1	어려움			cls=@trouble	r	r	困難に立ち向かう → 어려움에 맞서다
+困難	こんなん	n	2	어렵다	form=attr|cop|adv			r	r	脱出が困難になる → 탈출이 어려워지다
+不可能	ふかのう	na	1	불가능하다			lu	r	r	それは不可能だ → 그것은 불가능하다
+深刻	しんこく	na	1	심각하다				r	r	深刻な顔 → 심각한 얼굴
+真剣	しんけん	n	1	진지함				r	r	彼の真剣さ → 그의 진지함
+真剣	しんけん	n	2	진지하다	form=attr|cop|adv			r	r	真剣な顔 → 진지한 얼굴
+真剣	しんけん	n	3	진검	pred=抜く|振る			r	r	真剣を抜く → 진검을 뽑다
+冷静	れいせい	n	1	냉정			cls=@mood|@state	r	r	冷静を保つ → 냉정을 유지하다
+冷静	れいせい	n	2	침착하다	form=attr|cop|adv			r	r	冷静に聞く → 침착하게 듣다
+冷静	れいせい	n	3	냉정하다	form=attr head=@idea|@speech			r	r	冷静な意見 → 냉정한 의견
+穏やか	おだやか	na	1	온화하다				r	r	穏やかな表情 → 온화한 표정
+穏やか	おだやか	na	2	평온하다	head=@time|@period|@body.output			r	r	穏やかな午後 → 평온한 오후
+爽やか	さわやか	na	1	상쾌하다				r	r	爽やかな風 → 상쾌한 바람
+爽やか	さわやか	na	2	상큼하다	head=@smell			r	r	爽やかなレモンの香り → 상큼한 레몬 향
+爽やか	さわやか	na	3	산뜻하다	head=@person|笑顔			r	r	爽やかな笑顔 → 산뜻한 미소
+鮮やか	あざやか	na	1	선명하다				r	r	鮮やかな色 → 선명한 색
+鮮やか	あざやか	na	2	멋지다	head=@skill|@motion			r	r	鮮やかな手並み → 멋진 솜씨
+華やか	はなやか	na	1	화려하다				r	r	華やかな装飾 → 화려한 장식
+上品	じょうひん	na	1	품위 있다			lu	r	r	上品な振る舞い → 품위 있는 행동
+上品	じょうひん	na	2	고급스럽다	head=@thing			r	r	上品なドレス → 고급스러운 드레스
+下品	げひん	na	1	천박하다			lu	r	r	下品なこと → 천박한 말
+清潔	せいけつ	n	1	청결			cls=@abstract	r	r	清潔を保つ → 청결을 유지하다
+清潔	せいけつ	n	2	깨끗하다	form=attr|cop|adv			r	r	清潔な服 → 깨끗한 옷
+新鮮	しんせん	na	1	신선하다				r	r	新鮮な野菜 → 신선한 채소
+豊か	ゆたか	na	1	풍부하다				r	r	表情が豊かだ → 표정이 풍부하다
+豊か	ゆたか	na	2	풍만하다	head=@body|膨らみ			r	r	豊かな胸 → 풍만한 가슴
+気楽	きらく	na	1	마음 편하다				r	r	気楽に行こう → 마음 편하게 가자
+生意気	なまいき	n	1	건방			cls=@character lu	r	r	生意気を言う → 건방진 소리를 하다
+生意気	なまいき	n	2	건방지다	form=attr|cop|adv			r	r	生意気な子 → 건방진 아이
+乱暴	らんぼう	n	1	폭행			cls=@crime	r	r	私に乱暴を → 나에게 폭행을
+乱暴	らんぼう	n	2	거칠다	form=attr|cop|adv			r	r	乱暴に掴む → 거칠게 붙잡다
+我が儘	わがまま	n	1	고집			cls=@character|@request	r	r	私のわがままに付き合う → 내 고집을 받아 주다
+我が儘	わがまま	n	2	제멋대로이다	form=attr|cop|adv			r	r	わがままな上司 → 제멋대로인 상사
+頑固	がんこ	na	1	고집 세다				r	r	頑固な人 → 고집 센 사람
+臆病	おくびょう	n	1	겁			cls=@character	r	r	臆病を克服する → 겁을 극복하다
+臆病	おくびょう	n	2	겁 많다	form=attr|cop|adv			r	r	臆病な子 → 겁 많은 아이
+卑怯	ひきょう	n	1	비겁함			cls=@character	r	r	卑怯を憎む → 비겁함을 미워하다
+卑怯	ひきょう	n	2	비겁하다	form=attr|cop|adv			r	r	卑怯な手 → 비겁한 수
+有利	ゆうり	na	1	유리하다				r	r	有利な条件 → 유리한 조건
+不利	ふり	n	1	불리함			cls=@abstract	r	r	不利を覆す → 불리함을 뒤집다
+不利	ふり	n	2	불리하다	form=attr|cop|adv			r	r	不利な状況 → 불리한 상황
+適切	てきせつ	na	1	적절하다				r	r	適切な言葉 → 적절한 말
+平凡	へいぼん	n	1	평범함			cls=@abstract	r	r	平凡を好む → 평범함을 좋아하다
+平凡	へいぼん	n	2	평범하다	form=attr|cop|adv			r	r	平凡な毎日 → 평범한 나날
+独特	どくとく	na	1	독특하다				r	r	独特の雰囲気 → 독특한 분위기
+奇妙	きみょう	na	1	기묘하다				r	r	奇妙な話 → 기묘한 이야기
+異常	いじょう	n	1	이상			cls=@abstract	r	r	異常なし → 이상 없음
+異常	いじょう	n	2	비정상적이다	form=attr|cop|adv			r	r	異常に高い → 비정상적으로 높다
+公平	こうへい	n	1	공평			cls=@abstract name=+	r	r	公平を期す → 공평을 기하다
+公平	こうへい	n	2	공평하다	form=attr|cop|adv			r	r	公平な試合 → 공평한 시합
+公平	こうへい	n	3	공정하다	subj=@person			r	r	彼は公平だ → 그는 공정하다
+微妙	びみょう	na	1	미묘하다				r	r	微妙な違い → 미묘한 차이
+意地悪	いじわる	n	1	심술			cls=@character lu	r	r	意地悪をする → 심술을 부리다
+意地悪	いじわる	n	2	심술궂다	form=attr|cop|adv			r	r	意地悪な人 → 심술궂은 사람
+物騒	ぶっそう	na	1	위험하다				r	r	物騒なもの → 위험한 물건
+物騒	ぶっそう	na	2	흉흉하다	head=世の中|時代			r	r	物騒な世の中 → 흉흉한 세상
+物騒	ぶっそう	na	3	살벌하다	head=@speech|こと			r	r	物騒なことを言う → 살벌한 소리를 하다
+厄介	やっかい	n	1	골칫거리			cls=@trouble	r	r	厄介を抱える → 골칫거리를 떠안다
+厄介	やっかい	n	2	골치 아프다	form=attr|cop|adv			r	r	厄介な問題 → 골치 아픈 문제
+夢中	むちゅう	na	1	푹 빠지다				r	r	ゲームに夢中になる → 게임에 푹 빠지다
+夢中	むちゅう	na	2	정신없다	dat=-			r	r	夢中で走る → 정신없이 달리다
+無茶	むちゃ	n	1	무리			cls=@abstract	r	r	無茶だ → 무리다
+無茶	むちゃ	n	2	무리하다	form=attr|adv			r	r	無茶な要求 → 무리한 요구
+無茶	むちゃ	n	3	무모하다	form=attr head=@plan|@activity			r	r	無茶な作戦 → 무모한 작전
+目茶苦茶	めちゃくちゃ	adv	1	엄청				r	r	めちゃくちゃ美味い → 엄청 맛있다
+目茶苦茶	めちゃくちゃ	adv	2	엉망이다	form=cop|attr			r	r	めちゃくちゃな話 → 엉망인 이야기
+純粋	じゅんすい	na	1	순수하다				r	r	純粋な気持ち → 순수한 마음
+透明	とうめい	na	1	투명하다				r	r	透明な袋 → 투명한 봉투
+真っ暗	まっくら	na	1	깜깜하다				r	r	真っ暗な部屋 → 깜깜한 방
+真っ白	まっしろ	na	1	새하얗다				r	r	真っ白な雪 → 새하얀 눈
+真っ赤	まっか	na	1	새빨갛다				r	r	真っ赤な顔 → 새빨간 얼굴
+真っ青	まっさお	n	1	새파란색			cls=@color	r	r	真っ青に塗る → 새파란색으로 칠하다
+真っ青	まっさお	n	2	새파랗다	form=attr|cop|adv			r	r	真っ青な空 → 새파란 하늘
+真っ黒	まっくろ	na	1	새까맣다				r	r	真っ黒な服 → 새까만 옷
+微か	かすか	na	1	희미하다				r	r	微かな痛み → 희미한 통증
+豊富	ほうふ	na	1	풍부하다				r	r	経験が豊富だ → 경험이 풍부하다
+豊富	ほうふ	na	2	다양하다	subj=バリエーション|メニュー			r	r	メニューが豊富だ → 메뉴가 다양하다
+盛ん	さかん	na	1	활발하다				r	r	研究が盛んだ → 연구가 활발하다
+無責任	むせきにん	n	1	무책임			cls=@character lu	r	r	無責任を責める → 무책임을 탓하다
+無責任	むせきにん	n	2	무책임하다	form=attr|cop|adv			r	r	無責任な発言 → 무책임한 발언
+無邪気	むじゃき	n	1	천진함			cls=@character	r	r	子供の無邪気 → 아이의 천진함
+無邪気	むじゃき	n	2	천진난만하다	form=attr|cop|adv			r	r	無邪気な笑顔 → 천진난만한 미소
+器用	きよう	na	1	손재주 좋다				r	r	器用な人 → 손재주 좋은 사람
+器用	きよう	na	2	능숙하다	form=adv			r	r	器用に動く → 능숙하게 움직이다
+不器用	ふきよう	na	1	서투르다			lu	r	r	不器用な人 → 서투른 사람
+無力	むりょく	n	1	무력함			cls=@abstract	r	r	無力を嘆く → 무력함을 한탄하다
+無力	むりょく	n	2	무력하다	form=attr|cop|adv			r	r	私は無力だ → 나는 무력하다
+強力	きょうりょく	na	1	강력하다				r	r	強力な武器 → 강력한 무기
+最悪	さいあく	n	1	최악			cls=@abstract	r	r	最悪の事態 → 최악의 사태
+最低	さいてい	n	1	최저			cls=@abstract	r	r	最低気温 → 최저 기온
+最低	さいてい	n	2	최악이다	form=cop			r	r	最低だ → 최악이다
+最低	さいてい	n	3	최소	next=@number|@quantity			r	r	最低20本 → 최소 20롤
+最強	さいきょう	n	1	최강			cls=@abstract	r	r	最強の戦士 → 최강의 전사
+最大	さいだい	n	1	최대			cls=@quantity	r	r	最大の関心事 → 최대 관심사
+幸い	さいわい	adv	1	다행히				r	r	幸い怪我はなかった → 다행히 다치지 않았다
+幸い	さいわい	adv	2	다행이다	form=cop			r	r	無事で幸いだ → 무사해서 다행이다
+暢気	のんき	na	1	태평하다				r	r	のんきに言う → 태평하게 말하다
+陽気	ようき	n	1	날씨			cls=@weather	r	r	春の陽気 → 봄 날씨
+陽気	ようき	n	2	쾌활하다	form=attr|cop|adv			r	r	陽気な人 → 쾌활한 사람
+短気	たんき	n	1	다혈질			cls=@character	r	r	彼の短気 → 그의 다혈질
+短気	たんき	n	2	성질 급하다	form=attr|cop|adv			r	r	短気な人 → 성질 급한 사람
+強気	つよき	n	1	당당함			cls=@mood	r	r	強気を見せる → 당당함을 보이다
+強気	つよき	n	2	당당하다	form=attr|cop|adv			r	r	強気な態度 → 당당한 태도
+弱気	よわき	n	1	나약함			cls=@mood	r	r	弱気を見せる → 나약함을 드러내다
+弱気	よわき	n	2	나약하다	form=attr|cop|adv			r	r	弱気な心 → 나약한 마음
+正気	しょうき	n	1	제정신			cls=@abstract|@faculty|@state name=+	r	r	正気を保つ → 제정신을 유지하다
+順調	じゅんちょう	na	1	순조롭다				r	r	順調に進む → 순조롭게 진행되다
+快適	かいてき	n	1	쾌적함			cls=@abstract	r	r	快適さを求める → 쾌적함을 추구하다
+快適	かいてき	n	2	쾌적하다	form=attr|cop|adv			r	r	快適な店内 → 쾌적한 실내
+愉快	ゆかい	n	1	유쾌함			cls=@mood	r	r	愉快さ → 유쾌함
+愉快	ゆかい	n	2	유쾌하다	form=attr|cop|adv			r	r	愉快な仲間たち → 유쾌한 동료들
+誠実	せいじつ	n	1	성실함			cls=@abstract	r	r	誠実さに欠ける → 성실함이 부족하다
+誠実	せいじつ	n	2	성실하다	form=attr|cop|adv			r	r	誠実な人柄 → 성실한 인품
+謙虚	けんきょ	na	1	겸손하다				r	r	謙虚な気持ち → 겸손한 마음
+慎重	しんちょう	n	1	신중함			cls=@abstract	r	r	慎重さが必要だ → 신중함이 필요하다
+慎重	しんちょう	n	2	신중하다	form=attr|cop|adv			r	r	慎重な判断 → 신중한 판단
+慎重	しんちょう	n	3	조심스럽다	form=adv pred=@motion			r	r	慎重に近づく → 조심스럽게 다가가다
+大胆	だいたん	na	1	대담하다				r	r	大胆な行動 → 대담한 행동
+大袈裟	おおげさ	na	1	과장되다			lu	r	r	大袈裟に溜息をつく → 과장되게 한숨을 쉬다
+大袈裟	おおげさ	na	2	거창하다	head=話|こと			r	r	そんな大げさな話じゃない → 그렇게 거창한 얘기는 아니다
+几帳面	きちょうめん	na	1	꼼꼼하다				r	r	几帳面な人 → 꼼꼼한 사람
+雑	ざつ	na	1	엉성하다			lu	r	r	雑な作り → 엉성한 만듦새
+雑	ざつ	na	2	대충	form=adv			r	r	雑に扱う → 대충 다루다
+極端	きょくたん	n	1	극단			cls=@abstract	r	r	極端に走る → 극단으로 치닫다
+極端	きょくたん	n	2	극단적이다	form=attr|cop|adv			r	r	極端な例 → 극단적인 예
+唯一	ゆいいつ	n	1	유일			cls=@abstract	r	r	唯一無二 → 유일무이
+唯一	ゆいいつ	n	2	유일하다	form=no-attr|attr|adv|cop			r	r	唯一の友達 → 유일한 친구
+同様	どうよう	na	1	마찬가지이다				r	r	昨日と同様に → 어제와 마찬가지로
+互角	ごかく	n	1	호각			cls=@abstract	r	r	今は互角だ → 지금은 호각이다
+互角	ごかく	n	2	대등하다	form=adv			r	r	互角に戦う → 대등하게 싸우다
+充実	じゅうじつ	n	1	충실			cls=@abstract	r	r	内容の充実 → 내용의 충실
+充実	じゅうじつ	n	2	알차다	form=attr|cop|adv			r	r	充実した毎日 → 알찬 나날
+充実	じゅうじつ	n	3	잘 갖추어지다	subj=@facility|設備|装備			r	r	設備が充実している → 설비가 잘 갖추어져 있다
+不足	ふそく	n	1	부족			cls=@abstract	r	r	運動不足 → 운동 부족
+不足	ふそく	n	2	부족하다	form=cop|attr			r	r	人手が不足している → 일손이 부족하다
+手軽	てがる	na	1	간편하다				r	r	手軽に作れる → 간편하게 만들 수 있다
+気軽	きがる	na	1	부담 없다				r	r	気軽にお問い合わせください → 부담 없이 문의하세요
+気軽	きがる	na	2	가볍다	form=adv pred=聞く|言う			r	r	気軽に聞く → 가볍게 묻다
+気の毒	きのどく	na	1	딱하다				r	r	気の毒な人 → 딱한 사람
+不気味	ぶきみ	n	1	섬뜩함			cls=@mood lu	r	r	不気味さ → 섬뜩함
+不気味	ぶきみ	n	2	섬뜩하다	form=attr|cop|adv			r	r	不気味な笑い → 섬뜩한 웃음
+不気味	ぶきみ	n	3	으스스하다	head=@place			r	r	不気味な森 → 으스스한 숲
+不吉	ふきつ	n	1	불길함			cls=@abstract	r	r	不吉さ → 불길함
+不吉	ふきつ	n	2	불길하다	form=attr|cop|adv			r	r	不吉な予言 → 불길한 예언
+不審	ふしん	n	1	수상함			cls=@abstract	r	r	不審を抱く → 수상함을 느끼다
+不審	ふしん	n	2	수상하다	form=attr|cop|adv			r	r	不審な点 → 수상한 점
+安定	あんてい	n	1	안정			cls=@abstract name=+	r	r	安定を求める → 안정을 추구하다
+不明	ふめい	n	1	불명			cls=@abstract	r	r	原因不明 → 원인 불명
+不明	ふめい	n	2	알 수 없다	form=cop|attr			r	r	原因は不明だ → 원인은 알 수 없다
+退屈	たいくつ	n	1	지루함			cls=@mood	r	r	退屈を紛らわす → 지루함을 달래다
+退屈	たいくつ	n	2	지루하다	form=attr|cop|adv			r	r	退屈な授業 → 지루한 수업
+退屈	たいくつ	n	3	심심하다	subj=@person|- form=cop			r	r	一人では退屈だろう → 혼자면 심심하겠지
+貧乏	びんぼう	n	1	가난			cls=@abstract	r	r	貧乏を責める → 가난을 탓하다
+貧乏	びんぼう	n	2	가난하다	form=attr|cop|adv			r	r	貧乏な家 → 가난한 집
+平等	びょうどう	n	1	평등			cls=@abstract	r	r	平等を求める → 평등을 요구하다
+平等	びょうどう	n	2	평등하다	form=attr|cop|adv			r	r	平等に扱う → 평등하게 대하다
+幸福	こうふく	n	1	행복			cls=@emotion	r	r	幸福を祈る → 행복을 빌다
+幸福	こうふく	n	2	행복하다	form=attr|cop|adv			r	r	幸福な未来 → 행복한 미래
+不幸	ふこう	n	1	불행			cls=@abstract	r	r	不幸が続く → 불행이 이어지다
+不幸	ふこう	n	2	불행하다	form=attr|cop|adv			r	r	不幸な結末 → 불행한 결말
+まあ	まあ	adv	1	뭐				r	r	まあ、いいか → 뭐, 괜찮겠지
+唯	ただ	adv	1	다만			name=+	r	r	ただ、問題がある → 다만 문제가 있다
+唯	ただ	adv	2	단	next=@number|@quantity			r	r	たった200票差 → 단 200표 차이
+一体	いったい	adv	1	도대체				r	r	一体何だ → 도대체 뭐야
+取り敢えず	とりあえず	adv	1	일단				r	r	とりあえず座って → 일단 앉아
+既に	すでに	adv	1	이미				r	r	すでに終わった → 이미 끝났다
+正に	まさに	adv	1	그야말로			lu	r	r	まさに夢だ → 그야말로 꿈이다
+正に	まさに	adv	2	막	after=今			r	r	今まさに逃げ出そうとしている → 지금 막 도망치려 하고 있다
+正に	まさに	adv	3	바로	next=その|今			r	r	まさにその時 → 바로 그때
+恐らく	おそらく	adv	1	아마				r	r	おそらく来るだろう → 아마 올 것이다
+どうせ	どうせ	adv	1	어차피				r	r	どうせ無理だ → 어차피 무리다
+大分	だいぶ	adv	1	꽤				r	r	だいぶ時間が経った → 시간이 꽤 지났다
+元々	もともと	adv	1	원래				r	r	もともと弱い → 원래 약하다
+寧ろ	むしろ	adv	1	오히려				r	r	むしろ好都合だ → 오히려 잘됐다
+今更	いまさら	adv	1	이제 와서				r	r	今さら遅い → 이제 와서 늦었다
+改めて	あらためて	adv	1	다시				r	r	改めて説明する → 다시 설명하다
+改めて	あらためて	adv	2	새삼	pred=思う|感じる			r	r	改めて思う → 새삼 생각하다
+再び	ふたたび	adv	1	다시				r	r	再び立ち上がる → 다시 일어서다
+漸く	ようやく	adv	1	드디어				r	r	ようやく終わった → 드디어 끝났다
+漸く	ようやく	adv	2	겨우	pred=辿り着く|間に合う			r	r	ようやく間に合った → 겨우 시간에 맞췄다
+早速	さっそく	adv	1	곧바로				r	r	早速始める → 곧바로 시작하다
+最も	もっとも	adv	1	가장				r	r	最も大切だ → 가장 중요하다
+略	ほぼ	adv	1	거의				r	r	ほぼ終わった → 거의 끝났다
+愈	いよいよ	adv	1	드디어				r	r	いよいよ明日だ → 드디어 내일이다
+愈	いよいよ	adv	2	더욱더	pred=強まる|増す			r	r	風がいよいよ強まる → 바람이 더욱더 거세지다
+嘗て	かつて	adv	1	예전에				r	r	かつてここにいた → 예전에 여기에 있었다
+嘗て	かつて	adv	2	예전	form=no-attr			r	r	かつての私 → 예전의 나
+未だ	いまだ	adv	1	아직				r	r	いまだ返事がない → 아직 답이 없다
+未だ	いまだ	adv	2	아직도	next=に			r	r	未だに悔やんでいる → 아직도 후회하고 있다
+せめて	せめて	adv	1	적어도				r	r	せめてあと一人は欲しい → 적어도 한 명은 더 있었으면 한다
+たっぷり	たっぷり	adv	1	듬뿍				r	r	たっぷりかける → 듬뿍 뿌리다
+たっぷり	たっぷり	adv	2	푹	pred=寝る|休む			r	r	たっぷり寝る → 푹 자다
+たっぷり	たっぷり	adv	3	실컷	pred=楽しむ|味わう			r	r	たっぷり楽しむ → 실컷 즐기다
+たっぷり	たっぷり	adv	4	족히	next=@number|@duration			r	r	たっぷり10秒 → 족히 10초
+さっさと	さっさと	adv	1	얼른				r	r	さっさと行け → 얼른 가
+一応	いちおう	n	1	일단				r	r	一応確認する → 일단 확인하다
+実際	じっさい	n	1	실제			cls=@abstract	r	r	実際の状況 → 실제 상황
+実際	じっさい	n	2	실제로	form=adv			r	r	実際に食べてみる → 실제로 먹어 보다
+次々	つぎつぎ	adv	1	잇따라				r	r	次々と現れる → 잇따라 나타나다
+軈て	やがて	adv	1	이윽고				r	r	やがて信号が青になった → 이윽고 신호가 파란불로 바뀌었다
+何れ	いずれ	adv	1	언젠가				r	r	いずれ分かる → 언젠가 알게 되다
+到頭	とうとう	adv	1	마침내				r	r	とうとう終わった → 마침내 끝났다
+割と	わりと	adv	1	제법			lu	r	r	割と大きい → 제법 크다
+相当	そうとう	adv	1	상당히				r	r	相当疲れた → 상당히 피곤하다
+一切	いっさい	n	1	전혀			cls=@quantity	r	r	一切ない → 전혀 없다
+一切	いっさい	n	2	모든	form=no-attr			r	r	一切の責任 → 모든 책임
+一切	いっさい	n	3	일절	next=禁止			r	r	一切禁止 → 일절 금지
+到底	とうてい	adv	1	도저히				r	r	到底無理だ → 도저히 무리다
+主に	おもに	adv	1	주로				r	r	主に学生が使う → 주로 학생이 쓴다
+単に	たんに	adv	1	단순히				r	r	単に忘れただけ → 단순히 잊었을 뿐
+少々	しょうしょう	n	1	조금			cls=@quantity	r	r	少々おかしい → 조금 이상하다
+少々	しょうしょう	n	2	잠시	pred=待つ			r	r	少々お待ちください → 잠시만 기다려 주세요
+多少	たしょう	n	1	조금			cls=@quantity|@degree	r	r	多少は分かる → 조금은 알다
+偶々	たまたま	adv	1	우연히				r	r	たまたま見かけた → 우연히 보았다
+偶々	たまたま	adv	2	우연	form=cop			r	r	たまたまだ → 우연이다
+偶然	ぐうぜん	adv	1	우연히				r	r	偶然会う → 우연히 만나다
+偶然	ぐうぜん	adv	2	우연	form=cop|no-attr			r	r	偶然だ → 우연이다
+態と	わざと	adv	1	일부러				r	r	わざと間違える → 일부러 틀리다
+こっそり	こっそり	adv	1	몰래				r	r	こっそり出る → 몰래 나가다
+そっと	そっと	adv	1	살며시				r	r	そっと触れる → 살며시 닿다
+じっくり	じっくり	adv	1	차분히				r	r	じっくり話す → 차분히 이야기하다
+じっくり	じっくり	adv	2	곰곰이	pred=考える			r	r	じっくり考える → 곰곰이 생각하다
+じっくり	じっくり	adv	3	찬찬히	pred=見る			r	r	じっくり見る → 찬찬히 보다
+じっくり	じっくり	adv	4	푹	pred=煮込む|煮る			r	r	じっくり煮込む → 푹 끓이다
+ぼんやり	ぼんやり	adv	1	멍하니				r	r	ぼんやり眺める → 멍하니 바라보다
+ぼんやり	ぼんやり	adv	2	어렴풋이	pred=見える|聞こえる			r	r	ぼんやり見える → 어렴풋이 보이다
+ほっと	ほっと	adv	1	후유				r	r	ほっと一息つく → 후유 한숨 돌리다
+ぞっと	ぞっと	adv	1	오싹				r	r	ぞっとする → 오싹하다
+にっこり	にっこり	adv	1	방긋				r	r	にっこり笑う → 방긋 웃다
+ぴったり	ぴったり	adv	1	딱				r	r	ぴったり合う → 딱 맞다
+ぴったり	ぴったり	adv	2	정확히	next=@number|@quantity			r	r	ぴったり70 → 정확히 70
+ぎりぎり	ぎりぎり	adv	1	아슬아슬하게				r	r	ぎりぎり間に合う → 아슬아슬하게 시간에 맞추다
+ぎりぎり	ぎりぎり	adv	2	아슬아슬하다	form=cop|no-attr			r	r	本当にギリギリだった → 정말 아슬아슬했다
+ぎりぎり	ぎりぎり	adv	3	한계	next=まで			r	r	ギリギリまで消耗する → 한계까지 소모하다
+すっきり	すっきり	adv	1	후련히				r	r	すっきりと晴れた気分 → 후련히 갠 기분
+すっきり	すっきり	adv	2	깔끔히	subj=@room|@food			r	r	部屋がすっきり片付いた → 방이 깔끔히 정리됐다
+さっぱり	さっぱり	adv	1	전혀				r	r	さっぱり分からない → 전혀 모르겠다
+あっさり	あっさり	adv	1	쉽게				r	r	あっさり決める → 쉽게 결정하다
+あっさり	あっさり	adv	2	순순히	pred=引き下がる|従う			r	r	あっさり引き下がる → 순순히 물러나다
+どきどき	どきどき	adv	1	두근두근				r	r	どきどきしながら → 두근두근하며
+わくわく	わくわく	adv	1	설렘				r	r	わくわくが止まらない → 설렘이 멈추지 않는다
+苛々	いらいら	n	1	짜증			cls=@emotion	r	r	イライラを流す → 짜증을 씻어 내다
+にこにこ	にこにこ	adv	1	싱글벙글				r	r	にこにこ笑う → 싱글벙글 웃다
+にやにや	にやにや	adv	1	히죽히죽				r	r	にやにや笑う → 히죽히죽 웃다
+ぐったり	ぐったり	adv	1	축				r	r	ぐったりと倒れる → 축 늘어져 쓰러지다
+ふらふら	ふらふら	adv	1	비틀비틀				r	r	ふらふら歩く → 비틀비틀 걷다
+ふらふら	ふらふら	adv	2	어슬렁어슬렁	obj=@place			r	r	街をふらふらする → 거리를 어슬렁어슬렁하다
+ぶらぶら	ぶらぶら	adv	1	어슬렁어슬렁				r	r	ぶらぶら歩く → 어슬렁어슬렁 걷다
+ぶらぶら	ぶらぶら	adv	2	흔들흔들	obj=@body			r	r	脚をぶらぶらさせる → 다리를 흔들흔들 흔들다
+うろうろ	うろうろ	adv	1	이리저리				r	r	うろうろ歩く → 이리저리 걸어 다니다
+きょろきょろ	きょろきょろ	adv	1	두리번두리번				r	r	きょろきょろと見回す → 두리번두리번 둘러보다
+ごろごろ	ごろごろ	adv	1	뒹굴뒹굴				r	r	ソファでごろごろする → 소파에서 뒹굴뒹굴하다
+ごろごろ	ごろごろ	adv	2	데굴데굴	pred=転がる|転がす			r	r	ごろごろ転がる → 데굴데굴 구르다
+ごろごろ	ごろごろ	adv	3	우르릉	pred=鳴る			r	r	雷がごろごろ鳴る → 천둥이 우르릉 울리다
+ぐるぐる	ぐるぐる	adv	1	빙빙				r	r	ぐるぐる回る → 빙빙 돌다
+ぐるぐる	ぐるぐる	adv	2	친친	pred=巻く			r	r	ぐるぐる巻く → 친친 감다
+くるくる	くるくる	adv	1	빙글빙글				r	r	くるくる回す → 빙글빙글 돌리다
+くるくる	くるくる	adv	2	돌돌	pred=巻く			r	r	くるくる巻く → 돌돌 말다
+きらきら	きらきら	adv	1	반짝반짝				r	r	きらきら光る → 반짝반짝 빛나다
+ふわふわ	ふわふわ	adv	1	폭신폭신				r	r	ふわふわのパンケーキ → 폭신폭신한 팬케이크
+ふわふわ	ふわふわ	adv	2	둥실둥실	pred=浮かぶ|漂う			r	r	ふわふわ浮かぶ → 둥실둥실 떠오르다
+ぽろぽろ	ぽろぽろ	adv	1	뚝뚝				r	r	涙がぽろぽろこぼれる → 눈물이 뚝뚝 떨어지다
+ぺこぺこ	ぺこぺこ	adv	1	꾸벅꾸벅				r	r	ぺこぺこ頭を下げる → 꾸벅꾸벅 고개를 숙이다
+ぺこぺこ	ぺこぺこ	adv	2	고프다	subj=腹|お腹			r	r	お腹がぺこぺこだ → 배가 고프다
+ぴかぴか	ぴかぴか	adv	1	반짝반짝				r	r	ぴかぴかに磨く → 반짝반짝하게 닦다
+ずらり	ずらり	adv	1	죽				r	r	ずらりと並ぶ → 죽 늘어서다
+きっぱり	きっぱり	adv	1	단호히				r	r	きっぱり断る → 단호히 거절하다
+がっくり	がっくり	adv	1	푹				r	r	がっくりとうなだれる → 고개를 푹 숙이다
+がっくり	がっくり	adv	2	축	pred=落とす			r	r	がっくり肩を落とす → 어깨를 축 떨구다
+一旦	いったん	adv	1	일단				r	r	一旦帰る → 일단 돌아가다
+案の定	あんのじょう	adv	1	아니나 다를까				r	r	案の定、遅れた → 아니나 다를까 늦었다
+何しろ	なにしろ	adv	1	무엇보다				r	r	何しろ秀才中の秀才だ → 무엇보다 수재 중의 수재다
+敢えて	あえて	adv	1	굳이				r	r	あえて聞く → 굳이 묻다
+却って	かえって	adv	1	오히려				r	r	かえって悪い → 오히려 나쁘다
+益々	ますます	adv	1	더욱			lu	r	r	ますます強くなる → 더욱 강해지다
+一層	いっそう	adv	1	한층				r	r	一層激しくなる → 한층 격렬해지다
+いっそ	いっそ	adv	1	차라리				r	r	いっそやめる → 차라리 그만두다
+最早	もはや	adv	1	이제				r	r	もはや遅い → 이제 늦었다
+凡そ	およそ	adv	1	대략				r	r	およそ分かる → 대략 알다
+凡そ	およそ	adv	2	약	next=@number|@quantity			r	r	およそ30分 → 약 30분
+約	やく	pref	1	약				r	r	約30分 → 약 30분
+精々	せいぜい	adv	1	기껏해야				r	r	せいぜい10分 → 기껏해야 10분
+精々	せいぜい	adv	2	최대한	pred=頑張る|気を付ける			r	r	せいぜい頑張る → 최대한 노력하다
+只管	ひたすら	adv	1	오로지				r	r	ひたすら練習する → 오로지 연습하다
+思い切り	おもいきり	n	1	힘껏				r	r	思いきり抱きしめる → 힘껏 끌어안다
+思い切り	おもいきり	n	2	마음껏	pred=寝る|遊ぶ			r	r	思いっきり寝たい → 마음껏 자고 싶다
+直様	すぐさま	adv	1	곧바로				r	r	すぐさま行く → 곧바로 가다
+しょっちゅう	しょっちゅう	adv	1	자주				r	r	しょっちゅう来る → 자주 오다
+時折	ときおり	adv	1	가끔				r	r	時折来る → 가끔 오다
+余程	よほど	adv	1	어지간히				r	r	よほど嫌だったのだろう → 어지간히 싫었나 보다
+余程	よほど	adv	2	훨씬	pred=良い|増し			r	r	よっぽどいい → 훨씬 낫다
+極めて	きわめて	adv	1	극히				r	r	極めて低い → 극히 낮다
+ちょっぴり	ちょっぴり	adv	1	조금				r	r	ちょっぴり寂しい → 조금 쓸쓸하다
+忽ち	たちまち	adv	1	금세				r	r	たちまち広まる → 금세 퍼지다
+いざ	いざ	intj	1	막상				r	r	いざ本番になると → 막상 실전이 되니
+ふと	ふと	adv	1	문득				r	r	ふと思い出す → 문득 생각나다
+碌に	ろくに	adv	1	제대로				r	r	ろくに話もできない → 제대로 이야기도 못 하다
+況して	まして	adv	1	더구나			lu	r	r	ましてや子供には → 더구나 아이에게는
+尚更	なおさら	adv	1	더더욱				r	r	なおさら相談すべきだ → 더더욱 상의해야 한다
+尚更	なおさら	adv	2	더욱 그렇다	form=cop			r	r	それが彼女ならなおさらだ → 그 사람이 여자 친구라면 더욱 그렇다
+一先ず	ひとまず	adv	1	일단				r	r	ひとまず安心だね → 일단 안심이네
+兎も角	ともかく	adv	1	어쨌든				r	r	ともかく寝よう → 어쨌든 자자
+抑	そもそも	n	1	애초에				r	r	そもそもやる気ない → 애초에 할 마음이 없다
+抑	そもそも	n	2	애초	form=no-attr			r	r	そもそもの原因 → 애초의 원인
+ぐずぐず	ぐずぐず	adv	1	꾸물꾸물				r	r	ぐずぐずしないで → 꾸물거리지 말고
+ぐずぐず	ぐずぐず	adv	2	투덜투덜	pred=言う			r	r	ぐずぐず言っても仕方ない → 투덜거려 봐야 소용없다
+こそこそ	こそこそ	adv	1	몰래				r	r	こそこそ後をつける → 몰래 뒤를 따라가다
+こそこそ	こそこそ	adv	2	소곤소곤	pred=話す|喋る			r	r	こそこそ喋っている → 소곤소곤 이야기한다
+ぶつぶつ	ぶつぶつ	adv	1	중얼중얼				r	r	ぶつぶつ呟く → 중얼중얼 중얼거리다
+ぺらぺら	ぺらぺら	adv	1	술술				r	r	ぺらぺら喋る → 술술 떠들다
+ぺらぺら	ぺらぺら	adv	2	유창하다	form=cop			r	r	日本語がぺらぺらだ → 일본어가 유창하다
+ぺらぺら	ぺらぺら	adv	3	팔락팔락	pred=めくる			r	r	ページをぺらぺらめくる → 책장을 팔락팔락 넘기다
+だらだら	だらだら	adv	1	빈둥빈둥				r	r	だらだらする → 빈둥거리다
+だらだら	だらだら	adv	2	줄줄	pred=垂れる|伝う			r	r	汗がだらだら垂れる → 땀이 줄줄 흐르다
+ゆらゆら	ゆらゆら	adv	1	흔들흔들				r	r	ゆらゆら揺れる → 흔들흔들 흔들리다
+ぶるぶる	ぶるぶる	adv	1	부들부들				r	r	ぶるぶる震える → 부들부들 떨다
+ぞくぞく	ぞくぞく	adv	1	오싹오싹				r	r	体がぞくぞくする → 몸이 오싹오싹하다
+ぞくぞく	ぞくぞく	adv	2	짜릿짜릿	subj=快感|興奮			r	r	快感がぞくぞくと走る → 쾌감이 짜릿짜릿 흐르다
+びくびく	びくびく	adv	1	움찔움찔				r	r	体がびくびく震える → 몸이 움찔움찔 떨리다
+もじもじ	もじもじ	adv	1	쭈뼛쭈뼛				r	r	もじもじする → 쭈뼛쭈뼛하다
+もじもじ	もじもじ	adv	2	꼼지락꼼지락	pred=動かす			r	r	手をもじもじと動かす → 손을 꼼지락꼼지락 움직이다
+そわそわ	そわそわ	adv	1	안절부절				r	r	そわそわしている → 안절부절못하고 있다
+むっと	むっと	adv	1	발끈				r	r	むっとする → 발끈하다
+かっと	かっと	adv	1	확				r	r	かっと熱くなる → 확 달아오르다
+しくしく	しくしく	adv	1	훌쩍훌쩍				r	r	しくしく泣く → 훌쩍훌쩍 울다
+しくしく	しくしく	adv	2	욱신욱신	pred=痛む|痛い			r	r	胃がしくしく痛む → 위가 욱신욱신 아프다
+くすくす	くすくす	adv	1	킥킥				r	r	くすくす笑う → 킥킥 웃다
+にやり	にやり	adv	1	씩			lu	r	r	にやりと笑う → 씩 웃다
+ぺこり	ぺこり	adv	1	꾸벅				r	r	ぺこりと頭を下げる → 꾸벅 고개를 숙이다
+うとうと	うとうと	adv	1	꾸벅꾸벅				r	r	うとうと眠る → 꾸벅꾸벅 졸다
+じろじろ	じろじろ	adv	1	빤히				r	r	じろじろ見る → 빤히 쳐다보다
+ちらちら	ちらちら	adv	1	힐끔힐끔				r	r	ちらちら見る → 힐끔힐끔 보다
+ちらちら	ちらちら	adv	2	언뜻언뜻	pred=見える			r	r	下着がちらちら見える → 속옷이 언뜻언뜻 보이다
+ちらり	ちらり	adv	1	힐끗				r	r	ちらりと見る → 힐끗 보다
+ちらり	ちらり	adv	2	언뜻	pred=見える			r	r	ちらりと室内が見えた → 언뜻 방 안이 보였다
+ちらり	ちらり	adv	3	문득	pred=かすめる			r	r	疑問が頭をちらりとかすめる → 의문이 문득 머리를 스치다
+ぼうっと	ぼうっと	adv	1	멍하니				r	r	ぼうっと見つめる → 멍하니 바라보다
+ぼうっと	ぼうっと	adv	2	희미하게	pred=光る|浮かぶ			r	r	ぼうっと光る → 희미하게 빛나다
+僅か	わずか	adv	1	조금				r	r	わずかに遅い → 조금 늦다
+僅か	わずか	adv	2	불과	next=@number|@quantity|@duration			r	r	わずか一週間で → 불과 일주일 만에
+仲良く	なかよく	adv	1	사이좋게				r	r	仲良く暮らす → 사이좋게 살다
+ひょっと	ひょっと	adv	1	혹시				r	r	ひょっとして泳げないの？ → 혹시 수영 못 해?
+一気	いっき	n	1	단숨			cls=@abstract	r	r	一気に飲み干す → 단숨에 들이켜다
+一斉	いっせい	n	1	일제			cls=@abstract	r	r	一斉射撃 → 일제 사격
+一斉	いっせい	n	2	일제히	next=に			r	r	一斉に見る → 일제히 보다
+徐々	じょじょ	n	1	서서히			cls=@abstract	r	r	徐々に和らぐ → 서서히 누그러지다
+不意	ふい	n	1	갑자기			cls=@abstract	r	r	不意に声をかけられる → 갑자기 말을 걸다
+常	つね	n	1	항상			cls=@abstract	r	r	常に注意する → 항상 주의하다
+常	つね	n	2	보통	form=cop			r	r	それが常だった → 그게 보통이었다
+実	じつ	n	1	사실			cls=@abstract name=+	r	r	実は私も → 사실 저도
+実	じつ	n	2	친	head=@person.kin			r	r	実の父 → 친아버지
+実	じつ	n	3	정말	next=に			r	r	実にかわいい → 정말 귀엽다
+疾っく	とっく	n	1	진작				r	r	とっくに終わった → 진작 끝났다
+ぎゅっ	ぎゅっ	adv	1	꽉			lu	r	r	ぎゅっと握る → 꽉 쥐다
+ぎゅっ	ぎゅっ	adv	2	꼭	pred=抱きしめる|抱く			r	r	ぎゅっと抱きしめる → 꼭 껴안다
+ぎゅっ	ぎゅっ	adv	3	질끈	pred=閉じる|つぶる			r	r	目をぎゅっと閉じる → 눈을 질끈 감다
+ぱっ	ぱっ	adv	1	확			lu	r	r	ぱっと染まる → 확 붉어지다
+ぱっ	ぱっ	adv	2	벌떡	pred=立ち上がる|立つ			r	r	ぱっと立ち上がる → 벌떡 일어나다
+さっ	さっ	adv	1	재빨리			lu	r	r	さっと離れる → 재빨리 떨어지다
+すっ	すっ	adv	1	쓱			lu	r	r	すっと手を出す → 쓱 손을 내밀다
+すっ	すっ	adv	2	싹	pred=消える|なくなる			r	r	もやもやがすっと消える → 답답함이 싹 사라지다
+ぐっ	ぐっ	adv	1	꾹			lu	r	r	ぐっと堪える → 꾹 참다
+ぐっ	ぐっ	adv	2	바짝	pred=近づく|近寄る			r	r	ぐっと近づく → 바짝 다가가다
+ぐっ	ぐっ	adv	3	부쩍	pred=増える|減る			r	r	ぐっと増える → 부쩍 늘다
+ふっ	ふっ	adv	1	후			lu	r	r	ふっと息を吐く → 후 숨을 내쉬다
+ふっ	ふっ	adv	2	피식	pred=笑う			r	r	ふっと笑う → 피식 웃다
+ふっ	ふっ	adv	3	문득	pred=思う|思い出す			r	r	ふっと思い出す → 문득 떠올리다
+ちら	ちら	adv	1	힐끗			lu	r	r	ちらっと見る → 힐끗 보다
+ちら	ちら	adv	2	얼핏	pred=思う|見える			r	r	ちらっと思った → 얼핏 생각했다
+びく	びく	adv	1	움찔			lu	r	r	びくっと震える → 움찔 떨다
+但し	ただし	conj	1	다만				r	r	ただし、人による → 다만 사람마다 다르다
+及び	および	conj	1	및				r	r	AおよびB → A 및 B
+或いは	あるいは	conj	1	혹은				r	r	AあるいはB → A 혹은 B
+若しくは	もしくは	conj	1	혹은				r	r	AもしくはB → A 혹은 B
+即ち	すなわち	conj	1	즉				r	r	すなわち後輩だ → 즉 후배다
+一方	いっぽう	n	1	한편			cls=@side	r	r	一方、彼は → 한편 그는
+乃至	ないし	conj	1	또는			lu	r	r	確保、ないし殺害 → 확보 또는 살해
+乃至	ないし	conj	2	내지	after=@number|@quantity			r	r	三ないし五 → 3 내지 5
+ああ	ああ	intj	1	아				r	r	ああ、そうだったのか → 아, 그랬구나
+あっ	あっ	intj	1	아				r	r	あ、わかってくれたみたい → 아, 알아들은 모양이다
+えっ	えっ	intj	1	어				r	r	え？　そういう話？ → 어? 그런 얘기야?
+否	いや	intj	1	아니				r	r	
+はあ	はあ	intj	1	하아			lu	r	r	はぁ……見られたか → 하아…… 들켰네
+はあ	はあ	intj	2	뭐	form=q			r	r	はあ？　どうして私！？ → 뭐? 왜 나야!?
+あの	あの	intj	1	저기				r	r	あのー、すみません → 저기, 죄송한데요
+あの	あの	intj	2	그	head=@entity|@abstract			r	r	あの人 → 그 사람
+ほら	ほら	intj	1	자				r	r	ほら、行くわよ → 자, 가자
+さあ	さあ	intj	1	자				r	r	さあ、行こう → 자, 가자
+さあ	さあ	intj	2	글쎄	next=ね|な			r	r	さあね → 글쎄
+へえ	へえ	intj	1	오				r	r	へえ、そうなんだ → 오, 그렇구나
+ねえ	ねえ	intj	1	저기				r	r	ねえ、筧くん → 저기, 카케이 군
+おい	おい	intj	1	야				r	r	おい、何やってんだ → 야, 뭐 하는 거야
+よし	よし	intj	1	좋아				r	r	よし、行くぞ → 좋아, 간다
+あら	あら	intj	1	어머				r	r	あら、お風呂あがり？ → 어머, 목욕 끝났어?
+ふう	ふう	intj	1	후			name=+	r	r	ふう、暑いですね → 후, 덥네요
+ううん	ううん	intj	1	음				r	r	うーん、どうかな → 음, 글쎄
+うわ	うわ	intj	1	우와				r	r	うわ、きったねえ字だな → 우와, 글씨 진짜 못 썼네
+わあ	わあ	intj	1	와				r	r	わあ、キレイな花束 → 와, 예쁜 꽃다발
+やあ	やあ	intj	1	안녕				r	r	やあ、久しぶり → 안녕, 오랜만이야
+おっと	おっと	intj	1	이런				r	r	おっと、すみません → 이런, 죄송해요
+くそ	くそ	intj	1	젠장				r	r	くそっ、また負けた → 젠장, 또 졌다
+ふん	ふん	intj	1	흥				r	r	ふん、知らない → 흥, 몰라
+ふむ	ふむ	intj	1	흠				r	r	ふむ、わかった → 흠, 알겠어
+ほう	ほう	intj	1	호오				r	r	ほう、大した自信だ → 호오, 대단한 자신감인데
+えーと	えーと	intj	1	음				r	r	えーと、一度ここを出てから話す → 음, 일단 여기서 나가서 얘기할게
+然う然う	そうそう	intj	1	맞아 맞아			lu	r	r	そうそう、その通り → 맞아 맞아, 그래
+否々	いやいや	intj	1	아니 아니			lu	r	r	いやいや、まさか → 아니 아니, 설마
+否々	いやいや	intj	2	아뇨	register=polite			r	r	いやいや、大丈夫です → 아뇨, 괜찮아요
+やれ	やれ	intj	1	아휴				r	r	やれ、疲れた → 아휴, 피곤하다
+きゃあ	きゃあ	intj	1	꺄악				r	r	きゃあっ、ちょっと → 꺄악, 잠깐
+なあ	なあ	intj	1	저기			lu	r	r	なあ、筧よ → 저기, 카케이
+あれ	あれ	intj	1	어라				r	r	あれ？　外したはず → 어라? 뗀 줄 알았는데
+いえ	いえ	intj	1	아니요				r	r	いえ、気にしていません → 아니요, 신경 쓰지 않아요
+おっ	おっ	intj	1	오				r	r	おっ、きたきた → 오, 왔다 왔어
+はっ	はっ	intj	1	헉				r	r	はっ！　危ない → 헉! 위험해
+こら	こら	intj	1	야				r	r	こら、待て → 야, 기다려
+おお	おお	intj	1	오			lu	r	r	おお、あった → 오, 있다
+オーケー	おーけー	n	1	오케이			cls=@abstract	r	r	オーケー、わかった → 오케이, 알았어
+オーケー	おーけー	n	2	괜찮다	form=cop			r	r	はい、オッケーです → 네, 괜찮아요
+了解	りょうかい	n	1	알겠다			cls=@abstract	r	r	了解です → 알겠습니다
+了解	りょうかい	n	2	양해	pred=取る|得る			r	r	了解を得る → 양해를 얻다
+共	とも	n	1	함께			cls=@abstract	r	r	友人と共に → 친구와 함께
+共	とも	n	2	모두	after=男女|両方			r	r	男女ともに → 남녀 모두
+別	べつ	n	1	별개			cls=@abstract	r	r	それは別だ → 그건 별개다
+別	べつ	n	2	다른	form=no-attr			r	r	別の部屋 → 다른 방
+別	べつ	n	3	딱히	form=adv			r	r	別に好きじゃない → 딱히 좋아하지 않는다
+別	べつ	n	4	별도	next=@money|@settlement|@price			r	r	別料金 → 별도 요금
+他	ほか	n	1	그 밖			cls=@abstract	r	r	他にもある → 그 밖에도 있다
+他	ほか	n	2	다른	form=no-attr			r	r	他の学園 → 다른 학원
+多く	おおく	n	1	다수			cls=@quantity	r	r	生徒の多くが → 학생 다수가
+多く	おおく	n	2	많은	form=no-attr			r	r	多くの人 → 많은 사람
+全力	ぜんりょく	n	1	전력			cls=@strength	r	r	全力で走る → 전력으로 달리다
+限り	かぎり	n	1	한계			cls=@abstract	r	r	時間には限りがある → 시간에는 한계가 있다
+程度	ていど	n	1	정도			cls=@abstract	r	r	20人程度 → 20명 정도
+次第	しだい	n	1	경위			cls=@abstract	r	r	事の次第を話す → 일의 경위를 말하다
+次第	しだい	n	2	점점	form=adv			r	r	次第に大きくなる → 점점 커지다
+次第	しだい	n	3	나름	after=@entity|@abstract			r	r	君次第だ → 너 나름이다
+例	れい	n	1	예			cls=@abstract	r	r	一例をあげる → 한 가지 예를 들다
+例	れい	n	2	그	form=no-attr			r	r	例の件 → 그 일
+元	もと	n	1	원래			cls=@abstract|@state name=+	r	r	元の場所 → 원래 자리
+元	もと	n	2	전	next=@person|@person.role			r	r	元隊長 → 전 대장
+元	もと	n	3	곁	mod=@person			r	r	彼の元へ → 그의 곁으로
+無し	なし	n	1	없음			cls=@abstract	r	r	異常なし → 이상 없음
+無し	なし	n	2	없이	next=に|で			r	r	協力なしに → 협력 없이
+因み	ちなみ	n	1	참고로				r	r	ちなみに、どこがわからないの？ → 참고로 어디를 모르겠니?
+其々	それぞれ	n	1	각각			cls=@abstract	r	r	それぞれ25% → 각각 25%
+其々	それぞれ	n	2	각자	subj=@person|@group			r	r	それぞれ立ち上がる → 각자 일어서다
+色んな	いろんな	adn	1	여러				r	r	いろんな人 → 여러 사람
+色んな	いろんな	adn	2	여러 가지	head=事|物			r	r	いろんな事が分かった → 여러 가지를 알았다
+或る	ある	adn	1	어떤				r	r	ある人 → 어떤 사람
+或る	ある	adn	2	어느	head=@time|@place|程度			r	r	ある日 → 어느 날
+あらゆる	あらゆる	adn	1	모든				r	r	あらゆる可能性 → 모든 가능성
+大した	たいした	adn	1	대단한				r	r	大した自信 → 대단한 자신감
+大した	たいした	adn	2	별	head=事|問題			r	r	大した問題ではない → 별문제가 아니다
+残り	のこり	n	1	나머지			cls=@quantity	r	r	残りの半分 → 나머지 절반
+風	ふう	n	1	식			cls=@abstract|@wind name=+	r	r	こんな風に → 이런 식으로
+御陰	おかげ	n	1	덕분			cls=@abstract	r	r	筧さんのおかげです → 카케이 씨 덕분이에요
+現場	げんば	n	1	현장			cls=@place	r	r	現場に出る → 현장에 나가다
+訓練	くんれん	n	1	훈련			cls=@activity	r	r	訓練に参加する → 훈련에 참가하다
+爆発	ばくはつ	n	1	폭발			cls=@incident	r	r	爆発が起こる → 폭발이 일어나다
+レベル	れべる	n	1	수준			cls=@abstract|@quantity	r	r	反則のレベル → 반칙 수준
+レベル	れべる	n	2	레벨	next=@number			r	r	レベル43 → 레벨 43
+量	りょう	n	1	양			cls=@quantity name=+	r	r	汗の量 → 땀의 양
+勢い	いきおい	n	1	기세			cls=@abstract	r	r	勢いで持ってきた → 기세로 가져왔다
+タイプ	たいぷ	n	1	타입			cls=@abstract	r	r	好みのタイプ → 좋아하는 타입
+自身	じしん	n	1	자신			cls=@abstract	r	r	私自身 → 나 자신
+幾ら	いくら	adv	1	아무리				r	r	いくら食べても → 아무리 먹어도
+幾ら	いくら	adv	2	얼마	pred=掛かる|出す			r	r	いくら掛かる → 얼마 들다
+家	うち	n	1	집			cls=@house	r	r	うちに帰る → 집에 돌아가다
+家	うち	n	2	우리	form=no-attr			r	r	うちのクラス → 우리 반
+家	うち	n	3	저희	form=no-attr register=polite			r	r	うちの会社です → 저희 회사입니다
+唯	ただ	conj	1	다만			name=+	r	r	ただ、問題がある → 다만 문제가 있다
 取る	とる	v5	1	집다			vol=+ asp=activity te=go	r	r	何かを手に取る → 무언가를 집다
 取る	とる	v5	2	잡다	obj=@body|揚げ足			r	r	俺の手を取る → 내 손을 잡다
 取る	とる	v5	3	찍다	obj=@picture			r	r	写真を撮る → 사진을 찍다
@@ -2188,7 +4329,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 付ける	つける	v1	12	짓다	obj=@settlement			r	r	けじめをつける → 매듭을 짓다
 入れる	いれる	v1	1	넣다			vol=+ asp=activity te=go	r	r	箱に入れる → 상자에 넣다
 入れる	いれる	v1	2	타다	obj=@brew			r	r	コーヒーを淹れる → 커피를 타다
-入れる	いれる	v1	3	켜다	obj=@control			r	r	電源を入れる → 전원을 켜다
+入れる	いれる	v1	3	켜다	obj=@device			r	r	電源を入れる → 전원을 켜다
 入れる	いれる	v1	4	주다	obj=力			r	r	力を入れる → 힘을 주다
 入れる	いれる	v1	5	주다	obj=票			r	r	候補に一票入れる → 후보에게 한 표를 주다
 入れる	いれる	v1	6	걸다	obj=ツッコミ			r	r	ツッコミを入れる → 태클을 걸다
@@ -2578,6 +4719,117 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 話す	はなす	v5	3	말하다	subj=@info			r	r	理由はもう話した → 이유는 이미 말했다
 話す	はなす	v5	4	하다	obj=@language			r	r	英語を話す → 영어를 하다
 話す	はなす	v5	5	이야기하다	obj=何			r	r	何を話すんだ → 무슨 이야기를 하지
+知る	しる	v5	1	알다			vol=- asp=change neg=모르다 te=simple	r	r	メアド知ってる → 메일 주소 알아
+待つ	まつ	v5	1	기다리다			vol=+ asp=activity te=go	r	r	青海さんを待とう → 아오미 씨를 기다리자
+始める	はじめる	v1	1	시작하다			vol=+ asp=change te=past	r	r	説明を始める → 설명을 시작하다
+感ずる	かんずる	vs	1	느끼다			vol=- asp=activity te=go	r	r	殺気を感じる → 살기를 느끼다
+困る	こまる	v5	1	곤란하다			vol=- asp=change te=simple	r	r	言われても困る → 말해도 곤란하다
+困る	こまる	v5	2	난처하다	head=@expression|@sign|顔			r	r	困った顔をする → 난처한 얼굴을 하다
+困る	こまる	v5	3	난처하다	form=ta next=様			r	r	困ったように笑う → 난처한 듯 웃다
+困る	こまる	v5	4	골치 아프다	head=@person form=ta next=だ|です			r	r	ほんと困った人だな → 정말 골치 아픈 사람이네
+気付く	きづく	v5	1	알아차리다		に=을	vol=- asp=change te=go	r	r	サイレンに気付いた → 사이렌을 알아차렸다
+気付く	きづく	v5	2	깨닫다	after=と|って	に=을		r	r	好きだって気づいた → 좋아한다는 걸 깨달았다
+気付く	きづく	v5	3	깨닫다	dat=@emotion|@truth|事|さ	に=을		r	r	自分の気持ちに気づいた → 내 마음을 깨달았다
+気付く	きづく	v5	4	들키다	next=られる|れる			r	r	敵に気付かれないように → 적에게 들키지 않게
+気付く	きづく	v5	5	정신을 차리다	dat=- next=と|ば			r	r	気づくと、周りに人がいた → 정신을 차리니 주위에 사람이 있었다
+気付く	きづく	v5	6	정신을 차리다	dat=- next=たら			r	r	気付いたら全部食べてた → 정신을 차려 보니 다 먹었다
+続ける	つづける	v1	1	계속하다			vol=+ asp=activity te=go	r	r	研究を続ける → 연구를 계속하다
+続ける	つづける	v1	2	잇다	obj=@heard			r	r	話を続ける → 말을 잇다
+見詰める	みつめる	v1	1	바라보다			vol=+ asp=activity te=go	r	r	じっと俺を見つめる → 가만히 나를 바라보다
+見詰める	みつめる	v1	2	돌아보다	obj=自分			r	r	自分を見つめる → 자신을 돌아보다
+忘れる	わすれる	v1	1	잊다			vol=- asp=change te=go	r	r	約束を忘れないで → 약속을 잊지 마
+忘れる	わすれる	v1	2	두다	obj=@thing next=来る|行く			r	r	靴を忘れて行った → 신발을 두고 갔다
+答える	こたえる	v1	1	대답하다			vol=+ asp=activity te=go	r	r	質問に答える → 질문에 대답하다
+答える	こたえる	v1	2	응하다	dat=@request|@shout			r	r	要求に応える → 요구에 응하다
+答える	こたえる	v1	3	부응하다	dat=期待|信頼			r	r	期待に応える → 기대에 부응하다
+教える	おしえる	v1	1	알려 주다			vol=+ asp=activity te=go	r	r	番号を教える → 번호를 알려 주다
+教える	おしえる	v1	2	가르치다	obj=@skill|@subject.school|@language|@activity|@music|@instrument			r	r	勉強を教える → 공부를 가르치다
+教える	おしえる	v1	3	가르치다	next=方			r	r	教え方がうまい → 가르치는 방식이 좋다
+教える	おしえる	v1	4	알려 주다	obj=言葉			r	r	告白の言葉を教える → 고백한 말을 알려 주다
+教える	おしえる	v1	5	가르치다	subj=@skill|@subject.school			r	r	テクニックは教えてもらえなかった → 테크닉은 가르쳐 주지 않았다
+教える	おしえる	v1	6	가르치다	loc=@lesson			r	r	授業で教えてくれた → 수업에서 가르쳐 줬다
+会う	あう	v5	1	만나다		に=을	vol=+ asp=change te=go	r	r	友達に会う → 친구를 만나다
+会う	あう	v5	2	당하다	dat=@incident|@trouble|@damage|@crime|目	に=을		r	r	事故に遭う → 사고를 당하다
+決める	きめる	v1	1	정하다		に=로	vol=+ asp=change te=past	r	r	予定を決める → 예정을 정하다
+決める	きめる	v1	2	결정하다	obj=@result			r	r	選挙結果を決める → 선거 결과를 결정하다
+決める	きめる	v1	3	다지다	obj=覚悟			r	r	覚悟を決める → 각오를 다지다
+決める	きめる	v1	4	폼 잡다	mod=格好|びしっ			r	r	カッコよく決めた → 멋지게 폼 잡았다
+呼ぶ	よぶ	v5	1	부르다			vol=+ asp=activity te=go	r	r	名前を呼ぶ → 이름을 부르다
+呼ぶ	よぶ	v5	2	청하다	obj=助け			r	r	助けを呼ぶ → 도움을 청하다
+動かす	うごかす	v5	1	움직이다			vol=+ asp=activity te=go	r	r	手を動かす → 손을 움직이다
+動かす	うごかす	v5	2	작동시키다	obj=@machine			r	r	機械を動かす → 기계를 작동시키다
+動かす	うごかす	v5	3	옮기다	obj=@furniture			r	r	椅子を動かす → 의자를 옮기다
+動かす	うごかす	v5	4	끄덕이다	dat=縦			r	r	首を縦に動かす → 고개를 끄덕이다
+動かす	うごかす	v5	5	돌리다	obj=@gaze			r	r	視線を動かす → 시선을 돌리다
+付き合う	つきあう	v5	1	사귀다			vol=+ asp=activity te=go	r	r	千莉と付き合う → 센리와 사귀다
+付き合う	つきあう	v5	2	어울리다	dat=@event|@person|@request			r	r	練習に付き合う → 연습에 어울리다 (a に complement: the activity, person or whim one keeps company with)
+付き合う	つきあう	v5	3	어울리다	mod=@to.end|一寸			r	r	最後まで付き合う → 끝까지 어울리다; ちょっと付き合って → 잠깐 어울려 줘
+残る	のこる	v5	1	남다			vol=+ asp=change te=eo	r	r	部室に残る → 부실에 남다
+書く	かく	v5	1	쓰다			vol=+ asp=activity te=go	r	r	手紙を書く → 편지를 쓰다
+書く	かく	v5	2	그리다	obj=@picture			r	r	絵を書く → 그림을 그리다
+頂く	いただく	v5	1	받다			vol=+ asp=change te=past	r	r	電話をいただく → 전화를 받다
+頂く	いただく	v5	2	먹다	obj=@food|@meal			r	r	ケーキをいただく → 케이크를 먹다
+頂く	いただく	v5	3	마시다	obj=@drink			r	r	お茶をいただく → 차를 마시다
+頂く	いただく	v5	4	먹다	with=@tableware			r	r	割り箸でいただく → 나무젓가락으로 먹다
+頂く	いただく	v5	5	마시다	mod=@drink			r	r	お茶いただく → 차 마시다 (particle dropped: the drink stands right before the verb; ties with sense 6 and wins as the lower number)
+頂く	いただく	v5	6	먹다	mod=@food			r	r	カルビいただく → 갈비 먹다 (particle dropped: the food stands right before the verb)
+消える	きえる	v1	1	사라지다			vol=- asp=change te=eo	r	r	笑顔が消える → 웃음이 사라지다
+消える	きえる	v1	2	꺼지다	subj=@lighting|火			r	r	電気が消える → 불이 꺼지다
+送る	おくる	v5	1	보내다			vol=+ asp=activity te=go	r	r	メールを送る → 메일을 보내다
+送る	おくる	v5	2	바래다주다	obj=@person			r	r	彼女を家まで送る → 여자 친구를 집까지 바래다주다
+送る	おくる	v5	3	바래다주다	next=行く			r	r	美浜まで送っていく → 미하마까지 바래다주다
+送る	おくる	v5	4	바래다주다	obj=- next=貰う|頂く			r	r	送っていただいて → 바래다주셔서
+送る	おくる	v5	5	살다	obj=@lifetime			r	r	平穏な人生を送る → 평온한 인생을 살다
+送る	おくる	v5	6	보내다	obj=@person next=れる|られる			r	r	施設に送られる → 시설로 보내지다 (a person in the passive is sent, not escorted)
+近付く	ちかづく	v5	1	다가가다			vol=+ asp=change te=go	r	r	男子生徒に近づく → 남학생에게 다가가다
+近付く	ちかづく	v5	2	다가오다	next=来る			r	r	足音が近づいてくる → 발소리가 다가오다
+近付く	ちかづく	v5	3	다가오다	subj=@time|@event|@endpoint			r	r	勝負の日が近づく → 승부의 날이 다가오다; 限界が近づく → 한계가 다가오다
+近付く	ちかづく	v5	4	가까워지다	subj=@quantity|@body			r	r	ふたりの距離が近づく → 두 사람의 거리가 가까워지다
+近付く	ちかづく	v5	5	가까워지다	dat=@idea|@info|@endpoint			r	r	我慢の限界に近づく → 한계에 가까워지다
+近付く	ちかづく	v5	6	다가오다	subj=@body next=来る			r	r	唇が近づいてくる → 입술이 다가오다 (toward the viewer; without てくる sense 4)
+近付く	ちかづく	v5	7	다가오다	subj=@sound			r	r	近づく足音 → 다가오는 발소리 (a sound always approaches the hearer)
+近付く	ちかづく	v5	8	다가가다	subj=@body next=行く			r	r	見知った顔がベンチに近づいていく → 낯익은 얼굴이 벤치로 다가가다
+握る	にぎる	v5	1	쥐다			vol=+ asp=activity te=go	r	r	拳を握る → 주먹을 쥐다
+握る	にぎる	v5	2	잡다	obj=@hand|腕			r	r	俺の手を握る → 내 손을 잡다
+握る	にぎる	v5	3	잡다	arg=@leverage			r	r	弱みを握る → 약점을 잡다
+握る	にぎる	v5	4	만들다	obj=@rice.ball			r	r	おにぎりを握る → 주먹밥을 만들다
+開ける	あける	v1	1	열다			vol=+ asp=change te=go	r	r	扉を開ける → 문을 열다
+開ける	あける	v1	2	뜨다	obj=目|瞳			r	r	目を開ける → 눈을 뜨다
+開ける	あける	v1	3	벌리다	obj=口			r	r	口を開ける → 입을 벌리다
+開ける	あける	v1	4	따다	obj=@bottle|ワイン			r	r	缶ビールを開ける → 캔맥주를 따다
+開ける	あける	v1	5	뚫다	obj=穴|風穴			r	r	穴を開ける → 구멍을 뚫다
+開ける	あける	v1	6	두다	obj=@duration|間			r	r	時間をあけると → 시간을 두면
+開ける	あける	v1	7	뜨다	subj=目|瞳			r	r	目が開けられない → 눈을 못 뜨다 (potential marks the object with が)
+浮かべる	うかべる	v1	1	짓다			vol=+ asp=change te=go	r	r	笑みを浮かべる → 미소를 짓다
+浮かべる	うかべる	v1	2	짓다	obj=@expression			r	r	笑顔を浮かべる → 미소를 짓다 (笑顔 is also @emotion: this row keeps 짓다 over sense 3)
+浮かべる	うかべる	v1	3	띠다	obj=@emotion			r	r	戸惑いを浮かべる → 당혹감을 띠다
+浮かべる	うかべる	v1	4	글썽이다	obj=涙			r	r	目に涙を浮かべる → 눈에 눈물을 글썽이다
+浮かべる	うかべる	v1	5	맺다	obj=@body.output			r	r	額に汗を浮かべる → 이마에 땀을 맺다
+浮かべる	うかべる	v1	6	떠올리다	dat=頭|脳裏			r	r	頭に浮かべた人物 → 머릿속에 떠올린 인물
+寝る	ねる	v1	1	자다			vol=+ asp=change te=go	r	r	ここで寝る → 여기서 자다
+寝る	ねる	v1	2	눕다	dat=@place|@furniture|@stance			r	r	床に寝ている → 바닥에 누워 있다 (に marks where or how one lies: 仰向けに寝る 반듯이 눕다; で place stays 자다)
+放す	はなす	v5	1	놓다			vol=+ asp=change te=go	r	r	俺を離せ → 나를 놔
+放す	はなす	v5	2	떼다	obj=@body			r	r	唇を離す → 입술을 떼다
+放す	はなす	v5	3	놓다	obj=@hand			r	r	手を離す → 손을 놓다 (letting go of a held hand)
+放す	はなす	v5	4	놓다	obj=腕			r	r	腕を放さなかった → 팔을 놓지 않았다
+放す	はなす	v5	5	떼다	obj=@hand from=@body|@thing|@furniture			r	r	胸から手を離す → 가슴에서 손을 떼다 (どちらからともなく gives from=どちら: persons not listed)
+放す	はなす	v5	6	풀어 주다	obj=@animal			r	r	魚を川に放す → 물고기를 강에 풀어 주다
+放す	はなす	v5	7	떼다	from=@body|@thing|@furniture			r	r	喉から刃を離せ → 목에서 칼을 떼라 (moving something off a body part or object)
+構う	かまう	v5	1	상관하다			vol=- asp=activity te=go neg=상관없다	r	r	構わない → 상관없다
+構う	かまう	v5	2	상관하다	next=ん|ます			r	r	構いません → 상관없습니다 (guard: the ん/ません endings carry ず as a lemma too)
+構う	かまう	v5	3	상관하다	next=ぬ			r	r	構わぬ → 상관없다 (guard, as sense 2)
+構う	かまう	v5	4	아랑곳하다	next=ず			r	r	構わず続ける → 아랑곳하지 않고 계속하다
+構う	かまう	v5	5	상대하다	form=te	に=을		r	r	構ってほしい → 상대해 주길 바라다
+構う	かまう	v5	6	상대하다	dat=@person|@animal	に=을		r	r	子供に構う暇はない → 아이를 상대할 틈은 없다
+構う	かまう	v5	7	상대하다	obj=@person|@animal			r	r	猫を構う → 고양이를 상대하다
+合わせる	あわせる	v1	1	맞추다			vol=+ asp=activity te=go	r	r	相手に合わせる → 상대에게 맞추다
+合わせる	あわせる	v1	2	모으다	obj=@hand			r	r	手を合わせる → 두 손을 모으다
+合わせる	あわせる	v1	3	합치다	obj=力			r	r	力を合わせる → 힘을 합치다
+合わせる	あわせる	v1	4	마주치다	obj=@gaze|顔			r	r	目を合わせる → 눈을 마주치다
+合わせる	あわせる	v1	5	맞대다	obj=@body|@tableware			r	r	額を合わせる → 이마를 맞대다
+合わせる	あわせる	v1	6	합치다	form=te next=@counter			r	r	合わせて３票 → 합쳐서 3표
+合わせる	あわせる	v1	7	맞추다	obj=目線			r	r	しゃがんで目線を合わせる → 쪼그려 앉아 눈높이를 맞추다 (目線 here is eye level, not a look exchanged)
+守る	まもる	v5	1	지키다			vol=+ asp=activity te=go	r	r	仲間を守る → 동료를 지키다
 大変	たいへん	adv	1	정말				r	r	大変おいしい → 정말 맛있다
 トウキョウ	とうきょう	pn	1	도쿄			cls=@town	r	r	東京に行く → 도쿄에 가다
 オオサカ	おおさか	pn	1	오사카			cls=@town	r	r	大阪に住む → 오사카에 살다
@@ -2594,7 +4846,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 如何	どう	adv	1	어떻게				r	r	どうする → 어떻게 하다 alias of どう/どう/adv
 如何	どう	adv	2	어때	form=cop			r	r	調子はどう → 상태는 어때 alias of どう/どう/adv
 如何して	どうして	adv	1	왜			lu	r	r	どうして行かないの → 왜 안 가? alias of どうして/どうして/adv
-回	かい	suf	1	번			num=native	r	r	三回 → 세 번 alias of 回/かい/n
+回	かい	suf	1	번			num=native cls=@counter	r	r	三回 → 세 번 alias of 回/かい/n
 回	かい	suf	2	회	after=第			r	r	第一回 → 제1회 alias of 回/かい/n
 時	じ	suf	1	시			num=native	r	r	十時 → 10시 alias of 時/じ/n
 分	ふん	suf	1	분			cls=@duration num=sino	r	r	五分 → 5분 alias of 分/ふん/n
