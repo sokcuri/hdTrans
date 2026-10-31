@@ -38,7 +38,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 んっ	んっ	intj	1	응				m	r	んっ？ → 응?
 んっ	んっ	intj	2	음	next=…|、			m	r	んっ…… → 음……
 おい	おい	intj	1	이봐				m	r	おい、何やってんだ → 이봐, 뭐 하는 거야
-内	うち	n	1	우리			cls=@place|@house name=+	m	r	うちの子 → 우리 아이
+内	うち	n	1	우리			name=+ cls=@place|@house	m	r	うちの子 → 우리 아이
 内	うち	n	2	사이	mod=無い|居る|為る|今の|其の			m	r	知らないうちに → 모르는 사이에
 内	うち	n	3	집	pred=来る|帰る|返る|戻る|泊まる|遊ぶ			m	r	うちに帰る → 집에 돌아가다
 内	うち	n	4	중	mod=@number|@quantity|@group			m	r	三人のうち → 세 명 중
@@ -155,13 +155,13 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 園	えん	suf	1	원			name=+	m	r	幼稚園 → 유치원
 ううん	ううん	intj	1	아니				m	r	ううん、違う → 아니, 아니야
 ううん	ううん	intj	2	음	next=…|、|。			m	r	うーん、物置？ → 음, 창고?
-姿	すがた	n	1	모습			cls=@abstract|@sign name=+	m	r	姿を見せる → 모습을 보이다
+姿	すがた	n	1	모습			name=+ cls=@abstract|@sign	m	r	姿を見せる → 모습을 보이다
 姿	すがた	n	2	차림	mod=@clothing			m	r	浴衣姿 → 유카타 차림
 魔法	まほう	n	1	마법			cls=@magic	m	r	魔法を使う → 마법을 쓰다
 わし	わし	n	1	나			anim=+ cls=@person	m	r	わしは知らん → 나는 모른다
 うー	うー	intj	1	으				m	r	うー、雨の日が続くね → 으, 비 오는 날이 계속되네
 員	いん	suf	1	원				m	r	審査員 → 심사위원
-元	もと	n	1	원래			cls=@state name=+	m	r	元のまま → 원래대로
+元	もと	n	1	원래			name=+ cls=@state	m	r	元のまま → 원래대로
 元	もと	n	2	전	next=@person|@person.role			m	r	元暴力団員 → 전 폭력단원
 元	もと	n	3	곁	pred=戻る|行く|来る|帰る mod=@person			m	r	俺の元へ戻る → 내 곁으로 돌아오다
 元	もと	n	4	근원	pred=成る|生み出す			m	r	元となる → 근원이 되다
@@ -235,9 +235,9 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 やばい	やばい	adj	1	위험하다				m	r	ヤバイのか → 위험해?
 やばい	やばい	adj	2	큰일이다	form=ta|te subj=- register=casual			m	r	ヤバい、寝てた → 큰일이다, 잤네
 依然	いぜん	adv	1	여전히				m	r	依然として存在する → 여전히 존재하다
-力	りょく	suf	1	력			cls=@strength name=+	m	r	判断力 → 판단력
+力	りょく	suf	1	력			name=+ cls=@strength	m	r	判断力 → 판단력
 力	りょく	suf	2	힘	after=鳳|霊能			m	r	鳳力 → 봉력
-上	じょう	suf	1	상			cls=@position name=+	m	r	歴史上 → 역사상
+上	じょう	suf	1	상			name=+ cls=@position	m	r	歴史上 → 역사상
 上	じょう	suf	2	연상	after=父|兄|母|姉|義父			m	r	年上 → 연상
 我	われ	n	1	나			cls=@person anim=+	m	r	我ら → 우리
 我	われ	n	2	자기	next=が			m	r	我が事 → 자기 일
@@ -315,7 +315,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 号車	ごうしゃ	n	2	번 차	domain=sports			m	r	86号車 → 86번 차
 改	かい	n	1	개			cls=@abstract	m	r	鈴谷改 → 스즈야 개
 自在	じざい	na	1	자유자재				m	r	自在に操る → 자유자재로 다루다
-内	ない	suf	1	내			cls=@house name=+	m	r	学院内 → 학원 내
+内	ない	suf	1	내			name=+ cls=@house	m	r	学院内 → 학원 내
 小太刀	こだち	n	1	코다치			anim=+ cls=@person name=+	m	r	小太刀が入ってきた → 코다치가 들어왔다
 独り	ひとり	n	1	혼자				m	r	独りじゃない → 혼자가 아니다
 師	し	suf	1	사				m	r	看護師 → 간호사
@@ -327,7 +327,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 行う	おこなう	v5	1	하다			vol=+ asp=activity	m	r	活動を行う → 활동을 하다
 行う	おこなう	v5	2	실시하다	obj=調査|実験|訓練|手術|演習|検査|投票|試験			m	r	実験を行う → 실험을 실시하다
 行う	おこなう	v5	3	저지르다	obj=犯罪|犯行|悪事|不正			m	r	犯行を行う → 범행을 저지르다
-風	ふう	n	1	식			cls=@wind name=+	m	r	こんな風に言う → 이런 식으로 말하다
+風	ふう	n	1	식			name=+ cls=@wind	m	r	こんな風に言う → 이런 식으로 말하다
 易い	やすい	suf	1	쉽다				m	r	分かりやすい → 알기 쉽다
 完全	かんぜん	na	1	완전하다				m	r	完全なもの → 완전한 것
 完全	かんぜん	na	2	완전	next=勝利|救済|回避|成功|武装|燃焼 form=adv			m	r	完全勝利 → 완전 승리
@@ -471,7 +471,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 書	しょ	suf	1	서				m	r	報告書 → 보고서
 体	たい	n	1	몸			cls=@body	m	r	体が動かない → 몸이 움직이지 않는다
 体	たい	n	2	체	after=生命|高エネルギー|配糖|固|液|結合			m	r	生命体 → 생명체
-風	ふう	suf	1	풍			cls=@wind name=+	m	r	西洋風 → 서양풍
+風	ふう	suf	1	풍			name=+ cls=@wind	m	r	西洋風 → 서양풍
 風	ふう	suf	2	식	after=言う|こういう|そういう|ああいう|どういう			m	r	こういう風に → 이런 식으로
 アップ	あっぷ	n	1	업				m	r	パワーアップ → 파워업
 現われる	あらわれる	v1	1	나타나다			vol=- asp=change	m	r	男が現れる → 남자가 나타나다
@@ -517,7 +517,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 失う	うしなう	v5	1	잃다			vol=- asp=change	m	r	記憶を失う → 기억을 잃다
 日々	ひび	n	1	나날			cls=@time	m	r	大切な日々 → 소중한 나날
 日々	ひび	n	2	날마다	pred=頑張る|成長する|過ごす|思い出す form=-			m	r	日々成長する → 날마다 성장하다
-上	うえ	suf	1	님			cls=@position name=+	m	r	父上 → 아버님
+上	うえ	suf	1	님			name=+ cls=@position	m	r	父上 → 아버님
 上	うえ	suf	2	상	after=立場|仕事|法律|都合			m	r	立場上 → 입장상
 求める	もとめる	v1	1	구하다			vol=+ asp=activity	m	r	助けを求める → 도움을 구하다
 求める	もとめる	v1	2	요구하다	obj=訂正|謝罪|説明|回答|賠償			m	r	訂正を求める → 정정을 요구하다
@@ -548,7 +548,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 女子	じょし	n	2	여자애	domain=-			m	r	女子を見つけた → 여자애를 발견했다
 ぐっ	ぐっ	adv	1	꾹				m	r	ぐっと押す → 꾹 누르다
 ぐっ	ぐっ	adv	2	쭉	pred=来る|近づく			m	r	ぐっと来る → 확 와닿다
-金	きん	suf	1	금			cls=@money name=+	m	r	保険金 → 보험금
+金	きん	suf	1	금			name=+ cls=@money	m	r	保険金 → 보험금
 飛行	ひこう	n	1	비행			cls=@activity	m	r	飛行機 → 비행기
 面	めん	n	1	면			cls=@abstract	m	r	社交面 → 사교 면
 勝利	しょうり	n	1	승리			cls=@event name=+	m	r	勝利を収める → 승리를 거두다
@@ -605,7 +605,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 椿	つばき	n	1	츠바키			cls=@plant name=+	m	r	椿は笑った → 츠바키는 웃었다
 椿	つばき	n	2	동백나무	pred=咲く|散る|植える|摘む|落ちる			m	r	椿が咲く → 동백이 피다
 最終	さいしゅう	n	1	최종				m	r	最終決戦 → 최종 결전
-ライト	らいと	n	1	라이트			cls=@light|@lighting name=+	m	r	ライトを点ける → 라이트를 켜다
+ライト	らいと	n	1	라이트			name=+ cls=@light|@lighting	m	r	ライトを点ける → 라이트를 켜다
 要	よう	pref	1	요			name=+	m	r	要注意 → 요주의
 望む	のぞむ	v5	1	바라다			vol=+ asp=activity	m	r	平和を望む → 평화를 바라다
 望む	のぞむ	v5	2	바라보다	obj=山|海|富士|景色|景観			m	r	海を望む → 바다를 바라보다
@@ -616,7 +616,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 関わる	かかわる	v5	2	엮이다	with=@person dat=@person			m	r	あの人と関わる → 그 사람과 엮이다
 国	こく	suf	1	국				m	r	合衆国 → 합중국
 破棄	はき	n	1	파기				m	r	婚約破棄 → 약혼 파기
-屋敷	やしき	n	1	저택			cls=@house name=+	m	r	屋敷に戻る → 저택에 돌아가다
+屋敷	やしき	n	1	저택			name=+ cls=@house	m	r	屋敷に戻る → 저택에 돌아가다
 乗せる	のせる	v1	1	태우다			vol=+ asp=instant	m	r	人を車に乗せる → 사람을 차에 태우다
 乗せる	のせる	v1	2	싣다	obj=荷物|貨物|積荷|荷			m	r	荷物を乗せる → 짐을 싣다
 乗せる	のせる	v1	3	얹다	dat=御飯|皿|頭|肩|膝|手|掌|@food			m	r	御飯に乗せる → 밥에 얹다
@@ -709,7 +709,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 事実	じじつ	n	1	사실			cls=@abstract|@info	m	r	事実を認める → 사실을 인정하다
 誕生	たんじょう	n	1	탄생			cls=@event	m	r	新時代の誕生 → 새 시대의 탄생
 振り	ふり	n	1	척			cls=@abstract	m	r	寝たふり → 자는 척
-表	ひょう	n	1	표			cls=@document|@position name=+	m	r	表にまとめる → 표로 정리하다
+表	ひょう	n	1	표			name=+ cls=@document|@position	m	r	表にまとめる → 표로 정리하다
 距離	きょり	n	1	거리			cls=@quantity	m	r	距離を置く → 거리를 두다
 証拠	しょうこ	n	1	증거			cls=@info	m	r	証拠がない → 증거가 없다
 臭い	くさい	suf	1	스럽다			cls=@smell	m	r	年寄りくさい → 늙은이 같다
@@ -721,7 +721,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 図書	としょ	n	1	도서			cls=@document	m	r	図書館 → 도서관
 朽木	きゅうぼく	n	1	쿠츠키			anim=+ name=+	m	r	朽木家 → 쿠츠키 가문
 朽木	きゅうぼく	n	2	썩은 나무	next=の|のよう			m	r	朽木のよう → 썩은 나무 같다
-海	かい	suf	1	해			cls=@water.body name=+	m	r	地中海 → 지중해
+海	かい	suf	1	해			name=+ cls=@water.body	m	r	地中海 → 지중해
 全力	ぜんりょく	n	1	전력			cls=@abstract	m	r	全力で走る → 전력으로 달리다
 瞳	ひとみ	n	1	눈동자			cls=@body name=+	m	r	青い瞳 → 푸른 눈동자
 悲鳴	ひめい	n	1	비명			cls=@sound|@shout	m	r	悲鳴を上げる → 비명을 지르다
@@ -734,11 +734,11 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 有り	あり	n	2	괜찮다	next=か|だ|と			m	r	それもアリか → 그것도 괜찮겠네
 自己	じこ	n	1	자기			cls=@abstract	m	r	自己紹介 → 자기소개
 量	りょう	n	1	양			cls=@quantity name=+	m	r	量が増える → 양이 늘다
-ライン	らいん	n	1	라인			cls=@shape name=+	m	r	通過ライン → 통과선
+ライン	らいん	n	1	라인			name=+ cls=@shape	m	r	通過ライン → 통과선
 自信	じしん	n	1	자신감			cls=@emotion|@strength	m	r	自信がない → 자신감이 없다
 っこ	っこ	suf	1	기				m	r	脅かしっこなし → 놀라게 하기 없기
 足音	あしおと	n	1	발소리			cls=@sound	m	r	足音が聞こえる → 발소리가 들리다
-仲	なか	n	1	사이			cls=@relation name=+	m	r	仲が良い → 사이가 좋다
+仲	なか	n	1	사이			name=+ cls=@relation	m	r	仲が良い → 사이가 좋다
 奪う	うばう	v5	1	빼앗다			vol=+ asp=instant	m	r	金を奪う → 돈을 빼앗다
 繰り返す	くりかえす	v5	1	반복하다			vol=+ asp=activity	m	r	過ちを繰り返す → 잘못을 반복하다
 命令	めいれい	n	1	명령			cls=@speech	m	r	命令に従う → 명령에 따르다
@@ -1167,7 +1167,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 肌	はだ	n	1	피부			cls=@body	m	r	白い肌 → 하얀 피부
 巨大	きょだい	na	1	거대하다				m	r	巨大な蜘蛛 → 거대한 거미
 許可	きょか	n	1	허가			cls=@abstract	m	r	許可を取る → 허가를 받다
-通信	つうしん	n	1	통신			cls=@activity|@call name=+	m	r	通信が切れる → 통신이 끊기다
+通信	つうしん	n	1	통신			name=+ cls=@activity|@call	m	r	通信が切れる → 통신이 끊기다
 達成	たっせい	n	1	달성			cls=@abstract	m	r	目標達成 → 목표 달성
 裁判	さいばん	n	1	재판			cls=@event	m	r	裁判に勝つ → 재판에서 이기다
 グループ	ぐるーぷ	n	1	그룹			cls=@group	m	r	アイドルグループ → 아이돌 그룹
@@ -1175,7 +1175,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 イメージ	いめーじ	n	1	이미지			cls=@idea	m	r	良いイメージ → 좋은 이미지
 下	か	suf	1	하			cls=@position	m	r	支配下 → 지배하
 対	たい	n	1	대				m	r	2対0 → 2대 0
-朝日	あさひ	n	1	아침 해			cls=@nature|@light name=+	m	r	朝日が昇る → 아침 해가 떠오르다
+朝日	あさひ	n	1	아침 해			name=+ cls=@nature|@light	m	r	朝日が昇る → 아침 해가 떠오르다
 朝日	あさひ	n	2	아사히	next=君|ちゃん|生ビール			m	r	朝日君 → 아사히 군
 大	だい	suf	1	대			name=+	m	r	白陵大 → 백릉대
 ＢＲ	びーあーる	n	1	BR				m	r	BR → BR
@@ -1235,7 +1235,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 怪しい	あやしい	adj	1	수상하다				m	r	怪しい人 → 수상한 사람
 怪しい	あやしい	adj	2	의심스럽다	pred=-			m	r	長男が怪しい → 장남이 의심스럽다
 怪しい	あやしい	adj	3	요염하다	head=光|美女|魅力			m	r	妖しい光 → 요염한 빛
-弾	だん	suf	1	탄			cls=@ammunition|@blow name=+	m	r	焼夷弾 → 소이탄
+弾	だん	suf	1	탄			name=+ cls=@ammunition|@blow	m	r	焼夷弾 → 소이탄
 北方	ほっぽう	n	1	북방			cls=@direction name=+	m	r	北方海域 → 북방 해역
 夜戦	やせん	n	1	야전			cls=@event	m	r	夜戦に突入 → 야전에 돌입
 ＯＳＴ	おーえすてぃー	n	1	OST			cls=@music	m	r	ドラマOST → 드라마 OST
@@ -1268,7 +1268,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 台詞	せりふ	n	1	대사			cls=@speech|@rote	m	r	セリフを言う → 대사를 말하다
 えへへ	えへへ	intj	1	에헤헤				m	r	えへへ、頑張る → 에헤헤, 열심히 할게
 王子	おうじ	n	1	왕자			cls=@person.role anim=+ name=+	m	r	第二王子 → 제2왕자
-真実	しんじつ	n	1	진실			cls=@abstract|@info name=+	m	r	真実を話す → 진실을 말하다
+真実	しんじつ	n	1	진실			name=+ cls=@abstract|@info	m	r	真実を話す → 진실을 말하다
 放つ	はなつ	v5	1	발하다			vol=+ asp=instant	m	r	光を放つ → 빛을 발하다
 放つ	はなつ	v5	2	쏘다	obj=矢|弾|魔法|攻撃|斬撃|@weapon			m	r	矢を放つ → 화살을 쏘다
 放つ	はなつ	v5	3	내뿜다	obj=オーラ|殺気|気配|香り|匂い|熱|冷気|威圧感|芳香			m	r	殺気を放つ → 살기를 내뿜다

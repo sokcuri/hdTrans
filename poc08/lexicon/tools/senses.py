@@ -12,7 +12,9 @@ Equal tuples fall to the lower sense number, recorded as a default (margin 0). T
 The context is a plain object with:
   args: dict slot -> list of noun lemmas (subj obj dat loc with from to; 'arg' is any of them);
   head: noun lemma or None; mods, nexts, afters, preds: lists of lemmas; forms: set of form names;
-  domain, register: strings or ''; main_vol: '+', '-' or ''.
+  domain, register: strings or ''; main_vol: '+', '-' or '';
+  adn (optional, default False): the predicate is in an adnominal clause; then the modified noun (head) fills an
+  empty subj or obj slot (高い本 → subj=本, 写真を撮った日 keeps obj=写真). Native T does the same.
 """
 import collections
 
@@ -72,6 +74,8 @@ def atom(ctx, slot, vals, C):
     """(kind, depth) when the atom holds, else None."""
     if slot in ARG_SLOTS or slot == 'arg':
         nouns = [n for s in ARG_SLOTS for n in ctx.args.get(s, [])] if slot == 'arg' else ctx.args.get(slot, [])
+        if not nouns and slot in ('subj', 'obj') and getattr(ctx, 'adn', False) and ctx.head:
+            nouns = [ctx.head]
         if vals == ['-']:
             return (NEIGH, 0) if not nouns else None
         return _match_nouns(nouns, vals, C)

@@ -392,7 +392,7 @@ ttt		n	1	ttt				u	b
 粗削り	あらけずり	n	3	손질을 덜하다				u	b	
 粗削り	あらけずり	n	4	거칠게 깎기				u	b	
 粗捜し	あらさがし	n	1	흠 꼬집기				u	b	
-嵐	あらし	n	1	폭풍우			cls=@weather name=+	u	b	
+嵐	あらし	n	1	폭풍우			name=+ cls=@weather	u	b	
 嵐	あらし	n	2	람				u	b	
 粗筋	あらすじ	n	1	줄거리				u	wl	
 粗筋	あらすじ	n	2	개요				u	w	
@@ -601,7 +601,7 @@ ttt		n	1	ttt				u	b
 一押し	いちおし	n	2	강추				u	b	
 一押し	いちおし	n	3	추천				u	b	
 一概	いちがい	n	1	한 마디로	next=に			u	b	
-苺	いちご	n	1	딸기			cls=@food name=+	u	b	
+苺	いちご	n	1	딸기			name=+ cls=@food	u	b	
 一言	いちごん	n	1	한 마디				u	b	
 イチジク	いちじく	n	1	무화과나무				u	b	
 イチジク	いちじく	n	2	무화과				u	b	
@@ -968,7 +968,7 @@ ttt		n	1	ttt				u	b
 恵比須顔	えびすがお	n	1	싱글벙글 웃는 얼굴				u	w	
 海老天	えびてん	n	1	새우 튀김				u	b	
 葡萄茶	えびちゃ	n	1	적갈색				u	w	
-絵本	えほん	n	1	그림책			cls=@document name=+	u	b	
+絵本	えほん	n	1	그림책			name=+ cls=@document	u	b	
 笑み	えみ	n	1	웃음			cls=@expression	u	b	
 笑み	えみ	n	2	미소				u	b	
 襟	えり	n	1	깃				u	w	
@@ -991,7 +991,7 @@ ttt		n	1	ttt				u	b
 エンジェル	えんじぇる	n	1	엔젤			name=+	u	b	
 エンジェル	えんじぇる	n	2	엔젤스				u	c+b	from-names
 エンジェル	えんじぇる	n	3	로스앤젤레스 에인절스				u	c+np	from-names
-エンジン	えんじん	n	1	연기와 먼지			cls=@machine name=+	u	b	
+エンジン	えんじん	n	1	연기와 먼지			name=+ cls=@machine	u	b	
 エンジン	えんじん	n	2	엔진				u	b	
 煙突	えんとつ	n	1	굴뚝				u	b	
 円安	えんやす	n	1	엔화 약세				u	b	
@@ -1911,7 +1911,7 @@ ttt		n	1	ttt				u	b
 干瓢	かんぴょう	n	1	박고지				u	b	
 干瓢	かんぴょう	n	2	간표				u	b	
 勘弁	かんべん	n	1	용서				u	b	
-冠	かんむり	n	1	관			cls=@headwear name=+	u	b	
+冠	かんむり	n	1	관			name=+ cls=@headwear	u	b	
 簡明	かんめい	n	1	간명				u	b	
 簡明	かんめい	n	2	감명				u	b	
 簡約	かんやく	n	1	간략				u	b	
@@ -3662,7 +3662,7 @@ ttt		n	1	ttt				u	b
 障害	しょうがい	n	5	상해				u	b	
 障害	しょうがい	n	6	생애				u	b	
 障害	しょうがい	n	7	장애물				u	b	rule:4705 +unmapped
-正気	しょうき	n	1	제정신			cls=@faculty|@state name=+	u	b	
+正気	しょうき	n	1	제정신			name=+ cls=@faculty|@state	u	b	
 正気	しょうき	n	2	정기				u	b	
 正気	しょうき	n	3	메탄가스				u	b	
 正気	しょうき	n	4	아산화 질소				u	b	
@@ -6639,7 +6639,7 @@ ttt		n	1	ttt				u	b
 我が儘	わがまま	n	6	방자				u	b	
 我が儘	わがまま	n	7	자기 멋대로이다				u	b	
 我が儘	わがまま	n	8	자기 뜻				u	b	
-脇	わき	n	1	옆			cls=@position name=+	u	b	
+脇	わき	n	1	옆			name=+ cls=@position	u	b	
 脇	わき	n	2	협				u	b	
 脇	わき	n	3	겨드랑이				u	b	
 脇	わき	n	4	액				u	b	
@@ -9668,7 +9668,7 @@ ttt		n	1	ttt				u	b
 カポック	かぽっく	n	2	카폭				u	b	
 カポック	かぽっく	n	3	양목면				u	c+nw	from-names
 カマーバンド	かまーばんど	n	1	커머밴드				u	b	
-上	かみ	n	1	신			cls=@position name=+	u	b	
+上	かみ	n	1	신			name=+ cls=@position	u	b	
 カミツレ	かみつれ	n	1	카밀레				u	b	
 カム	かむ	n	1	캠				u	b	
 カムチッカ		n	1	캄차카				u	b	
@@ -10645,7 +10645,7 @@ ttt		n	1	ttt				u	b
 グラウンド	ぐらうんど	n	1	그라운드				u	b	
 グラジエント	ぐらじえんと	n	1	그레이디언트				u	b	
 グラジオラス	ぐらじおらす	n	1	글라디올러스				u	b	
-グラス	ぐらす	n	1	잔			cls=@tableware name=+	u	wl	
+グラス	ぐらす	n	1	잔			name=+ cls=@tableware	u	wl	
 グラス	ぐらす	n	2	글래스				u	b	
 グラスノスチ	ぐらすのすち	n	1	글라스노스트				u	b	
 グラタン	ぐらたん	n	1	그라탕				u	b	
@@ -10915,7 +10915,7 @@ ttt		n	1	ttt				u	b
 コケットリー	こけっとりー	n	1	교태				u	b	
 焦げ茶	こげちゃ	n	1	짙은 갈색				u	w	
 焦げ茶	こげちゃ	n	2	짙은 감색				u	b	
-ココア	ここあ	n	1	코코아			cls=@brew name=+	u	b	
+ココア	ここあ	n	1	코코아			name=+ cls=@brew	u	b	
 ココナッツ	ここなっつ	n	1	코코넛				u	b	
 ＣＯＣＯＭ	ここむ	n	1	코콤				u	b	
 コサイン	こさいん	n	1	코사인			name=+	u	b	
@@ -13203,7 +13203,7 @@ ttt		n	1	ttt				u	b
 スピーチ	すぴーち	n	1	스피치				u	b	
 スピーチ	すぴーち	n	2	연설				u	c+nw	from-names
 スピーデイー		n	1	스피디				u	b	
-スピード	すぴーど	n	1	스피드			cls=@quantity name=+	u	b	
+スピード	すぴーど	n	1	스피드			name=+ cls=@quantity	u	b	
 スピードアップ	すぴーどあっぷ	n	1	스피드업				u	b	
 スフィンクス	すふぃんくす	n	1	스핑크스				u	b	
 スプラッシャー		n	1	스플래셔				u	b	
@@ -16085,7 +16085,7 @@ ttt		n	1	ttt				u	b
 ハンドリング	はんどりんぐ	n	1	핸들링				u	b	
 ハンドル	はんどる	n	1	핸들				u	b	
 ハンドル	はんどる	n	2	한돌				u	c+nw	from-names
-ハンバーガー	はんばーがー	n	1	햄버거			cls=@food name=+	u	b	
+ハンバーガー	はんばーがー	n	1	햄버거			name=+ cls=@food	u	b	
 ハンバーグ	はんばーぐ	n	1	햄버그				u	x	
 ハンバーグ	はんばーぐ	n	2	햄버그 스테이크				u	c+nw	from-names
 ハンビット		n	1	한빛				u	b	
@@ -16749,7 +16749,7 @@ ttt		n	1	ttt				u	b
 パンタロン	ぱんたろん	n	2	나팔바지				u	c+nw	from-names
 パンダ	ぱんだ	n	1	팬더			name=+	u	b	
 パンダ	ぱんだ	n	2	판다				u	c+nq	from-names
-パンチ	ぱんち	n	1	펀치			cls=@blow name=+	u	b	
+パンチ	ぱんち	n	1	펀치			name=+ cls=@blow	u	b	
 パンチャー	ぱんちゃー	n	1	펀처				u	b	
 パンちら	ぱんちら	n	1	판치라				u	w	
 パンちら	ぱんちら	n	2	팬티 엿보기				u	b	
@@ -17154,7 +17154,7 @@ ttt		n	1	ttt				u	b
 ビー・シー・シー		n	1	BCC				u	b	
 ビー・ピーエス		n	1	bps				u	b	
 ピアー	ぴあー	n	1	피어				u	b	
-ピアス	ぴあす	n	1	귀걸이			cls=@accessory name=+	u	b	
+ピアス	ぴあす	n	1	귀걸이			name=+ cls=@accessory	u	b	
 ピアツーピアコンピューティング		n	1	피어 투 피어 컴퓨팅				u	b	
 ピアニシモ		n	1	피아니시모				u	b	
 ピアニスト	ぴあにすと	n	1	피아니스트				u	b	
@@ -17190,7 +17190,7 @@ ttt		n	1	ttt				u	b
 ピコアンメータ		n	1	피코어미터				u	b	
 ピコグラム	ぴこぐらむ	n	1	피코그램				u	b	
 ピコット	ぴこっと	n	1	피콧				u	b	
-ピザ	ぴざ	n	1	피자			cls=@food name=+	u	wl	
+ピザ	ぴざ	n	1	피자			name=+ cls=@food	u	wl	
 ピザ	ぴざ	n	2	핏자				u	b	
 ピジョイングリッシュ		n	1	피진영어				u	b	
 ピジン	ぴじん	n	1	혼합어				u	b	
@@ -18174,7 +18174,7 @@ ttt		n	1	ttt				u	b
 ブーケ	ぶーけ	n	1	부케			name=+	u	w	
 ブーゲンビレア	ぶーげんびれあ	n	1	부겐빌레아				u	w	
 ブーゲンビレア	ぶーげんびれあ	n	2	부겐빌리아				u	b	
-ブース	ぶーす	n	1	부스			cls=@room name=+	u	b	
+ブース	ぶーす	n	1	부스			name=+ cls=@room	u	b	
 ブースター	ぶーすたー	n	1	부스터				u	wl	
 ブースト	ぶーすと	n	1	부스트				u	b	
 ブーストレーナ		n	1	부스 트레이너				u	b	
@@ -18273,7 +18273,7 @@ ttt		n	1	ttt				u	b
 プラム	ぷらむ	n	1	플럼			name=+	u	b	
 プラモデル	ぷらもでる	n	1	플라모델				u	b	
 プラモデル	ぷらもでる	n	2	프라모델				u	c+nw	from-names
-プラン	ぷらん	n	1	플랜			cls=@plan|@scheme name=+	u	b	
+プラン	ぷらん	n	1	플랜			name=+ cls=@plan|@scheme	u	b	
 プランクトン	ぷらんくとん	n	1	플랑크톤				u	b	
 プランジミル		n	1	브란지밀 연마공구				u	b	
 プランジャー	ぷらんじゃー	n	1	플런저				u	wl	
@@ -19787,7 +19787,7 @@ ttt		n	1	ttt				u	b
 ミション		n	1	전도단체				u	b	
 ミシン	みしん	n	1	미싱				u	b	
 ミシン	みしん	n	2	재봉틀				u	c+nw	from-names
-ミス	みす	n	1	실수			cls=@incident name=+	u	wl	
+ミス	みす	n	1	실수			name=+ cls=@incident	u	wl	
 ミス	みす	n	2	미스				u	b	
 ミス	みす	n	3	미수				u	c+nw	from-names
 ミスター	みすたー	n	1	미스터				u	b	
@@ -20701,7 +20701,7 @@ ttt		n	1	ttt				u	b
 ラッピング	らっぴんぐ	n	2	래핑				u	c+np	from-names
 ラッピングコディネーター		n	1	포장전문가				u	b	
 ラッフル		n	1	러플				u	b	
-ラップ	らっぷ	n	1	랩			cls=@wrapping name=+	u	b	
+ラップ	らっぷ	n	1	랩			name=+ cls=@wrapping	u	b	
 ラップアラウンド	らっぷあらうんど	n	1	랩어라운드				u	b	
 ラップトップ	らっぷとっぷ	n	1	랩탑			cls=@computer	u	b	
 ラティフィケーション		n	1	비준				u	b	
@@ -20776,7 +20776,7 @@ ttt		n	1	ttt				u	b
 ランダマイズ	らんだまいず	n	1	랜더마이즈				u	b	
 ランダム	らんだむ	n	1	랜덤				u	b	
 ランダム	らんだむ	n	2	무작위				u	c+nw	from-names
-ランチ	らんち	n	1	런치			cls=@meal name=+	u	b	
+ランチ	らんち	n	1	런치			name=+ cls=@meal	u	b	
 ランチャー	らんちゃー	n	1	런처				u	wl	
 ランチャー	らんちゃー	n	2	발사장치				u	b	
 ランチョン	らんちょん	n	1	런천				u	b	
@@ -20900,7 +20900,7 @@ ttt		n	1	ttt				u	b
 リスケジューリング	りすけじゅーりんぐ	n	1	리스케줄링				u	b	
 リスタート	りすたーと	n	1	리스타트				u	b	
 リスティチューションセンター		n	1	리스티튜션 센터				u	b	
-リスト	りすと	n	1	리스트			cls=@document name=+	u	b	
+リスト	りすと	n	1	리스트			name=+ cls=@document	u	b	
 リストア	りすとあ	n	1	리스토어				u	b	
 リストラ	りすとら	n	1	정리해고				u	b	
 リストラ	りすとら	n	2	구조조정				u	c+nw	from-names
@@ -29001,7 +29001,7 @@ ttt		n	1	ttt				u	b
 右左	みぎひだり	n	1	좌우				u	b	
 右巻き	みぎまき	n	1	오른쪽 감기				u	b	
 右府	うふ	n	1	우의정				u	b	
-右手	みぎて	n	1	오른손			cls=@body name=+	u	b	
+右手	みぎて	n	1	오른손			name=+ cls=@body	u	b	
 右折	うせつ	n	1	우회전				u	b	
 右文	ゆうぶん	n	1	우문				u	b	
 右方	みぎかた	n	1	우측				u	b	
@@ -35087,7 +35087,7 @@ ttt		n	1	ttt				u	b
 平々	へいへい	n	1	평평				u	w	
 平年	へいねん	n	1	평년				u	b	
 平底	ひらぞこ	n	1	평저				u	b	
-平手	ひらて	n	1	손바닥			cls=@blow name=+	u	b	
+平手	ひらて	n	1	손바닥			name=+ cls=@blow	u	b	
 平方	へいほう	n	1	평방				u	b	
 平明	へいめい	n	1	평이하다				u	b	
 平明	へいめい	n	2	평명				u	b	
@@ -35666,7 +35666,7 @@ ttt		n	1	ttt				u	b
 弑逆	しいぎゃく	n	1	시해				u	w	
 弑逆	しいぎゃく	n	2	시살				u	b	
 弑逆	しいぎゃく	n	3	시역				u	c+nw	from-names
-弓	ゆみ	n	1	활			cls=@weapon name=+	u	b	
+弓	ゆみ	n	1	활			name=+ cls=@weapon	u	b	
 弓	ゆみ	n	2	궁				u	b	
 弓偏	ゆみへん	n	1	활궁변				u	b	
 弓勢	ゆんぜい	n	1	활을 쏘는 힘				u	b	
@@ -35926,7 +35926,7 @@ ttt		n	1	ttt				u	b
 強震	きょうしん	n	1	강진				u	b	
 強風	きょうふう	n	1	강풍				u	b	
 強飯	こわいい	n	1	찰밥				u	b	
-弾	たま	n	1	총알			cls=@ammunition|@blow name=+	u	b	
+弾	たま	n	1	총알			name=+ cls=@ammunition|@blow	u	b	
 弾	たま	n	2	탄				u	b	
 弾き	ひき	n	1	연주				u	b	
 弾き手	ひきて	n	1	연주자				u	b	
@@ -38231,7 +38231,7 @@ ttt		n	1	ttt				u	b
 抹殺	まっさつ	n	1	말살				u	b	
 抹油		n	1	말유				u	b	
 抹消	まっしょう	n	1	말소				u	b	
-抹茶	まっちゃ	n	1	가루차			cls=@brew name=+	u	b	
+抹茶	まっちゃ	n	1	가루차			name=+ cls=@brew	u	b	
 抹茶	まっちゃ	n	2	말차				u	c+nw	from-names
 抹香	まっこう	n	1	말향				u	b	
 抻送		n	1	압송				u	b	
@@ -38360,7 +38360,7 @@ ttt		n	1	ttt				u	b
 拡販	かくはん	n	1	확대판매				u	b	
 括弧	かっこ	n	1	괄호				u	b	
 拱式		n	1	공식				u	b	
-拳	こぶし	n	1	주먹			cls=@body|@fist name=+	u	b	
+拳	こぶし	n	1	주먹			name=+ cls=@body|@fist	u	b	
 拳	こぶし	n	2	권				u	b	
 拳法	けんぽう	n	1	권법				u	b	
 拳闘	けんとう	n	1	권투				u	b	
@@ -41549,7 +41549,7 @@ ttt		n	1	ttt				u	b
 枝	えだ	n	3	지				u	b	
 枝分かれ	えだわかれ	n	1	분기				u	w	
 枝打ち	えだうち	n	1	가지치기				u	b	
-栞	しおり	n	1	사립문			cls=@thing name=+	u	b	
+栞	しおり	n	1	사립문			name=+ cls=@thing	u	b	
 枝折り戸	しおりど	n	1	사립문				u	w	
 枝条	しじょう	n	1	가지				u	b	
 枝梢	ししょう	n	1	나뭇가지 끝				u	b	
@@ -42058,7 +42058,7 @@ ttt		n	1	ttt				u	b
 業風	ごうふう	n	1	업풍				u	b	
 楮	ちょ	n	1	닥나무				u	b	
 楮	ちょ	n	2	저				u	b	
-盾	たて	n	1	방패			cls=@weapon name=+	u	b	
+盾	たて	n	1	방패			name=+ cls=@weapon	u	b	
 盾	たて	n	2	순				u	b	
 盾	たて	n	3	구실				u	b	
 極	きょく	n	1	극히				u	b	
@@ -55114,7 +55114,7 @@ ttt		n	1	ttt				u	b
 試錐	しすい	n	1	시추				u	b	
 試食	ししょく	n	1	시식				u	b	
 試飲	しいん	n	1	시음				u	b	
-詩	し	n	1	시			cls=@writing name=+	u	b	
+詩	し	n	1	시			name=+ cls=@writing	u	b	
 詩人	しじん	n	1	시인				u	b	
 詩体	したい	n	1	시의 형식				u	b	
 詩作	しさく	n	1	작시				u	b	
@@ -58622,7 +58622,7 @@ ttt		n	1	ttt				u	b
 鈍足	どんそく	n	2	둔족				u	c+np	from-names
 鈍重	どんじゅう	n	1	둔하다				u	b	
 鈍重	どんじゅう	n	2	둔중				u	b	
-鈴	すず	n	1	방울			cls=@attachment name=+	u	wl	
+鈴	すず	n	1	방울			name=+ cls=@attachment	u	wl	
 鈴	すず	n	2	령				u	b	
 鈴懸	すずかけ	n	1	플라타너스				u	wl	
 鈴懸	すずかけ	n	2	가사				u	b	
@@ -58671,7 +58671,7 @@ ttt		n	1	ttt				u	b
 鉄瓶	てつびん	n	2	철병				u	c+np	from-names
 鉄甲	てっこう	n	1	철갑				u	b	
 鉄石	てっせき	n	1	철석				u	b	
-鉄砲	てっぽう	n	1	총			cls=@firearm name=+	u	b	
+鉄砲	てっぽう	n	1	총			name=+ cls=@firearm	u	b	
 鉄筆	てっぴつ	n	1	철필				u	b	
 鉄筋	てっきん	n	1	철근				u	b	
 鉄管	てっかん	n	1	철관				u	b	
@@ -59026,7 +59026,7 @@ ttt		n	1	ttt				u	b
 長尺	ちょうじゃく	n	1	긴				u	b	
 長尺	ちょうじゃく	n	2	길이가 긴	next=の			u	b	
 長屋	ながや	n	1	연립 주택			name=+	u	b	
-長年	ながねん	n	1	오랜 세월			cls=@duration name=+	u	b	
+長年	ながねん	n	1	오랜 세월			name=+ cls=@duration	u	b	
 長年	ながねん	n	2	장년				u	b	
 長幼	ちょうよう	n	1	장유				u	b	
 長座	ちょうざ	n	1	장좌				u	b	
@@ -59092,7 +59092,7 @@ ttt		n	1	ttt				u	b
 長駆	ちょうく	n	1	장구				u	b	
 長髪	ちょうはつ	n	1	긴 머리				u	wl	
 長髪	ちょうはつ	n	2	장발				u	b	
-門	もん	n	1	문			cls=@opening name=+	u	b	
+門	もん	n	1	문			name=+ cls=@opening	u	b	
 門下	もんか	n	1	문하				u	b	
 門中	もんちゅう	n	1	문중				u	b	
 門人	もんじん	n	1	문하생				u	wl	
@@ -59624,7 +59624,7 @@ ttt		n	1	ttt				u	b
 隊商	たいしょう	n	1	대상				u	b	
 隊形	たいけい	n	1	대형				u	b	
 隊旗	たいき	n	1	대기				u	b	
-隊長	たいちょう	n	1	대장			cls=@person.role name=+	u	b	
+隊長	たいちょう	n	1	대장			name=+ cls=@person.role	u	b	
 階上	かいじょう	n	1	계단위				u	b	
 階下	かいか	n	1	아래층				u	b	
 階位	かいい	n	1	계위				u	b	
@@ -60288,7 +60288,7 @@ ttt		n	1	ttt				u	b
 霞網	かすみあみ	n	1	새그물				u	w	
 霞草	かすみそう	n	1	안개꽃				u	w	
 霞草	かすみそう	n	2	광대 나물				u	b	
-霧	きり	n	1	안개			cls=@weather name=+	u	b	
+霧	きり	n	1	안개			name=+ cls=@weather	u	b	
 霧	きり	n	2	무				u	b	
 霧中	むちゅう	n	1	무중				u	b	
 霧散	むさん	n	1	무산				u	b	

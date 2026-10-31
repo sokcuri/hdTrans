@@ -327,7 +327,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 角々しい	かどかどしい	adj	1	신경질적이다				u	w	
 金臭い	かなくさい	adj	1	쇳내가 많다				u	b	
 金臭い	かなくさい	adj	2	쇳내투성이다				u	b	
-可成	かなり	na	1	상당한	next=の		cls=@degree name=+	u	b	
+可成	かなり	na	1	상당한	next=の		name=+ cls=@degree	u	b	
 黴臭い	かびくさい	adj	1	퀴퀴하다				u	w	
 黴臭い	かびくさい	adj	2	곰팡내가 많다				u	b	
 黴臭い	かびくさい	adj	3	곰팡이 냄새가 나다				u	b	

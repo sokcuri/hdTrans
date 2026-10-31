@@ -603,7 +603,7 @@ ja	yomi	pos	sense	ko	cue	frame	feat	st	prov	note
 キャリパー	きゃりぱー	n	1	캘리퍼				u	c+np	from-names
 キューレット	きゅーれっと	n	1	큐렛				u	c+np	from-names
 キリム	きりむ	n	1	키림				u	c+np	from-names
-金	きん	n	1	킨			cls=@money name=+	u	c+nw	from-names
+金	きん	n	1	킨			name=+ cls=@money	u	c+nw	from-names
 きんき	きんき	n	1	킨키				u	c+np	from-names
 キンダー	きんだー	n	1	킨더				u	c+np	from-names
 ギミー	ぎみー	n	1	기미				u	c+np	from-names

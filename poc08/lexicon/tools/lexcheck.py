@@ -144,7 +144,7 @@ def main():
                         member[r['ja']].update(c for c in ancestors(v) if classes.get(c))
     parents_of = set(classes.values())
     FEATS = {'vol': {'+', '-'}, 'asp': {'state', 'activity', 'change', 'instant', 'type4'},
-             'te': {'go', 'eo', 'past', 'simple'}, 'name': {'+'}, 'anim': {'+', '-'}, 'ni': {'-'}, 'num': {'native', 'sino'}}
+             'te': {'go', 'eo', 'past', 'simple'}, 'name': {'+'}, 'pclass': {'posture', 'motion'}, 'anim': {'+', '-'}, 'ni': {'-'}, 'num': {'native', 'sino'}}
 
     def check_list(slot, vals, where, st):
         lits = [v for v in vals if not v.startswith('@') and v != '-']

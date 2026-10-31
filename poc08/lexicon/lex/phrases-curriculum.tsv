@@ -520,6 +520,10 @@ id	pattern	ko	cue	st	prov	note
 お疲れ様#s1	お疲れ様	수고하셨다		r	r	set phrase (STYLE §12)
 お疲れ様#s2	お疲れ様	수고했다	register=casual	r	r	set phrase (STYLE §12)
 お疲れ#s1	お疲れ	수고했다		r	r	set phrase (STYLE §12)
+心から#c1	心から	진심으로		r	r	心/こころ/n
+元気を出す#c1	元気を出す	힘내다		r	r	元気/げんき/n
+口にする#c1	口にする	말하다		r	r	口/くち/n
+{X:@food}を口にする#c1	{X:@food}を口にする	{X}을 먹다		r	r	口/くち/n
 大変な事になる#c1	大変な事になる	큰일이 나다		r	r	大変/たいへん/na
 大変な事#c1	大変な事	큰일		r	r	大変/たいへん/na
 どん引きする#c1	どん引きする	정떨어지다		r	r	引く/ひく/v5

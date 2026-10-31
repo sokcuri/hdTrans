@@ -76,7 +76,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 もう	もう	adv	もう	adverb	이제												y		3
 もっと	もっと	adv	もっと	adverb	더												y		1
 ゆっくり	ゆっくり	adv	ゆっくり	adverb	천천히												y		2
-一寸	ちょっと	adv	ちょっと	adverb	좀												y		2
+一寸	ちょっと	adv	ちょっと	adverb	좀												y		3
 一杯	いっぱい	adv	いっぱい	adverb	많이												y		2
 一番	いちばん	adv	一番	adverb	제일												y		1
 一緒	いっしょ	n	一緒	adverb	함께		@abstract										y		2
@@ -230,7 +230,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 妻	つま	n	妻	family	아내		@person.kin	+									y		1
 姉	ねえ	n	お姉さん	family	언니		@person.kin	+									y		1
 姉	あね	n	姉	family	언니		@person.kin	+									y		2
-娘	むすめ	n	娘	family	딸		@person.kin	+									y		3
+娘	むすめ	n	娘	family	딸		@person.kin	+									y		4
 家族	かぞく	n	家族	family	가족		@group	+									y		1
 弟	おとうと	n	弟	family	남동생		@person.kin	+									y		1
 息子	むすこ	n	息子	family	아들		@person.kin	+									y		1
@@ -251,7 +251,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 寿司	すし	n	寿司	food	초밥		@food										y		1
 弁当	べんとう	n	弁当	food	도시락		@food										y		1
 御飯	ごはん	n	ご飯	food	밥		@food|@meal										y		1
-料理	りょうり	n	料理	food	요리		@food|@activity										y		1
+料理	りょうり	n	料理	food	요리		@food|@activity		+	activity	go						y		1
 昼御飯	ひるごはん	n	昼ご飯	food	점심		@meal										y		1
 晩御飯	ばんごはん	n	晩ご飯	food	저녁		@meal										y		1
 朝御飯	あさごはん	n	朝ご飯	food	아침밥		@meal										y		1
@@ -266,7 +266,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 醤油	しょうゆ	n	醤油	food	간장		@seasoning										y		1
 野菜	やさい	n	野菜	food	채소		@food										y		1
 食べ物	たべもの	n	食べ物	food	음식		@food										y		1
-食事	しょくじ	n	食事	food	식사		@meal										y		1
+食事	しょくじ	n	食事	food	식사		@meal		+	activity	go						y		1
 鶏肉	けいにく	n	鶏肉	food	닭고기		@food										y		1
 いいえ	いいえ	intj	いいえ	greeting	아니요												y		2
 うん	うん	intj	うん	greeting	응												y		1
@@ -292,15 +292,15 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 ドラマ	どらま	n	ドラマ	hobby	드라마		@show										y		1
 パーティー	ぱーてぃー	n	パーティー	hobby	파티		@event										y		1
 ピアノ	ぴあの	n	ピアノ	hobby	피아노		@instrument										y		1
-散歩	さんぽ	n	散歩	hobby	산책		@activity										y		1
-旅行	りょこう	n	旅行	hobby	여행		@activity										y		1
+散歩	さんぽ	n	散歩	hobby	산책		@activity		+	activity	go						y		1
+旅行	りょこう	n	旅行	hobby	여행		@activity		+	activity	go						y		1
 映画	えいが	n	映画	hobby	영화		@show										y		1
 歌	うた	n	歌	hobby	노래		@music										y		1
 漫画	まんが	n	漫画	hobby	만화		@document										y		1
 番組	ばんぐみ	n	番組	hobby	프로그램		@show										y		1
 祭り	まつり	n	祭り	hobby	축제		@event										y		1
 絵	え	n	絵	hobby	그림		@picture										y		1
-試合	しあい	n	試合	hobby	시합		@competition										y		1
+試合	しあい	n	試合	hobby	시합		@competition		+	activity	go						y		1
 趣味	しゅみ	n	趣味	hobby	취미		@activity										y		2
 野球	やきゅう	n	野球	hobby	야구		@sport										y		1
 音楽	おんがく	n	音楽	hobby	음악		@music										y		1
@@ -315,18 +315,18 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 家	いえ	n	家	home	집		@house										y		2
 庭	にわ	n	庭	home	정원		@place										y		1
 手洗い	てあらい	n	お手洗い	home	화장실		@room										y		2
-掃除	そうじ	n	掃除	home	청소		@activity										y		1
+掃除	そうじ	n	掃除	home	청소		@activity		+	activity	go						y		1
 本棚	ほんだな	n	本棚	home	책장		@furniture										y		1
 机	つくえ	n	机	home	책상		@furniture										y		1
 椅子	いす	n	椅子	home	의자		@seat										y		1
-洗濯	せんたく	n	洗濯	home	빨래		@task										y		1
+洗濯	せんたく	n	洗濯	home	빨래		@task		+	activity	go						y		1
 玄関	げんかん	n	玄関	home	현관		@room										y		1
 窓	まど	n	窓	home	창문		@opening										y		1
 部屋	へや	n	部屋	home	방		@room										y		1
 階段	かいだん	n	階段	home	계단		@place										y		1
 電気	でんき	n	電気	home	전기		@thing										y		4
 風呂	ふろ	n	お風呂	home	목욕		@bath										y		2
-会話	かいわ	n	会話	language	대화		@activity										y		2
+会話	かいわ	n	会話	language	대화		@activity		+	activity	go						y		2
 外国語	がいこくご	n	外国語	language	외국어		@language										y		1
 字	じ	n	字	language	글자		@language										y		2
 平仮名	ひらがな	n	ひらがな	language	히라가나		@language										y		1
@@ -340,7 +340,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 財布	さいふ	n	財布	money	지갑		@container										y		1
 金	かね	n	お金	money	돈		@money										y		1
 丈夫	じょうぶ	na	丈夫	na-adj	튼튼하다	HA									ga=@thing		y		1
-上手	じょうず	na	上手	na-adj	잘하다	HA									ga=@person		y		1
+上手	じょうず	na	上手	na-adj	잘하다	HA						못하다			ga=@person		y		1
 下手	へた	n	下手	na-adj	서투르다										ga=@person		y		2
 不便	ふべん	n	不便	na-adj	불편하다										ga=@thing		y		2
 便利	べんり	n	便利	na-adj	편리하다										ga=@thing		y		2
@@ -415,17 +415,17 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 事	こと	n	こと	other	일		@abstract										y		2
 全部	ぜんぶ	n	全部	other	전부		@quantity										y		1
 名前	なまえ	n	名前	other	이름		@info										y		1
-心配	しんぱい	n	心配	other	걱정		@emotion										y		1
+心配	しんぱい	n	心配	other	걱정		@emotion		+	activity	go						y		1
 本当	ほんとう	n	本当	other	정말		@abstract										y		3
 物	もの	n	もの	other	것		@entity										y		2
 病気	びょうき	n	病気	other	병		@illness										y		1
-約束	やくそく	n	約束	other	약속		@plan										y		1
+約束	やくそく	n	約束	other	약속		@plan		+	activity	go						y		1
 終わり	おわり	n	終わり	other	끝		@abstract										y		1
-結婚	けっこん	n	結婚	other	결혼		@event										y		1
+結婚	けっこん	n	結婚	other	결혼		@event		+	change	past						y		1
 話	はなし	n	話	other	이야기		@topic										y		2
-説明	せつめい	n	説明	other	설명		@speech										y		1
-買い物	かいもの	n	買い物	other	쇼핑		@activity										y		1
-返事	へんじ	n	返事	other	대답		@speech										y		2
+説明	せつめい	n	説明	other	설명		@speech		+	activity	go						y		1
+買い物	かいもの	n	買い物	other	쇼핑		@activity		+	activity	go						y		1
+返事	へんじ	n	返事	other	대답		@speech		+	activity	go						y		2
 音	おと	n	音	other	소리		@sound										y		1
 お巡りさん	おまわりさん	n	お巡りさん	people	경찰관		@person.role	+									y		1
 人	ひと	n	人	people	사람		@person	+									y		1
@@ -490,7 +490,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 其処	そこ	n	そこ	pronoun	거기		@place										y		1
 其方	そちら	n	そちら	pronoun	그쪽		@direction										y		1
 彼	かれ	n	彼	pronoun	그		@person	+									y		1
-彼の	あの	adn	あの	pronoun	그												y		3
+彼の	あの	adn	あの	pronoun	저												y		3
 彼れ	あれ	n	あれ	pronoun	저것		@entity										y		1
 彼処	あそこ	n	あそこ	pronoun	저기		@place										y		1
 彼女	かのじょ	n	彼女	pronoun	그녀		@person	+									y		2
@@ -525,8 +525,8 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 ボールペン	ぼーるぺん	n	ボールペン	school	볼펜		@writing.tool										y		1
 中学	ちゅうがく	n	中学	school	중학교		@school										y		1
 作文	さくぶん	n	作文	school	작문		@document										y		1
-勉強	べんきょう	n	勉強	school	공부		@activity										y		1
-卒業	そつぎょう	n	卒業	school	졸업		@event										y		1
+勉強	べんきょう	n	勉強	school	공부		@activity		+	activity	go						y		1
+卒業	そつぎょう	n	卒業	school	졸업		@event		+	change	past						y		1
 問題	もんだい	n	問題	school	문제		@question										y		1
 大学	だいがく	n	大学	school	대학		@school|@organization										y		1
 学校	がっこう	n	学校	school	학교		@school										y		1
@@ -538,7 +538,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 生徒	せいと	n	生徒	school	학생		@person.role	+									y		1
 答え	こたえ	n	答え	school	답		@speech										y		2
 試験	しけん	n	試験	school	시험		@exam										y		1
-質問	しつもん	n	質問	school	질문		@question										y		1
+質問	しつもん	n	質問	school	질문		@question		+	activity	go						y		1
 辞書	じしょ	n	辞書	school	사전		@document										y		1
 鉛筆	えんぴつ	n	鉛筆	school	연필		@writing.tool										y		1
 高校	こうこう	n	高校	school	고등학교		@school										y		1
@@ -580,7 +580,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 薬	くすり	n	薬	thing	약		@medicine										y		1
 鍵	かぎ	n	鍵	thing	열쇠		@tool										y		1
 雑誌	ざっし	n	雑誌	thing	잡지		@document										y		1
-電話	でんわ	n	電話	thing	전화		@phone										y		1
+電話	でんわ	n	電話	thing	전화		@phone		+	activity	go						y		1
 鞄	かばん	n	かばん	thing	가방		@container										y		1
 さっき	さっき	n	さっき	time	아까		@time						-				y		1
 クリスマス	くりすます	n	クリスマス	time	크리스마스		@event										y		1
@@ -674,7 +674,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 自転車	じてんしゃ	n	自転車	transport	자전거		@vehicle										y		1
 船	ふね	n	船	transport	배		@vehicle										y		1
 車	くるま	n	車	transport	차		@vehicle										y		1
-運転	うんてん	n	運転	transport	운전		@activity										y		1
+運転	うんてん	n	運転	transport	운전		@activity		+	activity	go						y		1
 電車	でんしゃ	n	電車	transport	전철		@vehicle										y		1
 飛行機	ひこうき	n	飛行機	transport	비행기		@vehicle										y		1
 上がる	あがる	v5	上がる	verb	오르다	REU			+	change	eo				ga=@thing		y	五段-ラ行	9
@@ -691,12 +691,12 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 住む	すむ	v5	住む	verb	살다	L			+	activity	go				ga=@person ni=@place		y	五段-マ行	1
 作る	つくる	v5	作る	verb	만들다	L			+	activity	go				ga=@person o=@thing.made		y	五段-ラ行	13
 使う	つかう	v5	使う	verb	쓰다	EU			+	activity	go				ga=@person o=@thing		y	五段-ワア行	5
-借りる	かりる	v1	借りる	verb	빌리다	REG			+	change	past				ga=@person o=@thing ni=@person		y	上一段-ラ行	1
+借りる	かりる	v1	借りる	verb	빌리다	REG			+	change	go				ga=@person o=@thing ni=@person		y	上一段-ラ行	1
 働く	はたらく	v5	働く	verb	일하다	HA			+	activity	go				ga=@person		y	五段-カ行	2
 入る	はいる	v5	入る	verb	들어가다	REG			+	change	eo				ga=@person ni=@place		y	五段-ラ行	7
 入れる	いれる	v1	入れる	verb	넣다	REG			+	activity	go				ga=@person o=@thing ni=@container		y	下一段-ラ行	9
 出す	だす	v5	出す	verb	내다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	6
-出る	でる	v1	出る	verb	나가다	REG			+	change	eo				ga=@person o=@place		y	下一段-ダ行	8
+出る	でる	v1	出る	verb	나가다	REG			+	change	eo				ga=@person o=@place		y	下一段-ダ行	9
 出掛ける	でかける	v1	出かける	verb	나가다	REG			+	change	eo				ga=@person to=@person		y	下一段-カ行	1
 出来る	できる	v1	できる	verb	할 수 있다	EXIST			-	state	simple				ni=@person ga=@activity	が=을	y	上一段-カ行	3
 分かる	わかる	v5	分かる	verb	알다	L			-	state	go	모르다			ga=@info	が=을	y	五段-ラ行	3
@@ -767,7 +767,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 直す	なおす	v5	直す	verb	고치다	REG			+	activity	go				ga=@person o=@thing		y	五段-サ行	2
 着く	つく	v5	着く	verb	도착하다	HA			-	change	eo				ga=@person ni=@place		y	五段-カ行	3
 着る	きる	v1	着る	verb	입다	REG			+	change	go				ga=@person o=@clothing		y	上一段-カ行	1
-知る	しる	v5	知る	verb	알다	L			-	change	go	모르다			ga=@person o=@info		y	五段-ラ行	1
+知る	しる	v5	知る	verb	알다	L			-	change	simple	모르다			ga=@person o=@info		y	五段-ラ行	1
 磨く	みがく	v5	磨く	verb	닦다	REG			+	activity	go				ga=@person o=@thing		y	五段-カ行	2
 空く	あく	v5	空く	verb	비다	REG			-	change	eo				ga=@place		y	形容詞	3
 立つ	たつ	v5	立つ	verb	서다	REG			+	change	eo				ga=@person ni=@place		n	五段-タ行	6
@@ -799,7 +799,7 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 調べる	しらべる	v1	調べる	verb	조사하다	HA			+	activity	go				ga=@person o=@thing|@info		y	下一段-バ行	2
 負ける	まける	v1	負ける	verb	지다	REG			-	change	go				ga=@person ni=@person		y	下一段-カ行	2
 貰う	もらう	v5	もらう	verb	받다	REG			+	change	past				ga=@person ni=@person o=@thing	に=에게서	y	五段-ワア行	1
-買う	かう	v5	買う	verb	사다	REG			+	change	past				ga=@person o=@thing		y	五段-ワア行	1
+買う	かう	v5	買う	verb	사다	REG			+	change	go				ga=@person o=@thing		y	五段-ワア行	1
 貸す	かす	v5	貸す	verb	빌려주다	REG			+	change	past				ga=@person ni=@person o=@thing		y	五段-サ行	1
 走る	はしる	v5	走る	verb	달리다	REG			+	activity	go				ga=@person|@animal|@vehicle		y	五段-ラ行	7
 起きる	おきる	v1	起きる	verb	일어나다	REG			+	change	go				ga=@person		y	上一段-カ行	5
@@ -828,11 +828,13 @@ ja	yomi	pos	orth	field	ko	kcls	cls	anim	vol	asp	te	neg	ni	num	args	frame	grid	ct
 飲む	のむ	v5	飲む	verb	마시다	REG			+	activity	go				ga=@person o=@drink		y	五段-マ行	6
 驚く	おどろく	v5	驚く	verb	놀라다	REG			-	change	past				ga=@person		y	五段-カ行	1
 鳴く	なく	v5	鳴く	verb	울다	L			+	activity	go				ga=@animal		y	五段-カ行	1
-バイト	ばいと	n	バイト	work	아르바이트		@activity										y		2
-仕事	しごと	n	仕事	work	일		@task										y		1
+バイト	ばいと	n	バイト	work	아르바이트		@activity		+	activity	go						y		2
+仕事	しごと	n	仕事	work	일		@task		+	activity	go						y		1
 会社	かいしゃ	n	会社	work	회사		@organization										y		1
 会社員	かいしゃいん	n	会社員	work	회사원		@person.role	+									y		1
 社長	しゃちょう	n	社長	work	사장		@person.role	+									y		1
+トウキョウ	とうきょう	pn	東京	place	도쿄		@town										y		1
+オオサカ	おおさか	pn	大阪	place	오사카		@town										y		1
 帰る	かえる	v5	帰る	verb	돌아가다	REG			+	change	eo				ga=@person ni=@place		y	五段-ラ行	3
 如何	どう	adv	どう	question	어떻게												y		2
 如何して	どうして	adv	どうして	question	왜												y		1
