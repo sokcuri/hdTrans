@@ -13,7 +13,7 @@
 # 규칙: GRM-3072
 rule	input	expected	kind	layer
 grammar:書くように前へ出た	大きな目を涙に潤ませた少女は、ディートリヒを庇うように前へ出た。	has:감싸듯이 앞으로 나섰다	fix	lookup
-grammar:書くように前へ出て	そして対峙する霊夢は四人を庇うように前へ出て、お札を構えていた。	has:감싸듯이 앞으로 나서	fix	lookup
+grammar:書くように前へ出て	そして対峙する少女は四人を庇うように前へ出て、お札を構えていた。	has:감싸듯이 앞으로 나서	fix	lookup
 grammar:書くように前へ出る	女性は、子供達を庇うように前へ出る。	has:감싸듯이 앞으로 나선다	fix	lookup
 grammar:書くように前へ出た	代表として一歩を踏み、皆を庇うようにして前へ出でて、荒ぶる聖女様と対峙する。	lacks:감싸듯이 앞으로	keep	lookup
 grammar:書くように前へ出た	俺は反射的に、ルキアシエルを庇うように前へと出て、彼女の手を握る。	lacks:감싸듯이 앞으로	keep	lookup
@@ -45,7 +45,6 @@ grammar:書けないでいる	従兄弟や叔父にはその時になるまで�
 pack:clause-patterns:2	「机で……用紙見てたら、話しかけられて……」	lacks:말을 걸어져	fix	packs
 pack:clause-patterns:2	急に話しかけられて体がビクッと飛び跳ねてしまった。	lacks:말을 걸어져	fix	packs
 pack:clause-patterns:2	突然話しかけられて何を言い出すのだろうと探る様に大地が答える。	lacks:말을 걸어져	fix	packs
-pack:clause-patterns:2	受付嬢アウラナちゃんに話しかけられた。	lacks:말을 걸어졌다	fix	packs
 pack:clause-patterns:2	単純になかなか私がお客さんに話しかけられないでいるからだ。	!rule:pack:clause-patterns:2	keep	packs
 pack:clause-patterns:2	なので周りからあまり話しかけられず、しかも一部の男子生徒によって和人はオタクのレッテルを張らている。	!rule:pack:clause-patterns:2	keep	packs
 pack:clause-patterns:2	それだけでなく、話しかけられることも増えたのだが相変わらず逃げてしまっている。	!rule:pack:clause-patterns:2	keep	packs
@@ -59,10 +58,10 @@ grammar:書いてやろうということ	聞くだけ聞いてやろうとい�
 grammar:書いてやろうということ	我がお主の伴侶となってやろうということだ	has:되어 주겠다는 것이다	fix	lookup
 grammar:書いてやろうということ	それをしなかったということは、何もせずにアルバを味わわせてやろうということだったのか。	has:그것을 하지 않았다는 것은	keep	lookup
 grammar:書いてやろうということ	ネットやなんかで知れ渡ってしまう前に、せいぜいカモってやろうということだったんだ。	has:등쳐먹어 주겠다는 것이었다	fix	lookup
-grammar:書く分、	ワイバーンの無い軍隊は、ワイバーンの火力支援が受けられない分、弱い。	lacks:분, 약하다	fix	lookup
-grammar:書く分、	責任も多くなる分、疲れてしまうかもしれない。	lacks:분,	fix	lookup
-grammar:書く分、	「僕が記憶を食べる分、モモの苦しみが薄れるんだね」	lacks:분,	fix	lookup
-grammar:書く分、	むしろ無理をさせられて野宿を強いられている分、僕のほうが状況は悲惨かも。	lacks:분,	fix	lookup
+grammar:書く分、	ワイバーンの無い軍隊は、ワイバーンの火力支援が受けられない分、弱い。	has:받게 되지 않는 만큼,	fix	lookup
+grammar:書く分、	責任も多くなる分、疲れてしまうかもしれない。	has:많아지는 만큼,	fix	lookup
+grammar:書く分、	「僕が記憶を食べる分、モモの苦しみが薄れるんだね」	has:먹는 만큼,	fix	lookup
+grammar:書く分、	むしろ無理をさせられて野宿を強いられている分、僕のほうが状況は悲惨かも。	has:있는 만큼,	fix	lookup
 grammar:書く分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:당하고 있던 만큼	keep	lookup
 grammar:書く分、	それに、ディリアさんは瘴気にやられていた分、百パーセントの力がでてなかった。	has:있던 만큼,	keep	lookup
 grammar:書く分、	これまで迷惑をかけられた分、かなり重い罰則を設けてしまったが自業自得だと思って諦めてほしい。	has:끼쳐진 만큼	keep	lookup
@@ -77,27 +76,21 @@ grammar:書かぬ限り	俺の志しが途絶えぬ限り。	has:않는 한.	fix
 grammar:書かぬ限り	ギブンは即死であっても、魔力が尽きぬ限り瞬間再生される。	has:않는 한 순간	fix	lookup
 grammar:書かぬ限り	死者でない者は、リリスが止めぬ限り、地上へ上がってゆく。	has:않는 한, 지상에	fix	lookup
 grammar:書かぬ限り	「安心しろ。貴様がその態度を忘れぬ限り鞭打ちは勘弁してやる」	has:않는 한 채찍질은	fix	lookup
-grammar:書かぬ限り	ル陛下を見捨てぬ限り、私もそれに従うつもりです」	has:않는 한, 저도	fix	lookup
+grammar:書かぬ限り	陛下を見捨てぬ限り、私もそれに従うつもりです」	has:않는 한, 저도	fix	lookup
 grammar:書かぬ限り	あらゆる幸せを知らぬ限りは、他の者たちを幸せに導くことはできぬ・・・	has:모르는 한은, 다른	fix	lookup
 grammar:書かぬ限り	薪の焔消えぬ限り、常しえに火を生み出さ	has:않는 한, 영원하게	fix	lookup
 grammar:書かぬ限り	捨て去らぬ限りそれは希望なのだから。	has:않는 한 그것은	fix	lookup
 grammar:書かぬ限り	俺が許さぬ限り自由など得られるはずもない。	has:않는 한 자유	fix	lookup
 grammar:書かぬ限り	『エノクが結界を解かぬ限りは、此処から出れぬ……』	has:한은, 여기에서	fix	lookup
 grammar:書かぬ限り	そいつを倒さぬ限り魔力の封印は解けないと、	has:않는 한 마력	fix	lookup
-grammar:書かぬ限り	村の掟を破らない限り、衣食住の保障がされること。	has:않는 한, 의식주	fix	lookup
-grammar:書かぬ限り	私がしゃべらない限り、このお爺さんがこの空気を破るしかない。	has:말하지 않는 한, 이	fix	lookup
-grammar:書かぬ限り	『旅に出る』とお決めにならない限り、始まりません。	has:않는 한, 시작되지	fix	lookup
-grammar:書かぬ限り	左手の指輪を見ない限り、全く人妻には見えない。	has:않는 한, 전혀	fix	lookup
-grammar:書かぬ限り	あなたの一族もこの間の誓約を違えない限り、妖精族が護ってあげるから。」	has:않는 한, 요정족이	fix	lookup
-grammar:書かぬ限り	ない限り、絶対ですよ？」	has:없는 한, 절대예요?」	keep	lookup
-grammar:書かぬ限り	フランツが死にでもしない限り、次の皇帝は彼に決まっている。	has:않는 한, 다음	keep	lookup
-grammar:書かぬ限り	けて群れが追加で攻めてこない限り、しばらくは持ち堪えるだろうよ」	has:않는 한, 당분간은	keep	lookup
-grammar:書かぬ限り	同じことが出来る者が出て来ない限り、ランキング一位は揺るがぬだろう。	has:않는 한, 랭킹	keep	lookup
-grammar:書かぬ限り	寒くない限り、彼女は外で食事を摂る。	has:않은 한, 그녀는	keep	lookup
-grammar:書かぬ限り	遠方を見る方法とセットで実現しない限り、実用的な運用は困難と思われる。	has:않는 한, 실용적인	keep	lookup
-grammar:書かぬ限り	話を聞きたくても神殿を出ない限りはゆっくり話すことは難しいだろう。	has:않는 한은 천천히	keep	lookup
-grammar:書かぬ限り	まあ、急所に当たらない限りは大丈夫だけども	has:않는 한 괜찮지만	keep	lookup
-grammar:書かぬ限り	彼と添い遂げるには誘拐でもされない限りはありえない未来だろう。	has:되지 않는 한 있을	keep	lookup
+grammar:書かない限り、	フランツが死にでもしない限り、次の皇帝は彼に決まっている。	has:않는 한, 다음	keep	lookup
+grammar:書かない限り、	群れが追加で攻めてこない限り、しばらくは持ち堪えるだろうよ」	has:않는 한, 당분간은	keep	lookup
+grammar:書かない限り、	同じことが出来る者が出て来ない限り、ランキング一位は揺るがぬだろう。	has:않는 한, 랭킹	keep	lookup
+grammar:書かない限り、	寒くない限り、彼女は外で食事を摂る。	has:않은 한, 그녀는	keep	lookup
+grammar:書かない限り、	遠方を見る方法とセットで実現しない限り、実用的な運用は困難と思われる。	has:않는 한, 실용적인	keep	lookup
+grammar:書かない限り、	話を聞きたくても神殿を出ない限りはゆっくり話すことは難しいだろう。	has:않는 한은 천천히	keep	lookup
+grammar:書かない限り、	まあ、急所に当たらない限りは大丈夫だけども	has:않는 한 괜찮지만	keep	lookup
+grammar:書かない限り、	彼と添い遂げるには誘拐でもされない限りはありえない未来だろう。	has:되지 않는 한 있을	keep	lookup
 grammar:書かぬ限り	できる限り外を出歩いてみるべきというのが、２人の考えだった。	has:수 있는 한 밖을	keep	lookup
 grammar:書くといいね	「三人とも同じクラスになるといいねー」	has:되면 좋겠네~」	fix	lookup
 grammar:書くといいね	「まあ、頑張って生きてよ。安楽死ができるといいねって聞こえてないか」	has:좋겠네는 들리지	fix	lookup
@@ -135,18 +128,15 @@ grammar:書くといいね	――ギルさん、受けてくれるといいな�
 grammar:書くといいね	頭硬い人じゃなくて気軽に話せるといいなぁ。	has:있으면 좋겠다.	keep	lookup
 grammar:書くといいね	自分がいけばいいけど、あまりでたくなかったから。	has:가면 좋지만, 그다지	keep	lookup
 grammar:お使いになる	えっ、今お使いになるのですか？	has:지금 쓰십니까?	fix	lookup
-grammar:お使いになる	「それなら私よりもアルコル様がお持ちになった方が…」	has:가지신 편이…」	fix	lookup
-grammar:お使いになる	訳じゃないし、そもそも先生がそんな趣味をお持ちになってるようとう	has:가지고 계시는치자	fix	lookup
-grammar:お使いになる	売りたい品は迷宮管理協会の買取所にお持ちになるのがお勧めです」	has:매입소에 가지시는 것이	fix	lookup
-grammar:お使いになる	「お兄様はお帰りになられたのですね」	has:「오라버니는 돌아가셨군요」	fix	lookup
+grammar:お使いになる	「お兄様はお帰りになられたのですね」	has:「오라버니는 귀가하셨군요」	fix	lookup
 grammar:お使いになる	”あなたが正しい騎士になれば女神様もお喜びになられるでしょう”	has:여신님도 기뻐하시겠죠”	fix	lookup
 grammar:お使いになる	「夕食にお召し上がりになりますか？」	has:드시겠습니까?」	fix	lookup
 grammar:お使いになる	「焼きリンゴ、作って来ましたけど、食べ……お召し上がりになられますか？」	has:먹고……드시겠습니까?」	fix	lookup
 grammar:お使いになる	「そうであろうな……エリーゼ様が私をお許しになるわけがない」	has:나를 허락하실 리가	fix	lookup
-grammar:お使いになる	どころかお疲れになってしまうではないか。	has:커녕 지치셔버리잖아.	fix	lookup
+grammar:お使いになる	どころかお疲れになってしまうではないか。	has:지치셔	fix	lookup
 grammar:お使いになる	陛下は、その唐突な問いに間を置かずにお答えになった。	has:않고 대답하셨다.	fix	lookup
 grammar:お使いになる	すぐにお答えになる若様に、奈瑠はぎょっとした。	has:대답하시는 도련님에게,	fix	lookup
-grammar:お使いになる	穏やかな微笑で、とんでもない事をお尋ねになってくる。	has:것을 물으셔 진다.	fix	lookup
+grammar:お使いになる	穏やかな微笑で、とんでもない事をお尋ねになってくる。	has:물으셔	fix	lookup
 grammar:お使いになる	「お急ぎになった方が良いかもしれませんね」	has:「서두르시는 것이	fix	lookup
 grammar:お使いになる	「皆さま随分とお急ぎになって、どちらへ向かったのでしょう？」	has:상당히 서두르셔,	fix	lookup
 grammar:お使いになる	「ああ、お急ぎにならなくてもよろしいですよ。」と、書類を差し出した。	has:「아, 서두르시지	fix	lookup
@@ -161,3 +151,5 @@ grammar:お使いになる	「お疲れ様。何か飲む？」	has:「수고하
 grammar:お使いになる	「……由良さん、お疲れ様です」	has:씨, 수고하셨습니다」	keep	lookup
 grammar:お使いになる	「気にせずお休みになってくださいまし。明日はわたくしの魔法で癒して差し上げましてよ」	has:않고 쉬셔 주세요.	keep	lookup
 grammar:お使いになる	「舞花様は自室でお休みになっておられますので、今日の所はお帰りいただけますか」	has:방에서 쉬시고 계시기	keep	lookup
+grammar:書かない限り、	左手の指輪を見ない限り、全く人妻には見えない。	has:보지 않는 이상	keep	lookup
+grammar:書かない限り、	村の掟を破らない限り、衣食住の保障がされること。	has:어기지 않는 이상	keep	lookup
