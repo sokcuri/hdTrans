@@ -375,6 +375,13 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             r.target = target;
             r.global = Register(r);
             table.rows.push_back(std::move(r));
+            for (std::size_t b = 0; b < c.befores.size(); b++) {
+                const std::string_view before = c.befores[b];
+                const int pattern = static_cast<int>(table.collocPatterns.size());
+                table.collocPatterns.emplace_back(static_cast<int>(table.collocs.size()), static_cast<int>(b));
+                if (before.empty()) table.collocsSlotFirst.push_back(pattern);
+                else table.collocsByLead[std::string(before.substr(0, hdTrans::text::DecodeRune(before).size))].push_back(pattern);
+            }
             table.collocs.push_back(std::move(c));
             return;
         }

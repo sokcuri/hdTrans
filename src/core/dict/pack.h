@@ -28,6 +28,7 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "core/dict/user_text.h"
@@ -90,6 +91,12 @@ struct PackTable {
     std::unordered_map<std::string, std::vector<std::string>, StringHash, std::equal_to<>> classes; // lemma → @classes
     std::unordered_map<std::string, std::string, StringHash, std::equal_to<>> ids;                  // row id → file:line
     std::vector<Colloc> collocs;  // in load order
+    // The patterns of the collocs, (colloc, before) in load order: a pattern with text before its
+    // slot under the first letter of that text, which the first word of a span starts with; a slot
+    // first (no text before it) under none. Indexes into collocPatterns.
+    std::vector<std::pair<int, int>> collocPatterns;
+    std::unordered_map<std::string, std::vector<int>, StringHash, std::equal_to<>> collocsByLead;
+    std::vector<int> collocsSlotFirst;
 
     bool Empty() const { return rows.empty(); }
     // The depth of a class (a root is 1); 0 for an unknown class.
