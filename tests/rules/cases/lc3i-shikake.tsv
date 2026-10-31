@@ -1,0 +1,44 @@
+# 규칙: GRM-201, LEX-229
+rule	input	expected	kind	layer
+cx:lc3i-shikake:20	って発狂しかけたっけ。	has:발광할 뻔했나	fix	rewrites
+cx:lc3i-shikake:20	形成しかけた闘気の剣を収める。	has:형성할 뻔한	fix	rewrites
+cx:lc3i-shikake:20	そんな、とメリザンドは放心しかけた。	has:방심할 뻔했다	fix	rewrites
+cx:lc3i-shikake:20	特に誰もいない…そう認識しかけたその時、	has:인식할 뻔한	fix	rewrites
+cx:lc3i-shikake:20	一瞬、同意しかけた野乃花だったが、首を振る。	has:동의할 뻔한	fix	rewrites
+cx:lc3i-shikake:20	ジグソー・パズル「一方が逝去しかけたんですが」	has:서거할 뻔했습니다만	fix	rewrites
+cx:lc3i-shikake:20	審判が宣告しかけたとき、俺の横を旋風が駆け抜けた。	has:선고할 뻔했을 때	fix	rewrites
+cx:lc3i-shikake:20	彼が何者か、ようやく理解しかけた一瞬、僕は目にした。	has:이해할 뻔한	fix	rewrites
+cx:lc3i-shikake:20	中央部に殺到しかけた兵数名がつんのめるように倒れていく。	has:쇄도할 뻔한 병	fix	rewrites
+cx:lc3i-shikake:20	今日だって自身の迂闊な発言によりノワールが魔法を暴走しかけた。	has:폭주할 뻔했다	fix	rewrites
+cx:lc3i-shikake:20	隊士の荒木漆黒は、崩壊しかけた本部内の保管庫で寂箱を探し始めた。	has:붕괴할 뻔한	fix	rewrites
+cx:lc3i-shikake:20	納得しかけた顔が歪んでたけど、検品が終了したら速攻店から追い出した。	has:납득할 뻔한 얼굴이	fix	rewrites
+cx:lc3i-shikake:20	彼女の肉穴を清めているときに思わず再び発情しかけたが、なんとか抑える。	has:발정할 뻔했지만	fix	rewrites
+cx:lc3i-shikake:10	否定しかけた自分に驚く。	has:부정하려고 한	fix	rewrites
+cx:lc3i-shikake:10	拒否しかけた心紅が、真冬の様子を窺ってくる。	has:거부하려고 한 심홍이	fix	rewrites
+cx:lc3i-shikake:10	僕が十八番の土下座を披露しかけたタイミング。	has:피로하려고 한	fix	rewrites
+cx:lc3i-shikake:10	俺が抗議しかけたところで、プシューと情けない音がした。	has:항의하려고 했더니	fix	rewrites
+cx:lc3i-shikake:10	質問しかけたところで、成川は雛子の足を踏んづけてきた。	has:질문하려고 했더니	fix	rewrites
+cx:lc3i-shikake:10	渋く久我が反論しかけた時、久我の意識は、不意に一時停止した。	has:반론하려고 했을 때	fix	rewrites
+cx:lc3i-shikake:10	︿明星﹀を召還しかけたものの、愛美は美奈のその言葉で気勢を削がれた。	has:소환하려고 했지만	fix	rewrites
+cx:lc3i-shikake:10	雪ツ木は否定しかけたが、エニトリューグは笑って「役得では」と言ってきた。	has:부정하려고 했지만	fix	rewrites
+cx:lc3i-shikake:20	突然話しかけるなよ	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	逆に男のほうが恐怖しかけていた。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	期待しかける心を押し殺し、慎重に尋ねた。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	落下しかける中、クリストフは蘭丸を見上げる。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	風化しかけていた甘い記憶が蘇り、とたんに気分が軽くなる。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	あら、お兄様が幾人かの女性を篭絡しかけている事実を含めてかしら	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	確かに、とその言葉に納得しかけるが、すぐに不可能であることに気が付く。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	でも今話しかけたら起きちゃうもんな。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	御者の仕事に戻る前に、とメルにもう一度話しかけた。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:20	俺は騎士達が去ったあと、アロッタにもう一度話しかけた。	!rule:cx:lc3i-shikake:20	keep	rewrites
+cx:lc3i-shikake:10	反論しかけるサーシャが、	!rule:cx:lc3i-shikake:10	keep	rewrites
+cx:lc3i-shikake:10	反論しかけるスカーレットに、私は首を振る。	!rule:cx:lc3i-shikake:10	keep	rewrites
+cx:lc3i-shikake:10	リリィが同行の経緯を説明しかけるが、それを待たずにラグードは自ら首を横に振った。	!rule:cx:lc3i-shikake:10	keep	rewrites
+cx:lc3i-shikake:20	確かに……と、一瞬納得しかけたが違和感を覚え	has:납득할 뻔했지만	fix	rewrites
+cx:lc3i-shikake:20	自分は宙に浮いている――と勘違いしかけたが違った。	has:착각할 뻔했지만	fix	rewrites
+lookup:kana-keta	俺は紙切れに記された９けたの数字を入力し、電話をかけた	has:9 자릿수의 숫자	keep	lookup
+lookup:kana-keta	３けたの番号に電話をする	has:3 자릿수의 번호	keep	lookup
+lookup:kana-keta	ファーニア姫の高貴さと威厳はけたが違う。	has:자릿수가 다르다	keep	lookup
+lookup:kana-keta	が、相手はけたが違いすぎる。	has:자릿수가 너무 다르다	keep	lookup
+lookup:kana-keta	ほんの一瞬のことではあるが、ヘスは危うく昏倒しかけた。	lacks:자릿수	fix	lookup
+lookup:kana-keta	それもあって一時期は友好関係が破綻しかけたとの話だ。	lacks:자릿수	fix	lookup

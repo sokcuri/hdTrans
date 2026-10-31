@@ -58,6 +58,7 @@ const dict::Snapshot* Dictionary() {
          "こう\t이렇게\tN311\t\t\tGN\t36\n"
          "こう\t이러%A1@\tG8U0\t\t\tGN\t37\n"
          "一人立ち\t독립\tI110\t\tHd\tGN\t38\n"
+         "気付いたら\t정신을 차려 보니\tE300\t\t\tGN\t190\n"
          "一人\t한 사람\tN110\t\t\tGN\t41\n"
          "君と\t군과\tN110\tQPN\t\tGN\t42\n"
          "君と\t너와\tN110\t\t\tGN\t43\n"
@@ -179,7 +180,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{51});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{52});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -435,6 +436,19 @@ HD_TEST(constraint_shika_before_negative) {
         {"まあしかしねえ", "しかしねえ", "しかし", "하지만"},
         {"まあしかしずいぶん", "しかしずいぶん", "しかし", "하지만"},
         {"まあしかしぬるいな", "しかしぬるいな", "しかし", "하지만"},
+    });
+}
+
+// A word in たら before しい, しく or しかっ leaves its ら to らしい (気付いたらしい: 気付いた + らしい).
+HD_TEST(constraint_tara_before_shii) {
+    CheckCases({
+        {"気付いたらしい", "気付いたらしい", "気付いたら", ""},
+        {"気付いたらしく", "気付いたらしく", "気付いたら", ""},
+        {"気付いたら朝", "気付いたら朝", "気付いたら", "정신을 차려 보니"},
+        {"気付いたらすぐ", "気付いたらすぐ", "気付いたら", "정신을 차려 보니"},
+        {"気付いたらしき", "気付いたらしき", "気付いたら", ""},
+        {"気付いたらしきりに", "気付いたらしきりに", "気付いたら", "정신을 차려 보니"},
+        {"気付いたらしきたり", "気付いたらしきたり", "気付いたら", "정신을 차려 보니"},
     });
 }
 
