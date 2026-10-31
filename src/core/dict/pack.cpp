@@ -7,7 +7,9 @@
 #include <mutex>
 #include <set>
 
+#include "core/dict/classes.h"
 #include "core/output/families.h"
+#include "core/text/utf8.h"
 #include "core/userdict/compile.h"
 
 namespace hdTrans::dict {
@@ -90,9 +92,21 @@ int Register(const PackRow& r) {
     return id;
 }
 
+// The class digit of the words of a pack pos (part code byte 1), for the rows of lemma * and @class.
+char PosDigit(std::string_view pos) {
+    if (pos == "v") return '4';
+    if (pos == "adj") return '7';
+    if (pos == "na") return '8';
+    if (pos == "p") return '2';
+    if (pos == "adv") return '3';
+    if (pos == "intj") return '0';
+    if (pos == "n") return '1';
+    return 0;
+}
+
 // The values a cue atom of these slots may take.
 bool KnownValue(std::string_view slot, std::string_view v) {
-    static constexpr std::string_view kForms[] = {"ta", "neg", "te", "te-request", "vol", "cop", "attr", "adv"};
+    static constexpr std::string_view kForms[] = {"ta", "neg", "nja", "te", "te-request", "vol", "cop", "attr", "adv"};
     static constexpr std::string_view kVoices[] = {"none", "passive", "potential", "respectful", "spontaneous"};
     static constexpr std::string_view kRegisters[] = {"polite", "casual", "plain"};
     auto in = [&](const auto& set) { return std::find(std::begin(set), std::end(set), v) != std::end(set); };
@@ -206,7 +220,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             a.slot = atom.substr(0, eq);
             constexpr std::string_view kSlots[] = {"subj", "obj",  "dat", "loc",  "with", "from",     "to",       "arg",
                                                    "head", "mod",  "pred", "next", "after", "form",   "register", "domain",
-                                                   "main.vol", "voice"};
+                                                   "main.vol", "voice", "final"};
             if (std::find(std::begin(kSlots), std::end(kSlots), a.slot) == std::end(kSlots))
                 return fail("cue slot " + userdict::internal::Quote(a.slot) + " is not one of the cue DSL");
             for (const std::string_view v : Split(atom.substr(eq + 1), '|')) {
@@ -214,7 +228,8 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
                     return fail("cue value " + userdict::internal::Quote(v) + " of " + a.slot + " is not one the host reads");
                 a.values.emplace_back(v);
             }
-            if (a.slot == "voice" && r.slot != PackSlot::Voice) return fail("a voice= atom is read on voice rows only");
+            if (a.slot == "voice" && (r.slot == PackSlot::Sense || r.slot == PackSlot::Name))
+                return fail("a voice= atom is read on voice, polarity and tense rows only");
             r.atoms.push_back(std::move(a));
         }
         const bool word = r.slot == PackSlot::Sense || r.slot == PackSlot::Name;
@@ -230,11 +245,26 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         if (r.slot == PackSlot::Voice && target.find(':') != std::string_view::npos &&
             (lexeme.empty() || (pos != "v" && pos != "v1" && pos != "v5")))
             return fail("a voice verb (" + userdict::internal::Quote(target) + ") needs a verb row and a Korean verb");
-        if ((r.slot == PackSlot::Polarity || r.slot == PackSlot::Tense) &&
+        // A target - keeps the slot as the chain decided it: the row wins over less specific rows and writes nothing.
+        const bool keep = target == "-";
+        if ((r.slot == PackSlot::Polarity || r.slot == PackSlot::Tense) && !keep &&
             output::kFormCodes.find(target.front()) == std::string_view::npos)
             return fail("ending " + userdict::internal::Quote(target) + " does not start with a form code (0-9, A, B)");
-        if (!word) r.target = r.slot == PackSlot::Voice ? voice : target;
+        if (!word || keep) r.target = r.slot == PackSlot::Voice ? voice : target;
         const bool unconjugated = pos == "p" || pos == "adv";
+        // lemma * is every word of the pos, lemma @class every word of that pack class (CheckPackClasses).
+        if (lemma == "*" || lemma.starts_with("@")) {
+            if (word && !keep) return fail("a sense or name row names its lemma (lemma * and @class write endings, voices or -)");
+            if (r.slot == PackSlot::Voice && !lexeme.empty()) return fail("a voice verb needs a lemma");
+            if (lemma.starts_with("@")) r.lemmaClass = lemma;
+            r.classDigit = PosDigit(pos);
+            if (r.classDigit == 0)
+                return fail("pos " + userdict::internal::Quote(pos) + " of lemma * or @class, want v (not v1, v5), adj, na, n, p, adv or intj");
+            r.global = Register(r);
+            table.open[OpenIndex(r.slot, r.classDigit)].push_back(static_cast<int>(table.rows.size()));
+            table.rows.push_back(std::move(r));
+            return;
+        }
         if (r.colloc) {
             // read for the format, not applied: no key
             r.target = target;
@@ -244,7 +274,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
         }
         for (const std::string_view jp : Split(lemma, '|')) {
             if (r.slot == PackSlot::Name && castOff.contains(jp)) continue;
-            std::string_view kr = word ? target : ModelTarget(pos);
+            std::string_view kr = word && !keep ? target : ModelTarget(pos);
             bool adjective = word && kr.ends_with("하다") && pos == "n";
             if (adjective) kr = kr.substr(0, kr.size() - std::string_view("하다").size());
             adjective = adjective && !kr.empty();
@@ -262,7 +292,7 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             }
             one.key = recs[0].key;
             one.classDigit = pos == "p" ? '2' : pos == "adv" ? '3' : recs[0].part.size() > 1 ? recs[0].part[1] : 0;
-            if (word) one.target = recs[0].target;
+            if (word && !keep) one.target = recs[0].target;
             one.adjective = adjective;
             one.global = Register(one);
             table.byKey[one.key].push_back(static_cast<int>(table.rows.size()));
@@ -306,11 +336,43 @@ void CheckPackClasses(PackTable& table, std::vector<PackError>& errors) {
     for (const auto& [lemma, own] : table.classes)
         for (const std::string& c : own)
             if (!declared(c)) errors.push_back({"pack-classes", 0, "the class " + c + " of " + lemma + " is not a class"});
-    for (const PackRow& r : table.rows)
+    // The keys of the members of a lemma class: a pack class, else a set of classes.tsv (its name without @).
+    const auto addKeys = [](PackRow& r, std::string_view lemma) {
+        std::vector<std::string_view> keys{lemma};
+        if (lemma.ends_with("する")) keys.push_back(lemma.substr(0, lemma.size() - std::string_view("する").size()));
+        // without its last kana: the stem of a verb (気づ|く) or of an adjective (高|い)
+        std::size_t lastStart = 0;
+        for (std::size_t at = 0; at < lemma.size();) {
+            const std::size_t size = text::DecodeRune(lemma.substr(at)).size;
+            if (size == 0) break;
+            lastStart = at;
+            at += size;
+        }
+        if (lastStart > 0) keys.push_back(lemma.substr(0, lastStart));
+        for (const std::string_view k : keys)
+            if (!k.empty()) r.lemmaKeys[std::string(k)].emplace_back(lemma);
+    };
+    for (PackRow& r : table.rows) {
+        if (r.lemmaClass.empty()) continue;
+        if (declared(r.lemmaClass)) {
+            for (const auto& [lemma, own] : table.classes)
+                if (table.Member(lemma, r.lemmaClass)) addKeys(r, lemma);
+            continue;
+        }
+        const ClassId builtin = ClassId::Of(std::string_view(r.lemmaClass).substr(1));
+        if (builtin.data == nullptr) {
+            errors.push_back({r.file, r.line, "the lemma class " + r.lemmaClass +
+                                                  " is not a class of the pack-classes files nor of classes.tsv"});
+            continue;
+        }
+        for (const std::string_view lemma : ClassMembers(builtin)) addKeys(r, lemma);
+    }
+    for (const PackRow& r : table.rows) {
         for (const PackAtom& a : r.atoms)
             for (const std::string& v : a.values)
                 if (v.starts_with("@") && !declared(v))
                     errors.push_back({r.file, r.line, "the class " + v + " is not a class of the pack-classes files"});
+    }
 }
 
 }  // namespace hdTrans::dict

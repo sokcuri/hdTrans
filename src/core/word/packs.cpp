@@ -2,8 +2,10 @@
 // class digit it names and whose cue holds, and leaves the rest of the sentence to the chain.
 // Voice rows decide the reading of (ら)れ inside DecideVoice; sense, name, polarity and tense
 // rows run after every other pass of the word stage. Per word and slot the most specific row
-// wins: lexical atoms, then class depth, then neighbour and form atoms, then register atoms,
-// then the number of atoms (the order of the lexicon's cue DSL), then pri, then load order.
+// wins: a row that names the lemma before one of a lemma class before one of lemma * (every word of
+// its pos), then lexical atoms, class depth, neighbour and form atoms, register atoms and the number
+// of atoms (the order of the lexicon's cue DSL), then pri, then load order. A row whose target is -
+// keeps the slot as the chain decided it.
 #include <algorithm>
 #include <array>
 #include <set>
@@ -11,8 +13,10 @@
 #include <string_view>
 #include <vector>
 
+#include "core/dict/classes.h"
 #include "core/dict/pack.h"
 #include "core/dict/snapshot.h"
+#include "core/text/utf8.h"
 #include "core/word/flush.h"
 #include "core/word/util.h"
 
@@ -53,6 +57,27 @@ Item* NegativeAux(const Item* it) {
     return s == "な" || s == "ない" || s == "なかっ" || s == "なく" || s == "ね" || s == "ん" ? n : nullptr;
 }
 
+// The sentence particles and modals cut from the end of a form (行ったか, 行こうよ, 行くでしょう, 良いんじゃないかしら).
+constexpr std::string_view kFinalParticles[] = {"か", "よ", "ね", "ぜ", "ぞ", "わ", "な", "の", "っけ", "かしら", "しら",
+                                                "でしょう", "でしょ", "だろう", "だろ"};
+
+// Drawn and clipped kana (kana.drawn-out, mark.clip), small katakana vowels and ellipses: tone, not words.
+bool Faint(std::string_view rune) {
+    return dict::InClass(HDTRANS_CLASS("kana.drawn-out"), rune) || dict::InClass(HDTRANS_CLASS("mark.clip"), rune) ||
+           std::string_view("ァィゥェォー…‥").find(rune) != std::string_view::npos;
+}
+
+// Whether what stands between the stem and a negative is a stem's own ending: nothing, one kana (行か,
+// 高く, 行き, 来), a て form (読んで, 書いてい) or a voice (書かれ, 読ませ, 食べられ), at most three kana.
+bool NegatedStem(std::string_view pre) {
+    const std::size_t runes = text::RuneCount(pre);
+    if (runes <= 1) return true;
+    if (runes > 3) return false;
+    for (const std::string_view end : {"て", "で", "てい", "でい", "れ", "せ"})
+        if (pre.ends_with(end)) return true;
+    return false;
+}
+
 // What the cue atoms of a row read about one word (the context of the lexicon's cue DSL).
 struct Context {
     std::vector<std::pair<std::string_view, const Item*>> args;  // slot, noun of a case phrase of the predicate
@@ -62,6 +87,7 @@ struct Context {
     const Item* next = nullptr;
     const Item* after = nullptr;  // the word before (the word is after it)
     std::set<std::string_view> forms;
+    std::string final;  // the sentence particles and the mark that end the sentence after the word (final=)
     bool polite = false;
     std::string_view voice;  // voice rows: the reading of (ら)れ the chain decided
 };
@@ -72,6 +98,13 @@ Context ContextOf(const Flusher& f, const Item* it) {
     c.next = it->After();
     c.after = it->prev;
     if (Predicate(cls)) {
+        // a word of a noun, が or は and a verb read as one (雨が降る 비가 오다) holds its own subject
+        if (const std::string_view w = it->group->surface; cls == '4') {
+            for (const std::string_view p : {"が", "は"}) {
+                const std::size_t at = w.find(p);
+                if (at != std::string_view::npos && at > 0 && at + p.size() < w.size()) c.args.emplace_back("subj", it);
+            }
+        }
         // the case phrases before it in its clause (noun + particle), right to left
         for (const Item* q = it->prev; q != nullptr && q->group != nullptr; q = q->prev) {
             if (SentenceEnd(q) || q->group->surface == "「" || q->group->surface == "『" || Predicate(ClassOf(q))) break;
@@ -80,7 +113,8 @@ Context ContextOf(const Flusher& f, const Item* it) {
                 q = q->prev;
             }
         }
-        if (c.next != nullptr && ClassOf(c.next) == '1' && it->DirectSurface().find("て") == std::string_view::npos) {
+        if (c.next != nullptr && ClassOf(c.next) == '1' && !Faint(c.next->group->surface) &&
+            it->DirectSurface().find("て") == std::string_view::npos) {
             c.head = c.next;
             c.pred = c.next;
         }
@@ -109,22 +143,87 @@ Context ContextOf(const Flusher& f, const Item* it) {
     std::string_view form = ending;
     for (bool cut = true; cut;) {
         cut = false;
-        for (const std::string_view p : {"か", "よ", "ね", "ぜ", "ぞ", "わ", "な", "の", "っけ"}) {
+        for (const std::string_view p : kFinalParticles) {
             if (form.size() > p.size() && form.ends_with(p)) {
                 form.remove_suffix(p.size());
                 cut = true;
             }
         }
     }
+    // final: the particles cut from the form, then the text after the word (and its negative auxiliary)
+    // up to the first sentence mark (。！？、, kept) or a closing bracket or the end (not kept); drawn and
+    // clipped kana and ellipses (Faint) are left out and blanks right before a mark skipped (行かないか？ か？,
+    // 吐かんかッ!! か！, 返さないよ？ よ？, 黙らんかァ！！ か！, 早くしないか……！ か！, いいんじゃない ？ ？)
+    std::string_view core = ending;  // the form without its particles, past drawn and clipped kana (行かないかっ)
+    for (bool cut = true; cut;) {
+        cut = false;
+        if (!core.empty() && Faint(core.substr(core.size() - DecodeLastRune(core).size))) {
+            core.remove_suffix(DecodeLastRune(core).size);
+            cut = true;
+        }
+        for (const std::string_view p : kFinalParticles) {
+            if (core.size() > p.size() && core.ends_with(p)) {
+                core.remove_suffix(p.size());
+                cut = true;
+            }
+        }
+    }
+    for (std::string_view rest = std::string_view(ending).substr(core.size()); !rest.empty();) {
+        const std::size_t size = text::DecodeRune(rest).size;
+        if (size == 0) break;
+        if (!Faint(rest.substr(0, size))) c.final += rest.substr(0, size);
+        rest.remove_prefix(size);
+    }
+    const Item* last = NegativeAux(it) != nullptr ? NegativeAux(it) : it;
+    bool stop = false, blank = false;
+    const auto take = [&](std::string_view rest) {
+        while (!rest.empty() && !stop) {
+            const std::size_t size = text::DecodeRune(rest).size;
+            if (size == 0) break;
+            std::string_view rune = rest.substr(0, size);
+            rest.remove_prefix(size);
+            if (rune == "!") rune = "！";
+            if (rune == "?") rune = "？";
+            if (rune == "｡") rune = "。";
+            if (rune == "！" || rune == "？" || rune == "。" || rune == "、") {
+                c.final += rune;
+                stop = true;
+            } else if (rune == " " || rune == "　") {
+                blank = true;
+            } else if (rune == "」" || rune == "』" || rune == "）" || rune == ")" || blank) {
+                stop = true;
+            } else if (!Faint(rune)) {
+                c.final += rune;
+            }
+        }
+    };
+    // the rest of the word's token, then the tokens after it as typed
+    take(From(last->text, static_cast<long>(last->start + last->length)));
+    for (int j = last->tokenIndex + 1; !stop && j < f.w.TokenCount(); j++) take(f.w.Typed(j));
     // ta: the past auxiliary closes the form (行った, 読んだ, 高かった, 行ったら); not the た of a stem (待たない)
     // (the だ forms only on verbs: 静かだ is the copula)
     for (const std::string_view ta : {"た", "たら", "たり", "たろう", "だ", "だら", "だり"}) {
         if (form.ends_with(ta) && (ta.starts_with("た") || cls == '4')) c.forms.insert("ta");
     }
-    // neg: a negative auxiliary after the stem (行かない, 高くない, 行きません, 知らず, 知らぬ); not the ぬ of 死ぬ
+    // neg: the last negative auxiliary of the ending right after the stem (NegatedStem: 行か|ない, 高く|ない,
+    // 行き|ません, 食べ|ない, 読んで|ない, 書か|れ|ない), not after a noun phrase, the copula, しか or っきゃ
+    // (食べるものはないか, 行ったじゃないか, 行くしかないか: nja for the copula of んじゃない); not the ぬ of 死ぬ
+    std::size_t lastNeg = std::string::npos;
     for (const std::string_view neg : {"ない", "なかっ", "なく", "なけれ", "ません", "ず", "ぬ"}) {
-        const std::size_t at = ending.find(neg);
-        if (at != std::string_view::npos && at > 0) c.forms.insert("neg");
+        const std::size_t at = ending.rfind(neg);
+        if (at != std::string::npos && (lastNeg == std::string::npos || at > lastNeg)) lastNeg = at;
+    }
+    if (lastNeg != std::string::npos && (lastNeg > 0 || (it->DirectSurface().empty() && NegativeAux(it) != nullptr)) &&
+        NegatedStem(std::string_view(ending).substr(0, lastNeg)))
+        c.forms.insert("neg");
+    // the old negative ん right after the stem or after its negative kana (吐|んか, 行かん, 待たんか, 勉強せんか, 来ん)
+    if (form == "ん" || (form.ends_with("ん") && form.size() >= 6 &&
+                         std::string_view("かがさたなばまらわせこ").find(form.substr(form.size() - 6, 3)) != std::string_view::npos)) {
+        c.forms.insert("neg");
+    }
+    // nja: the predicate negated through the の of んじゃない, のではない (いいんじゃない, 行くのではない)
+    for (const std::string_view nja : {"んじゃな", "のじゃな", "のではな", "んではな"}) {
+        if (ending.find(nja) != std::string_view::npos) c.forms.insert("nja");
     }
     if (form.ends_with("て") || form.ends_with("で")) {
         c.forms.insert("te");
@@ -148,7 +247,8 @@ Context ContextOf(const Flusher& f, const Item* it) {
         if (x->group == nullptr) continue;
         const std::string_view e = x->DirectSurface(), s = x->group->surface;
         if (e.find("ます") != std::string_view::npos || e.find("まし") != std::string_view::npos ||
-            e.find("ませ") != std::string_view::npos || e.find("です") != std::string_view::npos || s == "です" ||
+            e.find("ませ") != std::string_view::npos || e.find("です") != std::string_view::npos ||
+            e.find("でしょう") != std::string_view::npos || s == "です" ||
             s == "でした" || s == "でしょう") {
             c.polite = true;
             break;
@@ -185,6 +285,12 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
             continue;
         } else if (a.slot == "voice") {
             if (std::find(a.values.begin(), a.values.end(), c.voice) == a.values.end()) return false;
+            spec[2]++;
+            continue;
+        } else if (a.slot == "final") {
+            if (std::none_of(a.values.begin(), a.values.end(),
+                             [&](const std::string& v) { return v == "-" ? c.final.empty() : v == c.final; }))
+                return false;
             spec[2]++;
             continue;
         } else if (a.slot == "register") {
@@ -224,26 +330,60 @@ bool Holds(const dict::PackTable& t, const dict::PackRow& r, const Context& c, s
     return true;
 }
 
+// Whether a row of lemma * or lemma @class applies to the word, and how it names it (0 for *, 1 for @class).
+bool OpenRowNames(const dict::PackRow& r, const Item* it, int& named) {
+    named = 0;
+    if (r.lemmaClass.empty()) return true;
+    named = 1;
+    const auto keyed = r.lemmaKeys.find(it->group->surface);
+    if (keyed == r.lemmaKeys.end()) return false;
+    for (const std::string& lemma : keyed->second)
+        if (IsWord(it, lemma, std::max(it->selected, 0))) return true;
+    return false;
+}
+
 // The row of slot that decides the word, or -1.
 int BestRow(const Flusher& f, const dict::PackTable& t, const Item* it, std::string_view key, dict::PackSlot slot,
             std::string_view voice = {}) {
-    const auto rows = t.byKey.find(key);
-    if (rows == t.byKey.end()) return -1;
+    const auto keyed = t.byKey.find(key);
     const char cls = ClassOf(it);
+    // the rows that may decide the word: those of its key (naming it, 2), then those of lemma @class (1)
+    // and lemma * (0) of its class digit
+    std::vector<std::pair<int, int>> rows;
+    if (keyed != t.byKey.end())
+        for (const int i : keyed->second) rows.emplace_back(i, 2);
+    if (const auto open = t.open.find(dict::OpenIndex(slot, cls)); open != t.open.end()) {
+        for (const int i : open->second) {
+            int named = 0;
+            if (OpenRowNames(t.rows[static_cast<std::size_t>(i)], it, named)) rows.emplace_back(i, named);
+        }
+    }
     bool any = false;
-    for (const int i : rows->second) {
+    for (const auto& [i, named] : rows) {
         const dict::PackRow& r = t.rows[static_cast<std::size_t>(i)];
         any = any || (r.slot == slot && r.classDigit == cls);
     }
     if (!any) return -1;
     Context c = ContextOf(f, it);
+    // polarity and tense rows read the reading of (ら)れ the voice layer decided, and a potential of the dictionary
     c.voice = voice;
+    if (voice.empty() && it->detail != nullptr) {
+        const Voice v = it->detail->voice;
+        c.voice = v == Voice::Passive       ? "passive"
+                  : v == Voice::Potential   ? "potential"
+                  : v == Voice::Respectful  ? "respectful"
+                  : v == Voice::Spontaneous ? "spontaneous"
+                  : it->detail->record == 4 ? "potential"
+                  : it->detail->record == 1 ? "passive"
+                                            : "none";
+    }
     int best = -1;
-    std::array<int, 5> bestSpec{};
-    for (const int i : rows->second) {
+    std::array<int, 6> bestSpec{};
+    for (const auto& [i, named] : rows) {
         const dict::PackRow& r = t.rows[static_cast<std::size_t>(i)];
-        std::array<int, 5> spec{};
-        if (r.slot != slot || r.classDigit != cls || !Holds(t, r, c, spec)) continue;
+        std::array<int, 5> own{};
+        if (r.slot != slot || r.classDigit != cls || !Holds(t, r, c, own)) continue;
+        const std::array<int, 6> spec{named, own[0], own[1], own[2], own[3], own[4]};
         if (best < 0 || spec > bestSpec || (spec == bestSpec && r.pri > t.rows[static_cast<std::size_t>(best)].pri)) {
             best = i;
             bestSpec = spec;
@@ -267,12 +407,13 @@ const dict::PackRow* PackVoice(Flusher& f, Item* it, std::string_view stem, Voic
     if (best < 0 && stem != it->group->surface) best = BestRow(f, t, it, stem, dict::PackSlot::Voice, decided);
     if (best < 0) return nullptr;
     const dict::PackRow& r = t.rows[static_cast<std::size_t>(best)];
+    it->packRows.push_back(r.global);
+    if (r.target == "-") return nullptr;
     v = r.target == "passive"       ? Voice::Passive
         : r.target == "potential"   ? Voice::Potential
         : r.target == "respectful"  ? Voice::Respectful
         : r.target == "spontaneous" ? Voice::Spontaneous
                                     : Voice::None;
-    it->packRows.push_back(r.global);
     return &r;
 }
 
@@ -303,6 +444,11 @@ void ApplyPacks(Flusher& f) {
             if (best < 0) continue;
             const dict::PackRow& r = t.rows[static_cast<std::size_t>(best)];
             const Selection source{Provenance::Pack, r.global};
+            if (r.target == "-") {
+                it->packRows.push_back(r.global);
+                if (slot == dict::PackSlot::Polarity) break;  // a kept polarity holds the ending against tense rows
+                continue;
+            }
             if (nameOnly) {
                 it->AssignEntrySurface(it->selected, r.target, source);
                 it->choice = source;
@@ -315,6 +461,12 @@ void ApplyPacks(Flusher& f) {
                 if (it->DirectIndex() < 0 || it->directChoice.layer == Provenance::Pack ||
                     it->DirectEntry(it->DirectIndex())->neighbourAssigned)
                     continue;
+                // A polarity row replaces a plain negative auxiliary (않다) only: one read 없다 or 못하다 carries a
+                // potential or an inability the row would lose (信じられないか 믿을 수 없는가).
+                if (const Item* aux = NegativeAux(it); slot == dict::PackSlot::Polarity && aux != nullptr) {
+                    const std::string_view d = aux->group->At(aux->selected)->dst;
+                    if (d != "$DH@" && d != "$D7@") continue;
+                }
                 it->AssignDirectSlot(it->DirectIndex(), r.target, source);
                 it->directChoice = source;
                 // A polarity row writes the whole negation: the negative auxiliary after the word

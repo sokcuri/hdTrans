@@ -82,7 +82,7 @@ HD_TEST(dict_pack_errors) {
         {"\tsense\t本\tn\t\t책", "2: empty id, lemma, pos or target"},
         {"x\tvoice\t本\tn\t\tpassive:혼나다", "2: a voice verb (\"passive:혼나다\") needs a verb row and a Korean verb"},
         {"x\tsense\t本\tn\tform=past\t책", "2: cue value \"past\" of form is not one the host reads"},
-        {"x\tsense\t本\tn\tvoice=passive\t책", "2: a voice= atom is read on voice rows only"},
+        {"x\tsense\t本\tn\tvoice=passive\t책", "2: a voice= atom is read on voice, polarity and tense rows only"},
         {"x\tsense\t本\tn\t\t책\nx\tsense\t紙\tn\t\t종이", "3: row id \"x\" is also at p.tsv:2"},
     };
     for (const auto& c : cases) {
@@ -114,4 +114,53 @@ HD_TEST(dict_pack_classes) {
     errors.clear();
     ParsePackClasses("x.tsv", "key\tvalue\n", t, errors);
     HD_CHECK_EQ(Errors(errors), std::string("1: the header is neither class, parent nor lemma, classes"));
+}
+
+HD_TEST(dict_pack_open_rows) {
+    // lemma * is every word of the pos and lemma @class every word of a pack class: no key, the class digit of the
+    // pos, listed in open; a target - keeps the slot; final= reads the end of the sentence after the word.
+    const std::string text =
+        "id\tslot\tlemma\tpos\tcond\ttarget\n"
+        "a\tpolarity\t*\tv\tform=neg final=か！|か？\t1지 못해\n"
+        "b\tpolarity\t@still\tv\tform=neg final=か！\t-\n"
+        "c\tpolarity\tいい\tadj\tform=nja final=-|。\t1잖아\n"
+        "d\tsense\t本\tn\t\t-\n";
+    Families families;
+    PackTable t;
+    std::vector<PackError> errors;
+    ParsePackRows("p.tsv", text, nullptr, families, t, errors);
+    ParsePackClasses("c.tsv", "class\tparent\n@still\t\n", t, errors);
+    CheckPackClasses(t, errors);
+    HD_CHECK_EQ(Errors(errors), std::string());
+    HD_CHECK_EQ(Show(t), std::string("a polarity  4 1지 못해 [form=neg,final=か！|か？] 0; b polarity  4 - [form=neg,final=か！] 0; "
+                                     "c polarity い 7 1잖아 [form=nja,final=-|。] 0; d sense 本 1 - [] 0"));
+    HD_CHECK(t.open.size() == 1 && t.open[OpenIndex(PackSlot::Polarity, '4')].size() == 2);
+    HD_CHECK(t.rows[1].lemmaClass == "@still" && t.rows[0].lemmaClass.empty());
+    {
+        // a lemma class that no pack-classes file declares is a set of classes.tsv: its members' keys
+        Families own;
+        PackTable u;
+        std::vector<PackError> errs;
+        ParsePackRows("p.tsv", "id\tslot\tlemma\tpos\tcond\ttarget\nk\tpolarity\t@verb.unwilled\tv\t\t-\n", nullptr, own, u, errs);
+        CheckPackClasses(u, errs);
+        HD_CHECK_EQ(Errors(errs), std::string());
+        HD_REQUIRE(u.rows.size() == 1);
+        HD_CHECK(u.rows[0].lemmaKeys.contains("気づ") && u.rows[0].lemmaKeys.contains("ある"));
+    }
+    const struct {
+        const char* row;
+        const char* want;
+    } bad[] = {
+        {"x\tsense\t*\tn\t\t책", "2: a sense or name row names its lemma (lemma * and @class write endings, voices or -)"},
+        {"x\tpolarity\t@none\tv\t\t-", "2: the lemma class @none is not a class of the pack-classes files nor of classes.tsv"},
+        {"x\tpolarity\t*\tv5\t\t-", "2: pos \"v5\" of lemma * or @class, want v (not v1, v5), adj, na, n, p, adv or intj"},
+    };
+    for (const auto& c : bad) {
+        Families own;
+        PackTable u;
+        std::vector<PackError> errs;
+        ParsePackRows("p.tsv", std::string("id\tslot\tlemma\tpos\tcond\ttarget\n") + c.row, nullptr, own, u, errs);
+        CheckPackClasses(u, errs);
+        HD_CHECK_EQ(Errors(errs), std::string(c.want));
+    }
 }

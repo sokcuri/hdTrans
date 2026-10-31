@@ -21,3 +21,5 @@ pack:s.iu.heard	彼に言われた。	rule:pack:s.iu.heard=passive:듣다	keep	p
 pack:s.iu.heard	先生が言われた。	!rule:pack:s.iu.heard	keep	packs
 pack:s.tomeru.parked	多くの車が止められた駐車場。	많은 차가 세워진 주차장.	fix	packs
 pack:s.tomeru.parked	車を止めた。	!rule:pack:s.tomeru.parked	keep	packs
+pack:s.iku.invite	行くしかない？	!rule:pack:s.iku.invite	keep	packs
+pack:s.iku.invite	行ったじゃないか？	!rule:pack:s.iku.invite	keep	packs
