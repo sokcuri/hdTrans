@@ -1476,7 +1476,7 @@
 
 
 // LEX-151: set collocations read as the Korean collocation of the same use.
-を後にする	(을)를 나서다	v	gattr=Tu
+を後にする	(을)를 떠나다	v	gattr=Tu
 事を運ぶ	일을 진행하다	v5
 ことを運ぶ	일을 진행하다	v5
 足を進める	발걸음을 옮기다	v1

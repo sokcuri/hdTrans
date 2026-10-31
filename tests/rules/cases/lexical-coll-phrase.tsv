@@ -1,10 +1,10 @@
 # 규칙: LEX-151
 rule	input	expected	kind	layer
-phrase:coll	会長が部室を後にして、数十分。	has:동아리방을 나서, 수십 분	fix	builtin-phrase
-phrase:coll	同僚にそう挨拶して、俺は会社を後にした。	has:회사를 나섰다	fix	builtin-phrase
-phrase:coll	俺はソファーから立ちあがり、リビングを後にした。	has:거실을 나섰다	fix	builtin-phrase
-phrase:coll	「その話は後にしよう」	lacks:나서	keep	builtin-phrase
-phrase:coll	「レイチェルちゃん。ちょっと後にして。」	lacks:나서	keep	builtin-phrase
+phrase:coll	会長が部室を後にして、数十分。	회장이 동아리방을 떠나, 수십 분.	fix	builtin-phrase
+phrase:coll	同僚にそう挨拶して、俺は会社を後にした。	has:회사를 떠났다	fix	builtin-phrase
+phrase:coll	俺はソファーから立ちあがり、リビングを後にした。	has:거실을 떠났다	fix	builtin-phrase
+phrase:coll	「その話は後にしよう」	lacks:떠나	keep	builtin-phrase
+phrase:coll	「レイチェルちゃん。ちょっと後にして。」	lacks:떠나	keep	builtin-phrase
 phrase:coll	そうなるように事を運んでおられた	has:일을 진행하고	fix	builtin-phrase
 phrase:coll	私は足をすすめる。	has:발걸음을 옮긴다	fix	builtin-phrase
 phrase:coll	そう決意して、さらに足を進めると、	has:발걸음을 옮기	fix	builtin-phrase
