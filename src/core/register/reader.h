@@ -28,12 +28,17 @@ struct Capture {
     std::vector<std::vector<Item>> items;  // per line
     // When the call's long lines were cut into pieces: the line of each piece; empty otherwise.
     std::vector<int> pieceLine;
+    // The lines whose items are kept (the dialogue lines); empty keeps every line.
+    std::vector<bool> wanted;
 
     void Line(int piece);
+    // Another pass over the current line (or piece) starts.
+    void Pass();
     void Resolved(int sentence, const word::Chain& chain);
 
 private:
     int line_ = -1;
+    std::size_t passStart_ = 0;  // where the items of the current piece start
 };
 
 // One item of a line of the translation.

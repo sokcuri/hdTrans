@@ -141,6 +141,7 @@ bool LoadKo(Tables& t, std::string& err) {
             IrrRow row{r[c[0]], r[c[1]], {}, {}};
             if (r[c[2]] != "-") row.stem = Split(r[c[2]], ',');
             if (r[c[3]] != "-") row.ending = Split(r[c[3]], ',');
+            t.irregularBy[row.cls + "|" + row.before].push_back(t.irregular.size());
             t.irregular.push_back(std::move(row));
         }
     }

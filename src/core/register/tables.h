@@ -61,6 +61,7 @@ struct Tables {
     std::multimap<std::string, std::size_t> eomiBySlotFamily;  // "slot|family" → row
     std::multimap<std::string, std::size_t> eomiById;
     std::vector<IrrRow> irregular;
+    std::unordered_map<std::string, std::vector<std::size_t>> irregularBy;  // "class|before" → rows, in order
     std::vector<ContractRow> contract;
     std::vector<ParticleRow> particles;
     std::unordered_map<std::string, StemRow> stems;

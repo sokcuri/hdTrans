@@ -20,10 +20,29 @@ struct PredicateInfo {
 // The pos and class of a predicate lemma ("가다", or "가다:REG" with the class).
 PredicateInfo LookupPredicate(const Tables& t, const std::string& lemma);
 
+// A lemma with what the tables say of it and of its form without a class (가다:REG → 가다), looked up once.
+struct LemmaInfo {
+    std::string lemma, bare;
+    PredicateInfo info, bareInfo;
+};
+LemmaInfo LemmaOf(const Tables& t, const std::string& lemma);
+
 // A predicate in one word: the lemma with the endings, each an eomi.tsv id or a literal notation
 // ("-었-", "-어요", "(으)면"). pos and cls may be empty (looked up). host: the word before a copula.
 std::string ConjugateForms(const Tables& t, const std::string& lemma, const std::string& pos, const std::string& cls,
                            const std::vector<std::string>& forms, const std::string& host = "");
+std::string ConjugateForms(const Tables& t, const LemmaInfo& lemma, const std::string& pos, const std::string& cls,
+                           const std::vector<std::string>& forms, const std::string& host = "");
+
+// The text of one V node at level after host (the word before it), as Generate writes it outside
+// spoken fusions.
+std::string WriteV(const Tables& t, const LemmaInfo& lemma, const Node& n, Level level, Persona persona, bool hon,
+                   std::u32string_view host, bool fuseHost, int& fuseFinal);
+// The endings a V node is conjugated with: -시-, -었-, -겠- as the node has them, then finalForm.
+std::vector<std::string> FormsOf(const Tables& t, const Node& n, const std::string& finalForm, bool honIncl, bool hon);
+// The same with the ending form EndingForm gives for the node.
+std::string WriteV(const Tables& t, const LemmaInfo& lemma, const Node& n, const std::string& finalForm, bool honIncl,
+                   bool hon, std::u32string_view host, bool fuseHost, int& fuseFinal);
 
 // A particle notation (이/가, (으)로, (이)나, 도) after a word.
 std::string RealizeParticle(const std::string& form, std::u32string_view prev);
@@ -65,10 +84,12 @@ struct ParadigmShape {
         uint32_t tail = 0;  // tails index, kAnyTail when the ending does not end the surface
         Mood mood = Mood::decl;
         uint8_t pre = 0;    // 1 -었-, 2 -겠-, 4 -시-
+        uint32_t forms = 0;  // formLists index: the endings the generator writes it with
     };
     static constexpr uint32_t kAnyTail = 0xFFFFFFFF;
     std::vector<Reading> readings;
     std::vector<std::u32string> tails;
+    std::vector<std::vector<std::string>> formLists;
 };
 // copula: the lemma is 이다, whose ending's first syllable changes after a vowel.
 const ParadigmShape& ShapeOf(const Tables& t, const std::string& pos, bool copula);
@@ -80,8 +101,9 @@ public:
     ParadigmIndex(const Tables& t, const std::string& lemma, const std::string& pos, const std::string& cls,
                   const std::string& host);
     // The readings whose surface is surface, in paradigm order.
-    std::vector<Bundle> Find(const std::string& surface);
-    // Every reading with its surface, in paradigm order.
+    std::vector<uint32_t> Find(const std::string& surface);
+    Bundle At(uint32_t reading) const { return BundleOf(shape_->readings[reading]); }
+    // Every reading with its surface as Generate writes it, in paradigm order.
     std::vector<std::pair<std::string, Bundle>> All();
 
 private:
@@ -90,8 +112,11 @@ private:
 
     const Tables& t_;
     std::string lemma_, pos_, cls_, host_;
+    LemmaInfo info_;
+    std::u32string hostText_;
     const ParadigmShape* shape_ = nullptr;
-    std::unordered_map<std::size_t, std::string> surfaces_;  // by reading, those generated so far
+    std::unordered_map<uint32_t, std::string> surfaces_;  // by form list, those written so far
+    std::string scratch_;
 };
 
 // Orders readings that share one surface, best first.

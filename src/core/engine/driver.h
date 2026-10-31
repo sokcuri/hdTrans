@@ -57,6 +57,9 @@ struct StageObserver {
     void (*restored)(void* context, const pipeline::RestoreSteps& steps) = nullptr;
     // Ehnd-style stage snapshots and fired filter rules, including trailing newlines.
     void (*filterLog)(void* context, std::string_view message) = nullptr;
+    // Only the speech-level stage listens: no stage runs again for the observer, and the trial passes
+    // of a line report to it too (each pass starts with the CH pieces of chunk 0).
+    bool levelsOnly = false;
 };
 
 // Uses the session's dictionaries and options without retaining the observer; context as

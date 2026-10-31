@@ -397,10 +397,18 @@ void Capture::Line(int piece) {
     if (l < 0) return;
     if (items.size() <= static_cast<std::size_t>(l)) items.resize(static_cast<std::size_t>(l) + 1);
     if (first) items[static_cast<std::size_t>(l)].clear();  // a pass over the line starts again
+    passStart_ = items[static_cast<std::size_t>(l)].size();
+}
+
+void Capture::Pass() {
+    if (line_ < 0 || static_cast<std::size_t>(line_) >= items.size()) return;
+    items[static_cast<std::size_t>(line_)].resize(passStart_);
 }
 
 void Capture::Resolved(int sentence, const word::Chain& chain) {
     if (line_ < 0) return;
+    if (!wanted.empty() && (static_cast<std::size_t>(line_) >= wanted.size() || !wanted[static_cast<std::size_t>(line_)]))
+        return;
     auto& v = items[static_cast<std::size_t>(line_)];
     for (const word::Item* it = chain.head; it != nullptr; it = it->next) {
         Item x;

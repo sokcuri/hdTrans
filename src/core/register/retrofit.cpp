@@ -20,6 +20,18 @@ bool Blank(const std::string& s) { return s.find_first_not_of(" \t\r\xe3\x80\x80
 
 }  // namespace
 
+bool Prepare(std::span<const std::string> source, Capture& capture) {
+    const Data* d = LoadedData();
+    if (d == nullptr) return false;
+    std::vector<std::string> ja;
+    ja.reserve(source.size());
+    for (const std::string& s : source) ja.push_back(WithoutCr(s));
+    capture.wanted.assign(ja.size(), false);
+    for (std::size_t i = 0; i < ja.size(); i++) capture.wanted[i] = DialogueLine(d->reader, ja[i]);
+    return std::any_of(capture.wanted.begin(), capture.wanted.end(), [](bool b) { return b; }) &&
+           !CaptionDocument(d->reader, ja);
+}
+
 SourceDecisions DecideSource(std::span<const std::string> source) {
     SourceDecisions out;
     const Data* d = LoadedData();

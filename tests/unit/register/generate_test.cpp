@@ -110,7 +110,7 @@ HD_TEST(register_readings_by_surface) {
         reg::ParadigmIndex found(d->ko, l.lemma, "", "", l.host);
         for (const auto& [surface, keys] : bySurface) {
             std::vector<std::string> got;
-            for (const reg::Bundle& b : found.Find(surface)) got.push_back(Key(b));
+            for (const uint32_t r : found.Find(surface)) got.push_back(Key(found.At(r)));
             if (got != keys) hdtest::Fail(__FILE__, __LINE__, std::string(l.lemma) + " " + surface + ": other readings");
         }
         HD_CHECK(found.Find("없는말").empty());

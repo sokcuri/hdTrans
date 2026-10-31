@@ -15,27 +15,42 @@ namespace {
 using hangul::ToU32;
 using hangul::ToU8;
 
+// A host that ends in the same sound as host: the copula reads only that.
+std::string SoundOf(const std::string& host) {
+    switch (hangul::EndSound(ToU32(host))) {
+        case 'V': return "가";
+        case 'C': return "각";
+        case 'L': return "갈";
+        default: return "";
+    }
+}
+
 // The readings of the words of one call, by lemma, pos, class, host and surface.
 struct Words {
     static constexpr std::size_t kKeptLemmas = 1024, kKeptWords = 32768;
     const Tables& t;
     const RetroWords& rw;
     std::unordered_map<std::string, std::unique_ptr<ParadigmIndex>> paradigms;
-    std::unordered_map<std::string, std::vector<Bundle>> found;
+    std::unordered_map<std::string, std::pair<ParadigmIndex*, std::vector<uint32_t>>> found;
 
     std::vector<Bundle> Find(const std::string& lemma, const std::string& pos, const std::string& cls,
                              const std::string& surface, const AnalyzeHints& h) {
-        const std::string key = lemma + "|" + pos + "|" + cls + "|" + h.host;
+        // the copula's forms depend on its host only through the host's last sound (학생이야, 친구야)
+        const std::string host = cls == "COP" ? SoundOf(h.host) : h.host;
+        const std::string key = lemma + "|" + pos + "|" + cls + "|" + host;
         auto f = found.find(key + "|" + surface);
         if (f == found.end()) {
             // the readings are kept for the lemmas of a few hundred lines, so that a long document's memory stays bounded
-            if (paradigms.size() >= kKeptLemmas) paradigms.clear();
-            if (found.size() >= kKeptWords) found.clear();
+            if (paradigms.size() >= kKeptLemmas || found.size() >= kKeptWords) {
+                found.clear();
+                paradigms.clear();
+            }
             auto& index = paradigms[key];
-            if (!index) index = std::make_unique<ParadigmIndex>(t, lemma, pos, cls, h.host);
-            f = found.emplace(key + "|" + surface, index->Find(surface)).first;
+            if (!index) index = std::make_unique<ParadigmIndex>(t, lemma, pos, cls, host);
+            f = found.emplace(key + "|" + surface, std::make_pair(index.get(), index->Find(surface))).first;
         }
-        std::vector<Bundle> out = f->second;
+        std::vector<Bundle> out;
+        for (const uint32_t r : f->second.second) out.push_back(f->second.first->At(r));
         RankBundles(out, h);
         return out;
     }

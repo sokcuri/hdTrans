@@ -270,21 +270,45 @@ namespace {
 
 // The text of one V node (one word, or several when the ending spans words).
 std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, bool fuseHost, int& fuseFinal) {
-    const Node& n = x.n;
-    const PredicateInfo info = LookupPredicate(t, n.lemma);
-    const std::string pos = !n.vpos.empty() ? n.vpos : info.pos;
-    const std::string cls = !n.kcls.empty() ? n.kcls : info.cls;
-    bool honIncl = false;
-    const std::string finalForm = EndingForm(t, n, x.level, x.persona, honIncl);
+    return WriteV(t, LemmaOf(t, x.n.lemma), x.n, x.level, x.persona, x.hon, host, fuseHost, fuseFinal);
+}
+
+}  // namespace
+
+std::vector<std::string> FormsOf(const Tables& t, const Node& n, const std::string& finalForm, bool honIncl, bool hon) {
     std::vector<std::string> forms;
-    if (x.hon && !honIncl) forms.push_back(t.G("pre.hon"));
+    if (hon && !honIncl) forms.push_back(t.G("pre.hon"));
     // past on an adnominal only before -ㄹ (갔을); the other adnominals carry tense in their row (간, 갔던)
     if (n.tense == Tense::past && n.ctype != CType::stem && (n.ctype != CType::adn || n.rel == "fut"))
         forms.push_back(t.G("pre.past"));
     if (n.modal == "gess") forms.push_back(t.G("pre.gess"));
     forms.push_back(finalForm);
+    return forms;
+}
+
+LemmaInfo LemmaOf(const Tables& t, const std::string& lemma) {
+    LemmaInfo l;
+    l.lemma = lemma;
+    l.bare = lemma.substr(0, lemma.find(':'));
+    l.info = LookupPredicate(t, lemma);
+    l.bareInfo = l.bare == lemma ? l.info : LookupPredicate(t, l.bare);
+    return l;
+}
+
+std::string WriteV(const Tables& t, const LemmaInfo& lemma, const Node& n, Level level, Persona persona, bool hon,
+                   std::u32string_view host, bool fuseHost, int& fuseFinal) {
+    bool honIncl = false;
+    const std::string finalForm = EndingForm(t, n, level, persona, honIncl);
+    return WriteV(t, lemma, n, finalForm, honIncl, hon, host, fuseHost, fuseFinal);
+}
+
+std::string WriteV(const Tables& t, const LemmaInfo& lemma, const Node& n, const std::string& finalForm, bool honIncl,
+                   bool hon, std::u32string_view host, bool fuseHost, int& fuseFinal) {
+    const std::string pos = !n.vpos.empty() ? n.vpos : lemma.info.pos;
+    const std::string cls = !n.kcls.empty() ? n.kcls : lemma.info.cls;
+    const std::vector<std::string> forms = FormsOf(t, n, finalForm, honIncl, hon);
     const std::string hostArg = cls == "COP" ? ToU8(host) : std::string();
-    std::string text = ConjugateForms(t, n.lemma, pos, cls, forms, hostArg);
+    std::string text = ConjugateForms(t, lemma, pos, cls, forms, hostArg);
     if (cls == "COP") {
         // ConjugateForms returns the host and the copula: the copula part
         if (text.starts_with(hostArg)) text = text.substr(hostArg.size());
@@ -301,15 +325,18 @@ std::string RealizeV(const Tables& t, const XNode& x, std::u32string_view host, 
     return text;
 }
 
-}  // namespace
-
-std::string ConjugateForms(const Tables& t, const std::string& lemma, const std::string& posIn, const std::string& clsIn,
+std::string ConjugateForms(const Tables& t, const std::string& lemma, const std::string& pos, const std::string& cls,
                            const std::vector<std::string>& forms, const std::string& host) {
-    const PredicateInfo info = LookupPredicate(t, lemma);
+    return ConjugateForms(t, LemmaOf(t, lemma), pos, cls, forms, host);
+}
+
+std::string ConjugateForms(const Tables& t, const LemmaInfo& lemma, const std::string& posIn, const std::string& clsIn,
+                           const std::vector<std::string>& forms, const std::string& host) {
+    const PredicateInfo& info = lemma.info;
     const std::string pos = posIn.empty() ? info.pos : posIn;
     const std::string cls = clsIn.empty() ? info.cls : clsIn;
-    const std::string bare = lemma.substr(0, lemma.find(':'));
-    Stem s = StemOf(t, bare, pos, cls);
+    const std::string& bare = lemma.bare;
+    Stem s = StemOf(bare, pos, cls, lemma.bareInfo);
     std::u32string hostText = ToU32(host);
     const bool cop = cls == "COP";
     if (cop) {
