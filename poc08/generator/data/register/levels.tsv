@@ -29,3 +29,4 @@ exclaim	REG-13	haera	no	yes	no	見つけた！, 面白い。: an exclamation of 
 auth-plain	REG-14	haera	no	yes	no	an authoritative voice's plain statement keeps -다 (ファンだ → 팬이다)
 decl-zo	REG-17	haera	no	yes	strong	行くぞ！ → 간다!: a declaration with ぞ or ぜ keeps -다
 exclaim-ne	REG-18	hae	no	no	strong	寒いなぁ → 춥네: an exclamation with な on a predicate is 해체 -네
+prose-plain	REG-20	haera	no	yes	no	in prose fiction a plain statement without a casual cue keeps -다 (認める → 인정한다)

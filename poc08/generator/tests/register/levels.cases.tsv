@@ -159,3 +159,44 @@ r8-15	REG-8	fix	d132	乙	yes	「ええと、もうすぐ」	-	-
 r8-16	REG-8	fix	d132	乙	yes	「えっと、この本」	haeyo	-
 r13-17	REG-13	keep	d133		yes	「まったく」	hae	-
 r1-6	REG-1	keep	d134		yes	「私はそんな目で見てるけど」じゃねーわ！！	hae	-
+r20-0	REG-20	fix	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-1	REG-20	fix	p1		no		-	-
+r20-2	REG-20	fix	p1		yes	「聖女の旅に同行し国を救ったグランツ第一王子を王太子に任命し、聖女アヤメを王太子妃とする」	haera	-
+r20-3	REG-20	fix	p1		no		-	-
+r20-4	REG-20	fix	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-5	REG-20	fix	p1		no		-	-
+r20-6	REG-20	fix	p1		yes	「今度こそ国と聖女の役に立てるのだ。名誉なことだろう」	haera	-
+r20-7	REG-20	fix	p1		no		-	-
+r20-8	REG-20	fix	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-9	REG-20	fix	p1		no		-	-
+r20-10	REG-20	fix	p1		yes	「その娘の婚約を、子爵は一方的に破棄したと聞いた」	haera	-
+r20-11	REG-20	fix	p1		no		-	-
+r20-12	REG-20	fix	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-13	REG-20	fix	p1		no		-	-
+r20-14	REG-20	fix	p1		yes	「……わかった。子爵の、爵位返上を認める……」	haera	-
+r20-15	REG-20	fix	p1		no		-	-
+r20-16	REG-20	fix	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-17	REG-20	fix	p1		no		-	-
+r20-18	REG-14	fix	p1		yes	「副将アデムよ、お前に任せる。」	haera	-
+r20-19	REG-20	fix	p1		no		-	-
+r20-20	REG-20	fix	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-21	REG-20	fix	p1		no		-	-
+r20-22	REG-20	fix	p1		yes	「来春、小田原へ出る」	haera	-
+r20-23	REG-20	fix	p1		no		-	-
+r20-24	REG-20	keep	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-25	REG-20	keep	p1		no		-	-
+r20-26	REG-20	keep	p1		yes	「俺はもう行く」	hae	-
+r20-27	REG-20	keep	p1		no		-	-
+r20-28	REG-20	keep	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-29	REG-20	keep	p1		no		-	-
+r20-30	REG-20	keep	p1		yes	「もう寝てるよ」	hae	-
+r20-31	REG-20	keep	p1		no		-	-
+r20-32	REG-20	keep	p1		no	その日、城の広間には多くの者が集まっていた。	-	-
+r20-33	REG-20	keep	p1		no		-	-
+r20-34	REG-20	keep	p1		yes	「もう疲れちゃったし、帰る」	hae	-
+r20-35	REG-20	keep	p1		no		-	-
+r20-36	REG-20	keep	p1		yes	「明日も来る」	hae	-
+r20-37	REG-20	keep	p1		yes	「来なくていいよ」	-	-
+r20-38	REG-20	keep	p1		no		-	-
+r20-39	REG-20	keep	p2		yes	「来春、小田原へ出る」	hae	-
+r20-40	REG-20	keep	p2		yes	「そうか」	-	-

@@ -217,7 +217,16 @@ int LevelCases(const RegisterTables& rt, const Tables& gen, const std::string& p
             std::fprintf(stderr, "%s:%d: doc %s is not contiguous\n", path.c_str(), t.lines[k], t.rows[k][cdoc].c_str());
             return 1;
         }
-    const std::vector<RegDecision> ds = DecideLevels(rt, lines, {});
+    // one document per run of rows with the same doc id (REG-20 reads the whole document)
+    std::vector<RegDecision> ds;
+    for (size_t a = 0; a < lines.size();) {
+        size_t b = a;
+        while (b < lines.size() && t.rows[b][cdoc] == t.rows[a][cdoc]) ++b;
+        const std::vector<RegLine> part(lines.begin() + static_cast<long>(a), lines.begin() + static_cast<long>(b));
+        const std::vector<RegDecision> pd = DecideLevels(rt, part, {});
+        ds.insert(ds.end(), pd.begin(), pd.end());
+        a = b;
+    }
     int fail = 0, n = 0;
     std::map<std::string, std::pair<int, int>> fixKeep;  // spec → fix, keep
     for (size_t k = 0; k < t.rows.size(); ++k) {

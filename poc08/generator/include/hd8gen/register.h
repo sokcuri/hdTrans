@@ -36,6 +36,7 @@ struct RegDecision {
     };
     std::vector<Quote> quotes;
     bool trail = false;       // the utterance trails off after a て-form (言われて……): no command at its end
+    bool trailConj = false;   // the line trails off after a conjunction (けど……): its last predicate keeps 0.7.x's level
     bool holdQuote = false;   // REG-1: the line is a quote and the narrator's outburst; the quote keeps 0.7.x's level
     // REG-16: what backs the addressee as the subject of a polite question (hon.tsv back rows, or Z's constraint)
     bool honSonkei = false;   // an honorific verb (いらっしゃる, 召し上がる, ご覧): -시- on the final predicate

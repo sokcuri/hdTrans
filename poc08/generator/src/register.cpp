@@ -290,6 +290,8 @@ struct Cues {
     bool auth = false;        // the line has an authoritative voice cue (voices.tsv auth, REG-14)
     bool trail = false;       // the last sentence trails off after a て-form (言われて……)
     bool outburst = false;    // REG-1: the cues are those of the narrator's outburst after a quote
+    bool casualMark = false;  // REG-20: a casual cue: a sentence-final particle, a contraction, a casual pronoun or address
+    bool trailConj = false;   // the last clause trails off after a conjunction (けど……, が……, て……)
     bool honSonkei = false, honGive = false;  // REG-16 (hon.tsv back rows)
     bool declZo = false;      // REG-17: a plain statement declared with ぞ or ぜ (行くぞ, やるぜ)
     bool exclaimNe = false;   // REG-18: a predicate exclaimed with な, なぁ, なあ (寒いなぁ)
@@ -443,6 +445,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         else if (r.cue == "archaic") c.arch = true;
         else if (r.cue == "stiff") c.stiff = true;
         else if (r.cue == "casual") casualEnd = true;
+        else if (r.cue == "casual-mark") c.casualMark = true;
         else if (r.cue.rfind("first:", 0) == 0 && c.first.empty()) c.first = r.cue.substr(6);
     }
     // the last sentence has no end cue (a name called out: 落ち着きなさい！ 森下っ！！): the nearest earlier sentence
@@ -483,6 +486,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         }
     }
     c.cend = casualEnd && !c.pend;
+    if (tailStripped || c.strongTail) c.casualMark = true;
     {
         std::u32string raw = LastSentence(u.text);
         size_t e = raw.size();
@@ -490,6 +494,10 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         size_t dots = e;
         while (dots > 0 && (raw[dots - 1] == U'…' || raw[dots - 1] == U'‥')) --dots;
         c.trail = dots < e && dots > 0 && (raw[dots - 1] == U'て' || raw[dots - 1] == U'で');
+        // a clause trailing off after a conjunction (ですけど……, ますが……, まして……): no sentence end to set a level on
+        const std::u32string head = raw.substr(0, dots);
+        for (const char32_t* conj : {U"けど", U"けれど", U"が", U"て", U"で", U"のに", U"から", U"ので", U"し"})
+            if (dots < e && EndsWith(head, conj)) c.trailConj = true;
     }
     // REG-14: a plain statement without a sentence-final particle (思えない, ファンだ, 戦ってみたかった)
     {
@@ -500,7 +508,8 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         while (!x.empty() && (x.back() == U'っ' || x.back() == U'ッ' || x.back() == U'ー')) x.pop_back();
         static const std::u32string kEnds = U"だたいるうくすつぬぶむぐん";
         static const std::u32string kORow = U"おこごそぞとどのほぼぽもよょろ";
-        const bool volitional = x.size() >= 2 && x.back() == U'う' && kORow.find(x[x.size() - 2]) != std::u32string::npos;
+        const bool volitional = x.size() >= 2 && x.back() == U'う' && kORow.find(x[x.size() - 2]) != std::u32string::npos &&
+                                !EndsWith(x, U"だろう") && !EndsWith(x, U"であろう");  // conjecture, not volition
         c.plainDecl = !question && !volitional && !tailStripped && !x.empty() && kEnds.find(x.back()) != std::u32string::npos;
     }
     // REG-13: an exclamation of discovery or realisation: the utterance is bare predicates alone (見つけた！, 面白い。,
@@ -565,7 +574,7 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
             // an adverb in -く or -ぐ is no verb (早く, まったく, しばらく, すぐ): cues.tsv casual rows say the same
             static const std::u32string kAdvKu = U"しよかたらすき早遅強弱高低深浅長短広狭多少近遠暗明熱冷寒暑重軽固細太新古若薄厚濃全";
             const bool adverb = (p.back() == U'く' || p.back() == U'ぐ') && kAdvKu.find(prev) != std::u32string::npos;
-            if (!pred && !adverb && pieces.size() == 1 && p.size() >= 2 && kVerbEnd.find(p.back()) != std::u32string::npos &&
+            if (!pred && !adverb && pieces.size() == 1 && p.size() >= 2 && p.size() <= 4 && kVerbEnd.find(p.back()) != std::u32string::npos &&
                 (kanjiPrev || (prev >= U'ぁ' && prev <= U'ゖ')) && p != U"そう" && p != U"どう")
                 pred = true;
             if (asked[pi]) pred = false;  // a question asks, it does not exclaim (読んでいい？, できた？)
@@ -600,6 +609,15 @@ Cues Scan(const RegisterTables& t, const std::string& ja) {
         if (!asks && alone && raw.size() >= 3 && raw.back() == U'か' &&
             (raw[raw.size() - 2] == U'…' || raw[raw.size() - 2] == U'‥'))
             c.exclaim = true;
+    }
+    // REG-14: a vocative with よ opening the line on a name or a title (副将アデムよ、, 王よ、) is the address of a lord
+    {
+        const size_t v = u.text.find(U"よ、");
+        if (v != std::u32string::npos && v >= 1 && v <= 12) {
+            const char32_t p = u.text[v - 1];
+            static const std::u32string kTitle = U"将王帝卿殿様師長官者君神";
+            if ((p >= U'ァ' && p <= U'ヺ' && p != U'ー') || kTitle.find(p) != std::u32string::npos) c.auth = true;
+        }
     }
     for (const auto& [kind, text] : t.honBack)
         if (u.text.find(text) != std::u32string::npos) (kind == "give" ? c.honGive : c.honSonkei) = true;
@@ -665,6 +683,36 @@ Persona VoiceOf(const RegisterTables& t, const std::string& ja) {
 
 std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector<RegLine>& lines, const RegOptions& opt) {
     std::vector<RegDecision> out(lines.size());
+    // REG-20: prose fiction: paragraphs separated by blank lines (at least 1 line in 20 is blank, 10 lines or more) and
+    // no speaker tags.
+    // Game and VN scripts have no blank lines or name their speakers.
+    bool prose = false;
+    std::vector<bool> casualAt(lines.size(), false);
+    auto blank = [&](size_t k) { return lines[k].ja.find_first_not_of(" \t\r\xe3\x80\x80") == std::string::npos; };
+    {
+        size_t blanks = 0;
+        bool tagged = false;
+        for (size_t k = 0; k < lines.size(); ++k) {
+            if (blank(k)) ++blanks;
+            if (!lines[k].speaker.empty()) tagged = true;
+        }
+        // (a document of a few lines is no evidence: at least 10 lines and 2 blank ones)
+        prose = !tagged && lines.size() >= 10 && blanks >= 2 && blanks * 20 >= lines.size();
+        if (prose)
+            for (size_t k = 0; k < lines.size(); ++k)
+                if (lines[k].dialogue) casualAt[k] = Scan(t, lines[k].ja).casualMark;
+    }
+    // the line right before or after line k (blank lines skipped) is dialogue that speaks casually: an exchange
+    auto casualNeighbour = [&](size_t k) {
+        for (int dir : {-1, 1})
+            for (long m = static_cast<long>(k) + dir; m >= 0 && m < static_cast<long>(lines.size()); m += dir) {
+                const size_t u = static_cast<size_t>(m);
+                if (blank(u)) continue;
+                if (lines[u].dialogue && casualAt[u]) return true;
+                break;
+            }
+        return false;
+    };
     struct Prof {
         double pol = 0, cas = 0;
         bool auth = false;
@@ -776,6 +824,8 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             auto decide = [&](const Cues& c, std::string key, RegDecision& r) {
                 // REG-14: a plain statement without a sentence-final particle from an authoritative voice keeps -다
                 if (key == "casual" && c.plainDecl && (c.auth || authSpeaker)) key = "auth-plain";
+                // REG-20: in prose fiction a plain statement without a casual cue keeps -다
+                else if (prose && key == "casual" && c.plainDecl && !c.casualMark && !casualNeighbour(k)) key = "prose-plain";
                 r.key = key;
                 auto row = t.levels.find(key);
                 r.level = row != t.levels.end() ? row->second.level : Level::hae;
@@ -793,6 +843,7 @@ std::vector<RegDecision> DecideLevels(const RegisterTables& t, const std::vector
             decide(cues[k - i], keys[k - i], d);
             d.trail = cues[k - i].trail;
             d.holdQuote = cues[k - i].outburst;
+            d.trailConj = cues[k - i].trailConj;
             d.firstPerson = !cues[k - i].first.empty();
             d.narration = d.key == "narr";
             // REG-15: a line of several quotes gets a level per quote; the line's own decision is its last quote's

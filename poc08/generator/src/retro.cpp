@@ -998,7 +998,13 @@ bool RunRetro(const RetroSystem& sys, const std::vector<std::string>& pre, const
                 const bool jaCommand = v.Bool("command") && nodes[q].mood == Mood::imp && was == Level::haera;
                 // REG-12: the source trails off after a て-form (言われて……): 0.7.x's -어 is not a command to raise
                 const bool trail = d.trail && nodes[q].ctype == CType::final_ && nodes[q].mood == Mood::imp;
-                const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail;
+                // a polite clause trailing off after a conjunction (そうじゃないですけど……) keeps 0.7.x's form: no 요 after
+                // a trailing conjunction
+                bool lastV = true;
+                for (size_t k = q + 1; k < nodes.size(); ++k)
+                    if (nodes[k].kind == Kind::V) lastV = false;
+                const bool trailing = d.trailConj && lastV;
+                const bool keep = (perQuote ? quoteAt(q).keep : d.keep) || thinkOf(q) || nested[q] || trail || trailing;
                 const bool held = mixed || inner || keep || keigo || askedByEnding || hapsyo || raise || jaCommand ||
                                   (command && d.key.rfind("scene-speech", 0) == 0);
                 if (!held && raisePlain) {

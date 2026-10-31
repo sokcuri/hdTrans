@@ -8,6 +8,7 @@
 #           set (formal set phrases), archaic (old speech), stiff (stiff plain speech), casual (plain endings),
 #           first:<name> (first-person pronoun), tail (a sentence-final particle stripped before `end` rows),
 #           quotative (a string after which an any-not-quoted match does not count),
+#           casual-mark (REG-20: a contraction, casual pronoun or address that marks casual speech),
 #           exclaim (a whole sentence that exclaims a discovery although it is not a た or い form, REG-13)
 #   mode    tail rows: strong marks a particle that makes an unbracketed line speech (inner monologue ending
 #           in よ/ね/ぞ is 해, not narration -다: spec/register.md REG-7); notafter as below; other rows:
@@ -221,3 +222,49 @@ casual	end	つ		a verb in its dictionary form (頂く, 任せる → る row)
 casual	end	ぶ		a verb in its dictionary form (頂く, 任せる → る row)
 casual	end	む		a verb in its dictionary form (頂く, 任せる → る row)
 casual	end	ぐ	す	a verb in its dictionary form (急ぐ); not すぐ
+casual-mark	any	ちゃう
+casual-mark	any	ちゃっ
+casual-mark	any	じゃう
+casual-mark	any	じゃっ
+casual-mark	any	ちまう
+casual-mark	any	ちまっ
+casual-mark	any	ってる
+casual-mark	any	ってた
+casual-mark	any	んでる
+casual-mark	any	んでた
+casual-mark	any	いてる
+casual-mark	any	いてた
+casual-mark	any	してる
+casual-mark	any	してた
+casual-mark	any	えてる
+casual-mark	any	えてた
+casual-mark	any	るんだ
+casual-mark	any	くんだ
+casual-mark	any	いんだ
+casual-mark	any	たんだ
+casual-mark	any	なんだ
+casual-mark	any	うんだ
+casual-mark	any	すんだ
+casual-mark	any	つんだ
+casual-mark	any	ってんだ
+casual-mark	any	じゃん
+casual-mark	any	じゃねえ
+casual-mark	any	じゃねー
+casual-mark	any	ねえ
+casual-mark	any	ねー
+casual-mark	any	俺
+casual-mark	any	オレ
+casual-mark	any	おれ
+casual-mark	any	僕
+casual-mark	any	ボク
+casual-mark	any	お前
+casual-mark	any	おまえ
+casual-mark	any	あんた
+casual-mark	any	てめえ
+casual-mark	any	ちゃん
+casual-mark	any	くん
+casual-mark	any	君は
+casual-mark	any	君が
+casual-mark	any	君の
+casual-mark	any	君に
+casual-mark	any	君を
