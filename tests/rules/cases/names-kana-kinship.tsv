@@ -12,15 +12,21 @@ names:kana-kinship	「おねいちゃん」	「언니」	fix	lookup
 names:kana-kinship	「血を流しすぎでしたね︐おねいちゃん」	「너무 피를 흘렸죠 ︐언니」	fix	lookup
 names:kana-kinship	ありがとう、レティおねいちゃん！」	고마워, 레티 언니!」	fix	lookup
 names:kana-kinship	「お、おねいちゃんじゃない。	「어, 언니가 아니다.	fix	lookup
-names:kana-kinship	「かれんおねえさん。いま、ぼくさされたよね？」	「카렌 언니. 지금, 나 찔릴 수 있었지?」	fix	lookup
-names:kana-kinship	かれんおねえさんに抱きしめられ、頭を撫でられていた。	카렌 언니에게 안겨 머리가 쓰다듬어지고 있었다.	fix	lookup
+names:kana-kinship	「かれんおねえさん。いま、ぼくさされたよね？」	has:「카렌 언니.	fix	lookup
+names:kana-kinship	かれんおねえさんに抱きしめられ、頭を撫でられていた。	has:카렌 언니에게	fix	lookup
 names:kana-kinship	（さつきおねえさん！？かお！	(사츠키 언니!? 얼굴!	fix	lookup
 names:kana-kinship	「うん、ありがとう。ゆうまおにいちゃん。」	「응, 고마워. 유마 오빠.」	fix	lookup
 names:kana-kinship	「ねえ、ゆうまおにいちゃん、こくはくおしえて〜。」	「있잖아, 유마 오빠, 고백 가르쳐 줘~.」	fix	lookup
-names:kana-kinship	三か月俺より産まれるのが遅かったのにおねーさん風を吹かせてくる。	3개월 나보다 태어나는 것이 늦었는데 언니 행세할 수 있어 온다.	fix	lookup
+names:kana-kinship	三か月俺より産まれるのが遅かったのにおねーさん風を吹かせてくる。	has:늦었는데 언니	fix	lookup
 names:kana-kinship	ドーラのほうがおねーさんなのにー……	도라 쪽이 언니인데~……	fix	lookup
 names:kana-drawn-honorific	「さくらさ〜ん、待って！」	「사쿠라 씨~, 기다려!」	fix	lookup
 names:kana-drawn-honorific	「かえでさぁん！」	「카에데 씨~!」	fix	lookup
+names:kana-kinship	かれんおねーさま！	카렌 언니!	fix	lookup
+names:kana-kinship	かれんおにぃさん！	카렌 오빠!	fix	lookup
+names:kana-kinship	「かれんおねぇさま、待って」	「카렌 언니, 기다려」	fix	lookup
+names:kana-drawn-honorific	さくらさｰん！	사쿠라 씨~!	fix	lookup
+names:kana-drawn-honorific	さよりちゃーんと遊ぶ	has:사요리짱과	fix	lookup
+names:kana-drawn-honorific	いつかちゃーんと話そう	언젠가 제대로~ 이야기하자	keep	lookup
 names:kana-drawn-honorific	「うわあーん、カイネおにいちゃーん」	「으아아앙, 카이네 오빠~」	keep	lookup
 names:kana-drawn-honorific	「すみれちゃ〜ん、今度映画でも観に行こうよ」	「스미레짱~, 이번에 영화라도 보러 가자」	keep	lookup
 names:kana-drawn-honorific	「なるみちゃーん、着替え置いとくよー」	「나루미짱~, 갈아입고 놓아둬~」	keep	lookup
@@ -29,7 +35,7 @@ names:kana-drawn-honorific	「みどりく〜ん、こっち！」	「미도리 
 names:kana-kinship	という事はおねえさんの家なのかな……？	그렇다고 하는 일은 언니의 집인가……?	keep	lookup
 names:kana-kinship	「だっておにーちゃんの作った料理食べてみたいんだもん！」	「왜냐하면 오빠가 만든 요리 먹어 보고 싶은걸!」	keep	lookup
 names:kana-kinship	そうだおにーちゃんが起きるまでここを動いたらダメなんだ。	그렇다 오빠가 일어날 때까지 여기를 움직이면 안돼.	keep	lookup
-names:kana-kinship	目が覚めると、知らないおねえさんにだかれていた。	깨어나니, 모르는 언니에게 만여지고 있었다.	keep	lookup
+names:kana-kinship	目が覚めると、知らないおねえさんにだかれていた。	has:모르는 언니에게	keep	lookup
 names:kana-kinship	おねえちゃーん！」	언니~!」	keep	lookup
 names:kana-drawn-honorific	「おかあさーん！	「어머니~!	keep	lookup
 names:kana-drawn-honorific	「いやーーーーっっ！！おにいちゃ〜ん！！！！！」	「싫어어어어엇!! 오빠~!!!!!」	keep	lookup
