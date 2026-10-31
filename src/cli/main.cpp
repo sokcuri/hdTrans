@@ -630,7 +630,8 @@ int RunMain(int argc, char** argv) {
     }
 
     hdTrans::names::List names;
-    if (const auto files = hdTrans::internal::NameFiles(engine)) names = *files;
+    const auto nameFiles = hdTrans::internal::NameFiles(engine);
+    if (nameFiles) names = nameFiles->list;
     if (!namesPath.empty()) {
         hdTrans::names::List listed;
         std::string text;
@@ -649,13 +650,17 @@ int RunMain(int argc, char** argv) {
     }
 
     const auto snapshot = engine.Dictionaries();
-    std::unique_ptr<hdTrans::pipeline::DocumentNames> documentNames;
-    if (!names.names.empty()) {
+    std::shared_ptr<const hdTrans::pipeline::DocumentNames> documentNames;
+    if (namesPath.empty()) {
+        documentNames = nameFiles;
+    } else if (!names.names.empty()) {
+        std::unique_ptr<hdTrans::pipeline::DocumentNames> compiled;
         std::vector<std::string> errors;
-        hdTrans::pipeline::CompileNames(*snapshot, names, documentNames, &errors);
+        hdTrans::pipeline::CompileNames(*snapshot, names, compiled, &errors);
         // The names of the user folders compiled when they loaded, so the errors are of --names.
         for (const std::string& error : errors)
             std::fprintf(stderr, "hdtrans: error: %s:%s\n", namesPath.c_str(), error.c_str());
+        documentNames = std::move(compiled);
     }
     const auto generated = hdTrans::internal::NewGenerated(*snapshot);
     const hdTrans::word::Scorer diagnosticScorers[] = {{"shortest-target", hdTrans::word::ShortestTargetScore}};

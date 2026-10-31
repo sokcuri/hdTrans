@@ -262,7 +262,7 @@ namespace {
 // The name lists of version, read and compiled for snap; null when they hold no name. A file that
 // cannot be read, a malformed line and a name that does not compile are reported in errors and
 // left out.
-std::shared_ptr<const names::List> LoadNameFiles(const dict::Snapshot& snap, const UserVersion& version,
+std::shared_ptr<const pipeline::DocumentNames> LoadNameFiles(const dict::Snapshot& snap, const UserVersion& version,
                                                  std::vector<dict::LoadError>& errors) {
     if (version.names.empty()) return nullptr;
     const auto lineError = [&errors](const std::string& file, std::string_view text) {
@@ -289,7 +289,11 @@ std::shared_ptr<const names::List> LoadNameFiles(const dict::Snapshot& snap, con
     if (all.names.empty()) return nullptr;
     std::unique_ptr<pipeline::DocumentNames> compiled;
     std::vector<std::string> compileErrors;
-    pipeline::CompileNames(snap, all, compiled, &compileErrors);
+    if (!pipeline::CompileNames(snap, all, compiled, &compileErrors)) {
+        // The names that compiled, without the rows that failed.
+        all = compiled->list;
+        pipeline::CompileNames(snap, all, compiled);
+    }
     for (const std::string& error : compileErrors) {
         // error is "FILE:LINE: message".
         const auto file = std::find_if(version.names.begin(), version.names.end(), [&](const auto& f) {
@@ -299,7 +303,7 @@ std::shared_ptr<const names::List> LoadNameFiles(const dict::Snapshot& snap, con
         lineError(file->first, std::string_view(error).substr(file->first.size() + 1));
     }
     if (compiled->list.names.empty()) return nullptr;
-    return std::make_shared<const names::List>(std::move(compiled->list));
+    return compiled;
 }
 
 }  // namespace
@@ -316,7 +320,7 @@ struct Access {
                        std::vector<dict::LoadError> userErrors, FilterLoad filters, bool keepFailed,
                        MemoryInput memory, const dict::UserSource& ehndSource,
                        const std::vector<dict::UserSource>& requested,
-                       std::shared_ptr<const names::List> nameFiles) {
+                       std::shared_ptr<const pipeline::DocumentNames> nameFiles) {
         if (ticket < e.current_) return Loaded(r);
         UserWatch& w = *e.watch_;
         const bool filterFailed = !filters.read || !filters.valid;
@@ -1020,19 +1024,16 @@ bool Session::CompileNames(std::vector<std::string>* errors) {
     if (!snapshot_) return true;
     namesSnapshot_ = snapshot_;
     names_.reset();
-    const names::List* files = generated_ ? generated_->nameFiles.get() : nullptr;
-    if (!nameList_ && !files) return true;
-    names::List merged;
-    const names::List* list = nameList_.get();
-    if (files && nameList_) {
-        merged = *files;
-        names::Merge(merged, *nameList_);
-        list = &merged;
-    } else if (files) {
-        list = files;
+    const auto& files = generated_ ? generated_->nameFiles : nullptr;
+    if (!nameList_) {
+        names_ = files;
+        return true;
     }
+    names::List merged;
+    if (files) merged = files->list;
+    names::Merge(merged, *nameList_);
     std::unique_ptr<pipeline::DocumentNames> compiled;
-    const bool ok = pipeline::CompileNames(*snapshot_, *list, compiled, errors);
+    const bool ok = pipeline::CompileNames(*snapshot_, merged, compiled, errors);
     names_ = std::move(compiled);
     return ok;
 }
@@ -1051,7 +1052,7 @@ std::string TranslateObserved(Session& session, std::string_view text, const Sta
     return Access::TranslateObserved(session, text, observer, context);
 }
 
-std::shared_ptr<const names::List> NameFiles(const Engine& e) {
+std::shared_ptr<const pipeline::DocumentNames> NameFiles(const Engine& e) {
     std::shared_ptr<const dict::Snapshot> snap;
     std::shared_ptr<Generated> generated;
     std::shared_ptr<const filter::Filters> filters;

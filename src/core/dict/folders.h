@@ -33,7 +33,7 @@ struct UserSource {
 // Expands folders to top-level userdict*.txt/tsv and .txt/tsv files whose first line
 // is a prefilter/postfilter header, in lowercase filename byte order.
 // Explicit files keep their positions; empty paths are ignored. The name lists of the
-// folders, their top-level names*.txt/tsv files, go to names in the same order.
+// folders, their other top-level names*.txt/tsv files, go to names in the same order.
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths);
 std::vector<std::string> UserFiles(const std::vector<std::string>& paths, std::vector<UserSource>& sources);
 std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::vector<UserSource>& sources,

@@ -75,7 +75,7 @@ bool ParseList(std::string_view text, List& out, std::vector<std::string>* error
             fail(number, "JA holds white space, | or /");
             continue;
         }
-        Listed name{std::string(f[0]), std::string(f[1]), };
+        Listed name{std::string(f[0]), std::string(f[1])};
         name.line = static_cast<int>(number);
         name.source = source;
         if (f.size() > 2 && !f[2].empty()) {

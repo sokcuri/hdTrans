@@ -161,16 +161,14 @@ std::vector<std::string> UserFiles(const std::vector<UserSource>& paths, std::ve
             const auto lower = Lower(filename);
             if (lower.ends_with(".txt") || lower.ends_with(".tsv")) {
                 std::error_code kindError;
-                const bool regular = entries->is_regular_file(kindError);
-                if (regular && lower.starts_with("names")) {
-                    lists.push_back(filename);
-                } else if (regular) {
+                if (entries->is_regular_file(kindError)) {
                     bool selected = lower.starts_with("userdict");
                     if (!selected && !UserFilterHeader(entries->path(), selected)) {
                         selected = true;
                         if (readFailures) readFailures->push_back(Utf8(entries->path()));
                     }
                     if (selected) names.push_back(filename);
+                    else if (lower.starts_with("names")) lists.push_back(filename);
                 }
                 if (kindError) error = kindError;
             }

@@ -51,12 +51,15 @@ export type Speech = 'soft' | 'strict';
  *  level its cues give after the translation; 'keep' keeps the translation's own levels. */
 export type SpeechLevels = 'auto' | 'keep';
 
-/** Options of one translate() call; speech and wrapped apply to this call only. */
+/** Options of one translate() call; speech, speechLevels, wrapped and names apply to this call only. */
 export interface TranslateOptions {
   json?: boolean;
   speech?: Speech;
   speechLevels?: SpeechLevels;
   wrapped?: boolean;
+  /** A name list for this call only, in place of the one setNames() gave. It is compiled for the
+   *  call and the earlier list again after it, so give a list that stays with setNames(). */
+  names?: string;
   /** Lines that come before text in the same document, read only for their cues and, when
    *  wrapped, for the start of a sentence text goes on with; they are not returned. */
   context?: readonly string[];
@@ -82,6 +85,7 @@ interface Binding {
   setSpeech(speech: Speech): boolean;
   setSpeechLevels(levels: SpeechLevels): boolean;
   setWrapped(wrapped: boolean): void;
+  setNames(text: string): boolean;
   setUserDict(entries: readonly { ja: string; ko: string; pos: string; options: string }[], strict: boolean | undefined): boolean;
   setUserDictRaw(text: string, strict: boolean | undefined): boolean;
   getUserDict(): UserDictEntry[];
@@ -115,6 +119,8 @@ export interface InitOptions {
   speech?: Speech;
   speechLevels?: SpeechLevels;
   wrapped?: boolean;
+  /** The name list of the document (setNames). */
+  names?: string;
   strictDict?: boolean;
 }
 
@@ -127,6 +133,7 @@ export class HdTrans {
   private speech_: Speech = 'strict';
   private speechLevels_: SpeechLevels = 'auto';
   private wrapped_ = false;
+  private names_ = '';
 
   private constructor(binding: Binding, version: string) {
     this.binding_ = binding;
@@ -155,6 +162,7 @@ export class HdTrans {
       if (options.speech) translator.setSpeech(options.speech);
       if (options.speechLevels) translator.setSpeechLevels(options.speechLevels);
       if (options.wrapped !== undefined) translator.setWrapped(options.wrapped);
+      if (options.names !== undefined) translator.setNames(options.names);
       return translator;
     } catch (error) {
       translator.close();
@@ -181,8 +189,9 @@ export class HdTrans {
     };
   }
 
-  /** options.speech, options.speechLevels and options.wrapped apply to this call only; setSpeech(),
-   *  setSpeechLevels() and setWrapped() set them for later calls. Nothing is kept from one call to the next. */
+  /** options.speech, options.speechLevels, options.wrapped and options.names apply to this call only;
+   *  setSpeech(), setSpeechLevels(), setWrapped() and setNames() set them for later calls. Nothing is
+   *  kept from one call to the next. */
   translate(text: string): string;
   translate(text: string, options: TranslateOptions & { json: true }): TranslationResult;
   translate(text: string, options: TranslateOptions & { json?: false }): string;
@@ -198,16 +207,39 @@ export class HdTrans {
     const speech = this.speech_;
     const speechLevels = this.speechLevels_;
     const wrapped = this.wrapped_;
+    const names = this.names_;
     try {
       if (options.speech !== undefined) this.setSpeech(options.speech);
       if (options.speechLevels !== undefined) this.setSpeechLevels(options.speechLevels);
       if (options.wrapped !== undefined) this.setWrapped(options.wrapped);
+      if (options.names !== undefined) this.setNames(options.names);
       return options.json ? binding.translateJson(text, context) : binding.translate(text, context);
     } finally {
       if (options.speech !== undefined) this.setSpeech(speech);
       if (options.speechLevels !== undefined) this.setSpeechLevels(speechLevels);
       if (options.wrapped !== undefined) this.setWrapped(wrapped);
+      if (options.names !== undefined) {
+        binding.setNames(names);
+        this.names_ = names;
+      }
     }
+  }
+
+  /** The name list of the documents of later translations, one name per line:
+   *  JA<TAB>KO[<TAB>KIND[<TAB>hon]] (docs/dictionary-files.md); '' drops it. The list is compiled
+   *  here, so give it once per document, not per line. A malformed line or a name that does not
+   *  compile throws an Error that lists them, after the other lines are applied. */
+  setNames(text: string): void {
+    const binding = this.binding();
+    if (typeof text !== 'string' || text.includes('\0')) throw new TypeError('hdtrans: names must be a string without NUL');
+    this.names_ = text;
+    if (!binding.setNames(text)) throw new Error(binding.error);
+  }
+
+  /** The text last given to setNames() or init({ names }). */
+  getNames(): string {
+    this.binding();
+    return this.names_;
   }
 
   /** The speech level of later translations; 'strict' until set. */

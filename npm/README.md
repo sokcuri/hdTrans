@@ -78,6 +78,16 @@ try {
 
 `getUserDict()` returns registered source rows as an independent copy. A malformed raw update keeps the active dictionary and reports `userDictError`; inspect it after updating. `filterErrors` reports rejected filter rows. `reset()` clears translation context. `close()` releases the translator and can be called more than once. Instances have independent user dictionaries, filters and context.
 
+## Name list
+
+```js
+const translator = await HdTrans.init({ names: '衣更\t이사라\n' });
+translator.translate('衣更は今日も元気だ。'); // 이사라는 오늘도 건강하다.
+translator.setNames('');                       // drops the list
+```
+
+A name list gives the names of one work, one per line: `JA<TAB>KO[<TAB>KIND[<TAB>hon]]`, in the format of the native `--names` (kinds `given`, `family`, `full`, `nick`, `place`, `org`, `title`). It applies to each call's document and does not change the dictionaries. `init({ names })` and `setNames(text)` set it for later calls; `translate(text, { names })` for one call. `setNames` compiles the list, so give it once per document, not per line. A malformed line or a name that does not compile throws after the other lines are applied; `getNames()` returns the last text given.
+
 ## CLI
 
 ```sh

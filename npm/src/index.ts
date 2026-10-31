@@ -15,7 +15,7 @@ export type {
   TranslateOptions,
 } from './runtime.js';
 
-export type InitOptions = Pick<RuntimeInitOptions, 'ehnd' | 'speech' | 'speechLevels' | 'wrapped' | 'strictDict'>;
+export type InitOptions = Pick<RuntimeInitOptions, 'ehnd' | 'speech' | 'speechLevels' | 'wrapped' | 'names' | 'strictDict'>;
 export type HdTrans = RuntimeHdTrans;
 
 let modulePromise: Promise<EngineModule> | undefined;
@@ -53,6 +53,7 @@ export const HdTrans = Object.freeze({
       speech: options.speech,
       speechLevels: options.speechLevels,
       wrapped: options.wrapped,
+      names: options.names,
       strictDict: options.strictDict,
     });
   },

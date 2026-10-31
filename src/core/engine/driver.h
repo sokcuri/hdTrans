@@ -82,9 +82,8 @@ struct Generated {
     // built-in program runs.
     rules::Program rules;
     bool hasRules = false;
-    // The names of the name lists of the user folders loaded with the dictionary, those that
-    // compile; null for none.
-    std::shared_ptr<const names::List> nameFiles;
+    // The name lists of the user folders loaded with the dictionary, compiled for it; null for none.
+    std::shared_ptr<const pipeline::DocumentNames> nameFiles;
 };
 
 // The rules program text a loaded dictionary assembles: the header, one L line per rule
@@ -95,8 +94,8 @@ std::string RuleProgramText(const dict::Snapshot& snap);
 // The marker families of a loaded dictionary, with the families the dictionaries made at load.
 std::shared_ptr<Generated> NewGenerated(const dict::Snapshot& snap);
 
-// The names of the name lists of the user folders that e loaded (Generated::nameFiles).
-std::shared_ptr<const names::List> NameFiles(const Engine& e);
+// The name lists of the user folders that e loaded (Generated::nameFiles).
+std::shared_ptr<const pipeline::DocumentNames> NameFiles(const Engine& e);
 
 // What a session keeps between its calls.
 // The quotes a line leaves open for the lines after it (「明日行く。 then 明後日も行く」), and
