@@ -522,14 +522,6 @@ bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
 
 namespace {
 
-// The respectful reading of the passive or potential (ら)れ of item it: going back through the
-// sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
-// otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
-// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), as does
-// such a noun before ご自身 with no predicate between (先生ご自身で料理を振る舞われる), and so does
-// a subject の right before an intransitive verb that holds no object (先生の言われる通り).
-// A transitive verb also needs its object before that subject: without one its subject is what
-// the act is done to (陛下が幽閉された, 姫様は許された).
 // Whether item p is ご自身, 御自身 or ご自分 with で, which names who does the act (先生ご自身で).
 bool SelfBy(const Item* p) {
     for (const std::string_view self : {"ご自身", "御自身", "ご自分"}) {
@@ -542,6 +534,14 @@ bool SelfBy(const Item* p) {
     return false;
 }
 
+// The respectful reading of the passive or potential (ら)れ of item it: going back through the
+// sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
+// otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
+// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), as does
+// such a noun before ご自身 with no predicate between (先生ご自身で料理を振る舞われる), and so does
+// a subject の right before an intransitive verb that holds no object (先生の言われる通り).
+// A transitive verb also needs its object before that subject: without one its subject is what
+// the act is done to (陛下が幽閉された, 姫様は許された).
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
     bool predicate = false;  // a predicate stands between: ご自身 is of another clause
