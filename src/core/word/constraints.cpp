@@ -382,11 +382,20 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     }
     case ConstraintContext::BeforeKaNegative: {
         if (!after.starts_with("か")) return false;
-        // Not the か of an adjective's past or of から, かけ (楽しかった, 話しかける).
-        if (const char32_t next = text::DecodeRune(after.substr(std::string_view("か").size())).cp;
-            std::u32string_view(U"っろれけらた").find(next) != std::u32string_view::npos) {
+        // Not the か of an adjective's past or of から, かけ (楽しかった, 話しかける), nor the か of a
+        // question that goes on (話しかもしれない, 話しかどうか, 話しかと, 話しかって, 話しかしら, 話しかい？,
+        // 話しかな); the negative after しか starts right there (しかない, しかいない, しかしない).
+        const std::string_view tail = after.substr(std::string_view("か").size());
+        if (const char32_t next = text::DecodeRune(tail).cp;
+            std::u32string_view(U"っろれけらたもと").find(next) != std::u32string_view::npos) {
             return false;
         }
+        static constexpr std::string_view kQuestion[] = {"どう", "って", "しら"};
+        if (StartsWithAny(tail, kQuestion)) return false;
+        static constexpr std::string_view kStartsNegative[] = {"ない", "なく", "なかっ"};
+        if (tail.starts_with("な") && !StartsWithAny(tail, kStartsNegative)) return false;
+        static constexpr std::string_view kIruNegative[] = {"いな", "いま"};
+        if (tail.starts_with("い") && !StartsWithAny(tail, kIruNegative)) return false;
         // Every reading of the word is a noun (話し, 達し), no adjective or verb stem (おかし).
         if (!std::all_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
                 return c.source != source || c.codes == nullptr || c.codes->part.Tag() == 'N' || c.codes->part.Tag() == 'I';

@@ -20,3 +20,7 @@ constraint:shi-before-shika	テツに話しかけた。	테츠에게 말을 걸�
 constraint:shi-before-shika	特になにかがおかしかったわけじゃない。	특히 뭔가가 이상했던 것이 아니다.	keep	lookup
 constraint:shi-before-shika	女の子の友達しかいない。	여자아이의 친구밖에 없다.	keep	lookup
 constraint:moshi-before-yasui	攻撃しやすくなる。	공격하기 쉬워진다.	keep	lookup
+constraint:shi-before-shika	そういう話しかもしれない	그런 이야기일지도 모른다	keep	lookup
+constraint:shi-before-shika	それが本当の話しかどうか分からない	그것이 진정한 이야기인가 어떤가 모른다	keep	lookup
+constraint:shi-before-shika	これは話しかなと思わない	이것은 이야기일까라고 생각하지 않는다	keep	lookup
+constraint:shi-before-shika	それが話しかと聞かれても分からない	그것이 이야기일까 하고 물어도 모른다	keep	lookup

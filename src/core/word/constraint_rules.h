@@ -68,7 +68,8 @@ enum class ConstraintContext : uint8_t {
     AfterWordBeforeNegative,  // a word right before and ない, なかっ, なく, なけれ or ません after (予感しかしない,
                               // 味しかしません; not いや、しかしなあ, まあしかしねえ, まあしかしずいぶん)
     BeforeYasui,        // やすい, やすく, やすかっ, やすけれ, やすさ or やすそ follows (攻撃もしやすくなる: the し is する)
-    BeforeKaNegative,   // か follows (not かっ, から or かけ) and a negative ends its clause, every reading of the
+    BeforeKaNegative,   // か follows (not かっ, から, かけ, the か of a question going on: かも, かどう, かと, かって,
+                        // かしら, かい, かな but for かない) and a negative ends its clause, every reading of the
                         // word is a noun and the word without its last kana is a word too (話しかしなかった is
                         // 話 + しか, 者達しかいない 者達 + しか; not 楽しかった, おかしかったわけじゃない)
     BeforeRassharu,     // らっしゃ follows (座っていらっしゃる: the い starts いらっしゃる)

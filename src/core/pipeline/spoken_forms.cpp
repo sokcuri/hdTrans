@@ -516,16 +516,29 @@ bool KansaiMahen(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-// The copula じゃ of western and old speech before the が of a contrast, だ (仕方ないのじゃが だが, そうじゃが,
-// 思うんじゃがな, a sentence-initial じゃが、 だが、). Not the じゃが of the potato (じゃがいも, じゃが芋,
-// じゃがバター, 肉じゃが).
+// The copula じゃ of western and old speech before the が of a contrast, だ (仕方ないのじゃが…, そうじゃが、,
+// 思うんじゃがな, 件じゃがの。, a sentence-initial じゃが、 だが、): only where the が ends the clause, before a
+// comma, な, ね, のう, の before a mark, a closing mark or the end, or after the ん of のだ; elsewhere じゃが is the potato (じゃがいも,
+// 新じゃがを, じゃがバタ, じゃがと人参, じゃがの皮, 肉じゃが).
 bool OldCopulaJaga(std::string_view s, size_t pos, Match& m) {
     if (s.substr(0, pos).ends_with("肉")) return false;
     size_t p = pos;
     if (!Lit(s, p, "じゃが")) return false;
-    for (const std::string_view w : {"い", "イ", "芋", "バター", "りこ", "ー"}) {
-        if (s.substr(p).starts_with(w)) return false;
+    constexpr std::u32string_view kEnds = U"、，,。｡！!？?…‥」』）)";
+    size_t q = p;
+    bool ends = q == s.size() || OneOf(s, q, kEnds);
+    for (const std::string_view w : {"な", "ね", "のう"}) {
+        q = p;
+        ends = ends || Lit(s, q, w);
     }
+    q = p;
+    if (Lit(s, q, "の")) ends = ends || q == s.size() || OneOf(s, q, kEnds);
+    // After the ん of のだ the が is the copula's before any word (そうなんじゃが判を, 来たんじゃが仕方ない).
+    if (!ends && s.substr(0, pos).ends_with("ん")) {
+        ends = true;
+        for (const std::string_view w : {"い", "イ", "芋", "バター"}) ends = ends && !s.substr(p).starts_with(w);
+    }
+    if (!ends) return false;
     m.end = p;
     return true;
 }
@@ -559,11 +572,15 @@ bool IchidanSe(std::string_view head) {
 // The Kansai あかん (アカン) of a predicate, いけない: alone (もうあかん, 見たらあかん, 行かなきゃあかん),
 // with the must of a bare な or んと after a negative stem written in full (撮らなあかん 撮らなきゃいけない,
 // せなあかん しなきゃいけない, 行かんとあかん 行かないといけない), its past (あかんかった いけなかった) and a
-// sentence-final で, the よ of Kansai speech (あかんで いけないよ). Not 埒があかん (it does not open), a
+// sentence-final で, the よ of Kansai speech (あかんで いけないよ). Not 埒があかん or ドアがあかん (it does not open), a
 // word that goes on (あかんべ, あかんぼう, あかんたれ) or a katakana word (ミチョアカン).
 bool KansaiAkan(std::string_view s, size_t pos, Match& m) {
     const std::string_view head = s.substr(0, pos);
     if (head.ends_with("埒が") || head.ends_with("らちが") || head.ends_with("埒") || head.ends_with("らち")) return false;
+    // A door, a lid or an eye before が: it does not open (ドアがあかん, 目があかん).
+    for (const std::string_view opens : {"ドアが", "扉が", "戸が", "窓が", "蓋が", "ふたが", "鍵が", "目が", "瞼が", "まぶたが"}) {
+        if (head.ends_with(opens)) return false;
+    }
     size_t p = pos;
     // group 1 the must before あかん, written in full
     if (Lit(s, p, "せな") || Lit(s, p, "せんと")) {

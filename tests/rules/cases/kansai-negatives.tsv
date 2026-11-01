@@ -40,3 +40,9 @@ contraction:potential-n	黙って見てるとは思えん。	입다물고 보고
 contraction:potential-n	―――如何せん、	―――아무래도,	keep	normalize
 contraction:godan-nen	そういうの要らんねん！	그러한 것 필요하지 않거든!	fix	normalize
 contraction:godan-nen	知らんねん。	모르거든.	fix	normalize
+normalize:old-copula-jaga	新じゃがを茹でる	lacks:지만	keep	normalize
+normalize:old-copula-jaga	じゃがバタ	lacks:지만	keep	normalize
+normalize:old-copula-jaga	じゃがと人参	lacks:지만	keep	normalize
+normalize:old-copula-jaga	じゃがの皮	lacks:지만	keep	normalize
+normalize:old-copula-jaga	報償の件じゃがの。	보상의 건이지만의.	fix	normalize
+normalize:kansai-akan	ドアがあかん。	문이 열리지 않아.	keep	normalize
