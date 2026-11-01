@@ -1,0 +1,25 @@
+# 규칙: LEX-3604
+# 규칙: LEX-3605
+rule	input	expected	kind	layer
+pack:forge-and-spicy-senses:1	そんな彼の側で剣を打っていただろう。	has:검을 벼리고	fix	packs
+pack:forge-and-spicy-senses:1	その剣を打ったのがラバーナでも名を知られる名工ザレブであり	has:검을 벼렸던	fix	packs
+pack:forge-and-spicy-senses:1	アヤナのためにもう一本剣を打ちたい	has:벼리고 싶	fix	packs
+pack:forge-and-spicy-senses:1	お礼としてこいつら二人に剣を打ってやったのよ	has:검을 벼려 줬어	fix	packs
+pack:forge-and-spicy-senses:1	曾爺さんを越える剣を打つには、これしかない。	has:검을 벼리려면	fix	packs
+pack:forge-and-spicy-senses:1	俺が剣を打てるのは知っているだろう。	has:검을 벼릴 수 있는	fix	packs
+pack:forge-and-spicy-senses:1	持つ者にしか刀や剣を打つことはしない。	has:검을 벼리지는	fix	packs
+pack:forge-and-spicy-senses:2	リュウとサイバーは剣を打ち合う。	has:검을 서로 친다	keep	packs
+pack:forge-and-spicy-senses:2	後方へ飛んで剣を打ち下ろす。	has:검을 쳐 내린다	keep	packs
+pack:forge-and-spicy-senses:2	何度も剣を打ち付けていく。	lacks:벼	keep	packs
+pack:forge-and-spicy-senses:1	鉄を打つ音が響く。	has:철을 치는	keep	packs
+pack:forge-and-spicy-senses:1	頭を打った。	has:머리를 부딪쳤다	keep	packs
+pack:forge-and-spicy-senses:5	辛い匂いがした。	has:매운 냄새가 났다	fix	packs
+pack:forge-and-spicy-senses:5	あれ？辛い匂いがしますね。	has:매운 냄새가 나네요	fix	packs
+pack:forge-and-spicy-senses:5	食べる前から辛い匂いがする……	has:매운 냄새가 난다	fix	packs
+pack:forge-and-spicy-senses:5	しょうがの辛い味がした。	has:매운 맛이 났다	fix	packs
+pack:forge-and-spicy-senses:3	辛い味付けの野菜料理がメインだね」	has:매운 양념의	fix	packs
+pack:forge-and-spicy-senses:3	全体的に濃くて辛い味付けの汁とあっている。	has:매운 양념의	fix	packs
+pack:forge-and-spicy-senses:5	甘辛い匂いがした。	has:달짝지근한 냄새가 났다	keep	packs
+pack:forge-and-spicy-senses:5	ヒューイのキスは塩辛い味がした。	has:짠 맛이 났다	keep	packs
+pack:forge-and-spicy-senses:5	辛い思いをしながらも僕は毎日学校へ行く	lacks:매운	keep	packs
+pack:forge-and-spicy-senses:3	相当辛いものだった。	has:괴로운 것이었다	keep	packs
