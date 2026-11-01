@@ -530,6 +530,18 @@ namespace {
 // a subject の right before an intransitive verb that holds no object (先生の言われる通り).
 // A transitive verb also needs its object before that subject: without one its subject is what
 // the act is done to (陛下が幽閉された, 姫様は許された).
+// Whether item p is ご自身, 御自身 or ご自分 with で, which names who does the act (先生ご自身で).
+bool SelfBy(const Item* p) {
+    for (const std::string_view self : {"ご自身", "御自身", "ご自分"}) {
+        const std::string_view s = p->group->surface;
+        if (!s.starts_with(self)) continue;
+        const std::string_view rest = s.substr(self.size());
+        if (rest == "で") return true;
+        if (rest.empty() && p->next != nullptr && p->next->group != nullptr && p->next->group->surface == "で") return true;
+    }
+    return false;
+}
+
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
     bool predicate = false;  // a predicate stands between: ご自身 is of another clause
@@ -542,8 +554,7 @@ bool RespectfulReading(const Item* it, bool transitive) {
             if (a != nullptr && Person(a->Attr(std::max(a->selected, 0)))) return false;
         } else if (s == "を") {
             object = true;
-        } else if ((s.starts_with("ご自身") || s.starts_with("御自身") || s.starts_with("ご自分")) && !predicate &&
-                   HonouredPerson(p->prev)) {
+        } else if (!predicate && SelfBy(p) && HonouredPerson(p->prev)) {
             return true;
         } else if (s == "の" && p == it->prev && !transitive && !Has(it->group->surface, "を")) {
             return HonouredPerson(p->prev);

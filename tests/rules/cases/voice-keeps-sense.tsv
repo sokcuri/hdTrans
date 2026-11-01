@@ -10,7 +10,7 @@ pack:cue-chosen-senses:17	そこでわたしは料理を振る舞われ、	has:�
 pack:cue-chosen-senses:17	今日は食事を振る舞われるだろうか。	has:대접받을까	fix	packs
 pack:cue-chosen-senses:17	民衆から歓迎の食事と酒を振る舞われる	has:대접받는다	fix	packs
 pack:cue-chosen-senses:17	風呂や夕食を振る舞われた恩義があった。	has:대접받은	fix	packs
-voice:respectful-gojishin	先生ご自身でお料理を振る舞われる時には、	has:요리를 대접할 때는	keep	voice
+voice:respectful-gojishin	先生ご自身でお料理を振る舞われる時には、	lacks:대접받을	keep	voice
 pack:cue-chosen-senses:17	二人部屋で紅茶を振る舞われた事を思い出し。	has:대접받은	fix	packs
 pack:cue-chosen-senses:17	そして小さな妬みを込めて酒を振る舞われたと、	has:대접받았다고	fix	packs
 pack:cue-chosen-senses:17	昨日は日本では見ないようなご馳走を振る舞われ、	has:대접받아	fix	packs
@@ -24,7 +24,6 @@ pack:cue-chosen-senses:17	村人達からお礼にと頂いた食材で作った
 pack:cue-chosen-senses:17	流石に朝から昨日の夜のようなフルコース料理を振る舞われそうになったので、	has:대접받고	fix	packs
 pack:cue-chosen-senses:17	大した関係ではないと思っていたアシルが令嬢の手料理を振る舞われるような関係と知って、	has:대접받는	fix	packs
 pack:cue-chosen-senses:17	このあたりで採れる薬草から作った苦味の強いお茶を振る舞われた私はその話を聞きながら感銘を受けた。	has:대접받은	fix	packs
-voice:respectful-gojishin	皆様ご自分の領地で余生を送られないんでしょうか？	has:여생을 보내시지	fix	voice
 voice:respectful-gojishin	それはプリームス様ご自身で判断されれば宜しいかと。	has:판단하시면	fix	voice
 voice:respectful-gojishin	あの、もしかして、領主様ご自身で製作されるんですか？	has:제작하십니까	fix	voice
 voice:respectful-gojishin	最後には陛下ご自身でご確認された結果、間違いなく、皇家の血筋であると証明されたのだ。	has:증명되었다	keep	voice
@@ -32,3 +31,4 @@ pack:cue-chosen-senses:17	紅茶を振る舞われている。	has:대접받고	
 pack:cue-chosen-senses:14	飯を食い終わった俺たちに、ユナは冷やしたハーブティーを振る舞った。	다 밥을 먹은 우리에게, 유나는 차게 한 허브티를 대접했다.	keep	packs
 pack:cue-chosen-senses:14	王女らしく振る舞うのがバカらしくなっちゃった。	왕녀답게 행동하는 것이 바보스러워져버렸다.	keep	packs
 voice:respectful-gojishin	卒業後にご自身で爵位を継がれるか	has:스스로 작위	keep	voice
+voice:respectful-gojishin	私は陛下御自身の命令で幽閉された。	has:유폐되었다	keep	voice
