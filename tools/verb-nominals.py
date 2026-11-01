@@ -12,8 +12,9 @@ existentials 있다, 없다 and 계시다 are left out. A verb stem makes its no
 the table when it is the last word of the Korean of a noun row of two words or more (잠들어 버림) whose word
 before it is no attributive (흐르는 땀, 수줍은 웃음), or the whole Korean of a noun row of two syllables or
 more (삼킴); and when it is not itself the Korean of a noun row of kanji read in Sino-Korean (録音 녹음, 再起
-재기; src/core/dict/char_readings_gen.cpp) and comes from one verb only. Run
-it again when the dictionaries change; --check exits 1 when the table differs (ctest dicts.verb-nominals).
+재기; src/core/dict/char_readings_gen.cpp) or a word of its own (WORDS: 고함, 그림), and comes from one verb
+only. The name dictionaries are not read. Run it again when the dictionaries change; --check exits 1 when the
+table differs (ctest dicts.verb-nominals).
 """
 import collections
 import re
@@ -31,6 +32,12 @@ def syllable(c):
 
 def with_final(c, final):
     return chr(ord(c) - syllable(c)[2] + final)
+
+
+# Korean nouns spelled as a verb made a noun that are words of their own (고함 a shout, not 고하다; 그림 a
+# picture, not 그리다): a する after them is the noun's 하다.
+WORDS = {"고함", "이름", "구름", "그림", "바람", "기름", "고름", "거름", "마름", "어림", "힘", "김", "슬기", "움",
+         "춤", "꿈", "잠", "삶", "앎", "땀", "셈", "짐", "보름", "얼음", "다름", "아픔", "기쁨", "슬픔"}
 
 
 def nominals(stem, cls):
@@ -70,8 +77,10 @@ def sino(key, ko, readings):
 
 
 def rows(dicts):
-    """(key, Korean, part) of every row of the plain and the column dictionaries."""
+    """(key, Korean, part) of every row of the plain and the column dictionaries but the name dictionaries."""
     for path in sorted(dicts.glob("*.tsv")):
+        if path.name.startswith("names"):
+            continue
         header = None
         for line in path.read_text(encoding="utf-8").splitlines():
             if line.startswith("#") or not line:
@@ -124,7 +133,7 @@ def table(dicts, families, chars):
         elif len(words) == 1 and len(ko) >= 2 and ko in made:
             used.add(ko)
     lines = ["# The Korean verbs made nouns that end the Korean of noun rows, and their verbs (tools/verb-nominals.py)."]
-    for noun in sorted(used - sinos):
+    for noun in sorted(used - sinos - WORDS):
         if len(made[noun]) == 1:
             lines.append(f"{noun}\t{next(iter(made[noun]))}")
     return "\n".join(lines) + "\n"

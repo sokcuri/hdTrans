@@ -626,6 +626,12 @@ std::optional<std::string> VerbNounBeforeSuru(std::vector<ResolvedItem>& items, 
     const bool whole = suru == "&AV@";
     const bool stem = suru.starts_with(kHago) && suru.size() > kHago.size();
     const bool infinitive = suru.starts_with(kHae) && suru.size() > kHae.size();
+    // A する of its stem alone goes on into the verb after it (喧嘩し続けた 계속 싸움했다), which BuildAction
+    // writes with the noun.
+    if (static_cast<std::uint8_t>(next.detailKind) == 10 && next.endingLength == 0 &&
+        i + 2 < static_cast<int>(items.size()) && Adjoins(items, i + 2) && First(Code(items[i + 2])) == '4') {
+        return {};
+    }
     if (next.fixed || !(whole || stem || infinitive) ||
         !(dict::InClass(HDTRANS_CLASS("suru.verbal-noun-whole"), next.surface) ||
           dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0)) {
