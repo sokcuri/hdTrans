@@ -6,6 +6,7 @@ dict:jisjk:342434	「待ってるぞ」	「기다리고 있어」	fix	lookup
 dict:jisjk:342434	「分かってるぞ」	「알고 있어」	fix	lookup
 dict:jisjk:342434	……顔、死んでるぞ？」	……얼굴, 죽어 있어?」	keep	lookup
 dict:jisjk:342434	「うおっ！なってるぞ！」	「우옷! 돼 있어!」	keep	lookup
+dict:jisjk:342434	ご両親が校門に来てるぞ	부모님이 교문에 와 있어	keep	lookup
 dict:jisjk:342434	「落ちてるぞ」	「떨어져 있어」	keep	lookup
 normalize:adjective-su	これネ ユニクロの真逆じゃないすか	이것이네 유니클로의 정반대가 아닌가요	fix	normalize
 normalize:adjective-su	「運じゃないすか？」	「운이 아닌가?」	fix	normalize

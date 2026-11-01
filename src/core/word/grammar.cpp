@@ -1783,6 +1783,11 @@ void ResultState(Flusher& f) {
                 verb = "来";
             }
         }
+        // The irregular 来る with the contracted てるぞ takes the aspect of 来ている, the stem 来 (校門に
+        // 来てるぞ 와 있어); 来てる alone stays the act going on (横から来てるよ 오고 있어).
+        if (verb == "来る" && v == it && v->selected >= 0 && v->EntryText(v->selected) == "&AH@" && it->DirectSurface().ends_with("るぞ")) {
+            verb = "来";
+        }
         // What keeps coming, as wind or waves, comes on (いい風きてる 좋은 바람 오고 있어).
         if (verb == "来" && FlowBefore(v)) continue;
         const bool past = v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb);
