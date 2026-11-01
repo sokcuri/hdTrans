@@ -405,6 +405,25 @@ bool SsuMidSentence(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// The す of っす said without its っ after the い of an adjective or of ない written in kana, before か
+// (not から), ね, よ, けど, a mark or the end (真逆じゃないすか, ヤバいすね, いいすか？): group 1 what follows,
+// written after いっす. Not after a kanji or a particle, where いす is 椅子 (車いすから, このいす、), nor the
+// greeting ういす; after い only for いい standing alone (それ、いいすね; not 赤いいすね).
+bool AdjectiveSu(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    const char32_t c = Before(s, pos);
+    if (c == 0 || c == U'う' || !(IsHiraganaClass(c) || IsKatakanaRune(c)) || In(c, U"のがはをにもとでへ")) return false;
+    if (c == U'い') {
+        const std::string_view head = s.substr(0, pos - LastRune(s.substr(0, pos)).size);
+        const char32_t b = Before(head, head.size());
+        if (b != 0 && (IsHiraganaClass(b) || IsKatakanaRune(b) || IsKanjiClass(b) || b == U'ー')) return false;
+    }
+    if (!Lit(s, p, "いす")) return false;
+    if (s.substr(p).starts_with("けど")) return Done(s, m, p, p + std::string_view("けど").size(), 1);
+    if (s.substr(p).starts_with("から")) return false;
+    return CharOrEnd(s, p, U"かねよ。！？!?…‥」』、", m, 1);
+}
+
 // A literal pattern.
 template <const char* kText>
 bool Literal(std::string_view s, size_t pos, Match& m) {
@@ -860,9 +879,10 @@ bool KoKara(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|やっ|^し|[^ぁ-ゖ]し|[にをう]し)(と|ど)
+// ([一-龥々](?:[っしいえけげせぜてねべめれん])?|もらっ|まかし|やっ|[にく]なっ|^し|[^ぁ-ゖ]し|[にをう]し)(と|ど)
 // (く|こう|こ|いて|いた|いで|きな|きま|きたい|きたく|きたか|きゃ|き|け)([^ぁ-ゖ]|[よねぞわなも]|あげ|くれ|くだ|$), or
-// けば; after the っ or ん of a godan て form in kanji (持っといで, 呼んどいたから) and after the し of する
+// けば; after the っ or ん of a godan て form in kanji (持っといで, 呼んどいたから), after the なっ of なる
+// following に or く (親密になっといてまだ) and after the し of する
 // following に, を or う (こうしといたら) whatever follows.
 bool Toku(std::string_view s, size_t pos, Match& m) {
     auto after = [&](size_t p, bool suruTe = false) {
@@ -899,6 +919,12 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     for (std::string_view w : {"もらっ", "まかし", "やっ"}) {
         p = pos;
         if (Lit(s, p, w) && after(p)) return true;
+    }
+    p = pos;
+    // なっとく is also 納得 in kana: as the form of おく only where the rest allows it.
+    // なっとく where the sentence ends is 納得 (本当になっとく。).
+    if (OneOf(s, p, U"にく") && Lit(s, p, "なっ") && ((after(p, true) && m.group[3] != "く") || after(p))) {
+        return m.group[3] != "く" || (!m.group[4].empty() && IsHiraganaClass(At(m.group[4], 0).cp));
     }
     p = pos;
     if (pos == 0 && Lit(s, p, "し") && after(p)) return true;
@@ -1060,6 +1086,7 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
     text = ReplaceAll(text, Literal<kUssai>, [](const Match&) { return std::string("うるさい"); });
     text = ReplaceAll(text, Literal<kSsuKatakana>, [](const Match&) { return std::string("っす"); });
     text = ReplaceAll(text, Literal<kNaiNsuKatakana>, [](const Match&) { return std::string("ないんす"); });
+    text = ReplaceAll(text, AdjectiveSu, [](const Match& m) { return Cat({"いっす", m.group[1]}); });
     text = ReplaceAll(text, SsuMidSentence, [](const Match& m) { return std::string(m.group[1]); });
     // てんす and でんす are the contracted ている before it (言ってんすか 言ってるんですか).
     text = ReplaceAll(text, contracted ? Nsu<true> : Nsu<false>, [contracted](const Match& m) {

@@ -1,0 +1,29 @@
+# 규칙: LEX-3420
+# 규칙: LEX-3421
+rule	input	expected	kind	layer
+dict:loanword-typos:1	パソコンを起動させＵＳＢポートにケーブルを差し込んだ。	has:USB 포트에	fix	defaults
+dict:loanword-typos:1	通信ポートのミラーリング設定をしているようだ。	has:통신 포트의	fix	defaults
+dict:loanword-typos:1	係の人に案内されて転送ポートへと進む。	has:전송 포트로	fix	defaults
+dict:loanword-typos:1	迷宮の最深部には、ポートと呼ばれる、移動用の魔法陣がある。	has:포트로 불리는	fix	defaults
+dict:loanword-typos:1	ドッキング・ポートの陸戦隊を先にやる	has:포트의	fix	defaults
+dict:loanword-typos:1	ポートを使って行くが	has:포트를	fix	defaults
+dict:loanword-typos:1	色々コイツがサポートしてくれるらしい	has:서포트해	keep	defaults
+dict:loanword-typos:1	まるでテレポートでもするかのようにその場から消えていた。	has:텔레포트라도	keep	defaults
+dict:loanword-typos:1	パスポート発行も買い出しもすべて終わらせよう！	has:패스포트 발행	keep	defaults
+dict:loanword-typos:1	要約レポートの作成。	has:리포트의	keep	defaults
+dict:loanword-typos:1	エアポートに向かう途中なのだ。	has:공항으로	keep	defaults
+dict:loanword-typos:2	どっちを王にするかでモメると思ってんでしょ？	has:다툰다고	fix	defaults
+dict:loanword-typos:2	よくミカジメの取り合いでモメるんです	has:다툽니다	fix	defaults
+dict:loanword-typos:2	レジでモメる声が聞こえてきた。	has:다투는 목소리	fix	defaults
+dict:loanword-typos:2	で、その二人がモメてるんだ。	has:다투고 있어	fix	defaults
+dict:loanword-typos:2	お前とジェイクがモメたって話は、みんな知ってるぜ。	lacks:안절부절	fix	defaults
+dict:loanword-typos:2	絶対モメるぞ。	has:다투겠어	fix	defaults
+dict:loanword-typos:2	そのリズムに合わせて、カモメたちは舞うのだ。	has:갈매기들은	keep	defaults
+dict:loanword-typos:2	数羽のカモメが飛んでいる。	has:갈매기가	keep	defaults
+dict:loanword-typos:2	「なるほど、有名じゃないからっと、メモメモ」	has:메모 메모	keep	defaults
+dict:loanword-typos:2	入院の事で奥様と揉めたって！	has:다투었대	keep	defaults
+dict:loanword-typos:10	モリブテン	몰리브덴	fix	defaults
+dict:loanword-typos:13	マルチンゲール	마팅게일	fix	defaults
+dict:loanword-typos:15	そんな時、４０代の男性とモメ事が起きた。	has:다툼이 일어났다	fix	defaults
+dict:loanword-typos:15	早速モメ事起こしてるバカがいました。	has:다툼	fix	defaults
+dict:loanword-typos:16	モメごとは起こすなよ。	has:다툼은	fix	defaults

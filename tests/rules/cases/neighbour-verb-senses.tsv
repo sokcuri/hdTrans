@@ -1,0 +1,60 @@
+# 규칙: GRM-3076, LEX-3481, LEX-3482, LEX-3483, LEX-3484, LEX-3485
+rule	input	expected	kind	layer
+dict:jisjk:96124	まぁ、一緒に出掛けたいと思ってくれてるだけでも喜んどくべきかなぁ。	has:기뻐해 두어야	fix	local
+dict:jisjk:96124	大教母様が御帰還されたとあって街の者たちも喜んでおります。	has:기뻐하고 있습니다	fix	local
+dict:jisjk:96124	フィルミーノも喜んでおろう。	!rule:dict:jisjk:96124	fix	local
+dict:jisjk:96124	素質があるということを、喜んでおけばいいか。	has:기뻐해 두면	fix	local
+dict:jisjk:96124	まあ、小鳥ちゃんの見た中ではそれなりに上位らしいので、素直に喜んでおこうか。	has:기뻐해 둘까	fix	local
+dict:jisjk:96124	私達は思わず子供のように声を出して喜んでしまった。	has:기뻐해버렸다	fix	local
+dict:jisjk:96124	柄にもなく喜んでしまった。	!rule:dict:jisjk:96124	fix	local
+dict:jisjk:96124	「もちろん喜んで行くけどさ。何かあったのか？」	rule:dict:jisjk:96124=기꺼이    	keep	local
+dict:jisjk:96124	あぁいいぜ、何か頼み事があるってんなら喜んで引き受けよう。	rule:dict:jisjk:96124=기꺼이    	keep	local
+dict:jisjk:96124	「ええ。喜んで受けましょう」	rule:dict:jisjk:96124=기꺼이    	keep	local
+dict:jisjk:96124	「そうですね。ナーナシロナ様の料理ならば、賢馬様方も喜んでお召し上がりになりますわよ」	has:기꺼이 드셔요	keep	local
+dict:jisjk:373866	王族に見せる余興として使われている事に私のため息は増えるばかり。	!rule:dict:jisjk:373866	fix	local
+dict:jisjk:373866	親のパソコンを借りて、誰に見せるわけでもなく、好きなRPGを題材にしたオリジナル小説を書いていた。	has:누구에게 보이는	fix	local
+dict:jisjk:373866	だけど一年に数度しか会えない両親に見せてもまったく無関心、	has:부모님에게 보여도	fix	local
+dict:jisjk:373866	このひらがなより、カタカナの方が多い説明を齢７０や８０のジーさんやバーさんに見せてどれぐらいのお年寄りが理解できるだろうか？	!rule:dict:jisjk:373866	fix	local
+dict:jisjk:373866	「でも意外な一面だよな〜。昼間の魅音に見せてやりたいよ！	has:미온에게 보여 주고	fix	local
+dict:jisjk:373866	ブルブル震えだす身体はいつもの尊大さはなりを潜め、ティナを小さく見せる。	rule:dict:jisjk:373866=보이게 &AV@	keep	local
+dict:jisjk:373866	年老いても若く見せる柔い唇が、隙間からほんのり甘い香煙をこぼす。	rule:dict:jisjk:373866=보이게 &AV@	keep	local
+dict:jisjk:373866	単なる見栄、外側だけは強く見せよう	rule:dict:jisjk:373866=보이게 &AV@	keep	local
+dict:w:14800	優男な熟女好き眷属は熟成魔法を駆使してゴブリンを生きたまま	rule:dict:w:14800=좋아하는	fix	local
+dict:w:14800	列車好きキッズ集まれー！！	has:열차 좋아하는 키즈	fix	local
+dict:w:14800	それではそれでは中国が誇る女好き性欲大魔王の東京生活の始まり始まりです。	has:여자 좋아하는 성욕	fix	local
+dict:w:14800	「ねぇ…アキくん？おっぱい大好きアキくん？それとも貧乳好きアキくんなのかな？」	has:빈유 좋아하는 아키	fix	local
+dict:w:14800	人族は旅好きで大の噂好き。	has:소문 좋아해.	keep	local
+dict:w:14800	「ブタ、ワラビ好き。家、来たい言う。私一緒来た」	has:고사리 좋아해.	keep	local
+dict:jisjk:356900	佳代は、教室に入ってきた幸也に驚き、少し目を大きくさせた。	has:눈을 크게 했다	fix	local
+dict:jisjk:356900	実体の見えない不安が、酷く人々の心を居心地悪くさせた。	has:불편하게 했다	fix	local
+dict:jisjk:356900	そう言って頬を掻く彼に、私は……キッと視線を鋭くさせると、いつものように叫んだ。	has:날카롭게 하면	fix	local
+dict:jisjk:356900	魅音め、こいつなかなか人を熱くさせるのがうまいよなぁ！	has:뜨겁게 하는 것이	fix	local
+dict:jisjk:356900	リーダーの男とそのパーティーは先ほどよりも顔を険しくさせる。	has:험하게 한다	fix	local
+dict:jisjk:356900	屋敷の一階で一歩前に出た美香穂は表情を険しくさせていた。	has:험하게 하고 있었다	fix	local
+dict:jisjk:356900	睡蓮の口から出た仮説は、千隼の表情を険しくさせるのには十分すぎた。	has:험하게 하는데는	fix	local
+dict:jisjk:356900	けど気持ち良くなってしまうのは本当で、そのせめぎ合いが私を苦しくさせる。	has:괴롭게 한다	fix	local
+dict:jisjk:356900	「もう、今日のヒトキ君はそんな事ばっかり言って、私を恥ずかしくさせてばかり……もぅ」	has:부끄럽게 하고만	fix	local
+dict:jisjk:356900	「じゃじゃ馬王女を大人しくさせてからじゃないと洗えないだろ」	!rule:dict:jisjk:356900	keep	local
+dict:jisjk:356900	暴れている相手に使う大人しくさせる魔法だ。	!rule:dict:jisjk:356900	keep	local
+dict:jisjk:93094	ああ、ドアに付いているレンズからこっちを見てるのか？	!rule:dict:jisjk:93094	fix	local
+dict:jisjk:93094	それにシグルド……。まさか、あなたが前王朝の残党に付いていたとはね……。	has:잔당에 붙어 있었다	fix	local
+dict:jisjk:93094	幼い頃、こっそり出かける親の後に付いていって秘密の祭をうっかり目撃したことがある。	rule:dict:jisjk:93094=뒤&E3@	keep	local
+dict:jisjk:93094	もつれそうな足を引きずって、ジークさんに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
+dict:jisjk:93094	ブレトはカブリの様子を不思議がりながらも、彼の後に付いて行く。	rule:dict:jisjk:93094=뒤&E3@	keep	local
+dict:jisjk:93094	『意識』は、その『誰か』の後ろに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
+dict:jisjk:93288	どうなったか、コンラートさんに聞こうと思っていたんだ。	has:들으려고 하고 있었다	fix	local
+dict:jisjk:93288	「前から言おうと思っていたんだけどねぇ森……」	has:말하려고 하고 있었다	fix	local
+dict:jisjk:93288	「行こうと思っていたんだけど、急に怖くなって」	has:가려고 하고 있었다	fix	local
+dict:jisjk:93288	本当はもう少し溜まってから一気にやろうと思っていたんだが、どうせ暇ならやってもいいだろう。	has:하려고 하고 있었는데	fix	local
+dict:jisjk:93288	それも謝ろうと思っていたんだ」	has:사과하려고 하고 있었다	fix	local
+dict:jisjk:93288	うさぎ焼きは後で食べようと思っていたんだ。	has:먹으려고 하고 있었다	fix	local
+dict:jisjk:93288	早いとこ適当なことを言って帰ろうと思っていたんだ。	has:돌아가려고 하고 있었다	fix	local
+dict:jisjk:93288	「あ、いいよ！ほんとはこちらからお願いしようと思っていたんだ」	has:부탁하려고 하고 있었어	fix	local
+dict:jisjk:93288	「そのことをお前に相談しようと思っていたんだ。運よくこちらに出向いてくれて助かったよ」	has:상담하려고 하고 있었어	fix	local
+dict:jisjk:93288	「ああ。丁度行こうと思っていたんだ」	has:가려고 하고 있었어	fix	local
+dict:jisjk:93288	戦いが始まる前にクランメンバーの様子を確認しておこうと思っていたんだ。	has:두려고 하고 있었다	fix	local
+dict:jisjk:93288	後、ジュンに引導をわたそうと思っていたんだが。	has:건네려고 하고 있었는데	fix	local
+dict:jisjk:93288	お手伝いしようと思って、彼女の尻を上げさせた。	has:도우려고 해,	keep	local
+dict:jisjk:93288	「…ええ。そっちは別件として頼もうと思っていました」	has:부탁하려고 했습니다	keep	local
+dict:jisjk:93288	その日は、学校の行事について聞こうと思っていた。	has:들으려고 했다	keep	local
+dict:jisjk:93094	東雲さんに言われた非常扉も各階に付いている。	has:각층에 붙어 있다	fix	local

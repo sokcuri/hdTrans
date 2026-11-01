@@ -34,7 +34,7 @@ compose:sign-word-nominal	悲しみ①	슬픔①	fix	compose
 compose:sign-word-nominal	いいさ+1	좋아 +1	keep	compose
 compose:sign-word-nominal	そうさ。	그래.	keep	compose
 compose:sign-word-nominal	まあいいさα	뭐 좋아 α	keep	compose
-compose:sign-word-nominal	それでいいさ①	그것으로 좋아 ①	keep	compose
+compose:sign-word-nominal	それでいいさ①	그거면 돼 ①	keep	compose
 compose:sign-word-nominal	楽しいさ+1	즐거워 +1	keep	compose
 compose:sign-word-nominal	そうさ+1	그래 +1	keep	compose
 compose:sign-word-nominal	真っ青さ+1	시퍼래 +1	keep	compose

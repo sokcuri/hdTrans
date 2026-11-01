@@ -58,4 +58,4 @@ normalize:katakana-endings	来たデース！	온 데스!	keep	normalize
 normalize:katakana-endings	食べたデース！	먹은 데스!	keep	normalize
 sound:lengthening	関係ねー！	관계네―！	current	sound
 sound:lengthening	意味ねー	의미네―	current	sound
-sound:lengthening	朝ねー。皆を起こしてこないとねー。	아침이네―. 모두를 일으켜 오지 않으면―.	keep	sound
+sound:lengthening	朝ねー。皆を起こしてこないとねー。	아침이네―. 모두를 깨워 오지 않으면―.	keep	sound

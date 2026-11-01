@@ -522,16 +522,30 @@ bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
 
 namespace {
 
+// Whether item p is ご自身, 御自身 or ご自分 with で, which names who does the act (先生ご自身で).
+bool SelfBy(const Item* p) {
+    for (const std::string_view self : {"ご自身", "御自身", "ご自分"}) {
+        const std::string_view s = p->group->surface;
+        if (!s.starts_with(self)) continue;
+        const std::string_view rest = s.substr(self.size());
+        if (rest == "で") return true;
+        if (rest.empty() && p->next != nullptr && p->next->group != nullptr && p->next->group->surface == "で") return true;
+    }
+    return false;
+}
+
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
 // otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
-// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), and so
-// does a subject の right before an intransitive verb that holds no object (先生の言われる通り).
+// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), as does
+// such a noun before ご自身 with no predicate between (先生ご自身で料理を振る舞われる), and so does
+// a subject の right before an intransitive verb that holds no object (先生の言われる通り).
 // A transitive verb also needs its object before that subject: without one its subject is what
 // the act is done to (陛下が幽閉された, 姫様は許された).
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
-    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+    bool predicate = false;  // a predicate stands between: ご自身 is of another clause
+    for (const Item* p = it->prev; p != nullptr; predicate = predicate || p->detail->Yougo(), p = p->prev) {
         const std::string_view s = p->group->surface;
         if (s.starts_with("によ")) {
             return false;
@@ -540,6 +554,8 @@ bool RespectfulReading(const Item* it, bool transitive) {
             if (a != nullptr && Person(a->Attr(std::max(a->selected, 0)))) return false;
         } else if (s == "を") {
             object = true;
+        } else if (!predicate && SelfBy(p) && HonouredPerson(p->prev)) {
+            return true;
         } else if (s == "の" && p == it->prev && !transitive && !Has(it->group->surface, "を")) {
             return HonouredPerson(p->prev);
         } else if (transitive && !object && (s == "は" || s == "が" || s == "も")) {
@@ -1783,6 +1799,11 @@ void ResultState(Flusher& f) {
                 verb = "来";
             }
         }
+        // The irregular 来る with the contracted てるぞ takes the aspect of 来ている, the stem 来 (校門に
+        // 来てるぞ 와 있어); 来てる alone stays the act going on (横から来てるよ 오고 있어).
+        if (verb == "来る" && v == it && v->selected >= 0 && v->EntryText(v->selected) == "&AH@" && it->DirectSurface().ends_with("るぞ")) {
+            verb = "来";
+        }
         // What keeps coming, as wind or waves, comes on (いい風きてる 좋은 바람 오고 있어).
         if (verb == "来" && FlowBefore(v)) continue;
         const bool past = v->detail->record == 0 && !v->lexical && dict::InClass(HDTRANS_CLASS("verb.result-state-past"), verb);
@@ -2487,7 +2508,8 @@ const Item* EndFor(const Item* it, const Item* last) {
 
 // Whether the sentence or quotation ending at item end ends in a past, not よかった: in た, or a
 // verb whose た is in its conjugation (噴火した: する + た), also with only final particles in its
-// ending when its Korean ending is past (立っていたよ, ぼやいてたぞ).
+// ending when its Korean ending is past (立っていたよ, ぼやいてたぞ), or an adjective's past in かった
+// with only final particles after it (いなかったわ).
 bool PastEnd(const Item* end) {
     std::string_view tail = end->DirectIndex() >= 0 ? end->DirectSurface() : std::string_view();
     // An ending that closes a quotation ends the quoted sentence at the bracket (いた」と).
@@ -2497,13 +2519,21 @@ bool PastEnd(const Item* end) {
     const std::string text = std::string(end->group->surface) + std::string(tail);
     if (text.ends_with("よかった") || text.ends_with("良かった")) return false;
     if (text.ends_with("た")) return true;
+    const auto finalParticles = [](std::string_view rest) {
+        for (std::size_t k = 0; k < rest.size();) {
+            const text::Rune r = text::DecodeRune(rest.substr(k));
+            if (!dict::InClass(HDTRANS_CLASS("particle.final-after-past"), rest.substr(k, r.size))) return false;
+            k += r.size;
+        }
+        return true;
+    };
+    // An adjective's past with final particles (いなかったわ, 寒かったよ).
+    if (end->detail->cls == kDetailKeiyo && tail.starts_with("かった")) {
+        return finalParticles(tail.substr(std::string_view("かった").size()));
+    }
     if (end->detail->cls != kDetailVerb || end->detail->kind != 6) return false;
     if (tail.empty()) return true;
-    for (std::size_t k = 0; k < tail.size();) {
-        const text::Rune r = text::DecodeRune(tail.substr(k));
-        if (!dict::InClass(HDTRANS_CLASS("particle.final-after-past"), tail.substr(k, r.size))) return false;
-        k += r.size;
-    }
+    if (!finalParticles(tail)) return false;
     const Entry* e = end->DirectEntry(end->DirectIndex());
     return e != nullptr && e->dst.starts_with("5");
 }

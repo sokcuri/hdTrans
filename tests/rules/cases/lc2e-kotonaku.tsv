@@ -3,11 +3,11 @@ rule	input	expected	kind	layer
 cx:lc2e-kotonaku:10	寿命を全うする事なく死	has:완수하는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	僕は命令に背く事なく、	has:거역하는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	ミリアも俺に固執する事無く	has:고집하는 일 없이	fix	rewrites
-cx:lc2e-kotonaku:10	沙希は迷う事無く発砲した。	has:헤매는 일 없이	fix	rewrites
-cx:lc2e-kotonaku:10	鋼焔は迷う事無く、即答した。	has:헤매는 일 없이	fix	rewrites
+dict:everyday-sense-glosses:21	沙希は迷う事無く発砲した。	has:망설임 없이	fix	defaults
+dict:everyday-sense-glosses:21	鋼焔は迷う事無く、即答した。	has:망설임 없이	fix	defaults
 cx:lc2e-kotonaku:10	途中で眠る事なく観終わった。	has:자는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	互いに労う事なく軽口を叩く。	has:위로하는 일 없이	fix	rewrites
-cx:lc2e-kotonaku:10	ユリは迷う事なく返事をした。	has:헤매는 일 없이	fix	rewrites
+dict:everyday-sense-glosses:20	ユリは迷う事なく返事をした。	has:망설임 없이	fix	defaults
 cx:lc2e-kotonaku:10	『忌み子』の命は未だ果てる事なく、	has:끝나는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	付け加えて余す事無くレアに伝えた。	has:남기는 일 없이	fix	rewrites
 cx:lc2e-kotonaku:10	薄紅の願いは月に届く事無く、消えた。	has:도착하는 일 없이	fix	rewrites

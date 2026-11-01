@@ -752,13 +752,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key &&
                         !(spaced && again < rs_.size() && IsKanjiRune(rs_[again]) && StutterHeadMora(rs_, again, false) == s.key);
             }
-            // A lead asked on its own after an ellipsis that opens an utterance is one too
-            // (！…そう？ 그래?); after words the ellipsis only pauses them (したい…ね？).
+            // A lead asked on its own, or before a comma or ！, after an ellipsis that opens an utterance
+            // is one too (！…そう？ 그래?, ………おい、 어이,); after words the ellipsis only pauses them
+            // (したい…ね？).
             size_t asked = end, opened = from;
             while (asked < rs_.size() && In(rs_[asked], U"ッっー～")) asked++;
             while (opened > 0 && In(rs_[opened - 1], U"…‥")) opened--;
             if (!start && opened < from && UtteranceStart(opened) &&
-                (In(rs_[end - 1], U"？?") || (asked < rs_.size() && In(rs_[asked], U"？?")))) {
+                (In(rs_[end - 1], U"？?") || (asked < rs_.size() && In(rs_[asked], U"？?、，,！!")))) {
                 start = true;
             }
             // A kana in brackets right after a kanji is its reading (々(う)), and one after a dash
@@ -3028,6 +3029,9 @@ enum class Says {
     RuTsu,     // the る of the dictionary form said っ, before から
     Nai,       // the ら of a negative stem or the れ of a stem, before ない (or ねえ)
     Negative,  // the negative ない after an ichidan or potential stem
+    PotentialEnd,   // the negative ない after a potential stem, ending the sentence
+    PotentialPast,  // the な of the negative past なかった after a potential stem
+    GodanNen,       // the negative ない after the negative stem of a godan verb, before Kansai ねん
 };
 
 // The kana that the ん or っ says after stem, a verb's text before it, or "" for none.
@@ -3076,6 +3080,17 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
                 return kNai;
             }
             return {};
+        case Says::PotentialEnd:
+        case Says::PotentialPast:
+            // The potential of a godan verb (許せん 許せない, 言い返せんかった 言い返せなかった) or the られ of
+            // an ichidan one (信じられんかった); the stem of an ichidan verb of the dictionary keeps its ん,
+            // which the end rows read (思えん, 見えんかった).
+            if (VerbFormIs(s + std::string(kRu), kDictionaryForm, IchidanKind, ctx, snap)) return {};
+            if (VerbFormIs(s, kPotential, Godan, ctx, snap) || VerbFormIs(s, kPotential, IchidanOrKuru, ctx, snap)) {
+                return says == Says::PotentialPast ? std::string_view("な") : kNai;
+            }
+            return {};
+        case Says::GodanNen: return {};
         case Says::None: break;
     }
     return {};
@@ -3164,6 +3179,12 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             says = Says::Nai;
         } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative"), rest) > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-not"), rest) == 0) {
             says = Says::Negative;
+        } else if (std::u32string_view(U"えけせてねへめれげぜでべぺ").find(rs[i - 1]) != std::u32string_view::npos &&
+                   (rest.starts_with("かった") || ends(rest))) {
+            // a potential stem ends in a kana of the え row
+            says = rest.starts_with("かった") ? Says::PotentialPast : Says::PotentialEnd;
+        } else if (std::u32string_view(U"かがさたなばまらわ").find(rs[i - 1]) != std::u32string_view::npos && rest.starts_with("ねん")) {
+            says = Says::GodanNen;
         }
         if (says == Says::None) continue;
         const bool nai = says == Says::Nai && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) > 0;
@@ -3190,8 +3211,10 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
                 // rows of んか (始まらんかのう, 黙らんか！), also with a drawn or clipped kana before the
                 // mark (吐かんかッ!!, 持ってこんかぁ！).
                 const bool endRow = rest.starts_with("かの") || ReproachKa(rest);
-                if (godanNegative && kanji && !inWord && says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") &&
-                    !rest.starts_with("かて") && !endRow) {
+                if (godanNegative && kanji && !inWord &&
+                    ((says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") && !rest.starts_with("かて") &&
+                      !endRow) ||
+                     says == Says::GodanNen)) {
                     kana = kNai;
                 }
                 break;

@@ -1,0 +1,24 @@
+# 규칙: LEX-3601
+# 규칙: LEX-3602
+# 규칙: LEX-3603
+rule	input	expected	kind	layer
+dict:misglossed-audit-words:1	もう何もかも丸見えだ。	has:훤히 들여다보인다	fix	defaults
+dict:misglossed-audit-words:1	「うわー、すげー、丸見えだ」	has:훤히 들여다보인다	fix	defaults
+dict:misglossed-audit-words:1	裁縫部分が丸見えだ。	has:훤히 들여다보인다	fix	defaults
+dict:misglossed-audit-words:1	弱点の腹部は丸見えだ。	has:훤히 들여다보인다	fix	defaults
+dict:misglossed-audit-words:1	「ミュン、パンツが丸見えだぞー！」	has:훤히 들여다보여	keep	defaults
+dict:misglossed-audit-words:1	お尻はほぼ丸見えだった。	has:훤히 들여다보였다	keep	defaults
+dict:misglossed-audit-words:3	一目みたならば誰しもがそう思うだろう。	has:누구나 그렇게	fix	defaults
+dict:misglossed-audit-words:3	ひとは誰しもが運命の奴隷さ。	has:누구나 운명의	fix	defaults
+dict:misglossed-audit-words:3	学者を始めとする誰しもが考えがちだ。	has:누구나 생각하기	fix	defaults
+dict:misglossed-audit-words:3	ないとか人間誰しも思うじゃない？	has:누구든지 생각하잖아	keep	defaults
+dict:misglossed-audit-words:3	誰しも傷つかないために、自分の本心を隠して	has:누구든지 상처받지	keep	defaults
+dict:misglossed-audit-words:3	誰もが私の中身を見抜いてる。	has:누구나 내	keep	defaults
+dict:misglossed-audit-words:4	捩じ込むようにカチ上げるだけ。	has:쑤셔 넣도록	fix	defaults
+dict:misglossed-audit-words:4	口を開けた隙に舌を捩じ込む。	has:쑤셔 넣는다	fix	defaults
+dict:misglossed-audit-words:4	聴講生として姫を捩じ込む事は出来る。	has:쑤셔 넣는	fix	defaults
+dict:misglossed-audit-words:4	無理矢理尊に捩じ込まれたところが、痛い。	has:쑤셔 넣어진	fix	defaults
+dict:misglossed-audit-words:4	グリグリとねじ込んできた。	has:틀어넣어 왔다	keep	defaults
+dict:misglossed-audit-words:4	スマホを上着の懐にねじ込んだ後	has:틀어넣은 후	keep	defaults
+dict:misglossed-audit-words:4	半開きになっている口の間に肉棒をねじ込んだ。	has:틀어넣었다	keep	defaults
+dict:misglossed-audit-words:3	やって来るなんて誰しも思っていなかったのである。	has:누구든지 생각하지 않았던	keep	defaults

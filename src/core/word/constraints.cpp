@@ -94,6 +94,26 @@ constexpr ConstraintRule kRules[] = {
      "ら 앞에서 るな로 끝나는 말은 금지가 아니라 동사와 조건 なら (気にするなら 신경 쓰지 마들 → 신경 쓴다면)", {}},
     {"shika-before-negative", ConstraintWord::Source, "しかし", ConstraintContext::AfterWordBeforeNegative, ConstraintReject::Word,
      "앞에 말이 있고 부정 어미가 바로 이어지는 しかし는 접속사 하지만이 아니라 しか와 する의 부정 (予感しかしない 예감 하지만 없다 → 예감밖에 안 든다)", {}},
+    {"moshi-before-yasui", ConstraintWord::Source, "もし", ConstraintContext::BeforeYasui, ConstraintReject::Word,
+     "やすい, やすく 앞의 もし는 만약이 아니라 も와 する의 연용형 (攻撃もしやすくなる 공격 만약 싸진다 → 공격도 하기 쉬워진다)", {}},
+    {"moshiya-before-yasui", ConstraintWord::Source, "もしや", ConstraintContext::BeforeYasui, ConstraintReject::Word,
+     "すい, すく가 이어져 やすい가 되는 もしや도 같다 (勉強もしやすい 공부 어쩌면 들이마셔 → 공부도 하기 쉽다)", {}},
+    {"shi-before-shika", ConstraintWord::EndsInSource, "し", ConstraintContext::BeforeKaNegative, ConstraintReject::Word,
+     "부정으로 끝나는 절에서 か 앞의 し로 끝나는 낱말은 し를 しか에 남김 (そんな話しかしなかった 그런 이야기인가 하지 않았다 → 그런 이야기밖에 하지 않았다)", {}},
+    {"shikamo-before-tarasu", ConstraintWord::Source, "しかも", ConstraintContext::BeforeTarasu, ConstraintReject::Word,
+     "たらさ, たらし, たらす 앞의 しかも는 접속사 게다가가 아니라 しか와 もたらす (破壊しかもたらさなかった 파괴 게다가 늘어뜨리지 → 파괴밖에 가져오지)", {}},
+    {"shi-before-shitsu-word", ConstraintWord::EndsInSource, "し", ConstraintContext::BeforeShiTsuWord, ConstraintReject::Word,
+     "っかり, っくり 앞에서 し로 끝나는 낱말(もし, 부사와 する)은 쓰지 않고 し를 しっかり, しっくり에 남김 (時もしっかり 때 만약 빌리고 → 때도 확실히, それでもしっかり 그래도 해 빌리고 → 그래도 확실히)", {}},
+    {"moui-not-before-ii", ConstraintWord::Source, "もうい", ConstraintContext::NotBeforeIi, ConstraintReject::Word,
+     "い가 이어지지 않는 もうい는 もういい가 아니라 もう와 뒤 낱말의 첫 글자 (もういない 이제 된 있고 → 이제 없다). もういい는 그대로", {}},
+    {"dea-before-aitsu", ConstraintWord::Source, "であ", ConstraintContext::BeforeAitsu, ConstraintReject::Word,
+     "いつ 앞의 であ는 出会う나 である가 아니라 で와 あいつ (俺たちであいつを 우리에서 만나며 개를 → 우리로 저 녀석을)", {}},
+    {"nihama-before-marude", ConstraintWord::Source, "にはま", ConstraintContext::BeforeMarude, ConstraintReject::Word,
+     "るで, るっきり 앞의 にはま는 はまる가 아니라 には와 まるで, まるっきり (その顔にはまるで 그 얼굴에 빠지는 것으로 → 그 얼굴에는 전혀). はまるでしょう는 그대로", {}},
+    {"de-before-desu", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeDesu, ConstraintReject::Word,
+     "す와 ね, よ, か가 이어지면 で로 끝나는 단어는 쓰지 않고 で를 です에 남김 (途中ですね 도중에 무릎 → 도중이군요)", {}},
+    {"momi-before-mieru", ConstraintWord::Source, "もみ", ConstraintContext::BeforeMieru, ConstraintReject::Word,
+     "えた, える 앞의 もみ는 전나무가 아니라 も와 みえる (ようにもみえた 것처럼 전나무 천민 → 것처럼도 보였다)", {}},
     {"teiru-before-irassharu", ConstraintWord::EndsInSource, "てい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
      "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
     {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
@@ -368,6 +388,81 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::AfterWordBeforeNegative: {
         static constexpr std::string_view kNegative[] = {"ない", "なかっ", "なく", "なけれ", "ません"};
         return StartsWithAny(after, kNegative) && NameClassOf(adjacent) != kClassOther;
+    }
+    case ConstraintContext::BeforeYasui: {
+        static constexpr std::string_view kYasui[] = {"やすい", "やすく", "やすかっ", "やすけれ", "やすさ", "やすそ"};
+        const std::string tail = source.ends_with("や") ? std::string("や") + std::string(after) : std::string(after);
+        return StartsWithAny(tail, kYasui);
+    }
+    case ConstraintContext::BeforeKaNegative: {
+        if (!after.starts_with("か")) return false;
+        // Not the か of an adjective's past or of から, かけ (楽しかった, 話しかける), nor the か of a
+        // question that goes on (話しかもしれない, 話しかどうか, 話しかと, 話しかって, 話しかしら, 話しかい？,
+        // 話しかな); the negative after しか starts right there (しかない, しかいない, しかしない).
+        const std::string_view tail = after.substr(std::string_view("か").size());
+        if (const char32_t next = text::DecodeRune(tail).cp;
+            std::u32string_view(U"っろれけらたもと").find(next) != std::u32string_view::npos) {
+            return false;
+        }
+        static constexpr std::string_view kQuestion[] = {"どう", "って", "しら"};
+        if (StartsWithAny(tail, kQuestion)) return false;
+        static constexpr std::string_view kStartsNegative[] = {"ない", "なく", "なかっ"};
+        if (tail.starts_with("な") && !StartsWithAny(tail, kStartsNegative)) return false;
+        static constexpr std::string_view kIruNegative[] = {"いな", "いま"};
+        if (tail.starts_with("い") && !StartsWithAny(tail, kIruNegative)) return false;
+        // Every reading of the word is a noun (話し, 達し), no adjective or verb stem (おかし).
+        if (!std::all_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                return c.source != source || c.codes == nullptr || c.codes->part.Tag() == 'N' || c.codes->part.Tag() == 'I';
+            })) {
+            return false;
+        }
+        const std::string_view shorter = source.substr(0, source.size() - DecodeLastRune(source).size);
+        if (std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return c.source == shorter && c.codes != nullptr; })) {
+            return false;
+        }
+        static constexpr std::string_view kStops[] = {"。", "、", "！", "？", "!", "?", "」", "』", "…"};
+        std::string_view clause = after.substr(std::string_view("か").size());
+        for (const std::string_view stop : kStops) clause = clause.substr(0, clause.find(stop));
+        static constexpr std::string_view kNegative[] = {"ない", "なかっ", "なく", "なけれ", "ません", "ず"};
+        return std::any_of(std::begin(kNegative), std::end(kNegative),
+                           [&](std::string_view n) { return clause.find(n) != std::string_view::npos; });
+    }
+    case ConstraintContext::BeforeTarasu: {
+        static constexpr std::string_view kTarasu[] = {"たらさ", "たらし", "たらす", "たらせ", "たらそ"};
+        return StartsWithAny(after, kTarasu);
+    }
+    case ConstraintContext::BeforeShiTsuWord: {
+        static constexpr std::string_view kShiTsu[] = {"っかり", "っかと", "っくり", "っとり"};
+        return StartsWithAny(after, kShiTsu);
+    }
+    case ConstraintContext::NotBeforeIi: {
+        if (after.empty()) return false;
+        const char32_t next = text::DecodeRune(after).cp;
+        return std::u32string_view(U"いぃー～〜っッ").find(next) == std::u32string_view::npos;
+    }
+    case ConstraintContext::BeforeAitsu:
+        return after.starts_with("いつ") && !after.starts_with("いつつ");
+    case ConstraintContext::BeforeMarude: {
+        // Not the conjecture or the polite form after はまる (はまるでしょう, はまるです).
+        static constexpr std::string_view kMarude[] = {"るで", "るっきり", "るきり", "るごと"};
+        static constexpr std::string_view kCopula[] = {"るでしょ", "るです"};
+        return StartsWithAny(after, kMarude) && !StartsWithAny(after, kCopula);
+    }
+    case ConstraintContext::BeforeDesu: {
+        // Not the formal noun 事 with で (という事です), which the reading of the clause before it
+        // decides.
+        if (!after.starts_with("す") || source.ends_with("事で")) return false;
+        const std::string_view tail = after.substr(std::string_view("す").size());
+        if (tail.empty()) return true;
+        static constexpr std::string_view kNotKa[] = {"かさ", "かし", "かっ", "かす"};
+        if (tail.starts_with("か")) return !StartsWithAny(tail, kNotKa);
+        const char32_t next = text::DecodeRune(tail).cp;
+        return std::u32string_view(U"ねよ。、！？!?…‥」』").find(next) != std::u32string_view::npos;
+    }
+    case ConstraintContext::BeforeMieru: {
+        if (!after.starts_with("え")) return false;
+        const std::string_view tail = after.substr(std::string_view("え").size());
+        return !tail.empty() && std::u32string_view(U"たるてなまず").find(text::DecodeRune(tail).cp) != std::u32string_view::npos;
     }
     case ConstraintContext::BeforeRassharu:
         return after.starts_with("らっしゃ");
@@ -710,11 +805,16 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
         std::size_t i = 0;
         while (i < list.size()) {
             const std::string_view source = list[i].source;
+            // The cheap word test first: most rules name a word that most candidates are not.
+            if (source.empty() || list[i].codes == nullptr || !WordFits(rule, source, before, lookupContext.cued)) {
+                i++;
+                continue;
+            }
             const bool first = std::none_of(list.begin(), list.begin() + static_cast<std::ptrdiff_t>(i),
                                             [&](const dict::Candidate& c) { return c.source == source; });
             const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                                          : std::string_view(following);
-            if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before, lookupContext.cued) ||
+            if (!first ||
                 (rule.context == ConstraintContext::NotAfterNoun
                      ? !NotAfterNoun(head)
                      : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {

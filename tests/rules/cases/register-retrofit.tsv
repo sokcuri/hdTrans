@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 register:REG-2	「……子爵の娘は優秀だと聞いている」	「……자작의 딸은 우수하다고 듣고 있어」	fix	register
 register:REG-10	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keep	register
-register:REG-10	「……あら、ご覧になって」	「……어머나, 보세요」	keep	register
+register:REG-10	「……あら、ご覧になって」	「……어머, 보세요」	keep	register
 register:REG-10	「娘を買っていただきました。そのことによって金銭を得たのでございます」	「딸을 사 주셨습니다. 그것에 의해 금전을 얻은 것입니다」	keep	register
 register:REG-12	「醜聞なんてものじゃないと思うんだが」	「추문 같은 건 것이 아니라고 생각하는데」	keep	register
 register:REG-12	「わたくしはそんな話知りません、聞いてません！　絶対認めませんから！」	「저는 그런 이야기 모릅니다, 듣지 않았습니다! 절대 인정하지 않으니까요!」	keep	register
@@ -24,7 +24,7 @@ register:REG-12	「あとは必要なものを追加しようかと」	「나머
 register:REG-12	「一部には、部員の親族が取って変わり、利権にありつくなんて噂も流れていますが……」	「일부에는, 부원의 친족이 취해 바뀌어, 이권을 얻게 되다니 소문도 흐르고 있습니다만……」	keep	register
 register:REG-12	「言いましたよ。でも『青海はカウンターの方が向いてるから！』って、店長に言われて……」	「말했어요. 하지만 『아오미는 카운터가 향하고 있으니까!』는, 점장에게 들어……」	keep	register
 register:REG-12	「もっと真剣にーっ！！」	「좀 더 진지하게~!!」	keep	register
-register:REG-12	「いつもの軽いノリで、候補者を選んでほしくない」	「평소의 가벼운 김으로, 후보자를 선택하지 말았으면 좋겠다」	keep	register
+register:REG-12	「いつもの軽いノリで、候補者を選んでほしくない」	「평소의 가벼운 분위기로, 후보자를 선택하지 말았으면 좋겠다」	keep	register
 register:REG-13	「あ、ホントだ」	「아, 진짜다」	keep	register
 register:REG-6	「ほう。申してみよ」	「호오. 말해 봐라」	keep	register
 register:REG-18	「はぁ、今日は寒いなぁ」	「하아, 오늘은 춥네」	fix	register

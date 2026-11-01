@@ -24,4 +24,7 @@ struct Conjugated {
 // from the spelling of the stem.
 Conjugated Conjugating(std::string_view lemma, char marker, std::string_view cls, Families& generated);
 
+// Conjugating with the static families only: an error where a family would have to be made.
+Conjugated StaticConjugating(std::string_view lemma, char marker, std::string_view cls);
+
 }  // namespace hdTrans::output

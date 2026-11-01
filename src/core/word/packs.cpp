@@ -850,6 +850,9 @@ void ApplyPacks(Flusher& f) {
              {dict::PackSlot::Sense, dict::PackSlot::Name, dict::PackSlot::Polarity, dict::PackSlot::Tense}) {
             if (nameOnly && slot != dict::PackSlot::Name) continue;
             if (head && (slot == dict::PackSlot::Sense || slot == dict::PackSlot::Name)) continue;
+            // The Korean verb of a voice row is the word's sense in that voice (紅茶を振る舞われた 대접받았다):
+            // a sense row, which writes the verb in the active, does not replace it.
+            if (slot == dict::PackSlot::Sense && !it->packLexeme.empty() && cls == '4') continue;
             const dict::PackRow* best = DecidingRow(f, it, it->group->surface, slot, !nameOnly || nameLayer);
             if (best == nullptr) continue;
             const dict::PackRow& r = *best;

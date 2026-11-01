@@ -13,7 +13,7 @@ sound:hiragana-doubled	とてとてと廊下を歩いていく。	토테토테 �
 sound:hiragana-doubled	彼女はふるふると首を振る。	그녀는 후루후루 고개를 젓는다.	fix	sound
 sound:hiragana-doubled	いろいろと考えた。	여러모로 생각했다.	keep	sound
 cx:line-initial-to:10	と私が殊勝に頭を下げると、王子はひどくびっくりした顔をする。	라고 내가 기특하게 고개를 숙이면, 왕자는 몹시 놀란 얼굴을 한다.	fix	rewrites
-cx:line-initial-to:10	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	그런 시시한. 라고 웃어버리려고 했지만 그만두기로 했다.	fix	rewrites
+cx:line-initial-to:10	そんなバカな。と笑い飛ばそうとしたがやめておくことにした。	말도 안돼. 라고 웃어버리려고 했지만 그만두기로 했다.	fix	rewrites
 cx:line-initial-to:10	とまで業界で言われるようになった。	라고까지 업계에서 말하게 되었다.	fix	rewrites
 cx:line-initial-to:10	××と知り合いでもない。	××와 아는 사람도 아니다.	keep	rewrites
 cx:line-initial-to:10	「と、とにかく行こう」	「어, 어쨌든 가자」	keep	rewrites

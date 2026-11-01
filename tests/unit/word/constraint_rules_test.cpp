@@ -125,7 +125,25 @@ const dict::Snapshot* Dictionary() {
          "だけ\t만\tP211\t\t\tGN\t124\n"
          "バレ\t들&AA@\tM417\t\t\tGN\t120\n"
          "仁\t인\tN110\tXXX\tOn\tGN\t125\n"
-         "仁\t진\tN130\tVHnQPN\tWb\tGN\t126\n"},
+         "仁\t진\tN130\tVHnQPN\tWb\tGN\t126\n"
+         "も\t도\tP200\t\t\tGN\t133\n"
+         "もし\t만약\tE300\t\t\tGN\t127\n"
+         "もしや\t어쩌면\tE300\t\t\tGN\t128\n"
+         "話し\t이야기\tN110\t\t\tGN\t129\n"
+         "話\t이야기\tN110\t\t\tGN\t130\n"
+         "おかし\t이상하$AB@\tH7U0\t\t\tGN\t131\n"
+         "おか\t언덕\tN110\t\t\tGN\t132\n"
+         "しかも\t게다가\tE331\t\t\tGN\t134\n"
+         "しか\t밖에\tP211\t\t\tGN\t135\n"
+         "もうい\t이제 $AE@\tE7U0\t\t\tGN\t136\n"
+         "もう\t이제\tE300\t\t\tGN\t137\n"
+         "であ\t에서 만&A5@\tM420\t\t\tGN\t138\n"
+         "で\t에서\tP200\t\t\tGN\t139\n"
+         "にはま\t에 빠&AL@\tM428\t\t\tGN\t140\n"
+         "には\t에게는\tP211\t\t\tGN\t141\n"
+         "途中で\t도중에\tE300\t\t\tGN\t142\n"
+         "途中\t도중\tN110\t\t\tGN\t143\n"
+         "もみ\t전나무\tN110\t\t\tGN\t144\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -180,7 +198,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{52});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{62});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -436,6 +454,63 @@ HD_TEST(constraint_shika_before_negative) {
         {"まあしかしねえ", "しかしねえ", "しかし", "하지만"},
         {"まあしかしずいぶん", "しかしずいぶん", "しかし", "하지만"},
         {"まあしかしぬるいな", "しかしぬるいな", "しかし", "하지만"},
+    });
+}
+
+// もし and もしや before やすい, やすく are も and the stem of する (攻撃もしやすくなる, 勉強もしやすい);
+// もし before anything else is the conditional adverb.
+HD_TEST(constraint_moshi_before_yasui) {
+    CheckCases({
+        {"攻撃もしやすくなる", "もしやすくなる", "もし", ""},
+        {"攻撃もしやすかった", "もしやすかった", "もし", ""},
+        {"勉強もしやすい", "もしやすい", "もしや", ""},
+        {"もし安ければ", "もし安ければ", "もし", "만약"},
+        {"もしやすると", "もしやすると", "もしや", "어쩌면"},
+        {"もしや、君は", "もしや、君は", "もしや", "어쩌면"},
+    });
+}
+
+// A noun in し before か and a negative that ends the clause leaves its し to しか where the noun
+// without it is a word too (話しかしなかった 話 + しか); not before the か of a past or of かける, a
+// clause without a negative, nor an adjective's stem (おかしかった).
+HD_TEST(constraint_shi_before_shika) {
+    CheckCases({
+        {"そんな話しかしなかった", "話しかしなかった", "話し", ""},
+        {"話しかないぞ", "話しかないぞ", "話し", ""},
+        {"話しか？", "話しか？", "話し", "이야기"},
+        {"話しかと思ったが、違わない", "話しかと思ったが、違わない", "話し", "이야기"},
+        {"話しかけない", "話しかけない", "話し", "이야기"},
+        {"話しかもしれない", "話しかもしれない", "話し", "이야기"},
+        {"話しかどうか分からない", "話しかどうか分からない", "話し", "이야기"},
+        {"話しかなと思わない", "話しかなと思わない", "話し", "이야기"},
+        {"話しかと聞かれても分からない", "話しかと聞かれても分からない", "話し", "이야기"},
+        {"おかしかったわけじゃない", "おかしかったわけじゃない", "おかし", "이상하$AB@"},
+    });
+}
+
+// A word whose last kana starts the word after it is not read: しかも before もたらす, a word in し before
+// しっかり, もうい before anything but the い of いい, であ before あいつ, にはま before まるで, a word in で
+// before です and もみ before みえる.
+HD_TEST(constraint_split_before_next_word) {
+    CheckCases({
+        {"破壊しかもたらさなかった", "しかもたらさなかった", "しかも", ""},
+        {"しかもたらふく食べた", "しかもたらふく食べた", "しかも", "게다가"},
+        {"時もしっかりしてる", "もしっかりしてる", "もし", ""},
+        {"もしもし", "もしもし", "もし", "만약"},
+        {"もういない", "もういない", "もうい", ""},
+        {"もういちど", "もういちど", "もうい", ""},
+        {"もういいよ", "もういいよ", "もうい", "이제 $AE@"},
+        {"もういっか", "もういっか", "もうい", "이제 $AE@"},
+        {"俺たちであいつを", "であいつを", "であ", ""},
+        {"であいつつ", "であいつつ", "であ", "에서 만&A5@"},
+        {"俺にはまるで分からん", "にはまるで分からん", "にはま", ""},
+        {"罠にはまる", "にはまる", "にはま", "에 빠&AL@"},
+        {"途中ですね", "途中ですね", "途中で", ""},
+        {"途中ですか？", "途中ですか？", "途中で", ""},
+        {"途中ですかさず", "途中ですかさず", "途中で", "도중에"},
+        {"途中ですっかり", "途中ですっかり", "途中で", "도중에"},
+        {"ようにもみえた", "もみえた", "もみ", ""},
+        {"もみじ", "もみじ", "もみ", "전나무"},
     });
 }
 

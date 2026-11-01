@@ -1,0 +1,57 @@
+#! layer=base
+# 訳が分からない는 영문을 모르다, 訳も分からず는 영문도 모른 채
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+訳がわからな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:1
+訳もわからな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:2
+訳がわからず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:3
+訳がわからずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:4
+訳もわからず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:5
+訳もわからずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:6
+訳が分からな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:7
+訳も分からな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:8
+訳が分からず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:9
+訳が分からずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:10
+訳も分からず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:11
+訳も分からずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:12
+訳が判らな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:13
+訳も判らな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:14
+訳が判らず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:15
+訳が判らずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:16
+訳も判らず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:17
+訳も判らずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:18
+わけがわからな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:19
+わけもわからな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:20
+わけがわからず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:21
+わけがわからずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:22
+わけもわからず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:23
+わけもわからずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:24
+わけが分からな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:25
+わけも分からな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:26
+わけが分からず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:27
+わけが分からずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:28
+わけも分からず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:29
+わけも分からずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:30
+わけが判らな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:31
+わけも判らな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:32
+わけが判らず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:33
+わけが判らずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:34
+わけも判らず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:35
+わけも判らずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:36
+ワケがわからな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:37
+ワケもわからな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:38
+ワケがわからず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:39
+ワケがわからずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:40
+ワケもわからず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:41
+ワケもわからずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:42
+ワケが分からな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:43
+ワケも分からな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:44
+ワケが分からず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:45
+ワケが分からずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:46
+ワケも分からず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:47
+ワケも分からずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:48
+ワケが判らな	영문을 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:49
+ワケも判らな	영문도 $C4@	H7U0		XnAv	GN			LEX-3600	wake-ga-wakaranai:50
+ワケが判らず	영문을 몰라	N300			GN			LEX-3600	wake-ga-wakaranai:51
+ワケが判らずに	영문을 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:52
+ワケも判らず	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:53
+ワケも判らずに	영문도 모른 채	N300			GN			LEX-3600	wake-ga-wakaranai:54

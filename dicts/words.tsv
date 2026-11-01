@@ -14835,7 +14835,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 奴ら	놈들	N120	VHn		GN				llm		やつら	w:14797
 奴等	놈들	N120	VHn		GN				llm		やつら	w:14798
 奴隷船	노예선	N110			GN						どれいせん	w:14799
-好き	좋아해	N110	UFl		GN	4455	||1 &&3 P-1== "1**" S-1!= "R好き" S-1!= "Rすき"	명사 뒤의 好き에 대해 words.tsv에 있는 '좋아해' 후보를 고르되, 앞 명사가 되풀이한 好き이면 고르지 않는다.			すき	w:14800
+好き	좋아해	N110	UFl		GN	4455	||2 &&6 P-1== "1**" S-1!= "R好き" S-1!= "Rすき" P+1== "1**" G+1!= "Z7" D+0= "좋아하는" &&3 P-1== "1**" S-1!= "R好き" S-1!= "Rすき"	명사 뒤의 好き에 대해 words.tsv에 있는 '좋아해' 후보를 고르되, 뒤에 명사가 오면 그 명사를 꾸미는 '좋아하는'으로 바꾸고, 앞 명사가 되풀이한 好き이면 고르지 않는다.			すき	w:14800
 好きずき	취향 차이	N110	UYi		GN				llm		すきずき	w:14801
 好さ	좋음	N110			GN						よさ	w:14802
 好もし	믿음직$AB@	H7U0			GN						このもしい	w:14803
@@ -20567,7 +20567,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 皮膚糸状菌	피부사상균	N110	UTi		GN						ひふしじょうきん	w:20521
 皮蛋	피단	N110			GN						ピータン	w:20522
 皮靴	구두	N110	VCp		GN				llm		かわぐつ	w:20523
-皺が寄	&LC@	M428			GN						しわがよる	w:20524
+皺が寄	주름이 잡&AW@	M428			GN						しわがよる	w:20524
 皺くちゃ	꼬깃꼬깃%A1@	G8U0			GN						しわくちゃ	w:20525
 皺寄せ	여파	N110			GN				llm			w:20526
 皺曲	습곡	N110		Hd	GN						しゅうきょく	w:20527
@@ -21832,7 +21832,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 練製品	어묵류	N110	VFd		GN				llm		ねりせいひん	w:21784
 縁むすび	결연	N110			GN				xxx		えんむすび	w:21785
 縁むすび	인연	N110	UTh		GN				llm		えんむすび	w:21786
-縁取	마&Mv@	M428			GN						ふちどる	w:21787
 縁紅弁慶	염자	N110			GN						ふちべにべんけい	w:21788
 縁組	입양	N110		Hd	GN				xxx	1	えんぐみ	w:21789
 縁組み	입양	I110		Hd	GN				xxx	1	えんぐみ	w:21790
@@ -23065,7 +23064,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 蜘蛛の糸	거미줄	N110			GN						くものいと	w:23015
 蜘蛛人手	거미불가사리류	N110			GN						くもひとで	w:23016
 蜘蛛海星	거미불가사리류	N110			GN						くもひとで	w:23017
-蜜	시럽	N110	VFd		GN				llm		みつ	w:23018
+蜜	꿀	N110	VFd		GN				llm		みつ	w:23018
 蜜ろう	밀랍	N110			GN						みつろう	w:23019
 蜜柑	귤	N110			GN				xxx	1	みかん	w:23020
 蜜柑科	운향과	N110			GN						みかんが	w:23021
@@ -25026,7 +25025,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鍋料理	전골	N110	VFd		GN				llm		なべりょうり	w:24977
 鍋鶴	흑두루미	N110			GN						なべづる	w:24978
 鍼治療	침술	N110			GN						はりちりょう	w:24979
-鎌	유도 질문	N110	UTs		GN				llm		かま	w:24980
+鎌	낫	N110	UTs		GN				llm		かま	w:24980
 鎌切	사마귀	N110			GN						かまきり	w:24981
 鎖国主義	쇄국주의	N110			GN						さこくしゅぎ	w:24982
 鎖鎌	사슬낫	N110			GN						くさりがま	w:24983
@@ -27172,3 +27171,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おにぃさん	오빠	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29116
 おにぃちゃん	오빠	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29117
 おにぃさま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29118
+結	&Ha@	M420			GN			LEX-3486: 結う 묶다			ゆう	w:29119
+処	처단&AV@	M433			GN			LEX-3486: 処す 처단하다			しょす	w:29120
+屈	굴&AV@	M433			GN			LEX-3486: 屈す 굴하다			くっす	w:29121

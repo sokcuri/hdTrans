@@ -1,4 +1,4 @@
 # 규칙: GRM-4, SPC-1
 rule	input	expected	kind	layer
 cx:habitual-mono:14	「昔はよく一緒に遊んだものだ」	「옛날은 자주 함께 놀곤 했어」	fix	rewrites
-cx:habitual-mono:16	「子供の頃はいつも夜更かししたものだった」	「어릴 적은 언제나 밤샘하곤 했었어」	fix	rewrites
+cx:habitual-mono:16	「子供の頃はいつも夜更かししたものだった」	「어릴 적은 언제나 밤새곤 했었어」	fix	rewrites

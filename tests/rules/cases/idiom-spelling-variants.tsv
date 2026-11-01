@@ -1,0 +1,24 @@
+# 규칙: LEX-3607
+# 규칙: LEX-3608
+rule	input	expected	kind	layer
+lexical:na-wo-haseru	一部の世界では同人絵師として名をはせることに成功していた。	has:이름을 떨치는 것에	fix	fixed
+lexical:na-wo-haseru	かつての仲間が全国に名をはせる強敵と対等以上に渡りあう試合を見た。	has:이름을 떨치는 강적	fix	fixed
+lexical:na-wo-haseru	文学界でも名をはせた。	has:이름을 떨쳤다	fix	fixed
+lexical:na-wo-haseru	十文字槍を以って名をはせた仏門の流派。	has:이름을 떨친 불문	fix	fixed
+lexical:na-wo-haseru	僕はその処刑されるという王族に思いをはせる	has:떠올린다	keep	fixed
+lexical:na-wo-haseru	銀河に名を馳せる独立系重工業	has:이름을 떨치는	keep	fixed
+lexical:muge-ni	姫様の気遣いを無碍にする願いだと、わかっている。	has:배려를 저버리는	fix	fixed
+lexical:muge-ni	心配してくれた気持ちを無碍にするわけにもいかずわたしはにこりと笑って手を振った。	has:저버릴 수도	fix	fixed
+lexical:muge-ni	無碍にはできないからな……）	has:매정하게는	fix	fixed
+lexical:muge-ni	そこから賢者のラ・フォリアお願い」と無碍に言う。	has:매정하게 말한다	fix	fixed
+lexical:muge-ni	私の信用を無下にするな」	has:매몰차게 무시하지 마	keep	fixed
+lexical:muge-ni	無下には否定出来ないが。	lacks:매정	keep	fixed
+lexical:nanpaku	魔の大森林に何泊かの旅行に行ったようなもんじゃ」	has:몇 박	fix	fixed
+lexical:nanpaku	いらっしゃい！何泊するのかな？	has:몇 박 하는	fix	fixed
+lexical:nanpaku	何泊かする予定だが、女性連れなので、野宿はしたくない。	has:몇 박인가 할	fix	fixed
+lexical:nanpaku	二泊した。	has:2박 했다	keep	fixed
+lexical:mae-ga-mieru	最後尾から前が見える位置へ車を	has:앞이 보이는 위치	fix	fixed
+lexical:mae-ga-mieru	まともに前が見えない。	has:앞이 보이지 않는다	fix	fixed
+lexical:mae-ga-mieru	涙で前が見えなくなるくらいには感動した」	has:앞이 보이지 않게	fix	fixed
+lexical:mae-ga-mieru	名前が見えない。	has:이름이	keep	fixed
+lexical:mae-ga-mieru	目の前が見えない。	has:눈앞이	keep	fixed

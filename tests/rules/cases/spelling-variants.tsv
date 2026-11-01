@@ -31,7 +31,7 @@ cx:ni-after-adverb:10	それぐらいに近い。	그 정도로 가깝다.	fix	r
 cx:ni-after-adverb:10	それくらいに近い。	그 정도로 가깝다.	fix	rewrites
 cx:ni-after-adverb:10	気持ちが痛いくらいによくわかる。	기분이 아플 정도로 잘 안다.	fix	rewrites
 cx:ttae-adnominal:10	追い詰められてる時は周りが全然見えてなかった	몰리고 있을 때는 주위가 전혀 보이지 않았다	fix	rewrites
-cx:ttae-adnominal:10	今は喧嘩してる時じゃないよ！！	지금은 싸움하고 있을 때가 아니야!!	fix	rewrites
+cx:ttae-adnominal:10	今は喧嘩してる時じゃないよ！！	지금은 싸우고 있을 때가 아니야!!	fix	rewrites
 cx:ttae-adnominal:10	カタリナの記憶しかなかった時は、	카타리나의 기억밖에 없었을 때는,	fix	rewrites
 cx:ttae-adnominal:10	上級職にクラスチェンジした時の感動	!rule:cx:ttae-adnominal:10	keep	rewrites
 cx:ttae-adnominal:10	知っている人がいる。	!rule:cx:ttae-adnominal:10	keep	rewrites
