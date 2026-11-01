@@ -40,3 +40,6 @@ cx:tte-nominal:7	これって本当？	!rule:cx:tte-nominal:7	keep	rewrites
 cx:tte-nominal:21	誰だって怖いのは同じだ	!rule:cx:tte-nominal:21	keep	rewrites
 dict:tte-r1:2	さてこれで問題に集中できるってもんだ。	has:집중할 수 있다는 것이다	keep	defaults
 dict:tte-r1:2	こっちも教える甲斐があるってもんだ	has:보람이 있다는 것이다	keep	defaults
+dict:tte-r1:5	「それが男ってもんさ」	「그게 남자라는 거야」	fix	defaults
+dict:tte-r1:6	それが男ってもんよ	그것이 남자라는 거야	fix	defaults
+dict:tte-r1:6	「それが男ってもんよ！」	「그게 남자라는 거야!」	fix	defaults

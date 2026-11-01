@@ -34,3 +34,4 @@ cx:lc-quote-adnominal:50	いくら言ったって意味がない	!rule:cx:lc-quo
 cx:lc-quote-adnominal:50	何回謝ったって話にならない	!rule:cx:lc-quote-adnominal:50	keep	rewrites
 cx:lc-quote-adnominal:40	ハンドラーになったって話だ	!rule:cx:lc-quote-adnominal:40	keep	rewrites
 cx:lc-quote-adnominal:40	誰がどう考えたって事情は同じだ	!rule:cx:lc-quote-adnominal:40	keep	rewrites
+cx:lc-quote-adnominal:50	走ったって気分は晴れない	!rule:cx:lc-quote-adnominal:50	keep	rewrites

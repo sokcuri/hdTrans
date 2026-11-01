@@ -18,7 +18,7 @@ dict:jisjk:3986	世界の子供たちが何歳で家を出るか知っている�
 dict:jisjk:3986	今月末には何があるか知ってる？	has:있는지 알고	fix	local-ending
 dict:jisjk:3986	どこをどうすれば殺せるか知っているだけ。	has:죽일 수 있는지 알고	fix	local-ending
 dict:jisjk:3986	何を考えているか分かった	has:생각하고 있는지 알았다	fix	local-ending
-dict:jisjk:3986	何されるかわかりませんからね	has:당하는지 모르니까요	fix	local-ending
+dict:jisjk:3987	何されるかわかりませんからね	has:당할지 모르니까요	fix	local-ending
 dict:tte-r1:3	何をしてるか？	!rule:dict:tte-r1:3	keep	local-ending
 dict:tte-r1:3	元気にしてるか？	!rule:dict:tte-r1:3	keep	local-ending
 dict:tte-r1:3	聞いてるか、お前	!rule:dict:tte-r1:3	keep	local-ending
@@ -29,3 +29,7 @@ dict:jisjk:3986	何が起きたのか分からない	무슨 일이 일어났는�
 dict:jisjk:3986	誰か知ってる？	has:누군가	keep	local-ending
 dict:tte-r1:4	正直さっぱりだ	!rule:dict:tte-r1:4	keep	local
 dict:tte-r1:4	さっぱりした性格だ	!rule:dict:tte-r1:4	keep	local
+dict:jisjk:3987	どうなるかわかりませんよ	has:될지 몰라요	fix	local-ending
+dict:jisjk:3987	何されるか分からず	has:당할지 알지 못하고	fix	local-ending
+dict:jisjk:3987	何が起こるか分かりません	has:일어날지 모릅니다	fix	local-ending
+dict:jisjk:3986	どうなるかわかる？	has:되는지 알아?	keep	local-ending
