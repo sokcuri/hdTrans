@@ -1,6 +1,6 @@
 # 규칙: SPC-4
 rule	input	expected	kind	layer
-normalize:volitional-ka	私も薄着しちゃおっかな	has:해버릴까	fix	normalize
+normalize:volitional-ka	私も薄着しちゃおっかな	has:입어버릴까	fix	normalize
 normalize:volitional-ka	もう寝ちゃおっかー……	이제 자버릴까~……	fix	normalize
 normalize:volitional-ka	今日は飲んじゃおっか！	오늘은 마셔버릴까!	fix	normalize
 normalize:volitional-ka	やっちゃおっか！	해 치울까!	fix	normalize

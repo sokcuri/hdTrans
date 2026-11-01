@@ -1,12 +1,16 @@
 // Writing the composed items into their token texts, the spacing rules, and the output
 // of a sentence.
 #include <algorithm>
+#include <map>
+#include <optional>
 
+#include "core/dict/builtin.h"
 #include "core/dict/char_readings.h"
 #include "core/dict/classes.h"
 #include "core/output/cleanup.h"
 #include "core/output/compose.h"
 #include "core/output/inflect.h"
+#include "core/output/korean.h"
 #include "core/output/particle.h"
 #include "core/output/text.h"
 #include "core/text/hangul.h"
@@ -574,6 +578,106 @@ bool HadaNounBeforeSuru(const std::vector<ResolvedItem>& items, int i, std::stri
            dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0;
 }
 
+// The Korean verbs made nouns that end the Korean of noun rows, and their verbs
+// (builtin/extra/verb_nominals.tsv: 버림 버리다, 깜빡 잊기 잊다).
+const std::map<std::string, std::string, std::less<>>& VerbNominals() {
+    static const std::map<std::string, std::string, std::less<>> table = [] {
+        std::map<std::string, std::string, std::less<>> t;
+        const std::string text = dict::ExtraBuiltinText("verb_nominals.tsv");
+        for (std::size_t at = 0; at < text.size();) {
+            std::size_t end = text.find('\n', at);
+            if (end == std::string::npos) end = text.size();
+            const std::string_view line = std::string_view(text).substr(at, end - at);
+            at = end + 1;
+            const std::size_t tab = line.find('\t');
+            if (line.empty() || line[0] == '#' || tab == std::string_view::npos) continue;
+            t.emplace(line.substr(0, tab), line.substr(tab + 1));
+        }
+        return t;
+    }();
+    return table;
+}
+
+// Whether the Korean word w ends as an attributive (흐르는, 수줍은, 잰, 갈): a final ㄴ, or a final ㄹ
+// but in 을 and 를.
+bool EndsAttributive(std::string_view w) {
+    const char32_t last = LastRune(w);
+    const int final = text::Final(last);
+    return final == text::kFinalNieun || (final == text::kFinalRieul && last != U'을' && last != U'를');
+}
+
+// LEX-40: the text of noun item i when its Korean is a verb made a noun (잠들어 버림, 깜빡 잊기, 삼킴)
+// written straight before a する read 하다, then read as that verb: the words before the verb and the
+// verb's stem up to its marker family, which the する takes (寝落ちした 잠들어 버렸다); before a する
+// written 하고 or 해 with more after it (している 하고 있다, してしまう 해버리다), the verb's stem or its
+// 아/어 form, the する keeping the rest (平和ボケしている 평화에 취하고 있다). A noun of one word must
+// be two syllables or more, not be written in katakana, and follow no word that modifies it (親しい感じする)
+// or that it is written on to (昼寝 낮 잠). None otherwise.
+std::optional<std::string> VerbNounBeforeSuru(std::vector<ResolvedItem>& items, int i, const Families& generated) {
+    const ResolvedItem& noun = items[i];
+    if (First(Code(noun)) != '1' || At(Code(noun), 1) == '3' || !noun.appended.empty() ||
+        i + 1 >= static_cast<int>(items.size()) || !Adjoins(items, i + 1)) {
+        return {};
+    }
+    ResolvedItem& next = items[i + 1];
+    const std::string_view suru = EntryText(next);
+    constexpr std::string_view kHago = "하고 ";
+    constexpr std::string_view kHae = "해";
+    const bool whole = suru == "&AV@";
+    const bool stem = suru.starts_with(kHago) && suru.size() > kHago.size();
+    const bool infinitive = suru.starts_with(kHae) && suru.size() > kHae.size();
+    // A する of its stem alone goes on into the verb after it (喧嘩し続けた 계속 싸움했다), which BuildAction
+    // writes with the noun.
+    if (static_cast<std::uint8_t>(next.detailKind) == 10 && next.endingLength == 0 &&
+        i + 2 < static_cast<int>(items.size()) && Adjoins(items, i + 2) && First(Code(items[i + 2])) == '4') {
+        return {};
+    }
+    if (next.fixed || !(whole || stem || infinitive) ||
+        !(dict::InClass(HDTRANS_CLASS("suru.verbal-noun-whole"), next.surface) ||
+          dict::StartsWithMember(HDTRANS_CLASS("suru.verbal-noun-start"), next.surface) > 0)) {
+        return {};
+    }
+    const std::string_view t = EntryText(noun);
+    const std::size_t space = t.rfind(' ');
+    const std::size_t start = space == std::string_view::npos ? 0 : space + 1;
+    if (space == 0 || (space != std::string_view::npos && EndsAttributive(t.substr(0, space)))) return {};
+    if (space == std::string_view::npos) {
+        // A word in katakana is a loanword whose Korean is written as it sounds (ボギー 보기).
+        if (text::RuneCount(t) < 2 || tokenizer::Class(FirstRune(noun.surface)) == tokenizer::kClassKatakana) return {};
+        if (i > 0) {
+            const ResolvedItem& before = items[i - 1];
+            const char kind = First(Code(before));
+            if (kind == '0' || kind == '4' || kind == '7' || kind == '8' || before.surface == "の" ||
+                (kind == '1' && Adjoins(items, i))) {
+                return {};
+            }
+        }
+    }
+    const auto verb = VerbNominals().find(t.substr(start));
+    if (verb == VerbNominals().end()) return {};
+    const Conjugated c = StaticConjugating(verb->second, '&', "");
+    if (!c.error.empty() || c.target.size() < 4) return {};
+    const std::size_t family = c.target.size() - 4;
+    std::string head(t.substr(0, start));
+    std::string rest;
+    if (whole) {
+        head += c.target.substr(0, family);
+        rest = c.target.substr(family);
+    } else if (stem) {
+        head += verb->second.substr(0, verb->second.size() - std::string_view("다").size());
+        rest = suru.substr(std::string_view("하").size());
+    } else {
+        const std::string_view form = LookupSource(c.target.substr(family) + "6", generated);
+        if (form.empty()) return std::nullopt;
+        head += c.target.substr(0, family);
+        head += form;
+        rest = suru.substr(kHae.size());
+    }
+    if (next.selected <= 0) next.first.text = rest;
+    if (next.selected >= 0) next.entry.text = rest;
+    return head;
+}
+
 // Whether the next item that writes something, written straight after item i, attaches to
 // the last syllable of i: a particle or the copula (not one written as a space), a word
 // written attached (Tu) that starts with a syllable and is no counter (들, 에 대한), or the
@@ -944,6 +1048,7 @@ void Composer::Start(std::vector<ResolvedItem>& items, const Settings& settings,
     for (auto& s : state_) {
         s.text.clear();
         s.saved.clear();
+        s.verbNoun.reset();
         s.spoken = false;
     }
     written_.clear();
@@ -970,6 +1075,9 @@ void Composer::FinalOutputPrepass(std::vector<ResolvedItem>& items, const Nodes&
     Start(items, settings, generated);
     tokens_ = &tokens;
     first_ = first;
+    if (settings.literal) {
+        for (int i = 0; i + 1 < static_cast<int>(items.size()); i++) state_[i].verbNoun = VerbNounBeforeSuru(items, i, generated);
+    }
     if (settings.text) {
         if (source_.size() < tokens.size()) source_.resize(tokens.size());
         for (int i = first; i <= last; i++) source_[i] = tokens[i].text;
@@ -1113,8 +1221,10 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
         tokens[item.tokenIndex].spanText = translated;
         if (translated.empty()) tokens[item.tokenIndex].text.clear();
     }
-    const bool hadaNoun = HadaNounBeforeSuru(items, i, translated);
-    if (hadaNoun) translated.resize(translated.size() - kHagi.size());
+    const bool verbNoun = state_[i].verbNoun.has_value();
+    if (verbNoun) translated = *state_[i].verbNoun;
+    const bool hadaNoun = verbNoun || HadaNounBeforeSuru(items, i, translated);
+    if (hadaNoun && !verbNoun) translated.resize(translated.size() - kHagi.size());
     std::string composed;
     if (record) composed = translated;
     auto [spaced, space] = hadaNoun ? std::pair{std::move(translated), false}

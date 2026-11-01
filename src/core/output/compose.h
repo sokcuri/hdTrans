@@ -3,6 +3,7 @@
 // the texts of their tokens, which are then joined into the output pieces of the
 // sentence.
 #include <cstdint>
+#include <optional>
 #include <span>
 #include <string>
 #include <string_view>
@@ -142,6 +143,7 @@ private:
     struct Scratch {
         std::string text;   // composed text, " " once consumed
         std::string saved;  // text of a kanji item replaced by its surface
+        std::optional<std::string> verbNoun;  // the text of a noun read as the verb of the する after it (LEX-40)
         bool spoken = false;  // WriteCasual gave the item a casual sentence end
     };
     struct Written {

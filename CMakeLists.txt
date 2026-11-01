@@ -256,6 +256,9 @@ if(NOT EMSCRIPTEN)
             # The name heads table (builtin/extra/name_heads.tsv) is the one the name dictionaries give.
             add_test(NAME dicts.name-heads COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/name-heads.py" --check "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+            # The verb nominals table (builtin/extra/verb_nominals.tsv) is the one the dictionaries give.
+            add_test(NAME dicts.verb-nominals COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/verb-nominals.py" --check "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
             # Every row of the construction table has a fix and a keep rule case.
             add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)

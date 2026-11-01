@@ -41,7 +41,7 @@ cx:lc-quote-bracket:30	「うちに来たら開口一番、『お紅茶ある！
 cx:lc-quote-bracket:30	「でも、夢の中の人間に、『これは夢ですか』って聞かれても困っちゃうなぁ」	has:』라고 물어도	fix	rewrites
 cx:lc-quote-bracket:30	「ウチの署には代々、『風見とその関係者には関わるな』って厳しく言われていてな……」	has:』라고 엄격하게	fix	rewrites
 cx:lc-quote-bracket:30	「『人を傷つけてはいけません』って習ったって、俺はずっと傷つけられてきてるし」	has:』라고 배워도	fix	rewrites
-cx:lc-quote-bracket:30	「妹？　それは末っ子がお母さんに“妹がほしい！”っておねだりするあれ？」	has:”라고 조르기	fix	rewrites
+cx:lc-quote-bracket:30	「妹？　それは末っ子がお母さんに“妹がほしい！”っておねだりするあれ？」	has:”라고 조르는	fix	rewrites
 cx:lc-quote-bracket:30	「うん、サチが掃除してるの見かけて『あたしも手伝う』って声かけたんだけど……」	has:』라고 말을 걸었는데	fix	rewrites
 cx:lc-quote-bracket:30	｢俺が 必ず借金返すから｣って	has:｣라고	fix	rewrites
 cx:lc-quote-bracket:30	「まあ、みんな『タコス』ってしか言わないから」	has:』라고밖에	fix	rewrites

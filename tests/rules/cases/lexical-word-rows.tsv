@@ -35,7 +35,7 @@ lexical:word-rows	ミルコフのように魔力量が桁外れなのか？	has:
 lexical:word-rows	「まぁ、あの桁外れの戦力を手放すのも……	has:월등함의 전력	keep	lookup
 lexical:word-rows	こんなにウザいものなんだなって、よくわかった	has:이렇게 짜증스러운 것	fix	phrases
 lexical:word-rows	ドヤ顔がうざい！	has:얼굴이 짜증스러워	fix	phrases
-lexical:word-rows	ウザ絡みしてくる	has:짜증나게 달라붙기	keep	lookup
+lexical:word-rows	ウザ絡みしてくる	has:짜증나게 달라붙	keep	lookup
 lexical:word-rows	何かを言いかけた俺を遮るように、	has:말하려 한 나를	fix	phrases
 lexical:word-rows	言いかけた言葉を遮り、僕は大きな声で	has:말하려 한 말을	fix	phrases
 lexical:word-rows	そう言いかけた時、セルドルに注意を促され	has:말하려고 했을 때	keep	lookup

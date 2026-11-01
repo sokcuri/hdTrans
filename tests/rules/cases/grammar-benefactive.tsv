@@ -19,7 +19,7 @@ cx:benefactive-agent:20	そこまでしてもらわなくても	거기까지 해
 cx:benefactive-agent:20	治療を十分にしてもらった。	치료를 충분히 받았다.	keep	rewrites
 cx:benefactive-agent:20	実の息子のようによくしてもらいました。	친아들처럼 잘 대접받았습니다.	keep	rewrites
 cx:benefactive-provider:10	先生に説明していただいた。	선생님이 설명해 주셨다.	fix	rewrites
-cx:benefactive-provider:10	田中さんにお力添えして頂いた方	타나카 씨가 도움해 주신 분	fix	rewrites
+cx:benefactive-provider:10	田中さんにお力添えして頂いた方	타나카 씨가 도와 주신 분	fix	rewrites
 cx:benefactive-provider:10	王宮で働く方々に相談をさせていただいた。	왕궁에서 일하는 분들에게 상담을 했다.	keep	rewrites
 dict:benefactive:4	先生に本を読んでいただいた。	선생님이 책을 읽어 주셨다.	fix	local
 dict:benefactive:4	聞いていただき、ありがとうございます！	들어 주셔서, 감사합니다!	fix	local
