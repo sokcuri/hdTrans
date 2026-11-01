@@ -1,0 +1,53 @@
+# 규칙: LEX-3440
+# 규칙: LEX-3441
+# 규칙: LEX-3442
+# 규칙: LEX-3443
+# 규칙: LEX-3444
+# 규칙: LEX-3445
+# 규칙: LEX-3446
+# 규칙: LEX-3447
+rule	input	expected	kind	layer
+dict:kana-word-misglosses:1	「ママ、なんであの人ははだかなのー？」	has:알몸	fix	defaults
+dict:kana-word-misglosses:1	二人ともはだかで眠っていたようだ。	has:알몸으로	fix	defaults
+dict:kana-word-misglosses:1	「そ、その――わたしのはだかに、興味があったの？」	has:알몸에	fix	defaults
+dict:kana-word-misglosses:1	右手の壁には張り紙があり、「はだかになりましょう」とある。	has:알몸이 됩시다	fix	defaults
+dict:kana-word-misglosses:1	その歩は止まり、僕らの前には立派な扉がはだかっていた。	has:막아서	keep	defaults
+dict:kana-word-misglosses:1	帰ろうとするとまたもはだかる人影。	has:막아서는	keep	defaults
+dict:kana-word-misglosses:1	裸で寝る。	has:알몸으로	keep	defaults
+dict:kana-word-misglosses:3	「乳房がはみ出てるぞ」	has:삐져나와	fix	defaults
+dict:kana-word-misglosses:2	白く細い裸の肩が掛布からはみ出し指が俺の胸に乗せられている。	has:삐져나와	fix	defaults
+dict:kana-word-misglosses:3	そして臓物が腹からはみ出したクマちゃんと目が合う。	has:삐져나온	fix	defaults
+dict:kana-word-misglosses:2	わざとらしく、舌を出してペロリと口からはみ出させて含みのある発言をしてくる。	has:삐져나오게	fix	defaults
+dict:kana-word-misglosses:3	シャツがはみ出ている。	has:삐져나오고	fix	defaults
+dict:kana-word-misglosses:2	「私も、はみ出し者だったからさ。」	lacks:삐져나	keep	defaults
+dict:kana-word-misglosses:2	予算を超過した。	has:초과	keep	defaults
+dict:kana-word-misglosses:5	「お前の部下ののっぺらぼうは見ているとなかなかの術者だ。」	has:달걀귀신은	fix	defaults
+dict:kana-word-misglosses:5	そこには、のっぺらぼうの髪の長い人間が立っていた。	has:달걀귀신의	fix	defaults
+dict:kana-word-misglosses:4	のっぺら坊が出た。	has:달걀귀신이	fix	defaults
+dict:kana-word-misglosses:6	またギルド長を嫌っており会うたびに罵り合ったりしている。	has:서로 욕하거나	fix	defaults
+dict:kana-word-misglosses:6	俺たちが罵り合っている間、男は攻撃の手を止めている。	has:서로 욕하고	fix	defaults
+dict:kana-word-misglosses:8	二人はののしりあった。	has:서로 욕했다	fix	defaults
+dict:kana-word-misglosses:9	和馬と相対した蘇我田は、罵り合いを覚悟していた。	has:욕설 다툼을	fix	defaults
+dict:kana-word-misglosses:9	お互いのネーミングセンスの罵り合いから始まったストリートファイト。	has:욕설 다툼	fix	defaults
+dict:kana-word-misglosses:6	二人は口論した。	lacks:욕	keep	defaults
+dict:kana-word-misglosses:10	当時は、若者がサプリを摂る習慣は、今ほどなかった。	has:지금만큼 없었다	fix	defaults
+dict:kana-word-misglosses:10	今ほど悔しいと思ったことなんてないくらい、悔しい。	has:지금만큼 분하다	fix	defaults
+dict:kana-word-misglosses:10	銃も当時は今ほど小型化されていないだろうしね。	has:지금만큼 소형화	fix	defaults
+dict:kana-word-misglosses:11	いまほど便利ではなかった。	has:지금만큼	fix	defaults
+dict:kana-word-misglosses:10	先ほど連絡があった。	has:방금 전	keep	defaults
+dict:kana-word-misglosses:12	私には、お嬢様に仕える以前の記憶がほとんどない。	has:아가씨를 섬기기	fix	defaults
+dict:kana-word-misglosses:12	女王に仕える親衛隊の隊長として、事務作業も日課の一つ。	has:여왕을 섬기는	fix	defaults
+dict:kana-word-misglosses:12	雛「織田家に仕えていた年数なら雛達の方が長いのに〜！	has:섬기던	fix	defaults
+dict:kana-word-misglosses:12	どうかしら貴方、私に仕える気はなくて？	has:나를 섬길	fix	defaults
+dict:kana-word-misglosses:12	王に仕える。	has:왕을 섬긴다	keep	defaults
+dict:kana-word-misglosses:12	彼は会社に勤めている。	lacks:섬기	keep	defaults
+dict:kana-word-misglosses:13	マリウスはその度に、はれやかな笑みを浮かべ返事をする。	has:밝은 미소	fix	defaults
+dict:kana-word-misglosses:13	その顔が突然はれやかになった。	has:밝게	fix	defaults
+dict:kana-word-misglosses:14	晴やかな笑みを浮かべて紀夫は空を見る。	has:밝은 미소	fix	defaults
+dict:kana-word-misglosses:14	答える前に私は晴やかに笑った、と思う。	has:밝게 웃었다	fix	defaults
+dict:kana-word-misglosses:14	晴れやかな顔をしていた。	has:밝은 얼굴	keep	defaults
+dict:kana-word-misglosses:15	ねたきり老人の介護をする。	has:와병 노인	fix	defaults
+dict:kana-word-misglosses:16	彼はにらみ預金を求められた。	has:구속성 예금	fix	defaults
+dict:kana-word-misglosses:15	寝たきり老人の介護をする。	lacks:지체부자유	keep	defaults
+dict:jisjk:345000	「だってフランと離ればなれになりたくないしね」	lacks:뿔뿔이	keep	defaults
+dict:kana-word-misglosses:6	顔のない幽霊が出た。	lacks:달걀귀신	keep	defaults

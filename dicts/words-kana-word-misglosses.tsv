@@ -1,0 +1,19 @@
+#! layer=words
+# 가나로 쓴 낱말과 동사의 잘못 옮긴 뜻을 바로잡은 행
+key	ko	pos	sem	gram	note	flags	id
+はだか	알몸	N110	VBp		// LEX-3440	replace	kana-word-misglosses:1
+はみ出	삐져나&AH@	M413			// LEX-3441	replace	kana-word-misglosses:2
+はみ出	삐져나&AH@	M427			// LEX-3441	replace	kana-word-misglosses:3
+のっぺら坊	달걀귀신	N110			// LEX-3442	replace	kana-word-misglosses:4
+のっぺらぼう	달걀귀신	N110			// LEX-3442	replace	kana-word-misglosses:5
+罵り合	서로 욕&AV@	M420			// LEX-3443	replace	kana-word-misglosses:6
+ののしり合	서로 욕&AV@	M420			// LEX-3443	replace	kana-word-misglosses:7
+ののしりあ	서로 욕&AV@	M420			// LEX-3443	replace	kana-word-misglosses:8
+罵り合い	욕설 다툼	N110			// LEX-3443	replace	kana-word-misglosses:9
+今ほど	지금만큼	E311			// LEX-3444	replace	kana-word-misglosses:10
+いまほど	지금만큼	E311			// LEX-3444	replace	kana-word-misglosses:11
+に仕え	(을)를 섬&A2@	M417		PjTu	// LEX-3445	replace	kana-word-misglosses:12
+はれやか	%BE@	G8U0			// LEX-3446	replace	kana-word-misglosses:13
+晴やか	%BE@	G8U0			// LEX-3446	replace	kana-word-misglosses:14
+ねたきり老人	와병 노인	N110	VHn		// LEX-3447	replace	kana-word-misglosses:15
+にらみ預金	구속성 예금	N110	VMo		// LEX-3447	replace	kana-word-misglosses:16
