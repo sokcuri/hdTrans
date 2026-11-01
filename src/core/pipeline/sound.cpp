@@ -3178,11 +3178,11 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             says = Says::Nai;
         } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative"), rest) > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-not"), rest) == 0) {
             says = Says::Negative;
-        } else if (rest.starts_with("かった")) {
-            says = Says::PotentialPast;
-        } else if (ends(rest)) {
-            says = Says::PotentialEnd;
-        } else if (rest.starts_with("ねん")) {
+        } else if (std::u32string_view(U"えけせてねへめれげぜでべぺ").find(rs[i - 1]) != std::u32string_view::npos &&
+                   (rest.starts_with("かった") || ends(rest))) {
+            // a potential stem ends in a kana of the え row
+            says = rest.starts_with("かった") ? Says::PotentialPast : Says::PotentialEnd;
+        } else if (std::u32string_view(U"かがさたなばまらわ").find(rs[i - 1]) != std::u32string_view::npos && rest.starts_with("ねん")) {
             says = Says::GodanNen;
         }
         if (says == Says::None) continue;

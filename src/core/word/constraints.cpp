@@ -745,11 +745,16 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
         std::size_t i = 0;
         while (i < list.size()) {
             const std::string_view source = list[i].source;
+            // The cheap word test first: most rules name a word that most candidates are not.
+            if (source.empty() || list[i].codes == nullptr || !WordFits(rule, source, before, lookupContext.cued)) {
+                i++;
+                continue;
+            }
             const bool first = std::none_of(list.begin(), list.begin() + static_cast<std::ptrdiff_t>(i),
                                             [&](const dict::Candidate& c) { return c.source == source; });
             const std::string_view after = query.size() > source.size() ? From(query, static_cast<long>(source.size()))
                                                                          : std::string_view(following);
-            if (source.empty() || list[i].codes == nullptr || !first || !WordFits(rule, source, before, lookupContext.cued) ||
+            if (!first ||
                 (rule.context == ConstraintContext::NotAfterNoun
                      ? !NotAfterNoun(head)
                      : !ContextFits(rule, list, source, after, before, previous, adjacent, preceding, lead))) {
