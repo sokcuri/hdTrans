@@ -1264,7 +1264,8 @@ HD_TEST(pipeline_contracted_no) {
 
 // A ん or っ said for a kana of a verb form takes it back: る before the な of a prohibition, ら, れ
 // or られ before ない (and ねえ, written ない), the negative ない after an ichidan or potential stem
-// before ぞ, から or か and after a godan negative stem with a kanji before か, から, けど or し, the の
+// before ぞ, から or か, after a potential stem before the end of a sentence or かった (the な of
+// なかった), after a godan negative stem with a kanji before か, から, けど, し or ねん, the の
 // of a question after a past before か, る before から, the れ of しれない after かも; not after a verb of
 // ability, a godan negative stem elsewhere or a dictionary form, in a word, nor after a lone kana
 // elsewhere or kana alone.
@@ -1311,6 +1312,17 @@ HD_TEST(pipeline_contracted_n) {
         {"負けんぞ", "負けないぞ"},
         {"許せんから", "許せないから"},
         {"負けん。", "負けん。"},  // the word stage reads the negative ん before a mark
+        {"許せん。", "許せない。"},          // but not after a godan potential
+        {"許せん！", "許せない！"},
+        {"許せん", "許せない"},
+        {"許せんかった", "許せなかった"},    // nor its past
+        {"信じられんかった", "信じられなかった"},
+        {"信じられん…", "信じられない…"},
+        {"負けんかった", "負けんかった"},    // an ichidan stem keeps the past with ん
+        {"許せんのは", "許せんのは"},        // the ん before の is that of the dictionary form
+        {"知らんねん", "知らないねん"},      // a godan negative before Kansai ねん
+        {"書かんねん", "書かないねん"},
+        {"見んねん", "見んねん"},            // an ichidan stem before ねん: as often 見るねん
         {"見んかった", "見んかった"},  // the past said with ん
         {"知らんぞ", "知らんぞ"},      // already the negative of a godan verb
         {"書くんなら", "書くんなら"},  // the の after a dictionary form

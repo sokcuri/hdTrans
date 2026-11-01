@@ -1,0 +1,42 @@
+# 규칙: SPC-25
+rule	input	expected	kind	layer
+normalize:kansai-akan	「おい、もう行かなあかん」	「어이, 이제 가야 해」	fix	normalize
+normalize:kansai-akan	「私も急がなあかんなぁ……」	「나도 서둘러야 해……」	fix	normalize
+normalize:kansai-akan	自信を持たなあかんな。	자신을 가져야 하네.	fix	normalize
+normalize:kansai-akan	整理せなあかん。	정리해야 한다.	fix	normalize
+normalize:kansai-akan	なんとか上昇させなあかん……	어떻게든 상승시켜야 해……	fix	normalize
+normalize:kansai-akan	他のとこも行かんとアカンし	다른 곳도 가야 하고	fix	normalize
+normalize:kansai-akan	これ 撮らなアカンから。 これ。	이것 찍어야 하니까. 이것.	fix	normalize
+normalize:kansai-akan	あわてたらあかん。	당황하면 안된다.	fix	normalize
+normalize:kansai-akan	「私、もうあかんねん……」	「나, 이제 안되거든……」	fix	normalize
+normalize:kansai-akan	これはアカンです。	이것은 안됩니다.	fix	normalize
+normalize:kansai-akan	ウチ、もうあかん……。さいならぁ～……。	우리, 이제 안돼……. 다시 봅시다~…….	fix	normalize
+normalize:kansai-akan	司令はん、チョコのお返し、まだやね？ 忘れてたらあかんで？	has:잊어선 안돼	fix	normalize
+normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안돼, 요우 고조되지 않는」	keep	normalize
+normalize:kansai-akan	行ったらアカン！）	가면 안돼!)	keep	normalize
+normalize:kansai-akan	埒があかん。	결말이 나지 않아.	keep	normalize
+normalize:kansai-akan	ミチョアカン州	미초아칸주	keep	normalize
+normalize:old-wish-negative	うち このまま負けとうない。	has:이대로 지고 싶지 않다	fix	normalize
+normalize:old-wish-negative	「妾は浦島と離れとうない！」	「첩은 우라시마와 떨어지고 싶지 않아!」	fix	normalize
+normalize:old-wish-negative	妾は死にとうない！	첩은 죽고 싶지 않아!	fix	normalize
+normalize:old-wish-negative	謝りとうない。	사과하고 싶지 않다.	fix	normalize
+normalize:old-wish-negative	（い、嫌じゃ……食いとうない！	(시, 싫지……먹고 싶지 않아!	fix	normalize
+normalize:old-wish-negative	ありがとうな。	고마워.	keep	normalize
+normalize:old-copula-jaga	「む。確かにそうじゃが、そなたは？	「음. 확실히 그렇지만, 그대는?	fix	normalize
+normalize:old-copula-jaga	「武功を立てる者は山ほどおる。じゃが、陣が腐らぬようにする者はおらん。	has:하지만,	fix	normalize
+normalize:old-copula-jaga	何のメリットもないのじゃが？」	아무 메리트도 없는데?」	fix	normalize
+normalize:old-copula-jaga	一緒だと思うんじゃがな。	함께라고 생각하는데.	fix	normalize
+normalize:old-copula-jaga	肉じゃがは空になって	고기감자조림은 비어	keep	normalize
+normalize:old-copula-jaga	「ここがじゃがいもを食べさせる店か」	「여기가 감자를 먹이는 가게인가」	keep	normalize
+contraction:potential-n	悔しいのは言い返せんかったことじゃ。	분한 것은 되받아칠 수 없었던 거야.	fix	normalize
+contraction:potential-n	「汚すぎて読めん！	「너무 더러워 읽을 수 없어!	fix	normalize
+contraction:potential-n	「この名誉は渡せん」	「이 명예는 건네줄 수 없어」	fix	normalize
+contraction:potential-n	どうにも思い出せん。	어떻게도 생각해 낼 수 없다.	fix	normalize
+contraction:potential-n	信じられんかった。	믿을 수 없었다.	fix	normalize
+contraction:potential-n	「おのれ許せん！	「당신 용서할 수 없어!	fix	normalize
+contraction:potential-n	「・・何も見えん。真っ暗だ」	「··아무것도 안 보인다. 깜깜해」	keep	normalize
+contraction:potential-n	だが、おれは負けん！	하지만, 나는 지지 않아!	keep	normalize
+contraction:potential-n	黙って見てるとは思えん。	입다물고 보고 있다고는 생각되지 않아.	keep	normalize
+contraction:potential-n	―――如何せん、	―――아무래도,	keep	normalize
+contraction:godan-nen	そういうの要らんねん！	그러한 것 필요하지 않거든!	fix	normalize
+contraction:godan-nen	知らんねん。	모르거든.	fix	normalize

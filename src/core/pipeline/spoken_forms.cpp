@@ -516,6 +516,104 @@ bool KansaiMahen(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// The copula じゃ of western and old speech before the が of a contrast, だ (仕方ないのじゃが だが, そうじゃが,
+// 思うんじゃがな, a sentence-initial じゃが、 だが、). Not the じゃが of the potato (じゃがいも, じゃが芋,
+// じゃがバター, 肉じゃが).
+bool OldCopulaJaga(std::string_view s, size_t pos, Match& m) {
+    if (s.substr(0, pos).ends_with("肉")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "じゃが")) return false;
+    for (const std::string_view w : {"い", "イ", "芋", "バター", "りこ", "ー"}) {
+        if (s.substr(p).starts_with(w)) return false;
+    }
+    m.end = p;
+    return true;
+}
+
+// The たく of a wish said with the う of western and old speech before its negative (行きとうない
+// 行きたくない, 見とうなかった 見たくなかった, 負けとうなくて): とう after a verb's continuative, a
+// hiragana of the い or え row or the one kanji of an ichidan stem (見, 寝, 居, 出, 来, 着). Not
+// ありがとう or おめでとう, nor とう after another kana (さとう, もうとうない).
+bool OldWishNegative(std::string_view s, size_t pos, Match& m) {
+    const char32_t before = LastRune(s.substr(0, pos)).cp;
+    if (!In(before, U"いきぎしじちにひびみりえけげせぜてでねべめれ見寝居出来着")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "とうな")) return false;
+    const size_t tail = p;
+    if (!Lit(s, p, "い") && !Lit(s, p, "かった") && !Lit(s, p, "く")) return false;
+    m.group[1] = s.substr(tail - std::string_view("な").size(), p - tail + std::string_view("な").size());
+    m.end = p;
+    return true;
+}
+
+// Whether a せ after head ends the stem of an ichidan verb, not the negative stem of する: after one
+// kanji (見せ, 任せ, 乗せ) or the negative stem of a causative after its kanji (待たせ, 行かせ), not
+// after a noun of two kanji or more (勉強せ), a particle or an adverb in か (何とかせ, どうにかせ).
+bool IchidanSe(std::string_view head) {
+    const char32_t before = LastRune(head).cp;
+    const std::string_view rest = head.substr(0, head.size() - LastRune(head).size);
+    if (IsKanjiClass(before)) return !IsKanjiClass(LastRune(rest).cp);
+    return In(before, U"かがさたなばまらわ") && IsKanjiClass(LastRune(rest).cp);
+}
+
+// The Kansai あかん (アカン) of a predicate, いけない: alone (もうあかん, 見たらあかん, 行かなきゃあかん),
+// with the must of a bare な or んと after a negative stem written in full (撮らなあかん 撮らなきゃいけない,
+// せなあかん しなきゃいけない, 行かんとあかん 行かないといけない), its past (あかんかった いけなかった) and a
+// sentence-final で, the よ of Kansai speech (あかんで いけないよ). Not 埒があかん (it does not open), a
+// word that goes on (あかんべ, あかんぼう, あかんたれ) or a katakana word (ミチョアカン).
+bool KansaiAkan(std::string_view s, size_t pos, Match& m) {
+    const std::string_view head = s.substr(0, pos);
+    if (head.ends_with("埒が") || head.ends_with("らちが") || head.ends_with("埒") || head.ends_with("らち")) return false;
+    size_t p = pos;
+    // group 1 the must before あかん, written in full
+    if (Lit(s, p, "せな") || Lit(s, p, "せんと")) {
+        m.group[1] = s.substr(pos, p - pos) == "せな" ? "しなきゃ" : "しないと";
+    } else if (const char32_t before = LastRune(head).cp;
+               (IsHiraganaClass(before) || IsKanjiClass(before)) && before != U'ん' && before != U'な' &&
+               (Lit(s, p, "な") || (In(before, U"かがさたなばまらわ") && Lit(s, p, "んと")))) {
+        m.group[1] = s.substr(pos, p - pos) == "な" ? "なきゃ" : "ないと";
+    } else {
+        p = pos;
+    }
+    const size_t word = p;
+    if (!Lit(s, p, "あかん") && !Lit(s, p, "アカン")) return false;
+    const bool katakana = s.substr(word).starts_with("アカン");
+    // An あかん that opens an utterance before a comma is the interjection of the phrase rows
+    // (あかん、よう盛り上がらんわ 안돼, ...).
+    if (word == pos &&
+        (head.empty() || !(IsHiraganaClass(LastRune(head).cp) || IsKanjiClass(LastRune(head).cp) || IsKatakanaRune(LastRune(head).cp))) &&
+        (s.substr(p).starts_with("、") || s.substr(p).starts_with("，") || s.substr(p).starts_with(","))) {
+        return false;
+    }
+    if (katakana && word == pos && IsKatakanaRune(LastRune(head).cp)) return false;
+    if (p < s.size() && katakana && IsKatakanaRune(At(s, p).cp)) return false;
+    size_t q = p;
+    if (Lit(s, q, "かった")) {
+        m.group[2] = "いけなかった";
+        m.end = q;
+        return true;
+    }
+    q = p;
+    if (Lit(s, q, "で") && (q == s.size() || OneOf(s, q, U"。｡、！!？?…‥」』）　 ーっぇえ〜～"))) {
+        m.group[2] = "いけないよ";
+        m.end = p + std::string_view("で").size();
+        return true;
+    }
+    q = p;
+    const bool ends = q == s.size() || OneOf(s, q, U"。｡、，,！!？?…‥」』）)　 ーっッ～〜・") || Take(s, q, IsKanjiClass);
+    bool follows = ends;
+    for (const std::string_view w : {"ねん", "ねや", "のや", "のよ", "のん", "の", "で", "わ", "よ", "し", "から", "かな", "かも", "か",
+                                     "やろ", "やん", "って", "て", "な", "ね", "けど", "けれど", "のに", "もん", "ぞ", "ぜ", "と",
+                                     "ちゅう", "え", "が", "や"}) {
+        q = p;
+        follows = follows || Lit(s, q, w);
+    }
+    if (!follows) return false;
+    m.group[2] = "いけない";
+    m.end = p;
+    return true;
+}
+
 // The Kansai しもうた, しもた of しまう and もろうた, もろた of もらう after a て form, and their て
 // forms (行ってしもうた, 来てもろて): しまった, しまって, もらった, もらって.
 bool KansaiShimota(std::string_view s, size_t pos, Match& m) {
@@ -874,6 +972,22 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         text = ReplaceAll(text, KansaiMahen, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     }
     if (dialectForms && Contains(text, "へん")) text = ReplaceAll(text, KansaiNegative, ReplaceKansaiNegative);
+    if (dialectForms && Contains(text, "じゃが")) {
+        text = ReplaceAll(text, OldCopulaJaga, [](const Match&) { return std::string("だが"); });
+    }
+    if (dialectForms && Contains(text, "とうな")) {
+        text = ReplaceAll(text, OldWishNegative, [](const Match& m) { return Cat({"たく", m.group[1]}); });
+    }
+    if (dialectForms && (Contains(text, "あかん") || Contains(text, "アカン"))) {
+        const std::string source = text;
+        text = ReplaceAll(text, KansaiAkan, [&](const Match& m) {
+            std::string_view must = m.group[1];
+            if (must.starts_with("し") && IchidanSe(std::string_view(source).substr(0, m.begin))) {
+                must = must == "しなきゃ" ? "せなきゃ" : "せないと";
+            }
+            return Cat({must, m.group[2]});
+        });
+    }
     if (dialectForms && (Contains(text, "やろ") || Contains(text, "じゃろ"))) {
         text = ReplaceAll(text, KansaiConjecture, ReplaceKansaiConjecture);
     }
