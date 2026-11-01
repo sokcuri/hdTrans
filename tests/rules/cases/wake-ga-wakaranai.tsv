@@ -1,0 +1,24 @@
+# 규칙: LEX-3600
+rule	input	expected	kind	layer
+dict:wake-ga-wakaranai:7	訳が分からない。	has:영문을 모른다	fix	defaults
+dict:wake-ga-wakaranai:7	オイラは訳が分からなかった。	has:영문을 몰랐다	fix	defaults
+dict:wake-ga-wakaranai:7	訳が分からなくなる。	has:영문을 모르게 된다	fix	defaults
+dict:wake-ga-wakaranai:19	「わけがわからないよ！」	has:영문을 몰라	fix	defaults
+dict:wake-ga-wakaranai:19	ますますわけがわからない。	has:영문을 모른다	fix	defaults
+dict:wake-ga-wakaranai:1	エルガーは訳がわからない。	has:영문을 모른다	fix	defaults
+dict:wake-ga-wakaranai:11	圭吾は訳も分からず立ち尽くした。	has:영문도 모른 채	fix	defaults
+dict:wake-ga-wakaranai:11	その光景を訳も分からず黙り込んで凝視する匠。	has:영문도 모른 채	fix	defaults
+dict:wake-ga-wakaranai:23	累はわけもわからず着いていく。	has:영문도 모른 채	fix	defaults
+dict:wake-ga-wakaranai:9	訳が分からず、首を捻ってしまう。	has:영문을 몰라	fix	defaults
+dict:wake-ga-wakaranai:9	僕は訳が分からず戸惑う。	has:영문을 몰라 당황한다	fix	defaults
+dict:wake-ga-wakaranai:7	パチュリーも訳が分からなくなっていた。	has:영문을 모르게	fix	defaults
+dict:wake-ga-wakaranai:37	もうワケがわからない。	has:영문을 모른다	fix	defaults
+dict:wake-ga-wakaranai:37	レイにはワケがわからない。	has:영문을 모른다	fix	defaults
+dict:wake-ga-wakaranai:13	「ミナ君。僕訳が判らないんだけど通訳して…」	has:영문을 모르는데	fix	defaults
+dict:wake-ga-wakaranai:8	訳も分からないまま走った。	has:영문도 모르는 채	fix	defaults
+dict:wake-ga-wakaranai:7	まったく以て、訳のわからない痛みだ。	has:영문 모를 아픔	keep	defaults
+dict:wake-ga-wakaranai:7	等と訳のわからない事を言ってくる始末。	has:영문 모를 말	keep	defaults
+dict:wake-ga-wakaranai:7	訳のわからない裸踊りが再開される。	has:영문 모를 알몸 춤	keep	defaults
+dict:wake-ga-wakaranai:7	ビッチはどういう訳か俺の手を掴む。	has:왠지	keep	defaults
+dict:wake-ga-wakaranai:7	僕が使えたのには訳がある。	has:사정이 있다	keep	defaults
+dict:wake-ga-wakaranai:1	言い訳がわからない。	lacks:영문	keep	defaults
