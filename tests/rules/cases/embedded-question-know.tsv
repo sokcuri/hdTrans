@@ -1,0 +1,35 @@
+# 규칙: GRM-3092
+rule	input	expected	kind	layer
+dict:tte-r1:3	何をしてるか分からない	무엇을 하고 있는지 모른다	fix	local-ending
+dict:tte-r1:3	何が起きてるかわかる？	has:일어나고 있는지 알아?	fix	local-ending
+dict:tte-r1:3	二人とも何してるか分からない。	has:뭐하고 있는지 모른다	fix	local-ending
+dict:tte-r1:3	何を言ってるかわからない	무슨 말을 하는지 모른다	fix	local-ending
+dict:tte-r1:3	今どうなってるか知ってる？	has:되어 있는지 알고	fix	local-ending
+dict:tte-r1:3	何を考えてるかわからない	has:생각하고 있는지 모른다	fix	local-ending
+dict:tte-r1:3	宿題終わってるかわからないけど。	has:끝나 있는지 모르는데	fix	local-ending
+dict:tte-r1:3	みんなは美鳥ちゃんのことを何て言ってるか知ってる？	has:말하는지 알고	fix	local-ending
+dict:tte-r1:3	どこに行ってるかわからない	has:가고 있는지 모른다	fix	local-ending
+dict:tte-r1:3	生きてるかどうか分からない	has:살아 있는지	fix	local-ending
+dict:tte-r1:4	何を言ってるかさっぱりだ	무슨 말을 하는지 전혀 알 수 없다	fix	local
+dict:tte-r1:4	「何言ってるかさっぱりだ」	has:하는지 전혀 알 수 없어	fix	local
+dict:tte-r1:3	何言ってるかさっぱり分からない	has:하는지 전혀 모른다	fix	local-ending
+dict:jisjk:3986	いつ来るか知ってる？	has:언제 오는지 알고	fix	local-ending
+dict:jisjk:3986	世界の子供たちが何歳で家を出るか知っているか？	has:나가는지 알고	fix	local-ending
+dict:jisjk:3986	今月末には何があるか知ってる？	has:있는지 알고	fix	local-ending
+dict:jisjk:3986	どこをどうすれば殺せるか知っているだけ。	has:죽일 수 있는지 알고	fix	local-ending
+dict:jisjk:3986	何を考えているか分かった	has:생각하고 있는지 알았다	fix	local-ending
+dict:jisjk:3987	何されるかわかりませんからね	has:당할지 모르니까요	fix	local-ending
+dict:tte-r1:3	何をしてるか？	!rule:dict:tte-r1:3	keep	local-ending
+dict:tte-r1:3	元気にしてるか？	!rule:dict:tte-r1:3	keep	local-ending
+dict:tte-r1:3	聞いてるか、お前	!rule:dict:tte-r1:3	keep	local-ending
+dict:tte-r1:3	何してるかもしれない	has:하고 있을지도	keep	local-ending
+dict:jisjk:3986	行くか行かないか分からない	!rule:dict:tte-r1:3	keep	local-ending
+dict:jisjk:3986	何が起こるかわからない	무슨 일이 일어날지 모른다	keep	local-ending
+dict:jisjk:3986	何が起きたのか分からない	무슨 일이 일어났는지 모른다	keep	local-ending
+dict:jisjk:3986	誰か知ってる？	has:누군가	keep	local-ending
+dict:tte-r1:4	正直さっぱりだ	!rule:dict:tte-r1:4	keep	local
+dict:tte-r1:4	さっぱりした性格だ	!rule:dict:tte-r1:4	keep	local
+dict:jisjk:3987	どうなるかわかりませんよ	has:될지 몰라요	fix	local-ending
+dict:jisjk:3987	何されるか分からず	has:당할지 알지 못하고	fix	local-ending
+dict:jisjk:3987	何が起こるか分かりません	has:일어날지 모릅니다	fix	local-ending
+dict:jisjk:3986	どうなるかわかる？	has:되는지 알아?	keep	local-ending

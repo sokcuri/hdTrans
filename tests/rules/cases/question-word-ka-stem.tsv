@@ -2,4 +2,4 @@ rule	input	expected	kind	layer
 word:question-word	なぜ行かないんだろう	왜 가지 않을까	fix	rewrites
 word:question-word	どうして書かないんだろうな	왜 쓰지 않을까	fix	rewrites
 word:question-word	誰が来るか知らないんだろう	누가 오는지 모르겠지	keep	rewrites
-word:question-word	どうなるか……ってのもあるだろうな	어떻게 될까……는의도 있겠지	keep	rewrites
+word:question-word	どうなるか……ってのもあるだろうな	어떻게 될까……라는 것도 있겠지	keep	rewrites
