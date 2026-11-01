@@ -1,0 +1,39 @@
+#! layer=base
+# 철자나 뜻을 잘못 옮긴 기본 사전 낱말: ワンダフル 원더풀, ロールシャッハテスト 로르샤흐 테스트, 一案 한 가지 안, 一歩二歩 한두 걸음
+key	ko	pos	sem	gram	note	id
+ワンダフル	원더풀	N110			// LEX-3400	wrong-loan-and-ichi-glosses:1
+ワンダフォー	원더풀	N110			// LEX-3400	wrong-loan-and-ichi-glosses:2
+ロールシャッハテスト	로르샤흐 테스트	N110			// LEX-3400	wrong-loan-and-ichi-glosses:3
+ロールシャッハーテスト	로르샤흐 테스트	N110			// LEX-3400	wrong-loan-and-ichi-glosses:4
+ロールシャッハ・テスト	로르샤흐 테스트	N110			// LEX-3400	wrong-loan-and-ichi-glosses:5
+ロールシャッハけんさ	로르샤흐 검사	N110	QHP		// LEX-3400	wrong-loan-and-ichi-glosses:6
+ローレンツ力	로렌츠 힘	N110			// LEX-3400	wrong-loan-and-ichi-glosses:7
+ローレンツ変換	로렌츠 변환	N110			// LEX-3400	wrong-loan-and-ichi-glosses:8
+ローレンツ曲線	로렌츠 곡선	N110			// LEX-3400	wrong-loan-and-ichi-glosses:9
+ローレンツ電場	로렌츠 전기장	N110			// LEX-3400	wrong-loan-and-ichi-glosses:10
+ヴェルニ	베르니	N110			// LEX-3400	wrong-loan-and-ichi-glosses:11
+ロットプロダクション	로트 생산	N110	VMo		// LEX-3400	wrong-loan-and-ichi-glosses:12
+ロールコールポーリング	롤 콜 폴링	N110			// LEX-3400	wrong-loan-and-ichi-glosses:13
+ワイルドキャットストライキ	와일드캣 스트라이크	N110			// LEX-3400	wrong-loan-and-ichi-glosses:14
+ワウフラッター	와우 플러터	N110	VPeUTs		// LEX-3400	wrong-loan-and-ichi-glosses:15
+ワーカーズコレクティブ	워커스 컬렉티브	N110			// LEX-3400	wrong-loan-and-ichi-glosses:16
+ワードレコグナイザー	워드 레코그나이저	N110			// LEX-3400	wrong-loan-and-ichi-glosses:17
+一案	한 가지 안	N110			// LEX-3401	wrong-loan-and-ichi-glosses:18
+一歩二歩	한두 걸음	N110			// LEX-3401	wrong-loan-and-ichi-glosses:19
+一夫一婦	일부일처	N110	ULw		// LEX-3401	wrong-loan-and-ichi-glosses:20
+一日千秋	일일여삼추	I110			// LEX-3401	wrong-loan-and-ichi-glosses:21
+一工夫	약간의 궁리	N110	UTh		// LEX-3401	wrong-loan-and-ichi-glosses:22
+一工夫	궁리&AV@	M429			// LEX-3401	wrong-loan-and-ichi-glosses:23
+一人寂しく	홀로 쓸쓸히	E300			// LEX-3401	wrong-loan-and-ichi-glosses:24
+一人さびしく	홀로 쓸쓸히	E300			// LEX-3401	wrong-loan-and-ichi-glosses:25
+一人ぽっち	외톨이	I110	VHn		// LEX-3401	wrong-loan-and-ichi-glosses:26
+一つ話	이야기 하나	I110			// LEX-3401	wrong-loan-and-ichi-glosses:27
+一別以来	헤어진 이래	N110	UMe		// LEX-3401	wrong-loan-and-ichi-glosses:28
+一昨昨晩	그끄저께 밤	N110	UMe		// LEX-3401	wrong-loan-and-ichi-glosses:29
+一服基調	소강 기조	N110			// LEX-3401	wrong-loan-and-ichi-glosses:30
+一煮立ちさせ	한소끔 끓게 &AV@	M447			// LEX-3401	wrong-loan-and-ichi-glosses:31
+一生もん	평생 갈 것	N110			// LEX-3401	wrong-loan-and-ichi-glosses:32
+一生もの	평생 갈 것	N110			// LEX-3401	wrong-loan-and-ichi-glosses:33
+一生もんの	평생 갈	C0D1			// LEX-3401	wrong-loan-and-ichi-glosses:34
+一生ものの	평생 갈	C0D1			// LEX-3401	wrong-loan-and-ichi-glosses:35
+一歩二歩と	한 걸음 두 걸음	E300			// LEX-3401	wrong-loan-and-ichi-glosses:36

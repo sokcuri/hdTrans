@@ -1,0 +1,45 @@
+# 규칙: LEX-3400
+# 규칙: LEX-3401
+rule	input	expected	kind	layer
+dict:wrong-loan-and-ichi-glosses:1	シンプルでワンダフル。	has:원더풀	fix	defaults
+dict:wrong-loan-and-ichi-glosses:1	「ワ〜オ！ワンダフル！」と声を上げる。	has:원더풀	fix	defaults
+dict:wrong-loan-and-ichi-glosses:1	オールバックがワンダフルな和尚がいない。	has:원더풀한	fix	defaults
+dict:wrong-loan-and-ichi-glosses:1	素晴らしい景色だ。	lacks:원더풀	keep	defaults
+dict:wrong-loan-and-ichi-glosses:3	最初からロールシャッハテストかい！	has:로르샤흐 테스트	fix	defaults
+dict:wrong-loan-and-ichi-glosses:3	何だっけ、ロールシャッハテスト？	has:로르샤흐 테스트	fix	defaults
+dict:wrong-loan-and-ichi-glosses:6	ロールシャッハ検査	has:로르샤흐 검사	keep	defaults
+dict:wrong-loan-and-ichi-glosses:7	ローレンツ力により砲塔から射出する兵器だ。	has:로렌츠 힘	fix	defaults
+dict:wrong-loan-and-ichi-glosses:8	中学２年でローレンツ変換は習わないだろう。	has:로렌츠 변환	fix	defaults
+dict:wrong-loan-and-ichi-glosses:11	ヴィトン・ヴェルニのミニバック	has:베르니	fix	defaults
+dict:wrong-loan-and-ichi-glosses:18	それは一案だ。	has:한 가지 안이다	fix	defaults
+dict:wrong-loan-and-ichi-glosses:18	まあ、一案として水で洗い流すとかどう？	has:한 가지 안으로서	fix	defaults
+dict:wrong-loan-and-ichi-glosses:18	私に一案がございます」	has:한 가지 안이	fix	defaults
+dict:wrong-loan-and-ichi-glosses:18	第一案を採用して頂くしかございません	has:제1안	keep	defaults
+dict:wrong-loan-and-ichi-glosses:19	大人の階段を一歩二歩、毎日のように登っていく。	has:한두 걸음	fix	defaults
+dict:wrong-loan-and-ichi-glosses:19	もう一歩二歩近づく。	has:한두 걸음 더	fix	defaults
+dict:wrong-loan-and-ichi-glosses:36	後ろに一歩二歩とよろけた。	has:한 걸음 두 걸음	fix	defaults
+dict:wrong-loan-and-ichi-glosses:36	一歩二歩と進み、三歩目を躊躇った。	has:한 걸음 두 걸음 나아가	fix	defaults
+dict:wrong-loan-and-ichi-glosses:36	一歩踏み出す。	lacks:두 걸음	keep	defaults
+dict:wrong-loan-and-ichi-glosses:20	妖精族は一夫一婦なのよ。	has:일부일처	fix	defaults
+dict:wrong-loan-and-ichi-glosses:20	そこが一夫一婦制であった場合	has:일부일처제	keep	defaults
+dict:wrong-loan-and-ichi-glosses:21	一日千秋というコトバがあります。	has:일일여삼추	fix	defaults
+dict:wrong-loan-and-ichi-glosses:21	この日を一日千秋の思いで待ち続けてきました！	has:일각이 여삼추	keep	defaults
+dict:wrong-loan-and-ichi-glosses:22	収納方法には一工夫加えた。	has:약간의 궁리	fix	defaults
+dict:wrong-loan-and-ichi-glosses:22	人間の群れに潜り込むための一工夫というものだ。	has:약간의 궁리라는	fix	defaults
+dict:wrong-loan-and-ichi-glosses:23	一工夫する。	has:궁리한다	fix	defaults
+dict:wrong-loan-and-ichi-glosses:22	新しい工夫が必要だ。	lacks:약간의	keep	defaults
+dict:wrong-loan-and-ichi-glosses:24	今頃山の中で一人寂しく野垂れ死んでいたかもしれなかった。	has:홀로 쓸쓸히	fix	defaults
+dict:wrong-loan-and-ichi-glosses:24	一人寂しく過ごしてくださいね」	has:홀로 쓸쓸히	fix	defaults
+dict:wrong-loan-and-ichi-glosses:24	一人で過ごした。	lacks:쓸쓸히	keep	defaults
+dict:wrong-loan-and-ichi-glosses:26	一人ぽっちで泣いていた。	has:외톨이	fix	defaults
+dict:wrong-loan-and-ichi-glosses:27	そろそろ一つ話をしたいのですが	has:이야기 하나	fix	defaults
+dict:wrong-loan-and-ichi-glosses:27	何一つ話してくれない。	has:아무것도	keep	defaults
+dict:wrong-loan-and-ichi-glosses:27	もう一つ話があんだけどよ	lacks:진담	keep	defaults
+dict:wrong-loan-and-ichi-glosses:28	「一別以来だな。達者であったか？」	has:헤어진 이래	fix	defaults
+dict:wrong-loan-and-ichi-glosses:31	一煮立ちさせたら火を止める。	has:한소끔	fix	defaults
+dict:wrong-loan-and-ichi-glosses:33	一生ものだからな、こういうのは。	has:평생 갈 것이니까	fix	defaults
+dict:wrong-loan-and-ichi-glosses:33	友人関係は一生ものだと思っている。	has:평생 갈 것이라고	fix	defaults
+dict:wrong-loan-and-ichi-glosses:32	クレームつけなかったのか。一生もんだろ？	has:평생 갈 것이지	fix	defaults
+dict:wrong-loan-and-ichi-glosses:35	幼い彼女に一生ものの傷を残すことなんて出来ません。	has:평생 갈 상처	fix	defaults
+dict:wrong-loan-and-ichi-glosses:34	一生もんの宝物にしようと決めた。	has:평생 갈 보물	fix	defaults
+dict:wrong-loan-and-ichi-glosses:33	一生をかけて償う。	lacks:평생 갈	keep	defaults
