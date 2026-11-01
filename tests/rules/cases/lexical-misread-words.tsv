@@ -28,3 +28,10 @@ dict:jisjk:92746	権力闘争に明け暮れる	권력 투쟁에 몰두한다	fi
 dict:jisjk:92746	こうして信長は いやおうなく戦に明け暮れることになってしまった。	이렇게 해 노부나가는 억지로 싸움에 몰두하게 되어버렸다.	fix	lookup
 dict:jisjk:92095	だが、あいつは屈せず……	하지만, 저 녀석은 굴하지 않고……	fix	lookup
 dict:jisjk:92095	暴力に屈した。	폭력에 굴했다.	keep	lookup
+dict:w:29119	「そうね、結ってくれる？	「그래, 묶어 줄래?	fix	lookup
+dict:w:29119	長い髪を後ろで結ってる。	긴 머리카락을 뒤에서 묶고 있다.	fix	lookup
+dict:w:29119	俺の問いを聞いて、皐月はきゅっと唇を結んだ。	내 물음을 듣고, 5월은 꼭 입술을 다물었다.	keep	lookup
+dict:w:29120	勇者、あいつを処すの	has:저 녀석을 처단	fix	lookup
+dict:w:29120	極刑に処す。	극형에 처단한다.	fix	lookup
+dict:w:29121	不幸せな運命になんか屈さない。	불행한 운명 따위에 굴하지 않는다.	fix	lookup
+dict:w:29121	屈せず戦った。	굴하지 않고 싸웠다.	keep	lookup
