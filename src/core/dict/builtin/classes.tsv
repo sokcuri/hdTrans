@@ -147,8 +147,10 @@
 //= kana.ending-start-only	Kana that start the ending of an end row but no word, so that such an ending is no piece of a katakana run read as words (っしゅ of トリッシュ).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= kana.mimetic-adverb-frame	The second and fourth kana of a four-kana katakana run, in hiragana, that make it the shape of a native adverb (シッカリ, ヒンヤリ).
+//= ko-root.mimetic-adjective	Roots of Korean 하다 adjectives that the sound stage writes for a mimetic word (ふんわり 폭신, しっとり 촉촉): its している before a noun is the adjective (ふんわりしている髪 폭신한 머리카락).
 //= ko-root.hada-state	Roots of Korean 하다 adjectives that the sound stage writes before する (しんと 고요): their している is the adjective (しんとしている 고요하다).
 //= ko-adjective.hada-state	Korean 하다 adjectives of a bearing or a state that the 하다 verb of a Japanese と word reads (堂々と 당당하다): their て form before いる is 하게, not 하고 (당당하게 있다).
+//= ko-adverb.manner-only	Korean adverbs in 히 or 하게 whose 하다 adjective is no word or says something else, so a mimetic read as one keeps its した as an act (ゆっくりした 천천히 한, じっとした 가만히 한).
 //= ko-adjective.stem-end	Final syllables of Korean adjective stems: their 지 않다 is the negative of an adjective (기분이 좋지 않다, 좋지 않은), not of a verb (않는다, 않는).
 //= ko-noun.cp-danghada	Korean nouns of what one undergoes whose causative-passive (させられる after the Japanese noun) is the noun with 당하다 (해고당하다, 퇴학당하다), not the act one is made to do.
 //= ko-noun.passive-batda	Korean nouns of 하다 whose passive is the noun with 받다 (사과받다); nouns of neither this set nor ko-noun.passive-danghada take 되다 (고용되다).
@@ -225,9 +227,17 @@
 //= noun.arena	Ends of the nouns of a realm, a setting, a group or an event in which something holds or is done: でも after one is 에서도, in it too (王都でも指折り 왕도에서도 손꼽히는, 作戦でも働いた 작전에서도 일했다), not before する, a verb of verb.example-object, どう or a word of permission.
 //= noun.bound-pause	Starts of the nouns that need a modifier, the auxiliaries and the adverbial particles that still take the predicate before a pause (行く……ことにした, 来る……まで).
 //= noun.casual-declaration	Japanese nouns of declarations and verdicts, whose する and だ keep 다 (破棄する 파기한다).
+//= noun.act-head	Formal nouns and nouns of time, chance or result after which a した or している of a mimetic word or an adverb is the act (ちゃんとしたことがない 제대로 한 적이 없다, のんびりしている暇はない), not a quality of the noun.
 //= noun.clause	Nouns after a verb that name the clause rather than a thing in it (していたの, していたこと, していたようだ, 迎えられたこと).
 //= noun.cp-change	Verbal nouns of a change that befalls someone or something (中断, 孤立, 停止), whose causative-passive is that change done to one, 되다 (思考を中断させられた 사고가 중단되었다), not an act one is made to do.
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
+//= noun.dim-sight	Nouns of a light, a sight, a shape or a memory that ぼんやりした before them makes dim, 흐릿한 (ぼんやりした光 흐릿한 빛), not dazed.
+//= noun.vague-thought	Nouns of a thought, a feeling or a story that ぼんやりした before them makes vague, 막연한 (ぼんやりした不安 막연한 불안), not dazed.
+//= noun.firm-bond	Nouns of a trust, a will or a gaze that しっかりした before them makes firm, 굳건한 (しっかりとした信頼 굳건한 신뢰).
+//= noun.firm-step	Nouns of a gait that しっかりした before them makes steady, 힘찬 (しっかりとした足取り 힘찬 발걸음).
+//= noun.reply	Nouns of a reply or a reaction that あっさりした before them makes brief, 간단한 (あっさりした返事 간단한 대답), not mild in taste.
+//= noun.slender-part	Nouns of a slender part of the body that ほっそりした before them makes thin, 가느다란 (ほっそりとした指 가느다란 손가락); the body and the legs stay 날씬한.
+//= noun.sturdy-body	Nouns of a build or a body that しっかりした before them makes sturdy, 다부진 (しっかりとした体格 다부진 체격).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
@@ -2020,7 +2030,92 @@ kana.kin-before-chan	いっ
 kana.mimetic-adverb-frame	っり
 kana.mimetic-adverb-frame	んり
 
+ko-root.mimetic-adjective	폭신
+ko-root.mimetic-adjective	폭신폭신
+ko-root.mimetic-adjective	푹신푹신
+ko-root.mimetic-adjective	늘씬
+ko-root.mimetic-adjective	서늘
+ko-root.mimetic-adjective	촉촉
+ko-root.mimetic-adjective	묵직
+ko-root.mimetic-adjective	조용
+ko-root.mimetic-adjective	통통
+ko-root.mimetic-adjective	훈훈
+ko-root.mimetic-adjective	탱탱
+ko-root.mimetic-adjective	끈적
+ko-root.mimetic-adjective	끈적끈적
+ko-root.mimetic-adjective	숙연
+ko-root.mimetic-adjective	멍
+ko-root.mimetic-adjective	말랑
+ko-root.mimetic-adjective	말랑말랑
+ko-root.mimetic-adjective	매끈
+ko-root.mimetic-adjective	매끈매끈
+ko-root.mimetic-adjective	미끈
+ko-root.mimetic-adjective	미끈미끈
+ko-root.mimetic-adjective	미끌미끌
+ko-root.mimetic-adjective	축축
+ko-root.mimetic-adjective	눅눅
+ko-root.mimetic-adjective	포근
+ko-root.mimetic-adjective	포근포근
+ko-root.mimetic-adjective	뻣뻣
+ko-root.mimetic-adjective	쫀득
+ko-root.mimetic-adjective	쫀득쫀득
+ko-root.mimetic-adjective	바삭
+ko-root.mimetic-adjective	바삭바삭
+ko-root.mimetic-adjective	몽롱
+ko-root.mimetic-adjective	느긋
+ko-root.mimetic-adjective	느슨
+ko-root.mimetic-adjective	뒤룩뒤룩
+ko-root.mimetic-adjective	까칠
+ko-root.mimetic-adjective	까칠까칠
+ko-root.mimetic-adjective	쭈글쭈글
+ko-root.mimetic-adjective	후줄근
+ko-root.mimetic-adjective	우중충
+ko-root.mimetic-adjective	느끼
+ko-root.mimetic-adjective	꼿꼿
+ko-root.mimetic-adjective	늠름
+ko-root.mimetic-adjective	후련
+ko-root.mimetic-adjective	찜찜
+ko-root.mimetic-adjective	뻔뻔
+ko-root.mimetic-adjective	다소곳
+ko-root.mimetic-adjective	덥수룩
+ko-root.mimetic-adjective	더부룩
+ko-root.mimetic-adjective	물렁물렁
+ko-root.mimetic-adjective	팽팽
+ko-root.mimetic-adjective	빡빡
+ko-root.mimetic-adjective	빽빽
+ko-root.mimetic-adjective	빼곡
+ko-root.mimetic-adjective	자욱
+ko-root.mimetic-adjective	몽글몽글
+ko-root.mimetic-adjective	복슬복슬
+ko-root.mimetic-adjective	몽실몽실
+ko-root.mimetic-adjective	포동포동
+ko-root.mimetic-adjective	탱글탱글
+ko-root.mimetic-adjective	반들반들
+ko-root.mimetic-adjective	동글동글
+ko-root.mimetic-adjective	곱슬곱슬
+ko-root.mimetic-adjective	울퉁불퉁
+ko-root.mimetic-adjective	딱딱
+ko-root.mimetic-adjective	헐렁헐렁
+ko-root.mimetic-adjective	푸석푸석
+ko-root.mimetic-adjective	오돌토돌
+ko-root.mimetic-adjective	따끈따끈
+ko-root.mimetic-adjective	흐물흐물
+ko-root.mimetic-adjective	걸쭉
+ko-root.mimetic-adjective	얼얼
+ko-root.mimetic-adjective	시무룩
+ko-root.mimetic-adjective	흐뭇
+ko-root.mimetic-adjective	어리둥절
+ko-root.mimetic-adjective	지긋지긋
+ko-root.mimetic-adjective	똘망똘망
+ko-root.mimetic-adjective	뜨뜻
+
 ko-root.hada-state	고요
+
+ko-adverb.manner-only	천천히
+ko-adverb.manner-only	가만히
+ko-adverb.manner-only	서서히
+ko-adverb.manner-only	열심히
+ko-adverb.manner-only	완전히
 
 ko-adjective.hada-state	당당하다
 ko-adjective.hada-state	담담하다
@@ -2949,6 +3044,57 @@ noun.casual-declaration	追放
 noun.casual-declaration	承認
 noun.casual-declaration	認可
 
+noun.act-head	こと
+noun.act-head	事
+noun.act-head	ところ
+noun.act-head	所
+noun.act-head	とこ
+noun.act-head	はず
+noun.act-head	筈
+noun.act-head	わけ
+noun.act-head	訳
+noun.act-head	つもり
+noun.act-head	ため
+noun.act-head	為
+noun.act-head	ほう
+noun.act-head	とき
+noun.act-head	時
+noun.act-head	ころ
+noun.act-head	頃
+noun.act-head	うち
+noun.act-head	後
+noun.act-head	あと
+noun.act-head	途端
+noun.act-head	とたん
+noun.act-head	瞬間
+noun.act-head	際
+noun.act-head	場合
+noun.act-head	暇
+noun.act-head	いとま
+noun.act-head	間
+noun.act-head	余裕
+noun.act-head	結果
+noun.act-head	以上
+noun.act-head	上
+noun.act-head	おかげ
+noun.act-head	せい
+noun.act-head	ばかり
+noun.act-head	直後
+noun.act-head	拍子
+noun.act-head	末
+noun.act-head	段階
+noun.act-head	時点
+noun.act-head	割
+noun.act-head	分
+noun.act-head	次第
+noun.act-head	まえ
+noun.act-head	みたい
+noun.act-head	よう
+noun.act-head	隙
+noun.act-head	すき
+noun.act-head	最中
+noun.act-head	合間
+
 noun.clause	の
 noun.clause	ん
 noun.clause	こと
@@ -2988,6 +3134,93 @@ noun.dependent-ellipsis	うち
 noun.dependent-ellipsis	くらい
 noun.dependent-ellipsis	ぐらい
 noun.dependent-ellipsis	ほど
+
+noun.dim-sight	光
+noun.dim-sight	灯
+noun.dim-sight	灯り
+noun.dim-sight	明かり
+noun.dim-sight	月明かり
+noun.dim-sight	照明
+noun.dim-sight	視界
+noun.dim-sight	輪郭
+noun.dim-sight	影
+noun.dim-sight	人影
+noun.dim-sight	記憶
+noun.dim-sight	イメージ
+noun.dim-sight	景色
+noun.dim-sight	像
+noun.dim-sight	映像
+noun.dim-sight	意識
+noun.dim-sight	シルエット
+noun.dim-sight	色
+
+noun.vague-thought	話
+noun.vague-thought	不安
+noun.vague-thought	考え
+noun.vague-thought	予感
+noun.vague-thought	答え
+noun.vague-thought	返事
+noun.vague-thought	説明
+noun.vague-thought	表現
+noun.vague-thought	内容
+noun.vague-thought	計画
+noun.vague-thought	目標
+noun.vague-thought	夢
+noun.vague-thought	希望
+noun.vague-thought	期待
+noun.vague-thought	疑問
+noun.vague-thought	違和感
+
+noun.firm-bond	信頼
+noun.firm-bond	意志
+noun.firm-bond	意思
+noun.firm-bond	決意
+noun.firm-bond	覚悟
+noun.firm-bond	絆
+noun.firm-bond	信念
+noun.firm-bond	眼差し
+noun.firm-bond	まなざし
+
+noun.firm-step	足取り
+noun.firm-step	足どり
+noun.firm-step	足並み
+noun.firm-step	歩み
+noun.firm-step	歩調
+
+noun.reply	返事
+noun.reply	答え
+noun.reply	返答
+noun.reply	反応
+noun.reply	応答
+noun.reply	対応
+
+noun.slender-part	指
+noun.slender-part	指先
+noun.slender-part	手
+noun.slender-part	手首
+noun.slender-part	首
+noun.slender-part	首筋
+noun.slender-part	うなじ
+noun.slender-part	足首
+noun.slender-part	肩
+noun.slender-part	腕
+noun.slender-part	二の腕
+noun.slender-part	腰
+noun.slender-part	腰回り
+noun.slender-part	手足
+noun.slender-part	顎
+noun.slender-part	鼻筋
+
+noun.sturdy-body	体格
+noun.sturdy-body	体つき
+noun.sturdy-body	体躯
+noun.sturdy-body	骨格
+noun.sturdy-body	肉体
+noun.sturdy-body	身体
+noun.sturdy-body	体
+noun.sturdy-body	足腰
+noun.sturdy-body	胸板
+noun.sturdy-body	肩幅
 
 noun.event	事件
 noun.event	事故
