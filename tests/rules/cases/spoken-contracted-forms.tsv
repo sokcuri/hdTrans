@@ -7,6 +7,10 @@ dict:jisjk:342434	「分かってるぞ」	「알고 있어」	fix	lookup
 dict:jisjk:342434	……顔、死んでるぞ？」	……얼굴, 죽어 있어?」	keep	lookup
 dict:jisjk:342434	「うおっ！なってるぞ！」	「우옷! 돼 있어!」	keep	lookup
 dict:jisjk:342434	ご両親が校門に来てるぞ	부모님이 교문에 와 있어	keep	lookup
+dict:jisjk:91713	ドアが開いてるぞ	문이 열려 있어	keep	lookup
+dict:jisjk:91713	店が開いてるぞ	가게가 열려 있어	keep	lookup
+dict:jisjk:91713	ドアが開いてるよ	문이 열려 있어	fix	lookup
+dict:jisjk:91713	ドアが開いてる	문이 열려 있다	fix	lookup
 dict:jisjk:342434	「落ちてるぞ」	「떨어져 있어」	keep	lookup
 normalize:adjective-su	これネ ユニクロの真逆じゃないすか	이것이네 유니클로의 정반대가 아닌가요	fix	normalize
 normalize:adjective-su	「運じゃないすか？」	「운이 아닌가?」	fix	normalize
@@ -15,6 +19,12 @@ normalize:adjective-su	超不公平じゃないすかｗ」	매우 불공평하�
 normalize:adjective-su	なんかジブリっぽいすね。	뭔가 지브리 같네요.	fix	normalize
 normalize:adjective-su	「ゆきさん、いいすか」	「유키 씨, 좋은가요」	fix	normalize
 normalize:adjective-su	「写真だけでも、いいすか？	「사진만으로도, 좋은가요?	fix	normalize
+normalize:adjective-su	このいす、座っていい？	이 의자, 앉아 있고?	keep	normalize
+normalize:adjective-su	そのいすよ	그 의자야	keep	normalize
+normalize:adjective-su	赤いいすね	붉은 의자네	keep	normalize
+normalize:adjective-su	古いいすか	낡은 의자인가	keep	normalize
+normalize:adjective-su	すっごいいすね	대단한 의자네	keep	normalize
+normalize:adjective-su	それ、いいすね	그것, 좋네요	fix	normalize
 normalize:adjective-su	「ういす、行ってきます！」	「넵, 다녀오겠습니다!」	keep	normalize
 normalize:adjective-su	このいすが壊れた。	이 의자가 망가졌다.	keep	normalize
 normalize:toku-naru	「そこまで親密になっといてまだ何もないんですか！？」	「거기까지 친밀하게 돼 둬 아직 아무것도 없습니까!?」	fix	normalize
@@ -22,6 +32,7 @@ normalize:toku-naru	「勝手に気になっとけ」	「마음대로 신경 쓰
 normalize:toku-naru	俺の言いなりになっとけよ	내가 하라는 대로 되어 둬	fix	normalize
 normalize:toku-naru	ちゃんと元気になっとけよっ	제대로 기운을 차려 둬	fix	normalize
 normalize:toku-naru	こわいから、素直になっとこ！	무서우니까, 솔직해져 두자!	fix	normalize
+normalize:toku-naru	本当になっとく。	lacks:둔다	keep	normalize
 normalize:toku-naru	それになっとくした	lacks:두	keep	normalize
 normalize:toku-naru	彼女の説明になっとくがいかない	lacks:두	keep	normalize
 normalize:negative-nee-wish	「こんな死に方はしたくねぇよなぁ。	「이런 죽는 방법은 하고 싶지 않지.	fix	normalize

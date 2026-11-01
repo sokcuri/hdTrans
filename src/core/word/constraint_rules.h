@@ -80,7 +80,7 @@ enum class ConstraintContext : uint8_t {
     BeforeAitsu,        // いつ follows but not いつつ, so the word's last あ starts あいつ (俺たちであいつを:
                         // で + あいつ; not であいつつ)
     BeforeMarude,       // るで, るっきり, るきり or るごと follows, so the word's last ま starts まるで, まるっきり,
-                        // まるきり or まるごと (俺にはまるで: には + まるで; not 罠にはまる)
+                        // まるきり or まるごと (俺にはまるで: には + まるで; not 罠にはまる, 沼にはまるでしょう)
     BeforeDesu,         // す follows and then ね, よ, か (not かさ, かし, かっ, かす), a mark or nothing, so the
                         // word's last で starts です (途中ですね, とかですね; not 途中ですっかり, それですかさず, nor
                         // a word in 事で)

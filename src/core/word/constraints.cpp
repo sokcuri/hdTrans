@@ -107,11 +107,11 @@ constexpr ConstraintRule kRules[] = {
     {"moui-not-before-ii", ConstraintWord::Source, "もうい", ConstraintContext::NotBeforeIi, ConstraintReject::Word,
      "い가 이어지지 않는 もうい는 もういい가 아니라 もう와 뒤 낱말의 첫 글자 (もういない 이제 된 있고 → 이제 없다). もういい는 그대로", {}},
     {"dea-before-aitsu", ConstraintWord::Source, "であ", ConstraintContext::BeforeAitsu, ConstraintReject::Word,
-     "いつ 앞의 であ는 出会う나 である가 아니라 で와 あいつ (俺たちであいつを 우리에서 만나며 개를 → 우리가 저 녀석을)", {}},
+     "いつ 앞의 であ는 出会う나 である가 아니라 で와 あいつ (俺たちであいつを 우리에서 만나며 개를 → 우리로 저 녀석을)", {}},
     {"nihama-before-marude", ConstraintWord::Source, "にはま", ConstraintContext::BeforeMarude, ConstraintReject::Word,
-     "るで, るっきり 앞의 にはま는 はまる가 아니라 には와 まるで, まるっきり (俺にはまるで 나에 빠지는 것으로 → 나에게는 마치)", {}},
+     "るで, るっきり 앞의 にはま는 はまる가 아니라 には와 まるで, まるっきり (その顔にはまるで 그 얼굴에 빠지는 것으로 → 그 얼굴에는 전혀). はまるでしょう는 그대로", {}},
     {"de-before-desu", ConstraintWord::EndsInDe, "", ConstraintContext::BeforeDesu, ConstraintReject::Word,
-     "す와 ね, よ, か가 이어지면 で로 끝나는 단어는 쓰지 않고 で를 です에 남김 (途中ですね 도중에 무릎 → 도중이네요, とかですね 등으로 토라져)", {}},
+     "す와 ね, よ, か가 이어지면 で로 끝나는 단어는 쓰지 않고 で를 です에 남김 (途中ですね 도중에 무릎 → 도중이군요)", {}},
     {"momi-before-mieru", ConstraintWord::Source, "もみ", ConstraintContext::BeforeMieru, ConstraintReject::Word,
      "えた, える 앞의 もみ는 전나무가 아니라 も와 みえる (ようにもみえた 것처럼 전나무 천민 → 것처럼도 보였다)", {}},
     {"teiru-before-irassharu", ConstraintWord::EndsInSource, "てい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
@@ -443,8 +443,10 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::BeforeAitsu:
         return after.starts_with("いつ") && !after.starts_with("いつつ");
     case ConstraintContext::BeforeMarude: {
+        // Not the conjecture or the polite form after はまる (はまるでしょう, はまるです).
         static constexpr std::string_view kMarude[] = {"るで", "るっきり", "るきり", "るごと"};
-        return StartsWithAny(after, kMarude);
+        static constexpr std::string_view kCopula[] = {"るでしょ", "るです"};
+        return StartsWithAny(after, kMarude) && !StartsWithAny(after, kCopula);
     }
     case ConstraintContext::BeforeDesu: {
         // Not the formal noun 事 with で (という事です), which the reading of the clause before it

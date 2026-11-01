@@ -648,10 +648,14 @@ HD_TEST(pipeline_rewrite_casual) {
         {"ジブリっぽいすね。"sv, "ジブリっぽいっすね。"sv},
         {"ういす、行ってきます"sv, "ういす、行ってきます"sv},
         {"このいすが"sv, "このいすが"sv},
+        {"このいす、座って"sv, "このいす、座って"sv},
+        {"赤いいすね"sv, "赤いいすね"sv},
+        {"それ、いいすね"sv, "それ、いいっすね"sv},
         // なっとく after に or く is なっておく where the rest allows it; なっとく alone may be 納得.
         {"親密になっといてまだ"sv, "親密になっておいてまだ"sv},
         {"素直になっとこ！"sv, "素直になっておこう！"sv},
         {"それになっとくした"sv, "それになっとくした"sv},
+        {"本当になっとく。"sv, "本当になっとく。"sv},
     };
     Check([](std::string_view text) { return RewriteCasual(text); }, cases);
 }

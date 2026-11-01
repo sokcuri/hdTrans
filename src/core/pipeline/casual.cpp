@@ -407,11 +407,17 @@ bool SsuMidSentence(std::string_view s, size_t pos, Match& m) {
 
 // The す of っす said without its っ after the い of an adjective or of ない written in kana, before か
 // (not から), ね, よ, けど, a mark or the end (真逆じゃないすか, ヤバいすね, いいすか？): group 1 what follows,
-// written after いっす. Not after a kanji, where いす is 椅子 (車いすから), nor the greeting ういす.
+// written after いっす. Not after a kanji or a particle, where いす is 椅子 (車いすから, このいす、), nor the
+// greeting ういす; after い only for いい standing alone (それ、いいすね; not 赤いいすね).
 bool AdjectiveSu(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
     const char32_t c = Before(s, pos);
-    if (c == 0 || c == U'う' || !(IsHiraganaClass(c) || IsKatakanaRune(c))) return false;
+    if (c == 0 || c == U'う' || !(IsHiraganaClass(c) || IsKatakanaRune(c)) || In(c, U"のがはをにもとでへ")) return false;
+    if (c == U'い') {
+        const std::string_view head = s.substr(0, pos - LastRune(s.substr(0, pos)).size);
+        const char32_t b = Before(head, head.size());
+        if (b != 0 && (IsHiraganaClass(b) || IsKatakanaRune(b) || IsKanjiClass(b) || b == U'ー')) return false;
+    }
     if (!Lit(s, p, "いす")) return false;
     if (s.substr(p).starts_with("けど")) return Done(s, m, p, p + std::string_view("けど").size(), 1);
     if (s.substr(p).starts_with("から")) return false;
@@ -916,7 +922,10 @@ bool Toku(std::string_view s, size_t pos, Match& m) {
     }
     p = pos;
     // なっとく is also 納得 in kana: as the form of おく only where the rest allows it.
-    if (OneOf(s, p, U"にく") && Lit(s, p, "なっ") && ((after(p, true) && m.group[3] != "く") || after(p))) return true;
+    // なっとく where the sentence ends is 納得 (本当になっとく。).
+    if (OneOf(s, p, U"にく") && Lit(s, p, "なっ") && ((after(p, true) && m.group[3] != "く") || after(p))) {
+        return m.group[3] != "く" || (!m.group[4].empty() && IsHiraganaClass(At(m.group[4], 0).cp));
+    }
     p = pos;
     if (pos == 0 && Lit(s, p, "し") && after(p)) return true;
     p = pos;

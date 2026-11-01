@@ -21,6 +21,8 @@ constraint:nihama-before-marude	俺にはまるで先が見えなかった。	�
 constraint:nihama-before-marude	その顔にはまるで表情がなかった。	그 얼굴에는 전혀 표정이 없었다.	fix	lookup
 constraint:nihama-before-marude	刻印術師でもない俺たちにはまるで分からん。	각인술사도 아닌 우리에게는 마치 모르겠어.	fix	lookup
 constraint:nihama-before-marude	罠にはまってしまった。	함정에 빠져버렸다.	keep	lookup
+constraint:nihama-before-marude	沼にはまるでしょう。	늪에 빠지겠죠.	keep	lookup
+constraint:nihama-before-marude	池にはまるでしょうね	연못에 빠지겠지요	keep	lookup
 constraint:de-before-desu	19年とかですね 今。	19년이라든지군요 지금.	fix	lookup
 constraint:de-before-desu	「お粥とかですね」	「죽이라든지군요」	fix	lookup
 constraint:de-before-desu	灯油とかですね。	등유라든지군요.	fix	lookup
