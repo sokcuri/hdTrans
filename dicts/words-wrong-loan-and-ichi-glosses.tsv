@@ -7,7 +7,7 @@ key	ko	pos	sem	gram	note	id
 ロールシャッハーテスト	로르샤흐 테스트	N110			// LEX-3400	wrong-loan-and-ichi-glosses:4
 ロールシャッハ・テスト	로르샤흐 테스트	N110			// LEX-3400	wrong-loan-and-ichi-glosses:5
 ロールシャッハけんさ	로르샤흐 검사	N110	QHP		// LEX-3400	wrong-loan-and-ichi-glosses:6
-ローレンツ力	로렌츠 힘	N110			// LEX-3400	wrong-loan-and-ichi-glosses:7
+ローレンツ力	로렌츠력	N110			// LEX-3400	wrong-loan-and-ichi-glosses:7
 ローレンツ変換	로렌츠 변환	N110			// LEX-3400	wrong-loan-and-ichi-glosses:8
 ローレンツ曲線	로렌츠 곡선	N110			// LEX-3400	wrong-loan-and-ichi-glosses:9
 ローレンツ電場	로렌츠 전기장	N110			// LEX-3400	wrong-loan-and-ichi-glosses:10
@@ -22,7 +22,7 @@ key	ko	pos	sem	gram	note	id
 一歩二歩	한두 걸음	N110			// LEX-3401	wrong-loan-and-ichi-glosses:19
 一夫一婦	일부일처	N110	ULw		// LEX-3401	wrong-loan-and-ichi-glosses:20
 一日千秋	일일여삼추	I110			// LEX-3401	wrong-loan-and-ichi-glosses:21
-一工夫	약간의 궁리	N110	UTh		// LEX-3401	wrong-loan-and-ichi-glosses:22
+一工夫	궁리	N110	UTh		// LEX-3401	wrong-loan-and-ichi-glosses:22
 一工夫	궁리&AV@	M429			// LEX-3401	wrong-loan-and-ichi-glosses:23
 一人寂しく	홀로 쓸쓸히	E300			// LEX-3401	wrong-loan-and-ichi-glosses:24
 一人さびしく	홀로 쓸쓸히	E300			// LEX-3401	wrong-loan-and-ichi-glosses:25
