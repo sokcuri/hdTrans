@@ -1,0 +1,8 @@
+#! layer=pack
+# 칼, 칼날, 도끼 같은 목적어를 받는 打つ는 벼리다, 냄새와 맛을 꾸미거나 서술하는 辛い는 맵다
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri	agent
+forge-and-spicy-senses:1	打つ	v5	sense	obj=剣|大剣|長剣|短剣|聖剣|魔剣|名剣|宝剣|細剣|片手剣|両手剣|刃|斧|包丁|ナイフ|武具|防具	벼리다	LEX-3604	audit	剣を打つ 검을 벼리다			
+forge-and-spicy-senses:2	打つ	v5	sense	obj=剣|大剣|長剣|短剣|聖剣|魔剣|名剣|宝剣|細剣|片手剣|両手剣|刃|斧|包丁|ナイフ|武具|防具 next=つける|付ける|込む|こむ|合う|あう|砕く|落とす|返す|払う|下ろす|おろす|消す|合わせる|据える|鳴らす	-	LEX-3604	audit	剣を打ち合う(그대로)		10	
+forge-and-spicy-senses:3	辛い	adj	sense	head=匂い|臭い|におい|味|風味|香り|味付け	맵다	LEX-3605	audit	辛い匂い 매운 냄새			
+forge-and-spicy-senses:4	辛い	adj	sense	subj=匂い|臭い|におい|味|風味|香り|味付け	맵다	LEX-3605	audit	味が辛い 맛이 맵다			
+forge-and-spicy-senses:5	辛い	adj	sense	next=匂いがする|においがする|臭いがする|味がする|香りがする|味付け	맵다	LEX-3605	audit	辛い匂いがする 매운 냄새가 나다			
