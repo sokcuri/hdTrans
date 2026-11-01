@@ -14,11 +14,8 @@ normalize:spelled-u-adverb	こー見えて、私は冷え性だから。	이렇�
 normalize:spelled-u-adverb	こー見えても俺は、神を信じている。	이렇게 보여도 나는, 신을 믿고 있다.	fix	normalize
 normalize:spelled-u-adverb	「そー言えば…」	「그러고 보니…」	fix	normalize
 normalize:spelled-u-adverb	そー言えばこの人いい人だった。	그러고 보니 이 사람 좋은 사람이었다.	fix	normalize
-normalize:spelled-u-adverb	「……午後の授業は、どーしてこー眠いんだろーねぇ。」	「……오후 수업은, 왜 이렇게 졸린 것이겠지.」	fix	normalize
+normalize:spelled-u-adverb	「……午後の授業は、どーしてこー眠いんだろーねぇ。」	has:왜 이렇게	fix	normalize
 normalize:spelled-u-adverb	「任せとけって。そっこー終わらせるって」	lacks:이렇게	keep	normalize
-normalize:drawn-conjecture	「なんて、思ってんだろーな」	「정말, 생각하는 거지」	fix	normalize
-normalize:drawn-conjecture	「ま、そんなもんだろーな」	「뭐, 그런 것이겠지」	fix	normalize
-normalize:drawn-conjecture	わかってるだろーな！」……でた。	알고 있지!」……나왔다.	fix	normalize
 normalize:drawn-conjecture	『さぁ？どーだろーなー』	『글쎄? 어떨까―』	keep	normalize
 normalize:drawn-conjecture	「でしょーね」	「그렇겠지」	keep	normalize
 normalize:katakana-stress	痛イ……デモ…ソンナ攻撃ジャ…沈マナイ…！引ッ張ッテモラウンダ……	아프다……하지만…그런 공격은…가라앉지 않아…! 잡아당겨 주는 거야……	keep	normalize

@@ -447,7 +447,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return StartsWithAny(after, kMarude);
     }
     case ConstraintContext::BeforeDesu: {
-        if (!after.starts_with("す")) return false;
+        // Not the formal noun 事 with で (という事です), which the reading of the clause before it
+        // decides.
+        if (!after.starts_with("す") || source.ends_with("事で")) return false;
         const std::string_view tail = after.substr(std::string_view("す").size());
         if (tail.empty()) return true;
         static constexpr std::string_view kNotKa[] = {"かさ", "かし", "かっ", "かす"};

@@ -1,4 +1,4 @@
-# 규칙: LEX-3489, GRM-3093, SND-8
+# 규칙: LEX-3489, SND-8
 rule	input	expected	kind	layer
 dict:lexical-garbled-words	イタズラ心から、敬語とため口が混ざった口調になった	장난 진심으로, 경어와 반말이 섞인 어조가 되었다	fix	lookup
 dict:lexical-garbled-words	お前も楽にため口で話せよ。	너도 편하게 반말로 이야기해.	fix	lookup
@@ -25,9 +25,6 @@ dict:lexical-garbled-particles	常識ってものはないの！？」	상식이
 dict:lexical-garbled-particles	人の心ってものは、存外に脆い。	사람의 마음이라는 것은, 의외로 무르다.	fix	lookup
 dict:lexical-garbled-particles	ってものがありまして….	라는 것이 있어서….	fix	lookup
 dict:lexical-garbled-particles	秋ってもの悲しくない？	lacks:라는 것	keep	lookup
-dict:jisjk:350962	その傷の様子で無事かと言われたら、なんと答えていいのか難しい。	그 상처의 모습으로 무사한가 하면, 무려 대답해도 좋은 건지 어렵다.	fix	lookup
-dict:jisjk:350962	静かかと聞かれた	has:조용한가	fix	lookup
-dict:jisjk:350962	本気かと疑った	진심일까 하고 의심했다	keep	lookup
 sound:filler	「えっとね……」	「음……」	fix	sound
 sound:filler	「えっとね……パン屋さん」	「음……빵집」	fix	sound
 sound:filler	「えっとですね……」	「음……」	fix	sound

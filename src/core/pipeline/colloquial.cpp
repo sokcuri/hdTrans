@@ -2364,15 +2364,6 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         std::u32string fill;
         size_t wordEnd = 0;
         if (!DrawnWord(e, rs, i, j, std::max(covered, SoundWord(rs, from, j, ctx.extraBuiltin) ? j : 0), true, fill, wordEnd)) {
-            // The conjecture of the copula and the volitional of ます drawn out before a sentence particle
-            // that no word reads (だろーね, でしょーよ, ましょーか): the run dropped, which keeps them
-            // spoken (だろね 겠지).
-            const std::u32string_view head = std::u32string_view(rs).substr(0, i);
-            if ((head.ends_with(U"だろ") || head.ends_with(U"でしょ") || head.ends_with(U"ましょ")) &&
-                In(rs[j], U"よやぜぞねがなかわさ")) {
-                rs = Spliced(rs, i, U"", j);
-                changed = true;
-            }
             continue;
         }
         rs = Spliced(rs, i, fill, j);

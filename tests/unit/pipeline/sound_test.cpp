@@ -725,10 +725,10 @@ HD_TEST(pipeline_rewrite_emphasis) {
         {"やッぱり", "やっぱり"},
         {"ちょッと待って", "ちょっと待って"},
         {"ギャッと", "ギャッと"},
-        // こう, そう, どう spelled with ー before a kanji where a word then reads further, and the
-        // conjecture of the copula drawn out before a sentence particle.
+        // こう, そう, どう spelled with ー before a kanji where a word then reads further; the conjecture
+        // of the copula drawn out before a sentence particle keeps its mark.
         {"そー言えば", "そう言えば"},
-        {"だろーな", "だろな"},
+        {"だろーな", "だろーな"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }
