@@ -525,13 +525,15 @@ namespace {
 // The respectful reading of the passive or potential (ら)れ of item it: going back through the
 // sentence, an agent に, には or から after a person, or によって or により, makes it the passive;
 // otherwise the nearest は, が or も in the clause decides, respectful when the noun before it
-// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), and so
-// does a subject の right before an intransitive verb that holds no object (先生の言われる通り).
+// names someone the speaker honours (王子様がお見舞いに来られた, 陛下は手紙を書かれた), as does
+// such a noun before ご自身 with no predicate between (先生ご自身で料理を振る舞われる), and so does
+// a subject の right before an intransitive verb that holds no object (先生の言われる通り).
 // A transitive verb also needs its object before that subject: without one its subject is what
 // the act is done to (陛下が幽閉された, 姫様は許された).
 bool RespectfulReading(const Item* it, bool transitive) {
     bool object = false;
-    for (const Item* p = it->prev; p != nullptr; p = p->prev) {
+    bool predicate = false;  // a predicate stands between: ご自身 is of another clause
+    for (const Item* p = it->prev; p != nullptr; predicate = predicate || p->detail->Yougo(), p = p->prev) {
         const std::string_view s = p->group->surface;
         if (s.starts_with("によ")) {
             return false;
@@ -540,6 +542,9 @@ bool RespectfulReading(const Item* it, bool transitive) {
             if (a != nullptr && Person(a->Attr(std::max(a->selected, 0)))) return false;
         } else if (s == "を") {
             object = true;
+        } else if ((s.starts_with("ご自身") || s.starts_with("御自身") || s.starts_with("ご自分")) && !predicate &&
+                   HonouredPerson(p->prev)) {
+            return true;
         } else if (s == "の" && p == it->prev && !transitive && !Has(it->group->surface, "を")) {
             return HonouredPerson(p->prev);
         } else if (transitive && !object && (s == "は" || s == "が" || s == "も")) {
