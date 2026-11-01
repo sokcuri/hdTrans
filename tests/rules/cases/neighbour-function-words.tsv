@@ -1,0 +1,158 @@
+# 규칙: GRM-24, GRM-3073, GRM-3074, GRM-3075, GRM-3078, GRM-3079, GRM-3080, GRM-3081, GRM-3082, LEX-3475, LEX-3476, LEX-3477, LEX-3478, LEX-3479, LEX-3480
+rule	input	expected	kind	layer
+dict:jisjk:201813	麻衣は剣があると分かっても別に動じずそこまで持ってきた運動エネルギーを腕に回し、男の胸目掛けて攻撃する。	has:별로 동요하지 않고	fix	local
+dict:jisjk:201813	あいつとは別に行動する。	rule:dict:jisjk:201813=따로	keep	local
+dict:jisjk:201813	別に用意した。	rule:dict:jisjk:201813=따로	keep	local
+dict:jisjk:114644	さて、最後の子どうぞ」	!rule:dict:jisjk:114644	fix	local
+dict:jisjk:114644	『はい。では、カタリナ・クラエスさんどうぞ』	!rule:dict:jisjk:114644	fix	local
+dict:jisjk:114644	提督どうぞ召し上がってください。	!rule:dict:jisjk:114644	fix	local
+dict:jisjk:114644	お茶どうぞ	rule:dict:jisjk:114644=받아 주세요	keep	local
+dict:jisjk:114644	つまらないものですが、これどうぞ	rule:dict:jisjk:114644=받아 주세요	keep	local
+dict:jisjk:114644	「名刺をどうぞ」	rule:dict:jisjk:114644=받아 주세요	keep	local
+dict:gram:youni:purpose-subject	しかしニーチェが言うように、世界とは変遷流転する「生成」である	has:니체가 말하듯이	fix	local-ending
+dict:gram:youni:purpose-subject	「アタシはまだ認めてないから！　アンタが言うように、触れ合って確かめるまではね」	has:네가 말하듯이	fix	local-ending
+dict:gram:youni:purpose-subject	機械とはひとりでに動く遺跡のことで、財前が言うように、生きている、とも評される。	has:자이젠이 말하듯이	fix	local-ending
+dict:gram:youni:purpose-subject	この妖怪が言うように、魔法には呪文が必要だ。	has:요괴가 말하듯이	fix	local-ending
+dict:gram:youni:purpose-subject	レノーレが言うように、寮に直行した方がよさそうだ。	has:레노레가 말하듯이	fix	local-ending
+dict:gram:youni:purpose-subject	塔子が言うように、やはりレオは様子がおかしいようだ。	has:토코가 말하듯이	fix	local-ending
+dict:gram:youni:purpose-subject	あなたが仰るように、私が悪かった。	has:말씀하시듯이	fix	local-ending
+dict:gram:youni:purpose-subject	音が遠くまで届くように、高い音を使って陽気な曲を奏でる。	has:닿도록,	keep	local-ending
+dict:gram:youni:purpose-subject	効率よく指示が行き届くように、各部隊の隊長がアレンさんの号令を復唱する。	has:두루 미치도록,	keep	local-ending
+dict:gram:youni:purpose-subject	単にボールが当たった箇所がよく見えるように、向こう側をむいて、	has:보이도록,	keep	local-ending
+dict:jisjk:345706	一人頭大体３・４体の骸骨軍団が襲い掛かり、魔法による反撃も意に介せず	has:마법에 의한 반격	fix	local
+dict:jisjk:345706	「ミリアさん、お邪魔しています。勝手ながら、魔法による治療を施させて貰いましたが、どこか身体に痛む場所はございますか？」	has:마법에 의한 치료	fix	local
+dict:jisjk:345706	俺がブラックマジシャンで魔法による支援と攻撃という感じでいつもやっている。	has:마법에 의한 지원	fix	local
+dict:jisjk:345706	魔物や魔法による効果は、魔法師たちの解呪魔法でなければ基本的に解けない。	has:마법에 의한 효과	fix	local
+dict:jisjk:345706	その様は魔法による被造物が崩れ去る様子に少し似ている。	has:마법에 의한 피조물	fix	local
+dict:jisjk:345706	ユウナの魔法による被害確認へと。	has:마법에 의한 피해	fix	local
+dict:jisjk:345706	法による統治が為されているといっても身分による上下は確と存在している。	rule:dict:jisjk:345706=에 &E3@	keep	local
+dict:jisjk:345706	やったことは法によって裁かれるべきだ。	rule:dict:jisjk:345706=에 &E3@	keep	local
+dict:jisjk:345706	「………国なのだから法による秩序があるのはわかっている」	rule:dict:jisjk:345706=에 &E3@	keep	local
+dict:jisjk:6301	まるで人形にでもなった気分。	has:인형이라도 된 기분	fix	local
+dict:jisjk:6301	「……漫画の主人公にでもなるつもり？」	has:주인공이라도 될 생각	fix	local
+dict:jisjk:6301	その表情は、すべての職員が認知症の患者にでもなったかのようにポカンとしていた。	has:환자라도 된 것처럼	fix	local
+dict:jisjk:6301	まるで幽霊にでもなってしまったかのように。	has:유령이라도 되어버린	keep	local
+dict:jisjk:6301	介護士にでもなってはどうだろうか？	has:요양보호사라도 되면	keep	local
+dict:jisjk:6301	「哲学者にでもなったらどーだ？」	has:철학자라도 되면	fix	local
+dict:jisjk:6301	「いっそのこと、今の会社なんか止めてＡＶ男優にでもなろうかぁ」	!rule:dict:jisjk:6301	keep	local
+dict:jisjk:6301	先生にでも聞いてみろ	rule:dict:jisjk:6301=에게라도	keep	local
+dict:jisjk:6301	「領主の職場の裏。分からなかったら道端の商人にでも聞けば教えてくれるわ」	rule:dict:jisjk:6301=에게라도	keep	local
+dict:jisjk:6301	「……兄貴にでも頼めばいいんです。何故それをしない？	rule:dict:jisjk:6301=에게라도	keep	local
+dict:jisjk:6301	前世のどこぞの政治家にでも聞かせてやりたい。	rule:dict:jisjk:6301=에게라도	keep	local
+dict:jisjk:202298	と、背後からわたしを呼ぶ暗い声がした。	has:나를 부르는	fix	local
+dict:jisjk:202298	首を傾げるわたしを見て、母が悲しそうに目を伏せた。	has:나를 보고	fix	local
+dict:jisjk:202298	いつの間にか帰ってきたトゥーリが、台所の床にへたりこんでいるわたしを見つけて、声を張り上げた。	has:나를 찾아내고	fix	local
+dict:jisjk:202298	「最後まで一緒にいたいのっ、だから、絶対にわたしを離さないでっ」	has:나를 떼어	fix	local
+dict:jisjk:202298	「ねー、わたしをまもってー」	!rule:dict:jisjk:202298	fix	local
+dict:jisjk:202298	パラリとページを開けば、わたしを酔わせる美酒となる。	has:나를 취하게	fix	local
+dict:jisjk:202298	「あなたがわたしを軽んじても、婚約者としての務めを果たしてまいりましたわ。	has:저를 경시해도	fix	local
+dict:jisjk:202298	わたしを心配してくれているのだろう。	!rule:dict:jisjk:202298	keep	local
+dict:jisjk:202298	王子はわたしを優しくベッドに下ろし、王宮医に向き直った。	!rule:dict:jisjk:202298	keep	local
+dict:jisjk:202298	どうやら樹理様はわたしを敵視してるらしい。	!rule:dict:jisjk:202298	keep	local
+dict:jisjk:202298	ちなみにわたしの作ったものはただのマーブル模様になってしまった。	rule:dict:jisjk:202298=내	keep	local
+dict:jisjk:266208	三国共有島は、島１周を歩いて半日で回れるくらいの大きさなので、	has:돌 수 있을 정도의 크기	fix	local-ending
+dict:jisjk:266208	それに、外の通路はギリギリ人がすれ違えるくらいの幅だ。	has:정도의 폭	fix	local-ending
+dict:jisjk:266208	≪人が一人通れるくらいの幅に仕切られています。	has:정도의 폭	fix	local-ending
+dict:jisjk:266208	数回瞬きするくらいの時間に数年分の記憶が押し込まれて、	has:깜빡일 정도의 시간	fix	local-ending
+dict:jisjk:266208	良太や美香は？一緒に遊ぶくらいの仲だろ	has:놀 정도의 사이	fix	local-ending
+dict:jisjk:266208	俺の記憶じゃ、ギアが歩けるくらいのデカい穴だったような気がする。	has:걸을 수 있을 정도의 큰	fix	local-ending
+dict:jisjk:266208	…………。他人の心配をするくらいのよゆうがおまえにあるのか？	has:할 정도의 여유	fix	local-ending
+dict:jisjk:266208	いくら何でも過剰すぎるくらいの愛敬を振り巻き、	has:지날 정도의	fix	local-ending
+dict:jisjk:266208	桜庭のことだから、驚くくらいの努力するのだろう。	has:놀랄 정도의 노력	fix	local-ending
+dict:jisjk:266208	死ぬくらい痛い	has:죽을 정도로 아프다	keep	local-ending
+dict:jisjk:266208	驚くくらい速く走った	has:놀랄 정도로 빠르게	keep	local-ending
+dict:jisjk:266208	ここの食事もびっくりするくらい美味しかった。	has:놀랄 정도로 맛있었다	keep	local-ending
+dict:jisjk:266208	「そうだよ？壊れるくらい抱いてほしいんだ。」	has:망가질 정도로 안아	keep	local-ending
+dict:jisjk:151926	実家に住んでいたが、月々に残る金は僅かなものだった。	has:것이었다	fix	local
+dict:jisjk:151926	蹄鉄の痕跡を近くで眺め見ても、得られる情報は僅かなものだった。	has:것이었다	fix	local
+dict:jisjk:151926	得られる快感も僅かなものと言えばそうだ。	has:것이라고	fix	local
+dict:jisjk:151926	他の者やモンスターとの遭遇を避けようと、僅かな音にも過敏に反応していた。	has:소리에도	fix	local
+dict:jisjk:151926	仲間達が作った僅かな隙を見て、砦を出たのが昨日のこと。	has:틈을	fix	local
+dict:jisjk:151926	後には、僅かな光のエフェクトだけが浮かんでいる。	has:빛의	fix	local
+dict:jisjk:151926	あれからまだ僅かな時間しか経っていない。	has:시간밖에	keep	local
+dict:jisjk:151926	相手は僅かな逡巡の後、再び逃走を謀る。	has:준순	fix	local
+dict:jisjk:4138	いつも観察するのは数分だけ、それも見ているだけで行動を起こそうとは微塵も考えていない。	has:몇분만,	fix	local
+dict:jisjk:4138	王城に着き、数分だけ待たされた後、謁見の間へと通された。	!rule:dict:jisjk:4138	fix	local
+dict:jisjk:4138	クシルさんの人望というのはこの数分だけでもよくわかった。	!rule:dict:jisjk:4138	keep	local
+dict:jisjk:4138	そろそろみんなの元へ戻ってもいい頃だと思うけど、あと数分だけでもいいから、このままで居たい。	!rule:dict:jisjk:4138	keep	local
+dict:jisjk:4138	「その枚数分だけ勝利数になります」	rule:dict:jisjk:4138=만큼	keep	local
+dict:jisjk:4138	ともかく、何掛か身体強化をすれば、その回数分だけ転移を連続して行えると言う訳だ。	rule:dict:jisjk:4138=만큼	keep	local
+dict:jisjk:4138	そう言われた瞬間チェインライトニングを人数分だけ放った。	rule:dict:jisjk:4138=만큼	keep	local
+dict:jisjk:345201	霊「もしかしなくてもそうなんじゃないですかね」	!rule:dict:jisjk:345201	fix	local
+dict:jisjk:345201	「もしかしなくてもそうなんじゃない？」	!rule:dict:jisjk:345201	fix	local
+dict:jisjk:345201	本人曰く、結婚するメリットがわからないそうだ。	rule:dict:jisjk:345201=%D1@	keep	local
+dict:jisjk:345201	地方の交信者では、まだ名前もないそうだ。	rule:dict:jisjk:345201=%D1@	keep	local
+dict:jisjk:345201	タクシーが一台着いたそうだ。	rule:dict:jisjk:345201=%D1@	keep	local
+dict:jisjk:342314	正直怖くてことの詳細を聞いていないが、こうなっては聞きに出向くしかあるまい。	has:나갈 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	どうあれ、決闘イベントをこなすしかあるまい。	has:해낼 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	他にも気が付いていない能力の使い方がありそうだが、自分でコツコツ研究していくしかあるまい。	has:나갈 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	これは試すしかあるまいよ！	has:시험할 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	場合によっては職員が送るしかあるまい。	has:보낼 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	これは黙るしかあるまい。	has:입을 다물 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	もうこの際それは置いておくしかあるまい。	has:놓아둘 수밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	そんな事ができるのはそれなりの病院ぐらいしかあるまい。	has:병원 정도밖에 없을 것이다	fix	local-ending
+dict:jisjk:342314	「……それしかあるまい」	has:그것밖에 없을	fix	local-ending
+dict:jisjk:342314	「一揆しかあるまい！	has:잇키밖에 없을	fix	local-ending
+dict:jisjk:342314	まさかとは思うが、赤髪男ではなく妹に嫉妬していたわけではあるまい。	has:질투하고 있던 것일 리 없다	keep	local-ending
+dict:jisjk:342314	騎士が使えないってことはあるまい。	has:있을 리 없다	keep	local-ending
+dict:jisjk:342314	我らが降ったとしても世の嘲りを受けることはあるまい。	has:있을 리 없다	keep	local-ending
+dict:jisjk:355436	巨漢という範疇にすら余る、凄まじいという他ない身の丈。	has:할 수밖에 없는 키	fix	local
+dict:jisjk:355436	どうにもならないならどうにもならないで今の状況に適応する他ない。	has:적응할 수밖에 없다	fix	local
+dict:jisjk:355436	規格外という他ない。	rule:dict:jisjk:355436=$FA@	fix	local
+dict:jisjk:355436	「殺しても死なぬ吸血鬼が相手なんだ。喧嘩という他ないだろう」	has:싸움이라고 할 수밖에 없을	keep	local
+dict:jisjk:355436	気儘と言う他ない暮らしである。	has:말할 수밖에 없는 생활	fix	local
+dict:jisjk:355436	表現できるものは無数にあるが、これもまた選択肢が多く人それぞれという他ないだろう。	has:할 수밖에 없을 것이다	keep	local
+dict:jisjk:355436	大事な漁船を持っていかれた島民たちだったが、やはり遠めからその様子を眺める他はなかった。	has:바라볼 수밖에 없었다	keep	local
+dict:jisjk:355436	リサのその一言に、リクは黙る他なかった。	has:입을 다물 수밖에 없었다	keep	local
+dict:jisjk:355436	こうなってしまっては、もう諦める他ない。	has:포기할 수밖에 없다	fix	local
+cx:kato-belief:20	この人となら、生きていけるのではないかと思った。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	とても疲れておぼれるのではないかと思ったが、必死で岸に向け泳いだら着いた。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	けれど光太郎はちらと、二度と戻れないのではないかと思っただけだった。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	耕太としては恵美子が自分で行くと言い出すのではないかと思っていたのだ。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	故にこそ、このメイド養成学校もそういう方向へと傾くのではないかと思っていたが……。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	ただ、山小屋にもヤギの世話にも、この集落にさえ、ヒナは拘る必要がなくなったのではないかと思ったのだ。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	私がこの学院へ転入して来た目的を、既に達成しているのではないかと思った。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	「私が空殿のことを知りたいのは、アヤカが気にしているのではないかと思ったからよ」	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	なのでリョウはマーティアがそのことを言いだすのではないかと思ったのだ。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	俺たちは彼に視線を向けると、自分たちは夢でも見ているのではないかと思ったが、そんなことはない。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	しかし今の見た感じ破壊力はピカイチと言ってもいいのではないかと思った。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:20	それ以上に、エルシールさんに事の顛末を報告した方が好いのではないかと思った。	!rule:cx:kato-belief:20	fix	rewrites
+cx:kato-belief:10	昨晩は本当に死ぬかと思った。	has:죽을 줄 알았다	keep	rewrites
+cx:kato-belief:10	改めて今回も本当に死ぬかと思った。	has:죽을 줄 알았다	keep	rewrites
+dict:jisjk:261846	それに対しレオンはわかった、ただそれだけ。	has:그에 대해 레옹은	fix	local
+dict:jisjk:261846	それに対しレオンは首を横に振る。	has:그에 대해 레옹은	fix	local
+dict:jisjk:261846	当然、それに対する返答は沈黙だ。	rule:dict:jisjk:261846=그에 대&AV@	keep	local
+dict:jisjk:261846	それに対する女神の返答がこれだ。	rule:dict:jisjk:261846=그에 대&AV@	keep	local
+dict:jisjk:261846	しかしそれに対するマリーの反応は重い。	rule:dict:jisjk:261846=그에 대&AV@	keep	local
+dict:jisjk:6341	しばらくしてミカエラは貴族との婚姻を早々と決めて、その男のもとへ嫁いでいった。	rule:dict:jisjk:6341=아래	keep	local
+dict:jisjk:6341	「いいんだ、早く家族のもとへ帰りなさい」	has:가족의 곁으로	fix	local
+dict:jisjk:6341	黒装束を纏った人々が私のもとへ来て、同じ意味を含んだ言葉を吐く。	has:내 곁에 와	fix	local
+dict:jisjk:6341	その男子生徒は、僕のもとへとやってきて、確かに僕のことを上司と呼んだ。	has:내 곁으로 와	fix	local
+dict:jisjk:6341	患者のもとへと向かうピアの手には、一冊のノートがあった。	has:환자의 곁으로	fix	local
+dict:jisjk:6341	遅れて到着した僕は、謝りながら優香のもとへ駆け寄る。	has:유카의 곁에	fix	local
+dict:jisjk:6341	俺は”教員もどき”に脇目もくれず、先生のもとへと歩いていく。	has:선생님의 곁으로	fix	local
+dict:jisjk:6341	ユウト・・師匠のもとでお世話になり始めてから１ヶ月が経った。	rule:dict:jisjk:6341=아래	keep	local
+dict:jisjk:6341	そう心に決めて毎日祖父のもとで学んだ。	rule:dict:jisjk:6341=아래	keep	local
+dict:jisjk:267461	マリアは嬉しそうに嘶いて、殿下のもとに走る。	has:전하의 곁으로 달린다	fix	local
+dict:jisjk:267461	何人かが一政のもとに集まった。	has:곁으로 모였다	fix	local
+dict:jisjk:267461	曾祖母のもとに帰ってきたのは、遺骨代わりの小石が入った壺でした」	has:증조모의 곁으로 돌아온	fix	local
+dict:jisjk:267461	正義の名のもとに悪を滅ぼす。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:267461	「俺は真の男女平等主義者だ。男女平等の名のもとに、割り勘を提案する！」	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:373504	その財力と都の美しさ、人が住んでいると思えないほどの清潔さ、近くで見た夢の城はこの世の物とは思えない。	has:정도의 청결함,	fix	local-ending
+dict:jisjk:373504	「ハハ少しくらい平気さ」	has:괜찮아	keep	local-ending
+dict:jisjk:373504	「大丈夫さ、それにあんたが自分の娘を信じないでどうするのさ」	has:괜찮아,	keep	local-ending
+dict:jisjk:373504	「そう深刻にならずとも、僕に任せておけば大丈夫さ！」	has:괜찮아!	keep	local-ending
+dict:jisjk:6341	艶かしい美女がジェイドのもとへやって来る。	has:제이드의 곁으로 온다	fix	local
+dict:jisjk:6341	そしてカレンが真也たちのもとへ戻ってくる。	has:신야들의 곁으로 돌아온다	fix	local
+dict:jisjk:267461	すかさず、彼が教授のもとに駆け寄った。	has:교수의 곁으로 달려갔다	fix	local
+dict:jisjk:267461	観念した彼は、とうとうカリーナのもとに向かうのだった。	has:카리나의 곁으로 향했다	fix	local
+dict:jisjk:267461	みなみが去って、彼の意識は川崎とあさひ、大塚のもとに帰ってくる。	has:오오츠카의 곁으로 돌아온다	fix	local
+dict:jisjk:267461	そのまま天空樹のもとに残ったレオニスは、ユグドラエルや白銀の君と話をしていた。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:267461	ニアが王子のもとに嫁いでから半年。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:267461	快楽堕ちする星のもとに生まれたＴＨＥ・姫騎士。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:342314	「知識と力を持たねばできぬ芸当じゃ。どうじゃ？見ても、人間の少女にしか見えまい」	has:보일	keep	local-ending
+dict:jisjk:342314	判断が鈍ったとしか言えまい。	has:말할 수 있을	keep	local-ending
+dict:jisjk:342314	これで、髪が短くて胸が見えなければ、男にしか見えまい。	has:보일	keep	local-ending
+dict:jisjk:6301	困ったら、お母さんにでも。	rule:dict:jisjk:6301=에게라도	keep	local
+dict:gram:youni:purpose-subject	領民が喜ぶように、インフラの整備を進言しようかとか。	has:기뻐하도록,	keep	local-ending
+dict:gram:youni:purpose-subject	木が喜ぶように、全身に花を咲かせた。	has:기뻐하도록,	keep	local-ending
