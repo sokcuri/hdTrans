@@ -22525,8 +22525,8 @@ ttt	ttt	K110			GN				jisjk:201744
 しゅうかい	국경	N110	VPl		GN				jisjk:189127		-1
 しゅうかいじょう	집회장	N110	VPl		GN				jisjk:189134		-1
 しゅうかいどう	추해당	N110	VPt		GN				jisjk:189136		
-しゅうかく	후각	N110	QHPVBp		GN				jisjk:189137		-1
 しゅうかく	수확	N110		Hd	GN				jisjk:189138		-1
+しゅうかく	후각	N110	QHPVBp		GN				jisjk:189137		-1
 しゅうかくだか	수확고	N110			GN				jisjk:189140		-1
 しゅうかぶつ	브롬화물	N110			GN				jisjk:189143		-1
 しゅうかん	주간	N110	UMe		GN				jisjk:189144		-1
@@ -40794,7 +40794,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぼやき	불평	N110			GN				jisjk:340782		
 ぼやけ	희미해&AL@	M417			GN				jisjk:91470		
 ぼやぼや	멍청히	E301			GN				jisjk:117668		
-ぼろ	수지가 $KS@	H7N0	VMo		GN				jisjk:143546		
+ぼろ	$D1@	H7N0	VMo		GN				jisjk:143546		
 ぼろぼろ	너덜너덜	E300			GN				jisjk:1225		
 ぼろぼろ	투두둑	E300			GN				jisjk:342107		
 ぼろぼろに	너덜너덜하게	E300			GN				jisjk:265233		
@@ -189688,7 +189688,7 @@ ttt	ttt	K110			GN				jisjk:201744
 居館	저택	N110	VBl		GN				jisjk:174025		
 居馴染	오래 있어 친숙해&AL@	M425			GN				jisjk:140949		
 屈	구부러&AL@	M415			GN				jisjk:92094		
-屈	굽&AW@	M439			GN				jisjk:92095		
+屈	굴&AV@	M439			GN				jisjk:92095		
 屈め	구부&AA@	M437			GN				jisjk:92096		
 屈伏	굴복	N110	VTw	Hd	GN				jisjk:176158		
 屈伸	굽힘과 폄	N110			GN				jisjk:97224		
@@ -195746,7 +195746,7 @@ ttt	ttt	K110			GN				jisjk:201744
 差し送	보&A6@	M438			GN				jisjk:95167		
 差し違え	바꾸어 &H5@	M447			GN				jisjk:121192		
 差し遣わ	보&A6@	M443			GN				jisjk:121202		
-差し金	곱자	I110			GN				jisjk:85533		
+差し金	사주	I110			GN				jisjk:85533		
 差し障	지장이 &C6@	M428			GN				jisjk:95171		
 差し障	지장이 생&A2@	M428			GN				jisjk:121129		
 差し障り	지장	N110			GN				jisjk:12241		
@@ -226572,8 +226572,8 @@ ttt	ttt	K110			GN				jisjk:201744
 明け暗れ	날이 샐 무렵	N110	UMe		GN				jisjk:227087		
 明け暮	세월을 보&A6@	M423	UMe		GN				jisjk:139789		
 明け暮ら	세월을 보&A6@	M423	UMe		GN				jisjk:139793		
-明け暮れ	세월이 &EA@	M417			GN				jisjk:92746		
-明け暮れ	항상	E300	UMe		GN				jisjk:122728		
+明け暮れ	몰두&AV@	M417			GN				jisjk:92746		
+明け暮れ	항상	N110	UMe		GN				jisjk:122728		
 明け残	별빛이 남아 &HN@	M428	VSsUMe		GN				jisjk:139812		
 明け渡	명도&AV@	M433			GN				jisjk:92745		
 明け渡	내&CJ@	M443			GN				jisjk:139771		

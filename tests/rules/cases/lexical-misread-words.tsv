@@ -1,0 +1,30 @@
+# 규칙: LEX-3486
+rule	input	expected	kind	layer
+dict:lexical-misread-words	ほんなら国王様が、	그렇다면 국왕님이,	fix	lookup
+dict:lexical-misread-words	ほんならな、お前、店の名前が	has:그렇다면, 너	fix	lookup
+dict:lexical-misread-words	じっちゃんはいつも一人！	할아버지는 언제나 한 사람!	fix	lookup
+dict:lexical-misread-words	「そうだよ、じっちゃん」	「그래, 할아버지」	fix	lookup
+dict:lexical-misread-words	３８．あいことば（ｓｉｄｅ	38. 암호(side	fix	lookup
+dict:lexical-misread-words	兎にも角にも息災で何より。	어쨌든 무탈해서 다행이다.	fix	lookup
+dict:lexical-misread-words	ひたすらに混乱して……	오로지 혼란해……	fix	lookup
+dict:lexical-misread-words	この笑みは、ただひたすらにおぞましい。	이 미소는, 다만 오로지 무섭다.	fix	lookup
+dict:lexical-misread-words	見事にハモった。	보기좋게 화음을 맞추었다.	fix	lookup
+dict:lexical-misread-words	「ハモるな」	「화음을 맞추지 마」	fix	lookup
+dict:lexical-misread-words	ハモの天ぷら	갯장어의 튀김	keep	lookup
+dict:lexical-misread-words	調子乗ってない？」	우쭐대지 않아?」	fix	lookup
+dict:lexical-misread-words	ミコトはサキを睨め付ける。	미코토는 사키를 노려본다.	fix	lookup
+dict:lexical-misread-words	私の旦那様寝取る気なの？	내 주인님 가로챌 생각이야?	fix	lookup
+dict:lexical-misread-words	「フラグ建てて寝取るか…」	「플래그 세워 가로챌까…」	fix	lookup
+dict:lexical-misread-words	その中に銀色で縁取られたダチョウ？	그 중에 은색으로 테두리를 둘러진 타조?	fix	lookup
+dict:lexical-misread-words	赤い縁取りはまるで炎。	붉은 테두리는 마치 불길.	fix	lookup
+dict:lexical-misread-words	「ちがくないだろ？	「다르지 않지?	fix	lookup
+dict:lexical-misread-words	ドアが荒々しく開かれる	문이 몹시 거칠게 열린다	fix	lookup
+dict:lexical-misread-words	肩で荒々と呼吸しながら	어깨로 거칠게 호흡하면서	fix	lookup
+dict:jisjk:143546	ほんとうにぼろい部屋じゃ。	정말로 낡은 방이야.	fix	lookup
+sense:ぼろい	冒険者、ぼろい商売だぜ。	모험가, 수지맞은 장사야.	keep	senses
+dict:jisjk:85533	「……お前の差し金か」	「……네 사주인가」	fix	lookup
+dict:jisjk:189138	しゅうかく祭に 持っていけるぞ。	수확제에 가져갈 수 있어.	fix	lookup
+dict:jisjk:92746	権力闘争に明け暮れる	권력 투쟁에 몰두한다	fix	lookup
+dict:jisjk:92746	こうして信長は いやおうなく戦に明け暮れることになってしまった。	이렇게 해 노부나가는 억지로 싸움에 몰두하게 되어버렸다.	fix	lookup
+dict:jisjk:92095	だが、あいつは屈せず……	하지만, 저 녀석은 굴하지 않고……	fix	lookup
+dict:jisjk:92095	暴力に屈した。	폭력에 굴했다.	keep	lookup

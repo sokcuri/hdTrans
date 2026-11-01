@@ -1546,3 +1546,5 @@
 シメる	마무리하다	ここで,うどん,ラーメン,雑炊,おじや,麺,そば,茶漬け,お茶漬け,デザート	before	v1
 // LEX-2941: kana よつば is mostly a name, 요츠바; in a sentence of a wish, luck or a clover it is the four-leaf clover, 네잎클로버.
 よつば	네잎클로버	願,願を掛け,願掛け,願い,願う,幸運,幸せ,クローバー,押し花	sentence	n
+// LEX-3486: ぼろい is 낡다; before 商売 or 儲け it is the profit, 수지맞다.
+ぼろい	수지맞다	商売,儲け,稼ぎ,仕事,話	after

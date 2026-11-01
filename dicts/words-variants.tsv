@@ -10610,8 +10610,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 疎放	엉성%A1@	G8L0			GN							jisjk:3656
 疎放	조방	N110			GN							jisjk:3657
 粗々	대강	E311			GN							jisjk:1961
-荒々	대강	E311			GN							jisjk:1961
-荒荒	대강	E311			GN							jisjk:1961
+荒々	대강	N110			GN							jisjk:1961
+荒荒	대강	N110			GN							jisjk:1961
 疎密	소밀	N110			GN							jisjk:200994
 粗煮	서덜국	N110	VFd		GN							jisjk:124929
 アラ煮	서덜국	N110	VFd		GN							jisjk:124929
