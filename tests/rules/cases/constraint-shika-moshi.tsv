@@ -1,6 +1,6 @@
 # 규칙: MNG-18, LEX-3487
 rule	input	expected	kind	layer
-constraint:moshi-before-yasui	攻撃もしやすくなる。	has:하기 쉬워진다	fix	lookup
+constraint:moshi-before-yasui	攻撃もしやすくなる。	공격도 하기 쉬워진다.	fix	lookup
 constraint:moshi-before-yasui	カスタマイズもしやすい。	커스터마이즈도 하기 쉽다.	fix	lookup
 constraint:moshi-before-yasui	連係もしやすい。	연계도 하기 쉽다.	fix	lookup
 constraint:moshi-before-yasui	若いカラダは妊娠もしやすい。	젊은 몸은 임신도 하기 쉽다.	fix	lookup
@@ -19,3 +19,4 @@ constraint:shi-before-shika	なんだ、ドラマの話しか？	뭐야, 드라�
 constraint:shi-before-shika	テツに話しかけた。	테츠에게 말을 걸었다.	keep	lookup
 constraint:shi-before-shika	特になにかがおかしかったわけじゃない。	특히 뭔가가 이상했던 것이 아니다.	keep	lookup
 constraint:shi-before-shika	女の子の友達しかいない。	여자아이의 친구밖에 없다.	keep	lookup
+constraint:moshi-before-yasui	攻撃しやすくなる。	공격하기 쉬워진다.	keep	lookup
