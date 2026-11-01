@@ -611,8 +611,8 @@ bool EndsAttributive(std::string_view w) {
 // verb's stem up to its marker family, which the する takes (寝落ちした 잠들어 버렸다); before a する
 // written 하고 or 해 with more after it (している 하고 있다, してしまう 해버리다), the verb's stem or its
 // 아/어 form, the する keeping the rest (平和ボケしている 평화에 취하고 있다). A noun of one word must
-// be two syllables or more and follow no word that modifies it (親しい感じする) or that it is written on to
-// (昼寝 낮 잠). None otherwise.
+// be two syllables or more, not be written in katakana, and follow no word that modifies it (親しい感じする)
+// or that it is written on to (昼寝 낮 잠). None otherwise.
 std::optional<std::string> VerbNounBeforeSuru(std::vector<ResolvedItem>& items, int i, const Families& generated) {
     const ResolvedItem& noun = items[i];
     if (First(Code(noun)) != '1' || At(Code(noun), 1) == '3' || !noun.appended.empty() ||
@@ -642,7 +642,8 @@ std::optional<std::string> VerbNounBeforeSuru(std::vector<ResolvedItem>& items, 
     const std::size_t start = space == std::string_view::npos ? 0 : space + 1;
     if (space == 0 || (space != std::string_view::npos && EndsAttributive(t.substr(0, space)))) return {};
     if (space == std::string_view::npos) {
-        if (text::RuneCount(t) < 2) return {};
+        // A word in katakana is a loanword whose Korean is written as it sounds (ボギー 보기).
+        if (text::RuneCount(t) < 2 || tokenizer::Class(FirstRune(noun.surface)) == tokenizer::kClassKatakana) return {};
         if (i > 0) {
             const ResolvedItem& before = items[i - 1];
             const char kind = First(Code(before));

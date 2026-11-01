@@ -57,7 +57,7 @@ compose:verb-noun-before-suru	トラックで荷台いっぱいに運んでき�
 compose:verb-noun-before-suru	日本は平和ボケしているとよく言われているけれど	has:평화에 취하고 있으면	fix	compose
 compose:verb-noun-before-suru	白崎の言葉や表情の持つ意味も丸呑みしてしまった。	has:통째로 삼켜버렸다	fix	compose
 compose:verb-noun-before-suru	「つい夜更かしして観ちゃった」	has:밤새 봐버렸어	fix	compose
-compose:verb-noun-before-suru	「べ、べつに、ケンカしてたわけじゃないし……」	has:싸우고 있던	fix	compose
+compose:verb-noun-before-suru	「べ、べつに、ケンカしてたわけじゃないし……」	has:싸움하고 있던	keep	compose
 compose:verb-noun-before-suru	前倒しする必要性はないでしょう？	has:앞당기는 필요성	fix	compose
 compose:verb-noun-before-suru	盗み聞きしていたら“落ちこぼれ”って言われて	has:몰래 엿듣고	fix	compose
 compose:verb-noun-before-suru	考えが至らなかった自分に歯噛みする。	has:이를 간다	fix	compose
@@ -92,3 +92,5 @@ compose:verb-noun-before-suru	お昼寝する事に決めた。	lacks:점심자	
 compose:verb-noun-before-suru	寝落ちだ。	잠들어 버림이다.	keep	compose
 compose:verb-noun-before-suru	喧嘩し続けた。	계속 싸움했다.	keep	compose
 compose:verb-noun-before-suru	群衆が怒号する。	군중이 고함한다.	keep	compose
+compose:verb-noun-before-suru	ボギーした	보기했다	keep	compose
+compose:verb-noun-before-suru	風邪した	감기했다	keep	compose

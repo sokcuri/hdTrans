@@ -37,7 +37,8 @@ def with_final(c, final):
 # Korean nouns spelled as a verb made a noun that are words of their own (고함 a shout, not 고하다; 그림 a
 # picture, not 그리다): a する after them is the noun's 하다.
 WORDS = {"고함", "이름", "구름", "그림", "바람", "기름", "고름", "거름", "마름", "어림", "힘", "김", "슬기", "움",
-         "춤", "꿈", "잠", "삶", "앎", "땀", "셈", "짐", "보름", "얼음", "다름", "아픔", "기쁨", "슬픔"}
+         "춤", "꿈", "잠", "삶", "앎", "땀", "셈", "짐", "보름", "얼음", "다름", "아픔", "기쁨", "슬픔", "감기", "메기",
+         "보기", "튀김", "볶음", "조림", "찜", "무침", "절임", "드림"}
 
 
 def nominals(stem, cls):
