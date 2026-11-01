@@ -1,0 +1,8 @@
+#! layer=base
+# 훤히 들여다보이다, 누구나(誰しもが), 쑤셔 넣다처럼 활용이나 뜻이 어긋나던 낱말
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+丸見え	훤히 들여다보%D4@	G8U0		Av	GN			LEX-3601	misglossed-audit-words:1
+まるみえ	훤히 들여다보%D4@	G8U0		Av	GN			LEX-3601	misglossed-audit-words:2
+誰しもが	누구나	E311			GN			LEX-3602	misglossed-audit-words:3
+捩じ込	쑤셔 &H5@	M425			GN			LEX-3603	misglossed-audit-words:4
+捩込	쑤셔 &H5@	M425			GN			LEX-3603	misglossed-audit-words:5
