@@ -1,0 +1,17 @@
+#! layer=base
+# 철자나 뜻이 틀린 외래어 뜻풀이의 바른 한국어: ポート 포트, モメる 다투다, モリブテン 몰리브덴
+key	ko	pos	sem	gram	dict	rule	ctx	note	id
+ポート	포트	N110	UAr		GN			LEX-3420	loanword-typos:1
+モメ	다&CR@	M437			GN			LEX-3421	loanword-typos:2
+メヒカリ	메히카리	N110			GN			LEX-3420	loanword-typos:5
+メタ文字	메타 문자	I110			IT			LEX-3420	loanword-typos:6
+メードインジャパン	메이드 인 재팬	N110			GN			LEX-3420	loanword-typos:7
+メールディレクトリ	메일 디렉터리	N110			GN			LEX-3420	loanword-typos:8
+モスパワートランジスタ	MOS 파워 트랜지스터	N110			GN			LEX-3420	loanword-typos:9
+モリブテン	몰리브덴	N110			GN			LEX-3420	loanword-typos:10
+モーダルスプリット	모달 스플릿	N110			GN			LEX-3420	loanword-typos:11
+マルチプロトコルルータ	멀티프로토콜 라우터	N110			IT			LEX-3420	loanword-typos:12
+マルチンゲール	마팅게일	N110			GN			LEX-3420	loanword-typos:13
+マルテンサイト	마텐자이트	N110			GN			LEX-3420	loanword-typos:14
+モメ事	다툼	N110			GN			LEX-3421	loanword-typos:15
+モメごと	다툼	N110			GN			LEX-3421	loanword-typos:16
