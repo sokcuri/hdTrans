@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.8.1](https://github.com/sokcuri/hdTrans/compare/v0.8.0...v0.8.1) (2026-11-01)
+
+
+### Bug Fixes
+
+* **compose:** read a noun whose Korean is a verb made a noun as that verb before する ([#417](https://github.com/sokcuri/hdTrans/issues/417)) ([b48b12f](https://github.com/sokcuri/hdTrans/commit/b48b12fc58a72f36dcaaa98623ee4586630e64c7))
+* **dict:** choose senses by a same-clause noun and correct misread glosses ([#404](https://github.com/sokcuri/hdTrans/issues/404)) ([ff4bcd7](https://github.com/sokcuri/hdTrans/commit/ff4bcd716683eab28f59f6864087b1b7d280391d))
+* **dict:** choose verb senses by their argument and correct everyday glosses ([#403](https://github.com/sokcuri/hdTrans/issues/403)) ([26401f2](https://github.com/sokcuri/hdTrans/commit/26401f2234ddcbd7a499a3a6b0427288e419fb28))
+* **dict:** narrow local rules that ignored their neighbour ([#405](https://github.com/sokcuri/hdTrans/issues/405)) ([c0e3f8e](https://github.com/sokcuri/hdTrans/commit/c0e3f8e063477db409c93b941eb40fe42b5bbb7e))
+* **dict:** read はだか, はみ出る, に仕える, 今ほど and other misglossed words by their sense ([#410](https://github.com/sokcuri/hdTrans/issues/410)) ([1bb7eb1](https://github.com/sokcuri/hdTrans/commit/1bb7eb1e40c20071727967e8bbc67ad71c8b4070))
+* **dict:** read ポート as 포트, モメる as 다투다 and fix misspelled loanword glosses ([#409](https://github.com/sokcuri/hdTrans/issues/409)) ([8eaeda7](https://github.com/sokcuri/hdTrans/commit/8eaeda785201049f49ad03268f4151442562177f))
+* **dict:** read 丸見えだ as 훤히 들여다보인다, 誰しもが as 누구나 and 捩じ込む as 쑤셔 넣다 ([#412](https://github.com/sokcuri/hdTrans/issues/412)) ([0baec83](https://github.com/sokcuri/hdTrans/commit/0baec83dab6a4b31cbbcf446f896df89371cf04b))
+* **dict:** read 名をはせる, 無碍に, 何泊 and 前が見える by their sense ([#414](https://github.com/sokcuri/hdTrans/issues/414)) ([46f708c](https://github.com/sokcuri/hdTrans/commit/46f708c62b6e25ed5339299133999fdbd9048be9))
+* **dict:** read 打つ with a sword as 벼리다 and 辛い with smells and tastes as 맵다 ([#413](https://github.com/sokcuri/hdTrans/issues/413)) ([d2c2af8](https://github.com/sokcuri/hdTrans/commit/d2c2af818e81183b13f83e59ee2ce61fc3e70090))
+* **dict:** read 訳が分からない as 영문을 모르다 and 訳も分からず as 영문도 모른 채 ([#411](https://github.com/sokcuri/hdTrans/issues/411)) ([95c7363](https://github.com/sokcuri/hdTrans/commit/95c7363f926e0bdfbf853461bc6e3c0f8844b506))
+* **dict:** spell misspelled loanword glosses and read misglossed 一 words by their sense ([#408](https://github.com/sokcuri/hdTrans/issues/408)) ([86f9963](https://github.com/sokcuri/hdTrans/commit/86f9963347430656f70749e1603abc1b7dc302b5))
+* **grammar:** read それでいい, これでいい, ここでいい as 그거면, 이거면, 여기면 되다 ([#402](https://github.com/sokcuri/hdTrans/issues/402)) ([5a8871e](https://github.com/sokcuri/hdTrans/commit/5a8871e2873f0969ec1ea3772ba53ab8ddcaa91d))
+* **grammar:** って contractions, concessive たって and embedded questions ([#406](https://github.com/sokcuri/hdTrans/issues/406)) ([1f2046a](https://github.com/sokcuri/hdTrans/commit/1f2046aebe31095f199f60fccbd2389293d0c822))
+* **packs:** keep the Korean verb a voice row writes against sense rows ([#418](https://github.com/sokcuri/hdTrans/issues/418)) ([48697be](https://github.com/sokcuri/hdTrans/commit/48697be2ec8ba9e73305f93f954d6ee23c5e51d1))
+* **release:** read それでいい as 그거면 돼, spoken って and Kansai forms, and verb senses by their context ([57cbe6a](https://github.com/sokcuri/hdTrans/commit/57cbe6a3c18aba26283ee2d2eb4695c973554712))
+* **rewrites:** read a mimetic or adverb with した before a noun as its adjective ([#416](https://github.com/sokcuri/hdTrans/issues/416)) ([350a0f9](https://github.com/sokcuri/hdTrans/commit/350a0f9bb53a60ee38885f233ced0d534bedf014))
+* round 2 classes (Kansai negatives, misread words, しか segmentation) ([#407](https://github.com/sokcuri/hdTrans/issues/407)) ([2ff1295](https://github.com/sokcuri/hdTrans/commit/2ff12952f177483005239b78e7c574bbbd8fc458))
+* round 3 classes (next-word kana, emphatic spellings, garbled words, spoken contractions) ([#415](https://github.com/sokcuri/hdTrans/issues/415)) ([c8c90ea](https://github.com/sokcuri/hdTrans/commit/c8c90ea8e70674b74ea50663be2435076b6d608e))
+
 ## [0.8.0](https://github.com/sokcuri/hdTrans/compare/v0.7.6...v0.8.0) (2026-11-01)
 
 
