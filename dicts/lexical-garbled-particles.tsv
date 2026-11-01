@@ -1,0 +1,9 @@
+#! layer=words
+# 나뉘어 엉뚱하게 읽히던 조사 표현: 이름을 붙이는 ってもの
+key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
+ってものが	(이)라는 것이	P200			GN							garbled-particles:1
+ってものは	(이)라는 것은	P200			GN							garbled-particles:2
+ってものを	(이)라는 것을	P200			GN							garbled-particles:3
+ってものも	(이)라는 것도	P200			GN							garbled-particles:4
+ってものに	(이)라는 것에	P200			GN							garbled-particles:5
+ってものの	(이)라는 것의	P200			GN							garbled-particles:6

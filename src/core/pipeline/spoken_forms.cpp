@@ -357,6 +357,14 @@ bool NegativeNee(std::string_view s, size_t pos, Match& m) {
         p = pos;
         if (Lit(s, p, stem) && Lit(s, p, "く") && rest(p)) return true;
     }
+    // The たい of a wish after a verb's continuative, a kanji or a kana of the i or e row
+    // (したくねぇ, 行きたくねえ, 食べたくねー; not まったくねぇ). The start of s is the match read again
+    // (ReplaceNegativeNee).
+    p = pos;
+    if (const char32_t b = pos > 0 ? LastRune(s.substr(0, pos)).cp : 0;
+        (b == 0 || IsKanjiClass(b) || In(b, U"いきぎしじちにひびみりえけげせぜてでねへべめれ")) && Lit(s, p, "たく") && rest(p)) {
+        return true;
+    }
     return false;
 }
 

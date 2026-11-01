@@ -1,0 +1,41 @@
+# 규칙: LEX-3489, SND-8
+rule	input	expected	kind	layer
+dict:lexical-garbled-words	イタズラ心から、敬語とため口が混ざった口調になった	장난 진심으로, 경어와 반말이 섞인 어조가 되었다	fix	lookup
+dict:lexical-garbled-words	お前も楽にため口で話せよ。	너도 편하게 반말로 이야기해.	fix	lookup
+dict:lexical-garbled-words	もはやため口。	이미 반말.	fix	lookup
+dict:lexical-garbled-words	僕とテルヒコの顔がうり二つなので、	나와 테르히코의 얼굴이 판박이이므로,	fix	lookup
+dict:lexical-garbled-words	「よくないわよ！完全にふぬけだったわ！」	「좋지 않아! 완전히 얼간이였던!」	fix	lookup
+dict:lexical-garbled-words	昔は もっと威勢はよかったがなあ。ふぬけ。	옛날은 좀 더 위세는 좋았지만. 얼간이.	fix	lookup
+dict:lexical-garbled-words	「あ、信じてしまいたいのですが、それも引っ込めました。	「아, 믿어버리고 싶습니다만, 그것도 거뒀습니다.	fix	lookup
+dict:lexical-garbled-words	手を引っ込めた	손을 끌어당겼다	keep	lookup
+dict:lexical-garbled-words	一年間も放ったらかしてたんですよ？！	1년간도 내버려 뒀어요?!	fix	lookup
+dict:lexical-garbled-words	藤本放ったらかし。	후지모토내버려 둬.	fix	lookup
+dict:lexical-garbled-words	息も絶え絶えになりながらも、	숨이 끊어질 듯하게 되면서도,	fix	lookup
+dict:lexical-garbled-words	お茶とケーキが行きわたると、	차와 케이크가 골고루 돌아가면,	fix	lookup
+dict:lexical-garbled-words	匂いが肺の隅々まで行きわたる。	냄새가 폐의 구석구석까지 골고루 돌아간다.	fix	lookup
+dict:lexical-garbled-words	大刀を左手に提げたまま、凝っとそれを見守った。	큰 칼을 왼손에 든 채로, 가만히 그것을 지켜보았다.	fix	lookup
+dict:lexical-garbled-words	そっと自分の掌を重ね合わせていた。	살며시 자신의 손바닥을 겹치고 있었다.	fix	lookup
+dict:lexical-garbled-words	あれ、おつかい？	어라, 심부름?	fix	lookup
+dict:lexical-garbled-words	簡単なおつかいだ。	간단한 심부름이다.	fix	lookup
+dict:lexical-garbled-words	「…カンベンして下さいよ…」	「…용서해 주세요…」	fix	lookup
+dict:lexical-garbled-words	ものっそい強く頭を打ってたけど」	엄청 강하게 머리를 부딪쳤지만」	fix	lookup
+dict:lexical-garbled-words	ものっそい長いので、どこで切ろうか検討中。	엄청 길기 때문에, 어디서 자를까 검토 중.	fix	lookup
+dict:lexical-garbled-words	儲かりそう？」	득을 볼 것 같아?」	keep	lookup
+dict:lexical-garbled-particles	常識ってものはないの！？」	상식이라는 것은 없는 거야!?」	fix	lookup
+dict:lexical-garbled-particles	人の心ってものは、存外に脆い。	사람의 마음이라는 것은, 의외로 무르다.	fix	lookup
+dict:lexical-garbled-particles	ってものがありまして….	라는 것이 있어서….	fix	lookup
+dict:lexical-garbled-particles	秋ってもの悲しくない？	lacks:라는 것	keep	lookup
+sound:filler	「えっとね……」	「음……」	fix	sound
+sound:filler	「えっとね……パン屋さん」	「음……빵집」	fix	sound
+sound:filler	「えっとですね……」	「음……」	fix	sound
+sound:filler	「えーとですね」	「음」	fix	sound
+sound:filler	「え…はい…ええっとですね…」	「어…네…음…」	fix	sound
+sound:filler	えっと、	음,	keep	sound
+sound:lead-after-ellipsis	「………おい、聞こえてるぞ。人の噂なんかしてないで練習しろ。」	「………어이, 들려. 사람의 소문같은 걸 하지 말고 연습해라.」	fix	sound
+sound:lead-after-ellipsis	……おい！	……어이!	fix	sound
+sound:lead-after-ellipsis	……ね、聞いて	……저기, 들어	fix	sound
+sound:lead-after-ellipsis	したい…ね？	하고 싶다…?	keep	sound
+dict:lexical-garbled-words	手が器用だ。	손재주가 좋다.	fix	lookup
+dict:lexical-garbled-words	ざぶっとかけ湯をして、湯船に浸かった。	첨벙 물 끼얹기를 하고, 목욕통에 잠겼다.	fix	lookup
+dict:lexical-garbled-words	掛け湯をする	물 끼얹기를 한다	fix	lookup
+dict:lexical-garbled-words	し意的な輸出規制	자의적인 수출규제	fix	lookup
