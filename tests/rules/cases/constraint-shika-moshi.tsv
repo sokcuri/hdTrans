@@ -1,0 +1,21 @@
+# 규칙: MNG-18, LEX-3487
+rule	input	expected	kind	layer
+constraint:moshi-before-yasui	攻撃もしやすくなる。	has:하기 쉬워진다	fix	lookup
+constraint:moshi-before-yasui	カスタマイズもしやすい。	커스터마이즈도 하기 쉽다.	fix	lookup
+constraint:moshi-before-yasui	連係もしやすい。	연계도 하기 쉽다.	fix	lookup
+constraint:moshi-before-yasui	若いカラダは妊娠もしやすい。	젊은 몸은 임신도 하기 쉽다.	fix	lookup
+constraint:moshi-before-yasui	呼吸が、とてもしやすい。	호흡이, 무척 하기 쉽다.	keep	lookup
+constraint:moshi-before-yasui	もし安楽死すれば・・・	만약 안락사하면···	keep	lookup
+constraint:moshi-before-yasui	「あ、もしもし安田？	「아, 여보세요 야스다?	keep	lookup
+constraint:shi-before-shika	…志望校が合格圏か安全圏かとか…そんな話しかしなかった。	has:그런 이야기밖에 하지 않았다	fix	lookup
+constraint:shi-before-shika	自分の話しかしない奴。	자신의 이야기밖에 하지 않는 놈.	fix	lookup
+constraint:shi-before-shika	なんで、死ぬ話しかないの？	왜, 죽는 이야기밖에 없는 거야?	fix	lookup
+constraint:shi-before-shika	正確に言うと話しか聞けないん	정확히 말하면 이야기밖에 들을 수 없는	fix	lookup
+constraint:shi-before-shika	僕は誰かの真似しか出来ない。	나는 누군가의 흉내밖에 할 수 없다.	fix	lookup
+constraint:shi-before-shika	「つまらん話しかないぞ」	has:이야기밖에 없어	fix	lookup
+constraint:shi-before-shika	「神都は神官とその生活に携わる者達しかいない。」	「신도는 신관과 그 생활에 종사하는 사람들밖에 없어.」	fix	lookup
+constraint:shi-before-shika	話しかな、と思っていると、	이야기일까, 라고 생각하면,	keep	lookup
+constraint:shi-before-shika	なんだ、ドラマの話しか？	뭐야, 드라마 이야기인가?	keep	lookup
+constraint:shi-before-shika	テツに話しかけた。	테츠에게 말을 걸었다.	keep	lookup
+constraint:shi-before-shika	特になにかがおかしかったわけじゃない。	특히 뭔가가 이상했던 것이 아니다.	keep	lookup
+constraint:shi-before-shika	女の子の友達しかいない。	여자아이의 친구밖에 없다.	keep	lookup

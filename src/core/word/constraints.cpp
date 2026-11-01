@@ -94,6 +94,12 @@ constexpr ConstraintRule kRules[] = {
      "ら 앞에서 るな로 끝나는 말은 금지가 아니라 동사와 조건 なら (気にするなら 신경 쓰지 마들 → 신경 쓴다면)", {}},
     {"shika-before-negative", ConstraintWord::Source, "しかし", ConstraintContext::AfterWordBeforeNegative, ConstraintReject::Word,
      "앞에 말이 있고 부정 어미가 바로 이어지는 しかし는 접속사 하지만이 아니라 しか와 する의 부정 (予感しかしない 예감 하지만 없다 → 예감밖에 안 든다)", {}},
+    {"moshi-before-yasui", ConstraintWord::Source, "もし", ConstraintContext::BeforeYasui, ConstraintReject::Word,
+     "やすい, やすく 앞의 もし는 만약이 아니라 も와 する의 연용형 (攻撃もしやすくなる 공격 만약 싸진다 → 공격도 하기 쉬워진다)", {}},
+    {"moshiya-before-yasui", ConstraintWord::Source, "もしや", ConstraintContext::BeforeYasui, ConstraintReject::Word,
+     "すい, すく가 이어져 やすい가 되는 もしや도 같다 (勉強もしやすい 공부 어쩌면 들이마셔 → 공부도 하기 쉽다)", {}},
+    {"shi-before-shika", ConstraintWord::EndsInSource, "し", ConstraintContext::BeforeKaNegative, ConstraintReject::Word,
+     "부정으로 끝나는 절에서 か 앞의 し로 끝나는 낱말은 し를 しか에 남김 (そんな話しかしなかった 그런 이야기인가 하지 않았다 → 그런 이야기밖에 하지 않았다)", {}},
     {"teiru-before-irassharu", ConstraintWord::EndsInSource, "てい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
      "らっしゃ 앞에서 てい로 끝나는 말(座ってい 앉아 있다)은 ている가 아니라 て형과 いらっしゃる (座っていらっしゃいます 앉아 있고 있습니다 → 앉아 계십니다)", {}},
     {"deiru-before-irassharu", ConstraintWord::EndsInSource, "でい", ConstraintContext::BeforeRassharu, ConstraintReject::Word,
@@ -368,6 +374,35 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::AfterWordBeforeNegative: {
         static constexpr std::string_view kNegative[] = {"ない", "なかっ", "なく", "なけれ", "ません"};
         return StartsWithAny(after, kNegative) && NameClassOf(adjacent) != kClassOther;
+    }
+    case ConstraintContext::BeforeYasui: {
+        static constexpr std::string_view kYasui[] = {"やすい", "やすく", "やすかっ", "やすけれ", "やすさ", "やすそ"};
+        const std::string tail = source.ends_with("や") ? std::string("や") + std::string(after) : std::string(after);
+        return StartsWithAny(tail, kYasui);
+    }
+    case ConstraintContext::BeforeKaNegative: {
+        if (!after.starts_with("か")) return false;
+        // Not the か of an adjective's past or of から, かけ (楽しかった, 話しかける).
+        if (const char32_t next = text::DecodeRune(after.substr(std::string_view("か").size())).cp;
+            std::u32string_view(U"っろれけらた").find(next) != std::u32string_view::npos) {
+            return false;
+        }
+        // Every reading of the word is a noun (話し, 達し), no adjective or verb stem (おかし).
+        if (!std::all_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                return c.source != source || c.codes == nullptr || c.codes->part.Tag() == 'N' || c.codes->part.Tag() == 'I';
+            })) {
+            return false;
+        }
+        const std::string_view shorter = source.substr(0, source.size() - DecodeLastRune(source).size);
+        if (std::none_of(list.begin(), list.end(), [&](const dict::Candidate& c) { return c.source == shorter && c.codes != nullptr; })) {
+            return false;
+        }
+        static constexpr std::string_view kStops[] = {"。", "、", "！", "？", "!", "?", "」", "』", "…"};
+        std::string_view clause = after.substr(std::string_view("か").size());
+        for (const std::string_view stop : kStops) clause = clause.substr(0, clause.find(stop));
+        static constexpr std::string_view kNegative[] = {"ない", "なかっ", "なく", "なけれ", "ません", "ず"};
+        return std::any_of(std::begin(kNegative), std::end(kNegative),
+                           [&](std::string_view n) { return clause.find(n) != std::string_view::npos; });
     }
     case ConstraintContext::BeforeRassharu:
         return after.starts_with("らっしゃ");
