@@ -5105,7 +5105,6 @@ Nの火蓋が切られる는 연어로 읽어 `N의 막이 오르다`로, Nの�
 
 사례: `tests/rules/cases/forge-and-spicy-senses.tsv`
 
-<<<<<<< HEAD
 ## LEX-3607 가나와 다른 한자로 적은 관용구 名をはせる, 無碍に
 
 名をはせる는 名を馳せる처럼 `이름을 떨치다`로 활용한다. 無碍にする는 `저버리다`, 부사 無碍に는 `매정하게`다(무애로 읽지 않는다). 한자 無下に의 `매몰차게 무시하다`는 그대로다.
@@ -5131,7 +5130,7 @@ Nの火蓋が切られる는 연어로 읽어 `N의 막이 오르다`로, Nの�
 | 目の前が見えない。 | 눈앞이 안 보인다. | 유지 |
 
 사례: `tests/rules/cases/idiom-spelling-variants.tsv`
-=======
+
 ## LEX-3488 뒤 낱말의 첫 글자인 가나는 앞 낱말로 읽지 않는다
 
 앞 낱말의 마지막 가나가 바로 뒤 낱말의 첫 글자이면 앞 낱말은 그 가나 없이 읽는다(constraints.cpp). たらさ, たらし 앞의 しかも는
@@ -5176,4 +5175,3 @@ Nの火蓋が切られる는 연어로 읽어 `N의 막이 오르다`로, Nの�
 | 儲かりそう？」 | 득을 볼 것 같아?」 | 유지 |
 
 사례: `tests/rules/cases/lexical-garbled-words.tsv`
->>>>>>> 4d0dc94f2 (fix: kana that start the next word, stressed spellings, garbled words and spoken contractions)
