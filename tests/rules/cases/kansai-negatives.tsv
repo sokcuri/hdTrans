@@ -34,7 +34,7 @@ contraction:potential-n	「この名誉は渡せん」	「이 명예는 건네�
 contraction:potential-n	どうにも思い出せん。	어떻게도 생각해 낼 수 없다.	fix	normalize
 contraction:potential-n	信じられんかった。	믿을 수 없었다.	fix	normalize
 contraction:potential-n	「おのれ許せん！	「당신 용서할 수 없어!	fix	normalize
-contraction:potential-n	「・・何も見えん。真っ暗だ」	「··아무것도 안 보인다. 깜깜해」	keep	normalize
+contraction:potential-n	「何も見えん。真っ暗だ」	「아무것도 안 보인다. 깜깜해」	keep	normalize
 contraction:potential-n	だが、おれは負けん！	하지만, 나는 지지 않아!	keep	normalize
 contraction:potential-n	黙って見てるとは思えん。	입다물고 보고 있다고는 생각되지 않아.	keep	normalize
 contraction:potential-n	―――如何せん、	―――아무래도,	keep	normalize

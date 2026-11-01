@@ -5,7 +5,7 @@ constraint:moshi-before-yasui	カスタマイズもしやすい。	커스터마�
 constraint:moshi-before-yasui	連係もしやすい。	연계도 하기 쉽다.	fix	lookup
 constraint:moshi-before-yasui	若いカラダは妊娠もしやすい。	젊은 몸은 임신도 하기 쉽다.	fix	lookup
 constraint:moshi-before-yasui	呼吸が、とてもしやすい。	호흡이, 무척 하기 쉽다.	keep	lookup
-constraint:moshi-before-yasui	もし安楽死すれば・・・	만약 안락사하면···	keep	lookup
+constraint:moshi-before-yasui	もし安楽死すれば	만약 안락사하면	keep	lookup
 constraint:moshi-before-yasui	「あ、もしもし安田？	「아, 여보세요 야스다?	keep	lookup
 constraint:shi-before-shika	…志望校が合格圏か安全圏かとか…そんな話しかしなかった。	has:그런 이야기밖에 하지 않았다	fix	lookup
 constraint:shi-before-shika	自分の話しかしない奴。	자신의 이야기밖에 하지 않는 놈.	fix	lookup
