@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 dict:dou-copula	「どうなの？」	「어때?」	fix	lookup
 dict:dou-copula	「そういうみちるはどうなのよ？」	「그렇게 말하는 흩어지고는 어떤데?」	fix	lookup
 dict:dou-copula	提督、どうなの！？	제독, 어때!?	fix	lookup
-dict:dou-copula	「……で、どうなのよ」	「……그리고, 어떤데」	fix	lookup
+dict:dou-copula	「……で、どうなのよ」	「……그래서, 어떤데」	fix	lookup
 dict:dou-copula	「で、筧的にはどうなのよ？」	「그래서, 견적으로는 어떤데?」	fix	lookup
 dict:dou-copula	「佳奈はどうなの？」	「카나는 어때?」	fix	lookup
 dict:dou-copula	「どうなの、ギザ様？」	「어때, 기자님?」	fix	lookup

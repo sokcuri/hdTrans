@@ -1,0 +1,25 @@
+# 규칙: SND-7
+rule	input	expected	kind	layer
+normalize:katakana-stress	すンばらしい！	훌륭해!	fix	normalize
+normalize:katakana-stress	大ッ嫌い。	너무 싫다.	fix	normalize
+normalize:katakana-stress	「さわらないで！子爵なんて、大ッ嫌い！」	「손대지 마! 자작 같은 건, 너무 싫어!」	fix	normalize
+normalize:katakana-stress	「あンたほんとうに貴族のお嬢様？」	「너 정말로 귀족의 아가씨?」	fix	normalize
+normalize:katakana-stress	「片付けただと？ショウ、あンたがか？」	「정리했다라면? 쇼, 네가인가?」	fix	normalize
+normalize:katakana-stress	「やッぱりか？」	「역시인가?」	fix	normalize
+normalize:katakana-stress	「やッぱ、対人で使うべきだッたか。」	「역시, 대인으로 써야 했나.」	fix	normalize
+normalize:katakana-stress	ちょッと遅かッたネ。	조금 늦었네.	fix	normalize
+normalize:katakana-stress	「ちょッと！	「잠깐!	keep	normalize
+normalize:katakana-stress	「ギャッ」と叫んだ。	「꺅」이라고 외쳤다.	keep	normalize
+normalize:spelled-u-adverb	こー見えて、私は冷え性だから。	이렇게 보여, 나는 냉한체질이니까.	fix	normalize
+normalize:spelled-u-adverb	こー見えても俺は、神を信じている。	이렇게 보여도 나는, 신을 믿고 있다.	fix	normalize
+normalize:spelled-u-adverb	「そー言えば…」	「그러고 보니…」	fix	normalize
+normalize:spelled-u-adverb	そー言えばこの人いい人だった。	그러고 보니 이 사람 좋은 사람이었다.	fix	normalize
+normalize:spelled-u-adverb	「……午後の授業は、どーしてこー眠いんだろーねぇ。」	「……오후 수업은, 왜 이렇게 졸린 것이겠지.」	fix	normalize
+normalize:spelled-u-adverb	「任せとけって。そっこー終わらせるって」	lacks:이렇게	keep	normalize
+normalize:drawn-conjecture	「なんて、思ってんだろーな」	「정말, 생각하는 거지」	fix	normalize
+normalize:drawn-conjecture	「ま、そんなもんだろーな」	「뭐, 그런 것이겠지」	fix	normalize
+normalize:drawn-conjecture	わかってるだろーな！」……でた。	알고 있지!」……나왔다.	fix	normalize
+normalize:drawn-conjecture	『さぁ？どーだろーなー』	『글쎄? 어떨까―』	keep	normalize
+normalize:drawn-conjecture	「でしょーね」	「그렇겠지」	keep	normalize
+normalize:katakana-stress	痛イ……デモ…ソンナ攻撃ジャ…沈マナイ…！引ッ張ッテモラウンダ……	아프다……하지만…그런 공격은…가라앉지 않아…! 잡아당겨 주는 거야……	keep	normalize
+normalize:katakana-stress	手ゴタエガ……全ッ然ナイノネ！	반응이……전혀 없구나!	keep	normalize

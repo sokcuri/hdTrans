@@ -1,0 +1,40 @@
+# 규칙: LEX-3488, GRM-3094
+rule	input	expected	kind	layer
+constraint:shikamo-before-tarasu	人類の技術を超えた魔導戦争は破壊しかもたらさなかったが	인류의 기술을 넘은 마도 전쟁은 파괴밖에 가져오지 않았지만	fix	lookup
+constraint:shikamo-before-tarasu	猿はトラブルしかもたらさないぞ。	원숭이는 트러블밖에 가져오지 않아.	fix	lookup
+constraint:shikamo-before-tarasu	ボクの能力は周りに災いしかもたらさない。	내 능력은 주위에 재앙밖에 가져오지 않는다.	fix	lookup
+constraint:shikamo-before-tarasu	大きすぎる力は厄災しかもたらさない。	너무 큰 힘은 액재밖에 가져오지 않는다.	fix	lookup
+constraint:shikamo-before-tarasu	しかもたらふく食べた。	게다가 배불리 먹었다.	keep	lookup
+constraint:shi-before-shitsu-word	ネ それに持ち上げる時もしっかりしてるので	네 게다가 들어 올릴 때도 확실히 하고 있기 때문에	fix	lookup
+constraint:shi-before-shitsu-word	気になっている方もしっかり読んでくださいねー。	신경 쓰이고 있는 편도 확실히 읽어 주세요―.	fix	lookup
+constraint:shi-before-shitsu-word	もしもし？	여보세요?	keep	lookup
+constraint:moui-not-before-ii	でも、礼香先輩はもういない。	하지만, 레이카 선배는 이제 없다.	fix	lookup
+constraint:moui-not-before-ii	フクロウはもういなかった。	후쿠로우는 이제 없었다.	fix	lookup
+constraint:moui-not-before-ii	あの精神を病んでいたマリンはもういない。	그 정신을 병들던 마린은 이제 없다.	fix	lookup
+constraint:moui-not-before-ii	「でも、もういないの。誰もね」	「하지만, 이제 없어. 아무도」	fix	lookup
+constraint:moui-not-before-ii	もういいよ。	이제 됐어.	keep	lookup
+constraint:dea-before-aitsu	「俺たちであいつをなんとかしよう」	「우리로 저 녀석을 어떻게든 하자」	fix	lookup
+constraint:dea-before-aitsu	俺は こっちであいつらは あっちにいて…》	나는 여기로 저 녀석들은 저쪽에 있어…》	fix	lookup
+constraint:dea-before-aitsu	「ヌエの力も凄いぜ！この調子であいつらを倒して、セシルを助けるんだ！」	「누에의 힘도 굉장해! 이 상태로 저 녀석들을 넘어뜨리고, 세실을 돕는 거야!」	fix	lookup
+constraint:dea-before-aitsu	「なんであいつあんなところで寝てんの？」	「왜 저 녀석 저런 곳에서 자고 있어?」	keep	lookup
+constraint:nihama-before-marude	俺にはまるで先が見えなかった。	나에게는 전혀 예견되지 않았다.	fix	lookup
+constraint:nihama-before-marude	その顔にはまるで表情がなかった。	그 얼굴에는 전혀 표정이 없었다.	fix	lookup
+constraint:nihama-before-marude	刻印術師でもない俺たちにはまるで分からん。	각인술사도 아닌 우리에게는 마치 모르겠어.	fix	lookup
+constraint:nihama-before-marude	罠にはまってしまった。	함정에 빠져버렸다.	keep	lookup
+constraint:de-before-desu	19年とかですね 今。	19년이라든지군요 지금.	fix	lookup
+constraint:de-before-desu	「お粥とかですね」	「죽이라든지군요」	fix	lookup
+constraint:de-before-desu	灯油とかですね。	등유라든지군요.	fix	lookup
+constraint:de-before-desu	途中ですね。	도중이군요.	fix	lookup
+constraint:de-before-desu	それですかさず	그래서 재빠르게	keep	lookup
+constraint:momi-before-mieru	何もない病室のなかでその便箋たちは異彩を放っているようにもみえた。	아무것도 없는 병실 안에서 그 편지지들은 이채를 발하고 있는 것처럼도 보였다.	fix	lookup
+constraint:momi-before-mieru	泣いているようにもみえた。	울고 있는 것처럼도 보였다.	fix	lookup
+constraint:momi-before-mieru	魂の底からのため息にもみえた。	영혼의 바닥에서의 한숨에도 보였다.	fix	lookup
+constraint:momi-before-mieru	もみじの葉	단풍의 잎	keep	lookup
+ending:to-adverb	ここまで来るともはや御殿、あるいは城。	여기까지 오면 이미 저택, 혹은 성.	fix	lookup
+ending:to-adverb	これだけ滝に打たれるともはや感覚がない。	이만큼 폭포수를 맞으면 이미 감각이 없다.	fix	lookup
+ending:to-adverb	生気のないとても虚ろな眼だ。	생기가 없는 무척 공허한 눈이다.	fix	lookup
+ending:to-adverb	忘れたくないとても大事な人だ。	잊고 싶지 않은 무척 소중한 사람이다.	fix	lookup
+ending:to-adverb	そうするともう遅い。	그렇다면 이미 늦다.	keep	lookup
+rewrite:past-sequence	「朝起きたら、もう寒かったわ」	「아침에 일어났더니, 벌써 추웠어」	fix	rewrites
+rewrite:past-sequence	「うん。朝起きたら、もういなかったわ」	「응. 아침에 일어났더니, 이제 없었어」	fix	rewrites
+rewrite:past-sequence	「寒かったら、言ってね」	「추우면, 말해」	keep	rewrites

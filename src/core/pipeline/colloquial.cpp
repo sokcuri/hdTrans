@@ -1833,6 +1833,29 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
     bool changed = false;
+    // A katakana ッ or ン that stresses a word written in hiragana or kanji (すンばらしい, 素ッ晴らしい,
+    // やッぱり): written as its hiragana or dropped, whichever lets a key that starts in the run of kana
+    // and kanji before it read further, two or more characters past it; the hiragana on a tie. Not where
+    // a key already reads past it as written, nor in a line that writes the kana after kanji in katakana
+    // (痛イ……引ッ張ッテ), which the katakana speech pass reads.
+    bool katakanaAfterKanji = false;
+    for (size_t i = 0; i + 1 < rs.size() && !katakanaAfterKanji; i++) {
+        katakanaAfterKanji = IsKanjiRune(rs[i]) && IsKatakanaRune(rs[i + 1]) && !In(rs[i + 1], U"ッンー");
+    }
+    for (size_t i = 1; i + 1 < rs.size() && !katakanaAfterKanji; i++) {
+        if (rs[i] != U'ッ' && rs[i] != U'ン') continue;
+        if (!(IsHiraganaRune(rs[i - 1]) || IsKanjiRune(rs[i - 1])) || !(IsHiraganaRune(rs[i + 1]) || IsKanjiRune(rs[i + 1]))) continue;
+        size_t from = i - 1;
+        while (from > 0 && i - from < kMaxKeyRunes && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1]))) from--;
+        if (e.Reach(rs, from, i) > i) continue;
+        const std::u32string hiragana = Spliced(rs, i, std::u32string(1, rs[i] - 0x60), i + 1);
+        const std::u32string dropped = Spliced(rs, i, U"", i + 1);
+        const size_t kept = e.Reach(hiragana, from, i);
+        const size_t gone = e.Reach(dropped, from, i) + 1;  // in the characters of rs
+        if (kept < i + 2 && gone < i + 3) continue;
+        rs = kept >= gone ? hiragana : dropped;
+        changed = true;
+    }
     // The tic っぽい drawn out after a word (行くっぽーい, 寝ちゃったっぽ～い) is っぽい with the
     // lengthening mark.
     for (size_t i = 1; i + 2 < rs.size(); i++) {
@@ -2044,6 +2067,16 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
                     }
                 }
                 if (Volitional(rs, i) && e.StemEnds(rs, from, i - 1) && e.Reach(rs, from, i - 1) < i) {
+                    rs = Spliced(rs, i, U"う", end);
+                    changed = true;
+                } else if (r == U'ー' && end == i + 1 && In(prev, U"こそど") && (i - 1 == from || In(rs[i - 2], U"てでにはがをもとへ") ||
+                                                    e.ReadsAsWords(std::u32string_view(rs).substr(from, i - 1 - from))) &&
+                           end < rs.size() &&
+                           IsKanjiRune(rs[end]) &&
+                           e.Reach(Spliced(rs, i, U"う", end), from, i) > std::max(e.Reach(rs, from, i), i)) {
+                    // The adverbs こう, そう and どう spelled with ー before a kanji, where a key then reads
+                    // further than as written (そー言えば そう言えば, どーしてこー眠い), where the word starts there: at the start of
+                    // the kana, after a て form or a particle, or after words (not the こう of そっこー, けっこー).
                     rs = Spliced(rs, i, U"う", end);
                     changed = true;
                 } else if (!shoutTsu && !e.StemTagged(rs, from, i, "H") &&  // おいしぃ～: the い of an adjective
@@ -2331,6 +2364,15 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         std::u32string fill;
         size_t wordEnd = 0;
         if (!DrawnWord(e, rs, i, j, std::max(covered, SoundWord(rs, from, j, ctx.extraBuiltin) ? j : 0), true, fill, wordEnd)) {
+            // The conjecture of the copula and the volitional of ます drawn out before a sentence particle
+            // that no word reads (だろーね, でしょーよ, ましょーか): the run dropped, which keeps them
+            // spoken (だろね 겠지).
+            const std::u32string_view head = std::u32string_view(rs).substr(0, i);
+            if ((head.ends_with(U"だろ") || head.ends_with(U"でしょ") || head.ends_with(U"ましょ")) &&
+                In(rs[j], U"よやぜぞねがなかわさ")) {
+                rs = Spliced(rs, i, U"", j);
+                changed = true;
+            }
             continue;
         }
         rs = Spliced(rs, i, fill, j);

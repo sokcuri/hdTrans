@@ -2487,7 +2487,8 @@ const Item* EndFor(const Item* it, const Item* last) {
 
 // Whether the sentence or quotation ending at item end ends in a past, not よかった: in た, or a
 // verb whose た is in its conjugation (噴火した: する + た), also with only final particles in its
-// ending when its Korean ending is past (立っていたよ, ぼやいてたぞ).
+// ending when its Korean ending is past (立っていたよ, ぼやいてたぞ), or an adjective's past in かった
+// with only final particles after it (いなかったわ).
 bool PastEnd(const Item* end) {
     std::string_view tail = end->DirectIndex() >= 0 ? end->DirectSurface() : std::string_view();
     // An ending that closes a quotation ends the quoted sentence at the bracket (いた」と).
@@ -2497,13 +2498,21 @@ bool PastEnd(const Item* end) {
     const std::string text = std::string(end->group->surface) + std::string(tail);
     if (text.ends_with("よかった") || text.ends_with("良かった")) return false;
     if (text.ends_with("た")) return true;
+    const auto finalParticles = [](std::string_view rest) {
+        for (std::size_t k = 0; k < rest.size();) {
+            const text::Rune r = text::DecodeRune(rest.substr(k));
+            if (!dict::InClass(HDTRANS_CLASS("particle.final-after-past"), rest.substr(k, r.size))) return false;
+            k += r.size;
+        }
+        return true;
+    };
+    // An adjective's past with final particles (いなかったわ, 寒かったよ).
+    if (end->detail->cls == kDetailKeiyo && tail.starts_with("かった")) {
+        return finalParticles(tail.substr(std::string_view("かった").size()));
+    }
     if (end->detail->cls != kDetailVerb || end->detail->kind != 6) return false;
     if (tail.empty()) return true;
-    for (std::size_t k = 0; k < tail.size();) {
-        const text::Rune r = text::DecodeRune(tail.substr(k));
-        if (!dict::InClass(HDTRANS_CLASS("particle.final-after-past"), tail.substr(k, r.size))) return false;
-        k += r.size;
-    }
+    if (!finalParticles(tail)) return false;
     const Entry* e = end->DirectEntry(end->DirectIndex());
     return e != nullptr && e->dst.starts_with("5");
 }

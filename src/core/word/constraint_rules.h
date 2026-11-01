@@ -72,6 +72,19 @@ enum class ConstraintContext : uint8_t {
                         // かしら, かい, かな but for かない) and a negative ends its clause, every reading of the
                         // word is a noun and the word without its last kana is a word too (話しかしなかった is
                         // 話 + しか, 者達しかいない 者達 + しか; not 楽しかった, おかしかったわけじゃない)
+    BeforeTarasu,       // たらさ, たらし, たらす, たらせ or たらそ follows (破壊しかもたらさない: しか + もたらす)
+    BeforeShiTsuWord,   // っかり, っかと, っくり or っとり follows, so the word's last し starts しっかり, しっかと,
+                        // しっくり or しっとり (時もしっかり: も + しっかり, それでもしっかり: それでも + しっかり)
+    NotBeforeIi,        // a letter follows that is no い, ぃ, ー, ～, 〜, っ or ッ (もういない: もう + いない; not
+                        // もういい, もういー, もういっか)
+    BeforeAitsu,        // いつ follows but not いつつ, so the word's last あ starts あいつ (俺たちであいつを:
+                        // で + あいつ; not であいつつ)
+    BeforeMarude,       // るで, るっきり, るきり or るごと follows, so the word's last ま starts まるで, まるっきり,
+                        // まるきり or まるごと (俺にはまるで: には + まるで; not 罠にはまる)
+    BeforeDesu,         // す follows and then ね, よ, か (not かさ, かし, かっ, かす), a mark or nothing, so the
+                        // word's last で starts です (途中ですね, とかですね; not 途中ですっかり, それですかさず)
+    BeforeMieru,        // え and then た, る, て, な, ま or ず follows, so the word's last み starts 見える in kana
+                        // (ようにもみえた: も + みえた)
     BeforeRassharu,     // らっしゃ follows (座っていらっしゃる: the い starts いらっしゃる)
     BeforeCopula,       // だ, で, じゃ, に, の, か or なん follows, or no letter, which no verb stem
                         // takes (いただけだ, いただけなんです, いただけ〜)

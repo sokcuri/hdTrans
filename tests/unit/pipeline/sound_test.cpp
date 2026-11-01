@@ -53,7 +53,9 @@ const dict::LoadResult& SoundDictionary() {
         "ざんねん\t유감\tN110\t35\n"
         "へそ\t배꼽\tN110\t36\n"
         "そう\t그렇게\tE300\t37\n"
-        "なんでも\t뭐든\tE300\t38\n",
+        "なんでも\t뭐든\tE300\t38\n"
+        "すばらし\t훌륭하\tH100\t39\n"
+        "やっぱり\t역시\tE300\t40\n",
     }});
     return result;
 }
@@ -717,6 +719,16 @@ HD_TEST(pipeline_rewrite_emphasis) {
         // An ending of the contracted しまう (うよ after ちゃ) is no word after other kana: the
         // drawl of the particle is ～.
         {"歌うよぉー！", "歌うよ～！"},
+        // A katakana ッ or ン that stresses a word in hiragana is written in hiragana or dropped,
+        // whichever lets a word read past it; not after katakana.
+        {"すンばらしい！", "すばらしい！"},
+        {"やッぱり", "やっぱり"},
+        {"ちょッと待って", "ちょっと待って"},
+        {"ギャッと", "ギャッと"},
+        // こう, そう, どう spelled with ー before a kanji where a word then reads further, and the
+        // conjecture of the copula drawn out before a sentence particle.
+        {"そー言えば", "そう言えば"},
+        {"だろーな", "だろな"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteEmphasis(c.in, ctx, *snap), std::string(c.want));
 }

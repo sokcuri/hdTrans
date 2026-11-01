@@ -752,13 +752,14 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                 pause = std::u32string_view(f_).substr(again, s.key.size()) != s.key &&
                         !(spaced && again < rs_.size() && IsKanjiRune(rs_[again]) && StutterHeadMora(rs_, again, false) == s.key);
             }
-            // A lead asked on its own after an ellipsis that opens an utterance is one too
-            // (！…そう？ 그래?); after words the ellipsis only pauses them (したい…ね？).
+            // A lead asked on its own, or before a comma or ！, after an ellipsis that opens an utterance
+            // is one too (！…そう？ 그래?, ………おい、 어이,); after words the ellipsis only pauses them
+            // (したい…ね？).
             size_t asked = end, opened = from;
             while (asked < rs_.size() && In(rs_[asked], U"ッっー～")) asked++;
             while (opened > 0 && In(rs_[opened - 1], U"…‥")) opened--;
             if (!start && opened < from && UtteranceStart(opened) &&
-                (In(rs_[end - 1], U"？?") || (asked < rs_.size() && In(rs_[asked], U"？?")))) {
+                (In(rs_[end - 1], U"？?") || (asked < rs_.size() && In(rs_[asked], U"？?、，,！!")))) {
                 start = true;
             }
             // A kana in brackets right after a kanji is its reading (々(う)), and one after a dash
