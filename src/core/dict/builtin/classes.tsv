@@ -233,6 +233,11 @@
 //= noun.dependent-ellipsis	Starts of the nouns that an attributive before an ellipsis or a dash still modifies (行く……ことにした).
 //= noun.dim-sight	Nouns of a light, a sight, a shape or a memory that ぼんやりした before them makes dim, 흐릿한 (ぼんやりした光 흐릿한 빛), not dazed.
 //= noun.vague-thought	Nouns of a thought, a feeling or a story that ぼんやりした before them makes vague, 막연한 (ぼんやりした不安 막연한 불안), not dazed.
+//= noun.firm-bond	Nouns of a trust, a will or a gaze that しっかりした before them makes firm, 굳건한 (しっかりとした信頼 굳건한 신뢰).
+//= noun.firm-step	Nouns of a gait that しっかりした before them makes steady, 힘찬 (しっかりとした足取り 힘찬 발걸음).
+//= noun.reply	Nouns of a reply or a reaction that あっさりした before them makes brief, 간단한 (あっさりした返事 간단한 대답), not mild in taste.
+//= noun.slender-part	Nouns of a slender part of the body that ほっそりした before them makes thin, 가느다란 (ほっそりとした指 가느다란 손가락); the body and the legs stay 날씬한.
+//= noun.sturdy-body	Nouns of a build or a body that しっかりした before them makes sturdy, 다부진 (しっかりとした体格 다부진 체격).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
@@ -2110,6 +2115,7 @@ ko-adverb.manner-only	천천히
 ko-adverb.manner-only	가만히
 ko-adverb.manner-only	서서히
 ko-adverb.manner-only	열심히
+ko-adverb.manner-only	완전히
 
 ko-adjective.hada-state	당당하다
 ko-adjective.hada-state	담담하다
@@ -3075,6 +3081,12 @@ noun.act-head	せい
 noun.act-head	ばかり
 noun.act-head	直後
 noun.act-head	拍子
+noun.act-head	末
+noun.act-head	段階
+noun.act-head	時点
+noun.act-head	割
+noun.act-head	分
+noun.act-head	次第
 noun.act-head	まえ
 noun.act-head	みたい
 noun.act-head	よう
@@ -3158,6 +3170,57 @@ noun.vague-thought	希望
 noun.vague-thought	期待
 noun.vague-thought	疑問
 noun.vague-thought	違和感
+
+noun.firm-bond	信頼
+noun.firm-bond	意志
+noun.firm-bond	意思
+noun.firm-bond	決意
+noun.firm-bond	覚悟
+noun.firm-bond	絆
+noun.firm-bond	信念
+noun.firm-bond	眼差し
+noun.firm-bond	まなざし
+
+noun.firm-step	足取り
+noun.firm-step	足どり
+noun.firm-step	足並み
+noun.firm-step	歩み
+noun.firm-step	歩調
+
+noun.reply	返事
+noun.reply	答え
+noun.reply	返答
+noun.reply	反応
+noun.reply	応答
+noun.reply	対応
+
+noun.slender-part	指
+noun.slender-part	指先
+noun.slender-part	手
+noun.slender-part	手首
+noun.slender-part	首
+noun.slender-part	首筋
+noun.slender-part	うなじ
+noun.slender-part	足首
+noun.slender-part	肩
+noun.slender-part	腕
+noun.slender-part	二の腕
+noun.slender-part	腰
+noun.slender-part	腰回り
+noun.slender-part	手足
+noun.slender-part	顎
+noun.slender-part	鼻筋
+
+noun.sturdy-body	体格
+noun.sturdy-body	体つき
+noun.sturdy-body	体躯
+noun.sturdy-body	骨格
+noun.sturdy-body	肉体
+noun.sturdy-body	身体
+noun.sturdy-body	体
+noun.sturdy-body	足腰
+noun.sturdy-body	胸板
+noun.sturdy-body	肩幅
 
 noun.event	事件
 noun.event	事故

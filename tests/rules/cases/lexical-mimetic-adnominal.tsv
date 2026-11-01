@@ -1,222 +1,240 @@
 # 규칙: LEX-3611
 rule	input	expected	kind	layer
+cx:mimetic-adnominal:10	しっかりとした人だった。	착실한 사람이었다.	fix	rewrites
 cx:mimetic-adnominal:10	しっかりとした冒険者の数も多く	착실한 모험가의 수도 많이	fix	rewrites
 cx:mimetic-adnominal:10	しっかりとした女性が多い。	착실한 여성이 많다.	fix	rewrites
 cx:mimetic-adnominal:10	歳の割にしっかりしている子だ。	나이에 비해 착실한 아이다.	fix	rewrites
-cx:mimetic-adnominal:10	しっかりとした人だった。	착실한 사람이었다.	fix	rewrites
 cx:mimetic-adnominal:10	体のしっかりとした少年。	!rule:cx:mimetic-adnominal:10	keep	rewrites
-cx:mimetic-adnominal:20	しっかりとした体躯で	제대로 된 체구로	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした目つきは	제대로 된 눈초리는	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした筋肉も備えている。	제대로 된 근육도 갖추고 있다.	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした作りだ。	제대로 된 구조다.	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした答えは出せません。	제대로 된 대답은 낼 수 없습니다.	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした信頼がある。	제대로 된 신뢰가 있다.	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした足取りで歩いていく。	제대로 된 발걸음으로 걸어간다.	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした説明が無いのは	제대로 된 설명이 없는 것은	fix	rewrites
-cx:mimetic-adnominal:20	政策がしっかりしているネトゲは物価が安定しています。	정책이 제대로 된 온라인 게임은 물가가 안정되어 있습니다.	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした物を口に運んでいないため	제대로 된 것을 입으로 가져가지 않기 때문에	fix	rewrites
-cx:mimetic-adnominal:20	しっかりとした。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	しっかりとしたい。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	しっかりとした方がいい。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	しっかりとして。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	しっかりとしたら許す。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	しっかりとした、いい人だ。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	しっかりしていた人だ。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:20	教育もしっかりした。	!rule:cx:mimetic-adnominal:20	keep	rewrites
-cx:mimetic-adnominal:30	しっかりとしたものを食べたい。	제대로 된 것을 먹고 싶다.	fix	rewrites
-cx:mimetic-adnominal:30	歳の割にはしっかりしているもの」	!rule:cx:mimetic-adnominal:30	keep	rewrites
-cx:mimetic-adnominal:40	きちんとした造りだな	제대로 된 구조네	fix	rewrites
-cx:mimetic-adnominal:40	それ故久し振りのきちんとしたデートだった。	그러므로 오래간만의 제대로 된 데이트였다.	fix	rewrites
-cx:mimetic-adnominal:40	勝利にはきちんとした理由が必要です。	승리에는 제대로 된 이유가 필요합니다.	fix	rewrites
-cx:mimetic-adnominal:40	きちんとした報酬を決めるために	제대로 된 보수를 결정하기 위해	fix	rewrites
-cx:mimetic-adnominal:40	きちんとした性格だったんでしょうね。	제대로 된 성격이었던 것이군요.	fix	rewrites
-cx:mimetic-adnominal:40	きちんとした生活を送っているのだ。	제대로 된 생활을 하고 있다.	fix	rewrites
-cx:mimetic-adnominal:40	スキンケアはきちんとした方が良い。	!rule:cx:mimetic-adnominal:40	keep	rewrites
-cx:mimetic-adnominal:40	きちんとしたら日本人	!rule:cx:mimetic-adnominal:40	keep	rewrites
-cx:mimetic-adnominal:40	宿題をきちんとした子は帰っていい。	!rule:cx:mimetic-adnominal:40	keep	rewrites
-cx:mimetic-adnominal:50	きちんとしたものを書こうとした時	제대로 된 것을 쓰려고 했을 때	fix	rewrites
-cx:mimetic-adnominal:50	きちんとしたものの、	!rule:cx:mimetic-adnominal:50	keep	rewrites
-cx:mimetic-adnominal:60	ちゃんとしている人だ。	제대로 된 사람이다.	fix	rewrites
-cx:mimetic-adnominal:60	最初よりちゃんとしているし	!rule:cx:mimetic-adnominal:60	keep	rewrites
-cx:mimetic-adnominal:70	「Ｚ世代」のちゃんとした定義	「Z세대」의 제대로 된 정의	fix	rewrites
-cx:mimetic-adnominal:70	ことわざのちゃんとした意味を教える。	속담의 제대로 된 의미를 가르친다.	fix	rewrites
-cx:mimetic-adnominal:70	清潔な部屋のちゃんとしたベットが嬉しい。	청결한 방의 제대로 된 침대가 기쁘다.	fix	rewrites
-cx:mimetic-adnominal:70	君のちゃんとした所を見せて。	!rule:cx:mimetic-adnominal:70	keep	rewrites
-cx:mimetic-adnominal:80	ちゃんとした文明が	제대로 된 문명이	fix	rewrites
-cx:mimetic-adnominal:80	ちゃんとした理由があるの	제대로 된 이유가 있어	fix	rewrites
-cx:mimetic-adnominal:80	次はちゃんとしたゲームにしよう。	다음은 제대로 된 게임으로 하자.	fix	rewrites
-cx:mimetic-adnominal:80	屋台なのにちゃんとした料理が食える。	포장마차인데 제대로 된 요리를 먹을 수 있다.	fix	rewrites
-cx:mimetic-adnominal:80	ちゃんとした格好で	제대로 된 모습으로	fix	rewrites
-cx:mimetic-adnominal:80	ちゃんとした服を着たい。	제대로 된 옷을 입고 싶다.	fix	rewrites
-cx:mimetic-adnominal:80	ちゃんとしたものを	제대로 된 것을	fix	rewrites
-cx:mimetic-adnominal:80	ちゃんとしたい。	!rule:cx:mimetic-adnominal:80	keep	rewrites
-cx:mimetic-adnominal:80	ちゃんとしたら許す。	!rule:cx:mimetic-adnominal:80	keep	rewrites
-cx:mimetic-adnominal:80	ちゃんとしたことがない。	!rule:cx:mimetic-adnominal:80	keep	rewrites
-cx:mimetic-adnominal:80	宿題をちゃんとした子は帰っていい。	!rule:cx:mimetic-adnominal:80	keep	rewrites
-cx:mimetic-adnominal:80	ちゃんとした後で食べよう。	!rule:cx:mimetic-adnominal:80	keep	rewrites
-cx:mimetic-adnominal:80	ちゃんとした、いい人だ。	!rule:cx:mimetic-adnominal:80	keep	rewrites
-cx:mimetic-adnominal:90	きっちりした性格だから	빈틈없는 성격이니까	fix	rewrites
-cx:mimetic-adnominal:90	きっちりとしたスーツ姿で	빈틈없는 정장 차림으로	fix	rewrites
-cx:mimetic-adnominal:90	しかし普段のきっちりとした雰囲気はなく	하지만 평소의 빈틈없는 분위기는 없고	fix	rewrites
-cx:mimetic-adnominal:90	きっちりとした恰好をしていたのだろう。	빈틈없는 차림을 하고 있었을 것이다.	fix	rewrites
-cx:mimetic-adnominal:90	きっちりしているひとだ。	빈틈없는 사람이다.	fix	rewrites
-cx:mimetic-adnominal:90	番組の下準備をきっちりしたのに	!rule:cx:mimetic-adnominal:90	keep	rewrites
-cx:mimetic-adnominal:90	勤務時間はきっちりしているし	!rule:cx:mimetic-adnominal:90	keep	rewrites
-cx:mimetic-adnominal:100	皺ひとつないきっちりしたものだ。	주름 하나 없는 빈틈없는 것이다.	fix	rewrites
-cx:mimetic-adnominal:100	そんなにきっちりしたものじゃなくて	그렇게 빈틈없는 것이 아니고	fix	rewrites
-cx:mimetic-adnominal:100	準備をきっちりしたものの、	!rule:cx:mimetic-adnominal:100	keep	rewrites
-cx:mimetic-adnominal:110	はっきりとした拒絶。	뚜렷한 거절.	fix	rewrites
-cx:mimetic-adnominal:110	はっきりとしている声だ。	뚜렷한 목소리다.	fix	rewrites
-cx:mimetic-adnominal:110	そう思えるほどはっきりとした感覚だ。	그렇게 생각할 수 있는 만큼 뚜렷한 감각이다.	fix	rewrites
-cx:mimetic-adnominal:110	はっきりとした輪郭が見えた。	뚜렷한 윤곽이 보였다.	fix	rewrites
-cx:mimetic-adnominal:110	はっきりとした差異ではないのだが	뚜렷한 차이는 아닌데	fix	rewrites
-cx:mimetic-adnominal:110	はっきりとした根拠も確信もない。	뚜렷한 근거도 확신도 없다.	fix	rewrites
-cx:mimetic-adnominal:110	彼女にははっきりとした確証がない。	그녀에게는 뚜렷한 확증이 없다.	fix	rewrites
-cx:mimetic-adnominal:110	かなりはっきりとした言葉でしゃべった。	꽤 뚜렷한 말로 말했다.	fix	rewrites
-cx:mimetic-adnominal:110	はっきりとした時に言う。	!rule:cx:mimetic-adnominal:110	keep	rewrites
-cx:mimetic-adnominal:110	理由ははっきりしている。	!rule:cx:mimetic-adnominal:110	keep	rewrites
-cx:mimetic-adnominal:110	表と裏がはっきりしている	!rule:cx:mimetic-adnominal:110	keep	rewrites
-cx:mimetic-adnominal:120	意識もはっきりとしたものへと変わる。	의식도 뚜렷한 것으로 바뀐다.	fix	rewrites
-cx:mimetic-adnominal:120	はっきりとしたものの、	!rule:cx:mimetic-adnominal:120	keep	rewrites
-cx:mimetic-adnominal:130	のんびりとした声。	느긋한 목소리.	fix	rewrites
-cx:mimetic-adnominal:130	のんびりとした口調で	느긋한 어조로	fix	rewrites
-cx:mimetic-adnominal:130	のんびりとした時間。	느긋한 시간.	fix	rewrites
-cx:mimetic-adnominal:130	のんびりとした雰囲気の街中に	느긋한 분위기의 거리에	fix	rewrites
-cx:mimetic-adnominal:130	のんびりとした笑顔であった。	느긋한 웃는 얼굴이었다.	fix	rewrites
-cx:mimetic-adnominal:130	のんびりとしたスローライフを送りたい。	느긋한 슬로 라이프를 보내고 싶다.	fix	rewrites
-cx:mimetic-adnominal:130	のんびりとしたい。	!rule:cx:mimetic-adnominal:130	keep	rewrites
-cx:mimetic-adnominal:130	二人でのんびりとした。	!rule:cx:mimetic-adnominal:130	keep	rewrites
-cx:mimetic-adnominal:140	旅はのんびりとしたものだった。	여행은 느긋한 것이었다.	fix	rewrites
-cx:mimetic-adnominal:140	のんびりとしたものの、	!rule:cx:mimetic-adnominal:140	keep	rewrites
-cx:mimetic-adnominal:150	のんびりしている人だ。	느긋한 사람이다.	fix	rewrites
-cx:mimetic-adnominal:150	のんびりしているミアに	느긋한 미아에	fix	rewrites
-cx:mimetic-adnominal:150	そんなのんびりしている時間はない。	!rule:cx:mimetic-adnominal:150	keep	rewrites
-cx:mimetic-adnominal:150	のんびりしている余裕はなさそうです	!rule:cx:mimetic-adnominal:150	keep	rewrites
-cx:mimetic-adnominal:150	こんなところでのんびりしている場合じゃない。	!rule:cx:mimetic-adnominal:150	keep	rewrites
-cx:mimetic-adnominal:150	リビングでのんびりしているレナータ。	!rule:cx:mimetic-adnominal:150	keep	rewrites
-cx:mimetic-adnominal:150	ホテルに戻ってのんびりしていると電話が来た。	!rule:cx:mimetic-adnominal:150	keep	rewrites
-cx:mimetic-adnominal:160	中世人ののんびりした戦術など話になるか	중세인의 느긋한 전술 등 이야기가 될까	fix	rewrites
-cx:mimetic-adnominal:160	カタツムリたちののんびりした姿を見るのもいい。	달팽이들의 느긋한 모습을 보는 것도 좋다.	fix	rewrites
-cx:mimetic-adnominal:160	君ののんびりしたい気持ち。	!rule:cx:mimetic-adnominal:160	keep	rewrites
-cx:mimetic-adnominal:170	のんびりしたものだ。	느긋한 것이다.	fix	rewrites
-cx:mimetic-adnominal:170	のんびりした気持ちで	느긋한 기분으로	fix	rewrites
-cx:mimetic-adnominal:170	アリスは対照的にのんびりした声で答えた。	앨리스는 대조적으로 느긋한 목소리로 답했다.	fix	rewrites
-cx:mimetic-adnominal:170	旅の様子ものんびりしたものである。	여행의 모습도 느긋한 것이다.	fix	rewrites
-cx:mimetic-adnominal:170	こののんびりした反応、さすがはお姫様だなぁ。	이 느긋한 반응, 역시 공주님이구나.	fix	rewrites
-cx:mimetic-adnominal:170	のんびりしたい。	!rule:cx:mimetic-adnominal:170	keep	rewrites
-cx:mimetic-adnominal:170	休日はのんびりした。	!rule:cx:mimetic-adnominal:170	keep	rewrites
-cx:mimetic-adnominal:180	男のでっぷりとした太ももが	남자의 뚱뚱한 허벅지가	fix	rewrites
-cx:mimetic-adnominal:180	中年太りのでっぷりとしたお腹	중년태의 뚱뚱한 배	fix	rewrites
-cx:mimetic-adnominal:180	先のこぢんまりしたアパートを見て	앞의 아담한 아파트를 봐	fix	rewrites
-cx:mimetic-adnominal:180	農耕用のずんぐりとした馬にまたがった。	농경용의 땅딸막한 말에 올라탔다.	fix	rewrites
-cx:mimetic-adnominal:180	正四方形のこぢんまりした部屋だった。	정사방형의 아담한 방이었다.	fix	rewrites
-cx:mimetic-adnominal:180	工房自体はこぢんまりとしているが	!rule:cx:mimetic-adnominal:180	keep	rewrites
-cx:mimetic-adnominal:180	こぢんまりとしているけれど	!rule:cx:mimetic-adnominal:180	keep	rewrites
-cx:mimetic-adnominal:190	ほっそりとした手で	날씬한 손으로	fix	rewrites
-cx:mimetic-adnominal:190	ユイナのほっそりとした体	유이나의 날씬한 몸	fix	rewrites
-cx:mimetic-adnominal:190	頭を上げるとマダムのほっそりとした足首が見えた。	머리를 올리면 마담의 날씬한 발목이 보였다.	fix	rewrites
-cx:mimetic-adnominal:190	長くほっそりとした脚だ。	길고 날씬한 다리다.	fix	rewrites
-cx:mimetic-adnominal:190	そのほっそりとした肩を左腕で抱きながら	그 날씬한 어깨를 왼팔로 안으면서	fix	rewrites
-cx:mimetic-adnominal:190	ほっそりとしているから。	!rule:cx:mimetic-adnominal:190	keep	rewrites
-cx:mimetic-adnominal:200	スライム娘のほっそりした指が	슬라임 소녀의 날씬한 손가락이	fix	rewrites
-cx:mimetic-adnominal:200	ランのほっそりした首筋から芳香が立ち昇ってきた。	런의 날씬한 목덜미에서 방향이 피어 왔다.	fix	rewrites
-cx:mimetic-adnominal:200	彼のほっそりした、白い手。	!rule:cx:mimetic-adnominal:200	keep	rewrites
-cx:mimetic-adnominal:210	ほっそりした指を絡め	날씬한 손가락을 걸고	fix	rewrites
-cx:mimetic-adnominal:210	小柄でほっそりした体躯。	몸집이 작아 날씬한 체구.	fix	rewrites
-cx:mimetic-adnominal:210	白くなめらかなほっそりした手。	희고 매끈매끈한 날씬한 손.	fix	rewrites
-cx:mimetic-adnominal:210	ほっそりした、ぼくの大好きな人。	!rule:cx:mimetic-adnominal:210	keep	rewrites
-cx:mimetic-adnominal:220	すらりとした足と	늘씬한 다리와	fix	rewrites
-cx:mimetic-adnominal:220	すらりとした長身	늘씬한 장신	fix	rewrites
-cx:mimetic-adnominal:220	すらりとした体型に	늘씬한 체형에	fix	rewrites
-cx:mimetic-adnominal:220	すらりとした身体つき	늘씬한 몸집	fix	rewrites
-cx:mimetic-adnominal:220	ランタンはそのすらりとした脚が好きだったから	랜턴은 그 늘씬한 다리를 좋아했으니까	fix	rewrites
-cx:mimetic-adnominal:220	すらりとした。	!rule:cx:mimetic-adnominal:220	keep	rewrites
-cx:mimetic-adnominal:230	体格ががっしりとしているスポーツマン。	체격이 탄탄한 스포츠맨.	fix	rewrites
-cx:mimetic-adnominal:230	がっしりとしている。	!rule:cx:mimetic-adnominal:230	keep	rewrites
-cx:mimetic-adnominal:240	ぐったりとしている印象だった。	축 늘어진 인상이었다.	fix	rewrites
-cx:mimetic-adnominal:240	まだぐったりとしている美月ちゃん	아직 축 늘어진 미즈키짱	fix	rewrites
-cx:mimetic-adnominal:240	ぐったりとしているノエルの頭を撫でながら	축 늘어진 노엘 머리를 쓰다듬으면서	fix	rewrites
-cx:mimetic-adnominal:240	疲労からぐったりとしている相楽。	피로로부터 축 늘어진 사가라.	fix	rewrites
-cx:mimetic-adnominal:240	村人たちみんなお疲れでぐったりしている。	!rule:cx:mimetic-adnominal:240	keep	rewrites
-cx:mimetic-adnominal:240	ぐったりとしている隙に逃げた。	!rule:cx:mimetic-adnominal:240	keep	rewrites
-cx:mimetic-adnominal:250	ぐったりとした少女の顔	축 늘어진 소녀의 얼굴	fix	rewrites
-cx:mimetic-adnominal:250	ぐったりした表情の徹。	축 늘어진 표정의 철.	fix	rewrites
-cx:mimetic-adnominal:250	ぐったりとした状態になっている。	축 늘어진 상태가 되어 있다.	fix	rewrites
-cx:mimetic-adnominal:250	ぐったりしたエリックが	축 늘어진 에릭이	fix	rewrites
-cx:mimetic-adnominal:250	ぐったりとしたまま動かない。	축 늘어진 채로 움직이지 않는다.	fix	rewrites
-cx:mimetic-adnominal:250	ぐったりとした。	!rule:cx:mimetic-adnominal:250	keep	rewrites
-cx:mimetic-adnominal:260	あっさりした薄味だけど	담백한 싱거운 맛이지만	fix	rewrites
-cx:mimetic-adnominal:260	あっさりしたタリーの答えに	담백한 타레의 대답에	fix	rewrites
-cx:mimetic-adnominal:260	あっさりしたスープも悪くない	담백한 스프도 나쁘지 않다	fix	rewrites
-cx:mimetic-adnominal:260	あっさりした口調で言っているが	담백한 어조로 말하지만	fix	rewrites
-cx:mimetic-adnominal:260	味噌はこってりしていて、醤油はあっさりしている。	!rule:cx:mimetic-adnominal:260	keep	rewrites
-cx:mimetic-adnominal:260	交渉はあっさりした。	!rule:cx:mimetic-adnominal:260	keep	rewrites
-cx:mimetic-adnominal:270	彼の反応はあっさりしたものだった。	그의 반응은 담백한 것이었다.	fix	rewrites
-cx:mimetic-adnominal:270	返事はあっさりしたもの。	대답은 담백한 것.	fix	rewrites
-cx:mimetic-adnominal:270	しかしそれはとてもあっさりしたものだった。	하지만 그것은 무척 담백한 것이었다.	fix	rewrites
-cx:mimetic-adnominal:270	あっさりしたものの、	!rule:cx:mimetic-adnominal:270	keep	rewrites
-cx:mimetic-adnominal:280	ぼんやりした灯りに	흐릿한 등불에	fix	rewrites
-cx:mimetic-adnominal:280	ぼんやりした記憶の片隅に	흐릿한 기억 한쪽 구석에	fix	rewrites
-cx:mimetic-adnominal:280	そのぼんやりとした視界の中に	그 흐릿한 시야 안에	fix	rewrites
-cx:mimetic-adnominal:280	街灯とビルのぼんやりした灯りに照らされて	가로등과 빌딩의 흐릿한 등불에 비추어져	fix	rewrites
-cx:mimetic-adnominal:280	それはぼんやりしている映像に過ぎない。	그것은 흐릿한 영상에 지나지 않는다.	fix	rewrites
-cx:mimetic-adnominal:280	ぼんやりした頭で見上げる。	!rule:cx:mimetic-adnominal:280	keep	rewrites
-cx:mimetic-adnominal:290	ぼんやりした不安がある。	막연한 불안이 있다.	fix	rewrites
-cx:mimetic-adnominal:290	ぼんやりした話を繋いでいた。	막연한 이야기를 연결하고 있었다.	fix	rewrites
-cx:mimetic-adnominal:290	ぼんやりした顔で話を聞いた。	!rule:cx:mimetic-adnominal:290	keep	rewrites
-cx:mimetic-adnominal:300	ぼんやりした頭で見上げる。	멍한 머리로 올려다본다.	fix	rewrites
-cx:mimetic-adnominal:300	まだぼんやりとしているロイは	아직 멍한 로이는	fix	rewrites
-cx:mimetic-adnominal:300	ぼんやりした顔にはうっすらと涙の跡。	멍한 얼굴에는 희미하게 눈물의 자취.	fix	rewrites
-cx:mimetic-adnominal:300	頭がぼんやりしている。	!rule:cx:mimetic-adnominal:300	keep	rewrites
-cx:mimetic-adnominal:300	窓の外を見てぼんやりしていると	!rule:cx:mimetic-adnominal:300	keep	rewrites
-cx:mimetic-adnominal:310	がらんとした家は	텅 빈 집은	fix	rewrites
-cx:mimetic-adnominal:310	がらんとした広場に	텅 빈 광장에	fix	rewrites
-cx:mimetic-adnominal:310	がらんとした馬車の中で	텅 빈 마차 중에서	fix	rewrites
-cx:mimetic-adnominal:310	がらんとした部室の中に入って来る女性を見る。	텅 빈 동아리방 안에 들어오는 여성을 본다.	fix	rewrites
-cx:mimetic-adnominal:310	中に入るとがらんとした部屋しかない。	안에 들어오면 텅 빈 방밖에 없다.	fix	rewrites
-cx:mimetic-adnominal:310	廊下は誰もおらずがらんとしている。	!rule:cx:mimetic-adnominal:310	keep	rewrites
-cx:mimetic-adnominal:320	ならふんわりした服を選ぶとしようか	그렇다면 폭신한 옷을 선택한다고 할까	fix	rewrites
-cx:mimetic-adnominal:320	昔と同じふんわりした笑顔にもどって	옛날과 같은 폭신한 웃는 얼굴에 돌아와	fix	rewrites
-cx:mimetic-adnominal:320	少しふんわりした生地だ。	조금 폭신한 옷감이다.	fix	rewrites
-cx:mimetic-adnominal:320	手を振ってくるふんわりした桃色の髪の女の人	손을 흔들어 오는 폭신한 복숭아색 머리카락의 여자	fix	rewrites
-cx:mimetic-adnominal:320	同時にふんわりしている。	!rule:cx:mimetic-adnominal:320	keep	rewrites
-cx:mimetic-adnominal:320	少しふんわりした。	!rule:cx:mimetic-adnominal:320	keep	rewrites
-cx:mimetic-adnominal:330	暖かそうなふんわりとした白のマフラー。	따뜻할 것 같은 폭신한 흰색의 머플러.	fix	rewrites
-cx:mimetic-adnominal:330	すぐにまた元のふんわりとした様子に戻った。	곧바로 또 원래의 폭신한 모습으로 돌아갔다.	fix	rewrites
-cx:mimetic-adnominal:330	少女はその長くふんわりとした金色の髪を揺らしながら	소녀는 그 길고 폭신한 금빛 머리카락을 흔들면서	fix	rewrites
-cx:mimetic-adnominal:330	雰囲気がふんわりとした。	!rule:cx:mimetic-adnominal:330	keep	rewrites
-cx:mimetic-adnominal:340	ぼんやりとした光が見えた。	흐릿한 빛이 보였다.	fix	rewrites
-cx:mimetic-adnominal:340	それはぼんやりとした輪郭で	그것은 흐릿한 윤곽으로	fix	rewrites
-cx:mimetic-adnominal:340	ぼんやりとした記憶では、無事だった。	흐릿한 기억에서는, 무사했다.	fix	rewrites
-cx:mimetic-adnominal:340	ぼんやりとした光を放っている。	흐릿한 빛을 발하고 있다.	fix	rewrites
-cx:mimetic-adnominal:340	ぼんやりとした顔で頷いた。	!rule:cx:mimetic-adnominal:340	keep	rewrites
-cx:mimetic-adnominal:350	すっきりした顔で	개운한 얼굴로	fix	rewrites
-cx:mimetic-adnominal:350	すっきりした声。	개운한 목소리.	fix	rewrites
-cx:mimetic-adnominal:350	しんみりとした話はここまでにして	숙연한 이야기는 여기까지로 해	fix	rewrites
-cx:mimetic-adnominal:350	しんみりとした空気を作る。	숙연한 공기를 만든다.	fix	rewrites
-cx:mimetic-adnominal:350	いつもしっとりとした口調で	언제나 촉촉한 어조로	fix	rewrites
-cx:mimetic-adnominal:350	濡れたようにしっとりとした肌の感触。	젖은 것처럼 촉촉한 피부의 감촉.	fix	rewrites
-cx:mimetic-adnominal:350	このずっしりとした重み	이 묵직한 무게	fix	rewrites
-cx:mimetic-adnominal:350	あっけらかんとした発言に驚きを隠せない一同。	태연한 발언에 놀라움을 숨길 수 없는 일동.	fix	rewrites
-cx:mimetic-adnominal:350	くっきりとした指の跡	선명한 손가락의 자취	fix	rewrites
-cx:mimetic-adnominal:350	少しきょとんとした顔をしていた	조금 어리둥절한 얼굴을 하고 있었다	fix	rewrites
-cx:mimetic-adnominal:350	少し冷んやりした感触が、心地良い。	조금 서늘한 감촉이, 기분 좋다.	fix	rewrites
-cx:mimetic-adnominal:350	きっぱりした人だなあ。	단호한 사람이구나.	fix	rewrites
-cx:mimetic-adnominal:350	二人でなんとなくしんみりとした。	!rule:cx:mimetic-adnominal:350	keep	rewrites
-cx:mimetic-adnominal:350	とてもゆっくりとした動きで	!rule:cx:mimetic-adnominal:350	keep	rewrites
-cx:mimetic-adnominal:350	後ろでじっとしている獣を見遣る。	!rule:cx:mimetic-adnominal:350	keep	rewrites
-cx:mimetic-adnominal:350	口をすすいでようやくすっきりした。	!rule:cx:mimetic-adnominal:350	keep	rewrites
-cx:mimetic-adnominal:350	すっきりしたいからです。	!rule:cx:mimetic-adnominal:350	keep	rewrites
-cx:mimetic-adnominal:360	きっぱりとした口調。	단호한 어조.	fix	rewrites
-cx:mimetic-adnominal:360	そのきっぱりとした口ぶり	그 단호한 말투	fix	rewrites
-cx:mimetic-adnominal:360	きっぱりとしたアランの答えに	단호한 알란의 대답에	fix	rewrites
-cx:mimetic-adnominal:360	彼女はきっぱりとした口調で言った。	그녀는 단호한 어조로 말했다.	fix	rewrites
-cx:mimetic-adnominal:360	シャーロットのきっぱりとした物言いに	샬럿의 단호한 말에	fix	rewrites
-cx:mimetic-adnominal:360	きっぱりとした。	!rule:cx:mimetic-adnominal:360	keep	rewrites
-cx:mimetic-adnominal:370	少し長めでふんわりとしている髪。	조금 긴 편이어서 폭신한 머리카락.	fix	rewrites
-cx:mimetic-adnominal:370	しゅんとしているカイルの肩に手を載せ	시무룩한 카일의 어깨에 손을 싣고	fix	rewrites
-cx:mimetic-adnominal:370	ひっそりとしている姿に惹かれ	조용한 모습에 매료되고	fix	rewrites
-cx:mimetic-adnominal:370	木を見上げてぼんやりとしているミユキに	나무를 올려다봐 멍한 미유키에	fix	rewrites
-cx:mimetic-adnominal:370	彼女のふんわりとしている髪を撫でた。	그녀의 폭신한 머리카락을 쓰다듬었다.	fix	rewrites
-cx:mimetic-adnominal:370	中はふんわりとしている。	!rule:cx:mimetic-adnominal:370	keep	rewrites
-cx:mimetic-adnominal:370	森はひっそりとしていた村だ。	!rule:cx:mimetic-adnominal:370	keep	rewrites
+cx:mimetic-adnominal:20	しっかりとした体格。	다부진 체격.	fix	rewrites
+cx:mimetic-adnominal:20	しっかりとした体躯で	다부진 체구로	fix	rewrites
+cx:mimetic-adnominal:20	体格がしっかりとした。	!rule:cx:mimetic-adnominal:20	keep	rewrites
+cx:mimetic-adnominal:30	しっかりとした足取りで歩いていく。	힘찬 발걸음으로 걸어간다.	fix	rewrites
+cx:mimetic-adnominal:30	足取りはしっかりとした。	!rule:cx:mimetic-adnominal:30	keep	rewrites
+cx:mimetic-adnominal:40	しっかりとした信頼がある。	굳건한 신뢰가 있다.	fix	rewrites
+cx:mimetic-adnominal:40	信頼をしっかりとした。	!rule:cx:mimetic-adnominal:40	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとした作りだ。	제대로 된 구조다.	fix	rewrites
+cx:mimetic-adnominal:50	しっかりとした物を口に運んでいないため	제대로 된 것을 입으로 가져가지 않기 때문에	fix	rewrites
+cx:mimetic-adnominal:50	しっかりとした目つきは	제대로 된 눈초리는	fix	rewrites
+cx:mimetic-adnominal:50	しっかりとした答えは出せません。	제대로 된 대답은 낼 수 없습니다.	fix	rewrites
+cx:mimetic-adnominal:50	しっかりとした説明が無いのは	제대로 된 설명이 없는 것은	fix	rewrites
+cx:mimetic-adnominal:50	政策がしっかりしているネトゲは物価が安定しています。	정책이 제대로 된 온라인 게임은 물가가 안정되어 있습니다.	fix	rewrites
+cx:mimetic-adnominal:50	しっかりしていた人だ。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとした、いい人だ。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとした。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとしたい。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとしたら許す。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとした方がいい。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	しっかりとして。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:50	教育もしっかりした。	!rule:cx:mimetic-adnominal:50	keep	rewrites
+cx:mimetic-adnominal:60	しっかりとしたものを食べたい。	제대로 된 것을 먹고 싶다.	fix	rewrites
+cx:mimetic-adnominal:60	歳の割にはしっかりしているもの」	!rule:cx:mimetic-adnominal:60	keep	rewrites
+cx:mimetic-adnominal:70	きちんとした報酬を決めるために	제대로 된 보수를 결정하기 위해	fix	rewrites
+cx:mimetic-adnominal:70	きちんとした性格だったんでしょうね。	제대로 된 성격이었던 것이군요.	fix	rewrites
+cx:mimetic-adnominal:70	きちんとした生活を送っているのだ。	제대로 된 생활을 하고 있다.	fix	rewrites
+cx:mimetic-adnominal:70	きちんとした造りだな	제대로 된 구조네	fix	rewrites
+cx:mimetic-adnominal:70	それ故久し振りのきちんとしたデートだった。	그러므로 오래간만의 제대로 된 데이트였다.	fix	rewrites
+cx:mimetic-adnominal:70	勝利にはきちんとした理由が必要です。	승리에는 제대로 된 이유가 필요합니다.	fix	rewrites
+cx:mimetic-adnominal:70	きちんとしたら日本人	!rule:cx:mimetic-adnominal:70	keep	rewrites
+cx:mimetic-adnominal:70	スキンケアはきちんとした方が良い。	!rule:cx:mimetic-adnominal:70	keep	rewrites
+cx:mimetic-adnominal:70	宿題をきちんとした子は帰っていい。	!rule:cx:mimetic-adnominal:70	keep	rewrites
+cx:mimetic-adnominal:70	掃除をすぐにちゃんとした人。	!rule:cx:mimetic-adnominal:70	keep	rewrites
+cx:mimetic-adnominal:80	きちんとしたものを書こうとした時	제대로 된 것을 쓰려고 했을 때	fix	rewrites
+cx:mimetic-adnominal:80	きちんとしたものの、	!rule:cx:mimetic-adnominal:80	keep	rewrites
+cx:mimetic-adnominal:80	ちゃんとしたらしい。	!rule:cx:mimetic-adnominal:80	keep	rewrites
+cx:mimetic-adnominal:90	ちゃんとしている人だ。	제대로 된 사람이다.	fix	rewrites
+cx:mimetic-adnominal:90	最初よりちゃんとしているし	!rule:cx:mimetic-adnominal:90	keep	rewrites
+cx:mimetic-adnominal:100	「Ｚ世代」のちゃんとした定義	「Z세대」의 제대로 된 정의	fix	rewrites
+cx:mimetic-adnominal:100	ことわざのちゃんとした意味を教える。	속담의 제대로 된 의미를 가르친다.	fix	rewrites
+cx:mimetic-adnominal:100	清潔な部屋のちゃんとしたベットが嬉しい。	청결한 방의 제대로 된 침대가 기쁘다.	fix	rewrites
+cx:mimetic-adnominal:100	君のちゃんとした所を見せて。	!rule:cx:mimetic-adnominal:100	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとしたものを	제대로 된 것을	fix	rewrites
+cx:mimetic-adnominal:110	ちゃんとした文明が	제대로 된 문명이	fix	rewrites
+cx:mimetic-adnominal:110	ちゃんとした服を着たい。	제대로 된 옷을 입고 싶다.	fix	rewrites
+cx:mimetic-adnominal:110	ちゃんとした格好で	제대로 된 모습으로	fix	rewrites
+cx:mimetic-adnominal:110	ちゃんとした理由があるの	제대로 된 이유가 있어	fix	rewrites
+cx:mimetic-adnominal:110	屋台なのにちゃんとした料理が食える。	포장마차인데 제대로 된 요리를 먹을 수 있다.	fix	rewrites
+cx:mimetic-adnominal:110	次はちゃんとしたゲームにしよう。	다음은 제대로 된 게임으로 하자.	fix	rewrites
+cx:mimetic-adnominal:110	ちゃんとした、いい人だ。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとしたい。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとしたことがない。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとしたようだ。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとしたらしい。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとしたら許す。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとした後で食べよう。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	ちゃんとした次第です。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	宿題をちゃんとした子は帰っていい。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:110	掃除をすぐにちゃんとした人。	!rule:cx:mimetic-adnominal:110	keep	rewrites
+cx:mimetic-adnominal:120	きっちりした性格だから	빈틈없는 성격이니까	fix	rewrites
+cx:mimetic-adnominal:120	きっちりしているひとだ。	빈틈없는 사람이다.	fix	rewrites
+cx:mimetic-adnominal:120	きっちりとしたスーツ姿で	빈틈없는 정장 차림으로	fix	rewrites
+cx:mimetic-adnominal:120	きっちりとした恰好をしていたのだろう。	빈틈없는 차림을 하고 있었을 것이다.	fix	rewrites
+cx:mimetic-adnominal:120	しかし普段のきっちりとした雰囲気はなく	하지만 평소의 빈틈없는 분위기는 없고	fix	rewrites
+cx:mimetic-adnominal:120	勤務時間はきっちりしているし	!rule:cx:mimetic-adnominal:120	keep	rewrites
+cx:mimetic-adnominal:120	番組の下準備をきっちりしたのに	!rule:cx:mimetic-adnominal:120	keep	rewrites
+cx:mimetic-adnominal:130	そんなにきっちりしたものじゃなくて	그렇게 빈틈없는 것이 아니고	fix	rewrites
+cx:mimetic-adnominal:130	皺ひとつないきっちりしたものだ。	주름 하나 없는 빈틈없는 것이다.	fix	rewrites
+cx:mimetic-adnominal:130	準備をきっちりしたものの、	!rule:cx:mimetic-adnominal:130	keep	rewrites
+cx:mimetic-adnominal:140	かなりはっきりとした言葉でしゃべった。	꽤 뚜렷한 말로 말했다.	fix	rewrites
+cx:mimetic-adnominal:140	そう思えるほどはっきりとした感覚だ。	그렇게 생각할 수 있는 만큼 뚜렷한 감각이다.	fix	rewrites
+cx:mimetic-adnominal:140	はっきりとした差異ではないのだが	뚜렷한 차이는 아닌데	fix	rewrites
+cx:mimetic-adnominal:140	はっきりとした拒絶。	뚜렷한 거절.	fix	rewrites
+cx:mimetic-adnominal:140	はっきりとした根拠も確信もない。	뚜렷한 근거도 확신도 없다.	fix	rewrites
+cx:mimetic-adnominal:140	はっきりとした輪郭が見えた。	뚜렷한 윤곽이 보였다.	fix	rewrites
+cx:mimetic-adnominal:140	はっきりとしている声だ。	뚜렷한 목소리다.	fix	rewrites
+cx:mimetic-adnominal:140	彼女にははっきりとした確証がない。	그녀에게는 뚜렷한 확증이 없다.	fix	rewrites
+cx:mimetic-adnominal:140	はっきりとした時に言う。	!rule:cx:mimetic-adnominal:140	keep	rewrites
+cx:mimetic-adnominal:140	理由ははっきりしている。	!rule:cx:mimetic-adnominal:140	keep	rewrites
+cx:mimetic-adnominal:140	表と裏がはっきりしている	!rule:cx:mimetic-adnominal:140	keep	rewrites
+cx:mimetic-adnominal:150	意識もはっきりとしたものへと変わる。	의식도 뚜렷한 것으로 바뀐다.	fix	rewrites
+cx:mimetic-adnominal:150	はっきりとしたものの、	!rule:cx:mimetic-adnominal:150	keep	rewrites
+cx:mimetic-adnominal:160	のんびりとしたスローライフを送りたい。	느긋한 슬로 라이프를 보내고 싶다.	fix	rewrites
+cx:mimetic-adnominal:160	のんびりとした口調で	느긋한 어조로	fix	rewrites
+cx:mimetic-adnominal:160	のんびりとした声。	느긋한 목소리.	fix	rewrites
+cx:mimetic-adnominal:160	のんびりとした時間。	느긋한 시간.	fix	rewrites
+cx:mimetic-adnominal:160	のんびりとした笑顔であった。	느긋한 웃는 얼굴이었다.	fix	rewrites
+cx:mimetic-adnominal:160	のんびりとした雰囲気の街中に	느긋한 분위기의 거리에	fix	rewrites
+cx:mimetic-adnominal:160	のんびりとしたい。	!rule:cx:mimetic-adnominal:160	keep	rewrites
+cx:mimetic-adnominal:160	二人でのんびりとした。	!rule:cx:mimetic-adnominal:160	keep	rewrites
+cx:mimetic-adnominal:170	旅はのんびりとしたものだった。	여행은 느긋한 것이었다.	fix	rewrites
+cx:mimetic-adnominal:170	のんびりとしたものの、	!rule:cx:mimetic-adnominal:170	keep	rewrites
+cx:mimetic-adnominal:180	のんびりしているミアに	느긋한 미아에	fix	rewrites
+cx:mimetic-adnominal:180	のんびりしている人だ。	느긋한 사람이다.	fix	rewrites
+cx:mimetic-adnominal:180	こんなところでのんびりしている場合じゃない。	!rule:cx:mimetic-adnominal:180	keep	rewrites
+cx:mimetic-adnominal:180	そんなのんびりしている時間はない。	!rule:cx:mimetic-adnominal:180	keep	rewrites
+cx:mimetic-adnominal:180	のんびりしている余裕はなさそうです	!rule:cx:mimetic-adnominal:180	keep	rewrites
+cx:mimetic-adnominal:180	ホテルに戻ってのんびりしていると電話が来た。	!rule:cx:mimetic-adnominal:180	keep	rewrites
+cx:mimetic-adnominal:180	リビングでのんびりしているレナータ。	!rule:cx:mimetic-adnominal:180	keep	rewrites
+cx:mimetic-adnominal:190	カタツムリたちののんびりした姿を見るのもいい。	달팽이들의 느긋한 모습을 보는 것도 좋다.	fix	rewrites
+cx:mimetic-adnominal:190	中世人ののんびりした戦術など話になるか	중세인의 느긋한 전술 등 이야기가 될까	fix	rewrites
+cx:mimetic-adnominal:190	君ののんびりしたい気持ち。	!rule:cx:mimetic-adnominal:190	keep	rewrites
+cx:mimetic-adnominal:200	こののんびりした反応、さすがはお姫様だなぁ。	이 느긋한 반응, 역시 공주님이구나.	fix	rewrites
+cx:mimetic-adnominal:200	のんびりしたものだ。	느긋한 것이다.	fix	rewrites
+cx:mimetic-adnominal:200	のんびりした気持ちで	느긋한 기분으로	fix	rewrites
+cx:mimetic-adnominal:200	アリスは対照的にのんびりした声で答えた。	앨리스는 대조적으로 느긋한 목소리로 답했다.	fix	rewrites
+cx:mimetic-adnominal:200	旅の様子ものんびりしたものである。	여행의 모습도 느긋한 것이다.	fix	rewrites
+cx:mimetic-adnominal:200	のんびりしたい。	!rule:cx:mimetic-adnominal:200	keep	rewrites
+cx:mimetic-adnominal:200	のんびりしたらしい。	!rule:cx:mimetic-adnominal:200	keep	rewrites
+cx:mimetic-adnominal:200	休日はのんびりした。	!rule:cx:mimetic-adnominal:200	keep	rewrites
+cx:mimetic-adnominal:210	中年太りのでっぷりとしたお腹	중년태의 뚱뚱한 배	fix	rewrites
+cx:mimetic-adnominal:210	先のこぢんまりしたアパートを見て	앞의 아담한 아파트를 봐	fix	rewrites
+cx:mimetic-adnominal:210	正四方形のこぢんまりした部屋だった。	정사방형의 아담한 방이었다.	fix	rewrites
+cx:mimetic-adnominal:210	男のでっぷりとした太ももが	남자의 뚱뚱한 허벅지가	fix	rewrites
+cx:mimetic-adnominal:210	農耕用のずんぐりとした馬にまたがった。	농경용의 땅딸막한 말에 올라탔다.	fix	rewrites
+cx:mimetic-adnominal:210	こぢんまりとしているけれど	!rule:cx:mimetic-adnominal:210	keep	rewrites
+cx:mimetic-adnominal:210	工房自体はこぢんまりとしているが	!rule:cx:mimetic-adnominal:210	keep	rewrites
+cx:mimetic-adnominal:220	そのほっそりとした肩を左腕で抱きながら	그 가느다란 어깨를 왼팔로 안으면서	fix	rewrites
+cx:mimetic-adnominal:220	ほっそりとした手で	가느다란 손으로	fix	rewrites
+cx:mimetic-adnominal:220	頭を上げるとマダムのほっそりとした足首が見えた。	머리를 올리면 마담의 가느다란 발목이 보였다.	fix	rewrites
+cx:mimetic-adnominal:220	指がほっそりとしている。	!rule:cx:mimetic-adnominal:220	keep	rewrites
+cx:mimetic-adnominal:230	ユイナのほっそりとした体	유이나의 날씬한 몸	fix	rewrites
+cx:mimetic-adnominal:230	長くほっそりとした脚だ。	길고 날씬한 다리다.	fix	rewrites
+cx:mimetic-adnominal:230	ほっそりとしていた体。	!rule:cx:mimetic-adnominal:230	keep	rewrites
+cx:mimetic-adnominal:230	ほっそりとしているから。	!rule:cx:mimetic-adnominal:230	keep	rewrites
+cx:mimetic-adnominal:240	スライム娘のほっそりした指が	슬라임 소녀의 가느다란 손가락이	fix	rewrites
+cx:mimetic-adnominal:240	ランのほっそりした首筋から芳香が立ち昇ってきた。	런의 가느다란 목덜미에서 방향이 피어 왔다.	fix	rewrites
+cx:mimetic-adnominal:240	彼のほっそりした、白い手。	!rule:cx:mimetic-adnominal:240	keep	rewrites
+cx:mimetic-adnominal:250	ほっそりした指を絡め	가느다란 손가락을 걸고	fix	rewrites
+cx:mimetic-adnominal:250	白くなめらかなほっそりした手。	희고 매끈매끈한 가느다란 손.	fix	rewrites
+cx:mimetic-adnominal:250	ほっそりした、白い指。	!rule:cx:mimetic-adnominal:250	keep	rewrites
+cx:mimetic-adnominal:260	彼女のほっそりした体を抱き寄せた。	그녀의 날씬한 몸을 껴안았다.	fix	rewrites
+cx:mimetic-adnominal:260	彼のほっそりした、白い体。	!rule:cx:mimetic-adnominal:260	keep	rewrites
+cx:mimetic-adnominal:260	彼のほっそりした、白い手。	!rule:cx:mimetic-adnominal:260	keep	rewrites
+cx:mimetic-adnominal:270	小柄でほっそりした体躯。	몸집이 작아 날씬한 체구.	fix	rewrites
+cx:mimetic-adnominal:270	ほっそりした、ぼくの大好きな人。	!rule:cx:mimetic-adnominal:270	keep	rewrites
+cx:mimetic-adnominal:270	ほっそりした。	!rule:cx:mimetic-adnominal:270	keep	rewrites
+cx:mimetic-adnominal:280	すらりとした体型に	늘씬한 체형에	fix	rewrites
+cx:mimetic-adnominal:280	すらりとした足と	늘씬한 다리와	fix	rewrites
+cx:mimetic-adnominal:280	すらりとした身体つき	늘씬한 몸집	fix	rewrites
+cx:mimetic-adnominal:280	すらりとした長身	늘씬한 장신	fix	rewrites
+cx:mimetic-adnominal:280	ランタンはそのすらりとした脚が好きだったから	랜턴은 그 늘씬한 다리를 좋아했으니까	fix	rewrites
+cx:mimetic-adnominal:280	すらりとした。	!rule:cx:mimetic-adnominal:280	keep	rewrites
+cx:mimetic-adnominal:290	体格ががっしりとしているスポーツマン。	체격이 탄탄한 스포츠맨.	fix	rewrites
+cx:mimetic-adnominal:290	がっしりとしている。	!rule:cx:mimetic-adnominal:290	keep	rewrites
+cx:mimetic-adnominal:300	ぐったりとしているノエルの頭を撫でながら	축 늘어진 노엘 머리를 쓰다듬으면서	fix	rewrites
+cx:mimetic-adnominal:300	ぐったりとしている印象だった。	축 늘어진 인상이었다.	fix	rewrites
+cx:mimetic-adnominal:300	まだぐったりとしている美月ちゃん	아직 축 늘어진 미즈키짱	fix	rewrites
+cx:mimetic-adnominal:300	疲労からぐったりとしている相楽。	피로로부터 축 늘어진 사가라.	fix	rewrites
+cx:mimetic-adnominal:300	ぐったりとしている隙に逃げた。	!rule:cx:mimetic-adnominal:300	keep	rewrites
+cx:mimetic-adnominal:300	村人たちみんなお疲れでぐったりしている。	!rule:cx:mimetic-adnominal:300	keep	rewrites
+cx:mimetic-adnominal:310	ぐったりしたエリックが	축 늘어진 에릭이	fix	rewrites
+cx:mimetic-adnominal:310	ぐったりした表情の徹。	축 늘어진 표정의 철.	fix	rewrites
+cx:mimetic-adnominal:310	ぐったりとしたまま動かない。	축 늘어진 채로 움직이지 않는다.	fix	rewrites
+cx:mimetic-adnominal:310	ぐったりとした少女の顔	축 늘어진 소녀의 얼굴	fix	rewrites
+cx:mimetic-adnominal:310	ぐったりとした状態になっている。	축 늘어진 상태가 되어 있다.	fix	rewrites
+cx:mimetic-adnominal:310	ぐったりとした。	!rule:cx:mimetic-adnominal:310	keep	rewrites
+cx:mimetic-adnominal:320	あっさりした返事が返ってきた。	간단한 대답이 되돌아 왔다.	fix	rewrites
+cx:mimetic-adnominal:320	あっさりした。	!rule:cx:mimetic-adnominal:320	keep	rewrites
+cx:mimetic-adnominal:330	あっさりしたスープも悪くない	담백한 스프도 나쁘지 않다	fix	rewrites
+cx:mimetic-adnominal:330	あっさりした口調で言っているが	담백한 어조로 말하지만	fix	rewrites
+cx:mimetic-adnominal:330	あっさりした薄味だけど	담백한 싱거운 맛이지만	fix	rewrites
+cx:mimetic-adnominal:330	交渉はあっさりした。	!rule:cx:mimetic-adnominal:330	keep	rewrites
+cx:mimetic-adnominal:330	味噌はこってりしていて、醤油はあっさりしている。	!rule:cx:mimetic-adnominal:330	keep	rewrites
+cx:mimetic-adnominal:340	しかしそれはとてもあっさりしたものだった。	하지만 그것은 무척 간단한 것이었다.	fix	rewrites
+cx:mimetic-adnominal:340	彼の反応はあっさりしたものだった。	그의 반응은 간단한 것이었다.	fix	rewrites
+cx:mimetic-adnominal:340	返事はあっさりしたもの。	대답은 간단한 것.	fix	rewrites
+cx:mimetic-adnominal:340	あっさりしたものの、	!rule:cx:mimetic-adnominal:340	keep	rewrites
+cx:mimetic-adnominal:350	そのぼんやりとした視界の中に	그 흐릿한 시야 안에	fix	rewrites
+cx:mimetic-adnominal:350	それはぼんやりしている映像に過ぎない。	그것은 흐릿한 영상에 지나지 않는다.	fix	rewrites
+cx:mimetic-adnominal:350	ぼんやりした灯りに	흐릿한 등불에	fix	rewrites
+cx:mimetic-adnominal:350	ぼんやりした記憶の片隅に	흐릿한 기억 한쪽 구석에	fix	rewrites
+cx:mimetic-adnominal:350	街灯とビルのぼんやりした灯りに照らされて	가로등과 빌딩의 흐릿한 등불에 비추어져	fix	rewrites
+cx:mimetic-adnominal:350	ぼんやりした頭で見上げる。	!rule:cx:mimetic-adnominal:350	keep	rewrites
+cx:mimetic-adnominal:360	ぼんやりした不安がある。	막연한 불안이 있다.	fix	rewrites
+cx:mimetic-adnominal:360	ぼんやりした話を繋いでいた。	막연한 이야기를 연결하고 있었다.	fix	rewrites
+cx:mimetic-adnominal:360	ぼんやりした顔で話を聞いた。	!rule:cx:mimetic-adnominal:360	keep	rewrites
+cx:mimetic-adnominal:370	ぼんやりした頭で見上げる。	멍한 머리로 올려다본다.	fix	rewrites
+cx:mimetic-adnominal:370	ぼんやりした顔にはうっすらと涙の跡。	멍한 얼굴에는 희미하게 눈물의 자취.	fix	rewrites
+cx:mimetic-adnominal:370	まだぼんやりとしているロイは	아직 멍한 로이는	fix	rewrites
+cx:mimetic-adnominal:370	窓の外を見てぼんやりしていると	!rule:cx:mimetic-adnominal:370	keep	rewrites
+cx:mimetic-adnominal:370	頭がぼんやりしている。	!rule:cx:mimetic-adnominal:370	keep	rewrites
+cx:mimetic-adnominal:380	がらんとした家は	텅 빈 집은	fix	rewrites
+cx:mimetic-adnominal:380	がらんとした広場に	텅 빈 광장에	fix	rewrites
+cx:mimetic-adnominal:380	がらんとした部室の中に入って来る女性を見る。	텅 빈 동아리방 안에 들어오는 여성을 본다.	fix	rewrites
+cx:mimetic-adnominal:380	がらんとした馬車の中で	텅 빈 마차 중에서	fix	rewrites
+cx:mimetic-adnominal:380	中に入るとがらんとした部屋しかない。	안에 들어오면 텅 빈 방밖에 없다.	fix	rewrites
+cx:mimetic-adnominal:380	廊下は誰もおらずがらんとしている。	!rule:cx:mimetic-adnominal:380	keep	rewrites
+cx:mimetic-adnominal:390	ならふんわりした服を選ぶとしようか	그렇다면 부드러운 옷을 선택한다고 할까	fix	rewrites
+cx:mimetic-adnominal:390	少しふんわりした生地だ。	조금 부드러운 옷감이다.	fix	rewrites
+cx:mimetic-adnominal:390	手を振ってくるふんわりした桃色の髪の女の人	손을 흔들어 오는 부드러운 복숭아색 머리카락의 여자	fix	rewrites
+cx:mimetic-adnominal:390	昔と同じふんわりした笑顔にもどって	옛날과 같은 부드러운 웃는 얼굴에 돌아와	fix	rewrites
+cx:mimetic-adnominal:390	同時にふんわりしている。	!rule:cx:mimetic-adnominal:390	keep	rewrites
+cx:mimetic-adnominal:390	少しふんわりした。	!rule:cx:mimetic-adnominal:390	keep	rewrites
+cx:mimetic-adnominal:400	すぐにまた元のふんわりとした様子に戻った。	곧바로 또 원래의 부드러운 모습으로 돌아갔다.	fix	rewrites
+cx:mimetic-adnominal:400	少女はその長くふんわりとした金色の髪を揺らしながら	소녀는 그 길고 부드러운 금빛 머리카락을 흔들면서	fix	rewrites
+cx:mimetic-adnominal:400	暖かそうなふんわりとした白のマフラー。	따뜻할 것 같은 부드러운 흰색의 머플러.	fix	rewrites
+cx:mimetic-adnominal:400	雰囲気がふんわりとした。	!rule:cx:mimetic-adnominal:400	keep	rewrites
+cx:mimetic-adnominal:410	それはぼんやりとした輪郭で	그것은 흐릿한 윤곽으로	fix	rewrites
+cx:mimetic-adnominal:410	ぼんやりとした光が見えた。	흐릿한 빛이 보였다.	fix	rewrites
+cx:mimetic-adnominal:410	ぼんやりとした光を放っている。	흐릿한 빛을 발하고 있다.	fix	rewrites
+cx:mimetic-adnominal:410	ぼんやりとした記憶では、無事だった。	흐릿한 기억에서는, 무사했다.	fix	rewrites
+cx:mimetic-adnominal:410	ぼんやりとした顔で頷いた。	!rule:cx:mimetic-adnominal:410	keep	rewrites
+cx:mimetic-adnominal:420	あっけらかんとした発言に驚きを隠せない一同。	태연한 발언에 놀라움을 숨길 수 없는 일동.	fix	rewrites
+cx:mimetic-adnominal:420	きっぱりした人だなあ。	단호한 사람이구나.	fix	rewrites
+cx:mimetic-adnominal:420	くっきりとした指の跡	선명한 손가락의 자취	fix	rewrites
+cx:mimetic-adnominal:420	このずっしりとした重み	이 묵직한 무게	fix	rewrites
+cx:mimetic-adnominal:420	しんみりとした空気を作る。	숙연한 공기를 만든다.	fix	rewrites
+cx:mimetic-adnominal:420	しんみりとした話はここまでにして	숙연한 이야기는 여기까지로 해	fix	rewrites
+cx:mimetic-adnominal:420	すっきりした声。	개운한 목소리.	fix	rewrites
+cx:mimetic-adnominal:420	すっきりした顔で	개운한 얼굴로	fix	rewrites
+cx:mimetic-adnominal:420	少しきょとんとした顔をしていた	조금 어리둥절한 얼굴을 하고 있었다	fix	rewrites
+cx:mimetic-adnominal:420	少し冷んやりした感触が、心地良い。	조금 서늘한 감촉이, 기분 좋다.	fix	rewrites
+cx:mimetic-adnominal:420	濡れたようにしっとりとした肌の感触。	젖은 것처럼 촉촉한 피부의 감촉.	fix	rewrites
+cx:mimetic-adnominal:420	すっかりとした顔。	!rule:cx:mimetic-adnominal:420	keep	rewrites
+cx:mimetic-adnominal:420	すっきりしたいからです。	!rule:cx:mimetic-adnominal:420	keep	rewrites
+cx:mimetic-adnominal:420	とてもゆっくりとした動きで	!rule:cx:mimetic-adnominal:420	keep	rewrites
+cx:mimetic-adnominal:420	二人でなんとなくしんみりとした。	!rule:cx:mimetic-adnominal:420	keep	rewrites
+cx:mimetic-adnominal:420	口をすすいでようやくすっきりした。	!rule:cx:mimetic-adnominal:420	keep	rewrites
+cx:mimetic-adnominal:420	後ろでじっとしている獣を見遣る。	!rule:cx:mimetic-adnominal:420	keep	rewrites
+cx:mimetic-adnominal:430	きっぱりとしたアランの答えに	단호한 알란의 대답에	fix	rewrites
+cx:mimetic-adnominal:430	きっぱりとした口調。	단호한 어조.	fix	rewrites
+cx:mimetic-adnominal:430	そのきっぱりとした口ぶり	그 단호한 말투	fix	rewrites
+cx:mimetic-adnominal:430	シャーロットのきっぱりとした物言いに	샬럿의 단호한 말에	fix	rewrites
+cx:mimetic-adnominal:430	彼女はきっぱりとした口調で言った。	그녀는 단호한 어조로 말했다.	fix	rewrites
+cx:mimetic-adnominal:430	きっぱりとした。	!rule:cx:mimetic-adnominal:430	keep	rewrites
+cx:mimetic-adnominal:440	しゅんとしているカイルの肩に手を載せ	시무룩한 카일의 어깨에 손을 싣고	fix	rewrites
+cx:mimetic-adnominal:440	ひっそりとしている姿に惹かれ	조용한 모습에 매료되고	fix	rewrites
+cx:mimetic-adnominal:440	少し長めでふんわりとしている髪。	조금 긴 편이어서 폭신한 머리카락.	fix	rewrites
+cx:mimetic-adnominal:440	彼女のふんわりとしている髪を撫でた。	그녀의 폭신한 머리카락을 쓰다듬었다.	fix	rewrites
+cx:mimetic-adnominal:440	木を見上げてぼんやりとしているミユキに	나무를 올려다봐 멍한 미유키에	fix	rewrites
+cx:mimetic-adnominal:440	中はふんわりとしている。	!rule:cx:mimetic-adnominal:440	keep	rewrites
+cx:mimetic-adnominal:440	森はひっそりとしていた村だ。	!rule:cx:mimetic-adnominal:440	keep	rewrites

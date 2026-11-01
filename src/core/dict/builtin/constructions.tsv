@@ -255,55 +255,62 @@ cx:ganbatte-adverb:10	LEX-89	&&3 ||2 S+0== "頑張って" S+0== "がんばって
 //= mimetic-echo	after Select 70	A doubled mimetic whose half starts the Korean of a verb after it in its clause says the sound again: the verb alone says it (ギシギシとベッドが軋む 침대가 삐걱거린다, not 삐걱삐걱 침대가 삐걱거린다).
 cx:mimetic-echo:10	SND-1	&&2 F+0== "fixed" F+0== "echoed-by-verb"	set-target ""	ギシギシとベッドが軋む 침대가 삐걱거린다
 //~ adverb-adjective	하게=한 히=한	The 하다 adjective of a Korean adverb of manner in 하게 or 히 (촉촉하게 촉촉한, 단호히 단호한).
-//= mimetic-adnominal	after Select 65	A mimetic word or an adverb of manner with the した or している of する right before a noun it describes says what the noun is like, not what was done: the Korean adjective of that word (しっかりとした造り 제대로 된 구조, ちゃんとした服 제대로 된 옷, はっきりとした声 뚜렷한 목소리, のんびりとした口調 느긋한 말투, ぐったりとした様子 축 늘어진 모습), for a person sometimes another one (しっかりした子 착실한 아이). A word in り or と read as an adverb in 하게 or 히 takes the 하다 adjective of that adverb before した (しっとりとした肌 촉촉한 피부, きっぱりとした口調 단호한 어조), and a root the sound stage writes for a mimetic takes its adjective before している too (ふんわりしている髪 폭신한 머리카락). The same holds before the もの that a した carries as 것 (あっさりしたものだった 담백한 것이었다) and for a と read apart before する (ふんわりとした髪). Not before a formal noun or one of time or result (noun.act-head: ちゃんとしたことがない 제대로 한 적이 없다) or a final particle, after an object in を (宿題をちゃんとした子) or a place in で (リビングでのんびりしている), before したい, a comma or the end, nor in the past of している.
+//= mimetic-adnominal	after Select 65	A mimetic word or an adverb of manner with the した or している of する right before a noun it describes says what the noun is like, not what was done: the Korean adjective of that word (しっかりとした造り 제대로 된 구조, ちゃんとした服 제대로 된 옷, はっきりとした声 뚜렷한 목소리, のんびりとした口調 느긋한 말투, ぐったりとした様子 축 늘어진 모습), by the noun's class sometimes another one (しっかりした子 착실한 아이, しっかりとした体格 다부진 체격, ほっそりとした指 가느다란 손가락, あっさりした返事 간단한 대답). A word in り or と read as an adverb in 하게 or 히 takes the 하다 adjective of that adverb before した (しっとりとした肌 촉촉한 피부, きっぱりとした口調 단호한 어조), and a root the sound stage writes for a mimetic takes its adjective before している too (ふんわりしている髪 폭신한 머리카락). The same holds before the もの that a した carries as 것 (あっさりしたものだった 담백한 것이었다) and for a と read apart before する (ふんわりとした髪). Not before a formal noun or one of time or result (noun.act-head: ちゃんとしたことがない 제대로 한 적이 없다) or a final particle, after an object in を earlier in its clause (掃除をすぐにちゃんとした人) or a place in で right before it (リビングでのんびりしている), before したい, a comma, the end or the 것 of らしい, ようだ and みたい (ちゃんとしたらしい 제대로 한 것 같다), nor in the past of している.
 //: mim-noun-1	&&3 ||2 P+1== "1" &&2 S+1== "~を" !1 S+1== "Lを" F+1== "touches-prev" !1 ||3 S+1== @noun.act-head S+1== @particle.final-after-past &&2 S+1== "方" S+2== "が"	A noun right after the word, or a phrase that starts with a noun and を, that is no formal noun or final particle, nor 方 before が.
 //: mim-noun-2	&&3 ||2 P+2== "1" &&2 S+2== "~を" !1 S+2== "Lを" F+2== "touches-prev" !1 ||3 S+2== @noun.act-head S+2== @particle.final-after-past &&2 S+2== "方" S+3== "が"	The same after the word after.
 //: mim-noun-3	&&3 ||2 P+3== "1" &&2 S+3== "~を" !1 S+3== "Lを" F+3== "touches-prev" !1 ||3 S+3== @noun.act-head S+3== @particle.final-after-past &&2 S+3== "方" S+4== "が"	The same two words after.
-//: mim-free	&&2 !1 S-1== "を" !1 S-1== "で"	No object in を or place in で right before the word.
+//: mim-free	&&2 !1 S-1== "で" !1 <8 S+0== "を" ||5 F+0== "conjugating" S+0== "、" S+0== "。" S+0== "，" S+0== "「"	No place in で right before the word and no object in を before it in its clause.
 //: mim-suru	&&4 F+1== "touches-prev" :mim-free ||3 &&2 B+1== "する" Y+1== "8" &&3 ||2 S+1== "してい" S+1== "としてい" Y+1== "0" !1 S+2== "時間" &&3 S+0== "Rして" S+1== "い" Y+1== "0" :mim-noun-2	The word, then the した or している of its する (or the いる after a word in して) before a noun.
 //: mim-did	&&5 F+1== "touches-prev" :mim-free B+1== "する" Y+1== "8" :mim-noun-2	The word, then the した of its する before a noun.
-//: mim-suru-geot	&&4 F+1== "touches-prev" :mim-free B+1== "する" Y+1== "8 것"	The word, then the したもの of its する.
+//: mim-suru-geot	&&5 F+1== "touches-prev" :mim-free B+1== "する" Y+1== "8 것" ||3 U+1== "Rもの" U+1== "R物" U+1== "Rもん"	The word, then the したもの of its する (not the 것 of らしい, ようだ or みたい).
 //: mim-to	&&6 S+1== "と" L+1== "(으)로" B+2== "する" Y+2== "8" :mim-free :mim-noun-3	The word, a と read (으)로 and the した of its する before a noun.
 //: mim-iru	&&8 F+1== "touches-prev" :mim-free !1 G+0== "Va" Y+0== "1고" S+1== "い" Y+1== "0" !1 S+2== "時間" :mim-noun-2	A word read as a verb in its て form, then the いる of its している before a noun.
-//: mim-self	&&3 F+0== "verb" :mim-free ||3 &&2 Y+0== "8" :mim-noun-1 Y+0== "L8 채" Y+0== "8 것"	A word read as a verb in its past adnominal before a noun, with まま or with もの.
+//: mim-self	&&3 F+0== "verb" :mim-free ||3 &&2 Y+0== "8" :mim-noun-1 Y+0== "L8 채" &&2 Y+0== "8 것" ||3 U+0== "Rもの" U+0== "R物" U+0== "Rもん"	A word read as a verb in its past adnominal before a noun, with まま or with もの.
 //: mim-no	&&2 S-1== "の" D-1== "(이)가"	The の before the word, read as its subject while the word was a verb.
 cx:mimetic-adnominal:10	LEX-3611	&&3 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru &&4 F+2== "person" !1 F+2== "katakana" !1 &&2 S+3== "の" ||3 S+2== @pronoun.third-person S+2== @pronoun.first-person S+2== @pronoun.listener !1 ||2 S-1== "が" S-1== "の"	set-target "착실한" set-target@+1 "" set-ending@+1 ""	しっかりしている人 착실한 사람
-cx:mimetic-adnominal:20	LEX-3611	&&2 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru	set-target "제대로 된" set-target@+1 "" set-ending@+1 ""	しっかりとした造り 제대로 된 구조
-cx:mimetic-adnominal:30	LEX-3611	&&2 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru-geot	set-target "제대로 된 것" set-target@+1 "" set-ending@+1 ""	しっかりとしたものを食べたい 제대로 된 것을 먹고 싶다
-cx:mimetic-adnominal:40	LEX-3611	&&2 ||2 S+0== "ちゃんと" S+0== "きちんと" :mim-suru	set-target "제대로 된" set-target@+1 "" set-ending@+1 ""	きちんとした服装 제대로 된 복장
-cx:mimetic-adnominal:50	LEX-3611	&&2 ||2 S+0== "ちゃんと" S+0== "きちんと" :mim-suru-geot	set-target "제대로 된 것" set-target@+1 "" set-ending@+1 ""	きちんとしたものを書く 제대로 된 것을 쓰다
-cx:mimetic-adnominal:60	LEX-3611	&&2 S+0== "ちゃんと" :mim-iru	set-verb "제대로 되다" set-ending "8" set-target@+1 "" set-ending@+1 ""	ちゃんとしている人 제대로 된 사람
-cx:mimetic-adnominal:70	LEX-3611	&&3 S+0== "ちゃんと" :mim-self :mim-no	set-verb "제대로 되다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	私のちゃんとした服 내 제대로 된 옷
-cx:mimetic-adnominal:80	LEX-3611	&&2 S+0== "ちゃんと" :mim-self	set-verb "제대로 되다"	ちゃんとした服 제대로 된 옷
-cx:mimetic-adnominal:90	LEX-3611	&&2 ||2 S+0== "きっちりと" S+0== "きっちり" :mim-suru	set-target "빈틈없는" set-target@+1 "" set-ending@+1 ""	きっちりした性格 빈틈없는 성격
-cx:mimetic-adnominal:100	LEX-3611	&&2 ||2 S+0== "きっちりと" S+0== "きっちり" :mim-suru-geot	set-target "빈틈없는 것" set-target@+1 "" set-ending@+1 ""	きっちりしたものだ 빈틈없는 것이다
-cx:mimetic-adnominal:110	LEX-3611	&&2 ||2 S+0== "はっきりと" S+0== "はっきり" :mim-suru	set-target "뚜렷한" set-target@+1 "" set-ending@+1 ""	はっきりとした声 뚜렷한 목소리
-cx:mimetic-adnominal:120	LEX-3611	&&2 ||2 S+0== "はっきりと" S+0== "はっきり" :mim-suru-geot	set-target "뚜렷한 것" set-target@+1 "" set-ending@+1 ""	はっきりとしたものに変わる 뚜렷한 것으로 바뀌다
-cx:mimetic-adnominal:130	LEX-3611	&&2 ||2 S+0== "のんびりと" S+0== "のんびり" :mim-suru	set-target "느긋한" set-target@+1 "" set-ending@+1 ""	のんびりとした口調 느긋한 말투
-cx:mimetic-adnominal:140	LEX-3611	&&2 ||2 S+0== "のんびりと" S+0== "のんびり" :mim-suru-geot	set-target "느긋한 것" set-target@+1 "" set-ending@+1 ""	のんびりしたものだ 느긋한 것이다
-cx:mimetic-adnominal:150	LEX-3611	&&2 S+0== "のんびり" :mim-iru	set-verb "느긋하다" set-ending "8" set-target@+1 "" set-ending@+1 ""	のんびりしている人 느긋한 사람
-cx:mimetic-adnominal:160	LEX-3611	&&3 S+0== "のんびり" :mim-self :mim-no	set-verb "느긋하다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	カタツムリたちののんびりした姿 달팽이들의 느긋한 모습
-cx:mimetic-adnominal:170	LEX-3611	&&2 S+0== "のんびり" :mim-self	set-verb "느긋하다"	のんびりした声 느긋한 목소리
-cx:mimetic-adnominal:180	LEX-3611	&&3 ||5 S+0== "ゆったり" S+0== "こぢんまり" S+0== "こぢんまりと" S+0== "ずんぐりと" S+0== "でっぷりと" :mim-self :mim-no	select-lemma@-1 "의" map-target@-2 @plain-pronoun	初老のでっぷりとした院長 초로의 뚱뚱한 원장
-cx:mimetic-adnominal:190	LEX-3611	&&2 ||2 S+0== "ほっそりと" S+0== "ほっそり" :mim-suru	set-target "날씬한" set-target@+1 "" set-ending@+1 ""	ほっそりとした指 날씬한 손가락
-cx:mimetic-adnominal:200	LEX-3611	&&3 S+0== "ほっそり" :mim-self :mim-no	set-verb "날씬하다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	ランのほっそりした首筋 런의 날씬한 목덜미
-cx:mimetic-adnominal:210	LEX-3611	&&2 S+0== "ほっそり" :mim-self	set-verb "날씬하다"	ほっそりした体 날씬한 몸
-cx:mimetic-adnominal:220	LEX-3611	&&2 ||2 S+0== "すらりと" S+0== "すらり" :mim-suru	set-target "늘씬한" set-target@+1 "" set-ending@+1 ""	すらりとした脚 늘씬한 다리
-cx:mimetic-adnominal:230	LEX-3611	&&2 ||2 S+0== "がっしり" S+0== "がっしりと" :mim-suru	set-target "탄탄한" set-target@+1 "" set-ending@+1 ""	がっしりしている体 탄탄한 몸
-cx:mimetic-adnominal:240	LEX-3611	&&2 ||2 S+0== "ぐったりと" S+0== "ぐったり" :mim-iru	set-verb "축 늘어지다" set-ending "8" set-target@+1 "" set-ending@+1 ""	ぐったりとしている少年 축 늘어진 소년
-cx:mimetic-adnominal:250	LEX-3611	&&2 ||2 S+0== "ぐったりと" S+0== "ぐったり" :mim-self	set-verb "축 늘어지다"	ぐったりとした様子 축 늘어진 모습
-cx:mimetic-adnominal:260	LEX-3611	&&2 ||2 S+0== "あっさり" S+0== "あっさりと" :mim-suru	set-target "담백한" set-target@+1 "" set-ending@+1 ""	あっさりした味 담백한 맛
-cx:mimetic-adnominal:270	LEX-3611	&&2 ||2 S+0== "あっさり" S+0== "あっさりと" :mim-suru-geot	set-target "담백한 것" set-target@+1 "" set-ending@+1 ""	あっさりしたものだった 담백한 것이었다
-cx:mimetic-adnominal:280	LEX-3611	&&3 ||2 S+0== "ぼんやり" S+0== "ぼんやりと" :mim-suru S+2== @Lnoun.dim-sight	set-target "흐릿한" set-target@+1 "" set-ending@+1 ""	ぼんやりした光 흐릿한 빛
-cx:mimetic-adnominal:290	LEX-3611	&&3 ||2 S+0== "ぼんやり" S+0== "ぼんやりと" :mim-suru S+2== @noun.vague-thought	set-target "막연한" set-target@+1 "" set-ending@+1 ""	ぼんやりした不安 막연한 불안
-cx:mimetic-adnominal:300	LEX-3611	&&2 ||2 S+0== "ぼんやり" S+0== "ぼんやりと" :mim-suru	set-target "멍한" set-target@+1 "" set-ending@+1 ""	ぼんやりした顔 멍한 얼굴
-cx:mimetic-adnominal:310	LEX-3611	&&2 ||2 S+0== "がらんと" S+0== "がらん" :mim-suru	set-target "텅 빈" set-target@+1 "" set-ending@+1 ""	がらんとした部屋 텅 빈 방
-cx:mimetic-adnominal:320	LEX-3611	&&2 ||2 S+0== "ふんわり" S+0== "ふんわりと" :mim-suru	set-target "폭신한" set-target@+1 "" set-ending@+1 ""	ふんわりした服 폭신한 옷
-cx:mimetic-adnominal:330	LEX-3611	&&2 S+0== "ふんわり" :mim-to	set-target "폭신한" set-target@+1 "" set-target@+2 "" set-ending@+2 ""	暖かそうなふんわりとした白のマフラー 폭신한 흰색의 머플러
-cx:mimetic-adnominal:340	LEX-3611	&&4 F+0== "fixed" D+0== "멍" :mim-suru S+2== @Lnoun.dim-sight	set-target "" set-verb@+1 "흐릿하다" set-ending@+1 "8"	ぼんやりとした記憶 흐릿한 기억
-cx:mimetic-adnominal:350	LEX-3611	&&5 ||2 S+0== "Rり" S+0== "Rと" P+0== "3" ||2 D+0== "R하게" D+0== "R히" !1 D+0== @ko-adverb.manner-only :mim-did	map-target-tail @adverb-adjective set-target@+1 "" set-ending@+1 ""	しっとりとした肌 촉촉한 피부
-cx:mimetic-adnominal:360	LEX-3611	&&5 ||2 S+0== "Rり" S+0== "Rと" P+0== "3" ||2 D+0== "R하게" D+0== "R히" !1 D+0== @ko-adverb.manner-only :mim-to	map-target-tail @adverb-adjective set-target@+1 "" set-target@+2 "" set-ending@+2 ""	きっぱりとした態度 단호한 태도
-cx:mimetic-adnominal:370	LEX-3611	&&6 F+0== "fixed" D+0== @ko-root.mimetic-adjective ||2 S+1== "してい" S+1== "としてい" Y+1== "0" :mim-free :mim-noun-2	set-target@+1 "&AV@" set-ending@+1 "8"	ふんわりしている髪 폭신한 머리카락
+cx:mimetic-adnominal:20	LEX-3611	&&3 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru S+2== @noun.sturdy-body	set-target "다부진" set-target@+1 "" set-ending@+1 ""	しっかりとした体格 다부진 체격
+cx:mimetic-adnominal:30	LEX-3611	&&3 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru S+2== @noun.firm-step	set-target "힘찬" set-target@+1 "" set-ending@+1 ""	しっかりとした足取り 힘찬 발걸음
+cx:mimetic-adnominal:40	LEX-3611	&&3 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru S+2== @noun.firm-bond	set-target "굳건한" set-target@+1 "" set-ending@+1 ""	しっかりとした信頼 굳건한 신뢰
+cx:mimetic-adnominal:50	LEX-3611	&&2 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru	set-target "제대로 된" set-target@+1 "" set-ending@+1 ""	しっかりとした造り 제대로 된 구조
+cx:mimetic-adnominal:60	LEX-3611	&&2 ||2 S+0== "しっかりと" S+0== "しっかり" :mim-suru-geot	set-target "제대로 된 것" set-target@+1 "" set-ending@+1 ""	しっかりとしたものを食べたい 제대로 된 것을 먹고 싶다
+cx:mimetic-adnominal:70	LEX-3611	&&2 ||2 S+0== "ちゃんと" S+0== "きちんと" :mim-suru	set-target "제대로 된" set-target@+1 "" set-ending@+1 ""	きちんとした服装 제대로 된 복장
+cx:mimetic-adnominal:80	LEX-3611	&&2 ||2 S+0== "ちゃんと" S+0== "きちんと" :mim-suru-geot	set-target "제대로 된 것" set-target@+1 "" set-ending@+1 ""	きちんとしたものを書く 제대로 된 것을 쓰다
+cx:mimetic-adnominal:90	LEX-3611	&&2 S+0== "ちゃんと" :mim-iru	set-verb "제대로 되다" set-ending "8" set-target@+1 "" set-ending@+1 ""	ちゃんとしている人 제대로 된 사람
+cx:mimetic-adnominal:100	LEX-3611	&&3 S+0== "ちゃんと" :mim-self :mim-no	set-verb "제대로 되다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	私のちゃんとした服 내 제대로 된 옷
+cx:mimetic-adnominal:110	LEX-3611	&&2 S+0== "ちゃんと" :mim-self	set-verb "제대로 되다"	ちゃんとした服 제대로 된 옷
+cx:mimetic-adnominal:120	LEX-3611	&&2 ||2 S+0== "きっちりと" S+0== "きっちり" :mim-suru	set-target "빈틈없는" set-target@+1 "" set-ending@+1 ""	きっちりした性格 빈틈없는 성격
+cx:mimetic-adnominal:130	LEX-3611	&&2 ||2 S+0== "きっちりと" S+0== "きっちり" :mim-suru-geot	set-target "빈틈없는 것" set-target@+1 "" set-ending@+1 ""	きっちりしたものだ 빈틈없는 것이다
+cx:mimetic-adnominal:140	LEX-3611	&&2 ||2 S+0== "はっきりと" S+0== "はっきり" :mim-suru	set-target "뚜렷한" set-target@+1 "" set-ending@+1 ""	はっきりとした声 뚜렷한 목소리
+cx:mimetic-adnominal:150	LEX-3611	&&2 ||2 S+0== "はっきりと" S+0== "はっきり" :mim-suru-geot	set-target "뚜렷한 것" set-target@+1 "" set-ending@+1 ""	はっきりとしたものに変わる 뚜렷한 것으로 바뀌다
+cx:mimetic-adnominal:160	LEX-3611	&&2 ||2 S+0== "のんびりと" S+0== "のんびり" :mim-suru	set-target "느긋한" set-target@+1 "" set-ending@+1 ""	のんびりとした口調 느긋한 말투
+cx:mimetic-adnominal:170	LEX-3611	&&2 ||2 S+0== "のんびりと" S+0== "のんびり" :mim-suru-geot	set-target "느긋한 것" set-target@+1 "" set-ending@+1 ""	のんびりしたものだ 느긋한 것이다
+cx:mimetic-adnominal:180	LEX-3611	&&2 S+0== "のんびり" :mim-iru	set-verb "느긋하다" set-ending "8" set-target@+1 "" set-ending@+1 ""	のんびりしている人 느긋한 사람
+cx:mimetic-adnominal:190	LEX-3611	&&3 S+0== "のんびり" :mim-self :mim-no	set-verb "느긋하다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	カタツムリたちののんびりした姿 달팽이들의 느긋한 모습
+cx:mimetic-adnominal:200	LEX-3611	&&2 S+0== "のんびり" :mim-self	set-verb "느긋하다"	のんびりした声 느긋한 목소리
+cx:mimetic-adnominal:210	LEX-3611	&&3 ||5 S+0== "ゆったり" S+0== "こぢんまり" S+0== "こぢんまりと" S+0== "ずんぐりと" S+0== "でっぷりと" :mim-self :mim-no	select-lemma@-1 "의" map-target@-2 @plain-pronoun	初老のでっぷりとした院長 초로의 뚱뚱한 원장
+cx:mimetic-adnominal:220	LEX-3611	&&3 ||2 S+0== "ほっそりと" S+0== "ほっそり" :mim-suru S+2== @noun.slender-part	set-target "가느다란" set-target@+1 "" set-ending@+1 ""	ほっそりとした指 가느다란 손가락
+cx:mimetic-adnominal:230	LEX-3611	&&2 ||2 S+0== "ほっそりと" S+0== "ほっそり" :mim-suru	set-target "날씬한" set-target@+1 "" set-ending@+1 ""	ほっそりとした体 날씬한 몸
+cx:mimetic-adnominal:240	LEX-3611	&&4 S+0== "ほっそり" :mim-self :mim-no S+1== @noun.slender-part	set-verb "가느다랗다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	ランのほっそりした首筋 런의 가느다란 목덜미
+cx:mimetic-adnominal:250	LEX-3611	&&3 S+0== "ほっそり" :mim-self S+1== @noun.slender-part	set-verb "가느다랗다"	ほっそりした指 가느다란 손가락
+cx:mimetic-adnominal:260	LEX-3611	&&3 S+0== "ほっそり" :mim-self :mim-no	set-verb "날씬하다" select-lemma@-1 "의" map-target@-2 @plain-pronoun	スライム娘のほっそりした体 슬라임 소녀의 날씬한 몸
+cx:mimetic-adnominal:270	LEX-3611	&&2 S+0== "ほっそり" :mim-self	set-verb "날씬하다"	ほっそりした体 날씬한 몸
+cx:mimetic-adnominal:280	LEX-3611	&&2 ||2 S+0== "すらりと" S+0== "すらり" :mim-suru	set-target "늘씬한" set-target@+1 "" set-ending@+1 ""	すらりとした脚 늘씬한 다리
+cx:mimetic-adnominal:290	LEX-3611	&&2 ||2 S+0== "がっしり" S+0== "がっしりと" :mim-suru	set-target "탄탄한" set-target@+1 "" set-ending@+1 ""	がっしりしている体 탄탄한 몸
+cx:mimetic-adnominal:300	LEX-3611	&&2 ||2 S+0== "ぐったりと" S+0== "ぐったり" :mim-iru	set-verb "축 늘어지다" set-ending "8" set-target@+1 "" set-ending@+1 ""	ぐったりとしている少年 축 늘어진 소년
+cx:mimetic-adnominal:310	LEX-3611	&&2 ||2 S+0== "ぐったりと" S+0== "ぐったり" :mim-self	set-verb "축 늘어지다"	ぐったりとした様子 축 늘어진 모습
+cx:mimetic-adnominal:320	LEX-3611	&&3 ||2 S+0== "あっさり" S+0== "あっさりと" :mim-suru S+2== @noun.reply	set-target "간단한" set-target@+1 "" set-ending@+1 ""	あっさりした返事 간단한 대답
+cx:mimetic-adnominal:330	LEX-3611	&&2 ||2 S+0== "あっさり" S+0== "あっさりと" :mim-suru	set-target "담백한" set-target@+1 "" set-ending@+1 ""	あっさりした味 담백한 맛
+cx:mimetic-adnominal:340	LEX-3611	&&2 ||2 S+0== "あっさり" S+0== "あっさりと" :mim-suru-geot	set-target "간단한 것" set-target@+1 "" set-ending@+1 ""	あっさりしたものだった 간단한 것이었다
+cx:mimetic-adnominal:350	LEX-3611	&&3 ||2 S+0== "ぼんやり" S+0== "ぼんやりと" :mim-suru S+2== @Lnoun.dim-sight	set-target "흐릿한" set-target@+1 "" set-ending@+1 ""	ぼんやりした光 흐릿한 빛
+cx:mimetic-adnominal:360	LEX-3611	&&3 ||2 S+0== "ぼんやり" S+0== "ぼんやりと" :mim-suru S+2== @noun.vague-thought	set-target "막연한" set-target@+1 "" set-ending@+1 ""	ぼんやりした不安 막연한 불안
+cx:mimetic-adnominal:370	LEX-3611	&&2 ||2 S+0== "ぼんやり" S+0== "ぼんやりと" :mim-suru	set-target "멍한" set-target@+1 "" set-ending@+1 ""	ぼんやりした顔 멍한 얼굴
+cx:mimetic-adnominal:380	LEX-3611	&&2 ||2 S+0== "がらんと" S+0== "がらん" :mim-suru	set-target "텅 빈" set-target@+1 "" set-ending@+1 ""	がらんとした部屋 텅 빈 방
+cx:mimetic-adnominal:390	LEX-3611	&&2 ||2 S+0== "ふんわり" S+0== "ふんわりと" :mim-suru	set-target "부드러운" set-target@+1 "" set-ending@+1 ""	ふんわりした笑顔 부드러운 웃는 얼굴
+cx:mimetic-adnominal:400	LEX-3611	&&2 S+0== "ふんわり" :mim-to	set-target "부드러운" set-target@+1 "" set-target@+2 "" set-ending@+2 ""	暖かそうなふんわりとした白のマフラー 부드러운 흰색의 머플러
+cx:mimetic-adnominal:410	LEX-3611	&&4 F+0== "fixed" D+0== "멍" :mim-suru S+2== @Lnoun.dim-sight	set-target "" set-verb@+1 "흐릿하다" set-ending@+1 "8"	ぼんやりとした記憶 흐릿한 기억
+cx:mimetic-adnominal:420	LEX-3611	&&5 ||2 S+0== "Rり" S+0== "Rと" P+0== "3" ||2 D+0== "R하게" D+0== "R히" !1 D+0== @ko-adverb.manner-only :mim-did	map-target-tail @adverb-adjective set-target@+1 "" set-ending@+1 ""	しっとりとした肌 촉촉한 피부
+cx:mimetic-adnominal:430	LEX-3611	&&5 ||2 S+0== "Rり" S+0== "Rと" P+0== "3" ||2 D+0== "R하게" D+0== "R히" !1 D+0== @ko-adverb.manner-only :mim-to	map-target-tail @adverb-adjective set-target@+1 "" set-target@+2 "" set-ending@+2 ""	きっぱりとした態度 단호한 태도
+cx:mimetic-adnominal:440	LEX-3611	&&6 F+0== "fixed" D+0== @ko-root.mimetic-adjective ||2 S+1== "してい" S+1== "としてい" Y+1== "0" :mim-free :mim-noun-2	set-target@+1 "&AV@" set-ending@+1 "8"	ふんわりしている髪 폭신한 머리카락
 //~ ni-than	에=보다 하게=보다	The noun or adjectival root of a word read with に as 에 or 하게, with 보다 (건강에 건강보다, 안전하게 안전보다).
 //= shape-suffix	after Select 110	The suffix 状 after a katakana noun names a shape or a state, 모양 (ゼリー状 젤리 모양, パウダー状 파우더 모양): a loanword or a mimetic word names no letter, so the 장 of a letter (招待状 초대장) is left to kanji nouns.
 cx:shape-suffix:10	LEX-16	&&4 S+0== "状" L+0== "장" F+0== "touches-prev" F-1== "katakana"	take-target " 모양"	ゼリー状の物体 젤리 모양의 물체
