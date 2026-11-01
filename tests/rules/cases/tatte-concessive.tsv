@@ -1,0 +1,36 @@
+# 규칙: GRM-3091
+rule	input	expected	kind	layer
+dict:kuttatte:1	居なくったって平気だ	없어도 괜찮다	fix	analysis
+dict:kuttatte:1	使わなくったって私は強いし？	has:쓰지 않아도	fix	analysis
+dict:kuttatte:1	そんなに警戒しなくったっていいじゃない	has:경계하지 않아도	fix	analysis
+dict:kuttatte:1	だから痛くったって、それを望むんだ。	has:아파도,	fix	analysis
+dict:kuttatte:1	僕じゃなくったって困るぞ、これ。	has:내가 아니어도	fix	analysis
+dict:kuttatte:1	魔法がなくったって、人間には知恵があるんだ。	has:마법이 없어도,	fix	analysis
+dict:kuttatte:1	雪なんてなくったって、毎日楽しいわ	has:없어도,	fix	analysis
+dict:kuttatte:1	言われなくったって、知ってるわよ！	has:않아도,	fix	analysis
+dict:kuttatte:1	遅くったっていい	has:늦어도	fix	analysis
+dict:tte-r1:1	奴隷ったって食べるものや寝るところが必要なのである。	has:노예라고 해도	fix	defaults
+dict:tte-r1:1	いちゃいちゃったって限度はあるでしょ	has:알콩달콩이라고 해도	fix	defaults
+analysis:kitatte	彼が来たって。	그가 왔대.	fix	analysis
+analysis:kitatte	嵐が来たって寝てた	has:와도 잤다	fix	analysis
+analysis:kitatte	どんな奴が来たって吹飛ばしてやる	has:와도 날려	fix	analysis
+analysis:kitatte	こっちに来たって何も無いでしょうに	has:와도 아무것도	fix	analysis
+analysis:kitatte	お前、未来から来たって言ってたよな	has:왔다고 했지	fix	analysis
+cx:lc-quote-adnominal:40	誰かに見られていたって事？	has:보여지고 있었다는 것	fix	rewrites
+cx:lc-quote-adnominal:40	スレ２本で収まったって事で良かった	has:들어갔다는 것이라서	fix	rewrites
+cx:lc-quote-adnominal:40	私の願いは聞き届けられたって事ですか？	has:받아 들여졌다는 것입니까	fix	rewrites
+cx:lc-quote-adnominal:50	弟が流行り病に掛かったって報せがあって	has:걸렸다는 소식이	fix	rewrites
+cx:lc-quote-adnominal:50	バレて苦情来たって話、知ってる？	has:왔다는 이야기,	fix	rewrites
+dict:kuttatte:1	泣いたって無駄だ	울어도 쓸데없다	keep	analysis
+dict:kuttatte:1	つくったって言ってみればレヴィの護衛でしょ	has:만들어도 말하자면	keep	analysis
+dict:kuttatte:1	ページをめくったって何もない	has:넘겨도 아무것도	keep	analysis
+dict:tte-r1:1	何を言ったって無駄だ	무슨 말을 해도 쓸데없다	keep	defaults
+dict:tte-r1:1	飾るったって、なんて言やいいんだよ	has:장식한다 하더라도,	keep	defaults
+dict:tte-r1:1	どんなに体力が戻ったって、差は歴然だ。	has:돌아와도,	keep	defaults
+analysis:kitatte	言ってたって	말했대	keep	analysis
+analysis:kitatte	行ったり来たりする	has:왔다 갔다	keep	analysis
+analysis:kitatte	彼が来た。	그가 왔다.	keep	analysis
+cx:lc-quote-adnominal:50	いくら言ったって意味がない	!rule:cx:lc-quote-adnominal:50	keep	rewrites
+cx:lc-quote-adnominal:50	何回謝ったって話にならない	!rule:cx:lc-quote-adnominal:50	keep	rewrites
+cx:lc-quote-adnominal:40	ハンドラーになったって話だ	!rule:cx:lc-quote-adnominal:40	keep	rewrites
+cx:lc-quote-adnominal:40	誰がどう考えたって事情は同じだ	!rule:cx:lc-quote-adnominal:40	keep	rewrites

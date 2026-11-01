@@ -13766,6 +13766,7 @@ ttt	ttt	K110			GN				jisjk:201744
 くたくた	기진맥진	E301			GN				jisjk:2174		
 くたくた	지쳐서 녹초가 %D5@	G8U0			GN				jisjk:120578		
 くたって	6도	T500			GN				jisjk:260872		
+くったって	6도	T500			GN				kuttatte:1		
 くたにやき	사기 그릇	N110	VPe		GN				jisjk:176008		-1
 くたば	&HT@	M418			GN				jisjk:90688		
 くたびれ	피로	N110			GN				jisjk:6467		
@@ -32084,6 +32085,7 @@ ttt	ttt	K110			GN				jisjk:201744
 った	6버렸다	S5A0			GN				jisjk:259885		
 ったから	6버렸으니까	S5A0			GN				jisjk:341181		
 ったけど	6버렸지만	S5A0			GN				jisjk:350001		
+ったって	(이)라고 해도	P200			GN				tte-r1:1		
 ったって	2려 하더라도	S551			GN				jisjk:4149		
 ったって	4다 하더라도	S501			GN				jisjk:4150		
 ったの	6버렸어	S5A0			GN	3060	||1 D+1== "?"	ったの는 다음 단어의 번역이 물음표이면 완료나 유감을 나타내는 ‘-어 버렸어’ 계열 어미로 고른다.	jisjk:341317		
@@ -235689,7 +235691,6 @@ ttt	ttt	K110			GN				jisjk:201744
 来すぎ	자주 &AH@	M427	UMv		GN				jisjk:343219		
 来そうもな	올 것 같지도 $D7@	H7U0			GN				jisjk:268162		
 来た	초래&AV@	M443			GN				jisjk:266608		
-来た	&AH@	M428			GN				jisjk:343085		
 来たが	오고싶어 &AV@	M428			GN				jisjk:346584		
 来たくな	오고 싶지 $D7@	H7U0			GN				jisjk:356335		
 来たんや	왔어	A9H1			GN				jisjk:103475		
