@@ -1,0 +1,42 @@
+# 규칙: GRM-3090
+rule	input	expected	kind	layer
+cx:tte-nominal:20	駄目で元々、魔力強化ってのを試してみるか。	has:마력 강화라는 것을	fix	rewrites
+cx:tte-nominal:20	そのケジメってのを見せてみろ	has:케지메라는 것을	fix	rewrites
+cx:tte-nominal:20	ここでお別れってのも寂しいからさ	has:작별이라는 것도	fix	rewrites
+cx:tte-nominal:20	あと親父の愛車がインプレッサってのもある	has:임프레자라는 것도 있다	fix	rewrites
+cx:tte-nominal:20	海野の子に真田ってのがおったらしくて	has:사나다라는 것이	fix	rewrites
+cx:tte-nominal:20	さっきのバトルスーツってのも良く分からないんですが	has:배틀 슈트라는 것도	fix	rewrites
+cx:tte-nominal:20	恋ってのが分からない	has:사랑이라는 것을	fix	rewrites
+cx:tte-nominal:20	「恋ってのが分からない」	has:사랑이라는 걸	fix	rewrites
+cx:tte-nominal:20	早く『毎回恒例のやつ』ってのを教えてくださいよ	has:』이라는 것을	fix	rewrites
+cx:tte-nominal:20	それよか命じられて、ってのが気になるな	has:, 라는 것이	fix	rewrites
+cx:tte-nominal:20	エレナが人質に取られている状態、ってのを検証する	has:상태, 라는 것을	fix	rewrites
+cx:tte-nominal:21	盗品売買は重罪だってのを知らねえらしいな	has:중죄라는 것을	fix	rewrites
+cx:tte-nominal:21	あいつが本当はいいやつだってのも分かってるから。	has:좋은 녀석이라는 것도	fix	rewrites
+cx:tte-nominal:21	「我らが御大将だってのを忘れたのか？」	has:두령장이라는 걸	fix	rewrites
+cx:tte-nominal:7	演説は午後だってのに、もう緊張してる	has:오후라는데,	fix	rewrites
+cx:tte-nominal:7	人の家の話だってのによ。	has:이야기라는데	fix	rewrites
+cx:tte-nominal:7	危険に晒したのは俺の責任だってのに。	has:책임이라는데.	fix	rewrites
+cx:tte-nominal:7	地方テレビだってのに結構見てた奴いるんだな	has:TV라는데 상당히	fix	rewrites
+cx:tte-nominal:6	せっかく稼いだってのに今度は新しい装備だ	has:벌었다는데 이번에는	fix	rewrites
+cx:tte-nominal:6	ちょうどスヤスヤ寝てたってのに……	has:자고 있었다는데	fix	rewrites
+cx:tte-nominal:6	だからお前に頼んでたってのに…。	has:부탁하고 있었다는데	fix	rewrites
+cx:tte-nominal:6	空から女の子が降ってきたってのに	has:내려왔다는데	fix	rewrites
+cx:tte-nominal:11	回復魔法を教えてもらったってのはどうだ？	has:가르쳐 주었다는 것은	fix	rewrites
+cx:tte-nominal:11	のこのこ殺されに来たってのか。	has:왔다는 건가	fix	rewrites
+dict:tte-r1:2	野望ってもんはないのか？	has:야망이라는 것은	fix	defaults
+dict:tte-r1:2	「野望ってもんはないのか？」	has:야망이라는 건	fix	defaults
+dict:tte-r1:2	だが……相性ってもんは存在する	has:궁합이라는 것은	fix	defaults
+dict:tte-r1:2	それが親ってもんだろ	has:부모라는 것이지	fix	defaults
+dict:tte-r1:2	応援してやるのが親ってもんだ	has:부모라는 것이다	fix	defaults
+dict:tte-r1:2	「うらやむのは筋違いってもんだぜ！」	has:착각이라는 거야!	fix	defaults
+cx:tte-nominal:20	男ってのは	남자라는 것은	keep	rewrites
+cx:tte-nominal:20	勝つってのが難しい	!rule:cx:tte-nominal:20	keep	rewrites
+cx:tte-nominal:20	陸トレなんてしてる時間ねぇってのに！	!rule:cx:tte-nominal:20	keep	rewrites
+cx:tte-nominal:20	先生ってのに会った	!rule:cx:tte-nominal:20	keep	rewrites
+cx:tte-nominal:6	時間ないってのに。	!rule:cx:tte-nominal:6	keep	rewrites
+cx:tte-nominal:11	泣いたって無駄だ	!rule:cx:tte-nominal:11	keep	rewrites
+cx:tte-nominal:7	これって本当？	!rule:cx:tte-nominal:7	keep	rewrites
+cx:tte-nominal:21	誰だって怖いのは同じだ	!rule:cx:tte-nominal:21	keep	rewrites
+dict:tte-r1:2	さてこれで問題に集中できるってもんだ。	has:집중할 수 있다는 것이다	keep	defaults
+dict:tte-r1:2	こっちも教える甲斐があるってもんだ	has:보람이 있다는 것이다	keep	defaults
