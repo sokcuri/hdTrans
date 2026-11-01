@@ -1490,9 +1490,16 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (nextKind == '1' && DigitOrLatin(LastRune(t)) && JoinsNoun(tokens, items, i, nextIndex)) {
         return Result(std::move(t), ApartFromNoun(tokens, items, i, nextIndex));
     }
+    // The する that a word written attached starts with (しやすくなる 하기 쉬워지다, させる, される) joins
+    // the noun before it, not a particle (攻撃もしやすくなる 공격도 하기 쉬워진다).
+    const bool suruAfterParticle =
+        kind == '2' && (nextKind == '4' || nextKind == '7') &&
+        (next.surface.starts_with("し") || next.surface.starts_with("さ") || next.surface.starts_with("せ") ||
+         next.surface.starts_with("す")) &&
+        std::u32string_view(U"하해했할한함합시되돼됐당").find(text::DecodeRune(nextEntry).cp) != std::u32string_view::npos;
     if (!Contains(nextTags, "Tu")) {
         if (Contains(nextTags, "Ha")) return Result(std::move(t), true);
-    } else if (t != ",") {
+    } else if (t != "," && !suruAfterParticle) {
         return Result(std::move(t), false);
     }
     if (Contains(tags, "Wa") || Contains(tags, "Wb")) {

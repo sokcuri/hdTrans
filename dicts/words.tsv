@@ -21832,7 +21832,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 練製品	어묵류	N110	VFd		GN				llm		ねりせいひん	w:21784
 縁むすび	결연	N110			GN				xxx		えんむすび	w:21785
 縁むすび	인연	N110	UTh		GN				llm		えんむすび	w:21786
-縁取	마&Mv@	M428			GN						ふちどる	w:21787
 縁紅弁慶	염자	N110			GN						ふちべにべんけい	w:21788
 縁組	입양	N110		Hd	GN				xxx	1	えんぐみ	w:21789
 縁組み	입양	I110		Hd	GN				xxx	1	えんぐみ	w:21790
@@ -27172,3 +27171,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おにぃさん	오빠	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29116
 おにぃちゃん	오빠	N110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29117
 おにぃさま	오라버니	I110	VHn		GN			LEX-13: お姉さん, お兄さん의 입말 표기				w:29118
+結	&Ha@	M420			GN			LEX-3486: 結う 묶다			ゆう	w:29119
+処	처단&AV@	M433			GN			LEX-3486: 処す 처단하다			しょす	w:29120
+屈	굴&AV@	M433			GN			LEX-3486: 屈す 굴하다			くっす	w:29121

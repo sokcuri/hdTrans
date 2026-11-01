@@ -125,7 +125,14 @@ const dict::Snapshot* Dictionary() {
          "だけ\t만\tP211\t\t\tGN\t124\n"
          "バレ\t들&AA@\tM417\t\t\tGN\t120\n"
          "仁\t인\tN110\tXXX\tOn\tGN\t125\n"
-         "仁\t진\tN130\tVHnQPN\tWb\tGN\t126\n"},
+         "仁\t진\tN130\tVHnQPN\tWb\tGN\t126\n"
+         "も\t도\tP200\t\t\tGN\t133\n"
+         "もし\t만약\tE300\t\t\tGN\t127\n"
+         "もしや\t어쩌면\tE300\t\t\tGN\t128\n"
+         "話し\t이야기\tN110\t\t\tGN\t129\n"
+         "話\t이야기\tN110\t\t\tGN\t130\n"
+         "おかし\t이상하$AB@\tH7U0\t\t\tGN\t131\n"
+         "おか\t언덕\tN110\t\t\tGN\t132\n"},
         {0, "names.tsv",
          "#! layer=names\n"
          "key\tko\tpos\tsem\tgram\tdict\tid\n"
@@ -180,7 +187,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{52});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{55});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -436,6 +443,37 @@ HD_TEST(constraint_shika_before_negative) {
         {"まあしかしねえ", "しかしねえ", "しかし", "하지만"},
         {"まあしかしずいぶん", "しかしずいぶん", "しかし", "하지만"},
         {"まあしかしぬるいな", "しかしぬるいな", "しかし", "하지만"},
+    });
+}
+
+// もし and もしや before やすい, やすく are も and the stem of する (攻撃もしやすくなる, 勉強もしやすい);
+// もし before anything else is the conditional adverb.
+HD_TEST(constraint_moshi_before_yasui) {
+    CheckCases({
+        {"攻撃もしやすくなる", "もしやすくなる", "もし", ""},
+        {"攻撃もしやすかった", "もしやすかった", "もし", ""},
+        {"勉強もしやすい", "もしやすい", "もしや", ""},
+        {"もし安ければ", "もし安ければ", "もし", "만약"},
+        {"もしやすると", "もしやすると", "もしや", "어쩌면"},
+        {"もしや、君は", "もしや、君は", "もしや", "어쩌면"},
+    });
+}
+
+// A noun in し before か and a negative that ends the clause leaves its し to しか where the noun
+// without it is a word too (話しかしなかった 話 + しか); not before the か of a past or of かける, a
+// clause without a negative, nor an adjective's stem (おかしかった).
+HD_TEST(constraint_shi_before_shika) {
+    CheckCases({
+        {"そんな話しかしなかった", "話しかしなかった", "話し", ""},
+        {"話しかないぞ", "話しかないぞ", "話し", ""},
+        {"話しか？", "話しか？", "話し", "이야기"},
+        {"話しかと思ったが、違わない", "話しかと思ったが、違わない", "話し", "이야기"},
+        {"話しかけない", "話しかけない", "話し", "이야기"},
+        {"話しかもしれない", "話しかもしれない", "話し", "이야기"},
+        {"話しかどうか分からない", "話しかどうか分からない", "話し", "이야기"},
+        {"話しかなと思わない", "話しかなと思わない", "話し", "이야기"},
+        {"話しかと聞かれても分からない", "話しかと聞かれても分からない", "話し", "이야기"},
+        {"おかしかったわけじゃない", "おかしかったわけじゃない", "おかし", "이상하$AB@"},
     });
 }
 

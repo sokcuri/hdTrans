@@ -39,7 +39,7 @@ normalize:kansai-conjecture	やろうぜ	하자구	keep	normalize
 normalize:kansai-conjecture	俺がやろか	내가 야로인가	keep	normalize
 normalize:kansai-conjecture	よし、やろか	좋아, 야로인가	keep	normalize
 dict:colloquial-endings:24	わしの頼みを聞いてもらえんじゃろうか？	나의 부탁을 들어 줄 수 없을까?	fix	lookup
-dict:colloquial-endings:24	そうなんじゃが判を押すの もう少し待ってもらえんじゃろうか	그러면이 도장을 찍는 것 좀 더 기다려 줄 수 없을까	fix	lookup
+dict:colloquial-endings:24	そうなんじゃが判を押すの もう少し待ってもらえんじゃろうか	그렇긴 한데 도장을 찍는 것 좀 더 기다려 줄 수 없을까	fix	lookup
 dict:colloquial-endings:24	あれを わしらに譲ってはもらえんじゃろうか？	저것을 우리들에게 양보해 줄 수 없을까?	fix	lookup
 dict:spoken-words:22	このやろって	이 자식은	fix	lookup
 dict:spoken-words:22	このやろが！	이 자식이!	fix	lookup
