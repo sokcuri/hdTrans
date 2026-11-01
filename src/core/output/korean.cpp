@@ -347,11 +347,8 @@ bool ContainsString(const std::vector<std::string>& list, std::string_view s) {
     return false;
 }
 
-}  // namespace
-
-std::span<const std::string_view> Classes() { return kClasses; }
-
-Conjugated Conjugating(std::string_view lemma, char marker, std::string_view cls, Families& generated) {
+// Conjugating, with no family made when generated is null.
+Conjugated ConjugatingIn(std::string_view lemma, char marker, std::string_view cls, Families* generated) {
     Conjugated out;
     if (!lemma.ends_with("다") || lemma.size() == std::string_view("다").size()) {
         out.error = "KR " + Quote(lemma) + " is not a lemma ending in 다";
@@ -446,13 +443,29 @@ Conjugated Conjugating(std::string_view lemma, char marker, std::string_view cls
         out.error = std::string("unknown marker '") + marker + "'";
         return out;
     }
-    const std::string id = generated.Generate(marker, rows);
+    if (generated == nullptr) {
+        out.error = "no static family conjugates " + Quote(lemma);
+        return out;
+    }
+    const std::string id = generated->Generate(marker, rows);
     if (id.empty()) {
         out.error = std::string("no free ") + marker + " family ID";
         return out;
     }
     out.target = prefix + id;
     return out;
+}
+
+}  // namespace
+
+std::span<const std::string_view> Classes() { return kClasses; }
+
+Conjugated Conjugating(std::string_view lemma, char marker, std::string_view cls, Families& generated) {
+    return ConjugatingIn(lemma, marker, cls, &generated);
+}
+
+Conjugated StaticConjugating(std::string_view lemma, char marker, std::string_view cls) {
+    return ConjugatingIn(lemma, marker, cls, nullptr);
 }
 
 }  // namespace hdTrans::output

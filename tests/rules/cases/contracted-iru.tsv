@@ -17,7 +17,7 @@ lookup:contracted-iru	「……たぶん、みんなの合流地点が攻撃を�
 lookup:contracted-iru	「あぁ、もちろん行ったよ……まぁ想像はしてたが、すごい現場だったな」	「아아, 물론 갔어……뭐 상상은 하고 있었지만, 대단한 현장이었네」	fix	lookup
 lookup:contracted-iru	「勘弁してくれっ！！　これまでずっと妹か、それこそ娘のように思って接してきてたんだぞ！？」	「봐줘!! 지금까지 계속 여동생인가, 그야말로 딸처럼 생각해 접해 오고 있던 거야!?」	fix	lookup
 lookup:contracted-iru	「でも……俺だけを見てたわけじゃないよな？」	「하지만……나만을 보고 있던 게 아니지?」	fix	lookup
-lookup:contracted-iru	「べ、べつに、ケンカしてたわけじゃないし……」	「따, 딱히, 싸움하고 있던 게 아니고……」	fix	lookup
+lookup:contracted-iru	「べ、べつに、ケンカしてたわけじゃないし……」	「따, 딱히, 싸우고 있던 게 아니고……」	fix	lookup
 lookup:contracted-iru	見てた。	보았다.	keep	lookup
 lookup:contracted-iru	見てたの？	봤어?	keep	lookup
 lookup:contracted-iru	見てるだけだ。	보고 있을 뿐이다.	keep	lookup

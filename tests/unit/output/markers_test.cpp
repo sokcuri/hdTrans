@@ -5,6 +5,7 @@
 
 #include "fnv.h"
 #include "core/output/families.h"
+#include "core/output/korean.h"
 #include "hdtest.h"
 
 using namespace hdTrans::output;
@@ -144,4 +145,21 @@ HD_TEST(markers_dictionary_forms) {
     HD_CHECK_EQ(DictionaryForms("@", none), std::string("@"));
     HD_CHECK_EQ(DictionaryForms("", none), std::string());
     HD_CHECK(UnexpandedMarkers() >= before + 6);
+}
+
+// StaticConjugating gives the target Conjugating gives with a static family, and an error where
+// Conjugating makes a family.
+HD_TEST(markers_static_conjugating) {
+    for (const std::string_view lemma : {"버리다", "잊다", "들다", "싸우다"}) {
+        Families generated;
+        const Conjugated made = Conjugating(lemma, '&', "", generated);
+        const Conjugated fixed = StaticConjugating(lemma, '&', "");
+        HD_CHECK_EQ(fixed.error, std::string());
+        HD_CHECK_EQ(fixed.target, made.target);
+        HD_CHECK_EQ(generated.Size(), size_t{0});
+    }
+    Families generated;
+    HD_CHECK(Conjugating("일컫다", '&', "", generated).error.empty());
+    HD_CHECK(generated.Size() > 0);
+    HD_CHECK(!StaticConjugating("일컫다", '&', "").error.empty());
 }
