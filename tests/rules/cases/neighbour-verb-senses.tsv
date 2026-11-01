@@ -37,11 +37,7 @@ dict:jisjk:356900	「もう、今日のヒトキ君はそんな事ばっかり�
 dict:jisjk:356900	「じゃじゃ馬王女を大人しくさせてからじゃないと洗えないだろ」	!rule:dict:jisjk:356900	keep	local
 dict:jisjk:356900	暴れている相手に使う大人しくさせる魔法だ。	!rule:dict:jisjk:356900	keep	local
 dict:jisjk:93094	ああ、ドアに付いているレンズからこっちを見てるのか？	!rule:dict:jisjk:93094	fix	local
-dict:jisjk:93094	不知火「改陽炎型二番艦、不知火、配備に付きます！」	!rule:dict:jisjk:93094	fix	local
-dict:jisjk:93094	夕雲型駆逐艦、二番艦、巻雲、配置に付きました。	!rule:dict:jisjk:93094	fix	local
-dict:jisjk:93094	敵さん発見だ。仕掛けるぞ、魚雷戦よーい！各自持ち場に付け！	!rule:dict:jisjk:93094	fix	local
 dict:jisjk:93094	それにシグルド……。まさか、あなたが前王朝の残党に付いていたとはね……。	has:잔당에 붙어 있었다	fix	local
-dict:jisjk:93094	そうですね、私達十七駆が盾に……守りに付きます。	!rule:dict:jisjk:93094	fix	local
 dict:jisjk:93094	幼い頃、こっそり出かける親の後に付いていって秘密の祭をうっかり目撃したことがある。	rule:dict:jisjk:93094=뒤&E3@	keep	local
 dict:jisjk:93094	もつれそうな足を引きずって、ジークさんに付いていく。	rule:dict:jisjk:93094=뒤&E3@	keep	local
 dict:jisjk:93094	ブレトはカブリの様子を不思議がりながらも、彼の後に付いて行く。	rule:dict:jisjk:93094=뒤&E3@	keep	local
@@ -61,3 +57,4 @@ dict:jisjk:93288	後、ジュンに引導をわたそうと思っていたんだ
 dict:jisjk:93288	お手伝いしようと思って、彼女の尻を上げさせた。	has:도우려고 해,	keep	local
 dict:jisjk:93288	「…ええ。そっちは別件として頼もうと思っていました」	has:부탁하려고 했습니다	keep	local
 dict:jisjk:93288	その日は、学校の行事について聞こうと思っていた。	has:들으려고 했다	keep	local
+dict:jisjk:93094	東雲さんに言われた非常扉も各階に付いている。	has:각층에 붙어 있다	fix	local

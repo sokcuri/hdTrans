@@ -1,4 +1,4 @@
-# 규칙: GRM-24, GRM-3073, GRM-3074, GRM-3075, GRM-3077, GRM-3078, GRM-3079, GRM-3080, GRM-3081, GRM-3082, LEX-3475, LEX-3476, LEX-3477, LEX-3478, LEX-3479, LEX-3480
+# 규칙: GRM-24, GRM-3073, GRM-3074, GRM-3075, GRM-3078, GRM-3079, GRM-3080, GRM-3081, GRM-3082, LEX-3475, LEX-3476, LEX-3477, LEX-3478, LEX-3479, LEX-3480
 rule	input	expected	kind	layer
 dict:jisjk:201813	麻衣は剣があると分かっても別に動じずそこまで持ってきた運動エネルギーを腕に回し、男の胸目掛けて攻撃する。	has:별로 동요하지 않고	fix	local
 dict:jisjk:201813	あいつとは別に行動する。	rule:dict:jisjk:201813=따로	keep	local
@@ -63,14 +63,14 @@ dict:jisjk:266208	死ぬくらい痛い	has:죽을 정도로 아프다	keep	loca
 dict:jisjk:266208	驚くくらい速く走った	has:놀랄 정도로 빠르게	keep	local-ending
 dict:jisjk:266208	ここの食事もびっくりするくらい美味しかった。	has:놀랄 정도로 맛있었다	keep	local-ending
 dict:jisjk:266208	「そうだよ？壊れるくらい抱いてほしいんだ。」	has:망가질 정도로 안아	keep	local-ending
-dict:jisjk:341207	実家に住んでいたが、月々に残る金は僅かなものだった。	has:얼마 안되는 것이었다	fix	local
-dict:jisjk:341207	蹄鉄の痕跡を近くで眺め見ても、得られる情報は僅かなものだった。	has:얼마 안되는 것이었다	fix	local
-dict:jisjk:341207	得られる快感も僅かなものと言えばそうだ。	has:얼마 안되는 것이라고	fix	local
-dict:jisjk:341207	他の者やモンスターとの遭遇を避けようと、僅かな音にも過敏に反応していた。	has:얼마 안되는 소리에도	fix	local
-dict:jisjk:341207	仲間達が作った僅かな隙を見て、砦を出たのが昨日のこと。	has:얼마 안되는 틈을	fix	local
-dict:jisjk:341207	後には、僅かな光のエフェクトだけが浮かんでいる。	has:얼마 안되는 빛의	fix	local
-dict:jisjk:341207	あれからまだ僅かな時間しか経っていない。	has:얼마 안되는 시간밖에	keep	local
-dict:jisjk:341207	相手は僅かな逡巡の後、再び逃走を謀る。	has:얼마 안되는 준순	fix	local
+dict:jisjk:151926	実家に住んでいたが、月々に残る金は僅かなものだった。	has:것이었다	fix	local
+dict:jisjk:151926	蹄鉄の痕跡を近くで眺め見ても、得られる情報は僅かなものだった。	has:것이었다	fix	local
+dict:jisjk:151926	得られる快感も僅かなものと言えばそうだ。	has:것이라고	fix	local
+dict:jisjk:151926	他の者やモンスターとの遭遇を避けようと、僅かな音にも過敏に反応していた。	has:소리에도	fix	local
+dict:jisjk:151926	仲間達が作った僅かな隙を見て、砦を出たのが昨日のこと。	has:틈을	fix	local
+dict:jisjk:151926	後には、僅かな光のエフェクトだけが浮かんでいる。	has:빛의	fix	local
+dict:jisjk:151926	あれからまだ僅かな時間しか経っていない。	has:시간밖에	keep	local
+dict:jisjk:151926	相手は僅かな逡巡の後、再び逃走を謀る。	has:준순	fix	local
 dict:jisjk:4138	いつも観察するのは数分だけ、それも見ているだけで行動を起こそうとは微塵も考えていない。	has:몇분만,	fix	local
 dict:jisjk:4138	王城に着き、数分だけ待たされた後、謁見の間へと通された。	!rule:dict:jisjk:4138	fix	local
 dict:jisjk:4138	クシルさんの人望というのはこの数分だけでもよくわかった。	!rule:dict:jisjk:4138	keep	local
@@ -124,30 +124,35 @@ dict:jisjk:261846	それに対しレオンは首を横に振る。	has:그에 �
 dict:jisjk:261846	当然、それに対する返答は沈黙だ。	rule:dict:jisjk:261846=그에 대&AV@	keep	local
 dict:jisjk:261846	それに対する女神の返答がこれだ。	rule:dict:jisjk:261846=그에 대&AV@	keep	local
 dict:jisjk:261846	しかしそれに対するマリーの反応は重い。	rule:dict:jisjk:261846=그에 대&AV@	keep	local
-dict:jisjk:342965	「せっかく助けたのに着いた瞬間、死んだら助けた意味ないだろ？」と言われた。	has:죽으면 도운 의미	fix	local-ending
-dict:jisjk:342965	帰りの車で少し便意を感じることもあったが、少し我慢していたら収まった。	has:참고 있었더니	keep	local-ending
-dict:jisjk:342965	婚姻届の証人欄に由春が名前を書き込むとき、狙い定めて耳元で言ったら睨まれた。	has:말했더니	keep	local-ending
-dict:jisjk:342965	茶化す彩香さんにいいでしょって言ったら笑ってた。	has:말했더니	keep	local-ending
-dict:jisjk:6341	しばらくしてミカエラは貴族との婚姻を早々と決めて、その男のもとへ嫁いでいった。	rule:dict:jisjk:6341=곁	fix	local
+dict:jisjk:6341	しばらくしてミカエラは貴族との婚姻を早々と決めて、その男のもとへ嫁いでいった。	rule:dict:jisjk:6341=아래	keep	local
 dict:jisjk:6341	「いいんだ、早く家族のもとへ帰りなさい」	has:가족의 곁으로	fix	local
 dict:jisjk:6341	黒装束を纏った人々が私のもとへ来て、同じ意味を含んだ言葉を吐く。	has:내 곁에 와	fix	local
 dict:jisjk:6341	その男子生徒は、僕のもとへとやってきて、確かに僕のことを上司と呼んだ。	has:내 곁으로 와	fix	local
 dict:jisjk:6341	患者のもとへと向かうピアの手には、一冊のノートがあった。	has:환자의 곁으로	fix	local
-dict:jisjk:6341	茫然としている兵士のもとへ、上官が息を切らしながら駆け寄って来た。	has:병사의 곁에	fix	local
 dict:jisjk:6341	遅れて到着した僕は、謝りながら優香のもとへ駆け寄る。	has:유카의 곁에	fix	local
 dict:jisjk:6341	俺は”教員もどき”に脇目もくれず、先生のもとへと歩いていく。	has:선생님의 곁으로	fix	local
 dict:jisjk:6341	ユウト・・師匠のもとでお世話になり始めてから１ヶ月が経った。	rule:dict:jisjk:6341=아래	keep	local
 dict:jisjk:6341	そう心に決めて毎日祖父のもとで学んだ。	rule:dict:jisjk:6341=아래	keep	local
 dict:jisjk:267461	マリアは嬉しそうに嘶いて、殿下のもとに走る。	has:전하의 곁으로 달린다	fix	local
-dict:jisjk:267461	すると、なんとそんな私のもとに王子様がお見舞いに訪ねて来られた。	has:내 곁으로 왕자님이	fix	local
-dict:jisjk:267461	…心配しないでください。私は…涼月は必ず、帰ります…皆さんのもとに。	has:여러분의 곁으로	fix	local
-dict:jisjk:267461	ここから数百年経ち、少年のもとに二人の男たちが訪れた。	has:소년의 곁으로	fix	local
 dict:jisjk:267461	何人かが一政のもとに集まった。	has:곁으로 모였다	fix	local
 dict:jisjk:267461	曾祖母のもとに帰ってきたのは、遺骨代わりの小石が入った壺でした」	has:증조모의 곁으로 돌아온	fix	local
-dict:jisjk:267461	寮に戻られてすぐ、シンシア様が認めた長いお手紙は、何とかお母上のもとに届き、	has:어머님의 곁으로 닿아	fix	local
 dict:jisjk:267461	正義の名のもとに悪を滅ぼす。	rule:dict:jisjk:267461=아래에서	keep	local
 dict:jisjk:267461	「俺は真の男女平等主義者だ。男女平等の名のもとに、割り勘を提案する！」	rule:dict:jisjk:267461=아래에서	keep	local
 dict:jisjk:373504	その財力と都の美しさ、人が住んでいると思えないほどの清潔さ、近くで見た夢の城はこの世の物とは思えない。	has:정도의 청결함,	fix	local-ending
 dict:jisjk:373504	「ハハ少しくらい平気さ」	has:괜찮아	keep	local-ending
 dict:jisjk:373504	「大丈夫さ、それにあんたが自分の娘を信じないでどうするのさ」	has:괜찮아,	keep	local-ending
 dict:jisjk:373504	「そう深刻にならずとも、僕に任せておけば大丈夫さ！」	has:괜찮아!	keep	local-ending
+dict:jisjk:6341	艶かしい美女がジェイドのもとへやって来る。	has:제이드의 곁으로 온다	fix	local
+dict:jisjk:6341	そしてカレンが真也たちのもとへ戻ってくる。	has:신야들의 곁으로 돌아온다	fix	local
+dict:jisjk:267461	すかさず、彼が教授のもとに駆け寄った。	has:교수의 곁으로 달려갔다	fix	local
+dict:jisjk:267461	観念した彼は、とうとうカリーナのもとに向かうのだった。	has:카리나의 곁으로 향했다	fix	local
+dict:jisjk:267461	みなみが去って、彼の意識は川崎とあさひ、大塚のもとに帰ってくる。	has:오오츠카의 곁으로 돌아온다	fix	local
+dict:jisjk:267461	そのまま天空樹のもとに残ったレオニスは、ユグドラエルや白銀の君と話をしていた。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:267461	ニアが王子のもとに嫁いでから半年。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:267461	快楽堕ちする星のもとに生まれたＴＨＥ・姫騎士。	rule:dict:jisjk:267461=아래에서	keep	local
+dict:jisjk:342314	「知識と力を持たねばできぬ芸当じゃ。どうじゃ？見ても、人間の少女にしか見えまい」	has:보일	keep	local-ending
+dict:jisjk:342314	判断が鈍ったとしか言えまい。	has:말할 수 있을	keep	local-ending
+dict:jisjk:342314	これで、髪が短くて胸が見えなければ、男にしか見えまい。	has:보일	keep	local-ending
+dict:jisjk:6301	困ったら、お母さんにでも。	rule:dict:jisjk:6301=에게라도	keep	local
+dict:gram:youni:purpose-subject	領民が喜ぶように、インフラの整備を進言しようかとか。	has:기뻐하도록,	keep	local-ending
+dict:gram:youni:purpose-subject	木が喜ぶように、全身に花を咲かせた。	has:기뻐하도록,	keep	local-ending
