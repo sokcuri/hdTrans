@@ -40,3 +40,9 @@ cx:sono-ue-place:10	その上から砂がたまり、あたりは荒れ地と化
 cx:sono-ue-place:10	その上が三階の天井まで吹き抜けになっている。	그 위가 3층의 천장까지 부가 되어 있다.	fix	rewrites
 cx:sono-ue-place:10	その上、彼は強い。	게다가, 그는 강하다.	keep	rewrites
 cx:sono-ue-place:10	その上で話そう。	그런 다음에 이야기하자.	keep	rewrites
+cx:kiwa-suru:10	見はしない。	보지는 않는다.	keep	rewrites
+cx:kanenai-passive:20	壊しかねない状況	부술 수도 있는 상황	keep	rewrites
+cx:kanenai-passive:30	男は踏みつぶされかねないので逃げた。	남자는 짓뭉개질 수도 있기 때문에 도망쳤다.	fix	rewrites
+cx:kanenai-passive:30	彼なら壊しかねないので	그라면 부술 수도 있는 것으로	keep	rewrites
+cx:kanenai-passive:40	壊しかねないし	부술 수도 있고	keep	rewrites
+cx:kanenai-passive:60	壊しかねないと思った。	부술 수도 있다고 생각했다.	keep	rewrites
