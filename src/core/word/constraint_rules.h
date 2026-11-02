@@ -103,6 +103,9 @@ enum class ConstraintContext : uint8_t {
     AfterNumeral,       // right after a numeral (7体の中: the counter 体)
     AfterNumeralBeforeKurai,  // right after a numeral, with くらい or ぐらい after it (五歩くらい: the counter 歩
                               // and くらい, not the verb 歩く)
+    AfterCountBeforeKanji,  // right after a numeral and a one-kanji counter, with a kanji that is no numeral
+                            // after the word
+                            // (7体の中鬼: の and the noun 中鬼, not の中; 8体の中一つ stays)
     NameAfterNumeral,   // right after a numeral, with every reading of the word from the name layer and a
                         // counter (Ct) that the word starts with (1日村: the counter 日 and 村, not the name 日村)
     BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
