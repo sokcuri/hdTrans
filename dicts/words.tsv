@@ -27174,3 +27174,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 結	&Ha@	M420			GN			LEX-3486: 結う 묶다			ゆう	w:29119
 処	처단&AV@	M433			GN			LEX-3486: 処す 처단하다			しょす	w:29120
 屈	굴&AV@	M433			GN			LEX-3486: 屈す 굴하다			くっす	w:29121
+をくべ	(을)를 &H5@	M437		TuPj	GN			LEX-3700: 手紙をくべる 편지를 넣다			をくべる	w:29900
+薪をくべ	장작을 지&CM@	M437			GN			LEX-3700: 薪をくべる 장작을 지피다			まきをくべる	w:29902
+火をくべ	불을 지&CM@	M437			GN			LEX-3700: 火をくべる 불을 지피다			ひをくべる	w:29903
+にくべ	에 &H5@	M437		TuPj	GN			LEX-3700: 火にくべる 불에 넣다			にくべる	w:29901
