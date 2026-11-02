@@ -1,0 +1,27 @@
+# 규칙: NUM-30
+rule	input	expected	kind	layer
+dict:lex:ittai-counter	その周りに伏兵らしきものはいないけれど、機械の陰には一人……いや、一体だけ。	그 주위에 복병 같은 것은 없지만, 기계의 그늘에는 한 사람……아니, 한 체만.	fix	local
+dict:lex:ittai-counter	手負いの中鬼が一体だけとはいえ、	상처 입은 중귀가 한 체만이라고 해도,	fix	local
+dict:lex:ittai-counter	それは一体何の話だ。	그것은 도대체 무슨 이야기다.	keep	local
+compose:native-count	その言葉と共に、二体の水人形の腕がゆっくりとシュレムへと伸び、	그 말과 함께, 두 체의 물인형의 팔이 천천히 슈렘으로 자라	fix	compose
+compose:native-count	二体のモンスターが閃光と共にリングに出現する。	두 체의 몬스터가 섬광과 함께 링에 출현한다.	fix	compose
+compose:native-count	二体のエルフは、対照的な格好だった。	두 체의 엘프는, 대조적인 모습이었다.	fix	compose
+compose:native-count	５体の魔物を倒した	5체의 마물을 쓰러뜨렸다	keep	compose
+compose:native-count	１０体の中から	10체 중에서	keep	compose
+constraint:nonaka-after-count	7体の中鬼が現れた。	7체의 중귀가 나타났다.	fix	lookup
+constraint:nonaka-after-count	７体の中鬼	7체의 중귀	fix	lookup
+constraint:nonaka-after-count	８体の中一つだけ存在する本体。	8체 안 하나만 존재하는 본체.	keep	lookup
+constraint:nonaka-after-count	７体の中級ドラゴン	7체의 중급 드래곤	keep	lookup
+constraint:nonaka-after-count	森の中で	숲속에서	keep	lookup
+constraint:nonaka-after-count	部屋の中を見た	방 안을 보았다	keep	lookup
+cx:more-count:62	もう一日休む？	하루 더 쉬어?	fix	rewrites
+cx:more-count:62	もう一日待てば帰ってくる。	하루 더 기다리면 돌아온다.	fix	rewrites
+cx:more-count:62	もう一日寝ていれば治る感じはする	하루 더 자고 있으면 낫는 느낌은 한다	fix	rewrites
+cx:more-count:62	昨日……もう一日経っているのか。	어제……이미 하루 지나 있는 건가.	keep	rewrites
+cx:more-count:62	「もう一日終わるよ！」	「이제 하루 끝나!」	keep	rewrites
+cx:more-count:62	もう一日しかないと思うのか	이제 하루밖에 없다고 생각하는 건가	keep	rewrites
+cx:more-count:64	「まゆちゃん、もう１日待ってください。」	「마유짱, 하루 더 기다려 주세요.」	fix	rewrites
+cx:more-count:64	もう１日村に泊ってから帰ろう	이제 1일 마을에 묵고 나서 돌아가자	keep	rewrites
+cx:more-count:64	もう１日に１個は食べないと	이제 1일에 1개는 먹지 않으면	keep	rewrites
+constraint:nonaka-after-count	「でさ、なんで膝の上？」	「그리고, 왜 무릎 위?」	keep	lookup
+constraint:nonaka-after-count	暗闇の中彼女は笑った。	lacks:의 안	keep	lookup

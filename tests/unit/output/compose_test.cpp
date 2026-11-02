@@ -264,8 +264,8 @@ HD_TEST(compose_native_counts) {
         {{{"一発", "110", "", "한 방"}, {"目", "110", "Ct", "째"}}, {2}, "첫 번째."},
         {{{"一枚", "110", "", "한 장"}, {"の", "200", "", "의"}}, {2}, "한 장의."},
         {{{"一日", "110", "", "하루"}}, {1}, "하루."},
-        // 체 counts with Sino-Korean numerals.
-        {{{"八", "110", "NjNd", "8"}, {"体", "110", "Ct", "체"}}, {2}, "8체."},
+        // 体 after a kanji numeral counts with native numerals (NUM-30).
+        {{{"八", "110", "NjNd", "8"}, {"体", "110", "Ct", "체"}}, {2}, "여덟 체."},
         {{{"数", "110", "NjNd", "몇"}, {"体", "110", "Ct", "체"}}, {2}, "몇 체."},
         {{{"二十", "110", "NjNd", "20"}, {"匹", "110", "Ct", "마리"}}, {2}, "20마리."},
         // A number written in Hangul stands apart from its counter; 万 after digits joins them.

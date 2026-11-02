@@ -153,6 +153,8 @@ constexpr ConstraintRule kRules[] = {
      "수 바로 뒤의 体の中는 몸속이 아니라 조수사 体와 の中 (10体の中から 10몸속에서 → 10체 중에서)", {}},
     {"verb-before-kurai", ConstraintWord::Any, "", ConstraintContext::AfterNumeralBeforeKurai, ConstraintReject::AllVerbs,
      "수 바로 뒤에서 くらい, ぐらい 앞의 조수사는 동사(歩く, 継ぐ)의 어간이 아님 (五歩くらい 5 걷는들 있고 → 다섯 걸음 정도, 三つぐらい 3 따르는들 → 세 개 정도)", {}},
+    {"nonaka-after-count", ConstraintWord::Source, "の中", ConstraintContext::AfterCountBeforeKanji, ConstraintReject::Word,
+     "수와 조수사 바로 뒤에서 한자가 이어지는 の中는 중(가운데)이 아니라 の와 中으로 시작하는 명사 (7体の中鬼 7체 중귀 → 7체의 중귀)", {}},
     {"name-after-numeral", ConstraintWord::Kanji, "", ConstraintContext::NameAfterNumeral, ConstraintReject::Word,
      "수 바로 뒤에서 이름으로만 읽히고 조수사로 시작하는 한자 낱말은 쓰지 않고 그 조수사로 읽음 (１日村に 1히무라에 → 1일 마을에). 第5水陸両用軍団은 그대로", {}},
     {"sonoba-before-sho", ConstraintWord::Source, "その場", ConstraintContext::BeforeListed, ConstraintReject::Word,
@@ -521,6 +523,16 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     case ConstraintContext::AfterNumeralBeforeKurai:
         return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos &&
                (after.starts_with("くらい") || after.starts_with("ぐらい"));
+    case ConstraintContext::AfterCountBeforeKanji: {
+        if (after.empty() || NameClassOf(FirstChar(after)) != kClassKanji ||
+            kNumerals.find(text::DecodeRune(after).cp) != std::u32string_view::npos) {
+            return false;
+        }
+        const std::string_view counter = LastChar(lead);
+        if (counter.empty() || NameClassOf(counter) != kClassKanji) return false;
+        const std::string_view number = LastChar(lead.substr(0, lead.size() - counter.size()));
+        return !number.empty() && kNumerals.find(text::DecodeRune(number).cp) != std::u32string_view::npos;
+    }
     case ConstraintContext::NameAfterNumeral:
         return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos &&
                std::all_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
