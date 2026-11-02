@@ -33,3 +33,11 @@ lookup:copula-after-nominal	必要なものでもあるから潰してないん�
 lookup:copula-after-nominal	多分いつものことなのでしょう。	has:평소의 일이겠죠	keep	analysis
 lookup:copula-after-nominal	人間なのであった。	인간인 것이었다.	keep	analysis
 lookup:copula-after-nominal	弱いものでは勝てない。	has:약한 것으로는	keep	analysis
+lookup:copula-after-nominal	暇なのでしょう。	한가한 것이죠.	fix	analysis
+lookup:copula-after-nominal	悪いものではないか。	나쁜 것이 아닌가.	fix	analysis
+lookup:copula-after-nominal	暇なのでした。	한가한 것이었습니다.	fix	analysis
+lookup:copula-after-nominal	暇なのでしたいことをした。	한가해서 하고 싶은 것을 했다.	keep	analysis
+lookup:copula-after-nominal	好きなのでしかたがない。	좋아해서 어쩔 수 없다.	keep	analysis
+lookup:copula-after-nominal	暇なのでしょっちゅう来る。	한가해서 언제나 온다.	keep	analysis
+lookup:copula-after-nominal	好きなのでしょうがない。	좋아해서 어쩔 수 없다.	keep	analysis
+lookup:copula-after-nominal	生理現象なのでしかたがない。	lacks:것으로	keep	analysis

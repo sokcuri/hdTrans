@@ -185,20 +185,29 @@ bool ProperCodes(std::string_view part, std::string_view sem) {
 }
 
 // The で of a word or ending in もので or わけで, or of なので, is the copula when the copula goes on after it:
-// である and its forms, でございます, でござる, でしょう, でした, でしかない, ではない (弱いものである:
-// もの + である, not もので + ある; 一つなのでございます, 静かなのであった, 可愛いものでしょ, 書くわけである);
-// so is that of any ending in ので before ござ (叫ぶのでござる). Before any other word the で stays
-// (忙しいものであまり来られない), and so does でも, which before ある may ask whether there is something
-// (食べたいものでもあるか).
+// である and its forms, でございます, でござる, でしょう, でしかない, ではない, and でした before the end, a
+// mark or a particle (弱いものである: もの + である, not もので + ある; 一つなのでございます, 静かなのであった,
+// 可愛いものでしょ, 書くわけである); so is that of any ending in ので before ござ (叫ぶのでござる). Before any other
+// word the で stays (忙しいものであまり来られない, 暇なのでしたいことをした, 好きなのでしかたがない,
+// 暇なのでしょっちゅう来る, 好きなのでしょうがない), and so does でも, which before ある may ask whether there is
+// something (食べたいものでもあるか).
 bool CopulaAfterNominal(std::string_view ending, std::string_view after) {
     if (!ending.ends_with("もので") && !ending.ends_with("わけで") && ending != "なので") {
         return ending.ends_with("ので") && after.starts_with("ござ");
     }
-    for (const std::string_view s : {"ある", "あった", "あって", "あろう", "ありま", "あり、", "あれば", "ござ", "しょ",
-                                     "した", "しか", "はな", "はあ", "はご"}) {
+    for (const std::string_view s : {"ある", "あった", "あって", "あろう", "ありま", "あり、", "あれば", "ござ", "しかな",
+                                     "はな", "はあ", "はご"}) {
         if (after.starts_with(s)) return true;
     }
-    return false;
+    if (after.starts_with("しょ")) {
+        return !after.starts_with("しょっ") && !after.starts_with("しょうがな") && !after.starts_with("しょうがね") &&
+               !after.starts_with("しょうが無");
+    }
+    if (!after.starts_with("した")) return false;
+    const char32_t next = text::DecodeRune(after.substr(std::string_view("した").size())).cp;
+    if (std::u32string_view(U"かねよがけのわなし").find(next) != std::u32string_view::npos) return true;
+    const bool letter = (next >= U'ぁ' && next <= U'ヿ') || (next >= U'㐀' && next <= U'鿿') || next == U'々';
+    return !letter;
 }
 
 }  // namespace
