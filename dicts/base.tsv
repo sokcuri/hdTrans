@@ -35351,6 +35351,7 @@ ttt	ttt	K110			GN				jisjk:201744
 どなり声	고함소리	I110	UHr		GN				jisjk:41371		
 どの	어느	P250			GN				jisjk:119118		
 どの	어느	E0H0			GN				jisjk:123579		
+どの	님	E0H0	VHn	Tu	GN	9900	||1 &&4 P-1== "1**" S-1!= "R上" D-1!= "R님" ||7 G+0== "Ow" P+1== "2**" S+1== "、" S+1== "。" S+1== "…" S+1== "……" S+1== "?"	명사 바로 뒤에서 조사나 문장 부호 앞의 どの는 경칭 殿의 가나 표기 님으로 고른다(門番どの、 문지기님; どの本은 그대로).	lex:dono-honorific		
 どのくらい	어느 정도	C0H0	UMeUXd		GN				jisjk:41372		
 どのぐらい	어느 정도	I110			GN				jisjk:41373		
 どのへん	어디쯤	E0H0			GN				jisjk:341136		
@@ -292313,7 +292314,7 @@ ttt	ttt	K110			GN				jisjk:201744
 窪	움푹 팬 곳	N110	VPlXXX		GN				jisjk:176294		
 窪	쿠보	N130	QCTVPl		GN				jisjk:259669		
 窪	와	N110	XXX	On	GN				jisjk:290907		
-窪み	구덩이	N110	VPl		GN				jisjk:29720		
+窪み	움푹 팬 곳	N110	VPl		GN				jisjk:29720		
 窪ノ内	쿠보노우치	N130	QCTVPl		GN				jisjk:290948		
 窪中島	쿠보나카지마	N130	QCTVPl		GN				jisjk:290945		
 窪之庄町	쿠보노쇼쵸	I130	QCTVPl		GN				jisjk:290949		
