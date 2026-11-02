@@ -1,0 +1,27 @@
+# 규칙: LEX-3621
+rule	input	expected	kind	layer
+constraint:ni-before-shimau	上着のポケットにしまった。	윗도리의 포켓에 넣었다.	fix	lookup
+constraint:ni-before-shimau	古泉は缶を鞄にしまった。	고이즈미는 캔을 가방에 넣었다.	fix	lookup
+constraint:ni-before-shimau	先生が教室に入ってきて、俺はスマホをポケットにしまった。	선생님이 교실에 들어 와, 나는 스마트폰을 포켓에 넣었다.	fix	lookup
+constraint:ni-before-shimau	エナはチョコレートを受けると、そのまま服のポケットにしまい込んだ。	태는 초콜릿을 받으면, 그대로 옷의 포켓에 넣어 두었다.	fix	lookup
+dict:jisjk:202286	金貨の入った袋を謎のポケットにしまうと、女は立ち上がった。	금화가 들어온 봉투를 수수께끼의 포켓에 넣으니, 여자는 일어섰다.	fix	local
+dict:jisjk:202286	それから、忘れ物をポケットにしまって、俺のところに戻ってくる。	그리고, 두고 온 물건을 포켓에 넣어, 내 곳으로 돌아온다.	fix	local
+constraint:ni-before-shimau	「今日はこれにしましょう」	「오늘은 이걸로 합시다」	keep	lookup
+constraint:ni-before-shimau	あ、これにしましょう。	아, 이것으로 합시다.	keep	lookup
+constraint:mata-before-ida	ガードレールをまたいだ。	가드 레일을 넘었다.	fix	lookup
+constraint:mata-before-ida	そして、俺の股間をまたいで……ゆっくり腰を下ろしていく。	그리고, 내 가랑이를 넘어……천천히 앉아 간다.	fix	lookup
+constraint:mata-before-ida	さすがに日付はまたいでいた。	아무래도 날짜는 넘고 있었다.	fix	lookup
+constraint:mata-before-ida	「うん。また行こうね」	「응. 또 가자」	keep	lookup
+constraint:nomizo-before-ochi	中鬼のみぞおちの辺りを斜めに貫いた。	중귀의 명치 근처를 비스듬하게 관철했다.	fix	lookup
+constraint:nomizo-before-ochi	油断していた俺のみぞおちに一撃。	방심하고 있던 내 명치에 일격.	fix	lookup
+constraint:nomizo-before-ochi	全ては神のみぞ知る。	모든 것은 신만이 안다.	keep	lookup
+constraint:nadode-before-dekiru	生き延びることなどできないのだ。	살아남는 것 등 할 수 없는 것이다.	fix	lookup
+constraint:nadode-before-dekiru	皇国を裏切る事などできない。	황국을 배반하는 일 등 할 수 없다.	fix	lookup
+constraint:nadode-before-dekiru	反論などできるはずがない。	반론 같은 건 할 수 있을 리가 없다.	fix	lookup
+constraint:nadode-before-dekiru	急に王に会うなどできない。	갑자기 왕을 만나는 등 할 수 없다.	keep	lookup
+constraint:hai-before-rare	この世界では、架子と一緒にはいられないんだ	이 세계에서는, 가자와 함께는 있을 수 없다	fix	lookup
+constraint:hai-before-rare	「あ、でも、現実では俺とふたりきりってわけでもないんだし、今と同じようにはいられないか」	「아, 하지만, 현실에서는 나와 둘이서는 것도 아니니까, 지금과 같이는 있을 수 없는가」	fix	lookup
+constraint:hai-before-rare	それでも呼ばずにはいられない。	그래도 부르지 않을 수 없다.	keep	lookup
+constraint:sonoba-before-sho	本来ならば立ち入り禁止のその場所で、二人の男子高校生が駄弁っていた。	원래라면 출입 금지의 그 장소에서, 두 사람의 남고생이 수다를 떨고 있었다.	fix	lookup
+constraint:sonoba-before-sho	その場所へ向けて、フランは再び歩き出した。	그 장소에 향하여, 프랑은 다시 걷기 시작했다.	fix	lookup
+constraint:sonoba-before-sho	その場でくるっと回転。	그 자리에서 빙그르 회전.	keep	lookup

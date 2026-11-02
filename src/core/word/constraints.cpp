@@ -153,6 +153,23 @@ constexpr ConstraintRule kRules[] = {
      "수 바로 뒤의 体の中는 몸속이 아니라 조수사 体와 の中 (10体の中から 10몸속에서 → 10체 중에서)", {}},
     {"name-after-numeral", ConstraintWord::Kanji, "", ConstraintContext::NameAfterNumeral, ConstraintReject::Word,
      "수 바로 뒤에서 이름으로만 읽히고 조수사로 시작하는 한자 낱말은 쓰지 않고 그 조수사로 읽음 (１日村に 1히무라에 → 1일 마을에). 第5水陸両用軍団은 그대로", {}},
+    {"sonoba-before-sho", ConstraintWord::Source, "その場", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "所 앞의 その場는 그 자리가 아니라 その와 場所 (その場所 그 자리소 → 그 장소)", {}, "所"},
+    {"ni-before-shimau", ConstraintWord::EndsInSource, "に", ConstraintContext::BeforeListed, ConstraintReject::Verbs,
+     "しまっ, しまい, しまう, しまわ, しまえ, しまお 앞에서 に로 끝나는 말은 にする가 아니라 に와 しまう (鞄にしまった 가방으로 해 기다렸다 → 가방에 넣었다). にします, にしましょう는 그대로", {},
+     "しまっ|しまい|しまう|しまわ|しまえ|しまお"},
+    {"mata-before-ida", ConstraintWord::Source, "また", ConstraintContext::BeforeListed, ConstraintReject::OtherTargets,
+     "いだ, いで 앞의 また는 부사 또가 아니라 跨ぐ의 과거와 て형 (柵をまたいだ 울타리를 또 있고다 → 울타리를 넘었다)", "&H4@",
+     "いだ|いで"},
+    {"nomizo-before-ochi", ConstraintWord::Source, "のみぞ", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "おち 앞의 のみぞ는 のみ + ぞ가 아니라 の + みぞおち (鬼のみぞおち 귀만 떨어지고 → 귀의 명치). 神のみぞ知る는 그대로", {}, "おち"},
+    {"nomi-before-zoochi", ConstraintWord::Source, "のみ", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "ぞおち 앞의 のみ도 같다", {}, "ぞおち"},
+    {"nadode-before-dekiru", ConstraintWord::Source, "などで", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "できる의 활용이 이어지는 などで는 など + で가 아니라 など + できる (ことなどできない 것 등으로 오지 않는 → 것 등 할 수 없는)", {},
+     "きな|きる|きま|きっこ|きず|きそ|きれ"},
+    {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
 };
 
 // The numerals that start a quantity (つい三時間前, つい3日前, つい数分前).
@@ -481,6 +498,13 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
                    return c.source.size() < source.size() && source.starts_with(c.source) && c.codes != nullptr &&
                           c.codes->gram.HasCode("Ct");
                });
+    case ConstraintContext::BeforeListed:
+        for (std::string_view rest = rule.follows; !rest.empty();) {
+            const std::size_t bar = rest.find('|');
+            if (after.starts_with(rest.substr(0, bar))) return true;
+            rest = bar == std::string_view::npos ? std::string_view() : rest.substr(bar + 1);
+        }
+        return false;
     case ConstraintContext::BeforeNasai:
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:

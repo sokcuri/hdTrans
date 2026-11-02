@@ -102,6 +102,8 @@ enum class ConstraintContext : uint8_t {
     AfterNumeral,       // right after a numeral (7体の中: the counter 体)
     NameAfterNumeral,   // right after a numeral, with every reading of the word from the name layer and a
                         // counter (Ct) that the word starts with (1日村: the counter 日 and 村, not the name 日村)
+    BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
+                        // (ことなどできない: など + できない, not などで + きない)
     NotAfterNoun,       // in its token right after something other than a noun: a て, で or っ, a word
                         // with a kanji or katakana that ends there and reads first as a verb or an
                         // adjective (見, バレ), or a word in hiragana alone (荒れ, かい); not after a
@@ -159,6 +161,7 @@ struct ConstraintRule {
     ConstraintReject reject;
     std::string_view note;    // the rule in Korean
     std::string_view target;  // ConstraintReject::OtherTargets and Target only
+    std::string_view follows = {};  // ConstraintContext::BeforeListed only
 };
 
 // In table order; each rule runs on the candidates the earlier ones left.
