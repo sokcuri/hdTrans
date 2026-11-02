@@ -151,6 +151,8 @@ constexpr ConstraintRule kRules[] = {
      "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
     {"karada-counter", ConstraintWord::Source, "体の中", ConstraintContext::AfterNumeral, ConstraintReject::Word,
      "수 바로 뒤의 体の中는 몸속이 아니라 조수사 体와 の中 (10体の中から 10몸속에서 → 10체 중에서)", {}},
+    {"verb-before-kurai", ConstraintWord::Any, "", ConstraintContext::AfterNumeralBeforeKurai, ConstraintReject::AllVerbs,
+     "수 바로 뒤에서 くらい, ぐらい 앞의 조수사는 동사(歩く, 継ぐ)의 어간이 아님 (五歩くらい 5 걷는들 있고 → 다섯 걸음 정도, 三つぐらい 3 따르는들 → 세 개 정도)", {}},
     {"name-after-numeral", ConstraintWord::Kanji, "", ConstraintContext::NameAfterNumeral, ConstraintReject::Word,
      "수 바로 뒤에서 이름으로만 읽히고 조수사로 시작하는 한자 낱말은 쓰지 않고 그 조수사로 읽음 (１日村に 1히무라에 → 1일 마을에). 第5水陸両用軍団은 그대로", {}},
     {"sonoba-before-sho", ConstraintWord::Source, "その場", ConstraintContext::BeforeListed, ConstraintReject::Word,
@@ -176,6 +178,20 @@ constexpr ConstraintRule kRules[] = {
     {"hashita-before-end", ConstraintWord::Source, "はした", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "が, けど, もの나 문장 부호 앞의 はした는 우수리가 아니라 は와 する의 과거 (巻き込まれはしたが 말려 들어가고 우수리가 → 말려 들어가기는 했지만). はした金은 그대로", {},
      "が|けど|けれ|もの|。|、|！|？|…|よ|ね|わ|ぞ|ん|の|か"},
+    {"matata-before-kibi", ConstraintWord::Source, "またた", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "き火, き木 앞의 またた는 瞬く가 아니라 また와 たき火, たき木 (またたき火 깜박여 불 → 또 모닥불)", {}, "き火|き木"},
+    {"konokurai-before-chi", ConstraintWord::Source, "この位", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "置 앞의 この位는 이 정도가 아니라 この와 位置 (この位置 이 정도치 → 이 위치)", {}, "置"},
+    {"kousetsu-before-mei", ConstraintWord::Source, "こう説", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "明, 得 앞의 こう説는 巷説이 아니라 こう와 説明, 説得 (こう説明した 항설명 했다 → 이렇게 설명했다)", {}, "明|得"},
+    {"hiruma-before-negative", ConstraintWord::Source, "ひるま", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "부정 ない, ず, ぬ 앞의 ひるま는 昼間이 아니라 怯む의 부정 (ひるまなかった 낮 없었다 → 기가 죽지 않았다). ひるまなら는 그대로", {},
+     "ない|なか|なく|なけ|ず|ぬ"},
+    {"kakedashi-before-ta", ConstraintWord::Source, "駆けだし", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "た 앞의 駆けだし는 신출내기가 아니라 駆け出す의 과거 (駆けだした 신출내기 → 달리기 시작했다)", {}, "た"},
+    {"woto-before-totonou", ConstraintWord::Source, "をと", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "とのえ, とのい, とのう, とのっ, とのわ 앞의 をと는 を와 인용 と가 아니라 を와 ととのえる, ととのう (息をととのえる 숨을 이라고와의 → 숨을 고르다)", {},
+     "とのえ|とのい|とのう|とのっ|とのわ"},
     {"toshite-before-shimau", ConstraintWord::Source, "として", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "しま 앞의 として는 조사 로서가 아니라 と + する의 て형과 しまう (糧としてしまう 양식으로서 끝낸다 → 양식으로 해버린다)", {}, "しま"},
     {"shiteo-before-kunnasai", ConstraintWord::EndsInSource, "てお", ConstraintContext::BeforeListed, ConstraintReject::Word,
@@ -305,6 +321,8 @@ bool WordFits(const ConstraintRule& rule, std::string_view source, std::string_v
         return cued != nullptr && cued->find(source) != cued->end();
     case ConstraintWord::WithKanji:
         return text::RuneCount(source) >= 2 && HasKanji(source);
+    case ConstraintWord::Any:
+        return true;
     case ConstraintWord::Katakana:
         return text::RuneCount(source) >= 2 && AllOfClass(source, kClassKatakana) &&
                NameClassOf(before) != kClassKatakana;
@@ -500,6 +518,9 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
         return after.starts_with("らっしゃ");
     case ConstraintContext::AfterNumeral:
         return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
+    case ConstraintContext::AfterNumeralBeforeKurai:
+        return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos &&
+               (after.starts_with("くらい") || after.starts_with("ぐらい"));
     case ConstraintContext::NameAfterNumeral:
         return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos &&
                std::all_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
@@ -1009,6 +1030,11 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
                 }
                 break;
             }
+            case ConstraintReject::AllVerbs:
+                for (const std::size_t k : same) {
+                    if (list[k].codes != nullptr && list[k].codes->part.Tag() == 'M') rejected.push_back(k);
+                }
+                break;
             case ConstraintReject::NonVerbs: {
                 auto verb = [&](std::size_t k) { return list[k].codes->part.Tag() == 'M'; };
                 if (std::none_of(same.begin(), same.end(), verb)) break;

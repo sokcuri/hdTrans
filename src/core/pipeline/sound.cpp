@@ -1332,6 +1332,8 @@ bool SoundText::WordStartsSound(size_t p, const SoundMatch& last, size_t end) co
     // Three kana or more before the と (ぼーっと, not すっと of はぶ|すっと).
     if (key.size() - (key.ends_with(U'ト') ? 1 : 0) < 3) return false;
     if (key.ends_with(U'ト') || (end > last.end && rs_[last.end] == U'と')) return true;
+    // An ono sound that a form of する goes on from (ちょっとほっこりした; spec SND-20).
+    if (!last.intj && end == last.end && end < rs_.size() && In(rs_[end], kSuruKana)) return true;
     return key.size() >= 4 && key.size() % 2 == 0 && key.substr(0, key.size() / 2) == key.substr(key.size() / 2);
 }
 

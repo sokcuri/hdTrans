@@ -1,0 +1,53 @@
+# 규칙: LEX-3702, SND-20
+rule	input	expected	kind	layer
+constraint:matata-before-kibi	またたき火	또 모닥불	fix	lookup
+constraint:matata-before-kibi	エギヤがまたたき火の中に薪を投げた。	에기야가 또 모닥불 안에 장작을 던졌다.	fix	lookup
+constraint:matata-before-kibi	自分はまたたき火に向かって座り直す	자신은 또 모닥불을 향해 고쳐 앉는다	fix	lookup
+constraint:matata-before-kibi	星がまたたいていた。	별이 깜박이고 있었다.	keep	lookup
+constraint:konokurai-before-chi	この位置	이 위치	fix	lookup
+constraint:konokurai-before-chi	この位置から見えているだけでも部屋の半分は箱の山で埋まっている。	이 위치에서 보이는 것만으로도 방의 반은 상자의 산에서 메워져 있다.	fix	lookup
+constraint:konokurai-before-chi	この位置なら人が群れてれば必ず目につく筈！	이 위치라면 사람이 군집하고 있으면 반드시 눈에 띌 터!	fix	lookup
+constraint:konokurai-before-chi	この位でいい	이 정도면 된다	keep	lookup
+constraint:kousetsu-before-mei	こう説明した。	이렇게 설명했다.	fix	lookup
+constraint:kousetsu-before-mei	事前に、ラブルフルードがこう説明していたからである。	사전에, 라브르후루드가 이렇게 설명하고 있었기 때문이다.	fix	lookup
+constraint:kousetsu-before-mei	こう説明すると、二人は自分達で用意した荷物を見て愕然とした表情を浮かべる。	이렇게 설명하면, 두 사람은 자신들로 준비한 짐을 보고 아연실색한 표정을 짓는다.	fix	lookup
+constraint:hiruma-before-negative	ひるまなかったのだから、	기가 죽지 않았으니까,	fix	lookup
+constraint:hiruma-before-negative	しかし、ゾンビたちはひるまなかった。	하지만, 좀비들은 기가 죽지 않았다.	fix	lookup
+constraint:hiruma-before-negative	なおもひるまないアマンダ。	여전히 기가 죽지 않는 어맨다.	fix	lookup
+constraint:hiruma-before-negative	狙撃兵は飛び交う銃弾にひるまず引き鉄を引いた。	저격병은 난무하는 총탄에 기가 죽지 않고 방아쇠를 당겼다.	keep	lookup
+constraint:hiruma-before-negative	昼間なら	낮이라면	keep	lookup
+constraint:kakedashi-before-ta	駆けだした。	달리기 시작했다.	fix	lookup
+constraint:kakedashi-before-ta	ティラノサウルスが駆けだした。	티라노사우루스가 달리기 시작했다.	fix	lookup
+constraint:kakedashi-before-ta	修一はそう言って、音楽室の方向に駆けだした。	슈우이치는 그렇게 말해, 음악실의 방향으로 달리기 시작했다.	fix	lookup
+constraint:kakedashi-before-ta	駆けだしの冒険者	신출내기의 모험가	keep	lookup
+dict:lex:towaie-na	巨大とはいえ人間とほぼ同じ	거대하다고는 해도 인간과 거의 같다	fix	lookup
+dict:lex:towaie-na	ザイダイバの公爵家のリュカ様も変わり者とはいえ公爵家だ。	자이다이바의 공작가의 류카님도 괴짜라고는 해도 공작가다.	keep	lookup
+dict:lex:towaie-na	夏とはいえ寒い。	여름이라고는 해도 춥다.	keep	lookup
+constraint:verb-before-kurai	三つぐらい違った。	세 개 정도 달랐다.	fix	lookup
+constraint:verb-before-kurai	五歩くらいの距離	5보만한 거리	fix	lookup
+constraint:verb-before-kurai	「それにそもそも、全国大会は会場が四つくらいに分かれるし」	「게다가 애초에, 전국 대회는 회장이 네 개정도 나뉘고」	fix	lookup
+constraint:verb-before-kurai	乗り物としてだされた鳥カゴの中は、ゆうにベッドが二つくらい入る広さがあった。	탈 것으로서 나온 새장 안은, 우아하게 침대가 두 개 정도 들어가는 넓이가 있었다.	fix	lookup
+constraint:verb-before-kurai	本気を出せば街一つくらいは焼き払えますのに。	진심을 보이면 거리 하나 정도는 다 태울 수 있는데요.	keep	lookup
+constraint:verb-before-kurai	十歩ぐらい	10보 정도	keep	lookup
+sound:ono-before-suru	ちょっとほっこりした。	조금 훈훈했다.	fix	sound
+sound:ono-before-suru	二人のメロディがちょっとほっこりしたのは秘密である。	두 사람의 멜로디가 조금 훈훈한 것은 비밀이다.	keep	sound
+sound:ono-before-suru	赤ちゃんのような声に、ちょっとほっこりしてしまう。	아기와 같은 목소리에, 조금 훈훈해버린다.	fix	sound
+sound:ono-before-suru	ちょっとほっこりした気持ちになって、笑ってしまった。	조금 훈훈한 기분이 되어, 웃어버렸다.	fix	sound
+sound:ono-before-suru	ほっこりした。	훈훈했다.	keep	sound
+sound:ono-before-suru	もっと、ほっこりした。	좀 더, 훈훈했다.	keep	sound
+sound:ono-before-suru	まだしっかりしている	아직 확실히 하고 있다	keep	sound
+constraint:woto-before-totonou	息をととのえる。	숨을 고른다.	fix	lookup
+constraint:woto-before-totonou	しっかりと身だしなみをととのえて工房にもどった	제대로 몸가짐을 가다듬어 공방에 돌아왔다	fix	sound
+constraint:woto-before-totonou	それをとって	그것을 취해	keep	lookup
+dict:v:r083a:2	幼少期のイジメの理由になりえるというのは、美桜でもわかった。	어린 시절의 이지메의 이유가 될 수 있다는 것은, 미오라도 알았다.	fix	lookup
+dict:v:r083a:2	それはある意味で諸刃の剣になりえた。	그것은 어떤 의미로 쌍날의 검이 될 수 있었다.	fix	lookup
+dict:v:r083a:2	敵になりえない	적이 될 수 없다	keep	lookup
+dict:v:r083a:1	俺たちは、ここに来るキッカケを作った奴隷商人と思しき奴等と一戦交えた。	우리는, 여기에 오는 계기를 만든 노예상인으로 보이는 놈들과 일전 섞었다.	fix	lookup
+dict:v:r083a:1	メイド長と思しき女性は諦めずに突っ込んできた。	메이드장으로 보이는 여성은 포기하지 않고 돌진해 왔다.	fix	lookup
+lookup:gaado-shita	ガードした腕	가드한 팔	fix	lookup
+lookup:gaado-shita	避けることは出来なかったが、持っていた杖でライジンの拳をガードしたのである。	피할 수 없었지만, 가지고 있던 지팡이로 라이진의 주먹을 가드했다.	fix	lookup
+lookup:gaado-shita	今度は顔だけはガードしたので先ほどよりはダメージが無い。	이번에는 얼굴만은 가드했으므로 방금 전보다는 데미지가 없다.	fix	lookup
+constraint:hiruma-before-negative	「ひるまならだいじょうぶ？」	「낮이라면 괜찮아?」	keep	lookup
+constraint:hiruma-before-negative	ってぼくはひるまなのにおきあがって	라는 나는 낮인데 일어나	keep	lookup
+pack:kana-verb-senses:2	手早く身支度をととのえた俺は宿をあとにし、	재빠르게 몸치장을 가다듬은 나는 숙소를 뒤로 하고,	fix	packs
+pack:kana-verb-senses:4	最後に塩と胡椒を少々入れて味をととのえ、	마지막으로 소금과 후추를 조금 넣어 맛을 맞춰	fix	packs
