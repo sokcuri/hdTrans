@@ -1,0 +1,42 @@
+# 규칙: GRM-3200, GRM-3201, GRM-3202, GRM-3203, GRM-3204, LEX-3701
+rule	input	expected	kind	layer
+dict:lex:tteba-imperative	「出てけっ！　オラ、出てけってば！」	「나가라! 오라, 나가라니까!」	fix	lookup
+dict:lex:tteba-imperative	ちょっと、その手を離せってば！	잠깐, 그 손을 떼어 놓으라니까!	fix	lookup
+dict:lex:tteba-imperative	「いいからどけってば！」	「됐으니까 물러나라니까!」	fix	lookup
+dict:lex:tteba-imperative	起きろってば！	일어나라니까!	fix	lookup
+dict:lex:tteba-imperative	「̶̶ああもう、止まれってば！」	「̶̶아 이제, 멈추라니까!」	fix	lookup
+dict:lex:tteba-imperative	だから違うってば！	그러니까 다르다니까!	keep	lookup
+dict:lex:tteba-imperative	「ねえってば！」	「있잖아 좀!」	keep	lookup
+dict:jisjk:342458	負傷者を取り残すなよっ！	부상자를 남겨두지 마!	fix	local
+dict:jisjk:342458	死ぬなよっ！	죽지 마!	fix	local
+dict:jisjk:342458	…そう急ぐなよっ！	…그렇게 서두르지 마!	fix	local
+dict:jisjk:342458	「く、来るなよっ！」	「오, 오지 마!」	fix	local
+dict:jisjk:342458	分かったよっ！	알았다!	keep	local
+dict:jisjk:342458	やるぞっ！	한다!	keep	local
+cx:nanto-say:10	この関係はなんと呼べば良いのだろう。	이 관계는 뭐라고 부르면 좋겠지.	fix	rewrites
+cx:nanto-say:10	なんと書いてあるの？	뭐라고 써 있는 거야?	fix	rewrites
+cx:nanto-say:10	彼をなんと呼ぶべきか。	그를 뭐라고 불러야 할까.	fix	rewrites
+cx:nanto-say:10	こういう時、何と言えば良いのだろう。	이런 때, 뭐라고 말하면 좋을까.	keep	rewrites
+cx:nanto-say:10	なんと、彼は王子だった。	무려, 그는 왕자였다.	keep	rewrites
+cx:nanto-say:10	なんと美しい花だろう。	너무나 아름다운 꽃일 것이다.	keep	rewrites
+cx:nanto-say:10	なんと言っても	뭐라 해도	keep	rewrites
+cx:kiwa-suru:10	雪崩に巻き込まれはしたが、	눈사태에 말려 들어가기는 했지만,	fix	rewrites
+cx:kiwa-suru:10	一応見はしたけど	일단 보기는 했지만	fix	rewrites
+cx:kiwa-suru:10	怒られはしたが、	혼나기는 했지만,	fix	rewrites
+cx:kiwa-suru:10	「えっと……食べはしますけど、一度に１０個は食べないですかね……？」	「음……먹기는 하는데요, 한꺼번에 10개는 먹지 않습니까……?」	fix	rewrites
+cx:kiwa-suru:10	つまり、疑われはしても、	즉, 의심받기는 해도,	fix	rewrites
+constraint:hashita-before-end	特例で貸しはしたが、もう剣は返してもらった。	특례로 대여는 했지만, 이제 검은 돌려 받았다.	keep	lookup
+constraint:hashita-before-end	見はしない。	보지는 않는다.	keep	lookup
+constraint:hashita-before-end	はした金	푼돈	keep	lookup
+cx:kanenai-passive:10	壊されかねない。	부수어질 수도 있다.	fix	rewrites
+cx:kanenai-passive:20	壊されかねない状況	부수어질 수도 있는 상황	fix	rewrites
+cx:kanenai-passive:40	「吹雪じゃ飛空挺も壊されかねないしこんなトコに町を作るなんて」	「눈보라는 비낙하산도 망가뜨려질 수도 있고 이런 토코에 마을을 만들다니」	fix	rewrites
+cx:kanenai-passive:60	思わぬ風に吹き飛ばされかねないと考えた。	생각하지 못한 바람으로 날려버려질 수도 있다고 생각했다.	fix	rewrites
+cx:kanenai-passive:10	こんな真似を母に知られたら、それこそ殺されかねない。	이런 짓을 어머니에게 알려지면, 그야말로 살해당할 수도 있다.	keep	rewrites
+cx:kanenai-passive:10	壊しかねない。	부술 수도 있다.	keep	rewrites
+cx:sono-ue-place:10	その上をいく。	그 위를 간다.	fix	rewrites
+cx:sono-ue-place:10	私は注意深くその上を歩きつつ、風景を眺めた。	나는 유심히 그 위를 걸으면서, 풍경을 바라보았다.	fix	rewrites
+cx:sono-ue-place:10	その上から砂がたまり、あたりは荒れ地と化していた。	그 위로부터 모래가 모여, 근처는 황무지화하고 있었다.	fix	rewrites
+cx:sono-ue-place:10	その上が三階の天井まで吹き抜けになっている。	그 위가 3층의 천장까지 부가 되어 있다.	fix	rewrites
+cx:sono-ue-place:10	その上、彼は強い。	게다가, 그는 강하다.	keep	rewrites
+cx:sono-ue-place:10	その上で話そう。	그런 다음에 이야기하자.	keep	rewrites
