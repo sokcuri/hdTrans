@@ -9,7 +9,8 @@
 // as a cry (やだ 싫어), whose last copy said again and clipped with っ closes its last syllable
 // with ㅅ (やだやだっ 싫어 싫엇). KR/lemma writes the lemma before する (ぼーっとした 멍했다); acts in
 // the fourth column keeps KR before a する that describes a noun after it (ぷるぷるさせる 부들부들,
-// ぷるぷるした身 탱글탱글한).
+// ぷるぷるした身 탱글탱글한); adj marks an ono row whose KR takes 하다 as an adjective, written KR한
+// before an の and a noun (ふわふわのクッション 푹신푹신한 쿠션).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -834,7 +835,7 @@
 ぬるっ	미끄덩	ono
 ぬるり	미끄덩	ono
 ぬるん	미끄덩	ono
-ぬるぬる	미끌미끌	ono
+ぬるぬる	미끌미끌	ono	adj
 ぬめ	미끈	ono
 ぬめっ	미끈	ono
 ぬめり	미끈	ono
@@ -861,7 +862,7 @@
 ねっとり	끈적	ono
 ねとねと	끈적끈적	ono
 ねばねば	끈적끈적	ono
-べとべと	끈적끈적	ono
+べとべと	끈적끈적	ono	adj
 べっとり	끈적	ono
 べちゃ	철퍽	ono
 べちゃっ	철퍽	ono
@@ -991,12 +992,12 @@
 ぷるんっ	탱글	ono
 ぷるる	탱글	ono
 ぷるるん	탱그르르	ono
-ぷるぷる	탱글탱글/부들부들하다	ono	acts
+ぷるぷる	탱글탱글/부들부들하다	ono	acts adj
 ぷるんぷるん	출렁출렁	ono
 ぷりっ	탱	ono
-ぷりぷり	탱글탱글	ono
-ぷりっぷり	탱글탱글	ono
-ぷりんぷりん	탱글탱글	ono
+ぷりぷり	탱글탱글	ono	adj
+ぷりっぷり	탱글탱글	ono	adj
+ぷりんぷりん	탱글탱글	ono	adj
 たぷ	출렁	ono
 たぷん	출렁	ono
 たぷんっ	출렁	ono
@@ -1022,16 +1023,16 @@
 ぷにゅっ	말랑	ono
 ぷにっ	말랑	ono
 ぷに	말랑	ono
-ぷにぷに	말랑말랑	ono
-ぷにっぷに	말랑말랑	ono
+ぷにぷに	말랑말랑	ono	adj
+ぷにっぷに	말랑말랑	ono	adj
 ふにっ	말랑	ono
 ふにふに	말랑말랑	ono
 ふにゅふにゅ	말랑말랑	ono
 ふにゃふにゃ	흐물흐물	ono
 ふにゃり	흐물	ono
 むちっ	탱	ono
-むちむち	포동포동	ono
-むっちむち	포동포동	ono
+むちむち	포동포동	ono	adj
+むっちむち	포동포동	ono	adj
 むっちり	탱탱	ono
 もみもみ	주물주물	ono
 もーみもーみ	주무울주무울	ono
@@ -1126,10 +1127,10 @@
 とろっ	걸쭉	ono
 とろり	걸쭉	ono
 とろん	몽롱	ono
-どろどろ	질척질척	ono
+どろどろ	질척질척	ono	adj
 どろっ	걸쭉	ono
 どろり	걸쭉	ono
-どろっどろ	질척질척	ono
+どろっどろ	질척질척	ono	adj
 ねばっ	끈적	ono
 ぬちょり	질퍽	ono
 れろり	할짝	ono
@@ -1175,7 +1176,7 @@
 ぐにゅり	물컹	ono
 ぐにゅぐにゅ	물컹물컹	ono
 ぐにんぐにん	물컹물컹	ono
-くねくね	꼬불꼬불	ono
+くねくね	꼬불꼬불	ono	adj
 くねっ	꼬불	ono
 ぐねぐね	구불구불	ono
 うねうね	구불구불	ono
@@ -1355,12 +1356,12 @@
 ぱちぱちぱち	짝짝짝	ono
 ぱっちり	똘망똘망	ono
 ぱりっ	바삭	ono
-ぱりぱり	바삭바삭	ono
+ぱりぱり	바삭바삭	ono	adj
 ぱりん	쨍그랑	ono
 ぱりーん	쨍그랑	ono
 ぱさっ	툭	ono
 ぱさり	툭	ono
-ぱさぱさ	푸석푸석	ono
+ぱさぱさ	푸석푸석	ono	adj
 ぱらり	팔랑	ono
 ぱふっ	폭	ono
 ぱふぱふ	폭신폭신	ono
@@ -1416,7 +1417,7 @@
 がばっ	벌떡	ono
 がばぁ	버얼떡	ono
 がば	벌떡	ono
-がばがば	헐렁헐렁	ono
+がばがば	헐렁헐렁	ono	adj
 がくっ	털썩	ono
 がくん	덜컥	ono
 がくり	털썩	ono
@@ -1485,7 +1486,7 @@
 こんっ	똑	ono
 ごつん	쿵	ono
 ごつっ	쿵	ono
-ごつごつ	울퉁불퉁	ono
+ごつごつ	울퉁불퉁	ono	adj
 ごつんごつん	쿵쿵	ono
 ごっつんごっつん	쿵쿵	ono
 ごんっ	쿵	ono
@@ -1553,7 +1554,7 @@
 ぽろり	툭	ono
 ぽろぽろ	뚝뚝	ono
 ぼろっ	너덜	ono
-ぼろぼろ	너덜너덜	ono
+ぼろぼろ	너덜너덜	ono	adj
 ぼろり	툭	ono
 ぽつん	덩그러니	ono
 ぽつり	툭	ono
@@ -1593,7 +1594,7 @@
 さらっ	스윽	ono
 さらり	스윽	ono
 さくっ	싹둑	ono
-さくさく	바삭바삭	ono
+さくさく	바삭바삭	ono	adj
 さくり	싹둑	ono
 ざくっ	썩둑	ono
 ざくざく	서걱서걱	ono
@@ -1765,7 +1766,7 @@
 ぺたんっ	털썩	ono
 ぺたぺた	찰싹찰싹	ono
 べたっ	철썩	ono
-べたべた	끈적끈적	ono
+べたべた	끈적끈적	ono	adj
 べったり	찰싹	ono
 ぺちっ	찰싹	ono
 ぺちん	찰싹	ono
@@ -1893,11 +1894,11 @@
 びゅうびゅう	휭휭	ono
 そよそよ	살랑살랑	ono
 さわさわ	살랑살랑	ono
-ひらひら	팔랑팔랑	ono
+ひらひら	팔랑팔랑	ono	adj
 ひらり	살짝	ono
 ふわっ	둥실	ono
 ふわり	사뿐	ono
-ふわふわ	푹신푹신	ono
+ふわふわ	푹신푹신	ono	adj
 ふんわり	폭신	ono
 ほわほわ	포근포근	ono
 ぽかぽか	따끈따끈	ono
@@ -1942,12 +1943,12 @@
 むっくり	부스스	ono
 ぴかっ	번쩍	ono
 ぴかー	번쩍	ono
-ぴかぴか	반짝반짝	ono
-ぴっかぴか	반짝반짝	ono
+ぴかぴか	반짝반짝	ono	adj
+ぴっかぴか	반짝반짝	ono	adj
 ぴかり	번쩍	ono
 きらっ	반짝	ono
 きらり	반짝	ono
-きらきら	반짝반짝	ono
+きらきら	반짝반짝	ono	adj
 きらりん	반짝	ono
 きらーん	반짜악	ono
 きらん	반짝	ono
@@ -1956,8 +1957,8 @@
 ぎらぎら	이글이글	ono
 ちかちか	깜빡깜빡	ono
 ちかっ	깜빡	ono
-てかてか	번들번들	ono
-つやつや	반들반들	ono
+てかてか	번들번들	ono	adj
+つやつや	반들반들	ono	adj
 ぴかーん	번쩍	ono
 ぺかー	번쩍	ono
 びかびか	번쩍번쩍	ono
@@ -2032,8 +2033,8 @@
 つるっ	미끄덩	ono
 つるり	매끈	ono
 つるん	매끈	ono
-つるつる	매끈매끈	ono
-つるっつる	매끈매끈	ono
+つるつる	매끈매끈	ono	adj
+つるっつる	매끈매끈	ono	adj
 つやっ	반들	ono
 ぷにぷにっ	말랑말랑	ono
 ぴょん	뿅	ono
@@ -2099,9 +2100,9 @@
 でれっ	헤벌쭉	ono
 めろめろ	흐물흐물	ono
 もえもえ	모에모에	ono
-ほくほく	포슬포슬	ono
-ほかほか	따끈따끈	ono
-ほっかほか	따끈따끈	ono
+ほくほく	포슬포슬	ono	adj
+ほかほか	따끈따끈	ono	adj
+ほっかほか	따끈따끈	ono	adj
 ぬくぬく	뜨뜻	ono
 ぬっくぬく	뜨뜻	ono
 ひやっ	섬뜩	ono
@@ -2118,7 +2119,7 @@
 ゆらっ	흔들	ono
 ゆらり	흔들	ono
 ゆさゆさっ	출렁출렁	ono
-ゆるゆる	느슨	ono
+ゆるゆる	느슨	ono	adj
 ゆるり	느긋	ono
 ゆるっ	느슨	ono
 だらっ	축	ono
@@ -2291,19 +2292,19 @@
 ふんわりと	폭신	ono
 ふわっと	둥실	ono
 ふわーっ	두우웅실	ono
-ふかふか	푹신푹신	ono
-ふっかふか	푹신푹신	ono
-もふもふ	복슬복슬	ono
-もっふもふ	복슬복슬	ono
+ふかふか	푹신푹신	ono	adj
+ふっかふか	푹신푹신	ono	adj
+もふもふ	복슬복슬	ono	adj
+もっふもふ	복슬복슬	ono	adj
 もふっ	복슬	ono
-もこもこ	몽실몽실	ono
-もっこもこ	몽실몽실	ono
+もこもこ	몽실몽실	ono	adj
+もっこもこ	몽실몽실	ono	adj
 もこっ	불룩	ono
 もっこり	불룩	ono
 もさもさ	덥수룩	ono
 もじゃもじゃ	더부룩	ono
 もじゃもじゃもじゃ	더부룩	ono
-ぼさぼさ	부스스	ono
+ぼさぼさ	부스스	ono	adj
 ぼさっ	멍	ono
 ぼさっと	멍하니/멍하다	ono
 ぼそっ	툭	ono
@@ -2329,12 +2330,12 @@
 ぷにぷにっと	말랑말랑	ono
 むにゅむにゅっ	물컹물컹	ono
 ぷよぷよ	말랑말랑	ono
-ぶよぶよ	물렁물렁	ono
+ぶよぶよ	물렁물렁	ono	adj
 ぶにぶに	물렁물렁	ono
 ぷにん	말랑	ono
 ぷにんぷにん	말랑말랑	ono
 ふにんふにん	말랑말랑	ono
-もちもち	쫀득쫀득	ono
+もちもち	쫀득쫀득	ono	adj
 もっちり	쫀득	ono
 むにむにっ	말랑말랑	ono
 ふよふよ	둥실둥실	ono
@@ -2364,7 +2365,7 @@
 すらっと	늘씬	ono
 すらすら	술술	ono
 すいすい	술술	ono
-すべすべ	매끈매끈	ono
+すべすべ	매끈매끈	ono	adj
 すべっ	미끄덩	ono
 すりっ	부비	ono
 すりすりっ	부비부비	ono
@@ -2401,21 +2402,21 @@
 ごつごつっ	울퉁불퉁	ono
 いがいが	따끔따끔	ono
 いぼいぼ	오돌토돌	ono
-ざらざら	까칠까칠	ono
+ざらざら	까칠까칠	ono	adj
 ざらっ	까칠	ono
 ざらり	까칠	ono
 ざらっと	까칠	ono
 つぶつぶ	오돌오돌	ono
 ぶつぶつっ	투덜투덜	ono
-しわしわ	쭈글쭈글	ono
+しわしわ	쭈글쭈글	ono	adj
 しわくちゃ	꼬깃꼬깃	ono
-よれよれ	후줄근	ono
-ぼろっぼろ	너덜너덜	ono
+よれよれ	후줄근	ono	adj
+ぼろっぼろ	너덜너덜	ono	adj
 ずたずた	갈기갈기	ono
-ずたぼろ	너덜너덜	ono
+ずたぼろ	너덜너덜	ono	adj
 ばらっ	후드득	ono
 ちりちり	곱슬곱슬	ono
-くりくり	동글동글	ono
+くりくり	동글동글	ono	adj
 くりっ	동글	ono
 くりっと	동글	ono
 ころころっ	데굴데굴	ono
@@ -2441,8 +2442,8 @@
 ぶらんぶらん	대롱대롱	ono
 ぷらぷら	대롱대롱	ono
 ぷらーん	대롱	ono
-ぶかぶか	헐렁헐렁	ono
-ぶっかぶか	헐렁헐렁	ono
+ぶかぶか	헐렁헐렁	ono	adj
+ぶっかぶか	헐렁헐렁	ono	adj
 だぶだぶ	헐렁헐렁	ono
 がばがばっ	헐렁헐렁	ono
 ゆさっ	출렁	ono

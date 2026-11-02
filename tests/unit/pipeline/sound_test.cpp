@@ -422,6 +422,13 @@ HD_TEST(pipeline_sound) {
         {"くしゃくしゃに丸めた", "꼬깃꼬깃하게 丸めた"},
         {"ボロボロになった", "너덜너덜하게 なった"},
         {"ぐちゃぐちゃに", "엉망진창に"},
+        // の between an adj mimetic and a noun is 한; before other words and after other sounds it stays.
+        {"ふわふわのクッション", "푹신푹신한 クッション"},
+        {"つやつやのご飯", "반들반들한 ご飯"},
+        {"ボサボサの髪", "부스스한 髪"},
+        {"ふわふわのまま", "푹신푹신のまま"},
+        {"ガチャガチャの見出し", "달그락달그락の見出し"},
+        {"ふわふわーのクッション", "푹신푹신~のクッション"},
         // A mimetic of a syllable or two and ッ before と stands right after a kanji word;
         // a long vowel there is a volitional ending.
         {"時折ぶるっと身", "時折부르르 身"},

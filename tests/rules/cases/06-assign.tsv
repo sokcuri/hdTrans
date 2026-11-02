@@ -124,7 +124,7 @@ dict:jisjk:115563	狭い間に箱を置く。	좁은 사이에 상자를 둔다.
 dict:jisjk:115563	短い間だけ待つ。	짧은 동안만 기다린다.	fix	local
 dict:jisjk:115563	長い間待った。	오랫동안 기다렸다.	fix	local
 dict:jisjk:115635	運動用の靴は軽い。	운동용의 구두는 가볍다.	fix	local
-dict:jisjk:115635	革の靴が必要だ。	가죽의 구두가 필요하다.	fix	local
+dict:jisjk:115635	革の靴が必要だ。	가죽 구두가 필요하다.	fix	local
 dict:jisjk:355883	彼が読んだお手紙だ。	!rule:dict:jisjk:355883	keep	local
 dict:jisjk:355883	手紙を読んでおいた。	편지를 읽어 두었다.	fix	local
 dict:jisjk:267778	話しておいた。	이야기해 두었다.	fix	local

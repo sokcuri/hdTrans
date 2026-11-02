@@ -1,0 +1,30 @@
+# 규칙: GRM-3251
+rule	input	expected	kind	layer
+dict:jisjk:341889	目の前に向けられた命を奪うことが出来る銀の短剣が引っ込められたのを見て、	눈앞으로 향해진 목숨을 빼앗을 수가 있는 은 단검을 거둘 수 있던 것을 보고,	fix	local
+dict:jisjk:341889	きっとバーンズ商会で売り出す時は木製か石の駒になりそう。	has:돌의 말	keep	local
+dict:jisjk:341889	トタンの扉があった。	has:함석의 문	keep	local
+dict:jisjk:341889	その手には下を向いた空のブリキのバケツ。	그 손에는 아래를 향한 하늘의 양철 양동이.	fix	local
+dict:jisjk:341889	鉄の塊を蹴りつけた感触をケンカイに伝える。	철 덩어리를 차댄 감촉을 켄카이에게 전한다.	fix	local
+dict:jisjk:341889	武装は最低でも鋼の剣は持っている。	has:강철의 검	keep	local
+dict:jisjk:341889	木の箱の上部にある蓋を開けると中には、	나무 상자의 상부에 있는 뚜껑을 열면 중에는,	fix	local
+dict:jisjk:341889	私はため息を吐いて地面に木の棒を走らせる。	has:나무의 봉	keep	local
+dict:jisjk:341889	ガラスの瓶に数十滴入っている赤い液体…	has:유리의 병	keep	local
+dict:jisjk:341889	銀のスプーンを引っ張り出し、	은 스푼을 끄집어내고,	fix	local
+dict:jisjk:341889	ちょっと遠出になるので装備は革のジャケットに革のズボン。	조금 먼 외출이 되므로 장비는 가죽 재킷에 가죽 바지.	fix	local
+dict:jisjk:341889	鉄の扉は開いたまま固まってしまった。	has:철의 문	keep	local
+dict:jisjk:341889	棒状の巨大な金属の塊が倒れてきた。	막대 모양의 거대한 금속 덩어리가 쓰러져 왔다.	fix	local
+dict:jisjk:341889	放たれた黄金の矢は確実に命中したらしい。	발해진 황금 화살은 확실히 명중한 것 같다.	fix	local
+dict:jisjk:341889	それに会計の際に紙の袋に入れて渡すから、	게다가 계산 시에 종이 봉투에 넣어 건네주니까,	fix	local
+dict:jisjk:341889	簡素な寝台に木の机と椅子だけという最低限の家具しかない部屋だが、	간소한 침대에 나무 책상과 의자만이라는 최저한의 가구밖에 없는 방이지만,	fix	local
+dict:jisjk:341889	見慣れた石壁と等間隔に並ぶ木の柱。	보아서 익숙한 석벽과 등간격에 늘어서는 나무 기둥.	fix	local
+dict:jisjk:341889	ダイヤモンドのネックレス	다이아몬드 목걸이	fix	local
+dict:jisjk:341889	小さな銀の鈴	작은 은 방울	fix	local
+dict:jisjk:341889	私情より鉄の意志を求められる。	has:철의 의지	keep	local
+dict:jisjk:341889	巨万の富を産み出す金の卵。	has:황금알	keep	local
+dict:jisjk:341889	貴方の綺麗な銀の髪と身体を隅々まで洗ってあげるわ	has:은의 머리카락	keep	local
+dict:jisjk:341889	鉄の掟という大型クランを仕切っていた手腕を見せてくれ。	has:철의 규칙	keep	local
+dict:jisjk:341889	身体強化した鋼の肉体がミノタウロスの右足に弾丸の如き速さで接近する。	has:강철의 육체	keep	local
+dict:jisjk:341889	エルフの編んだ魔法銀の戦羽織を着込んだ巨躯の老人。	has:마법은의	keep	local
+dict:jisjk:341889	フローラ様は鋼の心の持ち主なのかな？	has:강철의 마음	keep	local
+dict:jisjk:341889	ミナは持ってきた小さな工具箱から、細い鉄の棒を取り出して隙間に差し込んだ。	has:가는 철의 봉을	keep	local
+dict:jisjk:341889	途中から投げるのなら槍の方が良い気がして鉄の槍を買ったが、	has:철의 창을	keep	local
