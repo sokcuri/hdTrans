@@ -43,3 +43,6 @@ cx:toha:20	彼とはどうなるかわからない。	has:그와는	keep	rewrite
 cx:toha:25	彼とは友達だ	그와는 친구다	keep	rewrites
 cx:toha:25	「それより小熊先輩とはどうなったの？」	has:선배와는 어떻게 됐어	keep	rewrites
 cx:toha:25	「……で、彼氏とはどうなんですか」	has:남자친구와는	keep	rewrites
+cx:toha:22	彼とは何がどうなったの？	has:그와는	fix	rewrites
+cx:toha:22	彼とは何がどうなるか分からない。	has:그와는	fix	rewrites
+cx:toha:22	人生とはなにがどうなるかわからないものである。	has:인생이란	keep	rewrites
