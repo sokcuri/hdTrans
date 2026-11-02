@@ -6,7 +6,7 @@ normalize:soyu-koto	「じゃっ、そゆことで」	「그러면, 그런 걸�
 normalize:hidee	「ひでえな」	「심하네」	fix	normalize
 normalize:hidee	「いきなりひでえ！？」	「갑자기 심해!?」	fix	normalize
 normalize:oi-tsu	「あ、おいっ」	「아, 이봐」	fix	normalize
-normalize:n-ka	間接キスしていいんか？	간접 키스 해도 좋은 건가?	fix	normalize
+normalize:n-ka	間接キスしていいんか？	간접 키스 해도 되는 건가?	fix	normalize
 normalize:n-ka	「いや、信じるんかい……」	「아니, 믿는 거야……」	fix	normalize
 normalize:naani	「なーにイチャついてんのよ。」	「뭐 시시덕거리고 있어.」	fix	normalize
 normalize:nsu	「え、ダメなんすか？」	「어, 안됩니까?」	fix	normalize
