@@ -167,7 +167,10 @@ constexpr ConstraintRule kRules[] = {
      "ぞおち 앞의 のみ도 같다", {}, "ぞおち"},
     {"nadode-before-dekiru", ConstraintWord::Source, "などで", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "できる의 활용이 이어지는 などで는 など + で가 아니라 など + できる (ことなどできない 것 등으로 오지 않는 → 것 등 할 수 없는)", {},
-     "きな|きる|きま|きっこ|きず|きそ|きれ"},
+     "きな|きる|きませ|きまい|きっこ|きず|きそ|きれ"},
+    {"nimoi-before-iru", ConstraintWord::Source, "にもい", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "い가 이어지지 않는 にもい는 にもいい가 아니라 にも와 いる (どこにもいない 어디에도 좋은 있고 → 어디에도 없다). それにもいいところ는 그대로", {},
+     "な|ね|る|た|ま|て|ら|れ|よ"},
     {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
     {"toshite-before-shimau", ConstraintWord::Source, "として", ConstraintContext::BeforeListed, ConstraintReject::Word,
@@ -846,6 +849,8 @@ void Worker::ApplyConstraints(dict::Candidates& found, std::string_view query) {
     lead += head;
     std::vector<dict::Candidate>& list = found.list;
     for (const ConstraintRule& rule : kRules) {
+        // Every candidate source is a prefix of the query, so a rule's source can only match one then.
+        if (rule.word == ConstraintWord::Source && !query.starts_with(rule.source)) continue;
         std::size_t i = 0;
         while (i < list.size()) {
             const std::string_view source = list[i].source;

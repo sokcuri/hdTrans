@@ -25,3 +25,4 @@ dict:lex:ittai-counter	それは一体何の話だ。	그것은 도대체 무슨
 constraint:name-after-numeral	１日村でゆっくりし、	1일 마을에서 쉬어,	fix	lookup
 constraint:name-after-numeral	もう１日村に泊ってから帰ろうと話がまとまった所で、	이제 1일 마을에 묵고 나서 돌아가려고 이야기가 결정된 곳에서,	fix	lookup
 constraint:name-after-numeral	第5水陸両用軍団の記録。	제5수륙양용 군단의 기록.	keep	lookup
+dict:lex:ittai-counter	一体しかないのに」	1체밖에 없는데」	fix	local

@@ -25,3 +25,7 @@ constraint:hai-before-rare	それでも呼ばずにはいられない。	그래�
 constraint:sonoba-before-sho	本来ならば立ち入り禁止のその場所で、二人の男子高校生が駄弁っていた。	원래라면 출입 금지의 그 장소에서, 두 사람의 남고생이 수다를 떨고 있었다.	fix	lookup
 constraint:sonoba-before-sho	その場所へ向けて、フランは再び歩き出した。	그 장소에 향하여, 프랑은 다시 걷기 시작했다.	fix	lookup
 constraint:sonoba-before-sho	その場でくるっと回転。	그 자리에서 빙그르 회전.	keep	lookup
+constraint:nimoi-before-iru	もうどこにもいない。	이제 어디에도 없다.	fix	lookup
+constraint:nimoi-before-iru	散々病院内を探したけどどこにもいねえし、	실컷 병원내를 찾았지만 어디에도 없고,	fix	lookup
+constraint:nimoi-before-iru	それにもいいところがある	거기에도 좋은 곳이 있다	keep	lookup
+constraint:nadode-before-dekiru	電車などできました	전철 등으로 왔습니다	keep	lookup

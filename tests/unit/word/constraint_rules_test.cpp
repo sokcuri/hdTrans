@@ -198,7 +198,7 @@ void CheckCases(std::initializer_list<Case> cases, std::string_view before = {})
 }  // namespace
 
 HD_TEST(constraint_rules_table) {
-    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{73});
+    HD_CHECK_EQ(word::ConstraintRules().size(), size_t{74});
     for (const word::ConstraintRule& r : word::ConstraintRules()) {
         HD_CHECK(!r.id.empty());
         HD_CHECK(!r.note.empty());
@@ -206,6 +206,11 @@ HD_TEST(constraint_rules_table) {
         HD_CHECK((r.reject == word::ConstraintReject::OtherTargets || r.reject == word::ConstraintReject::Target) ==
                  !r.target.empty());
         HD_CHECK((r.context == word::ConstraintContext::BeforeListed) == !r.follows.empty());
+        for (std::string_view rest = r.follows; !rest.empty();) {
+            const std::size_t bar = rest.find('|');
+            HD_CHECK(bar != 0 && bar + 1 != rest.size());
+            rest = bar == std::string_view::npos ? std::string_view() : rest.substr(bar + 1);
+        }
     }
 }
 
