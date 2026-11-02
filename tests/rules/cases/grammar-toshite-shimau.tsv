@@ -1,6 +1,14 @@
-# 규칙: GRM-3111
+# 규칙: GRM-3111, GRM-3207
 rule	input	expected	kind	layer
-constraint:toshite-before-shimau	その糧としてしまうかなり剣呑な呪いだ。	그 양식으로 해버리는 꽤 위험한 저주다.	fix	local
+constraint:toshite-before-shimau	その糧としてしまうかなり剣呑な呪いだ。	그 양식으로 삼아버리는 꽤 위험한 저주다.	fix	local
 constraint:toshite-before-shimau	その度にほっとしてしまう私。	그 때에 안심해버리는 나.	keep	local
 constraint:toshite-before-shimau	不覚にもドキっとしてしまう。	불찰에도 철렁해버린다.	keep	local
 lookup:cuts-word-kanari	もうかなり限界。	벌써 상당히 한계.	keep	lookup
+cx:toshite-samu:10	「なら、死神さんのＬｙｓも抜き取って、僕の糧としてしまえば……」	「그렇다면, 사신 씨의 Lys도 빼내, 내 양식으로 삼아버리면……」	fix	rewrites
+cx:toshite-samu:10	彼を盾としてしまう	그를 방패로 삼아버린다	fix	rewrites
+cx:toshite-samu:10	人質としてしまった。	인질로 삼아버렸다.	fix	rewrites
+cx:toshite-samu:10	なかったこととしてしまう	없었던 것으로 해버린다	keep	rewrites
+cx:toshite-samu:10	その度にほっとしてしまう私。	그 때에 안심해버리는 나.	keep	rewrites
+cx:toshite-samu:10	その試合を無効としてしまった	그 시합을 무효로 해버렸다	keep	rewrites
+cx:toshite-samu:10	彼を失格としてしまった	그를 실격으로 해버렸다	keep	rewrites
+cx:toshite-samu:10	詰所は騒然としてしまう	대기소는 술렁임으로 해버린다	keep	rewrites

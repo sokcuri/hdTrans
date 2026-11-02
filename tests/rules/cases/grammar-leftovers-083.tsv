@@ -1,0 +1,30 @@
+# 규칙: GRM-3205, GRM-3206, GRM-3208
+rule	input	expected	kind	layer
+cx:nanja-think:10	それは嘘なんじゃと思う。	그것은 거짓말이 아닌가 하고 생각한다.	fix	rewrites
+cx:nanja-think:10	あの女の魔法なんじゃと思っておる。	그 여자의 마법이 아닌가 하고 생각한다.	fix	rewrites
+cx:nanja-think:10	「あー、あまりにもリアルな魚人だから本物なんじゃと思ってな」	「아―, 너무 리얼한 어인이니까 진짜가 아닌가 하고 생각해서 말이야」	fix	rewrites
+cx:nanja-think:10	憑きやすい体質なんじゃと思う。	빙의하기 쉬운 체질이 아닌가 하고 생각한다.	fix	rewrites
+cx:nanja-think:10	若干虐待なんじゃと思っているがそれを見越した父が一言言った。	약간 학대가 아닌가 하고 생각하지만 그것을 예측한 아버지가 한마디 말했다.	fix	rewrites
+cx:nanja-think:10	「わっちの前世はなんじゃと思う？」	「왓치의 전생은이면이라고 생각해?」	keep	rewrites
+cx:nanja-think:10	これが初めてなんじゃ。	이것이 처음이지.	keep	rewrites
+cx:copula-quote:10	これは運命であると思う。	이것은 운명이라고 생각한다.	fix	rewrites
+cx:copula-quote:10	国を悪い方へと導く存在であると考えた。	나라를 나쁜 편에게 이끄는 존재라고 생각했다.	fix	rewrites
+cx:copula-quote:10	「見るところ正式な取引であると思うが、如何か」	「보는 곳 정식인 거래라고 생각하지만, 여하인가」	fix	rewrites
+cx:copula-quote:12	人は変わるものであると思う。	사람은 바뀌는 것이라고 생각한다.	fix	rewrites
+cx:copula-quote:20	それが真実なのだと知った。	그것이 진실이라고 알았다.	fix	rewrites
+cx:copula-quote:20	でも、大人になるといじめは命に係わる問題なのだと知った。	하지만, 어른이 되면 이지메는 생명과 관계되는 문제라고 알았다.	fix	rewrites
+cx:copula-quote:20	可愛いなと思った	귀엽다고 생각했다	keep	rewrites
+cx:copula-quote:30	彼女は本気なのだと分かった。	그녀는 진심이라고 알았다.	fix	rewrites
+cx:copula-quote:30	大事なことなのだと思う。	소중한 일이라고 생각한다.	fix	rewrites
+cx:copula-quote:30	彼は天才なのだと思った。	그는 천재라고 생각했다.	fix	rewrites
+cx:copula-quote:30	そうだろうと思った	그럴 것이라고 생각했다	keep	rewrites
+builtin-pattern:toitta-na	平々凡々といったところだ。	아주 평범한 수준이다.	fix	builtin-pattern
+builtin-pattern:toitta-na	成績は平々凡々といったところだ。	성적은 아주 평범한 수준이다.	fix	builtin-pattern
+builtin-pattern:toitta-na	平凡といったところだ。	평범한 수준이다.	fix	builtin-pattern
+builtin-pattern:toitta-na	学生といったところだ。	학생 정도다.	keep	builtin-pattern
+builtin-pattern:toitta-na	命中率はまずまずといったところ。	명중률은 그런대로라고 할 수 있다.	keep	builtin-pattern
+cx:copula-quote:12	これは運命であると思う。	이것은 운명이라고 생각한다.	keep	rewrites
+cx:copula-quote:10	人は変わるものであると思う。	사람은 바뀌는 것이라고 생각한다.	keep	rewrites
+cx:copula-quote:22	とても嬉しかったのだとヌシ様は言った。	무척 기뻤던 것이라고 누시님은 말했다.	fix	rewrites
+cx:copula-quote:22	それが真実なのだと知った。	그것이 진실이라고 알았다.	keep	rewrites
+cx:copula-quote:20	とても嬉しかったのだとヌシ様は言った。	무척 기뻤던 것이라고 누시님은 말했다.	keep	rewrites
