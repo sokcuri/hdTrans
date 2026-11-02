@@ -12759,8 +12759,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 切り裂	&HW@	M421			GN				xxx llm	1		w:12721
 切り開き	개간	N110			GN				llm		きりひらき	w:12722
 切れっぱし	조각	N110			GN				llm		きれっぱし	w:12723
-切れはし	토막	I110			GN				xxx	1	きれはし	w:12724
-切れ端	토막	I110			GN				xxx	1	きれはし	w:12725
+切れはし	조각	I110			GN				xxx	1	きれはし	w:12724
+切れ端	조각	I110			GN				xxx	1	きれはし	w:12725
 切削工具	절삭공구	N110			GN						せっさくこうぐ	w:12726
 切削油	절삭유	N110			GN						せっさくゆ	w:12727
 切味	날카로움	N110			GN				xxx llm		きれあじ	w:12728

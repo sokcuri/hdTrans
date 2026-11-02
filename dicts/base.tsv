@@ -4966,7 +4966,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うなず	수긍&AV@	M421			GN				jisjk:144314		
 うなずきあ	서로 끄덕&AJ@	M440			GN				jisjk:144237		
 うなずけ	납득이 &A1@	M427			GN				jisjk:144322		
-うなだれ	떨&LL@	M427			GN				jisjk:144336		
+うなだれ	고개를 숙&AJ@	M427			GN				jisjk:144336		
 うなばら	넓은 바다	N110	VPl		GN				jisjk:126998		
 うなり	신음소리	N110	UHrUHr		GN				jisjk:6454		
 うに	게	N110	VAm		GN				jisjk:127000		
@@ -34382,7 +34382,7 @@ ttt	ttt	K110			GN				jisjk:201744
 とどこお	밀&AA@	M428			GN				jisjk:145395		
 とどのつまり	결국	E311			GN				jisjk:820		
 とどま	머&Mx@	M418	VPl		GN				jisjk:91135		
-とどめ	일곡	N110			GN				jisjk:6540		
+とどめ	결정타	N110			GN				jisjk:6540		
 とどめ	세&AI@	M437			GN				jisjk:6541		
 とどめ	그&AO@	M437			GN	1354	||1 &&2 S-1== "に" P-2== "4**"	동사와 に 뒤에서 とどめ를 그치다로 고른다. (미발동: rare-context)	jisjk:118920		
 とどめ	남&A2@	M417			GN				jisjk:143277		
@@ -151969,7 +151969,7 @@ ttt	ttt	K110			GN				jisjk:201744
 台詞	대사	N110	UTs		GN				jisjk:19177		
 台詞劇	대사극	N110	UAr		GN				jisjk:239242		
 台詞回し	대사 처리	N110	UAr		GN				jisjk:239244		
-台車	대차	N110	VPe		GN				jisjk:242093		
+台車	수레	N110	VPe		GN				jisjk:242093		
 台道	다이도우	N130	QCTVPl		GN				jisjk:308195		
 台金屋	다이카나야	N130	QCTVPl		GN				jisjk:307893		
 台頭	대두	N110		Hd	GN				jisjk:19170		
@@ -214151,6 +214151,7 @@ ttt	ttt	K110			GN				jisjk:201744
 抜	제&AO@	M431			GN	695	||1 &&2 S-1== "を" P-2== "13*"	고유명사와 「を」 뒤에서 「抜」를 ‘제치다’로 고른다. (미발동: rare-context)	jisjk:92967		
 抜	&Mc@	M441			GN	3196	||1 S-2== "R食"	두 단어 앞의 말이 食로 끝나면 抜를 거르다로 고른다. (미발동: rare-context)	jisjk:342092		
 抜か	빠뜨&AA@	M433			GN				jisjk:92968		
+抜か	지껄&AJ@	M433			GN	9816	||1 S-1== "Rと"	인용 と 바로 뒤의 抜かす는 지껄이다로 고른다.	lex:nukasu-say		
 抜からぬ顔	시치미떼는 얼굴	N110			GN				jisjk:248427		
 抜かり	실수	N110			GN				jisjk:7593		
 抜き	빼기	N110			GN				jisjk:364547		
@@ -281036,7 +281037,7 @@ ttt	ttt	K110			GN				jisjk:201744
 目をこら	응시&AV@	M433			GN				jisjk:92785		
 目をそら	눈을 &C8@	M433			GN				jisjk:92786		
 目をつけ	주목&AV@	M427		Pn	GN				jisjk:117832		
-目をつぶ	눈감아 &CJ@	M428			GN				jisjk:117831		
+目をつぶ	눈을 &F1@	M428			GN				jisjk:117831		
 目をとざ	눈을 &F1@	M413			GN				jisjk:92787		
 目をむ	눈을 부릅&A8@	M441			GN				jisjk:117032		
 目をや	눈을 돌&AA@	M418			GN				jisjk:92788		
@@ -305564,7 +305565,7 @@ ttt	ttt	K110			GN				jisjk:201744
 胸上	무네아게	N130			GN				jisjk:104418		
 胸中	가슴 속	N110	UFl		GN				jisjk:40125		
 胸乳	유방	N110	VBp		GN				jisjk:253186		
-胸倉	가슴팍	N110	VBp		GN				jisjk:40126		
+胸倉	멱살	N110	VBp		GN				jisjk:40126		
 胸像	흉상	N110			GN				jisjk:40122		
 胸元	가슴팍	K110	VBp		GN				jisjk:202326		
 胸先	앞가슴	N110	VBp		GN				jisjk:40123		
@@ -307590,7 +307591,7 @@ ttt	ttt	K110			GN				jisjk:201744
 自閉症児	자폐증 어린이	N110	VHn		GN				jisjk:194060		
 自首	자수	N110	HGu	Hd	GN				jisjk:31922		
 自鳴鐘	자명종	I110	UHr		GN				jisjk:82092		
-臭	구$A4@	M7U0			GN				jisjk:5974		
+臭	구$A4@	H7U0			GN				jisjk:5974		
 臭	냄새&A5@	M410			GN				jisjk:5975		
 臭	수상$AB@	H7N0	VHnVHn		GN				jisjk:120390		
 臭	고약한 냄새가 $A2@	H7N0	VBpVFdSFl		GN				jisjk:120841		
@@ -354434,7 +354435,7 @@ ttt	ttt	K110			GN				jisjk:201744
 項	항	N110		On	GN				jisjk:259691		
 項分け	항목 분류	N110			GN				jisjk:181610		
 項垂れ	고개 숙&AJ@	M417			GN				jisjk:95877		
-項垂れ	떨&LL@	M427			GN				jisjk:144330		
+項垂れ	고개를 숙&AJ@	M427			GN				jisjk:144330		
 項梁	항량	N130	QPN		GN				jisjk:38641		
 項目	항목	N110		Ct	GN				jisjk:38642		
 項突	수긍&AV@	M421			GN				jisjk:144309		
