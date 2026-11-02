@@ -1,0 +1,35 @@
+# 규칙: GRM-3095
+rule	input	expected	kind	layer
+lookup:copula-after-nominal	人生とはなにがどうなるかわからないものである。	has:모르는 것이다.	fix	analysis
+lookup:copula-after-nominal	人間とは弱いものである。	인간이란 약한 것이다.	fix	analysis
+lookup:copula-after-nominal	たまには反抗的な人間を屈服させたいものである。	has:굴복시키고 싶은 것이다.	fix	analysis
+lookup:copula-after-nominal	これは痛みを伴わないものであるが、	has:수반하지 않는 것이지만,	fix	analysis
+lookup:copula-after-nominal	良いものである筈がない。	has:좋은 것일 리가 없다	fix	analysis
+lookup:copula-after-nominal	だが、その代償は、余りにも大きいものであった……	has:너무나 큰 것이었다	fix	analysis
+lookup:copula-after-nominal	一同の反応は渋いものであった。	has:것이었다.	fix	analysis
+lookup:copula-after-nominal	実際のところ今回は得難いものであろう。	has:얻기 어려운 것일 것이다	fix	analysis
+lookup:copula-after-nominal	名前、それは久しく呼ばれていなかったものである。	has:불리지 않았던 것이다	fix	analysis
+lookup:copula-after-nominal	易しいものではない。	쉬운 것은 아니다.	fix	analysis
+lookup:copula-after-nominal	「怪しいものではありません！」	has:수상한 것이 아닙니다	fix	analysis
+lookup:copula-after-nominal	泉はそれほど深いものではありませんが、	has:깊은 것이 아닙니다만	fix	analysis
+lookup:copula-after-nominal	『はい。やはり魔法はいいものでございます』	has:좋은 것입니다	fix	analysis
+lookup:copula-after-nominal	「是非ともそう願いたいものでございます」	has:바라는 것입니다	fix	analysis
+lookup:copula-after-nominal	して、実際この館にいるわけである。	has:있는 것이다	fix	analysis
+lookup:copula-after-nominal	そして採掘は二人一組が基本になるわけであるが、	has:되는 것이지만	fix	analysis
+lookup:copula-after-nominal	「そんな話をしに来たのでござるか」	has:온 것이오	fix	analysis
+lookup:copula-after-nominal	ほかの使い道なんてそんざいしなかったのでござるよ。	has:존재하지 않았던 것이오	fix	analysis
+lookup:copula-after-nominal	死後の世界のことなのでございます」	has:세계인 것입니다	fix	analysis
+lookup:copula-after-nominal	『ただの威嚇射撃なのでございます』	has:위협 사격인 것입니다	fix	analysis
+lookup:copula-after-nominal	「これは、決定事項なのでございましょうか？」	has:결정 사항인 걸까요?	fix	analysis
+dict:nominal-copula:1	自分で転移魔法を使う分には有効なのであった。	has:유효한 것이었다	fix	local-ending
+dict:nominal-copula:1	ネコが好きなのでござる。	has:좋아하는 것이오	fix	local-ending
+dict:jisjk:363711	それは予想だにしていなかったものであり、	has:않았던 것이며,	fix	local-ending
+dict:jisjk:363711	それは、「本当の自分は何者なのか」ということを示すものであり、崇高な経験なのです。	has:나타내는 것이며,	fix	local-ending
+lookup:copula-after-nominal	ここで会がある	has:여기서	keep	analysis
+lookup:copula-after-nominal	書いてある	써 있다	keep	analysis
+lookup:copula-after-nominal	それは事実でもある	그것은 사실이기도 하다	keep	analysis
+lookup:copula-after-nominal	「そうだな。何か食べたいものでもあるか？」	has:먹고 싶은 것이라도 있어?	keep	analysis
+lookup:copula-after-nominal	必要なものでもあるから潰してないんだけど。	has:필요한 것이기도 하니까	keep	analysis
+lookup:copula-after-nominal	多分いつものことなのでしょう。	has:평소의 일이겠죠	keep	analysis
+lookup:copula-after-nominal	人間なのであった。	인간인 것이었다.	keep	analysis
+lookup:copula-after-nominal	弱いものでは勝てない。	has:약한 것으로는	keep	analysis

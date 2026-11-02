@@ -184,6 +184,23 @@ bool ProperCodes(std::string_view part, std::string_view sem) {
     return (part.size() == 4 && part.substr(2, 2) == "30") || sem.starts_with("Q");
 }
 
+// The で of a word or ending in もので or わけで, or of なので, is the copula when the copula goes on after it:
+// である and its forms, でございます, でござる, でしょう, でした, でしかない, ではない (弱いものである:
+// もの + である, not もので + ある; 一つなのでございます, 静かなのであった, 可愛いものでしょ, 書くわけである);
+// so is that of any ending in ので before ござ (叫ぶのでござる). Before any other word the で stays
+// (忙しいものであまり来られない), and so does でも, which before ある may ask whether there is something
+// (食べたいものでもあるか).
+bool CopulaAfterNominal(std::string_view ending, std::string_view after) {
+    if (!ending.ends_with("もので") && !ending.ends_with("わけで") && ending != "なので") {
+        return ending.ends_with("ので") && after.starts_with("ござ");
+    }
+    for (const std::string_view s : {"ある", "あった", "あって", "あろう", "ありま", "あり、", "あれば", "ござ", "しょ",
+                                     "した", "しか", "はな", "はあ", "はご"}) {
+        if (after.starts_with(s)) return true;
+    }
+    return false;
+}
+
 }  // namespace
 
 bool NounBefore(std::string_view text) {
@@ -689,7 +706,8 @@ void Worker::DropModalSplits(Lookup& l, std::string_view query) {
     Record* last = nullptr;
     for (Record* r = l.records; r != nullptr; r = r->child) {
         if (SplitsModal(*r, query, afterKa) || SplitsKashira(*r, query) || SplitsDeshou(*r, query) || SplitsVerb(*r, query) ||
-            SplitsPrefixWord(*r, query)) {
+            SplitsPrefixWord(*r, query) || (At(r->partCode, 0) == 'P' && query.starts_with(r->source) &&
+                                            CopulaAfterNominal(r->source, query.substr(r->source.size())))) {
             l.count--;
             continue;
         }
@@ -983,13 +1001,13 @@ bool Worker::EndingApplies(const Entry& e, std::string_view rest, int token) con
 // An ending in です also gives its す to an adverb or interjection that starts with it
 // (寝込んだのですっかり: ので + すっかり, 遅れたのですみません: ので + すみません).
 // An ending in か before ら gives its か to the particle から (疲れただろうから: だろう + から,
-// いいでしょうから, 渡してるんですから), and one in もので before しょ its で to でしょう (可愛いものでしょ:
-// もの + でしょ, not もので + しょ).
+// いいでしょうから, 渡してるんですから), and one in もので or わけで gives its で to the copula after it
+// (CopulaAfterNominal).
 bool Worker::CutsWord(std::string_view before, std::string_view ending, std::string_view after) const {
     if (!settings.text) return false;
     if (ending.ends_with("ため") && after.starts_with("息")) return true;
     if (ending.ends_with("か") && after.starts_with("ら")) return true;
-    if (ending.ends_with("もので") && after.starts_with("しょ")) return true;
+    if (CopulaAfterNominal(ending, after)) return true;
     // An ending in けども or とも gives its も, and one in と its と, to an adverb that starts with it and
     // reaches further than the words after the ending do (分からないけどもう一度: けど + もう一度, けどもしかしたら,
     // 笑われるともはや: 笑われると + もはや, 分からないとても: 分からない + とても, とにかく; not けども + うん).
