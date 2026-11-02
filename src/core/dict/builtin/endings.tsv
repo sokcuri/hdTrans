@@ -620,6 +620,22 @@
 書いておいてくれよ	써 둬	end	prio=-1
 書いておくれ	써 다오	end	prio=-1
 書いておくれよ	써 다오	end	prio=-1
+// でない after a verb's dictionary form: an old prohibition
+書くでない	쓰지 마라	end	prio=-1
+書くでないぞ	쓰지 마라	end	prio=-1
+書くでないよ	쓰지 마라	end	prio=-1
+書くでないわ	쓰지 마라	end	prio=-1
+// ておくんなさい, ておくれなさい: an old polite request (くれなさい)
+書いておくんなさい	써 주세요	end	prio=-1
+書いておくんなさいよ	써 주세요	end	prio=-1
+書いておくんなさいな	써 주세요	end	prio=-1
+書いておくれなさい	써 주세요	end	prio=-1
+書いておくれなさいよ	써 주세요	end	prio=-1
+書いておくれなさいな	써 주세요	end	prio=-1
+書かないでおくんなさい	쓰지 말아 주세요	end	prio=-1
+書かないでおくんなさいよ	쓰지 말아 주세요	end	prio=-1
+書かないでおくれなさい	쓰지 말아 주세요	end	prio=-1
+書かないでおくれなさいよ	쓰지 말아 주세요	end	prio=-1
 書いてくれるよ	써 줄 거야	end	prio=-1
 // のだぞ, のだよ after a predicate
 書くのだぞ	쓰는 거다	end	prio=-1

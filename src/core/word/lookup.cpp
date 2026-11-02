@@ -1037,6 +1037,8 @@ bool Worker::CutsWord(std::string_view before, std::string_view ending, std::str
         return false;
     };
     if ((ending.ends_with("けども") || ending.ends_with("とも")) && givesToAdverb("も")) return true;
+    // An ending in か gives it to かなり (してしまうかなり: してしまう + かなり).
+    if (ending.ends_with("か") && after.starts_with("なり") && givesToAdverb("か")) return true;
     static constexpr std::string_view kToAdverbRests[] = {"ても", "っても", "もかく", "にかく"};
     if (ending.ends_with("と") &&
         std::any_of(std::begin(kToAdverbRests), std::end(kToAdverbRests), [&](std::string_view r) { return after.starts_with(r); }) &&

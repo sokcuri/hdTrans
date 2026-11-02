@@ -170,6 +170,11 @@ constexpr ConstraintRule kRules[] = {
      "きな|きる|きま|きっこ|きず|きそ|きれ"},
     {"hai-before-rare", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "られ 앞의 はい는 入る가 아니라 は + いられる (一緒にはいられない 함께 들어가지지 않다 → 함께 있을 수 없다)", {}, "られ"},
+    {"toshite-before-shimau", ConstraintWord::Source, "として", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "しま 앞의 として는 조사 로서가 아니라 と + する의 て형과 しまう (糧としてしまう 양식으로서 끝낸다 → 양식으로 해버린다)", {}, "しま"},
+    {"shiteo-before-kunnasai", ConstraintWord::EndsInSource, "てお", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "くんなさ, くれなさ 앞에서 てお로 끝나는 말은 ておく가 아니라 て형과 おくんなさい, おくれなさい (勘弁しておくんなさい 용서해 두는 해 → 용서해 주세요)", {},
+     "くんなさ|くれなさ"},
 };
 
 // The numerals that start a quantity (つい三時間前, つい3日前, つい数分前).
