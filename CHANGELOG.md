@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.8.2](https://github.com/sokcuri/hdTrans/compare/v0.8.1...v0.8.2) (2026-11-02)
+
+
+### Bug Fixes
+
+* **dict:** read misread novel words, counters and kana verb splits by their sense ([#424](https://github.com/sokcuri/hdTrans/issues/424)) ([8b80499](https://github.com/sokcuri/hdTrans/commit/8b80499c37fa4e26f1c17906899aa4956235d2b4))
+* **grammar:** read である after a nominalizer as the copula ([#422](https://github.com/sokcuri/hdTrans/issues/422)) ([36b9e9b](https://github.com/sokcuri/hdTrans/commit/36b9e9b1d9e1ec345355866b49ba8d73abb287bc))
+* **grammar:** read と before laughing, saying or nodding as a quotation ([#423](https://github.com/sokcuri/hdTrans/issues/423)) ([feb6aae](https://github.com/sokcuri/hdTrans/commit/feb6aae7078f0b050dc98a623569ea5c4b27246c))
+* **release:** read である as the copula, quote laughs and thoughts with と, and fix counters and kana verb splits ([d2c3296](https://github.com/sokcuri/hdTrans/commit/d2c3296e1181fce8f043394fdfb2402d0c41286f))
+
 ## [0.8.1](https://github.com/sokcuri/hdTrans/compare/v0.8.0...v0.8.1) (2026-11-01)
 
 
