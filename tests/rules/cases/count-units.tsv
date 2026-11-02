@@ -1,0 +1,201 @@
+# 규칙: NUM-30, NUM-31
+rule	input	expected	kind	layer
+cx:count-units:90	靴を一足用意してくれた。	구두를 한 켤레 준비해 주었다.	fix	rewrites
+cx:count-units:100	服が一着ある。	옷이 한 벌 있다.	fix	rewrites
+cx:count-units:45	とても広い大地に１輪の花。	무척 넓은 대지에 1송이의 꽃.	fix	rewrites
+cx:count-units:135	花が三輪ある。	꽃이 세 송이 있다.	fix	rewrites
+cx:count-units:50	シンプルな椅子が２脚、これですべてだ。	심플한 의자가 2개, 이것으로 모두다.	fix	rewrites
+cx:count-units:166	四脚の椅子が入れられた机が一組。	네 개의 의자가 넣을 수 있던 책상이 1조.	fix	rewrites
+cx:count-units:165	椅子が三脚ある。	의자가 세 개 있다.	fix	rewrites
+cx:count-units:55	魚の切り身が５切れパックされていました。	물고기의 생선 토막이 5조각 팩되고 있었습니다.	fix	rewrites
+cx:count-units:52	ケーキを三切れ食べた。	케이크를 세 조각 먹었다.	fix	rewrites
+cx:count-units:49	ケーキを一切れ食べた。	케이크를 한 조각 먹었다.	fix	rewrites
+cx:count-units:60	赤髪の少女は二筋の涙を流す。	빨간 머리의 소녀는 두 줄기의 눈물을 흘린다.	fix	rewrites
+cx:count-units:60	光が3筋ある。	빛이 3줄기 있다.	fix	rewrites
+cx:count-units:66	３柱の女神が震え上がる。	3명의 여신이 떨린다.	fix	rewrites
+cx:count-units:65	神が三柱ある。	신이 세 분 있다.	fix	rewrites
+cx:count-units:1	神が一柱ある。	신이 한 분 있다.	fix	rewrites
+cx:count-units:2	一缶だけだが、おやつにちょうどいい。	한 캔뿐이지만, 간식에 딱 좋다.	fix	rewrites
+cx:count-units:2	ビールが三缶ある。	맥주가 세 캔 있다.	fix	rewrites
+cx:count-units:80	水が三滴ある。	물이 세 방울 있다.	fix	rewrites
+cx:count-units:80	水が3滴ある。	물이 3방울 있다.	fix	rewrites
+cx:count-units:170	薬が一服ある。	약이 한 첩 있다.	fix	rewrites
+cx:count-units:5	薬が3服ある。	약이 3첩 있다.	fix	rewrites
+cx:count-units:10	食卓には箸が二膳、夫婦の分だけ用意されている。	식탁에는 젓가락이 두 벌, 부부의 몫만큼 준비되어 있다.	fix	rewrites
+cx:count-units:200	箸が一膳ある。	젓가락이 한 벌 있다.	fix	rewrites
+cx:count-units:25	なので今夜は、豆腐１丁が夕餉になる。	그래서 오늘 밤은, 두부 1모가 석식이 된다.	fix	rewrites
+cx:count-units:190	豆腐が一丁ある。	두부가 한 모 있다.	fix	rewrites
+cx:count-units:215	テントが一張ある。	텐트가 한 동 있다.	fix	rewrites
+cx:count-units:115	一機の飛行船から魔導砲が射出された。	1기의 비행선에서 마도포가 사출되었다.	fix	rewrites
+cx:count-units:115	戦闘機が一機ある。	전투기가 1기 있다.	fix	rewrites
+cx:count-units:220	塔が一基ある。	탑이 1기 있다.	fix	rewrites
+cx:count-units:240	歌が三曲ある。	노래가 세 곡 있다.	fix	rewrites
+cx:count-units:250	三戦だ。	3전이다.	fix	rewrites
+cx:count-units:140	一勝だ。	1승이다.	fix	rewrites
+cx:count-units:920	一敗だ。	1패다.	fix	rewrites
+cx:count-units:255	そして業界内二位のハーメルン。	그리고 업계내 2위의 하멜른.	fix	rewrites
+cx:count-units:265	一階だ。	1층이다.	fix	rewrites
+cx:count-units:906	料理が三人前ある。	요리가 3인분 있다.	fix	rewrites
+cx:count-units:905	寿司を二人前頼んだ。	스시를 2인분 부탁했다.	fix	rewrites
+cx:count-units:280	紙が三枚ある。	종이가 세 장 있다.	fix	rewrites
+cx:count-units:85	三歳の子供。	세 살의 아이.	fix	rewrites
+cx:count-units:85	一歳だ。	한 살이다.	fix	rewrites
+cx:count-units:90	彼は一足先に帰った。	그는 한발 앞서 돌아갔다.	keep	rewrites
+cx:count-units:90	一足早く着いた。	한 발 앞서 도착했다.	keep	rewrites
+cx:count-units:165	三脚を立てた。	삼각대를 세웠다.	keep	rewrites
+cx:count-units:260	三位一体の攻撃。	삼위일체의 공격.	keep	rewrites
+cx:count-units:260	まさに三位一体型水着の原点！」	그야말로 삼위일체형 수영복의 원점!」	keep	rewrites
+cx:count-units:135	三輪車に乗る。	삼륜차를 탄다.	keep	rewrites
+cx:count-units:190	一丁目の角。	1가의 모퉁이.	keep	rewrites
+cx:count-units:215	一張羅を着た。	나들이옷을 입었다.	keep	rewrites
+cx:count-units:210	一両日中に。	하루 이틀 중에.	keep	rewrites
+cx:count-units:1	柱が一本ある。	기둥이 한 개 있다.	keep	rewrites
+cx:count-units:85	二十歳になった。	20살이 되었다.	keep	rewrites
+cx:count-units:85	何歳ですか？	몇 살입니까?	keep	rewrites
+cx:count-units:85	3歳の子	3세의 아이	keep	rewrites
+cx:count-units:85	今、三十六歳の終わり。	지금, 36세의 끝.	keep	rewrites
+cx:tai-count:10	一体何だ？	도대체 뭐야?	keep	rewrites
+cx:tai-count:10	一体化した。	일체화했다.	keep	rewrites
+cx:count-units:51	糸が切れた。	실이 끊어졌다.	keep	rewrites
+cx:count-units:250	優勝までは９戦もある。	우승까지는 9전이나 있다.	keep	rewrites
+cx:tai-count:10	ここら一体が消滅する。	이 근처 일대가 소멸한다.	fix	rewrites
+cx:tai-count:15	死体が３体あった。	시체가 3구 있었다.	fix	rewrites
+cx:tai-count:15	魔物が３体あった。	마물이 3마리 있었다.	keep	rewrites
+cx:tai-count:20	ロボットが２体いる。	로봇이 2기 있다.	fix	rewrites
+cx:tai-count:20	魔物が２体いる。	마물이 2마리 있다.	keep	rewrites
+cx:tai-count:25	人形が２体ある。	인형이 2개 있다.	fix	rewrites
+cx:tai-count:25	魔物が２体ある。	마물이 2마리 있다.	keep	rewrites
+cx:tai-count:27	２体のエルフが来た。	2명의 엘프가 왔다.	fix	rewrites
+cx:tai-count:27	２体の魔物が来た。	2마리의 마물이 왔다.	keep	rewrites
+cx:tai-count:30	魔物が３体いる。	마물이 3마리 있다.	fix	rewrites
+cx:tai-count:30	体が痛い。	몸이 아프다.	keep	rewrites
+cx:tai-count:31	エルフが一体だけいる。	엘프가 한 명만 있다.	fix	rewrites
+cx:tai-count:31	魔物が一体だけいる。	마물이 한 마리만 있다.	keep	rewrites
+cx:tai-count:35	死体が一体だけある。	시체가 한 구만 있다.	fix	rewrites
+cx:tai-count:35	魔物が一体だけある。	마물이 한 마리만 있다.	keep	rewrites
+cx:tai-count:40	ロボットが一体だけある。	로봇이 1기만 있다.	fix	rewrites
+cx:tai-count:45	人形が一体だけある。	인형이 한 개만 있다.	fix	rewrites
+cx:tai-count:50	一体一体が強い。	한 마리 한 마리가 강하다.	fix	rewrites
+cx:tai-count:32	エルフが三体だけいる。	엘프가 세 명만 있다.	fix	rewrites
+cx:tai-count:32	魔物が三体だけいる。	마물이 세 마리만 있다.	keep	rewrites
+cx:tai-count:36	死体が三体だけある。	시체가 세 구만 있다.	fix	rewrites
+cx:tai-count:36	魔物が三体だけある。	마물이 세 마리만 있다.	keep	rewrites
+cx:tai-count:41	ロボットが三体だけある。	로봇이 3기만 있다.	fix	rewrites
+cx:tai-count:46	人形が三体だけある。	인형이 세 개만 있다.	fix	rewrites
+cx:tai-count:33	エルフが五体だけいる。	엘프가 다섯 명만 있다.	fix	rewrites
+cx:tai-count:33	魔物が五体だけいる。	마물이 다섯 마리만 있다.	keep	rewrites
+cx:tai-count:37	死体が五体だけある。	시체가 다섯 구만 있다.	fix	rewrites
+cx:tai-count:37	魔物が五体だけある。	마물이 다섯 마리만 있다.	keep	rewrites
+cx:tai-count:42	ロボットが五体だけある。	로봇이 5기만 있다.	fix	rewrites
+cx:tai-count:47	人形が五体だけある。	인형이 다섯 개만 있다.	fix	rewrites
+cx:tai-count:34	エルフが六体だけいる。	엘프가 여섯 명만 있다.	fix	rewrites
+cx:tai-count:34	魔物が六体だけいる。	마물이 여섯 마리만 있다.	keep	rewrites
+cx:tai-count:38	死体が六体だけある。	시체가 여섯 구만 있다.	fix	rewrites
+cx:tai-count:38	魔物が六体だけある。	마물이 여섯 마리만 있다.	keep	rewrites
+cx:tai-count:43	ロボットが六体だけある。	로봇이 6기만 있다.	fix	rewrites
+cx:tai-count:48	人形が六体だけある。	인형이 여섯 개만 있다.	fix	rewrites
+cx:count-units:51	ケーキを二切れ食べた。	케이크를 두 조각 먹었다.	fix	rewrites
+cx:count-units:53	ケーキを四切れ食べた。	케이크를 네 조각 먹었다.	fix	rewrites
+cx:count-units:53	紙を四切りにした。	종이를 사등분으로 했다.	keep	rewrites
+cx:count-units:54	ケーキを五切れ食べた。	케이크를 다섯 조각 먹었다.	fix	rewrites
+cx:count-units:2	ビールが一缶ある。	맥주가 한 캔 있다.	fix	rewrites
+cx:count-units:2	缶を開けた。	캔을 땄다.	keep	rewrites
+cx:count-units:5	薬を3服飲んだ。	약을 3첩 마셨다.	fix	rewrites
+cx:count-units:5	服を3着買った。	옷을 3벌 샀다.	keep	rewrites
+cx:count-units:10	箸が2膳ある。	젓가락이 2벌 있다.	fix	rewrites
+cx:count-units:10	ご飯を2膳食べた。	밥을 2공기 먹었다.	keep	rewrites
+cx:count-units:20	料理を2膳出した。	요리를 2그릇 냈다.	fix	rewrites
+cx:count-units:25	豆腐が2丁ある。	두부가 2모 있다.	fix	rewrites
+cx:count-units:25	拳銃が2丁ある。	권총이 2자루 있다.	keep	rewrites
+cx:count-units:35	テントが2張ある。	텐트가 2동 있다.	fix	rewrites
+cx:count-units:35	テントを張った。	텐트를 쳤다.	keep	rewrites
+cx:count-units:45	花が3輪ある。	꽃이 3송이 있다.	fix	rewrites
+cx:count-units:45	輪になって踊る。	원을 이루어 춤춘다.	keep	rewrites
+cx:count-units:50	椅子が3脚ある。	의자가 3개 있다.	fix	rewrites
+cx:count-units:50	脚が長い。	다리가 길다.	keep	rewrites
+cx:count-units:55	ピザを3切れ食べた。	피자를 3조각 먹었다.	fix	rewrites
+cx:count-units:60	筋が通っている。	조리가 서 있다.	keep	rewrites
+cx:count-units:65	３柱の女神が来た。	3명의 여신이 왔다.	keep	rewrites
+cx:count-units:80	水が3滴落ちた。	물이 3방울 떨어졌다.	fix	rewrites
+cx:count-units:80	滴が落ちた。	물방울이 떨어졌다.	keep	rewrites
+cx:count-units:85	3歳の子。	3세의 아이.	keep	rewrites
+cx:count-units:90	靴を一足買った。	구두를 한 켤레 샀다.	fix	rewrites
+cx:count-units:90	一足先に帰った。	한발 앞서 돌아갔다.	keep	rewrites
+cx:count-units:100	服を一着買った。	옷을 한 벌 샀다.	fix	rewrites
+cx:count-units:100	服を着た。	옷을 입었다.	keep	rewrites
+cx:count-units:115	戦闘機が一機来た。	전투기가 1기 왔다.	fix	rewrites
+cx:count-units:115	一機くんが来た。	카즈키 군이 왔다.	keep	rewrites
+cx:count-units:140	一勝さんが来た。	잇쇼 씨가 왔다.	keep	rewrites
+cx:count-units:130	花が二輪咲いた。	꽃이 두 송이 피었다.	fix	rewrites
+cx:count-units:130	二輪車に乗る。	이륜차를 탄다.	keep	rewrites
+cx:count-units:135	花が三輪咲いた。	꽃이 세 송이 피었다.	fix	rewrites
+cx:count-units:155	椅子が一脚ある。	의자가 한 개 있다.	fix	rewrites
+cx:count-units:166	四脚の椅子がある。	네 개의 의자가 있다.	fix	rewrites
+cx:count-units:166	椅子に座る。	의자에 앉는다.	keep	rewrites
+cx:count-units:170	薬を一服飲んだ。	약을 한 첩 먹었다.	fix	rewrites
+cx:count-units:170	ちょっと一服しよう。	조금 잠깐 쉬자.	keep	rewrites
+cx:count-units:185	光が三筋差した。	빛이 세 줄기 비쳤다.	fix	rewrites
+cx:count-units:190	豆腐を一丁買った。	두부를 한 모 샀다.	fix	rewrites
+cx:count-units:195	拳銃を一丁持っている。	권총을 한 자루 가지고 있다.	fix	rewrites
+cx:count-units:200	箸を一膳出した。	젓가락을 한 벌 꺼냈다.	fix	rewrites
+cx:count-units:200	ご飯を一膳食べた。	밥을 한 공기 먹었다.	keep	rewrites
+cx:count-units:210	車両が一両ある。	차량이 1량 있다.	fix	rewrites
+cx:count-units:220	基地に戻る。	기지로 돌아간다.	keep	rewrites
+cx:count-units:265	階段を上る。	계단을 오른다.	keep	rewrites
+cx:count-units:240	歌を三曲歌った。	노래를 세 곡 노래했다.	fix	rewrites
+cx:count-units:240	曲を聴いた。	곡을 들었다.	keep	rewrites
+cx:count-units:250	戦いが始まる。	싸움이 시작된다.	keep	rewrites
+cx:count-units:255	二位だ。	2위다.	fix	rewrites
+cx:count-units:255	地位が高い。	지위가 높다.	keep	rewrites
+cx:count-units:260	三位だ。	3위다.	fix	rewrites
+cx:count-units:280	三枚目のキャラ。	익살꾼 배우의 캐릭터.	keep	rewrites
+cx:count-units:905	料理が二人前ある。	요리가 2인분 있다.	fix	rewrites
+cx:count-units:905	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:907	料理が四人前ある。	요리가 4인분 있다.	fix	rewrites
+cx:count-units:908	料理が五人前ある。	요리가 5인분 있다.	fix	rewrites
+cx:count-units:909	料理が六人前ある。	요리가 6인분 있다.	fix	rewrites
+cx:count-units:910	料理が七人前ある。	요리가 7인분 있다.	fix	rewrites
+cx:count-units:911	料理が八人前ある。	요리가 8인분 있다.	fix	rewrites
+cx:count-units:912	料理が九人前ある。	요리가 9인분 있다.	fix	rewrites
+cx:count-units:913	料理が十人前ある。	요리가 10인분 있다.	fix	rewrites
+cx:count-units:920	一敗した。	1패했다.	fix	rewrites
+cx:count-units:920	失敗した。	실패했다.	keep	rewrites
+cx:tai-count:40	魔物が一体だけある。	마물이 한 마리만 있다.	keep	rewrites
+cx:tai-count:45	魔物が一体だけある。	마물이 한 마리만 있다.	keep	rewrites
+cx:tai-count:50	エルフが一体だけいる。	엘프가 한 명만 있다.	keep	rewrites
+cx:tai-count:41	魔物が三体だけある。	마물이 세 마리만 있다.	keep	rewrites
+cx:tai-count:46	魔物が三体だけある。	마물이 세 마리만 있다.	keep	rewrites
+cx:tai-count:51	魔物が三体だけいる。	마물이 세 마리만 있다.	fix	rewrites
+cx:tai-count:51	エルフが三体だけいる。	엘프가 세 명만 있다.	keep	rewrites
+cx:tai-count:42	魔物が五体だけある。	마물이 다섯 마리만 있다.	keep	rewrites
+cx:tai-count:47	魔物が五体だけある。	마물이 다섯 마리만 있다.	keep	rewrites
+cx:tai-count:52	魔物が五体だけいる。	마물이 다섯 마리만 있다.	fix	rewrites
+cx:tai-count:52	エルフが五体だけいる。	엘프가 다섯 명만 있다.	keep	rewrites
+cx:tai-count:43	魔物が六体だけある。	마물이 여섯 마리만 있다.	keep	rewrites
+cx:tai-count:48	魔物が六体だけある。	마물이 여섯 마리만 있다.	keep	rewrites
+cx:tai-count:53	魔物が六体だけいる。	마물이 여섯 마리만 있다.	fix	rewrites
+cx:tai-count:53	エルフが六体だけいる。	엘프가 여섯 명만 있다.	keep	rewrites
+cx:count-units:52	糸が切れた。	실이 끊어졌다.	keep	rewrites
+cx:count-units:54	糸が切れた。	실이 끊어졌다.	keep	rewrites
+cx:count-units:49	糸が切れた。	실이 끊어졌다.	keep	rewrites
+cx:count-units:15	ご飯を2膳食べた。	밥을 2공기 먹었다.	fix	rewrites
+cx:count-units:15	箸が2膳ある。	젓가락이 2벌 있다.	keep	rewrites
+cx:count-units:20	箸が2膳ある。	젓가락이 2벌 있다.	keep	rewrites
+cx:count-units:30	拳銃が2丁ある。	권총이 2자루 있다.	fix	rewrites
+cx:count-units:30	豆腐が2丁ある。	두부가 2모 있다.	keep	rewrites
+cx:count-units:55	糸が切れた。	실이 끊어졌다.	keep	rewrites
+cx:count-units:66	３柱の女神が来た。	3명의 여신이 왔다.	fix	rewrites
+cx:count-units:66	神が三柱ある。	신이 세 분 있다.	keep	rewrites
+cx:count-units:155	脚が長い。	다리가 길다.	keep	rewrites
+cx:count-units:185	筋が通っている。	조리가 서 있다.	keep	rewrites
+cx:count-units:195	豆腐を一丁買った。	두부를 한 모 샀다.	keep	rewrites
+cx:count-units:205	ご飯を一膳食べた。	밥을 한 공기 먹었다.	fix	rewrites
+cx:count-units:205	箸を一膳出した。	젓가락을 한 벌 꺼냈다.	keep	rewrites
+cx:count-units:906	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:907	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:908	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:909	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:910	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:911	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:912	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:913	料理を作った。	요리를 만들었다.	keep	rewrites

@@ -260,8 +260,8 @@ std::string_view DropLastRune(std::string_view s) {
 // The last character of s, 0 when s is empty.
 char32_t LastRune(std::string_view s) { return s.empty() ? 0 : text::DecodeRune(s.substr(DropLastRune(s).size())).cp; }
 
-// A Korean counter counted with native Korean numerals (두 마리, 세 번, 네 장, 두 체); counters
-// counted with Sino-Korean numerals (3층, 2호) are not listed and keep digits. A Korean
+// A Korean counter counted with native Korean numerals (두 마리, 세 번, 네 장, 세 구); counters
+// counted with Sino-Korean numerals (3층, 2호, 2기) are not listed and keep digits. A Korean
 // counter that also counts with Sino-Korean numerals lists the Japanese counters it is
 // native for: 2번 for 番 and 3장 for 章 stay digits. Some counters form words with 한 (한번,
 // 한잔, 한마디) and are not split from it.
@@ -275,12 +275,15 @@ constexpr NativeCounter kNativeCounters[] = {
     {"마리", U""},          {"개", U""},          {"명", U""},           {"사람", U""},         {"권", U"冊"},
     {"자루", U""},          {"그루", U""},        {"잔", U"", true},     {"대", U"台"},         {"장", U"枚張"},
     {"살", U""},            {"가지", U"", true},  {"군데", U""},         {"채", U"軒棟"},       {"척", U"隻艘"},
-    {"벌", U"着"},          {"통", U"通樽", true}, {"켤레", U""},        {"송이", U""},         {"알", U"", true},
+    {"벌", U"着膳"},          {"통", U"通樽", true}, {"켤레", U""},        {"송이", U""},         {"알", U"", true},
     {"병", U"本瓶"},        {"그릇", U""},        {"끼", U"", true},     {"가닥", U"", true},   {"쌍", U""},
     {"곳", U""},            {"마디", U"", true},  {"걸음", U"", true},   {"접시", U""},         {"봉지", U""},
     {"상자", U""},          {"바퀴", U""},        {"발", U"発"},         {"차례", U"", true},   {"번", U"回度遍", true},
     {"번째", U""},          {"개째", U""},        {"명째", U""},         {"마리째", U""},       {"면", U"面"},
-    {"덩어리", U""},        {"회", U"回", false, "번"}, {"체", U"体"},
+    {"덩어리", U""},        {"회", U"回", false, "번"}, {"구", U"体"},
+    {"조각", U""},          {"방울", U""},        {"줄기", U""},         {"첩", U"服"},         {"캔", U"缶"},
+    {"분", U"柱"},          {"입", U"口"},        {"모", U"丁"},         {"공기", U"膳"},       {"동", U"張"},
+    {"곡", U"曲"},
 };
 
 std::string_view NativeForm(const NativeCounter& c) { return c.native.empty() ? c.korean : c.native; }
