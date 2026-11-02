@@ -1,0 +1,23 @@
+# 규칙: GRM-3110
+rule	input	expected	kind	layer
+dict:lex:datta-hazu	この辺りだったはずだ。	이 근처였을 것이다.	fix	lookup
+dict:lex:datta-hazu	「確かこの辺りだったはず……。」	「분명 이 근처였을 거…….」	fix	lookup
+dict:lex:datta-hazu	確かここの近くだったはず。	분명 여기의 근처였을 것.	fix	lookup
+dict:lex:datta-hazu	魔動機院の近くだったはず。	마동기원의 근처였을 것.	fix	lookup
+dict:lex:datta-hazu	そこまで計算ずくだったはずだ。	거기까지 계산만이었을 것이다.	fix	lookup
+dict:lex:datta-hazu	とかだったはず。	라든지였을 것.	fix	lookup
+dict:lex:datta-hazu	それは望み続けたものだったはず。	그것은 계속 바란 것 이었을 것.	fix	lookup
+dict:lex:datta-hazu	俺は国賓扱いだったはずじゃ！？	나는 국빈 취급이었을 거야!?	fix	lookup
+dict:lex:datta-hazu-ga	あの辺りだったはずがない。	그 근처였을 리가 없다.	fix	lookup
+dict:lex:datta-hazu-noni	クズばかりだったはずなのに・・・」	쓰레기만이었을 터인데···」	fix	lookup
+dict:lex:datta-hazu-noni	小さな呟きだったはずなのに。	작은 중얼거림이었을 터인데.	fix	lookup
+dict:lex:datta-hazu-daga	「確かこの辺りだったはずだが……」	「분명 이 근처였을 텐데……」	fix	lookup
+dict:lex:datta-hazu	充分幸せだったはず。	충분히 행복했을 것.	keep	lookup
+dict:lex:datta-hazu	レオンと同じだったはず。	레옹과 같았을 것.	keep	lookup
+dict:lex:datta-hazu	ホテル正面は大通りだったはずだ。	호텔 정면은 큰 길이었을 것이다.	keep	lookup
+dict:lex:datta-hazu	今日はいつも通りだったはずだ。	오늘은 평소처럼이었을 것이다.	keep	lookup
+dict:lex:datta-hazu	それが以前のぼくだったはずだ。	그것이 이전의 나였을 것이다.	keep	lookup
+dict:lex:datta-hazu	性的対象は女性だったはずだ。	성적 대상은 여성이었을 것이다.	keep	lookup
+dict:lex:datta-hazu-no	私とそっくりだったはずの手が。	나와 꼭 닮았을 것의 손이.	keep	lookup
+dict:lex:datta-hazu-no	大好きだったはずのお母さんに。	정말 좋아했을 것의 엄마에게.	keep	lookup
+dict:lex:datta-hazu-noni	あれ程好きだったはずなのに？	저토록 좋아했을 텐데?	keep	lookup

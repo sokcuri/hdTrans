@@ -31482,6 +31482,13 @@ ttt	ttt	K110			GN				jisjk:201744
 だったのは	5던 것은	U500			GN				jisjk:265417		
 だったはず	5을 것	U500			GN				jisjk:344724		
 だったはず	5을 리	U500			GN	3626	||1 &&4 ||2 S+1== "が" S+1== "は" P+1== "2**" S+2== "な" P+2== "7**"	だったはず를 조사 が·は와 형용사 な 앞에서 었을 리로 고른다. (미발동: other)	jisjk:344765		
+だったはず	(이었)였을 것	P200			GN				lex:datta-hazu		
+だったはずの	(이었)였을 터인	P201			GN				lex:datta-hazu-no		
+だったはずが	(이었)였을 리가	P200			GN				lex:datta-hazu-ga		
+だったはずも	(이었)였을 리도	P200			GN				lex:datta-hazu-mo		
+だったはずは	(이었)였을 리는	P200			GN				lex:datta-hazu-wa		
+だったはずなのに	(이었)였을 터인데	P200			GN				lex:datta-hazu-noni		
+だったはずだが	(이었)였을 텐데	P200			GN				lex:datta-hazu-daga		
 だったものの	(이었)였지만	P200			GN				jisjk:362756		
 だったものの	5지만	U500			GN				jisjk:362757		
 だったよ	5어	U500			GN				jisjk:258435		
