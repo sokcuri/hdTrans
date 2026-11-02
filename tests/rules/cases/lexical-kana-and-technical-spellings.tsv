@@ -18,7 +18,7 @@ defaults:lexical-cleanup	尻をぬぐっている。	뒤치다꺼리하고 있�
 defaults:lexical-cleanup	札幌雪祭り	삿포로 눈축제	fix	defaults
 defaults:lexical-cleanup	札幌雪祭りに行った。	삿포로 눈축제에 갔다.	fix	defaults
 defaults:lexical-cleanup	数日前	며칠 전	keep	defaults
-defaults:lexical-cleanup	数日前に届いた。	며칠 전에 닿았다.	keep	defaults
+defaults:lexical-cleanup	数日前に届いた。	며칠 전에 도착했다.	keep	defaults
 defaults:lexical-cleanup	数日後に届く。	며칠 후에 닿는다.	keep	defaults
 defaults:lexical-cleanup	ぼそぼそと話す。	웅얼웅얼 이야기한다.	keep	defaults
 defaults:lexical-cleanup	切り立った崖	깎아지른 벼랑	keep	defaults

@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-names:reading	天井の梁（はり）からこちらを見ている。	천장의 대들보로부터 이쪽을 보고 있다.	fix	normalize
+names:reading	天井の梁（はり）からこちらを見ている。	천장의 대들보에서 이쪽을 보고 있다.	fix	normalize
 names:reading	温泉地でも錆（さ）びないように木製だった。	온천지에서도 녹슬지 않도록 목제였다.	fix	normalize
 names:reading	メインは秋刀魚と鮭（しゃけ）だ。	메인은 꽁치와 연어다.	fix	normalize
 names:reading	和気藹々(わきあいあい)とした遊びだ。	화기 애애한 놀이다.	fix	normalize

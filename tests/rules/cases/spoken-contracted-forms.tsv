@@ -42,4 +42,4 @@ normalize:negative-nee-wish	そもそも関わりたくねえ。	애초에 관�
 normalize:negative-nee-wish	「いや、まだ死にたくねー！」	「아니, 아직 죽고 싶지 않아!」	fix	normalize
 normalize:negative-nee-wish	まったくねぇ	완전히	keep	normalize
 normalize:adjective-su	いや、荷物じゃない……車いす……	아니, 짐이 아닌……휠체어……	keep	normalize
-normalize:adjective-su	香奈さんを車いすから降ろし	카나 씨를 휠체어로부터 내려	keep	normalize
+normalize:adjective-su	香奈さんを車いすから降ろし	카나 씨를 휠체어에서 내려	keep	normalize

@@ -1,0 +1,51 @@
+# 규칙: GRM-3260
+rule	input	expected	kind	layer
+dict:gram:kara:source-verb	ミナコはおもむろにポケットから石を取り出し、	has:포켓에서 돌을	fix	local
+dict:gram:kara:source-verb	彼は胸ポケットからタバコを取り出すと	has:포켓에서 담배를	fix	local
+dict:gram:kara:source-verb	ついでに冷蔵庫から豆腐を出し、	has:냉장고에서 두부를	fix	local
+dict:gram:kara:source-verb	そして年季の入った冷蔵庫から麦茶を出して、コップに注いだ。	has:냉장고에서 보리차를	fix	local
+dict:gram:kara:source-verb	ボーッとしながら教室の窓から空を眺める。	has:창에서 하늘을	fix	local
+dict:gram:kara:source-verb	なんとなく窓から空を見上げる。	has:창에서 하늘을	fix	local
+dict:gram:kara:source-verb	カブトの隙間から何かが見える。	has:틈새에서 뭔가가	fix	local
+dict:gram:kara:source-verb	半端に開いているドアの隙間から彼女が見える。	has:틈새에서 그녀가	fix	local
+dict:gram:kara:source-verb	俺はテレビから聞こえる笑い声が嫌いだ。	has:텔레비전에서 들리는	fix	local
+dict:gram:kara:source-verb	キーアの後ろの窓から見える空は、	has:창에서 보이는	fix	local
+dict:gram:kara:source-verb	小箱から櫛を取り出す。	has:상자에서 빗을	fix	local
+dict:gram:kara:source-verb	下駄箱から紙切れが落ちてきた。	has:신발장에서 종잇조각이	fix	local
+dict:gram:kara:source-verb	ちょうど今、窯から出したところなの	has:가마에서	fix	local
+dict:gram:kara:source-verb	杖の先から出てきたのは、ビー玉くらいの小さな火の玉だった。	has:끝에서 나온	fix	local
+dict:gram:kara:source-verb	クエストの進み具合は、メニューの「クエスト」から確認できます。	has:「퀘스트」에서 확인할	fix	local
+dict:gram:kara:source-verb	未来は遠慮なく冷蔵庫から冷凍庫へと移る。	has:냉장고에서 냉동고로	fix	local
+dict:gram:kara:source-verb	スマホから顔を上げた彼の視線が	has:스마트폰에서 고개를	fix	local
+dict:gram:kara:source-verb	そのメニューから選んでくれ	has:메뉴에서 선택해	fix	local
+dict:gram:kara:source-verb	ギードも、声を聞き厩舎から顔を出した。	has:마구간에서 얼굴을	fix	local
+dict:gram:kara:source-verb	額から流れる冷や汗。	has:이마에서 흐르는	fix	local
+dict:gram:kara:source-verb	車体から伝わる振動。	has:차체에서 전해지는	fix	local
+dict:gram:kara:source-verb	はい、スマートフォンからも打刻していただけます。	has:스마트폰에서도 타각해	fix	local
+dict:gram:kara:source-verb	そこには何もなく、ただ窓から見える景色があるだけだ。	has:창에서 보이는	fix	local
+dict:gram:kara:source-verb	燭台から外れた蝋燭が転がり、	has:촛대에서	fix	local
+dict:jisjk:3993	３クラスしかないこの学校で、１年のときから彼は無口キャラで浮いていた。	has:1년 때부터	fix	local
+dict:jisjk:3993	数日前から言っていたならともかく、	has:전부터 말했다면	fix	local
+dict:jisjk:3993	結局．．１４時くらいから用意して．．	has:정도부터 준비해	fix	local
+dict:jisjk:3993	本当は すっごく優しくて情にもろくて… 子供のときから	has:때부터	fix	local
+dict:jisjk:3993	それは、小学校五年のときからだった。	has:때부터였다	fix	local
+dict:gram:kara:person	男子生徒から、デートのプランを作ってくれという依頼があったんだ	has:남학생에게서,	fix	local
+dict:gram:kara:person	校内の男子生徒から告白やアプローチを受けているらしく、	has:남학생에게서 고백이나	fix	local
+dict:gram:kara:source-verb	それから８年間、俺はあらゆる危険からお前を守ってきた	has:위험으로부터 너를	keep	local
+dict:gram:kara:source-verb	現実から逃げようとしてる、と自分の心の弱さに嫌気が差した。	has:현실로부터 도망치려	keep	local
+dict:gram:kara:source-verb	よし、もう少しで荷物から解放される。	has:짐으로부터 해방된다	keep	local
+dict:gram:kara:source-verb	友人からの手紙、亡くなった奥さんの日記帳なんかで、	has:친구로부터의 편지	keep	local
+dict:gram:kara:source-verb	は期待に胸を膨らませ、窓からの景色を眺める。	has:창으로부터의 경치를	keep	local
+dict:gram:kara:source-verb	魔物と亜人の襲撃から三日が過ぎた。	has:습격으로부터 3일이	keep	local
+dict:gram:kara:person	前世の友達から聞いていた雑学が今世で役に立つとは思わなかった。	has:친구에게서 듣던	keep	local
+dict:gram:kara:source-verb	過去の経験から、俺の言い分は聞き入れてもらえないことが分かりきっているからな。	has:경험으로부터,	keep	local
+dict:gram:kara:source-verb	日本人から見れば派手な色彩をしたテントがいくつか並んでいる。	has:일본인으로부터 보면	keep	local
+dict:gram:kara:source-verb	オレから先生にかけあってみるぜ	has:나로부터 선생님에게	keep	local
+dict:gram:kara:thing	学校から帰った。	has:학교에서 돌아갔다	keep	local
+dict:jisjk:3993	大好きな姉について一切触れることの出来ない、究極的な制限生活は、このときから始まった。	has:때부터 시작되었다	keep	local
+dict:gram:kara:source-verb	田辺飛行士から伝わったこの異常事態の情報により、	has:비행사로부터 전해진	keep	local
+dict:gram:kara:source-verb	寝て起きてからのアレだったから、昨夜から見てない。	has:어젯밤부터 보지	keep	local
+dict:gram:kara:source-verb	前回から利用している。	has:지난번부터 이용하고	keep	local
+dict:gram:kara:source-verb	いえ創業から見ても、	lacks:창업에서	keep	local
+dict:gram:kara:source-verb	ここは、社会から見捨てられた人が流れつく場所。	has:사회로부터 버림받은	keep	local
+dict:gram:kara:source-verb	ひょうきんギャルから出た意外な言葉に、	lacks:갸루에서	keep	local

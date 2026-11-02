@@ -21,7 +21,7 @@ voice:agent	国王に問われた少女は臆することなく答えた。	국�
 voice:agent	私に弟を任せられたから、	나에게 남동생을 맡길 수 있었으니까,	keep	voice
 voice:agent	父に車を借りられた。	아버지에게 차를 빌릴 수 있었다.	keep	voice
 voice:agent	雨に降られた。	비를 맞았다.	keep	voice
-voice:agent	動物から得られる食物を食べない。	동물로부터 얻을 수 있는 음식을 먹지 않는다.	keep	voice
+voice:agent	動物から得られる食物を食べない。	동물에서 얻을 수 있는 음식을 먹지 않는다.	keep	voice
 voice:desire	褒められたい。	칭찬받고 싶다.	fix	voice
 voice:desire	先生に褒められたかった。	선생님에게 칭찬받고 싶었다.	fix	voice
 voice:desire	見られたくない。	보이고 싶지 않다.	keep	voice
