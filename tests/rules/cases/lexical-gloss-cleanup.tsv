@@ -297,7 +297,7 @@ dict:jisjk:162647	おが粉を燃やす。	톱밥을 태운다.	fix	defaults
 dict:jisjk:162647	おが粉が飛ぶ。	톱밥이 난다.	fix	defaults
 dict:jisjk:162647	おが粉の山。	톱밥의 산.	fix	defaults
 dict:jisjk:162647	おが粉を掃除する。	톱밥을 청소한다.	fix	defaults
-dict:jisjk:162647	木から出たおが粉。	나무로부터 나온 톱밥.	fix	defaults
+dict:jisjk:162647	木から出たおが粉。	나무에서 나온 톱밥.	fix	defaults
 dict:jisjk:162647	おがくず。	톱밥.	keep	defaults
 dict:jisjk:162647	おが屑。	톱밥.	keep	defaults
 dict:jisjk:162647	木屑を集める。	톱밥을 모은다.	keep	defaults

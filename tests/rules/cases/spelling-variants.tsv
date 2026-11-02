@@ -10,7 +10,7 @@ normalize:spelling-variant	身の程を知れ。	분수를 알아라.	keep	norma
 normalize:spelling-variant	信じられない位淡白で	믿을 수 없을 정도 담박해	fix	normalize
 normalize:spelling-variant	信じられないくらい淡白で	믿을 수 없을 정도 담박해	keep	normalize
 normalize:spelling-variant	秋刀魚を三枚におろす位、造作も無いこと。	꽁치를 석장에 내릴 정도로, 문제없는 일.	fix	normalize
-normalize:spelling-variant	ミヅチも神の位から落ちたらしい	미즈치도 신의 위로부터 떨어진 것 같다	keep	normalize
+normalize:spelling-variant	ミヅチも神の位から落ちたらしい	미즈치도 신의 위에서 떨어진 것 같다	keep	normalize
 normalize:spelling-variant	行かせない等、執拗で悪質なものもあった	가게 하지 않는 등, 집요하고 악질적인 것도 있었다	keep	normalize
 normalize:spelling-variant	行かせないなど、執拗で悪質なものもあった	가게 하지 않는 등, 집요하고 악질적인 것도 있었다	keep	normalize
 normalize:spelling-variant	プライドが高かった為、夫の裏切りを許せなかった	프라이드가 높았기 때문에, 남편의 배반을 용서할 수 없었다	fix	normalize

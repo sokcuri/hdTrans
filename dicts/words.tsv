@@ -3433,7 +3433,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ギミック	기믹	N110			GN				xxx llm	1		w:3424
 ギムナジウム	김나지움	N110			GN				xxx llm	1		w:3425
 ギャスケット	개스킷	N110			GN						ギャスケット	w:3426
-ギャル	갸루	N110			GN				xxx llm	1		w:3427
+ギャル	갸루	N110	VQwVHn		GN				xxx llm	1		w:3427
 ギャルゲ	미소녀 게임	N110			GN						ギャルゲ	w:3428
 ギャロッピングインフレ	갤로핑 인플레이션	N110			GN				llm		ギャロッピングインフレ	w:3429
 ギャロッピング・インフレ	갤로핑 인플레이션	N110			GN				llm		ギャロッピング・インフレ	w:3430
@@ -12902,7 +12902,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 前兆	전조	N110			GN				xxx	1	ぜんちょう	w:12864
 前口動物	선구동물	N110			GN						ぜんこうどうぶつ	w:12865
 前向き推論	전향 추론	I110			GN				xxx llm	1		w:12866
-前回	지난번	N110			GN				xxx llm	1		w:12867
+前回	지난번	N110	UMe		GN				xxx llm	1		w:12867
 前夜	전날 밤	N110			GN				xxx llm	1		w:12868
 前庭	앞뜰	N110			GN				xxx llm	1		w:12869
 前戯	전희	N110			GN						ぜんぎ	w:12870
@@ -14809,7 +14809,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 女声	여자 목소리	N110			GN				xxx llm	1		w:14771
 女子供	아녀자	N110			GN				llm			w:14772
 女子大	여대	N110	VHn		GN						じょしだい	w:14773
-女子生徒	여학생	N110			GN						じょしせいと	w:14774
+女子生徒	여학생	N110	VHn		GN						じょしせいと	w:14774
 女子高等学校	여자 고등학교	N110			GN						じょしこうとうがっこう	w:14775
 女宿	여수	N110			GN						うるきぼし	w:14776
 女寡	홀어미	N110			GN						おんなやもめ	w:14777
@@ -17477,7 +17477,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 数合せ	숫자 맞추기	N110			GN				llm		かずあわせ	w:17433
 数学者	수학자	N110			GN						すうがくしゃ	w:17434
 数日	며칠	N110	UMe		GN				xxx llm	1		w:17435
-数日前	며칠 전	I110			GN				xxx llm	1		w:17436
+数日前	며칠 전	I110	UMe		GN				xxx llm	1		w:17436
 数日後	며칠 후	I110			GN				xxx llm	1		w:17437
 数時間	몇 시간	N110	UMe	Tm	GN				llm		すうじかん	w:17438
 数歯巨頭	고양이고래	N110			GN						かずはごんどう	w:17439
@@ -17830,7 +17830,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 春服	봄옷	N110			GN						はるふく	w:17786
 春節	춘절	N110			GN						しゅんせつ	w:17787
 春車菊	기생초	N110	VPt		GN				llm		ハルシャぎく	w:17788
-昨夜	어젯밤	N110			GN				xxx llm	1		w:17789
+昨夜	어젯밤	N110	UMe		GN				xxx llm	1		w:17789
 是か非か	옳은가 그른가	A9D0			GN				llm		ぜかひか	w:17790
 是が非でも	무슨 일이 있어도	E300			GN				llm		ぜがひでも	w:17791
 是非に	꼭	E300			GN				llm			w:17792
@@ -20268,8 +20268,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 男の子	남자아이	I110	VHn		GN				xxx llm	1		w:20222
 男勝り	남자 못지않음	N110			GN				xxx llm	1		w:20223
 男女平等	남녀평등	N110			GN						だんじょびょうどう	w:20224
-男子学生	남학생	N110			GN						だんしがくせい	w:20225
-男子生徒	남학생	N110			GN						だんしせいと	w:20226
+男子学生	남학생	N110	VHn		GN						だんしがくせい	w:20225
+男子生徒	남학생	N110	VHn		GN						だんしせいと	w:20226
 男性化	남성화	N110			GN						だんせいか	w:20227
 男性恐怖症	남성공포증	N110	UTi		GN						だんせいきょうふしょう	w:20228
 男性語	남성어	N110			GN						だんせいご	w:20229
@@ -27179,3 +27179,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 火をくべ	불을 지&CM@	M437			GN			LEX-3700: 火をくべる 불을 지피다			ひをくべる	w:29903
 にくべ	에 &H5@	M437		TuPj	GN			LEX-3700: 火にくべる 불에 넣다			にくべる	w:29901
 あとで	후에	E300			GN	9950	||2 &&4 S-1== "の" P-1== "2**" ||9 D-2== "나" D-2== "저" D-2== "너" D-2== "그" D-2== "그녀" D-2== "당신" D-2== "우리" D-2== "그들" D-2== "너희" D+0= "뒤에" &&2 S-1== "の" P-1== "2**"	GRM-3250: 명사와 の 뒤의 あとで는 나중에가 아니라 후에다. 대명사 뒤는 그 사람의 뒤에다.			あとで	w:29250
+打刻	타각	N110		Hd	GN						だこく	w:29904
