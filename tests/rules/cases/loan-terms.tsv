@@ -20,7 +20,7 @@ dict:loan-terms:2	トリクロロメタン！？	lacks:트리클로로에탄	kee
 dict:loan-terms:25	ハンドヘルドＰＣの方にメールが着た。	lacks:단말기	keep	lookup
 dict:loan-terms:25	彼女はハンドヘルドＰＣをぽちぽちと操作している。	has:휴대용 PC를	keep	lookup
 pack:loan-terms:1	ペンチでドアの外枠のナットを外し終わる。	has:외측선의 너트를	fix	packs
-pack:loan-terms:2	ボルトのナットを外し、夏タイヤを収納する	has:볼트의 너트를	fix	packs
+pack:loan-terms:2	ボルトのナットを外し、夏タイヤを収納する	has:볼트 너트를	fix	packs
 pack:loan-terms:1	スパナを片手にナットが緩んでいないかを確かめる。	has:너트가	fix	packs
 pack:loan-terms:3	その中にナットやボルトと言った合金材質を入れる。	has:너트나 볼트	fix	packs
 pack:loan-terms:1	ボルトに幾つかのナットを締め付けただけの物や。	has:몇개의 너트를	fix	packs

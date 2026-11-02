@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-lexical:everyday-terms	畑の外に大きなため池を作る。	밭의 밖에 큰 저수지를 만든다.	fix	lookup
+lexical:everyday-terms	畑の外に大きなため池を作る。	밭 밖에 큰 저수지를 만든다.	fix	lookup
 lexical:everyday-terms	【万能農具】を出してみる。	【만능 농기구】를 내 본다.	fix	lookup
 lexical:everyday-terms	壁に小さな明かり取り窓を作った。	벽에 작은 채광창을 만들었다.	fix	lookup
 lexical:everyday-terms	できる限り血抜きをする。	할 수 있는 한 핏물 제거를 한다.	fix	lookup

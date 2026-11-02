@@ -24,7 +24,7 @@ pack:novel-report-senses:3	その責任は誰かが負わねばならない。	�
 pack:novel-report-senses:3	しかし心に大きな傷を負った被害者でもある。	하지만 마음에 큰 상처를 입은 피해자이기도 하다.	keep	packs
 pack:novel-report-senses:3	瀕死の重傷を負ったアスナを看ながら、	빈사의 중상을 입은 아스나를 보면서,	keep	packs
 dict:lexical-novel-misreads	伐り倒した木	베어 쓰러뜨린 나무	fix	lookup
-dict:lexical-novel-misreads	木を伐りたいなら森の入り口付近で伐ればいいし、	나무를 베고 싶으면 숲의 입구 부근에서 베면 되고,	fix	lookup
+dict:lexical-novel-misreads	木を伐りたいなら森の入り口付近で伐ればいいし、	나무를 베고 싶으면 숲 입구 부근에서 베면 되고,	fix	lookup
 dict:lex:dono-honorific	聖王どのは	성왕님은	fix	local
 dict:lex:dono-honorific	門番どの、お役目ご苦労様でした！	문지기님, 역할 수고였습니다!	fix	local
 dict:lex:dono-honorific	書記官どのが望むのであれば、	서기관님이 바란다면,	fix	local

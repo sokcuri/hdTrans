@@ -73,7 +73,7 @@ dict:jisjk:99236	決定者を探す。	결정자를 찾는다.	keep	lookup
 dict:jisjk:99236	決めた。	결정했다.	keep	lookup
 dict:jisjk:174010	きょうわんを見た。	피오르를 보았다.	fix	lookup
 dict:jisjk:174010	きょうわんの地形。	피오르의 지형.	fix	lookup
-dict:jisjk:174010	きょうわんの入り口。	피오르의 입구.	fix	lookup
+dict:jisjk:174010	きょうわんの入り口。	피오르 입구.	fix	lookup
 dict:jisjk:174010	入り江を見た。	후미를 보았다.	keep	lookup
 dict:jisjk:174044	きょくうの政党。	극우의 정당.	fix	lookup
 dict:jisjk:174044	きょくうの思想。	극우의 사상.	fix	lookup
