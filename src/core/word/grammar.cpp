@@ -2725,6 +2725,21 @@ bool QuoteVerbAhead(const Item* x) {
     return false;
 }
 
+// Whether a verb of saying or thinking or a gesture of answering (verb.answer-gesture: 頷く,
+// 首を振る, 付け加える) stands within six items from x on, with only the speaker and adverbs before
+// it: nouns, adverbs and the particles は, が, も, の (異論はないと頷いた, 風習だとアワイは最後に付け加えた).
+bool AnswerVerbAhead(const Item* x) {
+    for (int n = 0; n < 6 && x != nullptr && x->selected >= 0; n++, x = x->next) {
+        if (QuoteVerbFollows(x) || dict::StartsWithMember(HDTRANS_CLASS("verb.answer-gesture"), x->group->surface) > 0) {
+            return true;
+        }
+        const char cls = At(x->Code(x->selected), 0);
+        const std::string_view s = x->group->surface;
+        if (cls != '1' && cls != '3' && !(cls == '2' && (s == "は" || s == "が" || s == "も" || s == "の"))) return false;
+    }
+    return false;
+}
+
 // Whether the next item is a verb of thinking or wishing (思う, 考える, 願う, 祈る, 望む).
 bool WishVerbNext(const Item* x) {
     if (x == nullptr || x->selected < 0) return false;
@@ -2752,7 +2767,7 @@ void QuoteTo(Flusher& f) {
         if (it->DirectIndex() < 0) {
             if (it->group->surface == "だと" && it->prev != nullptr &&
                 (!it->prev->detail->Yougo() || it->prev->DirectSurface().ends_with("の")) &&
-                (QuoteEnd(f.w, it) || QuoteVerbFollows(it->After()) || ThinkingVerbAhead(it))) {
+                (QuoteEnd(f.w, it) || QuoteVerbFollows(it->After()) || ThinkingVerbAhead(it) || AnswerVerbAhead(it->After()))) {
                 SelectLemma(f, it, "(이)라고");
                 HearSense(f, it->After());
             }
@@ -2781,8 +2796,11 @@ void QuoteTo(Flusher& f) {
             it->AssignDirectSlot(it->DirectIndex(), std::string(e->dst.starts_with("1다면") ? "1다면" : "2면") + " 하고");
             continue;
         }
+        // A predicate other than a verb's plain form (an adjective, ない, a past) quotes before a verb of
+        // thinking, and before a verb of saying or a gesture of answering also past the speaker or an
+        // adverb (異論はないと頷いた 없다고 끄덕였다); a verb's plain form there may be a step (見ると頷いた) and is left.
         const bool thought = (At(it->Code(it->selected), 0) == '7' || ja.ends_with("ないと") || d.starts_with("た")) &&
-                             (ThinkingVerbAhead(it) ||
+                             (ThinkingVerbAhead(it) || AnswerVerbAhead(it->After()) ||
                               (it->After() != nullptr && it->After()->group->surface == kJaComma && QuoteVerbAhead(it->After()->next)));
         // ないと that ends the utterance is a duty or a need (行かないと 가지 않으면, 時間がないと
         // 시간이 없으면), but the adjective ない after the topic は or も there closes a quotation
