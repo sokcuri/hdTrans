@@ -44,6 +44,9 @@
 //     written 하고 after the pause (ぱさり、と 툭, 하고; ダンッ！　と 쾅! 하고), unless it
 //     starts a longer word (うん、とても), another と or する follows it, or a pause follows
 //     it after an ellipsis (やっ……と、, a stutter);
+//   - an intj row right before a と that quotes it, with a word of sound.quoted-by (笑, 叫, 頷)
+//     after the と in its clause, may be followed by that と, after a lone particle too when its key
+//     has three or more characters, and the と is written 하고 (ふふふと笑った 후후후 하고 웃었다);
 //   - a lead row (おい、 ほら！ ちょっと…) is a sound only at the start of an utterance
 //     and before a pause, and then wins over the dictionary words; an open row is a
 //     lead row that needs no pause (ってかなんで 그보다 왜);

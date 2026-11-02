@@ -511,6 +511,7 @@ private:
     size_t Adverbial(size_t i) const;
     bool StartsLongerWord(size_t i) const;
     size_t PausedTo(size_t i) const;
+    size_t QuotedBy(const SoundMatch& m, size_t p) const;
     size_t Stutter(size_t p, std::vector<StutterPiece>& pieces) const;
     size_t Burst(size_t p) const;
     size_t Cry(size_t p, std::string& korean) const;
@@ -1289,7 +1290,8 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         for (const SoundMatch& m : chain) {
             if (m.start < end && m.key != first.key && std::min(m.keyLen, first.keyLen) < 4) return {};
         }
-    } else if ((afterParticle && first.intj) || (afterWord && (first.intj || first.keyLen < 3)) ||
+    } else if ((afterParticle && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0)) ||
+               (afterWord && (first.intj || first.keyLen < 3)) ||
                (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
                 !MimeticAfterWord(first))) {
         return {};
@@ -1299,7 +1301,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         size_t end = last.end;
         if (!last.intj) end += Adverbial(end);
         const bool cry = CryBeforeWord(last);
-        if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") ||
+        if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") || QuotedBy(last, p) > 0 ||
             (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry ||
             (katakana && IsKatakanaRune(rs[end - 1]) && IsHiraganaRune(rs[end]) && PredicateStartsAt(p, end))) {
             if (afterWord && !WordStartsSound(p, last, end)) return {};
@@ -1475,6 +1477,34 @@ size_t SoundText::PausedTo(size_t i) const {
     std::vector<StutterPiece> pieces;
     if (Stutter(j, pieces) > 0) return 0;
     return StartsLongerWord(j) ? 0 : j + 1;
+}
+
+// The character after the と that quotes the interjection m, whose chain starts at character p,
+// right after it: a と that starts no longer word, before no other と, form of する or pause, with
+// a word of sound.quoted-by (笑, 叫, 頷) after it in its clause within eight characters
+// (ふふふと笑った 후후후 하고 웃었다, がははと豪快に笑い 가하하 하고 호쾌하게 웃어); 0 otherwise, and
+// where a dictionary word read from p takes the と (うんと, はっと).
+size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
+    const std::u32string_view rs = rs_;
+    const size_t i = m.end;
+    if (!m.intj || m.phrase || m.lead || m.open || i + 1 >= rs.size() || rs[i] != U'と' ||
+        In(rs[i + 1], U"とトしすさせ、，…‥")) {
+        return 0;
+    }
+    if (StartsLongerWord(i)) return 0;
+    size_t base = 0, user = 0, name = 0;
+    LongestKeys(p, base, user, name);
+    if (p + std::max(base, user) > i) return 0;
+    for (size_t k = i + 1; k < rs.size() && k <= i + 8; k++) {
+        if (In(rs[k], U"、，。．！？!?…‥「」『』（）()\n")) return 0;
+        if (k > i + 1 && IsKanjiRune(rs[k]) && IsKanjiRune(rs[k - 1])) continue;  // inside a word (爆笑)
+        const std::string_view at = text_.substr(offsets_[k]);
+        if (dict::StartsWithMember(HDTRANS_CLASS("sound.quoted-by"), at) > 0) {
+            // Xと言わせる is a set phrase (ギャフンと言わせる 꼼짝 못하게 만들다, アッと言わせる).
+            return at.starts_with("言わせ") || at.starts_with("いわせ") ? 0 : i + 1;
+        }
+    }
+    return 0;
 }
 
 // The end of the stutter at character p and its pieces, or 0: a kana syllable (with
@@ -2070,8 +2100,13 @@ std::string SoundText::Write() {
                 }
             }
             lastCry = chain.back();
-            // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
-            if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
+            // A と right after an interjection quotes it before a word of sound.quoted-by (ふふふと笑った 후후후 하고 웃었다).
+            if (const size_t said = QuotedBy(chain.back(), chain.front().start); said > 0) {
+                b += " 하고";
+                next = said;
+                if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (const size_t to = chain.back().phrase || rs[next - 1] == U'と' ? 0 : PausedTo(next); to > 0) {
+                // A と after a pause quotes the sound: 하고 after the pause (ぱさり、と落ちた 툭, 하고 떨어졌다).
                 b += Bytes(next, to - 1);
                 if (!text::IsSpace(rs[to - 2])) b += ' ';
                 b += "하고";

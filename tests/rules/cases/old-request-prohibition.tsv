@@ -1,0 +1,21 @@
+# 규칙: SPC-35
+rule	input	expected	kind	layer
+builtin-ending:ておくんなさい	とにかく包丁を捨てておくんなさい。	어쨌든 부엌칼을 버려 주세요.	fix	builtin-ending
+builtin-ending:ておくんなさい	任せておくんなさい！」	맡겨 주세요!」	fix	builtin-ending
+builtin-ending:ておくんなさい	ちょっと待っておくんなさい！	잠깐 기다려 주세요!	fix	builtin-ending
+builtin-ending:ておくんなさい	気を使わないでおくんなさい」	신경을 쓰지 말아 주세요」	fix	builtin-ending
+builtin-ending:ておくんなさい	「まかせておくれなさいよ」	「맡겨 주세요」	fix	builtin-ending
+builtin-ending:ておくんなさい	仁吉さんそう言わないでおくれなさいよ。	진키치 씨 그렇게 말하지 말아 주세요.	fix	builtin-ending
+builtin-ending:ておくんなさい	「これを貰っておくれ」	「이걸 받아 다오」	keep	builtin-ending
+builtin-ending:でない	「ええい、邪魔するでない！」	「에잇, 방해하지 마!」	fix	builtin-ending
+builtin-ending:でない	僕を悪者にするでない。	나를 나쁜놈으로 하지 마라.	fix	builtin-ending
+builtin-ending:でない	「いっぺんに聞くでない！	「한번에 듣지 마라!	fix	builtin-ending
+builtin-ending:でない	近付くでない！」	가까워지지 마라!」	fix	builtin-ending
+builtin-ending:でない	声が上手くでない。	목소리가 잘이 아니다.	keep	builtin-ending
+builtin-ending:でない	人の気配がまるでない。	사람의 기색이 전혀 없다.	keep	builtin-ending
+normalize:casual-negative-nee	親らしきものもいねぇ。	부모 같은 것도 없다.	fix	normalize
+normalize:casual-negative-nee	「って、ダレもいねぇ」	「라고, 아무도 없어」	fix	normalize
+normalize:casual-negative-nee	「魔物はいねぇな」	「마물은 없네」	fix	normalize
+normalize:casual-negative-nee	「…………忘れてはいねぇよ」	「…………잊지는 않아」	fix	normalize
+normalize:casual-negative-nee	リカはもういねえんだ。	리카는 이제 없다.	fix	normalize
+normalize:casual-negative-nee	「俺は、別に生きても死んでもどっちでも良いぜぇ。もう苦しみたくないだけだ。杏里もいねぇ、あんたを憎むのさえ、憎んでいるのかさえ分からなくなっちまった。」	「나는, 따로 살아도 죽어도 어느 쪽으로도 좋아. 이제 괴로워하고 싶지 않은 것뿐이다. 안리도 없는, 너를 미워하는 것조차, 미워하고 있는지 조차 모르게 돼버렸다.」	fix	normalize

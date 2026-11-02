@@ -1,0 +1,41 @@
+# 규칙: SPC-27
+rule	input	expected	kind	layer
+cx:exclaim-quote-to:5	まずいなと思いながらもまぶたが重たくて仕方がない。	큰일이라고 생각하면서도 눈꺼풀이 무거워서 어쩔 수 없다.	fix	rewrites
+cx:exclaim-quote-to:5	ゲハゲハと笑うハヌマーンを見て最低だなと思う。	게하게하 웃는 하누만을 보고 최악이라고 생각한다.	fix	rewrites
+cx:exclaim-quote-to:5	俺がいた世界に来られたら迷惑だなと思いつつ訊いたら、	내가 있던 세계에 올 수 있으면 민폐라고 생각하면서 물으면,	fix	rewrites
+cx:exclaim-quote-to:5	無理じゃないなと思った。	무리가 아니라고 생각했다.	fix	rewrites
+cx:exclaim-quote-to:5	最高だと思った。	최고라고 생각했다.	keep	rewrites
+cx:exclaim-quote-to:7	スキルになったあとがとても強力だからだと思う。	스킬이 된 뒤가 무척 강력하기 때문이라고 생각한다.	fix	rewrites
+cx:exclaim-quote-to:7	これは夢だと思った。	이것은 꿈이라고 생각했다.	keep	rewrites
+cx:exclaim-quote-to:10	不思議だなと思う。	이상하다고 생각한다.	fix	rewrites
+cx:exclaim-quote-to:10	珍しいなぁと思いながら自分の履いていた靴を	드물다고 생각하면서 자신이 신고 있던 구두를	fix	rewrites
+cx:exclaim-quote-to:10	いつか書けたらいいなと思ってた私小説	언젠가 쓸 수 있으면 좋겠다고 생각했던 사소설	fix	rewrites
+cx:exclaim-quote-to:10	「いや、改めて可愛いなと思って」	「아니, 다시 귀엽다고 생각해」	fix	rewrites
+cx:exclaim-quote-to:10	嫌だなと思ってしまって、	싫다고 생각해버려,	fix	rewrites
+cx:exclaim-quote-to:10	「でも、それでよかったんだと思う」	「하지만, 그래서 좋았다고 생각해」	fix	rewrites
+cx:exclaim-quote-to:10	入ったボトルを飲んだんだと思うよ」	들어간 보틀을 마셨다고 생각해」	fix	rewrites
+cx:exclaim-quote-to:10	来るかなと待っていた。	올까 하고 기다리고 있었다.	keep	rewrites
+cx:exclaim-quote-to:10	そうだろうと思った。	그럴 것이라고 생각했다.	keep	rewrites
+cx:exclaim-quote-to:12	「ああ、なんか改めて人間じゃないんだなと思ったわ」	「아, 왠지 다시 인간이 아니라고 생각했어」	fix	rewrites
+cx:exclaim-quote-to:12	私服はスカートじゃないんだなと思った。	사복은 스커트가 아니라고 생각했다.	fix	rewrites
+cx:exclaim-quote-to:12	大事な話という割には大したことじゃないんだなと思った。	소중한 이야기라는 것에 비해서는 별일 아니라고 생각했다.	fix	rewrites
+cx:exclaim-quote-to:12	そうか、無理じゃないんだなと思ったら自然と口が開く。	그런가, 무리가 아니라고 생각하면 자연스럽게 입이 열린다.	fix	rewrites
+cx:exclaim-quote-to:12	彼が犯人だと思う。	그가 범인이라고 생각한다.	keep	rewrites
+cx:exclaim-quote-to:13	「いや…ミオが可愛いのはカルが可愛いからだなと思って。」	「아니…미오가 귀여운 건 칼이 귀엽기 때문이라고 생각해.」	fix	rewrites
+cx:exclaim-quote-to:13	きっとそうだと思う。	분명 그렇다고 생각한다.	keep	rewrites
+cx:exclaim-quote-to:15	以前より仲良くなれたのだなと思うとうれしい。	이전보다 사이 좋게 될 수 있었다고 생각하면 기쁘다.	fix	rewrites
+cx:exclaim-quote-to:15	意外に安いんだなと思いながら、すぐにネットカフェを後にした。	의외로 싸다고 생각하면서, 곧바로 인터넷 카페를 떠났다.	fix	rewrites
+cx:exclaim-quote-to:15	やはりハーフエルフになっても使えるのだなと思って	역시 하프 엘프가 되어도 쓸 수 있다고 생각해	fix	rewrites
+cx:exclaim-quote-to:15	行くなと言った。	가지 말라고 했다.	keep	rewrites
+cx:exclaim-quote-to:20	私は面白い子だなぁと思った。	나는 재미있는 아이구나 하고 생각했다.	fix	rewrites
+cx:exclaim-quote-to:20	それを見るたびに異世界に居るんだなと思い出すのは仕方ないことだろう。	그것을 볼 때마다 이세계에 있는구나 하고 생각해 내는 것은 어쩔 수 없을 것이다.	fix	rewrites
+cx:exclaim-quote-to:20	この国は、戦時体制なのだなと思う。	이 나라는, 전시체제이구나 하고 생각한다.	fix	rewrites
+cx:exclaim-quote-to:20	楽しかったねと笑った。	즐거웠네 하고 웃었다.	keep	rewrites
+cx:exclaim-quote-to:30	それをぼんやり目で追いながら、相変わらず美人だなと思った。	그것을 멍하니 눈으로 쫓으면서, 변함없이 미인이구나 하고 생각했다.	fix	rewrites
+cx:exclaim-quote-to:30	俺は失礼な奴だなと思うが、	나는 무례한 놈이구나 하고 생각하지만,	fix	rewrites
+cx:exclaim-quote-to:30	前に来た二人だなと思った灰色スーツ姿の悪魔は、	앞에 온 두 사람이구나 하고 생각한 회색 정장 차림의 악마는,	fix	rewrites
+cx:exclaim-quote-to:30	ダメだと思った。	안된다고 생각했다.	keep	rewrites
+cx:exclaim-quote-to:40	実践しやすい形にアレンジした形なんだなと	실천하기 쉬운 형태에 어레인지한 형태구나 하고	fix	rewrites
+cx:exclaim-quote-to:40	そこはアナログなんだなと思い、	거기는 아날로그구나 하고 생각해,	fix	rewrites
+cx:exclaim-quote-to:40	ショッピングモールとはこんな風なんだなと思う。	쇼핑 몰이란 이런 식이구나 하고 생각한다.	fix	rewrites
+cx:exclaim-quote-to:40	お兄様に気を許しておいでなんだなと思った。	!rule:cx:exclaim-quote-to:40	keep	rewrites

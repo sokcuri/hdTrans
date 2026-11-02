@@ -26,3 +26,4 @@ cx:lc2b-dearou:10	皇帝の森と呼ばれる場所であろうと思われた�
 cx:lc2b-dearou:20	簡単な料理ではあるが、この腕ならヒスイに料理を任せて大丈夫であろうと確信した。	has:괜찮을 것이라고	fix	rewrites
 cx:lc2b-dearou:20	どんな敵であろうと、彼がいれば失敗はない。	!rule:cx:lc2b-dearou:20	keep	rewrites
 cx:lc2b-dearou:20	例え如何なる存在であろうとも。	!rule:cx:lc2b-dearou:20	keep	rewrites
+cx:lc2b-dearou:10	でも、やはりそれは妊婦にはどう考えても辛いものであろうと感じた。	has:괴로운 것일 것이라고 느꼈다	fix	rewrites

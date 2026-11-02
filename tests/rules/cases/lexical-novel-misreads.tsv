@@ -1,0 +1,32 @@
+# 규칙: LEX-3620
+rule	input	expected	kind	layer
+dict:lexical-novel-misreads	顔面を紅潮させてわめくその姿	안면을 홍조 시켜 소리치는 그 모습	fix	lookup
+dict:lexical-novel-misreads	変態が何事かわめいている。	변태가 무슨 일인가 소리치고 있다.	fix	lookup
+dict:lex:nukasu-say	腰を抜かしてしまった。	깜짝 놀라버렸다.	keep	local
+dict:lexical-novel-misreads	畑仕事にいそしむ	밭일에 힘쓴다	fix	lookup
+dict:lexical-novel-misreads	勇者アベルは自領にある森の中で秘術にいそしんでいた。	용사 아벨은 자령에 있는 숲속에서 비술에 힘쓰고 있었다.	fix	lookup
+dict:lexical-novel-misreads	源二は厳つい顔をゆるめた。	겐지는 험상궂은 얼굴을 완화했다.	fix	lookup
+dict:lexical-novel-misreads	魔王将の威厳などみじんも感じられない。	마왕장의 위엄 같은 건 조금도 느껴지지 않는다.	fix	lookup
+dict:lexical-novel-misreads	ないから、ネタばらしした。	없으니까, 비밀 공개했다.	fix	lookup
+dict:lexical-novel-misreads	福原が割って入った。	후쿠하라가 끼어들었다.	fix	lookup
+dict:lexical-novel-misreads	真面目そうな顔をしているだけで違和感が半端ない。	진지할 것 같은 표정을 하고 있는 것만으로 위화감이 장난 아니다.	fix	lookup
+dict:lexical-novel-misreads	情報屋の胸倉を掴みかかり	정보상의 멱살을 덤벼들어 붙잡아	fix	lookup
+dict:lexical-novel-misreads	セリカが背後から殴りかかった。	세리카가 뒤에서 덤벼들어 때렸다.	fix	lookup
+dict:lexical-novel-misreads	その剣呑な雰囲気に、通行人も足早に去っていく。	그 위험한 분위기에, 통행인도 빠른 걸음으로 떠나 간다.	fix	lookup
+dict:lexical-novel-misreads	桜の声が尻すぼみになる。	벚꽃의 목소리가 점점 작아진다.	fix	lookup
+dict:lexical-novel-misreads	手負いの虎程恐いものは無い。	상처 입은 범만큼 무서운 것은 없다.	fix	lookup
+dict:lexical-novel-misreads	あちこちが破けてしまっている。	여기저기가 찢어져버렸다.	fix	lookup
+dict:lexical-novel-misreads	「はい、今日もおつかれさーん」	「네, 오늘도 수고했어~」	fix	lookup
+dict:lexical-novel-misreads	さらに、ごはんのお供だけではなく…。	게다가 밥반찬뿐만 아니라….	fix	lookup
+dict:lexical-novel-misreads	「あっぶな」	「위험해」	fix	lookup
+dict:lexical-novel-misreads	セーフ、あぶなかった。	세이프, 위험했다.	keep	lookup
+dict:jisjk:6540	それがとどめになった。	그것이 결정타가 되었다.	fix	lookup
+dict:jisjk:117831	深い満足感を得て目をつぶる。	깊은 만족감을 얻어 눈을 감는다.	fix	lookup
+dict:jisjk:144336	稚隼はガックリとうなだれた。	치 하야부사는 털썩 고개를 숙였다.	fix	lookup
+dict:jisjk:242093	それを、台車に乗せて正門まで運ぶのだ。	그것을, 수레에 실어 정문까지 옮긴다.	fix	lookup
+dict:w:12725	壁に残ったその切れ端で彼女は思い出したのか。	벽에 남은 그 조각으로 그녀는 생각해 낸 건가.	fix	lookup
+dict:lex:nukasu-say	これといって特徴のない顔だと抜かすんだよ。	이렇다 할 특징이 없는 얼굴이라고 지껄여.	fix	local
+lookup:noun-before-case-particle	血の臭いが	피의 냄새가	fix	lookup
+lookup:noun-before-case-particle	むせかえる形容しがたい臭いに、	숨이 막히는 형용하기 어려운 냄새에,	fix	lookup
+lookup:noun-before-case-particle	ドロリとした青臭いにおい。	걸쭉한 미숙한 냄새.	keep	lookup
+lookup:noun-before-case-particle	あと血が臭い。	그리고 피가 구리다.	keep	lookup

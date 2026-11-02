@@ -1,0 +1,28 @@
+# 규칙: NUM-15
+rule	input	expected	kind	layer
+sense:時	この後１１時３０分からのｄａｙｓでも	이 후 11시 30분부터의 days라도	fix	senses
+sense:時	だってあの８時	왜냐하면 그 8시	fix	senses
+sense:時	そんな１６時過ぎ。	그런 16시 지나고.	fix	senses
+sense:時	「この７時４７分の新快速敦賀行き。」	「이 7시 47분의 신쾌속 쓰루가행.」	fix	senses
+sense:時	その時は私の学友だったはずだ！！	그 때는 내 학우였을 것이다!!	keep	senses
+sense:時	夜７時に	밤 7시에	keep	senses
+dict:jisjk:275022	結局東一郎の散髪は、この後１時間半も要した。	결국 토이치로의 이발은, 이 후 1시간 반도 필요로 했다.	fix	local
+dict:jisjk:275022	この後１時間くらいの対話が続いた。	이 후 1시간 정도의 대화가 계속되었다.	fix	local
+dict:jisjk:275022	「この後２日は予定が無いんだろ？	「이 후 2일은 예정이 없는 거지?	fix	local
+dict:jisjk:275022	港町まであと２日。	항구도시까지 앞으로 2일.	keep	local
+dict:jisjk:275022	春休みも残りあと２日。	봄방학도 남은 앞으로 2일.	keep	local
+constraint:karada-counter	３体の中で老人の『副館長』	3체 중에서 노인의 『부관장』	fix	lookup
+constraint:karada-counter	１０体の中から	10체 중에서	fix	lookup
+constraint:karada-counter	7体の中鬼	7체 중귀	fix	lookup
+constraint:karada-counter	カッと体の中が熱を発した。	딱 몸속이 열을 발했다.	keep	lookup
+dict:lex:ittai-counter	「待って、今度は一体だけだ」	「기다려, 이번에는 1체 뿐이다」	fix	local
+dict:lex:ittai-counter	「一体だけですよぅ！	「1체 뿐이에요!	fix	local
+dict:lex:ittai-counter	一体ずつとどめを刺す。	1체씩 결정타를 날린다.	fix	local
+dict:lex:ittai-counter	聖霊は一人につき一体しか使役	성령은 한 사람에 대해 1체밖에 사역	fix	local
+dict:lex:ittai-counter	手負いの中鬼が一体だけとはいえ、	상처 입은 중귀가 1체만이라고 해도,	fix	local
+dict:lex:ittai-counter	「あれ、一体何なの！？」	「어라, 도대체 뭐야 대체!?」	keep	local
+dict:lex:ittai-counter	それは一体何の話だ。	그것은 도대체 무슨 이야기다.	keep	local
+constraint:name-after-numeral	１日村でゆっくりし、	1일 마을에서 쉬어,	fix	lookup
+constraint:name-after-numeral	もう１日村に泊ってから帰ろうと話がまとまった所で、	이제 1일 마을에 묵고 나서 돌아가려고 이야기가 결정된 곳에서,	fix	lookup
+constraint:name-after-numeral	第5水陸両用軍団の記録。	제5수륙양용 군단의 기록.	keep	lookup
+dict:lex:ittai-counter	一体しかないのに」	1체밖에 없는데」	fix	local

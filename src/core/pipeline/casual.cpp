@@ -75,7 +75,7 @@ bool PausedConditional(std::string_view before, std::string_view at) {
     return true;
 }
 
-// (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっ]|$)
+// (て|で|[一-龥々][かがさたなばまらわ]|[見来出居寝似着]|(?<=^|[もはがに]|しか|もう|まだ)い|し|(?:わか|分か|判|知|つま|たま)ん)ね[ぇえ]([なよぜぞしんかけだっ]|$)
 // or (やら|[くにゃばて]なら)ね[ぇえー]([なよぜぞしんかけだっ]|$), or before a kanji or a sentence
 // end or a pause; not the particle やら after a kanji, なに or どう, nor the conditional なら
 // after a noun (君ならねぇ) or before a pause where PausedConditional holds (行くならねぇ、,
@@ -110,6 +110,19 @@ bool Nee(std::string_view s, size_t pos, Match& m) {
     }
     p = pos;
     if (OneOf(s, p, U"見来出居寝似着") && tail(p, true, false)) return true;
+    // いる in kana where a line starts or after the particle も, は, が, に, しか or the adverbs もう, まだ
+    // (誰もいねぇ、, ここにはいねー, もういねえよ; not the 稲 of いね), also before a mark.
+    p = pos;
+    if (const std::string_view before = s.substr(0, pos);
+        (pos == 0 || before.ends_with("も") || before.ends_with("は") || before.ends_with("が") || before.ends_with("に") ||
+         before.ends_with("しか") || before.ends_with("もう") || before.ends_with("まだ")) &&
+        Lit(s, p, "い")) {
+        m.group[1] = Span(s, pos, p);
+        if (Lit(s, p, "ね") && OneOf(s, p, U"ぇえー") &&
+            CharOrEnd(s, p, U"なよぜぞしんかけだっわの。、！？!?…‥」』）) 　", m, 2)) {
+            return true;
+        }
+    }
     p = pos;
     if (Lit(s, p, "し") && tail(p, true, false)) return true;
     for (std::string_view w : {"わか", "分か", "判", "知", "つま", "たま"}) {

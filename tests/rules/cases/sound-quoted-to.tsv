@@ -1,0 +1,40 @@
+# 규칙: SND-9
+rule	input	expected	kind	layer
+sound:quoted-to	「ガハハと笑って女を抱いて」	「가하하 하고 웃어 여자를 안아」	fix	sound
+sound:quoted-to	王様ががははははと豪快に笑い、	임금님이 가하하하하 하고 호쾌하게 웃어,	fix	sound
+sound:quoted-to	うふふと笑いながら答える。	우후후 하고 웃으면서 대답한다.	fix	sound
+sound:quoted-to	あらあらウフフと笑う妻の姿が浮かんだ。	어머어머 우후후 하고 웃는 아내의 모습이 떠올랐다.	fix	sound
+sound:quoted-to	リサはにひひと笑った。	리사는 니히히 하고 웃었다.	fix	sound
+sound:quoted-to	太腿を撫でて、へへっと笑った。	넓적다리를 쓰다듬고 있어 헤헷 하고 웃었다.	fix	sound
+sound:quoted-to	熊のような体格をした者たちがワハハと笑う。	곰과 같은 체격을 한 사람들이 와하하 하고 웃는다.	fix	sound
+sound:quoted-to	ディマイアスはふふんと笑う。	디마이아스는 흐흥 하고 웃는다.	fix	sound
+sound:quoted-to	額をさすりながら、えへへと笑ってみせた。	이마를 문지르면서, 에헤헤 하고 웃어 보였다.	fix	sound
+sound:quoted-to	鈴々は、にゃははと笑った。	린린은, 냐하하 하고 웃었다.	fix	sound
+sound:quoted-to	そう言うとルークはハハハと笑う。	그렇게 말하면 루크는 하하하 하고 웃는다.	fix	sound
+sound:quoted-to	紅緒は口をへの字に曲げ、うーんと唸っている。	베니오는 입을에 대한 글자에 굽혀 으음 하고 신음소리를 내고 있다.	fix	sound
+sound:quoted-to	ふうと息を吐いた。	후우 하고 숨을 내쉬었다.	fix	sound
+sound:quoted-to	きゃあっと言わんばかりにお腹らへんに飛びついてくる。	꺄악 하고 말하는 듯이 배등에 에 달려들어 온다.	fix	sound
+sound:quoted-to	ホホホと笑う私の顔を、レオニダスは見つめますわ。	호호호 하고 웃는 제 얼굴을, 레오니다스는 바라봐요.	fix	sound
+sound:quoted-to	ダレスがくくっと笑う。	다레스가 크큭 하고 웃는다.	fix	sound
+sound:quoted-to	孝司は、はぁと息をついて呆れた声を出す。	타카시는, 하아 하고 한숨을 쉬어 기가 막힌 소리를 낸다.	fix	sound
+sound:quoted-to	あはははと笑いながら、話が一段落する。	아하하하 하고 웃으면서, 이야기가 일단락한다.	fix	sound
+sound:quoted-to	でも、プッと吹き出してしまう。	하지만, 풉 하고 터트려버린다.	fix	sound
+sound:quoted-to	うっうっと声を出し続けて居た	윽윽 하고 계속 소리를 내 있었다	fix	sound
+sound:quoted-to	片桐さんはアハハとあっけらかんと笑った。	카타기리 씨는 아하하 하고 태연하게 웃었다.	fix	sound
+sound:quoted-to	エリンとカロンもきゃああと悲鳴を上げており	에린과 카론도 꺄아아 하고 비명을 질러 있어	fix	sound
+sound:quoted-to	ガハハハハと笑いながら高倉くんたちは帰っていった。	가하하하하 하고 웃으면서 타카쿠라 군들은 돌아갔다.	fix	sound
+sound:quoted-to	ニタァァアと笑みを引き上げるアダム	히죽~ 미소를 끌어올리는 아담	fix	sound
+sound:quoted-to	イルルはにまりと笑い、	이루루는 히죽 웃어,	fix	sound
+sound:quoted-to	琥珀達を見てニカリと笑う。	호박들을 보고 씩 웃는다.	fix	sound
+sound:quoted-to	皇女はニコリと笑った。	황녀는 방긋 웃었다.	keep	sound
+sound:quoted-to	永遠は何を思ったのかニヤリと笑った。	영원은 무엇을 생각했는지 씨익 웃었다.	keep	sound
+sound:quoted-to	くすくすと笑った。	킥킥 웃었다.	keep	sound
+sound:quoted-to	くすっと笑った。	피식 웃었다.	keep	sound
+sound:quoted-to	ふっと笑った。	문득 웃었다.	keep	sound
+sound:quoted-to	はっと気づいた。	흠칫 눈치챘다.	keep	sound
+sound:quoted-to	うんと遠くへ行った。	아주 멀리 갔다.	keep	sound
+sound:quoted-to	チルチルをギャフンと言わせるのよさ！	칠칠을 꼼짝 못하게 만들어!	keep	sound
+sound:quoted-to	それらを使って信長をアッと言わせないと……	그것들을 써 노부나가를 깜짝 놀라게 하지 않으면……	keep	sound
+sound:quoted-to	ははは、と笑った。	하하하, 하고 웃었다.	keep	sound
+sound:quoted-to	ああと笑うと男は言った。	아 하고 웃는다고 남자는 말했다.	keep	sound
+sound:quoted-to	タイロは、うーんと唸る。	타이로는, 으음 하고 신음소리를 낸다.	fix	sound
