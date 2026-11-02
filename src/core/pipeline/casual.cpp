@@ -754,8 +754,19 @@ bool Rya(std::string_view s, size_t pos, Match& m) {
     }
     if (!Take(s, q, [](char32_t r) { return IsHiraganaClass(r) || IsKanjiClass(r); })) return false;
     m.group[1] = "れば";
-    for (std::string_view neg : {"しない", "しね", "しません", "せん", "しなかった"}) {
-        if (s.substr(p).starts_with(neg)) m.group[1] = "りは";
+    // The stem of an ichidan verb says no り there (食われりゃしない 食われはしない, 出られりゃせん): an e- or
+    // i-row kana that ends at most three kana after a kanji, none of them a particle (しゃべりゃ, にかえりゃ), or
+    // 見, 出, 寝 alone. The なけ of なければ keeps its conditional (事がなけりゃしない).
+    const bool nakere = c == U'け' && b == U'な';
+    bool ichidan = In(c, U"見出寝");
+    if (In(c, U"えけげせぜねべめれきぎじちびみ") && !nakere) {
+        size_t k = pos - 3;
+        for (int n = 0; n < 2 && k >= 3 && IsHiraganaClass(Before(s, k)) && !In(Before(s, k), U"もにをがはでとのへや"); n++)
+            k -= 3;
+        ichidan = IsKanjiClass(Before(s, k));
+    }
+    for (std::string_view neg : {"しない", "しね", "しません", "せん", "せぬ", "しなかった"}) {
+        if (s.substr(p).starts_with(neg) && !nakere) m.group[1] = ichidan ? "は" : "りは";
     }
     while (p < s.size() && In(At(s, p).cp, U"あぁ")) p += At(s, p).size;
     m.end = p;

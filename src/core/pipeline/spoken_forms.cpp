@@ -384,13 +384,46 @@ bool KansaiNegative(std::string_view s, size_t pos, Match& m) {
         m.group[1] = Span(s, pos, p);
         if (!Lit(s, p, "へん")) return false;
         const size_t ending = p;
-        if (Lit(s, p, "かった")) m.group[2] = Span(s, ending, p);
-        else m.group[2] = {};
+        m.group[3] = {};
+        if (Lit(s, p, "かった")) {
+            m.group[2] = Span(s, ending, p);
+        } else {
+            m.group[2] = {};
+            // The sentence-final で after it is the よ of Kansai speech (負けへんで！ 負けないよ！), not
+            // the で of a negative that goes on.
+            size_t q = p;
+            if (Lit(s, q, "で") && (q == s.size() || OneOf(s, q, U"。｡！!？?…‥」』　 ") || Lit(s, q, "ー"))) {
+                m.group[3] = "よ";
+                p += std::string_view("で").size();
+            }
+        }
         m.end = p;
         return true;
     };
     size_t p = pos;
     if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"わかがさたなまば") && rest(p)) return true;
+    // The stem of an ichidan verb, a potential or a passive: kanji and at most three kana, the last an e- or
+    // i-row kana (負けへん, 離れへん, 逃れられへん, 落ちへん); not the drawn-out せえ, けえ or 来え of する or くる
+    // (手加減せえへん, 来えへん). せ alone after two kanji or more is written with the ん of the old negative
+    // (勉強せへん 勉強せん, 見逃せへん 見逃せん), which the contraction stage reads as する or a potential; group 4
+    // marks it.
+    p = pos;
+    m.group[4] = {};
+    int kanjiCount = 0;
+    while (Take(s, p, IsKanjiClass)) kanjiCount++;
+    if (kanjiCount > 0) {
+        const size_t kanji = p;
+        for (int n = 0; n < 3 && p < s.size() && IsHiraganaRune(At(s, p).cp) && !s.substr(p).starts_with("へん"); n++)
+            p += At(s, p).size;
+        const std::string_view kana = s.substr(kanji, p - kanji);
+        const char32_t last = kana.empty() ? 0 : LastRune(kana).cp;
+        const bool drawn = kana.ends_with("せえ") || kana.ends_with("けえ") ||
+                           (kana == "え" && LastRune(s.substr(0, kanji)).cp == U'来');
+        if (last != 0 && In(last, U"えけげせぜねべめれきぎじちびみ") && !drawn && rest(p)) {
+            if (kana == "せ" && kanjiCount >= 2) m.group[4] = "ん";
+            return true;
+        }
+    }
     for (std::string_view stem : kKansaiNegativeRa) {
         p = pos;
         if (Lit(s, p, stem) && Lit(s, p, "ら") && rest(p)) return true;
@@ -492,7 +525,8 @@ std::string ReplaceKansaiNegative(const Match& m) {
     std::string_view stem = g.group[1];
     if (stem == "あら" || stem == "あれ") stem = {};
     else if (stem == "せえ") stem = "し";
-    return Cat({stem, g.group[2].empty() ? "ない" : "なかった"});
+    if (!g.group[4].empty()) return Cat({stem, g.group[4], g.group[2], g.group[3]});
+    return Cat({stem, g.group[2].empty() ? "ない" : "なかった", g.group[3]});
 }
 
 // The Kansai polite negative まへん in words of their own: おまへん ありません, すんまへん and

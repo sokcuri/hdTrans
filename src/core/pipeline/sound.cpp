@@ -3025,6 +3025,7 @@ bool AnyKind(int, const dict::Codes*) { return true; }
 bool IchidanKind(int kind, const dict::Codes*) { return kind == kIchidan; }
 bool RaGodanKind(int kind, const dict::Codes*) { return kind == kRaGodan; }
 bool IchidanOrKuru(int kind, const dict::Codes*) { return kind == kIchidan || kind == kKuruKanji; }
+bool SuruKind(int kind, const dict::Codes*) { return kind == kSuru; }
 // Whether rest is か, then drawn or clipped kana (kana.drawn-out, mark.clip), then an exclamation
 // mark (か！, かッ!!, かぁ！).
 bool ReproachKa(std::string_view rest) {
@@ -3112,6 +3113,8 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
                 !dict::InClass(HDTRANS_CLASS("verb.observed-state"), s)) {
                 return kRu;
             }
+            // The potential of a godan verb takes no prohibition either: its ん is the negative (許せんな 許せないな).
+            if (VerbFormIs(s, kPotential, Godan, ctx, snap)) return kNai;
             return {};
         case Says::RuTsu:
             if (VerbFormIs(s + std::string(kRu), kDictionaryForm, AnyKind, ctx, snap)) return kRu;
@@ -3150,6 +3153,78 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
         case Says::None: break;
     }
     return {};
+}
+
+// Whether the せ before the ん or ぬ at i of rs (s, with the byte offsets byte) is the old negative stem of する:
+// after は or も that follow a word (許しはせん, 何もせん), after こと or そう (そんなことせん, そうせん), or after a
+// verb of する of the dictionary (気にせん) or a noun of an act (Hd: 勉強せん, 容赦せぬ) of two characters or more,
+// and before the end, a mark, a kanji or the kana of an ending or particle (せんぞ, せんかった, せんのか). Not a word
+// that goes on in kana (せんせい, せんぱい, せんべい), after one kanji, whose する conjugates otherwise (愛せん), the
+// potential of a godan verb in す (許せん, 誤魔化せん), a word of the dictionary that spans the せ and its ん or ぬ
+// (如何せん, 処方せん, 予期せぬ), or the literary volitional of a spell where it ends the clause (浄化せん！:
+// verb.chant-volitional).
+bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::vector<size_t>& byte, size_t i,
+                     const LineContext& ctx, const dict::Snapshot& snap) {
+    const size_t se = i - 1;
+    if (se == 0 || rs[se] != U'せ') return false;
+    const bool kanaAfter = i + 1 < rs.size() && (IsHiraganaRune(rs[i + 1]) || IsKatakanaRune(rs[i + 1]));
+    if (kanaAfter && std::u32string_view(U"ぞよわかのなねでとさしけじやがもは").find(rs[i + 1]) == std::u32string_view::npos) {
+        return false;
+    }
+    // After a particle or こと the せ may start a noun in kana: a word of the dictionary that starts there and goes
+    // on past the kana after the ん (せんしゅ, せんじつ, せんもんか), but for one that ends with an ending after the
+    // ん before the end, a mark or a sentence particle (せんねん, せんのう, せんじゃろう; not せんのうだ), and せんぞ
+    // before a case particle (せんぞが).
+    const auto noun = [&] {
+        const std::u32string_view rest = std::u32string_view(rs).substr(i + 1);
+        if (rest.starts_with(U"ぞ") && rest.size() > 1 && std::u32string_view(U"がをにの").find(rest[1]) != std::u32string_view::npos) {
+            return true;
+        }
+        for (const dict::Candidate& c : snap.GetWordInfo(std::string_view(s).substr(byte[se]), dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes == nullptr || !std::string_view(s).substr(byte[se]).starts_with(c.source) || i + 2 >= byte.size() ||
+                byte[se] + c.source.size() <= byte[i + 2]) {
+                continue;
+            }
+            bool ending = false;
+            for (const std::u32string_view e : {U"ねん", U"のう", U"もん", U"じゃ", U"かい"}) {
+                const char32_t next = rest.size() > e.size() ? rest[e.size()] : 0;
+                ending = ending || (rest.starts_with(e) && byte[se] + c.source.size() == byte[i + 1 + e.size()] &&
+                                    (next == 0 || std::u32string_view(U"よねなぞかわさろ").find(next) != std::u32string_view::npos ||
+                                     !(IsHiraganaRune(next) || IsKatakanaRune(next) || IsKanjiRune(next))));
+            }
+            if (!ending) return true;
+        }
+        return false;
+    };
+    if ((rs[se - 1] == U'は' || rs[se - 1] == U'も') && se >= 2 && (IsKanjiRune(rs[se - 2]) || IsHiraganaRune(rs[se - 2]))) {
+        return !noun();
+    }
+    const std::u32string_view before(rs.data(), se);
+    if (before.ends_with(U"こと") || before.ends_with(U"そう")) return !noun();
+    size_t start = se;
+    while (start > 0 && se - start < kLongestStem &&
+           (IsKanjiRune(rs[start - 1]) || IsKatakanaRune(rs[start - 1]) || rs[start - 1] == U'に')) {
+        start--;
+    }
+    if (start == se) return false;
+    const std::string_view head = std::string_view(s).substr(0, byte[se]);
+    if (!kanaAfter && dict::EndsWithMember(HDTRANS_CLASS("verb.chant-volitional"), head) > 0) return false;
+    for (size_t w = start; w < se; w++) {
+        for (const dict::Candidate& c : snap.GetWordInfo(std::string_view(s).substr(byte[w]), dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes != nullptr && byte[w] + c.source.size() > byte[i] && std::string_view(s).substr(byte[w]).starts_with(c.source)) {
+                return false;
+            }
+        }
+    }
+    for (size_t from = start; from + 1 < se; from++) {
+        const std::string_view stem = std::string_view(s).substr(byte[from], byte[se] - byte[from]);
+        if (VerbFormIs(std::string(stem) + "せ", kPotential, Godan, ctx, snap)) return false;
+        if (VerbFormIs(std::string(stem) + "し", kNegativeStem, SuruKind, ctx, snap)) return true;
+        for (const dict::Candidate& c : snap.GetWordInfo(stem, dict::LookupMode::General, ctx.lookup).list) {
+            if (c.codes != nullptr && c.source == stem && c.codes->part.Tag() == 'N' && c.codes->gram.HasCode("Hd")) return true;
+        }
+    }
+    return false;
 }
 
 }  // namespace
@@ -3209,7 +3284,10 @@ bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const d
 std::string RewriteContractedN(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     constexpr std::string_view kN = "ん", kSmallTsu = "っ", kNai = "ない";
     const std::span<const std::string_view> kara = dict::ClassMembers(HDTRANS_CLASS("contraction.tsu-ru"));
-    if (text.find(kN) == std::string_view::npos && !HoldsMember(text, {kara}, {kSmallTsu})) return std::string(text);
+    if (text.find(kN) == std::string_view::npos && text.find("せぬ") == std::string_view::npos &&
+        !HoldsMember(text, {kara}, {kSmallTsu})) {
+        return std::string(text);
+    }
     const std::u32string rs = DecodeText(text);
     const std::string s = EncodeText(rs);
     const std::vector<size_t> byte = EncodedOffsets(rs);
@@ -3223,8 +3301,20 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
     size_t done = 0;
     for (size_t i = 1; i < rs.size(); i++) {
         const bool tsu = rs[i] == U'っ';
-        if (rs[i] != U'ん' && !tsu) continue;
+        if (rs[i] != U'ん' && rs[i] != U'ぬ' && !tsu) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i + 1]);
+        // The old negative せん or せぬ of する is しない (勉強せんぞ 勉強しないぞ, 気にせんかった 気にしなかった, 容赦せぬ),
+        // but for the literary volitional before とする or がため (脱出せんとする) and the Kansai request of
+        // んといて (気にせんといて).
+        const bool volitional = rest.starts_with("とす") || rest.starts_with("とし") || rest.starts_with("とせ") ||
+                                rest.starts_with("がため") || rest.starts_with("が為");
+        if (!tsu && !volitional && !rest.starts_with("といて") && OldSuruNegative(rs, s, byte, i, ctx, snap)) {
+            out.append(s, byte[done], byte[i - 1] - byte[done]);
+            out += rest.starts_with("かっ") ? "しな" : "しない";
+            done = i + 1;
+            continue;
+        }
+        if (rs[i] == U'ぬ') continue;
         Says says = Says::None;
         if (tsu) {
             if (dict::StartsWithMember(HDTRANS_CLASS("contraction.tsu-ru"), rest) > 0) says = Says::RuTsu;
