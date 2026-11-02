@@ -37,3 +37,12 @@ cx:toha:25	相方とはどなたですか!?	has:파트너란	keep	rewrites
 cx:toha:25	サメ好きのメイドとは一体何なのか	has:메이드란	keep	rewrites
 cx:toha:25	人間とは恐ろしいもの。	has:인간이란	keep	rewrites
 cx:toha:25	ヒラ外務省役人とは仮の姿、国際情報官であり、白木にとって体得済である。	has:공무원이란	keep	rewrites
+cx:toha:20	人生とはなにがどうなるかわからないものである。	has:인생이란	fix	rewrites
+cx:toha:20	東京とは違う	도쿄와는 다르다	keep	rewrites
+cx:toha:20	彼とはどうなるかわからない。	has:그와는	keep	rewrites
+cx:toha:25	彼とは友達だ	그와는 친구다	keep	rewrites
+cx:toha:25	「それより小熊先輩とはどうなったの？」	has:선배와는 어떻게 됐어	keep	rewrites
+cx:toha:25	「……で、彼氏とはどうなんですか」	has:남자친구와는	keep	rewrites
+cx:toha:22	彼とは何がどうなったの？	has:그와는	fix	rewrites
+cx:toha:22	彼とは何がどうなるか分からない。	has:그와는	fix	rewrites
+cx:toha:22	人生とはなにがどうなるかわからないものである。	has:인생이란	keep	rewrites
