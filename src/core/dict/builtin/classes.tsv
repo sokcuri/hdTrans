@@ -195,6 +195,7 @@
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
+//= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
 //= noun.count-machine	Nouns of a robot, a mecha or a machine soldier, matched at the end of a word, after which the counter 体 is 기 (ロボット二体 로봇 2기).
 //= noun.count-figure	Nouns of a statue, a doll or a figure, matched at the end of a word, after which the counter 体 is 개 (人形が二体 인형이 두 개).
 //= noun.count-creature	Endings of nouns of creatures and monsters that a count word in 体 before の counts (一体の中鬼 한 마리의 중귀).
@@ -8735,6 +8736,31 @@ noun.count-corpse	ミイラ
 noun.count-corpse	骨
 noun.count-corpse	ゾンビ
 
+noun.count-flower	花
+noun.count-flower	バラ
+noun.count-flower	薔薇
+noun.count-flower	ばら
+noun.count-flower	百合
+noun.count-flower	ユリ
+noun.count-flower	菊
+noun.count-flower	キク
+noun.count-flower	椿
+noun.count-flower	ツバキ
+noun.count-flower	チューリップ
+noun.count-flower	カーネーション
+noun.count-flower	向日葵
+noun.count-flower	ひまわり
+noun.count-flower	ヒマワリ
+noun.count-flower	蓮
+noun.count-flower	牡丹
+noun.count-flower	芍薬
+noun.count-flower	桔梗
+noun.count-flower	水仙
+noun.count-flower	すみれ
+noun.count-flower	スミレ
+noun.count-flower	コスモス
+noun.count-flower	ガーベラ
+noun.count-flower	蘭
 noun.count-machine	ロボット
 noun.count-machine	機体
 noun.count-machine	機械兵
@@ -8755,6 +8781,8 @@ noun.count-machine	航空機
 noun.count-machine	艦載機
 noun.count-machine	ヘリ
 noun.count-machine	機
+noun.count-machine	飛行船
+noun.count-machine	飛空艇
 
 noun.count-figure	人形
 noun.count-figure	像

@@ -199,3 +199,67 @@ cx:count-units:910	料理を作った。	요리를 만들었다.	keep	rewrites
 cx:count-units:911	料理を作った。	요리를 만들었다.	keep	rewrites
 cx:count-units:912	料理を作った。	요리를 만들었다.	keep	rewrites
 cx:count-units:913	料理を作った。	요리를 만들었다.	keep	rewrites
+cx:count-units:3	ビールを3缶飲んだ。	맥주를 3캔 마셨다.	fix	rewrites
+cx:count-units:3	空き缶を拾った。	빈 깡통을 주웠다.	keep	rewrites
+cx:count-units:36	ケーキを六切れ食べた。	케이크를 여섯 조각 먹었다.	fix	rewrites
+cx:count-units:36	ケーキを三切れ食べた。	케이크를 세 조각 먹었다.	keep	rewrites
+cx:count-units:37	パンを七切れ焼いた。	빵을 일곱 조각 구웠다.	fix	rewrites
+cx:count-units:37	パンを九切れ焼いた。	빵을 아홉 조각 구웠다.	keep	rewrites
+cx:count-units:39	パンを九切れ焼いた。	빵을 아홉 조각 구웠다.	fix	rewrites
+cx:count-units:39	パンを七切れ焼いた。	빵을 일곱 조각 구웠다.	keep	rewrites
+cx:count-units:41	肉を十切れ並べた。	고기를 열 조각 늘어놓았다.	fix	rewrites
+cx:count-units:41	肉を六切れ並べた。	고기를 여섯 조각 늘어놓았다.	keep	rewrites
+cx:count-units:42	何切れ食べた？	몇 조각 먹었어?	fix	rewrites
+cx:count-units:42	ケーキを3切れ食べた。	케이크를 3조각 먹었다.	keep	rewrites
+cx:count-units:69	三口で食べ終えた。	세 입에 다 먹었다.	fix	rewrites
+cx:count-units:69	三口のコンセント。	3구의 콘센트.	keep	rewrites
+cx:count-units:70	三口食べた。	세 입 먹었다.	fix	rewrites
+cx:count-units:70	三口のコンセント。	3구의 콘센트.	keep	rewrites
+cx:count-units:130	バラを二輪買った。	장미를 두 송이 샀다.	fix	rewrites
+cx:count-units:130	バイクは二輪だから楽だ。	오토바이는 이륜이니까 편하다.	keep	rewrites
+cx:count-units:135	花が三輪咲いていた。	꽃이 세 송이 피어 있었다.	fix	rewrites
+cx:count-units:135	私は三輪です。	저는 미와입니다.	keep	rewrites
+cx:count-units:115	戦闘機一機が飛来した。	전투기 1기가 날아왔다.	fix	rewrites
+cx:count-units:115	一機は笑った。	카즈키는 웃었다.	keep	rewrites
+cx:count-units:100	服を一着買った。	옷을 한 벌 샀다.	fix	rewrites
+cx:count-units:100	水着で一着になった。	수영복으로 일착이 되었다.	keep	rewrites
+cx:tai-count:7	一体のロボットが動いた。	1기의 로봇이 움직였다.	fix	rewrites
+cx:tai-count:7	一体の使役モンスターが来た。	일체의 사역 몬스터가 왔다.	keep	rewrites
+cx:tai-count:8	一体のエルフが現れた。	한 명의 엘프가 나타났다.	fix	rewrites
+cx:tai-count:8	一体の使役モンスターが来た。	일체의 사역 몬스터가 왔다.	keep	rewrites
+cx:tai-count:9	一体のゴーレムが現れた。	한 마리의 골렘이 나타났다.	fix	rewrites
+cx:tai-count:9	一体の使役モンスターが来た。	일체의 사역 몬스터가 왔다.	keep	rewrites
+cx:tai-count:10	この辺一体を調べた。	이 근처 일대를 조사했다.	fix	rewrites
+cx:tai-count:10	この辺一体何なんだ。	이 근처 도대체 뭐야.	keep	rewrites
+cx:cue-sense:170	モンスターを３体も倒した。	몬스터를 3마리나 쓰러뜨렸다.	fix	rewrites
+cx:cue-sense:170	体を前に倒して礼をした。	몸을 앞에 두고 넘어뜨려 예를 했다.	keep	rewrites
+cx:count-what:5	神が何柱いる？	신이 몇 분 있어?	fix	rewrites
+cx:count-what:5	神が三柱いる。	신이 세 분 있다.	keep	rewrites
+cx:count-what:10	ビールを何缶飲んだ？	맥주를 몇 캔 마셨어?	fix	rewrites
+cx:count-what:10	ビールを3缶飲んだ。	맥주를 3캔 마셨다.	keep	rewrites
+cx:count-what:15	薬を何服飲んだ？	약을 몇 첩 마셨어?	fix	rewrites
+cx:count-what:15	薬を三服飲んだ。	약을 세 첩 마셨다.	keep	rewrites
+cx:count-what:20	ご飯を何膳食べた？	밥을 몇 공기 먹었어?	fix	rewrites
+cx:count-what:20	ご飯を三膳食べた。	밥을 세 공기 먹었다.	keep	rewrites
+cx:count-what:25	箸を何膳用意する？	젓가락을 몇 벌 준비해?	fix	rewrites
+cx:count-what:25	箸を二膳並べた。	젓가락을 두 벌 늘어놓았다.	keep	rewrites
+cx:count-what:30	何膳食べた？	몇 그릇 먹었어?	fix	rewrites
+cx:count-what:30	三膳食べた。	세 그릇 먹었다.	keep	rewrites
+cx:count-what:35	豆腐を何丁買った？	두부를 몇 모 샀어?	fix	rewrites
+cx:count-what:35	豆腐を三丁買った。	두부를 세 모 샀다.	keep	rewrites
+cx:count-what:40	拳銃を何丁持っている？	권총을 몇 자루 가지고 있어?	fix	rewrites
+cx:count-what:40	拳銃を三丁持っている。	권총을 세 자루 가지고 있다.	keep	rewrites
+cx:count-what:45	テントを何張張った？	텐트를 몇 동 쳤어?	fix	rewrites
+cx:count-what:45	テントを三張張った。	텐트를 세 동 쳤다.	keep	rewrites
+cx:count-what:50	花を何輪買った？	꽃을 몇 송이 샀어?	fix	rewrites
+cx:count-what:50	花を3輪買った。	꽃을 3송이 샀다.	keep	rewrites
+cx:count-what:55	光が何筋も差し込んだ。	빛이 몇 줄기도 쑤셨다.	fix	rewrites
+cx:count-what:55	光が三筋差し込んだ。	빛이 세 줄기 비추었다.	keep	rewrites
+cx:count-what:60	涙が何滴落ちた？	눈물이 몇 방울 떨어졌어?	fix	rewrites
+cx:count-what:60	涙が三滴落ちた。	눈물이 세 방울 떨어졌다.	keep	rewrites
+cx:count-what:65	何口食べた？	몇 입 먹었어?	fix	rewrites
+cx:count-what:65	三口食べた。	세 입 먹었다.	keep	rewrites
+cx:count-what:70	椅子が何脚ある？	의자가 몇 개 있어?	fix	rewrites
+cx:count-what:70	椅子が3脚ある。	의자가 3개 있다.	keep	rewrites
+cx:tai-count:31	この少女は一体何を言っているのだと。	이 소녀는 도대체 무슨 말을 하는 것이라고.	keep	rewrites
+cx:tai-count:50	「君は……一体？」	「너는……도대체?」	keep	rewrites
