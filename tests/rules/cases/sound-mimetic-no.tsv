@@ -1,0 +1,29 @@
+# 규칙: GRM-3252
+rule	input	expected	kind	layer
+sound:adnominal-no	ふわふわの短い尻尾。	푹신푹신한 짧은 꼬리.	fix	sound
+sound:adnominal-no	手触りの良いシーツにふわふわの枕。	감촉이 좋은 시트에 푹신푹신한 베개.	fix	sound
+sound:adnominal-no	つやつやの髪を撫でて様子を見るが、	반들반들한 머리카락을 쓰다듬고 있고 상태를 보지만,	fix	sound
+sound:adnominal-no	ぼさぼさの髪をかき上げながら、	부스스한 머리카락을 쓸어 올리면서,	fix	sound
+sound:adnominal-no	島民の娘と同じ様にボサボサの頭、	도민의 딸과 같게 부스스한 머리,	fix	sound
+sound:adnominal-no	あまりにボロボロの外観から、	너무나 너덜너덜한 외관으로부터,	fix	sound
+sound:adnominal-no	ヌルヌルの愛液を絡めていく。	미끌미끌한 애액을 관련되어 간다.	fix	sound
+sound:adnominal-no	もふもふの耳と尻尾が誘ってくるから…	복슬복슬한 귀와 꼬리가 권해 오니까…	fix	sound
+sound:adnominal-no	そのほとんどがひらひらのレースがたくさんついたもので、	그 대부분이 팔랑팔랑한 레이스가 많이 붙은 것으로,	fix	sound
+sound:adnominal-no	そちらを見るとよれよれの服を着ている。	그쪽을 보면 후줄근한 옷을 입고 있다.	fix	sound
+sound:adnominal-no	そのしわしわの顔で、	그 쭈글쭈글한 얼굴로,	fix	sound
+sound:adnominal-no	べたべたの口元を互いに笑いながら拭い合う。	끈적끈적한 입가를 서로 힘이 빠지면서 서로 닦는다.	fix	sound
+sound:adnominal-no	ほかほかの白米が恋しくなっていた	따끈따끈한 백미가 그리워져 있었다	fix	sound
+sound:adnominal-no	ごつごつの柄をこの手で握りしめたい。	울퉁불퉁한 격을 이 손으로 움켜쥐고 싶다.	fix	sound
+sound:adnominal-no	キラキラの瞳で見上げてくる子供たちが可愛すぎて、	반짝반짝한 눈동자로 올려다봐 오는 아이들이 너무 귀여워,	fix	sound
+sound:adnominal-no	ムチムチの太ももはスベスベそうだ。	포동포동한 허벅지는 매끈매끈그렇다.	fix	sound
+sound:adnominal-no	ザラザラの生地が好み。	까칠까칠한 옷감을 좋아해.	fix	sound
+sound:adnominal-no	側にあったパサパサのサンドウィッチ	측에 있던 푸석푸석한 샌드위치	fix	sound
+sound:adnominal-no	「明日からは、朝はふっかふかの白パンに、たっぷりの蜂蜜を塗って食べられますよ」	「내일부터는, 아침은 푹신푹신한 흰빵에, 듬뿍의 벌꿀을 발라 먹을 수 있어요」	fix	sound
+sound:adnominal-no	峯雲特製の朝食です。ほっかほかの麦飯と、	미네구모 특제의 아침 식사입니다. 따끈따끈한 보리밥과	fix	sound
+sound:adnominal-no	ふわふわのまま	lacks:푹신푹신한	keep	sound
+sound:adnominal-no	ガチャガチャの景品みたいなカプセルだ。	lacks:달그락달그락한	keep	sound
+sound:adnominal-no	ニコニコの笑みを向けた。	lacks:싱글벙글한	keep	sound
+sound:adnominal-no	そのパンパンのズボンを彼女に見られ、	lacks:팡팡한	keep	sound
+sound:adnominal-no	食事は変わり映えないカチカチのパンや乾燥肉、	lacks:똑딱똑딱한	keep	sound
+sound:adnominal-no	フランスで修行したガチガチの三つ星シェフが出てきたとか？	lacks:딱딱한	keep	sound
+sound:adnominal-no	二人一緒でびしょびしょの服を取り替えたっけな…	lacks:흠뻑한	keep	sound

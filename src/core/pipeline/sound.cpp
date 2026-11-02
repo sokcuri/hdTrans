@@ -263,6 +263,7 @@ struct SoundMatch {
     // copy of it right before draws out so (イっちゃう、イっちゃうぅぅっ 가버려, 가버려어엇).
     std::string redrawn;
     std::string alone;  // SoundRow::alone
+    bool adj = false;   // SoundRow::adj
 };
 
 // Whether the Korean s ends in an open syllable without an initial consonant that draws
@@ -501,6 +502,7 @@ private:
     bool CryCopyAfter(const SoundMatch& m, SoundMatch& next) const;
     bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
     bool Manner(const SoundMatch& m, size_t i) const;
+    bool Adnominal(const SoundMatch& m, size_t i) const;
     size_t QuotingAt(size_t i) const;
     size_t Quoting(size_t i) const;
     bool Spaced(size_t i) const;
@@ -887,7 +889,8 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
                                    (IsKanjiRune(rs_[end + 2]) || IsKatakanaRune(rs_[end + 2]));
             const std::string_view root = describes ? std::string_view() : std::string_view(s.root);
             best = SoundMatch{p, end, s.key.size(), s.key, std::move(korean), root, s.intj, s.lead, open, spaceAfter, s.phrase,
-                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone};
+                              end - p >= 2 && Lengthens(f_[end - 1], f_[end - 2]), s.cry, std::move(copyDrawn), s.alone,
+                              s.adj};
             chosen = &s;
         }
     }
@@ -1351,6 +1354,19 @@ bool SoundText::Manner(const SoundMatch& m, size_t i) const {
     if (m.intj || i + 1 >= rs_.size() || rs_[i] != U'に') return false;
     if (IsHiraganaRune(rs_[i + 1]) && !In(rs_[i + 1], U"しすさせな")) return false;
     return DoubledHangul(m.korean);
+}
+
+// Whether the ono sound m of an adj row is followed at i by an の that makes it describe the noun
+// in kanji or katakana after it, which Korean writes with the 하다 adjective (GRM-3252:
+// ふわふわのクッション 푹신푹신한 쿠션, ぼさぼさの髪 부스스한 머리카락).
+bool SoundText::Adnominal(const SoundMatch& m, size_t i) const {
+    // A sound drawn out with ~ is no adjective stem (ふわふわーの).
+    if (!m.adj || m.intj || m.korean.ends_with('~') || i + 1 >= rs_.size() || rs_[i] != U'の') return false;
+    // The noun may take the prefix お or ご (つやつやのご飯); before 音 or 声 the row is a heard sound.
+    size_t noun = i + 1;
+    if (In(rs_[noun], U"おご") && noun + 1 < rs_.size() && IsKanjiRune(rs_[noun + 1])) noun++;
+    if (!IsKanjiRune(rs_[noun]) && !(IsKatakanaRune(rs_[noun]) && !In(rs_[noun], U"ーッ"))) return false;
+    return !In(rs_[noun], U"音声");
 }
 
 // The end of the quoting form at character i (sound.quoting: という) that describes the word in
@@ -2123,6 +2139,9 @@ std::string SoundText::Write() {
                 b += "하게";
                 next++;
                 if (next < rs.size() && (IsKana(rs[next]) || IsKanjiRune(rs[next]))) b += ' ';
+            } else if (Adnominal(chain.back(), next)) {
+                b += "한 ";
+                next++;
             } else if (chain.back().lead && !chain.back().open && next + 1 < rs.size() && rs[next] == U'　' &&
                        !Sounds(next + 1, false, false).empty()) {
                 // An ideographic space between a lead and another sound is a plain space (さ　じゃあ 자 그럼).
