@@ -1,0 +1,6 @@
+# 규칙: GRM-3111
+rule	input	expected	kind	layer
+constraint:toshite-before-shimau	その糧としてしまうかなり剣呑な呪いだ。	그 양식으로 해버리는 꽤 위험한 저주다.	fix	local
+constraint:toshite-before-shimau	その度にほっとしてしまう私。	그 때에 안심해버리는 나.	keep	local
+constraint:toshite-before-shimau	不覚にもドキっとしてしまう。	불찰에도 철렁해버린다.	keep	local
+lookup:cuts-word-kanari	もうかなり限界。	벌써 상당히 한계.	keep	lookup

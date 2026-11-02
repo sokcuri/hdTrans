@@ -768,30 +768,47 @@ Record* NounAfterModifier(const Item& parent, Record* records, std::string_view 
 
 // Text path: the noun records of records move ahead of an adjective with kanji whose dictionary
 // form they spell, the stem and い (臭い 냄새, not 臭 + い 구린), where an adjective cannot stand: before を,
-// before も that starts no もの or もん, or before は that starts no はず (臭いも減り; but
-// 臭いものに蓋, 臭いはずだ). After a modifier NounAfterModifier moves them. Plain-dictionary
+// before に that starts no word in hiragana (but には, にも), before も that starts no もの or もん, before は
+// that starts no はず, and after の or な before が (臭いも減り, 形容しがたい臭いに, 血の臭いが; but 臭いものに蓋,
+// 臭いにおい, 臭いはずだ, 部屋は臭いが). After a modifier NounAfterModifier moves them. Plain-dictionary
 // records stay in front.
-Record* NounBeforeCaseParticle(Record* records, std::string_view text) {
+Record* NounBeforeCaseParticle(Record* records, std::string_view before, std::string_view text) {
     Record* owned = nullptr;
     Record* first = records;
     while (first != nullptr && first->user != nullptr) {
         owned = first;
         first = first->child;
     }
-    if (first == nullptr || At(first->partCode, 0) != 'H' || At(first->partCode, 1) != '7' || !HasKanji(first->source)) {
+    // After a modifier a longer record that no hiragana follows does not read on (臭いが of 臭いがする at 血の臭いが).
+    const bool modifier = before.ends_with("の") || before.ends_with("な");
+    const auto readsOn = [&](const Record* r) {
+        return !text.starts_with(r->source) || NameClassOf(FirstChar(text.substr(r->source.size()))) == kClassHiragana;
+    };
+    const Record* adjective = first;
+    while (modifier && adjective != nullptr && At(adjective->partCode, 1) != '7' && !readsOn(adjective)) {
+        adjective = adjective->child;
+    }
+    if (adjective == nullptr || At(adjective->partCode, 0) != 'H' || At(adjective->partCode, 1) != '7' ||
+        !HasKanji(adjective->source)) {
         return records;
     }
-    std::string noun(first->source);
+    std::string noun(adjective->source);
     noun += "い";
     if (!text.starts_with(noun)) return records;
     const std::string_view after = text.substr(noun.size());
-    if (!after.starts_with("を") && !(after.starts_with("も") && !after.starts_with("もの") && !after.starts_with("もん")) &&
+    const std::string_view ni = after.starts_with("に") ? after.substr(std::string_view("に").size()) : std::string_view();
+    const bool caseNi = after.starts_with("に") &&
+                        (NameClassOf(FirstChar(ni)) != kClassHiragana || ni.starts_with("は") || ni.starts_with("も"));
+    const bool modifiedGa = after.starts_with("が") && modifier;
+    if (adjective != first && !modifiedGa) return records;
+    if (!after.starts_with("を") && !caseNi && !modifiedGa &&
+        !(after.starts_with("も") && !after.starts_with("もの") && !after.starts_with("もん")) &&
         !(after.starts_with("は") && !after.starts_with("はず"))) {
         return records;
     }
     bool found = false;
     for (const Record* r = first; r != nullptr; r = r->child) {
-        if (r->source.size() > noun.size()) return records;
+        if (r->source.size() > noun.size() && (!modifiedGa || readsOn(r))) return records;
         found = found || (NounRow(*r) && r->source == noun);
     }
     if (!found) return records;
@@ -2087,7 +2104,7 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     if (settings.text) records = CopulaPredicateFirst(records, From(full, cursor));
     if (settings.text) records = NounBeforeCompound(records, From(full, cursor));
     if (settings.text) records = VerbBeforePolite(records, From(full, cursor));
-    if (settings.text) records = NounBeforeCaseParticle(records, From(full, cursor));
+    if (settings.text) records = NounBeforeCaseParticle(records, full.substr(0, static_cast<std::size_t>(cursor)), From(full, cursor));
     if (settings.text) records = AdverbOverKanaVerb(snapshot, records, full, cursor);
     if (parent != nullptr) {
         records = ReorderAfterNoun(*parent, records, snapshot, From(full, cursor));

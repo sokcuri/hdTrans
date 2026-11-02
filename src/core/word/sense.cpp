@@ -152,6 +152,9 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
         }
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;
+        // A word right after a numeral is its counter (この後11時): the words before the numeral
+        // do not choose its sense.
+        if (n == 0 && s.side == userdict::Side::Before && HasTag(x, "gram:Nd")) return false;
         const char cls = At(x->Code(x->selected), 0);
         // Before the word, an auxiliary verb written right after its verb (生えている角) lets
         // that verb be the trigger.
