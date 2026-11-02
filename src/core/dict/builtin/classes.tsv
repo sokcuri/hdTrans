@@ -316,6 +316,7 @@
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
 //= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
+//= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
@@ -7419,6 +7420,51 @@ word.toha-define	すなわち
 word.toha-define	即ち
 word.toha-define	要するに
 sound.quoting	という
+sound.quoted-by	笑
+sound.quoted-by	わら
+sound.quoted-by	嗤
+sound.quoted-by	微笑
+sound.quoted-by	ほほえ
+sound.quoted-by	叫
+sound.quoted-by	さけ
+sound.quoted-by	言
+sound.quoted-by	呟
+sound.quoted-by	つぶや
+sound.quoted-by	囁
+sound.quoted-by	ささや
+sound.quoted-by	喚
+sound.quoted-by	わめ
+sound.quoted-by	怒鳴
+sound.quoted-by	どな
+sound.quoted-by	唸
+sound.quoted-by	うな
+sound.quoted-by	鳴
+sound.quoted-by	泣
+sound.quoted-by	頷
+sound.quoted-by	うなず
+sound.quoted-by	首を
+sound.quoted-by	答え
+sound.quoted-by	応え
+sound.quoted-by	返
+sound.quoted-by	声
+sound.quoted-by	悲鳴
+sound.quoted-by	息
+sound.quoted-by	溜息
+sound.quoted-by	ため息
+sound.quoted-by	吹き出
+sound.quoted-by	噴き出
+sound.quoted-by	漏ら
+sound.quoted-by	洩ら
+sound.quoted-by	喉
+sound.quoted-by	鼻
+sound.quoted-by	苦笑
+sound.quoted-by	照れ笑
+sound.quoted-by	失笑
+sound.quoted-by	嘲笑
+sound.quoted-by	高笑
+sound.quoted-by	大笑
+sound.quoted-by	感心
+sound.quoted-by	歓声
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
 sound.stutter-alone	エ
