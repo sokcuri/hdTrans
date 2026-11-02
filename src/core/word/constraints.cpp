@@ -149,6 +149,10 @@ constexpr ConstraintRule kRules[] = {
      "술어가 바로 이어지는 余り는 나머지가 아니라 별로 (余り好きじゃない 나머지를 → 별로)", "별로"},
     {"wake-formal-noun", ConstraintWord::Source, "わけ", ConstraintContext::NounSlot, ConstraintReject::Verbs,
      "문장 부호, 조사, 계사, ある·ない가 뒤에 오는 わけ는 동사 沸く·分ける가 아니라 형식 명사 (なわけ。 끓어라 → 것, わけあって 서로 나누어 → 사정이 있어). わけて, 二つにわけ는 그대로", {}},
+    {"karada-counter", ConstraintWord::Source, "体の中", ConstraintContext::AfterNumeral, ConstraintReject::Word,
+     "수 바로 뒤의 体の中는 몸속이 아니라 조수사 体와 の中 (10体の中から 10몸속에서 → 10체 중에서)", {}},
+    {"name-after-numeral", ConstraintWord::Kanji, "", ConstraintContext::NameAfterNumeral, ConstraintReject::Word,
+     "수 바로 뒤에서 이름으로만 읽히고 조수사로 시작하는 한자 낱말은 쓰지 않고 그 조수사로 읽음 (１日村に 1히무라에 → 1일 마을에). 第5水陸両用軍団은 그대로", {}},
 };
 
 // The numerals that start a quantity (つい三時間前, つい3日前, つい数分前).
@@ -466,6 +470,17 @@ bool ContextFits(const ConstraintRule& rule, const std::vector<dict::Candidate>&
     }
     case ConstraintContext::BeforeRassharu:
         return after.starts_with("らっしゃ");
+    case ConstraintContext::AfterNumeral:
+        return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos;
+    case ConstraintContext::NameAfterNumeral:
+        return !adjacent.empty() && kNumerals.find(text::DecodeRune(adjacent).cp) != std::u32string_view::npos &&
+               std::all_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                   return c.source != source || c.codes == nullptr || (c.user != nullptr && c.user->nameLayer);
+               }) &&
+               std::any_of(list.begin(), list.end(), [&](const dict::Candidate& c) {
+                   return c.source.size() < source.size() && source.starts_with(c.source) && c.codes != nullptr &&
+                          c.codes->gram.HasCode("Ct");
+               });
     case ConstraintContext::BeforeNasai:
         return after.starts_with("なさい");
     case ConstraintContext::BeforeCopula:
