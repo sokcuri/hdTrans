@@ -791,9 +791,9 @@ void Composer::BuildAdjective(int i) {
 namespace {
 
 // Whether the copula stem 이 before ending drops after a vowel (무리다, 무리네, 무리지, 무리고,
-// 무리니까, 무리구나, 무리겠지): endings whose (이) the particle stage resolves.
+// 무리니까, 무리구나, 무리겠지, 무리라고): endings whose (이) the particle stage resolves.
 bool ContractsCopula(std::string_view ending) {
-    for (const std::string_view e : {"다", "네", "지", "고", "니", "구", "군", "며", "겠"}) {
+    for (const std::string_view e : {"다", "네", "지", "고", "니", "구", "군", "며", "겠", "라"}) {
         if (ending.starts_with(e)) return true;
     }
     return false;

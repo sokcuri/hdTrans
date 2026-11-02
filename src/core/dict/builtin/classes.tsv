@@ -316,6 +316,7 @@
 //= question.indefinite-after	Starts of what follows a question word that make it an indefinite, which asks nothing (どこにでも, 誰も, 誰でも, 誰であれ).
 //= script.chinese-han	Simplified Chinese forms and Chinese function characters that JIS X 0213 has but Japanese text does not use (你 么 吧 开): a Han run holding one is Chinese like one holding a character outside Japanese (tokenizer::IsJapaneseHan).
 //= sound.quoting	The quoting form after a sound, read as する before a word in kanji or katakana (カタカタという音 달각달각하는 소리).
+//= sound.quoted-by	Starts of the words that take an interjection or a laugh before a quoting と as what was said: laughing, crying out, saying, nodding, the voice (ふふふと笑った 후후후 하고 웃었다, ぎゃあと叫んだ 갸아 하고 외쳤다). The sound stage reads such a と as 하고 when one of them follows in the clause.
 //= sound.stutter-alone	Syllables, in katakana, that also stand alone before a separator and a word in kanji (あ、本当 "ah, really", ま、仕方ない "well"; が、 a particle): there they stutter only a word they start (sound.stutter-head) or when said twice.
 //= sound.stutter-conjunction	Syllables of sound.stutter-alone that are the conjunction where they open a line (と、時計を見た, で、電話をかけた), even before a word they start.
 //= sound.stutter-head	Starts of words in kanji after the katakana of the first mora of their reading (マ待, オ俺, ム無理): a syllable that also says something alone (ま、 お、 う、) and a separator before a word it starts are a stutter (ま、待って 기, 기다려). The longest head decides; a head of one kanji is that kanji before kana or a mark (待って, not 待機).
@@ -408,6 +409,7 @@
 //= verb.passive-after-object	Ichidan stems of acts done to someone, whose narrative られた after an object is the passive (決断を命じられた, 罵声を浴びせられた); a conditional of one is passive after its object without a recipient に.
 //= verb.passive-any-object	Ichidan stems whose られ reads as the passive whatever their objects (perception and attitude: 恐れられる, 見つめられる).
 //= verb.potential-rareta	Ichidan stems whose affirmative られた is mostly the potential (見つけられた, 耐えられた).
+//= verb.answer-gesture	Starts of the gestures and acts of answering that take what was said before a quoting と (頷く, 首を振る, 頭を下げる, 付け加える): after a predicate other than a verb's plain form the と is the quotation -다고, also with the speaker or an adverb between (異論はないと頷いた 이론은 없다고 끄덕였다, 風習だとアワイは最後に付け加えた 풍습이라고 아와이는 마지막으로 덧붙였다).
 //= verb.quote-start	Stems that start a verb of saying or thinking, which takes a quotation before it.
 //= verb.receiver-passive	Godan stems of permitting, entrusting and taking away, whose subject before the object and (ら)れ is the one acted on (参加を許される, 王位を奪われた).
 //= verb.respectful	Stems of the respectful verbs, お〜にな included, whose Korean is the honorific in 시 (仰っている 말씀하고 계신다, お休みになっている 쉬고 계신다).
@@ -6196,6 +6198,19 @@ verb.quote-start	感じ
 verb.quote-start	聞か	GRM-83
 verb.quote-start	聞い	GRM-83
 verb.quote-start	聞き	GRM-83
+verb.answer-gesture	頷
+verb.answer-gesture	うなず
+verb.answer-gesture	首肯
+verb.answer-gesture	首を振
+verb.answer-gesture	首を横に振
+verb.answer-gesture	首を縦に振
+verb.answer-gesture	首を傾げ
+verb.answer-gesture	首をかしげ
+verb.answer-gesture	かぶりを振
+verb.answer-gesture	頭を振
+verb.answer-gesture	頭を下げ
+verb.answer-gesture	付け加え
+verb.answer-gesture	付け足
 
 verb.receiver-passive	許
 verb.receiver-passive	任
@@ -7419,6 +7434,51 @@ word.toha-define	すなわち
 word.toha-define	即ち
 word.toha-define	要するに
 sound.quoting	という
+sound.quoted-by	笑
+sound.quoted-by	わら
+sound.quoted-by	嗤
+sound.quoted-by	微笑
+sound.quoted-by	ほほえ
+sound.quoted-by	叫
+sound.quoted-by	さけ
+sound.quoted-by	言
+sound.quoted-by	呟
+sound.quoted-by	つぶや
+sound.quoted-by	囁
+sound.quoted-by	ささや
+sound.quoted-by	喚
+sound.quoted-by	わめ
+sound.quoted-by	怒鳴
+sound.quoted-by	どな
+sound.quoted-by	唸
+sound.quoted-by	うな
+sound.quoted-by	鳴
+sound.quoted-by	泣
+sound.quoted-by	頷
+sound.quoted-by	うなず
+sound.quoted-by	首を
+sound.quoted-by	答え
+sound.quoted-by	応え
+sound.quoted-by	返
+sound.quoted-by	声
+sound.quoted-by	悲鳴
+sound.quoted-by	息
+sound.quoted-by	溜息
+sound.quoted-by	ため息
+sound.quoted-by	吹き出
+sound.quoted-by	噴き出
+sound.quoted-by	漏ら
+sound.quoted-by	洩ら
+sound.quoted-by	喉
+sound.quoted-by	鼻
+sound.quoted-by	苦笑
+sound.quoted-by	照れ笑
+sound.quoted-by	失笑
+sound.quoted-by	嘲笑
+sound.quoted-by	高笑
+sound.quoted-by	大笑
+sound.quoted-by	感心
+sound.quoted-by	歓声
 sound.stutter-alone	ア
 sound.stutter-alone	ウ
 sound.stutter-alone	エ
