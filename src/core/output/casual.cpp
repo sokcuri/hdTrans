@@ -139,7 +139,7 @@ bool AfterInfinitive(std::string_view s) {
 // 줘, 그만두어 그만둬, 됐어) and the bytes it replaces; {} for none; before is the text so far.
 // A word 주어 or 두어 on its own is the noun 주어 (subject) or 두어 (a couple) before a
 // particle or the copula; otherwise it is the verb before 서, 도, 야, 라 or 요, or after the
-// 아/어 form of a verb, a particle or an adverb (보여 주어, 돈을 주어, 곁에 두어, 가만히 두어).
+// 아/어 form of a verb, a particle or an adverb (보여 주어, 돈을 주어, 곁에 두어, 가만히 두어, 그냥 주어).
 // 주어지다 (be given) keeps its 주어.
 std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s, std::string_view before) {
     static constexpr std::pair<std::string_view, std::string_view> kForms[] = {
@@ -158,7 +158,7 @@ std::pair<std::string_view, std::size_t> SpokenSyllables(std::string_view s, std
             const std::string_view head = WithoutLast(before);
             const bool attached = !before.empty() && text::Split(text::DecodeRune(before.substr(head.size())).cp);
             bool verb = attached || AfterInfinitive(before);
-            for (const std::string_view word : {"을 ", "를 ", "에 ", "에게 ", "한테 ", "히 ", "고 ", "게 ", "로 "}) {
+            for (const std::string_view word : {"을 ", "를 ", "에 ", "에게 ", "한테 ", "히 ", "고 ", "게 ", "로 ", "그냥 "}) {
                 verb = verb || before.ends_with(word);
             }
             for (const std::string_view ending : {"서", "도", "야", "라", "요"}) {
