@@ -110,3 +110,9 @@ cx:novel-fixes-3:110	シーズンに変化する。	!rule:cx:novel-fixes-3:110	k
 cx:novel-fixes-3:110	次のターンに進化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
 cx:novel-fixes-3:110	全体に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
 cx:novel-fixes-3:110	スライムに進化した。	has:슬라임으로 진화했다	fix	rewrites
+cx:novel-fixes-3:110	田中に変化したところはない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	メンバーに変化した点はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:115	メンバーに変化した点はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	田中に変化させられた。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	猫に変化させられた。	has:고양이로 변화되었다	fix	rewrites
+cx:novel-fixes-3:110	ドラゴンに進化したところだ。	has:드래곤으로 진화한	fix	rewrites
