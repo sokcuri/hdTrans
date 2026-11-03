@@ -1,0 +1,39 @@
+# 규칙: LEX-4026
+rule	input	expected	kind	layer
+cx:novel-fixes-2:350	王子をはじめお城の方々にご迷惑をかけた。	has:왕자를 비롯해 성의	fix	rewrites
+cx:novel-fixes-2:350	国王を始め、大臣たち	has:국왕을 비롯해	fix	rewrites
+cx:novel-fixes-2:350	仕事をはじめた。	!rule:cx:novel-fixes-2:350	keep	rewrites
+cx:novel-fixes-2:355	王をはじめとする貴族	왕을 비롯한 귀족	fix	rewrites
+cx:novel-fixes-2:355	仕事をはじめとした。	!rule:cx:novel-fixes-2:355	keep	rewrites
+cx:novel-fixes-2:360	額の傷なんて前髪で隠せるのでなんの問題もございませんわ	has:아무 문제도 없어요	fix	rewrites
+cx:novel-fixes-2:360	何の問題もない。	아무 문제도 없다.	fix	rewrites
+cx:novel-fixes-2:360	なんの本を読んでるの？	!rule:cx:novel-fixes-2:360	keep	rewrites
+cx:novel-fixes-2:370	すると、なんとそんな私のもとに王子様がお見舞いに訪ねて来られた。	has:내 곁으로 왕자님이	fix	rewrites
+cx:novel-fixes-2:370	法のもとに裁かれる。	!rule:cx:novel-fixes-2:370	keep	rewrites
+cx:novel-fixes-2:380	第三王子ことジオルド王子様	제3왕자인 지오르드 왕자님	fix	rewrites
+cx:novel-fixes-2:380	私ことアイリス	!rule:cx:novel-fixes-2:380	keep	rewrites
+cx:novel-fixes-2:390	五日間程、高熱をだしうなされ続けた。	has:고열을 내고 계속	fix	rewrites
+cx:novel-fixes-2:390	そうだし、行こう。	!rule:cx:novel-fixes-2:390	keep	rewrites
+cx:novel-fixes-2:400	まだ、ベッドから起き上がるのがやっとという私	has:일어나는 것이 고작이라는	fix	rewrites
+cx:novel-fixes-2:400	やっと着いた。	!rule:cx:novel-fixes-2:400	keep	rewrites
+cx:novel-fixes-2:410	ジオルド様こんなかすり傷、気になさらないで下さい。	has:신경 쓰지 마세요	fix	rewrites
+cx:novel-fixes-2:410	気にしないで。	!rule:cx:novel-fixes-2:410	keep	rewrites
+cx:novel-fixes-2:420	このびっくり顔はこの五日間、大流行だ。	has:놀란 얼굴은	fix	rewrites
+cx:novel-fixes-2:420	王子はひどくびっくりした顔をする。	has:놀란 얼굴을 한다	keep	rewrites
+cx:novel-fixes-2:430	クラエス公爵家のわがままカタリナ嬢とはえらい違いだ。	has:제멋대로인 카타리나	fix	rewrites
+cx:novel-fixes-2:430	わがままを言うな。	!rule:cx:novel-fixes-2:430	keep	rewrites
+sense:落ち着く	五日後、熱も落ち着く頃には	has:열도 가라앉는	fix	senses
+sense:落ち着く	少し落ち着いて話そう。	has:침착해	keep	senses
+dict:jisjk:93098	そんな、王子様に我儘お嬢様は一目ぼれ、そのままひたすら王子様にべったり付きまとった。	has:찰싹 따라다녔다	fix	lookup
+dict:jisjk:368901	「こんにちはお加減はいかがですか？クラエス嬢」	has:몸 상태는 어떻습니까	fix	lookup
+dict:w:31044	カタリナ・クラエス、御年八歳。	has:올해	fix	lookup
+dict:w:31045	前世の私は少しばかりやんちゃな子供だった。	has:조금 장난스러운	fix	lookup
+dict:w:31046	初めの方こそ「女の子なのに」と言っていた母も	has:처음이야말로	fix	lookup
+dict:w:31049	「どうか、頭を上げてくださいジオルド様。」	has:고개를 들어 주세요	fix	lookup
+phrase:お構いなし	お構いなしだった。	아랑곳하지 않았다.	fix	builtin-phrase
+phrase:思わずにまにま	お姉さんは思わずにまにましてしまいそうになる。	has:나도 모르게 히죽히죽	fix	builtin-phrase
+cx:novel-fixes-2:400	艦隊がやっと帰還した。	!rule:cx:novel-fixes-2:400	keep	rewrites
+cx:novel-fixes-2:370	聖女の名のもとに人々は集まった。	!rule:cx:novel-fixes-2:370	keep	rewrites
+cx:novel-fixes-2:350	同居を始め２ヶ月。	!rule:cx:novel-fixes-2:350	keep	rewrites
+cx:novel-fixes-2:257	いろいろ頼まれる料理でして。	has:요리라서.	fix	rewrites
+cx:novel-fixes-2:257	手でしてくれる	has:손으로 하고	keep	rewrites
