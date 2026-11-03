@@ -420,6 +420,15 @@ cx:novel-fixes-2:585	LEX-4028	&&4 S+0== "L寄せ" S-2== "を" S-3== "眉" ||3 S-
 cx:novel-fixes-2:586	LEX-4028	&&3 S+0== "L寄せ" S-2== "を" S-3== "眉"	set-target@-3 "미간" set-target "찌푸&AA@"	眉を少し寄せた 미간을 조금 찌푸렸다
 cx:novel-fixes-2:590	LEX-4028	&&3 S+0== "違" D+0== "어긋&A5@" S-1== "とは"	set-target "&EF@"	子どもの手とは違う 아이의 손과는 다르다
 cx:novel-fixes-2:600	LEX-4028	&&2 S+0== "こけ" S-1== "痩せ"	set-target "바싹 여&CH@" set-target@-1 "" set-ending@-1 ""	痩せこけた手 바싹 여윈 손
+cx:novel-fixes-2:610	LEX-4029	&&5 S+0== "か" D+0== "(이)나" S+1== "あ" P-1== "1**" !1 F-1== "conjugating"	set-target "인가"	もう三か月かあ 벌써 3개월인가
+cx:novel-fixes-2:620	LEX-4029	&&3 S+0== "かな" S+1== "に" S+2== "かと"	set-target "(이)나" set-target@+1 " 뭔가" set-target@+2 "(으)로"	豪商の娘かなにかと予想される 호상의 딸이나 뭔가로 예상된다
+cx:novel-fixes-2:630	LEX-4029	&&4 S+0== "よる" D+0== "밤" S-1== "にも" S+1== "が"	set-target@-1 "에" set-target "따라서도 다르지만" set-target@+1 ""	相手にもよるが 상대에 따라서도 다르지만
+cx:novel-fixes-2:632	LEX-4029	&&4 S+0== "よる" D+0== "밤" ||2 S-1== "に" S-1== "にも" ||3 S+1== "Lけど" S+1== "Lけれど" S+1== "Lが"	set-target@-1 "에" set-target "따라 다르지만" set-target@+1 " "	ギアにもよるけど 기어에 따라 다르지만
+cx:novel-fixes-2:633	LEX-4029	&&4 S+0== "よる" D+0== "밤" ||2 S-1== "に" S-1== "にも" S+1== "Lと"	set-target@-1 "에" set-target "따라 다르" set-target@+1 "다고"	店にもよると思う 가게에 따라 다르다고 생각한다
+cx:novel-fixes-2:635	LEX-4029	&&3 S+0== "よる" D+0== "밤" ||2 S-1== "に" S-1== "にも"	set-target@-1 "에" set-target "따라 다르다"	相手による。 상대에 따라 다르다.
+cx:novel-fixes-2:640	LEX-4029	&&2 S+0== "あろう" S-1== "だったので"	set-target@-1 "(이었)였을" set-target " 것이다"	井の中の蛙だったのであろう 우물 안 개구리였을 것이다
+cx:novel-fixes-2:650	LEX-4029	&&2 S+0== "でき" S-1== "好き"	set-target@-1 "좋아서" set-target "&AH@"	好きできたわけではない 좋아서 온 것은 아니다
+cx:novel-fixes-2:660	LEX-4029	&&6 S+0== "あ" D+0== "&HN@" I+0== "ある" P+1== "1**" !1 S+1== "00？?！!。、」』…" ||4 S-1== "は" S-1== "、" S-1== "「" !1 F-1== "exists"	set-target "" set-ending "" prepend-target@+1 "어떤 "	猫猫はある怪奇の真相を暴く 마오마오는 어떤 괴기의 진상을 폭로한다
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면
