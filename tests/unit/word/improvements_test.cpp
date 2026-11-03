@@ -86,6 +86,19 @@ HD_TEST(word_improvements_causative_passive_output) {
                      "書かせられた。", "서.", "쓰게 되었다.");
 }
 
+// The passive of a dictionary す causative (言わす 말하게 하다) is the godan verb's causative-passive.
+HD_TEST(word_improvements_causative_passive_of_su_causative) {
+    const std::vector<hdTrans::dict::File> files = {
+        {0, "base.tsv",
+         "key\tko\tpos\tsem\tgram\tdict\trule\tid\n"
+         "言\t말&AV@\tM430\t\t\tGN\t0\t1\n"
+         "言わ\t말하게 &AV@\tM453\t\t\tGN\t0\t2\n"
+         "V\t5다\tS560\t\t\tGN\t0\t3\n"},
+    };
+    CheckImprovement(&hdTrans::word::Improvements::causativePassive, files,
+                     "言わされた。", "말하게 해졌다.", "말하게 되었다.");
+}
+
 HD_TEST(word_improvements_kanji_numbers_output) {
     const std::vector<hdTrans::dict::File> files = {
         {0, "base.tsv",

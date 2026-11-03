@@ -499,6 +499,14 @@ bool Item::AcceptVerbContinuation(Record* following) {
          four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
         return false;
     }
+    // The し of a する word before まう, まっ, まわ, まえ or まお starts the verb しまう, put away after
+    // an adverb (ちゃんとしまった 제대로 넣었다, not ちゃんとする and 待つ; spec LEX-3850).
+    if (!matched && base.patternKind == 9 && base.kind == 10) {
+        const std::string_view rest = after();
+        for (const std::string_view shimau : {"まう", "まっ", "まわ", "まえ", "まお"}) {
+            if (rest.starts_with(shimau) && !rest.starts_with("まっす")) return false;
+        }
+    }
 
     bool adjusted = false, desire = false;
     const int oldKind = base.patternKind, oldState = base.kind;
@@ -506,6 +514,11 @@ bool Item::AcceptVerbContinuation(Record* following) {
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
     if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
+    // The passive of that す causative is the godan verb's causative-passive (言わされた of 言う, spec GRM-3350).
+    if (!matched && oldState == 1 && oldKind == 3 && w->settings.text && w->settings.improvements.causativePassive &&
+        w->GodanCausative(surface)) {
+        return false;
+    }
     // A short causative (ShortCausative: 読まして) is read on the text path, and not where the dictionary
     // has the す verb it spells (表す あらわして, 任す まかして, 鳴らす 鳴らして).
     if (!matched && oldState == 2 && !Starts(tail, Conjugation(oldKind, 2))) {

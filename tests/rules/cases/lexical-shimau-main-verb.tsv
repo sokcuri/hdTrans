@@ -1,0 +1,31 @@
+# 규칙: LEX-3850, LEX-163
+rule	input	expected	kind	layer
+dict:lex:shimau-put-away	俺はナイフを静かにしまった。	나는 나이프를 조용하게 넣었다.	fix	local
+dict:lex:shimau-put-away	日記を閉じて、机の引き出しにそっとしまう。	일기를 덮고, 책상의 서랍에 살며시 넣는다.	fix	local
+dict:lex:shimau-put-away	弁当を手早くしまって立ち上がる。	도시락을 재빠르게 넣어 일어선다.	fix	local
+dict:lex:shimau-put-away	怯えられないように、霊棍も静かにしまう。	has:조용하게 넣는다	fix	local
+dict:lex:shimau-put-away	眼鏡を上げシャツをズボンの中に素早くしまった	has:바지 안에 재빠르게 넣었다	fix	local
+dict:lex:shimau-put-away	カバンからスマホを取り出して、すぐにしまった。	가방에서 스마트폰을 꺼내고, 곧바로 넣었다.	fix	local
+dict:lex:shimau-put-away	そしてその変な液体の入った注射器をさっさとしまって！	has:주사기를 빨리 넣어!	fix	local
+dict:lex:shimau-put-away	同級生に見られないように素早くしまったが、	동급생에게 보이지 않도록 재빠르게 넣었지만,	fix	local
+dict:lex:shimau-put-away	そのスマホを静かにしまうと怒りに満ちた表情で、	has:스마트폰을 조용하게 넣으면	fix	local
+dict:lex:shimau-put-away	頭の棚へきちんとしまって	머리의 선반에 제대로 넣어	fix	local
+dict:lex:shimau-put-away	それとも、そっとしまってやる？	has:살며시 넣어	fix	local
+dict:lex:shimau-put-away	しまった！	!rule:dict:lex:shimau-put-away	keep	local
+dict:lex:shimau-put-away	しまった、つい脳内ネームが……	!rule:dict:lex:shimau-put-away	keep	local
+dict:lex:shimau-put-away	バトンが落ちてしまった！	배턴이 떨어져버렸다!	keep	local
+dict:lex:shimau-put-away	武闘会が楽しみで、つい急いでしまったのですよね。	!rule:dict:lex:shimau-put-away	keep	local
+dict:lex:shimau-put-away	不承不承ながらも包丁をしまう。	has:부엌칼을 치운다	keep	local
+dict:lex:shimau-put-away	先生が教室に入ってきて、俺はスマホをポケットにしまった。	has:스마트폰을 포켓에 넣었다	keep	local
+analysis:shimau-after-suru-adverb	「ちゃんとしまったわよ」	「제대로 넣었어」	fix	analysis
+analysis:shimau-after-suru-adverb	でもいつのまにか「ちゃんとしまってよ！	하지만 어느새 「제대로 넣어!	fix	analysis
+analysis:shimau-after-suru-adverb	「ほらー、リュックも水筒も勝手に出して、ちゃんとしまっておきなさいよ」	has:제대로 넣어 둬	fix	analysis
+analysis:shimau-after-suru-adverb	「はい、大事にします」	「네, 소중히 합니다」	keep	analysis
+analysis:shimau-after-suru-adverb	「指輪、ありがとうございました。大事にしますね」	has:소중히 할게요	keep	analysis
+cx:verb-cue:40	事に大事にしまって、青空の下に駆け出した。	has:소중하게 간직해,	fix	rewrites
+cx:verb-cue:40	服や靴をマナトは大事にしまっていた。	has:소중하게 간직하고 있었다	fix	rewrites
+cx:verb-cue:45	……だからこの初恋は大事にしまっておこう。	……그러니까 이 첫사랑은 소중하게 간직해 두자.	fix	rewrites
+cx:verb-cue:45	ネクタイは箱に入れて大事にしまっておいた。	넥타이는 상자에 넣어 소중하게 간직해 두었다.	fix	rewrites
+cx:verb-cue:45	あとは、また大切にしまっておくのでしょう。	has:소중히 간직해 두겠죠	fix	rewrites
+cx:verb-cue:45	今日も鞄の中に大切にしまってある。	!rule:cx:verb-cue:45	keep	rewrites
+cx:verb-cue:45	それはそっとしまっておいてほしい。	!rule:cx:verb-cue:45	keep	rewrites

@@ -22099,6 +22099,7 @@ ttt	ttt	K110			GN				jisjk:201744
 しま	닫&AW@	M428		Dx	GN	3498	||1 &&2 S-1== "が" ||6 S-2== "まど" S-2== "R窓" S-2== "ドア" S-2== "R門" S-2== "戸" S-2== "扉"	しま 앞에 窓·門로 끝나는 말이나 まど·ドア·戸·扉와 が가 오면 닫히다라는 번역을 고른다. (미발동: rare-context)	jisjk:343690		
 しま	큰일 &A5@	M410			GN	4227	||3 S+1== "!" &&2 G+0== "Hz" M+0== "56*" &&2 M+0== "56*" S-1== "、"	느낌표 앞이거나 문장 처음·쉼표 뒤의 과거형인 しま를 큰일나다로 고른다.	jisjk:362205		
 しま	큰일 &A5@	M410			GN	4228	||1 D+1== "!"	뒤 단어가 느낌표로 번역되면 동사 しま를 큰일나다로 고른다. (미발동: rare-context)	jisjk:362206		
+しま	&H5@	M430			GN	10050	||1 &&3 P-1== "3**7**8**" S-1!= "Rて" S-1!= "Rで"	LEX-3850: 부사나 형용사의 부사형 바로 뒤의 しま는 て형 뒤 보조 동사가 아니라 본동사 넣다로 고른다.	lex:shimau-put-away		
 しまい	끝	N110	UMe		GN				jisjk:188452		
 しまい	자매	N110	VBpVHnVHn		GN				jisjk:188453		-1
 しまい	시마이	N120	VHn		GN				jisjk:188455		-1
@@ -26966,7 +26967,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すみかえ	이사&AV@	M447			GN				jisjk:137688		
 すみがき	묵화	N110	VBl		GN				jisjk:196843		-1
 すみがま	숯가마	N110	VPe		GN				jisjk:196845		-1
-すみき	맑게 개&AJ@	M418	VFrVPl		GN				jisjk:90968		
+すみき	맑게 &MT@	M418	VFrVPl		GN			LEX-3851	jisjk:90968		
 すみきんぶっさん	스미킨물산	N120	VMoVPl		GN				jisjk:196850		-1
 すみぎんリース	스미긴 리스	N110	VMoVBl		GN				jisjk:196852		
 すみこ	스미코	K130	QPN		GN				jisjk:103755		
@@ -27009,7 +27010,7 @@ ttt	ttt	K110			GN				jisjk:201744
 すみれ野	스미레노	I130	QCTVPl		GN				jisjk:303689		
 すみわけ	공존&AV@	M447			GN				jisjk:137722		
 すみわけ	거주지 분리	N110			GN				jisjk:196901		-1
-すみわた	맑게 개&AJ@	M428	SFl		GN				jisjk:137726		
+すみわた	맑게 &MT@	M428	SFl		GN			LEX-3851	jisjk:137726		
 すみを	먹을 &KB@	M429			GN				jisjk:137190		
 すみをや	숯을 &CS@	M441			GN				jisjk:137192		
 すみ分け	분리	I110			GN				jisjk:112029		
@@ -30600,7 +30601,7 @@ ttt	ttt	K110			GN				jisjk:201744
 たた	&HS@	M435			GN				jisjk:91025		
 たた	두드&AA@	M431			GN				jisjk:91026		
 たた	탈이 &A5@	M428	QHP		GN	1452	||1 S-1== "が"	たた 앞에 が가 오면 탈이 나다라는 번역을 고른다. (미발동: rare-word)	jisjk:139547		
-たた	&MO@	M445	VCp		GN				jisjk:346926		
+たた	&MT@	M445	VCp		GN			LEX-3851	jisjk:346926		
 たたいて売	투매&AV@	M448			GN				jisjk:138167		
 たたえ	기&AA@	M447	UCl		GN				jisjk:139455		
 たたえ	가득 채&AI@	M447	VFd		GN				jisjk:139459		
@@ -37249,7 +37250,7 @@ ttt	ttt	K110			GN				jisjk:201744
 に於いて	에 있어서	P200		Tu	GN				jisjk:366691		
 に於ける	에 있어서	E0H0		Tu	GN				jisjk:150039		
 に昇進	로 승진	A9H0		Tu	GN				jisjk:104040		
-に晴れ渡	(으)로 활짝 개&AJ@	M428		TuPj	GN				jisjk:257377		
+に晴れ渡	(으)로 활짝 &MT@	M428		TuPj	GN			LEX-3851	jisjk:257377		
 に曲がってい	으로 구부러져 &HN@	M427		PjTu	GN				jisjk:265646		
 に来てい	에 와 &HN@	M427		PjTu	GN				jisjk:268179		
 に来てい	러 와 &HN@	M427		PjTu	GN	4722	||2 &&3 P-1== "4**" M-1== "5:*" Y-1= "2" &&2 S-1== "遊び" D-1= "놀"	5: 계열 어미를 가진 동사 뒤에서는 앞 어미를 으 어간으로 바꾸고 遊び 뒤에서는 놀로 바꾸며 に来てい를 러 와 있다로 고른다. (미발동: rare-context)	jisjk:373274		
@@ -228894,7 +228895,7 @@ ttt	ttt	K110			GN				jisjk:201744
 晴れ晴れ	밝아 &AL@	M419			GN				jisjk:266471		
 晴れ晴れし	환$AB@	H7N0	SFl		GN				jisjk:122496		
 晴れ晴れした	상쾌한	E0H0			GN				jisjk:150063		
-晴れ渡	활짝 개&AJ@	M428	VFr		GN				jisjk:117829		
+晴れ渡	활짝 &MT@	M428	VFr		GN			LEX-3851	jisjk:117829		
 晴れ着	나들이 옷	I110	VCpVAc		GN				jisjk:86164		
 晴れ間	맑은 하늘	I110	UMe		GN				jisjk:86163		
 晴一	세이치	N130	QPN	Wb	GN				jisjk:364959		
@@ -253323,7 +253324,7 @@ ttt	ttt	K110			GN				jisjk:201744
 水っぽ	싱$GH@	H7N0	VFdSFl		GN				jisjk:136464		
 水っ洟	콧물	N110	VBp		GN				jisjk:252319		
 水で延ば	물에 타서 묽게&AV@	M443			GN				jisjk:116670		
-水で練	물로 &MO@	M428		Pn	GN				jisjk:266564		
+水で練	물로 &MT@	M428		Pn	GN			LEX-3851	jisjk:266564		
 水なまた病	미나마타병	N110	QHP		GN				jisjk:155291		
 水に当た	물을 먹고 체&AV@	M428		Pn	GN				jisjk:265498		
 水に流	없었던 것으로 &AV@	M423			GN				jisjk:118096		
@@ -266606,7 +266607,7 @@ ttt	ttt	K110			GN				jisjk:201744
 澄ませ	맑게 &AV@	M437			GN				jisjk:95142		
 澄ませ	집중&AV@	M437			GN				jisjk:95143		
 澄み切	맑게 개&AJ@	M418	VSsSFl		GN				jisjk:95144		
-澄み渡	맑게 개&AJ@	H428	SFl		GN				jisjk:137724		
+澄み渡	맑게 &MT@	H428	SFl		GN			LEX-3851	jisjk:137724		
 澄二郎	스미지로우	N130	QPN	Wb	GN				jisjk:357335		
 澄夫	스미오	N130	QPN	Wb	GN				jisjk:12222		
 澄子	스미코	N130	QPN	Wb	GN				jisjk:12226		
@@ -356825,7 +356826,7 @@ ttt	ttt	K110			GN				jisjk:201744
 飲	얕&AY@	M443			GN	1209	||1 &&2 P-2== "1**" A-2-= "VHn"	飲를 두 단어 앞에 사람 계열 명사가 있을 때 얕보다로 고른다. (미발동: rare-word)	jisjk:116717		
 飲こ	삼&AQ@	M435	VFd		GN				jisjk:94349		
 飲ま	먹&AJ@	M433	VFd		GN				jisjk:94350		
-飲まされ	먹게 &C6@	M427			GN				jisjk:147927		
+飲まされ	마시게 &C6@	M427			GN			LEX-3852	jisjk:147927		
 飲ませ	먹&AJ@	M427			GN				jisjk:264026		
 飲ませていただ	마&AE@	M461			GN				jisjk:350847		
 飲ませること	빼앗을 것	A9H0			GN				jisjk:103396		
