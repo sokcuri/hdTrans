@@ -127,3 +127,9 @@ pack:良い/よい/adj#3	別にいいことなんてない	!rule:pack:良い/よ
 pack:一体/いったい/n#1	君の一体何がわかるんだ	!rule:pack:一体/いったい/n#1	keep	packs
 pack:元#2c	叔父の元婚約者が好んだ花。	!rule:pack:元#2c	keep	packs
 pack:元#2	寝床は、俺の元寝床である大きな木の上。	!rule:pack:元#2	keep	packs
+pack:内#3	そうだな……そのうちでも一番好きなのはこれだ。	그래……그중에서도 제일 좋아하는 것은 이것이다.	fix	packs
+pack:内#3	・そのうちでも特に大事なもの	·그중에서도 특히 소중한 것	fix	packs
+pack:内#3	花はたくさんある。そのうちでも赤い花が好きだ。	꽃은 많이 있다. 그중에서도 붉은 꽃을 좋아한다.	keep	packs
+pack:内#3	三人いた。そのうちでも彼が一番速い。	세 명 있었다. 그중에서도 그가 제일 빠르다.	keep	packs
+pack:遣る/やる/v5#4	そうだな……目をやった。	그래……눈을 돌렸다.	keep	packs
+pack:遣る/やる/v5#4	彼は目をやった。	그는 눈을 돌렸다.	keep	packs

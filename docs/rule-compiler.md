@@ -180,10 +180,10 @@ local 3
 생성 코드의 모양(규칙 하나):
 
 ```cpp
-// global 997 stem pos 1 prio 1
-//     src == "屋" and src[-1] == "各部" and ko[-1] := "" and ko := "각 방"
-bool RuleG1([[maybe_unused]] Item* p) {
-    return (SrcEq(p, 0, "屋"sv) && SrcEq(p, -1, "各部"sv) && DstSet(p, -1, ""sv) && DstSet(p, 0, "각 방"sv));
+// global 2001 stem pos 8 prio 360
+//     gram has Gk and end.src == "に" and src[-1] == "の" and pos[-1] is 2** and end.ko := " 에"
+bool RuleG360([[maybe_unused]] Item* p) {
+    return (GramEq(p, 0, "Gk"sv) && GobiSrcEq(p, 0, "に"sv) && SrcEq(p, -1, "の"sv) && PumsaEq(p, -1, "2**"sv) && GobiDstSet(p, 0, " 에"sv));
 }
 ```
 

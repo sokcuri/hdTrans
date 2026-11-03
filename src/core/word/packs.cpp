@@ -538,6 +538,16 @@ std::string_view Segment(const Item* it) {
     return it->text.substr(start, static_cast<std::size_t>(std::max(it->length, 0)));
 }
 
+// Whether a word b right after word a is written with a space before it: b goes on in a's token
+// after a word, not after a mark (・, 、) or the start of a token (……), and not after a digit or a
+// Latin letter, after which the source's spacing stays (NUM-4: 3肉じゃが 3고기감자조림).
+bool SpacedAfter(const Item* a, const Item* b) {
+    if (a->tokenIndex != b->tokenIndex || ClassOf(a) == '6') return false;
+    char32_t r = DecodeLastRune(Segment(a)).cp;
+    if (r >= U'０' && r <= U'ｚ') r -= 0xFEE0;
+    return !((r >= U'0' && r <= U'9') || (r >= U'A' && r <= U'Z') || (r >= U'a' && r <= U'z'));
+}
+
 // Whether the words from items[i] on read text, text's last word in any conjugated form: the
 // span ends with the item past the last one read (end).
 bool ReadsText(const std::vector<Item*>& items, std::size_t i, std::string_view text, std::size_t& end) {
@@ -766,7 +776,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
                     text.insert(0, " ");
                 }
                 // the space before the span, when its first words are left empty and the head is written joined
-                if (!c.slot && k > i && i > 0 && c.lead.empty()) text.insert(0, " ");
+                if (!c.slot && k > i && i > 0 && c.lead.empty() && SpacedAfter(items[i - 1], items[i])) text.insert(0, " ");
                 Write(x, text, source);
                 // a phrase that does not conjugate keeps none of the word's ending
                 if (!best.conjugates && x->DirectIndex() >= 0) x->AssignDirectSlot(x->DirectIndex(), "", source);

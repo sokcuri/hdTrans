@@ -69,3 +69,5 @@ id	slot	lemma	pos	kind	cond	cue	target	pri	spec	prov	note
 元#2c	sense	元/もと/n	n	colloc	{X:@person}の元まで		{X}의 곁까지	80	LEX-200	review	{X:@person}の元まで → {X}의 곁까지
 元#2d	sense	元/もと/n	n	colloc	{X:@person}の元へ		{X}의 곁으로	80	LEX-200	review	{X:@person}の元へ → {X}의 곁으로
 内#3	sense	内/うち/n	n	colloc	そのうちでも		그중에서도	70	LEX-200	review	そのうちでも → 그중에서도
+肉じゃが/にくじゃが/n#1	sense	肉じゃが/にくじゃが/n	n	colloc	肉じゃが		고기감자조림	70	LEX-200	fault	肉じゃが → 고기감자조림
+各部屋/かくへや/n#1	sense	各部屋/かくへや/n	n	colloc	各部屋		각 방	70	LEX-200	fault	各部屋 → 각 방
