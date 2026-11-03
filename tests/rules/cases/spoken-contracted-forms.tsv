@@ -27,7 +27,7 @@ normalize:adjective-su	すっごいいすね	대단한 의자네	keep	normalize
 normalize:adjective-su	それ、いいすね	그것, 좋네요	fix	normalize
 normalize:adjective-su	「ういす、行ってきます！」	「넵, 다녀오겠습니다!」	keep	normalize
 normalize:adjective-su	このいすが壊れた。	이 의자가 망가졌다.	keep	normalize
-normalize:toku-naru	「そこまで親密になっといてまだ何もないんですか！？」	「그렇게까지 친밀해져 둬 아직 아무것도 없습니까!?」	fix	normalize
+normalize:toku-naru	「そこまで親密になっといてまだ何もないんですか！？」	「그렇게까지 친밀해져 놓고 아직 아무것도 없습니까!?」	fix	normalize
 normalize:toku-naru	「勝手に気になっとけ」	「마음대로 신경 쓰여 둬라」	fix	normalize
 normalize:toku-naru	俺の言いなりになっとけよ	내가 하라는 대로 되어 둬	fix	normalize
 normalize:toku-naru	ちゃんと元気になっとけよっ	제대로 기운을 차려 둬	fix	normalize

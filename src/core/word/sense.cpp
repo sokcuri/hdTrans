@@ -72,6 +72,19 @@ bool IsQuoteMark(std::string_view s) {
     return false;
 }
 
+// The opening bracket of the bracketed aside that closes at x (脇腹（多分肋骨が折れてる）を), or null.
+const Item* AsideStart(const Item* x) {
+    const std::string_view s = x->group->surface;
+    if (s != "）" && s != ")") return nullptr;
+    int depth = 0;
+    for (const Item* y = x; y != nullptr; y = y->prev) {
+        const std::string_view t = y->group->surface;
+        if (t == "）" || t == ")") depth++;
+        if ((t == "（" || t == "(") && --depth == 0) return y;
+    }
+    return nullptr;
+}
+
 bool HasTag(const Item* it, std::string_view tag) {
     if (tag.starts_with("sem:")) return dict::SemCodes(it->Attr(it->selected)).HasCode(tag.substr(4));
     return tag.starts_with("gram:") && dict::GramCodes(it->GAttr(it->selected)).HasCode(tag.substr(5));
@@ -122,7 +135,7 @@ bool SenseTriggers(const Item* x, const Item* it, const userdict::Sense& sense) 
 }
 
 // Whether a trigger of sense s stands on its side of it: for Before and After within the
-// window (a quotation mark, or a comma between nouns, counts but does not stop it), with
+// window (a quotation mark, a bracketed aside before it, or a comma between nouns, counts but does not stop it), with
 // no clause boundary and no other predicate in between. A sense with no triggers applies always, but for a one-kanji
 // key not inside a kanji compound.
 bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
@@ -141,6 +154,13 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
     for (int n = 0; n < kSenseWindow; n++) {
         x = step(x);
         if (x != nullptr && IsQuoteMark(x->group->surface)) continue;
+        // Before the word, a bracketed aside between it and its noun is passed over whole.
+        if (x != nullptr && s.side == userdict::Side::Before) {
+            if (const Item* open = AsideStart(x); open != nullptr) {
+                x = open;
+                continue;
+            }
+        }
         // A comma between two nouns lists them (コップとお皿、お盆): the noun across it can be
         // the trigger, but not the words of its own phrase (沖姉、朝ちゃん).
         if (x != nullptr && x->group->surface == "、" && At(it->Code(it->selected), 0) == '1') {

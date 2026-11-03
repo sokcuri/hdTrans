@@ -4,7 +4,7 @@ register:REG-2	「……子爵の娘は優秀だと聞いている」	「……�
 register:REG-10	「マリーさま。いらしていたのですか」	「마리님. 오시고 있었습니까」	keep	register
 register:REG-10	「……あら、ご覧になって」	「……어머, 보세요」	keep	register
 register:REG-10	「娘を買っていただきました。そのことによって金銭を得たのでございます」	「딸을 사 주셨습니다. 그것에 의해 금전을 얻은 것입니다」	keep	register
-register:REG-12	「醜聞なんてものじゃないと思うんだが」	「추문 같은 건 것이 아니라고 생각하는데」	keep	register
+register:REG-12	「醜聞なんてものじゃないと思うんだが」	「추문 같은 것이 아니라고 생각하는데」	keep	register
 register:REG-12	「わたくしはそんな話知りません、聞いてません！　絶対認めませんから！」	「저는 그런 이야기 모릅니다, 듣지 않았습니다! 절대 인정하지 않으니까요!」	keep	register
 register:REG-10	「婚約を破棄すると宣言するなど、わたくしまで貶めようとしているとしか思えません」	「약혼을 파기한다고 선언하는 등, 저까지 깎아내리려 하고 있다고밖에 생각되지 않습니다」	keep	register
 register:REG-12	「年の差なんて！　たかだか十六歳差ではありませんか。」	「나이 차이 따위! 고작 16세차가 아닙니까.」	keep	register

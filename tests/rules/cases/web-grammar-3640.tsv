@@ -99,7 +99,7 @@ cx:web-fixes-h:143	準備がいい人だ。	!rule:cx:web-fixes-h:143	keep	rewrit
 cx:web-fixes-h:150	ぽつりと漏らした言葉は、誰に届くこともなくロシアの寒空に消えた……直後。	has:닿는 일도 없이	fix	rewrites
 cx:web-fixes-h:150	少し毒気を抜かれた俺は、レナの揚げ足を取ることもなく頷いた。	has:트집을 잡는 일도 없이	fix	rewrites
 cx:web-fixes-h:150	大見はさすが自衛官で幹部の二尉である。その仕草に、おやっ？ とは思ったが、特段気にすることもなくスルーした。	has:신경 쓰는 일도 없이	fix	rewrites
-cx:web-fixes-h:150	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없고	keep	rewrites
+cx:web-fixes-h:150	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없이	keep	rewrites
 cx:web-fixes-h:150	そんなに心配することもない。	!rule:cx:web-fixes-h:150	keep	rewrites
 cx:web-fixes-h:160	上掛けとして掛けられている薄汚れた布からは変な臭いもするし、	has:이상한 냄새도 나고	fix	rewrites
 cx:web-fixes-h:160	そしたら夜になってからなんか足音がして、	has:발소리가 나,	fix	rewrites
@@ -134,5 +134,5 @@ cx:web-fixes-h:49	その程度の傷で、あなたの価値が損なわれる�
 cx:web-fixes-h:49	受け入れることなどすぐにはできない	has:받아들이는 것은	keep	rewrites
 cx:web-fixes-h:51	当然、実物に出会えることなど滅多にない。	has:만날 수 있는 일은 좀처럼 없다	fix	rewrites
 cx:web-fixes-h:51	受け入れることなどすぐにはできない	!rule:cx:web-fixes-h:51	keep	rewrites
-cx:web-fixes-h:151	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없고	fix	rewrites
+cx:web-fixes-h:151	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없이	fix	rewrites
 cx:web-fixes-h:151	誰に届くこともなく消えた	has:닿는 일도 없이	keep	rewrites

@@ -19,7 +19,7 @@ phrase:kigatsuitara	気づいたら、知らない部屋にぐるぐるロープ
 constraint:tara-before-shii	なにやら気付いたらしい。	has:깨달은 것 같다	fix	lookup
 constraint:tara-before-shii	どうやら全員気付いたらしい。	has:깨달은 것 같다	fix	lookup
 constraint:tara-before-shii	端っこにいる人も気付いたらしい。	has:깨달은 것 같다	fix	lookup
-constraint:tara-before-shii	それに気付いたらしいラオスが指さした。	has:깨달은 것 같은	fix	lookup
+constraint:tara-before-shii	それに気付いたらしいラオスが指さした。	has:알아차린 것 같은	fix	lookup
 constraint:tara-before-shii	下にして寝ているのに気がついたらしい。	has:깨달은 것 같다	fix	lookup
 constraint:tara-before-shii	男の１人がうすきひの動きに気がついたらしい	has:깨달은 것 같다	fix	lookup
 constraint:tara-before-shii	素に戻っていることにようやく気付いたらしい。	has:깨달은 것 같다	fix	lookup

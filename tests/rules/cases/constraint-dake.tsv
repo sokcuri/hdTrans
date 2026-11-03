@@ -4,12 +4,12 @@ constraint:da-before-ke	一度だけやらせてください。	한 번만 시�
 constraint:da-before-ke	今回だけやらせて	이번만 시켜	fix	lookup
 constraint:da-before-ke	一度だけやらないか	has:한 번만	fix	lookup
 constraint:da-before-ke	オレのだけ？	has:것만?	fix	lookup
-constraint:da-before-ke	もう少しだけ…	has:좀 더만	fix	lookup
+constraint:da-before-ke	もう少しだけ…	has:조금만 더	fix	lookup
 constraint:da-before-ke	京太郎の部屋でだけなんだ。	has:방에서만	fix	lookup
 constraint:da-before-ke	いつも無関心のくせにこんなときだけ	has:이런 때만	fix	lookup
 constraint:da-before-ke	そんなことはない。俺が後ろ向きなだけなんだ。	lacks:만일 수 있는	fix	lookup
 constraint:da-before-ke	分かるのはここであったということだけ。	has:것만.	fix	lookup
-constraint:da-before-ke	もう少しだけ時間を稼いでください	has:좀 더만 시간을	fix	lookup
+constraint:da-before-ke	もう少しだけ時間を稼いでください	has:조금만 더 시간을	fix	lookup
 constraint:da-before-ke	一度だけ見させて	한 번만 보게 해	keep	lookup
 constraint:da-before-ke	あなただけやらせて	당신만 시켜	keep	lookup
 constraint:da-before-ke	だけど行く	하지만 간다	keep	lookup

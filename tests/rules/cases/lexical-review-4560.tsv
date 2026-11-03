@@ -1,0 +1,124 @@
+# 규칙: LEX-4560, LEX-4561, LEX-4562, LEX-4563, LEX-4564, LEX-4565, LEX-4566, LEX-4567, LEX-4568, LEX-4569, LEX-4570, LEX-4571, LEX-4572, LEX-4573, LEX-4574, LEX-4575, LEX-4576, LEX-4577, LEX-4578, LEX-4579
+rule	input	expected	kind	layer
+cx:web-fixes-k:10	日傘をさして歩く。	양산을 쓰고 걷는다.	fix	rewrites
+cx:web-fixes-k:10	失敗をさして気にしない。	!rule:cx:web-fixes-k:10	keep	rewrites
+cx:web-fixes-k:20	目薬をさして寝た。	안약을 넣고 잤다.	fix	rewrites
+cx:web-fixes-k:20	それをさして重要とは思わない。	!rule:cx:web-fixes-k:20	keep	rewrites
+cx:web-fixes-k:30	これだけはと思い腰にさしてきた、ドワーフの手による名剣	has:허리에 차고 온,	fix	rewrites
+cx:web-fixes-k:30	腰にさして重さも感じない。	!rule:cx:web-fixes-k:30	keep	rewrites
+cx:web-fixes-k:40	光がさして明るくなった。	빛이 비쳐 밝아졌다.	fix	rewrites
+cx:web-fixes-k:40	光がさして強くない。	빛이 별로 강하지 않다.	keep	rewrites
+cx:web-fixes-k:50	「風邪引くし、さして帰れよ。返さなくていいから」	has:쓰고 돌아가.	fix	rewrites
+cx:web-fixes-k:50	さして変わらない。	!rule:cx:web-fixes-k:50	keep	rewrites
+cx:web-fixes-k:50	さして行きたくもない。	!rule:cx:web-fixes-k:50	keep	rewrites
+cx:web-fixes-k:60	『え？　アキラはハンターだったの？　その歳で？』	has:그 나이에?	fix	rewrites
+cx:web-fixes-k:60	そんな歳で子供を作るとは、まったく妬ましい。	has:그런 나이에 아이를	fix	rewrites
+cx:web-fixes-k:60	十歳で入学した。	10세에 입학했다.	keep	rewrites
+cx:web-fixes-k:60	何歳で結婚した？	!rule:cx:web-fixes-k:60	keep	rewrites
+cx:web-fixes-k:70	自力でモンスターを倒せたことで、自信を、希望を持ってしまったのだ。	has:자신감을, 희망을	fix	rewrites
+cx:web-fixes-k:70	「その根拠のない自信はどこからくるのでしょうか」	has:근거가 없는 자신감은	fix	rewrites
+cx:web-fixes-k:70	似合っているかどうか自信がない。	has:어떤지 자신이 없다	keep	rewrites
+cx:web-fixes-k:70	剣の腕には自信があった。	!rule:cx:web-fixes-k:70	keep	rewrites
+cx:web-fixes-k:70	これは自信作なんだから。	!rule:cx:web-fixes-k:70	keep	rewrites
+cx:web-fixes-k:80	牢獄の苦しみを、断頭台への恐れを、書き連ねた物	has:단두대에 대한 두려움을	fix	rewrites
+cx:web-fixes-k:80	一歩足を進める度に恐れを抱いてしまう。	has:두려움을 품어	fix	rewrites
+cx:web-fixes-k:80	新たな諍いに発展する恐れもあり、	has:발전할 우려도	keep	rewrites
+cx:web-fixes-k:80	地上の争いを恐れ空へと逃れた。	!rule:cx:web-fixes-k:80	keep	rewrites
+cx:web-fixes-k:80	感染の恐れ。	감염의 우려.	keep	rewrites
+cx:web-fixes-k:80	津波の恐れはありません。	해일의 우려는 없습니다.	keep	rewrites
+cx:web-fixes-k:80	感染の恐れを指摘した。	!rule:cx:web-fixes-k:80	keep	rewrites
+cx:web-fixes-k:80	恐れを知らない。	has:두려움을 모른다	fix	rewrites
+cx:web-fixes-k:90	「暫くは宮殿内でお過ごしください」	has:한동안은 궁전	fix	rewrites
+cx:web-fixes-k:90	暫くお待ちください。	잠시 기다려 주세요.	keep	rewrites
+cx:web-fixes-k:100	こんな風にミーアに意見してくれたのは、彼だけだった。	has:미아에게 의견을 말해 준 것은	fix	rewrites
+cx:web-fixes-k:100	彼の意見を聞いた。	!rule:cx:web-fixes-k:100	keep	rewrites
+cx:web-fixes-k:110	フラれた腹いせに貧乏貴族の娘にビンタした	has:가난한 귀족의 딸에게	fix	rewrites
+cx:web-fixes-k:110	ジャガイモ食べてる貧乏令嬢の心配なんて誰もしませんよ！	has:가난한 영애의	fix	rewrites
+cx:web-fixes-k:110	貧乏な家に生まれた。	!rule:cx:web-fixes-k:110	keep	rewrites
+cx:web-fixes-k:110	貧乏性なんだ。	!rule:cx:web-fixes-k:110	keep	rewrites
+cx:web-fixes-k:110	貧乏暇なしだ。	!rule:cx:web-fixes-k:110	keep	rewrites
+cx:web-fixes-k:110	貧乏男爵家のクロードには、	has:가난한 남작가의 클로드에게는,	fix	rewrites
+cx:web-fixes-k:120	まずケータイ（電池切れそう）、財布	has:휴대폰(방전 직전),	fix	rewrites
+cx:web-fixes-k:120	電池が切れそうだ。	!rule:cx:web-fixes-k:120	keep	rewrites
+cx:web-fixes-k:125	スマホが電池切れそうだ。	스마트폰이 방전 직전이다.	fix	rewrites
+cx:web-fixes-k:125	時間切れだ。	!rule:cx:web-fixes-k:125	keep	rewrites
+cx:web-fixes-k:130	ランクCの囚人にわざわざバトリングエントリーの話を持ちかけるなんてな……。	has:이야기를 꺼내다니	fix	rewrites
+cx:web-fixes-k:130	話を聞いた。	!rule:cx:web-fixes-k:130	keep	rewrites
+cx:web-fixes-k:135	自分に依頼を持ちかけているのだ。	has:의뢰를 제안하고 있다	fix	rewrites
+cx:web-fixes-k:135	交渉を持ちかけてきても無視。	has:교섭을 제안해 와도	fix	rewrites
+cx:web-fixes-k:135	俺はリュックを持ちかけると、教室を出ようとした。	!rule:cx:web-fixes-k:135	keep	rewrites
+cx:web-fixes-k:140	しかし時の賢者達というのは偉大だったようで	has:하지만 당대의 현자들	fix	rewrites
+cx:web-fixes-k:140	しかし時の流れは残酷だ。	!rule:cx:web-fixes-k:140	keep	rewrites
+cx:web-fixes-k:150	彼女はそれに気付くと、アキラに改めて微笑んだ。	has:그녀는 그것을 알아차리	fix	rewrites
+cx:web-fixes-k:150	それに気付いたイリアが場を取り直すように咳払いをする。	has:그것을 알아차린 일리아가	fix	rewrites
+cx:web-fixes-k:150	ふと気付くと朝だった。	!rule:cx:web-fixes-k:150	keep	rewrites
+cx:web-fixes-k:152	だが自身を隠そうともしない彼女の存在に全く気付けなかった。	has:그녀의 존재를 전혀 알아차릴 수 없었다	fix	rewrites
+cx:web-fixes-k:152	誰も気付けない。	!rule:cx:web-fixes-k:152	keep	rewrites
+cx:web-fixes-k:155	三度目の問いかけ、それに答える声があった。	has:거기에 대답하는 목소리가	fix	rewrites
+cx:web-fixes-k:155	それに答えも出ない。	!rule:cx:web-fixes-k:155	keep	rewrites
+cx:web-fixes-k:155	それに、答えはない。	!rule:cx:web-fixes-k:155	keep	rewrites
+dict:jisjk:182856	役立つのは腹の足しになりそうなお菓子ぐらいか。小腹を救って終了だが。	has:출출한 배를	fix	defaults
+dict:jisjk:182856	小腹を満たす。	출출한 배를 채운다.	fix	defaults
+dict:jisjk:182856	下腹が痛い。	lacks:출출한	keep	defaults
+dict:w:32401	その有機無線機能から送信されていて	has:유기 무선 기능에서	fix	defaults
+dict:w:32401	無線機で連絡した。	has:무전기	keep	defaults
+dict:w:2009	イケる、と静子は思った。	된다, 라고 시즈코는 생각했다.	fix	defaults
+dict:w:2009	今の俺なら、それらの単語だけで３発はイケる。	has:3발은 된다	fix	defaults
+dict:w:2009	イケメンだ。	미남이다.	keep	defaults
+dict:w:32402	イケない子だ。	has:안되는 아이다	fix	defaults
+dict:w:32402	いけない子だ。	has:안되는 아이다	keep	defaults
+dict:w:32403	お酒はイケる口ですか？	술은 잘하는 편입니까?	fix	defaults
+dict:w:32403	まだイケる！	lacks:편	keep	defaults
+dict:w:32404	ちょっとした頼み事があるのだけれど	has:약간의 부탁이 있는데	fix	defaults
+dict:w:32404	頼みがある。	lacks:부탁일	keep	defaults
+dict:w:32405	半狂乱で暴れてみたものの、	has:반쯤 미친 상태로 날뛰어	fix	defaults
+dict:w:32405	半狂乱になって慌てふためくのを何とか防いでいた。	has:반쯤 미친 상태가 되어	fix	defaults
+dict:w:32405	狂乱の宴だった。	lacks:반쯤	keep	defaults
+dict:jisjk:4930	比較するのはおこがましいってものよね。	has:주제넘다는	fix	defaults
+dict:jisjk:4930	「俺が言うのもおこがましいけど、結果は気にしないで」	has:말하는 것도 주제넘지만	fix	defaults
+dict:jisjk:343341	悪い夢を笑い飛ばすように高笑い。	has:웃어넘기도록	fix	defaults
+dict:jisjk:343341	笑い飛ばすには含蓄のある言葉だった。	has:웃어넘기려면	fix	defaults
+dict:jisjk:39153	アキラが必死の形相で階段に向かい急いで駆け上がる。	has:필사의 표정으로	fix	defaults
+dict:jisjk:39153	ドアの外に、ものすごい形相をした女性が立っていた。	has:무시무시한 표정을 한	fix	defaults
+dict:i:5634	家を後にした時の、兄弟たちの罵詈雑言が未だ耳に残っている。	has:귓가에 맴돌고 있다	fix	defaults
+dict:i:5634	噂を耳にした。	lacks:맴돌	keep	defaults
+dict:wfk:1	そして、一歩アキラに近付いた。	has:아키라에게 다가갔다	fix	local
+dict:wfk:1	目的に向かって、終わりに近付く夜の底を歩く。	has:끝에 가까워지는	keep	local
+pack:argument-senses:61	僕はそれ以上近付くことはできなかった	rule:pack:argument-senses:61=다가가다	fix	packs
+pack:argument-senses:61	自分からはなるべく近付かないようにしよう。	!rule:pack:argument-senses:61	keep	packs
+pack:argument-senses:62	見知らぬ誰かが自分に近付こうとしている。	rule:pack:argument-senses:62=다가오다	fix	packs
+pack:argument-senses:62	彼は窓に近付いた。	!rule:pack:argument-senses:62	keep	packs
+pack:argument-senses:63	微笑みながら近付いてくる彼女に向かって、再び叫ぶように警告する。	has:미소 지으면서 다가오는 그녀를	keep	packs
+phrase:chikazuite-kuru	警告を無視して近付いてくる相手に引き金を引こうとする。	has:무시해 다가오는 상대에게	fix	phrases
+phrase:chikazuite-kuru	彼女は全く動揺せず、危機感の欠片も感じさせない態度でアキラに近付いてくる。	has:아키라에게 다가온다	fix	phrases
+sense:yugamu	アキラの顔が驚愕で激しく歪む。	has:얼굴이 경악으로 격렬하게 일그러진다	fix	senses
+sense:yugamu	最後に見た真昼の顔がどこか泣きそうに歪んだように見えて、	has:울 것 같게 일그러진	fix	senses
+sense:yugamu	いきなり空間が歪んで、フラッシュとともにご登場という話じゃないですかい	has:공간이 일그러져,	fix	senses
+sense:yugamu	彼の心は歪んでいる。	그의 마음은 비뚤어져 있다.	keep	senses
+sense:yugamu	柱が歪んでいる。	기둥이 비뚤어져 있다.	keep	senses
+sense:mau	砂埃が盛大に舞っているが、行き交う人々は慣れているのか無頓着だ。	has:모래 먼지가 성대하게 날리고 있지만	fix	senses
+sense:mau	蓋を開けると、白い粉が舞う。	has:흰 가루가 날린다	fix	senses
+sense:mau	華麗に舞うわよー！	has:화려하게 춤출	keep	senses
+sense:iidasu	漫画家になると言い出してヘタクソなWEB漫画を開始したり、	has:된다고 말을 꺼내	fix	senses
+sense:iidasu	「誰が言い出したと？　アルガルドがか？」	has:누가 말을 꺼냈다고?	fix	senses
+sense:iidasu	言い出せないらしく、もじもじしている。	has:말을 꺼낼 수 없는	fix	senses
+sense:iidasu	突然、無邪気に何かを言い出した。	has:뭔가를 말하기 시작했다	keep	senses
+phrase:mou-sukoshi-dake	アキラはもう少しだけ探索を続けようと、項垂れていた顔を上げた。	has:조금만 더 탐색을	fix	phrases
+phrase:mou-sukoshi-dake	「じゃ、じゃあ、もうちょっとだけ……」	has:조금만 더……	fix	phrases
+phrase:mou-sukoshi-dake	もう少し歩かない？	좀 더 걷지 않을래?	keep	phrases
+cx:web-fixes-k:160	『そう言わずに話ぐらい聞いてもらえないかしら。』	has:『그러지 말고 이야기 정도	fix	rewrites
+cx:web-fixes-k:160	まあまあ、そう言わずに。	has:그러지 말고.	fix	rewrites
+cx:web-fixes-k:160	そう言わずにはいられない。	!rule:cx:web-fixes-k:160	keep	rewrites
+cx:web-fixes-k:160	何もそう言わずに去った。	!rule:cx:web-fixes-k:160	keep	rewrites
+phrase:ikaga-nasaimashita	「これは、ミーア姫殿下、いかがなさいましたか？」	has:미아 공주 전하, 무슨 일이십니까?	fix	phrases
+phrase:ikaga-nasaimashita	「お加減はいかがですか？」	lacks:무슨 일이십니까	keep	phrases
+phrase:ni-hikitsuzuki	ポーションに引き続き、魔法だなんて、益々ゲームみたいだと思うけど	has:포션에 이어, 마법이라니	fix	phrases
+phrase:ni-hikitsuzuki	前回に引き続き、今回もさく裂したなｗｗｗ	has:지난번에 이어, 이번에도	fix	phrases
+phrase:ni-hikitsuzuki	航空火力艦の運用の強化に引き続き努めよ！	has:강화에 계속해 노력해라	keep	phrases
+phrase:nanto-iu-koto	何と言うことはない。	별것 아니다.	fix	phrases
+phrase:nanto-iu-koto	何と言うことだ。	lacks:별것	keep	phrases
+sound:koterin	再びミーアは悲鳴を上げ、ベッドの上に、こてりん、と倒れ、そのまま気絶した。	has:침대 위에, 털썩, 하고 쓰러져	fix	sound
+sound:koterin	ころんと転がった。	떼구르르 굴렀다.	keep	sound
+sense:aside-window	ズキズキと痛む脇腹（多分肋骨が折れてる）を抑えながら、とぼとぼと町を歩く。	has:부러져 있다)를 누르면서	fix	senses
+sense:aside-window	脇腹を抑えながら歩く。	옆구리를 누르면서 걷는다.	keep	senses
+sense:aside-window	怒り（本当に強い）を抑えながら話した。	has:를 억제하면서	keep	senses
