@@ -15,7 +15,7 @@ sound:clipped-cho	ちょ、ちょ、ちょっと待って	자, 자, 잠깐 기�
 sound:clipped-cho	「ちょっ！？　他にいないのかよ？」	「잠깐!? 그 밖에 없는 건지?」	keep	fixed
 sound:clipped-cho	ちょこんと座った	다소곳 앉았다	keep	fixed
 sound:clipped-cho	ちょうど良かった	마침 좋았다	keep	defaults
-sound:clipped-cho	「い、いいのか佐藤。ちょ、調子に乗りすぎてるんじゃないか？！」	「괘, 괜찮아 사토. 잠깐, 너무 신이 나고 있는 게 아니야?!」	fix	fixed
+sound:clipped-cho	「い、いいのか佐藤。ちょ、調子に乗りすぎてるんじゃないか？！」	「괘, 괜찮아 사토. 잠깐, 신이 너무 나고 있는 게 아니야?!」	fix	fixed
 sound:clipped-cho	「ちょｗｗｗ落ち着きなってｗｗｗｗｗｗ」	has:「잠깐ㅋㅋㅋ 침착해	fix	fixed
 sound:clipped-cho	ちょｗｗｗ	잠깐ㅋㅋㅋ	fix	fixed
 sound:clipped-cho	ちょｗｗｗやめて	잠깐ㅋㅋㅋ 그만해	fix	fixed

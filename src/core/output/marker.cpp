@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
+#include <iterator>
 #include "core/dict/classes.h"
 #include "core/output/compose.h"
 #include "core/output/inflect.h"
@@ -915,6 +916,18 @@ void Composer::BuildAction(int i, int action, std::string_view mode) {
         default:
             sc.text.clear();
             return;
+    }
+    // A target of several words whose last word is the verb after a particle (上に立 위에 서다, と言 (이)라고
+    // 말하다, 夢を見 꿈을 꾸다) takes the adverb before that verb: 위에 계속 서다, not 계속 위에 서다. A
+    // compound verb (말려 들어가다, 신경 쓰다) keeps the adverb before it.
+    if (const std::size_t cut = stemText.rfind(' '); cut != std::string::npos && cut > 0) {
+        const std::string_view words(stemText);
+        const std::string_view head = words.substr(0, cut);
+        static constexpr std::string_view kParticles[] = {"을", "를", "이", "가", "에", "도", "은", "는", "로", "와", "과", "라고"};
+        if (std::any_of(std::begin(kParticles), std::end(kParticles), [&](std::string_view p) { return head.ends_with(p); })) {
+            sc.text = Cat({pending, carried, words.substr(0, cut + 1), adverb, words.substr(cut + 1), replacement, suffixText});
+            return;
+        }
     }
     sc.text = Cat({adverb, pending, carried, stemText, replacement, suffixText});
 }
