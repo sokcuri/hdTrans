@@ -16,7 +16,7 @@ compose:speech-mark	ちょっと…恥ずかしい…	조금…부끄러워…	f
 compose:speech-mark	俺もつい探してしまった……	나도 무심코 찾아버렸다……	keep	compose
 compose:speech-mark	開いたー！	열었어~!	fix	compose
 compose:speech-mark	今度は間に合った～	이번에는 늦지 않았다~	keep	compose
-compose:speech-mark	うそ！気づかれた！？	거짓말! 눈치채졌어!?	fix	compose
+compose:speech-mark	うそ！気づかれた！？	거짓말! 들켰어!?	fix	compose
 compose:speech-mark	「違う！」	「아니야!」	fix	compose
 compose:speech-mark	「寒い！」	「추워!」	fix	compose
 compose:speech-mark	ミドリからその後レスあったー？	미도리에서 그 후 댓글 있었어~?	fix	compose
