@@ -282,6 +282,30 @@ cx:not-even:10	GRM-3451	&&4 S+0== "なさそう" S-1== "でも" ||2 P-2== "1**" 
 cx:not-even:20	GRM-3451	&&3 S+0== "なさそう" Y-1== "R것도" D+0== "R%B3@"	set-target "아닌 것 %B3@"	待っているわけでもなさそう 기다리고 있는 것도 아닌 것 같다
 //= swift-write	after Select 158	さらさらと before 書く writes quickly and smoothly, 술술 (さらさらと書く 술술 쓴다), not the 찰랑찰랑 of hair.
 cx:swift-write:10	LEX-4000	&&2 S+0== "さらさらと" ||3 S+1== "L書" S+1== "Lかく" S+1== "Lしたため"	set-target "술술"	さらさらと書く 술술 쓴다
+//= novel-fixes	after Select 159	Misreadings the web novel examples showed in words split across a reading: the ある of ある種 that もある took (それもある種の 그것도 일종의), the の after 当然といえば当然 (당연하다면 당연한 이야기), and the あり得る of でもあり得る (무슨 색이라도 있을 수 있다).
+cx:novel-fixes:10	LEX-4000	&&2 S+0== "種" S-1== "もあ"	set-target "일종" set-target@-1 "" set-ending@-1 "" append-target@-2 "도"	それもある種のお約束 그것도 일종의 약속
+cx:novel-fixes:20	LEX-4000	&&2 S+0== "の" S-1== "当然といえば当然"	set-target " "	当然といえば当然の話 당연하다면 당연한 이야기
+cx:novel-fixes:30	LEX-4000	&&2 S+0== "得" S-1== "でもあ"	set-target "있을 수 &HN@" set-target@-1 "" set-ending@-1 "" append-target@-2 "(이)라도"	何色の髪でもあり得る 무슨 색의 머리카락이라도 있을 수 있다
+//= quote-after-comma	after QuoteTo 41	A と right after a comma and before a verb of thinking or saying quotes the clause before the comma, (이)라고 (帰りたい、と思う 돌아가고 싶다, 라고 생각한다), not (으)로.
+cx:quote-after-comma:10	GRM-3452	&&4 S+0== "と" S-1== "、" D+0== "(으)로" ||2 &&2 F+1== "verb" ||3 S+1== "L思" S+1== "L考" S+1== "L言" &&2 F+2== "verb" ||3 S+2== "L思" S+2== "L考" S+2== "L言"	set-target "(이)라고"	帰りたい、とひたすら思う 돌아가고 싶다, 라고 오로지 생각한다
+//= without	after Select 160	なし before で and a comma reads 없고 (機械類はなしで、 기계류는 없고), not 없음으로.
+cx:without:10	LEX-4007	&&3 S+0== "で" S-1== "なし" S+1== "、"	set-target "" set-target@-1 "없고"	機械類はなしで、 기계류는 없고,
+//= fresh-made	after Select 161	A verb before たて read -ㄴ 지 얼마 안 된 right before a noun is freshly made, 갓 and the past adnominal (焼きたてパン 갓 구운 빵).
+cx:fresh-made:10	LEX-4008	&&2 F+0== "verb" Y+0== "8 지 얼마 안 된"	prepend-target "갓 " set-ending "8"	焼きたてパン 갓 구운 빵
+//= looks-adj	after Select 162	そうな after a na-adjective or a noun of a state is how something looks, -한 듯한 (怪訝そうな顔 의아한 듯한 표정), not the guess -ㄹ 것 같은 a verb takes (降りそうな 내릴 것 같은).
+cx:looks-adj:10	GRM-3453	&&3 U+0== "そうな" Y+0== "3 것 같은" !1 P+0== "4**"	set-ending "4 듯한"	怪訝そうな顔 의아한 듯한 표정
+//= no-time	after Select 163	間 right after a verb before もなく or もない leaves no time, 새 (恐怖を覚える間もなく 공포를 느낄 새도 없이), not 동안.
+cx:no-time:10	LEX-4009	&&3 F+0== "verb" U+0== "R間" S+1== "も"	set-ending "3 새"	覚える間もなく 느낄 새도 없이
+//= most-of	after Select 164	多く right after その before は, が, を or の is most of them, 대부분 (その多くは 그 대부분은), not 많게.
+cx:most-of:10	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くは"	set-target@-1 "그 대부분은" set-target "" set-ending ""	その多くは 그 대부분은
+cx:most-of:20	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くが"	set-target@-1 "그 대부분이" set-target "" set-ending ""	その多くが 그 대부분이
+cx:most-of:30	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くを"	set-target@-1 "그 대부분을" set-target "" set-ending ""	その多くを 그 대부분을
+cx:most-of:40	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くの"	set-target@-1 "그 대부분의" set-target "" set-ending ""	その多くの 그 대부분의
+//= dislike-of	after Select 165	嫌い before な and a noun is what someone dislikes, 싫어하는 (ミーアの嫌いなもの 미아가 싫어하는 것), not the adjective 싫은.
+cx:dislike-of:5	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "が"	set-target "싫어하&AV@" set-ending "4는" set-target@-1 "(을)를"	運動が嫌いな人 운동을 싫어하는 사람
+cx:dislike-of:10	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" !1 ||2 S-1== "っ" S-1== "大"	set-target "싫어하&AV@" set-ending "4는"	嫌いな野菜 싫어하는 야채
+//= line-toiu	after Select 166	という at the start of a line takes up what came before, 라는 (という夢を見た 라는 꿈을 꾸었다), not 그렇다고 하는.
+cx:line-toiu:10	GRM-3454	&&5 S+0== "とい" D+0== "그렇다고 &AV@" U+0== "う" !1 F-1== "exists" !1 ||3 S+1== "事" S+1== "こと" S+1== "Lか"	set-target "라고 &AV@"	という夢を見た 라는 꿈을 꾸었다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
 cx:excuse-me:10	LEX-4006	&&2 S+0== "すみません" S-1== "ちょっと"	set-target "실례합니다" set-target@-1 "잠깐"	ちょっとすみません 잠깐 실례합니다
 cx:excuse-me:30	LEX-4006	&&4 S+0== "すみません" S+1== "、" S+2== "ちょっと" ||7 S+3== "Lいい" S+3== "い" S+3== "Lよろし" S+3== "L聞" S+3== "L伺" S+3== "Lお時間" S+3== "Lお尋ね"	set-target "실례합니다"	すみません、ちょっといいですか 실례합니다, 잠깐 괜찮습니까

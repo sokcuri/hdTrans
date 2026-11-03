@@ -201,7 +201,7 @@ cx:mimetic-adnominal:390	同時にふんわりしている。	!rule:cx:mimetic-a
 cx:mimetic-adnominal:390	少しふんわりした。	!rule:cx:mimetic-adnominal:390	keep	rewrites
 cx:mimetic-adnominal:400	すぐにまた元のふんわりとした様子に戻った。	곧바로 또 원래의 부드러운 모습으로 돌아갔다.	fix	rewrites
 cx:mimetic-adnominal:400	少女はその長くふんわりとした金色の髪を揺らしながら	소녀는 그 길고 부드러운 금빛 머리카락을 흔들면서	fix	rewrites
-cx:mimetic-adnominal:400	暖かそうなふんわりとした白のマフラー。	따뜻할 것 같은 부드러운 흰색의 머플러.	fix	rewrites
+cx:mimetic-adnominal:400	暖かそうなふんわりとした白のマフラー。	따뜻한 듯한 부드러운 흰색의 머플러.	fix	rewrites
 cx:mimetic-adnominal:400	雰囲気がふんわりとした。	!rule:cx:mimetic-adnominal:400	keep	rewrites
 cx:mimetic-adnominal:410	それはぼんやりとした輪郭で	그것은 흐릿한 윤곽으로	fix	rewrites
 cx:mimetic-adnominal:410	ぼんやりとした光が見えた。	흐릿한 빛이 보였다.	fix	rewrites

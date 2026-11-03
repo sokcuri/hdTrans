@@ -12,7 +12,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	id
 ボストンバッグ	보스턴백	N110			GN			LEX-2910	loanword-and-phrase-glosses:9
 プードル	푸들	N130			GN			LEX-2910	loanword-and-phrase-glosses:10
 フォークロア	포클로어	N110			GN			LEX-2910	loanword-and-phrase-glosses:11
-マイナーな	마이너한	N110			GN			LEX-2910	loanword-and-phrase-glosses:12
+マイナーな	마이너한	N110		Nn	GN			LEX-2910	loanword-and-phrase-glosses:12
 ハーモニック	하모닉	N110			GN			LEX-2910	loanword-and-phrase-glosses:13
 トムヤム	똠얌	N110			GN			LEX-2910	loanword-and-phrase-glosses:14
 スキーモービル	스키모빌	N110			GN			LEX-2910	loanword-and-phrase-glosses:15
