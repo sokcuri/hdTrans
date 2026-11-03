@@ -9,5 +9,5 @@ sound:after-interjection	ちょっと、ちょっと、いいとこに来たわ�
 sound:after-interjection	ふっんー、さて、じゃあ、行こうかなー	has:훗음, 자, 그럼,	fix	sound
 sound:after-interjection	ほら、ほら、ね？」	has:자, 자, 그렇지?	fix	sound
 sound:after-interjection	「え？ 装備ですか？ 装備は―――まぁ、ね、うんうん」	has:뭐, 네, 응응	keep	sound
-sound:after-interjection	「さ、さ、三分」	「자,, 3분」	keep	sound
+sound:after-interjection	「さ、さ、三分」	has:3분	keep	sound
 sound:after-interjection	「うん、で、さっきの話だけど」	has:응, 그리고,	keep	sound
