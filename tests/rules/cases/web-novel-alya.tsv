@@ -1,0 +1,100 @@
+# 규칙: LEX-4035
+rule	input	expected	kind	layer
+cx:novel-fixes-2:1300	結果、リスニングだけならほとんどネイティブレベルで出来るようになってしまった。	has:할 수 있게 되어버렸다	fix	rewrites
+cx:novel-fixes-2:1300	この箱は木で出来ている。	!rule:cx:novel-fixes-2:1300	keep	rewrites
+cx:novel-fixes-2:1310	アーリャは視線を前に向け直しながらボソッと言った。	has:시선을 앞으로	fix	rewrites
+cx:novel-fixes-2:1310	敵を前に逃げ出した。	!rule:cx:novel-fixes-2:1310	keep	rewrites
+cx:novel-fixes-2:1330	辛辣な口調でそう言い放ち、ハアッとこれ見よがしに溜息を吐く。	has:그렇게 내뱉어	fix	rewrites
+cx:novel-fixes-2:1330	そう言って笑った。	!rule:cx:novel-fixes-2:1330	keep	rewrites
+cx:novel-fixes-2:1340	すると、寄せた眉根に呆れを滲ませながら、隣の少女が振り返った。	has:찌푸린 미간에	fix	rewrites
+cx:novel-fixes-2:1340	机を寄せた。	!rule:cx:novel-fixes-2:1340	keep	rewrites
+cx:novel-fixes-2:1350	すると、寄せた眉根に呆れを滲ませながら、隣の少女が振り返った。	has:어이없음을 드러내면서	fix	rewrites
+cx:novel-fixes-2:1350	彼の態度に呆れた。	!rule:cx:novel-fixes-2:1350	keep	rewrites
+cx:novel-fixes-2:1355	少女は目に涙を滲ませ大きく頷いた。	has:눈물을 글썽이	fix	rewrites
+cx:novel-fixes-2:1355	声に苛立ちを滲ませた。	!rule:cx:novel-fixes-2:1355	keep	rewrites
+cx:novel-fixes-2:1360	「あら、橘くんじゃない。」	has:타치바나 군이잖아	fix	rewrites
+cx:novel-fixes-2:1360	翔くんじゃない！	!rule:cx:novel-fixes-2:1360	keep	rewrites
+cx:novel-fixes-2:1370	「いや、さっきのあれ。一応告白のつもりだったんだけど……」	has:조금 전의 그거.	fix	rewrites
+cx:novel-fixes-2:1370	そこにあれ。	!rule:cx:novel-fixes-2:1370	keep	rewrites
+cx:novel-fixes-2:1380	「いや、さっきのあれ。一応告白のつもりだったんだけど……」	has:고백으로 한 것이었	fix	rewrites
+cx:novel-fixes-2:1380	別にＭのつもりはなかったが、	!rule:cx:novel-fixes-2:1380	keep	rewrites
+cx:novel-fixes-2:1390	「そりゃ、確かに俺は忘れっぽいけどよ……好きな女の子が見せてくれたもののことは、流石に忘れねぇよ」	has:보여 준 건,	fix	rewrites
+cx:novel-fixes-2:1390	見せてくれたものの、よく分からなかった。	!rule:cx:novel-fixes-2:1390	keep	rewrites
+cx:novel-fixes-2:1400	「なんでって……お前に会いに来たに決まってるだろ？」	has:어째서냐니	fix	rewrites
+cx:novel-fixes-2:1400	彼はなんでって聞いた。	!rule:cx:novel-fixes-2:1400	keep	rewrites
+cx:novel-fixes-2:1410	私は彼の連絡先を知らないことに気付いていなかったのだ。	has:모르는 것을 깨닫지	fix	rewrites
+cx:novel-fixes-2:1410	そのことに気付いた。	!rule:cx:novel-fixes-2:1410	keep	rewrites
+cx:novel-fixes-2:1420	※本文中のロシア語は翻訳ソフト頼りなので、かなりいい加減だと思います。	has:번역소프트에 의지하므로	fix	rewrites
+cx:novel-fixes-2:1420	彼は頼りになる。	!rule:cx:novel-fixes-2:1420	keep	rewrites
+cx:novel-fixes-2:1430	ロシア語ペラペラのハイスペックな方がいらっしゃいましたら	has:러시아어 유창한	fix	rewrites
+cx:novel-fixes-2:1430	ペラペラ喋る。	!rule:cx:novel-fixes-2:1430	keep	rewrites
+cx:novel-fixes-2:1440	「バカァァァァーーーーー！！！」	has:「바보오!!!」	fix	rewrites
+cx:novel-fixes-2:1440	「バカ！」	!rule:cx:novel-fixes-2:1440	keep	rewrites
+cx:novel-fixes-2:1450	なんでかと言うと、俺の父方のじいちゃんがすんごいロシアかぶれだったから。	has:러시아 덕후였으니까	fix	rewrites
+cx:novel-fixes-2:1450	肌がかぶれた。	!rule:cx:novel-fixes-2:1450	keep	rewrites
+cx:novel-fixes-2:1500	「ホントに気を付けてたらこんなに忘れ物しないでしょ」	has:물건을 두고 오지 않	fix	rewrites
+cx:novel-fixes-2:1500	忘れ物が多い。	!rule:cx:novel-fixes-2:1500	keep	rewrites
+cx:novel-fixes-2:1510	俺の小声の叫びに、アーリャはフッと小馬鹿にした笑みを浮かべる。	has:피식	fix	rewrites
+cx:novel-fixes-2:1510	フッと息を吐いた。	!rule:cx:novel-fixes-2:1510	keep	rewrites
+cx:novel-fixes-2:1520	そのまま授業が始まり、俺達は黒板に向き直った。	has:칠판 쪽으로 돌아섰다	fix	rewrites
+cx:novel-fixes-2:1520	彼女はこちらに向き直った。	!rule:cx:novel-fixes-2:1520	keep	rewrites
+cx:novel-fixes-2:1525	彼女はこちらに向き直った。	has:이쪽으로 돌아섰다	fix	rewrites
+cx:novel-fixes-2:1525	俺達は黒板に向き直った。	!rule:cx:novel-fixes-2:1525	keep	rewrites
+cx:novel-fixes-2:1530	って思ってるのがガンガンに伝わってくる。	has:마구 전해져 온다	fix	rewrites
+cx:novel-fixes-2:1530	頭がガンガンする。	!rule:cx:novel-fixes-2:1530	keep	rewrites
+cx:novel-fixes-2:1540	その間も、頬に彼女の視線をバリバリ感じる。	has:따갑게 느낀다	fix	rewrites
+cx:novel-fixes-2:1540	バリバリ働く。	!rule:cx:novel-fixes-2:1540	keep	rewrites
+cx:novel-fixes-2:1550	半分くらいは眉唾だったっぽいけど。	has:믿기 어려운 이야기	fix	rewrites
+cx:novel-fixes-2:1550	ネットの広告なんて眉唾モノと思ってたけど	!rule:cx:novel-fixes-2:1550	keep	rewrites
+cx:novel-fixes-2:1555	ネットの広告なんて眉唾モノと思ってたけど	has:믿기 어려운 것이라고	fix	rewrites
+cx:novel-fixes-2:1555	半分くらいは眉唾だったっぽいけど。	!rule:cx:novel-fixes-2:1555	keep	rewrites
+cx:novel-fixes-2:1560	それにクラスの女子が食い付き、あっという間にアーリャ呼びが定着した。	has:아랴라는 호칭이	fix	rewrites
+cx:novel-fixes-2:1560	呼び出しを受けた。	!rule:cx:novel-fixes-2:1560	keep	rewrites
+cx:novel-fixes-2:1570	すっかりカミングアウトする機会を逸してしまった。	has:기회를 놓쳐버렸다	fix	rewrites
+cx:novel-fixes-2:1570	常軌を逸した行動だ。	!rule:cx:novel-fixes-2:1570	keep	rewrites
+cx:novel-fixes-2:1580	先生に名指しされ、慌てて頭をフル回転させるも……	has:선생님에게 지목당해	fix	rewrites
+cx:novel-fixes-2:1580	先生に注意された。	!rule:cx:novel-fixes-2:1580	keep	rewrites
+cx:novel-fixes-2:1590	内心で思いっ切りツッコミながらも、俺はポーカーフェイスで前を向く。	has:태클을 걸면서도	fix	rewrites
+cx:novel-fixes-2:1590	笑いながらも頷いた。	!rule:cx:novel-fixes-2:1590	keep	rewrites
+cx:novel-fixes-2:1600	妙に上手いこと特徴捉えてるんで、一発で分かってしまった。	has:묘하게 잘 특징	fix	rewrites
+cx:novel-fixes-2:1600	学はないが、人当たりが良く、商売上手なことから、ダニエルは重用していた。	!rule:cx:novel-fixes-2:1600	keep	rewrites
+cx:novel-fixes-2:1610	妙に上手いこと特徴捉えてるんで、一発で分かってしまった。	has:포착하고 있어서,	fix	rewrites
+cx:novel-fixes-2:1610	タナ子に呼び出されてるんでしょ？	!rule:cx:novel-fixes-2:1610	keep	rewrites
+cx:novel-fixes-2:1620	ご丁寧に鼻水まで垂らしてる辺り完全にイジってるが。	has:늘어뜨리고 있는 걸 보면	fix	rewrites
+cx:novel-fixes-2:1620	この辺りは静かだ。	!rule:cx:novel-fixes-2:1620	keep	rewrites
+cx:novel-fixes-2:1630	思いっ切り筆圧強めで書き殴ってるから	has:필압 세게	fix	rewrites
+cx:novel-fixes-2:1630	少し強めに押した。	!rule:cx:novel-fixes-2:1630	keep	rewrites
+cx:novel-fixes-2:1640	久しぶりに会った友人のお母さんと軽く言葉を交わし、家路を辿る。	has:집으로 향한다	fix	rewrites
+cx:novel-fixes-2:1640	記憶を辿る。	!rule:cx:novel-fixes-2:1640	keep	rewrites
+cx:novel-fixes-2:1650	結果、棒立ちのままよく分からない返しをしてしまう。	has:멍하니 선 채	fix	rewrites
+cx:novel-fixes-2:1650	そのままにしておく。	!rule:cx:novel-fixes-2:1650	keep	rewrites
+cx:novel-fixes-2:1660	結果、棒立ちのままよく分からない返しをしてしまう。	has:대답을 해버린다	fix	rewrites
+cx:novel-fixes-2:1660	恩返しをしたい。	!rule:cx:novel-fixes-2:1660	keep	rewrites
+cx:novel-fixes-2:1670	そんなこと気にもならない。	has:신경 쓰이지도 않는다	fix	rewrites
+cx:novel-fixes-2:1670	そんなこと気にもならなかった。	!rule:cx:novel-fixes-2:1670	keep	rewrites
+cx:novel-fixes-2:1675	そんなこと気にもならなかった。	has:신경 쓰이지도 않았다	fix	rewrites
+cx:novel-fixes-2:1675	気にするな。	!rule:cx:novel-fixes-2:1675	keep	rewrites
+cx:novel-fixes-2:1680	……いや、なんかやたら間抜け面で描かれてるし	has:얼간이 같은 얼굴로	fix	rewrites
+cx:novel-fixes-2:1680	公園で遊ぶ。	!rule:cx:novel-fixes-2:1680	keep	rewrites
+cx:novel-fixes-2:1690	このヤロウ……誰のせいだと思ってやがる。	has:이 자식……	fix	rewrites
+cx:novel-fixes-2:1690	フタタビ…アノアクムヲ…ミセテヤロウ…イマ…ココデッ！	!rule:cx:novel-fixes-2:1690	keep	rewrites
+dict:w:31079	声に苛立ちを滲ませた。	has:짜증을 드러냈다	fix	lookup
+dict:w:31080	アーリャは視線を前に向け直しながらボソッと言った。	has:앞으로 다시 돌리면서	fix	lookup
+dict:w:31081	突如として響き渡ったロシア語に、私は目を瞬かせた。	has:눈을 깜박였다	fix	lookup
+dict:w:31082	日本でお世話になった人達に、満足にお別れを告げることも出来なかった。	has:제대로 작별을	fix	lookup
+dict:w:31086	先生に注意され、小芝居はやめにする。	has:연극은 그만두기로	fix	lookup
+dict:w:31087	今では、ロシア語でデレた直後、隠し切れないニヤケ顔を晒す彼女。	has:히죽거리는 얼굴을	fix	lookup
+dict:w:31088	……いや、なんかやたら間抜け面で描かれてるし	has:얼간이 같은 얼굴	fix	lookup
+dict:jisjk:148867	ロシアと日本の文化の違いについてはじいちゃんに色々と吹き込まれたおかげで、	has:주입받은 덕분에	fix	lookup
+dict:jisjk:3695	後はまあ……地道な聞き込みだな	has:꾸준한 탐문	fix	lookup
+sense:akeru-end	でも、冬休みが明けて3学期が始まった時。	has:겨울 방학이 끝나	fix	senses
+sense:akeru-end	夜が明けた。	has:날이 샜다	keep	senses
+pattern:kara-dake	「それに、俺がマヌケって言ったのはボスがいないことに気付くのが遅かったからだけじゃないぞ」	has:늦었기 때문만이 아니야	fix	builtin-pattern
+pattern:kara-dake	好きだからだけじゃない。	has:좋아하기 때문만이 아니다	fix	builtin-pattern
+pattern:kara-dake	遅かったからだ。	has:늦었기 때문이다	keep	builtin-pattern
+phrase:何様のつもり	お前こそ何様のつもりだ！	has:뭐라도 된 줄 아는 거야!	fix	builtin-phrase
+cx:novel-fixes-2:1695	「ヒドッ！」	has:「너무해!」	fix	rewrites
+cx:novel-fixes-2:1695	ひどい！	!rule:cx:novel-fixes-2:1695	keep	rewrites
+dict:jisjk:43981	突然ウラジオストクに住む父方の祖父母が交通事故に遭ったという知らせが届いた。	has:블라디보스토크에	fix	lookup
+cx:novel-fixes-2:1700	タナ子に呼び出されてるんでしょ？	has:불려 가고 있는 거지?	fix	rewrites
+cx:novel-fixes-2:1700	食べるんでしょ？	!rule:cx:novel-fixes-2:1700	keep	rewrites

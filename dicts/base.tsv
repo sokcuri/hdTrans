@@ -50293,7 +50293,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ウライヤ	우라이야	I130	QCTVPl		GN				jisjk:276074		
 ウラシマ	우라시마	N130			GN				jisjk:97801		
 ウラジ	옷의 안감	N110			GN				jisjk:97800		
-ウラジオストク	블라디보스토그	N110			GN				jisjk:43981		
+ウラジオストク	블라디보스토크	N110			GN				jisjk:43981		
 ウラジオストック	블라디보스토크	N110	QCT	Qq	GN				jisjk:43982		
 ウラジロ	풀고사리	N130	QAL		GN				jisjk:103852		
 ウラス	우라스	N130	QPN		GN				jisjk:367081		
@@ -155374,7 +155374,7 @@ ttt	ttt	K110			GN				jisjk:201744
 吹き替え	더빙	N110			GN				jisjk:369250		
 吹き込	불어&AH@	M425			GN	1022	||1 &&3 P-1== "2**" S-2== "風" P-2== "1**"	吹き込를 風와 조사 뒤에서 불어오다로 고른다. (미발동: rare-word)	jisjk:115302		
 吹き込	들이&AO@	M425			GN	1023	||1 &&3 P-1== "2**" S-2== "雨" P-2== "1**"	吹き込가 雨와 조사 뒤에 오면 들이치다를 고른다. (미발동: rare-word)	jisjk:115303		
-吹き込まれ	송풍&C6@	M427			GN				jisjk:148867		
+吹き込まれ	주입&FD@	M427			GN				jisjk:148867		
 吹き込まれ	녹음&AV@	M447	UHr		GN	3340	||2 ||2 S+1== "アルバム" S+1== "曲" ||2 S+2== "アルバム" S+2== "曲"	뒤 두 단어 안에 アルバム 또는 曲이 있으면 吹き込まれ를 녹음하다로 고른다. (미발동: rare-context)	jisjk:342826		
 吹き返	되살&AA@	M433	VBp		GN				jisjk:95509		
 吹き返	되날&AA@	M453			GN				jisjk:95510		
@@ -162292,7 +162292,7 @@ ttt	ttt	K110			GN				jisjk:201744
 地質調査	지질 조사	N110			GN				jisjk:242633		
 地質調査所	지질 조사소	N110	VBl		GN				jisjk:242634		
 地軸	지축	N110			GN				jisjk:34610		
-地道	충실%A1@	G8U0			GN				jisjk:3695		
+地道	꾸준%A1@	G8U0			GN				jisjk:3695		
 地道に	착실하게	E300			GN				jisjk:123229		
 地酒	토산술	N110	VFd		GN				jisjk:34604		
 地金	지금	N110	VMo		GN				jisjk:34548		
