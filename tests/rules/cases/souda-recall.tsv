@@ -41,7 +41,7 @@ cx:souda-recall:30	提督…戴いたお菓子…そうだ、お茶を入れま�
 cx:souda-recall:30	元気がないときゃ…そうだ！	rule:cx:souda-recall:30=%Dn@	current	rewrites
 # 맞는 출력: ……그래, 그 폭발에 나는……그걸로 의식을……, 그런가.
 cx:souda-recall:30	……そうだ、あの爆発に俺は……あれで意識を……、そうか。	……맞다, 그 폭발에 나는……저것으로 의식을……, 그런가.	current	rewrites
-cx:souda-recall:30	「なるさ……そうだ、ほら、これ」	「되고 말이야……맞다, 자, 이거」	fix	rewrites
+cx:souda-recall:30	「なるさ……そうだ、ほら、これ」	「되지……맞다, 자, 이거」	fix	rewrites
 cx:souda-recall:30	「みんなと一緒に……そうだ、あの子も誘うか？」	「모두와 함께……맞다, 그 아이도 부를까?」	fix	rewrites
 cx:souda-recall:30	……そうだ、ボクは2階に上がっててもいい？	……맞다, 나는 2층에 올라도 돼?	fix	rewrites
 cx:souda-recall:30	昨日の敵は今日の……そうだ、日本語でなんと言ったかなぁ……	rule:cx:souda-recall:30=%Dn@	fix	rewrites

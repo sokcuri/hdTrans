@@ -377,6 +377,19 @@ cx:novel-fixes-2:220	LEX-4024	&&3 S+0== "の際" F-1== "verb" Y-1== "1고"	set-e
 cx:novel-fixes-2:230	LEX-4024	&&4 S+0== "よく分か" Y+0== "1지 않아" S+1== "が" S+2== "、"	set-target "잘 &LS@" set-ending "1지만" set-target@+1 ""	よく分からんが、 잘 모르지만,
 cx:novel-fixes-2:235	LEX-4024	&&3 S+0== "よく分か" Y+0== "1지 않아" S+1== "が"	set-target "잘 &LS@" set-ending "1지만" set-target@+1 " "	よく分からんが手伝え 잘 모르지만 도와라
 cx:novel-fixes-2:240	LEX-4024	&&2 S+0== "の" ||2 S-1== "命懸け" S-1== "命賭け"	set-target@-1 "목숨을 건" set-target " "	命懸けの戦い 목숨을 건 싸움
+cx:novel-fixes-2:250	LEX-4025	&&4 S+0== "そう言った" D+0== "그런" ||4 S-1== "が" S-1== "は" S-1== "も" S-1== "、" ||2 S+1== "L時" S+1== "Lとき"	set-target "그렇게 말했을"	俺がそう言った時 내가 그렇게 말했을 때
+cx:novel-fixes-2:255	LEX-4025	&&3 S+0== "そう言った" D+0== "그런" ||4 S-1== "が" S-1== "は" S-1== "も" S-1== "、"	set-target "그렇게 말한"	見回しながら、そう言った先生 둘러보면서, 그렇게 말한 선생님
+cx:novel-fixes-2:256	LEX-4025	&&4 S+0== "でして" D+0== "(으)로 하고" T+0== "L、" P-1== "1**"	set-target "(이)라서"	同じ大学でして、 같은 대학이라서,
+cx:novel-fixes-2:260	LEX-4025	&&4 S+0== "しま" D+0== "끝&A6@" S-1== "始めて" F-2== "verb"	set-target "버&AA@" set-ending@-2 "1기"	からかい始めてしまった 놀리기 시작해 버렸다
+cx:novel-fixes-2:270	LEX-4025	&&3 S+0== "と" D+0== "(와)과" S-1== "やめとけ"	set-target@-1 "그만두라고" set-target " "	やめとけと言われる 그만두라고 듣는다
+cx:novel-fixes-2:280	LEX-4025	&&3 ||3 S+0== "くそ" S+0== "クソ" S+0== "糞" ||2 S+1== "L、" S+1== "L！" !1 F-1== "conjugating"	set-target "젠장"	くそ、田村め 젠장, 타무라 녀석
+cx:novel-fixes-2:300	LEX-4025	&&3 S+0== "の" S-1== "どう" S+1== "とい"	set-target@-1 "어쩌고" set-target "" set-target@+1 " &AV@"	彼女がどうのというのは 여자친구가 어쩌고 하는 건
+cx:novel-fixes-2:310	LEX-4025	&&3 S+0== "と" D+0== "(와)과" S+1== "L名高"	set-target "(으)로"	マドンナと名高い 마돈나로 유명한
+cx:novel-fixes-2:320	LEX-4025	&&3 S+0== "出来" Y+0== "L8" ||9 S+1== "L後輩" S+1== "L人" S+1== "L男" S+1== "L女" S+1== "L嫁" S+1== "L息子" S+1== "L娘" S+1== "L部下" S+1== "L弟子"	set-target "됨됨이가 &C6@"	出来た後輩だ 됨됨이가 된 후배다
+cx:novel-fixes-2:330	LEX-4025	&&2 S+0== "彼女" ||2 S+1== "Lいな" S+1== "Lいね"	set-target "여자친구"	彼女いないけど 여자친구 없지만
+cx:novel-fixes-2:332	LEX-4025	&&3 S+0== "彼女" S+1== "を" S+2== "L作"	set-target "여자친구"	彼女を作る 여자친구를 만든다
+cx:novel-fixes-2:334	LEX-4025	&&4 S+0== "彼女" ||3 S+1== "が" S+1== "は" S+1== "も" S+2== "Lでき" ||3 I+2== "Lできた" I+2== "Lできて" I+2== "Lできま"	set-target "여자친구"	彼女ができた 여자친구가 생겼다
+cx:novel-fixes-2:340	LEX-4025	&&3 F+0== "verb" Y+0== "1고 말이야" ||2 F+0== "sentence-end" S+1== "00！!。」"	set-ending "1지"	血くらい出るさ！ 피 정도 나오지!
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면

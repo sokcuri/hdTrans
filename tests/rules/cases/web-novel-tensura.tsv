@@ -1,0 +1,37 @@
+# 규칙: LEX-4025
+rule	input	expected	kind	layer
+cx:novel-fixes-2:332	彼女を作ろうと努力した事もあった	has:여자친구를 만들려고	fix	rewrites
+cx:novel-fixes-2:332	今年こそは彼女を作る。	has:여자친구를 만든다	fix	rewrites
+cx:novel-fixes-2:332	彼女が作ったケーキを食べた	그녀가 만든 케이크를 먹었다	keep	rewrites
+cx:novel-fixes-2:334	あと彼女ができたら真っ先に報告するんだよ	has:여자친구가 생기면	fix	rewrites
+cx:novel-fixes-2:334	彼女ができることは少ない。	!rule:cx:novel-fixes-2:334	keep	rewrites
+cx:novel-fixes-2:330	どこにも彼女がいない。	has:그녀가 없다	keep	rewrites
+sense:流れる	変な噂でも流れてるんですか？	has:소문이라도 돕니까	fix	senses
+sense:流れる	川が流れる。	강이 흐른다.	keep	senses
+sense:あげる	叫び声をあげながら駆け寄ってくる。	has:비명을 지르면서	fix	senses
+sense:あげる	プレゼントをあげる。	선물을 준다.	keep	senses
+cx:novel-fixes-2:256	田村はたまたま同じ大学でして、	has:같은 대학이라서,	fix	rewrites
+cx:novel-fixes-2:256	家以外の場所でしているの	!rule:cx:novel-fixes-2:256	keep	rewrites
+cx:novel-fixes-2:255	部室を見回しながら、そう言った先生。	has:그렇게 말한 선생님	fix	rewrites
+cx:novel-fixes-2:255	そう言った問題は多い。	!rule:cx:novel-fixes-2:255	keep	rewrites
+phrase:かなわんな	かなわんな。	못 견디겠네.	fix	builtin-phrase
+cx:novel-fixes-2:250	俺がそう言った時、	내가 그렇게 말했을 때,	fix	rewrites
+cx:novel-fixes-2:250	そう言った問題は多い。	!rule:cx:novel-fixes-2:250	keep	rewrites
+cx:novel-fixes-2:260	ついからかい始めてしまった。	has:놀리기 시작해 버렸다	fix	rewrites
+cx:novel-fixes-2:260	しまってある。	!rule:cx:novel-fixes-2:260	keep	rewrites
+cx:novel-fixes-2:270	絶対やめとけとよく言われる。	has:그만두라고 자주	fix	rewrites
+cx:novel-fixes-2:270	やめとけ。	!rule:cx:novel-fixes-2:270	keep	rewrites
+cx:novel-fixes-2:280	くそ、田村め！	젠장, 타무라 녀석!	fix	rewrites
+cx:novel-fixes-2:280	くそ、なんでだ！	has:젠장,	fix	rewrites
+cx:novel-fixes-2:280	クソ！なんでだ！	has:빌어먹을!	keep	rewrites
+cx:novel-fixes-2:280	くそまずい料理	!rule:cx:novel-fixes-2:280	keep	rewrites
+cx:novel-fixes-2:300	この年になると彼女がどうのというのは正直面倒くさい。	has:어쩌고 하는 것은	fix	rewrites
+cx:novel-fixes-2:300	どうの	!rule:cx:novel-fixes-2:300	keep	rewrites
+cx:novel-fixes-2:310	会社のマドンナと名高い、受付の沢渡さん	has:마돈나로 유명한	fix	rewrites
+cx:novel-fixes-2:310	友達と遊ぶ。	!rule:cx:novel-fixes-2:310	keep	rewrites
+cx:novel-fixes-2:320	笑いながら取りなす田村。出来た後輩だ。	has:됨됨이가 된 후배다	fix	rewrites
+cx:novel-fixes-2:320	料理が出来た。	!rule:cx:novel-fixes-2:320	keep	rewrites
+cx:novel-fixes-2:330	生まれてこのかた彼女いないけど	has:여자친구 없	fix	rewrites
+cx:novel-fixes-2:330	彼女が来た。	!rule:cx:novel-fixes-2:330	keep	rewrites
+cx:novel-fixes-2:340	俺だって人間だ。刺されたら血くらい出るさ！	has:피 정도 나오지!	fix	rewrites
+cx:novel-fixes-2:340	それでさ、聞いてよ。	!rule:cx:novel-fixes-2:340	keep	rewrites
