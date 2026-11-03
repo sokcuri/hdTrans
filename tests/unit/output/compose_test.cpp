@@ -264,9 +264,9 @@ HD_TEST(compose_native_counts) {
         {{{"一発", "110", "", "한 방"}, {"目", "110", "Ct", "째"}}, {2}, "첫 번째."},
         {{{"一枚", "110", "", "한 장"}, {"の", "200", "", "의"}}, {2}, "한 장의."},
         {{{"一日", "110", "", "하루"}}, {1}, "하루."},
-        // 체 counts with Sino-Korean numerals.
-        {{{"八", "110", "NjNd", "8"}, {"体", "110", "Ct", "체"}}, {2}, "8체."},
-        {{{"数", "110", "NjNd", "몇"}, {"体", "110", "Ct", "체"}}, {2}, "몇 체."},
+        // 体 after a kanji numeral counts with native numerals (NUM-30).
+        {{{"八", "110", "NjNd", "8"}, {"体", "110", "Ct", "구"}}, {2}, "여덟 구."},
+        {{{"数", "110", "NjNd", "몇"}, {"体", "110", "Ct", "구"}}, {2}, "몇 구."},
         {{{"二十", "110", "NjNd", "20"}, {"匹", "110", "Ct", "마리"}}, {2}, "20마리."},
         // A number written in Hangul stands apart from its counter; 万 after digits joins them.
         {{{"百", "110", "OnNj", "백"}, {"回", "110", "Ct", "번"}}, {2}, "백 번."},
@@ -679,4 +679,14 @@ HD_TEST(compose_sign_led_word_after_noun) {
         composer.Compose(items, tokens, 0, 2, {}, settings, families, result);
         HD_CHECK_EQ(String(result), c.expected);
     }
+}
+
+// The negative auxiliary 않다 of a verb says the verb's present before 다고 (놓치지는 않는다고), but keeps
+// its adjective form after a verb read as a state (할 수 있지는 않다고).
+HD_TEST(compose_negative_auxiliary_after_state) {
+    const CompositionCase cases[] = {
+        {{{"逃が", "433", "", "놓&AO@", "1지는"}, {"しな", "7N0", "XnSkJsAv", "$DH@", "1다고"}}, {1, 2}, "놓치지는 않는다고."},
+        {{{"でき", "4U7", "Ma", "할 수 &HN@", "1지는"}, {"しな", "7N0", "XnSkJsAv", "$DH@", "1다고"}}, {1, 2}, "할 수 있지는 않다고."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
 }

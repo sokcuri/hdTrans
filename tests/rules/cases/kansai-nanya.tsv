@@ -1,0 +1,19 @@
+# 규칙: GRM-3366
+rule	input	expected	kind	layer
+normalize:kansai-nanya	なんや。	뭐야.	fix	normalize
+normalize:kansai-nanya	なんや、お前か。	뭐야, 너인가.	fix	normalize
+normalize:kansai-nanya	「ん？　なんや、知り合いか？」	「응? 뭐야, 아는 사람이야?」	fix	normalize
+normalize:kansai-nanya	「おう、アラタ先生。なんや、下が騒がしいんやけど」	has:뭐야, 아래가	fix	normalize
+normalize:kansai-nanya	なんやねん！	뭐야!	fix	normalize
+normalize:kansai-nanya	なんやなんや？	뭐야 뭐야?	fix	normalize
+normalize:kansai-nanya	何や、これ、お返し？	뭐냐, 이것, 답례?	fix	normalize
+normalize:kansai-nanya	なんやろ。	뭘까.	fix	normalize
+normalize:kansai-nanya	なんやろ？	뭘까?	fix	normalize
+normalize:kansai-nanya	なんやそれ。	뭐야 그게.	fix	normalize
+normalize:kansai-nanya	「なんや、もう終わりか」	「뭐야, 벌써 끝인가」	fix	normalize
+normalize:kansai-nanya	なんやかんやで、自分がやっていることに気づいていたのだ。	이래저래, 자신이 하고 있는 것에 눈치채고 있었다.	keep	normalize
+normalize:kansai-nanya	ずらっと並んだケーキやらなんやらに、思わず声を漏らした。	죽 늘어선 케이크든지 무엇이든지에, 무심코 소리를 흘렸다.	keep	normalize
+normalize:kansai-nanya	なんやろか。	뭘까.	keep	normalize
+normalize:kansai-nanya	それなんや？	그거야?	keep	normalize
+normalize:kansai-nanya	ってなんでやねんっ	라고 왜이거든	keep	normalize
+normalize:kansai-nanya	なんだ、お前か。	뭐야, 너인가.	keep	normalize

@@ -1,0 +1,23 @@
+# 규칙: LEX-4032
+rule	input	expected	kind	layer
+cx:novel-fixes-2:840	「すまない、ダリヤ。婚約を破棄させてほしい」	has:미안하다, 다리야	fix	rewrites
+cx:novel-fixes-2:840	すまない。	!rule:cx:novel-fixes-2:840	keep	rewrites
+cx:novel-fixes-2:850	「午後、商業ギルドで確認しましょう。2時からでいい？」	has:2시부터면	fix	rewrites
+cx:novel-fixes-2:850	ここからでも見える。	!rule:cx:novel-fixes-2:850	keep	rewrites
+cx:novel-fixes-2:860	トビアスは額の右を指でかいていた。	has:손가락으로 긁고 있었다	fix	rewrites
+cx:novel-fixes-2:860	筆で書いた。	!rule:cx:novel-fixes-2:860	keep	rewrites
+cx:novel-fixes-2:870	最後の記憶はひどい胸の痛みだったから、心筋梗塞あたりだろう。	has:심근경색쯤일 것이다	fix	rewrites
+cx:novel-fixes-2:870	この辺りだ。	!rule:cx:novel-fixes-2:870	keep	rewrites
+cx:novel-fixes-2:880	背が高いだけで地味なダリヤとは、正反対のタイプに思える。	has:다리야와는, 정반대	fix	rewrites
+cx:novel-fixes-2:880	友情とは何か。	!rule:cx:novel-fixes-2:880	keep	rewrites
+cx:novel-fixes-2:890	居間のテーブルに向かい合わせで座り、両者とも黙り込んだ。	has:테이블에 마주 보고 앉아	fix	rewrites
+cx:novel-fixes-2:890	力を合わせて戦う。	!rule:cx:novel-fixes-2:890	keep	rewrites
+dict:w:31066	ダリヤも幼い頃から魔導具にふれ、	has:마도구에	fix	lookup
+dict:w:31067	「俺は……真実の愛をみつけたんだ」	has:진정한 사랑을	fix	lookup
+dict:w:31068	よく言えば落ち着いた、悪く言えば地味な外見である。	has:좋게 말하면	fix	lookup
+dict:w:31072	見慣れたアーモンド色の目をうるませて言った。	has:눈을 글썽여	fix	lookup
+dict:i:7800	トビアスの父が急死し、喪があけて結婚というときに	has:상을 벗어	fix	lookup
+dict:jisjk:32986	結婚のため、二人で費用を折半して新居も建てた。	has:반반 부담해	fix	lookup
+sense:落ち着く	仕事や手続きがようやく落ち着いて、	has:정리되어	fix	senses
+sense:建てる	二人で費用を折半して新居も建てた。	has:새집도 지었다	fix	senses
+sense:建てる	計画を建てる。	has:계획을	keep	senses

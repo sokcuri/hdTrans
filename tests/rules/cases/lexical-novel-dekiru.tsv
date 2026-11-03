@@ -21,8 +21,8 @@ dict:jisjk:341217	今のおれが出来ることってそれくらいだから	h
 dict:jisjk:341217	今は私が出来ることをしないと。	has:내가 할 수 있는	fix	local
 dict:jisjk:341217	日本語が出来る。	has:일본어를 할 수 있다	keep	local
 dict:novel-dekiru:5	俺には何かができたはずなんだ。	has:뭔가를 할 수	fix	local
-dict:jisjk:375087	あと 彼女ができたら 真っ先にお母さんに報告するんだよ	has:그녀가 생기면	fix	local
-dict:jisjk:375087	彼女ができましたって話	has:그녀가 생겼	fix	local
+dict:jisjk:375087	あと 彼女ができたら 真っ先にお母さんに報告するんだよ	has:여자친구가 생기면	fix	local
+dict:jisjk:375087	彼女ができましたって話	has:여자친구가 생겼	fix	local
 dict:novel-dekiru:2	新しいアバターが出来ました～！	has:아바타가 생겼습니다	fix	local
 dict:novel-dekiru:2	次の芝居の脚本が出来ました。	has:각본이 생겼습니다	fix	local
 dict:novel-dekiru:2	いい思い出が出来ました。	has:추억이 생겼습니다	fix	local

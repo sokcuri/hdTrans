@@ -46,6 +46,16 @@ bool SuruAfterMo(std::string_view s) {
     return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
 }
 
+// Whether は at the start of s is followed by a negative of する (負けはしない, 変わりはしません, 許しはせず):
+// the continuative before it is the verb, denied with stress, not a noun.
+bool SuruNegativeAfterWa(std::string_view s) {
+    if (!s.starts_with("は")) return false;
+    const std::string_view r = s.substr(std::string_view("は").size());
+    for (const std::string_view neg : {"しな", "しませ", "せず"})
+        if (r.starts_with(neg)) return true;
+    return false;
+}
+
 // Whether a godan continuative (pattern kind not ichidan, する, ずる or くる) is the noun of
 // manner before s: the よう of 疑いようもない, やりようがない, 品のないなさりよう！ (verb.way-of-doing).
 // An ichidan stem keeps its volitional よう.
@@ -471,6 +481,27 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
         return false;
     };
+    // A continuative before は and a negative する (SuruNegativeAfterWa), where no word of the dictionary
+    // starts in the stem and reaches past the は (ありはしない), that no attributive な or の before it makes a noun
+    // (ような真似はしない; not みんな), and that is no noun of what one senses, whose する is 들다 or 나다 (感じはしない, 匂いはしない:
+    // noun.sensed, noun.feeling-suru).
+    auto stressedNegative = [&]() {
+        if (!SuruNegativeAfterWa(after())) return false;
+        const std::string_view head = std::string_view(text).substr(0, static_cast<std::size_t>(start));
+        if (head.ends_with("の") || (head.ends_with("な") && !head.ends_with("みんな"))) return false;
+        const std::string form = surface + std::string(tail.substr(0, static_cast<std::size_t>(pattern())));
+        if (dict::InClass(HDTRANS_CLASS("noun.sensed"), form) || dict::InClass(HDTRANS_CLASS("noun.feeling-suru"), form)) {
+            return false;
+        }
+        const std::size_t reach = static_cast<std::size_t>(pattern()) + kJaHa.size();
+        for (std::size_t i = 0; i < surface.size(); i += text::DecodeRune(std::string_view(surface).substr(i)).size) {
+            const std::string query = surface.substr(i) + std::string(tail);
+            for (const Record* r = w->DoLookup(w->arena.Keep(query), kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source.size() > surface.size() - i + reach) return false;
+            }
+        }
+        return true;
+    };
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
@@ -490,7 +521,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     }
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
-         (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
+         (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji) && !stressedNegative()) ||
          two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
          (two == kJaYa && !(four == kJaYasu) && !(w->settings.text && four == kJaYaga)) || two == kJaWo ||
          (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) ||
@@ -499,6 +530,14 @@ bool Item::AcceptVerbContinuation(Record* following) {
          four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
         return false;
     }
+    // The し of a する word before まう, まっ, まわ, まえ or まお starts the verb しまう, put away after
+    // an adverb (ちゃんとしまった 제대로 넣었다, not ちゃんとする and 待つ; spec LEX-3850).
+    if (!matched && base.patternKind == 9 && base.kind == 10) {
+        const std::string_view rest = after();
+        for (const std::string_view shimau : {"まう", "まっ", "まわ", "まえ", "まお"}) {
+            if (rest.starts_with(shimau) && !rest.starts_with("まっす")) return false;
+        }
+    }
 
     bool adjusted = false, desire = false;
     const int oldKind = base.patternKind, oldState = base.kind;
@@ -506,6 +545,11 @@ bool Item::AcceptVerbContinuation(Record* following) {
         oldState == 8 && oldKind != 3 && oldKind != 7 && after().starts_with(kJaSare);
     if (shortCausativePassive && w->SuVerb(surface + std::string(Conjugation(oldKind, 8)))) return false;
     if (!matched && oldState == 4 && oldKind == 3 && w->GodanCausative(surface)) return false;  // 迷わせる of 迷う
+    // The passive of that す causative is the godan verb's causative-passive (言わされた of 言う, spec GRM-3350).
+    if (!matched && oldState == 1 && oldKind == 3 && w->settings.text && w->settings.improvements.causativePassive &&
+        w->GodanCausative(surface)) {
+        return false;
+    }
     // A short causative (ShortCausative: 読まして) is read on the text path, and not where the dictionary
     // has the す verb it spells (表す あらわして, 任す まかして, 鳴らす 鳴らして).
     if (!matched && oldState == 2 && !Starts(tail, Conjugation(oldKind, 2))) {
@@ -599,7 +643,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||
               four == kJaKireKanji || four == kJaSou || after().starts_with("\"") || two == kJaMa || two == kJaHajiKanji ||
-              two == kJaNasai || two == kJaNi || (SuruAfterMo(after()) && !OneKana(surface)))) {
+              two == kJaNasai || two == kJaNi || ((SuruAfterMo(after()) || stressedNegative()) && !OneKana(surface)))) {
             const std::pair<const Window*, std::string_view> compounds[] = {
                 {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
                 {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},

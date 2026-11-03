@@ -22,6 +22,7 @@ enum class ConstraintWord : uint8_t {
     KansaiNegative,  // a word of copula.kansai-negative: the Kansai ちゃう of a negative copula (ちゃうわ)
     Cued,      // a word whose source a cue of the line or its document names (LookupContext::cued)
     WithKanji, // a word of two or more characters with a kanji
+    Any,       // any word
 };
 
 // What must be next to the word.
@@ -100,6 +101,11 @@ enum class ConstraintContext : uint8_t {
     BeforeCopulaPredicate,  // the copula follows as the predicate (だ, です, でし, じゃ, だろ, でしょ; not だけ:
                             // 相変わらずだな), or な before a kanji or katakana (相変わらずな人)
     AfterNumeral,       // right after a numeral (7体の中: the counter 体)
+    AfterNumeralBeforeKurai,  // right after a numeral, with くらい or ぐらい after it (五歩くらい: the counter 歩
+                              // and くらい, not the verb 歩く)
+    AfterCountBeforeKanji,  // right after a numeral and a one-kanji counter, with a kanji that is no numeral
+                            // after the word
+                            // (7体の中鬼: の and the noun 中鬼, not の中; 8体の中一つ stays)
     NameAfterNumeral,   // right after a numeral, with every reading of the word from the name layer and a
                         // counter (Ct) that the word starts with (1日村: the counter 日 and 村, not the name 日村)
     BeforeListed,       // one of the rule's follows, |-separated, starts the text after the word
@@ -146,6 +152,9 @@ enum class ConstraintReject : uint8_t {
     // The verb senses (M) of the word and of the shorter words it starts with, when a sense
     // of the word that is no verb remains.
     Verbs,
+    // Every verb sense (M) of the word, even when no other sense remains: the text falls back to the
+    // shorter words or the reading of its characters.
+    AllVerbs,
     // Every sense, when the word has a name: a person sense among the candidates or in the
     // name layer (for a kana word one that sounds like the kana) that is no Korean word of
     // its other senses; that name replaces them. Not when a person noun, a user entry or a

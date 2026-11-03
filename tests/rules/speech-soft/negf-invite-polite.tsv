@@ -1,0 +1,8 @@
+# 규칙: MNG-7
+rule	input	expected	kind	layer
+cx:neg-final-invite:36	一度、ご覧になりませんか？	한 번, 보시지 않겠습니까?	fix	rewrites
+cx:neg-final-invite:36	お話を聞いていただけませんか？	rule:cx:neg-final-invite:36=1지 않겠습니까	fix	rewrites
+cx:neg-final-invite:38	「良ければこのまま私の部屋に参りませんか？」	「괜찮으면 이대로 제 방에 가시지 않겠습니까?」	fix	rewrites
+cx:neg-final-invite:38	「まだ参りませんか？」	「아직 가지 않습니까?」	keep	rewrites
+cx:neg-final-invite:40	「え、ええと……学校まで、一緒に行きませんか？」	has:가지 않을래요?	fix	rewrites
+cx:neg-final-invite:40	「良ければこのまま私の部屋に参りませんか？」	!rule:cx:neg-final-invite:40	keep	rewrites

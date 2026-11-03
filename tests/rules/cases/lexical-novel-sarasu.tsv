@@ -1,6 +1,6 @@
 # 규칙: LEX-3
 rule	input	expected	kind	layer
-dict:jisjk:375235	隠しきれないニヤケ顔を晒す彼女。	숨기지 못할 니야케얼굴을 드러내는 그녀.	fix	defaults
+dict:jisjk:375235	隠しきれないニヤケ顔を晒す彼女。	숨기지 못할 히죽거리는 얼굴을 드러내는 그녀.	fix	defaults
 dict:jisjk:375235	ぼうっとマヌケ面を晒していると	멍하니 마누케면을 드러내고 있다고	fix	defaults
 dict:jisjk:375235	ひたすら醜態を晒し続けた。	오로지 추태를 계속 드러냈다.	fix	defaults
 dict:jisjk:375235	ただ裸を晒すのとは	다만 알몸을 드러내는 것이란	fix	defaults

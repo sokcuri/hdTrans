@@ -297,7 +297,7 @@ dict:jisjk:162647	おが粉を燃やす。	톱밥을 태운다.	fix	defaults
 dict:jisjk:162647	おが粉が飛ぶ。	톱밥이 난다.	fix	defaults
 dict:jisjk:162647	おが粉の山。	톱밥의 산.	fix	defaults
 dict:jisjk:162647	おが粉を掃除する。	톱밥을 청소한다.	fix	defaults
-dict:jisjk:162647	木から出たおが粉。	나무로부터 나온 톱밥.	fix	defaults
+dict:jisjk:162647	木から出たおが粉。	나무에서 나온 톱밥.	fix	defaults
 dict:jisjk:162647	おがくず。	톱밥.	keep	defaults
 dict:jisjk:162647	おが屑。	톱밥.	keep	defaults
 dict:jisjk:162647	木屑を集める。	톱밥을 모은다.	keep	defaults
@@ -485,7 +485,7 @@ dict:w:2954	カツ上げは犯罪だ。	삥뜯기는 범죄다.	fix	lookup
 dict:w:2954	カツ上げの被害が増えた。	삥뜯기의 피해가 늘어났다.	fix	lookup
 dict:w:2954	カツ上げをやめた。	삥뜯기를 그만두었다.	fix	lookup
 dict:w:2950	カツアゲは犯罪だ。	삥뜯기는 범죄다.	keep	lookup
-dict:w:2950	カツ丼を食べた。	가쓰돈을 먹었다.	keep	lookup
+dict:w:2950	カツ丼を食べた。	가츠돈을 먹었다.	keep	lookup
 dict:w:2950	カツを揚げた。	커틀릿을 튀겼다.	keep	lookup
 dict:w:2993	カビくさい部屋だ。	퀴퀴한 방이다.	fix	lookup
 dict:w:2993	この部屋はカビくさい。	이 방은 퀴퀴하다.	fix	lookup

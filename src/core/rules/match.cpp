@@ -81,7 +81,6 @@ bool MatchAttributeFamily(int family, std::string_view values, std::string_view 
         const int p = f.parent[i];
         if (p == -1) break;
         if (MatchAttributeFamily(p, values, pattern)) return true;
-        if (i == 4) return false;
     }
     for (const int e : f.expansion) {
         if (e == -1) break;

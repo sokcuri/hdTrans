@@ -1,0 +1,30 @@
+# 규칙: LEX-4024
+rule	input	expected	kind	layer
+cx:novel-fixes-2:180	全員の視線が私に注がれた。	전원의 시선이 나에게 쏠렸다.	fix	rewrites
+cx:novel-fixes-2:180	アルノルトの目は、少女の後ろ姿に注がれている。	has:뒷모습에 쏠리고 있다	fix	rewrites
+cx:novel-fixes-2:180	水を注がれた。	!rule:cx:novel-fixes-2:180	keep	rewrites
+cx:novel-fixes-2:180	彼は視線を注いだ。	!rule:cx:novel-fixes-2:180	keep	rewrites
+cx:novel-fixes-2:190	今世でもある程度は体を鍛えよう	has:이번 생에서도 어느 정도는	fix	rewrites
+cx:novel-fixes-2:190	ある程度は分かる。	!rule:cx:novel-fixes-2:190	keep	rewrites
+cx:novel-fixes-2:200	斜め上の解釈に呆れ、	has:엉뚱한 해석에	fix	rewrites
+cx:novel-fixes-2:200	斜め上を見る。	!rule:cx:novel-fixes-2:200	keep	rewrites
+cx:novel-fixes-2:210	主君が、いたって上機嫌に笑っているのだ。	has:매우 기분이 좋게	fix	rewrites
+cx:novel-fixes-2:210	上機嫌に笑う。	!rule:cx:novel-fixes-2:210	keep	rewrites
+cx:novel-fixes-2:220	飛び降りの際は、体を垂直に着地してはいけない。	has:뛰어내릴 때는,	fix	rewrites
+cx:novel-fixes-2:220	出発の際は連絡して。	!rule:cx:novel-fixes-2:220	keep	rewrites
+cx:novel-fixes-2:230	いやあ、よく分からんが、そうだ。	has:잘 모르지만,	fix	rewrites
+cx:novel-fixes-2:230	よく分からない。	!rule:cx:novel-fixes-2:230	keep	rewrites
+cx:novel-fixes-2:235	カケル！よく分からんが手伝え！	has:잘 모르지만 도와라	fix	rewrites
+cx:novel-fixes-2:235	よく分からない。	!rule:cx:novel-fixes-2:235	keep	rewrites
+cx:novel-fixes-2:240	命懸けの戦い	목숨을 건 싸움	fix	rewrites
+cx:novel-fixes-2:240	命懸けで戦う	목숨 걸고 싸운다	keep	rewrites
+dict:w:31041	規格外な行動。	규격 외의 행동.	fix	lookup
+dict:w:31042	つまらなさそうな目をしている主君	has:따분해 보이는 눈을	fix	lookup
+dict:w:31043	つまらなさそうに窓の外を見る。	has:따분한 듯이	fix	lookup
+dict:jisjk:146671	どいていろ！	비키고 있어라!	fix	lookup
+dict:jisjk:146671	身を退いた。	has:물러났다	keep	lookup
+sound:じとり	彼女はじとりとこちらを見た。	has:게슴츠레	fix	sound
+sound:じとり	じとっと汗をかく。	has:게슴츠레	fix	sound
+output:nn-phrase-apart	血染めの剣	피로 물든 검	fix	output
+output:nn-phrase-apart	つまらなさそうな顔	따분해 보이는 얼굴	fix	output
+output:nn-phrase-apart	結局昼になった。	결국 낮이 되었다.	keep	output

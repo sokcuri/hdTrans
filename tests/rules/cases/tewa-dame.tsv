@@ -14,4 +14,4 @@ cx:tewa-dame:10	それではダメだ	!rule:cx:tewa-dame:10	keep	rewrites
 cx:tewa-dame:10	ここで諦めてはいけない。	has:포기해선 안된다.	keep	rewrites
 cx:tewa-dame:10	私と、同じと思ってもらっては困ります。	!rule:cx:tewa-dame:10	keep	rewrites
 cx:tewa-dame:10	この勝利で慢心しては駄目。	has:자만심해선 안된다.	keep	rewrites
-cx:tewa-dame:10	傲慢になってはだめよ。	has:오만하게 되어서는 안돼요.	keep	rewrites
+cx:tewa-dame:10	傲慢になってはだめよ。	has:오만해져서는 안돼요.	keep	rewrites

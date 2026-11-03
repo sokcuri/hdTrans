@@ -1,0 +1,21 @@
+# 규칙: LEX-3866
+rule	input	expected	kind	layer
+dict:lex:sa-pronoun	「お前さ、近所の煙草屋にお遣いに行くんじゃないんだぞ」	「너 말이야, 이웃의 담배가게에 심부름에 가지 않은 거야」	fix	local
+dict:lex:saa2-pronoun	「あんたさあ、子供のお遣いじゃないんだし」	「너 말이야, 아이의 심부름이 아니니까」	fix	local
+dict:lex:sa-pronoun	「こいつさ、なかなか銃を撃ちたがらないんだよ」	「이 녀석 말이야, 좀처럼 총을 쏘고 싶어하지 않아」	fix	local
+dict:lex:sa-pronoun	「魅音さ、他人事じゃないぞ。」	「미온, 남의 일이 아니야.」	keep	local
+dict:lex:sa-pronoun	「圭ちゃんさ、まだこの雛見沢、ひとりじゃ回れないでしょ。」	「케이짱, 아직 이 히나미자와, 혼자는 돌 수 없지.」	keep	local
+dict:jisjk:344213	俺さぁ、結構気にいられてたんだけど	나 말이야, 상당히 마음에 들어지고 있었는데	fix	local
+dict:jisjk:344213	提督さんさぁ、眠くない？	제독님, 졸리지 않아?	keep	local
+dict:lex:sa-pronoun	提督さ、次はやってもいいだろ？	제독, 다음은 해도 괜찮지?	keep	local
+dict:lex:sa-pronoun	「あんたさ……下着以外にも、なにか見なかった？」	!rule:dict:lex:sa-pronoun	keep	local
+dict:lex:sa-pronoun	私さ、どーして男に生まれなかったのかなーって思う時あるよ。	나 말이야, 왜 남자로 태어나지 않았던 걸까라고 생각할 때 있어.	fix	local
+dict:lex:saa2-pronoun	君さあ、ちょっといい？	너 말이야, 잠깐 괜찮아?	fix	local
+dict:jisjk:344213	お前さぁ、いい加減にしろよな。	너 말이야, 적당히 좀 해라.	fix	local
+dict:lex:sa-pronoun	……そうじゃない。村を壊滅させたのは……俺さ……。	!rule:dict:lex:sa-pronoun	keep	local
+dict:lex:saa2-pronoun	さあ、行こう。	!rule:dict:lex:saa2-pronoun	keep	local
+dict:lex:saa2-pronoun	「さあ、どうぞ」	!rule:dict:lex:saa2-pronoun	keep	local
+dict:jisjk:344213	あのさぁ、	그런데 말이야,	keep	local
+dict:lex:sa-pronoun	「む…、むっ 先輩さぁ！」	「무…, 뭇 선배!」	keep	local
+dict:lex:sa-pronoun	「最後の１回だと思ってさ」	「마지막 1번이라고 생각해」	keep	local
+dict:lex:sa-pronoun	乾燥しちゃってさ。	!rule:dict:lex:sa-pronoun	keep	local

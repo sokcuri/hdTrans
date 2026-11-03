@@ -1,0 +1,6 @@
+#! layer=pack
+# 논항으로 소설 낱말의 뜻을 고르는 팩 행: 감정이 募る 커지다, 책임을 負う 지다
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri
+novel-report-senses:1	募る	v5	sense	after=が|も|まで|さえ|すら|ばかり obj=- head=-	커지다	LEX-3700		寂しさが募る 외로움이 커지다(が, も, まで, さえ, すら, ばかり 바로 뒤); 仲間を募る, 参加者は随時募っています 모집하다 그대로		
+novel-report-senses:3	負う	v5	sense	arg=責任|責め|罪|義務|責務|重責|負債|借金|全責任|罪過	지다	LEX-3700		責任を負う 책임을 지다; 傷を負う 상처를 입다 그대로		
+novel-report-senses:4	募る	v5	voice	*	passive:모집되다	LEX-3700		志願兵が募られた 지원병이 모집되었다(수동은 감정이 아님)		

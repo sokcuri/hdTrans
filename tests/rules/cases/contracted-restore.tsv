@@ -2,9 +2,9 @@
 rule	input	expected	kind	layer
 sound:contracted-auxiliaries	ウズウズしてたとこさ！	근질근질하고 있던 참이야!	fix	sound
 sound:contracted-auxiliaries	飯を作ってたとこなんだ。	밥을 만들고 있던 참이야.	fix	sound
-sound:contracted-auxiliaries	そこからお前が住んでたところを割り出して、後はまあ……地道な聞き込みだな	거기에서 네가 살고 있던 곳을 산출해, 나머지는 뭐……충실한 탐문이네	keep	sound
+sound:contracted-auxiliaries	そこからお前が住んでたところを割り出して、後はまあ……地道な聞き込みだな	거기에서 네가 살고 있던 곳을 산출해, 나머지는 뭐……꾸준한 탐문이네	keep	sound
 sound:contracted-auxiliaries	ただ幸せだなって思ってたところです	다만 행복하다라고 생각했습니다	keep	sound
-sound:contracted-auxiliaries	予定してたところを全部回ったと思った瞬間、全身がずっしりと重くなった。	예정하고 있던 곳을 전부 돌았다고 생각한 순간, 전신이 묵직 무거워졌다.	keep	sound
+sound:contracted-auxiliaries	予定してたところを全部回ったと思った瞬間、全身がずっしりと重くなった。	예정하고 있던 곳을 전부 돌았다고 생각한 순간, 전신이 묵직이 무거워졌다.	keep	sound
 sound:contracted-auxiliaries	いいよ、やったげよか？	좋아, 해 줄까?	fix	sound
 sound:contracted-auxiliaries	遅れたら、後で笑ったげるわ！	늦으면, 나중에 웃어 줄게!	fix	sound
 sound:contracted-auxiliaries	原稿書きながら付き合ったげるぅ～	has:어울려	fix	sound

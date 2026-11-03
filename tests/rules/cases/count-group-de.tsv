@@ -1,0 +1,25 @@
+# 규칙: GRM-3403
+rule	input	expected	kind	layer
+dict:jisjk:341860	三人で一緒に行こう。	세 명이서 함께 가자.	fix	local
+dict:jisjk:341860	「せっかく盛りあがってるんだから、３人で行こうよっ！」	「모처럼 고조되고 있으니까, 3명이서 가자!」	fix	local
+dict:jisjk:341860	いつもの４人で学校に向かって通学路を進む。	평소의 4명이서 학교를 향해 통학로를 진행한다.	fix	local
+dict:jisjk:341860	俺をのけものに遺産を三人で山分けするような守銭奴だ。	has:유산을 세 명이서 똑같이	fix	local
+dict:jisjk:341860	そいつ置いて三人で帰ってきました。	has:세 명이서 돌아왔습니다	fix	local
+dict:jisjk:341860	お弁当作って、モガミンと三人でお花見に行きましょう？	has:모가민과 세 명이서 꽃놀이하러	fix	local
+dict:jisjk:341860	四人でちゃんと固まってろよ？	has:네 명이서 제대로	fix	local
+dict:jisjk:341860	家族3人でくらせれば、ほかにはもうなにもいらないのに……。	has:가족 3명이서 생활할	fix	local
+dict:jisjk:341860	結局、この後は４人で行動することになり、	has:4명이서 행동하게	fix	local
+dict:jisjk:341860	三人で行くなら、二人分の切符を買えばいい。	has:세 명이서 간다면	fix	local
+dict:jisjk:341860	５人でどう戦うのかな？	5명이서 어떻게 싸우는 걸까?	fix	local
+dict:jisjk:341860	ずっと2人で	계속 2명이서	fix	local
+dict:jisjk:341860	十人で行こう。	열 명이서 가자.	fix	local
+dict:jisjk:341860	三名で行く。	세 명이서 간다.	fix	local
+dict:jisjk:341860	二人でする初めての任務！	둘이서 하는 첫 임무!	fix	local
+dict:jisjk:341860	三人で十分だ。	세 명으로 충분하다.	keep	local
+dict:jisjk:341860	三人で千円だ。	!rule:dict:jisjk:341860	keep	local
+dict:jisjk:341860	三日で終わった。	!rule:dict:jisjk:341860	keep	local
+dict:jisjk:341860	千円で買った。	!rule:dict:jisjk:341860	keep	local
+dict:jisjk:341860	二人で旅行に行った。	둘이서 여행하러 갔다.	keep	local
+dict:jisjk:341860	一人で行く。	혼자서 간다.	keep	local
+dict:jisjk:341860	ひとりっきりで過ごした。	혼자서 보냈다.	keep	local
+dict:jisjk:341860	ここで埋もれたら、俺は一生「関白の縁者の一人」で終わる。	!rule:dict:jisjk:341860	keep	local

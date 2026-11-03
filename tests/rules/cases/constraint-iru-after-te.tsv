@@ -25,6 +25,6 @@ constraint:iru-form-after-te	何していようかな	뭐하고 있을까	fix	lo
 constraint:iru-form-after-te	随分悔しがっていたみたいだけど	상당히 분해하고 있던 것 같지만	fix	lookup
 constraint:iru-past-after-te	待っていたって無駄だ	기다리고 있어도 쓸데없다	fix	lookup
 constraint:iru-form-after-te	いろいろ見ていろいろ考えた	여러 가지 봐 여러 가지 생각했다	keep	lookup
-constraint:iru-form-after-te	見ていい	봐도 좋다	keep	lookup
+constraint:iru-form-after-te	見ていい	봐도 된다	keep	lookup
 constraint:iru-form-after-te	いらっしゃいませ	어서 오세요	keep	lookup
 constraint:iru-form-after-te	怪我の痛みを	상처의 아픔을	keep	lookup

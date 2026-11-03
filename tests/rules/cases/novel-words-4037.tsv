@@ -1,0 +1,32 @@
+# 규칙: LEX-4037, LEX-4038
+rule	input	expected	kind	layer
+cx:novel-fixes-2:2100	「……１９９０年モノか」	has:1990년산인가	fix	rewrites
+cx:novel-fixes-2:2100	変なモノを見た。	!rule:cx:novel-fixes-2:2100	keep	rewrites
+cx:novel-fixes-2:2110	「そうだ、１０年だ。……１０年も経った今、お前は何を思って私を招いた？」	has:무슨 생각으로 나를 불렀어	fix	rewrites
+cx:novel-fixes-2:2110	アルガルドが何を思っていたのか。	!rule:cx:novel-fixes-2:2110	keep	rewrites
+cx:novel-fixes-2:2120	「……だから、この一本はあの日のために飲むのが相応しい。」	has:이 한 병은	fix	rewrites
+cx:novel-fixes-2:2120	鉛筆を一本ください。	!rule:cx:novel-fixes-2:2120	keep	rewrites
+cx:novel-fixes-2:2130	「綴流から聞いた。……あいつらもお前も、無茶な真似をしたものだ」	has:무리한 짓을 한	fix	rewrites
+cx:novel-fixes-2:2130	彼の真似をした。	!rule:cx:novel-fixes-2:2130	keep	rewrites
+cx:novel-fixes-2:2140	「……そういうところは、学生の頃から変わらないな」	has:학생 때부터	fix	rewrites
+cx:novel-fixes-2:2140	あの頃は楽しかった。	!rule:cx:novel-fixes-2:2140	keep	rewrites
+cx:novel-fixes-2:2150	「卑怯な妨害を受けた割には、まあ、そうだな、いい劇だったと言えるな。」	has:받은 것치고는	fix	rewrites
+cx:novel-fixes-2:2150	年の割に若い。	!rule:cx:novel-fixes-2:2150	keep	rewrites
+cx:novel-fixes-2:2160	演技にはまだ荒いところもあるが、もうじき俺の全盛期を超えるだろう	has:연기에는 아직	fix	rewrites
+cx:novel-fixes-2:2160	彼にはまだ早い。	!rule:cx:novel-fixes-2:2160	keep	rewrites
+cx:novel-fixes-2:2210	人生の枝葉が枯れ果てた衛には二度と手に入れられない。	has:완전히 시든	fix	rewrites
+cx:novel-fixes-2:2210	花が枯れた。	!rule:cx:novel-fixes-2:2210	keep	rewrites
+cx:novel-fixes-2:2300	あれ白露、それなぁに？	has:그것 뭐야?	fix	rewrites
+cx:novel-fixes-2:2300	0200…なぁにその顔…？	!rule:cx:novel-fixes-2:2300	keep	rewrites
+cx:novel-fixes-2:2305	0200…なぁにその顔…？	has:뭐야 그 얼굴	fix	rewrites
+cx:novel-fixes-2:2305	あれ白露、それなぁに？	!rule:cx:novel-fixes-2:2305	keep	rewrites
+cx:novel-fixes-2:2310	マルフタマルマル。丑三つ時っぽい。	has:한밤중 같	fix	rewrites
+cx:novel-fixes-2:2310	三つ目の箱	!rule:cx:novel-fixes-2:2310	keep	rewrites
+cx:novel-fixes-2:2315	マルフタマルマル。丑三つ時っぽい。	has:한밤중 같	fix	rewrites
+cx:novel-fixes-2:2315	2時です。丑三つ時ってやつだよ。	!rule:cx:novel-fixes-2:2315	keep	rewrites
+cx:novel-fixes-2:2316	2時です。丑三つ時ってやつだよ。	has:한밤중이라는	fix	rewrites
+cx:novel-fixes-2:2316	マルフタマルマル。丑三つ時っぽい。	!rule:cx:novel-fixes-2:2316	keep	rewrites
+cx:novel-fixes-2:2320	ヒトマルマルマル。午前中は元気が有り余ってるっぽい！	has:기운이 넘치고	fix	rewrites
+cx:novel-fixes-2:2320	時間が有り余っている。	!rule:cx:novel-fixes-2:2320	keep	rewrites
+dict:jisjk:164924	大枠はあいつの書いた劇と変わらんよ。	has:큰 틀은	fix	lookup
+dict:jisjk:28486	顔役のお前はヒールとしての地位を盤石なものにしたな。	has:간판의 너는	fix	lookup

@@ -13,7 +13,7 @@ dict:jisjk:365553	先輩好きです。	rule:dict:jisjk:365553=(을)를 좋아%D
 dict:jisjk:1859	駆逐艦の一番艦だ。	구축함의 1번함이다.	fix	local
 dict:jisjk:1859	一番目の問題。	첫번째의 문제.	keep	local
 dict:jisjk:1859	一番強い。	제일 강하다.	keep	defaults
-dict:jisjk:1859	一番になりたい。	제일이 되고 싶다.	keep	defaults
+dict:jisjk:1859	一番になりたい。	1등이 되고 싶다.	keep	defaults
 dict:number-lexical-words	八つ当たりするな。	엉뚱한 화풀이하지 마.	keep	defaults
 dict:number-lexical-words	一つください。	하나 주세요.	keep	defaults
 dict:number-lexical-words	一人で行く。	혼자서 간다.	keep	defaults
@@ -74,7 +74,7 @@ dict:jisjk:1859	大型高速駆逐艦、その級の一番艦です。	rule:dict
 # 맞는 출력: 일반적으로 어엿하다고 불리는 마술사는,
 dict:number-lexical-words	一般的に一人前と呼ばれている魔術師は、	일반적으로 한 사람 몫으로 불리고 있는 마술사는,	current	defaults
 # 맞는 출력: 한 사람 몫을 하기에는 아직 멀었습니다만
-dict:number-lexical-words	一人前にはまだほど遠いでありますが	한 사람 몫에게는 아직 멉니다만	current	defaults
+dict:number-lexical-words	一人前にはまだほど遠いでありますが	한 사람 몫에는 아직 멉니다만	current	defaults
 # 맞는 출력: 일등을 목표로 할 거야~!
 dict:jisjk:1859	一番目指すよー！	첫번째 가리켜~!	current	defaults
 dict:number-lexical-words	また…私が一番先なの？	또…내가 맨 앞이야?	fix	defaults

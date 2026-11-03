@@ -84,5 +84,8 @@ HD_TEST(rules_compiled_hash) {
     HD_CHECK(rules::compiled::RecordHash("L 1 ||0") != rules::compiled::RecordHash("L 1 ||0 "));
     const auto global = rules::compiled::GlobalRules();
     HD_REQUIRE(!global.empty() && global[0].code != nullptr);
-    HD_CHECK_EQ(global[0].hash, rules::compiled::RecordHash("G 1 1 997 1 ||1 &&4 S+0== \"屋\" S-1== \"各部\" D-1= \"\" D+0= \"각 방\""));
+    HD_CHECK_EQ(global[0].hash,
+                rules::compiled::RecordHash("G 10 1 1002 1 ||1 &&4 P+0== \"13*\" A+0== \"QPN\" ||6 S+1== \"様\" "
+                                            "S+1== \"氏\" S+1== \"君\" S+1== \"さん\" S+1== \"ちゃん\" S+1== \"ちゃーん\" "
+                                            "P+1== \"1**\""));
 }

@@ -48,7 +48,7 @@
 //= contraction.n-ru-final	The same before no kana, kanji or letter (こっち見んな 見るな, 邪魔すんな); not ごめんな or こんな, words that span the ん.
 //= contraction.n-nai	Starts of the text after a ん that says the ら of a godan verb's negative stem, the られ of a potential or the れ that ends an ichidan stem (分かんない 分からない, 信じらんない 信じられない, してくんない してくれない).
 //= contraction.n-nee	The same with ねえ for ない, which is written as ない (変わんねえ 変わらない, やってらんねえ やってられない).
-//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 許せんから 許せないから, 食べんか 食べないか), and but for ぞ, わ and かて after the negative stem of a godan verb with a kanji (待たんか 待たないか, 分からんし 分からないし).
+//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 忘れんよう 忘れないよう, 許せんから 許せないから, 食べんか 食べないか), and but for ぞ, わ and かて after the negative stem of a godan verb with a kanji (待たんか 待たないか, 分からんし 分からないし).
 //= contraction.n-negative-not	Starts of contraction.n-negative after which the ん is no such ない (食べんかった, the past said with ん; 食べんしゃい, the しゃい of a request; 負けんしゅ, a lisped す).
 //= contraction.n-kana-stem-after	The kana after which a verb stem of one kana starts a contracted form (気にすんな, してくんない, かもしんない, 俺がやっから); elsewhere a lone kana is no stem.
 //= contraction.tsu-ru	Starts of the text after a っ that says the る of a verb's dictionary form (やっから やるから, すっから するから).
@@ -194,6 +194,24 @@
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
+//= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
+//= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
+//= noun.count-ship	Nouns of ships, matched as a whole word in the sentence of the counter 体, which then counts them as 척 (艦を二体 함을 2척).
+//= noun.count-machine	Nouns of a robot, a mecha or a machine soldier, matched at the end of a word, after which the counter 体 is 기 (ロボット二体 로봇 2기).
+//= noun.count-figure	Nouns of a statue, a doll or a figure, matched at the end of a word, after which the counter 体 is 개 (人形が二体 인형이 두 개).
+//= noun.count-creature	Endings of nouns of creatures and monsters that a count word in 体 before の counts (一体のゴーレム 한 마리의 골렘).
+//= noun.count-person	Nouns of people and peoples, matched at the end of a word, that the counter 体 counts as 명 (二体のエルフ 두 명의 엘프).
+//= noun.count-area	Words of a place right before 一体 that is 一帯 miswritten, 일대 (ここら一体 이 근처 일대).
+//= noun.count-footwear	Nouns of footwear, matched at the end of a word, counted in pairs by 足, 켤레 (靴が三足 구두 세 켤레).
+//= noun.count-clothes	Nouns of clothes, matched at the end of a word, counted by 着, 벌 (服が一着 옷 한 벌).
+//= noun.count-chair	Nouns of chairs and tables, matched at the end of a word, counted by 脚, 개 (椅子が三脚 의자 세 개).
+//= noun.count-medicine	Nouns of medicine, matched at the end of a word, counted by 服, 첩 (薬が一服 약 한 첩).
+//= noun.count-tofu	Nouns counted in blocks by 丁, 모 (豆腐が一丁 두부 한 모).
+//= noun.count-gun	Nouns of guns and long tools, matched at the end of a word, counted by 丁, 자루 (拳銃が一丁 권총 한 자루).
+//= noun.count-rice	Nouns of a bowl of rice, matched at the end of a word, counted by 膳, 공기 (ご飯を一膳 밥 한 공기).
+//= noun.count-chopsticks	Nouns of chopsticks, counted in pairs by 膳, 벌 (箸が一膳 젓가락 한 벌).
+//= noun.count-tent	Nouns of tents, counted by 張, 동 (テントが一張 텐트 한 동).
+//= noun.count-rail	Nouns of trains and their cars, matched at the end of a word, counted by 両, 량 (車両が一両 차량 1량).
 //= noun.feeling-suru	Nouns of a feeling or a hunch before which する after が, も, は, すら, さえ, しか or こそ is 들다 (嫌な予感がする 불길한 예감이 든다, 気もしない 기분도 들지 않는다; spec LEX-218).
 //= noun.cry-rises	Nouns of a cry or a voice whose 上がる is bursting out, 터져 나오다 (叫び声が上がった 비명이 터져 나왔다); a plain 声 there comes out, 나오다 (spec LEX-219).
 //= noun.shout-flies	Nouns of a shout or a scolding whose 飛ぶ flies at someone, 날아들다 (怒声が飛んだ 고함이 날아들었다; spec LEX-219).
@@ -254,6 +272,7 @@
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
 //= noun.ni-not-goal	Ends of the nouns before に that tell a point in time or what else, not the place or state one goes back to (三時に戻る 3시에 돌아오다, 一時間後に戻る, それ以外に戻る理由).
+//= noun.knower-act	Verbal nouns of knowing, judging or copying (理解, 想像, 真似), whose できる after a person in に makes that person the one who can (誰にも理解できない 아무도 이해할 수 없다), as for 分かる.
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
@@ -366,12 +385,14 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
+//= verb.chant-volitional	Sino-Japanese verb nouns of a spell or an oath whose せん is the literary volitional, not the old negative of する (浄化せん！, 顕現せん, 召喚せん); the negative reading skips them.
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
 //= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
 //= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
 //= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
 //= verb.harming	Dictionary forms of verbs that harm what they act on (殺す, 殴る, 壊す): with てやる and no beneficiary they threaten (殺してやる 죽여 버릴 거야), not do a favour.
 //= verb.harming-causative	Dictionary forms of causatives that make someone learn a hard lesson (思い知らせる, わからせる): with てやる they threaten (思い知らせてやる 깨닫게 하겠어).
+//= verb.humble-invite	Starts of the polite forms of humble verbs (謙譲語) a speaker invites the listener with: their ませんか is a formal invitation, 합쇼 with -시- (参りませんか 가시지 않겠습니까; spec MNG-7).
 //= verb.janai-saying	て forms of verbs of saying (言っ, 話し) whose てるんじゃない after word.janai-correction corrects what was said and forbids nothing (そういうこと言ってるんじゃないわよ 그런 걸 말하는 게 아니야; spec MNG-6).
 //= word.janai-correction	Words that point at what was said (そういう, そんな), before a verb of verb.janai-saying in てるんじゃない (spec MNG-6).
 //= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
@@ -715,6 +736,7 @@ contraction.n-nee	ねー
 
 contraction.n-negative	ぞ
 contraction.n-negative	わ
+contraction.n-negative	よう
 contraction.n-negative	から
 contraction.n-negative	か
 contraction.n-negative	けど
@@ -780,6 +802,15 @@ contraction.te-iku	ってね
 contraction.te-iku	ってる
 contraction.te-iku	けよ
 contraction.te-iku	けば
+contraction.te-iku	ける
+contraction.te-iku	けない
+contraction.te-iku	けなかっ
+contraction.te-iku	けなく
+contraction.te-iku	けます
+contraction.te-iku	けません
+contraction.te-iku	けそう
+contraction.te-iku	けれ
+contraction.te-iku	けた
 
 contraction.te-iru	る
 contraction.te-iru	た
@@ -883,6 +914,8 @@ contraction.te-iku-final	って
 contraction.te-iku-final	け
 
 contraction.te-iku-listed	ってよ
+contraction.te-iku-listed	けっ
+contraction.te-iku-listed	けって
 
 contraction.te-iku-not	ったら
 contraction.te-iku-quoted	やめてってね
@@ -3709,6 +3742,25 @@ noun.ni-not-goal	時ごろ
 noun.ni-not-goal	以外
 noun.ni-not-goal	他
 noun.ni-not-goal	ほか
+noun.knower-act	理解
+noun.knower-act	想像
+noun.knower-act	予想
+noun.knower-act	予測
+noun.knower-act	想定
+noun.knower-act	判断
+noun.knower-act	判別
+noun.knower-act	区別
+noun.knower-act	真似
+noun.knower-act	納得
+noun.knower-act	把握
+noun.knower-act	認識
+noun.knower-act	推測
+noun.knower-act	推理
+noun.knower-act	解読
+noun.knower-act	再現
+noun.knower-act	実感
+noun.knower-act	識別
+noun.knower-act	予見
 
 noun.not-verbal	全部
 noun.not-verbal	全員
@@ -5508,6 +5560,43 @@ verb.casual-state	流行
 verb.casual-state	はや
 verb.casual-state	似合
 verb.casual-state	限
+verb.chant-volitional	召喚
+verb.chant-volitional	召還
+verb.chant-volitional	顕現
+verb.chant-volitional	顕界
+verb.chant-volitional	降臨
+verb.chant-volitional	再臨
+verb.chant-volitional	光臨
+verb.chant-volitional	降誕
+verb.chant-volitional	具現
+verb.chant-volitional	現界
+verb.chant-volitional	招来
+verb.chant-volitional	浄化
+verb.chant-volitional	成就
+verb.chant-volitional	創造
+verb.chant-volitional	殲滅
+verb.chant-volitional	湮滅
+verb.chant-volitional	撃滅
+verb.chant-volitional	討滅
+verb.chant-volitional	誅滅
+verb.chant-volitional	誅戮
+verb.chant-volitional	滅却
+verb.chant-volitional	蹂躙
+verb.chant-volitional	超越
+verb.chant-volitional	超克
+verb.chant-volitional	掌握
+verb.chant-volitional	付託
+verb.chant-volitional	継承
+verb.chant-volitional	回帰
+verb.chant-volitional	祝福
+verb.chant-volitional	封印
+verb.chant-volitional	開錠
+verb.chant-volitional	結実
+verb.chant-volitional	平定
+verb.chant-volitional	再興
+verb.chant-volitional	解放
+verb.chant-volitional	開放
+verb.chant-volitional	抹殺
 verb.observed-state	分か
 verb.observed-state	わか
 verb.observed-state	解か
@@ -6410,6 +6499,10 @@ verb.result-state	吹っ切れ
 verb.result-state	帰って
 verb.result-state	戻って
 verb.result-state	入って
+verb.result-state	晴れ渡
+verb.result-state	澄み渡
+verb.result-state	晴れわた
+verb.result-state	澄みわた
 
 verb.arrival-te	帰
 verb.arrival-te	戻
@@ -8567,6 +8660,8 @@ verb.harming	ぶちのめす
 verb.harming-causative	思い知らせる
 verb.harming-causative	わからせる
 verb.harming-causative	分からせる
+verb.humble-invite	参り
+verb.humble-invite	まいり
 adjective.character	優し
 adjective.character	やさし
 adjective.character	可愛
@@ -8701,6 +8796,266 @@ adverb.noun-reading	そっくり
 adverb.noun-reading	ばっちり
 adverb.noun-reading	ぎりぎり
 adverb.noun-reading	ギリギリ
+
+noun.count-corpse	死体
+noun.count-corpse	遺体
+noun.count-corpse	骸
+noun.count-corpse	屍
+noun.count-corpse	亡骸
+noun.count-corpse	死骸
+noun.count-corpse	遺骸
+noun.count-corpse	しかばね
+noun.count-corpse	屍体
+noun.count-corpse	骸骨
+noun.count-corpse	白骨
+noun.count-corpse	ミイラ
+noun.count-corpse	骨
+noun.count-corpse	ゾンビ
+
+noun.count-flower	花
+noun.count-flower	バラ
+noun.count-flower	薔薇
+noun.count-flower	ばら
+noun.count-flower	百合
+noun.count-flower	ユリ
+noun.count-flower	菊
+noun.count-flower	キク
+noun.count-flower	椿
+noun.count-flower	ツバキ
+noun.count-flower	チューリップ
+noun.count-flower	カーネーション
+noun.count-flower	向日葵
+noun.count-flower	ひまわり
+noun.count-flower	ヒマワリ
+noun.count-flower	蓮
+noun.count-flower	牡丹
+noun.count-flower	芍薬
+noun.count-flower	桔梗
+noun.count-flower	水仙
+noun.count-flower	すみれ
+noun.count-flower	スミレ
+noun.count-flower	コスモス
+noun.count-flower	ガーベラ
+noun.count-flower	蘭
+noun.count-machine	ロボット
+noun.count-machine	機体
+noun.count-machine	機械兵
+noun.count-machine	機兵
+noun.count-machine	機械人形
+noun.count-machine	メカ
+noun.count-machine	戦車
+noun.count-machine	ドローン
+noun.count-machine	アンドロイド
+noun.count-machine	魔導兵
+noun.count-machine	機甲兵
+noun.count-machine	戦闘機
+noun.count-machine	機動兵器
+noun.count-machine	兵器
+noun.count-machine	オートマタ
+noun.count-machine	飛行機
+noun.count-machine	航空機
+noun.count-machine	艦載機
+noun.count-machine	ヘリ
+noun.count-machine	機
+noun.count-machine	飛行船
+noun.count-machine	飛空艇
+noun.count-machine	ギア
+noun.count-ship	艦
+noun.count-ship	船
+noun.count-ship	艦艇
+noun.count-ship	戦艦
+noun.count-ship	駆逐艦
+noun.count-ship	巡洋艦
+noun.count-ship	空母
+noun.count-ship	潜水艦
+noun.count-ship	軍艦
+
+noun.count-figure	人形
+noun.count-figure	像
+noun.count-figure	石像
+noun.count-figure	銅像
+noun.count-figure	彫像
+noun.count-figure	木像
+noun.count-figure	仏像
+noun.count-figure	地蔵
+noun.count-figure	お地蔵
+noun.count-figure	フィギュア
+noun.count-figure	ぬいぐるみ
+noun.count-figure	マネキン
+noun.count-figure	案山子
+noun.count-figure	かかし
+noun.count-figure	埴輪
+noun.count-figure	木彫り
+
+noun.count-creature	鬼
+noun.count-creature	獣
+noun.count-creature	竜
+noun.count-creature	龍
+noun.count-creature	魔物
+noun.count-creature	妖怪
+noun.count-creature	悪魔
+noun.count-creature	魔獣
+noun.count-creature	魔族
+noun.count-creature	怪物
+noun.count-creature	化け物
+noun.count-creature	精霊
+noun.count-creature	天使
+noun.count-creature	兵
+noun.count-creature	虫
+noun.count-creature	蜂
+noun.count-creature	狼
+noun.count-creature	犬
+noun.count-creature	猫
+noun.count-creature	鳥
+noun.count-creature	熊
+noun.count-creature	蛇
+noun.count-creature	ゴーレム
+noun.count-creature	ゴブリン
+noun.count-creature	オーク
+noun.count-creature	スライム
+noun.count-creature	ドラゴン
+noun.count-creature	モンスター
+noun.count-creature	ウルフ
+noun.count-creature	トロール
+noun.count-creature	オーガ
+noun.count-creature	ワイバーン
+noun.count-creature	コボルト
+noun.count-creature	グール
+noun.count-creature	キメラ
+noun.count-creature	ガーゴイル
+noun.count-creature	デーモン
+noun.count-creature	リザードマン
+noun.count-creature	ミノタウロス
+
+noun.count-person	エルフ
+noun.count-person	ドワーフ
+noun.count-person	人間
+noun.count-person	少女
+noun.count-person	少年
+noun.count-person	兵士
+noun.count-person	騎士
+noun.count-person	戦士
+noun.count-person	女性
+noun.count-person	男性
+noun.count-person	子供
+noun.count-person	人族
+noun.count-person	獣人
+noun.count-person	魔族の女
+noun.count-person	ハーフエルフ
+noun.count-person	ダークエルフ
+noun.count-person	村人
+noun.count-person	住人
+
+noun.count-area	ここら
+noun.count-area	あたり
+noun.count-area	辺り
+noun.count-area	この辺
+noun.count-area	その辺
+noun.count-area	周辺
+noun.count-area	周囲
+noun.count-area	付近
+noun.count-area	近辺
+noun.count-area	一面
+
+noun.count-footwear	靴
+noun.count-footwear	靴下
+noun.count-footwear	ブーツ
+noun.count-footwear	草履
+noun.count-footwear	下駄
+noun.count-footwear	スニーカー
+noun.count-footwear	サンダル
+noun.count-footwear	足袋
+noun.count-footwear	ハイヒール
+noun.count-footwear	パンプス
+noun.count-footwear	上履き
+noun.count-footwear	長靴
+
+noun.count-clothes	服
+noun.count-clothes	着物
+noun.count-clothes	ドレス
+noun.count-clothes	スーツ
+noun.count-clothes	シャツ
+noun.count-clothes	コート
+noun.count-clothes	制服
+noun.count-clothes	水着
+noun.count-clothes	下着
+noun.count-clothes	浴衣
+noun.count-clothes	ローブ
+noun.count-clothes	洋服
+noun.count-clothes	ワンピース
+noun.count-clothes	ジャケット
+noun.count-clothes	鎧
+noun.count-clothes	衣装
+noun.count-clothes	衣服
+noun.count-clothes	ズボン
+noun.count-clothes	スカート
+noun.count-clothes	パジャマ
+noun.count-clothes	メイド服
+noun.count-clothes	礼服
+noun.count-clothes	喪服
+noun.count-clothes	普段着
+noun.count-clothes	晴れ着
+noun.count-clothes	着替え
+
+
+noun.count-chair	椅子
+noun.count-chair	イス
+noun.count-chair	いす
+noun.count-chair	机
+noun.count-chair	テーブル
+noun.count-chair	ベンチ
+noun.count-chair	ソファ
+noun.count-chair	ソファー
+noun.count-chair	スツール
+noun.count-chair	座椅子
+
+
+noun.count-medicine	薬
+noun.count-medicine	粉薬
+noun.count-medicine	漢方
+noun.count-medicine	漢方薬
+noun.count-medicine	煎じ薬
+noun.count-medicine	毒
+noun.count-medicine	丸薬
+
+noun.count-tofu	豆腐
+noun.count-tofu	こんにゃく
+noun.count-tofu	蒟蒻
+
+noun.count-gun	銃
+noun.count-gun	拳銃
+noun.count-gun	ピストル
+noun.count-gun	ライフル
+noun.count-gun	猟銃
+noun.count-gun	包丁
+noun.count-gun	鋏
+noun.count-gun	はさみ
+noun.count-gun	ハサミ
+noun.count-gun	短銃
+noun.count-gun	火縄銃
+noun.count-gun	鉄砲
+
+noun.count-rice	ご飯
+noun.count-rice	ごはん
+noun.count-rice	飯
+noun.count-rice	白飯
+noun.count-rice	米
+noun.count-rice	白米
+
+noun.count-chopsticks	箸
+noun.count-chopsticks	お箸
+noun.count-chopsticks	割り箸
+noun.count-chopsticks	割箸
+
+noun.count-tent	テント
+noun.count-tent	天幕
+
+noun.count-rail	車両
+noun.count-rail	電車
+noun.count-rail	列車
+noun.count-rail	客車
+noun.count-rail	貨車
+noun.count-rail	車輌
 
 noun.feeling-suru	気
 noun.feeling-suru	予感

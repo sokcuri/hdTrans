@@ -1,0 +1,86 @@
+# 규칙: GRM-3270, GRM-3271
+rule	input	expected	kind	layer
+dict:permission:3	じゃあ 注文していい？	그럼 주문해도 돼?	fix	local
+dict:permission:3	「やっていいぞ」	「해도 돼」	fix	local
+dict:permission:3	「ないていいんです」	「울어도 됩니다」	fix	local
+dict:permission:3	そう思っていいだろう。	그렇게 생각해도 될 것이다.	fix	local
+dict:permission:3	「好きなだけ食べていいぞ」	「원하는 만큼 먹어도 돼」	fix	local
+dict:permission:3	「え？　もらっていいの？」	「어? 받아도 되는 거야?」	fix	local
+dict:permission:3	「だから安心していいわよ」	「그러니까 안심해도 돼」	fix	local
+dict:permission:3	「……ふたりとも、私のことは忘れていいんだよ」	「……둘 다, 나는 잊어도 돼」	fix	local
+dict:permission:3	「私も貰っていいですか？」	「저도 받아도 됩니까?」	fix	local
+dict:permission:3	そんな簡単に情報を明かしていいのだろうか？	그런 간단하게 정보를 밝혀도 되는 걸까?	fix	local
+dict:permission:3	「なあ、俺もちょっと休憩していいか？」	「저기, 나도 조금 쉬어도 돼?」	fix	local
+dict:permission:3	「そういうのは言わなくていいの」	「그러한 건 말하지 않아도 돼」	fix	local
+dict:permission:3	「遠慮しなくていいわ。」	「사양하지 않아도 돼.」	fix	local
+dict:permission:3	「お前はしなくていい、質問に答えろ」	「너는 하지 않아도 된다, 질문에 대답해라」	fix	local
+dict:permission:3	「止めなくていいの？」	「멈추지 않아도 되는 거야?」	fix	local
+dict:permission:3	「お礼なんてなくていいのに……」	「감사 인사 같은 건 없어도 되는데……」	fix	local
+dict:permission:3	「それ以上は何も知らなくていいわ。」	「그 이상은 아무것도 몰라도 돼.」	fix	local
+dict:permission:3	謝らなくていい人は、とても明るい人で、	사과하지 않아도 되는 사람은, 무척 밝은 사람으로,	fix	local
+dict:permission:6	「一つ、お聞きしてもよろしいでしょうか」	「하나, 물어도 될까요」	fix	local
+dict:permission:6	「は、入ってもよろしいですか？」	「드, 들어가도 됩니까?」	fix	local
+dict:permission:6	一点だけ確認させていただいてもよろしいでしょうか。	한 점만 확인해도 될까요.	fix	local
+dict:permission:6	「会長、着替えをしなくてよろしいんですか？」	「회장, 갈아입음을 하지 않아도 됩니까?」	fix	local
+dict:permission:5	「後で見ておこう。下がってよいぞ。」	!rule:dict:permission:5	keep	local
+dict:permission:5	諦めてよい。	포기해도 좋다.	keep	local
+dict:permission:5	「別に急がなくてもよかったのに」	「별로 서두르지 않아도 됐을텐데」	fix	local
+dict:permission:5	「話さなくてよかったの？」	「이야기하지 않아도 됐어?」	fix	local
+dict:permission:5	死ななくてよかった人々が死んだ。	죽지 않아도 되었던 사람들이 죽었다.	fix	local
+dict:permission:4	これもう帰っても良いんじゃね？	!rule:dict:permission:4	keep	local
+dict:permission:4	「私もエル君って呼んでも良い？」	!rule:dict:permission:4	keep	local
+dict:permission:1	「でもさ、誰もけがしなくてよかったじゃん。あはは」	「하지만, 아무도 다치지 않아서 다행이었잖아. 아하하」	fix	local
+dict:permission:1	本当に、今日一人にさせなくてよかったよ。	정말, 오늘 한 사람에 시키지 않아서 다행이었어.	fix	local
+dict:permission:1	私の担当の場所には幽霊が居なくてよかった。	내 담당의 장소에는 유령이 없어서 다행이다.	fix	local
+dict:permission:1	（うわーっ、試着しなくてよかった。	(우와앗, 시착하지 않아서 다행이다.	fix	local
+dict:permission:1	「失礼しました。あなたに怪我がなくてよかった」	「실례했습니다. 당신에게 상처가 없어서 다행이다」	fix	local
+dict:permission:1	アレは使うことがなくてよかったよ。	저것은 쓰는 것이 없어서 다행이었어.	fix	local
+dict:permission:1	僕は、みんなの列を飛びださなくてよかったと自分に言い聞かせた。	나는, 모두의 열을 튀어나오지 않아서 다행이었다고 자신에게 타일렀다.	fix	local
+dict:permission:1	「お、ログアウトしてなくてよかった！」	「오, 로그아웃하지 않아서 다행이야!」	fix	local
+dict:permission:2	おれは彼女いなくて良かった	나는 여자친구 없어서 다행이다	fix	local
+dict:permission:3	勉強していい大学に行っておけば	!rule:dict:permission:3	keep	local
+dict:permission:3	「私なんかずっと待っててもいいことないと思いますけど」	has:좋은 일	keep	local
+dict:permission:3	面倒ごとが避けられていいかもしれない。	!rule:dict:permission:3	keep	local
+dict:permission:3	もう、なんと言っていいか、わからなくなった。	!rule:dict:permission:3	keep	local
+dict:permission:3	部員構成のバランスがよくなっていいわね	!rule:dict:permission:3	keep	local
+dict:permission:3	身代金を用意する手間がなくていいでしょう？	!rule:dict:permission:3	keep	local
+dict:permission:3	誰も気にしていなさそうだ。	!rule:dict:permission:3	keep	local
+dict:permission:3	おばちゃんのいうことちゃんと聞いていい子にしてたか？	!rule:dict:permission:3	keep	local
+dict:permission:3	行ってもいいよ	가도 괜찮아	keep	local
+dict:permission:3	「行ってもいいけど、一人じゃ嫌だな」	has:가도 괜찮지만	keep	local
+dict:permission:3	いい大学に入りたい	좋은 대학에 들어가고 싶다	keep	local
+dict:permission:3	今日は早く寝た方がいい	오늘은 빨리 자는 것이 좋다	keep	local
+dict:permission:3	好きなのを選ぶのがいい	좋아하는 것을 선택하는 것이 좋다	keep	local
+dict:permission:3	どうすればいい？	어떻게 하면 돼?	keep	local
+dict:permission:3	それもいいですね	그것도 좋네요	keep	local
+dict:permission:3	その服いいね	그 옷 좋네	keep	local
+dict:permission:3	「いいなぁ、休めて」	has:좋겠다	keep	local
+dict:permission:5	布団も剥がさなくてよくなった	!rule:dict:permission:5	keep	local
+dict:permission:4	ここで突っかかっていっても良いことなど何もない	!rule:dict:permission:4	keep	local
+dict:permission:4	あまり根を詰めても良い結果が得られるとは限らん。	has:좋은 결과	keep	local
+dict:permission:1	「ね！　来てよかったでしょ？」	!rule:dict:permission:1	keep	local
+dict:permission:1	「ちょっと高かったけど、買ってよかった」	!rule:dict:permission:1	keep	local
+dict:permission:1	「見つかってよかった。今後気をつけるんだぞ」	!rule:dict:permission:1	keep	local
+dict:permission:1	「別に急がなくてもよかったのに」	!rule:dict:permission:1	keep	local
+dict:permission:7	予定どおりに出来たと言っていいだろう。	예정대로 할 수 있었다고 해도 좋을 것이다.	keep	local
+dict:permission:7	天才って言っていいよ	천재라고 말해도 좋아	keep	local
+dict:permission:7	トンチンカンと呼んでいいのは	!rule:dict:permission:3	keep	local
+dict:permission:8	異端と言っても良い程の	이단이라고 말해도 좋을 정도의	keep	local
+dict:permission:3	もう言っていい？	이제 말해도 돼?	fix	local
+dict:permission:3	名前で呼んでいい？	이름으로 불러도 돼?	fix	local
+dict:permission:8	「あまり気を使わなくて良いわよ。」	「그다지 신경을 쓰지 않아도 좋아.」	fix	local
+dict:permission:9	汚染処理をしなくてよい所が気に入っている。	오염 처리를 하지 않아도 좋은 곳이 마음에 든다.	fix	local
+dict:permission:4	お世話になっても良かったかな……。	신세를 져도 되었나…….	fix	local
+dict:permission:5	「奇天烈な名じゃ。用は済んだ。行ってよいぞ」	!rule:dict:permission:5	keep	local
+dict:permission:3	「それに卵が乗っていて、それを割るとまた卵の味が加わっていいですね」	!rule:dict:permission:3	keep	local
+dict:permission:3	「プレゼントだと罪悪感がなくていいですね」	!rule:dict:permission:3	keep	local
+dict:permission:3	「わかりました。来月からの増員の件も進めていいですよね？」	has:진행해도 되죠?	fix	local
+dict:permission:3	「一刀、先に行っていいわ。」	has:먼저 가도 돼.	fix	local
+dict:permission:3	「ちょっと、そんな急がなくていいじゃん、大丈夫？」	has:서두르지 않아도 되잖아	fix	local
+dict:permission:3	「なぁ、真央って呼んでいい？」	has:불러도 돼?	fix	local
+dict:permission:3	「『レオン』って呼んでいい？」	has:이라고 불러도 돼?	fix	local
+dict:permission:1	大好きなおねえちゃんがいなくならなくてよかったのです。	has:없어지지 않아서 다행이었습니다.	fix	local
+dict:permission:1	けがしなくてよかったので、すぐ帰った。	has:다치지 않아서 다행이었기 때문에	fix	local
+dict:permission:1	「ともかくあれ以上犠牲が出なくてよかったです。」	has:나오지 않아서 다행입니다.	fix	local
+dict:permission:1	アンキさんに火がつかなくてよかったですね	has:붙지 않아서 다행이었지요	fix	local
+dict:permission:5	「エルレイさん、治療しなくてよかったのでしょうか？」	has:치료하지 않아도 됐을까요?	fix	local

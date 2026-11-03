@@ -66,7 +66,7 @@ dict:jisjk:264789	才能があるとか勘違いしないで、ひたすら練�
 cx:prohibit-request:10	食べないでください、と言った。	!rule:cx:prohibit-request:10	keep	rewrites
 cx:prohibit-request:20	勘違いしないでくださいと言った。	!rule:cx:prohibit-request:20	keep	rewrites
 ending:naide	泣かないで。	울지 마.	keep	local-ending
-cx:prohibit-request:20	費用を心配しないでいいし	비용을 걱정하지 않아도 좋고	keep	rewrites
+cx:prohibit-request:20	費用を心配しないでいいし	비용을 걱정하지 않아도 되고	keep	rewrites
 cx:prohibit-particle:10	いいわよ、もう着ないから…今年だけなんだから！ …えっ、そ、そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	좋아, 이제 입지 않으니까…금년만이니까! …어, 그, 그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
 cx:prohibit-particle:10	そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
 cx:prohibit-particle:10	そんな顔しないでよ...もぅ...わかったわよぉ	그런 얼굴 하지 마...정말...알았어	keep	rewrites
@@ -84,7 +84,7 @@ cx:prohibit-request:20	無理はしないでください。あ、海風、お茶
 dict:jisjk:264789	その呼び方　二度としないで。おお　怖ぇ。怖ぇ。	has:두 번 다시 하지 마.	keep	local-ending
 dict:jisjk:264789	無理しないで無理しないで｡	has:무리하지 마.	keep	local-ending
 cx:prohibit-particle:10	みんな、油断しないで行こう。	모두, 방심하지 않고 가자.	keep	rewrites
-cx:prohibit-request:20	その間の費用を心配しないでいいし	그 사이의 비용을 걱정하지 않아도 좋고	keep	rewrites
+cx:prohibit-request:20	その間の費用を心配しないでいいし	그 사이의 비용을 걱정하지 않아도 되고	keep	rewrites
 cx:prohibit-particle:10	あんまり危険なことはしないで欲しいです…	!rule:cx:prohibit-particle:10	keep	rewrites
 cx:prohibit-particle:10	あまり無理はしないで欲しいデース！	!rule:cx:prohibit-particle:10	keep	rewrites
 cx:prohibit-request:20	あ、気を使わないでくれ	아, 신경을 쓰지 말아줘	keep	rewrites

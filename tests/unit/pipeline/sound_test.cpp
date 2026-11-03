@@ -422,6 +422,13 @@ HD_TEST(pipeline_sound) {
         {"くしゃくしゃに丸めた", "꼬깃꼬깃하게 丸めた"},
         {"ボロボロになった", "너덜너덜하게 なった"},
         {"ぐちゃぐちゃに", "엉망진창に"},
+        // の between an adj mimetic and a noun is 한; before other words and after other sounds it stays.
+        {"ふわふわのクッション", "푹신푹신한 クッション"},
+        {"つやつやのご飯", "반들반들한 ご飯"},
+        {"ボサボサの髪", "부스스한 髪"},
+        {"ふわふわのまま", "푹신푹신のまま"},
+        {"ガチャガチャの見出し", "달그락달그락の見出し"},
+        {"ふわふわーのクッション", "푹신푹신~のクッション"},
         // A mimetic of a syllable or two and ッ before と stands right after a kanji word;
         // a long vowel there is a volitional ending.
         {"時折ぶるっと身", "時折부르르 身"},
@@ -1304,11 +1311,46 @@ HD_TEST(pipeline_contracted_n) {
                                      "みんな\t모두\tE100\t\t18\n"
                                      "待\t기다&AA@\tM434\t\t19\n"
                                      "任\t맡&AA@\tM433\t\t20\n"
-                                     "主任\t주임\tN110\t\t21\n"}});
+                                     "主任\t주임\tN110\t\t21\n"
+                                     "勉強\t공부&AV@\tM459\t\t22\n"
+                                     "容赦\t용서\tN110\tHd\t23\n"
+                                     "気に\t신경 &AF@\tM449\t\t24\n"
+                                     "如何せん\t아무래도\tE300\t\t25\n"
+                                     "誤魔化\t속&AA@\tM433\t\t26\n"
+                                     "殲滅\t섬멸\tN110\tHd\t27\n"
+                                     "予期せぬ\t예기치 못한\tE0H0\t\t28\n"
+                                     "愛\t사랑\tN110\tHd\t29\n"
+                                     "せんじつ\t일전\tN110\t\t30\n"
+                                     "せんねん\t전념\tN110\t\t31\n"
+                                     "浮か\t떠&E6@\tM416\t\t32\n"
+                                     "強い\t강요&AV@\tM437\t\t33\n"
+                                     "休め\t쉬&AL@\tM437\t\t34\n"}});
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
     const Case cases[] = {
+        // the old negative of する after a verb of する, a noun of an act, or は or も after a word
+        {"勉強せん。", "勉強しない。"},
+        {"容赦せんぞ！", "容赦しないぞ！"},
+        {"気にせんかった", "気にしなかった"},
+        {"許しはせん", "許しはしない"},
+        {"何もせんよ", "何もしないよ"},
+        {"容赦せぬ。", "容赦しない。"},
+        {"勉強せんとする", "勉強せんとする"},  // the literary volitional before とする
+        {"勉強せんといかん", "勉強しないといかん"},
+        {"気にせんといて", "気にせんといて"},  // the Kansai request んといて
+        {"殲滅せん！", "殲滅せん！"},          // a spell (verb.chant-volitional)
+        {"如何せん、", "如何せん、"},          // a word that spans the せ
+        {"予期せぬ", "予期せぬ"},
+        {"愛せん", "愛せん"},                  // one kanji: its する conjugates otherwise
+        {"誤魔化せんぞ", "誤魔化せないぞ"},    // the potential of a godan verb in す
+        {"殲滅せんぞ", "殲滅しないぞ"},        // a spell verb before a particle is negative
+        {"何もせんべいだ", "何もせんべいだ"},  // a word that goes on in kana
+        {"ことせんせい", "ことせんせい"},
+        {"これはせんじつ", "これはせんじつ"},  // a kana word of the dictionary past the ん
+        {"何もせんねん", "何もしないねん"},    // but for one that ends with an ending
+        {"何もせんねんだ", "何もせんねんだ"},
+        {"うちはせんぞが", "うちはせんぞが"},
         {"見んな", "見るな"},
         {"見んなよ", "見るなよ"},
         {"帰んなよ", "帰んなよ"},  // a godan verb in る: as often the imperative 帰りな
@@ -1328,6 +1370,8 @@ HD_TEST(pipeline_contracted_n) {
         {"許せん！", "許せない！"},
         {"許せん", "許せない"},
         {"許せんかった", "許せなかった"},    // nor its past
+        {"許せんな", "許せないな"},          // nor before な: a potential takes no prohibition
+        {"誤魔化せんなぁ", "誤魔化せないなぁ"},
         {"信じられんかった", "信じられなかった"},
         {"信じられん…", "信じられない…"},
         {"負けんかった", "負けんかった"},    // an ichidan stem keeps the past with ん
@@ -1366,6 +1410,31 @@ HD_TEST(pipeline_contracted_n) {
         {"負けんしゅ", "負けんしゅ"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    // With dialect forms the negative ん reads the tail after it (spec GRM-3365): a sentence-final で or がな is よ, でも
+    // is なくても (ないでも before な), でええ is なくていい, another で is that of ないで; not where a stem's て form ends in
+    // that んで, the polite ませんで, the ん after an adjective's い, nor では.
+    LineContext dialect = ctx;
+    dialect.dialectForms = true;
+    const Case tails[] = {
+        {"知らんで。", "知らないよ。"},
+        {"許せんで！", "許せないよ！"},
+        {"負けんで", "負けないよ"},
+        {"勉強せんで。", "勉強しないよ。"},
+        {"許せんよ。", "許せないよ。"},          // a godan potential before a final よ
+        {"知らんでも", "知らなくても"},
+        {"負けんでもない", "負けないでもない"},
+        {"知らんでええ", "知らなくていい"},
+        {"負けんでいい", "負けなくていい"},
+        {"知らんで書く", "知らないで書く"},
+        {"知らんな", "知らないな"},            // a negative stem whose stem and る is no verb, before な
+        {"浮かんで。", "浮かんで。"},            // the て form of 浮かぶ
+        {"空に浮かんでも", "空に浮かんでも"},
+        {"すみませんでした", "すみませんでした"},
+        {"強いんです", "強いんです"},
+        {"休めんではないか", "休めんではないか"},
+        {"知らんでる", "知らないでる"},
+    };
+    for (const auto& c : tails) HD_CHECK_EQ(internal::RewriteContractedN(c.in, dialect, *loaded.snapshot), std::string(c.want));
     // the verb of a rebuke before んじゃない (spoken forms)
     HD_CHECK(internal::EndsInDictionaryVerb("ここで待つ", ctx, *loaded.snapshot));
     HD_CHECK(internal::EndsInDictionaryVerb("待たせる", ctx, *loaded.snapshot));       // a longer form of a kanji verb

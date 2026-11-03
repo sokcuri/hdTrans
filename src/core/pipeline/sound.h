@@ -344,6 +344,9 @@ struct SoundRow {
     // The lemma only before a する that describes no noun after it (fourth column acts:
     // ぷるぷるさせる 부들부들, but ぷるぷるした身 탱글탱글한).
     bool acts = false;
+    // KR takes 하다 as an adjective, written KR한 before an の and a noun (fourth column adj:
+    // ふわふわのクッション 푹신푹신한 쿠션).
+    bool adj = false;
     bool intj = false;    // an intj or lead row; the other rows are ono rows
     bool phrase = false;  // a row of phrases.tsv
     bool lead = false;    // an interjection only at the start of an utterance, before a pause

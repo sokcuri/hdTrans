@@ -32,3 +32,12 @@ HD_TEST(output_josa_copula_go) {
     HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation("(이)고", {}, false), std::string("(이)고"));
     HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation("정답이고 이유고", {}, false), std::string("정답이고 이유고"));
 }
+
+HD_TEST(output_josa_group_seo) {
+    const struct { const char* word; const char* form; } cases[] = {
+        {"세 명", "세 명이서"}, {"3명", "3명이서"}, {"혼자", "혼자서"}, {"단둘이", "단둘이서"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation(std::string(c.word) + "(이)서", {}, false), std::string(c.form));
+    }
+}

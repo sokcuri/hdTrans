@@ -24,8 +24,8 @@ HD_TEST(validity_rules_fingerprint) {
         h.Byte(static_cast<uint8_t>(r.followClass));
         h.Str(r.first);
     }
-    HD_CHECK_EQ(h.h, uint64_t{0xb469db027b5f3235ull});
-    HD_CHECK_EQ(rules.size(), size_t{758});
+    HD_CHECK_EQ(h.h, uint64_t{0x119f74fa33fb0d74ull});
+    HD_CHECK_EQ(rules.size(), size_t{759});
     HD_REQUIRE(!rules.empty());
     HD_CHECK_EQ(std::string(rules[0].source), std::string("でも"));
     HD_CHECK_EQ(rules[0].sourceClass, '2');
@@ -68,6 +68,8 @@ HD_TEST(validity_match_dictionary) {
         // nor ないな the ら of なら (見てないならいい: ない + なら).
         {"いいんだ", "なら", '4', 'X', false}, {"いつでも", "なら", '4', 'X', false}, {"います", "なら", '4', 'X', true}, {"いいよ", "になら", '4', 'X', false}, {"、", "になら", '4', 'X', true},
         {"らいい", "ないな", '5', '4', false}, {"。", "ないな", '5', '4', true},
+        // The adjective よい has no stem よ before な: よな after an imperative is the particle (頑張れよな).
+        {"な。", "よ", '7', 'X', false}, {"く", "よ", '7', 'X', true}, {"かった", "よ", '7', 'X', true},
     };
     for (const Case& c : cases) {
         HD_CHECK_EQ(worker.MatchDictionary(c.following, c.source, c.first, c.second), c.ok);

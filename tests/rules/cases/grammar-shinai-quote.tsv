@@ -1,0 +1,25 @@
+# 규칙: GRM-3368
+rule	input	expected	kind	layer
+dict:jisjk:342931	殺しもしないって。	죽이지도 않는다고.	fix	compose
+dict:jisjk:342931	逃しはしないってか？	놓치지는 않는다는 건가?	fix	compose
+dict:jisjk:342931	別にとって食べはしないって。	따로 취해 먹지는 않는다고.	fix	compose
+dict:jisjk:342931	別にとって食べはしないってのに」	has:먹지는 않는다는데	fix	compose
+dict:jisjk:342931	もう、出し惜しみはしないって。	has:아끼지는 않는다고	fix	compose
+dict:jisjk:342931	どちらにもならず、消えもしないって事は。	has:사라지지도 않는다는 것은	fix	compose
+dict:jisjk:342931	「アンタたちを逃がしはしないって言ったろォ？	has:놓치지는 않는다고 말했잖아	fix	compose
+dict:jisjk:342931	莫迦をお言いでないよ、ろくに見えもしないってのに。	has:보이지도 않는다는데	fix	compose
+dict:jisjk:342931	「だから、さっきも言ったけど、やり直しはしないって。	has:다시 하지는 않는다고	fix	compose
+dict:jisjk:342931	「ケイト、あなたはもう殺しはしないって私と誓ったでしょ？	has:죽이지는 않는다는	fix	compose
+dict:jisjk:342931	っつか孕み女なら布団から降ろしもしないってのはガチだったようだ。	has:내리지도 않는다는 것은	fix	compose
+dict:jisjk:342931	あいつ持っている服は高級なものばかり、耕すときも着替えはしないって」	has:갈아입지는 않는다고	fix	compose
+dict:jisjk:342931	どーせ爆音でアグロアとか聞いてるから聞こえはしないって〜♪」	has:들리지는 않는다고	fix	compose
+dict:jisjk:342931	オタクだってこと隠しもしないって言うか、中二病全開だし、	has:숨기지도 않는다고	fix	compose
+dict:jisjk:342931	殺しを依頼されていたのに殺しはしないって言ってそれで構わないって……」	has:죽이지는 않는다고 말해	fix	compose
+dict:jisjk:342931	私、逃がしはしないって言いましたよ。	has:놓치지는 않는다고 말했어요	fix	compose
+dict:jisjk:342931	逃がしはせん…せ、ん、め、つ、じゃあ～！	has:놓치지는 않는다…	fix	compose
+dict:jisjk:342931	そんなことで薫の事を忘れることなんてできはしないってわかっていたのに、私はバカな女だった。	has:할 수 있지는 않다고	keep	compose
+dict:jisjk:342931	だから逃げもしないと思う」	그러니까 도망치지도 않는다고 생각한다」	keep	compose
+dict:jisjk:342931	そう長く留まりはしないと思うけど、念には念を」	has:머무르지는 않는다고 생각하지만	keep	compose
+dict:jisjk:342931	流石に捕まったりはしないと思うけど、	has:잡히지는 않는다고 생각하지만	keep	compose
+dict:jisjk:342931	土下座はしないって決めている。	도게자는 하지 않는다고 결정하고 있다.	keep	compose
+dict:jisjk:342931	何もしないって約束だよ」	has:아무것도 하지 않는다는 약속이야	keep	compose

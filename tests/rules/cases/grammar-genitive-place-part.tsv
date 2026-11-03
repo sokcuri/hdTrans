@@ -1,0 +1,33 @@
+# 규칙: GRM-3250
+rule	input	expected	kind	layer
+dict:jisjk:341889	一人で村の外に出て活動することは普通のことだった。	혼자서 마을 밖에 나와 활동하는 것은 보통 일이었다.	fix	local
+dict:jisjk:341889	そう言うとトイレの外に出ていった。	그렇게 말하니 화장실 밖에 나갔다.	fix	local
+dict:jisjk:341889	アナスタシアは颯爽と船の先端に立った。	아나스타샤는 씩씩하게 배 끝에 섰다.	fix	local
+dict:jisjk:341889	敵は南街区の寂れた教会の地下にいるらしい。	적은 낭가이구가 쇠퇴해진 교회 지하에 있는 것 같다.	fix	local
+dict:jisjk:341889	山の頂上にいた。	산 정상에 있었다.	fix	local
+dict:jisjk:341889	塔の頂上に当たる部屋。	탑 정상에 해당되는 방.	fix	local
+dict:jisjk:341889	紙の表面になにかのマークがついた。	종이 표면에 뭔가의 마크가 붙었다.	fix	local
+dict:jisjk:341889	話の途中で後ろから口を塞がれたテオは、	이야기 도중에 뒤에서 입을 막힌 테오는,	fix	local
+dict:jisjk:341889	あんただってお仕事の途中でＣＤショップに立ち寄って、	너도 일 도중에 CD 숍에 들러,	fix	local
+dict:w:29250	祝賀会のあとで王様に呼ばれて、	축하회 후에 임금님에게 불려,	fix	local
+dict:jisjk:341889	そう言えば神事の最中に急に眠気と疲れが増して……	그러고 보니 제사 도중에 갑자기 졸음과 피로가 늘어나……	fix	local
+dict:jisjk:341889	部屋の入り口を見据え、	방 입구를 확인해	fix	local
+dict:jisjk:341889	孝宏が家の正面に回ると、	타카히로가 집 정면으로 돌면,	fix	local
+dict:jisjk:341889	厨房の出口に向かおうとしたふたりに、	주방 출구를 향하려고 한 두 사람에게,	fix	local
+dict:jisjk:341889	椅子の背に両手を縛られた状態で座るソフィアの姿が見えた。	의자 등받이에 양손이 속박된 상태로 앉는 소피아의 모습이 보였다.	fix	local
+dict:jisjk:341889	身体の魔力を手の先に集めて、	몸의 마력을 손 끝에 모아,	fix	local
+dict:jisjk:341889	謝罪の言葉を繰り返す彼の背を私はそっとさすった。	has:그의 등을	keep	local
+dict:jisjk:341889	彼のあとをトボトボと歩いているところだ。	has:그의 뒤를	keep	local
+dict:jisjk:341889	白髪の背の高いにーちゃんが直してったって	has:백발의 키가	keep	local
+dict:jisjk:341889	猫が通る事ができる程度の隙間を開ける。	has:정도의 틈새를	keep	local
+dict:jisjk:341889	弁当はそのあとでいいから」	has:그 후에	keep	local
+dict:jisjk:341889	その途中で死んでくれても構わないよ。	has:그 도중에	keep	local
+dict:jisjk:341889	人だかりの中心に見えるのは、	has:무리의 중심	keep	local
+dict:jisjk:341889	場所は宮内の端にあり、	has:궁내의 구석	keep	local
+dict:jisjk:341889	この時あの悲しみの先にはこんな楽しいことがあるんだな、	has:슬픔의 끝	keep	local
+dict:jisjk:341889	あの不遜な態度の裏側に隠れているであろう悲しみも、	has:태도의 뒤편	keep	local
+dict:jisjk:341889	ドアの隙間から襲撃者を睨みつけたまま動かない。	has:문의 틈새	keep	local
+dict:jisjk:341889	ペニスの先端を凪に当てる。	has:페니스의 끝을	keep	local
+dict:jisjk:341889	ペニスの根元から甘い疼きが湧きだしてきた。	has:페니스의 밑동	keep	local
+dict:jisjk:341889	看板の反対側を持っているユメが少し上に動いた。	has:간판의 반대쪽	keep	local
+dict:jisjk:341889	その巨躯の内側から爆ぜるようにして色取り取りの光が世界中に散らばっていく。	has:거구의 안쪽에서	keep	local

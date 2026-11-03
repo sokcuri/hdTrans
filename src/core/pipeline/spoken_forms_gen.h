@@ -276,6 +276,23 @@ inline constexpr std::string_view kKansaiNegativeStems[] = {
     "いら",
 };
 
+// Verbs of one kana in kanji said with that kana's vowel drawn before the Kansai へん (寝えへん 寝ない,
+// 見いへん 見ない, 来えへん 来ない), and the kana けえ of 来る (けえへん こない): the drawn stem and the stem.
+inline constexpr std::string_view kKansaiDrawnStems[][2] = {
+    {"寝え", "寝"}, {"出え", "出"}, {"見い", "見"}, {"似い", "似"}, {"煮い", "煮"}, {"来え", "来"}, {"けえ", "こ"},
+};
+
+// What follows the Kansai ええ of いい: a sentence particle, the copula, a conjunction or a noun it describes.
+// A kanji whose stem and い is an adjective (怖い, 強い, 痛い): ええ after it is the adjective's drawn end
+// (怖ええよ 무서워, 強ええな), not the Kansai いい. 好, 良 and 善 (好い) are not here: 格好ええ is いい.
+inline constexpr std::u32string_view kKansaiEeAdjectiveKanji =
+    U"怖恐強速早痛寒暑熱凄汚臭遅若古安高低狭広重軽長短太細弱硬固堅黒白赤青甘辛苦酸温近遠多濃薄偉悪鋭鈍眩煩痒眠憎深浅暗緩荒粗渋酷醜拙旨巧丸";
+
+inline constexpr std::string_view kKansaiEeBefore[] = {
+    "よ", "わ", "な", "ね", "か", "やん", "やろ", "じゃろ", "ねん", "んや", "んよ", "んか", "んじゃ", "んだ", "んです",
+    "から", "けど", "けれど", "し", "のに", "のう", "のぅ", "もん", "感じ", "子", "人", "とこ", "加減", "かげん",
+};
+
 inline constexpr std::string_view kToruEndings[] = {
     "る",
     "った",

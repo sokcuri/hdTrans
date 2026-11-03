@@ -1,0 +1,16 @@
+# 규칙: GRM-3367
+rule	input	expected	kind	layer
+normalize:kansai-drawn-stem	寝えへん。	잠을 자지 않는다.	fix	normalize
+normalize:kansai-drawn-stem	今日はもう出えへん。	오늘은 이제 나오지 않는다.	fix	normalize
+normalize:kansai-drawn-stem	テレビは見いへん。	텔레비전은 보지 않는다.	fix	normalize
+normalize:kansai-drawn-stem	あいつは来えへん。	저 녀석은 오지 않는다.	fix	normalize
+normalize:kansai-drawn-stem	あいつ、けえへんな。	저 녀석, 오지 않네.	fix	normalize
+normalize:kansai-drawn-stem	寝えへんで。	잠을 자지 않아.	fix	normalize
+normalize:kansai-drawn-stem	ちっとも似いへん。	조금도 닮지 않는다.	fix	normalize
+normalize:kansai-drawn-stem	見いへんかった。	보지 않았다.	fix	normalize
+normalize:kansai-drawn-stem	見えへん。	안 보인다.	keep	normalize
+normalize:kansai-drawn-stem	消えへん。	사라지지 않는다.	keep	normalize
+normalize:kansai-drawn-stem	やっぱり離れへん。	역시 떨어지지 않는다.	keep	normalize
+normalize:kansai-drawn-stem	手加減せえへんで。	힘 조절하지 않아.	keep	normalize
+normalize:kansai-drawn-stem	逃れられへん。	피할 수 없다.	keep	normalize
+normalize:kansai-drawn-stem	何にもあらへん	아무것도 없다	keep	normalize

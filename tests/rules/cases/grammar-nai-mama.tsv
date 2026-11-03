@@ -1,0 +1,20 @@
+# 규칙: GRM-3402
+rule	input	expected	kind	layer
+dict:jisjk:365253	手紙の内容は、残念ながらわからないままだ。	편지의 내용은, 유감스럽지만 모르는 채다.	fix	local-ending
+dict:jisjk:365253	この恒星系が銀河のどの辺りに位置するのか、という点については依然としてわからないままだ。	has:여전히 모르는 채다	fix	local-ending
+dict:jisjk:365253	誰にも分からないままだった。	아무도 모르는 채였다.	fix	local-ending
+dict:jisjk:365253	分からないままだった。	모르는 채였다.	fix	local-ending
+dict:jisjk:365253	答えは分からないままだ。	대답은 모르는 채다.	fix	local-ending
+dict:jisjk:365253	眠れないままだった。	잘 수 없는 채였다.	fix	local-ending
+dict:jisjk:365253	若いままだ。	젊은 그대로다.	keep	local-ending
+dict:jisjk:365253	昔のままだ。	옛날 그대로다.	keep	local-ending
+dict:jisjk:365253	とりあえず状況は依然としてわからないままだが、生命の危機は脱する事ができたようだった。	has:여전히 모르는 채이지만	keep	local-ending
+dict:jisjk:365253	知らないまま帰った。	모르는 채 돌아갔다.	keep	local-ending
+dict:jisjk:365253	彼は来ないままだった。	그는 오지 않는 채였다.	fix	local-ending
+dict:jisjk:365253	結局、何も言えないままだった。	결국, 아무것도 말할 수 없는 채였다.	fix	local-ending
+dict:jisjk:365253	名前も知らないままだった。	이름도 모르는 채였다.	fix	local-ending
+dict:jisjk:365253	誰も来ないままだった。	아무도 오지 않는 채였다.	fix	local-ending
+dict:jisjk:365253	使えないままだけど	쓸 수 없는 채이지만	keep	local-ending
+dict:jisjk:365253	わかんないままなんだよ｡	모르는 채야.	keep	local-ending
+dict:jisjk:365253	犯人は見つからないままだ。	범인은 발견되지 않은 채다.	keep	local-ending
+dict:jisjk:365253	彼女は目を覚まさないままだ。	그녀는 눈을 뜨지 않은 채다.	keep	local-ending

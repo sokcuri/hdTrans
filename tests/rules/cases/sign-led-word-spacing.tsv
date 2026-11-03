@@ -1,6 +1,6 @@
 # 규칙: LAY-15
 rule	input	expected	kind	layer
-compose:sign-number-noun	銀の盾+10	은의 방패+10	fix	compose
+compose:sign-number-noun	銀の盾+10	은 방패+10	fix	compose
 compose:sign-number-noun	魔法の指輪+2	마법의 반지+2	fix	compose
 compose:sign-number-noun	回復速度+1	회복 속도+1	fix	compose
 compose:sign-number-noun	防御+1、魔力+2	방어+1, 마력+2	fix	compose

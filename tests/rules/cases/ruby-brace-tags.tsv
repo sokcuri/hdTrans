@@ -31,7 +31,7 @@ normalize:ruby	身体を{rb}捻{/rb}{rt}ねじ{/rt}って周りを見てみて�
 normalize:ruby	{rb}挫{/rb}{rt}くじ{/rt}けたり……	{rb}꺾이거나{/rb}{rt}꺾이거나{/rt}……	keep	normalize
 normalize:ruby	あれって{rb}剥{/rb}{rt}は{/rt}がせるのか？	그건 {rb}벗길 수 있는 건가{/rb}{rt}벗길 수 있는 건가{/rt}?	fix	normalize
 normalize:ruby	あの{rb}蔑{/rb}{rt}さげす{/rt}んだ目。	그 {rb}업신여긴{/rb}{rt}업신여긴{/rt} 눈.	keep	normalize
-word:ruby-neighbour	なんで{rb}寂{/rb}{rt}さみ{/rt}しそうなの？	왜 {rb}외로운 것 같아{/rb}{rt}외로운 것 같아{/rt}?	fix	rewrites
+word:ruby-neighbour	なんで{rb}寂{/rb}{rt}さみ{/rt}しそうなの？	왜 {rb}외로워 보여{/rb}{rt}외로워 보여{/rt}?	fix	rewrites
 normalize:ruby	通知表を{rb}剥{/rb}{rt}は{/rt}がそうとまでしてくるとは……	성적표를 {rb}벗기려고까지 해 오다니{/rb}{rt}벗기려고까지 해 오다니{/rt}……	fix	normalize
 normalize:ruby	手に持った{rb}瓶{/rb}{rt}びん{/rt}を落とさないで済んだ。	손에 가진 {rb}병{/rb}{rt}병{/rt}을 떨어뜨리지 않고 끝났다.	keep	normalize
 normalize:ruby	頬から{rb}滴{/rb}{rt}しずく{/rt}が一粒落ちる。	뺨에서 {rb}물방울{/rb}{rt}물방울{/rt}이 한 알 떨어진다.	keep	normalize

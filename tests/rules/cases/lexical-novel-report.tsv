@@ -1,0 +1,52 @@
+# 규칙: LEX-3700
+rule	input	expected	kind	layer
+dict:w:29902	薪をくべるのに	장작을 지피는데	fix	lookup
+dict:w:29902	新しく薪をくべなければ寒さで凍え死ぬかもしれない。	새로 장작을 지피지 않으면 추위로 얼어붙고 죽을지도 모른다.	fix	lookup
+dict:w:29902	暖炉に近づき薪をくべた。	벽난로에 가까워져 장작을 지피었다.	fix	lookup
+dict:w:29902	紫杏は厨房のかまどに薪をくべ、シチューを温める。	자행은 주방의 부뚜막에 장작을 지피어 스튜를 데운다.	fix	lookup
+dict:w:29901	イザベラが火にくべていたのは、ハンナの私物だった。	이사벨라가 불에 넣고 있던 것은, 한나의 개인 물건이었다.	fix	lookup
+dict:w:29902	男が火に薪をくべながらぽつりと、	남자가 불에 장작을 지피면서 툭하고,	fix	lookup
+dict:w:29901	炉にくべれば、少しは足しになるだろう』	로에 넣으면, 조금은 더하가 될 것이다』	fix	lookup
+dict:jisjk:29720	岩にくぼみのある場所へ移動する。	바위에 움푹 팬 곳이 있는 장소에 이동한다.	fix	lookup
+dict:jisjk:29720	城壁の僅かな窪みを利用し登る。	성벽의 얼마 안되는 움푹 팬 곳을 이용해 오른다.	fix	lookup
+dict:jisjk:29720	僅かな窪みに足をかけ崖を降りた。	얼마 안되는 움푹 팬 곳에 다리를 내기벼랑을 내렸다.	fix	lookup
+pack:novel-report-senses:1	惨めさや寂しさばかりが募ってきそうだったので、	비참함이나 외로움만이 커져 올 것 같았기 때문에,	fix	packs
+pack:novel-report-senses:1	オレじゃダメだったか、という無念さが募る。	나는 안되었던인가, 라는 원통함이 커진다.	fix	packs
+pack:novel-report-senses:1	ラハッドの中で否応なく危機感が募っていく。	라핫드 중에서 억지로 위기감이 커져 간다.	fix	packs
+pack:novel-report-senses:1	それでも、私が教えていると罪悪感が募る。	그래도, 내가 가르치고 있으면 죄책감이 커진다.	fix	packs
+pack:novel-report-senses:1	苛々が募り始め些細なことで喧嘩を始める。	안달복달이 커지기 시작하고 사소한 일로 싸움을 시작한다.	fix	packs
+pack:novel-report-senses:1	実際は、わたしの婚約者候補を募る催しだったの。	실제는, 내 약혼자 후보를 모집하는 행사였어.	keep	packs
+pack:novel-report-senses:1	外からも冒険者を募り、	밖에서도 모험가를 모집하고,	keep	packs
+pack:novel-report-senses:1	体育館には、ＰＴＡが募った女性ボランティア達が、先に集合している。	체육관에는, PTA가 모집한 여성 자원봉사들이, 먼저 집합하고 있다.	keep	packs
+pack:novel-report-senses:3	すべての責任は私が負う	모든 책임은 내가 진다	fix	packs
+pack:novel-report-senses:3	その責任は誰が負うと？	그 책임은 누가 진다고?	fix	packs
+pack:novel-report-senses:3	その責任は誰かが負わねばならない。	그 책임은 누군가가 져야 한다.	fix	packs
+pack:novel-report-senses:3	しかし心に大きな傷を負った被害者でもある。	하지만 마음에 큰 상처를 입은 피해자이기도 하다.	keep	packs
+pack:novel-report-senses:3	瀕死の重傷を負ったアスナを看ながら、	빈사의 중상을 입은 아스나를 보면서,	keep	packs
+dict:lexical-novel-misreads	伐り倒した木	베어 쓰러뜨린 나무	fix	lookup
+dict:lexical-novel-misreads	木を伐りたいなら森の入り口付近で伐ればいいし、	나무를 베고 싶으면 숲 입구 부근에서 베면 되고,	fix	lookup
+dict:lex:dono-honorific	聖王どのは	성왕님은	fix	local
+dict:lex:dono-honorific	門番どの、お役目ご苦労様でした！	문지기님, 역할 수고였습니다!	fix	local
+dict:lex:dono-honorific	書記官どのが望むのであれば、	서기관님이 바란다면,	fix	local
+dict:lex:dono-honorific	すぐ真後ろに、我が副司令官どのが立っていた。	바로 바로 뒤에, 우리 부사령관님이 서 있었다.	fix	local
+dict:lex:dono-honorific	「本当に弱いですねぇ、少将どの。」	「정말 약하네요, 소장님.」	fix	local
+dict:lex:dono-honorific	知ってるだろう、上官どの。	알고 있을 것이다, 상관님.	fix	local
+dict:lex:dono-honorific	「すまんのう婿どの」	「미안하구나 사위님」	fix	local
+dict:lex:dono-honorific	「って一気にこの谷間を抜けちまおうってのが、隊長どののお言葉だが」	「라고 단번에 이 계곡을 빠져버리자는의가, 대장님의 말씀이지만」	fix	local
+dict:lex:dono-honorific	どの本がいい？	어느 책이 좋아?	keep	local
+dict:lex:dono-honorific	今度どの店に行く？	이번 어느 가게에 가?	keep	local
+dict:lex:dono-honorific	この中でどの子が好き？	이 안에서 어느 아이를 좋아해?	keep	local
+dict:i:3466	器が大きくなる	그릇이 커진다	fix	lookup
+dict:i:3466	お前も謝れと言ってやりたいが、俺は器が大きいので許してやろう。	너도 사과하라고 말하고 싶지만, 나는 그릇이 크기 때문에 용서해 주마.	fix	lookup
+dict:i:3466	器が大きければ大きいほど、魔法少女として行使できる力が大きくなる。	그릇이 크면 큰 만큼, 마법소녀로서 행사할 수 있는 힘이 커진다.	fix	lookup
+dict:i:3466	自分の男性器が大きいという自覚があるのでしょう。	자신의 남성기가 크다고 하는 자각이 있겠죠.	keep	lookup
+dict:w:29900	暖炉に手紙をくべた。	벽난로에 편지를 넣었다.	fix	lookup
+dict:w:29903	ドルトンは暖炉に火をくべた。	돌턴은 벽난로에 불을 지피었다.	fix	lookup
+pack:novel-report-senses:1	参加者は随時募っています。	참가자는 수시로 모집하고 있습니다.	keep	packs
+pack:novel-report-senses:1	男子の参加者を広く募るため、	남자의 참가자를 넓게 모집하기 위해,	keep	packs
+pack:novel-report-senses:1	手伝ってくれる方を有償で募ります。	도와 주는 편을 유상으로 모집합니다.	keep	packs
+pack:novel-report-senses:1	そんな苛立たしさまで募ってきている。	그렇게 초조함까지 커져 오고 있다.	fix	packs
+dict:lex:dono-honorific	「骸骨どの？」	「해골님?」	fix	local
+pack:novel-report-senses:4	志願兵が募られた。	지원병이 모집되었다.	fix	packs
+pack:novel-report-senses:1	焦りだけが募っていく	초조만이 커져 간다	fix	packs
+dict:lex:dono-honorific	王様どの	lacks:님님	keep	local

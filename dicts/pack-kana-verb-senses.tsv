@@ -1,0 +1,7 @@
+#! layer=pack
+# 목적어로 가나로 쓴 동사의 뜻을 고르는 팩 행: 息をととのえる 숨을 고르다, 身なりをととのえる 가다듬다, 準備をととのえる 갖추다
+id	lemma	pos	slot	cond	target	spec	prov	note	kind	pri
+kana-verb-senses:1	ととのえる	v1	sense	obj=息|呼吸|息遣い	고르다	LEX-3702		息をととのえる 숨을 고르다		
+kana-verb-senses:2	ととのえる	v1	sense	obj=身なり|身だしなみ|身支度|服装|髪|体勢|態勢|姿勢|居住まい	가다듬다	LEX-3702		身だしなみをととのえる 몸가짐을 가다듬다		
+kana-verb-senses:3	ととのえる	v1	sense	obj=準備|用意|手筈|手はず|環境|条件|態勢	갖추다	LEX-3702		準備をととのえる 준비를 갖추다		
+kana-verb-senses:4	ととのえる	v1	sense	obj=味	맞추다	LEX-3702		味をととのえる 맛을 맞추다		

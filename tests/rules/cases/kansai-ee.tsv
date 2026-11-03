@@ -1,0 +1,31 @@
+# 규칙: LEX-3867
+rule	input	expected	kind	layer
+normalize:kansai-ee	「それならええよ」	「그렇다면 좋아」	fix	normalize
+normalize:kansai-ee	「ええよ」	「좋아」	fix	normalize
+normalize:kansai-ee	「準備はええか？　始めるでー」	「준비는 됐나? 시작할 거야―」	fix	normalize
+normalize:kansai-ee	「いくで、準備はええか」	「가는 걸로, 준비는 됐나」	fix	normalize
+normalize:kansai-ee	「お、アラタ、ええやんアンタんとこの新人。」	has:아라타, 좋아	fix	normalize
+normalize:kansai-ee	「どうつっこんだらええねん。」	has:좋겠네	fix	normalize
+normalize:kansai-ee	「張り切るんはええけど、目標がひっくいなぁ」	has:좋지만	fix	normalize
+normalize:kansai-ee	「もうええわ……。」	「이제 돼…….」	fix	normalize
+normalize:kansai-ee	提督さん？ 早く読んだ方がええよ	제독님? 빨리 읽는 것이 좋아	fix	normalize
+normalize:kansai-ee	浦風の出番じゃね？ええよ！	갯바람의 차례가 아니야? 좋아!	fix	normalize
+normalize:kansai-ee	ええ感じやのう。	has:좋은 느낌	fix	normalize
+normalize:kansai-ee	夜の戦じゃのう。ええとこ戴きじゃ！	has:좋은 데	fix	normalize
+normalize:kansai-ee	ええか？暁の水平線に勝利を刻むんじゃ！	알겠어? 새벽의 수평선에 승리를 새기지!	fix	normalize
+normalize:kansai-ee	十七駆でお花見もええね♪	17구로 꽃놀이도 좋네♪	fix	normalize
+normalize:kansai-ee	まあ、ええか。のんびりしよー。	뭐, 됐나. 한가로이 해~.	fix	normalize
+normalize:kansai-ee	ええで。	좋아.	fix	normalize
+normalize:kansai-ee	ええ、私が書きました。	네, 제가 썼습니다.	keep	normalize
+normalize:kansai-ee	ますね。ええっと……	has:음	keep	normalize
+normalize:kansai-ee	ええ～っ！	에에~엣!	keep	normalize
+normalize:kansai-ee	ええ？ 沈む	어? 가라앉는다	keep	normalize
+normalize:kansai-ee	こええよ。	무서워.	keep	normalize
+normalize:kansai-ee	ええ、そうです。	네, 그렇습니다.	keep	normalize
+normalize:kansai-ee	怖ええよ	무서워	keep	normalize
+normalize:kansai-ee	強ええな	강하네	keep	normalize
+normalize:kansai-ee	速ええな	빠르네	keep	normalize
+normalize:kansai-ee	痛ええよ	아파	keep	normalize
+normalize:kansai-ee	寒ええな	춥네	keep	normalize
+normalize:kansai-ee	頭ええな	머리가 좋아	fix	normalize
+normalize:kansai-ee	格好ええ	멋지다	fix	normalize

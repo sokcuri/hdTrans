@@ -24,10 +24,10 @@ lookup:longer-noun	二人分の食事。	두 사람분의 식사.	keep	lookup
 lookup:longer-noun	序章 第2話 手のひらの上で	서장 제2화 손바닥 위에서	keep	lookup
 lookup:longer-noun	箸を相手の弁当箱に突っ込む。	젓가락을 상대의 도시락통에 집어넣는다.	keep	lookup
 lookup:longer-noun	確かにレナの弁当箱はこの食卓の花だった。	확실히 레나의 도시락통은 이 식탁의 꽃이었다.	keep	lookup
-lookup:longer-noun	「はい、ここまで。おまえらは帰っていいぞ」	「네, 여기까지. 너희는 돌아가도 좋아」	keep	lookup
+lookup:longer-noun	「はい、ここまで。おまえらは帰っていいぞ」	「네, 여기까지. 너희는 돌아가도 돼」	keep	lookup
 lookup:longer-noun	吹奏楽部部長	취주악부 부장	keep	lookup
 lookup:longer-noun	部下は来訪者の名前を告げる。	부하는 방문자의 이름을 말한다.	keep	lookup
 lookup:longer-noun	宇宙飛行士同士	우주비행사끼리	keep	lookup
 lookup:longer-noun	経験ありそうだ。	경험 있을 것이다.	keep	lookup
-lookup:longer-noun	運動が嫌いな人向けの授業だ。	운동이 싫은 사람용 수업이다.	keep	lookup
+lookup:longer-noun	運動が嫌いな人向けの授業だ。	운동을 싫어하는 사람용 수업이다.	keep	lookup
 dict:w:26817	むしろ経験豊富よ？	오히려 경험 풍부해?	fix	lookup

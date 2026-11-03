@@ -3,7 +3,7 @@ dict:terms:1	小屋というよりは倉だな。	오두막이라기보다는 �
 dict:terms:1	倉庫に入れる。	창고에 들어갈 수 있다.	keep	defaults
 dict:terms:2	柵の外側に堀を作る。	울타리의 바깥쪽에 해자를 만든다.	fix	defaults
 dict:terms:2	堀さんが来た。	호리 씨가 왔다.	keep	defaults
-dict:terms:3	凶暴そうな前爪を持っていた。	흉포할 것 같은 앞발톱을 가지고 있었다.	fix	lookup
+dict:terms:3	凶暴そうな前爪を持っていた。	흉포한 듯한 앞발톱을 가지고 있었다.	fix	lookup
 dict:terms:4	太い木の根が横たわっていた。	굵은 나무뿌리가 누워 있었다.	fix	defaults
 dict:terms:5	杉とか檜を育てる。	삼나무라든지 편백나무를 기른다.	fix	defaults
 dict:jisjk:116141	竜の背から降りる。	용의 등에서 내린다.	fix	defaults

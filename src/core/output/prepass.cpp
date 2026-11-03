@@ -260,8 +260,8 @@ std::string_view DropLastRune(std::string_view s) {
 // The last character of s, 0 when s is empty.
 char32_t LastRune(std::string_view s) { return s.empty() ? 0 : text::DecodeRune(s.substr(DropLastRune(s).size())).cp; }
 
-// A Korean counter counted with native Korean numerals (두 마리, 세 번, 네 장); counters
-// counted with Sino-Korean numerals (8체, 3층, 2호) are not listed and keep digits. A Korean
+// A Korean counter counted with native Korean numerals (두 마리, 세 번, 네 장, 세 구); counters
+// counted with Sino-Korean numerals (3층, 2호, 2기) are not listed and keep digits. A Korean
 // counter that also counts with Sino-Korean numerals lists the Japanese counters it is
 // native for: 2번 for 番 and 3장 for 章 stay digits. Some counters form words with 한 (한번,
 // 한잔, 한마디) and are not split from it.
@@ -275,12 +275,15 @@ constexpr NativeCounter kNativeCounters[] = {
     {"마리", U""},          {"개", U""},          {"명", U""},           {"사람", U""},         {"권", U"冊"},
     {"자루", U""},          {"그루", U""},        {"잔", U"", true},     {"대", U"台"},         {"장", U"枚張"},
     {"살", U""},            {"가지", U"", true},  {"군데", U""},         {"채", U"軒棟"},       {"척", U"隻艘"},
-    {"벌", U"着"},          {"통", U"通樽", true}, {"켤레", U""},        {"송이", U""},         {"알", U"", true},
+    {"벌", U"着膳"},          {"통", U"通樽", true}, {"켤레", U""},        {"송이", U""},         {"알", U"", true},
     {"병", U"本瓶"},        {"그릇", U""},        {"끼", U"", true},     {"가닥", U"", true},   {"쌍", U""},
     {"곳", U""},            {"마디", U"", true},  {"걸음", U"", true},   {"접시", U""},         {"봉지", U""},
     {"상자", U""},          {"바퀴", U""},        {"발", U"発"},         {"차례", U"", true},   {"번", U"回度遍", true},
     {"번째", U""},          {"개째", U""},        {"명째", U""},         {"마리째", U""},       {"면", U"面"},
-    {"덩어리", U""},        {"회", U"回", false, "번"},
+    {"덩어리", U""},        {"회", U"回", false, "번"}, {"구", U"体"},
+    {"조각", U""},          {"방울", U""},        {"줄기", U""},         {"첩", U"服"},         {"캔", U"缶"},
+    {"분", U"柱"},          {"입", U"口"},        {"모", U"丁"},         {"공기", U"膳"},       {"동", U"張"},
+    {"곡", U"曲"},
 };
 
 std::string_view NativeForm(const NativeCounter& c) { return c.native.empty() ? c.korean : c.native; }
@@ -523,10 +526,16 @@ bool AttachesToNoun(std::string_view surface, std::string_view korean) {
 }
 
 // Whether a noun's Korean is an adverb, which forms no compound with the noun after it (結局昼
-// 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn) or a word of ko.adverb-noun.
+// 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn), also one of several words
+// (血染めの 피로 물든), or a word of ko.adverb-noun.
 bool AdverbKorean(std::string_view korean, std::string_view tags) {
-    if (!HangulWord(korean) || text::RuneCount(korean) < 2) return false;
-    return Contains(tags, "Nn") || dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
+    if (text::RuneCount(korean) < 2) return false;
+    if (Contains(tags, "Nn")) {
+        std::string words(korean);
+        std::erase(words, ' ');
+        return HangulWord(words);
+    }
+    return HangulWord(korean) && dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
 }
 
 // Whether the item continues a number or a range of numbers written before it (第2回,

@@ -1,0 +1,39 @@
+# 규칙: GRM-3351, LEX-3851
+rule	input	expected	kind	layer
+cx:weather-state:15	空は晴れていた。	하늘은 맑았다.	fix	rewrites
+cx:weather-state:15	今日も空は晴れている。	오늘도 하늘은 맑다.	fix	rewrites
+cx:weather-state:15	今宵は晴れていた筈……」	has:오늘 밤은 맑았을 터	fix	rewrites
+cx:weather-state:15	空は晴れているが、雲が多い。	하늘은 맑지만, 구름이 많다.	fix	rewrites
+cx:weather-state:15	空は晴れているのに、吹き抜ける風が冷たく肌寒い。	has:하늘은 맑은데,	fix	rewrites
+cx:weather-state:15	今日も空は晴れていて、そよそよと吹く風に桜の花びらが運ばれ、春の始まりを告げていた。	has:오늘도 하늘은 맑아,	fix	rewrites
+cx:weather-state:15	晴れていたとしても到底山頂まで保たないだろう。	has:맑았다고 해도	fix	rewrites
+cx:weather-state:15	無駄に晴れている空の下。	쓸데없이 맑은 하늘 아래.	fix	rewrites
+cx:weather-state:10	突然、それまで晴れていた空に黒雲が集まる。	has:그때까지 맑았던 하늘에	fix	rewrites
+cx:weather-state:10	あれほど晴れていた空には、一面を覆うどす黒く厚い雲が渦巻いている。	has:그토록 맑았던 하늘에는,	fix	rewrites
+cx:weather-state:10	空は晴れていた。	!rule:cx:weather-state:10	keep	rewrites
+cx:weather-state:20	「晴れてる。	「맑다.	fix	rewrites
+cx:weather-state:20	そこそこ晴れてるし、多分プレクトなら見えるんだろうなあ）	has:적당히 맑고,	fix	rewrites
+cx:weather-state:20	「ん〜、やっぱりこうやって晴れてる日に歩くのは気持ちが良いなぁ」	has:맑은 날에 걷는	fix	rewrites
+cx:weather-state:20	「ここだけ霧が晴れてる。	has:안개가 걷혀 있다	keep	rewrites
+cx:weather-state:30	さっきまで晴れてたのに…。	has:조금 전까지 맑았	fix	rewrites
+cx:weather-state:30	「そうだね…俺らの時は晴れてたもんね…」	has:우리 때는 맑았잖아	fix	rewrites
+cx:weather-state:30	こんなに暑くて晴れてたから、とっくに梅雨明けしてるんだと勘違いしていたぜ！	has:맑았으니까,	fix	rewrites
+cx:weather-state:30	「そういえば幻想の森の霧が晴れてたね」	!rule:cx:weather-state:30	keep	rewrites
+cx:weather-state:30	せっかく人がいなくなって気が晴れてたのに。	has:기분이 풀렸었는데	keep	rewrites
+cx:weather-state:15	外は雨でじとじとしてるけど、私の心は晴れている。	has:마음은 풀려 있다	keep	rewrites
+cx:weather-state:15	今はそのような疑いは晴れているものの、	has:의심은 풀려 있지만	keep	rewrites
+cx:weather-state:15	空は晴れてはいるものの、雲が多い。	!rule:cx:weather-state:15	keep	rewrites
+cx:weather-state:15	眠気そのものはまるで晴れていないようで、	!rule:cx:weather-state:15	keep	rewrites
+cx:weather-state:15	「しかし、みごとに晴れたな。秋晴れってやつか」	has:훌륭하게 개었군	keep	rewrites
+compose:gae-infinitive	空は晴れ渡って雲ひとつない。	하늘은 활짝 개어 구름 한점 없다.	fix	compose
+compose:gae-infinitive	昨日までの雨模様が嘘のように昊は晴れ渡って、気温はあっという間に真夏日になった。	has:활짝 개어,	fix	compose
+compose:gae-infinitive	曇りかけた心が、サーッと晴れていく。	has:싸악 개어 간다	fix	compose
+compose:gae-infinitive	それだけで、俺の心は朝から空のように澄み渡っていくのを感じた。	has:맑게 개어 가는	fix	compose
+rewrite:result-state	先日の雷が嘘のように晴れ渡っている。	has:활짝 개어 있다	fix	rewrites
+rewrite:result-state	窓の向こうは青空が晴れ渡っている。	has:푸른 하늘이 활짝 개어 있다	fix	rewrites
+rewrite:result-state	空は雲ひとつ無いくらい晴れ渡っており、日差しが強い。	has:활짝 개어 있어	fix	rewrites
+rewrite:result-state	日曜日の午後は青く澄み渡っていて、トンビが泳ぐように空を飛んでいる。	has:푸르고 맑아,	keep	rewrites
+dict:jisjk:346926	プールサイドには少女の体のサイズにピッタリの水着がたたんで置いてあった。	has:수영복이 개어 놓여	fix	defaults
+dict:jisjk:346926	姫神が着物をたたんでる最中にそのことを話すと、しばらく沈黙が訪れた。	has:기모노를 개고 있는	keep	defaults
+dict:jisjk:266564	アイシスは先ずは最初に焼けた「麦の粉を水で練って焼いたもの」	has:물로 개어 구운	fix	defaults
+dict:jisjk:266564	それを水で練って焼いたものだ」	그것을 물로 개어 구운 것이다」	fix	defaults
