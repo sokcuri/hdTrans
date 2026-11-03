@@ -18,8 +18,8 @@ compose:native-count	二匹目を捕まえた。	두 마리째를 잡았다.	kee
 compose:native-count	何回を数えた。	몇 번을 세었나.	fix	compose
 compose:native-count	三回を数えた。	세 번을 세었다.	keep	compose
 compose:native-count	一升瓶から	한 되병에서	keep	compose
-compose:native-count	ここの地蔵峠は、8体のお地蔵さまが並んでいます	여기의 지조토게는, 8체의 지장님이 줄지어 있습니다	fix	compose
-compose:native-count	数体の女王蜂	몇 체의 여왕벌	keep	compose
+compose:native-count	ここの地蔵峠は、8体のお地蔵さまが並んでいます	여기의 지조토게는, 8개의 지장님이 줄지어 있습니다	fix	compose
+compose:native-count	数体の女王蜂	몇 마리의 여왕벌	keep	compose
 compose:native-count	回数は……『2回・1回・2回』でお願い	횟수는……『2회·1회·2회』로 부탁	fix	compose
 compose:number-spacing	いや流石に何十万人もいるプレイヤーで	아니 역시 몇십만 명이나 있는 플레이어로	fix	compose
 compose:number-spacing	何百万もかかります。	몇백만이나 걸립니다.	fix	compose

@@ -194,6 +194,24 @@
 //= adjective.degree-stem	Stems of すごい and its spoken forms, which in the plain form before a predicate are the degree adverb 엄청 (すっごいおいしかった 엄청 맛있었다).
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
+//= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
+//= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
+//= noun.count-ship	Nouns of ships, matched as a whole word in the sentence of the counter 体, which then counts them as 척 (艦を二体 함을 2척).
+//= noun.count-machine	Nouns of a robot, a mecha or a machine soldier, matched at the end of a word, after which the counter 体 is 기 (ロボット二体 로봇 2기).
+//= noun.count-figure	Nouns of a statue, a doll or a figure, matched at the end of a word, after which the counter 体 is 개 (人形が二体 인형이 두 개).
+//= noun.count-creature	Endings of nouns of creatures and monsters that a count word in 体 before の counts (一体のゴーレム 한 마리의 골렘).
+//= noun.count-person	Nouns of people and peoples, matched at the end of a word, that the counter 体 counts as 명 (二体のエルフ 두 명의 엘프).
+//= noun.count-area	Words of a place right before 一体 that is 一帯 miswritten, 일대 (ここら一体 이 근처 일대).
+//= noun.count-footwear	Nouns of footwear, matched at the end of a word, counted in pairs by 足, 켤레 (靴が三足 구두 세 켤레).
+//= noun.count-clothes	Nouns of clothes, matched at the end of a word, counted by 着, 벌 (服が一着 옷 한 벌).
+//= noun.count-chair	Nouns of chairs and tables, matched at the end of a word, counted by 脚, 개 (椅子が三脚 의자 세 개).
+//= noun.count-medicine	Nouns of medicine, matched at the end of a word, counted by 服, 첩 (薬が一服 약 한 첩).
+//= noun.count-tofu	Nouns counted in blocks by 丁, 모 (豆腐が一丁 두부 한 모).
+//= noun.count-gun	Nouns of guns and long tools, matched at the end of a word, counted by 丁, 자루 (拳銃が一丁 권총 한 자루).
+//= noun.count-rice	Nouns of a bowl of rice, matched at the end of a word, counted by 膳, 공기 (ご飯を一膳 밥 한 공기).
+//= noun.count-chopsticks	Nouns of chopsticks, counted in pairs by 膳, 벌 (箸が一膳 젓가락 한 벌).
+//= noun.count-tent	Nouns of tents, counted by 張, 동 (テントが一張 텐트 한 동).
+//= noun.count-rail	Nouns of trains and their cars, matched at the end of a word, counted by 両, 량 (車両が一両 차량 1량).
 //= noun.feeling-suru	Nouns of a feeling or a hunch before which する after が, も, は, すら, さえ, しか or こそ is 들다 (嫌な予感がする 불길한 예감이 든다, 気もしない 기분도 들지 않는다; spec LEX-218).
 //= noun.cry-rises	Nouns of a cry or a voice whose 上がる is bursting out, 터져 나오다 (叫び声が上がった 비명이 터져 나왔다); a plain 声 there comes out, 나오다 (spec LEX-219).
 //= noun.shout-flies	Nouns of a shout or a scolding whose 飛ぶ flies at someone, 날아들다 (怒声が飛んだ 고함이 날아들었다; spec LEX-219).
@@ -8703,6 +8721,266 @@ adverb.noun-reading	そっくり
 adverb.noun-reading	ばっちり
 adverb.noun-reading	ぎりぎり
 adverb.noun-reading	ギリギリ
+
+noun.count-corpse	死体
+noun.count-corpse	遺体
+noun.count-corpse	骸
+noun.count-corpse	屍
+noun.count-corpse	亡骸
+noun.count-corpse	死骸
+noun.count-corpse	遺骸
+noun.count-corpse	しかばね
+noun.count-corpse	屍体
+noun.count-corpse	骸骨
+noun.count-corpse	白骨
+noun.count-corpse	ミイラ
+noun.count-corpse	骨
+noun.count-corpse	ゾンビ
+
+noun.count-flower	花
+noun.count-flower	バラ
+noun.count-flower	薔薇
+noun.count-flower	ばら
+noun.count-flower	百合
+noun.count-flower	ユリ
+noun.count-flower	菊
+noun.count-flower	キク
+noun.count-flower	椿
+noun.count-flower	ツバキ
+noun.count-flower	チューリップ
+noun.count-flower	カーネーション
+noun.count-flower	向日葵
+noun.count-flower	ひまわり
+noun.count-flower	ヒマワリ
+noun.count-flower	蓮
+noun.count-flower	牡丹
+noun.count-flower	芍薬
+noun.count-flower	桔梗
+noun.count-flower	水仙
+noun.count-flower	すみれ
+noun.count-flower	スミレ
+noun.count-flower	コスモス
+noun.count-flower	ガーベラ
+noun.count-flower	蘭
+noun.count-machine	ロボット
+noun.count-machine	機体
+noun.count-machine	機械兵
+noun.count-machine	機兵
+noun.count-machine	機械人形
+noun.count-machine	メカ
+noun.count-machine	戦車
+noun.count-machine	ドローン
+noun.count-machine	アンドロイド
+noun.count-machine	魔導兵
+noun.count-machine	機甲兵
+noun.count-machine	戦闘機
+noun.count-machine	機動兵器
+noun.count-machine	兵器
+noun.count-machine	オートマタ
+noun.count-machine	飛行機
+noun.count-machine	航空機
+noun.count-machine	艦載機
+noun.count-machine	ヘリ
+noun.count-machine	機
+noun.count-machine	飛行船
+noun.count-machine	飛空艇
+noun.count-machine	ギア
+noun.count-ship	艦
+noun.count-ship	船
+noun.count-ship	艦艇
+noun.count-ship	戦艦
+noun.count-ship	駆逐艦
+noun.count-ship	巡洋艦
+noun.count-ship	空母
+noun.count-ship	潜水艦
+noun.count-ship	軍艦
+
+noun.count-figure	人形
+noun.count-figure	像
+noun.count-figure	石像
+noun.count-figure	銅像
+noun.count-figure	彫像
+noun.count-figure	木像
+noun.count-figure	仏像
+noun.count-figure	地蔵
+noun.count-figure	お地蔵
+noun.count-figure	フィギュア
+noun.count-figure	ぬいぐるみ
+noun.count-figure	マネキン
+noun.count-figure	案山子
+noun.count-figure	かかし
+noun.count-figure	埴輪
+noun.count-figure	木彫り
+
+noun.count-creature	鬼
+noun.count-creature	獣
+noun.count-creature	竜
+noun.count-creature	龍
+noun.count-creature	魔物
+noun.count-creature	妖怪
+noun.count-creature	悪魔
+noun.count-creature	魔獣
+noun.count-creature	魔族
+noun.count-creature	怪物
+noun.count-creature	化け物
+noun.count-creature	精霊
+noun.count-creature	天使
+noun.count-creature	兵
+noun.count-creature	虫
+noun.count-creature	蜂
+noun.count-creature	狼
+noun.count-creature	犬
+noun.count-creature	猫
+noun.count-creature	鳥
+noun.count-creature	熊
+noun.count-creature	蛇
+noun.count-creature	ゴーレム
+noun.count-creature	ゴブリン
+noun.count-creature	オーク
+noun.count-creature	スライム
+noun.count-creature	ドラゴン
+noun.count-creature	モンスター
+noun.count-creature	ウルフ
+noun.count-creature	トロール
+noun.count-creature	オーガ
+noun.count-creature	ワイバーン
+noun.count-creature	コボルト
+noun.count-creature	グール
+noun.count-creature	キメラ
+noun.count-creature	ガーゴイル
+noun.count-creature	デーモン
+noun.count-creature	リザードマン
+noun.count-creature	ミノタウロス
+
+noun.count-person	エルフ
+noun.count-person	ドワーフ
+noun.count-person	人間
+noun.count-person	少女
+noun.count-person	少年
+noun.count-person	兵士
+noun.count-person	騎士
+noun.count-person	戦士
+noun.count-person	女性
+noun.count-person	男性
+noun.count-person	子供
+noun.count-person	人族
+noun.count-person	獣人
+noun.count-person	魔族の女
+noun.count-person	ハーフエルフ
+noun.count-person	ダークエルフ
+noun.count-person	村人
+noun.count-person	住人
+
+noun.count-area	ここら
+noun.count-area	あたり
+noun.count-area	辺り
+noun.count-area	この辺
+noun.count-area	その辺
+noun.count-area	周辺
+noun.count-area	周囲
+noun.count-area	付近
+noun.count-area	近辺
+noun.count-area	一面
+
+noun.count-footwear	靴
+noun.count-footwear	靴下
+noun.count-footwear	ブーツ
+noun.count-footwear	草履
+noun.count-footwear	下駄
+noun.count-footwear	スニーカー
+noun.count-footwear	サンダル
+noun.count-footwear	足袋
+noun.count-footwear	ハイヒール
+noun.count-footwear	パンプス
+noun.count-footwear	上履き
+noun.count-footwear	長靴
+
+noun.count-clothes	服
+noun.count-clothes	着物
+noun.count-clothes	ドレス
+noun.count-clothes	スーツ
+noun.count-clothes	シャツ
+noun.count-clothes	コート
+noun.count-clothes	制服
+noun.count-clothes	水着
+noun.count-clothes	下着
+noun.count-clothes	浴衣
+noun.count-clothes	ローブ
+noun.count-clothes	洋服
+noun.count-clothes	ワンピース
+noun.count-clothes	ジャケット
+noun.count-clothes	鎧
+noun.count-clothes	衣装
+noun.count-clothes	衣服
+noun.count-clothes	ズボン
+noun.count-clothes	スカート
+noun.count-clothes	パジャマ
+noun.count-clothes	メイド服
+noun.count-clothes	礼服
+noun.count-clothes	喪服
+noun.count-clothes	普段着
+noun.count-clothes	晴れ着
+noun.count-clothes	着替え
+
+
+noun.count-chair	椅子
+noun.count-chair	イス
+noun.count-chair	いす
+noun.count-chair	机
+noun.count-chair	テーブル
+noun.count-chair	ベンチ
+noun.count-chair	ソファ
+noun.count-chair	ソファー
+noun.count-chair	スツール
+noun.count-chair	座椅子
+
+
+noun.count-medicine	薬
+noun.count-medicine	粉薬
+noun.count-medicine	漢方
+noun.count-medicine	漢方薬
+noun.count-medicine	煎じ薬
+noun.count-medicine	毒
+noun.count-medicine	丸薬
+
+noun.count-tofu	豆腐
+noun.count-tofu	こんにゃく
+noun.count-tofu	蒟蒻
+
+noun.count-gun	銃
+noun.count-gun	拳銃
+noun.count-gun	ピストル
+noun.count-gun	ライフル
+noun.count-gun	猟銃
+noun.count-gun	包丁
+noun.count-gun	鋏
+noun.count-gun	はさみ
+noun.count-gun	ハサミ
+noun.count-gun	短銃
+noun.count-gun	火縄銃
+noun.count-gun	鉄砲
+
+noun.count-rice	ご飯
+noun.count-rice	ごはん
+noun.count-rice	飯
+noun.count-rice	白飯
+noun.count-rice	米
+noun.count-rice	白米
+
+noun.count-chopsticks	箸
+noun.count-chopsticks	お箸
+noun.count-chopsticks	割り箸
+noun.count-chopsticks	割箸
+
+noun.count-tent	テント
+noun.count-tent	天幕
+
+noun.count-rail	車両
+noun.count-rail	電車
+noun.count-rail	列車
+noun.count-rail	客車
+noun.count-rail	貨車
+noun.count-rail	車輌
 
 noun.feeling-suru	気
 noun.feeling-suru	予感
