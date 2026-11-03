@@ -565,6 +565,20 @@ cx:novel-fixes-2:2010	LEX-4036	&&3 S+0== "ピン" S+1== "っ" S+2== "と"	set-ta
 cx:novel-fixes-2:2020	LEX-4036	&&2 S+0== "だろうか" S-1== "だから"	set-target@-1 "그래서" set-target "일까"	だからだろうか 그래서일까
 cx:novel-fixes-2:2030	LEX-4036	&&2 S+0== "何時か" S+1== "わからな"	set-target "몇 시인지"	今が何時かわからない 지금이 몇 시인지 모른다
 cx:novel-fixes-2:2050	LEX-4036	&&4 S+0== "助け" D+0== "&J5@" I+0== "助けて" ||3 S+1== "!" S+1== "！" F+0== "last"	append-target " 줘"	神様助けて！ 신 도와 줘!
+cx:novel-fixes-2:2110	LEX-4037	&&5 S+0== "思" S-1== "を" S-2== "何" I+0== "思って" !1 S+1== "Lい"	set-target@-2 "" set-target@-1 "무슨 생각으로" set-target ""	何を思って私を招いた 무슨 생각으로 나를 불렀어
+cx:novel-fixes-2:2100	LEX-4037	&&3 S+0== "モノ" S-1== "年" F-2== "number"	set-target@-1 "년산" set-target ""	１９９０年モノか 1990년산인가
+cx:novel-fixes-2:2120	LEX-4037	&&2 S+0== "一本" >8 S+0== "L飲" S+0== "00。！？!?"	set-target "한 병"	この一本はあの日のために飲む 이 한 병은 그 날을 위해 마신다
+cx:novel-fixes-2:2130	LEX-4037	&&2 S+0== "真似を" ||3 S-1== "無茶" S-1== "無謀" S-1== "勝手"	set-target "짓을 &AV@"	無茶な真似をしたものだ 무리한 짓을 했다
+cx:novel-fixes-2:2140	LEX-4037	&&3 S+0== "頃" S-1== "の" ||8 S-2== "学生" S-2== "中学" S-2== "高校" S-2== "小学生" S-2== "中学生" S-2== "高校生" S-2== "大学" S-2== "大学生"	set-target@-1 "" set-target " 때"	学生の頃から 학생 때부터
+cx:novel-fixes-2:2150	LEX-4037	&&3 F+0== "conjugating" Y+0== "4 것에 비해서" I+0== "Rた割に"	set-ending "8 것치고"	妨害を受けた割には 방해를 받은 것치고는
+cx:novel-fixes-2:2160	LEX-4037	&&3 S+0== "にはまだ" P-1== "1**" !1 F-1== "person"	set-target "에는 아직"	演技にはまだ荒いところもある 연기에는 아직 거친 곳도 있다
+cx:novel-fixes-2:2210	LEX-4037	&&2 S+0== "果て" S-1== "枯れ"	set-target@-1 "" set-target "완전히 시&L4@"	枝葉が枯れ果てた 가지와 잎이 완전히 시든
+cx:novel-fixes-2:2300	LEX-4038	&&4 S+0== "な" S+1== "ぁ" S+2== "に" ||2 F+2== "last" S+3== "00、。！？!?」…―"	set-target " 뭐야" set-target@+1 "" set-target@+2 ""	それなぁに？ 그것 뭐야?
+cx:novel-fixes-2:2305	LEX-4038	&&3 S+0== "な" S+1== "ぁ" S+2== "に"	set-target " 뭐야" set-target@+1 "" set-target@+2 " "	なぁにその顔 뭐야 그 얼굴
+cx:novel-fixes-2:2310	LEX-4038	&&1 S+0== "丑三つ"	set-target "한밤중"	丑三つ時っぽい 한밤중 같아
+cx:novel-fixes-2:2315	LEX-4038	&&3 S+0== "時" S-1== "丑三つ" S+1== "っぽ"	set-target " "	丑三つ時っぽい 한밤중 같아
+cx:novel-fixes-2:2316	LEX-4038	&&2 S+0== "時" S-1== "丑三つ"	set-target ""	丑三つ時ってやつだ 한밤중이라는 녀석이다
+cx:novel-fixes-2:2320	LEX-4038	&&3 S+0== "有り余" S-1== "が" S-2== "元気"	set-target@-2 "기운" set-target "넘&AO@"	元気が有り余ってる 기운이 넘치고 있다
 cx:novel-fixes-2:770	LEX-4030	&&3 S+0== "行" Y+0== "L8" ||8 S+1== "L非道" S+1== "L悪事" S+1== "L行為" S+1== "L仕打ち" S+1== "L嫌がらせ" S+1== "L所業" S+1== "L実験" S+1== "L罪"	set-target "행&AV@"	レイニへ行った非道の数々 레이니에게 행한 갖가지 악행
 cx:novel-fixes-2:775	LEX-4030	&&3 S+0== "へ" S+1== "行" ||4 S+2== "L非道" S+2== "L悪事" S+2== "L仕打ち" S+2== "L嫌がらせ"	set-target "에게"	レイニへ行った非道 레이니에게 행한 악행
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
