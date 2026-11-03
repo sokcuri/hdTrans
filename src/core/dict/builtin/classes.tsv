@@ -265,7 +265,6 @@
 //= noun.issue-over	Ends of nouns of an issue, a plan, a right or a holding that parties dispute, before which を巡る is 둘러싸다 (和平案を巡って 평화안을 둘러싸고), not a tour of a place.
 //= verb.topic-about	Verb stems, matched whole, of speaking, asking, thinking, knowing, looking into and writing, after which a について of a place is what one talks or thinks about, 에 대해 (駅について尋ねた), not arrival.
 //= noun.topic-about	Verbal nouns of speaking, asking, thinking, looking into and writing, matched whole, that make a について before them a topic as verb.topic-about does (運行区間について表示します).
-//= noun.arrival-building	Buildings one arrives at that the dictionary codes as a building only (城, 宿, 寺), after which に and a て form of つく with no verb of speaking or thinking after it is arrival, 도착하다 (城について休んだ 성에 도착해 쉬었다), as after a place.
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
 //= noun.he-sent	Nouns of something sent or said to someone (手紙, 報告, 電話): the への before them is 에게 보내는 after a person (彼への手紙 그에게 보내는 편지), (으)로 보내는 after anything else.
@@ -3303,28 +3302,6 @@ noun.contest-over	確執
 noun.contest-over	裁判
 noun.contest-over	訴訟
 noun.contest-over	交渉
-noun.arrival-building	城
-noun.arrival-building	宿
-noun.arrival-building	宿屋
-noun.arrival-building	寺
-noun.arrival-building	旅館
-noun.arrival-building	宿舎
-noun.arrival-building	寮
-noun.arrival-building	小屋
-noun.arrival-building	屋敷
-noun.arrival-building	砦
-noun.arrival-building	要塞
-noun.arrival-building	神殿
-noun.arrival-building	教会
-noun.arrival-building	王宮
-noun.arrival-building	宮殿
-noun.arrival-building	城下
-noun.arrival-building	ホテル
-noun.arrival-building	アジト
-noun.arrival-building	隠れ家
-noun.arrival-building	拠点
-noun.arrival-building	基地
-noun.arrival-building	港
 verb.topic-about	話
 verb.topic-about	語
 verb.topic-about	尋ね
@@ -3372,14 +3349,9 @@ noun.topic-about	協議
 noun.topic-about	意見
 noun.topic-about	話
 noun.topic-about	話し合い
-noun.topic-about	心配
 noun.topic-about	記載
 noun.topic-about	記述
 noun.topic-about	言い争い
-noun.topic-about	講義
-noun.topic-about	講演
-noun.topic-about	会議
-noun.topic-about	打ち合わせ
 noun.issue-over	案
 noun.issue-over	見解
 noun.issue-over	領土

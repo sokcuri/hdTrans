@@ -201,7 +201,7 @@ voice:shorter-te	彼に掴まれて、動けない。	그에게 잡혀, 움직�
 cx:crit-fixes-1:5	駅について電話した。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	家について一息ついた。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	あの時は外側についてたでっかい鏡を動かすんだと思ったけど……。	!rule:cx:crit-fixes-1:5	keep	rewrites
-cx:crit-fixes-1:5	駅について。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について。	역에 대해.	fix	rewrites
 cx:crit-fixes-1:5	「駅について」	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	この『店』について尋ねたサラに、この店の主人はごく簡単に答えた。	has:『가게』에 대해 물은	fix	rewrites
 cx:crit-fixes-1:5	10分以上の遅れが見込まれる場合に、その路線名と運行区間について表示します。	has:운행 구간에 대해 표시	fix	rewrites
@@ -210,11 +210,7 @@ cx:crit-fixes-1:5	明知鉄道について	아케치 철도에 대해	fix	rewrit
 cx:crit-fixes-1:5	もし喋れたら、遊園地について質問していたかもしれない。	has:놀이공원에 대해 질문	fix	rewrites
 cx:crit-fixes-1:5	エナは久しぶりに遊園地について考えた。	has:놀이공원에 대해 생각했다	fix	rewrites
 cx:crit-fixes-1:5	彼らは自分の経営する会社についてで頭がいっぱいだったの。	has:회사에 대해로	fix	rewrites
-cx:crit-fixes-1:5	城について話そう。	성에 대해 이야기하자.	fix	rewrites
-cx:crit-fixes-1:7	ようやく城について休んだ。	드디어 성에 도착해 쉬었다.	fix	rewrites
-cx:crit-fixes-1:7	やっと宿について、荷物を下ろした。	has:숙소에 도착해,	fix	rewrites
-cx:crit-fixes-1:7	城についての話。	!rule:cx:crit-fixes-1:7	keep	rewrites
-cx:crit-fixes-1:7	今日は ９月３日に行われた放送番組審議会について￫	!rule:cx:crit-fixes-1:7	keep	rewrites
+cx:crit-fixes-1:5	港について説明した。	항에 대해 설명했다.	fix	rewrites
 cx:crit-fixes-1:50	<おじさんたちは 早く結婚して跡取りを作れなどと言い立てる>	has:만들어라	fix	rewrites
 cx:crit-fixes-1:50	読めなどしない。	!rule:cx:crit-fixes-1:50	keep	rewrites
 cx:crit-fixes-1:50	帰れなど言わない。	!rule:cx:crit-fixes-1:50	keep	rewrites
@@ -227,9 +223,6 @@ cx:crit-fixes-1:5	駅について書類を出した。	!rule:cx:crit-fixes-1:5	k
 cx:crit-fixes-1:5	駅について記念写真を撮った。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	駅について学生たちと別れた。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	駅について話題の店に入った。	!rule:cx:crit-fixes-1:5	keep	rewrites
-cx:crit-fixes-1:7	この城について、少し話そう。	!rule:cx:crit-fixes-1:7	keep	rewrites
-cx:crit-fixes-1:7	城について	!rule:cx:crit-fixes-1:7	keep	rewrites
-cx:crit-fixes-1:7	寺について、住職に挨拶した。	has:절에 도착해,	fix	rewrites
 cx:crit-fixes-1:100	かわした約束を守る。	!rule:cx:crit-fixes-1:100	keep	rewrites
 cx:crit-fixes-1:170	彼女の手で弾かれた曲。	!rule:cx:crit-fixes-1:170	keep	rewrites
 cx:crit-fixes-1:170	名手の手で弾かれるバイオリン。	!rule:cx:crit-fixes-1:170	keep	rewrites
@@ -237,3 +230,13 @@ cx:crit-fixes-1:160	問題をテレビで取り上げられた。	!rule:cx:crit-
 voice:shorter-te	触手に掴まれて、動けない。	has:촉수에 잡혀,	fix	voice
 voice:shorter-te	魔物に掴まれて、動けない。	has:마물에 잡혀,	fix	voice
 voice:shorter-te	ロープに掴まれて助かった。	has:매달릴 수 있어서	keep	voice
+cx:crit-fixes-1:5	空港について、すぐ会議に向かった。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	空港について会議に出た。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	会場について、講演を聞いた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について、思ったより人が多かった。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について、思った以上に混んでいた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	城について、行ったことのある人に聞いた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	この宿について、泊まった人の感想を読んだ。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	この城について、少し話そう。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	東京について、ずっと行きたいと思っていました。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	寺について、住職に挨拶した。	!rule:cx:crit-fixes-1:5	keep	rewrites
