@@ -1,0 +1,65 @@
+# 규칙: LEX-4036
+rule	input	expected	kind	layer
+cx:novel-fixes-2:1800	大学卒業後に就職した会社がブラックで身体を酷使して二十代を終え、三十代は病院で暮らした。	has:회사가 블랙 기업이라	fix	rewrites
+cx:novel-fixes-2:1800	ブラックでコーヒーを飲む。	!rule:cx:novel-fixes-2:1800	keep	rewrites
+cx:novel-fixes-2:1810	「礼は不要だ。	has:감사 인사는	fix	rewrites
+cx:novel-fixes-2:1810	礼を言う。	!rule:cx:novel-fixes-2:1810	keep	rewrites
+cx:novel-fixes-2:1820	……あー……その、なんだ。	has:그, 뭐냐.	fix	rewrites
+cx:novel-fixes-2:1820	それはなんだ？	!rule:cx:novel-fixes-2:1820	keep	rewrites
+cx:novel-fixes-2:1830	例えば……特殊なスキルを所持したり、良い出会いができるような運命を持っていたりとかだな」	has:가지고 있거나 하는 거지	fix	rewrites
+cx:novel-fixes-2:1830	それは本当だな。	!rule:cx:novel-fixes-2:1830	keep	rewrites
+cx:novel-fixes-2:1840	親族を名乗る人たちに色々されまして	has:이런저런 일을 당해서	fix	rewrites
+cx:novel-fixes-2:1840	色々話した。	!rule:cx:novel-fixes-2:1840	keep	rewrites
+cx:novel-fixes-2:1845	親族を名乗る人たちに色々されまして……あと、入った会社でも……	has:그리고, 들어간 회사에서도	fix	rewrites
+cx:novel-fixes-2:1845	「じゃあ……あと、５９回か６０回は更新があるわけか……」	!rule:cx:novel-fixes-2:1845	keep	rewrites
+cx:novel-fixes-2:1850	入った会社でも……だから、その……少し人間不信というか……	has:……그러니까, 그	fix	rewrites
+cx:novel-fixes-2:1850	まあ…駆逐艦…だから……	!rule:cx:novel-fixes-2:1850	keep	rewrites
+cx:novel-fixes-2:1860	「その辺りは大丈夫だ。	has:그 부분은 괜찮다	fix	rewrites
+cx:novel-fixes-2:1860	その辺りは静かだ。	!rule:cx:novel-fixes-2:1860	keep	rewrites
+cx:novel-fixes-2:1870	ずっと病院のベッドの上でしたから、動けるだけで幸せというか望みの大半が叶っている状態でして……	has:행복하다고 할까	fix	rewrites
+cx:novel-fixes-2:1870	幸せだ。	!rule:cx:novel-fixes-2:1870	keep	rewrites
+cx:novel-fixes-2:1880	駄目ではないが、その願いは私の管轄外でな。	has:관할 밖이라서	fix	rewrites
+cx:novel-fixes-2:1880	外で遊ぶ。	!rule:cx:novel-fixes-2:1880	keep	rewrites
+cx:novel-fixes-2:1890	「待たせたな。お前にはこれをやろう」	has:주마」	fix	rewrites
+cx:novel-fixes-2:1890	味方に壁役をやってもらって敵を受けてもらう	!rule:cx:novel-fixes-2:1890	keep	rewrites
+cx:novel-fixes-2:1900	取っ手部分は木製で、刃の部分だけが鉄製。	has:부분만이 철제	fix	rewrites
+cx:novel-fixes-2:1900	数分だけ待った。	!rule:cx:novel-fixes-2:1900	keep	rewrites
+cx:novel-fixes-2:1910	クワは確かに優秀だと思いますが、農具として万能は言い過ぎでは？」	has:심한 말 아닌가?	fix	rewrites
+cx:novel-fixes-2:1910	それでは？	!rule:cx:novel-fixes-2:1910	keep	rewrites
+cx:novel-fixes-2:1920	「今はお主のイメージでクワになっているが、用途に応じた形に変化する」	has:용도에 따른 형태	fix	rewrites
+cx:novel-fixes-2:1920	求めに応じる。	!rule:cx:novel-fixes-2:1920	keep	rewrites
+cx:novel-fixes-2:1925	「今はお主のイメージでクワになっているが、用途に応じた形に変化する」	has:형태로 변화한다	fix	rewrites
+cx:novel-fixes-2:1925	形になる。	!rule:cx:novel-fixes-2:1925	keep	rewrites
+cx:novel-fixes-2:1930	望んだ通りに出し入れできるぞ。	has:넣었다 뺐다 할 수	fix	rewrites
+cx:novel-fixes-2:1930	お金の出し入れが多い。	!rule:cx:novel-fixes-2:1930	keep	rewrites
+cx:novel-fixes-2:1935	駄目ではないが、その願いは私の管轄外でな。	has:안되는 건 아니지만	fix	rewrites
+cx:novel-fixes-2:1935	それ、貴族としてダメなんじゃないの？	!rule:cx:novel-fixes-2:1935	keep	rewrites
+cx:novel-fixes-2:1950	幹の直径一メートル超えクラスがそこらにある。	has:초과 급이	fix	rewrites
+cx:novel-fixes-2:1950	同じクラスになった。	!rule:cx:novel-fixes-2:1950	keep	rewrites
+cx:novel-fixes-2:1955	幹の直径一メートル超えクラスがそこらにある。	has:여기저기에 있다	fix	rewrites
+cx:novel-fixes-2:1955	そこらの女子とは違う。	!rule:cx:novel-fixes-2:1955	keep	rewrites
+cx:novel-fixes-2:1957	そこらの女子とは違う。	has:흔한 여자와는	fix	rewrites
+cx:novel-fixes-2:1957	幹の直径一メートル超えクラスがそこらにある。	!rule:cx:novel-fixes-2:1957	keep	rewrites
+cx:novel-fixes-2:1960	先ほどまで居る開けた場所は、俺の知る普通の地面だった。	has:트인 장소는	fix	rewrites
+cx:novel-fixes-2:1960	ドアを開けた。	!rule:cx:novel-fixes-2:1960	keep	rewrites
+cx:novel-fixes-2:1963	今居る場所はなぜか開けているが、それでも遠方が見えるほどではない。	has:트여 있지만	fix	rewrites
+cx:novel-fixes-2:1963	ドアを開けている。	!rule:cx:novel-fixes-2:1963	keep	rewrites
+cx:novel-fixes-2:1965	森が開けた。	has:숲이 트였다	fix	rewrites
+cx:novel-fixes-2:1965	個人商店も、開けてるところは開けてるはずですから	!rule:cx:novel-fixes-2:1965	keep	rewrites
+cx:novel-fixes-2:1970	多分、このまま移動すれば迷う。	has:이동하면 헤맨다	fix	rewrites
+cx:novel-fixes-2:1970	どちらにするか迷う。	!rule:cx:novel-fixes-2:1970	keep	rewrites
+cx:novel-fixes-2:1980	俺はこの硬い大地を相手に農業をするのか？	has:대지를 상대로	fix	rewrites
+cx:novel-fixes-2:1980	氷の塊を相手にぶつける。	!rule:cx:novel-fixes-2:1980	keep	rewrites
+cx:novel-fixes-2:1990	クワの先は、驚くほど軽く深々と地面に入った。	has:놀라울 정도로 가볍고	fix	rewrites
+cx:novel-fixes-2:1990	驚くほどだ。	!rule:cx:novel-fixes-2:1990	keep	rewrites
+cx:novel-fixes-2:2010	ピンっとひらめく俺。	has:번쩍이는 나	fix	rewrites
+cx:novel-fixes-2:2010	ピンを刺す。	!rule:cx:novel-fixes-2:2010	keep	rewrites
+cx:novel-fixes-2:2020	だからだろうか、一時間で五十メートルも進んでいない。	has:그래서일까,	fix	rewrites
+cx:novel-fixes-2:2020	雨だろうか。	!rule:cx:novel-fixes-2:2020	keep	rewrites
+cx:novel-fixes-2:2030	今が何時かわからないが、日が暮れたらどうしよう。	has:몇 시인지 모르지만	fix	rewrites
+cx:novel-fixes-2:2030	何時か会おう。	!rule:cx:novel-fixes-2:2030	keep	rewrites
+cx:novel-fixes-2:2050	神様助けて！	has:도와 줘!	fix	rewrites
+cx:novel-fixes-2:2050	助けてくれ！	!rule:cx:novel-fixes-2:2050	keep	rewrites
+dict:w:31089	そんな場所にぶっとい根を生やした太い木や背の高い草が生えているのは凄いと思う。	has:아주 굵은 뿌리를	fix	lookup
+dict:w:31090	見た感じ、良い肥料に見える。	has:보기에, 좋은 비료로	fix	lookup
+phrase:覚悟はいいな	「……では、そろそろ移動の時間だ。覚悟はいいな」	has:각오는 됐겠지	fix	builtin-phrase
