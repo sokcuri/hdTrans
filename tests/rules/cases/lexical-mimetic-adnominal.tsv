@@ -124,7 +124,7 @@ cx:mimetic-adnominal:210	こぢんまりとしているけれど	!rule:cx:mimeti
 cx:mimetic-adnominal:210	工房自体はこぢんまりとしているが	!rule:cx:mimetic-adnominal:210	keep	rewrites
 cx:mimetic-adnominal:220	そのほっそりとした肩を左腕で抱きながら	그 가느다란 어깨를 왼팔로 안으면서	fix	rewrites
 cx:mimetic-adnominal:220	ほっそりとした手で	가느다란 손으로	fix	rewrites
-cx:mimetic-adnominal:220	頭を上げるとマダムのほっそりとした足首が見えた。	머리를 올리면 마담의 가느다란 발목이 보였다.	fix	rewrites
+cx:mimetic-adnominal:220	頭を上げるとマダムのほっそりとした足首が見えた。	고개를 들면 마담의 가느다란 발목이 보였다.	fix	rewrites
 cx:mimetic-adnominal:220	指がほっそりとしている。	!rule:cx:mimetic-adnominal:220	keep	rewrites
 cx:mimetic-adnominal:230	ユイナのほっそりとした体	유이나의 날씬한 몸	fix	rewrites
 cx:mimetic-adnominal:230	長くほっそりとした脚だ。	길고 날씬한 다리다.	fix	rewrites

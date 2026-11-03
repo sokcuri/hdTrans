@@ -380,6 +380,7 @@ cx:novel-fixes-2:240	LEX-4024	&&2 S+0== "の" ||2 S-1== "命懸け" S-1== "命�
 cx:novel-fixes-2:250	LEX-4025	&&4 S+0== "そう言った" D+0== "그런" ||4 S-1== "が" S-1== "は" S-1== "も" S-1== "、" ||2 S+1== "L時" S+1== "Lとき"	set-target "그렇게 말했을"	俺がそう言った時 내가 그렇게 말했을 때
 cx:novel-fixes-2:255	LEX-4025	&&3 S+0== "そう言った" D+0== "그런" ||4 S-1== "が" S-1== "は" S-1== "も" S-1== "、"	set-target "그렇게 말한"	見回しながら、そう言った先生 둘러보면서, 그렇게 말한 선생님
 cx:novel-fixes-2:256	LEX-4025	&&4 S+0== "でして" D+0== "(으)로 하고" T+0== "L、" P-1== "1**"	set-target "(이)라서"	同じ大学でして、 같은 대학이라서,
+cx:novel-fixes-2:257	LEX-4025	&&4 S+0== "でして" D+0== "(으)로 하고" ||2 F+0== "last" S+1== "00。…‥」』？?" P-1== "1**"	set-target "(이)라서"	料理でして。 요리라서.
 cx:novel-fixes-2:260	LEX-4025	&&4 S+0== "しま" D+0== "끝&A6@" S-1== "始めて" F-2== "verb"	set-target "버&AA@" set-ending@-2 "1기"	からかい始めてしまった 놀리기 시작해 버렸다
 cx:novel-fixes-2:270	LEX-4025	&&3 S+0== "と" D+0== "(와)과" S-1== "やめとけ"	set-target@-1 "그만두라고" set-target " "	やめとけと言われる 그만두라고 듣는다
 cx:novel-fixes-2:280	LEX-4025	&&3 ||3 S+0== "くそ" S+0== "クソ" S+0== "糞" ||2 S+1== "L、" S+1== "L！" !1 F-1== "conjugating"	set-target "젠장"	くそ、田村め 젠장, 타무라 녀석
@@ -390,6 +391,29 @@ cx:novel-fixes-2:330	LEX-4025	&&2 S+0== "彼女" ||2 S+1== "Lいな" S+1== "Lい
 cx:novel-fixes-2:332	LEX-4025	&&3 S+0== "彼女" S+1== "を" S+2== "L作"	set-target "여자친구"	彼女を作る 여자친구를 만든다
 cx:novel-fixes-2:334	LEX-4025	&&4 S+0== "彼女" ||3 S+1== "が" S+1== "は" S+1== "も" S+2== "Lでき" ||3 I+2== "Lできた" I+2== "Lできて" I+2== "Lできま"	set-target "여자친구"	彼女ができた 여자친구가 생겼다
 cx:novel-fixes-2:340	LEX-4025	&&3 F+0== "verb" Y+0== "1고 말이야" ||2 F+0== "sentence-end" S+1== "00！!。」"	set-ending "1지"	血くらい出るさ！ 피 정도 나오지!
+cx:novel-fixes-2:350	LEX-4026	&&6 ||2 S+0== "をはじめ" S+0== "を始め" Y+0== "6" ||2 P+1== "1**" S+1== "L、" P-1== "1**" !1 G-1== "Hd" !1 F+1== "number"	set-target "(을)를 비롯&AV@"	王子をはじめお城の方々 왕자를 비롯해 성의 분들
+cx:novel-fixes-2:355	LEX-4026	&&3 ||2 S+0== "をはじめと" S+0== "を始めと" Y+0== "0" P+1== "1**"	set-target "(을)를 비롯&AV@" set-ending "8"	王をはじめとする貴族 왕을 비롯한 귀족
+cx:novel-fixes-2:360	LEX-4026	&&4 ||2 S+0== "何の" S+0== "なんの" P+1== "1**" S+2== "も" ||5 S+3== "Lな" S+3== "Lござ" S+3== "Lあり" S+3== "Lね" S+3== "Lありませ"	set-target "아무"	なんの問題もございません 아무 문제도 없습니다
+cx:novel-fixes-2:370	LEX-4026	&&4 S+0== "もとに" D+0== "아래에서" ||3 F-2== "person" S-2== @pronoun.first-person S-2== @pronoun.third-person >5 ||9 S+0== "L訪ね" S+0== "L来" S+0== "L届" S+0== "L駆け" S+0== "L向か" S+0== "L戻" S+0== "L帰" S+0== "L集ま" S+0== "L寄" S+0== "00。！？」"	set-target "곁으로"	私のもとに王子様が訪ねて来られた 내 곁으로 왕자님이 방문해 오셨다
+cx:novel-fixes-2:380	LEX-4026	&&4 S+0== "こと" P-1== "1**" F+1== "katakana" !1 ||6 S-1== "私" S-1== "俺" S-1== "僕" S-1== "わたし" S-1== "あたし" S-1== "わたくし"	append-target@-1 "인" set-target " "	第三王子ことジオルド王子様 제3왕자인 지오르드 왕자님
+cx:novel-fixes-2:390	LEX-4026	&&2 S+0== "だし" S-1== "を"	set-target " 내고"	高熱をだしうなされ続けた 고열을 내고 계속 시달렸다
+cx:novel-fixes-2:400	LEX-4026	&&2 S+0== "やっと" Y-1== "R것이"	set-target "고작"	起き上がるのがやっとという私 일어나는 것이 고작이라는 나
+cx:novel-fixes-2:410	LEX-4026	&&3 S+0== "なさ" S-1== "に" S-2== "気"	set-target@-2 "신경" set-target@-1 "" set-target " &AF@"	気になさらないで下さい 신경 쓰지 마세요
+cx:novel-fixes-2:420	LEX-4026	&&3 S+0== "顔" S-1== "びっくり" D-1== "깜짝"	set-target@-1 "놀란"	びっくり顔 놀란 얼굴
+cx:novel-fixes-2:430	LEX-4026	&&3 S+0== "わがまま" D+0== "이기적임" P+1== "1**"	set-target "제멋대로인"	わがままカタリナ嬢 제멋대로인 카타리나 양
+cx:novel-fixes-2:435	LEX-4027	&&4 S+0== "に" D+0== "" F-1== "conjugating" ||2 I-1== "Rてるの" I-1== "Rでるの"	set-ending@-1 "1고 있는데"	勉強してるのに 공부하고 있는데
+cx:novel-fixes-2:440	LEX-4027	&&3 S+0== "寸前" F-1== "verb" Y-1== "0"	set-ending@-1 "1기"	波が届く寸前 물결이 닿기 직전
+cx:novel-fixes-2:450	LEX-4027	&&4 S+0== "故" D+0== "고" P-1== "1**" ||2 S+1== "L、" F+0== "last"	append-target@-1 "(이)라서" set-target ""	離職率の高い職場故、 이직률이 높은 직장이라서,
+cx:novel-fixes-2:460	LEX-4027	&&3 S+0== "と、" D+0== "(와)과" S-1== "っ"	set-target ","	記入完了っと、 기입 완료,
+cx:novel-fixes-2:470	LEX-4027	&&4 S+0== "どうか" D+0== "제발" ||2 S+1== "とは" S+1== "と" S+2== "L思"	set-target "어떨까" set-target@+1 " 하고"	会社としてどうかとは思う 회사로서 어떨까 하고 생각한다
+cx:novel-fixes-2:480	LEX-4027	&&3 S+0== "ぶり" D+0== "만" S+1== "の"	set-target " 만의" set-target@+1 " "	３０時間ぶりの安眠 30시간 만의 단잠
+cx:novel-fixes-2:490	LEX-4027	&&3 S+0== "事" S-1== "厄介" D-1== "골칫거리"	set-target ""	厄介事が発生した 골칫거리가 발생했다
+cx:novel-fixes-2:500	LEX-4027	&&2 S+0== "なんだっけ" ||7 S-1== "名前" S-1== "名" S-1== "タイトル" S-1== "題名" S-1== "住所" S-1== "番号" S-1== "誕生日"	append-target@-1 "이" set-target " 뭐였더라"	名前なんだっけ 이름이 뭐였더라
+cx:novel-fixes-2:510	LEX-4027	&&3 S+0== "兼" P-1== "1**" P+1== "1**"	set-target " 겸 "	ディレクター兼プランナー 디렉터 겸 플래너
+cx:novel-fixes-2:520	LEX-4027	&&3 ||2 S+0== "先に" S+0== "先" D+0== "L먼저" ||6 S-1== "キロ" S-1== "メートル" S-1== "km" S-1== "m" S-1== "里" S-1== "歩"	set-target "앞에"	十数キロ先に 십여 킬로 앞에
+cx:novel-fixes-2:530	LEX-4027	&&3 S+0== "いかに" D+0== "얼마나" >8 ||3 S+0== "Lとはいえ" S+0== "Lとは言え" S+0== "Lとはいっても" S+0== "00。！？」"	set-target "아무리"	いかにブラックな会社とはいえ 아무리 블랙인 회사라고는 해도
+cx:novel-fixes-2:540	LEX-4027	&&3 S+0== "中" S+1== "には" ||3 F+0== "opens-line" F+0== "after-pause" S-1== "00。」』！？…"	set-target "개중" set-target@+1 "에는"	中にはテレビで見た者もいる 개중에는 텔레비전으로 본 사람도 있다
+cx:novel-fixes-2:560	LEX-4027	&&3 S+0== "と" D+0== "(와)과" S+1== "L笑わば"	set-target "(이)라고"	社畜と笑わば笑え 사축이라고 비웃으려면 비웃어라
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면
@@ -397,6 +421,7 @@ cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0==
 cx:adj-de-aru-koto:10	GRM-3467	&&4 F+0== "conjugating" Y+0== "1다" U+0== "Rである" S+1== "Lこと"	set-ending "4"	未熟であることは 미숙한 것은
 //= de-arou-noun	after QuoteTo 46	であろう after a verb right before a noun or an adjective that describes it is the guess in its adnominal form, -을 (驚愕するであろう貴重な知識 경악할 귀중한 지식), not 할 것이다.
 cx:de-arou-noun:10	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "Rであろう" !1 S+1== "00？?！!。．、」』）…‥" ||2 P+1== "1**" F+1== "conjugating"	set-ending "3"	驚愕するであろう貴重な知識 경악할 귀중한 지식
+cx:de-arou-noun:20	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "Rであろう" ||2 S+1== "「" S+1== "『" P+2== "1**"	set-ending "3"	そこにいるであろう「敵」 거기에 있을 「적」
 //= noun-denai-if	after QuoteTo 47	After a noun, でないと with its comma and no verb of saying after it is the condition (이)가 아니면 (会話が出来る人でないと、 대화를 할 수 있는 사람이 아니면,), not the quote 아니라고 (spec GRM-3460).
 cx:noun-denai-if:10	GRM-3460	&&5 S+0== "でな" D+0== "(이)가 아$A3@" ||2 Y+0== "1다고" Y+0== "1다고," U+0== "R、" !1 F+1== "quote-verb"	set-ending "2면,"	会話が出来る人でないと、話も聞いてもらえない 대화를 할 수 있는 사람이 아니면, 이야기도 들어 줄 수 없다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.

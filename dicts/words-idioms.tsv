@@ -7794,3 +7794,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ケツの穴の小さ	쩨쩨$AB@	H7N0			GN							i:7794
 腹括	각오를 다&AL@	M428		Pn	GN			LEX-4019: 腹括る 각오를 다지다			はらくく	i:7796
 腹くく	각오를 다&AL@	M428		Pn	GN			LEX-4019: 腹くくる 각오를 다지다			はらくく	i:7797
+安眠につ	단잠에 &L4@	M431			GN			LEX-4027: 安眠につく 단잠에 들다			あんみんにつ	i:7798
+安眠に就	단잠에 &L4@	M431			GN			LEX-4027: 安眠に就く 단잠에 들다			あんみんにつ	i:7799

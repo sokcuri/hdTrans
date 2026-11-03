@@ -1,0 +1,48 @@
+# 규칙: LEX-4027
+rule	input	expected	kind	layer
+cx:novel-fixes-2:435	勉強してるのに、遊ぶ。	공부하고 있는데, 논다.	fix	rewrites
+cx:novel-fixes-2:435	知ってるのに教えない。	알고 있는데 가르치지 않는다.	fix	rewrites
+cx:novel-fixes-2:435	勉強しているのに、遊ぶ。	공부하고 있는데, 논다.	keep	rewrites
+cx:novel-fixes-2:440	大地を這うような土埃の波が届く寸前……。	has:닿기 직전	fix	rewrites
+cx:novel-fixes-2:440	試合の寸前。	!rule:cx:novel-fixes-2:440	keep	rewrites
+cx:novel-fixes-2:450	離職率の高い職場故、この会社にいたプログラマーは二人のみ。	has:직장이라서,	fix	rewrites
+cx:novel-fixes-2:450	それ故に	!rule:cx:novel-fixes-2:450	keep	rewrites
+cx:novel-fixes-2:450	結局はベンチャーがベンチャー故の会社の弱さだ	!rule:cx:novel-fixes-2:450	keep	rewrites
+cx:novel-fixes-2:460	「よし、全部のクラスの記入完了っと、あとはバグの洗い出しだな」	has:기입 완료, 나머지는	fix	rewrites
+cx:novel-fixes-2:460	彼と、彼女	!rule:cx:novel-fixes-2:460	keep	rewrites
+cx:novel-fixes-2:470	会社としてどうかとは思うが。	has:어떨까 하고 생각하지만	fix	rewrites
+cx:novel-fixes-2:470	どうか許してください。	!rule:cx:novel-fixes-2:470	keep	rewrites
+cx:novel-fixes-2:480	机の下で３０時間ぶりの安眠についた。	has:30시간 만의 단잠에 들었다	fix	rewrites
+cx:novel-fixes-2:480	久しぶりだね。	!rule:cx:novel-fixes-2:480	keep	rewrites
+cx:novel-fixes-2:490	厄介事が発生してるのに、どこか嬉しそうだ。	has:골칫거리가 발생하고 있는데,	fix	rewrites
+cx:novel-fixes-2:490	大事な事だ。	!rule:cx:novel-fixes-2:490	keep	rewrites
+cx:novel-fixes-2:500	そういや名前なんだっけ？	그러고 보니 이름이 뭐였더라?	fix	rewrites
+cx:novel-fixes-2:500	そうなんだっけ？	!rule:cx:novel-fixes-2:500	keep	rewrites
+cx:novel-fixes-2:510	ディレクター兼プランナーのメタボ氏	has:디렉터 겸 플래너	fix	rewrites
+cx:novel-fixes-2:510	兼ねてから	!rule:cx:novel-fixes-2:510	keep	rewrites
+cx:novel-fixes-2:520	流星は十数キロ先に突き刺さった。	has:십여 킬로 앞에	fix	rewrites
+cx:novel-fixes-2:520	先に行くね。	!rule:cx:novel-fixes-2:520	keep	rewrites
+cx:novel-fixes-2:530	いかにブラックな会社とはいえ普通１人に２プロジェクト以上割り振られることは無い。	has:아무리 블랙인	fix	rewrites
+cx:novel-fixes-2:530	いかに大切か分かった。	!rule:cx:novel-fixes-2:530	keep	rewrites
+cx:novel-fixes-2:540	中にはテレビや動画サイトで見たことがある者もいるかも知れない。	has:개중에는 텔레비전	fix	rewrites
+cx:novel-fixes-2:540	箱の中には何もない。	상자 안에는 아무것도 없다.	keep	rewrites
+cx:novel-fixes-2:560	ああ、至福。社畜と笑わば笑え。	has:사축이라고 비웃으려면 비웃어라	fix	rewrites
+cx:novel-fixes-2:560	友達と笑う。	!rule:cx:novel-fixes-2:560	keep	rewrites
+cx:de-arou-noun:20	流星は、そこにいるであろう「敵」を蹂躙し	has:거기에 있을 「적」을	fix	rewrites
+cx:de-arou-noun:20	それはそうであろう「」	!rule:cx:de-arou-noun:20	keep	rewrites
+dict:jisjk:151710	その儚さに目を奪われる者、願いを唱える者、人それぞれだと思う。	has:사람마다 제각각이라고	fix	lookup
+dict:w:31051	１０分ほど前の考え無しの選択が今、流星となり大地を抉っていく。	has:생각 없는 선택이	fix	lookup
+dict:w:31053	佐藤って言いかけたなコノヤロウ。	has:이 자식	fix	lookup
+dict:w:31055	キセキ的にＭＭＯ－ＲＰＧのクライアントプログラムは納品された。	has:기적적으로	fix	lookup
+dict:w:31056	下手に組み込んで拒否られたら直す時間も無いしさ	has:거부당하면	fix	lookup
+sense:割る	卵を割る。	계란을 깬다.	fix	senses
+sense:割る	だが、空を割って隕石が落ちるのを見たことは無い。	has:하늘을 갈라	fix	senses
+sense:割る	脳天を割るように。	has:정수리를 쪼개	fix	senses
+sense:割る	水で割る。	has:물로	keep	senses
+sense:手放す	その痛みに意識を手放した直後	has:의식을 놓은	fix	senses
+sense:手放す	家を手放した。	has:집을	keep	senses
+sense:押す	スマホのデバッグが押してるから	has:디버그가 밀리고 있으니	fix	senses
+sense:押す	ボタンを押す。	버튼을 누른다.	keep	senses
+phrase:遅れに遅れ	オレは遅れに遅れているプロジェクトを納期に間に合わせるために	has:늦어질 대로 늦어진	fix	builtin-phrase
+phrase:ご存知だろうか	明晰夢という言葉をご存知だろうか？	has:아시는지?	fix	builtin-phrase
+ending:ましょっか	どうしましょっか	어떻게 할까요	fix	builtin-ending
