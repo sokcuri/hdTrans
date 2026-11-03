@@ -24,6 +24,10 @@ cx:web-fixes-k:80	牢獄の苦しみを、断頭台への恐れを、書き連�
 cx:web-fixes-k:80	一歩足を進める度に恐れを抱いてしまう。	has:두려움을 품어	fix	rewrites
 cx:web-fixes-k:80	新たな諍いに発展する恐れもあり、	has:발전할 우려도	keep	rewrites
 cx:web-fixes-k:80	地上の争いを恐れ空へと逃れた。	!rule:cx:web-fixes-k:80	keep	rewrites
+cx:web-fixes-k:80	感染の恐れ。	감염의 우려.	keep	rewrites
+cx:web-fixes-k:80	津波の恐れはありません。	해일의 우려는 없습니다.	keep	rewrites
+cx:web-fixes-k:80	感染の恐れを指摘した。	!rule:cx:web-fixes-k:80	keep	rewrites
+cx:web-fixes-k:80	恐れを知らない。	has:두려움을 모른다	fix	rewrites
 cx:web-fixes-k:90	「暫くは宮殿内でお過ごしください」	has:한동안은 궁전	fix	rewrites
 cx:web-fixes-k:90	暫くお待ちください。	잠시 기다려 주세요.	keep	rewrites
 cx:web-fixes-k:100	こんな風にミーアに意見してくれたのは、彼だけだった。	has:미아에게 의견을 말해 준 것은	fix	rewrites
@@ -31,6 +35,9 @@ cx:web-fixes-k:100	彼の意見を聞いた。	!rule:cx:web-fixes-k:100	keep	rew
 cx:web-fixes-k:110	フラれた腹いせに貧乏貴族の娘にビンタした	has:가난한 귀족의 딸에게	fix	rewrites
 cx:web-fixes-k:110	ジャガイモ食べてる貧乏令嬢の心配なんて誰もしませんよ！	has:가난한 영애의	fix	rewrites
 cx:web-fixes-k:110	貧乏な家に生まれた。	!rule:cx:web-fixes-k:110	keep	rewrites
+cx:web-fixes-k:110	貧乏性なんだ。	!rule:cx:web-fixes-k:110	keep	rewrites
+cx:web-fixes-k:110	貧乏暇なしだ。	!rule:cx:web-fixes-k:110	keep	rewrites
+cx:web-fixes-k:110	貧乏男爵家のクロードには、	has:가난한 남작가의 클로드에게는,	fix	rewrites
 cx:web-fixes-k:120	まずケータイ（電池切れそう）、財布	has:휴대폰(방전 직전),	fix	rewrites
 cx:web-fixes-k:120	電池が切れそうだ。	!rule:cx:web-fixes-k:120	keep	rewrites
 cx:web-fixes-k:125	スマホが電池切れそうだ。	스마트폰이 방전 직전이다.	fix	rewrites

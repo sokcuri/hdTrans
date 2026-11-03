@@ -39,6 +39,14 @@ cx:web-fixes-k:270	「黙れ！　おまえは僕の妻になる女だろう！�
 cx:web-fixes-k:270	「おまえが悪いんだ。自分が娘を産んだからって、男子の吾子を呪い殺す気だろう！」	!rule:cx:web-fixes-k:270	keep	rewrites
 cx:web-fixes-k:275	「予防をしろ、と毎回言っているだろうが！　繰り返してばかりでは愚の骨頂だろうが、この愚か者が!!」	has:매번 말하잖아!	fix	rewrites
 cx:web-fixes-k:275	「言っているだろうが、聞け」	!rule:cx:web-fixes-k:275	keep	rewrites
+cx:web-fixes-k:260	「きっと明日は晴れるだろう！」	「분명 내일은 갤 거야!」	keep	rewrites
+cx:web-fixes-k:260	「きっと勝てるだろう！」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:260	「そろそろ来るだろう！」	「슬슬 올 거야!」	keep	rewrites
+cx:web-fixes-k:260	「彼なら大丈夫だろう！」	「그라면 괜찮을 거야!」	keep	rewrites
+cx:web-fixes-k:260	「来るだろう！」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:270	「多分女だろう！」	!rule:cx:web-fixes-k:270	keep	rewrites
+cx:web-fixes-k:270	「雨が降れば中止だろう！」	!rule:cx:web-fixes-k:270	keep	rewrites
+cx:web-fixes-k:275	「きっと言っているだろうが！」	!rule:cx:web-fixes-k:275	keep	rewrites
 cx:web-fixes-k:280	彼女の飛び抜けた美しさは、比類無きものだった。	has:그녀의 뛰어난 아름다움은	fix	rewrites
 cx:web-fixes-k:280	彼の優れた才能	그의 뛰어난 재능	fix	rewrites
 cx:web-fixes-k:280	顔の整った少女	!rule:cx:web-fixes-k:280	keep	rewrites

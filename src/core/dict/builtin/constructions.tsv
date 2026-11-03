@@ -1615,7 +1615,7 @@ cx:web-fixes-k:40	LEX-4560	&&5 !1 :wfk-neg-later S+0== "さして" D+0== "별로
 cx:web-fixes-k:50	LEX-4560	&&6 !1 :wfk-neg-later S+0== "さして" D+0== "별로" F+1== "verb" ||4 S+1== "L帰" S+1== "L行" S+1== "L歩" S+1== "L出" !1 ||3 S-1== "を" S-1== "が" S-1== "に"	set-target "쓰고"	さして帰れよ 쓰고 돌아가
 cx:web-fixes-k:60	LEX-4561	&&3 S+0== "歳で" D+0== "세에" ||2 P-1== "0**" &&3 S-1== "の" !1 F-2== "number" !1 G-2== "Ct"	set-target "나이에"	その歳で？ 그 나이에?
 cx:web-fixes-k:70	LEX-4562	&&4 S+0== "自信" D+0== "자신" !1 S+1== "L作" !1 >3 ||2 D+0== "~&HN@" D+0== "~$FA@" ||2 F+0== "verb" F+0== "boundary"	set-target "자신감"	根拠のない自信 근거가 없는 자신감
-cx:web-fixes-k:80	LEX-4563	&&5 ||2 S+0== "恐れ" S+0== "おそれ" D+0== "우려" !1 F-1== "conjugating" !1 S-1== "を" ||3 P+1== "2**" F+1== "boundary" F+0== "last"	set-target "두려움"	断頭台への恐れ 단두대에 대한 두려움
+cx:web-fixes-k:80	LEX-4563	&&5 ||2 S+0== "恐れ" S+0== "おそれ" D+0== "우려" ||5 S-1== "への" S-1== "Lに対す" S-1== "Lに対し" S+1== "を" S+1== "も" !1 &&2 S-1== "の" ||5 G-2== "Hd" S-2== "津波" S-2== "地震" S-2== "災害" S-2== "噴火" !1 &&2 ||2 S+1== "は" S+1== "が" >2 ||2 D+0== "~&HN@" D+0== "~$FA@" ||0	set-target "두려움"	断頭台への恐れ 단두대에 대한 두려움
 cx:web-fixes-k:90	LEX-4567	&&3 ||2 S+0== "暫く" S+0== "しばらく" D+0== "잠시" S+1== "は"	set-target "한동안"	暫くは宮殿内でお過ごしください 한동안은 궁전 안에서 지내 주세요
 cx:web-fixes-k:200	GRM-3700	&&4 S+0== "より" ||3 D+0== "에서(보다)" D+0== "에서" D+0== "부터" S+1== "は" >8 ||7 P+0== "7**" P+0== "8**" S+0== "方" S+0== "ほう" S+0== "まし" S+0== "Lの方" S+0== "Lのほう" ||2 F+0== "verb" S+0== "00、。！？!?」』"	set-target "보다"	森の奥よりは安全だ 숲속보다는 안전하다
 cx:web-fixes-k:210	GRM-3700	&&3 S+0== "より" ||2 D+0== "에서(보다)" D+0== "에서" >8 ||7 P+0== "7**" P+0== "8**" S+0== "方" S+0== "ほう" S+0== "まし" S+0== "Lの方" S+0== "Lのほう" ||2 F+0== "verb" S+0== "00、。！？!?」』"	set-target "보다"	遺跡の奥部より生還の可能性が高い 유적 안쪽보다 생환의 가능성이 높다
@@ -1627,11 +1627,13 @@ cx:web-fixes-k:250	GRM-3704	&&6 S+0== "な" U+0== "く" Y+0== "1고" D+0== "$FA@
 cx:web-fixes-k:255	GRM-3704	&&6 S+0== "な" U+0== "く" Y+0== "1고" D+0== "$FA@" <4 ||4 S+0== "何の" S+0== "なんの" S+0== "何ら" S+0== "なんら" ||2 F+0== "verb" S+0== "00、。！？「」" !1 >6 S+0== "も" S+0== "00。！？!?」』"	set-ending "1이"	何の交渉もなく、 아무 교섭도 없이,
 cx:web-fixes-k:258	GRM-3704	&&6 S+0== "な" U+0== "く" Y+0== "1고" D+0== "$FA@" S-1== "も" ||2 S-2== "事" S-2== "こと"	set-ending "1이"	くすぶる事もなく、 피어오르는 일도 없이,
 //: wfk-safe-end	||2 F+0== "speech-goes-on" <0 S+0== "00「『" ||0	The sentence opens its quote or more of the quote follows it: a casual end there keeps the speech-level stage from rewriting no earlier plain sentence.
+//: wfk-guess-before	<10 ||10 S+0== "きっと" S+0== "たぶん" S+0== "多分" S+0== "おそらく" S+0== "恐らく" S+0== "そろそろ" S+0== "いずれ" S+0== "必ず" S+0== "Lなら" U+0== "Rば" S+0== "00、。！？!?「『"	A word of a guess (きっと, 多分, そろそろ, 必ず) or a なら, ば condition before the word in its clause: its だろう predicts.
+//: wfk-darou-fact	||3 !1 F+0== "verb" &&2 F+1== "blank" F+1== "exclaim-after" ||8 S+0== "L言" S+0== "Lいっ" S+0== "L知" S+0== "Lわか" S+0== "L分か" S+0== "L判" S+0== "L解" S+0== "L聞"	What the だろう！ holds up as known: an adjective or noun predicate, a ている, or a verb of saying or knowing; a bare verb predicts.
 //: wfk-bang	||2 F+0== "exclaim-after" &&2 F+1== "blank" F+1== "exclaim-after"	An exclamation mark follows the word, or the auxiliary after it that was left blank.
-cx:web-fixes-k:260	GRM-3705	&&6 :wfk-safe-end F+0== "conjugating" Y+0== "3 것이다" ||2 I+0== "~だろ" &&2 F+1== "blank" I+1== "~だろ" F+0== "quoted" :wfk-bang	set-ending "1잖아"	動くなって言っているだろう！ 움직이지 말라고 말하잖아!
-cx:web-fixes-k:265	GRM-3705	&&6 :wfk-safe-end F+0== "conjugating" Y+0== "5을 것이다" ||2 I+0== "~だろ" &&2 F+1== "blank" I+1== "~だろ" F+0== "quoted" :wfk-bang	set-ending "5잖아"	言っただろう！ 말했잖아!
-cx:web-fixes-k:270	GRM-3705	&&5 :wfk-safe-end S+0== "だろう" D+0== "일 것이다" F+0== "quoted" :wfk-bang	set-target "(이)잖아"	僕の妻になる女だろう！ 내 아내가 될 여자잖아!
-cx:web-fixes-k:275	GRM-3705	&&6 :wfk-safe-end F+0== "conjugating" Y+0== "1겠지만" F+0== "quoted" F+1== "blank" F+1== "exclaim-after"	set-ending "1잖아"	毎回言っているだろうが！ 매번 말하잖아!
+cx:web-fixes-k:260	GRM-3705	&&8 !1 :wfk-guess-before :wfk-darou-fact :wfk-safe-end F+0== "conjugating" Y+0== "3 것이다" ||2 I+0== "~だろ" &&2 F+1== "blank" I+1== "~だろ" F+0== "quoted" :wfk-bang	set-ending "1잖아"	動くなって言っているだろう！ 움직이지 말라고 말하잖아!
+cx:web-fixes-k:265	GRM-3705	&&7 !1 :wfk-guess-before :wfk-safe-end F+0== "conjugating" Y+0== "5을 것이다" ||2 I+0== "~だろ" &&2 F+1== "blank" I+1== "~だろ" F+0== "quoted" :wfk-bang	set-ending "5잖아"	言っただろう！ 말했잖아!
+cx:web-fixes-k:270	GRM-3705	&&6 !1 :wfk-guess-before :wfk-safe-end S+0== "だろう" D+0== "일 것이다" F+0== "quoted" :wfk-bang	set-target "(이)잖아"	僕の妻になる女だろう！ 내 아내가 될 여자잖아!
+cx:web-fixes-k:275	GRM-3705	&&7 !1 :wfk-guess-before :wfk-safe-end F+0== "conjugating" Y+0== "1겠지만" F+0== "quoted" F+1== "blank" F+1== "exclaim-after"	set-ending "1잖아"	毎回言っているだろうが！ 매번 말하잖아!
 cx:web-fixes-k:280	GRM-3706	&&5 S+0== "の" D+0== "(이)가" F-1== "person" B+1== @verb.adnominal-state ||2 P+2== "1**" &&2 P+2== "7**" I+2== "Rさ"	select-target "의"	彼女の飛び抜けた美しさ 그녀의 뛰어난 아름다움
 cx:web-fixes-k:285	GRM-3706	&&6 S+0== "の" D+0== "(이)가" F-1== "person" B+1== @verb.body-state P+2== "1**" ||2 A+2== "VBp" A+2== "VCp"	select-target "의"	彼女の濡れた髪 그녀의 젖은 머리카락
 cx:web-fixes-k:290	GRM-3707	&&5 F+0== "conjugating" Y+0== "6" I+0== "Rなさい" F+0== "quoted" <0 ||4 S+0== "Lです" S+0== "Lでし" U+0== "~ます" U+0== "~まし" S+0== "00「『"	set-ending "6 주세요"	帝国のためですよ、大人しく死になさい 제국을 위해서예요, 얌전히 죽어 주세요
@@ -1650,7 +1652,7 @@ cx:web-fixes-k:325	GRM-3710	&&4 ||4 D+0== "L내버려 &C7@" D+0== "L가만히 &C
 cx:web-fixes-k:330	GRM-3711	&&6 ||2 S+0== "い" S+0== "あ" D+0== "&HN@" Y+0== "2면" ||2 S-1== "Rも" Y-1== "R도" !1 S-1== "でも" >14 &&2 D+0== "~&HN@" ||3 S-1== "Rも" Y-1== "R도" S+0== "Lも" S+0== "00。！？!?」』"	set-ending "1고"	賛成する者もいれば、反対する者もいる 찬성하는 사람도 있고, 반대하는 사람도 있다
 cx:web-fixes-k:335	GRM-3711	&&4 ||2 S+0== "もあ" S+0== "もい" D+0== "도 &HN@" Y+0== "2면" >14 &&2 D+0== "~&HN@" ||3 S-1== "Rも" Y-1== "R도" S+0== "Lも" S+0== "00。！？!?」』"	set-ending "1고"	７０点のものもあれば３０点もあり 70점의 것도 있고 30점도 있어
 cx:web-fixes-k:100	LEX-4570	&&3 S+0== "意見" D+0== "의견" ||2 B+1== "する" S+1== "Lして"	set-target "의견을 말"	ミーアに意見してくれた 미아에게 의견을 말해 준
-cx:web-fixes-k:110	LEX-4571	&&4 S+0== "貧乏" D+0== "가난" P+1== "1**" F+1== "touches-prev"	set-target "가난한"	貧乏貴族の娘 가난한 귀족의 딸
+cx:web-fixes-k:110	LEX-4571	&&5 S+0== "貧乏" D+0== "가난" P+1== "1**" F+1== "touches-prev" ||3 A+1== "VHn" A+1== "UAq" S+1== "R家"	set-target "가난한"	貧乏貴族の娘 가난한 귀족의 딸
 //: wfk-also-more	>14 &&2 D+0== "~&HN@" ||3 S-1== "Rも" Y-1== "R도" S+0== "Lも" S+0== "00。！？!?」』"	Another ある or いる after a も follows in the sentence: the もあり lists.
 cx:web-fixes-k:340	GRM-3712	&&6 S+0== "もあ" D+0== "도 &HN@" Y+0== "6" S+1== "、" Y-1== "8 적" !1 :wfk-also-more	set-ending@-1 "8 것" set-ending "6서"	ここまで来たこともあり、 여기까지 온 것도 있어서,
 cx:web-fixes-k:342	GRM-3712	&&6 S+0== "もあ" D+0== "도 &HN@" Y+0== "6" S+1== "、" ||4 S-1== "こと" S-1== "事" S-1== "ということ" S-1== "ってこと" !1 :wfk-also-more	set-ending "6서"	大卒ということもあり、 대졸이라는 것도 있어서,
