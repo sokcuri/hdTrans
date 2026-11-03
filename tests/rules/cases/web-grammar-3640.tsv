@@ -21,12 +21,12 @@ cx:web-fixes-h:40	スープにも味が染みだしていていいでしょ？	!
 cx:web-fixes-h:50	特に12月や1月は、一日中気温が零度を下回ることなどザラだ。	has:밑도는 것은 흔함이다	fix	rewrites
 cx:web-fixes-h:50	素直に受け入れることなどすぐにはできない。	has:받아들이는 것은 곧바로는 할 수 없다	fix	rewrites
 cx:web-fixes-h:50	はっきりと言おう。負けることなどまずありえない。	has:지는 것은 거의 있을 수 없다	fix	rewrites
-cx:web-fixes-h:50	当然、実物に出会えることなど滅多にない。	has:만날 수 있는 것은 좀처럼 없다	fix	rewrites
+cx:web-fixes-h:50	受け入れることなどすぐにはできない	has:받아들이는 것은 곧바로는	fix	rewrites
 cx:web-fixes-h:50	最初ここを見つけた時は、力尽くで『供出』させようと思っていたことなど忘れ、	has:한 것은 잊어	fix	rewrites
 cx:web-fixes-h:50	本拠地に溜め込まれたお宝を全て略奪することなども可能だ。	has:약탈하는 것 등도 가능하다	keep	rewrites
 cx:web-fixes-h:50	また何かわからないことなどございましたら、いつでもお気軽にどうぞ。	has:모르는 것 등 있으면	keep	rewrites
 cx:web-fixes-h:52	その程度の傷で、あなたの価値が損なわれる事などありません	has:손상되는 일은 없습니다	fix	rewrites
-cx:web-fixes-h:52	世界を変革する事など、まるで当然のように	has:변혁하는 일 등,	keep	rewrites
+cx:web-fixes-h:52	世界を変革する事など、まるで当然のように	has:변혁하는 것 등,	keep	rewrites
 cx:web-fixes-h:60	頑張って仕事をし、行きたいところに行き、食べたいものを食べよう。	has:열심히 일을 하고,	fix	rewrites
 cx:web-fixes-h:60	魔力の強化のため頑張って畑を耕すのだ。	has:열심히 밭을 경작한다	fix	rewrites
 cx:web-fixes-h:60	この雷様が、頑張って大漁旗作ったんだから！	has:열심히 풍어기 만들었으니까	fix	rewrites
@@ -130,3 +130,9 @@ cx:adnominal-clause:50	いやー、植物人間とか早とちりだったっぽ
 cx:adnominal-clause:10	スキルポイントなるものは全部使い切っちゃったっぽいけど、	has:다 사용해버린 것 같지만	fix	rewrites
 cx:adnominal-clause:10	雨っぽい。	비 같다.	keep	rewrites
 cx:adnominal-clause:10	提督が鎮守府に着任したっぽい。これより艦隊の指揮に入るっぽい！	has:착임했다 뽀이	keep	rewrites
+cx:web-fixes-h:49	その程度の傷で、あなたの価値が損なわれる事などありません	has:손상되는 일은 없습니다	fix	rewrites
+cx:web-fixes-h:49	受け入れることなどすぐにはできない	has:받아들이는 것은	keep	rewrites
+cx:web-fixes-h:51	当然、実物に出会えることなど滅多にない。	has:만날 수 있는 일은 좀처럼 없다	fix	rewrites
+cx:web-fixes-h:51	受け入れることなどすぐにはできない	!rule:cx:web-fixes-h:51	keep	rewrites
+cx:web-fixes-h:151	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없고	fix	rewrites
+cx:web-fixes-h:151	誰に届くこともなく消えた	has:닿는 일도 없이	keep	rewrites

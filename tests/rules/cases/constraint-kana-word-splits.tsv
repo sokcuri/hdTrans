@@ -15,10 +15,8 @@ constraint:mata-before-ida	「うん。また行こうね」	「응. 또 가자�
 constraint:nomizo-before-ochi	中鬼のみぞおちの辺りを斜めに貫いた。	중귀의 명치 근처를 비스듬하게 관철했다.	fix	lookup
 constraint:nomizo-before-ochi	油断していた俺のみぞおちに一撃。	방심하고 있던 내 명치에 일격.	fix	lookup
 constraint:nomizo-before-ochi	全ては神のみぞ知る。	모든 것은 신만이 안다.	keep	lookup
-constraint:nadode-before-dekiru	生き延びることなどできないのだ。	살아남는 것 등 할 수 없는 것이다.	fix	lookup
-constraint:nadode-before-dekiru	皇国を裏切る事などできない。	황국을 배반하는 것 등 할 수 없다.	fix	lookup
 constraint:nadode-before-dekiru	生き延びることなどできないのだ。	살아남는 것은 할 수 없는 것이다.	fix	lookup
-constraint:nadode-before-dekiru	皇国を裏切る事などできない。	황국을 배반하는 일은 할 수 없다.	fix	lookup
+constraint:nadode-before-dekiru	皇国を裏切る事などできない。	황국을 배반하는 것은 할 수 없다.	fix	lookup
 constraint:nadode-before-dekiru	反論などできるはずがない。	반론 같은 건 할 수 있을 리가 없다.	fix	lookup
 constraint:nadode-before-dekiru	急に王に会うなどできない。	갑자기 왕을 만나는 등 할 수 없다.	keep	lookup
 constraint:hai-before-rare	この世界では、架子と一緒にはいられないんだ	이 세계에서는, 가자와 함께는 있을 수 없다	fix	lookup
