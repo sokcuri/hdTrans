@@ -22,6 +22,6 @@ cx:more-count:62	「もう一日終わるよ！」	「이제 하루 끝나!」	k
 cx:more-count:62	もう一日しかないと思うのか	이제 하루밖에 없다고 생각하는 건가	keep	rewrites
 cx:more-count:64	「まゆちゃん、もう１日待ってください。」	「마유짱, 하루 더 기다려 주세요.」	fix	rewrites
 cx:more-count:64	もう１日村に泊ってから帰ろう	이제 1일 마을에 묵고 나서 돌아가자	keep	rewrites
-cx:more-count:64	もう１日に１個は食べないと	이제 1일에 1개는 먹지 않으면	keep	rewrites
+cx:more-count:64	もう１日に１個は食べないと	이제 1일에 1개는 먹어야 한다	keep	rewrites
 constraint:nonaka-after-count	「でさ、なんで膝の上？」	「그리고, 왜 무릎 위?」	keep	lookup
 constraint:nonaka-after-count	暗闇の中彼女は笑った。	lacks:의 안	keep	lookup

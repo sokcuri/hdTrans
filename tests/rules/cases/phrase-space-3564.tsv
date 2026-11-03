@@ -1,0 +1,31 @@
+# 규칙: GRM-3564
+rule	input	expected	kind	layer
+cx:caption-fixes-1:120	<何も考えない ただ 感じる>	has:생각하지 않는다 다만	fix	rewrites
+cx:caption-fixes-1:120	《全然止まらない なんで？》	has:멈추지 않는다 왜?	fix	rewrites
+cx:caption-fixes-1:120	行く ちょっと待って	has:간다 잠깐	fix	rewrites
+cx:caption-fixes-1:120	午前4時でーす 休める時に休む 描くときには描く これがイケてるサークルなのよ	has:쉰다 그릴 때는 그린다 이것이	fix	rewrites
+cx:caption-fixes-1:120	夫が金持ってると強盗に殺される 貧乏だと女に相手にされない	has:살해당한다 가난하다면	fix	rewrites
+cx:caption-fixes-1:120	やんないほうがいい やんないほうがいいです。	has:좋다 하지 않는	fix	rewrites
+cx:caption-fixes-1:120	美味しい お店	!rule:cx:caption-fixes-1:120	keep	rewrites
+cx:caption-fixes-1:120	知らない 人だ	!rule:cx:caption-fixes-1:120	keep	rewrites
+cx:caption-fixes-1:120	どっちが悪いの？ っていう そこだけ。	!rule:cx:caption-fixes-1:120	keep	rewrites
+cx:caption-fixes-1:120	忘れない 忘れない ずっと…	has:잊지 않는 잊지 않는다 계속	fix	rewrites
+cx:caption-fixes-1:122	暑かった 意外と。	더웠다 의외로.	fix	rewrites
+cx:caption-fixes-1:122	よくやった ほんとに	has:잘 했다 정말	fix	rewrites
+cx:caption-fixes-1:122	ヤッベ 来た 逃げろ 逃げろ	has:왔다 도망쳐라	fix	rewrites
+cx:caption-fixes-1:122	いい仲間だなと思いました 楽しそう	has:생각했다 즐거울	fix	rewrites
+cx:caption-fixes-1:122	腹立ってきた 今。	has:왔다 지금.	fix	rewrites
+cx:caption-fixes-1:122	昨日行った 店	!rule:cx:caption-fixes-1:122	keep	rewrites
+cx:caption-fixes-1:122	笑ったね 泣いたよね 君がいた いろいろな軌跡	!rule:cx:caption-fixes-1:122	keep	rewrites
+cx:caption-fixes-1:122	あなたと目指した 優しい未来	!rule:cx:caption-fixes-1:122	keep	rewrites
+cx:caption-fixes-1:122	いかした みんなのラハン村！	!rule:cx:caption-fixes-1:122	keep	rewrites
+cx:caption-fixes-1:124	すごい ほんとに	대단하다 정말	fix	rewrites
+cx:caption-fixes-1:124	すまない しばらく休みたい。	has:미안하다 한동안	fix	rewrites
+cx:caption-fixes-1:124	(昴生)これは怖い これ怖いで	has:이것은 무섭다 이것	fix	rewrites
+cx:caption-fixes-1:124	僕の言葉ではない これは僕達の言葉	has:말이 아니다 이것은	fix	rewrites
+cx:caption-fixes-1:124	そうだね そーじゃない もーいいよ	has:그렇지 않다 이제	fix	rewrites
+cx:caption-fixes-1:124	3歳の子まで殺せるの本当に理解できない 何があったらそこまで	has:이해할 수 없다 무슨	fix	rewrites
+cx:caption-fixes-1:124	＜ちょっと新しい 私たち＞	!rule:cx:caption-fixes-1:124	keep	rewrites
+cx:caption-fixes-1:124	「無駄な行為を繰り返す愚かな お前に	!rule:cx:caption-fixes-1:124	keep	rewrites
+cx:caption-fixes-1:124	いい 天気	!rule:cx:caption-fixes-1:124	keep	rewrites
+cx:caption-fixes-1:124	大きい 手応え	!rule:cx:caption-fixes-1:124	keep	rewrites

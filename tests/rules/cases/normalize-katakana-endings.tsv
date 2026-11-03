@@ -43,8 +43,8 @@ normalize:katakana-endings	新しいマイカー	새로운 마이카	keep	normal
 normalize:katakana-endings	霧のデスマス	안개의 데스마스	keep	normalize
 normalize:katakana-endings	これがマスです	이것이 매스입니다	keep	normalize
 sound:lengthening	綺麗ねー！	예쁘네~!	fix	sound
-normalize:katakana-endings	Tea timeは大事にしないとネー！	Tea time은 소중히 하지 않으면~!	fix	normalize
-sound:lengthening	大事にしないとねー！	소중히 하지 않으면~!	fix	sound
+normalize:katakana-endings	Tea timeは大事にしないとネー！	Tea time은 소중히 해야지~!	fix	normalize
+sound:lengthening	大事にしないとねー！	소중히 해야지~!	fix	sound
 normalize:katakana-endings	食らいついたら離さないって、言ったデース！	물면 떼어 놓지 않는다고, 말한 데스!	keep	normalize
 normalize:katakana-endings	何してるデース！	뭐하고 있는 데스!	keep	normalize
 normalize:katakana-endings	あっ、逃げたデース！	앗, 도망친 데스!	keep	normalize

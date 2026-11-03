@@ -1,0 +1,29 @@
+# 규칙: GRM-3565, GRM-12
+rule	input	expected	kind	layer
+cx:caption-fixes-1:130	これまで以上に頑張らないとな。	지금까지 이상으로 노력해야지.	fix	rewrites
+cx:caption-fixes-1:130	どうせなら状況を楽しまないとな。	has:상황을 즐겨야지.	fix	rewrites
+cx:caption-fixes-1:130	さすがに修理しとかないとね。	has:수리해 두어야지.	fix	rewrites
+cx:caption-fixes-1:130	何か他の遊びを考えないとなあ。	has:생각해야지.	fix	rewrites
+cx:caption-fixes-1:130	「はいはい。急いで着替えないとね〜。	has:서둘러 갈아입어야지	fix	rewrites
+cx:caption-fixes-1:130	Battle shipはこうでないとね！	has:이러해야지!	fix	rewrites
+cx:caption-fixes-1:130	「ハーブティーごちそうさま。カップ洗わないとな」	has:컵 씻어야지	fix	rewrites
+cx:caption-fixes-1:130	「さあ？　年をとってみないとな……そういえば、	has:나이를 먹어 봐야지……	fix	rewrites
+cx:caption-fixes-1:130	「そっかあ。じゃあ今年も頑張らないとね」	has:노력해야지	fix	rewrites
+cx:caption-fixes-1:130	だから、夏はあまり好きではないと…え？	!rule:cx:caption-fixes-1:130	keep	rewrites
+cx:caption-fixes-1:130	ここで見てなければね。	!rule:cx:caption-fixes-1:130	keep	rewrites
+cx:caption-fixes-1:130	エンジンかけ直さないとなと思って。	!rule:cx:caption-fixes-1:130	keep	rewrites
+cx:caption-fixes-1:132	外はすっかり暗くなっていた。気を付けて運転しないと。	has:조심해 운전해야 한다.	fix	rewrites
+cx:caption-fixes-1:132	駄目だ、せめて更新チェックだけでもしておかないと……。	has:해 두어야 한다…….	fix	rewrites
+cx:caption-fixes-1:132	なら多少は無茶でも何か別の話題で注目を逸らさないと！	has:주목을 돌려야 한다!	fix	rewrites
+cx:caption-fixes-1:132	ミナト、気をしっかり持って、女の子たちを助けないと	has:여자아이들을 도와야 한다	fix	rewrites
+cx:caption-fixes-1:132	「でも、早く部室に行かないと」	has:동아리방에 가야 해	fix	rewrites
+cx:caption-fixes-1:132	「僕…そろそろ帰らないと…」	has:돌아가야 해…	fix	rewrites
+cx:caption-fixes-1:132	「ほら、急がないと急がないと！」	has:서둘러야 한다 서둘러야 한다!	fix	rewrites
+cx:caption-fixes-1:132	室温で少し溶かしておかないと。	has:녹여 두어야 한다.	fix	rewrites
+cx:caption-fixes-1:132	早くしないと、遅れるよ。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	そうよ、修理は急がないと。急がないと、間に合わないわ。	has:서두르지 않으면 늦	keep	rewrites
+cx:caption-fixes-1:132	みんなも……帰ってこないと……だめだから……	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	魚雷5、6本くらい撃ち込まないと…駄目よ！	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	急がないと間に合わない。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	行かないといけない。	가야 한다.	keep	rewrites
+cx:caption-fixes-1:132	一度沈んでみないと…わかんないかなぁ？	!rule:cx:caption-fixes-1:132	keep	rewrites
