@@ -1,4 +1,4 @@
-# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46
+# 규칙: MNG-1, MNG-15, MNG-16, GRM-50, GRM-51, GRM-55, GRM-62, LEX-18, MNG-7, MNG-8, MNG-9, GRM-45, GRM-46, GRM-3400
 rule	input	expected	kind	layer
 verb:synthetic-causative-potential	これ以上 続けさせられないってさ｡	has:계속하게 할 수 없	fix	analysis
 verb:synthetic-causative-potential	命令には従わせられないらしいぜ？	has:따르게 할 수 없	fix	analysis
@@ -115,3 +115,7 @@ pattern:negf-hazu	うん……負けるはずない」	has:질 리가 없다	fix
 pattern:negf-past-noda	「……領地の税を引き上げればよかったのではないか」	has:좋았던 건 아닌가	fix	builtin-pattern
 pack:negf:reproach	ま、行くっきゃないか！	lacks:못해	keep	packs
 cx:neg-clause-noda:10	事前に一言頂戴してもよかったのではないかと戸惑っている	has:괜찮았던 것은 아닐까	fix	rewrites
+cx:partial-negation:10	必ずしも正しくない。	has:올바르지는 않다	fix	rewrites
+cx:partial-negation:10	必ずしも勝てない。	has:이길 수는 없다	fix	rewrites
+cx:partial-negation:40	必ずしも悪人ではない。	has:악인은 아니다	fix	rewrites
+cx:partial-negation:20	必ずしも成功しません。	has:성공하지는 않습니다	fix	rewrites
