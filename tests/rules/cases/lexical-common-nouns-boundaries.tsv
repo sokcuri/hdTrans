@@ -18,7 +18,7 @@ dict:common-nouns	勝敗が決まる。	승패가 정해진다.	keep	lookup
 dict:common-nouns	これが私の流儀だ。	이것이 내 방식이다.	fix	lookup
 dict:common-nouns	彼の流儀に従う。	그의 방식에 따른다.	fix	lookup
 dict:common-nouns	古い流儀を守る。	낡은 방식을 지킨다.	fix	lookup
-dict:common-nouns	流儀は人それぞれだ。	방식은 사람 각자다.	fix	lookup
+dict:common-nouns	流儀は人それぞれだ。	방식은 사람마다 제각각이다.	fix	lookup
 dict:common-nouns	剣術の流儀を学ぶ。	검술의 방식을 배운다.	fix	lookup
 dict:common-nouns	自己流で描く。	자기류로 그린다.	keep	lookup
 dict:common-nouns	儀式が始まる。	의식이 시작된다.	keep	lookup

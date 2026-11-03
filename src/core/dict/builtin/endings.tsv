@@ -560,6 +560,8 @@
 学生でしたのよ	학생이었어요	end	prio=-1
 // だそう cut short at the end of a sentence after a noun: hearsay (五割増しだそう 5할 증가라고 한다)
 学生だそう	학생이라고 한다	end	prio=-1
+// ましょっか, the ましょうか said short (どうしましょっか 어떻게 할까요)
+書きましょっか	쓸까요	end	prio=-1
 // ぜ ending a sentence: the plain declarative after a verb, the casual 해체 after an
 // adjective or a noun
 書いてるぜ	쓰고 있다	end	prio=-1

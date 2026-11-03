@@ -401,6 +401,19 @@ cx:novel-fixes-2:400	LEX-4026	&&2 S+0== "やっと" Y-1== "R것이"	set-target "
 cx:novel-fixes-2:410	LEX-4026	&&3 S+0== "なさ" S-1== "に" S-2== "気"	set-target@-2 "신경" set-target@-1 "" set-target " &AF@"	気になさらないで下さい 신경 쓰지 마세요
 cx:novel-fixes-2:420	LEX-4026	&&3 S+0== "顔" S-1== "びっくり" D-1== "깜짝"	set-target@-1 "놀란"	びっくり顔 놀란 얼굴
 cx:novel-fixes-2:430	LEX-4026	&&3 S+0== "わがまま" D+0== "이기적임" P+1== "1**"	set-target "제멋대로인"	わがままカタリナ嬢 제멋대로인 카타리나 양
+cx:novel-fixes-2:435	LEX-4027	&&4 S+0== "に" D+0== "" F-1== "conjugating" ||2 I-1== "Rてるの" I-1== "Rでるの"	set-ending@-1 "1고 있는데"	勉強してるのに 공부하고 있는데
+cx:novel-fixes-2:440	LEX-4027	&&3 S+0== "寸前" F-1== "verb" Y-1== "0"	set-ending@-1 "1기"	波が届く寸前 물결이 닿기 직전
+cx:novel-fixes-2:450	LEX-4027	&&4 S+0== "故" D+0== "고" P-1== "1**" ||2 S+1== "L、" F+0== "last"	append-target@-1 "(이)라서" set-target ""	離職率の高い職場故、 이직률이 높은 직장이라서,
+cx:novel-fixes-2:460	LEX-4027	&&3 S+0== "と、" D+0== "(와)과" S-1== "っ"	set-target ","	記入完了っと、 기입 완료,
+cx:novel-fixes-2:470	LEX-4027	&&4 S+0== "どうか" D+0== "제발" ||2 S+1== "とは" S+1== "と" S+2== "L思"	set-target "어떨까" set-target@+1 " 하고"	会社としてどうかとは思う 회사로서 어떨까 하고 생각한다
+cx:novel-fixes-2:480	LEX-4027	&&3 S+0== "ぶり" D+0== "만" S+1== "の"	set-target " 만의" set-target@+1 " "	３０時間ぶりの安眠 30시간 만의 단잠
+cx:novel-fixes-2:490	LEX-4027	&&3 S+0== "事" S-1== "厄介" D-1== "골칫거리"	set-target ""	厄介事が発生した 골칫거리가 발생했다
+cx:novel-fixes-2:500	LEX-4027	&&2 S+0== "なんだっけ" ||7 S-1== "名前" S-1== "名" S-1== "タイトル" S-1== "題名" S-1== "住所" S-1== "番号" S-1== "誕生日"	append-target@-1 "이" set-target " 뭐였더라"	名前なんだっけ 이름이 뭐였더라
+cx:novel-fixes-2:510	LEX-4027	&&3 S+0== "兼" P-1== "1**" P+1== "1**"	set-target " 겸 "	ディレクター兼プランナー 디렉터 겸 플래너
+cx:novel-fixes-2:520	LEX-4027	&&3 ||2 S+0== "先に" S+0== "先" D+0== "L먼저" ||6 S-1== "キロ" S-1== "メートル" S-1== "km" S-1== "m" S-1== "里" S-1== "歩"	set-target "앞에"	十数キロ先に 십여 킬로 앞에
+cx:novel-fixes-2:530	LEX-4027	&&3 S+0== "いかに" D+0== "얼마나" >8 ||3 S+0== "Lとはいえ" S+0== "Lとは言え" S+0== "Lとはいっても" S+0== "00。！？」"	set-target "아무리"	いかにブラックな会社とはいえ 아무리 블랙인 회사라고는 해도
+cx:novel-fixes-2:540	LEX-4027	&&3 S+0== "中" S+1== "には" ||3 F+0== "opens-line" F+0== "after-pause" S-1== "00。」』！？…"	set-target "개중" set-target@+1 "에는"	中にはテレビで見た者もいる 개중에는 텔레비전으로 본 사람도 있다
+cx:novel-fixes-2:560	LEX-4027	&&3 S+0== "と" D+0== "(와)과" S+1== "L笑わば"	set-target "(이)라고"	社畜と笑わば笑え 사축이라고 비웃으려면 비웃어라
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면
@@ -408,6 +421,7 @@ cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0==
 cx:adj-de-aru-koto:10	GRM-3467	&&4 F+0== "conjugating" Y+0== "1다" U+0== "Rである" S+1== "Lこと"	set-ending "4"	未熟であることは 미숙한 것은
 //= de-arou-noun	after QuoteTo 46	であろう after a verb right before a noun or an adjective that describes it is the guess in its adnominal form, -을 (驚愕するであろう貴重な知識 경악할 귀중한 지식), not 할 것이다.
 cx:de-arou-noun:10	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "Rであろう" !1 S+1== "00？?！!。．、」』）…‥" ||2 P+1== "1**" F+1== "conjugating"	set-ending "3"	驚愕するであろう貴重な知識 경악할 귀중한 지식
+cx:de-arou-noun:20	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "Rであろう" ||2 S+1== "「" S+1== "『" P+2== "1**"	set-ending "3"	そこにいるであろう「敵」 거기에 있을 「적」
 //= noun-denai-if	after QuoteTo 47	After a noun, でないと with its comma and no verb of saying after it is the condition (이)가 아니면 (会話が出来る人でないと、 대화를 할 수 있는 사람이 아니면,), not the quote 아니라고 (spec GRM-3460).
 cx:noun-denai-if:10	GRM-3460	&&5 S+0== "でな" D+0== "(이)가 아$A3@" ||2 Y+0== "1다고" Y+0== "1다고," U+0== "R、" !1 F+1== "quote-verb"	set-ending "2면,"	会話が出来る人でないと、話も聞いてもらえない 대화를 할 수 있는 사람이 아니면, 이야기도 들어 줄 수 없다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
