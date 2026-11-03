@@ -1,0 +1,18 @@
+# 규칙: GRM-3404
+rule	input	expected	kind	layer
+dict:jisjk:4011	ビールを二杯とおつまみを頼んだ。	맥주를 두 잔과 안주를 부탁했다.	fix	local
+dict:jisjk:4011	ビール二杯とおつまみを頼んだ。	맥주 두 잔과 안주를 부탁했다.	fix	local
+dict:jisjk:4011	二杯とおつまみを頼んだ。	두 잔과 안주를 부탁했다.	fix	local
+dict:jisjk:4011	ミ「俺は今、刑事2人と一緒にいる。俺は何もしていない」	has:형사 2명과 함께 있다	fix	local
+dict:jisjk:4011	２人と話をしているうち、商店街の入り口となる小路が目に入った。	has:2명과 이야기를	fix	local
+dict:jisjk:4011	お前らも382と縁が繋がっている状態だということを忘れるな	has:382와 인연이	fix	local
+dict:jisjk:4011	It's 5 now. この綺麗なsunsetを、まさかEscort 22と一緒に見ることになるとはね。	has:Escort 22와 함께	fix	local
+dict:jisjk:4011	銀貨を1枚と銅貨を何枚か置く。	has:은화를 1장과 동화를	keep	local
+dict:jisjk:4011	りんごを三つとみかんを二つ買った。	사과를 세 개와 귤을 두 개 샀다.	keep	local
+dict:jisjk:4011	男2人と女2人が肝試しに行って	has:남자 2명과 여자 2명이	keep	local
+dict:jisjk:4011	猫が二匹と犬が一匹いる。	고양이가 두 마리와 개가 한 마리 있다.	keep	local
+dict:jisjk:4011	採掘ギアを5体と採掘人夫を10人ですな。	has:5기와 채굴 인부를	keep	local
+dict:jisjk:4011	星８つと表示されている。	!rule:dict:jisjk:4011	keep	local
+dict:jisjk:4011	未確認の大型ギア1体と推定されます！	!rule:dict:jisjk:4011	keep	local
+dict:jisjk:4011	１人２人と部員が帰って行き、	!rule:dict:jisjk:4011	keep	local
+dict:jisjk:4011	そして一人、また一人とホテルから退去していく。	!rule:dict:jisjk:4011	keep	local
