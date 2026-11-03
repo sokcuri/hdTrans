@@ -22,7 +22,7 @@ lookup:copies-te-form	みてみて～、この輝く肌。	봐 봐~, 이 빛나�
 lookup:copies-te-form	さ、急いで急いで。	자, 서둘러 서둘러.	keep	lookup
 lookup:copies-te-form	わー、待って待って。	와아, 기다려 기다려.	fix	rewrites
 lookup:copies-te-form	何で何で？	왜 왜?	keep	lookup
-lookup:copies-ku-adverb	ああ……だから、ちょくちょくヘンな感じになってた	아……니까, 가끔 이상한 기분이 들었다	keep	lookup
+lookup:copies-ku-adverb	ああ……だから、ちょくちょくヘンな感じになってた	아……그러니까, 가끔 이상한 기분이 들었다	keep	lookup
 lookup:copies-ku-adverb	よくよく見れば、寝袋に入って	자세히 보면, 침낭에 들어가	keep	lookup
 lookup:copies-ku-adverb	いや、よくよく見れば足が震えていた。	아니, 자세히 보면 다리가 떨고 있었다.	keep	lookup
 lookup:copies-ku-adverb	わくわくするっていうか、建物	두근두근한다고 하는지, 건물	keep	lookup
