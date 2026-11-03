@@ -28,7 +28,7 @@ voice:respectful-gojishin	それはプリームス様ご自身で判断されれ
 voice:respectful-gojishin	あの、もしかして、領主様ご自身で製作されるんですか？	has:제작하십니까	fix	voice
 voice:respectful-gojishin	最後には陛下ご自身でご確認された結果、間違いなく、皇家の血筋であると証明されたのだ。	has:증명되었다	keep	voice
 pack:cue-chosen-senses:17	紅茶を振る舞われている。	has:대접받고	keep	packs
-pack:cue-chosen-senses:14	飯を食い終わった俺たちに、ユナは冷やしたハーブティーを振る舞った。	다 밥을 먹은 우리에게, 유나는 차게 한 허브티를 대접했다.	keep	packs
+pack:cue-chosen-senses:14	飯を食い終わった俺たちに、ユナは冷やしたハーブティーを振る舞った。	밥을 다 먹은 우리에게, 유나는 차게 한 허브티를 대접했다.	keep	packs
 pack:cue-chosen-senses:14	王女らしく振る舞うのがバカらしくなっちゃった。	왕녀답게 행동하는 것이 바보스러워져버렸다.	keep	packs
 voice:respectful-gojishin	卒業後にご自身で爵位を継がれるか	has:스스로 작위	keep	voice
 voice:respectful-gojishin	私は陛下御自身の命令で幽閉された。	has:유폐되었다	keep	voice
