@@ -1,0 +1,13 @@
+# 규칙: SND-8
+rule	input	expected	kind	layer
+sound:after-interjection	「……お、おほほ、で、ですわよねぇ」	「……오, 오호호, 그, 그렇죠」	fix	sound
+sound:after-interjection	「おほほ、で、できた」	「오호호, 다, 다 됐다」	fix	sound
+sound:after-interjection	「あはは、ですよねー。そしたら……」	「아하하, 그렇죠~. 그랬더니……」	fix	sound
+sound:after-interjection	「ふーん、そう。」	「흐응, 그래.」	fix	sound
+sound:after-interjection	「うわぁ、ちょっと、これ、どうするよ……」	「우와아, 잠깐, 이거, 어떻게 해……」	fix	sound
+sound:after-interjection	ちょっと、ちょっと、いいとこに来たわね！	has:잠깐, 잠깐,	fix	sound
+sound:after-interjection	ふっんー、さて、じゃあ、行こうかなー	has:훗음, 자, 그럼,	fix	sound
+sound:after-interjection	ほら、ほら、ね？」	has:자, 자, 그렇지?	fix	sound
+sound:after-interjection	「え？ 装備ですか？ 装備は―――まぁ、ね、うんうん」	has:뭐, 네, 응응	keep	sound
+sound:after-interjection	「さ、さ、三分」	「자,, 3분」	keep	sound
+sound:after-interjection	「うん、で、さっきの話だけど」	has:응, 그리고,	keep	sound

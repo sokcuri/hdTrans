@@ -30,7 +30,7 @@ sound:teka-open	マルサン、マルマル。てかさ、うちらもカタパ�
 sound:teka-open	説教を食らわしてから一週間が経った	lacks:그보다	keep	sound
 sound:teka-open	ここで食べてかない？	여기서 먹어 가지 않아?	keep	sound
 phrase:ならいい	……そう、ならいいけど。	……그래, 그럼 됐지만.	fix	builtin-phrase
-phrase:ならいい	あら、そう？ならいいけど……提督？	어머, 그렇게? 그럼 됐지만……제독?	fix	builtin-phrase
+phrase:ならいい	あら、そう？ならいいけど……提督？	어머, 그래? 그럼 됐지만……제독?	fix	builtin-phrase
 phrase:ならいい	何か命令が？そう？ならいいの。	뭔가 명령이? 그래? 그럼 됐어.	fix	builtin-phrase
 phrase:ならいい	それならいいけど。	그렇다면 좋은데.	keep	builtin-phrase
 phrase:ならいい	ピアノをならった。	피아노를 배웠다.	keep	builtin-phrase
