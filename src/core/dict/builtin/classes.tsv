@@ -196,6 +196,7 @@
 //= adjective.grumble	Adjectives that said twice with nothing after them are a grumble, written as a 1다 and 6 pair (寒い寒い 춥다 추워), where other adjectives said again are a cry in 6 (痛い痛い 아파 아파).
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
+//= noun.change-result	Ends of the nouns of a form or a being that a thing turns into, before which に with 進化 or 変化 is (으)로 (次の段階に進化 다음 단계로 진화, 液体に変化 액체로 변화, 魔王に変化 마왕으로 변화); a bare 体 or 形 is no such end (全体, 地形).
 //= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
 //= noun.count-ship	Nouns of ships, matched as a whole word in the sentence of the counter 体, which then counts them as 척 (艦を二体 함을 2척).
 //= noun.count-machine	Nouns of a robot, a mecha or a machine soldier, matched at the end of a word, after which the counter 体 is 기 (ロボット二体 로봇 2기).
@@ -9062,6 +9063,23 @@ noun.count-corpse	白骨
 noun.count-corpse	ミイラ
 noun.count-corpse	骨
 noun.count-corpse	ゾンビ
+noun.change-result	姿
+noun.change-result	形態
+noun.change-result	段階
+noun.change-result	種族
+noun.change-result	成体
+noun.change-result	上位種
+noun.change-result	型
+noun.change-result	種
+noun.change-result	魔王
+noun.change-result	人間
+noun.change-result	液体
+noun.change-result	気体
+noun.change-result	固体
+noun.change-result	物体
+noun.change-result	個体
+noun.change-result	人形
+noun.change-result	球形
 
 noun.count-flower	花
 noun.count-flower	バラ

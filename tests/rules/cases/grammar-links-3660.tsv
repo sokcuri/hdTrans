@@ -6,7 +6,7 @@ cx:web-fixes-i:100	他の人が早いのではなく自分が遅いのだとい�
 cx:web-fixes-i:100	神出鬼没ではなくなり、二階の片隅にある書斎に篭るようになった。	!rule:cx:web-fixes-i:100	keep	rewrites
 cx:web-fixes-i:100	とくに興味もないテレビを観るでもなく観ていた。	!rule:cx:web-fixes-i:100	keep	rewrites
 cx:web-fixes-i:100	普通じゃなく感じた。	!rule:cx:web-fixes-i:100	keep	rewrites
-cx:web-fixes-i:105	やべっ、いけるか？ダメか？	has:안돼?	fix	rewrites
+cx:web-fixes-i:105	やべっ、いけるか？ダメか？	has:안되나?	fix	rewrites
 cx:web-fixes-i:105	と、いきなり他力本願でも駄目か。	!rule:cx:web-fixes-i:105	keep	rewrites
 cx:web-fixes-i:110	と、いきなり他力本願でも駄目か。	has:안되나.	fix	rewrites
 cx:web-fixes-i:110	ミドリさんがこのスレにいてくれたら嬉しいなぁ、ダメかな？	has:안되나?	fix	rewrites
