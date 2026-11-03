@@ -126,7 +126,7 @@ cx:kanenai-passive:60	GRM-3202	&&7 F+0== "conjugating" F+0== "verb" Y+0== "1고"
 cx:sono-ue-place:10	LEX-3701	&&3 S+0== "その上" D+0== "게다가" ||7 S+1== "を" S+1== "から" S+1== "まで" S+1== "へ" S+1== "が" S+1== "も" S+1== "の"	set-target "그 위"	その上をいく 그 위를 간다
 //= toshite-samu	after Select 135	The してしまう after a noun of a role something is made into (a shield, food, a hostage, a pawn, a disciple) and the と read (으)로 makes it that, 삼다 (その糧としてしまう 그 양식으로 삼아버리는, 盾としてしまう 방패로 삼아버리다); after another noun, a status declared (無効, 失格) or an adverb in と, it stays 하다 (無効としてしまった 무효로 해버렸다).
 cx:toshite-samu:10	GRM-3207	&&5 S+0== "と" D+0== "(으)로" ||55 S-1== "盾" S-1== "糧" S-1== "人質" S-1== "餌" S-1== "エサ" S-1== "弟子" S-1== "生贄" S-1== "生け贄" S-1== "手駒" S-1== "駒" S-1== "道具" S-1== "部下" S-1== "奴隷" S-1== "下僕" S-1== "しもべ" S-1== "配下" S-1== "家来" S-1== "供物" S-1== "贄" S-1== "踏み台" S-1== "足場" S-1== "拠点" S-1== "根城" S-1== "隠れ蓑" S-1== "囮" S-1== "おとり" S-1== "捨て駒" S-1== "傀儡" S-1== "標的" S-1== "獲物" S-1== "食料" S-1== "食糧" S-1== "材料" S-1== "素材" S-1== "燃料" S-1== "身代わり" S-1== "養分" S-1== "肥やし" S-1== "苗床" S-1== "器" S-1== "依り代" S-1== "憑代" S-1== "妻" S-1== "嫁" S-1== "養子" S-1== "跡継ぎ" S-1== "後継者" S-1== "眷属" S-1== "使い魔" S-1== "手下" S-1== "子分" S-1== "武器" S-1== "鎧" S-1== "戦力" S-1== "兵力" S+1== "してしま" F+1== "touches-prev"	set-verb@+1 "삼아버리다"	その糧としてしまう 그 양식으로 삼아버리는
-//= tai-count	after Select 140	The counter 体 counts creatures: 마리, or 구 after a dead body (noun.count-corpse), 기 after a machine (noun.count-machine), 개 after a statue or doll (noun.count-figure) and 명 after a person (noun.count-person), the noun read before the count (ゴーレム三体, ゴーレムが三体, お地蔵様１３体) or after it with の (三体のゴーレム); 체 is no counter of Korean prose. A count word 一体, 三体, 五体, 六体 is a count where the counter row chose it, after a noun and が, は, を or も before a verb, だけ, ずつ, しか, も, ほど or くらい, after が, を or も before the end (not before ？ or a trailing ……), never before a question word, after 最後の, doubled (一体一体 한 마리 한 마리) or before の and a katakana noun or a noun of those classes; 一体 after a word of a place (noun.count-area) is 一帯, 일대, but 一体 before 何, どう, 誰 or another question word is 도대체; 一体の is 1기의, 한 명의 or 한 마리의 before a machine, a person, a creature or a katakana noun; 一体何, 一体化 and 五体満足 stay.
+//= tai-count	after Select 140	The counter 体 counts creatures: 마리, or 구 after a dead body (noun.count-corpse), 기 after a machine (noun.count-machine), 개 after a statue or doll (noun.count-figure) and 명 after a person (noun.count-person), the noun read before the count (ゴーレム三体, ゴーレムが三体, お地蔵様１３体) or after it with の (三体のゴーレム); 체 is no counter of Korean prose. A count word 一体, 三体, 五体, 六体 is a count where the counter row chose it, after a countable noun (katakana or one of the count classes) and が, は, を or も before だけ, ずつ, しか, も, ほど or くらい, after such a noun and が, を or も (は only after a class noun) before a verb, an adjective or the end, never before a question word, after 最後の, doubled (一体一体 한 마리 한 마리) or before の and a katakana noun or a noun of those classes; 一体 after a word of a place (noun.count-area) is 一帯, 일대, but 一体 before a question word is 도대체; 一体の is 한 개의, 한 구의, 1기의, 한 명의 or 한 마리의 before a figure, a dead body, a machine, a person or a creature; 一体何, 一体化 and 五体満足 stay.
 //: tai-num	&&3 S+0== "体" D+0== "체" ||2 F-1== "number" ||3 S-1== "何" S-1== "数" S-1== "幾"	The counter 体 after a number or a question number.
 //: tai-cue2-corpse	||4 S-2== @Rnoun.count-corpse &&2 ||5 S-2== "が" S-2== "は" S-2== "を" S-2== "も" S-2== "様" S-3== @Rnoun.count-corpse &&2 S+1== "の" ||2 S+2== @Rnoun.count-corpse S+3== @Rnoun.count-corpse &&2 S-2== "の" S-3== @Rnoun.count-corpse	A noun of noun.count-corpse that the counter 体 after a number counts.
 //: tai-cue1-corpse	||3 S-1== @Rnoun.count-corpse &&2 ||5 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-1== "様" S-2== @Rnoun.count-corpse &&2 S+1== "の" ||2 S+2== @Rnoun.count-corpse S+3== @Rnoun.count-corpse	A noun of noun.count-corpse that a count word in 体 counts.
@@ -136,12 +136,15 @@ cx:toshite-samu:10	GRM-3207	&&5 S+0== "と" D+0== "(으)로" ||55 S-1== "盾" S-
 //: tai-cue1-figure	||3 S-1== @Rnoun.count-figure &&2 ||5 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-1== "様" S-2== @Rnoun.count-figure &&2 S+1== "の" ||2 S+2== @Rnoun.count-figure S+3== @Rnoun.count-figure	A noun of noun.count-figure that a count word in 体 counts.
 //: tai-cue2-person	||4 S-2== @Rnoun.count-person &&2 ||5 S-2== "が" S-2== "は" S-2== "を" S-2== "も" S-2== "様" S-3== @Rnoun.count-person &&2 S+1== "の" ||2 S+2== @Rnoun.count-person S+3== @Rnoun.count-person &&2 S-2== "の" S-3== @Rnoun.count-person	A noun of noun.count-person that the counter 体 after a number counts.
 //: tai-cue1-person	||3 S-1== @Rnoun.count-person &&2 ||5 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-1== "様" S-2== @Rnoun.count-person &&2 S+1== "の" ||2 S+2== @Rnoun.count-person S+3== @Rnoun.count-person	A noun of noun.count-person that a count word in 体 counts.
+//: tai-question	||12 S+1== "L何" S+1== "Lなに" S+1== "Lなん" S+1== "Lどう" S+1== "Lどんな" S+1== "L誰" S+1== "Lだれ" S+1== "Lどこ" S+1== "Lなぜ" S+1== "Lいつ" S+1== "Lいくら" S+1== "Lどれ"	A question word right after 一体, before which 一体 is 도대체 (一体何, 一体どうして).
 //: tai-word	||4 S+0== "一体" S+0== "三体" S+0== "五体" S+0== "六体"	The count words in 体 that the dictionary also reads as words.
-//: tai-count-word	&&3 :tai-word !1 ||9 S+1== "L何" S+1== "Lなに" S+1== "Lなん" S+1== "Lどう" S+1== "L誰" S+1== "Lだれ" S+1== "Lどこ" S+1== "Lなぜ" S+1== "Lいつ" ||9 S+1== "Lの内" S+1== "Lのうち" D+0== "한 마리" &&3 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" P-2== "1" ||9 F+1== "verb" S+1== "Lだけ" S+1== "Lずつ" S+1== "Lしか" S+1== "も" S+1== "ほど" S+1== "Lくらい" S+1== "Lぐらい" P+1== "7" &&2 ||3 S-1== "が" S-1== "を" S-1== "も" ||2 S+1== "00。！!」』" !1 F+1== "exists" &&2 S-1== "の" S-2== "最後" S+1== "一体" S-1== "一体" &&2 S+1== "の" ||8 S+2== "内" S+2== "うち" F+2== "katakana" S+2== @Rnoun.count-corpse S+2== @Rnoun.count-machine S+2== @Rnoun.count-figure S+2== @Rnoun.count-person S+2== @Rnoun.count-creature	A count word in 体 read as a count.
+//: tai-count-word	&&3 :tai-word !1 :tai-question ||11 S+1== "Lの内" S+1== "Lのうち" D+0== "한 마리" &&3 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" ||6 F-2== "katakana" S-2== @Rnoun.count-corpse S-2== @Rnoun.count-machine S-2== @Rnoun.count-figure S-2== @Rnoun.count-person S-2== @Rnoun.count-creature ||7 S+1== "Lだけ" S+1== "Lずつ" S+1== "Lしか" S+1== "も" S+1== "ほど" S+1== "Lくらい" S+1== "Lぐらい" &&3 ||3 S-1== "が" S-1== "を" S-1== "も" ||6 F-2== "katakana" S-2== @Rnoun.count-corpse S-2== @Rnoun.count-machine S-2== @Rnoun.count-figure S-2== @Rnoun.count-person S-2== @Rnoun.count-creature ||2 F+1== "verb" P+1== "7" &&3 S-1== "は" ||5 S-2== @Rnoun.count-corpse S-2== @Rnoun.count-machine S-2== @Rnoun.count-figure S-2== @Rnoun.count-person S-2== @Rnoun.count-creature ||2 F+1== "verb" P+1== "7" &&3 ||3 S-1== "が" S-1== "を" S-1== "も" ||6 F-2== "katakana" S-2== @Rnoun.count-corpse S-2== @Rnoun.count-machine S-2== @Rnoun.count-figure S-2== @Rnoun.count-person S-2== @Rnoun.count-creature ||2 S+1== "00。！!」』" !1 F+1== "exists" &&2 S-1== "の" S-2== "最後" S+1== "一体" S-1== "一体" &&2 S+1== "の" ||8 S+2== "内" S+2== "うち" F+2== "katakana" S+2== @Rnoun.count-corpse S+2== @Rnoun.count-machine S+2== @Rnoun.count-figure S+2== @Rnoun.count-person S+2== @Rnoun.count-creature	A count word in 体 read as a count: after a countable noun (katakana or a noun of the count classes) and が, は, を or も before だけ, ずつ, しか, も, ほど or くらい; after such a noun and が, を or も (は only after a noun of the classes) before a verb or an adjective; after such a noun and が, を or も at the end; after 最後の, doubled, or before の and a countable noun; never before a question word.
+cx:tai-count:5	NUM-30	&&2 S+0== "一体の" S+1== @Rnoun.count-figure	set-target "한 개의"	一体のマネキン 한 개의 마네킹
+cx:tai-count:6	NUM-30	&&2 S+0== "一体の" S+1== @Rnoun.count-corpse	set-target "한 구의"	一体のミイラ 한 구의 미라
 cx:tai-count:7	NUM-30	&&2 S+0== "一体の" S+1== @Rnoun.count-machine	set-target "1기의"	一体のロボット 1기의 로봇
 cx:tai-count:8	NUM-30	&&2 S+0== "一体の" S+1== @Rnoun.count-person	set-target "한 명의"	一体のエルフ 한 명의 엘프
-cx:tai-count:9	NUM-30	&&2 S+0== "一体の" ||2 S+1== @Rnoun.count-creature F+1== "katakana"	set-target "한 마리의"	一体のゴーレム 한 마리의 골렘
-cx:tai-count:10	NUM-30	&&3 S+0== "一体" S-1== @Rnoun.count-area !1 ||8 S+1== "L何" S+1== "Lなに" S+1== "Lなん" S+1== "Lどう" S+1== "L誰" S+1== "Lだれ" S+1== "Lどこ" S+1== "Lなぜ"	set-target "일대"	ここら一体 이 근처 일대
+cx:tai-count:9	NUM-30	&&2 S+0== "一体の" S+1== @Rnoun.count-creature	set-target "한 마리의"	一体のゴーレム 한 마리의 골렘
+cx:tai-count:10	NUM-30	&&3 S+0== "一体" S-1== @Rnoun.count-area !1 :tai-question	set-target "일대"	ここら一体 이 근처 일대
 cx:tai-count:15	NUM-30	&&2 :tai-num :tai-cue2-corpse	set-target "구"	死体が三体 시체 세 구
 cx:tai-count:20	NUM-30	&&2 :tai-num :tai-cue2-machine	set-target "기"	ロボット二体 로봇 2기
 cx:tai-count:25	NUM-30	&&2 :tai-num :tai-cue2-figure	set-target "개"	人形が二体 인형 두 개
@@ -168,15 +171,16 @@ cx:tai-count:51	NUM-30	&&2 S+0== "三体" :tai-count-word	set-target "세 마리
 cx:tai-count:52	NUM-30	&&2 S+0== "五体" :tai-count-word	set-target "다섯 마리"	中鬼が五体だけ 중귀가 다섯 마리만
 cx:tai-count:53	NUM-30	&&2 S+0== "六体" :tai-count-word	set-target "여섯 마리"	中鬼が六体だけ 중귀가 여섯 마리만
 //= count-units	after Select 145	A counter after a number, or a count word of a kanji number and a counter, is counted by the Korean unit of what it counts, not read as a word: 足 켤레, 着 벌, 輪 송이, 脚 개 (chairs), 切れ 조각, 筋 줄기, 柱 분 (gods), 缶 캔, 口 입, 滴 방울, 服 첩 (medicine), 膳 벌 or 공기, 丁 모 or 자루, 張 동 (tents), 機 and 基 기, 勝 승, 戦 전, 位 위, 階 층, 曲 곡, 枚 장; a kanji number before 歳 is 살. A count word whose counter needs a cue (着, 脚, 服, 丁, 膳, 両, 張, 足, 二輪 and 三輪 by a flower, 一機 by a machine) is a count only next to a noun of that class, with が, は, を or も between but not で; 基, 筋, 曲, 枚 are counts after a noun with が, は, を or も, or before a verb, だけ, ずつ, しか, も, ほど, くらい or the end. Words like 一足先, 一着 (a placing), 三脚 (a tripod), 一服 (a break), 一筋縄 and 三位一体 stay.
-cx:count-units:51	NUM-31	&&2 S+0== "切れ" S-1== "二"	set-target "" set-ending "" set-target@-1 "두 조각"	ケーキを二切れ 케이크를 두 조각
-cx:count-units:52	NUM-31	&&2 S+0== "切れ" S-1== "三"	set-target "" set-ending "" set-target@-1 "세 조각"	ケーキを三切れ 케이크를 세 조각
-cx:count-units:53	NUM-31	&&2 S+0== "四切" S+1== "れ"	set-target "네" set-target@+1 " 조각 " set-ending@+1 ""	ケーキを四切れ 케이크를 네 조각
-cx:count-units:54	NUM-31	&&2 S+0== "切れ" S-1== "五"	set-target "" set-ending "" set-target@-1 "다섯 조각"	ケーキを五切れ 케이크를 다섯 조각
-cx:count-units:36	NUM-31	&&2 S+0== "切れ" S-1== "六"	set-target "" set-ending "" set-target@-1 "여섯 조각"	ケーキを六切れ 케이크를 여섯 조각
-cx:count-units:37	NUM-31	&&2 S+0== "切れ" S-1== "七"	set-target "" set-ending "" set-target@-1 "일곱 조각"	ケーキを七切れ 케이크를 일곱 조각
-cx:count-units:39	NUM-31	&&2 S+0== "切れ" S-1== "九"	set-target "" set-ending "" set-target@-1 "아홉 조각"	ケーキを九切れ 케이크를 아홉 조각
-cx:count-units:41	NUM-31	&&2 S+0== "切れ" S-1== "十"	set-target "" set-ending "" set-target@-1 "열 조각"	ケーキを十切れ 케이크를 열 조각
-cx:count-units:42	NUM-31	&&2 S+0== "切れ" S-1== "何"	set-target "" set-ending "" set-target@-1 "몇 조각"	ケーキを何切れ 케이크를 몇 조각
+cx:count-units:51	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "二" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "두 조각"	ケーキを二切れ 케이크를 두 조각
+cx:count-units:52	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "三" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "세 조각"	ケーキを三切れ 케이크를 세 조각
+cx:count-units:53	NUM-31	&&3 S+0== "四切" S+1== "れ" ||2 F+2== "verb" S+2== "00。！？!?」』…"	set-target "네" set-target@+1 " 조각 " set-ending@+1 ""	ケーキを四切れ 케이크를 네 조각
+cx:count-units:38	NUM-31	&&3 S+0== "八切" S+1== "れ" ||2 F+2== "verb" S+2== "00。！？!?」』…"	set-target "여덟" set-target@+1 " 조각 " set-ending@+1 ""	ケーキを八切れ 케이크를 여덟 조각
+cx:count-units:54	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "五" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "다섯 조각"	ケーキを五切れ 케이크를 다섯 조각
+cx:count-units:36	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "六" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "여섯 조각"	ケーキを六切れ 케이크를 여섯 조각
+cx:count-units:37	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "七" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "일곱 조각"	ケーキを七切れ 케이크를 일곱 조각
+cx:count-units:39	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "九" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "아홉 조각"	ケーキを九切れ 케이크를 아홉 조각
+cx:count-units:41	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "十" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "열 조각"	ケーキを十切れ 케이크를 열 조각
+cx:count-units:42	NUM-31	&&4 U+0== "" S+0== "切れ" S-1== "何" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" set-target@-1 "몇 조각"	ケーキを何切れ 케이크를 몇 조각
 cx:count-units:69	NUM-31	&&4 S+0== "口" ||2 F-1== "number" S-1== "何" S+1== "で" ||2 S+2== "L食" S+2== "L飲"	set-target "입" set-target@+1 "에"	三口で食べた 세 입에 먹었다
 cx:count-units:70	NUM-31	&&3 S+0== "口" ||2 F-1== "number" S-1== "何" ||8 S+1== "L食" S+1== "L飲" S+1== "Lかじ" S+1== "L齧" S+1== "L啜" S+1== "Lすす" S+1== "L頬張" S+1== "Lたべ"	set-target "입"	三口食べた 세 입 먹었다
 cx:count-units:49	NUM-31	S+0== "一切れ"	set-target "한 조각"	一切れ 한 조각
@@ -192,17 +196,18 @@ cx:count-units:30	NUM-31	&&3 S+0== "丁" ||2 F-1== "number" ||3 S-1== "何" S-1=
 cx:count-units:35	NUM-31	&&3 S+0== "張" ||2 F-1== "number" ||3 S-1== "何" S-1== "数" S-1== "幾" ||3 S-2== @Rnoun.count-tent &&2 ||4 S-2== "が" S-2== "は" S-2== "を" S-2== "も" S-3== @Rnoun.count-tent &&2 S+1== "の" S+2== @Rnoun.count-tent	set-target "동"	テントが3張 텐트 3동
 cx:count-units:45	NUM-31	&&2 S+0== "輪" ||2 F-1== "number" ||3 S-1== "何" S-1== "数" S-1== "幾"	set-target "송이"	花が3輪 꽃 3송이
 cx:count-units:50	NUM-31	&&3 S+0== "脚" ||2 F-1== "number" ||3 S-1== "何" S-1== "数" S-1== "幾" ||3 S-2== @Rnoun.count-chair &&2 ||4 S-2== "が" S-2== "は" S-2== "を" S-2== "も" S-3== @Rnoun.count-chair &&2 S+1== "の" S+2== @Rnoun.count-chair	set-target "개"	椅子が3脚 의자 3개
-cx:count-units:55	NUM-31	&&2 S+0== "切れ" F-1== "number"	set-target "" set-ending "" append-target@-1 "조각"	ケーキが3切れ 케이크 3조각
+cx:count-units:55	NUM-31	&&4 U+0== "" S+0== "切れ" F-1== "number" ||2 F+1== "verb" S+1== "00。！？!?」』…"	set-target "" set-ending "" append-target@-1 "조각"	ケーキが3切れ 케이크 3조각
 cx:count-units:60	NUM-31	&&2 S+0== "筋" ||2 F-1== "number" ||3 S-1== "何" S-1== "数" S-1== "幾"	set-target "줄기"	光が3筋 빛 3줄기
 cx:count-units:65	NUM-31	&&2 S+0== "柱" ||12 S-1== "一" S-1== "二" S-1== "三" S-1== "四" S-1== "五" S-1== "六" S-1== "七" S-1== "八" S-1== "九" S-1== "十" S-1== "何" S-1== "数"	set-target "분"	神が三柱 신이 세 분
 cx:count-units:66	NUM-31	&&2 S+0== "柱" F-1== "number"	set-target "명"	３柱の女神 3명의 여신
 cx:count-units:80	NUM-31	&&2 S+0== "滴" ||2 F-1== "number" ||3 S-1== "何" S-1== "数" S-1== "幾"	set-target "방울"	水が3滴 물 3방울
 cx:count-units:85	NUM-31	&&2 S+0== "歳" ||11 S-1== "一" S-1== "二" S-1== "三" S-1== "四" S-1== "五" S-1== "六" S-1== "七" S-1== "八" S-1== "九" S-1== "十" S-1== "何"	set-target "살"	一歳 한 살
 cx:count-units:90	NUM-31	&&2 S+0== "一足" ||3 S-1== @Rnoun.count-footwear &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-footwear &&2 S+1== "の" S+2== @Rnoun.count-footwear	set-target "한 켤레"	靴が一足 구두 한 켤레
+cx:count-units:91	NUM-31	&&3 S+0== "足" ||2 F-1== "number" S-1== "何" ||3 S-2== @Rnoun.count-footwear &&2 ||4 S-2== "が" S-2== "は" S-2== "を" S-2== "も" S-3== @Rnoun.count-footwear &&2 S+1== "の" S+2== @Rnoun.count-footwear	set-target "켤레"	靴が三足 구두가 세 켤레
 cx:count-units:100	NUM-31	&&2 S+0== "一着" ||3 S-1== @Rnoun.count-clothes &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-clothes &&2 S+1== "の" S+2== @Rnoun.count-clothes	set-target "한 벌"	服が一着 옷 한 벌
-cx:count-units:115	NUM-31	&&2 S+0== "一機" ||3 S-1== @Rnoun.count-machine &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-machine &&2 S+1== "の" S+2== @Rnoun.count-machine	set-target "1기"	戦闘機が一機 전투기 1기
-cx:count-units:130	NUM-31	&&2 S+0== "二輪" ||3 S-1== @Rnoun.count-flower &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-flower &&2 S+1== "の" S+2== @Rnoun.count-flower	set-target "두 송이"	花が二輪 꽃이 두 송이
-cx:count-units:135	NUM-31	&&2 S+0== "三輪" ||3 S-1== @Rnoun.count-flower &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-flower &&2 S+1== "の" S+2== @Rnoun.count-flower	set-target "세 송이"	花が三輪 꽃이 세 송이
+cx:count-units:115	NUM-31	&&3 S+0== "一機" ||3 S-1== @Rnoun.count-machine &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-machine &&2 S+1== "の" S+2== @Rnoun.count-machine !1 ||11 S+1== "Lさん" S+1== "Lくん" S+1== "L君" S+1== "L様" S+1== "Lちゃん" S+1== "L先輩" S+1== "L先生" S+1== "L殿" S+1== "L氏" S+1== "Lたち" S+1== "L達"	set-target "1기"	戦闘機が一機 전투기 1기
+cx:count-units:130	NUM-31	&&3 S+0== "二輪" ||3 S-1== @Rnoun.count-flower &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-flower &&2 S+1== "の" S+2== @Rnoun.count-flower ||10 F+1== "verb" S+1== "Lだけ" S+1== "Lずつ" S+1== "Lしか" S+1== "も" S+1== "ほど" S+1== "Lくらい" S+1== "Lぐらい" S+1== "00。！？!?」』…" &&2 S+1== "の" S+2== @Rnoun.count-flower	set-target "두 송이"	花が二輪 꽃이 두 송이
+cx:count-units:135	NUM-31	&&3 S+0== "三輪" ||3 S-1== @Rnoun.count-flower &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-flower &&2 S+1== "の" S+2== @Rnoun.count-flower ||10 F+1== "verb" S+1== "Lだけ" S+1== "Lずつ" S+1== "Lしか" S+1== "も" S+1== "ほど" S+1== "Lくらい" S+1== "Lぐらい" S+1== "00。！？!?」』…" &&2 S+1== "の" S+2== @Rnoun.count-flower	set-target "세 송이"	花が三輪 꽃이 세 송이
 cx:count-units:140	NUM-31	&&2 S+0== "一勝" &&4 S+1!= "さん" S+1!= "くん" S+1!= "様" S+1!= "ちゃん"	set-target "1승"	一勝 1승
 cx:count-units:155	NUM-31	&&2 S+0== "一脚" ||3 S-1== @Rnoun.count-chair &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-chair &&2 S+1== "の" S+2== @Rnoun.count-chair	set-target "한 개"	椅子が三脚 의자 세 개
 cx:count-units:165	NUM-31	&&2 S+0== "三脚" ||3 S-1== @Rnoun.count-chair &&2 ||4 S-1== "が" S-1== "は" S-1== "を" S-1== "も" S-2== @Rnoun.count-chair &&2 S+1== "の" S+2== @Rnoun.count-chair	set-target "세 개"	椅子が三脚 의자 세 개
@@ -235,20 +240,21 @@ cx:count-units:920	NUM-31	S+0== "一敗"	set-target "1패"	一敗 1패
 //: kakeru-aux	&&8 ||2 S+0== "かけ" S+0== "掛け" F+0== "conjugating" F+0== "touches-prev" F-1== "verb" !1 F-1== "katakana" !1 F+0== "katakana" ||2 Y-1== "1고" Y-1== "6" !1 ||3 I-1== "Rて" I-1== "Rで" I-1== @Rverb.kakeru-directed	A かける right after the continuative of a verb (not its て form) that is not one of verb.kakeru-directed: the act is begun and not finished.
 //: kakeru-unwilled	||4 I-1== @Rverb.kakeru-unwilled F-1== "passive" I-1== "Rされ" I-1== "Rられ"	The verb before that かける is a change that befalls its subject (verb.kakeru-unwilled) or a passive.
 //= count-what	after Select 146	A question 何 before a counter that count-units gave a Korean unit asks how many, 몇 and the unit (何柱 몇 분), not the reading 하.
-cx:count-what:5	NUM-31	&&2 S-1== "何" D+0== "분"	set-target "몇 분" set-target@-1 ""	何분 몇 분
-cx:count-what:10	NUM-31	&&2 S-1== "何" D+0== "캔"	set-target "몇 캔" set-target@-1 ""	何캔 몇 캔
-cx:count-what:15	NUM-31	&&2 S-1== "何" D+0== "첩"	set-target "몇 첩" set-target@-1 ""	何첩 몇 첩
-cx:count-what:20	NUM-31	&&2 S-1== "何" D+0== "공기"	set-target "몇 공기" set-target@-1 ""	何공기 몇 공기
-cx:count-what:25	NUM-31	&&2 S-1== "何" D+0== "벌"	set-target "몇 벌" set-target@-1 ""	何벌 몇 벌
-cx:count-what:30	NUM-31	&&2 S-1== "何" D+0== "그릇"	set-target "몇 그릇" set-target@-1 ""	何그릇 몇 그릇
-cx:count-what:35	NUM-31	&&2 S-1== "何" D+0== "모"	set-target "몇 모" set-target@-1 ""	何모 몇 모
-cx:count-what:40	NUM-31	&&2 S-1== "何" D+0== "자루"	set-target "몇 자루" set-target@-1 ""	何자루 몇 자루
-cx:count-what:45	NUM-31	&&2 S-1== "何" D+0== "동"	set-target "몇 동" set-target@-1 ""	何동 몇 동
-cx:count-what:50	NUM-31	&&2 S-1== "何" D+0== "송이"	set-target "몇 송이" set-target@-1 ""	何송이 몇 송이
-cx:count-what:55	NUM-31	&&2 S-1== "何" D+0== "줄기"	set-target "몇 줄기" set-target@-1 ""	何줄기 몇 줄기
-cx:count-what:60	NUM-31	&&2 S-1== "何" D+0== "방울"	set-target "몇 방울" set-target@-1 ""	何방울 몇 방울
-cx:count-what:65	NUM-31	&&2 S-1== "何" D+0== "입"	set-target "몇 입" set-target@-1 ""	何입 몇 입
-cx:count-what:70	NUM-31	&&2 S-1== "何" D+0== "개"	set-target "몇 개" set-target@-1 ""	何개 몇 개
+cx:count-what:5	NUM-31	&&3 S-1== "何" S+0== "柱" D+0== "분"	set-target "몇 분" set-target@-1 ""	何분 몇 분
+cx:count-what:10	NUM-31	&&3 S-1== "何" S+0== "缶" D+0== "캔"	set-target "몇 캔" set-target@-1 ""	何캔 몇 캔
+cx:count-what:15	NUM-31	&&3 S-1== "何" S+0== "服" D+0== "첩"	set-target "몇 첩" set-target@-1 ""	何첩 몇 첩
+cx:count-what:20	NUM-31	&&3 S-1== "何" S+0== "膳" D+0== "공기"	set-target "몇 공기" set-target@-1 ""	何공기 몇 공기
+cx:count-what:25	NUM-31	&&3 S-1== "何" ||2 S+0== "膳" S+0== "着" D+0== "벌"	set-target "몇 벌" set-target@-1 ""	何벌 몇 벌
+cx:count-what:30	NUM-31	&&3 S-1== "何" S+0== "膳" D+0== "그릇"	set-target "몇 그릇" set-target@-1 ""	何그릇 몇 그릇
+cx:count-what:35	NUM-31	&&3 S-1== "何" S+0== "丁" D+0== "모"	set-target "몇 모" set-target@-1 ""	何모 몇 모
+cx:count-what:40	NUM-31	&&3 S-1== "何" S+0== "丁" D+0== "자루"	set-target "몇 자루" set-target@-1 ""	何자루 몇 자루
+cx:count-what:45	NUM-31	&&3 S-1== "何" S+0== "張" D+0== "동"	set-target "몇 동" set-target@-1 ""	何동 몇 동
+cx:count-what:50	NUM-31	&&3 S-1== "何" S+0== "輪" D+0== "송이"	set-target "몇 송이" set-target@-1 ""	何송이 몇 송이
+cx:count-what:55	NUM-31	&&3 S-1== "何" S+0== "筋" D+0== "줄기"	set-target "몇 줄기" set-target@-1 ""	何줄기 몇 줄기
+cx:count-what:60	NUM-31	&&3 S-1== "何" S+0== "滴" D+0== "방울"	set-target "몇 방울" set-target@-1 ""	何방울 몇 방울
+cx:count-what:65	NUM-31	&&3 S-1== "何" S+0== "口" D+0== "입"	set-target "몇 입" set-target@-1 ""	何입 몇 입
+cx:count-what:70	NUM-31	&&3 S-1== "何" S+0== "脚" D+0== "개"	set-target "몇 개" set-target@-1 ""	何개 몇 개
+cx:count-what:75	NUM-31	&&3 S-1== "何" S+0== "足" D+0== "켤레"	set-target "몇 켤레" set-target@-1 ""	何足 몇 켤레
 
 //= kakeru-aspect	after OwnPassives 10	The て of かける after に with a から before it in its clause spans a stretch, 걸쳐 (ウエストから尻山にかけて). A かける right after the continuative of a verb, not one of verb.kakeru-directed, is an act begun and not finished. After a change that befalls the subject (verb.kakeru-unwilled) or a passive, its past that ends the clause or is taken by こと, ところ, の or せい nearly happened, (으)ㄹ 뻔하다 (流されかけた 떠밀릴 뻔했다, パニックになりかけたが 패닉이 될 뻔했지만); before another noun, in ている and in its other forms it is the change going on, 어 가다 (沈みかけた夕日 가라앉아 가던 석양, 忘れかけている 잊어 가고 있다). After a verb done on purpose it is the act one set out to do, (으)려고 하다 (言いかけた 말하려고 했다), and its て before a pause is 다 말고 (歩きかけて、 걷다 말고). The passive of a かける read 걸다, not in ている, is 걸리다 (持ち手にかけられた木札 손잡이에 걸린 목찰), but with an object を it is 걸치다 (テーブルクロスをかけられた机). After glasses in the line it is 쓰다 (メガネ…あ、私かけてた).
 cx:kakeru-aspect:3	GRM-27	&&3 ||2 S+0== "かけ" S+0== "掛け" D+0== "&L1@" <0 ||6 S+0== "眼鏡" S+0== "メガネ" S+0== "めがね" S+0== "サングラス" S+0== "ゴーグル" S+0== "R眼鏡" ||0	select-target "&AF@"	メガネ…あ、私かけてた… 안경…아, 나 쓰고 있었다…

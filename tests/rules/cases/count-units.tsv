@@ -232,7 +232,7 @@ cx:tai-count:9	一体の使役モンスターが来た。	일체의 사역 몬�
 cx:tai-count:10	この辺一体を調べた。	이 근처 일대를 조사했다.	fix	rewrites
 cx:tai-count:10	この辺一体何なんだ。	이 근처 도대체 뭐야.	keep	rewrites
 cx:cue-sense:170	モンスターを３体も倒した。	몬스터를 3마리나 쓰러뜨렸다.	fix	rewrites
-cx:cue-sense:170	体を前に倒して礼をした。	몸을 앞에 두고 넘어뜨려 예를 했다.	keep	rewrites
+cx:cue-sense:170	体を前に倒して礼をした。	!rule:cx:cue-sense:170	keep	rewrites
 cx:count-what:5	神が何柱いる？	신이 몇 분 있어?	fix	rewrites
 cx:count-what:5	神が三柱いる。	신이 세 분 있다.	keep	rewrites
 cx:count-what:10	ビールを何缶飲んだ？	맥주를 몇 캔 마셨어?	fix	rewrites
@@ -253,7 +253,7 @@ cx:count-what:45	テントを何張張った？	텐트를 몇 동 쳤어?	fix	re
 cx:count-what:45	テントを三張張った。	텐트를 세 동 쳤다.	keep	rewrites
 cx:count-what:50	花を何輪買った？	꽃을 몇 송이 샀어?	fix	rewrites
 cx:count-what:50	花を3輪買った。	꽃을 3송이 샀다.	keep	rewrites
-cx:count-what:55	光が何筋も差し込んだ。	빛이 몇 줄기도 쑤셨다.	fix	rewrites
+cx:count-what:55	光が何筋も差し込んだ。	has:몇 줄기	fix	rewrites
 cx:count-what:55	光が三筋差し込んだ。	빛이 세 줄기 비추었다.	keep	rewrites
 cx:count-what:60	涙が何滴落ちた？	눈물이 몇 방울 떨어졌어?	fix	rewrites
 cx:count-what:60	涙が三滴落ちた。	눈물이 세 방울 떨어졌다.	keep	rewrites
@@ -263,3 +263,28 @@ cx:count-what:70	椅子が何脚ある？	의자가 몇 개 있어?	fix	rewrites
 cx:count-what:70	椅子が3脚ある。	의자가 3개 있다.	keep	rewrites
 cx:tai-count:31	この少女は一体何を言っているのだと。	이 소녀는 도대체 무슨 말을 하는 것이라고.	keep	rewrites
 cx:tai-count:50	「君は……一体？」	「너는……도대체?」	keep	rewrites
+cx:tai-count:50	お前は一体分かっているのか。	너는 도대체 알고 있는 건가.	keep	rewrites
+cx:tai-count:50	それが一体……	그것이 도대체……	keep	rewrites
+cx:tai-count:50	あいつが一体。	저 녀석이 도대체.	keep	rewrites
+cx:tai-count:50	ゴブリンが一体いた。	고블린이 한 마리 있었다.	fix	rewrites
+cx:tai-count:9	本体と一体のシステムだ。	본체와 일체의 시스템이다.	keep	rewrites
+cx:tai-count:5	一体のマネキンが立っていた。	한 개의 마네킹이 서 있었다.	fix	rewrites
+cx:tai-count:5	一体のゴーレムが現れた。	한 마리의 골렘이 나타났다.	keep	rewrites
+cx:tai-count:6	一体のミイラが眠っていた。	한 구의 미라가 자고 있었다.	fix	rewrites
+cx:tai-count:6	一体のゴーレムが現れた。	한 마리의 골렘이 나타났다.	keep	rewrites
+cx:tai-count:10	この辺一体いつから	이 근처 도대체 언제부터	keep	rewrites
+cx:count-units:135	花を三輪さんに渡した。	꽃을 미와 씨에게 건네주었다.	keep	rewrites
+cx:count-units:135	椿は三輪に言った。	츠바키는 미와에게 말했다.	keep	rewrites
+cx:count-units:135	菊が三輪の家に届いた。	국화가 미와의 집에 닿았다.	keep	rewrites
+cx:count-units:130	二輪の薔薇を贈った。	두 송이의 장미를 선물했다.	fix	rewrites
+cx:count-units:115	飛行機は一機くんのものだ。	비행기는 카즈키 군의 것이다.	keep	rewrites
+cx:count-units:51	二切れのパン	두 조각의 빵	keep	rewrites
+cx:count-units:36	六切れだけ	여섯 조각만	keep	rewrites
+cx:count-units:42	何切れてんの？	뭐 끊어져 있어?	keep	rewrites
+cx:count-units:38	ケーキを八切れ食べた。	케이크를 여덟 조각 먹었다.	fix	rewrites
+cx:count-units:38	八切りにする。	팔등분으로 한다.	keep	rewrites
+cx:count-units:91	靴が三足ある。	구두가 세 켤레 있다.	fix	rewrites
+cx:count-units:91	二足歩行	2족 보행	keep	rewrites
+cx:count-what:75	靴を何足持ってる？	구두를 몇 켤레 가지고 있어?	fix	rewrites
+cx:count-what:75	靴を三足持ってる。	구두를 세 켤레 가지고 있다.	keep	rewrites
+cx:count-what:20	何空気読んでんの	무엇 공기 읽고 있어	keep	rewrites

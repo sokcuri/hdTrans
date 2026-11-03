@@ -198,7 +198,7 @@
 //= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
 //= noun.count-machine	Nouns of a robot, a mecha or a machine soldier, matched at the end of a word, after which the counter 体 is 기 (ロボット二体 로봇 2기).
 //= noun.count-figure	Nouns of a statue, a doll or a figure, matched at the end of a word, after which the counter 体 is 개 (人形が二体 인형이 두 개).
-//= noun.count-creature	Endings of nouns of creatures and monsters that a count word in 体 before の counts (一体の中鬼 한 마리의 중귀).
+//= noun.count-creature	Endings of nouns of creatures and monsters that a count word in 体 before の counts (一体のゴーレム 한 마리의 골렘).
 //= noun.count-person	Nouns of people and peoples, matched at the end of a word, that the counter 体 counts as 명 (二体のエルフ 두 명의 엘프).
 //= noun.count-area	Words of a place right before 一体 that is 一帯 miswritten, 일대 (ここら一体 이 근처 일대).
 //= noun.count-footwear	Nouns of footwear, matched at the end of a word, counted in pairs by 足, 켤레 (靴が三足 구두 세 켤레).
@@ -8823,6 +8823,23 @@ noun.count-creature	猫
 noun.count-creature	鳥
 noun.count-creature	熊
 noun.count-creature	蛇
+noun.count-creature	ゴーレム
+noun.count-creature	ゴブリン
+noun.count-creature	オーク
+noun.count-creature	スライム
+noun.count-creature	ドラゴン
+noun.count-creature	モンスター
+noun.count-creature	ウルフ
+noun.count-creature	トロール
+noun.count-creature	オーガ
+noun.count-creature	ワイバーン
+noun.count-creature	コボルト
+noun.count-creature	グール
+noun.count-creature	キメラ
+noun.count-creature	ガーゴイル
+noun.count-creature	デーモン
+noun.count-creature	リザードマン
+noun.count-creature	ミノタウロス
 
 noun.count-person	エルフ
 noun.count-person	ドワーフ
