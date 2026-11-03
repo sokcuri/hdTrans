@@ -23,7 +23,7 @@ dict:bone-food-glosses:6	それは皮と骨ばかりというわけではなく	
 dict:bone-food-glosses:14	久々に障害を飛越し、	has:뛰어넘고	fix	defaults
 dict:bone-food-glosses:15	時間を飛越えてなかったら。	has:뛰어넘지	fix	defaults
 dict:bone-food-glosses:14	馬術障害飛越競技で金メダルを獲得した	lacks:뛰어넘	keep	defaults
-dict:bone-food-glosses:14	飛越地震を利用して、	has:히에쓰 지진	keep	defaults
+dict:bone-food-glosses:14	飛越地震を利用して、	has:히에츠 지진	keep	defaults
 dict:bone-food-glosses:16	試運転の飛行先は、王家直轄領	has:비행 목적지	fix	defaults
 dict:bone-food-glosses:18	雑草三割、薬草二割、食草四割	has:먹이 식물	fix	defaults
 dict:bone-food-glosses:18	肉食草食関係なく無頓着だ。	has:초식	keep	defaults

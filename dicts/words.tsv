@@ -815,9 +815,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 つぎ木	접붙이기	N110	UTt	Hd	GN				llm		つぎき	w:807
 つぎ木	접붙&AJ@	M429			GN				llm		つぎき	w:808
 つぎ込	쏟아&JG@	M425			GN				xxx llm	1		w:809
-つくだ煮	쓰쿠다니	N110	VFd		GN				llm		つくだに	w:810
+つくだ煮	츠쿠다니	N110	VFd		GN				llm		つくだに	w:810
 つくつく法師	애매미	N110			GN						つくつくぼうし	w:811
-つくり絵	쓰쿠리에	N110	UTt		GN				llm		つくりえ	w:812
+つくり絵	츠쿠리에	N110	UTt		GN				llm		つくりえ	w:812
 つけペン	딥펜	N110			GN						つけペン	w:813
 つけ入	틈&AR@	M428			GN				llm		つけいる	w:814
 つけ回	쫓아다&A7@	M423			GN						つけまわす	w:815
@@ -833,7 +833,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 つづれ織り	태피스트리	N110			GN				llm		つづれおり	w:825
 つづれ錦	수직 비단	N110	VCp		GN				llm		つづれにしき	w:826
 つばき油	동백기름	N110			GN						つばきあぶら	w:827
-つばめ返し	쓰바메가에시	N110	UTt		GN				llm		つばめがえし	w:828
+つばめ返し	츠바메가에시	N110	UTt		GN				llm		つばめがえし	w:828
 つぶやき	중얼거림	N110			GN				xxx llm	1		w:829
 つまみ取	&Md@	M428			GN						つまみとる	w:830
 つま弾	&Hd@	M421			GN						つまびく	w:831
@@ -2957,9 +2957,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カッペリーニ	카펠리니	N110	VFd		GN						カッペリーニ	w:2948
 カッワーリー	카왈리	N110			GN						カッワーリー	w:2949
 カツあげ	삥뜯기	N110		Hd	GN						カツあげ	w:2950
-カツカレー	가쓰카레	N110	VFd		GN						カツカレー	w:2951
+カツカレー	가츠카레	N110	VFd		GN						カツカレー	w:2951
 カツラ科	계수나무속	N110			GN						カツラか	w:2952
-カツ・カレー	가쓰카레	N110	VFd		GN						カツ・カレー	w:2953
+カツ・カレー	가츠카레	N110	VFd		GN						カツ・カレー	w:2953
 カツ上げ	삥뜯기	N110		Hd	GN						カツあげ	w:2954
 カテキン	카테킨	N110			GN						カテキン	w:2955
 カテコラミン	카테콜아민	N110			GN						カテコラミン	w:2956
@@ -5837,13 +5837,13 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 チオペンタール	티오펜탈 나트륨	N110			GN						チオペンタール	w:5829
 チカーノ	치카노	N110			GN						チカーノ	w:5830
 チキソトロピー	틱소트로피	N110			GN						チキソトロピー	w:5831
-チキンカツ	치킨카쓰	N110	VFd		GN						チキンカツ	w:5832
+チキンカツ	치킨카츠	N110	VFd		GN						チキンカツ	w:5832
 チキンカレー	치킨 커리	N110	VFd		GN						チキンカレー	w:5833
 チキンキエフ	치킨 키예프	N110			GN						チキンキエフ	w:5834
 チキンナゲット	치킨 너겟	N110			GN						チキンナゲット	w:5835
 チキンバーガー	치킨 버거	N110	VFd		GN						チキンバーガー	w:5836
 チキンム	치킨무	N110	VFd		GN						チキンム	w:5837
-チキン・カツ	치킨카쓰	N110	VFd		GN						チキン・カツ	w:5838
+チキン・カツ	치킨카츠	N110	VFd		GN						チキン・カツ	w:5838
 チキン・カレー	치킨 커리	N110	VFd		GN						チキン・カレー	w:5839
 チキン・キエフ	치킨 키예프	N110			GN						チキン・キエフ	w:5840
 チキン・ナゲット	치킨 너겟	N110			GN						チキン・ナゲット	w:5841
@@ -5981,7 +5981,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツェティニェ	체티녜 지방 자치제	N110			GN						ツェティニェ	w:5973
 ツェペリナイ	체펠리나이	N110	VFd		GN						ツェペリナイ	w:5974
 ツシマヤマネコ	쓰시마삵	N110			GN						ツシマヤマネコ	w:5975
-ツチノコ	쓰치노코	N110			GN						ツチノコ	w:5976
+ツチノコ	츠치노코	N110			GN						ツチノコ	w:5976
 ツッコ	태클을 &L1@	M425			GN				xxx		ツッコむ	w:26788
 ツッコ	처&MK@	M425			GN						ツッコむ	w:5977
 ツッコ	돌입&AV@	M425			GN						ツッコむ	w:5978
@@ -5990,7 +5990,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツッコ	참견&AV@	M425			GN				llm		ツッコむ	w:5981
 ツッコ	받아&AO@	M425			GN				llm		ツッコむ	w:5982
 ツッコミ	태클	N110			GN				llm		ツッコミ	w:5983
-ツツガムシ病	쓰쓰가무시증	N110	UTi		GN				llm		つつがむしびょう	w:5984
+ツツガムシ病	츠츠가무시증	N110	UTi		GN				llm		つつがむしびょう	w:5984
 ツツジ目	진달래목	N110			GN						ツツジもく	w:5985
 ツツジ科	진달래과	N110			GN						ツツジか	w:5986
 ツヅラフジ科	방기과	N110			GN						ツヅラフジか	w:5987
@@ -5999,7 +5999,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツノゴケ類	뿔이끼류	N110			GN						ツノゴケるい	w:5990
 ツバキ油	동백기름	N110			GN						ツバキあぶら	w:5991
 ツバキ科	차나무과	N110			GN						ツバキか	w:5992
-ツバメ返し	쓰바메가에시	N110	UTt		GN				llm		つばめがえし	w:5993
+ツバメ返し	츠바메가에시	N110	UTt		GN				llm		つばめがえし	w:5993
 ツマミ	안주	N110			GN				xxx llm	1		w:5994
 ツリーハウス	트리하우스	N110			GN						ツリーハウス	w:5995
 ツリー・ハウス	트리하우스	N110			GN						ツリー・ハウス	w:5996
@@ -12010,7 +12010,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 作業環境	작업 환경	N110			GN				llm		さぎょうかんきょう	w:12004
 作法	예법	N110			GN				xxx llm	1		w:12005
 作為的	작위적%D4@	G8U0			GN				llm		さくいてき	w:12006
-作絵	쓰쿠리에	N110	UTt		GN				llm		つくりえ	w:12007
+作絵	츠쿠리에	N110	UTt		GN				llm		つくりえ	w:12007
 作者	작가	N110	VHn		GN				xxx llm	1		w:12008
 作詞家	작사가	N110			GN						さくしか	w:12009
 作詞者	작사자	N110			GN						さくししゃ	w:12010
@@ -13267,7 +13267,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 占地	만가닥버섯	N110			GN						しめじ	w:13229
 占師	역술가	N110			GN						うらないし	w:13230
 占有率	점유율	N110			GN						せんゆうりつ	w:13231
-卯建	우다쓰	N110			GN				llm		うだつ	w:13232
+卯建	우다츠	N110			GN				llm		うだつ	w:13232
 印刷業	인쇄업	N110			GN						いんさつぎょう	w:13233
 印刷機	인쇄기	N110			GN						いんさつき	w:13234
 印度撞木鮫	날개귀상어	N110			GN						インドしゅもくざめ	w:13235
@@ -13604,7 +13604,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 右下	오른쪽 아래	N110			GN				xxx llm	1		w:13566
 右傾化	우경화	N110		Hd	GN						うけいか	w:13567
 右傾化	우경화&AV@	M429			GN						うけいか	w:13568
-右四つ	미기요쓰	N110			GN				llm		みぎよつ	w:13569
+右四つ	미기요츠	N110			GN				llm		みぎよつ	w:13569
 右心室	우심실	N110	VBp		GN						うしんしつ	w:13570
 右心房	우심방	N110	VBp		GN						うしんぼう	w:13571
 右端	오른쪽 끝	N110			GN				xxx llm	1		w:13572
@@ -14066,7 +14066,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 囓	조금 배&AI@	M428			GN				llm		かじる	w:14027
 囚人服	죄수복	N110			GN						しゅうじんふく	w:14028
 四つ叉	네 갈래	N110			GN				xxx llm	1		w:14029
-四つ相撲	요쓰즈모	N110			GN				llm		よつずもう	w:14030
+四つ相撲	요츠즈모	N110			GN				llm		よつずもう	w:14030
 四つ脚	사족	N110			GN						よつあし	w:14031
 四つ辻	사거리	N110			GN						よつつじ	w:14032
 四元数	사원수	N110			GN						しげんすう	w:14033
@@ -14402,7 +14402,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 変死者	변사자	N110	VHn		GN						へんししゃ	w:14364
 変電	변전	N110			GN						へんでん	w:14365
 夏休み	여름 방학	I110			GN				xxx llm	1		w:14366
-夏場所	나쓰바쇼	N110	UMe	Tm	GN				llm		なつばしょ	w:14367
+夏場所	나츠바쇼	N110	UMe	Tm	GN				llm		なつばしょ	w:14367
 夏季オリンピック	하계 올림픽	N110			GN						かきオリンピック	w:14368
 夏着	하복	N110			GN						なつぎ	w:14369
 夏至祭	하지제	N110			GN						げしまつり	w:14370
@@ -15513,7 +15513,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 山中	야마나카	N110			GN				xxx llm	1		w:15468
 山内	야마우치	N110			GN				xxx llm	1		w:15469
 山分け	똑같이 나눔	I110			GN				xxx llm	1		w:15470
-山口三菱ふそう自動車販売	야마구치 미쓰비시후소자동차판매	I110			GN				xxx llm	1		w:15471
+山口三菱ふそう自動車販売	야마구치 미츠비시후소자동차판매	I110			GN				xxx llm	1		w:15471
 山口県経済農業協同組合連合	야마구치현 경제농업협동조합연합	I110			GN				xxx llm	1		w:15472
 山型	산 모양	N110			GN				llm		やまがた	w:15473
 山女魚	산천어	N110			GN						やまめ	w:15474
@@ -18537,7 +18537,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 機械設計	기계설계	N110	UTt		GN						きかいせっけい	w:18491
 機銃掃射	기총소사	N110			GN						きじゅうそうしゃ	w:18492
 檸檬	레몬	N110			GN				xxx llm	1		w:18493
-櫃まぶし	히쓰마부시	N110	VFd		GN						ひつまぶし	w:18494
+櫃まぶし	히츠마부시	N110	VFd		GN						ひつまぶし	w:18494
 櫓	망루	N110			GN				xxx llm			w:18495
 櫓	가설 무대	N110	VBl		GN				llm		やぐら	w:18496
 櫓	고타쓰 틀	N110	VPe		GN				llm		やぐら	w:18497
@@ -21008,7 +21008,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 神世七代	신세칠대	N110			GN						かみよななよ	w:20961
 神司	신관	N110			GN						かんづかさ	w:20962
 神嘗祭	신상제	N110			GN						かんなめさい	w:20963
-神奈川三菱ふそう自動車販売	카나가와 미쓰비시후소자동차판매	I110			GN				xxx llm	1		w:20964
+神奈川三菱ふそう自動車販売	카나가와 미츠비시후소자동차판매	I110			GN				xxx llm	1		w:20964
 神妙	진지%A1@	G8U0			GN				xxx llm	1		w:20965
 神憑り	신들림	N110	UCl		GN				xxx llm		かみがかり	w:20966
 神憑り	광신	N110	UYi		GN				llm		かみがかり	w:20967
@@ -21084,7 +21084,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 秘密裡	비밀리	N110			GN				llm		ひみつり	w:21037
 秤動	칭동	N110			GN						ひょうどう	w:21038
 秦皮葉の楓	네군도단풍	N110			GN						とねりこばのかえで	w:21039
-秩父夜祭り	지치부 요마쓰리	N110			GN				xxx llm	1		w:21040
+秩父夜祭り	지치부 요마츠리	N110			GN				xxx llm	1		w:21040
 秩父蝙蝠	동부바르바스텔레박쥐	N110			GN						ちちぶこうもり	w:21041
 称え合	서로 칭찬&AV@	M420			GN				llm			w:21042
 移り変	변&AV@	M428			GN				llm		うつりかわる	w:21043
@@ -21989,9 +21989,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 羯磨	갈마	N110			GN						かつま	w:21940
 羽ばたき	날갯짓	N110			GN						はばたき	w:21941
 羽兜	날개 투구	N110			GN				llm			w:21942
-羽子つき	하네쓰키	N110		Hd	GN				llm		はねつき	w:21943
-羽子突き	하네쓰키	N110		Hd	GN				llm		はねつき	w:21944
-羽根つき	하네쓰키	N110		Hd	GN				llm		はねつき	w:21945
+羽子つき	하네츠키	N110		Hd	GN				llm		はねつき	w:21943
+羽子突き	하네츠키	N110		Hd	GN				llm		はねつき	w:21944
+羽根つき	하네츠키	N110		Hd	GN				llm		はねつき	w:21945
 羽白小千鳥	흰죽지꼬마물떼새	N110			GN						はじろこちどり	w:21946
 羽織ひも	하오리 끈	N110	VCp		GN				llm		はおりひも	w:21947
 羽虱	새털이아목	N110			GN						はじらみ	w:21948
@@ -26013,7 +26013,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鰥夫	홀아비	N110			GN						やもお	w:25964
 鰯鯨	보리고래	N110			GN						いわしくじら	w:25965
 鰹の烏帽子	작은부레관해파리	N110			GN						かつおのえぼし	w:25966
-鰹木	가쓰오기	N110			GN				xxx llm	1		w:25967
+鰹木	가츠오기	N110			GN				xxx llm	1		w:25967
 鰹鯨	에덴고래	N110			GN						かつおくじら	w:25968
 鱒の介	왕연어	N110			GN						ますのすけ	w:25969
 鱗甲目	천산갑	N110			GN						りんこうもく	w:25970

@@ -239,7 +239,7 @@ if(NOT EMSCRIPTEN)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
                     construction-cases audit blind new-pairs perf-budget perf-base fuzz variants nn-rows
-                    affected sets judge-packet)
+                    kana-spelling affected sets judge-packet)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
@@ -253,6 +253,10 @@ if(NOT EMSCRIPTEN)
             # Every noun row that does not read as a bare noun has gram Nn or an allowance (tools/nn-allowance.tsv).
             add_test(NAME dicts.nn-rows COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/nn-rows.py" --check)
+            # Japanese readings write ツ as 츠 and plain kana without tense consonants, or have an
+            # allowance (tools/kana-spelling-allowance.tsv).
+            add_test(NAME dicts.kana-spelling COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/kana-spelling.py" --check)
             # The name heads table (builtin/extra/name_heads.tsv) is the one the name dictionaries give.
             add_test(NAME dicts.name-heads COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/name-heads.py" --check "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
