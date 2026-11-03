@@ -1,7 +1,0 @@
-#LINE	1
-MI	0	0	0	0:0	3	力		を	1	0	0	0	LocalRule		-1	None
-MI	0	0	1	0:3	3	を	力	増	0	0	0	2	FirstXxx		-1	None
-MI	0	0	2	0:6	9	増	を	い	0	1	0	3	LocalRule	して	11	GlobalRule
-MI	0	0	3	0:15	9	いき	て	よ	0	1	0	0	LocalRule	、	11	GlobalRule
-MI	0	0	4	0:24	6	より	、	危	0	0	0	2	LocalRule		-1	None
-MI	0	0	5	0:30	9	危険	り	.	0	3	0	0	Single	だ	0	FirstXxx

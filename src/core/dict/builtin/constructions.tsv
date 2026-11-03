@@ -295,7 +295,7 @@ cx:fresh-made:10	LEX-4008	&&2 F+0== "verb" Y+0== "8 지 얼마 안 된"	prepend-
 //= looks-adj	after Select 162	そうな after a na-adjective or a noun of a state is how something looks, -한 듯한 (怪訝そうな顔 의아한 듯한 표정), not the guess -ㄹ 것 같은 a verb takes (降りそうな 내릴 것 같은).
 cx:looks-adj:10	GRM-3453	&&3 U+0== "そうな" Y+0== "3 것 같은" !1 P+0== "4**"	set-ending "4 듯한"	怪訝そうな顔 의아한 듯한 표정
 //= no-time	after Select 163	間 right after a verb before もなく or もない leaves no time, 새 (恐怖を覚える間もなく 공포를 느낄 새도 없이), not 동안.
-cx:no-time:10	LEX-4009	&&3 F+0== "verb" U+0== "R間" S+1== "も"	set-ending "3 새"	覚える間もなく 느낄 새도 없이
+cx:no-time:10	LEX-4009	&&4 F+0== "verb" U+0== "R間" S+1== "も" S+2== "Lな"	set-ending "3 새"	覚える間もなく 느낄 새도 없이
 //= most-of	after Select 164	多く right after その before は, が, を or の is most of them, 대부분 (その多くは 그 대부분은), not 많게.
 cx:most-of:10	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くは"	set-target@-1 "그 대부분은" set-target "" set-ending ""	その多くは 그 대부분은
 cx:most-of:20	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くが"	set-target@-1 "그 대부분이" set-target "" set-ending ""	その多くが 그 대부분이
@@ -303,23 +303,23 @@ cx:most-of:30	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くを"	set-target@
 cx:most-of:40	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くの"	set-target@-1 "그 대부분의" set-target "" set-ending ""	その多くの 그 대부분의
 //= dislike-of	after Select 165	嫌い before な and a noun is what someone dislikes, 싫어하는 (ミーアの嫌いなもの 미아가 싫어하는 것), not the adjective 싫은.
 cx:dislike-of:4	LEX-4011	&&5 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "の" D-1== "(을)를"	set-target "싫어하&AV@" set-ending "4는" set-target@-1 "(이)가"	千里の嫌いなチョコ 천리가 싫어하는 초콜릿
-cx:dislike-of:5	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "が"	set-target "싫어하&AV@" set-ending "4는" set-target@-1 "(을)를"	運動が嫌いな人 운동을 싫어하는 사람
+cx:dislike-of:5	LEX-4011	&&5 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "が" !1 ||9 F-2== "person" S-2== "私" S-2== "俺" S-2== "僕" S-2== "あたし" S-2== "彼" S-2== "彼女" S-2== "自分" S-2== "わたし"	set-target "싫어하&AV@" set-ending "4는" set-target@-1 "(을)를"	運動が嫌いな人 운동을 싫어하는 사람
 cx:dislike-of:10	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" !1 ||2 S-1== "っ" S-1== "大"	set-target "싫어하&AV@" set-ending "4는"	嫌いな野菜 싫어하는 야채
 //= line-toiu	after Select 166	という at the start of a line takes up what came before, 라는 (という夢を見た 라는 꿈을 꾸었다), not 그렇다고 하는.
 cx:line-toiu:10	GRM-3454	&&5 S+0== "とい" D+0== "그렇다고 &AV@" U+0== "う" !1 F-1== "exists" !1 ||3 S+1== "事" S+1== "こと" S+1== "Lか"	set-target "라고 &AV@"	という夢を見た 라는 꿈을 꾸었다
-//= rebuild-fixes	after Select 168	Misreadings the web novel examples showed: 唯の is ただの, 그냥 (唯の服 그냥 옷); 無し before か ends a question, 없나 (所持品は無しか 소지품은 없나), and before での 없는 (成果無しでの帰還 성과 없는 귀환); 不思議のない is 이상할 것 없는; 訳でもなく before a verb is 것도 아니고.
-cx:rebuild-fixes:10	LEX-4013	&&3 S+0== "唯" D+0== "다만" S+1== "の"	set-target "그냥" set-target@+1 " "	唯の服 그냥 옷
-cx:rebuild-fixes:20	LEX-4013	&&3 S+0== "か" ||2 S-1== "無し" S-1== "なし" ||2 S+1== "00。！？!?）」』…" !1 F+1== "exists"	set-target "없나" set-target@-1 ""	所持品は無しか 소지품은 없나
-cx:rebuild-fixes:30	LEX-4013	&&2 S+0== "での" ||2 S-1== "無し" S-1== "なし"	set-target "없는" set-target@-1 ""	成果無しでの帰還 성과 없는 귀환
-cx:rebuild-fixes:40	LEX-4013	&&2 S+0== "不思議の" S+1== "な"	set-target "이상할 것"	不思議のない状態 이상할 것 없는 상태
-cx:rebuild-fixes:50	GRM-3455	&&2 S+0== "でもな" Y+0== "1게"	set-ending "1고"	何をする訳でもなく佇んでいた 무엇을 하는 것도 아니고 우두커니 서 있었다
-cx:rebuild-fixes:60	LEX-4013	&&3 S+0== "不思議" ||3 S+1== "は" S+1== "が" S+1== "も" ||2 S+2== "L無" S+2== "Lな"	set-target "이상할 것"	いつ死んでも不思議は無く 언제 죽어도 이상할 것은 없고
-cx:rebuild-fixes:70	LEX-4013	&&4 S+0== "唯" D+0== "다만" F+1== "exists" !1 ||13 S+1== "の" S+1== "Lちゃん" S+1== "Lさん" S+1== "Lくん" S+1== "L様" S+1== "L先輩" S+1== "は" S+1== "が" S+1== "を" S+1== "も" S+1== "に" S+1== "と" S+1== "00。、！？!?」』…"	set-target "그저"	唯ひたすら走った 그저 오로지 달렸다
-cx:rebuild-fixes:80	LEX-4013	&&3 S+0== "中腰" S+1== "の" ||3 S+2== "体勢" S+2== "姿勢" S+2== "格好"	set-target "엉거주춤한" set-target@+1 " "	中腰の体勢で 엉거주춤한 자세로
-cx:rebuild-fixes:90	LEX-4013	&&4 S+0== "無駄" U+0== "に" F+1== "verb" !1 ||4 S+1== "Lな" S+1== "L終" S+1== "Lし" S+1== "Lす"	set-ending "1이"	安い銃が無駄に出回っている 싼 총이 쓸데없이 나돌고 있다
-cx:rebuild-fixes:100	LEX-4013	&&3 S+0== "なるほど" S+1== "の" ||2 Y-1== "1게" U-1== "Rに"	set-target "될 정도"	困難になるほどの長い年月 곤란하게 될 정도의 긴 세월
+//= novel-fixes-1	after Select 168	Misreadings the web novel examples showed: 唯の is ただの, 그냥 (唯の服 그냥 옷); 無し before か ends a question, 없나 (所持品は無しか 소지품은 없나), and before での 없는 (成果無しでの帰還 성과 없는 귀환); 不思議のない is 이상할 것 없는; 訳でもなく before a verb is 것도 아니고.
+cx:novel-fixes-1:10	LEX-4013	&&3 S+0== "唯" D+0== "다만" S+1== "の"	set-target "그냥" set-target@+1 " "	唯の服 그냥 옷
+cx:novel-fixes-1:20	LEX-4013	&&3 S+0== "か" ||2 S-1== "無し" S-1== "なし" ||2 S+1== "00。！？!?）」』…" !1 F+1== "exists"	set-target "없나" set-target@-1 ""	所持品は無しか 소지품은 없나
+cx:novel-fixes-1:30	LEX-4013	&&2 S+0== "での" ||2 S-1== "無し" S-1== "なし"	set-target "없는" set-target@-1 ""	成果無しでの帰還 성과 없는 귀환
+cx:novel-fixes-1:40	LEX-4013	&&2 S+0== "不思議の" S+1== "な"	set-target "이상할 것"	不思議のない状態 이상할 것 없는 상태
+cx:novel-fixes-1:50	GRM-3455	&&2 S+0== "でもな" Y+0== "1게"	set-ending "1고"	何をする訳でもなく佇んでいた 무엇을 하는 것도 아니고 우두커니 서 있었다
+cx:novel-fixes-1:60	LEX-4013	&&3 S+0== "不思議" ||3 S+1== "は" S+1== "が" S+1== "も" ||2 S+2== "L無" S+2== "Lな"	set-target "이상할 것"	いつ死んでも不思議は無く 언제 죽어도 이상할 것은 없고
+cx:novel-fixes-1:70	LEX-4013	&&4 S+0== "唯" D+0== "다만" F+1== "exists" !1 ||13 S+1== "の" S+1== "Lちゃん" S+1== "Lさん" S+1== "Lくん" S+1== "L様" S+1== "L先輩" S+1== "は" S+1== "が" S+1== "を" S+1== "も" S+1== "に" S+1== "と" S+1== "00。、！？!?」』…"	set-target "그저"	唯ひたすら走った 그저 오로지 달렸다
+cx:novel-fixes-1:80	LEX-4013	&&3 S+0== "中腰" S+1== "の" ||3 S+2== "体勢" S+2== "姿勢" S+2== "格好"	set-target "엉거주춤한" set-target@+1 " "	中腰の体勢で 엉거주춤한 자세로
+cx:novel-fixes-1:90	LEX-4013	&&4 S+0== "無駄" U+0== "に" F+1== "verb" !1 ||4 S+1== "Lな" S+1== "L終" S+1== "Lし" S+1== "Lす"	set-ending "1이"	安い銃が無駄に出回っている 싼 총이 쓸데없이 나돌고 있다
+cx:novel-fixes-1:100	LEX-4013	&&3 S+0== "なるほど" S+1== "の" ||2 Y-1== "1게" U-1== "Rに"	set-target "될 정도"	困難になるほどの長い年月 곤란하게 될 정도의 긴 세월
 //= fit-to	after Select 169	A na-adjective read -하게 right before 見合う, 相応しい or 似合う is the noun it fits, 에 (その危険に見合うもの 그 위험에 어울리는 것, 無謀に相応しい 무모에 걸맞은).
-cx:fit-to:10	GRM-3456	&&3 F+0== "conjugating" Y+0== "1게" ||4 S+1== "L見合" S+1== "L相応し" S+1== "Lふさわし" S+1== "L似合"	set-ending " 에"	その危険に見合うもの 그 위험에 어울리는 것
+cx:fit-to:10	GRM-3456	&&4 F+0== "conjugating" Y+0== "1게" !1 ||10 S+0== "完璧" S+0== "本当" S+0== "意外" S+0== "妙" S+0== "実" S+0== "見事" S+0== "非常" S+0== "十分" S+0== "素直" S+0== "自然" ||4 S+1== "L見合" S+1== "L相応し" S+1== "Lふさわし" S+1== "L似合"	set-ending " 에"	その危険に見合うもの 그 위험에 어울리는 것
 //= teki-and	after Select 170	A noun in 的 with で right before another 的 noun or an adjective lists both, 이고 (幻想的で非現実的な 환상적이고 비현실적인), not the cause 이어서.
 cx:teki-and:10	GRM-3457	&&4 S+0== "R的" U+0== "で" Y+0== "6" ||4 S+1== "R的" S+2== "R的" P+1== "7**" P+1== "8**"	set-ending "1고"	幻想的で非現実的な美しさ 환상적이고 비현실적인 아름다움
 //= resolve-quote	after QuoteTo 42	A verb whose と was read as the condition 니 right before 覚悟, 決意, 決心 or 誓う says what one resolves, -겠다고 (成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다).
@@ -334,7 +334,7 @@ cx:become-not:6	GRM-3461	&&6 S+0== "ならな" D+0== "안 $AF@" Y+0== "1다는" 
 cx:become-not:7	GRM-3461	&&6 S+0== "ならな" D+0== "안 $AF@" Y+0== "1다고" Y-1== "1게" U-1== "く" !1 D-1== "~아$A3@"	set-ending@-1 "6지지" set-target "$DH@" set-ending "4다고"	強くならないと思う 강해지지 않는다고 생각한다
 cx:become-not:10	GRM-3461	&&5 S+0== "ならな" D+0== "안 $AF@" Y-1== "1게" U-1== "く" !1 D-1== "~아$A3@"	set-ending@-1 "6지지" set-target "$DH@"	暗くならない 어두워지지 않는다
 //= handed-down	after Select 173	A より right before 伝わる says where something comes from, (으)로부터 (古の時代より伝わる儀式 옛 시대로부터 전해지는 의식), not the comparison 보다.
-cx:handed-down:10	LEX-4017	&&3 S+0== "より" D+0== "보다" S+1== "L伝わ"	set-target "(으)로부터"	古の時代より伝わる 옛 시대로부터 전해지는
+cx:handed-down:10	LEX-4017	&&4 S+0== "より" D+0== "보다" S+1== "L伝わ" ||11 S-1== "R時代" S-1== "R代" S-1== "昔" S-1== "古" S-1== "古来" S-1== "先祖" S-1== "祖先" S-1== "太古" F-1== "person" S-1== "R王" S-1== "R様"	set-target "(으)로부터"	古の時代より伝わる 옛 시대로부터 전해지는
 //= copula-tari	after Select 174	だったりする after a noun says it is so, as a hedge: 이기도 하다, whose する takes the adjective's plain form 하다 (現実だったりする 현실이기도 하다), not 한다.
 cx:copula-tari:10	GRM-3462	&&3 S-1== "だったり" D-1== "이기도" Y+0== "4다"	set-ending "1다"	犯人だったりする 범인이기도 하다
 //= not-un	after Select 175	A verb in なくはない, a double negative, does not deny it outright: -는 건 아니다 (わからなくはない 모르는 건 아니다, 行けなくはない 갈 수 없는 건 아니다), as なくもない reads -는 것도 아니다, not -지는 않다 on a verb.
@@ -387,10 +387,10 @@ cx:novel-fixes-2:270	LEX-4025	&&3 S+0== "と" D+0== "(와)과" S-1== "やめと�
 cx:novel-fixes-2:280	LEX-4025	&&3 ||3 S+0== "くそ" S+0== "クソ" S+0== "糞" ||2 S+1== "L、" S+1== "L！" !1 F-1== "conjugating"	set-target "젠장"	くそ、田村め 젠장, 타무라 녀석
 cx:novel-fixes-2:300	LEX-4025	&&3 S+0== "の" S-1== "どう" S+1== "とい"	set-target@-1 "어쩌고" set-target "" set-target@+1 " &AV@"	彼女がどうのというのは 여자친구가 어쩌고 하는 건
 cx:novel-fixes-2:310	LEX-4025	&&3 S+0== "と" D+0== "(와)과" S+1== "L名高"	set-target "(으)로"	マドンナと名高い 마돈나로 유명한
-cx:novel-fixes-2:320	LEX-4025	&&3 S+0== "出来" Y+0== "L8" ||9 S+1== "L後輩" S+1== "L人" S+1== "L男" S+1== "L女" S+1== "L嫁" S+1== "L息子" S+1== "L娘" S+1== "L部下" S+1== "L弟子"	set-target "됨됨이가 &C6@"	出来た後輩だ 됨됨이가 된 후배다
+cx:novel-fixes-2:320	LEX-4025	&&4 S+0== "出来" Y+0== "L8" ||5 F+0== "opens-line" F+0== "after-pause" S-1== "よく" S-1== "良く" S-1== "00。、「" ||9 S+1== "L後輩" S+1== "L人" S+1== "L男" S+1== "L女" S+1== "L嫁" S+1== "L息子" S+1== "L娘" S+1== "L部下" S+1== "L弟子"	set-target "됨됨이가 &C6@"	出来た後輩だ 됨됨이가 된 후배다
 cx:novel-fixes-2:330	LEX-4025	&&2 S+0== "彼女" ||2 S+1== "Lいな" S+1== "Lいね"	set-target "여자친구"	彼女いないけど 여자친구 없지만
 cx:novel-fixes-2:332	LEX-4025	&&3 S+0== "彼女" S+1== "を" S+2== "L作"	set-target "여자친구"	彼女を作る 여자친구를 만든다
-cx:novel-fixes-2:334	LEX-4025	&&4 S+0== "彼女" ||3 S+1== "が" S+1== "は" S+1== "も" S+2== "Lでき" ||3 I+2== "Lできた" I+2== "Lできて" I+2== "Lできま"	set-target "여자친구"	彼女ができた 여자친구가 생겼다
+cx:novel-fixes-2:334	LEX-4025	&&4 S+0== "彼女" ||2 S+1== "が" &&2 ||2 S+1== "は" S+1== "も" ||3 S+3== "?" S+3== "？" I+2== "Rか" S+2== "Lでき" ||3 I+2== "Lできた" I+2== "Lできて" I+2== "Lできま"	set-target "여자친구"	彼女ができた 여자친구가 생겼다
 cx:novel-fixes-2:340	LEX-4025	&&3 F+0== "verb" Y+0== "1고 말이야" ||2 F+0== "sentence-end" S+1== "00！!。」"	set-ending "1지"	血くらい出るさ！ 피 정도 나오지!
 cx:novel-fixes-2:350	LEX-4026	&&6 ||2 S+0== "をはじめ" S+0== "を始め" Y+0== "6" ||2 P+1== "1**" S+1== "L、" P-1== "1**" !1 G-1== "Hd" !1 F+1== "number"	set-target "(을)를 비롯&AV@"	王子をはじめお城の方々 왕자를 비롯해 성의 분들
 cx:novel-fixes-2:355	LEX-4026	&&3 ||2 S+0== "をはじめと" S+0== "を始めと" Y+0== "0" P+1== "1**"	set-target "(을)를 비롯&AV@" set-ending "8"	王をはじめとする貴族 왕을 비롯한 귀족
@@ -413,7 +413,7 @@ cx:novel-fixes-2:500	LEX-4027	&&2 S+0== "なんだっけ" ||7 S-1== "名前" S-1
 cx:novel-fixes-2:510	LEX-4027	&&3 S+0== "兼" P-1== "1**" P+1== "1**"	set-target " 겸 "	ディレクター兼プランナー 디렉터 겸 플래너
 cx:novel-fixes-2:520	LEX-4027	&&3 ||2 S+0== "先に" S+0== "先" D+0== "L먼저" ||6 S-1== "キロ" S-1== "メートル" S-1== "km" S-1== "m" S-1== "里" S-1== "歩"	set-target "앞에"	十数キロ先に 십여 킬로 앞에
 cx:novel-fixes-2:530	LEX-4027	&&3 S+0== "いかに" D+0== "얼마나" >8 ||3 S+0== "Lとはいえ" S+0== "Lとは言え" S+0== "Lとはいっても" S+0== "00。！？」"	set-target "아무리"	いかにブラックな会社とはいえ 아무리 블랙인 회사라고는 해도
-cx:novel-fixes-2:540	LEX-4027	&&3 S+0== "中" S+1== "には" ||3 F+0== "opens-line" F+0== "after-pause" S-1== "00。」』！？…"	set-target "개중" set-target@+1 "에는"	中にはテレビで見た者もいる 개중에는 텔레비전으로 본 사람도 있다
+cx:novel-fixes-2:540	LEX-4027	&&4 S+0== "中" S+1== "には" ||2 S+2== "、" >10 ||2 S+0== "Rも" S+0== "Lも" S+0== "00。！？" ||3 F+0== "opens-line" F+0== "after-pause" S-1== "00。」』！？…"	set-target "개중" set-target@+1 "에는"	中にはテレビで見た者もいる 개중에는 텔레비전으로 본 사람도 있다
 cx:novel-fixes-2:560	LEX-4027	&&3 S+0== "と" D+0== "(와)과" S+1== "L笑わば"	set-target "(이)라고"	社畜と笑わば笑え 사축이라고 비웃으려면 비웃어라
 cx:novel-fixes-2:570	LEX-4028	&&5 S+0== "って" D+0== "(은)는" S-1== "」" ||2 S+1== "、" S+1== "L、" F+2== "verb"	set-target "라고"	「…言ったのに！」って、泣いて怒っている 「…말했는데!」라고, 울며 화내고 있다
 cx:novel-fixes-2:580	LEX-4028	&&3 S+0== "L寄せ" S-1== "を" S-2== "眉"	set-target@-2 "미간" set-target "찌푸&AA@"	眉を寄せた 미간을 찌푸렸다
@@ -449,7 +449,7 @@ cx:novel-fixes-2:840	LEX-4032	&&3 S+0== "すまな" Y+0== "4" S+1== "L、"	set-e
 cx:novel-fixes-2:850	LEX-4032	&&3 S+0== "で" S-1== "から" S+1== "い"	set-target "면"	2時からでいい？ 2시부터면 돼?
 cx:novel-fixes-2:860	LEX-4032	&&3 S+0== "でか" D+0== "(으)로 &AF@" ||4 S-1== "指" S-1== "爪" S-1== "手" S-1== "指先"	set-target "(으)로 &Hh@"	額の右を指でかいていた 이마의 오른쪽을 손가락으로 긁고 있었다
 cx:novel-fixes-2:870	LEX-4032	&&3 S+0== "あたり" S+1== "だろう" P-1== "1**"	append-target@-1 "쯤일" set-target "" set-target@+1 "것이다"	心筋梗塞あたりだろう 심근경색쯤일 것이다
-cx:novel-fixes-2:880	LEX-4032	&&2 S+0== "とは" >5 ||5 S+0== "L正反対" S+0== "L対照的" S+0== "L違" S+0== "L逆" S+0== "L別物" S+0== "00。！？"	set-target "(와)과는"	地味なダリヤとは、正反対のタイプ 수수한 다리야와는, 정반대 타입
+cx:novel-fixes-2:880	LEX-4032	&&2 S+0== "とは" >5 ||5 S+0== "L正反対" S+0== "L対照的" &&2 S+0== "L違" F+0== "verb" S+0== "L逆" S+0== "L別物" S+0== "00。！？"	set-target "(와)과는"	地味なダリヤとは、正反対のタイプ 수수한 다리야와는, 정반대 타입
 cx:novel-fixes-2:890	LEX-4032	&&4 S+0== "合わせ" S-1== "に向か" S+1== "で" P-2== "1**"	append-target@-2 "에" set-target@-1 "" set-ending@-1 "" set-target "마주 보고" set-target@+1 " "	テーブルに向かい合わせで座り 테이블에 마주 보고 앉아
 cx:novel-fixes-2:900	LEX-4033	&&3 S+0== "な" D+0== "$D7@" Y-1== "R것이"	set-target "$FA@"	他に出来る事がなかった 그 밖에 할 수 있는 것이 없었다
 cx:novel-fixes-2:910	LEX-4033	&&2 S+0== "L見え" Y-1== "0 만큼"	set-ending@-1 "0 것으로만"	ただ遊んでいるだけに見えた 그저 놀고 있는 것으로만 보였다
@@ -557,8 +557,8 @@ cx:novel-fixes-2:1950	LEX-4036	&&2 S+0== "クラス" ||3 S-1== "超え" S-1== "�
 cx:novel-fixes-2:1955	LEX-4036	&&2 S+0== "そこら" ||3 S+1== "にあ" S+1== "に" S+1== "中"	set-target "여기저기"	そこらにある 여기저기 있다
 cx:novel-fixes-2:1957	LEX-4036	&&2 S+0== "そこら" S+1== "の"	set-target "흔한" set-target@+1 " "	そこらの女子生徒とは 흔한 여학생과는
 cx:novel-fixes-2:1960	LEX-4036	&&2 S+0== "開け" ||4 S+1== "場所" S+1== "土地" S+1== "空間" S+1== "草原"	set-target "트&AJ@"	開けた場所 트인 장소
-cx:novel-fixes-2:1963	LEX-4036	&&3 S+0== "開け" S+1== "い" <0 ||3 S+0== "場所" S+0== "森" S+0== "土地" S+0== "00、。！？!?「"	set-target "트&AJ@" set-ending "6"	今居る場所はなぜか開けている 지금 있는 장소는 왠지 트여 있다
-cx:novel-fixes-2:1965	LEX-4036	&&2 S+0== "開け" <0 ||3 S+0== "場所" S+0== "森" S+0== "土地" S+0== "00、。！？!?「"	set-target "트&AJ@"	今居る場所はなぜか開けている 지금 있는 장소는 왠지 트여 있다
+cx:novel-fixes-2:1963	LEX-4036	&&4 S+0== "開け" S+1== "い" !1 ||2 S-1== "を" S-2== "を" <4 ||3 S+0== "場所" S+0== "森" S+0== "土地" S+0== "00、。！？!?「"	set-target "트&AJ@" set-ending "6"	今居る場所はなぜか開けている 지금 있는 장소는 왠지 트여 있다
+cx:novel-fixes-2:1965	LEX-4036	&&3 S+0== "開け" !1 ||2 S-1== "を" S-2== "を" <4 ||3 S+0== "場所" S+0== "森" S+0== "土地" S+0== "00、。！？!?「"	set-target "트&AJ@"	今居る場所はなぜか開けている 지금 있는 장소는 왠지 트여 있다
 cx:novel-fixes-2:1970	LEX-4036	&&2 S+0== "迷" S-2== "移動"	set-target "헤&CC@"	このまま移動すれば迷う 이대로 이동하면 헤맨다
 cx:novel-fixes-2:1980	LEX-4036	&&4 S+0== "に" S-1== "相手" S-2== "を" !1 ||5 S+1== "Lぶつ" S+1== "L投げ" S+1== "L向け" S+1== "L渡" S+1== "L押し付"	set-target "(으)로"	この硬い大地を相手に 이 딱딱한 대지를 상대로
 cx:novel-fixes-2:1990	LEX-4036	&&2 S+0== "驚くほど" !1 ||3 S+1== "だ" S+1== "の" F+0== "last"	set-target "놀라울 정도로"	驚くほど軽く 놀라울 정도로 가볍게
@@ -568,7 +568,7 @@ cx:novel-fixes-2:2030	LEX-4036	&&2 S+0== "何時か" S+1== "わからな"	set-ta
 cx:novel-fixes-2:2050	LEX-4036	&&4 S+0== "助け" D+0== "&J5@" I+0== "助けて" ||3 S+1== "!" S+1== "！" F+0== "last"	append-target " 줘"	神様助けて！ 신 도와 줘!
 cx:novel-fixes-2:2110	LEX-4037	&&5 S+0== "思" S-1== "を" S-2== "何" I+0== "思って" !1 S+1== "Lい"	set-target@-2 "" set-target@-1 "무슨 생각으로" set-target ""	何を思って私を招いた 무슨 생각으로 나를 불렀어
 cx:novel-fixes-2:2100	LEX-4037	&&3 S+0== "モノ" S-1== "年" F-2== "number"	set-target@-1 "년산" set-target ""	１９９０年モノか 1990년산인가
-cx:novel-fixes-2:2120	LEX-4037	&&2 S+0== "一本" >8 S+0== "L飲" S+0== "00。！？!?"	set-target "한 병"	この一本はあの日のために飲む 이 한 병은 그 날을 위해 마신다
+cx:novel-fixes-2:2120	LEX-4037	&&3 S+0== "一本" !1 S+1== "の" >8 S+0== "L飲" S+0== "00。！？!?"	set-target "한 병"	この一本はあの日のために飲む 이 한 병은 그 날을 위해 마신다
 cx:novel-fixes-2:2130	LEX-4037	&&2 S+0== "真似を" ||3 S-1== "無茶" S-1== "無謀" S-1== "勝手"	set-target "짓을 &AV@"	無茶な真似をしたものだ 무리한 짓을 했다
 cx:novel-fixes-2:2140	LEX-4037	&&3 S+0== "頃" S-1== "の" ||8 S-2== "学生" S-2== "中学" S-2== "高校" S-2== "小学生" S-2== "中学生" S-2== "高校生" S-2== "大学" S-2== "大学生"	set-target@-1 "" set-target " 때"	学生の頃から 학생 때부터
 cx:novel-fixes-2:2150	LEX-4037	&&3 F+0== "conjugating" Y+0== "4 것에 비해서" I+0== "Rた割に"	set-ending "8 것치고"	妨害を受けた割には 방해를 받은 것치고는
@@ -593,7 +593,7 @@ cx:de-arou-noun:20	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "R
 //= noun-denai-if	after QuoteTo 47	After a noun, でないと with its comma and no verb of saying after it is the condition (이)가 아니면 (会話が出来る人でないと、 대화를 할 수 있는 사람이 아니면,), not the quote 아니라고 (spec GRM-3460).
 cx:noun-denai-if:10	GRM-3460	&&5 S+0== "でな" D+0== "(이)가 아$A3@" ||2 Y+0== "1다고" Y+0== "1다고," U+0== "R、" !1 F+1== "quote-verb"	set-ending "2면,"	会話が出来る人でないと、話も聞いてもらえない 대화를 할 수 있는 사람이 아니면, 이야기도 들어 줄 수 없다
 //= amari-not	after QuoteTo 48	あまり read 너무 with a negative later in its clause (ではない, ない, ません, ず) says not much, 별로 (あまり好きではない 별로 좋아하지 않는다, あまり文明的ではない国 별로 문명적이지 않은 나라), not too much; with no negative, or with a negative wish, request or condition (あまり積もらないといい 너무 쌓이지 않으면 좋겠다, あまり見ないで 너무 보지 마), it stays 너무 (あまり大きい 너무 크다). とても read 무척 before a later 수 없다 or 못하다 is 도저히 (とても寝ていられない 도저히 자고 있을 수 없다).
-cx:amari-not:10	GRM-3469	&&3 S+0== "あまり" D+0== "너무" >6 &&2 ||9 D+0== "R$D7@" D+0== "R$DH@" D+0== "R$FA@" D+0== "R않&AV@" Y+0== "~지 않" Y+0== "~지 못" Y+0== "~않" Y+0== "~없" I+0== "~ない" !1 ||6 Y+0== "~면" Y+0== "~도록" I+0== "~ように" I+0== "~ないで" Y+0== "~지 마" Y+0== "~지 말" S+0== "00。、！？"	set-target "별로"	あまり好きではない 별로 좋아하지 않는다
+cx:amari-not:10	GRM-3469	&&3 S+0== "あまり" D+0== "너무" >6 &&2 ||9 D+0== "R$D7@" D+0== "R$DH@" D+0== "R$FA@" D+0== "R않&AV@" Y+0== "~지 않" Y+0== "~지 못" Y+0== "~않" Y+0== "~없" I+0== "~ない" !1 ||6 Y+0== "~면" Y+0== "~도록" I+0== "~ように" I+0== "~ないで" Y+0== "~지 마" Y+0== "~지 말" ||2 S+0== "00。、！？" Y+0== "R서"	set-target "별로"	あまり好きではない 별로 좋아하지 않는다
 cx:amari-not:20	GRM-3469	&&3 S+0== "とても" D+0== "무척" >6 ||5 D+0== "~수 $FA@" Y+0== "~수 없" Y+0== "~지 못" D+0== "~못$AB@" Y+0== "L3 수 없" S+0== "00。、！？"	set-target "도저히"	とても寝ていられない 도저히 잘 수 없다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
 cx:excuse-me:10	LEX-4006	&&2 S+0== "すみません" S-1== "ちょっと"	set-target "실례합니다" set-target@-1 "잠깐"	ちょっとすみません 잠깐 실례합니다

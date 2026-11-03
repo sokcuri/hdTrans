@@ -1,0 +1,22 @@
+# 규칙: GRM-3469, LEX-4009, LEX-4011, LEX-4027, LEX-4036, LEX-4025, GRM-3456, LEX-4032, LEX-4017, LEX-4037
+rule	input	expected	kind	layer
+cx:amari-not:10	あまり暑くて眠れなかった。	!rule:cx:amari-not:10	keep	rewrites
+cx:amari-not:10	あまり暑くて眠れなかった。	has:너무 더워서	keep	rewrites
+cx:no-time:10	待っている間も、	!rule:cx:no-time:10	keep	rewrites
+cx:dislike-of:5	私が嫌いな食べ物	!rule:cx:dislike-of:5	keep	rewrites
+cx:dislike-of:5	私が嫌いな食べ物	has:내가 싫어하는 음식	keep	rewrites
+cx:novel-fixes-2:540	中には手紙が入っていた。	!rule:cx:novel-fixes-2:540	keep	rewrites
+cx:novel-fixes-2:1965	森で宝箱を開けた。	!rule:cx:novel-fixes-2:1965	keep	rewrites
+cx:novel-fixes-2:1965	森で宝箱を開けた。	has:보물상자를 열었다	keep	rewrites
+cx:novel-fixes-2:334	彼女はできた。	!rule:cx:novel-fixes-2:334	keep	rewrites
+cx:fit-to:10	完璧に似合っていた。	!rule:cx:fit-to:10	keep	rewrites
+cx:fit-to:10	完璧に似合っていた。	has:완벽하게 어울리고	keep	rewrites
+cx:novel-fixes-2:320	今日出来た人は帰っていい。	!rule:cx:novel-fixes-2:320	keep	rewrites
+cx:novel-fixes-2:880	愛とは、違いを認めることだ。	!rule:cx:novel-fixes-2:880	keep	rewrites
+cx:handed-down:10	言葉より伝わる。	!rule:cx:handed-down:10	keep	rewrites
+cx:handed-down:10	言葉より伝わる。	has:말보다	keep	rewrites
+cx:novel-fixes-2:2120	一本の木の下で酒を飲んだ。	!rule:cx:novel-fixes-2:2120	keep	rewrites
+cx:novel-fixes-2:334	「彼女はできたか？」	has:여자친구는	fix	rewrites
+cx:novel-fixes-2:540	中には平民にもいるが、それはたいへんに稀なことである。	has:개중에는 평민에게도	fix	rewrites
+cx:novel-fixes-2:540	中には、突入せずに、軌道上を周回していた。	has:개중에는,	fix	rewrites
+cx:handed-down:10	王より伝わった命令。	has:왕으로부터 전해진	fix	rewrites
