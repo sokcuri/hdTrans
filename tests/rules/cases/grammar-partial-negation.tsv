@@ -1,0 +1,32 @@
+# 규칙: GRM-3400
+rule	input	expected	kind	layer
+cx:partial-negation:10	必ずしも正しくない。	반드시 올바르지는 않다.	fix	rewrites
+cx:partial-negation:10	「必ずしも正しくないよ」	「반드시 올바르지는 않아」	fix	rewrites
+cx:partial-negation:10	必ずしも必要ではない。	반드시 필요하지는 않다.	fix	rewrites
+cx:partial-negation:10	「必ずしもそうじゃないよ」	「반드시 그렇지는 않아」	fix	rewrites
+cx:partial-negation:10	必ずしも高くない。	반드시 높지는 않다.	fix	rewrites
+cx:partial-negation:10	必ずしも成功しない。	반드시 성공하지는 않는다.	fix	rewrites
+cx:partial-negation:10	必ずしも勝てない。	반드시 이길 수는 없다.	fix	rewrites
+cx:partial-negation:10	必ずしも正しくない答え。	반드시 올바르지는 않은 대답.	fix	rewrites
+cx:partial-negation:10	必ずしも正しくないが、間違ってもいない。	has:반드시 올바르지는 않지만,	fix	rewrites
+cx:partial-negation:20	必ずしも成功しません。	반드시 성공하지는 않습니다.	fix	rewrites
+cx:partial-negation:20	必ずしも一致しておりません。	반드시 일치하고 있지는 않습니다.	fix	rewrites
+cx:partial-negation:34	必ずしも一致しない。	반드시 일치하지는 않는다.	fix	rewrites
+cx:partial-negation:30	必ずしも一致しないんだ。	반드시 일치하지는 않는다.	fix	rewrites
+cx:partial-negation:32	必ずしも一致しない点がある。	반드시 일치하지는 않는 점이 있다.	fix	rewrites
+cx:partial-negation:34	「必ずしも一致しないよ」	「반드시 일치하지는 않아」	fix	rewrites
+cx:partial-negation:40	必ずしも悪人ではない。	반드시 악인은 아니다.	fix	rewrites
+cx:partial-negation:10	必ずしも正しいとは限らない。	반드시 올바르다고는 할 수 없다.	keep	rewrites
+cx:partial-negation:10	必ずしも悪いわけではない。	반드시 나쁜 것은 아니다.	keep	rewrites
+cx:partial-negation:10	この世界が必ずしもゲームの過去通りに進んでいる訳では無いのではないかと椿は考えた。	has:반드시 게임의 과거대로 나아가고 있는 것은 아닌	keep	rewrites
+cx:partial-negation:10	優れていることが必ずしも良い結果をもたらすものではない。	has:반드시 좋은 결과를 가져오는 것은 아니다	keep	rewrites
+cx:partial-negation:20	必ずしも　そうではありませんが	반드시 그렇지는 않습니다만	keep	rewrites
+cx:partial-negation:10	必ずしもそうとは言えない。	!rule:cx:partial-negation:10	keep	rewrites
+cx:partial-negation:10	必ずしも行く必要はない。	반드시 갈 필요는 없다.	keep	rewrites
+cx:partial-negation:34	必ずしも勉強しない人が悪いわけではない。	!rule:cx:partial-negation:34	keep	rewrites
+cx:partial-negation:10	必ずしもそうではないが、彼は来ない。	has:그는 오지 않는다	keep	rewrites
+cx:partial-negation:34	絶対に一致しない。	!rule:cx:partial-negation:34	keep	rewrites
+cx:partial-negation:30	絶対に一致しないんだ。	!rule:cx:partial-negation:30	keep	rewrites
+cx:partial-negation:32	一致しない点がある。	!rule:cx:partial-negation:32	keep	rewrites
+cx:partial-negation:20	絶対に成功しません。	!rule:cx:partial-negation:20	keep	rewrites
+cx:partial-negation:40	彼は悪人ではない。	!rule:cx:partial-negation:40	keep	rewrites
