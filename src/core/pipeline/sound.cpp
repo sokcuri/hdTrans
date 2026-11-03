@@ -3188,16 +3188,24 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
     return {};
 }
 
-// Whether いざ stands before pos in its clause, since the last 。！？、 or bracket: a ん before と there is the
-// literary volitional (いざ行かんと思う), no negative.
+// Whether a standalone いざ stands before pos in its sentence, since the last 。！？ or bracket: one after no hiragana
+// and before a kanji, a comma or a space, not the いざ of いざとなったら, いざという時, いざこざ or いざかや. A ん before と
+// there is the literary volitional (いざ行かんと思う), no negative.
 bool IzaBefore(std::string_view s, size_t pos) {
+    constexpr std::string_view kIza = "いざ";
     const std::string_view head = s.substr(0, pos);
-    const size_t iza = head.rfind("いざ");
-    if (iza == std::string_view::npos) return false;
-    for (const std::string_view mark : {"。", "！", "？", "!", "?", "、", "，", "「", "」", "『", "』"}) {
-        if (const size_t m = head.rfind(mark); m != std::string_view::npos && m > iza) return false;
+    size_t clause = 0;
+    for (const std::string_view mark : {"。", "！", "？", "!", "?", "「", "」", "『", "』"}) {
+        if (const size_t m = head.rfind(mark); m != std::string_view::npos) clause = std::max(clause, m + mark.size());
     }
-    return true;
+    for (size_t at = head.find(kIza, clause); at != std::string_view::npos; at = head.find(kIza, at + kIza.size())) {
+        if (at > 0 && IsHiraganaRune(LastRune(s.substr(0, at)).cp)) continue;
+        const std::string_view after = s.substr(at + kIza.size());
+        if (after.empty()) continue;
+        const char32_t next = text::DecodeRune(after).cp;
+        if (IsKanjiRune(next) || RuneIn(next, U"、，, 　")) return true;
+    }
+    return false;
 }
 
 // Whether the せ before the ん or ぬ at i of rs (s, with the byte offsets byte) is the old negative stem of する:
@@ -3352,13 +3360,17 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         if (rs[i] != U'ん' && rs[i] != U'ぬ' && !tsu) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i + 1]);
         // The いけん of western speech is いけない, and いけんかった いけなかった: after the と, ちゃ or ば of an obligation or a
-        // prohibition (行かないといけん, 食べちゃいけんのじゃ), and after は, も, て or where a clause starts before the end, a
+        // prohibition (行かないといけん, 食べちゃいけんのじゃ), and after は or も that follow a word (not the kana 拝見 of
+        // では、はいけん), after て or where a clause starts before the end, a
         // mark or a final よ, ぞ, わ or ね (それはいけん, ああ、いけん！). The dictionary reads いけ alone as a negative
         // already, which the ん would deny again. Elsewhere before の or じゃ the ん may be the の of いける
         // (やっていけんのかな, 生きていけんじゃね).
+        const auto afterWord = [&](size_t k) {  // rs[k] follows a word
+            return k > 0 && (IsHiraganaRune(rs[k - 1]) || IsKatakanaRune(rs[k - 1]) || IsKanjiRune(rs[k - 1]));
+        };
         if (rs[i] == U'ん' && ctx.dialectForms && i >= 2 && rs[i - 2] == U'い' && rs[i - 1] == U'け' &&
             ((i > 2 && RuneIn(rs[i - 3], U"とゃば")) ||
-             ((i == 2 || RuneIn(rs[i - 3], U"はもてで、，,「『　 …‥")) &&
+             ((i == 2 || RuneIn(rs[i - 3], U"てで、，,「『　 …‥") || (RuneIn(rs[i - 3], U"はも") && afterWord(i - 3))) &&
               (ends(rest) || rest.starts_with("かった") || SentenceFinalParticle(rest, "よ") > 0 ||
                SentenceFinalParticle(rest, "ぞ") > 0 || SentenceFinalParticle(rest, "わ") > 0 || SentenceFinalParticle(rest, "ね") > 0)))) {
             out.append(s, byte[done], byte[i] - byte[done]);
