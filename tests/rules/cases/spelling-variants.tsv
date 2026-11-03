@@ -72,7 +72,7 @@ normalize:spelling-variant	子供程の背丈しかない。	아이 정도의 �
 normalize:spelling-variant	ある程度は分かる。	어느 정도는 안다.	keep	normalize
 normalize:spelling-variant	為替が動いた。	환율이 움직였다.	keep	normalize
 normalize:spelling-variant	先程の件だが。	조금 전의 건이지만.	keep	normalize
-normalize:spelling-variant	もっときれいになる。	좀 더 예쁘게 된다.	keep	normalize
+normalize:spelling-variant	もっときれいになる。	좀 더 예뻐진다.	keep	normalize
 normalize:spelling-variant	程なく雨が止んだ。	곧 비가 그쳤다.	keep	normalize
 normalize:spelling-variant	あいつ等が来た。	저놈들이 왔다.	keep	normalize
 normalize:spelling-variant	国の為となる。	나라를 위한 것이 된다.	fix	normalize

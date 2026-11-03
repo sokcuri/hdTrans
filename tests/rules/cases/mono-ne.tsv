@@ -15,7 +15,7 @@ cx:mono-ne:30	まったく、あの子も面倒な子たちに惚れられたも
 cx:mono-ne:30	随分と甘く見られたものね	has:봐졌네	fix	rewrites
 cx:mono-ne:30	ようやくここまで来れたものね	has:올 수 있었네	fix	rewrites
 cx:mono-ne:30	酷い事をする奴がいたものね！	has:있었네!	fix	rewrites
-cx:mono-ne:30	提督も随分と立派になったものね！	has:되었네!	fix	rewrites
+cx:mono-ne:30	提督も随分と立派になったものね！	has:훌륭해졌네!	fix	rewrites
 cx:mono-ne:10	私ら相手によそ見するとは、ナメられたもんね	!rule:cx:mono-ne:10	keep	rewrites
 cx:mono-ne:10	ふたり揃っておめおめと、あたしの前に顔を出せたもんね	!rule:cx:mono-ne:10	keep	rewrites
 cx:mono-ne:10	すーっと顔色良くなりましたもんね	!rule:cx:mono-ne:10	keep	rewrites

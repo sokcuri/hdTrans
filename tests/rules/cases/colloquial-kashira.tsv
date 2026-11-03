@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-lookup:kashira-split	何故かしら……逆に不安になってきたわ……	왜일까……반대로 불안에 됐어……	fix	lookup
+lookup:kashira-split	何故かしら……逆に不安になってきたわ……	왜일까……반대로 불안해졌어……	fix	lookup
 lookup:kashira-split	これが、仲間のいる心強さなのかしら……	이것이, 동료가 있는 든든함인 걸까……	fix	lookup
 dict:jisjk:4264	こういう感じかしら？	이런 느낌일까?	fix	lookup
 dict:colloquial-endings:5	途中ですれ違わなかったかしら？	도중에 스치듯 지나치지 않았을까?	fix	lookup
