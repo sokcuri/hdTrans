@@ -1,14 +1,16 @@
 # Rows that tools/kana-spelling.py finds but that do not spell a Japanese reading (spec LEX-3950): Chinese
 # and Tibetan names written by their own convention (四平 쓰핑, 章子怡 장쯔이), Korean words (쓰레기, 쓰나미, 빵) and
-# names whose Korean spelling is their own (ツウィ 쯔위). tools/kana-spelling.py --check fails on a row of that shape
+# names whose Korean spelling is their own (ツウィ 쯔위, ツクール 쯔꾸르). tools/kana-spelling.py --check fails on a row of that shape
 # not listed here, on a listed row that no longer needs to be and on a line listed twice.
 file	key	ko
-base.tsv	九州不ニサツシ	규슈후지사쓰시
-base.tsv	日本カルパツク	일본 칼파쯔크
-base.tsv	日産クレジツト	닛산 쿠레지쯔트
 base.tsv	自貢	쯔궁
+names.00.tsv	2D格闘ツクール2nd	2D 격투 쯔꾸르 2nd
+names.00.tsv	RPGツクール2	RPG 쯔꾸르 2
+names.00.tsv	RPGツクール3	RPG 쯔꾸르 3
+names.00.tsv	RPGツクールDS	RPG 쯔꾸르 DS
 names.00.tsv	あなたの運命を書いています	당신의 운명을 쓰고 있습니다
 names.00.tsv	こげぱん	코게빵
+names.00.tsv	つなみティーブレイク	쓰나미 티 브레이크
 names.00.tsv	アチェ津波博物館	아체 쓰나미 박물관
 names.00.tsv	アユミっぱい	아유미빠이
 names.00.tsv	イオっぱい	이오빠이
@@ -40,6 +42,8 @@ names.00.tsv	チチハル三家子空港	치치하얼 싼자쯔 공항
 names.00.tsv	チューセー県	쯔세현
 names.00.tsv	チューパー県	쯔빠현
 names.00.tsv	ツウィ	쯔위
+names.00.tsv	ツクール	쯔꾸르
+names.00.tsv	ツナミブースト	쓰나미 부스트
 names.00.tsv	ドンチュオン湖	동쯔엉호
 names.00.tsv	ド屑	쓰레기
 names.00.tsv	ナツメっぱい	나츠메빠이

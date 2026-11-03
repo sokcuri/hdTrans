@@ -1,0 +1,42 @@
+# 규칙: LEX-3950
+rule	input	expected	kind	layer
+dict:jisjk:243910	対馬国の歴史	츠시마의 역사	fix	defaults
+dict:names.20085	つくば万博に行った。	츠쿠바 세계 박람회에 갔다.	fix	fixed
+dict:names.657458	あれ…？ 白露型が元気、ですね？	has:시라츠유급이 건강	fix	fixed
+dict:names.657460	白露型駆逐艦五番艦の春雨です。	has:시라츠유급 구축함 5번함	fix	fixed
+dict:s:6452	薩摩弁で話す。	사츠마 방언으로 이야기한다.	fix	defaults
+dict:s:5877	津軽弁が出た。	츠가루 방언이 나왔다.	fix	defaults
+dict:s:7668	こたつ虫になる。	겨우내 고타츠에 틀어박힌 사람이 된다.	fix	defaults
+dict:w:22555	花かつおをかける。	has:가츠오부시를	fix	defaults
+dict:names.502692	夏目書房の本	나츠메 서점의 책	fix	fixed
+dict:jisjk:229478	唐津焼の皿	가라츠 지역 도자기의 접시	fix	defaults
+dict:names.218044	ダイハツ・トールに乗る。	다이하츠 톨을 탄다.	fix	fixed
+dict:names.151670	ゴーストオブツシマを遊んだ。	has:고스트 오브 츠시마	fix	fixed
+dict:names.760984	鰹のたたきを食べた。	가츠오 타타키를 먹었다.	fix	fixed
+dict:names.599747	松平家の家紋	has:마츠다이라씨	fix	fixed
+dict:names.348745	マツダ・キャロル	마츠다 캐럴	fix	fixed
+dict:names.581869	暁型駆逐艦	아카츠키급 구축함	fix	fixed
+dict:names.568114	抹茶クリームあんみつ	말차 크림 안미츠	fix	fixed
+dict:names.755893	高松琴平電鉄	다카마츠코토히라 전기 철도	fix	fixed
+dict:s:2364	タコヤキを買った。	타코야키를 샀다.	fix	defaults
+dict:jisjk:43407	イタイイタイ病	이타이이타이병	fix	defaults
+dict:s:6771	長崎ちゃんぽんを食べた。	나가사키 짬뽕을 먹었다.	fix	defaults
+dict:jisjk:322937	東札幌一条	히가시삿포로1죠	fix	defaults
+dict:names.596262	東京朝鮮第二初級学校	도쿄 조선 제2초급학교	fix	fixed
+dict:jisjk:188510	島中さんが来た。	시마나카 씨가 왔다.	fix	defaults
+dict:names.144339	ココイチで食べた。	has:코코이치방야	fix	fixed
+dict:jisjk:184733	坂本さんが来た。	사카모토 씨가 왔다.	fix	defaults
+dict:jisjk:112218	キングパーツ	킹 파츠	fix	defaults
+dict:jisjk:45187	オリンビックスポーツ	올림픽 스포츠	fix	defaults
+dict:jisjk:81061	日本ヘルス工業	일본 헬스 공업	fix	defaults
+dict:jisjk:169416	上司さんに怒られた。	상사님에게 혼났다.	fix	defaults
+dict:s:5876	津波警報が出た。	쓰나미경보가 나왔다.	keep	defaults
+dict:jisjk:43532	インコを飼う。	잉꼬를 기른다.	keep	defaults
+dict:jisjk:344369	トンカツを食べた。	돈까스를 먹었다.	keep	defaults
+dict:jisjk:135234	モンペをはく。	몸뻬를 입는다.	keep	defaults
+dict:jisjk:47441	ゴミ箱に捨てた。	쓰레기통에 버렸다.	keep	defaults
+dict:names.230446	ツウィ	쯔위	keep	fixed
+dict:names.23873	ぷよぷよ	뿌요뿌요	keep	fixed
+dict:names.375907	ヤマッピ	야마삐	keep	fixed
+dict:names.675283	章子怡	장쯔이	keep	fixed
+dict:names.230625	ツクール	쯔꾸르	keep	fixed

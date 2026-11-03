@@ -299,7 +299,7 @@ V	1지	S520			GN	4639	||1 &&2 S+1== "な" P+1== "7**"	공통 어미 항목 「V�
 V	1고	S590			GN	4666	||1 U-1== "Rかも"	앞말의 어미가 かも로 끝나면 어미 V를 -고로 고른다. (미발동: rare-context)	jisjk:369643		
 V	1지 않으면	S590			GN	5064	||1 &&2 S+1== "にはいられな" P+1== "7**"	내부 어미 표기 V의 이 후보는 뒤에 にはいられな 형용사가 오면 지 않으면으로 고른다. (미발동: rare-context)	jisjk:375311		
 W杯	월드컵	N110			GN				jisjk:103359		
-[sb	쯔지	N130	QPN		GN				jisjk:103516		
+[sb	츠지	N130	QPN		GN				jisjk:103516		
 ttt	ttt	K110			GN				jisjk:201744		
 μーlaw形式	μ-law 형식	N110			IT				jisjk:261443		
 ―	-	J110			GN				jisjk:202387		
@@ -5754,7 +5754,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おおかた	대충	E311			GN				jisjk:147		
 おおかみ	이리	N110	VAm		GN				jisjk:127981		
 おおかれすくなかれ	많든 적든 간에	E300			GN				jisjk:122891		
-おおがききょうりつぎんこう	오가키 교리쓰 은행	N110	VBlVMo		GN				jisjk:150639		
+おおがききょうりつぎんこう	오가키 교리츠 은행	N110	VBlVMo		GN				jisjk:150639		
 おおき	%B1@	G8L0			GN				jisjk:2130		
 おおき	$A9@	H7M0			GN				jisjk:2131		
 おおきいほど	큰 만큼	E300			GN				jisjk:149023		
@@ -5792,7 +5792,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おおた	오오타	I130	QPN		GN				jisjk:98933		
 おおたきガス	오타키 가스	N120	VBlVPl		GN				jisjk:128054		
 おおだい	대	N110	VMo		GN				jisjk:128059		
-おおだてかつらこうぎょう	오다테카쓰라 공업	N110	VBl		GN				jisjk:150651		
+おおだてかつらこうぎょう	오다테카츠라 공업	N110	VBl		GN				jisjk:150651		
 おおだてもの	거물	N110	VHn		GN				jisjk:128062		
 おおっぴら	공공연%A1@	G8U0			GN				jisjk:119478		
 おおつごもり	섣달 그믐날	N110	UMe		GN				jisjk:128065		
@@ -9867,7 +9867,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かねます	1기 어렵습니다	S5:0			GN				jisjk:374749		
 かねますので	1기 어려우므로	S5:0			GN				jisjk:341578		
 かねません	3 수 있습니다	S5:0			GN				jisjk:264650		
-かねまつにっさんのうりん	가네마쓰 닛산 농림	N110	VBl		GN				jisjk:150843		
+かねまつにっさんのうりん	가네마츠 닛산 농림	N110	VBl		GN				jisjk:150843		
 かねまわり	자금 사정	N110	VMo		GN				jisjk:169136		-1
 かねもうけ	돈벌이	N110			GN				jisjk:150845		
 かねもうけ	돈벌이	N110	VMo	Hd	GN				jisjk:169137		-1
@@ -10445,7 +10445,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かわつる三芳野	카와츠루미요시노	I130	QCTVPl		GN				jisjk:286823		
 かわづくり	껍질 채의 생선회	N110	VFd		GN				jisjk:169905		-1
 かわづら	강의 수면	N110	VPl		GN				jisjk:169906		-1
-かわてつしょうじ	가와테쓰상사	N120	VMoVPl		GN				jisjk:169908		-1
+かわてつしょうじ	가와테츠상사	N120	VMoVPl		GN				jisjk:169908		-1
 かわとじ	가죽 표지의 제본	N110	VBkVSw		GN				jisjk:169912		-1
 かわとじ	가죽 표지의 제본	N110	VBkVSw		GN				jisjk:169914		-1
 かわどこ	강바닥	N110	VPl		GN				jisjk:169915		-1
@@ -10616,7 +10616,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんさいでんりょく	칸사이전력	N120	VElVPl		GN				jisjk:170277		-1
 かんさいはんぷかがくぼうすい	간사이 한푸 화학 방수	N110	VBl		GN				jisjk:150883		
 かんさいべん	칸사이 사투리	N110			GN				jisjk:170279		-1
-かんさいみつびしでんき	간사이 미쓰비시 전기	N110	VBlVEl		GN				jisjk:150885		
+かんさいみつびしでんき	간사이 미츠비시 전기	N110	VBlVEl		GN				jisjk:150885		
 かんさかん	감사관	N110	VHn		GN				jisjk:170283		-1
 かんさく	간작	N110		Hd	GN				jisjk:170285		-1
 かんさつ	감찰	N110		Hd	GN				jisjk:170286		-1
@@ -10809,7 +10809,7 @@ ttt	ttt	K110			GN				jisjk:201744
 かんとうだいしんさい	관동대지진	N110	VSsVPl		GN				jisjk:170666		-1
 かんとうてんねんがすかいはつ	간토 천연 가스 개발	N110	VBl		GN				jisjk:150892		
 かんとうとくしゅせいこう	간토 특수 제강	N110	VBl		GN				jisjk:150893		
-かんとうまつざかやストア	간토 마쓰자카야 스토어	N110	VBlVMo		GN				jisjk:150894		
+かんとうまつざかやストア	간토 마츠자카야 스토어	N110	VBlVMo		GN				jisjk:150894		
 かんとうりょうじゅうこうさん	간토 료주 흥산	N110	VBl		GN				jisjk:150895		
 かんとく	감독	N110	VHn	Hd	GN				jisjk:170672		-1
 かんとく	터득	N110	SFl	Hd	GN				jisjk:170673		-1
@@ -16482,7 +16482,7 @@ ttt	ttt	K110			GN				jisjk:201744
 こうだんじゅうたく	공동 주택	N110	VBl		GN				jisjk:180844		-1
 こうだんせいりょく	고탄성력	N110			GN				jisjk:161692		
 こうちく	구축	N110	VBl	Hd	GN				jisjk:180861		-1
-こうちけん	고우찌현	N120	VPl		GN				jisjk:180864		-1
+こうちけん	고치현	N120	VPl		GN				jisjk:180864		-1
 こうちしょ	구치소	N110	ULwVBl		GN				jisjk:180866		-1
 こうちせい	향지성	N110	VPt		GN				jisjk:180869		-1
 こうちゃ	홍차	N110	VFdVPt		GN				jisjk:180870		-1
@@ -17404,9 +17404,9 @@ ttt	ttt	K110			GN				jisjk:201744
 こたえてや	대답하여 &CJ@	M448			GN				jisjk:141854		
 こたえまつ	대답해 드&AA@	M447			GN				jisjk:119999		
 こたつ	난로	I110	VPeUXl		GN				jisjk:40958		
-こたつがけ	코타쓰 덮개	I110	VPe		GN				jisjk:40959		
+こたつがけ	코타츠 덮개	I110	VPe		GN				jisjk:40959		
 こたつにあた	각로를 &CX@	M428			GN				jisjk:119555		
-こたつぶとん	코타쓰 덮개	I110			GN				jisjk:40960		
+こたつぶとん	코타츠 덮개	I110			GN				jisjk:40960		
 こだいぎれ	고대 직물	N110			GN				jisjk:182429		-1
 こだいこ	작은 북	N110	USoQMUVPe		GN				jisjk:182431		-1
 こだいこうこく	과대 광고	N110	VCm		GN				jisjk:182432		-1
@@ -28075,7 +28075,7 @@ ttt	ttt	K110			GN				jisjk:201744
 せつでん	절전	N110	VEl	Hd	GN				jisjk:198661		-1
 せつな	안타$G1@	H7U0			GN				jisjk:5147		
 せつなる	간절한	E0H0	SFl		GN				jisjk:123520		
-せつなんだいがく	세쓰난대학	N120	VPl		GN				jisjk:198667		-1
+せつなんだいがく	세츠난대학	N120	VPl		GN				jisjk:198667		-1
 せつびご	접미어	N110	UTs		GN				jisjk:198669		-1
 せつぶん	절분	N110	VSsUMe		GN				jisjk:198673		-1
 せつぼう	절망	N110	SFl	Hd	GN				jisjk:198676		-1
@@ -44110,8 +44110,8 @@ ttt	ttt	K110			GN				jisjk:201744
 りんかいせき	인회석	N110	VSn		GN				jisjk:156490		
 りんかい建設	린카이 건설	I130	QIDVGt		GN				jisjk:41851		
 りんく	링크	N110		Hd	GN				jisjk:162734		
-りんくうポート北	링쿠뽀토키타	I130	QCTVPl		GN				jisjk:338586		
-りんくうポート南	링쿠뽀토미나미	I130	QCTVPl		GN				jisjk:338587		
+りんくうポート北	린쿠 포트 키타	I130	QCTVPl		GN				jisjk:338586		
+りんくうポート南	린쿠 포트 미나미	I130	QCTVPl		GN				jisjk:338587		
 りんくう南浜	링쿠미나미하마	I130	QCTVPl		GN				jisjk:338588		
 りんくう往来北	링쿠오라이키타	I130	QCTVPl		GN				jisjk:338584		
 りんくう往来南	링쿠오라이미나미	I130	QCTVPl		GN				jisjk:338585		
@@ -45806,7 +45806,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アサートン	애서턴	N130	QPN		GN				jisjk:368207		
 アザミ	엉겅퀴	N130			GN				jisjk:106748		
 アザラシ	바다표범	N130	QAA		GN				jisjk:97421		
-アザラップ	아자랏뿌	I130	QCTVPl	Qq	GN				jisjk:269833		
+アザラップ	아자랏푸	I130	QCTVPl	Qq	GN				jisjk:269833		
 アシ	갈대	N130	QAL		GN				jisjk:97424		
 アシアナ	아시아나	N110	VPl		GN				jisjk:42450		
 アシアナ航空	아시아나 항공	N130	QIDVBlVTpVPlVGt		GN				jisjk:156977		
@@ -48351,7 +48351,7 @@ ttt	ttt	K110			GN				jisjk:201744
 イソレーション症候群	아이솔레이션 증후군	N110			GN				jisjk:151997		
 イソンデ	이성대	N130	QPN	WaWb	GN				jisjk:343929		
 イゾリーニ	이조리니	N130	QPN		GN				jisjk:367516		
-イタイイタイ病	이따이이따이병	N110	UTi		GN				jisjk:43407		
+イタイイタイ病	이타이이타이병	N110	UTi		GN				jisjk:43407		
 イタコ	무녀	N110			GN				jisjk:97571		
 イタズラ	장난	K110			GN				jisjk:375197		
 イタチ	족제비	N130	QAA		GN				jisjk:97572		
@@ -50211,7 +50211,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ウソ	거짓말	N110			GN				jisjk:97775		
 ウソつき	거짓말쟁이	N110	VHn		GN				jisjk:157668		
 ウソをつ	거짓말을 &AV@	M421			GN				jisjk:263525		
-ウタイ	노가꾸의 가사	N110			GN				jisjk:97776		
+ウタイ	노가쿠의 가사	N110			GN				jisjk:97776		
 ウダイ	천하	N110			GN				jisjk:97777		
 ウチ	안	N110			GN				jisjk:97778		
 ウチェ	우체	N130	QPN		GN				jisjk:371738		
@@ -50950,7 +50950,7 @@ ttt	ttt	K110			GN				jisjk:201744
 エスアイ	국제 단위계	N110			GN				jisjk:98805		
 エスアイー	에스티	N110	VPl		GN				jisjk:44236		
 エスアンドエス	에스안도에스	N110	VPl		GN				jisjk:44237		
-エスアールサンツアー	에스알산쯔아	N110	VPl		GN				jisjk:44235		
+エスアールサンツアー	에스알 선투어	N110	VPl		GN				jisjk:44235		
 エスイ	음향효과	N110			GN				jisjk:98806		
 エスイー	SE	N110			GN				jisjk:112955		
 エスエ	구세군	N110			GN				jisjk:98807		
@@ -52338,7 +52338,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オケージョン	기회	N110			GN				jisjk:158228		
 オコジョ	후추	N110	VFd		GN				jisjk:98947		
 オコチャ	오코차	N130	QPN		GN				jisjk:371743		
-オコッペ	오콧뻬	I130	QCTVPl	Qq	GN				jisjk:279774		
+オコッペ	오콧페	I130	QCTVPl	Qq	GN				jisjk:279774		
 オコナ	밀가루	N110	VFd		GN				jisjk:98948		
 オサマ	오사마	N130	QPN		GN				jisjk:373360		
 オサマ・ビン・ラディン	오사마 빈 라덴	N130	QPN		GN				jisjk:373361		
@@ -52496,7 +52496,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オニギリ	주먹밥	N110	VFd		GN				jisjk:45010		
 オニクス	오닉스	N130			GN				jisjk:98985		
 オニール	오닐	N130	QPN		GN				jisjk:257836		
-オヌプナイ	오누뿌나이	I130	QCTVPl	Qq	GN				jisjk:280521		
+オヌプナイ	오누푸나이	I130	QCTVPl	Qq	GN				jisjk:280521		
 オネジ	수나사	N110			GN				jisjk:164741		
 オノデン	오노덴	N130	QIDVGt		GN				jisjk:45011		
 オノプコ	오노프코	N130	QPN		GN				jisjk:371339		
@@ -52550,7 +52550,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オフィスサイバネティクス	오피스 사이버네틱스	N110			GN				jisjk:45027		
 オフィスサプライ	오피스 서플라이	N110			GN				jisjk:103327		
 オフィステル	오피스텔	N110	VBlVPl		GN				jisjk:264401		
-オフィスパーク	오후스빠쿠	I130	VBlVPl		GN				jisjk:339366		
+オフィスパーク	오피스 파크	I130	VBlVPl		GN				jisjk:339366		
 オフィスビル	오피스 빌딩	N110	VBl		BZ				jisjk:354618		
 オフィスプランニング	오피스 플래닝	N110			GN				jisjk:158260		
 オフィスラブ	사내 연애	N110			GN				jisjk:158261		
@@ -52904,7 +52904,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オリンパス光電子	올림퍼스 광전자	N130	QIDVGt		GN				jisjk:45183		
 オリンパス販売	올림퍼스 판매	N130	QIDVGt		GN				jisjk:45185		
 オリンビア	올림피아	N110			GN				jisjk:45186		
-オリンビックスポーツ	올림픽스포쓰	N110	VPl		GN				jisjk:45187		
+オリンビックスポーツ	올림픽 스포츠	N110	VPl		GN				jisjk:45187		
 オリンピア	올림피아	N110	VPl		GN				jisjk:45188		
 オリンピアード	올림피아드	N110	VGt		GN				jisjk:45189		
 オリンピコ	올림픽	N130	QPN		GN				jisjk:367073		
@@ -53199,7 +53199,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オーダー服	맞춤복	N110	VCp		GN				jisjk:363503		
 オーチェルク	기록 문학	N110			GN				jisjk:158082		
 オーツカ	오츠카	N110	VPl		GN				jisjk:44705		
-オーツカテック	오쓰카텍크	N110	VPl		GN				jisjk:44706		
+オーツカテック	오츠카 테크	N110	VPl		GN				jisjk:44706		
 オーツカ鉄鋼販売	오츠카 철강판매	N130	QIDVGt		GN				jisjk:44707		
 オーツタイヤ	오츠 타이어	N130	QIDVGt		GN				jisjk:44708		
 オーテック	오텍	N130	QIDVGt		GN				jisjk:44709		
@@ -53995,7 +53995,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カッドリンク	콰드 링크	N110			GN				jisjk:45415		
 カッパ	카파	N110	VCp		GN				jisjk:99110		
 カッパクリエイト	캇파 크레이트	N130	QIDVGt		GN				jisjk:45416		
-カッパテンゴク	캅빠천국	N110			GN				jisjk:99111		
+カッパテンゴク	갓파 천국	N110			GN				jisjk:99111		
 カッパドキア	카파도기아	N110	VPl		GN				jisjk:158497		
 カッパー価	카파치	N110			GN				jisjk:163546		
 カッピング	부항	N110			GN				jisjk:45417		
@@ -54017,7 +54017,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カツクイ沢山	캇쿠이자와야마	I130	QCTVPl		GN				jisjk:282441		
 カツクラ	카츠쿠라	N110	VPl		GN				jisjk:45424		
 カツノリ	카츠노리	N130	QPN		GN				jisjk:99109		
-カツヤマファインテック	가쯔야마파인테크	N110			GN				jisjk:111756		
+カツヤマファインテック	가츠야마 파인테크	N110			GN				jisjk:111756		
 カツラ	카츠라	N130			GN				jisjk:116853		
 カツラ	가발	N110	XXX		GN				jisjk:202155		
 カツレツ	커틀릿	N110	VFd		GN				jisjk:45425		
@@ -55999,7 +55999,7 @@ ttt	ttt	K110			GN				jisjk:201744
 キングストン体制	킹스턴 체제	N110	UMn		BZ				jisjk:355688		
 キングズイングリッシュ	표준 영어	N110	UTs		GN				jisjk:158894		
 キングダム	왕국	N110	VPl		GN				jisjk:158895		
-キングパーツ	긴그파쯔	N110			GN				jisjk:112218		
+キングパーツ	킹 파츠	N110			GN				jisjk:112218		
 キングピン	주요 인물	N110	VHn		GN				jisjk:158896		
 キングメーカー	킹메이커	N110	VHn		GN				jisjk:158897		
 キングレコード	킹 레코드	N130	QIDVGt		GN				jisjk:46138		
@@ -57623,7 +57623,7 @@ ttt	ttt	K110			GN				jisjk:201744
 グラハム	그라함	N130	QPN		GN				jisjk:100193		
 グラバ	그래버	N110			IT				jisjk:261640		
 グラバー	그래버	N110			GN				jisjk:46648		
-グラパックジャパン	구라빳쿠재팬	N110			GN				jisjk:112082		
+グラパックジャパン	그라팩 재팬	N110			GN				jisjk:112082		
 グラビア	그라비아	N110			GN				jisjk:100194		
 グラビティ	그라비티	N110			GN				jisjk:100195		
 グラビティーモデル	그래비티 모텔	N110			GN				jisjk:128179		
@@ -60921,7 +60921,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サワムラヤ	사와무라야	N130	QIDVGt		GN				jisjk:47761		
 サワラ	삼치	N110			GN				jisjk:101750		
 サワリ	맛 보기	N110			GN				jisjk:47762		
-サワンチサップ	사완치삿뿌	I130	QCTVPl	Qq	GN				jisjk:296577		
+サワンチサップ	사완치삿푸	I130	QCTVPl	Qq	GN				jisjk:296577		
 サワー	사워	N110	VFd		GN				jisjk:129058		
 サンアロイ工業	산아로이공업	N110			GN				jisjk:112010		
 サンアンドサン	썬 앤드 썬	N130	QIDVGt		GN				jisjk:47763		
@@ -60984,7 +60984,7 @@ ttt	ttt	K110			GN				jisjk:201744
 サンコ	삼고	N110			GN				jisjk:101766		
 サンコー	산코	N110			GN				jisjk:112896		
 サンコーコンサルタント	산코 콘설턴트	N130	QIDVGt		GN				jisjk:47784		
-サンコーポラス	상코뽀라스	I130	QCTVPl	Qq	GN				jisjk:296639		
+サンコーポラス	산코포라스	I130	QCTVPl	Qq	GN				jisjk:296639		
 サンコール	썬 콜	N130	QIDVGt		GN				jisjk:47785		
 サンコー商事	산코상사	N110			GN				jisjk:111859		
 サンコー電子	산코전자	N130	QIDVGt		GN				jisjk:47786		
@@ -63988,7 +63988,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ジーザスクライスト	예수 그리스도	N110	UClVHn		GN				jisjk:129460		
 ジーシー	지시	N110	VPl		GN				jisjk:48337		
 ジーシーインターナショナル	지씨인터내쇼날	N110	VPl		GN				jisjk:48338		
-ジーシーデンタルプロダクツ	지시덴탈프로다쿠쯔	N110	VPl		GN				jisjk:48339		
+ジーシーデンタルプロダクツ	지시 덴탈 프로덕츠	N110	VPl		GN				jisjk:48339		
 ジーダ	디다	N130	QPN		GN				jisjk:365336		
 ジーティーエム	지티에무	N110	VPl		GN				jisjk:48340		
 ジーナ	지나	N110	VHn		GN				jisjk:129461		
@@ -65279,7 +65279,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スパニッシュ	스패니쉬	N110			GN				jisjk:49215		
 スパム	스팸메일	N110			GN				jisjk:102329		
 スパムメール	스팸 메일	N110			IT				jisjk:260094		
-スパランド豊海	스빠란도토요미	I130	QCTVPl		GN				jisjk:303591		
+スパランド豊海	스파랜드 토요미	I130	QCTVPl		GN				jisjk:303591		
 スパルタ	스파르타	N110			GN				jisjk:102330		
 スパルタン	스파르타 사람	N130			GN				jisjk:102331		
 スパルタ式	스파르타식	N110			GN				jisjk:130020		
@@ -66321,7 +66321,7 @@ ttt	ttt	K110			GN				jisjk:201744
 セブンイレブン	세븐일레븐	N130	QID		GN				jisjk:49597		
 セブンシスターズ	세븐 시스터스	N110			GN				jisjk:49598		
 セブンスター	세븐 스타	N130			GN				jisjk:49599		
-セブンツーセブン	세븐쓰세븐	N110	VPl		GN				jisjk:49600		
+セブンツーセブン	세븐투세븐	N110	VPl		GN				jisjk:49600		
 セブンネット	세븐 네트	N130			GN				jisjk:49601		
 セブンフォーティーセブン	보잉 747기	N110	VPeVTw		GN				jisjk:152289		
 セブンホーム	세븐홈	N130	QIDVGt		GN				jisjk:49602		
@@ -68036,7 +68036,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ダイハツ三重	다이하츠미에	N110	VPl		GN				jisjk:50295		
 ダイハツ工業	다이하츠공업	N130	QIDVGt		GN				jisjk:50292		
 ダイハツ新東京販売	다이하츠 신토쿄 판매	N130	QIDVGt		GN				jisjk:50296		
-ダイハツ東京多摩	마이하쓰도쿄타마	N110	VPl		GN				jisjk:50294		
+ダイハツ東京多摩	다이하츠 도쿄 타마	N110	VPl		GN				jisjk:50294		
 ダイハツ町	다이하츠쵸	I130	QCTVPl		GN				jisjk:308227		
 ダイハツ興産	다이하츠흥산	N130	QIDVGt		GN				jisjk:50298		
 ダイハツ販売	다이하츠판매	N110			GN				jisjk:110013		
@@ -68441,7 +68441,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ダンモ	모던 재즈	N110	USoQMU		GN				jisjk:130889		
 ダンロップ	던롭	N110	VPl		GN				jisjk:50444		
 ダンロップスポーツ	던롭 스포츠	N130	QIDVGt		GN				jisjk:50445		
-ダンロップリトレッド	단로뿌리토렛도	N110	VPl		GN				jisjk:50446		
+ダンロップリトレッド	던롭 리트레드	N110	VPl		GN				jisjk:50446		
 ダヴィッズ	다비즈	N130	QPN		GN				jisjk:365282		
 ダヴィド	다비도	N130	QPN		GN				jisjk:366684		
 ダヴィド・バッレーリ	다비도·발레리	N130	QPN		SO				jisjk:372717		
@@ -68693,7 +68693,7 @@ ttt	ttt	K110			GN				jisjk:201744
 チフス	티푸스	N110	UTi		GN				jisjk:50524		
 チフス予防接種	티푸스 예방접종	N110			GN				jisjk:113292		
 チプリアーニ	치프리아니	N130	QPN		GN				jisjk:367333		
-チプ子オコッペ	치뿌네오콧뻬	I130	QCTVPl		GN				jisjk:308666		
+チプ子オコッペ	치푸네오콧페	I130	QCTVPl		GN				jisjk:308666		
 チベット	티벳	N110	QNN		GN				jisjk:50525		
 チベット動乱	티벳동란	N110			BZ				jisjk:359923		
 チベット問題	티벳문제	N110			BZ				jisjk:359921		
@@ -68944,7 +68944,7 @@ ttt	ttt	K110			GN				jisjk:201744
 チョップハウス	촙하우스	N110			GN				jisjk:50598		
 チョノドン	천호동	N110	VPl		GN				jisjk:131011		
 チョバング	토방	N130	QPN		GN				jisjk:370663		
-チョポシナイ	쵸뽀시나이	I130	QCTVPl		GN				jisjk:309043		
+チョポシナイ	쵸포시나이	I130	QCTVPl		GN				jisjk:309043		
 チョモランマ	에베레스트산	N110	VPl		GN				jisjk:131012		
 チョルチュク	철쭉	N110			GN				jisjk:113286		
 チョレク	초렉	N130	QPN		GN				jisjk:371472		
@@ -69136,7 +69136,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ツバメ	제비	N110	VAm		GN				jisjk:131061		
 ツバメコート	츠바메 코트	N130	QIDVGt		GN				jisjk:50657		
 ツバメックス	즈바메쿠수	N110	VPl		GN				jisjk:50658		
-ツバメプロパン	쓰바메프로팡	N110			GN				jisjk:50659		
+ツバメプロパン	츠바메 프로판	N110			GN				jisjk:50659		
 ツビタノビッチ	츠비타노비치	N130	QPN		GN				jisjk:370048		
 ツブ	알맹이	N110			GN				jisjk:105313		
 ツベタノフ	츠베타노프	N130	QPN		GN				jisjk:370570		
@@ -69160,7 +69160,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ツリー構造	트리 구조	N110			GN				jisjk:131063		
 ツリー状	트리상	N110			GN				jisjk:131064		
 ツルカメコーポレーション	츠루카메 코포레이션	N130	QIDVGt		GN				jisjk:50664		
-ツルガスパンクリート	쓰루가스팡크리트	N110	VPl		GN				jisjk:50665		
+ツルガスパンクリート	츠루가 스팬크리트	N110	VPl		GN				jisjk:50665		
 ツルゲーネフ	투르게네프	N110	VHn		GN				jisjk:50666		
 ツルタ電機	츠루타 전기	N130	QIDVGt		GN				jisjk:50667		
 ツルツル	반들반들	N110		Hd	GN				jisjk:131068		
@@ -71189,7 +71189,7 @@ ttt	ttt	K110			GN				jisjk:201744
 トップ・マネジメント	톱 매니지먼트	N110			BZ				jisjk:363107		
 トッポキ	떡볶이	N130	VFd		GN				jisjk:343628		
 トッポッキ	떡볶이	I130	VFd		GN				jisjk:373597		
-トツプ	토츠뿌	N130	QCTVPl		GN				jisjk:311707		
+トツプ	토츠푸	N130	QCTVPl		GN				jisjk:311707		
 トテ	토테	N130	QPN		GN				jisjk:368162		
 トテナム	토튼햄	N130			GN				jisjk:369675		
 トト	토토	N130			GN				jisjk:367822		
@@ -73030,7 +73030,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ニチガス	니치가스	N110	VPl		GN				jisjk:52415		
 ニチガン	니치간	N110	VPl		GN				jisjk:52416		
 ニチコン	니치콘	N110	VPl		GN				jisjk:52417		
-ニチノー緑化	니치노료쓰카	N110	VPl		GN				jisjk:52418		
+ニチノー緑化	니치노료카	N110	VPl		GN				jisjk:52418		
 ニチハツ工業	니치하츠공업	N110	VPl		GN				jisjk:52419		
 ニチバン	니치반	N110	VPl		GN				jisjk:52420		
 ニチパック	니치이 팩	N130	QIDVGt		GN				jisjk:52421		
@@ -73484,7 +73484,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ヌニェス	누녜스	N130	QPN		GN				jisjk:370910		
 ヌネス	누네스	N130	QPN		GN				jisjk:366332		
 ヌノ	누노	N130	QPN		GN				jisjk:371449		
-ヌプキベツ	누뿌키베츠	I130	QCTVPl		GN				jisjk:318898		
+ヌプキベツ	누푸키베츠	I130	QCTVPl		GN				jisjk:318898		
 ヌマタ	누마타	N130	QIDVGt		GN				jisjk:52648		
 ヌマニウ	누마니우	N130	QIDVGt		GN				jisjk:52649		
 ヌルキー	널 키	N110			GN				jisjk:52650		
@@ -73831,7 +73831,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ノザキマテック	노자키마텍	N130	QIDVGt		GN				jisjk:52854		
 ノザキ建工	노자키건공	N110	VPl		GN				jisjk:52855		
 ノザワ	노자와	N110	VPl		GN				jisjk:52856		
-ノシャップ	노샷뿌	I130	QCTVPl		GN				jisjk:319306		
+ノシャップ	노샷푸	I130	QCTVPl		GN				jisjk:319306		
 ノジョンユン	노정윤	N130	QPN		GN				jisjk:368770		
 ノスタルジア	노스탤지어	N110			GN				jisjk:52858		
 ノスタルジック	환상적%D4@	G8U0			GN				jisjk:268315		
@@ -74641,7 +74641,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ハリド	하리드	N130	QPN		GN				jisjk:369965		
 ハリネズミ	고슴도치	N110	VHn		GN				jisjk:53168		
 ハリファクス	할리폭스	N130	QCT		GN				jisjk:356250		
-ハリファックスアソシェイツ	하리팍스어소세이쓰	N110	VPl		GN				jisjk:53169		
+ハリファックスアソシェイツ	핼리팩스 어소시에이츠	N110	VPl		GN				jisjk:53169		
 ハリマ	하리마	N110	VPl		GN				jisjk:53170		
 ハリマセラミック	하리마 세라믹	N130	QIDVGt		GN				jisjk:53171		
 ハリマビステム	하리마비스템	N130	QIDVGt		GN				jisjk:53172		
@@ -76730,7 +76730,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パルプ	펄프	N110	VMa		GN				jisjk:53883		
 パルプかす	펄프 찌꺼기	N110			GN				jisjk:359872		
 パルプマガジン	펄프 매거진	N110	VCm		GN				jisjk:132885		
-パルプ町	빠루뿌쵸	I130	QCTVPl		GN				jisjk:321888		
+パルプ町	파루푸초	I130	QCTVPl		GN				jisjk:321888		
 パルプ町一条	빠루뿌쵸1죠	I130	QCTVPl		GN				jisjk:321889		
 パルプ町二条	빠루푸쵸2죠	I130	QCTVPl		GN				jisjk:321890		
 パルマ	팔마	N130	VGt		SO				jisjk:115128		
@@ -80403,7 +80403,7 @@ ttt	ttt	K110			GN				jisjk:201744
 フルトゥカ	흐루투카	N130	QPN		GN				jisjk:371903		
 フルトレーラ	풀 트레일러	N110			GN				jisjk:55409		
 フルトレーラー	풀 트레일러	N110			GN				jisjk:113946		
-フルトンプロダクツ工業	후레톤프로다쿠쯔	N110	VPl		GN				jisjk:55410		
+フルトンプロダクツ工業	풀턴 프로덕츠 공업	N110	VPl		GN				jisjk:55410		
 フルドレス	정장	N110	VCp		GN				jisjk:133522		
 フルニエ	훌니에	N130	QPN		GN				jisjk:366749		
 フルネーム	풀네임	N110			GN				jisjk:114691		
@@ -82665,7 +82665,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ヘルタ・ベルリン	헤르타 베를린	N130			GN				jisjk:369306		
 ヘルダイブ	헬다이브	N110			GN				jisjk:56214		
 ヘルダー	헬더	N130	QPN		GN				jisjk:370155		
-ヘルツ	헤르쯔	N110		Ct	IT				jisjk:56215		
+ヘルツ	헤르츠	N110		Ct	IT				jisjk:56215		
 ヘルツェゴビナ	헤르체고비나	N130	QNNVPl		GN				jisjk:133974		
 ヘルツェンバイン	홀첸바인	N130	QPN		GN				jisjk:369618		
 ヘルツォーク	헬츠어크	N130	QPN		GN				jisjk:366012		
@@ -83992,7 +83992,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ホーバークラフト	호버크라프트	N110	VTwVTp		GN				jisjk:134179		
 ホープ	호프	N110			GN				jisjk:56455		
 ホーベル	호벨	N110			GN				jisjk:56456		
-ホーペイ	허뻬이	N110	VPl		GN				jisjk:56457		
+ホーペイ	허베이	N110	VPl		GN				jisjk:56457		
 ホーボールック	호보 룩	N110			GN				jisjk:56458		
 ホーマー	호메로스	N110	VHn		GN				jisjk:56459		
 ホーミング	호밍	N110			GN				jisjk:134180		
@@ -84343,7 +84343,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ボルタ電池	볼타전지	N130			GN				jisjk:56739		
 ボルダーリング	볼더링	N110	VRw		GN				jisjk:134406		
 ボルツマン	볼츠만	N110	QPN		GN				jisjk:56740		
-ボルツマン方程式	볼쯔만 방정식	N110			GN				jisjk:134407		
+ボルツマン方程式	볼츠만 방정식	N110			GN				jisjk:134407		
 ボルティモア	볼티모어	N110	VPl		GN				jisjk:134408		
 ボルテック	보루테크	N110	VPl		GN				jisjk:56743		
 ボルテックス	소용돌이	N110	VSs		GN				jisjk:134409		
@@ -84743,7 +84743,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ポピー	양귀비	N110	VPt		GN				jisjk:134478		
 ポプラ	파퓰러	N130			GN				jisjk:56880		
 ポプラの木	포플라 나무	N130	QAL		GN				jisjk:56881		
-ポプラ団地	뽀뿌라단치	I130	QCTVPl		GN				jisjk:328682		
+ポプラ団地	포플러 단지	I130	QCTVPl		GN				jisjk:328682		
 ポプリ	포푸리	N110	VPt		GN				jisjk:134481		
 ポプリン	포플린	N110	VCp		GN				jisjk:134482		
 ポペスク	포페스쿠	N130	QPN		GN				jisjk:371405		
@@ -85772,7 +85772,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マツダ	마츠다	N110	VGt		GN				jisjk:57285		
 マツダ	마츠다	N110			GN				jisjk:57286		
 マツダアクセサリーサービス	마츠다 엑서사리 서비스	N130	QIDVGt		GN				jisjk:57287		
-マツダシティズ	마쯔다시테즈	N110	VPl		GN				jisjk:57288		
+マツダシティズ	마츠다 시티즈	N110	VPl		GN				jisjk:57288		
 マツダスチール	마츠다 스틸	N130	QIDVGt		GN				jisjk:57289		
 マツダレンタリース	마츠다 렌트카	N130	QIDVGt		GN				jisjk:57290		
 マツダロジスティクスサービス	마츠다 로지스틱스 서비스	N130	QIDVGt		GN				jisjk:57291		
@@ -86907,7 +86907,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ミツバチ	꿀벌	N110	QAE		GN				jisjk:372229		
 ミツボシ	미츠보시	N110	VPl		GN				jisjk:57735		
 ミツマタ	삼지닥 나무	N110	QAN		GN				jisjk:363132		
-ミツミニューテク	미쯔미뉴테크	N110	VPl		GN				jisjk:57736		
+ミツミニューテク	미츠미 뉴테크	N110	VPl		GN				jisjk:57736		
 ミツミ電機	미츠미전기	N130	QIDVGt		GN				jisjk:57737		
 ミツヤ	미츠야	N130			GN				jisjk:106245		
 ミツワ	미츠와	N110			GN				jisjk:106226		
@@ -88652,7 +88652,7 @@ ttt	ttt	K110			GN				jisjk:201744
 モーメンタリ。 スイッチ	모멘터리 스위치	N110			GN				jisjk:113715		
 モーメント	모멘트	N110	UMe		GN				jisjk:58126		
 モーラ	모라	N130	QPN		GN				jisjk:367590		
-モーラップ	모랏뿌	I130	QCTVPl		GN				jisjk:334315		
+モーラップ	모랏푸	I130	QCTVPl		GN				jisjk:334315		
 モーラル	도덕	N110			GN				jisjk:58127		
 モーリシャス	모리셔스	N130	QNNVPl		GN				jisjk:58128		
 モーリス	모리스	N130	QPN		GN				jisjk:366123		
@@ -88766,7 +88766,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ヤノス	야노스	N130	QPN		GN				jisjk:371902		
 ヤノフスキ	야노프스키	N130	QPN		GN				jisjk:371355		
 ヤハウエ	야훼	N110	UClVHn		GN				jisjk:135250		
-ヤハギ緑化	야하기료쓰카	N110	VPl		GN				jisjk:58308		
+ヤハギ緑化	야하기료카	N110	VPl		GN				jisjk:58308		
 ヤバ	위험$AB@	H7U0			GN				jisjk:345036		
 ヤバイ	위험	N110			GN				jisjk:345031		
 ヤバネスポーツ	야바네 스포츠	N130	QIDVGt		GN				jisjk:58309		
@@ -94679,7 +94679,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一和天安	일화천안	K130	VGt		GN				jisjk:202457		
 一和天馬	일봐 천마	N130	VGt		GN				jisjk:368930		
 一品	일품	N110			GN				jisjk:210237		
-一品	잇뽀우	N130	QCTVPl		GN				jisjk:273126		
+一品	잇포	N130	QCTVPl		GN				jisjk:273126		
 一品を取	일품 요리를 &L4@	M428			GN				jisjk:144611		
 一品料理	일품 요리	N110			GN				jisjk:125944		
 一員	일원	N110	VHn		GN				jisjk:31520		
@@ -97016,7 +97016,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三ケ野	미츠가노	N130	QCTVPl		GN				jisjk:331000		
 三ケ野山	미카노야마	I130	QCTVPl		GN				jisjk:330277		
 三ッ星	밋보시	I110	QCT		GN				jisjk:72451		
-三ッ星コード	미쓰보시코드	I110	VGt		GN				jisjk:72452		
+三ッ星コード	미츠보시코드	I110	VGt		GN				jisjk:72452		
 三ッ林	미츠바야시	N130	VHnQPN	Wa	GN				jisjk:339538		
 三ッ輪商会	미츠와상회	I130	QIDVGt		GN				jisjk:72450		
 三ツワ理化学工業	미츠와 이화학공업	I130	QIDVGt		GN				jisjk:72453		
@@ -97211,7 +97211,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三井オートリース	미츠이 오토리스	I130	QIDVGt		GN				jisjk:72946		
 三井グリーンランド	미츠이 그린랜드	I130	QIDVGt		GN				jisjk:72947		
 三井コークス工業	미츠이코크스공업	I130	QIDVGt		GN				jisjk:72948		
-三井サイアナミツド	미츠사이아나미쯔도	I110	VGt		GN				jisjk:72949		
+三井サイアナミツド	미츠이 사이아나미드	I110	VGt		GN				jisjk:72949		
 三井セメントヒューム管	미츠이시멘트흄관	I130			GN				jisjk:107103		
 三井デザインテック	미츠이 디자인텍	I130	QIDVGt		GN				jisjk:72950		
 三井デュポンフロロケミカル	미츠이듀퐁프로로	I110	VGt		GN				jisjk:72951		
@@ -97316,7 +97316,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三井軽金属加工	미츠이 경금속가공	I130	QIDVGt		GN				jisjk:72961		
 三井農木	미츠이농림	I110	VGt		GN				jisjk:72971		
 三井農林	미츠이 농림	I130	QIDVGt		GN				jisjk:72970		
-三井造	미쓰이조선소	I110	VGt		GN				jisjk:73024		
+三井造	미츠이조선소	I110	VGt		GN				jisjk:73024		
 三井造船	미츠이 조선	I130	QIDVGt		GN				jisjk:73025		
 三井造船アイムコ	미츠이조선아이무코	I110	VGt		GN				jisjk:73026		
 三井造船エンジニアリング	미츠이 조선엔지니어링	I130	QIDVGt		GN				jisjk:73027		
@@ -97329,7 +97329,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三井里	삼정리	N130	QCT		GN				jisjk:375504		
 三井野原	미이노하라	I110	VGt		GN				jisjk:73015		
 三井金属エンジニアリング	미츠이 금속엔지니어링	I130	QIDVGt		GN				jisjk:72965		
-三井金属九州機工	미쯔이금속큐슈기	I110	VGt		GN				jisjk:72967		
+三井金属九州機工	미츠이금속큐슈기	I110	VGt		GN				jisjk:72967		
 三井金属鉱業	미츠이 금속광업	I130	QIDVGt		GN				jisjk:72966		
 三井鉱山	미츠이 광산	I130	QIDVGt		GN				jisjk:72964		
 三井陽子	미츠이 요우코	N130	VHn		GN				jisjk:226257		
@@ -100526,7 +100526,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上台町	카미다이쵸	N130	QCTVPl		GN				jisjk:284861		
 上右田	카미미기타	N130	QCTVPl		GN				jisjk:285689		
 上司	상사	N110	VHnUQf		GN				jisjk:25715		
-上司さん	가미쓰카씨	N120	VHn		GN				jisjk:169416		
+上司さん	상사님	N120	VHn		GN				jisjk:169416		
 上司たち	상사들	N110	VHn		GN				jisjk:151247		
 上司ら	상사들	N110	VHn		GN				jisjk:195270		
 上司小剣	가미츠카사 쇼켄	N110	VHn		GN				jisjk:213566		
@@ -101964,7 +101964,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上泉伊勢守	고이즈미 이세노카미	N130	VHn		GN				jisjk:214788		
 上泉町	카미즈미쵸	N130	QCTVPl		GN				jisjk:283554		
 上泉町	카미즈미마치	N130	QCTVPl		GN				jisjk:283555		
-上泉秀網	가미이즈미 히데쓰나	N110	VHn		GN				jisjk:229267		
+上泉秀網	가미이즈미 히데츠나	N110	VHn		GN				jisjk:229267		
 上泊	카미도마리	N130	QCTVPl		GN				jisjk:285107		
 上法	상지법학논집	N110	VBkVSwVPl		GN				jisjk:161388		
 上法	상지법학논집	N110	VBkVSwVPl		GN				jisjk:161389		
@@ -103006,9 +103006,9 @@ ttt	ttt	K110			GN				jisjk:201744
 上野工業	우에노공업	I110			GN				jisjk:109754		
 上野市	우에노시	N130	QCTVPl	Qq	GN				jisjk:274647		
 上野幌	카미놋포로	N130	QCTVPl		GN				jisjk:285323		
-上野幌一条	카미놋뽀로1죠	I130	QCTVPl		GN				jisjk:285324		
-上野幌三条	카미놋뽀로3죠	I130	QCTVPl		GN				jisjk:285326		
-上野幌二条	카미놋뽀로2죠	I130	QCTVPl		GN				jisjk:285325		
+上野幌一条	카미놋포로1죠	I130	QCTVPl		GN				jisjk:285324		
+上野幌三条	카미놋포로3죠	I130	QCTVPl		GN				jisjk:285326		
+上野幌二条	카미놋포로2죠	I130	QCTVPl		GN				jisjk:285325		
 上野彦馬	우에노 히코마	N110	VHn		GN				jisjk:211554		
 上野御所ノ内町	우에노고쇼노우치쵸	I130	QCTVPl		GN				jisjk:274644		
 上野新	우에노신	N130	QCTVPl		GN				jisjk:274650		
@@ -103246,7 +103246,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上香貫	카미카누키	N130	QCTVPl		GN				jisjk:283934		
 上馬	카미우마	N130	QCTVPl		GN				jisjk:283663		
 上馬伏	카미마부시	N130	QCTVPl		GN				jisjk:285677		
-上馬場	카미바츠빠	N130	QCTVPl		GN				jisjk:285429		
+上馬場	카미밧파	N130	QCTVPl		GN				jisjk:285429		
 上馬場	카미바바	N130	QCTVPl		GN				jisjk:285430		
 上馬場	카미밤바	N130	QCTVPl		GN				jisjk:285436		
 上馬寄	카미마이소우	N130	QCTVPl		GN				jisjk:285634		
@@ -103583,7 +103583,7 @@ ttt	ttt	K110			GN				jisjk:201744
 下ケ傍示	사게호우지	I130	QCTVPl		GN				jisjk:295872		
 下ケ戸	사게토	N130	QCTVPl		GN				jisjk:295867		
 下ケ橋	사게하시	N130	QCTVPl		GN				jisjk:295870		
-下コクネップ	시모코쿠넷뿌	I130	QCTVPl		GN				jisjk:299057		
+下コクネップ	시모코쿠넷푸	I130	QCTVPl		GN				jisjk:299057		
 下ザヤ	특정 품목이 싼 현상	N110			BZ				jisjk:352381		
 下シ沢	쿠다시자와	N130	QCTVPl		GN				jisjk:290644		
 下タノ沢	시타노사와	I130	QCTVPl		GN				jisjk:297567		
@@ -110531,7 +110531,7 @@ ttt	ttt	K110			GN				jisjk:201744
 中越	나카고에	N130	QPN		GN				jisjk:102516		
 中越	나카코시	N130	QCTVPl		GN				jisjk:313364		
 中越	나카고시	N130	QCTVPl		GN				jisjk:313392		
-中越パック	쥬에츠빠쿠	I110	VGt		GN				jisjk:84708		
+中越パック	주에츠 팩	I110	VGt		GN				jisjk:84708		
 中越パッケージ	나카코시 패키지	I130	VGt		PN				jisjk:84709		
 中越パニー	츄에츠파니	I110	VGt		GN				jisjk:84710		
 中越パルプ工業	나카코시 펄프공업	I130	VGt		PN				jisjk:84711		
@@ -112989,7 +112989,7 @@ ttt	ttt	K110			GN				jisjk:201744
 九十九曲峠	쿠쥬쿠마가리토게	I110	QCT		GN				jisjk:62667		
 九十九曲川	구주쿠마가리가와	N130	VPl		GN				jisjk:214396		
 九十九湾	츠쿠모완	N130	VPl		GN				jisjk:218014		
-九十九湾	쓰쿠모만	N110	VPl		GN				jisjk:243876		
+九十九湾	츠쿠모만	N110	VPl		GN				jisjk:243876		
 九十九町	츠쿠모쵸	I130	QCTVPl		GN				jisjk:309393		
 九十九谷	쿠쥬쿠타니	I110	QCT		GN				jisjk:62668		
 九十九里	쿠쥬쿠리	I130			GN				jisjk:108622		
@@ -113060,7 +113060,7 @@ ttt	ttt	K110			GN				jisjk:201744
 九州リオン	큐슈리옹	I130			GN				jisjk:108640		
 九州リースサービス	큐슈 리스서비스	I130	QIDVGt		GN				jisjk:62694		
 九州三菱電気	규슈 미츠비시 전기	N110	VBlVEl		GN				jisjk:150971		
-九州不ニサツシ	규슈후지사쓰시	I130			GN				jisjk:108621		
+九州不ニサツシ	규슈 후지 새시	I130			GN				jisjk:108621		
 九州不二サッシ	큐슈 후지 삿시	I130	QIDVGt		GN				jisjk:62706		
 九州乳業	큐슈 유업	I130	QIDVGt		GN				jisjk:62719		
 九州住宅工業	큐슈주택공업	I110	VGt		GN				jisjk:62730		
@@ -115376,7 +115376,7 @@ ttt	ttt	K110			GN				jisjk:201744
 五日市港	이츠카이치코우	I130	QCTVPl		GN				jisjk:273145		
 五日市町	이츠카이치쵸	I130	QCTVPl		GN				jisjk:273147		
 五日市緑町	이츠카이치미도리마치	I130	QCTVPl		GN				jisjk:273149		
-五日市行き	이쓰카이치행	N110			GN				jisjk:150532		
+五日市行き	이츠카이치행	N110			GN				jisjk:150532		
 五日市駅前	이츠카이치에키마에	I130	QCTVPl		GN				jisjk:273144		
 五日熱	오일열	N110	QHP		GN				jisjk:228571		
 五日町	이츠카마치	I110	QCT		GN				jisjk:78537		
@@ -130705,7 +130705,7 @@ ttt	ttt	K110			GN				jisjk:201744
 八王寺	하치오지	N130	QCTVPl		GN				jisjk:320412		
 八王寺町	하치오지쵸	I130	QCTVPl		GN				jisjk:320415		
 八王寺町	하치오지마치	I130	QCTVPl		GN				jisjk:320416		
-八甫	핫뽀우	N130	QCTVPl		GN				jisjk:320639		
+八甫	핫포	N130	QCTVPl		GN				jisjk:320639		
 八田	핫타	N130	QCT		GN				jisjk:37441		
 八田	하타	N130	QCTVPl		GN				jisjk:320247		
 八田	하츠타	N130	QCTVPl		GN				jisjk:320679		
@@ -130881,7 +130881,7 @@ ttt	ttt	K110			GN				jisjk:201744
 八軒屋町	하치켄야마치	I130	QCTVPl		GN				jisjk:320459		
 八軒町	하치켄쵸	N130	QCTVPl		GN				jisjk:320453		
 八軒町	하치켐마치	N130	QCTVPl		GN				jisjk:320456		
-八辺	얏뻬	N130	QCTVPl		GN				jisjk:335704		
+八辺	얏페	N130	QCTVPl		GN				jisjk:335704		
 八迫区	야사코구	N130	QCTVPl		GN				jisjk:335405		
 八通町	야토리쵸	N130	QCTVPl		GN				jisjk:335783		
 八進数	팔진수	I110		Ct	GN				jisjk:87715		
@@ -132813,7 +132813,7 @@ ttt	ttt	K110			GN				jisjk:201744
 内方折り返し部	안쪽 되접어꺽은 부분	N110			GN				jisjk:162210		
 内方新保町	우치카타심보마치	I130	QCTVPl		GN				jisjk:275356		
 内方町	우치카타쵸	N130	QCTVPl		GN				jisjk:275357		
-内日	우쓰이	N110	VPl		GN				jisjk:211699		
+内日	우츠이	N110	VPl		GN				jisjk:211699		
 内日上	우츠이카미	N130	QCTVPl		GN				jisjk:275555		
 内日下	우츠이시모	N130	QCTVPl		GN				jisjk:275557		
 内日角	우치히스미	N130	QCTVPl		GN				jisjk:275510		
@@ -132939,7 +132939,7 @@ ttt	ttt	K110			GN				jisjk:201744
 内田橋	우치다바시	N130	QCTVPl		GN				jisjk:275452		
 内田橋住宅	우치다바시 주택	I130	QIDVGt		GN				jisjk:64234		
 内田油圧機器工業	우치다 유압기기 공업	I130	QIDVGt		GN				jisjk:64239		
-内田清之助	우치다 세이노쓰케	N110	VHn		GN				jisjk:211678		
+内田清之助	우치다 세이노츠케	N110	VHn		GN				jisjk:211678		
 内田町	우치다쵸	N130	QCTVPl		GN				jisjk:275450		
 内田町	우치다마치	N130	QCTVPl		GN				jisjk:275454		
 内田百？	우치다  햐ㅅ켄	N110	VHn		GN				jisjk:211681		
@@ -133124,7 +133124,7 @@ ttt	ttt	K110			GN				jisjk:201744
 内部的	내부적	I110			GN				jisjk:64184		
 内部監査	내부 감사	N110	ULw	Hd	GN				jisjk:246864		
 内部経済	내부 경제	N110	VMo		GN				jisjk:246867		
-内部線	우쓰베선	N110	VPl		GN				jisjk:211708		
+内部線	우츠베선	N110	VPl		GN				jisjk:211708		
 内部者取引	내부자 거래	N110			BZ				jisjk:348027		
 内部者取引管理規則	내부자거래 관리규칙	N110	UMn		BZ				jisjk:362228		
 内部蓋	내부 뚜껑	N110			GN				jisjk:161837		
@@ -133290,7 +133290,7 @@ ttt	ttt	K110			GN				jisjk:201744
 円上町	엔죠쵸	N130	QCTVPl		GN				jisjk:276909		
 円井町	츠무라이마치	N130	QCTVPl		GN				jisjk:309953		
 円井義弘	츠무라이 요시히로	N130	VHn		GN				jisjk:225499		
-円仏産業	엔브쓰산업	I110	VGt		GN				jisjk:78152		
+円仏産業	엔부츠산업	I110	VGt		GN				jisjk:78152		
 円位	원위	N110			GN				jisjk:29127		
 円余り	엔정도	K110			GN				jisjk:103839		
 円価	엔가	N110			GN				jisjk:29120		
@@ -135568,7 +135568,7 @@ ttt	ttt	K110			GN				jisjk:201744
 切りきず	베인 상처	I110	VPl		GN				jisjk:83010		
 切りこ	파고 들어 &A1@	M435			GN				jisjk:94725		
 切りこまざ	잘게 &HW@	M431			GN				jisjk:94726		
-切りごたつ	붙박이 고타쓰	I110			GN				jisjk:83011		
+切りごたつ	붙박이 고타츠	I110			GN				jisjk:83011		
 切りそろえ	가지런히 &EG@	M437			GN				jisjk:94727		
 切りたんぽ	떡꼬치 구이	N110	VFd		GN				jisjk:150989		
 切りつけ	&CT@	M437	VSw		GN				jisjk:94728		
@@ -136317,7 +136317,7 @@ ttt	ttt	K110			GN				jisjk:201744
 初閣議	첫 각료회의	K110			GN				jisjk:115086		
 初陣	첫 출진	N110			GN				jisjk:35895		
 初雁興業	하츠카리 흥업	I130	VGt		PN				jisjk:86328		
-初雛	첫 히나마쓰리	N110		Hd	GN				jisjk:249846		
+初雛	첫 히나마츠리	N110		Hd	GN				jisjk:249846		
 初雪	첫눈	N110	VFrUMe		GN				jisjk:35880		
 初雪草	설악초	N110	VPt		GN				jisjk:249854		
 初電	첫전철	N110	VTp		GN				jisjk:235712		
@@ -137766,7 +137766,7 @@ ttt	ttt	K110			GN				jisjk:201744
 前衛美術	전위미술	I110			GN				jisjk:110788		
 前衛華道	전위 꽃꽂이	N110			GN				jisjk:239740		
 前表	조짐	N110	UTs		GN				jisjk:199866		
-前褌	마에미쓰	N110	VRw		GN				jisjk:251576		
+前褌	마에미츠	N110	VRw		GN				jisjk:251576		
 前西	마에니시	N130	QPN	Wa	GN				jisjk:10990		
 前触れ	예고	I110	UTs		GN				jisjk:82776		
 前言	전언	N110	UTs	Hd	GN				jisjk:32728		
@@ -140365,7 +140365,7 @@ ttt	ttt	K110			GN				jisjk:201744
 勝流	카츠 방식	N110			GN				jisjk:101317		
 勝浦	카츠우라	N130	QPN	Wa	GN				jisjk:27668		
 勝浦市	카츠라시	N130	QCTVPl	Qq	GN				jisjk:282451		
-勝浦市沖	가쓰우라시 앞바다	N120	VPl		GN				jisjk:168849		
+勝浦市沖	가츠우라시 앞바다	N120	VPl		GN				jisjk:168849		
 勝浦町	카추라쵸	N130	QCTVPl		GN				jisjk:282452		
 勝浦郡	카추라군	N130	QCTVPl		GN				jisjk:282450		
 勝海	카츠미	N130	QPN	WaWb	GN				jisjk:9892		
@@ -143654,7 +143654,7 @@ ttt	ttt	K110			GN				jisjk:201744
 十六夜清心	이자요이 세이신	N110	VHn		GN				jisjk:210913		
 十六大角豆	16대각두	N110	VPt		GN				jisjk:237046		
 十六島	웃푸루이	I110	QCT		GN				jisjk:77111		
-十六島町	우츠뿌루이쵸	I130	QCTVPl		GN				jisjk:275603		
+十六島町	우츠푸루이쵸	I130	QCTVPl		GN				jisjk:275603		
 十六所	쥬우로쿠센	N130	QCTVPl		GN				jisjk:302484		
 十六日	음력 16일 밤	N110	UMe		GN				jisjk:194608		
 十六日町	쥬우로쿠니치마치	I130	QCTVPl		GN				jisjk:302490		
@@ -151899,7 +151899,7 @@ ttt	ttt	K110			GN				jisjk:201744
 台付きお繕	두리반	N110	VPl		GN				jisjk:204390		
 台六町	다이로쿠쵸	N130	QCTVPl		GN				jisjk:308335		
 台割れ	대 붕괴	N110		Ct	GN				jisjk:362216		
-台北	타이뻬이	N130	QCT		GN				jisjk:19175		
+台北	타이베이	N130	QCT		GN				jisjk:19175		
 台北	대북	N110			GN				jisjk:19176		
 台十能	밑에 대가 달린 부삽	N110	VPe		GN				jisjk:242108		
 台原	다이노하라	N130	QCTVPl		GN				jisjk:308222		
@@ -152314,7 +152314,7 @@ ttt	ttt	K110			GN				jisjk:201744
 司会	사회	N110	VPl	Hd	GN				jisjk:25019		
 司会役	사회역	N110			GN				jisjk:186785		
 司会者	사회자	N110	VHn		GN				jisjk:186781		
-司召しの除目	쓰카사메시 지모쿠	N110			GN				jisjk:243759		
+司召しの除目	츠카사메시 지모쿠	N110			GN				jisjk:243759		
 司天台	사천대	I110			GN				jisjk:100654		
 司婚者	주례	I110	VHnUQf		GN				jisjk:71804		
 司宮	시노미야	N130	QPN	Wa	GN				jisjk:7719		
@@ -157238,7 +157238,7 @@ ttt	ttt	K110			GN				jisjk:201744
 唐津屋町	카라츠야쵸	I130	QCTVPl		GN				jisjk:286370		
 唐津市	카라츠시	N130	QCTVPl	Qq	GN				jisjk:286369		
 唐津湾	가라츠만	N110	VPl		GN				jisjk:229479		
-唐津焼	가라쓰 지역 도자기	N110			GN				jisjk:229478		
+唐津焼	가라츠 지역 도자기	N110			GN				jisjk:229478		
 唐津物	도자기	N110			GN				jisjk:229477		
 唐津郡	당진군	N130	QCT		GN				jisjk:375427		
 唐津魚市場	카라츠 어시장	I130	VBlVPlVGt		GN				jisjk:64808		
@@ -158987,7 +158987,7 @@ ttt	ttt	K110			GN				jisjk:201744
 四川料理	시센요리	N110	VFd		GN				jisjk:233860		
 四川盆地	시센 분지	N110	VPl		GN				jisjk:233859		
 四川目	요카와메	N130	QCTVPl		GN				jisjk:337379		
-四川省	쓰센성	I110	QCT		GN				jisjk:71895		
+四川省	쓰촨성	I110	QCT		GN				jisjk:71895		
 四川食品工業	시센식품공업	I110	VGt		GN				jisjk:71896		
 四巻	4권	N110			GN				jisjk:100588		
 四幅	네폭	N110			GN				jisjk:104816		
@@ -162505,7 +162505,7 @@ ttt	ttt	K110			GN				jisjk:201744
 坂月町	사카즈키쵸	N130	QCTVPl		GN				jisjk:295394		
 坂木	사카키	N130	QPN	Wa	GN				jisjk:13228		
 坂本	사카모토	N130	QPN	Wa	GN				jisjk:13231		
-坂本さん	사카모또씨	N110	VHn		GN				jisjk:184733		
+坂本さん	사카모토 씨	N110	VHn		GN				jisjk:184733		
 坂本デニム	사카모토데님	I110	VGt		GN				jisjk:87546		
 坂本倫城	사카모토 미치키	N130	VHn		GN				jisjk:224939		
 坂本商事	사카모토 상사	I130	VGt		PN				jisjk:87549		
@@ -163089,7 +163089,7 @@ ttt	ttt	K110			GN				jisjk:201744
 城あと	성터	I110	VPl		GN				jisjk:74444		
 城が山	시로가야마	N130	QCTVPl		GN				jisjk:301309		
 城が落ち	성이 함락&C6@	M427			GN				jisjk:136085		
-城ないまつり	성내 마쓰리	I110			GN				jisjk:74445		
+城ないまつり	성내 마츠리	I110			GN				jisjk:74445		
 城にこも	농성&AV@	M428			GN				jisjk:136089		
 城に立てこも	농성&AV@	M428			GN				jisjk:136090		
 城の下通	시로노시타도리	I130	QCTVPl		GN				jisjk:301359		
@@ -163404,7 +163404,7 @@ ttt	ttt	K110			GN				jisjk:201744
 城見クリスタルタワー	시로미쿠리스타루타와	I130	VBlVPl		GN				jisjk:339356		
 城見ナショナルタワー	시로미나쇼나루타와	I130	VBlVPl		GN				jisjk:339357		
 城見台	시로미다이	N130	QCTVPl		GN				jisjk:301378		
-城見松下IMPビル	시로미마츠시타이에무삐비루	I130	VBlVPl		GN				jisjk:339338		
+城見松下IMPビル	시로미 마츠시타 IMP 빌딩	I130	VBlVPl		GN				jisjk:339338		
 城見町	시로미쵸	N130	QCTVPl		GN				jisjk:301379		
 城見町	시로미마치	N130	QCTVPl		GN				jisjk:301382		
 城見通	시로미토리	N130	QCTVPl		GN				jisjk:301380		
@@ -163875,7 +163875,7 @@ ttt	ttt	K110			GN				jisjk:201744
 堀松建設工業	호리마츠건설공업	I110	VGt		GN				jisjk:63053		
 堀松町	호리마츠쵸	N130	QCTVPl		GN				jisjk:328261		
 堀柳女	호리류죠	N110	VHn		GN				jisjk:251109		
-堀株村	호리캇뿌무라	N130	QCTVPl		GN				jisjk:328193		
+堀株村	호리캇푸무라	N130	QCTVPl		GN				jisjk:328193		
 堀止南ノ丁	호리도메미나미노쵸	I130	QCTVPl		GN				jisjk:328234		
 堀止東	호리도메히가시	N130	QCTVPl		GN				jisjk:328233		
 堀止西	호리도메니시	N130	QCTVPl		GN				jisjk:328232		
@@ -165179,7 +165179,7 @@ ttt	ttt	K110			GN				jisjk:201744
 増大幅	증대폭	N110			BZ				jisjk:356372		
 増子	미시코	N130	QPN	Wb	GN				jisjk:11883		
 増子	마스코	N130	QPN	Wb	GN				jisjk:344553		
-増子工務店	마쓰코코무텐	I110	VGt		GN				jisjk:84893		
+増子工務店	마스코코무텐	I110	VGt		GN				jisjk:84893		
 増宮	마스노미야	N130	QPN	Wa	GN				jisjk:11874		
 増富	마츠토미	N130	VPl		GN				jisjk:221523		
 増富	마츠토미	N130	VPl		GN				jisjk:221524		
@@ -165193,7 +165193,7 @@ ttt	ttt	K110			GN				jisjk:201744
 増岡	마스오카	N130	QPN	Wa	GN				jisjk:11868		
 増岡組	마스오카구미	I130	VGt		PN				jisjk:84886		
 増島	마스지마	N130	QPN	Wa	GN				jisjk:11875		
-増島土地開発	마쓰지마토지개발	I110	VGt		GN				jisjk:84888		
+増島土地開発	마스지마토지개발	I110	VGt		GN				jisjk:84888		
 増島町	마스시마쵸	N130	QCTVPl		GN				jisjk:329227		
 増島製作所	마스지마제작소	I110	VGt		GN				jisjk:84887		
 増川	마스카와	N130	QPN	Wa	GN				jisjk:11886		
@@ -165274,7 +165274,7 @@ ttt	ttt	K110			GN				jisjk:201744
 増田盛	마스다 사카리	I110	QPN		GN				jisjk:84896		
 増田石油	마스다 석유	I130	VGt		PN				jisjk:84895		
 増田稔	마스다 미노루	N130	VHn		GN				jisjk:226142		
-増田組	마쓰다구미	I110	QCT		GN				jisjk:84900		
+増田組	마스다구미	I110	QCT		GN				jisjk:84900		
 増田耕児	마스다 코우지	N130	VHn		GN				jisjk:226135		
 増田製作所	마스다 제작소	I130	VGt		PN				jisjk:84899		
 増田製粉所	마스다 제분소	I130	VGt		PN				jisjk:84898		
@@ -166048,8 +166048,8 @@ ttt	ttt	K110			GN				jisjk:201744
 壺井	츠보이	N130	QCTVPl		GN				jisjk:309890		
 壺井栄	츠보이사카에	N110	VHn		GN				jisjk:244067		
 壺井繁治	츠보이 시게지	N110	VHn		GN				jisjk:244068		
-壺切りの剣	쓰보키리 검	N110			GN				jisjk:244076		
-壺坂寺	쓰보사카절	N110	VBlUCl		GN				jisjk:244078		
+壺切りの剣	츠보키리 검	N110			GN				jisjk:244076		
+壺坂寺	츠보사카절	N110	VBlUCl		GN				jisjk:244078		
 壺坂霊験記	츠보사카레이겐키	N110	UArVBl		GN				jisjk:244079		
 壺屋	츠보야	N130	QCTVPl		GN				jisjk:309921		
 壺屋町	츠보야쵸	N130	QCTVPl		GN				jisjk:309922		
@@ -168372,13 +168372,13 @@ ttt	ttt	K110			GN				jisjk:201744
 大伴牛養	오오토모노 우시카이	N110	VHn		GN				jisjk:212291		
 大伴狭手彦	오오토모노 사데히코	N110	VHn		GN				jisjk:212300		
 大伴田主	오오토모노 다누시	N110	VHn		GN				jisjk:212304		
-大伴田村大嬢	오오토모노타무라노 오오이라쓰	N110	VHn		GN				jisjk:212306	0000000000000000000000000000000000000000000000000000000000000000403f403f3a1b470f4c143a474654490c4c14df403f403f3f33490c414d47004e3131300056486e00506c00447200466400436c000000000000007100710071006800000000000000000000000000474e000000000000000000000000502b0c3c	
+大伴田村大嬢	오오토모노타무라노 오오이라츠	N110	VHn		GN				jisjk:212306	0000000000000000000000000000000000000000000000000000000000000000403f403f3a1b470f4c143a474654490c4c14df403f403f3f33490c414d47004e3131300056486e00506c00447200466400436c000000000000007100710071006800000000000000000000000000474e000000000000000000000000502b0c3c	
 大伴益立	오오토모노 마스타테	N110	VHn		GN				jisjk:212312		
 大伴磐	오오토모노 이와	N110	VHn		GN				jisjk:212290		
 大伴稲公	오오토모노 이나기미	N110	VHn		GN				jisjk:212288		
 大伴継人	오오토모노 츠기히토	N110	VHn		GN				jisjk:212307		
 大伴道足	오오토모노 미치타리	N110	VHn		GN				jisjk:212314		
-大伴郎女	오오토모노 이라쓰메	N110	VHn		GN				jisjk:212289		
+大伴郎女	오오토모노 이라츠메	N110	VHn		GN				jisjk:212289		
 大伴部博麻	오오토모베노 하카마	N110	VHn		GN				jisjk:212320		
 大伴金村	오오토모노 가나무라	N110	VHn		GN				jisjk:212293		
 大伴長徳	오오토모노 나가토코	N110	VHn		GN				jisjk:212308		
@@ -168481,7 +168481,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大倉甲	다이구라코우	N130	QCTVPl		GN				jisjk:307939		
 大倉町	오쿠라쵸	N130	QCTVPl		GN				jisjk:277643		
 大倉種材	오오쿠라노 다네키	N110	VHn		GN				jisjk:212129		
-大倉笠山	오오쿠라 기쓰잔	N110	VHn		GN				jisjk:212132		
+大倉笠山	오오쿠라 기츠잔	N110	VHn		GN				jisjk:212132		
 大倉紙パルプ商事	오쿠라 종이펄프상사	I130	QIDVGt		GN				jisjk:65580		
 大倉製作所	오쿠라제작소	I110	VGt		GN				jisjk:65579		
 大倉谷	오쿠라타니	N130	QCTVPl		GN				jisjk:277637		
@@ -171202,7 +171202,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大洋コンクリート	타이요 콘크리트	I130	QIDVGt		GN				jisjk:65349		
 大洋シーフード	타이요 씨푸드	I130	QIDVGt		GN				jisjk:65350		
 大洋ハウス	다이요하우스	I110	VGt		GN				jisjk:65351		
-大洋パッケージング	다이요빠케진구	I110	VGt		GN				jisjk:65352		
+大洋パッケージング	다이요 패키징	I110	VGt		GN				jisjk:65352		
 大洋ペットフード	타이요오 애완동물용 사료	I130	QIDVGt		GN				jisjk:65353		
 大洋化学工業	다이요화학공업	I110	VGt		GN				jisjk:65373		
 大洋化成	타이요 화성	I130	QIDVGt		GN				jisjk:65372		
@@ -171795,7 +171795,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大砂川	오사가와	N130	QCTVPl		GN				jisjk:277758		
 大研化学工業	다이켄 화학공업	I130	QIDVGt		GN				jisjk:65389		
 大砲	대포	N110	VTw		GN				jisjk:19067		
-大砲万右衛門	오오즈쓰 만에몬	N110	VHn		GN				jisjk:212186		
+大砲万右衛門	오오즈츠 만에몬	N110	VHn		GN				jisjk:212186		
 大破	대파	N110		Hd	GN				jisjk:19059		
 大硯洞	대연동	N130	QCT		GN				jisjk:375430		
 大碓皇子	오오우스노 미코	N110	VHn		GN				jisjk:212023		
@@ -173522,7 +173522,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大鼓踊り	다이코 춤	N110	UAr	Hd	GN				jisjk:240843		
 大鼻岬	오오바나사키	I110	QCT		GN				jisjk:65196		
 大龍	오타츠	N130	QCTVPl		GN				jisjk:278055		
-大？娘	오오누노 이라쓰메	N110	VHn		GN				jisjk:212353		
+大？娘	오오누노 이라츠메	N110	VHn		GN				jisjk:212353		
 天	하늘	N110	VPl		GN				jisjk:116072		
 天	천	N110		On	GN				jisjk:259090		
 天から	처음부터	E311			GN				jisjk:1999		
@@ -175010,7 +175010,7 @@ ttt	ttt	K110			GN				jisjk:201744
 失地回復	실지회복	I110			GN				jisjk:107432		
 失墜	실추	N110		Hd	GN				jisjk:28120		
 失対	실업대책	N110	VMo		GN				jisjk:234060		
-失工業	데쯔야공업	I110	VGt		GN				jisjk:76999		
+失工業	데츠야공업	I110	VGt		GN				jisjk:76999		
 失当	부당%A1@	G8U0			GN				jisjk:3294		
 失当	부당	N110		Hd	GN				jisjk:187860		
 失念	깜빡잊음	N110			GN				jisjk:101495		
@@ -178782,7 +178782,7 @@ ttt	ttt	K110			GN				jisjk:201744
 安乗坤	안승곤	N130	QPN		GN				jisjk:208419		
 安乗崎	아노리자키	I110	QCT		GN				jisjk:77384		
 安二郎	야스지로우	N130	QPN	Wb	GN				jisjk:357051		
-安井	야쓰이	N110			GN				jisjk:28443		
+安井	야스이	N110			GN				jisjk:28443		
 安井	야스이	N130	QCTVPl		GN				jisjk:335496		
 安井てつ	야스이테츠	N110	VHn		GN				jisjk:254153		
 安井久治	야스이 히사하루	N130	VHn		GN				jisjk:226415		
@@ -179306,7 +179306,7 @@ ttt	ttt	K110			GN				jisjk:201744
 安比	아피	N110			GN				jisjk:101653		
 安比	앗피	N130	QCTVPl		GN				jisjk:270172		
 安比奈新田	아이나신덴	I130	QCTVPl		GN				jisjk:268753		
-安比総合開発	아쓰비종합개발	I110	VGt		GN				jisjk:77378		
+安比総合開発	앗피종합개발	I110	VGt		GN				jisjk:77378		
 安毛	아타게	N130	QCTVPl		GN				jisjk:270120		
 安気	근심 걱정 %B4@	G8U0			GN				jisjk:3315		
 安気配	약세	N110			BZ				jisjk:360559		
@@ -183391,7 +183391,7 @@ ttt	ttt	K110			GN				jisjk:201744
 富樫	토가시	N130	VHnQPN	Wa	GN				jisjk:339491		
 富樫政親	도가시 마사치카	N130	VHn		GN				jisjk:218303		
 富樫泰高	도가시 야스타카	N130	VHn		GN				jisjk:218304		
-富武士	톳뿌시	N130	QCTVPl		GN				jisjk:311696		
+富武士	톳푸시	N130	QCTVPl		GN				jisjk:311696		
 富民	부민	N110	VHn		GN				jisjk:24194		
 富永	토미나가	N130	QPN	Wa	GN				jisjk:100003		
 富永仲基	도미나가 나카모토	N130	VHn		GN				jisjk:218506		
@@ -184646,7 +184646,7 @@ ttt	ttt	K110			GN				jisjk:201744
 対顧客電信売相場	대고객 전신환 매도율	N110			BZ				jisjk:363733		
 対顧客電信買相場	대고객 전신환 매입률	N110			BZ				jisjk:363734		
 対馬	대마도	N130	QCT		GN				jisjk:19114		
-対馬国	쓰시마	N110	VPl		GN				jisjk:243910		
+対馬国	츠시마	N110	VPl		GN				jisjk:243910		
 対馬小路	츠마쇼지	I130	QCTVPl		GN				jisjk:309938		
 対馬山猫	쓰시마 야생고양이	N110	VAm		GN				jisjk:243913		
 対馬島	대마도	I110	QCT		GN				jisjk:65895		
@@ -186433,7 +186433,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小川町	코가와쵸	N130	QCTVPl		GN				jisjk:293047		
 小川町	코가와마치	N130	QCTVPl		GN				jisjk:293054		
 小川畜産食品	오가와 축산식품	I130	QIDVGt		GN				jisjk:75130		
-小川破笠	오가와 하리쓰	N110	VHn		GN				jisjk:212648		
+小川破笠	오가와 하리츠	N110	VHn		GN				jisjk:212648		
 小川秀樹	오가와 히데키	N130	VHn		GN				jisjk:224372		
 小川笙船	오가와 쇼센	N110	VHn		GN				jisjk:212642		
 小川署	오가와서	N120	VPl		GN				jisjk:165043		
@@ -189362,7 +189362,7 @@ ttt	ttt	K110			GN				jisjk:201744
 尾崎町	오자키쵸	N130	QCTVPl		GN				jisjk:279875		
 尾崎町	오자키마치	N130	QCTVPl		GN				jisjk:279878		
 尾崎直政	오자키 나오마사	N110	VHn		GN				jisjk:212815		
-尾崎秀実	오자키 호쓰미	N110	VHn		GN				jisjk:212817		
+尾崎秀実	오자키 호츠미	N110	VHn		GN				jisjk:212817		
 尾崎紅葉	오자키 고요	I110	QPN		GN				jisjk:69361		
 尾崎繁美	오자키시게미	N130	QPN		GN				jisjk:99674		
 尾崎織マーク	오자키오리마쿠	I110	VPl		GN				jisjk:69360		
@@ -191228,7 +191228,7 @@ ttt	ttt	K110			GN				jisjk:201744
 山玉町	야마다마마치	N130	QCTVPl		GN				jisjk:336361		
 山王	산노우	N130	QCTVPl		GN				jisjk:296759		
 山王セラミックス	산노세라믹스	I110	VGt		GN				jisjk:72265		
-山王パークタワー	산노우빠쿠타와	I130	VBlVPl		GN				jisjk:339354		
+山王パークタワー	산노 파크 타워	I130	VBlVPl		GN				jisjk:339354		
 山王一実神道	산왕일실신도	N110	UCl		GN				jisjk:233157		
 山王下	산노시타	N130	VPl		GN				jisjk:215599		
 山王下	산노시타	N130	VPl		GN				jisjk:215600		
@@ -191807,7 +191807,7 @@ ttt	ttt	K110			GN				jisjk:201744
 山陵町	미사사기쵸	N130	QCTVPl		GN				jisjk:330439		
 山陽	산요오	N130	QCT		GN				jisjk:25419		
 山陽ステーション開発	산요스테션개발	I110	VGt		GN				jisjk:72244		
-山陽チップ工業	산요칫뿌공업	I110	VGt		GN				jisjk:72245		
+山陽チップ工業	산요 칩 공업	I110	VGt		GN				jisjk:72245		
 山陽プレコン	산요프레콘	I110	VGt		GN				jisjk:72246		
 山陽ロード工業	산요로드공업	I130			GN				jisjk:107823		
 山陽住宅	산요주택	I110	VGt		GN				jisjk:72256		
@@ -193282,7 +193282,7 @@ ttt	ttt	K110			GN				jisjk:201744
 島並	시마나미	N130	QCTVPl		GN				jisjk:298149		
 島中	시마쥬우	N130	QCTVPl		GN				jisjk:298113		
 島中	시마나카	N130	QCTVPl		GN				jisjk:298148		
-島中さん	시마나까씨	N110	VHn		GN				jisjk:188510		
+島中さん	시마나카 씨	N110	VHn		GN				jisjk:188510		
 島久	시마히사	N130	QPN		GN				jisjk:98304		
 島之内	시마노우치	N130	VPl		GN				jisjk:215956		
 島之内	시마노우치	N130	VPl		GN				jisjk:215957		
@@ -194110,8 +194110,8 @@ ttt	ttt	K110			GN				jisjk:201744
 巌城	이와키	N130	QCTVPl		GN				jisjk:274197		
 巌存	엄존	N110		Hd	GN				jisjk:179422		
 巌封	엄봉	N110		Hd	GN				jisjk:179525		
-巌島	이쓰쿠도	N110	VPl		GN				jisjk:211223		
-巌島	이쓰쿠도	N110	VPl		GN				jisjk:211224		
+巌島	이츠쿠시마	N110	VPl		GN				jisjk:211223		
+巌島	이츠쿠시마	N110	VPl		GN				jisjk:211224		
 巌島神社	이츠쿠시마 신사	N110	VBl		GN				jisjk:228576		
 巌手	이와테	N130	VPl		GN				jisjk:28524		
 巌探	엄탐	N110		Hd	GN				jisjk:179437		
@@ -204583,7 +204583,7 @@ ttt	ttt	K110			GN				jisjk:201744
 徒然	무료%A1@	G8U0			GN				jisjk:140908		
 徒然たる	따분한	E0H0	SFl		GN				jisjk:123573		
 徒然なる	무료한	E0H0			GN				jisjk:123561		
-徒然草	쓰레즈레구사	N110	VBkVSw		GN				jisjk:244236		
+徒然草	츠레즈레구사	N110	VBkVSw		GN				jisjk:244236		
 徒町	오카치마치	N130	QCTVPl		GN				jisjk:279182		
 徒町	카치마치	N130	QCTVPl		GN				jisjk:282433		
 徒町川	오카치마치	N130	QCTVPl		GN				jisjk:279183		
@@ -208637,7 +208637,7 @@ ttt	ttt	K110			GN				jisjk:201744
 恵比寿化成	에비스화성	I110	VGt		GN				jisjk:89043		
 恵比寿南	에비스미나미	I130	QCTVPl		GN				jisjk:276812		
 恵比寿喜田	에비스키타	I130	QCTVPl		GN				jisjk:276779		
-恵比寿恵比寿ガーデンプレイス	에비스에비스가덴뿌레이스	I130	VBlVPl		GN				jisjk:339365		
+恵比寿恵比寿ガーデンプレイス	에비스 에비스 가든 플레이스	I130	VBlVPl		GN				jisjk:339365		
 恵比寿町	에비스쵸	I130	QCTVPl		GN				jisjk:276787		
 恵比寿町	에비스마치	I130	QCTVPl		GN				jisjk:276805		
 恵比寿西	에비스니시	I130	QCTVPl		GN				jisjk:276794		
@@ -212034,8 +212034,8 @@ ttt	ttt	K110			GN				jisjk:201744
 扇ノ山	오우기노센	I110	QCT		GN				jisjk:74333		
 扇ヶ浜	오기가하마	N110	VPl		GN				jisjk:211975		
 扇ヶ浜	오기가하마	N110	VPl		GN				jisjk:211976		
-扇ヶ谷	오기가야쓰	N110	VPl		GN				jisjk:211977		
-扇ヶ谷	오기가야쓰	N110	VPl		GN				jisjk:211978		
+扇ヶ谷	오기가야츠	N110	VPl		GN				jisjk:211977		
+扇ヶ谷	오기가야츠	N110	VPl		GN				jisjk:211978		
 扇働的	선동적	N110	SFl		GN				jisjk:199211		
 扇元	오기모토	N130	QPN	Wa	GN				jisjk:8729		
 扇動	선동	N110		Hd	GN				jisjk:26311		
@@ -214637,7 +214637,7 @@ ttt	ttt	K110			GN				jisjk:201744
 押岡	오시오카	N130	QCTVPl		GN				jisjk:279895		
 押川	오시카와	N130	QCTVPl		GN				jisjk:279908		
 押川	오시가와	N130	QCTVPl		GN				jisjk:279911		
-押帯	오쇼츠뿌	N130	QCTVPl		GN				jisjk:279985		
+押帯	오쇼츠푸	N130	QCTVPl		GN				jisjk:279985		
 押平	오시나라	N130	QCTVPl		GN				jisjk:279940		
 押廻	오시마와시	N130	QCTVPl		GN				jisjk:279973		
 押当て	눌러&C5@	M447			GN				jisjk:145885		
@@ -223132,7 +223132,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日ノ口	히노쿠치	N130	QCTVPl		GN				jisjk:324563		
 日ノ宮町	히노미야쵸	I130	QCTVPl		GN				jisjk:324653		
 日ノ尾峠	히노오토게	I110	VPl		GN				jisjk:80501		
-日ノ岡ホッパラ町	히노카홋빠라쵸	I130	QCTVPl		GN				jisjk:324536		
+日ノ岡ホッパラ町	히노오카 홋파라초	I130	QCTVPl		GN				jisjk:324536		
 日ノ岡一切経谷町	히노카잇사이쿄다니쵸	I130	QCTVPl		GN				jisjk:324529		
 日ノ岡坂脇町	히노카사카와키쵸	I130	QCTVPl		GN				jisjk:324532		
 日ノ岡堤谷町	히노카츠츠미다니쵸	I130	QCTVPl		GN				jisjk:324534		
@@ -223772,7 +223772,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日本アーバーエーカー	일본아바에카	I110	VPl		GN				jisjk:80750		
 日本アーム	일본 암	I130	VGt		PN				jisjk:80751		
 日本イコス	니혼이코스	I110	VPl		GN				jisjk:80780		
-日本イツトリウム	일본이쯔토리움	I110	VPl		GN				jisjk:80781		
+日本イツトリウム	일본 이트륨	I110	VPl		GN				jisjk:80781		
 日本イトン工業	일본 이톤 공업	I130	VGt		PN				jisjk:80782		
 日本インコム	일본 인콤	I130	VGt		PN				jisjk:80783		
 日本インシュレーション	일본 인슈레손	I130	VGt		PN				jisjk:80784		
@@ -223831,7 +223831,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日本カタン	일본 카탄	I130	VGt		PN				jisjk:80839		
 日本カニゼン	일본카니젠	I110	VPl		GN				jisjk:80840		
 日本カラリング	일본 카라링	I130	VGt		PN				jisjk:80841		
-日本カルパツク	일본 칼파쯔크	I130	VGt		PN				jisjk:80842		
+日本カルパツク	일본 칼팩	I130	VGt		PN				jisjk:80842		
 日本カードセンター	일본 카드 센터	I130	VGt		PN				jisjk:80831		
 日本カーバイド工業	일본 카바이드 공업	I130	VGt		PN				jisjk:80832		
 日本カーフェリー	일본 카 페리	I130	VGt		PN				jisjk:80833		
@@ -224072,7 +224072,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日本プレシジョンサーキッツ	일본 푸레시 존사킷츠	I130	VGt		PN				jisjk:81059		
 日本プロサッカーリーグ	일본 프로축구 리그	N110			SO				jisjk:372268		
 日本プロテン	일본 푸로텐	I130	VGt		PN				jisjk:81060		
-日本ヘルス工業	일본 헬쓰 공업	I130	VGt		PN				jisjk:81061		
+日本ヘルス工業	일본 헬스 공업	I130	VGt		PN				jisjk:81061		
 日本ベクトン	일본 베크톤	I130	VGt		PN				jisjk:81064		
 日本ベターリビング	니혼베타리빙구	I110	VPl		GN				jisjk:81065		
 日本ベニア	일본 베니아	I130	VGt		PN				jisjk:81066		
@@ -224974,7 +224974,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日産	닛산	N130	XXXVGt		GN				jisjk:267112		
 日産アルティア	닛산 알티아	I130	VGt		PN				jisjk:81564		
 日産カーリース	닛산 카 리스	I130	VGt		PN				jisjk:81565		
-日産クレジツト	닛산 쿠레지쯔트	I130	VGt		PN				jisjk:81566		
+日産クレジツト	닛산 크레디트	I130	VGt		PN				jisjk:81566		
 日産コンツェルン	닛산 콘체른	N110	VBlVMo		GN				jisjk:247977		
 日産コーエー	닛산 코에	I130	VGt		PN				jisjk:81567		
 日産サニー大分販売	닛산사니오이타판매	I110	VPl		GN				jisjk:81570		
@@ -225390,7 +225390,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日辰	일진	N110			GN				jisjk:31680		
 日辰貿易	닛신 무역	I130	VGt		PN				jisjk:81686		
 日農	일본 농민 조합	N110	VBl		GN				jisjk:247940		
-日辺	닛뻬	N130	QCTVPl		GN				jisjk:318529		
+日辺	닛페	N130	QCTVPl		GN				jisjk:318529		
 日近	히지카이	N130	QCTVPl		GN				jisjk:324240		
 日通	닛츠	N110	VPl		GN				jisjk:31690		
 日通不動産	닛츠 부동산	I130	VGt		PN				jisjk:81841		
@@ -230563,7 +230563,7 @@ ttt	ttt	K110			GN				jisjk:201744
 月数	월수	N110			GN				jisjk:159508		
 月日	세월	N110	UMe		GN				jisjk:30519		
 月日は流れ	세월은 &EA@	M427			GN				jisjk:140570		
-月日貝	쓰키히 조개	N110	VAm		GN				jisjk:243822		
+月日貝	츠키히 조개	N110	VAm		GN				jisjk:243822		
 月旦評	인물 비평	N110	UTs		GN				jisjk:179001		
 月明	밝은 달빛	N110	VSs		GN				jisjk:179020		
 月明かり	달빛	N110	VSs		GN				jisjk:153524		
@@ -230596,7 +230596,7 @@ ttt	ttt	K110			GN				jisjk:201744
 月橋町	츠키하시마치	N130	QCTVPl		GN				jisjk:309309		
 月次	월차	N110			GN				jisjk:30522		
 月次	츠키나미	N130	QCTVPl		GN				jisjk:309280		
-月次の祭	쓰키나미노축제	N110	VBl		GN				jisjk:243810		
+月次の祭	츠키나미노축제	N110	VBl		GN				jisjk:243810		
 月次報告	월례 보고	N110			GN				jisjk:179015		
 月次損益計算書	월차 손익 계산서	K110			BZ				jisjk:355942		
 月次総平均法	월차 총평균법	N110	UMn		BZ				jisjk:355943		
@@ -238115,12 +238115,12 @@ ttt	ttt	K110			GN				jisjk:201744
 東本郷	히가시홍고우	N130	QCTVPl		GN				jisjk:323715		
 東本郷町	히가시홍고우쵸	I130	QCTVPl		GN				jisjk:323716		
 東本郷通	히가시홍고우도리	I130	QCTVPl		GN				jisjk:323717		
-東札幌一条	히가시삿뽀로1죠	I130	QCTVPl		GN				jisjk:322937		
-東札幌三条	히가시삿뽀로3죠	I130	QCTVPl		GN				jisjk:322939		
-東札幌二条	히가시삿뽀로2죠	I130	QCTVPl		GN				jisjk:322938		
-東札幌五条	히가시삿뽀로5죠	I130	QCTVPl		GN				jisjk:322941		
-東札幌六条	히가시삿뽀로6죠	I130	QCTVPl		GN				jisjk:322942		
-東札幌四条	히가시삿뽀로4죠	I130	QCTVPl		GN				jisjk:322940		
+東札幌一条	히가시삿포로1죠	I130	QCTVPl		GN				jisjk:322937		
+東札幌三条	히가시삿포로3죠	I130	QCTVPl		GN				jisjk:322939		
+東札幌二条	히가시삿포로2죠	I130	QCTVPl		GN				jisjk:322938		
+東札幌五条	히가시삿포로5죠	I130	QCTVPl		GN				jisjk:322941		
+東札幌六条	히가시삿포로6죠	I130	QCTVPl		GN				jisjk:322942		
+東札幌四条	히가시삿포로4죠	I130	QCTVPl		GN				jisjk:322940		
 東朱雀町	히가시슈쟈쿠쵸	I130	QCTVPl		GN				jisjk:323007		
 東材木町	히가시자이모쿠쵸	I130	QCTVPl		GN				jisjk:322960		
 東村	아즈마무라	N130	QCTVPl		GN				jisjk:270042		
@@ -239329,7 +239329,7 @@ ttt	ttt	K110			GN				jisjk:201744
 東邦レオ	도호레오	I110	VGt		GN				jisjk:66820		
 東邦レマック	토호 레막	I130	QIDVGt		GN				jisjk:66821		
 東邦レーヨン	토호 레이온	I130	QIDVGt		GN				jisjk:66819		
-東邦ワラパルプ	도호와라빠루뿌	I110	VGt		GN				jisjk:66822		
+東邦ワラパルプ	도호 와라 펄프	I110	VGt		GN				jisjk:66822		
 東邦・大信金庫	동방. 대신금고	N110			GN				jisjk:373411		
 東邦亜鉛	토호 아연	I130	QIDVGt		GN				jisjk:66839		
 東邦化学工業	토호 화학공업	I130	QIDVGt		GN				jisjk:66854		
@@ -245203,7 +245203,7 @@ ttt	ttt	K110			GN				jisjk:201744
 梨地	칠공예	N110	UAr		GN				jisjk:247216		
 梨地織り	크레이프	N110			GN				jisjk:247217		
 梨壺	나시츠보	N110	VBl		GN				jisjk:247218		
-梨壼の五人	나시쓰보의 오인	N110	VHn		GN				jisjk:247219		
+梨壼の五人	나시츠보의 오인	N110	VHn		GN				jisjk:247219		
 梨大	이대	N130	QSTVGt		GN				jisjk:374047		
 梨子	나시고	N130	QCTVPl		GN				jisjk:315133		
 梨子ケ平	나시가다이라	I130	QCTVPl		GN				jisjk:315122		
@@ -249768,7 +249768,7 @@ ttt	ttt	K110			GN				jisjk:201744
 歌枕	시의 소재가 된 명소	N110	VPl		GN				jisjk:126806		
 歌柄	시의 품격	N110			GN				jisjk:126792		
 歌格	시의품격	N110			GN				jisjk:167336		
-歌棄	우타스쓰	N110	QCT		GN				jisjk:14382		
+歌棄	우타스츠	N110	QCT		GN				jisjk:14382		
 歌棄町	우타스츠쵸	N130	QCTVPl		GN				jisjk:275281		
 歌橋	우타하시	N110	VHn		GN				jisjk:211660		
 歌歌い	가수	N110	VHnUAq		GN				jisjk:126786		
@@ -252533,7 +252533,7 @@ ttt	ttt	K110			GN				jisjk:201744
 毛谷	케다니	N130	QCTVPl		GN				jisjk:291838		
 毛谷村六助	게야무라 로쿠스케	N130	VHn		GN				jisjk:214710		
 毛賀	케가	N130	QCTVPl		GN				jisjk:291809		
-毛越寺	모우쓰사	N110	VBlUCl		GN				jisjk:253607		
+毛越寺	모우츠사	N110	VBlUCl		GN				jisjk:253607		
 毛野新町	케노심마치	I130	QCTVPl		GN				jisjk:291861		
 毛針	제물 낚시	N110	VRw		GN				jisjk:178077		
 毛長堀	게나가보리	I110	QCT		GN				jisjk:68852		
@@ -257629,7 +257629,7 @@ ttt	ttt	K110			GN				jisjk:201744
 沿岸航路船	연안 항로선	I110			GN				jisjk:109046		
 沿岸警備隊	연안경비대	I110			GN				jisjk:109044		
 沿岸貿易	연안무역	I110			GN				jisjk:109047		
-沿杖立	쓰에타테	I110	QCT		GN				jisjk:78229		
+沿杖立	츠에타테	I110	QCT		GN				jisjk:78229		
 沿海	연해	N110	VPl		GN				jisjk:29295		
 沿海地方	연해 지방	N110	VPl		GN				jisjk:127691		
 沿海漁業	연해어업	I110			GN				jisjk:109043		
@@ -259131,7 +259131,7 @@ ttt	ttt	K110			GN				jisjk:201744
 津井浦	츠이우라	N130	QCTVPl		GN				jisjk:309093		
 津保川台	츠보카와다이	I130	QCTVPl		GN				jisjk:309902		
 津信用金庫	세츠신용금고	I110			GN				jisjk:110258		
-津信用金庫	세쓰쓰신용금고	I110			GN				jisjk:110259		
+津信用金庫	츠 신용금고	I110			GN				jisjk:110259		
 津倉町	츠쿠라쵸	N130	QCTVPl		GN				jisjk:309399		
 津免多貝	고둥	N110	VAm		GN				jisjk:244131		
 津具	츠구	N130	QCT		GN				jisjk:34918		
@@ -259214,7 +259214,7 @@ ttt	ttt	K110			GN				jisjk:201744
 津崎	츠자키	N130	VPl		GN				jisjk:218019		
 津崎	츠자키	N130	VPl		GN				jisjk:218020		
 津崎	츠자키	N130	QCTVPl		GN				jisjk:309426		
-津崎勝利	쯔쨔끼  카쯔토시	K110			GN				jisjk:115185		
+津崎勝利	츠자키 카츠토시	K110			GN				jisjk:115185		
 津川	츠가와	N130	QPN	Wa	GN				jisjk:309208		
 津川	츠가와	N130	QCTVPl		GN				jisjk:339484		
 津川町	츠가와쵸	N130	QCTVPl		GN				jisjk:309210		
@@ -260438,7 +260438,7 @@ ttt	ttt	K110			GN				jisjk:201744
 浜松ホトニクス	하마마츠 허트닉스	I130	QIDVGt		GN				jisjk:71685		
 浜松中納言物語	하마마츠중납언 이야기	N110	VBkVSw		GN				jisjk:250091		
 浜松五十鈴	하마마츠 이스즈	I130	QIDVGt		GN				jisjk:71688		
-浜松凧合戦	하마마쓰 연싸움	N110			GN				jisjk:250090		
+浜松凧合戦	하마마츠 연싸움	N110			GN				jisjk:250090		
 浜松医科大学	하마마츠 의과대학	N110	VBl		GN				jisjk:250089		
 浜松原町	하마마츠바라쵸	I130	QCTVPl		GN				jisjk:321293		
 浜松市	하마마츠시	N130	QCTVPl	Qq	GN				jisjk:321291		
@@ -265238,7 +265238,7 @@ ttt	ttt	K110			GN				jisjk:201744
 源法寺	겜보우지	N130	QCTVPl		GN				jisjk:292026		
 源流	원류	N110	VPl		GN				jisjk:30453		
 源清田	겐세이다	N130	QCTVPl		GN				jisjk:291990		
-源満仲	미나모토노 미쓰나카	N110	VHn		GN				jisjk:252579		
+源満仲	미나모토노 미츠나카	N110	VHn		GN				jisjk:252579		
 源為朝	미나모토노 다메토모	N110	VHn		GN				jisjk:252567		
 源為義	미나모토노 다메요시	N110	VHn		GN				jisjk:252568		
 源田	겐다	N130			GN				jisjk:104829		
@@ -267550,7 +267550,7 @@ ttt	ttt	K110			GN				jisjk:201744
 炙	&CX@	M448			GN				jisjk:138398		
 炬口	타케노쿠치	N130	QCTVPl		GN				jisjk:306421		
 炬火	횃불	N110	VPe		GN				jisjk:174020		
-炬燵櫓	고타쓰 틀	N110			GN				jisjk:231151	00000000000000000000000000000000000000000000000000000000000000004f5d4831df3f58405edf4c0a4f12df3f33452d3f44df414540134b3ddf39004e3131300000486e00506c00447200466400436c000000000000006400710071006800000000000000000000000000474e000000000000000000000000f62b0c3c	
+炬燵櫓	고타츠 틀	N110			GN				jisjk:231151	00000000000000000000000000000000000000000000000000000000000000004f5d4831df3f58405edf4c0a4f12df3f33452d3f44df414540134b3ddf39004e3131300000486e00506c00447200466400436c000000000000006400710071006800000000000000000000000000474e000000000000000000000000f62b0c3c	
 炭	숯	N110	XXX		GN				jisjk:116015		
 炭	탄	N110	VMd	Z7	GN				jisjk:116016		
 炭	탄	N110		On	GN				jisjk:259041		
@@ -268352,7 +268352,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無水酸	무수산	N110			GN				jisjk:253121		
 無汗症	무한증	N110	QHP		GN				jisjk:252932		
 無法	무법	N110			GN				jisjk:22096		
-無法松の一生	무호마쓰의 일생	N110	VBkVSw		GN				jisjk:253213		
+無法松の一生	무호마츠의 일생	N110	VBkVSw		GN				jisjk:253213		
 無法者	무법자	N110	VHn		GN				jisjk:155489		
 無洗米	씻지않은 쌀	I110			GN				jisjk:69132		
 無派	무소속	N110			GN				jisjk:22151		
@@ -284738,7 +284738,7 @@ ttt	ttt	K110			GN				jisjk:201744
 石坂	이시자카	N130	QPN	Wa	GN				jisjk:8624		
 石坂	이시사카	N130	QCTVPl		GN				jisjk:272088		
 石坂公成	이시자카키미시게	N110	VHn		GN				jisjk:228136		
-石坂公歴	이시자카 마사쓰구	N110	VHn		GN				jisjk:211013		
+石坂公歴	이시자카 마사츠구	N110	VHn		GN				jisjk:211013		
 石坂商店	이시사카상점	I110			GN				jisjk:110404		
 石坂宗哲	이시자카 소테츠	N110	VHn		GN				jisjk:211009		
 石坂川	이시자카가와	N130	QCTVPl		GN				jisjk:272093		
@@ -284915,7 +284915,7 @@ ttt	ttt	K110			GN				jisjk:201744
 石川亮平	우카와 료헤이	N130	VHn		GN				jisjk:224180		
 石川依平	이시카와 요리히라	N110	VHn		GN				jisjk:210976		
 石川光明	이시카와 고메이	N110	VHn		GN				jisjk:210941		
-石川刀子娘	이시카와노토네노 이라쓰메	N110	VHn		GN				jisjk:210969		
+石川刀子娘	이시카와노토네노 이라츠메	N110	VHn		GN				jisjk:210969		
 石川利光	이시카와 도시미츠	I110	QPN		GN				jisjk:74230		
 石川千代松	이시카와 지요마츠	I110	QPN		GN				jisjk:74238		
 石川半山	이시카와 한잔	N110	VHn		GN				jisjk:210972		
@@ -284925,7 +284925,7 @@ ttt	ttt	K110			GN				jisjk:201744
 石川啄木	이시카와 다쿠보쿠	I110	QPN		GN				jisjk:74239		
 石川善兵衛	이시카와 젠베에	N110	VHn		GN				jisjk:210952		
 石川善則	이시카와 요시노리	N130	VHn		GN				jisjk:223998		
-石川大？娘	이시카와노오오누노 이라쓰메	N110	VHn		GN				jisjk:210967		
+石川大？娘	이시카와노오오누노 이라츠메	N110	VHn		GN				jisjk:210967		
 石川安貞	이시카와 안테이	N110	VHn		GN				jisjk:210935		
 石川寅治	이시카와 도라지	N110	VHn		GN				jisjk:210963		
 石川島プラント	이시카와지마플랜트	I110	VGt		GN				jisjk:74213		
@@ -287964,7 +287964,7 @@ ttt	ttt	K110			GN				jisjk:201744
 神戸清雄	칸베 스가오	N130	QPN		GN				jisjk:364912		
 神戸港	코베항	I130			GN				jisjk:101486		
 神戸港地方	코우베코우지카타	I130	QCTVPl		GN				jisjk:292691		
-神戸燐寸	고베마쯔치	I110	VGt		GN				jisjk:76925		
+神戸燐寸	고베 성냥	I110	VGt		GN				jisjk:76925		
 神戸生糸	코베 생사	I130	QIDVGt		GN				jisjk:76928		
 神戸生糾	고베키토	I110	VGt		GN				jisjk:76927		
 神戸甲北	코베 록코산 북쪽	N110			GN				jisjk:101474		
@@ -294757,7 +294757,7 @@ ttt	ttt	K110			GN				jisjk:201744
 筆墨	필묵	N110	VSw		GN				jisjk:38132		
 筆山	히츠잔	N110	QCT		GN				jisjk:38137		
 筆山町	히츠잔쵸	N130	QCTVPl		GN				jisjk:324356		
-筆幡	쓰바타	N110	VPl		GN				jisjk:244052		
+筆幡	츠바타	N110	VPl		GN				jisjk:244052		
 筆影山	후데가케야마	I110	QCT		GN				jisjk:88247		
 筆染	후데소메	N130	QCTVPl		GN				jisjk:326728		
 筆法	필법	N110			GN				jisjk:38133		
@@ -307714,7 +307714,7 @@ ttt	ttt	K110			GN				jisjk:201744
 致死	치사	N110			GN				jisjk:36538		
 致死遺伝子	치사 유전자	N110			GN				jisjk:242622		
 致死量	치사량	I110		Ct	GN				jisjk:86926		
-致渚滑	쇼고쯔	I110	QCT		GN				jisjk:86927		
+致渚滑	쇼코츠	I110	QCT		GN				jisjk:86927		
 致知	치지	N110			GN				jisjk:242677		
 致良知	치량지	N110			GN				jisjk:243587		
 致道	치도	N110			GN				jisjk:103181		
@@ -314700,7 +314700,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蕃山町	반잔쵸	N130	QCTVPl		GN				jisjk:321829		
 蕃昌	반쇼	N130	QCTVPl		GN				jisjk:321831		
 蕃鎭	번진	N110	UAq		GN				jisjk:204989		
-蕉翁	마쓰오 바쇼	N110	VHn		GN				jisjk:235069		
+蕉翁	마츠오 바쇼	N110	VHn		GN				jisjk:235069		
 蕉門	쇼몬	N110	VHn		GN				jisjk:235478		
 蕉門十哲	쇼몬 십철	N110	VHn		GN				jisjk:235480		
 蕉風	쇼후	N110			GN				jisjk:235441		
@@ -315009,12 +315009,12 @@ ttt	ttt	K110			GN				jisjk:201744
 薩摩芋	고구마	I110	QAL		GN				jisjk:72434		
 薩摩菊	과꽃	N110	VPt		GN				jisjk:232581		
 薩摩藩	사츠마 번	N110	VBl		GN				jisjk:232589		
-薩摩蝋燭	사쓰마 초	N110			GN				jisjk:232592		
+薩摩蝋燭	사츠마 초	N110			GN				jisjk:232592		
 薩摩郡	사츠마군	N130	QCTVPl		GN				jisjk:296174		
 薩摩酒造	사츠마 주조	I130	QIDVGt		GN				jisjk:72435		
 薩摩錦蛾	나방의 일종	N110	VAm		GN				jisjk:232585		
 薩摩隼人	사츠마 무사	N110	VHn		GN				jisjk:232588		
-薩摩馬	사쓰마 말	N110	VAm		GN				jisjk:232579		
+薩摩馬	사츠마 말	N110	VAm		GN				jisjk:232579		
 薩日内	삿피나이	N130	QPN	Wa	GN				jisjk:72437		
 薩田	사츠다	N130	QPN	Wa	GN				jisjk:8004		
 薩英戦争	살영 전쟁	N110	VTw		GN				jisjk:232568		
@@ -316762,7 +316762,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蛇腹	주름 상자	N110	VPe		GN				jisjk:25293		
 蛇腹切り	장식물	N110			GN				jisjk:236887		
 蛇苔	이끼	N110	VPt		GN				jisjk:236875		
-蛇菰	쓰치토리모치	N110	VPt		GN				jisjk:243967		
+蛇菰	츠치토리모치	N110	VPt		GN				jisjk:243967		
 蛇行	사행	N110		Hd	GN				jisjk:25295		
 蛇行形状	에스자 형상	I110			GN				jisjk:72063		
 蛇行状	사행상	N110			GN				jisjk:164357		
@@ -320963,12 +320963,12 @@ ttt	ttt	K110			GN				jisjk:201744
 西新宿新宿エルタワー	니시신쥬쿠신쥬쿠에루타와	I130	VBlVPl		GN				jisjk:339349		
 西新宿新宿スクエアタワー	니시신쥬쿠신쥬쿠스쿠에아타와	I130	VBlVPl		GN				jisjk:339350		
 西新宿新宿センタービル	니시신쥬쿠신쥬쿠센타비루	I130	VBlVPl		GN				jisjk:339343		
-西新宿新宿パークタワー	니시신쥬쿠신쥬쿠빠쿠타와	I130	VBlVPl		GN				jisjk:339351		
+西新宿新宿パークタワー	니시신주쿠 신주쿠 파크 타워	I130	VBlVPl		GN				jisjk:339351		
 西新宿新宿モノリス	니시신쥬쿠신쥬쿠모노리스	I130	VBlVPl		GN				jisjk:339346		
 西新宿新宿三井ビル	니시신쥬쿠신쥬쿠미츠이비루	I130	VBlVPl		GN				jisjk:339345		
 西新宿新宿住友ビル	니시신쥬쿠신쥬쿠스미토모비루	I130	VBlVPl		GN				jisjk:339342		
 西新宿新宿野村ビル	니시신쥬쿠신쥬쿠노무라비루	I130	VBlVPl		GN				jisjk:339344		
-西新宿東京オペラシティ	니시신쥬쿠토우쿄오뻬라시테	I130	VBlVPl		GN				jisjk:339347		
+西新宿東京オペラシティ	니시신주쿠 도쿄 오페라 시티	I130	VBlVPl		GN				jisjk:339347		
 西新小岩	니시싱코이와	I130	QCTVPl		GN				jisjk:317277		
 西新居	니시아라이	N130	QCTVPl		GN				jisjk:316294		
 西新屋敷上之町	니시신야시키카미노쵸	I130	QCTVPl		GN				jisjk:317298		
@@ -321709,7 +321709,7 @@ ttt	ttt	K110			GN				jisjk:201744
 西田直養	니시다 나오카이	N130	VHn		GN				jisjk:219166		
 西田真基	니시다 마사키	N130	VHn		GN				jisjk:225761		
 西田税	니시다 미츠구	N130	VHn		GN				jisjk:219169		
-西田税	니시다 미쓰기	N110	VHn		GN				jisjk:247807		
+西田税	니시다 미츠기	N110	VHn		GN				jisjk:247807		
 西田美昭	니시다 요시아키	N130	VHn		GN				jisjk:225763		
 西田育代司	니시다 이쿠요시	N130	VHn		GN				jisjk:225760		
 西田谷	니시타야	N130	QPN	Wa	GN				jisjk:355209		
@@ -328075,7 +328075,7 @@ ttt	ttt	K110			GN				jisjk:201744
 豆酘	츠츠	N130	QCTVPl		GN				jisjk:309591		
 豆酘内院	츠츠나인	I130	QCTVPl		GN				jisjk:309637		
 豆酘瀬	츠츠세	N130	QCTVPl		GN				jisjk:309635		
-豆酸	쓰쓰	N110	VPl		GN				jisjk:19767		
+豆酸	츠츠	N110	VPl		GN				jisjk:19767		
 豆金柑	귤나무	N110	VPt		GN				jisjk:251955		
 豆鉄砲	장난감 대나무 총	I110	VRw		GN				jisjk:67416		
 豆電球	소형 백열전구	N110	VEl		GN				jisjk:251967		
@@ -330838,7 +330838,7 @@ ttt	ttt	K110			GN				jisjk:201744
 赤坂	아카사카	N130	QCTVPl		GN				jisjk:269097		
 赤坂	아카자카	N130	QCTVPl		GN				jisjk:343898		
 赤坂アークヒルズ	아카사카쿠히루즈	I130	VBlVPl		GN				jisjk:339334		
-赤坂パークビル	아카사카빠쿠비루	I130	VBlVPl		GN				jisjk:339336		
+赤坂パークビル	아카사카 파크 빌딩	I130	VBlVPl		GN				jisjk:339336		
 赤坂中野	아카사카나카노	I130	QCTVPl		GN				jisjk:269082		
 赤坂免	아카사카멘	N130	QCTVPl		GN				jisjk:269089		
 赤坂南新町	아카사카미나미심마치	I130	QCTVPl		GN				jisjk:269088		
@@ -331069,7 +331069,7 @@ ttt	ttt	K110			GN				jisjk:201744
 赤松	소나무	N110	QAL		GN				jisjk:32557		
 赤松	아카마츠	N130	QCTVPl		GN				jisjk:269221		
 赤松	아카마츠	N130	VHnQPN	Wa	GN				jisjk:339374		
-赤松さん	아카마쓰씨	N120	VHn		GN				jisjk:124015		
+赤松さん	아카마츠씨	N120	VHn		GN				jisjk:124015		
 赤松克麿	아카마츠 카츠마로	N110	VHn		GN				jisjk:226960		
 赤松則村	아카마츠 노리무라	N110	VHn		GN				jisjk:226961		
 赤松台	아카마츠다이	N130	QCTVPl		GN				jisjk:269222		
@@ -332185,7 +332185,7 @@ ttt	ttt	K110			GN				jisjk:201744
 足利義稙	아시카가 요시타네	N110	VHn		GN				jisjk:227225		
 足利義視	아시카가 요시미	N110	VHn		GN				jisjk:227232		
 足利義詮	아시카가 요시아키라	N110	VHn		GN				jisjk:227221		
-足利義輝	아시카가 요시테쓰	N110	VHn		GN				jisjk:227226		
+足利義輝	아시카가 요시테루	N110	VHn		GN				jisjk:227226		
 足利義量	아시카가 요시카즈	N110	VHn		GN				jisjk:227222		
 足利銀行	아시카가 은행	I130	VGt		PN				jisjk:83818		
 足助	아스케	N110	QCT		GN				jisjk:33784		
@@ -333448,7 +333448,7 @@ ttt	ttt	K110			GN				jisjk:201744
 軽合金	경합금	I110	VSn		GN				jisjk:61176		
 軽味	가벼움	N110			GN				jisjk:169769		
 軽器	가벼운 그릇	N110			GN				jisjk:96581		
-軽大娘皇女	가루노오이라쓰메노 히메미코	N110	VHn		GN				jisjk:213693		
+軽大娘皇女	가루노오이라츠메노 히메미코	N110	VHn		GN				jisjk:213693		
 軽妙	경묘%A1@	G8U0			GN				jisjk:120801		
 軽子	짐꾼	N110	UAq		GN				jisjk:15537		
 軽小	경소%A1@	G8U0			GN				jisjk:147409		
@@ -340959,7 +340959,7 @@ ttt	ttt	K110			GN				jisjk:201744
 重重し	정중$AB@	H7U0			GN				jisjk:5933		
 重重し	무게가 $FB@	H7N0	SFl		GN				jisjk:120028		
 重野	시게노	N130	QPN	Wa	GN				jisjk:11831		
-重野安繹	시게노 야스쓰구	N110	VHn		GN				jisjk:233647		
+重野安繹	시게노 야스츠구	N110	VHn		GN				jisjk:233647		
 重量	중량	N110			GN				jisjk:34406		
 重量あたり	중량당	N110			GN				jisjk:163505		
 重量キログラム	중량 킬로그램	N110			GN				jisjk:237031		
@@ -343528,7 +343528,7 @@ ttt	ttt	K110			GN				jisjk:201744
 釣魚台	조교다이	N130	VPl		GN				jisjk:217960		
 釦の木	미국 플라터나스	N110	VPt		GN				jisjk:257288		
 釧北	센포쿠	N110	QCT		GN				jisjk:35615		
-釧御前	쓰루기고젠	I110	QCT		GN				jisjk:86117		
+釧御前	츠루기고젠	I110	QCT		GN				jisjk:86117		
 釧望台	셈보우다이	N130	QCTVPl		GN				jisjk:304429		
 釧根食糧	센콘식량	I110	VGt		GN				jisjk:86112		
 釧石工業	센세키공업	I110	VGt		GN				jisjk:86116		
@@ -344986,7 +344986,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鍵之手町	카기노테쵸	I130	QCTVPl		GN				jisjk:281502		
 鍵孔	열쇠 구멍	N110	VPe		GN				jisjk:167540		
 鍵小野	카기오노	N130	QPN	Wa	GN				jisjk:355104		
-鍵屋ノ	가기야노쓰지	I110	QCT		GN				jisjk:60771		
+鍵屋ノ	가기야노츠지	I110	QCT		GN				jisjk:60771		
 鍵屋ノ辻	가기야노츠지	N110	VPl		GN				jisjk:213081		
 鍵屋中町	카기야나카마치	I130	QCTVPl		GN				jisjk:281508		
 鍵屋五兵衛	가기야 고헤에	N110	VHn		GN				jisjk:213079		
@@ -352573,7 +352573,7 @@ ttt	ttt	K110			GN				jisjk:201744
 霧中	무중	N110			GN				jisjk:22178		
 霧中信号	무중 신호	N110			GN				jisjk:253164		
 霧垂ｫ	분무기	N110	VPe		GN				jisjk:174443		
-霧多布	기리타쓰부	I110	QCT		GN				jisjk:69206		
+霧多布	기리타츠부	I110	QCT		GN				jisjk:69206		
 霧多布東一条	키리탓푸히가시1죠	I130	QCTVPl		GN				jisjk:289992		
 霧多布東三条	키리탓푸히가시3죠	I130	QCTVPl		GN				jisjk:289994		
 霧多布東二条	키리탓푸히가시2죠	I130	QCTVPl		GN				jisjk:289993		
@@ -357520,7 +357520,7 @@ ttt	ttt	K110			GN				jisjk:201744
 香取	카토리	N130	QCTVPl	Qq	GN				jisjk:287269		
 香取町	카토리쵸	N130	QCTVPl		GN				jisjk:282637		
 香取神宮	가토리 신사	N110	VBlUCl		GN				jisjk:229005		
-香取秀真	가토리 호쓰마	N110	VHn		GN				jisjk:229007		
+香取秀真	가토리 호츠마	N110	VHn		GN				jisjk:229007		
 香取郡	카토리군	N130	QCTVPl		GN				jisjk:282636		
 香合	향그릇	N110	VPe		GN				jisjk:180228		
 香合新田	코우고우신덴	I130	QCTVPl		GN				jisjk:292229		
@@ -361494,13 +361494,13 @@ ttt	ttt	K110			GN				jisjk:201744
 鰯江	이와시에	N130	QCTVPl		GN				jisjk:274265		
 鰯浜	이와시하마	N130	QCTVPl		GN				jisjk:274270		
 鰰.燭魚	도루묵	N110	VAm		GN				jisjk:249629		
-鰹	가다랭이	N110	VAmVFd		GN				jisjk:168852		
+鰹	가다랑어	N110	VAmVFd		GN				jisjk:168852		
 鰹	견	N110		On	GN				jisjk:259595		
 鰹の冠	고깔해파리	N110	VAm		GN				jisjk:228941		
 鰹の鳥帽子	고깔해파리	N110	VAm		GN				jisjk:228940		
 鰹木	통나무    	N110			GN				jisjk:228938		
 鰹淵	카츠오부치	N130	QCTVPl		GN				jisjk:282458		
-鰹節	가다랑어로 만든 포	N110	VCp		GN				jisjk:228955		
+鰹節	가츠오부시	N110	VCp		GN				jisjk:228955		
 鰹節虫	가츠오부시무시	N110	VAm		GN				jisjk:228942		
 鰹鳥	가츠오도리	N110	VAm		GN				jisjk:228939		
 鰺	전갱이	N110	VAm		GN				jisjk:124414		
@@ -362574,7 +362574,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鶴崎コスモス団地	츠루사키코스모스단치	I130	QCTVPl		GN				jisjk:310069		
 鶴崎共同動力	츠루사키 공동동력	I130	VGt		PN				jisjk:88465		
 鶴崎海陸運輸	츠루사키 해륙운수	I130	VGt		PN				jisjk:88466		
-鶴崎踊り	쓰루사키춤	N110	UAr		GN				jisjk:244199		
+鶴崎踊り	츠루사키춤	N110	UAr		GN				jisjk:244199		
 鶴川	츠루카와	N110	QCT		GN				jisjk:38438		
 鶴川	츠루가와	N130	QCTVPl		GN				jisjk:310051		
 鶴川内	츠루가와우치	N130	QCTVPl		GN				jisjk:310052		

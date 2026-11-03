@@ -5979,7 +5979,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツェツェ蠅	체체파리	N110			GN						ツェツェバエ	w:5972
 ツェティニェ	체티녜 지방 자치제	N110			GN						ツェティニェ	w:5973
 ツェペリナイ	체펠리나이	N110	VFd		GN						ツェペリナイ	w:5974
-ツシマヤマネコ	쓰시마삵	N110			GN						ツシマヤマネコ	w:5975
+ツシマヤマネコ	츠시마삵	N110			GN						ツシマヤマネコ	w:5975
 ツチノコ	츠치노코	N110			GN						ツチノコ	w:5976
 ツッコ	태클을 &L1@	M425			GN				xxx		ツッコむ	w:26788
 ツッコ	처&MK@	M425			GN						ツッコむ	w:5977
@@ -18537,7 +18537,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 櫃まぶし	히츠마부시	N110	VFd		GN						ひつまぶし	w:18494
 櫓	망루	N110			GN				xxx llm			w:18495
 櫓	가설 무대	N110	VBl		GN				llm		やぐら	w:18496
-櫓	고타쓰 틀	N110	VPe		GN				llm		やぐら	w:18497
+櫓	고타츠 틀	N110	VPe		GN				llm		やぐら	w:18497
 櫨の木	검양옻나무	N110			GN						はぜのき	w:18498
 欄杆	난간	N110			GN				llm		らんかん	w:18499
 欄檻	난간	N110			GN				llm		らんかん	w:18500
@@ -19546,7 +19546,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 炒飯	볶음밥	N110	VFd		GN						チャーハン	w:19503
 炙	&J2@	M428			GN				xxx	1	あぶる	w:19504
 炬燵	코타츠	N110	VPe		GN				llm		こたつ	w:19505
-炬燵やぐら	고타쓰 틀	N110	VPe		GN				llm		こたつやぐら	w:19506
+炬燵やぐら	고타츠 틀	N110	VPe		GN				llm		こたつやぐら	w:19506
 炭そ病	콜레토트리쿰속	N110	UTi		GN						たんそびょう	w:19507
 炭団	숯덩이	N110			GN						たどん	w:19508
 炭礦	탄광	N110			GN						たんこう	w:19509
@@ -22598,8 +22598,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 花いかだ	헬윙기아속	N110			GN						はないかだ	w:22552
 花いちもんめ	하나이치몬메	N110	VHn		GN				llm		はないちもんめ	w:22553
 花かご	꽃바구니	N110			GN						はなかご	w:22554
-花かつお	가쓰오부시	N110	VFd		GN				llm		はなかつお	w:22555
-花がつお	가쓰오부시	N110	VFd		GN				llm		はながつお	w:22556
+花かつお	가츠오부시	N110	VFd		GN				llm		はなかつお	w:22555
+花がつお	가츠오부시	N110	VFd		GN				llm		はながつお	w:22556
 花ざかり	만개	N110	UMe	Tm	GN				xxx llm		はなざかり	w:22557
 花ざかり	한창때	N110	UMe	Tm	GN				llm		はなざかり	w:22558
 花ざかり	전성기	N110	UMe	Tm	GN				llm		はなざかり	w:22559
@@ -27440,3 +27440,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 イケる口	잘하는 편	N110			GN			LEX-4566: お酒はイケる口ですか 술은 잘하는 편입니까			いけるくち	w:32403
 頼み事	부탁	N110			GN			LEX-4569: ちょっとした頼み事がある 작은 부탁이 있다			たのみごと	w:32404
 半狂乱	반쯤 미친 상태	N110			GN			LEX-4569: 半狂乱で暴れる 반쯤 미친 상태로 날뛰다			はんきょうらん	w:32405
+たつや	타츠야	N130	QPNVHn	Wb	GN			LEX-4590: たつやが言った 타츠야가 말했다			たつや	w:32500
+ねっこ	뿌리	N110	VPt		GN			LEX-4590: ねっこを掘る 뿌리를 판다			ねっこ	w:32501
+鬘	가발	N110			GN			LEX-4590: かつらを被る 가발을 쓴다			かつら	w:32502
