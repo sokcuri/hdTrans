@@ -1,0 +1,32 @@
+# 규칙: GRM-3350, LEX-3852, LEX-3853, GRM-1
+rule	input	expected	kind	layer
+analysis:causative-passive-of-su-causative	夢の中で、何度も通わされた道だ。	꿈속에서, 몇 번이나 다니게 된 길이다.	fix	analysis
+analysis:causative-passive-of-su-causative	今日のカナをみて、そんなことを思わされた。	오늘의 가나를 보고, 그런 것을 생각하게 되었다.	fix	analysis
+analysis:causative-passive-of-su-causative	こんな細かい動作の一つからも、つくづく整った容姿だと思わされてしまう。	has:용모라고 생각하게 되어버린다	fix	analysis
+analysis:causative-passive-of-su-causative	いつもこんなことを言わされ、そんなことをやらされているのだろうか。	has:이런 말을 하게 되고,	fix	analysis
+analysis:causative-passive-of-su-causative	気持ちと逆のことを昨日言わされたから、だそうだ。	has:어제 말하게 되었으니까,	fix	analysis
+analysis:causative-passive-of-su-causative	キスしようとする燎を叱って、好きって言わされて、寝た。	has:좋아한다고 말하게 되어,	fix	analysis
+analysis:causative-passive-of-su-causative	「ちょっと……っ！　それじゃ、私、無駄に卑猥なこと言わされただけじゃない……っ！」	has:외설스러운 말 하게 됐을 뿐	fix	analysis
+analysis:causative-passive-of-su-causative	「あのさ、ひょっとして……いじめっ子に罰ゲームで言わされてたりする？	has:때문에 억지로	fix	analysis
+analysis:causative-passive-of-su-causative	元の人間でもない限り迷わされてしまうような場所なのだろう。	has:헤매게 되어버리는	fix	analysis
+analysis:causative-passive-of-su-causative	言わされている……だけ	has:말하게 되고 있는	fix	analysis
+analysis:causative-passive-of-su-causative	・・・・・まさか、大河選手に毎日、言わされているのでしょうか？	has:말하게 되고 있는 걸까요	fix	analysis
+analysis:causative-passive-of-su-causative	これではＹＥＳと言っているのと同じだった。	이것으로는 YES라고 말하는 것과 같았다.	keep	analysis
+analysis:causative-passive-of-su-causative	「な、何を言っているんだ、お前は」	「무, 무슨 소리야, 너는」	keep	analysis
+analysis:causative-passive-of-su-causative	踏み込むなと言われた。	발을 들이지 말라고 했다.	keep	analysis
+analysis:causative-passive-of-su-causative	真帆を迷わせているのは、俺だ。	마호를 헤매게 하고 있는 것은, 나다.	keep	analysis
+dict:jisjk:147927	先輩に無理やり飲まされて	선배 때문에 억지로 마셔	fix	rewrites
+dict:jisjk:147927	「そうか、俺……ワイン飲まされて、酔っちゃったんだ」	has:와인 마시게 돼,	fix	defaults
+dict:jisjk:147927	彼の膝に乗り、彼からご飯をもらって口移しでワインを飲まされる。	has:와인을 마시게 된다	fix	defaults
+dict:jisjk:147927	媚薬を飲まされたときと同じ。	has:마시게 되었을 때	fix	defaults
+sense:飲まされる	抗生剤などたくさんの薬を飲まされた、点滴もした。	has:약을 먹게 된,	keep	senses
+sense:飲まされる	Ａさんに薬を飲まされる夢？	has:억지로 약을 먹는	keep	senses
+dict:w:30050	驚かされたぞ。	놀랐어.	fix	defaults
+dict:w:30050	少し驚かされたなぁ……」	has:조금 놀랐군	fix	defaults
+dict:w:30050	実技では学生らしからぬ実力に驚かされました」	has:실력에 놀랐습니다	fix	defaults
+dict:w:30050	時折押し入れの向こう側から聞こえて来る何かを叩く音には少し驚かされたが、	has:조금 놀랐지만,	fix	defaults
+dict:w:30050	昨夜、２３時頃にかかってきた電話には驚かされた。	has:전화에는 놀랐다	fix	defaults
+dict:w:30052	そんな風に、反抗勢力に煩わされる事が多くなったためだろう。	has:반항 세력에 시달리는	fix	defaults
+dict:w:30052	そうでもしないと毎日朝早くから煩わされることになりますから」	has:시달리게 될	fix	defaults
+dict:w:30052	「何より君がこの件で煩わされていると、	has:시달리고 있으면,	fix	defaults
+dict:w:30050	彼女を驚かせた。	그녀를 놀라게 했다.	keep	defaults

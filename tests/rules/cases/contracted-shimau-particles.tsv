@@ -42,7 +42,7 @@ ending:chau-particles	「身体おかしくしちゃうよ……？」	「신체
 ending:chau-particles	「いいから遅刻しちゃうよ？」	「됐으니까 지각해버릴 거야?」	fix	builtin-ending
 ending:chau-particles	疲れちゃうよぉ？	지쳐버릴 거야?	fix	builtin-ending
 ending:chau-particles	体が鈍っちまうよぉー	몸이 무디어져버릴 거야~	fix	builtin-ending
-ending:chau-particles	「なんでもしまっちゃうよ☆」	「뭐든 끝내버릴 거야☆」	fix	builtin-ending
+ending:chau-particles	「なんでもしまっちゃうよ☆」	「뭐든 넣어버릴 거야☆」	fix	builtin-ending
 # 맞는 출력: 「이불 걷어 버린다~?」
 ending:chau-particles	「お布団めくっちゃうよー？」	「이불 넘겨버릴 거야~?」	current	builtin-ending
 # 맞는 출력: 잠깐, 초조해지네…

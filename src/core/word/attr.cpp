@@ -344,6 +344,9 @@ bool Item::CheckGAttr(std::string_view s, int di) {
         // Vp: a verb in the potential voice (頑張れる, 食べられる).
         if (c == "Vp") return detail != nullptr &&
             (detail->record == 4 || (detail->syntheticCausative && detail->voice == Voice::Potential));
+        // Xj: a verb whose ている is its plain form (言っている 말한다), not as a causative-passive
+        // (言わされている 말하게 되고 있다).
+        if (c == "Xj") return Has(attrs, c) && (detail == nullptr || detail->record != 5);
         // Nq: a count (三, 二十, 三人, 十日, 数日), see ReadsCount.
         if (c == "Nq") return ReadsCount(i);
         // Qw: a question word is the word or comes before it in its sentence.

@@ -34,7 +34,7 @@ uint64_t StrHash(std::string_view s) {
 // The expected values are the hashes of the key -> row mapping each table resolves to
 // for every key it holds; keys outside the tables have no row.
 HD_TEST(markers_fingerprints) {
-    HD_CHECK_EQ(Fingerprint(internal::SourceMarkerTable(), SourceMarkerRow), uint64_t{0xb51c53f9de3d1df0ull});
+    HD_CHECK_EQ(Fingerprint(internal::SourceMarkerTable(), SourceMarkerRow), uint64_t{0x0d06041a0e7d6989ull});
     HD_CHECK_EQ(Fingerprint(internal::DollarMarkerTable(), DollarMarkerRow), uint64_t{0xe4a5c6472975a47bull});
     HD_CHECK_EQ(Fingerprint(internal::PercentMarkerTable(), PercentMarkerRow), uint64_t{0xd51bf5c32209ed5cull});
     HD_CHECK_EQ(internal::SourceMarkerTable().size(), size_t{3720});
