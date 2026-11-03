@@ -1,0 +1,74 @@
+# 규칙: LEX-4034
+rule	input	expected	kind	layer
+cx:novel-fixes-2:1000	風の噂たって、リビングから聞こえてきた兄弟の会話だが。	has:풍문이라고 해도,	fix	rewrites
+cx:novel-fixes-2:1000	三日たって、ようやく熱も下がってきた。	!rule:cx:novel-fixes-2:1000	keep	rewrites
+cx:novel-fixes-2:1010	けど、家も近く、小中と同じクラスになる事も多かったので、	has:초중학교 내내 같은 반	fix	rewrites
+cx:novel-fixes-2:1010	小中学校に通った。	!rule:cx:novel-fixes-2:1010	keep	rewrites
+cx:novel-fixes-2:1020	と、俺はその瞬間に気付いた。	has:그 순간에 알아차렸다	fix	rewrites
+cx:novel-fixes-2:1020	彼の嘘に気付いた。	!rule:cx:novel-fixes-2:1020	keep	rewrites
+cx:novel-fixes-2:1025	あと二人いる。	has:두 사람 더 있다	fix	rewrites
+cx:novel-fixes-2:1025	あと二人。	!rule:cx:novel-fixes-2:1025	keep	rewrites
+cx:novel-fixes-2:1030	よし。あと二人。	has:앞으로 두 사람.	fix	rewrites
+cx:novel-fixes-2:1030	「あと一つだけ」	!rule:cx:novel-fixes-2:1030	keep	rewrites
+cx:novel-fixes-2:1035	あと五分待って。	has:앞으로 5분 기다려	fix	rewrites
+cx:novel-fixes-2:1035	あ、あと一人暮らしです。	!rule:cx:novel-fixes-2:1035	keep	rewrites
+cx:novel-fixes-2:1040	あれが噂の走馬灯だろうか。一瞬すぎてわからなかった。	has:너무 순식간이라서 몰랐다	fix	rewrites
+cx:novel-fixes-2:1040	一瞬だった。	!rule:cx:novel-fixes-2:1040	keep	rewrites
+cx:novel-fixes-2:1050	情けなくも震えた声しか発せず、雨音にかき消された。	has:한심하게도 떨린	fix	rewrites
+cx:novel-fixes-2:1050	嬉しくもなる。	!rule:cx:novel-fixes-2:1050	keep	rewrites
+cx:novel-fixes-2:1055	嬉しくも恥ずかしい。	has:기쁘고도 부끄럽다	fix	rewrites
+cx:novel-fixes-2:1055	珍しくもない。	!rule:cx:novel-fixes-2:1055	keep	rewrites
+cx:novel-fixes-2:1057	辛くもなかった。	has:괴롭지도 않았다	fix	rewrites
+cx:novel-fixes-2:1057	辛くも勝利した。	!rule:cx:novel-fixes-2:1057	keep	rewrites
+cx:novel-fixes-2:1060	もっと運動をしておけばと、生まれて初めて思った。	has:운동을 해 둘걸 하고,	fix	rewrites
+cx:novel-fixes-2:1060	こうしておけば大丈夫だ。	!rule:cx:novel-fixes-2:1060	keep	rewrites
+cx:novel-fixes-2:1065	運動しておけばと悔やんだ。	has:운동해 둘걸 하고 후회했다	fix	rewrites
+cx:novel-fixes-2:1065	こうしておけば大丈夫だ。	!rule:cx:novel-fixes-2:1065	keep	rewrites
+cx:novel-fixes-2:1070	肺の中の空気が一瞬で吐き出される。	has:폐 안의 공기가	fix	rewrites
+cx:novel-fixes-2:1070	８体の中一つだけ存在する本体。	!rule:cx:novel-fixes-2:1070	keep	rewrites
+cx:novel-fixes-2:1080	購買で昼食を買おうとして並んでいた時、	has:매점에서 점심식사를	fix	rewrites
+cx:novel-fixes-2:1080	食堂で昼食を食べた。	!rule:cx:novel-fixes-2:1080	keep	rewrites
+cx:novel-fixes-2:1090	勉強は得意じゃなかったが、ゲームがうまくて、	has:공부는 자신 없었지만	fix	rewrites
+cx:novel-fixes-2:1090	得意な料理を作る。	!rule:cx:novel-fixes-2:1090	keep	rewrites
+cx:novel-fixes-2:1100	放課後、俺は顔が腫れ上がるまで殴られ、全裸で校門に磔にされた。	has:교문에 책형을 당했다	fix	rewrites
+cx:novel-fixes-2:1100	磔の刑に処す。	!rule:cx:novel-fixes-2:1100	keep	rewrites
+cx:novel-fixes-2:1110	「クソ以下だな」と評論家気取りで批判していただけだ。	has:평론가 행세를 하며	fix	rewrites
+cx:novel-fixes-2:1110	気取りのない人だ。	!rule:cx:novel-fixes-2:1110	keep	rewrites
+cx:novel-fixes-2:1120	俺だったらこんなクレイジーな格好した奴は絶対に採用しない。	has:차림을 한 놈은	fix	rewrites
+cx:novel-fixes-2:1120	変な格好をした男	!rule:cx:novel-fixes-2:1120	keep	rewrites
+cx:novel-fixes-2:1121	そんな格好している。	has:그런 차림을 하고 있다	fix	rewrites
+cx:novel-fixes-2:1121	変な格好をした男	!rule:cx:novel-fixes-2:1121	keep	rewrites
+cx:novel-fixes-2:1125	変な格好をした男が来た。	has:이상한 차림을 한 남자	fix	rewrites
+cx:novel-fixes-2:1125	と、山本は名刺を渡す格好をする。	!rule:cx:novel-fixes-2:1125	keep	rewrites
+cx:novel-fixes-2:1127	格好いい！	has:멋지다!	fix	rewrites
+cx:novel-fixes-2:1127	すごく格好いいと思う。	!rule:cx:novel-fixes-2:1127	keep	rewrites
+cx:novel-fixes-2:1130	嫌だな、かかわり合いになりたくないな。	has:엮이고 싶지 않	fix	rewrites
+cx:novel-fixes-2:1130	あの人とは関わり合いがない。	!rule:cx:novel-fixes-2:1130	keep	rewrites
+cx:novel-fixes-2:1140	喧嘩中の二人は聞く耳を持たない。	has:귀를 기울이지 않는다	fix	rewrites
+cx:novel-fixes-2:1140	聞く耳がない。	!rule:cx:novel-fixes-2:1140	keep	rewrites
+cx:novel-fixes-2:1145	「私達の人生を滅茶苦茶にしたやつらは何不自由なく生きているっていうのに？！」	has:엉망진창으로 만든 녀석들은	fix	rewrites
+cx:novel-fixes-2:1145	めちゃくちゃに強い。	!rule:cx:novel-fixes-2:1145	keep	rewrites
+cx:novel-fixes-2:1150	ぐちゃぐちゃに潰れる三人を見て、後悔するんだろうと直感した。	has:엉망진창으로 무너지는	fix	rewrites
+cx:novel-fixes-2:1150	めちゃくちゃに強い。	!rule:cx:novel-fixes-2:1150	keep	rewrites
+cx:novel-fixes-2:1155	部屋がぐちゃぐちゃになった。	has:엉망진창이 되었다	fix	rewrites
+cx:novel-fixes-2:1155	めちゃくちゃに強い。	!rule:cx:novel-fixes-2:1155	keep	rewrites
+cx:novel-fixes-2:1160	めちゃくちゃに強い。	has:엄청 강하다	fix	rewrites
+cx:novel-fixes-2:1160	めちゃくちゃに壊れた。	!rule:cx:novel-fixes-2:1160	keep	rewrites
+cx:novel-fixes-2:1170	見つけたのは、痴話喧嘩の真っ最中っぽい三人の高校生だ。	has:한창 사랑 싸움 중	fix	rewrites
+cx:novel-fixes-2:1170	今が真っ最中だ。	!rule:cx:novel-fixes-2:1170	keep	rewrites
+cx:novel-fixes-2:1180	中身の薄い人生だったという事か。	has:알맹이가 없는 인생	fix	rewrites
+cx:novel-fixes-2:1180	中身が多い。	!rule:cx:novel-fixes-2:1180	keep	rewrites
+cx:novel-fixes-2:1190	みんな俺の全裸磔と股間部のアップの写真を見て笑っていると思っていた。	has:클로즈업 사진을	fix	rewrites
+cx:novel-fixes-2:1190	写真をアップした。	!rule:cx:novel-fixes-2:1190	keep	rewrites
+cx:novel-fixes-2:1200	本気を出せば、一番にはなれなくても、プロにはなれたかもしれない。	has:프로는 될 수 있었을지도	fix	rewrites
+cx:novel-fixes-2:1200	それには及ばない。	!rule:cx:novel-fixes-2:1200	keep	rewrites
+cx:novel-fixes-2:1205	本気を出せば、一番にはなれなくても、プロにはなれたかもしれない。	has:1등은 될 수 없어도	fix	rewrites
+cx:novel-fixes-2:1205	これが一番好きだ。	!rule:cx:novel-fixes-2:1205	keep	rewrites
+dict:w:31077	瓶は粉々に砕けた。	has:산산조각 났다	fix	lookup
+dict:w:31078	俺は自分の五十倍以上の重量を持つトラックに跳ね飛ばされ、コンクリートの外壁に体を打ち付けた。	has:트럭에 튕겨 나가	fix	lookup
+dict:jisjk:121507	コンビニぐらいは歩いてればあるかもしれないが、金は持っていない。	has:있을지도 모르지만	fix	lookup
+dict:jisjk:137510	医者にはなりたくない。	has:의사는 되고 싶지 않다	fix	lookup
+sense:toru-nutrient	もっとカルシウムを取っておけばと、生まれて初めて思った。	has:칼슘을 섭취해 둘걸	fix	senses
+sense:toru-nutrient	水分をしっかり取ってください。	has:수분을 확실히 섭취해	fix	senses
+sense:toru-nutrient	写真を取った。	has:사진을 찍었다	keep	senses
+cx:novel-fixes-2:1205	一番には言えない。	!rule:cx:novel-fixes-2:1205	keep	rewrites
