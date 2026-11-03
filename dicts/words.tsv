@@ -17864,7 +17864,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 晒菜升麻	촛대승마	N110			GN						さらしなしょうま	w:17820
 晨り鴨	흰줄박이오리	N110			GN						しのりがも	w:17821
 晨鴨	흰줄박이오리	N110			GN						しのりがも	w:17822
-晩ごはん	석식	N110		Om	GN						ばんごはん	w:17823
+晩ごはん	저녁밥	N110		Om	GN						ばんごはん	w:17823
 晩生	늦벼	N110			GN						おくて	w:17824
 普賢	보현보살	N110	VHn		GN				llm		ふげん	w:17825
 普賢菩薩	보현보살	N110			GN						ふげんぼさつ	w:17826
@@ -19648,7 +19648,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 無線ＬＡＮ	무선랜	N110	UTt		GN				llm		むせんラン	w:19602
 無縁社会	무연사회	N110			GN						むえんしゃかい	w:19603
 無花被花	나화	N110			GN						むかひか	w:19604
-無茶	터무니없음	N110			GN				xxx llm	1	むちゃ	w:19605
+無茶	무리	N110			GN				xxx llm	1	むちゃ	w:19605
 無茶	무리%A1@	G8U0			GN				xxx llm	1		w:19606
 無辺	무한	N110			GN				llm		むへん	w:19607
 無辺	끝%B4@	G8U0			GN				llm		むへん	w:19608
@@ -27312,3 +27312,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 いらね	필요 없어	A9D0			GN			LEX-4356: いらね 필요 없어			いらね	w:31866
 ミス	실수&AV@	M428			GN			LEX-4356: ミスる 실수하다			ミスる	w:31867
 いいかんじ	좋은 느낌	N110			GN			LEX-4356: いいかんじだ 좋은 느낌이다			いいかんじ	w:31868
+斉射	 일제 사격	N110		Hd	GN			LEX-4310: 斉射 일제 사격			せいしゃ	w:31543
+一斉射	일제 사격	N110		Hd	GN			LEX-4310: 一斉射 일제 사격			いっせいしゃ	w:31544
+一斉射撃	일제 사격	N110		Hd	GN			LEX-4310: 一斉射撃 일제 사격			いっせいしゃげき	w:31545

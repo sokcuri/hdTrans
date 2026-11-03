@@ -50,7 +50,7 @@ ending:chau-particles	ちょっと、あせっちゃうよぉ…	잠깐, 서둘�
 # 맞는 출력: 이상한데, 몸이 떠 버려!?
 ending:chau-particles	おかしいな、体が浮いちゃうよ！？	이상한데, 몸이 떠버릴 거야!?	current	builtin-ending
 ending:chau-particles	なんかもう空見上げちゃうねー。	왠지 이제 하늘 올려다봐버리네~.	fix	builtin-ending
-ending:chau-particles	（小声）死んじゃうね	(작은 소리) 죽어버리네	fix	builtin-ending
+ending:chau-particles	（小声）死んじゃうね	(작은 목소리) 죽어버리네	fix	builtin-ending
 ending:chau-particles	眠くなっちゃうねー…	졸려져버리네~…	fix	builtin-ending
 # 맞는 출력: 좀 더 일해 버릴게?
 ending:chau-particles	もっと働いちゃうねっ？	좀 더 일해버리네?	current	builtin-ending

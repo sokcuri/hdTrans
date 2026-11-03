@@ -14,7 +14,7 @@ lookup:cut-deshou	忙しいもので、すみません。	바쁜 것으로, 죄�
 lookup:cut-deshou	嫌なんでしょ？	싫은 이지?	keep	lookup
 dict:function-nouns:10	それまで微睡みの中にいたのが、	그때까지 선잠 안에 있었던 것이,	fix	defaults
 dict:function-nouns:12	はい。いっちばん美味しいチョコ、あげるね♪	네. 제일 맛있는 초콜릿, 줄게♪	fix	defaults
-dict:function-nouns:17	隠しボス以外なら一撃で倒せる。	숨겨진 보스 이외라면 일격으로 넘어뜨릴 수 있다.	fix	defaults
+dict:function-nouns:17	隠しボス以外なら一撃で倒せる。	숨겨진 보스 이외라면 일격으로 쓰러뜨릴 수 있다.	fix	defaults
 dict:function-nouns:18	隠し部屋を見つけた。	숨겨진 방을 찾아냈다.	fix	defaults
 dict:function-nouns:16	卵と刻み野菜をたっぷり入れたマヨネーズ	계란과 다진 채소를 듬뿍 넣은 마요네즈	fix	defaults
 dict:function-nouns:21	断罪の場へと引きずり降ろされてしまっている。	단죄의 자리로 끌어내려져버렸다.	fix	defaults

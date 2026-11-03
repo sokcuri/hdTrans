@@ -110,7 +110,7 @@ dict:jisjk:254248	次の宿入り。	다음 귀향 휴가.	fix	lookup
 dict:jisjk:250151	早蒔きを試した。	조기 파종을 시험했다.	fix	lookup
 dict:jisjk:250151	早蒔きが必要だ。	조기 파종이 필요하다.	fix	lookup
 dict:jisjk:250151	早蒔きの準備。	조기 파종의 준비.	fix	lookup
-dict:jisjk:250151	今年は早蒔きだ。	금년은 조기 파종이다.	fix	lookup
+dict:jisjk:250151	今年は早蒔きだ。	올해는 조기 파종이다.	fix	lookup
 dict:jisjk:250151	早蒔きに適した品種。	조기 파종에 적합한 품종.	fix	lookup
 dict:jisjk:250151	早蒔きの時期。	조기 파종의 시기.	fix	lookup
 dict:jisjk:250151	春に種を蒔いた。	봄에 씨를 뿌렸다.	keep	lookup
@@ -121,7 +121,7 @@ dict:jisjk:254033	長年の訳業。	오랜 세월의 번역 작업.	fix	lookup
 dict:jisjk:254033	訳業を完成させた。	번역 작업을 완성시켰다.	fix	lookup
 dict:jisjk:254033	訳業の成果。	번역 작업의 성과.	fix	lookup
 dict:jisjk:254033	翻訳を読んだ。	번역을 읽었다.	keep	lookup
-dict:jisjk:250151	今年は早蒔きした。	금년은 조기 파종했다.	fix	lookup
+dict:jisjk:250151	今年は早蒔きした。	올해는 조기 파종했다.	fix	lookup
 dict:jisjk:250151	来年も早蒔きする。	내년도 조기 파종한다.	fix	lookup
 dict:jisjk:250151	早蒔きして育てた。	조기 파종해 길렀다.	fix	lookup
 dict:jisjk:250151	早蒔きをした。	조기 파종을 했다.	fix	lookup
@@ -151,7 +151,7 @@ dict:jisjk:103359	W杯が始まる。	월드컵이 시작된다.	fix	defaults
 dict:jisjk:103359	W杯を観戦する。	월드컵을 관전한다.	fix	defaults
 dict:jisjk:103359	ワールドカップで優勝した。	월드컵에서 우승했다.	keep	defaults
 dict:jisjk:103359	W杯の予選。	월드컵의 예선.	fix	defaults
-dict:jisjk:103359	今年のW杯。	금년의 월드컵.	fix	defaults
+dict:jisjk:103359	今年のW杯。	올해의 월드컵.	fix	defaults
 dict:jisjk:103359	サッカーのW杯。	축구의 월드컵.	fix	defaults
 dict:jisjk:103359	W杯の試合。	월드컵의 시합.	fix	defaults
 dict:jisjk:103359	ワールドカップを観戦する。	월드컵을 관전한다.	keep	defaults

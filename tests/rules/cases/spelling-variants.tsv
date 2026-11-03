@@ -65,7 +65,7 @@ dict:jisjk:92631	離れるときに見せた、あの瞳	떨어질 때 보인, �
 dict:jisjk:92631	家から離れる。	rule:dict:jisjk:92631=멀어&AL@	keep	local
 cx:hodo-degree:10	玉石混交という言葉が生ぬるい程に混沌としていた	옥석혼효라는 말이 미지근할 정도로 혼돈되고 있었다	fix	rewrites
 cx:hodo-degree:15	かつてない程のテンションアップ。	전에 없을 정도의 텐션 업.	fix	rewrites
-cx:hodo-degree:15	並のギアでは倒せない程の怪物なんですよ。	보통의 기어에서는 넘어뜨릴 수 없을 정도의 괴물이랍니다.	fix	rewrites
+cx:hodo-degree:15	並のギアでは倒せない程の怪物なんですよ。	보통의 기어에서는 쓰러뜨릴 수 없을 정도의 괴물이랍니다.	fix	rewrites
 normalize:spelling-variant	その数同数な程自衛官とともに存在した。	그 수동수인 정도 자위관과 함께 존재했다.	keep	normalize
 normalize:spelling-variant	そんなことに付き合ってられる程俺は暇じゃない！！	그런 일로 어울릴 수 있다만큼 나는 한가하지 않아!!	current	normalize
 normalize:spelling-variant	子供程の背丈しかない。	아이 정도의 키밖에 없다.	fix	normalize
