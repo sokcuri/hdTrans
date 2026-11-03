@@ -155,6 +155,20 @@ std::string CollapseDoubledWo(std::string_view text);
 // できぬ; the ね or ん after a sentence-final かしら is dropped (どうしてかしらね).
 std::string SpokenForms(std::string_view text, bool exclamationNa = false, bool dialectForms = false, const RunLookup& runs = {});
 
+// The length of particle at the start of s where it ends the sentence: before the end, a mark that ends it, a
+// closing bracket, a space or a drawn ー or ～, and with beforeComma before a comma; 0 otherwise.
+size_t SentenceFinalParticle(std::string_view s, std::string_view particle, bool beforeComma = false);
+
+// What the text rest after the ん or へん of a negative starts with that reads with the negative (spec GRM-3365):
+// its length in bytes and the negative written with it. A sentence-final で is the よ of Kansai speech and a
+// sentence-final がな its emphatic よ (知らんで, 負けへんで, 知らんがな ないよ), でも is なくても or before な
+// ないでも (知らんでも, 分からんでもない), でええ and でいい are なくていい (知らんでええ, 負けへんでいい); {0, ""} else.
+struct NegativeTail {
+    size_t length = 0;
+    std::string_view negative;
+};
+NegativeTail KansaiNegativeTail(std::string_view rest);
+
 // あれ (also drawn out, あれ～？) and え at the start of a sentence before 、，！？…‥ or a
 // dash with a small っ (あれ、 あれっ、, え―― えっ――, えぇ？ えっ？), but not あれ when a
 // particle follows its …‥ or dash run

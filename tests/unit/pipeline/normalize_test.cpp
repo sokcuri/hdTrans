@@ -1033,10 +1033,14 @@ HD_TEST(pipeline_dialect_forms) {
         {"見逃せへん"sv, "見逃せん"sv},
         {"見せへん"sv, "見せない"sv},
         {"落ちへん"sv, "落ちない"sv},
-        {"あいつは来えへん"sv, "あいつは来えへん"sv},  // the drawn-out 来え of くる
+        {"あいつは来えへん"sv, "あいつは来ない"sv},  // the drawn-out 来え of くる
         {"手加減せえへんで。"sv, "手加減しないよ。"sv},
         {"許さへんで"sv, "許さないよ"sv},
-        {"負けへんでええ"sv, "負けないでええ"sv},
+        {"負けへんでええ"sv, "負けなくていい"sv},
+        {"負けへんでも"sv, "負けなくても"sv},
+        {"寝えへん"sv, "寝ない"sv},  // a verb of one kana drawn before へん
+        {"見いへんかった"sv, "見なかった"sv},
+        {"けえへんで"sv, "こないよ"sv},
         {"たいへんに稀な"sv, "たいへんに稀な"sv},
         {"そこらへんで"sv, "そこらへんで"sv},
         {"ロボットが動いとる！"sv, "ロボットが動いている！"sv},
@@ -1089,6 +1093,55 @@ HD_TEST(pipeline_dialect_forms) {
     HD_CHECK_EQ(Normalize("金がねえ", ctx), "金がない");
 }
 
+// The tails of a Kansai negative (spec GRM-3365), なんや (GRM-3366) and ええ (LEX-3867) with dialect forms, and the
+// same lines without them.
+HD_TEST(pipeline_kansai_finals) {
+    struct Row {
+        std::string_view in, dialect, plain;
+    };
+    const Row rows[] = {
+        // after a kanji and one kana the contraction stage tells a て form in んで apart
+        {"わからんで。"sv, "わからないよ。"sv, "わからんで。"sv},
+        {"知らんがな。"sv, "知らないよ。"sv, "知らないがな。"sv},
+        {"わからんでもない"sv, "わからないでもない"sv, "わからんでもない"sv},
+        {"できんで！"sv, "できないよ！"sv, "できんで！"sv},
+        {"知らんで。"sv, "知らんで。"sv, "知らんで。"sv},
+        {"知らんでも"sv, "知らんでも"sv, "知らんでも"sv},
+        {"なんやそれ、ワシは知らない。"sv, "なんだそれ、ワシは知らない。"sv, "なんやそれ、ワシは知らない。"sv},
+        {"なんや、お前か。"sv, "なんだ、お前か。"sv, "なんや、お前か。"sv},
+        {"なんやねん！"sv, "なんだよ！"sv, "なんやねん！"sv},
+        {"なんやなんや？"sv, "なんだなんだ？"sv, "なんやなんや？"sv},
+        {"なんやろ？"sv, "なんだろ？"sv, "なんやろ？"sv},
+        {"何や、これ"sv, "何だ、これ"sv, "何や、これ"sv},
+        {"なんやろか"sv, "なんだろうか"sv, "なんやろか"sv},
+        {"なんやかんや言うて"sv, "なんやかんや言うて"sv, "なんやかんや言うて"sv},
+        {"なんやら"sv, "なんやら"sv, "なんやら"sv},
+        {"それなんや？"sv, "それなんや？"sv, "それなんや？"sv},
+        {"「ええよ」"sv, "「いいよ」"sv, "「ええよ」"sv},
+        {"ええで。"sv, "いいよ。"sv, "ええで。"sv},
+        {"もうええわ"sv, "もういいわ"sv, "もうええわ"sv},
+        {"選んでもええけど"sv, "選んでもいいけど"sv, "選んでもええけど"sv},
+        {"準備はええか？"sv, "準備はいいか？"sv, "準備はええか？"sv},
+        {"ええ感じやのう"sv, "いい感じやのう"sv, "ええ感じやのう"sv},
+        {"ええ、そうです"sv, "ええ、そうです"sv, "ええ、そうです"sv},  // the ええ of yes
+        {"ええと…"sv, "ええと…"sv, "ええと…"sv},
+        {"ええっ！"sv, "ええっ！"sv, "ええっ！"sv},
+        {"こええよ"sv, "怖いよ"sv, "こええよ"sv},  // the drawn end of an adjective
+        {"はええな"sv, "早いな"sv, "はええな"sv},
+    };
+    for (const Row& r : rows) {
+        HD_CHECK_EQ(SpokenForms(r.in, false, true), std::string(r.dialect));
+        HD_CHECK_EQ(SpokenForms(r.in, false, false), std::string(r.plain));
+    }
+    HD_CHECK_EQ(SentenceFinalParticle("で。", "で"), std::string_view("で").size());
+    HD_CHECK_EQ(SentenceFinalParticle("でも", "で"), size_t{0});
+    HD_CHECK_EQ(SentenceFinalParticle("で、", "で"), size_t{0});
+    HD_CHECK_EQ(SentenceFinalParticle("で、", "で", true), std::string_view("で").size());
+    HD_CHECK_EQ(std::string(KansaiNegativeTail("でもない").negative), std::string("ないでも"));
+    HD_CHECK_EQ(std::string(KansaiNegativeTail("でええ").negative), std::string("なくていい"));
+    HD_CHECK_EQ(KansaiNegativeTail("で書く").length, size_t{0});
+}
+
 HD_TEST(pipeline_kansai_verb_forms) {
     const Case cases[] = {
         // The と form of くれる; the word stage reads the other と forms.
@@ -1109,7 +1162,7 @@ HD_TEST(pipeline_kansai_verb_forms) {
         // The polite negative まへん in words of their own; after a verb the word stage reads it as ません.
         {"すんまへん"sv, "すみません"sv},
         {"すいまへん おおきに"sv, "すいません おおきに"sv},
-        {"ええ子 おまへんやろか？"sv, "ええ子 ありませんでしょうか？"sv},
+        {"ええ子 おまへんやろか？"sv, "いい子 ありませんでしょうか？"sv},
         {"かまへんか"sv, "かまわないか"sv},
         {"動いたらあきまへんで"sv, "動いたらいけませんよ"sv},
         {"知りまへん｡"sv, "知りまへん｡"sv},

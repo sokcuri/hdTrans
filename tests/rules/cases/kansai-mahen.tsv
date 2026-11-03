@@ -5,7 +5,7 @@ normalize:kansai-mahen	（大上）かまへんねん	(오우에) 상관없거�
 normalize:kansai-mahen	動いたらあきまへんで	움직이면 안돼요	fix	normalize
 normalize:kansai-mahen	ええ あの…いえ 何も おまへんで	네 그…아뇨 아무것도 없어요	fix	normalize
 normalize:kansai-mahen	せっかくでっけど それを受け取ることは でけしまへん	모처럼으로 지만 그것을 받을 수 없습니다	fix	normalize
-normalize:kansai-mahen	ええ子 おまへんやろか？	네자 없겠습니까?	fix	normalize
+normalize:kansai-mahen	ええ子 おまへんやろか？	좋은 아이 없겠습니까?	fix	normalize
 normalize:kansai-mahen	すいまへん おおきに	미안해요 크게	fix	normalize
 conjugation:kansai-masen	知りまへん｡	모릅니다.	fix	conjugation
 conjugation:kansai-masen	分かりまへん！ 噂だと	모릅니다! 소문이라고	fix	conjugation

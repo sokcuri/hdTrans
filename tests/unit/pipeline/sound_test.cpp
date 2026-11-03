@@ -1321,7 +1321,10 @@ HD_TEST(pipeline_contracted_n) {
                                      "予期せぬ\t예기치 못한\tE0H0\t\t28\n"
                                      "愛\t사랑\tN110\tHd\t29\n"
                                      "せんじつ\t일전\tN110\t\t30\n"
-                                     "せんねん\t전념\tN110\t\t31\n"}});
+                                     "せんねん\t전념\tN110\t\t31\n"
+                                     "浮か\t떠&E6@\tM416\t\t32\n"
+                                     "強い\t강요&AV@\tM437\t\t33\n"
+                                     "休め\t쉬&AL@\tM437\t\t34\n"}});
     HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
     LineContext ctx;
     ctx.lookup.plain = &loaded.snapshot->TextPlain();
@@ -1407,6 +1410,31 @@ HD_TEST(pipeline_contracted_n) {
         {"負けんしゅ", "負けんしゅ"},
     };
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteContractedN(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    // With dialect forms the negative ん reads the tail after it (spec GRM-3365): a sentence-final で or がな is よ, でも
+    // is なくても (ないでも before な), でええ is なくていい, another で is that of ないで; not where a stem's て form ends in
+    // that んで, the polite ませんで, the ん after an adjective's い, nor では.
+    LineContext dialect = ctx;
+    dialect.dialectForms = true;
+    const Case tails[] = {
+        {"知らんで。", "知らないよ。"},
+        {"許せんで！", "許せないよ！"},
+        {"負けんで", "負けないよ"},
+        {"勉強せんで。", "勉強しないよ。"},
+        {"許せんよ。", "許せないよ。"},          // a godan potential before a final よ
+        {"知らんでも", "知らなくても"},
+        {"負けんでもない", "負けないでもない"},
+        {"知らんでええ", "知らなくていい"},
+        {"負けんでいい", "負けなくていい"},
+        {"知らんで書く", "知らないで書く"},
+        {"知らんな", "知らないな"},            // a negative stem whose stem and る is no verb, before な
+        {"浮かんで。", "浮かんで。"},            // the て form of 浮かぶ
+        {"空に浮かんでも", "空に浮かんでも"},
+        {"すみませんでした", "すみませんでした"},
+        {"強いんです", "強いんです"},
+        {"休めんではないか", "休めんではないか"},
+        {"知らんでる", "知らないでる"},
+    };
+    for (const auto& c : tails) HD_CHECK_EQ(internal::RewriteContractedN(c.in, dialect, *loaded.snapshot), std::string(c.want));
     // the verb of a rebuke before んじゃない (spoken forms)
     HD_CHECK(internal::EndsInDictionaryVerb("ここで待つ", ctx, *loaded.snapshot));
     HD_CHECK(internal::EndsInDictionaryVerb("待たせる", ctx, *loaded.snapshot));       // a longer form of a kanji verb

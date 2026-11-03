@@ -1,0 +1,30 @@
+# 규칙: LEX-3865, LEX-3868
+rule	input	expected	kind	layer
+lookup:adjective-yo-before-na	お前さぁ、いい加減にしろよな。	너 말이야, 적당히 좀 해라.	fix	lookup
+dict:lex:yona-final	「何でもいいから、ちゃんと試験監督してくれよな」	lacks:좋은	keep	lookup
+dict:lex:yona-final	だからちゃんとここから出せよな！	그러니까 제대로 여기에서 내!	keep	lookup
+dict:lex:yona-final	≫382が無実だったら謝れよな…	≫382가 결백이라면 사과해…	keep	lookup
+lookup:adjective-yo-before-na	お、覚えてろよな！	두, 두고 보자!	fix	lookup
+lookup:adjective-yo-before-na	頑張れよな。	힘내라.	fix	lookup
+lookup:adjective-yo-before-na	早く来いよな。	빨리 와라.	fix	lookup
+lookup:adjective-yo-before-na	昨日、あれからいろいろ考えて、なかなか寝付けなかったんだよな……	어제, 그때부터 여러 가지 생각해, 좀처럼 잠들 수 없었다……	fix	lookup
+lookup:adjective-yo-before-na	だけど、この千里、リアルに寝息をたててるんだよな。	하지만, 이 천리, 리얼하게 숨소리를 내고 있어.	fix	lookup
+dict:lex:yonaa-final	けど、いいケンカ相手になりそうなんだよなぁ……。	하지만, 좋은 싸움 상대가 될 것 같애…….	fix	lookup
+dict:lex:yonaa-final	行ってやってんだよなぁ？	가 주는 거야?	fix	lookup
+dict:lex:yone-imperative	頑張れよね。	힘내라.	fix	local
+dict:lex:yone-imperative	見ろよね。	봐라.	fix	local
+lookup:adjective-yo-before-na	「ていうか、あの子結婚してるよな？」	lacks:좋은	fix	lookup
+dict:lex:yona-noun	お前のせいよな。	rule:dict:lex:yona-noun=(이)야	keep	local
+dict:lex:yona-noun	これよな。	rule:dict:lex:yona-noun=(이)야	keep	local
+dict:jisjk:264117	男の夢よなぁ。	rule:dict:jisjk:264117=(이)지	keep	local
+dict:lex:yone-imperative	約束よね。	!rule:dict:lex:yone-imperative	keep	local
+dict:lex:yone-imperative	そうよね。	!rule:dict:lex:yone-imperative	keep	local
+lookup:adjective-yo-before-na	約束だよな。	약속이지.	keep	lookup
+lookup:adjective-yo-before-na	行くよな。	가지.	keep	lookup
+lookup:adjective-yo-before-na	いいよな。	좋지.	keep	lookup
+lookup:adjective-yo-before-na	見てろよな！	두고 봐!	keep	lookup
+dict:w:69	「お前らいい加減にしろ……」	「너희들 적당히 좀 해라……」	fix	lookup
+dict:w:69	いい加減にしろよ。	적당히 좀 해라.	fix	lookup
+dict:jisjk:257499	「御園の冗談は全然わからんな」	「미소노의 농담은 전혀 몰라」	fix	lookup
+dict:jisjk:257499	って自分で書いてても意味わからん・・・	라고 스스로 써도 의미 몰라···	fix	lookup
+dict:jisjk:257499	わからん。	모른다.	keep	lookup
