@@ -46,7 +46,7 @@ cx:web-fixes-j:60	ごきげんよう。	!rule:cx:web-fixes-j:60	keep	rewrites
 cx:web-fixes-j:65	「それではごきげんよう、お嬢様」	has:「그러면 안녕히 계세요, 아가씨」	fix	rewrites
 cx:web-fixes-j:65	14時よ。食事の後は仮眠をとりますの。ではごきげんよう、提督	has:그럼 안녕히 계세요, 제독	fix	rewrites
 cx:web-fixes-j:65	ごきげんよう、三隈です。	!rule:cx:web-fixes-j:65	keep	rewrites
-cx:web-fixes-j:70	一方、食指を動かされることなく適齢を過ぎた妃は、よほど実家の権力がない限り位が下げられるなり、最悪、下賜されてしまう。	has:본가의 권력이 있지 않는 한	fix	rewrites
+cx:web-fixes-j:69	一方、食指を動かされることなく適齢を過ぎた妃は、よほど実家の権力がない限り位が下げられるなり、最悪、下賜されてしまう。	has:본가의 권력이 있지 않으면	fix	rewrites
 cx:web-fixes-j:70	平常時はシンクロ値が下がる。よほど近くにいなければ、ほとんど何も感じ取る事はないのだが。	has:근처에 있지 않으면	fix	rewrites
 cx:web-fixes-j:70	余程のことがない限りず～っとこのままかな……。	!rule:cx:web-fixes-j:70	keep	rewrites
 cx:web-fixes-j:70	実家の権力がない限り無理だ。	!rule:cx:web-fixes-j:70	keep	rewrites
@@ -185,3 +185,6 @@ cx:web-fixes-j:235	父は宰相、母は将軍の娘で、国の中でも王家�
 cx:web-fixes-j:235	彼に次ぐ実力者だ。	has:그에 버금가는	fix	rewrites
 cx:web-fixes-j:235	雨に次ぐ雨。	!rule:cx:web-fixes-j:235	keep	rewrites
 cx:web-fixes-j:235	妹に贈り物を渡した。	!rule:cx:web-fixes-j:235	keep	rewrites
+cx:web-fixes-j:69	よほど実家の権力がない限り	has:권력이 있지 않으면	fix	rewrites
+cx:web-fixes-j:69	よほど自信がない限り無理だ	has:자신감이 있지 않으면 무리다	fix	rewrites
+cx:web-fixes-j:69	よほどのことがない限り	!rule:cx:web-fixes-j:69	keep	rewrites

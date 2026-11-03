@@ -136,3 +136,6 @@ cx:web-fixes-h:51	当然、実物に出会えることなど滅多にない。	h
 cx:web-fixes-h:51	受け入れることなどすぐにはできない	!rule:cx:web-fixes-h:51	keep	rewrites
 cx:web-fixes-h:151	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없이	fix	rewrites
 cx:web-fixes-h:151	誰に届くこともなく消えた	has:닿는 일도 없이	keep	rewrites
+cx:web-fixes-h:70	じいちゃんやめてくれよ恥ずかしい！	!rule:cx:web-fixes-h:70	keep	rewrites
+cx:web-fixes-h:70	休んでくれよ、明日のためだ	!rule:cx:web-fixes-h:70	keep	rewrites
+cx:web-fixes-h:70	協力してくれよ！	has:협력해 줘!	fix	rewrites
