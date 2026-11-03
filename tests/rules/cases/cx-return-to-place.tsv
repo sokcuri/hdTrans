@@ -4,7 +4,7 @@ cx:return-to:20	タイトル画面に戻ります	타이틀 화면으로 돌아�
 cx:return-to:20	メニューに戻ります。	메뉴로 돌아갑니다.	fix	rewrites
 cx:return-to:20	前の画面に戻る	이전 화면으로 돌아간다	fix	rewrites
 cx:return-to:20	席へ戻る。	자리로 돌아간다.	fix	rewrites
-cx:return-to:20	さっさと通常モードに戻らないと。	빨리 통상 모드로 돌아가지 않으면.	fix	rewrites
+cx:return-to:20	さっさと通常モードに戻らないと。	빨리 통상 모드로 돌아가야 한다.	fix	rewrites
 cx:return-to:20	まるで、子供の頃に戻ったみたいで	rule:cx:return-to:20=(으)로	fix	rewrites
 cx:return-to:20	舌だけが絡み合う状態に戻る。	혀만이 얽히는 상태로 돌아간다.	fix	rewrites
 cx:return-to:20	だが、すぐに真顔に戻る。	하지만, 곧바로 진지한 얼굴로 돌아간다.	fix	rewrites

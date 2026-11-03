@@ -28,5 +28,5 @@ restore:closing-space	“ 先生の家この先すぐ ↑ ”	has:↑ ”	keep	r
 restore:closing-space	主電源、起動します。＞＞＞＞＞＞ OK正常に、動作中	has:기동합니다. >>>>>>	keep	restore
 restore:closing-space	もっと見る ＞	좀 더 본다 >	keep	restore
 restore:closing-space	排気ダクト配管後方へ回り込み、”プロの人”とやらに	has:, ”프로의 사람”	keep	restore
-restore:closing-space	私じゃなくて、”未来”とくっつかないと！　”現実の未来”と！！	has:않으면! ”현실의 미래”	keep	restore
+restore:closing-space	私じゃなくて、”未来”とくっつかないと！　”現実の未来”と！！	has:붙어야 한다! ”현실의 미래”	keep	restore
 restore:closing-space	彼は（多分）大丈夫だ。	그는(아마) 괜찮다.	keep	restore
