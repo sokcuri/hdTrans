@@ -1,0 +1,21 @@
+# 규칙: GRM-3553
+rule	input	expected	kind	layer
+dict:jisjk:373987	「ちなみに、その頃にはまだヘイディオは存在していません」	has:존재하고 있지 않습니다	fix	local-ending
+dict:jisjk:373987	作業は完了していません。	has:완료하고 있지 않습니다	fix	local-ending
+dict:jisjk:373987	まだ確認していません。	has:확인하고 있지 않습니다	fix	local-ending
+dict:jisjk:373987	彼は理解していません。	has:이해하고 있지 않습니다	fix	local-ending
+dict:jisjk:373987	まだ準備していません。	has:준비해 있지 않습니다	fix	local-ending
+dict:jisjk:373987	サービスは終了していません。	has:종료하고 있지 않습니다	fix	local-ending
+dict:jisjk:373987	あの事故から1日しか経過していませんよ。	has:경과하고 있지 않아요	keep	local-ending
+dict:jisjk:373987	そんなところには搭載していませんし…！	has:탑재하고 있지 않고	keep	local-ending
+dict:jisjk:373987	教えていませんから」	has:가르치고 있지 않으니까요	keep	local-ending
+dict:jisjk:373987	「まだ濡れていませんね。	has:젖어 있지 않아요	keep	local-ending
+dict:jisjk:373987	「会長、まだ終わっていません」	has:끝나 있지 않습니다	keep	local-ending
+dict:jisjk:373987	私、全く、全然、怒っていません！	has:화나 있지 않습니다	keep	local-ending
+dict:jisjk:373987	「私は大したことはしていません。	has:하고 있지 않습니다	keep	local-ending
+dict:jisjk:373987	「……ですが、脱税はしていません。	has:탈세는 하고 있지 않습니다	keep	local-ending
+dict:jisjk:373987	カメラにも記録は残っていません」	has:남아 있지 않습니다	keep	local-ending
+dict:jisjk:373987	結婚していません。	has:결혼하지 않았습니다	keep	local-ending
+dict:jisjk:373987	まだ完了していませんでした。	has:완료하고 있지 않았습니다	keep	local-ending
+dict:jisjk:373987	勉強してません。	has:공부하지 않았습니다	keep	local-ending
+dict:jisjk:373987	まだ食べていません。	has:먹고 있지 않습니다	keep	local-ending

@@ -1,0 +1,56 @@
+# 규칙: GRM-3543
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:100	新造艦が完成したようです。	has:신조함이 완성된	fix	rewrites
+cx:corpus-fixes-1:100	作戦が終了しました。	has:작전이 종료되었습니다	fix	rewrites
+cx:corpus-fixes-1:100	作戦が完了したみたいです。	has:작전이 완료된	fix	rewrites
+cx:corpus-fixes-1:100	あ、新しい艦の建造が完了したようです。	has:건조가 완료된	fix	rewrites
+cx:corpus-fixes-1:100	あの、艦の修理が完了したっと…	has:수리가 완료된	fix	rewrites
+cx:corpus-fixes-1:100	お洋服の修理は完了したよ。	has:수리는 완료됐어	fix	rewrites
+cx:corpus-fixes-1:100	新しい船が完成しました。素敵です。	has:배가 완성되었습니다	fix	rewrites
+cx:corpus-fixes-1:100	作戦行動が終了したよ。	has:종료됐어	fix	rewrites
+cx:corpus-fixes-1:100	応募期間は終了しました。	has:기간은 종료되었습니다	fix	rewrites
+cx:corpus-fixes-1:100	ネットゲームも１０年以上前にサービスは終了した。	has:서비스는 종료되었다	fix	rewrites
+cx:corpus-fixes-1:100	「もう問題は解決したのか？」	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	……あのトンネルか。爆弾の件も解決したし、なんとかなるか。	has:건도 해결되었고	fix	rewrites
+cx:corpus-fixes-1:100	俺の罰ゲームが確定したことを知ると魅音は本領発揮！！	has:게임이 확정된	fix	rewrites
+cx:corpus-fixes-1:100	そのうち、射出速度設定を術者がいじることで、魔術が完成する。	has:마술이 완성된다	fix	rewrites
+cx:corpus-fixes-1:100	これで、すべてのプロセスが終了し、	has:프로세스가 종료되어	fix	rewrites
+cx:corpus-fixes-1:100	合計約７００万件の会員情報が漏えいしたと発表した。	has:회원 정보가 누설되었다고	fix	rewrites
+cx:corpus-fixes-1:100	顧客企業によって異なるものの、氏名や電話番号、住所なども流出したという。	has:주소 등도 유출되었다고	fix	rewrites
+cx:corpus-fixes-1:100	政府は延期した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	委員会は中止した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	警察は解決した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	チームは開始した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	政府は延期した。	has:정부는 연기했다	keep	rewrites
+cx:corpus-fixes-1:100	探偵は事件を解決した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	エナの問題はエナが解決するべきだ。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	ビリは俺が確定している。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	婚約は解消しよう！	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	「さて、俺も再開するか」	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	だがユーザー数が増えなかったのか、ゲーム配信会社はサービス終了を決定したのだ。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	王都に凱旋した聖女をねぎらうために、国王は盛大なパーティーを開催した。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	「とりあえず、柴犬クラスが入ることのできる鍋は完成しました」	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:105	実戦には出ませんでしたが、出撃準備は完了しています。	has:완료되어 있습니다	fix	rewrites
+cx:corpus-fixes-1:105	彼は宿題を完了している。	!rule:cx:corpus-fixes-1:105	keep	rewrites
+cx:corpus-fixes-1:105	覚悟は完了してる。	!rule:cx:corpus-fixes-1:105	keep	rewrites
+cx:corpus-fixes-1:107	同社によると、クレジットカード情報やＩＤ、パスワードなどは漏えいしていない。	has:누설되어 있지 않다	fix	rewrites
+cx:corpus-fixes-1:107	彼はまだ作業を完了していない。	!rule:cx:corpus-fixes-1:107	keep	rewrites
+cx:corpus-fixes-1:100	作業は開始してください。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	作業は開始してください。	has:작업은 개시해 주세요	keep	rewrites
+cx:corpus-fixes-1:100	試合は延期しましょう。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	試合は延期しましょう。	has:시합은 연기합시다	keep	rewrites
+cx:corpus-fixes-1:100	計画は中止しようか。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	計画は中止しようか。	has:계획은 중지할까	keep	rewrites
+cx:corpus-fixes-1:100	試合は延期するな。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	試合は延期するな。	has:시합은 연기하지 마	keep	rewrites
+cx:corpus-fixes-1:100	作業は開始しても良い。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	作業は開始しても良い。	has:작업은 개시해도 좋다	keep	rewrites
+cx:corpus-fixes-1:100	予約は確定しますか？	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	予約は確定しますか？	has:예약은 확정합니까	keep	rewrites
+cx:corpus-fixes-1:100	試合が終了したら帰る。	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	試合が終了したら帰る。	has:시합이 종료하면	keep	rewrites
+cx:corpus-fixes-1:100	提督、新造艦が完成したようですよ？	!rule:cx:corpus-fixes-1:100	keep	rewrites
+cx:corpus-fixes-1:100	提督、新造艦が完成したようですよ？	has:완성한 것 같아요	keep	rewrites
+cx:corpus-fixes-1:100	作戦が完了する。	has:작전이 완료된다	fix	rewrites
+cx:corpus-fixes-1:105	「遊園地とこの近辺は住民の避難が完了してて、交通規制もしてるから	!rule:cx:corpus-fixes-1:105	keep	rewrites
+cx:corpus-fixes-1:105	作業は完了していません。	!rule:cx:corpus-fixes-1:105	keep	rewrites

@@ -71,7 +71,7 @@ lex:ポケット	ポケットから携帯を取り出して、じっと見つめ
 lex:ポケット	ポケットモンスター	has:포켓 몬스터	keep	lookup
 dict:jisjk:131867	ナッツを食べた。	has:너츠를	keep	lookup
 lex:トランプ	トランプのスタンダードなゲームのひとつだな。	has:트럼프의	keep	lookup
-lex:トランプ	トランプ大統領	has:도널드 트럼프	keep	lookup
+lex:トランプ	トランプ大統領	has:트럼프 대통령	keep	lookup
 lex:テロップ	画面にこんなテロップが出た。	has:이런 텔롭이	keep	lookup
 lex:ミルク	ミルクも、いかがですか？	has:밀크도	keep	lookup
 lex:スープ	パンとスープ、お代わり貰える！	has:빵과 스프	keep	lookup
