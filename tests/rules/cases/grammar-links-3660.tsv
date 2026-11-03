@@ -5,6 +5,7 @@ cx:web-fixes-i:100	悪しざまに罵ることができるのはお前たちじ�
 cx:web-fixes-i:100	他の人が早いのではなく自分が遅いのだということは理解しているけど、	has:빠른 것이 아니라 자신이	fix	rewrites
 cx:web-fixes-i:100	神出鬼没ではなくなり、二階の片隅にある書斎に篭るようになった。	!rule:cx:web-fixes-i:100	keep	rewrites
 cx:web-fixes-i:100	とくに興味もないテレビを観るでもなく観ていた。	!rule:cx:web-fixes-i:100	keep	rewrites
+cx:web-fixes-i:100	普通じゃなく感じた。	!rule:cx:web-fixes-i:100	keep	rewrites
 cx:web-fixes-i:105	やべっ、いけるか？ダメか？	has:안돼?	fix	rewrites
 cx:web-fixes-i:105	と、いきなり他力本願でも駄目か。	!rule:cx:web-fixes-i:105	keep	rewrites
 cx:web-fixes-i:110	と、いきなり他力本願でも駄目か。	has:안되나.	fix	rewrites
@@ -20,16 +21,25 @@ cx:web-fixes-i:130	なんか違う。	!rule:cx:web-fixes-i:130	keep	rewrites
 cx:web-fixes-i:130	それはなんか理由があるの？	!rule:cx:web-fixes-i:130	keep	rewrites
 cx:web-fixes-i:135	それはなんか理由があるの？	has:그것은 무슨 이유가	fix	rewrites
 cx:web-fixes-i:135	なんか理由があるの？	!rule:cx:web-fixes-i:135	keep	rewrites
+cx:web-fixes-i:128	お前になんか負けない。	has:너 따위에게 지지 않는다	fix	rewrites
+cx:web-fixes-i:128	キングになんか勝てる訳ないじゃないかぁー！！	has:킹 따위에게 이길 수	fix	rewrites
+cx:web-fixes-i:128	あいつとなんか話したくない。	has:저 녀석 따위와 이야기하고	fix	rewrites
+cx:web-fixes-i:128	あ、提督。なんだよ、俺になんかくれるのか？	!rule:cx:web-fixes-i:128	keep	rewrites
+cx:web-fixes-i:128	「例えばさ、工事中になんかあったとか。事故とか。」	!rule:cx:web-fixes-i:128	keep	rewrites
 cx:web-fixes-i:150	機械関係は駄目……ここから推測するに、パーツが少なければＯＫなのだろう。	has:추측하건대,	fix	rewrites
 cx:web-fixes-i:150	断面を見るに、細かく刻んだ肉を使った料理のようだ。	has:단면을 보건대,	fix	rewrites
 cx:web-fixes-i:150	推測するには材料が足りない。	!rule:cx:web-fixes-i:150	keep	rewrites
 cx:web-fixes-i:158	「うん、私の質問に答えないで質問で返してきたから」	has:내 질문에	fix	rewrites
 cx:web-fixes-i:158	私の書いた本だ。	!rule:cx:web-fixes-i:158	keep	rewrites
+cx:web-fixes-i:158	私の手に入れた宝	!rule:cx:web-fixes-i:158	keep	rewrites
+cx:web-fixes-i:158	私の腕を見せてあげるわ。	!rule:cx:web-fixes-i:158	keep	rewrites
 cx:web-fixes-i:160	その痛みに意識を手放した直後、オレの体は土埃の波にさらわれた。	has:흙먼지의 파도에 휩쓸렸다	fix	rewrites
 cx:web-fixes-i:160	アキラと彼女の目が合う。	has:그녀의 시선이 마주친다	fix	rewrites
 cx:web-fixes-i:160	「……聖女の望むままに」	!rule:cx:web-fixes-i:160	keep	rewrites
 cx:web-fixes-i:160	それより奴の言ったこと……	!rule:cx:web-fixes-i:160	keep	rewrites
 cx:web-fixes-i:160	あんなもの、人の手に負えるのかな？	!rule:cx:web-fixes-i:160	keep	rewrites
+cx:web-fixes-i:160	彼の手に入れた情報。	!rule:cx:web-fixes-i:160	keep	rewrites
+cx:web-fixes-i:160	母の手にした花は白かった。	!rule:cx:web-fixes-i:160	keep	rewrites
 cx:web-fixes-i:200	言葉は聞こえているが、意味がまるっきりわからない。	has:의미를 통 모른다	fix	rewrites
 cx:web-fixes-i:200	よって私にはこの世界の魔力というものがまったくわからないのだ。	has:것을 전혀 모르는	fix	rewrites
 cx:web-fixes-i:200	３回ぐるぐる回されたらもう、そこがどこか分からない。	!rule:cx:web-fixes-i:200	keep	rewrites
