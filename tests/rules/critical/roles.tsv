@@ -1,4 +1,4 @@
-# 규칙: MNG-4, GRM-9
+# 규칙: MNG-4, GRM-9, GRM-3401
 rule	input	expected	kind	layer
 verb:synthetic-causative-potential	私は先生に練習を続けさせられた。	has:선생님 때문에 억지로	keep	analysis
 verb:synthetic-causative-potential	先生に書かされる。	has:선생님 때문에 억지로	keep	analysis
@@ -65,3 +65,7 @@ dict:jisjk:147415	ようなしとされる。	has:쓸모없다고 여겨진다	f
 dict:jisjk:147415	ようなしとされた。	has:쓸모없다고 여겨졌다	fix	compose
 dict:jisjk:267367	俺は黙って電話を切った。	has:전화를 끊었다	keep	compose
 dict:jisjk:362260	見ていただきたい。	has:주셨으면 한다	keep	analysis
+cx:experiencer-ni:10	誰にも分からない。	has:아무도 모른다	fix	rewrites
+cx:experiencer-ni:10	誰にも言えない。	has:누구에게도 말할 수 없다	keep	rewrites
+cx:experiencer-ni:10	誰にも負けない。	has:누구에게도 지지 않는다	keep	rewrites
+cx:experiencer-ni:40	それと言っとくが、俺に協力出来ないことを逃げると言ってんじゃねーからな。	has:나에게 협력	keep	rewrites

@@ -1,0 +1,31 @@
+# 규칙: GRM-3401
+rule	input	expected	kind	layer
+cx:experiencer-ni:10	真偽のほどは誰にも分からない、それでいい	진위 여부는 아무도 모른다, 그거면 된다	fix	rewrites
+cx:experiencer-ni:10	誰にもわからない	아무도 모른다	fix	rewrites
+cx:experiencer-ni:10	「誰にもわかんないよ」	「아무도 몰라」	fix	rewrites
+cx:experiencer-ni:10	そうなれば、もう誰にも止められない。	has:이제 아무도 멈출 수 없다	fix	rewrites
+cx:experiencer-ni:10	そんな器用なことはそうそう誰にも出来ないのだが、	has:아무도 할 수 없는데	fix	rewrites
+cx:experiencer-ni:10	もう誰にも壊せないから	has:아무도 부술	fix	rewrites
+cx:experiencer-ni:10	誰にも理解できない。	아무도 이해할 수 없다.	fix	rewrites
+cx:experiencer-ni:10	誰にも言えない。	누구에게도 말할 수 없다.	keep	rewrites
+cx:experiencer-ni:10	スピードなら誰にも負けません。	has:누구에게도 지지 않습니다	keep	rewrites
+cx:experiencer-ni:10	俺は誰にも頼れない。	has:누구에게도 의지할 수 없다	keep	rewrites
+cx:experiencer-ni:10	誰にも心を許せない癖もついたけど。	has:누구에게도 마음을	keep	rewrites
+cx:experiencer-ni:10	誰にも説明できねえだろう？	!rule:cx:experiencer-ni:10	keep	rewrites
+cx:experiencer-ni:10	誰にも相談できない。	누구에게도 상담할 수 없다.	keep	rewrites
+cx:experiencer-ni:30	千歳お姉にはさせられないわね…。	!rule:cx:experiencer-ni:30	keep	rewrites
+cx:experiencer-ni:20	「右のカードが何かは俺にもわからないさ。	has:나도 몰라	fix	rewrites
+cx:experiencer-ni:20	皆が不安がっているのは私にもわかります。	has:저도 압니다	fix	rewrites
+cx:experiencer-ni:20	「さあ、俺にもわからん」	has:나도 모른다	fix	rewrites
+cx:experiencer-ni:20	俺にもできる。	나라도 할 수 있다.	keep	rewrites
+cx:experiencer-ni:30	彼がうしろを通った時、うそじゃない、私にはわかった。	has:나는 알았다	fix	rewrites
+cx:experiencer-ni:30	遺言を実行することなんか今の俺にはとても出来ない。	has:지금의 나는 도저히 할 수 없다	fix	rewrites
+cx:experiencer-ni:30	何に使うものなのか麗乃には理解できない物がごちゃごちゃと詰め込まれた部屋だった。	has:우라노는 이해할 수 없는	fix	rewrites
+cx:experiencer-ni:30	≫128ミドリさんには分かるらしい	has:미도리 씨는 아는	fix	rewrites
+cx:experiencer-ni:30	彼女には言えない。	그녀에게는 말할 수 없다.	keep	rewrites
+cx:experiencer-ni:30	どうも魅音には全然頭が上がらないようだ。	has:미온에게는 전혀	keep	rewrites
+cx:experiencer-ni:40	こんな普通の学校で体育教師なんてしてるヤツに分かるわけがない。	has:녀석이 알 리가 없다	fix	rewrites
+cx:experiencer-ni:40	赤ん坊に出来る事は少ない。	갓난아기가 할 수 있는 일은 적다.	fix	rewrites
+cx:experiencer-ni:40	「私に出来ることであれば」	has:내가 할 수 있는	fix	rewrites
+cx:experiencer-ni:40	それと言っとくが、俺に協力出来ないことを逃げると言ってんじゃねーからな。	has:나에게 협력	keep	rewrites
+cx:experiencer-ni:40	「筧君がいい動きをしていたから、向こうは私に集中できなかったんです」	has:저에게 집중할	keep	rewrites
