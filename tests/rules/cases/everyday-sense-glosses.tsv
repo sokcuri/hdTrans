@@ -31,7 +31,7 @@ pack:everyday-sense-glosses:p4	素知らぬ顔で気付かない振りをする�
 pack:everyday-sense-glosses:p4	別段痛くは無かったが痛がる振りをする。	has:아파하는 척한다	fix	packs
 pack:everyday-sense-glosses:p4	何年振りに見た思い出の橋。	!rule:pack:everyday-sense-glosses:p4	keep	packs
 pack:everyday-sense-glosses:p5	そう言ったら、白けた目を向けられた。	has:눈길을 받았다	fix	packs
-pack:everyday-sense-glosses:p5	父親に捨てられた事が、継母に冷たい目を向けられた事が、	has:차가운 눈길을 받은	fix	packs
+pack:everyday-sense-glosses:p5	父親に捨てられた事が、継母に冷たい目を向けられた事が、	has:차가운 눈길을 받았던	fix	packs
 pack:everyday-sense-glosses:p5	健一が一方に目を向けた。	!rule:pack:everyday-sense-glosses:p5	keep	packs
 pack:everyday-sense-glosses:p6	夫か、もしくは周囲のサポートなしで出産後の母子が共に生きていくのは簡単ではない。	rule:pack:everyday-sense-glosses:p6=함께	fix	packs
 pack:everyday-sense-glosses:p6	僕も共に行く。	rule:pack:everyday-sense-glosses:p6=함께	fix	packs

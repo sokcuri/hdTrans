@@ -1,0 +1,47 @@
+# 규칙: GRM-3523
+rule	input	expected	kind	layer
+cx:novel-fixes-4:140	千里に嫉妬している……	has:천리를	fix	rewrites
+cx:novel-fixes-4:240	進級して専攻科に進むと、	has:전공과로	fix	rewrites
+cx:novel-fixes-4:150	Ａ組の圧力に耐えている。	has:압력을 견디고	fix	rewrites
+cx:novel-fixes-4:240	胸を張って 次に進みます｡	has:다음으로	fix	rewrites
+cx:novel-fixes-4:150	愚鈍と慣れでこれに耐える」	has:이것을 견딘다	fix	rewrites
+cx:novel-fixes-4:155	≪つべこべ言わずに耐えろ。	has:않고 견뎌라	fix	rewrites
+cx:novel-fixes-4:140	生まれて初めて雅人に嫉妬するわ	has:마사토를	fix	rewrites
+cx:novel-fixes-4:140	私　あなたに嫉妬しちゃったの。	has:나 당신을	fix	rewrites
+cx:novel-fixes-4:150	腰を震わせ、痛みに耐える玉藻。	has:아픔을 견디는	fix	rewrites
+cx:novel-fixes-4:150	反動に耐えるための骨格への強化、	has:반동을 견디기	fix	rewrites
+cx:novel-fixes-4:150	何千年の時に耐える城は建ちませぬ	has:때를 견디는	fix	rewrites
+cx:novel-fixes-4:150	でも、差別やイジメに耐えかねて、	has:이지메를	fix	rewrites
+cx:novel-fixes-4:150	山本の冷ややかな視線に耐えながら、	has:시선을 견디면서	fix	rewrites
+cx:novel-fixes-4:150	現役時代、拷問に耐える訓練を受けた。	has:고문을 견디는	fix	rewrites
+cx:novel-fixes-4:150	あの子 暴力に耐えてやってんのかなと…	has:폭력을 견뎌	fix	rewrites
+cx:novel-fixes-4:140	浮気に嫉妬して 追いかけてきた妻を演じ	has:바람기를	fix	rewrites
+cx:novel-fixes-4:150	我々は この小屋で一晩 嵐に耐えたのだ	has:폭풍우를 견뎠다	fix	rewrites
+cx:novel-fixes-4:150	撃ち切れ　この砲撃に耐えられる人間など	has:이 포격을	fix	rewrites
+cx:novel-fixes-4:155	もっと引きつけて　慌てずに耐えて待つの	has:않고 견뎌	fix	rewrites
+cx:novel-fixes-4:150	千莉が快感に耐えるように眉根を寄せる。	has:쾌감을 견디도록	fix	rewrites
+cx:novel-fixes-4:150	痛みに耐えながらも、笑顔を作るのぞみ。	has:아픔을 견디면서도	fix	rewrites
+cx:novel-fixes-4:150	朔夜は首を振り、快感の嵐に耐えている。	has:폭풍우를 견디고	fix	rewrites
+cx:novel-fixes-4:150	巨大な喪失感に耐えて、神山は怒声を発した	has:상실감을 견뎌	fix	rewrites
+cx:novel-fixes-4:150	胸ｷｭﾝに耐える訓練は受けてないんだよ！	has:두근을 견디는	fix	rewrites
+cx:novel-fixes-4:150	(ﾘｻﾞ)何に耐えてる顔なんだよそれ!?	has:뭘 견디고	fix	rewrites
+rewrite:verb-particles	≫754それはどういう嫉妬だよアホｗ	≫754 그것은 어떤 질투야 바보 ㅋ	keep	rewrites
+rewrite:verb-particles	「とりあえず、話を先に進めましょう」	「우선, 이야기를 앞으로 진행합시다」	keep	rewrites
+rewrite:verb-particles	「空母機動部隊」北方海域に進出せよ！	「항공 모함 기동부대」북방 해역에 진출하라!	keep	rewrites
+rewrite:verb-particles	さて、午後はどっち方面に進撃するの？	자, 오후는 어느 쪽 방면으로 진격하는 거야?	keep	rewrites
+rewrite:verb-particles	そうか…自分が前に進めば…いいんだ。	그런가…자신이 앞으로 나아가면…된다.	keep	rewrites
+rewrite:verb-particles	でも、段々暇に耐えられなくなってね。	하지만, 점점 한가하게 견딜 수 없게 돼.	keep	rewrites
+rewrite:verb-particles	どうやら学校では耐えていたらしいが、	아무래도 학교에서는 참고 있던 것 같지만,	keep	rewrites
+rewrite:verb-particles	嫉妬から主人公をナイフで襲おうとし、	질투로부터 주인공을 나이프로 덮치려고 해,	keep	rewrites
+rewrite:verb-particles	戦乱に耐え兼ね国を離れたんじゃない。	전란에 견딜 수 없고 나라를 떠난 거 아니야.	keep	rewrites
+rewrite:verb-particles	繰り返される衝撃に無心で耐えながら、	반복되는 충격에 무심해 참으면서,	keep	rewrites
+rewrite:verb-particles	）と喉まで出そうになったが、耐えた。	)와 목까지 나올 뻔했지만, 참았다.	keep	rewrites
+rewrite:verb-particles	いや～ 前半戦にふさわしい前半でした	이야~ 전반전에 어울린 전반이었습니다	keep	rewrites
+rewrite:verb-particles	その姿に　江青は嫉妬を募らせていた。	그 모습에 강청은 질투를 더해가고 있었다.	keep	rewrites
+rewrite:verb-particles	やがて激しい嫉妬の念に さいなまれ・	이윽고 격렬한 질투의 생각에 괴롭혀지고·	keep	rewrites
+rewrite:verb-particles	毛利夫人 嫉妬してるな 美与子さんに	모우리 부인 질투하고 있는미여자 씨에게	keep	rewrites
+rewrite:verb-particles	嫌よ　そんなの。　私　耐えられない。	싫어 그런 것. 나 견딜 수 없다.	keep	rewrites
+rewrite:verb-particles	それが 物語としてふさわしい姿だわ｡	그것이 이야기로서 적격인 모습이야.	keep	rewrites
+rewrite:verb-particles	あんたは 天才衛士にふさわしい働きを	너는 천재 위사에 어울린 활약을	keep	rewrites
+rewrite:verb-particles	新聖祭にふさわしい立派な砂糖菓子を》	신성제에 어울린 훌륭한 설탕 과자를》	keep	rewrites
+rewrite:verb-particles	君の勝ちを見届けるまで耐えてみせる！	네 승리를 지켜볼 때까지 참아 내겠다!	keep	rewrites

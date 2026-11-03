@@ -1,0 +1,37 @@
+# 규칙: LEX-4150
+rule	input	expected	kind	layer
+lookup:novel-words	あ、芹沢さんに口を塞がれた。	has:씨에게 입을 막혔다	fix	lookup
+lookup:novel-words	私がぶち破った窓から宙に身を投げ出せば、	has:몸을 내던지면	fix	lookup
+lookup:novel-words	後ろから手が伸びてきて、視界を塞がれる。	has:시야를 막힌다	fix	lookup
+lookup:novel-words	真っ白な光の中へ身を投げ出すような感覚。	has:몸을 내던지는	fix	lookup
+lookup:novel-words	女の子らしい優しさに満ち溢れているんですわ！	has:다정함이 넘쳐흘러	fix	lookup
+lookup:novel-words	止める暇もなく、佳奈に唇を塞がれてしまった。	has:카나에게 입술을 막혀버렸다	fix	lookup
+lookup:novel-words	けれど左側の視界が塞がれてるに等しい今の状況で、	has:시야가 막히고	fix	lookup
+lookup:novel-words	今は片手が塞がれると私が何も出来なくなっちゃうからね！	has:손이 막히면	fix	lookup
+lookup:novel-words	視界を塞がれ、生存権を脅かす他の肉食獣の匂いを嗅がされ、	has:시야를 막혀	fix	lookup
+lookup:novel-words	硝子の破片を払って立ち上がるのは、活力に満ち溢れた美しい少女。	has:활력이 넘쳐흐른	fix	lookup
+lookup:novel-words	１８２．異世界は幸せ（テンプレ）に満ち溢れている／うっちー（羽智	has:행복(템플릿)이 넘쳐흘러	fix	lookup
+lookup:novel-words	不機嫌そうに言うと、アールはソファに身を投げ出して、寝てしまった。	has:몸을 내던져	fix	lookup
+lookup:novel-words	たっぷりの自信に満ち溢れた彼は、いつも尊大な態度で周囲に接している。	has:자신감이 넘쳐흐른	fix	lookup
+lookup:novel-words	視界を塞がれただけじゃない、肉食獣の強い体臭、それも１種類じゃない、	has:시야를 막혔을	fix	lookup
+lookup:novel-words	歪み塞がれた	has:비뚤어져 막혔다	fix	lookup
+lookup:novel-words	あんな蜘蛛がわんさか溢れてる場所で、	저런 거미가 왕인가 흘러넘치고 있는 장소에서,	keep	lookup
+lookup:novel-words	そこには、強い決意が充ち満ちている。	거기에는, 강한 결의가 충가득 차 있다.	keep	lookup
+lookup:novel-words	とても気品に溢れた美しい少女だった。	무척 기품이 넘친 아름다운 소녀였다.	keep	lookup
+lookup:novel-words	今朝は、床に溢れた本に足を痛打した。	오늘 아침은, 바닥에 흘러넘친 책에 다리를 강타했다.	keep	lookup
+lookup:novel-words	潮を吹くかの勢いで、愛液が溢れ出す。	물을 뿜을까의 기세로, 애액이 넘쳐흐른다.	keep	lookup
+lookup:novel-words	投げ出せる覚悟のある人のことを言うの	내던질 수 있을 각오가 있는 남 말 해	keep	lookup
+lookup:novel-words	もっと穏やかな安らぎに満ちるはずです	좀 더 온화한 평온함으로 가득 찰 것입니다	keep	lookup
+lookup:novel-words	威厳と気品に満ち満ちているでしょう？	위엄과 기품으로 가득 차고 가득 차 있을까요?	keep	lookup
+lookup:novel-words	鼻こうに満ちる甘やかで 優しい香り！	비강으로 가득 차는 달짝지근하고 다정한 향기!	keep	lookup
+lookup:novel-words	思い出すと、また涙が溢れてきそうで。	생각해 내면, 또 눈물이 흘러넘쳐 올 것 같아.	keep	lookup
+lookup:novel-words	開いた口が塞がらなくなるじゃねぇか。	기가 막혀 말이 안 나오게 되잖아.	keep	lookup
+lookup:novel-words	だらんとだらしなく手足を投げ出して、	축 야무지지 못하게 손발을 내던지고,	keep	lookup
+lookup:novel-words	「片手塞がってるんで、貼って下さい」	「한 손 막히고 있어서, 붙여 주세요」	keep	lookup
+lookup:novel-words	自信の満ち溢れた笑みが口元に浮かぶ。	자신감이 넘쳐흐른 미소가 입가에 떠오른다.	keep	lookup
+lookup:novel-words	抗議の声を上げる真帆の口を舌で塞ぐ。	항의의 소리를 내는 마호의 입을 혀로 막는다.	keep	lookup
+lookup:novel-words	小太刀が自信に満ちた表情を浮かべる。	작은 칼이 자신감으로 가득 찬 표정을 짓는다.	keep	lookup
+lookup:novel-words	堰を切ったように、言葉が溢れてくる。	봇물이 터진 것처럼, 말이 새어 나온다.	keep	lookup
+lookup:novel-words	溢れたその体液を、凪が舌先ですくう。	흘러넘친 그 체액을, 지가 혀끝 (로) 건진다.	keep	lookup
+lookup:novel-words	凪が喜ぶと、結合部から愛液が溢れる。	지가 기뻐하면, 결합부에서 애액이 흘러넘친다.	keep	lookup
+lookup:novel-words	「ああ……筧くんが、溢れちゃう……」	「아……카케이 군이, 흘러넘칠 것 같아……」	keep	lookup

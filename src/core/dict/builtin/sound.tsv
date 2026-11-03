@@ -10,7 +10,8 @@
 // with ㅅ (やだやだっ 싫어 싫엇). KR/lemma writes the lemma before する (ぼーっとした 멍했다); acts in
 // the fourth column keeps KR before a する that describes a noun after it (ぷるぷるさせる 부들부들,
 // ぷるぷるした身 탱글탱글한); adj marks an ono row whose KR takes 하다 as an adjective, written KR한
-// before an の and a noun (ふわふわのクッション 푹신푹신한 쿠션).
+// before an の and a noun (ふわふわのクッション 푹신푹신한 쿠션); final marks an intj row said only at the end of an
+// utterance, which draws out no word after it (みー 미~, but みーつけた 찾아냈다).
 // Laughter
 ふふ	후후	intj
 ふふっ	후훗	intj
@@ -214,6 +215,7 @@
 はぅ	하우	intj
 はう	하우	intj
 はぅぅ	하우우	intj
+みぃ	미이	intj	final
 はわ	하와	intj
 はわわ	하와와	intj
 はわわっ	하와왓	intj
@@ -1503,6 +1505,7 @@
 ころっ	떼굴	ono
 ころり	떼굴	ono
 ころん	떼구르르	ono
+こてりん	털썩	ono
 ころころ	떼굴떼굴	ono
 ごきっ	우두둑	ono
 ごきごき	우두둑	ono

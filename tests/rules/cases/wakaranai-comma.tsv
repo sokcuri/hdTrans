@@ -1,0 +1,26 @@
+# 규칙: LEX-4162
+rule	input	expected	kind	layer
+cx:novel-fixes-4:270	わからない、わからないけど……	has:모르겠다	fix	rewrites
+cx:novel-fixes-4:270	わからない、	has:모르겠다	fix	rewrites
+cx:novel-fixes-4:270	わからない、私には何もわからない。	has:모르겠다,	fix	rewrites
+cx:novel-fixes-4:270	分からない、どうすればいいのか。	has:모르겠다,	fix	rewrites
+cx:novel-fixes-4:270	≪人の本性は、外からでは分からない。	≪사람의 본성은, 밖에서는 몰라.	keep	rewrites
+cx:novel-fixes-4:270	「……喩えがよくわからないんだけど」	「……비유하고를 잘 모르는데」	keep	rewrites
+cx:novel-fixes-4:270	「まだいけるかはわからないけど……」	「아직 갈 수 있을까는 모르는데……」	keep	rewrites
+cx:novel-fixes-4:270	アールにはそれも分からないんだろう。	아르에게는 그것도 모르겠지.	keep	rewrites
+cx:novel-fixes-4:270	小学１年生の知識の常識がわからない。	초등학교 1학년의 지식의 상식을 모른다.	keep	rewrites
+cx:novel-fixes-4:270	武術なんてよくわからないんだけどね。	무술 같은 건 잘 모르는데.	keep	rewrites
+cx:novel-fixes-4:270	全く答えの出し方が分からないのです｣	전혀 대답의 내는 방법을 모릅니다｣	keep	rewrites
+cx:novel-fixes-4:270	これは体験しなきゃ分からないですね｡	이것은 체험하지 않으면 모르네요.	keep	rewrites
+cx:novel-fixes-4:270	(田中)分からないですもん 確かに｡	(타나카) 모르는 걸 확실히.	keep	rewrites
+cx:novel-fixes-4:270	田舎のバカの人はよく餃子分からない！	시골의 바보의 사람은 잘 교자 몰라!	keep	rewrites
+cx:novel-fixes-4:270	温(あった)かいのかがまだ分からない	따뜻한 건지를 아직 모른다	keep	rewrites
+cx:novel-fixes-4:270	何で分からないんですか彼の悲しみを｡	왜 모릅니까 그의 슬픔을.	keep	rewrites
+cx:novel-fixes-4:270	｢我々警察でも わからないような事に	｢우리 경찰에서도 모르는 것 같은 일에	keep	rewrites
+cx:novel-fixes-4:270	もう　どうしたらいいか分からない…。	이제 어떻게 하면 좋은가 몰라….	keep	rewrites
+cx:novel-fixes-4:270	どう説明していいかわからないんです。	어떻게 설명해야 할지 모릅니다.	keep	rewrites
+cx:novel-fixes-4:270	どんな失礼なこと言うか分からない｡・	어떤 실례인 일 말하는지 모른다. ·	keep	rewrites
+cx:novel-fixes-4:270	自分が犯人かどうか分からないんです！	자신이 범인인가 어떤가 모릅니다!	keep	rewrites
+cx:novel-fixes-4:270	僕はホントに何も分からないんです…｡	저는 정말로 아무것도 모릅니다….	keep	rewrites
+cx:novel-fixes-4:270	分からない？ ほんとかい？知らない！	몰라? 정말이야? 몰라!	keep	rewrites
+cx:novel-fixes-4:270	私　分からない。　どうすればいいの？	나 모른다. 어떻게 하면 되는 거야?	keep	rewrites

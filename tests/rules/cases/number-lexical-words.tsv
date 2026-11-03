@@ -17,7 +17,7 @@ dict:jisjk:1859	一番になりたい。	1등이 되고 싶다.	keep	defaults
 dict:number-lexical-words	八つ当たりするな。	엉뚱한 화풀이하지 마.	keep	defaults
 dict:number-lexical-words	一つください。	하나 주세요.	keep	defaults
 dict:number-lexical-words	一人で行く。	혼자서 간다.	keep	defaults
-dict:jisjk:1859	地元から一番近いショッピングモールまで出た。	동네에서 제일 가까운 쇼핑 몰까지 나왔다.	keep	defaults
+dict:jisjk:1859	地元から一番近いショッピングモールまで出た。	동네에서 제일 가까운 쇼핑몰까지 나왔다.	keep	defaults
 dict:jisjk:1859	この状況で一番大事なのは一つだけだ。	이 상황에서 제일 소중한 것은 하나뿐이다.	keep	defaults
 dict:jisjk:1859	一番最初に脱落しそうだと思っていた。	제일 처음에 탈락할 것 같다고 생각했다.	keep	defaults
 dict:jisjk:1859	厨房に一番近い席。	주방에 제일 가까운 자리.	keep	defaults
@@ -40,7 +40,7 @@ dict:jisjk:365553	彼が一番好きだった料理ですね。	그가 제일 �
 dict:number-lexical-words	一人前のレディーとして扱ってよね！	어엿한 레이디로서 취급해!	fix	defaults
 dict:number-lexical-words	一人前のレディとして頂くわ。	어엿한 레이디로서 받을게.	fix	defaults
 dict:number-lexical-words	八つ裂きにしてやろう！	갈기갈기 찢기로 해 주마!	fix	defaults
-dict:number-lexical-words	今年の試合、一波乱あり。	금년 시합, 한바탕 파란 있어.	fix	defaults
+dict:number-lexical-words	今年の試合、一波乱あり。	올해 시합, 한바탕 파란 있어.	fix	defaults
 dict:number-lexical-words	一筋縄ではいかない者たちと行動を共にする。	보통 수단으로는 안되는 사람들과 행동을 같이 한다.	fix	defaults
 dict:number-lexical-words	一筋縄ではいかないわよ？	보통 수단으로는 안돼?	fix	defaults
 dict:jisjk:1859	軽巡洋艦、その長女、一番艦の子よ。	rule:dict:jisjk:1859=1번	fix	local

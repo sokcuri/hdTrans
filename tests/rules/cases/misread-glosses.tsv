@@ -72,4 +72,4 @@ dict:misread-glosses:24	舗装された道では無く森の獣道を歩いた�
 pack:misread-glosses:p1	食卓には、ノリに漬物に生卵に焼鮭。	has:김에 채소 절임	keep	packs
 pack:misread-glosses:p1	湯気を立てるご飯を、まずはノリで味わう。	has:김으로 맛본다	keep	packs
 dict:jisjk:14088	あとはいつものノリだった。	has:평소의 분위기였다	fix	defaults
-pack:misread-glosses:p2	「ええ、ご飯を奢る者と、奢られる者の関係です」	has:한턱내는 사람과 얻어먹는 사람	fix	packs
+pack:misread-glosses:p2	「ええ、ご飯を奢る者と、奢られる者の関係です」	has:한턱내는 사람과, 얻어먹는 사람	fix	packs

@@ -13,7 +13,7 @@ cx:humble-go:30	一番隊、参ります！	1번대, 가겠습니다!	fix	rewrit
 cx:humble-go:30	逃すわけにはいきません！参ります！	놓칠 수는 없습니다! 가겠습니다!	fix	rewrites
 cx:humble-go:30	機動部隊、出撃準備。まいります！	기동부대, 출격 준비. 가겠습니다!	fix	rewrites
 cx:humble-go:30	全力で参ります！	전력으로 가겠습니다!	fix	rewrites
-cx:humble-go:30	「では、改めてご挨拶に参ります」	「그럼, 다시 인사에 가겠습니다」	fix	rewrites
+cx:humble-go:30	「では、改めてご挨拶に参ります」	「그럼, 다시 인사하러 가겠습니다」	fix	rewrites
 cx:humble-go:30	参りますか？	!rule:cx:humble-go:30	keep	rewrites
 cx:humble-go:40	北欧スウェーデンから参りました。	북유럽 스웨덴에서 왔습니다.	fix	rewrites
 cx:humble-go:40	え、援護に参りました…。	어, 원호하러 왔습니다….	fix	rewrites

@@ -1,6 +1,6 @@
 # 규칙: GRM-95
 rule	input	expected	kind	layer
-cx:tokoro-kanji-past:10	試しに投稿されている小説をクリックしてみた所、普通に内容を読めた。	has:클릭해 보았는데, 보통으로	fix	rewrites
+cx:tokoro-kanji-past:10	試しに投稿されている小説をクリックしてみた所、普通に内容を読めた。	has:클릭해 보았는데, 그냥	fix	rewrites
 cx:tokoro-kanji-past:10	一ヶ月かけて、各地を回った所、一つの募集に目が着いた。	has:각지를 돌았는데,	fix	rewrites
 cx:tokoro-kanji-past:10	それを受けて調査した所、支持率が下がりました	has:조사했는데,	fix	rewrites
 cx:tokoro-kanji-past:10	来る前にセリカに相談してみた所、	has:상담해 보았는데,	fix	rewrites

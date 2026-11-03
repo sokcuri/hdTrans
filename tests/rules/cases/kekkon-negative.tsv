@@ -1,0 +1,33 @@
+# 규칙: GRM-3554
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:220	結婚していませんか？	has:결혼하지 않았습니까	fix	rewrites
+cx:corpus-fixes-1:220	食べていませんか？	!rule:cx:corpus-fixes-1:220	keep	rewrites
+cx:corpus-fixes-1:222	結婚していませんでしたか？	has:결혼하지 않았습니까	fix	rewrites
+cx:corpus-fixes-1:222	来ていませんでしたか？	!rule:cx:corpus-fixes-1:222	keep	rewrites
+cx:corpus-fixes-1:224	結婚していませんよね？	has:결혼하지 않았죠	fix	rewrites
+cx:corpus-fixes-1:224	食べていませんよね？	!rule:cx:corpus-fixes-1:224	keep	rewrites
+cx:corpus-fixes-1:226	結婚していませんよ。	has:결혼하지 않았어요	fix	rewrites
+cx:corpus-fixes-1:226	見ていませんよ。	!rule:cx:corpus-fixes-1:226	keep	rewrites
+cx:corpus-fixes-1:228	結婚していませんでしたよ。	has:결혼하지 않았어요	fix	rewrites
+cx:corpus-fixes-1:228	見ていませんでしたよ。	!rule:cx:corpus-fixes-1:228	keep	rewrites
+cx:corpus-fixes-1:230	結婚していませんでしたね。	has:결혼하지 않았군요	fix	rewrites
+cx:corpus-fixes-1:230	食べていませんでしたね。	!rule:cx:corpus-fixes-1:230	keep	rewrites
+cx:corpus-fixes-1:232	結婚していませんけど。	has:결혼하지 않았지만	fix	rewrites
+cx:corpus-fixes-1:232	食べていませんけど。	!rule:cx:corpus-fixes-1:232	keep	rewrites
+cx:corpus-fixes-1:234	結婚していませんし、	has:결혼하지 않았고	fix	rewrites
+cx:corpus-fixes-1:234	食べていませんし、	!rule:cx:corpus-fixes-1:234	keep	rewrites
+cx:corpus-fixes-1:236	結婚していませんでしたが、	has:결혼하지 않았습니다만	fix	rewrites
+cx:corpus-fixes-1:236	食べていませんでしたが、	!rule:cx:corpus-fixes-1:236	keep	rewrites
+cx:corpus-fixes-1:238	結婚していませんでしたから。	has:결혼하지 않았으니까	fix	rewrites
+cx:corpus-fixes-1:238	食べていませんでしたから。	!rule:cx:corpus-fixes-1:238	keep	rewrites
+cx:corpus-fixes-1:240	結婚していませんでしたので、	has:결혼하지 않았으므로	fix	rewrites
+cx:corpus-fixes-1:240	食べていませんでしたので、	!rule:cx:corpus-fixes-1:240	keep	rewrites
+cx:corpus-fixes-1:242	結婚していませんでしたっけ？	has:결혼하지 않았던가요	fix	rewrites
+cx:corpus-fixes-1:242	食べていませんでしたっけ？	!rule:cx:corpus-fixes-1:242	keep	rewrites
+cx:corpus-fixes-1:244	結婚していませんでした。	has:결혼하지 않았습니다	fix	rewrites
+cx:corpus-fixes-1:244	食べていませんでした。	!rule:cx:corpus-fixes-1:244	keep	rewrites
+cx:corpus-fixes-1:220	結婚していません。	has:결혼하지 않았습니다	keep	rewrites
+cx:corpus-fixes-1:220	注文していませんか？	has:주문하지 않았습니까	fix	rewrites
+cx:corpus-fixes-1:220	その椅子に座った客が思い思いに料理を注文していた	!rule:cx:corpus-fixes-1:220	keep	rewrites
+cx:corpus-fixes-1:220	慌てて周りを見回すが、こっちに注目している人はいなかった	!rule:cx:corpus-fixes-1:220	keep	rewrites
+cx:corpus-fixes-1:220	結婚していないか？	!rule:cx:corpus-fixes-1:220	keep	rewrites

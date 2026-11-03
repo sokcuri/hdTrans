@@ -1,0 +1,118 @@
+# 규칙: GRM-3500 ~ GRM-3513, GRM-3515
+rule	input	expected	kind	layer
+cx:novel-fixes-3:20	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:다 죽어가는 뇌세포가	fix	rewrites
+cx:novel-fixes-3:20	彼は死にかけた。	!rule:cx:novel-fixes-3:20	keep	rewrites
+cx:novel-fixes-3:25	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:그 때, 내 다 죽어가는	fix	rewrites
+cx:novel-fixes-3:25	俺の大事な脳細胞が	!rule:cx:novel-fixes-3:25	keep	rewrites
+cx:novel-fixes-3:30	苦笑いでも、泣き顔よかマシだ。	has:우는 얼굴보다는 낫다	fix	rewrites
+cx:novel-fixes-3:30	泣き顔よ、かわいいね。	!rule:cx:novel-fixes-3:30	keep	rewrites
+cx:novel-fixes-3:40	全然ユニークなんかじゃねーよ！	has:전혀 독특한 것도 아니야!	fix	rewrites
+cx:novel-fixes-3:40	テロリストに洗脳を受け、人殺しの道具にされている人間は幸福なんかじゃないわ	has:행복한 것도 아니야	fix	rewrites
+cx:novel-fixes-3:40	子供なんかじゃない！	!rule:cx:novel-fixes-3:40	keep	rewrites
+cx:novel-fixes-3:70	田村はまだ28歳で、俺とはだいぶ年も離れてるのに	has:아직 28세이고,	fix	rewrites
+cx:novel-fixes-3:70	あなたはまだ13歳で、まだデビュタントを済ませていないのだから	has:아직 13세이고,	fix	rewrites
+cx:novel-fixes-3:70	28歳で結婚した。	!rule:cx:novel-fixes-3:70	keep	rewrites
+cx:novel-fixes-3:80	田村が声にならない叫び声をあげながら駆け寄ってくる。	has:지르면서 달려온다.	fix	rewrites
+cx:novel-fixes-3:80	何らかの理由を見つけてここへ攻め込んでくる用意はしている	has:쳐들어올 준비는	fix	rewrites
+cx:novel-fixes-3:80	男が走ってくる。	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:90	てか、だんだん熱さも痛みも感じなくなってきた。	has:느끼지 않게 되었다.	fix	rewrites
+cx:novel-fixes-3:90	同じ人間とは思えなくなってきた・・・	같은 인간이라고는 생각되지 않게 되었다···	fix	rewrites
+cx:novel-fixes-3:90	寒くなってきた。	!rule:cx:novel-fixes-3:90	keep	rewrites
+cx:novel-fixes-3:95	本来有り得ぬ天文学的確率で、三上悟は、異なる世界の魔物として転生する事となる。	has:마물로서 전생하게 된다.	fix	rewrites
+cx:novel-fixes-3:95	いずれ本当に死ぬ事になるぞ	has:정말 죽게 되겠어	fix	rewrites
+cx:novel-fixes-3:95	イベントを全て見た事になる。	!rule:cx:novel-fixes-3:95	keep	rewrites
+cx:novel-fixes-3:100	対熱耐寒耐性を獲得した事により、	has:획득함으로써,	fix	rewrites
+cx:novel-fixes-3:100	事によると、雨かもしれない。	!rule:cx:novel-fixes-3:100	keep	rewrites
+cx:novel-fixes-3:110	続けて、エクストラスキル『賢者』をユニークスキル『大賢者』に進化させます	has:『대현자』로 진화시킵니다	fix	rewrites
+cx:novel-fixes-3:110	狼に変化した。	has:이리로 변화했다	fix	rewrites
+cx:novel-fixes-3:110	気温に変化があった。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:115	彼は魔王に変化した。	has:마왕으로 변화했다	fix	rewrites
+cx:novel-fixes-3:115	彼に変化を感じた。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:130	「仲間を助けてやってくれ！」	has:살려 줘!	fix	rewrites
+cx:novel-fixes-3:130	お前がやってくれ。	!rule:cx:novel-fixes-3:130	keep	rewrites
+cx:novel-fixes-3:135	データを完全に消去してやってくれ・・・	has:소거해 줘···	fix	rewrites
+cx:novel-fixes-3:135	早く許してやってくれ。	!rule:cx:novel-fixes-3:135	keep	rewrites
+cx:novel-fixes-3:140	「俺、本当は、沢渡の事、先輩に自慢したくて・・・」	has:사와타리를, 선배에게	fix	rewrites
+cx:novel-fixes-3:140	「俺の事、分かるよな」	has:나를, 알지	fix	rewrites
+cx:novel-fixes-3:140	沢渡の事が好きだ。	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:145	全部許してやるから、彼女の事、幸せにしてやれよ。	has:그녀를, 행복하게 해 줘	fix	rewrites
+cx:novel-fixes-3:145	彼女の事が好きだ。	!rule:cx:novel-fixes-3:145	keep	rewrites
+cx:novel-fixes-3:160	ってそれは駄目か。	has:그것은 안되나.	fix	rewrites
+cx:novel-fixes-3:160	「…端っこではダメか？」	has:가장자리에서는 안되나?	fix	rewrites
+cx:novel-fixes-3:160	それは駄目だ。	!rule:cx:novel-fixes-3:160	keep	rewrites
+cx:novel-fixes-3:180	どう見ても恋愛に縁の無さそうな俺に	has:연애에 인연이 없을 것 같은	fix	rewrites
+cx:novel-fixes-3:180	恋愛に縁の深い人	!rule:cx:novel-fixes-3:180	keep	rewrites
+cx:novel-fixes-3:220	真っ青な顔で泣きじゃくりそうな顔して、俺を抱えようとする田村。	has:얼굴을 하고, 나를	fix	rewrites
+cx:novel-fixes-3:220	「シケた顔して、どうした？」	has:얼굴을 하고, 무슨	fix	rewrites
+cx:novel-fixes-3:220	変な顔をして、笑った。	!rule:cx:novel-fixes-3:220	keep	rewrites
+cx:novel-fixes-3:232	「先輩。」本当に失礼な・・・	has:정말 실례네···	fix	rewrites
+cx:novel-fixes-3:232	「先輩。」本当に失礼な人だ。	!rule:cx:novel-fixes-3:232	keep	rewrites
+cx:novel-fixes-3:235	「そうか。それじゃあ、おまえは追放な」	has:너는 추방이야	fix	rewrites
+cx:novel-fixes-3:235	「とりあえず最初にくっついた相手採用な。」	has:상대 채용이야.	fix	rewrites
+cx:novel-fixes-3:235	「いや……、待ちな。」	!rule:cx:novel-fixes-3:235	keep	rewrites
+cx:novel-fixes-3:235	「ああ、サンキューな」	!rule:cx:novel-fixes-3:235	keep	rewrites
+cx:novel-fixes-3:240	救助中に攻撃なんて… 卑怯な！	has:비겁하네!	fix	rewrites
+cx:novel-fixes-3:240	「無礼な……！」	has:무례하네……!	fix	rewrites
+cx:novel-fixes-3:240	この人、何処かで見た様な	!rule:cx:novel-fixes-3:240	keep	rewrites
+cx:novel-fixes-3:240	それも、割と流暢な。	!rule:cx:novel-fixes-3:240	keep	rewrites
+dict:jisjk:344593	寒いのだ。寒くてどうしようもない。	has:추워서 어쩔 수 없다	fix	local
+dict:jisjk:344593	無性に故郷が懐かしくて堪らなくなった。	has:그리워서 견딜 수	fix	local
+dict:jisjk:344593	本当は泣きたくてしかたないでしょうに……	has:울고 싶어서 어쩔 수	fix	local
+dict:jisjk:344593	高くて美しい山だ。	!rule:dict:jisjk:344593	keep	local
+cx:novel-fixes-3:110	数日後に進化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	夜に変化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	戦闘中に進化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	その瞬間に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	春に変化が訪れた。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	ドラゴンに進化した。	has:드래곤으로 진화했다	fix	rewrites
+cx:novel-fixes-3:115	彼女に変化した様子はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:80	「ちょっと出かけてくる」	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:80	「俺、みんなと町に遊びに行ってくるから。」	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:80	ちょっと行ってくる。	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:95	俺の魔力は水弾二発分という事になる。	!rule:cx:novel-fixes-3:95	keep	rewrites
+cx:novel-fixes-3:95	つまり、俺はここまで歩いてやってきたという事になる。	!rule:cx:novel-fixes-3:95	keep	rewrites
+cx:novel-fixes-3:140	「私の事、興味があるの？」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	アールと会っていた事、ラピスの事、俺は聞かれた事には全て答えた。	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	「お前の事、話したよ」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	「彼の事、心配だ」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	坊ちゃんの事、宜しく頼むよ！	has:도련님을, 잘 부탁	fix	rewrites
+cx:novel-fixes-3:145	「彼女の事、話したよ」	!rule:cx:novel-fixes-3:145	keep	rewrites
+cx:novel-fixes-3:110	百年前に進化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	数分前に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	一年以内に変化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	長い年月の間に進化してきた。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	休みの間に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	この時期に進化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	その期間に進化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	ドラゴンに進化した。	has:드래곤으로 진화했다	fix	rewrites
+cx:novel-fixes-3:110	次の段階に進化した。	has:다음 단계로 진화했다	fix	rewrites
+cx:novel-fixes-3:110	水が液体に変化した。	has:액체로 변화했다	fix	rewrites
+cx:novel-fixes-3:115	田中さんに変化した様子はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	兵士たちに変化した様子はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:140	「彼の事、知人から聞いた」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:145	「彼女の事、頼もしいと思う」	!rule:cx:novel-fixes-3:145	keep	rewrites
+cx:novel-fixes-3:145	「彼女の事、幸せだと思う？」	!rule:cx:novel-fixes-3:145	keep	rewrites
+cx:novel-fixes-3:145	「彼女の事、自慢の妹だ」	!rule:cx:novel-fixes-3:145	keep	rewrites
+cx:novel-fixes-3:145	「彼女の事、心配で見に来た」	!rule:cx:novel-fixes-3:145	keep	rewrites
+cx:novel-fixes-3:145	「彼女の事、好きなんだ」	has:그녀를, 좋아해	fix	rewrites
+cx:novel-fixes-3:110	体に変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	彼の体に変化した部分はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	身体に変化した感じはない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	田中に変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:115	犬に変化した様子はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	犬に変化した。	has:개로 변화했다	fix	rewrites
+cx:novel-fixes-3:110	地形に変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	システムに変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	ロンドンに変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	クリスマスに進化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	このタイミングに変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	シーズンに変化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	次のターンに進化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	全体に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	スライムに進化した。	has:슬라임으로 진화했다	fix	rewrites
+cx:novel-fixes-3:110	田中に変化したところはない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	メンバーに変化した点はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:115	メンバーに変化した点はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	田中に変化させられた。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	猫に変化させられた。	has:고양이로 변화되었다	fix	rewrites
+cx:novel-fixes-3:110	ドラゴンに進化したところだ。	has:드래곤으로 진화한	fix	rewrites

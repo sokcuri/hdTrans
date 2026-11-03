@@ -23,7 +23,7 @@ lookup:kana-spelling	「よくないから……ばちが当たったんだ…�
 dict:jisjk:193018	しんぱいだなぁ	걱정이구나	fix	defaults
 dict:jisjk:193018	「しんぱいだから」	「걱정이니까」	fix	defaults
 dict:jisjk:193018	「ずっとしんぱいしてたんだ」	「계속 걱정하고 있었어」	keep	local
-lookup:kana-spelling	学園で彼女をいじめ、馬鹿にして笑い	학원에서 그녀를 괴롭혀 무시해 웃음	keep	lookup
+lookup:kana-spelling	学園で彼女をいじめ、馬鹿にして笑い	학원에서 그녀를 괴롭혀, 무시해 웃음	keep	lookup
 lookup:kana-spelling	いじめたら損をするって……話……したよな？	괴롭히면 손해 본다는……이야기……했지?	keep	lookup
 lookup:kana-spelling	じゃあ、このへんでお別れかな？	has:쯤에서	keep	lookup
 lookup:kana-spelling	いっこうに勝てる気配のない	전혀 이길 수 있는 기색이 없다	keep	lookup

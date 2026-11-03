@@ -108,6 +108,8 @@
 あばよ	잘 있어라	intj
 
 // Exclamations and calls.
+ふぁいと	파이팅	intj
+お持ち帰り	가져갈래	intj	exclaim
 なんてこった	이럴 수가	intj
 何ですって	뭐라고요	intj
 なんですって	뭐라고요	intj
@@ -501,7 +503,7 @@
 思いを寄せる	마음을 두다	v1
 今になって	이제 와서	phrase
 更には	게다가	phrase
-背を押す	등을 떠밀다	v5
+背を押す	등을 밀다	v5
 言うに事を欠いて	하필이면	phrase
 糸を引く	배후에서 조종하다	v5
 調べが付く	조사가 끝나다	v5
@@ -634,6 +636,9 @@
 かなわんな	못 견디겠네	phrase
 なんとなくだが	막연하게나마	phrase
 何様のつもり	뭐라도 된 줄 아는 거	phrase
+感謝に堪えません	감사하기 그지없습니다	phrase
+どう転んでも	어떻게 되든	phrase
+どう転んだって	어떻게 되든	phrase
 覚悟はいいな	각오는 됐겠지	phrase
 覚悟はいいか	각오는 됐나	phrase
 そうとなれば	그렇게 되면	phrase
@@ -877,7 +882,7 @@
 どうしろというんだ	어쩌라는 거야	phrase
 よそう	그만두자	intj
 まだしも	그나마	adv
-ならまだしも	라면 몰라도	phrase
+ならまだしも	(이)라면 몰라도	phrase	gattr=Tu
 有無を言わさない	거부할 수 없다	adj
 有無を言わせない	거부할 수 없다	adj
 気付いたら	정신을 차려 보니	adv
@@ -1285,8 +1290,8 @@
 はずだ	그럴 것이다	intj
 はずです	그럴 것입니다	intj
 はずだった	그럴 것이었다	intj
-って何だよ	라니 뭐야	phrase
-ってなんだよ	라니 뭐야	phrase
+って何だよ	(이)라니 뭐야	phrase	gattr=Tu
+ってなんだよ	(이)라니 뭐야	phrase	gattr=Tu
 マジかよ	진짜냐	intj
 マジか	진짜냐	intj
 マジで	진짜로	adv
@@ -1331,6 +1336,13 @@
 
 場を以て	자리에서	phrase
 近づいてくる	다가오다	v
+近付いてくる	다가오다	v
+もう少しだけ	조금만 더	phrase
+もうちょっとだけ	조금만 더	phrase
+いかがなさいましたか	무슨 일이십니까	phrase
+に引き続き、	에 이어,	phrase	gattr=Tu
+何と言うことはない	별것 아니다	phrase
+何ということはない	별것 아니다	phrase
 もう一つは	또 하나는	phrase
 自信満々の	자신만만한	phrase
 唸るように	신음하듯이	phrase

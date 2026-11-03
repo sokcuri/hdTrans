@@ -3992,7 +3992,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 綺麗な薔薇には刺があ	아름다운 장미에는 가시가 &HN@	M428			GN				llm			i:3988
 餅は餅屋	떡은 떡집에 맡겨라	A9D0			GN				llm			i:3989
 モチはモチ屋	떡은 떡집에 맡겨라	A9D0			GN				llm			i:3990
-初めとする	을 비롯한	A9D0			GN				llm			i:3991
+初めとする	비롯한	A9D0			GN				llm			i:3991
 ボタンを掛け	단추를 채&AI@	M427		Pn	GN				llm			i:3992
 手元現金	보유 현금	A9D0			GN				llm			i:3993
 手許現金	보유 현금	A9D0			GN				llm			i:3994
@@ -5367,7 +5367,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 オイラーの公式	오일러의 공식	N110			GN							i:5364
 なんか用	무슨 용건이야	A9D0			GN				llm			i:5365
 なにか用	무슨 용건이야	A9D0			GN				llm			i:5366
-サザエの壺焼き	쓰보야키	N110			GN							i:5367
+サザエの壺焼き	츠보야키	N110			GN							i:5367
 栄螺の壺焼き	소라 통구이	N110			GN				llm			i:5368
 合意形成	합의 의사결정	N110			GN							i:5369
 小高い丘	나지막한 언덕	N110			GN				llm			i:5370
@@ -5634,7 +5634,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 実を付け	열매를 &FV@	M427		Pn	GN				llm			i:5631
 目で追	눈으로 &FL@	M420			GN				llm			i:5632
 夏の盛り	한여름	N110			GN				llm			i:5633
-耳に残	귓전에 아른거&AA@	M428			GN							i:5634
+耳に残	귓가에 맴&K9@	M428			GN							i:5634
 電話口に出	전화를 &FD@	M427			GN				llm			i:5635
 皮肉にも	얄궂게도	E300			GN				llm			i:5636
 犠牲者を出	희생자를 &A6@	M423		Pn	GN				llm			i:5637
@@ -6575,7 +6575,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 麒麟も老いぬれば駑馬に劣	기린도 늙으면 둔마만 못&AV@	M428			GN				llm			i:6572
 騏驎も老いぬれば駑馬に劣	기린도 늙으면 둔마만 못&AV@	M428			GN				llm			i:6573
 好意を持	호감을 가&AL@	M424		Pn	GN				llm			i:6574
-背中を押	등을 떠&LN@	M423		Pn	GN				llm			i:6575
+背中を押	등을 &LN@	M423		Pn	GN				llm			i:6575
 やすりを掛け	줄질을 &AV@	M427		Pn	GN				llm			i:6576
 鑢を掛け	줄질을 &AV@	M427		Pn	GN				llm			i:6577
 パンドラの箱を開け	판도라의 상자를 &LB@	M427		Pn	GN				llm			i:6578

@@ -5,7 +5,7 @@ pre-select:unplaced-particle	女性と見まごうような繊細な輪郭	has:�
 pre-select:unplaced-particle	噂は聞けど姿は見えず	has:소문은	fix	pre-select
 pre-select:unplaced-particle	落胆を隠せぬまま	has:낙담을	fix	pre-select
 pre-select:unplaced-particle	愛情を持ってたくて	has:애정을	fix	pre-select
-pre-select:unplaced-particle	気を遣われたくもない	has:기분을	fix	pre-select
+pre-select:unplaced-particle	気を遣われたくもない	has:신경을	fix	pre-select
 pre-select:unplaced-particle	まさか穴を掘るってんじゃないだろうな	has:구멍을	fix	pre-select
 pre-select:unplaced-particle	ゲームを待っててにゃ	has:게임을	fix	pre-select
 pre-select:unplaced-particle	どういう風の吹きまわしだ？	has:바람의	fix	pre-select
@@ -74,7 +74,7 @@ pre-select:unplaced-head	許してやんよ！	has:용서해	keep	pre-select
 pre-select:unplaced-head	とってやんよ♪	has:취해	keep	pre-select
 pre-select:unplaced-head	マジでやってやんよ！	has:진짜로 해	keep	pre-select
 pre-select:unplaced-head	お前らもやんねぇか？	lacks:잖아	keep	pre-select
-pre-select:unplaced-head	仲間に会わせてやんないとな。	has:주지 않으면	keep	pre-select
+pre-select:unplaced-head	仲間に会わせてやんないとな。	has:주어야지	keep	pre-select
 pre-select:unplaced-head	殺しはやんねぇ。	lacks:잖아	keep	pre-select
 pre-select:unplaced-head	やんちゃな子供だった。	has:장난스러운 아이였다	keep	pre-select
 pre-select:unplaced-head	相変わらずやんちゃ	has:변함없이	keep	pre-select

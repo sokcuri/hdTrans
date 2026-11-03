@@ -1,0 +1,25 @@
+# 규칙: GRM-3540
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:10	「採用試験は命を危険に晒すものじゃからの。	has:것이니까	fix	rewrites
+cx:corpus-fixes-1:10	「あれはわしのものじゃ。」	!rule:cx:corpus-fixes-1:10	keep	rewrites
+cx:corpus-fixes-1:20	わしみたいなダンデーは、どこ行っても、ラブラブじゃからな。	has:알콩달콩이니까	fix	rewrites
+cx:corpus-fixes-1:20	「うむ、お前を往復させても時間の無駄じゃからな。	has:시간 낭비니까	fix	rewrites
+cx:corpus-fixes-1:20	もうすぐ……じゃからなあ。	has:이제 곧……이니까	fix	rewrites
+cx:corpus-fixes-1:20	それじゃ、もう一度説明するから。	!rule:cx:corpus-fixes-1:20	keep	rewrites
+cx:corpus-fixes-1:20	「じゃ、私もう行くからね」	!rule:cx:corpus-fixes-1:20	keep	rewrites
+cx:corpus-fixes-1:20	「それじゃ、時間がないからもう行くね。	!rule:cx:corpus-fixes-1:20	keep	rewrites
+cx:corpus-fixes-1:20	まあ、そうじゃな。	!rule:cx:corpus-fixes-1:20	keep	rewrites
+cx:corpus-fixes-1:20	ほんまじゃぞぅ？	!rule:cx:corpus-fixes-1:20	keep	rewrites
+cx:corpus-fixes-1:25	別に好きなの選んでもええけど、先に潜入してる子との予備分やから全部持っていくんやで	has:예비분이니까 전부	fix	rewrites
+cx:corpus-fixes-1:25	むしろこんなんやから別の手段が必要になったんだよ！	has:이니까 다른 수단	fix	rewrites
+cx:corpus-fixes-1:25	ミナトやリョウタからも報告なし？	!rule:cx:corpus-fixes-1:25	keep	rewrites
+cx:corpus-fixes-1:25	鏡は無いが、手や足から若返った感じがする。	!rule:cx:corpus-fixes-1:25	keep	rewrites
+cx:corpus-fixes-1:25	これなら……敵機や敵潜から、みんなを守れます！	!rule:cx:corpus-fixes-1:25	keep	rewrites
+cx:corpus-fixes-1:27	微妙に話し聞かんのはキッドの双子やからか？	has:쌍둥이라서인지	fix	rewrites
+cx:corpus-fixes-1:27	東京や大阪からか？	!rule:cx:corpus-fixes-1:27	keep	rewrites
+cx:corpus-fixes-1:30	危険な獣どもがうろうろしとるし、おそろしい火食いトカゲまで住み着いとるんじゃからな。	has:정착하고 있으니까	fix	rewrites
+cx:corpus-fixes-1:30	俺は尋問官じゃないからな。	!rule:cx:corpus-fixes-1:30	keep	rewrites
+cx:corpus-fixes-1:30	安心して、カルトじゃないから。	!rule:cx:corpus-fixes-1:30	keep	rewrites
+cx:corpus-fixes-1:30	いやいや、衝突の傷じゃないから。	!rule:cx:corpus-fixes-1:30	keep	rewrites
+cx:corpus-fixes-1:40	わしはもう行ったんじゃからな。	has:갔으니까	fix	rewrites
+cx:corpus-fixes-1:40	わしはもう行ったんだからな。	!rule:cx:corpus-fixes-1:40	keep	rewrites

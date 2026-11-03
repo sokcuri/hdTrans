@@ -40,7 +40,7 @@ constraint:honorific-kanji-name	始まって、Ｅ↓Ｄ↓Ｃ↓Ｂ↓Ａ↓Ｓ
 constraint:honorific-kanji-name	「ねえ、恵さん」	「있잖아, 메구미 씨」	keep	lookup
 constraint:honorific-kanji-name	進さんといるのは嫌いではない。	스스무 씨와 있는 것은 싫지 않다.	keep	lookup
 constraint:honorific-kanji-name	家に茜さんの香りを持って帰ろうとしたのに。	집에 아카네 씨의 향기를 가지고 돌아가려고 했는데.	keep	lookup
-constraint:honorific-kanji-name	守君のことは大家さんに任せ、悠夏は守君の母親に連絡した。	마모루 군은 집주인에 맡겨 하루카는 마모루 군의 어머니에게 연락했다.	keep	lookup
+constraint:honorific-kanji-name	守君のことは大家さんに任せ、悠夏は守君の母親に連絡した。	마모루 군은 집주인에 맡겨, 하루카는 마모루 군의 어머니에게 연락했다.	keep	lookup
 constraint:honorific-kanji-name	値段の安さまで同じだった。	has:쌈까지	keep	lookup
 constraint:honorific-kanji-name	その潔さまで見事だ。	lacks:님	keep	lookup
 constraint:honorific-kanji-name	彼の偉さまでは分からない。	lacks:님	keep	lookup

@@ -1,0 +1,20 @@
+# 규칙: LEX-4400, LEX-4401, LEX-4402
+rule	input	expected	kind	layer
+dict:pity-clipped	…かわいそかわいそです。	…불쌍해 불쌍합니다.	fix	lookup
+dict:pity-clipped	兄にいじめられてかわいそかわいそですよ	형에게 괴롭힘을 당해 불쌍해 불쌍해요	fix	lookup
+dict:pity-clipped	かわいそかわいそなのです	불쌍해 불쌍합니다	fix	lookup
+dict:pity-clipped	かわいそ…	불쌍해…	fix	lookup
+dict:pity-clipped	かわいそうな子	불쌍한 아이	keep	lookup
+phrase:takeaway-cry	はぅ〜〜〜、お持ち帰り〜！！！	하우~, 가져갈래~!!!	fix	builtin-phrase
+phrase:takeaway-cry	はぅ……お持ち帰り……☆	하우……가져갈래……☆	fix	builtin-phrase
+phrase:takeaway-cry	お、お持ち帰り…じゃなくて！	가, 가져갈래…가 아니고!	fix	builtin-phrase
+phrase:takeaway-cry	…お持ち帰りお持ち帰り…☆	…가져갈래 가져갈래…☆	fix	builtin-phrase
+phrase:takeaway-cry	お持ち帰りですか？	가지고 가실겁니까?	keep	builtin-phrase
+phrase:takeaway-cry	お持ち帰りしたい〜！	가지고 돌아가고 싶어~!	keep	builtin-phrase
+phrase:takeaway-cry	ふぁいと、おー！	파이팅, 오―！	fix	builtin-phrase
+cx:cheer-fight:10	「…ファイト、おーです。」	「…파이팅, 오입니다.」	fix	rewrites
+cx:cheer-fight:10	「「「ファイト、お〜〜〜♪」」」	「「「파이팅, 오~~~♪」」」	fix	rewrites
+cx:cheer-fight:10	うん！ファイト！！	응! 파이팅!!	fix	rewrites
+cx:cheer-fight:10	いいファイトだった	좋은 투지였다	keep	rewrites
+cx:cheer-fight:10	ファイトマネー	파이트 머니	keep	rewrites
+cx:cheer-fight:10	あの子のファイト、すごかった	그 아이의 투지, 대단했다	keep	rewrites

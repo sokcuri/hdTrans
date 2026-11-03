@@ -508,6 +508,18 @@ bool AfterRestart(const Worker& w, const Item* it) {
     return false;
 }
 
+bool AfterLeaveTaking(const Worker& w, const Item* it) {
+    const auto cues = dict::ClassMembers(HDTRANS_CLASS("word.leave-taking"));
+    const auto has = [&](std::string_view s) {
+        return std::ranges::any_of(cues, [&](std::string_view m) { return s.find(m) != std::string_view::npos; });
+    };
+    if (has(it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0))))) return true;
+    for (int token = it->tokenIndex - 1; token >= 0; token--) {
+        if (has(w.Tok(token).text)) return true;
+    }
+    return false;
+}
+
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     const int count = static_cast<int>(it->group->entries.size());
     for (int slot = 0; slot < count; slot++) {
@@ -1226,7 +1238,26 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     // The shorter verb's passive (腕を掴まれた), with its object or after an agent in a narrative form;
     // else the potential of the verb in ーaる stays (繋がれると思った).
     if (form == VoiceForm::Shorter) {
-        return ObjectBefore(it) || (agent != nullptr && NarrativePassive(it, rest)) ? Voice::Passive : Voice::None;
+        if (ObjectBefore(it) || (agent != nullptr && NarrativePassive(it, rest))) return Voice::Passive;
+        // A て form, a progressive or たまま is a state one is put in (後ろから掴まれて, 呪いで繋がれたまま), not
+        // what one manages: but for ても and a partner in と right before (佐藤さんと繋がれて).
+        // A thing of noun.hold-on in に before 掴まる or 捕まる is what one holds on to (手すりに掴まれて), not
+        // who grabs (触手に掴まれて stays passive).
+        const bool partner = it->prev != nullptr && it->prev->group->surface == "と";
+        const std::string_view surface = it->group->surface;
+        bool heldThing = false;
+        if (surface.starts_with("掴") || surface.starts_with("捕") || surface.starts_with("つか")) {
+            for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+                const std::string_view s = p->group->surface;
+                if (s != "に" && s != "にも" && s != "には") continue;
+                const Item* a = p->prev;
+                heldThing = a != nullptr && dict::EndsWithMember(HDTRANS_CLASS("noun.hold-on"), a->group->surface) > 0;
+                break;
+            }
+        }
+        return !partner && !heldThing && ((rest.starts_with("て") && !rest.starts_with("ても")) || rest.starts_with("たまま"))
+                   ? Voice::Passive
+                   : Voice::None;
     }
     // The られ of an ichidan verb that takes no object has no Korean passive (寝られたら困る), so only
     // its form and clause decide it; an object in its clause or in the word (服を着) shows one.
@@ -1775,7 +1806,7 @@ void ResultState(Flusher& f) {
         const std::string_view stem = v->group->surface;
         const char c1 = At(v->Code(v->selected), 1);
         const bool object = c1 >= '3' && c1 <= '6';
-        if ((stem == "な" || stem == "にな") && GradualBefore(v)) continue;
+        if ((stem == "な" || stem == "にな" || stem.ends_with("くな")) && GradualBefore(v)) continue;
         if (stem == "にな" && v->prev != nullptr && dict::InClass(HDTRANS_CLASS("noun.ongoing-ninaru"), v->prev->group->surface)) {
             continue;
         }

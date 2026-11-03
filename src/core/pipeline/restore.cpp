@@ -678,13 +678,46 @@ std::string DropParticleMarks(std::string_view s) {
     return out;
 }
 
+// The contents of the parenthesized groups of source, ( or （ to ) or ）, in order.
+std::vector<std::u32string> ParenthesizedGroups(std::string_view source) {
+    std::vector<std::u32string> groups;
+    const std::u32string rs = Runes(source);
+    for (std::size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] != U'(' && rs[i] != U'（') continue;
+        std::size_t j = i + 1;
+        while (j < rs.size() && rs[j] != U')' && rs[j] != U'）' && rs[j] != U'(' && rs[j] != U'（') j++;
+        if (j >= rs.size() || rs[j] == U'(' || rs[j] == U'（') continue;
+        groups.push_back(rs.substr(i + 1, j - i - 1));
+        i = j;
+    }
+    return groups;
+}
+
 // line without a gloss in parentheses that only repeats the word before it, as a kana gloss
-// of a reading or a name reads once translated (저(저) 저, 미카(미카) 미카).
-std::string DropEchoedGlosses(std::string_view line) {
+// of a reading or a name reads once translated (저(저) 저, 미카(미카) 미카), or that repeats the end of
+// the word as the reading of its last kanji (魔剣（けん） 마검). A gloss repeating the end of the word
+// stays when its source group is katakana, a short name after the full one (セレスティナ（ティナ）
+// 세레스티나(티나)); groups of line and source pair by order when both have as many.
+std::string DropEchoedGlosses(std::string_view line, std::string_view source) {
     std::u32string rs = Runes(line);
+    const std::vector<std::u32string> groups = ParenthesizedGroups(source);
+    std::size_t opened = 0;
+    for (const char32_t r : rs) opened += r == U'(';
+    const bool paired = opened == groups.size();
     auto hangul = [](char32_t r) { return r >= U'가' && r <= U'힣'; };
-    for (std::size_t i = 1; i < rs.size(); i++) {
-        if (rs[i] != U'(' || !hangul(rs[i - 1])) continue;
+    auto katakana = [](const std::u32string& g) {
+        bool any = false;
+        for (const char32_t r : g) {
+            if (r >= U'ァ' && r <= U'ヺ') any = true;
+            else if (r != U'ー' && r != U'・') return false;
+        }
+        return any;
+    };
+    std::size_t group = 0;
+    for (std::size_t i = 0; i < rs.size(); i++) {
+        if (rs[i] != U'(') continue;
+        const std::size_t at = group++;
+        if (i == 0 || !hangul(rs[i - 1])) continue;
         std::size_t j = i + 1;
         while (j < rs.size() && hangul(rs[j])) j++;
         if (j == i + 1 || j >= rs.size() || rs[j] != U')') continue;
@@ -692,7 +725,9 @@ std::string DropEchoedGlosses(std::string_view line) {
         std::size_t word = i;  // the start of the Hangul run before (
         while (word > 0 && hangul(rs[word - 1])) word--;
         if (i - word < n || rs.compare(i - n, n, rs, i + 1, n) != 0) continue;
+        if (i - word > n && paired && katakana(groups[at])) continue;
         rs.erase(i, n + 2);
+        i--;
     }
     return Utf8(rs);
 }
@@ -945,10 +980,12 @@ RestoreSteps RestoreAll(const Pieces& cleaned, const Pieces& typed, bool keepBra
         const std::string korean = KoreanForms(s);
         return literalCleanup ? KoreanCleanup(korean) : korean;
     });
+    const std::string source = output::String(typed);
     st.line = UnescapePrivateUse(WriteLaughter(
-        DropEchoedGlosses(DropParticleMarks(
-            WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(WriteDropped(WriteStress(WriteSilentCommas(output::String(st.korean)))))))))),
-        output::String(typed)));
+        DropEchoedGlosses(DropParticleMarks(WriteLengthening(WriteEmphasis(WriteDrawls(WriteStutters(
+                              WriteDropped(WriteStress(WriteSilentCommas(output::String(st.korean))))))))),
+                          source),
+        source));
     if (literalCleanup) st.line = RetortIdioms(st.line);
     return st;
 }

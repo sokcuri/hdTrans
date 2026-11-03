@@ -13,7 +13,9 @@ syllable. It breaks the rule when つ or ツ is written 쓰 or 쯔, or when a hi
 た, ち, て, と or ぱ-row kana after the first syllable of a word is written with ㄲ, ㄸ, ㅃ or ㅉ
 (はなこ 하나꼬). ちゃん and たん after a name keep 짱 and 땅 (LEX-30), a word whose first syllable is
 already tense imitates a sound (ぷよぷよ 뿌요뿌요), and katakana written with tense consonants is a
-loanword (LEX-1). A proper noun row with a kanji key and no reading that aligns breaks the rule when
+loanword (LEX-1). A row whose kana does not align as a whole breaks the rule when a kana run of its key or
+reading is spelled by two or more syllables in a row of one Hangul word with 쓰 or 쯔 for a つ (つくば万博
+쓰쿠바 세계 박람회, ゴーストオブツシマ 고스트 오브 쓰시마). A proper noun row with a kanji key and no reading that aligns breaks the rule when
 a Hangul word of its target that kana can spell holds 쓰 or 쯔, or ends in 꼬 for a key ending in 子
 (夏月 나쓰키, 花子 하나꼬). The allowance lists the rows of that shape that are not Japanese readings
 (四平市 쓰핑시, クズ二号 쓰레기 2호) as file<TAB>key<TAB>ko; --check fails on a row that breaks the
@@ -21,6 +23,7 @@ rule and is not listed, on a listed row that no longer does and on a line listed
 allowance only shrinks.
 Exit: 0 clean, 1 findings, 2 invalid arguments.
 """
+import re
 import sys
 from pathlib import Path
 
@@ -48,6 +51,8 @@ FINAL_Q, FINAL_N = {19, 1, 17, 7}, {4, 21, 16}
 TENSE = {1, 4, 8, 13}  # ㄲ ㄸ ㅃ ㅉ
 PLAIN = {"k", "t", "p", "ch"}
 TSU = {"쓰", "쯔"}
+KANA_RUN = re.compile("[ぁ-ゖァ-ヺー]+")
+HANGUL_RUN = re.compile("[가-힣]+")
 
 
 def split(c):
@@ -127,6 +132,36 @@ def align(ms, sy):
     return go(0, 0, "")
 
 
+def tsu_in_part(ms, sy):
+    """Whether two or more syllables in a row of sy spell morae of ms in a row, one of them 쓰 or 쯔 for a つ."""
+    parts = [split(c) for c in sy]
+    none = -len(sy) - 1
+    memo = {}
+
+    def go(i, j, prev):
+        # (most syllables spelled from sy[j] on against ms[i] on, most of them on a path through a つ written 쓰 or 쯔)
+        if (i, j, prev) in memo:
+            return memo[i, j, prev]
+        best, tsu = 0, none
+        if i < len(ms) and j < len(sy):
+            cons, v, _ = ms[i]
+            if cons in ("Q", "L") or (cons == "" and (prev, v) in LONG):
+                n, t = go(i + 1, j, prev)
+                best, tsu = max(best, n), max(tsu, t)
+            if cons not in ("Q", "N", "L") and parts[j] is not None:
+                ini, vo, fin = parts[j]
+                nxt = ms[i + 1][0] if i + 1 < len(ms) else ""
+                if ini in INITIALS.get(cons, ()) and vo in vowels(cons, v) and not (ini == 10 and vo == 18 and cons != "ts"):
+                    step = 1 if fin == 0 else 2 if (nxt == "Q" and fin in FINAL_Q) or (nxt == "N" and fin in FINAL_N) else 0
+                    if step:
+                        n, t = go(i + step, j + 1, v)
+                        best, tsu = max(best, n + 1), max(tsu, t + 1, n + 1 if cons == "ts" and sy[j] in TSU else none)
+        memo[i, j, prev] = best, tsu
+        return best, tsu
+
+    return any(go(i, j, ms[i - 1][1] if i else "")[1] >= 2 for i in range(len(ms)) for j in range(len(sy)))
+
+
 def kana_only(s):
     return bool(s) and all("ぁ" <= c <= "ゖ" or "ァ" <= c <= "ヺ" or c in "ー・ 　" for c in s)
 
@@ -148,12 +183,22 @@ def breaks(key, ko, reading, pos):
     source = key if kana_only(key) else reading if kana_only(reading) else ""
     ms = morae("".join(c for c in source if c not in "・ 　")) if source else None
     at = align(ms, sy) if ms else None
+    if at is None and any("쓰" in w or "쯔" in w for w in ko.split()):
+        # A kana part of the key or reading spelled by part of a Hangul word (つくば万博 쓰쿠바 세계 박람회).
+        pieces = [p for s in (key, reading if kana_only(reading) else "") for p in KANA_RUN.findall(s)]
+        words = [w for w in HANGUL_RUN.findall(ko) if "쓰" in w or "쯔" in w]
+        if any(ms_ and tsu_in_part(ms_, w) for p in pieces for ms_ in [morae(p)] for w in words):
+            return True
     if at is None and kana_only(key):
         return False
     if at is not None:
         # A word that starts with a tense consonant for plain kana imitates the sound throughout
-        # (ぷよぷよ 뿌요뿌요, ちゃんぽん 짬뽕).
-        if any(first[j] and ms[i][0] in PLAIN and split(sy[j])[0] in TENSE for j, i in enumerate(at)):
+        # (ぷよぷよ 뿌요뿌요, ちゃんぽん 짬뽕); the 짱 of a final ちゃん is no such word (せつなちゃん 세츠나 짱).
+        def final_honorific(i):
+            return ms[i][2] in "ちチたタ" and i + 2 == len(ms) and ms[i + 1][0] == "N"
+
+        if any(first[j] and ms[i][0] in PLAIN and split(sy[j])[0] in TENSE and not final_honorific(i)
+               for j, i in enumerate(at)):
             return False
         for j, i in enumerate(at):
             cons, v, kana = ms[i]
@@ -245,6 +290,10 @@ def self_test():
         (("内海", "우쓰미", "", "N130"), True), (("リツコ", "리츠꼬", "", "N130"), False),
         (("いっぽ", "잇뽀", "", "N130"), True), (("いっぽ", "잇포", "", "N130"), False),
         (("鶴見線", "쓰루미선", "つるみせん", "N130"), True), (("鶴見線", "츠루미선", "つるみせん", "N130"), False),
+        (("せつ菜ちゃん", "세쓰나 짱", "せつなちゃん", "N110"), True), (("せつ菜ちゃん", "세츠나 짱", "せつなちゃん", "N110"), False),
+        (("ちゃんぽん", "짬뽕", "", "I110"), False), (("つくば万博", "쓰쿠바 세계 박람회", "", "N110"), True),
+        (("つくば万博", "츠쿠바 세계 박람회", "", "N110"), False), (("ゴーストオブツシマ", "고스트 오브 쓰시마", "", "N130"), True),
+        (("ツナミブースト", "쓰나미 부스트", "", "N130"), True), (("ゴミ箱", "쓰레기통", "", "N110"), False),
     ]
     for args, want in cases:
         if breaks(*args) != want:

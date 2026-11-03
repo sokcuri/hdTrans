@@ -1,0 +1,34 @@
+# 규칙: SPC-36
+rule	input	expected	kind	layer
+sound:clipped-volitional	どうしよ	어떻게 하지	fix	sound
+sound:clipped-volitional	どうしよ…	어떻게 하지…	fix	sound
+sound:clipped-volitional	どーしよ	어떻게 하지	fix	sound
+sound:clipped-volitional	どしよう	어떻게 하지	fix	sound
+sound:clipped-volitional	どうしよどうしよ… 何食べたい？	has:어떻게 하지 어떻게 하지…	fix	sound
+sound:clipped-volitional	勉強しよ	공부하자	fix	sound
+sound:clipped-volitional	そうしよ	그렇게 하자	fix	sound
+sound:clipped-volitional	こうしよ	이렇게 하자	fix	sound
+sound:clipped-volitional	帰ろ	돌아가자	fix	sound
+sound:clipped-volitional	帰ろっ！	돌아가자!	fix	sound
+sound:clipped-volitional	いっしょに行こ	함께 가자	fix	sound
+sound:clipped-volitional	飲もか	마실까	fix	sound
+sound:clipped-volitional	待と！	기다리자!	fix	sound
+sound:clipped-volitional	遊ぼ！	놀자!	fix	sound
+sound:clipped-volitional	描こっと	그려야지	fix	sound
+sound:clipped-volitional	勉強しよっと	공부해야지	fix	sound
+sound:clipped-volitional	もう寝よ	이제 자자	fix	sound
+sound:clipped-volitional	そろそろ寝よっか	슬슬 잘까	fix	sound
+sound:clipped-volitional	見よ！	봐라!	keep	sound
+sound:clipped-volitional	考えよ。	생각해라.	keep	sound
+sound:clipped-volitional	「早く言えよ」	「빨리 말해」	keep	sound
+sound:clipped-volitional	仲良しよ！	사이가 좋아!	keep	sound
+sound:clipped-volitional	面白いことしてくれたじゃない。倍返しよっ！	has:배반환이야!	keep	sound
+sound:clipped-volitional	跳躍力も	도약력도	keep	sound
+sound:clipped-volitional	積もり積もった	쌓여 쌓였다	keep	sound
+sound:clipped-volitional	いくらなんでも落ち込み過ぎよっ！	has:낙담해!	keep	sound
+sound:drawn-object	気ーつけなよ	조심해	fix	sound
+sound:drawn-object	気ぃつけなよ	조심해	fix	sound
+sound:drawn-object	目ぇ覚ませ	눈을 떠라	fix	sound
+sound:drawn-object	手ぇ出すな	손을 대지 마	fix	sound
+sound:drawn-object	姉ぇの部屋	언니의 방	keep	sound
+sound:drawn-object	寒ーい	추워~	keep	sound

@@ -9,7 +9,7 @@ cx:comma-terminal:30	嬉しい、です。	기쁜, 입니다.	keep	rewrites
 cx:comma-terminal:30	可愛い、みたいな？	귀엽다, 같은?	keep	rewrites
 cx:comma-terminal:10	後宮の弊害ともいえる、量は増えたが質が悪い。	has:할 수 있는, 양은	current	rewrites
 cx:comma-terminal:10	ベッドの上を転がる、転がる。	has:구른다, 구른다.	fix	rewrites
-cx:comma-terminal:10	仕方ないから働ける、今年もご主人様に	has:있는, 금년도	current	rewrites
+cx:comma-terminal:10	仕方ないから働ける、今年もご主人様に	has:있는, 올해도	current	rewrites
 cx:comma-terminal:10	戦う方法がある、そう教えてくれた。	has:방법이 있다,	fix	rewrites
 cx:comma-terminal:10	時折過ぎる、揺らめく何かの影。	has:지나는, 흔들거리는	keep	rewrites
 cx:comma-terminal:10	陽が眩しく降り注ぐ、サンルームで。	has:쏟아지는, 썬룸	keep	rewrites

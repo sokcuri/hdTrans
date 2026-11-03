@@ -1,0 +1,17 @@
+# 규칙: GRM-3542
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:70	今作には「私の要望を詰め込んでいただいた」そうで、撮影に臨んだ。	has:주셨다」라고 해	fix	rewrites
+cx:corpus-fixes-1:70	「たくさん歩けるようにスニーカーを履くことが多い」そうで、	has:많다」라고 해	fix	rewrites
+cx:corpus-fixes-1:70	友達の妹のものだったそうだ。	!rule:cx:corpus-fixes-1:70	keep	rewrites
+cx:corpus-fixes-1:70	散々探したが、結局見つからなかったそうだ。	!rule:cx:corpus-fixes-1:70	keep	rewrites
+cx:corpus-fixes-1:70	「……うさぎさんが…かわいそうです。	!rule:cx:corpus-fixes-1:70	keep	rewrites
+cx:corpus-fixes-1:80	魔法を道具に込めたりと、工作を主として活動してるそうです。	has:활동하고 있다고 합니다	fix	rewrites
+cx:corpus-fixes-1:80	どちらか片方、転がってるそうだ。	!rule:cx:corpus-fixes-1:80	keep	rewrites
+cx:corpus-fixes-1:80	準備が整ったそうです。	!rule:cx:corpus-fixes-1:80	keep	rewrites
+cx:corpus-fixes-1:80	犠牲者も団にはいないそうです。	!rule:cx:corpus-fixes-1:80	keep	rewrites
+cx:corpus-fixes-1:80	このままだと、失敗してしまいそうだ。	!rule:cx:corpus-fixes-1:80	keep	rewrites
+cx:corpus-fixes-1:90	丸焦げで食ってたそうで、何時癌病になるかヒヤヒヤする内容でした。	has:먹고 있었다고 해	fix	rewrites
+cx:corpus-fixes-1:90	昔、偉い人も言っていたそうだ。	!rule:cx:corpus-fixes-1:90	keep	rewrites
+cx:corpus-fixes-1:90	艦隊は五周年を迎えたそうです。	!rule:cx:corpus-fixes-1:90	keep	rewrites
+cx:corpus-fixes-1:90	気を抜くと後ろに倒れてしまいそうだ。	!rule:cx:corpus-fixes-1:90	keep	rewrites
+cx:corpus-fixes-1:90	ヤバい、帰ったら直ぐに寝ちゃいそうだ。	!rule:cx:corpus-fixes-1:90	keep	rewrites

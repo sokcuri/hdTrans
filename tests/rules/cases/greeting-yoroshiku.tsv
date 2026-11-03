@@ -15,7 +15,7 @@ lookup:closing-greeting	妹か… よろしくな｡	여동생인가… 잘 부�
 lookup:closing-greeting	よろしくな｡ こっちは妹の二葉｡	has:잘 부탁해. 여기는	fix	lookup
 lookup:closing-greeting	（エドガー）よろしくな	(에드거) 잘 부탁해	fix	lookup
 lookup:closing-greeting	司令、よろしくな。会えて嬉しいぜ。	사령, 잘 부탁해. 만날 수 있어서 기뻐.	fix	lookup
-lookup:closing-greeting	今年もよろしくな？	금년도 잘 부탁해?	fix	lookup
+lookup:closing-greeting	今年もよろしくな？	올해도 잘 부탁해?	fix	lookup
 lookup:closing-greeting	あたいもよろしくなー！	나도 잘 부탁해~!	fix	lookup
 lookup:closing-greeting	今年もこの秋雲さんをよろしくな～♪	has:씨를 잘 부탁해~♪	fix	lookup
 lookup:closing-greeting	宜しくな！	잘 부탁해!	fix	lookup
@@ -60,7 +60,7 @@ dict:jisjk:374933	よろしくお願いします	잘 부탁드립니다	keep	loo
 dict:jisjk:374933	改めてよろしく	다시 잘 부탁드립니다	keep	local
 dict:jisjk:374933	よろしく。	잘 부탁드립니다.	keep	local
 dict:jisjk:374933	どうかよろしくお願いします。	아무쪼록 잘 부탁드립니다.	keep	lookup
-dict:jisjk:374933	今年も宜しくです！	금년도 잘 부탁해요!	keep	builtin-phrase
+dict:jisjk:374933	今年も宜しくです！	올해도 잘 부탁해요!	keep	builtin-phrase
 dict:jisjk:374933	よろしく、提督！	!rule:dict:jisjk:374933	keep	defaults
 dict:jisjk:374933	よろしく 何やります？	!rule:dict:jisjk:374933	keep	defaults
 dict:jisjk:374933	こちらこそ よろしく お願いします。	이쪽이야말로 잘 부탁드립니다.	keep	local

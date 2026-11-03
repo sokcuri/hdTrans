@@ -6,6 +6,6 @@ dict:jisjk:94728	こちらからも短剣を切りつけていく。	이쪽에�
 dict:jisjk:94728	カーッとなって切りつけた！	화악 되어 베었다!	fix	defaults
 dict:jisjk:94728	(切りつける音)	(베는 소리)	fix	defaults
 dict:novel-verbs:26	（斬りつける音）	(베는 소리)	fix	defaults
-dict:novel-verbs:26	鋭利な刃物で斬りつけられた事による出血死。	예리한 칼로 베어진 일에 의한 출혈사.	fix	defaults
+dict:novel-verbs:26	鋭利な刃物で斬りつけられた事による出血死。	예리한 칼로 베어진 것에 의한 출혈사.	fix	defaults
 dict:novel-verbs:25	ナイフで切り付けた。	나이프로 베었다.	fix	defaults
 dict:jisjk:94729	ナイフで切りつけた。	나이프로 베었다.	keep	defaults

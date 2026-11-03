@@ -1,0 +1,42 @@
+# 규칙: GRM-3524
+rule	input	expected	kind	layer
+cx:novel-fixes-4:180	何者なのかは分かっていない。	has:누구인지는	fix	rewrites
+cx:novel-fixes-4:180	………何が良しなのかは置いといて。	has:좋다인지는	fix	rewrites
+cx:novel-fixes-4:180	タコスがなんなのかはわからないけど、	has:무엇인지는	fix	rewrites
+cx:novel-fixes-4:180	もっともその場所がどこなのかはわからない。	has:어디인지는	fix	rewrites
+cx:novel-fixes-4:180	お前らが何者なのかはちゃ～んと分かってらぁ	has:누구인지는	fix	rewrites
+cx:novel-fixes-4:180	誰が いちばん 日本一面白い漫才師なのかを決める	has:만담가인지를	fix	rewrites
+cx:novel-fixes-4:180	全体どういったものなのかは私共にも皆目判らないのです。	has:어떤 건지는	fix	rewrites
+cx:novel-fixes-4:180	それともこの絵の描き手の心情の発露なのかは判りませんけど。	has:발로인지는	fix	rewrites
+cx:novel-fixes-4:180	ユフィリアには何が間違いなのかすらもわからなくなっていた。	has:실수인지조차도 모르게 되어	fix	rewrites
+cx:novel-fixes-4:180	どこまでねつ造された記憶なのかは	has:기억인지는	fix	rewrites
+cx:novel-fixes-4:180	どちらが正義なのかを分かりやすく	has:정의인지를	fix	rewrites
+cx:novel-fixes-4:180	我々はどう動くべきなのかを議論するんです」	has:하는 건지를	fix	rewrites
+cx:novel-fixes-4:180	それが本来の役割なのかはわからないんだけど｡	has:역할인지는	fix	rewrites
+cx:novel-fixes-4:180	何らかの変異によって生成されたものなのかは不明ね。	has:생성된 건지는	fix	rewrites
+cx:novel-fixes-4:180	（沢渡）《どこで仕掛けてくるつもりなのかは分かってんだ。	has:생각인지는	fix	rewrites
+cx:novel-fixes-4:180	いや、他のクラブはどういうやり方なのかはわからないけど、	has:방식인지는	fix	rewrites
+cx:novel-fixes-4:180	まずノストラがどの程度の強さなのかを把握しておく必要があるのね」	has:강함인지를	fix	rewrites
+cx:novel-fixes-4:180	「ただ、今のところ、脅しだけですし……どこまで本気なのかは……」	has:진심인지는	fix	rewrites
+cx:novel-fixes-4:180	てっきり最初は今が何時なのかをたずねてくると思っていたのだけれど、	has:몇시인지를	fix	rewrites
+cx:novel-fixes-4:180	何が佳奈すけにとって一番なのかは、やはり本人が決めることだと思う。	has:제일인지는	fix	rewrites
+rewrite:embedded-question	382さんたちが、本当は何をしたのか	382 씨들이, 사실은 무엇을 한 건가	keep	rewrites
+rewrite:embedded-question	……この俺が、犯人だとでも言うのか？	……이 내가, 범인이라고라도 말하는 건가?	keep	rewrites
+rewrite:embedded-question	…これってさ、全部手作りなのかい？」	…이것은, 전부 수제인가 있고?」	keep	rewrites
+rewrite:embedded-question	…学校にゲームを持ちこんでいるのか。	…학교에 게임을 가지고 오고 있는 건가.	keep	rewrites
+rewrite:embedded-question	「……スポンジやタオルはあるのか？」	「……스펀지나 수건은 있는 거야?」	keep	rewrites
+rewrite:embedded-question	「……他のサイトには、繋がるのか？」	「……다른 사이트에는, 연결되는 거야?」	keep	rewrites
+rewrite:embedded-question	「いつもあんな食事をしているのか？」	「언제나 저런 식사를 하고 있는 거야?」	keep	rewrites
+rewrite:embedded-question	この煮物も梨花ちゃんが作ったのかい？	이 조림도 리카짱이 만든 거야?	keep	rewrites
+rewrite:embedded-question	「そうだね、風で飛ばされたのかな？」	「그러게, 바람으로 날아갔던가?」	keep	rewrites
+rewrite:embedded-question	「そうなのか、うーんざんねんだなぁ」	「그런가, 응유감이구나」	keep	rewrites
+rewrite:embedded-question	「ってことは、映画じゃないのかな？」	「라는 건, 영화가 아닐지?」	keep	rewrites
+rewrite:embedded-question	「で、俺とは付き合ってくれるのか？」	「그래서, 나와는 사귀어 주는 거야?」	keep	rewrites
+rewrite:embedded-question	「で、ＴＥＳとの契約は更新するのか」	「그래서, TES와의 계약은 갱신하는 건가」	keep	rewrites
+rewrite:embedded-question	まだ好きでい続けろって言うのかよ？」	아직 계속 좋아하고 있으라고 하는지?」	keep	rewrites
+rewrite:embedded-question	「俺にはそんな権利すらないのかよ？」	「나에게는 그런 권리조차 없는 건지?」	keep	rewrites
+rewrite:embedded-question	「単に飲み込めないんじゃないのか？」	「단지 삼킬 수 없는 거 아니야?」	keep	rewrites
+rewrite:embedded-question	「危機管理対策本部できてないのか？」	「위기 관리 대책 본부 하지 못한 거야?」	keep	rewrites
+rewrite:embedded-question	暴力沙汰とかには…ならなかったのか？	폭력 사태라든지에는…안되었던 건가?	keep	rewrites
+rewrite:embedded-question	「紡凪が、蒼くんを守ったのかも……」	「방지가, 아오이 군을 지켰을지도……」	keep	rewrites
+rewrite:embedded-question	「絵は親に指示されてやってたのか？」	「그림은 부모에게 지시받아 주고 있었는지?」	keep	rewrites

@@ -11,12 +11,12 @@ lookup:caption-idioms	だいたい 想像つくよ｡	대체로 상상이 가.	f
 lookup:caption-idioms	想像つかないから	상상이 가지 않으니까	fix	lookup
 lookup:caption-idioms	この番組への悪口 全部想像つきます	이 프로그램에 대한 욕 전부 상상이 갑니다	fix	lookup
 lookup:caption-idioms	想像がつかない。	상상이 가지 않는다.	keep	lookup
-lookup:caption-idioms	復旧の見通しが立っていない	복구가 전망이 서지 않았다	fix	lookup
+lookup:caption-idioms	復旧の見通しが立っていない	복구의 전망이 서지 않았다	fix	lookup
 lookup:caption-idioms	いくらなんでも｡	아무리 그래도.	fix	lookup
 lookup:caption-idioms	ん？　なぜかって？	응? 왜냐고?	fix	lookup
 lookup:caption-idioms	誰も想像つかないよね。	아무도 상상이 가지 않지.	fix	lookup
 lookup:caption-idioms	ちょっと想像つかなかったけど｡	조금 상상이 가지 않았지만.	fix	lookup
 lookup:caption-idioms	この分では無理だ。	이 상태로는 무리다.	keep	lookup
 lookup:caption-idioms	大将 いくらなんでもこりゃ やり過ぎでしょう｡	대장 아무리 그래도 이건 너무 하겠죠.	fix	lookup
-lookup:caption-idioms	公演成功の見通しが立ったわけだ。	공연 성공이 전망이 선 셈이다.	fix	lookup
+lookup:caption-idioms	公演成功の見通しが立ったわけだ。	공연 성공의 전망이 선 셈이다.	fix	lookup
 dict:jisjk:149395	なぜかといえば このコマは	왜냐하면 이 팽이는	fix	defaults

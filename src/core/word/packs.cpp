@@ -204,7 +204,15 @@ Context ContextOf(Flusher& f, const Item* it) {
     // the form of the word, from its ending and the word after it
     // the ending, with that of a negative auxiliary written right after the word
     std::string ending(it->DirectSurface());
-    if (const Item* aux = NegativeAux(it)) {
+    // An ending that starts with the formal noun こと (向けられたことが) holds no form: the form is the
+    // conjugated text between the stem and the ending (られた).
+    if (Predicate(cls) && ending.starts_with("こと")) {
+        const std::string_view whole = Slice(it->text, it->start, it->length);
+        const std::string_view stem = it->group->surface;
+        if (whole.starts_with(stem) && whole.ends_with(ending) && whole.size() >= stem.size() + ending.size()) {
+            ending = std::string(whole.substr(stem.size(), whole.size() - stem.size() - ending.size()));
+        }
+    } else if (const Item* aux = NegativeAux(it)) {
         ending += aux->group->surface;
         ending += aux->DirectSurface();
     }

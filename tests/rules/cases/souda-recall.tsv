@@ -34,7 +34,7 @@ cx:souda-recall:30	美味しいですよねぇ。…そうだ、今度カレー�
 cx:souda-recall:30	エェ？コノヒカリハ…アッ…ソウダ！	에? 이 빛은…앗…맞아!	fix	rewrites
 cx:souda-recall:30	竹の炊き込み飯だ。……そうだ、うまいぞ。	rule:cx:souda-recall:30=%Dn@	fix	rewrites
 # 맞는 출력: 자, 오늘 밤은 어떻게 하지? …그래, 피자는 어떨까?
-cx:souda-recall:30	さ、今晩はどうしようか？…そうだ、pizzaはどうかな？	자, 오늘 밤은 어떻게 하지? …맞다, pizza는 어떨까?	current	rewrites
+cx:souda-recall:30	さ、今晩はどうしようか？…そうだ、pizzaはどうかな？	자, 오늘 밤은 어떻게 할까? …맞다, pizza는 어떨까?	current	rewrites
 # 맞는 출력: 제독…받은 과자…그래, 차를 끓일게요.
 cx:souda-recall:30	提督…戴いたお菓子…そうだ、お茶を入れますね。	rule:cx:souda-recall:30=%Dn@	current	rewrites
 # 맞는 출력: 기운이 없을 때는…그래!

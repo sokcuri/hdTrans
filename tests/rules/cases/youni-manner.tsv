@@ -1,0 +1,37 @@
+# 규칙: GRM-3521
+rule	input	expected	kind	layer
+cx:novel-fixes-4:100	舌腹を押しつけるようにして舐めるたび、	has:강요하듯이	fix	rewrites
+cx:novel-fixes-4:100	俺の上にまたがるようにして入ってきたため、	has:올라타듯이	fix	rewrites
+cx:novel-fixes-4:100	俺は彼女の視線を避けるようにして通り過ぎる。	has:피하듯이	fix	rewrites
+cx:novel-fixes-4:100	兄弟３人 肩寄せ合うようにして生きてきました	has:기대듯이	fix	rewrites
+cx:novel-fixes-4:100	みんな、ケーキを奪い合うようにして食べている。	has:빼앗듯이	fix	rewrites
+cx:novel-fixes-4:100	ペニスに舌を巻き付けるようにして舐めてくれる。	has:붙이듯이	fix	rewrites
+cx:novel-fixes-4:100	固くなった乳首を指で挟むようにして転がしながら、	has:사이에 두듯이	fix	rewrites
+cx:novel-fixes-4:100	手を伸ばし、身体をすくい上げるようにして支える。	has:퍼올리듯이	fix	rewrites
+cx:novel-fixes-4:100	真帆が俺のペニスを指でつまむようにして持ち上げる。	has:손가락으로 집듯이	fix	rewrites
+cx:novel-fixes-4:100	望月さんが、多岐川さんを引っ張るようにして出ていった。	has:끌어들이듯이	fix	rewrites
+cx:novel-fixes-4:100	俺の行動を予想してかグリークが見下すようにして鼻で笑う。	has:업신여기듯이	fix	rewrites
+cx:novel-fixes-4:100	彼女は今、アルガルドの隣に支えられるようにして立ち尽くしていた。	has:의지하듯이	fix	rewrites
+cx:novel-fixes-4:100	気が付けばセリカとフランは後部座席で重なるようにして眠っていた。	has:겹치듯이	fix	rewrites
+cx:novel-fixes-4:100	路地を挟むようにして建った家々はまるで互いを見合う顔のようです。	has:사이에 두듯이	fix	rewrites
+cx:novel-fixes-4:100	生クリームに覆われた乳首を、舌腹を押しつけるようにして舐めあげた。	has:강요하듯이	fix	rewrites
+cx:novel-fixes-4:100	でも、一応アポは取るようにするから」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	哀願するようにしなだれかかってくる。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	音量を上げて聞こえるようにしてやる。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	これでええようにしてくれないですか？	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	無理はしないようにしてあげて下さい。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	そうよお邪魔にならないようにしないと	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	必ず中の階段を使うようにしてください	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	はい ときどき全体を混ぜるようにして	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	だから姫柊は姫柊の好きなようにしろ｡	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	その風呂敷を　お守りのようにして…。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	小さくなるようにしたいのですが……」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	・・・ふ、深く考えないようにしよう。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	「できるだけ、痛くないようにするよ」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	「御園には見つからないようにするよ」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	「もっと好きなようにしていいと思う」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	下から持ち上げるようにして愛撫する。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	携帯で見られるようにしておくといい」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	「じゃ、声出さないようにしないと」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	「なるべく痛くないようにするから」	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	いや、あまり考えないようにしよう。	!rule:cx:novel-fixes-4:100	keep	rewrites

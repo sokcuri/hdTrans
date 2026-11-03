@@ -1,0 +1,77 @@
+# 규칙: LEX-4530, LEX-4531
+rule	input	expected	kind	layer
+sense:転ぶ	そうしてかなりべったり付きまとい、しまいにはべったりしすぎて王子様にぶつかり転んだ。	has:부딪쳐 넘어졌다	fix	senses
+sense:転ぶ	転んだ勢いはたいしたことはなかったが、なにぶん場所が悪かった。	has:넘어진 기세는	fix	senses
+sense:転ぶ	ちょうど転んだ先に庭園の飾り岩があり、そこに強く頭をぶつけてしまった。	has:넘어진 곳에	fix	senses
+sense:転ぶ	子供は落ちたり転んだりするものさ。	has:넘어지거나	fix	senses
+sense:転ぶ	「…転ぶなよー！ 足元に気をつけろよー！」	has:넘어지지 마	fix	senses
+sense:転ぶ	三歩目で転んだ。	has:넘어졌다	fix	senses
+sense:転ぶ	「わかったから、慌てないで。転んだら危ないですよ。」	has:넘어지면 위험해요	fix	senses
+sense:転ぶ	ベッドに座り、寝転ぶ。	has:드러눕는다	keep	senses
+sense:転ぶ	地面をごろんと転がるように接地してゆく。	has:구르듯이	keep	senses
+sense:いだく	さすがに十七年分の記憶を取り戻した私が、八歳の男の子に恋心をいだくことはない。	has:연정을 품을	fix	senses
+sense:いだく	どうやらローラに嫉妬のような感情をいだいているらしい。	has:감정을 품고	fix	senses
+sense:いだく	赤ん坊を抱く。	has:안는다	keep	senses
+sense:次ぐ	父は宰相、母は将軍の娘で、国の中でも王家に次ぐそりゃあ血筋が宜しいお嬢様です。	has:버금가는	fix	senses
+sense:次ぐ	罵る女は後宮の最高権力者で、うつむく女はそれに次ぐ存在だった。	has:버금가는 존재	fix	senses
+sense:次ぐ	次いで彼が来た。	has:그 다음에	keep	senses
+sense:含む	白湯を含みながら猫猫は考えるがそれは違うと結論に至る。	has:머금으면서	fix	senses
+sense:含む	熱い湯を含ませてから絞ったのか、暖かいそれで拭うのは、中々に爽快だった。	has:머금게	fix	senses
+sense:含む	税金を含む価格。	has:포함한	keep	senses
+sense:歪む	美しい顔は歪むとそれは恐ろしいものになる。	has:일그러지면	fix	senses
+sense:歪む	次の瞬間、美冬の顔がくしゃっと歪む。	has:일그러진다	fix	senses
+sense:折る	ふと思いつき、近くに大きな石を見つけると、てこの原理で思いっきりヒールを折った。	has:힐을 부러뜨렸다	fix	senses
+sense:折る	紙を折る。	has:접는다	keep	senses
+sense:折る	彼のために骨を折った。	has:애썼다	keep	senses
+sense:落ち着く	五日後、熱も落ち着く頃には何とか頭の中の記憶も落ち着き、ようやくベッドからも起きられるようになった。	has:기억도 정리되어	fix	senses
+sense:吹き出る	……しかし、私といえば吹き出る血など問題ではなかった。	has:뿜어져 나오는 피	fix	senses
+sense:噴き出る	ぶつけたのは額で、どうやらそれなりにざっくりいったようで多量に血が噴き出していた。	has:피가 뿜어져 나오고	fix	senses
+sense:返す	私は間の抜けた返事を返しながら考える。	has:대답을 하면서	fix	senses
+sense:返す	男の方も、ゆるい顔で返事を返す。	has:대답을 한다	fix	senses
+sense:返す	タツゴロウに老人から店を受け継いだ男が挨拶を返す。	has:인사를 한다	fix	senses
+sense:返す	借りた本を急いで返した。	has:돌려주었다	keep	senses
+sense:命	「婚約破棄の命、しかと承ります。」	has:파혼의 명	fix	senses
+sense:命	命を懸けて戦う。	has:목숨을 걸어	keep	senses
+sense:手にする	ランタンを手にした人々が、物珍しそうに馬車を眺めている。	has:랜턴을 손에 든	fix	senses
+sense:手にする	箸を置いて、水を手にした。	has:물을 손에 들었다	fix	senses
+sense:手にする	アイスティーを手にする。	has:손에 든다	fix	senses
+sense:手にする	そう言って、スプーンを手にした瞬間――	has:스푼을 손에 든	fix	senses
+sense:手にする	消防士に見えなくもないが、バケツやモップを手にしているので掃除屋なのだろう。	has:손에 들고	fix	senses
+sense:手にする	問題にもならない功績を手にする可能性がある。	has:손에 넣을	keep	senses
+sense:手にする	勝利を手にした。	has:손에 넣었다	keep	senses
+sense:外す	馬を一頭、馬車から外して鞍に付け替えろ。	has:마차에서 떼어	fix	senses
+sense:外す	眼鏡を外した。	has:벗었다	keep	senses
+dict:w:32301	その変わりようには誰もが驚いた。	has:달라진 모습	fix	lookup
+dict:w:32302	公爵家の紋が入った豪奢な馬車に、身一つで乗り込む。	has:맨몸으로	fix	lookup
+dict:w:32303	私は馬車の窓から、今の今までいた校舎を眺める。	has:방금 전까지	fix	lookup
+dict:w:32304	……変なところで準備の良い弟を信用しての行動だった。	has:준비성 좋은	fix	lookup
+dict:w:32305	後宮と一括りに言ってもその規模は広大である。	has:한데 묶어	fix	lookup
+dict:w:32306	先帝の花の園には到底及ばないものの、三千の大所帯だった。	has:꽃동산	fix	lookup
+dict:w:32307	飛び降りの際は、体を地面に対して垂直に着地してはいけない。	has:수직으로	fix	lookup
+dict:w:32308	斜め上の解釈に呆れ、リーシェはじとりと半目になる。	has:리쉐는 게슴츠레	fix	lookup
+dict:w:32309	お前のような性根のねじ曲がった女が、王妃になどなれると思ったのか！？	has:비뚤어진 여자	fix	lookup
+dict:w:32310	捻じ曲がった根性を叩き直す。	has:비뚤어진	fix	lookup
+dict:w:32312	そう言って微笑んで礼をすると、愛らしく誠にご立派な八歳ジオルド王子は寝室を後にされた。	has:침실을 떠나셨다	fix	lookup
+dict:w:32313	たとえば、機嫌が悪いと執事に当たり散らし、本気で言うことも珍しくない。	has:집사에게 화를 내	fix	lookup
+dict:w:32313	敵の攻撃に当たり、倒れた。	has:공격에	keep	lookup
+dict:jisjk:25979	そのため生傷が絶えず、縫うような傷を作ったことも何度かあった。	has:생채기가	fix	lookup
+dict:jisjk:228393	呪いをかけるだけで一族郎党皆殺しとなる法がある中に、猫猫の考えはむしろ異端といえる。	has:일족과 가신	fix	lookup
+dict:jisjk:4601	（なんらかの病気か？もしかして遺伝的なもの？）	has:어떤 병	fix	lookup
+dict:jisjk:4601	ふたりの間にはなんらかの確執があるんだよな……	has:어떤 확집	fix	lookup
+dict:jisjk:255234	横恋慕は良くない。	has:남의 짝을 넘봄	fix	lookup
+dict:jisjk:79665	仕事一筋、恋愛している暇なんてあるか！というワタシだったけれども、それでもトキメキたいと思うのが乙女心。	has:소녀의 마음	fix	lookup
+dict:jisjk:79665	ヤキモチという心理状態……つまり乙女心が、微々たるものとはいえプログラムに影響を与える。	has:소녀의 마음이	fix	lookup
+dict:jisjk:105665	その挙げ句がこれだ。	has:그 끝이	fix	lookup
+dict:jisjk:176463	「馬を一頭、馬車から外して鞍に付け替えろ」	has:말안장에	fix	lookup
+dict:jisjk:39982	後宮で生まれる乳幼児の連続死。	has:후궁에서 태어나는	fix	lookup
+dict:jisjk:39982	現在、後宮で一番大きな部屋に住むのは、東宮のご生母梨花妃である。	has:후궁에서 제일	fix	lookup
+phrase:感謝に堪えません	同じ学生としてこの学園に通ったこと、感謝に堪えません。	has:감사하기 그지없습니다	fix	builtin-phrase
+phrase:どう転んだって	ってことは、どう転んだって卒業したら未来とは接点がなくなる……。	has:어떻게 되든 졸업하면	fix	builtin-phrase
+phrase:どう転んでも	どう転んでも損はしない。	has:어떻게 되든	fix	builtin-phrase
+sense:切る	確かに、今回の事故で私は額を切ってしまい少しだが縫うこととなった。	has:이마를 베어버려	fix	senses
+sense:切る	どうやら額を切って何針かぬったそうで	has:이마를 베어	fix	senses
+sense:切る	「なら、指を切るしかないわね」	has:손가락을 자를	keep	senses
+dict:w:32316	いにしえよりニサン教の教母様とアヴェの国王であられる方とは……	has:국왕이신	fix	local
+dict:w:32317	公爵家の紋が入った豪奢な馬車に、身一つで乗り込む。	has:공작가의 문장이	fix	lookup
+sense:次ぐ	雨に次ぐ雨。	has:뒤잇는	keep	senses
+sense:命	新しい命を受けて生まれた。	has:생명을	keep	senses

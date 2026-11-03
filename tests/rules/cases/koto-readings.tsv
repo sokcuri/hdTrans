@@ -1,0 +1,61 @@
+# 규칙: GRM-3526, LEX-4154
+rule	input	expected	kind	layer
+cx:novel-fixes-4:47	やっぱり私は　伝えることなんて…	has:일 같은 건	fix	rewrites
+cx:novel-fixes-4:47	「筧にされて嫌なことなんてない」	!rule:cx:novel-fixes-4:47	keep	rewrites
+cx:novel-fixes-4:47	俺のことなんて放っといてください	!rule:cx:novel-fixes-4:47	keep	rewrites
+cx:novel-fixes-4:220	謙遜することない」	has:겸손하는 일	fix	rewrites
+cx:novel-fixes-4:220	私、何もすることないの？	has:하는 일	fix	rewrites
+cx:novel-fixes-4:220	さて、何かやることは無いか？	has:하는 일은	fix	rewrites
+cx:novel-fixes-4:220	「そ、そんなことはないけど……」	!rule:cx:novel-fixes-4:220	keep	rewrites
+cx:novel-fixes-4:220	そ、そんなことはないのですぞっ！	!rule:cx:novel-fixes-4:220	keep	rewrites
+cx:novel-fixes-4:221	詰まることもないのよ｡	has:차는 일도	fix	rewrites
+cx:novel-fixes-4:221	誰かが死ぬこともないからね」	has:죽는 일도	fix	rewrites
+cx:novel-fixes-4:221	あえて否定することもないか。	has:부정하는 일도	fix	rewrites
+cx:novel-fixes-4:221	何事もない、つまらない夜だった。	!rule:cx:novel-fixes-4:221	keep	rewrites
+cx:novel-fixes-4:221	何事もなく梨花ちゃんが訂正する。	!rule:cx:novel-fixes-4:221	keep	rewrites
+cx:novel-fixes-4:222	何か気になることでも？」	has:일이라도	fix	rewrites
+cx:novel-fixes-4:222	なんぞ、気になることでも？	has:일이라도	fix	rewrites
+cx:novel-fixes-4:222	≪何か気になることでも？≫	has:일이라도	fix	rewrites
+cx:novel-fixes-4:222	なにか気になることでもあるのか、	!rule:cx:novel-fixes-4:222	keep	rewrites
+cx:novel-fixes-4:222	他に金になる仕事でも探すんだな。	!rule:cx:novel-fixes-4:222	keep	rewrites
+cx:novel-fixes-4:223	そうなったら俺たちにできることはないな｡	has:할 수 있는 일은 없네	fix	rewrites
+cx:novel-fixes-4:223	私にできることはないのか	has:할 수 있는 일은 없는 건가	fix	rewrites
+cx:novel-fixes-4:223	「そ、そんなことはないけど……」	!rule:cx:novel-fixes-4:223	keep	rewrites
+cx:novel-fixes-4:223	そ、そんなことはないのですぞっ！	!rule:cx:novel-fixes-4:223	keep	rewrites
+cx:novel-fixes-4:224	一人、二人、三人──自分たちが撃たれている事にも気付かないまま、	has:있는 것도	fix	rewrites
+cx:novel-fixes-4:224	元の世界に帰ることにもつながる｡	!rule:cx:novel-fixes-4:224	keep	rewrites
+cx:novel-fixes-4:224	画廊のおっさんの言ってることにも・	!rule:cx:novel-fixes-4:224	keep	rewrites
+cx:novel-fixes-4:226	「見なかったことにしよう」	has:보지 않은	fix	rewrites
+cx:novel-fixes-4:226	これは…見なかったことにしよう…。	has:보지 않은	fix	rewrites
+cx:novel-fixes-4:226	聞かなかったことにしてもらえばいい	has:듣지 않은	fix	rewrites
+cx:novel-fixes-4:226	「みんな聞かなかったことに」と、	!rule:cx:novel-fixes-4:226	keep	rewrites
+cx:novel-fixes-4:226	じゃったらこん話はなかったことに	!rule:cx:novel-fixes-4:226	keep	rewrites
+cx:novel-fixes-4:227	ここで自首したことにして	has:자수한 것으로	fix	rewrites
+cx:novel-fixes-4:227	頭のコブだって 骨折したことにして…	has:골절한 것으로	fix	rewrites
+cx:novel-fixes-4:227	ふやけてしもたことにしたらよろしいがな	has:불어버린 것으로	fix	rewrites
+cx:novel-fixes-4:227	名前で呼び合うことにしたんだね」	!rule:cx:novel-fixes-4:227	keep	rewrites
+cx:novel-fixes-4:227	その足でこの国を出ることにした。	!rule:cx:novel-fixes-4:227	keep	rewrites
+cx:novel-fixes-4:228	これはある意味で、直に被災する事とは別の意味で恐ろしい。	has:재해하는 것과는	fix	rewrites
+cx:novel-fixes-4:228	なるほど、見事とは言っておこう。	!rule:cx:novel-fixes-4:228	keep	rewrites
+cx:novel-fixes-4:228	続けろ｡そもそも 坂本のこととか	!rule:cx:novel-fixes-4:228	keep	rewrites
+cx:novel-fixes-4:231	あり得ない事ではない。	has:없는 일이	fix	rewrites
+cx:novel-fixes-4:231	路上駐車は　悪いことではないと。	has:나쁜 일이	fix	rewrites
+cx:novel-fixes-4:231	「それは悪いことではないでしょう？」	has:나쁜 일이	fix	rewrites
+cx:novel-fixes-4:231	そんなもの、知ったことではない。	!rule:cx:novel-fixes-4:231	keep	rewrites
+cx:novel-fixes-4:231	あのまぶしい光は ただ事ではない	!rule:cx:novel-fixes-4:231	keep	rewrites
+cx:novel-fixes-4:233	失っていた事に気づいた。	has:있었던 것을	fix	rewrites
+cx:novel-fixes-4:233	♪ ここにしかないことに気づく	has:없는 것을	fix	rewrites
+cx:novel-fixes-4:233	ﾁｹｯﾄなくしたことに気が付いて	has:없앴던 것을	fix	rewrites
+cx:novel-fixes-4:233	アタシはそこであることに気付いた。	!rule:cx:novel-fixes-4:233	keep	rewrites
+cx:novel-fixes-4:233	自分が乾いてしまったことに気付いた	!rule:cx:novel-fixes-4:233	keep	rewrites
+cx:novel-fixes-4:235	「何もないってことはないだろう」	has:건 없을	fix	rewrites
+cx:novel-fixes-4:235	でも、番記者になったってことは、	!rule:cx:novel-fixes-4:235	keep	rewrites
+cx:novel-fixes-4:235	ってことは　何だ？「はっぱに」。	!rule:cx:novel-fixes-4:235	keep	rewrites
+cx:novel-fixes-4:236	どうしてこんな単純な事に気がつかなかったのでしょう。	has:단순한 일을	fix	rewrites
+cx:novel-fixes-4:236	そんなことになったら大惨事です。	!rule:cx:novel-fixes-4:236	keep	rewrites
+cx:novel-fixes-4:236	爆発して中が大変なことになって、	!rule:cx:novel-fixes-4:236	keep	rewrites
+cx:novel-fixes-4:237	急なことに戸惑う。	has:갑작스러운 일에	fix	rewrites
+cx:novel-fixes-4:237	突然のことに驚いて、動きを止めていると……	has:갑작스러운 일에	fix	rewrites
+cx:novel-fixes-4:237	まず、白崎が諦めていなかったことに驚いた。	has:않았던 것에	fix	rewrites
+cx:novel-fixes-4:237	出ていないことに驚かされます！	!rule:cx:novel-fixes-4:237	keep	rewrites
+cx:novel-fixes-4:237	彼女がまだこの夢にいてくれることに安心した。	!rule:cx:novel-fixes-4:237	keep	rewrites

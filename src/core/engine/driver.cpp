@@ -195,18 +195,29 @@ constexpr int kPredicateRunes = 48;
 // and the analysis of the text before it ends in an adjective or a verb in an adnominal form (慌てた,
 // 静かな, 失ってる) or the particle の; a phrase of spelling.variant-after-predicate-phrase (その様な)
 // is the grammatical word too. After a noun or a name (ひなた様, 王様) or a word of
-// spelling.variant-after-predicate-kept-after (そんな様) it stays.
+// spelling.variant-after-predicate-kept-after (そんな様) it stays. A variant of
+// spelling.variant-after-form (事) needs no next word and only the form of a verb or an adjective
+// before it, of any kind before に (書いた事, 見る事に), not の (自分の事).
 bool StandsAfterPredicate(const RespellLookup& d, std::string_view line, size_t at, std::string_view variant,
                           std::string_view spelling) {
     const size_t end = at + variant.size();
     const std::string_view rest = line.substr(end);
-    if (dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-next"), rest) == 0) return false;
-    if (dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-kept-after"), line.substr(0, at)) > 0) {
-        return false;
+    const bool form = dict::InClass(HDTRANS_CLASS("spelling.variant-after-form"), variant);
+    if (!form && dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-next"), rest) == 0) return false;
+    // A word of the dictionary other than an ending or particle that starts with the variant holds it
+    // (事実, 事件): no next word guards a variant of spelling.variant-after-form.
+    if (form) {
+        for (const dict::Candidate& c : Find(d, line.substr(at)).list) {
+            if (c.source.size() > variant.size() && line.substr(at).starts_with(c.source) && !Grammar(c)) return false;
+        }
     }
     for (const std::string_view phrase : dict::ClassMembers(HDTRANS_CLASS("spelling.variant-after-predicate-phrase"))) {
         const size_t k = phrase.find(variant);
         if (k != std::string_view::npos && k <= at && line.substr(at - k).starts_with(phrase)) return true;
+    }
+    if (dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-kept-after"), line.substr(0, at)) > 0 ||
+        (form && dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-form-kept-after"), line.substr(0, at)) > 0)) {
+        return false;
     }
     const auto respelledKey = [&](size_t start, std::string_view source) {
         std::string respelled(source.substr(0, at - start));
@@ -248,16 +259,22 @@ bool StandsAfterPredicate(const RespellLookup& d, std::string_view line, size_t 
     const std::string_view written =
         last->text.substr(static_cast<size_t>(last->start), static_cast<size_t>(last->length));
     const bool past = dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-past"), written) > 0;
-    const bool beforeNi = rest.starts_with("に") &&
+    const bool beforeNi = !form && rest.starts_with("に") &&
                           dict::StartsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-naru"), rest) == 0;
     if (last->detail->cls == word::kDetailVerb) {
         if (past) return true;
         if (beforeNi) return false;
         return dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-end"), written) > 0;
     }
+    // A variant of spelling.variant-after-form needs the adnominal form of an adjective (楽しい事, 大変な事),
+    // not its condition (そうなら事は).
+    if (last->detail->Yougo() && form) {
+        return past || written.ends_with("い") || written.ends_with("な") ||
+               dict::EndsWithMember(HDTRANS_CLASS("spelling.variant-after-predicate-end"), written) > 0;
+    }
     if (last->detail->Yougo()) return past || !beforeNi;
     const std::string_view surface = last->group->surface;
-    return surface == "の" && last->Code(last->selected < 0 ? 0 : last->selected).starts_with("2");
+    return !form && surface == "の" && last->Code(last->selected < 0 ? 0 : last->selected).starts_with("2");
 }
 
 // Whether a dictionary word cuts across line[at, end) or holds it (pipeline::RespellVariants): a word
@@ -704,6 +721,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
     s.text = text;
     s.terminal = text;
     s.verse = verse;
+    s.wrapped = options.wrapped;
     if (!options.reference) {
         s.scorers = options.scorers;
         s.shadowScorers = options.shadowScorers;

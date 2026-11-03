@@ -1,0 +1,30 @@
+# 규칙: LEX-4202, LEX-4203, LEX-4204
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:120	６９人の国籍の内訳はスペイン５４人、米国４人。	has:69명의 국적	fix	rewrites
+cx:corpus-fixes-1:120	外国人の国籍を確かめた。	!rule:cx:corpus-fixes-1:120	keep	rewrites
+cx:corpus-fixes-1:120	そうか、あれは偉大な古代人の国なんだ。	!rule:cx:corpus-fixes-1:120	keep	rewrites
+cx:corpus-fixes-1:120	多国籍艦隊は、少し大変。	!rule:cx:corpus-fixes-1:120	keep	rewrites
+cx:corpus-fixes-1:120	ああ、勿論、俺と同年代で日本国籍の子だ。	!rule:cx:corpus-fixes-1:120	keep	rewrites
+cx:corpus-fixes-1:150	「大きくなってからやったら、すごくきちんとしたストーリーと世界観なのがわかったよ」	has:세계관인 걸 알았어	fix	rewrites
+cx:corpus-fixes-1:150	意外にポンコツなのが最近判明した。	!rule:cx:corpus-fixes-1:150	keep	rewrites
+cx:corpus-fixes-1:150	「だとしても、標的がアラタなのが不可解ですね」	!rule:cx:corpus-fixes-1:150	keep	rewrites
+cx:corpus-fixes-1:150	いや、いい奴だが…少し世話焼きなのが玉に瑕だが。	!rule:cx:corpus-fixes-1:150	keep	rewrites
+cx:corpus-fixes-1:200	大聖堂へと続く回廊の片隅を、二人の人物が移動していた。	has:대성당으로 이어지는 회랑	fix	rewrites
+cx:corpus-fixes-1:200	向こうの世界の地下へ続く階段を飛び降りる勢いで駆け下りたんだって	has:지하로 이어지는 계단	fix	rewrites
+cx:corpus-fixes-1:200	……この道は、キスレブ帝都-総統府へと続いているA区画-北ゲートです。	has:총통부로 이어지고	fix	rewrites
+cx:corpus-fixes-1:200	ここで改行\n次の行へ続く。	has:다음 행으로 이어진다	fix	rewrites
+cx:corpus-fixes-1:200	テストのたびに続く一進一退の攻防。	!rule:cx:corpus-fixes-1:200	keep	rewrites
+cx:corpus-fixes-1:200	僕に続け！	!rule:cx:corpus-fixes-1:200	keep	rewrites
+cx:corpus-fixes-1:200	私に続くがいい。	!rule:cx:corpus-fixes-1:200	keep	rewrites
+cx:corpus-fixes-1:205	至宝の眠る場所に続く扉はそれによって開かれる	has:장소로 이어지는 문	fix	rewrites
+cx:corpus-fixes-1:205	自宅から大通りに続く下り坂ではさらに調子づいてペダルを回す。	has:큰 길로 이어지는 내리막길	fix	rewrites
+cx:corpus-fixes-1:205	駅の構内に続く通路の所に、花屋があった。	has:구내로 이어지는 통로	fix	rewrites
+cx:corpus-fixes-1:205	は？階段下に続くやつあったじゃん	has:이어지는 녀석	fix	rewrites
+cx:corpus-fixes-1:205	空白の後に続く言葉は、少し長い。	!rule:cx:corpus-fixes-1:205	keep	rewrites
+cx:corpus-fixes-1:205	前作に続く今作では、	!rule:cx:corpus-fixes-1:205	keep	rewrites
+cx:corpus-fixes-1:205	皆、村雨に続いて！	!rule:cx:corpus-fixes-1:205	keep	rewrites
+cx:corpus-fixes-1:205	艦隊、この長門に続け！	!rule:cx:corpus-fixes-1:205	keep	rewrites
+dict:jisjk:93716	城を巡った。	has:성을 돌았다	keep	local
+dict:jisjk:93716	屋台を巡る。	has:포장마차를 돈다	keep	local
+dict:jisjk:93716	神殿を巡った。	has:신전을 돌았다	keep	local
+dict:jisjk:258514	駅について電話した。	has:역에 도착해	keep	local

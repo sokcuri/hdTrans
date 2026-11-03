@@ -4,7 +4,7 @@ voice:agent	そんな攻撃、蚊に刺されたような物だ！	그런 공격
 voice:agent	佐藤に押さえられてしまった。	사토에게 눌려버렸다.	fix	voice
 voice:agent	幽霊に導かれながら情報の断片を手に入れる。	유령에게 이끌리면서 정보의 단편을 손에 넣는다.	fix	voice
 voice:agent	珍しく担任に指名された。	드물게 담임에게 지명되었다.	fix	voice
-voice:agent	鈴木に見つめられ、	스즈키에게 응시당해	fix	voice
+voice:agent	鈴木に見つめられ、	스즈키에게 응시당해,	fix	voice
 voice:agent	虎に食われる前にひとつ、	범에게 먹히기 전에 하나,	fix	voice
 voice:agent	鬼に触られた者もまた鬼となるのだ。	귀신에게 만져진 사람도 또 귀신이 된다.	fix	voice
 voice:agent	健太に裏切られた絶望の中、	켄타에게 배신당한 절망 속,	fix	voice
@@ -13,8 +13,8 @@ voice:agent	その子はもともと他の3人にいじめられてて、	그 �
 voice:agent	かつて、悪魔に憑かれた王子がいた。	일찍이, 악마에게 홀린 왕자가 있었다.	fix	voice
 voice:agent	調子に乗るなって、田中に怒られちゃうから、	우쭐대지 말라고, 타나카에게 혼나버리니까,	fix	voice
 voice:agent	巨大なトカゲ風の生き物に引かれた馬車	거대한 도마뱀풍의 생물에게 끌린 마차	fix	voice
-voice:agent	陸路は敵に破壊され、	육로는 적에게 파괴돼	keep	voice
-voice:agent	仲間は敵にやられ、	동료는 적에게 당해	keep	voice
+voice:agent	陸路は敵に破壊され、	육로는 적에게 파괴돼,	keep	voice
+voice:agent	仲間は敵にやられ、	동료는 적에게 당해,	keep	voice
 voice:agent	猫に引っかかれた。	고양이에게 긁어졌다.	fix	voice
 voice:agent	お母さんにこんなのを見られたら……！	엄마에게 이런 걸 보여지면……!	fix	voice
 voice:agent	国王に問われた少女は臆することなく答えた。	국왕에게 질문받은 소녀는 겁먹는 일 없이 대답했다.	keep	voice
@@ -49,7 +49,7 @@ voice:listener	なにを驚かれているのですか？	무엇을 놀라고 �
 voice:listener	何を書かれているんですか。	무엇을 쓰고 계십니까.	fix	voice
 voice:listener	どちらへ帰られますか。	어디로 돌아가시겠습니까.	fix	voice
 voice:listener	警察の方々には何も言われませんでしたか？	경찰의 분들에게는 아무것도 듣지 않았습니까?	keep	voice
-voice:listener	と、言われて、信じることができますか？	라고 들어, 믿을 수 있습니까?	keep	voice
+voice:listener	と、言われて、信じることができますか？	라고, 들어, 믿을 수 있습니까?	keep	voice
 voice:listener	十時までに来られますか。	10시까지 올 수 있습니까.	keep	voice
 voice:listener	可燃物は投棄されましたか？	가연물은 투기되었습니까?	keep	voice
 voice:listener	刺身を食べられますか？	생선회를 먹을 수 있습니까?	keep	voice

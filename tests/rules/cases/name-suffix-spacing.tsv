@@ -1,0 +1,47 @@
+# 규칙: LEX-4165
+rule	input	expected	kind	layer
+compose:name-suffix-spacing	藩邸側がヨネとワサ。	has:저택 측이	fix	compose
+compose:name-suffix-spacing	えぇと、ユフィリア嬢？	has:유필리아 양	fix	compose
+compose:name-suffix-spacing	ユフィリア嬢、行こう。	has:유필리아 양	fix	compose
+compose:name-suffix-spacing	セルフィア嬢が答える。	has:세르피아 양이	fix	compose
+compose:name-suffix-spacing	外車側のブレーキ痕だ。	has:외제차 측의	fix	compose
+compose:name-suffix-spacing	相手側が　どう言うか。	has:상대 측이	fix	compose
+compose:name-suffix-spacing	井村屋側がウメとイチ。	has:이무라야 측이	fix	compose
+compose:name-suffix-spacing	バーサ嬢もなかなかだぜ。	has:바사 양도	fix	compose
+compose:name-suffix-spacing	交渉相手側の利益も考え、	has:상대 측의	fix	compose
+compose:name-suffix-spacing	僕は本気です ｱﾝﾅ嬢｡	has:안나 양	fix	compose
+compose:name-suffix-spacing	どうです ｴﾘｱｰﾅ嬢｡	has:엘리아나 양	fix	compose
+compose:name-suffix-spacing	ご機嫌よう、ユフィリア嬢。	has:유필리아 양	fix	compose
+compose:name-suffix-spacing	それとさ、何かナンシー嬢、	has:낸시 양	fix	compose
+compose:name-suffix-spacing	あれも選抜なんで生徒側は｡	has:학생 측은	fix	compose
+compose:name-suffix-spacing	信じてほしい フィーネ嬢｡	has:피네 양	fix	compose
+compose:name-suffix-spacing	「アルくんとユフィリア嬢が」	has:유필리아 양이	fix	compose
+compose:name-suffix-spacing	ユフィリア嬢、私の価値はね？	has:유필리아 양	fix	compose
+compose:name-suffix-spacing	安倍派では複数の所属議員側が	has:의원 측이	fix	compose
+compose:name-suffix-spacing	（八雲）弁護側は全面的対決。	has:변호 측은	fix	compose
+compose:name-suffix-spacing	アウト側が岩下　イン側が立木	has:아웃 측이 이와시타 인 측이	fix	compose
+compose:name-suffix-spacing	ユフィリア嬢を幸せに致します！	has:유필리아 양을	fix	compose
+compose:name-suffix-spacing	安倍派に所属する複数の議員側が	has:의원 측이	fix	compose
+compose:name-suffix-spacing	太平洋側は朝から晴れるところが	has:태평양 측은	fix	compose
+compose:name-suffix-spacing	(ｴﾚﾝ)ｴﾘｱｰﾅ嬢！はっ！	has:엘리아나 양	fix	compose
+compose:name-suffix-spacing	せめて、姉側の理由がわかれば、	has:자 측의	fix	compose
+compose:name-suffix-spacing	「いやお嬢さん、俺たちはですね──」	「아니 아가씨, 우리는이군요──」	keep	compose
+compose:name-suffix-spacing	「おいたが過ぎるようだね、お嬢さん」	「뒀지만 지나는 것 같다, 아가씨」	keep	compose
+compose:name-suffix-spacing	何をおっしゃっているんですかお嬢様！	무엇을 말씀하십니까 아가씨!	keep	compose
+compose:name-suffix-spacing	その割にお嬢さまは全然平気そうだし、	그런 것치고는 아가씨는 전혀 괜찮아 보이고,	keep	compose
+compose:name-suffix-spacing	その男爵令嬢の名は、レイニ・シアン。	그 남작 영애의 이름은, 레이니 시안.	keep	compose
+compose:name-suffix-spacing	それは令息だけでなく令嬢に対しても。	그것은 영식뿐만이 아니라 영애에 대해서도.	keep	compose
+compose:name-suffix-spacing	それを信じてくれるご令嬢がいればね。	그것을 믿어 주는 영애가 있으면.	keep	compose
+compose:name-suffix-spacing	まず、椿の母は大企業の令嬢であった。	우선, 츠바키의 어머니는 대기업의 영애였다.	keep	compose
+compose:name-suffix-spacing	件のカタリナ・クラエス令嬢はなぜか、	건의 카타리나 클라에스 영애는 왠지,	keep	compose
+compose:name-suffix-spacing	俺の内側に…どんな強風でも消えない、	내 안쪽에…어떤 강풍이라도 사라지지 않는다,	keep	compose
+compose:name-suffix-spacing	血が目に入って、左側がよく見えない。	피가 눈에 들어와, 좌측이 잘 안 보인다.	keep	compose
+compose:name-suffix-spacing	「お嬢様！おめでとうございます！！」	「아가씨! 축하합니다!!」	keep	compose
+compose:name-suffix-spacing	(医師)恐らくお嬢さんの脚は もう…	(의사) 아마 아가씨의 다리는 이제…	keep	compose
+compose:name-suffix-spacing	あの向こう側あそこが本物の染川町よ。	그 저쪽 편 저기가 진짜의 소메카와 마을이야.	keep	compose
+compose:name-suffix-spacing	反対側の 私のことは考えなかったの？	반대쪽의 나는 생각하지 않았어?	keep	compose
+compose:name-suffix-spacing	あなたの お嬢さん17歳になるって｡	당신의 아가씨 17세가 된다니까.	keep	compose
+compose:name-suffix-spacing	＜わたしたちは地球の反対側にいる｡・	<우리는 지구의 반대쪽에 있다. ·	keep	compose
+compose:name-suffix-spacing	どうやらお嬢さまは誘拐されたようです	아무래도 아가씨는 유괴당한 것 같습니다	keep	compose
+compose:name-suffix-spacing	お嬢さんなら持ち出すことは可能かと…	아가씨라면 꺼내는 것은 가능할 것 같습니다…	keep	compose
+compose:name-suffix-spacing	(弥生の泣き声)・(女性)お嬢様！・	(3월의 울음소리)·(여성) 아가씨!	keep	compose

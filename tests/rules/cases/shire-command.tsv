@@ -1,0 +1,25 @@
+# 규칙: LEX-4153
+rule	input	expected	kind	layer
+cx:novel-fixes-4:30	盲目は貴様だと知れ、ユフィリア！	has:네놈이라고 알아라	fix	rewrites
+cx:novel-fixes-4:30	愚かなのは貴様だと知れ、アルガルド！	has:네놈이라고 알아라	fix	rewrites
+cx:novel-fixes-4:30	敵は我らだと知れ、愚か者め！	has:우리들이라고 알아라	fix	rewrites
+cx:novel-fixes-4:30	毛利様に知れたら　わしらも殺される。	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	あなたには昔を知れる ﾍﾝﾙｰﾀﾞ｡	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	「誰かに、似たのかも知れません……」	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	男性なら魅力的と見るかも知れないが、	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	難しそうな顔をしていたのかも知れない。	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	両親は信じてくれるかも知れないが、	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	知れたこと。母なる神を……滅ぼすのだ。	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	嫌だよ　あんな得体の知れないもの。	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	戦となればいつ討たれるやも知れず…	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	氏素性の知れない女をお嫁にするなど	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	（駐在）死者３２名　重傷者は数知れず。	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	監督は 小津 安二郎言わずと知れた	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	やはり　この女底知れない脅威だ…！	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	「……共鳴したのかも知れないな」	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	知れたこと亡き大御所様に決まっておろうが	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	＜ですが卯之吉の行方は杳として知れず…＞	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	なあに寒いったって知れたもんだよ	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	おぬしの所業が ご公儀に知れたら	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	兄貴に知れたらただじゃ済まへんで	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:30	社の精神的負担は計り知れないの｡	!rule:cx:novel-fixes-4:30	keep	rewrites

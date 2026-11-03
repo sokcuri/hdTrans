@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 dict:jisjk:30921	乙巳の年。	을사의 해.	fix	defaults
 dict:jisjk:30921	乙巳生まれ。	을사 태생.	fix	defaults
-dict:jisjk:30921	今年は乙巳だ。	금년은 을사다.	fix	defaults
+dict:jisjk:30921	今年は乙巳だ。	올해는 을사다.	fix	defaults
 dict:jisjk:30921	乙巳から乙未まで。	을사로부터 을미까지.	fix	defaults
 dict:jisjk:30921	乙未の年。	을미의 해.	keep	defaults
 dict:jisjk:15092	乾風が吹く。	건조한 바람이 분다.	fix	defaults

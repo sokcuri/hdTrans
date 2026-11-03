@@ -726,6 +726,11 @@ bool ReadSign(std::string_view text) {
            dict::InClassRune(HDTRANS_CLASS("sign.final-rieul"), r.cp);
 }
 
+// Whether text, written straight after a word, joins it: it starts with a syllable or a bracket.
+bool JoinsWord(std::string_view text) {
+    return !text.empty() && (text.front() == '(' || text::Final(text::DecodeRune(text).cp) >= 0);
+}
+
 // Whether an item of a token of the given type is one letter or number written as a symbol (①, Ⅳ, α),
 // a word of its own.
 bool SymbolLetter(int type, std::string_view surface) {
@@ -1222,6 +1227,22 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     std::string translated =
         WriteCount(i, ApplyParenthesisTextFilter(DictionaryForms(Build(i, 0, {}), *generated_), i)) + item.appended;
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
+    // A comma the source writes at the end of the word is written after its Korean, as a comma the word
+    // stage left apart: the comma an ichidan or passive stem takes as its て (開け、 열어,, spec GRM-3529) or
+    // one a word reads with it (おり、 있어,, として、 (으)로서,, spec GRM-3514).
+    bool restoredComma = false;
+    {
+        const size_t at = std::min<size_t>(static_cast<size_t>(item.offset), tokenText.size());
+        const std::string_view covered = std::string_view(tokenText).substr(at, static_cast<size_t>(std::max(item.length, 0)));
+        const bool wordComma = settings_.text && covered != "、" && covered != "，" &&
+                               (covered.ends_with("、") || covered.ends_with("，"));
+        const size_t end = translated.find_last_not_of(' ');
+        if ((item.endingSurface == "、" || item.endingSurface == "," || wordComma) && !Blank(translated) &&
+            translated[end] != ',') {
+            translated.insert(end + 1, ",");
+            restoredComma = true;
+        }
+    }
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
     // A word span keeps its text unless a rewrite read it anew (ちょ 잠깐 → 완전 before an adjective);
@@ -1241,6 +1262,17 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     if (!space && !hadaNoun && AttachesAfter(items, tokens, i)) {
         const size_t end = spaced.find_last_not_of(' ');
         if (end != std::string::npos) spaced.erase(end + 1);
+    }
+    // A restored comma the next word would be written straight after (a word that attaches, read from
+    // the items already written: the rest of the token, or else the next token) keeps a space after it, as
+    // a source comma before a quote does (解決してくれ、と 해결해 주어, 라고, 見上げ、だが 올려다봐, 이지만).
+    const std::string_view following = !remainder.empty() ? std::string_view(remainder)
+                                       : item.tokenIndex + 1 < static_cast<int>(tokens.size())
+                                           ? std::string_view(tokens[item.tokenIndex + 1].text)
+                                           : std::string_view();
+    if (restoredComma && !space && JoinsWord(following)) {
+        const size_t end = spaced.find_last_not_of(' ');
+        if (end != std::string::npos && spaced[end] == ',') space = true;
     }
     if (record) inflected.push_back({i, std::move(composed), spaced, space});
     if (protectedToken) {
@@ -1543,19 +1575,19 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
     if (nextEntry == "「") return Result(std::move(t), true);
     // A number keeps its unit sign (50%, 30℃).
     if (!allowSpacing || nextEntry == "%" || (!t.empty() && IsDigit(t.back()) && ReadSign(next.surface))) return Result(std::move(t), false);
-    // 씨 and 군 after a name or its mask are dependent nouns, written apart (카케이 씨, 타나카 군,
-    // ○○ 씨).
+    // 씨, 군 and 양 after a name or its mask are dependent nouns, written apart (카케이 씨, 타나카 군,
+    // 레이니 양, ○○ 씨).
     bool mask = !t.empty();
     for (std::size_t k = 0; mask && k < t.size();) {
         const text::Rune r = text::DecodeRune(std::string_view(t).substr(k));
         mask = HasRune(U"○●◯◎×✕＊*■□△▲◇◆", r.cp);
         k += r.size;
     }
-    if ((kind == '1' || mask) && (nextEntry == "씨" || nextEntry == "군")) {
+    if ((kind == '1' || mask) && (nextEntry == "씨" || nextEntry == "군" || nextEntry == "양")) {
         if (dict::InClass(HDTRANS_CLASS("honorific.prepass-spaced"), next.surface)) return Result(std::move(t), true);
     }
-    // A noun of degree, time, listing or span read as a free noun after a word stands apart
-    // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등, 회의 중); 等 after a number is a rank (1등).
+    // A noun of degree, time, listing, span or side read as a free noun after a word stands apart
+    // (50배 이상, 4시 무렵, 세 명 정도, 7년 전, 안젤리카 등, 회의 중, 왕가 측); 等 after a number is a rank (1등).
     struct FreeNoun {
         std::string_view surface;
         std::string_view korean;
@@ -1565,7 +1597,7 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
         {"以上", "이상"}, {"以下", "이하"}, {"未満", "미만"}, {"頃", "무렵"}, {"ほど", "정도"},
         {"程", "정도"},   {"等", "등"},     {"など", "등"},   {"前", "전"},   {"後", "후"},
         {"前", "앞"},     {"後", "뒤"},     {"中", "중"},     {"くらい", "정도", true}, {"ぐらい", "정도", true},
-        {"など", "같은", true},
+        {"など", "같은", true}, {"側", "측"},
     };
     if (settings_.literal && kind == '1' && AttachesToNoun(next.surface, nextEntry)) return Result(std::move(t), false);
     // A direction noun and 쪽 make one word (위쪽, 앞쪽, 오른쪽); 쪽 after other nouns stands

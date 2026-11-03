@@ -67,7 +67,7 @@ cx:prohibit-request:10	食べないでください、と言った。	!rule:cx:pr
 cx:prohibit-request:20	勘違いしないでくださいと言った。	!rule:cx:prohibit-request:20	keep	rewrites
 ending:naide	泣かないで。	울지 마.	keep	local-ending
 cx:prohibit-request:20	費用を心配しないでいいし	비용을 걱정하지 않아도 되고	keep	rewrites
-cx:prohibit-particle:10	いいわよ、もう着ないから…今年だけなんだから！ …えっ、そ、そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	좋아, 이제 입지 않으니까…금년만이니까! …어, 그, 그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
+cx:prohibit-particle:10	いいわよ、もう着ないから…今年だけなんだから！ …えっ、そ、そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	좋아, 이제 입지 않으니까…올해만이니까! …어, 그, 그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
 cx:prohibit-particle:10	そんな顔しないでよ…もぅ…わかったわよぉ、まったく…	그런 얼굴 하지 마…정말…알았어, 정말이지…	fix	rewrites
 cx:prohibit-particle:10	そんな顔しないでよ...もぅ...わかったわよぉ	그런 얼굴 하지 마...정말...알았어	keep	rewrites
 cx:prohibit-particle:10	そんな顔しないでよ‥もぅ‥わかったわよぉ	그런 얼굴 하지 마‥정말‥알았어	fix	rewrites

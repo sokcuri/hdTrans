@@ -1,0 +1,48 @@
+# 규칙: LEX-4310
+rule	input	expected	kind	layer
+dict:jisjk:17422	今年もよろしゅう！	has:올해	fix	lookup
+dict:jisjk:17422	今年一番ドキドキした	has:올해	fix	lookup
+dict:jisjk:17422	今年も夏が近づいてきたわね。	has:올해	fix	lookup
+dict:jisjk:345931	対空兵装の拡充	has:무장	fix	lookup
+dict:jisjk:345931	潜水艦電子兵装の量産	has:무장	fix	lookup
+dict:jisjk:345931	これは……この兵装なら！	has:무장	fix	lookup
+dict:jisjk:115490	さらにKW環礁沖海域に反復出撃！	has:앞바다	fix	lookup
+dict:jisjk:115490	「第五航空戦隊」珊瑚諸島沖に出撃せよ！	has:앞바다	fix	lookup
+dict:jisjk:115490	ああ、あの岩手沖での第四艦隊事件のこと？	has:앞바다	fix	lookup
+dict:jisjk:83599	あ、朝ごはんの……	has:아침밥	fix	lookup
+dict:jisjk:83599	提督、朝ごはんです。	has:아침밥	fix	lookup
+dict:jisjk:83599	提督、朝ごはん置くね？	has:아침밥	fix	lookup
+dict:w:17823	今晩は噂のマミーヤで晩ごはん？	has:저녁밥	fix	lookup
+dict:w:17823	「あ、今日の晩ごはん外食なんだ」	has:저녁밥	fix	lookup
+dict:w:17823	ん、そうだ、晩ごはんの準備をしないと。	has:저녁밥	fix	lookup
+dict:jisjk:26762	（小声）好きだの	has:작은 목소리	fix	lookup
+dict:jisjk:26762	（小声）好きだにゃ	has:작은 목소리	fix	lookup
+dict:jisjk:26762	（小声）助けてわよ	has:작은 목소리	fix	lookup
+dict:jisjk:92361	お地蔵様倒したの！	has:쓰러뜨	fix	lookup
+dict:jisjk:92361	魔族を倒してくださったのですね。	has:쓰러뜨	fix	lookup
+dict:jisjk:92361	“ゲブラーを倒したければまずは王座につけ”と？	has:쓰러뜨	fix	lookup
+dict:jisjk:92361	倒せるかな？	has:쓰러뜨	fix	lookup
+dict:jisjk:92361	何とか……倒せたのか？	has:쓰러뜨	fix	lookup
+dict:jisjk:92361	そんな俺に奴が倒せるだろうか。	has:쓰러뜨	fix	lookup
+dict:w:31543	全門斉射！	has:일제 사격	fix	lookup
+dict:w:31543	全主砲、斉射！	has:일제 사격	fix	lookup
+dict:w:31544	主砲、一斉射だ。	has:일제 사격	fix	lookup
+dict:w:31544	第一戦隊、一斉射！	has:일제 사격	fix	lookup
+dict:jisjk:365309	ベント開け。	has:벤트	fix	lookup
+dict:jisjk:365309	……ベント開け！	has:벤트	fix	lookup
+dict:jisjk:365309	ハッチ閉鎖、ベント開け。	has:벤트	fix	lookup
+dict:jisjk:98378	「水雷戦隊」バシー島沖緊急展開	has:바시 섬 앞바다	fix	lookup
+dict:jisjk:115490	南西諸島沖に出撃せよ！	has:난세이제도 앞바다에	fix	lookup
+lex:今年度	今年度の予算を決める。	has:금년도 예산을	keep	lookup
+lex:今年中	今年中に終わらせる。	has:올해 안에	keep	lookup
+lex:沖縄	沖縄に行く。	has:오키나와에	keep	lookup
+lex:沖田	沖田さんが来た。	has:오키타 씨가	keep	lookup
+lex:気配	「全く夢が覚める気配がない」	has:깨는 기색이 없어	keep	lookup
+lex:押し倒す	「真帆を押し倒す」	has:밀어 넘어뜨려	keep	lookup
+lex:倒れ	木が倒れた。	나무가 쓰러졌다.	keep	lookup
+lex:無茶苦茶	無茶苦茶だ。	터무니없다.	keep	lookup
+lex:一斉	一斉に走り出した。	일제히 달리기 시작했다.	keep	lookup
+dict:w:31545	一斉射撃だ。	일제 사격이다.	fix	lookup
+dict:w:19605	先日の戦闘で、少し無茶しちゃいましたね。	has:조금 무리해버렸	fix	lookup
+dict:w:19605	「この前みたいな無茶はするなーとか言うし……」	has:무리는	fix	lookup
+dict:w:19605	かと言って無茶はできない。	has:무리는 할 수 없다	fix	lookup

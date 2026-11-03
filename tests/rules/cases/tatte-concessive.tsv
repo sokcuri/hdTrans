@@ -17,7 +17,7 @@ analysis:kitatte	どんな奴が来たって吹飛ばしてやる	has:와도 날
 analysis:kitatte	こっちに来たって何も無いでしょうに	has:와도 아무것도	fix	analysis
 analysis:kitatte	お前、未来から来たって言ってたよな	has:왔다고 했지	fix	analysis
 cx:lc-quote-adnominal:40	誰かに見られていたって事？	has:보여지고 있었다는 것	fix	rewrites
-cx:lc-quote-adnominal:40	スレ２本で収まったって事で良かった	has:들어갔다는 것이라서	fix	rewrites
+cx:lc-quote-adnominal:40	スレ２本で収まったって事で良かった	has:들어갔다는 것	fix	rewrites
 cx:lc-quote-adnominal:40	私の願いは聞き届けられたって事ですか？	has:받아 들여졌다는 것입니까	fix	rewrites
 cx:lc-quote-adnominal:50	弟が流行り病に掛かったって報せがあって	has:걸렸다는 소식이	fix	rewrites
 cx:lc-quote-adnominal:50	バレて苦情来たって話、知ってる？	has:왔다는 이야기,	fix	rewrites

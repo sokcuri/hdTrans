@@ -19,7 +19,7 @@ cx:obligation-alone:20	「そういえば、歓迎会をしなきゃね」	「�
 cx:obligation-alone:30	助けなきゃ、と思った。	도와야 한다고 생각했다.	fix	rewrites
 cx:obligation-alone:30	答えなければ、と思っていたはずだった。	대답해야 한다고 생각했을 것이었다.	fix	rewrites
 cx:obligation-alone:40	ユイと大掃除しなきゃと思った。	유이와 대청소해야 한다고 생각했다.	fix	rewrites
-cx:obligation-alone:50	「皆さんの期待に応えなきゃって気持ちの方が強くて」	「여러분이 기대에 부응해야 한다는 기분이 강해서」	fix	rewrites
+cx:obligation-alone:50	「皆さんの期待に応えなきゃって気持ちの方が強くて」	「여러분의 기대에 부응해야 한다는 기분이 강해서」	fix	rewrites
 cx:obligation-alone:60	早く行かなきゃって思った。	빨리 가야 한다고 생각했다.	fix	rewrites
 cx:obligation-alone:10	　抵抗しなくちゃいけないんだ。	 저항해야 한다.	fix	rewrites
 dict:jisjk:344317	「行かなくちゃいけない」	「가야 해」	fix	local-ending

@@ -3,8 +3,8 @@ rule	input	expected	kind	layer
 protect:katakana-native-word	　カブれなければいいが……	 물들지 않으면 좋겠지만……	fix	protect
 protect:katakana-native-word	　カブれなかった。	 물들지 않았다.	fix	protect
 protect:katakana-native-word	　ブチ殺す。	 때려죽인다.	fix	protect
-protect:katakana-native-word	　かなりビビッたが、畑に近付いたので俺の覚悟が決まった。	 꽤 위축되었지만, 밭에 가까워졌으므로 내 각오가 정해졌다.	fix	protect
-protect:katakana-native-word	凄まじい速度で突っ込んでくるトラックにハネられ、	굉장한 속도로 돌진해 오는 트럭에 받혀	fix	protect
+protect:katakana-native-word	　かなりビビッたが、畑に近付いたので俺の覚悟が決まった。	 꽤 위축되었지만, 밭에 다가갔으므로 내 각오가 정해졌다.	fix	protect
+protect:katakana-native-word	凄まじい速度で突っ込んでくるトラックにハネられ、	굉장한 속도로 돌진해 오는 트럭에 받혀,	fix	protect
 protect:katakana-native-word	ふふっ、いいな、……トボけた男だ……	후훗, 좋다, ……시치미를 뗀 남자야……	fix	protect
 protect:katakana-native-word	「はい、もちろんです！　どうぞコキ使ってください！」	「네, 물론입니다! 어서 혹사해 주세요!」	fix	protect
 protect:katakana-native-word	ベタぼれしている。	홀딱 반하고 있다.	fix	protect
@@ -39,7 +39,7 @@ protect:katakana-native-word	完全にイジってるが。	완전히 놀리고 
 protect:katakana-native-word	「何かミスしても殺す」	「뭔가 실수해도 죽여」	keep	protect
 protect:katakana-native-word	なるほど俺がテストしてやるよ！	그렇구나 내가 테스트해 줄게!	keep	protect
 protect:katakana-native-word	マウスを手にとってクリックしてみようかとも思ったが	마우스를 집어 클릭해 볼까 하고도 생각했지만	keep	protect
-protect:katakana-native-word	ゲーム配信会社もヌルゲーにシフトしていった。	게임 서비스 회사도 쉬운 게임에 쉬프트해 나갔다.	keep	protect
+protect:katakana-native-word	ゲーム配信会社もヌルゲーにシフトしていった。	게임 서비스 회사도 쉬운 게임에 시프트해 나갔다.	keep	protect
 protect:katakana-native-word	妹を姉の婚約者にスライドっていうのも	여동생을 언니의 약혼자에게 슬라이드라는 것도	keep	protect
 protect:katakana-native-word	それぞれ5ポイントかかった。	각각 5포인트 걸렸다.	keep	protect
 protect:katakana-native-word	「今、８レベルだね」	「지금, 8레벨이구나」	keep	protect

@@ -1,0 +1,8 @@
+# 규칙: GRM-3529
+rule	input	expected	kind	layer
+compose:stem-comma	手を上げ、走った。	손을 들어, 달렸다.	fix	compose
+compose:stem-comma	楽団による優美な音楽が奏でられ、社交へと勤しむ生徒たち。	has:연주되어, 사교	fix	compose
+compose:stem-comma	子供が右手で抱えていたパンを捨て、代わりに銃を抜いた。	has:빵을 버려, 대신에	fix	compose
+compose:stem-comma	そのままぶっ倒れ、知恵熱を出して寝込んだ	has:확 쓰러져, 지혜열이	fix	compose
+compose:stem-comma	本を読み、寝た。	책을 읽고, 잤다.	keep	compose
+compose:stem-comma	手を上げて走った。	손을 들어 달렸다.	keep	compose

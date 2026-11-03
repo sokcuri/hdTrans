@@ -14,7 +14,7 @@ cx:word-cue:25	あたしゃ勿体なくもミズ・ロッシュの愛娘だよ�
 cx:word-cue:25	ちょっと時間がもったいなくも、あるよな？	!rule:cx:word-cue:25	keep	rewrites
 cx:word-cue:25	それにもったいなくもある。	!rule:cx:word-cue:25	keep	rewrites
 cx:word-cue:25	もったいなくもなかったのかな	!rule:cx:word-cue:25	keep	rewrites
-cx:word-cue:30	まずい、阻止しないと！	큰일이다, 저지하지 않으면!	fix	rewrites
+cx:word-cue:30	まずい、阻止しないと！	큰일이다, 저지해야 해!	fix	rewrites
 cx:word-cue:30	まずい、ぶつかる！	큰일이다, 부딪친다!	keep	rewrites
 cx:word-cue:30	食わない理由はまずいから。	!rule:cx:word-cue:30	keep	rewrites
 cx:word-cue:40	これは本当にヤバイと思った。	has:정말 위험하다고 생각했다	fix	rewrites

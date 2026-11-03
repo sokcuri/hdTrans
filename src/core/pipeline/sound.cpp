@@ -460,6 +460,7 @@ private:
         return text_.substr(offsets_[from], offsets_[to] - offsets_[from]);
     }
     bool UtteranceStart(size_t p) const;
+    bool AfterInterjection(size_t p) const;
     bool PauseAt(size_t p) const;
     size_t LaughterEnd(size_t p) const;
     // With ending, the end rows go there instead of into user.
@@ -533,14 +534,20 @@ private:
     std::u32string f_;  // rs_ in katakana
     std::vector<size_t> offsets_;  // byte offset of each character, and the end
     size_t stutterEnd_ = static_cast<size_t>(-1);  // the character after the last stutter
+    size_t intjEnd_ = static_cast<size_t>(-1);     // the end of the last interjection that opened an utterance
 };
 
 // Whether character p starts an utterance: the start of the text or of a line, after an
-// opening bracket, a sentence end, a space or a stutter (お、おい).
+// opening bracket, a sentence end, a space or a stutter (お、おい), or after the comma of an
+// interjection or laugh of two or more characters that opened one (おほほ、で、ですわよね), not a
+// set phrase (ふぁいと、おー！).
 bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
+    if (AfterInterjection(p)) return true;
     return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
 }
+
+bool SoundText::AfterInterjection(size_t p) const { return p > 0 && p == intjEnd_ + 1 && In(rs_[p - 1], U"、，,"); }
 
 // The end of a run of mark.laughter letters at character p that no Latin letter or digit follows
 // (ｗｗ, not www.example), or p.
@@ -730,6 +737,10 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             // comma (なんだよ、ったく…).
             bool start = UtteranceStart(from) || (s.key.front() == U'ッ' && from > 0 && In(rs_[from - 1], U"、，,")),
                  pause = PauseAt(end) || (In(rs_[end - 1], U"？?") && p != stutterEnd_);  // a key that asks ends in its own pause (ね？)
+            // After an interjection a ね agrees (まぁ、ね、), it calls no one; only a bare ね？ asks.
+            if (s.key == U"ネ" && AfterInterjection(from) && (end != p + s.key.size() || !(end < rs_.size() && In(rs_[end], U"？?")))) {
+                start = false;
+            }
             // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
             // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
             // う……多分, ちょ……待って) and, unless it is a conjunction (で 그리고), before a space or
@@ -1297,7 +1308,10 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     } else if ((afterParticle && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0)) ||
                (afterWord && (first.intj || first.keyLen < 3)) ||
                (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
-                !MimeticAfterWord(first))) {
+                !MimeticAfterWord(first)) ||
+               // A particle after a closing bracket that a dictionary word goes on from past the first
+               // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
+               (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1))) {
         return {};
     }
     while (!chain.empty()) {
@@ -1536,6 +1550,21 @@ size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
 // is said twice; with ッ not for kSoundsBeforeKanji:
 // えっ……本当); or a syllable with ッ directly before a kanji, unless kSoundsBeforeKanji
 // holds it, with the separator 、.
+// The separator after a stutter piece as StutterSeparator reads it, with one half-width space after
+// it when it is a comma or kana follows the space (わ、 私は, どっ.. どうしよう 어.. 어떻게 하지); a full-width space keeps
+// spaced copies apart (お　お…　俺), and after an ellipsis before a kanji word the kana cannot be compared.
+size_t SpacedStutterSeparator(std::u32string_view rs, size_t i) {
+    size_t n = StutterSeparator(rs, i);
+    if (n == 0) return 0;
+    // One space only; a run of them separates columns.
+    const size_t sp = i + n;
+    if (sp + 1 < rs.size() && rs[sp] == U' ' && rs[sp + 1] != U' ' &&
+        (In(rs[i], U"、，") || IsHiraganaRune(rs[sp + 1]) || IsKatakanaRune(rs[sp + 1]))) {
+        n++;
+    }
+    return n;
+}
+
 size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const std::u32string_view rs = rs_, f = f_;
     pieces.clear();
@@ -1546,7 +1575,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     if (rs[p] == U'が') {
         size_t q = p;
         while (q > 0 && In(rs[q - 1], U" 　")) q--;
-        const size_t k = StutterSeparator(rs, p + 1);
+        const size_t k = SpacedStutterSeparator(rs, p + 1);
         const bool again = k != 0 && p + 1 + k < rs.size() && rs[p + 1 + k] == U'が';
         if ((q == 0 || rs[q - 1] == U'\n') && !again) return 0;
     }
@@ -1586,7 +1615,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     }
     size_t i = p;
     while (f.substr(i, n) == x) {
-        const size_t k = StutterSeparator(rs, i + n);
+        const size_t k = SpacedStutterSeparator(rs, i + n);
         if (k == 0) break;
         pieces.push_back({rs.substr(i + n, k)});
         i += n + k;
@@ -1602,8 +1631,8 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     std::vector<std::pair<size_t, size_t>> longer;  // start and length of each longer piece
     for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
         size_t e = j + n;
-        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && StutterSeparator(rs, e) == 0) e++;
-        const size_t k = StutterSeparator(rs, e);
+        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && SpacedStutterSeparator(rs, e) == 0) e++;
+        const size_t k = SpacedStutterSeparator(rs, e);
         if (k == 0 || e == j + n) break;
         longer.push_back({j, e - j});
         j = e + k;
@@ -1616,7 +1645,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     };
     while (!longer.empty()) {
         const auto& [lastStart, lastLength] = longer.back();
-        const size_t after = lastStart + lastLength + StutterSeparator(rs, lastStart + lastLength);
+        const size_t after = lastStart + lastLength + SpacedStutterSeparator(rs, lastStart + lastLength);
         const std::u32string_view word = kanaWord(after);
         // The word without its lengthening, and without an ending the dictionary does not
         // hold in the word (すきです: すき). A word said again is no piece of it
@@ -1634,7 +1663,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         if (chained) {
             for (const auto& [start, length] : longer) {
                 const size_t e = start + length;
-                pieces.push_back({rs.substr(e, StutterSeparator(rs, e)), length, stem.size()});
+                pieces.push_back({rs.substr(e, SpacedStutterSeparator(rs, e)), length, stem.size()});
             }
             return after;
         }
@@ -1647,8 +1676,8 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     // a word keeps the word (そ、そんな……嘘).
     for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
         size_t e = j + n;
-        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && StutterSeparator(rs, e) == 0) e++;
-        const size_t k = StutterSeparator(rs, e);
+        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && SpacedStutterSeparator(rs, e) == 0) e++;
+        const size_t k = SpacedStutterSeparator(rs, e);
         if (k == 0 || e == j + n || e - j > 2 || !In(rs[e], U"、，―─—") || e + k >= rs.size() ||
             !IsKanjiRune(rs[e + k]) || NumeralRune(rs[e + k])) {
             break;
@@ -2088,12 +2117,18 @@ std::string SoundText::Write() {
                     for (size_t k = 1; k < piece.kana; k++) text::AppendRune(b, kStutterMark);
                     for (size_t k = piece.kana; k < piece.word; k++) text::AppendRune(b, kStutterRest);
                 }
-                b += EncodeText(piece.separator);
+                // A comma goes alone; the comma stage writes the space after it (あ、 あの 저, 저기).
+                const bool comma = !piece.separator.empty() && In(piece.separator[0], U"、，");
+                b += EncodeText(comma ? piece.separator.substr(0, 1) : piece.separator);
             }
             next = end;
             stutterEnd_ = end;
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
+            if (next - i > 1 && UtteranceStart(i) &&
+                std::all_of(chain.begin(), chain.end(), [](const SoundMatch& m) { return m.intj && !m.phrase; })) {
+                intjEnd_ = next;
+            }
             spans_.emplace_back(i, next);
             for (const SoundMatch& m : chain) keySpans_.emplace_back(m.start, m.end);
             // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
@@ -3156,8 +3191,28 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
     return {};
 }
 
+// Whether a standalone いざ stands before pos in its sentence, since the last 。！？ or bracket: one after no hiragana
+// and before a kanji, a comma or a space, not the いざ of いざとなったら, いざという時, いざこざ or いざかや. A ん before と
+// there is the literary volitional (いざ行かんと思う), no negative.
+bool IzaBefore(std::string_view s, size_t pos) {
+    constexpr std::string_view kIza = "いざ";
+    const std::string_view head = s.substr(0, pos);
+    size_t clause = 0;
+    for (const std::string_view mark : {"。", "！", "？", "!", "?", "「", "」", "『", "』"}) {
+        if (const size_t m = head.rfind(mark); m != std::string_view::npos) clause = std::max(clause, m + mark.size());
+    }
+    for (size_t at = head.find(kIza, clause); at != std::string_view::npos; at = head.find(kIza, at + kIza.size())) {
+        if (at > 0 && IsHiraganaRune(LastRune(s.substr(0, at)).cp)) continue;
+        const std::string_view after = s.substr(at + kIza.size());
+        if (after.empty()) continue;
+        const char32_t next = text::DecodeRune(after).cp;
+        if (IsKanjiRune(next) || RuneIn(next, U"、，, 　")) return true;
+    }
+    return false;
+}
+
 // Whether the せ before the ん or ぬ at i of rs (s, with the byte offsets byte) is the old negative stem of する:
-// after は or も that follow a word (許しはせん, 何もせん), after こと or そう (そんなことせん, そうせん), or after a
+// after は, も or を that follow a word (許しはせん, 何もせん, 支度をせん), after こと or そう (そんなことせん, そうせん), or after a
 // verb of する of the dictionary (気にせん) or a noun of an act (Hd: 勉強せん, 容赦せぬ) of two characters or more,
 // and before the end, a mark, a kanji or the kana of an ending or particle (せんぞ, せんかった, せんのか). Not a word
 // that goes on in kana (せんせい, せんぱい, せんべい), after one kanji, whose する conjugates otherwise (愛せん), the
@@ -3172,6 +3227,8 @@ bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::
     if (kanaAfter && std::u32string_view(U"ぞよわかのなねでとさしけじやがもは").find(rs[i + 1]) == std::u32string_view::npos) {
         return false;
     }
+    // せんじ but for せんじゃ is 煎じる written in kana (お茶をせんじる, 薬はせんじて), not the negative of する.
+    if (i + 1 < rs.size() && rs[i + 1] == U'じ' && !(i + 2 < rs.size() && rs[i + 2] == U'ゃ')) return false;
     // After a particle or こと the せ may start a noun in kana: a word of the dictionary that starts there and goes
     // on past the kana after the ん (せんしゅ, せんじつ, せんもんか), but for one that ends with an ending after the
     // ん before the end, a mark or a sentence particle (せんねん, せんのう, せんじゃろう; not せんのうだ), and せんぞ
@@ -3197,7 +3254,8 @@ bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::
         }
         return false;
     };
-    if ((rs[se - 1] == U'は' || rs[se - 1] == U'も') && se >= 2 && (IsKanjiRune(rs[se - 2]) || IsHiraganaRune(rs[se - 2]))) {
+    if ((rs[se - 1] == U'は' || rs[se - 1] == U'も' || rs[se - 1] == U'を') && se >= 2 &&
+        (IsKanjiRune(rs[se - 2]) || IsHiraganaRune(rs[se - 2]) || IsKatakanaRune(rs[se - 2]))) {
         return !noun();
     }
     const std::u32string_view before(rs.data(), se);
@@ -3304,6 +3362,25 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         const bool tsu = rs[i] == U'っ';
         if (rs[i] != U'ん' && rs[i] != U'ぬ' && !tsu) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i + 1]);
+        // The いけん of western speech is いけない, and いけんかった いけなかった: after the と, ちゃ or ば of an obligation or a
+        // prohibition (行かないといけん, 食べちゃいけんのじゃ), and after は or も that follow a word (not the kana 拝見 of
+        // では、はいけん), after て or where a clause starts before the end, a
+        // mark or a final よ, ぞ, わ or ね (それはいけん, ああ、いけん！). The dictionary reads いけ alone as a negative
+        // already, which the ん would deny again. Elsewhere before の or じゃ the ん may be the の of いける
+        // (やっていけんのかな, 生きていけんじゃね).
+        const auto afterWord = [&](size_t k) {  // rs[k] follows a word
+            return k > 0 && (IsHiraganaRune(rs[k - 1]) || IsKatakanaRune(rs[k - 1]) || IsKanjiRune(rs[k - 1]));
+        };
+        if (rs[i] == U'ん' && ctx.dialectForms && i >= 2 && rs[i - 2] == U'い' && rs[i - 1] == U'け' &&
+            ((i > 2 && RuneIn(rs[i - 3], U"とゃば")) ||
+             ((i == 2 || RuneIn(rs[i - 3], U"てで、，,「『　 …‥") || (RuneIn(rs[i - 3], U"はも") && afterWord(i - 3))) &&
+              (ends(rest) || rest.starts_with("かった") || SentenceFinalParticle(rest, "よ") > 0 ||
+               SentenceFinalParticle(rest, "ぞ") > 0 || SentenceFinalParticle(rest, "わ") > 0 || SentenceFinalParticle(rest, "ね") > 0)))) {
+            out.append(s, byte[done], byte[i] - byte[done]);
+            out += rest.starts_with("かった") ? std::string_view("な") : kNai;
+            done = i + 1;
+            continue;
+        }
         // The ん of a negative before a tail of KansaiNegativeTail reads with it (知らんで 知らないよ, 許せんで 許せないよ,
         // 勉強せんで 勉強しないよ, 知らんでも 知らなくても), and before any other で it is the ない of ないで (知らんで書くな).
         // Not the polite ませんで (すみませんでした), the の said ん after an adjective's い (強いんです, 痛いんで), では
@@ -3327,7 +3404,8 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         // んといて (気にせんといて).
         const bool volitional = rest.starts_with("とす") || rest.starts_with("とし") || rest.starts_with("とせ") ||
                                 rest.starts_with("がため") || rest.starts_with("が為");
-        if (!tsu && !volitional && !rest.starts_with("といて") && OldSuruNegative(rs, s, byte, i, ctx, snap)) {
+        if (!tsu && !volitional && !rest.starts_with("といて") && !(rest.starts_with("と") && IzaBefore(s, byte[i])) &&
+            OldSuruNegative(rs, s, byte, i, ctx, snap)) {
             out.append(s, byte[done], byte[i - 1] - byte[done]);
             out += rest.starts_with("かっ") ? "しな" : "しない";
             done = i + 1;
@@ -3345,6 +3423,8 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             says = Says::Nai;
         } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative"), rest) > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-not"), rest) == 0) {
             says = Says::Negative;
+        } else if (const size_t final = dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-final"), rest); final > 0 && ends(rest.substr(final))) {
+            says = Says::Negative;
         } else if (beforeDe) {
             says = Says::Negative;
         } else if (std::u32string_view(U"えけせてねへめれげぜでべぺ").find(rs[i - 1]) != std::u32string_view::npos &&
@@ -3355,6 +3435,7 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             says = Says::GodanNen;
         }
         if (says == Says::None) continue;
+        if (says == Says::Negative && rest.starts_with("と") && IzaBefore(s, byte[i])) continue;
         const bool nai = says == Says::Nai && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) > 0;
         size_t start = i;
         while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsHiraganaRune(rs[start - 1]))) start--;
@@ -3583,7 +3664,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
         internal::RewriteCasualAdjectives(
             internal::RewriteOnbinU(
                 internal::RewriteContractedNo(
-                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
                 ctx, snap),
             ctx, snap),
         ctx, snap);

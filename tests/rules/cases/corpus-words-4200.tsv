@@ -1,0 +1,41 @@
+# 규칙: LEX-4200, LEX-4201
+rule	input	expected	kind	layer
+dict:w:31300	あからさまに、おかしな事を言う一樹の意図を酌み取った和則は、	has:의도를 헤아린	fix	lookup
+dict:w:31301	冷えきった早朝の空気が部屋を満たしていき、	has:차가워진	fix	lookup
+dict:w:31302	凍てつく風が吹き荒び、雨粒が雪にかわるこの季節は、	has:바람이 휘몰아쳐	fix	lookup
+dict:w:31303	凍てつく風が吹き荒び、雨粒が雪にかわるこの季節は、	has:얼어붙는 바람	fix	lookup
+dict:w:31304	需要と供給が逆転して、不要となった杉が、日本中に溢れかえる。	has:넘쳐난다	fix	lookup
+dict:w:31305	古代から日本中に杉が溢れ返っていたのであれば、	has:넘쳐나고 있었	fix	lookup
+dict:w:31307	我が家の父は、本を新たに借りに行こうとする息子に対し、これ見よがしの舌打ちをする。	has:보란 듯한	fix	lookup
+dict:w:31308	非常に注意深く、時間をかけて一字一字書いたのだろう	has:한 글자 한 글자 썼	fix	lookup
+dict:w:31309	宝玉院とは貴族の子弟が通う軍学校のことである。	has:군사학교	fix	lookup
+dict:w:31310	国策で大規模に増やして、手に負えなくなったのが、現在の大量にある杉林なのだろうか	has:삼나무 숲	fix	lookup
+dict:w:31310	杉林さんが来た。	has:스기바야시 씨	keep	lookup
+dict:w:31311	面倒ごとは早く終わらせたい。	has:귀찮은 일은	fix	lookup
+dict:w:31312	厄介ごとに巻き込まれた。	has:골칫거리	fix	lookup
+dict:w:31314	ムラクモ王国軍の片翼、左硬軍の頂点に君臨していた。	has:한쪽 날개	fix	lookup
+dict:w:31315	伐採するだけでも大赤字だ。	has:큰 적자다	fix	lookup
+dict:w:31316	その、吉報を聞きたい、と願う心情が漏れ出た声に、	has:희소식을	fix	lookup
+dict:w:31317	見渡す限り広がる杉林は、	has:눈이 닿는 데까지	fix	lookup
+dict:w:31327	そんな小山に林立する杉林を分け入って、	has:임립하는 삼나무 숲	fix	lookup
+dict:w:31318	ベトナム戦争下の究極の愛や悲劇を描く今作は、２０２２年公演以来の上演に。	has:이번 작품은	fix	lookup
+dict:w:31318	今、作業中だ。	lacks:작품	keep	lookup
+dict:w:31320	韓国政府による追悼式を１３日に同市で行うと発表した。	has:같은 시	fix	lookup
+dict:w:31320	二人は同時に動いた。	has:동시에	keep	lookup
+dict:w:31321	急激に業容を拡大してきたため、	has:사업 규모를	fix	lookup
+dict:w:31322	自社で起きた問題の究明や対策については	has:문제 규명	fix	lookup
+dict:w:31322	まずは殺人事件の真相を究明しなきゃな	has:규명해야	fix	lookup
+dict:w:31323	九州の九つの酒蔵が２日、試飲イベントを開催した。	has:양조장	fix	lookup
+dict:w:31324	列車事故、邦人２人目も死亡確認	lacks:해외주재	fix	lookup
+dict:w:31325	事業拡大を優先してきた姿勢に疑問を投げ掛けた。	has:의문을 던졌다	fix	lookup
+dict:w:31326	２つ目、異界より喚び出す護法神。（神社の稲荷、寺の金剛力士等）	has:신사의 이나리	fix	lookup
+dict:w:20655	会見で熊谷氏は相次ぐ不正アクセス問題について、「インターネットの危機」と強調。	has:잇따르는 부정 액세스	fix	lookup
+dict:w:20655	事故が相次いだ。	has:잇따랐다	fix	lookup
+dict:jisjk:118979	米メディアなどによると、選挙情勢は下院で民主党が優勢となり、	has:미국 언론 등에	fix	lookup
+dict:jisjk:193002	トランプ米大統領の「信任投票」となる中間選挙	has:신임 투표	fix	lookup
+names:names.246895	ただ、トランプ大統領は２日、インタビューで語った。	has:트럼프 대통령은	fix	lookup
+dict:w:31328	影から飛び出してきた何者かが背後に立った瞬間、俺の身体は言う事をきかなくなった。	has:몸은 말을 듣지 않게 되었다	fix	lookup
+dict:w:31329	子供が言うことをきかない。	has:말을 듣지 않는다	fix	lookup
+dict:w:31326	ご昼食は、稲荷寿司にしてみました。	has:유부초밥	keep	lookup
+dict:w:31324	異邦人	has:이방인	keep	lookup
+dict:w:31325	ゆっくりと、決して言葉が震えぬようにとユフィリアが問いを投げかける。	has:물음을 던진다	keep	lookup

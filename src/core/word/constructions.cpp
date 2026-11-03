@@ -332,19 +332,30 @@ bool PlainQuote(Flusher& f, const Item* it) {
     return k < s.quoteStyles.size() && (s.quoteStyles[k] & ~output::kCasualSpeech) == 0;
 }
 
-// Whether the questions of the word's speech are 해체: on a line the speech-level stage writes, its level
-// for the line, or for the word's quote on a line of several quotes (spec REG-15), is 해체 (REG-2) and the
-// line does not speak in an authoritative voice (REG-14); on other lines the word stands in a plain quote
-// (PlainQuote), whose questions the compose stage writes in 해체 (spec SPC-1).
-bool CasualLevel(Flusher& f, const Item* it) {
+// The speech level of the word on a line the speech-level stage writes: the level for the line, or for
+// the word's quote on a line of several quotes (spec REG-15); none on other lines.
+Settings::LineLevel SpeechLevel(Flusher& f, const Item* it) {
     const Settings& s = f.w.settings;
-    if (s.lineLevel == Settings::LineLevel::none) return PlainQuote(f, it);
     Settings::LineLevel level = s.lineLevel;
-    if (s.quoteLevels.size() >= 2 && it->tokenIndex >= 0) {
+    if (level != Settings::LineLevel::none && s.quoteLevels.size() >= 2 && it->tokenIndex >= 0) {
         const output::QuoteState q = QuoteAt(f, it);
         if (q.depth > 0 && q.count >= 1) level = s.quoteLevels[std::min(static_cast<std::size_t>(q.count), s.quoteLevels.size()) - 1];
     }
-    return level == Settings::LineLevel::casual && !s.authoritative;
+    return level;
+}
+
+// Whether the questions of the word's speech are 해체: its speech level (SpeechLevel) is 해체 (REG-2) and
+// the line does not speak in an authoritative voice (REG-14); on lines without a level the word stands in
+// a plain quote (PlainQuote), whose questions the compose stage writes in 해체 (spec SPC-1).
+bool CasualLevel(Flusher& f, const Item* it) {
+    if (f.w.settings.lineLevel == Settings::LineLevel::none) return PlainQuote(f, it);
+    return SpeechLevel(f, it) == Settings::LineLevel::casual && !f.w.settings.authoritative;
+}
+
+// Whether the word's speech level (SpeechLevel) is 해요체 or 합쇼체.
+bool PoliteLevel(Flusher& f, const Item* it) {
+    const Settings::LineLevel level = SpeechLevel(f, it);
+    return level == Settings::LineLevel::polite || level == Settings::LineLevel::formal;
 }
 
 struct NamedFeature {
@@ -425,6 +436,8 @@ constexpr NamedFeature kFeatures[] = {
     // The line uses the tic ぽい (PoiLine).
     {"poi-line", [](Flusher& f, const Item*) { return f.w.settings.poiTic; }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
+    // Earlier text on the line takes leave (word.leave-taking): a greeting after it parts.
+    {"after-leave-taking", [](Flusher& f, const Item* it) { return AfterLeaveTaking(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"after-space", [](Flusher& f, const Item* it) {
@@ -483,6 +496,8 @@ constexpr NamedFeature kFeatures[] = {
     {"quoted", [](Flusher&, const Item* it) { return it->InQuote(); }},
     // The questions of the word's speech are 해체 (CasualLevel).
     {"casual-level", CasualLevel},
+    // The word's speech is 해요체 or 합쇼체 (PoliteLevel).
+    {"polite-level", PoliteLevel},
     // The line is a line of prose fiction that the speech-level stage writes (spec REG-20).
     {"prose", [](Flusher& f, const Item*) { return f.w.settings.lineLevel != Settings::LineLevel::none && f.w.settings.prose; }},
     // A digit ends the text before the word in its token (3から).
@@ -562,6 +577,17 @@ constexpr NamedFeature kFeatures[] = {
          const auto next = static_cast<std::size_t>(it->tokenIndex + 1);
          if (rest.empty() && it->tokenIndex >= 0 && next < f.w.tokens.size()) rest = f.w.tokens.Canonical(next);
          return !rest.empty() && RuneIn(text::DecodeRune(rest).cp, "。．.");
+     }},
+    // An ellipsis or a dash of mark.pause, or two ・ (· in the canonical text), follows the word (失礼な・・・, 生意気な…).
+    {"pause-after",
+     [](Flusher& f, const Item* it) {
+         std::string_view rest = From(it->text, it->start + it->length);
+         const auto next = static_cast<std::size_t>(it->tokenIndex + 1);
+         if (rest.empty() && it->tokenIndex >= 0 && next < f.w.tokens.size()) rest = f.w.tokens.Canonical(next);
+         if (rest.empty()) rest = it->detail->nextText;
+         const std::size_t size = text::DecodeRune(rest).size;
+         return size != 0 && (dict::InClass(HDTRANS_CLASS("mark.pause"), rest.substr(0, size)) || rest.starts_with("・・") ||
+                                rest.starts_with("··"));
      }},
     {"utterance-end", [](Flusher& f, const Item* it) { return UtteranceEnd(f.w, it); }},
     // More words follow on the line past the end of the sentence (SpeechGoesOn).

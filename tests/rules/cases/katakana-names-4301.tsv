@@ -1,0 +1,66 @@
+# 규칙: LEX-4301
+rule	input	expected	kind	layer
+dict:jisjk:48526	「しっかりしてくれ、ジョージ！	has:조지	fix	lookup
+dict:jisjk:48526	レイチェル夫人は、ジョージの妻。	has:조지	fix	lookup
+dict:jisjk:366833	あら、あなたもジョー様の応援？	has:조님	fix	lookup
+dict:jisjk:366833	ジョー様のファンクラブに入らない？	has:조님	fix	lookup
+dict:jisjk:48591	USSジョンストン、出撃！	has:존스턴	fix	lookup
+dict:jisjk:48591	USSジョンストン、出るわ！	has:존스턴	fix	lookup
+dict:jisjk:366553	「ジュリアン様……」	has:줄리안	fix	lookup
+dict:jisjk:366553	4番の婚約者、ジュリアン・フォークト伯爵令息が叫んだ。	has:줄리안	fix	lookup
+dict:jisjk:45126	オランダとはめっちゃ違うんだ。	has:네덜란드	fix	lookup
+dict:jisjk:45126	オランダ軽巡De Ruyter！	has:네덜란드	fix	lookup
+dict:jisjk:99100	真珠湾からガダルカナルまで駆けまわったんじゃ。	has:과달카날	fix	lookup
+dict:jisjk:99100	失礼しちゃう、ガダルカナル島輸送作戦でも活躍したわ！	has:과달카날	fix	lookup
+dict:jisjk:362848	It's 5... ねえ、フォークランドの話はやめ！	has:포클랜드	fix	lookup
+dict:jisjk:101705	護衛駆逐艦、ジョン・C・バトラー級、サミュエル・B・ロバーツです。	has:새뮤얼	fix	lookup
+dict:jisjk:101705	私ね、ジョン・C・バトラー級護衛駆逐艦、サミュエル・B・ロバーツっ。	has:새뮤얼	fix	lookup
+dict:jisjk:107591	「……ローラか」	has:로라	fix	lookup
+dict:jisjk:107591	「あっ、ローラが逃げた！	has:로라	fix	lookup
+dict:jisjk:367040	バジャー男爵家のビリー様。	has:빌리	fix	lookup
+dict:jisjk:367040	なあ、ビリーもそう思うだろ？	has:빌리	fix	lookup
+dict:jisjk:264669	訝しむティナに、エルは決然とした表情で顔を上げる。	has:티나	fix	lookup
+dict:jisjk:264669	申し訳無さそうなティナに、エルは目を見開いて首を振る。	has:티나	fix	lookup
+dict:jisjk:368626	「……そ、そうなのか、ナンシー？	has:낸시	fix	lookup
+dict:jisjk:368626	ちなみにナンシー様は必死で目を逸らしてる。	has:낸시	fix	lookup
+dict:jisjk:367358	テリー・スヴァンソン：スヴァンソン銃砲店の店主。	has:테리	fix	lookup
+dict:jisjk:367358	テリー・ワーデル:傭兵ギルドイッツ支部・業務管理部部長。	has:테리	fix	lookup
+dict:jisjk:365978	ウォルフ伯爵家のオリヴァー様。	has:울프	fix	lookup
+dict:jisjk:365978	問題児集団のリーダー格、ウォルフ伯爵家のオリヴァー様が呆れたように言った。	has:울프	fix	lookup
+dict:jisjk:369139	ケネス・ナバロという男	has:나바로	fix	lookup
+dict:jisjk:369139	騎士の名はケネス・ナバロ。	has:나바로	fix	lookup
+dict:jisjk:202750	リカルドもまた犠牲者の一人……。	has:리카르도	fix	lookup
+dict:jisjk:202750	対戦者は“リカルド・バンデラス”！	has:리카르도	fix	lookup
+dict:jisjk:366006	マックス…でもいいけど。	has:맥스	fix	lookup
+dict:jisjk:366006	マックスはちゃんとやってるかな	has:맥스	fix	lookup
+dict:names.86198	彼の息子、エルネスティは今年で３歳になる。	has:에르네스티	fix	lookup
+dict:names.86198	エルネスティは年の割りに非常に明瞭に喋る。	has:에르네스티	fix	lookup
+dict:names.322800	「待て、ヘザー！	has:헤더	fix	lookup
+dict:names.322800	ヘザー博士を逮捕しろ。	has:헤더	fix	lookup
+dict:names.388928	「ララティーナ、秋は？	has:라라티나	fix	lookup
+dict:names.388928	「ララティーナ、夏は？	has:라라티나	fix	lookup
+dict:w:31500	ルーデウスはソレだ。	has:루데우스	fix	lookup
+dict:w:31500	子供はルーデウスと名付けられた。	has:루데우스	fix	lookup
+dict:w:31501	ヒッパーの無能め！	has:히퍼	fix	lookup
+dict:w:31501	フォン・ヒッパーに連絡。	has:히퍼	fix	lookup
+dict:w:31502	フルネームはアリサ・アレクサンドロヴナ・マキ。	has:알렉산드로브나	fix	lookup
+dict:w:31506	……キリシマ？	has:키리시마	fix	lookup
+dict:w:31506	隣は……キリシマ！	has:키리시마	fix	lookup
+dict:w:31526	デイル様とダーメイン家の先代が交わした約束だ。	has:다메인	fix	lookup
+dict:w:31526	わたしの死でダーメイン家との契約は特別ではなくなる。	has:다메인	fix	lookup
+dict:w:31527	バジャー男爵家のビリー様。	has:배저	fix	lookup
+dict:w:31527	と、バジャー男爵家のビリー様。	has:배저	fix	lookup
+dict:w:31528	レパード子爵家のシモン様。	has:레퍼드	fix	lookup
+dict:w:31528	その隣にひょいと座ったレパード子爵家のシモン様。	has:레퍼드	fix	lookup
+dict:w:31541	ペナン沖海戦	has:페낭	fix	lookup
+dict:jisjk:45285	カーネルに教え込まれたわよね」	has:커널	fix	lookup
+dict:jisjk:45285	カーネルがトリガーに指をかけた。	has:커널	fix	lookup
+dict:jisjk:48592	ジョンソンさんに会った。	has:존슨 씨	fix	lookup
+dict:jisjk:367186	オランダ領の島だ。	has:네덜란드령	fix	lookup
+dict:jisjk:369706	騎士団に所属しているゼッケン5番のフェリックス・ライデン子爵令息が有利か？	has:펠릭스 라이덴	fix	lookup
+dict:w:31504	セルフィア・オルデンブルク公爵令嬢の好きな色は	has:세르피아 올덴부르크 공작 영애	fix	lookup
+restore:echoed-gloss	母親であるセレスティナ（ティナ）と同じ紫銀に輝く髪	has:세레스티나(티나)와	fix	lookup
+restore:echoed-gloss	魔剣（けん）を振るう。	마검을 휘두른다.	keep	lookup
+lex:ジョージ・ワシントン	ジョージ・ワシントン	has:조지 워싱턴	keep	lookup
+restore:echoed-gloss	ミカ（ミカ）と呼んで。	미카라고 불러.	keep	lookup
+restore:echoed-gloss	エリザベス（リズ）が来た。	엘리자베스(리즈)가 왔다.	keep	lookup

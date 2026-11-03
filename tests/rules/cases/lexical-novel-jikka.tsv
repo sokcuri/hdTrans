@@ -16,7 +16,7 @@ dict:jisjk:28136	えっ？いや 実家に帰るだけ 夏休みだし	어? 아�
 dict:jisjk:28136	普通 戻ってきたら 実家に泊まるでしょ｡	보통 돌아오면 본가에 묵겠지.	fix	defaults
 dict:jisjk:28136	(内村)私の母の実家が隣の造り酒屋｡	(우치무라) 내 어머니의 본가가 옆의 양조장.	fix	defaults
 dict:jisjk:28136	本家と分家	본가와 분가	keep	defaults
-dict:jisjk:28136	本家に挨拶に行く。	본가에 인사에 간다.	keep	defaults
+dict:jisjk:28136	本家に挨拶に行く。	본가에 인사하러 간다.	keep	defaults
 dict:jisjk:28136	生家を訪ねた。	생가를 방문했다.	keep	defaults
 dict:jisjk:28136	母の生家は古い。	어머니의 생가는 낡다.	keep	defaults
 dict:jisjk:28136	家に帰る。	집에 돌아간다.	keep	defaults

@@ -6,7 +6,7 @@ dict:w:28450	「何するのよ」	「뭐하는 거야」	fix	local-ending
 dict:w:28450	「何するのよ！」	「뭐하는 거야!」	fix	local-ending
 dict:w:28450	「何すんのよ！」	「뭐하는 거야!」	fix	local-ending
 dict:w:28450	「何をするのよ！」	「뭘 하는 거야!」	fix	local-ending
-dict:jisjk:342458	「どうして今更そんなこと言い出すのよっ！」	has:하는 거야!	fix	local
+dict:jisjk:342458	「どうして今更そんなこと言い出すのよっ！」	has:꺼내는 거야!	fix	local
 dict:jisjk:342458	「イラつくのよっ！」	!rule:dict:jisjk:342458	fix	local
 dict:jisjk:342458	「好きなのよっ！」	!rule:dict:jisjk:342458	keep	local
 dict:w:28450	「なんで駅前が出てくるのよ！」	「왜 역 앞이 나오는 거야!」	fix	local-ending

@@ -1,0 +1,12 @@
+# 규칙: SND-21
+rule	input	expected	kind	layer
+sound:wave-dash-after-kanji	死亡～そして転生～	사망~그리고 전생~	fix	sound
+sound:wave-dash-after-kanji	死亡～しかし	사망~하지만	fix	sound
+sound:wave-dash-after-kanji	猫～そして犬	고양이~그리고 개	fix	sound
+sound:wave-dash-after-kanji	提督～なんだか眠い	has:제독~왠지	fix	sound
+sound:wave-dash-after-kanji	風雲～ここはベタで…	has:풍운~여기는	fix	sound
+sound:wave-dash-after-kanji	寒～い	추워~	keep	sound
+sound:wave-dash-after-kanji	面白～い	재미있어~	keep	sound
+sound:wave-dash-after-kanji	見～て	봐~	keep	sound
+sound:wave-dash-after-kanji	痛ーい	아파~	keep	sound
+sound:wave-dash-after-kanji	寒～かった	추웠다	keep	sound

@@ -1,0 +1,47 @@
+# 규칙: LEX-4156
+rule	input	expected	kind	layer
+cx:novel-fixes-4:70	‎そこまでしなくても	has:‎그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	確かにそこまでやれば	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「そこまでしなくても」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	それなのにそこまでする？	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	そこまでじゃないのかな？	has:그렇게까지가	fix	rewrites
+cx:novel-fixes-4:70	「そこまでやるか普通！」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	さすがにそこまでしないか。	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	そこまで気がつかなかったわ	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	そこまで悪くねえよ お前は！	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	そこまで好きかよ　ホルモン。	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	エル、どうしてそこまでする。	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	そこまで ﾔﾊﾞくないはず…？	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	そこまでする必要があるってのか	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	歌には俺もそこまで詳しくない。	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	μ'sがそこまでする必要があるの	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「こ、高校生でそこまでする…？」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	生憎そこまで高貴じゃないんでな。	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「そこまで破廉恥じゃありません」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「うーん……そこまで曖昧だと……」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	（今田）そこまで深くないと思います	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	っていうかそこまでするなら いっそ	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:75	そこまで海軍は愚かではありません。	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	貴女たちがそこまでする理由は何？」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「私がそこまで親切だと思います？」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「そこまでして優勝したいんですか？」	has:그렇게까지	fix	rewrites
+cx:novel-fixes-4:70	「あおくんが、そこまで言うなら……」	「아오 군이, 거기까지 말한다면……」	keep	rewrites
+cx:novel-fixes-4:70	あ、いや別にそこまで言うつもりは……	아, 아니별로 거기까지 말할 생각은……	keep	rewrites
+cx:novel-fixes-4:70	そこまで周りが見えなくなるもんかね」	거기까지 주위가 안 보이게 될까 보냐」	keep	rewrites
+cx:novel-fixes-4:70	ミドリさんそこまで考えてたん・・・？	미도리 씨 거기까지 생각하고 있었던 ···?	keep	rewrites
+cx:novel-fixes-4:70	そこまで言わんでええねん別に お前は	거기까지 말하지 않아 좋다 별로 너는	keep	rewrites
+cx:novel-fixes-4:70	阿部先生を あそこまで追い込んだのは	아베 선생님을 저기까지 몰아넣은 것은	keep	rewrites
+cx:novel-fixes-4:70	アマゾンキラーがそこまで言うからには	아마존 킬러가 거기까지 말하는 이상에는	keep	rewrites
+cx:novel-fixes-4:70	そこまでかしこまられるようなことにも	거기까지 빌려주어 난처되는 것 같은 일에도	keep	rewrites
+cx:novel-fixes-4:70	地球の動物はそこまでのものなのかね｡	지구의 동물은 거기까지의 건가.	keep	rewrites
+cx:novel-fixes-4:70	殿下がそこまでおっしゃるのでしたら・	전하가 거기까지 말씀하시므로 하면·	keep	rewrites
+cx:novel-fixes-4:70	見事だった｡そこまで言われるもんでも	훌륭했다. 그렇게 까지 듣는 것이라도	keep	rewrites
+cx:novel-fixes-4:70	(ｳｫｰｹﾝ)君たちが なぜそこまで	(워켄) 자네들이 왜 거기까지	keep	rewrites
+cx:novel-fixes-4:70	ご決断なされたと｡殿下 そこまで…｡	결단 되었다고. 전하 거기까지….	keep	rewrites
+cx:novel-fixes-4:70	「もうそこまで知ってるなんて流石ね」	「이제 거기까지 알고 있는 역시네」	keep	rewrites
+cx:novel-fixes-4:70	まさか……あそこまで反応が悪いとは。	설마……저기까지 반응이 나쁘다고는.	keep	rewrites
+cx:novel-fixes-4:70	「いつかはそこまで行きたいですけど」	「언젠가는 거기까지 가고 싶지만요」	keep	rewrites
+cx:novel-fixes-4:70	「俺は、そこまで問題視していないな」	「나는, 거기까지 문제시하고 있지 않네」	keep	rewrites
+cx:novel-fixes-4:70	「そこまで言うならとっておいたら？」	「거기까지 말한다면 하고는 두면?」	keep	rewrites
+cx:novel-fixes-4:70	あそこまでして成立した婚約である以上、	저기까지 해 성립한 약혼인 이상,	keep	rewrites
+cx:novel-fixes-4:70	そこまで分かってるなら断れないよね〜！	거기까지 알고 있다면 거절할 수 없지~!	keep	rewrites

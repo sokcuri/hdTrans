@@ -1,0 +1,41 @@
+# 규칙: LEX-4304
+rule	input	expected	kind	layer
+dict:jisjk:106919	っていうかマグロの人形って何？	has:참치	fix	lookup
+dict:jisjk:106919	ごま油で和えられた冷たい漬けマグロとアボカドがごはんとめちゃくちゃ合う。	has:참치	fix	lookup
+dict:w:1500	アジフライ定食！	has:전갱이튀김	fix	lookup
+dict:w:1500	アジフライいかがでしたか？	has:전갱이튀김	fix	lookup
+dict:w:31517	当然そんな注意を受け入れるはずもなく、こちらに何者だという胡乱げな視線を向けるチーマー共。	has:양아치	fix	lookup
+dict:w:31517	そういえば、連日ニュースなどでチーマー同士の抗争で刃傷沙汰になることもあると報道されていた。	has:양아치	fix	lookup
+dict:w:31518	テートク、Ciao♪	has:제독	fix	lookup
+dict:w:31518	テートク、どうしたの？	has:제독	fix	lookup
+dict:w:31519	……テイトク？	has:제독	fix	lookup
+dict:w:31520	「それじゃ、行くぜヤロウども！	has:놈들	fix	lookup
+dict:w:31514	店主は『トーフ』とか言ってたけど）	has:두부	fix	lookup
+dict:w:31514	一口大の四角に切り分けられたトーフをフォークに刺してしげしげと眺める。	has:두부	fix	lookup
+dict:w:31515	悔しさをかみ締める…トーフステーキと一緒に。	has:두부 스테이크	fix	lookup
+dict:w:31515	トーフステーキと一緒に食べるライスや、付け合せまで美味しいのが、また悔しい。	has:두부 스테이크	fix	lookup
+dict:w:31516	「ところで、そのオシルコって何？	has:단팥죽	fix	lookup
+dict:w:31516	コウベ・ビーフのスキヤキにオシルコだ」	has:단팥죽	fix	lookup
+dict:w:31510	キラッキラな桃茶！	has:반짝반짝	fix	lookup
+dict:w:31510	桃はぁ、キラッキラ☆	has:반짝반짝	fix	lookup
+dict:w:31535	どいつもこいつもドンパチと宝探し……けっ、無粋だねぇ。	has:총격전	fix	lookup
+dict:w:31535	沙漠じゃまたドンパチが始まる、ってのにノンキなやつだな。	has:총격전	fix	lookup
+dict:w:31536	ドヨウにはやはりこれだな」	has:토요	fix	lookup
+dict:w:31536	７日に１度のドヨウの日ならば…」	has:토요	fix	lookup
+dict:w:31537	こりゃぁ～マジパナイ！	has:진짜 장난 아니야	fix	lookup
+dict:w:31537	くっそぉ～、マジパナイっ！	has:진짜 장난 아니야	fix	lookup
+dict:w:31538	キサマ、ともに行くぞ！	has:네놈	fix	lookup
+dict:w:31538	キ、キサマ……かけるぞ、その手に！	has:네놈	fix	lookup
+dict:w:31539	ちょっと覗いてみたらナニコレｗｗｗ	has:이게 뭐야	fix	lookup
+dict:w:31540	トンチンカンだと！	has:엉터리	fix	lookup
+dict:w:31540	小僧、わしをトンチンカンだと言うか！	has:엉터리	fix	lookup
+dict:w:31533	同じ立場になればテンパるだろうさ	has:당황할 것이다	fix	lookup
+dict:w:31533	「なんかテンパってるみたいだけど大丈夫？	has:당황하고 있는	fix	lookup
+dict:w:31531	ニホンのサクラ、綺麗です。	has:일본	fix	lookup
+dict:w:31532	アタイも行くさ！	has:나도 가	fix	lookup
+dict:w:31534	だったら、別にガマンしなくても――	has:참지 않아도	fix	lookup
+dict:w:31534	でも、「大武会」が終わるまでガマンするよ。	has:끝날 때까지 참아	fix	lookup
+dict:jisjk:99138	ガマンの限界だ。	has:인내의 한계	fix	lookup
+dict:jisjk:98957	この冬、筧京太郎、オシャレデビューである。	has:멋내기 데뷔	fix	lookup
+lex:ニホンシュー	このニホンシューという白ワイン、いける！	has:니혼슈라는	keep	lookup
+lex:キサマラ	ヤルナ……キサマラッ！	has:너희	keep	lookup
