@@ -1,0 +1,83 @@
+# 규칙: LEX-4351~LEX-4362
+rule	input	expected	kind	layer
+dict:w:31800	死なれると面倒なのでさっさと回復魔法をかけ、ついでに眠りの魔法もかけておきます。	has:죽으면 귀찮아서	fix	lookup
+dict:w:31800	ここで死なれては困る。	여기서 죽어서는 곤란하다.	fix	lookup
+dict:w:31800	妻に死なれた。	아내가 돌아가셨다.	keep	lookup
+dict:w:31801	書斎の惨状と意識を失ったヴィクトルの姿に動揺するニールに、強めの声で応える。	has:강한 목소리로	fix	lookup
+dict:w:31801	語尾が強めの舌打ちに聞こえたのは気のせいか。	has:강한 혀 차는 소리	fix	lookup
+dict:w:31801	語気を強めた。	어조를 강하게 했다.	keep	lookup
+dict:w:31803	濃いめの味。	진한 맛.	fix	lookup
+dict:w:31803	薄めの味。	싱거운 맛.	keep	lookup
+dict:w:31804	…はっきり言って、身も心も参っている悟史くんに、さらに追い討ちをかけるようなバイトは、あまり賛成できなかった。	has:결정타를 날리는	fix	lookup
+dict:w:31805	口をぱくぱくさせているバーサ様に、ここぞとばかりに同席のご令嬢が追い討ちを掛ける。	has:결정타를 날린다	fix	lookup
+dict:w:31805	追い討ちの一撃。	추격의 일격.	keep	lookup
+dict:w:31810	「赤き英雄よ。もう一度、問う。何故、お前は戦う？」	has:붉은 영웅	fix	lookup
+dict:w:31810	十字の上に、山羊の角～東西、治める神の御座～赤き刻印、持つ者は～	has:붉은 각인	fix	lookup
+dict:w:31815	「『蒼き猛獣！』」	「『푸른 맹수!』」	fix	lookup
+dict:w:31817	美しき滅びの母の力を！	has:아름다운	fix	lookup
+dict:w:31818	「悲しき運命のバイト戦士ですからね。」	has:슬픈 운명의	fix	lookup
+dict:w:31822	そのことに対する責任が、誇り高きゼーレマン家の若き騎士であるハインリヒを走らせてきた。	has:긍지 높은	fix	lookup
+dict:w:31825	その犯罪者を数日間休ませてやったこの俺達の“優しき、慈悲の心”には逆に感謝して欲しいぐらいだ。	has:“상냥한, 자비의 마음”	fix	lookup
+dict:w:31836	名も無き花。	이름 없는 꽃.	fix	lookup
+dict:w:31810	赤い糸。	붉은 실.	keep	lookup
+dict:w:31810	弱きを助け強きを挫く。	약자를 돕고 강자를 꺾는다.	keep	lookup
+dict:w:31840	他愛もない雑談を一言二言だけして気を紛らわし、すぐに戦闘続行だ。	has:한두 마디만	fix	lookup
+dict:w:31841	選挙運動の方針が二転三転したことで	선거 운동의 방침이 오락가락한 것으로	fix	lookup
+dict:w:31842	居住区か…なるほど。	거주구인가…그렇구나.	fix	lookup
+dict:w:31842	旅立ちの準備が整い次第、休息をとるといいだろう。上の居住区の寝室を使ってくれ。	has:거주구의 침실	fix	lookup
+dict:w:31843	「もし私がもう少し努力していれば……と思うのは、只の思い上がりなのかもしれません」	has:그저 	fix	lookup
+dict:w:31843	心配しなさんな只の『ドライブ』だよ	걱정하지 말아 그저 『드라이브』야	fix	lookup
+dict:w:31843	只より高いものはない。	무료보다 비싼 것은 없다.	keep	lookup
+dict:w:31845	ノエルの垂直切りはいとも簡単に父の木剣でガードされた。	has:수직 베기는	fix	lookup
+dict:w:31846	まっ、自転車で配送のアルバイトをしていた僕にはどうと言う事のない距離である。	has:별것 아닌 거리이다	fix	lookup
+dict:w:31848	どうということのない話。	별것 아닌 이야기.	fix	lookup
+dict:w:31849	支えを失った豊臣などもはや 恐るるに足らぬ。	has:두려워할 만하지 않다	fix	lookup
+dict:w:31849	恐るるに足らない相手だ。	두려워할 만하지 않은 상대다.	fix	lookup
+dict:w:31849	取るに足らない。	하찮다.	keep	lookup
+dict:w:31861	白崎の笑顔を見ていると本当に癒やされる。	has:정말 치유된다	fix	lookup
+dict:w:31861	「（ああ、今日は猫を見て癒やされなくては）」	has:치유돼야 한다	fix	lookup
+dict:w:31850	「アップルシナモンティー。疲れを癒やしてくれるみたい」	has:피로를 달래 주는	fix	lookup
+dict:w:31850	疲れを癒す。	피로를 푼다.	keep	lookup
+dict:w:31853	それでも詩乃は火照りを怒りで塗り替えるように声を張り上げた。	has:달아오름을	fix	lookup
+dict:w:31855	少年レフィルの顔には苦い表情と手形の跡。	has:표정과 손자국	fix	lookup
+dict:w:31855	手形を発行する。	어음을 발행한다.	keep	lookup
+dict:w:31856	ガスが吹き出れば全ては決着するだろうが、向こうも座してそれを待ちはしまい。	has:저편도 앉아 그것을	fix	lookup
+dict:w:31856	座して死を待つ。	앉아 죽음을 기다린다.	fix	lookup
+dict:w:31856	部屋の座をとる。	방의 자리를 잡는다.	keep	lookup
+dict:w:31857	国王は前のめりになった。	국왕은 앞으로 몸이 기울었다.	fix	lookup
+dict:w:31858	国王は前のめりになった。	국왕은 앞으로 몸이 기울었다.	fix	lookup
+dict:w:31860	は、はぅ…！ 悲しい男の性が思わず前のめりな状態に……ひ〜…！	has:앞으로 쏠린 상태	fix	lookup
+dict:w:31859	すかさず頭を下げるコニーへ鷹揚に頷きを返す。	has:끄덕임으로 답한다	fix	lookup
+dict:w:31859	一際小柄な助手席の少女は、コクリと頷きマスクで顔を覆った。	has:끄덕여 마스크로	keep	lookup
+dict:jisjk:258514	ダガーを仕舞い、この『店』について尋ねたサラに、この店の主人はごく簡単に答えた。	has:『가게』에 대해 물은	fix	local
+dict:jisjk:258514	「あなたはその分野について、エキスパートなのだと思っていました」	「당신은 그 분야에 대해, 전문가라고 생각했습니다」	fix	local
+dict:jisjk:258514	当サイトについて	당사이트에 대해	fix	local
+dict:jisjk:258514	もうすぐ家につく。	이제 곧 집에 도착한다.	keep	local
+dict:jisjk:258514	艦隊が、無事港につきました。よかったです。	has:항에 도착했습니다	keep	local
+dict:jisjk:346453	10分以上の遅れが見込まれる場合に、その路線名と運行区間について表示します。	has:운행 구간에 대해 표시	fix	local
+dict:jisjk:346453	駅についたら電話して。	역에 도착하면 전화해.	keep	local
+dict:jisjk:341799	親父の後について、階段を登り店内に入る。	아버지 뒤를 따라, 계단을 올라 가게 안에 들어간다.	fix	local
+dict:jisjk:341799	上機嫌で部屋を出ていくセリカたちの後について、エルも部屋を出る。	has:세리카들 뒤를 따라,	fix	local
+dict:jisjk:341799	さて、そろそろこの俺、佐藤孝弘という男のことについて語っておこう。	has:에 대해 말해 두자	fix	local
+dict:jisjk:341799	個人情報の取扱いについて	개인정보 취급에 대해	fix	local
+dict:jisjk:341799	「微笑ましいやりとりをしているところ悪いのだけど、今後について、そろそろ話をしてもいいかしら」	has:향후에 대해,	fix	local
+dict:jisjk:341799	概ね5分以上の遅延が発生したものについて、延着証明書を発行いたします。	has:발생한 것에 대해,	fix	local
+dict:jisjk:341799	技術が身について、成長した。	기술이 자기 것이 되어, 성장했다.	keep	local
+dict:jisjk:341799	席について、待つ。	자리에 앉아, 기다린다.	keep	local
+dict:jisjk:95050	内容は至って普通の民族儀式、	내용은 극히 보통 민족 의식,	fix	local
+dict:jisjk:95050	事態は至って深刻だ。	사태는 극히 심각하다.	fix	local
+dict:jisjk:95050	表情も至って穏やかだ。	표정도 극히 온화하다.	fix	local
+dict:jisjk:95050	ここに至って、ようやく分かった。	여기에 이르러, 드디어 알았다.	keep	local
+dict:jisjk:95050	子爵令嬢に至っては、信じられないものを見る目で絶句していた。	has:자작 영애에 이르러서는	keep	local
+dict:jisjk:95050	未だ完成には至っていない。	아직도 완성에는 이르지 않았다.	keep	local
+dict:jisjk:344421	「でもそれはもう取り消せなくて……一生消えない傷になるんだ……」	has:상처가 되는 거야	fix	local
+dict:jisjk:344421	傷になったからって、なにもしないでいるべきだろうか？	상처가 되었다고 해서, 아무것도 하지 않는다 할까?	fix	local
+dict:jisjk:344421	風邪になった。	감기에 걸렸다.	keep	local
+dict:jisjk:115105	こんなに楽しそうな沙都子を見るのは、本当に久しぶりなのですよ。	has:즐거운 듯한 사토코	fix	defaults
+dict:jisjk:115105	校庭から聞こえてくる子供たちの楽しそうな声が、実にうらやましい。	has:즐거운 듯한 목소리	fix	defaults
+dict:jisjk:115105	「うん、楽しそうだね」	「응, 즐거운 듯하네」	fix	defaults
+dict:jisjk:115105	楽しそうに笑う。	즐거운 듯이 웃는다.	keep	defaults
+dict:jisjk:265140	なかなか、やりがいがありそうな仕事だな。	꽤, 보람이 있을 듯한 일이네.	fix	defaults
+dict:jisjk:265140	この台所はどう見ても本棚がありそうな雰囲気ではない。	has:있을 듯한 분위기	fix	defaults
+dict:jisjk:265140	危険がありそうだ。	위험이 있을 듯하다.	fix	defaults
+dict:jisjk:123374	私も誓って言える。	나도 맹세코 말할 수 있다.	fix	defaults

@@ -257,6 +257,7 @@
 //= noun.slender-part	Nouns of a slender part of the body that ほっそりした before them makes thin, 가느다란 (ほっそりとした指 가느다란 손가락); the body and the legs stay 날씬한.
 //= noun.sturdy-body	Nouns of a build or a body that しっかりした before them makes sturdy, 다부진 (しっかりとした体格 다부진 체격).
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
+//= noun.contest-over	Starts of the nouns and verb stems of a dispute or a struggle, after which a を巡る of a place is what the parties fight over, 둘러싸다 (領土を巡る争い 영토를 둘러싼 분쟁), not a tour.
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
 //= noun.he-sent	Nouns of something sent or said to someone (手紙, 報告, 電話): the への before them is 에게 보내는 after a person (彼への手紙 그에게 보내는 편지), (으)로 보내는 after anything else.
@@ -3280,6 +3281,20 @@ noun.event	虐殺
 noun.event	抗争
 noun.event	暴動
 noun.event	乱
+noun.contest-over	争
+noun.contest-over	戦い
+noun.contest-over	戦争
+noun.contest-over	紛争
+noun.contest-over	対立
+noun.contest-over	論争
+noun.contest-over	攻防
+noun.contest-over	抗争
+noun.contest-over	議論
+noun.contest-over	駆け引き
+noun.contest-over	確執
+noun.contest-over	裁判
+noun.contest-over	訴訟
+noun.contest-over	交渉
 
 noun.do-angle	角度
 noun.do-angle	傾斜
@@ -4683,6 +4698,9 @@ question.wonder-not	何度と無く
 question.wonder-not	どれでも
 question.wonder-not	いくらか
 question.wonder-not	いくらでも
+question.wonder-not	どうと言う事のない	LEX-4356: of no account, no question
+question.wonder-not	どうという事のない	LEX-4356
+question.wonder-not	どうということのない	LEX-4356
 question.indefinite-after	も
 question.indefinite-after	でも
 question.indefinite-after	にでも

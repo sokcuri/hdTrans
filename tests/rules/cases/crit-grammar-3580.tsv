@@ -1,0 +1,98 @@
+# 규칙: LEX-4350, GRM-3580~GRM-3588
+rule	input	expected	kind	layer
+cx:crit-fixes-1:10	また両国は和平案を巡って、	has:평화안을 둘러싸고,	fix	rewrites
+cx:crit-fixes-1:10	遺産を巡って争う。	유산을 둘러싸고 싸운다.	fix	rewrites
+cx:crit-fixes-1:10	遺産を巡り争う。	유산을 둘러싸고 싸운다.	fix	rewrites
+cx:crit-fixes-1:15	和平案を巡っては対立が続く。	평화안을 둘러싸고는 대립이 계속된다.	fix	rewrites
+cx:crit-fixes-1:15	各地を巡っては旅をした。	!rule:cx:crit-fixes-1:15	keep	rewrites
+cx:crit-fixes-1:10	聖女の役目はまず国中を巡って聖なる結界を張ること。	has:온 나라를 돌아 다녀	keep	rewrites
+cx:crit-fixes-1:10	季節が巡って春になる。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:20	領土を巡る争い。	영토를 둘러싼 분쟁.	fix	rewrites
+cx:crit-fixes-1:20	予算を巡る議論が続いた。	예산을 둘러싼 논의가 계속되었다.	fix	rewrites
+cx:crit-fixes-1:20	近江鉄道沿線を巡る３種類の2日間パス発売	has:연선을 돌아 다니는	keep	rewrites
+cx:crit-fixes-1:30	遺産を巡る。	유산을 둘러싼다.	fix	rewrites
+cx:crit-fixes-1:30	名所を巡る旅。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:30	もう少し考えを巡らせなきゃならなかった。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:40	平和に慣れきった日本人は特殊部隊という言葉を聞くと	has:다 익숙해진 일본인	fix	rewrites
+cx:crit-fixes-1:40	全てを俺に預けきった顔で微笑む。	모든 것을 나에게 다 맡긴 얼굴로 미소 짓는다.	fix	rewrites
+cx:crit-fixes-1:40	好き勝手にはしゃぎまわる子供達から完全に隠れきるのは簡単なことではない。	has:완전히 다 숨는 것은	fix	rewrites
+cx:crit-fixes-1:40	あれだけ複雑な作りになっていると、調べきるのに時間が掛かりそうね	has:다 조사하는데	fix	rewrites
+cx:crit-fixes-1:40	疲れきった顔で座る。	다 지친 얼굴로 앉는다.	fix	rewrites
+cx:crit-fixes-1:40	武術の奥義を極めきったと豪語してますの。	!rule:cx:crit-fixes-1:40	keep	rewrites
+cx:crit-fixes-1:40	それを見きった。	!rule:cx:crit-fixes-1:40	keep	rewrites
+cx:crit-fixes-1:40	食べきれない。	!rule:cx:crit-fixes-1:40	keep	rewrites
+cx:crit-fixes-1:40	走り続けて乾ききったハインリヒの体に染み込む。	has:다 마른 하인리히	keep	rewrites
+cx:crit-fixes-1:45	呆れきった顔。	기가 막힌 표정.	fix	rewrites
+cx:crit-fixes-1:45	身体が詠唱に慣れきってしまい、	!rule:cx:crit-fixes-1:45	keep	rewrites
+cx:crit-fixes-1:50	携帯とお金出せなどと従業員を脅して、	has:돈 내라	fix	rewrites
+cx:crit-fixes-1:50	帰れなどと言う。	돌아가라 같은 말을 한다.	fix	rewrites
+cx:crit-fixes-1:50	黙れなどと叫んだ。	입을 다물어라 하고 외쳤다.	fix	rewrites
+cx:crit-fixes-1:50	帰れるなどと思うな。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:50	早く寝ろなどと言われた。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:65	成程、彼女が“皇石”の一つを持っていると知ったら、私は彼女のそれを賭けて勝負をしたかもしれなかった。	has:가지고 있다는 걸 알았	fix	rewrites
+cx:crit-fixes-1:65	彼が来ると知った。	그가 온다는 걸 알았다.	fix	rewrites
+cx:crit-fixes-1:65	遠いと分かった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:65	見ると知っている顔だった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:65	よく見ると知っている顔だった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:65	考えると分かった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:70	叡智を宿した瞳が静かに光る。	예지를 품은 눈동자가 조용하게 빛난다.	fix	rewrites
+cx:crit-fixes-1:70	自然そのものに名前を付けることで心を、神を宿したんだよ	has:신을 품었어	fix	rewrites
+cx:crit-fixes-1:70	お腹に新しい命を宿している。	!rule:cx:crit-fixes-1:70	keep	rewrites
+cx:crit-fixes-1:80	「宰相よ、１ヶ月ほど前接触してきた日本という国の情報はあるか」	has:「재상이여,	fix	rewrites
+cx:crit-fixes-1:80	提督よ、艦隊が戻ったぞ。	제독이여, 함대가 돌아왔어.	fix	rewrites
+cx:crit-fixes-1:80	勇者よ、目覚めなさい。	용사여, 눈을 떠.	fix	rewrites
+cx:crit-fixes-1:80	「副将アデムよ、お前に任せる。」	「부장 아젬이여, 너에게 맡긴다.」	fix	rewrites
+cx:crit-fixes-1:80	神よ、我に力を。	신이여, 나에게 힘을.	fix	rewrites
+cx:crit-fixes-1:80	まぁ、そういう訳だ。隊長さんよ、せいぜい足手まといにならないでくんな。	has:대장님이여,	fix	rewrites
+cx:crit-fixes-1:80	『良かった。私はアルファよ、宜しくね』	has:나는 알파야,	keep	rewrites
+cx:crit-fixes-1:80	敵よ、クソ提督！ …アタシが、何とかするけど！	has:적이야,	keep	rewrites
+cx:crit-fixes-1:80	「城壁よ。中には領主様のいらっしゃるお城がある。」	has:「성벽이야.	keep	rewrites
+cx:crit-fixes-1:80	高雄型の2番艦、愛宕よ、うふふ。	has:아타고야,	keep	rewrites
+cx:crit-fixes-1:80	艦隊型駆逐艦、夕雲型駆逐艦の三番艦、風雲よ、よろしく。	has:카자구모야,	keep	rewrites
+cx:crit-fixes-1:80	「店主よ！勘定を頼みたいのだが」	has:점주야!	keep	rewrites
+cx:crit-fixes-1:80	あいつよ、美浜のルーキー！	has:저 녀석이야,	keep	rewrites
+cx:crit-fixes-1:90	助けようとしてくれた。	도우려고 해 주었다.	fix	rewrites
+cx:crit-fixes-1:90	しかし若はそれに応えようとしてくれている、精一杯ね。	has:응하려고 해 주고 있다	fix	rewrites
+cx:crit-fixes-1:90	きちんとこちらに確認を取ろうとして下さったお人柄を信用します	has:취하려고 해 주신	fix	rewrites
+cx:crit-fixes-1:90	「映画と同じで、夢だって、励まそうとしてくれて、癒やそうとしてくれてるんじゃないかしら」	has:달래려고 해 주고 있는	fix	rewrites
+cx:crit-fixes-1:90	助けてくれた。	!rule:cx:crit-fixes-1:90	keep	rewrites
+cx:crit-fixes-1:90	助けようとした。	!rule:cx:crit-fixes-1:90	keep	rewrites
+cx:crit-fixes-1:100	「あっぶな！　どうにかかわしたのよさっ」	「위험해! 어떻게든 피했어」	fix	rewrites
+cx:crit-fixes-1:100	俺はとっさに後ろに下がってかわす。	나는 순간에 뒤로 물러나 피한다.	fix	rewrites
+cx:crit-fixes-1:100	ナオの手加減のない攻撃を、セリカは軽々とかわしカウンターを決める。	has:가볍게 피해 카운터	fix	rewrites
+cx:crit-fixes-1:100	答えずにかわしたいところだが……。	대답하지 않고 피하고 싶지만…….	fix	rewrites
+cx:crit-fixes-1:100	言葉をかわした。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	視線をかわす二人。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:110	「けどよ、物なら父さんの時みたく誰も居なけりゃ…」	has:아버지 때처럼 아무도	fix	rewrites
+cx:crit-fixes-1:110	そしてそれが当たり前のようにマスコミが美談みたく扱ってんの。	has:미담처럼 취급하고	fix	rewrites
+cx:crit-fixes-1:110	本が読みたくて転生したいと望んだ。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:110	映画をみたくない。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:120	どっちも変わらないと岩城は強く思う。	어느 쪽도 변함없다고 이와키는 강하게 생각한다.	fix	rewrites
+cx:crit-fixes-1:120	私は可愛いと誰もが言うけれど、	나는 귀엽다고 누구나 말하지만,	fix	rewrites
+cx:crit-fixes-1:120	寒いと彼は家にいる。	!rule:cx:crit-fixes-1:120	keep	rewrites
+cx:crit-fixes-1:120	「ケートク生への差別は、なんとかしないといけない問題です。」	has:하지 않으면 안되는	keep	rewrites
+cx:crit-fixes-1:125	まさに渡りに船。率直にこの申し出をうれしく思った。	has:기쁘게 생각했다	fix	rewrites
+cx:crit-fixes-1:125	司令にご心配をかけして、申し訳なく思います。	has:미안하게 생각합니다	fix	rewrites
+cx:crit-fixes-1:125	「北条、悪いけど…僕も優勝賞金を狙ってるんだ。悪く思うなよぉ！」	has:나쁘게 생각하지 마	fix	rewrites
+cx:crit-fixes-1:125	大変申し訳ありません。損傷を修理したく思います。	has:수리하고 싶다고 생각합니다	keep	rewrites
+cx:crit-fixes-1:125	寒いと思う。	!rule:cx:crit-fixes-1:125	keep	rewrites
+voice:shorter-te	後ろから掴まれて、動けない。	뒤에서 잡혀, 움직일 수 없다.	fix	voice
+voice:shorter-te	鎖に繋がれて、動けない。	쇠사슬에 연결되어, 움직일 수 없다.	fix	voice
+voice:shorter-te	エルはここにいない。だが、今日まで一緒に戦ってきた。忌々しいＰｅＴＳという呪いで繋がれたまま。	has:저주로 연결된 채로	fix	voice
+voice:shorter-te	「筧さんと繋がれたから……」	「카케이 씨와 연결될 수 있었으니까……」	keep	voice
+voice:shorter-te	佐藤さんと繋がれて嬉しい。	사토 씨와 연결될 수 있어서 기쁘다.	keep	voice
+voice:shorter-te	手すりに掴まれても怖い。	난간에 매달릴 수 있어도 무섭다.	keep	voice
+voice:shorter-te	リビングを出ようとすると、腕を掴まれた。	거실을 나오려고 하니, 팔을 잡혔다.	keep	voice
+constraint:shi-before-nitsuite	でも、私は少なくともこの二人の死についてだけは、かなり具体的に知っている。	has:두 사람의 죽음에	fix	lookup
+constraint:shi-before-nitsuite	死についての考察。	죽음에 대한 고찰.	fix	lookup
+constraint:shi-before-nitsuite	死にたい。	lacks:죽음	keep	lookup
+constraint:shi-before-nitsuite	死にかけた。	lacks:죽음	keep	lookup
+constraint:chikatte-before-ending	「誓っても良い」	「맹세해도 좋다」	fix	lookup
+constraint:chikatte-before-ending	私ゃ今年こそはおやっさんの右腕を見付け出すと誓ってますが、……さっぱり見付かってません。	has:맹세하고 있습니다만	fix	lookup
+constraint:chikatte-before-ending	誓ってやる！	맹세해 준다!	fix	lookup
+constraint:chikatte-before-ending	私も誓って言える。	나도 맹세코 말할 수 있다.	keep	lookup
+constraint:hai-before-negative	そして、悟史くんを「鬼隠し」にした人間は、……そう遠くにはいない。	has:그렇게 멀리는 없다	fix	lookup
+constraint:hai-before-negative	近くにはいなかった。	가까운 곳에는 없었다.	keep	lookup
+constraint:hai-before-negative	はい、ないです。	네, 없습니다.	keep	lookup
+constraint:hai-before-negative	ここにはいない。	여기에는 없다.	keep	lookup
+cx:crit-fixes-1:80	「城壁よ、中には城がある。」	has:성벽이야,	keep	rewrites
