@@ -21,9 +21,25 @@ cx:caption-fixes-1:132	「僕…そろそろ帰らないと…」	has:돌아가�
 cx:caption-fixes-1:132	「ほら、急がないと急がないと！」	has:서둘러야 한다 서둘러야 한다!	fix	rewrites
 cx:caption-fixes-1:132	室温で少し溶かしておかないと。	has:녹여 두어야 한다.	fix	rewrites
 cx:caption-fixes-1:132	早くしないと、遅れるよ。	!rule:cx:caption-fixes-1:132	keep	rewrites
-cx:caption-fixes-1:132	そうよ、修理は急がないと。急がないと、間に合わないわ。	has:서두르지 않으면 늦	keep	rewrites
+cx:caption-fixes-1:132	そうよ、修理は急がないと。急がないと、間に合わないわ。	has:서두르지 않으면, 늦	keep	rewrites
 cx:caption-fixes-1:132	みんなも……帰ってこないと……だめだから……	!rule:cx:caption-fixes-1:132	keep	rewrites
 cx:caption-fixes-1:132	魚雷5、6本くらい撃ち込まないと…駄目よ！	!rule:cx:caption-fixes-1:132	keep	rewrites
 cx:caption-fixes-1:132	急がないと間に合わない。	!rule:cx:caption-fixes-1:132	keep	rewrites
 cx:caption-fixes-1:132	行かないといけない。	가야 한다.	keep	rewrites
 cx:caption-fixes-1:132	一度沈んでみないと…わかんないかなぁ？	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	もう二度と会わないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	もう誰も信じないと…	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	二度と戻らないと…	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	それを没収されたら何も残らないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	私の死は「天災」に他ならず、災厄以外の何も生み出さないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	絶対に負けないと…心に誓った。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	彼女はもう笑わないと…そう思っていた。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	もう泣かないと……そう決めた。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	使える武器は使わないと……飛び道具もきちんと	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	（急がないと……）	has:(서둘러야 한다……)	fix	rewrites
+cx:caption-fixes-1:132	誰にも負けないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	どこにも行かないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	一切口を出さないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	何にも言わないと…	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	全然食べないと…	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	まったく気にしないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
