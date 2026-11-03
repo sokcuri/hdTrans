@@ -1,0 +1,149 @@
+# 규칙: LEX-4000~4013, GRM-3450~3458
+rule	input	expected	kind	layer
+dict:w:31002	雨が降りしきる中、公園でブランコに座っていた。	비가 퍼붓는 중, 공원에서 그네에 앉아 있었다.	fix	lookup
+dict:w:31002	降りしきる雨の中を歩いた。	쏟아지는 빗속을 걸었다.	keep	lookup
+dict:w:31001	雨が降り注ぐ。	비가 쏟아진다.	fix	lookup
+dict:w:31003	雨が降り続く。	비가 계속 내린다.	fix	lookup
+dict:w:31004	雨が降り止んだ。	비가 그쳤다.	fix	lookup
+dict:w:31001	雨が降る。	비가 온다.	keep	lookup
+dict:w:31006	今まで頭上を覆っていた傘を差し出す。	지금까지 머리 위를 덮고 있던 우산을 내민다.	fix	lookup
+dict:w:31006	傘を差した。	우산을 썼다.	keep	lookup
+dict:jisjk:446	亜麻色のストレートヘアーはいつもさらさらとして光沢が見える。	아마색 스트레이트 헤어는 언제나 찰랑찰랑 해 광택이 보인다.	fix	lookup
+dict:jisjk:446	さらさらと流れる川。	찰랑찰랑 흐르는 강.	keep	lookup
+dict:jisjk:118331	風邪でも引かれると何となく寝覚めが悪い。	감기라도 걸리면 왠지 뒤가 개운치 않다.	fix	lookup
+dict:jisjk:258806	お気遣いはありがたいですが、私はここに居たいから居るので。	배려는 고맙습니다만, 나는 여기에 있고 싶으니까 있으므로.	fix	lookup
+dict:jisjk:94196	これは恐らく警戒を緩める事はまずないな。	이것은 아마 경계를 느슨하게 하는 일은 거의 없네.	fix	lookup
+dict:w:20028	拒絶の現れに、周も深追いする気はなかった。	거절의 표현에, 주도 깊이 쫓을 생각은 없었다.	fix	lookup
+senses	僅かに上向いた顔は青白い。	조금 위를 향한 얼굴은 창백하다.	fix	senses
+senses	景気が上向いた。	경기가 나아졌다.	keep	senses
+senses	風邪でも引かれると困る。	감기라도 걸리면 곤란하다.	fix	senses
+senses	袖を引かれた。	has:당겨	keep	senses
+pattern:書いてる筈	むしろ何で話しかけてきたんだ、といった感情が湧いてる筈だ。	오히려 왜 말을 걸어 왔다, 라는 감정이 솟아나고 있을 것이다.	fix	lookup
+pattern:書いてる筈なのに	知ってる筈なのに。	알고 있을 터인데.	fix	lookup
+pattern:書いてる筈	知ってるはずだ。	알고 있을 것이다.	keep	lookup
+cx:quote-answer:10	儚げな美貌がこちらを窺っているので、周は「そうか」とだけ返す。	덧없는 듯한 미모가 이쪽을 살피고 있으므로, 주는 「그런가」라고만 대답한다.	fix	rewrites
+cx:quote-answer:10	「うん」と返した。	「응」이라고 대답했다.	fix	rewrites
+cx:quote-answer:10	本を返した。	책을 돌려주었다.	keep	rewrites
+cx:only-that:10	ただ、ああいった顔をした人間を放っておくのは、なんとなく良心が痛んだ。それだけだ。	다만, 저런 얼굴을 한 인간을 그대로 두는 것은, 왠지 양심이 찔렸다. 그것뿐이다.	fix	rewrites
+cx:only-that:10	それだけだった。	그것뿐이었다.	fix	rewrites
+cx:only-that:10	それだけで十分だ。	그것만으로 충분하다.	keep	rewrites
+cx:only-that:20	これだけだ。	이것뿐이다.	fix	rewrites
+cx:only-that:20	これだけで足りる。	이만큼으로 충분하다.	keep	rewrites
+cx:soaked:10	ここで少女がずぶ濡れになって一人ぼっちで居る。	여기서 소녀가 흠뻑 젖어 외톨이로 있다.	fix	rewrites
+cx:soaked:10	濡れた服を脱いだ。	젖은 옷을 벗었다.	keep	rewrites
+cx:soaked:20	ずぶ濡れの服を脱いだ。	흠뻑 젖은 옷을 벗었다.	fix	rewrites
+cx:soaked:20	ずぶ濡れになった。	흠뻑 젖었다.	keep	rewrites
+cx:sound-of:10	足早に離れると、背後から真昼の声がする。	빠른 걸음으로 떨어지면, 뒤에서 한낮의 목소리가 들린다.	fix	rewrites
+cx:sound-of:10	遠くで波の音がする。	먼 곳에서 물결의 소리가 난다.	fix	rewrites
+cx:sound-of:10	彼の書いた本。	그가 쓴 책.	keep	rewrites
+cx:know-that:10	あいつが来ると分かった。	저 녀석이 온다는 걸 알았다.	fix	rewrites
+cx:know-that:10	彼が死んだと知った。	그가 죽었다는 걸 알았다.	fix	rewrites
+cx:know-that:10	「行く」と分かった。	「간다」라고 알았다.	keep	rewrites
+cx:know-that:20	薄暗く雨で視界も悪かったが、あの目立つ亜麻色の髪と制服ですぐに真昼だと分かる。	어슴푸레하게 비로 시야도 나빴지만, 그 눈에 띄는 아마색 머리카락과 제복으로 곧바로 한낮이라는 걸 안다.	fix	rewrites
+cx:know-that:20	犯人だと気づいた。	범인이라는 걸 눈치챘다.	fix	rewrites
+cx:know-that:20	日本語が分かる。	일본어를 알 수 있다.	keep	rewrites
+cx:level-of:10	実際彼女は定期考査でも常に一位を取っているし、体育の授業でもエース並の活躍をしているそうだ。	실제 그녀는 정기고사에서도 항상 1위를 차지하고 있고, 체육의 수업에서도 에이스급 활약을 하고 있다고 한다.	fix	rewrites
+cx:level-of:10	並の人間ではない。	보통의 인간이 아니다.	keep	rewrites
+cx:not-even:10	誰かを待っているといった訳でもなさそうで、ただぼんやりとどこかを見ている。	누군가를 기다리고 있다고 하는 것도 아닌 것 같아, 다만 멍하니 어딘가를 보고 있다.	fix	rewrites
+cx:not-even:10	何もなさそうだ。	아무것도 없을 것 같다.	keep	rewrites
+cx:not-even:20	待っているわけでもなさそうだ。	기다리고 있는 것도 아닌 것 같다.	fix	rewrites
+cx:not-even:20	お金もなさそうだ。	돈도 없을 것 같다.	keep	rewrites
+dict:jisjk:347776	あいつが来ると分かった。	저 녀석이 온다는 걸 알았다.	fix	local
+dict:jisjk:347776	日本語がよく分かる。	일본어를 잘 안다.	keep	local
+cx:excuse-me:10	ちょっとすみません。	잠깐 실례합니다.	fix	rewrites
+cx:excuse-me:10	あの、ちょっとすみません、道を聞きたいんですが。	저, 잠깐 실례합니다, 길을 묻고 싶습니다만.	fix	rewrites
+cx:excuse-me:10	すみません、遅れました。	죄송합니다, 늦었습니다.	keep	rewrites
+cx:excuse-me:30	すみません、ちょっといいですか。	실례합니다, 잠깐 괜찮습니까.	fix	rewrites
+cx:excuse-me:30	本当にすみません。	정말 죄송합니다.	keep	rewrites
+cx:swift-write:10	筆をとると優美な動きでなにかをさらさらと書く。	붓을 취하면 우아한 움직임으로 뭔가를 술술 쓴다.	fix	rewrites
+cx:swift-write:10	髪はさらさらとしている。	머리카락은 찰랑찰랑 하고 있다.	keep	rewrites
+cx:level-of:10	今なら並の戦艦にだって負けない。	!rule:cx:level-of:10	keep	rewrites
+cx:level-of:10	軽空母並の航空戦力を運用可能な航空戦艦です。	경항공모함급 항공전력을 운용 가능한 항공전함입니다.	fix	rewrites
+cx:excuse-me:30	「すみません、ちょっとやり過ぎちゃいました……」	!rule:cx:excuse-me:30	keep	rewrites
+cx:novel-fixes:10	それもある種のお約束か。	그것도 일종의 약속인가.	fix	rewrites
+cx:novel-fixes:10	そういうこともある。	그런 것도 있다.	keep	rewrites
+cx:novel-fixes:20	当然といえば当然の話だ。	당연하다면 당연한 이야기다.	fix	rewrites
+cx:novel-fixes:20	当然の結果だ。	당연한 결과다.	keep	rewrites
+cx:novel-fixes:30	何色の髪でもあり得る。	무슨색의 머리카락이라도 있을 수 있다.	fix	rewrites
+cx:novel-fixes:30	それでもある。	그래도 있다.	keep	rewrites
+cx:quote-after-comma:10	帰りたい、とひたすら思う。	돌아가고 싶다, 라고 오로지 생각한다.	fix	rewrites
+cx:quote-after-comma:10	彼と、彼女と話した。	그와 그녀와 이야기했다.	keep	rewrites
+cx:without:10	見たとこ機械類はなしで、建材も石材か木材でほぼ統一。	보아하니 기계류는 없고, 건재도 석재나 목재로 거의 통일.	fix	rewrites
+cx:without:10	説明なしで分かる。	!rule:cx:without:10	keep	rewrites
+dict:w:31007	その直後の慌てぶりときたら。	그 직후의 당황하는 모습이라고 하면.	fix	lookup
+dict:w:31008	自分の殻に閉じこもったどうしようもないクズ。	자기 껍질 속에 틀어박힌 어쩔 수 없는 쓰레기.	fix	lookup
+dict:jisjk:90787	泣き言がこぼれて早くも折れそうだ。	푸념이 흘러넘쳐 벌써 부러질 것 같다.	fix	lookup
+dict:jisjk:90787	涙がこぼれている。	눈물이 흘러넘치고 있다.	fix	lookup
+dict:jisjk:262993	ある種の才能だ。	일종의 재능이다.	fix	lookup
+sound:contracted-auxiliaries	コミュレベル１の俺でやってけるのか？	소통 레벨 1의 나로 해 나갈 수 있는 건가?	fix	sound
+sound:contracted-auxiliaries	出てけ！	나가라!	keep	sound
+dict:jisjk:151032	ほんのり紅潮した健康的な頬。	살짝 홍조한 건강한 뺨.	fix	lookup
+dict:jisjk:151032	健康的な食事。	건강한 식사.	keep	lookup
+dict:jisjk:344978	無理やり口に押し込まれた時の、あの何とも言えない青臭さ。	억지로 입에 밀어넣어졌을 때의, 그 뭐라고 말할 수 없는 풋내.	fix	lookup
+dict:jisjk:344978	無理やり連れて行かれた。	억지로 끌려갔다.	keep	lookup
+dict:jisjk:358465	嫌いな野菜である黄月トマトの入った料理を作ったコックを、その場でクビにしたからか？	싫어하는 야채인 황월 토마토가 들어간 요리를 만든 요리사를, 그 자리에서 해고했으니까인가?	fix	lookup
+dict:jisjk:358465	コックをひねって水を止めた。	콕을 비틀어 물을 멈추었다.	keep	lookup
+dict:w:31009	その場でクビにした。	그 자리에서 해고했다.	fix	lookup
+dict:w:31010	フリルがふんだんに使われている、さわり心地のいいやつだ。	프릴이 충분하게 사용되고 있는, 감촉이 좋은 녀석이다.	fix	lookup
+dict:w:31012	こうして血染めの日記帳を見てしまった後となっては。	이렇게 해 피로 물든 일기장을 봐버린 후가 돼.	fix	lookup
+phrase:酸っぱさ	あの何とも言えない青臭さと酸っぱさとえぐみ……。	그 뭐라고 말할 수 없는 풋내와 신맛과 아린 맛…….	fix	phrases
+cx:fresh-made:10	ふんわりと香ばしい焼きたてパン。	폭신 고소한 갓 구운 빵.	fix	rewrites
+cx:fresh-made:10	パンを焼いた。	빵을 구웠다.	keep	rewrites
+cx:looks-adj:10	中にいた男が怪訝そうな顔を向けてきた。	안에 있던 남자가 의아스러운 듯한 표정을 향하여 왔다.	fix	rewrites
+cx:looks-adj:10	雨が降りそうな空。	비가 올 것 같은 하늘.	keep	rewrites
+cx:no-time:10	むき出しの殺意に恐怖を覚える間もなく、重たい鉄の塊が落ちてきて。	드러난 살의에 공포를 느낄 새도 없고, 무거운 철 덩어리가 떨어져 내려.	fix	rewrites
+cx:no-time:10	その間、彼は寝ていた。	그 사이, 그는 자고 있었다.	keep	rewrites
+cx:most-of:10	聞いているだけで耳をふさぎたくなるような罵声、怒号。その多くは自分を非難するものだ。	듣고 있는 것만으로 귀를 막고 싶어지는 것 같은 욕설, 고함. 그 대부분은 자신을 비난하는 것이다.	fix	rewrites
+cx:most-of:40	その多くの人。	그 대부분의 사람.	fix	rewrites
+cx:most-of:10	多くは語らない。	!rule:cx:most-of:10	keep	rewrites
+cx:dislike-of:10	ミーアの嫌いなもの。	미아가 싫어하는 것.	fix	rewrites
+cx:dislike-of:10	野菜は嫌いだ。	야채는 싫다.	keep	rewrites
+cx:line-toiu:10	という夢を見た。	라는 꿈을 꾸었다.	fix	rewrites
+cx:line-toiu:10	彼という人。	그라는 사람.	keep	rewrites
+senses	赤い、燃えるように赤い夕日が視界を焼く。	붉다, 불타도록 붉은 석양이 시야를 태운다.	fix	senses
+senses	パンを焼く。	빵을 굽는다.	keep	senses
+pattern:書くはずがございません	「い、いやですわ、あんなこと、起こるはずがございませんのに」	「시, 싫네요, 저런 일, 일어날 리가 없는데요」	fix	lookup
+cx:most-of:20	その多くが死んだ。	그 대부분이 죽었다.	fix	rewrites
+cx:most-of:20	多くが死んだ。	대부분이 죽었다.	keep	rewrites
+cx:most-of:30	その多くを失った。	그 대부분을 잃었다.	fix	rewrites
+cx:most-of:30	多くを失った。	대부분을 잃었다.	keep	rewrites
+cx:most-of:40	多くの人。	많은 사람.	keep	rewrites
+cx:dislike-of:5	運動が嫌いな人向けの授業だ。	운동을 싫어하는 사람용 수업이다.	fix	rewrites
+cx:dislike-of:5	ミーアの嫌いなもの。	미아가 싫어하는 것.	keep	rewrites
+cx:line-toiu:10	という事はおねえさんの家なのかな……？	그렇다고 하는 일은 언니의 집인가……?	keep	rewrites
+cx:dislike-of:10	大っ嫌えな侍に借り作りたくねえ。	!rule:cx:dislike-of:10	keep	rewrites
+cx:rebuild-fixes:10	汚れで変色している唯の服と、整備状態の怪しい拳銃。	더러움으로 변색하고 있는 그냥 옷과 정비 상태의 수상한 권총.	fix	rewrites
+cx:rebuild-fixes:10	唯一の希望。	유일한 희망.	keep	rewrites
+cx:rebuild-fixes:20	（……この先客も所持品は無しか）	(……이 선객도 소지품은 없나)	fix	rewrites
+cx:rebuild-fixes:20	無しかもしれない。	!rule:cx:rebuild-fixes:20	keep	rewrites
+cx:rebuild-fixes:30	成果無しでの帰還は、ここに来るだけでも命賭けのアキラにとって。	성과 없는 귀환은, 여기에 오는 것만으로도 목숨을 건 아키라에게.	fix	rewrites
+cx:rebuild-fixes:30	成果無しで帰る。	!rule:cx:rebuild-fixes:30	keep	rewrites
+cx:rebuild-fixes:40	その者は震えで誤って引き金を引いても不思議のない状態だ。	그 사람은 떨림으로 잘못해 방아쇠를 당겨도 이상할 것 없는 상태다.	fix	rewrites
+cx:rebuild-fixes:40	不思議の国。	이상한 나라.	keep	rewrites
+cx:rebuild-fixes:50	彼女は何をする訳でもなく佇んでいた。	그녀는 무엇을 하는 것도 아니고 우두커니 서 있었다.	fix	rewrites
+cx:rebuild-fixes:50	それでもなく。	!rule:cx:rebuild-fixes:50	keep	rewrites
+cx:fit-to:10	その危険に見合うものがここにあるからだ。	그 위험에 알맞는 것이 여기에 있기 때문이다.	fix	rewrites
+cx:fit-to:10	その無謀に相応しい末路を迎えただけ。	그 무모에 걸맞은 말로를 맞이했을 뿐.	fix	rewrites
+cx:fit-to:10	静かに眠る。	!rule:cx:fit-to:10	keep	rewrites
+cx:teki-and:10	その女性は全身に幻想的で非現実的な美しさを備えていた。	그 여성은 전신에 환상적이고 비현실적인 아름다움을 갖추고 있었다.	fix	rewrites
+cx:teki-and:10	効率的で助かる。	!rule:cx:teki-and:10	keep	rewrites
+dict:w:31014	命懸けでここまで来たっていうのに。	목숨 걸고 여기까지 왔는데도.	fix	lookup
+dict:w:31017	命賭けの戦い。	목숨을 건 싸움.	fix	lookup
+cx:rebuild-fixes:60	いつ死んでも不思議は無く、死んでも誰も気にも留めない。	언제 죽어도 이상할 것은 없고, 죽어도 아무도 마음에도 두지 않는다.	fix	rewrites
+cx:rebuild-fixes:60	不思議な話。	이상한 이야기.	keep	rewrites
+cx:rebuild-fixes:70	１度目と２度目の襲撃は、唯ひたすら走って逃げ回った。	1번째와 2번째 습격은, 그저 오로지 달려 도망 다녔다.	fix	rewrites
+cx:rebuild-fixes:70	唯一の希望。	유일한 희망.	keep	rewrites
+cx:rebuild-fixes:80	目線を合わせる為に中腰の体勢で、微笑みながら見ていた。	시선을 맞추기 위해 엉거주춤한 자세로, 미소 지으면서 보고 있었다.	fix	rewrites
+cx:rebuild-fixes:80	中腰になった。	!rule:cx:rebuild-fixes:80	keep	rewrites
+cx:rebuild-fixes:90	安い銃が無駄に出回っている非常に治安の悪いスラム街。	싼 총이 쓸데없이 나돌고 있는 매우 치안이 나쁜 슬럼가.	fix	rewrites
+cx:rebuild-fixes:90	努力が無駄になった。	!rule:cx:rebuild-fixes:90	keep	rewrites
+cx:rebuild-fixes:100	かつての英知と栄華を想像するのが困難になるほどの長い年月が流れた。	한 때의 예지와 영화를 상상하는 것이 곤란하게 될 정도의 긴 세월이 흘렀다.	fix	rewrites
+cx:rebuild-fixes:100	なるほどの話だ。	!rule:cx:rebuild-fixes:100	keep	rewrites
+cx:resolve-quote:10	３度目の襲撃を生き残った後、アキラはハンターになって成り上がると覚悟を決めた。	3번째 습격을 살아남은 후, 아키라는 헌터가 되어 출세하겠다고 각오를 다졌다.	fix	rewrites
+cx:resolve-quote:10	雨が降ると困る。	비가 오면 곤란하다.	keep	rewrites
+dict:w:31018	両手は彼女の胸に減り込んだままだ。	양손은 그녀의 가슴에 파고든 채 그대로다.	fix	lookup
+dict:i:5287	正気を失った者から死ぬ。	제정신을 잃은 사람에게서 죽는다.	fix	lookup
+dict:jisjk:35830	余りの出来事にアキラは銃を構えた体勢のまま思考を停止した。	넘치는 사건에 아키라는 총을 겨눈 자세인 채 사고를 정지했다.	fix	lookup
+cx:dislike-of:4	咄嗟のウソとはいえ、千里の嫌いなチョコの話を持ち出すなんて……	순간의 거짓말이라고는 해도, 천리가 싫어하는 초콜릿 이야기를 꺼내다니……	fix	rewrites
+cx:dislike-of:4	嫌いな野菜。	!rule:cx:dislike-of:4	keep	rewrites
+cx:rebuild-fixes:70	唯ちゃんが笑った。	!rule:cx:rebuild-fixes:70	keep	rewrites

@@ -9,7 +9,8 @@
 
 A row needs Nn when its pos is a noun other than a proper noun (x1yy, y not 3) and either its key
 ends in one of PARTICLES after at least one character and its Korean ends in one of KOREAN (答えは
-대답은), or its Korean ends in one of ADVERBS (当然 당연히). Nn also goes by hand on rows whose Korean
+대답은), or its Korean ends in one of ADVERBS (当然 당연히), or its key ends in な after at least one
+character and its Korean in one of ADNOMINALS (健康的な 건강한, 一方的な 일방적인). Nn also goes by hand on rows whose Korean
 is an interjection, an adnominal or a conjunction (いや 아니, いわゆる 이른바, あと 그리고), which no
 shape finds. The allowance lists the rows of either shape that read as a bare noun as
 file<TAB>key<TAB>ko; --check fails on a row that needs Nn and is not listed, on a listed row that
@@ -25,6 +26,7 @@ PARTICLES = ("が", "を", "に", "へ", "と", "で", "から", "より", "ま�
 KOREAN = ("이", "가", "을", "를", "에", "에서", "에게", "한테", "로", "으로", "와", "과", "랑", "하고", "의", "은",
           "는", "도", "까지", "부터", "보다", "만", "니까", "서", "고", "며", "지만", "게", "듯이", "처럼", "대로", "께")
 ADVERBS = ("히", "하게", "스럽게", "롭게", "없이", "같이")
+ADNOMINALS = ("한", "인", "운", "된", "은", "는", "같은", "없는", "듯한")
 
 
 def needs_nn(key, ko, pos, gram):
@@ -32,7 +34,8 @@ def needs_nn(key, ko, pos, gram):
         return False
     ko = ko.strip()
     particle = any(key.endswith(p) and len(key) > len(p) for p in PARTICLES) and any(ko.endswith(k) for k in KOREAN)
-    return particle or ko.endswith(ADVERBS)
+    adnominal = key.endswith("な") and len(key) > 1 and ko.endswith(ADNOMINALS)
+    return particle or adnominal or ko.endswith(ADVERBS)
 
 
 def rows(text):
@@ -95,7 +98,8 @@ def self_test():
         (("当然", "당연히", "N110", "ANnB"), True), (("ペニヒ", "페니히", "N130", ""), False),
         (("心から", "진심으로", "N110", ""), True), (("かが", "가가", "N130", ""), False),
         (("答え", "대답", "N110", ""), False), (("は", "은", "N110", ""), False),
-        (("用に", "용으로", "P200", ""), False),
+        (("用に", "용으로", "P200", ""), False), (("健康的な", "건강한", "N110", ""), True),
+        (("一方的な", "일방적인", "N110", "Nn"), False), (("な", "한", "N110", ""), False),
     ]
     for args, want in cases:
         if needs_nn(*args) != want:

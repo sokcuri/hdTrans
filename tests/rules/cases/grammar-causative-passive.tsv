@@ -49,7 +49,7 @@ cx:forced-act:30	確かに姉と妹は彼女たちに負傷させられたが、
 cx:forced-act:30	勉強させられた。	!rule:cx:forced-act:30	keep	rewrites
 cx:forced-act:30	彼に心配させられた。	!rule:cx:forced-act:30	keep	rewrites
 cx:forced-act:35	孤立させられた。	고립되었다.	fix	rewrites
-cx:forced-act:35	不機嫌そうな田中さんに思考を中断させられた。	기분이 안 좋을 것 같은 타나카 씨 때문에 사고를 중단하게 되었다.	keep	rewrites
+cx:forced-act:35	不機嫌そうな田中さんに思考を中断させられた。	기분이 안 좋은 듯한 타나카 씨 때문에 사고를 중단하게 되었다.	keep	rewrites
 cx:forced-act:35	勉強させられた。	!rule:cx:forced-act:35	keep	rewrites
 rewrite:passive-reading	母に本を読ませられた。	어머니가 책을 읽게 했다.	current	rewrites
 cx:forced-act:10	以前、練習に付き合ったときは、佐藤が台詞を言うたびにドキリとさせられた。	!rule:cx:forced-act:10	keep	rewrites

@@ -272,7 +272,71 @@ cx:count-what:60	NUM-31	&&3 S-1== "何" S+0== "滴" D+0== "방울"	set-target "�
 cx:count-what:65	NUM-31	&&3 S-1== "何" S+0== "口" D+0== "입"	set-target "몇 입" set-target@-1 ""	何입 몇 입
 cx:count-what:70	NUM-31	&&3 S-1== "何" S+0== "脚" D+0== "개"	set-target "몇 개" set-target@-1 ""	何개 몇 개
 cx:count-what:75	NUM-31	&&3 S-1== "何" S+0== "足" D+0== "켤레"	set-target "몇 켤레" set-target@-1 ""	何足 몇 켤레
-
+//= know-that	after QuoteTo 40	A clause quoted with と before 分かる, 気づく or 知る is what is found out, -다는 걸 and (이)라는 걸 (来ると分かった 온다는 걸 알았다, 犯人だと気づいた 범인이라는 걸 눈치챘다), not -다고.
+cx:know-that:10	GRM-3450	&&4 ||4 S+0== "分か" S+0== "気づ" S+0== "気付" S+0== "知" F-1== "conjugating" Y-1== "R다고" !1 S-1== "Rって"	replace-ending-tail@-1 "다고" "다는 걸"	来ると分かった 온다는 걸 알았다
+cx:know-that:20	GRM-3450	&&3 ||4 S+0== "分か" S+0== "気づ" S+0== "気付" S+0== "知" S-1== "だと" D-1== "(이)라고"	set-target@-1 "(이)라는 걸"	犯人だと気づいた 범인이라는 걸 눈치챘다
+//= level-of	after Select 151	並 right after a noun and before の is the level of that noun, 급 (エース並の活躍 에이스급 활약), not 보통.
+cx:level-of:10	LEX-4005	&&5 S+0== "並" D+0== "보통" P-1== "1**" S+1== "の" !1 ||8 S-1== "Rなら" S-1== "Rは" S-1== "Rも" S-1== "Rが" S-1== "Rを" S-1== "Rに" S-1== "Rで" S-1== "Rと"	set-target "급" set-target@+1 " "	エース並の活躍 에이스급 활약
+//= not-even	after Select 152	でもなさそう after a noun, 訳 or わけ is the copula denied, 도 아닌 것 같다 (待っている訳でもなさそう 기다리고 있는 것도 아닌 것 같아), not (이)라도 없을 것 같다.
+cx:not-even:10	GRM-3451	&&4 S+0== "なさそう" S-1== "でも" ||2 P-2== "1**" S-2== "わけ" D+0== "R%B3@"	set-target "아닌 것 %B3@" set-target@-1 "도"	待っている訳でもなさそう 기다리고 있는 것도 아닌 것 같아
+cx:not-even:20	GRM-3451	&&3 S+0== "なさそう" Y-1== "R것도" D+0== "R%B3@"	set-target "아닌 것 %B3@"	待っているわけでもなさそう 기다리고 있는 것도 아닌 것 같다
+//= swift-write	after Select 158	さらさらと before 書く writes quickly and smoothly, 술술 (さらさらと書く 술술 쓴다), not the 찰랑찰랑 of hair.
+cx:swift-write:10	LEX-4000	&&2 S+0== "さらさらと" ||3 S+1== "L書" S+1== "Lかく" S+1== "Lしたため"	set-target "술술"	さらさらと書く 술술 쓴다
+//= novel-fixes	after Select 159	Misreadings the web novel examples showed in words split across a reading: the ある of ある種 that もある took (それもある種の 그것도 일종의), the の after 当然といえば当然 (당연하다면 당연한 이야기), and the あり得る of でもあり得る (무슨 색이라도 있을 수 있다).
+cx:novel-fixes:10	LEX-4000	&&2 S+0== "種" S-1== "もあ"	set-target "일종" set-target@-1 "" set-ending@-1 "" append-target@-2 "도"	それもある種のお約束 그것도 일종의 약속
+cx:novel-fixes:20	LEX-4000	&&2 S+0== "の" S-1== "当然といえば当然"	set-target " "	当然といえば当然の話 당연하다면 당연한 이야기
+cx:novel-fixes:30	LEX-4000	&&2 S+0== "得" S-1== "でもあ"	set-target "있을 수 &HN@" set-target@-1 "" set-ending@-1 "" append-target@-2 "(이)라도"	何色の髪でもあり得る 무슨 색의 머리카락이라도 있을 수 있다
+//= quote-after-comma	after QuoteTo 41	A と right after a comma and before a verb of thinking or saying quotes the clause before the comma, (이)라고 (帰りたい、と思う 돌아가고 싶다, 라고 생각한다), not (으)로.
+cx:quote-after-comma:10	GRM-3452	&&4 S+0== "と" S-1== "、" D+0== "(으)로" ||2 &&2 F+1== "verb" ||3 S+1== "L思" S+1== "L考" S+1== "L言" &&2 F+2== "verb" ||3 S+2== "L思" S+2== "L考" S+2== "L言"	set-target "(이)라고"	帰りたい、とひたすら思う 돌아가고 싶다, 라고 오로지 생각한다
+//= without	after Select 160	なし before で and a comma reads 없고 (機械類はなしで、 기계류는 없고), not 없음으로.
+cx:without:10	LEX-4007	&&3 S+0== "で" S-1== "なし" S+1== "、"	set-target "" set-target@-1 "없고"	機械類はなしで、 기계류는 없고,
+//= fresh-made	after Select 161	A verb before たて read -ㄴ 지 얼마 안 된 right before a noun is freshly made, 갓 and the past adnominal (焼きたてパン 갓 구운 빵).
+cx:fresh-made:10	LEX-4008	&&2 F+0== "verb" Y+0== "8 지 얼마 안 된"	prepend-target "갓 " set-ending "8"	焼きたてパン 갓 구운 빵
+//= looks-adj	after Select 162	そうな after a na-adjective or a noun of a state is how something looks, -한 듯한 (怪訝そうな顔 의아한 듯한 표정), not the guess -ㄹ 것 같은 a verb takes (降りそうな 내릴 것 같은).
+cx:looks-adj:10	GRM-3453	&&3 U+0== "そうな" Y+0== "3 것 같은" !1 P+0== "4**"	set-ending "4 듯한"	怪訝そうな顔 의아한 듯한 표정
+//= no-time	after Select 163	間 right after a verb before もなく or もない leaves no time, 새 (恐怖を覚える間もなく 공포를 느낄 새도 없이), not 동안.
+cx:no-time:10	LEX-4009	&&3 F+0== "verb" U+0== "R間" S+1== "も"	set-ending "3 새"	覚える間もなく 느낄 새도 없이
+//= most-of	after Select 164	多く right after その before は, が, を or の is most of them, 대부분 (その多くは 그 대부분은), not 많게.
+cx:most-of:10	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くは"	set-target@-1 "그 대부분은" set-target "" set-ending ""	その多くは 그 대부분은
+cx:most-of:20	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くが"	set-target@-1 "그 대부분이" set-target "" set-ending ""	その多くが 그 대부분이
+cx:most-of:30	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くを"	set-target@-1 "그 대부분을" set-target "" set-ending ""	その多くを 그 대부분을
+cx:most-of:40	LEX-4010	&&3 S+0== "多" S-1== "その" U+0== "くの"	set-target@-1 "그 대부분의" set-target "" set-ending ""	その多くの 그 대부분의
+//= dislike-of	after Select 165	嫌い before な and a noun is what someone dislikes, 싫어하는 (ミーアの嫌いなもの 미아가 싫어하는 것), not the adjective 싫은.
+cx:dislike-of:4	LEX-4011	&&5 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "の" D-1== "(을)를"	set-target "싫어하&AV@" set-ending "4는" set-target@-1 "(이)가"	千里の嫌いなチョコ 천리가 싫어하는 초콜릿
+cx:dislike-of:5	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "が"	set-target "싫어하&AV@" set-ending "4는" set-target@-1 "(을)를"	運動が嫌いな人 운동을 싫어하는 사람
+cx:dislike-of:10	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" !1 ||2 S-1== "っ" S-1== "大"	set-target "싫어하&AV@" set-ending "4는"	嫌いな野菜 싫어하는 야채
+//= line-toiu	after Select 166	という at the start of a line takes up what came before, 라는 (という夢を見た 라는 꿈을 꾸었다), not 그렇다고 하는.
+cx:line-toiu:10	GRM-3454	&&5 S+0== "とい" D+0== "그렇다고 &AV@" U+0== "う" !1 F-1== "exists" !1 ||3 S+1== "事" S+1== "こと" S+1== "Lか"	set-target "라고 &AV@"	という夢を見た 라는 꿈을 꾸었다
+//= rebuild-fixes	after Select 168	Misreadings the web novel examples showed: 唯の is ただの, 그냥 (唯の服 그냥 옷); 無し before か ends a question, 없나 (所持品は無しか 소지품은 없나), and before での 없는 (成果無しでの帰還 성과 없는 귀환); 不思議のない is 이상할 것 없는; 訳でもなく before a verb is 것도 아니고.
+cx:rebuild-fixes:10	LEX-4013	&&3 S+0== "唯" D+0== "다만" S+1== "の"	set-target "그냥" set-target@+1 " "	唯の服 그냥 옷
+cx:rebuild-fixes:20	LEX-4013	&&3 S+0== "か" ||2 S-1== "無し" S-1== "なし" ||2 S+1== "00。！？!?）」』…" !1 F+1== "exists"	set-target "없나" set-target@-1 ""	所持品は無しか 소지품은 없나
+cx:rebuild-fixes:30	LEX-4013	&&2 S+0== "での" ||2 S-1== "無し" S-1== "なし"	set-target "없는" set-target@-1 ""	成果無しでの帰還 성과 없는 귀환
+cx:rebuild-fixes:40	LEX-4013	&&2 S+0== "不思議の" S+1== "な"	set-target "이상할 것"	不思議のない状態 이상할 것 없는 상태
+cx:rebuild-fixes:50	GRM-3455	&&2 S+0== "でもな" Y+0== "1게"	set-ending "1고"	何をする訳でもなく佇んでいた 무엇을 하는 것도 아니고 우두커니 서 있었다
+cx:rebuild-fixes:60	LEX-4013	&&3 S+0== "不思議" ||3 S+1== "は" S+1== "が" S+1== "も" ||2 S+2== "L無" S+2== "Lな"	set-target "이상할 것"	いつ死んでも不思議は無く 언제 죽어도 이상할 것은 없고
+cx:rebuild-fixes:70	LEX-4013	&&4 S+0== "唯" D+0== "다만" F+1== "exists" !1 ||13 S+1== "の" S+1== "Lちゃん" S+1== "Lさん" S+1== "Lくん" S+1== "L様" S+1== "L先輩" S+1== "は" S+1== "が" S+1== "を" S+1== "も" S+1== "に" S+1== "と" S+1== "00。、！？!?」』…"	set-target "그저"	唯ひたすら走った 그저 오로지 달렸다
+cx:rebuild-fixes:80	LEX-4013	&&3 S+0== "中腰" S+1== "の" ||3 S+2== "体勢" S+2== "姿勢" S+2== "格好"	set-target "엉거주춤한" set-target@+1 " "	中腰の体勢で 엉거주춤한 자세로
+cx:rebuild-fixes:90	LEX-4013	&&4 S+0== "無駄" U+0== "に" F+1== "verb" !1 ||4 S+1== "Lな" S+1== "L終" S+1== "Lし" S+1== "Lす"	set-ending "1이"	安い銃が無駄に出回っている 싼 총이 쓸데없이 나돌고 있다
+cx:rebuild-fixes:100	LEX-4013	&&3 S+0== "なるほど" S+1== "の" ||2 Y-1== "1게" U-1== "Rに"	set-target "될 정도"	困難になるほどの長い年月 곤란하게 될 정도의 긴 세월
+//= fit-to	after Select 169	A na-adjective read -하게 right before 見合う, 相応しい or 似合う is the noun it fits, 에 (その危険に見合うもの 그 위험에 알맞는 것, 無謀に相応しい 무모에 걸맞은).
+cx:fit-to:10	GRM-3456	&&3 F+0== "conjugating" Y+0== "1게" ||4 S+1== "L見合" S+1== "L相応し" S+1== "Lふさわし" S+1== "L似合"	set-ending " 에"	その危険に見合うもの 그 위험에 알맞는 것
+//= teki-and	after Select 170	A noun in 的 with で right before another 的 noun or an adjective lists both, 이고 (幻想的で非現実的な 환상적이고 비현실적인), not the cause 이어서.
+cx:teki-and:10	GRM-3457	&&4 S+0== "R的" U+0== "で" Y+0== "6" ||4 S+1== "R的" S+2== "R的" P+1== "7**" P+1== "8**"	set-ending "1고"	幻想的で非現実的な美しさ 환상적이고 비현실적인 아름다움
+//= resolve-quote	after QuoteTo 42	A verb whose と was read as the condition 니 right before 覚悟, 決意, 決心 or 誓う says what one resolves, -겠다고 (成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다).
+cx:resolve-quote:10	GRM-3458	&&3 F+0== "verb" Y+0== "2니" ||4 S+1== "L覚悟" S+1== "L決意" S+1== "L決心" S+1== "L誓"	set-ending "1겠다고"	成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다
+//= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
+cx:excuse-me:10	LEX-4006	&&2 S+0== "すみません" S-1== "ちょっと"	set-target "실례합니다" set-target@-1 "잠깐"	ちょっとすみません 잠깐 실례합니다
+cx:excuse-me:30	LEX-4006	&&4 S+0== "すみません" S+1== "、" S+2== "ちょっと" ||7 S+3== "Lいい" S+3== "い" S+3== "Lよろし" S+3== "L聞" S+3== "L伺" S+3== "Lお時間" S+3== "Lお尋ね"	set-target "실례합니다"	すみません、ちょっといいですか 실례합니다, 잠깐 괜찮습니까
+//= quote-answer	after Select 154	A 返す right after a closing quote with と, or that と and だけ, answers what is quoted, 대답하다 (「そうか」とだけ返す 「그런가」라고만 대답한다), not 돌려주다.
+cx:quote-answer:10	LEX-4001	&&2 S+0== "返" ||4 S-1== "R」と" S-1== "R』と" &&2 S-1== "だけ" S-2== "R」と" &&2 S-1== "だけ" S-2== "R』と"	set-target "대답&AV@"	「そうか」と返す 「그런가」라고 대답한다
+//= only-that	after Select 155	それだけ and これだけ right before the copula say that is all, 그것뿐 and 이것뿐 (それだけだ 그것뿐이다), not 그것만이다 or 이만큼이다.
+cx:only-that:10	LEX-4002	&&2 S+0== "それだけ" ||2 S+1== "Lだ" S+1== "でした"	set-target "그것뿐"	それだけだ 그것뿐이다
+cx:only-that:20	LEX-4002	&&2 S+0== "これだけ" ||2 S+1== "Lだ" S+1== "でした"	set-target "이것뿐"	これだけだ 이것뿐이다
+//= soaked	after Select 156	ずぶ濡れ and びしょ濡れ before になる are the verb 젖다 with 흠뻑 (ずぶ濡れになって 흠뻑 젖어), and before の 흠뻑 젖은, not 흠뻑 젖음이 되다.
+cx:soaked:10	LEX-4003	&&2 S+0== "にな" ||2 S-1== "ずぶ濡れ" S-1== "びしょ濡れ"	set-target "흠뻑 &HV@" set-target@-1 ""	ずぶ濡れになって 흠뻑 젖어
+cx:soaked:20	LEX-4003	&&2 ||2 S+0== "ずぶ濡れ" S+0== "びしょ濡れ" S+1== "の"	set-target "흠뻑 젖은" set-target@+1 " "	ずぶ濡れの服 흠뻑 젖은 옷
+//= sound-of	after Select 157	The の between a noun and 声がする, 音がする or 匂いがする, whose が is inside the phrase, stays the genitive 의 (真昼の声がする 마히루의 목소리가 들린다), not the subject (이)가.
+cx:sound-of:10	LEX-4004	&&3 S+0== "の" D+0== "(이)가" ||4 S+1== "L声が" S+1== "L音が" S+1== "L匂いが" S+1== "Lにおいが"	set-target "의"	真昼の声がする 마히루의 목소리가 들린다
 //= kakeru-aspect	after OwnPassives 10	The て of かける after に with a から before it in its clause spans a stretch, 걸쳐 (ウエストから尻山にかけて). A かける right after the continuative of a verb, not one of verb.kakeru-directed, is an act begun and not finished. After a change that befalls the subject (verb.kakeru-unwilled) or a passive, its past that ends the clause or is taken by こと, ところ, の or せい nearly happened, (으)ㄹ 뻔하다 (流されかけた 떠밀릴 뻔했다, パニックになりかけたが 패닉이 될 뻔했지만); before another noun, in ている and in its other forms it is the change going on, 어 가다 (沈みかけた夕日 가라앉아 가던 석양, 忘れかけている 잊어 가고 있다). After a verb done on purpose it is the act one set out to do, (으)려고 하다 (言いかけた 말하려고 했다), and its て before a pause is 다 말고 (歩きかけて、 걷다 말고). The passive of a かける read 걸다, not in ている, is 걸리다 (持ち手にかけられた木札 손잡이에 걸린 목찰), but with an object を it is 걸치다 (テーブルクロスをかけられた机). After glasses in the line it is 쓰다 (メガネ…あ、私かけてた).
 cx:kakeru-aspect:3	GRM-27	&&3 ||2 S+0== "かけ" S+0== "掛け" D+0== "&L1@" <0 ||6 S+0== "眼鏡" S+0== "メガネ" S+0== "めがね" S+0== "サングラス" S+0== "ゴーグル" S+0== "R眼鏡" ||0	select-target "&AF@"	メガネ…あ、私かけてた… 안경…아, 나 쓰고 있었다…
 cx:kakeru-aspect:5	GRM-27	&&4 ||2 S+0== "かけ" S+0== "掛け" S-1== "に" Y+0== "6" <6 S+0== "から" S+0== "00。、！？!?"	select-target "걸&AO@"	ウエストから尻山にかけて 허리에서 엉덩이에 걸쳐

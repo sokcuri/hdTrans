@@ -2000,7 +2000,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ありかた	방식	N110			GN				jisjk:124957		
 ありがた	고$GB@	H7U0			GN				jisjk:4829		
 ありがた	$DE@	H7U0			GN	4889	||1 &&4 U+0== "いんですが" U-1== "と" Y+0= "1겠습니다만" Y-1= "2면"	ありがた가 いんですが 어미를 가지며 앞말 어미가 と이면 현재 어미를 -겠습니다만으로 바꾸고 앞 어미를 -으면으로 바꾼다. (미발동: rare-context)	jisjk:374189		
-ありがたいです	고맙겠습니다	A9D0			GN				jisjk:258806		
+ありがたいです	고맙습니다	A9D0			GN				jisjk:258806		
 ありがたが	귀하게 여&A2@	M448	SFl		GN				jisjk:138733		
 ありがたが	고맙게 생각&AV@	M448			GN				jisjk:138736		
 ありがたが	존중&AV@	M448			GN				jisjk:138739		
@@ -2027,7 +2027,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ありきたり	평범	I110			GN				jisjk:365229		
 ありきたりの外交辞令	흔한 겉치렛말	I110			GN				jisjk:365836		
 ありくい	개미핥기	N110	VAm		GN				jisjk:124961		
-ありげな	있는 듯한	I110			GN				jisjk:260644		
+ありげな	있는 듯한	I110		Nn	GN				jisjk:260644		
 ありげに	있는 듯이	E300			GN				jisjk:122759		
 ありさま	상태	I110			GN				jisjk:112113		
 ありしひ	생전	N110	UMe		GN				jisjk:124963		
@@ -2140,8 +2140,8 @@ ttt	ttt	K110			GN				jisjk:201744
 ある男子	어느 남자	N110	VHn		GN				jisjk:150451		
 ある程度	어느 정도	C0H0			GN				jisjk:260369		
 ある程度の年にな	어느 정도의 나이가 &C6@	M428	UMe	PnDx	GN	1490	||1 &&2 P-1== "1**" A-1-= "VHn"	사람 계열 명사 바로 뒤의 ある程度の年にな를 '어느 정도의 나이가 되다'로 고른다. (미발동: rare-word)	jisjk:143338		
-ある種	어느 종류	I110			GN				jisjk:106722		
-ある種の	어떤 종류의	A9D0			GN				jisjk:262993		
+ある種	일종	I110			GN				jisjk:106722		
+ある種の	일종의	A9D0			GN				jisjk:262993		
 ある種の	일종의	A9D0			GN	2484	||1 &&2 S+1== "国民" P+1== "1**"	ある種の 뒤에 명사 国民이 오면 일종의라는 번역을 고른다. (미발동: rare-context)	jisjk:266186		
 ある組織	어느 조직	N110	VBl		GN				jisjk:150449		
 ある者	어떤 사람	I110	VHn		GN				jisjk:40344		
@@ -3413,7 +3413,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いっこう	전혀	E311		Zn	GN				jisjk:61		
 いっこうに	매우	E311			GN				jisjk:62		
 いっこうに	전혀	E311		Zn	GN				jisjk:63		
-いっこくな	고집 불통인	N110			GN				jisjk:150517		
+いっこくな	고집 불통인	N110		Nn	GN				jisjk:150517		
 いっこくもの	고집쟁이	N110	VHnSFl		GN				jisjk:125839		
 いっこく者	고집쟁이	N110	VHnSFl		GN				jisjk:125838		
 いっさい	일체	E300			GN				jisjk:97585		
@@ -17844,7 +17844,7 @@ ttt	ttt	K110			GN				jisjk:201744
 このやろう	이 자식	C110			GN				jisjk:373562		
 このよう	이와 %B3@	G8U0			GN				jisjk:2180		
 このような	이러한	C0D1			GN				jisjk:4559		
-このような	이와 같은	N110			GN				jisjk:151097		
+このような	이와 같은	N110		Nn	GN				jisjk:151097		
 このような中にあって	이런 상황속에서	E300			GN				jisjk:149132		
 このような案でいかがでしょうか	이와 같은 안으로 어떻겠습니까	A9D0			GN				jisjk:374946		
 このように	이와 같이	C311			GN				jisjk:391		
@@ -17948,7 +17948,6 @@ ttt	ttt	K110			GN				jisjk:201744
 こぼうず	사미승	N110	VHnUCl		GN				jisjk:182923		-1
 こぼねをとりにく	잔가시를 없애기 어$G8@	H7N0			GN				jisjk:136267		
 こぼれ	흘러넘&AO@	M417			GN				jisjk:90786		
-こぼれ	넘쳐 흐름	I110			GN				jisjk:90787		
 こぼれ	빠&AL@	M427	VPeVPe		GN				jisjk:120179		
 こぼれざいわい	뜻하지 않은 요행	N110			GN				jisjk:182934		-1
 こぼれつづけ	계속 넘&AO@	M427			GN				jisjk:120169		
@@ -20288,8 +20287,7 @@ ttt	ttt	K110			GN				jisjk:201744
 さらけ出	속속들이 드러&A6@	M443			GN				jisjk:121642		
 さらさら	졸졸	E311			GN				jisjk:444		
 さらさら	전혀	E311		Zn	GN	1035	||1 &&2 S+1== "な" P+1== "7**"	さらさら는 형용사 ない 앞에서 부정 강조 부사 ‘전혀’를 고른다.	jisjk:115391		
-さらさらと	결코	E311		Zn	GN				jisjk:445		
-さらさらと	졸졸	E311			GN				jisjk:446		
+さらさらと	찰랑찰랑	E311			GN				jisjk:446		
 さらさらと流れ	졸졸 &EA@	M427			GN				jisjk:120719		
 さらさらと語	술술 이야기&AV@	M428			GN				jisjk:120710		
 さらさらと走らせ	술술 움직&AJ@	M447			GN				jisjk:120723		
@@ -27217,7 +27215,6 @@ ttt	ttt	K110			GN				jisjk:201744
 ずたずた	갈기갈기	E300			GN				jisjk:123266		
 ずたずたに	갈기갈기	E300			GN				jisjk:123267		
 ずっこけ	벗겨&AL@	M427	VCp		GN				jisjk:139801		
-ずっしりと	묵직	I110			GN				jisjk:112008		
 ずっしりと	묵직하게	E300			GN				jisjk:149229		
 ずっしり重	묵직$AB@	H7N0			GN				jisjk:121161		
 ずっと	계속	E300			GN	2142	||1 &&4 S-1== "Rで" P+1== "7**8**" S+1!= "簡単" S+1!= "楽"	で로 끝나는 말 뒤의 ずっと는 형용사 앞에서 지속 부사 계속을 고르되 簡単·楽의 정도 비교는 훨씬 후보에 맡긴다.	jisjk:263983		
@@ -30092,7 +30089,7 @@ ttt	ttt	K110			GN				jisjk:201744
 そんなはずが	그럴 리가	C110		Nn	GN				jisjk:344792		
 そんなはず	그럴 리	C110			GN				colloq:hazu-2		
 そんなふうに	그런 식으로	E300			GN				jisjk:149275		
-そんなような	그러한	N110			GN				jisjk:160067		
+そんなような	그러한	N110		Nn	GN				jisjk:160067		
 そんなら	그렇다면	E331			GN				jisjk:658		
 そんなわけで	그래서	A9D0			GN				jisjk:265119		
 そんなんだから	그러니까	E310			GN				jisjk:263158		
@@ -53460,7 +53457,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オープンかかく	오픈 가격	N110	VMyVMo		GN				jisjk:158156		
 オープンしじょう	단기 금융 시장	N110	VMoVBl		GN				jisjk:158158		
 オープンせん	오픈전	N110	VRwVBl		GN				jisjk:158159		
-オープンな	개방적인	N110			GN				jisjk:152096		
+オープンな	개방적인	N110		Nn	GN				jisjk:152096		
 オープンにされ	오픈&C6@	M427			GN				jisjk:357715		
 オープンにされ	오픈&C6@	M427			GN	4080	||1 &&2 S-1== "を" D-1= "(이)가"	を 바로 뒤에서 オープンにされ를 오픈되다로 고르고 を를 이가로 바꾼다. (미발동: rare-word)	jisjk:357716		
 オープンアカウント	청산계정	N110			GN				jisjk:44841		
@@ -58673,8 +58670,8 @@ ttt	ttt	K110			GN				jisjk:201744
 コチョウラン	호접란	N110	VPt		GN				jisjk:128512		
 コッカ	국가	N110			GN				jisjk:100382		
 コッカス	코카스	N110			GN				jisjk:100383		
-コック	콕	N110			GN				jisjk:100384		
 コック	요리사	N110	VFdVHn		GN				jisjk:358465		
+コック	콕	N110			GN				jisjk:100384		
 コック	콕	N130	QPN		GN				jisjk:370138		
 コックス	콕스	N130	QIDVGt		GN				jisjk:47032		
 コックス・リポート	콕스 리포트	N110	VSw		GN				jisjk:354583		
@@ -65621,7 +65618,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スムースとな	원활해&AL@	M428			GN				jisjk:148775		
 スムーズ	스무드	N110		Hh	GN				jisjk:49350		
 スムーズ	순조%A3@	G8U0			GN				jisjk:365544		
-スムーズな	스무스한	N110			GN				jisjk:113247		
+スムーズな	스무스한	N110		Nn	GN				jisjk:113247		
 スムーズに運	순조롭게 진행&C6@	G426			GN				jisjk:266152		
 スメクチック	스멕칭	N110			GN				jisjk:49351		
 スメグマ	치구	N110	VBp		GN				jisjk:130120		
@@ -70380,7 +70377,7 @@ ttt	ttt	K110			GN				jisjk:201744
 デザイン分け	디자인 분류	N110			GN				jisjk:162238		
 デザイン界	디자인계	N110	VBlVCp		GN				jisjk:131427		
 デザイン的	디자인적	N110			GN				jisjk:131428		
-デザイン的な	디자인적인	N110			GN				jisjk:152334		
+デザイン的な	디자인적인	N110		Nn	GN				jisjk:152334		
 デザイン課	디자인과	N110	VBl		GN				jisjk:131426		
 デザート	디저트	N110	VFd		GN				jisjk:51225		
 デザートコース	디저트 코스	N110			GN				jisjk:131421		
@@ -75203,7 +75200,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バエク	바에크	N130	QPN		GN				jisjk:366091		
 バカ	바보	N110	VHn		GN	881	||1 &&2 S+1== "じゃな" P+1== "7**"	「バカ」 뒤에 부정 표현 「じゃな」가 오면 ‘바보’를 고른다.	jisjk:103411		
 バカ	터무니없이	N110		Nn	GN	3326	||1 &&2 P+1== "7**8**" S+1!= "Lも"	バカ는 다음 말이 い형용사·형용동사이면 정도 부사 ‘터무니없이’를 고른다. も로 시작하는 말(もいいとこ) 앞은 아니다.	jisjk:342777		
-バカな	바보 같은	N110			GN				jisjk:152415		
+バカな	바보 같은	N110		Nn	GN				jisjk:152415		
 バカに	바보 취급&AV@	M429			GN				jisjk:261689		
 バカにならな	만만치 $D7@	H7U0			GN				jisjk:343843		
 バカみたい	바보%B3@	G8U0			GN				jisjk:343494		
@@ -84473,7 +84470,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ボーダープリント	보더 프린트	N110	VCp		GN				jisjk:134325		
 ボーダーライン	경계선	N110	VPl		GN				jisjk:56673		
 ボーダーレス	보더리스	N110			GN				jisjk:134326		
-ボーダーレスな	국경 없는	N110			GN				jisjk:152544		
+ボーダーレスな	국경 없는	N110		Nn	GN				jisjk:152544		
 ボーダーレスエコノミー	무국경 경제	N110	VMo		GN				jisjk:134327		
 ボーッと	멍해&AL@	M429		Dx	GN				jisjk:343125		
 ボーティエン	보티엔	N130	QPN		GN				jisjk:368255		
@@ -84699,7 +84696,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ポッド	포드	N110			GN				jisjk:56854		
 ポッドモール	소규모 쇼핑센터	N110	VBl		GN				jisjk:134469		
 ポップ	팝	N110			GN				jisjk:56855		
-ポップな	팝적인	N110			GN				jisjk:152550		
+ポップな	팝적인	N110		Nn	GN				jisjk:152550		
 ポップアップ	팝업	N110			IT				jisjk:262973		
 ポップアップメニュー	팝업 메뉴	N110			IT				jisjk:262974		
 ポップアート	팝 아트	N110			GN				jisjk:134470		
@@ -85135,7 +85132,7 @@ ttt	ttt	K110			GN				jisjk:201744
 マイナス要因	마이너스 요인	N110			BZ				jisjk:360898		
 マイナループ	마이너 루프	N110			GN				jisjk:57054		
 マイナー	마이너	N110			GN				jisjk:57050		
-マイナーな	마이너스적인	N110			GN				jisjk:152564		
+マイナーな	마이너한	N110		Nn	GN				jisjk:152564		
 マイナーチェンジ	부분 변경	N110	VMo		GN				jisjk:134569		
 マイナーバージョンアップ	마이너 버전 업	N110			IT				jisjk:263037		
 マイナーパワーサージ	마이너 파워 서지	N110			GN				jisjk:57051		
@@ -95118,7 +95115,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一方法	한 방법	N110			GN				jisjk:160956		
 一方的	일방적	I110			GN				jisjk:80336		
 一方的な	일방적인	E0H0			GN				jisjk:150194		
-一方的な	일방적인	N110			GN				jisjk:150531		
+一方的な	일방적인	N110		Nn	GN				jisjk:150531		
 一方的に	일방적으로	E300			GN				jisjk:122828		
 一方社油脂	잇포샤유지	I110	VGt		GN				jisjk:80334		
 一方社油脂工業	잇포샤 유지공업	I130	VGt		PN				jisjk:80335		
@@ -106943,7 +106940,7 @@ ttt	ttt	K110			GN				jisjk:201744
 不正利得	부정이득	N110			GN				jisjk:361551		
 不正利益	부정이익	N110			BZ				jisjk:361550		
 不正小切手	부정 수표	N110	VMo		BZ				jisjk:361546		
-不正常な	부정상적인	N110			GN				jisjk:151739		
+不正常な	부정상적인	N110		Nn	GN				jisjk:151739		
 不正手段	부정수단	N110			BZ				jisjk:361547		
 不正申告	부정신고	N110			BZ				jisjk:361549		
 不正直	부정직%A1@	G8L0			GN				jisjk:3072		
@@ -123093,7 +123090,7 @@ ttt	ttt	K110			GN				jisjk:201744
 体制固め	체제 굳히기	N110			GN				jisjk:151319		
 体力	체력	N110	UPc		GN				jisjk:35822		
 体力テスト	체력 테스트	N110	VRw		GN				jisjk:241085		
-体勢	몸의 자세	N110			GN				jisjk:35830		
+体勢	자세	N110			GN				jisjk:35830		
 体協	체육협회	N110	VBl		GN				jisjk:240804		
 体固め	누르기	N110	VRw	Hd	GN				jisjk:240792		
 体型	체형	N110			GN				jisjk:35852		
@@ -124749,7 +124746,7 @@ ttt	ttt	K110			GN				jisjk:201744
 俗学	속학	N110	USu		GN				jisjk:26998		
 俗念	속념	N110			GN				jisjk:26977		
 俗悪	속악	N110			GN				jisjk:26990		
-俗悪な	저질인	N110			GN				jisjk:151311		
+俗悪な	저질인	N110		Nn	GN				jisjk:151311		
 俗情	시정인심	N110			GN				jisjk:101128		
 俗才	속재	N110			GN				jisjk:240717		
 俗明院	조쿠묘인	N130	QCTVPl		GN				jisjk:305108		
@@ -126691,7 +126688,7 @@ ttt	ttt	K110			GN				jisjk:201744
 健康志向	건강지향	N110			GN				jisjk:350971		
 健康産業	건강산업	N110	QID		GN				jisjk:206888		
 健康的	건강적	N110	QHP		GN				jisjk:178289		
-健康的な	건강한	N110			GN				jisjk:151032		
+健康的な	건강한	N110		Nn	GN				jisjk:151032		
 健康的に	건강하게	E300			GN				jisjk:149109		
 健康美	건강미	I110			GN				jisjk:60734		
 健康茶	건강차	N110	VFd		GN				jisjk:178287		
@@ -131308,7 +131305,7 @@ ttt	ttt	K110			GN				jisjk:201744
 公田町	쿠덴쵸	N130	QCTVPl		GN				jisjk:290764		
 公田町	쿠뎀마치	N130	QCTVPl		GN				jisjk:290765		
 公的	공적	N110			GN				jisjk:6946		
-公的な	공적인	N110			GN				jisjk:151061		
+公的な	공적인	N110		Nn	GN				jisjk:151061		
 公的に	공적으로	E300			GN				jisjk:123067		
 公的介護保険	공적개호보험	N110			BZ				jisjk:348272		
 公的債務	공적채무	N110	VMo		BZ				jisjk:356927		
@@ -135260,7 +135257,7 @@ ttt	ttt	K110			GN				jisjk:201744
 分か	&K6@	M428	UTh	Ma	GN	706	||5 &&5 S-1== "無事" P-1== "8**" S-2== "が" P-3== "1**" D-2= "(이)가" &&2 U+0== "Lません" D+0= "&LS@" ||3 U-1== "Rも" U-1== "Rが" U-1== "Rは" U+0== "Rか" &&3 M+0== "57*" S+1== "い" P+1== "4**"	조사·의문·연결형 등의 문맥에서 '分か'를 '알다'로 고르되 'ません' 부정형에서는 '모르다'로 바꾼다.	jisjk:93149		
 分か	나&C4@	M444			GN				jisjk:265154		
 分か	알 수 &HN@	M448		Ke	GN	2954	||3 U+0== "ように" S-1== "が" &&3 U+0== "ます" P-1== "4**" U-1== "ことが"	分か는 어미가 ように이거나 앞말이 が인 경우와 ことが 뒤 정중형 문맥에서 알 수 있다로 고른다.	jisjk:340850		
-分か	&K6@	M428	XXXUTh	Ma	GN	3843	||4 &&2 ||2 U+0== "Lません" U+0== "ん" D+0= "&LS@" &&3 P-1!= "8**" S-2== "が" D-2= "(을)를" &&2 S-1== "が" D-1= "(을)를" &&2 M+0== "59*" Y+0= "1지 못하고"	分か의 부정 어미 문맥에서는 어간을 '모르다'로 바꾸고 일부 が를 '(을)를'로 고치며 59 계열 어미는 '-지 못하고'로 조정한다. (미발동: rare-context)	jisjk:347776		
+分か	&K6@	M428	XXXUTh	Ma	GN	3843	||4 &&2 ||2 U+0== "Lません" U+0== "ん" D+0= "&LS@" &&4 P-1!= "8**" P-1!= "4**" S-2== "が" D-2= "(을)를" &&2 S-1== "が" D-1= "(을)를" &&2 M+0== "59*" Y+0= "1지 못하고"	分か의 부정 어미 문맥에서는 어간을 '모르다'로 바꾸고 일부 が를 '(을)를'로 고치며 59 계열 어미는 '-지 못하고'로 조정한다. (미발동: rare-context)	jisjk:347776		
 分かけて	분걸려	A9H0			GN				jisjk:103500		
 分かち	구별	N110			GN				jisjk:267925		
 分かちあ	분담&AV@	M430			GN				jisjk:93150		
@@ -138460,7 +138457,7 @@ ttt	ttt	K110			GN				jisjk:201744
 劇界	연극계	N110	VPl		GN				jisjk:17295		
 劇痛	격통	N110			GN				jisjk:178879		
 劇的	극적	N110			GN				jisjk:7167		
-劇的な	극적인	N110			GN				jisjk:151040		
+劇的な	극적인	N110		Nn	GN				jisjk:151040		
 劇的に	극적으로	E300			GN				jisjk:123052		
 劇的シーン	극적인 장면	I110	VPl		GN				jisjk:63255		
 劇芸術協会	극예술협회	N110	VGt		GN				jisjk:206277		
@@ -148234,7 +148231,7 @@ ttt	ttt	K110			GN				jisjk:201744
 原出	하라데	N130	QCTVPl		GN				jisjk:321484		
 原分町	하루분쵸	N130	QCTVPl		GN				jisjk:321619		
 原初	원초	N110			GN				jisjk:30420		
-原初的な	원초적인	N110			GN				jisjk:151044		
+原初的な	원초적인	N110		Nn	GN				jisjk:151044		
 原判決	원판결	I110			GN				jisjk:79275		
 原判決中	원판결중	N110			GN				jisjk:161329		
 原別	하라베츠	N130	QCTVPl		GN				jisjk:321495		
@@ -164355,7 +164352,7 @@ ttt	ttt	K110			GN				jisjk:201744
 場席	좌석	N110	VBl		GN				jisjk:154210		
 場当たり	임기응변	I110	UTs		GN				jisjk:82221		
 場当たりな	임기응변의	E0H0			GN				jisjk:123616		
-場当たり的な	임기응변적인	N110			GN				jisjk:151696		
+場当たり的な	임기응변적인	N110		Nn	GN				jisjk:151696		
 場当り	임기응변	I110	UTs		GN				jisjk:82222		
 場当りな	임기응변의	E0H0			GN				jisjk:123617		
 場慣れ	익숙해&AL@	M417		Dx	GN				jisjk:94603		
@@ -165687,7 +165684,7 @@ ttt	ttt	K110			GN				jisjk:201744
 声音	음성	N110	USoQMUVBp		GN				jisjk:183174		
 声音	성음	N110	USoQMU		GN				jisjk:197149		
 声高	큰소리	N110			GN				jisjk:26590		
-声高な	목청을 돋운	N110			GN				jisjk:151103		
+声高な	목청을 돋운	N110		Nn	GN				jisjk:151103		
 声高に	소리 높여	K110			GN				jisjk:262986		
 声高に	소리 높여	K110			GN				jisjk:262987		
 声高らかに	소리 드높게	E300			GN				jisjk:344779		
@@ -167895,7 +167892,7 @@ ttt	ttt	K110			GN				jisjk:201744
 夢幻	몽환	N110			GN				jisjk:21986		
 夢幻	무겐	N130	VGt		GN				jisjk:21987		
 夢幻的	몽환적	N110			GN				jisjk:252997		
-夢幻的な	몽환적인	N110			GN				jisjk:151831		
+夢幻的な	몽환적인	N110		Nn	GN				jisjk:151831		
 夢心地	황홀한 기분	I110	UFl		GN				jisjk:69007		
 夢想	몽상	N110		Hd	GN				jisjk:21984		
 夢想家	몽상가	I110	VHn		GN				jisjk:69006		
@@ -183922,7 +183919,7 @@ ttt	ttt	K110			GN				jisjk:201744
 寝袋	침낭	N110	VRw		GN				jisjk:153990		
 寝装品	침장품	N110			GN				jisjk:236183		
 寝装店	침구점	N110	VBl		GN				jisjk:192802		
-寝覚めが悪	꿈자리가 사$G3@	H7U0			GN				jisjk:118331		
+寝覚めが悪	뒤가 개운치 $D7@	H7U0			GN				jisjk:118331		
 寝覚ノ床	네자메노토코	N130	VPl		GN				jisjk:219394		
 寝覚ノ床	네자메노토코	N130	VPl		GN				jisjk:219395		
 寝言	잠꼬대	N110	UTs		GN				jisjk:36649		
@@ -195602,7 +195599,7 @@ ttt	ttt	K110			GN				jisjk:201744
 巨頭会談	거두 회담	N110			GN				jisjk:174266		
 巨頭鯨	들쇠고래	N110	VAm		GN				jisjk:231950		
 巨額	거액	N110	VMo		GN				jisjk:15047		
-巨額な	거액인	N110			GN				jisjk:150986		
+巨額な	거액인	N110		Nn	GN				jisjk:150986		
 巨顔	큰 얼굴	N110			GN				jisjk:96445		
 巨魁	괴수	N110			GN				jisjk:15032		
 巨鯨	큰 고래	N110	VAm		GN				jisjk:174146		
@@ -199728,7 +199725,7 @@ ttt	ttt	K110			GN				jisjk:201744
 広吉松	히로요시마츠	N130	QCTVPl		GN				jisjk:325449		
 広名田	히로나다	N130	QCTVPl		GN				jisjk:325369		
 広告	광고	N110	UTs	Hd	GN				jisjk:16465		
-広告でし烈な	광고로 치열한	N110			GN				jisjk:151053		
+広告でし烈な	광고로 치열한	N110		Nn	GN				jisjk:151053		
 広告びら	광고지	I110			GN				jisjk:109193		
 広告主	광고주	N110	VHn		GN				jisjk:180212		
 広告会社	광고회사	N110			BZ				jisjk:354294		
@@ -207866,7 +207863,7 @@ ttt	ttt	K110			GN				jisjk:201744
 急テンポ	급템포	N110	USoQMU		GN				jisjk:173330		
 急ハンドル	급핸들	N110			GN				jisjk:173332		
 急ピッチ	급피치	N110	UMe		GN				jisjk:173334		
-急ピッチな	급피치한	N110			GN				jisjk:150974		
+急ピッチな	급피치한	N110		Nn	GN				jisjk:150974		
 急ブレーキ	급브레이크	N110	VPeVTp		GN				jisjk:173336		
 急上昇	급상승	N110		Hd	GN				jisjk:173112		
 急伸	급성장	N110		Hd	GN				jisjk:17584		
@@ -208227,7 +208224,7 @@ ttt	ttt	K110			GN				jisjk:201744
 恒久南	츠네히사미나미	N130	QCTVPl		GN				jisjk:309758		
 恒久減税	항구 감세	N110			BZ				jisjk:360686		
 恒久的	항구적	N110			GN				jisjk:179977		
-恒久的な	항구적인	N110			GN				jisjk:151050		
+恒久的な	항구적인	N110		Nn	GN				jisjk:151050		
 恒之	츠네유키	N130	QPN	Wb	GN				jisjk:13352		
 恒二郎	츠네지로우	N130	QPN	Wb	GN				jisjk:357073		
 恒二郎	코우지로우	N130	QPN	Wb	GN				jisjk:357262		
@@ -250196,7 +250193,7 @@ ttt	ttt	K110			GN				jisjk:201744
 正希	마사키	N130	QPN	Wa	GN				jisjk:340499		
 正常	정상적%D4@	G8L0			GN				jisjk:3624		
 正常	정상	N110		Or	GN				jisjk:3625		
-正常な	정상적인	N110			GN				jisjk:151283		
+正常な	정상적인	N110		Nn	GN				jisjk:151283		
 正常に	정상적으로	E300			GN				jisjk:123279		
 正常人	정상인	N110	VHn		GN				jisjk:197627		
 正常価格	정상 가격	N110	VMo		GN				jisjk:238557		
@@ -252913,7 +252910,7 @@ ttt	ttt	K110			GN				jisjk:201744
 気づ	눈치&Ca@	M411			GN				jisjk:92218		
 気づ	정신이 &L4@	M421			GN				jisjk:341395		
 気づかしめ	알아차리게 &C6@	M427			GN				jisjk:141779		
-気づかられたような	알게 된 것 같은	N110			GN				jisjk:150948		
+気づかられたような	알게 된 것 같은	N110		Nn	GN				jisjk:150948		
 気づきにく	깨닫기 어$G7@	H7N0			GN				jisjk:120290		
 気づま	비위	N110			GN				jisjk:172515		
 気ど	뽐&A6@	M418			GN				jisjk:92219		
@@ -268389,7 +268386,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無理に	억지로	E311			GN				jisjk:355885		
 無理にでも	무리해서라도	E300			GN				jisjk:375118		
 無理はめ	억지로 끼&AI@	M4U9			GN				jisjk:143222		
-無理やり	억지로	N110			GN				jisjk:344978		
+無理やり	억지로	N110		Nn	GN				jisjk:344978		
 無理を承知で	무리인줄 알면서	A9D0			GN				jisjk:374198		
 無理を申しあげ	무리한 말씀을 드&AA@	M427		Pn	GN				jisjk:372137		
 無理嵌め	억지로 끼&AI@	M4U9			GN				jisjk:143219		
@@ -272093,7 +272090,7 @@ ttt	ttt	K110			GN				jisjk:201744
 狭軌	협궤	N110			GN				jisjk:39109		
 狭野茅上娘子	사노노치가미노오토메	N110	VHn		GN				jisjk:232666		
 狭量	협량	N110			GN				jisjk:39110		
-狭量な	도량이 좁은	N110			GN				jisjk:150984		
+狭量な	도량이 좁은	N110		Nn	GN				jisjk:150984		
 狭長	협장	N110		Dd	GN				jisjk:173769		
 狭間	틈	N110	VPl		GN				jisjk:39108		
 狭間	하사마	N130	QCTVPl		GN				jisjk:319986		
@@ -281787,7 +281784,7 @@ ttt	ttt	K110			GN				jisjk:201744
 相互作用	상호작용	I110			GN				jisjk:110838		
 相互依存	상호의존	I110		Hd	GN				jisjk:110828		
 相互依存的	상호의존적	N110			GN				jisjk:200104		
-相互依存的な	상호의존적인	N110			GN				jisjk:151297		
+相互依存的な	상호의존적인	N110		Nn	GN				jisjk:151297		
 相互保険	상호보험	N110	VMo		GN				jisjk:240031		
 相互信用金庫	소고신용금고	N120	VMoVPl		GN				jisjk:200132		
 相互台	소우고다이	N130	QCTVPl		GN				jisjk:304628		
@@ -281795,7 +281792,7 @@ ttt	ttt	K110			GN				jisjk:201744
 相互扶助	상호부조	N110			GN				jisjk:200135		
 相互扶助方式	상호 부조 방식	N110	UMn		GN				jisjk:354351		
 相互扶助的	상호 부조적	N110			GN				jisjk:200137		
-相互扶助的な	상호 부조적인	N110			GN				jisjk:151299		
+相互扶助的な	상호 부조적인	N110		Nn	GN				jisjk:151299		
 相互接続	상호 접속	N110		Hd	BZ				jisjk:350822		
 相互援助條約	상호원조조약	I110			GN				jisjk:110837		
 相互援助資金制度	상호원조금 제도	N110	UMn		BZ				jisjk:359412		
@@ -287018,7 +287015,7 @@ ttt	ttt	K110			GN				jisjk:201744
 社会指標	사회지표	N110			GN				jisjk:234474		
 社会改良主義	사회 개량 주의	N110			GN				jisjk:234458		
 社会政策	사회정책	I110			GN				jisjk:110175		
-社会政策的な	사회 정책적인	N110			GN				jisjk:151173		
+社会政策的な	사회 정책적인	N110		Nn	GN				jisjk:151173		
 社会教育	사회 교육	N110			GN				jisjk:188726		
 社会教育主事	사회교육주사	N110	VHn		GN				jisjk:234461		
 社会教育法	사회교육법	N110	ULw		GN				jisjk:234462		
@@ -293427,7 +293424,7 @@ ttt	ttt	K110			GN				jisjk:201744
 端町	카와바타쵸	N130	QCTVPl		GN				jisjk:286928		
 端登	하타노보리	N130	QCTVPl		GN				jisjk:320350		
 端的	단적	N110			GN				jisjk:7361		
-端的な	단적인	N110			GN				jisjk:151348		
+端的な	단적인	N110		Nn	GN				jisjk:151348		
 端端	사소한 부분	N110	VPl		GN				jisjk:18638		
 端緒	단서	N110			GN				jisjk:18645		
 端縁	단테두리	N110			GN				jisjk:164682		
@@ -299719,7 +299716,7 @@ ttt	ttt	K110			GN				jisjk:201744
 結果として	결과로서	E300			GN	1207	||1 S-1== "の"	結果として는 앞말이 の이면 결과로서로 고른다. (미발동: rare-context)	jisjk:116714		
 結果を収め得	결과를 올릴 수 &HN@	M447		PnMa	GN	1581	||1 &&2 U+0== "Lません" D+0= "결과를 올릴 수 &M9@"	어미가 ません으로 시작하면 結果を収め得를 결과를 올릴 수 없다로 바꾼다. (미발동: rare-word)	jisjk:148230		
 結果的	결과적	N110			GN				jisjk:177864		
-結果的な	결과적인	N110			GN				jisjk:151027		
+結果的な	결과적인	N110		Nn	GN				jisjk:151027		
 結果的に	결과적으로	E300			GN				jisjk:123049		
 結果論	결과론	N110			GN				jisjk:177870		
 結核	결핵	N110	UTi		GN				jisjk:15332		
@@ -299924,7 +299921,7 @@ ttt	ttt	K110			GN				jisjk:201744
 統一政策金利	통일 정책 금리	N110			BZ				jisjk:349984		
 統一新羅時代	통일신라시대	N110	UMe		GN				jisjk:203273		
 統一的	통일적	I110			GN				jisjk:87380		
-統一的な	통일적인	N110			GN				jisjk:151462		
+統一的な	통일적인	N110		Nn	GN				jisjk:151462		
 統一相	통일부장관	N110	UQf		GN				jisjk:372173		
 統一科学	통일 과학	N110			GN				jisjk:245243		
 統一通貨	통일 통화	N110			BZ				jisjk:350000		
@@ -301522,7 +301519,7 @@ ttt	ttt	K110			GN				jisjk:201744
 緩み	해이해짐	N110			GN				jisjk:10586		
 緩み出し	이완	I110			GN				jisjk:78691		
 緩み方向	이완 방향	I110			GN				jisjk:78690		
-緩め	느슨하게&AV@	M437			GN				jisjk:94196		
+緩め	느슨하게 &AV@	M437			GN				jisjk:94196		
 緩やか	완만%A1@	G8L0			GN				jisjk:3413		
 緩下剤	완하제	I110			GN				jisjk:78692		
 緩化	완화	N110		Hd	GN				jisjk:29751		
@@ -349874,7 +349871,7 @@ ttt	ttt	K110			GN				jisjk:201744
 陽気	날씨	N110			GN				jisjk:3355		
 陽気	쾌활%A1@	G8L0			GN				jisjk:373997		
 陽気で	명랑하고	N110		Nn	GN				jisjk:151894		
-陽気な	명랑한	N110			GN				jisjk:151895		
+陽気な	명랑한	N110		Nn	GN				jisjk:151895		
 陽気に	쾌활하게	E300			GN				jisjk:149565		
 陽気に騷	쾌활하게 떠&L4@	M412			GN				jisjk:94034		
 陽炎	아지랑이	N110	VFr		GN				jisjk:28917		
@@ -353569,7 +353566,7 @@ ttt	ttt	K110			GN				jisjk:201744
 非但	비단	N110			GN				jisjk:24825		
 非公募債	비공모채	N110	VMo		GN				jisjk:353604		
 非公式	비공식	I110			GN				jisjk:71597		
-非公式な	비공식적인	N110			GN				jisjk:151706		
+非公式な	비공식적인	N110		Nn	GN				jisjk:151706		
 非公認	비공인	I110			GN				jisjk:71598		
 非公開	비공개	I110			GN				jisjk:71596		
 非凡	비범%A1@	G8L0			GN				jisjk:3139		
