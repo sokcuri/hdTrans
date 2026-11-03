@@ -323,8 +323,15 @@ bool Item::StandsAlone() const {
     bool closed = n == tokenizer::kTypeEnd && !w->settings.wrapped;
     if (n == tokenizer::kTypeSymbol && (detail->nextText.starts_with("…") || detail->nextText.starts_with("‥"))) {
         std::string_view after = detail->nextText;
-        while (after.starts_with("…") || after.starts_with("‥")) after.remove_prefix(std::string_view("…").size());
-        if (const int k = tokenIndex + 2; after.empty() && k < w->TokenCount()) after = w->Tok(k).text;
+        while (after.starts_with("…") || after.starts_with("‥") || after.starts_with("　")) after.remove_prefix(std::string_view("…").size());
+        while (after.starts_with(" ")) after.remove_prefix(1);
+        for (int k = tokenIndex + 2; after.empty() && k < w->TokenCount(); k++) {
+            const tokenizer::TokenView token = w->Tok(k);
+            std::string_view piece = token.text;  // past spaces
+            while (piece.starts_with(" ")) piece.remove_prefix(1);
+            while (piece.starts_with("　")) piece.remove_prefix(std::string_view("　").size());
+            after = piece;
+        }
         closed = true;
         const std::initializer_list<std::string_view> goesOn =
             detail->cls == kDetailKeiyo ? std::initializer_list<std::string_view>{"い", "く", "か", "け", "さ", "そう", "すぎ"}
