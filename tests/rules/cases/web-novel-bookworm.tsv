@@ -1,0 +1,30 @@
+# 규칙: GRM-3469, LEX-4028
+rule	input	expected	kind	layer
+cx:amari-not:10	あまり好きではない。	별로 좋아하지 않는다.	fix	rewrites
+cx:amari-not:10	あまり文明的ではない国か、過去にタイムスリップでもしたのだろうか。	has:별로 문명적이지	fix	rewrites
+cx:amari-not:10	そういうのあまり好きじゃないの。	has:별로 좋아하지 않아	fix	rewrites
+cx:amari-not:10	あまり大きいと困る。	has:너무 크면	keep	rewrites
+cx:amari-not:10	あまり気にするな。	너무 신경 쓰지 마.	keep	rewrites
+cx:amari-not:10	「ゆ、雪があまり積もらないといいな」	has:너무 쌓이지 않으면	keep	rewrites
+cx:amari-not:10	あまりジロジロ見ないでよ。	has:너무 빤히 보지 마	keep	rewrites
+cx:amari-not:20	一定のリズムで続いてて、とても寝ていられない。	has:도저히 자고 있을 수 없다	fix	rewrites
+cx:amari-not:20	とても信じられない話だ。	도저히 믿을 수 없는 이야기다.	fix	rewrites
+cx:amari-not:20	とても綺麗だ。	무척 예쁘다.	keep	rewrites
+cx:novel-fixes-2:570	「本の数を減らせって何度も言ったのに！」って、泣いて怒っているに違いない。	has:말했는데!」라고, 울어	fix	rewrites
+cx:novel-fixes-2:570	「好き」って、どういう意味？	has:「좋아」는,	keep	rewrites
+cx:novel-fixes-2:580	眉を寄せる。	미간을 찌푸린다.	fix	rewrites
+cx:novel-fixes-2:580	客を寄せる。	!rule:cx:novel-fixes-2:580	keep	rewrites
+cx:novel-fixes-2:585	わたしは小さく呻きながら眉をきつく寄せた。	has:미간을 잔뜩 찌푸렸다	fix	rewrites
+cx:novel-fixes-2:585	眉を少し寄せた。	!rule:cx:novel-fixes-2:585	keep	rewrites
+cx:novel-fixes-2:586	眉を少し寄せた。	미간을 조금 찌푸렸다.	fix	rewrites
+cx:novel-fixes-2:586	身を寄せた。	!rule:cx:novel-fixes-2:586	keep	rewrites
+cx:novel-fixes-2:590	こんな栄養失調っぽい小さな子どもの手とは違う。	has:손과는 다르다	fix	rewrites
+cx:novel-fixes-2:590	私とは違う。	나와는 다르다.	keep	rewrites
+cx:novel-fixes-2:600	視界に映ったのは痩せこけた細くて小さな子どもの手だった。	has:바싹 여윈	fix	rewrites
+cx:novel-fixes-2:600	痩せた男	!rule:cx:novel-fixes-2:600	keep	rewrites
+dict:i:2476	意味がわからない女性の言葉を耳にすると同時に	has:말을 듣는 것과 동시에	fix	lookup
+dict:i:2476	噂を耳にした。	소문을 들었다.	fix	lookup
+dict:w:354	熱のせいでかすれているはずなのに	has:갈라지고 있을 텐데	fix	lookup
+dict:jisjk:91792	見慣れた自分のものではない。	has:눈에 익숙한	fix	lookup
+dict:w:31057	わたしはゆっくりと重い瞼を開けた。	has:눈꺼풀을 들어 올렸다	fix	lookup
+sense:伸びる	自分の額に向かって伸びてくる指先が、黄色く染まっている。	has:손가락끝이	keep	senses

@@ -1,0 +1,30 @@
+# 규칙: LEX-4029
+rule	input	expected	kind	layer
+cx:novel-fixes-2:610	（もう三か月かあ、おやじ、飯食ってんだろうか）	has:3개월인가	fix	rewrites
+cx:novel-fixes-2:610	行くか？	!rule:cx:novel-fixes-2:610	keep	rewrites
+cx:novel-fixes-2:620	部屋の主は、豪商の娘かなにかと予想される。	has:딸이나 뭔가로 예상된다	fix	rewrites
+cx:novel-fixes-2:620	いいかな。	!rule:cx:novel-fixes-2:620	keep	rewrites
+cx:novel-fixes-2:630	それが不幸かどうかは相手にもよるが、	has:상대에 따라서도 다르지만,	fix	rewrites
+cx:novel-fixes-2:630	夜になる。	!rule:cx:novel-fixes-2:630	keep	rewrites
+cx:novel-fixes-2:635	それは相手にもよる。	has:상대에 따라 다르다.	fix	rewrites
+cx:novel-fixes-2:635	よるの散歩	!rule:cx:novel-fixes-2:635	keep	rewrites
+cx:novel-fixes-2:640	所詮、井の中の蛙だったのであろう。	has:우물 안 개구리였을 것이다	fix	rewrites
+cx:novel-fixes-2:640	あろうことか	!rule:cx:novel-fixes-2:640	keep	rewrites
+cx:novel-fixes-2:650	好きできたわけではないが、お給金はいただいている	has:좋아서 온 것은 아니지만	fix	rewrites
+cx:novel-fixes-2:650	料理ができた。	!rule:cx:novel-fixes-2:650	keep	rewrites
+cx:novel-fixes-2:660	この数日後、猫猫はある怪奇の真相を暴くことになる。	has:어떤 괴기의 진상을	fix	rewrites
+cx:novel-fixes-2:660	移動先にある町。	이동할 곳에 있는 마을.	keep	rewrites
+cx:novel-fixes-2:660	なんかお菓子ある？	뭔가 과자 있어?	keep	rewrites
+cx:novel-fixes-2:660	力のある人	!rule:cx:novel-fixes-2:660	keep	rewrites
+dict:jisjk:143367	薬師としてそれなりの生活をしていた猫猫にははた迷惑な話なのだ。	has:민폐인 이야기	fix	lookup
+dict:jisjk:342041	はやく仕事終わらせよう	has:빨리 일 끝내자	fix	lookup
+dict:w:31059	絢爛の花々に気圧され、鼻っ柱を折られ	has:찬란한 꽃들에	fix	lookup
+dict:w:31061	扉を開け無愛想な返事をするのは、部屋付の侍女だった。	has:방 담당의 시녀	fix	lookup
+dict:w:31062	宮内に入る前は誉めそやされた美しい容姿であるが	has:칭송된	fix	lookup
+phrase:おいといて	「そこにおいといて」	「거기에 놔 둬」	fix	builtin-phrase
+phrase:男とも女ともつかない	男とも女ともつかない召使たちが洗濯物を洗っていた。	has:남자인지 여자인지 모를	fix	builtin-phrase
+cx:novel-fixes-2:632	操作するギアにもよるけど主に	has:기어에 따라 다르지만 주로	fix	rewrites
+cx:novel-fixes-2:632	よるが更けた。	!rule:cx:novel-fixes-2:632	keep	rewrites
+cx:novel-fixes-2:633	「店にもよると思うけど、」	has:가게에 따라 다르다고 생각하지만	fix	rewrites
+cx:novel-fixes-2:633	よると、	!rule:cx:novel-fixes-2:633	keep	rewrites
+cx:novel-fixes-2:610	提督、頑張ってるかあ？	!rule:cx:novel-fixes-2:610	keep	rewrites
