@@ -1308,7 +1308,10 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     } else if ((afterParticle && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0)) ||
                (afterWord && (first.intj || first.keyLen < 3)) ||
                (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
-                !MimeticAfterWord(first))) {
+                !MimeticAfterWord(first)) ||
+               // A particle after a closing bracket that a dictionary word goes on from past the first
+               // sound is the particle of the quoted word (「メニュー」はわざわざ, not はわ ざわ; spec GRM-3668).
+               (runStart && In(prev, U"」』）)") && In(r, kParticles) && LongerWordAt(p + 1, first.end - p - 1))) {
         return {};
     }
     while (!chain.empty()) {
