@@ -436,6 +436,8 @@ constexpr NamedFeature kFeatures[] = {
     // The line uses the tic ぽい (PoiLine).
     {"poi-line", [](Flusher& f, const Item*) { return f.w.settings.poiTic; }},
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
+    // Earlier text on the line takes leave (word.leave-taking): a greeting after it parts.
+    {"after-leave-taking", [](Flusher& f, const Item* it) { return AfterLeaveTaking(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"after-space", [](Flusher& f, const Item* it) {

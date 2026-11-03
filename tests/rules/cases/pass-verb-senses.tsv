@@ -17,7 +17,7 @@ cx:go-not-say:10	王都にいった。	왕도에 갔다.	fix	rewrites
 cx:go-not-say:10	公園にいく	공원에 간다	keep	rewrites
 cx:go-not-say:10	駅までいく	역까지 간다	keep	rewrites
 cx:go-not-say:10	異世界にいった。	이세계에 갔다.	fix	rewrites
-cx:go-not-say:10	正直にいって	정직하게 말해	keep	rewrites
+cx:go-not-say:10	正直にいって	솔직하게 말해	keep	rewrites
 cx:go-not-say:10	学校までいった。	rule:cx:go-not-say:10=&A1@	fix	rewrites
 cx:go-not-say:10	巷にいう噂	항간에 말하는 소문	fix	defaults
 cx:go-not-say:10	町にいわない	마을에 말하지 않는다	fix	defaults

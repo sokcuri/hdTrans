@@ -8,7 +8,7 @@ cx:stype-todemo:10	「あっはは！面白いなぁ。逃げられるとでも�
 cx:stype-todemo:10	「この俺が負けるとでも？」	「이 내가 질 줄 알았어?」	fix	rewrites
 cx:stype-todemo:10	「そんな話を信じるとでも!?」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
 cx:stype-todemo:10	「黙って待つとでも」	rule:cx:stype-todemo:10=3 줄 알았어	fix	rewrites
-cx:stype-todemo:10	「だいたい、彼女が学校にチクるとでも思ってるの？」	「대체로, 그녀가 학교에 고자질한다고 생각해?」	keep	rewrites
+cx:stype-todemo:10	「だいたい、彼女が学校にチクるとでも思ってるの？」	「애초에, 그녀가 학교에 고자질한다고 생각해?」	keep	rewrites
 cx:stype-todemo:10	「あんたは彼女が死ぬとでも思ってるの？」	!rule:cx:stype-todemo:10	keep	rewrites
 cx:stype-todemo:10	我が索敵機から逃げられるとでも思ったか！	!rule:cx:stype-todemo:10	keep	rewrites
 cx:stype-todemo:10	まるで自分の方が傷つけられたとでも言うように。	!rule:cx:stype-todemo:10	keep	rewrites

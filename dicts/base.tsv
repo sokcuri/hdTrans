@@ -36466,7 +36466,7 @@ ttt	ttt	K110			GN				jisjk:201744
 なんやかんやで	이래저래	E300			GN				jisjk:149416		
 なんら	어떤	E300			GN				jisjk:363716		
 なんら	아무런	E300		Zn	GN				jisjk:363717		
-なんらかの	하등의	C0D1			GN				jisjk:4601		
+なんらかの	어떤	C0D1			GN				jisjk:4601		
 なんらの	아무런	E0H0			GN				jisjk:150224		
 なんらの	아무런	E0H0			GN				jisjk:150250		
 なんらの	아무런	E0H0			GN				jisjk:150278		
@@ -95121,7 +95121,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一方通行的	일방통행적%D4@	G8U0			GN				jisjk:119370		
 一方高	잇포코	I110	QCT		GN				jisjk:80333		
 一族	일족	N110	VHn		GN				jisjk:31538		
-一族郎党	일족의 무리들	N110	VHn		GN				jisjk:228393		
+一族郎党	일족과 가신	N110	VHn		GN				jisjk:228393		
 一旗	깃발 하나	N110			GN				jisjk:31447		
 一日	하루	N110	UMe		GN				jisjk:116462		
 一日	1일	N110			GN	1152	||3 G-1== "Ct" S-1== "R月" &&2 S-1== "は" ||6 S-2== "きょう" S-2== "今日" S-2== "あした" S-2== "明日" S-2== "あさって" S-2== "おととい"	조수사·月로 끝나는 말 뒤나 오늘·내일 같은 날짜 표현의 は 뒤에 오는 一日을 '1일'로 고른다. (미발동: rare-context)	jisjk:116463		
@@ -112856,7 +112856,7 @@ ttt	ttt	K110			GN				jisjk:201744
 乙女	오토메	N130	QCTVPl		GN				jisjk:280360		
 乙女子	소녀	N110	VHn		GN				jisjk:165728		
 乙女座	처녀자리	I130			GN				jisjk:103902		
-乙女心	아가씨의 마음	I110	UFlVQw		GN				jisjk:79665		
+乙女心	소녀의 마음	I110	UFlVQw		GN				jisjk:79665		
 乙女新田	오토메신덴	I130	QCTVPl		GN				jisjk:280361		
 乙女浜	오토메하마	N130	QCTVPl		GN				jisjk:280362		
 乙女高原	오토메 고원	N110	VPl		GN				jisjk:212892		
@@ -204188,7 +204188,7 @@ ttt	ttt	K110			GN				jisjk:201744
 後学	후학	N110			GN				jisjk:40042		
 後孫	후손	N110	VHn		GN				jisjk:40015		
 後室	미망인	N110	VHnVQwUQf		GN				jisjk:40020		
-後宮	후궁	N110	UAqVQw		GN				jisjk:39982		
+後宮	후궁	N110	UAqVQwVPl		GN				jisjk:39982		
 後宮虎郎	우시로쿠 도라오	I110	QPN		GN				jisjk:89955		
 後家	미망인	N110	VQwVHnUQf		GN				jisjk:39975		
 後家を立て	수절&AV@	M427			GN				jisjk:119742		
@@ -215546,7 +215546,7 @@ ttt	ttt	K110			GN				jisjk:201744
 挙げさせてもら	예를 들어 &AY@	M420			GN				jisjk:139970		
 挙げられ	들고 &HN@	M427			GN	1454	||1 &&3 S-1== "などが" D+0= "들 수 &HN@" D-1= "등을"	앞에 などが가 오면 挙げられ를 들 수 있다로 바꾸고 앞말을 등을로 바꾼다. (미발동: rare-context)	jisjk:140004		
 挙げれ	올리&AE@	M447			GN				jisjk:263993		
-挙げ句	끝구	I110			GN				jisjk:105665		
+挙げ句	끝	I110			GN				jisjk:105665		
 挙げ句の果て	결국	N110			GN				jisjk:150382		
 挙って	빠짐없이	E300			GN				jisjk:123081		
 挙例	거례	N110			GN				jisjk:15067		
@@ -248106,7 +248106,7 @@ ttt	ttt	K110			GN				jisjk:201744
 横当島	요코아테지마	I110	QCT		GN				jisjk:89832		
 横志多	요코시다	N130	QCTVPl		GN				jisjk:337503		
 横志田	요코시다	N130	QCTVPl		GN				jisjk:337504		
-横恋慕	기혼자나 약혼한 사람을 연모함	N110			GN				jisjk:255234		
+横恋慕	남의 짝을 넘봄	N110			GN				jisjk:255234		
 横戸	요코도	N130	QCTVPl		GN				jisjk:337571		
 横戸台	요코도다이	N130	QCTVPl		GN				jisjk:337575		
 横戸町	요코도쵸	N130	QCTVPl		GN				jisjk:337576		
@@ -274660,7 +274660,7 @@ ttt	ttt	K110			GN				jisjk:201744
 生保	쇼보	N130	QCTVPl		GN				jisjk:300944		
 生倉	이쿠라	N130	QPN	Wa	GN				jisjk:8440		
 生倉	이쿠라	N130	QCTVPl		GN				jisjk:271669		
-生傷	새 상처	N110	UTi		GN				jisjk:25979		
+生傷	생채기	N110	UTi		GN				jisjk:25979		
 生元素	생원소	N110			GN				jisjk:238415		
 生兵法	서투른 병법	I110	VTw		GN				jisjk:73760		
 生写し	꼭 닮음	I110			GN				jisjk:73762		
@@ -353926,7 +353926,7 @@ ttt	ttt	K110			GN				jisjk:201744
 鞆奥	도모오쿠	N130	VPl		GN				jisjk:218524		
 鞆浦	토모우라	N130	QCTVPl		GN				jisjk:312160		
 鞆町	토모쵸	N130	QCTVPl		GN				jisjk:312187		
-鞍	말안장	N110	VPeVAm		GN				jisjk:176463		
+鞍	말안장	N110	VPe		GN				jisjk:176463		
 鞍	안	N110		On	GN				jisjk:259672		
 鞍上	말안장	N110			GN				jisjk:101654		
 鞍下	등심	N110	VAmVFd		GN				jisjk:176495		

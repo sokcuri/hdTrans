@@ -83,6 +83,9 @@ bool OpensLine(const Worker& w, const Item* it);
 // Whether marks of mark.restart (…, ―) stand right before the item and some text before them: the
 // item restarts what was being said (私が…私が). Not at the start of a line (grammar.cpp).
 bool AfterRestart(const Worker& w, const Item* it);
+// Whether the text before the item on its line holds a word of taking leave (word.leave-taking:
+// ありがとうございました, お世話になりました, 失礼します) (grammar.cpp).
+bool AfterLeaveTaking(const Worker& w, const Item* it);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
 // The target of the dictionary verb whose passive surface is (書かれ 書 쓰다, 見られ 見 보다), its
