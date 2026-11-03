@@ -309,16 +309,20 @@ bool Item::RunDakeiyoCase8Query() {
 // Of the adjectives only the し stems qualify, which are also the old terminal form;
 // the others are cut-off forms whose last kana is a verb ending or a particle
 // (試してみた, ではな). An adjectival-noun stem ending in な is a cut-off ない; one
-// ending in みたい is left to MitaiLike.
+// ending in みたい is left to MitaiLike, and よう alone is the call (よう 요우), not 様.
 bool Item::StandsAlone() const {
     const std::string_view surface = group->surface;
     if (detail->cls == kDetailKeiyo ? !surface.ends_with(kJaShi)
-                                    : surface.ends_with(kJaNa) || surface.ends_with(kJaMitai)) {
+                                    : surface.ends_with(kJaNa) || surface.ends_with(kJaMitai) || surface == kJaYou) {
         return false;
     }
     if (start + group->length != static_cast<int>(text.size())) return false;
-    if (const int n = detail->nextType; n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
-    if (const int p = detail->ClassifyTrailingPunctuation({}); p < 2 || p > 4) return false;
+    // The end of the text or line, or an ellipsis, ends the sentence too (かわいそう…, すてき).
+    const int n = detail->nextType;
+    const bool closed = n == tokenizer::kTypeEnd ||
+                        (n == tokenizer::kTypeSymbol && (detail->nextText.starts_with("…") || detail->nextText.starts_with("‥")));
+    if (!closed && n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
+    if (const int p = detail->ClassifyTrailingPunctuation({}); !closed && (p < 2 || p > 4)) return false;
     if (start > 0) {
         if (!text::IsPunct(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return false;
     } else if (tokenIndex > 0) {
