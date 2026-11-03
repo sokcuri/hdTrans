@@ -288,3 +288,17 @@ cx:count-units:91	二足歩行	2족 보행	keep	rewrites
 cx:count-what:75	靴を何足持ってる？	구두를 몇 켤레 가지고 있어?	fix	rewrites
 cx:count-what:75	靴を三足持ってる。	구두를 세 켤레 가지고 있다.	keep	rewrites
 cx:count-what:20	何空気読んでんの	무엇 공기 읽고 있어	keep	rewrites
+cx:tai-count:50	アレンが一体知っているのか。	알렌이 도대체 알고 있는 건가.	keep	rewrites
+cx:tai-count:50	クロエが一体……	클로이가 도대체……	keep	rewrites
+cx:tai-count:50	動機が一体……	동기가 도대체……	keep	rewrites
+cx:tai-count:50	鉄骨が一体倒れた。	철골이 도대체 쓰러졌다.	keep	rewrites
+cx:tai-count:50	少女は一体分かっているのか。	소녀는 도대체 알고 있는 건가.	keep	rewrites
+cx:tai-count:51	ゴーレム三体が現れた。	골렘 세 마리가 나타났다.	fix	rewrites
+cx:tai-count:50	魔物が一体ある。	마물이 한 마리 있다.	fix	rewrites
+cx:tai-count:45	人形が一体動いた。	인형이 한 개 움직였다.	fix	rewrites
+cx:tai-count:45	この人形は一体動いているのか。	이 인형은 도대체 움직이고 있는 건가.	keep	rewrites
+cx:count-units:53	ケーキを四切れに分けた。	케이크를 사등분으로 나누었다.	keep	rewrites
+cx:count-units:53	ケーキを四切れ食べた。	케이크를 네 조각 먹었다.	fix	rewrites
+cx:count-units:38	ケーキを八切れに分けた。	케이크를 팔등분으로 나누었다.	keep	rewrites
+cx:count-units:130	花が二輪。	꽃이 두 송이.	fix	rewrites
+cx:count-units:135	花が三輪！	꽃이 세 송이!	fix	rewrites
