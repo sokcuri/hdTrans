@@ -36,7 +36,7 @@ normalize:spelling-variant	今日も何事も無くて、本当に良かった�
 normalize:spelling-variant	「何事も先手を打って損することはない」	「아무 일도 선수를 쳐 손해 볼 일은 없다」	keep	normalize
 normalize:spelling-variant	「大丈夫大丈夫、ただの考え事だから」	「괜찮아 괜찮아, 그냥 생각이니까」	keep	normalize
 normalize:spelling-variant	しれー、わたしに隠し事とかよくない。	사령관님, 나에게 비밀사항이라든지 좋지 않다.	keep	normalize
-normalize:spelling-variant	ちょっとした頼み事があるのだけれど、	약간의 부탁일이 있는데,	keep	normalize
+normalize:spelling-variant	ちょっとした頼み事があるのだけれど、	약간의 부탁이 있는데,	keep	normalize
 normalize:spelling-variant	魔学という力を持つって事ですからね。	마학이라는 힘을 가진다는 것이니까요.	keep	normalize
 normalize:spelling-variant	＜たくさんの人の思いを知るって事だ＞	<많은 사람의 생각을 안다는 것이다>	keep	normalize
 normalize:spelling-variant	オレの勝ちって事で、文句ないよな。	내 승리는 일로, 불만 없지.	keep	normalize
@@ -53,7 +53,7 @@ normalize:spelling-variant	私の事丈博さんから聞いてませんか？	�
 cx:novel-fixes-4:223	私に出来る事はない訳で。	has:할 수 있는 일은 없는	keep	rewrites
 cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총격당하고 있는 것도 깨닫지	fix	rewrites
 cx:novel-fixes-4:221	もうろくに話す事もないだろう	has:이야기하는 일도 없을	keep	rewrites
-cx:novel-fixes-4:221	その輝きはくすぶる事もなく	has:일도 없고	keep	rewrites
+cx:novel-fixes-4:221	その輝きはくすぶる事もなく	has:일도 없이	keep	rewrites
 cx:novel-fixes-4:222	何か気になる事でも～？	has:신경 쓰이는 일이라도	keep	rewrites
 normalize:spelling-variant	俺はダストボックス行きって事になった	lacks:행이라는 것이	keep	normalize
 normalize:spelling-variant	自分がまだ４歳だったと言う事を思い出し	has:4세였다는 사실을	keep	normalize
