@@ -37,7 +37,7 @@ dict:permission:1	「失礼しました。あなたに怪我がなくてよか�
 dict:permission:1	アレは使うことがなくてよかったよ。	저것은 쓰는 것이 없어서 다행이었어.	fix	local
 dict:permission:1	僕は、みんなの列を飛びださなくてよかったと自分に言い聞かせた。	나는, 모두의 열을 튀어나오지 않아서 다행이었다고 자신에게 타일렀다.	fix	local
 dict:permission:1	「お、ログアウトしてなくてよかった！」	「오, 로그아웃하지 않아서 다행이야!」	fix	local
-dict:permission:2	おれは彼女いなくて良かった	나는 그녀 없어서 다행이다	fix	local
+dict:permission:2	おれは彼女いなくて良かった	나는 여자친구 없어서 다행이다	fix	local
 dict:permission:3	勉強していい大学に行っておけば	!rule:dict:permission:3	keep	local
 dict:permission:3	「私なんかずっと待っててもいいことないと思いますけど」	has:좋은 일	keep	local
 dict:permission:3	面倒ごとが避けられていいかもしれない。	!rule:dict:permission:3	keep	local

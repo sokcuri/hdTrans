@@ -14,6 +14,6 @@ cx:yori:10	これよりはマシだ。	has:이것보다는	keep	rewrites
 cx:yori:10	今よりは随分ましだろう。	has:지금보다는	keep	rewrites
 cx:yori:20	普段の視界よりずっと鮮明に見えた。	has:시야보다 훨씬	fix	rewrites
 cx:yori:20	その真ん中より少し大島寄りの場所に	has:한가운데보다 조금	fix	rewrites
-cx:yori:20	それが他の部位より幾分かマシだった。	has:부위보다 약간인가	fix	rewrites
+cx:yori:20	それが他の部位より幾分かマシだった。	has:부위보다 다소	fix	rewrites
 cx:yori:20	前方より更に友軍艦隊。	has:전방에서	keep	rewrites
 cx:yori:20	東京より来た。	lacks:보다	keep	rewrites
