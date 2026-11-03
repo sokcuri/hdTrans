@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "core/dict/classes.h"
+#include "core/pipeline/normalize.h"
 #include "core/pipeline/protect.h"
 #include "core/pipeline/restore.h"
 #include "core/pipeline/runes.h"
@@ -3303,6 +3304,24 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         const bool tsu = rs[i] == U'っ';
         if (rs[i] != U'ん' && rs[i] != U'ぬ' && !tsu) continue;
         const std::string_view rest = std::string_view(s).substr(byte[i + 1]);
+        // The ん of a negative before a tail of KansaiNegativeTail reads with it (知らんで 知らないよ, 許せんで 許せないよ,
+        // 勉強せんで 勉強しないよ, 知らんでも 知らなくても), and before any other で it is the ない of ないで (知らんで書くな).
+        // Not the polite ませんで (すみませんでした), the の said ん after an adjective's い (強いんです, 痛いんで), では
+        // (休めんではないか, read as written), nor a stem whose て form ends in that んで (浮かんで, 膨らんでも), which the
+        // stem loop leaves.
+        const NegativeTail tail = rs[i] == U'ん' && ctx.dialectForms ? KansaiNegativeTail(rest) : NegativeTail{};
+        // A kana that ends a dictionary form, a past or the な of a noun (行くんです, 来たんで, 大変なんです) starts no
+        // negative stem before the other で.
+        const bool beforeDe = rs[i] == U'ん' && ctx.dialectForms &&
+                              (tail.length > 0 || (rest.starts_with("で") && !RuneIn(rs[i - 1], U"うくぐすつぬぶむるただな"))) &&
+                              !rest.starts_with("では") && rs[i - 1] != U'い' && !(i >= 2 && rs[i - 1] == U'せ' && rs[i - 2] == U'ま');
+        // Writes the tail after the ない just written (whose い it rewrites) and moves done past it.
+        const auto writeDe = [&] {
+            if (!beforeDe || tail.length == 0) return;
+            out.resize(out.size() - kNai.size());
+            out += tail.negative;
+            done += text::RuneCount(rest.substr(0, tail.length));
+        };
         // The old negative せん or せぬ of する is しない (勉強せんぞ 勉強しないぞ, 気にせんかった 気にしなかった, 容赦せぬ),
         // but for the literary volitional before とする or がため (脱出せんとする) and the Kansai request of
         // んといて (気にせんといて).
@@ -3312,6 +3331,7 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             out.append(s, byte[done], byte[i - 1] - byte[done]);
             out += rest.starts_with("かっ") ? "しな" : "しない";
             done = i + 1;
+            if (!rest.starts_with("かっ")) writeDe();
             continue;
         }
         if (rs[i] == U'ぬ') continue;
@@ -3325,9 +3345,11 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             says = Says::Nai;
         } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative"), rest) > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-not"), rest) == 0) {
             says = Says::Negative;
+        } else if (beforeDe) {
+            says = Says::Negative;
         } else if (std::u32string_view(U"えけせてねへめれげぜでべぺ").find(rs[i - 1]) != std::u32string_view::npos &&
-                   (rest.starts_with("かった") || ends(rest))) {
-            // a potential stem ends in a kana of the え row
+                   (rest.starts_with("かった") || ends(rest) || SentenceFinalParticle(rest, "よ") > 0)) {
+            // a potential stem ends in a kana of the え row, here also before a final よ (許せんよ 許せないよ)
             says = rest.starts_with("かった") ? Says::PotentialPast : Says::PotentialEnd;
         } else if (std::u32string_view(U"かがさたなばまらわ").find(rs[i - 1]) != std::u32string_view::npos && rest.starts_with("ねん")) {
             says = Says::GodanNen;
@@ -3338,7 +3360,9 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         while (start > 0 && i - start < kLongestStem && (IsKanjiRune(rs[start - 1]) || IsHiraganaRune(rs[start - 1]))) start--;
         if (start == i) continue;
         std::string_view kana;
+        size_t decided = start;  // the stem the last pass of the loop read
         for (size_t from = start; from < i && kana.empty(); from++) {
+            decided = from;
             const std::string_view stem = std::string_view(s).substr(byte[from], byte[i] - byte[from]);
             // The ん after a dictionary form is the の said ん (書くんなら); the ん after the negative
             // stem of a godan verb is its negative (いかんな, 知らんぞ), read as such, but for one
@@ -3357,10 +3381,14 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
                 // rows of んか (始まらんかのう, 黙らんか！), also with a drawn or clipped kana before the
                 // mark (吐かんかッ!!, 持ってこんかぁ！).
                 const bool endRow = rest.starts_with("かの") || ReproachKa(rest);
+                // Before the な of a prohibition (n-ru) the ん after a negative stem whose stem and る is no verb is
+                // the negative too (知らんな 知らないな; 止まんな is 止まるな).
+                const bool negativeNa = says == Says::Ru && godanNegative &&
+                                        !VerbFormIs(std::string(stem) + "る", kDictionaryForm, AnyKind, ctx, snap);
                 if (godanNegative && kanji && !inWord &&
                     ((says == Says::Negative && !rest.starts_with("ぞ") && !rest.starts_with("わ") && !rest.starts_with("かて") &&
                       !endRow) ||
-                     says == Says::GodanNen)) {
+                     says == Says::GodanNen || negativeNa)) {
                     kana = kNai;
                 }
                 break;
@@ -3410,9 +3438,12 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
             }
         }
         if (kana.empty()) continue;
+        // The stem that read the negative ends its て form in that んで (浮かんで): no negative.
+        if (beforeDe && TeForm(rs, decided, i + 2, ctx, snap)) continue;
         out.append(s, byte[done], byte[i] - byte[done]);
         out += kana;
         done = i + 1;
+        if (kana == kNai) writeDe();
         // ねえ after the ん is the casual ない, written as such.
         if (const size_t n = dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nee"), rest); says == Says::Nai && n > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) == 0) {
             out += kNai;

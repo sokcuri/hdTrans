@@ -139,6 +139,17 @@ std::string_view GAttr(const ResolvedItem& it) { return Selected(it).gattr; }
 std::string_view DirectText(const ResolvedItem& it) { return it.directIndex < 0 ? std::string_view() : it.ending.text; }
 std::string_view DirectCode(const ResolvedItem& it) { return it.directIndex < 0 ? std::string_view() : it.ending.code; }
 
+// Whether a Korean target ends in a family of 있다, 없다 (a declarative with no 는) or an adjective
+// (할 수 &HN@): a state, after which the negative auxiliary 않다 ($DH@) keeps its adjective forms
+// (할 수 있지는 않다고).
+bool StateTarget(std::string_view target) {
+    if (target.size() < 4 || !target.ends_with("@")) return false;
+    const auto* family = internal::FindKoreanFamily(target.substr(target.size() - 4));
+    return family != nullptr && (family->inflectionClass == internal::InflectionClass::Existential ||
+                                 family->partOfSpeech == internal::KoreanPartOfSpeech::Adjective ||
+                                 (family->flags & internal::kBareDeclarative) != 0);
+}
+
 bool KeiyoX(const ResolvedItem& it) { return it.detailClass == DetailClass::Keiyo && it.detailKind == 'x'; }
 bool DakeiyoX(const ResolvedItem& it) { return it.detailClass == DetailClass::Dakeiyo && it.detailKind == 'X'; }
 
@@ -744,6 +755,9 @@ void Composer::BuildAdjective(int i) {
             switch (First(Code(items[linked]))) {
                 case '4':
                     if (Contains(GAttr(items[linked]), "Va")) normalize = it.surface != kJaNa;
+                    if (it.surface != kJaNa && EntryText(it).ends_with("$DH@") && StateTarget(EntryText(items[linked]))) {
+                        normalize = false;
+                    }
                     break;
                 case '7': case '8':
                     normalize = it.surface != kJaNa;

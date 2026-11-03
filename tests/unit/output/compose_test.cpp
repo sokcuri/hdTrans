@@ -680,3 +680,13 @@ HD_TEST(compose_sign_led_word_after_noun) {
         HD_CHECK_EQ(String(result), c.expected);
     }
 }
+
+// The negative auxiliary 않다 of a verb says the verb's present before 다고 (놓치지는 않는다고), but keeps
+// its adjective form after a verb read as a state (할 수 있지는 않다고).
+HD_TEST(compose_negative_auxiliary_after_state) {
+    const CompositionCase cases[] = {
+        {{{"逃が", "433", "", "놓&AO@", "1지는"}, {"しな", "7N0", "XnSkJsAv", "$DH@", "1다고"}}, {1, 2}, "놓치지는 않는다고."},
+        {{{"でき", "4U7", "Ma", "할 수 &HN@", "1지는"}, {"しな", "7N0", "XnSkJsAv", "$DH@", "1다고"}}, {1, 2}, "할 수 있지는 않다고."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}

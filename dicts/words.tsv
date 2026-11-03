@@ -69,7 +69,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 あん摩	안마&AV@	M429			GN						あんま	w:66
 いいえ	아니요	E300			GN				xxx llm	1		w:67
 いいこ	착한 아이	N110			GN				llm			w:68
-いい加減にしろ	적당히 해라	A9D0			GN				llm		いいかげんにしろ	w:69
+いい加減にしろ	적당히 좀 해라	A9D0			GN				llm		いいかげんにしろ	w:69
 いい度胸	대단한 배짱	N110			GN				llm			w:70
 いかだ乗り	뗏목꾼	N110	UAqVHn		GN				llm		いかだのり	w:71
 いかフライ	오징어튀김	N110	VFd		GN						いかフライ	w:72
