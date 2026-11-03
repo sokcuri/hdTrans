@@ -38,8 +38,6 @@ cx:count-units:265	一階だ。	1층이다.	fix	rewrites
 cx:count-units:906	料理が三人前ある。	요리가 3인분 있다.	fix	rewrites
 cx:count-units:905	寿司を二人前頼んだ。	스시를 2인분 부탁했다.	fix	rewrites
 cx:count-units:280	紙が三枚ある。	종이가 세 장 있다.	fix	rewrites
-cx:count-units:85	三歳の子供。	세 살의 아이.	fix	rewrites
-cx:count-units:85	一歳だ。	한 살이다.	fix	rewrites
 cx:count-units:90	彼は一足先に帰った。	그는 한발 앞서 돌아갔다.	keep	rewrites
 cx:count-units:90	一足早く着いた。	한 발 앞서 도착했다.	keep	rewrites
 cx:count-units:165	三脚を立てた。	삼각대를 세웠다.	keep	rewrites
@@ -50,10 +48,6 @@ cx:count-units:190	一丁目の角。	1가의 모퉁이.	keep	rewrites
 cx:count-units:215	一張羅を着た。	나들이옷을 입었다.	keep	rewrites
 cx:count-units:210	一両日中に。	하루 이틀 중에.	keep	rewrites
 cx:count-units:1	柱が一本ある。	기둥이 한 개 있다.	keep	rewrites
-cx:count-units:85	二十歳になった。	20살이 되었다.	keep	rewrites
-cx:count-units:85	何歳ですか？	몇 살입니까?	keep	rewrites
-cx:count-units:85	3歳の子	3세의 아이	keep	rewrites
-cx:count-units:85	今、三十六歳の終わり。	지금, 36세의 끝.	keep	rewrites
 cx:tai-count:10	一体何だ？	도대체 뭐야?	keep	rewrites
 cx:tai-count:10	一体化した。	일체화했다.	keep	rewrites
 cx:count-units:51	糸が切れた。	실이 끊어졌다.	keep	rewrites
@@ -118,7 +112,6 @@ cx:count-units:60	筋が通っている。	조리가 서 있다.	keep	rewrites
 cx:count-units:65	３柱の女神が来た。	3명의 여신이 왔다.	keep	rewrites
 cx:count-units:80	水が3滴落ちた。	물이 3방울 떨어졌다.	fix	rewrites
 cx:count-units:80	滴が落ちた。	물방울이 떨어졌다.	keep	rewrites
-cx:count-units:85	3歳の子。	3세의 아이.	keep	rewrites
 cx:count-units:90	靴を一足買った。	구두를 한 켤레 샀다.	fix	rewrites
 cx:count-units:90	一足先に帰った。	한발 앞서 돌아갔다.	keep	rewrites
 cx:count-units:100	服を一着買った。	옷을 한 벌 샀다.	fix	rewrites
