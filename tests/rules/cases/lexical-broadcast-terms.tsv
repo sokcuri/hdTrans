@@ -7,7 +7,7 @@ sense:続投	あと１点で茂野は続投できるんだ。	그리고 1점으�
 sense:続投	続投だ！　茂野。	연속 투구야! 시게노.	keep	senses
 sense:抑え	マウンドには抑えの杉山投手。	마운드에는 마무리의 스기야마 투수.	fix	senses
 sense:抑え	抑えが効かない。	억제가 효과가 없다.	keep	senses
-sense:死者	今回の地震による死者は３８人で	이번 지진에 의한 사망자는 38명이	fix	senses
+sense:死者	今回の地震による死者は３８人で	이번 지진에 의한 사망자는 38명으로	fix	senses
 sense:死者	これまでに死者は１９人…。	지금까지 사망자는 19명….	fix	senses
 sense:死者	現状は把握した限り 死者６名です｡	현 상황은 파악한 한계 사망자 6명입니다.	fix	senses
 sense:死者	累計死者 行方不明者	누계 사망자 행방불명자	fix	senses
