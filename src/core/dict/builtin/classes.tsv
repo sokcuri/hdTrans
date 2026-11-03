@@ -133,7 +133,7 @@
 //= honorific.nickname	The honorifics that make the hiragana before them a nickname (みっちゃん, けんくん); the last one that starts the text wins.
 //= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
 //= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
-//= honorific.prepass-spaced	Honorifics read 씨 or 군 that are written apart from the noun before them (田中さん 다나카 씨).
+//= honorific.prepass-spaced	Honorifics read 씨, 군 or 양 that are written apart from the noun before them (田中さん 다나카 씨, レイニ嬢 레이니 양).
 //= name.title-ship	Ship types and ranks a ship's name follows (駆逐艦時雨, 軽巡「川内」, 戦艦、大和): the word after one is the ship's name (names::NameCues).
 //= name.title-person	Titles that a katakana name follows written right after them (聖女アヤメ, 勇者アレン).
 //= name.suffix-after	Words after a name that make it a name: a sister's title, a remodel number (時雨姉さん, 霞改二).
@@ -334,7 +334,7 @@
 //= pronoun.first-person	The first-person pronouns 私, わたくし, あたし, 僕 and 俺 in kanji, hiragana and katakana; a katakana one beside one in another spelling in its sentence is a second self (ワタシと私).
 //= pronoun.first-person-genitive	First-person pronouns whose genitive takes the short form (나의 내, 저의 제).
 //= pronoun.hiragana-end	Pronouns and nouns that end in hiragana, after which a word reads as following a noun (これ, みんな, 予定通り).
-//= pronoun.humble-first-person	First-person pronouns read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다).
+//= pronoun.humble-first-person	First-person pronouns, and their のこと read as the pronoun, read as the humble 저 or 저희 in polite speech (私はそう思います 저는 그렇게 생각합니다, 私のこともお見知りおきを 저도).
 //= pronoun.rough-second-person	Second-person pronouns of rough or scornful speech, alone and plural (お前, 貴様, てめえ, あんた): the subject of a quotation before a sentence-final 思うな, which then forbids (お前が勝てると思うな 네가 이길 수 있다고 생각하지 마).
 //= pronoun.second-person-genitive	Second-person pronouns whose genitive takes the short form (너의 네).
 //= pronoun.speaker	Words by which the speaker names himself or herself, alone or with others, as the subject of a promise (私が行くね 내가 갈게).
@@ -372,14 +372,16 @@
 //= spelling.variant	Spellings of a grammatical word written as its other spelling before lookup, VARIANT=SPELLING, so that both read alike (痛い程に 痛いほどに, 見たとき 見た時).
 //= spelling.variant-after-word	Kanji variants of spelling.variant also respelled after a kanji or katakana, not only after hiragana (子供程 子供ほど).
 //= spelling.variant-after-predicate	Kanji variants of spelling.variant that are the grammatical word only after an inflected word or the particle の as the analysis reads the text before them, and before a word of spelling.variant-after-predicate-next (慌てた様に 慌てたように, 太陽の様な 太陽のような); after a noun or a name they stay (ひなた様に, あなた様に).
+//= spelling.variant-after-form	Variants of spelling.variant-after-predicate that are the grammatical word right after the form of a verb or an adjective whatever follows, also before に, and not after の (書いた事 書いたこと, 見る事にした 見ることにした; 自分の事, 一つ事 stay).
+//= spelling.variant-after-form-kept-after	Words after which a variant of spelling.variant-after-form stays, unless a phrase of spelling.variant-after-predicate-phrase holds it: the adnominal ある of a certain thing (ある事を思い出す 어느 일; である事 is the copula).
 //= spelling.variant-after-predicate-end	Ends of the ending of a verb before which a variant of spelling.variant-after-predicate is the grammatical word: an adnominal form (慌てた様に, 言う様に, 行かない様に), not the stem (すれ違い様に, 振り向き様に).
 //= spelling.variant-after-predicate-past	Ends of the past form of a verb, after which a variant of spelling.variant-after-predicate is the grammatical word before に too (慌てた様に 慌てたように); after the other adnominal forms it is respelled before に only when なる follows (使える様になる).
 //= spelling.variant-after-predicate-naru	The forms of なる after に, before which a variant of spelling.variant-after-predicate after a present form is the grammatical word (使える様になる).
 //= spelling.variant-after-predicate-next	Starts of the text after a variant of spelling.variant-after-predicate that let it be the grammatical word: a copula, に, な, a pause or the end (怒った様だ, 海の様で。); before は, が, を it is the noun of a look or a sight (その様は).
 //= spelling.variant-after-predicate-kept-after	Words after which a variant of spelling.variant-after-predicate is the noun of a look or a state and stays (そんな様だった, 死闘のような様だ).
-//= spelling.variant-after-predicate-phrase	Phrases of a demonstrative and a variant of spelling.variant-after-predicate that read as the grammatical word (その様な そのような, どの様に どのように); その様に, あの様に and この様だ may be the sight or the sorry state and stay.
+//= spelling.variant-after-predicate-phrase	Phrases of a demonstrative and a variant of spelling.variant-after-predicate that read as the grammatical word (その様な そのような, どの様に どのように); その様に, あの様に and この様だ may be the sight or the sorry state and stay; である事 is the copula and the こと it takes (取り巻きである事も 추종자인 것도), という事 the quoting という and its こと (ワープしてきたという事ですか 워프해 왔다는 것입니까).
 //= spelling.variant-kana-after	The kana after which a kana variant of spelling.variant is respelled: the end of a predicate or of の (あったとき, そのとき; not もっときれい).
-//= spelling.variant-kept	Contexts in which a variant of spelling.variant is another word and stays: 位 of rank after の or before が, を (神の位, 位が下げられる), 等 read ら after a pronoun (それ等, あいつ等), the verb 為す or 為る (何を為そう), and 程 after the adnominal な, which the kana rows read as an attached 만큼 (同数な程).
+//= spelling.variant-kept	Contexts in which a variant of spelling.variant is another word and stays: 位 of rank after の or before が, を (神の位, 位が下げられる), 等 read ら after a pronoun (それ等, あいつ等), the verb 為す or 為る (何を為そう), and 程 after the adnominal な, which the kana rows read as an attached 만큼 (同数な程), and 事 after a verb form where a dictionary phrase reads 事 itself: と言う事 (と言う事を思い出す 다는 사실을), 迷う事 that a pack row reads (何も迷う事は無い 망설이는 일은 없다), 事 before を言う (the words said) or a でき without its が, the 事 of a 切る of completion (決まりきった事), 上手い事 of something said cleverly (上手いこと is the adverb 잘) and なかった事にする of pretending (못 본 척하다); and the ある事 of 所である事, which is 所で and ある, not である (冷静になった所である事を思い出した).
 //= stem.adverse-outcome	Stems of predicates of trouble or embarrassment, which make the (ら)れ of a condition before them the passive (見られたら困る, 見つめられたら照れる).
 //= stem.compound-particle	Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
 //= stem.contracted-shimau	The contractions of て or で with しまう before its own endings (食べちゃうよ, 飲んじゃうよ, 行っちまうよ, 死んじまうよ).
@@ -2061,6 +2063,7 @@ honorific.prepass-spaced	さん
 honorific.prepass-spaced	くん
 honorific.prepass-spaced	君
 honorific.prepass-spaced	氏
+honorific.prepass-spaced	嬢
 
 kana.drawn-out	ぁ
 kana.drawn-out	ぃ
@@ -4736,6 +4739,9 @@ pronoun.humble-first-person	わたしたち
 pronoun.humble-first-person	僕たち
 pronoun.humble-first-person	僕達
 pronoun.humble-first-person	僕ら
+pronoun.humble-first-person	私のこと
+pronoun.humble-first-person	わたしのこと
+pronoun.humble-first-person	僕のこと
 
 pronoun.second-person-genitive	君
 pronoun.second-person-genitive	お前
@@ -5499,8 +5505,13 @@ spelling.variant	為=ため
 spelling.variant	迄=まで
 spelling.variant	様=よう
 spelling.variant	とき=時
+spelling.variant	事=こと
 spelling.variant-after-word	程
 spelling.variant-after-predicate	様
+spelling.variant-after-predicate	事
+spelling.variant-after-form	事
+spelling.variant-after-form-kept-after	ある
+spelling.variant-after-form-kept-after	或る
 spelling.variant-after-predicate-kept-after	ような
 spelling.variant-after-predicate-kept-after	そんな
 spelling.variant-after-predicate-kept-after	こんな
@@ -5513,6 +5524,8 @@ spelling.variant-after-predicate-phrase	どの様な
 spelling.variant-after-predicate-phrase	この様に
 spelling.variant-after-predicate-phrase	どの様に
 spelling.variant-after-predicate-phrase	その様です
+spelling.variant-after-predicate-phrase	である事
+spelling.variant-after-predicate-phrase	という事
 spelling.variant-after-predicate-end	う
 spelling.variant-after-predicate-end	く
 spelling.variant-after-predicate-end	ぐ
@@ -5558,6 +5571,17 @@ spelling.variant-kana-after	ぶ
 spelling.variant-kana-after	ぐ
 spelling.variant-kana-after	な
 spelling.variant-kana-after	の
+spelling.variant-kept	と言う事
+spelling.variant-kept	所である事
+spelling.variant-kept	ところである事
+spelling.variant-kept	迷う事
+spelling.variant-kept	事を言
+spelling.variant-kept	きった事
+spelling.variant-kept	事でき
+spelling.variant-kept	上手い事
+spelling.variant-kept	うまい事
+spelling.variant-kept	かった事にし
+spelling.variant-kept	かった事にす
 spelling.variant-kept	の位
 spelling.variant-kept	な程
 spelling.variant-kept	位が
@@ -6757,6 +6781,12 @@ verb.result-state	晴れわた
 verb.result-state	澄みわた
 verb.result-state	ささくれ立
 verb.result-state	ささくれだ
+verb.result-state	成り立
+verb.result-state	なくな
+verb.result-state	わからなくな
+verb.result-state	分からなくな
+verb.result-state	判らなくな
+verb.result-state	孤立
 
 verb.arrival-te	帰
 verb.arrival-te	戻
@@ -6771,6 +6801,8 @@ verb.result-state-past	生き残
 verb.result-state-past	古び
 verb.result-state-past	身罷
 verb.result-state-past	身まか
+verb.result-state-past	調べが付
+verb.result-state-past	調べがつ
 
 verb.say-teiru	話
 verb.say-teiru	お話

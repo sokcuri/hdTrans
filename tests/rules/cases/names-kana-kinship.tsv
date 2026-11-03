@@ -32,7 +32,7 @@ names:kana-drawn-honorific	「すみれちゃ〜ん、今度映画でも観に�
 names:kana-drawn-honorific	「なるみちゃーん、着替え置いとくよー」	「나루미짱~, 갈아입고 놓아둬~」	keep	lookup
 names:kana-drawn-honorific	まつりちゃーん」	마츠리짱~」	keep	lookup
 names:kana-drawn-honorific	「みどりく〜ん、こっち！」	「미도리 군~, 여기!」	keep	lookup
-names:kana-kinship	という事はおねえさんの家なのかな……？	그렇다고 하는 일은 언니의 집인가……?	keep	lookup
+names:kana-kinship	という事はおねえさんの家なのかな……？	그 말은 언니의 집인가……?	keep	lookup
 names:kana-kinship	「だっておにーちゃんの作った料理食べてみたいんだもん！」	「왜냐하면 오빠가 만든 요리 먹어 보고 싶은걸!」	keep	lookup
 names:kana-kinship	そうだおにーちゃんが起きるまでここを動いたらダメなんだ。	그렇다 오빠가 일어날 때까지 여기를 움직이면 안돼.	keep	lookup
 names:kana-kinship	目が覚めると、知らないおねえさんにだかれていた。	has:모르는 언니에게	keep	lookup

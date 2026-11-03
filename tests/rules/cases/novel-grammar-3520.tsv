@@ -1,0 +1,54 @@
+# 규칙: GRM-3520, GRM-3521, GRM-3522, GRM-3523, GRM-3524, GRM-3525, GRM-3526, GRM-3527, GRM-3528
+rule	input	expected	kind	layer
+cx:novel-fixes-4:20	それなら味方が見られないユフィリア嬢を庇っておこう。	has:아군을 볼 수 없는	fix	rewrites
+cx:novel-fixes-4:20	彼が本を見られないのは暗いからだ。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	テレビが見られない。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:100	彼女は今、アルガルドの隣に支えられるようにして立ち尽くしていた。	has:옆에 의지하듯이 우두커니	fix	rewrites
+cx:novel-fixes-4:100	俺は彼女の視線を避けるようにして通り過ぎる。	has:피하듯이 지나간다	fix	rewrites
+cx:novel-fixes-4:100	忘れないようにしてください。	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:100	たまに見るようにするとは言ってくれたけど	!rule:cx:novel-fixes-4:100	keep	rewrites
+cx:novel-fixes-4:110	そうする事で研鑽を促すという目的があっても、	has:재촉한다는 목적	fix	rewrites
+cx:novel-fixes-4:110	信じられないという思いでユフィリアは叫んだ。	has:믿을 수 없다는 생각	fix	rewrites
+cx:novel-fixes-4:110	彼は行かないという。	!rule:cx:novel-fixes-4:110	keep	rewrites
+cx:novel-fixes-4:110	鈴木という男が来た。	!rule:cx:novel-fixes-4:110	keep	rewrites
+cx:novel-fixes-4:120	「貴様は我が婚約者に相応しくないと判断した。」	has:약혼자로 걸맞지 않다고	fix	rewrites
+cx:novel-fixes-4:120	帝国の姫君に相応しくない、ちょっと品のない悲鳴だった。	!rule:cx:novel-fixes-4:120	keep	rewrites
+cx:novel-fixes-4:120	彼女に相応しい男になる。	!rule:cx:novel-fixes-4:120	keep	rewrites
+cx:novel-fixes-4:130	楽団による優美な音楽が奏でられ、社交へと勤しむ生徒たち。	has:사교에 힘쓰는	fix	rewrites
+cx:novel-fixes-4:130	森へと向かう。	!rule:cx:novel-fixes-4:130	keep	rewrites
+cx:novel-fixes-4:140	更には、そこにレイニに惹かれた他の貴族子息、レイニに嫉妬する貴族令嬢達の思惑も絡んで	has:레이니를 질투하는	fix	rewrites
+cx:novel-fixes-4:140	新たな若い国王様は、騎士様の名声に嫉妬した。	has:명성을 질투했다	fix	rewrites
+cx:novel-fixes-4:140	どうやらローラに嫉妬のような感情を抱いた。	!rule:cx:novel-fixes-4:140	keep	rewrites
+cx:novel-fixes-4:150	ユフィリアはその強かさで環境に耐えることが出来た。	rule:cx:novel-fixes-4:150=(을)를	fix	rewrites
+cx:novel-fixes-4:150	連射に耐えかねて、よく壊れるので	has:연사를 참기	fix	rewrites
+cx:novel-fixes-4:150	語るに耐えない。	!rule:cx:novel-fixes-4:150	keep	rewrites
+cx:novel-fixes-4:160	どっちに正義があるのかわからないけれど	has:어느 쪽에 정의가 있는지	fix	rewrites
+cx:novel-fixes-4:160	CRの後ろに文字がある	has:뒤에 문자가 있다	fix	rewrites
+cx:novel-fixes-4:160	彼に罪がある。	!rule:cx:novel-fixes-4:160	keep	rewrites
+cx:novel-fixes-4:170	後でどっちが正しいのかわかるでしょ。	has:어느 쪽이 올바른	fix	rewrites
+cx:novel-fixes-4:170	彼の気持ちがわかる。	!rule:cx:novel-fixes-4:170	keep	rewrites
+cx:novel-fixes-4:180	ユフィリアには何が間違いなのかすらもわからなくなっていた。	has:실수인지조차도	fix	rewrites
+cx:novel-fixes-4:180	俺はそれが誰なのかを気にすることはなかった。	has:누구인지를	fix	rewrites
+cx:novel-fixes-4:180	本当なのか？	!rule:cx:novel-fixes-4:180	keep	rewrites
+cx:novel-fixes-4:190	共に支え、生きて行くには十分。	has:살아가기에는	fix	rewrites
+cx:novel-fixes-4:190	生きて行くには金がいる。	!rule:cx:novel-fixes-4:190	keep	rewrites
+cx:novel-fixes-4:220	これは恐らく警戒を緩める事はまずないな。	has:느슨하게 하는 일은 거의 없	keep	rewrites
+cx:novel-fixes-4:220	赤ん坊に出来る事は少ない。	has:할 수 있는 일은 적다	keep	rewrites
+cx:novel-fixes-4:220	家族全員で食事を囲むことは少ない。	has:둘러싸는 일은 적다	fix	rewrites
+cx:novel-fixes-4:220	やる事は決まっている。	!rule:cx:novel-fixes-4:220	keep	rewrites
+cx:novel-fixes-4:220	言うことは何もないと。	!rule:cx:novel-fixes-4:220	keep	rewrites
+cx:novel-fixes-4:225	幾人かは涙目になっていて、本気で心配してくれていた事が窺えた。	has:걱정해 주고 있었던 것을 살필 수	fix	rewrites
+cx:novel-fixes-4:225	落ちていくのがわかった。	!rule:cx:novel-fixes-4:225	keep	rewrites
+cx:novel-fixes-4:230	同時にレイニに寄り添っていた取り巻きである事もユフィリアは知っていた。	has:추종자인 것도	fix	rewrites
+cx:novel-fixes-4:230	彼は学生である。	!rule:cx:novel-fixes-4:230	keep	rewrites
+cx:novel-fixes-4:240	十日ほど、色々な方角に進んでみた。	has:방향으로 나아가	fix	rewrites
+cx:novel-fixes-4:240	決勝に進む2組を選ぶため	!rule:cx:novel-fixes-4:240	keep	rewrites
+cx:novel-fixes-4:240	この世界が必ずしもゲームの過去通りに進んでいる訳では無い	!rule:cx:novel-fixes-4:240	keep	rewrites
+cx:novel-fixes-4:245	二人は彼等の関係はそこまで止まっていて、その先に進むことはなかった。	has:그 앞으로 나아가는	fix	rewrites
+cx:novel-fixes-4:245	その先には森がある。	!rule:cx:novel-fixes-4:245	keep	rewrites
+cx:novel-fixes-4:260	（――これは不味い状況なのでは？）	has:상황인 게 아닐까?	fix	rewrites
+cx:novel-fixes-4:260	「状況なのでは、仕方ない」	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:tokoro-kanji:5	これが壊れてたら泣きを見ていた所だった。	has:낭패를 볼 뻔했다	fix	rewrites
+cx:tokoro-kanji:5	彼は本を読んでいた所だった。	!rule:cx:tokoro-kanji:5	keep	rewrites
+cx:tokoro-kanji:6	もし遅れていたら、泣きを見ていた所でした。	has:볼 뻔했습니다	fix	rewrites
+cx:tokoro-kanji:6	本を読んでいた所でした。	!rule:cx:tokoro-kanji:6	keep	rewrites

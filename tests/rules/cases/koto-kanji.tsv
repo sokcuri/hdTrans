@@ -1,0 +1,18 @@
+# 규칙: LEX-4163, GRM-3531, GRM-3533
+rule	input	expected	kind	layer
+normalize:spelling-variant	身分ではなく実力での評価を。そうする事で研鑽を促す	has:그렇게 함으로써	fix	normalize
+normalize:spelling-variant	煤で汚れた顔ですら彼女の気品を穢す事は出来ない。	has:기품을 더럽힐 수 없다	fix	normalize
+normalize:spelling-variant	そこに魔法を加える事で国有数の実力者として名を馳せていた。	has:마법을 더함으로써	fix	normalize
+normalize:spelling-variant	自分で書いてみた事もある。	has:써 본 적도 있다	fix	normalize
+normalize:spelling-variant	そんな事はない。	그런 일은 없다.	keep	normalize
+normalize:spelling-variant	全力で見なかった事にした。	has:못 본 척했다	keep	normalize
+normalize:spelling-variant	とはいえ、ここは特に迷う事はない。	has:망설이는 일은 없다	keep	normalize
+normalize:spelling-variant	何、ねぼけた事を言ってるんだ。	has:노망난 말을	keep	normalize
+normalize:spelling-variant	本気で告白すれば、付き合う事ぐらいは出来たかもしれない。	has:고백했더라면, 사귀는 것 정도는	keep	normalize
+normalize:spelling-variant	何を決まりきった事を聞いているのだと	has:다 정해진 일을	keep	normalize
+compose:copula-quote	これが夢でも幻でもない紛れもない現実であるという事を、この後俺は知る事になる。	has:현실이라는 것을	fix	compose
+compose:copula-quote	鹿威しがコーンと鳴り、ここが東京であるということを忘れさせてしまう。	has:도쿄라는 것을	fix	compose
+compose:copula-quote	これは本である。	이것은 책이다.	keep	compose
+pack:koto-form	継母に冷たい目を向けられたことが辛かった。	has:차가운 눈길을 받았던 것이	fix	packs
+pack:koto-form	冷たい目を向けられた。	차가운 눈길을 받았다.	keep	packs
+cx:lc3g-tokorode:30	どうせ今から帰ったところで、やることはない。	has:돌아가 봤자	fix	rewrites

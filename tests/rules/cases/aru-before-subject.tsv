@@ -1,0 +1,26 @@
+# 규칙: LEX-4152
+rule	input	expected	kind	layer
+cx:novel-fixes-4:10	パレッティア王国にはある〝王女〟がいる。	has:왕국에는 어느	fix	rewrites
+cx:novel-fixes-4:10	この町にはある噂がある。	has:어느 소문이 있다	fix	rewrites
+cx:novel-fixes-4:10	村にはある老人がいた。	has:어느 노인이 있었다	fix	rewrites
+cx:novel-fixes-4:10	城にはある騎士がいる。	has:어느 기사가 있다	fix	rewrites
+cx:novel-fixes-4:10	こういう時間のある時やっとかないと。	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある日 ぜんぜん描けなくなっちゃった	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	《それはある日の放課後のことだった》	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	でも ある程度共通点もあるわけです｡	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	(田中) 余裕がある 余裕があるな｡	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある意味安心するんでいいんだけど……	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある程度はフォローしてやらないとな。	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある日、噂に興味を持った生徒数人が、	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	……え、ある意味ぜんぜん地味じゃない？	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	「ある意味で、支援は受けておりますが」	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	「だからある意味もっと難しいかも」	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	そしてある時、母と散歩に出た彼は、	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	（ ケンタ ） だから ある意味… 。	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	小栗≫マスクはある日突然イレギュラーで	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある日 桃太郎君がやなその彼女にな	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	田口さんも　ある意味　戦争の被害者や。	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある日 上野駅に親戚を送りにいって	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある日 焼き型にﾀﾙﾄ生地を敷き忘れて	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ある意味　同じですね　ナタク太子と	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	でも　ある時　妹が人質にとられて。	!rule:cx:novel-fixes-4:10	keep	rewrites

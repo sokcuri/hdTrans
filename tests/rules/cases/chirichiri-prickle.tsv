@@ -1,0 +1,27 @@
+# 규칙: LEX-4155
+rule	input	expected	kind	layer
+cx:novel-fixes-4:60	胃の上部がチリチリ痛いような気がする。	has:찌릿찌릿	fix	rewrites
+cx:novel-fixes-4:60	あんた見とると不安で　胸が　チリチリするのや。	has:찌릿찌릿하는	fix	rewrites
+cx:novel-fixes-4:60	唇を重ねる度に、胸の奥がチリチリと熱くなっていった。	has:찌릿찌릿	fix	rewrites
+cx:novel-fixes-4:60	この立ち位置と状況、なんか記憶がちりちりとするような……？	has:찌릿찌릿하는	fix	rewrites
+cx:novel-fixes-4:60	頭の奥がちりちりとする。	has:찌릿찌릿한다	fix	rewrites
+cx:novel-fixes-4:60	よしよし、艤装も艦載機もばっちりね！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	ケーキもターキーも、ほら、ばっちり！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	今日のF作業は戦果ばっちりですから！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	結構、ばっちりじゃない、コレってば！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	遺伝子の検査をきっちりしていただいて	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	きっちり円になってないと思うんですね	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	もっちりして おいしい～｡うんうん！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	「おー、ばっちりですー、最高ですー」	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	しかも、ばっちり目があってしまった。	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	ぱっちりした目にスッキリとした鼻筋、	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	「じゃあ、俺なんかばっちりじゃない」	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	桜庭が満足げにぱちりと扇子を閉じる。	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	よかった～ ばっちり体、直します！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	今日もきっちり朝ごはんが作られている。	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	大丈夫だ、来年…来年はばっちりだから！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	活気のある露店がぎっちりと並んで、	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	作戦は完了。ばっちり、ばっちりよ！	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	(片桐)もっちり焼っていうこういう…｡	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	どら焼きというか今川焼きがもっちり焼｡	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:60	もっちり焼ってカスタードっぽい…｡	!rule:cx:novel-fixes-4:60	keep	rewrites

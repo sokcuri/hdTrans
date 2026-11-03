@@ -1,0 +1,47 @@
+# 규칙: GRM-3532
+rule	input	expected	kind	layer
+rewrite:result-state	もう分からなくなっていた≫	has:모르게 되어	fix	rewrites
+rewrite:result-state	ご依頼によって成り立っております	has:성립되어	fix	rewrites
+rewrite:result-state	力の加減がわからなくなっていたよ。	has:모르게 되어	fix	rewrites
+rewrite:result-state	御園は、動揺を隠し通せなくなっていた。	has:없게 되어	fix	rewrites
+rewrite:result-state	生徒会役員内で孤立しているのだろうか。	has:고립되어	fix	rewrites
+rewrite:result-state	結局１行目すら満足に書けなくなっていた。	has:없게 되어	fix	rewrites
+rewrite:result-state	だからこそ魔獣がいても村々が成り立っていた。	has:성립되어	fix	rewrites
+rewrite:result-state	この番組は皆さんのご依頼で成り立っております	has:성립되어	fix	rewrites
+rewrite:result-state	この番組は皆さまのご依頼で成り立っております	has:성립되어	fix	rewrites
+rewrite:result-state	しかし　我々はもう　引き返せなくなっていた。	has:없게 되어	fix	rewrites
+rewrite:result-state	しかし、いつしか、桜庭は止まれなくなっていた。	has:없게 되어	fix	rewrites
+rewrite:result-state	あきれたわね｡ そのﾊﾞｶな話の上に成り立ってんのが	has:성립되어	fix	rewrites
+rewrite:result-state	…とまあ　山鉾巡行は完全分業制で成り立っております。	has:성립되어	fix	rewrites
+rewrite:result-state	でなければ、孤立している私を哀れんだのかもしれない。	has:고립되어	fix	rewrites
+rewrite:result-state	「なんの刺身かもわからなくなってて、超あやしいわよ！」	has:모르게 돼	fix	rewrites
+rewrite:result-state	我々、人の歴史は多くの争いの上に成り立っています……。	has:성립되어	fix	rewrites
+rewrite:result-state	その全ては貴様が糸を引いている事は調べが付いているのだ！」	has:것은 조사가 끝났다	fix	rewrites
+rewrite:result-state	ユフィリアには何が間違いなのかすらもわからなくなっていた。	has:실수인지조차도 모르게 되어	fix	rewrites
+rewrite:result-state	あれは……お祭りイベントのひとつとして成り立っているから、	has:성립되어	fix	rewrites
+rewrite:result-state	「状況を見る限り、なんかユフィリア嬢が孤立してる感じかな？」	has:유필리아 양이 고립돼	fix	rewrites
+rewrite:result-state	なのに、ユフィリアの喉は引き攣ったように声を出せなくなっていた。	has:없게 되어	fix	rewrites
+rewrite:result-state	まったく知識がないから、どうすればいいかわからなくなってる……」	has:모르게 되어	fix	rewrites
+rewrite:result-state	≪敵の攻撃を受けて孤立していると、一時離脱したヘリが連絡してきた。	has:고립되어	fix	rewrites
+rewrite:result-state	激しく動揺してます……どうしていいか……わからなくなってます……」	has:모르게 되어	fix	rewrites
+rewrite:result-state	「お互い相手のことを気にして、前に進めなくなっていたわけですよね」	has:없게 돼	fix	rewrites
+rewrite:result-state	調べきるのに時間が掛かりそうね……≫	다 조사하는데 시간이 걸릴 것 같구나……≫	keep	rewrites
+rewrite:result-state	それを調べるのが、お前たちの課題だ。	그것을 조사하는 것이, 너희의 과제다.	keep	rewrites
+rewrite:result-state	「そんな事まで調べてるんですか！？」	「그런 일까지 조사합니까!?」	keep	rewrites
+rewrite:result-state	「ね、とけてなくなっちゃうでしょ？」	「저기, 녹아 없어져버리잖아?」	keep	rewrites
+rewrite:result-state	よくいなくなるイスカに困ってるのと、	has:이스카 때문에	keep	rewrites
+rewrite:result-state	「部室がなくなったら困りますしねえ」	「동아리방이 없어지면 곤란하고 응」	keep	rewrites
+rewrite:result-state	あれから自分でも調べまくったんです！	그때부터 스스로도 마구 조사했습니다!	keep	rewrites
+rewrite:result-state	しかもゲブラー部隊がいなくなった今、	게다가 게브라 부대가 없어진 지금,	keep	rewrites
+rewrite:result-state	しょうもなくなって視線を前に戻すと、	시시하게 되어 시선을 앞에 두고 되돌리면,	keep	rewrites
+rewrite:result-state	そう自分に言い聞かせ、書棚を調べる。	그렇게 자신에게 타일러, 책장을 조사한다.	keep	rewrites
+rewrite:result-state	そこまで周りが見えなくなるもんかね」	거기까지 주위가 안 보이게 될까 보냐」	keep	rewrites
+rewrite:result-state	抱き上げても不快感を憶えなくなった。	안아 올려도 불쾌감을 기억하지 않게 되었다.	keep	rewrites
+rewrite:result-state	でも、段々暇に耐えられなくなってね。	하지만, 점점 한가하게 견딜 수 없게 돼.	keep	rewrites
+rewrite:result-state	ダチがひとりいなくなっちまったんだよ	친구가 혼자 없어져버렸어	keep	rewrites
+rewrite:result-state	使うと自分がいなくなってしまうから。	쓰면 자신이 없어져버리니까.	keep	rewrites
+rewrite:result-state	勝てば今日の借りもなくなりますしね」	이기면 오늘의 빚도 없어지고」	keep	rewrites
+rewrite:result-state	取り返しがつかなくなる前に助けてやれ	돌이킬 수 없게 되기 전에 살려 주어라	keep	rewrites
+rewrite:result-state	同じ人間とは思えなくなってきた・・・	같은 인간이라고는 생각되지 않게 되었다···	keep	rewrites
+rewrite:result-state	時々、突然いなくなる人がいるだろう？	가끔, 갑자기 없어지는 사람이 있겠지?	keep	rewrites
+rewrite:result-state	病院出たとこでカケルがいなくなってた	병원 나온 참으로 카케루가 없어졌다	keep	rewrites

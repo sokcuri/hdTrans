@@ -11,7 +11,7 @@ normalize:kansai-nanya	なんやろ。	뭘까.	fix	normalize
 normalize:kansai-nanya	なんやろ？	뭘까?	fix	normalize
 normalize:kansai-nanya	なんやそれ。	뭐야 그게.	fix	normalize
 normalize:kansai-nanya	「なんや、もう終わりか」	「뭐야, 벌써 끝인가」	fix	normalize
-normalize:kansai-nanya	なんやかんやで、自分がやっていることに気づいていたのだ。	이래저래, 자신이 하고 있는 것에 눈치채고 있었다.	keep	normalize
+normalize:kansai-nanya	なんやかんやで、自分がやっていることに気づいていたのだ。	이래저래, 자신이 하고 있는 것을 눈치채고 있었다.	keep	normalize
 normalize:kansai-nanya	ずらっと並んだケーキやらなんやらに、思わず声を漏らした。	죽 늘어선 케이크든지 무엇이든지에, 무심코 소리를 흘렸다.	keep	normalize
 normalize:kansai-nanya	なんやろか。	뭘까.	keep	normalize
 normalize:kansai-nanya	それなんや？	그거야?	keep	normalize

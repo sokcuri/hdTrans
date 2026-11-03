@@ -1,0 +1,37 @@
+# 규칙: GRM-3525
+rule	input	expected	kind	layer
+cx:novel-fixes-4:195	もちろんお肉で十分！	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	艦載機の練度も十分。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	質素なところで十分。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	「うん……十分十分！」	has:충분해 충분해	fix	rewrites
+cx:novel-fixes-4:190	視界を遮るには 十分｡	has:가로막기에는 충분하다	fix	rewrites
+cx:novel-fixes-4:195	今は さっきの情報で十分｡	has:충분하다	fix	rewrites
+cx:novel-fixes-4:190	共に支え、生きて行くには十分。	has:살아가기에는 충분하다	fix	rewrites
+cx:novel-fixes-4:195	(坂上) もう ここの窓１枚で十分｡	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	魚介は十分。 最後に狙う食材は お肉。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	もう十分。　あんたは　よくやってくれたよ。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	「もう充分。これ以上欲しいものなんてない」	has:이제 충분해	fix	rewrites
+cx:novel-fixes-4:195	受験に必要なそこそこが出来てりゃ充分充分！」	has:충분하다 충분하다	fix	rewrites
+cx:novel-fixes-4:195	ばっちゃを安心させるためならこの人で十分｡・	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	ありがとう ﾛﾚｱちゃん｡気持ちだけで十分！	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	「十分！　方向だけでもわかれば、とりあえず動き出せるから」	has:충분하다	fix	rewrites
+rewrite:juubun-niwa	いいわ……十分に……やったから……。	좋아……충분히……했으니까…….	keep	rewrites
+rewrite:juubun-niwa	やせぎすの猫猫には十分な量であるが、	야세기스의 마오마오에게는 충분한 양이지만,	keep	rewrites
+rewrite:juubun-niwa	俺の上でユメが寝息を立てて数十分――	나 위에서 유메가 숨소리를 내 수십 분――	keep	rewrites
+rewrite:juubun-niwa	提督、天城、今なら十分活躍できます！	제독, 아마기, 지금이라면 충분히 활약할 수 있습니다!	keep	rewrites
+rewrite:juubun-niwa	それで十分 世の中の流れは分かるから	그래서 충분히 세상의 흐름은 아니까	keep	rewrites
+rewrite:juubun-niwa	目には目をってことは十分 考えられる	눈에는 눈 라는 것은 충분히 생각된다	keep	rewrites
+rewrite:juubun-niwa	久遠≫十分に相手が酔ったらんんっ…。	쿠도≫충분히 상대가 취하면….	keep	rewrites
+rewrite:juubun-niwa	沼田君十分 医学部に入れる成績だし・	누마타 군 충분히 의학부에 넣는 성적이고·	keep	rewrites
+rewrite:juubun-niwa	いいさ 遠いから気持ちだけで十分だよ	좋아 머니까 기분만으로 충분해	keep	rewrites
+rewrite:juubun-niwa	書斎が今より広ければそれで十分だから	서재가 지금보다 넓으면 그래서 충분하니까	keep	rewrites
+rewrite:juubun-niwa	(ﾎﾟｰﾘｰ)たわ言は もう十分だ！	(폴리) 실없는 소리는 이제 충분해!	keep	rewrites
+rewrite:juubun-niwa	(カータツ)そんだけあれば十分だろ｡	(카타츠) 만 있으면 충분하지.	keep	rewrites
+rewrite:juubun-niwa	覚えていてくださるだけで十分ですのに	기억하고 있어 주시는 것만으로 충분한데요	keep	rewrites
+rewrite:juubun-niwa	（人間たちのざわめき）もう十分だよ！	(인간들의 웅성거림) 이제 충분해!	keep	rewrites
+rewrite:juubun-niwa	十分に時間を稼いだら　方針どおり…。	충분히 시간을 벌면 방침대로….	keep	rewrites
+rewrite:juubun-niwa	これから十分挽回は可能だと思います」	지금부터 충분히 만회는 가능하다고 생각합니다」	keep	rewrites
+rewrite:juubun-niwa	「十分です！　さすが私的世界遺産！」	「충분합니다! 역시 사적 세계 유산!」	keep	rewrites
+rewrite:juubun-niwa	「いやいや、十分堪能させてもらった」	「아니아니, 충분히 능숙 했어」	keep	rewrites
+rewrite:juubun-niwa	「今だって、十分拘束されてますけど」	「지금도, 충분히 구속돼 있는데요」	keep	rewrites
+rewrite:juubun-niwa	「なに言ってんだ、十分役得だったよ」	「무슨 소리야, 충분히 부수입이었어」	keep	rewrites

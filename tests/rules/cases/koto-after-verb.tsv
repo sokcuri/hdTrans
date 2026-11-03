@@ -1,0 +1,47 @@
+# 규칙: GRM-3526
+rule	input	expected	kind	layer
+normalize:spelling-variant	……ギアで戦う事を。	has:싸우는 것을	fix	normalize
+normalize:spelling-variant	また会う事になるだろう。	has:또 만나게	fix	normalize
+normalize:spelling-variant	残っていて困る事もない。	has:있어 곤란할	fix	normalize
+normalize:spelling-variant	一つだけ分かっている事は、	has:있는 것은	fix	normalize
+cx:novel-fixes-4:220	「謝ることなんてないわよ」	has:사과하는 일은	fix	rewrites
+normalize:spelling-variant	お前が気にする事じゃない」	has:쓰는 것이	fix	normalize
+cx:novel-fixes-4:222	なんぞ、気になることでも？	has:일이라도	fix	rewrites
+normalize:spelling-variant	まず王都内に潜入する事だ。	has:잠입하는 것이다	fix	normalize
+cx:novel-fixes-4:220	さて、何かやることは無いか？	has:하는 일은	fix	rewrites
+normalize:spelling-variant	それに自身が転生者である事。	has:전생자인 것	fix	normalize
+normalize:spelling-variant	ただ急に話しかけられた事に、	has:걸어왔던 것에	fix	normalize
+normalize:spelling-variant	とも秘密裏に尋ねた事もある。	has:물은 적도	fix	normalize
+normalize:spelling-variant	それが忍ぶという事でして……」	has:참는다는 것이라서	fix	normalize
+normalize:spelling-variant	高さもあるので落ちる事もない。	has:있으므로 떨어질	fix	normalize
+normalize:spelling-variant	先にそちらから決める事にする。	has:결정하기로 한다	fix	normalize
+cx:novel-fixes-4:80	いったいどういうことなんだっ？！	has:어떻게 된 일이야	fix	rewrites
+normalize:spelling-variant	また変な事言おうとしてるでしょ！	has:소리 하려	fix	normalize
+normalize:spelling-variant	「生まれてきた事をお祝いする日だ」	has:태어난 걸	fix	normalize
+normalize:spelling-variant	それ以外にも頭を悩ませる事は多い。	has:썩이는 것은	fix	normalize
+normalize:spelling-variant	いつだって自分に不利な事はあった。	has:불리한 것은	fix	normalize
+cx:novel-fixes-4:226	これは…見なかったことにしよう…。	has:보지 않은	fix	rewrites
+cx:novel-fixes-4:80	「これはどういうことかな、アール？」	has:어떻게 된 일일까	fix	rewrites
+normalize:spelling-variant	ちょっと聞きたい事があるだけだよ～。	has:싶은 것이	fix	normalize
+normalize:spelling-variant	「俺は……命の重さを感じた事がない」	has:느꼈던 적이	fix	normalize
+normalize:spelling-variant	「父様にお願いしたい事があるのです」	has:싶은 게	fix	normalize
+normalize:spelling-variant	――これは本気でマズイことになった。	――이것은 진심으로 큰일 났다.	keep	normalize
+normalize:spelling-variant	……いやいや、そんなことは有りえん。	……아니아니, 그런 일은 있을 수.	keep	normalize
+normalize:spelling-variant	あ、朝っぱらってことはないと思うな。	아, 이른 아침 라는 것은 없다고 생각해.	keep	normalize
+normalize:spelling-variant	「いえ、さすがにそんなことはないわ」	「아뇨, 아무래도 그렇지 않아」	keep	normalize
+normalize:spelling-variant	「お姉ちゃんを、大事にしてあげて？」	「언니를, 소중히 해 줘?」	keep	normalize
+normalize:spelling-variant	こ、これは困ったことになるのですぞ！	이, 이것은 곤란하게 되는 것이지!	keep	normalize
+normalize:spelling-variant	「このまま何事もなければいいけれど」	「이대로 아무 일도 없으면 좋지만」	keep	normalize
+normalize:spelling-variant	「こらっ、余計なことしなさんなっ！」	「이봐, 쓸데없는 일 하지 말아!」	keep	normalize
+normalize:spelling-variant	そう……決して無茶なことはしないで。	그렇게……결코 무리한 것은 하지 마.	keep	normalize
+normalize:spelling-variant	そう見えることもあるかもしれないが、	그렇게 보이는 일도 있을지도 모르지만,	keep	normalize
+normalize:spelling-variant	「ってことは、映画じゃないのかな？」	「라는 건, 영화가 아닐지?」	keep	normalize
+normalize:spelling-variant	「みんなに迷惑かけることになるよね」	「모두에게 폐를 끼치게 되지」	keep	normalize
+normalize:spelling-variant	「テロということは交戦の可能性も？」	「테러라는 건 교전의 가능성도?」	keep	normalize
+normalize:spelling-variant	「明日は部室で食べることにしようよ」	「내일은 동아리방에서 먹기로 하자」	keep	normalize
+normalize:spelling-variant	「状況が最悪だって事はよく分かった」	「상황이 최악도 일은 잘 알았어」	keep	normalize
+normalize:spelling-variant	話題にすら出さなかったということは、	화제에조차 내지 않았다는 것은,	keep	normalize
+normalize:spelling-variant	「（くっ、こういうことですか……）」	「(큭, 이런 것입니까……)」	keep	normalize
+normalize:spelling-variant	あぁ、そ、長門も大事にしてあげてね。	아아, 나, 나가토도 소중히 해 줘.	keep	normalize
+normalize:spelling-variant	あと、私のことはアルファでいいわよ。	그리고, 나는 알파면 돼.	keep	normalize
+normalize:spelling-variant	いつものことですからね、ハハハ……！	평소의 일이니까요, 하하하……!	keep	normalize

@@ -20,7 +20,7 @@ cx:koto-nonai:10	彼女は、俺が出会ったことのないタイプの人間
 cx:koto-nonai:10	「ヘイディオ……聞いたことのない名前だわ」	!rule:cx:koto-nonai:10	keep	rewrites
 cx:koto-nonai:10	一度も見せたことのない顔	!rule:cx:koto-nonai:10	keep	rewrites
 cx:koto-nonai:10	会うことのできない人	!rule:cx:koto-nonai:10	keep	rewrites
-cx:koto-nonai:10	部隊を率いる事のない、後方勤務への。	!rule:cx:koto-nonai:10	keep	rewrites
+cx:koto-nonai:10	部隊を率いる事のない、後方勤務への。	has:이끌 일이 없는	fix	rewrites
 cx:koto-nonai:10	二度と会うことはないだろう	!rule:cx:koto-nonai:10	keep	rewrites
 cx:koto-nonai:10	怒ることはない	!rule:cx:koto-nonai:10	keep	rewrites
 cx:koto-nonai:10	彼は負けることがない。	!rule:cx:koto-nonai:10	keep	rewrites

@@ -1,0 +1,40 @@
+# 규칙: GRM-3529
+rule	input	expected	kind	layer
+compose:stem-comma	「友人として、かしら」	has:친구로서, 일까	fix	compose
+compose:stem-comma	「……あきらめ、かな？」	has:포기해, 일까	fix	compose
+compose:stem-comma	もっと…頑張らないと、ですね。	has:않으면, 이군요	fix	compose
+compose:stem-comma	幻なら消えてくれ、という感じだ。	has:주어, 라는	fix	compose
+compose:stem-comma	自分を信じてくれ、という言葉は、	has:주어, 라는	fix	compose
+compose:stem-comma	また来てくれ、と言いそうになった。	has:주고, 라고	fix	compose
+compose:stem-comma	まるで諦めてくれ、と言わんばかりで。	has:주고, 라고	fix	compose
+compose:stem-comma	あっ……夕食の準備をしないと、ですね。	has:않으면, 이군요	fix	compose
+compose:stem-comma	腰がぴくんと跳ね、より股間が硬くなる。	has:뛰어, 보다	fix	compose
+compose:stem-comma	校長は根本的に解決してくれ、と頼んだようだが、	has:주어, 라고	fix	compose
+compose:stem-comma	あっちへ行け、という風に手を振ると友人の脇に控えた。	has:있어, 라는	fix	compose
+compose:stem-comma	子爵は国王を見定めるように見上げ、だが無言を貫いた。	has:올려다봐, 이지만	fix	compose
+compose:stem-comma	手を握ったり、キスをしたり、ということは難しいので、	has:하거나, 라는	fix	compose
+compose:stem-comma	彼氏が困っているのを見て嬉しくなるなんて、と桜庭は思う。	has:기뻐지다니, 와	fix	compose
+compose:stem-comma	遣独潜水艦作戦の第二次遣独艦として、かの地に向かったのよ。	has:제2차견독함으로서, 인가의	fix	compose
+compose:stem-comma	「これからも白崎の力になってやってくれ、というだけのことだ」	has:줘, 라고	fix	compose
+compose:stem-comma	生徒会の主張は、その団体らしい発表をしてくれ、ということだった。	has:주어, 라는	fix	compose
+compose:stem-comma	サポーターとして、という意味でないのは彼女の表情から明らかだった。	has:서포터로서, 라는	fix	compose
+compose:stem-comma	「そう、それじゃ、また来週ね、美冬」	「그래, 그럼, 다음 주에 보자, 미후유」	keep	compose
+compose:stem-comma	「近代化改修」を進め、戦備を整えよ！	「근대화 개수」를 진행시켜, 전비를 갖추어라!	keep	compose
+compose:stem-comma	「（落ち着け、ここは堪えるんだっ）」	「(진정해, 여기는 참는 거야)」	keep	compose
+compose:stem-comma	あの浜で、楽しく話していたような……	그 바닷가에서, 즐겁게 이야기한 것 같은……	keep	compose
+compose:stem-comma	この力で、艦隊をきっとお守りします！	이 힘으로, 함대를 분명 수호합니다!	keep	compose
+compose:stem-comma	さっき話した通り、選択肢は２つだけ≫	조금 전 이야기한 대로, 선택지는 2개만≫	keep	compose
+compose:stem-comma	そう考え、サラは料理が来るのを待つ。	그렇게 생각해, 사라는 요리가 오는 것을 기다린다.	keep	compose
+compose:stem-comma	でも、それを振り切り、俺は口を開く。	하지만, 그것을 뿌리치고, 나는 입을 연다.	keep	compose
+compose:stem-comma	ふぁぁぁ…早く寝て、早く起きようよ…	후아아아…빨리 자, 일찍 일어나자…	keep	compose
+compose:stem-comma	よし、囲んで追い込め、追い込めぇ！」	좋아, 둘러싸 쫓아 담아, 몰아넣어라!」	keep	compose
+compose:stem-comma	わたしのがキレイだけど、見て、提督！	나의 것이 깨끗하지만, 봐, 제독!	keep	compose
+compose:stem-comma	わらわの護り、その目で見て見なさい。	이 몸의 수비, 그 눈으로 보고 봐.	keep	compose
+compose:stem-comma	クワがスッと現れ、俺の手に握られる。	괭이가 슥 나타나, 내 손에 잡힌다.	keep	compose
+compose:stem-comma	セリカはアラタに触れ、瞳を覗き込む。	세리카는 아라타에 접해, 눈동자를 들여다본다.	keep	compose
+compose:stem-comma	三一駆、秋刀魚祭り、参加いたします！	31구, 꽁치 제사 지내, 참가하겠습니다!	keep	compose
+compose:stem-comma	主人はサラの問いかけに頷き、答えた。	주인은 사라의 질문에 끄덕여, 대답했다.	keep	compose
+compose:stem-comma	俺の目を見て、何度も力を込めてくる。	내 눈을 보고, 몇 번이나 힘을 집중해 온다.	keep	compose
+compose:stem-comma	俺は玄関のドアを閉め、門の外に出る。	나는 현관의 문을 닫아, 몬노소토에 나온다.	keep	compose
+compose:stem-comma	僕がそう言って謝り、ベッドに座ると、	내가 그렇게 말해 사과해, 침대에 앉으면,	keep	compose
+compose:stem-comma	戦いに臨み、空母へと改装されました。	싸움에 임해, 항공 모함으로 개장되었습니다.	keep	compose

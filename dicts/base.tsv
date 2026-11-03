@@ -3020,7 +3020,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いじっぱり	고집쟁이	N110	VHnSFl	Dd	GN				jisjk:125478		
 いじにな	고집을 세&AI@	M428			GN				jisjk:144255		
 いじまし	인색$AB@	H7U0			GN				jisjk:4857		
-いじめ	이지메	N110	UYh	Hd	GN				jisjk:6449		
+いじめ	괴롭힘	N110	UYh	Hd	GN				jisjk:6449		
 いじめ	괴롭&AW@	M437	SFl		GN				jisjk:140703		
 いじめっこ	개구쟁이	I110	VHn		GN				jisjk:40368		
 いじめにあ	집단 괴롭힘을 당&AV@	M420			GN				jisjk:144257		
@@ -35268,7 +35268,7 @@ ttt	ttt	K110			GN				jisjk:201744
 どこの馬の骨だかわからな	어디 태생인지도 $C4@	H7N0			GN				jisjk:137410		
 どこの馬の骨ともわからぬ	어디 태생인지도 모르는	E0H0			GN				jisjk:150016		
 どこへでも	어디든지	E311			GN				jisjk:868		
-どこまでも	어디까지나	E311			GN				jisjk:869		
+どこまでも	한없이	E311			GN				jisjk:869		
 どこもが	어디나	E300			GN				jisjk:149380		
 どこやら	어딘지 모르게	E311			GN				jisjk:870		
 どころ	0 것	S500			GN				jisjk:4359		
@@ -37145,7 +37145,7 @@ ttt	ttt	K110			GN				jisjk:201744
 に向け	에게 향&AV@	M427		TuPj	GN	2544	||1 A-1-= "VHn"	に向け는 앞말이 사람 의미 계열 VHn이면 ‘에게 향하다’를 고른다.	jisjk:266424		
 に向け	(을)를 향&AV@	M447	XXX	TuPj	GN	2858	||2 &&4 M+0== "58*" P-1== "1**" P+1== "1**" Y+0= "6" A-1!= "VHn"	「に向け」는 명사 사이의 명사형에서 자신의 어미를 ‘-아/어’로 바꾸거나 앞말에 VHn 코드가 없으면 ‘(을)를 향하다’를 고른다.	jisjk:268431		
 に向けての	(을)를 향한	E300		Tu	GN				jisjk:262998		
-に向けられ	(으)로 향해&AL@	M427		TuPj	GN				jisjk:145608		
+に向けられ	(을)를 향&AV@	M427		TuPj	GN				jisjk:145608		
 に向ってであ	에 향해서&Ac@	M428		Tu	GN				jisjk:148003		
 に喜んでいただけ	(이)가  기뻐&AV@	M447		Tu	GN				jisjk:262799		
 に困	(이)가 곤란&AV@	M418		Tu	GN				jisjk:91232		
@@ -120111,7 +120111,7 @@ ttt	ttt	K110			GN				jisjk:201744
 任長栄	임장영	N130	QPN		GN				jisjk:209406		
 任靖周	임정주	N130	QPN		GN				jisjk:209411		
 企	기도&AV@	M445			GN				jisjk:139313		
-企て	기획	N110			GN				jisjk:7274		
+企て	계획	N110			GN				jisjk:7274		
 企て	기획&AV@	M437			GN				jisjk:7275		
 企み	계획	N110			GN				jisjk:153005		
 企会	기업회계	N110			GN				jisjk:161399		
@@ -206377,7 +206377,7 @@ ttt	ttt	K110			GN				jisjk:201744
 心弱	마음이 약$AB@	H7U0			GN				jisjk:5740		
 心張り棒	버팀목	N110	VPe		GN				jisjk:193012		
 心強	든든$AB@	H7U0			GN				jisjk:5732		
-心当たり	짐작	I110			GN				jisjk:111314		
+心当たり	짐작 가는 데	I110			GN				jisjk:111314		
 心当たりがな	짚이는 곳이 $FA@	H7U0			GN				jisjk:5735		
 心当て	추측	I110			GN				jisjk:106232		
 心当り	짐작	I110			GN				jisjk:106231		
@@ -251672,7 +251672,7 @@ ttt	ttt	K110			GN				jisjk:201744
 残念そう	유감%A2@	G8U0			GN				jisjk:122584		
 残念ながら	유감스럽지만	A9H1			GN				jisjk:90302		
 残念なこと	유감스러운 일	G110			GN				jisjk:151145		
-残念なことに	유감스럽게	E300			GN				jisjk:353227		
+残念なことに	유감스럽게도	E300			GN				jisjk:353227		
 残念なのは	유감스러운 것은	N110		Nn	GN				jisjk:151147		
 残念な事に	유감스럽게도	E300			GN				jisjk:149173		
 残念に	유감으로	E300			GN				jisjk:267513		
@@ -301454,8 +301454,8 @@ ttt	ttt	K110			GN				jisjk:201744
 編み上げ	편상화	N110	VCp		GN				jisjk:124795		
 編み上げ	&AM@	M437			GN				jisjk:373314		
 編み上げ靴	편상화	N110	VCp		GN				jisjk:124796		
-編み出	짜&A6@	M433			GN				jisjk:95738		
-編み出	고안해 &A6@	M443			GN				jisjk:138501		
+編み出	고안해 &A6@	M433			GN				jisjk:95738		
+編み出	짜&A6@	M443			GN				jisjk:138501		
 編み地	편물지	N110			GN				jisjk:163145		
 編み戸	사립문	N110	VBl		GN				jisjk:124812		
 編み方	뜨는 방법	N110			GN				jisjk:163184		
@@ -332120,7 +332120,7 @@ ttt	ttt	K110			GN				jisjk:201744
 足を運ばないところ	가지 않는 곳	N110	VPl		GN				jisjk:150392		
 足を限りに	걸을 수 있는 데까지	E300			GN				jisjk:148943		
 足タラッピング	발트래핑	N110	UTt		GN				jisjk:204438		
-足下	발 밑	N110	VPl		GN				jisjk:33788		
+足下	발밑	N110	VPl		GN				jisjk:33788		
 足下に付け込	등쳐 &HU@	M445			GN				jisjk:117036		
 足下を見られ	약점을 잡&AW@	M447			GN				jisjk:117039		
 足並み	보조	K110			GN				jisjk:116545		

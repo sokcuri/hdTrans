@@ -1,0 +1,47 @@
+# 규칙: LEX-4164
+rule	input	expected	kind	layer
+defaults:novel-lexical	いじめなんかじゃない	has:괴롭힘	fix	defaults
+defaults:novel-lexical	どこまでも沈む……！	has:한없이	fix	defaults
+defaults:novel-lexical	ええ…　心当たりは？	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	私に心当たりがある｡	has:짐작 가는 데가	fix	defaults
+defaults:novel-lexical	どこまでも その…｡	has:한없이	fix	defaults
+defaults:novel-lexical	どこまでも一蓮托生！	has:한없이	fix	defaults
+defaults:novel-lexical	何か心当たりがある？	has:짐작 가는 데가	fix	defaults
+defaults:novel-lexical	１つ心当たりがあるわ	has:짐작 가는 데가	fix	defaults
+defaults:novel-lexical	どこまでも、受け身。	has:한없이	fix	defaults
+defaults:novel-lexical	「足下を探してくれ」	has:「발밑을	fix	defaults
+defaults:novel-lexical	「心当たりはないが」	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	どこまでも重たい空気。	has:한없이	fix	defaults
+defaults:novel-lexical	なにも心当たりはない。	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	何か心当たりはない？」	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	今どこまでも行けそうさ	has:지금 한없이	fix	defaults
+defaults:novel-lexical	だが、心当たりは……」	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	「心当たりですか……」	has:짐작 가는 데입니까	fix	defaults
+defaults:novel-lexical	心当たりはありませんか？	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	心当たりは ないのんか？	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	♬　どこまでも続くこの空	has:♬ 한없이	fix	defaults
+defaults:novel-lexical	「行き先に心当たりは？」	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	と、小太刀は足下を示す。	has:칼은 발밑을	fix	defaults
+defaults:novel-lexical	背中を押していなかったら。	has:등을 밀지	fix	defaults
+defaults:novel-lexical	ほかに 何か 心当たりは？	has:짐작 가는 데는	fix	defaults
+defaults:novel-lexical	後輩いじめじゃないっすか！	has:괴롭힘이	fix	defaults
+defaults:novel-lexical	……そして何も言わずに背中を向ける。	……그리고 아무것도 말하지 않고 등을 돌린다.	keep	defaults
+defaults:novel-lexical	「何とか期限前に企画がまとまったね」	「어떻게든 기한 전에 기획이 결정됐네」	keep	defaults
+defaults:novel-lexical	魅音と勘違いしていじめて悪かったな。	미온과 착각해 괴롭혀 미안했네.	keep	defaults
+defaults:novel-lexical	あくまでも目安としてご利用ください。	어디까지나 기준으로서 이용하십시오.	keep	defaults
+defaults:novel-lexical	それはごろんと、俺の足元に転がった。	그것은 데굴, 내 발밑에 굴렀다.	keep	defaults
+defaults:novel-lexical	シンダリオンを生み出すよう仕向けた」	신다리온을 만들어 내도록 유도했다」	keep	defaults
+defaults:novel-lexical	というのは、あくまで俺の友人の弁だ。	그렇다고 하는 것은, 어디까지나 내 친구의 말이다.	keep	defaults
+defaults:novel-lexical	まず、椿の母は大企業の令嬢であった。	우선, 츠바키의 어머니는 대기업의 영애였다.	keep	defaults
+defaults:novel-lexical	柏木はチラ見でその画面に目を向ける。	카시와기는 치라 보고로 그 화면에 눈길을 돌린다.	keep	defaults
+defaults:novel-lexical	今回は重工業機械向けの受注でしたが、	이번에는 중공업 기계전용의 수주였지만,	keep	defaults
+defaults:novel-lexical	創立100年の里おこしベンチャー企業	창립 100년의 마을 부흥 벤처기업	keep	defaults
+defaults:novel-lexical	地域共生型サービス企業をめざします。	지역 공생형 서비스 기업을 목표로 합니다.	keep	defaults
+defaults:novel-lexical	小太刀が手品師みたいな企み顔をした。	작은 칼이 마술사 같은 계획얼굴을 했다.	keep	defaults
+defaults:novel-lexical	昭和の乙女向けノベルで読んだような」	쇼와의 여성향 노벨로 읽은 것 같은」	keep	defaults
+defaults:novel-lexical	背中に感じる彼女の体温が、心地よい。	등에 느끼는 그녀의 체온이, 기분 좋다.	keep	defaults
+defaults:novel-lexical	背中を撃たれ、つんのめって倒れ込む。	등을 총격당해, 푹 고꾸라져 쓰러진다.	keep	defaults
+defaults:novel-lexical	誘導に従い、視線をそちらに向ける……	유도에 따라, 시선을 그쪽으로 향한다……	keep	defaults
+defaults:novel-lexical	あ～ なるほど腰から 結構 背中…｡	아~ 그렇구나 허리에서 상당히 등….	keep	defaults
+defaults:novel-lexical	⟨どこまで危険に見えるかは出川次第⟩	⟨어디까지 위험하게 보일까는 데가와 나름 ⟩	keep	defaults
+defaults:novel-lexical	>>足元に気を付けて降りてください｡	>>발밑에 조심해 내려 주세요.	keep	defaults

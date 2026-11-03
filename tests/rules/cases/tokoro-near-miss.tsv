@@ -1,0 +1,24 @@
+# 규칙: GRM-3528
+rule	input	expected	kind	layer
+cx:tokoro-kanji:5	これが壊れてたら泣きを見ていた所だった。	has:볼 뻔했다	fix	rewrites
+cx:tokoro-kanji:5	これが壊れてたら大変な目に遭っていた所だった。	has:당할 뻔했다	fix	rewrites
+cx:tokoro-kanji:5	なんか、取り込まれるところだった…。	왠지, 흡수되려던 참이었어….	keep	rewrites
+cx:tokoro-kanji:5	満足とばかりに席を立つところだった。	만족이라는 듯이 자리에서 일어나려던 참이었다.	keep	rewrites
+cx:tokoro-kanji:5	特にないです。　いい場所だったので。	딱히 없습니다. 좋은 장소였으므로.	keep	rewrites
+cx:tokoro-kanji:5	直哉たちの演奏が終わったところだった	나오야들의 연주가 끝난 참이었다	keep	rewrites
+cx:tokoro-kanji:5	夜這いの作法を教わるところだった…｡	야저 있고의 예법을 배우려던 참이었다….	keep	rewrites
+cx:tokoro-kanji:5	重要度が低い場所だったからじゃない｡	중요도가 낮은 장소였으니까가 아니다.	keep	rewrites
+cx:tokoro-kanji:5	この手で撃ち殺してしまうところだった	이 손으로 쏘아 죽여버릴 뻔했다	keep	rewrites
+cx:tokoro-kanji:5	危うく気付かず、落ちるところだった。	하마터면 깨닫지 않고, 떨어질 뻔했다.	keep	rewrites
+cx:tokoro-kanji:5	これはこれで重要な場所だったりする。	이것은 이것대로 중요한 장소이기도 하다.	keep	rewrites
+cx:tokoro-kanji:5	あやうく畳まれるところだったとかｗ	하마터면 접어질 뻔했다든가 ㅋ	keep	rewrites
+cx:tokoro-kanji:5	もう少しで死ぬところだったクマー！	거의 죽을 지경이었던 곰-!	keep	rewrites
+cx:tokoro-kanji:5	ちょうどお兄様が帰宅したところだった。	마침 형님이 귀가한 참이었다.	keep	rewrites
+cx:tokoro-kanji:5	地蔵峠がどういう場所だったかによる	지조토게가 어떤 장소였는지에 의한다	keep	rewrites
+cx:tokoro-kanji:5	たまたま 家が近所だったってだけで	우연히 집이 이웃이었다는만으로	keep	rewrites
+cx:tokoro-kanji:5	俺たちが生まれないところだったもんな｡	우리가 태어나지 않는 곳이었던 거야.	keep	rewrites
+cx:tokoro-kanji:5	せっかく慣れてきたところだったのに	모처럼 익숙해져 왔는데였는데	keep	rewrites
+cx:tokoro-kanji:5	危うく臭い飯を食うところだった俺を	하마터면 구린 밥을 먹을 뻔했던 나를	keep	rewrites
+cx:tokoro-kanji:5	危うく店の親父を射殺する所だったんだぜ	하마터면 가게의 아버지를 사살하는 곳이었다	keep	rewrites
+cx:tokoro-kanji:5	寝室を出ると、そこは台所だった。	침실을 나오니, 거기는 부엌이었다.	keep	rewrites
+cx:tokoro-kanji:5	一歩間違えば船まで奪われるところだった。	한 걸음 잘못하면 배까지 빼앗길 뻔했다.	keep	rewrites

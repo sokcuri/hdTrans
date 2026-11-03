@@ -16,7 +16,7 @@ cx:novel-fixes-3:80	田村が声にならない叫び声をあげながら駆け
 cx:novel-fixes-3:80	何らかの理由を見つけてここへ攻め込んでくる用意はしている	has:쳐들어올 준비는	fix	rewrites
 cx:novel-fixes-3:80	男が走ってくる。	!rule:cx:novel-fixes-3:80	keep	rewrites
 cx:novel-fixes-3:90	てか、だんだん熱さも痛みも感じなくなってきた。	has:느끼지 않게 되었다.	fix	rewrites
-cx:novel-fixes-3:90	同じ人間とは思えなくなってきた・・・	has:생각되지 않게 되었다	fix	rewrites
+cx:novel-fixes-3:90	同じ人間とは思えなくなってきた・・・	같은 인간이라고는 생각되지 않게 되었다···	fix	rewrites
 cx:novel-fixes-3:90	寒くなってきた。	!rule:cx:novel-fixes-3:90	keep	rewrites
 cx:novel-fixes-3:95	本来有り得ぬ天文学的確率で、三上悟は、異なる世界の魔物として転生する事となる。	has:마물로서 전생하게 된다.	fix	rewrites
 cx:novel-fixes-3:95	いずれ本当に死ぬ事になるぞ	has:정말 죽게 되겠어	fix	rewrites

@@ -1,0 +1,38 @@
+# 규칙: LEX-4157
+rule	input	expected	kind	layer
+cx:novel-fixes-4:80	一体 どういうこと？	has:어떻게 된 일	fix	rewrites
+cx:novel-fixes-4:80	これはどういうことだ	has:어떻게 된 일이다	fix	rewrites
+cx:novel-fixes-4:80	こりゃ 一体 どういうことだ？	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	いったいどういうことなんだっ？！	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	ゲジ姉  これは どういうことだ？	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	(二人の泣き声)一体 どういうことだ！	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	「呼ばれたというのはどういうことだ？」	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	(冥夜)武！ あれは いったいどういうことだ？	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	「二人とも同じメール……一体どういうことだ？」	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	(こころ)アイドルが戦ってる…一体どういうこと？	has:어떻게 된 일	fix	rewrites
+cx:novel-fixes-4:80	吉村春夫との関係は一体どういうことになるんでしょう	has:어떻게 된 일이	fix	rewrites
+cx:novel-fixes-4:80	（白雲軒）理由もなく暇を出すなんてのはどういうことだい？	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	図書部のくせに、本を読もうとする奴がいないのはどういうことか。	has:어떻게 된 일인가	fix	rewrites
+cx:novel-fixes-4:80	人にコーチを頼んでおいて、やる気のなさが滲んでるのはどういう事よ」	has:어떻게 된 일이야	fix	rewrites
+cx:novel-fixes-4:80	(裕平)これは どういうことでしょうか？｢水野春子｣となっていますが	has:어떻게 된 일입니까	fix	rewrites
+cx:novel-fixes-4:80	これはどういう事？	has:어떻게 된 일	fix	rewrites
+cx:novel-fixes-4:80	≫382、地蔵峠はどういうところだ？	≫382, 지조토게는 어떤 곳이야?	keep	rewrites
+cx:novel-fixes-4:80	≫754それはどういう嫉妬だよアホｗ	≫754 그것은 어떤 질투야 바보 ㅋ	keep	rewrites
+cx:novel-fixes-4:80	「これはいったいどういう状況ですか」	「이건 도대체 어떤 상황입니까」	keep	rewrites
+cx:novel-fixes-4:80	「それはどういった意味でしょうか？」	「그건 어떤 의미입니까?」	keep	rewrites
+cx:novel-fixes-4:80	「で、昨日のお礼ってどういうこと？」	「그래서, 어제 감사 인사는 무슨 뜻?」	keep	rewrites
+cx:novel-fixes-4:80	どういうことでしょうかあああああああ	무슨 뜻입니까아아아아아아아	keep	rewrites
+cx:novel-fixes-4:80	どういうふうに亡くなられたのだろう？	어떤 식으로 돌아가셨을까?	keep	rewrites
+cx:novel-fixes-4:80	今日は、どういったご用件でしょうか？	오늘은, 어떤 용건입니까?	keep	rewrites
+cx:novel-fixes-4:80	≪ちょっとアラタ、どういうつもり！≫	≪조금 아라타, 어떤 작정! ≫	keep	rewrites
+cx:novel-fixes-4:80	(田山)これ研ぎとはどういう関係が？	(다야마) 이것 연마와는 어떤 관계가?	keep	rewrites
+cx:novel-fixes-4:80	いやいや…えっ どういうことですか？	아니아니…어 어떻게 된 일입니까?	keep	rewrites
+cx:novel-fixes-4:80	(上田)どういう教えだったんですか？	(우에다) 어떤 가르침이었던 것입니까?	keep	rewrites
+cx:novel-fixes-4:80	どういうきっかけでファンになったの？	어떤 계기로 팬이 됐어?	keep	rewrites
+cx:novel-fixes-4:80	どういうとこ連れていったらええかな？	어떤 곳 데려가면 좋을까?	keep	rewrites
+cx:novel-fixes-4:80	どういう意味があんねんそんなことして	무슨 뜻이 네 그런 일 해	keep	rewrites
+cx:novel-fixes-4:80	（今田）ねえ どういうふうになんのか	(이마다) 저기 어떤 식으로 무슨인가	keep	rewrites
+cx:novel-fixes-4:80	世間の人はどういう目で見るじゃろうの	세상의 사람은 어떤 눈 (으고 보는은 우노	keep	rewrites
+cx:novel-fixes-4:80	お客さんはどういう目で見るじゃろうの	손님은 어떤 눈 (으고 보는은 우노	keep	rewrites
+cx:novel-fixes-4:80	誰でもいいのかよどういうことだ お前	누구라도 좋은 건지무슨 뜻이다 너	keep	rewrites
+cx:novel-fixes-4:80	(ノブ) へぇ～！ どういうふうに？	(노브) 헤에~! 어떤 식으로?	keep	rewrites

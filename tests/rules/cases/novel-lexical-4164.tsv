@@ -1,0 +1,25 @@
+# 규칙: LEX-4164, LEX-4165, GRM-3532
+rule	input	expected	kind	layer
+dict:jisjk:869	頭上には青空がどこまでもひろがっていて	has:한없이 퍼지고	fix	defaults
+dict:jisjk:869	対し、子爵の表情はどこまでも冷ややかだ。	has:한없이 냉담하다	fix	defaults
+dict:jisjk:7274	更には暗殺の企て！	has:암살의 계획!	fix	defaults
+dict:jisjk:6449	これからいじめ問題なんかで大変だろうなあ	has:괴롭힘 문제	fix	defaults
+dict:jisjk:111314	「非道の数々、と言われても心当たりがございません。」	has:짐작 가는 데가 없습니다	fix	defaults
+dict:jisjk:111314	「うーん……なにも心当たりはない？」	has:짐작 가는 데는 없어	fix	defaults
+dict:jisjk:145608	私に向けられる視線は奇異の視線そのものだ。	has:나를 향하는 시선	fix	defaults
+dict:jisjk:145608	殺意がこちらに向けられる。	has:이쪽을 향한다	fix	defaults
+dict:jisjk:95738	魔学を編み出した第一人者であった。	has:고안해 낸	fix	defaults
+dict:i:6575	なのでレナの背中を押して、魅音を置き去りに	has:등을 밀어,	fix	lookup
+phrase:背を押す	アヤメは誰かを癒し励まし、そっとその背を押すだけだ。	has:등을 밀 뿐이다	fix	phrases
+phrase:と言うように	何故、と言うようにユフィリア嬢が視線を上げる。	has:라고 말하듯이 유필리아	fix	phrases
+dict:jisjk:33788	だからこそ、尚更に理解出来ない。足下が崩れ落ちそうな現実の前にふらつき	has:발밑이 무너져	fix	defaults
+compose:name-suffix-spacing	ユフィリア嬢が泣いた。	유필리아 양이 울었다.	fix	compose
+compose:name-suffix-spacing	立場としてはアルガルド側が持ち込んだ婚約話になる。	has:아르가르드 측이	fix	compose
+compose:name-suffix-spacing	お嬢様が来た。	아가씨가 왔다.	keep	compose
+compose:name-suffix-spacing	反対側に回った。	has:반대쪽으로	keep	compose
+compose:humble-koto	提督、私のこともどうぞ、お見知りおき下さいね。	has:저도	fix	compose
+rewrite:result-state	関係は国の為の義務という連帯感によって成り立っていたものであった。	has:성립되어 있던	fix	rewrites
+rewrite:result-state	「状況を見る限り、なんかユフィリア嬢が孤立してる感じかな？」	has:고립돼 있는	fix	rewrites
+rewrite:result-state	ユフィリアの喉は引き攣ったように声を出せなくなっていた。	has:낼 수 없게 되어 있었다	fix	rewrites
+rewrite:result-state	その全ては貴様が糸を引いている事は調べが付いているのだ！	has:조사가 끝났다	fix	rewrites
+rewrite:result-state	勉強がだんだんわからなくなっている。	has:모르게 되고 있다	keep	rewrites
