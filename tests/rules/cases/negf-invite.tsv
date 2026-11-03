@@ -49,6 +49,31 @@ cx:neg-final-invite:40	「そんなことより、なにか飲みませんか？
 cx:neg-final-invite:40	「時間ありませんか？」	「시간 없습니까?」	keep	rewrites
 cx:neg-final-invite:40	「なんとかなりませんか？」	!rule:cx:neg-final-invite:40	keep	rewrites
 cx:neg-final-invite:40	増えた特待生の学力レベルは下がりませんか？	!rule:cx:neg-final-invite:40	keep	rewrites
+cx:neg-final-invite:36	お話を聞いていただけませんか？	rule:cx:neg-final-invite:36=1지 않겠습니까	fix	rewrites
+cx:neg-final-invite:36	一度、ご覧になりませんか？	한 번, 보시지 않겠습니까?	fix	rewrites
+cx:neg-final-invite:36	少しお休みになりませんか？	조금 쉬시지 않겠습니까?	fix	rewrites
+cx:neg-final-invite:36	今度、うちにお越しになりませんか？	has:오시지 않겠습니까?	fix	rewrites
+cx:neg-final-invite:36	一緒に召し上がりませんか？	함께 드시지 않겠습니까?	keep	rewrites
+cx:neg-final-invite:36	「質問の意図がおわかりになりませんか？」	!rule:cx:neg-final-invite:36	keep	rewrites
+cx:neg-final-invite:36	「先生はご覧になりませんか？」	「선생님은 보시지 않습니까?」	keep	rewrites
+cx:neg-final-invite:36	「まだお休みになりませんか？」	lacks:않겠습니까	keep	rewrites
+cx:neg-final-invite:36	この書類を見ていただけませんか？	!rule:cx:neg-final-invite:36	keep	rewrites
+cx:neg-final-invite:36	「お茶でもお飲みになりませんか？」	「차라도 드시지 않겠습니까?」	fix	rewrites
+cx:neg-final-invite:36	「そんなことより、なにか飲みませんか？」	!rule:cx:neg-final-invite:36	keep	rewrites
+cx:neg-final-invite:38	「良ければこのまま私の部屋に参りませんか？」	「괜찮으면 이대로 제 방에 가시지 않겠습니까?」	fix	rewrites
+cx:neg-final-invite:38	一緒に参りませんか？	rule:cx:neg-final-invite:38=2시지 않겠습니까	fix	rewrites
+cx:neg-final-invite:38	まいりませんか？	오시지 않겠습니까?	fix	rewrites
+cx:neg-final-invite:38	皆様もご一緒に参りませんか。	has:가시지 않겠습니까.	fix	rewrites
+cx:neg-final-invite:38	「僕の家に参りませんか」	「제 집에 가시지 않겠습니까」	fix	rewrites
+cx:neg-final-invite:38	「まだ参りませんか？」	「아직 가지 않습니까?」	keep	rewrites
+cx:neg-final-invite:38	「田中さんは参りませんか？」	!rule:cx:neg-final-invite:38	keep	rewrites
+cx:neg-final-invite:38	もう参りません。	이제 가지 않습니다.	keep	rewrites
+cx:neg-final-invite:38	「一緒に舞いませんか？」	!rule:cx:neg-final-invite:38	keep	rewrites
+cx:neg-final-invite:38	「わたくしも参りませんか？」	lacks:가시지	keep	rewrites
+cx:neg-final-invite:38	「私も一緒に参りませんか？」	!rule:cx:neg-final-invite:38	keep	rewrites
+cx:neg-final-invite:38	「私、参りませんか？」	lacks:가시지	keep	rewrites
+cx:neg-final-invite:40	「一緒に舞いませんか？」	「함께 춤추지 않을래요?」	fix	rewrites
+cx:neg-final-invite:40	「良ければこのまま私の部屋に参りませんか？」	!rule:cx:neg-final-invite:40	keep	rewrites
 cx:neg-final-invite:50	ところで 一献つきあわんか？	has:하지 않겠는가?	fix	rewrites
 cx:neg-final-invite:50	うん｡ お前達｡落とし主を捜してくれぬか？	has:찾아 주지 않겠는가?	fix	rewrites
 cx:neg-final-invite:50	わしのそばに　いてくれんか。	has:있어 주지 않겠는가.	fix	rewrites

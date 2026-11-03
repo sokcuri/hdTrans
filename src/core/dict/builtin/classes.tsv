@@ -390,6 +390,7 @@
 //= verb.janai-quote	The quoting いう and 言う before which a sentence-final んじゃない asks what a thing is called and forbids nothing (それがつれないって言うんじゃない; spec MNG-6).
 //= verb.harming	Dictionary forms of verbs that harm what they act on (殺す, 殴る, 壊す): with てやる and no beneficiary they threaten (殺してやる 죽여 버릴 거야), not do a favour.
 //= verb.harming-causative	Dictionary forms of causatives that make someone learn a hard lesson (思い知らせる, わからせる): with てやる they threaten (思い知らせてやる 깨닫게 하겠어).
+//= verb.humble-invite	Starts of the polite forms of humble verbs (謙譲語) a speaker invites the listener with: their ませんか is a formal invitation, 합쇼 with -시- (参りませんか 가시지 않겠습니까; spec MNG-7).
 //= verb.janai-saying	て forms of verbs of saying (言っ, 話し) whose てるんじゃない after word.janai-correction corrects what was said and forbids nothing (そういうこと言ってるんじゃないわよ 그런 걸 말하는 게 아니야; spec MNG-6).
 //= word.janai-correction	Words that point at what was said (そういう, そんな), before a verb of verb.janai-saying in てるんじゃない (spec MNG-6).
 //= verb.causative-passive	Dictionary rows of causative-passive verbs (待たされる 기다리게 되다, 書かされる 쓰게 되다); a person before に is who made it happen.
@@ -8587,6 +8588,8 @@ verb.harming	ぶちのめす
 verb.harming-causative	思い知らせる
 verb.harming-causative	わからせる
 verb.harming-causative	分からせる
+verb.humble-invite	参り
+verb.humble-invite	まいり
 adjective.character	優し
 adjective.character	やさし
 adjective.character	可愛
