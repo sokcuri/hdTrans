@@ -43,7 +43,7 @@ dict:i:6256	花が咲いた。	꽃이 피었다.	keep	lookup
 dict:w:25292	夜の雨が降った。	밤의 비가 왔다.	fix	lookup
 dict:w:25292	雨が降っている。	비가 오고 있다.	keep	lookup
 dict:jisjk:359484	弟は練習していませんでした。	남동생은 연습하고 있지 않았습니다.	fix	local-ending
-dict:jisjk:359484	彼は結婚していませんでした。	그는 결혼하지 않았었습니다.	keep	local-ending
+dict:jisjk:359484	彼は結婚していませんでした。	그는 결혼하지 않았습니다.	keep	local-ending
 dict:everyday-words:12	アジアのほかの国に行く。	아시아의 다른 나라에 간다.	fix	lookup
 dict:everyday-words:12	東京のほか、大阪でも売る。	도쿄외, 오사카에서도 판다.	keep	lookup
 dict:everyday-words:13	もくずがにを食べた。	참게를 먹었다.	fix	lookup
