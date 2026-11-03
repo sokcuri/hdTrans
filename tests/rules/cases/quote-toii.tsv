@@ -1,0 +1,17 @@
+# 규칙: GRM-3541
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:50	「（対策の）優先順位を考えていた」（副社長）といい、明らかに後手に回った。	has:부사장)이라며,	fix	rewrites
+cx:corpus-fixes-1:50	「（対策の）優先順位を考えていた」（社長）といい、	has:사장)이라며,	fix	rewrites
+cx:corpus-fixes-1:50	『星の王子さま』といい、『夜間飛行』といい、名作ばかりだ。	has:『어린 왕자』도 그렇고,	keep	rewrites
+cx:corpus-fixes-1:50	『星の王子さま』といい、『夜間飛行』といい、名作ばかりだ。	!rule:cx:corpus-fixes-1:50	keep	rewrites
+cx:corpus-fixes-1:50	「んじゃ俺が一つ……」といいながら白木が一つ奪って食べる。	!rule:cx:corpus-fixes-1:50	keep	rewrites
+cx:corpus-fixes-1:50	（社長）といい、（部長）といい、頼りない。	!rule:cx:corpus-fixes-1:50	keep	rewrites
+cx:corpus-fixes-1:60	彼女の名前は桜井ミナといい、東京から引っ越してきたばかりだという。	has:미나라고 하며,	fix	rewrites
+cx:corpus-fixes-1:60	耳に心地よい低音の声を持つ彼は、名をルーカスといい、先日崩御した王の息子だった。	has:루카스라고 하며,	fix	rewrites
+cx:corpus-fixes-1:60	名前といい、顔といい、完璧だ。	has:이름도 그렇고, 얼굴도 그렇고	keep	rewrites
+cx:corpus-fixes-1:60	名前といい、顔といい、完璧だ。	!rule:cx:corpus-fixes-1:60	keep	rewrites
+cx:corpus-fixes-1:60	整った鼻梁に長い睫毛に覆われた大きな瞳といい、実に人形のような繊細な美しさを誇っていた。	!rule:cx:corpus-fixes-1:60	keep	rewrites
+cx:corpus-fixes-1:60	提督といい、巻雲さんといい、スキンシップ大好きですね。	!rule:cx:corpus-fixes-1:60	keep	rewrites
+cx:corpus-fixes-1:60	「この間といい、やっぱり仲直りしたんだ」	!rule:cx:corpus-fixes-1:60	keep	rewrites
+cx:corpus-fixes-1:60	武器を持つ相手に動じない冷静さといい、セリカは本当に強くなりましたね」	!rule:cx:corpus-fixes-1:60	keep	rewrites
+cx:corpus-fixes-1:60	名は太郎といい、名字は山田といい、平凡だ。	!rule:cx:corpus-fixes-1:60	keep	rewrites

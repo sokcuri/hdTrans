@@ -1,0 +1,37 @@
+# 규칙: GRM-3546, GRM-3547, GRM-3548, GRM-3549, GRM-3552
+rule	input	expected	kind	layer
+cx:corpus-fixes-1:160	俺は、遠ざかる東雲さんの後ろ姿を、黙って見送ることしかできなかった。	has:배웅할 수밖에 없었다	fix	rewrites
+cx:corpus-fixes-1:160	祈ることしかできないの！？	has:빌 수밖에 없는	fix	rewrites
+cx:corpus-fixes-1:160	煮るしか出来ないのでシチューばかりです。	has:수밖에 없기 때문에	fix	rewrites
+cx:corpus-fixes-1:160	そう、彼らはただその船を見続けることしかできなかった……	has:볼 수밖에 없었다	fix	rewrites
+cx:corpus-fixes-1:160	ただ目の前で行われていることに、聞き耳を立てることしかできない。	has:세울 수밖에 없다	fix	rewrites
+cx:corpus-fixes-1:160	しかし壮絶な津波の情景は、彼らをただ傍観者にすることしかできなかった。	has:할 수밖에 없었다	fix	rewrites
+cx:corpus-fixes-1:160	なので、私は屋敷の中で本を読むことしかできないでいる。	has:읽을 수밖에 없다	fix	rewrites
+cx:corpus-fixes-1:160	お前にしかできないんだぞ	!rule:cx:corpus-fixes-1:160	keep	rewrites
+cx:corpus-fixes-1:160	固唾を飲んで待つ事しか出来なかった。	!rule:cx:corpus-fixes-1:160	keep	rewrites
+cx:corpus-fixes-1:160	「俺にはそういう生き方しか出来なかった」	!rule:cx:corpus-fixes-1:160	keep	rewrites
+cx:corpus-fixes-1:160	とっさに答えることができなかった。	!rule:cx:corpus-fixes-1:160	keep	rewrites
+cx:corpus-fixes-1:160	そうですね、助けに向かおうとしても、氷の海を渡ることができない。	!rule:cx:corpus-fixes-1:160	keep	rewrites
+cx:corpus-fixes-1:170	」と詰め寄ってきたのである。	has:바짝 다가선 것이다	fix	rewrites
+cx:corpus-fixes-1:170	ロリコンだのペド野郎だのと陰口を叩かれてきたのである。	has:해대어진 것이다	fix	rewrites
+cx:corpus-fixes-1:170	彼は愛妻家で恐妻家なのである。	!rule:cx:corpus-fixes-1:170	keep	rewrites
+cx:corpus-fixes-1:170	音だけ流れていればいいのである。	!rule:cx:corpus-fixes-1:170	keep	rewrites
+cx:corpus-fixes-1:170	この時の俺は知る由もなかったのである。	!rule:cx:corpus-fixes-1:170	keep	rewrites
+cx:corpus-fixes-1:170	雨が降ったので、家にいた。	!rule:cx:corpus-fixes-1:170	keep	rewrites
+cx:corpus-fixes-1:180	スープの類であればここまで驚きはしなかったであろう。	has:놀라지는 않았을 것이다	fix	rewrites
+cx:corpus-fixes-1:180	うまく立ち回って逃げ切るであろう。	!rule:cx:corpus-fixes-1:180	keep	rewrites
+cx:corpus-fixes-1:180	疑いようがない事実であろう。	!rule:cx:corpus-fixes-1:180	keep	rewrites
+cx:corpus-fixes-1:190	教育どころか、ろくな衛生環境も与えられていなかったであろう少女。	has:주어지지 않았을 소녀	fix	rewrites
+cx:corpus-fixes-1:190	それに、一緒にいるであろうクロガネ博士も」	!rule:cx:corpus-fixes-1:190	keep	rewrites
+cx:corpus-fixes-1:190	残念ですが、キングであろうと無許可で通す訳にはいきません。	!rule:cx:corpus-fixes-1:190	keep	rewrites
+dict:jisjk:263863	貴方にはベレベレム連邦のスパイではないかという嫌疑もかかっているのですが？	has:스파이가 아닐까 하는 혐의	fix	lookup
+dict:jisjk:263863	有識者の間ではロボットのようなものではないかという意見も多く出ていた	has:것이 아닐까 하는 의견	fix	lookup
+dict:jisjk:263863	数字のひとつが間違いではないかという噂が出ております	has:실수가 아닐까 하는 소문	fix	lookup
+dict:jisjk:263863	例の、障壁＜ゲート＞がこの近辺にあるのではないかということです。	has:아닐까 하는 것입니다	fix	lookup
+dict:jisjk:263863	もう昼ではないか。	lacks:하는	keep	lookup
+dict:jisjk:263863	提督、少し疲れているのではないか？	lacks:하는	keep	lookup
+dict:jisjk:263863	普段の鍛錬が足りないのではないか。	lacks:하는	keep	lookup
+cx:corpus-fixes-1:210	「筧さんって、最初の頃は女の子に興味があるのかわかりませんでしたよね」	has:있는지 몰랐군요	fix	rewrites
+cx:corpus-fixes-1:210	「昨日は何も食べませんでしたよね」	!rule:cx:corpus-fixes-1:210	keep	rewrites
+cx:corpus-fixes-1:210	初めまして……では、ありませんでしたね」	!rule:cx:corpus-fixes-1:210	keep	rewrites
+cx:corpus-fixes-1:210	「頬の上気を感じましたし、平静とは言えませんでしたね」	!rule:cx:corpus-fixes-1:210	keep	rewrites

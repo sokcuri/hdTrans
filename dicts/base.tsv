@@ -2606,7 +2606,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いかと	1겠는가	T500			GN				jisjk:265935		
 いかと	3까	T500	XXX		GN				jisjk:267021		
 いかと	3 것으로 	T500			GN	4272	||1 &&2 S+1== "存じ" P+1== "4**"	いかと 어미는 다음 단어가 存じ 동사이면 을 것으로로 고른다. (미발동: rare-context)	jisjk:362886		
-いかという	3 것인가 라고 하는	T500			GN				jisjk:263863		
+いかという	3까 하는	T500			GN				jisjk:263863		
 いかというと	4가 하면 	T500			GN				jisjk:264561		
 いかとの	4가 라는 	T500			GN				jisjk:267365		
 いかどうか	4지 어떤지	T500			GN				jisjk:265897		
@@ -125255,7 +125255,7 @@ ttt	ttt	K110			GN				jisjk:201744
 信任	신임	N110		Hd	GN				jisjk:27933		
 信任してい	신임하고 &HN@	M427			GN				jisjk:136288		
 信任を取り付け	신임을 &AX@	M427			GN				jisjk:136289		
-信任投票	신입 투표	N110	ULw		GN				jisjk:193002		
+信任投票	신임 투표	N110	ULw		GN				jisjk:193002		
 信任状	신임장	N110			GN				jisjk:193000		
 信保	노부야스	N130	QPN	Wb	GN				jisjk:10105		
 信保	신포	N130	QPN	Wb	GN				jisjk:348448		
@@ -155713,7 +155713,7 @@ ttt	ttt	K110			GN				jisjk:201744
 告発	고발&AV@	M459			GN				jisjk:266599		
 告白	고백	N110	UTs	Hd	GN				jisjk:15708		
 告白本	고백서	N110	VSw		GN				jisjk:357702		
-告知	고지	N110		Hd	GN				jisjk:15712		
+告知	고지	N110	UTs	Hd	GN				jisjk:15712		
 告知してはならな	고지해서는 안 $AF@	H7N0			GN				jisjk:138809		
 告知事項	공지사항	N110			GN				jisjk:262254		
 告知後	고지후	N110	UMe		GN				jisjk:160843		
@@ -296169,7 +296169,7 @@ ttt	ttt	K110			GN				jisjk:201744
 米ミズーリ	미국 미주리	N130	QCT		GN				jisjk:263260		
 米ミネソタ	미국 미네소타	N130	QCT		GN				jisjk:263258		
 米メイン	미국 메인	N130	QCT		GN				jisjk:263254		
-米メディア	미국의 매디아	K110			GN				jisjk:118979		
+米メディア	미국 언론	K110			GN				jisjk:118979		
 米メリーランド	미국 메릴랜드	N130	QCT		GN				jisjk:263255		
 米モンタナ	미국 몬태나	N130	QCT		GN				jisjk:263261		
 米ヤフー	미국의 야후	N130	VGt		GN				jisjk:347139		
@@ -318142,7 +318142,7 @@ ttt	ttt	K110			GN				jisjk:201744
 表敬訪問	예방	I110			GN				jisjk:88033		
 表日本	오모테니혼	N110	VPl		GN				jisjk:212999		
 表日本	오모테니혼	N110	VPl		GN				jisjk:213000		
-表明	표명	N110		Hd	GN	502	||1 &&4 P-2== "4**" U-2== "と" M-2== "500" Y-2= "4다고"	表明를 두 단어 앞 동사의 어미가 と이고 품사가 500일 때 고르고 그 어미를 다고로 바꾼다. (미발동: rare-word)	jisjk:37912		
+表明	표명	N110	UTs	Hd	GN	502	||1 &&4 P-2== "4**" U-2== "と" M-2== "500" Y-2= "4다고"	表明를 두 단어 앞 동사의 어미가 と이고 품사가 500일 때 고르고 그 어미를 다고로 바꾼다. (미발동: rare-word)	jisjk:37912		
 表書	표서	N110	VSw		GN				jisjk:37917		
 表書き	겉봉의 주소	I110	VSwUTs		GN				jisjk:88044		
 表替え	다다미의 겉자리를 바꿈	N110			GN				jisjk:166069		
@@ -335874,7 +335874,7 @@ ttt	ttt	K110			GN				jisjk:201744
 通古賀	토노코가	N130	QCTVPl		GN				jisjk:311194		
 通史	통사	N110			GN				jisjk:37096		
 通名	통명	N110			GN				jisjk:37092		
-通告	통고	N110		Hd	GN				jisjk:37077		
+通告	통고	N110	UTs	Hd	GN				jisjk:37077		
 通告処分	통고 처분	N110			GN				jisjk:243714		
 通和散	점액물질	N110			GN				jisjk:243751		
 通商	통상	N110		Hd	GN				jisjk:37099		

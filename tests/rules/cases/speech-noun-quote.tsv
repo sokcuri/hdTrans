@@ -1,0 +1,17 @@
+# 규칙: GRM-3550
+rule	input	expected	kind	layer
+dict:jisjk:37912	トランプ氏は１０月中旬にカンザス州で、８０億ドルの支援制度を始めると表明した。	has:시작한다고 표명했다	fix	lookup
+dict:jisjk:37912	引退すると表明した。	has:은퇴한다고 표명했다	fix	lookup
+dict:jisjk:37912	続けて支援を表明してくれた、のんちゃん、ユメ、そして森下さんは帰宅した。	has:지원을 표명해 준	keep	lookup
+dict:jisjk:37912	共和党支持者の５３％が経済面での現状に不満を表明。	has:불만을 표명	keep	lookup
+dict:jisjk:15712	サービスは来月で終了すると告知した。	has:종료한다고 고지했다	fix	lookup
+dict:jisjk:15712	事前に告知した。	has:사전에 고지했다	keep	lookup
+dict:jisjk:37077	「……戦力外通告か」	has:전력 외 통고인가	keep	lookup
+dict:jisjk:37912	米当局者は、イランが商船攻撃を行うことを防ぐのが狙いだと指摘した。	has:목적이라고 지적했다	keep	lookup
+dict:jisjk:37912	政権高官は米メディアに対し、支給は中間選挙後になると言明。	has:된다고 언명	keep	lookup
+dict:jisjk:37912	戦力不保持を定めた９条２項の見直しが必要だと主張した。	has:필요하다고 주장했다	keep	lookup
+dict:jisjk:37912	豊田氏は、自動車が「人々の暮らしや夢を支える産業だ」と強調。	has:산업이다」라고 강조	keep	lookup
+dict:jisjk:37912	と、由弦ははっきりと明言した。	has:분명히 명언했다	keep	lookup
+dict:jisjk:37077	相手に一方的に通告した。	has:통고했다	keep	lookup
+dict:jisjk:37077	契約を打ち切ると通告した。	has:중단한다고 통고했다	fix	lookup
+dict:jisjk:15712	結果は後日告知する。	has:고지한다	keep	lookup
