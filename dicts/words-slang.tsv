@@ -67,7 +67,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ごはんバーガー	라이스버거	N110			GN							s:64
 さしすせそ	사시스세소	N110			GN							s:65
 さすまた	사스마타	N110			GN							s:66
-さつまあげ	사쓰마아게	N110			GN							s:67
+さつまあげ	사츠마아게	N110			GN							s:67
 さぬきうどん	사누키 우동	N110			GN							s:68
 しかせんべい	사슴전병	N110			GN							s:69
 ししとう	꽈리고추	N110			GN							s:70
@@ -81,7 +81,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 すく水	학교 수영복	N110			GN							s:78
 すてゼリフ	막말	N110			GN				llm			s:79
 すなじごく	모래지옥	N110			GN							s:80
-ずんだもち	즌다모찌	N110			GN							s:81
+ずんだもち	즌다모치	N110			GN							s:81
 せんずり	자위행위	N110			GN							s:82
 そばアレルギー	메밀 알레르기	N110			GN				llm			s:83
 たいぴんぐ	타이핑	N110			GN				llm			s:84
@@ -104,7 +104,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ちりとり	쓰레받기	N110			GN							s:101
 ちんすこう	친스코	N110			GN							s:102
 つじぎり	츠지기리	N110			GN				llm			s:103
-つちのこ	쓰치노코	N110			GN							s:104
+つちのこ	츠치노코	N110			GN							s:104
 つば広帽	챙 넓은 모자	N110			GN				llm			s:105
 つぶあん	통팥앙금	N110			GN				llm			s:106
 つめ切り	손톱깎이	N110			GN							s:107
@@ -131,7 +131,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ぱらぱら漫画	플립북	N110			GN				llm			s:128
 ぱんちら	판치라	N110			GN							s:129
 ぱんもろ	팬티 노출	N110			GN				llm			s:130
-ひつまぶし	히쓰마부시	N110			GN							s:131
+ひつまぶし	히츠마부시	N110			GN							s:131
 ひとりえっち	자위행위	N110			GN							s:132
 ひとりエッチ	자위행위	N110			GN							s:133
 ひなあられ	히나아라레	N110			GN							s:134
@@ -163,7 +163,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 まねきねこ	마네키네코	N110			GN							s:160
 ままかり	밴댕이	N110			GN							s:161
 まわしげり	돌려차기	N110			GN							s:162
-みそかつ	미소카쓰	N110			GN							s:163
+みそかつ	미소카츠	N110			GN							s:163
 みねうち	칼등치기	N110			GN							s:164
 むしタイプ	벌레 타입	N110			GN				llm			s:165
 やえ歯	덧니	N110			GN				llm			s:166
@@ -1045,7 +1045,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 カツアゲ	삥뜯기	N110			GN				llm			s:1042
 カツオクジラ	에덴고래	N110			GN							s:1043
 カツオノエボシ	작은부레관해파리	N110			GN							s:1044
-カツ丼	가쓰돈	N110			GN							s:1045
+カツ丼	가츠돈	N110			GN							s:1045
 カテゴリー錯誤	범주 오인	N110			GN							s:1046
 カテナチオ	카테나치오	N110			GN							s:1047
 カトストムス科	카토스토무스과	N110			GN							s:1048
@@ -2576,7 +2576,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ツチクジラ	베어드부리고래	N110			GN				llm			s:2573
 ツチハンミョウ	가뢰과	N110			GN							s:2574
 ツチハンミョウ科	가뢰과	N110			GN							s:2575
-ツツガムシ	쯔쯔가무시	N110			GN				llm			s:2576
+ツツガムシ	츠츠가무시	N110			GN				llm			s:2576
 ツナ缶	캔 참치	N110			GN							s:2577
 ツノガイ	뿔조개	N110			GN				llm			s:2578
 ツノガエル属	남아메리카뿔개구리속	N110			GN							s:2579
@@ -4755,7 +4755,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 中華丼	주카돈	N110			GN							s:4752
 中道化	중도화	N110			GN				llm			s:4753
 中間管理職	중간 관리직	N110			GN				llm			s:4754
-串カツ	구시카쓰	N110			GN							s:4755
+串カツ	구시카츠	N110			GN							s:4755
 串団子	꼬치 당고	N110			GN				llm			s:4756
 主体思想	주체사상	N110			GN							s:4757
 主力戦車	주력전차	N110			GN							s:4758
@@ -5082,7 +5082,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 周期ゼミ	주기매미	N110			GN							s:5079
 周飾頭類	주식두류	N110			GN							s:5080
 呪いの人形	저주 인형	N110			GN				llm			s:5081
-味噌カツ	미소카쓰	N110			GN							s:5082
+味噌カツ	미소카츠	N110			GN							s:5082
 味噌カツ丼	미소카츠동	N110			GN				llm			s:5083
 味噌ラーメン	미소라멘	N110			GN							s:5084
 味噌田楽	미소 덴가쿠	N110			GN				llm			s:5085
@@ -5691,8 +5691,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 月命日	매달 기일	N110			GN				llm			s:5688
 月経カップ	생리컵	N110			GN							s:5689
 月虹	달무지개	N110			GN							s:5690
-月見うどん	쓰키미 우동	N110			GN				llm			s:5691
-月見そば	쓰키미 소바	N110			GN				llm			s:5692
+月見うどん	츠키미 우동	N110			GN				llm			s:5691
+月見そば	츠키미 소바	N110			GN				llm			s:5692
 有刺鉄線	철조망	N110			GN							s:5693
 有害物質	유해 물질	N110			GN				llm			s:5694
 有性生殖	유성 생식	N110			GN							s:5695
@@ -5730,7 +5730,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 東京都知事	도쿄도지사	N110			GN							s:5727
 東北弁	도호쿠 방언	N110			GN							s:5728
 東欧革命	동유럽 혁명	N110			GN							s:5729
-松坂牛	마쓰사카규	N110			GN							s:5730
+松坂牛	마츠사카규	N110			GN							s:5730
 板鰓類	판새아강	N110			GN							s:5731
 枕仕事	캐스팅 카우치	N110			GN							s:5732
 枕営業	캐스팅 카우치	N110			GN							s:5733
@@ -5990,7 +5990,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 片手剣	한손검	N110			GN							s:5987
 版權	저작권	N110			GN							s:5988
 牛めし	소고기덮밥	N110			GN				llm			s:5989
-牛カツ	규카쓰	N110			GN							s:5990
+牛カツ	규카츠	N110			GN							s:5990
 牛乳パック	우유팩	N110			GN				llm			s:5991
 牛乳プリン	우유 푸딩	N110			GN				llm			s:5992
 牛乳瓶	우유병	N110			GN							s:5993
@@ -6574,7 +6574,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 豚バラ	삼겹살	N110			GN				llm			s:6571
 豚丼	부타돈	N110			GN							s:6572
 豚耳	돼지 귀	N110			GN							s:6573
-豚骨ラーメン	돈코쓰라멘	N110			GN							s:6574
+豚骨ラーメン	돈코츠라멘	N110			GN							s:6574
 豪華客船	호화 여객선	N110			GN				llm			s:6575
 豬年	돼지해	N110			GN				llm			s:6576
 豹柄	표범 무늬	N110			GN							s:6577
@@ -6702,12 +6702,12 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 郵便配達員	집배원	N110			GN							s:6699
 郵政民営化	우정민영화	N110			GN							s:6700
 郷土料理	향토 음식	N110			GN							s:6701
-都々逸	도도이쓰	N110			GN							s:6702
+都々逸	도도이츠	N110			GN							s:6702
 都市伝説	도시전설	N110			GN							s:6703
 都市鉱山	도시광산	N110			GN							s:6704
 都督	도독	N110			GN							s:6705
 都道府県旗	도도부현기	N110			GN							s:6706
-都都逸	도도이쓰	N110			GN							s:6707
+都都逸	도도이츠	N110			GN							s:6707
 配信者	스트리머	N110			GN							s:6708
 配偶子	배우자	N110			GN				llm			s:6709
 配達人	배달원	N110			GN				llm			s:6710
@@ -7022,7 +7022,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鼻出血	코피	N110			GN							s:7019
 鼻茸	비용종	N110			GN							s:7020
 龍年	용의 해	N110			GN				llm			s:7021
-龍田揚げ	다쓰타아게	N110			GN							s:7022
+龍田揚げ	다츠타아게	N110			GN							s:7022
 させ子	헤픈 여자	N110			GN				llm			s:7023
 タンコブ	혹	N110			GN				llm			s:7024
 チャリンコ	자전거	N110			GN				llm			s:7025

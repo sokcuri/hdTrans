@@ -1,0 +1,28 @@
+# 규칙: LEX-3950
+rule	input	expected	kind	layer
+dict:jisjk:104433	花子	하나코	fix	defaults
+dict:jisjk:98751	律子が来た。	리츠코가 왔다.	fix	defaults
+dict:jisjk:38298	伍代夏子	고다이 나츠코	fix	defaults
+dict:names.502493	夏月は走った。	나츠키는 달렸다.	fix	fixed
+dict:names.745746	refio+霜月はるか	refio+시모츠키 하루카	fix	fixed
+dict:places:25163	鶴見線	츠루미선	fix	fixed
+dict:places:24710	高松駅	다카마츠역	fix	fixed
+dict:places:8988	宇都宮線	우츠노미야선	fix	fixed
+dict:places:22477	【越美北線】大雨による運転取り止めについて	【에츠미호쿠선】큰 비에 의한 운전 정지에 대해	fix	fixed
+dict:places:9567	対馬は…ここに。	츠시마는…여기에.	fix	defaults
+dict:names.566502	戦艦陸奥、出撃よ！	전함 무츠, 출격이야!	fix	fixed
+dict:names.508965	大発を出します。	다이하츠를 냅니다.	fix	fixed
+dict:names.598624	「――ときに松之助」	「――때에 마츠노스케」	fix	fixed
+dict:names.499528	朽木宮内少輔晴綱　　　　基綱の父	has:모토츠나의 아버지	fix	fixed
+dict:jisjk:86590	【桃の節句】春の雛祭り艦隊決戦！2026	【삼짇날】봄의 히나마츠리 함대 결전! 2026	fix	defaults
+dict:names.599054	松型駆逐艦、松、出撃！皆、続いて！	has:마츠형 구축함, 마츠, 출격!	fix	fixed
+dict:w:5832	高峰→おろしチキンカツ弁当・缶コーヒー２本	has:치킨카츠 도시락	fix	defaults
+dict:jisjk:13985	「ゴミですね」	「쓰레기군요」	keep	defaults
+dict:w:4271	「ゴミ袋、取ってくるね」	「쓰레기봉투, 가져 올게」	keep	defaults
+dict:jisjk:15735	香ばしい風味を持つ最後の尻尾まで、一気に。	고소한 풍미를 가지는 마지막 꼬리까지, 단번에.	keep	defaults
+dict:jisjk:3829	手紙を書いた。	편지를 썼다.	keep	local
+names:kana-target-keep	バスツアー	버스 투어	keep	lookup
+dict:jisjk:41287	「玉藻ちゃん、暇は作るものだよ」	「타마모짱, 시간은 만드는 거야」	keep	fixed
+dict:jisjk:41289	ちゃんぽんを食べた。	짬뽕을 먹었다.	keep	global-stem
+dict:s:5875	津波地震が起きた。	쓰나미 지진이 일어났다.	keep	defaults
+dict:names.555297	張子豪が来た。	장쯔하오가 왔다.	keep	fixed

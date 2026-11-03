@@ -23,11 +23,11 @@ dict:jisjk:194156	じゃくはいものなら分かる。	풋내기라면 안다
 dict:jisjk:194156	じゃくはいものでも知っている。	풋내기라도 알고 있다.	fix	defaults
 dict:jisjk:194156	じゃくはいものではない。	풋내기가 아니다.	fix	defaults
 dict:jisjk:194156	じゃくはいものたちが集まった。	풋내기들이 모였다.	fix	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売。	카나가와 미쓰비시후소자동차판매.	keep	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売の資料。	카나가와 미쓰비시후소자동차판매의 자료.	keep	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売に行く。	카나가와 미쓰비시후소자동차판매에 간다.	keep	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売を見る。	카나가와 미쓰비시후소자동차판매를 본다.	keep	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売から来た。	카나가와 미쓰비시후소자동차판매로부터 왔다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売。	카나가와 미츠비시후소자동차판매.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売の資料。	카나가와 미츠비시후소자동차판매의 자료.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売に行く。	카나가와 미츠비시후소자동차판매에 간다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売を見る。	카나가와 미츠비시후소자동차판매를 본다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売から来た。	카나가와 미츠비시후소자동차판매로부터 왔다.	keep	defaults
 lookup:lexical-spelling	連続函数。	연속 함수.	keep	defaults
 lookup:lexical-spelling	連続函数を調べる。	연속 함수를 조사한다.	keep	defaults
 lookup:lexical-spelling	連続函数のグラフ。	연속 함수의 그래프.	keep	defaults
@@ -48,10 +48,10 @@ lookup:lexical-spelling	融解を調べる。	융해를 조사한다.	keep	defau
 lookup:lexical-spelling	JRバスに乗る。	JR 버스를 탄다.	keep	defaults
 lookup:lexical-spelling	CFカードを使う。	CF 카드를 쓴다.	keep	defaults
 lookup:lexical-spelling	1/fゆらぎを調べる。	1/f 흔들림을 조사한다.	keep	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売は会社だ。	카나가와 미쓰비시후소자동차판매는 회사다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売は会社だ。	카나가와 미츠비시후소자동차판매는 회사다.	keep	defaults
 lookup:lexical-spelling	「連続函数だ」と言った。	「연속 함수다」라고 말했다.	keep	defaults
 lookup:lexical-spelling	「炉心溶融だ」と言った。	「노심 용융이다」라고 말했다.	fix	defaults
-lookup:lexical-spelling	神奈川三菱ふそう自動車販売ではない。	카나가와 미쓰비시후소자동차판매는 아니다.	keep	defaults
+lookup:lexical-spelling	神奈川三菱ふそう自動車販売ではない。	카나가와 미츠비시후소자동차판매는 아니다.	keep	defaults
 lookup:lexical-spelling	連続函数ではない。	연속 함수가 아니다.	keep	defaults
 lookup:lexical-spelling	炉心溶融ではない。	노심 용융이 아니다.	fix	defaults
 lookup:reactor	原子炉を停止した。	원자로를 정지했다.	keep	defaults

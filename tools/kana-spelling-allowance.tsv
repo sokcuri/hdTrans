@@ -1,0 +1,301 @@
+# Rows that tools/kana-spelling.py finds but that do not spell a Japanese reading (spec LEX-3950): Chinese
+# and Tibetan names written by their own convention (四平 쓰핑, 章子怡 장쯔이), Korean words (쓰레기, 쓰나미, 빵) and
+# names whose Korean spelling is their own (ツウィ 쯔위). tools/kana-spelling.py --check fails on a row of that shape
+# not listed here, on a listed row that no longer needs to be and on a line listed twice.
+file	key	ko
+base.tsv	九州不ニサツシ	규슈후지사쓰시
+base.tsv	日本カルパツク	일본 칼파쯔크
+base.tsv	日産クレジツト	닛산 쿠레지쯔트
+base.tsv	自貢	쯔궁
+names.00.tsv	あなたの運命を書いています	당신의 운명을 쓰고 있습니다
+names.00.tsv	こげぱん	코게빵
+names.00.tsv	アチェ津波博物館	아체 쓰나미 박물관
+names.00.tsv	アユミっぱい	아유미빠이
+names.00.tsv	イオっぱい	이오빠이
+names.00.tsv	エロぷよ	에로뿌요
+names.00.tsv	オルドス市	어얼둬쓰시
+names.00.tsv	カス虫	쓰레기벌레
+names.00.tsv	カミラっぱい	카미라빠이
+names.00.tsv	カンゼ・チベット族自治州	간쯔 티베트족 자치주
+names.00.tsv	キエンスオン県	끼엔쓰엉현
+names.00.tsv	ギャンツェ県	장쯔현
+names.00.tsv	クズとメガネと文学少女	쓰레기와 안경과 문학소녀
+names.00.tsv	クズの本懐	쓰레기의 본망
+names.00.tsv	クズ二号	쓰레기 2호
+names.00.tsv	クルンテープ・アピワット中央駅	방쓰 중앙역
+names.00.tsv	コルガス市	훠얼궈쓰시
+names.00.tsv	コンチロ県	꽁쯔로현
+names.00.tsv	ゴミ屋敷とトイプードルと私	쓰레기 집과 토이푸들과 나
+names.00.tsv	ゴミ山	쓰레기산
+names.00.tsv	ゴミ捨て場の決戦	쓰레기장의 결전
+names.00.tsv	サムドゥプツェ区	쌍주쯔구
+names.00.tsv	ジャムス市	자무쓰시
+names.00.tsv	ジャムス西駅	자무쓰 서역
+names.00.tsv	ジャムス駅	자무쓰역
+names.00.tsv	スリーデイズ 愛と正義	쓰리 데이즈
+names.00.tsv	タイブス旗	타이푸쓰기
+names.00.tsv	タインチュオン県	타인쯔엉현
+names.00.tsv	タクツェ県	다쯔구
+names.00.tsv	チチハル三家子空港	치치하얼 싼자쯔 공항
+names.00.tsv	チューセー県	쯔세현
+names.00.tsv	チューパー県	쯔빠현
+names.00.tsv	ツウィ	쯔위
+names.00.tsv	ドンチュオン湖	동쯔엉호
+names.00.tsv	ド屑	쓰레기
+names.00.tsv	ナツメっぱい	나츠메빠이
+names.00.tsv	ナナミっぱい	나나미빠이
+names.00.tsv	ナンカルツェ県	랑카쯔현
+names.00.tsv	ハルカっぱい	하루카빠이
+names.00.tsv	バーンスー区	방쓰
+names.01.tsv	ペトラ・フォン・カントの苦い涙	페트라 폰 칸트의 쓰디쓴 눈물
+names.01.tsv	マナス県	마나쓰현
+names.01.tsv	ミス・リーは知っている	미쓰리는 알고 있다
+names.01.tsv	ラツェ県	라쯔현
+names.01.tsv	万寿寺駅	완서우쓰역
+names.01.tsv	万梓良	완쯔량
+names.01.tsv	上思県	상쓰현
+names.01.tsv	中国 エイズ孤児の村	양쯔강의 에이즈 고아
+names.01.tsv	于子迪	위쯔디
+names.01.tsv	仇孜林	추쯔린
+names.01.tsv	傅斯年	푸쓰녠
+names.01.tsv	六本木クラス	롯폰기 클라쓰
+names.01.tsv	凹子底駅	아오쯔디역
+names.01.tsv	分鐘寺駅	펀중쓰역
+names.01.tsv	劇場版 ハイキュー!! ゴミ捨て場の決戦	극장판 하이큐!! 쓰레기장의 결전
+names.01.tsv	劇場版ハイキュー!! ゴミ捨て場の決戦	극장판 하이큐!! 쓰레기장의 결전
+names.01.tsv	劉子歌	류쯔거
+names.01.tsv	劉子萌	류쯔멍
+names.01.tsv	劉子葭	류쯔샤
+names.01.tsv	劉思斉	류쓰치
+names.01.tsv	勇者のクズ	쓰레기 용사
+names.01.tsv	北大西洋ゴミベルト	북대서양 쓰레기 지대
+names.01.tsv	厲麟似	리린쓰
+names.01.tsv	双台子区	솽타이쯔구
+names.01.tsv	可米小子	커미샤오쯔
+names.01.tsv	叶子涵	예쯔한
+names.01.tsv	叶子萌	예쯔멍
+names.01.tsv	司天峰	쓰톈펑
+names.01.tsv	吐きだめの悪魔	쓰레기장의 악마
+names.01.tsv	呂思勉	뤼쓰몐
+names.01.tsv	呉思瑶	우쓰야오
+names.01.tsv	呉梓天	우쯔톈
+names.01.tsv	周子健	저우쯔젠
+names.01.tsv	周思斉	저우쓰치
+names.01.tsv	周水子駅	저우수이쯔역
+names.01.tsv	周自斉	저우쯔치
+names.01.tsv	善悪の屑	선악의 쓰레기
+names.01.tsv	單子騰	산쯔텅
+names.01.tsv	四会市	쓰후이시
+names.01.tsv	四子王旗	쓰쯔왕기
+names.01.tsv	四季青橋駅	쓰지칭차오역
+names.01.tsv	四平市	쓰핑시
+names.01.tsv	四平省	쓰핑성
+names.01.tsv	四平路駅	쓰핑루 역
+names.01.tsv	四平陸軍戦車学校	쓰핑 육군전차학교
+names.01.tsv	四恵東駅	쓰후이 동역
+names.01.tsv	四方区	쓰팡구
+names.01.tsv	四方台区	쓰팡타이구
+names.01.tsv	四方台駅	쓰팡타이역
+names.01.tsv	四梅線	쓰메이 철로
+names.01.tsv	四次元くずかご	4차원 쓰레기통
+names.01.tsv	四次元ゴミ袋	4차원 쓰레기봉투
+names.01.tsv	四湖郷	쓰후향
+names.01.tsv	四營駅	쓰잉 역
+names.01.tsv	四脚亭駅	쓰쟈오팅 역
+names.01.tsv	四道橋駅	쓰다오차오역
+names.01.tsv	坊子区	팡쯔구
+names.01.tsv	塘子駅	탕쯔 역
+names.01.tsv	大連周水子国際空港	다롄 저우수이쯔 국제공항
+names.01.tsv	大鐘寺駅	다중쓰역
+names.01.tsv	太子河	타이쯔허
+names.01.tsv	太子河区	타이쯔허구
+names.01.tsv	太平洋ゴミベルト	태평양 거대 쓰레기 지대
+names.01.tsv	奪われし玉座:ウィッチャーテイルズ	쓰론브레이커: 더 위쳐 테일즈
+names.01.tsv	子文	쯔원
+names.01.tsv	子牙河	쯔야허
+names.01.tsv	子長県	쯔창현
+names.01.tsv	孟子義	멍쯔이
+names.01.tsv	宋子安	쑹쯔안
+names.01.tsv	宋子文	쑹쯔원
+names.01.tsv	宋子睿	쑹쯔루이
+names.01.tsv	宋子良	쑹쯔량
+names.01.tsv	将軍様は縮地法を使われる	장군님 축지법 쓰신다
+names.01.tsv	小敏	미쓰민
+names.01.tsv	屋根裏のゴミ	다락방의 쓰레기
+names.01.tsv	巍子	웨이쯔
+names.01.tsv	張子楓	장쯔펑
+names.01.tsv	張子涵	장쯔한
+names.01.tsv	張子豪	장쯔하오
+names.01.tsv	張思之	장쓰즈
+names.01.tsv	張梓琳	장쯔린
+names.01.tsv	張紫良	장쯔량
+names.01.tsv	張羅子辛	장뤄쯔신
+names.01.tsv	張自忠路駅	장쯔중루역
+names.01.tsv	張資平	장쯔핑
+names.01.tsv	徐田龍子	쉬톈룽쯔
+names.01.tsv	徐紫茵	쉬쯔인
+names.01.tsv	思南県	쓰난현
+names.01.tsv	思宏陳	천쓰훙
+names.01.tsv	思明区	쓰밍 구
+names.01.tsv	思茅区	쓰마오구
+names.01.tsv	愛はごみ箱の中に	사랑은 쓰레기통 속에
+names.01.tsv	慈寿寺駅	츠서우쓰역
+names.01.tsv	成寿寺駅	청서우쓰역
+names.01.tsv	戴思遠	다이쓰위안
+names.01.tsv	戴資穎	다이쯔잉
+names.01.tsv	押忍!!ふんどし部!	오쓰 !! 들보 부!
+names.01.tsv	指南宮駅	쯔난공 역
+names.01.tsv	揚子江プレート	양쯔판
+names.01.tsv	揚子江快運航空	양쯔강 익스프레스
+names.01.tsv	文姿云	원쯔윈
+names.01.tsv	斯特国王子	쓰탄 왕자
+names.01.tsv	易思玲	이쓰링
+names.01.tsv	晏紫	옌쯔
+names.01.tsv	晏紫東	옌쯔둥
+names.01.tsv	曙さんとクソ提督	아케보노 씨와 쓰레기 제독
+names.01.tsv	朱自清	주쯔칭
+names.01.tsv	朴子市	포쯔 시
+names.01.tsv	李 子文	이 쯔원
+names.01.tsv	李四光	리쓰광
+names.01.tsv	李四端	리쓰돤
+names.01.tsv	李子君	리쯔쥔
+names.01.tsv	李子旭	리쯔쉬
+names.01.tsv	李子祺	리쯔치
+names.01.tsv	李梓萌	리쯔멍
+names.01.tsv	李自健美術館	리쯔지안미술관
+names.01.tsv	東四十条駅	둥쓰스탸오역
+names.01.tsv	東四駅	둥쓰역
+names.01.tsv	東日本大震災津波伝承館	동일본대지진 쓰나미 전승관
+names.01.tsv	松滋市	쑹쯔시
+names.01.tsv	林子偉	린쯔웨이
+names.01.tsv	林子元	린쯔위안
+names.01.tsv	林子杰	린쯔제
+names.01.tsv	林子淵	린쯔위안
+names.01.tsv	林子豪	린쯔하오
+names.01.tsv	柳思佳	류쓰자
+names.01.tsv	桐梓県	퉁쯔현
+names.01.tsv	梁子湖区	량쯔후구
+names.01.tsv	梁思成	량쓰청
+names.01.tsv	梅里斯ダウール族区	메이리쓰 다우르족구
+names.01.tsv	梓潼県	쯔퉁현
+names.01.tsv	梨泰院クラス	이태원 클라쓰
+names.01.tsv	楊子萱	양쯔쉬안
+names.01.tsv	楊思駅	양쓰역
+names.01.tsv	楊梓	양쯔
+names.01.tsv	楠梓区	난쯔구
+names.01.tsv	楠梓科技園区駅	난쯔 가공구 역
+names.01.tsv	楠梓陸橋	난쯔 다리
+names.01.tsv	槍槓	창깡
+names.01.tsv	欧陽自遠	어우양쯔위안
+names.01.tsv	気になるその気の歌/明るく良い子	신경 쓰이는 그 느낌의 노래
+names.01.tsv	気象戦隊ウェザースリー	기상전대 웨더쓰리
+names.02.tsv	泗水県	쓰수이현
+names.02.tsv	泗洪県	쓰훙현
+names.02.tsv	泗陽県	쓰양현
+names.02.tsv	海口路駅	쯔요다루 역
+names.02.tsv	湾仔	완쯔
+names.02.tsv	湾子駅	완쯔역
+names.02.tsv	潘石屹	판쓰이
+names.02.tsv	潭子区	탄쯔구
+names.02.tsv	燃えろ!熱血リズム魂 押忍!闘え!応援団2	불타올라라! 열혈 리듬혼 오쓰! 싸워라! 응원단 2
+names.02.tsv	物資学院路駅	우쯔쉐위안루역
+names.02.tsv	犬とハサミは使いよう	개와 가위는 쓰기 나름
+names.02.tsv	犬と屑	개와 쓰레기
+names.02.tsv	独山子区	두산쯔구
+names.02.tsv	獅子山区	스쯔산구
+names.02.tsv	獅子郷	스쯔향
+names.02.tsv	玉仏寺	위포쓰
+names.02.tsv	王子文	왕쯔원
+names.02.tsv	王子昂	왕쯔앙
+names.02.tsv	王子銘	왕쯔밍
+names.02.tsv	王子騰	왕쯔텅
+names.02.tsv	王思尹	왕쓰인
+names.02.tsv	王紫涵	왕쯔한
+names.02.tsv	王裕子	왕위쯔
+names.02.tsv	甘井子区	간징쯔구
+names.02.tsv	甘孜県	간쯔현
+names.02.tsv	甘思陽	간쓰양
+names.02.tsv	甘海子駅	간하이쯔 역
+names.02.tsv	田子坊	톈쯔팡
+names.02.tsv	白堆子駅	바이두이쯔역
+names.02.tsv	百子湾駅	바이쯔완역
+names.02.tsv	真面目系クズの日常的終末論	성실계 쓰레기의 일상적 종말론
+names.02.tsv	石河子市	스허쯔시
+names.02.tsv	碾子山区	녠쯔산구
+names.02.tsv	秦紫翼	친쯔이
+names.02.tsv	程思瑜	청쓰위
+names.02.tsv	竜子湖区	룽쯔후구
+names.02.tsv	章子怡	장쯔이
+names.02.tsv	章孝慈	장샤오쯔
+names.02.tsv	竹子林駅	주쯔린 역
+names.02.tsv	粗大ごみの日	대형 쓰레기의 날
+names.02.tsv	紅寺堡区	훙쓰부구
+names.02.tsv	紫杉路駅	쯔산루 역
+names.02.tsv	紫草塢駅	쯔차오우역
+names.02.tsv	紫金山天文台	쯔진산 천문대
+names.02.tsv	紫金県	쯔진현
+names.02.tsv	紫陽	쯔양
+names.02.tsv	紫陽県	쯔양현
+names.02.tsv	紫雲ミャオ族プイ族自治県	쯔윈 먀오족 부이족 자치현
+names.02.tsv	翁子瑜	웡쯔위
+names.02.tsv	聶元梓	녜위안쯔
+names.02.tsv	胡子豪	후쯔하오
+names.02.tsv	胡志明	호찌민
+names.02.tsv	胡斯予	후쓰위
+names.02.tsv	臧式毅	장쓰이
+names.02.tsv	自流井区	쯔류징구
+names.02.tsv	自貢市	쯔궁시
+names.02.tsv	茄子河区	체쯔허구
+names.02.tsv	茅子俊	마오쯔쥔
+names.02.tsv	董子斉	둥쯔치
+names.02.tsv	蒙自市	멍쯔시
+names.02.tsv	蘇子河	쑤쯔허
+names.02.tsv	謝子龍影像芸術館	셰쯔룽영상예술관
+names.02.tsv	謝梓萌	셰쯔멍
+names.02.tsv	谷思雨	구쓰위
+names.02.tsv	豊子愷	펑쯔카이
+names.02.tsv	資中県	쯔중현
+names.02.tsv	資渓県	쯔시현
+names.02.tsv	資源県	쯔위안현
+names.02.tsv	資興市	쯔싱시
+names.02.tsv	資陽区	쯔양구
+names.02.tsv	資陽市	쯔양시
+names.02.tsv	趙子豪	자오쯔하오
+names.02.tsv	趙子驥	자오쯔지
+names.02.tsv	趙紫陽	자오쯔양
+names.02.tsv	趙露思	자오루쓰
+names.02.tsv	路斯明	루쓰밍
+names.02.tsv	辜梓豪	구쯔하오
+names.02.tsv	連思宇	롄쓰위
+names.02.tsv	遅子建	츠쯔젠
+names.02.tsv	邵力子	사오리쯔
+names.02.tsv	邸子健	디쯔젠
+names.02.tsv	鄧子恢	덩쯔후이
+names.02.tsv	鄭子健	정쯔젠
+names.02.tsv	鄭思維	정쓰웨이
+names.02.tsv	鄭自才	쩡 쯔차이
+names.02.tsv	金子涵	진쯔한
+names.02.tsv	長子県	장쯔 현
+names.02.tsv	長江メモリ	양쯔 메모리 테크놀로지스
+names.02.tsv	長江中下游平原	양쯔강 중하류 평원
+names.02.tsv	関子嶺温泉	관쯔린 온천
+names.02.tsv	陳子胤	천쯔인
+names.02.tsv	陳子豪	천쯔하오
+names.02.tsv	陳思源	천쓰위안
+names.02.tsv	陳思羽	천쓰위
+names.02.tsv	陳昊蘇	천하오쓰
+names.02.tsv	陳梓健	천쯔젠
+names.02.tsv	陸子豪	루쯔하오
+names.02.tsv	霊隠寺	링인쓰
+names.02.tsv	静安寺	징안쓰
+names.02.tsv	顏子月	옌 쯔웨
+names.02.tsv	饒子和	라오쯔허
+names.02.tsv	駱駝祥子	낙타 샹쯔
+names.02.tsv	高梓淇	가오쯔치
+names.02.tsv	魏子翔	웨이쯔샹
+names.02.tsv	黄子平	황쯔핑
+names.02.tsv	黄思源	황쓰위안
+names.02.tsv	黄梓熙	황쯔시
+names.02.tsv	黎筱濛	쓰다오후이장
+names.02.tsv	黎除	레쯔
+names.02.tsv	黒須スリー & 黒須フォー	크로스 쓰리 & 크로스 포

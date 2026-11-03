@@ -15,13 +15,13 @@ dict:names.93597	オラクルマスターを目指す。	오라클 마스터를 
 dict:jisjk:14070	なべ	냄비	keep	defaults
 dict:names.93597	オラクル	오라클	keep	fixed
 dict:names.93597	オラクルカードを見た。	오라클 카드를 보았다.	keep	fixed
-dict:jisjk:109826	茨城三菱ふそう自動車販売	이바라키 미쓰비시후소자동차판매	fix	defaults
-dict:jisjk:109826	茨城三菱ふそう自動車販売の車。	이바라키 미쓰비시후소자동차판매의 차.	fix	defaults
-dict:jisjk:109826	茨城三菱ふそう自動車販売を訪ねた。	이바라키 미쓰비시후소자동차판매를 방문했다.	fix	defaults
+dict:jisjk:109826	茨城三菱ふそう自動車販売	이바라키 미츠비시후소자동차판매	fix	defaults
+dict:jisjk:109826	茨城三菱ふそう自動車販売の車。	이바라키 미츠비시후소자동차판매의 차.	fix	defaults
+dict:jisjk:109826	茨城三菱ふそう自動車販売を訪ねた。	이바라키 미츠비시후소자동차판매를 방문했다.	fix	defaults
 dict:jisjk:117886	話しに花が咲く。	이야기꽃이 핀다.	fix	defaults
 dict:jisjk:117886	話しに花が咲いた。	이야기꽃이 피었다.	fix	defaults
 dict:jisjk:117886	話しに花が咲いている。	이야기꽃이 피고 있다.	fix	defaults
-dict:jisjk:109826	三菱ふそう自動車販売	미쓰비시 후소자동차판매	keep	defaults
+dict:jisjk:109826	三菱ふそう自動車販売	미츠비시 후소자동차판매	keep	defaults
 dict:jisjk:109826	茨城県	이바라키현	keep	defaults
 dict:jisjk:117886	花が咲く。	꽃이 핀다.	keep	defaults
 dict:jisjk:117886	話を聞いた。	이야기를 들었다.	keep	defaults
