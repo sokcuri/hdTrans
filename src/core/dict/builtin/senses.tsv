@@ -928,6 +928,8 @@
 伸びる	뻗다	腕,手,足,脚,指,指先	after	v1
 絡む	마주치다	視線,目	before	v5
 絡む	얽히다	手,指,足,腕,髪,糸,蔦,ツタ,舌	before	v5
+// 地元 right before a news source or an office is the place reported from, 현지 (spec LEX-4252).
+地元	현지	メディア,当局,警察,紙,新聞,政府,州政府,自治体,記者,報道,消防,通信,テレビ局	after	n
 地元	동네
 紛れる	섞이다	群衆,人混み,人ごみ,雑踏,人波,人込み	before	v1:규칙
 方	쪽	見る,向く,振り向く,向ける,向かう	after

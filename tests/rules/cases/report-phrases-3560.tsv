@@ -1,0 +1,91 @@
+# 규칙: GRM-3560~3562, LEX-4250~4252
+rule	input	expected	kind	layer
+cx:caption-fixes-1:10	この決定を受け日本サッカー協会は…。	has:결정을 받아 일본 축구 협회는	fix	rewrites
+cx:caption-fixes-1:10	盛り込まれたことを受け賛成に転じました。	has:포함된 것을 받아	fix	rewrites
+cx:caption-fixes-1:10	サイバー攻撃を受け攻撃者とみられる者から	has:사이버 공격을 받아	fix	rewrites
+cx:caption-fixes-1:10	日本航空は、予約システムの委託先が不正アクセスを受け	has:액세스를 받아	fix	rewrites
+cx:caption-fixes-1:10	「現地保全員の報告を受け救援チームを向かわせた」	has:보고를 받아 구원 팀을	fix	rewrites
+cx:caption-fixes-1:10	しかし、移送中に襲撃を受け怪我人を出した。	has:습격을 받아 부상자를	fix	rewrites
+cx:caption-fixes-1:10	外部評価を受けその結果を公表する	!rule:cx:caption-fixes-1:10	keep	rewrites
+cx:caption-fixes-1:10	受けを狙ったネタ	!rule:cx:caption-fixes-1:10	keep	rewrites
+cx:caption-fixes-1:5	「一般幹部候補試験」を受け合格。	has:시험」을 치러 합격	fix	rewrites
+cx:caption-fixes-1:5	この決定を受け日本サッカー協会は…。	!rule:cx:caption-fixes-1:5	keep	rewrites
+cx:caption-fixes-1:20	ネタニヤフ首相を巡ってはイランや	has:수상을 둘러싸고는	fix	rewrites
+cx:caption-fixes-1:20	武部大臣を巡っては文春オンラインが	has:대신을 둘러싸고는	fix	rewrites
+cx:caption-fixes-1:20	国中を巡っては祈りを捧げた。	!rule:cx:caption-fixes-1:20	keep	rewrites
+cx:caption-fixes-1:22	障害者向けのグループホームを巡って	has:그룹홈을 둘러싸고	fix	rewrites
+cx:caption-fixes-1:22	膠着状態が続いていた衆議院の議員定数削減を巡り	has:삭감을 둘러싸고	fix	rewrites
+cx:caption-fixes-1:22	北極圏のガス田開発を巡り	has:둘러싸고	fix	rewrites
+cx:caption-fixes-1:22	この不思議な景観の誕生を巡って	has:탄생을 둘러싸고	fix	rewrites
+cx:caption-fixes-1:22	人が増えれば、活動内容をめぐって意見が割れる可能性が高い。	has:활동 내용을 둘러싸고 의견이	fix	rewrites
+cx:caption-fixes-1:22	聖女の役目はまず国中を巡って聖なる結界を張ること	!rule:cx:caption-fixes-1:22	keep	rewrites
+cx:caption-fixes-1:22	町を巡って歩いた。	!rule:cx:caption-fixes-1:22	keep	rewrites
+cx:caption-fixes-1:24	海洋安全保障協力を巡る具体的な議論や	has:협력을 둘러싼 구체적인 논의	fix	rewrites
+cx:caption-fixes-1:24	外食業界などへの支援もあわせて焦点となる消費税減税法案を巡る議論。	has:법안을 둘러싼 논의	fix	rewrites
+cx:caption-fixes-1:24	近江鉄道沿線を巡る３種類の2日間パス	!rule:cx:caption-fixes-1:24	keep	rewrites
+cx:caption-fixes-1:24	血が全身を巡る。	!rule:cx:caption-fixes-1:24	keep	rewrites
+cx:caption-fixes-1:26	開発を巡った対立	has:개발을 둘러싼 대립	fix	rewrites
+cx:caption-fixes-1:26	各地を巡った。	!rule:cx:caption-fixes-1:26	keep	rewrites
+cx:caption-fixes-1:28	一部の週刊誌で報じられたことを巡り	has:보도된 것을 둘러싸고	fix	rewrites
+cx:caption-fixes-1:28	季節の巡りを感じる。	!rule:cx:caption-fixes-1:28	keep	rewrites
+cx:caption-fixes-1:40	遺族と船の運航団体が初めて面会したことが分かりました。	유족과 배 운항 단체가 처음으로 면회한 것으로 밝혀졌습니다.	fix	rewrites
+cx:caption-fixes-1:40	検討を進めていることが分かりました。	has:있는 것으로 밝혀졌습니다	fix	rewrites
+cx:caption-fixes-1:40	100件を超える情報が寄せられたことが分かりました。	has:전해진 것으로 밝혀졌습니다	fix	rewrites
+cx:caption-fixes-1:40	はい、分かりました。	네, 알겠습니다.	keep	rewrites
+cx:caption-fixes-1:40	それが分かりました。	!rule:cx:caption-fixes-1:40	keep	rewrites
+cx:caption-fixes-1:50	また、けが人についても多数いるとみられています。	has:다수 있는 것으로 보이고 있습니다	fix	rewrites
+cx:caption-fixes-1:50	東京ではけさ強風によるとみられる	has:강풍에 의하는 것으로 보인다	fix	rewrites
+cx:caption-fixes-1:50	個人情報とみられるデータを公開された	!rule:cx:caption-fixes-1:50	keep	rewrites
+cx:caption-fixes-1:52	列車に乗っていたとみられる人々。	열차를 타고 있던 것으로 보이는 사람들.	fix	rewrites
+cx:caption-fixes-1:52	攻撃者とみられる者から	!rule:cx:caption-fixes-1:52	keep	rewrites
+cx:caption-fixes-1:54	また昨日、個人情報が公開されたとみられる	has:공개된 것으로 보인다	fix	rewrites
+cx:caption-fixes-1:54	愛知県内から送られたとみられています。	has:보내진 것으로 보이고 있습니다	fix	rewrites
+cx:caption-fixes-1:54	自殺を図ったとみられていて当初は意識不明でしたが	has:시도한 것으로 보이고 있어	fix	rewrites
+cx:caption-fixes-1:54	東京駅から新幹線に乗って西へ向かったとみられることが分かりました。	has:향한 것으로 보이는 것으로 밝혀졌습니다	fix	rewrites
+cx:caption-fixes-1:54	遺体の状態から死後2日は経っていると見られ、	has:지나 있는 것으로 보여	fix	rewrites
+cx:caption-fixes-1:54	最大級とみられるということです。	!rule:cx:caption-fixes-1:54	keep	rewrites
+cx:caption-fixes-1:56	被害は大きいとみられる。	has:큰 것으로 보인다	fix	rewrites
+cx:caption-fixes-1:56	影響は少ないとみられています。	has:적은 것으로 보이고	fix	rewrites
+cx:caption-fixes-1:56	中学生とみられる１４歳の少年	!rule:cx:caption-fixes-1:56	keep	rewrites
+cx:caption-fixes-1:60	アジアカップまで森保監督の続投を決定。	has:감독의 유임을 결정	fix	rewrites
+cx:caption-fixes-1:60	先発の続投で	!rule:cx:caption-fixes-1:60	keep	rewrites
+cx:caption-fixes-1:70	(大吉(だいきち))対象は 今年度ご覧の年齢になる方で	has:보시는 연령이	fix	rewrites
+cx:caption-fixes-1:70	ご覧のあて先まで	has:보시는 행선지까지	fix	rewrites
+cx:caption-fixes-1:70	ご覧のとおりです。	!rule:cx:caption-fixes-1:70	keep	rewrites
+cx:caption-fixes-1:70	こちらをご覧ください。	!rule:cx:caption-fixes-1:70	keep	rewrites
+cx:caption-fixes-1:80	賛成にまわりました。	찬성으로 돌아섰습니다.	fix	rewrites
+cx:caption-fixes-1:80	守りに回る。	has:로 돌아선다	fix	rewrites
+cx:caption-fixes-1:80	大通りに回った。	!rule:cx:caption-fixes-1:80	keep	rewrites
+cx:caption-fixes-1:82	反対に回った。	반대로 돌아섰다.	fix	rewrites
+cx:caption-fixes-1:82	ねじを反対に回した。	!rule:cx:caption-fixes-1:82	keep	rewrites
+dict:jisjk:375040	引き続き、情報収集を続けるとしています。	has:정보수집을 계속한다고 하고 있습니다	fix	local-ending
+dict:jisjk:375040	捜査を進めるとしています。	has:진행시킨다고 하고 있습니다	fix	local-ending
+dict:jisjk:375040	対象者には個別に連絡するとしています。	has:연락한다고 하고 있습니다	fix	local-ending
+dict:jisjk:375040	回答できないとしています。	has:회답할 수 없다고 하고 있습니다	keep	local-ending
+dict:jisjk:375040	難しいとしています。	has:어렵다고 하고 있습니다	keep	local-ending
+dict:jisjk:4029	値上げするとの発表がありました。	has:인상한다는 발표가	fix	local-ending
+dict:jisjk:4029	上院も接戦にもつれ込むとの見方が広がっています。	has:접전으로 이어진다는 견해가	fix	local-ending
+dict:jisjk:4029	今年は王太子が参加するとのことで、	has:참가한다는 것으로	fix	local-ending
+dict:jisjk:4029	アヴェに不穏な動きがあるとの情報が流れてる	has:있다는 정보가	keep	local-ending
+dict:jisjk:4029	彼女との約束を守った。	has:그녀와의 약속을	keep	local-ending
+dict:jisjk:37912	１兆円以上を給付すると表明。	1조엔 이상을 급부한다고 표명.	fix	local-ending
+dict:jisjk:37912	負傷者の応急処置を行うための場所を準備していると表明。	has:준비해 있다고 표명	fix	local-ending
+dict:jisjk:37912	位置付けると表明しました。	has:한다고 표명했습니다	fix	local-ending
+dict:jisjk:29070	いずれ戦争になると言及した。	has:된다고 언급했다	fix	local-ending
+dict:jisjk:37077	契約を打ち切ると通告した。	has:중단한다고 통고했다	fix	local-ending
+dict:jisjk:37912	辞任の意向を表明した。	has:의향을 표명했다	keep	local-ending
+dict:jisjk:147507	延長戦にもつれ込んだ。	연장전으로 이어졌다.	fix	lookup
+dict:jisjk:147507	試合は延長にもつれ込み、	has:연장으로 이어져,	fix	lookup
+dict:w:24118	検討会での議論などを踏まえ	has:논의 등을 토대로 하고	fix	lookup
+dict:w:24118	事実を踏まえた上で判断する。	has:사실을 토대로 한	fix	lookup
+sense:jimoto-genchi	地元メディアによりますと少なくとも６４人が	has:현지 미디어에 의하면	fix	senses
+sense:jimoto-genchi	ロイター通信は地元州政府の情報として	has:현지 주정부의	fix	senses
+sense:jimoto-genchi	アメリカに入国したと複数の地元メディアが報じました。	has:복수의 현지 미디어가	fix	senses
+sense:jimoto-genchi	私の地元です。	has:동네	keep	senses
+sense:jimoto-genchi	伊吹たまごっていう地元のブランド卵	has:동네의	keep	senses
+dict:names.575670	出場権を獲得した男女日本代表が喜びを語りました。	has:남녀 일본 대표가	fix	lookup
+dict:names.575670	日本代表が世界一になるためにダブルスで出てほしい。	has:일본 대표가 세계	fix	lookup
+dict:names.575670	日本代表の帰国会見が行われました。	has:일본 대표의 귀국 회견	fix	lookup
+dict:names.200366	スペイン代表が勝った。	스페인 국가대표팀이 이겼다.	fix	lookup
+dict:names.132170	クロアチア代表の選手	크로아티아 국가대표팀의 선수	fix	lookup
+dict:names.575670	フランス代表の選手	프랑스 국가대표팀의 선수	keep	lookup

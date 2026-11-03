@@ -273660,7 +273660,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 日本人民解放連盟	일본인민해방연맹	N130	VGt		GN							names.575667
 日本人留学生射殺事件	일본인 유학생 사살 사건	N110			GN							names.575668
 日本人顔	일본인 얼굴	N110			GN							names.575669
-日本代表	일본 축구 국가대표팀	N130	QCTVPl		GN							names.575670
+日本代表	일본 대표	N130	QCTVPl		GN							names.575670
 日本以外全部沈没	일본이외 전부침몰	N130	QWK		GN							names.575671
 日本会議	일본회의	N130	VGt		GN							names.575672
 日本住血吸虫	일본주혈흡충	N110			GN							names.575673
