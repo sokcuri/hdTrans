@@ -64,3 +64,6 @@ dict:jisjk:634	それとも俺を揶揄っているだけか？	has:아니면 �
 dict:w:22436	すんなり融合して今に至るというワケだ。	has:지금에 이른다는 것이다	fix	lookup
 dict:w:22436	それ単体では少し濃いテリヤキが、完全な味へと至る。	has:맛으로 이른다.	fix	lookup
 dict:i:1198	信じるに至った。	믿기에 이르렀다.	fix	lookup
+cx:novel-fixes-2:91	資料につきましては、本日中に改めてお送りいたします。	has:오늘 중에 다시 보내	fix	rewrites
+cx:novel-fixes-2:91	彼女はそれに気付くと、アキラに改めて微笑んだ。	!rule:cx:novel-fixes-2:91	keep	rewrites
+cx:novel-fixes-2:90	資料につきましては、本日中に改めてお送りいたします。	!rule:cx:novel-fixes-2:90	keep	rewrites

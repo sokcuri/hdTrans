@@ -360,7 +360,8 @@ cx:novel-fixes-2:50	LEX-4022	&&3 S+0== "ありふれ" D+0== "흔히 &HN@" Y+0== 
 cx:novel-fixes-2:60	LEX-4022	&&3 S+0== "ね" D+0== "(이)네" ||4 S-1== "多分" S-1== "勿論" S-1== "絶対" S-1== "無論"	set-target ""	多分ね 아마
 cx:novel-fixes-2:70	LEX-4022	&&3 S+0== "成" D+0== "&C6@" S-1== "に"	set-target@-1 "(이)가"	ハンターに成りました 헌터가 되었습니다
 cx:novel-fixes-2:80	LEX-4022	&&3 S+0== "もらえな" D+0== "받을 수 $FA@" Y-1== "6"	set-target "줄 수 $FA@"	話を聞いてもらえない 이야기를 들어 줄 수 없다
-cx:novel-fixes-2:90	LEX-4022	&&5 S+0== "に改め" Y+0== "6" F+1== "verb" P-1== "1**" !1 <5 S+0== "を" S+0== "00、。！？「"	append-target@-1 "에게" set-target "" set-ending "" prepend-target@+1 "다시 "	アキラに改めて微笑んだ 아키라에게 다시 미소 지었다
+cx:novel-fixes-2:90	LEX-4022	&&6 S+0== "に改め" F-1== "person" Y+0== "6" F+1== "verb" P-1== "1**" !1 <5 S+0== "を" S+0== "00、。！？「"	append-target@-1 "에게" set-target "" set-ending "" prepend-target@+1 "다시 "	アキラに改めて微笑んだ 아키라에게 다시 미소 지었다
+cx:novel-fixes-2:91	LEX-4022	&&5 S+0== "に改め" Y+0== "6" F+1== "verb" P-1== "1**" !1 <5 S+0== "を" S+0== "00、。！？「"	append-target@-1 "에" set-target "" set-ending "" prepend-target@+1 "다시 "	本日中に改めてお送りいたします 오늘 중에 다시 보내 드리겠습니다
 cx:novel-fixes-2:110	LEX-4022	&&4 S+0== "離" D+0== "떼어 &F6@" U+0== "Lして" ||7 F+0== "last" S+1== "L下さ" S+1== "Lくださ" S+1== "Lくれ" S+1== "よ" S+1== "Lって" S+1== "00！!」…"	set-target "&F6@"	離して下さい 놓아 주세요
 cx:novel-fixes-2:120	LEX-4023	&&2 S+0== "にな" S-1== "骨抜き"	set-target@-1 "넋이" set-target " 빠&AL@"	主人公に骨抜きになっている 주인공에게 넋이 빠져 있는
 cx:novel-fixes-2:128	LEX-4023	&&6 B+0== "する" S-1== "を" S-2== "嫌がらせ" S-3== "に" D-3== "에게" !1 U+0== "Lさ"	set-target@-3 "(을)를" set-target@-2 "" set-target@-1 "" set-target "괴롭&AW@"	彼女に嫌がらせをした 그녀를 괴롭혔다
