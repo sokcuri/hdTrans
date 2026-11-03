@@ -44,6 +44,15 @@ cx:web-fixes-k:260	「きっと勝てるだろう！」	!rule:cx:web-fixes-k:260
 cx:web-fixes-k:260	「そろそろ来るだろう！」	「슬슬 올 거야!」	keep	rewrites
 cx:web-fixes-k:260	「彼なら大丈夫だろう！」	「그라면 괜찮을 거야!」	keep	rewrites
 cx:web-fixes-k:260	「来るだろう！」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:260	「見ればわかるだろう！」	「보면 알잖아!」	fix	rewrites
+cx:web-fixes-k:260	「見れば分かるだろう！」	「보면 알잖아!」	fix	rewrites
+cx:web-fixes-k:260	「知っているだろう！」	「알고 있잖아!」	fix	rewrites
+cx:web-fixes-k:260	「言えばわかるだろう！」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:260	「話せばわかるだろう！」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:262	「知ってるだろう！」	「알고 있잖아!」	fix	rewrites
+cx:web-fixes-k:262	「聞いてるだろう！」	「듣고 있잖아!」	fix	rewrites
+cx:web-fixes-k:262	「きっと知ってるだろう！」	!rule:cx:web-fixes-k:262	keep	rewrites
+cx:web-fixes-k:262	「彼は待ってるだろう」	!rule:cx:web-fixes-k:262	keep	rewrites
 cx:web-fixes-k:270	「多分女だろう！」	!rule:cx:web-fixes-k:270	keep	rewrites
 cx:web-fixes-k:270	「雨が降れば中止だろう！」	!rule:cx:web-fixes-k:270	keep	rewrites
 cx:web-fixes-k:275	「きっと言っているだろうが！」	!rule:cx:web-fixes-k:275	keep	rewrites
