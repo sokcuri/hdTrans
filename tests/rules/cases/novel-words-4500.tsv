@@ -1,0 +1,87 @@
+# 규칙: LEX-4500, LEX-4501, LEX-4502, LEX-4503, LEX-4504, LEX-4505, LEX-4506, LEX-4507, LEX-4508, LEX-4509, LEX-4510, LEX-4511, LEX-4512, LEX-4513, LEX-4514
+rule	input	expected	kind	layer
+dict:jisjk:18340	クワは確かに優秀だと思いますが、農具として万能は言い過ぎでは？」	has:농기구로서	fix	lookup
+dict:jisjk:18340	実際、ドリルやヤスリが農具かと問われたら、普通は違うと答えるだろう。	has:줄이 농기구일까	fix	lookup
+dict:jisjk:79697	とりあえず、どこか飲料水を確保できる場所を見つけねば。	has:어딘가 식수를	fix	lookup
+dict:jisjk:79697	自販機で清涼飲料を買った。	lacks:식수	keep	lookup
+dict:w:32200	湧き水のように穴の横からチョロチョロと流れ出し、	has:샘물처럼	fix	lookup
+dict:w:32200	地面から水が湧き出る。	lacks:샘물	keep	lookup
+dict:w:32202	内部がささくれ立っていたので、内部を整える。	has:내부가 거칠어져 있었으므로	fix	lookup
+dict:w:32202	指のささくれが痛い。	lacks:거칠어	keep	lookup
+dict:w:32204	木と木を擦り合わせる？	has:나무와 나무를 비비	fix	lookup
+dict:w:32204	意見の擦り合わせが必要だ。	has:의견의 조정이	keep	lookup
+dict:w:32205	ちょっと哀しくて、その場に不貞寝した。	has:그 자리에 토라져 잤다	fix	lookup
+dict:w:32205	その場で寝た。	lacks:토라져	keep	lookup
+dict:names.225074	装備はポロシャツにチノパン、スニーカー。	has:치노 팬츠	fix	lookup
+dict:w:32209	実に意味深な内容だ。	has:의미심장한 내용	fix	lookup
+dict:w:32209	富竹さんは意味深に笑って見せると、	has:의미심장하게 웃어	fix	lookup
+dict:w:32209	意味深い言葉だ。	has:뜻깊은 말	keep	lookup
+dict:jisjk:120534	初心者には「クリアできないマップはこれ使ってゴリ押ししてね」というメッセージを送りたい。	has:밀어붙여	fix	lookup
+dict:jisjk:73688	レーダーはマップとほぼ同じだがユニットを全て色分けした点で表示してくれる。	has:색깔 구분한	fix	lookup
+dict:i:3991	また全てのユニットの弱点を初めとする詳細情報の閲覧が可能になる。	has:약점을 비롯한	fix	lookup
+dict:i:3991	弱点をはじめとする詳細情報。	has:약점을 비롯한	keep	lookup
+dict:w:32218	真っ直ぐ下に。	똑바로 아래에.	fix	lookup
+dict:w:32218	ナナイさんが真っ直ぐ俺を見る。	has:똑바로 나를 본다	fix	lookup
+dict:w:32219	真っ直ぐな道。	곧은 길.	keep	lookup
+dict:w:32219	彼は真っ直ぐな性格だ。	has:곧은 성격	keep	lookup
+dict:w:32220	真っすぐ下に。	똑바로 아래에.	fix	lookup
+dict:jisjk:91232	「ついでに、保管場所に困らないようにお前の身体に宿る。	has:보관 장소가 곤란하지 않도록	fix	lookup
+dict:jisjk:91232	まだ若く当時の社会情勢では次の就職に困ることもなかった。	has:취직이 곤란할 것도	fix	lookup
+dict:jisjk:91232	お金に困らない。	has:돈에 쪼들리지	keep	lookup
+sense:唱える	その儚さに目を奪われる者、願いを唱える者、人それぞれだと思う。	has:소원을 비는 사람	fix	senses
+sense:唱える	呪文を唱える。	has:주문을 외운다	keep	senses
+dict:w:32216	疲れないことを良いことに、視界なんて気にするべきじゃなかったか。	has:지치지 않는 것을 이용해,	fix	lookup
+dict:w:32215	「あの日、お姉ちゃんがいないのをいいことに、抜け駆けなんかしようとするから……」	has:없는 걸 이용해,	fix	lookup
+dict:w:32215	いいことがあった。	lacks:이용해	keep	lookup
+cx:web-fixes-i:10	間違ってもプランナーやデザイナーには成れないな。	has:디자이너는 될 수 없네	fix	rewrites
+cx:web-fixes-i:10	ナオを解放する事には成功した。	!rule:cx:web-fixes-i:10	keep	rewrites
+cx:web-fixes-i:10	ハンターに成りました。	!rule:cx:web-fixes-i:10	keep	rewrites
+cx:web-fixes-i:20	もっとも大事な話だ。	rule:cx:web-fixes-i:20=가장	fix	rewrites
+cx:web-fixes-i:20	もっとも、雨なら休む。	!rule:cx:web-fixes-i:20	keep	rewrites
+cx:web-fixes-i:25	もっともある程度の知識がないと情報が多すぎて活用できないんじゃないかと思う。	has:다만 어느 정도의 지식이	fix	rewrites
+cx:web-fixes-i:25	もっともそれを使った者はいない。	has:다만 그것을 쓴 사람은	fix	rewrites
+cx:web-fixes-i:25	もっとも急ぐ必要がある。	!rule:cx:web-fixes-i:25	keep	rewrites
+cx:web-fixes-i:25	もっとも、雨なら休む。	!rule:cx:web-fixes-i:25	keep	rewrites
+cx:web-fixes-i:30	隣の席で責任者が作業をすすめているが、誰も奇異の目を向けない。	has:기이의 눈길을 보내지 않는다	fix	rewrites
+cx:web-fixes-i:30	テレジアの肩を抱いたままアヤメは冷たい目を向けた。	has:차가운 눈길을 보냈다	fix	rewrites
+cx:web-fixes-i:30	窓の外に目を向けた。	!rule:cx:web-fixes-i:30	keep	rewrites
+cx:web-fixes-i:40	あとでＷＷの方から「ＦＡＮＴＡＳＹ」が取れたので今では紛らわしいと言うほどではない。	has:「FANTASY」가 빠졌으므로	fix	rewrites
+cx:web-fixes-i:40	ようやく疲れが取れた。	!rule:cx:web-fixes-i:40	keep	rewrites
+cx:web-fixes-i:50	ついでにいくらか若返らせてやろう」	has:하는 김에 조금 젊어지게	fix	rewrites
+cx:web-fixes-i:50	「食料はいくらかあるか……」	has:식량은 조금 있을까	fix	rewrites
+cx:web-fixes-i:50	この学院、一体学費はいくらかかってるんだろう。	!rule:cx:web-fixes-i:50	keep	rewrites
+cx:web-fixes-i:50	値段がいくらか知らない。	!rule:cx:web-fixes-i:50	keep	rewrites
+cx:web-fixes-i:60	ポルさんの名セリフを言ってみたいが止めておこう。	has:말해 보고 싶지만 그만두자	fix	rewrites
+cx:web-fixes-i:60	深夜三時、なんか小腹が空かない？　この時間は止めとく？	has:이 시간은 그만둬?	fix	rewrites
+cx:web-fixes-i:60	車を止めておこう。	!rule:cx:web-fixes-i:60	keep	rewrites
+cx:web-fixes-i:70	ヘザー博士は独り言を言った。	has:혼잣말을 했다	fix	rewrites
+cx:web-fixes-i:70	冗談を言った。	!rule:cx:web-fixes-i:70	keep	rewrites
+cx:web-fixes-i:75	隣の席でデバッグ外注の責任者がブツブツと独り言を言いながら作業をすすめている	has:혼잣말을 하면서	fix	rewrites
+cx:web-fixes-i:75	文句を言いながら作業をすすめている	!rule:cx:web-fixes-i:75	keep	rewrites
+cx:web-fixes-i:170	俺の中のイメージの井戸とは全然違うが、	has:내 안의 이미지	fix	rewrites
+cx:web-fixes-i:170	知識そのものを思い出していなくても、私の中に確かにあったものだから。	has:내 안에 확실히	fix	rewrites
+cx:web-fixes-i:170	肺の中の空気を吐いた。	!rule:cx:web-fixes-i:170	keep	rewrites
+cx:web-fixes-i:175	俺の中で生まれた疑惑は、たった一晩でずいぶん大きくなってしまった。	has:내 안에서 태어난	fix	rewrites
+cx:web-fixes-i:175	この屋敷……マクミラン公爵邸の中でクロードが自由に出入りできる場は限られている。	!rule:cx:web-fixes-i:175	keep	rewrites
+cx:web-fixes-i:175	俺たちの中で一番強い。	!rule:cx:web-fixes-i:175	keep	rewrites
+cx:web-fixes-i:180	できれば、二度とそういった思いはしたくありません」	has:그런 경험은	fix	rewrites
+cx:web-fixes-i:180	怖い思いをするのはまっぴらごめんだけど！	has:무서운 경험을 하는 것은	fix	rewrites
+cx:web-fixes-i:180	寂しい思いをさせてごめん。	!rule:cx:web-fixes-i:180	keep	rewrites
+cx:web-fixes-i:180	彼に思いを伝える。	!rule:cx:web-fixes-i:180	keep	rewrites
+cx:web-fixes-i:190	（説明文には衣をつけて油で揚げたとあったが…）	has:튀겼다고 적혀 있었지만	fix	rewrites
+cx:web-fixes-i:190	油で揚げたと思った。	!rule:cx:web-fixes-i:190	keep	rewrites
+cx:web-fixes-i:195	スキルといえばステータス画面にスキルポイント１０とあったが割り振るスキルが無いのが悲しい。	has:10이라고 적혀 있었지만	fix	rewrites
+cx:web-fixes-i:195	剣士や格闘家の難易度は星１つとある。	has:별 1개라고 적혀 있다	fix	rewrites
+cx:web-fixes-i:195	一時期とあるＦＰＳゲームにドハマリし、	!rule:cx:web-fixes-i:195	keep	rewrites
+cx:web-fixes-i:195	友達とあった。	!rule:cx:web-fixes-i:195	keep	rewrites
+cx:web-fixes-i:195	どれどれ、検索ポチッと……あ、ありましたよ。	!rule:cx:web-fixes-i:195	keep	rewrites
+cx:web-fixes-i:210	さらに欄の最後にある「不滅」ってなんだ？	has:란의 마지막에 있는	fix	rewrites
+cx:web-fixes-i:210	最後に言っておく。	!rule:cx:web-fixes-i:210	keep	rewrites
+cx:web-fixes-i:240	ファンタジーゲームに出てくる村人のような格好で、ズボンにラフな上着。	has:바지에 편한 윗도리	fix	rewrites
+cx:web-fixes-i:240	ラフなスケッチを描いた。	!rule:cx:web-fixes-i:240	keep	rewrites
+cx:web-fixes-i:250	ほう、珍しくギアの足音がすると思っておったら、お主らのギアか。	has:발소리가 난다고	fix	rewrites
+cx:web-fixes-i:250	上掛けとして掛けられている薄汚れた布からは変な臭いもするし、	has:냄새도 나고	fix	rewrites
+cx:web-fixes-i:250	勉強がしたい。	!rule:cx:web-fixes-i:250	keep	rewrites
+cx:web-fixes-i:255	どこかで水の流れる音はしないか？	has:소리는 나지 않는가	fix	rewrites
+cx:web-fixes-i:255	少なくとも嫌な匂いはしない。	has:냄새는 나지 않는다	fix	rewrites
+cx:web-fixes-i:255	誰も何もしない。	!rule:cx:web-fixes-i:255	keep	rewrites

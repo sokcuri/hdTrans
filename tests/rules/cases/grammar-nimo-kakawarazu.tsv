@@ -12,7 +12,7 @@ dict:nimo-kakawarazu:2	体を余す所無く見られているのにも拘わら
 dict:nimo-kakawarazu:3	喉に詰まったにも拘らず、頭を撫でた。	목에 막혔음에도 불구하고, 머리를 쓰다듬었다.	fix	local
 dict:nimo-kakawarazu:1	年齢に関わらず参加できる。	연령에 관계없이 참가할 수 있다.	keep	local
 dict:nimo-kakawarazu:1	誰とも関わらず生きる。	!rule:dict:nimo-kakawarazu:1	keep	local
-dict:nimo-kakawarazu:3	【万能農具】は、農具の名前に拘らずに何にでも変形する。	【만능 농기구】는, 농구의 이름에 관계없이 무엇이라도 변형한다.	keep	local
+dict:nimo-kakawarazu:3	【万能農具】は、農具の名前に拘らずに何にでも変形する。	【만능 농기구】는, 농기구의 이름에 관계없이 무엇이라도 변형한다.	keep	local
 dict:jisjk:373984	相手は同級生であるにも関わらず、握力が強い。	상대는 동급생임에도 불구하고, 악력이 세다.	fix	ending-defaults
 dict:jisjk:373984	肉も魚も卵も乳も使わないにも関わらず素晴らしい。	고기도 물고기도 알도 젖도 쓰지 않음에도 불구하고 훌륭하다.	fix	ending-defaults
 dict:jisjk:373984	汚れているにも関わらず、レナは笑った。	더러워져 있음에도 불구하고, 레나는 웃었다.	fix	ending-defaults

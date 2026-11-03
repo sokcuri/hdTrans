@@ -68,7 +68,7 @@ sense:クワ	クワを持った。	괭이를 가졌다.	fix	senses
 sense:クワ	クワ・トイネ公国だ。	쿠와 트이네 공국이다.	keep	senses
 sense:クワ	一本のクワだ。	한 개의 괭이다.	fix	senses
 sense:クワ	クワ・トイネから来た。	쿠와 트이네로부터 왔다.	keep	senses
-sense:クワ	クワは良い農具だ。	괭이는 좋은 농구다.	fix	senses
+sense:クワ	クワは良い農具だ。	괭이는 좋은 농기구다.	fix	senses
 sense:クワ	クワ・トイネ公国がある。	쿠와 트이네 공국이 있다.	keep	senses
 sense:年代	幼稚園に通う年代だ。	유치원에 다니는 나이대다.	fix	senses
 sense:年代	古い年代の品だ。	오래된 연대의 물건이다.	keep	senses
