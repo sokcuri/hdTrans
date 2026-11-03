@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:kansai-akan	「おい、もう行かなあかん」	「어이, 이제 가야 해」	fix	normalize
 normalize:kansai-akan	「私も急がなあかんなぁ……」	「나도 서둘러야 해……」	fix	normalize
-normalize:kansai-akan	自信を持たなあかんな。	자신을 가져야 하네.	fix	normalize
+normalize:kansai-akan	自信を持たなあかんな。	자신감을 가져야 하네.	fix	normalize
 normalize:kansai-akan	整理せなあかん。	정리해야 한다.	fix	normalize
 normalize:kansai-akan	なんとか上昇させなあかん……	어떻게든 상승시켜야 해……	fix	normalize
 normalize:kansai-akan	他のとこも行かんとアカンし	다른 곳도 가야 하고	fix	normalize

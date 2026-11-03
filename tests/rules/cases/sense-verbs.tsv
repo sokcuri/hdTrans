@@ -47,7 +47,7 @@ dict:ブチ切れ	彼は切れていた。	그는 끊어져 있었다.	keep	defa
 dict:握りかえ	手を握りかえした。	손을 마주 잡았다.	fix	defaults
 dict:握りかえ	手を握った。	손을 잡았다.	keep	defaults
 dict:お腹のす	お腹のすいた子供だ。	배가 고픈 아이다.	fix	defaults
-dict:お腹のす	お腹がすいた。	배가 고팠다.	keep	defaults
+dict:お腹のす	お腹がすいた。	배가 고프다.	keep	defaults
 dict:絶句	絶句した。	말을 잃었다.	fix	defaults
 dict:絶句	絶句を読む。	절구를 읽는다.	keep	defaults
 dict:観念	観念して話した。	체념해 이야기했다.	fix	defaults

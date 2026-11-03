@@ -398,6 +398,8 @@
 //= suru.tail	Starts of the rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the first kana of まで, なら or たくさん after 今年.
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
+//= verb.adnominal-state	Dictionary forms of verbs of a quality a thing has, not an act (優れる, 整う, 尖る): before a noun in their past, a person with の before them owns that noun, 의, and is not the doer (彼の優れた才能 그의 뛰어난 재능).
+//= verb.body-state	Dictionary forms of verbs of a state a body or clothes come into (濡れる, 汚れる, 乱れる): before a body part or a garment in their past, a person with の before them owns it, 의 (彼女の濡れた髪 그녀의 젖은 머리카락), but before other nouns the person may be the one in that state (彼女が濡れた理由).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
 //= verb.chant-volitional	Sino-Japanese verb nouns of a spell or an oath whose せん is the literary volitional, not the old negative of する (浄化せん！, 顕現せん, 召喚せん); the negative reading skips them.
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
@@ -5894,6 +5896,29 @@ verb.observed-state	あり得
 verb.observed-state	間に合
 verb.observed-state	でき
 verb.observed-state	出来
+verb.adnominal-state	優れる
+verb.adnominal-state	すぐれる
+verb.adnominal-state	秀でる
+verb.adnominal-state	飛び抜ける
+verb.adnominal-state	ずば抜ける
+verb.adnominal-state	際立つ
+verb.adnominal-state	整う
+verb.adnominal-state	澄む
+verb.adnominal-state	透き通る
+verb.adnominal-state	尖る
+verb.adnominal-state	とがる
+verb.adnominal-state	引き締まる
+verb.body-state	濡れる
+verb.body-state	汚れる
+verb.body-state	乱れる
+verb.body-state	痩せる
+verb.body-state	荒れる
+verb.body-state	腫れる
+verb.body-state	火照る
+verb.body-state	冷える
+verb.body-state	汗ばむ
+verb.body-state	ほつれる
+verb.body-state	破れる
 verb.unwilled	ある
 verb.unwilled	有る
 verb.unwilled	在る

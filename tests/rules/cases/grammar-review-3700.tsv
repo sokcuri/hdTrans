@@ -1,0 +1,87 @@
+# 규칙: GRM-3700, GRM-3701, GRM-3702, GRM-3703, GRM-3704, GRM-3705, GRM-3706, GRM-3707, GRM-3708, GRM-3709, GRM-3710, GRM-3711, GRM-3712, GRM-3713
+rule	input	expected	kind	layer
+cx:web-fixes-k:200	同じく比較的安全とは遺跡の奥部よりは生還の可能性が高いという意味だ。	has:유적 안쪽부보다는 생환의	fix	rewrites
+cx:web-fixes-k:200	まあ、神通さんとこよりはいいんだろうけど	has:곳보다는 좋겠지만	fix	rewrites
+cx:web-fixes-k:200	本日よりは営業いたします。	!rule:cx:web-fixes-k:200	keep	rewrites
+cx:web-fixes-k:210	外に出て、ここより難易度の低い場所に住み着く	has:여기보다 난이도가	fix	rewrites
+cx:web-fixes-k:210	遺跡の奥部より生還の可能性が高い。	유적 안쪽부보다 생환의 가능성이 높다.	fix	rewrites
+cx:web-fixes-k:210	東京より参りました。	!rule:cx:web-fixes-k:210	keep	rewrites
+cx:web-fixes-k:210	学校より連絡があった。	!rule:cx:web-fixes-k:210	keep	rewrites
+cx:web-fixes-k:215	普通のサラリーマン家庭よりかは裕福なのだが	has:가정보다는 유복한데	fix	rewrites
+cx:web-fixes-k:215	彼か、あるいは彼女か。	!rule:cx:web-fixes-k:215	keep	rewrites
+cx:web-fixes-k:220	この儀式、如何せん大昔に一度きり行われた儀式なもので	has:한 번만 행해진 의식	fix	rewrites
+cx:web-fixes-k:220	二度きり会ったことがある	has:두 번만 만났던	fix	rewrites
+cx:web-fixes-k:220	一度きりの人生	!rule:cx:web-fixes-k:220	keep	rewrites
+cx:web-fixes-k:220	一度切り捨てた	!rule:cx:web-fixes-k:220	keep	rewrites
+cx:web-fixes-k:230	親友や恋人なんてものは作るつもりがない。	has:애인 같은 것은 만들	fix	rewrites
+cx:web-fixes-k:230	醜聞なんてものじゃないと思うんだが	has:추문 같은 것이 아니라고	fix	rewrites
+cx:web-fixes-k:230	幽霊なんて信じない	!rule:cx:web-fixes-k:230	keep	rewrites
+cx:web-fixes-k:230	なんてものを見せるんだ	!rule:cx:web-fixes-k:230	keep	rewrites
+cx:web-fixes-k:240	「まぁ、混じりもんとか粗悪品。五百ウォン硬貨みたいなの出てきて衰退するだろけど」	has:500원 동전 같은 거 나와	fix	rewrites
+cx:web-fixes-k:240	「架子の好きなの選んでいいよ」	has:좋아하는 거 선택해도 돼	fix	rewrites
+cx:web-fixes-k:240	変なの。	!rule:cx:web-fixes-k:240	keep	rewrites
+cx:web-fixes-k:240	変なのが出た	!rule:cx:web-fixes-k:240	keep	rewrites
+cx:web-fixes-k:250	一切の前触れなく、一瞬で、完全に姿を消していた。	has:아무런 예고 없이, 한순간에	fix	rewrites
+cx:web-fixes-k:250	一切関係なく、	!rule:cx:web-fixes-k:250	keep	rewrites
+cx:web-fixes-k:255	何の交渉もなく、ただ面白半分で。	has:아무 교섭도 없이,	fix	rewrites
+cx:web-fixes-k:255	なんの脈絡もなく、千里が尋ねた。	has:아무 맥락도 없이,	fix	rewrites
+cx:web-fixes-k:255	何の取り柄もなく、金もない	!rule:cx:web-fixes-k:255	keep	rewrites
+cx:web-fixes-k:255	何の問題もない。	!rule:cx:web-fixes-k:255	keep	rewrites
+cx:web-fixes-k:258	雨に濡れていてもその輝きはくすぶる事もなく、むしろ	has:일도 없이, 오히려	fix	rewrites
+cx:web-fixes-k:258	金もなく、家もない	!rule:cx:web-fixes-k:258	keep	rewrites
+cx:web-fixes-k:260	「う、動くなって言っているだろう！　それ以上近付くな！」	has:움직이지 말라고 말하잖아!	fix	rewrites
+cx:web-fixes-k:260	「知らないだろう！」	「모르잖아!」	fix	rewrites
+cx:web-fixes-k:260	「彼は来るだろう」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:260	「お前という奴は！　何度過ちを繰り返せば学習するというのだ！　その頭は飾りではなかろう!?」	!rule:cx:web-fixes-k:260	keep	rewrites
+cx:web-fixes-k:265	「言っただろう！」	「말했잖아!」	fix	rewrites
+cx:web-fixes-k:265	「言っただろう？」	!rule:cx:web-fixes-k:265	keep	rewrites
+cx:web-fixes-k:270	「黙れ！　おまえは僕の妻になる女だろう！　僕はいずれ当主の夫になるのだから、これくらいのことは許すべきだ！」	has:아내가 되는 여자잖아!	fix	rewrites
+cx:web-fixes-k:270	「おまえが悪いんだ。自分が娘を産んだからって、男子の吾子を呪い殺す気だろう！」	!rule:cx:web-fixes-k:270	keep	rewrites
+cx:web-fixes-k:275	「予防をしろ、と毎回言っているだろうが！　繰り返してばかりでは愚の骨頂だろうが、この愚か者が!!」	has:매번 말하잖아!	fix	rewrites
+cx:web-fixes-k:275	「言っているだろうが、聞け」	!rule:cx:web-fixes-k:275	keep	rewrites
+cx:web-fixes-k:280	彼女の飛び抜けた美しさは、比類無きものだった。	has:그녀의 뛰어난 아름다움은	fix	rewrites
+cx:web-fixes-k:280	彼の優れた才能	그의 뛰어난 재능	fix	rewrites
+cx:web-fixes-k:280	顔の整った少女	!rule:cx:web-fixes-k:280	keep	rewrites
+cx:web-fixes-k:280	王の残した言葉	!rule:cx:web-fixes-k:280	keep	rewrites
+cx:web-fixes-k:285	彼女の濡れた髪	그녀의 젖은 머리카락	fix	rewrites
+cx:web-fixes-k:285	彼女の濡れた理由	!rule:cx:web-fixes-k:285	keep	rewrites
+cx:web-fixes-k:290	「帝国のためですよ、大人しく死になさい。お姫様」	has:얌전히 죽어 주세요.	fix	rewrites
+cx:web-fixes-k:290	「早く寝なさい」	!rule:cx:web-fixes-k:290	keep	rewrites
+cx:web-fixes-k:290	「あなたのためよ、早く寝なさい」	!rule:cx:web-fixes-k:290	keep	rewrites
+cx:web-fixes-k:300	電気が止められでもしたら事だしな。	has:끊기기라도 하면	fix	rewrites
+cx:web-fixes-k:300	私のせいで霊廟が荒らされでもしたら、私に生きていく資格はありません。	has:망쳐지기라도 하면,	fix	rewrites
+cx:web-fixes-k:300	勉強でもしようか	!rule:cx:web-fixes-k:300	keep	rewrites
+cx:web-fixes-k:310	午後6時です。提督ー、お腹空いたよー！	has:제독~, 배고파~!	fix	rewrites
+cx:web-fixes-k:310	「……お腹がすきましたわ」	「……배가 고파요」	fix	rewrites
+cx:web-fixes-k:310	「いえ、なんでもありませんわ。お腹がすいたので、おやつを用意していただけるかしら？」	has:배가 고파서, 간식을	fix	rewrites
+cx:web-fixes-k:310	昨日はお腹がすいたよ	!rule:cx:web-fixes-k:310	keep	rewrites
+cx:web-fixes-k:310	さすがに腹が減った程度でビービー泣くような歳じゃない。	!rule:cx:web-fixes-k:310	keep	rewrites
+cx:web-fixes-k:316	これくらいは作れるようになっておいて損は無いと思ってさ	has:두어서 손해는 없다고	fix	rewrites
+cx:web-fixes-k:316	放っておいても害がある	!rule:cx:web-fixes-k:316	keep	rewrites
+cx:web-fixes-k:318	窓辺に手を置いて背伸びをして外を眺めていると	has:창가에 손을 두고 발돋움을	fix	rewrites
+cx:web-fixes-k:318	当然怪我を負った友人を置いて逃げるわけにもいかず	has:친구를 두고 도망칠	fix	rewrites
+cx:web-fixes-k:318	「テーブルにでも置いておいて」	!rule:cx:web-fixes-k:318	keep	rewrites
+cx:web-fixes-k:320	でもね、断りもなく人を呼び付けておいて存在を無視するとはいい度胸だと思う。	has:불러와 놓고 존재를 무시	fix	rewrites
+cx:web-fixes-k:320	召喚しておいて無目的で放置されたとあっては	has:소환해 놓고	fix	rewrites
+cx:web-fixes-k:320	『家にかけて美里に俺のこと話しておいてくれないか？』	!rule:cx:web-fixes-k:320	keep	rewrites
+cx:web-fixes-k:320	任せておいて！	!rule:cx:web-fixes-k:320	keep	rewrites
+cx:web-fixes-k:325	あっさりと放っておいて帰るという事を決断できた。	has:내버려 두고 돌아간다	fix	rewrites
+cx:web-fixes-k:325	放っておいて…放って…。	!rule:cx:web-fixes-k:325	keep	rewrites
+cx:web-fixes-k:330	賛成する者もいれば、反対する者もいる。	찬성하는 사람도 있고, 반대하는 사람도 있다.	fix	rewrites
+cx:web-fixes-k:330	勇者が魔王を討ち滅ぼすこともあれば、魔王が勇者を退けることもあった。	has:멸하는 일도 있고, 마왕이	fix	rewrites
+cx:web-fixes-k:330	３人もいれば問題ないでしょ？	!rule:cx:web-fixes-k:330	keep	rewrites
+cx:web-fixes-k:330	また生徒会絡みの依頼でもあれば会えるだろ	!rule:cx:web-fixes-k:330	keep	rewrites
+cx:web-fixes-k:335	７０点のものもあれば３０点もあり、ひいては１００点のものもある。	has:70점의 것도 있고 30점도	fix	rewrites
+cx:web-fixes-k:335	お金もあれば何でも買える。	!rule:cx:web-fixes-k:335	keep	rewrites
+cx:web-fixes-k:340	命賭けでここまで来たこともあり、成果無しで帰る為には、それなりの言い訳が必要だった。	has:여기까지 온 것도 있어서,	fix	rewrites
+cx:web-fixes-k:340	魔法という共通の好きなものがあったこともあって、私たちはそれからあっという間に仲良くなった。	has:있던 것도 있어서, 우리는	fix	rewrites
+cx:web-fixes-k:340	彼は来ることもあり、来ないこともある	!rule:cx:web-fixes-k:340	keep	rewrites
+cx:web-fixes-k:342	やはり大卒ということもあり、高卒から入ってくる連中に	has:대졸이라는 것도 있어서,	fix	rewrites
+cx:web-fixes-k:342	そんなこともあり、各国は暗黙の了解で	has:그런 일도 있어서,	fix	rewrites
+cx:web-fixes-k:342	そんなこともあるだろう。	!rule:cx:web-fixes-k:342	keep	rewrites
+cx:web-fixes-k:344	別邸は宿舎として使われていることもあり、軍中央部からほど近い場所に位置している。	has:사용되고 있는 것도 있어서,	fix	rewrites
+cx:web-fixes-k:344	使われていることもある。	!rule:cx:web-fixes-k:344	keep	rewrites
+phrase:nara-madashimo	マズイだけならまだしも、数日間、お腹が痛くなるのは、なんとかしてほしかった。	has:것뿐이라면 몰라도,	fix	phrases
+phrase:nara-madashimo	真帆にならまだしも、なんで多岐川さんの世話にならなきゃいけないんだ。	has:마호에게라면 몰라도,	fix	phrases
+phrase:nara-madashimo	子供ならまだしも	아이라면 몰라도	fix	phrases
+phrase:nara-madashimo	子供ならともかく	아이라면 몰라도	keep	phrases

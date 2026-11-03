@@ -6053,8 +6053,8 @@ ttt	ttt	K110			GN				jisjk:201744
 おこ	일어&A5@	M428			GN				jisjk:343419		
 おこうとの	두자 라는	E0H0			GN				jisjk:149761		
 おこえがかり	추천	N110			GN				jisjk:165244		-1
-おこがまし	우$GG@	H7U0			GN				jisjk:4930		
-おこがまし	주제$KI@	H7N0	SFl		GN				jisjk:120822		
+おこがまし	주제$KI@	H7U0			GN				jisjk:4930		
+おこがまし	우$GG@	H7N0	SFl		GN				jisjk:120822		
 おこさま	자제분	N110	VHn		GN				jisjk:165245		-1
 おこさま	아이	N110	VHn		GN				jisjk:165246		-1
 おこし	부흥	I110			GN				jisjk:106662		
@@ -187953,7 +187953,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小脳	소뇌	N110	QHPVBp		GN				jisjk:191157		
 小腰をかがめ	허리를 좀 굽&AW@	M447			GN				jisjk:119404		
 小腸	소장	N110	QHP		GN				jisjk:191066		
-小腹	아랫배	N110	VBp		GN				jisjk:182856		
+小腹	출출한 배	N110	VBp		GN				jisjk:182856		
 小膓	소장	N110	VBp		GN				jisjk:26796		
 小膝	무릎	N110	VBp		GN				jisjk:182858		
 小臥蛇島	고가자도	N130	VPl		GN				jisjk:214879		
@@ -203455,7 +203455,7 @@ ttt	ttt	K110			GN				jisjk:201744
 形状記憶シャツ	형상 기억 셔츠	N110	VCp		BZ				jisjk:352877		
 形状記憶効果	형상 기억 효과	N110			BZ				jisjk:352874		
 形状記憶合金	형상기억합금	N110	VMa		GN				jisjk:204018		
-形相	형상	N110			GN				jisjk:39153		
+形相	표정	N110			GN				jisjk:39153		
 形而上	형이상	I110			GN				jisjk:89028		
 形而上学	형이상학	I110	USu		GN				jisjk:89029		
 形而下	형이하	I110			GN				jisjk:89030		
@@ -294013,7 +294013,7 @@ ttt	ttt	K110			GN				jisjk:201744
 笑い草	웃음거리	I110			GN				jisjk:75409		
 笑い話	만담	I110	UTs		GN				jisjk:75410		
 笑い顔	웃는 얼굴	I110	VBp		GN				jisjk:75407		
-笑い飛ば	웃어버&AA@	M423			GN				jisjk:343341		
+笑い飛ば	웃어넘&A2@	M423			GN				jisjk:343341		
 笑う角には福来たる	소문만복래	A9D0			GN				jisjk:343086		
 笑え	웃&A2@	M427			GN	1312	||1 &&3 P+1== "1**" S+1!= "理由" S+1!= "日"	笑え는 뒤에 명사가 오면 ‘웃기다’를 고르되, 웃을 수 있는 이유·날을 나타내는 理由·日 앞에는 적용하지 않는다.	jisjk:117087		
 笑え	웃을 수 &HN@	M427	XXX	MaKe	GN	3811	||2 &&2 M+0== "590" D+0= "&HJ@" &&2 U+0== "Lません" D+0= "웃을 수 &M9@"	笑え가 590 어미를 가지면 웃다로 바꾸고 ません 어미를 가지면 웃을 수 없다로 바꾼다. (미발동: rare-context)	jisjk:346989		
@@ -334464,6 +334464,7 @@ ttt	ttt	K110			GN				jisjk:201744
 近下秀明	지카시타 히데아키	N130	VHn		GN				jisjk:225456		
 近世	근세	N110	UMe		GN				jisjk:17396		
 近付	가까워&AL@	M421			GN				jisjk:141123		
+近付	다가&A1@	M421			GN	4005	||1 &&4 S-1== "に" P-1== "2**" P-2== "1**" A-2== "VHn"	近付는 사람 명사와 に 뒤에서 '다가가다'를 고른다.	wfk:1		
 近付き	접근	N110			GN				jisjk:105551		
 近付きにな	친해&AL@	M418			GN				jisjk:92160		
 近付け	가까이 &AV@	M447			GN				jisjk:141126		

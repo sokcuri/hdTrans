@@ -66,7 +66,7 @@ dict:variant:tsuitekuru:3	付いてこい！	따라 와라!	fix	lookup
 dict:variant:tsuitekuru:3	しっかり付いてくるっす。	has:따라 와요	fix	lookup
 dict:variant:tsuitekuru:3	Richelieuに付いてきなさい。	Richelieu를 따라 와.	fix	lookup
 dict:variant:tsuitekuru:3	ほな、黒潮に付いてきてぇ～。	has:구로시오를	keep	lookup
-dict:variant:tsuitekuru:3	微笑みながら近付いてくる彼女	has:가까워져 오는	keep	lookup
+dict:variant:tsuitekuru:3	微笑みながら近付いてくる彼女	has:다가오는	keep	lookup
 dict:dialogue-senses:12	↑オイオイｗほんの少し上に382とミドリさんの書き込みがあるぞｗ	has:미도리 씨의 글이	fix	lookup
 dict:dialogue-senses:12	書き込みが途絶えて結構時間が経ってますが	has:글이 끊어져	fix	lookup
 dict:dialogue-senses:12	ミドリさんの書き込みから、丸2日以上経ってますが	has:미도리 씨의 글로부터	fix	lookup
