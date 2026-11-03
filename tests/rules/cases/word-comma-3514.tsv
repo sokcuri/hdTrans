@@ -1,0 +1,8 @@
+# 규칙: GRM-3514
+rule	input	expected	kind	layer
+compose:word-comma	年の離れた兄が両親を養っており、俺は気ままな独身貴族だった。	has:부양하고 있어, 나는	fix	compose
+compose:word-comma	代行措置として、電流耐性獲得・・・成功しました。	has:대행 조치로서, 전류	fix	compose
+compose:word-comma	パンを食べ、寝た。	빵을 먹어, 잤다.	fix	compose
+compose:word-comma	なお、明日は休みだ。	has:덧붙여, 내일은	fix	compose
+compose:word-comma	このため、中止した。	이 때문에, 중지했다.	keep	compose
+compose:word-comma	パンを食べて寝た。	lacks:,	keep	compose

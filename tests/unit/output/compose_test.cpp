@@ -430,6 +430,19 @@ HD_TEST(compose_ani_quoting_form) {
     for (const auto& c : cases) CheckComposition(c);
 }
 
+// A word whose source ends in the comma of its token (おり、, として、) keeps that comma (spec GRM-3514); a
+// comma item and a blank word write none of their own.
+HD_TEST(compose_word_keeps_its_comma) {
+    const CompositionCase cases[] = {
+        {{{"養", "410", "", "부양&AV@", "1고"}, {"おり、", "417", "", "&HN@", "6"}, {"俺", "120", "", "나"}},
+         {1, 2, 3}, "부양하고 있어, 나."},
+        {{{"措置", "110", "", "조치"}, {"として、", "200", "", "(으)로서"}, {"電流", "110", "", "전류"}}, {2, 3},
+         "조치로서, 전류."},
+        {{{"措置", "110", "", "조치"}, {"、", "600", "", ","}, {"電流", "110", "", "전류"}}, {1, 2, 3}, "조치, 전류."},
+    };
+    for (const auto& c : cases) CheckComposition(c);
+}
+
 // The auxiliary 버리다 (gram Ds) joins the 아/어 form before it; the main verb stays apart.
 HD_TEST(compose_auxiliary_beorida_join) {
     const CompositionCase cases[] = {

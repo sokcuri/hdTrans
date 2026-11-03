@@ -1222,10 +1222,19 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     std::string translated =
         WriteCount(i, ApplyParenthesisTextFilter(DictionaryForms(Build(i, 0, {}), *generated_), i)) + item.appended;
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
-    // The comma an ichidan or passive stem takes as its て (開け、 열어,) is the item's ending text:
-    // it is written after the word, as a comma the word stage left apart.
-    if ((item.endingSurface == "、" || item.endingSurface == ",") && !Blank(translated) && !translated.ends_with(",")) {
-        translated += ",";
+    // A comma the source writes at the end of the word is written after its Korean, as a comma the word
+    // stage left apart: the comma an ichidan or passive stem takes as its て (開け、 열어,, spec GRM-3529) or
+    // one a word reads with it (おり、 있어,, として、 (으)로서,, spec GRM-3514).
+    {
+        const size_t at = std::min<size_t>(static_cast<size_t>(item.offset), tokenText.size());
+        const std::string_view covered = std::string_view(tokenText).substr(at, static_cast<size_t>(std::max(item.length, 0)));
+        const bool wordComma = settings_.text && covered != "、" && covered != "，" &&
+                               (covered.ends_with("、") || covered.ends_with("，"));
+        const size_t end = translated.find_last_not_of(' ');
+        if ((item.endingSurface == "、" || item.endingSurface == "," || wordComma) && !Blank(translated) &&
+            translated[end] != ',') {
+            translated.insert(end + 1, ",");
+        }
     }
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
