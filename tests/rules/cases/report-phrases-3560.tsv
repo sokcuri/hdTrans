@@ -49,7 +49,8 @@ cx:caption-fixes-1:56	影響は少ないとみられています。	has:적은 �
 cx:caption-fixes-1:56	中学生とみられる１４歳の少年	!rule:cx:caption-fixes-1:56	keep	rewrites
 cx:caption-fixes-1:60	アジアカップまで森保監督の続投を決定。	has:감독의 유임을 결정	fix	rewrites
 cx:caption-fixes-1:60	先発の続投で	!rule:cx:caption-fixes-1:60	keep	rewrites
-cx:caption-fixes-1:70	(大吉(だいきち))対象は 今年度ご覧の年齢になる方で	has:보시는 연령이	fix	rewrites
+cx:caption-fixes-1:70	ご覧の皆さん、こんばんは。	has:보시는 여러분	fix	rewrites
+cx:caption-fixes-1:70	(大吉(だいきち))対象は 今年度ご覧の年齢になる方で	!rule:cx:caption-fixes-1:70	keep	rewrites
 cx:caption-fixes-1:70	ご覧のあて先まで	has:보시는 행선지까지	fix	rewrites
 cx:caption-fixes-1:70	ご覧のとおりです。	!rule:cx:caption-fixes-1:70	keep	rewrites
 cx:caption-fixes-1:70	こちらをご覧ください。	!rule:cx:caption-fixes-1:70	keep	rewrites
