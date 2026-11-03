@@ -20,6 +20,9 @@ sound:wave-dash-after-kanji	今日来～て	오늘 와~	keep	sound
 sound:wave-dash-after-kanji	本当行～く？	사실 가~?	keep	sound
 sound:wave-dash-after-kanji	本当帰～る	사실 돌아간다~	keep	sound
 sound:wave-dash-after-kanji	来～て	와~	keep	sound
+sound:wave-dash-after-kanji	また来～ます！	또 옵니다!	keep	sound
+sound:wave-dash-after-kanji	遊びに来～ました	놀러 왔습니다	keep	sound
+sound:wave-dash-after-kanji	来～ませんか？	오지 않을래요?	keep	sound
 sound:drawn-object	気ぃついたら朝だった	정신을 차려 보니 아침이었다	fix	sound
 sound:drawn-object	目ぇ回った	눈이 핑핑 돌았다	fix	sound
 sound:drawn-object	声ー出ない	목소리가 나오지 않는다	fix	sound

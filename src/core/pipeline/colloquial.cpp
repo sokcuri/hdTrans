@@ -1406,6 +1406,11 @@ int ConjugatesFrom(const dict::Snapshot& snap, std::u32string_view key, std::u32
                 const std::u32string f = DecodeText(word::Conjugation(kind, b));
                 if (f.size() > 1 && rest.starts_with(std::u32string_view(f).substr(1))) return 2;
             }
+            // The き and こ stems alone take auxiliaries as an ichidan stem does (来ます, 来ない, 来られる).
+            if (!rest.empty() && (In(rest[0], U"まなたてずん") || rest.starts_with(U"させ") || rest.starts_with(U"され") ||
+                                  rest.starts_with(U"られ"))) {
+                return 1;
+            }
         }
     }
     const std::string text = EncodeText(key);
