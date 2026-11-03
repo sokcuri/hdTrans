@@ -1,0 +1,14 @@
+# 규칙: LEX-4302
+rule	input	expected	kind	layer
+dict:jisjk:46052	外務省キャリアの田中は、その言葉を聞いて絶句する。	has:커리어	fix	lookup
+dict:jisjk:46052	「まぁ……将来のことを考えると、キャリアとしては東証一部上場企業とかがいいんじゃない？	has:커리어	fix	lookup
+dict:w:31525	携帯キャリアでもだいぶ違うだろうから、俺からもかけてみるよ、ってかメール打つ努力しろよ！	has:휴대폰 캐리어	fix	lookup
+dict:jisjk:52980	「ハーレムってか。	has:하렘	fix	lookup
+dict:jisjk:52980	「いいか、ハーレムっていうのはな！	has:하렘	fix	lookup
+dict:jisjk:54755	おにいちゃんの持ってる、そのフィギュア…………いいなあ。	has:피규어	fix	lookup
+dict:jisjk:54755	プラモを作ったり、フィギュアを塗装してみたり、ブログをやってみたり。	has:피규어	fix	lookup
+dict:w:2220	現代の海自イージス艦にもその名は受け継がれたの。	has:이지스	fix	lookup
+dict:w:2220	現代の海上自衛隊のイージス艦にも、その名は受け継がれています。	has:이지스	fix	lookup
+dict:w:31547	ハーレム地区に住む。	has:할렘 지구에	fix	lookup
+lex:フィギュアスケート	元フィギュアスケーターかよ	has:피겨 스케이팅 선수	keep	lookup
+lex:キャリアウーマン	ドラマに出てくる、超エリートキャリアウーマンさながらだ。	has:커리어 우먼	keep	lookup

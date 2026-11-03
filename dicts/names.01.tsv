@@ -24676,7 +24676,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ヘコれいむ	헤코 레이무	N130	QPNVHn		GN						へこれいむ	names.322797
 ヘコアユ	헤코아유	N110			GN						へこあゆ	names.322798
 ヘコヘコ	헤코헤코	N110			GN						へこへこ	names.322799
-ヘザー Heather	헤더	N130	QPNVHn	Wb	GN						へざー	names.322800
+ヘザー	헤더	N130	QPNVHn	Wb	GN						へざー	names.322800
 ヘザース/ベロニカの熱い日	헤더스	N130	QWK		GN							names.322801
 ヘザーセット	헤더셋	N130	QCTVPl		GN							names.322802
 ヘザートン	해더턴	N130	QCTVPl		GN							names.322803
@@ -89965,7 +89965,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ララサンシャイン	라라 선샤인	N130	QWK		GN						ららさんしゃいん	names.388925
 ララッシュア・エル・マルディアル	라라슈아 엘 마르디알	N130	QPNVHn		GN						ららっしゅあ・える・まるでぃある	names.388926
 ララッシュア・エル・マルディアル	라랏슈아 엘 마르디알	N130	QPNVHn		GN						ララッシュア・エル・マルディアル	names.388927
-ララティーナ	다크니스	N130	QPNVHn	Wb	GN							names.388928
+ララティーナ	라라티나	N130	QPNVHn	Wb	GN							names.388928
 ララドゥ	라라두	N110			GN						ららどぅ	names.388929
 ララネル	라라넬	N130	QPNVHn	Wb	GN						ららねる	names.388930
 ララノア	라라노아	N130	QPNVHn	Wb	GN						ららのあ	names.388931

@@ -1,0 +1,97 @@
+# 규칙: LEX-4300
+rule	input	expected	kind	layer
+dict:jisjk:116629	いきなりカミングアウトされても困る。	has:커밍아웃	fix	lookup
+dict:jisjk:116629	そうだ、ここはカミングアウトが正解だ。	has:커밍아웃	fix	lookup
+dict:jisjk:48523	「ジョーカーはなし。	has:조커	fix	lookup
+dict:jisjk:48523	ジョーカーはオールマイティーか？	has:조커	fix	lookup
+dict:jisjk:60017	ワゴン持ってるから車出してもらってんだよ	has:왜건	fix	lookup
+dict:jisjk:60017	俺がワゴンを示すと、アシュレイは目を見開いた。	has:왜건	fix	lookup
+dict:jisjk:268414	門司港レトロ観光線	has:레트로	fix	lookup
+dict:jisjk:268414	「ほえ～……なんかレトロな艦だねぇ。	has:레트로	fix	lookup
+dict:jisjk:49169	その前に、一緒にストレッチする？	has:스트레치	fix	lookup
+dict:jisjk:49169	寝る前に、15分だけストレッチをした。	has:스트레치	fix	lookup
+dict:jisjk:48988	スタミナが足りません	has:스태미나	fix	lookup
+dict:jisjk:48988	STM （スタミナ）:20	has:스태미나	fix	lookup
+dict:jisjk:47452	ゴンドラに乗りますか？	has:곤돌라	fix	lookup
+dict:jisjk:47452	連射モードのアサルトライフルが一斉に火を吹き、観覧車のゴンドラを蜂の巣にする。	has:곤돌라	fix	lookup
+dict:jisjk:49187	スナック菓子しか浮かんでこない。	has:스낵	fix	lookup
+dict:jisjk:133756	遺されたプラモデル、ゲームのタイトルの数々だった。	has:프라모델	fix	lookup
+dict:jisjk:58587	「ユニット配置」……作成済みユニットなし。	has:유닛	fix	lookup
+dict:jisjk:58587	「ユニット作成」……作成可能ユニットなし。	has:유닛	fix	lookup
+dict:jisjk:129119	朗らかな午後の日差しが燦々と降り注ぐ、サンルームにて。	has:썬룸	fix	lookup
+dict:jisjk:47264	小湊鐵道4コマ漫画特集コンテンツです。	has:콘텐츠	fix	lookup
+dict:jisjk:48108	「俺にシフトに入れと……」	has:시프트	fix	lookup
+dict:jisjk:260762	「無駄だ、プレゼンなんて意味ない」	has:프레젠테이션	fix	lookup
+dict:jisjk:260762	「柏木のプレゼンしたゲームはどんなクソゲーでも必ず売れる」	has:프레젠테이션	fix	lookup
+dict:jisjk:50305	ダイヤ・運賃・	has:다이아	fix	lookup
+dict:jisjk:50305	「ダイヤが遅れているんだ。	has:다이아	fix	lookup
+dict:jisjk:48977	「スタッフの同行はないんですか？	has:스태프	fix	lookup
+dict:jisjk:43516	カナリがインカムの向こうで沈黙する。	has:인컴	fix	lookup
+dict:jisjk:43516	ちょっと、なんでインカムつけたままなの？	has:인컴	fix	lookup
+dict:jisjk:129363	ショートカットを起動するべきか、否か。	has:숏컷	fix	lookup
+dict:jisjk:129363	一応すぐに逃げられるようにワープアイテムをショートカットには入れて。	has:숏컷	fix	lookup
+dict:jisjk:351081	人がいない商業施設……ショッピングモールとはこんな風なんだなと思う。	has:쇼핑몰	fix	lookup
+dict:jisjk:103321	サバイバルゲームでゲーマーの質が問われるのがこの後片付けである。	has:서바이벌 게임	fix	lookup
+dict:jisjk:103321	そんな御大がそもそもなんでサバイバルゲームなんてやってるのかと。	has:서바이벌 게임	fix	lookup
+dict:jisjk:114026	今ミドリさんと松はまだファストフード店内？	has:패스트푸드	fix	lookup
+dict:jisjk:114026	戻ってるってかファストフード店に入った充電できるし	has:패스트푸드	fix	lookup
+dict:jisjk:129482	ジェットコースター ロマンス	has:제트코스터	fix	lookup
+dict:jisjk:129482	ラピスがジェットコースターを見て興奮している。	has:제트코스터	fix	lookup
+dict:jisjk:131867	ナッツとフルーツでクールダウンしながら、彼らはまた雑談を再開する。	has:너츠	fix	lookup
+dict:jisjk:59386	平が 氏と言われ、自分の一族のルーツを示すものだが、箔付けの為に勝手に名乗る事が多かった。	has:루츠	fix	lookup
+dict:w:2941	「あ、圭一くん、カチューシャ落ちそうだよ。	has:카츄샤	fix	lookup
+dict:w:2941	「メイドさんのカチューシャを付けた感想はどう？	has:카츄샤	fix	lookup
+dict:w:31508	実は白木は「後天性サヴァン症候群」……つまりサヴァン脳の持ち主なのである。	has:서번트	fix	lookup
+dict:w:31513	夜のボイトレ、ですか？	has:보이스 트레이닝	fix	lookup
+dict:w:31513	ボイトレは大事だよ、せ～の	has:보이스 트레이닝	fix	lookup
+dict:w:31509	「オッケイじゃないよ！	has:오케이	fix	lookup
+dict:w:31509	「瓶はオッケイだと思って」	has:오케이	fix	lookup
+dict:w:31542	-Bインフォー- ”	has:인포	fix	lookup
+dict:w:31542	ここは帝都・Bインフォーです。	has:인포	fix	lookup
+dict:w:31511	これはバトリングキング。	has:배틀링 킹	fix	lookup
+dict:w:31529	ここはオカルトスレだぞ？	has:오컬트 스레	fix	lookup
+dict:w:31529	てかオカルトスレだからかな？	has:오컬트 스레	fix	lookup
+dict:w:31530	さすがオカスレｗｗ	has:오컬트 스레	fix	lookup
+dict:w:31530	ただのオカスレじゃねーもんな	has:오컬트 스레	fix	lookup
+dict:jisjk:116630	友達にカムアウトした。	has:커밍아웃	fix	lookup
+dict:jisjk:45558	カラフルだ。	has:컬러풀	fix	lookup
+dict:jisjk:48109	シフトキーを押す。	has:시프트 키를	fix	lookup
+dict:w:31512	亜麻色のストレートヘアーはいつもさらさらとして光沢が見える	has:스트레이트 헤어는	fix	lookup
+dict:s:3063	「それで毒の効くビッグノームかー。	has:빅 노움	fix	lookup
+dict:jisjk:54482	ファーストフードを食べた。	has:패스트푸드를	fix	lookup
+dict:jisjk:133207	ファーストフード店に入る。	has:패스트푸드점에	fix	lookup
+dict:w:31546	ネットハック	has:넷핵	fix	lookup
+dict:w:31546	ネットハックをする。	넷핵을 한다.	fix	lookup
+dict:jisjk:49169	ストレッチ素材のパンツ	has:스트레치 소재	fix	lookup
+dict:w:2941	カチューシャの歌	has:카츄샤의 노래	fix	lookup
+lex:ネット	「あ、私がネットで拾ったんです」	has:넷에서 주웠습니다	keep	lookup
+lex:ネット	ネットで評判の墓場てのがあって	has:넷에서 평판의	keep	lookup
+lex:ゴールネット	ゴールネットを揺らした。	has:골네트를	keep	lookup
+lex:ポケット	ポケットから携帯を取り出して、じっと見つめる。	has:포켓에서	keep	lookup
+lex:ポケット	ポケットモンスター	has:포켓 몬스터	keep	lookup
+dict:jisjk:131867	ナッツを食べた。	has:너츠를	keep	lookup
+lex:トランプ	トランプのスタンダードなゲームのひとつだな。	has:트럼프의	keep	lookup
+lex:トランプ	トランプ大統領	has:도널드 트럼프	keep	lookup
+lex:テロップ	画面にこんなテロップが出た。	has:이런 텔롭이	keep	lookup
+lex:ミルク	ミルクも、いかがですか？	has:밀크도	keep	lookup
+lex:スープ	パンとスープ、お代わり貰える！	has:빵과 스프	keep	lookup
+lex:アンケート	車内放送に関するアンケートを実施します。	has:앙케이트를	keep	lookup
+lex:マニア	俺は別にＳＦマニアというわけでもないしな……。	has:SF 매니아	keep	lookup
+lex:ラッピング	きれいなラッピングして、あとはタイミングです！	has:랩핑	keep	lookup
+lex:リラックス	なかなかリラックスしてはもらえないな。	has:릴렉스	keep	lookup
+lex:エリア	エリアで探す	has:에리어에서	keep	lookup
+lex:プール	プールで立ち泳ぎをしながら、エナは変わり果てた周囲の景色を見て言葉を失っている。	has:풀에서	keep	lookup
+lex:クーラー	「クーラー弱くします？	has:쿨러	keep	lookup
+lex:シール	子供の頃、シールを集めてたっけ。	has:씰을	keep	lookup
+lex:ルックス	リーダーシップがあり、ルックスもまあまあ	has:룩스도	keep	lookup
+lex:セオリー	セオリー通りじゃなく、自分の頭で考える。	has:시어리대로	keep	lookup
+lex:スウェット	スウェットを掴む手の力が強くなる。	has:스웨트를	keep	lookup
+dict:jisjk:49921	このターキーも食べて？	has:터키도	keep	lookup
+lex:シールド	セリカがシールドで俺を庇い、銃弾を防いでくれる。	has:쉴드로	keep	lookup
+lex:メトロノーム	メトロノーム	has:메트로놈	keep	lookup
+dict:jisjk:373466	その途中、ふとロースカツが呟く。	has:로스카츠가	fix	lookup
+dict:jisjk:373466	お前は相変わらずみたいだな『ロースカツ』」	has:『로스카츠』	fix	lookup
+dict:jisjk:134932	ミリタリーマニアの姉らしい一品で後二つほど買わされた	has:밀리터리 매니아	fix	lookup
+dict:jisjk:134932	（ミリタリー物買わされて、重かったから近道の獣道を通って家の裏に出ると思ったら……）	has:밀리터리물	fix	lookup
+dict:jisjk:45581	どうやら…ゲームはカルタらしいな。	has:카루타인	fix	lookup
+dict:jisjk:45581	だってすごいかぁいいカルタだったんだもの。	has:카루타였다	fix	lookup

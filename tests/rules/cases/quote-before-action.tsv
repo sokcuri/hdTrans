@@ -18,7 +18,7 @@ cx:tte-quote:10	戸締りができているなら寝ちまったって問題な�
 cx:tte-quote:20	人の少ない場所って希望したけど	사람이 적은 장소라고 희망했지만	fix	rewrites
 cx:tte-quote:5	あの子に、静かにってお願いしてきましょうか？	그 아이에게, 조용하게 부탁해 올까요?	fix	rewrites
 cx:tte-quote:20	あの子に、静かにってお願いしてきましょうか？	!rule:cx:tte-quote:20	keep	rewrites
-cx:tte-quote:20	「ジョーカーじゃない」って確信できるの？	「조우커가 아니다」라고 확신할 수 있는 거야?	fix	rewrites
+cx:tte-quote:20	「ジョーカーじゃない」って確信できるの？	「조커가 아니다」라고 확신할 수 있는 거야?	fix	rewrites
 cx:tte-quote:20	そうしたら、「救助訓練実施中」って返事があった。	!rule:cx:tte-quote:20	keep	rewrites
 cx:final-quote-to:20	「曾孫の顔が見たいんだと」	「증손의 얼굴을 보고 싶다고」	fix	rewrites
 cx:final-quote-to:15	何があったんだと心配そうに	무슨 일이 있었냐고 걱정스러운 듯이	fix	rewrites
@@ -40,7 +40,7 @@ cx:final-quote-to:20	「従業員は、客と同じ場所で食べちゃいけ�
 cx:final-quote-to:20	子になりそうだなぁと、彼はどこかずれた事を考えていた。	아이가 될 것 같다고, 그는 어딘가 어긋난 일을 생각하고 있었다.	fix	rewrites
 cx:final-quote-to:20	そうだろうと思った。	그럴 것이라고 생각했다.	keep	rewrites
 cx:final-quote-to:20	これを受け取っていただけますと、幸い…です…。	!rule:cx:final-quote-to:20	keep	rewrites
-cx:final-quote-to:30	サバイバルゲームなんてやってるのかと。	서바이벌게임 같은 건 하고 있는지.	fix	rewrites
+cx:final-quote-to:30	サバイバルゲームなんてやってるのかと。	서바이벌 게임 같은 건 하고 있는지.	fix	rewrites
 cx:final-quote-to:30	いや……そんなこともあるかも……と。	!rule:cx:final-quote-to:30	keep	rewrites
 cx:final-quote-to:40	熱いんじゃないかなぁと想像して放棄。	뜨겁지 않을까 하고 상상해 포기.	fix	rewrites
 cx:final-quote-to:40	角度に問題はないかなぁと不安になる	각도에 문제는 없을까 하고 불안해진다	fix	rewrites
