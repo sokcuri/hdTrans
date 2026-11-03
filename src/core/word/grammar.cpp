@@ -1229,8 +1229,20 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         if (ObjectBefore(it) || (agent != nullptr && NarrativePassive(it, rest))) return Voice::Passive;
         // A て form, a progressive or たまま is a state one is put in (後ろから掴まれて, 呪いで繋がれたまま), not
         // what one manages: but for ても and a partner in と right before (佐藤さんと繋がれて).
+        // A thing in に before 掴まる or 捕まる is what one holds on to (手すりに掴まれて), not who grabs.
         const bool partner = it->prev != nullptr && it->prev->group->surface == "と";
-        return !partner && ((rest.starts_with("て") && !rest.starts_with("ても")) || rest.starts_with("たまま"))
+        const std::string_view surface = it->group->surface;
+        bool heldThing = false;
+        if (surface.starts_with("掴") || surface.starts_with("捕") || surface.starts_with("つか")) {
+            for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+                const std::string_view s = p->group->surface;
+                if (s != "に" && s != "にも" && s != "には") continue;
+                const Item* a = p->prev;
+                heldThing = a != nullptr && !Person(a->Attr(std::max(a->selected, 0)));
+                break;
+            }
+        }
+        return !partner && !heldThing && ((rest.starts_with("て") && !rest.starts_with("ても")) || rest.starts_with("たまま"))
                    ? Voice::Passive
                    : Voice::None;
     }

@@ -36,7 +36,7 @@ dict:w:31849	恐るるに足らない相手だ。	두려워할 만하지 않은 
 dict:w:31849	取るに足らない。	하찮다.	keep	lookup
 dict:w:31861	白崎の笑顔を見ていると本当に癒やされる。	has:정말 치유된다	fix	lookup
 dict:w:31861	「（ああ、今日は猫を見て癒やされなくては）」	has:치유돼야 한다	fix	lookup
-dict:w:31850	「アップルシナモンティー。疲れを癒やしてくれるみたい」	has:피로를 달래 주는	fix	lookup
+dict:w:31850	「アップルシナモンティー。疲れを癒やしてくれるみたい」	has:피로를 치유해 주는	fix	lookup
 dict:w:31850	疲れを癒す。	피로를 푼다.	keep	lookup
 dict:w:31853	それでも詩乃は火照りを怒りで塗り替えるように声を張り上げた。	has:달아오름을	fix	lookup
 dict:w:31855	少年レフィルの顔には苦い表情と手形の跡。	has:표정과 손자국	fix	lookup
@@ -49,12 +49,8 @@ dict:w:31858	国王は前のめりになった。	국왕은 앞으로 몸이 기
 dict:w:31860	は、はぅ…！ 悲しい男の性が思わず前のめりな状態に……ひ〜…！	has:앞으로 쏠린 상태	fix	lookup
 dict:w:31859	すかさず頭を下げるコニーへ鷹揚に頷きを返す。	has:끄덕임으로 답한다	fix	lookup
 dict:w:31859	一際小柄な助手席の少女は、コクリと頷きマスクで顔を覆った。	has:끄덕여 마스크로	keep	lookup
-dict:jisjk:258514	ダガーを仕舞い、この『店』について尋ねたサラに、この店の主人はごく簡単に答えた。	has:『가게』에 대해 물은	fix	local
-dict:jisjk:258514	「あなたはその分野について、エキスパートなのだと思っていました」	「당신은 그 분야에 대해, 전문가라고 생각했습니다」	fix	local
-dict:jisjk:258514	当サイトについて	당사이트에 대해	fix	local
 dict:jisjk:258514	もうすぐ家につく。	이제 곧 집에 도착한다.	keep	local
 dict:jisjk:258514	艦隊が、無事港につきました。よかったです。	has:항에 도착했습니다	keep	local
-dict:jisjk:346453	10分以上の遅れが見込まれる場合に、その路線名と運行区間について表示します。	has:운행 구간에 대해 표시	fix	local
 dict:jisjk:346453	駅についたら電話して。	역에 도착하면 전화해.	keep	local
 dict:jisjk:341799	親父の後について、階段を登り店内に入る。	아버지 뒤를 따라, 계단을 올라 가게 안에 들어간다.	fix	local
 dict:jisjk:341799	上機嫌で部屋を出ていくセリカたちの後について、エルも部屋を出る。	has:세리카들 뒤를 따라,	fix	local
@@ -95,3 +91,19 @@ dict:w:31867	単純なミスだ。	단순한 실수다.	keep	lookup
 dict:w:31868	「うむ。まあ、いいかんじだ。」	has:좋은 느낌이다	fix	lookup
 dict:w:31868	ああ～、いいかんじ！ありがとう～	has:좋은 느낌!	fix	lookup
 dict:w:31868	いい感じだ。	좋은 느낌이다.	keep	lookup
+dict:jisjk:258514	駅についたら電話して。	역에 도착하면 전화해.	keep	local
+dict:jisjk:258514	東京へついて電話した。	도쿄에 도착해 전화했다.	keep	local
+dict:jisjk:341799	ただの農家だし、魔法のことについて知らなかったのは仕方ない。	has:마법에 대해 몰랐던	fix	local
+dict:jisjk:341799	しかしここに無いものについてブーブー言ってもしょうがない。	has:없는 것에 대해	fix	local
+dict:jisjk:341799	「大丈夫、戦い方について話すから」	has:싸우는 방법에 대해	fix	local
+dict:jisjk:341799	初めて結婚ということについて考えたよ	has:결혼이라는 것에 대해 생각했어	fix	local
+dict:jisjk:341799	俺はアプリオの外に出ながら、今後について考えを巡らせる。	has:향후에 대해	fix	local
+dict:jisjk:341799	さすがにここまでやられると、青海さんのことについて、あれこれ文句を言う気もなくなる。	has:아오미 씨에 대해,	fix	local
+dict:jisjk:341799	今日は ９月３日に行われた放送番組審議会について￫	has:심의회에 대해	keep	local
+dict:w:31850	「泣いても、悔しくても、それでも前へ進んで心の傷を癒やすしかない」	has:상처를 치유할 수밖에	fix	lookup
+dict:w:31850	時間はすべてを癒やしてくれると	has:치유해 준다고	fix	lookup
+dict:w:31850	その心地良さがアレイディアの疲弊した頭を少しだけ癒やしてくれる。	has:약간 치유해 준다	fix	lookup
+dict:w:31850	傷を癒やす。	상처를 치유한다.	fix	lookup
+dict:w:31861	あの身体は癒やされない、今も体の中が魔改造されて錬成され続けてる。	has:치유되지 않는	fix	lookup
+dict:w:31861	さらっと癒やされていたが、癒やされるってことはストレスがあったってことだ。	has:스윽 치유되고	fix	lookup
+dict:w:31850	疲れを癒す。	피로를 푼다.	keep	lookup
