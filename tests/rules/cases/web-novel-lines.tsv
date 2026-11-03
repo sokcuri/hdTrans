@@ -122,7 +122,7 @@ cx:rebuild-fixes:40	その者は震えで誤って引き金を引いても不思
 cx:rebuild-fixes:40	不思議の国。	이상한 나라.	keep	rewrites
 cx:rebuild-fixes:50	彼女は何をする訳でもなく佇んでいた。	그녀는 무엇을 하는 것도 아니고 우두커니 서 있었다.	fix	rewrites
 cx:rebuild-fixes:50	それでもなく。	!rule:cx:rebuild-fixes:50	keep	rewrites
-cx:fit-to:10	その危険に見合うものがここにあるからだ。	그 위험에 알맞는 것이 여기에 있기 때문이다.	fix	rewrites
+cx:fit-to:10	その危険に見合うものがここにあるからだ。	그 위험에 어울리는 것이 여기에 있기 때문이다.	fix	rewrites
 cx:fit-to:10	その無謀に相応しい末路を迎えただけ。	그 무모에 걸맞은 말로를 맞이했을 뿐.	fix	rewrites
 cx:fit-to:10	静かに眠る。	!rule:cx:fit-to:10	keep	rewrites
 cx:teki-and:10	その女性は全身に幻想的で非現実的な美しさを備えていた。	그 여성은 전신에 환상적이고 비현실적인 아름다움을 갖추고 있었다.	fix	rewrites

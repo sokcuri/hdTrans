@@ -12207,7 +12207,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 儂等	우리	N120	VHn		GN				llm		わしら	w:12201
 儚げ	덧없는 듯%A1@	G8U0			GN				llm			w:12202
 償金	배상금	N110			GN				xxx llm	1		w:12203
-優しそう	상냥해 보%D4@	G8U0			GN				xxx llm	1		w:12204
+優しそう	상냥해 보%EJ@	G8U0		Av	GN				xxx llm	1		w:12204
 優に	족히	E300			GN				xxx llm	1		w:12205
 優勝カップ	우승컵	N110			GN						ゆうしょうカップ	w:12206
 優婆塞	우바새	N110			GN						うばそく	w:12207
@@ -15283,7 +15283,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 射倖心	사행심	N110	UFl		GN				llm		しゃこうしん	w:15241
 射出成形	사출성형	N110			GN						しゃしゅつせいけい	w:15242
 射撃場	사격장	N110			GN						しゃげきじょう	w:15243
-射止め	손에 &H5@	M427			GN				xxx llm	1		w:15244
+射止め	사로&FK@	M427			GN			LEX-4030: 射止める 사로잡다	xxx llm	1		w:15244
 射精管	사정관	N110	VBp		GN						しゃせいかん	w:15245
 射落	쏘아 떨어뜨&AA@	M423			GN				xxx llm		いおとす	w:15246
 射落	쟁취&AV@	M423			GN				llm		いおとす	w:15247
@@ -16108,7 +16108,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 強いて	굳이	E300			GN				xxx llm	1		w:16064
 強か	만만치 %B5@	G8U0			GN				llm			w:16065
 強かさ	끈질김	N110	UYi		GN				llm			w:16066
-強そう	강해 보%D4@	G8U0			GN				xxx llm	1		w:16067
+強そう	강해 보%EJ@	G8U0		Av	GN				xxx llm	1		w:16067
 強制収容所	강제수용소	N110			GN						きょうせいしゅうようじょ	w:16068
 強塩基	강염기	N110			GN						きょうえんき	w:16069
 強変化動詞	강변화동사	N110			GN						きょうへんかどうし	w:16070
@@ -18779,7 +18779,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 気安げ	허물%B4@	G8U0			GN				llm			w:18733
 気怠	나른$AB@	H7U0			GN						けだるい	w:18734
 気性	성미	N110			GN				xxx	1	きしょう	w:18735
-気持ちよさそう	기분 좋아 보%D4@	G8U0			GN				llm			w:18736
+気持ちよさそう	기분 좋아 보%EJ@	G8U0		Av	GN				llm			w:18736
 気持ち悪	기분 나$AG@	H7U0			GN				xxx llm			w:18737
 気持ち悪	징그$G7@	H7U0			GN						きもちわるい	w:18738
 気持ち悪	메스$G2@	H7U0			GN				llm		きもちわるい	w:18739
@@ -21966,7 +21966,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 美しい人	아름다운 사람	N110			GN				llm			w:21917
 美名	미명	N110			GN						びめい	w:21918
 美味い話	솔깃한 이야기	N110	UTs		GN				llm		うまいはなし	w:21919
-美味しそう	맛있어 보%D4@	G8U0			GN				xxx llm	1		w:21920
+美味しそう	맛있어 보%EJ@	G8U0		Av	GN				xxx llm	1		w:21920
 美妙	미묘	N110			GN						びみょう	w:21921
 美術史	미술사	N110			GN						びじゅつし	w:21922
 美術商	미술상	N110			GN						びじゅつしょう	w:21923
@@ -27236,3 +27236,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 部屋付	방 담당	N110			GN			LEX-4029: 部屋付 방 담당			へやつき	w:31061
 誉めそや	칭송&AV@	M443			GN			LEX-4029: 誉めそやす 칭송하다			ほめそや	w:31062
 褒めそや	칭송&AV@	M443			GN			LEX-4029: 褒めそやす 칭송하다			ほめそや	w:31063
+白銀色	은백색	N110			GN			LEX-4030: 白銀色 은백색			はくぎんいろ	w:31064
+庇護欲	보호욕	N110			GN			LEX-4030: 庇護欲 보호욕			ひごよく	w:31065

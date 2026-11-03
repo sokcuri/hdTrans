@@ -1,0 +1,16 @@
+# 규칙: LEX-4031
+rule	input	expected	kind	layer
+cx:novel-fixes-2:800	まったく師匠は大袈裟すぎるのだ。	정말이지 스승은 과장이 지나치다.	fix	rewrites
+cx:novel-fixes-2:800	まったく、困ったものだ。	has:정말이지,	fix	rewrites
+cx:novel-fixes-2:800	まったく分からない。	전혀 모른다.	keep	rewrites
+cx:novel-fixes-2:800	まったく同じだ。	완전히 같다.	keep	rewrites
+cx:novel-fixes-2:810	師匠が余計うるさくなった。	스승이 더 시끄러워졌다.	fix	rewrites
+cx:novel-fixes-2:810	余計気になる。	더 신경 쓰인다.	fix	rewrites
+cx:novel-fixes-2:810	余計なことをするな。	쓸데없는 일을 하지 마.	keep	rewrites
+cx:novel-fixes-2:820	まったく師匠は大袈裟すぎるのだ。	has:과장이 지나치다	fix	rewrites
+cx:novel-fixes-2:820	高すぎる。	너무 높다.	keep	rewrites
+cx:novel-fixes-2:825	大袈裟すぎる話だ。	과장이 지나친 이야기다.	fix	rewrites
+cx:novel-fixes-2:825	派手すぎる服。	너무 화려한 옷.	keep	rewrites
+cx:novel-fixes-2:830	幾分マシになった視界で前を見る。	약간 나아진 시야로 앞을 본다.	fix	rewrites
+cx:novel-fixes-2:830	その目で確かめた。	그 눈으로 확인했다.	keep	rewrites
+cx:novel-fixes-2:830	視界で動くものがある。	!rule:cx:novel-fixes-2:830	keep	rewrites

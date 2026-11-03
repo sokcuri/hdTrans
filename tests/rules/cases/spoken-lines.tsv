@@ -25,7 +25,7 @@ dict:w:28861	そんな顔されたら	그런 얼굴을 하면	fix	local
 dict:w:28861	嫌な顔された	싫은 얼굴을 했다	fix	local
 dict:w:28861	変な顔されても	이상한 얼굴을 해도	fix	local
 dict:w:28862	そんな顔をされたら困る	그런 얼굴을 하면 곤란하다	fix	local
-dict:w:28862	悲しそうな表情をされた	슬픈 것 같은 표정을 했다	fix	local
+dict:w:28862	悲しそうな表情をされた	슬퍼 보이는 표정을 했다	fix	local
 dict:w:28861	無視された	무시당했다	keep	local
 dict:w:28861	質問された	질문받았다	keep	local
 dict:w:28862	顔を殴られた	얼굴을 맞았다	keep	local
