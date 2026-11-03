@@ -1536,15 +1536,18 @@ size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
 // is said twice; with ッ not for kSoundsBeforeKanji:
 // えっ……本当); or a syllable with ッ directly before a kanji, unless kSoundsBeforeKanji
 // holds it, with the separator 、.
-// The separator after a stutter piece as StutterSeparator reads it, with the half-width spaces after
-// it when a comma or kana follows them (わ、 私は, どっ.. どうしよう 어.. 어떻게 하지); a full-width space keeps
+// The separator after a stutter piece as StutterSeparator reads it, with one half-width space after
+// it when it is a comma or kana follows the space (わ、 私は, どっ.. どうしよう 어.. 어떻게 하지); a full-width space keeps
 // spaced copies apart (お　お…　俺), and after an ellipsis before a kanji word the kana cannot be compared.
 size_t SpacedStutterSeparator(std::u32string_view rs, size_t i) {
     size_t n = StutterSeparator(rs, i);
     if (n == 0) return 0;
-    size_t sp = i + n;
-    while (sp < rs.size() && rs[sp] == U' ') sp++;
-    if (sp > i + n && sp < rs.size() && (In(rs[i], U"、，") || IsHiraganaRune(rs[sp]) || IsKatakanaRune(rs[sp]))) n = sp - i;
+    // One space only; a run of them separates columns.
+    const size_t sp = i + n;
+    if (sp + 1 < rs.size() && rs[sp] == U' ' && rs[sp + 1] != U' ' &&
+        (In(rs[i], U"、，") || IsHiraganaRune(rs[sp + 1]) || IsKatakanaRune(rs[sp + 1]))) {
+        n++;
+    }
     return n;
 }
 
