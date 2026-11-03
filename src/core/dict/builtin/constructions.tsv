@@ -452,13 +452,13 @@ cx:novel-fixes-2:880	LEX-4032	&&2 S+0== "とは" >5 ||5 S+0== "L正反対" S+0==
 cx:novel-fixes-2:890	LEX-4032	&&4 S+0== "合わせ" S-1== "に向か" S+1== "で" P-2== "1**"	append-target@-2 "에" set-target@-1 "" set-ending@-1 "" set-target "마주 보고" set-target@+1 " "	テーブルに向かい合わせで座り 테이블에 마주 보고 앉아
 cx:novel-fixes-2:900	LEX-4033	&&3 S+0== "な" D+0== "$D7@" Y-1== "R것이"	set-target "$FA@"	他に出来る事がなかった 그 밖에 할 수 있는 것이 없었다
 cx:novel-fixes-2:910	LEX-4033	&&2 S+0== "L見え" Y-1== "0 만큼"	set-ending@-1 "0 것으로만"	ただ遊んでいるだけに見えた 그저 놀고 있는 것으로만 보였다
-cx:novel-fixes-2:920	LEX-4033	&&2 S+0== "頭がいい" S+1== "と"	set-target "머리가 좋다" set-target@+1 "고"	頭がいいと褒められた 머리가 좋다고 칭찬받았다
-cx:novel-fixes-2:925	LEX-4033	&&2 S+0== "頭がいい" P+1== "1**"	set-target "머리가 좋은"	頭がいい子 머리가 좋은 아이
-cx:novel-fixes-2:930	LEX-4033	&&2 S+0== "だの" ||2 Y-1== "R라" D-1== "R라"	set-target "느니"	勇気を出せだの 용기를 내라느니
-cx:novel-fixes-2:935	LEX-4033	&&3 S+0== "と" S-1== "だの" !1 F+1== "verb"	set-target " 하는"	頑張れだのと無責任な言葉 힘내라느니 하는 무책임한 말
+cx:novel-fixes-2:930	LEX-4033	&&2 S+0== "だの" ||2 Y-1== "R라" &&2 D-1== "R라" !1 P-1== "1**"	set-target "느니"	勇気を出せだの 용기를 내라느니
+cx:novel-fixes-2:935	LEX-4033	&&4 S+0== "と" S-1== "だの" !1 F+1== "verb" !1 S+1== "00、。,「」『』！？!?"	set-target " 하는"	頑張れだのと無責任な言葉 힘내라느니 하는 무책임한 말
 cx:novel-fixes-2:936	LEX-4033	&&2 S+0== "と" S-1== "だの"	set-target " 하고"	頑張れだのと言った 힘내라느니 하고 말했다
 cx:novel-fixes-2:937	LEX-4033	&&3 S+0== "と言" S-1== "だの" !1 I+0== "Lと言われ"	set-target " 하고 말&AV@"	頑張れだのと言った 힘내라느니 하고 말했다
-cx:novel-fixes-2:940	LEX-4033	&&3 S+0== "と" S+1== "噂" S+2== "の"	set-target "(이)라고" set-target@+1 "소문난" set-target@+2 " "	最底辺と噂の高校 최하층이라고 소문난 고등학교
+cx:novel-fixes-2:938	LEX-4033	&&2 S+0== "と、" S-1== "だの"	set-target " 하고,"	帰れだのと、騒ぐ 돌아가라느니 하고, 떠든다
+cx:novel-fixes-2:940	LEX-4033	&&4 S+0== "と" S+1== "噂" S+2== "の" !1 F-1== "person"	set-target "(이)라고" set-target@+1 "소문난" set-target@+2 " "	最底辺と噂の高校 최하층이라고 소문난 고등학교
+cx:novel-fixes-2:945	LEX-4033	&&4 S+0== "と" S+1== "噂" S+2== "の" F-1== "person"	set-target "(와)과" set-target@+1 "소문난" set-target@+2 " "	王子と噂の令嬢 왕자와 소문난 영애
 cx:novel-fixes-2:960	LEX-4033	&&3 S+0== "かわ" Y-1== "R고 나서" I+0== "Lかわれ"	set-ending@-1 "6" set-target "놀림&FD@" set-active	仇名を付けられてからかわれた 별명이 붙여져 놀림받았다
 cx:novel-fixes-2:970	LEX-4033	&&3 S+0== "と似" S+1== "よう" Y+1== "4"	set-target "(와)과 비슷&AV@" set-ending "8" set-target@+1 ""	俺と似たような境遇 나와 비슷한 처지
 cx:novel-fixes-2:980	LEX-4033	&&2 S+0== "取られ" <0 ||4 S+0== "写真" S+0== "写メ" S+0== "動画" S+0== "画像" ||2 S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "찍&AW@"	写真もいっぱい取られた 사진도 많이 찍혔다

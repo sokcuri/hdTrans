@@ -3075,8 +3075,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 左手の法則	플레밍의 왼손 법칙	N110			GN				llm			i:3069
 障子に目あり	문에도 눈이 있는 법	A9D0			GN				llm			i:3070
 壁に耳あり障子に目あり	벽에도 귀가 있고 문에도 눈이 있는 법	A9D0			GN				llm			i:3071
-頭がいい	머리가 좋아	A9D0			GN				llm			i:3072
-頭が良い	머리가 좋아	A9D0			GN				llm			i:3073
 終止符を打	종지부를 &HR@	M424		Pn	GN				llm			i:3074
 恋に落ち	사랑에 빠&AL@	M427			GN							i:3075
 心ここにあらず	마음이 딴 데 가 있어	A9D0			GN				llm			i:3076

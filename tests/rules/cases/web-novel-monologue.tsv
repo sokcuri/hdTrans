@@ -4,10 +4,11 @@ cx:novel-fixes-2:900	けれど、一人だけ時間に取り残され、暗い�
 cx:novel-fixes-2:900	時間がなかった。	!rule:cx:novel-fixes-2:900	keep	rewrites
 cx:novel-fixes-2:910	傍から見れば、ただ遊んでいるだけに見えただろう。	has:놀고 있는 것으로만 보였을	fix	rewrites
 cx:novel-fixes-2:910	子供に見えた。	!rule:cx:novel-fixes-2:910	keep	rewrites
-cx:novel-fixes-2:920	小学生の頃は、この歳にしては頭がいいと褒められて育った。	has:머리가 좋다고 칭찬받아	fix	rewrites
-cx:novel-fixes-2:920	あいつは頭がいい。	!rule:cx:novel-fixes-2:920	keep	rewrites
-cx:novel-fixes-2:925	頭がいい子だ。	has:머리가 좋은 아이	fix	rewrites
-cx:novel-fixes-2:925	あいつは頭がいい。	!rule:cx:novel-fixes-2:925	keep	rewrites
+lexical:atama-ga-ii	小学生の頃は、この歳にしては頭がいいと褒められて育った。	has:머리가 좋다고 칭찬받아	fix	defaults
+lexical:atama-ga-ii	頭がいい子だ。	has:머리가 좋은 아이	fix	defaults
+lexical:atama-ga-ii	頭がいいと得だ。	has:머리가 좋으면 이득이다	fix	defaults
+lexical:atama-ga-ii	頭が良かった。	has:머리가 좋았다	fix	defaults
+lexical:atama-ga-ii	頭がいいと思う。	has:머리가 좋다고 생각한다	keep	defaults
 cx:novel-fixes-2:930	勇気を出せだの、頑張れだのと無責任な言葉を投げつけた。	has:용기를 내라느니, 힘내라느니	fix	rewrites
 cx:novel-fixes-2:930	本だの服だのが散らかっている。	!rule:cx:novel-fixes-2:930	keep	rewrites
 cx:novel-fixes-2:935	勇気を出せだの、頑張れだのと無責任な言葉を投げつけた。	has:힘내라느니 하는 무책임한 말	fix	rewrites
@@ -17,7 +18,9 @@ cx:novel-fixes-2:936	雨と風が強い。	!rule:cx:novel-fixes-2:936	keep	rewri
 cx:novel-fixes-2:937	頑張れだのと言った。	has:힘내라느니 하고 말했다	fix	rewrites
 cx:novel-fixes-2:937	帰れだのと言われた。	!rule:cx:novel-fixes-2:937	keep	rewrites
 cx:novel-fixes-2:940	その結果、県内でも最底辺と噂の超絶バカ高校に入学するハメになった。	has:최하층이라고 소문난	fix	rewrites
-cx:novel-fixes-2:940	噂の高校に入った。	!rule:cx:novel-fixes-2:940	keep	rewrites
+cx:novel-fixes-2:940	彼女は王子と噂の令嬢だ。	!rule:cx:novel-fixes-2:940	keep	rewrites
+cx:novel-fixes-2:945	彼女は王子と噂の令嬢だ。	has:왕자와 소문난 영애	fix	rewrites
+cx:novel-fixes-2:945	最強と噂の剣士が来た。	!rule:cx:novel-fixes-2:945	keep	rewrites
 cx:novel-fixes-2:960	ヒエラルキーは一瞬にして最下層に落ちて、ホーケーという仇名を付けられてからかわれた。	has:별명이 붙여져 놀림받았다	fix	rewrites
 cx:novel-fixes-2:960	手紙を書いてから変わった。	!rule:cx:novel-fixes-2:960	keep	rewrites
 cx:novel-fixes-2:970	俺と似たような境遇でそうしている奴はたくさんいた。	has:나와 비슷한 처지에서	fix	rewrites
@@ -34,3 +37,7 @@ dict:jisjk:260766	絵が下手くそで困る。	has:그림이 몹시 서툴러	
 dict:w:31076	そこそこ裕福な家庭の三男として生まれた。兄兄姉弟。５人兄弟の４番目。	has:형, 형, 누나, 남동생.	fix	lookup
 phrase:なんとなくだが	いや、なんとなくだが、ハロワにいけばいいということはわかる。	has:막연하게나마	fix	builtin-phrase
 phrase:なんとなくだが	なんとなくそう思った。	has:왠지 그렇게	keep	builtin-phrase
+cx:novel-fixes-2:930	カメラだの、レンズだの買った。	!rule:cx:novel-fixes-2:930	keep	rewrites
+cx:novel-fixes-2:935	帰れだのと、騒ぐ。	!rule:cx:novel-fixes-2:935	keep	rewrites
+cx:novel-fixes-2:938	帰れだのと、騒ぐ。	has:돌아가라느니 하고, 떠든다	fix	rewrites
+cx:novel-fixes-2:938	雨と、風が強い。	!rule:cx:novel-fixes-2:938	keep	rewrites
