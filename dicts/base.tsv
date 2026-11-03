@@ -18757,8 +18757,8 @@ ttt	ttt	K110			GN				jisjk:201744
 ごりょう	오료	N110	UCl	Hd	GN				jisjk:184080		-1
 ごりょう	능	N110	VBl		GN				jisjk:184081		-1
 ごりょうち	황실 소유지	N110	VPl		GN				jisjk:184083		-1
-ごり押し	막무가내로 관철&AV@	M429			GN				jisjk:120534		
-ごり押し	무리한 관철	N110			GN				jisjk:151118		
+ごり押し	밀어붙&AJ@	M429			GN				jisjk:120534		
+ごり押し	밀어붙이기	N110			GN				jisjk:151118		
 ごれいぜん	영전	N110	VPl		GN				jisjk:184091		-1
 ごろ	경	N110	UMe	TuTm	GN				jisjk:13635		
 ごろあわせ	언어유희	I110			GN				jisjk:111684		
@@ -309020,7 +309020,7 @@ ttt	ttt	K110			GN				jisjk:201744
 色再現	색재현	I110			GN				jisjk:73695		
 色出	시키데	N130	QCTVPl		GN				jisjk:297299		
 色分かれ	색 분리	N110			GN				jisjk:164233		
-色分け	분류	I110			GN				jisjk:73688		
+色分け	색깔 구분	I110			GN				jisjk:73688		
 色分解	색분해	K110			IT				jisjk:262447		
 色分解光学計	색분해광학계	N110	VPe		GN				jisjk:203111		
 色利浦	이로리우라	N130	QCTVPl		GN				jisjk:274126		
@@ -334081,7 +334081,7 @@ ttt	ttt	K110			GN				jisjk:201744
 農作業に行った帰り	농사일하러 갔다 오는 길	N110			GN				jisjk:151638		
 農作物	농작물	I110			GN				jisjk:64415		
 農兵	농병	N110	VHn		GN				jisjk:18355		
-農具	농구	N110	VPe		GN				jisjk:18340		
+農具	농기구	N110	VPe		GN				jisjk:18340		
 農務	농무	N110			GN				jisjk:18350		
 農務長官	농무 장관	I110	VHn		GN				jisjk:64408		
 農協	농협	N110	VGt		GN				jisjk:18374		
@@ -356897,7 +356897,7 @@ ttt	ttt	K110			GN				jisjk:201744
 飲手	술꾼	N110	VHn		GN				jisjk:30983		
 飲料	음료	N110	VFd		GN				jisjk:30981		
 飲料ともに	음료 모두	N110			GN				jisjk:150561		
-飲料水	음료수	I110	VFd		GN				jisjk:79697		
+飲料水	식수	I110	VFd		GN				jisjk:79697		
 飲毒	음독	N110			GN				jisjk:30980		
 飲物	음료	N110	VFdVFd		GN				jisjk:30982		
 飲用	음용	N110	VFd	Hd	GN				jisjk:30985		
