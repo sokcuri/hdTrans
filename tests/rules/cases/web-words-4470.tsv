@@ -1,0 +1,88 @@
+# 규칙: LEX-4470, LEX-4474, LEX-4481, LEX-4482, LEX-4483, LEX-4484, LEX-4485
+rule	input	expected	kind	layer
+dict:w:32101	「こうして二人で飲み交わすのは、いつ以来になるか」	has:둘이서 술잔을 주고 받는 건	fix	lookup
+dict:w:32101	久しぶりに会った友人のお母さんと軽く言葉を交わし、家路を辿る。	has:가볍게 말을 주고 받고	keep	lookup
+dict:w:32102	夕立、お鍋大好きっぽい！ご相伴するっぽい！	has:함께 식사한다	fix	lookup
+dict:w:32102	旗風もぜひご相伴させて頂ければと……ありがとう存じます。	has:꼭 함께 식사	fix	lookup
+dict:w:32102	占守もお相伴♪ ん～、美味しいっしゅ♪	has:점수도 함께 식사♪	fix	lookup
+dict:w:32103	決め手は一番出汁？っぽい？	has:첫 육수?	fix	lookup
+dict:w:32103	関西の居住経験が長い柏木にとって、関西風の出汁の方が好み。	has:칸사이풍의 국물이	keep	lookup
+dict:w:32105	慌てて黒板の上に視線を這わし、なんとかヒントを探そうとする俺。	has:칠판 위에 시선을 훑어,	fix	lookup
+dict:w:32106	視線を這わせる。	시선을 훑는다.	fix	lookup
+dict:w:32106	陰唇をなぞるように舌を這わせ、御園を味わう。	has:혀를 기게 해	keep	lookup
+cx:web-fixes-h:6	それにクラスの女子が食い付き、あっという間にアーリャ呼びが定着した。	has:반의 여자가 달려들어,	fix	rewrites
+cx:web-fixes-h:6	……それに、狂犬はもう、新しいおもちゃに食いついているみたいですわ。	has:새로운 장난감에 달려들고 있는	fix	rewrites
+cx:web-fixes-h:6	犬が足に食いついた。	개가 다리에 덥석 물었다.	keep	rewrites
+cx:web-fixes-h:6	魚が餌に食いついた。	물고기가 먹이에 덥석 물었다.	keep	rewrites
+cx:web-fixes-h:6	ワニに食いつかれた。	악어에게 덥석 물렸다.	keep	rewrites
+cx:web-fixes-h:6	サメに食いつかれた。	상어에게 덥석 물렸다.	keep	rewrites
+cx:web-fixes-h:6	犬に食いつかれた。	개에게 덥석 물렸다.	keep	rewrites
+cx:web-fixes-h:6	彼に食いつかれた。	그에게 덥석 물렸다.	keep	rewrites
+cx:web-fixes-h:6	彼が肉に食いついた。	그가 고기에 덥석 물었다.	keep	rewrites
+cx:web-fixes-h:6	傷口に食い込む。	상처에 파고든다.	keep	rewrites
+dict:w:32108	つーかはっず！　カッコイイって誰がだよ！	has:그보다 창피해!	fix	lookup
+dict:w:32109	はっずかしい！	부끄러워!	keep	lookup
+dict:w:32108	日本で探すよりはずっと難しいかもしれない	lacks:창피	keep	lookup
+dict:w:32110	しっかり者の彼女にうっかり者な俺が助けられることの方が多い。	has:덜렁이인 내가	fix	lookup
+dict:w:32110	今ではむしろ、しっかり者の彼女が頼りだ。	has:착실한 사람의 그녀가	keep	lookup
+dict:w:32111	外国からは病的な清潔好きと言われる日本人の視点で見るからだろうか。	has:병적인 깔끔쟁이라고	fix	lookup
+dict:w:32111	清潔にしてくれたら良いお姉ちゃんだが、	has:청결하게 해 주면	keep	lookup
+dict:w:32112	ただでさえ忘れっぽい彼が、写真のことを覚えていた。	has:건망증이 심한 그가	fix	lookup
+dict:w:32112	「そりゃ、確かに俺は忘れっぽいけどよ……」	has:나는 건망증이 심하지만	fix	lookup
+dict:w:32112	提督が忘れっぽいのは仕方ないとして、	has:제독이 건망증이 심한 것은	fix	lookup
+dict:w:32112	「ホントに気を付けてたらこんなに忘れ物しないでしょ」	has:물건을 두고 오지 않지	keep	lookup
+dict:w:32113	日本の家電を使うお手軽な家事でさえ面倒で、	has:간편한 가사조차	fix	lookup
+dict:w:32113	えー信じるだけでいいとかお手軽じゃん	has:간편하잖아	fix	lookup
+dict:w:32113	手軽に作れる料理だ。	간편하게 만들 수 있는 요리다.	keep	lookup
+dict:w:32114	婚約後は踵のある靴はやめ、ぺったんこの靴だけをはくようにした。	has:납작한 구두만을	fix	lookup
+dict:w:32115	記憶にある限りでは、どうやらマインは身体が弱い子で、よく熱を出して寝込んでいたらしい。	has:열이 나 드러눕고	fix	lookup
+dict:w:32115	ただ熱を出せば苦しいし、転べば痛いし、食べ物はおいしいし。	has:열이 나면 괴롭고	fix	lookup
+dict:w:32115	熱を測るつもりなのだろう、トゥーリの汚い手が自分に向かって伸びてくる。	has:열을 잴 생각	keep	lookup
+dict:w:32119	そのままぶっ倒れ、知恵熱を出して寝込んだ。	has:지혜열이 나 드러누웠다	fix	lookup
+dict:w:32116	その関係にヒビを入れてしまうのが、なんとも残念に思えた。	has:관계에 금이 가게 해버리는	fix	lookup
+dict:w:32116	壁にヒビが入った。	벽에 금이 들어갔다.	keep	lookup
+dict:w:32118	「……まだ、頭痛い。寝たい」	has:아직, 머리 아프다.	fix	lookup
+dict:w:32118	思わず頭痛がしてくる。	has:두통이	keep	lookup
+dict:w:32118	「エル……。大丈夫だ、少し頭痛がしただけだ。」	has:조금 두통이 났을 뿐이야	keep	lookup
+sense:普通に	頬をつねったりすれば普通に痛い。	볼을 꼬집거나 하면 그냥 아프다.	fix	senses
+sense:普通に	ただ、試しに投稿されている小説をクリックしてみた所、普通に内容を読めた。	has:그냥 내용을 읽을 수 있었다	fix	senses
+sense:普通に	右手の指2本欠損するレベルで犬に噛まれてなお犯行続けたの普通に怖いんだが	has:그냥 무서운데	fix	senses
+sense:普通に	しかも気のせいでなければ、相手の女性とも普通に会話が成立していたような……。	has:상대의 여성과도 그냥 대화가	fix	senses
+sense:普通に	先生に注意される俺の横で普通に笑っているアーリャに、心の中で思いっ切り叫ぶ。	has:평범하게 웃고 있는	fix	senses
+sense:普通に	ただ1人普通に接してくれた人。	has:평범하게 접해 준 사람	fix	senses
+sense:普通に	普通に育っていたら、他人に暴力をふるうことはそれほどハードルが高いことなんだ。	has:평범하게 자라고 있으면	fix	senses
+sense:普通に	美浜にいる子供たちが普通に見えるほど、異常な生い立ちだ。	has:평범하게 보이는	fix	senses
+sense:普通に	あれだけの物体が大気圏に突入したら、普通に考えると尋常ではない空力圧縮が起こる。	has:상식적으로 생각하면	fix	senses
+sense:普通に	体調が普通に戻った。	컨디션이 정상으로 돌아왔다.	keep	senses
+sense:普通に	普通に戻る。	정상으로 돌아온다.	keep	senses
+cx:web-fixes-h:5	普通にしてて。	평소대로 하고 있어.	keep	rewrites
+cx:web-fixes-h:5	普通にしていればいい。	평소대로 하고 있으면 된다.	keep	rewrites
+cx:web-fixes-h:5	普通にしてるだけだよ。	has:평소대로 하고 있을 뿐이야	fix	rewrites
+cx:web-fixes-h:5	駐在さんも普通に納得するくらいだったんでしょ？	has:그냥 납득할	keep	rewrites
+cx:web-fixes-h:5	署名は普通にお願いしてゲットしたのです	has:그냥 부탁해	keep	rewrites
+sense:普通に	これが普通になった。	이것이 보통으로 되었다.	keep	senses
+sense:普通に	普通に動く。	정상으로 움직인다.	keep	senses
+sense:普通に	普通に美味しい。	그냥 맛있다.	keep	senses
+sense:普通に	普通に勝てる。	그냥 이길 수 있다.	keep	senses
+sense:普通に	「世の中から陰キャがいなくなったら、陽キャは全員普通になるわけで」	has:전원 보통으로 되는	keep	senses
+sense:普通に	普通の生活がしたい。	보통 생활을 하고 싶다.	keep	senses
+sense:普通に	それが普通だ。	그것이 보통이다.	keep	senses
+compose:spoken-juo	「こ、交換じゃなくて、普通にあげるよ、ごはんニワトリ」	has:그냥 줘,	fix	compose
+sense:踵	婚約後は踵のある靴はやめた。	has:굽이 있는 구두는	fix	senses
+sense:踵	それだけ言い残すと、富竹さんは踵を返し、去って行った。	has:발길을 돌려	keep	senses
+sense:踵	靴の踵を折ってから走り出す。	has:구두의 굽을	keep	senses
+sense:つける	常にかつらをつけて生活している薄汚れたコスプレイヤーが母親だと考えるよりは、	has:항상 가발을 써 생활하고	fix	senses
+sense:つける	「だってヘンだもん、名前に色をつけて呼ぶなんて」	has:이름에 색을 칠해	keep	senses
+phrase:tte-nanda-yo	「真実の愛ってなんだよ、単純に浮気だろ！」	has:진정한 사랑이라니 뭐야,	fix	phrases
+phrase:tte-nanda-yo	ミドリってなんだよ	미도리라니 뭐야	fix	phrases
+phrase:tte-nanda-yo	「ほ、本気って何だよッ？！？！」	has:진심이라니 뭐야	fix	phrases
+phrase:tte-nanda-yo	夢ってなんだ……？	꿈은 뭐야……?	keep	phrases
+validity:katsu-ra	驚きのあまり引っ掴んで、かつらじゃないか確認してしまいたくなるような色だ。	has:가발이 아닌가	fix	analysis
+validity:katsu-ra	圭ちゃん好みのストレートロングのかつら被せて…。	has:롱의 가발 씌워	fix	analysis
+validity:katsu-ra	かつ一瞬で温かいお湯を出すことが出来る。	has:또한 한순간에	keep	analysis
+validity:katsu-ra	ドイツらしい重厚かつ美しいデザインでしょう？	has:중후하고 아름다운	keep	analysis
+validity:katsu-ra	有能かつ真面目な上司。	유능하고 성실한 상사.	keep	analysis
+lookup:hairu-not-suffix	ダリヤは、日差しの入る窓に向かって顔を上げる。	has:햇볕이 들어가는 창을	fix	lookup
+lookup:hairu-not-suffix	最新の給湯施設はおろか、隙間風の入る壁の補修もままならない。	has:외풍이 들어가는 벽	fix	lookup
+lookup:hairu-not-suffix	「入る……かな？」	lacks:깊이	fix	lookup
+lookup:hairu-not-suffix	都市すら買える大金が手に入ることもある。	has:손에 들어 오는	keep	lookup

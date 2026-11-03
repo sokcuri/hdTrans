@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 compose:comma-before-symbols	「わかるよー、■■■でしょ？」	「알아~, ■■■겠지?」	fix	compose
 compose:comma-before-symbols	○ボタン、△ボタンによる攻撃	○버튼, △버튼에 의한 공격	fix	compose
 compose:comma-before-symbols	「ねえ、＃＄％＆！」	「있잖아, ＃＄％＆!」	fix	compose
-compose:comma-before-symbols	普通に頼むと、￥１６００という超学食級の価格である。	보통으로 부탁하면, ￥1600이라는 초학생식당급의 가격이다.	fix	compose
+compose:comma-before-symbols	普通に頼むと、￥１６００という超学食級の価格である。	그냥 부탁하면, ￥1600이라는 초학생식당급의 가격이다.	fix	compose
 compose:comma-before-symbols	えっ、≫90大丈夫？	어, ≫90괜찮아?	fix	compose
 compose:comma-before-symbols	あっ、……しまった。	앗, ……큰일 났다.	fix	compose
 compose:comma-before-symbols	キングを、……頼む。	킹을, ……부탁한다.	fix	compose
