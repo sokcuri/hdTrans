@@ -1,19 +1,35 @@
 rule	input	expected	kind	layer
-segmentation:nikujaga	夕飯に肉じゃがを作った。	저녁에 고기감자조림을 만들었다.	fix	lookup
-segmentation:nikujaga	肉じゃがは食べなかった。	고기감자조림은 먹지 않았다.	fix	lookup
-segmentation:nikujaga	肉じゃが定食を注文した。	고기감자조림 정식을 주문했다.	fix	lookup
-segmentation:nikujaga	肉がじゃがいもより多い。	고기가 감자보다 많다.	keep	lookup
-segmentation:nikujaga	肉じゃ、がまんできない。	고기는, 참을 수 없다.	keep	lookup
-segmentation:nikujaga	肉 じゃがいも 玉ねぎを買った。	고기 감자 양파를 샀다.	keep	lookup
-segmentation:nikujaga	肉じゃがいもを切る。	고기 감자를 자른다.	keep	lookup
-segmentation:kakubeya	各部屋に鍵がある。	각 방에 열쇠가 있다.	fix	lookup
-segmentation:kakubeya	各部屋には窓がない。	각 방에는 창이 없다.	fix	lookup
-segmentation:kakubeya	各部屋番号を確認した。	각 방 번호를 확인했다.	fix	lookup
-segmentation:kakubeya	各部屋のドアを閉めた。	각 방의 문을 닫았다.	fix	lookup
-segmentation:kakubeya	各部は屋外で練習した。	각부는 옥외에서 연습했다.	keep	lookup
-segmentation:kakubeya	各部 屋根 壁を調べた。	각부 지붕 벽을 조사했다.	keep	lookup
-segmentation:kakubeya	部屋着を洗った。	실내복을 씻었다.	keep	lookup
-segmentation:kakubeya	各部の屋台を見た。	각부의 포장마차를 보았다.	keep	lookup
+pack:肉じゃが/にくじゃが/n#1	夕飯に肉じゃがを作った。	저녁에 고기감자조림을 만들었다.	fix	packs
+pack:肉じゃが/にくじゃが/n#1	肉じゃがは食べなかった。	고기감자조림은 먹지 않았다.	fix	packs
+pack:肉じゃが/にくじゃが/n#1	肉じゃが定食を注文した。	고기감자조림 정식을 주문했다.	fix	packs
+pack:肉じゃが/にくじゃが/n#1	肉がじゃがいもより多い。	고기가 감자보다 많다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	肉じゃ、がまんできない。	고기는, 참을 수 없다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	肉 じゃがいも 玉ねぎを買った。	고기 감자 양파를 샀다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	肉じゃがいもを切る。	고기 감자를 자른다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	特製肉じゃがを作った。	특제 고기감자조림을 만들었다.	fix	packs
+pack:肉じゃが/にくじゃが/n#1	母の特製肉じゃがだ。	어머니의 특제 고기감자조림이다.	fix	packs
+pack:肉じゃが/にくじゃが/n#1	・肉じゃが	·고기감자조림	keep	packs
+pack:肉じゃが/にくじゃが/n#1	そうだな……肉じゃがにしよう。	그래……고기감자조림으로 하자.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	今日は肉じゃがだ。	오늘은 고기감자조림이다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	3肉じゃがを作った。	3고기감자조림을 만들었다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	１０肉じゃが	10고기감자조림	keep	packs
+pack:肉じゃが/にくじゃが/n#1	DX肉じゃがだ。	DX고기감자조림이다.	keep	packs
+pack:肉じゃが/にくじゃが/n#1	No.1肉じゃが	No.1고기감자조림	keep	packs
+pack:肉じゃが/にくじゃが/n#1	3 肉じゃがを作った。	3 고기감자조림을 만들었다.	keep	packs
+pack:各部屋/かくへや/n#1	各部屋に鍵がある。	각 방에 열쇠가 있다.	fix	packs
+pack:各部屋/かくへや/n#1	各部屋には窓がない。	각 방에는 창이 없다.	fix	packs
+pack:各部屋/かくへや/n#1	各部屋番号を確認した。	각 방 번호를 확인했다.	fix	packs
+pack:各部屋/かくへや/n#1	各部屋のドアを閉めた。	각 방의 문을 닫았다.	fix	packs
+pack:各部屋/かくへや/n#1	各部は屋外で練習した。	각부는 옥외에서 연습했다.	keep	packs
+pack:各部屋/かくへや/n#1	各部 屋根 壁を調べた。	각부 지붕 벽을 조사했다.	keep	packs
+pack:各部屋/かくへや/n#1	部屋着を洗った。	실내복을 씻었다.	keep	packs
+pack:各部屋/かくへや/n#1	各部の屋台を見た。	각부의 포장마차를 보았다.	keep	packs
+pack:各部屋/かくへや/n#1	各部屋根を修理した。	각부 지붕을 수리했다.	keep	packs
+pack:各部屋/かくへや/n#1	各部屋上	각부 옥상	keep	packs
+pack:各部屋/かくへや/n#1	各部屋敷	각부 저택	keep	packs
+pack:各部屋/かくへや/n#1	各部屋台	각부 포장마차	keep	packs
+pack:各部屋/かくへや/n#1	各部屋外	!rule:pack:各部屋/かくへや/n#1	keep	packs
+pack:各部屋/かくへや/n#1	各部屋内	!rule:pack:各部屋/かくへや/n#1	keep	packs
 segmentation:hanikamu	彼女ははにかむ。	그녀는 수줍어한다.	fix	lookup
 segmentation:hanikamu	少年ははにかんだ。	소년은 수줍어했다.	fix	lookup
 segmentation:hanikamu	彼ははにかまなかった。	그는 수줍어하지 않았다.	fix	lookup
