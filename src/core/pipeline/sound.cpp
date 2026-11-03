@@ -460,6 +460,7 @@ private:
         return text_.substr(offsets_[from], offsets_[to] - offsets_[from]);
     }
     bool UtteranceStart(size_t p) const;
+    bool AfterInterjection(size_t p) const;
     bool PauseAt(size_t p) const;
     size_t LaughterEnd(size_t p) const;
     // With ending, the end rows go there instead of into user.
@@ -533,14 +534,20 @@ private:
     std::u32string f_;  // rs_ in katakana
     std::vector<size_t> offsets_;  // byte offset of each character, and the end
     size_t stutterEnd_ = static_cast<size_t>(-1);  // the character after the last stutter
+    size_t intjEnd_ = static_cast<size_t>(-1);     // the end of the last interjection that opened an utterance
 };
 
 // Whether character p starts an utterance: the start of the text or of a line, after an
-// opening bracket, a sentence end, a space or a stutter (お、おい).
+// opening bracket, a sentence end, a space or a stutter (お、おい), or after the comma of an
+// interjection or laugh of two or more characters that opened one (おほほ、で、ですわよね), not a
+// set phrase (ふぁいと、おー！).
 bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
+    if (AfterInterjection(p)) return true;
     return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
 }
+
+bool SoundText::AfterInterjection(size_t p) const { return p > 0 && p == intjEnd_ + 1 && In(rs_[p - 1], U"、，,"); }
 
 // The end of a run of mark.laughter letters at character p that no Latin letter or digit follows
 // (ｗｗ, not www.example), or p.
@@ -730,6 +737,10 @@ bool SoundText::MatchAt(size_t p, SoundMatch& best, bool inChain, bool afterPart
             // comma (なんだよ、ったく…).
             bool start = UtteranceStart(from) || (s.key.front() == U'ッ' && from > 0 && In(rs_[from - 1], U"、，,")),
                  pause = PauseAt(end) || (In(rs_[end - 1], U"？?") && p != stutterEnd_);  // a key that asks ends in its own pause (ね？)
+            // After an interjection a ね agrees (まぁ、ね、), it calls no one; only a bare ね？ asks.
+            if (s.key == U"ネ" && AfterInterjection(from) && (end != p + s.key.size() || !(end < rs_.size() && In(rs_[end], U"？?")))) {
+                start = false;
+            }
             // A lead that is a syllable of sound.stutter-alone and opens an utterance, not after a
             // space (そうだ ね……), stands alone before a dash or an ellipsis too (さ……行こう,
             // う……多分, ちょ……待って) and, unless it is a conjunction (で 그리고), before a space or
@@ -2111,6 +2122,10 @@ std::string SoundText::Write() {
             stutterEnd_ = end;
         } else if (chain = Sounds(i, afterParticle, afterWord); !chain.empty()) {
             next = chain.back().end;
+            if (next - i > 1 && UtteranceStart(i) &&
+                std::all_of(chain.begin(), chain.end(), [](const SoundMatch& m) { return m.intj && !m.phrase; })) {
+                intjEnd_ = next;
+            }
             spans_.emplace_back(i, next);
             for (const SoundMatch& m : chain) keySpans_.emplace_back(m.start, m.end);
             // The と that a key in と or the dropped と took may start the quoting form (ドンという音);
