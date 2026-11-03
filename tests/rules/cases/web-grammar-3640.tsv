@@ -1,0 +1,138 @@
+# 규칙: GRM-3640, GRM-3653, GRM-3641, GRM-3642, GRM-3643, GRM-3644, GRM-3645, GRM-3646, GRM-3647, GRM-3648, GRM-3649, GRM-3650, GRM-3651, GRM-3652, LEX-4471, LEX-4472, LEX-4473, LEX-4475, LEX-4476, LEX-4477, LEX-4478, LEX-4479, LEX-4480
+rule	input	expected	kind	layer
+cx:web-fixes-h:10	これからは、嫌なことは嫌と、好きなことは好きと言おう。	has:싫은 것은 싫다고, 좋아하는 것은 좋아한다고 말하자	fix	rewrites
+cx:web-fixes-h:10	好きな子のことを好きと言えない多感な年頃…。	has:좋아하는 아이를 좋아한다고 말할 수 없는	fix	rewrites
+cx:web-fixes-h:10	特定の誰が好きとか嫌いとか、どうもしっくりこないのだ。	has:좋아한다든가 싫다든가	fix	rewrites
+cx:web-fixes-h:10	「そうよ……好きな人に、好きと言ってもらえたのですから……」	has:좋아한다고 말해 줄 수	fix	rewrites
+cx:web-fixes-h:10	あの…私…、す…好き…というか…その…	has:좋아…라고 할까	keep	rewrites
+cx:web-fixes-h:10	好きと嫌いの区別。	!rule:cx:web-fixes-h:10	keep	rewrites
+cx:web-fixes-h:10	嫌とは言えない雰囲気になりそうだしなぁ。	has:싫다고는 말할 수 없는	keep	rewrites
+cx:web-fixes-h:11	大好きと言った。	너무 좋아한다고 말했다.	fix	rewrites
+cx:web-fixes-h:11	大好きな人。	!rule:cx:web-fixes-h:11	keep	rewrites
+cx:web-fixes-h:20	慣れた足取りで美容室の奥にあるドアを通り、台所に進む。	has:문을 지나, 부엌으로	fix	rewrites
+cx:web-fixes-h:20	大通りを抜けた。	!rule:cx:web-fixes-h:20	keep	rewrites
+cx:web-fixes-h:30	わたしの本にかける情熱と愛は、失敬な事に周囲の人が引くレベルだった。	has:주위의 사람이 질리는 레벨이었다	fix	rewrites
+cx:web-fixes-h:30	彼が手を引くと、扉が開いた。	!rule:cx:web-fixes-h:30	keep	rewrites
+cx:web-fixes-h:40	「おう、今日はここにいていいぞ！」	has:여기에 있어도 돼!	fix	rewrites
+cx:web-fixes-h:40	8時…今日も提督と一緒にいていいかな？	has:함께 있어도 될까?	fix	rewrites
+cx:web-fixes-h:40	横にいて…いい？	옆에 있어도…돼?	fix	rewrites
+cx:web-fixes-h:40	だからってお前、何もしないでいていいのか？	has:하지 않고 있어도 되는 건가?	fix	rewrites
+cx:web-fixes-h:40	スープにも味が染みだしていていいでしょ？	!rule:cx:web-fixes-h:40	keep	rewrites
+cx:web-fixes-h:50	特に12月や1月は、一日中気温が零度を下回ることなどザラだ。	has:밑도는 것은 흔함이다	fix	rewrites
+cx:web-fixes-h:50	素直に受け入れることなどすぐにはできない。	has:받아들이는 것은 곧바로는 할 수 없다	fix	rewrites
+cx:web-fixes-h:50	はっきりと言おう。負けることなどまずありえない。	has:지는 것은 거의 있을 수 없다	fix	rewrites
+cx:web-fixes-h:50	受け入れることなどすぐにはできない	has:받아들이는 것은 곧바로는	fix	rewrites
+cx:web-fixes-h:50	最初ここを見つけた時は、力尽くで『供出』させようと思っていたことなど忘れ、	has:한 것은 잊어	fix	rewrites
+cx:web-fixes-h:50	本拠地に溜め込まれたお宝を全て略奪することなども可能だ。	has:약탈하는 것 등도 가능하다	keep	rewrites
+cx:web-fixes-h:50	また何かわからないことなどございましたら、いつでもお気軽にどうぞ。	has:모르는 것 등 있으면	keep	rewrites
+cx:web-fixes-h:52	その程度の傷で、あなたの価値が損なわれる事などありません	has:손상되는 일은 없습니다	fix	rewrites
+cx:web-fixes-h:52	世界を変革する事など、まるで当然のように	has:변혁하는 것 등,	keep	rewrites
+cx:web-fixes-h:60	頑張って仕事をし、行きたいところに行き、食べたいものを食べよう。	has:열심히 일을 하고,	fix	rewrites
+cx:web-fixes-h:60	魔力の強化のため頑張って畑を耕すのだ。	has:열심히 밭을 경작한다	fix	rewrites
+cx:web-fixes-h:60	この雷様が、頑張って大漁旗作ったんだから！	has:열심히 풍어기 만들었으니까	fix	rewrites
+cx:web-fixes-h:60	頑張ってミドリも松もミヅチ様も！！	has:힘내 미도리도	keep	rewrites
+cx:web-fixes-h:60	よし！ 頑張ってレナの罰ゲームをみんなに引かせるぞぅ！	!rule:cx:web-fixes-h:60	keep	rewrites
+cx:web-fixes-h:60	今日も頑張っていきましょう！	has:힘내 갑시다!	keep	rewrites
+cx:web-fixes-h:70	そのために地下水路から忍び込みたいんだ。協力してくれよ。じいさん！	has:협력해 줘. 할아버지!	fix	rewrites
+cx:web-fixes-h:70	……今度は明るい昼間に来てくれよな。	has:밝은 낮에 와 줘.	fix	rewrites
+cx:web-fixes-h:70	許してくれよな？	용서해 줘?	fix	rewrites
+cx:web-fixes-h:70	ペナン島沖において、敵駆逐隊を捕捉、これに複数回痛打を与えよ！	has:강타를 주어라!	keep	rewrites
+cx:web-fixes-h:70	しょうがない、ママにあげよ……	!rule:cx:web-fixes-h:70	keep	rewrites
+cx:web-fixes-h:80	姫様には悪いが、王族の後継者争いは自分の知らない所で勝手にやってほしいものである。	has:공주님에는 미안하지만,	fix	rewrites
+cx:web-fixes-h:80	マルロクマルマル。司令官、悪いがちょっと重い…。	has:사령관, 미안하지만 조금	fix	rewrites
+cx:web-fixes-h:80	悪いが休ませてもらうぞ。	has:미안하지만 쉬겠어	fix	rewrites
+cx:web-fixes-h:80	家具を運んでもらったばかりで悪いのだけれど、前の家にもう一度運んでもらいたいの。	has:얼마 안 돼서 미안한데,	fix	rewrites
+cx:web-fixes-h:80	味は……親父には悪いが、そんじょそこらのファミレスと大差はない…。	has:아버지에게는 미안하지만,	fix	rewrites
+cx:web-fixes-h:80	お肌に悪いな～これ……	has:피부에 나쁘다	keep	rewrites
+cx:web-fixes-h:80	公爵家とでは釣り合いは悪いが、今よりは随分ましだろう。	has:균형은 나쁘지만,	keep	rewrites
+cx:web-fixes-h:80	支持率落として、評判悪いけど、絶対にこの人はいいひとだ。	has:평판 나쁘지만,	keep	rewrites
+cx:web-fixes-h:80	悪いけど、帰るね。	미안하지만, 돌아갈게.	fix	rewrites
+cx:web-fixes-h:80	本当に悪いけど、帰るね。	정말 미안하지만, 돌아갈게.	fix	rewrites
+cx:web-fixes-h:80	頭がすごく悪いけど。	머리가 정말 나쁜데.	keep	rewrites
+cx:web-fixes-h:80	景気がずっと悪いけど、頑張る。	경기가 계속 나쁘지만, 노력한다.	keep	rewrites
+cx:web-fixes-h:80	体調は最近ずっと悪いね。	컨디션은 최근 계속 나쁘네.	keep	rewrites
+cx:web-fixes-h:80	今日はとても悪いね。	오늘은 무척 나쁘네.	keep	rewrites
+cx:web-fixes-h:80	顔色、すごく悪いけど大丈夫？	안색, 정말 나쁘지만 괜찮아?	keep	rewrites
+cx:web-fixes-h:80	体の調子、ずっと悪いね。	몸의 상태, 계속 나쁘네.	keep	rewrites
+cx:web-fixes-h:80	天気、悪いけど行こう。	날씨, 나쁘지만 가자.	keep	rewrites
+cx:web-fixes-h:80	空気、悪いけど我慢して。	공기, 나쁘지만 참아.	keep	rewrites
+cx:web-fixes-h:80	先輩、悪いけど行くね。	선배, 미안하지만 갈게.	fix	rewrites
+cx:web-fixes-h:81	天気、悪いね。	날씨, 나쁘네.	fix	rewrites
+cx:web-fixes-h:81	空気、悪いね。	공기, 나쁘네.	fix	rewrites
+cx:web-fixes-h:81	先輩、悪いね。	선배, 미안하네.	keep	rewrites
+cx:web-fixes-h:81	そうか、悪いな。	그런가, 미안하네.	keep	rewrites
+cx:web-fixes-h:81	「あ、悪い」	「아, 미안하다」	keep	rewrites
+cx:web-fixes-h:81	じゃあ悪いけど	그럼 미안한데	keep	rewrites
+cx:web-fixes-h:90	いくら机くっつけてるからって、隣同士で会話しないのは当然だけどさ。	has:근처끼리 대화하지	fix	rewrites
+cx:web-fixes-h:90	仲の良いグループ同士でお茶するのが当たり前の光景だったりする。	has:그룹끼리 차 하는	fix	rewrites
+cx:web-fixes-h:90	親同士の思惑があった婚約。	!rule:cx:web-fixes-h:90	keep	rewrites
+cx:web-fixes-h:100	町民だから、完全に底辺ってわけでもないんですよ。	has:밑바닥이라는 것도 아니에요	fix	rewrites
+cx:web-fixes-h:100	「今生の別れってわけじゃないんだ。また生徒会絡みの依頼でもあれば会えるだろ」	has:영원한 이별이라는 게 아니다	fix	rewrites
+cx:web-fixes-h:100	引きこもってたとはいえ、別にコミュ障ってわけじゃないから、	!rule:cx:web-fixes-h:100	keep	rewrites
+cx:web-fixes-h:101	あ……別に殿下が嫌いってわけじゃないんですよ。	has:전하가 싫다는 것이 아니에요	fix	rewrites
+cx:web-fixes-h:101	「私はいいわ。今日を逃したら一生ボートに乗れないってわけでもないし……」	has:탈 수 없다는 것도 아니고	fix	rewrites
+cx:web-fixes-h:101	引きこもってたとはいえ、別にコミュ障ってわけじゃないから、	!rule:cx:web-fixes-h:101	keep	rewrites
+cx:web-fixes-h:110	「ホントに最低っ！」	「정말로 최악!」	fix	rewrites
+cx:web-fixes-h:110	女の子のそんなとこ見たいなんて、最低！	has:보고 싶다니, 최악!	fix	rewrites
+cx:web-fixes-h:110	最低限の荷物だけ背負い、2本の足で城下町を目指していた。	has:최저한의 짐만	keep	rewrites
+cx:web-fixes-h:110	「うん、だから、最低３つ揃えればいいんだ、それで勝ち」	has:최저 3개	keep	rewrites
+cx:web-fixes-h:120	現代日本、便利すぎ。	현대 일본, 너무 편리해.	fix	rewrites
+cx:web-fixes-h:120	しかしこの洞窟、広すぎ！	하지만 이 동굴, 너무 넓어!	fix	rewrites
+cx:web-fixes-h:120	「くっ、高すぎ……」	「큭, 너무 높아……」	fix	rewrites
+cx:web-fixes-h:120	時刻は４時過ぎ。	!rule:cx:web-fixes-h:120	keep	rewrites
+cx:web-fixes-h:120	彼は食べ過ぎて、倒れた。	!rule:cx:web-fixes-h:120	keep	rewrites
+cx:web-fixes-h:120	え、チョコの食べ過ぎ…？	!rule:cx:web-fixes-h:120	keep	rewrites
+cx:web-fixes-h:120	ミドリさん心配すぎ	!rule:cx:web-fixes-h:120	keep	rewrites
+cx:web-fixes-h:130	自分でできる限り、生きたいように生きよう。	has:살고 싶은 대로 살자	fix	rewrites
+cx:web-fixes-h:130	呼びたいように呼んでくれていいと思った	has:부르고 싶은 대로 불러	fix	rewrites
+cx:web-fixes-h:130	特定のパワーをつけたいようにしか見えない。	!rule:cx:web-fixes-h:130	keep	rewrites
+cx:web-fixes-h:140	第二水雷戦隊、出撃準備！ 各駆逐隊、準備いい？	has:준비 됐어?	fix	rewrites
+cx:web-fixes-h:140	準備はいいけど、まだ早い。	!rule:cx:web-fixes-h:140	keep	rewrites
+cx:web-fixes-h:141	皆、準備はいいな！	모두, 준비는 됐지!	fix	rewrites
+cx:web-fixes-h:141	相棒よ、準備はいいな？…よし、いい面構えだ！	has:준비는 됐지?	fix	rewrites
+cx:web-fixes-h:141	準備がいい人だ。	!rule:cx:web-fixes-h:141	keep	rewrites
+cx:web-fixes-h:142	じゅ…準備はいいですか？	주…준비는 됐습니까?	fix	rewrites
+cx:web-fixes-h:142	加賀さん、用意はいいですか？	has:준비는 됐습니까?	fix	rewrites
+cx:web-fixes-h:142	準備はいいけど、まだ早い。	!rule:cx:web-fixes-h:142	keep	rewrites
+cx:web-fixes-h:143	同志諸君、準備はいいかい？	has:준비는 됐나?	fix	rewrites
+cx:web-fixes-h:143	準備がいい人だ。	!rule:cx:web-fixes-h:143	keep	rewrites
+cx:web-fixes-h:150	ぽつりと漏らした言葉は、誰に届くこともなくロシアの寒空に消えた……直後。	has:닿는 일도 없이	fix	rewrites
+cx:web-fixes-h:150	少し毒気を抜かれた俺は、レナの揚げ足を取ることもなく頷いた。	has:트집을 잡는 일도 없이	fix	rewrites
+cx:web-fixes-h:150	大見はさすが自衛官で幹部の二尉である。その仕草に、おやっ？ とは思ったが、特段気にすることもなくスルーした。	has:신경 쓰는 일도 없이	fix	rewrites
+cx:web-fixes-h:150	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없고	keep	rewrites
+cx:web-fixes-h:150	そんなに心配することもない。	!rule:cx:web-fixes-h:150	keep	rewrites
+cx:web-fixes-h:160	上掛けとして掛けられている薄汚れた布からは変な臭いもするし、	has:이상한 냄새도 나고	fix	rewrites
+cx:web-fixes-h:160	そしたら夜になってからなんか足音がして、	has:발소리가 나,	fix	rewrites
+cx:web-fixes-h:160	嫌な予感もする。	불길한 예감도 든다.	keep	rewrites
+cx:web-fixes-h:160	変な声もする。	!rule:cx:web-fixes-h:160	keep	rewrites
+cx:web-fixes-h:170	そう、忘れもしない3カ月前。	그래, 잊을 수도 없는 3개월 전.	fix	rewrites
+cx:web-fixes-h:170	忘れもしない、あの作戦……。	잊을 수도 없는, 그 작전…….	fix	rewrites
+cx:web-fixes-h:170	あの日のことは忘れもしない。	!rule:cx:web-fixes-h:170	keep	rewrites
+cx:web-fixes-h:180	わたしが心置きなく本を読むためにも、病気になっても医者になんてかかれない気がするし、	has:의사에게는 진찰받을 수 없는	fix	rewrites
+cx:web-fixes-h:180	手紙にはかかれない。	!rule:cx:web-fixes-h:180	keep	rewrites
+dict:jisjk:343681	「あぁ、お風呂入りたい。……けど、あるのかな？」	has:하지만, 있는 걸까?	fix	local
+dict:jisjk:343681	でも、ある男が来た。	하지만, 한 남자가 왔다.	keep	local
+dict:jisjk:359324	でも、ある？	하지만, 있어?	fix	local
+dict:jisjk:359324	ヒトハチ、マルマル！さぁ、夕食の用意するかも！提督、食べたいもの、ある？	has:먹고 싶은 것, 있어?	fix	local
+dict:jisjk:359324	それは、ある日のことだった。	has:어느 날	keep	local
+dict:jisjk:362276	もっとも、まだ読み書きは苦手らしいが。	다만, 아직 읽고 쓰기는 서투른 것 같지만.	fix	local
+dict:jisjk:362276	ラムサス（やはり“奴”なのか……まさかと思いたいが。	has:생각하고 싶지만.	fix	local
+dict:jisjk:362276	できることなら、紗弓実にも変わってほしいが。	has:변하였으면 하지만.	fix	local
+dict:jisjk:362276	壊れることはないが……	has:없겠지만……	keep	local
+dict:jisjk:362276	着てくれたら嬉しいが。	입어 주면 기쁘겠지만.	keep	local
+conjugation:rare-desire	清潔にしてくれたら良いお姉ちゃんだが、今は触られたくない。	has:지금은 만져지고 싶지 않다.	fix	conjugation
+conjugation:rare-desire	「くっ……握られたくない」	「큭……잡히고 싶지 않아」	fix	conjugation
+conjugation:rare-desire	同情されたくもないし、気を遣われたくもない。	lacks:견나	fix	conjugation
+conjugation:rare-desire	触られたい。	만져지고 싶다.	keep	conjugation
+conjugation:rare-desire	殴られたくない。	맞고 싶지 않다.	keep	conjugation
+cx:adnominal-clause:50	半分くらいは眉唾だったっぽいけど。	has:이야기였던 것 같은데	fix	rewrites
+cx:adnominal-clause:50	いやー、植物人間とか早とちりだったっぽい。	has:오해였던 것 같다	fix	rewrites
+cx:adnominal-clause:10	スキルポイントなるものは全部使い切っちゃったっぽいけど、	has:다 사용해버린 것 같지만	fix	rewrites
+cx:adnominal-clause:10	雨っぽい。	비 같다.	keep	rewrites
+cx:adnominal-clause:10	提督が鎮守府に着任したっぽい。これより艦隊の指揮に入るっぽい！	has:착임했다 뽀이	keep	rewrites
+cx:web-fixes-h:49	その程度の傷で、あなたの価値が損なわれる事などありません	has:손상되는 일은 없습니다	fix	rewrites
+cx:web-fixes-h:49	受け入れることなどすぐにはできない	has:받아들이는 것은	keep	rewrites
+cx:web-fixes-h:51	当然、実物に出会えることなど滅多にない。	has:만날 수 있는 일은 좀처럼 없다	fix	rewrites
+cx:web-fixes-h:51	受け入れることなどすぐにはできない	!rule:cx:web-fixes-h:51	keep	rewrites
+cx:web-fixes-h:151	勉強や内申点にこそ追われていたが、特筆することもなく、穏やかな２年間だった。	has:특필할 것도 없고	fix	rewrites
+cx:web-fixes-h:151	誰に届くこともなく消えた	has:닿는 일도 없이	keep	rewrites

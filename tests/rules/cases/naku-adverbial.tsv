@@ -3,6 +3,7 @@ rule	input	expected	kind	layer
 cx:naku-adverbial:10	それにしても資料もなく作業して炎上しない訳が無い。	has:자료도 없이 작업	fix	rewrites
 cx:naku-adverbial:10	それからは、特にお互い会話もなく授業を受けた。	has:대화도 없이 수업을	fix	rewrites
 cx:naku-adverbial:10	ぽつりと漏らした言葉は、誰に届くこともなく消えた。	has:닿는 일도 없이 사라졌다.	fix	rewrites
+cx:naku-adverbial:10	ぽつりと漏らした言葉は、誰に届くこともなく消えた。	has:일도 없이 사라졌다.	fix	rewrites
 cx:naku-adverbial:10	ＯＪＴする暇も無く実戦に投入された。	has:틈도 없이 실전에	fix	rewrites
 cx:naku-adverbial:10	ドアを背に気配もなく立っていたのは一人の少女だった。	has:기색도 없이 서	fix	rewrites
 cx:naku-adverbial:10	でもね、断りもなく人を呼び付けておいて。	has:없이	fix	rewrites
