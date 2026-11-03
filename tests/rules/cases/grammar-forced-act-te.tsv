@@ -1,0 +1,18 @@
+# 규칙: GRM-3352, GRM-1
+rule	input	expected	kind	layer
+cx:forced-act:5	先輩に無理やり飲まされて	선배 때문에 억지로 마셔서	fix	rewrites
+cx:forced-act:5	先輩に無理やり飲まされて、気分が悪い。	선배 때문에 억지로 마셔서, 속이 메스껍다.	fix	rewrites
+cx:forced-act:5	母に本を読まされて泣いた。	어머니 때문에 억지로 책을 읽어서 울었다.	fix	rewrites
+cx:forced-act:5	母に本を読まされて、泣いた。	어머니 때문에 억지로 책을 읽어서, 울었다.	fix	rewrites
+cx:forced-act:5	部長に謝らされて、悔しかった。	부장 때문에 억지로 사과해서, 분했다.	fix	rewrites
+cx:forced-act:5	兄に荷物を持たされて、腕が痛い。	형 때문에 억지로 짐을 들어서, 팔이 아프다.	fix	rewrites
+cx:forced-act:5	母に本を読まされてしまった。	!rule:cx:forced-act:5	keep	rewrites
+cx:forced-act:5	母に本を読まされた。	rule:cx:forced-act:10=&HK@	keep	rewrites
+cx:forced-act:5	彼に一時間も待たされて、疲れた。	그 때문에 1시간이나 기다리게 되어, 지쳤다.	keep	rewrites
+cx:forced-act:5	無理やり食べさせられて	억지로 먹게 되어	keep	rewrites
+cx:forced-act:5	引きずられるように無理やり立たされて、歩きだす。	끌려가도록 억지로 서게 되어, 걷기 시작한다.	keep	rewrites
+cx:forced-act:5	無理矢理上を向かされて、魔王様を見上げた。	억지로 위를 쳐다보게 되어, 마왕님을 올려다보았다.	keep	rewrites
+cx:forced-act:15	父に勉強させられて	아버지 때문에 억지로 공부해서	fix	rewrites
+cx:forced-act:15	父に勉強させられて、疲れた。	아버지 때문에 억지로 공부해서, 지쳤다.	fix	rewrites
+cx:forced-act:15	父に勉強させられている。	!rule:cx:forced-act:15	keep	rewrites
+cx:forced-act:15	父に勉強させられた。	아버지 때문에 억지로 공부했다.	keep	rewrites

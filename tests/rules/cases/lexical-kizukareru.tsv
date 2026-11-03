@@ -1,0 +1,29 @@
+# 규칙: LEX-3854
+rule	input	expected	kind	layer
+dict:passive:3	チラッと鏡を見たら顔が真っ赤になっていたから、気づかれないようにうつむきながら。	has:들키지 않도록 고개를 숙이면서	fix	defaults
+dict:passive:3	ぼうっとしていたことに気づかれないよう、眉間に皺をよせてみた。	has:들키지 않게,	fix	defaults
+dict:passive:3	そーっと気づかれないように部屋へ戻ろうとした時、「誰？	has:살그머니 들키지 않도록	fix	defaults
+dict:passive:3	気づかれたら何をされるのだろう。	들키면 무슨 일을 당하는 걸까.	fix	defaults
+dict:passive:3	周りに自分と間諜の男しかおらず、気づかれたときには組み伏せられていた。	has:들켰을 때는	fix	defaults
+dict:passive:3	とにかく、彼の足音で気づかれることはないだろう。	has:발소리로 들킬 일은 없을 것이다	fix	defaults
+dict:passive:3	このまま気づかれずにやり過ごせればいいのだが。	이대로 들키지 않고 넘길 수 있으면 좋은데.	fix	defaults
+dict:passive:3	気づかれずに脱出さえしてしまえば、夜陰に紛れるのは容易であった。	has:들키지 않고 탈출만	fix	defaults
+dict:passive:4	私たちは竜の後ろに行き、気付かれないように近づきました	has:들키지 않도록 가까워졌습니다	fix	defaults
+dict:passive:4	気付かれないように睨んでみる。	들키지 않도록 노려본다.	fix	defaults
+dict:passive:4	気付かれたら面倒だ。	들키면 귀찮다.	fix	defaults
+dict:passive:4	ヤバい、こっそり見てることを気付かれた！	has:몰래 보고 있는 일을 들켰다!	fix	defaults
+dict:passive:4	能力を使えば、気付かれずに侵入できるだろうが、	has:들키지 않고 침입할 수 있겠지만	fix	defaults
+dict:passive:4	誰にも気付かれず、そして誰にも知られずにバルガの部屋へと辿り着く。	has:누구에게도 들키지 않고,	fix	defaults
+dict:passive:5	それから、ラビィは彼に気づかれないように、小さなため息をついた。	has:그에게 들키지 않도록,	fix	defaults
+dict:passive:5	胸元を押さえたあや希は、柊生に気づかれた。	has:에게 들켰다.	fix	defaults
+dict:passive:5	「騒ぐなっ、ヤツらに気づかれるっ、」	has:에게 들킨다	fix	defaults
+dict:passive:5	あくまで、彼らに気づかれることなく、場に紛れ込まなくてはいけない。	has:그들에게 들키는 일 없이	fix	defaults
+dict:passive:6	若宮に気付かれた園崎は背筋が凍りついた。	has:와카미야에게 들킨 소노자키는	fix	defaults
+dict:passive:6	敵に気付かれることのないように、他の隊員に指令出すため副隊長をゆっくり下がらせた。	has:적에게 들킬 일이 없도록	fix	defaults
+dict:passive:6	魔法を使うとお父さまに気付かれるから、	has:아버님에게 들키니까	fix	defaults
+dict:passive:3	気づかれたくない。	들키고 싶지 않다.	keep	defaults
+dict:passive:3	彼は異変に気づいた。	has:눈치챘다	keep	defaults
+dict:passive:4	まだ誰も気付いていない。	아직 아무도 깨닫지 못했다.	keep	defaults
+dict:passive:5	彼女の変化に気づいた。	has:눈치챘다	keep	defaults
+pack:clause-patterns:3	先生は気づかれましたか。	선생님은 눈치채셨습니까.	fix	voice
+pack:clause-patterns:4	気付かれましたか？	깨달으셨습니까?	keep	voice

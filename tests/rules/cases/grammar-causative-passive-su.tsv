@@ -15,7 +15,7 @@ analysis:causative-passive-of-su-causative	これではＹＥＳと言ってい�
 analysis:causative-passive-of-su-causative	「な、何を言っているんだ、お前は」	「무, 무슨 소리야, 너는」	keep	analysis
 analysis:causative-passive-of-su-causative	踏み込むなと言われた。	발을 들이지 말라고 했다.	keep	analysis
 analysis:causative-passive-of-su-causative	真帆を迷わせているのは、俺だ。	마호를 헤매게 하고 있는 것은, 나다.	keep	analysis
-dict:jisjk:147927	先輩に無理やり飲まされて	선배 때문에 억지로 마셔	fix	rewrites
+dict:jisjk:147927	先輩に無理やり飲まされて	선배 때문에 억지로 마셔서	fix	rewrites
 dict:jisjk:147927	「そうか、俺……ワイン飲まされて、酔っちゃったんだ」	has:와인 마시게 돼,	fix	defaults
 dict:jisjk:147927	彼の膝に乗り、彼からご飯をもらって口移しでワインを飲まされる。	has:와인을 마시게 된다	fix	defaults
 dict:jisjk:147927	媚薬を飲まされたときと同じ。	has:마시게 되었을 때	fix	defaults
