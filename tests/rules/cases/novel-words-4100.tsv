@@ -50,3 +50,5 @@ dict:w:31102	しかし、痛いのはかなわんな・・・。	has:아픈 것�
 dict:w:31102	データを作るのはかまわないけど	has:만드는 것은 상관없	keep	lookup
 dict:w:31102	ご注文は？おいしいのやすいのはやいの	has:싼 것 빨라	keep	lookup
 dict:w:31102	高いのはかまわない。	높은 것은 상관없다.	fix	lookup
+cx:novel-fixes-3:60	上司からの付き合いの誘いを断った	!rule:cx:novel-fixes-3:60	keep	rewrites
+cx:novel-fixes-3:60	会社からの付き合いで飲みに行く	!rule:cx:novel-fixes-3:60	keep	rewrites

@@ -59,3 +59,21 @@ dict:jisjk:344593	寒いのだ。寒くてどうしようもない。	has:추워
 dict:jisjk:344593	無性に故郷が懐かしくて堪らなくなった。	has:그리워서 견딜 수	fix	local
 dict:jisjk:344593	本当は泣きたくてしかたないでしょうに……	has:울고 싶어서 어쩔 수	fix	local
 dict:jisjk:344593	高くて美しい山だ。	!rule:dict:jisjk:344593	keep	local
+cx:novel-fixes-3:110	数日後に進化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	夜に変化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	戦闘中に進化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	その瞬間に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	春に変化が訪れた。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	ドラゴンに進化した。	has:드래곤으로 진화했다	fix	rewrites
+cx:novel-fixes-3:115	彼女に変化した様子はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:80	「ちょっと出かけてくる」	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:80	「俺、みんなと町に遊びに行ってくるから。」	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:80	ちょっと行ってくる。	!rule:cx:novel-fixes-3:80	keep	rewrites
+cx:novel-fixes-3:95	俺の魔力は水弾二発分という事になる。	!rule:cx:novel-fixes-3:95	keep	rewrites
+cx:novel-fixes-3:95	つまり、俺はここまで歩いてやってきたという事になる。	!rule:cx:novel-fixes-3:95	keep	rewrites
+cx:novel-fixes-3:140	「私の事、興味があるの？」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	アールと会っていた事、ラピスの事、俺は聞かれた事には全て答えた。	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	「お前の事、話したよ」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	「彼の事、心配だ」	!rule:cx:novel-fixes-3:140	keep	rewrites
+cx:novel-fixes-3:140	坊ちゃんの事、宜しく頼むよ！	has:도련님을, 잘 부탁	fix	rewrites
+cx:novel-fixes-3:145	「彼女の事、話したよ」	!rule:cx:novel-fixes-3:145	keep	rewrites
