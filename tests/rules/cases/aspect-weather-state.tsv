@@ -7,7 +7,7 @@ cx:weather-state:15	空は晴れているが、雲が多い。	하늘은 맑지�
 cx:weather-state:15	空は晴れているのに、吹き抜ける風が冷たく肌寒い。	has:하늘은 맑은데,	fix	rewrites
 cx:weather-state:15	今日も空は晴れていて、そよそよと吹く風に桜の花びらが運ばれ、春の始まりを告げていた。	has:오늘도 하늘은 맑아,	fix	rewrites
 cx:weather-state:15	晴れていたとしても到底山頂まで保たないだろう。	has:맑았다고 해도	fix	rewrites
-cx:weather-state:15	無駄に晴れている空の下。	쓸데없게 맑은 하늘 아래.	fix	rewrites
+cx:weather-state:15	無駄に晴れている空の下。	쓸데없이 맑은 하늘 아래.	fix	rewrites
 cx:weather-state:10	突然、それまで晴れていた空に黒雲が集まる。	has:그때까지 맑았던 하늘에	fix	rewrites
 cx:weather-state:10	あれほど晴れていた空には、一面を覆うどす黒く厚い雲が渦巻いている。	has:그토록 맑았던 하늘에는,	fix	rewrites
 cx:weather-state:10	空は晴れていた。	!rule:cx:weather-state:10	keep	rewrites
