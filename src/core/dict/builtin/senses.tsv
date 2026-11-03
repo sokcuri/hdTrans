@@ -1550,3 +1550,5 @@
 ぼろい	수지맞다	商売,儲け,稼ぎ,仕事,話	after
 // LEX-3852: 飲まされる follows 飲む: 먹다 before a medicine.
 飲まされる	먹게 되다	薬,錠剤,クスリ,くすり	before
+上向く	위를 향하다	顔,顔面,目線,視線	after
+引かれる	걸리다	風邪	before

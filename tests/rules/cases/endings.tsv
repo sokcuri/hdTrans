@@ -35,7 +35,7 @@ dict:jisjk:343476	一般的だと困る。	일반적이라면 곤란하다.	fix	
 dict:jisjk:343476	一般的だと思う。	일반적이라고 생각한다.	keep	local-ending
 dict:jisjk:343477	静かだと困る。	조용하다면 곤란하다.	fix	local-ending
 dict:jisjk:343477	無理だと困る。	무리라면 곤란하다.	fix	local-ending
-dict:jisjk:343477	静かだと知った。	조용하다고 알았다.	keep	local-ending
+dict:jisjk:343477	静かだと知った。	조용하다는 걸 알았다.	keep	local-ending
 dict:jisjk:343477	静かだとしたら嬉しい。	조용하다고 하면 기쁘다.	keep	local-ending
 dict:jisjk:343477	静かだとして話す。	조용하다고 해 이야기한다.	keep	local-ending
 dict:jisjk:344516	涙が出る程面白い。	눈물이 나올 정도로 재미있다.	fix	local-ending

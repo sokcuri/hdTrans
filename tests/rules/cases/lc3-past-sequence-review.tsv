@@ -34,10 +34,10 @@ rewrite:past-sequence	カムイがさっと動いたら、護衛二人の剣が�
 rewrite:past-sequence	私が窓を開けたら風が入ってきた。	has:열었더니	keep	rewrites
 rewrite:past-sequence	振り向いたら走ってくるリナの姿が見えた。	has:뒤돌아 보았더니	keep	rewrites
 rewrite:past-sequence	ダンディーなお店にはダンディーなマスターがいると決まっている。	has:있다고	keep	rewrites
-rewrite:past-sequence	ドアを開けると気付いた。	has:연다고	keep	rewrites
+rewrite:past-sequence	ドアを開けると気付いた。	has:연다는 걸	keep	rewrites
 rewrite:past-sequence	そしてレイチェルが勘違いをしていると察した。	has:있다고	keep	rewrites
-rewrite:past-sequence	お互いがそう感じていると気付いたことがあった。	has:있다고	keep	rewrites
-rewrite:past-sequence	からかわれていると気付いたのは後々になってからだ。	has:있다고	keep	rewrites
+rewrite:past-sequence	お互いがそう感じていると気付いたことがあった。	has:있다는 걸	keep	rewrites
+rewrite:past-sequence	からかわれていると気付いたのは後々になってからだ。	has:있다는 걸	keep	rewrites
 rewrite:past-sequence	信じられないけれど、眠ると必ず見る嫌な夢は見なかった。	has:자면	keep	rewrites
 rewrite:past-sequence	微妙に最初の間が気になるけど、つっこんだら話が長引くのでやめた。	has:찔러 넣으면	keep	rewrites
 rewrite:past-sequence	一度、口頭で北が一回、西が四回と教えたら、しっかりと覚えてくれた。	has:가르쳤더니	keep	rewrites
