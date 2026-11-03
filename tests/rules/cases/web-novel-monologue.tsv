@@ -1,0 +1,36 @@
+# 규칙: LEX-4033
+rule	input	expected	kind	layer
+cx:novel-fixes-2:900	けれど、一人だけ時間に取り残され、暗い殻に閉じこもってしまった俺には、他に出来る事がなかった。	has:할 수 있는 것이 없었다	fix	rewrites
+cx:novel-fixes-2:900	時間がなかった。	!rule:cx:novel-fixes-2:900	keep	rewrites
+cx:novel-fixes-2:910	傍から見れば、ただ遊んでいるだけに見えただろう。	has:놀고 있는 것으로만 보였을	fix	rewrites
+cx:novel-fixes-2:910	子供に見えた。	!rule:cx:novel-fixes-2:910	keep	rewrites
+cx:novel-fixes-2:920	小学生の頃は、この歳にしては頭がいいと褒められて育った。	has:머리가 좋다고 칭찬받아	fix	rewrites
+cx:novel-fixes-2:920	あいつは頭がいい。	!rule:cx:novel-fixes-2:920	keep	rewrites
+cx:novel-fixes-2:925	頭がいい子だ。	has:머리가 좋은 아이	fix	rewrites
+cx:novel-fixes-2:925	あいつは頭がいい。	!rule:cx:novel-fixes-2:925	keep	rewrites
+cx:novel-fixes-2:930	勇気を出せだの、頑張れだのと無責任な言葉を投げつけた。	has:용기를 내라느니, 힘내라느니	fix	rewrites
+cx:novel-fixes-2:930	本だの服だのが散らかっている。	!rule:cx:novel-fixes-2:930	keep	rewrites
+cx:novel-fixes-2:935	勇気を出せだの、頑張れだのと無責任な言葉を投げつけた。	has:힘내라느니 하는 무책임한 말	fix	rewrites
+cx:novel-fixes-2:935	帰れだのと騒ぐ。	!rule:cx:novel-fixes-2:935	keep	rewrites
+cx:novel-fixes-2:936	帰れだのと騒ぐ。	has:돌아가라느니 하고 떠든다	fix	rewrites
+cx:novel-fixes-2:936	雨と風が強い。	!rule:cx:novel-fixes-2:936	keep	rewrites
+cx:novel-fixes-2:937	頑張れだのと言った。	has:힘내라느니 하고 말했다	fix	rewrites
+cx:novel-fixes-2:937	帰れだのと言われた。	!rule:cx:novel-fixes-2:937	keep	rewrites
+cx:novel-fixes-2:940	その結果、県内でも最底辺と噂の超絶バカ高校に入学するハメになった。	has:최하층이라고 소문난	fix	rewrites
+cx:novel-fixes-2:940	噂の高校に入った。	!rule:cx:novel-fixes-2:940	keep	rewrites
+cx:novel-fixes-2:960	ヒエラルキーは一瞬にして最下層に落ちて、ホーケーという仇名を付けられてからかわれた。	has:별명이 붙여져 놀림받았다	fix	rewrites
+cx:novel-fixes-2:960	手紙を書いてから変わった。	!rule:cx:novel-fixes-2:960	keep	rewrites
+cx:novel-fixes-2:970	俺と似たような境遇でそうしている奴はたくさんいた。	has:나와 비슷한 처지에서	fix	rewrites
+cx:novel-fixes-2:970	似たような話を聞いた。	!rule:cx:novel-fixes-2:970	keep	rewrites
+cx:novel-fixes-2:980	写真もいっぱい取られた。	has:사진도 많이 찍혔다	fix	rewrites
+cx:novel-fixes-2:980	財布を取られた。	!rule:cx:novel-fixes-2:980	keep	rewrites
+dict:jisjk:266516	いつ取られたのか、まったく気がつかなかった。	has:언제 빼앗겼는지	fix	lookup
+dict:jisjk:266516	上の息子が軍隊に取られてからさびしくってねえ。	has:군대에 빼앗기고	fix	lookup
+dict:jisjk:266516	だってそうしないとアヴェの国を取られて、みんな殺されるか、奴隷にされちゃうから。	has:나라를 빼앗기고	fix	lookup
+dict:jisjk:266516	早急な措置が取られた。	has:조치가 취해졌다	keep	lookup
+dict:jisjk:147310	まだしも、漫画家になると言い出してヘタクソなWEB漫画を開始したり、	has:형편없는 WEB 만화	fix	lookup
+dict:jisjk:147310	歌がヘタクソで困る。	has:노래가 형편없어	fix	lookup
+dict:jisjk:260766	絵が下手くそで困る。	has:그림이 몹시 서툴러	fix	lookup
+dict:w:31076	そこそこ裕福な家庭の三男として生まれた。兄兄姉弟。５人兄弟の４番目。	has:형, 형, 누나, 남동생.	fix	lookup
+phrase:なんとなくだが	いや、なんとなくだが、ハロワにいけばいいということはわかる。	has:막연하게나마	fix	builtin-phrase
+phrase:なんとなくだが	なんとなくそう思った。	has:왠지 그렇게	keep	builtin-phrase
