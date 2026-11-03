@@ -81,3 +81,17 @@ dict:jisjk:265140	なかなか、やりがいがありそうな仕事だな。	�
 dict:jisjk:265140	この台所はどう見ても本棚がありそうな雰囲気ではない。	has:있을 듯한 분위기	fix	defaults
 dict:jisjk:265140	危険がありそうだ。	위험이 있을 듯하다.	fix	defaults
 dict:jisjk:123374	私も誓って言える。	나도 맹세코 말할 수 있다.	fix	defaults
+dict:w:31862	いよいよレナの家へ運ぶことになったが、さすがにこのままってわけにもいかない。	has:이대로라고 할 수도 없다	fix	lookup
+dict:w:31862	さすがにこのままってわけにはいかない。	has:이대로라고 할 수는 없다	keep	lookup
+dict:w:31863	唖然としている女性たちを他所に、シグリだけはグラムの強靭さに驚いた。	has:여성들을 아랑곳하지 않고	fix	lookup
+dict:w:31863	周囲の心配をよそに、彼は出かけた。	has:아랑곳하지 않고	keep	lookup
+dict:w:31864	「いえ、もうけっこうです、最後まで聞く必要はありませんから」	has:「아뇨, 이제 됐습니다,	fix	lookup
+dict:w:31864	けっこうです。	괜찮습니다.	keep	lookup
+dict:w:31866	「いらね。と……そうそう、肉はひとつ抜いといて」	has:「필요 없어.	fix	lookup
+dict:w:31866	こんなものいらねえよ。	이런 것 필요 없어.	keep	lookup
+dict:w:31867	(鈴木の声)焦ってミスってる人が多いんで。	has:실수하고 있는 사람이	fix	lookup
+dict:w:31867	ミスった。	실수했다.	fix	lookup
+dict:w:31867	単純なミスだ。	단순한 실수다.	keep	lookup
+dict:w:31868	「うむ。まあ、いいかんじだ。」	has:좋은 느낌이다	fix	lookup
+dict:w:31868	ああ～、いいかんじ！ありがとう～	has:좋은 느낌!	fix	lookup
+dict:w:31868	いい感じだ。	좋은 느낌이다.	keep	lookup

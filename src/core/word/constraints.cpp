@@ -185,6 +185,8 @@ constexpr ConstraintRule kRules[] = {
     {"hai-before-negative", ConstraintWord::Source, "はい", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "부정 ない, ません 앞의 はい는 대답 네가 아니라 は + いる의 부정 (遠くにはいない 멀리 네 없다 → 멀리에는 없다)", {},
      "ない|なか|なく|なけ|ねえ|ねぇ|ません|ませ"},
+    {"niwa-before-zuka", ConstraintWord::Source, "にわ", ConstraintContext::BeforeListed, ConstraintReject::Word,
+     "ずか 앞의 にわ는 庭가 아니라 に와 わずか (中にわずかに 속 정원않고 게 → 속에 조금)", {}, "ずか"},
     {"hashita-before-end", ConstraintWord::Source, "はした", ConstraintContext::BeforeListed, ConstraintReject::Word,
      "が, けど, もの나 문장 부호 앞의 はした는 우수리가 아니라 は와 する의 과거 (巻き込まれはしたが 말려 들어가고 우수리가 → 말려 들어가기는 했지만). はした金은 그대로", {},
      "が|けど|けれ|もの|。|、|！|？|…|よ|ね|わ|ぞ|ん|の|か"},

@@ -1,4 +1,4 @@
-# 규칙: LEX-4350, GRM-3580~GRM-3588
+# 규칙: LEX-4350, LEX-4353, LEX-4357~LEX-4359, LEX-4363~LEX-4365, GRM-10, GRM-3580~GRM-3588
 rule	input	expected	kind	layer
 cx:crit-fixes-1:10	また両国は和平案を巡って、	has:평화안을 둘러싸고,	fix	rewrites
 cx:crit-fixes-1:10	遺産を巡って争う。	유산을 둘러싸고 싸운다.	fix	rewrites
@@ -96,3 +96,33 @@ constraint:hai-before-negative	近くにはいなかった。	가까운 곳에�
 constraint:hai-before-negative	はい、ないです。	네, 없습니다.	keep	lookup
 constraint:hai-before-negative	ここにはいない。	여기에는 없다.	keep	lookup
 cx:crit-fixes-1:80	「城壁よ、中には城がある。」	has:성벽이야,	keep	rewrites
+cx:crit-fixes-1:130	そこで僕だけに向き直る。	거기서 나에게만 돌아선다.	fix	rewrites
+cx:crit-fixes-1:130	「最終的には部の利益になるんだから、俺だけに感謝を強要するな」	has:나에게만 감사를	fix	rewrites
+cx:crit-fixes-1:130	「風見さんだけに任せるわけにもいかないしね」	has:카자미 씨에게만 맡길	fix	rewrites
+cx:crit-fixes-1:130	沙都子は勝者だけに許される優雅さで、涼しげに声をかけてくる。	has:승자에게만 허락되는	fix	rewrites
+cx:crit-fixes-1:130	事が事だけに仕方ないだろう。	!rule:cx:crit-fixes-1:130	keep	rewrites
+cx:crit-fixes-1:130	期待していただけに残念だ。	!rule:cx:crit-fixes-1:130	keep	rewrites
+cx:crit-fixes-1:130	右側だけに団子を作る。	!rule:cx:crit-fixes-1:130	keep	rewrites
+cx:crit-fixes-1:140	Three O'clock! …そうか、眠れないのか。 仕方ない、ラム酒でやるか？	has:어쩔 수 없다, 럼으로	fix	rewrites
+cx:crit-fixes-1:140	駆逐艦杉！敵艦隊発見！やるしかねぇ、艦隊！合戦用意！	has:할 수밖에 없다, 함대	fix	rewrites
+cx:crit-fixes-1:140	「しょうがない、ママにあげよ……」	has:어쩔 수 없다,	fix	rewrites
+cx:crit-fixes-1:140	仕方ない、買い物に行こう。	has:어쩔 수 없다,	fix	rewrites
+cx:crit-fixes-1:140	まあ、仕方ない、です！	!rule:cx:crit-fixes-1:140	keep	rewrites
+cx:crit-fixes-1:140	ち、下がるしかない、のか…？	!rule:cx:crit-fixes-1:140	keep	rewrites
+cx:crit-fixes-1:140	美しい、白い花。	!rule:cx:crit-fixes-1:140	keep	rewrites
+cx:crit-fixes-1:150	「なな、何をするんだ圭一！」	has:「나나, 뭘	fix	rewrites
+cx:crit-fixes-1:150	「なな、…何でもないよ！！」	has:「나나, …	fix	rewrites
+cx:crit-fixes-1:150	仕方ない、ラム酒でやるか？	!rule:cx:crit-fixes-1:150	keep	rewrites
+cx:crit-fixes-1:160	まさに大好物を取り上げられた赤子のように、今にも泣き出しそうな表情で兄に懇願する。	has:좋아하는 음식을 빼앗긴	fix	rewrites
+cx:crit-fixes-1:160	その唯一を取り上げられたエリザベスは、実に潔く、クロードを手放すことを決めたのだ。	has:유일을 빼앗긴	fix	rewrites
+cx:crit-fixes-1:160	わたしが動き回らないように靴をトゥーリに取り上げられてしまった以上、仕方ない。	has:빼앗겨버린 이상	fix	rewrites
+cx:crit-fixes-1:160	よく、レンジャー訓練は、報道番組でも取り上げられ、その厳しさは誰もが知るところである。	!rule:cx:crit-fixes-1:160	keep	rewrites
+cx:crit-fixes-1:160	ニュースにも新聞にも取り上げられることはなかった。	!rule:cx:crit-fixes-1:160	keep	rewrites
+cx:crit-fixes-1:170	ノエルの垂直切りはいとも簡単に父の木剣でガードされ弾かれる。	has:가드되고 튕겨진다	fix	rewrites
+cx:crit-fixes-1:170	空き缶は、物体に接触する直前でパンっと弾かれどこかにすっとんでいく。	has:팡 튕겨지고	fix	rewrites
+cx:crit-fixes-1:170	シールドのような物に弾かれたのだが、	has:물건에 튕겨졌는데	fix	rewrites
+cx:crit-fixes-1:170	ピアノが弾かれる音がした。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	先生の声に弾かれたように前を向く。	!rule:cx:crit-fixes-1:170	keep	rewrites
+constraint:niwa-before-zuka	口の中にわずかに残っていた物が、水分を吸ってより深い香りを出してくれる。	has:입속에 조금 남아 있던	fix	lookup
+constraint:niwa-before-zuka	屋敷の別館にわずかな使用人と一緒に押し込められて、	has:별관에 약간의 하인과	fix	lookup
+constraint:niwa-before-zuka	庭にわずかな花。	뜰에 약간의 꽃.	fix	lookup
