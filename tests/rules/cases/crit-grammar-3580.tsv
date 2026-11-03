@@ -10,7 +10,8 @@ cx:crit-fixes-1:10	季節が巡って春になる。	!rule:cx:crit-fixes-1:10	ke
 cx:crit-fixes-1:20	領土を巡る争い。	영토를 둘러싼 분쟁.	fix	rewrites
 cx:crit-fixes-1:20	予算を巡る議論が続いた。	예산을 둘러싼 논의가 계속되었다.	fix	rewrites
 cx:crit-fixes-1:20	近江鉄道沿線を巡る３種類の2日間パス発売	has:연선을 돌아 다니는	keep	rewrites
-cx:crit-fixes-1:30	遺産を巡る。	유산을 둘러싼다.	fix	rewrites
+cx:crit-fixes-1:30	利権を巡る。	이권을 둘러싼다.	fix	rewrites
+cx:crit-fixes-1:30	遺産を巡る。	!rule:cx:crit-fixes-1:30	keep	rewrites
 cx:crit-fixes-1:30	名所を巡る旅。	!rule:cx:crit-fixes-1:30	keep	rewrites
 cx:crit-fixes-1:30	もう少し考えを巡らせなきゃならなかった。	!rule:cx:crit-fixes-1:30	keep	rewrites
 cx:crit-fixes-1:40	平和に慣れきった日本人は特殊部隊という言葉を聞くと	has:다 익숙해진 일본인	fix	rewrites
@@ -217,3 +218,22 @@ cx:crit-fixes-1:7	今日は ９月３日に行われた放送番組審議会に�
 cx:crit-fixes-1:50	<おじさんたちは 早く結婚して跡取りを作れなどと言い立てる>	has:만들어라	fix	rewrites
 cx:crit-fixes-1:50	読めなどしない。	!rule:cx:crit-fixes-1:50	keep	rewrites
 cx:crit-fixes-1:50	帰れなど言わない。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:20	世界遺産を巡る旅に出た。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:20	文化遺産を巡るツアー。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:20	遺産を巡る争い。	유산을 둘러싼 분쟁.	fix	rewrites
+cx:crit-fixes-1:5	駅について知り合いに会った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	家について言葉を失った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について書類を出した。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について記念写真を撮った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について学生たちと別れた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について話題の店に入った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:7	この城について、少し話そう。	!rule:cx:crit-fixes-1:7	keep	rewrites
+cx:crit-fixes-1:7	城について	!rule:cx:crit-fixes-1:7	keep	rewrites
+cx:crit-fixes-1:7	寺について、住職に挨拶した。	has:절에 도착해,	fix	rewrites
+cx:crit-fixes-1:100	かわした約束を守る。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:170	彼女の手で弾かれた曲。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	名手の手で弾かれるバイオリン。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:160	問題をテレビで取り上げられた。	!rule:cx:crit-fixes-1:160	keep	rewrites
+voice:shorter-te	触手に掴まれて、動けない。	has:촉수에 잡혀,	fix	voice
+voice:shorter-te	魔物に掴まれて、動けない。	has:마물에 잡혀,	fix	voice
+voice:shorter-te	ロープに掴まれて助かった。	has:매달릴 수 있어서	keep	voice

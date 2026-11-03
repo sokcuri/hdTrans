@@ -1229,7 +1229,8 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
         if (ObjectBefore(it) || (agent != nullptr && NarrativePassive(it, rest))) return Voice::Passive;
         // A て form, a progressive or たまま is a state one is put in (後ろから掴まれて, 呪いで繋がれたまま), not
         // what one manages: but for ても and a partner in と right before (佐藤さんと繋がれて).
-        // A thing in に before 掴まる or 捕まる is what one holds on to (手すりに掴まれて), not who grabs.
+        // A thing of noun.hold-on in に before 掴まる or 捕まる is what one holds on to (手すりに掴まれて), not
+        // who grabs (触手に掴まれて stays passive).
         const bool partner = it->prev != nullptr && it->prev->group->surface == "と";
         const std::string_view surface = it->group->surface;
         bool heldThing = false;
@@ -1238,7 +1239,7 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
                 const std::string_view s = p->group->surface;
                 if (s != "に" && s != "にも" && s != "には") continue;
                 const Item* a = p->prev;
-                heldThing = a != nullptr && !Person(a->Attr(std::max(a->selected, 0)));
+                heldThing = a != nullptr && dict::EndsWithMember(HDTRANS_CLASS("noun.hold-on"), a->group->surface) > 0;
                 break;
             }
         }

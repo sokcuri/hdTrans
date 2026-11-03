@@ -259,10 +259,12 @@
 //= noun.event	Ends of nouns of events that are no verbal noun, before which であった after a place is what happened there (海外であった事件 해외에서 있던 사건).
 //= noun.contest-over	Starts of the nouns and verb stems of a dispute or a struggle, after which a を巡る of a place is what the parties fight over, 둘러싸다 (領土を巡る争い 영토를 둘러싼 분쟁), not a tour.
 //= noun.knock-back	Ends of weapons, blows and guards in the clause of a 弾かれる that make it a thing knocked back, 튕기다 (木剣でガードされ弾かれる 가드되고 튕겨진다), not music played.
+//= noun.hold-on	Ends of things one holds on to (手すり, ロープ, 枝, 柱), after which に before 掴まる or 捕まる is what one grips, not who grabs: the potential stays (手すりに掴まれて助かった 난간에 매달릴 수 있어서 살았다; spec GRM-10).
 //= noun.kin-address	Ends of kinship and family words (ママ, お母さん, 娘, 息子), before which よ and a comma is a sentence-final よ of a statement, not a vocative call (お母さんよ、開けて 엄마야, 열어).
 //= noun.alarm	Ends of words one cries out to raise an alarm (くせ者, 泥棒, 敵), before which よ and a comma tells what is there, 이야, not a call to it (くせ者よ、であえ 수상한 놈이야).
 //= noun.issue-over	Ends of nouns of an issue, a plan, a right or a holding that parties dispute, before which を巡る is 둘러싸다 (和平案を巡って 평화안을 둘러싸고), not a tour of a place.
-//= verb.topic-about	Starts of the verbs and verbal nouns of speaking, asking, thinking, knowing, looking into and writing, after which a について of a place is what one talks or thinks about, 에 대해 (駅について尋ねた), not arrival.
+//= verb.topic-about	Verb stems, matched whole, of speaking, asking, thinking, knowing, looking into and writing, after which a について of a place is what one talks or thinks about, 에 대해 (駅について尋ねた), not arrival.
+//= noun.topic-about	Verbal nouns of speaking, asking, thinking, looking into and writing, matched whole, that make a について before them a topic as verb.topic-about does (運行区間について表示します).
 //= noun.arrival-building	Buildings one arrives at that the dictionary codes as a building only (城, 宿, 寺), after which に and a て form of つく with no verb of speaking or thinking after it is arrival, 도착하다 (城について休んだ 성에 도착해 쉬었다), as after a place.
 //= noun.do-angle	Nouns of angle or temperature earlier in the sentence that make 度 one (角度は四十五度, 体温が三十八度).
 //= noun.feeling	Verbal nouns and mimetic words of a feeling that comes over one, whose する is no act one plans (安心する, ドキドキする): with ますね they are what the speaker feels, not a promise.
@@ -3301,45 +3303,6 @@ noun.contest-over	確執
 noun.contest-over	裁判
 noun.contest-over	訴訟
 noun.contest-over	交渉
-verb.topic-about	話
-verb.topic-about	語
-verb.topic-about	尋ね
-verb.topic-about	聞
-verb.topic-about	訊
-verb.topic-about	問
-verb.topic-about	言
-verb.topic-about	考え
-verb.topic-about	思
-verb.topic-about	調べ
-verb.topic-about	書
-verb.topic-about	記
-verb.topic-about	知
-verb.topic-about	説明
-verb.topic-about	表示
-verb.topic-about	述べ
-verb.topic-about	触れ
-verb.topic-about	議論
-verb.topic-about	相談
-verb.topic-about	検討
-verb.topic-about	質問
-verb.topic-about	言及
-verb.topic-about	報告
-verb.topic-about	研究
-verb.topic-about	調査
-verb.topic-about	学
-verb.topic-about	教え
-verb.topic-about	考察
-verb.topic-about	解説
-verb.topic-about	紹介
-verb.topic-about	伺
-verb.topic-about	確認
-verb.topic-about	協議
-verb.topic-about	意見
-verb.topic-about	情報
-verb.topic-about	詳し
-verb.topic-about	悩
-verb.topic-about	心配
-verb.topic-about	説
 noun.arrival-building	城
 noun.arrival-building	宿
 noun.arrival-building	宿屋
@@ -3362,11 +3325,65 @@ noun.arrival-building	隠れ家
 noun.arrival-building	拠点
 noun.arrival-building	基地
 noun.arrival-building	港
+verb.topic-about	話
+verb.topic-about	語
+verb.topic-about	尋ね
+verb.topic-about	訊ね
+verb.topic-about	聞
+verb.topic-about	訊
+verb.topic-about	問
+verb.topic-about	問い合わせ
+verb.topic-about	言
+verb.topic-about	考え
+verb.topic-about	思
+verb.topic-about	調べ
+verb.topic-about	書
+verb.topic-about	記
+verb.topic-about	知
+verb.topic-about	述べ
+verb.topic-about	触れ
+verb.topic-about	学
+verb.topic-about	教え
+verb.topic-about	伺
+verb.topic-about	悩
+verb.topic-about	説
+verb.topic-about	話し合
+verb.topic-about	語り合
+verb.topic-about	考え込
+verb.topic-about	思い悩
+verb.topic-about	ぼや
+verb.topic-about	論じ
+verb.topic-about	議論し
+noun.topic-about	説明
+noun.topic-about	表示
+noun.topic-about	議論
+noun.topic-about	相談
+noun.topic-about	検討
+noun.topic-about	質問
+noun.topic-about	言及
+noun.topic-about	報告
+noun.topic-about	研究
+noun.topic-about	調査
+noun.topic-about	考察
+noun.topic-about	解説
+noun.topic-about	紹介
+noun.topic-about	確認
+noun.topic-about	協議
+noun.topic-about	意見
+noun.topic-about	話
+noun.topic-about	話し合い
+noun.topic-about	心配
+noun.topic-about	記載
+noun.topic-about	記述
+noun.topic-about	言い争い
+noun.topic-about	講義
+noun.topic-about	講演
+noun.topic-about	会議
+noun.topic-about	打ち合わせ
 noun.issue-over	案
 noun.issue-over	見解
 noun.issue-over	領土
 noun.issue-over	利権
-noun.issue-over	遺産
 noun.issue-over	問題
 noun.issue-over	権利
 noun.issue-over	予算
@@ -3465,6 +3482,36 @@ noun.knock-back	打撃
 noun.knock-back	斬撃
 noun.knock-back	一撃
 noun.knock-back	突き
+noun.hold-on	手すり
+noun.hold-on	手摺
+noun.hold-on	手摺り
+noun.hold-on	ロープ
+noun.hold-on	綱
+noun.hold-on	縄
+noun.hold-on	紐
+noun.hold-on	枝
+noun.hold-on	柱
+noun.hold-on	吊り革
+noun.hold-on	つり革
+noun.hold-on	吊革
+noun.hold-on	岩
+noun.hold-on	崖
+noun.hold-on	棚
+noun.hold-on	幹
+noun.hold-on	手綱
+noun.hold-on	取っ手
+noun.hold-on	ハンドル
+noun.hold-on	鉄棒
+noun.hold-on	杖
+noun.hold-on	浮き輪
+noun.hold-on	船べり
+noun.hold-on	背もたれ
+noun.hold-on	ポール
+noun.hold-on	はしご
+noun.hold-on	梯子
+noun.hold-on	ベルト
+noun.hold-on	つる
+noun.hold-on	蔓
 noun.alarm	くせ者
 noun.alarm	曲者
 noun.alarm	泥棒
