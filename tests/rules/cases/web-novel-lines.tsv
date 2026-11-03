@@ -144,3 +144,6 @@ cx:resolve-quote:10	雨が降ると困る。	비가 오면 곤란하다.	keep	re
 dict:w:31018	両手は彼女の胸に減り込んだままだ。	양손은 그녀의 가슴에 파고든 채 그대로다.	fix	lookup
 dict:i:5287	正気を失った者から死ぬ。	제정신을 잃은 사람에게서 죽는다.	fix	lookup
 dict:jisjk:35830	余りの出来事にアキラは銃を構えた体勢のまま思考を停止した。	넘치는 사건에 아키라는 총을 겨눈 자세인 채 사고를 정지했다.	fix	lookup
+cx:dislike-of:4	咄嗟のウソとはいえ、千里の嫌いなチョコの話を持ち出すなんて……	순간의 거짓말이라고는 해도, 천리가 싫어하는 초콜릿 이야기를 꺼내다니……	fix	rewrites
+cx:dislike-of:4	嫌いな野菜。	!rule:cx:dislike-of:4	keep	rewrites
+cx:rebuild-fixes:70	唯ちゃんが笑った。	!rule:cx:rebuild-fixes:70	keep	rewrites
