@@ -309,16 +309,36 @@ bool Item::RunDakeiyoCase8Query() {
 // Of the adjectives only the し stems qualify, which are also the old terminal form;
 // the others are cut-off forms whose last kana is a verb ending or a particle
 // (試してみた, ではな). An adjectival-noun stem ending in な is a cut-off ない; one
-// ending in みたい is left to MitaiLike.
+// ending in みたい is left to MitaiLike, and よう alone is the call (よう 요우), not 様.
 bool Item::StandsAlone() const {
     const std::string_view surface = group->surface;
     if (detail->cls == kDetailKeiyo ? !surface.ends_with(kJaShi)
-                                    : surface.ends_with(kJaNa) || surface.ends_with(kJaMitai)) {
+                                    : surface.ends_with(kJaNa) || surface.ends_with(kJaMitai) || surface == kJaYou) {
         return false;
     }
     if (start + group->length != static_cast<int>(text.size())) return false;
-    if (const int n = detail->nextType; n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
-    if (const int p = detail->ClassifyTrailingPunctuation({}); p < 2 || p > 4) return false;
+    // The end of the text, unless lines may break mid-sentence, or an ellipsis that the stem's ending
+    // does not follow ends the sentence too (すてき, かわいそう…; not おいし…い, すてき…な人).
+    const int n = detail->nextType;
+    bool closed = n == tokenizer::kTypeEnd && !w->settings.wrapped;
+    if (n == tokenizer::kTypeSymbol && (detail->nextText.starts_with("…") || detail->nextText.starts_with("‥"))) {
+        std::string_view after = detail->nextText;
+        while (after.starts_with("…") || after.starts_with("‥") || after.starts_with("　")) after.remove_prefix(std::string_view("…").size());
+        while (after.starts_with(" ")) after.remove_prefix(1);
+        for (int k = tokenIndex + 2; after.empty() && k < w->TokenCount(); k++) {
+            const tokenizer::TokenView token = w->Tok(k);
+            std::string_view piece = token.text;  // past spaces
+            while (piece.starts_with(" ")) piece.remove_prefix(1);
+            while (piece.starts_with("　")) piece.remove_prefix(std::string_view("　").size());
+            after = piece;
+        }
+        const auto goesOn = [&](std::initializer_list<std::string_view> endings) {
+            return std::any_of(endings.begin(), endings.end(), [&](std::string_view e) { return after.starts_with(e); });
+        };
+        closed = !(detail->cls == kDetailKeiyo ? goesOn({"い", "く", "か", "け", "さ", "そう", "すぎ"}) : goesOn({"な", "だ", "で", "に"}));
+    }
+    if (!closed && n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
+    if (const int p = detail->ClassifyTrailingPunctuation({}); !closed && (p < 2 || p > 4)) return false;
     if (start > 0) {
         if (!text::IsPunct(DecodeLastRune(text.substr(0, static_cast<std::size_t>(start))).cp)) return false;
     } else if (tokenIndex > 0) {

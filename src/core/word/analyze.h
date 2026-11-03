@@ -76,6 +76,8 @@ struct Settings {
     // The line of verse goes on in the next line of its document: a て form that ends it is
     // the connective 고 rather than a request.
     bool verse = false;
+    // Lines may break in the middle of a sentence: the end of the text ends no sentence.
+    bool wrapped = false;
     // Text path: the last character of the line's text before the chunk, white space
     // aside; empty for the first chunk.
     std::string_view before;

@@ -1,0 +1,15 @@
+# 규칙: GRM-3600
+rule	input	expected	kind	layer
+analysis:bare-stem-line-end	かわいそう	불쌍하다	fix	analysis
+analysis:bare-stem-line-end	そう、かわいそう…そうだ！	그래, 불쌍하다…맞아!	fix	analysis
+analysis:bare-stem-line-end	すてき	멋지다	fix	analysis
+analysis:bare-stem-line-end	すてき…	멋져…	fix	analysis
+analysis:bare-stem-line-end	やだ、美味し…ふ、ふんだっ。	싫어, 맛있다…흐, 흥이다.	fix	analysis
+analysis:bare-stem-line-end	これは…！ おいし…！	이것은…! 맛있어…!	fix	analysis
+analysis:bare-stem-line-end	きつきつ	꽉 낀다	fix	analysis
+analysis:bare-stem-line-end	ふしだら	문란하다	fix	analysis
+analysis:bare-stem-line-end	かわいそうに	불쌍하게	keep	analysis
+analysis:bare-stem-line-end	かわいそうじゃん	불쌍하잖아	keep	analysis
+analysis:bare-stem-line-end	おいしそう	맛있을 것 같다	keep	analysis
+analysis:bare-stem-line-end	きれい	예쁘다	keep	analysis
+analysis:bare-stem-line-end	だめ	안돼	keep	analysis
