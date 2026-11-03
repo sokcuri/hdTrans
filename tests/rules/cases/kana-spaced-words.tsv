@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 sound:spaced-word	「大人の挨拶だよ、お　と　な　の」	「어른의 인사야, 어른의」	fix	sound
 sound:spaced-word	「お　と　な　の」	「어른의」	fix	sound
 sound:spaced-word	白崎が、口の動きだけで『ト　イ　レ』と告げた。	has:『화장실』	fix	sound
-sound:spaced-word	「ご飯にしますか？　お風呂にしますか？　そ　れ　と　も」	has:그렇지 않으면」	fix	sound
+sound:spaced-word	「ご飯にしますか？　お風呂にしますか？　そ　れ　と　も」	has:아니면」	fix	sound
 sound:spaced-word	「し　て　ま　し　た」	「하고 있었습니다」	fix	sound
 sound:spaced-word	「マ　ジ　か　よ！　アンタの噂は聞いてるぜ！」	「진짜냐! 너의 소문은 듣고 있어!」	fix	sound
 sound:spaced-word	タマも銃も全部自前品です。あ く ま で、プライベート参加です。	has:어디까지나, 프라이빗	fix	sound

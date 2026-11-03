@@ -349,8 +349,28 @@ cx:how-to-do:20	GRM-3465	&&5 S+0== "い" D+0== "$DE@" Y-1== "6도" ||3 Y+0== "R�
 cx:not-knowing:10	LEX-4018	&&3 ||2 S+0== "わか" S+0== "分か" ||2 Y+0== "1지 않고" Y+0== "1지 못하고" U+0== "Lらず"	set-target "&LS@" set-ending "1고"	意味が分からず、困った 의미를 모르고, 곤란했다
 //= take-along	after Select 179	連れて before a verb that is not 行く, 来る or 参る, or before a noun, takes someone along while doing it, 데리고 (妹を連れて帰った 여동생을 데리고 돌아갔다, 連れて部屋を出て行った), not 데려, which only joins 가다 and 오다 (連れていく 데려가다).
 cx:take-along:10	LEX-4020	&&7 S+0== "連れ" D+0== "데&AA@" Y+0== "6" !1 S-1== "Rに" !1 Y-1== "R에" ||2 F+1== "verb" P+1== "1**" !1 ||10 S+1== "L行" S+1== "Lい" S+1== "L来" S+1== "Lく" S+1== "Lき" S+1== "Lこ" S+1== "L参" S+1== "Lっ" S+1== "Lけ" S+1== "Lお"	set-ending "1고"	妹を連れて帰った 여동생을 데리고 돌아갔다
-//= novel-fixes-2	after Select 180	More words the web novel examples misread: ぼさぼさ right before 髪 describes the hair, 부스스한 (ぼさぼさ髪 부스스한 머리카락), not the adverb 더부룩이.
+//= novel-fixes-2	after Select 180	More words the web novel examples misread: ぼさぼさ right before 髪 describes the hair, 부스스한 (ぼさぼさ髪 부스스한 머리카락), not the adverb 더부룩이; 冗談も休み休み言う is 농담도 작작 하다, 意地悪をする 심술을 부리다, 不思議ちゃん, split as ちゃんと, 4차원, ありふれた 흔한, not 흔히 있던, the ね after an adverb in kanji (多分, 勿論, 絶対) nothing (多分ね 아마), not (이)네; に成る (이)가 되다, not 에게; てもらえない after a verb 줄 수 없다 (聞いてもらえない 들어 줄 수 없다); に改めて read as に改める before a verb is 에게 다시 (アキラに改めて微笑んだ 아키라에게 다시 미소 지었다); 離して asked for, before 下さい, くれ, よ or the end, lets go, 놓다 (離してください 놓아 주세요), not 떼어 놓다.
 cx:novel-fixes-2:10	LEX-4021	&&2 S+0== "ぼさぼさ" S+1== "L髪"	set-target "부스스한"	ぼさぼさ髪 부스스한 머리카락
+cx:novel-fixes-2:20	LEX-4022	&&3 S+0== "言" S-1== "に" S-2== "休み休み"	set-target@-2 "작작" set-target@-1 "" set-target "&AV@"	冗談も休み休みに言って 농담도 작작 해
+cx:novel-fixes-2:25	LEX-4022	&&2 S+0== "言" S-1== "休み休み"	set-target@-1 "작작" set-target "&AV@"	冗談も休み休み言え 농담도 작작 해라
+cx:novel-fixes-2:30	LEX-4022	&&3 B+0== "する" S-1== "を" S-2== "意地悪"	set-target "부&AA@"	意地悪をする 심술을 부리다
+cx:novel-fixes-2:40	LEX-4022	&&3 S+0== "ちゃんと" S-1== "不思議" S+1== "い"	set-target@-1 "4차원이라는" set-target "" set-target@+1 "" set-ending@+1 ""	不思議ちゃんという性格 4차원이라는 성격
+cx:novel-fixes-2:45	LEX-4022	&&2 S+0== "ちゃん" S-1== "不思議"	set-target@-1 "4차원" set-target ""	不思議ちゃんだ 4차원이다
+cx:novel-fixes-2:50	LEX-4022	&&3 S+0== "ありふれ" D+0== "흔히 &HN@" Y+0== "L8"	set-target "흔&AV@"	ありふれた日常 흔한 일상
+cx:novel-fixes-2:60	LEX-4022	&&3 S+0== "ね" D+0== "(이)네" ||4 S-1== "多分" S-1== "勿論" S-1== "絶対" S-1== "無論"	set-target ""	多分ね 아마
+cx:novel-fixes-2:70	LEX-4022	&&3 S+0== "成" D+0== "&C6@" S-1== "に"	set-target@-1 "(이)가"	ハンターに成りました 헌터가 되었습니다
+cx:novel-fixes-2:80	LEX-4022	&&3 S+0== "もらえな" D+0== "받을 수 $FA@" Y-1== "6"	set-target "줄 수 $FA@"	話を聞いてもらえない 이야기를 들어 줄 수 없다
+cx:novel-fixes-2:90	LEX-4022	&&5 S+0== "に改め" Y+0== "6" F+1== "verb" P-1== "1**" !1 <5 S+0== "を" S+0== "00、。！？「"	append-target@-1 "에게" set-target "" set-ending "" prepend-target@+1 "다시 "	アキラに改めて微笑んだ 아키라에게 다시 미소 지었다
+cx:novel-fixes-2:110	LEX-4022	&&4 S+0== "離" D+0== "떼어 &F6@" U+0== "Lして" ||7 F+0== "last" S+1== "L下さ" S+1== "Lくださ" S+1== "Lくれ" S+1== "よ" S+1== "Lって" S+1== "00！!」…"	set-target "&F6@"	離して下さい 놓아 주세요
+//= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
+cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
+cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면
+//= adj-de-aru-koto	after QuoteTo 45	A な adjective with である before こと, the, (重要であること 중요한 것) takes its adnominal form, -한, not 중요하다 것.
+cx:adj-de-aru-koto:10	GRM-3467	&&4 F+0== "conjugating" Y+0== "1다" U+0== "Rである" S+1== "Lこと"	set-ending "4"	未熟であることは 미숙한 것은
+//= de-arou-noun	after QuoteTo 46	であろう after a verb right before a noun or an adjective that describes it is the guess in its adnominal form, -을 (驚愕するであろう貴重な知識 경악할 귀중한 지식), not 할 것이다.
+cx:de-arou-noun:10	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "Rであろう" !1 S+1== "00？?！!。．、」』）…‥" ||2 P+1== "1**" F+1== "conjugating"	set-ending "3"	驚愕するであろう貴重な知識 경악할 귀중한 지식
+//= noun-denai-if	after QuoteTo 47	After a noun, でないと with its comma and no verb of saying after it is the condition (이)가 아니면 (会話が出来る人でないと、 대화를 할 수 있는 사람이 아니면,), not the quote 아니라고 (spec GRM-3460).
+cx:noun-denai-if:10	GRM-3460	&&5 S+0== "でな" D+0== "(이)가 아$A3@" ||2 Y+0== "1다고" Y+0== "1다고," U+0== "R、" !1 F+1== "quote-verb"	set-ending "2면,"	会話が出来る人でないと、話も聞いてもらえない 대화를 할 수 있는 사람이 아니면, 이야기도 들어 줄 수 없다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
 cx:excuse-me:10	LEX-4006	&&2 S+0== "すみません" S-1== "ちょっと"	set-target "실례합니다" set-target@-1 "잠깐"	ちょっとすみません 잠깐 실례합니다
 cx:excuse-me:30	LEX-4006	&&4 S+0== "すみません" S+1== "、" S+2== "ちょっと" ||7 S+3== "Lいい" S+3== "い" S+3== "Lよろし" S+3== "L聞" S+3== "L伺" S+3== "Lお時間" S+3== "Lお尋ね"	set-target "실례합니다"	すみません、ちょっといいですか 실례합니다, 잠깐 괜찮습니까
@@ -443,7 +463,7 @@ cx:weather-state:30	GRM-3351	&&4 ||2 S+0== "晴れ" S+0== "はれ" D+0== "&MT@" 
 cx:past-progressive-adnominal:10		&&6 F+0== "conjugating" F+0== "verb" F+0== "plain-voice" ||2 Y+0== "1고 있었던" Y+0== "1고 있던" F+0!= "holding-verb" F+0== "described-noun"	set-ending "1던"	one ending 고 있던
 cx:past-progressive-adnominal:20		&&12 F+0== "conjugating" F+0== "verb" F+0== "plain-voice" Y+0== "1고" ||2 U+0== "Rて" U+0== "Rで" S+1== "い" F+1== "selected" U+1== "た" Y+1== "8" L+1== "L있" F+0!= "holding-verb" F+1== "described-noun"	set-ending "1던" set-target@+1 "" set-ending@+1 ""	読んでいた本 읽던 책
 //= see-and	after NotYet 10	The て of 見る read 보다 after を is 고, an action done before the next one (私を見て言う 나를 보고 말한다), unless the sentence ends after it (the end of the utterance, or ！？!? after it; after a question word only the end of the utterance: 何を見て？ 뭘 보고?) with no comma, or a closing quote, an auxiliary of the て form or one of particle.see-te-keep follows it.
-cx:see-and:10		&&8 S+0== "R見" U+0== "て" Y+0== "6" S-1== "を" F+0== "conjugating" L+0== "보다" ||3 F+0!= "sentence-end" T+0== "L、" &&2 F+0!= "utterance-end" S-2== @question.wonder ||2 !1 F+1== "exists" &&4 S+1!= "L」" S+1!= "L』" S+1!= @Laux.te-start S+1!= @particle.see-te-keep	set-ending "1고"	私を見て言う 나를 보고 말한다
+cx:see-and:10		&&9 S+0== "R見" U+0== "て" Y+0== "6" S-1== "を" F+0== "conjugating" L+0== "보다" !1 F+0== "period-after" ||3 F+0!= "sentence-end" T+0== "L、" &&2 F+0!= "utterance-end" S-2== @question.wonder ||2 !1 F+1== "exists" &&4 S+1!= "L」" S+1!= "L』" S+1!= @Laux.te-start S+1!= @particle.see-te-keep	set-ending "1고"	私を見て言う 나를 보고 말한다
 //= te-sequence	after NotYet 20	The て form read 어 of a verb whose Korean is an action of ko-verb.sequence is 고 when a verb follows in the sentence (手を洗って寝る 손을 씻고 잔다); not ないで.
 cx:te-sequence:10		&&7 F+0== "conjugating" F+0== "verb" Y+0== "6" ||2 I+0== "Rて" I+0== "Rで" I+0!= "Rないで" L+0== @ko-verb.sequence F+0== "predicate-follows"	set-ending "1고"	手を洗って寝る 손을 씻고 잔다
 //= te-object-comma	after TeThanks 10	The て or 連用 form read 어 of a verb with an object before a comma is 고 (本を開いて、 책을 펴고,), unless the verb gives a means (verb.means: 道具を使って、 도구를 써,).
