@@ -1,0 +1,242 @@
+# 규칙: LEX-4350, LEX-4353, LEX-4357~LEX-4359, LEX-4363~LEX-4365, GRM-10, GRM-3580~GRM-3588
+rule	input	expected	kind	layer
+cx:crit-fixes-1:10	また両国は和平案を巡って、	has:평화안을 둘러싸고,	fix	rewrites
+cx:crit-fixes-1:10	遺産を巡って争う。	유산을 둘러싸고 싸운다.	fix	rewrites
+cx:crit-fixes-1:10	遺産を巡り争う。	유산을 둘러싸고 싸운다.	fix	rewrites
+cx:crit-fixes-1:15	和平案を巡っては対立が続く。	평화안을 둘러싸고는 대립이 계속된다.	fix	rewrites
+cx:crit-fixes-1:15	各地を巡っては旅をした。	!rule:cx:crit-fixes-1:15	keep	rewrites
+cx:crit-fixes-1:10	聖女の役目はまず国中を巡って聖なる結界を張ること。	has:온 나라를 돌아 다녀	keep	rewrites
+cx:crit-fixes-1:10	季節が巡って春になる。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:20	領土を巡る争い。	영토를 둘러싼 분쟁.	fix	rewrites
+cx:crit-fixes-1:20	予算を巡る議論が続いた。	예산을 둘러싼 논의가 계속되었다.	fix	rewrites
+cx:crit-fixes-1:20	近江鉄道沿線を巡る３種類の2日間パス発売	has:연선을 돌아 다니는	keep	rewrites
+cx:crit-fixes-1:30	利権を巡る。	이권을 둘러싼다.	fix	rewrites
+cx:crit-fixes-1:30	遺産を巡る。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:30	名所を巡る旅。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:30	もう少し考えを巡らせなきゃならなかった。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:40	平和に慣れきった日本人は特殊部隊という言葉を聞くと	has:다 익숙해진 일본인	fix	rewrites
+cx:crit-fixes-1:40	全てを俺に預けきった顔で微笑む。	모든 것을 나에게 다 맡긴 얼굴로 미소 짓는다.	fix	rewrites
+cx:crit-fixes-1:40	好き勝手にはしゃぎまわる子供達から完全に隠れきるのは簡単なことではない。	has:완전히 다 숨는 것은	fix	rewrites
+cx:crit-fixes-1:40	あれだけ複雑な作りになっていると、調べきるのに時間が掛かりそうね	has:다 조사하는데	fix	rewrites
+cx:crit-fixes-1:40	疲れきった顔で座る。	다 지친 얼굴로 앉는다.	fix	rewrites
+cx:crit-fixes-1:40	武術の奥義を極めきったと豪語してますの。	!rule:cx:crit-fixes-1:40	keep	rewrites
+cx:crit-fixes-1:40	それを見きった。	!rule:cx:crit-fixes-1:40	keep	rewrites
+cx:crit-fixes-1:40	食べきれない。	!rule:cx:crit-fixes-1:40	keep	rewrites
+cx:crit-fixes-1:40	走り続けて乾ききったハインリヒの体に染み込む。	has:다 마른 하인리히	keep	rewrites
+cx:crit-fixes-1:45	呆れきった顔。	기가 막힌 표정.	fix	rewrites
+cx:crit-fixes-1:45	身体が詠唱に慣れきってしまい、	!rule:cx:crit-fixes-1:45	keep	rewrites
+cx:crit-fixes-1:50	携帯とお金出せなどと従業員を脅して、	has:돈 내라	fix	rewrites
+cx:crit-fixes-1:50	帰れなどと言う。	돌아가라 같은 말을 한다.	fix	rewrites
+cx:crit-fixes-1:50	黙れなどと叫んだ。	입을 다물어라 하고 외쳤다.	fix	rewrites
+cx:crit-fixes-1:50	帰れるなどと思うな。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:50	早く寝ろなどと言われた。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:65	成程、彼女が“皇石”の一つを持っていると知ったら、私は彼女のそれを賭けて勝負をしたかもしれなかった。	has:가지고 있다는 걸 알았	fix	rewrites
+cx:crit-fixes-1:65	彼が来ると知った。	그가 온다는 걸 알았다.	fix	rewrites
+cx:crit-fixes-1:65	遠いと分かった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:65	見ると知っている顔だった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:65	よく見ると知っている顔だった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:65	考えると分かった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:70	叡智を宿した瞳が静かに光る。	예지를 품은 눈동자가 조용하게 빛난다.	fix	rewrites
+cx:crit-fixes-1:70	自然そのものに名前を付けることで心を、神を宿したんだよ	has:신을 품었어	fix	rewrites
+cx:crit-fixes-1:70	お腹に新しい命を宿している。	!rule:cx:crit-fixes-1:70	keep	rewrites
+cx:crit-fixes-1:80	「宰相よ、１ヶ月ほど前接触してきた日本という国の情報はあるか」	has:「재상이여,	fix	rewrites
+cx:crit-fixes-1:80	提督よ、艦隊が戻ったぞ。	제독이여, 함대가 돌아왔어.	fix	rewrites
+cx:crit-fixes-1:80	勇者よ、目覚めなさい。	용사여, 눈을 떠.	fix	rewrites
+cx:crit-fixes-1:80	「副将アデムよ、お前に任せる。」	「부장 아젬이여, 너에게 맡긴다.」	fix	rewrites
+cx:crit-fixes-1:80	神よ、我に力を。	신이여, 나에게 힘을.	fix	rewrites
+cx:crit-fixes-1:80	まぁ、そういう訳だ。隊長さんよ、せいぜい足手まといにならないでくんな。	has:대장님이여,	fix	rewrites
+cx:crit-fixes-1:80	『良かった。私はアルファよ、宜しくね』	has:나는 알파야,	keep	rewrites
+cx:crit-fixes-1:80	敵よ、クソ提督！ …アタシが、何とかするけど！	has:적이야,	keep	rewrites
+cx:crit-fixes-1:80	「城壁よ。中には領主様のいらっしゃるお城がある。」	has:「성벽이야.	keep	rewrites
+cx:crit-fixes-1:80	高雄型の2番艦、愛宕よ、うふふ。	has:아타고야,	keep	rewrites
+cx:crit-fixes-1:80	艦隊型駆逐艦、夕雲型駆逐艦の三番艦、風雲よ、よろしく。	has:카자구모야,	keep	rewrites
+cx:crit-fixes-1:80	「店主よ！勘定を頼みたいのだが」	has:점주야!	keep	rewrites
+cx:crit-fixes-1:80	あいつよ、美浜のルーキー！	has:저 녀석이야,	keep	rewrites
+cx:crit-fixes-1:90	助けようとしてくれた。	도우려고 해 주었다.	fix	rewrites
+cx:crit-fixes-1:90	しかし若はそれに応えようとしてくれている、精一杯ね。	has:응하려고 해 주고 있다	fix	rewrites
+cx:crit-fixes-1:90	きちんとこちらに確認を取ろうとして下さったお人柄を信用します	has:취하려고 해 주신	fix	rewrites
+cx:crit-fixes-1:90	「映画と同じで、夢だって、励まそうとしてくれて、癒やそうとしてくれてるんじゃないかしら」	has:치유하려고 해 주고 있는	fix	rewrites
+cx:crit-fixes-1:90	助けてくれた。	!rule:cx:crit-fixes-1:90	keep	rewrites
+cx:crit-fixes-1:90	助けようとした。	!rule:cx:crit-fixes-1:90	keep	rewrites
+cx:crit-fixes-1:100	「あっぶな！　どうにかかわしたのよさっ」	「위험해! 어떻게든 피했어」	fix	rewrites
+cx:crit-fixes-1:100	俺はとっさに後ろに下がってかわす。	나는 순간에 뒤로 물러나 피한다.	fix	rewrites
+cx:crit-fixes-1:100	ナオの手加減のない攻撃を、セリカは軽々とかわしカウンターを決める。	has:가볍게 피해 카운터	fix	rewrites
+cx:crit-fixes-1:100	答えずにかわしたいところだが……。	대답하지 않고 피하고 싶지만…….	fix	rewrites
+cx:crit-fixes-1:100	言葉をかわした。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	視線をかわす二人。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:110	「けどよ、物なら父さんの時みたく誰も居なけりゃ…」	has:아버지 때처럼 아무도	fix	rewrites
+cx:crit-fixes-1:110	そしてそれが当たり前のようにマスコミが美談みたく扱ってんの。	has:미담처럼 취급하고	fix	rewrites
+cx:crit-fixes-1:110	本が読みたくて転生したいと望んだ。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:110	映画をみたくない。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:120	どっちも変わらないと岩城は強く思う。	어느 쪽도 변함없다고 이와키는 강하게 생각한다.	fix	rewrites
+cx:crit-fixes-1:120	私は可愛いと誰もが言うけれど、	나는 귀엽다고 누구나 말하지만,	fix	rewrites
+cx:crit-fixes-1:120	寒いと彼は家にいる。	!rule:cx:crit-fixes-1:120	keep	rewrites
+cx:crit-fixes-1:120	「ケートク生への差別は、なんとかしないといけない問題です。」	has:하지 않으면 안되는	keep	rewrites
+cx:crit-fixes-1:125	まさに渡りに船。率直にこの申し出をうれしく思った。	has:기쁘게 생각했다	fix	rewrites
+cx:crit-fixes-1:125	司令にご心配をかけして、申し訳なく思います。	has:미안하게 생각합니다	fix	rewrites
+cx:crit-fixes-1:125	「北条、悪いけど…僕も優勝賞金を狙ってるんだ。悪く思うなよぉ！」	has:나쁘게 생각하지 마	fix	rewrites
+cx:crit-fixes-1:125	大変申し訳ありません。損傷を修理したく思います。	has:수리하고 싶다고 생각합니다	keep	rewrites
+cx:crit-fixes-1:125	寒いと思う。	!rule:cx:crit-fixes-1:125	keep	rewrites
+voice:shorter-te	後ろから掴まれて、動けない。	뒤에서 잡혀, 움직일 수 없다.	fix	voice
+voice:shorter-te	鎖に繋がれて、動けない。	쇠사슬에 연결되어, 움직일 수 없다.	fix	voice
+voice:shorter-te	エルはここにいない。だが、今日まで一緒に戦ってきた。忌々しいＰｅＴＳという呪いで繋がれたまま。	has:저주로 연결된 채로	fix	voice
+voice:shorter-te	「筧さんと繋がれたから……」	「카케이 씨와 연결될 수 있었으니까……」	keep	voice
+voice:shorter-te	佐藤さんと繋がれて嬉しい。	사토 씨와 연결될 수 있어서 기쁘다.	keep	voice
+voice:shorter-te	手すりに掴まれても怖い。	난간에 매달릴 수 있어도 무섭다.	keep	voice
+voice:shorter-te	リビングを出ようとすると、腕を掴まれた。	거실을 나오려고 하니, 팔을 잡혔다.	keep	voice
+constraint:shi-before-nitsuite	でも、私は少なくともこの二人の死についてだけは、かなり具体的に知っている。	has:두 사람의 죽음에	fix	lookup
+constraint:shi-before-nitsuite	死についての考察。	죽음에 대한 고찰.	fix	lookup
+constraint:shi-before-nitsuite	死にたい。	lacks:죽음	keep	lookup
+constraint:shi-before-nitsuite	死にかけた。	lacks:죽음	keep	lookup
+constraint:chikatte-before-ending	「誓っても良い」	「맹세해도 좋다」	fix	lookup
+constraint:chikatte-before-ending	私ゃ今年こそはおやっさんの右腕を見付け出すと誓ってますが、……さっぱり見付かってません。	has:맹세하고 있습니다만	fix	lookup
+constraint:chikatte-before-ending	誓ってやる！	맹세해 준다!	fix	lookup
+constraint:chikatte-before-ending	私も誓って言える。	나도 맹세코 말할 수 있다.	keep	lookup
+constraint:hai-before-negative	そして、悟史くんを「鬼隠し」にした人間は、……そう遠くにはいない。	has:그렇게 멀리는 없다	fix	lookup
+constraint:hai-before-negative	近くにはいなかった。	가까운 곳에는 없었다.	keep	lookup
+constraint:hai-before-negative	はい、ないです。	네, 없습니다.	keep	lookup
+constraint:hai-before-negative	ここにはいない。	여기에는 없다.	keep	lookup
+cx:crit-fixes-1:80	「城壁よ、中には城がある。」	has:성벽이야,	keep	rewrites
+cx:crit-fixes-1:130	そこで僕だけに向き直る。	거기서 나에게만 돌아선다.	fix	rewrites
+cx:crit-fixes-1:130	「最終的には部の利益になるんだから、俺だけに感謝を強要するな」	has:나에게만 감사를	fix	rewrites
+cx:crit-fixes-1:130	「風見さんだけに任せるわけにもいかないしね」	has:카자미 씨에게만 맡길	fix	rewrites
+cx:crit-fixes-1:130	沙都子は勝者だけに許される優雅さで、涼しげに声をかけてくる。	has:승자에게만 허락되는	fix	rewrites
+cx:crit-fixes-1:130	事が事だけに仕方ないだろう。	!rule:cx:crit-fixes-1:130	keep	rewrites
+cx:crit-fixes-1:130	期待していただけに残念だ。	!rule:cx:crit-fixes-1:130	keep	rewrites
+cx:crit-fixes-1:130	右側だけに団子を作る。	!rule:cx:crit-fixes-1:130	keep	rewrites
+cx:crit-fixes-1:140	Three O'clock! …そうか、眠れないのか。 仕方ない、ラム酒でやるか？	has:어쩔 수 없다, 럼으로	fix	rewrites
+cx:crit-fixes-1:140	駆逐艦杉！敵艦隊発見！やるしかねぇ、艦隊！合戦用意！	has:할 수밖에 없다, 함대	fix	rewrites
+cx:crit-fixes-1:140	「しょうがない、ママにあげよ……」	has:어쩔 수 없다,	fix	rewrites
+cx:crit-fixes-1:140	仕方ない、買い物に行こう。	has:어쩔 수 없다,	fix	rewrites
+cx:crit-fixes-1:140	まあ、仕方ない、です！	!rule:cx:crit-fixes-1:140	keep	rewrites
+cx:crit-fixes-1:140	ち、下がるしかない、のか…？	!rule:cx:crit-fixes-1:140	keep	rewrites
+cx:crit-fixes-1:140	美しい、白い花。	!rule:cx:crit-fixes-1:140	keep	rewrites
+cx:crit-fixes-1:150	「なな、何をするんだ圭一！」	has:「나나, 뭘	fix	rewrites
+cx:crit-fixes-1:150	「なな、…何でもないよ！！」	has:「나나, …	fix	rewrites
+cx:crit-fixes-1:150	仕方ない、ラム酒でやるか？	!rule:cx:crit-fixes-1:150	keep	rewrites
+cx:crit-fixes-1:160	まさに大好物を取り上げられた赤子のように、今にも泣き出しそうな表情で兄に懇願する。	has:좋아하는 음식을 빼앗긴	fix	rewrites
+cx:crit-fixes-1:160	その唯一を取り上げられたエリザベスは、実に潔く、クロードを手放すことを決めたのだ。	has:유일을 빼앗긴	fix	rewrites
+cx:crit-fixes-1:160	わたしが動き回らないように靴をトゥーリに取り上げられてしまった以上、仕方ない。	has:빼앗겨버린 이상	fix	rewrites
+cx:crit-fixes-1:160	よく、レンジャー訓練は、報道番組でも取り上げられ、その厳しさは誰もが知るところである。	!rule:cx:crit-fixes-1:160	keep	rewrites
+cx:crit-fixes-1:160	ニュースにも新聞にも取り上げられることはなかった。	!rule:cx:crit-fixes-1:160	keep	rewrites
+cx:crit-fixes-1:170	ノエルの垂直切りはいとも簡単に父の木剣でガードされ弾かれる。	has:가드되고 튕겨진다	fix	rewrites
+cx:crit-fixes-1:170	シールドのような物に弾かれたのだが、	has:물건에 튕겨졌는데	fix	rewrites
+cx:crit-fixes-1:170	ピアノが弾かれる音がした。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	先生の声に弾かれたように前を向く。	!rule:cx:crit-fixes-1:170	keep	rewrites
+constraint:niwa-before-zuka	口の中にわずかに残っていた物が、水分を吸ってより深い香りを出してくれる。	has:입속에 조금 남아 있던	fix	lookup
+constraint:niwa-before-zuka	屋敷の別館にわずかな使用人と一緒に押し込められて、	has:별관에 약간의 하인과	fix	lookup
+constraint:niwa-before-zuka	庭にわずかな花。	뜰에 약간의 꽃.	fix	lookup
+cx:crit-fixes-1:10	だが、文明が発展していくに連れて彼等は己の主義主張や利権を巡って戦争を繰り返すようになった。	has:이권을 둘러싸고 전쟁을	fix	rewrites
+cx:crit-fixes-1:10	「全く……ユージの隣を巡って争うなんてみっともないわね」	has:옆을 둘러싸고 싸우다니	fix	rewrites
+cx:crit-fixes-1:10	王位を巡り、兄弟が争った。	has:왕위를 둘러싸고,	fix	rewrites
+cx:crit-fixes-1:20	とある事情で……世界守護結界を巡る攻防戦は、ユカには、ちょっとトラウマになっている節があるの。	has:결계를 둘러싼 공방전은	fix	rewrites
+cx:crit-fixes-1:10	血が体を巡る。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:30	血が体を巡る。	has:피가 몸을 돈다	keep	rewrites
+cx:crit-fixes-1:20	城を巡った。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:30	城を巡った。	has:성을 돌았다	keep	rewrites
+cx:crit-fixes-1:10	寺を巡り歩く。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:10	すると、自分の体の感覚の中にあの時感じた暖かいものが体を巡っているのを感じた。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:30	答えの出ない問いが、頭の中を巡る。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:10	村の散策を始めた生徒たちは、広場や見晴台、商店街など目に付く場所を次から次に巡っていく。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:10	アヤメと名乗った聖女は国を巡り、聖女の気配に危機感を強めた魔族を討ち払った。	!rule:cx:crit-fixes-1:10	keep	rewrites
+cx:crit-fixes-1:20	そんな千里の後を追いながら、巡った部活を思い起こす。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:30	恐怖が身体の中を駆け巡る。	!rule:cx:crit-fixes-1:30	keep	rewrites
+cx:crit-fixes-1:100	間一髪でかわしたが、後ろに痺れ薬で倒れていた盗賊達はそうはいかない	has:절박함으로 피했지만	fix	rewrites
+cx:crit-fixes-1:100	廊下で面倒くさい奴らに絡まれたが、いつものように適当にかわす。	has:적당히 피한다	fix	rewrites
+cx:crit-fixes-1:100	たやすくかわし、見たこともない足さばきだ。	has:용이하게 피해,	fix	rewrites
+cx:crit-fixes-1:100	そうくる事は分かっていた。かわしながら後ろへ下がって間合いを取る。	has:피하면서 뒤에	fix	rewrites
+cx:crit-fixes-1:100	エルが放った鋭い攻撃を、俺は寸前でかわした。	has:직전에 피했다	fix	rewrites
+cx:crit-fixes-1:100	トドメを刺すはずの爪を、エルが紙一重でかわした。	has:근소한 차이로 피했다	fix	rewrites
+cx:crit-fixes-1:100	予想外の方向から繰り出された斬撃を、ユーキは危うくかわした。	has:하마터면 피했다	fix	rewrites
+cx:crit-fixes-1:100	突きはどうにかかわしたものの、バランスを崩したところを打たれてしまった。	has:어떻게든 피했지만	fix	rewrites
+cx:crit-fixes-1:100	遅れて、頬から鮮血が噴き出す。かわしきれず、刃の先端がかすめたのだ。	has:피하지 못하고	fix	rewrites
+cx:crit-fixes-1:100	セリカが飛びかかるが、アールは何事もなかったようにかわし、セリカの腹に膝蹴りを打ち込んだ。	has:없는 것처럼 피해,	fix	rewrites
+cx:crit-fixes-1:100	さり気なくかわすのが信条の梨花ちゃん。	has:아무렇지도 않게 피하는 것이	fix	rewrites
+cx:crit-fixes-1:100	固い握手がかわされた。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	互いにかわした約束。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	二人がかわした言葉。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	三矢の軽口をかわす。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	だが華井と交わした契約を考えると、話し合いすら出来ない。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:100	いつからだろう、親とあまり言葉を交わさなくなったのは。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:80	「……少年よ、残念ながら例の写真はまだ保存されているよ？」	has:「……소년이여,	fix	rewrites
+cx:crit-fixes-1:80	「神よ、我らが神よ！」	has:「신이여,	fix	rewrites
+cx:crit-fixes-1:80	4時だ。相棒よ、今日は寝ずの番をするつもりか？	has:파트너여, 오늘은	fix	rewrites
+cx:crit-fixes-1:80	午後7時だ。おう提督よ、夕飯はどうするんだ？	has:제독이여, 저녁은	fix	rewrites
+cx:crit-fixes-1:80	提督よ、貴様も苦労しているのだな。	has:제독이여, 네놈도	fix	rewrites
+cx:crit-fixes-1:80	Ammiraglio...じゃなかった。提督さんよ、伊503、抜錨するお。	has:제독님이여,	fix	rewrites
+cx:crit-fixes-1:80	「お母さんよ、開けて」	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:80	「この子、私の娘よ、可愛いでしょ」	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:80	ママよ、早く来て。	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:80	うちの子よ、よろしくね。	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:80	「クイーン、こいつが隊長よ、やっちゃって！」	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:80	「店の者よ、それで良いか？」	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:80	「……って、させるかぁ～～！　くせ者よ、であえであえ～！」	!rule:cx:crit-fixes-1:80	keep	rewrites
+cx:crit-fixes-1:110	「前みたく、気軽におやつ手当みたいな話はできないのです」	has:전처럼, 부담없이	fix	rewrites
+cx:crit-fixes-1:110	バカみたく笑う。	바보처럼 웃는다.	fix	rewrites
+cx:crit-fixes-1:110	映画みたくない？	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:110	映画みたくなかった。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:110	映画みたくて行った。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:110	海を見てみたくなった。	!rule:cx:crit-fixes-1:110	keep	rewrites
+cx:crit-fixes-1:63	魔獣が全て、元ヒトだったかもしれないと知った後も、変わることなく。	has:모른다는 걸 안 후도	fix	rewrites
+cx:crit-fixes-1:63	私が人を殺さないと知っているせいか、銃口を向けられても焦る様子はない。	has:죽이지 않는다는 걸 알고	fix	rewrites
+cx:crit-fixes-1:63	自分だけが汚れ役じゃないと知って安心しているようだ。	has:아니라는 걸 알아서	fix	rewrites
+cx:crit-fixes-1:63	彼が来ないと知った。	그가 오지 않는다는 걸 알았다.	fix	rewrites
+cx:crit-fixes-1:65	食べてみると分かった。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:63	食べてみると分かった。	!rule:cx:crit-fixes-1:63	keep	rewrites
+cx:crit-fixes-1:65	押すと分かる。	!rule:cx:crit-fixes-1:65	keep	rewrites
+cx:crit-fixes-1:160	本を書いて新聞に取り上げられた。	!rule:cx:crit-fixes-1:160	keep	rewrites
+cx:crit-fixes-1:160	証は間違いなく俺のデータで通ったので、なんとか船は取り上げられずに済んだ。	!rule:cx:crit-fixes-1:160	keep	rewrites
+cx:crit-fixes-1:160	たったひとつの切り札を取り上げられて、お情けで結婚して貰うなど、我慢ならない。	has:비장의 카드를 빼앗기고	fix	rewrites
+cx:crit-fixes-1:170	剣が弾かれた。	검이 튕겨졌다.	fix	rewrites
+cx:crit-fixes-1:170	放たれた矢は盾に弾かれた。	has:튕겨졌다	fix	rewrites
+cx:crit-fixes-1:170	彼にショパンを弾かれた。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	ワルツが弾かれた。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	空き缶は、物体に接触する直前でパンっと弾かれどこかにすっとんでいく。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	社交界から弾かれそうだけどな。	!rule:cx:crit-fixes-1:170	keep	rewrites
+voice:shorter-te	手すりに掴まれて助かった。	has:매달릴 수 있어서	keep	voice
+voice:shorter-te	吊り革に掴まれて安心した。	has:매달릴 수 있어서	keep	voice
+voice:shorter-te	だが、ジュリとジョンは、それぞれ正造と雪江に腕を強く掴まれて、勢い余って尻餅をついてしまった。	has:팔을 강하게 잡혀,	fix	voice
+voice:shorter-te	ハルトは、掴まれていた腕をねじりながら、横薙ぎに一閃。	has:잡히던 팔을	fix	voice
+voice:shorter-te	彼に掴まれて、動けない。	그에게 잡혀, 움직일 수 없다.	fix	voice
+cx:crit-fixes-1:5	駅について電話した。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	家について一息ついた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	あの時は外側についてたでっかい鏡を動かすんだと思ったけど……。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について。	역에 대해.	fix	rewrites
+cx:crit-fixes-1:5	「駅について」	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	この『店』について尋ねたサラに、この店の主人はごく簡単に答えた。	has:『가게』에 대해 물은	fix	rewrites
+cx:crit-fixes-1:5	10分以上の遅れが見込まれる場合に、その路線名と運行区間について表示します。	has:운행 구간에 대해 표시	fix	rewrites
+cx:crit-fixes-1:5	当サイトについて	당사이트에 대해	fix	rewrites
+cx:crit-fixes-1:5	明知鉄道について	아케치 철도에 대해	fix	rewrites
+cx:crit-fixes-1:5	もし喋れたら、遊園地について質問していたかもしれない。	has:놀이공원에 대해 질문	fix	rewrites
+cx:crit-fixes-1:5	エナは久しぶりに遊園地について考えた。	has:놀이공원에 대해 생각했다	fix	rewrites
+cx:crit-fixes-1:5	彼らは自分の経営する会社についてで頭がいっぱいだったの。	has:회사에 대해로	fix	rewrites
+cx:crit-fixes-1:5	港について説明した。	항에 대해 설명했다.	fix	rewrites
+cx:crit-fixes-1:50	<おじさんたちは 早く結婚して跡取りを作れなどと言い立てる>	has:만들어라	fix	rewrites
+cx:crit-fixes-1:50	読めなどしない。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:50	帰れなど言わない。	!rule:cx:crit-fixes-1:50	keep	rewrites
+cx:crit-fixes-1:20	世界遺産を巡る旅に出た。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:20	文化遺産を巡るツアー。	!rule:cx:crit-fixes-1:20	keep	rewrites
+cx:crit-fixes-1:20	遺産を巡る争い。	유산을 둘러싼 분쟁.	fix	rewrites
+cx:crit-fixes-1:5	駅について知り合いに会った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	家について言葉を失った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について書類を出した。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について記念写真を撮った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について学生たちと別れた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について話題の店に入った。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:100	かわした約束を守る。	!rule:cx:crit-fixes-1:100	keep	rewrites
+cx:crit-fixes-1:170	彼女の手で弾かれた曲。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:170	名手の手で弾かれるバイオリン。	!rule:cx:crit-fixes-1:170	keep	rewrites
+cx:crit-fixes-1:160	問題をテレビで取り上げられた。	!rule:cx:crit-fixes-1:160	keep	rewrites
+voice:shorter-te	触手に掴まれて、動けない。	has:촉수에 잡혀,	fix	voice
+voice:shorter-te	魔物に掴まれて、動けない。	has:마물에 잡혀,	fix	voice
+voice:shorter-te	ロープに掴まれて助かった。	has:매달릴 수 있어서	keep	voice
+cx:crit-fixes-1:5	空港について、すぐ会議に向かった。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	空港について会議に出た。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	会場について、講演を聞いた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について、思ったより人が多かった。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について、思った以上に混んでいた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	城について、行ったことのある人に聞いた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	この宿について、泊まった人の感想を読んだ。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	この城について、少し話そう。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	東京について、ずっと行きたいと思っていました。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	寺について、住職に挨拶した。	!rule:cx:crit-fixes-1:5	keep	rewrites

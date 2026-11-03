@@ -1226,7 +1226,26 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     // The shorter verb's passive (腕を掴まれた), with its object or after an agent in a narrative form;
     // else the potential of the verb in ーaる stays (繋がれると思った).
     if (form == VoiceForm::Shorter) {
-        return ObjectBefore(it) || (agent != nullptr && NarrativePassive(it, rest)) ? Voice::Passive : Voice::None;
+        if (ObjectBefore(it) || (agent != nullptr && NarrativePassive(it, rest))) return Voice::Passive;
+        // A て form, a progressive or たまま is a state one is put in (後ろから掴まれて, 呪いで繋がれたまま), not
+        // what one manages: but for ても and a partner in と right before (佐藤さんと繋がれて).
+        // A thing of noun.hold-on in に before 掴まる or 捕まる is what one holds on to (手すりに掴まれて), not
+        // who grabs (触手に掴まれて stays passive).
+        const bool partner = it->prev != nullptr && it->prev->group->surface == "と";
+        const std::string_view surface = it->group->surface;
+        bool heldThing = false;
+        if (surface.starts_with("掴") || surface.starts_with("捕") || surface.starts_with("つか")) {
+            for (const Item* p = it->prev; p != nullptr && !ClauseBreak(p); p = p->prev) {
+                const std::string_view s = p->group->surface;
+                if (s != "に" && s != "にも" && s != "には") continue;
+                const Item* a = p->prev;
+                heldThing = a != nullptr && dict::EndsWithMember(HDTRANS_CLASS("noun.hold-on"), a->group->surface) > 0;
+                break;
+            }
+        }
+        return !partner && !heldThing && ((rest.starts_with("て") && !rest.starts_with("ても")) || rest.starts_with("たまま"))
+                   ? Voice::Passive
+                   : Voice::None;
     }
     // The られ of an ichidan verb that takes no object has no Korean passive (寝られたら困る), so only
     // its form and clause decide it; an object in its clause or in the word (服を着) shows one.

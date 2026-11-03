@@ -41,3 +41,12 @@ HD_TEST(output_josa_group_seo) {
         HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation(std::string(c.word) + "(이)서", {}, false), std::string(c.form));
     }
 }
+
+HD_TEST(output_josa_vocative_yeo) {
+    const struct { const char* word; const char* form; } cases[] = {
+        {"재상", "재상이여"}, {"제독", "제독이여"}, {"용사", "용사여"}, {"파트너", "파트너여"},
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(hdTrans::output::ApplyJosaAlternation(std::string(c.word) + "(이)여", {}, false), std::string(c.form));
+    }
+}

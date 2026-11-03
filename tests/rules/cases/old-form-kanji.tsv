@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 normalize:old-form	なんで弟はあんな惡ガキなのかしら。	왜 남동생은 저런 개구쟁이인 걸까.	fix	normalize
 normalize:old-form	こんな粗惡なパーツ、使うかなあ！？	이런 투박한 파츠, 쓸까!?	fix	normalize
-normalize:old-form	惡く思わないでね。	나쁘다고 생각하지 마.	fix	normalize
+normalize:old-form	惡く思わないでね。	나쁘게 생각하지 마.	fix	normalize
 normalize:old-form	惡いな。俺も出口を探してる口なんだ。	미안하네. 나도 출구를 찾고 있는 입이야.	fix	normalize
 normalize:old-form	俺は惡くない。	나는 나쁘지 않다.	fix	normalize
 normalize:old-form	足の調子が惡そうだな。	다리의 상태가 안 좋아 보이네.	fix	normalize
