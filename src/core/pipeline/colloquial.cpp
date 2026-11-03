@@ -1402,11 +1402,16 @@ bool ConjugatesFrom(const dict::Snapshot& snap, std::u32string_view key, std::u3
     for (const dict::Candidate& c : records) {
         if (c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
         const int kind = c.codes->partText[3] - '0';
+        const bool ichidan = word::Conjugation(kind, 5) == "よう";
         for (int b = 0; b < word::kConjugationBranches; b++) {
             const std::string_view f = word::Conjugation(kind, b);
             if (!f.empty() && (f.front() == '(' || f == "XX")) continue;
-            // An empty ending is the bare stem of an ichidan verb before its auxiliaries (出ない, 付けなよ, 付けんと).
-            if (f.empty() ? !rest.empty() && In(rest[0], U"るれろよたてなまさらずん") : rest.starts_with(DecodeText(f))) return true;
+            // An empty ending is the bare stem of an ichidan verb before its auxiliaries (出ない, 付けなよ); before
+            // the ん of a negative only of an ichidan kind (付けんと, not 気をつか of 気ぃつかんかった).
+            if (f.empty() ? !rest.empty() && In(rest[0], ichidan ? U"るれろよたてなまさらずん" : U"るれろよたてなまさらず")
+                          : rest.starts_with(DecodeText(f))) {
+                return true;
+            }
         }
     }
     return false;
@@ -1489,21 +1494,28 @@ std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot
         }
         size_t start = i - 1;
         while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
-        // The whole kanji run is the stem of a verb with that volitional (帰ろ, 行こ); before も, の and
-        // と, which are also particles, only a stem that is no noun (not 力も, 生も, 野分と).
-        const std::string key = EncodeText(rs.substr(start, i - start));
-        const std::vector<dict::Candidate> records = snap.RetrieveRecords(key, dict::LookupMode::General);
+        // The whole kanji run is the stem of a verb with that volitional (帰ろ, 行こ), or the run after a
+        // noun of two kanji or more whose particle is dropped (元気出そ, 洗濯物干そ); before も, の and と,
+        // which are also particles, only a stem that is no noun (not 力も, 生も, 野分と).
         const std::string volitional = EncodeText(std::u32string{rs[i], U'う'});
         bool verb = false, noun = false, ichidan = false;
-        for (const dict::Candidate& c : records) {
-            if (c.codes == nullptr || c.codes->partText.empty()) continue;
-            noun = noun || c.codes->partText[0] == 'N';
-            if (c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
-            const std::string_view v = word::Conjugation(c.codes->partText[3] - '0', 5);
-            verb = verb || v == volitional;
-            ichidan = ichidan || v == "よう";  // 居ろ is the imperative of 居る
+        for (size_t k = start; k < i && !verb; k++) {
+            if (k > start && (k - start < 2 || !isKey(std::u32string_view(rs).substr(start, k - start)))) continue;
+            const std::string key = EncodeText(rs.substr(k, i - k));
+            noun = ichidan = false;
+            for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+                if (c.codes == nullptr || c.codes->partText.empty()) continue;
+                noun = noun || c.codes->partText[0] == 'N';
+                if (c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
+                const std::string_view v = word::Conjugation(c.codes->partText[3] - '0', 5);
+                verb = verb || v == volitional;
+                ichidan = ichidan || v == "よう";  // 居ろ is the imperative of 居る, but 着こ the volitional of 着く
+            }
+            if (verb) start = k;
         }
-        if (!verb || ichidan || (noun && In(rs[i], U"もぼのと")) || isKey(std::u32string_view(rs).substr(start, i + 1 - start))) continue;
+        if (!verb || (ichidan && rs[i] == U'ろ') || (noun && In(rs[i], U"もぼのと")) || isKey(std::u32string_view(rs).substr(start, i + 1 - start))) {
+            continue;
+        }
         insert(i);
     }
     // An ichidan stem before よ (寝よか, もう起きよ): only where it is plainly said, before か, or after もう,
@@ -2016,7 +2028,7 @@ namespace {
 
 // Whether the run of ～ at [i, end) after the kanji at i - 1 draws out a verb or adjective stem before
 // its ending (寒～い, 面白～い, 見～て, 行～こう, 会～いたい): an adjective stem, or a verb in kanji whose
-// conjugation the kana after the run start. After a noun or a noun of する, before a word such as そして,
+// conjugation the kana after the run start (間違～った, 今行～く). After a noun or a noun of する, before a word such as そして,
 // it is a mark of its own (死亡～そして転生～, 猫～そして). A ー or a small vowel after a kanji stays a
 // drawl (気ーつけな, 気ぃつけ).
 bool KanjiStemDrawn(const Emphasis& e, const dict::Snapshot& snap, std::u32string_view rs, size_t from, size_t i, size_t end) {
@@ -2024,7 +2036,16 @@ bool KanjiStemDrawn(const Emphasis& e, const dict::Snapshot& snap, std::u32strin
     size_t start = i - 1;
     while (start > from && IsKanjiRune(rs[start - 1])) start--;
     for (size_t k = start; k < i; k++) {
-        if (ConjugatesFrom(snap, rs.substr(k, i - k), rs.substr(end))) return i - k == 1 && (k == 0 || !IsKanjiRune(rs[k - 1]));
+        if (!ConjugatesFrom(snap, rs.substr(k, i - k), rs.substr(end))) continue;
+        // A one-kanji stem after a kanji that makes a common word with it, no proper noun, is the end of
+        // that word (第一話～, but 今行～く).
+        if (i - k > 1 || k == 0 || !IsKanjiRune(rs[k - 1])) return true;
+        const std::string pair = EncodeText(rs.substr(k - 1, 2));
+        const std::vector<dict::Candidate> records = snap.RetrieveRecords(pair, dict::LookupMode::General);
+        for (const dict::Candidate& c : records) {
+            if (c.codes != nullptr && c.codes->partText != "N130") return false;
+        }
+        return true;
     }
     return false;
 }

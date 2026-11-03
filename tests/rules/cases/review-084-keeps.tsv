@@ -3,14 +3,24 @@ rule	input	expected	kind	layer
 sound:clipped-volitional	ここに居ろ！	여기에 있어라!	keep	sound
 sound:clipped-volitional	しよーぜ！	하자구!	fix	sound
 sound:clipped-volitional	練習しよーね	연습하자	fix	sound
+sound:clipped-volitional	元気出そ！	기운 내자!	fix	sound
+sound:clipped-volitional	洗濯物干そ	세탁물 널자	fix	sound
+sound:clipped-volitional	野分と	노와키와	keep	sound
 sound:wave-dash-after-kanji	行～こう！	가자!	keep	sound
 sound:wave-dash-after-kanji	会～いたい	만나고 싶다	keep	sound
 sound:wave-dash-after-kanji	飲～もう	마시자	keep	sound
+sound:wave-dash-after-kanji	今行～く！	지금 간다~!	keep	sound
+sound:wave-dash-after-kanji	今帰～る	지금 돌아간다~	keep	sound
+sound:wave-dash-after-kanji	一人行～く	한 사람 간다~	keep	sound
+sound:wave-dash-after-kanji	皆来～て！	모두 와~!	keep	sound
+sound:wave-dash-after-kanji	間違～った	잘못했다	keep	sound
+sound:wave-dash-after-kanji	第一話～そして	제1화~그리고	fix	sound
 sound:drawn-object	気ぃついたら朝だった	정신을 차려 보니 아침이었다	fix	sound
 sound:drawn-object	目ぇ回った	눈이 핑핑 돌았다	fix	sound
 sound:drawn-object	声ー出ない	목소리가 나오지 않는다	fix	sound
 sound:drawn-object	帰り道も気ぃつけんと…	has:조심	keep	sound
 sound:drawn-object	気ぃ利くじゃん！	눈치가 있잖아!	fix	sound
+sound:drawn-object	気ぃつかんかった	깨닫지 않았다	fix	sound
 sound:stutter-spaced	あ、    あの	아,    저기	keep	sound
 cx:novel-fixes-2:339	騎士の彼女は剣を抜いた。	!rule:cx:novel-fixes-2:339	keep	rewrites
 cx:novel-fixes-2:339	メイドの彼女は頭を下げた	!rule:cx:novel-fixes-2:339	keep	rewrites
