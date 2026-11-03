@@ -1,0 +1,10 @@
+# 규칙: SND-1
+rule	input	expected	kind	layer
+sound:stutter-spaced	どっ.. どうしよう	어.. 어떻게 하지	fix	sound
+sound:stutter-spaced	あ、 あの	저, 저기	fix	sound
+sound:stutter-spaced	わ、 私は	나, 나는	fix	sound
+sound:stutter-spaced	そ… そうだね	그… 그러게	fix	sound
+sound:stutter-spaced	どっ..どうしよう	어..어떻게 하지	keep	sound
+sound:stutter-spaced	お　お…　俺のプリン	오 오… 내 푸딩	keep	sound
+sound:stutter-spaced	1話  長めのプロローグ	1화  약간 긴 프롤로그	keep	sound
+sound:stutter-spaced	夜…か… 飛龍さん…	밤…이나… 히류 씨…	keep	sound

@@ -1,0 +1,18 @@
+# 규칙: SND-22
+rule	input	expected	kind	layer
+sound:mii-final	ボクは平気なのですよ、みー	나는 괜찮습니다, 미~	fix	sound
+sound:mii-final	「…みぃ…。」	「…미이….」	fix	sound
+sound:mii-final	みぃ☆	미이☆	fix	sound
+sound:mii-final	みー。	미~.	fix	sound
+sound:mii-final	うん、みー…	응, 미~…	fix	sound
+sound:mii-final	みーつけた	찾아냈다	keep	sound
+sound:mii-final	みーっけ	찾았다	keep	sound
+sound:mii-final	みーっ！	미~!	fix	sound
+sound:mii-final	みーんな知ってる	모두 알고 있다	keep	sound
+sound:mii-final	おやすみぃ…	잘 자~…	keep	sound
+sound:mii-final	おやすみー	잘 자~	keep	sound
+sound:mii-final	みぃつけた	찾아냈다	keep	sound
+sound:mii-final	みぃーつけた	찾아냈다	keep	sound
+sound:mii-final	みぃんな	모두	keep	sound
+sound:mii-final	みぃむが秘書	미무가 비서	keep	sound
+sound:mii-final	あーさみぃー。	아-춥다.	keep	sound
