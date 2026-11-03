@@ -384,6 +384,7 @@
 //= suru.verbal-noun-start	Starts of the する, なさる or できる that join the verbal noun before them (キスしたい 키스하고 싶다, 我慢できない, 購入なさる).
 //= suru.verbal-noun-whole	Forms of する written with the marker of 하다 that join the verbal noun before them (即答する 즉답하다).
 //= verb.casual-state	Starts of Japanese verbs that state (違う, 似る; 高すぎる after an adjective), whatever their Korean.
+//= verb.chant-volitional	Sino-Japanese verb nouns of a spell or an oath whose せん is the literary volitional, not the old negative of する (浄化せん！, 顕現せん, 召喚せん); the negative reading skips them.
 //= verb.observed-state	Stems of Japanese verbs of a state one perceives, feels or is in (分かる, 見える, 目立つ, 泣ける), whose な at the end of a sentence observes that state instead of forbidding it (分かるな 아는구나).
 //= verb.unwilled	Dictionary forms of verbs of being, knowing, perceiving, ability or a happening that no one does on purpose (ある, 分かる, 見える, できる, 気づく, 降る, 壊れる): a negative question after one asks about a fact; it neither invites (MNG-7) nor orders (MNG-8): 雨が降らないか！ 비가 오지 않는가!
 //= verb.janai-state	Stems of ある and いる, before which a sentence-final んじゃない asks or tells what is so and forbids nothing (興味あるんじゃない, そこにいるんじゃない); いる after the て of a て form is ている (spec MNG-6).
@@ -5529,6 +5530,43 @@ verb.casual-state	流行
 verb.casual-state	はや
 verb.casual-state	似合
 verb.casual-state	限
+verb.chant-volitional	召喚
+verb.chant-volitional	召還
+verb.chant-volitional	顕現
+verb.chant-volitional	顕界
+verb.chant-volitional	降臨
+verb.chant-volitional	再臨
+verb.chant-volitional	光臨
+verb.chant-volitional	降誕
+verb.chant-volitional	具現
+verb.chant-volitional	現界
+verb.chant-volitional	招来
+verb.chant-volitional	浄化
+verb.chant-volitional	成就
+verb.chant-volitional	創造
+verb.chant-volitional	殲滅
+verb.chant-volitional	湮滅
+verb.chant-volitional	撃滅
+verb.chant-volitional	討滅
+verb.chant-volitional	誅滅
+verb.chant-volitional	誅戮
+verb.chant-volitional	滅却
+verb.chant-volitional	蹂躙
+verb.chant-volitional	超越
+verb.chant-volitional	超克
+verb.chant-volitional	掌握
+verb.chant-volitional	付託
+verb.chant-volitional	継承
+verb.chant-volitional	回帰
+verb.chant-volitional	祝福
+verb.chant-volitional	封印
+verb.chant-volitional	開錠
+verb.chant-volitional	結実
+verb.chant-volitional	平定
+verb.chant-volitional	再興
+verb.chant-volitional	解放
+verb.chant-volitional	開放
+verb.chant-volitional	抹殺
 verb.observed-state	分か
 verb.observed-state	わか
 verb.observed-state	解か

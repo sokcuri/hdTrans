@@ -46,6 +46,16 @@ bool SuruAfterMo(std::string_view s) {
     return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
 }
 
+// Whether は at the start of s is followed by a negative of する (負けはしない, 変わりはしません, 許しはせず):
+// the continuative before it is the verb, denied with stress, not a noun.
+bool SuruNegativeAfterWa(std::string_view s) {
+    if (!s.starts_with("は")) return false;
+    const std::string_view r = s.substr(std::string_view("は").size());
+    for (const std::string_view neg : {"しな", "しませ", "せず"})
+        if (r.starts_with(neg)) return true;
+    return false;
+}
+
 // Whether a godan continuative (pattern kind not ichidan, する, ずる or くる) is the noun of
 // manner before s: the よう of 疑いようもない, やりようがない, 品のないなさりよう！ (verb.way-of-doing).
 // An ichidan stem keeps its volitional よう.
@@ -471,6 +481,27 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
         return false;
     };
+    // A continuative before は and a negative する (SuruNegativeAfterWa), where no word of the dictionary
+    // starts in the stem and reaches past the は (ありはしない), that no attributive な or の before it makes a noun
+    // (ような真似はしない; not みんな), and that is no noun of what one senses, whose する is 들다 or 나다 (感じはしない, 匂いはしない:
+    // noun.sensed, noun.feeling-suru).
+    auto stressedNegative = [&]() {
+        if (!SuruNegativeAfterWa(after())) return false;
+        const std::string_view head = std::string_view(text).substr(0, static_cast<std::size_t>(start));
+        if (head.ends_with("の") || (head.ends_with("な") && !head.ends_with("みんな"))) return false;
+        const std::string form = surface + std::string(tail.substr(0, static_cast<std::size_t>(pattern())));
+        if (dict::InClass(HDTRANS_CLASS("noun.sensed"), form) || dict::InClass(HDTRANS_CLASS("noun.feeling-suru"), form)) {
+            return false;
+        }
+        const std::size_t reach = static_cast<std::size_t>(pattern()) + kJaHa.size();
+        for (std::size_t i = 0; i < surface.size(); i += text::DecodeRune(std::string_view(surface).substr(i)).size) {
+            const std::string query = surface.substr(i) + std::string(tail);
+            for (const Record* r = w->DoLookup(w->arena.Keep(query), kModeGeneral).records; r != nullptr; r = r->child) {
+                if (r->source.size() > surface.size() - i + reach) return false;
+            }
+        }
+        return true;
+    };
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
@@ -490,7 +521,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
     }
     if (!matched && base.kind == 10 &&
         ((two == kJaGa && !(four == kJaGara) && !(four == kJaGata) && !(four == kJaGachi)) || after().starts_with(".") ||
-         (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji)) ||
+         (two == kJaNo && !(four == kJaNokataKanji) && !(six == kJaNokata)) || (two == kJaHa && !(four == kJaHaji) && !stressedNegative()) ||
          two == kJaDa || two == kJaTo || two == kJaDe || two == kJaHe || (two == kJaMo && !SuruAfterMo(after())) ||
          (two == kJaYa && !(four == kJaYasu) && !(w->settings.text && four == kJaYaga)) || two == kJaWo ||
          (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) ||
@@ -612,7 +643,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||
               four == kJaKireKanji || four == kJaSou || after().starts_with("\"") || two == kJaMa || two == kJaHajiKanji ||
-              two == kJaNasai || two == kJaNi || (SuruAfterMo(after()) && !OneKana(surface)))) {
+              two == kJaNasai || two == kJaNi || ((SuruAfterMo(after()) || stressedNegative()) && !OneKana(surface)))) {
             const std::pair<const Window*, std::string_view> compounds[] = {
                 {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
                 {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},

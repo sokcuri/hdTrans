@@ -11,8 +11,8 @@ dict:novel-idioms:35	判断がつかず困っていたところで、そのメ�
 dict:novel-idioms:35	中に黒い液体が入っているのを確認していたところで、男が戻って来て、尋ねる。	안에 검은 액체가 들어가 있는 것을 확인하고 있던 참에, 남자가 돌아와, 묻는다.	fix	local-ending
 dict:novel-idioms:23	いくら嘆いたところであの子は戻らん	아무리 한탄해 봤자 그 아이는 돌아가지 않는다	fix	local-ending
 dict:novel-idioms:23	俺が何をしたところで、学校に連絡を取られれば意味がなくなる。	내가 무엇을 해 봤자, 학교에 연락을 해지면 의미가 없어진다.	fix	local-ending
-dict:novel-idioms:23	だから俺がなんと言ったところで、なにも変わりはしない。	그러니까 내가 뭐라고 말해 봤자, 아무것도 변함은 하지 않는다.	fix	local-ending
-dict:novel-idioms:23	まあ、別に言ったところで怒りはしないのだろうが。	뭐, 따로 말해 봤자 분노는 하지 않겠지만.	fix	local-ending
+dict:novel-idioms:23	だから俺がなんと言ったところで、なにも変わりはしない。	그러니까 내가 뭐라고 말해 봤자, 아무것도 바뀌지는 않는다.	fix	local-ending
+dict:novel-idioms:23	まあ、別に言ったところで怒りはしないのだろうが。	뭐, 따로 말해 봤자 화내지는 않겠지만.	fix	local-ending
 dict:novel-idioms:23	でも何をしたところで意味がなかった。	하지만 무엇을 해 봤자 의미가 없었다.	fix	local-ending
 dict:novel-idioms:23	今更わかったところで遅い。	이제 와서 알아 봤자 늦다.	fix	local-ending
 dict:novel-idioms:24	自分が聞いたところでは、相当なやり手だと……。	자신이 들은 바로는, 상당한 수완가라면…….	fix	defaults

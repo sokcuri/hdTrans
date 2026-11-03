@@ -1965,15 +1965,17 @@ void SimpleAspect(Flusher& f) {
 // A verb continuative before も and する is the verb itself, said with emphasis: V-지도 않다
 // when the する is negative, V-기도 하다 otherwise (立ち上がりもせず 일어서지도 않고, 読みもしません
 // 읽지도 않습니다, 読みもした 읽기도 했다). The negative of する moves onto the verb's ending
-// and the する writes nothing.
+// and the する writes nothing. Before は and a negative する it is V-지는 않다 (負けはせん 지지는 않아).
 void EmphaticMo(Flusher& f) {
     const std::string jido = "1" + std::string(kKoJi) + "도";
+    const std::string jinun = "1" + std::string(kKoJi) + "는";
     const std::string ji = "1" + std::string(kKoJi) + " ";
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-        if (!it->detail->Yougo() || it->selected < 0 || it->DirectIndex() < 0 ||
-            it->DirectText(it->DirectIndex()) != jido || !it->DirectSurface().starts_with("も")) {
-            continue;
-        }
+        if (!it->detail->Yougo() || it->selected < 0 || it->DirectIndex() < 0) continue;
+        const std::string_view own = it->DirectText(it->DirectIndex());
+        const bool mo = own == jido && it->DirectSurface().starts_with("も");
+        const bool wa = own == jinun && it->DirectSurface().starts_with("は");
+        if (!mo && !wa) continue;
         Item* n = it->After();
         if (n == nullptr || !n->detail->Yougo() || n->group->surface != "する" || n->selected < 0 ||
             n->DirectIndex() < 0) {
@@ -1981,10 +1983,10 @@ void EmphaticMo(Flusher& f) {
         }
         const std::string_view d = n->DirectText(n->DirectIndex());
         if (d.starts_with(ji)) {
-            it->AssignDirectSlot(it->DirectIndex(), jido + " " + std::string(d.substr(ji.size())));
+            it->AssignDirectSlot(it->DirectIndex(), std::string(own) + " " + std::string(d.substr(ji.size())));
             n->AssignEntrySurface(n->selected, "");
             n->AssignDirectSlot(n->DirectIndex(), "");
-        } else if (!d.starts_with("1" + std::string(kKoJi))) {
+        } else if (mo && !d.starts_with("1" + std::string(kKoJi))) {
             it->AssignDirectSlot(it->DirectIndex(), "1기도");
         }
     }
