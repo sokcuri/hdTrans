@@ -33,7 +33,7 @@ normalize:katakana-endings	大掃除デスカー？	대청소입니까~?	fix	nor
 normalize:katakana-endings	私、苦手デース！	저, 서투릅니다~!	fix	normalize
 normalize:katakana-endings	Supplyは大切ネー！	Supply는 중요하네~!	fix	normalize
 normalize:katakana-endings	朝は納豆ですカー。	아침은 낫토입니까~.	fix	normalize
-normalize:katakana-endings	混ぜたり、乗せたりするやつですネー！	섞거나 싣거나 하는 녀석이군요~!	fix	normalize
+normalize:katakana-endings	混ぜたり、乗せたりするやつですネー！	섞거나, 싣거나 하는 녀석이군요~!	fix	normalize
 normalize:katakana-endings	あと一マス。	앞으로 1매스.	keep	normalize
 normalize:katakana-endings	一マス進む	1매스 나아간다	keep	normalize
 normalize:katakana-endings	デスゲームの開始だ	데스 게임 개시다	keep	normalize

@@ -17,7 +17,7 @@ dict:lexical-novel-misreads	桜の声が尻すぼみになる。	벚꽃의 목�
 dict:lexical-novel-misreads	手負いの虎程恐いものは無い。	상처 입은 범만큼 무서운 것은 없다.	fix	lookup
 dict:lexical-novel-misreads	あちこちが破けてしまっている。	여기저기가 찢어져버렸다.	fix	lookup
 dict:lexical-novel-misreads	「はい、今日もおつかれさーん」	「네, 오늘도 수고했어~」	fix	lookup
-dict:lexical-novel-misreads	さらに、ごはんのお供だけではなく…。	게다가 밥반찬뿐만 아니라….	fix	lookup
+dict:lexical-novel-misreads	さらに、ごはんのお供だけではなく…。	게다가, 밥반찬뿐만 아니라….	fix	lookup
 dict:lexical-novel-misreads	「あっぶな」	「위험해」	fix	lookup
 dict:lexical-novel-misreads	セーフ、あぶなかった。	세이프, 위험했다.	keep	lookup
 dict:jisjk:6540	それがとどめになった。	그것이 결정타가 되었다.	fix	lookup

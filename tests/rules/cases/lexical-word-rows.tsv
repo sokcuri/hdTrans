@@ -5,7 +5,7 @@ lexical:word-rows	すてき！	has:멋져	fix	lookup
 lexical:word-rows	すてきな人	has:멋진 사람	keep	lookup
 lexical:word-rows	そこね わしが書き足したところ。	has:덧붙여 썼	fix	phrases
 lexical:word-rows	ゴンはまたノートに書き足していく。	has:덧붙여 써 간다	fix	phrases
-lexical:word-rows	何度も書き直したり、書き足したりと、	has:고쳐 쓰거나 덧붙여 쓰거나	fix	phrases
+lexical:word-rows	何度も書き直したり、書き足したりと、	has:고쳐 쓰거나, 덧붙여 쓰거나	fix	phrases
 lexical:word-rows	コモンズ投信の投資哲学を更に深掘りする。	has:깊이 파고든다	fix	phrases
 lexical:word-rows	これ以上は深掘りできない。	has:깊이 파고들 수 없다	fix	phrases
 lexical:word-rows	フォートＭＦの主な水源は昔ながらの深掘りの井戸である。	has:깊이 파기의 우물	keep	lookup
