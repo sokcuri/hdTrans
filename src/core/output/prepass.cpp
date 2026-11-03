@@ -1222,6 +1222,11 @@ void Composer::WriteItem(int i, bool isLast, std::span<tokenizer::ControlMarker>
     std::string translated =
         WriteCount(i, ApplyParenthesisTextFilter(DictionaryForms(Build(i, 0, {}), *generated_), i)) + item.appended;
     if (settings_.literal) translated = SplitTimeNoun(item, std::move(translated));
+    // The comma an ichidan or passive stem takes as its て (開け、 열어,) is the item's ending text:
+    // it is written after the word, as a comma the word stage left apart.
+    if ((item.endingSurface == "、" || item.endingSurface == ",") && !Blank(translated) && !translated.ends_with(",")) {
+        translated += ",";
+    }
     const bool protectedToken = tokens[item.tokenIndex].type == tokenizer::kTypeProtected;
     if (settings_.cleanup && !protectedToken) RemoveGlosses(translated);
     // A word span keeps its text unless a rewrite read it anew (ちょ 잠깐 → 완전 before an adjective);

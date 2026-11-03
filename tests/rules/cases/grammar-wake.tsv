@@ -17,7 +17,7 @@ constraint:wake-formal-noun	中二病なわけ？	중2병인 것?	fix	lookup
 constraint:wake-formal-noun	そういうわけですか……	그런 것입니까……	fix	lookup
 constraint:wake-formal-noun	「そんなわけあるかいな……」	「그런 이유 있을까……」	fix	lookup
 constraint:wake-formal-noun	仲良くわけて食べた。	사이 좋게 나누어 먹었다.	keep	lookup
-constraint:wake-formal-noun	パンをわけ、食べた。	빵을 나누어 먹었다.	keep	lookup
+constraint:wake-formal-noun	パンをわけ、食べた。	빵을 나누어, 먹었다.	keep	lookup
 constraint:wake-formal-noun	みんなでわけよう。	모두 나누자.	keep	lookup
 dict:jisjk:373943	道理で手慣れてるわけだ。	rule:dict:jisjk:373943=것	fix	local
 dict:jisjk:373943	そのわけを話せ。	!rule:dict:jisjk:373943	keep	local

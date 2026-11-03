@@ -50,4 +50,4 @@ lookup:gaado-shita	今度は顔だけはガードしたので先ほどよりは�
 constraint:hiruma-before-negative	「ひるまならだいじょうぶ？」	「낮이라면 괜찮아?」	keep	lookup
 constraint:hiruma-before-negative	ってぼくはひるまなのにおきあがって	라는 나는 낮인데 일어나	keep	lookup
 pack:kana-verb-senses:2	手早く身支度をととのえた俺は宿をあとにし、	재빠르게 몸치장을 가다듬은 나는 숙소를 뒤로 하고,	fix	packs
-pack:kana-verb-senses:4	最後に塩と胡椒を少々入れて味をととのえ、	마지막으로 소금과 후추를 조금 넣어 맛을 맞춰	fix	packs
+pack:kana-verb-senses:4	最後に塩と胡椒を少々入れて味をととのえ、	마지막으로 소금과 후추를 조금 넣어 맛을 맞춰,	fix	packs
