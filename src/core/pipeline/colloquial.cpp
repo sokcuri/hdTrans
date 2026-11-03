@@ -1394,25 +1394,44 @@ bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
                              (toOrKudasai && beforeExclaim()));
 }
 
-// Whether rest starts with a conjugation ending of a verb that the dictionary has under key (行 + こう,
-// 回 + った, 出 + す).
-bool ConjugatesFrom(const dict::Snapshot& snap, std::u32string_view key, std::u32string_view rest) {
+// How rest goes on from a verb that the dictionary has under key (行 + こう, 回 + った, 出 + す): 2 with
+// a written conjugation ending, 1 with only the bare stem of an ichidan verb before its auxiliaries (出ない,
+// 付けなよ, 付けんと; さ only as させ, され and ら only as られ), 0 not at all.
+int ConjugatesFrom(const dict::Snapshot& snap, std::u32string_view key, std::u32string_view rest) {
+    // 来 is the kanji of くる, which the dictionary keeps as a word of its own.
+    if (key == U"来") {
+        for (int kind = 0; kind <= 13; kind++) {
+            if (word::Conjugation(kind, 0) != "くる") continue;
+            for (int b = 0; b < word::kConjugationBranches; b++) {
+                const std::u32string f = DecodeText(word::Conjugation(kind, b));
+                if (f.size() > 1 && rest.starts_with(std::u32string_view(f).substr(1))) return 2;
+            }
+        }
+    }
     const std::string text = EncodeText(key);
     const std::vector<dict::Candidate> records = snap.RetrieveRecords(text, dict::LookupMode::General);
+    int best = 0;
     for (const dict::Candidate& c : records) {
         if (c.codes == nullptr || c.codes->partText.size() != 4 || c.codes->partText[0] != 'M') continue;
         const int kind = c.codes->partText[3] - '0';
         const bool ichidan = word::Conjugation(kind, 5) == "よう";
         for (int b = 0; b < word::kConjugationBranches; b++) {
-            const std::string_view f = word::Conjugation(kind, b);
-            if (!f.empty() && (f.front() == '(' || f == "XX")) continue;
-            // An empty ending is the bare stem of an ichidan verb before its auxiliaries (出ない, 付けなよ); before
-            // the ん of a negative only of an ichidan kind (付けんと, not 気をつか of 気ぃつかんかった).
-            if (f.empty() ? !rest.empty() && In(rest[0], ichidan ? U"るれろよたてなまさらずん" : U"るれろよたてなまさらず")
-                          : rest.starts_with(DecodeText(f))) {
-                return true;
-            }
+            const std::u32string f = DecodeText(word::Conjugation(kind, b));
+            if (!f.empty() && (f.front() == U'(' || f == U"XX")) continue;
+            if (!f.empty() && rest.starts_with(f)) return 2;
+            if (f.empty() && ichidan && !rest.empty() && In(rest[0], U"るれろよたてなまずん")) best = 1;
+            if (f.empty() && ichidan && (rest.starts_with(U"させ") || rest.starts_with(U"され") || rest.starts_with(U"られ"))) best = 1;
         }
+    }
+    return best;
+}
+
+// Whether the dictionary has w as a word other than a proper noun.
+bool CommonWord(const dict::Snapshot& snap, std::u32string_view w) {
+    const std::string text = EncodeText(w);
+    const std::vector<dict::Candidate> records = snap.RetrieveRecords(text, dict::LookupMode::General);
+    for (const dict::Candidate& c : records) {
+        if (c.codes != nullptr && c.codes->partText != "N130") return true;
     }
     return false;
 }
@@ -1569,14 +1588,18 @@ std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap
         if (j == i + 1 || j >= rs.size() || !(IsHiraganaRune(rs[j]) || IsKanjiRune(rs[j]))) continue;
         // The particle whose idiom key reads furthest with the rest conjugating from it (気ぃつけな 気をつけ,
         // 気ぃついた 気がつ, 目ぇ回った 目が回, 手ぇ出すな 手を出); none when neither fits.
+        // On a tie a written ending wins over a bare stem (手ぇ出さないで 手を出さ, not 手が出 + さ).
         char32_t particle = 0;
         size_t best = 0;
+        int bestHow = 0;
         for (const char32_t p : {U'が', U'を'}) {
             std::u32string with = std::u32string{rs[i], p};
             for (size_t k = j; k < rs.size() && k < j + 5; k++) {
                 with.push_back(rs[k]);
-                if (with.size() > best && ConjugatesFrom(snap, with, std::u32string_view(rs).substr(k + 1))) {
+                const int how = ConjugatesFrom(snap, with, std::u32string_view(rs).substr(k + 1));
+                if (how > 0 && (with.size() > best || (with.size() == best && how > bestHow))) {
                     best = with.size();
+                    bestHow = how;
                     particle = p;
                 }
             }
@@ -2028,7 +2051,7 @@ namespace {
 
 // Whether the run of ～ at [i, end) after the kanji at i - 1 draws out a verb or adjective stem before
 // its ending (寒～い, 面白～い, 見～て, 行～こう, 会～いたい): an adjective stem, or a verb in kanji whose
-// conjugation the kana after the run start (間違～った, 今行～く). After a noun or a noun of する, before a word such as そして,
+// conjugation the kana after the run start (間違～った, 今行～く), at the start of a word. After a noun or a noun of する, before a word such as そして,
 // it is a mark of its own (死亡～そして転生～, 猫～そして). A ー or a small vowel after a kanji stays a
 // drawl (気ーつけな, 気ぃつけ).
 bool KanjiStemDrawn(const Emphasis& e, const dict::Snapshot& snap, std::u32string_view rs, size_t from, size_t i, size_t end) {
@@ -2036,16 +2059,21 @@ bool KanjiStemDrawn(const Emphasis& e, const dict::Snapshot& snap, std::u32strin
     size_t start = i - 1;
     while (start > from && IsKanjiRune(rs[start - 1])) start--;
     for (size_t k = start; k < i; k++) {
-        if (!ConjugatesFrom(snap, rs.substr(k, i - k), rs.substr(end))) continue;
-        // A one-kanji stem after a kanji that makes a common word with it, no proper noun, is the end of
-        // that word (第一話～, but 今行～く).
-        if (i - k > 1 || k == 0 || !IsKanjiRune(rs[k - 1])) return true;
-        const std::string pair = EncodeText(rs.substr(k - 1, 2));
-        const std::vector<dict::Candidate> records = snap.RetrieveRecords(pair, dict::LookupMode::General);
-        for (const dict::Candidate& c : records) {
-            if (c.codes != nullptr && c.codes->partText != "N130") return false;
+        if (ConjugatesFrom(snap, rs.substr(k, i - k), rs.substr(end)) == 0) continue;
+        // The stem starts a word where the kanji before it read as the longest common words from the start
+        // of the run (毎日 + 来～て, 本当 + 行～く, 今 + 行～く); not inside one (変化～して).
+        size_t at = start;
+        while (at < k) {
+            size_t to = at + 1;
+            for (size_t q = i; q > at + 1; q--) {
+                if (CommonWord(snap, rs.substr(at, q - at))) {
+                    to = q;
+                    break;
+                }
+            }
+            at = to;
         }
-        return true;
+        return at == k;
     }
     return false;
 }
