@@ -3189,7 +3189,7 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
 }
 
 // Whether the せ before the ん or ぬ at i of rs (s, with the byte offsets byte) is the old negative stem of する:
-// after は or も that follow a word (許しはせん, 何もせん), after こと or そう (そんなことせん, そうせん), or after a
+// after は, も or を that follow a word (許しはせん, 何もせん, 支度をせん), after こと or そう (そんなことせん, そうせん), or after a
 // verb of する of the dictionary (気にせん) or a noun of an act (Hd: 勉強せん, 容赦せぬ) of two characters or more,
 // and before the end, a mark, a kanji or the kana of an ending or particle (せんぞ, せんかった, せんのか). Not a word
 // that goes on in kana (せんせい, せんぱい, せんべい), after one kanji, whose する conjugates otherwise (愛せん), the
@@ -3229,7 +3229,8 @@ bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::
         }
         return false;
     };
-    if ((rs[se - 1] == U'は' || rs[se - 1] == U'も') && se >= 2 && (IsKanjiRune(rs[se - 2]) || IsHiraganaRune(rs[se - 2]))) {
+    if ((rs[se - 1] == U'は' || rs[se - 1] == U'も' || rs[se - 1] == U'を') && se >= 2 &&
+        (IsKanjiRune(rs[se - 2]) || IsHiraganaRune(rs[se - 2]) || IsKatakanaRune(rs[se - 2]))) {
         return !noun();
     }
     const std::u32string_view before(rs.data(), se);
@@ -3376,6 +3377,8 @@ std::string RewriteContractedN(std::string_view text, const LineContext& ctx, co
         } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nai"), rest) > 0 || dict::StartsWithMember(HDTRANS_CLASS("contraction.n-nee"), rest) > 0) {
             says = Says::Nai;
         } else if (dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative"), rest) > 0 && dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-not"), rest) == 0) {
+            says = Says::Negative;
+        } else if (const size_t final = dict::StartsWithMember(HDTRANS_CLASS("contraction.n-negative-final"), rest); final > 0 && ends(rest.substr(final))) {
             says = Says::Negative;
         } else if (beforeDe) {
             says = Says::Negative;

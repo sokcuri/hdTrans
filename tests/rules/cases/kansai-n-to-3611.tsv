@@ -1,0 +1,26 @@
+# 규칙: GRM-3611
+rule	input	expected	kind	layer
+sound:contracted-n	艦隊、合戦用意じゃ！ 急がんと！	has:서둘러야 한다!	fix	sound
+sound:contracted-n	もうこんな時間か。夕飯の支度をせんと。	이제 이런 시간인가. 저녁 준비를 해야 한다.	fix	sound
+sound:contracted-n	気をつけんと。	조심해야 한다.	fix	sound
+sound:contracted-n	「それより、今は屋台フェスを頑張らんと」	「그것보다, 지금은 포장마차 페스티벌을 노력해야 해」	fix	sound
+sound:contracted-n	行かんと	가야 한다	fix	sound
+sound:contracted-n	食べんと	먹어야 한다	fix	sound
+sound:contracted-n	そろそろ帰らんとね。	슬슬 돌아가야지.	fix	sound
+sound:contracted-n	「“言わんとわからんのか？”」	has:말하지 않으면	fix	sound
+sound:contracted-n	きっぱり断らんといかんよ	has:거절하지 않으면 안	fix	sound
+sound:contracted-n	宿題をせんぞ。	숙제를 하지 않아.	fix	sound
+sound:contracted-n	馬車を守らんと奮闘していた	lacks:않으면	keep	sound
+sound:contracted-n	言わんとすることはわかる。	has:말하려는	keep	sound
+sound:contracted-n	それはごろんと、俺の足元に	has:데굴	keep	sound
+sound:contracted-n	さあ！たんと！	has:듬뿍!	keep	sound
+sound:contracted-n	「……きちんと、１から１０	has:제대로	keep	sound
+sound:contracted-n	ぺたんと、千里のお尻	has:털썩	keep	sound
+sound:contracted-n	そしてたくあんと、豪華に納豆	lacks:않으면	keep	sound
+sound:contracted-n	ずいぶんと、私たちの	has:꽤	keep	sound
+sound:contracted-n	「彼、大見 健さんと、	lacks:않으면	keep	sound
+sound:contracted-n	おべんと、食べる？	lacks:않으면	keep	sound
+sound:contracted-n	ling! ちゃんと、	has:제대로	keep	sound
+sound:contracted-n	ほんと？	정말?	keep	sound
+sound:contracted-n	なんと！	무려!	keep	sound
+sound:contracted-n	しーんと静まり返る。	has:고요히	keep	sound

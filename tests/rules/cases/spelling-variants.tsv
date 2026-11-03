@@ -22,7 +22,7 @@ normalize:spelling-variant	呉で朽ち果てるまで、戦うつもりだ。	�
 normalize:spelling-variant	追い詰められてるときは周りが全然見えてなかった	몰리고 있을 때는 주위가 전혀 보이지 않았다	fix	normalize
 normalize:spelling-variant	これはまずい、と思ったときには遅かった。	이것은 큰일이다, 라고 생각했을 때는 늦었다.	keep	normalize
 normalize:spelling-variant	これはまずい、と思った時には遅かった。	이것은 큰일이다, 라고 생각했을 때는 늦었다.	keep	normalize
-normalize:spelling-variant	時間あるときは、電池の確認と整備をしないと	시간 있을 때는, 전지 확인과 정비를 하지 않으면	keep	normalize
+normalize:spelling-variant	時間あるときは、電池の確認と整備をしないと	시간 있을 때는, 전지 확인과 정비를 해야 한다	keep	normalize
 normalize:spelling-variant	胸がときめく。	가슴이 두근거린다.	keep	normalize
 lookup:demonstrative-gurai	それぐらいは出来ると思った。	그 정도는 할 수 있다고 생각했다.	fix	lookup
 lookup:demonstrative-gurai	それくらいは出来ると思った。	그 정도는 할 수 있다고 생각했다.	keep	lookup

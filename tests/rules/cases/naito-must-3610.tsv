@@ -1,0 +1,44 @@
+# 규칙: GRM-3610, GRM-3565
+rule	input	expected	kind	layer
+cx:naito-must:20	ヒトサンマルマル。食べたね。運動しないと。	1300. 먹었네. 운동해야 한다.	fix	rewrites
+cx:naito-must:20	しっかり護衛しないと。	확실히 호위해야 한다.	fix	rewrites
+cx:naito-must:20	「ええ、台本のチェックをしないと」	「네, 각본 체크를 해야 해」	fix	rewrites
+cx:naito-must:20	江風、少し自重しないと…本当に…お姉さんは心配です…。	has:조금 자중해야 한다…	fix	rewrites
+cx:naito-must:20	こちらは…あ…補給もしないと…開発はどうしよう？	has:보급도 해야 한다…	fix	rewrites
+cx:naito-must:20	「仮に、全員が筧に好意があったとしても、白崎は気にしないと？」	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:20	なにもしないと……きっと、後悔するから……	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:20	早く修理しないと……部隊に置いていかれてしまいます……	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:20	「でも……そうしないと……私たち……もう３人一緒にいられなくなるわ」	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:20	時間あるときは、電池の確認と整備を…しないと……速く、走れない。	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:20	早くしないと、遅れるよ。	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:20	何もしないと。	!rule:cx:naito-must:20	keep	rewrites
+cx:naito-must:10	さて、みんなと合流しないとな。	자, 모두와 합류해야지.	fix	rewrites
+cx:naito-must:10	「ベッドとその服、あとで洗濯しないとな」	「침대와 그 옷, 나중에 세탁해야지」	fix	rewrites
+cx:naito-must:10	何もしないとね。	!rule:cx:naito-must:10	keep	rewrites
+cx:naito-must:30	朝ねー。皆を起こしてこないとねー。	아침이네―. 모두를 깨워 와야지―.	fix	rewrites
+cx:naito-must:30	誰も来ないとね。	!rule:cx:naito-must:30	keep	rewrites
+cx:naito-must:40	やっばーい、少し寝ないと！	큰일이다, 조금 잠을 자야 해!	fix	rewrites
+cx:naito-must:40	あーもー！ 寝ててくんないと！	has:자고 있어 줘야 해!	fix	rewrites
+cx:naito-must:40	「買ってこないと……」	「사 와야 해……」	fix	rewrites
+cx:naito-must:40	万が一のときのためにも、オレたちがしっかりしていないと。	has:확실히 하고 있어야 한다.	fix	rewrites
+cx:naito-must:40	誰も来ないと。	!rule:cx:naito-must:40	keep	rewrites
+cx:naito-must:50	「そこは、納得してもらえるように情報を積み上げていかないとな」	has:쌓아올려 가야지	fix	rewrites
+cx:naito-must:50	誰もいかないとね。	!rule:cx:naito-must:50	keep	rewrites
+cx:naito-must:60	「そろそろ、いかないと……」	「슬슬, 가야 해……」	fix	rewrites
+cx:naito-must:60	「でも……けじめ、つけないと……忘れて、いかないと……あたし……」	has:잊어, 가야 한다……	fix	rewrites
+cx:naito-must:60	誰もいかないと。	!rule:cx:naito-must:60	keep	rewrites
+cx:caption-fixes-1:132	フタマルマルマル―― 敵の電探攻撃には気を付けないと‥‥ 川内さん、用心して行きましょう！	has:조심해야 한다‥‥	fix	rewrites
+cx:caption-fixes-1:132	「まずいよ、押されてる。助けないと……でもどうやれば……」	has:도와야 한다……	fix	rewrites
+cx:caption-fixes-1:132	「そういや、俺休憩時間だった。夕飯食わないと……みんな何食べる？」	has:저녁 먹어야 한다……	fix	rewrites
+cx:caption-fixes-1:132	ヒトハチマルマルです、提督。夜ご飯を作らないと…あ、外でいいんですか？	has:저녁밥을 만들어야 한다…	fix	rewrites
+cx:caption-fixes-1:132	「でも……けじめ、つけないと……忘れて、いかないと……あたし……」	has:매듭, 지어야 한다……	fix	rewrites
+cx:caption-fixes-1:132	ここから、一歩、外に踏み出さないと……俺たちは、次に進めない。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	「だ、だって……男は……出さないと……溜まるし……」	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	「ハァ、ハァ……どこかへ向けて歩いてないと……心が折れちゃうよ……」	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	俺がここで踏ん張らないと……みいちゃんが目を覚ました時、顔向けできないじゃないか。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	「お前は行かないと？」	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	何も言わないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	二度と戻らないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:132	そうはいかないと。	!rule:cx:caption-fixes-1:132	keep	rewrites
+cx:caption-fixes-1:130	何も言わないとね。	!rule:cx:caption-fixes-1:130	keep	rewrites
+cx:caption-fixes-1:132	「ここなら……あの、しばらくは……見つからないと……こほ、こほっ」	!rule:cx:caption-fixes-1:132	keep	rewrites

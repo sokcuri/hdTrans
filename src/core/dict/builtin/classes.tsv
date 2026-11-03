@@ -48,7 +48,8 @@
 //= contraction.n-ru-final	The same before no kana, kanji or letter (こっち見んな 見るな, 邪魔すんな); not ごめんな or こんな, words that span the ん.
 //= contraction.n-nai	Starts of the text after a ん that says the ら of a godan verb's negative stem, the られ of a potential or the れ that ends an ichidan stem (分かんない 分からない, 信じらんない 信じられない, してくんない してくれない).
 //= contraction.n-nee	The same with ねえ for ない, which is written as ない (変わんねえ 変わらない, やってらんねえ やってられない).
-//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 忘れんよう 忘れないよう, 許せんから 許せないから, 食べんか 食べないか), and but for ぞ, わ and かて after the negative stem of a godan verb with a kanji (待たんか 待たないか, 分からんし 分からないし).
+//= contraction.n-negative	Starts of the text after a ん that is the negative ない after an ichidan or potential stem (負けんぞ 負けないぞ, 忘れんよう 忘れないよう, 許せんから 許せないから, 食べんか 食べないか, 言わんとわからん 言わないとわからない), and but for ぞ, わ and かて after the negative stem of a godan verb with a kanji (待たんか 待たないか, 分からんし 分からないし, 断らんといかん 断らないといかん).
+//= contraction.n-negative-final	The same before no kana, kanji or letter: the と of a condition that ends the clause, and a closing ね or な after it (急がんと！ 急がないと！, 気をつけんと。, 帰らんとね); not the literary volitional ん before と and its verb (守らんと奮闘する, 言わんとする).
 //= contraction.n-negative-not	Starts of contraction.n-negative after which the ん is no such ない (食べんかった, the past said with ん; 食べんしゃい, the しゃい of a request; 負けんしゅ, a lisped す).
 //= contraction.n-kana-stem-after	The kana after which a verb stem of one kana starts a contracted form (気にすんな, してくんない, かもしんない, 俺がやっから); elsewhere a lone kana is no stem.
 //= contraction.tsu-ru	Starts of the text after a っ that says the る of a verb's dictionary form (やっから やるから, すっから するから).
@@ -750,6 +751,29 @@ contraction.n-negative	か
 contraction.n-negative	けど
 contraction.n-negative	けれど
 contraction.n-negative	し
+contraction.n-negative	といかん
+contraction.n-negative	といけ
+contraction.n-negative	とならん
+contraction.n-negative	とならな
+contraction.n-negative	とだめ
+contraction.n-negative	とダメ
+contraction.n-negative	と駄目
+contraction.n-negative	と思
+contraction.n-negative	とわか
+contraction.n-negative	と分か
+
+contraction.n-negative-final	とねえ
+contraction.n-negative-final	とねぇ
+contraction.n-negative-final	とねー
+contraction.n-negative-final	となあ
+contraction.n-negative-final	となぁ
+contraction.n-negative-final	となー
+contraction.n-negative-final	とね
+contraction.n-negative-final	とな
+contraction.n-negative-final	とよ
+contraction.n-negative-final	とっ
+contraction.n-negative-final	とー
+contraction.n-negative-final	と
 
 contraction.n-negative-not	かっ
 contraction.n-negative-not	しゃ
