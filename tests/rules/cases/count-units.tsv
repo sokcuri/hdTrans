@@ -69,7 +69,7 @@ cx:tai-count:35	死体が一体だけある。	시체가 한 구만 있다.	fix	
 cx:tai-count:35	魔物が一体だけある。	마물이 한 마리만 있다.	keep	rewrites
 cx:tai-count:40	ロボットが一体だけある。	로봇이 1기만 있다.	fix	rewrites
 cx:tai-count:45	人形が一体だけある。	인형이 한 개만 있다.	fix	rewrites
-cx:tai-count:50	一体一体が強い。	한 마리 한 마리가 강하다.	fix	rewrites
+cx:tai-count:49	一体一体が強い。	하나하나가 강하다.	fix	rewrites
 cx:tai-count:32	エルフが三体だけいる。	엘프가 세 명만 있다.	fix	rewrites
 cx:tai-count:32	魔物が三体だけいる。	마물이 세 마리만 있다.	keep	rewrites
 cx:tai-count:36	死体が三体だけある。	시체가 세 구만 있다.	fix	rewrites
@@ -295,3 +295,18 @@ cx:count-units:53	ケーキを四切れ食べた。	케이크를 네 조각 먹�
 cx:count-units:38	ケーキを八切れに分けた。	케이크를 팔등분으로 나누었다.	keep	rewrites
 cx:count-units:130	花が二輪。	꽃이 두 송이.	fix	rewrites
 cx:count-units:135	花が三輪！	꽃이 세 송이!	fix	rewrites
+cx:tai-count:26	ここの地蔵峠は、8体のお地蔵さまが並んでいます	여기의 지조토게는, 8개의 지장님이 줄지어 있습니다	fix	rewrites
+cx:tai-count:26	僕がこちらに来た当初から、お地蔵さまが7体倒されていました	제가 이쪽에 온 당초부터, 지장님이 7개 쓰러지고 있었습니다	fix	rewrites
+cx:tai-count:26	ゴブリンを3体倒した。	고블린을 3마리 쓰러뜨렸다.	keep	rewrites
+cx:tai-count:21	ゲブラー特殊部隊ギア5体、未確認の大型ギア1体と推定されます！	게브라 특수부대 기어 5기, 미확인의 대형 기어 1기로 추정됩니다!	fix	rewrites
+cx:tai-count:21	……それでは、採掘ギアを5体と採掘人夫を10人ですな。	……그러면, 채굴 기어를 5기와 채굴 인부를 10명입니다.	fix	rewrites
+cx:tai-count:21	魔物が5体いる。	마물이 5마리 있다.	keep	rewrites
+cx:tai-count:22	軍縮条約？艦を二体解体って…私には無理！	군축 조약? 함을 2척 해체는…나에게는 무리!	fix	rewrites
+cx:tai-count:22	魔物が二体いる。	마물이 두 마리 있다.	keep	rewrites
+cx:tai-count:16	武器の回収が終わったらここに１体ずつ遺体を入れてください。	무기 회수가 끝나면 여기에 1구씩 시신을 넣어 주세요.	fix	rewrites
+cx:tai-count:16	ここに１体ずつ並べてください。	여기에 1체씩 늘어놓아 주세요.	keep	rewrites
+cx:tai-count:28	ゴブリンを3体倒したエルフの少女。	고블린을 3마리 쓰러뜨린 엘프의 소녀.	keep	rewrites
+cx:tai-count:30	エルフの少女がゴブリンを3体倒した。	엘프의 소녀가 고블린을 3마리 쓰러뜨렸다.	fix	rewrites
+cx:tai-count:28	エルフが森の奥に3体いた。	엘프가 숲속에 3명 있었다.	fix	rewrites
+cx:tai-count:49	一体だけですよぅ。	한 체 뿐이에요.	keep	rewrites
+cx:tai-count:49	ゴブリン一体一体を倒す。	고블린 하나하나를 쓰러뜨린다.	fix	rewrites

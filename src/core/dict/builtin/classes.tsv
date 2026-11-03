@@ -196,6 +196,7 @@
 //= noun.address-title	Katakana titles that a speaker calls the listener by and that the dictionary codes as no person (マスター, カーネル): after a sentence-final ます they are a call (spec SPC-22).
 //= noun.count-corpse	Nouns of a dead body, matched at the end of a word, after which the counter 体 is 구 (死体が三体 시체 세 구).
 //= noun.count-flower	Nouns of flowers, matched at the end of a word, next to which the count words 二輪 and 三輪 count blooms, 송이 (バラが二輪 장미가 두 송이).
+//= noun.count-ship	Nouns of ships, matched as a whole word in the sentence of the counter 体, which then counts them as 척 (艦を二体 함을 2척).
 //= noun.count-machine	Nouns of a robot, a mecha or a machine soldier, matched at the end of a word, after which the counter 体 is 기 (ロボット二体 로봇 2기).
 //= noun.count-figure	Nouns of a statue, a doll or a figure, matched at the end of a word, after which the counter 体 is 개 (人形が二体 인형이 두 개).
 //= noun.count-creature	Endings of nouns of creatures and monsters that a count word in 体 before の counts (一体のゴーレム 한 마리의 골렘).
@@ -8783,6 +8784,16 @@ noun.count-machine	ヘリ
 noun.count-machine	機
 noun.count-machine	飛行船
 noun.count-machine	飛空艇
+noun.count-machine	ギア
+noun.count-ship	艦
+noun.count-ship	船
+noun.count-ship	艦艇
+noun.count-ship	戦艦
+noun.count-ship	駆逐艦
+noun.count-ship	巡洋艦
+noun.count-ship	空母
+noun.count-ship	潜水艦
+noun.count-ship	軍艦
 
 noun.count-figure	人形
 noun.count-figure	像
