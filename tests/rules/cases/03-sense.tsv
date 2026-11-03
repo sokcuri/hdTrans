@@ -5,7 +5,7 @@ dict:jisjk:343546	行くって見抜いた。	간다고 간파했다.	keep	local
 dict:jisjk:343546	来るって思った。	온다고 생각했다.	keep	local
 dict:jisjk:6506	田中さんと話す。	rule:dict:jisjk:6506=씨	keep	local
 dict:jisjk:6506	店員さんを呼ぶ。	!rule:dict:jisjk:6506	keep	local
-dict:jisjk:267272	書いており、読んでいる。	쓰고 있어 읽고 있다.	fix	local
+dict:jisjk:267272	書いており、読んでいる。	쓰고 있어, 읽고 있다.	fix	local
 dict:jisjk:267272	読んでおりません。	rule:dict:jisjk:267272=&HN@	keep	local
 dict:jisjk:265218	あと二人必要だ。	!rule:dict:jisjk:265218	keep	local
 dict:jisjk:265218	あと、窓も閉める。	그리고, 창도 닫는다.	fix	local
