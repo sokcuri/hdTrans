@@ -1,0 +1,24 @@
+# 규칙: LEX-4590, LEX-93
+rule	input	expected	kind	layer
+lookup:kana-spelling	常にかつらをつけて生活している薄汚れたコスプレイヤー	has:항상 가발을	fix	lookup
+lookup:kana-spelling	驚きのあまり引っ掴んで、かつらじゃないか確認してしまいたくなるような色だ。	has:가발이 아닌가	fix	lookup
+lookup:kana-spelling	かつらが落ちた。	가발이 떨어졌다.	fix	lookup
+lookup:kana-spelling	かつおを食べた。	가다랑어를 먹었다.	fix	lookup
+lookup:kana-spelling	かつおのたたき	has:가다랑어의	fix	lookup
+lookup:kana-spelling	かつおぶしをかける。	has:가츠오부시를	fix	lookup
+lookup:kana-spelling	まだらの猫	얼룩의 고양이	fix	lookup
+lookup:kana-spelling	まだらだ	얼룩이다	fix	lookup
+dict:w:32501	ねっこを掘る。	뿌리를 판다.	fix	defaults
+dict:w:32501	木のねっこ	나무의 뿌리	fix	defaults
+dict:w:32501	ねっこが張る	has:뿌리가	fix	defaults
+dict:w:32500	たつやが言った。	타츠야가 말했다.	fix	defaults
+dict:w:32500	「たつや！」	「타츠야!」	fix	defaults
+dict:w:32500	たつやの家	타츠야의 집	fix	defaults
+dict:w:32502	鬘を被る。	has:가발을	fix	defaults
+lookup:kana-spelling	賢く、かつおおらかだ。	has:또한	keep	lookup
+lookup:kana-spelling	かつ丼を食べた。	lacks:가다랑어	keep	lookup
+lookup:kana-spelling	まだ来ない。	아직 오지 않는다.	keep	lookup
+dict:w:32501	ねこを飼う。	고양이를 기른다.	keep	defaults
+dict:w:32500	役にたつやつだ。	도움이 되는 녀석이다.	keep	defaults
+dict:w:32500	席をたつやいなや走った。	lacks:타츠야	keep	defaults
+dict:w:32500	時がたつやら	lacks:타츠야	keep	defaults

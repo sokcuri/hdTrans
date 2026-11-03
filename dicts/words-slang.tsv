@@ -60,7 +60,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 きつねそば	유부소바	N110			GN				llm			s:57
 きもだめし	담력 시험	N110			GN							s:58
 くずきり	구즈키리	N110			GN							s:59
-こたつむり	고타쓰 달팽이	N110			GN				llm			s:60
+こたつむり	고타츠 달팽이	N110			GN				llm			s:60
 この世ならざるもの	이 세상의 존재가 아닌 것	N110			GN				llm			s:61
 こびとさん	소인	N110			GN							s:62
 こんぺいとう	별사탕	N110			GN							s:63
@@ -2364,7 +2364,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 タコノキ	판다누스	N110			GN							s:2361
 タコノキ目	판다누스목	N110			GN							s:2362
 タコノマクラ	방패연잎성게	N110			GN							s:2363
-タコヤキ	타코야끼	N110			GN							s:2364
+タコヤキ	타코야키	N110			GN							s:2364
 タコ部屋	타코베야	N110			GN				llm			s:2365
 タジン鍋	타진	N110			GN							s:2366
 タスクマネージャー	작업 관리자	N110			GN							s:2367
@@ -5877,7 +5877,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 泥団子	진흙 경단	N110			GN							s:5874
 津波地震	쓰나미 지진	N110			GN				llm			s:5875
 津波警報	쓰나미경보	N110			GN							s:5876
-津軽弁	쓰가루 방언	N110			GN							s:5877
+津軽弁	츠가루 방언	N110			GN							s:5877
 流れるプール	유수풀	N110			GN							s:5878
 流体金属	액체 금속	N110			GN							s:5879
 流刑地	유형지	N110			GN				llm			s:5880
@@ -6452,7 +6452,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 薄明	박명	N110			GN							s:6449
 薄明光線	틈새빛살	N110			GN							s:6450
 薜茘多	프레타	N110			GN							s:6451
-薩摩弁	사쓰마 방언	N110			GN				llm			s:6452
+薩摩弁	사츠마 방언	N110			GN				llm			s:6452
 薬中	약물 중독	N110			GN							s:6453
 薬剤学	약제학	N110			GN				llm			s:6454
 薬物中毒	약물 중독	N110			GN							s:6455
@@ -6771,7 +6771,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鏡映	반사	N110			GN							s:6768
 長周期地震動	장주기 지진동	N110			GN							s:6769
 長周期地震動階級	장주기 지진동 계급	N110			GN							s:6770
-長崎ちゃんぽん	나가사끼 짬뽕	N110			GN							s:6771
+長崎ちゃんぽん	나가사키 짬뽕	N110			GN							s:6771
 長巻	장권	N110			GN							s:6772
 長江文明	장강 문명	N110			GN							s:6773
 長鼻目	장비목	N110			GN							s:6774
@@ -7668,8 +7668,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 ウラシマ効果	우라시마 효과	N110			GN				llm			s:7665
 浦島効果	우라시마 효과	N110			GN				llm			s:7666
 コタツムリ	겨울내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7667
-こたつ虫	겨우내 고타쓰에 틀어박힌 사람	N110			GN				llm			s:7668
-炬燵虫	겨우내 고타쓰에 틀어박힌 사람	N110			GN				llm			s:7669
+こたつ虫	겨우내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7668
+炬燵虫	겨우내 고타츠에 틀어박힌 사람	N110			GN				llm			s:7669
 早稲女	와세다 여학생	N110			GN				llm			s:7670
 ワセ女	와세다 여학생	N110			GN				llm			s:7671
 クソゲ	똥겜	N110			GN				llm			s:7672

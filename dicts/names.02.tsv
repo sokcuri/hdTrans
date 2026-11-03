@@ -3462,8 +3462,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 津軽	츠가루	N130	QPNVHn	Wa	GN							names.629808
 津軽うみ	츠가루 우미	N130	QPNVHn		GN						つがる うみ	names.629809
 津軽じょんがら節	츠가루 종가라부시	N130	QWK		GN							names.629810
-津軽の北斗七星	쓰가루의 북두칠성	N110			GN						つがるのほくとしちせい	names.629811
-津軽の太鼓	쓰가루의 북	N110			GN						つがるのたいこ	names.629812
+津軽の北斗七星	츠가루의 북두칠성	N110			GN						つがるのほくとしちせい	names.629811
+津軽の太鼓	츠가루의 북	N110			GN						つがるのたいこ	names.629812
 津軽ジョッカー	츠가루 조커	N130	QPNVHn		GN						つがるじょっかー	names.629813
 津軽レインボー	츠가루 레인보우	N110			GN						つがるれいんぼー	names.629814
 津軽三味線	츠가루 샤미센	N110			GN						つがるしゃみせん	names.629815
@@ -11517,7 +11517,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 源俊房	미나모토노 토시후사	N110			GN						みなもととしふさ	names.637956
 源俊賢	미나모토노 도시카타	N110			GN						みなもとのとしかた	names.637957
 源俊頼	미나모토노 도시요리	N130	QPNVHn		GN							names.637958
-源保光の娘	미나모토노 야스미쓰의 딸	N110			GN						みなもとのやすみつのむすめ	names.637959
+源保光の娘	미나모토노 야스미츠의 딸	N110			GN						みなもとのやすみつのむすめ	names.637959
 源信	겐신	N130	QPNVHn	Wb	GN							names.637960
 源信明	미나모토노 사네아키라	N130	QPNVHn		GN							names.637961
 源倫子	미나모토노 린시	N110			GN						みなもとのりんし	names.637962
@@ -22999,7 +22999,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 琴櫻	코토자쿠라	N130	QPNVHn	Wb	GN						ことざくら	names.649683
 琴櫻傑將	고토자쿠라 마사카츠	N130	QPNVHn		GN							names.649684
 琴櫻将傑	코토노와카 마사히로	N130	QPNVHn		GN							names.649685
-琴欧州	고토오슈 가쓰노리	N110			GN						ことおうしゅう	names.649686
+琴欧州	고토오슈 가츠노리	N110			GN						ことおうしゅう	names.649686
 琴欧洲	고토오슈	N130	QPNVHn	Wa	GN							names.649687
 琴欧洲勝紀	고토오슈 가츠노리	N130	QPNVHn		GN							names.649688
 琴民鐡	금민철	N130	QPNVHn	Wb	GN							names.649689
@@ -24221,7 +24221,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 生野北第二ランプ	이쿠노키타 제2 램프	N130	QCTVPl		GN							names.650932
 生野慈朗	쇼노 지로	N130	QPNVHn		GN							names.650933
 生野文治	쇼노 분지	N130	QPNVHn		GN							names.650934
-生野朝鮮初級学校	오사까조선초급학교	N130	VGt		GN							names.650935
+生野朝鮮初級学校	오사카조선초급학교	N130	VGt		GN							names.650935
 生野村	이쿠노촌	N130	QCTVPl		GN							names.650936
 生野洋司	이쿠노 요지	N130	QPNVHn		GN						いくの ようじ	names.650937
 生野町	이쿠노정	N130	QCTVPl		GN							names.650938
@@ -27828,7 +27828,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 画歌ミオ	가카 미오	N130	QPNVHn		GN						がかみお	names.654578
 画法	화법	N110			GN							names.654579
 画津村	에즈촌	N130	QCTVPl		GN							names.654580
-画狂老人卍	가쓰시카 호쿠사이	N110			GN							names.654581
+画狂老人卍	가츠시카 호쿠사이	N110			GN							names.654581
 画皮	화피	N110			GN						がひ	names.654582
 画皮 あやかしの恋	화피	N130	QWK		GN							names.654583
 画皮世界2	화피세계2	N130	QWK		GN							names.654584
@@ -30642,9 +30642,9 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 白露	백로	N110			GN							names.657455
 白露	시라츠유	N130	QPNVHn	Wb	GN							names.657456
 白露・ルドルフ・ハース	시라츠유 루돌프 하스	N130	QPNVHn		GN						しらつゆるどるふはーす	names.657457
-白露型	시라쓰유급	N110			GN							names.657458
-白露型下着	시라쓰유급 속옷	N110			GN							names.657459
-白露型駆逐艦	시라쓰유급 구축함	N110			GN							names.657460
+白露型	시라츠유급	N110			GN							names.657458
+白露型下着	시라츠유급 속옷	N110			GN							names.657459
+白露型駆逐艦	시라츠유급 구축함	N110			GN							names.657460
 白露山	하쿠로잔	N130	QPNVHn	Wa	GN							names.657461
 白露山佑太	하쿠로잔 유타	N130	QPNVHn		GN							names.657462
 白露西亞	백로서아	N110			GN							names.657463
@@ -48447,7 +48447,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 竹中美彩	다케나카 미사	N130	QPNVHn		GN							names.675593
 竹中英太郎	타케나카 에이타로	N130	QPNVHn		GN							names.675594
 竹中藤右衛門	타케나카 토에몬	N130	QPNVHn		GN						たけなか とうえもん	names.675595
-竹中郁	다끼나까 이꾸	N130	QPNVHn		GN							names.675596
+竹中郁	다케나카 이쿠	N130	QPNVHn		GN							names.675596
 竹中里美	다케나카 사토미	N130	QPNVHn		GN							names.675597
 竹中重利	다케나카 시게토시	N130	QPNVHn		GN							names.675598
 竹中重治	다케나카 시게하루	N110			GN						たけなか しげはる	names.675599
@@ -60699,7 +60699,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 羽赫	우혁	N130	QPNVHn	Wb	GN						うかく	names.688062
 羽越新幹線	우에츠 신칸센	N110			GN							names.688063
 羽越本線	우에츠 본선	N110			GN						うえつほんせん	names.688064
-羽越線	우에쓰 본선	N110			GN						うえつせん	names.688065
+羽越線	우에츠 본선	N110			GN						うえつせん	names.688065
 羽里	하리	N130	QPNVHn	Wa	GN							names.688066
 羽里さつき	하리 사츠키	N130	QPNVHn		GN							names.688067
 羽里早紀子	하리 사키코	N130	QPNVHn		GN							names.688068
@@ -72628,7 +72628,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 葵渚	아오이 나기사	N130	QPNVHn		GN						あおい なぎさ	names.700185
 葵百合香	아오이 유리카	N130	QPNVHn		GN							names.700186
 葵真木子	아오이 마키코	N130	QPNVHn		GN							names.700187
-葵符「水戸の光圀」	규부 「미토의 미쓰쿠니」	N110			GN							names.700188
+葵符「水戸の光圀」	규부 「미토의 미츠쿠니」	N110			GN							names.700188
 葵紋	아오이몬	N130	QWK		GN							names.700189
 葵紫穂	아오이 시호	N130	QPNVHn		GN							names.700190
 葵興駅	콰이힝역	N130	QCTVPl		GN							names.700191
@@ -75160,7 +75160,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 藤原帰一	후지와라 기이치	N130	QPNVHn		GN							names.702730
 藤原幸鷹	후지와라노 유키타카	N130	QPNVHn		GN						ふじわらのゆきたか	names.702731
 藤原広嗣	후지와라노 히로츠구	N110			GN						ふじわらのひろつぐ	names.702732
-藤原広嗣の乱	후지와라노 히로쓰구의 난	N110			GN						ふじわらのひろつぐのらん	names.702733
+藤原広嗣の乱	후지와라노 히로츠구의 난	N110			GN						ふじわらのひろつぐのらん	names.702733
 藤原広太朗	후지와라 고타로	N130	QPNVHn		GN							names.702734
 藤原広業	후지와라노 히로나리	N110			GN						ふじわらのひろなり	names.702735
 藤原式家	후지와라 식가	N110			GN							names.702736
@@ -82313,10 +82313,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 西鉄 2000形 電車	니시테츠 2000형 전차	N130	QCTVPl		GN							names.709962
 西鉄 3000形 電車	니시테츠 3000형 전차	N110			GN							names.709963
 西鉄 3000形 電車	니시테츠 3000형 전동차	N110			GN							names.709964
-西鉄 5000形 電車	니시테쓰 5000형	N110			GN							names.709965
+西鉄 5000形 電車	니시테츠 5000형	N110			GN							names.709965
 西鉄 6000形 電車	니시테츠 6000형 전동차	N110			GN							names.709966
 西鉄 600形 電車	니시테츠 600형 전동차	N110			GN							names.709967
-西鉄 9000形 電車	니시테쓰 9000형	N110			GN							names.709968
+西鉄 9000形 電車	니시테츠 9000형	N110			GN							names.709968
 西鉄1000形	니시테츠 1000형	N110			GN							names.709969
 西鉄1000形電車	니시테츠 1000형 전차	N130	QCTVPl		GN							names.709970
 西鉄3000形	니시테츠 3000형	N110			GN						にしてつ3000がた	names.709971
@@ -86506,7 +86506,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 豊田章一郎	도요다 쇼이치로	N130	QPNVHn		GN							names.714245
 豊田章男	토요다아키오	N130	QPNVHn	Wb	GN						とよだあきお	names.714246
 豊田綾乃	토요다 아야노	N130	QPNVHn		GN							names.714247
-豊田自動織機	도끼와세이끼가부시끼가이샤	N130	VGt		GN							names.714248
+豊田自動織機	도요타 자동직기	N130	VGt		GN							names.714248
 豊田英二	도요다 에이지	N130	QPNVHn		GN							names.714249
 豊田萌絵	토요타 모에	N130	QPNVHn		GN							names.714250
 豊田薫	토요다 카오루	N130	QPNVHn		GN							names.714251
@@ -105169,7 +105169,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 釣本	츠리모토	N130	QPNVHn	Wa	GN							names.733158
 釣本南	츠리모토 미나미	N130	QPNVHn		GN							names.733159
 釣歌音ソウ	츠리가네 소	N110			GN						つりがねそう	names.733160
-釣瓶下ろし	쓰루베오토시	N110			GN							names.733161
+釣瓶下ろし	츠루베오토시	N110			GN							names.733161
 釣瓶火	츠루베비	N110			GN						つるべび	names.733162
 釣鐘茶寮	츠리가네 사료	N130	QPNVHn		GN						つりがねさりょう	names.733163
 釣魚台国賓館	댜오위타이 국빈관	N130	VGt		GN							names.733164
@@ -108821,7 +108821,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 長堀	나카호리	N130	QPNVHn	Wa	GN						なかほり	names.736849
 長堀嘉一	나가호리 요시카즈	N130	QPNVHn		GN							names.736850
 長堀村	나가호리촌	N130	QCTVPl		GN							names.736851
-長堀鶴見緑地線	오사카 시 교통국 지하철 나가호리쓰루미료쿠치 선	N110			GN							names.736852
+長堀鶴見緑地線	오사카 시 교통국 지하철 나가호리츠루미료쿠치 선	N110			GN							names.736852
 長堤路	장제로	N130	QCTVPl		GN							names.736853
 長場村	나가바촌	N130	QCTVPl		GN							names.736854
 長塚	나가츠카	N130	QCTVPl		GN						ながつか	names.736855
@@ -110912,7 +110912,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 閑野誠	시즈노 마코토	N130	QPNVHn		GN						しずのまこと	names.738952
 閑院宮	간인노미야	N110			GN						かんいんのみや	names.738953
 閑院宮典仁親王	간인노미야 스케히토 친왕	N110			GN						かんいんのみやすけひとしんのう	names.738954
-閑院宮孝仁親王	간인노미야 다쓰히토 친왕	N110			GN						かんいんのみや たかひとしんのう	names.738955
+閑院宮孝仁親王	간인노미야 다츠히토 친왕	N110			GN						かんいんのみや たかひとしんのう	names.738955
 閑院宮愛仁親王	간인노미야 나루히토 친왕	N110			GN						かんいんのみや なるひとしんのう	names.738956
 閑院宮春仁王	간인 스미히토	N110			GN						かんいんのみやはるひとおう	names.738957
 閑院宮直仁親王	간인노미야 나오히토 친왕	N110			GN						かんいんのみや なおひとしんのう	names.738958
@@ -114412,7 +114412,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 陸奥睦美	무츠 무츠미	N130	QPNVHn		GN						むつ むつみ	names.742483
 陸奥神なおや	무츠가미 나오야	N130	QPNVHn		GN						むつがみなおや	names.742484
 陸奥笑穂	무츠 에미	N130	QPNVHn		GN						むつ えみ	names.742485
-陸奥陽之助	무쓰 무네미쓰	N110			GN							names.742486
+陸奥陽之助	무츠 무네미츠	N110			GN							names.742486
 陸子豪	루쯔하오	N130	QPNVHn	Wb	GN							names.742487
 陸孫	육손	N130	QPNVHn	Wb	GN						りくそん	names.742488
 陸守ユウ	리쿠모리 유	N130	QPNVHn		GN						りくもり ゆう	names.742489
@@ -127604,7 +127604,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 高松燈	타카마츠 토모리	N130	QPNVHn		GN							names.755890
 高松琴平電気鉄道	다카마츠코토히라 전기 철도	N110			GN						たかまつことひらでんきてつどう	names.755891
 高松琴平電気鉄道株式会社	타카마츠코토히라 전기철도	N130	VGt		GN							names.755892
-高松琴平電鉄	다카마쓰코토히라 전기 철도	N110			GN						たかまつことひらでんきてつどう	names.755893
+高松琴平電鉄	다카마츠코토히라 전기 철도	N110			GN						たかまつことひらでんきてつどう	names.755893
 高松由香	다카마츠 유카	N130	QPNVHn		GN							names.755894
 高松直輝	다카마츠 나오키	N130	QPNVHn		GN							names.755895
 高松知美	타카마츠 토모미	N130	QPNVHn		GN							names.755896
@@ -132640,7 +132640,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 鰯水鯵子	이와시미즈 아지코	N130	QPNVHn		GN						いわしみず あじこ	names.760981
 鰲川面	오천면	N130	QCTVPl		GN							names.760982
 鰲拜	오배	N130	QPNVHn	Wb	GN							names.760983
-鰹のたたき	가쓰오 타타키	N110			GN							names.760984
+鰹のたたき	가츠오 타타키	N110			GN							names.760984
 鰹節	가츠오부시	N110			GN							names.760985
 鰺坂	아지사카	N130	QPNVHn	Wa	GN							names.760986
 鰺坂二夫	아지사카 츠기오	N130	QPNVHn		GN							names.760987
