@@ -317,10 +317,20 @@ bool Item::StandsAlone() const {
         return false;
     }
     if (start + group->length != static_cast<int>(text.size())) return false;
-    // The end of the text or line, or an ellipsis, ends the sentence too (かわいそう…, すてき).
+    // The end of the text, unless lines may break mid-sentence, or an ellipsis that the stem's ending
+    // does not follow ends the sentence too (すてき, かわいそう…; not おいし…い, すてき…な人).
     const int n = detail->nextType;
-    const bool closed = n == tokenizer::kTypeEnd ||
-                        (n == tokenizer::kTypeSymbol && (detail->nextText.starts_with("…") || detail->nextText.starts_with("‥")));
+    bool closed = n == tokenizer::kTypeEnd && !w->settings.wrapped;
+    if (n == tokenizer::kTypeSymbol && (detail->nextText.starts_with("…") || detail->nextText.starts_with("‥"))) {
+        std::string_view after = detail->nextText;
+        while (after.starts_with("…") || after.starts_with("‥")) after.remove_prefix(std::string_view("…").size());
+        if (const int k = tokenIndex + 2; after.empty() && k < w->TokenCount()) after = w->Tok(k).text;
+        closed = true;
+        const std::initializer_list<std::string_view> goesOn =
+            detail->cls == kDetailKeiyo ? std::initializer_list<std::string_view>{"い", "く", "か", "け", "さ", "そう", "すぎ"}
+                                        : std::initializer_list<std::string_view>{"な", "だ", "で", "に"};
+        for (const std::string_view e : goesOn) closed = closed && !after.starts_with(e);
+    }
     if (!closed && n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
     if (const int p = detail->ClassifyTrailingPunctuation({}); !closed && (p < 2 || p > 4)) return false;
     if (start > 0) {

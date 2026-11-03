@@ -704,6 +704,7 @@ word::Settings AnalysisSettings(bool text, bool verse, const TranslationOptions&
     s.text = text;
     s.terminal = text;
     s.verse = verse;
+    s.wrapped = options.wrapped;
     if (!options.reference) {
         s.scorers = options.scorers;
         s.shadowScorers = options.shadowScorers;
