@@ -1,0 +1,170 @@
+# 규칙: GRM-3680, GRM-3681, GRM-3682, GRM-3683, GRM-3684, GRM-3685, GRM-3686, LEX-4532, LEX-4533, LEX-4534, LEX-4535, LEX-4536, LEX-4537
+rule	input	expected	kind	layer
+cx:web-fixes-j:5	下級妃嬪は後宮内で個室を持つことを許されているが、場所は宮内の端にあり、皇帝の目につくことはめったにない。	has:황제의 눈에 띄는	fix	rewrites
+cx:web-fixes-j:5	両親は私を殿下の目に入るところに連れていけば気にいられると信じていた。	has:전하의 눈에 들어오는	fix	rewrites
+cx:web-fixes-j:5	ショッケンに関する文章がたまたま青海さんの目に入ったんだろう。	has:아오미 씨의 눈에 들어왔을	fix	rewrites
+cx:web-fixes-j:5	すでに、みいちゃんの容体は、皆の耳に入っている。	has:모두의 귀에 들려오고	fix	rewrites
+cx:web-fixes-j:5	私は多くの人の目に入るような場所に連れ回されていた。	has:많은 사람의 눈에 들어오는	fix	rewrites
+cx:web-fixes-j:5	今日は良い日じゃ。南蛮の技術が手に入るのだからな。	!rule:cx:web-fixes-j:5	keep	rewrites
+cx:web-fixes-j:5	誰の目にも明らかだ。	!rule:cx:web-fixes-j:5	keep	rewrites
+cx:web-fixes-j:5	彼の手に入れた宝。	!rule:cx:web-fixes-j:5	keep	rewrites
+cx:web-fixes-j:7	さ、提督にご挨拶に行きましょう。	has:제독에게 인사하러 갑시다	fix	rewrites
+cx:web-fixes-j:7	提督。一航戦、新年のご挨拶に参りました。	has:신년의 인사하러 왔습니다	fix	rewrites
+cx:web-fixes-j:7	昨日、先輩たちが挨拶に来たらしい。	has:인사하러 온 것 같다	fix	rewrites
+cx:web-fixes-j:7	正直まったく話を聞いてなかったし、なんの挨拶にくるのだろうと思いつつも……	has:무슨 인사하러 올	fix	rewrites
+cx:web-fixes-j:7	朝の挨拶にも返事がない。	!rule:cx:web-fixes-j:7	keep	rewrites
+cx:web-fixes-j:7	千里の挨拶に反応し、店主は小さな店の窓口から顔をのぞかせた。	!rule:cx:web-fixes-j:7	keep	rewrites
+cx:web-fixes-j:10	先行していたバイクが、何かを踏んで転倒した。	has:뭔가를 밟아 넘어졌다	fix	rewrites
+cx:web-fixes-j:10	そもそもこちらが一方的に付きまとった挙句に転倒して、おまけに流血沙汰を起こしたわけですから	has:따라다닌 끝에 넘어져,	fix	rewrites
+cx:web-fixes-j:10	「本末転倒じゃないか」	!rule:cx:web-fixes-j:10	keep	rewrites
+cx:web-fixes-j:10	滑って転倒。	!rule:cx:web-fixes-j:10	keep	rewrites
+cx:web-fixes-j:20	だって、よくよく考えたらヒロインは婚約者がいる男に近づいていって、それで横恋慕するんだ。	has:그래서 남의 짝을 넘보는 거야	fix	rewrites
+cx:web-fixes-j:20	横恋慕は良くない。	!rule:cx:web-fixes-j:20	keep	rewrites
+cx:web-fixes-j:30	仕事一筋でその日は夜遅くまで働いて、会社帰りに事故で死んでしまった。	has:일 외길로 그날은	fix	rewrites
+cx:web-fixes-j:30	仕事一筋、恋愛している暇なんてあるか！というワタシだった。	has:일 외길, 연애하고	fix	rewrites
+cx:web-fixes-j:30	創業者が技術畑一筋の出身で技術力はピカイチだが、営業力や宣伝力がない。	has:기술밭 외길의 출신	fix	rewrites
+cx:web-fixes-j:30	その時、一筋の閃光が夜空で弾けた。	!rule:cx:web-fixes-j:30	keep	rewrites
+cx:web-fixes-j:30	オーバーヒート直前のレナの鼻から、赤いものが一筋垂れてくる。	!rule:cx:web-fixes-j:30	keep	rewrites
+cx:web-fixes-j:40	本日、私は父に付き添い王宮にやってきた。	has:오늘, 나는 아버지와 동행해 왕궁에 왔다.	fix	rewrites
+cx:web-fixes-j:40	母に付き添って病院へ行った。	has:어머니와 동행해 병원에 갔다.	fix	rewrites
+cx:web-fixes-j:40	ジオルド王子だけでなく、寝室に付き添っていた召使さんたちも一様に固まってしまった。	!rule:cx:web-fixes-j:40	keep	rewrites
+cx:web-fixes-j:45	……こんな茶番に、これ以上付き合ってられない。	has:더 이상 어울리고 있을 수 없다	fix	rewrites
+cx:web-fixes-j:45	Admiralも、姉さんの深酒に、あまり付き合わなくていいからね。	has:별로 어울리지 않아도 되니까	fix	rewrites
+cx:web-fixes-j:45	午前三時です。提督には付き合いきれませんわ。	has:제독에게는 다 어울릴 수 없어요	fix	rewrites
+cx:web-fixes-j:45	お母さんのテンションには付き合わず、床に置いてあったリュックを取る。	has:텐션에는 어울리지 않고	fix	rewrites
+cx:web-fixes-j:45	彼女と付き合っている。	!rule:cx:web-fixes-j:45	keep	rewrites
+cx:web-fixes-j:45	「……そもそも、なんでキノが俺と未来に付き合ってほしいんだよ」	!rule:cx:web-fixes-j:45	keep	rewrites
+cx:web-fixes-j:45	付き合ってください。	!rule:cx:web-fixes-j:45	keep	rewrites
+cx:web-fixes-j:47	それでも初めの時からのあまりの変わりようにびっくりしたのだろう。	has:너무나 달라진 모습에 놀랐을 것이다	fix	rewrites
+cx:web-fixes-j:47	あまりの痛さに声が出た。	!rule:cx:web-fixes-j:47	keep	rewrites
+cx:web-fixes-j:50	私はあわてて返した。	has:나는 서둘러 대답했다.	fix	rewrites
+cx:web-fixes-j:50	これ以上、ジオルド王子に気をつかわせてしまってはと私は満面の笑顔で返す。	has:만면의 웃는 얼굴로 대답한다	fix	rewrites
+cx:web-fixes-j:50	まったく聞いてなかったが、とりあえず笑顔で返した。	has:우선 웃는 얼굴로 대답했다	fix	rewrites
+cx:web-fixes-j:50	「ターシャ！」とさけぶと「ダー！」とターシャが返す。	has:타샤가 대답한다	fix	rewrites
+cx:web-fixes-j:50	滝本はニッコリ笑いながらうなずいて返す、しかし目の奥は笑っていない。	has:끄덕여 대답한다	fix	rewrites
+cx:web-fixes-j:50	俺も笑顔で返し、森下さんの手をきゅっと握った。	has:나도 웃는 얼굴로 대답해,	fix	rewrites
+cx:web-fixes-j:50	借りた本を急いで返した。	!rule:cx:web-fixes-j:50	keep	rewrites
+cx:web-fixes-j:50	肩をすくめ望月さんを見ると、にっこりと笑って返された。	!rule:cx:web-fixes-j:50	keep	rewrites
+cx:web-fixes-j:50	帝国に指つき瓶を返すの。	!rule:cx:web-fixes-j:50	keep	rewrites
+cx:web-fixes-j:60	「同じ学生としてこの学園に通ったこと、皆様に良くしていただいたこと、感謝に堪えません。御機嫌よう」	has:감사하기 그지없습니다. 안녕히 계세요」	fix	rewrites
+cx:web-fixes-j:60	「ごきげんよう、フィリップ様」	!rule:cx:web-fixes-j:60	keep	rewrites
+cx:web-fixes-j:60	「ええ、ごきげんよう」	!rule:cx:web-fixes-j:60	keep	rewrites
+cx:web-fixes-j:60	ヒトヨンマルマ……あら、明石ちゃん。御機嫌よう。流石に最新の装備ね、素敵だわ。	!rule:cx:web-fixes-j:60	keep	rewrites
+cx:web-fixes-j:60	ごきげんよう。	!rule:cx:web-fixes-j:60	keep	rewrites
+cx:web-fixes-j:65	「それではごきげんよう、お嬢様」	has:「그러면 안녕히 계세요, 아가씨」	fix	rewrites
+cx:web-fixes-j:65	14時よ。食事の後は仮眠をとりますの。ではごきげんよう、提督	has:그럼 안녕히 계세요, 제독	fix	rewrites
+cx:web-fixes-j:65	ごきげんよう、三隈です。	!rule:cx:web-fixes-j:65	keep	rewrites
+cx:web-fixes-j:70	一方、食指を動かされることなく適齢を過ぎた妃は、よほど実家の権力がない限り位が下げられるなり、最悪、下賜されてしまう。	has:본가의 권력이 있지 않는 한	fix	rewrites
+cx:web-fixes-j:70	平常時はシンクロ値が下がる。よほど近くにいなければ、ほとんど何も感じ取る事はないのだが。	has:근처에 있지 않으면	fix	rewrites
+cx:web-fixes-j:70	余程のことがない限りず～っとこのままかな……。	!rule:cx:web-fixes-j:70	keep	rewrites
+cx:web-fixes-j:70	実家の権力がない限り無理だ。	!rule:cx:web-fixes-j:70	keep	rewrites
+cx:web-fixes-j:80	「リーシェ、お前はまた僕の可愛いマリーを泣かせたな！？　マリーからすべて聞いているぞ。」	has:마리에게서 모두 듣고 있어.	fix	rewrites
+cx:web-fixes-j:80	「おまえな、いくら何でもあれはねえだろ、下品にも程があるぞ！」	has:천해도 정도가 있어!	fix	rewrites
+cx:web-fixes-j:80	「平民、男爵、伯爵。なるほど階級はガチャで決まるのか。国王まであるぞ。剣聖でも同じか？」	has:국왕까지 있어.	fix	rewrites
+cx:web-fixes-j:80	塀の上にカタツムリがおるぞ！	has:담 위에 달팽이가 있어!	fix	rewrites
+cx:web-fixes-j:80	ん、なんだ、今、なんて？変な言葉を聞いた気がするぞ。	has:이상한 말을 들은 것 같아.	fix	rewrites
+cx:web-fixes-j:80	ミドリさんと松はもういいと思うぞ	has:이제 되다고 생각해	fix	rewrites
+cx:web-fixes-j:80	望んだ通りに出し入れできるぞ。	has:넣었다 뺐다 할 수 있어.	fix	rewrites
+cx:web-fixes-j:80	「ほら、呼んでいるぞ」	has:「자, 부르고 있어」	fix	rewrites
+cx:web-fixes-j:80	行くぞ。	!rule:cx:web-fixes-j:80	keep	rewrites
+cx:web-fixes-j:80	「どけ！殺すぞ！！！」	!rule:cx:web-fixes-j:80	keep	rewrites
+cx:web-fixes-j:80	「とにかく全力で隠蔽するぞ！」	!rule:cx:web-fixes-j:80	keep	rewrites
+cx:web-fixes-j:90	空はまだ暗く、見たこともないほど美しい星空が広がっていた。	has:본 적도 없을 정도로 아름다운	fix	rewrites
+cx:web-fixes-j:90	しかも八歳とは思えないほど落ち着いてしっかりした子だった。	has:생각되지 않을 정도로 침착해	fix	rewrites
+cx:web-fixes-j:90	確かにやり直したいとは思ったが、電気代も支払えないほど貧乏な家に生まれるとは……。	has:지불할 수 없을 정도로 가난한	fix	rewrites
+cx:web-fixes-j:90	ようやくCMに切り替わった時、スタジオの空気は、誰も何も言えないほど張り詰めていた。	has:말할 수 없을 정도로 긴장되어	fix	rewrites
+cx:web-fixes-j:90	ボスのＨＰは信じられないくらい高く、５０人のレイド戦でも１時間以上殴らないと死なない。	has:믿을 수 없을 정도로 높고	fix	rewrites
+cx:web-fixes-j:90	でも魅音が絶叫するほどじゃない。	!rule:cx:web-fixes-j:90	keep	rewrites
+cx:web-fixes-j:90	夏だな。…暑いがまあ、気になるほどではないな。	!rule:cx:web-fixes-j:90	keep	rewrites
+cx:web-fixes-j:90	だが、それでも運命を変えられるほどではなかった。	!rule:cx:web-fixes-j:90	keep	rewrites
+cx:web-fixes-j:100	絵にかいたような金髪碧眼の爽やかな外見で、挙げ句に王太子という地位もあってか、彼に群がる女性は絶えなかった。	has:급기야 왕태자라는	fix	rewrites
+cx:web-fixes-j:100	ロシア語からフランス語まで流暢に話し、挙句に数学や物理学の分野でも、過去問を全て間違わずに解いた。	has:급기야 수학이나	fix	rewrites
+cx:web-fixes-j:105	シンシア様がお母上のお腹にいる頃から彼女をちっとも顧みず、挙句愛人作ってそっちにも娘を産ませて	has:급기야 애인 만들어	fix	rewrites
+cx:web-fixes-j:105	このナンシー・フェイカー男爵令嬢を不当に貶めて虐めた挙句、ついには直接危害まで加えたそうだな！	!rule:cx:web-fixes-j:105	keep	rewrites
+cx:web-fixes-j:105	そして挙句の果てには勝手に縁談を組んだり、お見合いの話を進めたりする。	!rule:cx:web-fixes-j:105	keep	rewrites
+cx:web-fixes-j:110	薬屋をやってきて思うこと、女の笑みほど恐ろしい毒はないと。	has:약국을 해 오고	fix	rewrites
+cx:web-fixes-j:110	あのころの感動を求めて、いくつものゲームをやってきた。	has:여러의 게임을 해 왔다	fix	rewrites
+cx:web-fixes-j:110	男は数々のゲームをやってきた。	has:수많은 게임을 해 왔다	fix	rewrites
+cx:web-fixes-j:110	本日、私は王宮にやってきた。	!rule:cx:web-fixes-j:110	keep	rewrites
+cx:web-fixes-j:115	「では、またあなたの体調が優れた頃に改めてご挨拶に参ります」	has:좋았을 무렵에 다시 인사하러	fix	rewrites
+cx:web-fixes-j:115	彼女はそれに気付くと、アキラに改めて微笑んだ。	!rule:cx:web-fixes-j:115	keep	rewrites
+cx:web-fixes-j:120	氏名を堂々と名乗った挙げ句に『かかってこいやぁ！』と異星文明相手に営業活動をかました。	has:자칭한 끝에 『덤벼라	fix	rewrites
+cx:web-fixes-j:120	不当に貶めて虐めた挙句、ついには直接危害まで加えた。	!rule:cx:web-fixes-j:120	keep	rewrites
+cx:web-fixes-j:125	「……なんだって？」	has:「……뭐라고?」	fix	rewrites
+cx:web-fixes-j:125	ん、なんだ、今、なんて？	has:지금, 뭐라고?	fix	rewrites
+cx:web-fixes-j:125	「なんだって？　優先チャンネルだぞ、混線なんてするか？」	has:「뭐라고? 우선 채널이야	fix	rewrites
+cx:web-fixes-j:125	「……なんて？」	has:「……뭐라고?」	fix	rewrites
+cx:web-fixes-j:125	なんてきれいな花なんだ！	!rule:cx:web-fixes-j:125	keep	rewrites
+cx:web-fixes-j:125	そんなことを言うなんて信じられない。	!rule:cx:web-fixes-j:125	keep	rewrites
+cx:web-fixes-j:127	「ちなみに、嬉野さんはなんて？」	has:「참고로, 우레시노 씨는 뭐래?」	fix	rewrites
+cx:web-fixes-j:127	先生はなんて言ったの？	!rule:cx:web-fixes-j:127	keep	rewrites
+cx:web-fixes-j:135	誰と誰が婚約だって？	has:누구와 누가 약혼이라고?	fix	rewrites
+cx:web-fixes-j:135	午後9時です。ほんっと能代は私がいないとねぇ。…え？逆だって？	has:…어? 반대라고?	fix	rewrites
+cx:web-fixes-j:135	新入りだって？あたしより後輩だな。	has:신입이라고? 나보다 후배네.	fix	rewrites
+cx:web-fixes-j:135	「ハッキングだって？」	has:「해킹이라고?」	fix	rewrites
+cx:web-fixes-j:135	子供だって知ってる。	!rule:cx:web-fixes-j:135	keep	rewrites
+cx:web-fixes-j:135	え、突然何言ってんだって？	!rule:cx:web-fixes-j:135	keep	rewrites
+cx:web-fixes-j:140	「そうよね、でなければ三人も亡くなられるわけないわ」	has:「그렇지, 그렇지 않으면 세 명도	fix	rewrites
+cx:web-fixes-j:140	「何をしたのか話せ、でなければ助けられない」って言い続けていて、	has:이야기해라, 그렇지 않으면 도울 수 없다	fix	rewrites
+cx:web-fixes-j:140	本物でなければ意味がない。	!rule:cx:web-fixes-j:140	keep	rewrites
+cx:web-fixes-j:145	小蘭からついでに聞いた話をすると、快くかわってくれた。	has:기분 좋게 대신해 주었다	fix	rewrites
+cx:web-fixes-j:145	彼はすっかりかわってしまった。	!rule:cx:web-fixes-j:145	keep	rewrites
+cx:web-fixes-j:150	「殿下。国民はあなたが護り、慈しむべき存在です。そのようなお言葉はなりません」	has:그러한 말씀은 안됩니다	fix	rewrites
+cx:web-fixes-j:150	雛見沢への帰り道は長いはずなのに、あまり気にはならない。	!rule:cx:web-fixes-j:150	keep	rewrites
+cx:web-fixes-j:150	同行させてくれませんか？なあに、決して足でまといにはなりませんよ！	!rule:cx:web-fixes-j:150	keep	rewrites
+cx:web-fixes-j:155	お前のような性根のねじ曲がった女が、王妃になどなれると思ったのか！？	has:왕비 따위가 될 수 있다고	fix	rewrites
+cx:web-fixes-j:155	王妃になど興味はない。	!rule:cx:web-fixes-j:155	keep	rewrites
+cx:web-fixes-j:165	……これを逃す手はないかも。	has:이것을 놓칠 수는 없을지도	fix	rewrites
+cx:web-fixes-j:165	震える手は冷たかった。	!rule:cx:web-fixes-j:165	keep	rewrites
+cx:web-fixes-j:170	それだけの覚悟をもってやったのだ、と言外に仄めかす。	has:각오를 가지고 했다	fix	rewrites
+cx:web-fixes-j:170	俺は仕事として命を懸けてやっているし、責任を取る覚悟もある	has:목숨을 걸어 하고 있고	fix	rewrites
+cx:web-fixes-j:170	ブライアンがありったけの撮影機材を持ってやってきた。	!rule:cx:web-fixes-j:170	keep	rewrites
+cx:web-fixes-j:175	甘やかされて育ったので、人の迷惑などお構いなしだった。	has:사람의 민폐 같은 건 아랑곳하지 않았다	fix	rewrites
+cx:web-fixes-j:175	迷惑な話だ。	!rule:cx:web-fixes-j:175	keep	rewrites
+cx:web-fixes-j:177	迷惑なんか気にしない。	has:민폐 같은 건 신경 쓰지 않는다	fix	rewrites
+cx:web-fixes-j:177	それは迷惑なんだよ。	!rule:cx:web-fixes-j:177	keep	rewrites
+cx:web-fixes-j:180	「間に合わなかったのね……しかも、今までで一番最悪のタイミングだわ。」	has:지금까지 중에서 제일 최악의 타이밍	fix	rewrites
+cx:web-fixes-j:180	佳奈の腰をしっかり支えると、今までで一番深く、強く沈めた。	has:지금까지 중에서 제일 깊고	fix	rewrites
+cx:web-fixes-j:180	これまでで最高の出来だ。	has:지금까지 중에서 최고의	fix	rewrites
+cx:web-fixes-j:180	今まで何してた？	!rule:cx:web-fixes-j:180	keep	rewrites
+cx:web-fixes-j:180	今まで通りでいい。	!rule:cx:web-fixes-j:180	keep	rewrites
+cx:web-fixes-j:185	メニューはパンとスープ、それにチキン入りのオムレツ。	has:치킨 넣은 오믈렛	fix	rewrites
+cx:web-fixes-j:185	猫猫はお礼代わりに、甘草入りの茶を渡す。	has:감초 넣은 차를	fix	rewrites
+cx:web-fixes-j:185	氷入りの冷たい水。	has:얼음 넣은 차가운 물	fix	rewrites
+cx:web-fixes-j:185	気に入りの服を着た。	!rule:cx:web-fixes-j:185	keep	rewrites
+cx:web-fixes-j:185	日の入りの時刻を調べた。	!rule:cx:web-fixes-j:185	keep	rewrites
+cx:web-fixes-j:190	「やっぱりな。さっきはなんでもない顔をして笑っていたくせに、内心では悲しんでいたんじゃないか」	has:아무렇지도 않은 얼굴을 해 웃고	fix	rewrites
+cx:web-fixes-j:190	若は何でもない顔をして実はつらい思いをしておられるのだろう。	has:아무렇지도 않은 얼굴을 해	fix	rewrites
+cx:web-fixes-j:190	なんでもない日常が一番だ。	!rule:cx:web-fixes-j:190	keep	rewrites
+cx:web-fixes-j:190	なんでもないよ。	!rule:cx:web-fixes-j:190	keep	rewrites
+cx:web-fixes-j:100	氏名を堂々と名乗った挙げ句に『かかってこいやぁ！』と叫んだ。	!rule:cx:web-fixes-j:100	keep	rewrites
+cx:web-fixes-j:100	そして挙句の果てには勝手に縁談を組んだりする。	!rule:cx:web-fixes-j:100	keep	rewrites
+cx:web-fixes-j:195	…おやすみなさ…	…안녕히 주무세…	fix	rewrites
+cx:web-fixes-j:195	おやすみなさい。	!rule:cx:web-fixes-j:195	keep	rewrites
+cx:web-fixes-j:195	「おやすみ、また明日な」	!rule:cx:web-fixes-j:195	keep	rewrites
+cx:web-fixes-j:200	先生でいらっしゃる方々に挨拶した。	has:선생님이신 분들	fix	rewrites
+cx:web-fixes-j:200	彼は先生でいらっしゃる。	!rule:cx:web-fixes-j:200	keep	rewrites
+cx:web-fixes-j:200	社長でいらっしゃいますか。	!rule:cx:web-fixes-j:200	keep	rewrites
+cx:web-fixes-j:205	国王でいらっしゃる方。	국왕이신 분.	fix	rewrites
+cx:web-fixes-j:205	いにしえよりニサン教の教母様とアヴェの国王であられる方とは……	has:국왕이신 분이란	fix	rewrites
+cx:web-fixes-j:205	部屋にいらっしゃる方は先生です。	!rule:cx:web-fixes-j:205	keep	rewrites
+cx:web-fixes-j:210	正直に言って、肉体的な苦痛については、丸切り夢のような幻想を抱いていた。	has:솔직하게 말해,	fix	rewrites
+cx:web-fixes-j:210	正直にいって私は優良物件である。	has:솔직하게 말해 나는	fix	rewrites
+cx:web-fixes-j:210	私は、正直に言えば王族の考え方が肌に合わない。	has:솔직하게 말하면	fix	rewrites
+cx:web-fixes-j:210	正直に話してくれ。	has:솔직하게 이야기해	fix	rewrites
+cx:web-fixes-j:210	正直に生きる。	!rule:cx:web-fixes-j:210	keep	rewrites
+cx:web-fixes-j:210	正直、さっきよりも緊張してきた。	!rule:cx:web-fixes-j:210	keep	rewrites
+cx:web-fixes-j:215	「いえいえ。ジオルド様こんなかすり傷、気になさらないで下さい。だいたい、額の傷なんて前髪でぱぱっと隠せるのでなんの問題もございませんわ」	has:애초에, 이마의 상처	fix	rewrites
+cx:web-fixes-j:215	「だいたい、お前がもう少しシャイン殿下の心を繋ぎ止めていれば、こんな話にはならなかったのだ」	has:「애초에, 네가	fix	rewrites
+cx:web-fixes-j:215	だいたい、どうして乗れもしないギアに乗ろうなんてしたのよ？	has:애초에, 왜	fix	rewrites
+cx:web-fixes-j:215	だいたい分かった。	!rule:cx:web-fixes-j:215	keep	rewrites
+cx:web-fixes-j:215	作業はだいたい、終わった。	!rule:cx:web-fixes-j:215	keep	rewrites
+cx:web-fixes-j:220	政略結婚が当たり前の世の中、ちょっとしたことでも不利な材料とされてしまう。	has:사소한 일이라도	fix	rewrites
+cx:web-fixes-j:220	そういえばあの方、ちょっとしたことでよく笑うから“笑い袋”って呼ばれていた。	has:사소한 일로	fix	rewrites
+cx:web-fixes-j:220	ちょっとした騒ぎになった。	!rule:cx:web-fixes-j:220	keep	rewrites
+cx:web-fixes-j:225	ジオルド王子の訪問時も部屋に控えていてくれたアンだったが、なぜだか異様に興奮していた。	has:방에서 대기하고 있어 준	fix	rewrites
+cx:web-fixes-j:225	外に控えていた衛士も、笑い声の聞こえる病室に怪訝な表情をしていた。	has:밖에서 대기하던	fix	rewrites
+cx:web-fixes-j:225	あっちへ行け、という風に手を振ると友人の脇に控えた。	has:옆에서 대기했다	fix	rewrites
+cx:web-fixes-j:225	受験を間近に控えた時期なのに、親の期待もなにもかもうっちゃった。	!rule:cx:web-fixes-j:225	keep	rewrites
+cx:web-fixes-j:215	ふ～ッ！だいたい、こんなとこかな……。	!rule:cx:web-fixes-j:215	keep	rewrites
+cx:web-fixes-j:215	「大体、形が見えてきたか」	!rule:cx:web-fixes-j:215	keep	rewrites
