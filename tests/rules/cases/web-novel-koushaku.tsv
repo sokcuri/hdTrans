@@ -1,0 +1,37 @@
+# 규칙: LEX-4023
+rule	input	expected	kind	layer
+dict:jisjk:102557	新興貴族が増長して貴族のパワーバランスが崩れる	has:기고만장해	fix	lookup
+dict:w:31037	幾分か視線は和らぎ	has:다소 시선은	fix	lookup
+dict:w:31039	たかが子女、されど子女。	겨우 자녀, 그래도 자녀.	fix	lookup
+dict:w:31039	「されど、拙者にも考えがある」	has:그래도,	fix	lookup
+dict:w:31040	私を私たらしめるモノは私だけのもの。	has:나를 나답게 만드는	fix	lookup
+dict:w:658	ああ、すっきりした。	아, 개운했다.	fix	lookup
+dict:w:5093	ああ、スッキリした。	아, 개운했다.	fix	lookup
+dict:w:5093	気分的にもかなりスッキリしていた。	has:개운했다	fix	lookup
+dict:jisjk:92844	声を大にして問い詰めてやりたい。	has:캐물어 주고 싶다	fix	lookup
+sound:ほろり	ここで、ホロリと涙を流す。	has:주르륵 눈물을 흘린다	fix	sound
+sound:ほろり	ほろりと涙を流す。	주르륵 눈물을 흘린다.	fix	sound
+sound:ほろり	にこりと笑う。	방긋 웃는다.	keep	sound
+cx:mimetic-adnominal:415	すっきりした顔で	개운한 얼굴로	fix	rewrites
+cx:mimetic-adnominal:415	すっきりした。	!rule:cx:mimetic-adnominal:415	keep	rewrites
+cx:mimetic-adnominal:447	そんな晴れ晴れとした気持ちで、私は部屋を後にした。	has:상쾌한 기분으로	fix	rewrites
+cx:mimetic-adnominal:447	空が晴れ晴れと広がる。	!rule:cx:mimetic-adnominal:447	keep	rewrites
+cx:novel-fixes-2:120	主人公に骨抜きになっている彼	has:넋이 빠져 있는	fix	rewrites
+cx:novel-fixes-2:120	病気になった。	!rule:cx:novel-fixes-2:120	keep	rewrites
+cx:novel-fixes-2:128	私は確かに彼女に嫌がらせをしましたわ。	has:그녀를 괴롭혔어요	fix	rewrites
+cx:novel-fixes-2:128	彼に話をした。	!rule:cx:novel-fixes-2:128	keep	rewrites
+cx:novel-fixes-2:130	嫌がらせをした。	괴롭혔다.	fix	rewrites
+cx:novel-fixes-2:130	今後も何か嫌がらせをしてきたら	has:괴롭혀 오면	fix	rewrites
+cx:novel-fixes-2:130	あらゆる嫌がらせをしてきた？	has:괴롭힘을 해 왔어	keep	rewrites
+cx:novel-fixes-2:130	嫌がらせをされた。	has:괴롭힘을 당했다	keep	rewrites
+cx:novel-fixes-2:140	この場でできることは、もうない。	has:할 수 있는 것은	fix	rewrites
+cx:novel-fixes-2:140	ここでできる。	!rule:cx:novel-fixes-2:140	keep	rewrites
+cx:novel-fixes-2:150	それは、父との交渉次第。	has:교섭 나름.	fix	rewrites
+cx:novel-fixes-2:150	あとは本人の成長次第だね	has:성장 나름이	fix	rewrites
+cx:novel-fixes-2:150	到着次第、連絡します。	!rule:cx:novel-fixes-2:150	keep	rewrites
+cx:novel-fixes-2:160	皆さんにお会いすることはないでしょう。	has:여러분을 만날	fix	rewrites
+cx:novel-fixes-2:160	皆さんにお伝えします。	!rule:cx:novel-fixes-2:160	keep	rewrites
+cx:novel-fixes-2:170	最初は聞き間違えかと思った。	has:잘못 들었나 하고 생각했다	fix	rewrites
+cx:novel-fixes-2:170	聞き間違えた。	!rule:cx:novel-fixes-2:170	keep	rewrites
+cx:lc3h-toiunoni:28	事態だって起こり得るというのに……。	has:일어날 수 있는데도	fix	rewrites
+cx:lc3h-toiunoni:28	朝早くというのに、	has:아침 일찍인데도,	keep	rewrites
