@@ -332,11 +332,10 @@ bool Item::StandsAlone() const {
             while (piece.starts_with("　")) piece.remove_prefix(std::string_view("　").size());
             after = piece;
         }
-        closed = true;
-        const std::initializer_list<std::string_view> goesOn =
-            detail->cls == kDetailKeiyo ? std::initializer_list<std::string_view>{"い", "く", "か", "け", "さ", "そう", "すぎ"}
-                                        : std::initializer_list<std::string_view>{"な", "だ", "で", "に"};
-        for (const std::string_view e : goesOn) closed = closed && !after.starts_with(e);
+        const auto goesOn = [&](std::initializer_list<std::string_view> endings) {
+            return std::any_of(endings.begin(), endings.end(), [&](std::string_view e) { return after.starts_with(e); });
+        };
+        closed = !(detail->cls == kDetailKeiyo ? goesOn({"い", "く", "か", "け", "さ", "そう", "すぎ"}) : goesOn({"な", "だ", "で", "に"}));
     }
     if (!closed && n != tokenizer::kTypeAsciiPunct && n != tokenizer::kTypeSentenceEnd) return false;
     if (const int p = detail->ClassifyTrailingPunctuation({}); !closed && (p < 2 || p > 4)) return false;
