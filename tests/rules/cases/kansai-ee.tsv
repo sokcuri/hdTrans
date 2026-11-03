@@ -22,3 +22,10 @@ normalize:kansai-ee	ええ～っ！	에에~엣!	keep	normalize
 normalize:kansai-ee	ええ？ 沈む	어? 가라앉는다	keep	normalize
 normalize:kansai-ee	こええよ。	무서워.	keep	normalize
 normalize:kansai-ee	ええ、そうです。	네, 그렇습니다.	keep	normalize
+normalize:kansai-ee	怖ええよ	무서워	keep	normalize
+normalize:kansai-ee	強ええな	강하네	keep	normalize
+normalize:kansai-ee	速ええな	빠르네	keep	normalize
+normalize:kansai-ee	痛ええよ	아파	keep	normalize
+normalize:kansai-ee	寒ええな	춥네	keep	normalize
+normalize:kansai-ee	頭ええな	머리가 좋아	fix	normalize
+normalize:kansai-ee	格好ええ	멋지다	fix	normalize

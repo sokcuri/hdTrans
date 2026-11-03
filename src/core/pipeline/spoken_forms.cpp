@@ -640,13 +640,15 @@ bool KansaiNanya(std::string_view s, size_t pos, Match& m) {
 // copula, a conjunction or a noun of ええ (kKansaiEeBefore), after a particle, a て form or a word in kanji or
 // katakana or where a clause starts; a sentence-final で after it is the よ of Kansai speech (ええで いいよ). Not
 // the ええ of yes (ええ、そうです), the filler ええと, a cry (ええっ, ひええ) or the drawn end of an adjective
-// (こええ 怖い, つええ, はええな).
+// (こええ 怖い, つええ, はええな, 怖ええ, 強ええ; kKansaiEeAdjectiveKanji).
 bool KansaiEe(std::string_view s, size_t pos, Match& m) {
     if (pos > 0) {
         const std::string_view head = s.substr(0, pos);
         const char32_t b = LastRune(head).cp;
         const bool clauseStart = In(b, U"「『（(　 、，,。！？!?…‥―─～");
         if (!clauseStart && !IsKanjiClass(b) && !IsKatakanaRune(b) && !In(b, U"でもがはらばとてのうあち")) return false;
+        // After the stem of an adjective it is the adjective drawn out (怖ええよ 무서워, 強ええな).
+        if (In(b, kKansaiEeAdjectiveKanji)) return false;
         // は that starts a clause is the drawn 速い (はええな).
         if (b == U'は' && (head.size() == std::string_view("は").size() ||
                           In(LastRune(head.substr(0, head.size() - std::string_view("は").size())).cp, U"「『（(　 、，,。！？!?…‥"))) {
