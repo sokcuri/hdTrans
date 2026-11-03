@@ -71,3 +71,4 @@ dict:jisjk:137510	医者にはなりたくない。	has:의사는 되고 싶지 
 sense:toru-nutrient	もっとカルシウムを取っておけばと、生まれて初めて思った。	has:칼슘을 섭취해 둘걸	fix	senses
 sense:toru-nutrient	水分をしっかり取ってください。	has:수분을 확실히 섭취해	fix	senses
 sense:toru-nutrient	写真を取った。	has:사진을 찍었다	keep	senses
+cx:novel-fixes-2:1205	一番には言えない。	!rule:cx:novel-fixes-2:1205	keep	rewrites
