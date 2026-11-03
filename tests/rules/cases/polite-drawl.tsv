@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 normalize:drawl	明日も頑張り…ます。	내일도 노력하겠…습니다.	fix	normalize
 normalize:drawl	駅まで歩きま―した。	역까지 걸었―습니다.	fix	normalize
-normalize:drawl	私にはわかりま……せん。	저에게는 모릅……니다.	fix	normalize
+normalize:drawl	私にはわかりま……せん。	저는 모릅……니다.	fix	normalize
 normalize:drawl	もう休み……ましょう。	이제 쉽……시다.	fix	normalize
 normalize:drawl	一緒に行きま…しょうか？	함께 갈…까요?	fix	normalize
 normalize:drawl	本当に来ま……すか？	정말 옵……니까?	fix	normalize

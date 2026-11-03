@@ -272,6 +272,7 @@
 //= noun.manner-ni	Nouns that make an adverb of manner with に, after which いう is to say, not to go (一括りにいっても 말해도, 端的にいえば 말하면).
 //= noun.market-price	Ends of the nouns of prices, rates and markets: as the subject of 反発 they rebound, 반등 (株価が反発した 주가가 반등했다).
 //= noun.ni-not-goal	Ends of the nouns before に that tell a point in time or what else, not the place or state one goes back to (三時に戻る 3시에 돌아오다, 一時間後に戻る, それ以外に戻る理由).
+//= noun.knower-act	Verbal nouns of knowing, judging or copying (理解, 想像, 真似), whose できる after a person in に makes that person the one who can (誰にも理解できない 아무도 이해할 수 없다), as for 分かる.
 //= noun.not-verbal	Kanji compounds before する that tell a time, a frequency or an amount, and stay an adverb apart from the verb (全部します 전부 합니다).
 //= noun.ongoing-ninaru	Nouns before になっている that read as an ongoing state (話題になっている 화제가 되고 있다).
 //= noun.practice	Nouns of experience and practice that 積む piles up rather than loads, before which 一杯 and いっぱい read 많이 (経験もいっぱい積んだ 경험도 많이 쌓았다); written as words of a senses.tsv trigger.
@@ -3741,6 +3742,25 @@ noun.ni-not-goal	時ごろ
 noun.ni-not-goal	以外
 noun.ni-not-goal	他
 noun.ni-not-goal	ほか
+noun.knower-act	理解
+noun.knower-act	想像
+noun.knower-act	予想
+noun.knower-act	予測
+noun.knower-act	想定
+noun.knower-act	判断
+noun.knower-act	判別
+noun.knower-act	区別
+noun.knower-act	真似
+noun.knower-act	納得
+noun.knower-act	把握
+noun.knower-act	認識
+noun.knower-act	推測
+noun.knower-act	推理
+noun.knower-act	解読
+noun.knower-act	再現
+noun.knower-act	実感
+noun.knower-act	識別
+noun.knower-act	予見
 
 noun.not-verbal	全部
 noun.not-verbal	全員
