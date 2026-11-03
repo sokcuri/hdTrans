@@ -1,0 +1,54 @@
+# 규칙: LEX-4258, LEX-4259, GRM-3563
+rule	input	expected	kind	layer
+dict:w:31400	<斜めではなく ぶつ切りにして>	has:토막으로 해	fix	lookup
+dict:w:31401	小麦粉と その甘味料ガムシロ的なものを混ぜて	has:검 시럽	fix	lookup
+dict:w:31402	明日から警察は大忙しでしょう。	내일부터 경찰은 몹시 바쁘겠죠.	fix	lookup
+dict:w:31402	周囲の屋台は、看板を片付けたり在庫を雨から守ったりと大忙しだ。	has:몹시 바쁘다.	fix	lookup
+dict:w:31402	艦隊も大掃除で、大忙しですね！	has:몹시 바쁘네요!	fix	lookup
+dict:w:31403	ちょっと ののしりを強めて…。	has:욕설을 강하게	fix	lookup
+dict:w:31404	フーシ派がその気になれば全て攻撃可能です。	has:마음만 먹으면 모두 공격 가능합니다	fix	lookup
+dict:w:31404	電話だってあるし、その気になれば会いに行くことだってできるんだ	has:마음만 먹으면 만나러	fix	lookup
+dict:w:31404	すっかりその気になっている。	lacks:마음만 먹으면	keep	lookup
+dict:w:31405	(一同)ん？どがんしますか？ 社長。	has:어떻게 합니까?	fix	lookup
+dict:w:31405	どがんしよ…。	어떻게 해….	fix	lookup
+dict:w:31405	コンペの一輪挿し どがんなった？	has:어떻게 됐어?	fix	lookup
+dict:jisjk:39875	こういう絵馬じゃなくて	has:이런 에마가 아니고	fix	lookup
+dict:jisjk:39875	あ〜和算の設問が奉納された絵馬でしたっけ？	has:봉납된 에마였던가요?	fix	lookup
+dict:jisjk:21850	ともに農場を営む家族の間でも不満の矛先は政府に。	has:불만의 화살은 정부에	fix	lookup
+dict:jisjk:21850	俺は怒りの矛先をスマホに変えて、	has:분노의 화살을 스마트폰으로	fix	lookup
+dict:jisjk:21850	今やその矛先を俺に向けていた。	has:그 화살을 나에게	fix	lookup
+dict:jisjk:182454	何かこだわりが？	뭔가 고집이?	fix	lookup
+dict:jisjk:182454	すごく強い こだわりがあると思いますね。	has:강한 고집이 있다고	fix	lookup
+dict:jisjk:182454	それを重ねていくうち、目的のわからないこだわりが増えていき、	has:모르는 고집이 늘어나	fix	lookup
+cx:caption-fixes-1:100	こだわりの食材	공들인 식재료	fix	rewrites
+cx:caption-fixes-1:100	Hornetこだわりのmedium rare.	has:공들인	fix	rewrites
+cx:caption-fixes-1:100	こだわりの点を説明する。	!rule:cx:caption-fixes-1:100	keep	rewrites
+cx:caption-fixes-1:100	こだわりがある。	!rule:cx:caption-fixes-1:100	keep	rewrites
+sense:koromo-batter	<衣につけて1分半 油で揚げた>	has:튀김옷을 묻혀 1분 반	fix	senses
+sense:koromo-batter	（説明文には衣をつけて油で揚げたとあったが…）	has:튀김옷을 묻혀 기름에 튀겼다고	fix	senses
+sense:koromo-batter	癖の無い油をたっぷり含んだ、香ばしくて歯ごたえのある衣と一体となり、	has:튀김옷과 하나가	fix	senses
+sense:koromo-batter	彼は衣をつけて出かけた。	has:옷을 입고	keep	senses
+sense:koromo-batter	白い衣をまとった少女	lacks:튀김옷	keep	senses
+cx:caption-fixes-1:90	衣につけて油で揚げた。	rule:cx:caption-fixes-1:90=묻&AW@	fix	rewrites
+cx:caption-fixes-1:90	南方の海で取れたシュライプにパンの衣をつけ、油で揚げたもの	has:튀김옷을 묻혀, 기름에	fix	rewrites
+cx:caption-fixes-1:90	顔に泥をつけた。	!rule:cx:caption-fixes-1:90	keep	rewrites
+cx:caption-fixes-1:92	衣につけて油で揚げた。	has:튀김옷을 묻혀	fix	rewrites
+cx:caption-fixes-1:92	服を衣につけて	!rule:cx:caption-fixes-1:92	keep	rewrites
+sense:arasou-compete	中学生と高校生600人が３日間にわたって日本一を争った全国大会。	has:일본 제일을 다툰	fix	senses
+sense:arasou-compete	優勝を争う。	우승을 다툰다.	fix	senses
+sense:arasou-compete	首位を争う両チーム	has:선두를 다투는	fix	senses
+sense:arasou-compete	彼と争った。	그와 싸웠다.	keep	senses
+sense:arasou-compete	遺跡をめぐって両軍は争った。	has:싸웠다	keep	senses
+sense:osoi-slow	勉強だって 走るのも 食べるのも全部遅いけど…。	has:먹는 것도 전부 느린데	fix	senses
+sense:osoi-slow	「あら……大島くん、食べるの遅いのね。」	has:먹는 거 느리구나	fix	senses
+sense:osoi-slow	帰りが遅い。	has:늦다	keep	senses
+sense:osoi-slow	もう遅い。	has:늦	keep	senses
+cx:caption-fixes-1:110	まあ 効き目が悪い分	has:나쁜 만큼	fix	rewrites
+cx:caption-fixes-1:110	よかったんですけれども打球が強かった分	has:강했던 만큼	fix	rewrites
+cx:caption-fixes-1:110	そして彼が真面目な分、グレイス伯爵の所業のあり得なさが	has:성실한 만큼,	fix	rewrites
+cx:caption-fixes-1:110	これまで一緒に過ごせなかった分を取り戻すかのように。	has:보낼 수 없었던 만큼을	fix	rewrites
+cx:caption-fixes-1:110	乳母に足りない分を飲ませてもらっていたのです	has:부족한 만큼을	fix	rewrites
+cx:caption-fixes-1:110	この街らしさは残して必要な分だけ木で作り直してる	has:필요한 만큼만 나무로	fix	rewrites
+cx:caption-fixes-1:110	食べた分だけ太る。	!rule:cx:caption-fixes-1:110	keep	rewrites
+cx:caption-fixes-1:110	五分以内に来い。	!rule:cx:caption-fixes-1:110	keep	rewrites
+cx:caption-fixes-1:110	自分の分は自分で払う。	!rule:cx:caption-fixes-1:110	keep	rewrites

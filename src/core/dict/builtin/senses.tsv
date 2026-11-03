@@ -602,7 +602,7 @@
 積む	탑재하다	艦載機,魚雷,爆雷,偵,装,装備,機銃,主砲,砲,爆弾,探照灯,電探,レーダー	before
 積む	적재하다	燃料,食糧,食料,物資,ドラム缶,荷物,荷,貨物,戦車,弾薬	before
 返す	갚다	恩,借り,借金,仇,倍,恩義	before
-遅い	느리다	足,動き,速度,スピード,反応,船足,脚,歩み,速力,足取り,回転,歩く	before
+遅い	느리다	足,動き,速度,スピード,反応,船足,脚,歩み,速力,足取り,回転,歩く,走る,食べる,泳ぐ,作業,処理,テンポ,ペース,進み,成長	before
 叩く	치다	敵艦,隊,部隊,団,敵,主力,基地,艦隊,飛行場,輸送船	before
 叩く	때리다	頭,後頭部,頬,尻,お尻	before
 叩く	털다	ホコリ,埃	before
@@ -928,6 +928,8 @@
 伸びる	뻗다	腕,手,足,脚,指,指先	after	v1
 絡む	마주치다	視線,目	before	v5
 絡む	얽히다	手,指,足,腕,髪,糸,蔦,ツタ,舌	before	v5
+// 衣 in a sentence about deep-frying is the batter, 튀김옷 (spec LEX-4259).
+衣	튀김옷	揚げる,油で揚げる,揚げ,油,天ぷら,フライ,パン粉,唐揚げ,から揚げ,揚げ物	sentence	n
 // 地元 right before a news source or an office is the place reported from, 현지 (spec LEX-4252).
 地元	현지	メディア,当局,警察,紙,新聞,政府,州政府,自治体,記者,報道,消防,通信,テレビ局	after	n
 地元	동네
@@ -1045,6 +1047,8 @@
 
 // 歳 after a numeral the dictionary has as a word (十六 16): the counter 세.
 歳	세	十六,十,二十,三十,四十,五十,六十,七十,八十,九十,百,数十	before	n
+// 争う over a title or a rank is competing for it, 다투다 (spec LEX-4259).
+争う	다투다	日本一,優勝,首位,一位,1位,１位,王座,タイトル,覇権,上位,順位,座	before	v5
 // 腕が立つ, 腕も立つ: skilled.
 立つ	뛰어나다	腕	before	v5
 // 続投 of an office holder is 유임; 抑え in a sentence about pitching is the closer; 死者 counted in a report is 사망자.
