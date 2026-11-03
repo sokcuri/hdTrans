@@ -83138,7 +83138,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ベンツェル	벤첼	N130	QPN		GN				jisjk:369865		
 ベンテゴジ	벤테고디	N130			GN				jisjk:367137		
 ベンディングマシン	자동판매기	N110			GN				jisjk:113421		
-ベント	겨이삭띠	N110	VPt		GN				jisjk:134080		
+ベント	벤트	N110	VPt		GN				jisjk:134080		
 ベント	벤트	N130	QPN		GN				jisjk:365309		
 ベントスチールワイヤー	벤트 스틸 와이어	N110			GN				jisjk:56350		
 ベントナイト	벤토나이트	N110			GN				jisjk:163203		
@@ -118036,7 +118036,7 @@ ttt	ttt	K110			GN				jisjk:201744
 今平	이마히라	N130	QPN	Wa	GN				jisjk:7267		
 今平	콘페이	N130	QCTVPl		GN				jisjk:294422		
 今平町	이마히라마치	N130	QCTVPl		GN				jisjk:273904		
-今年	금년	N110	UMe		GN				jisjk:17422		
+今年	올해	N110	UMe		GN				jisjk:17422		
 今年に入	금년에 들어&AH@	M428			GN				jisjk:261772		
 今年中	금년중	N110	UMe		GN				jisjk:231279		
 今年夏ごろ	금년 여름경	N110	UMe		GN				jisjk:182661		
@@ -126172,7 +126172,7 @@ ttt	ttt	K110			GN				jisjk:201744
 倍額	배액	N110	VMo	Hd	GN				jisjk:23121		
 倍額増資	배액증자	N110			BZ				jisjk:359658		
 們多	몬타	N130	QPN	Wb	GN				jisjk:118164		
-倒	넘어뜨&AA@	M433			GN				jisjk:92361		
+倒	쓰러뜨&AA@	M433			GN				jisjk:92361		
 倒	쓰러뜨&AA@	M443	VRw		GN				jisjk:139195		
 倒け	넘어&AL@	M427			GN				jisjk:119820		
 倒され	쓰러&AL@	M417			GN				jisjk:92362		
@@ -132220,7 +132220,7 @@ ttt	ttt	K110			GN				jisjk:201744
 兵術	병술	N110	VTw		GN				jisjk:154806		
 兵衛	무관	N110			GN				jisjk:103183		
 兵衛	효에	N130	QCTVPl		GN				jisjk:324825		
-兵装	공격	K110		Hd	MI				jisjk:345931		
+兵装	무장	K110		Hd	MI				jisjk:345931		
 兵輔	효우스케	N130	QPN	Wb	GN				jisjk:23642		
 兵部	병부	N110	VPl		GN				jisjk:204935		
 兵部町	효부쵸	N130	QCTVPl		GN				jisjk:324840		
@@ -185959,7 +185959,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小境	코자카이	N130	QCTVPl		GN				jisjk:293231		
 小境町	코자카이쵸	N130	QCTVPl		GN				jisjk:293233		
 小増川	코마스가와	N130	QCTVPl		GN				jisjk:293990		
-小声	작은 소리	N110	UHr		GN				jisjk:26762		
+小声	작은 목소리	N110	UHr		GN				jisjk:26762		
 小売	소매	N110		Hd	GN				jisjk:26734		
 小売り	소매	I110		Hd	GN				jisjk:74804		
 小売り業者	소매업자	I110	VHn		BZ				jisjk:361788		
@@ -193437,7 +193437,7 @@ ttt	ttt	K110			GN				jisjk:201744
 島民ら	도민들	I110	VHn		GN				jisjk:66014		
 島江町	시마에쵸	N130	QCTVPl		GN				jisjk:298080		
 島池町	시마이케마치	N130	QCTVPl		GN				jisjk:298074		
-島沖	시마오키	N130	QPNVPl		GN				jisjk:98378		
+島沖	섬 앞바다	N110			GN				jisjk:98378		
 島泉	시마이즈미	N130	QCTVPl		GN				jisjk:298075		
 島泊	시마도마리	N130	QCTVPl		GN				jisjk:298146		
 島津	시마츠	N130	QPN	Wa	GN				jisjk:98370		
@@ -231508,7 +231508,7 @@ ttt	ttt	K110			GN				jisjk:201744
 朝	조	N110		On	GN				jisjk:259059		
 朝げ	조반	N110	VFd		GN				jisjk:124268		
 朝げいこ	아침 연습	N110	VRw		GN				jisjk:124271		
-朝ごはん	아침 밥	I110	VFdVFd	Om	GN				jisjk:83599		
+朝ごはん	아침밥	I110	VFdVFd	Om	GN				jisjk:83599		
 朝ご飯に	아침밥으로	N110		Nn	GN				jisjk:201735		
 朝っぱら	이른 아침	I110	UMe		GN				jisjk:83600		
 朝なぎ	아침뜸	I110			GN				jisjk:83601		
@@ -256311,7 +256311,7 @@ ttt	ttt	K110			GN				jisjk:201744
 沓脱ぎ石	신발돌	N110	VBl		GN				jisjk:176178		
 沓見	쿠츠미	N130	QCTVPl		GN				jisjk:290755		
 沓谷	쿠츠노야	N130	QCTVPl		GN				jisjk:290754		
-沖	바다	N110	XXXVPl		GN				jisjk:115490		
+沖	 앞바다	N110	XXXVPl		GN				jisjk:115490		
 沖	충천&AV@	M419			GN				jisjk:141740		
 沖	오키	N130	QPN	Wa	GN				jisjk:258382		
 沖	오키	N130	QCTVPl		GN				jisjk:279343		

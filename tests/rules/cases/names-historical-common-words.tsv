@@ -1,7 +1,7 @@
 rule	input	expected	kind	layer
 names:historical-common-word	今日 その息子さんは…	has:오늘 그 아들은	fix	names
 names:historical-common-word	今日 キキに会ってさ	has:오늘 키키를	fix	names
-names:historical-common-word	今年 僕53になったんですよ	has:금년 저	fix	names
+names:historical-common-word	今年 僕53になったんですよ	has:올해 저	fix	names
 names:historical-common-word	近年　箸墓古墳の出土物などから年代測定が行われ	has:근년 하시하카	fix	names
 names:historical-common-word	社長　結婚してたんですか？	has:사장 결혼	fix	names
 names:historical-common-word	長年 日記を書いているという文芸評論家で	has:오랜 세월 일기를	fix	names

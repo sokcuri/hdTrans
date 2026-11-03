@@ -15,7 +15,7 @@ constraint:moui-not-before-ii	「でも、もういないの。誰もね」	「�
 constraint:moui-not-before-ii	もういいよ。	이제 됐어.	keep	lookup
 constraint:dea-before-aitsu	「俺たちであいつをなんとかしよう」	「우리로 저 녀석을 어떻게든 하자」	fix	lookup
 constraint:dea-before-aitsu	俺は こっちであいつらは あっちにいて…》	나는 여기로 저 녀석들은 저쪽에 있어…》	fix	lookup
-constraint:dea-before-aitsu	「ヌエの力も凄いぜ！この調子であいつらを倒して、セシルを助けるんだ！」	「누에의 힘도 굉장해! 이 상태로 저 녀석들을 넘어뜨리고, 세실을 돕는 거야!」	fix	lookup
+constraint:dea-before-aitsu	「ヌエの力も凄いぜ！この調子であいつらを倒して、セシルを助けるんだ！」	「누에의 힘도 굉장해! 이 상태로 저 녀석들을 쓰러뜨리고, 세실을 돕는 거야!」	fix	lookup
 constraint:dea-before-aitsu	「なんであいつあんなところで寝てんの？」	「왜 저 녀석 저런 곳에서 자고 있어?」	keep	lookup
 constraint:nihama-before-marude	俺にはまるで先が見えなかった。	나에게는 전혀 예견되지 않았다.	fix	lookup
 constraint:nihama-before-marude	その顔にはまるで表情がなかった。	그 얼굴에는 전혀 표정이 없었다.	fix	lookup
