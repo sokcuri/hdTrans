@@ -8,7 +8,7 @@ cx:corpus-fixes-1:160	ただ目の前で行われていることに、聞き耳�
 cx:corpus-fixes-1:160	しかし壮絶な津波の情景は、彼らをただ傍観者にすることしかできなかった。	has:할 수밖에 없었다	fix	rewrites
 cx:corpus-fixes-1:160	なので、私は屋敷の中で本を読むことしかできないでいる。	has:읽을 수밖에 없다	fix	rewrites
 cx:corpus-fixes-1:160	お前にしかできないんだぞ	!rule:cx:corpus-fixes-1:160	keep	rewrites
-cx:corpus-fixes-1:160	固唾を飲んで待つ事しか出来なかった。	!rule:cx:corpus-fixes-1:160	keep	rewrites
+cx:corpus-fixes-1:160	固唾を飲んで待つ事しか出来なかった。	has:기다릴 수밖에 없었다	fix	rewrites
 cx:corpus-fixes-1:160	「俺にはそういう生き方しか出来なかった」	!rule:cx:corpus-fixes-1:160	keep	rewrites
 cx:corpus-fixes-1:160	とっさに答えることができなかった。	!rule:cx:corpus-fixes-1:160	keep	rewrites
 cx:corpus-fixes-1:160	そうですね、助けに向かおうとしても、氷の海を渡ることができない。	!rule:cx:corpus-fixes-1:160	keep	rewrites

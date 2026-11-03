@@ -1,0 +1,47 @@
+# 규칙: LEX-4151
+rule	input	expected	kind	layer
+compose:humble-koto	私のこと見えてますかあ？	has:저	fix	compose
+compose:humble-koto	あれ わたしのことです｡	has:저입니다	fix	compose
+compose:humble-koto	私のことも忘れないでくださいまし	has:저도	fix	compose
+compose:humble-koto	先生は僕のことをしってたんですか	has:선생님은 저를	fix	compose
+compose:humble-koto	あなたは私のことを怖がりませんね｡	has:당신은 저를	fix	compose
+compose:humble-koto	私のこと、感じてくれたんですよね」	has:저	fix	compose
+compose:humble-koto	僕のこと息子やと思ってるんですかね。	has:저	fix	compose
+compose:humble-koto	だからもう 私のことは忘れてください	has:이제 저는	fix	compose
+compose:humble-koto	そんなに私のことが気になりますかぁー？	has:그렇게 제가	fix	compose
+compose:humble-koto	その人が今の私のことも話すでしょうから	has:지금의 저도	fix	compose
+compose:humble-koto	私のことですか？よくも　そんな差別を…。	has:저입니까	fix	compose
+compose:humble-koto	僕のことおもマザコンだと思ったですよね？	has:저도	fix	compose
+compose:humble-koto	私のこと助けてる場合じゃないですよね！？	has:저	fix	compose
+compose:humble-koto	「私のことを、羊飼いだと思いましたか？」	has:「저를	fix	compose
+compose:humble-koto	「……って、私のことはどうでもいいです」	has:저는	fix	compose
+compose:humble-koto	「私のことが邪魔だったり、しませんか？」	has:「제가	fix	compose
+compose:humble-koto	「気にしないで下さい、私のことですから」	has:저니까	fix	compose
+compose:humble-koto	「私のこと、嫌いになっちゃいませんか？」	has:「저	fix	compose
+compose:humble-koto	どうか… 私のことはお忘れになってください	has:저는	fix	compose
+compose:humble-koto	よかったら　私のことも椋って呼んでください	has:괜찮다면 저도	fix	compose
+compose:humble-koto	「私のことをモヤモヤさせるなんて生意気です」	has:「저를	fix	compose
+compose:humble-koto	「私のこと、寂しい女だって言いましたよね？」	has:「저	fix	compose
+compose:humble-koto	いえいえ、わたしのことは気にしないでください。	has:저는	fix	compose
+compose:humble-koto	「先輩は、ずいぶん私のことが知りたいんですね」	has:꽤 제가	fix	compose
+compose:humble-koto	「私のこと、ずっと見ててくれて嬉しかったです」	has:「저	fix	compose
+compose:humble-koto	あと、私のことはアルファでいいわよ。	그리고, 나는 알파면 돼.	keep	compose
+compose:humble-koto	もっと詳しく私のこと知りたいって？」	좀 더 자세하게 나 알고 싶다는?」	keep	compose
+compose:humble-koto	ん…私のこと、好きって言ったのに…！	응…나, 좋아한다고 말했는데…!	keep	compose
+compose:humble-koto	反対側の 私のことは考えなかったの？	반대쪽의 나는 생각하지 않았어?	keep	compose
+compose:humble-koto	私のこと見たのに　見捨てて逃げたの。	나 보았는데 버려 도망쳤어.	keep	compose
+compose:humble-koto	≪何より私のことを大事にしてくれる≫	≪무엇보다 나를 소중히 해 준다≫	keep	compose
+compose:humble-koto	みんな 私のこと信頼しきってんだよね	모두 나 신뢰해버리는 거야지	keep	compose
+compose:humble-koto	(ﾄｵｲ)僕のことは ほっといてよ｡	(토오이) 나는 가만히 둬.	keep	compose
+compose:humble-koto	どんだけ私のこと好きなんだ お前…｡	얼마나 나를 좋아해 너….	keep	compose
+compose:humble-koto	皆私のことしっかりしてるって言うけど	모두 나 확실히 하고 있다고 말하는데	keep	compose
+compose:humble-koto	「え、どうしてわたしのことを……？」	「어, 왜 나를……?」	keep	compose
+compose:humble-koto	「私のこと恨んだりしてないかな……」	「나 원망하거나 하지 않을까……」	keep	compose
+compose:humble-koto	「それ、暗にわたしのことをないって」	「그거, 은근히 나를 없다고」	keep	compose
+compose:humble-koto	「……必死すぎですよ、私のことなのに」	「……너무 필사적이어요, 나인데」	keep	compose
+compose:humble-koto	司令官、ちょっと私のこと分かってきた？	사령관, 조금 나 알게 됐어?	keep	compose
+compose:humble-koto	私のことは…そう、フレイでいいわ。	나는…그렇게, 흐레이면 돼.	keep	compose
+compose:humble-koto	どんだけ余裕ないと思ってんの私のこと｡	얼마나 여유 없다고 생각해 나.	keep	compose
+compose:humble-koto	え～！　建　あなたまで私のこと…。	에에~! 건 당신까지 나….	keep	compose
+compose:humble-koto	で 私のことは陰で何て呼んでんの？	그리고 나는 그늘에서 뭐라고 부르고 있어?	keep	compose
+compose:humble-koto	あなた 私のことからかってるんでしょ？	당신 나 놀리고 있는 거지?	keep	compose

@@ -637,11 +637,16 @@ std::string Composer::Build(int i, int action, std::string_view mode) {
             if (!Contains(key, "&CJ@") || !Contains(suffix, kKoJuseyo)) {
                 replacement = LookupSource(key, *generated_);
                 // The copula verb (でござ &Ac@) takes 에 before the polite 요 (학생이에요, 저예요), not 어
-                // (학생이어요), and its stem alone before 군 and 구나 (천하인이군, not 천하인인군), as the
-                // copula after a noun does.
+                // (학생이어요), its stem alone before 군 and 구나 (천하인이군, not 천하인인군), and 라 before
+                // the quoting endings (현실이라는, not 현실이다는), as the copula after a noun does.
                 if (key.size() == 5 && LookupSource(Cat({std::string_view(key).substr(0, 4), "6"}), *generated_) == "(이어)여") {
+                    std::string_view quoted, after;
                     if (key[4] == '6' && suffix.starts_with("요")) replacement = "(이에)예";
                     if (key[4] == '0' && (suffix.starts_with("군") || suffix.starts_with("구"))) replacement = "(이)";
+                    if (key[4] == '4' && CutQuoting(suffix, quoted, after)) {
+                        replacement = "(이)";
+                        suffix = Cat({"라", quoted, after});
+                    }
                 }
             } else {
                 const size_t s = suffix.find_first_not_of(' ');

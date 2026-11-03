@@ -1,0 +1,23 @@
+# 규칙: LEX-4158
+rule	input	expected	kind	layer
+cx:novel-fixes-4:90	なのに今にも泣きそうというか、あれ、もしかして実際に泣いてた？	has:어라	fix	rewrites
+cx:novel-fixes-4:90	……あれ、なんて打てばいいんだろう。	……어라, 정말 치면 되겠지.	keep	rewrites
+cx:novel-fixes-4:90	≪何あれ、すごい低空飛行だけど……≫	≪무엇 저것, 대단한 저공비행이지만……≫	keep	rewrites
+cx:novel-fixes-4:90	「うぅ……あれはつらかったよぉ……」	「으으……저건 괴로웠어……」	keep	rewrites
+cx:novel-fixes-4:90	あれ、明日、うちに来るってこと……？	어라, 내일, 치러 온다는 것……?	keep	rewrites
+cx:novel-fixes-4:90	あれが、日本の高速戦艦「霧島」、か。	저것이, 일본의 고속전함 「기리시마」, 인가.	keep	rewrites
+cx:novel-fixes-4:90	あれは……Yamato-class?	저것은……Yamato-class?	keep	rewrites
+cx:novel-fixes-4:90	あれは…伊号潜水艦、艦名は…伊の八！	저것은…이호 잠수함, 함명은…이탈리아의 8!	keep	rewrites
+cx:novel-fixes-4:90	あれは、その…いや、事情があって…。	저것은, 그…아니, 사정이 있어….	keep	rewrites
+cx:novel-fixes-4:90	あれは誰もが扱える機械じゃないのよ！	저것은 누구나 다룰 수 있는 기계는 아닌 거예요!	keep	rewrites
+cx:novel-fixes-4:90	あれも割と普通だったと思うけど……」	저것도 꽤보통이었다고 생각하는데……」	keep	rewrites
+cx:novel-fixes-4:90	ふゎあ～あ…よく寝た～あれ、提督は？	후아~아…잘 잔~저것, 제독은?	keep	rewrites
+cx:novel-fixes-4:90	潜水艦たちも、可愛い…あれ、菱餅が？	잠수함들도, 귀엽다…저것, 히시모치가?	keep	rewrites
+cx:novel-fixes-4:90	いや でもね蹴りたくなるよ あれは｡	아니 그런데 차고 싶어져 저것은.	keep	rewrites
+cx:novel-fixes-4:90	あれが始まりだとは思いませんでした｡	저것이 시작이라고는 생각하지 않았습니다.	keep	rewrites
+cx:novel-fixes-4:90	(潤平) あっ じゃ あれは？ あの	(준페이) 앗 그러면 저것은? 저기	keep	rewrites
+cx:novel-fixes-4:90	うわっ あいつはあかんあれはあかんわ	우왓 저 녀석은 열리지 않는 저것은 안돼	keep	rewrites
+cx:novel-fixes-4:90	あれは何て遊び？あ～。　昔からある。	저것은 무슨 놀이? 아~. 옛날부터 있다.	keep	rewrites
+cx:novel-fixes-4:90	あれが私に内緒で大金を持ち出すなんて	저것이 나에게 비밀로 큰돈을 꺼내다니	keep	rewrites
+cx:novel-fixes-4:90	あれも　本当に起きた事故だったんで。	저것도 정말 일어난 사고였던 것으로.	keep	rewrites
+cx:novel-fixes-4:90	これも愛、あれも愛。でも思うんだけど	이것도 사랑, 저것도 사랑. 하지만 생각하는데	keep	rewrites

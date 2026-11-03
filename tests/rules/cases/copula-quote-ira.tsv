@@ -1,0 +1,39 @@
+# 규칙: GRM-3531
+rule	input	expected	kind	layer
+compose:copula-quote	では…｡ 春夫の｢春｣であるならば	has:｢봄｣이라면	fix	compose
+compose:copula-quote	事実を改変するシステム”であるという事だ」	has:시스템”이라는 것이다	fix	compose
+compose:copula-quote	生きている人間であるということをもう少しお考え下さい」	has:인간이라는	fix	compose
+compose:copula-quote	日本政府に提供するように託された映像であるということです。	has:영상이라는	fix	compose
+compose:copula-quote	だが、もし本当に“奴”であるのならば……俺は……この俺は……）	has:“놈”이라면	fix	compose
+compose:copula-quote	だが―――これが夢でも幻でもない紛れもない現実であるという事を、	has:현실이라는 것을	fix	compose
+compose:copula-quote	交わることのないはずの死者と生者が交わる死者の庭であるのならば。	has:뜰이라면	fix	compose
+compose:copula-quote	気付きにくくなってしまうんですよね。それが外来種であるということに	has:외래종이라는	fix	compose
+compose:copula-quote	「それが相手にとっていいことであるなら、いいことには変わりないもん」	has:것이라면	fix	compose
+compose:copula-quote	紫苑に対して嫉妬を覚えたことだって決して嘘であるとは言えないだろう。	has:거짓말이라고는	fix	compose
+compose:copula-quote	≪ツンデレであるということが分かれば・	has:≪츤데레라는	fix	compose
+compose:copula-quote	地球の研究者が猫が液体であるということを	has:액체라는	fix	compose
+compose:copula-quote	何分の１かであるということは分かっていたさ	has:1인가라는	fix	compose
+compose:copula-quote	修復しようとする試み」であるとすることも可能であろう	has:시도」라는	fix	compose
+compose:copula-quote	住宅街とはいえ、ここが東京であるということを忘れさせてしまう。	has:도쿄라는	fix	compose
+compose:copula-quote	（藤波）将軍のお体を傷つけるのは極めて大罪であるということじゃ。	has:대죄라는	fix	compose
+compose:copula-quote	シンクロ値１００％とは、俺がエルであり、エルが俺であるという事。	has:나라는 것	fix	compose
+compose:copula-quote	なぜ生徒会役員であるところのお前は、	왜 학생회 임원인 곳의 너는,	keep	compose
+compose:copula-quote	何かあるのであれば言ってちょうだい。	뭔가 있다면 말해 줘.	keep	compose
+compose:copula-quote	これで話してたら自衛隊員失格である。	이것으로 이야기하면 자위대원 실격이다.	keep	compose
+compose:copula-quote	そこがヘイディオの下部組織であれば、	거기가 헤이디오의 하부조직이면,	keep	compose
+compose:copula-quote	そっちのほうが給料がいいからである。	그쪽 쪽이 급료가 좋기 때문이다.	keep	compose
+compose:copula-quote	であればまだ両家の関係を維持しつつ、	그렇다면 아직 양가의 관계를 유지하면서,	keep	compose
+compose:copula-quote	ふ～、今日も素晴しいこうぎであった。	후~, 오늘도 훌륭한 공공이었다.	keep	compose
+compose:copula-quote	まず、椿の母は大企業の令嬢であった。	우선, 츠바키의 어머니는 대기업의 영애였다.	keep	compose
+compose:copula-quote	もちろん、そこにいるのは後者である。	물론, 거기에 있는 것은 후자이다.	keep	compose
+compose:copula-quote	やせぎすの猫猫には十分な量であるが、	야세기스의 마오마오에게는 충분한 양이지만,	keep	compose
+compose:copula-quote	ラウリ・エチェバルリアその人である。	라우리 에체바르리아 그 사람이다.	keep	compose
+compose:copula-quote	エルフであるファルダニアは知らない。	엘프인 파르다니아는 모른다.	keep	compose
+compose:copula-quote	その問いに答えてはいけないのである。	그 물음에 답해선 안되는 것이다.	keep	compose
+compose:copula-quote	夫婦の寝室である豪奢なベッドルーム。	부부의 침실인 호사스러운 침실.	keep	compose
+compose:copula-quote	王族として見れば落第も良い所である。	왕족으로서 보면 낙제도 이만저만이 아니다.	keep	compose
+compose:copula-quote	撮影なりすることはできたはずである。	촬영이든지 할 수 있었을 것이다.	keep	compose
+compose:copula-quote	元婚約者である王太子ディートリヒだ。	전 약혼자인 왕태자 디트리히다.	keep	compose
+compose:copula-quote	そして彼が模型製作が趣味であるのも、	그리고 그가 모형 제작이 취미인 것도,	keep	compose
+compose:copula-quote	ガルウイングである必要あんの？　これ	가르윙일 필요 있는 거야? 이것	keep	compose
+compose:copula-quote	ほかであれば新郎新婦様の合図と同時に	외이면 신랑신부님의 신호와 동시에	keep	compose

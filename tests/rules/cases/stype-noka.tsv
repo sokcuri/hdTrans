@@ -20,7 +20,7 @@ cx:stype-noka:15	「心当たりのひとつやふたつ、あるんじゃない
 cx:stype-noka:15	「最近、疲れてるんじゃないのか……」	!rule:cx:stype-noka:15	keep	rewrites
 cx:stype-noka:10	「……なにか、用があって、待ってたんじゃないのか？」	「……뭔가, 용무가 있어, 기다리고 있었던 거 아니야?」	fix	rewrites
 cx:stype-noka:10	「……なにか、用があって、待ってたんじゃないのか」	!rule:cx:stype-noka:10	keep	rewrites
-cx:stype-noka:30	「台所はそこまで苦しいものなのか？」	「부엌은 거기까지 괴로운 거야?」	fix	rewrites
+cx:stype-noka:30	「台所はそこまで苦しいものなのか？」	「부엌은 그렇게까지 괴로운 거야?」	fix	rewrites
 cx:stype-noka:30	「台所はそこまで苦しいものなのか」	!rule:cx:stype-noka:30	keep	rewrites
 cx:stype-noka:35	「え？　まさか断るつもりなのか？」	「어? 설마 거절할 생각이야?」	fix	rewrites
 cx:stype-noka:35	「え？　まさか断るつもりなのか」	!rule:cx:stype-noka:35	keep	rewrites

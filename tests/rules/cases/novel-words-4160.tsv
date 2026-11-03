@@ -1,0 +1,44 @@
+# 규칙: LEX-4160
+rule	input	expected	kind	layer
+cx:novel-fixes-4:195	もちろんお肉で十分！	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	艦載機の練度も十分。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	質素なところで十分。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	「うん……十分十分！」	has:충분해 충분해	fix	rewrites
+cx:novel-fixes-4:210	元気に答えるさよりちゃん。	has:힘차게	fix	rewrites
+cx:novel-fixes-4:200	弥吉を陥れた 付き人の金次郎	has:야요시를 함정에	fix	rewrites
+cx:novel-fixes-4:190	共に支え、生きて行くには十分。	has:살아가기에는 충분하다	fix	rewrites
+cx:novel-fixes-4:210	元気に答え、佳奈は去っていった。	has:힘차게	fix	rewrites
+cx:novel-fixes-4:195	魚介は十分。 最後に狙う食材は お肉。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:210	するとユフィリア嬢が元気に悲鳴を上げた。	has:유필리아 양이 힘차게	fix	rewrites
+cx:novel-fixes-4:200	自分を陥れたのは 毛利さんだと思ってるのよ	has:자신을 함정에	fix	rewrites
+cx:novel-fixes-4:195	もう十分。　あんたは　よくやってくれたよ。	has:충분하다	fix	rewrites
+cx:novel-fixes-4:195	「もう充分。これ以上欲しいものなんてない」	has:이제 충분해	fix	rewrites
+cx:novel-fixes-4:195	受験に必要なそこそこが出来てりゃ充分充分！」	has:충분하다 충분하다	fix	rewrites
+cx:novel-fixes-4:195	ありがとう ﾛﾚｱちゃん｡気持ちだけで十分！	has:충분하다	fix	rewrites
+cx:novel-fixes-4:210	元気に返事をして、ユメはポーズを取りだした。	has:힘차게	fix	rewrites
+cx:novel-fixes-4:200	[万田さんを陥れるためだけに奥様も手にかけるなんて…｡]	has:씨를 함정에	fix	rewrites
+cx:novel-fixes-4:195	「十分！　方向だけでもわかれば、とりあえず動き出せるから」	has:충분하다	fix	rewrites
+cx:novel-fixes-4:200	殿に　益体もないことを告げこのわしを陥れようとするつもりか？	has:함정에 빠뜨리려고	fix	rewrites
+cx:novel-fixes-4:200	自らを陥れようとする悪意に立ち向かった事だって初めてではない。	has:스스로를 함정에 빠뜨리려고 하는 악의와 맞선 것도	fix	rewrites
+cx:novel-fixes-4:210	ほっかむりを被り庭師さんに借りた作業着、着用で私は元気に答える。	has:나는 힘차게	fix	rewrites
+cx:novel-fixes-4:200	我らを陥れる腹だ。	has:우리들을 함정에	fix	rewrites
+rewrite:novel-words	ああ、心配してたよりは元気だったよ。	아, 걱정하고 있었던 것보다는 건강했어.	keep	rewrites
+rewrite:novel-words	いいわ……十分に……やったから……。	좋아……충분히……했으니까…….	keep	rewrites
+rewrite:novel-words	はい、三一駆、元気に異常なし、です！	네, 31구, 건강하게 이상 없음, 입니다!	keep	rewrites
+rewrite:novel-words	やせぎすの猫猫には十分な量であるが、	야세기스의 마오마오에게는 충분한 양이지만,	keep	rewrites
+rewrite:novel-words	やっぱり手作りは元気が湧いてきます」	역시 수제는 기운이 솟아나 옵니다」	keep	rewrites
+rewrite:novel-words	イントレピッド、普通に元気そうだな！	인트레피드, 보통으로 건강해 보이네!	keep	rewrites
+rewrite:novel-words	ティータイムで、きっと元気が出るわ。	티타임으로, 분명 활기가 생겨.	keep	rewrites
+rewrite:novel-words	俺の上でユメが寝息を立てて数十分――	나 위에서 유메가 숨소리를 내 수십 분――	keep	rewrites
+rewrite:novel-words	元気でやってるのかしら、あの人……。	잘 지내고 있는 걸까, 그 사람…….	keep	rewrites
+rewrite:novel-words	元気ないわねーそんなんじゃ駄目よぉ！	기운이 없네-그런 것은 안돼!	keep	rewrites
+rewrite:novel-words	元気よく頭を下げ、鈴木が立ち去った。	활기 차게 고개를 숙여, 스즈키가 떠났다.	keep	rewrites
+rewrite:novel-words	提督、天城、今なら十分活躍できます！	제독, 아마기, 지금이라면 충분히 활약할 수 있습니다!	keep	rewrites
+rewrite:novel-words	桐もどこかで元気でやってるのかしら？	동도 어디선가 잘 지내고 있는 걸까?	keep	rewrites
+rewrite:novel-words	え、この蟹ですか？ はい、元気です♪	어, 이 게입니까? 네, 건강합니다♪	keep	rewrites
+rewrite:novel-words	はい。お肉を食べると元気になるのよ。	네. 고기를 먹으면 기운을 차려.	keep	rewrites
+rewrite:novel-words	それで十分 世の中の流れは分かるから	그래서 충분히 세상의 흐름은 아니까	keep	rewrites
+rewrite:novel-words	目には目をってことは十分 考えられる	눈에는 눈 라는 것은 충분히 생각된다	keep	rewrites
+rewrite:novel-words	あっ どうも！相変わらず 元気だね｡	앗 아무래도! 변함없이 건강하네.	keep	rewrites
+rewrite:novel-words	あぁ～ うんめ～お母さん元気かな～？	아아~ 응 ~엄마 건강한가~?	keep	rewrites
+rewrite:novel-words	久遠≫十分に相手が酔ったらんんっ…。	쿠도≫충분히 상대가 취하면….	keep	rewrites

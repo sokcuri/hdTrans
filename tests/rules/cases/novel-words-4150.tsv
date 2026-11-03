@@ -1,0 +1,56 @@
+# 규칙: LEX-4150, LEX-4152, LEX-4153, LEX-4154, LEX-4155, LEX-4156, LEX-4157, LEX-4158, LEX-4159, LEX-4160, LEX-4162
+rule	input	expected	kind	layer
+dict:w:31200	今は片手が塞がれると私が何も出来なくなっちゃうからね！	has:한 손이 막히면	fix	lookup
+dict:w:31200	視界を塞がれ、生存権を脅かす他の肉食獣の匂いを嗅がされ	has:시야를 막혀,	fix	lookup
+dict:w:31200	口を塞いだ。	입을 막았다.	keep	lookup
+dict:w:31201	私がぶち破った窓から宙に身を投げ出せば、	has:몸을 내던지면	fix	lookup
+dict:w:31201	彼女は身を投げた。	그녀는 투신했다.	keep	lookup
+dict:w:31202	硝子の破片を払って立ち上がるのは、活力に満ち溢れた美しい少女。	has:활력이 넘쳐흐른	fix	lookup
+dict:w:31202	希望に満ちた顔	희망으로 가득 찬 얼굴	keep	lookup
+cx:novel-fixes-4:10	パレッティア王国にはある〝王女〟がいる。	has:왕국에는 어느 “왕녀”가 있다	fix	rewrites
+cx:novel-fixes-4:10	机の上にある本を取った。	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:10	ここにある〝剣〟を見ろ。	!rule:cx:novel-fixes-4:10	keep	rewrites
+cx:novel-fixes-4:30	「言うに事を欠いて盲目だと!?　盲目は貴様だと知れ、ユフィリア！」	has:맹목은 네놈이라고 알아라, 유필리아!	fix	rewrites
+cx:novel-fixes-4:30	犯人が彼だと知れ、騒ぎになった。	!rule:cx:novel-fixes-4:30	keep	rewrites
+cx:novel-fixes-4:40	「何故、親が定めた婚約を貴方の一存で解消などと……！」	has:독단으로 해소라니……!	fix	rewrites
+cx:novel-fixes-4:40	「……しかし、どうしたものか。まさか婚約破棄などと……どうすれば良いのだ……」	has:설마 파혼이라니……	fix	rewrites
+cx:novel-fixes-4:40	本や雑誌などと一緒に置いた。	!rule:cx:novel-fixes-4:40	keep	rewrites
+cx:novel-fixes-4:45	「ですから、心当たりなど……！」	has:짐작 가는 데 같은 건……!	fix	rewrites
+cx:novel-fixes-4:45	「そんな……私など……」	has:나 같은 건……	fix	rewrites
+cx:novel-fixes-4:45	駅看板など	!rule:cx:novel-fixes-4:45	keep	rewrites
+cx:novel-fixes-4:45	「りんご、バナナなど」	!rule:cx:novel-fixes-4:45	keep	rewrites
+cx:novel-fixes-4:50	本当は攫うならお姫様抱っこなんかが良いんだろうけど	has:공주님 안기 같은 게 좋	fix	rewrites
+cx:novel-fixes-4:50	着替えなんかが入っているのだろう。	has:같은 게 들어가	fix	rewrites
+cx:novel-fixes-4:50	神なんか信じない。	!rule:cx:novel-fixes-4:50	keep	rewrites
+cx:novel-fixes-4:60	この立ち位置と状況、なんか記憶がちりちりとするような……？	has:기억이 찌릿찌릿하는	fix	rewrites
+cx:novel-fixes-4:60	唇を重ねる度に、胸の奥がチリチリと熱くなっていった。	has:찌릿찌릿 뜨거워져	fix	rewrites
+cx:novel-fixes-4:60	髪がちりちりになった。	!rule:cx:novel-fixes-4:60	keep	rewrites
+cx:novel-fixes-4:70	背はそこまで大きくもないし華奢な人が多い	has:키는 그렇게까지 크지도 않고	fix	rewrites
+cx:novel-fixes-4:70	さすがにそこまでしないか。	has:그렇게까지 하지	fix	rewrites
+cx:novel-fixes-4:70	そこまで走っていく。	!rule:cx:novel-fixes-4:70	keep	rewrites
+cx:novel-fixes-4:70	水と食糧だけでも手に入れば…そこまで考えてハインリヒは即座に決意する。	!rule:cx:novel-fixes-4:70	keep	rewrites
+cx:novel-fixes-4:75	だから婚約破棄に関してはそこまでショックは受けていなかった。	has:그렇게까지 쇼크는	fix	rewrites
+cx:novel-fixes-4:75	よもやそこまで盲目になられましたか!?	has:설마 그렇게까지 맹목이	fix	rewrites
+cx:novel-fixes-4:75	ケンカはそこまで！	!rule:cx:novel-fixes-4:75	keep	rewrites
+cx:novel-fixes-4:75	具体的にそこまでは考えていなかったけど	!rule:cx:novel-fixes-4:75	keep	rewrites
+cx:novel-fixes-4:80	「えぇと、ユフィリア嬢？　これはどういう事？」	has:이건 어떻게 된 일?	fix	rewrites
+cx:novel-fixes-4:80	次期国王ともあろうものが次期王妃の婚約者の傍にいないのはどういう事なのか。	has:없는 것은 어떻게 된 일인가	fix	rewrites
+cx:novel-fixes-4:80	「それは、どういうことかしら？」	!rule:cx:novel-fixes-4:80	keep	rewrites
+cx:novel-fixes-4:80	電話繋がらんってどういうこと？	!rule:cx:novel-fixes-4:80	keep	rewrites
+cx:novel-fixes-4:90	なのに今にも泣きそうというか、あれ、もしかして実際に泣いてた？	has:할까, 어라, 혹시	fix	rewrites
+cx:novel-fixes-4:90	これとあれ、どっちがいい？	!rule:cx:novel-fixes-4:90	keep	rewrites
+cx:novel-fixes-4:155	しかし、ユフィリアはその強かさで環境に耐えることが出来た。	has:환경을 견딜 수가	fix	rewrites
+cx:novel-fixes-4:155	強い衝撃に耐える。	강한 충격을 견딘다.	fix	rewrites
+cx:novel-fixes-4:155	痛みを耐える。	!rule:cx:novel-fixes-4:155	keep	rewrites
+cx:novel-fixes-4:195	共に支え、生きて行くには十分。	has:살아가기에는 충분하다.	fix	rewrites
+cx:novel-fixes-4:195	艦載機の練度も十分。出撃ね！	has:숙련도도 충분하다.	fix	rewrites
+cx:novel-fixes-4:195	もう十分？	!rule:cx:novel-fixes-4:195	keep	rewrites
+cx:novel-fixes-4:195	時間は十分ある。	!rule:cx:novel-fixes-4:195	keep	rewrites
+cx:novel-fixes-4:200	自らを陥れようとする悪意に立ち向かった事だって初めてではない。	has:스스로를 함정에 빠뜨리려고	fix	rewrites
+cx:novel-fixes-4:200	彼を窮地に陥れた。	!rule:cx:novel-fixes-4:200	keep	rewrites
+cx:novel-fixes-4:210	するとユフィリア嬢が元気に悲鳴を上げた。	has:힘차게 비명을 질렀다	fix	rewrites
+cx:novel-fixes-4:210	ほっかむりを被り庭師さんに借りた作業着、着用で私は元気に答える。	has:힘차게 대답한다	fix	rewrites
+cx:novel-fixes-4:210	時雨は元気にしているかしら……	!rule:cx:novel-fixes-4:210	keep	rewrites
+cx:novel-fixes-4:270	何を謝罪すると言うのか。わからない、ユフィリアには何もわからなかった。	has:모르겠다, 유필리아	fix	rewrites
+cx:novel-fixes-4:270	わからない、とか……？	!rule:cx:novel-fixes-4:270	keep	rewrites
+cx:novel-fixes-4:270	本当にわからない、と言った。	!rule:cx:novel-fixes-4:270	keep	rewrites

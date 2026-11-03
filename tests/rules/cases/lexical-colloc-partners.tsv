@@ -10,7 +10,7 @@ lexical:namae-wo-ageru	好きなキャラにおいて、数々の名前を挙げ
 lexical:namae-wo-ageru	名前を挙げられた二人は顔を見合わせ、首を傾げた。	has:이름이 거론된	fix	lookup
 lexical:namae-wo-ageru	突然、ブルーの名前を挙げられてぎくりとした。	has:이름이 거론되어	fix	lookup
 lexical:namae-wo-ageru	彼女は作家の名前を挙げて、俺に尋ねる。	has:이름을 거론해	fix	lookup
-lexical:namae-wo-ageru	敢えて特定の人物の名前を挙げる事はしなかった。	has:이름을 거론하는	fix	lookup
+lexical:namae-wo-ageru	敢えて特定の人物の名前を挙げる事はしなかった。	has:이름을 거론하지는 않았다	fix	lookup
 lexical:namae-wo-ageru	と一人の名前を挙げた。	has:이름을 거론했다	fix	lookup
 lexical:namae-wo-ageru	ミミちゃんが名前を挙げると、彼女の後ろの背景が切り替わり	has:이름을 거론하면	fix	lookup
 lexical:namae-wo-ageru	とか……いくつか名前を挙げてたな。	has:거론하고	fix	lookup

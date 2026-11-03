@@ -1,0 +1,47 @@
+# 규칙: LEX-4159
+rule	input	expected	kind	layer
+cx:novel-fixes-4:150	Ａ組の圧力に耐えている。	has:압력을 견디고	fix	rewrites
+cx:novel-fixes-4:150	腰を震わせ、痛みに耐える玉藻。	has:아픔을 견디는	fix	rewrites
+cx:novel-fixes-4:150	反動に耐えるための骨格への強化、	has:반동을 견디기	fix	rewrites
+cx:novel-fixes-4:150	何千年の時に耐える城は建ちませぬ	has:때를 견디는	fix	rewrites
+cx:novel-fixes-4:150	山本の冷ややかな視線に耐えながら、	has:시선을 견디면서	fix	rewrites
+cx:novel-fixes-4:150	現役時代、拷問に耐える訓練を受けた。	has:고문을 견디는	fix	rewrites
+cx:novel-fixes-4:150	千莉が快感に耐えるように眉根を寄せる。	has:쾌감을 견디도록	fix	rewrites
+cx:novel-fixes-4:150	痛みに耐えながらも、笑顔を作るのぞみ。	has:아픔을 견디면서도	fix	rewrites
+cx:novel-fixes-4:150	朔夜は首を振り、快感の嵐に耐えている。	has:폭풍우를 견디고	fix	rewrites
+cx:novel-fixes-4:150	胸ｷｭﾝに耐える訓練は受けてないんだよ！	has:두근을 견디는	fix	rewrites
+cx:novel-fixes-4:150	(ﾘｻﾞ)何に耐えてる顔なんだよそれ!?	has:뭘 견디고	fix	rewrites
+cx:novel-fixes-4:150	彼らは　恥辱に耐え全てを告白したのです。	has:치욕을 견디고	fix	rewrites
+cx:novel-fixes-4:150	快楽に耐えながら頑張って猫真似する千莉。	has:쾌락을 견디면서	fix	rewrites
+cx:novel-fixes-4:150	猫の洗脳に耐える訓練を受けているのだろう｡	has:세뇌를 견디는	fix	rewrites
+cx:novel-fixes-4:150	破瓜の痛みに耐えている少女はもういなかった。	has:아픔을 견디고	fix	rewrites
+cx:novel-fixes-4:150	まるで、快楽の波に耐えているかのようだった。	has:물결을 견디고	fix	rewrites
+cx:novel-fixes-4:150	襲ってくる快楽に耐えながら、必死で頑張る佳奈。	has:쾌락을 견디면서	fix	rewrites
+cx:novel-fixes-4:150	せりあがってくる射精感に耐えながら腰を動かす。	has:사정감을 견디면서	fix	rewrites
+cx:novel-fixes-4:150	そう言った傍から、風に耐えるように身を縮める。	has:바람을 견디도록	fix	rewrites
+cx:novel-fixes-4:150	その… その2000年の風雪に耐える城を造りたい	has:풍설을 견디는	fix	rewrites
+cx:novel-fixes-4:150	痛みに耐えるような、名状しがたい感情が垣間見えた。	has:아픔을 견디는	fix	rewrites
+cx:novel-fixes-4:150	なんの！ これに耐えれば電気ショックに勝てるんだ！	has:이것을 견디면	fix	rewrites
+cx:novel-fixes-4:150	ペニスを咥えつつ、何とか快感に耐えようとする白崎。	has:쾌감을 견디려고	fix	rewrites
+cx:novel-fixes-4:150	襲いくる快楽に耐えながら、笑顔を向けてくれる佳奈。	has:쾌락을 견디면서	fix	rewrites
+cx:novel-fixes-4:150	(ﾘｻﾞ)ﾚｰｻﾞｰや 隕石に耐える訓練はしていても	has:운석을 견디는	fix	rewrites
+cx:novel-fixes-4:155	「（落ち着け、ここは堪えるんだっ）」	「(진정해, 여기는 참는 거야)」	keep	rewrites
+cx:novel-fixes-4:155	でも、段々暇に耐えられなくなってね。	하지만, 점점 한가하게 견딜 수 없게 돼.	keep	rewrites
+cx:novel-fixes-4:155	どうやら学校では耐えていたらしいが、	아무래도 학교에서는 참고 있던 것 같지만,	keep	rewrites
+cx:novel-fixes-4:155	女子生徒は根性で堪えたみたいだけど、	여학생은 근성으로 참은 것 같지만,	keep	rewrites
+cx:novel-fixes-4:155	戦乱に耐え兼ね国を離れたんじゃない。	전란에 견딜 수 없고 나라를 떠난 거 아니야.	keep	rewrites
+cx:novel-fixes-4:155	繰り返される衝撃に無心で耐えながら、	반복되는 충격에 무심해 참으면서,	keep	rewrites
+cx:novel-fixes-4:155	）と喉まで出そうになったが、耐えた。	)와 목까지 나올 뻔했지만, 참았다.	keep	rewrites
+cx:novel-fixes-4:155	嫌よ　そんなの。　私　耐えられない。	싫어 그런 것. 나 견딜 수 없다.	keep	rewrites
+cx:novel-fixes-4:155	誠に 慶賀に堪えない次第でございます	정말로 경축에 참지 않을 따름입니다	keep	rewrites
+cx:novel-fixes-4:155	こたびのご逝去憾悔の念に堪えません｡	여행의 서거감회의 생각에 참지 않습니다.	keep	rewrites
+cx:novel-fixes-4:155	君の勝ちを見届けるまで耐えてみせる！	네 승리를 지켜볼 때까지 참아 내겠다!	keep	rewrites
+cx:novel-fixes-4:155	ここで耐えれば　私たちの時代が来る。	여기서 참으면 우리의 시대가 온다.	keep	rewrites
+cx:novel-fixes-4:155	だけど……２．５人は、耐えられない」	하지만……2.5명은, 견딜 수 없다」	keep	rewrites
+cx:novel-fixes-4:155	とても、今日は耐えられない気がする。	무척, 오늘은 견딜 수 없는 것 같다.	keep	rewrites
+cx:novel-fixes-4:155	あたし、こんなの耐えられないよ…。	나, 이런 건 견딜 수 없어….	keep	rewrites
+cx:novel-fixes-4:155	一人だったら一時間も耐えられんだろ	한 사람이라면 1시간이나 견딜 수 없어지	keep	rewrites
+cx:novel-fixes-4:155	今も笑いそうなの必死に堪えてるんだよ？	지금도 웃을 것 같은 필사적으로 참고 있어?	keep	rewrites
+cx:novel-fixes-4:155	耐えた先で報われることはあるのか？	참은 곳에서 보답받는 것은 있는 건가?	keep	rewrites
+cx:novel-fixes-4:155	(有吉) 耐えた！じゃないんだよ｡	(아리요시) 참았어! 가 아니야.	keep	rewrites
+cx:novel-fixes-4:155	牢内の暴虐に耐えかね脱走したものかと。	감옥내의 포학하게 참기 힘들고 탈주한 걸까 하고.	keep	rewrites

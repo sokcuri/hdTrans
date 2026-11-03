@@ -1,0 +1,10 @@
+# 규칙: GRM-7
+rule	input	expected	kind	layer
+cx:counterfactual-past:20	本気で告白すれば、付き合う事ぐらいは出来たかもしれない。	has:고백했더라면, 사귀는 것 정도는	fix	rewrites
+cx:counterfactual-past:20	本気で告白すれば、付き合うことぐらいは出来たかもしれない。	has:고백했더라면, 사귀는 것 정도는	fix	rewrites
+cx:counterfactual-past:20	この学園に来れば、きっと楽しいことがあると思っていた。	has:오면, 분명 즐거운 일이 있다고	keep	rewrites
+cx:counterfactual-past:20	「そんなことになったら、貴女は私達を撃つことになるかもしれない」	has:그렇게 되면,	keep	rewrites
+cx:counterfactual-past:20	親しくなりすぎれば、いつか裏切ることになるだろうしな。	has:너무 친해 지면,	keep	rewrites
+cx:counterfactual-past:20	嘘をつく気になれば、簡単につくことができる質問だった。	has:마음이 생기면,	keep	rewrites
+cx:counterfactual-past:20	「……言われてみれば、そんなことあったね」	has:듣고 보니,	keep	rewrites
+cx:counterfactual-past:20	「玄関を見ていたら、あの時のことを思い出した」	has:보고 있었더니,	keep	rewrites

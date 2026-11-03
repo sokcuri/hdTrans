@@ -1,0 +1,23 @@
+# 규칙: GRM-3520
+rule	input	expected	kind	layer
+cx:novel-fixes-4:20	それなら味方が見られないユフィリア嬢を庇っておこう。	has:아군을 볼 수 없는 유필리아 양을	fix	rewrites
+cx:novel-fixes-4:20	そこまで周りが見えなくなるもんかね」	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	こんな単純な一手が見えないなんて…。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	運転手の妹さん　目が見えないんです。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	だから　真実が見えなかったんです))	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	森で一度崖が見えなくなるんじゃそうな	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	「湯気と光が邪魔で絵が見えなかった」	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	でも私には筧が眩しくて星が見えない。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	顔が見えないから気持ちがわからない。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	「……先輩が見えなくてつまらないです」	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	⟨炙りタチウオを米が見えなくなるほど⟩	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	あ　いや　わしは化け物を見られなんだ。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	姿が見えないときには不安になった>	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	道が見えなくなったら動くんじゃないぞ！	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	やがて、完全にその姿が見えなくなると、	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	「いえ、筧さんが見えないなあって……」	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	夜は潜水艦が見えないから…怖い。	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	ホソお前 左の目が見えないんだろ	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	来たって私が見えなきゃ意味ないし	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	「……心の色が見えない、だからニセモノ」	!rule:cx:novel-fixes-4:20	keep	rewrites
+cx:novel-fixes-4:20	エルの存在は確かに感じる。だが見えない。	!rule:cx:novel-fixes-4:20	keep	rewrites

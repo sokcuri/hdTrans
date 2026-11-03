@@ -1,0 +1,33 @@
+# 규칙: GRM-3527
+rule	input	expected	kind	layer
+cx:novel-fixes-4:260	（霧島）まだ交戦中なのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	やはり空想上の生き物なのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	（――これは不味い状況なのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	《これ もうほぼ告白なのでは…？》	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	この子は考えてたより、いい子なのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	(ｼｬﾐﾙ)認識災害を引き起こす種なのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	あまりに安直かつ簡素すぎるﾈｰﾐﾝｸﾞなのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	「それは、住吉さんやおおしま氏の役割なのでは？」	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	(小沢)むっ… 新型OSの発案は副司令ご自身なのでは？	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	「日本人は金閣寺に住んでいて、みんなニンジャなのでは？」	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	「本当なら、彼女が私の靴をなめながら懇願するのが筋なのでは？」	has:게 아닐까	fix	rewrites
+cx:novel-fixes-4:260	その“別れ”は一時的なものではなく、	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	「俺が好きなのは、みいちゃんだから」	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	歓迎したくない相手なのはわかるけど、	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	お前の一存で覆していいものではない」	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	争いとは無縁なのはこの街くらいです。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	わたしが憑依したのではないかと思う。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	そうなんですけど　ほかのものでは…。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	特に高価なものではありませんでした。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	断じてほかのやからに渡すものではない	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	赤面疱瘡にかかられたのではないかと。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	あなたが金で情報を売ったのではないと	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	「天狗の子を授かってきたのでは」と。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	怪事課は すでに解体されたのでは…？	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	江戸幕府の復活そのために必要なのは・	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	こんなに楽しそうなのは久しぶりです。	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	お前様道具が惜しうて止めたのではない	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	・あちらで にぎやかなのは芸者衆かね	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	なのはもフェイトも楽しそうで何よりね	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	いつもなのはがお世話になっております	!rule:cx:novel-fixes-4:260	keep	rewrites
+cx:novel-fixes-4:260	しかし なんとも不思議なのは歌山殿だ	!rule:cx:novel-fixes-4:260	keep	rewrites

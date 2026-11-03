@@ -1806,7 +1806,7 @@ void ResultState(Flusher& f) {
         const std::string_view stem = v->group->surface;
         const char c1 = At(v->Code(v->selected), 1);
         const bool object = c1 >= '3' && c1 <= '6';
-        if ((stem == "な" || stem == "にな") && GradualBefore(v)) continue;
+        if ((stem == "な" || stem == "にな" || stem.ends_with("くな")) && GradualBefore(v)) continue;
         if (stem == "にな" && v->prev != nullptr && dict::InClass(HDTRANS_CLASS("noun.ongoing-ninaru"), v->prev->group->surface)) {
             continue;
         }

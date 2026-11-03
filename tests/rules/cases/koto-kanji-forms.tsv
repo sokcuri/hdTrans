@@ -1,0 +1,66 @@
+# 규칙: LEX-4163, GRM-3526, GRM-7
+rule	input	expected	kind	layer
+normalize:spelling-variant	死のうとした事。	has:한 것	fix	normalize
+normalize:spelling-variant	なかった事に…｡	has:없었던 것으로	fix	normalize
+normalize:spelling-variant	知らぬ事とはいえ	has:일이라고	fix	normalize
+normalize:spelling-variant	これはどういう事？	has:어떻게 된 일	fix	normalize
+normalize:spelling-variant	お忙しいという事で	has:바쁘다는 것으로	fix	normalize
+normalize:spelling-variant	噂を聞いた事がある	has:들었던 적이	fix	normalize
+normalize:spelling-variant	ちょっとした事を？	has:약간의	fix	normalize
+normalize:spelling-variant	ママ　いい事言う！	has:말 한다	fix	normalize
+normalize:spelling-variant	「という事は……」	has:그 말은	fix	normalize
+normalize:spelling-variant	人の命を絶つ事に、	has:끊는 것에	fix	normalize
+normalize:spelling-variant	……ギアで戦う事を。	has:싸우는 것을	fix	normalize
+normalize:spelling-variant	某には謹慎という事で	has:근신이라는 것으로	fix	normalize
+normalize:spelling-variant	それさえも破る事など	has:찢는 것	fix	normalize
+normalize:spelling-variant	無駄に死ぬ事はない」	has:쓸데없이 죽을	fix	normalize
+normalize:spelling-variant	できる事は……一つ。	has:있는 것은	fix	normalize
+normalize:spelling-variant	世界を変革する事など、	has:변혁하는 것	fix	normalize
+normalize:spelling-variant	人間である事を捨てる。	has:인간인 것을	fix	normalize
+normalize:spelling-variant	君に尋ねたい事がある。	has:싶은 것이	fix	normalize
+normalize:spelling-variant	利人さんが伝えたい事。	has:싶은 것	fix	normalize
+normalize:spelling-variant	工業エリアという事で。	has:에리어라는 것으로	fix	normalize
+normalize:spelling-variant	手術する事もできます。	has:수술할 수도	fix	normalize
+normalize:spelling-variant	確かめたい事があって｡	has:싶은 것이	fix	normalize
+normalize:spelling-variant	うわべだけをまねる事｡	has:흉내내는 것	fix	normalize
+normalize:spelling-variant	近々 この地を去る事に	has:떠나는 것에	fix	normalize
+normalize:spelling-variant	調べりゃ　分かる事だ。	has:아는 것이다	fix	normalize
+normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize
+normalize:spelling-variant	「……アールの事を思っていたんです」	「……아르를 생각했습니다」	keep	normalize
+normalize:spelling-variant	こないだの事は謝るから出してくれ！」	지난번의 일은 사과하니까 내 줘!」	keep	normalize
+normalize:spelling-variant	しかも、こんな事態になるなんて……。	게다가, 이런 사태가 되다니…….	keep	normalize
+normalize:spelling-variant	「そんな事まで調べてるんですか！？」	「그런 일까지 조사합니까!?」	keep	normalize
+normalize:spelling-variant	そんな事を何故考えていたかというと、	그런 일을 왜 생각하고 있었는가라고 하면,	keep	normalize
+normalize:spelling-variant	「このまま何事もなければいいけれど」	「이대로 아무 일도 없으면 좋지만」	keep	normalize
+normalize:spelling-variant	今日も何事も無くて、本当に良かった。	오늘도 아무 일도 없어서, 정말 좋았다.	keep	normalize
+normalize:spelling-variant	「何事も先手を打って損することはない」	「아무 일도 선수를 쳐 손해 볼 일은 없다」	keep	normalize
+normalize:spelling-variant	「大丈夫大丈夫、ただの考え事だから」	「괜찮아 괜찮아, 그냥 생각이니까」	keep	normalize
+normalize:spelling-variant	しれー、わたしに隠し事とかよくない。	사령관님, 나에게 비밀사항이라든지 좋지 않다.	keep	normalize
+normalize:spelling-variant	ちょっとした頼み事があるのだけれど、	약간의 부탁일이 있는데,	keep	normalize
+normalize:spelling-variant	魔学という力を持つって事ですからね。	마학이라는 힘을 가진다는 것이니까요.	keep	normalize
+normalize:spelling-variant	＜たくさんの人の思いを知るって事だ＞	<많은 사람의 생각을 안다는 것이다>	keep	normalize
+normalize:spelling-variant	オレの勝ちって事で、文句ないよな。	내 승리는 일로, 불만 없지.	keep	normalize
+normalize:spelling-variant	噂が事実なら、すでに事は我々と音楽科の先生、	소문이 사실이라면, 이미 일은 우리와 음악과의 선생님,	keep	normalize
+normalize:spelling-variant	これが魔力を消耗したと言う事なのだろう。	이것이 마력을 소모했다고 하는 일일 것이다.	keep	normalize
+normalize:spelling-variant	下と言う事はないだろうが、そう年上にも見えない。	아래라는 일은 없을 테지만, 그렇게 연상에도 안 보인다.	keep	normalize
+normalize:spelling-variant	全力で見なかった事にした。	전력으로 못 본 척했다.	keep	normalize
+normalize:spelling-variant	……まあ、俺も人の事を言えないがな。	……뭐, 나도 사람을 말할 수 없지만.	keep	normalize
+normalize:spelling-variant	信じてもいない事を言わないで下さい。	믿지 않은 말을 말하지 마세요.	keep	normalize
+normalize:spelling-variant	「？　何かおかしな事を言ったか？」	「? 뭔가 이상한 말을 말했나?」	keep	normalize
+normalize:spelling-variant	小さな私の事も…覚えていてくださいね。	작은 제 일도…기억하고 있어 주세요.	keep	normalize
+normalize:spelling-variant	なんで 僕の事がわかったんですか？	왜 제 일을 알 수 있었습니까?	keep	normalize
+normalize:spelling-variant	私の事丈博さんから聞いてませんか？	제 일다케히로 씨에게서 듣지 않습니까?	keep	normalize
+cx:novel-fixes-4:223	私に出来る事はない訳で。	has:할 수 있는 일은 없는	keep	rewrites
+cx:novel-fixes-4:224	自分たちが撃たれている事にも気付かないまま	has:총격당하고 있는 것도 깨닫지	fix	rewrites
+cx:novel-fixes-4:221	もうろくに話す事もないだろう	has:이야기하는 일도 없을	keep	rewrites
+cx:novel-fixes-4:221	その輝きはくすぶる事もなく	has:일도 없고	keep	rewrites
+cx:novel-fixes-4:222	何か気になる事でも～？	has:신경 쓰이는 일이라도	keep	rewrites
+normalize:spelling-variant	俺はダストボックス行きって事になった	lacks:행이라는 것이	keep	normalize
+normalize:spelling-variant	自分がまだ４歳だったと言う事を思い出し	has:4세였다는 사실을	keep	normalize
+normalize:spelling-variant	噂が事実なら、すでに事は我々と音楽科の先生、	has:이미 일은	keep	normalize
+normalize:spelling-variant	冷静になった所である事を思い出した。	lacks:곳인 것을	keep	normalize
+cx:novel-fixes-4:110	連絡を待っててほしいという話だったが	has:좋겠다고 하는 이야기	keep	rewrites
+dict:イジメ	よくもお姉ちゃんをイジメてくれたわね	has:괴롭혀 주었네	keep	lookup
+dict:イジメ	目の届かない所でイジメられている双子を	has:따돌림 당하고	keep	lookup
+cx:counterfactual-past:20	本気で告白すれば、付き合う事ぐらいは出来たかもしれない。	has:고백했더라면, 사귀는 것 정도는	fix	rewrites
+cx:counterfactual-past:20	本気で告白すれば、付き合うことぐらいは出来たかもしれない。	has:고백했더라면, 사귀는 것 정도는	fix	rewrites

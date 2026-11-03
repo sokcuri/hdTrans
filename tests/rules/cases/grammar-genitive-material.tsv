@@ -1,6 +1,6 @@
 # 규칙: GRM-3251
 rule	input	expected	kind	layer
-dict:jisjk:341889	目の前に向けられた命を奪うことが出来る銀の短剣が引っ込められたのを見て、	눈앞으로 향해진 목숨을 빼앗을 수가 있는 은 단검을 거둘 수 있던 것을 보고,	fix	local
+dict:jisjk:341889	目の前に向けられた命を奪うことが出来る銀の短剣が引っ込められたのを見て、	눈앞을 향한 목숨을 빼앗을 수가 있는 은 단검을 거둘 수 있던 것을 보고,	fix	local
 dict:jisjk:341889	きっとバーンズ商会で売り出す時は木製か石の駒になりそう。	has:돌의 말	keep	local
 dict:jisjk:341889	トタンの扉があった。	has:함석의 문	keep	local
 dict:jisjk:341889	その手には下を向いた空のブリキのバケツ。	그 손에는 아래를 향한 하늘의 양철 양동이.	fix	local

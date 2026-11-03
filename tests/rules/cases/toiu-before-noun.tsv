@@ -1,0 +1,47 @@
+# 규칙: GRM-3522
+rule	input	expected	kind	layer
+cx:novel-fixes-4:110	乗れないという演技も	has:수 없다는	fix	rewrites
+rewrite:toiu-before-noun	某には謹慎という事で	has:근신이라는 것으로	fix	rewrites
+rewrite:toiu-before-noun	工業エリアという事で。	has:에리어라는 것으로	fix	rewrites
+cx:novel-fixes-4:110	新しいという漢字を使って	has:새롭다는	fix	rewrites
+cx:novel-fixes-4:110	ファンになったという彼女は	has:되었다는	fix	rewrites
+cx:novel-fixes-4:110	この体積が求まるというほう…	has:구해진다는	fix	rewrites
+cx:novel-fixes-4:110	ばっかり言われるという状況は	has:듣는다는	fix	rewrites
+cx:novel-fixes-4:110	倭王武が葬られたという古墳。	has:매장되었다는	fix	rewrites
+rewrite:toiu-before-noun	- ママの娘だという事は秘密	has:딸이라는 것은	fix	rewrites
+cx:novel-fixes-4:110	一気に放出させるという大技だ	has:방출시킨다는	fix	rewrites
+rewrite:toiu-before-noun	それが忍ぶという事でして……」	has:참는다는 것이라서	fix	rewrites
+cx:novel-fixes-4:110	まとめるというルールですからね	has:정리한다는	fix	rewrites
+cx:novel-fixes-4:110	女を殺して金を奪うという犯行と	has:빼앗는다는	fix	rewrites
+rewrite:toiu-before-noun	全然｡ えっ… という事は何？	has:라는 것은	fix	rewrites
+cx:novel-fixes-4:110	刑務所に入りたいという気持ちも	has:들어가고 싶다는	fix	rewrites
+rewrite:toiu-before-noun	男に殺されたという事？ ええ｡	has:살해당했다는 것	fix	rewrites
+cx:novel-fixes-4:110	届きにくいという意味が分かった	has:어렵다는	fix	rewrites
+cx:novel-fixes-4:110	僕のすべてを燃やすという衝動と	has:태운다는	fix	rewrites
+cx:novel-fixes-4:110	鏡は円いという常識を覆しました。	has:둥글다는	fix	rewrites
+cx:novel-fixes-4:110	古墳に導入されたという盛土技術。	has:도입되었다는	fix	rewrites
+cx:novel-fixes-4:110	この門は俺が造ったという証しだよ	has:양성했다는	fix	rewrites
+cx:novel-fixes-4:110	新しい艦ができたという報告でーす…	has:생겼다는	fix	rewrites
+rewrite:toiu-before-noun	狙撃地点はそう遠くないという事だ。	has:않다는 것이다	fix	rewrites
+cx:novel-fixes-4:110	体脂肪が減ったというﾃﾞｰﾀがある	has:줄어들었다는	fix	rewrites
+cx:novel-fixes-4:110	基準を僕の中に作ったという点数です	has:만들었다는	fix	rewrites
+rewrite:toiu-before-noun	…反抗期というやつだったのだろうか。	…반항기라는 녀석이었던 걸까.	keep	rewrites
+rewrite:toiu-before-noun	「……というか、いつの間に盗撮した」	「……그보다, 어느새 도촬했어」	keep	rewrites
+rewrite:toiu-before-noun	という女が昨日テレビに出ていたので、	라는 여자가 어제 TV에 나와 있었으므로,	keep	rewrites
+rewrite:toiu-before-noun	「テロということは交戦の可能性も？」	「테러라는 건 교전의 가능성도?」	keep	rewrites
+rewrite:toiu-before-noun	「私に相談しに来たというわけですか」	「저에게 상담하러 왔다고 하는 것입니까」	keep	rewrites
+rewrite:toiu-before-noun	話題にすら出さなかったということは、	화제에조차 내지 않았다는 것은,	keep	rewrites
+rewrite:toiu-before-noun	逢沢は清掃班という立場でありながら、	아이자와는 청소반이라는 입장이면서,	keep	rewrites
+rewrite:toiu-before-noun	「限界……というか、んーそうだなぁ」	「한계……그보다, 음그래~」	keep	rewrites
+rewrite:toiu-before-noun	いわゆるトラウマというやつだろうか。	이른바 트라우마라는 녀석일까.	keep	rewrites
+rewrite:toiu-before-noun	お礼参りというのなら受けてあげるわ。	참배라고 한다면 받아 줄게.	keep	rewrites
+rewrite:toiu-before-noun	これは、チョコのお返しというわけか。	이것은, 초콜릿 답례라는 건가.	keep	rewrites
+rewrite:toiu-before-noun	その人々が我々の祖先……という話だ。	그 사람들이 우리의 조상……이라는 이야기다.	keep	rewrites
+rewrite:toiu-before-noun	そんな事を何故考えていたかというと、	그런 일을 왜 생각하고 있었는가라고 하면,	keep	rewrites
+rewrite:toiu-before-noun	ただ〝魔法〟という言葉が好きだった。	다만 “마법”이라는 말을 좋아했다.	keep	rewrites
+rewrite:toiu-before-noun	つぐみらしいというか、なんと言うか。	다물어답다고 하는지, 뭐랄까.	keep	rewrites
+rewrite:toiu-before-noun	つまり、１位か６位以下ということだ。	즉, 1위나 6위 이하라는 것이다.	keep	rewrites
+rewrite:toiu-before-noun	ではどうやって他人を呼ぶかというと、	그럼 어떻게 타인을 부르는가 하면,	keep	rewrites
+rewrite:toiu-before-noun	というかね、もうそろそろ空腹が限界。	그렇다고 하는 거야, 이제 슬슬 공복이 한계.	keep	rewrites
+rewrite:toiu-before-noun	というのは、あくまで俺の友人の弁だ。	그렇다고 하는 것은, 어디까지나 내 친구의 말이다.	keep	rewrites
+rewrite:toiu-before-noun	というわけで、今後の予定がきまった。	그래서, 향후의 예정이 결정되었다.	keep	rewrites
