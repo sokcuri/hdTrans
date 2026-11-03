@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.8.4](https://github.com/sokcuri/hdTrans/compare/v0.8.3...v0.8.4) (2026-11-04)
+
+
+### Bug Fixes
+
+* **compose:** keep the comma a word reads with it ([#474](https://github.com/sokcuri/hdTrans/issues/474)) ([c319b40](https://github.com/sokcuri/hdTrans/commit/c319b401580905f90237bddc15c4603953ef7360))
+* **dict:** do not read 思う before より, 以上 or 通り as a topic verb after について ([#480](https://github.com/sokcuri/hdTrans/issues/480)) ([c5f5c6f](https://github.com/sokcuri/hdTrans/commit/c5f5c6f717c22083d7571a6b060912c8f6df6d23))
+* **dict:** give frequent words their usual default reading ([#473](https://github.com/sokcuri/hdTrans/issues/473)) ([b9f5acd](https://github.com/sokcuri/hdTrans/commit/b9f5acd1027252c39f00bd17e9c596f4da35a6c4))
+* **dict:** keep one negative after a してい read 하지 않다 ([#487](https://github.com/sokcuri/hdTrans/issues/487)) ([329ce2a](https://github.com/sokcuri/hdTrans/commit/329ce2a9f127242ea5fffb226544b8110117a9d4))
+* **dict:** read critical misreadings of について, 巡る, きる, vocative よ and other constructions ([#462](https://github.com/sokcuri/hdTrans/issues/462)) ([b210727](https://github.com/sokcuri/hdTrans/commit/b2107270b58782a47d880e38aff80e19f2afb8fb))
+* **dict:** read misglossed words of spoken lines ([#465](https://github.com/sokcuri/hdTrans/issues/465)) ([d0e29f3](https://github.com/sokcuri/hdTrans/commit/d0e29f398f414702e49c5e7ca3aa6322650cc3b7))
+* **dict:** read misread words and set phrases such as 農具, 真っ直ぐ, 俺の中, 目を向ける ([#475](https://github.com/sokcuri/hdTrans/issues/475)) ([e24ef92](https://github.com/sokcuri/hdTrans/commit/e24ef9297c4cc0013d3c52c16a9bf2164290a503))
+* **dict:** read the takeaway cry, the fight cheer and bare kana stems at line end ([#469](https://github.com/sokcuri/hdTrans/issues/469)) ([f07f14e](https://github.com/sokcuri/hdTrans/commit/f07f14e34e08323d91fdf1936d2cc8177d9d6c8c))
+* **dict:** read the words and clause links the web novel examples misread ([#476](https://github.com/sokcuri/hdTrans/issues/476)) ([3f66a9d](https://github.com/sokcuri/hdTrans/commit/3f66a9d7ee3d0b74bdd73892dd32fe931e9415d0))
+* **dict:** read the words and clause shapes the web examples misread ([#484](https://github.com/sokcuri/hdTrans/issues/484)) ([b48f70d](https://github.com/sokcuri/hdTrans/commit/b48f70d2e63aaf4e8520d1f8909322d7b91a8b5b))
+* **dict:** read the words and constructions fresh news, novel and game lines misread ([#467](https://github.com/sokcuri/hdTrans/issues/467)) ([0938550](https://github.com/sokcuri/hdTrans/commit/09385505aa4cf02a737d47c3a38ca6b1d3e7ae94))
+* **dict:** read the words and particles the narration examples misread ([#479](https://github.com/sokcuri/hdTrans/issues/479)) ([029af46](https://github.com/sokcuri/hdTrans/commit/029af4687df9e67615317338909762036bdaa07a))
+* **dict:** read the words and senses the web examples misread ([#482](https://github.com/sokcuri/hdTrans/issues/482)) ([aaec244](https://github.com/sokcuri/hdTrans/commit/aaec2440e37c4228f2f94148d484e402f658e8c4))
+* **dict:** read 事 after a verb as こと and fix particle, degree and quoting misreadings ([#472](https://github.com/sokcuri/hdTrans/issues/472)) ([26da037](https://github.com/sokcuri/hdTrans/commit/26da037b441c539ff4ac03a4d4c4cc7ed590a682))
+* **dict:** spell katakana loanwords and foreign names as Korean readers write them ([#463](https://github.com/sokcuri/hdTrans/issues/463)) ([3bce04d](https://github.com/sokcuri/hdTrans/commit/3bce04d7db711ee312bb002330c3432680582193))
+* **dict:** write つ as 츠 and later plain stops aspirated in every dictionary row ([#481](https://github.com/sokcuri/hdTrans/issues/481)) ([1a9ea43](https://github.com/sokcuri/hdTrans/commit/1a9ea43000b66de4b3dd6a32b4300c2716fb9054))
+* **grammar:** read the quotes, endings and set forms the web examples broke ([#483](https://github.com/sokcuri/hdTrans/issues/483)) ([0bca491](https://github.com/sokcuri/hdTrans/commit/0bca491e10d5fa1cdf9f497f4bce193dc384a4fb))
+* **grammar:** read じゃなく, 駄目か, ちゃう？, なんか, するに and the の before phrase verbs ([#477](https://github.com/sokcuri/hdTrans/issues/477)) ([30b8c50](https://github.com/sokcuri/hdTrans/commit/30b8c502a9498317d51a9137acd999ec8eda9182))
+* **output:** keep the comma an ichidan or passive stem takes as its te ([#471](https://github.com/sokcuri/hdTrans/issues/471)) ([ccd08b7](https://github.com/sokcuri/hdTrans/commit/ccd08b748a2146f3285de3a6597a0769bde7ae60))
+* **output:** put the adverb of a compound verb before the verb of a multi-word target ([#470](https://github.com/sokcuri/hdTrans/issues/470)) ([57bf417](https://github.com/sokcuri/hdTrans/commit/57bf417ef5a36482d236448b29544971b7082672))
+* **release:** read the web examples, loanwords and Japanese readings more naturally ([a9e8b43](https://github.com/sokcuri/hdTrans/commit/a9e8b43045ab6e63f32a564869eb29e6e935b8eb))
+* **rules:** end spoken sentences at phrase spaces and bare ないと ([#466](https://github.com/sokcuri/hdTrans/issues/466)) ([d4b2a25](https://github.com/sokcuri/hdTrans/commit/d4b2a2598e0a9f249ffaa476653efeebc0cc7806))
+* **rules:** keep くれよ in mid-sentence and read よほど…ない限り as 있지 않으면 ([#486](https://github.com/sokcuri/hdTrans/issues/486)) ([6bbc19f](https://github.com/sokcuri/hdTrans/commit/6bbc19fd08d138717c5b6b7e9686e95be93a5d50))
+* **rules:** read one-word negatives and dialect んと before a bare ないと as obligation ([#478](https://github.com/sokcuri/hdTrans/issues/478)) ([0eb04f8](https://github.com/sokcuri/hdTrans/commit/0eb04f87b349f204f4d33f9c9860a0ded477de07))
+* **rules:** read report phrases in news lines ([#464](https://github.com/sokcuri/hdTrans/issues/464)) ([c07dd37](https://github.com/sokcuri/hdTrans/commit/c07dd37663a3724b9c8ab88f80f9c433c62e3a3f))
+* **sound:** drop the みー sound row ([#488](https://github.com/sokcuri/hdTrans/issues/488)) ([97b75f1](https://github.com/sokcuri/hdTrans/commit/97b75f1132b488418a1bab55ff546aac62fd2982))
+* **sound:** open an utterance after an interjection and its comma ([#485](https://github.com/sokcuri/hdTrans/issues/485)) ([6a04aab](https://github.com/sokcuri/hdTrans/commit/6a04aabc79431cec0b26bdfb98bf6b6d7774b3c1))
+* **sound:** read drawls after kanji, spaced stutters, clipped volitionals and drawn objects ([#468](https://github.com/sokcuri/hdTrans/issues/468)) ([9a5aab9](https://github.com/sokcuri/hdTrans/commit/9a5aab98e7dfc9e44f30d060638bd5196e10d2c6))
+
 ## [0.8.3](https://github.com/sokcuri/hdTrans/compare/v0.8.2...v0.8.3) (2026-11-03)
 
 
