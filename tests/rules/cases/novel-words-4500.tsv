@@ -92,7 +92,7 @@ cx:web-fixes-i:210	さらに欄の最後にある「不滅」ってなんだ？	
 cx:web-fixes-i:210	最後に言っておく。	!rule:cx:web-fixes-i:210	keep	rewrites
 cx:web-fixes-i:240	ファンタジーゲームに出てくる村人のような格好で、ズボンにラフな上着。	has:바지에 편한 윗도리	fix	rewrites
 cx:web-fixes-i:240	ラフなスケッチを描いた。	!rule:cx:web-fixes-i:240	keep	rewrites
-cx:web-fixes-i:225	彼に困っている。	has:그 때문에 곤란	fix	rewrites
+cx:web-fixes-i:225	彼に困っている。	has:그 때문에 곤란해하고 있다	fix	rewrites
 cx:web-fixes-i:225	よくいなくなるイスカに困ってるのと、ＰｅＴＳを使うことは何も関係なくない？	has:이스카 때문에 곤란	fix	rewrites
 cx:web-fixes-i:225	「ついでに、保管場所に困らないようにお前の身体に宿る。	!rule:cx:web-fixes-i:225	keep	rewrites
 cx:web-fixes-i:250	ほう、珍しくギアの足音がすると思っておったら、お主らのギアか。	has:발소리가 난다고	fix	rewrites
