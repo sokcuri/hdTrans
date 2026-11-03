@@ -439,6 +439,11 @@ cx:novel-fixes-2:755	LEX-4030	&&3 S+0== "溢れ" D+0== "흘러넘&AO@" ||25 S-1=
 cx:novel-fixes-2:765	LEX-4030	&&2 S+0== "を始め" S-1== "仲違い"	set-target@-1 "사이가 틀어지기" set-target " 시작&AV@"	仲違いを始めた 사이가 틀어지기 시작한
 cx:novel-fixes-2:780	LEX-4030	&&4 F+0== "verb" ||2 Y+0== "0 것이" Y+0== "0 일이" S+1== "Lあ" <6 ||9 S+0== "時として" S+0== "時々" S+0== "時折" S+0== "たまに" S+0== "よく" S+0== "しばしば" S+0== "ときどき" S+0== "ときおり" S+0== "稀に" S+0== "00。「"	set-ending "3 때가"	時として鋭さを感じる事がある 때로는 날카로움을 느낄 때가 있다
 cx:novel-fixes-2:790	LEX-4030	&&3 S+0== "見合" D+0== "어울&AA@" Y+0== "8"	set-ending "0"	見合った訓練 어울리는 훈련
+cx:novel-fixes-2:800	LEX-4031	&&5 ||2 S+0== "まったく" S+0== "全く" D+0== "완전히" ||4 F+0== "opens-line" F+0== "after-pause" S-1== "00「『（。！？" !1 F-1== "exists" ||4 S+1== "L、" S+1== "L！" S+2== "は" S+2== "って" !1 >10 ||9 D+0== "R$D7@" D+0== "R$DH@" D+0== "R$FA@" Y+0== "~지 않" Y+0== "~지 못" Y+0== "~않" Y+0== "~없" I+0== "~ない" I+0== "~ません" S+0== "00。！？」"	set-target "정말이지"	まったく師匠は大袈裟すぎるのだ 정말이지 스승님은 과장이 지나치다
+cx:novel-fixes-2:810	LEX-4031	&&3 S+0== "余計" D+0== "여분" F+1== "conjugating"	set-target "더"	師匠が余計うるさくなった 스승이 더 시끄러워졌다
+cx:novel-fixes-2:820	LEX-4031	&&5 S+0== "すぎ" D+0== "지&A5@" Y+0== "L4다" P-1== "1**" !1 F-1== "conjugating"	append-target@-1 "(이)가" set-target "지나&AO@" set-ending "1다"	大袈裟すぎるのだ 과장이 지나치다
+cx:novel-fixes-2:825	LEX-4031	&&5 S+0== "すぎ" D+0== "지&A5@" ||2 Y+0== "4" Y+0== "0" P-1== "1**" !1 F-1== "conjugating"	append-target@-1 "(이)가" set-target "지나&AO@" set-ending "8"	大袈裟すぎる話 과장이 지나친 이야기
+cx:novel-fixes-2:830	LEX-4031	&&3 S+0== "で" ||7 S-1== "視界" S-1== "目" S-1== "瞳" S-1== "両目" S-1== "片目" S-1== "望遠鏡" S-1== "双眼鏡" >5 ||6 S+0== "L見" S+0== "L眺め" S+0== "L捉え" S+0== "L確認" S+0== "L見渡" S+0== "L覗" S+0== "00。！？"	set-target "(으)로"	視界で前を見る 시야로 앞을 본다
 cx:novel-fixes-2:770	LEX-4030	&&3 S+0== "行" Y+0== "L8" ||8 S+1== "L非道" S+1== "L悪事" S+1== "L行為" S+1== "L仕打ち" S+1== "L嫌がらせ" S+1== "L所業" S+1== "L実験" S+1== "L罪"	set-target "행&AV@"	レイニへ行った非道の数々 레이니에게 행한 갖가지 악행
 cx:novel-fixes-2:775	LEX-4030	&&3 S+0== "へ" S+1== "行" ||4 S+2== "L非道" S+2== "L悪事" S+2== "L仕打ち" S+2== "L嫌がらせ"	set-target "에게"	レイニへ行った非道 레이니에게 행한 악행
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
