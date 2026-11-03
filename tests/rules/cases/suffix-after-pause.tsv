@@ -26,7 +26,7 @@ G30	村人……	마을사람……	keep	defaults
 G30	「師匠……」	「스승……」	keep	defaults
 G30	二人……三人と増えた。	두 사람……세 명과 늘어났다.	keep	defaults
 G30	「あの……人は誰？」	「그……사람은 누구?」	keep	defaults
-G30	彼女……頭がいいね。	그녀……머리가 좋아.	keep	defaults
+G30	彼女……頭がいいね。	그녀……머리가 좋네.	keep	defaults
 G30	終盤は阿鼻叫喚の包囲戦だ。	종반은 아비규환 포위전이다.	keep	global-stem
 G30	ヴァーゲル家	바겔가	keep	global-stem
 G30	ゲーム内で母親が死ぬのは	게임내에서 어머니가 죽는 것은	keep	global-stem

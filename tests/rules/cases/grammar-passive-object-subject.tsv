@@ -4,7 +4,7 @@ voice:object-subject	名前を呼ばれた気がした。	이름이 불린 것 �
 voice:object-subject	名前を呼ばれた結衣は、びくりと肩を震わせた。	has:이름이 불린 유이는	fix	voice
 voice:object-subject	少女のようにどう見ても目下のものに、実名を呼ばれる事は大変許しがたい行為である。	has:실명이 불리는	fix	voice
 voice:object-subject	先生に名前を呼ばれた。	선생님에게 이름이 불렸다.	fix	voice
-voice:object-subject	ヒエラルキーは一瞬にして最下層に落ちて、ホーケーという仇名を付けられてからかわれた。	has:별명이 붙여지고	fix	voice
+voice:object-subject	ヒエラルキーは一瞬にして最下層に落ちて、ホーケーという仇名を付けられてからかわれた。	has:별명이 붙여져	fix	voice
 voice:object-subject	一度大怪我をし、痩身処置を施された。	has:감량 처치가 실시되었다	fix	voice
 voice:object-subject	これ以上ぐずぐずしていたら、本当に新たな条件を付け加えられてしまう。	has:조건이 덧붙여져	fix	voice
 voice:object-subject	広場は集合住宅のような高い建物に四方を囲まれていて、	has:사방이 둘러싸여	fix	voice

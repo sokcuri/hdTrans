@@ -444,6 +444,24 @@ cx:novel-fixes-2:810	LEX-4031	&&3 S+0== "余計" D+0== "여분" F+1== "conjugati
 cx:novel-fixes-2:820	LEX-4031	&&5 S+0== "すぎ" D+0== "지&A5@" Y+0== "L4다" P-1== "1**" !1 F-1== "conjugating"	append-target@-1 "(이)가" set-target "지나&AO@" set-ending "1다"	大袈裟すぎるのだ 과장이 지나치다
 cx:novel-fixes-2:825	LEX-4031	&&5 S+0== "すぎ" D+0== "지&A5@" ||2 Y+0== "4" Y+0== "0" P-1== "1**" !1 F-1== "conjugating"	append-target@-1 "(이)가" set-target "지나&AO@" set-ending "8"	大袈裟すぎる話 과장이 지나친 이야기
 cx:novel-fixes-2:830	LEX-4031	&&3 S+0== "で" ||7 S-1== "視界" S-1== "目" S-1== "瞳" S-1== "両目" S-1== "片目" S-1== "望遠鏡" S-1== "双眼鏡" >5 ||6 S+0== "L見" S+0== "L眺め" S+0== "L捉え" S+0== "L確認" S+0== "L見渡" S+0== "L覗" S+0== "00。！？"	set-target "(으)로"	視界で前を見る 시야로 앞을 본다
+cx:novel-fixes-2:840	LEX-4032	&&3 S+0== "すまな" Y+0== "4" S+1== "L、"	set-ending "1다"	すまない、ダリヤ 미안하다, 다리야
+cx:novel-fixes-2:850	LEX-4032	&&3 S+0== "で" S-1== "から" S+1== "い"	set-target "면"	2時からでいい？ 2시부터면 돼?
+cx:novel-fixes-2:860	LEX-4032	&&3 S+0== "でか" D+0== "(으)로 &AF@" ||4 S-1== "指" S-1== "爪" S-1== "手" S-1== "指先"	set-target "(으)로 &Hh@"	額の右を指でかいていた 이마의 오른쪽을 손가락으로 긁고 있었다
+cx:novel-fixes-2:870	LEX-4032	&&3 S+0== "あたり" S+1== "だろう" P-1== "1**"	append-target@-1 "쯤일" set-target "" set-target@+1 "것이다"	心筋梗塞あたりだろう 심근경색쯤일 것이다
+cx:novel-fixes-2:880	LEX-4032	&&2 S+0== "とは" >5 ||5 S+0== "L正反対" S+0== "L対照的" S+0== "L違" S+0== "L逆" S+0== "L別物" S+0== "00。！？"	set-target "(와)과는"	地味なダリヤとは、正反対のタイプ 수수한 다리야와는, 정반대 타입
+cx:novel-fixes-2:890	LEX-4032	&&4 S+0== "合わせ" S-1== "に向か" S+1== "で" P-2== "1**"	append-target@-2 "에" set-target@-1 "" set-ending@-1 "" set-target "마주 보고" set-target@+1 " "	テーブルに向かい合わせで座り 테이블에 마주 보고 앉아
+cx:novel-fixes-2:900	LEX-4033	&&3 S+0== "な" D+0== "$D7@" Y-1== "R것이"	set-target "$FA@"	他に出来る事がなかった 그 밖에 할 수 있는 것이 없었다
+cx:novel-fixes-2:910	LEX-4033	&&2 S+0== "L見え" Y-1== "0 만큼"	set-ending@-1 "0 것으로만"	ただ遊んでいるだけに見えた 그저 놀고 있는 것으로만 보였다
+cx:novel-fixes-2:930	LEX-4033	&&2 S+0== "だの" ||2 Y-1== "R라" &&2 D-1== "R라" !1 P-1== "1**"	set-target "느니"	勇気を出せだの 용기를 내라느니
+cx:novel-fixes-2:935	LEX-4033	&&4 S+0== "と" S-1== "だの" !1 F+1== "verb" !1 S+1== "00、。,「」『』！？!?"	set-target " 하는"	頑張れだのと無責任な言葉 힘내라느니 하는 무책임한 말
+cx:novel-fixes-2:936	LEX-4033	&&2 S+0== "と" S-1== "だの"	set-target " 하고"	頑張れだのと言った 힘내라느니 하고 말했다
+cx:novel-fixes-2:937	LEX-4033	&&3 S+0== "と言" S-1== "だの" !1 I+0== "Lと言われ"	set-target " 하고 말&AV@"	頑張れだのと言った 힘내라느니 하고 말했다
+cx:novel-fixes-2:938	LEX-4033	&&2 S+0== "と、" S-1== "だの"	set-target " 하고,"	帰れだのと、騒ぐ 돌아가라느니 하고, 떠든다
+cx:novel-fixes-2:940	LEX-4033	&&4 S+0== "と" S+1== "噂" S+2== "の" !1 F-1== "person"	set-target "(이)라고" set-target@+1 "소문난" set-target@+2 " "	最底辺と噂の高校 최하층이라고 소문난 고등학교
+cx:novel-fixes-2:945	LEX-4033	&&4 S+0== "と" S+1== "噂" S+2== "の" F-1== "person"	set-target "(와)과" set-target@+1 "소문난" set-target@+2 " "	王子と噂の令嬢 왕자와 소문난 영애
+cx:novel-fixes-2:960	LEX-4033	&&3 S+0== "かわ" Y-1== "R고 나서" I+0== "Lかわれ"	set-ending@-1 "6" set-target "놀림&FD@" set-active	仇名を付けられてからかわれた 별명이 붙여져 놀림받았다
+cx:novel-fixes-2:970	LEX-4033	&&3 S+0== "と似" S+1== "よう" Y+1== "4"	set-target "(와)과 비슷&AV@" set-ending "8" set-target@+1 ""	俺と似たような境遇 나와 비슷한 처지
+cx:novel-fixes-2:980	LEX-4033	&&2 S+0== "取られ" <0 ||4 S+0== "写真" S+0== "写メ" S+0== "動画" S+0== "画像" ||2 S+0== "00、。,「」『』！？!?" F+0== "conjugating"	set-target "찍&AW@"	写真もいっぱい取られた 사진도 많이 찍혔다
 cx:novel-fixes-2:770	LEX-4030	&&3 S+0== "行" Y+0== "L8" ||8 S+1== "L非道" S+1== "L悪事" S+1== "L行為" S+1== "L仕打ち" S+1== "L嫌がらせ" S+1== "L所業" S+1== "L実験" S+1== "L罪"	set-target "행&AV@"	レイニへ行った非道の数々 레이니에게 행한 갖가지 악행
 cx:novel-fixes-2:775	LEX-4030	&&3 S+0== "へ" S+1== "行" ||4 S+2== "L非道" S+2== "L悪事" S+2== "L仕打ち" S+2== "L嫌がらせ"	set-target "에게"	レイニへ行った非道 레이니에게 행한 악행
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
