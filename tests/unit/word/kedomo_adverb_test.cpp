@@ -25,9 +25,9 @@ HD_TEST(word_kedomo_gives_mo_to_adverb) {
         const char* want;
     };
     const Case cases[] = {
-        {"悪いけどもう一度", "나쁘지만 한번 더"},
-        {"悪いけどもうん", "나쁘지만 응"},
-        {"悪いけども", "나쁘지만"},
+        {"悪いけどもう一度", "미안하지만 한번 더"},
+        {"悪いけどもうん", "미안하지만 응"},
+        {"悪いけども", "미안하지만"},
     };
     for (const Case& c : cases) {
         const std::vector<std::string> lines = {c.in};

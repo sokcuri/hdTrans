@@ -17,10 +17,12 @@ constraint:nomizo-before-ochi	油断していた俺のみぞおちに一撃。	�
 constraint:nomizo-before-ochi	全ては神のみぞ知る。	모든 것은 신만이 안다.	keep	lookup
 constraint:nadode-before-dekiru	生き延びることなどできないのだ。	살아남는 것 등 할 수 없는 것이다.	fix	lookup
 constraint:nadode-before-dekiru	皇国を裏切る事などできない。	황국을 배반하는 것 등 할 수 없다.	fix	lookup
+constraint:nadode-before-dekiru	生き延びることなどできないのだ。	살아남는 것은 할 수 없는 것이다.	fix	lookup
+constraint:nadode-before-dekiru	皇国を裏切る事などできない。	황국을 배반하는 일은 할 수 없다.	fix	lookup
 constraint:nadode-before-dekiru	反論などできるはずがない。	반론 같은 건 할 수 있을 리가 없다.	fix	lookup
 constraint:nadode-before-dekiru	急に王に会うなどできない。	갑자기 왕을 만나는 등 할 수 없다.	keep	lookup
 constraint:hai-before-rare	この世界では、架子と一緒にはいられないんだ	이 세계에서는, 가자와 함께는 있을 수 없다	fix	lookup
-constraint:hai-before-rare	「あ、でも、現実では俺とふたりきりってわけでもないんだし、今と同じようにはいられないか」	「아, 하지만, 현실에서는 나와 둘이서는 것도 아니니까, 지금과 같이는 있을 수 없는가」	fix	lookup
+constraint:hai-before-rare	「あ、でも、現実では俺とふたりきりってわけでもないんだし、今と同じようにはいられないか」	「아, 하지만, 현실에서는 나와 둘이서라는 것도 아니니까, 지금과 같이는 있을 수 없는가」	fix	lookup
 constraint:hai-before-rare	それでも呼ばずにはいられない。	그래도 부르지 않을 수 없다.	keep	lookup
 constraint:sonoba-before-sho	本来ならば立ち入り禁止のその場所で、二人の男子高校生が駄弁っていた。	원래라면 출입 금지의 그 장소에서, 두 사람의 남고생이 수다를 떨고 있었다.	fix	lookup
 constraint:sonoba-before-sho	その場所へ向けて、フランは再び歩き出した。	그 장소에 향하여, 프랑은 다시 걷기 시작했다.	fix	lookup

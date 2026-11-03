@@ -670,7 +670,9 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
     }
 
-    if (!matched && base.patternKind == 7 && base.kind == 6 && (six == kJaKerepa || four == kJaKat || two == kJaI)) {
+    // The (ら)れ, せ of another verb take every form of たい on their stem form (触られたくない).
+    if (!matched && base.patternKind == 7 && base.kind == 6 &&
+        (six == kJaKerepa || four == kJaKat || two == kJaI || (adjusted && Desire(tail)))) {
         patternWidth = 0;
         base.kind = 10;
     }
