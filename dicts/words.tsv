@@ -23147,7 +23147,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 血腫	혈종	N110	UTi		GN						けっしゅ	w:23098
 血膿	피고름	N110			GN						ちうみ	w:23099
 衆参	중의원과 참의원	N110			GN				xxx llm	1		w:23100
-行かん	여하	A9D0			GN						いかん	w:23101
 行き合	마주&AO@	M420			GN				llm		いきあう	w:23102
 行き掛り	상황	N110			GN				llm		いきがかり	w:23103
 行き詰り	교착	N110			GN						いきづまり	w:23104
