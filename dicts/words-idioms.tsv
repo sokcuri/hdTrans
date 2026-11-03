@@ -123,7 +123,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 侃侃諤諤	갑론을박	N110			GN				llm			i:118
 冠を曲げ	심기가 틀어&AL@	M427		Pn	GN				llm			i:119
 歓心を買	환심을 &AX@	M420		Pn	GN				llm			i:120
-堪忍袋の緒が切れ	참을성의 한계에 &MG@	M427			GN				llm			i:121
+堪忍袋の緒が切れ	참을성의 한계에 &ME@	M427			GN				llm			i:121
 感度良好	감도 양호	A9D0			GN				llm			i:122
 換言すれば	바꿔 말하면	A9D0			GN							i:123
 甘い小説	감상적인 소설	N110			GN				llm			i:124
@@ -1200,8 +1200,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 真偽を確かめ	진위를 확인&AV@	M427		Pn	GN				llm			i:1195
 命令を下	명령을 내&AA@	M423		Pn	GN				llm			i:1196
 真実を語	진실을 말&AV@	M428		Pn	GN				llm			i:1197
-信じるに至	믿기에 &MG@	M428			GN				llm			i:1198
-信じるにいた	믿기에 &MG@	M428			GN				llm			i:1199
+信じるに至	믿기에 &ME@	M428			GN				llm			i:1198
+信じるにいた	믿기에 &ME@	M428			GN				llm			i:1199
 神前に誓	신 앞에서 맹세&AV@	M420			GN				llm			i:1200
 身代を傾け	재산을 탕진&AV@	M427		Pn	GN				llm			i:1201
 新聞に載	신문에 실&AA@	M428			GN				llm			i:1202
@@ -4048,7 +4048,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 不気味の谷	불쾌한 골짜기	N110			GN				llm			i:4042
 酔いを覚ま	술을 &C2@	M423		Pn	GN				llm			i:4043
 酔いが覚め	술이 &C2@	M427			GN				llm			i:4044
-技神に入	신의 경지에 &MG@	M428			GN				llm			i:4045
+技神に入	신의 경지에 &ME@	M428			GN				llm			i:4045
 牙を研	이빨을 &KB@	M422		Pn	GN				llm			i:4046
 牙をと	이빨을 &KB@	M422		Pn	GN				llm			i:4047
 爪をと	발톱을 &KB@	M422		Pn	GN				llm			i:4048
@@ -7792,3 +7792,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 見つけたが百年目	찾은 이상 끝장	N110			GN						みつけたがひゃくねんめ	i:7792
 ケツの穴が小さ	속이 $DG@	H7N0			GN							i:7793
 ケツの穴の小さ	쩨쩨$AB@	H7N0			GN							i:7794
+腹括	각오를 다&AL@	M428		Pn	GN			LEX-4019: 腹括る 각오를 다지다			はらくく	i:7796
+腹くく	각오를 다&AL@	M428		Pn	GN			LEX-4019: 腹くくる 각오를 다지다			はらくく	i:7797

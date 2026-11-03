@@ -1,0 +1,66 @@
+# 규칙: GRM-3460, GRM-3466~3468, LEX-4022
+rule	input	expected	kind	layer
+cx:ka-to-ieba:10	未練が無いかと言えば嘘になるが	has:미련이 없는가 하면 거짓말이 되	fix	rewrites
+cx:ka-to-ieba:10	どちらが王子様と年が近いかと言うと、もちろん愛良ちゃん。	has:나이가 가까운가 하면,	fix	rewrites
+cx:ka-to-ieba:10	なんでそんな風に思うかというと、	!rule:cx:ka-to-ieba:10	keep	rewrites
+cx:ka-to-ieba:20	ただし……何もなかったかと言えば、そうでもなかった。	has:아무것도 없었는가 하면, 그렇지도	fix	rewrites
+cx:ka-to-ieba:20	なんでこんなに語れるのかと言えば、別人だからだ。	has:건가 하면,	fix	rewrites
+cx:ka-to-ieba:20	彼は来ると言えば来る。	!rule:cx:ka-to-ieba:20	keep	rewrites
+cx:ka-to-ieba:10	言えば分かる。	!rule:cx:ka-to-ieba:10	keep	rewrites
+cx:adj-de-aru-koto:10	実力が極めて未熟であることは、問題ではなかった。	has:미숙한 것은,	fix	rewrites
+cx:adj-de-aru-koto:10	それが重要であることは明らかだ。	그것이 중요한 것은 분명하다.	fix	rewrites
+cx:adj-de-aru-koto:10	彼は学生であることを隠した。	그는 학생인 것을 숨겼다.	keep	rewrites
+cx:adj-de-aru-koto:10	それは重要である。	!rule:cx:adj-de-aru-koto:10	keep	rewrites
+cx:de-arou-noun:10	専門家が聞けば驚愕するであろう貴重な知識を聞いている	has:경악할 귀중한 지식	fix	rewrites
+cx:de-arou-noun:10	王子は思いもしないであろうジオルドの姿	has:않을 지오르드	fix	rewrites
+cx:de-arou-noun:10	「余の申したことを覚えておるであろう？」	「짐이 말씀드린 것을 기억하고 있겠지?」	keep	rewrites
+cx:de-arou-noun:10	それは困難であろう。	그것은 곤란할 것이다.	keep	rewrites
+cx:noun-denai-if:10	私と会話が出来る人でないと、話すら聞いてもらえないからね。	has:사람이 아니면, 이야기조차 들어 줄 수 없으니까	fix	rewrites
+cx:noun-denai-if:10	会話が出来る人でないと、話を聞いてもらえない。	has:사람이 아니면, 이야기를	fix	rewrites
+cx:noun-denai-if:10	学生でないと言った。	학생이 아니라고 말했다.	keep	rewrites
+cx:noun-denai-if:10	彼は学生でないと、言った。	!rule:cx:noun-denai-if:10	keep	rewrites
+cx:novel-fixes-2:20	冗談も、休み休みに言ってください。	농담도, 작작 해 주세요.	fix	rewrites
+cx:novel-fixes-2:20	休みに言った。	!rule:cx:novel-fixes-2:20	keep	rewrites
+cx:novel-fixes-2:25	ブリティッシュジョークも休み休み言え。	has:농담도 작작 해라	fix	rewrites
+cx:novel-fixes-2:25	休み休み歩いた。	!rule:cx:novel-fixes-2:25	keep	rewrites
+cx:novel-fixes-2:30	彼女は意地悪をする。	그녀는 심술을 부린다.	fix	rewrites
+cx:novel-fixes-2:30	意地悪をした。	심술을 부렸다.	fix	rewrites
+cx:novel-fixes-2:30	勉強をする。	!rule:cx:novel-fixes-2:30	keep	rewrites
+cx:novel-fixes-2:40	不思議ちゃんという性格の彼らは	has:4차원이라는 성격의 그들은	fix	rewrites
+cx:novel-fixes-2:40	ちゃんという名前	!rule:cx:novel-fixes-2:40	keep	rewrites
+cx:novel-fixes-2:45	彼女は不思議ちゃんだ。	그녀는 4차원이다.	fix	rewrites
+cx:novel-fixes-2:45	ちゃんとした服。	!rule:cx:novel-fixes-2:45	keep	rewrites
+cx:novel-fixes-2:50	ありふれたものだ。	흔한 것이다.	fix	rewrites
+cx:novel-fixes-2:50	ありふれた毎日	has:흔한 매일	fix	rewrites
+cx:novel-fixes-2:50	ありふれません。	!rule:cx:novel-fixes-2:50	keep	rewrites
+cx:novel-fixes-2:60	いきなり使い切ったわ。多分ね。	has:아마.	fix	rewrites
+cx:novel-fixes-2:60	勿論ね。	물론.	fix	rewrites
+cx:novel-fixes-2:60	学生ね。	학생이네.	keep	rewrites
+cx:novel-fixes-2:70	今日、ハンターに成りました。	오늘, 헌터가 되었습니다.	fix	rewrites
+cx:novel-fixes-2:70	彼は医者になりました。	그는 의사가 되었습니다.	keep	rewrites
+cx:novel-fixes-2:80	私と会話が出来る人でないと、話すら聞いてもらえない	has:들어 줄 수 없	fix	rewrites
+cx:novel-fixes-2:80	週末しかお外に出してもらえないの	has:내 줄 수 없어	fix	rewrites
+cx:novel-fixes-2:80	褒めてもらえない。	칭찬해 주지 않는다.	keep	rewrites
+cx:novel-fixes-2:90	彼女はそれに気付くと、アキラに改めて微笑んだ。	has:아키라에게 다시 미소 지었다	fix	rewrites
+cx:novel-fixes-2:90	名前を田中に改めて届け出た。	has:타나카로 고쳐	keep	rewrites
+cx:novel-fixes-2:90	改めて考えると、おかしい。	다시 생각하면, 이상하다.	keep	rewrites
+cx:novel-fixes-2:110	痛いから離して下さい。	아프니까 놓아 주세요.	fix	rewrites
+cx:novel-fixes-2:110	「………離して下さらない？」	has:놓아 주시지	fix	rewrites
+cx:novel-fixes-2:110	「離して」	「놓아」	fix	rewrites
+cx:novel-fixes-2:110	二人は再び間合いを離して睨み合った。	has:간격을 떼어 놓아	keep	rewrites
+cx:novel-fixes-2:110	顔を少し離してから	has:떼어 놓고 나서	keep	rewrites
+cx:see-and:10	『ゆっくり下を見て。少しずつ、静かにね』	has:아래를 봐.	fix	rewrites
+cx:see-and:10	これを見て、驚いた。	이것을 보고, 놀랐다.	keep	rewrites
+sense:離す	スマホから手を離して目を閉じる。	has:손을 놓아	fix	senses
+sense:離す	まるで、俺を離したくないと言っているようだ。	has:나를 놓고 싶지 않다	fix	senses
+sense:離す	俺から目を離していない。	has:눈을 떼지 않았다	keep	senses
+dict:w:31027	敵意が無いのなら過剰に警戒する必要もない。	has:지나치게 경계할	fix	lookup
+dict:w:31028	話すら聞かない。	has:이야기조차	fix	lookup
+dict:w:31032	歴史を紐解けばいくらでもある。	has:역사를 펼쳐 보면	fix	lookup
+dict:w:31033	普通幼少の頃に前世を思い出す。	has:어린 시절에	fix	lookup
+dict:w:31035	本当に私をイライラさせる。	정말 나를 짜증 나게 한다.	fix	lookup
+dict:w:31029	もう、かなりイライラさせられたものだ。	has:짜증이 난 것이다	fix	lookup
+dict:jisjk:634	それとも俺を揶揄っているだけか？	has:아니면 나를 놀리고	fix	lookup
+dict:w:22436	すんなり融合して今に至るというワケだ。	has:지금에 이른다는 것이다	fix	lookup
+dict:w:22436	それ単体では少し濃いテリヤキが、完全な味へと至る。	has:맛으로 이른다.	fix	lookup
+dict:i:1198	信じるに至った。	믿기에 이르렀다.	fix	lookup

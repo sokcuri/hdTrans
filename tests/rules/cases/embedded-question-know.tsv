@@ -30,6 +30,6 @@ dict:jisjk:3986	誰か知ってる？	has:누군가	keep	local-ending
 dict:tte-r1:4	正直さっぱりだ	!rule:dict:tte-r1:4	keep	local
 dict:tte-r1:4	さっぱりした性格だ	!rule:dict:tte-r1:4	keep	local
 dict:jisjk:3987	どうなるかわかりませんよ	has:될지 몰라요	fix	local-ending
-dict:jisjk:3987	何されるか分からず	has:당할지 알지 못하고	fix	local-ending
+dict:jisjk:3987	何されるか分からず	has:당할지 모르고	fix	local-ending
 dict:jisjk:3987	何が起こるか分かりません	has:일어날지 모릅니다	fix	local-ending
 dict:jisjk:3986	どうなるかわかる？	has:되는지 알아?	keep	local-ending

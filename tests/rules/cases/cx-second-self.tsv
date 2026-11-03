@@ -1,7 +1,7 @@
 # 규칙: LEX-5
 rule	input	expected	kind	layer
 cx:second-self:10	さて、ワタシと私が融合して	자, 와타시와 내가 융합해	fix	rewrites
-cx:second-self:10	すんなりワタシと私は融合して今に至る	순조롭게 와타시와 나는 융합해 지금에 이르다	fix	rewrites
+cx:second-self:10	すんなりワタシと私は融合して今に至る	순조롭게 와타시와 나는 융합해 지금에 이른다	fix	rewrites
 cx:second-self:10	ワタシも私も知識として知っている。	와타시도 나도 지식으로서 알고 있다.	fix	rewrites
 cx:second-self:10	ワタシの記憶を取り戻す前にあった私の怒り	와타시의 기억을 되찾기 전에 있던 내 분노	fix	rewrites
 cx:second-self:10	ワタシと私が融合して	rule:cx:second-self:10=와타시	fix	rewrites

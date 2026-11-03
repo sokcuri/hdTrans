@@ -8,7 +8,7 @@ normalize:nsu	（橋本）18からデコトラやってんスね	(하시모토) 
 normalize:nsu	あんまりよくないんスよ芸人として	별로 좋지 않아요 연예인으로서	fix	normalize
 normalize:nsu	あぁ…あぁ～ 一生ないんすかね	아아…아아~ 일생 없습니까	fix	normalize
 normalize:nsu	いや　おねえさん　知らないかもだけどこんな人様の玄関で　神メンツそろうことまあ　ないんすよ。	has:뭐 없어요.	fix	normalize
-normalize:nsu	あっ それとも 俺 普段３人で活動してて 一緒に住んでんすよ｡	앗 그렇지 않으면 나 평소 3명이 활동하고 있어 함께 살고 있는 거예요.	fix	normalize
+normalize:nsu	あっ それとも 俺 普段３人で活動してて 一緒に住んでんすよ｡	앗 아니면 나 평소 3명이 활동하고 있어 함께 살고 있는 거예요.	fix	normalize
 normalize:nsu	(松陰寺) ずっと聞いてんすよ｡	has:계속 듣고 있는 거예요.	fix	normalize
 normalize:nsu	ベロ～ンってなってんすよ｡	날름~ 되어 있는 거예요.	fix	normalize
 normalize:nsu	だから　俺も　後ないんすよ。	그러니까 나도 후 없어요.	fix	normalize

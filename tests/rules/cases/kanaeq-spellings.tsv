@@ -1,7 +1,7 @@
 # 규칙: LEX-93
 rule	input	expected	kind	layer
 lookup:kana-spelling	今日のところはこのへんと言ったところですか	has:이 근처라고	fix	lookup
-lookup:kana-spelling	それとも、このへんに用事があった？	그렇지 않으면, 이 근처에 용무가 있었어?	fix	lookup
+lookup:kana-spelling	それとも、このへんに用事があった？	아니면, 이 근처에 용무가 있었어?	fix	lookup
 lookup:kana-spelling	選挙の話は、このへんにしておきましょう。	has:이 근처로 해 둡시다	fix	lookup
 lookup:kana-spelling	お相撲さんとか？　このへん、相撲部屋が多いし……	has:이 근처, 스모베야가	fix	lookup
 lookup:kana-spelling	このへんを、下着の上から触っても、あまり感じないということか……	has:이 근처를,	fix	lookup
