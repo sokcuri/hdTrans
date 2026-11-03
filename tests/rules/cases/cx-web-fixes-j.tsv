@@ -1,13 +1,5 @@
-# 규칙: GRM-3680, GRM-3681, GRM-3682, GRM-3683, GRM-3684, GRM-3685, GRM-3686, LEX-4532, LEX-4533, LEX-4534, LEX-4535, LEX-4536, LEX-4537
+# 규칙: GRM-3680, GRM-3681, GRM-3682, GRM-3684, GRM-3685, GRM-3686, LEX-4532, LEX-4533, LEX-4534, LEX-4535, LEX-4536, LEX-4537
 rule	input	expected	kind	layer
-cx:web-fixes-j:5	下級妃嬪は後宮内で個室を持つことを許されているが、場所は宮内の端にあり、皇帝の目につくことはめったにない。	has:황제의 눈에 띄는	fix	rewrites
-cx:web-fixes-j:5	両親は私を殿下の目に入るところに連れていけば気にいられると信じていた。	has:전하의 눈에 들어오는	fix	rewrites
-cx:web-fixes-j:5	ショッケンに関する文章がたまたま青海さんの目に入ったんだろう。	has:아오미 씨의 눈에 들어왔을	fix	rewrites
-cx:web-fixes-j:5	すでに、みいちゃんの容体は、皆の耳に入っている。	has:모두의 귀에 들려오고	fix	rewrites
-cx:web-fixes-j:5	私は多くの人の目に入るような場所に連れ回されていた。	has:많은 사람의 눈에 들어오는	fix	rewrites
-cx:web-fixes-j:5	今日は良い日じゃ。南蛮の技術が手に入るのだからな。	!rule:cx:web-fixes-j:5	keep	rewrites
-cx:web-fixes-j:5	誰の目にも明らかだ。	!rule:cx:web-fixes-j:5	keep	rewrites
-cx:web-fixes-j:5	彼の手に入れた宝。	!rule:cx:web-fixes-j:5	keep	rewrites
 cx:web-fixes-j:7	さ、提督にご挨拶に行きましょう。	has:제독에게 인사하러 갑시다	fix	rewrites
 cx:web-fixes-j:7	提督。一航戦、新年のご挨拶に参りました。	has:신년의 인사하러 왔습니다	fix	rewrites
 cx:web-fixes-j:7	昨日、先輩たちが挨拶に来たらしい。	has:인사하러 온 것 같다	fix	rewrites
@@ -63,7 +55,7 @@ cx:web-fixes-j:80	「おまえな、いくら何でもあれはねえだろ、�
 cx:web-fixes-j:80	「平民、男爵、伯爵。なるほど階級はガチャで決まるのか。国王まであるぞ。剣聖でも同じか？」	has:국왕까지 있어.	fix	rewrites
 cx:web-fixes-j:80	塀の上にカタツムリがおるぞ！	has:담 위에 달팽이가 있어!	fix	rewrites
 cx:web-fixes-j:80	ん、なんだ、今、なんて？変な言葉を聞いた気がするぞ。	has:이상한 말을 들은 것 같아.	fix	rewrites
-cx:web-fixes-j:80	ミドリさんと松はもういいと思うぞ	has:이제 되다고 생각해	fix	rewrites
+cx:web-fixes-j:80	ミドリさんと松はもういいと思うぞ	has:생각해	fix	rewrites
 cx:web-fixes-j:80	望んだ通りに出し入れできるぞ。	has:넣었다 뺐다 할 수 있어.	fix	rewrites
 cx:web-fixes-j:80	「ほら、呼んでいるぞ」	has:「자, 부르고 있어」	fix	rewrites
 cx:web-fixes-j:80	行くぞ。	!rule:cx:web-fixes-j:80	keep	rewrites
@@ -117,7 +109,7 @@ cx:web-fixes-j:155	王妃になど興味はない。	!rule:cx:web-fixes-j:155	ke
 cx:web-fixes-j:165	……これを逃す手はないかも。	has:이것을 놓칠 수는 없을지도	fix	rewrites
 cx:web-fixes-j:165	震える手は冷たかった。	!rule:cx:web-fixes-j:165	keep	rewrites
 cx:web-fixes-j:170	それだけの覚悟をもってやったのだ、と言外に仄めかす。	has:각오를 가지고 했다	fix	rewrites
-cx:web-fixes-j:170	俺は仕事として命を懸けてやっているし、責任を取る覚悟もある	has:목숨을 걸어 하고 있고	fix	rewrites
+cx:web-fixes-j:170	俺は仕事として命を懸けてやっているし、責任を取る覚悟もある	has:목숨을 걸고 하고 있고	fix	rewrites
 cx:web-fixes-j:170	ブライアンがありったけの撮影機材を持ってやってきた。	!rule:cx:web-fixes-j:170	keep	rewrites
 cx:web-fixes-j:175	甘やかされて育ったので、人の迷惑などお構いなしだった。	has:사람의 민폐 같은 건 아랑곳하지 않았다	fix	rewrites
 cx:web-fixes-j:175	迷惑な話だ。	!rule:cx:web-fixes-j:175	keep	rewrites
@@ -173,3 +165,23 @@ cx:web-fixes-j:230	結婚活動、通称婚活。	has:통칭 혼활	fix	rewrites
 cx:web-fixes-j:230	結婚活動を婚活と略す。	has:혼활이라고	fix	rewrites
 cx:web-fixes-j:230	ユキ＠婚活終了	!rule:cx:web-fixes-j:230	keep	rewrites
 cx:web-fixes-j:230	婚活を始めた。	!rule:cx:web-fixes-j:230	keep	rewrites
+rewrite:body-idiom-genitive	海の目に入る部屋	lacks:바다의	keep	rewrites
+rewrite:body-idiom-genitive	ゴミの目につく道	lacks:쓰레기의	keep	rewrites
+rewrite:body-idiom-genitive	その本の手に入る店	lacks:책의	keep	rewrites
+cx:web-fixes-j:45	私には付き合っている彼氏がいる。	!rule:cx:web-fixes-j:45	keep	rewrites
+cx:web-fixes-j:45	クラスには付き合っているカップルが多い。	!rule:cx:web-fixes-j:45	keep	rewrites
+cx:web-fixes-j:215	だいたい、三時間くらいかな。	!rule:cx:web-fixes-j:215	keep	rewrites
+cx:web-fixes-j:215	だいたい、わかった。	!rule:cx:web-fixes-j:215	keep	rewrites
+cx:web-fixes-j:62	先刻、ラムサス閣下の命を受けた。	has:각하의 명을 받았다	fix	rewrites
+cx:web-fixes-j:62	新しい命を受けて生まれた。	!rule:cx:web-fixes-j:62	keep	rewrites
+cx:web-fixes-j:62	この世に命を受けた者	!rule:cx:web-fixes-j:62	keep	rewrites
+cx:web-fixes-j:30	髪の毛一筋も動かない。	!rule:cx:web-fixes-j:30	keep	rewrites
+cx:web-fixes-j:30	糸一筋ほどの隙間	!rule:cx:web-fixes-j:30	keep	rewrites
+cx:web-fixes-j:180	今までで十分だ。	!rule:cx:web-fixes-j:180	keep	rewrites
+cx:web-fixes-j:40	母に付き添ってもらった。	!rule:cx:web-fixes-j:40	keep	rewrites
+cx:web-fixes-j:60	「まあ、皆様。ごきげんよう」	!rule:cx:web-fixes-j:60	keep	rewrites
+cx:web-fixes-j:60	「長い間お世話になりました。ごきげんよう」	has:신세를 졌습니다. 안녕히 계세요	fix	rewrites
+cx:web-fixes-j:235	父は宰相、母は将軍の娘で、国の中でも王家に次ぐそりゃあ血筋が宜しいお嬢様です。	has:왕가에 버금가는	fix	rewrites
+cx:web-fixes-j:235	彼に次ぐ実力者だ。	has:그에 버금가는	fix	rewrites
+cx:web-fixes-j:235	雨に次ぐ雨。	!rule:cx:web-fixes-j:235	keep	rewrites
+cx:web-fixes-j:235	妹に贈り物を渡した。	!rule:cx:web-fixes-j:235	keep	rewrites

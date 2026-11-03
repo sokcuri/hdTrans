@@ -32,7 +32,6 @@ sense:返す	男の方も、ゆるい顔で返事を返す。	has:대답을 한�
 sense:返す	タツゴロウに老人から店を受け継いだ男が挨拶を返す。	has:인사를 한다	fix	senses
 sense:返す	借りた本を急いで返した。	has:돌려주었다	keep	senses
 sense:命	「婚約破棄の命、しかと承ります。」	has:파혼의 명	fix	senses
-sense:命	先刻、ラムサス閣下の命を受けた。	has:명을 받았다	fix	senses
 sense:命	命を懸けて戦う。	has:목숨을 걸어	keep	senses
 sense:手にする	ランタンを手にした人々が、物珍しそうに馬車を眺めている。	has:랜턴을 손에 든	fix	senses
 sense:手にする	箸を置いて、水を手にした。	has:물을 손에 들었다	fix	senses
@@ -75,3 +74,5 @@ sense:切る	どうやら額を切って何針かぬったそうで	has:이마�
 sense:切る	「なら、指を切るしかないわね」	has:손가락을 자를	keep	senses
 dict:w:32316	いにしえよりニサン教の教母様とアヴェの国王であられる方とは……	has:국왕이신	fix	local
 dict:w:32317	公爵家の紋が入った豪奢な馬車に、身一つで乗り込む。	has:공작가의 문장이	fix	lookup
+sense:次ぐ	雨に次ぐ雨。	has:뒤잇는	keep	senses
+sense:命	新しい命を受けて生まれた。	has:생명을	keep	senses

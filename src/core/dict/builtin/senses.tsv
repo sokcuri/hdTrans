@@ -1588,9 +1588,10 @@
 作成	생성	身体,体,肉体,からだ,ボディ	before	n
 爽やか	산뜻하다	青年,少年,好青年,笑顔,イケメン,男,男性,青少年	after	na
 // LEX-4530: 転ぶ falls (넘어지다); いだく in kana is 품다; に次ぐ is 버금가다; a drink held in the mouth is 머금다; a face 歪む is 일그러지다; a heel or a blade 折る is 부러뜨리다; memories 落ち着く 정리되다; blood 吹き出る 뿜어져 나오다; 返事を返す 대답을 하다; a forehead or a cheek 切る is 베다; a thing held in the hand 手にする is 손에 들다; 命 before 承る, 下す, 背く, 受ける is the order 명.
+// LEX-4530: 転ぶ falls (넘어지다); いだく in kana is 품다; に次ぐ is 버금가다; a drink held in the mouth is 머금다; a face 歪む is 일그러지다; a heel or a blade 折る is 부러뜨리다; memories 落ち着く 정리되다; blood 吹き出る 뿜어져 나오다; 返事を返す 대답을 하다; a forehead or a cheek 切る is 베다; a thing held in the hand 手にする is 손에 들다; 命 before 承る, 下す, 背く is the order 명; に次ぐ after a person, a house or それ is 버금가다.
 転ぶ	넘어지다			v5
 いだく	품다			v5
-次ぐ	버금가다	に,それに	before	v5
+次ぐ	버금가다	sem:VHn@に,それに,王家,王族,皇族,公爵家,王国,帝国	before	v5
 含む	머금다	白湯,水,お茶,茶,酒,口,湯,薬,紅茶,スープ	before	v5
 歪む	일그러지다	顔,表情,口元,顔つき,唇,口	before	v5
 折る	부러뜨리다	ヒール,剣,刀,杖,歯,牙,角,槍,首,肋骨,背骨,腕,足	before	v5
@@ -1602,4 +1603,4 @@
 返す	하다	返事,返答,挨拶,お辞儀,会釈	before	v5
 切る	베다	額,頬,唇,首筋,手首,まぶた,眉	before	v5
 手にする	손에 들다	ランタン,水,アイスティー,バケツ,モップ,スプーン,食器,剣,杖,本,カップ,コップ,箸,傘,武器,銃,ナイフ,ペン,紙,手紙,花束,鞄,荷物,盾,槍,弓,杯,紅茶,コーヒー,ジュース,酒,瓶,ボトル,箱,皿,包丁,刀,斧,松明,ランプ,鏡,カメラ,スマホ,携帯,グラス,ワイン	before	v
-命	명	承る,下す,背く,受ける	after	n
+命	명	承る,下す,背く	after	n

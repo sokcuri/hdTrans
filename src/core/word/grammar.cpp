@@ -508,6 +508,18 @@ bool AfterRestart(const Worker& w, const Item* it) {
     return false;
 }
 
+bool AfterLeaveTaking(const Worker& w, const Item* it) {
+    const auto cues = dict::ClassMembers(HDTRANS_CLASS("word.leave-taking"));
+    const auto has = [&](std::string_view s) {
+        return std::ranges::any_of(cues, [&](std::string_view m) { return s.find(m) != std::string_view::npos; });
+    };
+    if (has(it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0))))) return true;
+    for (int token = it->tokenIndex - 1; token >= 0; token--) {
+        if (has(w.Tok(token).text)) return true;
+    }
+    return false;
+}
+
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     const int count = static_cast<int>(it->group->entries.size());
     for (int slot = 0; slot < count; slot++) {
