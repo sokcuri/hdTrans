@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.8.3](https://github.com/sokcuri/hdTrans/compare/v0.8.2...v0.8.3) (2026-11-03)
+
+
+### Bug Fixes
+
+* **dict:** narrow construction rows the release review flagged and keep the drawn ええ of adjectives ([#459](https://github.com/sokcuri/hdTrans/issues/459)) ([b4239ae](https://github.com/sokcuri/hdTrans/commit/b4239ae984c0bb7a0a95e4ccaf1428630c96b79f))
+* **dict:** read adjective そうな as -어 보이는 and the words the fantasy example and three issues misread ([#455](https://github.com/sokcuri/hdTrans/issues/455)) ([b5e42c4](https://github.com/sokcuri/hdTrans/commit/b5e42c4e1ebe092b7bbb1b093556db376e326035))
+* **dict:** read novel lines the web examples misread: 降りしきる, 差し出す, 筈, と分かる and more ([#442](https://github.com/sokcuri/hdTrans/issues/442)) ([2fcc66d](https://github.com/sokcuri/hdTrans/commit/2fcc66d5e0568724e720317c001c145fe0f60ff4))
+* **dict:** read the words the dahliya and monologue examples misread ([#456](https://github.com/sokcuri/hdTrans/issues/456)) ([c472947](https://github.com/sokcuri/hdTrans/commit/c47294777e51fbf924ef4fa1edc74feefc2f7fdd))
+* **dict:** read the words the farming, dialogue and game-voice examples misread ([#458](https://github.com/sokcuri/hdTrans/issues/458)) ([52757bc](https://github.com/sokcuri/hdTrans/commit/52757bc22141699eb9fd27c755a9da5c47c97d77))
+* **dict:** read the words the hamefura and deathmarch examples misread ([#453](https://github.com/sokcuri/hdTrans/issues/453)) ([e7060ad](https://github.com/sokcuri/hdTrans/commit/e7060ad28e4ee32ba436bcbbdfd0e25f622eda29))
+* **dict:** read the words the koushaku, loop7 and tensura examples misread ([#452](https://github.com/sokcuri/hdTrans/issues/452)) ([5ba3e32](https://github.com/sokcuri/hdTrans/commit/5ba3e32ff9785d98cbd579b4d8200e35314c9f5f))
+* **dict:** read the words the monologue and alya examples misread ([#457](https://github.com/sokcuri/hdTrans/issues/457)) ([f5f6720](https://github.com/sokcuri/hdTrans/commit/f5f6720b1f78e0618246c0f5434e5d722dd251c1))
+* **dict:** read くべる, 窪み, 募る, 負う, kana どの and 器が大きい by their sense ([#427](https://github.com/sokcuri/hdTrans/issues/427)) ([73f0705](https://github.com/sokcuri/hdTrans/commit/73f0705bd0071bafe8719294dbcd8606032a55e6))
+* **dict:** write つ as 츠 and later plain stops aspirated in Japanese readings ([#440](https://github.com/sokcuri/hdTrans/issues/440)) ([d40184c](https://github.com/sokcuri/hdTrans/commit/d40184c1a80895bc0a55f37a79a0091d14701c67))
+* **grammar:** drop the stiff 의 before place nouns, after materials and after state mimetics ([#430](https://github.com/sokcuri/hdTrans/issues/430)) ([73fb4de](https://github.com/sokcuri/hdTrans/commit/73fb4dea135aa9c51b48f4c7c8cf2691b2055996))
+* **grammar:** quote the copula with 라고, read なんじゃと思う, Nとしてしまう and na-adjective といったところだ ([#432](https://github.com/sokcuri/hdTrans/issues/432)) ([e394649](https://github.com/sokcuri/hdTrans/commit/e394649eabc366792361a6f02202e3080a1a42d8))
+* **grammar:** read a keigo invitation ませんか as 합쇼 with -시- ([#450](https://github.com/sokcuri/hdTrans/issues/450)) ([b4bce78](https://github.com/sokcuri/hdTrans/commit/b4bce781ddbaf61a157cab6e2e4720e181ae93c2))
+* **grammar:** read a person's に before 分かる and できる as the subject, and 誰にも before a denial as 아무도 ([#446](https://github.com/sokcuri/hdTrans/issues/446)) ([015828e](https://github.com/sokcuri/hdTrans/commit/015828e126b063edc26a38ec30461102d0e36710))
+* **grammar:** read imperative ってば, なよっ, なんと before saying, Vはした and passive かねない ([#428](https://github.com/sokcuri/hdTrans/issues/428)) ([71593f7](https://github.com/sokcuri/hdTrans/commit/71593f758ec7daeac96b319871583b9f7ffb6c68))
+* **grammar:** read permission ていい and なくていい as 되다, relief なくてよかった as 다행이다 ([#435](https://github.com/sokcuri/hdTrans/issues/435)) ([81a7e18](https://github.com/sokcuri/hdTrans/commit/81a7e18dcb568980f30279c14ea3f0ae1f17191d))
+* **grammar:** read the Kansai negative before で, がな and でも, なんや, ええ, よな after an imperative and さ after a pronoun ([#441](https://github.com/sokcuri/hdTrans/issues/441)) ([9e43507](https://github.com/sokcuri/hdTrans/commit/9e43507f9777058c1185d3509e2b90bae8879818))
+* **grammar:** read the lines the saint, rebuild and koushaku examples misread ([#451](https://github.com/sokcuri/hdTrans/issues/451)) ([78bc6d4](https://github.com/sokcuri/hdTrans/commit/78bc6d4e7267dda34f9730007350be1953def8b2))
+* **grammar:** read the negative after 必ずしも as partial negation ([#443](https://github.com/sokcuri/hdTrans/issues/443)) ([28fa7f9](https://github.com/sokcuri/hdTrans/commit/28fa7f96a2fb6917c922db0fa2b0e6e87423429c))
+* **grammar:** read the old negative せん, せぬ and へん after a verb or a noun of an act as a negative ([#436](https://github.com/sokcuri/hdTrans/issues/436)) ([13b7a38](https://github.com/sokcuri/hdTrans/commit/13b7a387fdab94c9bbd84c765d567980c1e15c06))
+* **grammar:** read あまり before a negative as 별로 and the words the bookworm and kusuriya examples misread ([#454](https://github.com/sokcuri/hdTrans/issues/454)) ([a130b4e](https://github.com/sokcuri/hdTrans/commit/a130b4e0c8ab29903ff603d9f3c68ce7a3abfbea))
+* **grammar:** read から after a thing as 에서 before taking-out and seeing verbs, and after a time as 부터 ([#433](https://github.com/sokcuri/hdTrans/issues/433)) ([ac3c2cd](https://github.com/sokcuri/hdTrans/commit/ac3c2cdb5996f662407318fd503546b526ce1d5c))
+* **grammar:** read しまう after an adverb as 넣다, weather 晴れている as 맑다 and the godan causative-passive ([#439](https://github.com/sokcuri/hdTrans/issues/439)) ([560bf43](https://github.com/sokcuri/hdTrans/commit/560bf431e5a35e3dbafffbd40bb753592d4fd02c))
+* **grammar:** read で after a counted group of people as 이서, and と after a count before a noun as 와/과 ([#448](https://github.com/sokcuri/hdTrans/issues/448)) ([0f238a5](https://github.com/sokcuri/hdTrans/commit/0f238a50dec965382131a9899bb9cabe97476d5d))
+* **grammar:** read なる after a na-adjective as -어지다 and its ならない as the negative of なる ([#438](https://github.com/sokcuri/hdTrans/issues/438)) ([444c5e6](https://github.com/sokcuri/hdTrans/commit/444c5e699ac12eb99bae199e8573584771b4b309))
+* **grammar:** read 気づかれる as 들키다 and the て form of a forced causative-passive as -어서 ([#449](https://github.com/sokcuri/hdTrans/issues/449)) ([37ee95a](https://github.com/sokcuri/hdTrans/commit/37ee95a285702535bd9ec342b1cb6f44573b42a9))
+* **number:** count with Korean units, not 체 or word readings ([#434](https://github.com/sokcuri/hdTrans/issues/434)) ([402fb87](https://github.com/sokcuri/hdTrans/commit/402fb87695f6ccb40fdf927cc27734a84b15e39d))
+* **number:** count 体 after a kanji numeral natively, keep の before a noun after a count, read もう一日 as 하루 더 ([#431](https://github.com/sokcuri/hdTrans/issues/431)) ([493ac25](https://github.com/sokcuri/hdTrans/commit/493ac25c5b313f4f2d9a15d2c81eb72ff0f9494e))
+* **release:** read the words the web novel examples misread and the Kansai, keigo and count forms ([ef21560](https://github.com/sokcuri/hdTrans/commit/ef21560c0e3d063a966b1c52c05adbfe354a7d00))
+* **segment:** keep kana words whole after a shorter word, counters before くらい and mimetics before する ([#429](https://github.com/sokcuri/hdTrans/issues/429)) ([4ada20f](https://github.com/sokcuri/hdTrans/commit/4ada20f5f6010d09cb8738f9b541c1edaa47c66b))
+
 ## [0.8.2](https://github.com/sokcuri/hdTrans/compare/v0.8.1...v0.8.2) (2026-11-02)
 
 
