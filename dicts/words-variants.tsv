@@ -4134,7 +4134,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 おとし入れ	빠뜨&AA@	M447			GN							jisjk:146457
 陥せい	함정	N110			GN							jisjk:170479
 まる見え	죄다 보임	I110			GN							jisjk:89417
-まる見え	훤히 들여다보%D4@	G8U0			GN							jisjk:146748
+まる見え	훤히 들여다보%EJ@	G8U0		Av	GN							jisjk:146748
 丸だし	노출	I110			GN							jisjk:89597
 まる洗い	통빨래	N110		Hd	GN							jisjk:252000
 まる呑み	통째로 삼킴	I110			GN							jisjk:89600

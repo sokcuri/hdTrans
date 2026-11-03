@@ -318,8 +318,8 @@ cx:rebuild-fixes:70	LEX-4013	&&4 S+0== "唯" D+0== "다만" F+1== "exists" !1 ||
 cx:rebuild-fixes:80	LEX-4013	&&3 S+0== "中腰" S+1== "の" ||3 S+2== "体勢" S+2== "姿勢" S+2== "格好"	set-target "엉거주춤한" set-target@+1 " "	中腰の体勢で 엉거주춤한 자세로
 cx:rebuild-fixes:90	LEX-4013	&&4 S+0== "無駄" U+0== "に" F+1== "verb" !1 ||4 S+1== "Lな" S+1== "L終" S+1== "Lし" S+1== "Lす"	set-ending "1이"	安い銃が無駄に出回っている 싼 총이 쓸데없이 나돌고 있다
 cx:rebuild-fixes:100	LEX-4013	&&3 S+0== "なるほど" S+1== "の" ||2 Y-1== "1게" U-1== "Rに"	set-target "될 정도"	困難になるほどの長い年月 곤란하게 될 정도의 긴 세월
-//= fit-to	after Select 169	A na-adjective read -하게 right before 見合う, 相応しい or 似合う is the noun it fits, 에 (その危険に見合うもの 그 위험에 알맞는 것, 無謀に相応しい 무모에 걸맞은).
-cx:fit-to:10	GRM-3456	&&3 F+0== "conjugating" Y+0== "1게" ||4 S+1== "L見合" S+1== "L相応し" S+1== "Lふさわし" S+1== "L似合"	set-ending " 에"	その危険に見合うもの 그 위험에 알맞는 것
+//= fit-to	after Select 169	A na-adjective read -하게 right before 見合う, 相応しい or 似合う is the noun it fits, 에 (その危険に見合うもの 그 위험에 어울리는 것, 無謀に相応しい 무모에 걸맞은).
+cx:fit-to:10	GRM-3456	&&3 F+0== "conjugating" Y+0== "1게" ||4 S+1== "L見合" S+1== "L相応し" S+1== "Lふさわし" S+1== "L似合"	set-ending " 에"	その危険に見合うもの 그 위험에 어울리는 것
 //= teki-and	after Select 170	A noun in 的 with で right before another 的 noun or an adjective lists both, 이고 (幻想的で非現実的な 환상적이고 비현실적인), not the cause 이어서.
 cx:teki-and:10	GRM-3457	&&4 S+0== "R的" U+0== "で" Y+0== "6" ||4 S+1== "R的" S+2== "R的" P+1== "7**" P+1== "8**"	set-ending "1고"	幻想的で非現実的な美しさ 환상적이고 비현실적인 아름다움
 //= resolve-quote	after QuoteTo 42	A verb whose と was read as the condition 니 right before 覚悟, 決意, 決心 or 誓う says what one resolves, -겠다고 (成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다).
@@ -429,6 +429,18 @@ cx:novel-fixes-2:635	LEX-4029	&&3 S+0== "よる" D+0== "밤" ||2 S-1== "に" S-1
 cx:novel-fixes-2:640	LEX-4029	&&2 S+0== "あろう" S-1== "だったので"	set-target@-1 "(이었)였을" set-target " 것이다"	井の中の蛙だったのであろう 우물 안 개구리였을 것이다
 cx:novel-fixes-2:650	LEX-4029	&&2 S+0== "でき" S-1== "好き"	set-target@-1 "좋아서" set-target "&AH@"	好きできたわけではない 좋아서 온 것은 아니다
 cx:novel-fixes-2:660	LEX-4029	&&6 S+0== "あ" D+0== "&HN@" I+0== "ある" P+1== "1**" !1 S+1== "00？?！!。、」』…" ||4 S-1== "は" S-1== "、" S-1== "「" !1 F-1== "exists"	set-target "" set-ending "" prepend-target@+1 "어떤 "	猫猫はある怪奇の真相を暴く 마오마오는 어떤 괴기의 진상을 폭로한다
+cx:novel-fixes-2:700	LEX-4030	&&5 S+0== "そう" D+0== "것 %B3@" D-1== "~$" Y-1== "4" !1 Y+0== "L1다"	set-ending@-1 "6" set-target "보%EJ@"	大人しそうな見た目 얌전해 보이는 외모
+cx:novel-fixes-2:710	LEX-4030	&&4 S+0== "L言われ" Y+0== "L2면" Y-1== "R까 하고" F-1== "conjugating"	set-ending@-1 "1냐" set-target "&AV@"	繋がるかと言われれば 연결되냐 하면
+cx:novel-fixes-2:720	LEX-4030	&&4 S+0== "事" S+1== "だろう" F-1== "conjugating" Y-1== "8"	set-ending@-1 "5을" set-target "" set-target@+1 "것이다"	いた事だろう 있었을 것이다
+cx:novel-fixes-2:730	LEX-4030	&&3 S+0== "に" S-1== "Rなり" D-1== "R나름"	set-target "대로"	彼女なりに 그녀 나름대로
+cx:novel-fixes-2:740	LEX-4030	&&3 S+0== "共に" D+0== "모두" !1 P-1== "1**"	set-target "함께"	共に支え 함께 지탱하며
+cx:novel-fixes-2:750	LEX-4030	&&4 S+0== "溢れ" D+0== "흘러넘&AO@" S-1== "に" ||25 S-2== "気品" S-2== "威厳" S-2== "自信" S-2== "活気" S-2== "魅力" S-2== "愛情" S-2== "優しさ" S-2== "生命力" S-2== "希望" S-2== "喜び" S-2== "情熱" S-2== "才能" S-2== "個性" S-2== "野性味" S-2== "好奇心" S-2== "慈愛" S-2== "気迫" S-2== "殺気" S-2== "闘志" S-2== "やる気" S-2== "元気" S-2== "品格" S-2== "知性" S-2== "色気" S-2== "風格"	set-target@-1 "(이)가" set-target "넘&AO@"	気品に溢れた 기품이 넘치는
+cx:novel-fixes-2:755	LEX-4030	&&3 S+0== "溢れ" D+0== "흘러넘&AO@" ||25 S-1== "気品" S-1== "威厳" S-1== "自信" S-1== "活気" S-1== "魅力" S-1== "愛情" S-1== "優しさ" S-1== "生命力" S-1== "希望" S-1== "喜び" S-1== "情熱" S-1== "才能" S-1== "個性" S-1== "野性味" S-1== "好奇心" S-1== "慈愛" S-1== "気迫" S-1== "殺気" S-1== "闘志" S-1== "やる気" S-1== "元気" S-1== "品格" S-1== "知性" S-1== "色気" S-1== "風格"	set-target "넘&AO@"	威厳溢れる姿 위엄 넘치는 모습
+cx:novel-fixes-2:765	LEX-4030	&&2 S+0== "を始め" S-1== "仲違い"	set-target@-1 "사이가 틀어지기" set-target " 시작&AV@"	仲違いを始めた 사이가 틀어지기 시작한
+cx:novel-fixes-2:780	LEX-4030	&&4 F+0== "verb" ||2 Y+0== "0 것이" Y+0== "0 일이" S+1== "Lあ" <6 ||9 S+0== "時として" S+0== "時々" S+0== "時折" S+0== "たまに" S+0== "よく" S+0== "しばしば" S+0== "ときどき" S+0== "ときおり" S+0== "稀に" S+0== "00。「"	set-ending "3 때가"	時として鋭さを感じる事がある 때로는 날카로움을 느낄 때가 있다
+cx:novel-fixes-2:790	LEX-4030	&&3 S+0== "見合" D+0== "어울&AA@" Y+0== "8"	set-ending "0"	見合った訓練 어울리는 훈련
+cx:novel-fixes-2:770	LEX-4030	&&3 S+0== "行" Y+0== "L8" ||8 S+1== "L非道" S+1== "L悪事" S+1== "L行為" S+1== "L仕打ち" S+1== "L嫌がらせ" S+1== "L所業" S+1== "L実験" S+1== "L罪"	set-target "행&AV@"	レイニへ行った非道の数々 레이니에게 행한 갖가지 악행
+cx:novel-fixes-2:775	LEX-4030	&&3 S+0== "へ" S+1== "行" ||4 S+2== "L非道" S+2== "L悪事" S+2== "L仕打ち" S+2== "L嫌がらせ"	set-target "에게"	レイニへ行った非道 레이니에게 행한 악행
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면

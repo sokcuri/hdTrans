@@ -1,0 +1,47 @@
+# 규칙: LEX-4030
+rule	input	expected	kind	layer
+cx:novel-fixes-2:700	レイニは大人しそうな見た目をしていて、とても愛くるしい。	has:얌전해 보이는	fix	rewrites
+cx:novel-fixes-2:700	足の調子が惡そうだな。	has:안 좋아 보이네	fix	rewrites
+cx:novel-fixes-2:700	まぶしそうだ。	눈부신 것 같다.	keep	rewrites
+cx:novel-fixes-2:710	それが欠点へと繋がるかと言われればそうでもない。	has:연결되냐 하면	fix	rewrites
+cx:novel-fixes-2:710	そう言われれば、そうだ。	!rule:cx:novel-fixes-2:710	keep	rewrites
+cx:novel-fixes-2:720	思いを寄せる者は間違いなくいた事だろう。	has:있었을 것이다	fix	rewrites
+cx:novel-fixes-2:720	大事な事だろう。	!rule:cx:novel-fixes-2:720	keep	rewrites
+cx:novel-fixes-2:730	ユフィリアは彼女なりにアルガルドの事を思っていた。	has:그녀 나름대로	fix	rewrites
+cx:novel-fixes-2:730	彼女に会った。	!rule:cx:novel-fixes-2:730	keep	rewrites
+cx:novel-fixes-2:740	国を担う者として、共に支え、生きて行く。	has:함께 지탱해	fix	rewrites
+cx:novel-fixes-2:740	二人共に来た。	!rule:cx:novel-fixes-2:740	keep	rewrites
+cx:novel-fixes-2:750	とても気品に溢れた美しい少女だった。	has:기품이 넘친	fix	rewrites
+cx:novel-fixes-2:750	コップに溢れた水。	!rule:cx:novel-fixes-2:750	keep	rewrites
+cx:novel-fixes-2:755	威厳溢れるその姿	has:위엄 넘치는	fix	rewrites
+cx:novel-fixes-2:755	涙溢れる目	!rule:cx:novel-fixes-2:755	keep	rewrites
+cx:novel-fixes-2:765	二人が仲違いを始めたのは、一人の男爵令嬢が二人の間に入るようになってからだ。	has:사이가 틀어지기 시작한	fix	rewrites
+cx:novel-fixes-2:765	勉強を始めた。	!rule:cx:novel-fixes-2:765	keep	rewrites
+cx:novel-fixes-2:770	貴様がレイニ・シアンへ行った非道の数々	has:행한 갖가지 악행	fix	rewrites
+cx:novel-fixes-2:770	学校へ行った日	!rule:cx:novel-fixes-2:770	keep	rewrites
+cx:novel-fixes-2:775	貴様がレイニ・シアンへ行った非道の数々	has:시안에게 행한	fix	rewrites
+cx:novel-fixes-2:775	学校へ行った。	!rule:cx:novel-fixes-2:775	keep	rewrites
+cx:novel-fixes-2:780	その瞳は時として鋭さを感じる事がある。	has:느낄 때가 있다	fix	rewrites
+cx:novel-fixes-2:780	話したいことがある。	이야기하고 싶은 것이 있다.	keep	rewrites
+dict:w:12204	優しそうな人	상냥해 보이는 사람	fix	lookup
+dict:w:12204	彼は優しそうだ。	그는 상냥해 보인다.	fix	lookup
+dict:w:16067	強そうな男だ。	강해 보이는 남자다.	fix	lookup
+dict:w:21920	美味しそうな料理	맛있어 보이는 요리	fix	lookup
+dict:jisjk:356262	お元気そうですね。	건강해 보이네요.	keep	lookup
+dict:jisjk:322971	どう考えてもアルガルドの地位に見合う者ではない。	has:어울리는 사람이 아니다	fix	lookup
+dict:w:15244	彼女は容易くアルガルドの心を射止めたらしい。	has:마음을 사로잡은	fix	lookup
+dict:jisjk:98152	彼等の関係は最早、修復不可能な程までに断裂した。	has:단절했다	fix	lookup
+dict:w:31064	長く伸ばした白銀色の髪	has:은백색	fix	lookup
+dict:w:31065	潤んだ灰色の目は庇護欲を駆り立てる。	has:보호욕을 자극한다	fix	lookup
+phrase:そうとなれば	そうとなればユフィリアも口を出さざるを得ない。	has:그렇게 되면	fix	builtin-phrase
+sense:伸ばす	長く伸ばした白銀色の髪を揺らし	has:길게 기른	fix	senses
+sense:伸ばす	手を伸ばした。	손을 뻗었다.	keep	senses
+sense:入る	男爵令嬢が二人の間に入るようになってからだ。	has:사이에 끼어들게	fix	senses
+sense:入る	部屋に入る。	방에 들어간다.	keep	senses
+sense:握る	固く握られた拳	has:쥐어진 주먹	fix	senses
+sense:開く	二人の距離を更に開かせることとなった。	has:벌어지게	fix	senses
+sense:開く	窓を開く。	has:창을	keep	senses
+sense:絡む	レイニに嫉妬する貴族令嬢達の思惑も絡んで捩れ曲がっていく。	has:속셈도 얽혀	fix	senses
+sense:駆り立てる	潤んだ灰色の目は庇護欲を駆り立てる。	has:자극한다	fix	senses
+cx:novel-fixes-2:790	ギアは、さらに見合った訓練を	has:어울리는 훈련을	fix	rewrites
+cx:novel-fixes-2:790	地位に見合う者	has:어울리는 사람	keep	rewrites

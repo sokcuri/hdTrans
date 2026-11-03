@@ -7338,8 +7338,8 @@ ttt	ttt	K110			GN				jisjk:201744
 お偉方	높은 분	I110	VHn		GN				jisjk:40637		
 お元気	건강%A1@	G8U0			GN				jisjk:341276		
 お元気	건강	N110			GN				jisjk:341277		
-お元気そう	건강해 보%D4@	G8U0		Av	GN				jisjk:356262		
-元気そう	건강해 보%D4@	G8U0		Av	GN				colloq:genki-sou		
+お元気そう	건강해 보%EJ@	G8U0		Av	GN				jisjk:356262		
+元気そう	건강해 보%EJ@	G8U0		Av	GN				colloq:genki-sou		
 お元気でしたか	안녕하셨습니까	A9H1			GN				jisjk:90187		
 お元気でしょうか	안녕하십니까	A9D0			GN				jisjk:371836		
 お元気ですか	안녕하십니까	A9H1			GN				jisjk:90188		
@@ -41564,7 +41564,7 @@ ttt	ttt	K110			GN				jisjk:201744
 まるまつ	마루마츠	I130	QIDVGt		GN				jisjk:41661		
 まるまる	포동포동	E301			GN				jisjk:117679		
 まるまる	꼬박	E301	XXX		GN				jisjk:117680		
-まるみえ	훤히 들여다보%D4@	G8U0			GN				jisjk:146754		
+まるみえ	훤히 들여다보%EJ@	G8U0		Av	GN				jisjk:146754		
 まる出し	그대로	I110			GN				jisjk:112480		
 まる果新潟青果	마루니이가타청과	I110	VPl		GN				jisjk:41662		
 まる裸	빈털터리	I110			GN				jisjk:41663		
@@ -111512,7 +111512,7 @@ ttt	ttt	K110			GN				jisjk:201744
 丸襟	둥글린 깃	N110			GN				jisjk:252002		
 丸西	마루니시	N130			GN				jisjk:104618		
 丸見え	죄다 보임	I110			GN				jisjk:89417		
-丸見え	훤히 들여다보%D4@	G8U0			GN				jisjk:146748		
+丸見え	훤히 들여다보%EJ@	G8U0		Av	GN				jisjk:146748		
 丸誠	마루세이	N130	VGt		GN				jisjk:39653		
 丸誠重工業	마루세이 중공업	I130	VGt		PN				jisjk:89515		
 丸谷	마루야	N130	VHnQPN	Wa	GN				jisjk:339535		
@@ -220299,7 +220299,7 @@ ttt	ttt	K110			GN				jisjk:201744
 断行	단행	N110		Hd	GN				jisjk:18594		
 断裁	종이를 재단함	N110			GN				jisjk:98159		
 断裁機	재단기	N110	VPe		GN				jisjk:153323		
-断裂	단열	N110		Hd	GN				jisjk:98152		
+断裂	단절	N110		Hd	GN				jisjk:98152		
 断裂図法	단열도법	N110			GN				jisjk:242468		
 断見	단견	N110	UCl	Hd	GN				jisjk:242397		
 断言	단언	N110	UTs	Hd	GN				jisjk:18584		
@@ -276687,7 +276687,7 @@ ttt	ttt	K110			GN				jisjk:201744
 由紀彦	유키히코	K130	QPN	Wb	GN				jisjk:202492		
 由紀恵	유키에	N130	QPN	Wb	GN				jisjk:268472		
 由緒	유서	N110			GN				jisjk:30758		
-由緒有り気	유서가 깊어 보%D4@	G8U0			GN				jisjk:147253		
+由緒有り気	유서가 깊어 보%EJ@	G8U0		Av	GN				jisjk:147253		
 由縄坂	요나자카	N130	QCTVPl		GN				jisjk:338093		
 由美	유미	N130	QPN	Wb	GN				jisjk:202761		
 由美子	유미코	N130	QPN	Wb	GN				jisjk:368467		
@@ -322968,7 +322968,7 @@ ttt	ttt	K110			GN				jisjk:201744
 見受けられ	보&AJ@	M427			CT			GRM-700	jisjk:260611		
 見台	받침대	N110	VPeVBkVSw		GN				jisjk:178519		
 見合	중매	N110			GN				jisjk:155213		
-見合	알&FB@	M420			GN				jisjk:344057		
+見合	어울&AA@	M420			GN				jisjk:344057		
 見合	마주&AY@	M420			GN	3530	||1 S-2== "顔"	見合의 두 단어 앞에 顔가 있으면 마주보다를 고른다. (미발동: rare-context)	jisjk:344058		
 見合い	맞선	N110		Hd	GN				jisjk:6799		
 見合い	균형	N110			BZ				jisjk:360782		-1
