@@ -1536,6 +1536,18 @@ size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
 // is said twice; with ッ not for kSoundsBeforeKanji:
 // えっ……本当); or a syllable with ッ directly before a kanji, unless kSoundsBeforeKanji
 // holds it, with the separator 、.
+// The separator after a stutter piece as StutterSeparator reads it, with the half-width spaces after
+// it when a comma or kana follows them (わ、 私は, どっ.. どうしよう 어.. 어떻게 하지); a full-width space keeps
+// spaced copies apart (お　お…　俺), and after an ellipsis before a kanji word the kana cannot be compared.
+size_t SpacedStutterSeparator(std::u32string_view rs, size_t i) {
+    size_t n = StutterSeparator(rs, i);
+    if (n == 0) return 0;
+    size_t sp = i + n;
+    while (sp < rs.size() && rs[sp] == U' ') sp++;
+    if (sp > i + n && sp < rs.size() && (In(rs[i], U"、，") || IsHiraganaRune(rs[sp]) || IsKatakanaRune(rs[sp]))) n = sp - i;
+    return n;
+}
+
 size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     const std::u32string_view rs = rs_, f = f_;
     pieces.clear();
@@ -1546,7 +1558,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     if (rs[p] == U'が') {
         size_t q = p;
         while (q > 0 && In(rs[q - 1], U" 　")) q--;
-        const size_t k = StutterSeparator(rs, p + 1);
+        const size_t k = SpacedStutterSeparator(rs, p + 1);
         const bool again = k != 0 && p + 1 + k < rs.size() && rs[p + 1 + k] == U'が';
         if ((q == 0 || rs[q - 1] == U'\n') && !again) return 0;
     }
@@ -1586,7 +1598,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     }
     size_t i = p;
     while (f.substr(i, n) == x) {
-        const size_t k = StutterSeparator(rs, i + n);
+        const size_t k = SpacedStutterSeparator(rs, i + n);
         if (k == 0) break;
         pieces.push_back({rs.substr(i + n, k)});
         i += n + k;
@@ -1602,8 +1614,8 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     std::vector<std::pair<size_t, size_t>> longer;  // start and length of each longer piece
     for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
         size_t e = j + n;
-        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && StutterSeparator(rs, e) == 0) e++;
-        const size_t k = StutterSeparator(rs, e);
+        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && SpacedStutterSeparator(rs, e) == 0) e++;
+        const size_t k = SpacedStutterSeparator(rs, e);
         if (k == 0 || e == j + n) break;
         longer.push_back({j, e - j});
         j = e + k;
@@ -1616,7 +1628,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     };
     while (!longer.empty()) {
         const auto& [lastStart, lastLength] = longer.back();
-        const size_t after = lastStart + lastLength + StutterSeparator(rs, lastStart + lastLength);
+        const size_t after = lastStart + lastLength + SpacedStutterSeparator(rs, lastStart + lastLength);
         const std::u32string_view word = kanaWord(after);
         // The word without its lengthening, and without an ending the dictionary does not
         // hold in the word (すきです: すき). A word said again is no piece of it
@@ -1634,7 +1646,7 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
         if (chained) {
             for (const auto& [start, length] : longer) {
                 const size_t e = start + length;
-                pieces.push_back({rs.substr(e, StutterSeparator(rs, e)), length, stem.size()});
+                pieces.push_back({rs.substr(e, SpacedStutterSeparator(rs, e)), length, stem.size()});
             }
             return after;
         }
@@ -1647,8 +1659,8 @@ size_t SoundText::Stutter(size_t p, std::vector<StutterPiece>& pieces) const {
     // a word keeps the word (そ、そんな……嘘).
     for (size_t j = i; j < rs.size() && f.substr(j, n) == x;) {
         size_t e = j + n;
-        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && StutterSeparator(rs, e) == 0) e++;
-        const size_t k = StutterSeparator(rs, e);
+        while (e < rs.size() && e - j < 4 && IsKana(rs[e]) && SpacedStutterSeparator(rs, e) == 0) e++;
+        const size_t k = SpacedStutterSeparator(rs, e);
         if (k == 0 || e == j + n || e - j > 2 || !In(rs[e], U"、，―─—") || e + k >= rs.size() ||
             !IsKanjiRune(rs[e + k]) || NumeralRune(rs[e + k])) {
             break;
@@ -2088,7 +2100,9 @@ std::string SoundText::Write() {
                     for (size_t k = 1; k < piece.kana; k++) text::AppendRune(b, kStutterMark);
                     for (size_t k = piece.kana; k < piece.word; k++) text::AppendRune(b, kStutterRest);
                 }
-                b += EncodeText(piece.separator);
+                // A comma goes alone; the comma stage writes the space after it (あ、 あの 저, 저기).
+                const bool comma = !piece.separator.empty() && In(piece.separator[0], U"、，");
+                b += EncodeText(comma ? piece.separator.substr(0, 1) : piece.separator);
             }
             next = end;
             stutterEnd_ = end;
@@ -3583,7 +3597,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
         internal::RewriteCasualAdjectives(
             internal::RewriteOnbinU(
                 internal::RewriteContractedNo(
-                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(completed, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
                 ctx, snap),
             ctx, snap),
         ctx, snap);

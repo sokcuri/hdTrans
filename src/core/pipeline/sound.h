@@ -246,6 +246,8 @@ std::string RewriteOnbinU(std::string_view text, const LineContext& ctx, const d
 // (漢字そっか, 了解そっか) it is the answer そうか and stays. Before the end, a sentence mark, a
 // closing bracket, な, ね or a drawn vowel.
 std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap);
+std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot& snap);
+std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap);
 
 // The fused and clipped adjective endings written in full (spec SPC-19): an adjective stem of the
 // dictionary said with its last syllable and い fused (うるせぇ うるさい, すげーな すごいな, 若え！ 若い！,

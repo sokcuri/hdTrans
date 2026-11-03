@@ -1393,6 +1393,157 @@ bool LengthensWord(const Emphasis& e, std::u32string_view rs, size_t from, size_
 
 }  // namespace
 
+// The volitional said without its う before the end, a mark, a drawl or a particle (帰ろ 帰ろう, 行こか 行こうか,
+// どうしよ どうしよう, 勉強しよっ): a verb in kanji whose volitional the dictionary spells with the kana and う
+// (godan only: 見よ is also the old imperative), or し of する after kanji, どう, そう, こう, ああ or where a
+// clause starts (not わたしよ, はなしよ). ど before しよ where a clause starts is どう said short (どしよう).
+std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot& snap) {
+    std::u32string rs = DecodeText(text);
+    bool changed = false;
+    constexpr std::u32string_view kClauseStart = U"「『（(。！？!?…‥、 　";
+    constexpr std::u32string_view kMarks = U"？?！!。、…‥」』）)";
+    // Whether what follows character q ends the clipped form: the end, a mark, a drawl, a shout's っ
+    // or っと before a mark (帰ろっ！, 描こっと; not っか or the っ of 積もった), or か, よ, ね, な before
+    // the end or a mark.
+    const auto ends = [&](size_t q) {
+        if (q >= rs.size() || In(rs[q], kMarks) || In(rs[q], U"ー～〜")) return true;
+        if (rs[q] == U'っ') {
+            // っと said with the volitional before the end or a mark (描こっと 描こうっと 그려야지).
+            if (q + 1 < rs.size() && rs[q + 1] == U'と') return q + 2 >= rs.size() || In(rs[q + 2], kMarks) || In(rs[q + 2], U"ー～〜");
+            return q + 1 >= rs.size() || In(rs[q + 1], kMarks);
+        }
+        if (!In(rs[q], U"かよねな")) return false;
+        return q + 1 >= rs.size() || In(rs[q + 1], kMarks) || In(rs[q + 1], U"ー～〜なね");
+    };
+    // The う put in after character at; a drawl after it is one ～, dropped before か and っと
+    // (どうしよー どうしよう～, しよーかな しようかな, しよーっと しようっと).
+    const auto insert = [&](size_t at) {
+        rs.insert(rs.begin() + static_cast<std::ptrdiff_t>(at + 1), U'う');
+        size_t q = at + 2;
+        size_t run = q;
+        while (run < rs.size() && In(rs[run], U"ー～〜")) run++;
+        if (run > q) {
+            const bool on = run < rs.size() && (rs[run] == U'か' || rs[run] == U'っ');
+            rs.erase(q, run - q);
+            if (!on) rs.insert(rs.begin() + static_cast<std::ptrdiff_t>(q), U'～');
+        }
+        changed = true;
+    };
+    // A godan or ichidan volitional drawn out is the drawl pass's (帰ろー, 捨てよー, 頑張ろー).
+    const auto drawn = [&](size_t q) { return q < rs.size() && In(rs[q], U"ー～〜"); };
+    const auto word = [&](std::u32string_view w) { return !snap.RetrieveRecords(EncodeText(w), dict::LookupMode::General).empty(); };
+    for (size_t i = 0; i + 3 < rs.size(); i++) {
+        // どーしよ, そーしよ: the う of どう, そう and こう drawn out.
+        if (In(rs[i], U"どそこ") && In(rs[i + 1], U"ー～") && rs[i + 2] == U'し' && rs[i + 3] == U'よ') {
+            rs[i + 1] = U'う';
+            changed = true;
+        }
+    }
+    for (size_t i = 0; i + 1 < rs.size(); i++) {
+        if (rs[i] == U'ど' && rs[i + 1] == U'し' && i + 2 < rs.size() && rs[i + 2] == U'よ' && (i == 0 || In(rs[i - 1], kClauseStart))) {
+            rs.insert(rs.begin() + static_cast<std::ptrdiff_t>(i + 1), U'う');
+            changed = true;
+            continue;
+        }
+        // Said again straight after itself it ends too (どうしよどうしよ).
+        const bool again = i >= 2 && i + 6 <= rs.size() && std::u32string_view(rs).substr(i + 2, 4) == std::u32string_view(rs).substr(i - 2, 4);
+        if (rs[i] != U'し' || rs[i + 1] != U'よ' || (i + 2 < rs.size() && In(rs[i + 2], U"うぅ")) || (!ends(i + 2) && !again)) continue;
+        const std::u32string_view two = i >= 2 ? std::u32string_view(rs).substr(i - 2, 2) : std::u32string_view();
+        bool after = i == 0 || In(rs[i - 1], kClauseStart) || two == U"どう" || two == U"そう" || two == U"こう" || two == U"ああ";
+        if (!after && i >= 2 && IsKanjiRune(rs[i - 1]) && IsKanjiRune(rs[i - 2])) {
+            // A noun of two or more kanji that the dictionary has before する (勉強しよ), not a noun in し
+            // (仲良し, 裏返し, 倍返し).
+            size_t start = i - 2;
+            while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+            after = word(std::u32string_view(rs).substr(start, i - start)) && !word(std::u32string_view(rs).substr(start, i + 1 - start)) &&
+                    !In(rs[i - 1], U"返") && (start == 0 || !In(rs[start - 1], U"おご"));
+        }
+        if (!after) continue;
+        insert(i + 1);
+    }
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (!In(rs[i], U"こごそとのぼもろ") || !IsKanjiRune(rs[i - 1]) || (i + 1 < rs.size() && In(rs[i + 1], U"うぅ")) || drawn(i + 1) ||
+            !ends(i + 1)) {
+            continue;
+        }
+        size_t start = i - 1;
+        while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        // The whole kanji run is the stem of a verb with that volitional (帰ろ, 行こ); before も, の and
+        // と, which are also particles, only a stem that is no noun (not 力も, 生も, 野分と).
+        const std::string key = EncodeText(rs.substr(start, i - start));
+        const std::vector<dict::Candidate> records = snap.RetrieveRecords(key, dict::LookupMode::General);
+        const std::string volitional = EncodeText(std::u32string{rs[i], U'う'});
+        bool verb = false, noun = false;
+        for (const dict::Candidate& c : records) {
+            if (c.codes == nullptr || c.codes->partText.empty()) continue;
+            noun = noun || c.codes->partText[0] == 'N';
+            verb = verb || (c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
+                            word::Conjugation(c.codes->partText[3] - '0', 5) == volitional);
+        }
+        if (!verb || (noun && In(rs[i], U"もぼのと")) || word(std::u32string_view(rs).substr(start, i + 1 - start))) continue;
+        insert(i);
+    }
+    // An ichidan stem before よ (寝よか, もう起きよ): only where it is plainly said, before か, or after もう,
+    // そろそろ, 早く or さあ, since 見よ, 考えよ alone are also the old imperative and 過ぎよ the noun 過ぎ.
+    for (size_t i = 1; i < rs.size(); i++) {
+        if (rs[i] != U'よ' || (i + 1 < rs.size() && In(rs[i + 1], U"うぅ")) || drawn(i + 1) || !ends(i + 1)) continue;
+        size_t start = i;
+        while (start > 0 && i - start < 2 && IsHiraganaRune(rs[start - 1]) && !In(rs[start - 1], U"よ")) start--;
+        if (start == 0 || !IsKanjiRune(rs[start - 1])) continue;
+        while (start > 0 && IsKanjiRune(rs[start - 1])) start--;
+        const bool said = i + 1 < rs.size() && rs[i + 1] == U'か';
+        if (i >= 2 && (std::u32string_view(rs).substr(i - 2, 2) == U"過ぎ" || std::u32string_view(rs).substr(i - 2, 2) == U"すぎ")) continue;  // 落ち込み過ぎよ
+        const std::u32string_view before = std::u32string_view(rs).substr(0, start);
+        const bool cue = before.ends_with(U"もう") || before.ends_with(U"そろそろ") || before.ends_with(U"早く") ||
+                         before.ends_with(U"さあ") || before.ends_with(U"さぁ");
+        if (!said && !cue) continue;
+        // Not the imperative of a godan verb before the particle よ (言えよ, 行けよ): an e-row kana whose
+        // u-row with the stem is a verb.
+        if (const size_t e = std::u32string_view(U"えけげせてねべめれ").find(rs[i - 1]); e != std::u32string_view::npos && IsKanjiRune(rs[i - 2])) {
+            const std::string stem = EncodeText(rs.substr(start, i - 1 - start));
+            const std::string godan = EncodeText(std::u32string{U"おこごそとのぼもろ"[e], U'う'});
+            bool imperative = false;
+            for (const dict::Candidate& c : snap.RetrieveRecords(stem, dict::LookupMode::General)) {
+                imperative = imperative || (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
+                                            word::Conjugation(c.codes->partText[3] - '0', 5) == godan);
+            }
+            if (imperative) continue;
+        }
+        const std::string key = EncodeText(rs.substr(start, i - start));
+        bool verb = false;
+        for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+            verb = verb || (c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'M' &&
+                            word::Conjugation(c.codes->partText[3] - '0', 5) == "よう");
+        }
+        if (!verb) continue;
+        insert(i);
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
+
+// A one-kanji noun drawn out where its を is dropped (気ぃつけな 気をつけな, 目ぇ覚ませ 目を覚ませ, 手ぇ出すな
+// 手を出すな): the drawl written を where the dictionary has an idiom of the noun, を and what follows.
+std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap) {
+    std::u32string rs = DecodeText(text);
+    bool changed = false;
+    for (size_t i = 0; i + 2 < rs.size(); i++) {
+        if (!IsKanjiRune(rs[i]) || (i > 0 && IsKanjiRune(rs[i - 1]))) continue;
+        size_t j = i + 1;
+        while (j < rs.size() && j - i <= 3 && In(rs[j], U"ぃぇィェー～〜")) j++;
+        if (j == i + 1 || j >= rs.size() || !(IsHiraganaRune(rs[j]) || IsKanjiRune(rs[j]))) continue;
+        std::u32string with = std::u32string{rs[i], U'を'};
+        bool idiom = false;
+        for (size_t k = j; k < rs.size() && k < j + 5 && !idiom; k++) {
+            with.push_back(rs[k]);
+            idiom = !snap.RetrieveRecords(EncodeText(with), dict::LookupMode::General).empty();
+        }
+        if (!idiom) continue;
+        rs = rs.substr(0, i + 1) + U"を" + rs.substr(j);
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
+
 std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& snap) {
     const std::u32string rs = DecodeText(text);
     std::u32string out;
@@ -1829,6 +1980,15 @@ std::string RewriteDrawnHonorifics(std::string_view text, const LineContext& ctx
     return changed ? EncodeText(rs) : std::string(text);
 }
 
+// Whether the run of ～ at [i, end) after the kanji at i - 1 draws out a verb or adjective stem before
+// its ending (寒～い, 面白～い, 見～て): an adjective stem, or a verb stem before kana that start no
+// word of their own. After a noun, or before a word such as そして, it is a mark of its own (死亡～そして
+// 転生～, 猫～そして). A ー or a small vowel after a kanji stays a drawl (気ーつけな, 気ぃつけ).
+bool KanjiStemDrawn(const Emphasis& e, std::u32string_view rs, size_t from, size_t i, size_t end) {
+    if (e.StemTagged(rs, from, i, "H")) return true;
+    return e.StemTagged(rs, from, i, "M") && e.KeyEnd(rs, end) < end + 2;
+}
+
 std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string rs = DecodeText(text);
     const Emphasis e(ctx, snap);
@@ -2263,7 +2423,7 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
             read = true;
         } else if (best < 0 && !vowelRun && In(rs[end], kConjKana) &&
                    ((rs[i] == U'っ' && IsKanjiRune(prev) && In(rs[end], U"かきくけこがぎぐげご")) ||
-                    (rs[i] != U'っ' && (IsKanjiRune(prev) || e.StemEnds(rs, from, i))))) {
+                    (rs[i] != U'っ' && (IsKanjiRune(prev) ? (r != U'～' && r != U'〜') || KanjiStemDrawn(e, rs, from, i, end) : e.StemEnds(rs, from, i))))) {
             best = 0;
             read = rs[i] != U'っ';  // a stem before its ending: やーめーて
         }

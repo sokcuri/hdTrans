@@ -1,0 +1,30 @@
+# 규칙: LEX-4039
+rule	input	expected	kind	layer
+cx:novel-fixes-2:336	現在一人暮らしの37歳。彼女はいない。	has:여자친구는 없다.	fix	rewrites
+cx:novel-fixes-2:336	彼女がいなければ、俺は	!rule:cx:novel-fixes-2:336	keep	rewrites
+cx:novel-fixes-2:336	どこにも彼女がいない。	!rule:cx:novel-fixes-2:336	keep	rewrites
+cx:novel-fixes-2:337	彼女が欲しい。	has:여자친구를 갖고 싶다	fix	rewrites
+cx:novel-fixes-2:337	彼女が笑った。	!rule:cx:novel-fixes-2:337	keep	rewrites
+cx:novel-fixes-2:338	彼女がいるのか？	has:여자친구가 있는	fix	rewrites
+cx:novel-fixes-2:338	手の届く至近距離に彼女がいた。	!rule:cx:novel-fixes-2:338	keep	rewrites
+cx:novel-fixes-2:339	俺の彼女に手を出すな	has:내 여자친구에게	fix	rewrites
+cx:novel-fixes-2:339	田中の彼女は美人だ	has:타나카의 여자친구는	fix	rewrites
+cx:novel-fixes-2:339	人の彼女を横取りするなんて	has:사람의 여자친구를	fix	rewrites
+cx:novel-fixes-2:339	王女の彼女は笑った。	!rule:cx:novel-fixes-2:339	keep	rewrites
+cx:novel-fixes-2:339	しっかり者の彼女にうっかり者な俺が助けられる	!rule:cx:novel-fixes-2:339	keep	rewrites
+cx:novel-fixes-2:339	か弱い彼女を守る	!rule:cx:novel-fixes-2:339	keep	rewrites
+cx:novel-fixes-2:335	涼太の彼女さん	has:여자친구분	fix	rewrites
+cx:novel-fixes-2:335	彼女は笑った	!rule:cx:novel-fixes-2:335	keep	rewrites
+cx:novel-fixes-2:343	彼女募集中	has:여자친구 모집	fix	rewrites
+cx:novel-fixes-2:343	彼女は家にいる	!rule:cx:novel-fixes-2:343	keep	rewrites
+cx:novel-fixes-2:2400	どうしようかな	어떻게 할까	fix	rewrites
+cx:novel-fixes-2:2400	どうしよっか	어떻게 할까	fix	rewrites
+cx:novel-fixes-2:2400	どうしよう	!rule:cx:novel-fixes-2:2400	keep	rewrites
+cx:novel-fixes-2:2406	これからどうしようか考えた	앞으로 어떻게 할지 생각했다	fix	rewrites
+cx:novel-fixes-2:2406	これからどうしようか？	!rule:cx:novel-fixes-2:2406	keep	rewrites
+cx:novel-fixes-2:2407	これからどうしようか？	앞으로 어떻게 할까?	fix	rewrites
+cx:novel-fixes-2:2407	これからどうしようか考えた	!rule:cx:novel-fixes-2:2407	keep	rewrites
+cx:novel-fixes-2:2410	提督～なんだか疲れ気味なんじゃない～？	has:좀 피곤한 거 아니야~?	fix	rewrites
+cx:novel-fixes-2:2410	疲れ気味だ	!rule:cx:novel-fixes-2:2410	keep	rewrites
+cx:novel-fixes-2:2420	一緒に頑張ろう？	함께 힘내자?	fix	rewrites
+cx:novel-fixes-2:2420	頑張ろうと思う。	!rule:cx:novel-fixes-2:2420	keep	rewrites
