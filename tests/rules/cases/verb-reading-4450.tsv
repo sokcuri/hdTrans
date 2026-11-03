@@ -1,0 +1,12 @@
+# 규칙: LEX-4450
+rule	input	expected	kind	layer
+lexical:ha-gyou	夜…夜の海は怖い…でも、今は行かないと…全艦、突撃です！	has:지금은 가야 한다…	fix	lookup
+lexical:ha-gyou	婚約破棄までは行かないにしても、	has:파혼까지는 가지 않는다고 해도	fix	lookup
+lexical:ha-gyou	こういうのは行為じゃなくて、やさしさが大事なんだもんな。	has:이런 것은 행위가 아니고	fix	lookup
+lexical:ha-gyou	ハ行の音が苦手だ。	has:하행의 소리	keep	lookup
+lexical:ochitsukase-na	とにかく、森下さんを落ち着かせないと。	어쨌든, 모리시타 씨를 진정시켜야 한다.	fix	lookup
+lexical:ochitsukase-na	彼を落ち着かせないように騒いだ。	has:진정시키지 않도록	fix	lookup
+lexical:ochitsukase-na	心を落ち着かせて、手元に集中しないと……	has:마음을 진정되게 하고	keep	lookup
+lexical:ikan	行かんといて。	lacks:여하	fix	lookup
+lexical:ikan	わしは行かん。	나는 가지 않는다.	keep	lookup
+lexical:ikan	そうは行かん。	그렇게는 가지 않는다.	keep	lookup
