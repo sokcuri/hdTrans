@@ -35,6 +35,13 @@ cx:web-fixes-i:158	私の手に入れた宝	!rule:cx:web-fixes-i:158	keep	rewrit
 cx:web-fixes-i:158	私の腕を見せてあげるわ。	!rule:cx:web-fixes-i:158	keep	rewrites
 cx:web-fixes-i:160	その痛みに意識を手放した直後、オレの体は土埃の波にさらわれた。	has:흙먼지의 파도에 휩쓸렸다	fix	rewrites
 cx:web-fixes-i:160	アキラと彼女の目が合う。	has:그녀의 시선이 마주친다	fix	rewrites
+cx:web-fixes-i:160	下級妃嬪は後宮内で個室を持つが、皇帝の目につくことはめったにない。	has:황제의 눈에 띄는	fix	rewrites
+cx:web-fixes-i:160	王の耳に入る。	has:왕의 귀에	fix	rewrites
+cx:web-fixes-i:160	聖女と共に戦いの旅に出たにもかかわらず、	has:싸움의 여행을	fix	rewrites
+cx:web-fixes-i:160	屋敷中の者がエリザベスの味方についている」	has:엘리자베스의 편을	fix	rewrites
+cx:web-fixes-i:160	海の目に入る部屋に泊まった。	!rule:cx:web-fixes-i:160	keep	rewrites
+cx:web-fixes-i:160	ゴミの目につく道だった。	!rule:cx:web-fixes-i:160	keep	rewrites
+cx:web-fixes-i:160	噂の耳に入るのは早い。	!rule:cx:web-fixes-i:160	keep	rewrites
 cx:web-fixes-i:160	「……聖女の望むままに」	!rule:cx:web-fixes-i:160	keep	rewrites
 cx:web-fixes-i:160	それより奴の言ったこと……	!rule:cx:web-fixes-i:160	keep	rewrites
 cx:web-fixes-i:160	あんなもの、人の手に負えるのかな？	!rule:cx:web-fixes-i:160	keep	rewrites
