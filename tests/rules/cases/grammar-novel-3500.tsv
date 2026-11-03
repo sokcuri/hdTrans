@@ -95,3 +95,18 @@ cx:novel-fixes-3:145	「彼女の事、幸せだと思う？」	!rule:cx:novel-f
 cx:novel-fixes-3:145	「彼女の事、自慢の妹だ」	!rule:cx:novel-fixes-3:145	keep	rewrites
 cx:novel-fixes-3:145	「彼女の事、心配で見に来た」	!rule:cx:novel-fixes-3:145	keep	rewrites
 cx:novel-fixes-3:145	「彼女の事、好きなんだ」	has:그녀를, 좋아해	fix	rewrites
+cx:novel-fixes-3:110	体に変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	彼の体に変化した部分はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	身体に変化した感じはない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	田中に変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:115	犬に変化した様子はない。	!rule:cx:novel-fixes-3:115	keep	rewrites
+cx:novel-fixes-3:115	犬に変化した。	has:개로 변화했다	fix	rewrites
+cx:novel-fixes-3:110	地形に変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	システムに変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	ロンドンに変化した様子はない。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	クリスマスに進化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	このタイミングに変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	シーズンに変化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	次のターンに進化する。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	全体に変化した。	!rule:cx:novel-fixes-3:110	keep	rewrites
+cx:novel-fixes-3:110	スライムに進化した。	has:슬라임으로 진화했다	fix	rewrites
