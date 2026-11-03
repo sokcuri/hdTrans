@@ -240,3 +240,7 @@ cx:crit-fixes-1:5	この宿について、泊まった人の感想を読んだ�
 cx:crit-fixes-1:5	この城について、少し話そう。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	東京について、ずっと行きたいと思っていました。	!rule:cx:crit-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:5	寺について、住職に挨拶した。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について思ったより人が多かった。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について思った以上に混んでいた。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について思った通りだった。	!rule:cx:crit-fixes-1:5	keep	rewrites
+cx:crit-fixes-1:5	駅について思った。	역에 대해 생각했다.	fix	rewrites
