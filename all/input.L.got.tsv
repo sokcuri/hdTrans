@@ -1,0 +1,7 @@
+#LINE	1
+L	0	0	0:0	3	力	4	TWordInfo	-1		0
+L	0	0	0:3	3	を	4	TWordInfo	-1		0
+L	0	0	0:6	9	増	4	TVerbWord	7	して	103
+L	0	0	0:15	9	いき	5	TVerbWord	7	、	103
+L	0	0	0:24	6	より	15	TWordInfo	-1		0
+L	0	0	0:30	9	危険	1	TDakeiyoWord	48	だ	5

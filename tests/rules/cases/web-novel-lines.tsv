@@ -1,4 +1,4 @@
-# 규칙: LEX-4000~4012, GRM-3450~3454
+# 규칙: LEX-4000~4013, GRM-3450~3458
 rule	input	expected	kind	layer
 dict:w:31002	雨が降りしきる中、公園でブランコに座っていた。	비가 퍼붓는 중, 공원에서 그네에 앉아 있었다.	fix	lookup
 dict:w:31002	降りしきる雨の中を歩いた。	쏟아지는 빗속을 걸었다.	keep	lookup
@@ -112,3 +112,35 @@ cx:dislike-of:5	運動が嫌いな人向けの授業だ。	운동을 싫어하�
 cx:dislike-of:5	ミーアの嫌いなもの。	미아가 싫어하는 것.	keep	rewrites
 cx:line-toiu:10	という事はおねえさんの家なのかな……？	그렇다고 하는 일은 언니의 집인가……?	keep	rewrites
 cx:dislike-of:10	大っ嫌えな侍に借り作りたくねえ。	!rule:cx:dislike-of:10	keep	rewrites
+cx:rebuild-fixes:10	汚れで変色している唯の服と、整備状態の怪しい拳銃。	더러움으로 변색하고 있는 그냥 옷과 정비 상태의 수상한 권총.	fix	rewrites
+cx:rebuild-fixes:10	唯一の希望。	유일한 희망.	keep	rewrites
+cx:rebuild-fixes:20	（……この先客も所持品は無しか）	(……이 선객도 소지품은 없나)	fix	rewrites
+cx:rebuild-fixes:20	無しかもしれない。	!rule:cx:rebuild-fixes:20	keep	rewrites
+cx:rebuild-fixes:30	成果無しでの帰還は、ここに来るだけでも命賭けのアキラにとって。	성과 없는 귀환은, 여기에 오는 것만으로도 목숨을 건 아키라에게.	fix	rewrites
+cx:rebuild-fixes:30	成果無しで帰る。	!rule:cx:rebuild-fixes:30	keep	rewrites
+cx:rebuild-fixes:40	その者は震えで誤って引き金を引いても不思議のない状態だ。	그 사람은 떨림으로 잘못해 방아쇠를 당겨도 이상할 것 없는 상태다.	fix	rewrites
+cx:rebuild-fixes:40	不思議の国。	이상한 나라.	keep	rewrites
+cx:rebuild-fixes:50	彼女は何をする訳でもなく佇んでいた。	그녀는 무엇을 하는 것도 아니고 우두커니 서 있었다.	fix	rewrites
+cx:rebuild-fixes:50	それでもなく。	!rule:cx:rebuild-fixes:50	keep	rewrites
+cx:fit-to:10	その危険に見合うものがここにあるからだ。	그 위험에 알맞는 것이 여기에 있기 때문이다.	fix	rewrites
+cx:fit-to:10	その無謀に相応しい末路を迎えただけ。	그 무모에 걸맞은 말로를 맞이했을 뿐.	fix	rewrites
+cx:fit-to:10	静かに眠る。	!rule:cx:fit-to:10	keep	rewrites
+cx:teki-and:10	その女性は全身に幻想的で非現実的な美しさを備えていた。	그 여성은 전신에 환상적이고 비현실적인 아름다움을 갖추고 있었다.	fix	rewrites
+cx:teki-and:10	効率的で助かる。	!rule:cx:teki-and:10	keep	rewrites
+dict:w:31014	命懸けでここまで来たっていうのに。	목숨 걸고 여기까지 왔는데도.	fix	lookup
+dict:w:31017	命賭けの戦い。	목숨을 건 싸움.	fix	lookup
+cx:rebuild-fixes:60	いつ死んでも不思議は無く、死んでも誰も気にも留めない。	언제 죽어도 이상할 것은 없고, 죽어도 아무도 마음에도 두지 않는다.	fix	rewrites
+cx:rebuild-fixes:60	不思議な話。	이상한 이야기.	keep	rewrites
+cx:rebuild-fixes:70	１度目と２度目の襲撃は、唯ひたすら走って逃げ回った。	1번째와 2번째 습격은, 그저 오로지 달려 도망 다녔다.	fix	rewrites
+cx:rebuild-fixes:70	唯一の希望。	유일한 희망.	keep	rewrites
+cx:rebuild-fixes:80	目線を合わせる為に中腰の体勢で、微笑みながら見ていた。	시선을 맞추기 위해 엉거주춤한 자세로, 미소 지으면서 보고 있었다.	fix	rewrites
+cx:rebuild-fixes:80	中腰になった。	!rule:cx:rebuild-fixes:80	keep	rewrites
+cx:rebuild-fixes:90	安い銃が無駄に出回っている非常に治安の悪いスラム街。	싼 총이 쓸데없이 나돌고 있는 매우 치안이 나쁜 슬럼가.	fix	rewrites
+cx:rebuild-fixes:90	努力が無駄になった。	!rule:cx:rebuild-fixes:90	keep	rewrites
+cx:rebuild-fixes:100	かつての英知と栄華を想像するのが困難になるほどの長い年月が流れた。	한 때의 예지와 영화를 상상하는 것이 곤란하게 될 정도의 긴 세월이 흘렀다.	fix	rewrites
+cx:rebuild-fixes:100	なるほどの話だ。	!rule:cx:rebuild-fixes:100	keep	rewrites
+cx:resolve-quote:10	３度目の襲撃を生き残った後、アキラはハンターになって成り上がると覚悟を決めた。	3번째 습격을 살아남은 후, 아키라는 헌터가 되어 출세하겠다고 각오를 다졌다.	fix	rewrites
+cx:resolve-quote:10	雨が降ると困る。	비가 오면 곤란하다.	keep	rewrites
+dict:w:31018	両手は彼女の胸に減り込んだままだ。	양손은 그녀의 가슴에 파고든 채 그대로다.	fix	lookup
+dict:i:5287	正気を失った者から死ぬ。	제정신을 잃은 사람에게서 죽는다.	fix	lookup
+dict:jisjk:35830	余りの出来事にアキラは銃を構えた体勢のまま思考を停止した。	넘치는 사건에 아키라는 총을 겨눈 자세인 채 사고를 정지했다.	fix	lookup

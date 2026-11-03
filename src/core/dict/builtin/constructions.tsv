@@ -306,6 +306,23 @@ cx:dislike-of:5	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" S-1== "が"	
 cx:dislike-of:10	LEX-4011	&&4 S+0== "嫌い" U+0== "な" P+1== "1**" !1 ||2 S-1== "っ" S-1== "大"	set-target "싫어하&AV@" set-ending "4는"	嫌いな野菜 싫어하는 야채
 //= line-toiu	after Select 166	という at the start of a line takes up what came before, 라는 (という夢を見た 라는 꿈을 꾸었다), not 그렇다고 하는.
 cx:line-toiu:10	GRM-3454	&&5 S+0== "とい" D+0== "그렇다고 &AV@" U+0== "う" !1 F-1== "exists" !1 ||3 S+1== "事" S+1== "こと" S+1== "Lか"	set-target "라고 &AV@"	という夢を見た 라는 꿈을 꾸었다
+//= rebuild-fixes	after Select 168	Misreadings the web novel examples showed: 唯の is ただの, 그냥 (唯の服 그냥 옷); 無し before か ends a question, 없나 (所持品は無しか 소지품은 없나), and before での 없는 (成果無しでの帰還 성과 없는 귀환); 不思議のない is 이상할 것 없는; 訳でもなく before a verb is 것도 아니고.
+cx:rebuild-fixes:10	LEX-4013	&&2 S+0== "唯" S+1== "の"	set-target "그냥" set-target@+1 " "	唯の服 그냥 옷
+cx:rebuild-fixes:20	LEX-4013	&&3 S+0== "か" ||2 S-1== "無し" S-1== "なし" ||2 S+1== "00。！？!?）」』…" !1 F+1== "exists"	set-target "없나" set-target@-1 ""	所持品は無しか 소지품은 없나
+cx:rebuild-fixes:30	LEX-4013	&&2 S+0== "での" ||2 S-1== "無し" S-1== "なし"	set-target "없는" set-target@-1 ""	成果無しでの帰還 성과 없는 귀환
+cx:rebuild-fixes:40	LEX-4013	&&2 S+0== "不思議の" S+1== "な"	set-target "이상할 것"	不思議のない状態 이상할 것 없는 상태
+cx:rebuild-fixes:50	GRM-3455	&&2 S+0== "でもな" Y+0== "1게"	set-ending "1고"	何をする訳でもなく佇んでいた 무엇을 하는 것도 아니고 우두커니 서 있었다
+cx:rebuild-fixes:60	LEX-4013	&&3 S+0== "不思議" ||3 S+1== "は" S+1== "が" S+1== "も" ||2 S+2== "L無" S+2== "Lな"	set-target "이상할 것"	いつ死んでも不思議は無く 언제 죽어도 이상할 것은 없고
+cx:rebuild-fixes:70	LEX-4013	&&2 S+0== "唯" !1 S+1== "の"	set-target "그저"	唯ひたすら走った 그저 오로지 달렸다
+cx:rebuild-fixes:80	LEX-4013	&&3 S+0== "中腰" S+1== "の" ||3 S+2== "体勢" S+2== "姿勢" S+2== "格好"	set-target "엉거주춤한" set-target@+1 " "	中腰の体勢で 엉거주춤한 자세로
+cx:rebuild-fixes:90	LEX-4013	&&4 S+0== "無駄" U+0== "に" F+1== "verb" !1 ||4 S+1== "Lな" S+1== "L終" S+1== "Lし" S+1== "Lす"	set-ending "1이"	安い銃が無駄に出回っている 싼 총이 쓸데없이 나돌고 있다
+cx:rebuild-fixes:100	LEX-4013	&&3 S+0== "なるほど" S+1== "の" ||2 Y-1== "1게" U-1== "Rに"	set-target "될 정도"	困難になるほどの長い年月 곤란하게 될 정도의 긴 세월
+//= fit-to	after Select 169	A na-adjective read -하게 right before 見合う, 相応しい or 似合う is the noun it fits, 에 (その危険に見合うもの 그 위험에 알맞는 것, 無謀に相応しい 무모에 걸맞은).
+cx:fit-to:10	GRM-3456	&&3 F+0== "conjugating" Y+0== "1게" ||4 S+1== "L見合" S+1== "L相応し" S+1== "Lふさわし" S+1== "L似合"	set-ending " 에"	その危険に見合うもの 그 위험에 알맞는 것
+//= teki-and	after Select 170	A noun in 的 with で right before another 的 noun or an adjective lists both, 이고 (幻想的で非現実的な 환상적이고 비현실적인), not the cause 이어서.
+cx:teki-and:10	GRM-3457	&&4 S+0== "R的" U+0== "で" Y+0== "6" ||4 S+1== "R的" S+2== "R的" P+1== "7**" P+1== "8**"	set-ending "1고"	幻想的で非現実的な美しさ 환상적이고 비현실적인 아름다움
+//= resolve-quote	after QuoteTo 42	A verb whose と was read as the condition 니 right before 覚悟, 決意, 決心 or 誓う says what one resolves, -겠다고 (成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다).
+cx:resolve-quote:10	GRM-3458	&&3 F+0== "verb" Y+0== "2니" ||4 S+1== "L覚悟" S+1== "L決意" S+1== "L決心" S+1== "L誓"	set-ending "1겠다고"	成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
 cx:excuse-me:10	LEX-4006	&&2 S+0== "すみません" S-1== "ちょっと"	set-target "실례합니다" set-target@-1 "잠깐"	ちょっとすみません 잠깐 실례합니다
 cx:excuse-me:30	LEX-4006	&&4 S+0== "すみません" S+1== "、" S+2== "ちょっと" ||7 S+3== "Lいい" S+3== "い" S+3== "Lよろし" S+3== "L聞" S+3== "L伺" S+3== "Lお時間" S+3== "Lお尋ね"	set-target "실례합니다"	すみません、ちょっといいですか 실례합니다, 잠깐 괜찮습니까
