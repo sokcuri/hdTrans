@@ -43,7 +43,7 @@ cx:final-quote-to:20	これを受け取っていただけますと、幸い…�
 cx:final-quote-to:30	サバイバルゲームなんてやってるのかと。	서바이벌게임 같은 건 하고 있는지.	fix	rewrites
 cx:final-quote-to:30	いや……そんなこともあるかも……と。	!rule:cx:final-quote-to:30	keep	rewrites
 cx:final-quote-to:40	熱いんじゃないかなぁと想像して放棄。	뜨겁지 않을까 하고 상상해 포기.	fix	rewrites
-cx:final-quote-to:40	角度に問題はないかなぁと不安になる	각도에 문제는 없을까 하고 불안하게 된다	fix	rewrites
+cx:final-quote-to:40	角度に問題はないかなぁと不安になる	각도에 문제는 없을까 하고 불안해진다	fix	rewrites
 cx:final-quote-to:40	そういえば確かもう一系統あったなと思い付いて	그러고 보니 분명 벌써 일계통 있었군 하고 생각나	fix	rewrites
 cx:final-quote-to:40	仕方がないわねと、引き続き考察に付き合う。	어쩔 수 없네 하고 계속 고찰에 함께한다.	fix	rewrites
 cx:final-quote-to:40	とても優秀だからと求婚したけど断られた	무척 우수하니까 하고 청혼했지만 거절당했다	fix	rewrites

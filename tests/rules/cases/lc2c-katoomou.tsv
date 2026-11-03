@@ -1,7 +1,7 @@
 # 규칙: GRM-131
 rule	input	expected	kind	layer
 cx:lc2c-katoomou:10	軽く頭を振ったかと思うと	has:흔들었나 싶더니	fix	rewrites
-cx:lc2c-katoomou:10	無表情になったかと思うと	has:되었나 싶더니	fix	rewrites
+cx:lc2c-katoomou:10	無表情になったかと思うと	has:무표정해졌나 싶더니	fix	rewrites
 cx:lc2c-katoomou:10	男が舌打ちをしたかと思うと	has:찼나 싶더니	fix	rewrites
 cx:lc2c-katoomou:10	じっと見つめていたかと思うと、	has:있었나 싶더니	fix	rewrites
 cx:lc2c-katoomou:20	中かと思えば、庭だった。	has:안인가 했더니	fix	rewrites

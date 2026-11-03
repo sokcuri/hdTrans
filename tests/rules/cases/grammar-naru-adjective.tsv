@@ -1,0 +1,59 @@
+# 규칙: GRM-3385, GRM-3386
+rule	input	expected	kind	layer
+dict:gram:naru-adj:な	途端に部屋が静かになる。	바로 그때 방이 조용해진다.	fix	local
+dict:gram:naru-adj:な	座敷が、静かになった。	다다미방이, 조용해졌다.	fix	local
+dict:gram:naru-adj:な	冷静になるんだ。	냉정해지는 거야.	fix	local
+dict:gram:naru-adj:な	だからこそ、きっと支えが必要になる。	그렇기에, 분명 버팀목이 필요해진다.	fix	local
+dict:gram:naru-adj:な	「お前こそ、もうちょい正直になれよ」	「너야말로, 이제 조금 정직해져」	fix	local
+dict:gram:naru-adj:な	日本人は災害に敏感になった。	일본인은 재해에 민감해졌다.	fix	local
+dict:gram:naru-adj:な	「クラスメイトが増えて、賑やかになったよね」	「클래스메이트가 늘어나, 떠들썩해졌지」	fix	local
+dict:gram:naru-adj:な	食事は豪華になったけど、手作りではなくなった。	식사는 호화로워졌지만, 수제가 아니게 되었다.	fix	local
+dict:gram:naru-adj:な	宮殿から薬草園まで通うのが面倒になったため、	궁전에서 약초원까지 다니는 것이 귀찮아졌기 때문에,	fix	local
+dict:gram:naru-adj:な	「佳奈の全部が好きなんだ。嫌いになる部分なんてない」	「카나의 전부를 좋아해. 싫어지는 부분 같은 건 없어」	fix	local
+dict:gram:naru-adj:な	果たして美味になるのだろうか？	과연 맛좋아지는 걸까?	fix	local
+dict:gram:naru-adj:な	傲慢になってはだめよ。	오만해져서는 안돼요.	fix	local
+dict:gram:naru-adj:な	「立派になったなぁ！」	「훌륭해졌구나!」	fix	local
+dict:gram:naru-adj:な	ちょっと落ち着け、クールになれ。	조금 진정해, 쿨해져라.	fix	local
+dict:gram:naru-adj:な	いつの間にか、先生の表情はおだやかになっていた。	어느새인가, 선생님의 표정은 온화해져 있었다.	fix	local
+dict:gram:naru-adj:な	「ふたりに幸せになってほしいの」	「두 사람에게 행복해져 줬으면 좋겠어」	fix	local
+dict:gram:naru-adj:なって	不安になってきた。	불안해졌다.	fix	local
+dict:gram:naru-adj:なって	「何故かしら……逆に不安になってきたわ……」	「왜일까……반대로 불안해졌어……」	fix	local
+dict:gram:naru-adj:なって	もうすっかり夜ですね。静かになってきました。	이제 완전히 밤이군요. 조용해졌습니다.	fix	local
+dict:gram:naru-adj:なって	頬は朱に染まり、その動きも緩慢になってきている。	뺨은 피로 물들어, 그 움직임도 완만해지고 있다.	fix	local
+dict:gram:naru-adj:な	「気付いたら……好きになってましたから」	「정신을 차려 보니……좋아하게 돼 있었으니까요」	keep	local
+dict:gram:naru-adj:な	分厚い本なので、思わず持てるか心配になってしまう。	두꺼운 책이므로, 나도 모르게 가질 수 있을까 걱정이 되어버린다.	keep	local
+dict:gram:naru-adj:な	「もっと真っ赤になるのかと思ってたよ」	「좀 더 새빨갛게 되는 줄 알았어」	keep	local
+dict:gram:naru-adj:な	「でもそれじゃ、望月さんが悪者みたいになってしまう」	「하지만 그럼, 모치즈키 씨가 나쁜놈같이 돼버린다」	keep	local
+dict:gram:naru-adj:な	そのうち寂しくなったら入ってくるに違いない。	머지않아 외로워지면 들어 올 것임에 틀림없다.	keep	local
+dict:gram:naru-adj:な	「では、病気にならない身体をお願いします」	「그럼, 병이 들지 않는 몸을 부탁드립니다」	keep	local
+dict:gram:naru-adj:ならな	戦の前に不安にならないものなんていない。	싸움 앞에 불안해지지 않는 것은 없다.	fix	local
+dict:gram:naru-adj:な	だから不安にならないで	그러니까 불안해지지 마	fix	local
+dict:gram:naru-adj:ならな	私が不安にならないように。	내가 불안해지지 않도록.	fix	local
+dict:gram:naru-adj:ならな	「でもあんまり不安にならないんだよね！」	「하지만 별로 불안해지지 않아!」	fix	local
+dict:gram:naru-adj:な	嫌いにならないで。	싫어지지 마.	fix	local
+dict:gram:naru-adj:ならな	それじゃ誰も幸せにならない	그럼 아무도 행복해지지 않는다	fix	local
+dict:gram:naru-adj:ならな	ちっとも静かにならなかった。	조금도 조용해지지 않았다.	fix	local
+dict:gram:naru-adj:ならな	先生はなかなか静かにならないので	선생님은 좀처럼 조용해지지 않기 때문에	fix	local
+dict:gram:naru-adj:ならな	必要にならない限りは	필요해지지 않는 한은	fix	local
+dict:gram:naru-adj:ならな	感情を押し殺してでも冷静にならなければいけない。	감정을 억누르고서라도 냉정해져야 한다.	fix	local
+dict:gram:naru-adj:ならな	ここは逆に冷静にならないと乗り切れない。	여기는 반대로 냉정해지지 않으면 극복할 수 없다.	fix	local
+dict:gram:naru-neg:ならな	心配にならないわけがない。	걱정이 되지 않을 리가 없다.	fix	local
+dict:gram:naru-neg:ならな	心配にならないわけないだろ	걱정이 되지 않을 리가 없잖아	fix	local
+dict:gram:naru-neg:ならな	「心配にならないの？」	「걱정이 되지 않는 거야?」	fix	local
+dict:gram:naru-neg:ならな	心配にならないのか？	걱정이 되지 않는 건가?	fix	local
+dict:gram:naru-neg:ならな	倉内のことなんか好きにならない。	쿠라우치 같은 건 좋아하게 되지 않는다.	fix	local
+dict:gram:naru-neg:ならな	「……俺はお前以外好きにならないよ」	「……나는 너 이외 좋아하게 되지 않아」	fix	local
+dict:gram:naru-neg:ならな	こんな素敵な女性を好きにならない訳が無いだろう。	이런 멋진 여성을 좋아하게 되지 않을 리가 없을 것이다.	fix	local
+dict:gram:naru-neg:ならな	「私みたいにならないように、今しっかりやって」	「나같이 되지 않도록, 지금 확실히 해」	fix	local
+dict:gram:naru-copula:なって	そんなこと言われたら心配になってきたわ。	그런 말 들었더니 걱정이 됐어.	fix	local
+dict:gram:naru-copula:なって	天童の倫理感が少し心配になってきた。	덴도의 윤리감이 조금 걱정이 되었다.	fix	local
+dict:gram:naru-copula:なって	心配になってきた。	걱정이 되었다.	fix	local
+dict:gram:naru-neg:ならな	和馬と田中は、馬たちの邪魔にならないように、端っこで見ていた。	카즈마와 타나카는, 말들의 방해가 되지 않도록, 가장자리로 보고 있었다.	keep	local
+dict:gram:naru-neg:ならな	他の店の迷惑にならないように	다른 가게에게 폐가 되지 않도록	keep	local
+dict:gram:naru-neg:ならな	俺は気にならないが。」	!rule:dict:gram:naru-neg:ならな	keep	local
+dict:gram:naru-neg:ならな	戦の前に不安にならないものなんていない。	!rule:dict:gram:naru-neg:ならな	keep	local
+dict:gram:naru-adj:ならな	倉内のことなんか好きにならない。	!rule:dict:gram:naru-adj:ならな	keep	local
+dict:gram:naru-copula:なって	不安になってきた。	!rule:dict:gram:naru-copula:なって	keep	local
+dict:gram:naru-adj:なって	だんだん好きになってきた。	점점 좋아하게 되었다.	keep	local
+dict:gram:naru-adj:なって	天童の倫理感が少し心配になってきた。	!rule:dict:gram:naru-adj:なって	keep	local
+dict:gram:naru-copula:なって	だんだん好きになってきた。	!rule:dict:gram:naru-copula:なって	keep	local
