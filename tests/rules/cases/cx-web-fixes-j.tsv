@@ -168,3 +168,8 @@ cx:web-fixes-j:225	あっちへ行け、という風に手を振ると友人の�
 cx:web-fixes-j:225	受験を間近に控えた時期なのに、親の期待もなにもかもうっちゃった。	!rule:cx:web-fixes-j:225	keep	rewrites
 cx:web-fixes-j:215	ふ～ッ！だいたい、こんなとこかな……。	!rule:cx:web-fixes-j:215	keep	rewrites
 cx:web-fixes-j:215	「大体、形が見えてきたか」	!rule:cx:web-fixes-j:215	keep	rewrites
+cx:web-fixes-j:230	まったく強大で迷惑極まりない結婚活動、略して婚活、宮廷の女狩りである。	has:결혼 활동, 줄여서 혼활,	fix	rewrites
+cx:web-fixes-j:230	結婚活動、通称婚活。	has:통칭 혼활	fix	rewrites
+cx:web-fixes-j:230	結婚活動を婚活と略す。	has:혼활이라고	fix	rewrites
+cx:web-fixes-j:230	ユキ＠婚活終了	!rule:cx:web-fixes-j:230	keep	rewrites
+cx:web-fixes-j:230	婚活を始めた。	!rule:cx:web-fixes-j:230	keep	rewrites

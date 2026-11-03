@@ -5264,7 +5264,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 姫抱き	공주님 안기	N110			GN							s:5261
 姫抱っこ	공주님 안기	N110			GN							s:5262
 娼館	매춘 업소	N110			GN				llm			s:5263
-婚活	혼활	N110			GN				llm			s:5264
+婚活	결혼 활동	N110			GN				llm			s:5264
 媚薬	미약	N110			GN				llm			s:5265
 嫡出子	친생자	N110			GN							s:5266
 孔子鳥	공자새	N110			GN							s:5267
