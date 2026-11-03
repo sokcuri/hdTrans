@@ -30,3 +30,10 @@ cx:novel-fixes-2:320	出来た人は手を挙げて。	!rule:cx:novel-fixes-2:32
 cx:novel-fixes-2:318	よく出来た人だ。	has:됨됨이가 된 사람이다	fix	rewrites
 cx:novel-fixes-2:318	よく出来た料理だ。	!rule:cx:novel-fixes-2:318	keep	rewrites
 cx:novel-fixes-2:1965	その場所で開けてみた。	!rule:cx:novel-fixes-2:1965	keep	rewrites
+cx:dislike-of:5	母が嫌いな料理	!rule:cx:dislike-of:5	keep	rewrites
+cx:dislike-of:5	田中さんが嫌いな食べ物	!rule:cx:dislike-of:5	keep	rewrites
+cx:dislike-of:5	先生が嫌いな言葉	!rule:cx:dislike-of:5	keep	rewrites
+cx:amari-not:10	あまり無理をすると続かない。	!rule:cx:amari-not:10	keep	rewrites
+cx:novel-fixes-2:318	よく出来た人形だ。	!rule:cx:novel-fixes-2:318	keep	rewrites
+cx:novel-fixes-2:1920	依頼に応じた冒険者が来た。	!rule:cx:novel-fixes-2:1920	keep	rewrites
+cx:novel-fixes-2:1920	状況に応じた判断が必要だ。	has:상황에 따른 판단	fix	rewrites
