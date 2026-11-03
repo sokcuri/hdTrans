@@ -1,0 +1,110 @@
+# 규칙: GRM-3459~3465, LEX-4014~4021
+rule	input	expected	kind	layer
+cx:rhetoric-ja-quote:10	効果が良いんだからいいじゃないと思っているのだが	has:좋지 않냐고 생각	fix	rewrites
+cx:rhetoric-ja-quote:10	可愛いじゃないと思った。	귀엽지 않냐고 생각했다.	fix	rewrites
+cx:rhetoric-ja-quote:10	学生じゃないと入れない。	!rule:cx:rhetoric-ja-quote:10	keep	rewrites
+cx:rhetoric-ja-quote:10	まあ、いいじゃない。	has:좋잖아	keep	rewrites
+cx:ja-nai-start:10	ポジティブにいこう。じゃないと死ぬ、精神的に。	has:그렇지 않으면 죽는다	fix	rewrites
+cx:ja-nai-start:10	「そうだよ、じゃないと下の子は困るから」	has:그래, 그렇지 않으면	fix	rewrites
+cx:ja-nai-start:10	じゃなきゃ死ぬ。	그렇지 않으면 죽는다.	fix	rewrites
+cx:ja-nai-start:10	これじゃないと、人手が足りない	!rule:cx:ja-nai-start:10	keep	rewrites
+cx:ja-nai-start:10	「えへへ、じゃねえよ！」	!rule:cx:ja-nai-start:10	keep	rewrites
+cx:become-not:5	鼻息も荒くならない。	콧김도 거칠어지지 않는다.	fix	rewrites
+cx:become-not:5	私は任務中に眠くならない。	has:졸려지지 않는다	fix	rewrites
+cx:become-not:6	瘴気が濃くならないとの報告もあった。	has:진해지지 않는다는 보고	fix	rewrites
+cx:become-not:7	強くならないと思う。	강해지지 않는다고 생각한다.	fix	rewrites
+cx:become-not:10	あまり遅くならないようにね。	has:늦어지지 않도록	fix	rewrites
+cx:become-not:10	美冬の容体はよくならないんだから	has:좋아지지 않으니까	fix	rewrites
+cx:become-not:10	この季節は、なんか胸が痛くならない？	has:아파지지 않아?	fix	rewrites
+cx:become-not:10	イジメはなくならないだろう。	has:없어지지 않을	keep	rewrites
+cx:become-not:10	そんなことじゃなくならないから	!rule:cx:become-not:10	keep	rewrites
+cx:become-not:10	空が暗くなった。	하늘이 어두워졌다.	keep	rewrites
+cx:become-not:5	そんなことじゃなくならない。	!rule:cx:become-not:5	keep	rewrites
+cx:become-not:6	そんなことじゃなくならないとの話だ。	!rule:cx:become-not:6	keep	rewrites
+cx:become-not:7	そんなことじゃなくならないと思う。	!rule:cx:become-not:7	keep	rewrites
+cx:not-un:30	食べられなくもない。	!rule:cx:not-un:30	keep	rewrites
+cx:not-un:40	書かなくもない。	!rule:cx:not-un:40	keep	rewrites
+cx:not-un:40	できなくはない。	!rule:cx:not-un:40	keep	rewrites
+cx:handed-down:10	王国に古の時代より伝わる儀式。	has:옛 시대로부터 전해지는 의식	fix	rewrites
+cx:handed-down:10	王より伝わった命令。	has:왕으로부터 전해진	fix	rewrites
+cx:handed-down:10	昔より強くなった。	!rule:cx:handed-down:10	keep	rewrites
+cx:copula-tari:10	実は彼が犯人だったりする。	실은 그가 범인이기도 하다.	fix	rewrites
+cx:copula-tari:10	基本のステータス値だったりする。	has:값이기도 하다	fix	rewrites
+cx:copula-tari:10	本を読んだりする。	!rule:cx:copula-tari:10	keep	rewrites
+cx:not-un:10	君達の言い分もわからなくはない	has:모르는 건 아니다	fix	rewrites
+cx:not-un:10	行けなくはない。	갈 수 없는 건 아니다.	fix	rewrites
+cx:not-un:30	食べられなくはない。	먹을 수 없는 건 아니다.	fix	rewrites
+cx:not-un:40	書かなくはない。	쓰지 않는 건 아니다.	fix	rewrites
+cx:not-un:40	あり得なくはない。	있을 수 없는 건 아니다.	fix	rewrites
+cx:not-un:10	嬉しくはない	기쁘지는 않다	keep	rewrites
+cx:not-un:10	道徳の授業など受けたくはない	has:받고 싶지는 않다	keep	rewrites
+cx:not-un:10	言いたいことは分からなくもない。	!rule:cx:not-un:10	keep	rewrites
+cx:noun-dato-if:10	「８だと、まだ中級は作れないんだよなぁ」	has:8이라면,	fix	rewrites
+cx:noun-dato-if:10	「この時間だと、たぶん野菜が安くなってるはずだから」	has:이 시간이라면,	fix	rewrites
+cx:noun-dato-if:10	あれだけ美人だと、見ているだけでも少し癒される。	has:미인이라면,	fix	rewrites
+cx:noun-dato-if:10	「それだと、２０ロールで２０００円しか違わないじゃない」	has:그것이라면,	fix	rewrites
+cx:noun-dato-if:10	生放送だと、誰かが叫んでいるのが聞こえた。	has:생방송이라고,	keep	rewrites
+cx:noun-dato-if:10	今なら大事なことだと、感じます。	has:일이라고,	keep	rewrites
+cx:noun-dato-if:10	なんだと、このハゲ	has:뭐라고,	keep	rewrites
+cx:noun-dato-if:10	傾斜地をだだだだっと、駆けおりる。	!rule:cx:noun-dato-if:10	keep	rewrites
+cx:noun-dato-if:10	我慢ならないのだと、無言のままに叫んでいる。	!rule:cx:noun-dato-if:10	keep	rewrites
+cx:how-to-do:20	どう接していいかわからない	has:어떻게 접해야 할지 모른다	fix	rewrites
+cx:how-to-do:20	見事にスルーされた私をどう扱っていいのか分からなかったんだろうね。	has:어떻게 취급해야 할지 몰랐	fix	rewrites
+cx:how-to-do:20	なんて言っていいのか分からない。	뭐라고 말해야 할지 모른다.	fix	rewrites
+cx:how-to-do:20	どう返事していいのか迷った。	has:어떻게 대답해야 할지 망설였다	fix	rewrites
+cx:how-to-do:20	これ、食べていいのか？	!rule:cx:how-to-do:20	keep	rewrites
+cx:how-to-do:20	入ってもいいか聞いた。	!rule:cx:how-to-do:20	keep	rewrites
+phrase:どうしていいのか	どうしていいのか分からない。	어찌해야 할지 모른다.	fix	builtin-phrase
+phrase:どうしていいのか	「……嬉しくて、どうしていいかわからない」	has:어찌해야 할지 몰라	keep	builtin-phrase
+cx:not-knowing:10	意味が分からず、困った。	의미를 모르고, 곤란했다.	fix	rewrites
+cx:not-knowing:10	二人は一瞬わからず困惑する。	has:순간 모르고	fix	rewrites
+cx:not-knowing:10	所在もわからずにただ護衛しろと指示されましても	has:소재도 모르고	fix	rewrites
+cx:not-knowing:10	涙の意味がわからずにいると、みいちゃんがそっと近づいてきた。	has:모르고 있으니,	fix	rewrites
+cx:not-knowing:10	わけもわからず銃を握らされた日	has:영문도 모른 채	keep	rewrites
+cx:not-knowing:10	何も分からない。	아무것도 모른다.	keep	rewrites
+phrase:分からずとも	理屈は分からずとも、そうなるのでございます。	has:이치는 몰라도	fix	builtin-phrase
+cx:take-along:10	妹を連れて帰った。	여동생을 데리고 돌아갔다.	fix	rewrites
+cx:take-along:10	愛良ちゃんだけを連れて部屋を出て行った。	has:데리고 방을 나갔다	fix	rewrites
+cx:take-along:10	教団を壊滅させた後、狼は赤ん坊を連れて逃げた	has:데리고 도망	fix	rewrites
+cx:take-along:10	食材を買ったので、森下さんを連れて家に帰った。	has:데리고 집에 돌아갔다	fix	rewrites
+cx:take-along:10	医務室に連れて行ってあげて	의무실에 데려가 줘	keep	rewrites
+cx:take-along:10	連れてきて。	데려와.	keep	rewrites
+cx:take-along:10	連れていく気なの？	!rule:cx:take-along:10	keep	rewrites
+cx:take-along:10	食事だと連れられて食堂に向かい	!rule:cx:take-along:10	keep	rewrites
+cx:take-along:10	話が進むに連れて変わっていき	!rule:cx:take-along:10	keep	rewrites
+cx:mimetic-adnominal:445	茶色のふわふわとした髪に	has:푹신푹신한 머리카락	fix	rewrites
+cx:mimetic-adnominal:445	ふわふわと浮かぶ。	둥실둥실 떠오른다.	keep	rewrites
+cx:novel-fixes-2:10	一纏めに括ったぼさぼさ髪に	has:부스스한 머리카락	fix	rewrites
+cx:novel-fixes-2:10	ぼさぼさと伸びた草	!rule:cx:novel-fixes-2:10	keep	rewrites
+dict:w:31019	紛う事なき現実だ。	틀림없는 현실이다.	fix	lookup
+dict:w:31022	紛れもなく王子だった。	틀림없이 왕자였다.	fix	lookup
+dict:w:31022	それは、紛れもなく私自身だから。	has:틀림없이 나 자신	fix	lookup
+dict:w:31023	生産スキルのレベルに応じて作成可能なランクが決まる。	has:레벨에 따라	fix	lookup
+dict:w:31023	現状に応じて仕様変更でもしたんでしょう	has:현 상황에 따라	fix	lookup
+dict:w:31023	依頼に応じる。	의뢰에 응한다.	keep	lookup
+dict:w:31024	確かに衣食住の保障はあれど、それ以外は放置だった。	has:보장은 있지만,	fix	lookup
+dict:w:31026	知識はあれども経験の薄いリーリャには、判断が難しい。	has:지식은 있지만 경험이	fix	lookup
+dict:w:16986	紐で括る。	끈으로 묶는다.	fix	lookup
+dict:w:16986	髪を後ろで括って	has:묶어	fix	lookup
+dict:w:16986	高を括っていた。	얕잡아 보고 있었다.	keep	lookup
+dict:w:16986	首を括った。	목을 매었다.	keep	lookup
+dict:i:7796	しょうがない、腹括って行こう。	has:각오를 다져	fix	lookup
+dict:i:7796	腹を括った。	각오를 다졌다.	keep	lookup
+ending:のよ-past	最初の三日間は、まだ良かったのよ。	has:아직 좋았어.	fix	builtin-ending
+ending:のよ-past	山本提督も私の艦長だったのよ！	has:함장이었어!	fix	builtin-ending
+ending:のよ-past	だから、ちょっとからかってやりたかったのよ。	has:놀려 주고 싶었어.	fix	builtin-ending
+ending:のよ-past	唯一のよすがでしたのよ。	has:연고였어요.	fix	builtin-ending
+ending:のよ-past	楽しかったのよね。	즐거웠지.	fix	builtin-ending
+ending:のよ-past	心配したのよ。	걱정했어.	keep	builtin-ending
+ending:だそう	大体五割り増しだそう。	has:5할증이라고 한다.	fix	builtin-ending
+ending:だそう	学生だそうだ。	학생이라고 한다.	keep	builtin-ending
+pattern:書く所だった	心を囚われかける所だった。	has:가려던 참이었다	fix	builtin-pattern
+pattern:書く所だった	帰る所がない。	has:곳이 없다	keep	builtin-pattern
+conjugation:roptda-past	薬草園はとても興味深かった。	약초원은 무척 흥미로웠다.	fix	conjugation
+conjugation:roptda-past	いじらしかった。	애처로웠다.	fix	conjugation
+conjugation:ssipda	ガムを噛む。	껌을 씹는다.	fix	conjugation
+conjugation:ssipda	肉を噛めば	has:씹으면	fix	conjugation
+conjugation:salmda	肉を煮込むと柔らかくなる。	고기를 삶으면 부드러워진다.	fix	conjugation
+conjugation:salmda	卵をゆでた。	계란을 삶았다.	fix	conjugation
+dict:jisjk:134424	魔力を注ぎながら煮込むとポーションができる。	has:삶으면 포션이 생긴다	fix	lookup
+dict:jisjk:134424	この薬草からＨＰポーションができるんですよ	has:포션이 생기는	keep	lookup

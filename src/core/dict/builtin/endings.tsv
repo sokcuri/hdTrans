@@ -549,6 +549,17 @@
 静かだったのね	조용했구나	end	prio=-1
 学生なのね	학생이구나	end	prio=-1
 学生だったのね	학생이었구나	end	prio=-1
+// のよ ending a sentence after a past adjective or noun: the casual 해체 (良かったのよ 좋았어), and
+// のよね 지; でしたのよ is 요
+高かったのよ	높았어	end	prio=-1
+高くなかったのよ	높지 않았어	end	prio=-1
+静かだったのよ	조용했어	end	prio=-1
+学生だったのよ	학생이었어	end	prio=-1
+高かったのよね	높았지	end	prio=-1
+学生だったのよね	학생이었지	end	prio=-1
+学生でしたのよ	학생이었어요	end	prio=-1
+// だそう cut short at the end of a sentence after a noun: hearsay (五割増しだそう 5할 증가라고 한다)
+学生だそう	학생이라고 한다	end	prio=-1
 // ぜ ending a sentence: the plain declarative after a verb, the casual 해체 after an
 // adjective or a noun
 書いてるぜ	쓰고 있다	end	prio=-1

@@ -16,7 +16,7 @@ dict:passive-double-negative	気づかれたくないわけではない。	들�
 dict:passive-double-negative	気づかれたくなかったわけではない。	들키고 싶지 않았던 것은 아니다.	fix	lookup
 dict:passive-double-negative	気づかれたくないとは言わない。	들키고 싶지 않다고는 말하지 않는다.	fix	lookup
 dict:passive-negative-onset	気づかれたくなくなった。	들키고 싶지 않게 되었다.	fix	lookup
-dict:passive-double-negative	気づかれたくなくはない。	들키고 싶지 않지는 않다.	fix	lookup
+dict:passive-double-negative	気づかれたくなくはない。	들키고 싶지 않은 건 아니다.	fix	lookup
 dict:fatigue-noun	気づかれで休む。	정신적 피로로 쉰다.	keep	lookup
 dict:fatigue-noun	気疲れで休む。	심로로 쉰다.	keep	lookup
 dict:fatigue-noun	きづかれで休む。	심로로 쉰다.	keep	lookup
