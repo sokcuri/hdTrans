@@ -369,6 +369,14 @@ cx:novel-fixes-2:140	LEX-4023	&&3 S+0== "でき" D+0== "가능&AV@" Y+0== "L0"	s
 cx:novel-fixes-2:150	LEX-4023	&&3 S+0== "次第" D+0== "하는 대로" ||3 F+0== "last" S+1== "Lだ" S+1== "Lです"	set-target " 나름"	父との交渉次第 아버지와의 교섭 나름
 cx:novel-fixes-2:160	LEX-4023	&&3 S+0== "に" D+0== "에게" S+1== "Lお会い"	set-target "(을)를"	皆様にお会いする 여러분을 만나다
 cx:novel-fixes-2:170	LEX-4023	&&3 S+0== "聞き間違え" Y+0== "1고" S+1== "Lかと思"	set-ending "5나" set-target@+1 " 하고 생각&AV@"	聞き間違えかと思って 잘못 들었나 하고 생각해
+cx:novel-fixes-2:180	LEX-4024	&&3 S+0== "注" I+0== "~がれ" <9 ||5 S+0== "L視線" S+0== "目" S+0== "L眼差し" S+0== "Lまなざし" S+0== "L注目" S+0== "00。！？「"	set-target "쏠&AA@" set-active	視線が私に注がれた 시선이 나에게 쏠렸다
+cx:novel-fixes-2:190	LEX-4024	&&3 S+0== "程度" S-1== "でもあ" P-2== "1**"	set-target "어느 정도" set-target@-1 "" set-ending@-1 "" append-target@-2 "에서도"	今世でもある程度は 이번 생에서도 어느 정도는
+cx:novel-fixes-2:200	LEX-4024	&&3 S+0== "斜め上" S+1== "の" ||7 S+2== "L解釈" S+2== "L発想" S+2== "L展開" S+2== "L方向" S+2== "L結論" S+2== "L答え" S+2== "L行動"	set-target "엉뚱한" set-target@+1 " "	斜め上の解釈 엉뚱한 해석
+cx:novel-fixes-2:210	LEX-4024	&&3 S+0== "上機嫌" ||6 S-1== "いたって" S-1== "とても" S-1== "すごく" S-1== "非常に" S-1== "実に" S-1== "大変" D+0== "매우 기분이 %B8@"	set-target "기분이 %B8@"	いたって上機嫌に 매우 기분이 좋게
+cx:novel-fixes-2:220	LEX-4024	&&3 S+0== "の際" F-1== "verb" Y-1== "1고"	set-ending@-1 "3" set-target " 때"	飛び降りの際は 뛰어내릴 때는
+cx:novel-fixes-2:230	LEX-4024	&&4 S+0== "よく分か" Y+0== "1지 않아" S+1== "が" S+2== "、"	set-target "잘 &LS@" set-ending "1지만" set-target@+1 ""	よく分からんが、 잘 모르지만,
+cx:novel-fixes-2:235	LEX-4024	&&3 S+0== "よく分か" Y+0== "1지 않아" S+1== "が"	set-target "잘 &LS@" set-ending "1지만" set-target@+1 " "	よく分からんが手伝え 잘 모르지만 도와라
+cx:novel-fixes-2:240	LEX-4024	&&2 S+0== "の" ||2 S-1== "命懸け" S-1== "命賭け"	set-target@-1 "목숨을 건" set-target " "	命懸けの戦い 목숨을 건 싸움
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면

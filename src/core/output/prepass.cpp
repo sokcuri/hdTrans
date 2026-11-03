@@ -526,10 +526,16 @@ bool AttachesToNoun(std::string_view surface, std::string_view korean) {
 }
 
 // Whether a noun's Korean is an adverb, which forms no compound with the noun after it (結局昼
-// 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn) or a word of ko.adverb-noun.
+// 결국 낮, 正直頭 솔직히 머리): a row read not as a bare noun (Nn), also one of several words
+// (血染めの 피로 물든), or a word of ko.adverb-noun.
 bool AdverbKorean(std::string_view korean, std::string_view tags) {
-    if (!HangulWord(korean) || text::RuneCount(korean) < 2) return false;
-    return Contains(tags, "Nn") || dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
+    if (text::RuneCount(korean) < 2) return false;
+    if (Contains(tags, "Nn")) {
+        std::string words(korean);
+        std::erase(words, ' ');
+        return HangulWord(words);
+    }
+    return HangulWord(korean) && dict::InClass(HDTRANS_CLASS("ko.adverb-noun"), korean);
 }
 
 // Whether the item continues a number or a range of numbers written before it (第2回,
