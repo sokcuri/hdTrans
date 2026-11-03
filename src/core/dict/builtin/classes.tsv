@@ -3302,6 +3302,7 @@ noun.contest-over	確執
 noun.contest-over	裁判
 noun.contest-over	訴訟
 noun.contest-over	交渉
+noun.contest-over	外交
 verb.topic-about	話
 verb.topic-about	語
 verb.topic-about	尋ね
@@ -3388,6 +3389,10 @@ noun.issue-over	協定
 noun.issue-over	法律
 noun.issue-over	改革
 noun.issue-over	人事
+noun.issue-over	削減
+noun.issue-over	開発
+noun.issue-over	協力
+noun.issue-over	こと
 noun.kin-address	ママ
 noun.kin-address	パパ
 noun.kin-address	母
