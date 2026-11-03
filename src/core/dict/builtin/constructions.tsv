@@ -414,6 +414,12 @@ cx:novel-fixes-2:520	LEX-4027	&&3 ||2 S+0== "先に" S+0== "先" D+0== "L먼저"
 cx:novel-fixes-2:530	LEX-4027	&&3 S+0== "いかに" D+0== "얼마나" >8 ||3 S+0== "Lとはいえ" S+0== "Lとは言え" S+0== "Lとはいっても" S+0== "00。！？」"	set-target "아무리"	いかにブラックな会社とはいえ 아무리 블랙인 회사라고는 해도
 cx:novel-fixes-2:540	LEX-4027	&&3 S+0== "中" S+1== "には" ||3 F+0== "opens-line" F+0== "after-pause" S-1== "00。」』！？…"	set-target "개중" set-target@+1 "에는"	中にはテレビで見た者もいる 개중에는 텔레비전으로 본 사람도 있다
 cx:novel-fixes-2:560	LEX-4027	&&3 S+0== "と" D+0== "(와)과" S+1== "L笑わば"	set-target "(이)라고"	社畜と笑わば笑え 사축이라고 비웃으려면 비웃어라
+cx:novel-fixes-2:570	LEX-4028	&&5 S+0== "って" D+0== "(은)는" S-1== "」" ||2 S+1== "、" S+1== "L、" F+2== "verb"	set-target "라고"	「…言ったのに！」って、泣いて怒っている 「…말했는데!」라고, 울며 화내고 있다
+cx:novel-fixes-2:580	LEX-4028	&&3 S+0== "L寄せ" S-1== "を" S-2== "眉"	set-target@-2 "미간" set-target "찌푸&AA@"	眉を寄せた 미간을 찌푸렸다
+cx:novel-fixes-2:585	LEX-4028	&&4 S+0== "L寄せ" S-2== "を" S-3== "眉" ||3 S-1== "きつ" S-1== "強" S-1== "ぎゅっと"	set-target@-3 "미간" set-target "찌푸&AA@" set-target@-1 "" set-ending@-1 "" prepend-target "잔뜩 "	眉をきつく寄せた 미간을 잔뜩 찌푸렸다
+cx:novel-fixes-2:586	LEX-4028	&&3 S+0== "L寄せ" S-2== "を" S-3== "眉"	set-target@-3 "미간" set-target "찌푸&AA@"	眉を少し寄せた 미간을 조금 찌푸렸다
+cx:novel-fixes-2:590	LEX-4028	&&3 S+0== "違" D+0== "어긋&A5@" S-1== "とは"	set-target "&EF@"	子どもの手とは違う 아이의 손과는 다르다
+cx:novel-fixes-2:600	LEX-4028	&&2 S+0== "こけ" S-1== "痩せ"	set-target "바싹 여&CH@" set-target@-1 "" set-ending@-1 ""	痩せこけた手 바싹 여윈 손
 //= ka-to-ieba	after QuoteTo 44	A question in か with と before 言えば or 言うと, written in kanji, asks and answers itself: -냐 하면, the same as かというと (未練が無いかと言えば嘘になる 미련이 없는가 하면 거짓말이 된다, 年が近いかと言うと 나이가 가까운가 하면), not -을까 말하면.
 cx:ka-to-ieba:10	GRM-3466	&&5 S+0== "言" D+0== "말&AV@" Y+0== "L2면" Y-1== "3까" D-1== "~$"	set-ending@-1 "4가" set-target "&AV@"	未練が無いかと言えば 미련이 없는가 하면
 cx:ka-to-ieba:20	GRM-3466	&&4 S+0== "言" ||2 D+0== "말&AV@" D+0== "&AV@" Y+0== "L2면" Y-1== "R가 하고"	replace-ending-tail@-1 " 하고" "" set-target "&AV@"	何もなかったかと言えば 아무것도 없었는가 하면
@@ -424,6 +430,9 @@ cx:de-arou-noun:10	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "R
 cx:de-arou-noun:20	GRM-3468	&&5 F+0== "conjugating" Y+0== "3 것이다" U+0== "Rであろう" ||2 S+1== "「" S+1== "『" P+2== "1**"	set-ending "3"	そこにいるであろう「敵」 거기에 있을 「적」
 //= noun-denai-if	after QuoteTo 47	After a noun, でないと with its comma and no verb of saying after it is the condition (이)가 아니면 (会話が出来る人でないと、 대화를 할 수 있는 사람이 아니면,), not the quote 아니라고 (spec GRM-3460).
 cx:noun-denai-if:10	GRM-3460	&&5 S+0== "でな" D+0== "(이)가 아$A3@" ||2 Y+0== "1다고" Y+0== "1다고," U+0== "R、" !1 F+1== "quote-verb"	set-ending "2면,"	会話が出来る人でないと、話も聞いてもらえない 대화를 할 수 있는 사람이 아니면, 이야기도 들어 줄 수 없다
+//= amari-not	after QuoteTo 48	あまり read 너무 with a negative later in its clause (ではない, ない, ません, ず) says not much, 별로 (あまり好きではない 별로 좋아하지 않는다, あまり文明的ではない国 별로 문명적이지 않은 나라), not too much; with no negative, or with a negative wish, request or condition (あまり積もらないといい 너무 쌓이지 않으면 좋겠다, あまり見ないで 너무 보지 마), it stays 너무 (あまり大きい 너무 크다). とても read 무척 before a later 수 없다 or 못하다 is 도저히 (とても寝ていられない 도저히 자고 있을 수 없다).
+cx:amari-not:10	GRM-3469	&&3 S+0== "あまり" D+0== "너무" >6 &&2 ||9 D+0== "R$D7@" D+0== "R$DH@" D+0== "R$FA@" D+0== "R않&AV@" Y+0== "~지 않" Y+0== "~지 못" Y+0== "~않" Y+0== "~없" I+0== "~ない" !1 ||6 Y+0== "~면" Y+0== "~도록" I+0== "~ように" I+0== "~ないで" Y+0== "~지 마" Y+0== "~지 말" S+0== "00。、！？"	set-target "별로"	あまり好きではない 별로 좋아하지 않는다
+cx:amari-not:20	GRM-3469	&&3 S+0== "とても" D+0== "무척" >6 ||5 D+0== "~수 $FA@" Y+0== "~수 없" Y+0== "~지 못" D+0== "~못$AB@" Y+0== "L3 수 없" S+0== "00。、！？"	set-target "도저히"	とても寝ていられない 도저히 잘 수 없다
 //= excuse-me	after Select 153	すみません with ちょっと right before it or right after it (すみません、ちょっと) calls for attention, 실례합니다, and that ちょっと is 잠깐 (ちょっとすみません 잠깐 실례합니다), not 조금 죄송합니다.
 cx:excuse-me:10	LEX-4006	&&2 S+0== "すみません" S-1== "ちょっと"	set-target "실례합니다" set-target@-1 "잠깐"	ちょっとすみません 잠깐 실례합니다
 cx:excuse-me:30	LEX-4006	&&4 S+0== "すみません" S+1== "、" S+2== "ちょっと" ||7 S+3== "Lいい" S+3== "い" S+3== "Lよろし" S+3== "L聞" S+3== "L伺" S+3== "Lお時間" S+3== "Lお尋ね"	set-target "실례합니다"	すみません、ちょっといいですか 실례합니다, 잠깐 괜찮습니까

@@ -2479,7 +2479,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 よりによって今日	하필이면 오늘	A9D0			GN				llm			i:2473
 自分でも	스스로도	A9D0			GN				llm			i:2474
 良ければ	괜찮으면	A9D0			GN				llm			i:2475
-耳にする	듣게 되어	A9D0			GN				llm			i:2476
+耳にす	&J6@	M440			GN			LEX-4028: 耳にする 듣다	llm			i:2476
 大の苦手	아주 질색	N110			GN				llm			i:2477
 身を乗り出	몸을 앞으로 내&LN@	M423		Pn	GN				llm			i:2478
 早ければ早いほど良い	빠르면 빠를수록 좋아요	A9D0			GN				llm			i:2479
