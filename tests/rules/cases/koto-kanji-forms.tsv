@@ -6,7 +6,7 @@ normalize:spelling-variant	知らぬ事とはいえ	has:일이라고	fix	normali
 normalize:spelling-variant	これはどういう事？	has:어떻게 된 일	fix	normalize
 normalize:spelling-variant	お忙しいという事で	has:바쁘다는 것으로	fix	normalize
 normalize:spelling-variant	噂を聞いた事がある	has:들었던 적이	fix	normalize
-normalize:spelling-variant	ちょっとした事を？	has:약간의	fix	normalize
+normalize:spelling-variant	ちょっとした事を？	has:일을?	fix	normalize
 normalize:spelling-variant	ママ　いい事言う！	has:말 한다	fix	normalize
 normalize:spelling-variant	「という事は……」	has:그 말은	fix	normalize
 normalize:spelling-variant	人の命を絶つ事に、	has:끊는 것에	fix	normalize

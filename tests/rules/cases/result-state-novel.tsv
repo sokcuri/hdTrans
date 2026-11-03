@@ -29,7 +29,7 @@ rewrite:result-state	調べきるのに時間が掛かりそうね……≫	다 
 rewrite:result-state	それを調べるのが、お前たちの課題だ。	그것을 조사하는 것이, 너희의 과제다.	keep	rewrites
 rewrite:result-state	「そんな事まで調べてるんですか！？」	「그런 일까지 조사합니까!?」	keep	rewrites
 rewrite:result-state	「ね、とけてなくなっちゃうでしょ？」	「저기, 녹아 없어져버리잖아?」	keep	rewrites
-rewrite:result-state	よくいなくなるイスカに困ってるのと、	잘 없어지는 이스카 곤란해와,	keep	rewrites
+rewrite:result-state	よくいなくなるイスカに困ってるのと、	has:이스카 때문에	keep	rewrites
 rewrite:result-state	「部室がなくなったら困りますしねえ」	「동아리방이 없어지면 곤란하고 응」	keep	rewrites
 rewrite:result-state	あれから自分でも調べまくったんです！	그때부터 스스로도 마구 조사했습니다!	keep	rewrites
 rewrite:result-state	しかもゲブラー部隊がいなくなった今、	게다가 게브라 부대가 없어진 지금,	keep	rewrites
@@ -42,6 +42,6 @@ rewrite:result-state	ダチがひとりいなくなっちまったんだよ	친�
 rewrite:result-state	使うと自分がいなくなってしまうから。	쓰면 자신이 없어져버리니까.	keep	rewrites
 rewrite:result-state	勝てば今日の借りもなくなりますしね」	이기면 오늘의 빚도 없어지고」	keep	rewrites
 rewrite:result-state	取り返しがつかなくなる前に助けてやれ	돌이킬 수 없게 되기 전에 살려 주어라	keep	rewrites
-rewrite:result-state	同じ人間とは思えなくなってきた・・・	같은 인간이라고는 생각되지 않게 되어 왔다···	keep	rewrites
+rewrite:result-state	同じ人間とは思えなくなってきた・・・	같은 인간이라고는 생각되지 않게 되었다···	keep	rewrites
 rewrite:result-state	時々、突然いなくなる人がいるだろう？	가끔, 갑자기 없어지는 사람이 있겠지?	keep	rewrites
 rewrite:result-state	病院出たとこでカケルがいなくなってた	병원 나온 참으로 카케루가 없어졌다	keep	rewrites

@@ -30,7 +30,7 @@ dict:w:32219	真っ直ぐな道。	곧은 길.	keep	lookup
 dict:w:32219	彼は真っ直ぐな性格だ。	has:곧은 성격	keep	lookup
 dict:w:32220	真っすぐ下に。	똑바로 아래에.	fix	lookup
 dict:jisjk:91232	「ついでに、保管場所に困らないようにお前の身体に宿る。	has:보관 장소가 곤란하지 않도록	fix	lookup
-dict:jisjk:91232	まだ若く当時の社会情勢では次の就職に困ることもなかった。	has:취직이 곤란할 것도	fix	lookup
+dict:jisjk:91232	まだ若く当時の社会情勢では次の就職に困ることもなかった。	has:취직이 곤란	fix	lookup
 dict:jisjk:91232	お金に困らない。	has:돈에 쪼들리지	keep	lookup
 sense:唱える	その儚さに目を奪われる者、願いを唱える者、人それぞれだと思う。	has:소원을 비는 사람	fix	senses
 sense:唱える	呪文を唱える。	has:주문을 외운다	keep	senses
