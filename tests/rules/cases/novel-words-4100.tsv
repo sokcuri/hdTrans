@@ -1,0 +1,52 @@
+# 규칙: LEX-4100, LEX-4101, LEX-4102, LEX-4103
+rule	input	expected	kind	layer
+cx:novel-fixes-3:50	「ども。三上悟です。緊張なんてしなくても大丈夫ですよ。」	has:「안녕하세요. 미카미 사토루입니다.	fix	rewrites
+cx:novel-fixes-3:50	「よーっす」	!rule:cx:novel-fixes-3:50	keep	rewrites
+cx:novel-fixes-3:60	田村はたまたま同じ大学でして、会社の研修会で意気投合してね。それ以来の付き合いなんです。	has:그 이후로 알고 지내는 사이입니다	fix	rewrites
+cx:novel-fixes-3:60	お前とは、俺がガキの頃からの付き合いで、以来ずっと一緒だ。	has:무렵부터 알고 지내는 사이로	fix	rewrites
+cx:novel-fixes-3:60	会社の付き合いで飲みに行った。	!rule:cx:novel-fixes-3:60	keep	rewrites
+cx:novel-fixes-3:120	風呂に沈めて、電気流して、データを完全に消去してやってくれ・・・	has:욕조에 가라앉혀	fix	rewrites
+cx:novel-fixes-3:120	風呂に入って寝た。	!rule:cx:novel-fixes-3:120	keep	rewrites
+cx:novel-fixes-3:125	そっと自分の手を持ち上げ目視で確認してみる。	has:육안으로 확인해 본다	fix	rewrites
+cx:novel-fixes-3:125	目視も出来ない、小さな次元の亀裂。	!rule:cx:novel-fixes-3:125	keep	rewrites
+cx:novel-fixes-3:150	まさか、未使用であの世に旅立つ事になるとは・・・	has:저세상으로 여행을 떠나게 되다니	fix	rewrites
+cx:novel-fixes-3:150	うぅ…あの世で三隈に、詫び入れるかなぁ…	has:저세상에서	fix	rewrites
+cx:novel-fixes-3:150	あの世代の人は強い。	!rule:cx:novel-fixes-3:150	keep	rewrites
+cx:novel-fixes-3:155	まさか、未使用であの世に旅立つ事になるとは・・・	has:저세상으로	fix	rewrites
+cx:novel-fixes-3:155	あの世に未練はない。	!rule:cx:novel-fixes-3:155	keep	rewrites
+cx:novel-fixes-3:170	笑えないよ、こっちわ！	has:웃을 수 없어, 이쪽은!	fix	rewrites
+cx:novel-fixes-3:170	こっちは寒い。	!rule:cx:novel-fixes-3:170	keep	rewrites
+cx:novel-fixes-3:190	「ちっ・・・、たく。全部許してやるから」	has:쳇···, 참나.	fix	rewrites
+cx:novel-fixes-3:190	「たく。何やってんだ」	!rule:cx:novel-fixes-3:190	keep	rewrites
+cx:novel-fixes-3:200	《確認しました。刺突耐性獲得・・・成功しました。続けて、物理攻撃耐性獲得・・・成功しました》	has:이어서, 물리 공격 내성 획득	fix	rewrites
+cx:novel-fixes-3:200	彼は話を続けて、笑った。	!rule:cx:novel-fixes-3:200	keep	rewrites
+cx:novel-fixes-3:210	なんだこれ？熱すぎる・・・勘弁して欲しい。	has:봐줬으면 한다	fix	rewrites
+cx:novel-fixes-3:210	でも、正直言って、そんな会を作るのは勘弁してほしい……	has:봐줬으면 해	fix	rewrites
+cx:novel-fixes-3:210	勘弁してくれ。	!rule:cx:novel-fixes-3:210	keep	rewrites
+sense:作成	《確認しました。血液が不要な身体を作成します・・・成功しました》	has:몸을 생성합니다	fix	senses
+sense:作成	その身体を作成する。	has:그 몸을 생성한다	fix	senses
+sense:作成	報告書を作成する。	보고서를 작성한다.	keep	senses
+sense:爽やか	笑顔で俺に向かって歩いて来る、爽やかな青年。	has:산뜻한 청년	fix	senses
+sense:爽やか	小太刀もまた爽やかな笑顔になった。	has:산뜻한 웃는 얼굴	fix	senses
+sense:爽やか	爽やかな朝の空気を切り裂きながら走る。	has:상쾌한 아침	keep	senses
+dict:w:31100	その時、俺の死にかけの脳細胞が、閃のように重要な事柄を思い出す。	has:섬광처럼	fix	defaults
+dict:w:31101	目視も出来ない、小さな次元の亀裂。	has:육안 확인도 할 수 없는	fix	defaults
+dict:w:31101	２等級くらい低い星でも目視が可能だ。	has:육안 확인이 가능하다	fix	defaults
+cx:novel-fixes-3:127	真っ青な顔で泣きじゃくりそうな顔して、	has:새파랗게 질린 얼굴로	fix	rewrites
+cx:novel-fixes-3:127	真っ青な空が広がる。	!rule:cx:novel-fixes-3:127	keep	rewrites
+dict:jisjk:125269	会社の研修会で意気投合してね。	has:의기투합	fix	defaults
+dict:jisjk:155067	沢渡さんは突然の事態に茫然自失になっているようだが、	has:망연자실	fix	defaults
+dict:jisjk:61369	苦笑いでも、泣き顔よかマシだ。	has:쓴웃음이라도	fix	defaults
+dict:jisjk:61369	玉藻が苦笑いを浮かべる。	has:쓴웃음을 짓는다	fix	defaults
+dict:jisjk:103266	大学を出て一応大手と言われるゼネコンに入社し、	has:종합건설회사에 입사해	fix	defaults
+dict:jisjk:13809	沢渡さんの様子を見ようとしたが、視界が霞んでよく見えない。	has:시야가 흐려져 잘 안 보인다	fix	defaults
+dict:jisjk:13809	霞む遠景から軽く判断しただけでも	has:흐려지는 원경으로부터	fix	defaults
+dict:jisjk:41355	田村が沢渡さんの肩を叩きながらとりなしてる。	has:무마하고 있다	fix	lookup
+dict:jisjk:41355	彼のとりなしで助かった。	그의 중재로 살았다.	keep	lookup
+dict:jisjk:116378	仕事帰りの待ち合わせ場所の交差点脇で、柱にもたれて	has:교차로옆에서,	fix	local
+dict:jisjk:116378	道の脇で休んだ。	길의 옆에서 쉬었다.	fix	local
+dict:jisjk:105444	家の前で泣いていた。	집 앞에서 울고 있었다.	fix	local
+dict:w:31102	しかし、痛いのはかなわんな・・・。	has:아픈 것은 못 견디겠네	fix	lookup
+dict:w:31102	データを作るのはかまわないけど	has:만드는 것은 상관없	keep	lookup
+dict:w:31102	ご注文は？おいしいのやすいのはやいの	has:싼 것 빨라	keep	lookup
+dict:w:31102	高いのはかまわない。	높은 것은 상관없다.	fix	lookup
