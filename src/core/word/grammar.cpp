@@ -2983,7 +2983,8 @@ void DiscourseTo(Flusher& f) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->DirectSurface() != "と" || it->prev == nullptr) continue;
         const Entry* e = it->DirectEntry(it->DirectIndex());
         if (e == nullptr || !e->dst.starts_with("2면")) continue;
-        const std::string_view word = LastLemmaWord(output::Lemma(it->EntryText(it->selected), f.families));
+        const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+        const std::string_view word = LastLemmaWord(lemma);
         const bool saying = word == "말하다" || word == "말씀드리다";
         const bool judging = word == "판단하다";
         const Item* p = it->prev;
