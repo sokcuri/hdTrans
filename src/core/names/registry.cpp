@@ -955,6 +955,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
             SplitReading(n.parts[0], n.parts[1], kana);
         }
     }
+    scoresBuilt_++;
     return scores_;
 }
 
@@ -1241,14 +1242,18 @@ std::string Registry::Key() {
 }
 
 std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
-    const std::map<std::string, Name> acc = Accepted();
+    const std::map<std::string, Name>& acc = Accepted();
     std::vector<Occurrence> out;
     if (acc.empty()) return out;
-    std::map<char32_t, std::vector<std::string>> byFirst;
-    for (const auto& [t, n] : acc) byFirst[RuneAt(t, 0).cp].push_back(t);
-    for (auto& [c, list] : byFirst) {
-        std::stable_sort(list.begin(), list.end(), [](const std::string& a, const std::string& b) { return a.size() > b.size(); });
+    if (byFirstBuilt_ != scoresBuilt_) {
+        byFirst_.clear();
+        for (const auto& [t, n] : acc) byFirst_[RuneAt(t, 0).cp].push_back(t);
+        for (auto& [c, list] : byFirst_) {
+            std::stable_sort(list.begin(), list.end(), [](const std::string& a, const std::string& b) { return a.size() > b.size(); });
+        }
+        byFirstBuilt_ = scoresBuilt_;
     }
+    const std::map<char32_t, std::vector<std::string>>& byFirst = byFirst_;
     const std::vector<Run> runs = RunsOf(line);
     auto okRight = [&](std::string_view p) {
         if (p.empty() || acc.count(std::string(p)) > 0) return true;
