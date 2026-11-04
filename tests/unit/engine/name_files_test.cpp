@@ -77,7 +77,7 @@ HD_TEST(engine_name_files) {
     // The list of the session replaces a name of the files whole and keeps the others.
     HD_CHECK(session.SetNames("衣更\t키사라\tfamily"));
     HD_CHECK_EQ(session.Translate("衣更は今日も元気だ。"), std::string("키사라는 오늘도 건강하다."));
-    HD_CHECK_EQ(session.Translate("若葉は笑った。"), std::string("와카바는 웃었다."));
+    HD_CHECK_EQ(session.Translate("若葉は来た。"), std::string("와카바는 왔다."));
     std::vector<std::string> errors;
     HD_CHECK(!session.SetNames("睦月\n若葉\t와카바", &errors));
     HD_REQUIRE(errors.size() == 1);
@@ -90,7 +90,7 @@ HD_TEST(engine_name_files) {
     HD_CHECK(internal::CheckUserFile(engine));
     HD_CHECK(engine.UserFileError().empty());
     HD_CHECK_EQ(session.Translate("衣更は今日も元気だ。"), std::string("키사라는 오늘도 건강하다."));
-    HD_CHECK_EQ(session.Translate("若葉は笑った。"), std::string("와카바는 웃었다."));
+    HD_CHECK_EQ(session.Translate("若葉は来た。"), std::string("와카바는 왔다."));
 
     // A removed file takes its names away.
     std::error_code ec;
@@ -98,7 +98,7 @@ HD_TEST(engine_name_files) {
     HD_CHECK(internal::CheckUserFile(engine));
     HD_CHECK_EQ(session.Translate("衣更は今日も元気だ。"), std::string("의갱은 오늘도 건강하다."));
     HD_CHECK(session.SetNames(""));
-    HD_CHECK_EQ(session.Translate("若葉は笑った。"), std::string("새잎은 웃었다."));
+    HD_CHECK_EQ(session.Translate("若葉は来た。"), std::string("새잎은 왔다."));
 
     // A later file replaces a name of an earlier one.
     HD_REQUIRE(Write(temp.path / "names-a.txt", "衣更\t이사라\n"));

@@ -5713,7 +5713,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 浴衣姿	유카타 차림	N110			GN							names.632080
 浴衣編	유카타 편	N110			GN							names.632081
 浴衣美人	유카타 미인	N110			GN						ゆかたびじん	names.632082
-海	하이	N130	QPNVHn	Wb	GN						はい	names.632083
 海	카이	N130	QPNVHn	Wb	GN							names.632084
 海 まりん	우미 마린	N130	QPNVHn		GN						うみ まりん	names.632085
 海 まりん	아쿠아 마린	N130	QPNVHn		GN						あくあ まりん	names.632086
@@ -17449,7 +17448,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 片想いfinally	짝사랑 finally	N130	QWK		GN						かたおもいふぁいなりー	names.644008
 片想いサンバ	짝사랑 삼바	N130	QWK		GN							names.644009
 片手かめはめ波	한손 에네르기파	N130	QPNVHn		GN							names.644011
-片方	가타가타	N130	QPNVHn	Wa	GN							names.644012
 片方善治	가타가타 젠지	N130	QPNVHn		GN							names.644013
 片木	가타기	N130	QPNVHn	Wa	GN							names.644014
 片木右子	카타기 유코	N130	QPNVHn		GN						かたぎゆうこ	names.644015

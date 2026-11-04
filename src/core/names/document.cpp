@@ -272,8 +272,8 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         maleKin = maleKin || speech.maleKin;
         quoted = quoted || speech.quoted;
         for (const names::NameCue& c : CuesOf(*doc, line)) {
-            if (c.strong) doc->cued.insert(c.key);
-            if (c.recurring) recurring[c.key]++;
+            if (c.strong || c.person) doc->cued.insert(c.key);
+            if (c.recurring || c.acted) recurring[c.key]++;
         }
     }
     std::vector<const names::HistoricalLine*> historical;

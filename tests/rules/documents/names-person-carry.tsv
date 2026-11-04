@@ -1,0 +1,7 @@
+# 규칙: LEX-4820
+rule	input	expected	kind	layer
+names:person-carry	皐月さんが来た。\n今日こそは、皐月の方から言わせてやる！	사츠키 씨가 왔다.\n오늘이야말로는, 사츠키로부터 말하게 해 준다!	fix	fixed
+names:person-carry	玉藻ちゃんは笑った。\n玉藻の指が、俺の髪を弄んでいる。\nそれは玉藻だった。	타마모짱은 웃었다.\n타마모의 손가락이, 내 머리카락을 희롱하고 있다.\n그것은 타마모였다.	fix	fixed
+names:person-carry	玉藻がはにかむ。\n玉藻が微笑む。\nそれは玉藻だった。	타마모가 수줍어한다.\n타마모가 미소 짓는다.\n그것은 타마모였다.	fix	fixed
+names:person-carry	玉藻がはにかむ。\nそれは玉藻だった。	타마모가 수줍어한다.\n그것은 말이었다.	keep	fixed
+names:person-carry	桃ちゃんが来た。\n桃を食べた。	모모짱이 왔다.\n복숭아를 먹었다.	keep	fixed
