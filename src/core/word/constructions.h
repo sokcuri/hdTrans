@@ -145,7 +145,11 @@ struct ConstructionTable {
 // Parses the lines of a construction table against the names of the text passes, in order.
 // Errors are collected; the rows that parse still load.
 ConstructionTable ParseConstructions(std::span<const std::string_view> lines, std::span<const std::string_view> passes);
-// The parsed builtin constructions.tsv.
+// Puts the operands of each && and || cheapest first, in the guards and in the rows that place no
+// action by @scan: the atoms read nothing that changes while the rows of a family are tried on a
+// word, so the order changes no value.
+void OrderOperands(ConstructionTable& t);
+// The parsed builtin constructions.tsv, its operands ordered.
 const ConstructionTable& BuiltinConstructions();
 // RunConstructions over table t instead of the builtin one.
 void RunConstructions(Flusher& f, const ConstructionTable& t, std::size_t pass, bool (*skip)(std::string_view name) = nullptr);

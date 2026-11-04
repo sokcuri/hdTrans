@@ -1007,6 +1007,46 @@ void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
 
 namespace {
 
+// About how many atoms the condition at node i tries, an unbounded scan counted as 16 words.
+uint64_t Cost(const ConstructionTable& t, uint32_t i) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) return 1;
+    if (n.kind == rules::BodyKind::Not) return Cost(t, i + 1);
+    if (n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight) {
+        return (n.count == 0 ? 16 : n.count) * (Cost(t, i + 1) + Cost(t, t.nodes[i + 1].end));
+    }
+    uint64_t cost = 0;
+    for (uint32_t k = 0, child = i + 1; k < n.count; k++, child = t.nodes[child].end) cost += Cost(t, child);
+    return cost;
+}
+
+// Appends the condition at node i to out, placed from node base, with the operands of each && and
+// || cheapest first.
+void Reordered(const ConstructionTable& t, uint32_t i, uint32_t base, std::vector<CxNode>& out) {
+    const std::size_t at = out.size();
+    out.push_back(t.nodes[i]);
+    const CxNode& n = t.nodes[i];
+    if (!n.atom) {
+        std::vector<uint32_t> operands;
+        const uint32_t count = n.kind == rules::BodyKind::Not ? 1
+                               : n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight ? 2
+                                                                                                          : n.count;
+        for (uint32_t k = 0, child = i + 1; k < count; k++, child = t.nodes[child].end) operands.push_back(child);
+        if (n.kind == rules::BodyKind::Or || n.kind == rules::BodyKind::And) {
+            std::ranges::stable_sort(operands, {}, [&](uint32_t child) { return Cost(t, child); });
+        }
+        for (const uint32_t child : operands) Reordered(t, child, base, out);
+    }
+    out[at].end = base + static_cast<uint32_t>(out.size());
+}
+
+// Reorders the condition at node root in place (Reordered).
+void Reorder(ConstructionTable& t, uint32_t root) {
+    std::vector<CxNode> out;
+    Reordered(t, root, root, out);
+    std::ranges::copy(out, t.nodes.begin() + root);
+}
+
 // A condition with each token :NAME replaced by the condition named so (a //: line above it).
 bool ExpandNamed(std::string_view text, const std::vector<std::pair<std::string, std::string>>& named, std::string& out,
                  std::string& error) {
@@ -1225,10 +1265,23 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
     return t;
 }
 
+void OrderOperands(ConstructionTable& t) {
+    // The first scan of a row whose actions are placed by it is found in the written order.
+    for (const CxRow& r : t.rows) {
+        if (!r.scans) Reorder(t, r.root);
+    }
+    for (const CxFamily& c : t.families) {
+        if (c.guard != kNoGuard) Reorder(t, c.guard);
+    }
+}
+
 const ConstructionTable& BuiltinConstructions() {
     static const ConstructionTable table = [] {
         for (const dict::internal::BuiltinTable& b : dict::internal::BuiltinTables()) {
-            if (b.name == "constructions.tsv") return ParseConstructions(b.lines, TextPassNames());
+            if (b.name != "constructions.tsv") continue;
+            ConstructionTable t = ParseConstructions(b.lines, TextPassNames());
+            OrderOperands(t);
+            return t;
         }
         return ConstructionTable{};
     }();
