@@ -6,7 +6,7 @@ normalize:kana-iteration	あゝ、無情	아, 무정	fix	normalize
 normalize:kanji-iteration	隆々と反り返った	융륭하게 젖혀져 돌아갔다	fix	normalize
 lookup:kanji-iteration	易々と越えた	손쉽게 넘었다	fix	lookup
 lookup:kanji-iteration	脈々と流れる	면면히 흐른다	fix	lookup
-lookup:kanji-iteration	一人だと清々する	한 사람이라고 후련한다	fix	lookup
+lookup:kanji-iteration	一人だと清々する	혼자라고 후련한다	fix	lookup
 lookup:kanji-iteration	精々頑張れ	기껏해야 힘내라	fix	lookup
 local:iteration-plural	これは々です	이것은 々입니다	fix	local
 local:iteration-plural	「々」という記号	「々」라는 기호	fix	local

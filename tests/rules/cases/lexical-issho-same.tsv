@@ -12,7 +12,7 @@ cx:issho-same:20	まぁ、しんどいのはドコ行っても一緒やろ。	ha
 cx:issho-same:20	どうせどの料理が美味しいか分からないならば、どれを選んでも一緒。	has:선택해도 마찬가지.	fix	rewrites
 cx:issho-same:20	年頃の子はだいたいどこも一緒よ	has:어디도 마찬가지	fix	rewrites
 cx:issho-same:30	どうせ結果は一緒だ。	어차피 결과는 마찬가지다.	fix	rewrites
-cx:issho-same:30	二人の気持ちは一緒だった。	has:기분은 마찬가지였다	fix	rewrites
+cx:issho-same:30	二人の気持ちは一緒だった。	has:마음은 마찬가지였다	fix	rewrites
 cx:issho-same:10	「先生と一緒にいたい」	has:함께 있고 싶어	keep	rewrites
 cx:issho-same:10	彼と一緒だ。	그와 함께다.	keep	rewrites
 cx:issho-same:20	ただ、友人が作れても一緒のクラスになれるか分からない。	lacks:마찬가지	keep	rewrites

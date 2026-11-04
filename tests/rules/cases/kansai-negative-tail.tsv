@@ -7,7 +7,7 @@ normalize:kansai-negative-tail	……え？ うちの重巡？ ……知らん�
 sound:kansai-negative-tail	何？ 疫病神だと？ 知らんな。	뭐? 역귀라고? 모르네.	fix	sound
 sound:kansai-negative-tail	こいつは舐めても治らんな…。	이 녀석은 핥아도 낫지 않네….	fix	sound
 normalize:kansai-negative-tail	マスコミの行動もわからんでもない。	매스컴 행동도 모르지는 않다.	fix	normalize
-sound:kansai-negative-tail	≫382らの気持ちも分からんでもない。	≫382등의 기분도 모르지는 않다.	fix	sound
+sound:kansai-negative-tail	≫382らの気持ちも分からんでもない。	≫382등의 마음도 모르지는 않다.	fix	sound
 sound:kansai-negative-tail	いや、聞かんでおこ……。	has:묻지 말고	fix	sound
 sound:kansai-negative-tail	ミドリさん知らんでカキコすんな	has:모르고 방명록	fix	sound
 sound:kansai-negative-tail	そうなりゃ役人に金を払わんでもいい仕事ができる	has:지불하지 않아도	fix	sound

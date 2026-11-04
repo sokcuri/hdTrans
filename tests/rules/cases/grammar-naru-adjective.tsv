@@ -44,7 +44,7 @@ dict:gram:naru-neg:ならな	心配にならないのか？	걱정이 되지 않
 dict:gram:naru-neg:ならな	倉内のことなんか好きにならない。	쿠라우치 같은 건 좋아하게 되지 않는다.	fix	local
 dict:gram:naru-neg:ならな	「……俺はお前以外好きにならないよ」	「……나는 너 이외 좋아하게 되지 않아」	fix	local
 dict:gram:naru-neg:ならな	こんな素敵な女性を好きにならない訳が無いだろう。	이런 멋진 여성을 좋아하게 되지 않을 리가 없을 것이다.	fix	local
-dict:gram:naru-neg:ならな	「私みたいにならないように、今しっかりやって」	「나같이 되지 않도록, 지금 확실히 해」	fix	local
+dict:gram:naru-neg:ならな	「私みたいにならないように、今しっかりやって」	「나같이 되지 않도록, 지금 제대로 해」	fix	local
 dict:gram:naru-copula:なって	そんなこと言われたら心配になってきたわ。	그런 말 들었더니 걱정이 됐어.	fix	local
 dict:gram:naru-copula:なって	天童の倫理感が少し心配になってきた。	덴도의 윤리감이 조금 걱정이 되었다.	fix	local
 dict:gram:naru-copula:なって	心配になってきた。	걱정이 되었다.	fix	local
