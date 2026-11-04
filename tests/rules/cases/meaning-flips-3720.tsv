@@ -1,4 +1,4 @@
-# 규칙: GRM-3720, GRM-3721, GRM-3722, GRM-3723, GRM-3724, LEX-4600
+# 규칙: GRM-3720, GRM-3721, GRM-3722, GRM-3723, GRM-3724, LEX-4600, LEX-4602
 rule	input	expected	kind	layer
 dict:jisjk:341889	俺はその言葉の意味を、まだ理解していなかった。	나는 그 말의 의미를, 아직 이해하고 있지 않았다.	fix	local
 dict:jisjk:341889	その言葉の意味が分からない。	그 말의 의미를 모른다.	fix	local
@@ -124,3 +124,14 @@ cx:meaning-flips-1:70	本物じゃなくてがっかりした	!rule:cx:meaning-f
 cx:meaning-flips-1:70	本物じゃなくて悔しい	!rule:cx:meaning-flips-1:70	keep	rewrites
 cx:meaning-flips-1:70	本物じゃなくて悲しい	!rule:cx:meaning-flips-1:70	keep	rewrites
 cx:meaning-flips-1:70	私じゃなくてほっとした	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:nado-dismissive:40	あたし 卓球なんか大っ嫌い！	나 탁구 같은 건 너무 싫어!	fix	rewrites
+cx:nado-dismissive:40	あたし卓球なんか大嫌い！	나 탁구 같은 건 너무 싫어!	fix	rewrites
+cx:nado-dismissive:40	卓球なんか嫌い	탁구 같은 건 싫다	fix	rewrites
+cx:nado-dismissive:40	ピーマンなんか大嫌い。	피망 같은 건 너무 싫다.	fix	rewrites
+cx:nado-dismissive:40	勉強なんか嫌いだ	공부 같은 건 싫다	keep	rewrites
+cx:nado-dismissive:40	あんたなんか 大っ嫌いよ	너 같은 건 정말 싫어	keep	rewrites
+cx:nado-dismissive:40	卓球なんか嫌いじゃない	!rule:cx:nado-dismissive:40	keep	rewrites
+dict:jisjk:341464	なんか嫌い	왠지 싫다	keep	local
+dict:jisjk:341464	なんか変だ	왠지 이상하다	keep	local
+dict:jisjk:341464	今日はなんか眠い	오늘은 왠지 졸리다	keep	local
+dict:jisjk:341464	この部屋なんか寒い	이 방 왠지 춥다	keep	local
