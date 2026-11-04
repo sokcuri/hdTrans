@@ -1,5 +1,6 @@
 #include "core/word/constructions.h"
 
+#include <algorithm>
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -212,8 +213,14 @@ HD_TEST(constructions_surface_index) {
     // A prefix, a negated atom and a || with an operand that needs no surface give no key.
     HD_CHECK(c.open == (std::vector<int>{1, 3}));
     HD_REQUIRE(c.bySurface.size() == 2);
-    HD_CHECK(c.bySurface.find(std::string_view("に"))->second == (std::vector<int>{0, 1, 2, 3}));
-    HD_CHECK(c.bySurface.find(std::string_view("には"))->second == (std::vector<int>{0, 1, 3}));
+    const auto rows = [&](std::string_view surface) {
+        const auto number = t.surfaces.find(surface);
+        if (number == t.surfaces.end()) return std::vector<int>();
+        const auto found = std::ranges::find(c.bySurface, number->second, [](const auto& e) { return e.first; });
+        return found != c.bySurface.end() ? found->second : std::vector<int>();
+    };
+    HD_CHECK(rows("に") == (std::vector<int>{0, 1, 2, 3}));
+    HD_CHECK(rows("には") == (std::vector<int>{0, 1, 3}));
 }
 
 HD_TEST(constructions_parse_map_errors) {

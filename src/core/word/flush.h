@@ -5,8 +5,10 @@
 // of each item's candidate and ending by the rules, and the passes that fix class-3
 // words, negatives and terminal forms.
 #include <cstddef>
+#include <cstdint>
 #include <span>
 #include <string_view>
+#include <vector>
 
 #include "core/output/families.h"
 #include "core/rules/rules.h"
@@ -31,6 +33,15 @@ struct Flusher {
         Attachment attachment;
         std::vector<const Item*> items;  // the chain's items, in the attachment's order
     } attached{};
+    // The scratch of the construction families (constructions.cpp): the number of each word's surface
+    // among the table's surfaces, and the values of the atoms on the word being tried, by slot; a
+    // slot holds stamp << 1 | value, for the stamp of the try it was found in.
+    struct Constructions {
+        std::vector<uint32_t> surfaces;
+        std::vector<uint32_t> slots;
+        uint32_t stamp = 0;
+        const Item* word = nullptr;
+    } constructions{};
 };
 
 // Runs the sentence passes over w.chain (the chain of one sentence after the token loop).

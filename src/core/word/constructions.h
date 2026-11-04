@@ -10,7 +10,6 @@
 #include <string>
 #include <string_view>
 #include <unordered_map>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -52,6 +51,7 @@ struct CxAtom {
     std::string value;
     const dict::internal::WordClass* set = nullptr;
     CxFeature feature = nullptr;
+    uint32_t slot = 0;  // atoms that compare alike share a slot, the place of their value on a word
 };
 
 struct CxNode {
@@ -107,14 +107,16 @@ struct CxFamily {
     // The root of its guard in nodes, kNoGuard for none: a word on which the guard is false tries
     // none of the family's rows.
     uint32_t guard = kNoGuard;
-    // The surfaces the guard needs the word to have, when it names them (S+0== "もら", S+0== @set):
-    // a word with another surface skips the family without trying the guard.
-    std::unordered_set<std::string, CxSurfaceHash, std::equal_to<>> guardSurfaces;
+    // The surfaces the guard needs the word to have, when it names them (S+0== "もら", S+0== @set),
+    // sorted, into ConstructionTable::surfaces: a word with another surface skips the family without
+    // trying the guard.
+    std::vector<uint32_t> guardSurfaces;
     bool guardKeyed = false;
-    // The rows worth trying on a word, by PRIO. A row whose condition needs the word to be one of a
-    // few surfaces (S+0== "で", S+0== @set) is listed under each of them; the other rows (open) are
-    // listed under every surface. A word whose surface is no key tries the open rows only.
-    std::unordered_map<std::string, std::vector<int>, CxSurfaceHash, std::equal_to<>> bySurface;
+    // The rows worth trying on a word, by PRIO, sorted by surface (into ConstructionTable::surfaces).
+    // A row whose condition needs the word to be one of a few surfaces (S+0== "で", S+0== @set) is
+    // listed under each of them; the other rows (open) are listed under every surface. A word whose
+    // surface is no key tries the open rows only.
+    std::vector<std::pair<uint32_t, std::vector<int>>> bySurface;
     std::vector<int> open;
     bool indexed = false;  // some row has surfaces
     // The atoms every row needs to hold (itself, or an operand of its && or &&n at any depth), into
@@ -133,6 +135,9 @@ struct ConstructionTable {
     std::vector<CxNode> nodes;
     std::vector<CxAtom> atoms;
     std::vector<CxMap> maps;
+    // The surfaces the families are indexed by, numbered.
+    std::unordered_map<std::string, uint32_t, CxSurfaceHash, std::equal_to<>> surfaces;
+    uint32_t slots = 0;  // of the atoms
     std::vector<std::vector<int>> afterPass;  // the families after each pass, by stage
     std::vector<CxError> errors;
 };
