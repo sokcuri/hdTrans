@@ -79,7 +79,7 @@
 高いけんのう	높으니까 말이야	end	prio=-1
 書かぬ	쓰지 않다	end	stative prio=-1
 書かぬ	쓰지 않는다	end	prio=-1
-高いでござる	높소	end	prio=-1
+高いでござる	높으오	end	prio=-1
 // Speech styles. A lady (ですわ, ですの, でしてよ, ですこと, かしら): 〜이에요, 〜랍니다, 〜지요,
 // 〜일까요.
 静かですわよ	조용해요	end	prio=-1

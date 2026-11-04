@@ -1,0 +1,326 @@
+# 규칙: REG-6, REG-24, GRM-3206, LAY-5, GRM-3800, GRM-3801, GRM-3802, GRM-3803, GRM-3804, GRM-3805, GRM-3806, LEX-23, LEX-4680, LEX-4681, LEX-4682, LEX-4683
+rule	input	expected	kind	layer
+cx:archaic-speech:10	では 何をそんなに おびえておる？	그럼 무엇을 그렇게 무서워하고 있느냐?	fix	rewrites
+cx:archaic-speech:10	何をしておる！ 早く来んか！	무엇을 하고 있느냐! 빨리 오지 못해!	fix	rewrites
+cx:archaic-speech:10	ところで 卿は知っておるか？	그런데 경은 알고 있느냐?	fix	rewrites
+cx:archaic-speech:10	誰の言葉か知っておるか？	누구의 말인가 알고 있느냐?	fix	rewrites
+cx:archaic-speech:10	「わらわを誰だと思っておる」	「이 몸을 누구라고 생각하느냐」	fix	rewrites
+cx:archaic-speech:10	こやつ どうなっておる？	이자식 어떻게 되어 있느냐?	fix	rewrites
+cx:archaic-speech:10	衛兵は何をしておった？	위병은 무엇을 하고 있었느냐?	fix	rewrites
+cx:archaic-speech:10	どこに行っておった！	어디에 가고 있었느냐!	fix	rewrites
+cx:archaic-speech:10	例の物は？ できておるか？	그 물건은? 되어 있느냐?	fix	rewrites
+cx:archaic-speech:10	いつまで遊んでおる？	언제까지 놀고 있느냐?	fix	rewrites
+cx:archaic-speech:10	それだけの力 どこに秘めておった？	그것만의 힘어디에 간직하고 있었느냐?	fix	rewrites
+cx:archaic-speech:10	スー坊は ガー坊をどう思っておる？	스방은 가방을 어떻게 생각하느냐?	fix	rewrites
+cx:archaic-speech:10	分かっておる！ 主砲の準備を！	알고 있다! 주포 준비를!	keep	rewrites
+cx:archaic-speech:10	実をいうとな 早い話 みんな 生きておる！	사실을 말하자면 빠른 이야기 모두 살아 있다!	keep	rewrites
+cx:archaic-speech:10	我は そう信じておる。	나는 그렇게 믿고 있다.	keep	rewrites
+cx:archaic-speech:10	「何でも知っておる」	「뭐든 알고 있다」	keep	rewrites
+cx:archaic-speech:10	もう２日も 入っておらぬ！	벌써 2일이나 접어들어 있지 않다!	keep	rewrites
+cx:archaic-speech:10	ずーっと見ておったからのう	계속 보고 있었으니까 말이야	keep	rewrites
+cx:archaic-speech:10	何を言うておるのじゃ	무슨 말을 하는 게야	keep	rewrites
+cx:archaic-speech:20	《どこじゃ？ わしとやらは どこにおる？》	《어디냐? 나등은 어디에 있느냐?》	fix	rewrites
+cx:archaic-speech:20	しかし なぜわらわは ここにおる？	하지만 왜 이 몸은 여기에 있느냐?	fix	rewrites
+cx:archaic-speech:20	わしの剣はどこにおる？	나의 검은 어디에 있느냐?	fix	rewrites
+cx:archaic-speech:20	どこや どこにおる？ 御堂筋	어디나 어디에 있어? 미도우스지	keep	rewrites
+cx:archaic-speech:20	キジは どこにおる？	꿩은 어디에 있어?	keep	rewrites
+cx:archaic-speech:20	わしは ここだ ここにおる！	나는 여기다 여기에 있다!	keep	rewrites
+cx:archaic-speech:30	「拙者、これにて失礼いたす」	「나, 이만 실례하겠소」	fix	rewrites
+cx:archaic-speech:32	平原よりの加勢 劉備玄徳 義によって助太刀いたす	평원에서의 가세 유비현덕도리에 의해 조력하겠소	fix	rewrites
+cx:archaic-speech:32	犬よ これよりわしは出陣いたす	개야 지금부터 나는 출진하겠소	fix	rewrites
+cx:archaic-speech:32	では！ 鬼ヶ島討ち入りの作戦を 説明いたす！	그럼! 오니가시마 결전의 작전을 설명하겠소!	fix	rewrites
+cx:archaic-speech:32	お断りいたす	거절하겠소	fix	rewrites
+cx:archaic-speech:28	いかがいたす？	어찌하겠느냐?	fix	rewrites
+cx:archaic-speech:30	夜分に失礼いたす	밤중에 실례하겠소	fix	rewrites
+cx:archaic-speech:30	さような気が致す	그와 같이 기분이 한다	keep	rewrites
+cx:archaic-speech:28	何を致す！	무엇을 하느냐!	fix	rewrites
+cx:archaic-speech:30	それでは、失礼いたします	그러면, 실례하겠습니다	keep	rewrites
+cx:archaic-speech:30	ご案内いたすところでござった	안내하는 것이 마땅했다	keep	rewrites
+cx:archaic-speech:38	何と申されたか	뭐라고 말씀하셨나	fix	rewrites
+cx:archaic-speech:38	「そう申されるか？」	「그렇게 말씀하시느냐?」	fix	rewrites
+cx:archaic-speech:38	何と申したか	!rule:cx:archaic-speech:38	keep	rewrites
+cx:archaic-speech:38	そう申されて	!rule:cx:archaic-speech:38	keep	rewrites
+cx:archaic-speech:40	張遼 そちがやると申すか？	장료 소치가 한다고 말하느냐?	fix	rewrites
+cx:archaic-speech:40	異なことを。 なぜ そう申す？	이인 일을. 왜 그렇게 말하느냐?	fix	rewrites
+cx:archaic-speech:40	お主 今 なんと申した？	그대 지금 뭐라고 말했느냐?	fix	rewrites
+cx:archaic-speech:40	わしは島田カンベエ そのほう 名は何と申す？	나는 시마다 칸베에 그쪽명은 뭐라고 말하느냐?	fix	rewrites
+cx:archaic-speech:40	ビネガー･カーンに 復しゅうしたいと申すか？	비니거·까앙에 복수하고 싶다고 말하느냐?	fix	rewrites
+cx:archaic-speech:40	お主 先ほど 抜け道があると申したか？	그대 방금 전 샛길이 있다고 말했나?	fix	rewrites
+cx:archaic-speech:40	ふんっ！ アヤトリオと申す｡	흥! 아야 트리오라고 한다.	keep	rewrites
+cx:archaic-speech:40	「拙者が申す」	「소인이 말씀드린다」	keep	rewrites
+cx:archaic-speech:40	殿下 その呼び方はおやめくださいと何度申せば…	전하 그 부르는 법은 어라인 듯하는이다 세로 몇 번 말씀드리면…	keep	rewrites
+cx:archaic-speech:40	ついに シェラどのの剣が見られ申すな	마침내 쉐라님의 검을 볼 수 있고 말씀드리는구나	keep	rewrites
+cx:archaic-speech:40	はじめまして、私は、大島と申します	처음 뵙겠습니다, 저는, 오오시마라고 합니다	keep	rewrites
+cx:archaic-speech:45	戯れ言を申すな！	장난말을 말하지 마라!	fix	rewrites
+cx:archaic-speech:45	「わがままを申すな」	「이기적임을 말하지 마」	fix	rewrites
+cx:archaic-speech:45	無礼を申すな	무례를 말하지 마라	fix	rewrites
+cx:archaic-speech:45	もし お主も 米が欲しいと申すなら…	만약 그대도 미를 갖고 싶다고 말씀드린다면…	keep	rewrites
+cx:archaic-speech:45	皆がそれほど申すならば 命だけは許そう	모두가 그렇게 말씀드린다면 생명만은 용서하자	keep	rewrites
+cx:archaic-speech:50	参ったな	난처하네	fix	rewrites
+cx:archaic-speech:50	ハァ～ 参ったな	하아~ 난처하네	fix	rewrites
+cx:archaic-speech:50	参ったなあ 星野先生まで	난처하네 호시노 선생님까지	fix	rewrites
+cx:archaic-speech:50	参ったな… 頭がボーッと…	난처하네… 머리가 멍하니…	fix	rewrites
+cx:archaic-speech:50	あっ 怒らせちゃった 参ったな	앗 화나게 해버렸다 난처하네	fix	rewrites
+cx:archaic-speech:50	いや ちょっと金欠でね… 参ったなあ	아니 조금 돈부족으로… 난처하네	fix	rewrites
+cx:archaic-speech:50	「迎えに参ったな」	「맞이하러 갔군」	keep	rewrites
+cx:archaic-speech:50	今日は話があって参った！	오늘은 이야기가 있어 왔다!	keep	rewrites
+cx:archaic-speech:50	）鈴屋班の誇りに懸け いざ 参る！	) 스즈노야반의 자랑에 걸고 자 간다!	keep	rewrites
+cx:archaic-speech:50	どうだ、参ったか、クソ野郎。	어때, 항복이냐, 빌어먹을 놈.	keep	rewrites
+cx:archaic-speech:60	「ではこれにて御免」	「그럼 이만 실례하겠소」	fix	rewrites
+cx:archaic-speech:60	これにて失礼いたします	!rule:cx:archaic-speech:60	keep	rewrites
+cx:archaic-speech:65	拙者 カン十郎の元へ 向かう故 これにて 御免。	has:이만	fix	rewrites
+cx:archaic-speech:65	これにて失礼いたします	이만 실례하겠습니다	fix	rewrites
+cx:archaic-speech:65	では拙者は これにて｡	그럼 나는 이만.	fix	rewrites
+cx:archaic-speech:65	「では 拙者はこれにて」	「그럼 나는 이만」	fix	rewrites
+cx:archaic-speech:65	礼には及ばない 拙者 日陰の身ゆえ これにて	별말씀을 나 응달의 몸이라서 이만	fix	rewrites
+cx:archaic-speech:65	これにて一件落着	!rule:cx:archaic-speech:65	keep	rewrites
+cx:archaic-speech:70	これにて一件落着	이것으로 일단락	fix	rewrites
+cx:archaic-speech:70	「お疲れ様、これにて任務は完了。ご協力に感謝します」	「수고하셨습니다, 이걸로 임무는 완료. 협력에 감사합니다」	fix	rewrites
+cx:archaic-speech:70	鬼門の妄説は、大抵これにて分かるであろう。	귀문의 망설은, 대체로 이것으로 알 것이다.	fix	rewrites
+cx:archaic-speech:70	城にて待つ	성에서 기다린다	keep	rewrites
+cx:archaic-speech:80	母親としての妾が目覚めたのじゃ	어머니로서의 이 몸이 눈을 뜬 게야	fix	rewrites
+cx:archaic-speech:80	妾が命じ各魔王どもの城の地下で 栽培を始めたのじゃ！	이 몸이 명하고 각 마왕들 성 지하에서 재배를 시작한 게야!	fix	rewrites
+cx:archaic-speech:80	よく分かるぞ あのトカゲは 一度泣かしてやらねばと 妾も思っておるのじゃ…。	잘 알겠어 그 도마뱀은 한 번 울려 주어야 한다고 이 몸도 생각하는 게야….	fix	rewrites
+cx:archaic-speech:80	当主たる妾が 花嫁と認めぬ。	당주인 첩이 신부로 인정하지 않는다.	keep	rewrites
+cx:archaic-speech:80	妾の財を委ねるに ふさわしいかどうかを 見定めるために作られた 魔法生命体じゃ	이 몸의 재산을 맡기는에 적격인지 어떤지를 확정하기 위해 만들어진 마법 생명체야	fix	rewrites
+cx:archaic-speech:80	「お菊は拙者の妾でござる」	「오키쿠는 나의 첩이오」	keep	rewrites
+cx:archaic-speech:80	妾の子という奴か	첩의 자식이라는 놈인가	keep	rewrites
+cx:archaic-speech:80	妾が あの狙撃手を追う！	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	これまで妾が守ってきたもの	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	四十ばかりの妾が居るのだそうで、東京や京都に行って居るのだと云う。	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	ところがオトキという妾が利巧者で	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	妾は一人で大丈夫だ	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	妾も罰を受け容れる	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	妾はどうなるんでしょう？	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	けれども妾は一生懸命に我慢した。	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	正妻も妾も その娘も一緒に暮らしているなんて	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	王の妾は美しい	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	母親は妾にしたかった	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	家族は、それでも同じで、妻、妾、子二人、家二軒。	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	その妾も利便事の標的なのか？	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:100	「余の息子じゃ」	「짐의 아들이다」	fix	rewrites
+cx:archaic-speech:100	「わしの息子じゃ」	「나의 아들이다」	fix	rewrites
+cx:archaic-speech:100	「わらわは女王じゃ！」	「이 몸은 여왕이다!」	fix	rewrites
+cx:archaic-speech:100	朕の罪じゃ 許せ	짐의 죄다 용서해라	fix	rewrites
+cx:archaic-speech:100	わらわの負けじゃ	이 몸의 패배다	fix	rewrites
+cx:archaic-speech:100	「ここじゃ」	「여기야」	keep	rewrites
+cx:archaic-speech:100	「それじゃ」	「그럼」	keep	rewrites
+cx:archaic-speech:100	そなた 一体 何様のつもりじゃ	그대 도대체 뭐라도 된 줄 아는 거야	keep	rewrites
+cx:archaic-speech:100	わらわが今 長い眠りから覚めたのも 再び日本を支配する時が 来たからじゃ	이 몸이 지금 긴 잠으로부터 깨었던 것도 다시 일본을 지배할 때가 왔으니까야	keep	rewrites
+cx:archaic-speech:100	「おもしろい冗談じゃ」	「재미있는 농담이야」	keep	rewrites
+cx:archaic-speech:110	下手人は、何者じゃろう？	하수인은, 누구일까?	fix	rewrites
+cx:archaic-speech:110	はて なんのことじゃろう？	글쎄 무슨 일일까?	fix	rewrites
+cx:archaic-speech:110	もう十分じゃろう	!rule:cx:archaic-speech:110	keep	rewrites
+cx:archaic-speech:115	一体どうなるんじゃろう？	도대체 어떻게 되는 걸까?	fix	rewrites
+cx:archaic-speech:115	なぜ来たのじゃろう	왜 온 걸까	fix	rewrites
+cx:archaic-speech:115	いろいろあって疲れたんじゃろう	!rule:cx:archaic-speech:115	keep	rewrites
+cx:archaic-speech:118	「書見いたそうか」	「독서할까」	fix	rewrites
+cx:archaic-speech:118	「それほどの御熱心なら、思う存分の夢を見る手段が御座るが、伝授いたそうか」	「그렇게의 어 열심이라면, 마음껏의 꿈을 꾸는 수단이 계시지만, 전수할까」	fix	rewrites
+cx:archaic-speech:118	「いたそうか」	「아파 보이는가」	keep	rewrites
+cx:archaic-speech:120	装束を拙者が用意いたそう	의복을 내가 준비하겠소	fix	rewrites
+cx:archaic-speech:120	「いよいよ今夜決行いたそう」	「드디어 오늘 밤 결행하겠소」	fix	rewrites
+cx:archaic-speech:120	助太刀いたそう	조력하겠소	fix	rewrites
+cx:archaic-speech:120	と 言われていたそうだ	라고 하고 있었다고 한다	keep	rewrites
+cx:archaic-speech:120	控え室で寝ていたそうです。	대기실에서 자고 있었다고 합니다.	keep	rewrites
+dict:jisjk:33824	「拙者、これにて失礼いたす」	「나, 이만 실례하겠소」	fix	defaults
+dict:jisjk:33824	償いきれない罪を拙者は犯した	갚지 못할 죄를 나는 범했다	fix	defaults
+dict:jisjk:33824	いま一度 拙者と戦え	지금 한 번 나와 싸워라	fix	defaults
+dict:jisjk:198517	拙者(せっしゃ)は 母上と一緒に残ります！	소인은 어머님과 함께 남습니다!	fix	defaults
+dict:jisjk:201059	それがしにお任せあれ	나에게 맡겨 주세요	fix	defaults
+dict:jisjk:201059	うむ。 それがしも賛成だ。	음. 나도 찬성이다.	fix	defaults
+dict:jisjk:201059	わたしもそれがしたいです	저도 그것을 하고 싶습니다	keep	defaults
+dict:jisjk:201059	それがしたかった	그것을 하고 싶었다	keep	defaults
+dict:jisjk:29600	吾輩は猫である。	나는 고양이로소이다.	keep	defaults
+dict:jisjk:29600	吾輩の召喚魔術が間に合ってしまうなぁ	나의 소환마술이 늦지 않아버리는구나	fix	defaults
+dict:w:32900	吾輩が先ほどまで挑んでいた ミステリーの話はどうであるか？	내가 방금 전까지 도전하고 있던 미스터리 이야기는 어떻게일까?	fix	defaults
+dict:archaic-speech	絶対に負けないでござる！	절대로 지지 않소!	fix	lookup
+dict:archaic-speech	もっと仲間を頼っていいでござるよ	좀 더 동료를 의지해도 되오	fix	lookup
+dict:archaic-speech	ちょっと 撮ってきていいでござるか？	조금 찍어 와도 되오?	fix	lookup
+dict:archaic-speech	何をしているでござるか	무엇을 하고 있소	fix	lookup
+dict:archaic-speech	どうしたでござるか？	어떻게 했소?	fix	lookup
+dict:archaic-speech	いつまでも 成長しないでござるな。	언제까지나 성장하지 않는구려.	fix	lookup
+dict:archaic-speech	厄介なことになったでござるな	골치 아프게 되었구려	fix	lookup
+dict:archaic-speech	うむ なかなかの強者でござるぞ。	음 꽤 강자이오.	fix	lookup
+dict:archaic-speech	あの親子にしても 必ず 喜んでくれるでござろう。	그 부모와 자식으로 해도 반드시 기뻐해 줄 것이오.	fix	lookup
+dict:archaic-speech	部屋に入る前に ノックをするのが礼儀でござろう	방에 들어가기 전에 노크를 하는 것이 예의일 것이오	fix	lookup
+dict:archaic-speech	貴殿もそうでござろう？	귀하도 그럴 것이오?	fix	lookup
+dict:archaic-speech	しかし 拙者の教えは厳しいでござるよ！	하지만 나의 가르침은 어렵소!	fix	lookup
+dict:archaic-speech	ボクは 侍じゃないでござるよ！	나는 사무라이가 아니오!	fix	lookup
+dict:archaic-speech	拙者は なごみではないでござる	나는 푸근이 아니오	fix	lookup
+dict:archaic-speech	随分 雰囲気が変わったね｡ そうでござるか？	상당히 분위기가 바뀌었네. 그러오?	fix	lookup
+dict:archaic-speech	なんでござるか？ あれは。	무엇이오? 저것은.	fix	lookup
+dict:archaic-speech	拙者は流浪人。 歩くでござるよ。	나는 유랑인. 걸으오.	keep	lookup
+dict:archaic-speech	それが拙者の任務でござる｡	그것이 나의 임무이오.	keep	lookup
+dict:archaic-speech	もう十分じゃろう	이제 충분하겠지	fix	lookup
+dict:archaic-speech	お前の力で 多くの者が 支えられたのは確かじゃろう…。	네 힘으로 많은 사람이 지탱된 것은 확실하겠지….	fix	lookup
+dict:archaic-speech	いろいろあって疲れたんじゃろう	여러 가지 있어 지친 거겠지	fix	lookup
+dict:archaic-speech	お疲れじゃろう？ 背中を流しに来たのじゃ	피곤하겠지? 등을 밀어 주러 온 게야	fix	lookup
+dict:archaic-speech	あはっ！ 当たり前じゃろ！	아핫! 당연하겠지!	fix	lookup
+dict:archaic-speech	よもや 脱げとは言わぬじゃろう？	설마 벗으라고는 말하지 않겠지?	fix	lookup
+dict:archaic-speech	出島社長は 夢にも思わなかったじゃろう	데지마 사장은 꿈에도 생각하지 않았겠지	fix	lookup
+dict:archaic-speech	家が近い千夜に もらいに行くのは どうじゃろう？	집이 가까운 센야에게 받으러 가는 것은 어떨까?	fix	lookup
+dict:archaic-speech	そうじゃろ そうじゃろ すごいじゃろ	그렇지 그렇지 대단하겠지	fix	lookup
+dict:archaic-speech	何かの隠語じゃろうか？	뭔가의 은어일까?	keep	lookup
+dict:archaic-speech	民間人だけでも避難させる事が 先決じゃろうが	민간인만으로도 피난시키는 것이 선결이잖아	keep	lookup
+dict:archaic-speech	ああ あそこは 楽園じゃからのう。	아 저기는 낙원이니까 말이야.	fix	lookup
+dict:archaic-speech	おまえらとは きたえ方が ちがうからのう。	너희와는 온 편이 다르니까 말이야.	fix	lookup
+dict:archaic-speech	確かに 繭玉は 奇麗じゃからのう。	확실히 설날 장식은 깨끗하니까 말이야.	fix	lookup
+dict:archaic-speech	よい天気じゃのう	좋은 날씨로구먼	keep	lookup
+dict:archaic-speech	雑魚が飛び込んできたでおじゃる	잡졸이 뛰어들어 왔소	fix	lookup
+dict:archaic-speech	あいかわらず ふうりゅうの かけらもない ふるまいでおじゃるな～。	변함없이 풍류가 조금도 없는 행동이구려~.	fix	lookup
+dict:archaic-speech	イチョウのもりを まもっているのでおじゃる｡	은행나무의 숲을 지키고 있는 것이오.	fix	lookup
+dict:archaic-speech	そうでおじゃるか？	그러오?	fix	lookup
+dict:archaic-speech	しょせんは傭兵でおじゃる	어차피는 용병이오	keep	lookup
+normalize:old-negative	「拙者は知らぬ」	「나는 모른다」	fix	normalize
+normalize:old-negative	朕には分からぬ	짐에는 모른다	fix	normalize
+normalize:old-negative	何であるかは わしにも分からぬ	왜 있을까는 나도 모른다	fix	normalize
+normalize:old-negative	この村から 誘い出そうとしたのかは知らぬ	이 마을에서 꾀어내려고 했는지는 모른다	fix	normalize
+normalize:old-negative	さっぱりコツが分からぬでござる	전혀 요령을 알 수 없소	keep	normalize
+normalize:old-negative	言っても 分からぬか？	말해도 모르는 건가?	fix	normalize
+normalize:old-negative	ならぬ！ 我々の目的は あくまで エイジャの赤石を 手に入れること｡	안돼! 우리의 목적은 어디까지나 에이자의 적석을 손에 넣는 것.	fix	normalize
+normalize:old-negative	ならぬぞ	안돼	fix	normalize
+normalize:old-negative	カービィ殿、訳あってそなたと戦わなくてはならぬ？	커비전, 사정이 있어 그대와 싸워야 해?	fix	normalize
+normalize:old-negative	見知らぬ人が来た。	낯선 사람이 왔다.	keep	normalize
+normalize:old-negative	「知らぬ間に眠っていた」	「어느새 자고 있었어」	keep	normalize
+normalize:old-negative	「知らぬが仏」	「모르는게 약」	keep	normalize
+normalize:old-negative	「知らぬ存ぜぬ」	「아무것도 모르는체」	keep	normalize
+normalize:old-negative	「何も知らぬ子供だ」	「아무것도 모르는 아이야」	keep	normalize
+normalize:old-negative	いかん！目を閉じよ 何も見てはならぬ！	안돼! 눈을 감아라 아무것도 봐서는 안된다!	keep	normalize
+normalize:old-negative	「そうはならぬ」	「그렇게는 되지 않는다」	keep	normalize
+normalize:old-negative	「相手にならぬ」	「상대가 되지 않는다」	keep	normalize
+normalize:old-negative	人ならぬ 神の作りたもうた肉体	사람 되지 않는 신의 만들기도 노래 육체	keep	normalize
+normalize:old-negative	「行かねばならぬ」	「가야 한다」	keep	normalize
+cleanup:haoche	ここにいるでござる	여기에 있소	fix	restore
+cleanup:haoche	絶対に 嫌でござる	절대로 싫소	fix	restore
+cleanup:haoche	もう しばらく 道場にいた方がいいでござるよ。	조금 더 도장에 있는 것이 좋소.	fix	restore
+cleanup:haoche	かたじけないでござる｡ どうも｡	송구스럽소. 네.	fix	restore
+cleanup:haoche	ええっ 楽しいでござるよ	에엣 즐겁소	fix	restore
+cleanup:haoche	話を聞くでござる	이야기를 들으오	keep	restore
+cleanup:haoche	皆で戦うでござる	모두가 싸우오	keep	restore
+cleanup:haoche	嬉しいでござるよ	기쁘오	keep	restore
+register:REG-6	「必ず喜んでくれるでござろう」	「반드시 기뻐해 줄 것이오」	fix	register
+register:REG-6	「もう寝るでおじゃる」	「이제 자오」	fix	register
+register:REG-6	「助太刀いたす！」	「조력하겠소!」	fix	register
+register:REG-6	「余の息子じゃ」	「짐의 아들이다」	fix	register
+register:REG-6	「ヘヘン、わらわせる。なにが認識不足だ」	「헤헨, 웃겨. 뭐가 인식 부족이야」	keep	register
+cx:archaic-speech:28	くっ！ 何をいたす!? この者たちは 兵にあらず。	큭! 뭘 하느냐!? 이 사람들은 군사에게 있지 않고.	fix	rewrites
+cx:archaic-speech:28	夜分に失礼いたす	!rule:cx:archaic-speech:28	keep	rewrites
+cx:archaic-speech:32	各々方、頭を垂れよ！駿府屋形の主、今川治部大輔がこれより入城致す！	여러분, 고개를 숙여라! 슨푸 저택의 주인, 이마가와 지부타이후가 지금부터 입성하겠소!	fix	rewrites
+cx:archaic-speech:32	この李牧 敵ながら感服致す！	이 이목 적이면서 감복하오!	fix	rewrites
+cx:archaic-speech:32	また志半ばで倒れた方々の苦衷に思いを致す。	또 뜻을 이루지 못하고 쓰러진 분들의 고충에 생각을 한다.	keep	rewrites
+cx:archaic-speech:32	さような気が致す	그와 같이 기분이 한다	keep	rewrites
+cx:archaic-speech:10	青騎士については わらわが誰よりも よく知っておる	청기사에 대해서는 이 몸이 누구보다 잘 알고 있다	keep	rewrites
+cx:archaic-speech:10	「佐々殿の舎弟、成政どのの好意で、時節を待っておった」	「사사전의 자기 동생, 나리마사님의 호의로, 시절을 기다리고 있었어」	keep	rewrites
+cx:archaic-speech:10	高定の忠義は誰よりもこの孔明が知っておる	고정의 충의는 누구보다 이 공명이 알고 있다	keep	rewrites
+cx:archaic-speech:40	ふふ、驚きました？初めてだと申したでしょう？	후후, 놀랐습니까? 처음이라고 말씀드렸겠죠?	keep	rewrites
+cx:archaic-speech:40	何！アンスバッハが そのようなことを申したと？	뭐! 안스바흐가 그러한 말씀을 드렸다고?	keep	rewrites
+cx:archaic-speech:40	あっ いや… 鏡どのにも礼を申さねば	앗 아니… 거울님에게도 예를 말씀드리지 않으면	keep	rewrites
+cx:archaic-speech:50	「おお卜伝か、よく参ったな」	「오오 복전인가, 잘 왔군」	keep	rewrites
+cx:archaic-speech:50	「そなたはどこから参ったな？」	「그대는 어디에서 갔군?」	keep	rewrites
+cx:archaic-speech:50	「上使の役目は……して副使には誰が参ったな？」	「상사의 역할은……해 부사에는 누가 왔느냐?」	keep	rewrites
+cx:archaic-speech:50	しっかし リングマには参ったな	하지만 링곰에게는 난처하네	fix	rewrites
+cx:archaic-speech:80	一度泣かしてやらねばと 妾も思っておるのじゃ…。	한 번 울려 주어야 한다고 이 몸도 생각하는 게야….	fix	rewrites
+cx:archaic-speech:80	夫は別れた妾がよほど気に入っていた	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	俺には妾が四人あるんだぞ。	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	金持が妾を蓄えたり、別荘をもったりしている	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:100	好き放題に振る舞っていた 愚かな我輩らのせいなのじゃ	저 좋은 대로 행동하고 있던 어리석은 우리 탓인 것이야	keep	rewrites
+cx:archaic-speech:110	何じゃろ。わからないよ	무엇일까. 몰라	fix	rewrites
+cx:archaic-speech:110	なぜじゃろう	왜일까	fix	rewrites
+cx:archaic-speech:115	一体 何があったかは はっきりするじゃろう	도대체 무슨 일이 있었는가는 확실하겠지	keep	rewrites
+dict:archaic-speech	ああ そうじゃろうが	아 그렇잖아	fix	lookup
+dict:archaic-speech	じゃあ 「チョコを唇に塗ってプレゼント」 の３倍はどんなじゃろ？	그럼 「초콜릿을 입술에 발라 선물」의 3배는 어떨까?	fix	lookup
+dict:archaic-speech	泥深くてやたらともぐり込むそうでござるから……	진흙 깊고 유난히 파고든다고 하니까……	keep	lookup
+normalize:old-negative	うむ 贅沢な暮らしを知らぬわらわは メイドを雇うのも性に合わんでな	음 사치스러운 생활을 모르는 이 몸은 메이드를 고용하는 것도 성미에 맞지 말고	keep	normalize
+normalize:old-negative	現在 行方が分からぬ	현재 행방을 알 수 없다	keep	normalize
+normalize:old-negative	まさか、知らぬわけではあるまい	설마, 모르는 것일 리 없다	keep	normalize
+cx:archaic-speech:2	長久保それがしという男なんぞ、僕は、君の夫だなんて思つてやしなかつたくらいさ。	나가쿠보 모라는 남자 따위, 나는, 네 남편이라니 사연줄이나 하고이기는 정도.	fix	rewrites
+cx:archaic-speech:2	歩哨下妻の物持で戸山それがし――。	보초 시모츠마의 부자로 도야마 모――.	fix	rewrites
+cx:archaic-speech:2	それがしは天下の武士だぞ	나는 천하의 무사다	keep	rewrites
+cx:archaic-speech:2	うむ。 それがしも賛成だ。	음. 나도 찬성이다.	keep	rewrites
+cx:archaic-speech:80	「さてはうぬが、この淫乱妾のお先棒になって、京弥どのを掠ってまいったのじゃな」	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	洋妾も傍に侍したり。	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:100	そのおぬしが、わしにばかり、沙金を子と思えとは、どういうわけじゃ。	그 네가, 나에게만, 사금을 아이라고 생각하라고는, 어떤 이유야.	keep	rewrites
+cx:archaic-speech:10	一体何処の誰だろうというので、問題になっておる	도대체 어디의 누구일 거라고 말하므로, 문제가 되어 있다	keep	rewrites
+cx:archaic-speech:10	相合傘で送って出て、一本松にも居らぬとすりゃ、雨の中を、どこへどう行くもんや、つもっても知れておる。	한 우산을 씀으로 보내 나와, 잇폰마츠에도 있지 않는 그렇다면, 빗속을, 어디로 어떻게 가는 것이나, 쌓여도 알려져 있다.	keep	rewrites
+cx:archaic-speech:10	なぜ、そのことを知っておる？	왜, 그것을 알고 있느냐?	fix	rewrites
+cx:archaic-speech:115	わしがだれだか、いわなくても、わかっているじゃろう。	내가 누구일까, 말하지 않아도, 알고 있겠지.	keep	rewrites
+cx:archaic-speech:115	窃盗常習犯にとっては何でもないじゃろう	절도 상습범에게는 아무것도 아니겠지	keep	rewrites
+cx:archaic-speech:40	だ…だから申したではありませんか！気まずくなると！	그…그러니까 말씀드렸잖아요! 거북해진다고!	keep	rewrites
+cx:archaic-speech:5	「拙者にお任せくださいませ」	「소인에게 맡겨 주십시오」	fix	rewrites
+cx:archaic-speech:5	「殿、拙者が参りまする」	「전, 소인이 가옵니다」	fix	rewrites
+cx:archaic-speech:5	「拙者は佐助と申します」	「소인은 사스케라고 합니다」	fix	rewrites
+cx:archaic-speech:5	「某は無風流者ゆえ、堅いものにばかり目が行きまする」	「소인은 무풍류자라서, 딱딱한 것에만 눈길이 가옵니다」	fix	rewrites
+cx:archaic-speech:5	「しからば、拙者は貴様を斬るぞ」	「해인가들, 나는 네놈을 베겠어」	keep	rewrites
+cx:archaic-speech:5	「拙者が参る」	「내가 간다」	keep	rewrites
+cx:archaic-speech:5	「お綱ッ、拙者につかまれ！」	「밧줄, 나에게 잡혀라!」	keep	rewrites
+cx:archaic-speech:5	「拙者の友でござる」	「나의 친구이오」	keep	rewrites
+cx:archaic-speech:5	「拙者に何の用」	「나에게 무슨용무」	keep	rewrites
+cx:archaic-speech:26	いかがいたす？	어찌하겠느냐?	fix	rewrites
+cx:archaic-speech:26	何といたす	어찌하겠느냐	fix	rewrites
+cx:archaic-speech:26	何をいたす!?	!rule:cx:archaic-speech:26	keep	rewrites
+cx:archaic-speech:27	承知いたした	알았소	fix	rewrites
+cx:archaic-speech:27	承知いたす	알겠소	fix	rewrites
+cx:archaic-speech:27	感服致す	!rule:cx:archaic-speech:27	keep	rewrites
+cx:archaic-speech:29	拙者が成敗いたした	내가 처벌 했소	fix	rewrites
+cx:archaic-speech:29	失礼いたしました	!rule:cx:archaic-speech:29	keep	rewrites
+cx:archaic-speech:31	この李牧 敵ながら感服致す！	이 이목 적이면서 감복하오!	fix	rewrites
+cx:archaic-speech:31	助太刀いたす！	!rule:cx:archaic-speech:31	keep	rewrites
+cx:archaic-speech:47	「副使には誰が参ったな？」	「부사에는 누가 왔느냐?」	fix	rewrites
+cx:archaic-speech:47	「そなたはどこから参ったな？」	!rule:cx:archaic-speech:47	keep	rewrites
+cx:archaic-speech:48	「おお卜伝か、よく参ったな」	「오오 복전인가, 잘 왔군」	fix	rewrites
+cx:archaic-speech:48	「智恵者が参ったな」	「지혜자가 왔군」	fix	rewrites
+cx:archaic-speech:48	参ったな	!rule:cx:archaic-speech:48	keep	rewrites
+cx:archaic-speech:50	はあ 参ったな	하아 난처하네	fix	rewrites
+cx:archaic-speech:50	こりゃ参ったな	이건 난처하네	fix	rewrites
+cx:archaic-speech:76	妾は妾なのじゃ	이 몸은 이 몸인 게야	fix	rewrites
+cx:archaic-speech:76	妾は一人で大丈夫だ	!rule:cx:archaic-speech:76	keep	rewrites
+cx:archaic-speech:80	妾は妾だから	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:80	王の妾は美しい	!rule:cx:archaic-speech:80	keep	rewrites
+cx:archaic-speech:95	そなたも そなたじゃ！	그대도 그대지!	fix	rewrites
+cx:archaic-speech:95	わしも行くのじゃ！	!rule:cx:archaic-speech:95	keep	rewrites
+cx:archaic-speech:105	なんてわしは馬鹿じゃろう！	이 얼마나 나는 바보같은가!	fix	rewrites
+cx:archaic-speech:105	何じゃろ。	!rule:cx:archaic-speech:105	keep	rewrites
+cx:archaic-speech:106	なんと美しいじゃろう	이 얼마나 아름다운가	fix	rewrites
+cx:archaic-speech:106	もう十分じゃろう	!rule:cx:archaic-speech:106	keep	rewrites
+cx:archaic-speech:125	それがしが読もう	내가 읽겠다	fix	rewrites
+cx:archaic-speech:125	拙者が行こう	내가 가겠다	fix	rewrites
+cx:archaic-speech:125	「では参ろう」	「그럼 가자」	keep	rewrites
+cx:archaic-speech:126	某が参ろう	내가 가겠다	fix	rewrites
+cx:archaic-speech:126	わしは帰ろう	나는 돌아가겠다	fix	rewrites
+cx:archaic-speech:126	みんなで帰ろう	모두 돌아가자	keep	rewrites
+dict:archaic-speech	拙者もでござる	나도 그렇소	fix	lookup
+dict:archaic-speech	欲しいんじゃろう？	갖고 싶은 거겠지?	fix	lookup
+dict:archaic-speech	むしろ 襲うために 広い空間にしておるんじゃろ｡	오히려 덮치기 위해 넓은 공간으로 하고 있지.	keep	lookup
+cx:archaic-speech:103	ウフフフ、……皆さんそうじゃろうが。	우후후후, ……여러분 그렇잖아.	fix	rewrites
+cx:archaic-speech:103	ああ そうじゃろうが、それでも	아 그렇겠지만, 그래도	keep	rewrites
+cx:archaic-speech:95	よーし、今年の秋も大漁じゃ。	좋아~, 올해 가을도 풍어야.	keep	rewrites
+cx:archaic-speech:100	わしは、今、町の寺に泊まっているじゃ。	나는, 지금, 마을의 절에 묵고 있는이야.	keep	rewrites
+dict:archaic-speech	女子には分からんじゃろう	여자에게는 모르겠지	fix	lookup
+cx:archaic-speech:32	我ら勝利のためなら どんなことでもいたす！	우리들 승리를 위해서라면 어떤 일이라도 한다!	keep	rewrites
+cx:archaic-speech:10	余の服装が何であったか、どういうものだか今だに記憶しておる。	짐의 복장이 왜 있었는지, 어떤 걸까 여태 껏 기억하고 있다.	keep	rewrites
+cx:archaic-speech:5	タウロ 某は正気であり 何をしているのか 理解しているつもりです	타우로 소인은 제정신이며 무엇을 하고 있는지 이해하고 있을 생각입니다	fix	rewrites
+cx:archaic-speech:5	はっ 恐れながら 某の息子は先般	헉 송구하오나 소인의 아들은 지난번	fix	rewrites
+cx:archaic-speech:5	「その死の直前に郡兵衛殿より、拙者一揆の指揮たのまれ」	「그 죽음의 직전에 군 무관전부터, 소인 잇키 지휘 부탁받고」	fix	rewrites
+cx:archaic-speech:5	「貴殿と拙者とは讐敵同士！」	「귀하와 나란 수적끼리!」	keep	rewrites
+cx:archaic-speech:1	その「拙者」とか「お主」って単語 どこで習ったの？	그 「소인」이든지 「그대」라는 단어 어디서 배웠어?	fix	rewrites
+cx:archaic-speech:1	「拙者が参る」	!rule:cx:archaic-speech:1	keep	rewrites
+cx:archaic-speech:3	信長様に忠義を誓う某	노부나가님에게 충의를 맹세하는 소인	fix	rewrites
+cx:archaic-speech:3	忠義を誓う某	!rule:cx:archaic-speech:3	keep	rewrites
+cx:archaic-speech:4	忠義を誓う某	충의를 맹세하는 나	fix	rewrites
+cx:archaic-speech:4	田中某という男	!rule:cx:archaic-speech:4	keep	rewrites
+cx:archaic-speech:5	拙者スザクと申す	소인 스자쿠라고 한다	fix	rewrites
+cx:archaic-speech:5	拙者の不覚にござる	소인의 불찰이다	fix	rewrites
+cx:archaic-speech:5	拙者は山崎でござる	나는 야마자키이오	keep	rewrites
+cx:archaic-speech:5	拙者の道場の下男にでもなれ	나의 도장의 하인이라도 되어라	keep	rewrites
+cx:archaic-speech:5	候補の拙者	후보인 나	keep	rewrites
+cx:archaic-speech:80	妾(わらわ)には そういう能力があるんじゃ	이 몸에는 그런 능력이 있지	fix	rewrites
+cx:archaic-speech:80	お前の皇子の命も 妾(わらわ)の皇子が もらい受けたのだから	네 황자의 생명도 이 몸의 황자가 받았으니까	fix	rewrites
+cx:archaic-speech:80	妾が七人もいるそうだ	첩이 일곱 명이나 있다고 한다	keep	rewrites
+cx:archaic-speech:112	「おかしいなあ。もう、一緒になって、二年になるとじゃろ？」	「이상한데. 이제, 함께 돼, 2년이 되면?」	fix	rewrites
+cx:archaic-speech:112	もう十分じゃろう	!rule:cx:archaic-speech:112	keep	rewrites
+cx:copula-quote:11	その絵が吾輩であると云う事	그 그림이 나라고 말하는 것	fix	rewrites
+cx:copula-quote:11	猫であると云う事	고양이라고 말하는 것	fix	rewrites
+cx:copula-quote:11	猫であると思う	!rule:cx:copula-quote:11	keep	rewrites
+cx:archaic-speech:80	「ふうむ、明朝明けの鐘と共に鬼王丸めは芳江姫を妾にするというのじゃな」	「낳는, 내일 아침 새벽의 종과 함께 오니오 둥근은 요시에 공주를 첩으로 한다는 것이군」	keep	rewrites
+cx:archaic-speech:80	「ほほうのう、お大名というものは、なかなか意気なお妾をお飼いおきなさるものじゃな」	「호호우노우, 사치스러운 사람이라는 것은, 꽤 기개 더 첩을 길러 일어나고 하시는 것이군」	keep	rewrites
+cx:archaic-speech:1	＜わらわって 昔の 高貴な身分の女性の一人称だよな＞	!rule:cx:archaic-speech:1	keep	rewrites

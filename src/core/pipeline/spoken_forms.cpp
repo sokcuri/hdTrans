@@ -353,11 +353,49 @@ bool NegativeE(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
-constexpr char kDekinu[] = "できぬ";
+// Whether the sentence ends at p, also before a sentence-final particle or an ending of old speech.
+bool OldNegativeEnds(std::string_view s, size_t p) {
+    if (p == s.size()) return true;
+    size_t q = p;
+    if (OneOf(s, q, U"。！？!?」』ぞか")) return true;
+    // わ only as the sentence particle, not the start of a word (知らぬわらわ, 知らぬわけ).
+    if (q = p; Lit(s, q, "わ") && (q == s.size() || OneOf(s, q, U"。！？!?」』…‥ 　"))) return true;
+    for (const std::string_view w : {"のじゃ", "のだ", "でござる", "でおじゃる"}) {
+        if (q = p; Lit(s, q, w)) return true;
+    }
+    return false;
+}
 
-bool Dekinu(std::string_view s, size_t pos, Match& m) {
+// The classical negative ぬ of the verbs whose negative the word stage reads as a word of its own
+// (できない 할 수 없다, 知らない 모르다, 分からない 모르다), read as ない: できぬ anywhere, the others where
+// the sentence ends (知らぬ。, not the idioms 知らぬが仏, 知らぬ間に or 見知らぬ), ならぬ there after なくては,
+// まかり or nothing (ならぬ！, 戦わなくてはならぬ), not 人ならぬ (인간이 아닌), 相手にならぬ, そうはならぬ or the
+// prohibition てはならぬ, which the word stage reads (해서는 안 된다).
+constexpr std::string_view kOldNegatives[] = {"できぬ", "知らぬ", "分からぬ", "わからぬ", "判らぬ"};
+
+bool OldNegative(std::string_view s, size_t pos, Match& m) {
+    for (const std::string_view w : kOldNegatives) {
+        size_t p = pos;
+        if (!Lit(s, p, w)) continue;
+        if (w == "知らぬ" && s.substr(0, pos).ends_with("見")) return false;
+        if (w != "できぬ" && !OldNegativeEnds(s, p)) return false;
+        // After が the word stage reads 分からぬ as what cannot be told (行方が分からぬ 행방을 알 수 없다).
+        if (w != "できぬ" && w != "知らぬ" && s.substr(0, pos).ends_with("が")) return false;
+        m.group[1] = w.substr(0, w.size() - std::string_view("ぬ").size());
+        // A question in か asks whether one does not (分からぬか 모르는 건가), not a wondering かな.
+        if (size_t q = p; w != "できぬ" && Lit(s, q, "か")) m.group[2] = "の";
+        m.end = p;
+        return true;
+    }
     size_t p = pos;
-    if (!Lit(s, p, kDekinu)) return false;
+    if (!Lit(s, p, "ならぬ")) return false;
+    const std::string_view head = s.substr(0, pos);
+    if (!head.empty() && !head.ends_with("なくては") && !head.ends_with("まかり")) {
+        const char32_t before = LastRune(head).cp;
+        if (!In(before, U"「『（(、。！？!?…‥ 　")) return false;
+    }
+    if (!OldNegativeEnds(s, p)) return false;
+    m.group[1] = "なら";
     m.end = p;
     return true;
 }
@@ -1234,7 +1272,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         text = ReplaceAll(text, SlangAdjectivePattern, [](const Match& m) { return std::string(m.group[1]); });
     }
     if (exclamationNa && Contains(text, "な")) text = ReplaceAll(text, ExclamationNa, ReplaceExclamationNa);
-    return ReplaceAll(text, Dekinu, [](const Match&) { return std::string("できない"); });
+    return ReplaceAll(text, OldNegative, [](const Match& m) { return Cat({m.group[1], "ない", m.group[2]}); });
 }
 
 }  // namespace hdTrans::pipeline::internal

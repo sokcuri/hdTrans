@@ -226,3 +226,8 @@ r3-33	REG-3	fix	d306		yes	「お先にどうぞ」	haeyo	-
 r3-34	REG-3	fix	d307		yes	「ちゃんと待っててくださぁい」	haeyo	-
 r17-31	REG-17	fix	d308		yes	「よし、イクぞっ」	haera	-
 r17-32	REG-17	fix	d309		yes	「行くぞー！」	haera	-
+r6-15	REG-6	fix	d310		yes	「必ず喜んでくれるでござろう」	hae	-
+r6-16	REG-6	fix	d311		yes	「もう寝るでおじゃる」	hae	-
+r6-17	REG-6	fix	d312		yes	「助太刀いたす！」	hae	-
+r6-18	REG-6	fix	d313		yes	「余の息子じゃ」	hae	-
+r6-19	REG-6	keep	d314		yes	「ヘヘン、わらわせる。なにが認識不足だ」	hae	-

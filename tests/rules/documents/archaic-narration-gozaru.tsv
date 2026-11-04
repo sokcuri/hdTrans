@@ -1,0 +1,5 @@
+# 규칙: GRM-3804, REG-1
+rule	input	expected	kind	layer
+cx:archaic-speech:130	「行くぞ」\n彼はそこへ行ったのでござる。\n彼は強いでござる。	「가겠어」\n그는 거기에 간 것이다.\n그는 강하다.	fix	rewrites
+cx:archaic-speech:130	「行くぞ」\n彼は書いたでござる。	「가겠어」\n그는 썼다.	fix	rewrites
+cx:archaic-speech:130	「行くぞ」\n「彼は強いでござる」	「가겠어」\n「그는 강하오」	keep	rewrites
