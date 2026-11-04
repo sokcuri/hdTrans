@@ -500,6 +500,9 @@ private:
     bool StemAt(size_t p, size_t n) const;
     bool EndsInsideKatakana(size_t p, size_t end) const;
     std::vector<SoundMatch> Sounds(size_t p, bool afterParticle, bool afterWord = false) const;
+    // The length of a final particle at character i (よ, ね, な, わ, ぞ, ぜ, さ) drawn out or not,
+    // when no kana follow it; 0 otherwise.
+    size_t FinalParticleAt(size_t i) const;
     bool CryCopyBefore(const SoundMatch& before, const SoundMatch& m) const;
     bool CryCopyAfter(const SoundMatch& m, SoundMatch& next) const;
     bool ClippedCryCopy(const SoundMatch& m, bool copyBefore) const;
@@ -545,6 +548,15 @@ bool SoundText::UtteranceStart(size_t p) const {
     if (p == 0 || p == stutterEnd_) return true;
     if (AfterInterjection(p)) return true;
     return In(rs_[p - 1], U"\n「『（(。！？!?♪♡♥❤ 　―");
+}
+
+size_t SoundText::FinalParticleAt(size_t i) const {
+    const std::u32string_view rs = rs_;
+    if (i >= rs.size() || !In(rs[i], U"よねなわぞぜさ")) return 0;
+    size_t j = i + 1;
+    while (j < rs.size() && In(rs[j], U"ーっ～〜ぇぉ")) j++;
+    // Then a mark, a space or the end, not a word (やったよ高いところに: the や of やった is no cry).
+    return j >= rs.size() || !(IsKana(rs[j]) || IsKanjiRune(rs[j]) || text::IsLetter(rs[j]) || text::IsDigit(rs[j])) ? j - i : 0;
 }
 
 bool SoundText::AfterInterjection(size_t p) const { return p > 0 && p == intjEnd_ + 1 && In(rs_[p - 1], U"、，,"); }
@@ -1257,8 +1269,14 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
     const bool runStart = IsHiraganaRune(r) && !IsHiraganaRune(prev) && prev != U'ー' && prev != U'～';
     afterParticle = afterParticle && IsHiraganaRune(r);
     afterWord = afterWord && IsHiraganaRune(r) && !runStart && !afterParticle;
+    // After the て form of a verb only a phrase of phrases.tsv that closes the clause starts (騒いで
+    // どうした; spec LEX-4825).
+    // て after a kanji or kana, or で after the ん or い of a godan て form (騒いで, 読んで; not ままで, それで).
+    const bool afterTe = IsHiraganaRune(r) && !runStart && !afterWord && p >= 2 &&
+                         ((prev == U'て' && (IsKanjiRune(rs[p - 2]) || IsHiraganaRune(rs[p - 2]))) || (prev == U'で' && In(rs[p - 2], U"んい")));
+    const bool teOnly = afterTe && !afterParticle;
     std::vector<SoundMatch> chain;
-    if (!katakana && !runStart && !afterParticle && !afterWord) return chain;
+    if (!katakana && !runStart && !afterParticle && !afterWord && !afterTe) return chain;
     // Katakana that only draw out the vowel of the hiragana before them belong to it
     // (ひぃやアアア).
     if (katakana && IsHiraganaRune(prev)) {
@@ -1298,6 +1316,15 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         if (chain.size() < 2) return {};
     }
     const SoundMatch& first = chain[0];
+    // A phrase of phrases.tsv of three kana or more, alone in the chain, that closes its clause: the
+    // end of the text, no kana after it, or a final particle and then no kana (騒いでどうした).
+    const bool closingPhrase = chain.size() == 1 && first.intj && (first.phrase || first.cry) && first.keyLen >= 3 &&
+                               (first.end == rs.size() || !IsKana(rs[first.end]) || FinalParticleAt(first.end) > 0);
+    // Only どうした and its forms (騒いでどうした): other phrases after a て form go on the verb (見てやった,
+    // 来てくれた, 知ってよかった 알아서 좋았다, 宛てでしょうね).
+    const bool asking = first.key.starts_with(U"ドウシ") || first.key.starts_with(U"ドシ");
+    const bool teClosing = afterTe && closingPhrase && first.phrase && asking;
+    if (teOnly && !teClosing) return {};
     if (katakana && IsKanjiRune(prev) && first.keyLen < 3) return {};
     if (katakana) {
         const size_t end = KatakanaEnd(rs, p);
@@ -1305,7 +1332,7 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         for (const SoundMatch& m : chain) {
             if (m.start < end && m.key != first.key && std::min(m.keyLen, first.keyLen) < 4) return {};
         }
-    } else if ((afterParticle && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0)) ||
+    } else if ((afterParticle && !teClosing && first.intj && (first.keyLen < 3 || QuotedBy(chain.back(), p) == 0)) ||
                (afterWord && (first.intj || first.keyLen < 3)) ||
                (runStart && InWord(prev) && (first.intj || first.keyLen < 4 || In(r, kParticles)) &&
                 !MimeticAfterWord(first)) ||
@@ -1319,6 +1346,13 @@ std::vector<SoundMatch> SoundText::Sounds(size_t p, bool afterParticle, bool aft
         size_t end = last.end;
         if (!last.intj) end += Adverbial(end);
         const bool cry = CryBeforeWord(last);
+        // よ or ね after a cry closes it and goes with it
+        // (やだよ 싫어, あ〜ん やだね; spec LEX-4825).
+        if (last.intj && last.cry && !last.lead && end < rs.size() && FinalParticleAt(end) > 0 && In(rs[end], U"よね")) {
+            if (afterWord && !WordStartsSound(p, last, end)) return {};
+            last.end = end + FinalParticleAt(end);
+            return chain;
+        }
         if (!last.intj || last.open || end == rs.size() || !IsKana(rs[end]) || In(rs[end - 1], U"？?") || QuotedBy(last, p) > 0 ||
             (IsHiraganaRune(rs[end - 1]) && IsKatakanaRune(rs[end])) || cry ||
             (katakana && IsKatakanaRune(rs[end - 1]) && IsHiraganaRune(rs[end]) && PredicateStartsAt(p, end))) {
@@ -1520,21 +1554,23 @@ size_t SoundText::PausedTo(size_t i) const {
 size_t SoundText::QuotedBy(const SoundMatch& m, size_t p) const {
     const std::u32string_view rs = rs_;
     const size_t i = m.end;
-    if (!m.intj || m.phrase || m.lead || m.open || i + 1 >= rs.size() || rs[i] != U'と' ||
-        In(rs[i + 1], U"とトしすさせ、，…‥")) {
+    // と, or って (ヤダって感じる; spec LEX-4825).
+    const bool tte = i + 2 < rs.size() && rs[i] == U'っ' && rs[i + 1] == U'て';
+    if (!m.intj || (m.phrase && !m.cry) || m.lead || m.open || i + 1 >= rs.size() || (rs[i] != U'と' && !tte) ||
+        (!tte && In(rs[i + 1], U"とトしすさせ、，…‥"))) {
         return 0;
     }
     if (StartsLongerWord(i)) return 0;
     size_t base = 0, user = 0, name = 0;
     LongestKeys(p, base, user, name);
     if (p + std::max(base, user) > i) return 0;
-    for (size_t k = i + 1; k < rs.size() && k <= i + 8; k++) {
+    for (size_t k = i + (tte ? 2 : 1); k < rs.size() && k <= i + 8; k++) {
         if (In(rs[k], U"、，。．！？!?…‥「」『』（）()\n")) return 0;
         if (k > i + 1 && IsKanjiRune(rs[k]) && IsKanjiRune(rs[k - 1])) continue;  // inside a word (爆笑)
         const std::string_view at = text_.substr(offsets_[k]);
         if (dict::StartsWithMember(HDTRANS_CLASS("sound.quoted-by"), at) > 0) {
             // Xと言わせる is a set phrase (ギャフンと言わせる 꼼짝 못하게 만들다, アッと言わせる).
-            return at.starts_with("言わせ") || at.starts_with("いわせ") ? 0 : i + 1;
+            return at.starts_with("言わせ") || at.starts_with("いわせ") ? 0 : i + (tte ? 2 : 1);
         }
     }
     return 0;
@@ -3659,7 +3695,7 @@ std::string PlainSpaces(std::string text) {
 
 std::string SoundRun(std::string_view normalized, const LineContext& ctx, const dict::Snapshot& snap) {
     const std::string completed = internal::RewriteDrawnHonorifics(
-        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(normalized, ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
+        internal::CompleteCutOffs(internal::WriteMasked(internal::JoinSpelledOut(internal::JoinSpacedOut(internal::WriteSpacedCopies(internal::JoinPauseCommas(normalized, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap),
         ctx, snap);
     std::string sounded = internal::WriteSounds(
         internal::RewriteCasualAdjectives(
