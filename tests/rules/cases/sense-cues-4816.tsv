@@ -1,0 +1,43 @@
+# 규칙: LEX-4816, LEX-4817, LEX-4818, LEX-4819, LEX-4820
+rule	input	expected	kind	layer
+cx:sense-cues-1:72	「それは違うよ！　ユージは訳あってここに来れないだけから！」	「그건 아니야! 유지는 사정이 있어 여기에 올 수 없는 것뿐으로부터!」	fix	rewrites
+cx:sense-cues-1:72	けれど、それは違う。	하지만, 그것은 아니다.	fix	rewrites
+cx:sense-cues-1:73	「失礼を申すが、それは違います」	「실례를 말씀드리지만, 그건 아닙니다」	fix	rewrites
+cx:sense-cues-1:72	討論会は違う。	토론회는 다르다.	keep	rewrites
+cx:sense-cues-1:72	…あっ、それは違うの？	…앗, 그것은 다른 거야?	keep	rewrites
+cx:sense-cues-1:80	「んじゃ、俺も付き合うわ」	「그럼, 나도 어울릴게」	fix	rewrites
+cx:sense-cues-1:80	仕方ない、私も付き合うか……	어쩔 수 없다, 나도 어울릴까……	fix	rewrites
+cx:sense-cues-1:80	「……ウチら……付き合う？」	「……우리……사귀어?」	keep	rewrites
+cx:sense-cues-1:80	彼女と付き合ってる	그녀와 사귀고 있다	keep	rewrites
+cx:sense-cues-1:90	お願い！止めてっ！	부탁! 그만해!	fix	rewrites
+cx:sense-cues-1:90	エイミー、そういうの止めて	에이미, 그러한 것 그만해	fix	rewrites
+cx:sense-cues-1:90	二人とも止めなさい	두 사람 모두 그만해	fix	rewrites
+cx:sense-cues-1:90	「この辺だって、俺には厳しいんだ。止めろ。これ以上奥には行くな」	「이 근처도, 나에게는 어렵다. 멈추어라. 더 이상 안쪽에는 가지 마」	keep	rewrites
+cx:sense-cues-1:90	王女のあおりに、警備が止めてそのまま退場させていた。	왕녀의 선동에, 경비가 멈추어 그대로 퇴장시키고 있었다.	keep	rewrites
+cx:sense-cues-1:92	だから彼が笑うのを 止めた	그러니까 그가 웃는 것을 그만두었다	fix	rewrites
+cx:sense-cues-1:92	この無意味なことを止めないなら	이 무의미한 일을 그만두지 않으면	fix	rewrites
+cx:sense-cues-1:92	力ずくで瓶を取るのを止めて、話し合うお二人。	힘으로 병을 집는 것을 그만두고, 서로 이야기하는 두 사람.	fix	rewrites
+cx:sense-cues-1:92	言葉を止めるように子爵を呼ぶ。	말을 멈추도록 자작을 부른다.	keep	rewrites
+cx:sense-cues-1:94	おい、おまえら見てねえで、こいつを止めてくれっ！	어이, 너희 봐 응으로, 이 녀석을 말려 줘!	fix	rewrites
+cx:sense-cues-1:94	わかっているわ。兄上を止めるために、わたしがここにいるんだもの	알고 있어. 형님을 말리기 위해, 내가 여기에 있는걸	fix	rewrites
+cx:sense-cues-1:94	お母さんは水を止め、ハンドタオルで手を拭く。	엄마는 물을 멈추어, 핸드타월로 손을 닦는다.	keep	rewrites
+cx:sense-cues-1:94	ピカチュウ あのメカを止めるぞ	피카츄 그 메카를 멈추겠어	keep	rewrites
+cx:sense-cues-1:94	まるで時を止めてしまったように。	마치 때를 멈추어버린 것처럼.	keep	rewrites
+cx:sense-cues-1:101	それでも最後の方は太平洋よ？	그래도 마지막 무렵은 태평양이야?	fix	rewrites
+cx:sense-cues-1:101	あたしも最後の方は、さすがに普通じゃなかったから	나도 마지막 무렵은, 아무래도 보통이 아니었으니까	fix	rewrites
+cx:sense-cues-1:101	最後のページを開いた	마지막 페이지를 폈다	keep	rewrites
+cx:sense-cues-1:14	最後の一人になった	마지막 한 사람이 되었다	keep	rewrites
+cx:sense-cues-1:102	なので、軽い方へ話を誘導する。	그래서, 가벼운 쪽으로 이야기를 유도한다.	fix	rewrites
+cx:sense-cues-1:102	こっちの方がいい	여기가 좋다	keep	rewrites
+cx:sense-cues-1:104	「ん？　んんん？　見知らぬ方がおられるのですが？」	「응? 으으응? 낯선 분이 계십니다만?」	fix	rewrites
+cx:sense-cues-1:104	その方がいい	그쪽이 좋다	keep	rewrites
+sense:tataku-hit	ズボンを脱がして ケツを叩くぞ	바지를 벗겨 엉덩이를 때리겠어	fix	senses
+sense:tataku-hit	ほっぺたを叩いた	뺨을 때렸다	fix	senses
+sense:tataku-hit	ドアを叩く音	문을 두드리는 소리	keep	senses
+sense:oboeru-learn	「じゃあ、基礎問題をしっかり覚えていこう」	「그럼, 기초 문제를 확실히 외워 가자」	fix	senses
+sense:oboeru-learn	まずは基本操作を覚えなきゃね。	우선은 기본 조작을 익혀야지.	fix	senses
+sense:oboeru-learn	名前ちゃんと覚えてよね？	이름 제대로 기억해?	keep	senses
+dict:w:32602	き、貴様、私を侮辱しおって、覚えていろ！！	네, 네놈, 나를 모욕 소금은, 두고 봐라!!	fix	lookup
+dict:w:32604	あんた、あとで覚えてなさい！	너, 나중에 두고 봐!	fix	lookup
+dict:w:32602	覚えておきなよ！	기억해 둬!	keep	lookup
+cx:sense-cues-1:73	自己卑下は違います	자기 비하는 다릅니다	keep	rewrites
