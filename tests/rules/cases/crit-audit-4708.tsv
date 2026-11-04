@@ -13,7 +13,7 @@ cx:notice-words-1:124	二〇二五年	2025년	keep	rewrites
 normalize:tteNda	まあ いいや おいらさ バットってんだ よろしく	뭐 아니 저야 배트라고 한다 잘 부탁드립니다	fix	normalize
 normalize:tteNda	これは何ってんだ？	이것은 뭐라는 거야?	fix	normalize
 normalize:tteNda	言ってんだ	말하는 거야	keep	normalize
-normalize:anno	あたいは、戦いが終わっても……やることが、あんのによ……。	나는, 싸움이 끝나도……주는 것이, 있는 것에…….	fix	normalize
+normalize:anno	あたいは、戦いが終わっても……やることが、あんのによ……。	나는, 싸움이 끝나도……하는 것이, 있는 것에…….	fix	normalize
 normalize:anno	あんな人	저런 사람	keep	normalize
 lexical:sino-gloss	流石だね。	역시구나.	fix	lookup
 lexical:sino-gloss	精強「第十七駆逐隊」を編成せよ！	정예 「제17구축대」를 편성하라!	fix	lookup
