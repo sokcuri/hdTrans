@@ -1,0 +1,16 @@
+# 규칙: GRM-40, GRM-177
+rule	input	expected	kind	layer
+rewrite:past-sequence	夜など少し早めに伺うと、夕食の後らしくバイオリンを弾いておられた。	has:물으니,	fix	rewrites
+rewrite:past-sequence	部屋に入ると、彼女が本を読んでいました。	has:들어가니,	keep	rewrites
+rewrite:past-sequence	彼は窓を開けると、外を見ていた。	has:열고는,	keep	rewrites
+rewrite:past-sequence	暫くたつと、大きな露わな眼で、彼の方をじっと眺めていた。	has:지나자,	keep	rewrites
+rewrite:past-sequence	閣下はアタシの目がモヤモヤを消すと、いい方向にいくことが多いって言ってましたけど、いきませんでした。	has:지우면,	fix	rewrites
+rewrite:past-sequence	そ、そうですか…こうやって…力を抜くとちょうどいいのですね…	has:빼면	keep	rewrites
+rewrite:past-sequence	いや、それがね？経験してみるとすごくよかったんだ…本当に素敵だった	has:보니	keep	rewrites
+rewrite:past-sequence	作家も、津田さんくらいになると、やっぱり違ったところがあると思った。	has:되면,	fix	rewrites
+rewrite:past-sequence	この程度になると、誰も止められなかった。	has:되니,	keep	rewrites
+rewrite:past-sequence	単刀直入に申し上げると、玉葉妃はふっと小さな笑みをこぼすと懐から布きれを取り出した。	has:말씀드리자면,	fix	rewrites
+rewrite:past-sequence	物音から判断すると、千莉はすぐに奥の部屋に入った。	has:판단하자면,	fix	rewrites
+rewrite:past-sequence	「率直に言うと、最近、筧が小太刀を追い回しているらしい」	has:말하자면,	fix	rewrites
+rewrite:past-sequence	正直に言うと、俺は怖かった。	has:솔직히 말하면,	keep	rewrites
+rewrite:past-sequence	彼は部屋に入ると、すぐに言った。	has:들어가	keep	rewrites
