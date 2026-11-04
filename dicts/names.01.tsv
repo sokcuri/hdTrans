@@ -229113,7 +229113,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 小天使テルス	소천사 테루스	N130	QPNVHn		GN							names.530107
 小天村	오아마촌	N130	QCTVPl		GN							names.530108
 小天狗	소천구	N110			GN						しょうてんぐ	names.530109
-小太刀	소도	N110			GN						こだち	names.530110
+小太刀	코다치	N130	QPNVHn	Wb	GN						こだち	names.530110
 小太刀凪	코다치 나기	N130	QPNVHn		GN						こだちなぎ	names.530111
 小太刀右京	코다치 우쿄	N110			GN						こだち うきょう	names.530112
 小太郎	코타로	N130	QPNVHn	Wb	GN							names.530113

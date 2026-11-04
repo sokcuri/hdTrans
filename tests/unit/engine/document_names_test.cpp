@@ -44,8 +44,8 @@ HD_TEST(engine_document_names) {
         return out.empty() ? std::string() : out[0];
     };
     const std::vector<std::pair<std::string, std::string>> cases = {
-        {"睦月は笑った。", "무츠키는 웃었다."},  // a month name
-        {"若葉は笑った。", "와카바는 웃었다."},
+        {"睦月は来た。", "무츠키는 왔다."},  // a month name
+        {"若葉は来た。", "와카바는 왔다."},
         {"暁", "아카츠키"},                       // alone on its line
         {"若葉マークだ。", "초보운전자 마크다."},  // a longer word
         {"恋は大事だ。", "사랑은 소중하다."},     // hon: the word where no honorific follows
@@ -97,7 +97,7 @@ HD_TEST(engine_document_names) {
     HD_CHECK_EQ(translate("今日はゆきちゃんと遊んだ。", kana.get()), std::string("오늘은 유키짱과 놀았다."));
     HD_CHECK_EQ(translate("しろちゃんと遊ぶ。", kana.get()), std::string("시로짱과 논다."));
 
-    HD_CHECK_EQ(translate("睦月は笑った。", nullptr), std::string("1월은 웃었다."));
+    HD_CHECK_EQ(translate("睦月は来た。", nullptr), std::string("1월은 왔다."));
     HD_CHECK_EQ(translate("もしもしみみちゃん？", nullptr), std::string("여보세요 귀짱?"));
 
     // The session's list applies to each later call; empty text drops it.
@@ -105,20 +105,20 @@ HD_TEST(engine_document_names) {
     HD_REQUIRE(engine.Open({dicts}));
     Session session(engine);
     HD_CHECK(session.SetNames(kNames));
-    HD_CHECK_EQ(session.Translate("睦月は笑った。"), std::string("무츠키는 웃었다."));
+    HD_CHECK_EQ(session.Translate("睦月は来た。"), std::string("무츠키는 왔다."));
     HD_CHECK_EQ(session.Translate("暁が来た。"), std::string("아카츠키가 왔다."));
     HD_CHECK(!session.SetNames("睦月\n若葉\t와카바"));  // a malformed line; the other is kept
-    HD_CHECK_EQ(session.Translate("若葉は笑った。\n睦月は笑った。"), std::string("와카바는 웃었다.\n1월은 웃었다."));
-    HD_CHECK_EQ(session.Translate("若葉は笑った。\r\n睦月は笑った。\r\n"), std::string("와카바는 웃었다.\r\n1월은 웃었다.\r\n"));
+    HD_CHECK_EQ(session.Translate("若葉は来た。\n睦月は来た。"), std::string("와카바는 왔다.\n1월은 왔다."));
+    HD_CHECK_EQ(session.Translate("若葉は来た。\r\n睦月は来た。\r\n"), std::string("와카바는 왔다.\r\n1월은 왔다.\r\n"));
     HD_CHECK(session.SetNames(kNames));
     HD_CHECK_EQ(session.Translate("恋が来た。", "恋「おはよう」\n恋「またね」\n恋「うん」"), std::string("렌이 왔다."));
     HD_CHECK_EQ(session.Translate("恋が来た。"), std::string("사랑이 왔다."));
     session.SetWrapped(true);
-    HD_CHECK_EQ(session.Translate("睦月は\n笑った。"), std::string("무츠키는\n웃었다."));
+    HD_CHECK_EQ(session.Translate("睦月は\n来た。"), std::string("무츠키는\n왔다."));
     session.SetWrapped(false);
     // A JA the pack rows cannot hold is a malformed line.
     HD_CHECK(!session.SetNames("若葉\t와카바\n睦月|暁\t무츠키"));
-    HD_CHECK_EQ(session.Translate("若葉は笑った。"), std::string("와카바는 웃었다."));
+    HD_CHECK_EQ(session.Translate("若葉は来た。"), std::string("와카바는 왔다."));
     HD_CHECK(session.SetNames(""));
-    HD_CHECK_EQ(session.Translate("若葉は笑った。"), std::string("새잎은 웃었다."));
+    HD_CHECK_EQ(session.Translate("若葉は来た。"), std::string("새잎은 왔다."));
 }
