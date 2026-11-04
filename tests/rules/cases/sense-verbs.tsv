@@ -31,7 +31,7 @@ dict:jisjk:267484	私にできません。	제가 할 수 없습니다.	fix	loca
 dict:jisjk:341799	友人について来る。	친구를 따라 온다.	fix	local
 dict:jisjk:341799	計画について話す。	계획에 대해 이야기한다.	keep	local
 dict:jisjk:341799	友人について話す。	친구에 대해 이야기한다.	keep	local
-dict:jisjk:90581	パンにソースをかけた。	빵에 소스를 끼얹었다.	fix	local
+dict:jisjk:90581	パンにソースをかけた。	빵에 소스를 뿌렸다.	fix	local
 dict:jisjk:90581	壁に時計をかけた。	벽에 시계를 걸었다.	keep	local
 dict:jisjk:93609	パンを焼いた。	빵을 구웠다.	fix	local
 dict:jisjk:93609	鍋で焼いた。	냄비로 구웠다.	keep	local

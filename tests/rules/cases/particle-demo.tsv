@@ -1,7 +1,7 @@
 # 규칙: LEX-41
 rule	input	expected	kind	layer
 dict:jisjk:4344	「お世辞でも嬉しいよ……」	has:「빈말이라도 기뻐	fix	defaults
-dict:jisjk:4344	さて、ナナイさんに電話してアポでも取っておくか。	has:약속이라도 취해	fix	defaults
+dict:jisjk:4344	さて、ナナイさんに電話してアポでも取っておくか。	has:약속이라도 잡아	fix	defaults
 dict:jisjk:4344	「そこで本でも読んでてください」	has:책이라도 읽고	fix	defaults
 dict:jisjk:4344	まさか幻でも見てたのか？	has:환상이라도 보고	fix	defaults
 dict:jisjk:4344	「今度、物語でも書いてみれば？」	has:이야기라도 써	fix	defaults

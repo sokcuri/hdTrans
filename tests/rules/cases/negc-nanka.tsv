@@ -8,7 +8,7 @@ cx:neg-clause-nanka:10	揉めてなんてないよね？	lacks:왠지	fix	rewrit
 cx:neg-clause-nanka:10	えっ、の…呑んでなんかないよぉ？	has:있지 않아	fix	rewrites
 cx:neg-clause-nanka:10	怒ってなんかないですよ？	has:화내고 있지 않아요	fix	rewrites
 cx:neg-clause-nanka:10	何も隠してなんかないよ。	has:숨기고 있지 않아	fix	rewrites
-cx:neg-clause-nanka:10	泣いてなんかないもん	has:울고 있지 않은 걸	fix	rewrites
+cx:neg-clause-nanka:10	泣いてなんかないもん	has:울고 있지 않은걸	fix	rewrites
 cx:neg-clause-nanka:10	悔しくなんかないもん！！	!rule:cx:neg-clause-nanka:10	keep	rewrites
 cx:neg-clause-nanka:10	見たことなんかない。	!rule:cx:neg-clause-nanka:10	keep	rewrites
 cx:neg-clause-nanka:10	お金なんかない	!rule:cx:neg-clause-nanka:10	keep	rewrites

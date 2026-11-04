@@ -1,0 +1,29 @@
+# 규칙: LEX-4610, LEX-4611, GRM-3913
+rule	input	expected	kind	layer
+cx:sense-cues-1:120	うふふ、本当だね。鏡餅みたいだね	우후후, 정말이구나. 설떡 같네	fix	rewrites
+cx:sense-cues-1:120	「あ……本当ですね。	「아……정말이군요.	fix	rewrites
+cx:sense-cues-1:120	その話は本当だ	그 이야기는 사실이다	keep	rewrites
+cx:sense-cues-1:122	艦隊、無事母港に入りました。本当、良かった！	함대, 무사히 모항에 들어갔습니다. 정말, 다행이에요!	fix	rewrites
+cx:sense-cues-1:122	It's ten. 今日も本当、いろいろあったわね。	It's ten. 오늘도 정말, 여러 가지 있었네.	fix	rewrites
+cx:sense-cues-1:122	本当なら、生きているうちにこうしてやりたかった	사실이라면, 살아 있는 동안에 이렇게 해 주고 싶었다	keep	rewrites
+sense:kakeru-sauce	微笑みながらメンチカツとキャベツにたっぷりとソースをかけている	미소 지으면서 멘치카츠와 양배추에 듬뿍 소스를 뿌리고 있다	fix	senses
+sense:kakeru-sauce	ケチャップをかけすぎじゃないか?	케찹을 너무 뿌리지 않을까?	fix	senses
+sense:kakeru-trouble	「……すまん、面倒かけた」	「……미안, 귀찮음 끼쳤다」	fix	senses
+sense:kakeru-trouble	手間かけさせやがって！脱出するぞ。	수고 끼치게 하다니! 탈출하겠어.	fix	senses
+sense:kakeru-sauce	眼鏡をかけた少年	안경을 쓴 소년	keep	senses
+sense:toru-get	一度は保健室に行ったが、先生に許可を取りショッケンの部室で休むことにした。	한 번은 양호실에 갔지만, 선생님에게 허가를 받아 쇽켄의 동아리방에서 쉬기로 했다.	fix	senses
+sense:toru-get	１５分後、俺たちはアポを取った団体のたまり場に向かっていた。	15분 후, 우리는 약속을 잡은 단체의 대기실로 향하고 있었다.	fix	senses
+sense:toru-get	…えっ、夜ご飯出前取るの？	…어, 저녁밥 요리 배달 시키는 거야?	fix	senses
+sense:toru-get	写真を取る	사진을 찍는다	keep	senses
+sense:motsu-hold	皆も、同じようにグラスを持って、白崎に注目する。	모두도, 똑같이 잔을 들고, 시라사키에 주목한다.	fix	senses
+sense:motsu-hold	実況の王女もマイクを持ってあとを追う。	실황의 왕녀도 마이크를 들고 쫓아다닌다.	fix	senses
+sense:motsu-hold	青い靴下も持ってるよ	푸른 양말도 가지고 있어	keep	senses
+sense:yoku-often	コヨイたちがよく出入りしているサリアの部屋も除外していいだろう。	코요이들이 자주 출입하고 있는 살리아의 방도 제외해도 될 것이다.	fix	senses
+sense:yoku-often	料理では沸騰したお湯をよく使うわ。	요리에서는 비등한 뜨거운 물을 자주 써.	fix	senses
+sense:yoku-often	「よく来てくれたね！」	「잘 와 줬네!」	keep	senses
+sense:yoku-often	　よく通る声。	 잘 들리는 목소리.	keep	senses
+builtin-ending:もん	「師匠は臆病でもいいって言ってるもん。」	「스승은 겁이 많아도 좋다고 말하는걸.」	fix	builtin-ending
+builtin-ending:もん	「うん。私、あんな上手に銃を撃てないもん」	「응. 나, 저런 능숙하게 총을 쏠 수 없는걸」	fix	builtin-ending
+builtin-ending:もん	だって嬉しいんですもん。気持ちいいんですもんっ。	왜냐하면 기쁜걸요. 기분 좋은걸요.	fix	builtin-ending
+builtin-ending:もん	消えたほうが、ずっとマシだって思っちゃってるもん	사라지는 편이, 계속 낫다고 생각해 버렸는걸	keep	builtin-ending
+builtin-ending:もん	会長はウチの鍵持ってたもんね	회장은 우리의 열쇠 가지고 있었잖아	keep	builtin-ending
