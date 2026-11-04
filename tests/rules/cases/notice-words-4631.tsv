@@ -1,0 +1,98 @@
+# 규칙: LEX-4631, LEX-4632, LEX-4633, LEX-4634, LEX-4635, LEX-4636, LEX-4637, LEX-4638, LEX-4639, GRM-3754
+rule	input	expected	kind	layer
+cx:notice-words-1:60	貴族の家に生まれた。	귀족의 집에서 태어났다.	fix	rewrites
+cx:notice-words-1:60	「子爵の娘の婚約者……。子爵の家に婿入り予定だった男は……」	has:자작의 집에 데릴사위로	fix	rewrites
+cx:notice-words-1:60	王は家に帰った。	왕은 집에 돌아갔다.	fix	rewrites
+cx:notice-words-1:60	男爵家の家に住む。	남작가의 집에 산다.	fix	rewrites
+cx:notice-words-1:60	侯爵家の娘だ。	후작가의 딸이다.	keep	rewrites
+cx:notice-words-1:60	伯爵家に仕える。	!rule:cx:notice-words-1:60	keep	rewrites
+cx:notice-words-1:62	お客様の中にお医者様はいらっしゃいませんか。	has:손님 중에 의사 선생님은	fix	rewrites
+cx:notice-words-1:62	集まってきた人の中に、見覚えがある奴がいた。	has:모여 온 사람 중에,	fix	rewrites
+cx:notice-words-1:62	「彼らの中には、今後、国を背負って立つ人材がいる」	has:그들 중에는,	fix	rewrites
+cx:notice-words-1:62	陣の中を流れる水は飲ませませぬ。	!rule:cx:notice-words-1:62	keep	rewrites
+cx:notice-words-1:62	生徒の中から選ぶ。	학생 중에서 선택한다.	keep	rewrites
+cx:notice-words-1:62	心の中に残る。	마음속에 남는다.	keep	rewrites
+dict:w:32700	「ええ、お医者様が入っていったのを見たって」	has:의사 선생님이 들어간	fix	lookup
+dict:w:32701	「お医者さまの訪問回数から、梨花さまのほうが重いのかしら？」	has:의사 선생님의 방문	fix	lookup
+dict:w:32700	医者に診てもらった。	의사에게 보였다.	keep	lookup
+dict:jisjk:12006	知らせが届いた。	소식이 도착했다.	fix	defaults
+dict:jisjk:12006	先ほど知らせを受けてから……	방금 전 소식을 받고 나서……	fix	defaults
+dict:jisjk:12006	お知らせします。	알려 드리겠습니다.	keep	defaults
+cx:notice-words-1:67	誰にも必要とされてない。	누구도 필요로 하지 않는다.	fix	rewrites
+cx:notice-words-1:67	必要とされてない。	!rule:cx:notice-words-1:67	keep	rewrites
+cx:notice-words-1:68	みんなに必要とされてない人なんていない。	has:모두가 필요로 하지 않는 사람	fix	rewrites
+cx:notice-words-1:68	会社に必要とされてなかった。	!rule:cx:notice-words-1:68	keep	rewrites
+cx:notice-words-1:69	必要とされてない人間だ。	필요로 하지 않는 인간이다.	fix	rewrites
+cx:notice-words-1:69	この国に必要とされてない人間だ。	!rule:cx:notice-words-1:69	keep	rewrites
+cx:notice-words-1:69	必要とされてない書類だ。	!rule:cx:notice-words-1:69	keep	rewrites
+cx:notice-words-1:70	必要とされてない。	필요하지 않다.	fix	rewrites
+cx:notice-words-1:70	「私なんて、必要とされてない」	「나 같은 건, 필요하지 않아」	fix	rewrites
+cx:notice-words-1:70	会社に必要とされてなかった。	!rule:cx:notice-words-1:70	keep	rewrites
+cx:notice-words-1:71	会社に必要とされてなかった。	회사에 필요하지 않았다.	fix	rewrites
+cx:notice-words-1:71	この国に必要とされてない人間だ。	이 나라에 필요하지 않은 인간이다.	fix	rewrites
+cx:notice-words-1:71	必要とされてない人間だ。	!rule:cx:notice-words-1:71	keep	rewrites
+cx:notice-words-1:72	その方が我が力を必要とされているのだ	rule:cx:notice-words-1:72=(을)를	fix	rewrites
+cx:notice-words-1:72	誰か力を必要とされたい方はいますか。	!rule:cx:notice-words-1:72	keep	rewrites
+cx:notice-words-1:73	「顔もいいし、何より、みんなに必要とされてるじゃないか」	has:모두가 필요로 하고 있잖아	fix	rewrites
+cx:notice-words-1:73	「あおくんに必要とされて……ちゃんと、役に立てたから」	has:아오 군이 필요로 해	fix	rewrites
+cx:notice-words-1:73	その方が我が力を必要とされているのだ	has:우리 힘을 필요로 하고 있다	fix	rewrites
+cx:notice-words-1:73	冷静さが必要とされる職業だ。	냉정함이 필요하게 되는 직업이다.	keep	rewrites
+cx:notice-words-1:73	誰のために存在したい？　誰に必要とされたい？	has:누구에게 필요하게 되고 싶어	keep	rewrites
+cx:notice-words-1:73	冷静で動じないことが　必要とされる職業だから――	has:않는 것이 필요하게 되는 직업이니까	keep	rewrites
+cx:notice-words-1:73	バトリングに必要とされるギアは用意します。	!rule:cx:notice-words-1:73	keep	rewrites
+cx:notice-words-1:73	会社に必要とされている。	!rule:cx:notice-words-1:73	keep	rewrites
+cx:notice-words-1:74	「顔もいいし、何より、みんなに必要とされてるじゃないか」	rule:cx:notice-words-1:74=(이)가	fix	rewrites
+cx:notice-words-1:74	誰のために存在したい？　誰に必要とされたい？	!rule:cx:notice-words-1:74	keep	rewrites
+cx:notice-words-1:74	会社に必要とされていない。	!rule:cx:notice-words-1:74	keep	rewrites
+cx:notice-words-1:75	誰にも必要とされていない。	누구도 필요로 하지 않는다.	fix	rewrites
+cx:notice-words-1:75	彼には必要とされていない。	그에게는 필요하지 않다.	keep	rewrites
+cx:notice-words-1:76	誰にも必要とされていない。	rule:cx:notice-words-1:76=누구도	fix	rewrites
+cx:notice-words-1:76	誰にも言わない。	!rule:cx:notice-words-1:76	keep	rewrites
+cx:notice-words-1:77	必要とされていない人間だ。	필요로 하지 않는 인간이다.	fix	rewrites
+cx:notice-words-1:77	この国に必要とされていない人間だ。	이 나라에 필요하지 않은 인간이다.	keep	rewrites
+cx:notice-words-1:77	署名が必要とされていない書類。	서명이 필요하지 않은 서류.	keep	rewrites
+cx:notice-words-1:77	会社に必要とされていない。	회사에 필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	チームに必要とされていない。	팀에 필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	私にとって必要とされていない。	나에게 필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	必要とされていない。	필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	もう必要とされていない、そう思った。	이제 필요하지 않다, 그렇게 생각했다.	keep	rewrites
+cx:notice-words-1:77	許可は必要とされていない。	허가는 필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	この仕事に資格は必要とされていない。	이 일에 자격은 필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	私は必要とされていない。	나는 필요하지 않다.	keep	rewrites
+cx:notice-words-1:77	彼女は誰からも必要とされていなかった。	그녀는 누구에게서도 필요하지 않았다.	keep	rewrites
+cx:notice-words-1:77	まるで必要とされていない 存在だということです	마치 필요하지 않은 존재라는 것입니다	keep	rewrites
+cx:notice-words-1:80	予定が前倒しになる。	예정이 앞당겨진다.	fix	rewrites
+cx:notice-words-1:80	会議が前倒しになった。	회의가 앞당겨졌다.	fix	rewrites
+cx:notice-words-1:80	前倒しで進める。	앞당겨서 진행한다.	keep	rewrites
+cx:notice-words-1:82	日程を前倒しにする。	일정을 앞당긴다.	fix	rewrites
+cx:notice-words-1:82	予定が前倒しになる。	!rule:cx:notice-words-1:82	keep	rewrites
+cx:notice-words-1:64	テストで赤点取る。	테스트에서 낙제점 받는다.	fix	rewrites
+cx:notice-words-1:64	試験で満点を取った。	시험에서 만점을 받았다.	fix	rewrites
+cx:notice-words-1:64	テストで使う。	테스트로 쓴다.	keep	rewrites
+cx:notice-words-1:66	赤点を取った者は、訓練送りだ。	has:낙제점을 받은 사람은	fix	rewrites
+cx:notice-words-1:66	「私は、赤点を取ってない」	has:낙제점을 받지	fix	rewrites
+cx:notice-words-1:66	バスケで点を取った。	!rule:cx:notice-words-1:66	keep	rewrites
+cx:notice-words-1:84	昔のことを思い出した。	옛일을 떠올렸다.	fix	rewrites
+cx:notice-words-1:84	用事を思い出しました。	용무를 떠올렸습니다.	fix	rewrites
+cx:notice-words-1:84	来月結婚すると言っていたのを思い出した。	내달 결혼한다고 한 것을 떠올렸다.	fix	rewrites
+cx:notice-words-1:84	ああ…思い出した！	아…생각해 냈어!	keep	rewrites
+cx:notice-words-1:84	アオ君が私を思い出すまで。	아오 군이 나를 생각해 낼 때까지.	keep	rewrites
+cx:notice-words-1:86	新曲を配信する。	신곡을 공개한다.	fix	rewrites
+cx:notice-words-1:86	楽曲の配信を開始しました。	has:악곡 공개를 개시했습니다	fix	rewrites
+cx:notice-words-1:86	新曲を配信中です。	신곡을 공개 중입니다.	fix	rewrites
+cx:notice-words-1:86	配信で新曲を歌った。	방송으로 신곡을 노래했다.	keep	rewrites
+cx:notice-words-1:86	今日の配信では新曲を歌います。	오늘의 방송에서는 신곡을 노래합니다.	keep	rewrites
+cx:notice-words-1:86	曲を流しながらゲームを配信する。	곡을 틀면서 게임을 방송한다.	keep	rewrites
+cx:notice-words-1:86	新曲を配信で披露した。	!rule:cx:notice-words-1:86	keep	rewrites
+cx:notice-words-1:86	運行情報を公式でも配信しています。	운행 정보를 공식에서도 전달하고 있습니다.	keep	rewrites
+cx:notice-words-1:86	ゲームのプレイを動画配信する者もいる。	has:동영상 방송하는	keep	rewrites
+cx:notice-words-1:60	伯爵の家の娘だ。	백작 가의 딸이다.	keep	rewrites
+cx:notice-words-1:60	王の家に行く。	왕의 집에 간다.	fix	rewrites
+cx:notice-words-1:60	子爵の家に婿入りする。	has:자작의 집에	fix	rewrites
+cx:notice-words-1:90	来月結婚すると言っていたのを思い出した。	has:결혼한다고 한 것을	fix	rewrites
+cx:notice-words-1:90	あれから、会長の言っていたことを考えていた。	has:회장이 말한 것을 생각하고	fix	rewrites
+cx:notice-words-1:90	御園が、お守りだと言っていたものだ。	미소노가, 부적이라고 말한 것이다.	fix	rewrites
+cx:notice-words-1:90	言っていることがわからない。	!rule:cx:notice-words-1:90	keep	rewrites
+dict:jisjk:138807	許可は必要とされていない。	허가는 필요하지 않다.	fix	defaults
+dict:jisjk:138807	署名が必要とされていない書類。	서명이 필요하지 않은 서류.	fix	defaults
+dict:jisjk:138807	誰にも必要とされていない。	누구도 필요로 하지 않는다.	keep	defaults

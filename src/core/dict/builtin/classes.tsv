@@ -2252,6 +2252,7 @@ ko-adjective.stem-end	탐탁
 ko-adjective.stem-end	점잖
 ko-adjective.stem-end	고프
 ko-adjective.stem-end	뻔하
+ko-adjective.stem-end	필요하
 
 ko-noun.passive-batda	사과
 ko-noun.passive-batda	축하
@@ -6581,7 +6582,6 @@ verb.unattained	信頼され
 verb.unattained	評価され
 verb.unattained	選ばれ
 verb.unattained	救われ
-verb.unattained	必要とされ
 verb.unattained	好かれ
 verb.unattained	慕われ
 verb.unattained	恵まれ
@@ -10236,3 +10236,13 @@ noun.thing-passive	適用
 noun.thing-passive	反映
 noun.thing-passive	変換
 noun.thing-passive	案内
+//= noun.song	Ends of nouns of songs and recordings whose を or の before 配信 makes it the release, 공개 (新曲を配信 신곡을 공개).
+noun.song	曲
+noun.song	楽曲
+noun.song	新曲
+noun.song	シングル
+noun.song	アルバム
+noun.song	音源
+noun.song	ミュージックビデオ
+noun.song	主題歌
+noun.song	MV

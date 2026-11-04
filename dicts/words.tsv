@@ -27443,3 +27443,5 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 たつや	타츠야	N130	QPNVHn	Wb	GN			LEX-4590: たつやが言った 타츠야가 말했다			たつや	w:32500
 ねっこ	뿌리	N110	VPt		GN			LEX-4590: ねっこを掘る 뿌리를 판다			ねっこ	w:32501
 鬘	가발	N110			GN			LEX-4590: かつらを被る 가발을 쓴다			かつら	w:32502
+お医者様	의사 선생님	N110	VHn		GN			LEX-4632: お医者様 의사 선생님			おいしゃさま	w:32700
+お医者さま	의사 선생님	N110	VHn		GN			LEX-4632: お医者さま 의사 선생님			おいしゃさま	w:32701
