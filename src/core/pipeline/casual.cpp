@@ -1044,6 +1044,7 @@ constexpr EmphaticSpelling kEmphaticSpellings[] = {
     {"ばっかじゃ", "バカじゃ", nullptr, true},  // not the ばかり of 学食ばっかじゃ
     {"ばっかみたい", "バカみたい", nullptr, true},
     {"大っ嫌", "大嫌"},  // 大っ嫌い
+    {"大っきらい", "大嫌い"},
     {"大っ好き", "大好き"},
     {"だいっきらい", "だいきらい"},
     {"だいっすき", "だいすき"},

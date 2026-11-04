@@ -40,3 +40,5 @@ normalize:emphatic-spelling	大っ嫌いな食べ物	정말 싫은 음식	fix	no
 normalize:emphatic-spelling	大っ好き	너무 좋아	fix	normalize
 normalize:emphatic-spelling	大っ好きなお兄ちゃん	정말 좋아하는 오빠	fix	normalize
 normalize:emphatic-spelling	大嫌い	너무 싫다	keep	normalize
+normalize:emphatic-spelling	大っきらい	너무 싫다	fix	normalize
+normalize:emphatic-spelling	お前なんか大っきらいだ	너 같은 건 정말 싫다	fix	normalize

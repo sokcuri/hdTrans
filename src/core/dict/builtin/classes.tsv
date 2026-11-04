@@ -27,6 +27,8 @@
 //= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
 //= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
+//= noun.invite-place	Places and gatherings one is invited to with に (うち, 家, パーティー): いらっしゃいませんか after one is 오시지 않겠습니까 (spec LEX-4600).
+//= verb.keep-doing	Stems of verbs one keeps doing (見, 見張, 寝, 待): a ていないと of one that ends the sentence is what one must keep doing, -아야 한다 (spec GRM-3725).
 //= word.wonder	Words of wonder that open a line before a pause (へえ、, ほう、), also as the interjection stage has already written them (헤에, 호오): a verb with な after one is admired, 구나, not forbidden (spec GRM-3723).
 //= word.leave-taking	Words of taking leave (ありがとうございました, お世話になりました, 失礼します, さようなら): a 御機嫌よう later on the line closing a quoted speech parts, 안녕히 계세요, and greets no one.
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
@@ -9999,6 +10001,34 @@ word.direction-demonstrative	そちら
 word.direction-demonstrative	こちら
 word.direction-demonstrative	あちら
 word.direction-demonstrative	どちら
+noun.invite-place	うち
+noun.invite-place	家
+noun.invite-place	お家
+noun.invite-place	おうち
+noun.invite-place	我が家
+noun.invite-place	パーティー
+noun.invite-place	パーティ
+noun.invite-place	会
+noun.invite-place	集まり
+noun.invite-place	結婚式
+noun.invite-place	お祭り
+noun.invite-place	祭り
+noun.invite-place	食事会
+noun.invite-place	飲み会
+noun.invite-place	お茶会
+verb.keep-doing	見
+verb.keep-doing	見張
+verb.keep-doing	寝
+verb.keep-doing	待
+verb.keep-doing	起き
+verb.keep-doing	休
+verb.keep-doing	黙
+verb.keep-doing	隠れ
+verb.keep-doing	座
+verb.keep-doing	掴
+verb.keep-doing	押さえ
+verb.keep-doing	支え
+verb.keep-doing	付い
 word.wonder	へえ
 word.wonder	へぇ
 word.wonder	へー
