@@ -1130,6 +1130,35 @@ bool MustNannai(std::string_view s, size_t pos, Match& m) {
     return false;
 }
 
+// The やだ of いやだ said short (絶対やだよ 絶対いやだよ, こんなのやだ, もうやだ, ウェルダンやだ) after kanji or
+// katakana, or after の, と, も or もう; not the や ending a word in kana before the copula (ひやひやだ, ろうやだ,
+// がんばりやだ). A やだ that starts the text or follows a mark or a drawn kana is the phrase row (やだ！ 싫어,
+// やだ何それ, もーやだ) unless plain kana go on after it (やだもう, やだから, やだよ雀).
+bool ShortIyada(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "やだ")) return false;
+    const std::string_view head = s.substr(0, pos);
+    const char32_t before = head.empty() ? 0 : LastRune(head).cp;
+    if (IsHiraganaClass(before) && !head.ends_with("の") && !head.ends_with("と") && !head.ends_with("も") &&
+        !head.ends_with("もう")) {
+        return false;
+    }
+    if (!IsHiraganaClass(before) && !IsKanjiClass(before) && !(before >= U'ァ' && before <= U'ヺ')) {
+        const std::string_view rest = s.substr(p);
+        if (rest.empty() || !IsHiraganaClass(LastRune(rest.substr(0, text::DecodeRune(rest).size)).cp)) return false;
+        if (rest.starts_with("や") || rest.starts_with("ぁ") || rest.starts_with("もぅ") || rest.starts_with("もー")) {
+            return false;
+        }
+        // Sentence particles up to the end, a mark or the やだ said again (やだね。, やだなぁ, やだっやだっ).
+        size_t q = p;
+        while (q < s.size() && OneOf(s, q, U"よねなぁあーぇえ～っ")) {}
+        size_t r = q;
+        if (q == s.size() || s.substr(q).starts_with("や") || OneOf(s, r, U"、。｡！？!?…‥」』 　・")) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 // The Kobe とう of ている after し, っ or 見 (何しとう？ 何してる？, 行っとうよ, 見とう), before the end, a mark or
 // よ, ん, や, ねん, て; not the old wish before な or ござ (見とうない, 話しとうございます).
 bool KobeTou(std::string_view s, size_t pos, Match& m) {
@@ -1308,6 +1337,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
     if (dialectForms && Contains(text, "やし")) {
         text = ReplaceAll(text, KansaiYashi, [](const Match&) { return std::string("だし"); });
     }
+    if (Contains(text, "やだ")) text = ReplaceAll(text, ShortIyada, [](const Match&) { return std::string("いやだ"); });
     if (Contains(text, "なん")) {
         text = ReplaceAll(text, MustNannai, [](const Match& m) { return Cat({m.group[1], "ならない"}); });
     }
