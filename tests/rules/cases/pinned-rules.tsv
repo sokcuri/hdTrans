@@ -69,7 +69,7 @@ dict:jisjk:4209	兄より弟の方が背が高い。	rule:dict:jisjk:4209=보다
 dict:jisjk:342560	右へどうぞ進んでください。	오른쪽으로 부디 진행해 주세요.	fix	local
 dict:jisjk:374896	犯人は彼とのことです。	rule:dict:jisjk:374896=(와)과의 일	current	local
 dict:jisjk:375007	ステンレス流しを買う。	rule:dict:jisjk:375007=흘려 보내기	current	local
-dict:jisjk:375216	健康のため歩く。	rule:dict:jisjk:375216=이기 때문에	current	local
+dict:jisjk:375216	「なんだかんだで全部邪神のせいになる」という流れのため「痴呆」	has:라는 흐름 때문에 「치매」	fix	local
 dict:jisjk:92417	愚王の話を本で読んだ。	우왕 이야기를 책에서 읽었다.	current	local
 sense:見かける	駅で先生をお見かけしました。	역에서 선생님을 보았습니다.	current	senses
 dict:jisjk:3829	裏の通りを歩く。	뒤의 거리를 걷는다.	fix	local
