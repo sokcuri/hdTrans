@@ -3048,6 +3048,78 @@ std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, con
     return out;
 }
 
+namespace {
+
+// What follows the れ of an ichidan potential said without its ら: the forms of the potential stem
+// (逃げれる, 起きれない, 来れた, 見れて, 寝れます, 起きれず, 起きれん, 起きれねえ, 起きれそう), not
+// the conditional ば (考えれば) or the northern imperative standing alone (やめれ).
+constexpr std::string_view kRaLessAfter[] = {"る", "な", "た", "て", "ま", "ず", "ん", "ね", "そう"};
+
+// Whether a word of the dictionary that starts the text s at byte reaches the byte offset at.
+bool WordReaches(std::string_view s, size_t byte, size_t at, const LineContext& ctx, const dict::Snapshot& snap) {
+    const dict::Candidates rd = snap.GetWordInfo(s.substr(byte), dict::LookupMode::General, ctx.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (c.codes != nullptr && byte + c.source.size() >= at && s.substr(byte).starts_with(c.source)) return true;
+    }
+    return false;
+}
+
+// Whether a verb of the dictionary that starts the text s at byte has a form there that reaches the
+// byte offset at: the plain reading of a れ (畳まれる of 畳む, 取れる of 取る, たたまれない of たたむ).
+bool PlainVerbOver(std::string_view s, size_t byte, size_t at, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::string_view text = s.substr(byte);
+    const dict::Candidates rd = snap.GetWordInfo(text, dict::LookupMode::General, ctx.lookup);
+    for (const dict::Candidate& c : rd.list) {
+        if (c.codes == nullptr || c.codes->part.Tag() != 'M' || c.codes->part.ClassDigit() != '4' || !text.starts_with(c.source)) {
+            continue;
+        }
+        const std::string_view rest = text.substr(c.source.size());
+        for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+            const std::string_view form = word::Conjugation(c.codes->part.VerbKind(), branch);
+            if (!form.empty() && rest.starts_with(form) && byte + c.source.size() + form.size() >= at) return true;
+        }
+    }
+    return false;
+}
+
+}  // namespace
+
+std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    constexpr std::string_view kRe = "れ", kRu = "る";
+    if (text.find(kRe) == std::string_view::npos) return std::string(text);
+    // The ら that the potential られ of an ichidan verb starts with.
+    const std::string_view potential = word::Conjugation(7, 4);
+    const std::string_view ra = potential.substr(0, text::DecodeRune(potential).size);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (rs[i] != U'れ' || StartLength(std::string_view(s).substr(byte[i + 1]), kRaLessAfter) == 0) continue;
+        size_t from = i;
+        while (from > 0 && i - from < kLongestStem && (IsKanjiRune(rs[from - 1]) || IsHiraganaRune(rs[from - 1]))) from--;
+        // The longest stem first; a word of the dictionary over the れ from where a stem would start
+        // (入れる, 切れない, 呆れない, 忘れない) keeps the text.
+        bool found = false;
+        for (; from < i; from++) {
+            if (WordReaches(s, byte[from], byte[i + 1], ctx, snap)) break;
+            const std::string stem = s.substr(byte[from], byte[i] - byte[from]);
+            if (VerbStem(stem, kRu, ctx, snap)) {
+                found = !PlainVerbOver(s, byte[from], byte[i + 1], ctx, snap);
+                break;
+            }
+        }
+        if (!found) continue;
+        out.append(s, byte[done], byte[i] - byte[done]);
+        out += ra;
+        done = i;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
 std::string RewriteContractedNo(std::string_view text, const dict::Snapshot& snap) {
     constexpr std::string_view kNo = "の";
     if (!HoldsMember(text, {dict::ClassMembers(HDTRANS_CLASS("contraction.n-no"))})) return std::string(text);
@@ -3701,7 +3773,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
         internal::RewriteCasualAdjectives(
             internal::RewriteOnbinU(
                 internal::RewriteContractedNo(
-                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
                 ctx, snap),
             ctx, snap),
         ctx, snap);

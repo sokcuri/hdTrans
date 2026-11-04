@@ -1259,6 +1259,38 @@ HD_TEST(pipeline_ra_less_kuru) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteRaLessKuru(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+// The potential of an ichidan verb without its ら takes its ら back after the stem of an ichidan verb
+// of the dictionary; not where a word or another verb's form reads over the れ (入れる, 取れる, 畳まれる),
+// before the conditional ば, or after no ichidan stem.
+HD_TEST(pipeline_ra_less_ichidan) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "逃げ\t도망치&AA@\tM437\t1\n"
+                                     "起き\t일어나&AA@\tM437\t2\n"
+                                     "い\t있&HN@\tM437\t3\n"
+                                     "いれ\t넣&HN@\tM437\t4\n"
+                                     "取\t잡&AA@\tM418\t5\n"
+                                     "畳\t접&AA@\tM415\t6\n"
+                                     "畳ま\t접히&AA@\tM417\t7\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    const Case cases[] = {
+        {"逃げれる", "逃げられる"},
+        {"逃げれない", "逃げられない"},
+        {"起きれた", "起きられた"},
+        {"朝起きれなくて", "朝起きられなくて"},
+        {"起きれん", "起きられん"},
+        {"逃げれば", "逃げれば"},    // the conditional
+        {"逃げれ", "逃げれ"},        // no form after it
+        {"いれる", "いれる"},        // a verb of its own
+        {"取れる", "取れる"},        // the potential of a godan verb
+        {"畳まれる", "畳まれる"},    // the passive of a godan verb
+        {"流れる", "流れる"},        // no ichidan stem
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteRaLessIchidan(c.in, ctx, *loaded.snapshot), std::string(c.want));
+}
+
 // The の said ん after a noun before 中 or とこ, not inside a word (真ん中) nor before kanji.
 HD_TEST(pipeline_contracted_no) {
     const auto loaded = dict::Load({{0, "base.tsv",
