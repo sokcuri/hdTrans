@@ -1,0 +1,21 @@
+#! layer=base
+# 과거 계사·형용사 뒤 끝 조사 わよ, わね, わよね, ぞ, のね (GRM-3837)
+key	ko	pos	sem	gram	dict	rule	ctx	note	id	raw	prio
+だったわね	(이었)였네	P200			GN				past-final:2
+だったわよね	(이었)였지	P200			GN				past-final:3
+だったぞ	(이었)였어	P200			GN				past-final:4
+でしたわ	(이었)였어요	P200			GN				past-final:5
+でしたわよ	(이었)였어요	P200			GN				past-final:6
+でしたわね	(이었)였네요	P200			GN				past-final:7
+でしたわよね	(이었)였지요	P200			GN				past-final:8
+でしたのね	(이었)였군요	P200			GN				past-final:9
+でしたぞ	(이었)였어요	P200			GN				past-final:10
+だったわね	5네	U500			GN				past-final:11
+だったわよね	5지	U500			GN				past-final:12
+かったわね	5네	T500			GN				past-final:13
+かったわよね	5지	T500			GN				past-final:14
+かったわよ	5어	T500			GN				past-final:15
+だわね	(이)네	P200			GN				past-final:16
+だわよね	(이)지	P200			GN				past-final:17
+だわね	1네	U500			GN				past-final:18
+だわよね	1지	U500			GN				past-final:19
