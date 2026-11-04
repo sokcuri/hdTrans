@@ -29,3 +29,19 @@ cx:meaning-flips-1:90	見てないと困る	보지 않으면 곤란하다	keep	r
 cx:meaning-flips-1:90	見てないと？	보지 않으면?	keep	rewrites
 dict:jisjk:342197	寝てないといい	자지 않으면 좋다	fix	local-ending
 dict:jisjk:342197	スリルを求めてばかりで 現実を見ていないとでも？	스릴을 구하고만 있어 현실을 보지 않았다고라도?	keep	local-ending
+cx:meaning-flips-1:64	ご主人は家にいらっしゃいませんか？	남편은 집에 계시지 않습니까?	keep	rewrites
+cx:meaning-flips-1:64	先生は今、学校にいらっしゃいませんか	선생님은 지금, 학교에 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:64	社長は会社にいらっしゃいませんか？	사장은 회사에 계시지 않습니까?	keep	rewrites
+cx:meaning-flips-1:64	お母様はご自宅にいらっしゃいませんか	어머님은 자택에 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:64	よかったら、パーティーにいらっしゃいませんか？	괜찮다면, 파티에 오시지 않겠습니까?	fix	rewrites
+cx:meaning-flips-1:64	今度、学校にいらっしゃいませんか	이번, 학교에 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	学校にいらっしゃいませんか	학교에 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:64	病院にいらっしゃいませんか？	병원에 계시지 않습니까?	keep	rewrites
+cx:meaning-flips-1:64	事務所にいらっしゃいませんか	사무소에 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:64	今、家にいらっしゃいませんか？	지금, 집에 계시지 않습니까?	keep	rewrites
+cx:meaning-flips-1:64	まだ会社にいらっしゃいませんか	아직 회사에 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:64	あなたは家にいらっしゃいませんか	당신은 집에 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:64	皆さんも、今度うちにいらっしゃいませんか	여러분도, 이번 집에 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	ぜひ一度、事務所にいらっしゃいませんか	꼭 한 번, 사무소에 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	一緒にいらっしゃいませんか	함께 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	遊びにいらっしゃいませんか	놀러 오시지 않겠습니까	fix	rewrites
