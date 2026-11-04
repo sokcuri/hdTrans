@@ -1,0 +1,31 @@
+# 규칙: GRM-3720, GRM-3722, GRM-3724, GRM-3725, LEX-4600
+rule	input	expected	kind	layer
+cx:meaning-flips-1:32	そう言ってるでしょ	그렇게 말하잖아	fix	rewrites
+cx:meaning-flips-1:32	そう言ってるでしょ！	그렇게 말하잖아!	fix	rewrites
+cx:meaning-flips-1:32	だからそう言ってんだろ	그러니까 그렇게 말하잖아	fix	rewrites
+cx:meaning-flips-1:32	そう言ってるだろう	!rule:cx:meaning-flips-1:32	keep	rewrites
+cx:meaning-flips-1:32	そう言ってるだろうから	그렇게 말할 테니까	keep	rewrites
+cx:meaning-flips-1:64	今度、うちにいらっしゃいませんか	이번, 집에 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	パーティーにいらっしゃいませんか	파티에 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	明日、私の家にいらっしゃいませんか	내일, 제 집에 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:64	こちらにいらっしゃいませんか？	이쪽에 계시지 않습니까?	keep	rewrites
+cx:meaning-flips-1:64	そこにいらっしゃいませんか	!rule:cx:meaning-flips-1:64	keep	rewrites
+cx:meaning-flips-1:64	奥様はいらっしゃいませんか	사모님은 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:72	夢じゃなくて嬉しい	꿈이 아니어서 기쁘다	fix	rewrites
+cx:meaning-flips-1:72	夢じゃなくて嬉しかった	꿈이 아니어서 기뻤다	fix	rewrites
+cx:meaning-flips-1:72	本物じゃなくてがっかりした	진짜가 아니어서 실망했다	fix	rewrites
+cx:meaning-flips-1:72	本物じゃなくて悲しい	진짜가 아니어서 슬프다	fix	rewrites
+cx:meaning-flips-1:72	それは私じゃなくて妹です	그것은 내가 아니라 여동생입니다	keep	rewrites
+cx:meaning-flips-1:72	人じゃなくて良かった	사람이 아니어서 다행이다	keep	rewrites
+cx:meaning-flips-1:90	彼女を見てないと。	그녀를 봐야 한다.	fix	rewrites
+cx:meaning-flips-1:90	クラスメートがゲームバトラに 入れられたとかいう時に クラりんは僕が見てないと！	클래스메이트가 게임바트라에 넣을 수 있었다든가 말할 때 어질 응하 내가 봐야 한다!	fix	rewrites
+cx:meaning-flips-1:90	誰かが周辺で見張ってないと	누군가가 주변에서 감시해야 한다	fix	rewrites
+cx:meaning-flips-1:90	あなたは寝ていないと	당신은 자야 한다	fix	rewrites
+cx:meaning-flips-1:90	彼女を見てないとね	그녀를 봐야지	fix	rewrites
+cx:meaning-flips-1:90	たいした死人は出てないと	별 죽은 사람은 나오지 않았다고	keep	rewrites
+cx:meaning-flips-1:90	まだ寝ていないと	아직 자지 않았다고	keep	rewrites
+cx:meaning-flips-1:90	見てないと思う	!rule:cx:meaning-flips-1:90	keep	rewrites
+cx:meaning-flips-1:90	見てないと困る	보지 않으면 곤란하다	keep	rewrites
+cx:meaning-flips-1:90	見てないと？	보지 않으면?	keep	rewrites
+dict:jisjk:342197	寝てないといい	자지 않으면 좋다	fix	local-ending
+dict:jisjk:342197	スリルを求めてばかりで 現実を見ていないとでも？	스릴을 구하고만 있어 현실을 보지 않았다고라도?	keep	local-ending

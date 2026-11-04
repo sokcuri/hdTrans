@@ -149,7 +149,6 @@ cx:meaning-flips-1:80	死亡の原因が 君の所見通り	!rule:cx:meaning-fli
 cx:meaning-flips-1:80	私をあなたの人生の意味にしないで！	!rule:cx:meaning-flips-1:80	keep	rewrites
 cx:meaning-flips-1:80	斜め上の解釈に呆れ、	!rule:cx:meaning-flips-1:80	keep	rewrites
 dict:jisjk:342197	たいした死人は出てないと	별 죽은 사람은 나오지 않았다고	fix	local-ending
-dict:jisjk:342197	あなたは寝ていないと	당신은 자지 않았다고	fix	local-ending
 dict:jisjk:342197	スリルを求めてばかりで 現実を見ていないとでも？	스릴을 구하고만 있어 현실을 보지 않았다고라도?	fix	local-ending
 dict:jisjk:342197	その首と胴が つながっていないと知れ	그 목과 몸통이 연결되지 않았다고 알려지고	fix	local-ending
 cx:meaning-flips-1:38	やめろって言ってんだよ	그만두라니까	fix	rewrites
