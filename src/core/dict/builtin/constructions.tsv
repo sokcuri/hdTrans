@@ -1130,6 +1130,8 @@ cx:notice-words-1:126	LEX-4710	&&4 S+0== "司令" D+0== "사령관" S+1!= @Rhono
 cx:notice-words-1:128	LEX-4712	&&3 S+0== "感心" F+0== "verb" ||4 I+0== "L感心しない" I+0== "L感心しなかっ" I+0== "L感心しません" &&2 S+1== "な" !1 S+2== "がら"	set-target "좋게 &AY@"	それは感心しないな 그건 좋게 보지 않네; not 感心した, 感心しながら
 cx:notice-words-1:130	LEX-4712	&&2 S+0== "心中" S+1== "する"	set-target "동반자살"	二人は心中した 두 사람은 동반자살했다; not 心中を察する
 cx:notice-words-1:131	GRM-3758	&&3 S+0== "で" S-1== @noun.medium-place !1 >3 S+0== @Lverb.send-by ||0	select-lemma "에서"	SNSで話題になった SNS에서 화제가 되었다; not SNSで送った
+cx:notice-words-1:170	LEX-4719	&&2 S+0== "オラ" ||3 F+0== "exclaim-after" F+0== "utterance-end" &&5 S+1!= "たち" S+1!= "達" S+1!= "ら" S+1!= "ぁ" !1 P+1== "2**"	set-target "이봐"	オラ、出てけ 이봐, 나가라; not オラに聞いてみて 나에게
+cx:notice-words-1:171	LEX-4719	&&2 S+0== "オラ" S+1== "ぁ"	set-target "오라"	抜けよオラぁっ！ 빠져라 오라!; a drawn オラ is a shout, not 나 or 이봐
 //= chau-final	after Select 90	The ちゃう that ends a line inside 「」 or 『』 is speech, not -어버린다: after a verb of what happens to one (verb.involuntary) it is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아, 死んじゃう 죽을 것 같아), after another verb -어버릴 거야 (やっちゃう 해버릴 거야). Narration keeps -어버린다.
 cx:chau-final:10	LEX-69	&&5 Y+0== "6버린다" ||4 I+0== "Rちゃう" I+0== "Rじゃう" I+0== "Rちまう" I+0== "Rじまう" ||2 F+0== "quote-end" F+0== "utterance-end" F+0== "quoted" ||3 B+0== @verb.involuntary F+0== "passive" F+0== "lexical-passive"	set-ending "3 것 같아"	「出ちゃう」 나올 것 같아
 cx:chau-final:20	LEX-69	&&4 Y+0== "6버린다" ||4 I+0== "Rちゃう" I+0== "Rじゃう" I+0== "Rちまう" I+0== "Rじまう" ||2 F+0== "quote-end" F+0== "utterance-end" F+0== "quoted"	set-ending "6버릴 거야"	「やっちゃう」 해버릴 거야
