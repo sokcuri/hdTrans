@@ -1550,6 +1550,44 @@ void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dic
     if (at < text.size()) output::Add(out, text.substr(at));
 }
 
+// A one-kanji name of name.kanji-honorific before さん, くん, ちゃん or 様 and then a mark, the end or
+// a particle, written as the name (成さん？ 나루 씨, not 成さん 이루지 않아, the negative of 成す; spec
+// LEX-4824): the kanji starts its run, after no kanji.
+void KanjiNamesIn(std::string_view text, output::Pieces& out) {
+    size_t at = 0;
+    for (size_t i = 0; i < text.size();) {
+        const text::Rune r = text::DecodeRune(text.substr(i));
+        const size_t step = std::max<size_t>(1, r.size);
+        if (!IsKanjiRune(r.cp) || (i > 0 && IsKanjiRune(LastRune(text.substr(0, i)).cp))) {
+            i += step;
+            continue;
+        }
+        std::string_view korean;
+        for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("name.kanji-honorific"))) {
+            const std::size_t eq = pair.find('=');
+            if (eq != std::string_view::npos && text.substr(i, step) == pair.substr(0, eq)) korean = pair.substr(eq + 1);
+        }
+        const std::string_view rest = text.substr(i + step);
+        std::string_view honorific;
+        for (const std::string_view h : {std::string_view("さん"), std::string_view("くん"), std::string_view("ちゃん"), std::string_view("様")}) {
+            if (rest.starts_with(h)) honorific = h;
+        }
+        const std::string_view after = rest.substr(honorific.size());
+        const char32_t next = text::DecodeRune(after).cp;
+        const bool closed = after.empty() || !(IsHiraganaRune(next) || IsKanjiRune(next) || IsKatakanaRune(next)) ||
+                            RuneIn(next, U"はがをにともへでやの");
+        if (korean.empty() || honorific.empty() || !closed) {
+            i += step;
+            continue;
+        }
+        if (i > at) output::Add(out, text.substr(at, i - at));
+        out.push_back({std::string(korean), output::SpanWord});
+        at = i + step;
+        i = at;
+    }
+    if (at < text.size()) output::Add(out, text.substr(at));
+}
+
 }  // namespace
 
 output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& ctx, const dict::Snapshot& snap) {
@@ -1563,7 +1601,12 @@ output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& 
         if (p.span == output::SpanText) NicknameSuffixesIn(p.text, ctx, snap, named);
         else named.push_back(p);
     }
-    return named;
+    output::Pieces kanji;
+    for (const output::Piece& p : named) {
+        if (p.span == output::SpanText) KanjiNamesIn(p.text, kanji);
+        else kanji.push_back(p);
+    }
+    return kanji;
 }
 
 std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap, bool endRows) {

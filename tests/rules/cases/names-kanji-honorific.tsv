@@ -1,0 +1,17 @@
+# 규칙: LEX-4824
+rule	input	expected	kind	layer
+names:kanji-honorific	はぅ？成さん？こんなところで何をしているんですか？	하우? 나루 씨? 이런 곳에서 무엇을 하고 있습니까?	fix	lookup
+names:kanji-honorific	な、成さん…、そんなことより	나, 나루 씨…, 그런 일보다	fix	lookup
+names:kanji-honorific	はわわっ！？成さん！？	하와왓!? 나루 씨!?	fix	lookup
+names:kanji-honorific	成さんと一緒にキッチンに並んでお料理。	나루 씨와 함께 키친에 늘어서 요리.	fix	lookup
+names:kanji-honorific	しかし、成くんにあそこまでコケにされては仕方がない。	하지만, 나루 군에게 저기까지 우습게 여겨져 어쩔 수 없다.	fix	lookup
+names:kanji-honorific	隼斗くんにお願いがあります	하야토 군에게 부탁이 있습니다	fix	lookup
+names:kanji-honorific	美命。隼斗くんは真摯な男だ。	미명. 하야토 군은 진지한 남자다.	fix	lookup
+names:kanji-honorific	そこにいるのは隼斗か？	거기에 있는 것은 하야토인가?	fix	lookup
+names:kanji-honorific	許さん！	용서하지 않아!	keep	lookup
+names:kanji-honorific	絶対に許さん。	절대로 용서하지 않는다.	keep	lookup
+names:kanji-honorific	完成さんに会った	완성 씨를 만났다	keep	lookup
+names:kanji-honorific	北斗七星が見える	북두칠성이 보인다	keep	lookup
+names:kanji-honorific	一斗缶	한 말캔	keep	lookup
+names:kanji-honorific	勿論です	물론입니다	keep	lookup
+names:kanji-honorific	自己紹介をする	자기 소개를 한다	keep	lookup
