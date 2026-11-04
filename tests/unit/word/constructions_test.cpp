@@ -423,6 +423,18 @@ HD_TEST(constructions_casual_level) {
     HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::casual, false, false, "prose"), std::string("인기"));
 }
 
+// A family reads what an earlier family of its pass wrote on the same word, the same atoms included.
+HD_TEST(constructions_later_family_reads_rewrite) {
+    const std::vector<std::string_view> table = {
+        "//= a\tafter First 10\tdoc\n",
+        "cx:a:10\t\tD+0== \"인기\"\tset-target \"X\"\t\n",
+        "//= b\tafter First 20\tdoc\n",
+        "cx:b:10\t\tD+0== \"인기\"\tset-target \"Z\"\t\n",
+        "cx:b:20\t\tD+0== \"X\"\tset-target \"Y\"\t\n",
+    };
+    HD_CHECK_EQ(GuardedTarget(table), std::string("Y"));
+}
+
 // A family guard is a condition tried on each word before the family's rows: a false guard skips
 // every row, a true one leaves the rows as they are without a guard.
 HD_TEST(constructions_family_guard) {

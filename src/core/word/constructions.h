@@ -61,6 +61,8 @@ struct CxNode {
     uint32_t end = 0;    // one past the subtree
 };
 
+// The actions of a row. A new one may change candidates, targets and endings but no surface and no link
+// of the chain (Apply).
 enum class CxVerb : uint8_t {
     SelectLemma, SelectTarget, TakeTarget, SetTarget, AppendTarget, PrependTarget, SetEnding, ReplaceHead, ReplaceEndingTail,
     MapEndingTail, MapTargetTail, MapLemma, MapTarget, SelectMap, SetVerb, SetVerbFrom, CopyEnding, CopyWord, SetSound, SetActive, ClipEnding, SetBaseVerb, DrawEnding,

@@ -371,6 +371,8 @@ bool EllipsisItem(const Item* it) {
            s.find("―") != std::string_view::npos;
 }
 
+// A feature reads the chain and changes nothing: no surface, no link and no selection (the atom values
+// RunConstructions keeps for a word, and its surface numbers, rely on it).
 constexpr NamedFeature kFeatures[] = {
     {"exists", [](Flusher&, const Item*) { return true; }},
     {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }},
@@ -1253,14 +1255,18 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
     }
-    std::unordered_map<std::string, uint32_t> slots;
-    for (CxAtom& a : t.atoms) {
-        std::string key(reinterpret_cast<const char*>(&a.set), sizeof a.set);
-        key.append(reinterpret_cast<const char*>(&a.feature), sizeof a.feature);
-        key += {static_cast<char>(a.field), static_cast<char>(a.match), static_cast<char>(a.delta), static_cast<char>(a.negated)};
-        key += a.value;
-        a.slot = slots.try_emplace(std::move(key), t.slots).first->second;
-        if (a.slot == t.slots) t.slots++;
+    // The atoms with one value, by the first of each kind (SameAtom).
+    std::unordered_map<std::string_view, std::vector<uint32_t>> byValue;
+    for (uint32_t i = 0; i < t.atoms.size(); i++) {
+        CxAtom& a = t.atoms[i];
+        std::vector<uint32_t>& same = byValue[a.value];
+        const auto found = std::ranges::find_if(same, [&](uint32_t b) { return SameAtom(a, t.atoms[b]); });
+        if (found != same.end()) {
+            a.slot = t.atoms[*found].slot;
+        } else {
+            a.slot = t.slots++;
+            same.push_back(i);
+        }
     }
     return t;
 }
@@ -1471,6 +1477,8 @@ const Item* Scanned(Flusher& f, const ConstructionTable& t, uint32_t i, const It
 // with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
 char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
 
+// An action may change the candidates, targets and endings of words but no surface and no link of the
+// chain: RunConstructions numbers the surfaces of the chain once per pass.
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, const internal::CxAction& a,
            Selection source) {
     Item* it = Neighbour(a.scanned ? scanned : origin, a.delta);
@@ -1729,7 +1737,8 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
             if (family.indexed && tally == nullptr) {
                 rows = &family.open;
                 if (surface != kNoSurface) {
-                    const auto found = std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
+                    const auto found =
+                        std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
                     if (found != family.bySurface.end() && found->first == surface) rows = &found->second;
                 }
                 if (rows->empty()) continue;
