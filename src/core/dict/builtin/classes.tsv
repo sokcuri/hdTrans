@@ -10276,3 +10276,12 @@ noun.synced-data	連絡先
 noun.synced-data	カレンダー
 noun.synced-data	情報
 noun.synced-data	クラウド
+//= noun.test-score	Scores of a test that one gets with 取る, 받다 (赤点を取る 낙제점을 받다), after which the で of the test is 에서.
+noun.test-score	赤点
+noun.test-score	満点
+noun.test-score	零点
+noun.test-score	百点
+noun.test-score	落第点
+noun.test-score	高得点
+noun.test-score	最高点
+noun.test-score	平均点
