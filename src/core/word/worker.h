@@ -167,6 +167,9 @@ private:
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     // Whether a dictionary word starts at full[cursor:].
     bool WordAt(std::string_view full, int cursor, int token);
+    // The shorter readings to take at full[cursor:] instead of c when c leaves one stray hiragana
+    // that a shorter reading lets the next word take; null when c stands.
+    Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
     // Whether the verb shorter, read from records at full[cursor:] with a shorter ending, reads the
     // same where the text ends after it.
     bool StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter);
