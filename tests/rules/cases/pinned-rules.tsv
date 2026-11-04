@@ -45,7 +45,7 @@ dict:jisjk:342458	そんな話があるかっ！	그런 이야기가 있어!	cur
 dict:jisjk:342710	つまらないって人もいるけど私は好きだ。	시시하다는 사람도 있지만 나는 좋아한다.	current	local-ending
 dict:jisjk:343126	お送りしました資料をご確認ください。	보내 드렸던 자료를 확인해 주십시오.	current	local-ending
 dict:jisjk:343569	君もそう思うよねえ。	rule:dict:jisjk:343569=	current	local
-dict:jisjk:344514	電話ないし、メールで連絡する。	rule:dict:jisjk:344514=없고	current	local
+dict:jisjk:344514	電話ないし、メールで連絡する。	rule:dict:jisjk:344514= 없고	current	local
 dict:jisjk:266225	この辺りはとても静かだそうだ。	이 주위는 무척 조용하다고 한다.	current	local-ending
 dict:jisjk:345267	試験に合格するには努力が必要だ。	rule:dict:jisjk:345267= 	current	local
 dict:jisjk:346541	彼の自由に行動させた。	rule:dict:jisjk:346541=자유에	current	local
@@ -56,7 +56,7 @@ dict:jisjk:4092	走ったら足が速くなった。	달리자 발이 빨라졌�
 dict:jisjk:353400	毎日薬を飲んで欲しい。	rule:dict:jisjk:353400=$DE@	current	local
 dict:jisjk:355019	彼は話を聞かれた。	rule:dict:jisjk:355019=들&AA@	current	local
 dict:jisjk:358632	一日だけで終わる。	rule:dict:jisjk:358632=에만	current	local
-dict:jisjk:359335	分かったものの不安は残る。	안 것의 불안은 남는다.	current	local-ending
+dict:jisjk:359335	分かったものの不安は残る。	알았지만 불안은 남는다.	current	local-ending
 dict:jisjk:362124	はい、了解です。	rule:dict:jisjk:362124=%EF@	current	local
 sense:高い	値段は高いものの品質が良い。	가격은 비싸기는 하지만 품질이 좋다.	current	senses
 dict:jisjk:142505	彼は医者であり、作家でもある。	rule:dict:jisjk:142505=이기도 &Mf@	current	local
@@ -67,7 +67,7 @@ dict:jisjk:373524	早く寝ようという計画です。	빨리 자려는 계�
 dict:jisjk:373549	天気がよくなくて残念だ。	날씨가 좋지 않아 유감이다.	current	local-ending
 dict:jisjk:4209	兄より弟の方が背が高い。	rule:dict:jisjk:4209=보다	current	local
 dict:jisjk:342560	右へどうぞ進んでください。	오른쪽으로 부디 진행해 주세요.	fix	local
-dict:jisjk:374896	犯人は彼とのことです。	rule:dict:jisjk:374896=(와)과의 일	current	local
+dict:jisjk:374896	彼とのことは忘れた	rule:dict:jisjk:374896=(와)과의 일	current	local
 dict:jisjk:375007	ステンレス流しを買う。	rule:dict:jisjk:375007=흘려 보내기	current	local
 dict:jisjk:375216	「なんだかんだで全部邪神のせいになる」という流れのため「痴呆」	has:라는 흐름 때문에 「치매」	fix	local
 dict:jisjk:92417	愚王の話を本で読んだ。	우왕 이야기를 책에서 읽었다.	current	local
