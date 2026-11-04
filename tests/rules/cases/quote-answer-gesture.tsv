@@ -1,6 +1,6 @@
 # 규칙: SPC-28
 rule	input	expected	kind	layer
-rewrite:quote-to-answer	私は、異論はないと頷いた。	나는, 이론은 없다고 끄덕였다.	fix	rewrites
+rewrite:quote-to-answer	私は、異論はないと頷いた。	나는, 이의는 없다고 끄덕였다.	fix	rewrites
 rewrite:quote-to-answer	それが風習だとアワイは最後に付け加えた。	그것이 풍습이라고 아와이는 마지막으로 덧붙였다.	fix	rewrites
 rewrite:quote-to-answer	ティアナが、そんなことはないと首を振る。	티아나가, 그렇지 않다고 고개를 젓는다.	fix	rewrites
 rewrite:quote-to-answer	よく分からないと首を傾げる。	잘 모른다고 고개를 갸웃한다.	fix	rewrites

@@ -10,7 +10,7 @@ cx:darou-concessive:20	かなり接近しないと場所の特定は無理でし
 cx:darou-concessive:40	下と言う事はないだろうが、そう年上にも見えない。	has:없을 테지만,	fix	rewrites
 cx:darou-concessive:20	持って生まれた麗華の資質も、もちろんあっただろうけど。	has:있었을 테지만.	fix	rewrites
 cx:darou-concessive:40	自分の腕では完璧ではないだろうが、似た感じの像ができた。	has:완벽하지 않을 테지만,	fix	rewrites
-cx:darou-concessive:30	彼等としては不服でしょうけど。	has:불복이겠지만.	fix	rewrites
+cx:darou-concessive:30	彼等としては不服でしょうけど。	has:불만이겠지만.	fix	rewrites
 cx:darou-concessive:40	あなた方には靴しか見えないだろうが、あれには中身が入っている。	has:안 보일 테지만,	fix	rewrites
 cx:darou-concessive:40	池の中から言っても説得力はないだろうが、野生動物はむしろ神経質だ	has:설득력은 없을 테지만,	fix	rewrites
 cx:darou-concessive:20	それはそれで幸せなんでしょうけど……、でもね	has:행복한 것이겠지만……,	fix	rewrites
@@ -28,7 +28,7 @@ cx:darou-concessive:20	別の展開もあったんでしょうけど……	has:�
 cx:darou-concessive:20	商業施設にするんでしょうが、いまさらそんなことできませんって	has:하겠지만,	fix	rewrites
 cx:darou-concessive:22	私と比較すればお姉様は地味だろうけれど、十分に綺麗な顔	has:수수할 테지만,	fix	rewrites
 cx:darou-concessive:22	お前の国にも親御さんは いるだろうけれど	has:있을 테지만	fix	rewrites
-cx:darou-concessive:31	彼等としては不服でしょうけど、仕方ない。	has:불복이겠지만,	fix	rewrites
+cx:darou-concessive:31	彼等としては不服でしょうけど、仕方ない。	has:불만이겠지만,	fix	rewrites
 cx:darou-concessive:10	攫うならお姫様抱っこなんかが良いんだろうけど	!rule:cx:darou-concessive:10	keep	rewrites
 cx:darou-concessive:10	それがあんたの仕事でしょうが」	!rule:cx:darou-concessive:10	keep	rewrites
 cx:darou-concessive:20	それがあんたの仕事でしょうが」	!rule:cx:darou-concessive:20	keep	rewrites

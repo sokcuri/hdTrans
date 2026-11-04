@@ -22,7 +22,7 @@ dict:jisjk:364119	責任をもって対応する。	책임을 져 대응한다.	
 dict:jisjk:364119	時価をもって計算する。	시가로써 계산한다.	fix	local
 dict:jisjk:373295	パスタを茹でる。	파스타를 삶는다.	fix	local
 dict:jisjk:373295	中華麺を茹でる。	중화면을 삶는다.	keep	local
-dict:jisjk:115307	式典がすんだ。	식전이 끝났다.	fix	local
+dict:jisjk:115307	式典がすんだ。	의식이 끝났다.	fix	local
 dict:jisjk:115307	試験がすんだ。	시험이 끝났다.	keep	local
 dict:jisjk:267484	私にできる仕事だ。	내가 할 수 있는 일이다.	fix	local
 dict:jisjk:267484	彼にできる仕事だ。	그가 할 수 있는 일이다.	keep	local

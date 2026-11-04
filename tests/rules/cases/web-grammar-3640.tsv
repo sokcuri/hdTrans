@@ -129,7 +129,7 @@ cx:adnominal-clause:50	半分くらいは眉唾だったっぽいけど。	has:�
 cx:adnominal-clause:50	いやー、植物人間とか早とちりだったっぽい。	has:오해였던 것 같다	fix	rewrites
 cx:adnominal-clause:10	スキルポイントなるものは全部使い切っちゃったっぽいけど、	has:다 사용해버린 것 같지만	fix	rewrites
 cx:adnominal-clause:10	雨っぽい。	비 같다.	keep	rewrites
-cx:adnominal-clause:10	提督が鎮守府に着任したっぽい。これより艦隊の指揮に入るっぽい！	has:착임했다 뽀이	keep	rewrites
+cx:adnominal-clause:10	提督が鎮守府に着任したっぽい。これより艦隊の指揮に入るっぽい！	has:부임했다 뽀이	keep	rewrites
 cx:web-fixes-h:49	その程度の傷で、あなたの価値が損なわれる事などありません	has:손상되는 일은 없습니다	fix	rewrites
 cx:web-fixes-h:49	受け入れることなどすぐにはできない	has:받아들이는 것은	keep	rewrites
 cx:web-fixes-h:51	当然、実物に出会えることなど滅多にない。	has:만날 수 있는 일은 좀처럼 없다	fix	rewrites
