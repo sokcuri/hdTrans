@@ -1,4 +1,4 @@
-# 규칙: LEX-4631, LEX-4632, LEX-4633, LEX-4634, LEX-4635, LEX-4636, LEX-4637, LEX-4638, LEX-4639, GRM-3754
+# 규칙: LEX-4644, LEX-4643, LEX-4631, LEX-4632, LEX-4633, LEX-4634, LEX-4635, LEX-4636, LEX-4637, LEX-4638, LEX-4639, GRM-3754
 rule	input	expected	kind	layer
 cx:notice-words-1:60	貴族の家に生まれた。	귀족의 집에서 태어났다.	fix	rewrites
 cx:notice-words-1:60	「子爵の娘の婚約者……。子爵の家に婿入り予定だった男は……」	has:자작의 집에 데릴사위로	fix	rewrites
@@ -96,3 +96,25 @@ cx:notice-words-1:90	言っていることがわからない。	!rule:cx:notice-
 dict:jisjk:138807	許可は必要とされていない。	허가는 필요하지 않다.	fix	defaults
 dict:jisjk:138807	署名が必要とされていない書類。	서명이 필요하지 않은 서류.	fix	defaults
 dict:jisjk:138807	誰にも必要とされていない。	누구도 필요로 하지 않는다.	keep	defaults
+cx:notice-words-1:63	お医者様方が集まった。	의사 선생님들이 모였다.	fix	rewrites
+cx:notice-words-1:63	お客様方にお知らせします。	손님들에게 알려 드리겠습니다.	fix	rewrites
+cx:notice-words-1:63	奥様方が来た。	사모님들이 왔다.	fix	rewrites
+cx:notice-words-1:63	るのは大体奥様方だもの	has:대개 사모님들인걸	fix	rewrites
+cx:notice-words-1:63	羅漢様方は山神様のお使いだ。	has:라칸님들은	fix	rewrites
+cx:notice-words-1:63	お客様の方へどうぞ。	!rule:cx:notice-words-1:63	keep	rewrites
+cx:notice-words-1:63	皆様方のご協力をお願いします。	여러분 협력을 부탁드립니다.	keep	rewrites
+cx:notice-words-1:61	先生方、よろしくお願いします。	선생님들, 잘 부탁드립니다.	fix	rewrites
+cx:notice-words-1:61	浜学園の先生方にお話を伺った。	has:선생님들에게 이야기를	fix	rewrites
+cx:notice-words-1:61	先生の方を見た。	!rule:cx:notice-words-1:61	keep	rewrites
+cx:notice-words-1:62	お客様の中をご案内します。	손님 중을 안내해 드리겠습니다.	fix	rewrites
+cx:notice-words-1:62	お客様の中、	손님 중,	fix	rewrites
+cx:notice-words-1:62	生徒の中を歩く。	학생 중을 걷는다.	fix	rewrites
+cx:notice-words-1:62	家の中を歩く。	!rule:cx:notice-words-1:62	keep	rewrites
+cx:notice-words-1:64	試験で高得点を取った。	시험에서 고득점을 받았다.	fix	rewrites
+cx:notice-words-1:64	テストで零点を取った。	테스트에서 영점을 받았다.	fix	rewrites
+cx:notice-words-1:66	試験で高得点を取った。	rule:cx:notice-words-1:66=&FD@	fix	rewrites
+cx:notice-words-1:66	バスケで点を取った。	!rule:cx:notice-words-1:66	keep	rewrites
+dict:jisjk:98686	零点だった。	영점이었다.	fix	defaults
+dict:jisjk:98686	テストで零点を取った。	has:영점을 받았다	fix	defaults
+dict:w:32702	気温は零点下だ。	has:영하	fix	lookup
+dict:w:32702	零点だった。	영점이었다.	keep	lookup
