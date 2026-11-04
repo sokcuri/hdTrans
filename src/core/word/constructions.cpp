@@ -706,7 +706,7 @@ constexpr NamedFeature kFeatures[] = {
     {"speech-close",
      [](Flusher&, const Item* it) {
          const std::string_view rest = TextAfter(it);
-         return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！!」』）)");
+         return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！!」』）)≫》】〉＞");
      }},
     // An exclamation mark of mark.exclaim is one of the two characters after the word
     // (待ち伏せますか！, ますか？！, ますかっ！).

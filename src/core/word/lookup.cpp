@@ -386,6 +386,20 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
             return IsDigit(b) || IsAlpha(b);
         };
         if (!wordBefore()) return false;
+        // After a person's name of the name layer, やん is the nickname -やん (まりやん 마리얀), not the
+        // Kansai ending (学生やん 학생이잖아; spec GRM-3832).
+        if (u.key.starts_with("やん")) {
+            std::string_view head = left.substr(0, static_cast<std::size_t>(before));
+            // The name fills its kana run: two characters or more after a break, not the tail of a
+            // predicate (関係あるんやん).
+            for (int n = 0; n < 6 && !head.empty(); n++) {
+                const std::size_t cut = head.size() - DecodeLastRune(head).size;
+                const char32_t prior = cut > 0 ? DecodeLastRune(left.substr(0, cut)).cp : U' ';
+                const bool start = !(prior >= U'ぁ' && prior <= U'ゖ') && !(prior >= U'ァ' && prior <= U'ヺ') && !text::IsKanji(prior);
+                if (n >= 1 && start && snapshot.NamePerson(left.substr(cut, static_cast<std::size_t>(before) - cut))) return false;
+                head = head.substr(0, cut);
+            }
+        }
         bool particleRow = true;
         for (const std::string_view c : {"だ", "で", "じゃ", "や"}) {
             if (u.key.starts_with(c)) particleRow = false;
@@ -945,7 +959,7 @@ bool Worker::SentenceFinal(std::string_view rest, int token, bool comma) const {
     // The punctuation that may follow a sentence-final predicate in its token, and the
     // small kana that only lengthen or stop its last sound (書くなっ, 来たぁ).
     static constexpr std::string_view kClosing[] = {"。", "．", "！", "？", "…", "‥", "・", "」", "』", "）", "～",
-                                                    "ー", "―", "—", "─", "♪", "♡", "♥", "❤", "☆", "★", "／", ".", "!", "?", "っ", "ッ",
+                                                    "ー", "―", "—", "─", "♪", "♡", "♥", "❤", "☆", "★", "／", "≫", "》", "】", "〉", "＞", ".", "!", "?", "っ", "ッ",
                                                     "ぁ", "ぃ", "ぅ", "ぇ", "ぉ", "ァ", "ィ", "ゥ", "ェ", "ォ"};
     auto closing = [](std::string_view t) {
         while (!t.empty()) {

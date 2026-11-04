@@ -50,7 +50,7 @@ lexical:spoken-words	かえりうちにする	has:반격	fix	lookup
 lexical:spoken-words	ワレトトモニ…エイエンニシズミナサイ……ッ！	has:나와 함께	fix	lookup
 lexical:spoken-words	野次馬の中にひとりわれ関せずという下女がいた	lacks:깨지고	fix	lookup
 lexical:spoken-words	皿がわれる	접시가 깨진다	keep	lookup
-pre-select:unplaced-head	まりやん！	마리잖아!	fix	pre-select
+pre-select:unplaced-head	まりやん！	마리얀!	fix	pre-select
 pre-select:unplaced-head	まりです。	마리입니다.	fix	pre-select
 pre-select:unplaced-head	ぬぺです。	누페입니다.	fix	pre-select
 pre-select:unplaced-head	ぽぺやん！	포페잖아!	fix	pre-select

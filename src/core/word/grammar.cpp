@@ -3239,7 +3239,7 @@ bool QuoteEnd(const Worker& w, const Item* it) {
         if (w.Span(it->tokenIndex + 1) != 0) return false;
         rest = w.Tok(it->tokenIndex + 1).text;
     }
-    return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)");
+    return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！？!?。．.」』）)≫》】〉＞");
 }
 
 bool QuoteVerbFollows(const Item* it) {
