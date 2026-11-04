@@ -26,9 +26,15 @@ cx:notice-words-1:68	誰にも必要とされていない。	누구도 필요로
 cx:notice-words-1:68	誰にも必要とされてなかった。	누구도 필요로 하지 않았다.	keep	rewrites
 cx:notice-words-1:70	必要とされてない人間だ。	필요로 하지 않는 인간이다.	fix	rewrites
 cx:notice-words-1:70	バトリングに必要とされるギアは用意します。	!rule:cx:notice-words-1:70	keep	rewrites
+cx:notice-words-1:71	誰のために存在したい？　誰に必要とされたい？	has:누구에게 필요하게 되고 싶어	keep	rewrites
+cx:notice-words-1:71	冷静で動じないことが　必要とされる職業だから――	has:않는 것이 필요하게 되는 직업이니까	keep	rewrites
+cx:notice-words-1:73	彼は必要とされていない。	has:그는 필요하게 되지 않는다	fix	rewrites
+cx:notice-words-1:71	必要とされてない人間だ。	필요로 하지 않는 인간이다.	fix	rewrites
+cx:notice-words-1:73	誰にも必要とされていない。	!rule:cx:notice-words-1:73	keep	rewrites
+cx:notice-words-1:74	誰のために存在したい？　誰に必要とされたい？	!rule:cx:notice-words-1:74	keep	rewrites
 cx:notice-words-1:74	「顔もいいし、何より、みんなに必要とされてるじゃないか」	has:모두가 필요로 하고 있잖아	fix	rewrites
 cx:notice-words-1:74	「あおくんに必要とされて……ちゃんと、役に立てたから」	has:아오 군이 필요로 해	fix	rewrites
-cx:notice-words-1:74	バトリングに必要とされるギアは用意します。	배틀링에 필요로 하는 기어는 준비합니다.	keep	rewrites
+cx:notice-words-1:74	バトリングに必要とされるギアは用意します。	!rule:cx:notice-words-1:74	keep	rewrites
 cx:notice-words-1:76	誰にも必要とされていない。	rule:cx:notice-words-1:76=누구도	fix	rewrites
 cx:notice-words-1:76	誰にも言わない。	!rule:cx:notice-words-1:76	keep	rewrites
 cx:notice-words-1:80	予定が前倒しになる。	예정이 앞당겨진다.	fix	rewrites
@@ -51,3 +57,8 @@ cx:notice-words-1:90	来月結婚すると言っていたのを思い出した�
 cx:notice-words-1:90	あれから、会長の言っていたことを考えていた。	has:회장이 말한 것을 생각하고	fix	rewrites
 cx:notice-words-1:90	御園が、お守りだと言っていたものだ。	미소노가, 부적이라고 말한 것이다.	fix	rewrites
 cx:notice-words-1:90	言っていることがわからない。	!rule:cx:notice-words-1:90	keep	rewrites
+cx:notice-words-1:71	その方が我が力を必要とされているのだ	has:우리 힘을 필요로 하고 있다	fix	rewrites
+cx:notice-words-1:71	冷静さが必要とされる職業だ。	냉정함이 필요하게 되는 직업이다.	keep	rewrites
+cx:notice-words-1:71	必要とされる人材。	!rule:cx:notice-words-1:71	keep	rewrites
+cx:notice-words-1:72	その方が我が力を必要とされているのだ	rule:cx:notice-words-1:72=(을)를	fix	rewrites
+cx:notice-words-1:72	誰か力を必要とされたい方はいますか。	!rule:cx:notice-words-1:72	keep	rewrites
