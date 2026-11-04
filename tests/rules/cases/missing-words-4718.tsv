@@ -1,0 +1,19 @@
+# 규칙: LEX-4718
+rule	input	expected	kind	layer
+lexical:missing-word	或る夜、彼はまた、母親の夢を見た。	어떤 밤, 그는 또, 어머니의 꿈을 꾸었다.	fix	lookup
+lexical:missing-word	然し三千代は気にも掛からなかった。	그러나 미치요는 기분에도 걸리지 않았다.	fix	lookup
+lexical:missing-word	而して、其処に足をかけて	그리고, 거기에 다리를 걸어	fix	lookup
+lexical:missing-word	末座に坐って、	말석에 앉아,	fix	lookup
+lexical:missing-word	十時に近い頃、部屋に這入って来た	10시에 가까운 무렵, 방에 들어왔다	fix	lookup
+lexical:missing-word	要するに形に於ては余り正確ではない	요컨대 형태에서는 별로 정확하지 않다	fix	lookup
+lexical:missing-word	あん時の兄貴 カッコよかった	그때의 형 멋졌다	fix	lookup
+lexical:missing-word	お前の おとっつぁんも 出陣した	네 아버지도 출진했다	fix	lookup
+lexical:missing-word	確かに ありゃあ おいしかった	확실히 저건 맛있었다	fix	lookup
+lexical:missing-word	《ここんとこ やたらと ため息ばかり》	《요즘 유난히 한숨만》	fix	lookup
+lexical:missing-word	すごいマヌケに見えるだろ	대단한 멍청이로 보이지	fix	lookup
+lexical:missing-word	ダメだ 痛てて…｡	안된다 아야야….	fix	lookup
+lexical:missing-word	お前は ちょっとまぬけじゃが	너는 조금 멍청하지만	fix	lookup
+lexical:missing-word	そうだね ここいらで…	그러게 이 근처로…	fix	lookup
+lexical:missing-word	わしの所に、或る男が来た。	나의 곳에, 어떤 남자가 왔다.	fix	lookup
+lexical:missing-word	部員のみなさんに、ひと言、あってしかるべきかと	부원의 여러분에, 한마디, 있어 마땅할 것 같습니다	keep	lookup
+lexical:missing-word	追ってこないな	쫓아 오지 않네	keep	lookup
