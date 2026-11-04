@@ -58,6 +58,15 @@ HD_TEST(constructions_parse) {
     HD_CHECK(n[root + 2].kind == hdTrans::rules::BodyKind::ScanLeft && n[root + 2].count == 0);
     HD_CHECK(n[root + 3].atom && n[root + 4].kind == hdTrans::rules::BodyKind::Or && n[root + 4].count == 0);
     HD_CHECK(n[root + 5].atom && n[root].end == root + 6);
+    // Ordered, the feature atom goes before the scan.
+    internal::ConstructionTable ordered = t;
+    internal::OrderOperands(ordered);
+    const std::vector<internal::CxNode>& o = ordered.nodes;
+    HD_CHECK(o[root].kind == hdTrans::rules::BodyKind::And && o[root].count == 2 && o[root].end == root + 6);
+    HD_CHECK(o[root + 1].atom && o[root + 1].count == n[root + 5].count && o[root + 1].end == root + 2);
+    HD_CHECK(o[root + 2].kind == hdTrans::rules::BodyKind::Not && o[root + 2].end == root + 6);
+    HD_CHECK(o[root + 3].kind == hdTrans::rules::BodyKind::ScanLeft && o[root + 3].end == root + 6);
+    HD_CHECK(o[root + 4].atom && o[root + 5].kind == hdTrans::rules::BodyKind::Or && o[root + 5].end == root + 6);
 }
 
 HD_TEST(constructions_parse_maps) {
@@ -412,6 +421,18 @@ HD_TEST(constructions_casual_level) {
                 std::string("X"));
     HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::none, false, true, "prose"), std::string("인기"));
     HD_CHECK_EQ(CasualLevelTarget("「人気」", {0, 0}, L::casual, false, false, "prose"), std::string("인기"));
+}
+
+// A family reads what an earlier family of its pass wrote on the same word, the same atoms included.
+HD_TEST(constructions_later_family_reads_rewrite) {
+    const std::vector<std::string_view> table = {
+        "//= a\tafter First 10\tdoc\n",
+        "cx:a:10\t\tD+0== \"인기\"\tset-target \"X\"\t\n",
+        "//= b\tafter First 20\tdoc\n",
+        "cx:b:10\t\tD+0== \"인기\"\tset-target \"Z\"\t\n",
+        "cx:b:20\t\tD+0== \"X\"\tset-target \"Y\"\t\n",
+    };
+    HD_CHECK_EQ(GuardedTarget(table), std::string("Y"));
 }
 
 // A family guard is a condition tried on each word before the family's rows: a false guard skips

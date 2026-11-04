@@ -371,6 +371,8 @@ bool EllipsisItem(const Item* it) {
            s.find("―") != std::string_view::npos;
 }
 
+// A feature reads the chain and changes nothing: no surface, no link and no selection (the atom values
+// RunConstructions keeps for a word, and its surface numbers, rely on it).
 constexpr NamedFeature kFeatures[] = {
     {"exists", [](Flusher&, const Item*) { return true; }},
     {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }},
@@ -1007,6 +1009,46 @@ void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
 
 namespace {
 
+// About how many atoms the condition at node i tries, an unbounded scan counted as 16 words.
+uint64_t Cost(const ConstructionTable& t, uint32_t i) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) return 1;
+    if (n.kind == rules::BodyKind::Not) return Cost(t, i + 1);
+    if (n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight) {
+        return (n.count == 0 ? 16 : n.count) * (Cost(t, i + 1) + Cost(t, t.nodes[i + 1].end));
+    }
+    uint64_t cost = 0;
+    for (uint32_t k = 0, child = i + 1; k < n.count; k++, child = t.nodes[child].end) cost += Cost(t, child);
+    return cost;
+}
+
+// Appends the condition at node i to out, placed from node base, with the operands of each && and
+// || cheapest first.
+void Reordered(const ConstructionTable& t, uint32_t i, uint32_t base, std::vector<CxNode>& out) {
+    const std::size_t at = out.size();
+    out.push_back(t.nodes[i]);
+    const CxNode& n = t.nodes[i];
+    if (!n.atom) {
+        std::vector<uint32_t> operands;
+        const uint32_t count = n.kind == rules::BodyKind::Not ? 1
+                               : n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight ? 2
+                                                                                                          : n.count;
+        for (uint32_t k = 0, child = i + 1; k < count; k++, child = t.nodes[child].end) operands.push_back(child);
+        if (n.kind == rules::BodyKind::Or || n.kind == rules::BodyKind::And) {
+            std::ranges::stable_sort(operands, {}, [&](uint32_t child) { return Cost(t, child); });
+        }
+        for (const uint32_t child : operands) Reordered(t, child, base, out);
+    }
+    out[at].end = base + static_cast<uint32_t>(out.size());
+}
+
+// Reorders the condition at node root in place (Reordered).
+void Reorder(ConstructionTable& t, uint32_t root) {
+    std::vector<CxNode> out;
+    Reordered(t, root, root, out);
+    std::ranges::copy(out, t.nodes.begin() + root);
+}
+
 // A condition with each token :NAME replaced by the condition named so (a //: line above it).
 bool ExpandNamed(std::string_view text, const std::vector<std::pair<std::string, std::string>>& named, std::string& out,
                  std::string& error) {
@@ -1213,22 +1255,39 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
     }
-    std::unordered_map<std::string, uint32_t> slots;
-    for (CxAtom& a : t.atoms) {
-        std::string key(reinterpret_cast<const char*>(&a.set), sizeof a.set);
-        key.append(reinterpret_cast<const char*>(&a.feature), sizeof a.feature);
-        key += {static_cast<char>(a.field), static_cast<char>(a.match), static_cast<char>(a.delta), static_cast<char>(a.negated)};
-        key += a.value;
-        a.slot = slots.try_emplace(std::move(key), t.slots).first->second;
-        if (a.slot == t.slots) t.slots++;
+    // The atoms with one value, by the first of each kind (SameAtom).
+    std::unordered_map<std::string_view, std::vector<uint32_t>> byValue;
+    for (uint32_t i = 0; i < t.atoms.size(); i++) {
+        CxAtom& a = t.atoms[i];
+        std::vector<uint32_t>& same = byValue[a.value];
+        const auto found = std::ranges::find_if(same, [&](uint32_t b) { return SameAtom(a, t.atoms[b]); });
+        if (found != same.end()) {
+            a.slot = t.atoms[*found].slot;
+        } else {
+            a.slot = t.slots++;
+            same.push_back(i);
+        }
     }
     return t;
+}
+
+void OrderOperands(ConstructionTable& t) {
+    // The first scan of a row whose actions are placed by it is found in the written order.
+    for (const CxRow& r : t.rows) {
+        if (!r.scans) Reorder(t, r.root);
+    }
+    for (const CxFamily& c : t.families) {
+        if (c.guard != kNoGuard) Reorder(t, c.guard);
+    }
 }
 
 const ConstructionTable& BuiltinConstructions() {
     static const ConstructionTable table = [] {
         for (const dict::internal::BuiltinTable& b : dict::internal::BuiltinTables()) {
-            if (b.name == "constructions.tsv") return ParseConstructions(b.lines, TextPassNames());
+            if (b.name != "constructions.tsv") continue;
+            ConstructionTable t = ParseConstructions(b.lines, TextPassNames());
+            OrderOperands(t);
+            return t;
         }
         return ConstructionTable{};
     }();
@@ -1418,6 +1477,8 @@ const Item* Scanned(Flusher& f, const ConstructionTable& t, uint32_t i, const It
 // with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
 char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
 
+// An action may change the candidates, targets and endings of words but no surface and no link of the
+// chain: RunConstructions numbers the surfaces of the chain once per pass.
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, const internal::CxAction& a,
            Selection source) {
     Item* it = Neighbour(a.scanned ? scanned : origin, a.delta);
@@ -1676,7 +1737,8 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
             if (family.indexed && tally == nullptr) {
                 rows = &family.open;
                 if (surface != kNoSurface) {
-                    const auto found = std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
+                    const auto found =
+                        std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
                     if (found != family.bySurface.end() && found->first == surface) rows = &found->second;
                 }
                 if (rows->empty()) continue;
