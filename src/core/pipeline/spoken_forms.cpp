@@ -689,10 +689,18 @@ bool KansaiMahen(std::string_view s, size_t pos, Match& m) {
     static constexpr std::string_view kWords[][2] = {
         {"おまへん", "ありません"}, {"すんまへん", "すみません"}, {"すいまへん", "すいません"}, {"あきまへん", "いけません"},
         {"かまへん", "かまわない"}, {"でけしまへん", "できません"}};
+    m.group[2] = {};
     for (const auto& w : kWords) {
         if (size_t p = pos; Lit(s, p, w[0])) {
             m.group[1] = w[1];
-            m.end = w[0] == "かまへん" ? p : finalDe(p);
+            // かまへんで before a comma may be a て form (かまわないで、); before the end it is the よ.
+            if (w[0] == "かまへん") {
+                const size_t de = SentenceFinalParticle(s.substr(p), "で", false);
+                if (de > 0) m.group[2] = "よ";
+                m.end = p + de;
+            } else {
+                m.end = finalDe(p);
+            }
             return true;
         }
     }
@@ -1090,6 +1098,58 @@ bool SlangAdjectivePattern(std::string_view s, size_t pos, Match& m) {
 
 // (こっち|お前|…)わ before a mark, a space, kanji, katakana or the end: group 1 the
 // pronoun (こっちわ大丈夫 こっちは). わ before hiragana stays (お前わかってる).
+// The Kansai やし of a noun before a mark or the end is the だし that lists a reason (雨やし、 雨だし、);
+// not やし after kana (しやしない, やしの木 after a particle).
+bool KansaiYashi(std::string_view s, size_t pos, Match& m) {
+    if (pos == 0) return false;
+    const char32_t before = LastRune(s.substr(0, pos)).cp;
+    if (!IsKanjiClass(before) && !(before >= U'ァ' && before <= U'ヺ') && before != U'ー') return false;
+    // Not the stem of a verb in やす (費やし、 増やし、 冷やし、 生やし).
+    if (In(before, U"費増冷生燃肥癒絶殖")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "やし")) return false;
+    size_t q = p;
+    if (p != s.size() && !OneOf(s, q, U"、。！？!?…‥」』 ")) return false;
+    m.end = p;
+    return true;
+}
+
+// The なん of ならない said short after a must (やらなきゃなんない, 行かなくちゃなんねえ) is なら.
+bool MustNannai(std::string_view s, size_t pos, Match& m) {
+    for (const std::string_view must : {"なきゃ", "なくちゃ", "なけりゃ", "なけれ"}) {
+        size_t p = pos;
+        if (!Lit(s, p, must) || !Lit(s, p, "なん")) continue;
+        for (const std::string_view neg : {"ない", "ねえ", "ねー", "ねぇ"}) {
+            size_t q = p;
+            if (!Lit(s, q, neg)) continue;
+            m.group[1] = must;
+            m.end = q;
+            return true;
+        }
+    }
+    return false;
+}
+
+// The Kobe とう of ている after し, っ or 見 (何しとう？ 何してる？, 行っとうよ, 見とう), before the end, a mark or
+// よ, ん, や, ねん, て; not the old wish before な or ござ (見とうない, 話しとうございます).
+bool KobeTou(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "し") && !Lit(s, p, "っ") && !Lit(s, p, "見")) return false;
+    m.group[1] = Span(s, pos, p);
+    m.group[2] = {};
+    if (!Lit(s, p, "とう")) return false;
+    if (p != s.size()) {
+        const std::string_view after = s.substr(p);
+        bool ok = false;
+        for (const std::string_view f : {"よ", "ん", "や", "ねん", "て", "？", "?", "！", "!", "。", "、", "…", "」", "』", "ー", "わ"}) {
+            ok = ok || after.starts_with(f);
+        }
+        if (!ok) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 bool TopicWa(std::string_view s, size_t pos, Match& m) {
     if (pos > 0) {
         const char32_t before = LastRune(s.substr(0, pos)).cp;
@@ -1242,6 +1302,15 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         text = ReplaceAll(text, KansaiMahen, [](const Match& m) { return Cat({m.group[1], m.group[2]}); });
     }
     if (dialectForms && Contains(text, "へん")) text = ReplaceAll(text, KansaiNegative, ReplaceKansaiNegative);
+    if (dialectForms && Contains(text, "とう")) {
+        text = ReplaceAll(text, KobeTou, [](const Match& m) { return Group1Plus(m, "てる"); });
+    }
+    if (dialectForms && Contains(text, "やし")) {
+        text = ReplaceAll(text, KansaiYashi, [](const Match&) { return std::string("だし"); });
+    }
+    if (Contains(text, "なん")) {
+        text = ReplaceAll(text, MustNannai, [](const Match& m) { return Cat({m.group[1], "ならない"}); });
+    }
     if (dialectForms && Contains(text, "じゃが")) {
         text = ReplaceAll(text, OldCopulaJaga, [](const Match&) { return std::string("だが"); });
     }

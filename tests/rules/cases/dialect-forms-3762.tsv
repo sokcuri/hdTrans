@@ -1,0 +1,21 @@
+# 규칙: GRM-3762
+rule	input	expected	kind	layer
+normalize:kansai-yashi	雨やし、行かへん。	비이고, 가지 않는다.	fix	normalize
+normalize:kansai-yashi	時間を費やし、勉強した	시간을 쏟고, 공부했다	keep	normalize
+normalize:must-nannai	やらなきゃなんない。	해야 한다.	fix	normalize
+normalize:must-nannai	たった３か月で あそこまで行って 優勝しなきゃなんねえんだ	단 3개월에 저기까지 가 우승해야 한다	fix	normalize
+normalize:must-nannai	なんでもない	아무것도 아니다	keep	normalize
+normalize:kobe-tou	何しとう？	뭐하고 있어?	fix	normalize
+normalize:kobe-tou	見とうよ。	보고 있어.	fix	normalize
+normalize:kobe-tou	見とうない	보고 싶지 않다	keep	normalize
+normalize:kobe-tou	ありがとう。	고마워.	keep	normalize
+normalize:kansai-mahen	かまへんで。	상관없어.	fix	normalize
+normalize:kansai-mahen	別にかまへんけど	별로 상관없는데	keep	normalize
+lexical:dialect	おめえ、何してんだ。	너, 뭐하는 거야.	fix	lookup
+lexical:dialect	あたいらの庭で好き勝手が通ると思うなよ？おめえら！	우리의 뜰에서 제멋대로가 통과한다고 생각하지 마? 너희!	fix	lookup
+lexical:dialect	せやな。	그렇지.	fix	lookup
+lexical:dialect	なんでやねん！？自分ら、何さくっと納得してんねん！	왜 그래!? 자신들, 무엇 싹둑 납득하고 있거든!	fix	lookup
+lexical:dialect	ちゃうちゃう。	아니 아니.	fix	lookup
+lexical:dialect	いや～ん おおきに！ みんなも大変やのに アリガトな～。	이야앙~ 고마워! 모두도 큰 일이나의에 아리가트인~.	fix	lookup
+lexical:dialect	「あちゃ～、下手すぎて見てられへんかったわ。アンタ、どないしたんや」	「아차~, 너무 서툴러 보고 있을 수 없었어. 너, 무슨 일이야」	fix	lookup
+lexical:dialect	どないしたん？	무슨 일이야?	fix	lookup
