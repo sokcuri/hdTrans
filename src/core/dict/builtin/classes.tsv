@@ -167,6 +167,8 @@
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.person-object	Korean verbs that take the person they act on as their object, (을)를: after a verb of verb.ni-partner read so, the person's に is (을)를 (私に勝てる 나를 이길 수 있다, 彼に会った 그를 만났다).
 //= ko-verb.passive-subject	Korean passive verbs whose patient is their subject and never an object (불리다, 끊기다): the を object of a passive read with one, or with 어지다 or 되다, is its subject (名前を呼ばれた 이름이 불렸다); a passive that takes the part or the thing one loses as its object (발을 밟히다, 지갑을 빼앗기다) is not one.
+//= ko-verb.look	Korean verbs of looking and checking whose と finds what follows, -니, unless a person answers it (時計を見ると、早過ぎた 보니, 時刻を確認すると、回っていた 확인하니, 彼女を見ると、彼女は笑った 보자; spec GRM-40, GRM-178).
+//= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
 //= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (近づくと、目に入った 가까워지니 눈에 들어왔다; spec GRM-40).
 //= ko-verb.perceive	Korean verbs of seeing, hearing and noticing (a word matches the end of the last word of a lemma, a phrase such as 정신을 차리다 the end of the lemma), whose と before a state in ている is what one found, -니 (気づくと朝になっていた 눈치채니, 見ると彼女が走ってきた 보니; spec GRM-40).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
@@ -2453,6 +2455,33 @@ ko-verb.passive-subject	덮이다
 ko-verb.passive-subject	둘러싸이다
 ko-verb.passive-subject	에워싸이다
 ko-verb.passive-subject	꺾이다
+ko-verb.look	보다
+ko-verb.look	바라보다
+ko-verb.look	올려다보다
+ko-verb.look	내려다보다
+ko-verb.look	들여다보다
+ko-verb.look	둘러보다
+ko-verb.look	돌아보다
+ko-verb.look	쳐다보다
+ko-verb.look	살펴보다
+ko-verb.look	확인하다
+ko-verb.look	검색하다
+ko-verb.look	조사하다
+ko-verb.look	체크하다
+verb.come-upon	驚
+verb.come-upon	吃驚
+verb.come-upon	びっくり
+verb.come-upon	ぎょっと
+verb.come-upon	仰天
+verb.come-upon	ぶち当た
+verb.come-upon	突き当た
+verb.come-upon	行き当た
+verb.come-upon	ぶつか
+verb.come-upon	出くわ
+verb.come-upon	出会
+verb.come-upon	出逢
+verb.come-upon	鉢合わせ
+verb.come-upon	触れ
 ko-verb.found	알다
 ko-verb.found	깨닫다
 ko-verb.found	눈치채다
@@ -2463,6 +2492,27 @@ ko-verb.found	들리다
 ko-verb.found	놀라다
 ko-verb.found	기겁하다
 ko-verb.found	짐작이 가다
+ko-verb.found	느끼다
+ko-verb.found	부딪히다
+ko-verb.found	부딪치다
+ko-verb.found	맞닥뜨리다
+ko-verb.found	흠칫하다
+ko-verb.found	질겁하다
+ko-verb.found	마중나가다
+ko-verb.found	마중 나오다
+ko-verb.found	알 수 있다
+ko-verb.found	찾아내다
+ko-verb.found	찾아 내다
+ko-verb.found	발견하다
+ko-verb.found	알게 되다
+ko-verb.found	만나다
+ko-verb.found	조우하다
+ko-verb.found	마주치다
+ko-verb.found	맞이하다
+ko-verb.found	마중하다
+ko-verb.found	표시되다
+ko-verb.found	히트하다
+ko-verb.found	채워지다
 ko-verb.perceive	보다
 ko-verb.perceive	듣다
 ko-verb.perceive	눈치채다

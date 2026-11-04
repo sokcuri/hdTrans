@@ -8,10 +8,10 @@ rewrite:past-sequence	彼はにっこりすると、手を振った。	has:방�
 rewrite:past-sequence	男はそうつぶやくと、海の方へ向き直った。	has:중얼거리자	fix	rewrites
 rewrite:past-sequence	俺がそう言うと、犬はゆっくりと目を閉じた。	내가 그렇게 말하자, 개는 천천히 눈을 감았다.	fix	rewrites
 rewrite:past-sequence	頭を撫でると、彼女は嬉しそうに目を細めた。	has:쓰다듬자	fix	rewrites
-rewrite:past-sequence	佳奈を見ると、視線をあさっての方向に向けた。	has:보자	fix	rewrites
+rewrite:past-sequence	佳奈を見ると、視線をあさっての方向に向けた。	has:보니	fix	rewrites
 rewrite:past-sequence	「彼は立ち上がると、部屋を出て行った」	has:일어서자	fix	rewrites
 rewrite:past-sequence	俺は手早く弁当箱を引っ張り出すと、イスを引っ張って彼女らの輪に加わっていった。	has:끄집어내자	fix	rewrites
-rewrite:past-sequence	玄関を出て足を動かすと、少し視界が揺れた。	has:움직이자	fix	rewrites
+rewrite:past-sequence	玄関を出て足を動かすと、少し視界が揺れた。	has:움직이니	fix	rewrites
 rewrite:past-sequence	振り返ると、そこに彼女がいた。	돌아보니, 거기에 그녀가 있었다.	keep	rewrites
 rewrite:past-sequence	部屋に入ると、誰もいなかった。	방에 들어가니, 아무도 없었다.	keep	rewrites
 rewrite:past-sequence	部屋に入ると、静かだった。	방에 들어가니, 조용했다.	keep	rewrites

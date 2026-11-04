@@ -2626,17 +2626,16 @@ bool SameSubjectAfter(const Item* it, const Item* last) {
     return true;
 }
 
-// Whether a predicate between item it and last ends its clause in a contrast after a present, with
-// a comma (思われるでしょうが、, 来るけど、).
+// Whether a predicate between item it and last ends its clause, before a comma, in a contrast or a
+// reason after a guess (思われるでしょうが、, されそうなので、).
 bool PresentLinkBefore(const Item* it, const Item* last) {
     for (const Item* x = it->After(); x != nullptr && x != last; x = x->next) {
-        if (!x->detail->Yougo() || x->DirectIndex() < 0 || x->After() == nullptr || x->After()->group->surface != kJaComma) {
-            continue;
-        }
+        if (x->DirectIndex() < 0 || x->After() == nullptr || x->After()->group->surface != kJaComma) continue;
         const std::string_view d = x->DirectSurface();
-        if ((d.ends_with("が") || d.ends_with("けど") || d.ends_with("けれど") || d.ends_with("けれども")) && PresentLink(x)) {
-            return true;
-        }
+        const std::string text = std::string(x->group->surface) + std::string(d);
+        const bool link = d.ends_with("が") || d.ends_with("けど") || d.ends_with("けれど") || d.ends_with("けれども") ||
+                          d.ends_with("ので") || d.ends_with("から");
+        if (link && (Has(text, "そう") || Has(text, "だろ") || Has(text, "でしょ"))) return true;
     }
     return false;
 }
@@ -2650,6 +2649,27 @@ bool AdjectiveGloss(std::string_view target) {
     return dict::InClass(HDTRANS_CLASS("ko-root.hada-adjective"), root) ||
            dict::InClass(HDTRANS_CLASS("ko-root.hada-state"), root) ||
            dict::InClass(HDTRANS_CLASS("ko-root.mimetic-adjective"), root);
+}
+
+// The last word of the Korean lemma of verb item it, with the verbal noun before a bare する
+// (確認すると 확인하다).
+std::string VerbalNounLemma(Flusher& f, const Item* it) {
+    const std::string word(LastLemmaWord(output::Lemma(it->EntryText(it->selected), f.families)));
+    if (word != "하다" || it->prev == nullptr || it->prev->selected < 0 || it->prev->detail->Yougo()) return word;
+    return output::Lemma(it->prev->EntryText(it->prev->selected), f.families) + word;
+}
+
+// Whether a person or an animal, as the subject after the と of item it, answers it with an act of
+// their own before last (彼女を見ると、彼女は笑った).
+bool PersonAnswers(const Item* it, const Item* last) {
+    for (const Item* x = it->After(); x != nullptr && x != last; x = x->next) {
+        const std::string_view s = x->group->surface;
+        if ((s == "が" || s == "は" || s == "も") && x->prev != nullptr && x->prev->selected >= 0 &&
+            (Has(x->prev->Attr(x->prev->selected), "VH") || Has(x->prev->Attr(x->prev->selected), "VA"))) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Whether the sentence ending at last, after the と of item it, tells what was found rather than
@@ -2672,13 +2692,23 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
         return v.find(' ') != std::string_view::npos ? full.ends_with(v) : LastLemmaWord(full).ends_with(v);
     });
     bool subject = false;
+    bool person = false;
     for (const Item* x = it->After(); x != nullptr; x = x->next) {
         const std::string_view s = x->group->surface;
-        if (s == "が" || s == "は" || s == "も" || s == "には" || s == "にも") subject = true;
+        if (s == "が" || s == "は" || s == "も" || s == "には" || s == "にも") {
+            subject = true;
+            // A person or a voice acts or answers (貴族から賛成の声が上がった), no sight that came.
+            if (x->prev != nullptr && x->prev->selected >= 0 &&
+                (Has(x->prev->Attr(x->prev->selected), "VH") || Has(x->prev->Attr(x->prev->selected), "VA") ||
+                 x->prev->group->surface.ends_with("声"))) {
+                person = true;
+            }
+        }
         // A verb row that holds its own subject (雨が降る 비가 오다).
         if (x->detail->Yougo() && x->selected >= 0 && Has(s, "が")) {
             const std::string own = output::Lemma(x->EntryText(x->selected), f.families);
             if (Has(own, "이 ") || Has(own, "가 ")) subject = true;
+            if (Has(s, "声が")) person = true;
         }
         if (x == last) break;
     }
@@ -2694,14 +2724,62 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
     // A state an act left (書かれていた 쓰여 있었다, 濡れていた 젖어 있었다), not one going on (降っていた 오고 있었다).
     const Entry* before = progressive && last->prev->DirectIndex() >= 0 ? last->prev->DirectEntry(last->prev->DirectIndex()) : nullptr;
     const bool left = before != nullptr && !before->dst.starts_with("1고");
-    const bool found = std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.found")),
-                                           [&](std::string_view v) { return lemma == v || lemma.ends_with(" " + std::string(v)); });
+    // The verb before an auxiliary of its て form (見えてきた, 迎えてくれた, 出てきた) tells what came.
+    const Item* main = AfterTeForm(last) && !progressive && last->prev != nullptr && last->prev->selected >= 0 ? last->prev : last;
+    const std::string mainLemma = main->selected >= 0 ? output::Lemma(main->EntryText(main->selected), f.families) : "";
+    const auto in = [&](auto cls, const std::string& l) {
+        return std::ranges::any_of(dict::ClassMembers(cls), [&](std::string_view v) { return l == v || l.ends_with(" " + std::string(v)); });
+    };
+    // What one found, met or felt (見つけた, 出会った, 感じた), and anything a subject that is no person
+    // did (黒いものが出てきた, 視界が開けた); a person's act answers the と (お爺さんが入ってきた 이야기하자).
+    const Item* verb = progressive && last->prev != nullptr && last->prev->selected >= 0 ? last->prev : main;
+    const std::string verbLemma = verb->selected >= 0 ? output::Lemma(verb->EntryText(verb->selected), f.families) : "";
+    const std::string_view verbWord = LastLemmaWord(verbLemma);
+    const std::string_view verbEnding = verb->DirectIndex() >= 0 ? verb->DirectSurface() : std::string_view();
+    const std::string_view verbInput = std::string_view(verb->text).substr(verb->start, verb->length);
+    // A change of なる (寂しくなった 쓸쓸해졌다) or a passive or spontaneous ending (満たされた, 感じられた).
+    const bool becomes = verb->group->surface.starts_with("な") || verb->group->surface.ends_with("な") ||
+                         verb->group->surface.starts_with("成");
+    const bool undergone = verbWord.ends_with("되다") || becomes ||
+                           (verb->detail->Yougo() && verb->detail->cls != kDetailKeiyo &&
+                            (Has(verbEnding, "れ") || Has(verbInput, "され") || Has(verbInput, "られ")));
+    // Coming out at a place after going (学園の外れまで来ると池のほとりに出た 오니), meeting a sight (歩いているエナを見かけた), seeing a
+    // scene (立っているのを見た).
+    const Item* q = main->prev;
+    const std::string_view going = LastLemmaWord(full);
+    const bool travel = going.ends_with("가다") || going.ends_with("오다") || going == "걷다" || going.ends_with("오르다");
+    const bool arrived = travel && (verbWord == "나오다" || verbWord == "나가다") && q != nullptr &&
+                         (q->group->surface.ends_with("に") || q->group->surface.ends_with("へ"));
+    // A start of surprise or a run into something (ぎょっとした, 扉にぶち当たった: verb.come-upon) or a
+    // sight that came into view (視界に入った).
+    const std::string_view ms = main->group->surface;
+    const bool startled = dict::StartsWithMember(HDTRANS_CLASS("verb.come-upon"), ms) > 0 ||
+                          (q != nullptr && dict::StartsWithMember(HDTRANS_CLASS("verb.come-upon"), q->group->surface) > 0) ||
+                          Has(ms, "視界に") || Has(ms, "目に入") || Has(ms, "眼に") ||
+                          (q != nullptr && (q->group->surface.ends_with("視界に") || q->group->surface.ends_with("目に") ||
+                                            q->group->surface.ends_with("眼に") ||
+                                            (q->group->surface == "に" && q->prev != nullptr &&
+                                             (q->prev->group->surface == "視界" || q->prev->group->surface == "目" ||
+                                              q->prev->group->surface == "眼"))));
+    const bool sighted = startled || main->group->surface.starts_with("見かけ") || main->group->surface.starts_with("見掛け") ||
+                         (verbWord == "보다" && q != nullptr &&
+                          (q->group->surface == "のを" ||
+                           (q->group->surface == "を" && q->prev != nullptr && q->prev->group->surface == "の")));
+    const bool found = in(HDTRANS_CLASS("ko-verb.found"), lemma) || in(HDTRANS_CLASS("ko-verb.found"), mainLemma) ||
+                       (subject && !person) || (undergone && !(subject && person)) || arrived || sighted;
+    // A sound or a smell (物音がした 소리가 났다), a feeling (気がした), a sight (見えてきた), a gradual change
+    // (なってきた) or a state named by an adjective (暗くて困った).
+    const Item* p = main->prev;
+    const bool sensed = (main->group->surface == "し" || main->group->surface == "する") && p != nullptr && p->group->surface == "が" &&
+                        p->prev != nullptr && dict::EndsWithMember(HDTRANS_CLASS("noun.sensed"), p->prev->group->surface) > 0;
+    const bool felt = main->group->surface.starts_with("気が") || main->group->surface.starts_with("見え") ||
+                      main->group->surface.starts_with("聞こえ") || (main != last && (LastLemmaWord(mainLemma) == "되다" || LastLemmaWord(mainLemma).ends_with("지다"))) ||
+                      (last->selected >= 0 && AdjectiveGloss(last->EntryText(last->selected)));
     // A copula split after its noun (殺風景で + あった).
     const std::string tail = (last->prev != nullptr && last->prev->DirectIndex() >= 0 ? std::string(last->prev->DirectSurface()) : "") + end;
     // A nominalised past (出て行ったのだった) tells what happened, no state.
     const bool copula = !ToldPast(last) && (tail.ends_with("だった") || tail.ends_with("であった") || tail.ends_with("でした"));
-    const bool state = being || left || found || last->detail->cls == kDetailKeiyo || copula || last->group->surface.starts_with("見え") ||
-                       last->group->surface.starts_with("聞こえ");
+    const bool state = being || left || found || sensed || felt || last->detail->cls == kDetailKeiyo || copula;
     const bool held = progressive || Has(end, "ていた") || Has(end, "でいた") || end.ends_with("てた") || end.ends_with("でた");
     return state || (held && (perceive || subject)) || (perceive && subject);
 }
@@ -2764,9 +2842,14 @@ void PastSequence(Flusher& f) {
         } else if (it->After() == nullptr || (!paused && !joined)) {
             continue;
         } else if (seeing && !viewpoint && !tara) {
-            it->AssignDirectSlot(it->DirectIndex(), !to || FoundAfterTo(f, it, close) ? "2니" : "1자");
+            // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look
+            // (彼女を見ると、彼女は笑った 보자).
+            it->AssignDirectSlot(it->DirectIndex(), !to || !PersonAnswers(it, close) ? "2니" : "1자");
         } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
+        } else if (to && dict::InClass(HDTRANS_CLASS("ko-verb.look"), VerbalNounLemma(f, it))) {
+            // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look.
+            it->AssignDirectSlot(it->DirectIndex(), PersonAnswers(it, close) && !FoundAfterTo(f, it, close) ? "1자" : "2니");
         } else if (to && (RieulStem(output::Lemma(it->EntryText(it->selected), f.families)) ||
                           (!AdjectiveGloss(it->EntryText(it->selected)) && !FoundAfterTo(f, it, close)))) {
             it->AssignDirectSlot(it->DirectIndex(), "1자");

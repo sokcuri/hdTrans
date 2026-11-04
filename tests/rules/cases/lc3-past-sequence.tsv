@@ -17,7 +17,7 @@ rewrite:past-sequence	夕食の準備をしているとロスウェが起きて�
 rewrite:past-sequence	後ろから大きな声がしたので振り向くと走ってくるリナの姿が見えた。	has:뒤돌아 보니	fix	rewrites
 rewrite:past-sequence	ボッチな事情を話すと先輩は顔色を変えて俺に謝ってきた。	has:이야기하자	fix	rewrites
 rewrite:past-sequence	教室を出るとすごく綺麗な先輩が驚いて立っていた。	has:나오니	fix	rewrites
-rewrite:past-sequence	彼女は浅瀬に入ると足があっという間に鰭に変わった。	has:들어가자	fix	rewrites
+rewrite:past-sequence	彼女は浅瀬に入ると足があっという間に鰭に変わった。	has:들어가니	fix	rewrites
 rewrite:past-sequence	朝飯を食っていると元気な声が外から聞こえてきた。	has:먹고 있으니	fix	rewrites
 rewrite:past-sequence	そこまで話すとお爺さんがお茶を持って部屋に入ってきた。	has:이야기하자	fix	rewrites
 rewrite:past-sequence	白木に呼び止められたスタッフは、そう言うと走り去ってしまった。	has:말하자	fix	rewrites

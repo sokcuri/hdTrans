@@ -5,11 +5,11 @@ rewrite:past-sequence	食べてみると想像以上に美味しかった。	has
 rewrite:past-sequence	やってみると予想以上に難しかった。	has:해 보니	fix	rewrites
 rewrite:past-sequence	やってみると予想外に簡単だった。	has:해 보니	fix	rewrites
 rewrite:past-sequence	家に着くと仰天した。	has:도착하니	fix	rewrites
-rewrite:past-sequence	空を見上げると仰向けに倒れた。	has:올려다보자	fix	rewrites
+rewrite:past-sequence	空を見上げると仰向けに倒れた。	has:올려다보니	fix	rewrites
 rewrite:past-sequence	振り返るとぼやけた影が見えた。	has:돌아보니	fix	rewrites
 rewrite:past-sequence	彼女が笑うと察しがついた。	has:웃으니	fix	rewrites
 rewrite:past-sequence	振り返ると想像を絶する光景が広がっていた。	has:돌아보니	fix	rewrites
-rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨자	fix	rewrites
+rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨니	fix	rewrites
 rewrite:past-sequence	目を覚ますと決まって彼がいた。	has:뜨면	fix	rewrites
 rewrite:past-sequence	あいつって決まって遅刻するんだよ。	lacks:녀석이라고	fix	rewrites
 rewrite:past-sequence	「振り返ると、彼女がいた」と彼は語った。	has:돌아보니	fix	rewrites
