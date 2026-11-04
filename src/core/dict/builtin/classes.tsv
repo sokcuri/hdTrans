@@ -24,6 +24,9 @@
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
+//= noun.abstract-relation	Abstract and relational nouns (意味, 原因, 関係, 存在): an の before one keeps 의 (言葉の意味 말의 의미) where the rules read the space of an action noun (spec GRM-3721).
+//= noun.relation-compound	Nouns that make one Korean compound with an abstract noun of noun.abstract-relation after の (主従の関係 주종 관계, 火災の原因 화재 원인): the の stays a space (spec GRM-3721).
+//= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
 //= word.wonder	Words of wonder that open a line before a pause (へえ、, ほう、), also as the interjection stage has already written them (헤에, 호오): a verb with な after one is admired, 구나, not forbidden (spec GRM-3723).
 //= word.leave-taking	Words of taking leave (ありがとうございました, お世話になりました, 失礼します, さようなら): a 御機嫌よう later on the line closing a quoted speech parts, 안녕히 계세요, and greets no one.
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
@@ -9953,6 +9956,49 @@ word.leave-taking	さよなら
 word.leave-taking	お別れ
 word.leave-taking	お会いすることはない
 word.leave-taking	二度とお会い
+noun.abstract-relation	意味
+noun.abstract-relation	原因
+noun.abstract-relation	関係
+noun.abstract-relation	存在
+noun.abstract-relation	意図
+noun.abstract-relation	意識
+noun.abstract-relation	象徴
+noun.abstract-relation	解釈
+noun.abstract-relation	脅威
+noun.abstract-relation	定義
+noun.abstract-relation	思想
+noun.abstract-relation	思考
+noun.abstract-relation	理解
+noun.abstract-relation	実在
+noun.abstract-relation	一致
+noun.abstract-relation	共通
+noun.abstract-relation	依存
+noun.abstract-relation	由来
+noun.abstract-relation	覚悟
+noun.relation-compound	主従
+noun.relation-compound	上下
+noun.relation-compound	人間
+noun.relation-compound	友人
+noun.relation-compound	友達
+noun.relation-compound	師弟
+noun.relation-compound	親子
+noun.relation-compound	恋人
+noun.relation-compound	協力
+noun.relation-compound	信頼
+noun.relation-compound	利害
+noun.relation-compound	因果
+noun.relation-compound	火災
+noun.relation-compound	死亡
+noun.relation-compound	事故
+noun.relation-compound	故障
+word.direction-demonstrative	そっち
+word.direction-demonstrative	こっち
+word.direction-demonstrative	あっち
+word.direction-demonstrative	どっち
+word.direction-demonstrative	そちら
+word.direction-demonstrative	こちら
+word.direction-demonstrative	あちら
+word.direction-demonstrative	どちら
 word.wonder	へえ
 word.wonder	へぇ
 word.wonder	へー
