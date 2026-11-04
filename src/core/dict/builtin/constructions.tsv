@@ -1089,6 +1089,8 @@ cx:notice-words-1:145	GRM-3757	&&3 S+0== "いただけ" D+0== "받을 수 &M9@" 
 cx:notice-words-1:146	GRM-3757	&&2 S+0== "させ" ||2 I-1== "Rままに" &&2 S-1== "に" S-2== "Rまま"	set-target "하게 &C7@"	思うままにさせろ 생각하는 대로 하게 둬라
 cx:notice-words-1:148	GRM-3757	&&5 S+0== "いただ" D+0== "&CJ@" U-1== "Rて" I+0== "いただきます" ||2 F+0== "utterance-end" F+0== "period-after"	set-target "주&AE@" set-ending "6야겠습니다"	人質になっていただきます 인질이 되어 주셔야겠습니다
 cx:notice-words-1:150	GRM-3757	&&4 S+0== "していただ" D+0== "해 주&AE@" I+0== "していただきます" ||2 F+0== "utterance-end" F+0== "period-after"	set-ending "6야겠습니다"	協力していただきます 협력해 주셔야겠습니다
+cx:notice-words-1:152	LEX-4714	&&4 S+0== "の" D+0== "마&AE@" I+0== "のみ" I-1== "Rること"	set-ending@-1 "0 것뿐" set-target "" set-ending ""	応援することのみ 응원하는 것뿐
+cx:notice-words-1:154	LEX-4714	&&6 S+0== "やな" I+0== "やな" P+1== "1**" !1 P-1== "1**" !1 S+1== "Lん" !1 S+1== "Lぎ"	set-target "싫은"	やなおばさん 싫은 아줌마; not そうやな
 cx:notice-words-1:126	LEX-4710	&&4 S+0== "司令" D+0== "사령관" S+1!= @Rhonorific.constraint ||4 &&2 P+1== "1**" F+1== "touches-prev" S+1== "官" S+2== "官" S+3== "官"	set-target "사령"	司令所 사령소, 司令……官 사령……관
 cx:notice-words-1:128	LEX-4712	&&3 S+0== "感心" F+0== "verb" ||4 I+0== "L感心しない" I+0== "L感心しなかっ" I+0== "L感心しません" &&2 S+1== "な" !1 S+2== "がら"	set-target "좋게 &AY@"	それは感心しないな 그건 좋게 보지 않네; not 感心した, 感心しながら
 cx:notice-words-1:130	LEX-4712	&&2 S+0== "心中" S+1== "する"	set-target "동반자살"	二人は心中した 두 사람은 동반자살했다; not 心中を察する
