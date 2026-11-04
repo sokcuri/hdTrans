@@ -40,6 +40,7 @@ enum class Side : uint8_t {
 struct Sense {
     std::string key;     // the key of the word (the stem of a conjugating word)
     char classDigit = 0; // the class digit (part code byte 1) of the candidates it applies to
+    char kind = 0;       // a verb's conjugation kind (part code byte 3) from its dictionary form, 0 for none
     std::string target;
     std::vector<std::string> triggers;  // with none the sense always applies
     Side side = Side::Before;

@@ -366,7 +366,8 @@ bool MatchKind(Detail& d, std::string_view tail, std::string_view recordText, co
         if (WidthOf(tail) >= 6) middle = Cut(tail, 2, 4);
         return Starts(tail, kJaI) && (middle == kJaMasu || middle == kJaMase || middle == kJaMashi);
     };
-    for (const std::string_view stem : dict::ClassMembers(HDTRANS_CLASS("stem.request"))) {
+    // Only a godan verb in る takes the い of these stems (仰います of 仰る, not 仰ぐ or 仰向く).
+    for (const std::string_view stem : kind == 8 ? dict::ClassMembers(HDTRANS_CLASS("stem.request")) : std::span<const std::string_view>{}) {
         if (const std::size_t i = record.source.find(stem);
             i != std::string_view::npos && i == record.source.size() - stem.size() && politeRequest()) {
             d.patternKind = 8;
@@ -393,7 +394,18 @@ bool Worker::TeAfterWaStem(std::string_view stem, std::string_view after) const 
         const std::string_view next = Tok(current + 1).text;
         if (Starts(next, kJaEllipsis) || Starts(next, "‥")) return false;
     }
-    if (Starts(after, kJaTe)) {
+    // The で, だ and じゃ of a ぐ verb of the same stem (担いで: 担ぐ, not 担う + で), and the ちゃ of a く
+    // verb (拭いちゃ), read the same way.
+    std::string_view form = "いた";
+    if (Starts(after, "で") || Starts(after, "だ") || Starts(after, "じゃ")) {
+        // Not where the stem in い is a noun of the dictionary, whose copula or で that is (戦いだ 싸움이다).
+        const std::string noun = std::string(stem) + "い";
+        for (const dict::Candidate& c : snapshot.RetrieveRecords(noun, dict::LookupMode::General)) {
+            if (c.codes->partText.starts_with("N")) return false;
+        }
+        form = "いだ";
+    } else if (Starts(after, "ちゃ")) {
+    } else if (Starts(after, kJaTe)) {
         // 言いてえ, 会いてぇ: the spoken たい.
         if (Starts(after, "てえ") || Starts(after, "てぇ") || Starts(after, "てー") || Starts(after, "てェ")) return false;
     } else {
@@ -404,12 +416,13 @@ bool Worker::TeAfterWaStem(std::string_view stem, std::string_view after) const 
             if (Starts(after, rest)) return false;
         }
     }
-    // Only where the stem is also a く verb, whose て and た forms these are (彷徨いて, 拭いた).
+    // Only where the stem is also a く verb, whose て and た forms these are (彷徨いて, 拭いた), or a ぐ
+    // verb for で and だ (担いで, 担いだ).
     for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
         const std::string_view pc = c.codes->partText;
         if (pc.size() != 4 || pc[0] != 'M' || pc[1] != '4') continue;
         const int kind = pc[3] - '0';
-        if (kind >= 0 && kind < kConjugationKinds && Conjugation(kind, 6) == "いた") return true;
+        if (kind >= 0 && kind < kConjugationKinds && Conjugation(kind, 6) == form) return true;
     }
     return false;
 }

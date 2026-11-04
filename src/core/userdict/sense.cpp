@@ -82,6 +82,7 @@ std::string ParseSense(std::string_view line, Families& families, Sense& s, bool
     s = Sense();
     s.key = e.key;
     s.classDigit = pos == "p" ? '2' : pos == "adv" ? '3' : e.part.size() > 1 ? e.part[1] : 0;
+    if (s.classDigit == '4' && e.part.size() > 3) s.kind = e.part[3];
     s.target = e.target;
     s.side = sideValue;
     s.adjective = adjective;
