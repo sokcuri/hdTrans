@@ -210,6 +210,10 @@ private:
     std::set<std::string> siblings_;                    // SiblingNames, valid while scoresValid_
     std::map<std::string, std::string> numbered_;       // numbered names to their name, valid while scoresValid_
     bool scoresValid_ = false;
+    unsigned scoresBuilt_ = 0;  // the times scores_ was built
+    // The accepted names by first rune, longest first, as of build byFirstBuilt_ of scores_.
+    std::map<char32_t, std::vector<std::string>> byFirst_;
+    unsigned byFirstBuilt_ = 0;
 };
 
 // The labels of the speaker cues of text: a name at a line start followed by 「, です,
