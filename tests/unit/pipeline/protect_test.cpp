@@ -405,6 +405,51 @@ HD_TEST(pipeline_kata_native_words_names) {
     }
 }
 
+HD_TEST(pipeline_kata_whole_predicates) {
+    // An i-adjective written whole in katakana before what follows a predicate, a mimetic adverb
+    // closed by ッ before と, and a polite ending written on to the word it ends read in hiragana; a
+    // run the name layer reads and a run before a noun's particle stay (GRM-3836).
+    dict::File base, names;
+    base.name = "base.tsv";
+    base.text = "key\tko\tpos\tsem\tgram\tdict\tid\n"
+                "ずる\t치사$AB@\tH7U0\t\t\tGN\t1\n"
+                "い\t$DE@\tH7U0\t\t\tGN\t2\n"
+                "あお\t푸르$AA@\tH7U0\t\t\tGN\t3\n"
+                "じっと\t가만히\tE311\t\t\tGN\t4\n";
+    names.name = "names.tsv";
+    names.text = "#! layer=names\nkey\tko\tpos\tsem\tgram\tdict\tid\n"
+                 "アオイ\t아오이\tN130\tQPNVHn\tWb\tGN\t5\n";
+    const auto snap = dict::Load({base, names}).snapshot;
+    HD_REQUIRE(snap != nullptr);
+    LineContext ctx;
+    const struct {
+        const char* in;
+        const char* want;
+    } cases[] = {
+        {"ズルイわよね", "ずるいわよね"},
+        {"ズルイ。", "ずるい。"},
+        {"イイ男", "いい男"},           // a form in い before the noun it describes
+        {"ズルイの？", "ずるいの？"},
+        {"ズルイの話", "ズルイの話"},     // の before a noun is the genitive
+        {"ズルイは", "ズルイは"},         // a particle after the run
+        {"アオイ！", "アオイ！"},         // a name of the name layer
+        {"ジッとして", "じっとして"},
+        {"伝えマシタね", "伝えましたね"},
+        {"悪いデスよ", "悪いですよ"},
+        {"一マス進む", "一マス進む"},     // a numeral counts squares
+        {"堅実なマスに", "堅実なマスに"},
+        {"内ッスよ", "内っすよ"},
+        {"来るッスよ", "来るッスよ"},     // っす only after a kanji noun
+    };
+    for (const auto& c : cases) {
+        HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text(c.in), ctx, *snap)), std::string(c.want));
+    }
+    const dict::KeySet named = {"ズルイ"};
+    ctx.named = &named;
+    HD_CHECK_EQ(Show(internal::KataWordsToHiragana(Text("ズルイわよね"), ctx, *snap)), std::string("ズルイわよね"));
+    ctx.named = nullptr;
+}
+
 HD_TEST(pipeline_kata_speech) {
     const auto snap = Snapshot("わたし\t나\tN110\t\t\tGN\t1\nねこ\t고양이\tN110\t\t\tGN\t2\nロボット\t로봇\tN110\t\t\tGN\t3\n");
     HD_REQUIRE(snap != nullptr);

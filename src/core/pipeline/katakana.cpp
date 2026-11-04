@@ -754,6 +754,51 @@ bool ConjugatesWith(int kind, std::string_view text) {
     return false;
 }
 
+// Whether ending, the hiragana of a katakana run right after prev, is a polite ending or the copula
+// written in katakana (kana.spelled-ending): ます and its forms after a verb stem in い or え or a kanji
+// (伝えマシタ, 思いマス; not the マス of 堅実なマス), です and its forms after a kana or a kanji (悪いデスよ),
+// and っす after a kanji noun (校舎内ッスよ; after a verb form it is the dialect ending, not です).
+bool SpelledEnding(std::string_view ending, char32_t prev) {
+    if (!dict::InClass(HDTRANS_CLASS("kana.spelled-ending"), ending)) return false;
+    // A numeral before マス counts squares (一マス), and ends nothing.
+    if (ending.starts_with("ま")) {
+        return (IsKanjiRune(prev) && !RuneIn(prev, U"一二三四五六七八九十百千万何数両半")) ||
+               RuneIn(prev, U"いきしちにひみりぎじびぴえけせてねへめれげぜでべぺ");
+    }
+    if (ending.starts_with("で")) return IsKanjiRune(prev) || IsHiraganaRune(prev);
+    return IsKanjiRune(prev);
+}
+
+// Whether ending, the kana of a katakana run after an i-adjective stem, is a whole ending of it:
+// い, く, かっ, さ and the like of follower.kata-adjective-stem, alone or with た or て (かった, くて).
+bool WholeAdjective(std::string_view ending) {
+    const std::size_t n = dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-stem"), ending);
+    if (n == 0) return false;
+    const std::string_view more = ending.substr(n);
+    return more.empty() || more == "た" || more == "て";
+}
+
+// Whether rest, the text after a katakana run, is what follows a predicate: the end of the line, a
+// sentence end, a closing mark after a closing ッ (tsu), a final particle (final: after a form in い),
+// a particle or a predicate of follower.kata-adjective or follower.kata-verb (の only before an end), or,
+// after a form in い, a kanji noun it describes (イイ男).
+bool PredicateFollows(std::string_view rest, bool tsu, bool final) {
+    const char32_t next = text::DecodeRune(rest).cp;
+    if (rest.empty() || next == U'\n' || next == U'\r' || RuneIn(next, kSentenceEnd) || (tsu && RuneIn(next, kClippedEnd))) return true;
+    // の after the run is the nominal の of a predicate only before an end or a final particle (ヨカッタの？);
+    // before a noun it is the genitive of a name or a noun (タイの).
+    if (rest.starts_with("の")) {
+        const std::string_view after = rest.substr(std::string_view("の").size());
+        const char32_t r = text::DecodeRune(after).cp;
+        return after.empty() || RuneIn(r, kSentenceEnd) || RuneIn(r, U"かよねにで");
+    }
+    if (dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective"), rest) > 0 ||
+        dict::StartsWithMember(HDTRANS_CLASS("follower.kata-verb"), rest) > 0) {
+        return true;
+    }
+    return final && (dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-final"), rest) > 0 || IsKanjiRune(next));
+}
+
 // The hiragana spelling of a katakana run that writes a native word for emphasis, or "":
 //   - a verb or i-adjective stem that the hiragana after the run conjugates (カブれない
 //     かぶれない, ナメられ なめられ, ビビッた びびった) or that runs on into the text after it
@@ -797,6 +842,9 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
         const std::vector<dict::Record> names = snap.NameRecords(word);
         nameThenSuru = std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes != nullptr && r.codes->sem.HasPrefix("QPN"); });
     }
+    // A run that the name layer reads as a person or a place (アオイ, ミドリ) is no whole word in katakana.
+    const std::vector<dict::Record> nameRows = snap.NameRecords(word);
+    const bool named = std::any_of(nameRows.begin(), nameRows.end(), [](const dict::Record& r) { return r.codes != nullptr && r.codes->sem.HasPrefix("QP"); });
     // A particle, an honorific or a drawn honorific (くぅん) after the run.
     const bool nounFollows = drawn(1) || dict::StartsWithMember(HDTRANS_CLASS("follower.kata-noun"), rest) > 0 ||
                              dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest) > 0;
@@ -817,10 +865,21 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
             if (ConjugatesWith(part[3] - '0', after) || (runsOn && part[3] == '7')) return hira;
         } else if (part[0] == 'H' && part[1] == '7' && c.source.size() == hira.size() && !tsu && !nounFollows) {
             if (dict::StartsWithMember(HDTRANS_CLASS("follower.kata-adjective-stem"), after) > 0) return hira;
+        } else if (part[0] == 'H' && part[1] == '7' && c.source.size() < hira.size() &&
+                   (c.source.size() >= 6 || c.source == "い" || c.source == "よ") && !named &&
+                   WholeAdjective(std::string_view(hira).substr(c.source.size())) && PredicateFollows(rest, tsu, hira.ends_with("い"))) {
+            // An i-adjective written whole in katakana (ズルイわね, イイんだ, マズカッタ), before what
+            // follows a predicate: the stem and its ending fill the run. A stem of one kana is that of
+            // いい or よい (ヨカッタ), not an auxiliary such as たい (タイの is the country).
+            return hira;
         } else if ((part[0] == 'E' || part[0] == 'N') && part[1] == '3' && c.source.size() >= hira.size() &&
                    AdverbShape(k) && !quoted && (!Doubled(k) || adverbial)) {
             const std::string_view more = std::string_view(c.source).substr(hira.size());
             if (more.empty() || dict::InClass(HDTRANS_CLASS("follower.kata-adverb"), more)) return hira;
+        } else if ((part[0] == 'E' || part[0] == 'N') && part[1] == '3' && tsu && !named &&
+                   std::string_view(c.source) == hira + "と") {
+            // A mimetic adverb whose っ closes the run before its と (ジッと じっと, ホッと): no name ends so.
+            return hira;
         }
     }
     return {};
@@ -902,6 +961,14 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         }
         // The run joins a name or the span before it.
         const bool joined = prev == U'・' || prev == U'＝' || (start == 0 && spanBefore);
+        // A polite ending or the copula spelled in katakana right after the word it ends (分かりマシタ,
+        // 悪いデスよ, 校舎内ッスよ) is the ending in hiragana (SpelledEnding).
+        if (const std::string ending = ToHiragana(word); !(start == 0 && spanBefore) && SpelledEnding(ending, prev)) {
+            b.append(text.substr(at, start - at));
+            b += ending;
+            at = i;
+            continue;
+        }
         // A katakana spelling of a native word of kana.native-katakana (サイコー 最高, ソノ その,
         // ドコ どこ; spec LEX-4823), not joined to a name, after no digit, before no honorific, and
         // no name of the document or plain entry of the user's.
