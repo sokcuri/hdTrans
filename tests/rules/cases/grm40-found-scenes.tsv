@@ -6,7 +6,7 @@ rewrite:past-sequence	学食に入ると元気な声が迎えてくれた。	has
 rewrite:past-sequence	玄関を出て足を動かすと、少し視界が揺れた。	has:움직이니,	fix	rewrites
 rewrite:past-sequence	家まで帰ってくると、廊下で小太刀と遭遇した。	has:돌아오니,	fix	rewrites
 rewrite:past-sequence	音楽棟を出ようとすると、見知った顔に出会った。	has:하니,	fix	rewrites
-rewrite:past-sequence	少しすると、ぺらぺらとページをめくる音が聞こえてきた。	has:조금 하니,	fix	rewrites
+rewrite:past-sequence	少しすると、ぺらぺらとページをめくる音が聞こえてきた。	has:잠시 후,	fix	rewrites
 rewrite:past-sequence	数分歩くと、みいちゃんが住んでいるマンションが見えてきた。	has:걸으니,	fix	rewrites
 rewrite:past-sequence	図書館に入ると、カウンターで何かしている御園さんを見つけた。	has:들어가니,	fix	rewrites
 rewrite:past-sequence	スプーンでご飯を皿に掻き出すと、白いものに続いて黒いものが出てきた。	has:긁어내니,	fix	rewrites

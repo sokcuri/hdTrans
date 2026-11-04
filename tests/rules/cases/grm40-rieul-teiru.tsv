@@ -21,3 +21,16 @@ rewrite:past-sequence	手を伸ばすと、それを掴んだ。	has:뻗자,	fix
 rewrite:past-sequence	子供の頃は雨が降ると外で遊んだ。	has:오면	keep	rewrites
 rewrite:past-sequence	隠岐島の東郷という村では、昔この浜の人が釣りをしていると、魚は釣れずに石を一つ釣り上げました。	has:있는데,	keep	rewrites
 rewrite:past-sequence	富竹さんは陽気に手を振るとひぐらしの声の中に消えて行った。	has:흔들고는	fix	rewrites
+rewrite:past-sequence	楽しそうな笑みを浮かべると、千里は俺の手を包み込んだ。	has:짓자,	fix	rewrites
+rewrite:past-sequence	初めて口を開くと、それは連れの若者に言っていた。	has:열자,	fix	rewrites
+rewrite:past-sequence	おかんはそっと窺っていると、やがてお朝は湯呑みの茶を飲んだ。	has:있는데,	fix	rewrites
+rewrite:past-sequence	指を上下に動かし続けると、少しずつ声が高くなってきた。	has:움직이니,	fix	rewrites
+rewrite:past-sequence	彼女はカーテンを開くと、同時に叫んだ。	has:열자,	fix	rewrites
+rewrite:past-sequence	少しすると、ページをめくる音が聞こえてきた。	has:잠시 후,	fix	rewrites
+rewrite:past-sequence	霎時すると、彼は戻ってきた。	has:잠시 후,	fix	rewrites
+rewrite:past-sequence	頭を撫でると、彼女は嬉しそうに目を細めた。	has:쓰다듬자,	keep	rewrites
+rewrite:past-sequence	ドアを開けると、そこには誰もいなかった。	has:여니,	keep	rewrites
+rewrite:past-sequence	衣更の笑顔を見ていると、なんだか、胸がドキドキしてきた。	has:있으니,	keep	rewrites
+rewrite:past-sequence	お茶をすすっていると、緊急記者会見が始まった。	has:있는데,	keep	rewrites
+rewrite:past-sequence	千莉は小さく笑うと、キッチンへと向かった。	has:웃고는,	keep	rewrites
+rewrite:past-sequence	少し休むと、元気が出た。	has:조금 쉬니,	keep	rewrites
