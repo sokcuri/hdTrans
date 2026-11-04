@@ -18,4 +18,4 @@ constraint:cued-name	「じゃあ……いくよ、未散……」	「그럼…�
 constraint:cued-name	いつか、千里はトラウマから、解放される日が来るんだろうか？	언젠가, 천리는 트라우마로부터, 해방되는 날이 오는 걸까?	keep	lookup
 constraint:cued-name	It's 7 o'clock now. Hi, Victorious! ここね、Pub Mamiya! 楽しみだわ。	It's 7 o'clock now. Hi, Victorious! 여기네, Pub Mamiya! 기다려지구나.	keep	lookup
 constraint:cued-name	……！？きみか、D区画の！	……!? 너인가, D구획!	keep	lookup
-constraint:cued-name	「では圭一さんは私と同じではございませんこと？「お花見」ですのよ！」	「그럼 케이이치 씨는 저와 같은 거 이지 않습니다 일? 「꽃놀이」예요!」	keep	lookup
+constraint:cued-name	「では圭一さんは私と同じではございませんこと？「お花見」ですのよ！」	「그럼 케이이치 씨는 저와 같은 거 이지 않으시겠어요? 「꽃놀이」예요!」	keep	lookup
