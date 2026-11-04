@@ -10,7 +10,7 @@ dict:jisjk:355685	この市場では新鮮な魚が安く買える。	rule:dict:
 dict:jisjk:6285	犬などの小さい動物がいる。	!rule:dict:jisjk:6285	fix	local
 dict:jisjk:6588	どんな感じの部屋ですか。	rule:dict:jisjk:6588=느낌	current	local
 dict:jisjk:266239	あたしの好きな色は青だよ。	rule:dict:jisjk:266239=(이)가	current	local
-dict:jisjk:115173	バスは学校へ進む。	rule:dict:jisjk:115173=진학&AV@	current	local
+dict:jisjk:115173	大学に進む	rule:dict:jisjk:115173=진학&AV@	current	local
 dict:jisjk:137573	この資料を前提に話を進めます。	rule:dict:jisjk:137573=진행시&AQ@	current	local
 dict:jisjk:341095	友達と英語で話す。	rule:dict:jisjk:341095=&AV@	current	local
 sense:高い	その服は高くないですよ。	그 옷은 비싸지 않아요.	current	senses
@@ -61,7 +61,7 @@ dict:jisjk:362124	はい、了解です。	rule:dict:jisjk:362124=%EF@	current	l
 sense:高い	値段は高いものの品質が良い。	가격은 비싸기는 하지만 품질이 좋다.	current	senses
 dict:jisjk:142505	彼は医者であり、作家でもある。	rule:dict:jisjk:142505=이기도 &Mf@	current	local
 dict:jisjk:364338	それが男というものさ。	rule:dict:jisjk:364338=(이)야	current	local
-dict:jisjk:364499	電話とかで話す。	rule:dict:jisjk:364499=등에서	current	local
+dict:jisjk:364499	マスコミとかで話す	rule:dict:jisjk:364499=등에서	current	local
 dict:jisjk:373336	今度友達と旅行に行きます。	rule:dict:jisjk:373336=이번에	current	local
 dict:jisjk:373524	早く寝ようという計画です。	빨리 자려는 계획입니다.	current	local-ending
 dict:jisjk:373549	天気がよくなくて残念だ。	날씨가 좋지 않아 유감이다.	current	local-ending
