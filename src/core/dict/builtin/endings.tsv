@@ -288,6 +288,27 @@
 書いてるっての	쓰고 있다니까	end	prio=-1
 高いっての	높다니까	end	prio=-1
 書くかっての	쓰겠냐고	end	prio=-1
+// ませんこと: a genteel invitation (歩いてみませんこと？ 걸어 보지 않으시겠어요?; spec GRM-3912).
+書きませんこと	쓰지 않으시겠어요	end	prio=-1
+学生ではありませんこと	학생이 아닌가요	end	prio=-1
+学生ではございませんこと	학생이 아닌가요	end	prio=-1
+学生でございませんこと	학생이 아닌가요	end	prio=-1
+書かなかったでございませんこと	쓰지 않았나요	end	prio=-1
+学生じゃありませんこと	학생이 아닌가요	end	prio=-1
+書くのではありませんこと	쓰는 것이 아닌가요	end	prio=-1
+書いたじゃありませんこと	썼잖아요	end	prio=-1
+書かなかったじゃありませんこと	쓰지 않았잖아요	end	prio=-1
+// でもあるまい, のではあるまい(な): it can hardly be so, 도 아니겠지 (spec GRM-3912).
+学生でもあるまい	학생도 아니겠지	end	prio=-1
+書くのではあるまい	쓰는 것은 아니겠지	end	prio=-1
+書くのではあるまいな	쓰는 것은 아니겠지	end	prio=-1
+書いているのではあるまいな	쓰고 있는 것은 아니겠지	end	prio=-1
+// だとよ: what one heard, 라는군 (spec GRM-3912).
+学生だとよ	학생이라는군	end	prio=-1
+// んだろうが at the end: granting what the listener knows, 겠지만 (spec GRM-3912).
+学生だったんだろうが	학생이었겠지만	end	prio=-1
+静かだったんだろうが	조용했겠지만	end	prio=-1
+高かったんだろうが	높았겠지만	end	prio=-1
 // てるなよ: a rebuke of what the listener is doing (泣かしてんじゃねえよ, spoken forms)
 書いてるなよ	쓰지 마	end	prio=-1
 // だっけか, もんでね
