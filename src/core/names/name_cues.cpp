@@ -127,6 +127,15 @@ bool HonorificAfter(const dict::Snapshot& snap, std::string_view after, std::str
            !after.starts_with("くんだり") && HonorableKey(snap, key);
 }
 
+// A title after a word that HonorableKey allows (葉月先生, 筧先輩), or a word of a family after a
+// kanji name of two characters or more (園崎本家, 古手家, 竜宮家): like an honorific, it shows a person
+// to the document (spec LEX-4826).
+bool TitleAfter(const dict::Snapshot& snap, std::string_view after, std::string_view key) {
+    return (after.starts_with("先生") || after.starts_with("先輩") ||
+            (IsKanji(FirstRune(key).cp) && text::RuneCount(key) >= 2 && dict::StartsWithMember(HDTRANS_CLASS("name.family-after"), after) > 0)) &&
+           HonorableKey(snap, key);
+}
+
 // Whether a hiragana key starts with a verb or an adjective of the dictionary (いくよ: いく).
 bool HiraganaPredicate(const dict::Snapshot& snap, std::string_view key) {
     for (std::size_t n = 0; n < key.size();) {
@@ -615,7 +624,7 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
         const bool recurring = strong && text::RuneCount(key) >= 2 && !Memorable(snap, key);
         strong = strong && !recurring && Memorable(snap, key);
         person = person && Carried(snap, key);
-        acted = acted && Carried(snap, key);
+        acted = acted && Carried(snap, key) && !FigureKey(snap, key);
         const auto found = std::find_if(out.begin(), out.end(), [&](const NameCue& c) { return c.key == key; });
         if (found == out.end()) {
             out.push_back({std::string(key), strong, recurring, person, acted});
@@ -709,12 +718,14 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
             add(key, false, true);
         } else if (runStart && WeakKey(snap, key) && PersonActAt(snap, key, before, after)) {
             add(key, false, false, true);
+        } else if (runStart && !hiragana && TitleAfter(snap, after, key)) {
+            add(key, false, true);
         } else if ((runStart && hiragana && HonorificAfter(snap, after, key)) ||
                    (WeakKey(snap, key) && (IntroductionAt(before, after, hiragana) ||
                                           ((katakana || (kanji && text::RuneCount(key) >= 2)) &&
                                            CallAt(before, after) && CallableKey(snap, key, kanji) &&
                                            !PlaceKey(snap, key))))) {
-            add(key, false);
+            add(key, false, false, true);
         }
         i += step;
     }
