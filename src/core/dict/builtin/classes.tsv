@@ -142,6 +142,7 @@
 //= honorific.katakana-name	The katakana honorifics a katakana name may end in (ヨウタサン).
 //= honorific.name	Person suffixes that follow a name (さん, 様, 先生), with their drawn-out spellings (さぁん, ちゃーん); a label or run that ends in one is the name before it.
 //= honorific.nickname	The honorifics that make the hiragana before them a nickname (みっちゃん, けんくん, しおいさん; さん only after kana that are no word, spec LEX-4821); the last one that starts the text wins.
+//= name.kanji-honorific	One-kanji given names, KANJI=KOREAN, that before さん, くん, ちゃん or 様 and a mark, the end or a particle are the name, not the ん negative of a verb in す that starts with the kanji (成さん？ 나루 씨, not 이루지 않아; spec LEX-4824). Not 許, 出, 返, whose さん is the negative (許さん！ 용서하지 않아).
 //= name.nickname-suffix	Endings of a nickname that follow a name of the name layer in the same run of kana, written as one name with it (ひよりん 히요린, かのちん 카노친, あゆやん 아유얀, トモすけ 토모스케; spec LEX-4821).
 //= honorific.person-title	The titles that show a name to be a person when they follow it (霧島さん, 千歳お姉, 加賀改二).
 //= honorific.prepass	Honorifics that the rules left untranslated, which leave the spacing to the word after them (魔王ちゃんの 마왕의).
@@ -1772,6 +1773,7 @@ honorific.name	卿
 honorific.nickname	ちゃん
 honorific.nickname	くん
 honorific.nickname	さん
+name.kanji-honorific	成=나루
 name.nickname-suffix	ん
 name.nickname-suffix	りん
 name.nickname-suffix	やん

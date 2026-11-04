@@ -174080,7 +174080,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 勾践	구천	N130	QPNVHn	Wb	GN							names.474109
 勾金村	마가리카네촌	N130	QCTVPl		GN							names.474110
 勾陣	코우친	N130	QPNVHn	Wb	GN						こうちん	names.474111
-勿	말 물	N110			GN							names.474112
 勿忘	물망초	N110			GN						わすれなぐさ	names.474113
 勿来	나코소	N130	QPNVHn	Wa	GN							names.474114
 勿来なほ子	나코소 나오코	N130	QPNVHn		GN							names.474115
@@ -246933,7 +246932,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 差波	사시나미	N130	QPNVHn	Wa	GN						さしなみ	names.548011
 差波優人	사시나미 유토	N130	QPNVHn		GN							names.548012
 差異	차이	N110			GN							names.548013
-己	몸 기	N110			GN						き	names.548015
 己丑	기축	N110			GN							names.548016
 己丑年	기축년	N110			GN							names.548017
 己亥	기해	N110			GN							names.548018
@@ -263522,7 +263520,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 戎本みろ	에비스모토 미로	N130	QPNVHn		GN							names.565291
 戎橋	에비스바시	N110			GN						えびすばし	names.565292
 戎毅	룽이	N130	QPNVHn	Wb	GN						じゅうき	names.565293
-成	청	N110			GN							names.565294
 成せば成るのさ 七色卵	이루면 완성되는 것 칠색알	N130	QWK		GN							names.565295
 成れ果て	말로	N130	QPNVHn	Wb	GN							names.565296
 成ヘ琅	성혜랑	N130	QPNVHn	Wb	GN							names.565297
@@ -269994,7 +269991,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 斑鳩翼	이카루가 츠바사	N130	QPNVHn		GN						いかるが つばさ	names.571931
 斑鳩芳正	이카루가 요시마사	N130	QPNVHn		GN						いかるが よしまさ	names.571932
 斑鳩萌衣	이카루가 메이	N130	QPNVHn		GN						いかるがめい	names.571933
-斗	말 두	N130	QPNVHn		GN						はかる	names.571934
 斗井駅	두정역	N130	QCTVPl		GN							names.571935
 斗亜	토아	N130	QPNVHn	Wb	GN							names.571936
 斗元工科大学校	두원공과대학교	N130	VGt		GN							names.571937
