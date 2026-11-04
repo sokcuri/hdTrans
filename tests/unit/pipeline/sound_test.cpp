@@ -1291,6 +1291,41 @@ HD_TEST(pipeline_ra_less_ichidan) {
     for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteRaLessIchidan(c.in, ctx, *loaded.snapshot), std::string(c.want));
 }
 
+// The Kansai へん after a kana stem of a verb of the dictionary is ない: an ichidan stem, the ichidan stem
+// before られ, a godan negative stem or potential; from the start of the kana or after a particle or a て
+// form; not the polite まへん, nor ここらへん, nor without dialect forms.
+HD_TEST(pipeline_kansai_negative_kana) {
+    const auto loaded = dict::Load({{0, "base.tsv",
+                                     "key\tko\tpos\tid\n"
+                                     "くれ\t주&HN@\tM437\t1\n"
+                                     "足り\t충분하&AA@\tM437\t2\n"
+                                     "な\t되&AA@\tM418\t3\n"
+                                     "つ\t붙&AA@\tM411\t4\n"
+                                     "もら\t받&AA@\tM410\t5\n"
+                                     "やめ\t그만두&AA@\tM437\t6\n"}});
+    HD_REQUIRE(loaded.snapshot != nullptr && loaded.errors.empty());
+    LineContext ctx;
+    ctx.lookup.plain = &loaded.snapshot->TextPlain();
+    ctx.dialectForms = true;
+    const Case cases[] = {
+        {"くれへん？", "くれない？"},
+        {"まだ足りへん", "まだ足りない"},
+        {"どうにもならへんわ", "どうにもならないわ"},
+        {"格好がつかへん", "格好がつかない"},
+        {"かまってもらえへん", "かまってもらえない"},
+        {"やめられへんかった", "やめられなかった"},
+        {"負けてくれへんで", "負けてくれないよ"},
+        {"あのへん", "あのへん"},
+        {"ここらへん", "ここらへん"},
+        {"やってられまへん", "やってられまへん"},
+        {"へんだね", "へんだね"},
+        {"またへんな奴が", "またへんな奴が"},
+    };
+    for (const auto& c : cases) HD_CHECK_EQ(internal::RewriteKansaiNegativeKana(c.in, ctx, *loaded.snapshot), std::string(c.want));
+    ctx.dialectForms = false;
+    HD_CHECK_EQ(internal::RewriteKansaiNegativeKana("くれへん？", ctx, *loaded.snapshot), std::string("くれへん？"));
+}
+
 // The の said ん after a noun before 中 or とこ, not inside a word (真ん中) nor before kanji.
 HD_TEST(pipeline_contracted_no) {
     const auto loaded = dict::Load({{0, "base.tsv",
