@@ -662,6 +662,41 @@ constexpr NamedFeature kFeatures[] = {
      }},
     // The text ends after the word, or a closing bracket or an exclamation mark follows it: a line
     // of speech ends there (授けよう」, 渡そう！), not a sentence of narration in 。.
+    // Only final particles and sentence marks stand between the word and the closing bracket or the
+    // end of the line (行くし」, 行くしね」, 行くし。」), no further sentence and no trailing ellipsis.
+    {"speech-ends",
+     [](Flusher& f, const Item* it) {
+         const auto trailing = [](std::string_view t) {
+             for (std::size_t k = 0; k < t.size();) {
+                 const text::Rune r = text::DecodeRune(t.substr(k));
+                 if (RuneIn(r.cp, "」』）)")) return 1;
+                 // A trailing ellipsis leaves the list open (待ってられないし……」), so it goes on.
+                 if (!RuneIn(r.cp, "。．！!.ーねさなよっ〜~ 　")) return -1;
+                 k += std::max<std::size_t>(r.size, 1);
+             }
+             return 0;
+         };
+         // The chain ends at the sentence; the tokens after it go on to the end of the line.
+         int state = trailing(From(it->text, it->start + it->length));
+         for (int t = it->tokenIndex + 1; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text);
+         return state >= 0;
+     }},
+    // An earlier predicate in the same quotation already lists a reason in し (痛いし眠いし,
+    // わかりやすいし間違えないし, めがねだし、陰キャだし).
+    {"after-listed-shi",
+     [](Flusher&, const Item* it) {
+         for (const Item* x = it->prev; x != nullptr; x = x->prev) {
+             std::string_view s = x->group->surface;
+             if (s == "「" || s == "『" || s.ends_with("「") || s.ends_with("『")) return false;
+             if (s.ends_with("、")) s.remove_suffix(std::string_view("、").size());
+             std::string_view d = x->DirectIndex() >= 0 ? x->DirectSurface() : std::string_view();
+             if (d.ends_with("、")) d.remove_suffix(std::string_view("、").size());
+             if (d.ends_with("し") || s.ends_with("だし") || s.ends_with("ですし") || s.ends_with("だったし") || s.ends_with("でしたし")) {
+                 return true;
+             }
+         }
+         return false;
+     }},
     {"speech-close",
      [](Flusher&, const Item* it) {
          const std::string_view rest = TextAfter(it);

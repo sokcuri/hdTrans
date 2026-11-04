@@ -30,13 +30,13 @@ cx:kara-cause:10	亭主を軍隊に取られてからこっち	!rule:cx:kara-cau
 cx:kara-cause:10	「お前は頭がいいから要注意だぜ」	!rule:cx:kara-cause:20	keep	rewrites
 cx:kara-cause:10	「じゃあ仕事行ってくるから、遅刻しないように行きなさいよ」	!rule:cx:kara-cause:20	keep	rewrites
 cx:kara-cause:5	疲れただろう。	!rule:cx:kara-cause:5	keep	rewrites
-cx:shi-list:10	「念のためセキュリティを解除してみましたが、当然開きませんでしたし」	「만약을 위해 보안을 해제해 보았습니다만, 당연히 열지 않았고요」	fix	rewrites
-cx:shi-list:10	「では1番も棄権しますわ。私も慰謝料をいただく気はありませんでしたし」	「그럼 1번이나 기권해요. 나도 위자료를 받을 생각은 없었고요」	fix	rewrites
+cx:shi-list:9	「念のためセキュリティを解除してみましたが、当然開きませんでしたし」	「만약을 위해 보안을 해제해 보았습니다만, 당연히 열지 않았거든요」	fix	rewrites
+cx:shi-list:9	「では1番も棄権しますわ。私も慰謝料をいただく気はありませんでしたし」	「그럼 1번이나 기권해요. 나도 위자료를 받을 생각은 없었거든요」	fix	rewrites
 cx:shi-list:10	「大丈夫です。店長も、わたしの事情はわかってくれてますし……」	「괜찮습니다. 점장도, 내 사정은 알아 주고 있고요……」	fix	rewrites
 cx:shi-list:10	まわりのブースにご迷惑かけちゃいましたし。	주위의 부스에 폐 끼쳐버렸고요.	fix	rewrites
-cx:shi-list:10	「はい。佐藤先輩もその様子を見て、ニコニコされてますし」	「네. 사토 선배도 그 상태를 보고, 싱글벙글되고 있고요」	fix	rewrites
+cx:shi-list:9	「はい。佐藤先輩もその様子を見て、ニコニコされてますし」	「네. 사토 선배도 그 상태를 보고, 싱글벙글되고 있거든요」	fix	rewrites
 cx:shi-list:10	「ゆうちゃんも今言ってましたし……」	「유짱도 지금 말했고요……」	fix	rewrites
-cx:shi-list:10	「いいんですよ。俺は食事に来ただけですし」	「좋아요. 나는 식사하러 왔을 뿐이고요」	fix	rewrites
+cx:shi-list:9	「いいんですよ。俺は食事に来ただけですし」	「좋아요. 나는 식사하러 왔을 뿐이거든요」	fix	rewrites
 cx:shi-list:20	元々僕の年齢も足りてないのですし、そもそも方法だってそれしかないと	원래 내 연령도 충분하지 않고, 애초에 방법도 그것밖에 없으면	fix	rewrites
 cx:shi-list:20	倍率400倍を超えているのだし「まあ一応応募しておくか」と	배율 400배를 넘고 있고 「뭐 일단 응모해 둘까」라고	fix	rewrites
 cx:shi-list:20	それはあくまでも陰でこっそりと行うことであるし、もちろん	그것은 어디까지나 그늘에서 몰래 실시하는 것이고, 물론	fix	rewrites
@@ -53,6 +53,7 @@ cx:shi-list:20	雨ですし、帰ります。	!rule:cx:shi-list:20	keep	rewrites
 cx:shi-list:20	後頭部からいったしな、アホになったかもしれん。	!rule:cx:shi-list:20	keep	rewrites
 cx:shi-list:20	勉強もしたし、	!rule:cx:shi-list:20	keep	rewrites
 cx:shi-list:7	コストがかかっているのだろう。	!rule:cx:shi-list:7	keep	rewrites
-cx:shi-list:30	「生徒主導なんですし」	「학생 주도이고요」	fix	rewrites
+cx:shi-list:29	「生徒主導なんですし」	「학생 주도이거든요」	fix	rewrites
 cx:shi-list:30	「生徒主導なんです」	!rule:cx:shi-list:30	keep	rewrites
 cx:shi-list:40	「生徒主導なんですが、もう少し」	!rule:cx:shi-list:40	keep	rewrites
+cx:shi-list:30	生徒主導なんですし。	학생 주도이고요.	fix	rewrites
