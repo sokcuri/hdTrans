@@ -10,7 +10,7 @@ cx:archaic-speech:10	衛兵は何をしておった？	위병은 무엇을 하�
 cx:archaic-speech:10	どこに行っておった！	어디에 가고 있었느냐!	fix	rewrites
 cx:archaic-speech:10	例の物は？ できておるか？	그 물건은? 되어 있느냐?	fix	rewrites
 cx:archaic-speech:10	いつまで遊んでおる？	언제까지 놀고 있느냐?	fix	rewrites
-cx:archaic-speech:10	それだけの力 どこに秘めておった？	그것만의 힘어디에 간직하고 있었느냐?	fix	rewrites
+cx:archaic-speech:10	それだけの力 どこに秘めておった？	그것만의 힘 어디에 간직하고 있었느냐?	fix	rewrites
 cx:archaic-speech:10	スー坊は ガー坊をどう思っておる？	스방은 가방을 어떻게 생각하느냐?	fix	rewrites
 cx:archaic-speech:10	分かっておる！ 主砲の準備を！	알고 있다! 주포 준비를!	keep	rewrites
 cx:archaic-speech:10	実をいうとな 早い話 みんな 生きておる！	사실을 말하자면 빠른 이야기 모두 살아 있다!	keep	rewrites
@@ -26,7 +26,7 @@ cx:archaic-speech:20	どこや どこにおる？ 御堂筋	어디나 어디에 
 cx:archaic-speech:20	キジは どこにおる？	꿩은 어디에 있어?	keep	rewrites
 cx:archaic-speech:20	わしは ここだ ここにおる！	나는 여기다 여기에 있다!	keep	rewrites
 cx:archaic-speech:30	「拙者、これにて失礼いたす」	「나, 이만 실례하겠소」	fix	rewrites
-cx:archaic-speech:32	平原よりの加勢 劉備玄徳 義によって助太刀いたす	평원에서의 가세 유비현덕도리에 의해 조력하겠소	fix	rewrites
+cx:archaic-speech:32	平原よりの加勢 劉備玄徳 義によって助太刀いたす	평원에서의 가세 유비현덕 도리에 의해 조력하겠소	fix	rewrites
 cx:archaic-speech:32	犬よ これよりわしは出陣いたす	개야 지금부터 나는 출진하겠소	fix	rewrites
 cx:archaic-speech:32	では！ 鬼ヶ島討ち入りの作戦を 説明いたす！	그럼! 오니가시마 결전의 작전을 설명하겠소!	fix	rewrites
 cx:archaic-speech:32	お断りいたす	거절하겠소	fix	rewrites
@@ -43,7 +43,7 @@ cx:archaic-speech:38	そう申されて	!rule:cx:archaic-speech:38	keep	rewrites
 cx:archaic-speech:40	張遼 そちがやると申すか？	장료 소치가 한다고 말하느냐?	fix	rewrites
 cx:archaic-speech:40	異なことを。 なぜ そう申す？	이인 일을. 왜 그렇게 말하느냐?	fix	rewrites
 cx:archaic-speech:40	お主 今 なんと申した？	그대 지금 뭐라고 말했느냐?	fix	rewrites
-cx:archaic-speech:40	わしは島田カンベエ そのほう 名は何と申す？	나는 시마다 칸베에 그쪽명은 뭐라고 말하느냐?	fix	rewrites
+cx:archaic-speech:40	わしは島田カンベエ そのほう 名は何と申す？	나는 시마다 칸베에 그쪽 명은 뭐라고 말하느냐?	fix	rewrites
 cx:archaic-speech:40	ビネガー･カーンに 復しゅうしたいと申すか？	비니거·까앙에 복수하고 싶다고 말하느냐?	fix	rewrites
 cx:archaic-speech:40	お主 先ほど 抜け道があると申したか？	그대 방금 전 샛길이 있다고 말했나?	fix	rewrites
 cx:archaic-speech:40	ふんっ！ アヤトリオと申す｡	흥! 아야 트리오라고 한다.	keep	rewrites

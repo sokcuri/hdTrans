@@ -566,9 +566,31 @@ bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::
             const int tail = to[static_cast<std::size_t>(j - 1)];
             if (tail >= 0) {
                 output::ResolvedItem& previous = items[static_cast<std::size_t>(tail)];
+                // A noun after the space starts a word of its own, as the space shows (海斗 お前 카이토 너,
+                // あんた これ 너 이것); a particle, a copula, a quoting と or a する after it still attaches
+                // (関係 している 관계하고), and so do the letters of a word spaced out one by one (ミ ラ ノ,
+                // 明 家が) and a word after a mark (スプリット･ ドロー).
+                const output::ResolvedItem* lead = head >= 0 ? &items[static_cast<std::size_t>(head)] : nullptr;
+                const auto one = [&](int k) { return text::RuneCount(tokens.Raw(static_cast<std::size_t>(k))) == 1; };
+                // A kanji standing alone before kanji, after the start or a mark, may spell a compound
+                // across the space (明 家が, (避 難者).
+                const auto lastRune = [](std::string_view s) {
+                    std::size_t at = s.size();
+                    while (at > 0 && (static_cast<unsigned char>(s[at - 1]) & 0xC0) == 0x80) at--;
+                    return at > 0 ? std::pair{text::DecodeRune(s.substr(at - 1)).cp, at - 1} : std::pair{char32_t{0}, std::size_t{0}};
+                };
+                const auto [lastCp, at] = lastRune(tokens.Raw(static_cast<std::size_t>(j - 1)));
+                const char32_t prior = lastRune(tokens.Raw(static_cast<std::size_t>(j - 1)).substr(0, at)).first;
+                const bool kanjiAlone = text::IsKanji(lastCp) && !text::IsKanji(prior) && !(prior >= U'ぁ' && prior <= U'ヿ') &&
+                                        text::IsKanji(text::DecodeRune(tokens.Raw(static_cast<std::size_t>(j))).cp);
+                const bool spelled = kanjiAlone ||
+                                     (one(j) && (one(j - 1) || (j + 1 < n && tokens[static_cast<std::size_t>(j + 1)].afterSpace && one(j + 1))));
+                const bool noun = lead != nullptr && lead->entry.code.starts_with("1") && !lead->entry.text.empty() &&
+                                  !previous.entry.code.starts_with("6") && !previous.entry.text.empty() && !spelled;
                 if (previous.entry.code.starts_with("32") ||
                     (previous.detailClass == output::DetailClass::None &&
-                     dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1))))) {
+                     dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1)))) ||
+                    noun) {
                     previous.spaceAfter = true;
                 }
             }

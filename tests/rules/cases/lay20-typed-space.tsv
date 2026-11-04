@@ -1,0 +1,24 @@
+# 규칙: LAY-20
+rule	input	expected	kind	layer
+compose:typed-space	あんた これ 随分 ボロボロね	너 이것 상당히 너덜너덜이네	fix	compose
+compose:typed-space	あんた 会話できる？	너 대화할 수 있어?	fix	compose
+compose:typed-space	みんな 飯は外で食ってくるからなあ	has:모두 밥은	fix	compose
+compose:typed-space	哲希くん これ お母さんからー	has:군 이것	fix	compose
+compose:typed-space	キヨシ お前も こいつに なんか言ってやれよ	키요시 너도 이 녀석에게 뭔가 말해	fix	compose
+compose:typed-space	ウィンリィ 銃を放せ	윈리 총을 놓아라	fix	compose
+compose:typed-space	海斗 お前 ママのこと好きか？	has:카이토 너	fix	compose
+compose:typed-space	信 お前…	신 너…	fix	compose
+compose:typed-space	聞いてくれ アンディのところへ帰ろう	들어 줘 앤디에게 돌아가자	fix	compose
+compose:typed-space	えっ それ取れるのか!?	has:어 그것	fix	compose
+compose:typed-space	ある晩 ダグラスは ４人のカナダ人を案内	has:밤 더글라스는	fix	compose
+compose:typed-space	一番 センター 泉君 背番号八	has:센터 이즈미	fix	compose
+compose:typed-space	お前が書いたコードに関係 していることだ	네가 쓴 코드에 관계하고 있는 것이다	keep	compose
+compose:typed-space	子供のためのタブレット ではない	아이를 위한 태블릿이 아니다	keep	compose
+compose:typed-space	訓練されたプロのスパイ じゃないと	훈련된 프로의 스파이가 아니면	keep	compose
+compose:typed-space	だから 努力しなさい という意味だったのよ	has:노력해라는	keep	compose
+compose:typed-space	ここを単なる墓場で しかないと思ったのだろう	has:묘지에서밖에	keep	compose
+compose:typed-space	富良野じゃなくてﾐ ﾗ ﾉ！ ｲﾀﾘｱの都市よ｡	후라노가 아니라 미라노! 이탈리아의 도시야.	keep	compose
+compose:typed-space	マ ル それから？	마르 그리고?	keep	compose
+compose:typed-space	判定はスプリット･ ドローです	판정은 스플릿·드로입니다	keep	compose
+compose:typed-space	運賃 ・ 時刻 ・ 忘れ物のお問い合わせは県庁前駅へ	운임·시각·두고 온 물건 문의는 겐초마에역에	keep	compose
+compose:typed-space	いや そう簡単に分析 できるもんじゃないよ	has:분석할 수	keep	compose
