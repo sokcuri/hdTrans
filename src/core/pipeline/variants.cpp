@@ -287,7 +287,62 @@ std::u32string PoliteDrawnU(std::u32string rs, bool& changed) {
     return rs;
 }
 
+// Whether a dictionary key other than a name is s (クリトリス).
+bool CommonKey(std::u32string_view s, const dict::Snapshot& snap) {
+    const std::string key = EncodeText(s);
+    for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == key && !c.codes->sem.HasPrefix("QPN")) return true;
+    }
+    return false;
+}
+
 }  // namespace
+
+std::string JoinPauseCommas(std::string_view text, const dict::Snapshot& snap) {
+    std::u32string rs = DecodeText(text);
+    bool changed = false;
+    for (size_t i = 1; i + 1 < rs.size(); i++) {
+        if (rs[i] != U'、') continue;
+        const char32_t before = rs[i - 1], next = rs[i + 1];
+        bool join = false;
+        // A predicate, then a final particle that ends the utterance (ない、よ？ ないよ？, いい、の？). Not か,
+        // whose pause muses (世は巡る、か), the adverbial なく (比喩じゃなく、ね), また (また、ね) or an
+        // interjection in ん (ん、なっ…).
+        const std::u32string_view head = std::u32string_view(rs).substr(0, i);
+        if (IsHiraganaRune(before) && In(before, U"いただるうくすつぬむぶぐ") && In(next, U"よのねなわぞ") && !head.ends_with(U"なく") &&
+            !head.ends_with(U"また")) {
+            size_t k = i + 2;
+            if (k < rs.size() && In(rs[k], U"ねなよわ")) k++;  // よね, のよ
+            while (k < rs.size() && In(rs[k], U"ーっぉぇ～〜")) k++;
+            join = k == rs.size() || In(rs[k], U"？?！!…‥。」』");
+        }
+        // A word in kanji or katakana, then さま (ご主人、さまぁ ご主人さまぁ).
+        if (!join && (IsKanjiRune(before) || IsKatakanaRune(before))) {
+            const std::u32string_view rest = std::u32string_view(rs).substr(i + 1);
+            // さま and 様 only: a name before a hesitant さん or ちゃん may not be a word (占守、ちゃん).
+            join = rest.starts_with(U"さま") || rest.starts_with(U"様");
+            // Not the adverb ちゃんと (モノ、ちゃんと抱えて) or a word that starts with 様 (医療品、様々な).
+            if (rest.starts_with(U"ちゃんと") || (rest.starts_with(U"様") && rest.size() > 1 && (IsKanjiRune(rest[1]) || rest[1] == U'々'))) {
+                join = false;
+            }
+        }
+        // A katakana word split by a pause whose halves are no words of their own and whose whole is
+        // (クリ、トリス クリトリス; not パン、ケーキ).
+        if (!join && IsKatakanaRune(before) && IsKatakanaRune(next)) {
+            size_t a = i, b = i + 1;
+            while (a > 0 && IsKatakanaRune(rs[a - 1])) a--;
+            while (b < rs.size() && IsKatakanaRune(rs[b])) b++;
+            const std::u32string_view left = std::u32string_view(rs).substr(a, i - a), right = std::u32string_view(rs).substr(i + 1, b - i - 1);
+            join = left.size() >= 2 && right.size() >= 2 && !CommonKey(left, snap) && !CommonKey(right, snap) &&
+                   CommonKey(std::u32string(left) + std::u32string(right), snap);
+        }
+        if (!join) continue;
+        rs.erase(i, 1);
+        changed = true;
+    }
+    return changed ? EncodeText(rs) : std::string(text);
+}
+
 
 std::string RewriteSpellingVariants(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
     std::u32string rs = DecodeText(text);

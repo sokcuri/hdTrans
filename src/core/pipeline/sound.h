@@ -254,6 +254,11 @@ std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap
 // as the dictionary keys them where only the respelling reads as words (spec LEX-4822).
 std::string RewriteSpellingVariants(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// The pause comma inside a unit dropped: between a predicate and a final particle that ends the
+// utterance (ない、よ？), a word and さま (ご主人、さま) and the halves of a katakana word
+// (クリ、トリス) (spec GRM-3870).
+std::string JoinPauseCommas(std::string_view text, const dict::Snapshot& snap);
+
 // The fused and clipped adjective endings written in full (spec SPC-19): an adjective stem of the
 // dictionary said with its last syllable and い fused (うるせぇ うるさい, すげーな すごいな, 若え！ 若い！,
 // 汚ねえ 汚い, さみい さむい, 分からねえ 分からない) before the end of a clause, a sentence particle or the

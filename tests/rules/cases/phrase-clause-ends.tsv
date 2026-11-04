@@ -1,0 +1,16 @@
+# 규칙: LEX-4825, GRM-3870
+rule	input	expected	kind	layer
+sound:phrase-clause-end	「そ、そんなこと……ない、よ？」	「그, 그런 일……없어?」	fix	sound
+sound:phrase-clause-end	こなつ…いい、の？	코나츠…괜찮아?	fix	sound
+sound:phrase-clause-end	ん、ぁ…はい、ご主人、さまぁ。	응, 아…네, 주인님~.	fix	sound
+sound:phrase-clause-end	先に…行く、ね	먼저…갈게	fix	sound
+sound:phrase-clause-end	「そうだけど……それがどうしたんだ？」	「그렇지만……그게 어쨌다는 거야?」	fix	sound
+sound:phrase-clause-end	こらこら、急に騒いでどうした	이봐 이봐, 갑자기 떠들어 무슨 일이야	fix	sound
+sound:phrase-clause-end	「慌ててどうしたの？」	「황급히 무슨 일이야?」	fix	sound
+sound:phrase-clause-end	あ〜ん やだよ	아~앙 싫어	fix	sound
+sound:phrase-clause-end	「やだよ！　こんなところで諦めるくらいなら」	「싫어! 이런 곳에서 포기할 바에야」	fix	sound
+sound:phrase-clause-end	パン、ケーキ、ジュース	빵, 케이크, 주스	keep	sound
+sound:phrase-clause-end	曲芸をやった	곡예를 했다	keep	sound
+sound:phrase-clause-end	その子たちはどうした？	그 아이들은 어떻게 했어?	keep	sound
+sound:phrase-clause-end	見てやった	보고 주었다	keep	sound
+sound:phrase-clause-end	妄想は妄想のままでよかった。	망상은 망상인 채로 좋았다.	keep	sound
