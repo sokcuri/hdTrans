@@ -171,6 +171,7 @@
 //= kana.ending-start-only	Kana that start the ending of an end row but no word, so that such an ending is no piece of a katakana run read as words (っしゅ of トリッシュ).
 //= kana.kin-before-chan	The kin, pet and other words before ちゃん the dictionary lacks in hiragana, which are no nickname (にいちゃん, わんちゃん, いっちゃん 一番).
 //= kana.native-katakana	Native words that writers spell in katakana for emphasis and that no katakana row has, KATAKANA=SPELLING: the protect stage reads them in that spelling (サイコー=最高 최고, ソノ=その 그, ドコ=どこ 어디; spec LEX-4823). Only words that are not given names as well (no カナリ, カナタ, ミナ, コヨイ).
+//= kana.spelled-ending	Polite endings and the copula that robotic or foreign speech spells in katakana right after the word they end (分かりマシタ 알겠습니다, 悪いデスよ, 校舎内ッスよ): read in hiragana there.
 //= kana.mimetic-adverb-frame	The second and fourth kana of a four-kana katakana run, in hiragana, that make it the shape of a native adverb (シッカリ, ヒンヤリ).
 //= ko-root.mimetic-adjective	Roots of Korean 하다 adjectives that the sound stage writes for a mimetic word (ふんわり 폭신, しっとり 촉촉): its している before a noun is the adjective (ふんわりしている髪 폭신한 머리카락).
 //= ko-root.hada-adjective	Roots of Korean 하다 adjectives that a Japanese verb reads with the 하다 of a verb (はっきりする 확실하다, 落ち着く 침착하다): its と before the next act is -니, not -자 (spec GRM-40).
@@ -2428,6 +2429,19 @@ kana.native-katakana	ドコ=どこ
 kana.native-katakana	ナンデ=なんで
 kana.native-katakana	ドウシテ=どうして
 kana.native-katakana	ドーシテ=どうして
+kana.spelled-ending	です
+kana.spelled-ending	でした
+kana.spelled-ending	でしょう
+kana.spelled-ending	でしょ
+kana.spelled-ending	ます
+kana.spelled-ending	ました
+kana.spelled-ending	ません
+kana.spelled-ending	ましょう
+kana.spelled-ending	まして
+kana.spelled-ending	っす
+kana.spelled-ending	っした
+kana.spelled-ending	っすね
+kana.spelled-ending	っすよ
 
 kana.mimetic-adverb-frame	っり
 kana.mimetic-adverb-frame	んり
