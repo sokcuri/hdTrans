@@ -57,7 +57,7 @@ dict:w:32313	敵の攻撃に当たり、倒れた。	has:공격에	keep	lookup
 dict:jisjk:25979	そのため生傷が絶えず、縫うような傷を作ったことも何度かあった。	has:생채기가	fix	lookup
 dict:jisjk:228393	呪いをかけるだけで一族郎党皆殺しとなる法がある中に、猫猫の考えはむしろ異端といえる。	has:일족과 가신	fix	lookup
 dict:jisjk:4601	（なんらかの病気か？もしかして遺伝的なもの？）	has:어떤 병	fix	lookup
-dict:jisjk:4601	ふたりの間にはなんらかの確執があるんだよな……	has:어떤 확집	fix	lookup
+dict:jisjk:4601	ふたりの間にはなんらかの確執があるんだよな……	has:어떤 불화	fix	lookup
 dict:jisjk:255234	横恋慕は良くない。	has:남의 짝을 넘봄	fix	lookup
 dict:jisjk:79665	仕事一筋、恋愛している暇なんてあるか！というワタシだったけれども、それでもトキメキたいと思うのが乙女心。	has:소녀의 마음	fix	lookup
 dict:jisjk:79665	ヤキモチという心理状態……つまり乙女心が、微々たるものとはいえプログラムに影響を与える。	has:소녀의 마음이	fix	lookup
