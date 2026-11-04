@@ -1091,6 +1091,11 @@ cx:notice-words-1:148	GRM-3757	&&5 S+0== "いただ" D+0== "&CJ@" U-1== "Rて" I
 cx:notice-words-1:150	GRM-3757	&&4 S+0== "していただ" D+0== "해 주&AE@" I+0== "していただきます" ||2 F+0== "utterance-end" F+0== "period-after"	set-ending "6야겠습니다"	協力していただきます 협력해 주셔야겠습니다
 cx:notice-words-1:152	LEX-4714	&&4 S+0== "の" D+0== "마&AE@" I+0== "のみ" I-1== "Rること"	set-ending@-1 "0 것뿐" set-target "" set-ending ""	応援することのみ 응원하는 것뿐
 cx:notice-words-1:154	LEX-4714	&&6 S+0== "やな" I+0== "やな" P+1== "1**" !1 P-1== "1**" !1 S+1== "Lん" !1 S+1== "Lぎ"	set-target "싫은"	やなおばさん 싫은 아줌마; not そうやな
+cx:notice-words-1:156	LEX-4715	&&2 S+0== "元に戻" S-1== "の"	set-target "곁으로 돌아&A1@"	コペルニクスの元に戻り 코페르니쿠스의 곁으로 돌아가; not 元に戻る 원래대로
+cx:notice-words-1:158	LEX-4715	&&2 S+0== "できるだけ" ||4 S+1== "Lな" S+1== "Lだ" S+1== "Lで" S+1== "Lじゃ"	set-target "할 수 있을 뿐"	できるだけなのです 할 수 있을 뿐인 것입니다; not できるだけ早く
+cx:notice-words-1:160	LEX-4715	&&2 S+0== "物にな" S-1== "の"	set-target "것이 &C6@" set-target@-1 "의"	主の物になる 주인의 것이 된다; not 物にならない 쓸모 있게 되지 않는다
+cx:notice-words-1:161	LEX-4715	&&4 S+0== "物にな" ||3 P-1== "4**" P-1== "7**" P-1== "H**" !1 I-1== "Rと" !1 I-1== "Rば"	set-target "것이 &C6@"	変えられない物になる 바꿀 수 없는 것이 된다
+cx:notice-words-1:162	LEX-4715	&&3 S+0== "に教えてもら" D+0== "(이)가 가르쳐 &CJ@" ||2 A-1== "UMe" A-1== "UMeVFd"	set-target "에 가르쳐 &CJ@"	お昼に教えてもらった 점심에 가르쳐 준; not 先生に教えてもらった
 cx:notice-words-1:126	LEX-4710	&&4 S+0== "司令" D+0== "사령관" S+1!= @Rhonorific.constraint ||4 &&2 P+1== "1**" F+1== "touches-prev" S+1== "官" S+2== "官" S+3== "官"	set-target "사령"	司令所 사령소, 司令……官 사령……관
 cx:notice-words-1:128	LEX-4712	&&3 S+0== "感心" F+0== "verb" ||4 I+0== "L感心しない" I+0== "L感心しなかっ" I+0== "L感心しません" &&2 S+1== "な" !1 S+2== "がら"	set-target "좋게 &AY@"	それは感心しないな 그건 좋게 보지 않네; not 感心した, 感心しながら
 cx:notice-words-1:130	LEX-4712	&&2 S+0== "心中" S+1== "する"	set-target "동반자살"	二人は心中した 두 사람은 동반자살했다; not 心中を察する

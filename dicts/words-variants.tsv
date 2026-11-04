@@ -6083,8 +6083,6 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 大氣	대기	N110	UGsVFr		GN							jisjk:18885
 大いそぎ	몹시 급%A1@	G8U0			GN							jisjk:2668
 大いそぎ	지급	I110			GN							jisjk:2669
-大革	북	N110	USoQMUVPe		GN							jisjk:127984
-大革	큰 북	N110	VPeUSoQMU		GN							jisjk:128066
 大ちゅき	정말 좋아%D1@	G8L0		Av	GN	81	||3 &&2 S-1== "が" D-1== "(을)를" &&4 P-1== "4**" U-1== "のが" M-1== "50*" Y-1= "0 것을" &&4 P-1== "8**" U-1== "なのが" M-1== "50*" Y-1= "4 것을"	が가 목적격으로 번역되거나 앞 동사에 のが, 앞 형용동사에 なのが가 붙으면 大好き를 정말 좋아하다로 고르고 필요한 목적어 어미를 맞춘다. (미발동: rare-context)				jisjk:2690
 大ちゅき	너무 좋아	N110		J2J4	GN	1940	||1 G+0== "Ow"	문장 끝의 大好き를 너무 좋아로 고른다.				jisjk:259754
 大あわて	큰 당황	I110		Hd	GN							jisjk:106028
