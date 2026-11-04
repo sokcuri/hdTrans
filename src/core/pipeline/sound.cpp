@@ -3224,7 +3224,8 @@ bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::
     const size_t se = i - 1;
     if (se == 0 || rs[se] != U'せ') return false;
     const bool kanaAfter = i + 1 < rs.size() && (IsHiraganaRune(rs[i + 1]) || IsKatakanaRune(rs[i + 1]));
-    if (kanaAfter && std::u32string_view(U"ぞよわかのなねでとさしけじやがもは").find(rs[i + 1]) == std::u32string_view::npos) {
+    if (kanaAfter && std::u32string_view(U"ぞよわかのなねでとさしけじやがもは").find(rs[i + 1]) == std::u32string_view::npos &&
+        !std::u32string_view(rs).substr(i + 1).starts_with(U"だろ")) {
         return false;
     }
     // せんじ but for せんじゃ is 煎じる written in kana (お茶をせんじる, 薬はせんじて), not the negative of する.

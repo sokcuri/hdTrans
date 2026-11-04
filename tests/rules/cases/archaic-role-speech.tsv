@@ -295,7 +295,7 @@ cx:archaic-speech:103	ウフフフ、……皆さんそうじゃろうが。	우
 cx:archaic-speech:103	ああ そうじゃろうが、それでも	아 그렇겠지만, 그래도	keep	rewrites
 cx:archaic-speech:95	よーし、今年の秋も大漁じゃ。	좋아~, 올해 가을도 풍어야.	keep	rewrites
 cx:archaic-speech:100	わしは、今、町の寺に泊まっているじゃ。	나는, 지금, 마을의 절에 묵고 있는이야.	keep	rewrites
-dict:archaic-speech	女子には分からんじゃろう	여자에게는 모르겠지	fix	lookup
+dict:archaic-speech	女子には分からんじゃろう	여자는 모르겠지	fix	lookup
 cx:archaic-speech:32	我ら勝利のためなら どんなことでもいたす！	우리들 승리를 위해서라면 어떤 일이라도 한다!	keep	rewrites
 cx:archaic-speech:10	余の服装が何であったか、どういうものだか今だに記憶しておる。	짐의 복장이 왜 있었는지, 어떤 걸까 여태 껏 기억하고 있다.	keep	rewrites
 cx:archaic-speech:5	タウロ 某は正気であり 何をしているのか 理解しているつもりです	타우로 소인은 제정신이며 무엇을 하고 있는지 이해하고 있을 생각입니다	fix	rewrites
