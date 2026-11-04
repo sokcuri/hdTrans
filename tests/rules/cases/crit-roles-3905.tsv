@@ -1,0 +1,34 @@
+# 규칙: GRM-3905, GRM-3906, GRM-3907, LEX-4806, LEX-4807
+rule	input	expected	kind	layer
+cx:meaning-flips-1:170	二人きりだから…コウくんが好きなことするの	단둘이니까…코우 군이 좋아하는 일 해	fix	rewrites
+cx:meaning-flips-1:170	あたしが好きなタイプは優人以外よ。	내가 좋아하는 타입은 유토 이외.	fix	rewrites
+cx:meaning-flips-1:170	猫が好きな人	고양이를 좋아하는 사람	keep	rewrites
+cx:meaning-flips-1:170	私は猫が好きだ	나는 고양이를 좋아한다	keep	rewrites
+cx:meaning-flips-1:170	「筧さんが私のことが好きなことぐらい知ってますから」	「카케이 씨가 저를 좋아하는 일 정도 알고 있으니까요」	keep	rewrites
+cx:meaning-flips-1:172	ふむ。君が欲しい下着は、こっちの白の下着かい？	흠. 네가 갖고 싶은 속옷은, 여기의 흰색의 속옷이야?	fix	rewrites
+cx:meaning-flips-1:172	お前が欲しいものは何だ	네가 갖고 싶은 것은 뭐냐	fix	rewrites
+cx:meaning-flips-1:172	君が欲しい	너를 갖고 싶다	keep	rewrites
+cx:meaning-flips-1:174	この戦で我らが出来ることはただ一つ。	이 전에서 우리들이 할 수 있는 것은 다만 하나.	fix	rewrites
+cx:meaning-flips-1:174	子供が出来た	아이가 생겼다	keep	rewrites
+cx:meaning-flips-1:174	恋人が出来たことは	애인이 생겼던 것은	keep	rewrites
+cx:meaning-flips-1:174	どうしたらこういう溝が出来るのか	어떻게 하면 이런 도랑이 생기는 건가	keep	rewrites
+dict:jisjk:341217	私達はたった一人の人間が幸せでいられるために自分達の出来ることをしているわ	저희들은 단 한 사람의 인간이 행복해 있을 수 있어서 자신들이 할 수 있는 것을 하고 있어	fix	local
+dict:jisjk:341217	英語が出来る	영어를 할 수 있다	keep	local
+dict:jisjk:341217	日本語の出来る人	일본어를 할 수 있는 사람	keep	local
+global:G30	こども味なんて言ってないよ。	어린이맛 같은 건 말하지 않았어.	fix	global-stem
+global:G30	今の俺は男でも女でもない存在だけど…以前は男だったんだ	지금의 나는 남자도 여자도 아닌 존재이지만…이전에는 남자였다	fix	global-stem
+global:G30	加えてヤツらには山ほど	더해 녀석들에게는 산더미처럼	fix	global-stem
+global:G30	イチゴ味のアイス	딸기맛의 아이스	keep	global-stem
+global:G30	中年男が来た	중년 남자가 왔다	keep	global-stem
+global:G30	……拳闘家……迷子……貴公子……無責任男	……권투가……마이코……귀공자……무책임남	keep	global-stem
+global:G30	日本男児	일본 남아	keep	global-stem
+sense:kiku-ask	「んー？　単に味の違いを聞いただけなんだけどなー」	「음? 단지 맛의 차이를 물었을 뿐이지만~」	fix	senses
+sense:kiku-ask	値段を聞いた	가격을 물었다	fix	senses
+sense:kiku-ask	噂を聞いた	소문을 들었다	keep	senses
+sense:kiku-ask	先生の話の意味を聞いて驚いた	선생님 이야기의 의미를 듣고 놀랐다	keep	senses
+sense:arau-check	犯人の身元を洗う	범인의 신원을 조사한다	fix	senses
+sense:arau-check	ホースの水で父を洗い 父の髪をとかした	호스의 물로 아버지를 씻어 아버지의 머리를 빗었다	fix	senses
+sense:arau-check	顔を洗う	얼굴을 씻는다	keep	senses
+sense:arau-check	シャツを洗う	셔츠를 빤다	keep	senses
+global:G260	床を震わせ、桜庭が段ボールを机の脇に下ろした。	바닥을 진동시켜, 사쿠라바가 골판지를 책상의 옆에 내렸다.	fix	global-stem
+global:G260	荷物を下ろす	짐을 내린다	keep	global-stem
