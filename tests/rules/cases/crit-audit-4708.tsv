@@ -31,5 +31,5 @@ lexical:marker	声がうわずる。	목소리가 들뜬다.	fix	lookup
 lexical:marker	大成功を収めた。	대성공을 거두었다.	fix	lookup
 lexical:numeral-name	四万円	4만엔	fix	lookup
 lexical:numeral-name	「三式弾」と「九一式徹甲弾」	「3식탄」과「91식 철갑탄」	fix	lookup
-lexical:numeral-name	ただそれは…我らのためだけでやがりますか？一二三、湖衣	다만 그것은…우리들을 위해서만 나옵니까? 히후미, 코이	keep	lookup
+lexical:numeral-name	ただそれは…我らのためだけでやがりますか？一二三、湖衣	다만 그것은…우리들을 위해서 뿐입니까? 히후미, 코이	keep	lookup
 lexical:numeral-name	いらっしゃい 十三ちゃん	어서 오세요 주조짱	keep	lookup
