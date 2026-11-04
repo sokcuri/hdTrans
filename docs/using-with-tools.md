@@ -177,12 +177,12 @@ terminal 버전과 .NET 6 런타임을 설치한 뒤 서버 폴더에서 실행�
 - **사전 진단:** 번역이 이상하면 hdTrans 프로그램의 로그 탭(또는 `hdtrans --verify-dicts`)에서 사전 경고를 확인합니다.
 - **말투 설정:** `J2KEngine.dll`과 C API는 설정 파일의 `speech`로 엔진 전체에 정합니다. TypeScript는 `setSpeech()`로
   이후 번역에, `translate(text, { speech })`로 그 호출에만 정하고, C++은 `Session::SetSpeech`, CLI는 `--speech`입니다.
-  말투마다 무엇이 달라지는지는 [README](../README.md#말투-strict와-soft)에 있습니다.
+  말투마다 무엇이 달라지는지는 [말투와 번역 방식](translation-modes.md#말투-strict와-soft)에 있습니다.
 - **대사의 말투 수준:** 「」나 『』로 시작하는 줄은 번역한 뒤 말투 수준 규칙이 문장 끝을 다시 씁니다(「白崎、俺が手伝うから大丈夫だ」 →
   「시라사키, 내가 도우니까 괜찮아」). 후킹 도구가 한 줄씩 보내도 그 줄이 「로 시작하면 적용됩니다. 끄려면 설정 파일에
   `speech_levels: keep`을 적고 도구를 다시 시작하거나 다시 읽기를 합니다(TypeScript `speechLevels`, CLI `--speech-levels`).
   대사 하나가 여러 줄로 잘려 오면(`「白崎、俺が手伝うから`와 `大丈夫だ」`) 「를 같은 줄에서 닫지 않으므로 `wrapped: true`여도 그 대사는
-  번역의 말투 그대로입니다(`괜찮다」`). 자세한 내용은 [README](../README.md#대사의-말투-수준)에 있습니다.
+  번역의 말투 그대로입니다(`괜찮다」`). 자세한 내용은 [말투와 번역 방식](translation-modes.md#대사의-말투-수준)에 있습니다.
 - **문장 중간에서 잘린 줄:** 설정 파일의 `wrapped: true`(CLI `--wrapped`, TypeScript `wrapped`): 입력이 문장 중간에서
   잘려 있음 (자막, 후킹 텍스트). 줄 수는 유지됨. 빈 줄은 늘 문장 경계입니다. 앞 호출의 줄은 남지 않으므로 이어지는 문장의
   앞부분은 문맥(C API `hdTrans_TranslateContext`, TypeScript `context`, CLI `--context`)으로 함께 넘깁니다.
