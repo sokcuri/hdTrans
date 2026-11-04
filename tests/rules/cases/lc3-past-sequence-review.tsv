@@ -16,19 +16,19 @@ rewrite:past-sequence	「振り返ると、彼女がいた」と彼は語った�
 rewrite:past-sequence	「ドアを開けたら彼がいた」と彼は言った。	has:열었더니	fix	rewrites
 rewrite:past-sequence	「ドアを開けたら、彼がいた」と彼は言った。	has:열었더니	fix	rewrites
 rewrite:past-sequence	もし雨なら行かないと決めていたが、朝起きると晴れていた。	has:일어나니	fix	rewrites
-rewrite:past-sequence	もし彼が来たらどうしようと悩んでいたが、ドアを開けると誰もいなかった。	has:문을 열자	fix	rewrites
+rewrite:past-sequence	もし彼が来たらどうしようと悩んでいたが、ドアを開けると誰もいなかった。	has:문을 여니	fix	rewrites
 rewrite:past-sequence	戦いが始まると彼は逃げ出した。	has:시작되자	fix	rewrites
 rewrite:past-sequence	荷物をまとめると部屋を出た。	has:정리하자	fix	rewrites
 rewrite:past-sequence	荷物をまとめると、部屋を出た。	has:정리하자	fix	rewrites
 rewrite:past-sequence	振り返ると素晴らしい景色が広がっていた。	has:돌아보니	fix	rewrites
-rewrite:past-sequence	扉を開けるといやらしい笑みを浮かべた男がいた。	has:열자	fix	rewrites
+rewrite:past-sequence	扉を開けるといやらしい笑みを浮かべた男がいた。	has:여니	fix	rewrites
 rewrite:past-sequence	部屋に入ると普段は無口な彼が笑っていた。	has:들어가니	fix	rewrites
 rewrite:past-sequence	振り返ると、時々見かける猫がいた。	has:돌아보니	fix	rewrites
 rewrite:past-sequence	敵がトラブルに慣れていたら騙されなかった。	has:있으면	fix	rewrites
 rewrite:past-sequence	このボタンを押したら爆発する爆弾を作った。	has:누르면	fix	rewrites
 rewrite:past-sequence	雨が降ったら試合は中止になった。	has:오자	fix	rewrites
 rewrite:past-sequence	彼が窓を開けたら風が入ってきた。	has:열자	fix	rewrites
-rewrite:past-sequence	富竹さんは陽気に手を振るとひぐらしの声の中に消えて行った。	has:흔들자	fix	rewrites
+rewrite:past-sequence	富竹さんは陽気に手を振るとひぐらしの声の中に消えて行った。	has:흔들고는	fix	rewrites
 rewrite:past-sequence	軍隊に行ってた男たちが帰ってきたら息子も私も肩身が狭くなってしまったよ。	has:돌아오자	fix	rewrites
 rewrite:past-sequence	カムイがさっと動いたら、護衛二人の剣が鞘ごと切断されて床に落ちた。	has:움직이자	fix	rewrites
 rewrite:past-sequence	私が窓を開けたら風が入ってきた。	has:열었더니	keep	rewrites

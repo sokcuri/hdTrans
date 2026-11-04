@@ -176,6 +176,8 @@
 //= ko-verb.look	Korean verbs of looking and checking whose と finds what follows, -니, unless a person answers it (時計を見ると、早過ぎた 보니, 時刻を確認すると、回っていた 확인하니, 彼女を見ると、彼女は笑った 보자; spec GRM-40, GRM-178).
 //= ko-verb.lead-in	Korean verbs of coming, leaving, hearing and asking whose と leads into the next act with -자 even when the same person goes on, not -고는 (研究所を出ると、製図部へ回った 나오자, それを聞くと、ギョッとした 듣자; spec GRM-40).
 //= adverb.speak-manner	Manners of speaking before 言う or 申し上げる whose と frames what follows, -면 as the dictionary idioms do (率直に言うと 솔직히 말하면, 単刀直入に申し上げると 말씀드리면; spec GRM-40).
+//= ko-verb.break-in	Korean verbs of a happening that breaks in on an ongoing act, after which the いる of ている is -는데 (お茶をすすっていると、会見が始まった 마시고 있는데; spec GRM-40).
+//= noun.habit-time	Nouns of a time of one's life (子供の頃, 小さい頃) that, before a と or たら in their clause, make it a habit, -면 (子供の頃は雨が降ると外で遊んだ 비가 오면; spec GRM-177).
 //= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
 //= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (近づくと、目に入った 가까워지니 눈에 들어왔다; spec GRM-40).
@@ -2516,6 +2518,21 @@ adverb.speak-manner	実を
 adverb.speak-manner	要するに
 adverb.speak-manner	早い話が
 adverb.speak-manner	はっきり
+ko-verb.break-in	시작되다
+ko-verb.break-in	도착하다
+ko-verb.break-in	열리다
+ko-verb.break-in	울리다
+ko-verb.break-in	터지다
+ko-verb.break-in	조우하다
+ko-verb.break-in	마주치다
+ko-verb.break-in	메아리치다
+ko-verb.break-in	울려 퍼지다
+ko-verb.break-in	진동하다
+noun.habit-time	子供の頃
+noun.habit-time	子どもの頃
+noun.habit-time	小さい頃
+noun.habit-time	幼い頃
+noun.habit-time	小さな頃
 verb.come-to	気づ
 verb.come-to	気付
 verb.come-to	気がつ
@@ -2546,6 +2563,8 @@ ko-verb.found	놀라다
 ko-verb.found	기겁하다
 ko-verb.found	짐작이 가다
 ko-verb.found	느끼다
+ko-verb.found	마음에 걸리다
+ko-verb.found	신경 쓰이다
 ko-verb.found	부딪히다
 ko-verb.found	부딪치다
 ko-verb.found	맞닥뜨리다

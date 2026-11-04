@@ -45,9 +45,10 @@ std::string Translate(std::string_view text) {
 }  // namespace
 
 HD_TEST(word_past_sequence_joins_without_a_pause) {
-    // と and たら with no comma before a past event (GRM-175, GRM-176), the いる of ている too.
+    // と and たら with no comma before a past event (GRM-175, GRM-176); the いる of ている before
+    // someone who breaks in takes -는데 (GRM-40).
     HD_CHECK_EQ(Translate("ドアを開けると男が入った。"), "문을 열자 남자가 들어갔다.");
-    HD_CHECK_EQ(Translate("男が待っていると彼が入った。"), "남자가 기다리고 있으니 그가 들어갔다.");
+    HD_CHECK_EQ(Translate("男が待っていると彼が入った。"), "남자가 기다리고 있는데 그가 들어갔다.");
     HD_CHECK_EQ(Translate("ドアを開けたら男が入った。"), "문을 열었더니 남자가 들어갔다.");
 }
 

@@ -397,7 +397,7 @@ cx:fit-to:10	GRM-3456	&&4 F+0== "conjugating" Y+0== "1게" !1 ||10 S+0== "完璧
 //= teki-and	after Select 170	A noun in 的 with で right before another 的 noun or an adjective lists both, 이고 (幻想的で非現実的な 환상적이고 비현실적인), not the cause 이어서.
 cx:teki-and:10	GRM-3457	&&4 S+0== "R的" U+0== "で" Y+0== "6" ||4 S+1== "R的" S+2== "R的" P+1== "7**" P+1== "8**"	set-ending "1고"	幻想的で非現実的な美しさ 환상적이고 비현실적인 아름다움
 //= resolve-quote	after QuoteTo 42	A verb whose と was read as the condition 니 right before 覚悟, 決意, 決心 or 誓う says what one resolves, -겠다고 (成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다).
-cx:resolve-quote:10	GRM-3458	&&3 F+0== "verb" Y+0== "2니" ||4 S+1== "L覚悟" S+1== "L決意" S+1== "L決心" S+1== "L誓"	set-ending "1겠다고"	成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다
+cx:resolve-quote:10	GRM-3458	&&3 F+0== "verb" ||4 Y+0== "2니" Y+0== "1자" Y+0== "1고는" Y+0== "1고" ||4 S+1== "L覚悟" S+1== "L決意" S+1== "L決心" S+1== "L誓"	set-ending "1겠다고"	成り上がると覚悟を決めた 출세하겠다고 각오를 다졌다
 //= rhetoric-ja-quote	after QuoteTo 43	An adjective in its plain form with じゃない right before a quoting と asks back to affirm, not deny (いいじゃないと思う 좋지 않냐고 생각한다): 않냐고, not 않다고; the plain negative of an adjective is くない.
 cx:rhetoric-ja-quote:10	GRM-3459	&&5 D+0== "$D7@" S+0== "な" Y+0== "1다고" U-1== "Rいじゃ" !1 F-1== "verb"	set-ending "1냐고"	いいじゃないと思っている 좋지 않냐고 생각하고 있다
 //= ja-nai-start	after Select 171	じゃないと, じゃなきゃ, じゃなければ where a sentence or clause starts, with no noun before them, are the condition そうじゃないと said short, 그렇지 않으면 (じゃないと死ぬ 그렇지 않으면 죽는다), not (이)가 아니면 with no noun to hold the particle.
