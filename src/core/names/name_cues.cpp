@@ -213,6 +213,11 @@ bool HiraganaAlone(const dict::Snapshot& snap, std::string_view key, std::string
     const char32_t next = FirstRune(after).cp;
     if (after.empty() || !IsHiragana(next)) return !final;
     if (!InRunes(next, "がはもをにとのやでへ")) return false;
+    // The particle starts no verb or adjective (まるゆとまったり: 止まったり; but つぐみには, あいかの方は).
+    for (std::size_t n = FirstRune(after).size, k = 0; n < after.size() && k < 6; k++) {
+        n += text::DecodeRune(after.substr(n)).size;
+        if (PredicateStem(snap, after.substr(0, n))) return false;
+    }
     const std::string_view rest = after.substr(FirstRune(after).size);
     return !predicate || rest.empty() || !IsHiragana(FirstRune(rest).cp);
 }
