@@ -826,6 +826,15 @@ std::string NativeSpelling(std::string_view word, bool tsu, std::string_view res
     return {};
 }
 
+// The spelling kana.native-katakana gives the katakana run w (サイコー=最高), or "".
+std::string_view NativeKatakana(std::string_view w) {
+    for (const std::string_view pair : dict::ClassMembers(HDTRANS_CLASS("kana.native-katakana"))) {
+        const std::size_t eq = pair.find('=');
+        if (eq != std::string_view::npos && pair.substr(0, eq) == w) return pair.substr(eq + 1);
+    }
+    return {};
+}
+
 // KataWordsToHiragana on one text piece; spanBefore and spanAfter report the spans
 // around it.
 std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, const LineContext& ctx,
@@ -893,6 +902,18 @@ std::string KataWordsIn(std::string_view text, bool spanBefore, bool spanAfter, 
         }
         // The run joins a name or the span before it.
         const bool joined = prev == U'・' || prev == U'＝' || (start == 0 && spanBefore);
+        // A katakana spelling of a native word of kana.native-katakana (サイコー 最高, ソノ その,
+        // ドコ どこ; spec LEX-4823), not joined to a name, after no digit, before no honorific, and
+        // no name of the document or plain entry of the user's.
+        if (const std::string_view as = NativeKatakana(base); !as.empty() && !joined && !text::IsDigit(prev) &&
+            dict::StartsWithMember(HDTRANS_CLASS("honorific.name"), rest) == 0 && !HasPlainSense(word, ctx, snap) &&
+            (ctx.named == nullptr || (!ctx.named->contains(std::string(word)) && !ctx.named->contains(std::string(base))))) {
+            b.append(text.substr(at, start - at));
+            b += as;
+            if (tsu) b += "っ";
+            at = i;
+            continue;
+        }
         if (kw == nullptr) {
             // After a digit the run counts something (1モグり), not a native word.
             if (joined || text::IsDigit(prev)) continue;
