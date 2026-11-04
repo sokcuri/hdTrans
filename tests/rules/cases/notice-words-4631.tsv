@@ -1,0 +1,53 @@
+# 규칙: LEX-4631, LEX-4632, LEX-4633, LEX-4634, LEX-4635, LEX-4636, LEX-4637, LEX-4638, LEX-4639, GRM-3754
+rule	input	expected	kind	layer
+cx:notice-words-1:60	貴族の家に生まれた。	귀족의 집에서 태어났다.	fix	rewrites
+cx:notice-words-1:60	「子爵の娘の婚約者……。子爵の家に婿入り予定だった男は……」	has:자작의 집에 데릴사위로	fix	rewrites
+cx:notice-words-1:60	王は家に帰った。	왕은 집에 돌아갔다.	fix	rewrites
+cx:notice-words-1:60	男爵家の家に住む。	남작가의 집에 산다.	fix	rewrites
+cx:notice-words-1:60	侯爵家の娘だ。	후작가의 딸이다.	keep	rewrites
+cx:notice-words-1:60	伯爵家に仕える。	!rule:cx:notice-words-1:60	keep	rewrites
+cx:notice-words-1:62	お客様の中にお医者様はいらっしゃいませんか。	has:손님 중에 의사 선생님은	fix	rewrites
+cx:notice-words-1:62	集まってきた人の中に、見覚えがある奴がいた。	has:모여 온 사람 중에,	fix	rewrites
+cx:notice-words-1:62	「彼らの中には、今後、国を背負って立つ人材がいる」	has:그들 중에는,	fix	rewrites
+cx:notice-words-1:62	陣の中を流れる水は飲ませませぬ。	!rule:cx:notice-words-1:62	keep	rewrites
+cx:notice-words-1:62	生徒の中から選ぶ。	학생 중에서 선택한다.	keep	rewrites
+cx:notice-words-1:62	心の中に残る。	마음속에 남는다.	keep	rewrites
+dict:w:32700	「ええ、お医者様が入っていったのを見たって」	has:의사 선생님이 들어간	fix	lookup
+dict:w:32701	「お医者さまの訪問回数から、梨花さまのほうが重いのかしら？」	has:의사 선생님의 방문	fix	lookup
+dict:w:32700	医者に診てもらった。	의사에게 보였다.	keep	lookup
+dict:jisjk:12006	知らせが届いた。	소식이 도착했다.	fix	defaults
+dict:jisjk:12006	先ほど知らせを受けてから……	방금 전 소식을 받고 나서……	fix	defaults
+dict:jisjk:12006	お知らせします。	알려 드리겠습니다.	keep	defaults
+sense:haishin-song	新曲を配信する。	신곡을 공개한다.	fix	senses
+sense:haishin-song	楽曲の配信を開始しました。	has:공개를 개시했습니다	fix	senses
+sense:haishin-song	運行情報を公式でも配信しています。	운행 정보를 공식에서도 전달하고 있습니다.	keep	senses
+sense:haishin-song	ゲームのプレイを動画配信する者もいる。	has:동영상 방송하는	keep	senses
+cx:notice-words-1:68	誰にも必要とされていない。	누구도 필요로 하지 않는다.	fix	rewrites
+cx:notice-words-1:68	誰にも必要とされてなかった。	누구도 필요로 하지 않았다.	keep	rewrites
+cx:notice-words-1:70	必要とされてない人間だ。	필요로 하지 않는 인간이다.	fix	rewrites
+cx:notice-words-1:70	バトリングに必要とされるギアは用意します。	!rule:cx:notice-words-1:70	keep	rewrites
+cx:notice-words-1:74	「顔もいいし、何より、みんなに必要とされてるじゃないか」	has:모두가 필요로 하고 있잖아	fix	rewrites
+cx:notice-words-1:74	「あおくんに必要とされて……ちゃんと、役に立てたから」	has:아오 군이 필요로 해	fix	rewrites
+cx:notice-words-1:74	バトリングに必要とされるギアは用意します。	배틀링에 필요로 하는 기어는 준비합니다.	keep	rewrites
+cx:notice-words-1:76	誰にも必要とされていない。	rule:cx:notice-words-1:76=누구도	fix	rewrites
+cx:notice-words-1:76	誰にも言わない。	!rule:cx:notice-words-1:76	keep	rewrites
+cx:notice-words-1:80	予定が前倒しになる。	예정이 앞당겨진다.	fix	rewrites
+cx:notice-words-1:80	会議が前倒しになった。	회의가 앞당겨졌다.	fix	rewrites
+cx:notice-words-1:80	前倒しで進める。	앞당겨서 진행한다.	keep	rewrites
+cx:notice-words-1:82	日程を前倒しにする。	일정을 앞당긴다.	fix	rewrites
+cx:notice-words-1:82	予定が前倒しになる。	!rule:cx:notice-words-1:82	keep	rewrites
+cx:notice-words-1:64	テストで赤点取る。	테스트에서 낙제점 받는다.	fix	rewrites
+cx:notice-words-1:64	試験で満点を取った。	시험에서 만점을 받았다.	fix	rewrites
+cx:notice-words-1:64	テストで使う。	테스트로 쓴다.	keep	rewrites
+cx:notice-words-1:66	赤点を取った者は、訓練送りだ。	has:낙제점을 받은 사람은	fix	rewrites
+cx:notice-words-1:66	「私は、赤点を取ってない」	has:낙제점을 받지	fix	rewrites
+cx:notice-words-1:66	バスケで点を取った。	!rule:cx:notice-words-1:66	keep	rewrites
+cx:notice-words-1:84	昔のことを思い出した。	옛일을 떠올렸다.	fix	rewrites
+cx:notice-words-1:84	用事を思い出しました。	용무를 떠올렸습니다.	fix	rewrites
+cx:notice-words-1:84	来月結婚すると言っていたのを思い出した。	내달 결혼한다고 한 것을 떠올렸다.	fix	rewrites
+cx:notice-words-1:84	ああ…思い出した！	아…생각해 냈어!	keep	rewrites
+cx:notice-words-1:84	アオ君が私を思い出すまで。	아오 군이 나를 생각해 낼 때까지.	keep	rewrites
+cx:notice-words-1:90	来月結婚すると言っていたのを思い出した。	has:결혼한다고 한 것을	fix	rewrites
+cx:notice-words-1:90	あれから、会長の言っていたことを考えていた。	has:회장이 말한 것을 생각하고	fix	rewrites
+cx:notice-words-1:90	御園が、お守りだと言っていたものだ。	미소노가, 부적이라고 말한 것이다.	fix	rewrites
+cx:notice-words-1:90	言っていることがわからない。	!rule:cx:notice-words-1:90	keep	rewrites
