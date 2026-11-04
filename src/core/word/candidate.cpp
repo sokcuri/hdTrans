@@ -191,6 +191,14 @@ bool OneKanaParticles(const Record* records) {
     return true;
 }
 
+// Whether s starts with the past or て form of an adjective after its stem (かった, かっ, くて) (LEX-4720).
+bool AdjectiveFormAfter(std::string_view s) {
+    for (const std::string_view f : {"かった", "かっ", "くて"}) {
+        if (s.starts_with(f)) return true;
+    }
+    return false;
+}
+
 Record* ReorderAfterNoun(const Item& parent, Record* records, const dict::Snapshot& snapshot, std::string_view text) {
     if (parent.EntryText(0) == kKoCloseQuote || parent.EntryText(0) == ")" || At(parent.Code(0), 0) != '1') {
         return records;
@@ -226,10 +234,13 @@ Record* ReorderAfterNoun(const Item& parent, Record* records, const dict::Snapsh
             if (Has(p->attr, "Pj")) break;
             // An adjective stem of three or more kana keeps its place before particles of one kana
             // after which no word of two characters or more starts: the particle would leave a piece
-            // of the adjective as a word (水着かわいい, not か + わ + いい; but それはかなわない).
-            if (k == '7' && text::RuneCount(p->source) >= 3 && AllHiragana(p->source) && OneKanaParticles(first)) {
+            // of the adjective as a word (水着かわいい, not か + わ + いい; but それはかなわない). So does a
+            // shorter one before a past or て form that makes it three kana or more (ホントよかった, not
+            // よ + 買った).
+            if (k == '7' && AllHiragana(p->source) && OneKanaParticles(first)) {
+                if (text::RuneCount(p->source) < 3 && AdjectiveFormAfter(text.substr(p->source.size()))) break;
                 const std::string_view rest = text.substr(text::DecodeRune(text).size);
-                if (text::RuneCount(rest.substr(0, snapshot.WordAt(rest))) < 2) break;
+                if (text::RuneCount(p->source) >= 3 && text::RuneCount(rest.substr(0, snapshot.WordAt(rest))) < 2) break;
             }
             reorder = true;
         }

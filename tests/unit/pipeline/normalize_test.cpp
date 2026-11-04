@@ -404,6 +404,29 @@ HD_TEST(pipeline_spoken_forms) {
     Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
 }
 
+// The short やだ of いやだ after kanji, katakana, の, と, も or もう, or with plain kana after it; not the や
+// ending a kana word, nor a やだ standing alone, which the phrase rows read.
+HD_TEST(pipeline_spoken_forms_short_iyada) {
+    const Case cases[] = {
+        {"絶対やだよ！"sv, "絶対いやだよ！"sv},
+        {"ウェルダンやだ"sv, "ウェルダンいやだ"sv},
+        {"こんなのやだよ"sv, "こんなのいやだよ"sv},
+        {"もうやだ、帰りたい"sv, "もういやだ、帰りたい"sv},
+        {"やだもう！"sv, "いやだもう！"sv},
+        {"やだって聞かない"sv, "いやだって聞かない"sv},
+        {"やだ！"sv, "やだ！"sv},
+        {"やだやだ"sv, "やだやだ"sv},
+        {"やだっやだっ"sv, "やだっやだっ"sv},
+        {"やだね。"sv, "やだね。"sv},
+        {"やだ何それ"sv, "やだ何それ"sv},
+        {"もーやだ"sv, "もーやだ"sv},
+        {"ひやひやだった"sv, "ひやひやだった"sv},
+        {"ろうやだ"sv, "ろうやだ"sv},
+        {"いやだ"sv, "いやだ"sv},
+    };
+    Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
+}
+
 // SpokenForms asks the lookup whether a verb ends before んじゃない: no rebuke without one (the name and
 // honorific of おーしまくんじゃない).
 HD_TEST(pipeline_spoken_forms_rebuke_verb) {
