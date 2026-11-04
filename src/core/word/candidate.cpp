@@ -2123,6 +2123,83 @@ bool Worker::WordAt(std::string_view full, int cursor, int token) {
     return l.count != 0 && InsertLateCandidate(full, cursor, token, l.records) != nullptr;
 }
 
+// A long reading must not leave one hiragana behind it that only a one-kana noun or suffix row reads
+// (本当ですか + ら + ね, にな + ら + か, だて + め + ぇ, にそい + つ + を). When a shorter reading lets the
+// next word take that kana (本当 + ですからね, に + なめらか, だ + てめぇ, に + そいつ), the shorter
+// reading goes first.
+Record* Worker::OverStrayKana(std::string_view full, int cursor, int token, const Item& c) {
+    const int next = cursor + c.length;
+    const std::string_view rest = From(full, next);
+    const text::Rune kana = text::DecodeRune(rest);
+    // Small kana, vowels that draw a sound out (これじゃ + あ), ん, the お and ご of a polite word, the
+    // ば of a condition and the た and て of a verb are not stray.
+    if (kana.cp < U'ぁ' || kana.cp > U'ゖ' || Has("ぁぃぅぇぉっゃゅょゎゕゖあいうえおんごばたて", FirstChar(rest))) return nullptr;
+    // The long reading ends in kana and the kana left behind runs on into a word: a kana before a
+    // mark or the end is a final particle (なのよ + さ」), and a kanji reading before kana is
+    // the stem of its own okurigana (生成 + り).
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    if (NameClassOf(LastChar(source)) != kClassHiragana) return nullptr;
+    if (const int on = NameClassOf(FirstChar(rest.substr(kana.size))); on != kClassHiragana && on != kClassKatakana && on != kClassKanji) {
+        return nullptr;
+    }
+    // An ending that the reading did not take is not a stray kana (といい + ます).
+    if (KeyLengths(snapshot, rest, dict::LookupMode::VerbEnding, 'S') >> 2 != 0) return nullptr;
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    // The longest reading of a word at at, 0 for none; each record is tried, as the first that fits
+    // is not the longest (つ before ついた).
+    auto reach = [&](int at) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        int longest = 0;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w != nullptr) longest = std::max(longest, w->length);
+        }
+        return longest;
+    };
+    // The kana is no word there: its only reading is a one-kana noun or suffix after a reading that is
+    // not a noun (a suffix after a noun is its own word: あいつ + ら). A kana that no row reads is left
+    // as it is (調べて + き + とう).
+    const Lookup words = DoLookup(rest, kModeGeneral);
+    const Item* word = words.count == 0 ? nullptr : InsertLateCandidate(full, next, token, words.records);
+    if (word == nullptr || word->length != static_cast<int>(kana.size) || Has(word->GAttr(0), "Nm")) return nullptr;
+    auto tag = [](const Item& it) {
+        const Entry* e = it.group == nullptr ? nullptr : it.group->At(0);
+        return e == nullptr ? '\0' : e->cls;
+    };
+    const char host = tag(c);
+    if (tag(*word) != 'N' && tag(*word) != 'Q') return nullptr;
+    if (host == 'I' || host == 'K' || host == 'N' || host == 'Q') return nullptr;
+    // わ before ね or よ is the final particle (でしたわね).
+    if (kana.cp == U'わ' && (rest.substr(kana.size).starts_with("ね") || rest.substr(kana.size).starts_with("よ"))) return nullptr;
+    if (reach(next) > static_cast<int>(kana.size)) return nullptr;
+    // A longer reading at cursor that takes the kana is left to the readings after this one (verb
+    // ついた after the adverb つい, さわられて after さわら).
+    if (cursor + reach(cursor) >= next + static_cast<int>(kana.size)) return nullptr;
+    // The longest shorter reading whose next word takes the kana wins. It is a word that ends before
+    // the kana, not a verb whose ending runs on (こう of 乞う in こうしたら, 逸れ + と in それともう).
+    Record* best = nullptr;
+    int bestLength = 0;
+    uint64_t tried = 0;  // the lengths whose next word was looked at
+    Record* shorter = after(c.group->records);
+    for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+        const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+        if (head == nullptr || head->detail->cls == kDetailVerb || head->length >= c.length || head->length <= bestLength ||
+            head->length >= 64 || (tried >> head->length & 1) != 0) {
+            continue;
+        }
+        tried |= uint64_t{1} << head->length;
+        if (cursor + head->length + reach(cursor + head->length) >= next + static_cast<int>(kana.size)) {
+            best = shorter;
+            bestLength = head->length;
+        }
+    }
+    return best;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
@@ -2148,6 +2225,12 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
         candidate->group->records = nullptr;
         from = remaining;
         candidate = InsertLateCandidate(full, cursor, token, remaining);
+    }
+    if (settings.text && candidate != nullptr) {
+        if (Record* shorter = OverStrayKana(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
     }
     if (candidate == nullptr) {
         const std::string_view pair = PairText(text);
