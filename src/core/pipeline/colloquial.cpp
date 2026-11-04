@@ -79,6 +79,16 @@ public:
         return KeyTags(EncodeText(s), ctx_, snap_, !drawn);
     }
 
+    // Whether the first sense of the key s names a person (じいさん 할아버지, にいちゃん 형; not
+    // こうくん 교훈).
+    bool PersonFirst(std::u32string_view s) const {
+        const std::string key = EncodeText(s);
+        for (const dict::Candidate& c : snap_.RetrieveRecords(key, dict::LookupMode::General)) {
+            if (c.codes != nullptr && !c.codes->part.Empty()) return c.codes->sem.HasCode("VHn");
+        }
+        return false;
+    }
+
     // Whether s is a noun of the dictionary or a person of the name layer.
     bool NounOrPerson(std::u32string_view s) const {
         if (Tags(s).find('N') != std::string::npos) return true;
@@ -675,6 +685,8 @@ bool DrawnWord(const Emphasis& e, std::u32string_view rs, size_t i, size_t j, si
             const size_t lastEnd = last && f.empty() && soundEnd == 0 ? e.ReadEnd(std::u32string_view(m).substr(0, phrase - (j - after)), s) : 0;
             if (!f.empty()) {
                 if (v == 3 && s + 1 >= i) continue;  // the e row within a word that starts before the kana (not へーそう)
+                // Before an honorific, a word of a person only (じーさん じいさん; not こーくん 교훈).
+                if (nickname && !e.PersonFirst(std::u32string_view(m).substr(s, end - s))) continue;
                 // The long vowel spelled inside a word, not a kana spelling, that goes on two or more
                 // characters past it, not up to another mark (かーさん かあさん, じーさん じいさん; not
                 // しゅうりょ of しゅーりょー), or that ends a word of four or more characters other than

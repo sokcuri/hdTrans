@@ -147,6 +147,76 @@ bool HiraganaCall(const dict::Snapshot& snap, std::string_view key) {
              (snap.DictionaryWord(rest) || InRunes(RuneBefore(rest, rest.size()).cp, "うくぐすつぬぶむるい")));
 }
 
+// Whether the dictionary has s as a common word, a sense that is no name or place and no verb or
+// adjective stem (この; not かが 加賀 or みが).
+bool CommonKanaWord(const dict::Snapshot& snap, std::string_view s) {
+    bool common = false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
+        if (c.codes == nullptr || c.source != s || c.codes->part.Empty()) continue;
+        if (c.codes->part.Tag() == 'M' || c.codes->part.Tag() == 'H') continue;
+        if (c.codes->part.Tag() != 'N' || (!c.codes->sem.HasPrefix("QPN") && !c.codes->sem.HasCode("QCT") &&
+                                            !c.codes->sem.HasCode("QNN") && !c.codes->sem.HasCode("VPl"))) {
+            common = true;
+        }
+    }
+    return common;
+}
+
+// Whether the hiragana s reads as dictionary words of two kana or more and one-kana particles
+// (ここの, はまだ, いくよ), with a final particle only at the end (last).
+bool KanaWords(const dict::Snapshot& snap, std::string_view s, bool last) {
+    if (s.empty()) return true;
+    const text::Rune first = text::DecodeRune(s);
+    if (InRunes(first.cp, "はがをにともへでやの") && first.size < s.size() && KanaWords(snap, s.substr(first.size), last)) return true;
+    if (last && first.size == s.size() && InRunes(first.cp, "はがをにともへでやのよねなわさぞぜ")) return true;
+    for (std::size_t n = first.size; n < s.size();) {
+        n += text::DecodeRune(s.substr(n)).size;
+        if (snap.DictionaryWord(s.substr(0, n)) && KanaWords(snap, s.substr(n), last)) return true;
+    }
+    return false;
+}
+
+// Whether a hiragana key of the name layer stands alone as a name (spec LEX-4821): a whole run
+// of hiragana that no dictionary word spells and that reads as no dictionary words and particles
+// (KanaWords: なしこ, こなつ; not ここの, はまだ, いくよ), after the start, a mark,
+// kanji or katakana, and before the end, a mark, kanji, katakana or a one-kana particle
+// (、つぐみが朝食の席に着く, あいかの方は). A key that starts a verb or an adjective (つぐみ)
+// needs a mark, kanji or katakana after its particle too (つぐみが、; not つぐみでありさえ).
+bool HiraganaAlone(const dict::Snapshot& snap, std::string_view key, std::string_view after, bool predicate) {
+    if (text::RuneCount(key) < 3 || snap.DictionaryWord(key) || KanaWords(snap, key, true)) return false;
+    // A person row that writes a title (けいおん 케이온!) names a work, which stands alone only in
+    // marks (spec LEX-4).
+    for (const dict::Record& r : snap.NameRecords(key)) {
+        if (r.codes != nullptr && r.codes->sem.HasPrefix("QPN") && r.target.find_first_of("!?！？") != std::string_view::npos) return false;
+    }
+    // A drawn interjection or a stammer is no name (まぁこ of まぁこの, そそそ).
+    if (internal::AllRunes(key, [&](char32_t c) { return c == FirstRune(key).cp; })) return false;
+    for (std::size_t i = 0; i < key.size();) {
+        const text::Rune r = text::DecodeRune(key.substr(i));
+        if (InRunes(r.cp, "ぁぃぅぇぉ")) return false;
+        i += r.size;
+    }
+    // The run of hiragana reads on as words across the end of the key: words up to a common word that
+    // starts in the key and ends after it (よりこの: より この; not つぐみが: みが is a verb stem).
+    std::size_t run = 0;
+    while (run < after.size() && IsHiragana(text::DecodeRune(after.substr(run)).cp)) run += text::DecodeRune(after.substr(run)).size;
+    for (std::size_t p = text::DecodeRune(key).size; p < key.size(); p += text::DecodeRune(key.substr(p)).size) {
+        if (!KanaWords(snap, key.substr(0, p), false)) continue;
+        for (std::size_t e = 0; e < run;) {
+            e += text::DecodeRune(after.substr(e)).size;
+            if (CommonKanaWord(snap, std::string(key.substr(p)) + std::string(after.substr(0, e)))) return false;
+        }
+    }
+    // A key that ends like a final particle needs a particle after it: before a mark it may be
+    // speech (いくよー！; あかねが is a name).
+    const bool final = InRunes(RuneBefore(key, key.size()).cp, "よねなわさぞぜか");
+    const char32_t next = FirstRune(after).cp;
+    if (after.empty() || !IsHiragana(next)) return !final;
+    if (!InRunes(next, "がはもをにとのやでへ")) return false;
+    const std::string_view rest = after.substr(FirstRune(after).size);
+    return !predicate || rest.empty() || !IsHiragana(FirstRune(rest).cp);
+}
+
 // Whether what follows a word after a title ends a name there: a mark or the end, a bracket, a
 // particle, a copula, a self-introduction, a suffix or an honorific (駆逐艦時雨、, 戦艦大和です;
 // not 海防艦計3隻).
@@ -608,7 +678,9 @@ std::vector<NameCue> NameCues(const dict::Snapshot& snap, std::string_view text)
                  (UtteranceStart(before) && after.starts_with("、")))) {
                 add(key, false);
             }
-            if (!closedLabel && HiraganaPredicate(snap, key) && !PersonActAt(snap, key, before, after)) {
+            const bool predicate = HiraganaPredicate(snap, key);
+            if (HiraganaAlone(snap, key, after, predicate)) add(key, false);
+            if (!closedLabel && predicate && !PersonActAt(snap, key, before, after) && !HiraganaAlone(snap, key, after, predicate)) {
                 i += step;
                 continue;
             }

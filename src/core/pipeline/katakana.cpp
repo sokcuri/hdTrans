@@ -1193,7 +1193,10 @@ size_t NicknameStart(std::string_view text, size_t end, bool spanBefore, const d
         if (!NicknameRune(r.cp) || r.size == 0 || r.size > start) break;
         start -= r.size;
     }
-    const auto runes = [&](size_t from) { return CountRunes(text.substr(from, end - from), [](char32_t) { return true; }); };
+    // The morae of the kana: a small ゃ, ゅ, ょ or vowel joins the kana before it (にょにょん: three).
+    const auto runes = [&](size_t from) {
+        return CountRunes(text.substr(from, end - from), [](char32_t r) { return !RuneIn(r, U"ゃゅょぁぃぅぇぉゎ"); });
+    };
     const char32_t before = start == 0 ? 0 : LastRune(text.substr(0, start)).cp;
     const bool boundary = start == 0 || (!IsKanjiRune(before) && !IsKatakanaRune(before));
     if (start == end) return std::string_view::npos;
@@ -1278,6 +1281,17 @@ bool EndsInVerb(std::string_view s, const dict::Snapshot& snap) {
         }
     }
     return false;
+}
+
+// Whether a dictionary row or plain entry has the key s as written: a long mark is no vowel
+// there (こーくん is no こうくん 교훈).
+bool LiteralWord(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+    for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
+        if (c.codes != nullptr && !c.codes->part.Empty() && (c.source == s || s.find("ー") == std::string_view::npos)) return true;
+    }
+    bool entry = false;
+    ForUserEntries(s, ctx, [&](const dict::UserEntry& e) { entry = entry || !e.end; });
+    return entry;
 }
 
 void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx, const dict::Snapshot& snap, output::Pieces& out) {
@@ -1368,20 +1382,149 @@ void NicknamesIn(std::string_view text, bool spanBefore, const LineContext& ctx,
         for (size_t from = 0; from < name.size() && !word; from += std::max<size_t>(1, text::DecodeRune(name.substr(from)).size)) {
             for (size_t n = 0, e = 0; n <= 4 && !word; n++) {
                 const std::string key = std::string(name.substr(from)) + std::string(honorific) + std::string(rest.substr(0, e));
-                word = !KeyTags(key, ctx, snap).empty();
+                word = LiteralWord(key, ctx, snap);
                 if (e >= rest.size()) break;
                 e += std::max<size_t>(1, text::DecodeRune(rest.substr(e)).size);
             }
         }
         if (word) continue;
-        // Long vowels are dropped as a Korean name drops them (ゆうくん 유군, みーちゃん 미짱).
+        // さん follows words as often as names (べっぴんさん, せっかちさん, あちらさん, 許さーん): the
+        // kana before it are a name only where no dictionary has them as a word, and さん starts no
+        // word with the kana after it (あおなみさんぽ 散歩).
+        if (honorific == "さん") {
+            std::string_view head = name;
+            if (head.ends_with("っ")) head.remove_suffix(std::string_view("っ").size());  // もっさん
+            bool common = !KeyTags(head, ctx, snap).empty();
+            for (size_t e = 0, n = 0; !common && n < 3 && e < rest.size() && IsHiraganaRune(text::DecodeRune(rest.substr(e)).cp); n++) {
+                e += std::max<size_t>(1, text::DecodeRune(rest.substr(e)).size);
+                common = LiteralWord(std::string(honorific) + std::string(rest.substr(0, e)), ctx, snap);
+            }
+            if (common) continue;
+        }
+        // Long vowels are dropped as a Korean name drops them (ゆうくん 유군, みーちゃん 미짱), and the
+        // っ of っさん (もっさん, つかっさん) is the honorific's.
         std::string kana(name);
+        if (honorific == "さん" && kana.ends_with("っ")) kana.resize(kana.size() - std::string_view("っ").size());
         for (size_t p; (p = kana.find("ー")) != std::string::npos;) kana.erase(p, std::string_view("ー").size());
         const std::string hangul = listed.empty() ? text::FromKana(kana, text::Preset::FanShort) : std::string(listed);
         if (hangul.empty()) continue;
         if (start > at) output::Add(out, text.substr(at, start - at));
         out.push_back({hangul, output::SpanWord});
         at = end;
+    }
+    if (at < text.size()) output::Add(out, text.substr(at));
+}
+
+// Whether the name layer reads s as a person and no dictionary reads it as a word other than a
+// name (ひより, あゆ 아유; not ある, あか).
+bool PersonNotWord(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap) {
+    if (!snap.NamePerson(s)) return false;
+    for (const dict::Candidate& c : snap.RetrieveRecords(s, dict::LookupMode::General)) {
+        if (c.codes != nullptr && c.source == s && c.codes->sem.Text().starts_with("QPN")) return true;
+    }
+    return KeyTags(s, ctx, snap).empty();
+}
+
+// The particles that may follow a nickname of NicknameSuffixesIn in its run of hiragana.
+constexpr std::string_view kNicknameParticles[] = {"とも", "には", "にも", "って", "とか", "は", "が", "を", "に", "と",
+                                                    "も", "の", "や", "で", "へ", "か", "ね", "よ"};
+
+// A name of the name layer and a nickname ending of name.nickname-suffix in one run of hiragana,
+// or after the katakana of the name, written as one name (ひよりんと 히요린, かのちんとも 카노친,
+// トモすけ 토모스케; spec LEX-4821): the run starts after the start, a mark or a space, and ends at
+// its end or before a particle; no dictionary has the nickname, and the name is no other word.
+void NicknameSuffixesIn(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, output::Pieces& out) {
+    size_t at = 0;
+    for (size_t i = 0; i < text.size();) {
+        const text::Rune r = text::DecodeRune(text.substr(i));
+        const size_t step = std::max<size_t>(1, r.size);
+        if (!IsHiraganaRune(r.cp) || (i > 0 && IsHiraganaRune(LastRune(text.substr(0, i)).cp))) {
+            i += step;
+            continue;
+        }
+        size_t end = i;
+        while (end < text.size() && IsHiraganaRune(text::DecodeRune(text.substr(end)).cp)) {
+            end += std::max<size_t>(1, text::DecodeRune(text.substr(end)).size);
+        }
+        size_t from = i;
+        while (from > at && IsKatakanaRune(LastRune(text.substr(0, from)).cp)) from -= LastRune(text.substr(0, from)).size;
+        const bool afterKanji = from > 0 && IsKanjiRune(LastRune(text.substr(0, from)).cp);
+        const std::string_view head = text.substr(from, i - from);
+        const std::string_view run = text.substr(i, end - i);
+        std::string hangul;
+        size_t nameEnd = 0;
+        for (size_t cut = 0; cut <= std::size(kNicknameParticles) && hangul.empty(); cut++) {
+            std::string_view name = run;
+            if (cut > 0) {
+                const std::string_view p = kNicknameParticles[cut - 1];
+                if (!run.ends_with(p) || run.size() == p.size()) continue;
+                name.remove_suffix(p.size());
+            }
+            for (const std::string_view suffix : dict::ClassMembers(HDTRANS_CLASS("name.nickname-suffix"))) {
+                if (!name.ends_with(suffix)) continue;
+                const std::string_view base = name.substr(0, name.size() - suffix.size());
+                // A ん that is 何, the explanatory ん or a contracted る (なんか, ワカんの, わかんの) makes
+                // no nickname.
+                if (suffix == "ん" && (!head.empty() || base.ends_with("な") || (cut > 0 && kNicknameParticles[cut - 1] == "か") ||
+                                       KeyTags(std::string(base) + "る", ctx, snap).find('M') != std::string::npos)) {
+                    continue;
+                }
+                if (head.empty()) {
+                    // The name starts the run, after no kanji, or follows kana that read as words
+                    // (それがちはやん, ならひよりんに), the longest name first. A verb, an adjective or a
+                    // past before ん or やん is Kansai speech (あるやん, ええやん, 言うたやん).
+                    const size_t baseEnd = i + base.size();
+                    size_t start = std::string_view::npos;
+                    for (size_t s = i; s < baseEnd && start == std::string_view::npos;
+                         s += std::max<size_t>(1, text::DecodeRune(text.substr(s)).size)) {
+                        const std::string_view named = text.substr(s, baseEnd - s);
+                        if (CountRunes(named, [](char32_t) { return true; }) < 2) break;
+                        if (s == i ? afterKanji : (afterKanji || !ReadsAsWords(text.substr(i, s - i), snap))) continue;
+                        if (PersonNotWord(named, ctx, snap)) start = s;
+                    }
+                    if (start == std::string_view::npos) continue;
+                    // The run up to the end of the nickname reads as no words, and no word of three kana or
+                    // more of the lead runs into the name (もちろん, なんかごめん; not それがちはやん).
+                    bool crossed = ReadsAsWords(text.substr(i, name.size()), snap);
+                    for (size_t p = i; p < start && !crossed; p += std::max<size_t>(1, text::DecodeRune(text.substr(p)).size)) {
+                        for (size_t e = start; e < i + name.size() && !crossed;) {
+                            e += std::max<size_t>(1, text::DecodeRune(text.substr(e)).size);
+                            const std::string_view w = text.substr(p, e - p);
+                            crossed = CountRunes(w, [](char32_t) { return true; }) >= 3 && !KeyTags(w, ctx, snap).empty();
+                        }
+                    }
+                    if (crossed) continue;
+                    const std::string_view whole = text.substr(start, i + name.size() - start);
+                    bool kansai = false;
+                    for (const std::string_view t : {std::string_view("やん"), std::string_view("ん")}) {
+                        if (!whole.ends_with(t) || kansai) continue;
+                        const std::string_view lead = text.substr(i, i + name.size() - t.size() - i);
+                        kansai = lead.ends_with("い") || lead.ends_with("た") || lead.ends_with("だ") || EndsInVerb(lead, snap);
+                    }
+                    if (kansai || !KeyTags(whole, ctx, snap).empty()) continue;
+                    hangul = text::FromKana(whole, text::Preset::FanShort);
+                    from = start;
+                } else {
+                    if (!base.empty() || afterKanji || CountRunes(head, [](char32_t) { return true; }) < 2 || !snap.NamePerson(head)) {
+                        continue;
+                    }
+                    std::string kr = snap.NameReading(head);
+                    if (kr.empty()) kr = text::FromKana(head, text::Preset::FanShort);
+                    if (kr.empty()) continue;
+                    hangul = kr + text::FromKana(suffix, text::Preset::FanShort);
+                }
+                if (!hangul.empty()) {
+                    nameEnd = i + name.size();
+                    break;
+                }
+            }
+        }
+        if (!hangul.empty()) {
+            if (from > at) output::Add(out, text.substr(at, from - at));
+            out.push_back({hangul, output::SpanWord});
+            at = nameEnd;
+        }
+        i = end;
     }
     if (at < text.size()) output::Add(out, text.substr(at));
 }
@@ -1394,7 +1537,12 @@ output::Pieces NicknamesToHangul(const output::Pieces& text, const LineContext& 
         if (text[k].span == output::SpanText) NicknamesIn(text[k].text, k > 0, ctx, snap, out);
         else out.push_back(text[k]);
     }
-    return out;
+    output::Pieces named;
+    for (const output::Piece& p : out) {
+        if (p.span == output::SpanText) NicknameSuffixesIn(p.text, ctx, snap, named);
+        else named.push_back(p);
+    }
+    return named;
 }
 
 std::string KeyTags(std::string_view s, const LineContext& ctx, const dict::Snapshot& snap, bool endRows) {

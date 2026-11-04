@@ -1,0 +1,42 @@
+# 규칙: LEX-4, LEX-4821
+rule	input	expected	kind	layer
+names:kana-nickname	これは 我々への予告状です。 よって 山梨県警が にょにょんさんを 警護するのがスジです。	이것은 우리에 대한 예고장입니다. 따라서 야마나시현경이 뇨뇬 씨를 경호하는 것이 스지입니다.	fix	lookup
+names:kana-nickname	しおいさん達誘って、繰り出しちゃお～！！	시오이 씨들 불러, 계속 내보내면~!!	fix	lookup
+names:kana-nickname	アタシも…こーくんと、エッチ…したい	나도…코 군과, 변태…하고 싶다	fix	lookup
+names:kana-nickname	こーくんもテンパッてなに言ってんの！	코 군도 텐팟이라고 무슨 소리야!	fix	lookup
+names:kana-nickname	タコのように顔を真っ赤にして、つぐみが朝食の席に着く。	문어처럼 얼굴을 새빨갛게 해, 츠구미가 아침 식사의 자리에 앉는다.	fix	lookup
+names:kana-nickname	つぐみは、つぐみでありさえすれば。	츠구미는, 츠구미로 있기만 하면.	fix	lookup
+names:kana-nickname	多岐川さんが、つぐみをチラ見しつつ言う。	타키가와 씨가, 츠구미를 힐금대면서 말한다.	fix	lookup
+names:kana-nickname	こなつが幸せならいい。	코나츠가 행복하면 좋다.	fix	lookup
+names:kana-nickname	そっか、ありがとう。これも、あいかが毎日お世話してくれたからだね	그렇구나, 고마워. 이것도, 아이카가 매일돌봐 주었기 때문이구나	fix	lookup
+names:kana-nickname	「つぐみ？」	「츠구미?」	fix	lookup
+names:kana-nickname	うん、聞いてるよ。ひよりんと、かのちんとも話した	응, 듣고 있어. 히요린과, 카노친이라고도 이야기했다	fix	lookup
+names:kana-nickname	かのちんが必要って言ってくれたからさ	카노친이 필요하다고 말해 주었으니까	fix	lookup
+names:kana-nickname	はいはい。ちはやんの気持ちはよくわかりました～	네네. 치하얀의 마음은 잘 알겠습니다~	fix	lookup
+names:kana-nickname	ほら、やっぱりちはやんは女の子みたいだった	자, 역시 치하얀은 여자아이 같았다	fix	lookup
+names:kana-nickname	ちはやん！邪魔しないで！	치하얀! 방해하지 마!	fix	lookup
+names:kana-nickname	トモすけ、まだ起きないの…何してんの、二人	토모스케, 아직 일어나지 않는 것…뭐하고 있어, 두 사람	fix	lookup
+names:kana-nickname	…トウヤっち。	…토야치.	fix	lookup
+names:kana-nickname	「ひよりん」	「히요린」	fix	lookup
+names:kana-nickname	ひよりんの家に行く。	히요린의 집에 간다.	fix	lookup
+names:kana-nickname	ひよりんが来た。	히요린이 왔다.	fix	lookup
+names:kana-nickname	つぐみの家に行く。	츠구미의 집에 간다.	fix	lookup
+names:kana-nickname	なんだい、べっぴんさんにはカレシさんがいるのかい。	뭐야, 미인 씨에게는 남자친구 씨가 있는 거야.	keep	lookup
+names:kana-nickname	「あちらさん、しびれを切らして出てきたわよ」	「저리 씨, 인내심의 한계를 느껴 나왔어」	keep	lookup
+names:kana-nickname	あおなみさんぽ	푸른 보고 산책	keep	lookup
+names:kana-nickname	みなさん、こんにちは。	여러분, 안녕하세요.	keep	lookup
+names:kana-nickname	たくさん食べた。	많이 먹었다.	keep	lookup
+names:kana-nickname	じーさんが来た。	할아버지가 왔다.	keep	lookup
+names:kana-nickname	ここのデカブツたち、全員連れていって良いから	여기의 덩치들, 전원 데려가 좋으니까	keep	lookup
+names:kana-nickname	と思ったが、トラックはまだ迫ってきていた。	라고 생각했지만, 트럭은 아직 다가오고 있었다.	keep	lookup
+names:kana-nickname	やっぱり、サークルよりこの時間の方が、いっぱい欲しい	역시, 서클보다 이 시간이, 가득 갖고 싶다	keep	lookup
+names:kana-nickname	了解ー！それじゃみんな、いくよー！	이해~! 그럼 모두, 가~!	keep	lookup
+names:kana-nickname	まぁこのエスパーダよりは安いか	뭐 이 에스파다보다는 싼가	keep	lookup
+names:kana-nickname	あるやん。	있잖아.	keep	lookup
+names:kana-nickname	ええやん。	좋잖아.	keep	lookup
+names:kana-nickname	言うたやん。	말했잖아.	keep	lookup
+names:kana-nickname	もちろん、最初のキッカケとなった	물론, 처음의 계기가 되었다	keep	lookup
+names:kana-nickname	「外泊……あ、なんかごめん。今日は帰るから」	「외박……아, 왠지 미안. 오늘은 돌아가니까」	keep	lookup
+names:kana-nickname	隊長～、まるゆなんか遠巻きに見られる感じなんですよね…	대장~, 마루유는 멀찍이로 보이는 느낌이예요…	keep	lookup
+names:kana-nickname	名無しの怖がりさん	이름 없는 겁쟁이	keep	lookup
+names:kana-nickname	みかん食べる？	귤 먹어?	keep	lookup
