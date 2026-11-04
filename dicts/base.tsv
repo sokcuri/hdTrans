@@ -40165,7 +40165,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぶっつけ	갑자기	I110			GN				jisjk:112619		
 ぶっつけ	처음	I110			GN	3618	||1 S+1== "から"	から 바로 앞의 ぶっつけ를 '처음'으로 고른다. (미발동: rare-word)	jisjk:344739		
 ぶっ壊	부&CF@	M463			GN				jisjk:340842		
-ぶっ放	발사&AV@	M433	VEI		GN				jisjk:91441		
+ぶっ放	발사&AV@	M433	VEl		GN				jisjk:91441		
 ぶっ続け	계속	I110			GN				jisjk:41589		
 ぶっ通	계속&AV@	M433			GN				jisjk:91442		
 ぶっ通し	계속	N110			GN				jisjk:6564		
@@ -45039,7 +45039,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アイ シー	아이시 회로	N110	VMa		GN				jisjk:42024		
 アイ シービーエム	대륙간 탄도 유도탄	N110	VTw		GN				jisjk:42025		
 アイ ディー カード	아이디 카드	N110	VMoVMo		GN				jisjk:42026		
-アイ ディーブイ	공업용 텔레비전	N110	VEI		GN				jisjk:42027		
+アイ ディーブイ	공업용 텔레비전	N110	VEl		GN				jisjk:42027		
 アイアン	아이언	N110	VSn		GN				jisjk:42028		
 アイアンクラブ	아이언클럽	N110			GN				jisjk:112817		
 アイアンマン	아이언맨	N110	VHn		GN				jisjk:42029		
@@ -45341,7 +45341,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アイロニ	아이러니	N110			GN				jisjk:42215		
 アイロニカル	아이러니컬	N110			GN				jisjk:42217		
 アイロニー	아이러니	N110			GN				jisjk:42216		
-アイロン	다리미	N110	VEI		GN				jisjk:42218		
+アイロン	다리미	N110	VEl		GN				jisjk:42218		
 アイロンかけ	다림질	N110		Hd	GN				jisjk:163882		
 アイロンがけ	다림질	N110			GN				jisjk:151938		
 アイロンをかけ	다리미질을 &AV@	M427		Pn	GN				jisjk:340905		
@@ -46073,7 +46073,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アダプタ	어댑터	N110	VPe		GN				jisjk:42561		
 アダプタビリティー	어뎁터빌리티	N110			GN				jisjk:42563		
 アダプタビリティー	적응성	N110			GN				jisjk:42564		
-アダプター	아답터	N110	VPeVEI		GN				jisjk:42562		
+アダプター	아답터	N110	VPeVEl		GN				jisjk:42562		
 アダプダ	어댑터	N110	VPe		GN				jisjk:42565		
 アダプティブメッシャー	어댑티브 메셔	N110			GN				jisjk:42567		
 アダプティブメッシュ	어댑티브 메시	N110			GN				jisjk:42568		
@@ -46690,7 +46690,7 @@ ttt	ttt	K110			GN				jisjk:201744
 アプロユーラシア	아프로유라시아	N110	QNN		GN				jisjk:42869		
 アプローズ	어플러즈	N110			GN				jisjk:42864		
 アプローチ	어프로치	N110			GN				jisjk:42865		
-アプローチ ライト	활주로 착륙 유도등	N110	VEI		GN				jisjk:42866		
+アプローチ ライト	활주로 착륙 유도등	N110	VEl		GN				jisjk:42866		
 アヘッド	어해드	N110			GN				jisjk:42870		
 アヘン	아편	N110			GN				jisjk:97498		
 アベイホン	아베이혼	N130	QPN		GN				jisjk:370875		
@@ -53447,7 +53447,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オーファンドラッグ	희소 질병약	N110	QHP		GN				jisjk:158153		
 オーフェルマルス	오펠말스	N130	QPN		GN				jisjk:370194		
 オーブリー	어브리	N130	QPN		GN				jisjk:366528		
-オーブン	오븐	N110	VEI		GN				jisjk:44835		
+オーブン	오븐	N110	VEl		GN				jisjk:44835		
 オープナー	오프너	N110			GN				jisjk:44836		
 オープニング	오프닝	N110			GN				jisjk:44837		
 オープン	오픈	N110		Hd	GN				jisjk:44838		
@@ -54367,7 +54367,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カラーコンディショニング	색채 조절	N110			GN				jisjk:152126		
 カラーコンビネーション	배색	N110			GN				jisjk:158554		
 カラースキャナー	컬러 스캐너	N110	VPe		GN				jisjk:158555		
-カラースキーマ	칼라 스캠	N110	VEI		GN				jisjk:45546		
+カラースキーマ	칼라 스캠	N110	VEl		GN				jisjk:45546		
 カラースキーマー	칼라 스캠	N110	VPe		GN				jisjk:45547		
 カラータイマー	컬러 타이머	N110	VHn		GN				jisjk:158556		
 カラーダイナミックス	색채역학	N110	UTh		GN				jisjk:158557		
@@ -54444,7 +54444,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カルガモ	흰뺨검동오리	N130	QAA		GN				jisjk:99169		
 カルガリー	캘거리	N110	VPl		GN				jisjk:45575		
 カルキ	칼크	N110			GN				jisjk:158586		
-カルキュレーター	계산기	N110	VEI		GN				jisjk:45576		
+カルキュレーター	계산기	N110	VEl		GN				jisjk:45576		
 カルキン	칼킨	N130	QPN		GN				jisjk:368387		
 カルキング	칼 킹	N130			GN				jisjk:365444		
 カルクリ	칼쿠리	N130	QPN		GN				jisjk:371815		
@@ -54854,7 +54854,7 @@ ttt	ttt	K110			GN				jisjk:201744
 カードサービス	카드 서비스	N110			IT				jisjk:261111		
 カードサービスイネーブラ	카드 서비스 이네이블러	N110			IT				jisjk:260323		
 カードスタッカ	카드스택커	N110			GN				jisjk:45267		
-カードセン孔機	카드천공기	N110	VEI		GN				jisjk:45268		
+カードセン孔機	카드천공기	N110	VEl		GN				jisjk:45268		
 カードツーカード	카드 투 카드	N110	UTt		GN				jisjk:45269		
 カードツーテープ	카드 투 테이프	N110	UTt		GN				jisjk:45270		
 カードデック	카드 데크	N110			GN				jisjk:266734		
@@ -57149,7 +57149,7 @@ ttt	ttt	K110			GN				jisjk:201744
 クレモネーゼ	크레모네제	N130	VGt		GN				jisjk:368480		
 クレヨン	크레용	N110			GN				jisjk:46488		
 クレランド	크레랜드	N130	QPN		GN				jisjk:371147		
-クレンザ	클린저	N110	VEI		GN				jisjk:46489		
+クレンザ	클린저	N110	VEl		GN				jisjk:46489		
 クレンザー	클린저	N110	VPa		GN				jisjk:46490		
 クレンジング	클렌징	N110			GN				jisjk:128120		
 クレンジングクリーム	클렌징 크림	N110	VAcVPe		GN				jisjk:128121		
@@ -57465,7 +57465,7 @@ ttt	ttt	K110			GN				jisjk:201744
 クーポンレート	쿠폰 레이트	N110			BZ				jisjk:353202		
 クーポン収入	쿠폰 수입	N110			BZ				jisjk:353203		
 クーマン	쿠만	N130	QPH		GN				jisjk:370177		
-クーラ	쿨러	N110	VEI		GN				jisjk:13971		
+クーラ	쿨러	N110	VEl		GN				jisjk:13971		
 クーラント	쿨란트	N110			GN				jisjk:46207		
 クーラー	쿨러	N110	VEl		GN				jisjk:46206		
 クーリエ	쿠리어	N110	VHn		GN				jisjk:158946		
@@ -58253,7 +58253,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ケーブリングスキーマー	케이블링 스킴	N110			GN				jisjk:46785		
 ケーブル	케이블	N110	VPeVCm		GN				jisjk:46786		
 ケーブル カー	케이블카	N110	VTp		GN				jisjk:46787		
-ケーブル テレビ	케이블TV	N110	VEI		GN				jisjk:46788		
+ケーブル テレビ	케이블TV	N110	VEl		GN				jisjk:46788		
 ケーブルTV	케이블TV 	K110			GN				jisjk:260494		
 ケーブルアジャスタ	케이블 어저스터	N110			GN				jisjk:266798		
 ケーブルカ	케이블카	N110			GN				jisjk:46789		
@@ -59367,7 +59367,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コンテキスト	컨텍스트	N110			GN				jisjk:47254		
 コンテキストエディタ	콘텍스트 에디터	N110	VPe		GN				jisjk:47255		
 コンテキストエディター	콘텍스트 에디터	N110	VPe		GN				jisjk:47256		
-コンテキストスイッチ	콘텍스트 스위칭	N110	VEI		IT				jisjk:47257		
+コンテキストスイッチ	콘텍스트 스위칭	N110	VEl		IT				jisjk:47257		
 コンテキストセンシティブ・ヘル	컨텍스트 센서티브 헬프	N110			IT				jisjk:261193		
 コンテキストフリー	콘텍스트 프리	N110			GN				jisjk:47258		
 コンテキストメニュー	컨텍스트 메뉴	N110			IT				jisjk:260533		
@@ -59569,7 +59569,7 @@ ttt	ttt	K110			GN				jisjk:201744
 コンピニオン	컴피니온	N110	VCm		GN				jisjk:128716		
 コンピュサーブ	컴퓨서브	N130			BZ				jisjk:347777		
 コンピュセックス	컴퓨터섹스	N110			GN				jisjk:128728		
-コンピュータ	컴퓨터	N110	VPeVEI		GN				jisjk:47359		
+コンピュータ	컴퓨터	N110	VPeVEl		GN				jisjk:47359		
 コンピュータ。 ユーザーグループcomputer user's group	컴퓨터 유저 그룹	N110			GN				jisjk:47361		
 コンピュータ。 ユーティリティーcomputer utility	컴퓨터 유틸리티	N110			GN				jisjk:47362		
 コンピュータインタネットワーク	컴퓨터 인터네트워크	N110			GN				jisjk:47363		
@@ -61634,7 +61634,7 @@ ttt	ttt	K110			GN				jisjk:201744
 シェーデング	쉐딩	N110			GN				jisjk:112409		
 シェード	쉐이드	N110			GN				jisjk:47970		
 シェード	차양	N110			GN				jisjk:47971		
-シェーバー	전기 면도기	N110	VPeVEI		GN				jisjk:47972		
+シェーバー	전기 면도기	N110	VPeVEl		GN				jisjk:47972		
 シェービング	면도	N110			GN				jisjk:47973		
 シェービングークリーム	면도용 크림	N110	VPe		GN				jisjk:129171		
 シェープ	세이프	N110			GN				jisjk:47974		
@@ -62212,7 +62212,7 @@ ttt	ttt	K110			GN				jisjk:201744
 シャンタン	샨탄	N130			GN				jisjk:102037		
 シャンツェ	샨체	N110			GN				jisjk:48163		
 シャンテ	찬송	N110	USoQMU		GN				jisjk:129317		
-シャンデリア	샹들리에	N110	VEI		GN				jisjk:48165		
+シャンデリア	샹들리에	N110	VEl		GN				jisjk:48165		
 シャンデール	샨델	N130	QIDVGt		GN				jisjk:48164		
 シャントン	샹동	N110			GN				jisjk:112411		
 シャンハイ	상해	N110			GN				jisjk:112410		
@@ -63726,7 +63726,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ジューキ東販	쥬키동판	N110	VPl		GN				jisjk:48505		
 ジュークボックス	주크박스	N110	VPeUSoUHr		GN				jisjk:48507		
 ジューサブロ	쥬사부로	N130			GN				jisjk:102058		
-ジューサー	주서	N110	VPeVEI		GN				jisjk:48508		
+ジューサー	주서	N110	VPeVEl		GN				jisjk:48508		
 ジューシー	쥬시%A1@	G8U0			GN				jisjk:266123		
 ジュース	주스	N110	VFd		GN				jisjk:48509		
 ジュート	주트	N110			BZ				jisjk:355372		
@@ -64637,7 +64637,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スタントカー	스턴트 카	N110	VPe		GN				jisjk:129853		
 スタントコーディネーター	스턴트 감독	N110	UArUAqVHn		GN				jisjk:152254		
 スタントマン	스턴트 맨	N110	VHnUAr		GN				jisjk:129855		
-スタンド	스탠드	N110	VPlVEI		GN				jisjk:48996		
+スタンド	스탠드	N110	VPlVEl		GN				jisjk:48996		
 スタンド。 バイ。 クレディット	스탠드바이 크레디트	N110			GN				jisjk:48997		
 スタンド。 バイクレディット	스탠드바이 크레디트	N110			GN				jisjk:48998		
 スタンドアロン	스탠드얼론	N110			GN				jisjk:129856		
@@ -65526,7 +65526,7 @@ ttt	ttt	K110			GN				jisjk:201744
 スポット	스폿	N110	 		GN				jisjk:130108		
 スポットアナウンス	스포트 아나운스	N110	VCm		GN				jisjk:130110		
 スポットチェック	불시 점검	N110			GN				jisjk:130111		
-スポットテレビ	스폿 텔레비전	N110	VEI		GN				jisjk:49323		
+スポットテレビ	스폿 텔레비전	N110	VEl		GN				jisjk:49323		
 スポットライト	스포트라이트	N110			GN				jisjk:49324		
 スポット・ファンド	스폿펀드	N110	VMo		BZ				jisjk:363321		
 スポット・レート	스폿레이트	N110			BZ				jisjk:358212		
@@ -69653,7 +69653,7 @@ ttt	ttt	K110			GN				jisjk:201744
 テレビゲーム	텔레비전 게임	N110	VRw		GN				jisjk:358246		
 テレビコンテ	TV 대본	N110	UArVPe		GN				jisjk:131233		
 テレビショッピング	TV 쇼핑	N110			BZ				jisjk:361335		
-テレビジョン	텔레비전	N110	VEIVCm		GN				jisjk:50906		
+テレビジョン	텔레비전	N110	VElVCm		GN				jisjk:50906		
 テレビジョンサテライト	방송 중계국	N110	VBl		GN				jisjk:131234		
 テレビタレント	탤런트	N110	VHnUAr		GN				jisjk:131235		
 テレビデオ	비디오 일체형 TV	N110	VPl		GN				jisjk:50907		
@@ -69679,7 +69679,7 @@ ttt	ttt	K110			GN				jisjk:201744
 テレフォト	전송 사진	N110	VEl		GN				jisjk:131238		
 テレフォニカ	텔레포니카	N110	VPl		GN				jisjk:50915		
 テレフォニー	전화	N110			GN				jisjk:131239		
-テレフォン	텔레폰	N110	VEIVCm		GN				jisjk:50916		
+テレフォン	텔레폰	N110	VElVCm		GN				jisjk:50916		
 テレフタル	테레프탈	N110			GN				jisjk:50917		
 テレフタル酸	테레프탈산	N110			GN				jisjk:162968		
 テレフタレート	테레프탈레이트	N110			GN				jisjk:50918		
@@ -69690,7 +69690,7 @@ ttt	ttt	K110			GN				jisjk:201744
 テレプロンプタ	텔레프론프터	N110			GN				jisjk:50922		
 テレプロンプター	텔레 프롬프터	N110			GN				jisjk:50923		
 テレペンチン	텔레벤틴	N110			GN				jisjk:50924		
-テレホン	텔레폰	N110	VEIVCm		GN				jisjk:50925		
+テレホン	텔레폰	N110	VElVCm		GN				jisjk:50925		
 テレホンカード	전화 카드	N110	VEl		GN				jisjk:131241		
 テレホンクラブ	텔레폰 클럽	N110	VBlVRw		GN				jisjk:131242		
 テレホンサービス	텔레폰 서비스	N110			GN				jisjk:131243		
@@ -71479,7 +71479,7 @@ ttt	ttt	K110			GN				jisjk:201744
 トランジェントライブラリー	임시도서관	N110	VBl		GN				jisjk:51832		
 トランジション。 ダクト	트랜지션 덕트	N110			GN				jisjk:51833		
 トランジスタ	트랜지스터	N110			GN				jisjk:51834		
-トランジスター	트랜지스터	N110	VEIVCmUHr		GN				jisjk:51835		
+トランジスター	트랜지스터	N110	VElVCmUHr		GN				jisjk:51835		
 トランジスタ数	트랜지스터 카운트	N110			IT				jisjk:260978		
 トランジタ	트랜지스터	N110			GN				jisjk:162107		
 トランジット	트래시트	N110			GN				jisjk:51836		
@@ -72270,7 +72270,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ドライマティーニ	드라이 마티니	N110	VFd		GN				jisjk:131772		
 ドライミルク	분유	N110	VFd		GN				jisjk:131773		
 ドライヤ	드라이어	N110	VPe		GN				jisjk:52080		
-ドライヤー	드라이어	N110	VPeVEI		GN				jisjk:52081		
+ドライヤー	드라이어	N110	VPeVEl		GN				jisjk:52081		
 ドライラン	드라이 런	N110			GN				jisjk:52082		
 ドライヴ	드라이브	N110	VTp	Hd	GN				jisjk:131774		
 ドライヴァー	드라이버	N110	VTpUAqVHn		GN				jisjk:131775		
@@ -73568,7 +73568,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ネオロマンチシズム	네오로맨티시즘	N110			GN				jisjk:113245		
 ネオロマンチスム	신 낭만주의	N110			GN				jisjk:132035		
 ネオン	네온	N110			GN				jisjk:52689		
-ネオンサイン	네온사인	N110	VEI		GN				jisjk:52690		
+ネオンサイン	네온사인	N110	VEl		GN				jisjk:52690		
 ネガ	네가티브	N110			GN				jisjk:105277		
 ネガカラー	컬러 네거티브	N110			GN				jisjk:132036		
 ネガコピー	네거티브 카피	N110			GN				jisjk:52691		
@@ -75010,7 +75010,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バイオケミカル	바이오케미컬	N110			GN				jisjk:53322		
 バイオケミストリー	생화학	N110	USu		GN				jisjk:53323		
 バイオコンジュゲイトケミストリ	보조효소B12	N110			GN				jisjk:102056		
-バイオコンピューター	바이오컴퓨터	N110	VPeVEI		GN				jisjk:53324		
+バイオコンピューター	바이오컴퓨터	N110	VPeVEl		GN				jisjk:53324		
 バイオサイエンス	바이오사이언스	N110			GN				jisjk:53325		
 バイオサーファクタント	생물 계면활성제	N110	QHP		GN				jisjk:132438		
 バイオス	바이오스	N110			IT				jisjk:53326		
@@ -75467,7 +75467,7 @@ ttt	ttt	K110			GN				jisjk:201744
 バックミュージック	백 뮤직	N110	USo		GN				jisjk:53463		
 バックミラー	백미러	N110	VTpVPe		GN				jisjk:132580		
 バックヤード	뒤뜰	N110	VPl		GN				jisjk:132581		
-バックライト	백 라이트	N110	VEI		GN				jisjk:53464		
+バックライト	백 라이트	N110	VEl		GN				jisjk:53464		
 バックラシッシュ	백래쉬	N110			GN				jisjk:114105		
 バックラッシュ	백래쉬	N110			GN				jisjk:53465		
 バックリング	버클링	N110			GN				jisjk:53466		
@@ -76984,7 +76984,7 @@ ttt	ttt	K110			GN				jisjk:201744
 パーソナルオートメーション	퍼스널 오토메이션	N110			GN				jisjk:53644		
 パーソナルコミュニケーション	대화	N110			GN				jisjk:152424		
 パーソナルコンピュータ	퍼스널 컴퓨터	N110	VPeVEl		GN				jisjk:152425		
-パーソナルコンピューター	퍼스널 컴퓨터	N110	VPeVEI		GN				jisjk:53645		
+パーソナルコンピューター	퍼스널 컴퓨터	N110	VPeVEl		GN				jisjk:53645		
 パーソナルコール	지명 통화	N110			GN				jisjk:132701		
 パーソナルセリング	개인 판매	N110	VMo		GN				jisjk:132702		
 パーソナルセーリング	개인적 판매	N110			GN				jisjk:53646		
@@ -77387,7 +77387,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ヒータ	히터	N110			GN				jisjk:163307		
 ヒータプラグ	히터	N110			GN				jisjk:114174		
 ヒータボード	히터 보드	N110			GN				jisjk:114167		
-ヒーター	히터	N110	VEI		GN				jisjk:53971		
+ヒーター	히터	N110	VEl		GN				jisjk:53971		
 ヒーターエレメント	히터 엘리먼트	N110			GN				jisjk:53972		
 ヒーティング	히팅	N110			GN				jisjk:53973		
 ヒーテッドオーツーセンサー	열산소 센서	N110			GN				jisjk:114199		
@@ -77679,8 +77679,8 @@ ttt	ttt	K110			GN				jisjk:201744
 ビテル	비텔	N130	QPN		GN				jisjk:366084		
 ビテンコート	비텐코트	N130	QPN		GN				jisjk:366256		
 ビディコン	비디콘	N110	VEl		GN				jisjk:133051		
-ビディーオ	비디오	N110	VEI		GN				jisjk:54234		
-ビデオ	비디오	N110	VEI		GN				jisjk:54235		
+ビディーオ	비디오	N110	VEl		GN				jisjk:54234		
+ビデオ	비디오	N110	VEl		GN				jisjk:54235		
 ビデオCD	비디오CD	N110			IT				jisjk:261667		
 ビデオRAM	비디오 램	N110			IT				jisjk:262304		
 ビデオ。 スイッチング	비디오 스위칭	N110			GN				jisjk:54236		
@@ -77812,7 +77812,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ビューアー	뷰어	N110			GN				jisjk:54265		
 ビューアーズ	뷰어즈	N130	QPN		GN				jisjk:368241		
 ビューイング	뷰잉	N110			GN				jisjk:54266		
-ビューカム	뷰캠	N110	VEI		GN				jisjk:54267		
+ビューカム	뷰캠	N110	VEl		GN				jisjk:54267		
 ビューグル	뷰글	N110			GN				jisjk:114190		
 ビューシュケンス	뷰슈켄스	N130	QPN		GN				jisjk:369455		
 ビューティ	뷰티	N110			GN				jisjk:265063		
@@ -81482,7 +81482,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ブンカ	분카	N130			GN				jisjk:55872		
 ブンセン	분센	N110	VPl		GN				jisjk:55873		
 ブンゼン。 バーナ	분젠 버너	N110			GN				jisjk:55874		
-ブンゼン燈	분젠등	N110	VEI		GN				jisjk:55875		
+ブンゼン燈	분젠등	N110	VEl		GN				jisjk:55875		
 ブンソン	붐송	N130	QPN		GN				jisjk:370598		
 ブンツォル	분철	N130	QPN		GN				jisjk:371469		
 ブンデスバンク	분데스 뱅크	N110	VBlVMo		GN				jisjk:133700		
@@ -82561,7 +82561,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ヘッドホーン	헤드폰	N110	VPeUHr		GN				jisjk:56187		
 ヘッドボイス	두성	N110			GN				jisjk:114325		
 ヘッドマウンドディスプレイ	헤드 마운트 디스플레이	N110			IT				jisjk:262798		
-ヘッドライト	헤드라이트	N110	VMaVEI		GN				jisjk:56189		
+ヘッドライト	헤드라이트	N110	VMaVEl		GN				jisjk:56189		
 ヘッドライニング	헤드라이닝	N110			GN				jisjk:56190		
 ヘッドライン	헤드라인	N110	VPl		GN				jisjk:56191		
 ヘッドリトラクト	헤드 리트랙트	N110			GN				jisjk:56192		
@@ -86708,7 +86708,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ミカン	귤	N110	QAM		GN				jisjk:107012		
 ミカ製版	미카제판	N110	VPl		GN				jisjk:57652		
 ミキサ	믹서	N110			GN				jisjk:107013		
-ミキサー	믹서	N110	VEI		GN				jisjk:57654		
+ミキサー	믹서	N110	VEl		GN				jisjk:57654		
 ミキサー	믹서	N110			IT				jisjk:263090		
 ミキサーカー	믹서 카	N110			GN				jisjk:57655		
 ミキシング	믹싱	N110			GN				jisjk:57656		
@@ -89896,7 +89896,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ラジオロケーター	전파 탐지기	N110	VElVPe		GN				jisjk:135482		
 ラジオ局	라디오국	N110	VBl		GN				jisjk:135470		
 ラジオ星	전파원	N110	VSs		GN				jisjk:135471		
-ラジカセ	라디오 카셋트	N110	VEI		GN				jisjk:58800		
+ラジカセ	라디오 카셋트	N110	VEl		GN				jisjk:58800		
 ラジカリスト	급진주의자	N110	VHn		GN				jisjk:58801		
 ラジカリズム	급진주의	N110			GN				jisjk:58802		
 ラジカル	급진적%D4@	G8L0			GN				jisjk:2405		
@@ -90265,7 +90265,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ランタイムモジュール	런 타임 모듈	N110			IT				jisjk:263365		
 ランタイムライブラリ	런 타임 라이브러리	N110			IT				jisjk:263364		
 ランタイムルーチン	런 타임 루틴즈	N110			GN				jisjk:267836		
-ランタン	랜턴	N110	VEI		GN				jisjk:58916		
+ランタン	랜턴	N110	VEl		GN				jisjk:58916		
 ランダブル	란다부루	N130	QPN		SO				jisjk:365034		
 ランダマイズ	랜더마이즈	N110			GN				jisjk:113559		
 ランダム	랜덤	N110			GN				jisjk:58917		
@@ -92080,7 +92080,7 @@ ttt	ttt	K110			GN				jisjk:201744
 レコーダー	레코더	N110			GN				jisjk:59523		
 レコーディング	레코딩	N110			GN				jisjk:59525		
 レコーディングディレクター	녹음 감독	N110	UArUAqVHn		GN				jisjk:152617		
-レコード	레코드	N110	VEI		GN				jisjk:59526		
+レコード	레코드	N110	VEl		GN				jisjk:59526		
 レコード。 キー	레코드 키	N110			GN				jisjk:59527		
 レコード。 チェンジャ	레코드 체인저	N110			GN				jisjk:59528		
 レコード。 チェンジャー	레코드 체인저	N110			GN				jisjk:59529		
@@ -92466,7 +92466,7 @@ ttt	ttt	K110			GN				jisjk:201744
 レンゴー	렌고	N130	QIDVGt		GN				jisjk:59656		
 レンゴーサービス	렌고 서비스	N130	QIDVGt		GN				jisjk:59657		
 レンゴー食品	렌고식품	N130	QIDVGt		GN				jisjk:59658		
-レンジ	레인지	N110	VEI		GN				jisjk:59659		
+レンジ	레인지	N110	VEl		GN				jisjk:59659		
 レンジインディケーター	레인지 인디케이터	N110			GN				jisjk:107581		
 レンジビン	레인지 빈	N110			GN				jisjk:107553		
 レンジファインダー	거리계	N110	VPe		GN				jisjk:135991		
@@ -118958,7 +118958,7 @@ ttt	ttt	K110			GN				jisjk:201744
 付	교부&AV@	M439	VMoVSw		GN				jisjk:93093		
 付	뒤&E3@	M411	VHn		GN	701	||1 &&4 S-1== "に" P-1== "2**" ||12 A-2-= "VHn" S-2== "後" S-2== "後ろ" S-2== "あと" S-2== "席" S-2== "配置" S-2== "配備" S-2== "持ち場" S-2== "任務" S-2== "守り" S-2== "位置" S-2== "警備" D-1= "(을)를"	付는 바로 앞말이 사람이나 後, 後ろ, あと, 또는 자리와 임무(席, 配置, 配備, 持ち場, 任務, 守り, 位置, 警備)에 붙은 조사 に이면 그 번역을 ‘(을)를’로 바꾸고 ‘뒤따르다’를 고른다. 물건 뒤의 に付く는 기본 ‘붙다’다.	jisjk:93094		
 付	붙&AJ@	M439			GN	702	||1 S-2== "理由"	付의 두 단어 앞에 理由가 있으면 붙이다를 고른다. (미발동: rare-word)	jisjk:93095		
-付	켜&AL@	M411	VEIVEI	Dx	GN				jisjk:93096		
+付	켜&AL@	M411	VElVEl	Dx	GN				jisjk:93096		
 付	&E9@	M441			GN	1765	||1 &&2 S-1== "を" S-2== "核心"	付 앞에 核心を가 있으면 찌르다를 고른다. (미발동: rare-context)	jisjk:202279		
 付	첨부	N110			GN				jisjk:342144		
 付	부	N110		On	GN				jisjk:342145		
@@ -128346,7 +128346,7 @@ ttt	ttt	K110			GN				jisjk:201744
 光ケ丘団地	히카리가오카단치	I130	QCTVPl		GN				jisjk:321981		
 光コネクター	광커넥터	N110	VMa		GN				jisjk:206550		
 光コンピュータ	광컴퓨터	N110			IT				jisjk:261908		
-光コンピューター	광컴퓨터	I110	VPeVEI		GN				jisjk:62287		
+光コンピューター	광컴퓨터	I110	VPeVEl		GN				jisjk:62287		
 光センサ	광 센서	I110	VMa		GN				jisjk:62288		
 光センサー	광센서	I110	VMa		GN				jisjk:62289		
 光ディスク	광디스크	I110	VPeVMa		BZ				jisjk:62290		
@@ -133999,7 +133999,7 @@ ttt	ttt	K110			GN				jisjk:201744
 冷凍保管法	냉동저장법	N110	UMn		GN				jisjk:206043		
 冷凍剤	냉동제	N110	QHP		GN				jisjk:256373		
 冷凍受精卵	냉동 수정난	N110			GN				jisjk:256375		
-冷凍庫	냉동고	I110	VPlVEI		GN				jisjk:67656		
+冷凍庫	냉동고	I110	VPlVEl		GN				jisjk:67656		
 冷凍手術	냉동 수술	N110	QHP		GN				jisjk:256374		
 冷凍機	냉동기	N110	VPe		GN				jisjk:206044		
 冷凍肉	냉동육	N110	VFd		GN				jisjk:206040		
@@ -134099,7 +134099,7 @@ ttt	ttt	K110			GN				jisjk:201744
 冷菜	냉채	N110	VFd		GN				jisjk:206033		
 冷蔵	냉장	N110		Hd	GN				jisjk:20102		
 冷蔵倉庫	냉장 창고	N110	VPl		GN				jisjk:206035		
-冷蔵庫	냉장고	I110	VEI		GN				jisjk:67661		
+冷蔵庫	냉장고	I110	VEl		GN				jisjk:67661		
 冷蔵庫の中	냉장고 안	I110			GN				jisjk:257355		
 冷蔵法	냉장법	N110	UMn		GN				jisjk:206036		
 冷血	냉혈	N110			GN				jisjk:20111		
@@ -138939,7 +138939,7 @@ ttt	ttt	K110			GN				jisjk:201744
 加減速	가감 속도	N110			GN				jisjk:170179		
 加温	가온	N110		Hd	GN				jisjk:14269		
 加湿	가습	N110		Hd	GN				jisjk:14266		
-加湿器	가습기	I110	VEI		GN				jisjk:60197		
+加湿器	가습기	I110	VEl		GN				jisjk:60197		
 加瀬	카세	N130	QPN		GN				jisjk:96164		
 加瀬俊一	카세 도시카즈	I130			GN				jisjk:60183		
 加瀬友喜	카세 토모키	N130	QPN		GN				jisjk:96165		
@@ -150257,7 +150257,7 @@ ttt	ttt	K110			GN				jisjk:201744
 受信装置	수신장치	N110			BZ				jisjk:353534		
 受傷	수상	N110		Hd	GN				jisjk:159929		
 受像器	수상기	I110			GN				jisjk:101202		
-受像機	수상기	I110	VEI		GN				jisjk:75632		
+受像機	수상기	I110	VEl		GN				jisjk:75632		
 受光	수광	N110		Hd	GN				jisjk:27129		
 受光部	수광부	N110	VPl		GN				jisjk:163764		
 受光部	수광부	N110	VPl		GN				jisjk:163765		
@@ -166897,7 +166897,7 @@ ttt	ttt	K110			GN				jisjk:201744
 外為資金	외환 자금	N110			BZ				jisjk:350439		
 外為銀行	외환 은행	N110			BZ				jisjk:350444		
 外燃	외연	N110			GN				jisjk:29864		
-外燈	외등	N110	VEI		GN				jisjk:29827		
+外燈	외등	N110	VEl		GN				jisjk:29827		
 外牧	호카마키	N130	QCTVPl		GN				jisjk:327833		
 外物	외물	N110			GN				jisjk:29835		
 外環	바깥고리	N110			GN				jisjk:160425		
@@ -174883,7 +174883,7 @@ ttt	ttt	K110			GN				jisjk:201744
 太陽スペクトル	태양 스펙트럼	N110			GN				jisjk:241044		
 太陽ゼネラル	다이요제네럴	I110	VGt		GN				jisjk:87199		
 太陽信用金庫	다이요신용금고	I110	VGt		GN				jisjk:87217		
-太陽光	태양광	I110	VEIUXl		GN				jisjk:87205		
+太陽光	태양광	I110	VElUXl		GN				jisjk:87205		
 太陽光発電システム	태양광 발전 시스템	N110			BZ				jisjk:363497		
 太陽化学	타이요 화학	I130	VGt		PN				jisjk:87229		
 太陽印刷工業	타이요 인쇄공업	I110	VGt		GN				jisjk:87224		
@@ -178918,7 +178918,7 @@ ttt	ttt	K110			GN				jisjk:201744
 安全手持量	안전 소유량	I110			BZ				jisjk:350263		
 安全標識	안전 표지	N110			GN				jisjk:227872		
 安全灯	안전등	N110	VPe		GN				jisjk:125048		
-安全燈	안전등	I110	VEI		GN				jisjk:77401		
+安全燈	안전등	I110	VEl		GN				jisjk:77401		
 安全牌	안전패	N110			GN				jisjk:227877		
 安全率	안전율	N110			GN				jisjk:227875		
 安全石油	안젠 석유	I130	QIDVGt		GN				jisjk:77405		
@@ -182453,7 +182453,7 @@ ttt	ttt	K110			GN				jisjk:201744
 家長韜庵	이에나가 토안	N110	VHn		GN				jisjk:210850		
 家門	가문	N110	VPl		GN				jisjk:14334		
 家集	개인 시집	N110	VBkVSw		GN				jisjk:168234		
-家電	가전	N110	VEI		GN				jisjk:14358		
+家電	가전	N110	VEl		GN				jisjk:14358		
 家電やさん	가전 제품 판매업자	N110	VElVHn		GN				jisjk:168952		
 家電リサイクル法	가전 리사이클법	N110	UMn		BZ				jisjk:348607		
 家電器機	가전기기	N110	VPeVEl		GN				jisjk:206998		
@@ -189433,7 +189433,7 @@ ttt	ttt	K110			GN				jisjk:201744
 尾瀬敬止	오세 게이시	N110	VHn		GN				jisjk:212834		
 尾瀬林業	오세 임업	I130	QIDVGt		GN				jisjk:69367		
 尾瀬沼	오제누마	N130	QCTVPl		GN				jisjk:280022		
-尾燈	미등	N110	VEI		GN				jisjk:22361		
+尾燈	미등	N110	VEl		GN				jisjk:22361		
 尾生	오	N130	QCTVPl		GN				jisjk:277041		
 尾生町	오부쵸	N130	QCTVPl		GN				jisjk:280744		
 尾田	오타	N130	QCTVPl		GN				jisjk:280056		
@@ -197346,7 +197346,7 @@ ttt	ttt	K110			GN				jisjk:201744
 常在	상주	N110		Hd	GN				jisjk:237283		
 常夏	상하	N110			GN				jisjk:8314		
 常夜灯	상야등	N110	VPeVEl		GN				jisjk:195544		
-常夜燈	상야등	I110	VEI		GN				jisjk:73564		
+常夜燈	상야등	I110	VEl		GN				jisjk:73564		
 常夫	츠네오	N130	QPN	Wb	GN				jisjk:8287		
 常夫	토키오	N130	QPN	Wb	GN				jisjk:346967		
 常套	상투	N110			GN				jisjk:25853		
@@ -204197,7 +204197,7 @@ ttt	ttt	K110			GN				jisjk:201744
 後小松天皇	고코마츠 천황	N110	VHn		GN				jisjk:231643		
 後尾	후미	N110	VPl		GN				jisjk:39998		
 後尾	우시로	N130	QCTVPl		GN				jisjk:275025		
-後尾燈	후미등	I110	VEI		GN				jisjk:89968		
+後尾燈	후미등	I110	VEl		GN				jisjk:89968		
 後屈	후굴	N110			GN				jisjk:39981		
 後屋敷	우시로야시키	N130	QCTVPl		GN				jisjk:275063		
 後屋敷待井	우시로야시키마치	I130	QCTVPl		GN				jisjk:275064		
@@ -210564,7 +210564,7 @@ ttt	ttt	K110			GN				jisjk:201744
 懐中汁粉	인스턴트 단팥죽	N110	VFd		GN				jisjk:166952		
 懐中物	소지품	N110			GN				jisjk:166954		
 懐中物御用心	회중품조심	I110			GN				jisjk:89783		
-懐中電燈	회중전등	I110	VPeVEI		GN				jisjk:89784		
+懐中電燈	회중전등	I110	VPeVEl		GN				jisjk:89784		
 懐具合	주머니 사정	I110			GN				jisjk:89781		
 懐刀	호신용 칼	N110	VTw		GN				jisjk:39831		
 懐剣	비수	N110	VPe		GN				jisjk:166655		
@@ -212856,7 +212856,7 @@ ttt	ttt	K110			GN				jisjk:201744
 手詰まり	궁지	N110			GN				jisjk:342553		
 手詰め	다그침	N110		Hd	GN				jisjk:244560		
 手話	수화	N110		Hd	GN				jisjk:27265		
-手話器	수화기	I110	VEIVCm		GN				jisjk:75811		
+手話器	수화기	I110	VElVCm		GN				jisjk:75811		
 手話法	수화법	N110			GN				jisjk:235004		
 手貝町	테가이쵸	N130	QCTVPl		GN				jisjk:310210		
 手賀新田	테가신덴	I130	QCTVPl		GN				jisjk:310212		
@@ -216513,7 +216513,7 @@ ttt	ttt	K110			GN				jisjk:201744
 探海灯	해조 탐사등	N110	VPe		GN				jisjk:153197		
 探測機	탐측기	I110	VPe		GN				jisjk:87126		
 探測気球	탐측후기	N110	VPe		GN				jisjk:241909		
-探照燈	탐조등	I110	VEI		GN				jisjk:87125		
+探照燈	탐조등	I110	VEl		GN				jisjk:87125		
 探知	탐지	N110		Hd	GN				jisjk:36877		
 探究	탐구	N110		Hd	GN				jisjk:36871		
 探究者	탐구자	N110	VHn		GN				jisjk:153204		
@@ -227346,7 +227346,7 @@ ttt	ttt	K110			GN				jisjk:201744
 星工業	호시공업	I110	QCT		GN				jisjk:74513		
 星布尼	세이후니	N130	VHn		GN				jisjk:216859		
 星座	별자리	N110	VPlVSs		GN				jisjk:26549		
-星影	별빛	N110	VSsVEI		GN				jisjk:26546		
+星影	별빛	N110	VSsVEl		GN				jisjk:26546		
 星恂太郎	호시 준타로	N130	VHn		GN				jisjk:221170		
 星斗	별	N110	VSs		GN				jisjk:197848		
 星新一	호시신이치	N110	VHn		GN				jisjk:250902		
@@ -254464,7 +254464,7 @@ ttt	ttt	K110			GN				jisjk:201744
 水銀法	수은법	N110			BZ				jisjk:360494		
 水銀温度計	수은온도계	N110	VPe		GN				jisjk:237707		
 水銀灯	수은등	N110	VPe		GN				jisjk:196143		
-水銀燈	수은등	I110	VEI		GN				jisjk:75948		
+水銀燈	수은등	I110	VEl		GN				jisjk:75948		
 水銀電池	수은전지	N110			GN				jisjk:237711		
 水鏡	물거울	N110			GN				jisjk:252277		
 水門	수문	N110	VPl		GN				jisjk:27352		
@@ -265511,7 +265511,7 @@ ttt	ttt	K110			GN				jisjk:201744
 溶液	용액	N110			GN				jisjk:30054		
 溶液あたり	용액당	N110			GN				jisjk:163931		
 溶液当り	용액당	N110			GN				jisjk:163930		
-溶炉	용광로	N110	VPlVEI		GN				jisjk:30051		
+溶炉	용광로	N110	VPlVEl		GN				jisjk:30051		
 溶球反応	용구 반응	N110			GN				jisjk:254990		
 溶結凝灰岩	용결응회암	N110	VSn		GN				jisjk:254997		
 溶脱	용탈	N110		Hd	GN				jisjk:163807		
@@ -267202,7 +267202,7 @@ ttt	ttt	K110			GN				jisjk:201744
 火ともし	점화	I110			GN				jisjk:89284		
 火に当た	불을 &CX@	M428			GN				jisjk:265496		
 火に油を注	불난 집에 부채질&AV@	M422			GN				jisjk:117936		
-火のし	다리미	I110	VEI		GN				jisjk:89285		
+火のし	다리미	I110	VEl		GN				jisjk:89285		
 火のみやぐら	망루	I110	VPl		GN				jisjk:89286		
 火の元	화기	I110	VPl		GN				jisjk:89292		
 火の宮町	히노미야쵸	I130	QCTVPl		GN				jisjk:324652		
@@ -267522,7 +267522,7 @@ ttt	ttt	K110			GN				jisjk:201744
 炊煙	취연	N110			GN				jisjk:196118		
 炊爨	취사	N110		Hd	GN				jisjk:196174		
 炊飯	밥솥	N110	VCk		GN				jisjk:36452		
-炊飯器	밥솥	I110	VCkVEI		GN				jisjk:86860		
+炊飯器	밥솥	I110	VCkVEl		GN				jisjk:86860		
 炎	불길	N110	XXX		GN				jisjk:115474		
 炎	염	N110	UTi	Z7	GN				jisjk:115475		
 炎	염	N110		On	GN				jisjk:258361		
@@ -267646,8 +267646,8 @@ ttt	ttt	K110			GN				jisjk:201744
 炯眼	형안	N110			GN				jisjk:39170		
 炸楽	작약	N110			GN				jisjk:232390		
 炸裂	작렬	N110		Hd	GN				jisjk:185026		
-点	&AP@	M43:	VEIVEI		GN				jisjk:13767		
-点	켜&AL@	M411	VEIVEI	Dx	GN				jisjk:13768		
+点	&AP@	M43:	VElVEl		GN				jisjk:13767		
+点	켜&AL@	M411	VElVEl	Dx	GN				jisjk:13768		
 点	점	N110	XXX		GN				jisjk:119093		
 点	&H5@	M423	QHPQHP		GN				jisjk:121376		
 点	켜&AL@	M421	VEl	Dx	GN				jisjk:142715		
@@ -267658,7 +267658,7 @@ ttt	ttt	K110			GN				jisjk:201744
 点々と	점점이	E300			GN				jisjk:149343		
 点がついてい	점이 붙어 &HN@	M427			GN				jisjk:142147		
 点がとれ	점수를 얻을 수 &HN@	M427			GN				jisjk:142151		
-点け	&AP@	M437	VEIVEI		GN				jisjk:94804		
+点け	&AP@	M437	VElVEl		GN				jisjk:94804		
 点じ	&AP@	M447			GN				jisjk:144511		
 点じ	&H5@	M447	QHPQHP		GN				jisjk:144517		
 点じ	달&AJ@	M447	VFd		GN				jisjk:144523		
@@ -269073,7 +269073,7 @@ ttt	ttt	K110			GN				jisjk:201744
 煕麟	희린	N130	QPN	Wb	GN				jisjk:349869		
 煖房	난방	N110		Hd	GN				jisjk:17959		
 煖炉	난로	N110	VPeUXl		GN				jisjk:17958		
-煙	&AR@	M418	VEI		GN				jisjk:13745		
+煙	&AR@	M418	VEl		GN				jisjk:13745		
 煙	흐려 보&AJ@	M418	VFr		GN				jisjk:13746		
 煙	연기	N110	UGs		GN				jisjk:115476		
 煙	연기가 &A5@	M418	VPt		GN				jisjk:119573		
@@ -269221,12 +269221,12 @@ ttt	ttt	K110			GN				jisjk:201744
 照手	테루테	N130	QCTVPl		GN				jisjk:310447		
 照手町	테루테쵸	N130	QCTVPl		GN				jisjk:310448		
 照日	테루히	N130	QCTVPl		GN				jisjk:310449		
-照明	조명	N110	VEI	Hd	GN				jisjk:33622		
+照明	조명	N110	VEl	Hd	GN				jisjk:33622		
 照明を当てられ	조명을 &FD@	M427			GN				jisjk:122353		
 照明器具	조명기구	N110	VPe		GN				jisjk:235470		
 照明太子	쇼메이태자	N110	VHn		GN				jisjk:235471		
 照明弾	조명탄	I110	VTw		GN				jisjk:83685		
-照明燈	조명등	I110	VEI		GN				jisjk:83684		
+照明燈	조명등	I110	VEl		GN				jisjk:83684		
 照星	가늠쇠	N110	VPe		GN				jisjk:190993		
 照月湖	쇼게츠코	I110	QCT		GN				jisjk:83687		
 照木	테루키	N130	QPN	Wa	GN				jisjk:11421		
@@ -269623,7 +269623,7 @@ ttt	ttt	K110			GN				jisjk:201744
 熱可塑性	열가소성	I110			GN				jisjk:78278		
 熱可塑性樹脂	열가소성 수지	N110			GN				jisjk:248638		
 熱唱	열창	N110	UHr	Hd	GN				jisjk:29399		
-熱器具	열기구	I110	VEI		GN				jisjk:78281		
+熱器具	열기구	I110	VEl		GN				jisjk:78281		
 熱圏	열권	N110	VPlVSs		GN				jisjk:248645		
 熱圧着	열압착	N110		Hd	GN				jisjk:163428		
 熱型	열형	N110	QHP		GN				jisjk:151607		
@@ -269693,7 +269693,7 @@ ttt	ttt	K110			GN				jisjk:201744
 熱気	열기	N110			GN				jisjk:29379		
 熱気がさ	열이 &E6@	M423			GN				jisjk:147685		
 熱気浴	열기욕	N110		Hd	GN				jisjk:248605		
-熱気球	열기구	I110	VEI		GN				jisjk:78283		
+熱気球	열기구	I110	VEl		GN				jisjk:78283		
 熱水鉱床	열수 광상	N110			GN				jisjk:248608		
 熱汚染	열오염	N110			GN				jisjk:248632		
 熱池町	니케쵸	N130	QCTVPl		GN				jisjk:315872		
@@ -269835,9 +269835,9 @@ ttt	ttt	K110			GN				jisjk:201744
 燈	&AP@	M433			GN				jisjk:13672		
 燈	(불을) &AP@	M453			GN				jisjk:13673		
 燈	불을 &AP@	M413			GN				jisjk:13674		
-燈	등불	N110	VEI		GN				jisjk:116090		
+燈	등불	N110	VEl		GN				jisjk:116090		
 燈	등	N110		On	GN				jisjk:259106		
-燈かり	불빛	I110	VEIUXl		GN				jisjk:67440		
+燈かり	불빛	I110	VElUXl		GN				jisjk:67440		
 燈り	빛	N110			GN				jisjk:7415		
 燈下	등잔 밑	N110	VPl		GN				jisjk:19820		
 燈台	등대	N110	VBl		GN				jisjk:19816		
@@ -269849,8 +269849,8 @@ ttt	ttt	K110			GN				jisjk:201744
 燈明崎	도묘자키	N130	VPl		GN				jisjk:218275		
 燈油	등유	N110	UXl		GN				jisjk:19818		
 燈油機関	등유기관	N110	VMa		GN				jisjk:205627		
-燈火	등화	N110	VEI		GN				jisjk:19821		
-燈盞	등잔	N110	VEI		GN				jisjk:19819		
+燈火	등화	N110	VEl		GN				jisjk:19821		
+燈盞	등잔	N110	VEl		GN				jisjk:19819		
 燈篭	등롱	N110			GN				jisjk:19815		
 燈籠町	토우로우쵸	N130	QCTVPl		GN				jisjk:311143		
 燈豊町	토우부쵸	N130	QCTVPl		GN				jisjk:311058		
@@ -277680,7 +277680,7 @@ ttt	ttt	K110			GN				jisjk:201744
 留守番を頼	집 보는 것을 부탁&AV@	M4U5			GN				jisjk:202381		
 留守番を頼まれ	집 보는 것을 부탁&FD@	M4U7			GN				jisjk:202382		
 留守番中の	집을 보고 있던	E0H0			GN				jisjk:150193		
-留守番電話	자동 응답 전화	I110	VEIVCmUTs		GN				jisjk:67991		
+留守番電話	자동 응답 전화	I110	VElVCmUTs		GN				jisjk:67991		
 留守神	유수신	N110	VHn		GN				jisjk:256277		
 留守電	자동 응답 전화	I110			GN				jisjk:264486		
 留寿都	루스츠	I110	QCT		GN				jisjk:67986		
@@ -279615,7 +279615,7 @@ ttt	ttt	K110			GN				jisjk:201744
 白熱	백열	N110			GN				jisjk:23288		
 白熱	최고조에 달&AV@	M429			GN				jisjk:346799		
 白熱戦	백열전	I110			GN				jisjk:69966		
-白熱燈	백열등	I110	VEI		GN				jisjk:69965		
+白熱燈	백열등	I110	VEl		GN				jisjk:69965		
 白熱的	백열적%D4@	G8U0			GN				jisjk:143345		
 白熱電球	백열전구	N110	VEl		GN				jisjk:203399		
 白燈油	백등유	I110	UXl		GN				jisjk:69924		
@@ -293371,7 +293371,7 @@ ttt	ttt	K110			GN				jisjk:201744
 端な	상스$G7@	H7U0			GN				jisjk:5462		
 端を発	비롯&C6@	M429			GN				jisjk:117719		
 端を発	발단&AV@	M429			GN	1441	||1 &&2 S-1== "に" D-1= "(으)로"	바로 앞말이 に이면 端を発를 발단하다로 고르고 に를 으로로 바꾼다. (미발동: rare-word)	jisjk:138259		
-端ミシン	오버랩 미싱	I110	VEI		GN				jisjk:64750		
+端ミシン	오버랩 미싱	I110	VEl		GN				jisjk:64750		
 端二三彦	하타 후미히코	N130	VHn		GN				jisjk:225857		
 端免	하시멘	N130	QCTVPl		GN				jisjk:320094		
 端出場	하데바	I110	QCT		GN				jisjk:64755		
@@ -294868,7 +294868,7 @@ ttt	ttt	K110			GN				jisjk:201744
 等質	등질	N110			GN				jisjk:19860		
 等距離	등거리	I110			GN				jisjk:67463		
 等身	등신	N110	VBp		GN				jisjk:19852		
-等身仏	등신불	I110	VEI		GN				jisjk:67471		
+等身仏	등신불	I110	VEl		GN				jisjk:67471		
 等軸晶系	등축 정계	N110			GN				jisjk:245452		
 等辺	등변	N110			GN				jisjk:19845		
 等辺三角形	등변 삼각형	N110			GN				jisjk:245575		
@@ -297646,7 +297646,7 @@ ttt	ttt	K110			GN				jisjk:201744
 紅涙	홍루	N110	VBp		GN				jisjk:181553		
 紅潮	홍조	N110			GN				jisjk:39382		
 紅灯	붉은 등불	N110	VPe		GN				jisjk:181008		
-紅炎	홍염	N110	VEIUGs		GN				jisjk:39379		
+紅炎	홍염	N110	VElUGs		GN				jisjk:39379		
 紅玉	홍옥	N110			GN				jisjk:39380		
 紅疫	홍역	N110	UTi		GN				jisjk:39378		
 紅白	홍백	N110			GN				jisjk:39373		
@@ -313115,7 +313115,7 @@ ttt	ttt	K110			GN				jisjk:201744
 華清池	화청지	N110	VPl		GN				jisjk:257280		
 華渓寺	화계사	N130	VPl		GN				jisjk:375600		
 華熟里	케쥬쿠리	N130	QCTVPl		GN				jisjk:291828		
-華燭	화촉	N110	VEI		GN				jisjk:39600		
+華燭	화촉	N110	VEl		GN				jisjk:39600		
 華燭の典	화촉지전	I110			GN				jisjk:89380		
 華美	화려%A1@	G8L0			GN				jisjk:3938		
 華者	연약%A1@	G8U0			GN				jisjk:3940		
@@ -314311,7 +314311,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蓄電	축전	N110		Hd	GN				jisjk:36264		
 蓄電器	축전기	I110			GN				jisjk:86629		
 蓄電池	축전지	I110			GN				jisjk:106083		
-蓄音機	축음기	I110	VEI		GN				jisjk:86628		
+蓄音機	축음기	I110	VEl		GN				jisjk:86628		
 蓉二郎	요우지로우	N130	QPN	Wb	GN				jisjk:357414		
 蓋	뚜껑	N110			GN				jisjk:115536		
 蓋	가&AA@	M440			GN				jisjk:145485		
@@ -316795,7 +316795,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蛍光塗料	형광 도료	N110			GN				jisjk:177290		
 蛍光放電管	형광방전관	N110	VPe		GN				jisjk:204023		
 蛍光灯	형광등	N110	VPeVEl		GN				jisjk:177288		
-蛍光燈	형광등	I110	VEI		GN				jisjk:89034		
+蛍光燈	형광등	I110	VEl		GN				jisjk:89034		
 蛍光物質	형광 물질	N110	VPe		GN				jisjk:177292		
 蛍合戦	반딧불이 싸움	N110			GN				jisjk:250974		
 蛍川	호타루가와	N130	QCTVPl		GN				jisjk:328024		
@@ -317003,7 +317003,7 @@ ttt	ttt	K110			GN				jisjk:201744
 蝋染め	납결	N110			GN				jisjk:267920		
 蝋梅	납매	N110	VPt		GN				jisjk:256629		
 蝋燭	초	N110			GN				jisjk:18077		
-蝋燭	양초	N110	UXlVEI		GN				jisjk:18078		
+蝋燭	양초	N110	UXlVEl		GN				jisjk:18078		
 蝋画	납화	N110			GN				jisjk:256528		
 蝋石	납석	N110			GN				jisjk:18075		
 蝋竜湖	반류코	I110	VGt		GN				jisjk:64147		
@@ -317793,7 +317793,7 @@ ttt	ttt	K110			GN				jisjk:201744
 行為性	행위성	N110			GN				jisjk:160787		
 行為時	행위시	N110	UMe		GN				jisjk:160812		
 行為規範	행위규범	N110	ULw		GN				jisjk:204118		
-行燈	행등	N110	VEI		GN				jisjk:13375		
+行燈	행등	N110	VEl		GN				jisjk:13375		
 行状	행장	N110			GN				jisjk:38812		
 行用町	교요우쵸	N130	QCTVPl		GN				jisjk:290146		
 行田	교타	N130	QPN	Wa	GN				jisjk:38829		
@@ -317899,7 +317899,7 @@ ttt	ttt	K110			GN				jisjk:201744
 街幅	거리	N110	VPl		GN				jisjk:14416		
 街村	가촌	N110	VPl		GN				jisjk:171109		
 街灯	가로등	N110			GN				jisjk:171127		
-街燈	가로등	N110	VEI		GN				jisjk:14409		
+街燈	가로등	N110	VEl		GN				jisjk:14409		
 街着	나들이옷	N110			GN				jisjk:251765		
 街竝	거리	N110			GN				jisjk:14411		
 街竝み	거리	I110			GN				jisjk:60293		
@@ -317907,7 +317907,7 @@ ttt	ttt	K110			GN				jisjk:201744
 街談	거리의 풍문	N110			GN				jisjk:171115		
 街路	가로	N110	VPl		GN				jisjk:14410		
 街路樹	가로수	I110	QAL		GN				jisjk:60292		
-街路燈	가로등	I110	VPeVEI		GN				jisjk:60291		
+街路燈	가로등	I110	VPeVEl		GN				jisjk:60291		
 街道	가도	N110	VPl		GN				jisjk:14407		
 街頭	가두	N110	VPl		GN				jisjk:14408		
 街頭奉仕	가두봉사	I110			GN				jisjk:109093		
@@ -324044,7 +324044,7 @@ ttt	ttt	K110			GN				jisjk:201744
 角淵	츠노부치	N130	QCTVPl		GN				jisjk:309815		
 角瀬保雄	카도세 야스오	N130	QPN		GN				jisjk:96238		
 角灯	랜턴	N110	VPe		GN				jisjk:167734		
-角燈	각등	N110	VEI		GN				jisjk:14467		
+角燈	각등	N110	VEl		GN				jisjk:14467		
 角班炳	각반병	I110			GN				jisjk:60326		
 角班病	각반병	N110	UTi		GN				jisjk:202789		
 角生	츠노우	N130	QCTVPl		GN				jisjk:309774		
@@ -330757,7 +330757,7 @@ ttt	ttt	K110			GN				jisjk:201744
 赤パン黴	붉은빵곰팡이	N110	QHP		GN				jisjk:226982		
 赤ヘル	빨강 헬멧	N110	VAc		GN				jisjk:119138		
 赤マン	붉은 보지	K110	VBp		GN				jisjk:116600		
-赤ランプ	빨간 램프	I110	VEI		GN				jisjk:82584		
+赤ランプ	빨간 램프	I110	VEl		GN				jisjk:82584		
 赤ワイン	붉은 와인 	N110	VLq		GN				jisjk:341707		
 赤下	아카시타	N130	QCTVPl		GN				jisjk:269103		
 赤不動	부동 명왕	N110	VHnUCl		GN				jisjk:226946		
@@ -331403,7 +331403,7 @@ ttt	ttt	K110			GN				jisjk:201744
 赤雪	적설	N110	VSs		GN				jisjk:226976		
 赤雪	적설	N110	VSs		GN				jisjk:238966		
 赤電	마지막 전차	N110	VBlVTp		GN				jisjk:226927		
-赤電話	공중전화	I110	VCmVEI		GN				jisjk:82626		
+赤電話	공중전화	I110	VCmVEl		GN				jisjk:82626		
 赤電車	막차	I110	VTp		GN				jisjk:82625		
 赤面	빨간 얼굴	N110	VBp		GN				jisjk:32542		
 赤面	아카츠라	N130	QCTVPl		GN				jisjk:269150		
@@ -351936,7 +351936,7 @@ ttt	ttt	K110			GN				jisjk:201744
 電報用紙	전보용지	I110			GN				jisjk:82959		
 電場	전기장	N110			GN				jisjk:32946		
 電塾	온라인학교	N110			GN				jisjk:103312		
-電子	전자	N110	VEI		GN				jisjk:32944		
+電子	전자	N110	VEl		GN				jisjk:32944		
 電子ウイルス	전자 바이러스	N110	VEl		GN				jisjk:245128		
 電子オルガン	전자 오르간	N110	USoQMUVEl		GN				jisjk:245129		
 電子サイン	전자사인	N110			BZ				jisjk:361133		
@@ -352047,7 +352047,7 @@ ttt	ttt	K110			GN				jisjk:201744
 電気ごて	전기 인두	N110			GN				jisjk:160077		
 電気でしびれ	감전되어 찌르르&AV@	M427	VEl		GN				jisjk:142561		
 電気の消し忘れ	전기를 끄는 것을 잊어버림	N110			GN				jisjk:152806		
-電気アイロン	전기다리미	I110	VEI		GN				jisjk:82938		
+電気アイロン	전기다리미	I110	VEl		GN				jisjk:82938		
 電気エネルギー	전기 에너지	N110	VEl		GN				jisjk:245078		
 電気ガス税	전기 가스세	N110			GN				jisjk:245079		
 電気ギター	전기 기타	N110	USoQMUVEl		GN				jisjk:245080		
@@ -352197,9 +352197,9 @@ ttt	ttt	K110			GN				jisjk:201744
 電熱	전열	N110			GN				jisjk:32941		
 電熱器	전열기	I110	VPe		GN				jisjk:82971		
 電熱線	전열선	I110			GN				jisjk:82972		
-電燈	전등	N110	VEI		GN				jisjk:32924		
+電燈	전등	N110	VEl		GN				jisjk:32924		
 電燈がつ	전등불이 들어&AH@	M421	VEl		GN				jisjk:142571		
-電球	전구	N110	VPeVEI		GN				jisjk:32917		
+電球	전구	N110	VPeVEl		GN				jisjk:32917		
 電界	전계	N110	VGt		GN				jisjk:32914		
 電界効果トランジスタ。	전계효과 트랜지스터	N110	VPe		BZ				jisjk:361347		
 電界強度	전기장 강도	N110			GN				jisjk:245002		
@@ -352291,7 +352291,7 @@ ttt	ttt	K110			GN				jisjk:201744
 電話料	전화요금	I110			GN				jisjk:83003		
 電話料金	전화요금	I110	VMo		GN				jisjk:83004		
 電話料金制度	전화 요금 제도	N110			BZ				jisjk:349225		
-電話機	전화기	I110	VEIVCm		GN				jisjk:83001		
+電話機	전화기	I110	VElVCm		GN				jisjk:83001		
 電話機能	전화기능	I110			GN				jisjk:364102		
 電話番	전화당번	N110			GN				jisjk:161175		
 電話番号	전화번호	N110		Oq	GN				jisjk:161177		
@@ -353291,7 +353291,7 @@ ttt	ttt	K110			GN				jisjk:201744
 青雲	아오모	N130	QPN	Wa	GN				jisjk:12736		
 青雲	세이운	N130	QPN	Wb	GN				jisjk:344998		
 青雲町	세이운쵸	N130	QCTVPl		GN				jisjk:303798		
-青電話	공중전화	I110	VCmVEI		GN				jisjk:86278		
+青電話	공중전화	I110	VCmVEl		GN				jisjk:86278		
 青電車	막차 직전 전철	N110			GN				jisjk:226814		
 青青	싱싱&AV@	M429			GN				jisjk:137604		
 青青と	청청하게	E300			GN				jisjk:122720		
@@ -363559,7 +363559,7 @@ ttt	ttt	K110			GN				jisjk:201744
 黄が暎	황석영	N130	QPN		GN				jisjk:210191		
 黄な粉	콩가루	I110	VFdVFd		GN				jisjk:89733		
 黄の	노란	P251			GN				jisjk:6432		
-黄の燭	황촉불	I110	VEI		GN				jisjk:89734		
+黄の燭	황촉불	I110	VEl		GN				jisjk:89734		
 黄ば	노래&AL@	M415			GN				jisjk:96063		
 黄まぐろ	황다랭이	N110	QAC		GN				jisjk:203827		
 黄イニョン	황인용	N130	QPN		GN				jisjk:210206		

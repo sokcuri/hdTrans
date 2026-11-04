@@ -1,0 +1,38 @@
+# 규칙: LEX-4705, LEX-4706
+rule	input	expected	kind	layer
+cx:notice-words-1:102	全く、困ったものだ。	정말이지, 곤란하다.	fix	rewrites
+cx:notice-words-1:102	まったく、なんで最初がボクじゃないんだ	정말이지, 왜 처음이 내가 아니다	fix	rewrites
+cx:notice-words-1:102	全く…なんつー御大将なんですか貴方様は！	정말이지…몇 개-두령장입니까 귀하는!	fix	rewrites
+cx:notice-words-1:102	全く分からない。	전혀 모른다.	keep	rewrites
+cx:notice-words-1:102	それは全く違う。	그것은 전혀 다르다.	keep	rewrites
+cx:notice-words-1:104	なんだってできちゃう	뭐든지 할 수 있어버린다	fix	rewrites
+cx:notice-words-1:104	あおくんを守るためになんだってするのにっ……！	아오 군을 지키기 위해 뭐든지 하는 것 씩……!	fix	rewrites
+cx:notice-words-1:104	彼はなんだって言ったの？	그는 라고 말했어?	keep	rewrites
+cx:notice-words-1:104	なんだって？	뭐라고?	keep	rewrites
+cx:notice-words-1:106	ちょっとちょっと！	잠깐 잠깐!	fix	rewrites
+cx:notice-words-1:106	ちょっとちょっと、聞き捨てならない評価が飛び出して来たんですけど!?	잠깐 잠깐, 그냥 넘길 수 없는 말이야 평가가 튀어 나왔는데요!?	fix	rewrites
+cx:notice-words-1:106	ちょっと待って	잠깐 기다려	keep	rewrites
+cx:notice-words-1:106	ちょっと休もう	조금 쉬자	keep	rewrites
+cx:notice-words-1:108	殿、お待ちください。	주군, 기다려 주세요.	fix	rewrites
+cx:notice-words-1:108	な、なんだあれはっ！？殿、空を！	뭐, 뭐야 저건!? 주군, 하늘을!	fix	rewrites
+cx:notice-words-1:108	殿！前方に美濃勢を発見！	주군! 전방으로 미노세를 발견!	fix	rewrites
+cx:notice-words-1:108	提督殿、どうぞ。	제독님, 어서.	keep	rewrites
+cx:notice-words-1:108	第六十一駆逐隊を編成、艦隊の殿として戦った。	제61구축대를 편성, 함대의 전으로서 싸웠다.	keep	rewrites
+cx:notice-words-1:108	殿を務めるのじゃ！	전을 맡는 게야!	keep	rewrites
+dict:w:33200	完全にネタメニューだ。	완전히 웃기려고 만든 메뉴다.	fix	lookup
+dict:w:33201	「おわっ、近すぎだ！　加減しろって！」	「와, 너무 가깝다! 적당히 하라고!」	fix	lookup
+dict:w:33202	“恋むすび”を買いに来てんだぞ	“사랑의 매듭”을 구매래라고 다	fix	lookup
+dict:w:33204	…将来、役に立たないのは承知で。	…장래, 쓸모없는 것은 알면서.	fix	lookup
+dict:w:33206	艦名は…伊の八！	함명은…이8!	fix	lookup
+sense:uchiage	任務の打ち上げとエルの歓迎会を兼ねたすき焼きパーティが始まった。	임무 뒤풀이와 엘의 환영회를 겸한 스키야키 파티가 시작되었다.	fix	senses
+sense:uchiage	サバイバルゲーム後の打ち上げ居酒屋飲み会で	서바이벌 게임 후 뒤풀이 선술집 회식에서	fix	senses
+sense:uchiage	ロケットの打ち上げを見た	로켓 발사를 보았다	keep	senses
+sense:copy	ポスターの横に乗せる、大文字のコピーを考えればいいわけだな？	포스터 옆에 싣는, 대문자 카피를 생각하면 변명이네?	fix	senses
+sense:copy	資料のコピーを取る	자료 복사를 취한다	keep	senses
+sense:kannen	いい加減観念なさいませ。	이제 좀 체념하십시오.	fix	senses
+sense:kannen	固定観念を捨てろ	고정 관념을 버려라	keep	senses
+sense:toritsuke	もう一回 決闘を取り付けておいて	다시 한번 결투를 잡아 두어	fix	senses
+sense:toritsuke	約束を取り付けた	약속을 얻어냈다	keep	senses
+lexical:vel-codes	桜庭が天井の照明をつけた。	사쿠라바가 천장 조명을 켰다.	fix	lookup
+lexical:vel-codes	「お風呂、電気付いてなかったよ」	「목욕, 전기 켜지지 않았어」	fix	lookup
+lexical:vel-codes	朝は火の通ったものたーっぷり食べないと	아침은 불이 다닌 것 듬뿍 먹어야 한다	keep	lookup
