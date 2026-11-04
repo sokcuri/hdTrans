@@ -1,7 +1,7 @@
 # 규칙: LEX-3320
 # 규칙: LEX-3321
 rule	input	expected	kind	layer
-dict:word-sense-glosses:1	素妃杏にとって幸いだったのは嫁姑の確執等は無く	has:고부의 확집	fix	defaults
+dict:word-sense-glosses:1	素妃杏にとって幸いだったのは嫁姑の確執等は無く	has:고부의 불화	fix	defaults
 dict:word-sense-glosses:1	結婚しても嫁姑問題なんかは起きそうにない。	has:고부 문제	fix	defaults
 dict:word-sense-glosses:1	あの嫁姑戦争から三日が経った。	has:고부 전쟁	fix	defaults
 dict:word-sense-glosses:1	嫁と姑の仲は良好だ。	lacks:고부	keep	defaults

@@ -12246,7 +12246,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 皆無	전무%A1@	G8L0		Ns	GN							w:27357
 無数	무수%A1@	G8L0			GN							w:27358
 清楚	청초%A1@	G8L0			GN							w:27359
-精強	정강%A1@	G8L0			GN							w:27360
+精強	막강%A1@	G8L0			GN							w:27360
 稀有	희유%A1@	G8L0			GN							w:27361
 端麗	단려%A1@	G8L0			GN							w:27362
 美麗	미려%A1@	G8L0			GN							w:27363
@@ -27548,3 +27548,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 八時限目	8교시	N110			GN			LEX-4710: 八時限目 8교시			はちじげんめ	w:33310
 九時限目	9교시	N110			GN			LEX-4710: 九時限目 9교시			きゅうじげんめ	w:33311
 十時限目	10교시	N110			GN			LEX-4710: 十時限目 10교시			じゅうじげんめ	w:33312
+名艦長	이름난 함장	N110			GN			LEX-4711: 名艦長 이름난 함장			めいかんちょう	w:33313
