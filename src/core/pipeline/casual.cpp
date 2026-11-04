@@ -218,6 +218,32 @@ bool Chitta(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// ([ァ-ヶー]|何)ってんだ: っていうんだ said short after a noun (バットってんだ, 何ってんだ)
+bool NounTteNda(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (Lit(s, p, "何")) {
+    } else {
+        const text::Rune r = text::DecodeRune(s.substr(p));
+        if (!((r.cp >= U'ァ' && r.cp <= U'ヶ') || r.cp == U'ー')) return false;
+        p += r.size;
+    }
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "ってんだ")) return false;
+    m.end = p;
+    return true;
+}
+
+// あんの(に|か): あるの said short (金ならあんのに)
+bool AnNo(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "あんの")) return false;
+    const size_t q = p;
+    if (!OneOf(s, p, U"にか")) return false;
+    m.group[1] = Span(s, q, p);
+    m.end = p;
+    return true;
+}
+
 // ([てで])もう([たて]): the Kansai てしまう (やってもうた, 赤にしてもうて)
 bool Moota(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
@@ -1131,6 +1157,14 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         const Match g = Rematch(m, Chitta);
         if (!g.group[1].empty()) return Cat({g.group[1], "ちゃった"});
         return std::string("んじゃった");
+    });
+    text = ReplaceAll(text, NounTteNda, [](const Match& m) {
+        const Match g = Rematch(m, NounTteNda);
+        return Cat({g.group[1], "っていうんだ"});
+    });
+    text = ReplaceAll(text, AnNo, [](const Match& m) {
+        const Match g = Rematch(m, AnNo);
+        return Cat({"あるの", g.group[1]});
     });
     text = ReplaceAll(text, Moota, [](const Match& m) {
         const Match g = Rematch(m, Moota);
