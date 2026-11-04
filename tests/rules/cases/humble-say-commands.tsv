@@ -18,7 +18,7 @@ dict:w:28451	「申してください」	「말씀드려 주세요」	keep	local
 dict:w:28451	「父が申しておりました」	!rule:dict:w:28451	keep	local
 dict:w:28451	「申すまでもない」	「말씀드릴 것도 없어」	keep	local
 dict:w:28451	「申せません」	「말할 수 없습니다」	keep	local
-dict:w:28451	「失礼を申すが、それは違います」	「실례를 말씀드리지만, 그건 다릅니다」	keep	local
+dict:w:28451	「失礼を申すが、それは違います」	「실례를 말씀드리지만, 그건 아닙니다」	keep	local
 dict:w:28451	「何も申さぬ」	「아무것도 말씀드리지 않는다」	keep	local
 dict:w:28451	「申してみなさい」	「말해 봐」	fix	local
 dict:w:28451	「では申してみるがよい」	「그럼 말해 보도록 해」	fix	local

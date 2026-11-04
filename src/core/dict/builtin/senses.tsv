@@ -1626,3 +1626,7 @@
 吹き出す	뿜어져 나오다	血,鮮血,血しぶき	before	v5
 結く	맺다	縁,契り	before	v5
 洗う	조사하다	身元,経歴,過去,素性,背後,足取り,交友関係,金の流れ	before
+// 叩く: 때리다 with a face, a head or a bottom before it (頬を叩く 뺨을 때리다; spec LEX-4820). 覚える: 외우다 for what one learns by heart, 익히다 for a skill (spec LEX-4820).
+叩く	때리다	頬,ほっぺ,ほっぺた,横っ面,顔,頭,尻,お尻,ケツ	before
+覚える	외우다	単語,英単語,問題,公式,呪文,台詞,セリフ,歌詞,九九,年号,暗号,パスワード,振り付け,手順	before
+覚える	익히다	魔法,技,技術,スキル,やり方,操作,コツ,剣術,呪術,料理	before
