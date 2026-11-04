@@ -1125,10 +1125,9 @@ bool OwnedGroup(const Group* g) { return g != nullptr && !g->entries.empty() && 
 bool Worker::MatchDictionary(std::string_view following, std::string_view source, char first, char second) {
     std::string query;
     for (const ValidityRule& r : ValidityRules()) {
-        const std::string_view rs = r.source;
-        if (rs.starts_with("XX")) {
-            if (r.sourceClass != first) continue;
-        } else if (first != r.sourceClass || second != r.followClass || rs != source) {
+        if (r.sourceClass != first) continue;
+        // A source of XX applies to every word of its class.
+        if ((r.source[0] != 'X' || r.source[1] != 'X') && (second != r.followClass || std::string_view(r.source) != source)) {
             continue;
         }
         std::string_view list = r.first;
