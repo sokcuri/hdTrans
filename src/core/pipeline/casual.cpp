@@ -175,12 +175,12 @@ bool GaNee(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
-// ([っし]|[えけげせぜてでねべめれ]|[見来寝着出居似煮])ちま([うっえいわお])|んじま([うっえいわお]):
+// ([っし]|[えけげせぜてでねべめれ]|[きぎちにひみりびぴ]|[見来寝着出居似煮])ちま([うっえいわお])|んじま([うっえいわお]):
 // てしまう contracted, after the て form of a godan verb, する and a verb in -eru or -iru
-// (言っちまう, 忘れちまう, 見ちまった)
+// (言っちまう, 忘れちまう, 見ちまった, できちまった; a godan stem in -i takes no ちま)
 bool Chimau(std::string_view s, size_t pos, Match& m) {
     size_t p = pos;
-    if (OneOf(s, p, U"っしえけげせぜてでねべめれ見来寝着出居似煮")) {
+    if (OneOf(s, p, U"っしえけげせぜてでねべめれきぎちにひみりびぴ見来寝着出居似煮")) {
         size_t q = p;
         if (Lit(s, q, "ちま")) {
             size_t r = q;
