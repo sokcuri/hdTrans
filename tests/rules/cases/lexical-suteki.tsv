@@ -1,7 +1,7 @@
 # 규칙: LEX-51
 rule	input	expected	kind	layer
 lexical:suteki-adjective	「でも、素敵」	「하지만, 멋져」	fix	lookup
-lexical:suteki-adjective	今日も司令、朝から素敵。	오늘도 사령, 아침부터 멋지다.	fix	lookup
+lexical:suteki-adjective	今日も司令、朝から素敵。	오늘도 사령관, 아침부터 멋지다.	fix	lookup
 lexical:suteki-adjective	あらぁ～…素敵。	어머나~…멋지다.	fix	lookup
 lexical:suteki-adjective	C'est bon! 素敵。	C'est bon! 멋지다.	fix	lookup
 lexical:suteki-adjective	素敵！Honey, 問題ないよね？	멋져! Honey, 문제없지?	fix	lookup

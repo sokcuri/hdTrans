@@ -17,7 +17,7 @@ cx:humble-go:30	「では、改めてご挨拶に参ります」	「그럼, 다�
 cx:humble-go:30	参りますか？	!rule:cx:humble-go:30	keep	rewrites
 cx:humble-go:40	北欧スウェーデンから参りました。	북유럽 스웨덴에서 왔습니다.	fix	rewrites
 cx:humble-go:40	え、援護に参りました…。	어, 원호하러 왔습니다….	fix	rewrites
-cx:humble-go:40	司令、駆逐艦、参りました。	사령, 구축함, 왔습니다.	fix	rewrites
+cx:humble-go:40	司令、駆逐艦、参りました。	사령관, 구축함, 왔습니다.	fix	rewrites
 cx:humble-go:40	約束を守ってまいりました。	!rule:cx:humble-go:40	keep	rewrites
 cx:humble-go:50	この海……共にまいりましょう。	이 바다……모두 갑시다.	fix	rewrites
 cx:humble-go:50	皆さん、参りましょう！	여러분, 갑시다!	fix	rewrites

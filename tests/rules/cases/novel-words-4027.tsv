@@ -26,7 +26,7 @@ cx:novel-fixes-2:530	いかにブラックな会社とはいえ普通１人に�
 cx:novel-fixes-2:530	いかに大切か分かった。	!rule:cx:novel-fixes-2:530	keep	rewrites
 cx:novel-fixes-2:540	中にはテレビや動画サイトで見たことがある者もいるかも知れない。	has:개중에는 텔레비전	fix	rewrites
 cx:novel-fixes-2:540	箱の中には何もない。	상자 안에는 아무것도 없다.	keep	rewrites
-cx:novel-fixes-2:560	ああ、至福。社畜と笑わば笑え。	has:사축이라고 비웃으려면 비웃어라	fix	rewrites
+cx:novel-fixes-2:560	ああ、至福。社畜と笑わば笑え。	has:회사 노예라고 비웃으려면 비웃어라	fix	rewrites
 cx:novel-fixes-2:560	友達と笑う。	!rule:cx:novel-fixes-2:560	keep	rewrites
 cx:de-arou-noun:20	流星は、そこにいるであろう「敵」を蹂躙し	has:거기에 있을 「적」을	fix	rewrites
 cx:de-arou-noun:20	それはそうであろう「」	!rule:cx:de-arou-noun:20	keep	rewrites

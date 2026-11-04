@@ -1,0 +1,37 @@
+# 규칙: LEX-4710
+rule	input	expected	kind	layer
+lexical:sino-gloss	恋の呪縛	사랑의 속박	fix	lookup
+lexical:sino-gloss	誰も異論はない。	아무도 이의는 없다.	fix	lookup
+lexical:sino-gloss	「祝日だからか」	「공휴일이니까인가」	fix	lookup
+lexical:sino-gloss	「最後の奴は不服だが」	「마지막 놈은 불만이지만」	fix	lookup
+lexical:sino-gloss	樹海で会ったあいつに……	숲에서 만난 저 녀석에게……	fix	lookup
+lexical:sino-gloss	秋雲着任！提督、よろしくね	아키구모 부임! 제독, 잘 부탁해	fix	lookup
+lexical:sino-gloss	字面も怖いけど内容も怖かった	글자도 무섭지만 내용도 무서웠다	fix	lookup
+lexical:sino-gloss	やあ、ダン！今日も威勢がいいな！	야, 댄! 오늘도 기세가 좋네!	fix	lookup
+lexical:sino-gloss	６時限目の授業ももうすぐ終わりだ。	6교시 수업도 이제 곧 끝이다.	fix	lookup
+lexical:sino-gloss	さて、今日のお稽古は華道とピアノだ。	자, 오늘의 연습은 꽃꽂이와 피아노다.	fix	lookup
+lexical:sino-gloss	賛否を問うと、まずは千里が勢いよく挙手した。	찬반을 물으니, 우선은 천리가 힘차게 거수했다.	fix	lookup
+lexical:sino-gloss	さぁ、外洋に参りましょう。	자, 원양에 갑시다.	fix	lookup
+lexical:sino-gloss	魔術と 関係ない事象なんて	마술과 관계없는 현상 같은 건	fix	lookup
+lexical:sino-gloss	「……屋敷の家財を処分しているらしいな」	「……저택의 가재도구를 처분하고 있는 것 같네」	fix	lookup
+lexical:sino-gloss	でもまだ機関部は無傷！	하지만 아직 기관부는 무사!	fix	lookup
+lexical:sino-gloss	俺が羊飼いにならないと明言すれば、もう彼に会えないだろう。	내가 양치기가 되지 않는다고 단언하면, 이제 그를 만날 수 없을 것이다.	fix	lookup
+lexical:false-friend	電車の中で寝てしまった。	전철 안에서 자버렸다.	fix	lookup
+lexical:false-friend	敵中を突破せよ！	적진을 돌파하라!	fix	lookup
+lexical:false-friend	「じゃなきゃ、本職やってられませんって」	「그렇지 않으면, 본업 할 수 없다고요」	fix	lookup
+lexical:false-friend	ふっふっふっ、その通り。一切、他意はない	훗훗훗, 그대로. 일절, 딴뜻은 없다	fix	lookup
+lexical:false-friend	調教されてしまう前に自害、自害しないと！	조교되어버리기 전에 자결, 자결해야 해!	fix	lookup
+cx:notice-words-1:126	いいのか、司令？	괜찮아, 사령관?	keep	rewrites
+cx:notice-words-1:126	三つの新しい司令所を設置する	세 개의 새로운 사령소를 설치한다	fix	rewrites
+cx:notice-words-1:126	し、司令……官？	사, 사령……관?	fix	rewrites
+cx:notice-words-1:126	第一海防隊司令海防艦	제1해안 방비대 사령 해방함	fix	rewrites
+cx:notice-words-1:126	司令さん、頑張ってるのね～。	사령관 씨, 노력하고 있구나~.	keep	rewrites
+lexical:false-friend	司令官に報告する。	사령관에 보고한다.	keep	lookup
+lexical:false-friend	司令部より入電。	사령부에서 입전.	keep	lookup
+lexical:false-friend	副長、状況は？	부장, 상황은?	keep	lookup
+lexical:false-friend	強い絆を結んだ艦娘を旗艦とした第一艦隊でリランカ島へ出撃、敵中枢を撃滅せよ！	강한 유대를 묶은 칸무스를 기함으로 한 제1함대로 리란카섬에 출격, 적 중추를 격멸하라!	fix	lookup
+lexical:false-friend	ボールが的中した。	공이 적중했다.	keep	lookup
+lexical:sino-gloss	三時限目の授業	3교시의 수업	fix	lookup
+lexical:sino-gloss	二時限目、体育だっけ	2교시, 체육이었나	fix	lookup
+lexical:sino-gloss	時限を設ける	시한을 마련한다	keep	lookup
+lexical:sino-gloss	時限爆弾が爆発した	시한폭탄이 폭발했다	keep	lookup
