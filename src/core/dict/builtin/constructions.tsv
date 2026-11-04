@@ -1060,6 +1060,8 @@ cx:notice-words-1:120	LEX-4707	&&4 S+0== "いただ" S-1== "を" ||2 A-2== "VFd"
 cx:notice-words-1:122	LEX-4707	&&5 S+0== "言いつけ" D+0== "명령&AV@" S-1== "に" ||2 F-2== "person" F-2== "person-name" !1 <4 S+0== "を" S+0== "00、。！？「」"	set-target "고자질&AV@"	先生に言いつけるわよ 선생님에게 고자질할 거야
 cx:notice-words-1:124	LEX-4708	&&2 S+0== "00一二三四五六七八九" ||4 S+1== "〇" &&2 S+1== "00一二三四五六七八九" S+2== "〇" S-1== "〇" &&2 S-1== "00一二三四五六七八九" S-2== "〇"	map-target @kanji-digit	一三〇〇 1300
 cx:notice-words-1:126	LEX-4710	&&4 S+0== "司令" D+0== "사령관" S+1!= @Rhonorific.constraint ||4 &&2 P+1== "1**" F+1== "touches-prev" S+1== "官" S+2== "官" S+3== "官"	set-target "사령"	司令所 사령소, 司令……官 사령……관
+cx:notice-words-1:128	LEX-4712	&&3 S+0== "感心" F+0== "verb" ||4 I+0== "L感心しない" I+0== "L感心しなかっ" I+0== "L感心しません" &&2 S+1== "な" !1 S+2== "がら"	set-target "좋게 &AY@"	それは感心しないな 그건 좋게 보지 않네; not 感心した, 感心しながら
+cx:notice-words-1:130	LEX-4712	&&2 S+0== "心中" S+1== "する"	set-target "동반자살"	二人は心中した 두 사람은 동반자살했다; not 心中を察する
 //= chau-final	after Select 90	The ちゃう that ends a line inside 「」 or 『』 is speech, not -어버린다: after a verb of what happens to one (verb.involuntary) it is what is about to happen, -ㄹ 것 같아 (出ちゃう 나올 것 같아, 死んじゃう 죽을 것 같아), after another verb -어버릴 거야 (やっちゃう 해버릴 거야). Narration keeps -어버린다.
 cx:chau-final:10	LEX-69	&&5 Y+0== "6버린다" ||4 I+0== "Rちゃう" I+0== "Rじゃう" I+0== "Rちまう" I+0== "Rじまう" ||2 F+0== "quote-end" F+0== "utterance-end" F+0== "quoted" ||3 B+0== @verb.involuntary F+0== "passive" F+0== "lexical-passive"	set-ending "3 것 같아"	「出ちゃう」 나올 것 같아
 cx:chau-final:20	LEX-69	&&4 Y+0== "6버린다" ||4 I+0== "Rちゃう" I+0== "Rじゃう" I+0== "Rちまう" I+0== "Rじまう" ||2 F+0== "quote-end" F+0== "utterance-end" F+0== "quoted"	set-ending "6버릴 거야"	「やっちゃう」 해버릴 거야
