@@ -1,0 +1,17 @@
+# 규칙: GRM-3840
+rule	input	expected	kind	layer
+lookup:tteba	だから、いやらしい目で見ないでってば！！	그러니까, 야한 눈으로 보지 말라니까!!	fix	lookup
+lookup:tteba	もぉ、だから舐めないでってば	도, 그러니까 핥지 말라니까	fix	lookup
+lookup:tteba	立つ鳥が跡を濁さなければ問題ないんですってば。	날아가는새가 말끝을 얼버무리지 않으면 문제없다니까요.	fix	lookup
+cx:tte-final:165	ジョークですってば。	농담이라니까요.	fix	rewrites
+cx:tte-final:165	本当ですってば！	사실이라니까요!	fix	rewrites
+lookup:tteba	もう、わかったってば	벌써, 알았다니까	fix	lookup
+lookup:tteba	やめてってば	그만하라니까	fix	lookup
+lookup:tteba	ねぇ早く答えてってば。	저기 빨리 대답하라니까.	fix	lookup
+cx:tte-final:170	ご主人様？起きてください。ご主人様ってば	주인님? 일어나 주세요. 주인님도 참	fix	rewrites
+cx:tte-final:170	はい！ねえ、提督ってば！ 聞いてる？	네! 있잖아, 제독도 참! 듣고 있어?	fix	rewrites
+cx:tte-final:170	「でもね、この子ってば、根っこの部分には野生的なところが残ってるから」	「그런데, 이 아이는 정말, 뿌리의 부분에는 야생적인 곳이 남아 있으니까」	keep	rewrites
+lookup:tteba	違うってば！	아니라니까!	keep	lookup
+lookup:tteba	大丈夫だってば	괜찮다니까	keep	lookup
+lookup:tteba	かわいいですってば	귀엽다니까요	keep	lookup
+cx:tte-final:165	それはジョークですってば、本当に	!rule:cx:tte-final:165	keep	rewrites
