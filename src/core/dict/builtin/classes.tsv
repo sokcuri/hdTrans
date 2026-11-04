@@ -168,6 +168,7 @@
 //= ko-verb.person-object	Korean verbs that take the person they act on as their object, (을)를: after a verb of verb.ni-partner read so, the person's に is (을)를 (私に勝てる 나를 이길 수 있다, 彼に会った 그를 만났다).
 //= ko-verb.passive-subject	Korean passive verbs whose patient is their subject and never an object (불리다, 끊기다): the を object of a passive read with one, or with 어지다 or 되다, is its subject (名前を呼ばれた 이름이 불렸다); a passive that takes the part or the thing one loses as its object (발을 밟히다, 지갑을 빼앗기다) is not one.
 //= ko-verb.look	Korean verbs of looking and checking whose と finds what follows, -니, unless a person answers it (時計を見ると、早過ぎた 보니, 時刻を確認すると、回っていた 확인하니, 彼女を見ると、彼女は笑った 보자; spec GRM-40, GRM-178).
+//= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
 //= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (近づくと、目に入った 가까워지니 눈에 들어왔다; spec GRM-40).
 //= ko-verb.perceive	Korean verbs of seeing, hearing and noticing (a word matches the end of the last word of a lemma, a phrase such as 정신을 차리다 the end of the lemma), whose と before a state in ている is what one found, -니 (気づくと朝になっていた 눈치채니, 見ると彼女が走ってきた 보니; spec GRM-40).
@@ -2468,6 +2469,11 @@ ko-verb.look	확인하다
 ko-verb.look	검색하다
 ko-verb.look	조사하다
 ko-verb.look	체크하다
+verb.come-to	気づ
+verb.come-to	気付
+verb.come-to	気がつ
+verb.come-to	気が付
+verb.come-to	我に返
 verb.come-upon	驚
 verb.come-upon	吃驚
 verb.come-upon	びっくり

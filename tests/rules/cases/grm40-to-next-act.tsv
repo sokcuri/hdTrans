@@ -55,3 +55,8 @@ rewrite:past-sequence	部屋に入ると、誰もいなかったのだった。	
 rewrite:past-sequence	写真を取り出すと、彼女に見せた。	has:꺼내자	fix	rewrites
 rewrite:past-sequence	ご飯を作ると、食卓を整えた。	밥을 만들자, 식탁을 정돈했다.	keep	rewrites
 rewrite:past-sequence	「こうやって指摘すると、みなさんもおかしな話だと思われるでしょうが、これまで誰も問題にしてきませんでした」	has:지적하면,	fix	rewrites
+rewrite:past-sequence	そこを拾い読みしてみると、彼はにわかに気がついた。	has:보니,	keep	rewrites
+rewrite:past-sequence	目を開くと、桶側胴の鎧を着た若武者が自分のそばに立っているのを見た。	has:뜨니,	fix	rewrites
+rewrite:past-sequence	お雪は何心なく小梨平の方を仰ぐと、そこの坂道を、こちらへ人の下りて来るのを認めました。	has:들이키니,	fix	rewrites
+rewrite:past-sequence	気づくと目の前につぐみがいた。	has:눈치채니	fix	rewrites
+rewrite:past-sequence	気がつくと、ベッドの上にいた。	has:정신을 차려 보니,	keep	rewrites

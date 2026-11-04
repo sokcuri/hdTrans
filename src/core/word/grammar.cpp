@@ -2685,6 +2685,14 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
         LastLemmaWord(full).starts_with("있")) {
         return true;
     }
+    // Coming to (気づくと, 我に返ると) finds where one is, also when the analysis split the end
+    // (気づくと目の前につぐみがいた).
+    if (dict::StartsWithMember(HDTRANS_CLASS("verb.come-to"), std::string(it->group->surface) + std::string(it->DirectSurface())) > 0) {
+        const std::string_view in = std::string_view(last->text).substr(last->start, last->length);
+        for (const std::string_view e : {"がいた", "にいた", "はいた", "もいた", "があった", "にあった", "なっていた"}) {
+            if (in.ends_with(e)) return true;
+        }
+    }
     // A thought finds what follows (そう考えると 그렇게 생각하니, 思い出すと 생각해 내니).
     if (Has(full, "생각")) return true;
     // A phrase (정신을 차리다) matches the whole lemma's end, a word the end of its last word (돌아보다).
@@ -2762,9 +2770,11 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
                                              (q->prev->group->surface == "視界" || q->prev->group->surface == "目" ||
                                               q->prev->group->surface == "眼"))));
     const bool sighted = startled || main->group->surface.starts_with("見かけ") || main->group->surface.starts_with("見掛け") ||
-                         (verbWord == "보다" && q != nullptr &&
-                          (q->group->surface == "のを" ||
-                           (q->group->surface == "を" && q->prev != nullptr && q->prev->group->surface == "の")));
+                         ((verbWord == "보다" || ms.starts_with("認め")) && q != nullptr &&
+                          (q->group->surface == "のを" || (q->DirectIndex() >= 0 && q->DirectSurface().ends_with("のを")) ||
+                           (q->group->surface == "を" && q->prev != nullptr &&
+                            (q->prev->group->surface == "の" ||
+                             (q->prev->DirectIndex() >= 0 && q->prev->DirectSurface().ends_with("の"))))));
     const bool found = in(HDTRANS_CLASS("ko-verb.found"), lemma) || in(HDTRANS_CLASS("ko-verb.found"), mainLemma) ||
                        (subject && !person) || (undergone && !(subject && person)) || arrived || sighted;
     // A sound or a smell (物音がした 소리가 났다), a feeling (気がした), a sight (見えてきた), a gradual change
@@ -2844,12 +2854,16 @@ void PastSequence(Flusher& f) {
         } else if (seeing && !viewpoint && !tara) {
             // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look
             // (彼女を見ると、彼女は笑った 보자).
-            it->AssignDirectSlot(it->DirectIndex(), !to || !PersonAnswers(it, close) ? "2니" : "1자");
+            it->AssignDirectSlot(it->DirectIndex(),
+                                 !to || tried || !PersonAnswers(it, close) || FoundAfterTo(f, it, close) ? "2니" : "1자");
         } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
         } else if (to && dict::InClass(HDTRANS_CLASS("ko-verb.look"), VerbalNounLemma(f, it))) {
             // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look.
-            it->AssignDirectSlot(it->DirectIndex(), PersonAnswers(it, close) && !FoundAfterTo(f, it, close) ? "1자" : "2니");
+            // てみると finds whatever follows (GRM-178: 拾い読みしてみると、彼は気がついた 보니).
+            const bool triedLook = stem.ends_with("てみ") || stem.ends_with("でみ") || (stem == "み" && AfterTeForm(it));
+            it->AssignDirectSlot(it->DirectIndex(),
+                                 !triedLook && PersonAnswers(it, close) && !FoundAfterTo(f, it, close) ? "1자" : "2니");
         } else if (to && (RieulStem(output::Lemma(it->EntryText(it->selected), f.families)) ||
                           (!AdjectiveGloss(it->EntryText(it->selected)) && !FoundAfterTo(f, it, close)))) {
             it->AssignDirectSlot(it->DirectIndex(), "1자");
