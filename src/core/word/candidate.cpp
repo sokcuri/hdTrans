@@ -2200,6 +2200,56 @@ Record* Worker::OverStrayKana(std::string_view full, int cursor, int token, cons
     return best;
 }
 
+// A reading that starts with a particle and runs past it (からか, とかで) yields to the
+// particle alone when the particle and the word after it cover more text than the reading and the
+// word after it (から + かかって, not からか + かって).
+Record* Worker::OverFusedParticle(std::string_view full, int cursor, int token, const Item& c) {
+    const std::string_view source = From(full, cursor).substr(0, static_cast<std::size_t>(c.length));
+    static constexpr std::string_view kParticles[] = {"から", "まで", "とか", "には", "では", "とは", "にも", "でも", "に", "と", "で", "が", "を", "の", "は", "も", "へ"};
+    std::string_view particle;
+    for (const std::string_view p : kParticles) {
+        if (source.starts_with(p) && source.size() > p.size()) { particle = p; break; }
+    }
+    if (particle.empty() || c.detail == nullptr || c.detail->cls == kDetailVerb) return nullptr;
+    // Only a particle reading that runs on (からか, とかで), not a particle of its own (とか, でさえ) nor a
+    // reading of another class (に比べ, もし, といい).
+    const Entry* first = c.group == nullptr ? nullptr : c.group->At(0);
+    if (first == nullptr || first->cls != 'P') return nullptr;
+    // という and のこと are grammar of their own (メアリーといいます, 我が部のこと).
+    // The copula in で (でした, でしょう, です) is no particle either (仰る通りでしたわね).
+    if (source.starts_with("とい") || source.starts_with("のこと") || source.starts_with("もし") || source.starts_with("でし") ||
+        source.starts_with("です")) {
+        return nullptr;
+    }
+    for (const std::string_view whole : {"とか", "でさえ", "さえ", "でも", "には", "では", "とは", "にも", "ても", "とも", "から", "まで", "より", "しか", "こそ", "など", "ばかり", "だけ", "って", "とかって", "とかは", "とかも", "との", "での", "への", "からの", "までの", "にて", "にの"}) {
+        if (source == whole) return nullptr;
+    }
+    auto after = [](Record* r) {
+        while (r != nullptr && r->source.empty()) r = r->child;
+        return r;
+    };
+    auto reach = [&](int at) {
+        const Lookup l = DoLookup(From(full, at), kModeGeneral);
+        int longest = 0;
+        Record* from = l.count == 0 ? nullptr : after(l.records);
+        for (int tries = 0; from != nullptr && tries < 64; tries++, from = after(from->child)) {
+            const Item* w = InsertLateCandidate(full, at, token, from);
+            if (w != nullptr) longest = std::max(longest, w->length);
+        }
+        return longest;
+    };
+    const int longCover = c.length + reach(cursor + c.length);
+    Record* shorter = after(c.group->records);
+    for (int tries = 0; shorter != nullptr && tries < 64; tries++, shorter = after(shorter->child)) {
+        if (shorter->source != particle) continue;
+        const Item* head = InsertLateCandidate(full, cursor, token, shorter);
+        if (head == nullptr || head->length != static_cast<int>(particle.size())) continue;
+        if (head->length + reach(cursor + head->length) > longCover) return shorter;
+        return nullptr;
+    }
+    return nullptr;
+}
+
 // Makes an item from records at full[cursor:], then translates the rest of the token
 // after it; when that fails it retries with the shorter candidates.
 bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent) {
@@ -2228,6 +2278,10 @@ bool Worker::ProcessCandidateRecord(std::string_view full, int cursor, int token
     }
     if (settings.text && candidate != nullptr) {
         if (Record* shorter = OverStrayKana(full, cursor, token, *candidate)) {
+            candidate->group->records = nullptr;
+            return ProcessCandidateRecord(full, cursor, token, shorter, parent);
+        }
+        if (Record* shorter = OverFusedParticle(full, cursor, token, *candidate)) {
             candidate->group->records = nullptr;
             return ProcessCandidateRecord(full, cursor, token, shorter, parent);
         }
