@@ -1302,6 +1302,30 @@ void Worker::BuildSyntheticTransform(std::string_view surface, int token, int of
     Insert(item);
 }
 
+namespace {
+
+bool IsNounSymbol(std::string_view s) {
+    for (std::size_t i = 0; i < s.size(); i++) {
+        const auto c = static_cast<unsigned char>(s[i]);
+        if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) return true;
+        // Roman numerals (Ⅰ, U+2160..218F) and unit squares (㎝, U+3380..33FF).
+        if (c == 0xE2 && i + 2 < s.size() && static_cast<unsigned char>(s[i + 1]) == 0x85) return true;
+        if (c == 0xE3 && i + 2 < s.size() && (static_cast<unsigned char>(s[i + 1]) == 0x8E || static_cast<unsigned char>(s[i + 1]) == 0x8F)) return true;
+        if (c == 0xEF && i + 2 < s.size()) {
+            const auto b = static_cast<unsigned char>(s[i + 1]), d = static_cast<unsigned char>(s[i + 2]);
+            if (b == 0xBC && ((d >= 0x90 && d <= 0x99) || (d >= 0xA1 && d <= 0xBA))) return true;
+            if (b == 0xBD && d >= 0x81 && d <= 0x9A) return true;
+        }
+    }
+    for (const std::string_view m : {"%", "％", "‰", "+", "＋", "-", "－", "−", "×", "÷", "=", "＝", "°", "℃", "$", "＄",
+                                     "¥", "￥", "€", "£", "#", "＃", "&", "＆", "@", "＠", "*", "＊", "/", "／"}) {
+        if (s == m) return true;
+    }
+    return false;
+}
+
+}  // namespace
+
 // A record for text the dictionary does not know: kana and kanji get a transliterated
 // target, everything else is its own target.
 Record* Worker::CreateSyntheticRecord(int token, std::string_view source, bool emptyTarget) {
@@ -1332,8 +1356,10 @@ Record* Worker::CreateSyntheticRecord(int token, std::string_view source, bool e
     else if (IsAlpha(At(source, 0))) category = 2;
     if (category != 0 && symbol) r->partCode = "N600";
     else if (category != 0) r->partCode = "N110";
-    else if (source == "(" || source == ")" || source == "（" || source == "）") r->partCode = "N600";
-    else r->partCode = "N110";
+    // Text with no kana, kanji, digit or letter at its start (?, ？, ♪, ≫) is a mark, never a noun;
+    // unit and sign symbols (%, ＋, ℃, $) and text with a digit or letter in it (+2) still stand for a noun.
+    else if (IsNounSymbol(source)) r->partCode = "N110";
+    else r->partCode = "N600";
     r->attr = category == 1 ? "Nd" : "Nm";
     if (category == 24 && WidthOf(source) == 2) r->attr += "On";
     return r;

@@ -1,0 +1,35 @@
+# 규칙: GRM-3900, GRM-3901, SPC-12, GRM-37, GRM-3662
+rule	input	expected	kind	layer
+analysis:mark-not-noun	けっこう…出すの大変だった？	꽤…내는 것 힘들었어?	fix	analysis
+analysis:mark-not-noun	「オーちゃんも大変だったんじゃないの？	「오짱도 힘들었던 거 아니야?	fix	analysis
+analysis:mark-not-noun	こんなところで何してるの？ 寒いのに。	이런 곳에서 뭐해? 추운데.	keep	analysis
+analysis:mark-not-noun	高嶺君って…コスプレ好きな上に、熟女好き？	타카네 군은…코스프레를 좋아하는 위에, 숙녀 좋아해?	fix	analysis
+analysis:mark-not-noun	うち？ 帰ってきたら うまいもの たらふく食べたいって言ってて。	집? 돌아오면 맛있는 것 배불리 먹고 싶다고 말해.	fix	analysis
+analysis:mark-not-noun	どっちに進撃するの？西？南？	어느 쪽으로 진격하는 거야? 서쪽? 남쪽?	fix	analysis
+analysis:mark-not-noun	大変な一日だった	대단한 하루였다	keep	analysis
+analysis:mark-not-noun	身長は190㎝以上でしょうか	키는 190㎝ 이상입니까	keep	analysis
+analysis:mark-not-noun	特改Ⅰ型駆逐艦	특개Ⅰ형 구축함	keep	analysis
+analysis:mark-not-noun	投票率は９８．４％で、平均を０．１％下回った	투표율은 98.4%로, 평균을 0.1% 밑돌았다	keep	analysis
+analysis:mark-not-noun	「戦闘糧食」(★+6以上)を第1スロに装備。	「전투식량」(★+6 이상)을 제1스로에 장비.	keep	analysis
+dict:jisjk:372190	まずは幽霊って思うべきじゃない？	우선은 유령이라고 생각해야 하는 것이 아니야?	keep	local
+dict:jisjk:372190	そんなことを言うべきじゃない。	그런 말을 해서는 안된다.	keep	local
+dict:jisjk:372190	「そんなこと言うべきじゃない」	「그런 말 해서는 안돼」	keep	local
+dict:jisjk:362128	真影流は受けの剣術と言ったか？	사진류는 접수의 검술이라고 했나?	keep	local
+dict:jisjk:362128	はあ… と言いますと？	하아… 라고 하면?	keep	local
+dict:jisjk:362137	Admiral、これは？ チョコレートのお返しだと言うのか？	Admiral, 이것은? 초콜릿 답례라는 건가?	keep	local
+dict:jisjk:90725	夜は、提督が…作ってくれるって？	밤은, 제독이…만들어 준다고?	fix	local-ending
+dict:jisjk:90725	作ってくれる？	만들어 줄래?	keep	local-ending
+dict:jisjk:373524	ふふっ、どこに行こうというのだ？	후훗, 어디에 가려는 거야?	fix	local
+dict:jisjk:373524	何をしようという気だ	무엇을 하려는 생각이다	keep	local
+cx:tte-final:90	えっ？ 何してるかって？ 読書よ、読書。	어? 뭐하고 있어라고? 독서야, 독서.	fix	rewrites
+cx:tte-final:90	え、突然何言ってんだって？	어, 갑자기 무슨 소리를 하는 거야라고?	fix	rewrites
+cx:tte-final:90	ん？昼に夜戦演習できるかって？できるよ！	응? 낮에 야전 연습할 수 있을까라고? 할 수 있어!	fix	rewrites
+cx:tte-final:90	でもキモい顔の人に付きまといって…？	하지만 징그러운 얼굴의 사람에게 따라다녀라고…?	fix	rewrites
+cx:tte-final:90	新しい艦娘が来たかもって？	새로운 칸무스가 왔는지도라고?	fix	rewrites
+cx:tte-final:90	砲塔が重いかって？	포탑이 무겁냐고?	keep	rewrites
+cx:tte-final:90	美味しかったって？	맛있었다고?	keep	rewrites
+cx:tte-final:90	これって？	이것은?	keep	rewrites
+cx:subject-no:20	仲の良さそうな？	사이가 좋을 것 같은?	keep	rewrites
+cx:subject-no:20	色素の薄い金髪	색소가 옅은 금발	keep	rewrites
+cx:web-fixes-i:120	ヒトヒトマルマル。お弁当食べちゃう？	1100. 도시락 먹어버려?	keep	rewrites
+cx:web-fixes-i:120	お弁当食べちゃう	도시락 먹어버린다	keep	rewrites
