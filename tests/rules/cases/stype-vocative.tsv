@@ -14,7 +14,7 @@ cx:stype-vocative:20	間もなく到着します電車	머지않아 도착하는
 cx:stype-vocative:20	「次に停まります駅」	!rule:cx:stype-vocative:20	keep	rewrites
 cx:stype-vocative:20	こちらでお待ちします。	!rule:cx:stype-vocative:20	keep	rewrites
 cx:stype-vocative:30	「あら、聞きました奥さま？」	「어머, 들었습니까 사모님?」	fix	rewrites
-cx:stype-vocative:30	「こんなところで、どうされましたカーネル殿」	rule:cx:stype-vocative:30=5습니까	fix	rewrites
+cx:stype-vocative:30	「こんなところで、何をしましたカーネル殿」	rule:cx:stype-vocative:30=5습니까	fix	rewrites
 cx:stype-vocative:30	お届けしました料理	!rule:cx:stype-vocative:30	keep	rewrites
 cx:stype-vocative:40	「受け賜りましたマスター」	「받았습니다 마스터」	fix	rewrites
 cx:stype-vocative:40	「…わ、わかりましたご主人様…。」	rule:cx:stype-vocative:40=5습니다	fix	rewrites

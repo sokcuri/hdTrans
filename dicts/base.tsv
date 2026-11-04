@@ -96961,7 +96961,7 @@ ttt	ttt	K110			GN				jisjk:201744
 三つ又	삼거리	I110	VPl		GN				jisjk:72442		
 三つ口	언청이	I110	VHn		GN				jisjk:72439		
 三つ子	세쌍둥이	I110	VHn		GN				jisjk:72443		
-三つ巴	삼파	N110			GN				jisjk:252473		
+三つ巴	삼파전	N110			GN				jisjk:252473		
 三つ折り	삼단 접기	N110			GN				jisjk:252450		
 三つ折れ人形	관절 인형	N110			GN				jisjk:252456		
 三つ指	세 손가락	N110	VBp		GN				jisjk:252497		
@@ -154184,7 +154184,7 @@ ttt	ttt	K110			GN				jisjk:201744
 名乗りを上げ	입후보&AV@	M427			GN	882	||1 &&2 S-1== "に" D-1= "에"	名乗りを上げ 앞에 に가 오면 입후보를 고르고 に를 에로 바꾼다. (미발동: rare-word)	jisjk:103479		
 名乗りを上げ	존재를 밝&AW@	M447			GN				jisjk:144539		
 名乗りを挙げ	경합에 나&AD@	M427			GN				jisjk:144541		
-名乗り出	자신있게 나&AD@	M418			GN				jisjk:364018		
+名乗り出	자청하고 나&AD@	M417			GN				jisjk:364018		
 名乗り始め	칭하기 시작&AV@	M427			GN				jisjk:144527		
 名人	명인	N110	VHn		GN				jisjk:21677		
 名人戦	명인전	N110	VBlVRw		GN				jisjk:253352		

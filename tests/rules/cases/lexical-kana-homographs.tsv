@@ -26,7 +26,7 @@ dict:jisjk:266093	爆雷も問題なし、魚雷もOK、と。	폭뢰도 문제 
 dict:jisjk:266093	問題なし。	문제 없음.	keep	local
 sound:teka-open	てかおかしい	그보다 이상하다	fix	sound
 sound:teka-open	てかイケメン納得だわ	그보다 미남 납득이야	fix	sound
-sound:teka-open	マルサン、マルマル。てかさ、うちらもカタパルト欲しくない？	0300. 그보다, 중 등도 캐터펄트 갖고 싶지 않아?	fix	sound
+sound:teka-open	マルサン、マルマル。てかさ、うちらもカタパルト欲しくない？	0300. 그보다, 우리도 캐터펄트 갖고 싶지 않아?	fix	sound
 sound:teka-open	説教を食らわしてから一週間が経った	lacks:그보다	keep	sound
 sound:teka-open	ここで食べてかない？	여기서 먹어 가지 않아?	keep	sound
 phrase:ならいい	……そう、ならいいけど。	……그래, 그럼 됐지만.	fix	builtin-phrase
