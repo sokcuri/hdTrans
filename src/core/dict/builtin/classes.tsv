@@ -419,7 +419,7 @@
 //= stem.adverse-outcome	Stems of predicates of trouble or embarrassment, which make the (ら)れ of a condition before them the passive (見られたら困る, 見つめられたら照れる).
 //= stem.compound-particle	Verb stems of the compound particles in て after に, と or を (について 에 대해, によって).
 //= stem.contracted-shimau	The contractions of て or で with しまう before its own endings (食べちゃうよ, 飲んじゃうよ, 行っちまうよ, 死んじまうよ).
-//= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます).
+//= stem.request	Stems of the honorific godan verbs in る whose polite forms are written with い (くださいます, いらっしゃいませ, ございます, 仰いました).
 //= stem.subject-predicate	Stems before い of the predicates of existence, quantity or knowing, whose の before them is the subject (人の少ない).
 //= suffix.compound-action	Second halves of the compound verbs of action on someone (睨み付け, 突きつけ, 投げかけ, 責め立て).
 //= suffix.continuative	The polite ending and the auxiliaries and suffixes that a verb's continuative runs into as one verb form (余ります, 余り過ぎる, 余り始める, 余りがち, 余りそうだ).
@@ -6117,6 +6117,7 @@ stem.request	いらっしゃ
 stem.request	おっしゃ
 stem.request	なさ
 stem.request	ござ
+stem.request	仰
 
 stem.subject-predicate	居な
 stem.subject-predicate	いな

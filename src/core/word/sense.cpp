@@ -304,8 +304,24 @@ void ChooseSenses(Flusher& f) {
         if (it->group->At(it->selected)->neighbourAssigned) continue;
         const auto senses = snapshot.Senses().find(it->group->surface);
         if (senses == snapshot.Senses().end()) continue;
+        // A verb sense is of the verb of its dictionary form: a stem whose verbs in the word are all of
+        // another conjugation takes none of it (転がす is no 転がる).
+        const auto otherVerb = [&](const userdict::Sense& s) {
+            if (s.kind < '0' || s.kind > '8') return false;
+            bool verb = false;
+            for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+                const std::string_view code = it->Code(slot);
+                if (At(code, 0) != '4') continue;
+                // The る of an ichidan and a godan verb look alike in a sense key (ひねる), so the two count as one.
+                const char kind = At(code, 2);
+                const auto ru = [](char k) { return k == '7' || k == '8'; };
+                if (kind < '0' || kind > '8' || kind == s.kind || (ru(kind) && ru(s.kind))) return false;
+                verb = true;
+            }
+            return verb;
+        };
         for (const userdict::Sense& s : senses->second) {
-            if (At(it->Code(it->selected), 0) == s.classDigit && Triggered(f, it, s)) {
+            if (At(it->Code(it->selected), 0) == s.classDigit && !otherVerb(s) && Triggered(f, it, s)) {
                 TakeTarget(it, s.classDigit, s.target, {s.triggers.empty() ? Provenance::SenseDefault : Provenance::Sense, s.row});
                 it->adjectival = s.adjective;
                 break;
