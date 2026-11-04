@@ -3930,7 +3930,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いまわし	불길$AB@	H7N0	SFl		GN				jisjk:119856		
 いま一つ	별로	E300			GN				jisjk:361015		
 いま風	현대식	I110			GN				jisjk:202221		
-いみ	금기	N110	UCl		GN				jisjk:126200		
+いみ	의미	N110	UCl		GN				jisjk:126200		
 いみあい	사정	N110			GN				jisjk:150551		
 いみあけ	탈상	N110			GN				jisjk:126203		
 いみがとお	의미가 통&AV@	M428			GN				jisjk:144829		
@@ -12210,7 +12210,6 @@ ttt	ttt	K110			GN				jisjk:201744
 きゅうでん	궁전	N110	VBl		GN				jisjk:173190		-1
 きゅうでんこう	규전공	N120	VElVPl		GN				jisjk:173194		-1
 きゅうでんび	휴전일	N110	UMeVEl		GN				jisjk:173196		-1
-きゅうと	옛 수도	N110	VPl		GN				jisjk:173197		-1
 きゅうとう	급등	N110	VMo	Hd	GN				jisjk:173198		-1
 きゅうどう	궁도	N110	VRw		GN				jisjk:173207		-1
 きゅうなん	구난	N110			GN				jisjk:173210		-1
@@ -14426,7 +14425,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ぐ	꾸물거&AA@	M418			GN				jisjk:90729		
 ぐあい	형편	I110			GN				jisjk:100097		
 ぐあい	상태	I110			GN	5079	||1 S-2== "体"	두 단어 앞이 体이면 ぐあい를 신체의 '상태'로 고른다. (미발동: rare-word)	jisjk:375371		
-ぐい	생각	N110			GN				jisjk:100107		
+ぐい	꾹	N110			GN				jisjk:100107		
 ぐいぐい	벌컥벌컥	E301			GN				jisjk:326		
 ぐういん	우연한 사연	N110			GN				jisjk:176890		-1
 ぐうえい	우작	N110			GN				jisjk:176892		-1
@@ -24892,7 +24891,6 @@ ttt	ttt	K110			GN				jisjk:201744
 じしんけい	지진계	N110	VPe		GN				jisjk:193568		-1
 じしんたい	지진대	N110	VPl		GN				jisjk:193570		-1
 じしんまんまん	자신 만만	N110		Dd	GN				jisjk:193573		-1
-じじ	시사	N110	VCm		GN				jisjk:193574		
 じじ	할아버지	N110	VHnVHn		GN				jisjk:193575		-1
 じじい	할아범	I110	VHn		GN				jisjk:41159		
 じじつうしんしゃ	지지 통신사	N110	VBl		GN				jisjk:193579		-1
@@ -30053,7 +30051,6 @@ ttt	ttt	K110			GN				jisjk:201744
 そんしょう	존칭	N110	UTs		GN				jisjk:201107		-1
 そんしょく	손색	I110			GN				jisjk:41230		
 そんじ	손상&AV@	M427	SFlVPeQHP		GN				jisjk:139070		
-そんじゃ	존자	N110	VHn		GN				jisjk:201109		-1
 そんじょそこら	그 근처	N110	VPl		GN				jisjk:201110		-1
 そんぞく	존속	N110	ULw		GN				jisjk:201114		-1
 そんぞく	존속	N110		Hd	GN				jisjk:201115		-1
