@@ -45,6 +45,14 @@ void Analyze(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, co
     out.spaced = w.spaced;
 }
 
+bool LineHolds(std::string_view line, std::span<const std::string_view> cues, std::span<const std::string_view> skip) {
+    std::string text(line);
+    for (const std::string_view m : skip) {
+        for (std::size_t at = text.find(m); at != std::string::npos; at = text.find(m, at + 1)) text.replace(at, m.size(), m.size(), '|');
+    }
+    return std::ranges::any_of(cues, [&](std::string_view m) { return text.find(m) != std::string::npos; });
+}
+
 bool PoiTicLine(std::string_view line) {
     const auto closes = [](std::string_view s) {
         while (s.starts_with("ー") || s.starts_with("～") || s.starts_with("〜")) s.remove_prefix(std::string_view("ー").size());

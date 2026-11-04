@@ -581,6 +581,9 @@ std::string Key(const Cues& c) {
     if (c.set && !c.cend) return "set";
     if (c.keigo && c.pend) return "keigo-pend";
     if (c.pend) return "pend";
+    // Old speech that ends in a strong particle or か keeps its own ends also beside keigo (重畳でござった。…
+    // 存じられぬ。…大切でござるぞ; REG-6), rather than the 해체 of keigo-casual.
+    if (c.keigo && (c.lastStrong || c.lastKa) && c.arch) return "archaic";
     if (c.keigo) return c.lastStrong || c.lastKa ? "keigo-casual" : "keigo";
     if (c.arch) return "archaic";
     if (c.pany) return "polite-any";

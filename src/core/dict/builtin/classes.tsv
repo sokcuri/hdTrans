@@ -30,6 +30,11 @@
 //= noun.invite-place	Places and gatherings one is invited to with に (うち, 家, パーティー): いらっしゃいませんか after one is 오시지 않겠습니까 (spec LEX-4600).
 //= verb.keep-doing	Stems of verbs one keeps doing (見, 見張, 寝, 待): a ていないと of one that ends the sentence is what one must keep doing, -아야 한다 (spec GRM-3725).
 //= word.wonder	Words of wonder that open a line before a pause (へえ、, ほう、), also as the interjection stage has already written them (헤에, 호오): a verb with な after one is admired, 구나, not forbidden (spec GRM-3723).
+//= word.wh-ask	Question words that ask by themselves in old speech (何, 誰, どこ, なぜ, どう): not before も, でも, か or より, where they are indefinite or embedded (spec GRM-3800).
+//= verb.archaic-threat	Verbs of striking down that make the speaker of old speech threaten, so that 拙者 is 나, not the humble 소인 (spec LEX-23).
+//= noun.itasu-state	Verbal nouns of a feeling or an acceptance before いたす, which state, 하오, rather than declare a will, 하겠소 (spec GRM-3801).
+//= word.self-other	Words for a person that repeat in XもXじゃ, -도 -지 (そなたもそなたじゃ 그대도 그대지; spec GRM-3802).
+//= word.archaic-person	Words for oneself or the listener in old or role speech, as the analysis splits them (拙者, わらわ, 余は, お主, そなた): a line with one is old speech, where the word stage writes its sentence ends in 하오 or plain -다 forms (spec REG-24).
 //= word.leave-taking	Words of taking leave (ありがとうございました, お世話になりました, 失礼します, さようなら): a 御機嫌よう later on the line closing a quoted speech parts, 안녕히 계세요, and greets no one.
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
@@ -372,9 +377,14 @@
 //= sound.stutter-interjection	Syllables of sound.stutter-alone that are interjections anywhere, also before an ellipsis or a dash inside an utterance (……あ……先輩) and before a word they start (あ、明日 아, 내일).
 //= sound.stutter-particle	Syllables of sound.stutter-alone that alone are particles, so before an ellipsis or a dash they stutter the word after them (……と……大丈夫).
 //= speech.female	Speech markers inside an utterance that show the speaker to be a woman (ですわ, かしら, あたし).
+//= speech.humble-cue	Text of a line that speaks humbly to or of a superior (申す, 申し上げ, 存じ, くだされ, 候, べし, a lord in 殿 or 様, an apology such as 面目ない or 不覚): its 拙者 is 소인 (spec LEX-23). ござる alone is the plain ending of the role, no cue; ます and です speak politely to the listener.
+//= speech.humble-lookalike	Text that holds a member of speech.humble-cue and is no humble speech (貴様, 貴殿, 候補, 同様, この様, 申せ).
 //= speech.male	Speech markers inside an utterance that show the speaker to be a man (俺, だぜ, 兄上).
 //= speech.old	Marks of old or lordly speech found anywhere in a line (ておる, のじゃ, 拙者).
 //= speech.old-negative	The classical negative ぬ (ならぬ, 知らぬ), a mark of old speech only before the end of a clause, which 死ぬ is not.
+//= speech.threat-cue	Text of a line that threatens or commands an inferior (貴様, おのれ, せよ, 斬る, ぞ！): its 拙者 is 나, not 소인 (spec LEX-23).
+//= speech.old-self-cue	Text of a line of old speech in which a 妾 is the speaker, 이 몸, not a concubine (わらわ, also as a reading of 妾, じゃ, ておる, おぬし, そなた; spec LEX-4683).
+//= speech.old-self-lookalike	Text that holds a member of speech.old-self-cue and is no old speech (じゃない, じゃあ, それじゃ).
 //= speech.polite	Marks of polite speech found anywhere in a line (です, ます, ください).
 //= speech.polite-lookalike	Words that hold a mark of speech.polite-grammar and are no polite speech (ますます).
 //= speech.polite-grammar	Marks of polite speech found inside a surface, which make the sentence polite (です, ます, ください).
@@ -10382,3 +10392,254 @@ word.degree-adverb	特に
 word.degree-adverb	すげえ
 word.degree-adverb	すげー
 word.degree-adverb	最高に
+word.archaic-person	拙者
+word.archaic-person	それがし
+word.archaic-person	わらわ
+word.archaic-person	余は
+word.archaic-person	余が
+word.archaic-person	余も
+word.archaic-person	余を
+word.archaic-person	余に
+word.archaic-person	朕
+word.archaic-person	わし
+word.archaic-person	儂
+word.archaic-person	ワシ
+word.archaic-person	我輩
+word.archaic-person	吾輩
+word.archaic-person	我が輩
+word.archaic-person	麿
+word.archaic-person	まろ
+word.archaic-person	身共
+word.archaic-person	お主
+word.archaic-person	おぬし
+word.archaic-person	そなた
+word.archaic-person	其方
+word.archaic-person	汝
+word.archaic-person	そち
+word.archaic-person	うぬ
+word.wh-ask	何
+word.wh-ask	なに
+word.wh-ask	なん
+word.wh-ask	誰
+word.wh-ask	だれ
+word.wh-ask	どこ
+word.wh-ask	いずこ
+word.wh-ask	なぜ
+word.wh-ask	何故
+word.wh-ask	どう
+word.wh-ask	どうして
+word.wh-ask	いつ
+word.wh-ask	どれ
+word.wh-ask	どちら
+word.wh-ask	どっち
+word.wh-ask	何者
+word.wh-ask	何処
+word.wh-ask	いかが
+word.wh-ask	如何
+word.wh-ask	何様
+word.wh-ask	何事
+word.wh-ask	何時
+word.wh-ask	何奴
+word.wh-ask	なんの
+word.wh-ask	何の
+word.wh-ask	何で
+word.wh-ask	どういう
+word.wh-ask	如何なる
+word.wh-ask	どなた
+word.wh-ask	どちら様
+verb.archaic-threat	斬る
+verb.archaic-threat	殺す
+verb.archaic-threat	叩き伏せる
+verb.archaic-threat	討つ
+verb.archaic-threat	討ち取る
+verb.archaic-threat	倒す
+verb.archaic-threat	叩き斬る
+verb.archaic-threat	斬り捨てる
+verb.archaic-threat	始末する
+verb.archaic-threat	成敗する
+noun.itasu-state	感服
+noun.itasu-state	敬服
+noun.itasu-state	感心
+noun.itasu-state	感謝
+noun.itasu-state	恐縮
+noun.itasu-state	安堵
+noun.itasu-state	同意
+noun.itasu-state	了承
+noun.itasu-state	同情
+noun.itasu-state	拝察
+noun.itasu-state	推察
+noun.itasu-state	得心
+noun.itasu-state	納得
+noun.itasu-state	満足
+noun.itasu-state	感激
+speech.threat-cue	貴様
+speech.threat-cue	おのれ
+speech.threat-cue	そち
+speech.threat-cue	おぬし
+speech.threat-cue	お主
+speech.threat-cue	うぬ
+speech.threat-cue	せよ
+speech.threat-cue	しろ
+speech.threat-cue	しまえ
+speech.threat-cue	て来い
+speech.threat-cue	てこい
+speech.threat-cue	思え
+speech.threat-cue	斬る
+speech.threat-cue	斬って
+speech.threat-cue	斬り
+speech.threat-cue	斬れ
+speech.threat-cue	殺す
+speech.threat-cue	殺し
+speech.threat-cue	殺さ
+speech.threat-cue	叩き伏せ
+speech.threat-cue	討ち取
+speech.threat-cue	ぞ！
+speech.threat-cue	ぞ。
+speech.threat-cue	ぞ」
+speech.threat-cue	ぞ…
+speech.threat-cue	ぜ！
+speech.threat-cue	ぜ。
+speech.threat-cue	ぜ」
+word.self-other	そなた
+word.self-other	お前
+word.self-other	おぬし
+word.self-other	お主
+word.self-other	貴様
+word.self-other	あなた
+word.self-other	わし
+word.self-other	わらわ
+word.self-other	拙者
+word.self-other	それがし
+word.self-other	親
+word.self-other	子
+word.self-other	奴
+speech.humble-cue	申す
+speech.humble-cue	申し
+speech.humble-cue	申した
+speech.humble-cue	申せぬ
+speech.humble-cue	申さ
+speech.humble-cue	申し上げ
+speech.humble-cue	つかまつ
+speech.humble-cue	仕る
+speech.humble-cue	存じ
+speech.humble-cue	くだされ
+speech.humble-cue	下され
+speech.humble-cue	下さい
+speech.humble-cue	ください
+speech.humble-cue	恐れながら
+speech.humble-cue	聖上
+speech.humble-cue	陛下
+speech.humble-cue	殿下
+speech.humble-cue	上様
+speech.humble-cue	殿様
+speech.humble-cue	お館様
+speech.humble-cue	若殿
+speech.humble-cue	候
+speech.humble-cue	べし
+speech.humble-cue	なり。
+speech.humble-cue	なり」
+speech.humble-cue	なり！
+speech.humble-cue	至らぬ
+speech.humble-cue	失態
+speech.humble-cue	面目ない
+speech.humble-cue	面目次第
+speech.humble-cue	不覚
+speech.humble-cue	目違い
+speech.humble-cue	申し訳
+speech.humble-cue	様、
+speech.humble-cue	様！
+speech.humble-cue	様!
+speech.humble-cue	様っ
+speech.humble-cue	様…
+speech.humble-cue	様。
+speech.humble-cue	様」
+speech.humble-cue	様が
+speech.humble-cue	様は
+speech.humble-cue	様を
+speech.humble-cue	様の
+speech.humble-cue	様に
+speech.humble-cue	様へ
+speech.humble-cue	様から
+speech.humble-cue	様より
+speech.humble-cue	様と
+speech.humble-cue	殿、
+speech.humble-cue	殿！
+speech.humble-cue	殿!
+speech.humble-cue	殿っ
+speech.humble-cue	殿…
+speech.humble-cue	殿。
+speech.humble-cue	殿」
+speech.humble-cue	殿が
+speech.humble-cue	殿は
+speech.humble-cue	殿を
+speech.humble-cue	殿の
+speech.humble-cue	殿に
+speech.humble-cue	殿へ
+speech.humble-cue	殿から
+speech.humble-cue	殿より
+speech.humble-cue	殿と
+speech.humble-lookalike	貴様
+speech.humble-lookalike	貴殿
+speech.humble-lookalike	そなた様
+speech.humble-lookalike	あなた様
+speech.humble-lookalike	お前様
+speech.humble-lookalike	ますます
+speech.humble-lookalike	候補
+speech.humble-lookalike	気候
+speech.humble-lookalike	天候
+speech.humble-lookalike	時候
+speech.humble-lookalike	兆候
+speech.humble-lookalike	居候
+speech.humble-lookalike	斥候
+speech.humble-lookalike	測候
+speech.humble-lookalike	この様
+speech.humble-lookalike	その様
+speech.humble-lookalike	あの様
+speech.humble-lookalike	どの様
+speech.humble-lookalike	同様
+speech.humble-lookalike	左様
+speech.humble-lookalike	斯様
+speech.humble-lookalike	如何様
+speech.humble-lookalike	様々
+speech.humble-lookalike	有様
+speech.humble-lookalike	模様
+speech.humble-lookalike	仕様
+speech.humble-lookalike	異様
+speech.humble-lookalike	一様
+speech.humble-lookalike	多様
+speech.humble-lookalike	殿中
+speech.humble-lookalike	御殿
+speech.humble-lookalike	宮殿
+speech.humble-lookalike	神殿
+speech.humble-lookalike	殿堂
+speech.humble-lookalike	殿方
+speech.humble-lookalike	申せ
+speech.old-self-cue	わらわ
+speech.old-self-cue	じゃ
+speech.old-self-cue	ておる
+speech.old-self-cue	でおる
+speech.old-self-cue	ておった
+speech.old-self-cue	でおった
+speech.old-self-cue	おぬし
+speech.old-self-cue	お主
+speech.old-self-cue	そなた
+speech.old-self-cue	其方
+speech.old-self-cue	のう。
+speech.old-self-cue	ぞよ
+speech.old-self-lookalike	じゃない
+speech.old-self-lookalike	じゃなかった
+speech.old-self-lookalike	じゃあ
+speech.old-self-lookalike	じゃん
+speech.old-self-lookalike	それじゃ
+speech.old-self-lookalike	これじゃ
+speech.old-self-lookalike	じゃね
+speech.old-self-lookalike	わらわら
+speech.old-self-cue	とうない
+speech.old-self-cue	とうござ
+speech.humble-cue	ます
+speech.humble-cue	です
+speech.humble-cue	ませ
+speech.humble-cue	まし
+speech.humble-cue	ございま
+speech.humble-cue	ござりま
+speech.humble-cue	まする

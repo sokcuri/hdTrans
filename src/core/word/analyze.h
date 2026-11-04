@@ -99,6 +99,14 @@ struct Settings {
     std::span<const LineLevel> quoteLevels;
     // Text path: the line uses the tic ぽい (PoiTicLine).
     bool poiTic = false;
+    // Text path: the line speaks humbly to a superior, or threatens or commands an inferior
+    // (LineHolds with speech.humble-cue and speech.threat-cue), read by the construction features
+    // humble-line and threat-line.
+    bool humbleLine = false;
+    bool threatLine = false;
+    // Text path: the line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue: わらわ,
+    // じゃ, ておる, おぬし, そなた), read by the construction feature old-self-line.
+    bool oldSelfLine = false;
     // Text path: the document writes its speech in 「」, so its text outside them is narration.
     bool narrated = false;
     // Text path: the name rows of the document's name list, applied with the snapshot's packs; null
@@ -177,5 +185,8 @@ void Analyze(const tokenizer::Tokens& tokens, const dict::Snapshot& snapshot, co
 // Whether line uses the tic ぽい: ぽい (ぽーい, ぽいぽい) stands alone between marks, or two
 // sentences end in っぽい or ぽい (提督さん、情報見るっぽい？了解っぽい。) (constructions.cpp).
 bool PoiTicLine(std::string_view line);
+
+// Whether line holds a member of cues outside the members of skip (the 様 of 貴様 is no address in 様).
+bool LineHolds(std::string_view line, std::span<const std::string_view> cues, std::span<const std::string_view> skip);
 
 }  // namespace hdTrans::word

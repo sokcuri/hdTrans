@@ -23,7 +23,7 @@ dict:w:28451	「何も申さぬ」	「아무것도 말씀드리지 않는다」	
 dict:w:28451	「申してみなさい」	「말해 봐」	fix	local
 dict:w:28451	「では申してみるがよい」	「그럼 말해 보도록 해」	fix	local
 dict:w:28451	「陛下に申し上げよ」	!rule:dict:w:28451	keep	local
-dict:w:28451	「拙者が申す」	「졸자가 말씀드린다」	keep	local
+dict:w:28451	「拙者が申す」	「소인이 말씀드린다」	keep	local
 dict:w:28451	「ほう。申してみよ」	「호오. 말해 봐라」	fix	local
 dict:w:28451	「早く申さぬか」	rule:dict:w:28451=말&AV@	fix	local
 dict:w:28451	「早く申さんか」	rule:dict:w:28451=말&AV@	fix	local

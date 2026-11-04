@@ -710,6 +710,9 @@ struct LineSpeech {
     bool markedOnly = false;
     bool asked = false;
     bool poiTic = false;
+    bool humble = false;
+    bool threat = false;
+    bool oldSelf = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -987,6 +990,9 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         settings.quoteLevels = s.quoteLevels;
     }
     settings.poiTic = speech.poiTic;
+    settings.humbleLine = speech.humble;
+    settings.threatLine = speech.threat;
+    settings.oldSelfLine = speech.oldSelf;
     settings.narrated = speech.narrated;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
@@ -1123,6 +1129,11 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     if (!options.reference) {
         speech.asked = true;
         speech.poiTic = word::PoiTicLine(facts.text);
+        speech.humble = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.humble-cue")),
+                                        dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
+        speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
+        speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
+                                         dict::ClassMembers(HDTRANS_CLASS("speech.old-self-lookalike")));
         speech.narrated = ctx.narrated;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);
