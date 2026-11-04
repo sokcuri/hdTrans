@@ -3672,6 +3672,10 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
     if (std::string plain = internal::RewriteEmphasis(sounded, ctx, snap); plain != sounded) {
         sounded = internal::WriteSounds(plain, ctx, snap);
     }
+    // What the sound passes leave in an unusual spelling (spec LEX-4822).
+    if (std::string respelled = internal::RewriteSpellingVariants(sounded, ctx, snap); respelled != sounded) {
+        sounded = internal::WriteSounds(respelled, ctx, snap);
+    }
     return PlainSpaces(internal::WriteCries(sounded, ctx, snap));
 }
 
