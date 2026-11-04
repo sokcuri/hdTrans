@@ -2628,6 +2628,61 @@ bool SameSubjectAfter(const Item* it, const Item* last) {
 
 }  // namespace
 
+namespace {
+
+// Whether the sentence ending at last, after the と of item it, tells what was found rather than
+// the next act (spec GRM-40): the と verb is a state that goes on (考え事をしていると) or a thought
+// (そう思うと); the end is a state of being or one an act left, an adjective, a copula, or a sight,
+// a sound or a finding (ko-verb.found: 誰もいなかった, 書かれていた, 暗かった, 目に入った, わかった);
+// or a state in ている follows a new subject or a verb of perceiving (男たちが待っていた, 気づくと
+// 朝になっていた), or a verb of perceiving meets a new subject. Anything else is the next act, -자
+// (立ち上がると、部屋を出て行った 일어서자).
+bool Found(Flusher& f, const Item* it, const Item* last) {
+    const std::string full = output::Lemma(it->EntryText(it->selected), f.families);
+    if (AfterTeForm(it) || full.ends_with("고 있다") || full.ends_with("어 있다") || full.ends_with("아 있다") ||
+        LastLemmaWord(full).starts_with("있")) {
+        return true;
+    }
+    // A thought finds what follows (そう考えると 그렇게 생각하니, 思い出すと 생각해 내니).
+    if (Has(full, "생각")) return true;
+    const bool perceive = std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.perceive")),
+                                              [&](std::string_view v) { return LastLemmaWord(full).ends_with(v); });
+    bool subject = false;
+    for (const Item* x = it->After(); x != nullptr; x = x->next) {
+        const std::string_view s = x->group->surface;
+        if (s == "が" || s == "は" || s == "も" || s == "には" || s == "にも") subject = true;
+        // A verb row that holds its own subject (雨が降る 비가 오다).
+        if (x->detail->Yougo() && x->selected >= 0 && Has(s, "が")) {
+            const std::string own = output::Lemma(x->EntryText(x->selected), f.families);
+            if (Has(own, "이 ") || Has(own, "가 ")) subject = true;
+        }
+        if (x == last) break;
+    }
+    std::string end(last->group->surface);
+    if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
+    const std::string lemma = last->selected >= 0 ? output::Lemma(last->EntryText(last->selected), f.families) : "";
+    const std::string_view word = LastLemmaWord(lemma);
+    // The いる of ている, not the いく of ていく (加わっていった).
+    const bool progressive = AfterTeForm(last) && (last->group->surface == "居" ||
+                                                   (last->group->surface == "い" && !end.starts_with("いっ") &&
+                                                    !end.starts_with("いか") && !end.starts_with("いき")));
+    const bool being = !progressive && (word.starts_with("있") || word.starts_with("없"));
+    // A state an act left (書かれていた 쓰여 있었다, 濡れていた 젖어 있었다), not one going on (降っていた 오고 있었다).
+    const Entry* before = progressive && last->prev->DirectIndex() >= 0 ? last->prev->DirectEntry(last->prev->DirectIndex()) : nullptr;
+    const bool left = before != nullptr && !before->dst.starts_with("1고");
+    const bool found = std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.found")),
+                                           [&](std::string_view v) { return lemma == v || lemma.ends_with(" " + std::string(v)); });
+    // A copula split after its noun (殺風景で + あった).
+    const std::string tail = (last->prev != nullptr && last->prev->DirectIndex() >= 0 ? std::string(last->prev->DirectSurface()) : "") + end;
+    const bool state = being || left || found || last->detail->cls == kDetailKeiyo || tail.ends_with("だった") ||
+                       tail.ends_with("であった") || tail.ends_with("でした") || last->group->surface.starts_with("見え") ||
+                       last->group->surface.starts_with("聞こえ");
+    const bool held = progressive || Has(end, "ていた") || Has(end, "でいた") || end.ends_with("てた") || end.ends_with("でた");
+    return state || (held && (perceive || subject)) || (perceive && subject);
+}
+
+}  // namespace
+
 void PastSequence(Flusher& f) {
     const Item* last = nullptr;
     for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) {
@@ -2639,7 +2694,7 @@ void PastSequence(Flusher& f) {
     if (last == nullptr) return;
     std::string end(last->group->surface);
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
-    // Narration in the present tells its steps as the past does (籠を置くと、籠を見る 바구니를 두니, 바구니를
+    // Narration in the present tells its steps as the past does (籠を置くと、籠を見る 바구니를 두자, 바구니를
     // 본다), a と only, of an act on an object by the subject that goes on.
     const bool past = PastEnd(last);
     const bool present = !end.ends_with("た") && !past && NarratedPresentAct(f, last, end);
@@ -2681,10 +2736,10 @@ void PastSequence(Flusher& f) {
         } else if (it->After() == nullptr || (!paused && !joined)) {
             continue;
         } else if (seeing && !viewpoint && !tara) {
-            it->AssignDirectSlot(it->DirectIndex(), "2니");
+            it->AssignDirectSlot(it->DirectIndex(), !to || Found(f, it, close) ? "2니" : "1자");
         } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
-        } else if (to && RieulStem(output::Lemma(it->EntryText(it->selected), f.families))) {
+        } else if (to && (RieulStem(output::Lemma(it->EntryText(it->selected), f.families)) || !Found(f, it, close))) {
             it->AssignDirectSlot(it->DirectIndex(), "1자");
         } else if (to) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");

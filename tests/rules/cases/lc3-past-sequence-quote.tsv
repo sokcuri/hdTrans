@@ -38,7 +38,7 @@ rewrite:past-sequence	家に着くと仰天した。	has:도착하니	keep	rewri
 rewrite:past-sequence	指先が奥にぶつかると太一はビクンッと仰け反った	lacks:부딪친다고	keep	rewrites
 rewrite:past-sequence	振り返るとぼやけた影が見えた。	has:돌아보니	keep	rewrites
 rewrite:past-sequence	彼女が笑うと察しがついた。	has:웃으니	keep	rewrites
-rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨니	keep	rewrites
+rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨자	keep	rewrites
 rewrite:past-sequence	目を覚ますと決まって彼がいた。	has:뜨면	keep	rewrites
 rewrite:past-sequence	「新人が入ると決まって初日にパーティーを開くんだよ」	has:들어오면	keep	rewrites
 rewrite:past-sequence	ダンディーなお店にはダンディーなマスターがいると決まっている。	has:있다고	keep	rewrites

@@ -166,6 +166,8 @@
 //= ko-verb.holding	Korean verbs of holding, wearing, touching, posture and knowing, whose 고 있던 is the state the action left (抱えていた子供 안고 있던 아이, 忘れていた 잊고 있던); 던 would read as a habit. A phrase that ends in one counts too (이를 악물다).
 //= ko-verb.person-object	Korean verbs that take the person they act on as their object, (을)를: after a verb of verb.ni-partner read so, the person's に is (을)를 (私に勝てる 나를 이길 수 있다, 彼に会った 그를 만났다).
 //= ko-verb.passive-subject	Korean passive verbs whose patient is their subject and never an object (불리다, 끊기다): the を object of a passive read with one, or with 어지다 or 되다, is its subject (名前を呼ばれた 이름이 불렸다); a passive that takes the part or the thing one loses as its object (발을 밟히다, 지갑을 빼앗기다) is not one.
+//= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (読み進めると、わかった 읽어 나가니 알았다, 近づくと、目に入った 다가가니 눈에 들어왔다; spec GRM-40).
+//= ko-verb.perceive	Last words of Korean verbs of seeing, hearing and noticing, whose と before a state in ている is what one found, -니 (気づくと朝になっていた 눈치채니, 見ると彼女が走ってきた 보니; spec GRM-40).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
 //= ko.utterance-end	Last syllables of Korean that ends an utterance, by which a set phrase reads as something said (힘내라, 고마워, 수고하셨습니다).
 //= ko.recall-interjection	The Korean that the sound stage writes only for interjections of noticing (あっ 앗), before which a そうだ standing alone recalls something; not 음, which it writes for うむ and んー too.
@@ -2437,6 +2439,23 @@ ko-verb.passive-subject	덮이다
 ko-verb.passive-subject	둘러싸이다
 ko-verb.passive-subject	에워싸이다
 ko-verb.passive-subject	꺾이다
+ko-verb.found	알다
+ko-verb.found	깨닫다
+ko-verb.found	눈치채다
+ko-verb.found	알아차리다
+ko-verb.found	눈에 들어오다
+ko-verb.found	눈에 띄다
+ko-verb.found	보이다
+ko-verb.found	들리다
+ko-verb.found	놀라다
+ko-verb.found	기겁하다
+ko-verb.found	짐작이 가다
+ko-verb.perceive	보다
+ko-verb.perceive	듣다
+ko-verb.perceive	눈치채다
+ko-verb.perceive	깨닫다
+ko-verb.perceive	알아차리다
+ko-verb.perceive	차리다
 ko-verb.sequence	먹다
 ko-verb.sequence	마시다
 ko-verb.sequence	읽다

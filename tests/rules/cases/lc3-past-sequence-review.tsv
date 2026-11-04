@@ -5,11 +5,11 @@ rewrite:past-sequence	食べてみると想像以上に美味しかった。	has
 rewrite:past-sequence	やってみると予想以上に難しかった。	has:해 보니	fix	rewrites
 rewrite:past-sequence	やってみると予想外に簡単だった。	has:해 보니	fix	rewrites
 rewrite:past-sequence	家に着くと仰天した。	has:도착하니	fix	rewrites
-rewrite:past-sequence	空を見上げると仰向けに倒れた。	has:올려다보니	fix	rewrites
+rewrite:past-sequence	空を見上げると仰向けに倒れた。	has:올려다보자	fix	rewrites
 rewrite:past-sequence	振り返るとぼやけた影が見えた。	has:돌아보니	fix	rewrites
 rewrite:past-sequence	彼女が笑うと察しがついた。	has:웃으니	fix	rewrites
 rewrite:past-sequence	振り返ると想像を絶する光景が広がっていた。	has:돌아보니	fix	rewrites
-rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨니	fix	rewrites
+rewrite:past-sequence	目を開けると決まりきった朝が来た。	has:뜨자	fix	rewrites
 rewrite:past-sequence	目を覚ますと決まって彼がいた。	has:뜨면	fix	rewrites
 rewrite:past-sequence	あいつって決まって遅刻するんだよ。	lacks:녀석이라고	fix	rewrites
 rewrite:past-sequence	「振り返ると、彼女がいた」と彼は語った。	has:돌아보니	fix	rewrites
@@ -17,9 +17,9 @@ rewrite:past-sequence	「ドアを開けたら彼がいた」と彼は言った�
 rewrite:past-sequence	「ドアを開けたら、彼がいた」と彼は言った。	has:열었더니	fix	rewrites
 rewrite:past-sequence	もし雨なら行かないと決めていたが、朝起きると晴れていた。	has:일어나니	fix	rewrites
 rewrite:past-sequence	もし彼が来たらどうしようと悩んでいたが、ドアを開けると誰もいなかった。	has:문을 열자	fix	rewrites
-rewrite:past-sequence	戦いが始まると彼は逃げ出した。	has:시작되니	fix	rewrites
-rewrite:past-sequence	荷物をまとめると部屋を出た。	has:정리하니	fix	rewrites
-rewrite:past-sequence	荷物をまとめると、部屋を出た。	has:정리하니	fix	rewrites
+rewrite:past-sequence	戦いが始まると彼は逃げ出した。	has:시작되자	fix	rewrites
+rewrite:past-sequence	荷物をまとめると部屋を出た。	has:정리하자	fix	rewrites
+rewrite:past-sequence	荷物をまとめると、部屋を出た。	has:정리하자	fix	rewrites
 rewrite:past-sequence	振り返ると素晴らしい景色が広がっていた。	has:돌아보니	fix	rewrites
 rewrite:past-sequence	扉を開けるといやらしい笑みを浮かべた男がいた。	has:열자	fix	rewrites
 rewrite:past-sequence	部屋に入ると普段は無口な彼が笑っていた。	has:들어가니	fix	rewrites
