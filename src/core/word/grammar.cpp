@@ -2347,7 +2347,7 @@ bool Subject(const Item* x) {
 // Whether the と of item x was read as a step of the story (頭を下げると出かけて行った).
 bool Step(const Item* x) {
     const Entry* e = x->DirectEntry(x->DirectIndex());
-    return e != nullptr && (e->dst == "2니" || e->dst == "1자");
+    return e != nullptr && (e->dst == "2니" || e->dst == "1자" || e->dst == "1고는");
 }
 
 // Whether the sentence ending at last tells what happened in a nominalised past (ending.told-past:
@@ -2659,13 +2659,84 @@ std::string VerbalNounLemma(Flusher& f, const Item* it) {
     return output::Lemma(it->prev->EntryText(it->prev->selected), f.families) + word;
 }
 
+// Whether noun item x names a person or an animal: by its sem codes (VHn, VAm, QPN, QNP, QAA..QAH),
+// or as a person's name in the name layer (芹沢).
+bool PersonNoun(Flusher& f, const Item* x) {
+    if (x->detail->Yougo() || x->selected < 0) return false;
+    const std::string_view attr = x->Attr(x->selected);
+    for (std::size_t i = 0; i + 3 <= attr.size(); i += 3) {
+        const std::string_view c = attr.substr(i, 3);
+        if (c == "VHn" || c == "VAm" || c == "QPN" || c == "QNP" || (c >= "QAA" && c <= "QAH")) return true;
+    }
+    // A common word with sem codes of its own (前) or with kana of a word (深さ) is no name.
+    if (!x->Attr(x->selected).empty()) return false;
+    for (std::string_view t = x->group->surface; !t.empty();) {
+        const text::Rune r = text::DecodeRune(t);
+        if (r.cp >= 0x3041 && r.cp <= 0x309F) return false;
+        t.remove_prefix(std::max<std::size_t>(r.size, 1));
+    }
+    const std::vector<dict::Record> names = f.w.snapshot.NameRecords(x->group->surface);
+    return std::any_of(names.begin(), names.end(), [](const dict::Record& r) { return r.codes->sem.HasPrefix("QPN"); });
+}
+
+// Whether the clause of a と at item it and the clause after it, up to last, have one subject: a topic
+// in は before the と (千莉は小さく笑うと、キッチンへ向かった) or a subject right after it (そう言うと
+// 芹沢は、上着を脱ぎ始めた), and nobody else, so the subject goes on to its own next act, -고는
+// (spec GRM-40).
+bool OwnNextAct(Flusher& f, const Item* it, const Item* last) {
+    // Coming, leaving, hearing and asking (研究所を出ると, それを聞くと) lead into what follows, -자;
+    // so does what happened to the doer (訊ねられると) or an attempt (往こうとすると).
+    const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+    const std::string_view input = std::string_view(it->text).substr(it->start, it->length);
+    if (dict::InClass(HDTRANS_CLASS("ko-verb.lead-in"), LastLemmaWord(lemma)) || Has(input, "れる") || Has(input, "られ") ||
+        Has(lemma, "려고") ||
+        (it->prev != nullptr && (it->prev->group->surface == "と" ||
+                                 (it->prev->DirectIndex() >= 0 && it->prev->DirectSurface().ends_with("と"))))) {
+        return false;
+    }
+    const auto marked = [&](const Item* x) {
+        return x->group->surface == "は" && x->prev != nullptr &&
+               !x->prev->detail->Yougo() && x->prev->selected >= 0 &&
+               (PersonNoun(f, x->prev) || !Thing(x->prev->Attr(x->prev->selected)));
+    };
+    // A topic in は before the と spans both clauses; a subject in が there is the と clause's own.
+    int before = 0;
+    for (const Item* x = it->prev; x != nullptr; x = x->prev) {
+        const std::string_view s = x->group->surface;
+        if (s == "。" || InSet(kSentenceEndItems, s) || s == "「" || s == "」" || s == "『" || s == "』") break;
+        if (x->DirectIndex() >= 0 && x->DirectSurface().ends_with("と")) break;
+        if (s == "という" || QuotingAfter(x)) break;
+        if (s == "も" || (!x->detail->Yougo() && s.ends_with("が"))) return false;
+        if (marked(x)) before++;
+    }
+    // A topic in は right after the と with no comma between (そう言うと芹沢は、) is the doer of both; a
+    // subject in が there is someone else's (話すとお爺さんが入ってきた).
+    const Item* x = it->After();
+    int after = 0;
+    if (x != nullptr && x != last && !x->detail->Yougo() && x->next != nullptr && x->next != last && marked(x->next)) {
+        after = 1;
+        x = x->next->next;
+    }
+    if (x != nullptr && x->group->surface == kJaComma) x = x->next;
+    // Anyone else named in the main clause answers the と (撫でると、彼女は目を細めた; 告げると、
+    // みんな集まってきた).
+    for (; x != nullptr; x = x->next) {
+        const std::string_view s = x->group->surface;
+        if (s == "が" || s == "は" || s == "も" || s == "には" || s == "にも") return false;
+        if (x->detail->Yougo() && Has(s, "が")) return false;
+        if (!x->detail->Yougo() && x->selected >= 0 && PersonNoun(f, x)) return false;
+        if (x == last) break;
+    }
+    return before + after == 1;
+}
+
 // Whether a person or an animal, as the subject after the と of item it, answers it with an act of
 // their own before last (彼女を見ると、彼女は笑った).
-bool PersonAnswers(const Item* it, const Item* last) {
+bool PersonAnswers(Flusher& f, const Item* it, const Item* last) {
     for (const Item* x = it->After(); x != nullptr && x != last; x = x->next) {
         const std::string_view s = x->group->surface;
         if ((s == "が" || s == "は" || s == "も") && x->prev != nullptr && x->prev->selected >= 0 &&
-            (Has(x->prev->Attr(x->prev->selected), "VH") || Has(x->prev->Attr(x->prev->selected), "VA"))) {
+            PersonNoun(f, x->prev)) {
             return true;
         }
     }
@@ -2707,8 +2778,7 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
             subject = true;
             // A person or a voice acts or answers (貴族から賛成の声が上がった), no sight that came.
             if (x->prev != nullptr && x->prev->selected >= 0 &&
-                (Has(x->prev->Attr(x->prev->selected), "VH") || Has(x->prev->Attr(x->prev->selected), "VA") ||
-                 x->prev->group->surface.ends_with("声"))) {
+                (PersonNoun(f, x->prev) || x->prev->group->surface.ends_with("声"))) {
                 person = true;
             }
         }
@@ -2855,7 +2925,7 @@ void PastSequence(Flusher& f) {
             // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look
             // (彼女を見ると、彼女は笑った 보자).
             it->AssignDirectSlot(it->DirectIndex(),
-                                 !to || tried || !PersonAnswers(it, close) || FoundAfterTo(f, it, close) ? "2니" : "1자");
+                                 !to || tried || !PersonAnswers(f, it, close) || FoundAfterTo(f, it, close) ? "2니" : "1자");
         } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
         } else if (to && dict::InClass(HDTRANS_CLASS("ko-verb.look"), VerbalNounLemma(f, it))) {
@@ -2863,10 +2933,10 @@ void PastSequence(Flusher& f) {
             // てみると finds whatever follows (GRM-178: 拾い読みしてみると、彼は気がついた 보니).
             const bool triedLook = stem.ends_with("てみ") || stem.ends_with("でみ") || (stem == "み" && AfterTeForm(it));
             it->AssignDirectSlot(it->DirectIndex(),
-                                 !triedLook && PersonAnswers(it, close) && !FoundAfterTo(f, it, close) ? "1자" : "2니");
+                                 !triedLook && PersonAnswers(f, it, close) && !FoundAfterTo(f, it, close) ? "1자" : "2니");
         } else if (to && (RieulStem(output::Lemma(it->EntryText(it->selected), f.families)) ||
                           (!AdjectiveGloss(it->EntryText(it->selected)) && !FoundAfterTo(f, it, close)))) {
-            it->AssignDirectSlot(it->DirectIndex(), "1자");
+            it->AssignDirectSlot(it->DirectIndex(), !FoundAfterTo(f, it, close) && OwnNextAct(f, it, close) ? "1고는" : "1자");
         } else if (to) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
         } else if (tara && OtherSubject(f, it)) {

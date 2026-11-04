@@ -18,4 +18,4 @@ rewrite:past-sequence	テレジアの父、ヴァーゲル公爵が憤然とし�
 rewrite:past-sequence	未だ蒼ざめているテレジアが微かに首を振ると、ハッとしたように口を押えて言い直した。	has:젓자,	keep	rewrites
 rewrite:past-sequence	元気よく朝の挨拶をすると、クラスメイトがどーっと集まってきた。	has:하자,	keep	rewrites
 rewrite:past-sequence	そこまで話すとお爺さんがお茶を持って部屋に入ってきた。	has:이야기하자	keep	rewrites
-rewrite:past-sequence	彼は立ち上がると、部屋を出て行った。	has:일어서자,	keep	rewrites
+rewrite:past-sequence	彼は立ち上がると、部屋を出て行った。	has:일어서고는,	keep	rewrites
