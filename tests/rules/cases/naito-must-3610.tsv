@@ -1,7 +1,7 @@
 # 규칙: GRM-3610, GRM-3565
 rule	input	expected	kind	layer
 cx:naito-must:20	ヒトサンマルマル。食べたね。運動しないと。	1300. 먹었네. 운동해야 한다.	fix	rewrites
-cx:naito-must:20	しっかり護衛しないと。	확실히 호위해야 한다.	fix	rewrites
+cx:naito-must:20	しっかり護衛しないと。	제대로 호위해야 한다.	fix	rewrites
 cx:naito-must:20	「ええ、台本のチェックをしないと」	「네, 각본 체크를 해야 해」	fix	rewrites
 cx:naito-must:20	江風、少し自重しないと…本当に…お姉さんは心配です…。	has:조금 자중해야 한다…	fix	rewrites
 cx:naito-must:20	こちらは…あ…補給もしないと…開発はどうしよう？	has:보급도 해야 한다…	fix	rewrites

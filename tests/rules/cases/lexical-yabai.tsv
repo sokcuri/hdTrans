@@ -27,7 +27,7 @@ cx:yabai-exclaim:7	強すぎてやばい奴	!rule:cx:yabai-exclaim:7	keep	rewrit
 cx:yabai-exclaim:7	やばい薬だろう	!rule:cx:yabai-exclaim:7	keep	rewrites
 dict:i:7790	「ここで会ったが百年目だ！」	「여기서 만난 이상 끝장이야!」	fix	lookup
 cx:hyakunen-me:10	お前の悪運も今日で百年目だ	네 악운도 오늘로 끝장이다	fix	rewrites
-cx:hyakunen-me:10	貴様の命も百年目だ！	네놈의 생명도 끝장이다!	fix	rewrites
+cx:hyakunen-me:10	貴様の命も百年目だ！	네놈의 목숨도 끝장이다!	fix	rewrites
 cx:hyakunen-me:10	創業百年目の老舗	!rule:cx:hyakunen-me:10	keep	rewrites
 cx:hyakunen-me:10	今年で百年目になる	!rule:cx:hyakunen-me:10	keep	rewrites
 cx:yabai-exclaim:10	ヤバい？ どうしよう	!rule:cx:yabai-exclaim:10	keep	rewrites

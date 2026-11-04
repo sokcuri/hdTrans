@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:novel-fixes-3:50	「ども。三上悟です。緊張なんてしなくても大丈夫ですよ。」	has:「안녕하세요. 미카미 사토루입니다.	fix	rewrites
 cx:novel-fixes-3:50	「よーっす」	!rule:cx:novel-fixes-3:50	keep	rewrites
 cx:novel-fixes-3:60	田村はたまたま同じ大学でして、会社の研修会で意気投合してね。それ以来の付き合いなんです。	has:그 이후로 알고 지내는 사이입니다	fix	rewrites
-cx:novel-fixes-3:60	お前とは、俺がガキの頃からの付き合いで、以来ずっと一緒だ。	has:무렵부터 알고 지내는 사이로	fix	rewrites
+cx:novel-fixes-3:60	お前とは、俺がガキの頃からの付き合いで、以来ずっと一緒だ。	has:때부터 알고 지내는 사이로	fix	rewrites
 cx:novel-fixes-3:60	会社の付き合いで飲みに行った。	!rule:cx:novel-fixes-3:60	keep	rewrites
 cx:novel-fixes-3:120	風呂に沈めて、電気流して、データを完全に消去してやってくれ・・・	has:욕조에 가라앉혀	fix	rewrites
 cx:novel-fixes-3:120	風呂に入って寝た。	!rule:cx:novel-fixes-3:120	keep	rewrites

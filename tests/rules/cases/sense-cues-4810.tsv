@@ -1,0 +1,87 @@
+# 규칙: LEX-4810, LEX-4811, LEX-4812, LEX-4813, LEX-4814, LEX-4815
+rule	input	expected	kind	layer
+cx:sense-cues-1:10	図書部全体の問題にするわけにはいかないので、俺一人が背負ったのだ。	도서부 전체가 문제삼을 수는 없기 때문에, 나 혼자가 짊어졌다.	fix	rewrites
+cx:sense-cues-1:12	「（ほら、一人じゃ入りにくいでしょう？）」	「(자, 혼자는 들어오기 어려울 거예요?)」	fix	rewrites
+cx:sense-cues-1:14	このことを知っておるのは わし一人になって	이 일을 알고 있는 것은 나 혼자가 되어	fix	rewrites
+cx:sense-cues-1:12	でも 俺一人じゃ無理かもな	하지만 나 혼자는 무리일지도	fix	rewrites
+cx:sense-cues-1:14	三人の少女のためだ 一人になれ	세 명의 소녀를 위해서다 혼자가 되어라	fix	rewrites
+cx:sense-cues-1:10	俺一人に任せられないと ご判断された理由を	나 혼자에 맡길 수 없으면 판단하신 이유를	fix	rewrites
+cx:sense-cues-1:12	「僕、暗くて、怖くて、寂しくて……。このままずっと一人だと思っていた……」	「나, 어둡고, 무섭고, 외로워서……. 이대로 계속 혼자라고 생각했어……」	fix	rewrites
+cx:sense-cues-1:14	　ようやく兄を引き離して一人になれた時間。	 드디어 형을 갈라 놓아 혼자가 될 수 있었던 시간.	fix	rewrites
+cx:sense-cues-1:10	スタッフの一人が尋ねる。	스태프의 한 사람이 묻는다.	keep	rewrites
+cx:sense-cues-1:10	あと一人来る	더 한 사람 온다	keep	rewrites
+cx:sense-cues-1:10	坊や一人くらいは誑かしておかねばな	아가 한 사람 정도는 광 빌려주어 두지 않으면	keep	rewrites
+cx:sense-cues-1:12	「誰か一人じゃなく、みんなの影響じゃないか？」	「누군가 한 사람이 아니고, 모두의 영향이 아니야?」	keep	rewrites
+cx:sense-cues-1:10	一人の女の子が立ちすくんでいた。	한 사람의 여자아이가 꼼짝달싹 못하고 있었다.	keep	rewrites
+cx:sense-cues-1:14	「指揮系統が一人になった弊害ね……」	「지휘 계통이 한 사람이 된 폐해네……」	keep	rewrites
+cx:sense-cues-1:20	んん 幼稚園の頃の善子ちゃん いつも言ってたんです	으응 유치원 때의 요시코짱 언제나 말했습니다	fix	rewrites
+cx:sense-cues-1:20	　友達の妹さんが小学二年生の頃の話、だそうだ。	 친구의 여동생이 초등학교 2학년생 때 이야기, 라고 한다.	fix	rewrites
+cx:sense-cues-1:20	梅雨の季節ですね。MO作戦の頃を思い出します。あのときもスコールが……ね、瑞鶴？	장마의 계절이군요. MO 작전 때를 떠올립니다. 그 때도 스콜이……, 즈이카쿠?	fix	rewrites
+cx:sense-cues-1:20	ふ……、なんだかヘンな感じだよ。あいつとは、ガキの頃からずーっと、一緒だったからなあ……。	후……, 왠지 이상한 느낌이야. 저 녀석과는, 녀석 때부터 계속, 함께였으니까…….	fix	rewrites
+cx:sense-cues-1:20	おまえとは、ずっとガキの頃から友達だったみたいな気がするんだ。	너란, 계속 녀석 때부터 친구였던 것 같은 생각이 드는 거야.	fix	rewrites
+cx:sense-cues-1:20	お前とは、俺がガキの頃からの付き合いで、以来ずっと一緒だ。	너와는, 내가 녀석 때부터 알고 지내는 사이로, 이래 계속 함께다.	fix	rewrites
+cx:sense-cues-1:20	そういえばガキの頃あそこの売り物を拝借してひどく怒られたっけ。	그러고 보니 녀석 때 저기의 파는 물건을 빌려 몹시 혼났나.	fix	rewrites
+cx:sense-cues-1:20	７月の初め頃、俺は芹沢さんと一緒にいた。	7월초 무렵, 나는 세리자와 씨와 함께 있었다.	keep	rewrites
+cx:sense-cues-1:20	「その頃にはまだヘイディオは存在していません」	「그 무렵에는 아직 헤이디오는 존재하고 있지 않습니다」	keep	rewrites
+cx:sense-cues-1:20	東雲の頃に目が覚めた。	새벽 무렵에 깨어났다.	keep	rewrites
+cx:sense-cues-1:20	「最初の頃はゆで卵にマヨネーズを混ぜて作ってたんだけどね……」	「처음의 무렵은 삶은 달걀에 마요네즈를 섞어 만들고 있었는데……」	keep	rewrites
+cx:sense-cues-1:20	気が付いたのは小学校のお受験前の頃。	깨달은 것은 초등학교의 수험 전 무렵.	keep	rewrites
+cx:sense-cues-1:30	俺の命をもって	내 목숨을 가지고	fix	rewrites
+cx:sense-cues-1:30	また誰かの命が 奪われるかと思うと	또 누군가의 목숨이 빼앗길까 하고 생각하면	fix	rewrites
+cx:sense-cues-1:30	百人の仲間の命を切り捨てることを選んだ	백 명 동료의 목숨을 버리는 것을 선택했다	fix	rewrites
+cx:sense-cues-1:30	私は 人の命を盾にするのが 許せないだけ。	나는 사람의 목숨을 방패로 하는 것이 용서할 수 없는 것뿐.	fix	rewrites
+cx:sense-cues-1:30	ジョンは私の命をいろんな意味で 何度も救ってくれました	존은 제 목숨을 여러 가지 의미로 몇 번이나 구해 주었습니다	fix	rewrites
+cx:sense-cues-1:30	敵のために 自分の命を 投げ出そうとするんじゃねえ！	적을 위해 자신의 목숨을 내던지려고 하지 마!	fix	rewrites
+cx:sense-cues-1:30	≪どうか忘れないで欲しい。キミたちの命は、我々の手の中にあるということを≫	≪제발 잊지 말았으면 좋겠다. 너희의 목숨은, 우리의 손안에 있다는 것을≫	fix	rewrites
+cx:sense-cues-1:30	「けど、人の命を預かるというのはやはり胃が痛いわね」	「하지만, 사람의 목숨을 맡는다는 건 역시 위가 아프네」	fix	rewrites
+cx:sense-cues-1:30	今まで何度も命の危険はあったけれど	지금까지 몇 번이나 생명의 위험은 있었지만	keep	rewrites
+cx:sense-cues-1:30	命を持つものでありながら	생명을 가지는 것이면서	keep	rewrites
+cx:sense-cues-1:30	あの方は ご自分の命より 他人の命を重んじる方であります	그 분은 자신의 생명보다 타인의 생명을 존중하는 편입니다	keep	rewrites
+cx:sense-cues-1:30	地上に住む者達の命を支え続けていた。	지상에 사는 사람들의 생명을 계속 지탱하고 있었다.	keep	rewrites
+cx:sense-cues-1:30	「声が命なのに、喉が痛かったんです」	「목소리가 생명인데, 목이 아팠습니다」	keep	rewrites
+cx:sense-cues-1:42	「今の調子で一年間しっかり勉強すれば、きっと合格できると思うわ」	「지금의 상태로 1년간 제대로 공부하면, 분명 합격할 수 있다고 생각해」	fix	rewrites
+cx:sense-cues-1:42	「これは参加賞。しっかり飲んで健康になってね」	「이건 참가상. 제대로 마시고 건강하게 돼」	fix	rewrites
+cx:sense-cues-1:42	しっかり煮込むことで、汁を出してそれを混ぜ込んでいる。	제대로 삶음으로써, 국물을 내 그것을 섞어 넣고 있다.	fix	rewrites
+cx:sense-cues-1:42	うむ。しっかり混ぜないと、天和地和の連続になってしまうからな	음. 제대로 섞지 않으면, 텐나지화의 연속으로 되어버리니까	fix	rewrites
+cx:sense-cues-1:40	それに。お金の無駄遣いは良くないわ。妻として、財布の紐はしっかり握っておかないと	게다가. 돈의 낭비는 좋지 않아. 아내로서, 지갑끈은 꽉 잡아 두어야 한다	fix	rewrites
+cx:sense-cues-1:42	ちょっと、しっかり見てよ。越後屋の未来はお兄ちゃんの股間にかかってるんだからね	잠깐, 제대로 봐. 에치고야의 미래는 오빠의 가랑이에 걸려 있으니까	fix	rewrites
+cx:sense-cues-1:40	「しっかりつかまって」	「꽉 잡혀」	fix	rewrites
+cx:sense-cues-1:42	今でもしっかり覚えているさ。	지금도 확실히 기억하고 있고 말이야.	keep	rewrites
+cx:sense-cues-1:42	何？今は備蓄はしっかりあるだと？	뭐? 지금은 비축은 확실히 있는이라면?	keep	rewrites
+cx:sense-cues-1:42	でも、けじめはしっかりつけないと」	하지만, 매듭은 확실히 지어야 한다」	keep	rewrites
+cx:sense-cues-1:42	……しっかりしてるな。	……확실히 하고 있구나.	keep	rewrites
+cx:sense-cues-1:42	帝都脱出の鍵になる情報しっかりつかんで来たっす！	제국의 수도 탈출의 열쇠가 되는 정보 확실히 잡아 왔어요!	keep	rewrites
+cx:sense-cues-1:50	もう！イヤだって言ったのに、どうして入れるのっ。お兄ちゃんのヘンタイエロ魔神！	정말! 싫다고 말했는데, 왜 들어갈 수 있다. 오빠의 헨타이 에로 마신!	fix	rewrites
+cx:sense-cues-1:50	もう！ だから 思いっ切りと言ってるのに…	정말! 그러니까 마음껏이라고 말하는데…	fix	rewrites
+cx:sense-cues-1:50	「もう！大丈夫だから！心配しないで！	「정말! 괜찮으니까! 걱정하지 마!	fix	rewrites
+cx:sense-cues-1:50	もうさ、外を歩いてる人やテレビの楽しそうな笑い声すら耳障りなの。	정말, 밖을 걷고 있는 사람이나 텔레비전의 즐거운 듯한 웃음소리조차 귀에 거슬리는 거야.	fix	rewrites
+cx:sense-cues-1:50	もうさ、明かりに引き寄せられる蛾のようにフラフラっと、その人の手を取った。	정말, 빛에 끌어당길 수 있는 나방처럼 비틀비틀, 그 사람의 손을 잡았다.	fix	rewrites
+cx:sense-cues-1:50	もうさ、超いい匂いするし、声がさ、頭に残るっていうか、じんと染み入るっていうか。	정말, 매우 좋은 냄새하고, 목소리가, 머리에 남는다고 하는지, 찡 스며든다고 할까.	fix	rewrites
+cx:sense-cues-1:50	の、覗くな！ このクソ提督！ も、もう！	드, 들여다 보지 마! 이 빌어먹을 제독! 저, 정말!	fix	rewrites
+cx:sense-cues-1:50	もうあまり時間がありませんからねー	이제 너무 시간이 없으니까요―	keep	rewrites
+cx:sense-cues-1:50	それがなくなってしまっては、もう……、もう……っ」	그것이 없어져버려서는, 이제……, 이제……」	keep	rewrites
+cx:sense-cues-1:50	もうあげたから！	벌써 주었으니까!	keep	rewrites
+cx:sense-cues-1:50	「もうあきらめてるから、クラスの連中にはイチイチ言わないんだけどさ」	「이제 포기하고 있으니, 반의 무리에게는 이치이치 말하지 않는데」	keep	rewrites
+cx:sense-cues-1:60	「ゆ、ゆうくんの……その気持ち……絶対、本気じゃない……」	「유, 유 군의……그 마음……절대, 진심이 아니야……」	fix	rewrites
+cx:sense-cues-1:60	付き合えなくても、俺の気持ちは変わらない。	사귈 수 없어도, 내 마음은 변함없다.	fix	rewrites
+cx:sense-cues-1:60	兄貴の気持ちを考えてなかった	형의 마음을 생각하지 않았다	fix	rewrites
+cx:sense-cues-1:60	相手の気持ちを知りたいと思うから身体でも求めるんだ。リコは順序が逆だったのかもね	상대의 마음을 알고 싶다고 생각하니까 신체라도 구하는 거야. 리코는 순서가 반대였던 걸지도	fix	rewrites
+cx:sense-cues-1:60	雛たち三人の気持ちをね	병아리들 세 명의 마음을	fix	rewrites
+cx:sense-cues-1:60	はぁ…勝手な人です。私の気持ちを、こんなにも無視して迫るなんて	하아…제멋대로인 사람입니다. 내 마음을, 이렇게도 무시해 다가오다니	fix	rewrites
+cx:sense-cues-1:60	「首なんかひねって……ゆうくんは、千里の気持ちがわからない？」	「고개는 갸웃해……유 군은, 천리의 마음을 몰라?」	fix	rewrites
+cx:sense-cues-1:60	皐月が先生に負けそうになって、俺は自分の気持ちに気付いた。	5월이 선생님에게 질 뻔해서, 나는 자신의 마음을 알아차렸다.	fix	rewrites
+cx:sense-cues-1:60	すごく気持ちいい	정말 기분 좋다	keep	rewrites
+cx:sense-cues-1:60	「お母さん、今のお気持ちを一言――」	「엄마, 지금의 기분을 한마디――」	keep	rewrites
+cx:sense-cues-1:60	ねぇ、どんな気持ち？	저기, 어떤 기분?	keep	rewrites
+cx:sense-cues-1:60	うさぎの着ぐるみを着た奴がやってきた俺の気持ちを考えろよ！	토끼의 인형을 입은 놈이 온 내 기분을 생각해라!	keep	rewrites
+cx:sense-cues-1:60	これがレナに捕食される沙都子や梨花ちゃんの気持ちか…。	이것이 레나에게 포식되는 사토코나 리카짱의 기분인가….	keep	rewrites
+cx:sense-cues-1:22	いい頃だと思って電話した	좋은 때라고 생각해 전화했다	fix	rewrites
+cx:sense-cues-1:22	君と話をしてもいい頃だな	너와 이야기를 해도 되는 때네	fix	rewrites
+cx:sense-cues-1:22	あの頃はよかった	그 무렵은 좋았다	keep	rewrites
+cx:sense-cues-1:40	「もちろん。公私共々しっかり支えます」	「물론. 공사 다 같이 제대로 지탱합니다」	keep	rewrites
+cx:sense-cues-1:40	指のすき間からしっかり見ますので	손가락의 빈틈에서 제대로 보기 때문에	keep	rewrites
+cx:sense-cues-1:10	店内には柏木一人しかいない。	가게 안에는 카시와기 혼자밖에 없다.	fix	rewrites
+cx:sense-cues-1:10	業なんてものを貴様一人に背負わせてはやらん。	업 같은 것을 네놈 혼자에 짊어지게 해 주지 않아.	fix	rewrites
+cx:sense-cues-1:10	自分一人いれば勝てるとわかっていて	자신 혼자 있으면 이길 수 있다고 알고 있어	fix	rewrites
+cx:sense-cues-1:12	今、妹ちゃん一人なの？	지금, 여동생 혼자야?	fix	rewrites
+cx:sense-cues-1:10	シンシア様のお母上一人しか子供がおらず	신시아님의 어머님 한 사람밖에 아이가 있지 않고	keep	rewrites
