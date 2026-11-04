@@ -239,7 +239,7 @@ if(NOT EMSCRIPTEN)
         if(HDTRANS_PYTHON)
             foreach(tool union-tsv accept-cases chrf rule-ids verdicts count-class hygiene pass-mutation
                     construction-cases audit blind new-pairs perf-budget perf-base fuzz variants nn-rows
-                    kana-spelling affected sets judge-packet)
+                    kana-spelling affected sets judge-packet spec-ids)
                 add_test(NAME tools.${tool} COMMAND "${HDTRANS_PYTHON}" -I
                     "${CMAKE_CURRENT_SOURCE_DIR}/tools/${tool}.py" --self-test)
             endforeach()
@@ -263,6 +263,9 @@ if(NOT EMSCRIPTEN)
             # The verb nominals table (builtin/extra/verb_nominals.tsv) is the one the dictionaries give.
             add_test(NAME dicts.verb-nominals COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/verb-nominals.py" --check "${CMAKE_CURRENT_SOURCE_DIR}/dicts")
+            # Every rule id has one section in spec/, and the case files name only ids that have one.
+            add_test(NAME spec.ids COMMAND "${HDTRANS_PYTHON}" -I
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/spec-ids.py" --check "${CMAKE_CURRENT_SOURCE_DIR}")
             # Every row of the construction table has a fix and a keep rule case.
             add_test(NAME rules.constructions COMMAND "${HDTRANS_PYTHON}" -I
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/construction-cases.py" --check)
