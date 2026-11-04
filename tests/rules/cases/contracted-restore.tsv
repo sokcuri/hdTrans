@@ -23,7 +23,7 @@ sound:contracted-auxiliaries	やったるで。	해 줄 거야.	keep	sound
 sound:contracted-auxiliaries	ビミョーな魚雷でも、なんとかやったるぜ！	미묘한 어뢰로도, 어떻게든 해 준다!	keep	sound
 sound:contracted-auxiliaries	んっ、敵艦隊発見したぜ、やったるぜぇ、合戦準備！	읏, 적함대 발견했다구, 해 준다, 전투 준비!	keep	sound
 sound:contracted-auxiliaries	さあ、やったるぜー！	자, 해 준다~!	keep	sound
-sound:contracted-auxiliaries	そんなの……見てられないもん……	그런 것……보고 있을 수 없는 걸……	fix	sound
+sound:contracted-auxiliaries	そんなの……見てられないもん……	그런 것……보고 있을 수 없는걸……	fix	sound
 sound:contracted-auxiliaries	テレビのニュースによくお顔出てらっしゃるだろうよ……ニュースぐらい見ろよ……って見てるのか	텔레비전의 뉴스에 잘 얼굴 나와 계실 것이다……뉴스 정도 봐라……는 보고 있는 거야	fix	sound
 sound:contracted-auxiliaries	あの頃はみんなが聞きたがってさあ、オイラ、のんびり遊んでられなかったよ。	그 무렵은 모두가 듣고 싶어해 자, 나, 한가로이 놀고 있을 수 없었어.	fix	sound
 sound:contracted-auxiliaries	青葉、じっとしてられないな。	has:가만히	fix	sound

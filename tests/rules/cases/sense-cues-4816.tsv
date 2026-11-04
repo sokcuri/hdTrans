@@ -1,4 +1,4 @@
-# 규칙: LEX-4816, LEX-4817, LEX-4818, LEX-4819, LEX-4820
+# 규칙: LEX-4816, LEX-4817, LEX-4818, LEX-4819, LEX-4609
 rule	input	expected	kind	layer
 cx:sense-cues-1:72	「それは違うよ！　ユージは訳あってここに来れないだけから！」	「그건 아니야! 유지는 사정이 있어 여기에 올 수 없는 것뿐으로부터!」	fix	rewrites
 cx:sense-cues-1:72	けれど、それは違う。	하지만, 그것은 아니다.	fix	rewrites

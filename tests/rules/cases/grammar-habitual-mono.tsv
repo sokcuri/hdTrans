@@ -21,7 +21,7 @@ cx:habitual-mono:24	昔はよく遊んだもんだ。	옛날은 자주 놀곤 �
 cx:habitual-mono:24	しょっちゅう喧嘩したもんだ。	언제나 싸우곤 했다.	fix	rewrites
 cx:habitual-mono:24	困ったもんだ。	곤란하다.	keep	rewrites
 cx:habitual-mono:26	昔はよく遊んだもんだった。	옛날은 자주 놀곤 했었다.	fix	rewrites
-cx:habitual-mono:26	昔はよく遊んだもんだったと思う。	옛날은 잘 논 것이었다고 생각한다.	keep	rewrites
+cx:habitual-mono:26	昔はよく遊んだもんだったと思う。	옛날은 자주 논 것이었다고 생각한다.	keep	rewrites
 cx:habitual-mono:30	昔はよく遊んだもんです。	옛날은 자주 놀곤 했습니다.	fix	rewrites
 cx:habitual-mono:30	昔はよく遊んだもんだよ。	옛날은 자주 놀곤 했어.	fix	rewrites
 cx:habitual-mono:30	時々来たもんだから、慣れている。	가끔 온 것이니까, 익숙해져 있다.	keep	rewrites

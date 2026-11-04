@@ -144,6 +144,18 @@
 // もん
 書くもん	쓰는걸	end	prio=-1
 書いたもん	썼는걸	end	prio=-1
+書いてるもん	쓰고 있는걸	end	prio=-1
+書いてたもん	쓰고 있었는걸	end	prio=-1
+書かないもん	쓰지 않는걸	end	prio=-1
+高いもん	높은걸	end	prio=-1
+高かったもん	높았는걸	end	prio=-1
+書いてるんだもん	쓰고 있는걸	end	prio=-1
+書いちゃってるもん	써 버렸는걸	end	prio=-1
+// ですもん, ますもん: the same reason said politely, 〜걸요 (くすぐったいんですもん 간지러운걸요; spec GRM-3913).
+書きますもん	쓰는걸요	end	prio=-1
+書くんですもん	쓰는걸요	end	prio=-1
+高いんですもん	높은걸요	end	prio=-1
+学生ですもん	학생인걸요	end	prio=-1
 // もんな: a reason the listener shares, 〜잖아
 書くもんな	쓰잖아	end	prio=-1
 書いたもんな	썼잖아	end	prio=-1
