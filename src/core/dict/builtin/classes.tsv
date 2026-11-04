@@ -180,6 +180,7 @@
 //= noun.habit-time	Nouns of a time of one's life (子供の頃, 小さい頃) that, before a と or たら in their clause, make it a habit, -면 (子供の頃は雨が降ると外で遊んだ 비가 오면; spec GRM-177).
 //= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
+//= ko-verb.answer-move	Korean verbs of a body or a person moving in answer (튀다, 움찔하다, 돌아오다, 달려가다), whose subject after a と answers the act, -자 (触れると、お尻が跳ねた 닿자; spec GRM-40).
 //= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (近づくと、目に入った 가까워지니 눈에 들어왔다; spec GRM-40).
 //= ko-verb.perceive	Korean verbs of seeing, hearing and noticing (a word matches the end of the last word of a lemma, a phrase such as 정신을 차리다 the end of the lemma), whose と before a state in ている is what one found, -니 (気づくと朝になっていた 눈치채니, 見ると彼女が走ってきた 보니; spec GRM-40).
 //= ko-verb.sequence	Korean verbs of actions done one after the other (먹다, 씻다, 자다), whose て reads 고.
@@ -2552,6 +2553,26 @@ verb.come-upon	出会
 verb.come-upon	出逢
 verb.come-upon	鉢合わせ
 verb.come-upon	触れ
+ko-verb.answer-move	튀다
+ko-verb.answer-move	돌아오다
+ko-verb.answer-move	돌아가다
+ko-verb.answer-move	달려가다
+ko-verb.answer-move	달려오다
+ko-verb.answer-move	뛰어가다
+ko-verb.answer-move	뛰어오다
+ko-verb.answer-move	떠나가다
+ko-verb.answer-move	걸어가다
+ko-verb.answer-move	걸어오다
+ko-verb.answer-move	도망가다
+ko-verb.answer-move	도망치다
+ko-verb.answer-move	뛰다
+ko-verb.answer-move	튀어 오르다
+ko-verb.answer-move	움찔하다
+ko-verb.answer-move	움찔거리다
+ko-verb.answer-move	떨다
+ko-verb.answer-move	떨리다
+ko-verb.answer-move	움츠러들다
+ko-verb.answer-move	뒷걸음질치다
 ko-verb.found	알다
 ko-verb.found	깨닫다
 ko-verb.found	눈치채다

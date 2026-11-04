@@ -2751,8 +2751,10 @@ bool PersonNoun(Flusher& f, const Item* x, bool subject = false) {
     // Someone, a count of people (二人, 数人), or as a subject an unknown katakana word, which is mostly
     // a name there (ロスウェが起きてきた).
     if (x->group->surface.starts_with("誰") || (x->group->surface.ends_with("人") && x->group->surface.size() <= 9)) return true;
-    // お and one kanji as a subject is an old-style name (お朝, お雪).
-    if (subject && x->group->surface.starts_with("お") && x->group->surface.size() == std::string_view("お朝").size() &&
+    // お and one kanji as a subject is an old-style name (お朝, お雪), unless it is a dictionary word
+    // with sem codes of its own (お金, お茶, お湯).
+    if (subject && x->Attr(x->selected).empty() && x->group->surface.starts_with("お") &&
+        x->group->surface.size() == std::string_view("お朝").size() &&
         text::IsKanji(text::DecodeRune(x->group->surface.substr(std::string_view("お").size())).cp)) {
         return true;
     }
@@ -2854,7 +2856,11 @@ int OwnNextAct(Flusher& f, const Item* it, const Item* last) {
     for (; x != nullptr; x = x->next) {
         const std::string_view s = x->group->surface;
         if (s == "が" || s == "は" || s == "も" || s == "には" || s == "にも") return 0;
-        if (x->detail->Yougo() && Has(s, "が")) return 0;
+        if (x->detail->Yougo() && x->selected >= 0 && Has(s, "が")) {
+            // Only a row that holds its own subject (声が上がる 목소리가 나오다), not a stem in が (立ち上がる).
+            const std::string own = output::Lemma(x->EntryText(x->selected), f.families);
+            if (Has(own, "이 ") || Has(own, "가 ")) return 0;
+        }
         if (!x->detail->Yougo() && x->selected >= 0 && PersonNoun(f, x)) return 0;
         if (x == last) break;
     }
@@ -2938,6 +2944,7 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last, Finding finding)
             subject = true;
             // A person or a voice acts or answers (貴族から賛成の声が上がった), no sight that came.
             if (x->prev != nullptr && x->prev->selected >= 0 &&
+                // お read apart from one kanji (お + 朝) is a name that no dictionary word joins.
                 (PersonNoun(f, x->prev, true) || x->prev->group->surface.ends_with("声") ||
                  (x->prev->prev != nullptr && x->prev->prev->group->surface == "お" &&
                   text::DecodeRune(x->prev->group->surface).size == x->prev->group->surface.size() &&
@@ -3027,6 +3034,11 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last, Finding finding)
                            (q->group->surface == "を" && q->prev != nullptr &&
                             (q->prev->group->surface == "の" ||
                              (q->prev->DirectIndex() >= 0 && q->prev->DirectSurface().ends_with("の"))))));
+    // Going, coming or flinching (お金が帰って来た, お尻がぴくんと跳ねた) is done by someone or by a
+    // body that answers the act, whatever the noun.
+    const bool answering = in(HDTRANS_CLASS("ko-verb.answer-move"), mainLemma) ||
+                           in(HDTRANS_CLASS("ko-verb.answer-move"), std::string(LastLemmaWord(mainLemma)));
+    if (answering && subject) person = true;
     const bool found = in(HDTRANS_CLASS("ko-verb.found"), lemma) || in(HDTRANS_CLASS("ko-verb.found"), mainLemma) ||
                        (subject && !person && !(acting && !(progressive || being || left || (afterTe && (lastSurface == "あ" || lastSurface == "い"))))) || (undergone && !(subject && person)) || arrived ||
                        sighted;
@@ -3171,16 +3183,25 @@ void PastSequence(Flusher& f) {
         } else if (seeing && !viewpoint && !tara) {
             // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look
             // (彼女を見ると、彼女は笑った 보자).
-            it->AssignDirectSlot(it->DirectIndex(),
-                                 !to || tried || !PersonAnswers(f, it, close) || FoundAfterTo(f, it, close, Finding::Any) ? "2니" : "1자");
+            const bool found = !to || tried || FoundAfterTo(f, it, close, Finding::Any);
+            const int own = found ? 0 : OwnNextAct(f, it, close);
+            it->AssignDirectSlot(it->DirectIndex(), own == 1   ? "1고는"
+                                                    : own == 2 ? "1고"
+                                                    : !found && PersonAnswers(f, it, close) ? "1자"
+                                                                                             : "2니");
         } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
         } else if (to && dict::InClass(HDTRANS_CLASS("ko-verb.look"), VerbalNounLemma(f, it))) {
             // Looking finds what follows (時計を見ると、早過ぎた 보니) unless a person answers the look.
             // てみると finds whatever follows (GRM-178: 拾い読みしてみると、彼は気がついた 보니).
             const bool triedLook = stem.ends_with("てみ") || stem.ends_with("でみ") || (stem == "み" && AfterTeForm(it));
-            it->AssignDirectSlot(it->DirectIndex(),
-                                 !triedLook && PersonAnswers(f, it, close) && !FoundAfterTo(f, it, close, Finding::Any) ? "1자" : "2니");
+            // A person who looks and then acts (彼女は振り返ると、にっこり笑った) goes on, -고는, as GRM-40.
+            const bool found = triedLook || FoundAfterTo(f, it, close, Finding::Any);
+            const int own = found ? 0 : OwnNextAct(f, it, close);
+            it->AssignDirectSlot(it->DirectIndex(), own == 1   ? "1고는"
+                                                    : own == 2 ? "1고"
+                                                    : !found && PersonAnswers(f, it, close) ? "1자"
+                                                                                             : "2니");
         } else if (to && ((AfterTeForm(it) && LastLemmaWord(output::Lemma(it->EntryText(it->selected), f.families)) == "있다") ||
                           output::Lemma(it->EntryText(it->selected), f.families).ends_with("고 있다"))) {
             // The いる of ている is the background of what came, -는데 (考え事をしていると三人が帰ってきた

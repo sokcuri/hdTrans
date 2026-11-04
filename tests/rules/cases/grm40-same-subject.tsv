@@ -27,3 +27,12 @@ rewrite:past-sequence	技術は進歩すると、世界を変えた。	has:진�
 rewrite:past-sequence	セックスすると、もっと仲良くなれるって凛が言ってた。	has:섹스하면,	fix	rewrites
 rewrite:past-sequence	するとある人がおかあさんに、子供に短い名前をつけると、その子の命は短いし、長い名前をつけるほど、その子の寿命は長いものだといって聞かせました。	has:붙이면,	fix	rewrites
 rewrite:past-sequence	そう言うと、後は何のフォローもなく、トビアスは出て行った。	has:말하자,	keep	rewrites
+rewrite:past-sequence	彼女は振り返ると、にっこり笑った。	has:돌아보고는,	fix	rewrites
+rewrite:past-sequence	彼は時計を見ると、立ち上がった。	has:보고는,	fix	rewrites
+rewrite:past-sequence	彼女は振り返ると、そこに彼がいた。	has:돌아보니,	keep	rewrites
+rewrite:past-sequence	振り返ると、そこに彼がいた。	has:돌아보니,	keep	rewrites
+rewrite:past-sequence	財布を開けると、お金がなかった。	has:여니,	keep	rewrites
+rewrite:past-sequence	本を読んでいると、お湯が沸いた。	has:있으니,	keep	rewrites
+rewrite:past-sequence	秘部に触れると、未散のかわいらしいお尻がぴくんと跳ねた。	has:접하자,	keep	rewrites
+rewrite:past-sequence	などと、とりとめのない事を考えて居ると、水口の油障子が、がたごと云って、お金が帰って来た。	has:있는데,	keep	rewrites
+rewrite:past-sequence	と、一彦の手からひったくるように鍵をとると、お礼もいわずに元きた道へ走り去りました。	has:잡자,	keep	rewrites
