@@ -2422,11 +2422,11 @@ ttt	ttt	K110			GN				jisjk:201744
 いいだ	말하기 시작&AV@	M443			GN				jisjk:139229		
 いいだくだくと	유유 낙낙하게	E300			GN				jisjk:148957		
 いいだしかね	말을 꺼내기 어&MW@	M447			GN				jisjk:201497		
-いいちら	퍼뜨&AY@	M443			GN				jisjk:139231		
+いいちら	퍼뜨&AA@	M443			GN				jisjk:139231		
 いいつ	말을 전&AV@	M432			GN				jisjk:90418		
 いいつか	분부&FD@	M448	VTw		GN				jisjk:139238		
 いいつく	죄다 말&AV@	M433	UTs		GN				jisjk:90419		
-いいつく	죄다 말해버&AY@	M443	SFlUTs		GN				jisjk:139247		
+いいつく	죄다 말해버&AA@	M443	SFlUTs		GN				jisjk:139247		
 いいつくろ	말을 꾸며&C5@	M440			GN				jisjk:139255		
 いいつけ	말&AV@	M437	UTs		GN				jisjk:90420		
 いいつけ	명령	N110	ULw		GN				jisjk:125129		
@@ -5331,7 +5331,7 @@ ttt	ttt	K110			GN				jisjk:201744
 うわさを立て	소문을 &A6@	M447			GN				jisjk:146584		
 うわざし	바둑판 무늬로 누빈 것	N110	VCp		GN				jisjk:127248		
 うわしき	다다미에 씌우는 돗자리	N110	VPe		GN				jisjk:127249		
-うわず	흥분&AY@	M428	SFl		GN				jisjk:144911		
+うわず	들&A8@	M428	SFl		GN				jisjk:144911		
 うわずみ	윗물	N110	VFd		GN				jisjk:127253		
 うわぜい	키	N110	QHPVBp		GN				jisjk:127254		
 うわぞうり	실내에서 신는 짚신	N110	VCp		GN				jisjk:127256		
@@ -94302,8 +94302,6 @@ ttt	ttt	K110			GN				jisjk:201744
 一万円札を崩	만엔권을 &LH@	M443			GN				jisjk:201501		
 一万城町	이치만죠쵸	I130	QCTVPl		GN				jisjk:273050		
 一丈	10자	N110			GN				jisjk:125664		
-一三	이치조	K130	QPN	Wb	GN				jisjk:202673		
-一三	이치조우	N130	VHnQPN	Wb	GN				jisjk:339569		
 一三夫	이사오	N130	QPN	Wb	GN				jisjk:346857		
 一三夫	히사오	N130	QPN	Wb	GN				jisjk:346861		
 一下	한 번 내림	N110			GN				jisjk:228461		
@@ -94432,7 +94430,6 @@ ttt	ttt	K110			GN				jisjk:201744
 一事不再議	일사부재의	N110	ULw		GN				jisjk:228380		
 一事例	한 사례	N110			GN				jisjk:160401		
 一事情	한 가지 사정	N110			GN				jisjk:160492		
-一二	이치지	N130	VHnQPN	Wb	GN				jisjk:339568		
 一二三	히후미	N130	QPN	Wb	GN				jisjk:375057		
 一二郎	이치지로우	N130	QPN	Wb	GN				jisjk:357090		
 一二％増	12퍼센트 증가	N110			GN				jisjk:194509		
@@ -95606,7 +95603,7 @@ ttt	ttt	K110			GN				jisjk:201744
 一碧湖	잇페키호	N110	VPl		GN				jisjk:211221		
 一碧湖	잇페키호	N110	VPl		GN				jisjk:211222		
 一磨	카즈마	N130	QPN	Wb	GN				jisjk:257791		
-一礼	일례	N110			GN				jisjk:104764		
+一礼	목례	N110			GN				jisjk:104764		
 一神教	일신교	N110	UCl		GN				jisjk:125876		
 一神教徒	일신교도	I110	VHn		GN				jisjk:80378		
 一票	한 표	N110			GN				jisjk:31555		
@@ -96680,7 +96677,6 @@ ttt	ttt	K110			GN				jisjk:201744
 万全	만전	N110			GN				jisjk:21286		
 万全な	만전의	E0H0			GN				jisjk:150067		
 万全を期	만전을 기&AV@	M4U9			GN				jisjk:264296		
-万六	만로쿠	N130	QCTVPl		GN				jisjk:330137		
 万兵	만헤이	N130	VGt		GN				jisjk:21274		
 万円	만엔	N110	VMo	Ct	GN				jisjk:114839		
 万円について	만엔에 대해	E300			GN				jisjk:149527		
@@ -100597,7 +100593,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上和白	카미와지로	N130	QCTVPl		GN				jisjk:285973		
 上和野	카미와노	N130	QPN	Wa	GN				jisjk:73502		
 上品	품위%B7@	G8U0			GN				jisjk:3171		
-上品	상품	N110			GN				jisjk:3172		
+上品	품위	N110			GN				jisjk:3172		
 上品	카미시나	N130	QCTVPl		GN				jisjk:284480		
 上品寺町	죠본지쵸	I130	QCTVPl		GN				jisjk:302765		
 上品濃	카미시나노	N130	QCTVPl		GN				jisjk:284481		
@@ -112960,7 +112956,6 @@ ttt	ttt	K110			GN				jisjk:201744
 九の城町	쿠노시로쵸	I130	QCTVPl		GN				jisjk:290870		
 九まい	아홉 장	N110			GN				jisjk:343654		
 九ヵ国	9개국	N110	VPl		GN				jisjk:173338		
-九一	구일	N130	QST		GN				jisjk:374036		
 九一八八円	9188엔	N110			GN				jisjk:159481		
 九一郎	쿠이치로우	N130	QPN	Wb	GN				jisjk:356764		
 九七	97	N110	UMe		GN				jisjk:159484		
@@ -114274,8 +114269,6 @@ ttt	ttt	K110			GN				jisjk:201744
 二丈	니죠	N110	VPl		GN				jisjk:247895		
 二丈町	니죠마치	N130	QCTVPl		GN				jisjk:318452		
 二三	약간	N110			GN				jisjk:247772		
-二三	후미	N130	VHnQPN	Wb	GN				jisjk:339876		
-二三一	후미카즈	N130	QPN	Wb	GN				jisjk:366485		
 二三万	23만	N110			GN				jisjk:159747		
 二三夫	후미오	N130	QPN	Wb	GN				jisjk:346851		
 二三日	2,3일	N110	UMe		GN				jisjk:364548		
@@ -115125,7 +115118,6 @@ ttt	ttt	K110			GN				jisjk:201744
 五光建設	고코건설	I110	VGt		GN				jisjk:78496		
 五光製作所	고코제작소	I110	VGt		GN				jisjk:78498		
 五八	58	N110		NjNd	GN				jisjk:294761		
-五八	고하치	N130	QCTVPl		GN				jisjk:364522		
 五八の賀	40세가 된 축하	N110			GN				jisjk:231836		
 五公五民	오공 오민	N110			GN				jisjk:231636		
 五六島	오륙도	M110	VPl		GN				jisjk:376059		
@@ -115527,7 +115519,6 @@ ttt	ttt	K110			GN				jisjk:201744
 五畳敷	고죠지키	N130	QCTVPl		GN				jisjk:294678		
 五畿七道	고키시치도	N130	VPl		GN				jisjk:215245		
 五畿七道	고키시치도	N130	VPl		GN				jisjk:215246		
-五百	5백	N130		Nj	GN				jisjk:104856		
 五百井	이오이	N130	QCTVPl		GN				jisjk:271432		
 五百刈	고햐쿠가리	N130	QCTVPl		GN				jisjk:294768		
 五百刈	고햣카리	N130	QCTVPl		GN				jisjk:294774		
@@ -123870,7 +123861,7 @@ ttt	ttt	K110			GN				jisjk:201744
 作治郎	사쿠지로우	N130	QPN	Wb	GN				jisjk:349292		
 作況	작황	N110			GN				jisjk:32026		
 作況指数	작황지수	N110			GN				jisjk:232548		
-作法	작법	N110			GN				jisjk:32008		
+作法	예법	N110			GN				jisjk:32008		
 作滝	사쿠타키	N130	QCTVPl		GN				jisjk:295719		
 作為	작위	N110			GN				jisjk:32017		
 作為犯	작위범	N110	VHn		GN				jisjk:184869		
@@ -143499,7 +143490,6 @@ ttt	ttt	K110			GN				jisjk:201744
 十両	10량	N110			GN				jisjk:237029		
 十中八九	십중팔구	I110			GN				jisjk:77157		
 十九	19	N110		Nj	GN				jisjk:101532		
-十九	쥿쿠	N130	QCTVPl		GN				jisjk:302497		
 十九条	쥬우쿠죠	N130	QCTVPl		GN				jisjk:302383		
 十九渕	츠즈라후치	N130	QCTVPl		GN				jisjk:309698		
 十九田町	쥬쿠타쵸	I130	QCTVPl		GN				jisjk:302493		
@@ -143580,7 +143570,6 @@ ttt	ttt	K110			GN				jisjk:201744
 十二郎	토우지로우	N130	QPN	Wb	GN				jisjk:356380		
 十二里町	쥬우니리쵸	I130	QCTVPl		GN				jisjk:302448		
 十二音音楽	12음음악	N110	USoQMU		GN				jisjk:236982		
-十五	쥬우고	N130	QCTVPl		GN				jisjk:302385		
 十五	15	N110	XXX		GN				jisjk:340132		
 十五カ所	15개 장소	N110	VPl		GN				jisjk:194328		
 十五パズル	15퍼즐	N110	VRw		GN				jisjk:236915		
@@ -148722,7 +148711,7 @@ ttt	ttt	K110			GN				jisjk:201744
 参	(가)&AH@	M418	UMv		GN	825	||1 &&2 P-1== "4**" M-1== "57*"	연결 어미를 가진 동사 바로 뒤에서 参의 가다 후보를 고른다. (미발동: rare-context)	jisjk:95226		
 参	참배&AV@	M41:	UClVPl		GN				jisjk:95227		
 参	참여&AV@	M419			GN				jisjk:95228		
-参	찾아가&AY@	M41:			GN				jisjk:95229		
+参	찾아&A1@	M41:			GN				jisjk:95229		
 参	관여&AV@	M429			GN				jisjk:121749		
 参	질&AA@	M428	XXX		GN	2325	||3 &&4 P-1== "7**" U-1== "いのに" Y-1== "4 데" M-1== "50*" S-1== "本当に" &&3 P-1== "2**" P-2== "7**" U-2== "いのに"	형용사의 いのに 뒤나 本当に 뒤에 오는 参을 '질리다'로 고른다. (미발동: rare-context)	jisjk:265447		
 参	질&AA@	M428			GN	2326	||2 &&2 S+1== "らし" P+1== "7**" &&3 P-1== "4**" U-1== "ことには" Y-1== "0 것에는"	뒤가 형용사 「らし」이거나 앞 동사의 어미가 지정 번역의 「ことには」이면 「参」를 ‘질리다’로 고른다. (미발동: rare-context)	jisjk:265448		
@@ -154017,7 +154006,7 @@ ttt	ttt	K110			GN				jisjk:201744
 同潤会	동윤회	I130			GN				jisjk:98456		
 同点	동점	N110			GN				jisjk:98469		
 同点とされ	동점이 &C6@	M427		Pn	GN				jisjk:367290		
-同然	동연	N110			GN				jisjk:19629		
+同然	마찬가지	N110			GN				jisjk:19629		
 同然	(와)과 다름%B4@	G8U0		Tu	GN				jisjk:344785		
 同物異名	동물 이명	N110			GN				jisjk:246501		
 同率	동률	N110			GN				jisjk:19603		
@@ -157259,8 +157248,8 @@ ttt	ttt	K110			GN				jisjk:201744
 唐珠洞	당주동	N130	QCT		GN				jisjk:375426		
 唐琵琶	당비파	N110	VRy		GN				jisjk:205899		
 唐破風	가라하후	N110	VBl		GN				jisjk:229494		
-唐突	당돌	N110			GN				jisjk:98198		
-唐突	당돌%A1@	G8U0			GN				jisjk:142451		
+唐突	갑작스러움	N110			GN				jisjk:98198		
+唐突	갑작%A2@	G8U0			GN				jisjk:142451		
 唐端新	카라하타신	N130	QCTVPl		GN				jisjk:286394		
 唐端藤蔵	가라하타 도조	N110	VHn		GN				jisjk:213676		
 唐竹	참대	N110	QAL		GN				jisjk:18721		
@@ -158775,8 +158764,6 @@ ttt	ttt	K110			GN				jisjk:201744
 四丁	시쵸	N130	QCTVPl		GN				jisjk:297703		
 四丁町	시쵸마치	N130	QCTVPl		GN				jisjk:297706		
 四丁目	욘쵸메	N130	QCTVPl		GN				jisjk:338306		
-四万	시마	N130	VPl		GN				jisjk:215893		
-四万	시마	N130	VPl		GN				jisjk:215894		
 四万十川	시만토가와	I110	QCT		GN				jisjk:71858		
 四万十町	시만토쵸	I130	QCTVPl		GN				jisjk:298198		
 四三嶋	시소지마	N130	QCTVPl		GN				jisjk:297531		
@@ -158821,7 +158808,6 @@ ttt	ttt	K110			GN				jisjk:201744
 四区二条	용쿠2죠	I130	QCTVPl		GN				jisjk:338302		
 四区町	용쿠쵸	N130	QCTVPl		GN				jisjk:338304		
 四十七士	아코 47사무라이	N110	VHn		GN				jisjk:233792		
-四十万	시지마	N130	QCTVPl		GN				jisjk:297475		
 四十万町	시지마마치	I130	QCTVPl		GN				jisjk:297477		
 四十三郎	요소사부로우	N130	QPN	Wb	GN				jisjk:356386		
 四十九日	사십구일재	N110	UMeUCl		GN				jisjk:187356		
@@ -159898,7 +159884,7 @@ ttt	ttt	K110			GN				jisjk:201744
 国上	쿠니가미	N130	QCTVPl		GN				jisjk:290791		
 国下町	코쿠가마치	N130	QCTVPl		GN				jisjk:293076		
 国中	쿠니나카	N130	QCTVPl		GN				jisjk:290815		
-国中	국중	N110	XXX		GN				jisjk:341418		
+国中	온 나라	N110	XXX		GN				jisjk:341418		
 国中公麻呂	구니나카노 기미마로	N130	VHn		GN				jisjk:214472		
 国丸	쿠니마루	N130	QPN	Wb	GN				jisjk:7131		
 国主	쿠니시	N130	QCTVPl		GN				jisjk:290800		
@@ -170247,7 +170233,7 @@ ttt	ttt	K110			GN				jisjk:201744
 大成ロテック	타이세이 로텍	I130	QIDVGt		GN				jisjk:65256		
 大成住宅	다이세이주택	I110	VGt		GN				jisjk:65270		
 大成功	대성공	I110		Hd	GN				jisjk:341420		
-大成功を収め	대성공을 거&AY@	M447			GN				jisjk:138267		
+大成功を収め	대성공을 거&C7@	M447			GN				jisjk:138267		
 大成化工	타이세이 화공	I130	QIDVGt		GN				jisjk:65273		
 大成化薬	타이세이 화약	I130	QIDVGt		GN				jisjk:65274		
 大成商事	타이세이 상사	I130	QIDVGt		GN				jisjk:65264		
@@ -185543,7 +185529,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小倉餡	팥알 섞은 팥소	N110	VFd		GN				jisjk:165225		
 小値賀町	오지카쵸	I130	QCTVPl		GN				jisjk:280189		
 小像	초상	N110			GN				jisjk:26756		
-小僧	소승	N110	UAq		GN				jisjk:26767		
+小僧	애송이	N110	UAq		GN				jisjk:26767		
 小僧	애송이	N110	VHn		GN				jisjk:26768		
 小僧っ子	풋내기	N110	VHn		GN				jisjk:182408		
 小僧寿し本部	코조즈시 본부	I130	QIDVGt		GN				jisjk:74930		
@@ -190940,7 +190926,7 @@ ttt	ttt	K110			GN				jisjk:201744
 山末記	야마자키 스에키	N130	VHn		GN				jisjk:226468		
 山本	야마모토	N130	QPN	Wa	GN				jisjk:25400		
 山本	야마모토	N130	QCT	Qq	GN				jisjk:340517		
-山本	산본	N130	QST		GN				jisjk:374142		
+山本	야마모토	N130	QST		GN				jisjk:374142		
 山本コーポレーション	야마모토코퍼레이션	I110			GN				jisjk:107593		
 山本ビニター	야마모토비니타	I110	VGt		GN				jisjk:72191		
 山本ビル	야마모토 빌딩	I130	VBlVPl		GN				jisjk:72192		
@@ -209176,7 +209162,7 @@ ttt	ttt	K110			GN				jisjk:201744
 惑い箸	이것저것 건드리는 젓가락질	N110		Hd	GN				jisjk:251894		
 惑わ	유혹&AV@	M433			GN				jisjk:96001		
 惑乱	현혹	N110		Hd	GN				jisjk:156854		
-惑星	혹성	N110	VSs		GN				jisjk:39320		
+惑星	행성	N110	VSs		GN				jisjk:39320		
 惑星大気	혹성 대기	N110	VSs		GN				jisjk:256892		
 惑星状星雲	혹성상성운	N110	VSs		GN				jisjk:256891		
 惑星間塵	혹성간진	N110	VSs		GN				jisjk:256889		
@@ -214301,7 +214287,7 @@ ttt	ttt	K110			GN				jisjk:201744
 披瀝	피력	N110		Hd	GN				jisjk:38075		
 披針	피침	N110			GN				jisjk:38077		
 披針形	피침형	N110			GN				jisjk:154321		
-披露	피로	N110		Hd	GN				jisjk:38076		
+披露	공개	N110		Hd	GN				jisjk:38076		
 披露宴	피로연	N110	VBl		GN				jisjk:154490		
 抱	&FH@	M431			GN	858	||1 &&4 P-1== "2**" P-2== "1**" A-2-= "UFl" D+0= "&M3@"	감정 계열 명사와 조사 뒤의 抱에서 번역을 '안다'에서 '품다'로 바꾼다. (미발동: rare-context)	jisjk:95772		
 抱	가&AL@	M431	UFl		GN				jisjk:95773		
@@ -217476,7 +217462,7 @@ ttt	ttt	K110			GN				jisjk:201744
 撤収軍	철수군	N110	VHn		GN				jisjk:153596		
 撤回	철회	N110		Hd	GN				jisjk:35633		
 撤廃	철폐	N110		Hd	GN				jisjk:35632		
-撤退	철퇴	N110		Hd	GN				jisjk:35631		
+撤退	철수	N110		Hd	GN				jisjk:35631		
 撤饌	철찬	N110			GN				jisjk:244506		
 撥	넘&A2@	M438			GN				jisjk:92978		
 撥ね	튀&A2@	M437			GN				jisjk:92979		
@@ -225599,7 +225585,7 @@ ttt	ttt	K110			GN				jisjk:201744
 日韓翻訳	일한번역	I110			GN				jisjk:263065		
 日韓関係筋	한일 관계 소식통	N110	VBl		GN				jisjk:151589		
 日頃	평소	N110	XXX		GN				jisjk:31576		
-日頃	일경	N110			GN	1795	||1 G-1== "NjNd"	日頃 앞말이 숫자 문법 코드를 가지면 일경이라는 번역을 고른다. (미발동: rare-context)	jisjk:202539		
+日頃	평소	N110			GN	1795	||1 G-1== "NjNd"	日頃 앞말이 숫자 문법 코드를 가지면 일경이라는 번역을 고른다. (미발동: rare-context)	jisjk:202539		
 日頃にな	며칠이 지&A5@	M418			GN				jisjk:94543		
 日頃は	평소에는	E310			GN				jisjk:260742		
 日頃市町	히코로이치쵸	I130	QCTVPl		GN				jisjk:324128		
@@ -225895,7 +225881,7 @@ ttt	ttt	K110			GN				jisjk:201744
 早志	하야시	N130	QPN	Wa	GN				jisjk:11403		
 早急	급%A1@	G8L0			GN				jisjk:3649		
 早急	시급	N110		Dd	GN				jisjk:185288		
-早急	조급	N110	SFl	Dd	GN				jisjk:200014		
+早急	시급	N110	SFl	Dd	GN				jisjk:200014		
 早急に	시급하게	E300			GN				jisjk:123298		
 早慶戦	와세다-게이오전	N110	VRw		GN				jisjk:239989		
 早成	조성	N110			GN				jisjk:33543		
@@ -231622,7 +231608,7 @@ ttt	ttt	K110			GN				jisjk:201744
 朝敵	역적	N110			GN				jisjk:243380		
 朝方	아침	N110	UMe		GN				jisjk:33568		
 朝日	아사히	N130	QCTQMSVSw	Mo	GN	493	||3 &&2 P-2== "1**" A-2-= "VSw" A+1-= "VSw" S-1== "BS"	朝日 앞쪽이나 다음 말이 집필물 계열이거나 바로 앞 표기가 BS이면 아사히를 고른다. (미발동: rare-context)	jisjk:33577		
-朝日	조일	N110			GN				jisjk:341740		
+朝日	아침 해	N110			GN				jisjk:341740		
 朝日	아침해	N110	XXXVFrVSs		GN				jisjk:341741		
 朝日が丘	아사히가오카	I130	QCTVPl		GN				jisjk:269709		
 朝日が丘町	아사히가오카쵸	I130	QCTVPl		GN				jisjk:269714		
@@ -256143,7 +256129,7 @@ ttt	ttt	K110			GN				jisjk:201744
 決済資金	결제자금	N110			BZ				jisjk:354942		
 決然と	결연&AV@	M429			GN				jisjk:119553		
 決然と	결연히	E300			GN				jisjk:123050		
-決着	결착	N110		Hd	GN				jisjk:15303		
+決着	결판	N110		Hd	GN				jisjk:15303		
 決着ずみ	매듭필	N110			GN				jisjk:177962		
 決算	결산	N110		Hd	BZ				jisjk:15292		
 決算予備発表	결산 예비 발표	N110			BZ				jisjk:355947		
@@ -259809,7 +259795,7 @@ ttt	ttt	K110			GN				jisjk:201744
 流用	유용	N110		Hd	GN				jisjk:20837		
 流町	나가레마치	N130	QCTVPl		GN				jisjk:315012		
 流留	나가루	N130	QCTVPl		GN				jisjk:315003		
-流石	유석	N110	VSn		GN				jisjk:20825		
+流石	역시	N110	VSn		GN				jisjk:20825		
 流砂	유사	N110			GN				jisjk:20822		
 流砂現象	유사 현상	N110			GN				jisjk:255892		
 流竄	귀양 보냄	N110			GN				jisjk:255904		
@@ -265689,7 +265675,7 @@ ttt	ttt	K110			GN				jisjk:201744
 滑石	나메시	N130	QCTVPl		GN				jisjk:315509		
 滑石団地	나메이시 단지	N130	VPl		GN				jisjk:218901		
 滑石団地	나메이시 단지	N130	VPl		GN				jisjk:218902		
-滑稽	골계	N110			GN				jisjk:15938		
+滑稽	우스꽝스러움	N110			GN				jisjk:15938		
 滑稽	해학	N110			GN				jisjk:15939		
 滑稽	우스꽝%A2@	G8U0			GN				jisjk:121423		
 滑稽な	우스운	C0D1			GN				jisjk:4793		
@@ -268140,7 +268126,7 @@ ttt	ttt	K110			GN				jisjk:201744
 無定形炭素	무정형 탄소	N110			GN				jisjk:253173		
 無定見	무정견	I110			GN				jisjk:69157		
 無定見	견식이 %B4@	G8U0			GN				jisjk:147061		
-無実	무실	N110			GN				jisjk:22115		
+無実	결백	N110			GN				jisjk:22115		
 無害	무해	N110			GN				jisjk:22154		
 無害通航権	무해 통항권	N110	ULw		GN				jisjk:252935		
 無宿	무숙	N110			GN				jisjk:253087		
@@ -271315,7 +271301,7 @@ ttt	ttt	K110			GN				jisjk:201744
 特定電気事業者	특정전기 사업자	N110	VHn		BZ				jisjk:361868		
 特定非営利活動促進法	특정 비영리활동 촉진법	N110	ULw		BZ				jisjk:361872		
 特小	특소	N110			GN				jisjk:245749		
-特待	특대	N110			GN				jisjk:37230		
+特待	특별 대우	N110			GN				jisjk:37230		
 特待生	특별우대생	N110	VHn		GN				jisjk:245761		
 特徴	특징	N110			GN				jisjk:37267		
 特徴づけ	특징지&AI@	M447			GN				jisjk:145184		
@@ -278048,7 +278034,7 @@ ttt	ttt	K110			GN				jisjk:201744
 異機種コンピュータネットワーク	이기종 컴퓨터 네트워크	I110			IT				jisjk:262491		
 異機種間空戦訓練	이기종간 공중전 훈련	N110			MI				jisjk:345718		
 異歯性	이치성	N110	QHP		GN				jisjk:228138		
-異母	이모	N110	VHn		GN				jisjk:31192		
+異母	이복	N110	VHn		GN				jisjk:31192		
 異母兄弟	배다른 형제	N110	VHn		BZ				jisjk:160620		
 異父	아버지가 다름	N110			GN				jisjk:126143		
 異父兄弟	아버지가 다른 형제	N110	ULwVHn		GN				jisjk:126146		
@@ -297010,7 +296996,7 @@ ttt	ttt	K110			GN				jisjk:201744
 精巧	정교%A1@	G8L0			GN				jisjk:3630		
 精巧	정교	N110			GN				jisjk:3631		
 精度	정밀도	N110			GN				jisjk:33305		
-精強	정강	N110			GN				jisjk:346009		
+精強	정예	N110			GN				jisjk:346009		
 精強	정예	N110			MI				jisjk:346010		
 精彩	정채	N110			GN				jisjk:33327		
 精彩を放	생동감이 넘&AO@	M424			GN				jisjk:137829		
@@ -303137,7 +303123,7 @@ ttt	ttt	K110			GN				jisjk:201744
 義太夫	기다유	N110	USoQMU		GN				jisjk:231014		
 義太夫節	기다유부시	N110	USoQMU		GN				jisjk:231015		
 義夫	요시오	N130	VHnQPN	Wb	GN				jisjk:339951		
-義妹	의매	N110	VHn		GN				jisjk:31059		
+義妹	의붓여동생	N110	VHn		GN				jisjk:31059		
 義妹	처제	N110	VQwVHnUQf		GN				jisjk:31060		
 義姉	형수	N110	VHn		GN				jisjk:31074		
 義子	요시코	N130	QPN	Wb	GN				jisjk:115115		
@@ -324374,7 +324360,7 @@ ttt	ttt	K110			GN				jisjk:201744
 言いたて	떠들어&C5@	M437	UTs		GN				jisjk:94056		
 言いだ	말하기 시작&AV@	M433	UTs		GN				jisjk:94057		
 言いつか	분부&FD@	M448	VTw		GN				jisjk:139236		
-言いつく	죄다 말해버&AY@	M443	SFlUTs		GN				jisjk:139245		
+言いつく	죄다 말해버&AA@	M443	SFlUTs		GN				jisjk:139245		
 言いつくろ	말을 둘러&C5@	M440			GN				jisjk:139259		
 言いつけ	명령	N110	UTs	Hd	GN				jisjk:10524		
 言いつけ	명령&AV@	M437	UTs		GN				jisjk:10525		
@@ -324476,7 +324462,7 @@ ttt	ttt	K110			GN				jisjk:201744
 言い損な	실언&AV@	M440	UTs		GN				jisjk:139193		
 言い放	단언&AV@	M434	UTs		GN				jisjk:94075		
 言い散	함부로 말&AV@	M413	UTs		GN				jisjk:94081		
-言い散ら	퍼뜨&AY@	M443			GN				jisjk:139230		
+言い散ら	퍼뜨&AA@	M443			GN				jisjk:139230		
 言い方	말투	I110	UTs		GN				jisjk:78105		
 言い暮ら	되뇌며 날을 보&A6@	M443			GN				jisjk:139135		
 言い曲げ	왜곡&AV@	M437	UTs		GN				jisjk:94065		
@@ -333089,7 +333075,7 @@ ttt	ttt	K110			GN				jisjk:201744
 軍旅	전쟁	N110	VTw		GN				jisjk:177132		
 軍旗	군기	N110	UQf		GN				jisjk:17037		
 軍書	군서	N110	VBkVSwVTw		GN				jisjk:177038		
-軍曹	군조	N110			GN				jisjk:17077		
+軍曹	중사	N110			GN				jisjk:17077		
 軍服	군복	N110	VCp		GN				jisjk:17055		
 軍楽	군악	N110	USo		GN				jisjk:17043		
 軍楽隊	군악대	N110	VBlVTw		GN				jisjk:177009		
@@ -334948,7 +334934,7 @@ ttt	ttt	K110			GN				jisjk:201744
 迷宮	미궁	N110	VBl		GN				jisjk:22538		
 迷宮入り	미궁에 빠짐	N110			GN				jisjk:253318		
 迷宮入りの	미궁에 빠진	E0H0			GN				jisjk:123678		
-迷彩	미채	N110			GN				jisjk:22547		
+迷彩	위장	N110			GN				jisjk:22547		
 迷悟	미혹함과 깨우침	N110			GN				jisjk:253331		
 迷惑	귀%C4@	E8L0			GN	84	||1 &&2 U+0== "なのですが" D+0= "폐%D4@"	迷惑에 なのですが가 붙으면 번역을 '귀찮다'에서 명사 서술형 '폐이다'로 바꾼다. (미발동: rare-context)	jisjk:2912		
 迷惑	폐	N110		Hd	GN				jisjk:2913		
@@ -353392,7 +353378,7 @@ ttt	ttt	K110			GN				jisjk:201744
 静子	시즈코	N130	QPN	Wb	GN				jisjk:11312		
 静子	세이코	N130	QPN	Wb	GN				jisjk:349937		
 静子	세이시	N130	QPN	Wb	GN				jisjk:349938		
-静子	정자	N130	QPN	Wb	GN				jisjk:349939		
+静子	시즈코	N130	QPN	Wb	GN				jisjk:349939		
 静寂	정적	N110			GN				jisjk:3646		
 静寂境	정적경	I110			GN				jisjk:83322		
 静山	세이잔	N130	QPN	Wb	GN				jisjk:11305		
@@ -355134,7 +355120,7 @@ ttt	ttt	K110			GN				jisjk:201744
 頭を集め	사람들을 &E5@	M417			GN				jisjk:92485		
 頭ヶ島	가시라가시마	N110	VPl		GN				jisjk:213189		
 頭ヶ島	가시라가시마	N110	VPl		GN				jisjk:213190		
-頭上	두상	N110	VBp		GN				jisjk:19784		
+頭上	머리 위	N110	VBp		GN				jisjk:19784		
 頭中将	도노추조	N130	VHn		GN				jisjk:218256		
 頭久保	가시라쿠보	I110	VPl		GN				jisjk:67422		
 頭光	츠무리노 히카루	N130	VHn		GN				jisjk:218067		
