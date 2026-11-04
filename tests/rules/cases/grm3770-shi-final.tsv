@@ -1,0 +1,87 @@
+# 규칙: GRM-3770, GRM-3771, GRM-3772, GRM-3773
+rule	input	expected	kind	layer
+cx:narration-style-1:2	「いえ、風見さんがもしそうなったとき、私が動揺しないように忠告してくれたのだと思いますし」	「아뇨, 카자미 씨가 만약 그렇게 됐을 때, 제가 동요하지 않도록 충고해 줬던 것이라고 생각하기도 하고요」	fix	rewrites
+cx:narration-style-1:2	「桜庭先輩、私のことは『さより』って呼んで下さい。紛らわしいと思いますし」	「사쿠라바 선배, 저는 『보다』라고 불러 주세요. 혼동하기 쉽다고 생각하기도 하고요」	fix	rewrites
+cx:narration-style-1:2	いえ、風見さんがもしそうなったとき、私が動揺しないように忠告してくれたのだと思いますし。	아뇨, 카자미 씨가 만약 그렇게 되었을 때, 제가 동요하지 않도록 충고해 주었던 것이라고 생각하고.	keep	rewrites
+cx:narration-style-1:3	「その制服、魅音なんかには絶対に似合わないと思うけど。…詩音ちゃんにはよく似合ってると思うしさ。」	「그 제복, 미온같은 것에는 절대로 어울리지 않는다고 생각하는데. …시온짱에게는 잘 어울리고 있다고 생각하기도 하고.」	fix	rewrites
+cx:narration-style-1:3	「もちろん！　そういう休日の過ごし方もあっていいと思うし」	「물론! 그런 휴일의 보내는 방식도 있어 좋다고 생각하기도 하고」	fix	rewrites
+cx:narration-style-1:3	その制服、魅音なんかには絶対に似合わないと思うけど。…詩音ちゃんにはよく似合ってると思うしさ。	그 제복, 미온같은 것에는 절대로 어울리지 않는다고 생각하는데. …시온짱에게는 잘 어울리고 있다고 생각하고.	keep	rewrites
+cx:narration-style-1:5	「そしたら、気兼ねなくデートもできますしね」	「그랬더니, 거리낌없게 데이트도 할 수 있잖아요」	fix	rewrites
+cx:narration-style-1:5	「やると言ったからにはやりますよ。勝てば今日の借りもなくなりますしね」	「한다고 한 이상에는 해요. 이기면 오늘의 빚도 없어지잖아요」	fix	rewrites
+cx:narration-style-1:5	そしたら、気兼ねなくデートもできますしね。	그랬더니, 거리낌없게 데이트도 할 수 있고.	keep	rewrites
+cx:narration-style-1:7	「いえ、流石に遠慮しておきます。従業員がテーブルで食べる訳にはいきませんし」	「아뇨, 역시 사양해 둡니다. 종업원이 테이블로 먹을 수는 없거든요」	fix	rewrites
+cx:narration-style-1:7	「いえ、結構です。遊びに来たわけじゃありませんし」	「아뇨, 좋습니다. 놀러 온 게 아니거든요」	fix	rewrites
+cx:narration-style-1:7	いえ、流石に遠慮しておきます。従業員がテーブルで食べる訳にはいきませんし。	아뇨, 역시 사양해 둡니다. 종업원이 테이블로 먹을 수는 없고.	keep	rewrites
+cx:narration-style-1:8	「せっかく塗ったオイルが無駄になってしまいましたし」	「모처럼 바른 오일이 쓸데없게 돼버렸거든요」	fix	rewrites
+cx:narration-style-1:8	「芸能人のライブなんかもありましたし」	「연예인의 라이브도 있었거든요」	fix	rewrites
+cx:narration-style-1:8	せっかく塗ったオイルが無駄になってしまいましたし。	모처럼 바른 오일이 쓸데없게 되어버렸고.	keep	rewrites
+cx:narration-style-1:9	「いや、俺なんかじゃ、そもそも身の回りの人を幸せにできるかもわからないですし」	「아니, 나 같은 건, 애초에 신변의 사람을 행복하게 할 수 있을지도 모르거든요」	fix	rewrites
+cx:narration-style-1:9	「そもそも、マサキは私のことを女として見てないですし」	「애초에, 마사키는 저를 여자로서 보지 않거든요」	fix	rewrites
+cx:narration-style-1:9	いや、俺なんかじゃ、そもそも身の回りの人を幸せにできるかもわからないですし。	아니, 나 같은 것은, 애초에 신변의 사람을 행복하게 할 수 있을지도 모르며.	keep	rewrites
+cx:narration-style-1:10	「ああ、写真は別の機会にも使えるしな」	「아, 사진은 다른 기회에도 쓸 수 있잖아」	fix	rewrites
+cx:narration-style-1:10	「いや、海外から連れてくるかもしれないだろ。爺さん、海外にも人脈あるし」	「아니, 해외에서 데려올지도 모르지. 할아버지, 해외에도 인맥 있잖아」	fix	rewrites
+cx:narration-style-1:10	ああ、写真は別の機会にも使えるしな。	아, 사진은 다른 기회에도 쓸 수 있고.	keep	rewrites
+cx:narration-style-1:12	「う、うん、そうだね。高峰くんも待ってるし」	「으, 응, 그러게. 타카미네 군도 기다리고 있잖아」	fix	rewrites
+cx:narration-style-1:12	「でも、さっきから腰を引いて俺に抱きついてるし」	「하지만, 조금 전부터 허리를 당겨 나에게 달라붙고 있잖아」	fix	rewrites
+cx:narration-style-1:12	う、うん、そうだね。高峰くんも待ってるし。	으, 응, 그러게. 타카미네 군도 기다리고 있고.	keep	rewrites
+cx:narration-style-1:13	「店が閉まってると、当然お客も少なくなるしね」	「가게가 닫혀 있으면, 당연히 손님도 적게 되잖아」	fix	rewrites
+cx:narration-style-1:13	店が閉まってると、当然お客も少なくなるしね。	가게가 닫혀 있으면, 당연히 손님도 적게 되기도 하고.	keep	rewrites
+cx:narration-style-1:14	「でもまあ、仕事だしな」	「하지만 뭐, 일이잖아」	fix	rewrites
+cx:narration-style-1:14	「昔の写真を見る限りじゃ元気いっぱいって感じだな。インタビューもやる気満々だし」	「옛 사진을 보는 한은 활기가 가득이라는 느낌이네. 인터뷰도 의욕만만이잖아」	fix	rewrites
+cx:narration-style-1:14	でもまあ、仕事だしな。	하지만 뭐, 일이고.	keep	rewrites
+cx:narration-style-1:20	「……当然だよ。ＣＩＲＳの人たちは、ほんとは敵じゃないし」	「……당연해. CIRS의 사람들은, 사실은 적이 아니거든」	fix	rewrites
+cx:narration-style-1:20	「……続き読みたいし」	「……계속돼 읽고 싶거든」	fix	rewrites
+cx:narration-style-1:20	……当然だよ。ＣＩＲＳの人たちは、ほんとは敵じゃないし。	……당연해. CIRS의 사람들은, 사실은 적이 아니고.	keep	rewrites
+cx:narration-style-1:21	「あんま言ったことなかったしな」	「별로 말한 적 없었거든」	fix	rewrites
+cx:narration-style-1:21	「お前、女と付き合う気があるのか心配なとこあったし」	「너, 여자와 사귀는 마음이 있는지 걱정스러운 곳 있었거든」	fix	rewrites
+cx:narration-style-1:21	あんま言ったことなかったしな。	별로 말한 적 없었고.	keep	rewrites
+cx:narration-style-1:22	「……降ってるし」	「……내리고 있거든」	fix	rewrites
+cx:narration-style-1:22	「さっきからキョロキョロしてるし」	「조금 전부터 두리번두리번하고 있거든」	fix	rewrites
+cx:narration-style-1:22	……降ってるし。	……내리고 있고.	keep	rewrites
+cx:narration-style-1:23	「おおう、あんときゃもう今にも死にそうな顔してたし」	「감싸는, 아와 꺄 이제 당장이라도 죽을 것 같은 얼굴 하고 있었거든」	fix	rewrites
+cx:narration-style-1:23	「それのエプロン買ってたし」	「그것의 에이프런 사고 있었거든」	fix	rewrites
+cx:narration-style-1:23	おおう、あんときゃもう今にも死にそうな顔してたし。	감싸는, 아와 꺄 이제 당장이라도 죽을 것 같은 얼굴 하고 있었고.	keep	rewrites
+cx:narration-style-1:29	「やってることはまあ、グレーというか……なわけだしな」	「하고 있는 건 뭐, 회색이라고 할까……거잖아」	fix	rewrites
+cx:narration-style-1:29	やってることはまあ、グレーというか……なわけだしな。	하고 있는 것은 뭐, 회색이라고 할까……것이고.	keep	rewrites
+cx:narration-style-1:30	「……まぁ真面目な話、退院祝いをしなくちゃだしな」	「……뭐 진지한 이야기, 퇴원 축하를 하지 않으면이거든」	fix	rewrites
+cx:narration-style-1:30	「……やっぱやめようかな。怖いもんな。自分なんて、みそっかすの底辺ニンジャだし」	「……역시 그만둘까. 무섭잖아. 자신 같은 건, 된장빌려주는 거 밑바닥 닌자거든」	fix	rewrites
+cx:narration-style-1:30	……まぁ真面目な話、退院祝いをしなくちゃだしな。	……뭐 진지한 이야기, 퇴원 축하를 하지 않으면이고.	keep	rewrites
+cx:narration-style-1:31	「それに、ＧＷまで様子を見てから、やめるか続けるか決めてＯＫってことだったし」	「게다가, GW까지 상태를 보고 나서, 그만둘까 계속할까 결정해 OK라는 것이었거든」	fix	rewrites
+cx:narration-style-1:31	それに、ＧＷまで様子を見てから、やめるか続けるか決めてＯＫってことだったし。	게다가, GW까지 상태를 보고 나서, 그만둘까 계속할까 결정해 OK라는 것이었고.	keep	rewrites
+cx:narration-style-1:39	「そうですか、ならばあまり大騒ぎはしない方が……寝ている子も大勢いるでしょうし」	「그렇습니까, 라면 그다지 큰 소동은 하지 않는 게……자고 있는 아이도 여럿 있을 테니까요」	fix	rewrites
+cx:narration-style-1:39	そうですか、ならばあまり大騒ぎはしない方が……寝ている子も大勢いるでしょうし。	그렇습니까, 라면 그다지 큰 소동은 하지 않는 것이……자고 있는 아이도 여럿 있을 테고.	keep	rewrites
+cx:narration-style-1:40	「それに、今から食材を買いに行かなければならないだろうし」	「게다가, 지금부터 식재료를 사러 가야 할 테니까」	fix	rewrites
+cx:narration-style-1:40	「だからきっと相手になんてされないだろうしね」	「그러니까 분명 상대 따위가 되지 않을 테니까」	fix	rewrites
+cx:narration-style-1:40	それに、今から食材を買いに行かなければならないだろうし。	게다가, 지금부터 식재료를 사러 가야 할 테고.	keep	rewrites
+cx:narration-style-1:41	「それがいい。性格も人それぞれなら理想像も人それぞれだろうし」	「그게 좋다. 성격도 사람마다 제각각이라면 이상상도 사람마다 제각각일 테니까」	fix	rewrites
+cx:narration-style-1:41	「で、でもあれは近いうちにってことだろうし」	「이, 이기도 할 수 있는은 가까운 시일내에는 일일 테니까」	fix	rewrites
+cx:narration-style-1:41	それがいい。性格も人それぞれなら理想像も人それぞれだろうし。	그것이 좋다. 성격도 사람마다 제각각이라면 이상상도 사람마다 제각각일 테고.	keep	rewrites
+cx:narration-style-1:42	「筧は悪くないよ。私が羊飼いになったから忘れたわけだし」	「견은 나쁘지 않아. 내가 양치기가 됐으니까 잊은 거잖아」	fix	rewrites
+cx:narration-style-1:42	筧は悪くないよ。私が羊飼いになったから忘れたわけだし。	견은 나쁘지 않아. 내가 양치기가 되었으니까 잊은 거고.	keep	rewrites
+cx:narration-style-1:43	「ってか、夢にルールもなにもないか……架子だっているわけだし」	「그보다, 꿈에 룰도 아무것도 없는가……가자라고 있는 거잖아」	fix	rewrites
+cx:narration-style-1:43	ってか、夢にルールもなにもないか……架子だっているわけだし。	그보다, 꿈에 룰도 아무것도 없는가……가자라고 있는 거고.	keep	rewrites
+cx:narration-style-1:60	「最後の最後に、二つの部をまとめたのは望月さんですし」	「마지막의 마지막에, 두 개의 부를 정리한 건 모치즈키 씨거든요」	fix	rewrites
+cx:narration-style-1:60	「牛丼屋さんって女一人だとちょっと勇気いるじゃないですか。男の戦場って感じですし」	「소고기 덮밥집은 여자 한 사람이라면 조금 용기 있잖아요. 남자의 전장이라는 느낌이거든요」	fix	rewrites
+cx:narration-style-1:60	最後の最後に、二つの部をまとめたのは望月さんですし。	마지막의 마지막에, 두 개의 부를 정리한 것은 모치즈키 씨이고.	keep	rewrites
+cx:shi-list:9	「いいんですよ。俺は食事に来ただけですし」	「좋아요. 나는 식사하러 왔을 뿐이거든요」	fix	rewrites
+cx:shi-list:9	「この話がなくたって、どうせサマコンには参加させられてましたし」	「이 이야기가 없어도, 어차피 사마콘에는 참가하게 되고 있었거든요」	fix	rewrites
+cx:shi-list:9	いいんですよ。俺は食事に来ただけですし。	좋아요. 나는 식사하러 왔을 뿐이고요.	keep	rewrites
+cx:shi-list:29	「生徒主導なんですし」	「학생 주도이거든요」	fix	rewrites
+cx:shi-list:29	生徒主導なんですし。	학생 주도이고요.	keep	rewrites
+rewrite:sentence-final-shi	「まだよく知りませんし」	「아직 잘 모르거든요」	fix	rewrites
+rewrite:sentence-final-shi	「無駄になってしまいましたし」	「쓸데없게 돼버렸거든요」	fix	rewrites
+rewrite:sentence-final-shi	「寝ている子も大勢いるでしょうし」	「자고 있는 아이도 여럿 있을 테니까요」	fix	rewrites
+rewrite:sentence-final-shi	「難しいでしょうし！」	「어려울 테니까요!」	fix	rewrites
+rewrite:sentence-final-shi	「来るかもしれませんしね」	「올지도 모르고」	keep	rewrites
+rewrite:sentence-final-shi	「変わらなそうですし」	「변함없어 보이고」	keep	rewrites
+rewrite:sentence-final-shi	「どんなところでも狙えるし」	「어떤 곳에서도 노릴 수 있잖아」	keep	rewrites
+rewrite:sentence-final-shi	「外でも求めてくるし」	「밖에서도 구해 오잖아」	fix	rewrites
+rewrite:sentence-final-shi	「筧くんも、いつも助けてくれてるし」	「카케이 군도, 언제나 도와 주고 있잖아」	fix	rewrites
+rewrite:sentence-final-shi	「実行委員会との交渉も、全部桜庭任せだったし」	「실행위원회와의 교섭도, 전부 사쿠라바 맡김이었고」	fix	rewrites
+rewrite:sentence-final-shi	「詩音ちゃんにはよく似合ってると思うしさ」	「시온짱에게는 잘 어울리고 있다고 생각하기도 하고」	fix	rewrites
+rewrite:sentence-final-shi	「ゆっくり暮らしてもいいしね」	「천천히 살아도 괜찮기도 하고」	keep	rewrites
+rewrite:sentence-final-shi	「想像したことだって、ないとは言えないし」	「상상한 것도, 없다고는 말할 수 없고」	keep	rewrites
+rewrite:sentence-final-shi	「全員がそうとは限りませんし」	「전원이 그렇다고는 할 수 없고」	keep	rewrites
+rewrite:sentence-final-shi	「……まあ、そういうわけだしな」	「……뭐, 그런 거잖아」	fix	rewrites
+rewrite:sentence-final-shi	「別に怒ってないし。」	「별로 화내지 않거든.」	keep	rewrites
+rewrite:sentence-final-shi	「星も綺麗だし」	「별도 예쁘잖아」	keep	rewrites
