@@ -1,0 +1,21 @@
+# 규칙: LEX-4612, LEX-4613
+rule	input	expected	kind	layer
+cx:sense-cues-1:130	はい、特に報告事項ありません。	네, 특별히 보고사항 없습니다.	fix	rewrites
+cx:sense-cues-1:130	そっと振り返ってみるが、特にかわったことはない。	살며시 되돌아 보지만, 특별히 색다른 것은 없다.	fix	rewrites
+cx:sense-cues-1:130	「デスク周りを一通り確認しましたけど、特にはありませんでした」	「책상 주위를 대충 확인했는데요, 특별히는 없었습니다」	fix	rewrites
+cx:sense-cues-1:130	帰りは暗くなってしまうから特に用がなければ行きたくはない。	돌아오는 길은 어두워져버리니까 특별히 용무가 없으면 가고 싶지는 않다.	fix	rewrites
+cx:sense-cues-1:130	特に芸術学部は倍率が高く、余程の才能が無い限り合格は出来ない。	특히 예술 학부는 배율이 높고, 상당한 재능이 없는 한 합격은 할 수 없다.	keep	rewrites
+cx:sense-cues-1:130	ああ、なるべく早くお願いする。特に人夫は家族のいない奴を頼むぞ。	아, 되도록 빨리 부탁한다. 특히 인부는 가족이 없는 놈을 부탁하겠어.	keep	rewrites
+cx:sense-cues-1:130	特に味に関しては負けない	특히 맛에 관해서는 지지 않는다	keep	rewrites
+cx:sense-cues-1:140	御園が周囲の女の子に別れを告げ、俺の所へ駆け寄ってきた。	미소노가 주위의 여자아이에게 하직해, 나에게 달려가 왔다.	fix	rewrites
+cx:sense-cues-1:140	もう お前の役目は終わったよ 胸張って仲間の所へ帰れ	이제 네 역할은 끝났어 가슴 펴 동료에게 돌아가라	fix	rewrites
+cx:sense-cues-1:140	総督のところへ行った方が 話しが早いんじゃねえのか	총독에게 간 편이 이야기가 빠른 거 아닌가	fix	rewrites
+cx:sense-cues-1:140	フタマルマルマル…少し、赤城さんの所へ行ってきます。	2000…조금, 아카기 씨에게 다녀오겠습니다.	fix	rewrites
+cx:sense-cues-1:140	レイラは 事が進まないと ためらわず殺す男の所にいる	레이라는 일이 나아가지 않으면 망설이지 않고 죽이는 남자 곳에 있다	keep	rewrites
+cx:sense-cues-1:140	同じ所に住む	같은 곳에 산다	keep	rewrites
+sense:motomeru-demand	瑞穂裁判長！被告人の証言には曖昧なところがあります！再審を求めます！	미즈호 재판장! 피고인의 증언에는 애매한 곳이 있습니다! 재심을 요구합니다!	fix	senses
+sense:motomeru-demand	学園長が授業などの進捗報告を求めています	학원장이 수업 등의 진척 보고를 요구하고 있습니다	fix	senses
+sense:motomeru-demand	助けを求める	도움을 구한다	keep	senses
+sense:shibaraku-moment	残念だけど、今バギーは全部出払ってしまっていてね。しばらく待ってもらえないかな？	유감이지만, 지금 유모차는 전부 다 나가버리고 있어. 잠시 기다려 줄 수 없을까?	fix	senses
+sense:shibaraku-moment	しばらく後、購買に行くのを口実に一人外に出た。	잠시 후, 구매하러 가는 것을 구실에 일인외에 나왔다.	fix	senses
+sense:shibaraku-moment	しばらく休んで ちゃんと治療を 受けた方がいい	한동안 쉬고 제대로 치료를 받는 것이 좋다	keep	senses

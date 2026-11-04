@@ -14,6 +14,6 @@ lexical:missing-word	すごいマヌケに見えるだろ	대단한 멍청이로
 lexical:missing-word	ダメだ 痛てて…｡	안된다 아야야….	fix	lookup
 lexical:missing-word	お前は ちょっとまぬけじゃが	너는 조금 멍청하지만	fix	lookup
 lexical:missing-word	そうだね ここいらで…	그러게 이 근처로…	fix	lookup
-lexical:missing-word	わしの所に、或る男が来た。	나의 곳에, 어떤 남자가 왔다.	fix	lookup
+lexical:missing-word	わしの所に、或る男が来た。	나에게, 어떤 남자가 왔다.	fix	lookup
 lexical:missing-word	部員のみなさんに、ひと言、あってしかるべきかと	부원의 여러분에, 한마디, 있어 마땅할 것 같습니다	keep	lookup
 lexical:missing-word	追ってこないな	쫓아 오지 않네	keep	lookup
