@@ -2975,8 +2975,9 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
 
 }  // namespace
 
-// A と of saying after a manner of speaking (正直に言うと, 単刀直入に申し上げると) or of judging from
-// something (物音から判断すると) frames what follows, -자면 (말하자면, 말씀드리자면, 판단하자면).
+// A と of saying after a manner of speaking (率直に言うと, 単刀直入に申し上げると) or of judging from
+// something (物音から判断すると) frames what follows, -면 (말하면, 말씀드리면, 판단하면) as the
+// dictionary idioms do (正直に言うと 솔직히 말하면), never a step of the story.
 void DiscourseTo(Flusher& f) {
     for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->DirectSurface() != "と" || it->prev == nullptr) continue;
@@ -2989,7 +2990,7 @@ void DiscourseTo(Flusher& f) {
         std::string manner(p->group->surface);
         if (p->prev != nullptr && (manner == "に" || manner == "を" || manner == "で")) manner = std::string(p->prev->group->surface) + manner;
         if ((saying && dict::InClass(HDTRANS_CLASS("adverb.speak-manner"), manner)) || (judging && p->group->surface == "から")) {
-            it->AssignDirectSlot(it->DirectIndex(), "1자면");
+            it->AssignDirectSlot(it->DirectIndex(), "2면");
         }
     }
 }

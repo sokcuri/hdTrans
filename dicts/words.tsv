@@ -27446,3 +27446,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 お医者様	의사 선생님	N110	VHn		GN			LEX-4632: お医者様 의사 선생님			おいしゃさま	w:32700
 お医者さま	의사 선생님	N110	VHn		GN			LEX-4632: お医者さま 의사 선생님			おいしゃさま	w:32701
 零点下	영하	N110			GN			LEX-4643: 零点下 영하			れいてんか	w:32702
+実を云うと	사실을 말하자면	E300			GN			LEX-4670: 実を云うと私は好きであった 사실을 말하자면 나는 좋아했다				w:32800

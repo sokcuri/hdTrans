@@ -175,7 +175,7 @@
 //= ko-verb.passive-subject	Korean passive verbs whose patient is their subject and never an object (불리다, 끊기다): the を object of a passive read with one, or with 어지다 or 되다, is its subject (名前を呼ばれた 이름이 불렸다); a passive that takes the part or the thing one loses as its object (발을 밟히다, 지갑을 빼앗기다) is not one.
 //= ko-verb.look	Korean verbs of looking and checking whose と finds what follows, -니, unless a person answers it (時計を見ると、早過ぎた 보니, 時刻を確認すると、回っていた 확인하니, 彼女を見ると、彼女は笑った 보자; spec GRM-40, GRM-178).
 //= ko-verb.lead-in	Korean verbs of coming, leaving, hearing and asking whose と leads into the next act with -자 even when the same person goes on, not -고는 (研究所を出ると、製図部へ回った 나오자, それを聞くと、ギョッとした 듣자; spec GRM-40).
-//= adverb.speak-manner	Manners of speaking before 言う or 申し上げる whose と frames what follows, -자면 (正直に言うと 솔직히 말하자면, 単刀直入に申し上げると 단도직입적으로 말씀드리자면; spec GRM-40).
+//= adverb.speak-manner	Manners of speaking before 言う or 申し上げる whose と frames what follows, -면 as the dictionary idioms do (率直に言うと 솔직히 말하면, 単刀直入に申し上げると 말씀드리면; spec GRM-40).
 //= verb.come-to	Starts of Japanese verbs of coming to oneself (気づく, 気がつく, 我に返る) whose と before where one was found is -니 (気づくと目の前に彼女がいた 눈치채니; spec GRM-40).
 //= verb.come-upon	Starts of Japanese words of a start of surprise or of running into something (驚く, ぎょっと, ぶち当たる, 出くわす, 触れる) that, ending a past sentence after a と, tell what one came upon, -니 (ページをめくると、ぎょっとした 넘기니, 階段を下りきると、扉にぶち当たった 내려가니; spec GRM-40).
 //= ko-verb.found	Ends of Korean verbs of finding, seeing, hearing and being surprised at what was found that, ending a past sentence after a と, tell what was found, so the と is -니 (近づくと、目に入った 가까워지니 눈에 들어왔다; spec GRM-40).
