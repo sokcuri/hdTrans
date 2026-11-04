@@ -182,6 +182,91 @@ std::u32string SpellLongVowels(std::u32string rs, const LineContext& ctx, const 
     return rs;
 }
 
+// rs with a long mark inside a run of hiragana spelled as the vowel it stands for (しょーもない
+// しょうもない, かいちょーだ かいちょうだ, かわいー かわいい), where the run is no name and a key of three
+// characters or more, longer than any key that holds the mark as written, holds the vowel while the
+// kana before and after it read as words. The vowel is that of the row (う after the o row, い after the e row), or お and
+// え (とーい, ねーさん). Marks drawn twice or before a drawn run stay the sound stage's.
+std::u32string SpellInnerLongVowels(std::u32string rs, const LineContext& ctx, const dict::Snapshot& snap, bool& changed) {
+    for (size_t q = 1; q < rs.size(); q++) {
+        if (rs[q] != U'ー' || !IsHiraganaRune(rs[q - 1]) || In(rs[q - 1], U"ぁぃぅぇぉっんゎ")) continue;
+        if (q + 1 < rs.size() && (rs[q + 1] == U'ー' || rs[q + 1] == U'～' || rs[q + 1] == U'〜' || In(rs[q + 1], U"っぁぃぅぇぉ") ||
+                                  (rs[q + 1] >= 0xE000 && rs[q + 1] <= 0xF8FF))) {
+            continue;
+        }
+        const size_t from = WordFrom(rs, q - 1);
+        size_t runEnd = q + 1;
+        while (runEnd < rs.size() && IsHiraganaRune(rs[runEnd])) runEnd++;
+        // The longest key that holds the mark as written (そーなんだ, ちょー of 超); a name holding it
+        // (ほっしー) keeps the mark.
+        size_t written = 0;
+        bool name = false;
+        for (size_t st = q > from + 6 ? q - 6 : from; st < q && !name; st++) {
+            for (size_t e = q + 1; e <= runEnd && !name; e++) {
+                const std::u32string_view w = std::u32string_view(rs).substr(st, e - st);
+                if (IsKey(w, ctx, snap)) written = std::max(written, e - st);
+                name = snap.NamePerson(EncodeText(w));
+            }
+        }
+        if (name) continue;
+        const char32_t row = LongVowel(rs[q - 1]);
+        if (row == 0) continue;
+        std::u32string vowels(1, row);
+        if (row == U'う' && In(rs[q - 1], U"おこそとのほもよろごぞどぼぽ")) vowels += U'お';  // not after ょ
+        if (row == U'い' && In(rs[q - 1], U"えけせてねへめれげぜでべぺ")) vowels += U'え';
+        for (const char32_t v : vowels) {
+            std::u32string spelled = rs;
+            spelled[q] = v;
+            // The longest key of three characters or more that holds the vowel, from within six
+            // characters before it.
+            size_t ks = 0, ke = 0;
+            for (size_t st = q > from + 6 ? q - 6 : from; st < q; st++) {
+                for (size_t e = std::min(runEnd, st + kMaxVariantKey); e > q && e >= st + 3; e--) {
+                    if (e - st > ke - ks && e - st > written && IsKey(std::u32string_view(spelled).substr(st, e - st), ctx, snap)) {
+                        ks = st;
+                        ke = e;
+                    }
+                }
+            }
+            // A key that starts with a small kana is no word of its own (っこう of そっこー).
+            if (ke == 0 || In(spelled[ks], U"ぁぃぅぇぉっゃゅょゎ")) continue;
+            // A vowel that ends the key draws out the end of a word (見るなー, してー, だねー) unless the key is
+            // the whole word from the start of the run (せんせー, かいちょー), after no particle or ending.
+            if (ke == q + 1 && (ks != from || In(rs[q - 1], U"なねよてでわさぞぜかのや"))) continue;
+            // A key that reads only as nouns is mostly a kanji word spelled in kana (さんそう 산장, せいへん
+            // 정변): it must start the run and stand before a particle, the copula or no more kana
+            // (かいちょーだ, せんせーの, しょくぎょー研究; not さんそーぎょらーい, 存在せーへん).
+            const std::string tags = KeyTags(EncodeText(std::u32string_view(spelled).substr(ks, ke - ks)), ctx, snap);
+            if (tags.find_first_not_of("NIK") == std::string::npos) {
+                const std::u32string_view tail = std::u32string_view(spelled).substr(ke, runEnd - ke);
+                const bool ends = ke < spelled.size() && spelled[ke] == U'ー';
+                if (ks != from || ends || (!tail.empty() && !In(tail[0], U"だでじがはをにのもとやへかよね"))) continue;
+            }
+            // A key that the mark ends is an adjective (きれー) or a word of four kana or more (せんせー,
+            // かいちょー; not そこー, which the sound stage leaves of そっこー).
+            if (ke == q + 1 && ke - ks < 4 && tags.find_first_of("GH") == std::string::npos) continue;
+            // A name before an honorific (こーくん) is NicknamesToHangul's.
+            const std::u32string_view after = std::u32string_view(spelled).substr(q + 1);
+            if (after.starts_with(U"くん") || after.starts_with(U"ちゃん") || after.starts_with(U"さん") || after.starts_with(U"様")) continue;
+            // The kana before the key from the last kanji on, and the kana after it, read as words; the
+            // copula だ may follow (かいちょうだ), and the kana of an ending a stem key (しょうもな) takes.
+            std::u32string_view lead = std::u32string_view(spelled).substr(from, ks - from);
+            size_t kanji = lead.size();
+            while (kanji > 0 && !IsKanjiRune(lead[kanji - 1])) kanji--;
+            lead.remove_prefix(kanji);
+            std::u32string_view rest = std::u32string_view(spelled).substr(ke, runEnd - ke);
+            if (rest.starts_with(U"だ")) rest.remove_prefix(1);
+            // A stem key (しょうもな) goes on with the kana of its ending (い).
+            if (!rest.empty() && !ReadsAsKeys(rest, ctx, snap) && In(rest[0], U"いくけかっるれろらりんしさせそ")) rest.remove_prefix(1);
+            if ((!lead.empty() && !ReadsAsKeys(lead, ctx, snap)) || !ReadsAsKeys(rest, ctx, snap)) continue;
+            rs = std::move(spelled);
+            changed = true;
+            break;
+        }
+    }
+    return rs;
+}
+
 // Whether r is a small vowel that a loanword in hiragana writes (ふぁ, てぃ).
 bool LoanKana(char32_t r) { return In(r, U"ぁぃぅぇぉ"); }
 
@@ -352,6 +437,7 @@ std::string RewriteSpellingVariants(std::string_view text, const LineContext& ct
     if (lisped) rs = Unlisp(std::move(rs), kLispsAfter, ctx, snap, lisped);
     changed = lisped;
     rs = SpellLongVowels(std::move(rs), ctx, snap, changed);
+    rs = SpellInnerLongVowels(std::move(rs), ctx, snap, changed);
     rs = LoanwordsInHiragana(std::move(rs), ctx, snap, changed);
     rs = PoliteDrawnU(std::move(rs), changed);
     return changed ? EncodeText(rs) : std::string(text);
