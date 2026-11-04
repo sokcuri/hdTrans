@@ -38,8 +38,10 @@ namespace internal {
 // Whether the ASCII space at s[i] ends a phrase: after a final particle before more
 // Japanese (そうだね そうじゃない, すきだよ すきだよ), or between hiragana and a kanji
 // when the hiragana ends neither a particle nor a dictionary or attributive form
-// (ひろい集め 彼は, ほら 上も). Spaces of text written word by word (おなかが すきました,
-// かがやく おでこ, 美しい 花) and between kanji or katakana words (大見 健) are not.
+// (ひろい集め 彼は, ほら 上も). A dictionary or past form before a personal pronoun that opens a
+// phrase ends it too (分かってる 僕と, あった 俺は; not 彼女の, or after という, よう, なく and んだ).
+// Spaces of text written word by word (おなかが すきました, かがやく おでこ, 美しい 花) and
+// between kanji or katakana words (大見 健) are not.
 bool KanaSpace(std::string_view s, size_t i);
 
 // Whether s ends in a conjunctive form that ends a clause before 、: て ば たら だら ても

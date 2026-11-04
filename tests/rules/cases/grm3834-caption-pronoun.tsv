@@ -1,0 +1,21 @@
+# 규칙: GRM-3834
+rule	input	expected	kind	layer
+segment:caption-pronoun	彼には妙なところがあった 俺は刑事ですよ 先生	그에게는 이상한 점이 있었다 나는 형사예요 선생님	fix	segment
+segment:caption-pronoun	分かってる 僕とティナを助けるために	알고 있다 나와 티나를 돕기 위해	fix	segment
+segment:caption-pronoun	村を乗っ取ろうとしてる あなたは何かしないといけない	마을을 빼앗으려 하고 있다 당신은 뭔가 하지 않으면 안된다	fix	segment
+segment:caption-pronoun	違う 俺だって… やれる	아니다 나도… 할 수 있다	fix	segment
+segment:caption-pronoun	貴重品箱を探してる 俺達が盗んだと言ってる	귀중품상자를 찾고 있다 우리가 훔쳤다고 하고 있다	fix	segment
+segment:caption-pronoun	何もさせない 私が見てる	아무것도 시키지 않는다 내가 보고 있다	fix	segment
+segment:caption-pronoun	君に教えたい 俺は凄い	너에게 가르치고 싶다 나는 굉장하다	fix	segment
+segment:caption-pronoun	住所は必要ない 俺が取りに行く	has:필요 없다 내가	fix	segment
+segment:caption-pronoun	来週から期末試験が始まる 私はその為に呼び出されたのだ	다음주부터 기말시험이 시작된다 나는 그 때문에 불려 갔다	fix	segment
+segment:caption-pronoun	彼が連れてきた 私はビクターのために生きている	그가 데려왔다 나는 빅터를 위해 살아 있다	fix	segment
+segment:caption-pronoun	知らないと思う 私も初耳よ	모른다고 생각한다 나도 금시초문이야	fix	segment
+segment:caption-pronoun	空から落ちてきた 私の運命の悪魔…	하늘에서 떨어져 내린 내 운명의 악마…	keep	segment
+segment:caption-pronoun	う〜！ きっさっまという やつはッ！	으으~! 오고 님이라는 녀석은!	keep	segment
+segment:caption-pronoun	“でも悪口ばっか言ってる あいつらと違って—”	“하지만 욕뿐 하는 저 녀석들과 달리—”	keep	segment
+segment:caption-pronoun	"クジラ"と呼ばれている 奴が関係している	"고래"로 불리고 있는 놈이 관계하고 있다	keep	segment
+segment:caption-pronoun	あんたは助かるよう 俺が上に言ってやる	너는 살아나도록 내가 위에 말한다	keep	segment
+segment:caption-pronoun	「あなたのためにこんなに頑張ってきたのに、私 が 何 を し た っ て 言 う の よ ！！」	「당신을 위해 이렇게 노력해 왔는데, 내가 뭘 했다고 하는 거야 !!」	keep	segment
+segment:caption-pronoun	対空兵器を持ってる 攻撃を受けた	has:가지고 있는 공격을	keep	segment
+segment:caption-pronoun	かがやく おでこ	빛나는 이마	keep	segment
