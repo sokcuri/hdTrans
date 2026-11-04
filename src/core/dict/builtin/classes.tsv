@@ -29,6 +29,7 @@
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
 //= noun.invite-place	Places and gatherings one is invited to with に (うち, 家, パーティー): いらっしゃいませんか after one is 오시지 않겠습니까 (spec LEX-4600).
 //= verb.keep-doing	Stems of verbs one keeps doing (見, 見張, 寝, 待): a ていないと of one that ends the sentence is what one must keep doing, -아야 한다 (spec GRM-3725).
+//= verb.offer	Stems of verbs one offers to do for the listener (奢, 手伝, 案内): their るよ at the end promises, -ㄹ게 (奢るよ 한턱낼게; spec GRM-3911).
 //= word.wonder	Words of wonder that open a line before a pause (へえ、, ほう、), also as the interjection stage has already written them (헤에, 호오): a verb with な after one is admired, 구나, not forbidden (spec GRM-3723).
 //= word.wh-ask	Question words that ask by themselves in old speech (何, 誰, どこ, なぜ, どう): not before も, でも, か or より, where they are indefinite or embedded (spec GRM-3800).
 //= verb.archaic-threat	Verbs of striking down that make the speaker of old speech threaten, so that 拙者 is 나, not the humble 소인 (spec LEX-23).
@@ -10418,6 +10419,12 @@ verb.keep-doing	掴
 verb.keep-doing	押さえ
 verb.keep-doing	支え
 verb.keep-doing	付い
+verb.offer	奢
+verb.offer	おご
+verb.offer	手伝
+verb.offer	案内
+verb.offer	送
+verb.offer	おく
 word.wonder	へえ
 word.wonder	へぇ
 word.wonder	へー

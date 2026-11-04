@@ -1,0 +1,22 @@
+# 규칙: GRM-3910, GRM-3911, LEX-4809
+rule	input	expected	kind	layer
+cx:meaning-flips-1:190	「ここで、御園らしき人物を見かけたって噂を聞いたんだ」	「여기서, 미소노 같은 인물을 보았다는 소문을 들은 거야」	fix	rewrites
+cx:meaning-flips-1:190	最近、甲州の金がよく採れるようになったって噂を聞いたのよ。	최근, 코우슈우의 돈이 잘 얻게 되었다는 소문을 들었어.	fix	rewrites
+cx:meaning-flips-1:190	見かけたって分からない	봐도 모른다	keep	rewrites
+cx:meaning-flips-1:192	なにが私に起ころうと	뭐가 나에게 일어나든	fix	rewrites
+cx:meaning-flips-1:192	誰とぶつかろうと、ぶっ壊す	누구와 부딪치든, 부순다	keep	rewrites
+cx:meaning-flips-1:192	どんなに簡単であろうと	아무리 간단해도	keep	rewrites
+cx:meaning-flips-1:192	行こうと思う	가려고 한다	keep	rewrites
+cx:meaning-flips-1:194	誰って ひどい言いぐさだな	누구라니 심한 말투네	fix	rewrites
+cx:meaning-flips-1:194	誰って？	누구는?	keep	rewrites
+cx:meaning-flips-1:196	「足並みを揃えていただきませんと……」	「보조를 맞추지 않으면……」	fix	rewrites
+cx:meaning-flips-1:196	来ないと困りますと言った	오지 않으면 곤란합니다라고 했다	keep	rewrites
+cx:meaning-flips-1:200	越後の娘のタマちゃんが、何の因果か妹に。愛してみせます、お兄ちゃん	에치고 딸 타마짱이, 무슨 인과나 여동생에게. 사랑해 보이겠습니다, 오빠	fix	rewrites
+cx:meaning-flips-1:200	必ずあなたを負かしてみせます！	반드시 당신을 이겨 보이겠습니다!	keep	rewrites
+cx:meaning-flips-1:200	見つけてみせてよ。	찾아내 보여.	keep	rewrites
+cx:meaning-flips-1:200	活躍してみせるね	활약해 보일게	keep	rewrites
+cx:meaning-flips-1:202	「ああ、色々あって疲れただろ。お疲れさま会ってことで２人に何か奢るよ」	「아, 여러 일이 있어서 지쳤지. 수고하셨어요 만나 일로 2명에게 뭔가 한턱낼게」	fix	rewrites
+cx:meaning-flips-1:202	家まで送るよ	집까지 배웅할게	fix	rewrites
+cx:meaning-flips-1:202	レナも手伝えるよ	레나도 도울 수 있어	keep	rewrites
+cx:meaning-flips-1:204	それが愛ってものだから	그것이 사랑이라는 것이니까	fix	local
+cx:meaning-flips-1:204	愛っても	사랑이라고 해도	keep	local
