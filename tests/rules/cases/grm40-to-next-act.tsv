@@ -22,7 +22,7 @@ rewrite:past-sequence	部室に近づくと、ドアが開いているのが目�
 rewrite:past-sequence	読み進めていくと、いくつか基本的なことがわかった。	has:나가니,	keep	rewrites
 rewrite:past-sequence	そう思うと、腕の中ののぞみが急に気になってきた。	has:생각하니,	keep	rewrites
 rewrite:past-sequence	彼女のそばに寄ると、砂に『架子』と書かれていた。	has:니, 모래에	keep	rewrites
-rewrite:past-sequence	ドアを開けると、そこには誰もいなかった。	문을 열자, 거기에는 아무도 없었다.	keep	rewrites
+rewrite:past-sequence	ドアを開けると、そこには誰もいなかった。	문을 여니, 거기에는 아무도 없었다.	keep	rewrites
 rewrite:past-sequence	春になると、桜が咲く。	봄이 되면, 벚꽃이 핀다.	keep	rewrites
 rewrite:past-sequence	ボタンを押すと、音が鳴る。	버튼을 누르면, 소리가 울린다.	keep	rewrites
 rewrite:past-sequence	「ボタンを押すと、音が鳴る」	has:누르면,	keep	rewrites
