@@ -100,7 +100,7 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: WriteSpacedCopies, JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
-// RewriteVolitionalSo, RewriteRaLessIchidan, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
+// RewriteVolitionalSo, RewriteRaLessIchidan, RewriteKansaiNegativeKana, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
 // RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
 // RewriteOnbinU, RewriteCasualAdjectives, then WriteSounds;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
@@ -213,6 +213,13 @@ std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, con
 // when no word of the dictionary from where that stem starts goes on over the れ (入れる, 切れない,
 // 呆れない; the rows of 見れ, 食べれ and 来れ).
 std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The Kansai negative へん after a kana stem that the spoken forms leave (足りへん 足りない, ならへん,
+// 脱いでくれへん, 格好がつかへん, 合わせられへん) as ない, and a tail of KansaiNegativeTail after it with it, when
+// the kana from a kanji before them, from where they start or from after a particle or a て form among them
+// spell a verb's stem before ない; not the polite まへん, the 辺 of ここらへん nor 変な before a noun in kanji or
+// katakana (またへんな奴).
+std::string RewriteKansaiNegativeKana(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
 // The の after a noun in kanji or katakana said ん before a member of contraction.n-no
 // (頭ん中 頭の中, 先生んとこ 先生のとこ), when the dictionary has the noun and no word that

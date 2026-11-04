@@ -3299,6 +3299,73 @@ std::string_view ContractedKana(Says says, std::string_view stem, const std::u32
     return {};
 }
 
+// Whether text, the kana stem before a Kansai へん (and the kanji before it), is a form of a verb of the
+// dictionary that the negative ない follows: the stem of an ichidan verb (くれ, なれ, 足り), the ichidan stem
+// before a られ (合わせられ, やめられ), the negative stem of a godan verb (なら, つか) or its potential (もらえ).
+bool KansaiNegativeStem(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    const std::string s(text);
+    if (VerbFormIs(s + "る", kDictionaryForm, IchidanKind, ctx, snap)) return true;
+    if (s.ends_with("られ") && VerbFormIs(s.substr(0, s.size() - std::string_view("られ").size()) + "る", kDictionaryForm,
+                                         IchidanKind, ctx, snap)) {
+        return true;
+    }
+    return VerbFormIs(s, kNegativeStem, Godan, ctx, snap) || VerbFormIs(s, kPotential, Godan, ctx, snap);
+}
+
+}  // namespace
+
+// The Kansai negative へん after a kana stem the spoken forms leave (足りへん, ならへん, くれへん,
+// もらえへん, 合わせられへん, 格好がつかへん) as ない; KansaiNegativeTail after it reads with it.
+std::string RewriteKansaiNegativeKana(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+    constexpr std::string_view kHen = "へん";
+    if (!ctx.dialectForms || text.find(kHen) == std::string_view::npos) return std::string(text);
+    const std::u32string rs = DecodeText(text);
+    const std::string s = EncodeText(rs);
+    const std::vector<size_t> byte = EncodedOffsets(rs);
+    std::string out;
+    size_t done = 0;
+    for (size_t h = 1; h + 1 < rs.size(); h++) {
+        if (rs[h] != U'へ' || rs[h + 1] != U'ん') continue;
+        const std::string_view head = std::string_view(s).substr(0, byte[h]);
+        // The polite まへん is the word stage's; the へん of 辺 after ここら, そこら, あそこら, どこら.
+        if (rs[h - 1] == U'ま' || head.ends_with("ここら") || head.ends_with("そこら") || head.ends_with("どこら")) continue;
+        // The へんな of 変な before a noun in kanji or katakana (またへんな奴).
+        if (h + 3 < rs.size() && rs[h + 2] == U'な' && (IsKanjiRune(rs[h + 3]) || IsKatakanaRune(rs[h + 3]))) continue;
+        size_t hs = h;
+        while (hs > 0 && h - hs < 12 && IsHiraganaRune(rs[hs - 1])) hs--;
+        if (hs == h) continue;
+        size_t ks = hs;
+        while (ks > 0 && hs - ks < 3 && IsKanjiRune(rs[ks - 1])) ks--;
+        // The verb starts at a kanji before the kana, where the kana start, or after a particle or a て
+        // form among them (脱いでくれへん, 格好がつかへん), and spans two characters or more.
+        bool found = false;
+        for (size_t st = ks; st + 1 < h && !found; st++) {
+            if (st > hs && !In(rs[st - 1], U"がをにはもてでと")) continue;
+            found = KansaiNegativeStem(std::string_view(s).substr(byte[st], byte[h] - byte[st]), ctx, snap);
+        }
+        if (!found) continue;
+        size_t end = h + 2;
+        std::string_view negative = "ない";
+        const std::string_view rest = std::string_view(s).substr(byte[end]);
+        if (rest.starts_with("かった")) {
+            negative = "なかった";
+            end += 3;
+        } else if (const NegativeTail t = KansaiNegativeTail(rest); t.length > 0) {
+            negative = t.negative;
+            end += text::RuneCount(rest.substr(0, t.length));
+        }
+        out.append(s, byte[done], byte[h] - byte[done]);
+        out += negative;
+        done = end;
+        h = end - 1;
+    }
+    if (done == 0) return std::string(text);
+    out.append(s, byte[done], std::string::npos);
+    return out;
+}
+
+namespace {
+
 // Whether a standalone いざ stands before pos in its sentence, since the last 。！？ or bracket: one after no hiragana
 // and before a kanji, a comma or a space, not the いざ of いざとなったら, いざという時, いざこざ or いざかや. A ん before と
 // there is the literary volitional (いざ行かんと思う), no negative.
@@ -3773,7 +3840,7 @@ std::string SoundRun(std::string_view normalized, const LineContext& ctx, const 
         internal::RewriteCasualAdjectives(
             internal::RewriteOnbinU(
                 internal::RewriteContractedNo(
-                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
+                    internal::RewriteRaLessKuru(internal::RewriteContractedAuxiliaries(internal::RewriteContractedIku(internal::RewriteContractedOru(internal::RewriteContractedN(internal::RewriteKansaiNegativeKana(internal::RewriteRaLessIchidan(internal::RewriteVolitionalSo(internal::RewriteClippedVolitional(internal::RewriteDrawnObject(completed, snap), snap), snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), ctx, snap), snap),
                 ctx, snap),
             ctx, snap),
         ctx, snap);
