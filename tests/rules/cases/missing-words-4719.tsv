@@ -1,0 +1,18 @@
+# 규칙: LEX-4719
+rule	input	expected	kind	layer
+cx:notice-words-1:170	木曽、突入する。オラ、オラ！道をあけろぉ！	기소, 돌입한다. 이봐, 이봐! 길을 비워라!	fix	rewrites
+cx:notice-words-1:171	オラぁ！ かかってこい！	오라! 덤벼라!	fix	rewrites
+cx:notice-words-1:171	オラが行ってくる	내가 다녀올게	keep	rewrites
+cx:notice-words-1:170	チチ オラを信じろ！	치치 나를 믿어라!	keep	rewrites
+lexical:missing-word	ワイが女やったら、この場で求婚しとったわ	내가 여자 하자, 이 자리에서 청혼하고 있었어	fix	lookup
+lexical:missing-word	オラたち 豚バラで うまい飯 食わされるの？	우리 삼겹살로 맛있는 밥 먹여지는 거야?	fix	lookup
+lexical:missing-word	今夜だって、これから電話かけに一寸出て	오늘 밤도, 지금부터 전화 걸어 조금 나와	fix	lookup
+lexical:missing-word	完璧な、一寸の隙もない典型的な朝食だった。	완벽한, 한 치의 틈도 없는 전형적인 아침 식사였다.	keep	lookup
+lexical:missing-word	通信を報告する。心して聞け。	통신을 보고한다. 명심해서 들어라.	fix	lookup
+lexical:missing-word	ライブハウスのおっちゃんも 言ってたでしょ	라이브하우스의 아저씨도 말했잖아	fix	lookup
+lexical:missing-word	大層なゲス野郎だ	대단한 쓰레기 놈이다	fix	lookup
+lexical:missing-word	赤ちゃんを食べるワルだ	아기를 먹는 악당이다	fix	lookup
+lexical:missing-word	ムチャするなよ、先生！	무리하지 마, 선생님!	fix	lookup
+lexical:missing-word	そ… それは ひきょうすぎるのでは	그… 그것은 너무 비겁한 것은	fix	lookup
+lexical:missing-word	“うぐ… ひきょう者だと！”	“우그… 비겁자라고! ”	fix	lookup
+lexical:missing-word	It's 8 o'clock. さあおまたせ。	It's 8 o'clock. 자 기다리게 했다.	keep	lookup
