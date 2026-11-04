@@ -6,7 +6,7 @@ constraint:shikamo-before-tarasu	ボクの能力は周りに災いしかもた�
 constraint:shikamo-before-tarasu	大きすぎる力は厄災しかもたらさない。	너무 큰 힘은 액재밖에 가져오지 않는다.	fix	lookup
 constraint:shikamo-before-tarasu	しかもたらふく食べた。	게다가 배불리 먹었다.	keep	lookup
 constraint:shi-before-shitsu-word	ネ それに持ち上げる時もしっかりしてるので	네 게다가 들어 올릴 때도 확실히 하고 있기 때문에	fix	lookup
-constraint:shi-before-shitsu-word	気になっている方もしっかり読んでくださいねー。	신경 쓰이고 있는 편도 확실히 읽어 주세요―.	fix	lookup
+constraint:shi-before-shitsu-word	気になっている方もしっかり読んでくださいねー。	신경 쓰이고 있으신 분도 확실히 읽어 주세요―.	fix	lookup
 constraint:shi-before-shitsu-word	もしもし？	여보세요?	keep	lookup
 constraint:moui-not-before-ii	でも、礼香先輩はもういない。	하지만, 레이카 선배는 이제 없다.	fix	lookup
 constraint:moui-not-before-ii	フクロウはもういなかった。	후쿠로우는 이제 없었다.	fix	lookup
