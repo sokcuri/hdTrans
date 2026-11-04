@@ -62,6 +62,44 @@ int CharsBeforeEnd(const output::Pieces& text, size_t k, size_t from) {
     return n;
 }
 
+// The length of the personal pronoun that s starts with, 0 for none: one of the speaker or the
+// listener, or 彼 and 彼女 with their plurals; not あいつ, そいつ or 奴, which a clause before them
+// often describes (悪口ばっか言ってる あいつら, と呼ばれている 奴).
+std::size_t Person(std::string_view s) {
+    std::size_t n = 0;
+    auto take = [&](std::string_view m) {
+        if (m.size() > n && s.starts_with(m)) n = m.size();
+    };
+    for (const dict::ClassId set : {HDTRANS_CLASS("pronoun.first-person"), HDTRANS_CLASS("pronoun.listener")}) {
+        for (const std::string_view m : dict::ClassMembers(set)) take(m);
+    }
+    for (const std::string_view m : {"彼", "彼女", "彼ら", "彼女ら"}) take(m);
+    return n;
+}
+
+// Whether s opens with a personal pronoun that starts a phrase of its own: not one before の (a
+// clause before a space describes the noun after 彼女の) or one running into a longer word (君主).
+bool PersonOpens(std::string_view s) {
+    const std::size_t n = Person(s);
+    if (n == 0) return false;
+    std::string_view rest = s.substr(n);
+    for (const std::string_view plural : {"たち", "達", "ら", "等", "ども"}) {
+        if (rest.starts_with(plural)) {
+            rest.remove_prefix(plural.size());
+            break;
+        }
+    }
+    return !rest.starts_with("の") && !IsKanjiRune(text::DecodeRune(rest).cp);
+}
+
+// Whether a form before a pronoun goes on into it: the quoting という and the よう of a purpose,
+// which describe or lead to it (きさまという やつ, 助かるよう 俺が), the なく of "not this but"
+// (父さんじゃなく 俺を), and the explanatory んだ, after which the pronoun is the subject said last
+// (どんだけ私のこと好きなんだ お前).
+bool ClauseRunsOn(std::string_view s) {
+    return s.ends_with("いう") || s.ends_with("よう") || s.ends_with("なく") || s.ends_with("んだ");
+}
+
 }  // namespace
 
 bool KanaSpace(std::string_view s, size_t i) {
@@ -73,7 +111,8 @@ bool KanaSpace(std::string_view s, size_t i) {
     const char32_t first = text::DecodeRune(rest).cp;
     if (!IsJapaneseRune(first)) return false;
     return RuneIn(last, U"ねよさわぞぜ") ||
-           (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか"));
+           (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか")) ||
+           (RuneIn(last, U"いただるうくすつぬむぶぐ") && PersonOpens(rest) && !ClauseRunsOn(s.substr(0, i)));
 }
 
 bool Conjunctive(std::string_view s) {
