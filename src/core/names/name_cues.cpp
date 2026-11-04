@@ -440,12 +440,18 @@ bool FinalCallAt(std::string_view key, std::string_view before, std::string_view
            after.starts_with("」") || after.starts_with("…");
 }
 
-// Whether the dictionary reads key as a part of the body, a colour or a feeling, words that do
-// what a person does in figures of speech (瞳が見つめる, 心が泣く, 紫がかった).
+// Whether a person cue of key may be a figure of speech (瞳が見つめる, 心が泣く, 花が笑う, 夢が叫ぶ,
+// 未来が微笑む): key is a single character, a member of name.personified-word, or a word the dictionary
+// reads as a part of the body, a colour, a feeling, weather, the sky or a place.
 bool FigureKey(const dict::Snapshot& snap, std::string_view key) {
+    if (text::RuneCount(key) < 2 || dict::InClass(HDTRANS_CLASS("name.personified-word"), key)) return true;
     for (const dict::Candidate& c : snap.RetrieveRecords(key, dict::LookupMode::General)) {
-        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN")) continue;
-        for (const std::string_view code : {"VBp", "UCl", "UFl"}) {
+        // The senses of a proper noun, a person or a place (千里 치사토, 高峰 타카미네), are no common word.
+        if (c.codes == nullptr || c.source != key || c.codes->sem.HasPrefix("QPN") || c.codes->sem.HasCode("QCT") ||
+            c.codes->sem.HasCode("QNN")) {
+            continue;
+        }
+        for (const std::string_view code : {"VBp", "UCl", "UFl", "VFr", "VSs", "VPl"}) {
             if (c.codes->sem.HasCode(code)) return true;
         }
     }
@@ -456,9 +462,9 @@ bool FigureKey(const dict::Snapshot& snap, std::string_view key) {
 // (皐月の顔), as the subject of が, は or も, or set off by 、 before a clause, of what only a person
 // does (玉藻がはにかむ, 小太刀が黙然と腕を組んだ, 弥生、怒ってない), called with a request (ゴーヤー、教えて)
 // or, with two characters or more, after a final particle (イクよ、皐月っ！; not だったね、海), or
-// closing a sentence after a clause of what a person does (口をパクパクさせる玉藻。). The common word
-// of the key names no person or animal, no part of the body, colour or feeling, and no verb starts
-// with it (HonorableKey, FigureKey).
+// closing a sentence after a clause of what a person does (口をパクパクさせる玉藻。). The key has two
+// characters or more, its common word names no person or animal and is no word a figure of speech
+// makes a person (FigureKey), and no verb starts with it (HonorableKey).
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     if (!HonorableKey(snap, key) || FigureKey(snap, key)) return false;
     if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
