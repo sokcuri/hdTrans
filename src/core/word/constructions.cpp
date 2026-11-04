@@ -440,6 +440,8 @@ constexpr NamedFeature kFeatures[] = {
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     // Earlier text on the line takes leave (word.leave-taking): a greeting after it parts.
     {"after-leave-taking", [](Flusher& f, const Item* it) { return AfterLeaveTaking(f.w, it); }},
+    // The line opens with a word of wonder and a pause (へえ、): what follows is admired, not forbidden.
+    {"after-wonder", [](Flusher& f, const Item* it) { return AfterWonder(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"after-space", [](Flusher& f, const Item* it) {

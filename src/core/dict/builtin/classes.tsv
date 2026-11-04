@@ -24,6 +24,7 @@
 //= verb.te-state-aux	Stems of the auxiliaries of state after a て form (いる, おる, しまう, ある): 決まっている is the verb 決まる, not the adverb 決まって (決まって遅刻する).
 //= word.quote-stem-other	Words, alone or with the word after them, that start like verb.quote-stem but quote nothing (予想通り, 想像以上, 想像を絶する, 仰天, 仰向け, 仰ぎ見る, ぼやける, 察しがつく, 決まりきった, 決め台詞, 気付かないうちに, 勘違いだった).
 //= noun.partner	Words of a partner or a couple (彼氏, 恋人, カップル): 付き合っている before one describes a relationship, 사귀다.
+//= word.wonder	Words of wonder that open a line before a pause (へえ、, ほう、), also as the interjection stage has already written them (헤에, 호오): a verb with な after one is admired, 구나, not forbidden (spec GRM-3723).
 //= word.leave-taking	Words of taking leave (ありがとうございました, お世話になりました, 失礼します, さようなら): a 御機嫌よう later on the line closing a quoted speech parts, 안녕히 계세요, and greets no one.
 //= word.scold	Interjections that scold the listener (こら, コラ): a negative question after one in its sentence orders the act, 지 못해 (こら やめんか。 그만두지 못해.), and invites to nothing (spec MNG-8).
 //= word.kana-before-word	Kana spellings of quantifiers that stand before the predicate they count over, also a word in kanji (みな元気だ 모두 건강하다, はみな実に美しい 모두 실로 아름답다).
@@ -9864,6 +9865,21 @@ word.leave-taking	さよなら
 word.leave-taking	お別れ
 word.leave-taking	お会いすることはない
 word.leave-taking	二度とお会い
+word.wonder	へえ
+word.wonder	へぇ
+word.wonder	へー
+word.wonder	ほう
+word.wonder	ほお
+word.wonder	ほー
+word.wonder	ほぉ
+word.wonder	ふーん
+word.wonder	ふうん
+word.wonder	わあ
+word.wonder	わぁ
+word.wonder	헤에
+word.wonder	호오
+word.wonder	흐응
+word.wonder	와아
 noun.partner	彼氏
 noun.partner	彼女
 noun.partner	恋人

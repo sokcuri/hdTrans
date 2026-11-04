@@ -520,6 +520,32 @@ bool AfterLeaveTaking(const Worker& w, const Item* it) {
     return false;
 }
 
+bool AfterWonder(const Worker& w, const Item* it) {
+    std::string before;
+    for (int token = 0; token < it->tokenIndex; token++) before += w.Tok(token).text;
+    before += it->text.substr(0, static_cast<std::size_t>(std::max(it->start, 0)));
+    std::string_view s = before;
+    for (const std::string_view open : {" ", "　", "「", "『"}) {
+        while (s.starts_with(open)) s.remove_prefix(open.size());
+    }
+    for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("word.wonder"))) {
+        if (!s.starts_with(m)) continue;
+        std::string_view rest = s.substr(m.size());
+        bool paused = false;
+        for (const std::string_view mark : {"、", "…", "！", "!", "ー", "〜", "　", " "}) {
+            while (rest.starts_with(mark)) {
+                rest.remove_prefix(mark.size());
+                paused = true;
+            }
+        }
+        if (!paused) continue;
+        bool ends = false;
+        for (const std::string_view stop : {"。", "！", "？", "!", "?", "."}) ends = ends || rest.find(stop) != std::string_view::npos;
+        if (!ends) return true;
+    }
+    return false;
+}
+
 bool SelectLemma(Flusher& f, Item* it, std::string_view lemma) {
     const int count = static_cast<int>(it->group->entries.size());
     for (int slot = 0; slot < count; slot++) {
