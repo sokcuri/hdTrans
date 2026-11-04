@@ -536,6 +536,7 @@ void Registry::Add(std::string_view rawLine) {
         }
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
+    for (const std::string& t : FreeKanaNames(line)) count(kanaFree_, t);
     // A line that is a name alone, a speaker line before a quote, names the speaker of the
     // quote.
     const std::string_view body = TrimSpace(line);
@@ -676,6 +677,17 @@ const std::map<std::string, Name>& Registry::Accepted() {
     for (const auto& [t, c] : kanaHon_) {
         Name& n = all[t];
         n.score += static_cast<double>(std::min(c, kHonorificCap));
+        // Kana no dictionary has stand for the person after one honorific (みいちゃん … みいは; spec
+        // LEX-4826): they are no word a bare use could mean.
+        if (Flags(t).records == 0) n.score += 1;
+        n.person = true;
+    }
+    // Kana no dictionary has that the document writes three times or more where a name stands, before a
+    // particle and a word (みいは自分の, みいが来た), are a name there too (spec LEX-4826).
+    for (const auto& [t, c] : kanaFree_) {
+        if (c < 3 || Flags(t).records > 0) continue;
+        Name& n = all[t];
+        n.score += kThreshold;
         n.person = true;
     }
     for (const auto& [t, c] : gloss_) {
@@ -910,6 +922,10 @@ const std::map<std::string, Name>& Registry::Accepted() {
             // the threshold for a common word (ひかり), and it is no predicate form (あおいさん,
             // but あおい空).
             const auto k = kanaHon_.find(t);
+            if (k == kanaHon_.end() && kanaFree_.count(t) != 0 && n.score >= need && Flags(t).records == 0) {
+                scores_[t] = n;
+                continue;
+            }
             if (k == kanaHon_.end()) {
                 // A name given in parentheses (Add) stands alone.
                 if (gloss_.count(t) != 0 && n.score >= need) scores_[t] = n;

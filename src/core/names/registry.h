@@ -145,6 +145,13 @@ private:
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     bool NoNounWord(std::string_view t);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
+    // The runs of two to five kana in line that no dictionary has and that stand where a name does:
+    // a whole run of hiragana after no kana, kanji or katakana, before が, は, も, の, を, に, と or へ and
+    // then no hiragana (みいは自分の); not with a long mark, a small vowel or tsu, or one kana said over
+    // (spec LEX-4826).
+    std::vector<std::string> FreeKanaNames(std::string_view line);
+    // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
+    bool InflectedRun(std::string_view t);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool LayerReading(std::string_view t);
@@ -196,6 +203,7 @@ private:
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
+    std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
     std::map<std::string, int> gloss_;                  // surfaces with a kana gloss or ruby
     std::map<std::string, std::string> reading_;        // first gloss or ruby reading
     std::map<std::string, int> runs_;                   // kanji runs

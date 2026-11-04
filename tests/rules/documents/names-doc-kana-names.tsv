@@ -1,0 +1,10 @@
+# 규칙: LEX-4826
+rule	input	expected	kind	layer
+names:doc-kana-names	みいちゃん、来て。\nみいは自分の荷物を持った。\n出口へ向かうみいを見ていると。	미이짱, 와.\n미이는 자신의 짐을 들었다.\n출구로 향하는 미이를 보고 있다고.	fix	fixed
+names:doc-kana-names	ぱんにゃは今日も元気だ。\nぱんにゃが走る。\nその時ぱんにゃの声がした。\nぱんにゃを見た。	판냐는 오늘도 건강하다.\n판냐가 달린다.\n그 때 판냐의 목소리가 들렸다.\n판냐를 보았다.	fix	fixed
+names:doc-kana-names	なので、葉月先生に付き添いをお願いした。\n「そうね、葉月なら、きっと大丈夫よ……」	그래서, 하즈키 선생님에게 시중드는 사람을 부탁했다.\n「그래, 하즈키라면, 분명 괜찮아……」	fix	fixed
+names:doc-kana-names	園崎本家に移られました。\n園崎本家は代々続く家です。	소노자키 본가로 옮겨졌습니다.\n소노자키 본가는 대대로 계속되는 집입니다.	fix	fixed
+names:doc-kana-names	「でも、いい先生ほど気に入った生徒を」\nいい天気だ。	「하지만, 좋은 선생님만큼 마음에 든 학생을」\n좋은 날씨다.	keep	fixed
+names:doc-kana-names	どくんどくんと鳴る。\nどくんどくんと響く。	두근 두근 울린다.\n두근 두근 울린다.	keep	fixed
+names:doc-kana-names	sugarをたくさん入れましょう。\nもっとたくさん。	sugar를 많이 넣읍시다.\n좀 더 많이.	keep	fixed
+names:doc-kana-names	えへへ、くすぐったい。\nえへへが止まらない。\nえへへと笑った。\nえへへは癖だ。	에헤헤, 낯간지럽다.\n에헤헤가 멈추지 않는다.\n에헤헤와 웃었다.\n에헤헤는 버릇이다.	keep	fixed
