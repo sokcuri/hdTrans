@@ -18,7 +18,7 @@ analysis:shorter-ending	ガードレールにぶつかったあとですか？	�
 analysis:shorter-ending	慎一も　変えようとしてますよ。そう…。	신이치도 바꾸려고 하고 있어요. 그래….	fix	analysis
 analysis:shorter-ending	盛り上がってるとこ悪いんですけど・	has:고조되고 있는 곳	fix	analysis
 analysis:shorter-ending	(香尾里)こうやってね 光のほうを向けるときれいに見えるのよ	has:향하면 예쁘게	fix	analysis
-analysis:shorter-ending	願かけなどはやめ　今後は薬をのむとここで約束せよ。	has:마시면 여기서	fix	analysis
+analysis:shorter-ending	願かけなどはやめ　今後は薬をのむとここで約束せよ。	has:마신다고 여기서	fix	analysis
 analysis:shorter-ending	他人事として見ているぶんには美しいかもしれないけれど、自分となるとこれは落ち着かないわ……。	lacks:나루와	fix	analysis
 analysis:shorter-ending	それをあげるのです	그것을 줍니다	keep	analysis
 analysis:shorter-ending	わかんないんだけど	모르는데	keep	analysis
