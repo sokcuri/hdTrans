@@ -32145,6 +32145,9 @@ ttt	ttt	K110			GN				jisjk:201744
 っては	6버려서는	S5A0			GN				jisjk:264987		
 ってば	(은)는 정말	P200			GN				jisjk:341192		
 ってば	4다니까	S500			GN				jisjk:345538		
+ってば	5다니까	S560			GN				tteba:1		
+ってば	2라니까	S540			GN				tteba:2		
+ってば	2라니까	S570			GN				tteba:8		
 ってます	6버리고 있습니다	S5A0			GN				jisjk:343250		
 っても	(이)라고 해도	P200			GN				jisjk:342991		
 っても	라고 해도	P200			GN	3383	||1 G+0== "Hz"	っても가 문장 첫 단어이면 라고 해도라는 번역을 고른다. (미발동: rare-context)	jisjk:342992		
@@ -33620,6 +33623,8 @@ ttt	ttt	K110			GN				jisjk:201744
 ですだい。	인 거야	P210		Z2	GN				jisjk:6234		
 ですって	(이)라고	P211		Z2	GN				jisjk:6235		
 ですって	(이)래	P210		Z2J2	GN				jisjk:6236		
+いですってば	1다니까요	T500			GN				tteba:7		
+いんですってば	1다니까요	T500			GN				tteba:9		
 ですと	이라면	P200			GN				jisjk:264414		
 ですなあ	(이)구나	P210		Z2J2	GN				jisjk:6237		
 ですね	(이)군요	P200		Tu	GN				jisjk:119099		
@@ -35553,6 +35558,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ないでも	1지 않아도	S580		Yn	GN				jisjk:265895		
 ないでも	1지 않는 것도	S580		Yn	GN	3827	||1 &&2 ||2 S+1== "な" S+1== "無" P+1== "7**"	형용사 な·無 바로 앞의 어미 ないでも를 '-지 않는 것도'로 고른다. (미발동: rare-context)	jisjk:347178		
 ないでよ	1지 말아 	S580			GN				jisjk:261690		
+ないでってば	1지 말라니까	S580			GN				tteba:3		
 ないで欲しい	지 말았으면 좋겠다	A9D0			GN				jisjk:137424		
 ないな	1지 않았어	S570			GN				jisjk:263585		
 ないはずはな	지 않을 리가 $FA@	H7N0			GN				jisjk:137429		
