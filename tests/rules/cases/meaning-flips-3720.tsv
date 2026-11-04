@@ -1,0 +1,97 @@
+# 규칙: GRM-3720, GRM-3721, GRM-3722, GRM-3723, GRM-3724, LEX-4600
+rule	input	expected	kind	layer
+dict:jisjk:341889	俺はその言葉の意味を、まだ理解していなかった。	나는 그 말의 의미를, 아직 이해하고 있지 않았다.	fix	local
+dict:jisjk:341889	その言葉の意味が分からない。	그 말의 의미를 모른다.	fix	local
+dict:jisjk:341889	事故の原因を調べる。	사고의 원인을 조사한다.	fix	local
+dict:jisjk:341889	二人の関係は悪い。	두 사람의 관계는 나쁘다.	fix	local
+dict:jisjk:341889	神の存在を信じない。	신의 존재를 믿지 않는다.	fix	local
+dict:jisjk:341889	作戦の意図を読む。	작전의 의도를 읽는다.	fix	local
+dict:jisjk:341889	魔物の脅威が迫る。	마물의 위협이 다가온다.	fix	local
+dict:jisjk:341889	言葉の解釈が違う。	말의 해석이 다르다.	fix	local
+dict:jisjk:341889	平和の象徴だ」	평화의 상징이다」	fix	local
+dict:jisjk:341889	……そして、モズの言葉の意味。	……그리고, 때까치 말의 의미.	fix	local
+dict:jisjk:341889	ここから先は政府の関係組織に任せましょう	여기에서 앞은 정부 관계 조직에 맡깁시다	keep	local
+dict:jisjk:341889	ググール先生で何を検索しても上位の関連項目に表示されます	그굴 선생님으로 무엇을 검색해도 상위 관련 항목에 표시됩니다	keep	local
+dict:jisjk:341889	悪辣な敵MOBの思考ルーチンに	악랄한 적MOB 사고 루틴에	keep	local
+dict:jisjk:341889	戦闘の準備をする。	전투 준비를 한다.	keep	local
+dict:jisjk:341889	部屋の掃除をした。	방 청소를 했다.	keep	local
+dict:jisjk:341889	車の修理を頼む。	차 수리를 부탁한다.	keep	local
+dict:jisjk:341889	基地の警備を担当する。	기지 경비를 담당한다.	keep	local
+dict:jisjk:341889	写真付きの手紙だ。	사진 첨부 편지다.	keep	local
+dict:jisjk:341889	店の評判がいい。	가게 평판이 좋다.	keep	local
+dict:jisjk:264511	いい加減にしないと、本気で怒るよ？	적당히 하지 않으면, 정말로 화내?	fix	local-ending
+dict:jisjk:264511	ちゃんとしないと、怒るよ？	제대로 하지 않으면, 화내?	fix	local-ending
+dict:jisjk:264511	行かないと、見捨てられる	가지 않으면, 버림받는다	keep	local-ending
+dict:jisjk:264511	高いと、本気で怒る	높다고, 정말로 화낸다	keep	local-ending
+dict:jisjk:264511	早くしないと、遅刻するよ	빨리 하지 않으면, 지각해	keep	local-ending
+dict:jisjk:264511	静かにしないと、先生に怒られるよ。	조용하게 하지 않으면, 선생님에게 혼나.	keep	local-ending
+dict:jisjk:264511	金がないと、本気で困る	돈이 없으면, 진심으로 곤란하다	keep	local-ending
+dict:jisjk:342197	食べてないと困る	먹지 않으면 곤란하다	fix	local-ending
+dict:jisjk:342197	寝てないと死ぬぞ	자지 않으면 죽겠어	fix	local-ending
+dict:jisjk:342197	俺に伝わっていないと思い込んでいる彼女	나에게 전해지지 않았다고 믿어버리고 있는 그녀	keep	local-ending
+dict:jisjk:342197	高いと思う	높다고 생각한다	keep	local-ending
+dict:jisjk:342197	大事にしないとダメだよ	소중히 하지 않으면 안돼	keep	local-ending
+dict:jisjk:342197	急がないと間に合わないよ	서두르지 않으면 늦어	keep	local-ending
+cx:meaning-flips-1:10	「勝負しねえって言ってんだろうが」	「승부하지 않는다고 말하잖아」	fix	rewrites
+cx:meaning-flips-1:10	離せって言ってるんだろうが！	떼어 놓으라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:10	何て言ってるんだろうが	!rule:cx:meaning-flips-1:10	keep	rewrites
+cx:meaning-flips-1:20	行くって言ってるでしょう	간다고 말하잖아요	fix	rewrites
+cx:meaning-flips-1:20	行くって言ってるでしょう？	!rule:cx:meaning-flips-1:20	keep	rewrites
+cx:meaning-flips-1:30	頭をなでなでしないでよ！もう子供じゃないって言ってるでしょ！	머리를 쓰담쓰담하지 마! 이제 아이가 아니라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	待てって言ってんだろ！	기다리라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	ドッキリじゃねーって言ってんだろ！	몰래카메라가 아니라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	自然そのものだって言ってんだろ	자연 그 자체라고 말하잖아	fix	rewrites
+cx:meaning-flips-1:30	おいミドリ、こっちも助けてくれって言ってるだろ	어이 미도리, 여기도 도와 달라고 말하잖아	fix	rewrites
+cx:meaning-flips-1:30	ふん、ドック入りなんて。まぁいいか。…っ！ だから、見るなって言ってるでしょっ！！	흥, 도크 입거는. 뭐 됐나. …읏! 그러니까, 보지 말라고 말하잖아!!	fix	rewrites
+cx:meaning-flips-1:30	構わないで…。放っておいてって言ってるでしょ？やめてよ…そういうの。	상관없고…. 내버려 두라고 말하잖아? 그만두어…그러한 것.	fix	rewrites
+cx:meaning-flips-1:30	「本気だって言ってるでしょ！」	「진심이라고 말하잖아!」	fix	rewrites
+cx:meaning-flips-1:30	やめろって言ってるだろ。	그만두라고 말하잖아.	fix	rewrites
+cx:meaning-flips-1:30	彼は来るって言ってるんでしょ？	그는 온다고 하는 거지?	keep	rewrites
+cx:meaning-flips-1:30	何て言ってるんだろう	뭐라고 말하는 걸까	keep	rewrites
+cx:meaning-flips-1:30	彼は来るって言ってるだろう？	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	買いたいって言ってるんだから	사고 싶다고 말하니까	keep	rewrites
+cx:meaning-flips-1:30	嫌だって言ってるのに…こんなの嫌だから…！	싫다고 말하는데…이런 건 싫으니까…!	keep	rewrites
+cx:meaning-flips-1:40	黙れって言ってるんだ	입을 다물라고 말하는 거야	fix	rewrites
+cx:meaning-flips-1:40	「そうじゃない。おまえには首輪なんて必要ないって言ってるんだよ」	「그렇지 않아. 너에게는 목걸이 같은 건 필요 없다고 말하는 거야」	fix	rewrites
+cx:meaning-flips-1:40	ボク達を助けてくれるって言ってるんだから言うとおりにしようよ。	우리를 도와 준다고 하니까 말하는 대로 하자.	keep	rewrites
+cx:meaning-flips-1:40	俺は大丈夫だって言ってるんだがな	나는 괜찮다고 말하는데	keep	rewrites
+cx:meaning-flips-1:45	「ケートク生を無理矢理サボらせて場所取りさせるなんて、サイテーだって言ってるのよっ！」	「케이트크생을 억지로 게으름 피우게 해 장소 잡기시키다니, 사이테라고 말하는 거야!」	fix	rewrites
+cx:meaning-flips-1:45	何て言ってるのよ？	!rule:cx:meaning-flips-1:45	keep	rewrites
+cx:meaning-flips-1:50	食べながら話すな	먹으면서 이야기하지 마	fix	rewrites
+cx:meaning-flips-1:50	スマホを見ながら歩くな。	스마트폰을 보면서 걷지 마.	fix	rewrites
+cx:meaning-flips-1:50	歩きながら話すな！	걸으면서 이야기하지 마!	fix	rewrites
+cx:meaning-flips-1:50	「泣きながら走るな」	「울면서 달리지 마」	fix	rewrites
+cx:meaning-flips-1:50	寝ながら食べるな	자면서 먹지 마	fix	rewrites
+cx:meaning-flips-1:50	笑いながら、よく食べるな	웃으면서, 잘 먹는구나	keep	rewrites
+cx:meaning-flips-1:50	今更ながらよく食べるな	새삼스럽지만 잘 먹는구나	keep	rewrites
+cx:meaning-flips-1:50	残念ながら雨が降るな	유감스럽지만 비가 오는구나	keep	rewrites
+cx:meaning-flips-1:50	日が暮れるな	해가 지는구나	keep	rewrites
+cx:meaning-flips-1:50	よく食べるな	잘 먹는구나	keep	rewrites
+cx:meaning-flips-1:50	食べながら話すなら	먹으면서 이야기한다면	keep	rewrites
+cx:meaning-flips-1:60	一緒にいらっしゃいませんか	함께 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:60	誰かいらっしゃいませんか	누군가 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:62	今度うちに遊びにいらっしゃいませんか	이번 집에 놀러 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:62	奥様はいらっしゃいませんか	사모님은 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:70	それは私じゃなくて妹です	그것은 내가 아니라 여동생입니다	fix	rewrites
+cx:meaning-flips-1:70	私じゃなくて、妹です	내가 아니라, 여동생입니다	fix	rewrites
+cx:meaning-flips-1:70	私じゃなくて、あいつが悪い	내가 아니라, 저 녀석이 나쁘다	fix	rewrites
+cx:meaning-flips-1:70	犬じゃなくて猫が好き	개가 아니라 고양이를 좋아해	fix	rewrites
+cx:meaning-flips-1:70	今日じゃなくて明日行く	오늘이 아니라 내일 간다	fix	rewrites
+cx:meaning-flips-1:70	敵じゃなくて味方だ」	적이 아니라 아군이다」	fix	rewrites
+cx:meaning-flips-1:70	問題は金じゃなくて、時間だ。	문제는 돈이 아니라, 시간이다.	fix	rewrites
+cx:meaning-flips-1:70	「本当に？　ゲームでの話じゃなくて？」	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	人じゃなくて良かった	사람이 아니어서 다행이다	keep	rewrites
+cx:meaning-flips-1:70	死装束じゃなくて良かった	수의가 아니어서 다행이다	keep	rewrites
+cx:meaning-flips-1:70	私じゃなくて安心した	내가 아니어서 안심했다	keep	rewrites
+cx:meaning-flips-1:70	猫じゃなくて残念	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	静かじゃなくて困る	조용하지 않아서 곤란하다	keep	rewrites
+phrase:いらっしゃいませんか	誰かいらっしゃいませんか	누군가 계시지 않습니까	fix	builtin-phrase
+phrase:いらっしゃいませんか	どなたかいらっしゃいませんか？	누군가 계시지 않습니까?	fix	builtin-phrase
+phrase:いらっしゃいませんか	先生はいらっしゃいませんか。	선생님은 계시지 않습니까.	fix	builtin-phrase
+phrase:いらっしゃいませんでしたか	いらっしゃいませんでしたか	계시지 않았습니까	fix	builtin-phrase
+phrase:いらっしゃいませんでした	先生はいらっしゃいませんでした	선생님은 계시지 않았습니다	fix	builtin-phrase
+phrase:おっしゃいませんか	何もおっしゃいませんか	아무것도 말씀하시지 않습니까	fix	builtin-phrase
+phrase:おっしゃいませんでしたか	おっしゃいませんでしたか	말씀하시지 않았습니까	fix	builtin-phrase
+phrase:おっしゃいませんでした	何もおっしゃいませんでした	아무것도 말씀하시지 않았습니다	fix	builtin-phrase
+phrase:いらっしゃいません	どなたもいらっしゃいません	어떤 분도 계시지 않습니다	keep	builtin-phrase
+phrase:いらっしゃいません	いらっしゃいませ、お客様	어서 오세요, 손님	keep	builtin-phrase

@@ -30,7 +30,7 @@ sound:contracted-n	みんないい人なんだよ	모두 좋은 사람이야	kee
 sound:contracted-n	知らんぞ	몰라	keep	sound
 normalize:tsutte	おい　やめろっつったよな	이봐 그만두라고 했지	fix	normalize
 normalize:tsutte	来るっつってたな	온다고 했네	fix	normalize
-normalize:tsutte	金払えっつってんだろ	돈 지불하라는 거지	fix	normalize
+normalize:tsutte	金払えっつってんだろ	돈 지불하라고 말하잖아	fix	normalize
 normalize:tsutte	なんつった？	뭐라고 말했어?	fix	normalize
 normalize:tsutte	なんつって。	농담이야.	fix	phrases
 normalize:tsutte	いっつも勉強してる	언제나 공부하고 있다	keep	normalize
