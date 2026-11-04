@@ -11478,7 +11478,6 @@ ttt	ttt	K110			GN				jisjk:201744
 が非常に好き	(을)를 매우 좋아%D1@	G8U0		TuPj	GN				jisjk:2161		
 が非常に嫌	(을)를 매우 싫어%D1@	G8U0		TuPj	GN				jisjk:2159		
 が非常に嫌い	(을)를 매우 싫어%D1@	G8U0		TuPj	GN				jisjk:2160		
-が鳥	거위	N110	VHn		GN				jisjk:13877		
 き	&JB@	M411			GN				jisjk:90641		
 き	&HN@	M411		Ma	GN	2288	||2 &&5 U+0== "Lません" P-1== "2**" D-2== "융통성" P-2== "1**" D+0= "&M9@" &&3 P-1== "2**" D-2== "융통성" P-2== "1**"	융통성으로 번역된 명사와 조사 뒤에서 きを 있다로 고르고 ません 어미 앞에서는 없다로 바꾼다. (미발동: rare-context)	jisjk:265286		
 き	&AL@	M427		Tu	GN	2766	||1 &&4 S-1== "ひんやりと" P-1== "4**" M-1== "57*" Y-1= "6"	ひんやりと 연결형 동사 바로 뒤에서 き를 지다로 고르고 앞 어미를 아어형으로 바꾼다. (미발동: rare-context)	jisjk:267662		
@@ -36774,7 +36773,7 @@ ttt	ttt	K110			GN				jisjk:201744
 にと	에 &HN@	M468	XXX	TuPj	GN	2576	||1 &&3 M+0== "57*" P-1== "1**" A-1-= "QNNVPl"	にと를 명사 뒤에서 정해진 연결어미를 가질 때 '-에 있다'로 선택한다.	jisjk:266551		
 にと	에게 &HN@	M468		TuPj	GN	3315	||1 &&4 M+0== "57*" P-1== "1**" ||2 A-1== "VHnVQwVQmVGnVAmQPNQNPUAqUQf" P-1== "12*13*" ||4 &&3 U+0== "は" D+0= "에게는    " Y+0= "" &&3 S+1== "、" D+0= "에게는    " Y+0= "" &&3 U+0== "も" D+0= "에게도    " Y+0= "" &&2 D+0= "에게    " Y+0= ""	にと는 사람이나 고유 명사 뒤에서 동사 연결형으로 쓰이면 ‘에게’(は와 쉼표 앞은 ‘에게는’, も 앞은 ‘에게도’)로 고른다.	jisjk:342698		
 にとっての	에 있어서의	E0H0		PjTu	GN				jisjk:150036		
-にとっての	에게	E0H0		PjTu	GN	2513	||1 A-1== "VHn"	사람을 나타내는 말 뒤의 にとっての를 ‘에게’로 고른다.	jisjk:266302		
+にとっての	에게 있어	E0H0		PjTu	GN	2513	||1 A-1== "VHn"	사람을 나타내는 말 뒤의 にとっての를 ‘에게’로 고른다.	jisjk:266302		
 にとっても	에 있어서도	I110		TuPjNn	GN				jisjk:257508		
 にとっても	에게도	I110		TuPjNn	GN	5330	||2 A-1== "VHnVQwVQmVGnVAmQPNQNPUAqUQf" P-1== "12*13*"	사람이나 고유 명사 뒤의 にとって는 ‘에게’를 고른다.	gram:nitotte:5		
 にとってもよ	에 있어서도 $DE@	H7N0		Tu	GN				jisjk:137493		
@@ -36792,7 +36791,6 @@ ttt	ttt	K110			GN				jisjk:201744
 にとりましても	에 있어서도	I110		TuNn	GN				jisjk:262870		
 にと思	(을)를 위해서라고 생각&AV@	M460		TuPj	GN				jisjk:345202		
 にな	&AE@	M4U8		PjTu	GN	1302	||1 &&2 P-1== "4**" S-2== "お"	にな는 두 단어 앞에 お가 있고 바로 앞말이 동사이면 존경을 나타내는 -시다로 고른다.	jisjk:116987		
-にな	에 $FA@	H7N0		PjTu	GN				jisjk:138874		
 にな	하&AE@	M448		PjTu	GN	1814	||1 &&3 P-1== "1**" G-1== "Hd" ||2 S-2== "ご" S-2== "お"	ご나 お가 붙은 사변명사 뒤에서 にな를 하시다로 고른다. (미발동: rare-context)	jisjk:257431		
 にな	 &C6@	M428		PjTuDx	GN	2725	||3 &&3 P-1== "4**" U-1== "こと" Y-1== "1게" &&3 U-1== "まま" D+0= " &HN@" Y-1= "8 채로" &&5 S-1== "こと" P-2== "7**" U-2== "い" D-1= "" Y-2= "1게"	동사의 こと·まま 뒤나 형용사와 こと 뒤에서 にな를 되다로 고르고 앞 표현을 게 또는 은 채로에 맞게 바꾼다. (미발동: rare-context)	jisjk:267519		
 にな	해 &AL@	M428		PjTu	GN	2726	||1 ||2 S-1== "元気" S-1== "げんき"	にな를 元気·げんき 뒤에서 해 지다로 고른다. (미발동: rare-context)	jisjk:267520		
@@ -37406,7 +37404,6 @@ ttt	ttt	K110			GN				jisjk:201744
 に際して	에 즈음하여	E300	UMe	TuPj	GN				jisjk:149422		
 に際しての	에 즈음한	N110		Tu	GN				jisjk:151584		
 に際しては	에 즈음해서는	E311		Tu	GN				jisjk:1012		
-に雇	(으)로 고용&AV@	M430		Tu	GN				jisjk:91231		
 に難くな	데 어렵지 $D7@	H7N0			GN				jisjk:138872		
 に面	에 접&AV@	M429		TuPj	GN				jisjk:202123		
 に飛び入り	에 나타&A5@	M429		Tu	GN				jisjk:264954		
@@ -118052,7 +118049,6 @@ ttt	ttt	K110			GN				jisjk:201744
 今後の引き立て	앞으로의 후원	A9D0			GN				jisjk:268209		
 今御門町	이마미카도쵸	I130	QCTVPl		GN				jisjk:273926		
 今必要と	지금 필요로 &AV@	M429			GN				jisjk:144825		
-今思	지금 생각&AV@	M420			GN				jisjk:144807		
 今思い返	지금 다시 생각&AV@	M443			GN				jisjk:343857		
 今態野	이마쿠마노	N110	VPl		GN				jisjk:211379		
 今成	이마나리	N130	QPN	Wa	GN				jisjk:7234		
@@ -157983,7 +157979,6 @@ ttt	ttt	K110			GN				jisjk:201744
 喜びを	기뻐&AV@	M429		Pn	GN				jisjk:364637		
 喜びをかみしめ	기쁨을 맛&AY@	M447			GN				jisjk:147615		
 喜びを隠さな	기쁨을 감추지 못$AB@	H7U0			GN				jisjk:257513		
-喜んでい	기뻐하고 &HN@	M427			GN				jisjk:147619		
 喜んでいただ	기꺼이 &FD@	M441			GN				jisjk:262800		
 喜んでいただけ	기뻐해 주&AE@	M427			GN				jisjk:364487		
 喜んでもらえ	기뻐하실 수 &HN@	M427			GN				jisjk:147620		
@@ -209571,7 +209566,6 @@ ttt	ttt	K110			GN				jisjk:201744
 愛し	사랑&AV@	M425			GN				jisjk:140917		
 愛しあ	서로 사랑&AV@	M420			GN				jisjk:343969		
 愛しさ	그리움	N110	SFl		GN				jisjk:125994		
-愛してい	사랑하고 &HN@	M447			GN				jisjk:262078		
 愛していな	사랑하지 $D7@	H7U0		AvJs	GN				jisjk:265699		
 愛してはくれな	사랑해 주지는 $DH@	H7N0			GN				jisjk:121279		
 愛し合	서로 사랑&AV@	M420			GN				jisjk:139630		
@@ -229813,7 +229807,6 @@ ttt	ttt	K110			GN				jisjk:201744
 書中	서면	N110	VBkVSw		GN				jisjk:191788		
 書中にて	서면을 빌어,	E300			GN				jisjk:267623		
 書中をも	서면을 &L8@	M424			GN				jisjk:260627		
-書付	문서	N110	VSw		GN				jisjk:26049		
 書体	서체	N110	VSw		GN				jisjk:26062		
 書信	서신	N110	VSw		GN				jisjk:26054		
 書債	서채	N110			GN				jisjk:235671		
@@ -270906,7 +270899,6 @@ ttt	ttt	K110			GN				jisjk:201744
 物にす	제것으로 &AV@	M448			GN				jisjk:117121		
 物にす	마스터&AV@	M448			GN				jisjk:117122		
 物にな	쓸모 있게 &C6@	M428		Dx	GN				jisjk:92907		
-物にな	훌륭한 인물이 &C6@	M428		Dx	GN				jisjk:117123		
 物に本末あり	물건에는 본말이 있고	A9D0			GN				jisjk:202248		
 物の具	도구	I110			GN				jisjk:69295		
 物の怪	귀신	N110	VHn		GN				jisjk:253834		
@@ -325242,7 +325234,7 @@ ttt	ttt	K110			GN				jisjk:201744
 訳され	번역&C6@	M427	UTh		GN	1962	||1 &&3 S-1== "に" S-2== "R語" D-1= "(으)로"	訳され는 語로 끝나는 말과 に 뒤에서 번역되다로 고르고 に를 (으)로로 바꾼다. (미발동: rare-word)	jisjk:260386		
 訳では	8 것은	S561			GN				jisjk:4513		
 訳ではな	 것은 아$A3@	H7N0			GN				jisjk:138426		
-訳な	문제$FA@	H7N0			GN				jisjk:137097		
+訳な	리가 $FA@	H7N0			GN				jisjk:137097		
 訳の分からぬこと	영문 모를 일	A9D0			GN				jisjk:265714		
 訳合い	이유	I110	UTsUHr		GN				jisjk:78201		
 訳名	역명	N110			GN				jisjk:29232		
@@ -331999,7 +331991,6 @@ ttt	ttt	K110			GN				jisjk:201744
 足あとを付け	발자국을 남&A2@	M447			GN				jisjk:140147		
 足あぶり	발 난로	N110	VPe		GN				jisjk:124328		
 足かせ	족쇄	I110			GN				jisjk:83803		
-足が	발버둥&AO@	M421			GN				jisjk:137787		
 足がかり	발판	I110			GN				jisjk:110823		
 足がつ	단서가 잡&AW@	M421	ULw		GN				jisjk:140154		
 足がひきつ	발에 쥐가 &A5@	M428	QHP		GN				jisjk:140161		
