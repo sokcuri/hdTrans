@@ -127,6 +127,14 @@ bool SenseTrigger(const Item* x, const Item* it, std::string_view trigger) {
     return false;
 }
 
+// Whether every word between x and it (both left out) is a degree adverb (word.degree-adverb).
+bool OnlyDegreeAdverbsBetween(const Item* x, const Item* it) {
+    for (const Item* y = x->next; y != nullptr && y != it; y = y->next) {
+        if (!dict::InClass(HDTRANS_CLASS("word.degree-adverb"), y->group->surface)) return false;
+    }
+    return true;
+}
+
 bool SenseTriggers(const Item* x, const Item* it, const userdict::Sense& sense) {
     for (const auto& trigger : sense.triggers) {
         if (SenseTrigger(x, it, trigger)) return true;
@@ -169,6 +177,16 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
             // A comma right after the noun drops its particle (背、伸びたね): the predicate after it
             // is still the noun's own.
             if (n == 0 && s.side == userdict::Side::After) continue;
+        }
+        // Before an adjective, a comma right before it (or before the degree adverbs in front of it)
+        // ends a topic said without its particle (ラーメン、めっちゃうまい): the noun before the comma
+        // can be the trigger.
+        if (x != nullptr && x->group->surface == "、" && s.side == userdict::Side::Before && OnlyDegreeAdverbsBetween(x, it)) {
+            const char key = At(it->Code(it->selected), 0);
+            const Item* y = x->prev;
+            if ((key == '7' || key == '8') && y != nullptr && y->selected >= 0 && At(y->Code(y->selected), 0) == '1') {
+                return SenseTriggers(y, it, s);
+            }
         }
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;
