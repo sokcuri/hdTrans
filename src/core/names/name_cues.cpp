@@ -455,9 +455,10 @@ bool FigureKey(const dict::Snapshot& snap, std::string_view key) {
 // A predicate of a person (spec LEX-4820): the word with の before a part of the body or the face
 // (皐月の顔), as the subject of が, は or も, or set off by 、 before a clause, of what only a person
 // does (玉藻がはにかむ, 小太刀が黙然と腕を組んだ, 弥生、怒ってない), called with a request (ゴーヤー、教えて)
-// or after a final particle (イクよ、皐月っ！), or closing a sentence after a clause of what a person
-// does (口をパクパクさせる玉藻。). The common word of the key names no person or animal, no part of
-// the body, colour or feeling, and no verb starts with it (HonorableKey, FigureKey).
+// or, with two characters or more, after a final particle (イクよ、皐月っ！; not だったね、海), or
+// closing a sentence after a clause of what a person does (口をパクパクさせる玉藻。). The common word
+// of the key names no person or animal, no part of the body, colour or feeling, and no verb starts
+// with it (HonorableKey, FigureKey).
 bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_view before, std::string_view after) {
     if (!HonorableKey(snap, key) || FigureKey(snap, key)) return false;
     if (after.starts_with("の")) return PersonPartAt(after.substr(std::string_view("の").size()));
@@ -467,7 +468,7 @@ bool PersonActAt(const dict::Snapshot& snap, std::string_view key, std::string_v
         const std::string_view rest = after.substr(std::string_view("、").size());
         return RequestAt(rest) || PersonActIn(rest, Role::Other, true);
     }
-    if (!internal::AllRunes(key, IsHiragana) && FinalCallAt(key, before, after)) return true;
+    if (text::RuneCount(key) >= 2 && !internal::AllRunes(key, IsHiragana) && FinalCallAt(key, before, after)) return true;
     if (after.empty() || after.starts_with("。") || after.starts_with("！") || after.starts_with("!") || after.starts_with("…")) {
         return IsHiragana(RuneBefore(before, before.size()).cp) && PersonActIn(ClauseBefore(before), Role::Other, false);
     }
