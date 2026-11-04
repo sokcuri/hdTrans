@@ -1166,6 +1166,18 @@
 家家臣	가문 가신	n
 面目次第もございません	면목이 없습니다	phrase
 いらっしゃいません	계시지 않습니다	phrase
+そうじゃなくても	그렇지 않아도	phrase
+そうでなくても	그렇지 않아도	phrase
+そうではなくても	그렇지 않아도	phrase
+// A verb stem with な that ends what is said orders it, 해체 (待ちな 기다려; spec LEX-4801).
+待ちな	기다려	intj	final
+行きな	가	intj	final
+帰りな	돌아가	intj	final
+黙りな	입 다물어	intj	final
+聞きな	들어	intj	final
+座りな	앉아	intj	final
+やめな	그만해	intj	final
+言いな	말해	intj	final
 いらっしゃいませんか	계시지 않습니까	phrase
 いらっしゃいませんでした	계시지 않았습니다	phrase
 いらっしゃいませんでしたか	계시지 않았습니까	phrase

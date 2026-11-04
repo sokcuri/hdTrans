@@ -11,7 +11,7 @@ lookup:kana-homograph	「三角テントだったら２人じゃきつかった�
 lookup:kana-homograph	あ今はね、five o'clockだ！	아 지금은 말이야, five o'clock이야!	fix	lookup
 lookup:kana-homograph	あ、今はね、マルヒトマルマルよ。	has:지금은 말이야	fix	lookup
 lookup:kana-homograph	車にはねられた。	차에 받혔다.	keep	lookup
-lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨 그렇지 않아……저, 마신 라페르이죠?」	keep	lookup
+lookup:kana-homograph	「いえそうじゃなくて……あの、魔神ラフェルですよね？」	「아뇨 그게 아니라……저, 마신 라페르이죠?」	keep	lookup
 validity:genki-nai	「……元気ない？」	「……기운이 없어?」	fix	analysis
 validity:genki-nai	司令官、元気ないね。	사령관, 기운이 없네.	fix	analysis
 validity:genki-nai	提督、あなたも元気ないわね！	제독, 당신도 기운이 없네!	fix	analysis

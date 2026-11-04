@@ -10,7 +10,7 @@ constraint:honorific-kanji-name	あの子が望くんの好きな人？	has:노�
 constraint:honorific-kanji-name	空ちゃん、バッカじゃない！」	has:소라짱	fix	lookup
 constraint:honorific-kanji-name	そもそもどうやって瞬君がここへ？	has:슌 군	fix	lookup
 constraint:honorific-kanji-name	…幸さんが元気になってよかったよ。	has:사치 씨	fix	lookup
-constraint:honorific-kanji-name	「幸ちゃんのおじさまとおばさまは？」	has:사치짱이	fix	lookup
+constraint:honorific-kanji-name	「幸ちゃんのおじさまとおばさまは？」	has:사치짱의 아저씨	fix	lookup
 constraint:honorific-kanji-name	「あ、修くん、陽葵ちゃん。おっは〜♪」	has:오사무 군	fix	lookup
 constraint:honorific-kanji-name	「いやぁ、悪いね、勇くん、子守させちゃって」	has:유우 군	fix	lookup
 constraint:honorific-kanji-name	もう１人の幼な子が健さんの息子である悟くんと私の息子	has:사토루 군	fix	lookup
