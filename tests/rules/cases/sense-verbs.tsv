@@ -65,7 +65,7 @@ sense:早まる	判断が早まった。	판단이 성급하게 굴었다.	keep	
 sense:許される	入学を許された。	입학이 허락되었다.	fix	senses
 sense:許される	罪を許された。	죄가 용서되었다.	keep	senses
 sense:取り上げられる	切り札を取り上げられた。	비장의 카드를 빼앗겼다.	fix	senses
-sense:取り上げられる	ニュースで取り上げられた。	뉴스로 다루어졌다.	keep	senses
+sense:取り上げられる	ニュースで取り上げられた。	뉴스에서 다루어졌다.	keep	senses
 sense:触れる	犬に触れていた。	개에게 손을 대고 있었다.	fix	senses
 sense:触れる	法律に触れた。	법률에 저촉되었다.	keep	senses
 sense:寄せ付け	人を寄せ付けない。	사람을 접근시키지 않는다.	fix	senses
