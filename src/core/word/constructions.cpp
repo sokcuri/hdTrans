@@ -931,11 +931,22 @@ bool SurfaceKeys(const ConstructionTable& t, uint32_t i, std::vector<std::string
     return found;
 }
 
+// The number of surface key among the surfaces of t, numbering it when it is new.
+uint32_t SurfaceNumber(ConstructionTable& t, std::string_view key) {
+    if (const auto found = t.surfaces.find(key); found != t.surfaces.end()) return found->second;
+    const auto number = static_cast<uint32_t>(t.surfaces.size());
+    t.surfaces.emplace(std::string(key), number);
+    return number;
+}
+
 // Fills the surface index of family c.
-void IndexFamily(const ConstructionTable& t, CxFamily& c) {
+void IndexFamily(ConstructionTable& t, CxFamily& c) {
     if (std::vector<std::string_view> guard; c.guard != kNoGuard && SurfaceKeys(t, c.guard, guard)) {
         c.guardKeyed = true;
-        c.guardSurfaces.insert(guard.begin(), guard.end());
+        for (const std::string_view key : guard) c.guardSurfaces.push_back(SurfaceNumber(t, key));
+        std::ranges::sort(c.guardSurfaces);
+        const auto [first, last] = std::ranges::unique(c.guardSurfaces);
+        c.guardSurfaces.erase(first, last);
     }
     std::vector<std::vector<std::string_view>> keys(c.rows.size());
     std::vector<bool> keyed(c.rows.size());
@@ -946,13 +957,15 @@ void IndexFamily(const ConstructionTable& t, CxFamily& c) {
     }
     for (std::size_t k = 0; k < c.rows.size(); k++) {
         for (const std::string_view key : keys[k]) {
-            if (c.bySurface.contains(key)) continue;
-            std::vector<int>& rows = c.bySurface[std::string(key)];
+            const uint32_t number = SurfaceNumber(t, key);
+            if (std::ranges::any_of(c.bySurface, [&](const auto& e) { return e.first == number; })) continue;
+            std::vector<int>& rows = c.bySurface.emplace_back(number, std::vector<int>()).second;
             for (std::size_t j = 0; j < c.rows.size(); j++) {
                 if (!keyed[j] || std::ranges::find(keys[j], key) != keys[j].end()) rows.push_back(c.rows[j]);
             }
         }
     }
+    std::ranges::sort(c.bySurface, {}, [](const auto& e) { return e.first; });
 }
 
 // Adds to out the atoms the condition at node i needs to hold: itself, or the operands of an &&
@@ -1200,6 +1213,15 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
     }
+    std::unordered_map<std::string, uint32_t> slots;
+    for (CxAtom& a : t.atoms) {
+        std::string key(reinterpret_cast<const char*>(&a.set), sizeof a.set);
+        key.append(reinterpret_cast<const char*>(&a.feature), sizeof a.feature);
+        key += {static_cast<char>(a.field), static_cast<char>(a.match), static_cast<char>(a.delta), static_cast<char>(a.negated)};
+        key += a.value;
+        a.slot = slots.try_emplace(std::move(key), t.slots).first->second;
+        if (a.slot == t.slots) t.slots++;
+    }
     return t;
 }
 
@@ -1226,9 +1248,10 @@ using internal::CxNode;
 // The item delta items away; rightwards from a ruby base, past its reading (Item::Object).
 template <typename T>
 T* Neighbour(T* it, int delta) {
-    const bool base = it != nullptr && it->w != nullptr && it->w->RubyPart(it->tokenIndex) == 1;
-    for (; it != nullptr && delta > 0; delta--) it = base ? it->After() : it->next;
     for (; it != nullptr && delta < 0; delta++) it = it->prev;
+    if (it == nullptr || delta == 0) return it;
+    const bool base = it->w != nullptr && it->w->RubyPart(it->tokenIndex) == 1;
+    for (; it != nullptr && delta > 0; delta--) it = base ? it->After() : it->next;
     return it;
 }
 
@@ -1311,9 +1334,31 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
     return v != a.negated;
 }
 
+// Holds, remembered on the word being tried (Flusher::constructions), where nothing changes until a
+// row fires.
+bool Held(Flusher& f, const Item* it, const CxAtom& a) {
+    Flusher::Constructions& c = f.constructions;
+    if (it != c.word) return Holds(f, it, a);
+    uint32_t& slot = c.slots[a.slot];
+    if (slot >> 1 == c.stamp) return (slot & 1) != 0;
+    const bool v = Holds(f, it, a);
+    slot = c.stamp << 1 | static_cast<uint32_t>(v);
+    return v;
+}
+
+// Starts a try of the families on it: the values Held remembers are those found on it from now.
+void Try(Flusher& f, const Item* it) {
+    Flusher::Constructions& c = f.constructions;
+    if (++c.stamp == 1u << 31) {
+        std::ranges::fill(c.slots, 0);
+        c.stamp = 1;
+    }
+    c.word = it;
+}
+
 bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     const CxNode& n = t.nodes[i];
-    if (n.atom) return Holds(f, it, t.atoms[n.count]);
+    if (n.atom) return Held(f, it, t.atoms[n.count]);
     switch (n.kind) {
         case rules::BodyKind::Not: return !Eval(f, t, i + 1, it);
         case rules::BodyKind::ScanLeft:
@@ -1607,22 +1652,38 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
         tally->constructionRuns.resize(t.rows.size());
         tally->constructionFires.resize(t.rows.size());
     }
+    if (t.afterPass[pass].empty()) return;
+    // The actions change no surface and no link of the chain.
+    Flusher::Constructions& c = f.constructions;
+    if (c.slots.size() < t.slots) c.slots.resize(t.slots);
+    constexpr uint32_t kNoSurface = UINT32_MAX;
+    c.surfaces.clear();
+    for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const auto found = t.surfaces.find(std::string_view(it->group->surface));
+        c.surfaces.push_back(found != t.surfaces.end() ? found->second : kNoSurface);
+    }
     for (const int k : t.afterPass[pass]) {
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
-        for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-            if (family.guardKeyed && !family.guardSurfaces.contains(std::string_view(it->group->surface))) continue;
+        std::size_t at = 0;
+        for (Item* it = f.w.chain.head; it != nullptr; it = it->next, at++) {
+            const uint32_t surface = c.surfaces[at];
+            if (family.guardKeyed && !std::ranges::binary_search(family.guardSurfaces, surface)) continue;
+            Try(f, it);
             if (family.guard != internal::kNoGuard && !Eval(f, t, family.guard, it)) continue;
             // Rule counts try every row.
             const std::vector<int>* rows = &family.rows;
             if (family.indexed && tally == nullptr) {
-                const auto found = family.bySurface.find(std::string_view(it->group->surface));
-                rows = found != family.bySurface.end() ? &found->second : &family.open;
+                rows = &family.open;
+                if (surface != kNoSurface) {
+                    const auto found = std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
+                    if (found != family.bySurface.end() && found->first == surface) rows = &found->second;
+                }
                 if (rows->empty()) continue;
             }
             // An atom all rows need that is false here: none fires (rule counts try every row).
             if (tally == nullptr &&
-                !std::ranges::all_of(family.shared, [&](uint32_t a) { return Holds(f, it, t.atoms[a]); }))
+                !std::ranges::all_of(family.shared, [&](uint32_t a) { return Held(f, it, t.atoms[a]); }))
                 continue;
             for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
@@ -1640,6 +1701,7 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
             }
         }
     }
+    c.word = nullptr;
 }
 
 std::string_view ConstructionId(int index) {
