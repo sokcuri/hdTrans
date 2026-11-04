@@ -29,7 +29,7 @@ dict:jisjk:6280	三ないし五人	3 내지 다섯 명	fix	local
 dict:jisjk:6280	二年ないし三年かかる	2년 내지 3년 걸린다	fix	local
 dict:jisjk:6280	電話ないしメールで	전화 내지 메일로	fix	local
 dict:jisjk:359335	分かったものの不安は残る。	알았지만 불안은 남는다.	fix	local-ending
-dict:jisjk:359335	え～？ もっと手の込んだものの ほうがいいのではなくて？	에에~? 좀 더 공들인 것의 편이 좋은 것이 아니어서?	keep	local-ending
+dict:jisjk:359335	え～？ もっと手の込んだものの ほうがいいのではなくて？	에에~? 좀 더 공들인 것의 편이 좋은 것이 아니야?	keep	local-ending
 dict:jisjk:359335	買ったものの、使わない。	샀지만, 쓰지 않는다.	keep	local-ending
 dict:jisjk:359335	見たものの中で一番だ	본 것의 중에서 제일이다	keep	local-ending
 dict:jisjk:374896	犯人は彼とのことです。	범인은 그라는 것입니다.	fix	local
