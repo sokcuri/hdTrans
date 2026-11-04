@@ -23,6 +23,10 @@ dict:w:33200	完全にネタメニューだ。	완전히 웃기려고 만든 메
 dict:w:33201	「おわっ、近すぎだ！　加減しろって！」	「와, 너무 가깝다! 적당히 하라고!」	fix	lookup
 dict:w:33202	“恋むすび”を買いに来てんだぞ	“사랑의 매듭”을 구매래라고 다	fix	lookup
 dict:w:33204	…将来、役に立たないのは承知で。	…장래, 쓸모없는 것은 알면서.	fix	lookup
+lex:shouchi	承知です。	알겠습니다.	fix	words
+lex:shouchi	承知の上で頼んでいる	알면서도 부탁하고 있다	fix	defaults
+lex:shouchi	両親の承知を得た	부모님의 승낙을 얻었다	fix	defaults
+lex:shouchi	承知しました。	알았습니다.	keep	defaults
 dict:w:33206	艦名は…伊の八！	함명은…이8!	fix	lookup
 sense:uchiage	任務の打ち上げとエルの歓迎会を兼ねたすき焼きパーティが始まった。	임무 뒤풀이와 엘의 환영회를 겸한 스키야키 파티가 시작되었다.	fix	senses
 sense:uchiage	サバイバルゲーム後の打ち上げ居酒屋飲み会で	서바이벌 게임 후 뒤풀이 선술집 회식에서	fix	senses

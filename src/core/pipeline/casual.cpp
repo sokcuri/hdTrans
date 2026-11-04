@@ -257,6 +257,49 @@ bool Moota(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// ([てで])いやが: ている before the scornful やがる, said whole (遊んでいやがる, 笑っていやがった): the
+// ている the shorter てやがる also reads, not the verb 嫌がる.
+bool TeIyagaru(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    // で only as the て form after ん or い (遊んでいやがる), not the particle (つもりでいやがる).
+    if (Lit(s, p, "で") && !(pos > 0 && RuneIn(Before(s, pos), U"んい"))) return false;
+    p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "いやが")) return false;
+    m.end = p;
+    return true;
+}
+
+// でやが(ります|りました|る|った): the copula of a speaker who says です as でやがります and でやがる
+// (良い子でやがりますな 良い子ですな, 戻るでやがりますよ 戻るんですよ), after no て form (遊んでやがる is
+// ている) and no kanji that ends an ichidan stem in で (撫でやがる).
+bool DeYagaru(std::string_view s, size_t pos, Match& m) {
+    // An い after kana ends an adjective (したくないでやがります, いいでやがります), not the て form of a verb
+    // in -gu, which follows a kanji (泳いで).
+    bool adjective = false;
+    if (pos > 0 && Before(s, pos) == U'い') {
+        const std::string_view head = s.substr(0, pos - std::string_view("い").size());
+        adjective = !head.empty() && IsHiraganaRune(Before(head, head.size()));
+    }
+    if (pos > 0 && !adjective && RuneIn(Before(s, pos), U"んていでっ撫茹秀出詣")) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "でやが")) return false;
+    const size_t q = p;
+    // After a predicate the copula is the explanatory んです (戻るでやがります 戻るんです).
+    const bool predicate = pos > 0 && RuneIn(Before(s, pos), U"るたいうくすつぬむぶぐ");
+    for (const std::string_view tail : {"りました", "ります", "った", "る"}) {
+        size_t r = q;
+        if (Lit(s, r, tail)) {
+            const bool past = tail == "りました" || tail == "った";
+            m.group[1] = predicate ? (past ? "んでした" : "んです") : (past ? "でした" : "です");
+            m.end = r;
+            return true;
+        }
+    }
+    return false;
+}
+
 // っつの before a mark that ends what was said or the end: the quoting って with の of insistence said
 // つ (違うっつの, 見てねえっつの！ 見ていないっての！).
 bool TsuNo(std::string_view s, size_t pos, Match& m) {
@@ -1162,6 +1205,9 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         const Match g = Rematch(m, NounTteNda);
         return Cat({g.group[1], "っていうんだ"});
     });
+    // The copula でやがる first, so that the でいやがる of ている is not taken for it.
+    text = ReplaceAll(text, DeYagaru, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, TeIyagaru, [](const Match& m) { return Cat({m.group[1], "やが"}); });
     text = ReplaceAll(text, AnNo, [](const Match& m) {
         const Match g = Rematch(m, AnNo);
         return Cat({"あるの", g.group[1]});
