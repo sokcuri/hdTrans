@@ -32,3 +32,11 @@ normalize:emphatic-spelling	「学食ばっかじゃ飽きる」	「학생식당
 normalize:emphatic-spelling	夏本番だー！ くぅ～、あっついねー！！	has:덥네~!!	fix	normalize
 normalize:emphatic-spelling	あっついなぁぁぁ……もー夏かぁ	has:더워	fix	normalize
 normalize:emphatic-spelling	アホくっさ…クソして寝るわ	has:바보스럽다…	fix	normalize
+normalize:emphatic-spelling	大っ嫌い	너무 싫다	fix	normalize
+normalize:emphatic-spelling	「そんなのお父様の身勝手じゃないですか、馬鹿！　嫌い！　お父様なんて大っ嫌いっ！！」	「그런 거 아버님의 제멋대로가 아닙니까, 바보! 싫어요! 아버님 같은 건 너무 싫어요!!」	fix	normalize
+normalize:emphatic-spelling	アタシはクソ提督が大っ嫌いなの！！	나는 빌어먹을 제독이 정말 싫어!!	fix	normalize
+normalize:emphatic-spelling	お前なんか大っ嫌いだ	너 같은 건 정말 싫다	fix	normalize
+normalize:emphatic-spelling	大っ嫌いな食べ物	정말 싫은 음식	fix	normalize
+normalize:emphatic-spelling	大っ好き	너무 좋아	fix	normalize
+normalize:emphatic-spelling	大っ好きなお兄ちゃん	정말 좋아하는 오빠	fix	normalize
+normalize:emphatic-spelling	大嫌い	너무 싫다	keep	normalize

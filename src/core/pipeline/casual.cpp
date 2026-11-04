@@ -1043,6 +1043,10 @@ constexpr EmphaticSpelling kEmphaticSpellings[] = {
     {"バッカ", "バカ", NoKatakana},          // not バッカス
     {"ばっかじゃ", "バカじゃ", nullptr, true},  // not the ばかり of 学食ばっかじゃ
     {"ばっかみたい", "バカみたい", nullptr, true},
+    {"大っ嫌", "大嫌"},  // 大っ嫌い
+    {"大っ好き", "大好き"},
+    {"だいっきらい", "だいきらい"},
+    {"だいっすき", "だいすき"},
 };
 
 bool EmphaticAt(std::string_view s, size_t pos, Match& m) {

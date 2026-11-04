@@ -22,7 +22,7 @@ cx:subject-before-ga:40	誰の好きな歌	누가 좋아하는 노래	fix	rewrit
 cx:subject-before-ga:40	誰に聞かれても困る。	누가 물어도 곤란하다.	fix	rewrites
 cx:subject-before-ga:40	誰に言われた？	누구에게 들었어?	keep	rewrites
 cx:subject-before-ga:40	誰のせいだ。	누구의 탓이다.	keep	rewrites
-cx:subject-before-ga:20	問題は誰じゃなくて何をしたかだ。	문제는 누가 아니고 무엇을 했는지다.	fix	rewrites
+cx:subject-before-ga:20	問題は誰じゃなくて何をしたかだ。	문제는 누가 아니라 무엇을 했는지다.	fix	rewrites
 cx:subject-before-ga:10	誰が好き？	누구를 좋아해?	keep	rewrites
 cx:subject-before-ga:10	ヌーが好き	누를 좋아해	keep	rewrites
 cx:subject-before-ga:40	誰が来た。	누가 왔나.	fix	rewrites
