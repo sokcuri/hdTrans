@@ -1,0 +1,80 @@
+# 규칙: LEX-4700
+rule	input	expected	kind	layer
+dict:w:33003	じゃがバター	감자버터	fix	lookup
+dict:w:33004	噺	이야기	fix	lookup
+dict:w:33005	らしからぬ	답지 않은	fix	lookup
+dict:w:33006	お手並み拝見といこうか	솜씨 좀 볼까	fix	lookup
+dict:w:33007	どちらからともなく	누가 먼저랄 것도 없이	fix	lookup
+dict:w:33008	膨れっ面	뾰로통한 얼굴	fix	lookup
+dict:w:33009	ふくれっ面	뾰로통한 얼굴	fix	lookup
+dict:w:33010	ふくれっつら	뾰로통한 얼굴	fix	lookup
+dict:w:33011	手放しに	마냥	fix	lookup
+dict:w:33013	やり合う	맞붙어 싸운다	fix	lookup
+dict:w:33014	遣り合う	맞붙어 싸운다	fix	lookup
+dict:w:33015	殺りあう	싸운다	fix	lookup
+dict:w:33016	殺り合う	싸운다	fix	lookup
+dict:w:33017	体よく	그럴듯하게	fix	lookup
+dict:w:33018	愛おしい	사랑스럽다	fix	lookup
+dict:w:33019	開き直り	적반하장	fix	lookup
+dict:w:33021	人のことは言えない	남 말할 처지가 아니다	fix	lookup
+dict:w:33022	総員起こし	총원 기상	fix	lookup
+dict:w:33023	鉛玉	납탄	fix	lookup
+dict:w:33024	鉛弾	납탄	fix	lookup
+dict:w:33025	今に見てろ	어디 두고 보자	fix	lookup
+dict:w:33026	ラブコメ	러브코미디	fix	lookup
+dict:w:33027	ごめんなさ…	미안해…	fix	lookup
+dict:w:33028	お頭	두목	fix	lookup
+dict:w:33029	だからどうした	그래서 어쨌다는 거냐	fix	lookup
+dict:w:33030	ドアホ	멍청이	fix	lookup
+dict:w:33031	お気遣いなく	신경 쓰지 마세요	fix	lookup
+dict:w:33032	ばっちい	더럽다	fix	lookup
+dict:w:33033	一発屋	반짝 스타	fix	lookup
+dict:w:33034	やらしい	야하다	fix	lookup
+dict:w:33035	妹嫁	여동생 신부	fix	lookup
+dict:w:33036	悦ぶ	기뻐한다	fix	lookup
+dict:w:33037	耳型	귀 본	fix	lookup
+dict:w:33038	なりきる	흉내 낸다	fix	lookup
+dict:w:33039	成り切る	흉내 낸다	fix	lookup
+dict:w:33040	見まごう	잘못 본다	fix	lookup
+dict:w:33041	見紛う	잘못 본다	fix	lookup
+dict:w:33042	三つどもえ	삼파전	fix	lookup
+dict:w:33043	みつどもえ	삼파전	fix	lookup
+dict:w:33044	紺地	남색 바탕	fix	lookup
+dict:w:33045	私としたことが	제가 이런 실수를	fix	lookup
+dict:w:33046	アホタレ	멍청이	fix	lookup
+dict:w:33048	黄備え	황색 부대	fix	lookup
+dict:w:33049	綺麗綺麗する	깨끗이 한다	fix	lookup
+dict:w:33053	洗いっこ	서로 씻겨 주기	fix	lookup
+dict:w:33055	日の本	일본	fix	lookup
+dict:w:33056	影ながら	남몰래	fix	lookup
+dict:w:33057	お嬢	아가씨	fix	lookup
+dict:w:33059	うちら	우리	fix	lookup
+dict:w:33060	空脅し	빈 협박	fix	lookup
+dict:w:33061	早よう	빨리	fix	lookup
+dict:w:33062	暴き	폭로	fix	lookup
+dict:w:33063	よきように	적절히	fix	lookup
+dict:w:33064	良きように	적절히	fix	lookup
+dict:w:33065	人質に取られる	인질로 잡힌다	fix	lookup
+dict:w:33008	「え、何で膨れっ面してるんだ」	has:뾰로통한 얼굴	fix	lookup
+dict:w:33025	今に見てろ！	어디 두고 보자!	fix	lookup
+dict:w:33019	多少開き直りであることは本人も否定できない。	has:다소 적반하장인	fix	lookup
+dict:w:33022	総員起こしかけますね？	has:총원 기상	fix	lookup
+dict:w:33060	私は空脅しはしない	has:빈 협박	fix	lookup
+dict:w:33045	……す、すみません。私としたことが……	has:제가 이런 실수를	fix	lookup
+dict:w:33028	詩乃ちゃんの言う通りですよお頭。	has:두목	fix	lookup
+dict:w:33055	そしてこの日の本に、新たな歴史の一歩を	has:이 일본에	fix	lookup
+dict:w:33032	ばっちり決まった。	완벽하게 정해졌다.	keep	lookup
+dict:w:33034	やらしてくれ。	하게 해 줘.	keep	lookup
+dict:w:33057	お嬢様が来た。	아가씨가 왔다.	keep	lookup
+dict:w:33029	だから、どうしたの？	그러니까, 무슨 일이야?	keep	lookup
+phrase:どうされました	どうされました？ お菊ちゃん	has:무슨 일이세요?	fix	fixed
+phrase:どうされました	提督、どうされましたか？	has:무슨 일이세요?	fix	fixed
+phrase:どうされました	どうしました？	무슨 일이에요?	keep	fixed
+lexical:kanaeq-demakase	でまかせを言うな	엉터리를 말하지 마	fix	lookup
+lexical:kanaeq-demakase	出任せを言うな	엉터리를 말하지 마	keep	lookup
+lexical:narazaru	それはつまり、人ならざる存在だということだ。	has:사람이 아닌 존재	fix	lookup
+lexical:narazaru	人ならざるもの	사람이 아닌 것	fix	lookup
+phrase:行きはよいよい	ホント、行きはよいよい、帰りは怖い～ってね！	has:갈 때는 좋지만	fix	fixed
+dict:jisjk:252473	これは早くも三つ巴の戦いになりそうだ	has:삼파전의 싸움	fix	lookup
+dict:jisjk:364018	俺が名乗り出た	has:자청하고 나섰다	fix	lookup
+dict:w:17716	早よ来い	빨리 와라	fix	lookup
