@@ -54,3 +54,16 @@ dict:jisjk:119513	本が厚い。	책이 두껍다.	keep	lookup
 cx:notice-words-1:100	仏軍が攻めてきた	불군이 공격해 왔다	keep	rewrites
 cx:notice-words-1:98	舜くんとエッチ。	슌 군과 섹스.	keep	rewrites
 cx:notice-words-1:99	エッチな本	!rule:cx:notice-words-1:99	keep	rewrites
+cx:notice-words-1:101	あつい本を読んだ。	두꺼운 책을 읽었다.	fix	rewrites
+cx:notice-words-1:101	この本はあつい。	이 책은 두껍다.	fix	rewrites
+cx:notice-words-1:101	あつい雲が広がる	두꺼운 구름이 퍼진다	fix	rewrites
+cx:notice-words-1:101	胸板があつい	가슴팍이 두껍다	fix	rewrites
+cx:notice-words-1:101	あついお茶を飲む。	뜨거운 차를 마신다.	keep	rewrites
+cx:notice-words-1:101	お風呂があつい。	목욕이 뜨겁다.	keep	rewrites
+cx:notice-words-1:101	胸があつくなる	가슴이 뜨거워진다	keep	rewrites
+cx:notice-words-1:103	今日はあつい。	오늘은 덥다.	fix	rewrites
+cx:notice-words-1:103	あつい部屋	더운 방	fix	rewrites
+cx:notice-words-1:103	あついスープ	!rule:cx:notice-words-1:103	keep	rewrites
+cx:notice-words-1:103	このスープはあつい。	이 스프는 뜨겁다.	keep	rewrites
+dict:w:33130	意匠を凝らした作品	공을 들인 작품	fix	lookup
+dict:w:33130	表面の意匠	표면의 디자인	keep	lookup
