@@ -10101,6 +10101,12 @@ noun.purpose-tame	対策
 noun.purpose-tame	自衛
 noun.purpose-tame	保身
 noun.purpose-tame	ダイエット
+noun.purpose-tame	世界
+noun.purpose-tame	人類
+noun.purpose-tame	地球
+noun.purpose-tame	人々
+noun.purpose-tame	正義
+noun.purpose-tame	人助け
 //= noun.cause-tame	Ends of nouns of an event or a state that a のため gives as the cause, read 때문에 (メンテナンスのため 유지보수 때문에, 空腹のため 공복 때문에).
 noun.cause-tame	メンテナンス
 noun.cause-tame	通行止め
@@ -10120,6 +10126,14 @@ noun.cause-tame	点検
 noun.cause-tame	大雪
 noun.cause-tame	強風
 noun.cause-tame	大雨
+noun.cause-tame	雨
+noun.cause-tame	雪
+noun.cause-tame	風邪
+noun.cause-tame	地震
+noun.cause-tame	火事
+noun.cause-tame	寒さ
+noun.cause-tame	暑さ
+noun.cause-tame	怪我
 noun.cause-tame	台風
 noun.cause-tame	満員
 noun.cause-tame	満席
@@ -10246,3 +10260,19 @@ noun.song	音源
 noun.song	ミュージックビデオ
 noun.song	主題歌
 noun.song	MV
+//= noun.synced-data	Nouns of data, devices and clocks whose の before 同期 makes it the syncing, 동기화 (データの同期 데이터의 동기화), not a colleague 동기.
+noun.synced-data	データ
+noun.synced-data	ファイル
+noun.synced-data	時刻
+noun.synced-data	時計
+noun.synced-data	アカウント
+noun.synced-data	設定
+noun.synced-data	音声
+noun.synced-data	映像
+noun.synced-data	フォルダ
+noun.synced-data	端末
+noun.synced-data	デバイス
+noun.synced-data	連絡先
+noun.synced-data	カレンダー
+noun.synced-data	情報
+noun.synced-data	クラウド

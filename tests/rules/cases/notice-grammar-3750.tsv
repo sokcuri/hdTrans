@@ -122,7 +122,24 @@ cx:notice-words-1:42	高峰は空腹のため海の家へ向かった。	has:공
 cx:notice-words-1:42	現在改装工事の為通行止めです。	has:개장 공사 때문에 통행금지입니다	fix	rewrites
 cx:notice-words-1:42	昼間通行止めのため一部便で遅延が見込まれます。	has:통행금지 때문에	fix	rewrites
 cx:notice-words-1:42	病気のためだ。	병 때문이다.	keep	rewrites
-cx:notice-words-1:42	雨のため中止です。	!rule:cx:notice-words-1:42	keep	rewrites
+cx:notice-words-1:42	雨のため中止です。	비 때문에 중지입니다.	fix	rewrites
+cx:notice-words-1:42	「全部邪神のせいになる」という流れのため「痴呆」	!rule:cx:notice-words-1:42	keep	rewrites
+cx:notice-words-1:43	雨のために中止になった。	비 때문에 중지가 되었다.	fix	rewrites
+cx:notice-words-1:43	事故のために遅れた。	사고 때문에 늦었다.	fix	rewrites
+cx:notice-words-1:43	病気のために休んだ。	병 때문에 쉬었다.	fix	rewrites
+cx:notice-words-1:43	メンテナンスのために停止します。	유지보수 때문에 정지합니다.	fix	rewrites
+cx:notice-words-1:43	工事のために通行止めです。	공사 때문에 통행금지입니다.	fix	rewrites
+cx:notice-words-1:43	怪我のために欠場した。	has:때문에 결장했다	fix	rewrites
+cx:notice-words-1:43	健康のために走る。	건강을 위해 달린다.	keep	rewrites
+cx:notice-words-1:43	国のために戦う。	나라를 위해 싸운다.	keep	rewrites
+cx:notice-words-1:43	君の為に頑張る。	!rule:cx:notice-words-1:43	keep	rewrites
+cx:notice-words-1:40	世界のため、祈る。	세계를 위해, 빈다.	fix	rewrites
+cx:notice-words-1:45	何のため、生きるのか。	무엇을 위해, 사는 건가.	fix	rewrites
+cx:notice-words-1:45	誰のため、こんなことを？	누구를 위해, 이런 일을?	keep	rewrites
+cx:notice-words-1:45	何のために生きるのか。	무엇을 위해서 사는 건가.	keep	rewrites
+cx:notice-words-1:52	データの同期が完了しました。	has:데이터의 동기화가 완료	fix	rewrites
+cx:notice-words-1:52	同期の桜。	동기의 벚꽃.	keep	rewrites
+cx:notice-words-1:52	彼の同期が来た。	그의 동기가 왔다.	keep	rewrites
 cx:notice-words-1:44	「ただ、ライブのためにこんだけ頑張ってるんだし」	has:라이브를 위해	fix	rewrites
 cx:notice-words-1:44	安全のために、ベルトを締めてください。	!rule:cx:notice-words-1:44	keep	rewrites
 cx:notice-words-1:46	現在、囚人達を移送中の為民間人の進入を禁止しております。	has:이송 중이기 때문에 민간인의	fix	rewrites
