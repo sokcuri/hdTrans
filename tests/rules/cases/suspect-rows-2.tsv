@@ -1,0 +1,38 @@
+# 규칙: GRM-3726, LEX-4605, LEX-4606, LEX-4607, LEX-4608
+rule	input	expected	kind	layer
+dict:jisjk:341849	船から出る	배에서 나온다	fix	local
+dict:jisjk:341849	港から船が出る	항구에서 배가 출항한다	keep	local
+dict:jisjk:341849	フェリーが出た	페리가 출항했다	keep	local
+dict:jisjk:115173	バスは学校へ進む。	버스는 학교로 나아간다.	fix	local
+dict:jisjk:115173	大学に進む	대학에 진학한다	keep	local
+dict:jisjk:115173	高校へ進む	고등학교에 진학한다	keep	local
+dict:jisjk:341101	食事をひかえる	식사를 삼간다	fix	local
+dict:jisjk:341101	発言をひかえた	발언을 삼갔다	fix	local
+dict:jisjk:341101	メモをひかえる	메모를 기록한다	keep	local
+dict:jisjk:91863	露を結ぶ	이슬이 맺힌다	fix	local
+dict:jisjk:91863	実を結ぶ	결실을 본다	keep	local
+dict:jisjk:357320	働いて求められる能力	일하고 요구되는 능력	fix	local
+dict:jisjk:357320	結果が求められる	결과가 요구된다	keep	local
+dict:jisjk:364499	電話とかで話す。	전화등으로 이야기한다.	fix	local
+dict:jisjk:364499	マスコミとかで話す	매스컴등에서 이야기한다	keep	local
+dict:jisjk:340279	勉強することにしたい	공부하기로 하고 싶다	fix	local-ending
+dict:jisjk:340279	勉強することにした	공부하기로 했다	keep	local-ending
+dict:jisjk:348920	帰ったところですね。	돌아갔네요.	fix	local-ending
+dict:jisjk:348920	食べたところですね	먹었네요	fix	local-ending
+dict:jisjk:348920	今帰ったところです	지금 돌아갔습니다	keep	local-ending
+dict:jisjk:264095	明日来ますね	내일 올게요	keep	local
+dict:jisjk:4346	家でも買うか。	집이라도 살까.	keep	local
+dict:jisjk:355855	成果が得られていない	성과를 얻지 못하고 있다	keep	local
+cx:meaning-flips-1:110	話に乗せられた。	이야기에 넘어갔다.	fix	rewrites
+cx:meaning-flips-1:110	彼を車に乗せた。	그를 차에 태웠다.	keep	rewrites
+cx:meaning-flips-1:100	先生に来ていただきたい	선생님이 와 주셨으면 좋겠다	fix	rewrites
+cx:meaning-flips-1:100	先生に教えていただきたい	선생님이 가르쳐 주셨으면 좋겠다	fix	rewrites
+cx:meaning-flips-1:102	ぜひ来ていただきたいです	꼭 와 주셨으면 좋겠습니다	fix	rewrites
+cx:meaning-flips-1:102	手伝ってもらいたいです	도움을 받고 싶습니다	keep	rewrites
+dict:w:32600	先生に来ていただきたいですか	선생님이 와 주시고 싶습니까	fix	words
+dict:w:32600	先生に来ていただくことにした	선생님이 와 주시기로 했다	fix	words
+dict:w:32600	先生に来ていただきました	선생님이 와 주셨습니다	fix	words
+dict:w:32600	家に来ていた	집에 와 있었다	keep	words
+dict:w:32601	母にもらいたい	어머니에게 받고 싶다	fix	words
+dict:w:32601	彼にもらいたかった	그에게 받고 싶었다	fix	words
+dict:w:32601	母に買ってもらいたい	어머니가 사주었으면 좋겠다	keep	words
