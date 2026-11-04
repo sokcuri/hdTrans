@@ -27535,3 +27535,4 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 承知で	알면서	E300			GN			LEX-4705: 承知で 알면서			しょうちで	w:33204
 承知の上で	알면서	E300			GN			LEX-4705: 承知の上で 알면서			しょうちのうえで	w:33205
 伊の八	이8	N130			GN			LEX-4705: 伊の八 이8			いのはち	w:33206
+ゆるさな	용서하지 $DH@	H7N0			GN			LEX-4707: ゆるさない 용서하지 않는다			ゆるさない	w:33300

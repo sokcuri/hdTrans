@@ -1,0 +1,32 @@
+# 규칙: LEX-4707
+rule	input	expected	kind	layer
+cx:notice-words-1:110	買い物に付き合ってくれる？	쇼핑에 어울려 줄래?	fix	rewrites
+cx:notice-words-1:110	最後まで付き合う。	끝까지 함께한다.	fix	rewrites
+cx:notice-words-1:110	「いいから、ちょっと付き合ってっ！」	「됐으니까, 조금 함께해!」	fix	rewrites
+cx:notice-words-1:110	とことん付き合っちゃうよー！	철저히 함께해버릴 거야~!	fix	rewrites
+cx:notice-words-1:110	彼女と付き合っている。	그녀와 사귀고 있다.	keep	rewrites
+cx:notice-words-1:110	先輩と付き合うことになった。	선배와 사귀게 되었다.	keep	rewrites
+cx:notice-words-1:110	「……そもそも、なんでキノが俺と未来に付き合ってほしいんだよ」	「……애초에, 왜 키노가 나와 미래에 사귀어 줬으면 좋겠어」	keep	rewrites
+cx:notice-words-1:112	彼女を駅まで送った。	그녀를 역까지 배웅했다.	fix	rewrites
+cx:notice-words-1:112	「とにかく……家まで送るよ」	「어쨌든……집까지 배웅해」	fix	rewrites
+cx:notice-words-1:112	「んじゃ、寮まで送るよ」	「그럼, 기숙사까지 배웅해」	fix	rewrites
+cx:notice-words-1:112	荷物を家まで送る。	짐을 집까지 보낸다.	keep	rewrites
+cx:notice-words-1:112	手紙を送った。	편지를 보냈다.	keep	rewrites
+cx:notice-words-1:114	（？　エルが俺にアイコンタクトを送ってきている）	(? 엘이 나에게 아이콘택트를 보내 오고 있다)	fix	rewrites
+cx:notice-words-1:114	「別の人が送ってきたということもないとは言い切れないわ」	「다른 사람이 보내 왔다는 것도 없다고는 단언할 수 없어」	fix	rewrites
+cx:notice-words-1:114	「…俺は灰色の学校生活を送ってきた。」	「…나는 회색 학교생활을 보내 왔어.」	fix	rewrites
+cx:notice-words-1:114	友達を送ってきた。	친구를 배웅하고 왔다.	keep	rewrites
+cx:notice-words-1:118	まあ…仕方ないわね。今日はそれで手を打ちましょ	뭐…어쩔 수 없네. 오늘은 그래서 합의합시다	fix	rewrites
+cx:notice-words-1:118	これで手を打とう。	이것으로 합의하자.	fix	rewrites
+cx:notice-words-1:118	手を打つ必要がある。	손을 쓸 필요가 있다.	keep	rewrites
+cx:notice-words-1:118	早く手を打たないと。	빨리 손을 써야 한다.	keep	rewrites
+cx:notice-words-1:120	魚をいただきましょう。	물고기를 먹읍시다.	fix	rewrites
+cx:notice-words-1:120	ケーキをいただきます。	케이크를 먹습니다.	fix	rewrites
+cx:notice-words-1:120	お菓子をいただきました。	과자를 먹었습니다.	keep	rewrites
+cx:notice-words-1:120	お言葉をいただきました。	말씀을 받았습니다.	keep	rewrites
+cx:notice-words-1:122	妙高姉さんに言いつけるわよ！	묘오코 언니에게 고자질할 거야!	fix	rewrites
+cx:notice-words-1:122	先生に言いつけるわよ。	선생님에게 고자질할 거야.	fix	rewrites
+cx:notice-words-1:122	仕事を言いつけられた。	일을 명령받았다.	keep	rewrites
+dict:w:33300	「ゆるさないっ！！！！」	「용서하지 않아!!!!」	fix	lookup
+dict:w:33300	ぜったいゆるさない	절대로 용서하지 않는다	fix	lookup
+dict:w:33300	ゆるい服	느슨한 옷	keep	lookup

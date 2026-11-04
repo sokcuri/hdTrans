@@ -10969,3 +10969,19 @@ noun.hot-air	夜
 noun.hot-air	今年
 noun.hot-air	今夜
 noun.hot-air	朝
+//= noun.edible	Ends of nouns of food that いただく takes as its を object: then it is eating, 먹다 (魚をいただきましょう 생선을 먹읍시다).
+noun.edible	魚
+noun.edible	刺身
+noun.edible	果物
+noun.edible	肉
+noun.edible	菓子
+noun.edible	ケーキ
+noun.edible	弁当
+noun.edible	ご飯
+noun.edible	飯
+noun.edible	料理
+noun.edible	寿司
+noun.edible	パン
+noun.edible	おにぎり
+noun.edible	団子
+noun.edible	饅頭
