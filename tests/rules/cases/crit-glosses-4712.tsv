@@ -1,0 +1,25 @@
+# 규칙: LEX-4712
+rule	input	expected	kind	layer
+cx:notice-words-1:128	「歓迎したくない相手なのはわかるけど、必要以上に貶めるのは感心しないぞ」	「환영하고 싶지 않은 상대인 건 알지만, 필요이상으로 깎아내리는 건 좋게 보지 않아」	fix	rewrites
+cx:notice-words-1:128	個人的に 違法な銃取引は あまり感心しない	개인적으로 위법한 총거래는 그다지 좋게 보지 않는다	fix	rewrites
+cx:notice-words-1:128	それは感心しないな。	그것은 좋게 보지 않네.	fix	rewrites
+cx:notice-words-1:128	感心しませんね。	좋게 보지 않아요.	fix	rewrites
+cx:notice-words-1:128	彼の努力には感心した。	그의 노력에는 감탄했다.	keep	rewrites
+cx:notice-words-1:128	感心しながら聞いた。	감탄하면서 들었다.	keep	rewrites
+cx:notice-words-1:130	「なるほど……つまり、極論、人間が駄目なら心中するもやむなしということか」	「그렇구나……즉, 극론, 인간이 안되면 동반자살하는 것도 불가피라는 건가」	fix	rewrites
+cx:notice-words-1:130	二人は心中した。	두 사람은 동반자살했다.	fix	rewrites
+cx:notice-words-1:130	その心中は、なんとなく察することができる。	그 심중은, 어렴풋이 헤아릴 수가 있다.	keep	rewrites
+cx:notice-words-1:130	彼の心中を察する。	그의 심중을 헤아린다.	keep	rewrites
+lexical:sino-gloss	むにゅむにゃ…先輩に…戦艦に…一隻が炎上中……	물컹 음냐…선배에게…전함에…한 척이 화재 중……	fix	lookup
+sense:炎上	部活を商業活動に利用してるって ネットでも大炎上。	동아리를 상업 활동에 이용하고 있다고 넷에서도 큰 논란.	fix	lookup
+lexical:sino-gloss	逸話の少女を現す「紫紺の令嬢」というあだ名	일화의 소녀를 나타내는 「진보라의 영애」라는 별명	fix	lookup
+lexical:sino-gloss	「高評価じゃないか」	「높은 평가잖아」	fix	lookup
+lexical:sino-gloss	はい。花子様が猫川を去られて幾年月…	네. 하나코님이 네코가와를 떠나셔 몇 해…	fix	lookup
+lexical:sino-gloss	「零式艦戦52型」x6、「紫電一一型」x4	「영식함전 52형」x6, 「시덴 11형」x4	fix	lookup
+sense:炎上	その発言がSNSで炎上した。	그 발언이 SNS로 논란이 되었다.	fix	senses
+sense:炎上	彼のブログが炎上している。	그의 블로그가 논란이 되고 있다.	fix	senses
+sense:炎上	動画が炎上してアカウントが消えた。	동영상이 논란이 되어 계정이 사라졌다.	fix	senses
+sense:炎上	炎上ウォッチング@burning_NOW	논란 워칭 @burning_NOW	fix	senses
+sense:炎上	炎上商法はやめろ。	노이즈 마케팅은 그만두어라.	fix	senses
+sense:炎上	城が炎上している。	성이 불타오르고 있다.	keep	senses
+sense:炎上	車が炎上した。	차가 불타올랐다.	keep	senses
