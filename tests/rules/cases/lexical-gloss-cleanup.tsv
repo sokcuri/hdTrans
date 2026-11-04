@@ -562,7 +562,7 @@ dict:w:4637	お団子を食べた。	경단을 먹었다.	keep	lookup
 dict:w:4850	ジェスチャで伝える。	제스처로 전한다.	fix	lookup
 dict:w:4850	ジェスチャを使う。	제스처를 쓴다.	fix	lookup
 dict:w:4850	大きなジェスチャだ。	큰 제스처다.	fix	lookup
-dict:w:4850	ジェスチャの意味だ。	제스처 의미다.	fix	lookup
+dict:w:4850	ジェスチャの意味だ。	제스처의 의미다.	fix	lookup
 dict:w:4850	ジェスチャーで伝える。	제스처로 전한다.	keep	lookup
 dict:w:4862	ジェントルキツネザル属の動物だ。	대나무여우원숭이속의 동물이다.	fix	lookup
 dict:w:4862	ジェントルキツネザル属に属する。	대나무여우원숭이속에 속한다.	fix	lookup
@@ -828,7 +828,7 @@ dict:jisjk:240927	体積弾性を調べる。	체적탄성을 조사한다.	fix	
 dict:jisjk:240927	体積弾性の値を調べた。	체적탄성의 값을 조사했다.	fix	lookup
 dict:jisjk:240927	体積弾性が変わった。	체적탄성이 바뀌었다.	fix	lookup
 dict:jisjk:240927	この体積弾性は大きい。	이 체적탄성은 크다.	fix	lookup
-dict:jisjk:240927	体積弾性と圧力の関係を調べる。	체적탄성과 압력 관계를 조사한다.	fix	lookup
+dict:jisjk:240927	体積弾性と圧力の関係を調べる。	체적탄성과 압력의 관계를 조사한다.	fix	lookup
 dict:jisjk:240927	体積弾性です。	체적탄성입니다.	fix	lookup
 dict:jisjk:240927	体積弾性だった。	체적탄성이었다.	fix	lookup
 dict:jisjk:240927	体積弾性ではない。	체적탄성이 아니다.	fix	lookup

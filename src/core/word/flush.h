@@ -97,6 +97,9 @@ bool AfterRestart(const Worker& w, const Item* it);
 // Whether the text before the item on its line holds a word of taking leave (word.leave-taking:
 // ありがとうございました, お世話になりました, 失礼します) (grammar.cpp).
 bool AfterLeaveTaking(const Worker& w, const Item* it);
+// Whether the line opens with a word of wonder (word.wonder: へえ, ほう) and a pause, and no sentence
+// ends between it and the item (grammar.cpp).
+bool AfterWonder(const Worker& w, const Item* it);
 // Whether s has only digits (ASCII or full-width) and kanji numerals, and is not empty (grammar.cpp).
 bool NumberSurface(std::string_view s);
 // The target of the dictionary verb whose passive surface is (書かれ 書 쓰다, 見られ 見 보다), its

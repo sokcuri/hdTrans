@@ -1,0 +1,162 @@
+# 규칙: GRM-3720, GRM-3721, GRM-3722, GRM-3723, GRM-3724, LEX-4600, LEX-4602
+rule	input	expected	kind	layer
+cx:meaning-flips-1:80	俺はその言葉の意味を、まだ理解していなかった。	나는 그 말의 의미를, 아직 이해하고 있지 않았다.	fix	rewrites
+cx:meaning-flips-1:80	その言葉の意味が分からない。	그 말의 의미를 모른다.	fix	rewrites
+cx:meaning-flips-1:80	事故の原因を調べる。	사고 원인을 조사한다.	keep	rewrites
+cx:meaning-flips-1:80	二人の関係は悪い。	두 사람의 관계는 나쁘다.	fix	rewrites
+cx:meaning-flips-1:80	神の存在を信じない。	신의 존재를 믿지 않는다.	fix	rewrites
+cx:meaning-flips-1:80	作戦の意図を読む。	작전의 의도를 읽는다.	fix	rewrites
+cx:meaning-flips-1:80	魔物の脅威が迫る。	마물의 위협이 다가온다.	fix	rewrites
+cx:meaning-flips-1:80	言葉の解釈が違う。	말의 해석이 다르다.	fix	rewrites
+cx:meaning-flips-1:80	平和の象徴だ」	평화의 상징이다」	fix	rewrites
+cx:meaning-flips-1:80	……そして、モズの言葉の意味。	……그리고, 때까치 말의 의미.	fix	rewrites
+cx:meaning-flips-1:80	ここから先は政府の関係組織に任せましょう	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	ググール先生で何を検索しても上位の関連項目に表示されます	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	悪辣な敵MOBの思考ルーチンに	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	戦闘の準備をする。	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	部屋の掃除をした。	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	車の修理を頼む。	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	基地の警備を担当する。	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	写真付きの手紙だ。	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	店の評判がいい。	!rule:cx:meaning-flips-1:80	keep	rewrites
+dict:jisjk:264511	いい加減にしないと、本気で怒るよ？	적당히 하지 않으면, 정말로 화내?	fix	local-ending
+dict:jisjk:264511	ちゃんとしないと、怒るよ？	제대로 하지 않으면, 화내?	fix	local-ending
+dict:jisjk:264511	行かないと、見捨てられる	가지 않으면, 버림받는다	keep	local-ending
+dict:jisjk:264511	高いと、本気で怒る	높다고, 정말로 화낸다	keep	local-ending
+dict:jisjk:264511	早くしないと、遅刻するよ	빨리 하지 않으면, 지각해	keep	local-ending
+dict:jisjk:264511	静かにしないと、先生に怒られるよ。	조용하게 하지 않으면, 선생님에게 혼나.	keep	local-ending
+dict:jisjk:264511	金がないと、本気で困る	돈이 없으면, 진심으로 곤란하다	keep	local-ending
+dict:jisjk:342197	食べてないと困る	먹지 않으면 곤란하다	fix	local-ending
+dict:jisjk:342197	寝てないと死ぬぞ	자지 않으면 죽겠어	fix	local-ending
+dict:jisjk:342197	俺に伝わっていないと思い込んでいる彼女	나에게 전해지지 않았다고 믿어버리고 있는 그녀	keep	local-ending
+dict:jisjk:342197	高いと思う	높다고 생각한다	keep	local-ending
+dict:jisjk:342197	大事にしないとダメだよ	소중히 하지 않으면 안돼	keep	local-ending
+dict:jisjk:342197	急がないと間に合わないよ	서두르지 않으면 늦어	keep	local-ending
+cx:meaning-flips-1:10	「勝負しねえって言ってんだろうが」	「승부하지 않는다고 말하잖아」	fix	rewrites
+cx:meaning-flips-1:10	離せって言ってるんだろうが！	떼어 놓으라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:10	何て言ってるんだろうが	!rule:cx:meaning-flips-1:10	keep	rewrites
+cx:meaning-flips-1:20	行くって言ってるでしょう	간다고 말하잖아요	fix	rewrites
+cx:meaning-flips-1:20	行くって言ってるでしょう？	!rule:cx:meaning-flips-1:20	keep	rewrites
+cx:meaning-flips-1:30	頭をなでなでしないでよ！もう子供じゃないって言ってるでしょ！	머리를 쓰담쓰담하지 마! 이제 아이가 아니라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	待てって言ってんだろ！	기다리라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	ドッキリじゃねーって言ってんだろ！	몰래카메라가 아니라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	自然そのものだって言ってんだろ	자연 그 자체라고 말하잖아	fix	rewrites
+cx:meaning-flips-1:30	おいミドリ、こっちも助けてくれって言ってるだろ	어이 미도리, 여기도 도와 달라고 말하잖아	fix	rewrites
+cx:meaning-flips-1:30	ふん、ドック入りなんて。まぁいいか。…っ！ だから、見るなって言ってるでしょっ！！	흥, 도크 입거는. 뭐 됐나. …읏! 그러니까, 보지 말라고 말하잖아!!	fix	rewrites
+cx:meaning-flips-1:30	構わないで…。放っておいてって言ってるでしょ？やめてよ…そういうの。	상관없고…. 내버려 두라고 말하잖아? 그만두어…그러한 것.	fix	rewrites
+cx:meaning-flips-1:30	「本気だって言ってるでしょ！」	「진심이라고 말하잖아!」	fix	rewrites
+cx:meaning-flips-1:30	やめろって言ってるだろ。	그만두라고 말하잖아.	fix	rewrites
+cx:meaning-flips-1:30	彼は来るって言ってるんでしょ？	그는 온다고 하는 거지?	keep	rewrites
+cx:meaning-flips-1:30	何て言ってるんだろう	뭐라고 말하는 걸까	keep	rewrites
+cx:meaning-flips-1:30	彼は来るって言ってるだろう？	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	買いたいって言ってるんだから	사고 싶다고 말하니까	keep	rewrites
+cx:meaning-flips-1:30	嫌だって言ってるのに…こんなの嫌だから…！	싫다고 말하는데…이런 건 싫으니까…!	keep	rewrites
+cx:meaning-flips-1:38	黙れって言ってるんだ	입을 다물라니까	fix	rewrites
+cx:meaning-flips-1:40	「そうじゃない。おまえには首輪なんて必要ないって言ってるんだよ」	「그렇지 않아. 너에게는 목걸이 같은 건 필요 없다고 말하는 거야」	fix	rewrites
+cx:meaning-flips-1:40	ボク達を助けてくれるって言ってるんだから言うとおりにしようよ。	우리를 도와 준다고 하니까 말하는 대로 하자.	keep	rewrites
+cx:meaning-flips-1:40	俺は大丈夫だって言ってるんだがな	나는 괜찮다고 말하는데	keep	rewrites
+cx:meaning-flips-1:45	「ケートク生を無理矢理サボらせて場所取りさせるなんて、サイテーだって言ってるのよっ！」	「케이트크생을 억지로 게으름 피우게 해 장소 잡기시키다니, 사이테라고 말하는 거야!」	fix	rewrites
+cx:meaning-flips-1:45	何て言ってるのよ？	!rule:cx:meaning-flips-1:45	keep	rewrites
+cx:meaning-flips-1:50	食べながら話すな	먹으면서 이야기하지 마	fix	rewrites
+cx:meaning-flips-1:50	スマホを見ながら歩くな。	스마트폰을 보면서 걷지 마.	fix	rewrites
+cx:meaning-flips-1:50	歩きながら話すな！	걸으면서 이야기하지 마!	fix	rewrites
+cx:meaning-flips-1:50	「泣きながら走るな」	「울면서 달리지 마」	fix	rewrites
+cx:meaning-flips-1:50	寝ながら食べるな	자면서 먹지 마	fix	rewrites
+cx:meaning-flips-1:50	笑いながら、よく食べるな	웃으면서, 잘 먹는구나	keep	rewrites
+cx:meaning-flips-1:50	今更ながらよく食べるな	새삼스럽지만 잘 먹는구나	keep	rewrites
+cx:meaning-flips-1:50	残念ながら雨が降るな	유감스럽지만 비가 오는구나	keep	rewrites
+cx:meaning-flips-1:50	日が暮れるな	해가 지는구나	keep	rewrites
+cx:meaning-flips-1:50	よく食べるな	잘 먹는구나	keep	rewrites
+cx:meaning-flips-1:50	食べながら話すなら	먹으면서 이야기한다면	keep	rewrites
+cx:meaning-flips-1:60	一緒にいらっしゃいませんか	함께 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:60	誰かいらっしゃいませんか	누군가 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:62	今度うちに遊びにいらっしゃいませんか	이번 집에 놀러 오시지 않겠습니까	fix	rewrites
+cx:meaning-flips-1:62	奥様はいらっしゃいませんか	사모님은 계시지 않습니까	keep	rewrites
+cx:meaning-flips-1:70	それは私じゃなくて妹です	그것은 내가 아니라 여동생입니다	fix	rewrites
+cx:meaning-flips-1:70	私じゃなくて、妹です	내가 아니라, 여동생입니다	fix	rewrites
+cx:meaning-flips-1:70	私じゃなくて、あいつが悪い	내가 아니라, 저 녀석이 나쁘다	fix	rewrites
+cx:meaning-flips-1:70	犬じゃなくて猫が好き	개가 아니라 고양이를 좋아해	fix	rewrites
+cx:meaning-flips-1:70	今日じゃなくて明日行く	오늘이 아니라 내일 간다	fix	rewrites
+cx:meaning-flips-1:70	敵じゃなくて味方だ」	적이 아니라 아군이다」	fix	rewrites
+cx:meaning-flips-1:70	問題は金じゃなくて、時間だ。	문제는 돈이 아니라, 시간이다.	fix	rewrites
+cx:meaning-flips-1:70	「本当に？　ゲームでの話じゃなくて？」	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	人じゃなくて良かった	사람이 아니어서 다행이다	keep	rewrites
+cx:meaning-flips-1:70	死装束じゃなくて良かった	수의가 아니어서 다행이다	keep	rewrites
+cx:meaning-flips-1:70	私じゃなくて安心した	내가 아니어서 안심했다	keep	rewrites
+cx:meaning-flips-1:70	猫じゃなくて残念	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	静かじゃなくて困る	조용하지 않아서 곤란하다	keep	rewrites
+phrase:いらっしゃいませんか	誰かいらっしゃいませんか	누군가 계시지 않습니까	fix	builtin-phrase
+phrase:いらっしゃいませんか	どなたかいらっしゃいませんか？	누군가 계시지 않습니까?	fix	builtin-phrase
+phrase:いらっしゃいませんか	先生はいらっしゃいませんか。	선생님은 계시지 않습니까.	fix	builtin-phrase
+phrase:いらっしゃいませんでしたか	いらっしゃいませんでしたか	계시지 않았습니까	fix	builtin-phrase
+phrase:いらっしゃいませんでした	先生はいらっしゃいませんでした	선생님은 계시지 않았습니다	fix	builtin-phrase
+phrase:おっしゃいませんか	何もおっしゃいませんか	아무것도 말씀하시지 않습니까	fix	builtin-phrase
+phrase:おっしゃいませんでしたか	おっしゃいませんでしたか	말씀하시지 않았습니까	fix	builtin-phrase
+phrase:おっしゃいませんでした	何もおっしゃいませんでした	아무것도 말씀하시지 않았습니다	fix	builtin-phrase
+phrase:いらっしゃいません	どなたもいらっしゃいません	어떤 분도 계시지 않습니다	keep	builtin-phrase
+phrase:いらっしゃいません	いらっしゃいませ、お客様	어서 오세요, 손님	keep	builtin-phrase
+cx:meaning-flips-1:30	雨って言ってるだろうから、傘を持っていく。	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	彼も来るって言ってるだろうけど。	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	来るって言ってるだろうと思う。	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	あいつは来るって言ってるだろう。	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	来るって言ってるだろうな	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	来るって言ってるだろうね	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:30	来るって言ってるだろ、だから	!rule:cx:meaning-flips-1:30	keep	rewrites
+cx:meaning-flips-1:10	来るって言ってるだろうが、信じない。	!rule:cx:meaning-flips-1:10	keep	rewrites
+cx:meaning-flips-1:10	う、動くなって言ってんだろうが！	우, 움직이지 말라고 말하잖아!	fix	rewrites
+cx:meaning-flips-1:30	何も使ってねーよオレは男だっつってんだろ	아무것도 쓰지 않아 나는 남자라고 말하잖아	fix	rewrites
+cx:meaning-flips-1:30	そっちは仕事だっつってんだろ	그쪽은 일이라고 말하잖아	fix	rewrites
+cx:meaning-flips-1:30	ちげーっつってんだろ	다르다고 말하잖아	fix	rewrites
+cx:meaning-flips-1:50	食べながらよく話せるな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	寝ながら歌えるな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	泣きながらよく笑うな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	走りながらよく話すな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	彼は歌いながら踊るな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	へえ、歌いながら踊るな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	ほう、歌いながら踊るな	!rule:cx:meaning-flips-1:50	keep	rewrites
+cx:meaning-flips-1:50	見ながら歩くな	보면서 걷지 마	fix	rewrites
+cx:meaning-flips-1:50	飲みながら運転するな	마시면서 운전하지 마	fix	rewrites
+cx:meaning-flips-1:50	お前は食べながら話すな	너는 먹으면서 이야기하지 마	fix	rewrites
+cx:meaning-flips-1:50	おい、食べながら話すな	어이, 먹으면서 이야기하지 마	fix	rewrites
+cx:meaning-flips-1:50	へえ、すごい。食べながら話すな	헤에, 대단해. 먹으면서 이야기하지 마	fix	rewrites
+cx:meaning-flips-1:50	食べながら、話すな	먹으면서, 이야기하지 마	keep	rewrites
+cx:meaning-flips-1:70	本物じゃなくてがっかりした	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	本物じゃなくて悔しい	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	本物じゃなくて悲しい	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:meaning-flips-1:70	私じゃなくてほっとした	!rule:cx:meaning-flips-1:70	keep	rewrites
+cx:nado-dismissive:40	あたし 卓球なんか大っ嫌い！	나 탁구 같은 건 너무 싫어!	fix	rewrites
+cx:nado-dismissive:40	あたし卓球なんか大嫌い！	나 탁구 같은 건 너무 싫어!	fix	rewrites
+cx:nado-dismissive:40	卓球なんか嫌い	탁구 같은 건 싫다	fix	rewrites
+cx:nado-dismissive:40	ピーマンなんか大嫌い。	피망 같은 건 너무 싫다.	fix	rewrites
+cx:nado-dismissive:40	勉強なんか嫌いだ	공부 같은 건 싫다	keep	rewrites
+cx:nado-dismissive:40	あんたなんか 大っ嫌いよ	너 같은 건 정말 싫어	keep	rewrites
+cx:nado-dismissive:40	卓球なんか嫌いじゃない	!rule:cx:nado-dismissive:40	keep	rewrites
+dict:jisjk:341464	なんか嫌い	왠지 싫다	keep	local
+dict:jisjk:341464	なんか変だ	왠지 이상하다	keep	local
+dict:jisjk:341464	今日はなんか眠い	오늘은 왠지 졸리다	keep	local
+dict:jisjk:341464	この部屋なんか寒い	이 방 왠지 춥다	keep	local
+cx:meaning-flips-1:80	これは光属性の 魔法の存在が大きいだろう	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	皆さんにも 今日の授業の意味が わかるときがくると思います。	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	鳥の歌の意味を あれこれ推測したわ	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	それぞれの動きの 意味は分かりませんが	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	あっ！そっちの意味じゃないですよっ	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	まあ、私の場合はそうですねぇ…いささか主従の関係を超えた、深いモノになってはいますが	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	後の話の関係もありますし……」	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	'ｗａｎｋｅｒ'の 単語の意味を知り	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	その男との元々の関係は？	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	）火災の原因は？	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	死亡の原因が 君の所見通り	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	私をあなたの人生の意味にしないで！	!rule:cx:meaning-flips-1:80	keep	rewrites
+cx:meaning-flips-1:80	斜め上の解釈に呆れ、	!rule:cx:meaning-flips-1:80	keep	rewrites
+dict:jisjk:342197	たいした死人は出てないと	별 죽은 사람은 나오지 않았다고	fix	local-ending
+dict:jisjk:342197	あなたは寝ていないと	당신은 자지 않았다고	fix	local-ending
+dict:jisjk:342197	スリルを求めてばかりで 現実を見ていないとでも？	스릴을 구하고만 있어 현실을 보지 않았다고라도?	fix	local-ending
+dict:jisjk:342197	その首と胴が つながっていないと知れ	그 목과 몸통이 연결되지 않았다고 알려지고	fix	local-ending
+cx:meaning-flips-1:38	やめろって言ってんだよ	그만두라니까	fix	rewrites
+cx:meaning-flips-1:38	必要ないって言ってるんだよ	!rule:cx:meaning-flips-1:38	keep	rewrites
+cx:meaning-flips-1:38	子供じゃないって言ってるんだ	!rule:cx:meaning-flips-1:38	keep	rewrites
+cx:meaning-flips-1:80	もうすぐ夏か。僕の名前の意味は知ってるか？	이제 곧 여름인가. 내 이름의 의미는 알고 있어?	fix	rewrites
+cx:meaning-flips-1:80	体を焼き尽くすような『熱』の原因はいまだに活動中。	몸을 불태우는 것 같은 『열』의 원인은 아직껏 활동 중.	fix	rewrites
+cx:meaning-flips-1:80	五奇人の存在が 学院を良くする方向に 進んでない感じがするというか	오기인의 존재가 학원을 잘 할 방향으로 진행되지 않는 느낌이 든다고 할까	fix	rewrites
+cx:meaning-flips-1:80	あの人の言葉の意味が わかってきた。	그 사람 말의 의미를 알 수 있어 왔다.	fix	rewrites
+cx:meaning-flips-1:80	その雪のように真っ白なチップが お前の魂の象徴だ	그 눈처럼 새하얀 칩이 네 영혼의 상징이다	fix	rewrites
