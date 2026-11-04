@@ -1,0 +1,40 @@
+# 규칙: LEX-4822
+rule	input	expected	kind	layer
+lex:spelling-variant	で、では、しちゅれいしゅるね	그, 그럼, 실례할게	fix	sound
+lex:spelling-variant	あがががががっ！ごめんなちゃい！ジョーク、イッツ、ダディージョーク！	아가가가가가! 미안해요! 농담, 이츠, 대디 농담!	fix	sound
+lex:spelling-variant	好き しゅき	좋아해 좋아	fix	sound
+lex:spelling-variant	しゅごいの	대단해	fix	sound
+lex:spelling-variant	なっ…そ、そんなことにゃいっ！	뭣…그, 그렇지 않아!	fix	sound
+lex:spelling-variant	お菓子とかいーから！飲み物も！アタシ持ってくから！	과자라든지 좋으니까! 음료도! 나 가져가니까!	fix	sound
+lex:spelling-variant	いーじゃん 買えばあ	좋잖아 사면 아	fix	sound
+lex:spelling-variant	「ふぁいん」	「파인」	fix	sound
+lex:spelling-variant	あふっ、せっくす用のスクール水着	아훗, 섹스용의 학교 수영복	fix	sound
+lex:spelling-variant	この「ちょこれいと」と言う物を渡すんが、ここのしきたりみたいじゃのう。	이 「초콜릿」이라는 것을 건네주는 이, 여기의 관례 같구먼.	fix	sound
+lex:spelling-variant	暗黒のパワーにするがいいですう	암흑의 파워로 하도록 해라입니다	fix	sound
+lex:spelling-variant	座わって	앉아	fix	sound
+lex:spelling-variant	恐がられる母親	무서워해지는 어머니	fix	sound
+lex:spelling-variant	慣れ慣れしくしちゃっても	허물없게 해버려도	fix	sound
+lex:spelling-variant	くっ、我輩を…そこいらの猫と、同じにするで、にゃい	큭, 나를…그 근방의 고양이와, 같게 하는 것으로, 없다	fix	sound
+lex:spelling-variant	なにを恐がってる?	뭘 무서워하고 있어?	fix	sound
+lex:spelling-variant	ぶるー」で「あんにゅい」なきぶんなんだってー！	인 체한다~」로 「권태」울어 만큼 라고~!	fix	sound
+lex:spelling-variant	しゅくだいをする	숙제를 한다	keep	sound
+lex:spelling-variant	こんにゃくを食べた	곤약을 먹었다	keep	sound
+lex:spelling-variant	仕方ないにゃー。もっと興奮していいよ。	어쩔 수 없다냥~. 좀 더 흥분해도 돼.	keep	sound
+lex:spelling-variant	猫じゃないにゃ。	고양이가 아니다냥.	keep	sound
+lex:spelling-variant	んにゃ、ごめんごめん	은냐, 미안 미안	keep	sound
+lex:spelling-variant	ま、まって、けんしゅけくん…っ！	기, 기다려, 켄슈케 군…!	keep	sound
+lex:spelling-variant	ぱんにゃさんの鳴き声が聞こえた	판냐 씨의 울음소리가 들렸다	keep	sound
+lex:spelling-variant	うーん、そういうものですかねぇ	으음, 그런 것입니까	keep	sound
+lex:spelling-variant	おーいおいおいおい！	어이 이봐 이봐 이봐!	keep	sound
+lex:spelling-variant	甘くて、すこーし苦いんです。	달아서, 조금 씁쓸합니다.	keep	sound
+lex:spelling-variant	いいかなーって思ったからさ	좋을까라고 생각했으니까	keep	sound
+lex:spelling-variant	うんそーだねストーカーじゃないね	응 그래 스토커가 아니네	keep	sound
+lex:spelling-variant	そーなんだ	그렇군	keep	sound
+lex:spelling-variant	アタシも…こーくんと、エッチ…したい	나도…코 군과, 변태…하고 싶다	keep	sound
+lex:spelling-variant	素敵な制服 かっこいい帽子	멋진 제복 근사한 모자	keep	sound
+lex:spelling-variant	あっと言う間だった。	순식간이었다.	keep	sound
+lex:spelling-variant	ほっとくと食べないことも多いから	가만히 두면 먹지 않는 것도 많으니까	keep	sound
+lex:spelling-variant	しゃべる鳥に チョイちゃんに 王子さま	말하는 새에게 초이짱에 왕자님	keep	sound
+lex:spelling-variant	しゅたっ。その役目、自分がやろうかなぁ	슈탓. 그 역할, 자신이 할까	keep	sound
+lex:spelling-variant	はいー、今いくわー。	네―, 지금 가~.	keep	sound
+lex:spelling-variant	問題にゃい。	문제없다.	fix	sound

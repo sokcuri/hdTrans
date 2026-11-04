@@ -249,6 +249,11 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
 std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot& snap);
 std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap);
 
+// The spellings of baby talk and cat speech (しゅき 好き, ごめんなちゃい, にゃい), long marks inside
+// words (いーから, しょーに合わない) and loanwords written in hiragana (ちょこれいと チョコレート), spelled
+// as the dictionary keys them where only the respelling reads as words (spec LEX-4822).
+std::string RewriteSpellingVariants(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The fused and clipped adjective endings written in full (spec SPC-19): an adjective stem of the
 // dictionary said with its last syllable and い fused (うるせぇ うるさい, すげーな すごいな, 若え！ 若い！,
 // 汚ねえ 汚い, さみい さむい, 分からねえ 分からない) before the end of a clause, a sentence particle or the
