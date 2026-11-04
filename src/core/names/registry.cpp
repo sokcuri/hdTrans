@@ -537,6 +537,11 @@ void Registry::Add(std::string_view rawLine) {
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
     for (const std::string& t : FreeKanaNames(line)) count(kanaFree_, t);
+    for (const LooseUse& u : LooseKanaUses(line)) {
+        Loose& l = kanaLoose_[u.t];
+        (u.closed ? l.closed : l.open)++;
+        l.particles.insert(u.particle);
+    }
     // A line that is a name alone, a speaker line before a quote, names the speaker of the
     // quote.
     const std::string_view body = TrimSpace(line);
@@ -684,8 +689,18 @@ const std::map<std::string, Name>& Registry::Accepted() {
     }
     // Kana no dictionary has that the document writes three times or more where a name stands, before a
     // particle and a word (みいは自分の, みいが来た), are a name there too (spec LEX-4826).
+    // Kana whose halves are words (あい, いか) need more: five uses or more before two particles or more,
+    // three of them a whole run closed by its particle; the uses after a particle inside a run and those
+    // with kana after the particle count once those three are there (spec LEX-4828).
+    std::set<std::string> free;
     for (const auto& [t, c] : kanaFree_) {
-        if (c < 3 || Flags(t).records > 0) continue;
+        if (c >= 3) free.insert(t);
+    }
+    for (const auto& [t, l] : kanaLoose_) {
+        if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2) free.insert(t);
+    }
+    for (const std::string& t : free) {
+        if (Flags(t).records > 0) continue;
         Name& n = all[t];
         n.score += kThreshold;
         n.person = true;
@@ -922,7 +937,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
             // the threshold for a common word (ひかり), and it is no predicate form (あおいさん,
             // but あおい空).
             const auto k = kanaHon_.find(t);
-            if (k == kanaHon_.end() && kanaFree_.count(t) != 0 && n.score >= need && Flags(t).records == 0) {
+            if (k == kanaHon_.end() && free.count(t) != 0 && n.score >= need && Flags(t).records == 0) {
                 scores_[t] = n;
                 continue;
             }
