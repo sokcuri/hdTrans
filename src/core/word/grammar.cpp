@@ -2479,6 +2479,29 @@ bool ConditionAround(Flusher& f, const Item* it, const Item* last) {
         }
     }
     if (it->prev != nullptr && it->prev->group->surface == "から" && lemma == "하다") return true;
+    // A degree reached (津田さんくらいになると, これほどになると) is a general condition.
+    if (lemma == "되다" || LastLemmaWord(lemma) == "되다") {
+        const Item* p = it->prev;
+        for (int k = 0; k < 3 && p != nullptr; k++, p = p->prev) {
+            const std::string_view ps = p->group->surface;
+            if (ps.ends_with("くらいに") || ps.ends_with("ぐらいに") || ps.ends_with("ほどに") || ps == "くらい" ||
+                ps == "ぐらい" || ps == "ほど") {
+                return true;
+            }
+        }
+    }
+    // Good or right after it (力を抜くとちょうどいい, 消すと、いい方向に) judges a condition.
+    if (const Item* n = it->After(); n != nullptr) {
+        const Item* m = n->group->surface == kJaComma ? n->next : n;
+        for (int k = 0; k < 2 && m != nullptr; k++, m = m->next) {
+            if (m->detail->Yougo() && m->selected >= 0 && (m->group->surface == "い" || m->group->surface == "良" || m->group->surface == "よ") &&
+                m->detail->cls == kDetailKeiyo && !From(m->text, m->start).starts_with("よかっ") &&
+                !From(m->text, m->start).starts_with("良かっ")) {
+                return true;
+            }
+            if (m->detail->Yougo()) break;
+        }
+    }
     // A なる after a word of manner is a turn things may take (こうなったら, いざとなったら).
     if (lemma == "되다") {
         for (const std::string_view m : dict::ClassMembers(HDTRANS_CLASS("word.turn-manner"))) {
@@ -2674,7 +2697,7 @@ bool PresentLinkBefore(const Item* it, const Item* last) {
         // form (持って); an ichidan stem ends in an e or i row kana.
         const std::string_view before = d.size() > std::string_view("って").size() ? d.substr(0, d.size() - std::string_view("って").size())
                                                                                    : std::string_view(x->group->surface);
-        const bool quoted = d.ends_with("って") && before != "い" &&
+        const bool quoted = d.ends_with("って") && (before != "い" || x->detail->cls == kDetailKeiyo) &&
                             std::u32string_view(U"るうくすつぬむぶぐいだえけげせぜてでねへべぺめれきぎしじちにひびぴみり")
                                     .find(DecodeLastRune(before).cp) != std::u32string_view::npos;
         // The listing し follows a plain form too (短いし, 行くし), not a 連用形 (取り出し、).
@@ -2868,9 +2891,11 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
     const std::string lemma = last->selected >= 0 ? output::Lemma(last->EntryText(last->selected), f.families) : "";
     const std::string_view word = LastLemmaWord(lemma);
-    // The いる of ている, not the いく of ていく (加わっていった).
-    const bool progressive = AfterTeForm(last) && (last->group->surface == "居" ||
-                                                   (last->group->surface == "い" && !end.starts_with("いっ") &&
+    // The いる of ている, not the いく of ていく (加わっていった), also in respect (弾いておられた).
+    const std::string_view lastSurface = last->group->surface;
+    const bool progressive = AfterTeForm(last) && (lastSurface == "居" || lastSurface.starts_with("おら") ||
+                                                   lastSurface.starts_with("居ら") || lastSurface.starts_with("いらっしゃ") ||
+                                                   (lastSurface == "い" && !end.starts_with("いっ") &&
                                                     !end.starts_with("いか") && !end.starts_with("いき")));
     const bool being = !progressive && (word.starts_with("있") || word.starts_with("없"));
     // A state an act left (書かれていた 쓰여 있었다, 濡れていた 젖어 있었다), not one going on (降っていた 오고 있었다).
@@ -2935,12 +2960,44 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
     const bool copula = !ToldPast(last) && (tail.ends_with("だった") || tail.ends_with("であった") || tail.ends_with("でした"));
     const bool state = being || left || found || sensed || felt || last->detail->cls == kDetailKeiyo || copula;
     const bool held = progressive || Has(end, "ていた") || Has(end, "でいた") || end.ends_with("てた") || end.ends_with("でた");
-    return state || (held && (perceive || subject)) || (perceive && subject);
+    // A state going on with no one named, and no topic before the と, is what the act came upon (伺うと、
+    // バイオリンを弾いておられた; 彼は窓を開けると、外を見ていた stays the doer's).
+    bool topic = false;
+    for (const Item* x = it->prev; x != nullptr && x->group->surface != "。" && !InSet(kSentenceEndItems, x->group->surface); x = x->prev) {
+        if (x->group->surface == "は") topic = true;
+    }
+    // Time going by (しばらくたつと, 七日たつと) only leads to the scene, -자.
+    const std::string_view ts = it->group->surface;
+    const bool elapsing = ts == "た" || ts == "経" || ts == "過ぎ" || ts == "すぎ" || LastLemmaWord(full) == "지나다";
+    const bool unnamed = progressive && !subject && !topic && !elapsing;
+    return state || unnamed || (held && (perceive || subject)) || (perceive && subject);
 }
 
 }  // namespace
 
+// A と of saying after a manner of speaking (率直に言うと, 単刀直入に申し上げると) or of judging from
+// something (物音から判断すると) frames what follows, -면 (말하면, 말씀드리면, 판단하면) as the
+// dictionary idioms do (正直に言うと 솔직히 말하면), never a step of the story.
+void DiscourseTo(Flusher& f) {
+    for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        if (!it->detail->Yougo() || it->DirectIndex() < 0 || it->DirectSurface() != "と" || it->prev == nullptr) continue;
+        const Entry* e = it->DirectEntry(it->DirectIndex());
+        if (e == nullptr || !e->dst.starts_with("2면")) continue;
+        const std::string lemma = output::Lemma(it->EntryText(it->selected), f.families);
+        const std::string_view word = LastLemmaWord(lemma);
+        const bool saying = word == "말하다" || word == "말씀드리다";
+        const bool judging = word == "판단하다";
+        const Item* p = it->prev;
+        std::string manner(p->group->surface);
+        if (p->prev != nullptr && (manner == "に" || manner == "を" || manner == "で")) manner = std::string(p->prev->group->surface) + manner;
+        if ((saying && dict::InClass(HDTRANS_CLASS("adverb.speak-manner"), manner)) || (judging && p->group->surface == "から")) {
+            it->AssignDirectSlot(it->DirectIndex(), "2면");
+        }
+    }
+}
+
 void PastSequence(Flusher& f) {
+    DiscourseTo(f);
     const Item* last = nullptr;
     for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) {
         const std::string_view s = it->group->surface;
