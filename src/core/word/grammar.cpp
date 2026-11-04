@@ -2626,9 +2626,31 @@ bool SameSubjectAfter(const Item* it, const Item* last) {
     return true;
 }
 
-}  // namespace
+// Whether a predicate between item it and last ends its clause in a contrast after a present, with
+// a comma (思われるでしょうが、, 来るけど、).
+bool PresentLinkBefore(const Item* it, const Item* last) {
+    for (const Item* x = it->After(); x != nullptr && x != last; x = x->next) {
+        if (!x->detail->Yougo() || x->DirectIndex() < 0 || x->After() == nullptr || x->After()->group->surface != kJaComma) {
+            continue;
+        }
+        const std::string_view d = x->DirectSurface();
+        if ((d.ends_with("が") || d.ends_with("けど") || d.ends_with("けれど") || d.ends_with("けれども")) && PresentLink(x)) {
+            return true;
+        }
+    }
+    return false;
+}
 
-namespace {
+// Whether a verb's Korean is an adjective, which takes no -자 (すっきりすると 개운하니, お腹が痛むと
+// 아프니): an adjective's marker family, or the 하다 of a root of ko-root.hada-adjective (확실&AV@).
+bool AdjectiveGloss(std::string_view target) {
+    if (AdjectiveTarget(target)) return true;
+    if (!target.ends_with("&AV@")) return false;
+    const std::string_view root = target.substr(0, target.size() - 4);
+    return dict::InClass(HDTRANS_CLASS("ko-root.hada-adjective"), root) ||
+           dict::InClass(HDTRANS_CLASS("ko-root.hada-state"), root) ||
+           dict::InClass(HDTRANS_CLASS("ko-root.mimetic-adjective"), root);
+}
 
 // Whether the sentence ending at last, after the と of item it, tells what was found rather than
 // the next act (spec GRM-40): the と verb is a state that goes on (考え事をしていると) or a thought
@@ -2637,7 +2659,7 @@ namespace {
 // or a state in ている follows a new subject or a verb of perceiving (男たちが待っていた, 気づくと
 // 朝になっていた), or a verb of perceiving meets a new subject. Anything else is the next act, -자
 // (立ち上がると、部屋を出て行った 일어서자).
-bool Found(Flusher& f, const Item* it, const Item* last) {
+bool FoundAfterTo(Flusher& f, const Item* it, const Item* last) {
     const std::string full = output::Lemma(it->EntryText(it->selected), f.families);
     if (AfterTeForm(it) || full.ends_with("고 있다") || full.ends_with("어 있다") || full.ends_with("아 있다") ||
         LastLemmaWord(full).starts_with("있")) {
@@ -2645,8 +2667,10 @@ bool Found(Flusher& f, const Item* it, const Item* last) {
     }
     // A thought finds what follows (そう考えると 그렇게 생각하니, 思い出すと 생각해 내니).
     if (Has(full, "생각")) return true;
-    const bool perceive = std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.perceive")),
-                                              [&](std::string_view v) { return LastLemmaWord(full).ends_with(v); });
+    // A phrase (정신을 차리다) matches the whole lemma's end, a word the end of its last word (돌아보다).
+    const bool perceive = std::ranges::any_of(dict::ClassMembers(HDTRANS_CLASS("ko-verb.perceive")), [&](std::string_view v) {
+        return v.find(' ') != std::string_view::npos ? full.ends_with(v) : LastLemmaWord(full).ends_with(v);
+    });
     bool subject = false;
     for (const Item* x = it->After(); x != nullptr; x = x->next) {
         const std::string_view s = x->group->surface;
@@ -2674,8 +2698,9 @@ bool Found(Flusher& f, const Item* it, const Item* last) {
                                            [&](std::string_view v) { return lemma == v || lemma.ends_with(" " + std::string(v)); });
     // A copula split after its noun (殺風景で + あった).
     const std::string tail = (last->prev != nullptr && last->prev->DirectIndex() >= 0 ? std::string(last->prev->DirectSurface()) : "") + end;
-    const bool state = being || left || found || last->detail->cls == kDetailKeiyo || tail.ends_with("だった") ||
-                       tail.ends_with("であった") || tail.ends_with("でした") || last->group->surface.starts_with("見え") ||
+    // A nominalised past (出て行ったのだった) tells what happened, no state.
+    const bool copula = !ToldPast(last) && (tail.ends_with("だった") || tail.ends_with("であった") || tail.ends_with("でした"));
+    const bool state = being || left || found || last->detail->cls == kDetailKeiyo || copula || last->group->surface.starts_with("見え") ||
                        last->group->surface.starts_with("聞こえ");
     const bool held = progressive || Has(end, "ていた") || Has(end, "でいた") || end.ends_with("てた") || end.ends_with("でた");
     return state || (held && (perceive || subject)) || (perceive && subject);
@@ -2719,6 +2744,9 @@ void PastSequence(Flusher& f) {
         const bool seeing = e->dst == "2면" && (d.ends_with("ば") || to || tara) &&
                             output::Lemma(it->EntryText(it->selected), f.families).ends_with("보다");
         if ((to || tara) && ConditionAround(f, it, close)) continue;
+        // A clause that ends in a link after a present (思われるでしょうが) holds the と, also past a
+        // comma (GRM-175): こうやって指摘すると、…と思われるでしょうが 지적하면.
+        if (to && PresentLinkBefore(it, close)) continue;
         if (tara && UnsaidTara(it, close)) continue;
         // てみれば before a past is what one found on trying, also without a comma (出かけてみれば
         // 出会ったのは 나가 보니 만난 것은); てみると and てみたら are, when they join an event.
@@ -2736,10 +2764,11 @@ void PastSequence(Flusher& f) {
         } else if (it->After() == nullptr || (!paused && !joined)) {
             continue;
         } else if (seeing && !viewpoint && !tara) {
-            it->AssignDirectSlot(it->DirectIndex(), !to || Found(f, it, close) ? "2니" : "1자");
+            it->AssignDirectSlot(it->DirectIndex(), !to || FoundAfterTo(f, it, close) ? "2니" : "1자");
         } else if (e->dst != "2면(자)" && !(seeing && tara && !viewpoint)) {
             continue;
-        } else if (to && (RieulStem(output::Lemma(it->EntryText(it->selected), f.families)) || !Found(f, it, close))) {
+        } else if (to && (RieulStem(output::Lemma(it->EntryText(it->selected), f.families)) ||
+                          (!AdjectiveGloss(it->EntryText(it->selected)) && !FoundAfterTo(f, it, close)))) {
             it->AssignDirectSlot(it->DirectIndex(), "1자");
         } else if (to) {
             it->AssignDirectSlot(it->DirectIndex(), "2니");
