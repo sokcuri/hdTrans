@@ -2751,6 +2751,11 @@ bool PersonNoun(Flusher& f, const Item* x, bool subject = false) {
     // Someone, a count of people (二人, 数人), or as a subject an unknown katakana word, which is mostly
     // a name there (ロスウェが起きてきた).
     if (x->group->surface.starts_with("誰") || (x->group->surface.ends_with("人") && x->group->surface.size() <= 9)) return true;
+    // お and one kanji as a subject is an old-style name (お朝, お雪).
+    if (subject && x->group->surface.starts_with("お") && x->group->surface.size() == std::string_view("お朝").size() &&
+        text::IsKanji(text::DecodeRune(x->group->surface.substr(std::string_view("お").size())).cp)) {
+        return true;
+    }
     if (subject && x->Attr(x->selected).empty()) {
         bool katakana = !x->group->surface.empty();
         for (std::string_view t = x->group->surface; !t.empty();) {
@@ -2842,6 +2847,8 @@ int OwnNextAct(Flusher& f, const Item* it, const Item* last) {
         x = x->next->next;
     }
     if (x != nullptr && x->group->surface == kJaComma) x = x->next;
+    // At the same time (開くと、同時に叫んだ) both happen at once, -자.
+    if (x != nullptr && (x->group->surface.starts_with("同時に") || x->group->surface == "同時")) return 0;
     // Anyone else named in the main clause answers the と (撫でると、彼女は目を細めた; 告げると、
     // みんな集まってきた).
     for (; x != nullptr; x = x->next) {
@@ -2931,7 +2938,10 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last, Finding finding)
             subject = true;
             // A person or a voice acts or answers (貴族から賛成の声が上がった), no sight that came.
             if (x->prev != nullptr && x->prev->selected >= 0 &&
-                (PersonNoun(f, x->prev, true) || x->prev->group->surface.ends_with("声"))) {
+                (PersonNoun(f, x->prev, true) || x->prev->group->surface.ends_with("声") ||
+                 (x->prev->prev != nullptr && x->prev->prev->group->surface == "お" &&
+                  text::DecodeRune(x->prev->group->surface).size == x->prev->group->surface.size() &&
+                  text::IsKanji(text::DecodeRune(x->prev->group->surface).cp)))) {
                 person = true;
             }
         }
@@ -2947,6 +2957,14 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last, Finding finding)
             if (Has(s, "声が")) person = true;
         }
         if (x == last) break;
+    }
+    // A subject that acts on an object (千里は俺の手を包み込んだ) is an agent, whatever its noun.
+    bool acting = false;
+    bool seenSubject = false;
+    for (const Item* x = it->After(); x != nullptr && x != last; x = x->next) {
+        const std::string_view s = x->group->surface;
+        if (s == "が" || s == "は") seenSubject = true;
+        if (seenSubject && s == "を") acting = true;
     }
     std::string end(last->group->surface);
     if (last->DirectIndex() >= 0) end += std::string(last->DirectSurface());
@@ -3010,13 +3028,18 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last, Finding finding)
                             (q->prev->group->surface == "の" ||
                              (q->prev->DirectIndex() >= 0 && q->prev->DirectSurface().ends_with("の"))))));
     const bool found = in(HDTRANS_CLASS("ko-verb.found"), lemma) || in(HDTRANS_CLASS("ko-verb.found"), mainLemma) ||
-                       (subject && !person) || (undergone && !(subject && person)) || arrived || sighted;
+                       (subject && !person && !(acting && !(progressive || being || left || (afterTe && (lastSurface == "あ" || lastSurface == "い"))))) || (undergone && !(subject && person)) || arrived ||
+                       sighted;
     // A sound or a smell (物音がした 소리가 났다), a feeling (気がした), a sight (見えてきた), a gradual change
     // (なってきた) or a state named by an adjective (暗くて困った).
     const Item* p = main->prev;
     const bool sensed = (main->group->surface == "し" || main->group->surface == "する") && p != nullptr && p->group->surface == "が" &&
                         p->prev != nullptr && dict::EndsWithMember(HDTRANS_CLASS("noun.sensed"), p->prev->group->surface) > 0;
-    const bool felt = main->group->surface.starts_with("気が") || main->group->surface.starts_with("見え") ||
+    // A change that grew (声が高くなってきた, なってきた read as one word).
+    const bool growing = (last->group->surface.starts_with("な") || last->group->surface.ends_with("な") ||
+                          last->group->surface.ends_with("なって")) &&
+                         (Has(end, "てき") || Has(end, "てく") || Has(end, "って"));
+    const bool felt = growing || main->group->surface.starts_with("気が") || main->group->surface.starts_with("見え") ||
                       main->group->surface.starts_with("聞こえ") || (main != last && (last->group->surface == "き" || last->group->surface == "来" || last->group->surface == "く") &&
                        (LastLemmaWord(mainLemma) == "되다" || LastLemmaWord(mainLemma).ends_with("지다"))) ||
                       (last->selected >= 0 && AdjectiveGloss(last->EntryText(last->selected)));
@@ -3033,7 +3056,9 @@ bool FoundAfterTo(Flusher& f, const Item* it, const Item* last, Finding finding)
                       main->group->surface.starts_with("気が") || main->group->surface.starts_with("見え") ||
                       (last->selected >= 0 && AdjectiveGloss(last->EntryText(last->selected)));
     // Touching or running into something (白崎は…触れてきた) is no finding for a ㄹ stem.
-    if (finding == Finding::Strict) return (kept && !startled) || (held && subject);
+    // Someone saying something (それは若者に言っていた) acts; it is no state found.
+    const bool saying = dict::StartsWithMember(HDTRANS_CLASS("verb.quote-start"), verb->group->surface) > 0;
+    if (finding == Finding::Strict) return !(saying && held) && ((kept && !startled) || (held && subject));
     // An ongoing act that a feeling or a change grows out of (見ていると、ドキドキしてきた, 思えてきた), not
     // a voice or a happening that breaks in (歩いていると、声が聞こえてきた, ドアがノックされた).
     if (finding == Finding::Grown) {
