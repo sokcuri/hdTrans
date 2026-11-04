@@ -343,6 +343,35 @@ bool NegativeN(std::string_view s, size_t pos, Match& m) {
 
 // (でき|得|足り|られ|させ|言え|見え|聞こえ)ん([！!？?。、…‥」』ぞよわがしけっ]|$), or before a tail of
 // KansaiNegativeTail.
+// The ん of a negative before the conjecture of the copula, だろ, じゃろ or でしょ, after a kana of the あ row
+// (分からんだろう, 終わらんじゃろう, 要らんでしょ, 許さんだろう) is ない (모를 것이다, 끝나지 않겠지), before かった
+// the な of なかった. Not a potential in え, which says the る of るんだ short (使えんだろ 쓸 수 있는 거지), nor
+// a word whose negative the dictionary reads (いかん 안 돼, 済まん, かなわん), ている said とる (しとらん), やがる, the
+// kana わかん of 分かるんだ, nor the kana of a noun or a past (いちばんだろう, 茶わんだろう, えらんだろう, 読んだろう,
+// 何なんだろう, したんでしょう, 強盗さんでしょうか).
+bool NegativeConjecture(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "ん")) return false;
+    const std::string_view head = s.substr(0, pos);
+    if (head.empty()) return false;
+    if (!In(LastRune(head).cp, U"かまやらわがざばぱ") && !head.ends_with("許さ") && !head.ends_with("せさ")) return false;
+    for (const std::string_view w : {"わか", "いか", "とら", "どら", "済ま", "すま", "かなわ", "叶わ", "ちば", "茶わ", "えら", "やが", "しきら"}) {
+        if (head.ends_with(w) && !(w == "わか" && head.ends_with("分か"))) return false;
+    }
+    std::string_view rest = s.substr(p);
+    // A past in かった goes with it (知らんかっただろ 몰랐을 것이다).
+    m.group[1] = rest.starts_with("かった") ? "な" : "ない";
+    if (rest.starts_with("かった")) rest.remove_prefix(std::string_view("かった").size());
+    if (!rest.starts_with("だろ") && !rest.starts_with("じゃろ") && !rest.starts_with("でしょ")) return false;
+    m.end = p;
+    // A じゃろ before a comma, which no end row reads, is だろ (わからんじゃろ、 모르겠지,).
+    if (rest.starts_with("じゃろ、") && m.group[1] == "ない") {
+        m.group[1] = "ないだろ";
+        m.end = p + std::string_view("じゃろ").size();
+    }
+    return true;
+}
+
 bool NegativeE(std::string_view s, size_t pos, Match& m) {
     for (std::string_view w : kNegativeEStems) {
         size_t p = pos;
@@ -1258,6 +1287,7 @@ std::string SpokenForms(std::string_view in, bool exclamationNa, bool dialectFor
         };
         text = ReplaceAll(text, NegativeN, negative);
         text = ReplaceAll(text, NegativeE, negative);
+        text = ReplaceAll(text, NegativeConjecture, [](const Match& m) { return std::string(m.group[1]); });
     }
     if (dialectForms && Contains(text, "こと")) {
         text = ReplaceAll(text, WhatAThing, [](const Match&) { return std::string("なんてこった"); });
