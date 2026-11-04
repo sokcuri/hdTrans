@@ -83,7 +83,7 @@ voice:shorter-te	エルはここにいない。だが、今日まで一緒に戦
 voice:shorter-te	「筧さんと繋がれたから……」	「카케이 씨와 연결될 수 있었으니까……」	keep	voice
 voice:shorter-te	佐藤さんと繋がれて嬉しい。	사토 씨와 연결될 수 있어서 기쁘다.	keep	voice
 voice:shorter-te	手すりに掴まれても怖い。	난간에 매달릴 수 있어도 무섭다.	keep	voice
-voice:shorter-te	リビングを出ようとすると、腕を掴まれた。	거실을 나오려고 하니, 팔을 잡혔다.	keep	voice
+voice:shorter-te	リビングを出ようとすると、腕を掴まれた。	거실을 나오려고 하자, 팔을 잡혔다.	keep	voice
 constraint:shi-before-nitsuite	でも、私は少なくともこの二人の死についてだけは、かなり具体的に知っている。	has:두 사람의 죽음에	fix	lookup
 constraint:shi-before-nitsuite	死についての考察。	죽음에 대한 고찰.	fix	lookup
 constraint:shi-before-nitsuite	死にたい。	lacks:죽음	keep	lookup

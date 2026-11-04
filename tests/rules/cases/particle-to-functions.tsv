@@ -7,7 +7,7 @@ sound:paused-to	やっ……と、静かになったぁ……。	얏……과, �
 sound:paused-to	うん、とても良い。	응, 무척 좋다.	keep	sound
 sound:pon	　ぽん、と手を叩く。	 퐁, 하고 손뼉을 친다.	fix	sound
 sound:pon	ぽんと手を叩く。	탁 손뼉을 친다.	keep	sound
-sound:katakana-after-to	　スタスタとベッドから降りると、彼女は部屋を飛び出した。	 척척 침대에서 내리니, 그녀는 방을 뛰쳐나왔다.	fix	sound
+sound:katakana-after-to	　スタスタとベッドから降りると、彼女は部屋を飛び出した。	 척척 침대에서 내리자, 그녀는 방을 뛰쳐나왔다.	fix	sound
 sound:katakana-after-to	舌を絡めて、チュッとキスをした。	혀를 걸고, 쪽 키스를 했다.	keep	sound
 sound:hiragana-doubled	とてとてと廊下を歩いていく。	토테토테 복도를 걸어간다.	fix	sound
 sound:hiragana-doubled	彼女はふるふると首を振る。	그녀는 후루후루 고개를 젓는다.	fix	sound
@@ -60,7 +60,7 @@ rewrite:quote-to	「力がないと」	「힘이 없으면」	fix	rewrites
 rewrite:quote-to	言うことは何もないと。	말하는 것은 아무것도 없다고.	keep	rewrites
 cx:line-initial-to:10	と一緒に行こう。	와 함께 가자.	fix	rewrites
 cx:line-initial-to:10	と違って、彼は優しい。	와 달리, 그는 다정하다.	fix	rewrites
-cx:line-initial-to:10	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이니, 그는 웃었다.	keep	rewrites
+cx:line-initial-to:10	と私が頭を下げると、彼は笑った。	라고 내가 고개를 숙이자, 그는 웃었다.	keep	rewrites
 cx:noun-to:10	誰かと会話する。	누군가와 대화한다.	fix	rewrites
 cx:noun-to:10	もっと未来と話したい。	좀 더 미래와 이야기하고 싶다.	fix	rewrites
 cx:noun-to:10	勇者と言った。	용사라고 말했다.	keep	rewrites

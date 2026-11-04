@@ -21,7 +21,7 @@ rewrite:quote-to-answer	すると、彼は構わないと首を振った。	그�
 rewrite:quote-to-answer	ホワイト殿の話で構わないと答えながらも、文句は聞き入れるつもりはないと付け加えています。	화이트전의 이야기로 상관없다고 대답하면서도, 불평은 들어줄 생각은 없다고 덧붙이고 있습니다.	fix	rewrites
 rewrite:quote-to-answer	ボタンを押すと開く。	버튼을 누르면 연다.	keep	rewrites
 rewrite:quote-to-answer	エメンの方を見ると頷いた。	에멘의 쪽을 보니 끄덕였다.	keep	rewrites
-rewrite:quote-to-answer	ジルは少し難しい顔をすると首を振った。	질은 조금 심각한 표정을 하니 고개를 저었다.	keep	rewrites
+rewrite:quote-to-answer	ジルは少し難しい顔をすると首を振った。	질은 조금 심각한 표정을 하자 고개를 저었다.	keep	rewrites
 rewrite:quote-to-answer	大丈夫だと頷いた。	괜찮다고 끄덕였다.	keep	rewrites
 rewrite:quote-to-answer	嫌だと首を振った。	싫다고 고개를 저었다.	keep	rewrites
 rewrite:quote-to-answer	時間がないと彼は言った。	시간이 없다고 그는 말했다.	keep	rewrites
