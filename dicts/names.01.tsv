@@ -22829,7 +22829,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 プルトゥエルブ	프루트웰브	N130	QPNVHn	Wb	GN						ぷるとぅえるぶ	names.320918
 プルトコ	푸르토코	N130	QPNVHn	Wb	GN						ぷるとこ	names.320919
 プルトニウム	플루토늄	N110			GN						プルトニウム	names.320920
-プルトン	하데스	N110			GN						プルトン	names.320921
+プルトン	플루톤	N110			GN						プルトン	names.320921
 プルトン・アインザック	플루톤 아인자크	N130	QPNVHn		GN						ぷるとん・あいんざっく	names.320922
 プルト川	프루트강	N130	QCTVPl		GN							names.320923
 プルドニク	프루드니크	N130	QCTVPl		GN							names.320924
@@ -178397,8 +178397,8 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 半額	반값	N110			GN							names.478462
 半高村	한타카촌	N130	QCTVPl		GN							names.478463
 半﨑美子	한자키 요시코	N130	QPNVHn		GN							names.478464
-卍	만지	N130	QPNVHn	Wb	GN							names.478465
-卍	만자문	N110			GN							names.478466
+卍	만자	N130	QPNVHn	Wb	GN							names.478465
+卍	만자	N110			GN							names.478466
 卍カマイタチ	만지 카마이타치	N130	QPNVHn		GN						まんじかまいたち	names.478467
 卍丸	만지마루	N130	QPNVHn	Wb	GN						まんじまる	names.478468
 卍禁	만금	N130	QPNVHn	Wb	GN							names.478469

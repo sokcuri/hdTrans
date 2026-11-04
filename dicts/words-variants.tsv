@@ -7163,7 +7163,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 御目に掛か	만나&J8@	M428		Db	GN	1546	||1 &&4 M+0== "57*" P+1== "1" P+2== "2**" Y+0= "1고"	お目にかか의 어미가 57 계열이고 뒤에 명사와 조사가 오면 만나뵙다를 고르고 어미를 고로 바꾼다. (미발동: rare-context)				jisjk:146688
 目にあま	눈에 거슬&AA@	M428			GN							jisjk:117808
 眼に余	눈에 거슬&AA@	M428			GN							jisjk:117808
-目をつむ	눈감아 &CJ@	M428			GN							jisjk:117831
+目をつむ	눈을 &F1@	M428			GN							jisjk:117831
 眼をつぶ	눈감아 &CJ@	M428			GN							jisjk:117831
 眼を瞑	눈감아 &CJ@	M428			GN							jisjk:117831
 眼をつむ	눈감아 &CJ@	M428			GN							jisjk:117831
@@ -9076,7 +9076,7 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 茶しぶ	차의 앙금	N110	VFd		GN							jisjk:153377
 血のめぐり	혈액 순환	I110			GN							jisjk:88917
 智将	지장	N110			GN							jisjk:242646
-騙し討ち	속여서 침	I110			GN							jisjk:41276
+騙し討ち	기습	I110			GN							jisjk:41276
 騙し打ち	속여서 침	I110			GN							jisjk:41276
 だまし打ち	속여서 침	I110			GN							jisjk:41276
 断裁器	재단기	N110	VPe		GN							jisjk:153323

@@ -197,6 +197,40 @@ bool Chimau(std::string_view s, size_t pos, Match& m) {
     return Done(s, m, p, r, 3);
 }
 
+// ([っし]|[えけげせぜてでねべめれ]|[見来寝着出居似煮])ちった|んじった: ちゃった said with its ゃ
+// dropped (行っちった, 間違えちった, 読んじった)
+bool Chitta(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (OneOf(s, p, U"っしえけげせぜてでねべめれ見来寝着出居似煮")) {
+        size_t q = p;
+        if (Lit(s, q, "ちった")) {
+            // ちったぁ is 少しは (ちったぁ暇になる), not ちゃった.
+            size_t r = q;
+            if (OneOf(s, r, U"ぁあァアー")) return false;
+            m.group[1] = Span(s, pos, p);
+            m.end = q;
+            return true;
+        }
+    }
+    p = pos;
+    if (!Lit(s, p, "んじった")) return false;
+    m.end = p;
+    return true;
+}
+
+// ([てで])もう([たて]): the Kansai てしまう (やってもうた, 赤にしてもうて)
+bool Moota(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "もう")) return false;
+    const size_t q = p;
+    if (!OneOf(s, p, U"たて")) return false;
+    m.group[2] = Span(s, q, p);
+    m.end = p;
+    return true;
+}
+
 // っつの before a mark that ends what was said or the end: the quoting って with の of insistence said
 // つ (違うっつの, 見てねえっつの！ 見ていないっての！).
 bool TsuNo(std::string_view s, size_t pos, Match& m) {
@@ -1092,6 +1126,15 @@ std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contr
         const Match g = Rematch(m, Chimau);
         if (!g.group[1].empty()) return Cat({g.group[1], "ちゃ", g.group[2]});
         return Cat({"んじゃ", g.group[3]});
+    });
+    text = ReplaceAll(text, Chitta, [](const Match& m) {
+        const Match g = Rematch(m, Chitta);
+        if (!g.group[1].empty()) return Cat({g.group[1], "ちゃった"});
+        return std::string("んじゃった");
+    });
+    text = ReplaceAll(text, Moota, [](const Match& m) {
+        const Match g = Rematch(m, Moota);
+        return Cat({g.group[1], "しま", g.group[2] == "た" ? "った" : "って"});
     });
     text = ReplaceAll(text, Tsutte, [](const Match& m) {
         return Cat({m.group[1] == "ん" ? "んて" : "って", "言っ", m.group[2]});

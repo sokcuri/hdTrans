@@ -1359,7 +1359,7 @@ ttt	ttt	K110			GN				jisjk:201744
 あっぷる	애플	N130			GN				jisjk:97449		
 あつ	두$G2@	H7U0			GN				jisjk:119511		
 あつ	$G5@	H7U0	VFrUXt		GN	1381	||7 &&2 ||4 S-1== "すご" S-1== "スッゴ" S-1== "とても" S-1== "スゴ" P-1== "7**" &&2 P-1== "2**" A-2== "UMe" &&2 ||2 S-2== "さむ" S-2== "寒" P-2== "7**" &&2 ||2 S-1== "さむ" S-1== "寒" P-1== "7**" &&2 ||2 S+1== "さむ" S+1== "寒" P+1== "7**" A+1== "UMe" A-1== "UMe"	형용사 뜻 선택: 머리 단어가 형용사(7**), 형용동사(8**)인 규칙(うまい→맛있다, 薄い→싱겁다, 얇다, 好き, 残念…). 형식: docs/rule-language.md, 실행 순서: docs/pipeline-layers.md. 규칙은 그 번호를 가리키는 사전 단어(머리 단어)의 갈래로 파일을 정한다(docs/rule-language.md#주제-파일). 파일 안에서는 머리 단어별로 모아 두었다. 다른 파일: 부정 형용사 ない와 ない로 끝나는 부정 표현은 negation-aspect.txt, 형용사 어미(く, くて, かった)는 endings.txt. 강조 형용사나 추위를 나타내는 형용사 또는 시간 표현이 주변에 있으면 あつ를 덥다로 고른다. (미발동: rare-context)	jisjk:119512		
-あつ	뜨$GH@	H7U0			GN	1382	||3 &&2 ||4 S+1== "ひと" S+1== "女" S+1== "人" S+1== "男" P+1== "1**" &&2 P-2== "1**" A-2== "VLq" A+1== "VLq"	사람을 뜻하는 명사가 뒤따르거나 액체 명사가 앞선 문맥에 있으면 あつ를 '뜨겁다'로 고른다. (미발동: rare-context)	jisjk:119513		
+あつ	뜨$GH@	H7U0	XXX		GN	1382	||3 &&2 ||4 S+1== "ひと" S+1== "女" S+1== "人" S+1== "男" P+1== "1**" &&2 P-2== "1**" A-2== "VLq" A+1== "VLq"	사람을 뜻하는 명사가 뒤따르거나 액체 명사가 앞선 문맥에 있으면 あつ를 '뜨겁다'로 고른다. (미발동: rare-context)	jisjk:119513		
 あつ	위독$AB@	H7U0			GN				jisjk:119515		
 あつあつの	매우 뜨거운	E0H0			GN				jisjk:149709		
 あつか	다&CB@	M460			GN				jisjk:343136		
@@ -31606,7 +31606,7 @@ ttt	ttt	K110			GN				jisjk:201744
 だましこ	감쪽같이 속&AJ@	M435			GN				jisjk:91049		
 だまし取	가로&Ca@	M448			GN				jisjk:262082		
 だまし果せ	끝까지 속&AJ@	M447			GN				jisjk:141050		
-だまし討ち	속여서 침	I110			GN				jisjk:41276		
+だまし討ち	기습	I110			GN				jisjk:41276		
 だまっちま	가만히 있게 &C6@	M420			GN				jisjk:141056		
 だまってい	가만히 &HN@	M427			GN				jisjk:267059		
 だまってい	가만히 &HN@	M427		Va	GN				jisjk:267060		
@@ -51181,7 +51181,7 @@ ttt	ttt	K110			GN				jisjk:201744
 エッソ石油	엣소석유	N130	QIDVGt		GN				jisjk:44321		
 エッチ	야%A1@	G8U0			GN				jisjk:2304		
 エッチ	변태	N130			GN				jisjk:2305		
-エッチ	섹스	N110		Hd	GN				jisjk:258034		
+エッチ	섹스	N110	XXX	Hd	GN				jisjk:258034		
 エッチ	섹스&AV@	M419			GN				jisjk:258035		
 エッチアンドエム	H and M	N110			GN				jisjk:157878		
 エッチイーシーきこう	HEC 기계 공업	N110	VBlVPe		GN				jisjk:152059		
@@ -52985,7 +52985,7 @@ ttt	ttt	K110			GN				jisjk:201744
 オレたち	우리들	N110	VHn		GN				jisjk:158350		
 オレイン酸	올레인산	N110			GN				jisjk:45208		
 オレオ。 スイッチ	오레오스위치	N110			GN				jisjk:45209		
-オレカ	프리페이드 카드	N110			GN				jisjk:158351		
+オレカ	오레카	N110			GN				jisjk:158351		
 オレグ	오레그	N130	QPN		SO				jisjk:371345		
 オレゴン	오리건	N130	QCT	Qq	GN				jisjk:45210		
 オレフィン	올레핀	N110			GN				jisjk:45211		
@@ -101385,7 +101385,7 @@ ttt	ttt	K110			GN				jisjk:201744
 上掲	상게	N110		Hd	GN				jisjk:195163		
 上揚	카미아게	N130	QCTVPl		GN				jisjk:283423		
 上摂待	카미세츠타이	N130	QCTVPl		GN				jisjk:284652		
-上擦	흥분&AY@	M428	SFl		GN				jisjk:144908		
+上擦	들&A8@	M428	SFl		GN				jisjk:144908		
 上支湧別	카미슈우베츠	I130	QCTVPl		GN				jisjk:284512		
 上改田	카미카이다	N130	QCTVPl		GN				jisjk:283860		
 上放れ	급등	N110			BZ				jisjk:349248		
@@ -103668,7 +103668,7 @@ ttt	ttt	K110			GN				jisjk:201744
 下与名	시타구미묘	N130	QCTVPl		GN				jisjk:297547		
 下与田川	시모요타가와	I130	QCTVPl		GN				jisjk:300420		
 下世屋	시모세야	N130	QCTVPl		GN				jisjk:299359		
-下世話	밑 일	I110			GN				jisjk:88295		
+下世話	저속%A1@	G8L0			GN				jisjk:88295		
 下並木	시모나미키	N130	QCTVPl		GN				jisjk:299761		
 下中	시모나카	N120	VHn		GN				jisjk:188673		
 下中ノ目	시모나카노메	I130	QCTVPl		GN				jisjk:299716		
@@ -114837,7 +114837,7 @@ ttt	ttt	K110			GN				jisjk:201744
 二見赤松町	후타미아카마츠마치	I130	QCTVPl		GN				jisjk:326642		
 二見野田崎町	후타미노타자키마치	I130	QCTVPl		GN				jisjk:326648		
 二親	부모	N110	VHn		GN				jisjk:31146		
-二言	이언	N110	UTs		GN				jisjk:31140		
+二言	두말	N110	UTs		GN				jisjk:31140		
 二説	2설	N110			GN				jisjk:160909		
 二豊団地	니호우단치	I130	QCTVPl		GN				jisjk:318624		
 二豎	병	N110	QHP		GN				jisjk:247858		
@@ -118433,8 +118433,8 @@ ttt	ttt	K110			GN				jisjk:201744
 介護報酬部会	개호보수부회	N110			BZ				jisjk:348399		
 介護貯金	개호저금	N110			BZ				jisjk:364380		
 介錯	시중	N110	VBp	Hd	GN				jisjk:166746		
-仏	부처	N110			GN				jisjk:116217		
-仏	프랑스	N130	XXXQNN		GN				jisjk:116218		
+仏	부처	N110	XXX		GN				jisjk:116217		
+仏	프랑스	N130	QNN		GN				jisjk:116218		
 仏	불	N110		On	GN				jisjk:259209		
 仏の座	광대나물	N110	VPt		GN				jisjk:251064		
 仏ケ後	호토케라	N130	QCTVPl		GN				jisjk:328091		
@@ -120111,7 +120111,7 @@ ttt	ttt	K110			GN				jisjk:201744
 任那	미마나	N110	VPl		GN				jisjk:252647		
 任長栄	임장영	N130	QPN		GN				jisjk:209406		
 任靖周	임정주	N130	QPN		GN				jisjk:209411		
-企	기도&AV@	M445			GN				jisjk:139313		
+企	꾀&AV@	M445			GN				jisjk:139313		
 企て	계획	N110			GN				jisjk:7274		
 企て	기획&AV@	M437			GN				jisjk:7275		
 企み	계획	N110			GN				jisjk:153005		
@@ -129115,7 +129115,7 @@ ttt	ttt	K110			GN				jisjk:201744
 入り換	교체&AV@	M428			GN				jisjk:141084		
 入り換わ	교체&AV@	M428			GN				jisjk:141081		
 入り換わり	교대	N110			GN				jisjk:126262		
-入り方	해 질 무렵	N110	UMe		GN				jisjk:126264		
+入り方	들어가는 방법	N110			GN				jisjk:126264		
 入り日	석양	I110	VFr		GN				jisjk:81956		
 入り日影	석양빛	N110	VSs		GN				jisjk:126272		
 入り替	교대&AV@	M427			GN				jisjk:141079		
@@ -177523,7 +177523,7 @@ ttt	ttt	K110			GN				jisjk:201744
 子癇	임신 중독증	N110	QHP		GN				jisjk:186818		
 子祭り	어린이날 축제	N110	VBl		GN				jisjk:248708		
 子福者	자복자	I110	VHn		GN				jisjk:82038		
-子種	자식	N110	VHn		GN				jisjk:182451		
+子種	씨	N110	VHn		GN				jisjk:182451		
 子細	자세	N110			GN				jisjk:31816		
 子細な	문제$FA@	H7N0	SFl		GN				jisjk:120927		
 子細無し	지장없음	N110			GN				jisjk:233708		
@@ -204749,7 +204749,7 @@ ttt	ttt	K110			GN				jisjk:201744
 御きげん	심기	I110			GN				jisjk:77902		
 御しやす	다루기 $GF@	H7U0			GN				jisjk:5778		
 御ち走	맛 있는 음식	I110	VFd		GN				jisjk:77903		
-御の字	특급	I110			GN				jisjk:77904		
+御の字	다행	I110			GN				jisjk:77904		
 御一同さま	여러분	I110	VHn		GN				jisjk:77997		
 御一同様	여러분	I110	VHn		GN				jisjk:77998		
 御一新	메이지 유신	N110			GN				jisjk:183400		
@@ -209386,7 +209386,7 @@ ttt	ttt	K110			GN				jisjk:201744
 意中の人	마음에 둔 사람	N110	SFlVHn		GN				jisjk:125763		
 意力	의지력	N110	SFl		GN				jisjk:126289		
 意匠	생각	N110			GN				jisjk:31038		
-意匠	디자인	N110			IT				jisjk:262494		
+意匠	디자인	N110	XXX		IT				jisjk:262494		
 意匠広告	의장 광고	N110	VCm		GN				jisjk:228167		
 意匠料	의장료	N110			GN				jisjk:350318		
 意匠権	의장권	N110	ULw		BZ				jisjk:125468		
@@ -216654,7 +216654,7 @@ ttt	ttt	K110			GN				jisjk:201744
 控除	공제	N110		Hd	BZ				jisjk:16155		
 控除限度額	공제 한도액	N110			BZ				jisjk:352089		
 控除額	공제액	N110			GN				jisjk:160354		
-推	헤아&AA@	M433			GN				jisjk:95335		
+推	&LN@	M433			GN				jisjk:95335		
 推	추천&AV@	M443			GN	1538	||3 ||3 S-2== "氏" S-2== "君" S-2== "さん" A-2== "QPN" A-2-= "VHn"	두 단어 앞이 「氏・君・さん」으로 끝나거나 사람 이름·사람 의미 계열이면 「推」를 ‘추천하다’로 고른다. (미발동: rare-context)	jisjk:146190		
 推こう	추고	I110			GN				jisjk:105940		
 推して知	미루어 짐작&AV@	M428			GN				jisjk:146031		
@@ -218083,7 +218083,7 @@ ttt	ttt	K110			GN				jisjk:201744
 放ってお	내버려 &C7@	M441			GN			LEX-123	jisjk:264502		
 放ってお	그대로 &C7@	M441			GN	4766	||2 M+0== "540" A-2-= "VHn"	특정 활용형이거나 앞쪽에 사람 의미의 말이 있으면 '放ってお'를 '그대로 두다'로 고른다.	jisjk:373489		
 放り出	내던&AL@	M443			GN				jisjk:260357		
-放れ	풀&AA@	M417			GN				jisjk:92995		
+放れ	떨어&AL@	M417			GN				jisjk:92995		
 放下僧	호우카소	N110	VHn		GN				jisjk:250499		
 放下師	호우카시	N110	VHn		GN				jisjk:250498		
 放任	방임	N110		Hd	GN				jisjk:23005		
@@ -294966,7 +294966,7 @@ ttt	ttt	K110			GN				jisjk:201744
 筋違い	접질&AA@	M429			GN				jisjk:137152		
 筋違橋町	스지카이바시쵸	I130	QCTVPl		GN				jisjk:303352		
 筋金	속대	N110			GN				jisjk:17362		
-筋金入り	국건한 신념	I110			GN				jisjk:63311		
+筋金入り	골수	I110			GN				jisjk:63311		
 筋金入りの	진짜	E0H0			GN				jisjk:149923		
 筋雲	새털구름	N110	VSs		GN				jisjk:196659		
 筋電図	근전도	I110	VSp		GN				jisjk:63318		
@@ -347384,7 +347384,7 @@ ttt	ttt	K110			GN				jisjk:201744
 間に合	시간이 &FB@	M410			GN	4191	||1 &&3 U+0!= "Lません" U+0!= "Lわ" D+0= "늦지 &LW@"	間に合는 긍정형에서 늦지 않다는 뜻으로 번역한다. 부정 어미에는 중복 부정을 만들지 않는다.	jisjk:361304		
 間に合ってい	충분히 시간이 &HN@	M417		Ma	GN	619	||1 &&2 U+0== "Lません" D+0= "충분히 시간이 &M9@"	間に合ってい의 어미가 ません으로 시작하면 충분히 시간이 없다로 바꾼다. (미발동: rare-word)	jisjk:91665		
 間に合わせ	임시 변통	N110		Hd	GN				jisjk:6586		
-間に合わせ	도움이 되게 &AV@	M417			GN				jisjk:6587		
+間に合わせ	시간에 맞&CL@	M417			GN				jisjk:6587		
 間に合わせの	임시적인	E0H0			GN				jisjk:150123		
 間に合わな	$Ky@	H7U0			GN	1016	||2 &&4 P-1== "5**" S-2== "行" D-2== "&A1@" P-2== "4**" &&5 U+0== "く" S+1== "Rな" P+1== "4**" D+0= "늦    " Y+0= " 게"	앞쪽 이동 표현이 있으면 間に合わな를 시간에 맞지 않다로 고르고 뒤에 なる가 이어지는 く형이면 늦게로 바꾼다. (미발동: rare-context)	jisjk:115260		
 間に立	화해시&AQ@	M434			GN				jisjk:91663		

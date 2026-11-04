@@ -1,0 +1,56 @@
+# 규칙: LEX-4701, LEX-4702, LEX-4703, LEX-4704
+rule	input	expected	kind	layer
+dict:jisjk:6587	「必ずできる。絶対に間に合わせよう」	「반드시 할 수 있다. 절대로 시간에 맞추자」	fix	lookup
+dict:jisjk:88295	下世話な話は万国共通である。	저속한 이야기는 만국 공통이다.	fix	lookup
+dict:jisjk:117831	咄嗟に目をつむる。	순간적으로 눈을 감는다.	fix	lookup
+dict:jisjk:182451	私に子種、いっぱいかけてください	저에게 씨, 많이 걸어 주세요	fix	lookup
+dict:jisjk:144908	あ～、声が上擦ってる。	아~, 목소리가 들뜨고 있다.	fix	lookup
+dict:w:18706	気っ風がいいねぇ。	배포가 좋네.	fix	lookup
+dict:jisjk:77904	御の字って線で組む	다행은 선으로 짠다	fix	lookup
+dict:jisjk:41276	騙し討ちみたいな形になってすみません。	기습 같은 형태가 되어서 미안합니다.	fix	lookup
+dict:jisjk:31140	武士に二言はない？	무사에게 두말은 없어?	fix	lookup
+dict:jisjk:126264	私も最初は入り方がわからなくて	나도 처음은 들어가는 방법을 몰라서	fix	lookup
+dict:jisjk:139313	お前らが何を企んでいるのか わからなかったぜ	너희들이 무엇을 꾀하고 있는지 몰랐어	fix	lookup
+dict:jisjk:92995	また１０年放れましょ	또 10년 떨어집시다	fix	lookup
+dict:jisjk:158351	オレカやってるほうが おもしれえし。	오레카 하고 있는 편이 재미있고.	fix	lookup
+dict:jisjk:119513	あつい、のぉ…	뜨겁다, 의…	fix	lookup
+dict:jisjk:262494	表面にある陰陽魚の意匠に	표면에 있는 음양어의 디자인에	fix	lookup
+dict:jisjk:116217	信じる神や仏…	믿는 신이나 부처…	fix	lookup
+dict:jisjk:95335	「ぜひゲーム研究部の部長さんには、ＢＦを推しておいてくださいね」	「꼭 게임 연구부의 부장님에게는, BF를 밀어 둬 주세요」	fix	lookup
+dict:jisjk:95335	推して知るべし	미루어 짐작해야 한다	keep	lookup
+dict:w:33121	航空母艦、瑞鳳。推して参ります！	항공모함, 즈이호우. 나가겠습니다!	fix	lookup
+dict:w:33120	その後、二言三言会話して	그 후, 두세 마디 대화해	fix	lookup
+dict:jisjk:258034	舜くんとエッチ…したい	슌 군과 섹스…하고 싶다	fix	lookup
+dict:jisjk:258034	本当にすごいですっ。エッチがこんなに気持ちいいだなんて	정말 대단합니다. 섹스가 이렇게 기분 좋은이라니	fix	lookup
+cx:notice-words-1:98	この、エッチ！	이, 변태!	fix	rewrites
+cx:notice-words-1:98	「筧くんのエッチ……」	「카케이 군의 변태……」	fix	rewrites
+cx:notice-words-1:98	私、エッチ、好きになってきちゃった	나, 섹스, 좋아하게 되어버렸다	fix	rewrites
+cx:notice-words-1:99	その触り方、エッチっぽいよ	그 만지는 방법, 야한 것 같아	fix	rewrites
+cx:notice-words-1:99	エッチなこと考えてる	야한 일 생각하고 있다	keep	rewrites
+cx:notice-words-1:100	伊駆逐、独駆逐、米駆逐、仏艦艇	이탈리아 구축, 독일 구축, 미 구축, 프랑스 함정	fix	rewrites
+cx:notice-words-1:100	仏の顔も三度まで	부처의 얼굴도 세 번까지	keep	rewrites
+cx:notice-words-1:100	いきなり仏さん見たらビビる	갑자기 부처 씨 보면 위축된다	keep	rewrites
+lexical:hamewaza	「ハメ技は使いません」	「얍삽이는 쓰지 않습니다」	fix	lookup
+dict:w:33101	このチップからはあのチカラが使用された	이 칩으로부터는 그 힘이 사용되었다	fix	lookup
+dict:w:33102	彼はナイツウォッチの団長だった	그는 나이츠워치의 단장이었다	fix	lookup
+lexical:ikai	この番号は彼女の遺灰の	이 번호는 그녀의 유골의	fix	lookup
+lexical:pluton	古代兵器プルトンの設計図	고대병기 플루톤의 설계도	fix	lookup
+dict:w:33103	再び合流して 卍(まんじ)型に交差している	다시 합류해 만자형에 교차하고 있다	fix	lookup
+dict:w:33104	ま、俺達にとっちゃどっちでもいいことさ。	뭐, 우리에게는 어느 쪽이라도 좋은 일이야.	fix	lookup
+dict:w:33107	臨時学校みたいの 作るとか言ってたな	임시 학교같은 것 만든다든가 말했네	fix	lookup
+dict:w:33108	「んなこと言ってない」	「그런 일 말하지 않다」	fix	lookup
+dict:w:33110	んなもん関係ない！	그런 거 관계없어!	fix	lookup
+dict:w:33111	それじゃどうしょうもねぇだろう	그럼 어쩔 수 없을 것이다	fix	lookup
+dict:w:33113	「うっし！ じゃんじゃか避難させるのよさ！」	「좋았어! 팍팍 피난시켜!」	fix	lookup
+dict:w:33114	がっつり食い込んじゃってますよ。	제대로 파고들어버리고 있습니다.	fix	lookup
+dict:w:33115	ばかすか食うじゃん	마구 먹잖아	fix	lookup
+normalize:chitta	みんな、行っちった	모두, 가버렸다	fix	normalize
+normalize:chitta	「えへへ、師匠に褒められちった」	「에헤헤, 스승에게 칭찬받아버렸다」	fix	normalize
+normalize:chitta	戦争が終わってちったぁ暇になるかと思った	전쟁이 끝나 흩어졌다한가해 질 줄 알았다	fix	normalize
+normalize:moota	先越されてもうたし	앞 넘어져버렸고	fix	normalize
+normalize:moota	やってもうた！	해버렸다!	fix	normalize
+normalize:moota	真っ赤にしてもうて…	새빨갛게 해버려…	fix	normalize
+dict:jisjk:119513	本が厚い。	책이 두껍다.	keep	lookup
+cx:notice-words-1:100	仏軍が攻めてきた	불군이 공격해 왔다	keep	rewrites
+cx:notice-words-1:98	舜くんとエッチ。	슌 군과 섹스.	keep	rewrites
+cx:notice-words-1:99	エッチな本	!rule:cx:notice-words-1:99	keep	rewrites

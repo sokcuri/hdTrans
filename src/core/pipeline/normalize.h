@@ -183,7 +183,8 @@ std::string RewriteInterjections(std::string_view text);
 std::string RewriteEmphaticSpellings(std::string_view text);
 
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,
-// やらねー やらない, 渡しちまった 渡しちゃった, なめんなよ なめるなよ, 貰っとく 貰っておく,
+// やらねー やらない, 渡しちまった 渡しちゃった, 行っちった 行っちゃった, やってもうた やってしまった,
+// なめんなよ なめるなよ, 貰っとく 貰っておく,
 // 置いてく 置いていく, 行くんすか 行くんですか, わかるっス わかるっす, そだね そうだね). With runs.holds,
 // a contracted ておく that a dictionary word holds stays as written (言っとくけど). With contracted
 // (the dialect and contracted forms of the line), てんす is てるんです and ないんす after a noun
