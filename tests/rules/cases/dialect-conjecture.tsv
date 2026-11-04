@@ -32,7 +32,7 @@ normalize:kansai-conjecture	うそやろか	거짓말일까	fix	normalize
 normalize:kansai-conjecture	ほんまやろな	진짜일 것이다	fix	normalize
 normalize:kansai-conjecture	乗ってんねやろな乗ってんねやろな	타겠지타겠지	fix	normalize
 normalize:kansai-conjecture	この桜たちも来週には 散ってんねやろなぁ｡	이 벚꽃들도 다음주에는 지겠지.	fix	normalize
-normalize:kansai-conjecture	どないかして店開けられんやろかって 相談に	없는가 해 가게 열리지 않을까는 상담에	fix	normalize
+normalize:kansai-conjecture	どないかして店開けられんやろかって 相談に	어떻게 빌려주어 가게 열리지 않을까는 상담에	fix	normalize
 normalize:kansai-conjecture	ミチコちゃん。　おじいさんにみんなの前で　話　してもらえんやろか？	미치코짱. 할아버지에게 모두의 앞에서 이야기 해 줄 수 없을까?	fix	normalize
 normalize:kansai-conjecture	一緒にやろう	함께 하자	keep	normalize
 normalize:kansai-conjecture	やろうぜ	하자구	keep	normalize
