@@ -1,0 +1,14 @@
+# 규칙: LEX-4716
+rule	input	expected	kind	layer
+cx:notice-words-1:164	というか そもそも先生は子供の世話とかできるんですか？	그렇다고 할까 애초에 선생님은 아이의 뒷바라지라도 할 수 있습니까?	fix	rewrites
+cx:notice-words-1:164	「小太刀、催眠術とかできないか？」	「작은 칼, 최면술이라도 할 수 있지 않을래?」	fix	rewrites
+cx:notice-words-1:164	ゲームとかでよくある剣と魔法の世界だ。	게임등으로 자주 있는 검과 마법의 세계다.	keep	rewrites
+cx:notice-words-1:166	んっ…やっぱり、せんぱいにしてもらうと、全然違います	읏…역시, 선배가 해 주면, 전혀 다릅니다	fix	rewrites
+cx:notice-words-1:166	俺も男にしてもらうから。	나도 남자로 해 주니까.	keep	rewrites
+lexical:fused-row	あれはきっと事故じゃ……あっ、いやなんでもない……。	저것은 분명 사고는……앗, 아니, 아무것도 아니야…….	fix	lookup
+lexical:fused-row	まあなんでもいいけど、受験生って立場だけは忘れないようにね」	뭐, 뭐든 좋지만, 수험생은 입장만은 잊지 않도록」	fix	lookup
+lexical:fused-row	チューバの人数を どうして ４人にしたんでしょうか？	튜바의 인원수를 왜 4인으로 했을까요?	fix	lookup
+lexical:fused-row	スピード面で右に出るものはまずいないでしょう	스피드면에서 능가하는 것은 거의 없을 거예요	fix	lookup
+lexical:fused-row	好き好んで行く奴なんてまずいないぜ。	좋아해 가는 놈 같은 건 거의 없어.	fix	lookup
+lexical:fused-row	これはまずいな。	이것은 큰일이네.	keep	lookup
+lexical:fused-row	それはまずいね	그것은 큰일이네	keep	lookup
