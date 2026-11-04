@@ -12,7 +12,7 @@ normalize:kansai-akan	「私、もうあかんねん……」	「나, 이제 안
 normalize:kansai-akan	これはアカンです。	이것은 안됩니다.	fix	normalize
 normalize:kansai-akan	ウチ、もうあかん……。さいならぁ～……。	우리, 이제 안돼……. 다시 봅시다~…….	fix	normalize
 normalize:kansai-akan	司令はん、チョコのお返し、まだやね？ 忘れてたらあかんで？	has:잊어선 안돼	fix	normalize
-normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안돼, 요우 고조되지 않는」	keep	normalize
+normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안돼, 요우 고조되지 않아」	keep	normalize
 normalize:kansai-akan	行ったらアカン！）	가면 안돼!)	keep	normalize
 normalize:kansai-akan	埒があかん。	결말이 나지 않아.	keep	normalize
 normalize:kansai-akan	ミチョアカン州	미초아칸주	keep	normalize

@@ -321,7 +321,7 @@ bool NegativeNEnd(std::string_view s, size_t p, bool de, Match& m) {
     return EndGroup(s, p, kNegativeEnd, m);
 }
 
-// ([一-龥々][らわかがまば]|許さ|わから|しら|かまわ|いか)ん([！!？?。、…‥」』ぞよわがしけっ]|$), or before a final が
+// ([一-龥々][まわかがばさた]?[らわかがまば]|許さ|わから|しら|かまわ|つまら|くだら|いら|たまら|いか)ん([！!？?。、…‥」』ぞよわがしけっ]|$), or before a final が
 // な, or after a stem but the first before a tail in で: a godan verb in kanji may end its て form in that んで
 // (浮かんで), which the contraction stage tells apart.
 bool NegativeN(std::string_view s, size_t pos, Match& m) {
@@ -331,9 +331,39 @@ bool NegativeN(std::string_view s, size_t pos, Match& m) {
     };
     size_t p = pos;
     if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"らわかがまば") && rest(p, false)) return true;
+    // A godan stem with two kana after the kanji (止まらん, 終わらん, 助からん).
+    p = pos;
+    if (Take(s, p, IsKanjiClass) && OneOf(s, p, U"まわかがばさた") && OneOf(s, p, U"らわかがまば") &&
+        !Span(s, pos, p).ends_with("分から") && rest(p, false)) {
+        return true;
+    }
     for (std::string_view w : kNegativeNStems) {
         p = pos;
         if (Lit(s, p, w) && rest(p, true)) return true;
+        // The な after the kana stem's ん that ends the clause is the final particle (つまらんな つまらないな),
+        // and a negative said twice reads as one (いらんいらん いらないいらない).
+        p = pos;
+        if (Lit(s, p, w)) {
+            size_t q = p;
+            if (Lit(s, q, "ん") && s.substr(q).starts_with(Cat({w, "ん"}))) {
+                m.group[1] = Span(s, pos, p);
+                m.group[2] = {};
+                m.group[3] = {};
+                m.end = q;
+                return true;
+            }
+            q = p;
+            if (Lit(s, q, "んな")) {
+                size_t r = q;
+                if (r == s.size() || OneOf(s, r, U"！!？?。、…‥」』ぁあー〜～")) {
+                    m.group[1] = Span(s, pos, p);
+                    m.group[2] = "な";
+                    m.group[3] = {};
+                    m.end = q;
+                    return true;
+                }
+            }
+        }
     }
     // A kana いか after casual.ikanai-after is いく (わけにはいかん), not the いかん of それはいかん.
     p = pos;

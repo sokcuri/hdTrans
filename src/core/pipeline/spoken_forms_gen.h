@@ -135,6 +135,10 @@ inline constexpr std::string_view kNegativeNStems[] = {
     "わから",
     "しら",
     "かまわ",
+    "つまら",
+    "くだら",
+    "いら",
+    "たまら",
 };
 
 inline constexpr std::string_view kNegativeEStems[] = {

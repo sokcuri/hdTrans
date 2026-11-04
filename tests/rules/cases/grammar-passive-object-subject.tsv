@@ -26,7 +26,7 @@ voice:object-subject	私は弟に手紙を破られた。	나는 남동생에게
 voice:object-subject	この婚約ははじめから、数年で解消されることを前提に結ばれたものである。	lacks:것이 전제로	keep	voice
 voice:object-subject	一生を本に囲まれて生きていきたい。	has:일생을 책에	keep	voice
 voice:object-subject	あの鏡はビームを反射するために作られたと考えるべきでしょう。	has:빔을 반사하기	keep	voice
-voice:object-subject	≪彼女を連れ去られてしまっては、何百万の命が失われる≫	has:그녀를 데리고	keep	voice
+voice:object-subject	≪彼女を連れ去られてしまっては、何百万の命が失われる≫	has:그녀가 끌려가	keep	voice
 voice:object-subject	彼が手紙を書かれた。	lacks:편지가	keep	voice
 voice:object-subject	OK! いいね!これなら奴らをやっつけられる！	lacks:놈들이	keep	voice
 voice:object-subject	「私も同感〜！ 校長先生の頭を撫でられるのは梨花ちゃんだけだし。」	lacks:머리가	keep	voice
