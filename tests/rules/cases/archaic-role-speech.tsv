@@ -40,7 +40,7 @@ cx:archaic-speech:38	何と申されたか	뭐라고 말씀하셨나	fix	rewrite
 cx:archaic-speech:38	「そう申されるか？」	「그렇게 말씀하시느냐?」	fix	rewrites
 cx:archaic-speech:38	何と申したか	!rule:cx:archaic-speech:38	keep	rewrites
 cx:archaic-speech:38	そう申されて	!rule:cx:archaic-speech:38	keep	rewrites
-cx:archaic-speech:40	張遼 そちがやると申すか？	장료 소치가 한다고 말하느냐?	fix	rewrites
+cx:archaic-speech:40	張遼 そちがやると申すか？	장료 그대가 한다고 말하느냐?	fix	rewrites
 cx:archaic-speech:40	異なことを。 なぜ そう申す？	이인 일을. 왜 그렇게 말하느냐?	fix	rewrites
 cx:archaic-speech:40	お主 今 なんと申した？	그대 지금 뭐라고 말했느냐?	fix	rewrites
 cx:archaic-speech:40	わしは島田カンベエ そのほう 名は何と申す？	나는 시마다 칸베에 그쪽 명은 뭐라고 말하느냐?	fix	rewrites
