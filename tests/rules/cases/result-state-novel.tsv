@@ -25,7 +25,7 @@ rewrite:result-state	まったく知識がないから、どうすればいい�
 rewrite:result-state	≪敵の攻撃を受けて孤立していると、一時離脱したヘリが連絡してきた。	has:고립되어	fix	rewrites
 rewrite:result-state	激しく動揺してます……どうしていいか……わからなくなってます……」	has:모르게 되어	fix	rewrites
 rewrite:result-state	「お互い相手のことを気にして、前に進めなくなっていたわけですよね」	has:없게 돼	fix	rewrites
-rewrite:result-state	調べきるのに時間が掛かりそうね……≫	다 조사하는데 시간이 걸릴 것 같구나……≫	keep	rewrites
+rewrite:result-state	調べきるのに時間が掛かりそうね……≫	다 조사하는데 시간이 걸릴 것 같네……≫	keep	rewrites
 rewrite:result-state	それを調べるのが、お前たちの課題だ。	그것을 조사하는 것이, 너희의 과제다.	keep	rewrites
 rewrite:result-state	「そんな事まで調べてるんですか！？」	「그런 일까지 조사합니까!?」	keep	rewrites
 rewrite:result-state	「ね、とけてなくなっちゃうでしょ？」	「저기, 녹아 없어져버리잖아?」	keep	rewrites

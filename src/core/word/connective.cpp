@@ -40,7 +40,7 @@ bool UtteranceEnd(const Worker& w, const Item* it) {
         if (w.Span(it->tokenIndex + 1) != 0) return false;
         rest = w.Tok(it->tokenIndex + 1).text;
     }
-    return TrimRunes(rest, "…‥」』）)。．、ーっッ～").empty();
+    return TrimRunes(rest, "…‥」』）)≫》】〉＞。．、ーっッ～").empty();
 }
 
 // Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서:
