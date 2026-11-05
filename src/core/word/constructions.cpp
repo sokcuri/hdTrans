@@ -371,6 +371,8 @@ bool EllipsisItem(const Item* it) {
            s.find("―") != std::string_view::npos;
 }
 
+// A feature reads the chain and changes nothing: no surface, no link and no selection (the atom values
+// RunConstructions keeps for a word, and its surface numbers, rely on it).
 constexpr NamedFeature kFeatures[] = {
     {"exists", [](Flusher&, const Item*) { return true; }},
     {"selected", [](Flusher&, const Item* it) { return it->selected >= 0; }},
@@ -413,22 +415,23 @@ constexpr NamedFeature kFeatures[] = {
      }},
     // A question mark follows the word, with only other marks between (ないの!? ないの？).
     {"question-after",
-     [](Flusher&, const Item* it) {
-         const auto asks = [](std::string_view rest) {
-             while (!rest.empty()) {
-                 const text::Rune r = text::DecodeRune(rest);
-                 if (r.cp == U'?' || r.cp == U'？') return 1;
-                 if (r.size == 0 || !RuneIn(r.cp, "!！…‥〜～~ーっッ")) return 0;
-                 rest.remove_prefix(r.size);
-             }
-             return -1;  // only marks that draw out or pause, up to the end
+     [](Flusher& f, const Item* it) {
+         // From at on in text: 1 for a question mark after marks that draw out or pause, 0 for
+         // another rune, -1 for only such marks up to the end (MarksEnd: a long run asks once).
+         const auto asks = [&](std::string_view text, std::size_t at) {
+             const std::size_t end = MarksEnd(f.w, text, at, "!！…‥〜～~ーっッ");
+             if (end >= text.size()) return -1;
+             const char32_t r = text::DecodeRune(text.substr(end)).cp;
+             return r == U'?' || r == U'？' ? 1 : 0;
          };
          const Item* cur = it;
          for (int n = 0; n < 4 && cur != nullptr; n++) {
-             if (const int a = asks(TextAfter(cur)); a >= 0) return a == 1;
+             const auto at = static_cast<std::size_t>(cur->start + cur->length);
+             const int after = at < cur->text.size() ? asks(cur->text, at) : asks(cur->detail->nextText, 0);
+             if (after >= 0) return after == 1;
              cur = cur->After();
              if (cur == nullptr) return false;
-             if (const int a = asks(cur->group->surface); a >= 0) return a == 1;
+             if (const int a = asks(cur->group->surface, 0); a >= 0) return a == 1;
          }
          return false;
      }},
@@ -438,6 +441,14 @@ constexpr NamedFeature kFeatures[] = {
     {"after-restart", [](Flusher& f, const Item* it) { return AfterRestart(f.w, it); }},
     // Earlier text on the line takes leave (word.leave-taking): a greeting after it parts.
     {"after-leave-taking", [](Flusher& f, const Item* it) { return AfterLeaveTaking(f.w, it); }},
+    // The line holds a cue of humble speech to a superior (speech.humble-cue: ます, 申し上げ, 殿), or one of
+    // threat or command (speech.threat-cue: 貴様, せよ, 斬る).
+    {"humble-line", [](Flusher& f, const Item*) { return f.w.settings.humbleLine; }},
+    {"threat-line", [](Flusher& f, const Item*) { return f.w.settings.threatLine; }},
+    // The line holds a mark of old speech that makes a 妾 the speaker (speech.old-self-cue).
+    {"old-self-line", [](Flusher& f, const Item*) { return f.w.settings.oldSelfLine; }},
+    // The line opens with a word of wonder and a pause (へえ、): what follows is admired, not forbidden.
+    {"after-wonder", [](Flusher& f, const Item* it) { return AfterWonder(f.w, it); }},
     // An ellipsis or a dash stands right before the word (……そうだ).
     {"after-pause", [](Flusher&, const Item* it) { return it->AfterPause(false); }},
     {"after-space", [](Flusher& f, const Item* it) {
@@ -658,10 +669,43 @@ constexpr NamedFeature kFeatures[] = {
      }},
     // The text ends after the word, or a closing bracket or an exclamation mark follows it: a line
     // of speech ends there (授けよう」, 渡そう！), not a sentence of narration in 。.
+    // Only final particles and sentence marks stand between the word and the closing bracket or the
+    // end of the line (行くし」, 行くしね」, 行くし。」), no further sentence and no trailing ellipsis.
+    {"speech-ends",
+     [](Flusher& f, const Item* it) {
+         // From at on in t: 1 for a closing bracket after final particles and sentence marks, -1
+         // for another rune, 0 for only those up to the end (MarksEnd: a long run asks once).
+         const auto trailing = [&](std::string_view t, std::size_t at) {
+             // A trailing ellipsis leaves the list open (待ってられないし……」), so it goes on.
+             const std::size_t end = MarksEnd(f.w, t, at, "。．！!.ーねさなよっ〜~ 　");
+             if (end >= t.size()) return 0;
+             return RuneIn(text::DecodeRune(t.substr(end)).cp, "」』）)") ? 1 : -1;
+         };
+         // The chain ends at the sentence; the tokens after it go on to the end of the line.
+         int state = trailing(it->text, static_cast<std::size_t>(it->start + it->length));
+         for (int t = it->tokenIndex + 1; state == 0 && t < f.w.TokenCount(); t++) state = trailing(f.w.Tok(t).text, 0);
+         return state >= 0;
+     }},
+    // An earlier predicate in the same quotation already lists a reason in し (痛いし眠いし,
+    // わかりやすいし間違えないし, めがねだし、陰キャだし).
+    {"after-listed-shi",
+     [](Flusher&, const Item* it) {
+         for (const Item* x = it->prev; x != nullptr; x = x->prev) {
+             std::string_view s = x->group->surface;
+             if (s == "「" || s == "『" || s.ends_with("「") || s.ends_with("『")) return false;
+             if (s.ends_with("、")) s.remove_suffix(std::string_view("、").size());
+             std::string_view d = x->DirectIndex() >= 0 ? x->DirectSurface() : std::string_view();
+             if (d.ends_with("、")) d.remove_suffix(std::string_view("、").size());
+             if (d.ends_with("し") || s.ends_with("だし") || s.ends_with("ですし") || s.ends_with("だったし") || s.ends_with("でしたし")) {
+                 return true;
+             }
+         }
+         return false;
+     }},
     {"speech-close",
      [](Flusher&, const Item* it) {
          const std::string_view rest = TextAfter(it);
-         return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！!」』）)");
+         return rest.empty() || RuneIn(text::DecodeRune(rest).cp, "！!」』）)≫》】〉＞");
      }},
     // An exclamation mark of mark.exclaim is one of the two characters after the word
     // (待ち伏せますか！, ますか？！, ますかっ！).
@@ -931,11 +975,22 @@ bool SurfaceKeys(const ConstructionTable& t, uint32_t i, std::vector<std::string
     return found;
 }
 
+// The number of surface key among the surfaces of t, numbering it when it is new.
+uint32_t SurfaceNumber(ConstructionTable& t, std::string_view key) {
+    if (const auto found = t.surfaces.find(key); found != t.surfaces.end()) return found->second;
+    const auto number = static_cast<uint32_t>(t.surfaces.size());
+    t.surfaces.emplace(std::string(key), number);
+    return number;
+}
+
 // Fills the surface index of family c.
-void IndexFamily(const ConstructionTable& t, CxFamily& c) {
+void IndexFamily(ConstructionTable& t, CxFamily& c) {
     if (std::vector<std::string_view> guard; c.guard != kNoGuard && SurfaceKeys(t, c.guard, guard)) {
         c.guardKeyed = true;
-        c.guardSurfaces.insert(guard.begin(), guard.end());
+        for (const std::string_view key : guard) c.guardSurfaces.push_back(SurfaceNumber(t, key));
+        std::ranges::sort(c.guardSurfaces);
+        const auto [first, last] = std::ranges::unique(c.guardSurfaces);
+        c.guardSurfaces.erase(first, last);
     }
     std::vector<std::vector<std::string_view>> keys(c.rows.size());
     std::vector<bool> keyed(c.rows.size());
@@ -946,13 +1001,15 @@ void IndexFamily(const ConstructionTable& t, CxFamily& c) {
     }
     for (std::size_t k = 0; k < c.rows.size(); k++) {
         for (const std::string_view key : keys[k]) {
-            if (c.bySurface.contains(key)) continue;
-            std::vector<int>& rows = c.bySurface[std::string(key)];
+            const uint32_t number = SurfaceNumber(t, key);
+            if (std::ranges::any_of(c.bySurface, [&](const auto& e) { return e.first == number; })) continue;
+            std::vector<int>& rows = c.bySurface.emplace_back(number, std::vector<int>()).second;
             for (std::size_t j = 0; j < c.rows.size(); j++) {
                 if (!keyed[j] || std::ranges::find(keys[j], key) != keys[j].end()) rows.push_back(c.rows[j]);
             }
         }
     }
+    std::ranges::sort(c.bySurface, {}, [](const auto& e) { return e.first; });
 }
 
 // Adds to out the atoms the condition at node i needs to hold: itself, or the operands of an &&
@@ -993,6 +1050,49 @@ void ShareAtoms(const ConstructionTable& t, CxFamily& c) {
 }  // namespace
 
 namespace {
+
+// About how many atoms the condition at node i tries. An unbounded scan is counted as kUnbounded
+// words: it reads to the end of the chain, which a run of thousands of marks makes thousands of
+// words long, so it goes after any operand that tries a bounded number of atoms.
+constexpr uint64_t kUnbounded = 1024;
+uint64_t Cost(const ConstructionTable& t, uint32_t i) {
+    const CxNode& n = t.nodes[i];
+    if (n.atom) return 1;
+    if (n.kind == rules::BodyKind::Not) return Cost(t, i + 1);
+    if (n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight) {
+        return (n.count == 0 ? kUnbounded : n.count) * (Cost(t, i + 1) + Cost(t, t.nodes[i + 1].end));
+    }
+    uint64_t cost = 0;
+    for (uint32_t k = 0, child = i + 1; k < n.count; k++, child = t.nodes[child].end) cost += Cost(t, child);
+    return cost;
+}
+
+// Appends the condition at node i to out, placed from node base, with the operands of each && and
+// || cheapest first.
+void Reordered(const ConstructionTable& t, uint32_t i, uint32_t base, std::vector<CxNode>& out) {
+    const std::size_t at = out.size();
+    out.push_back(t.nodes[i]);
+    const CxNode& n = t.nodes[i];
+    if (!n.atom) {
+        std::vector<uint32_t> operands;
+        const uint32_t count = n.kind == rules::BodyKind::Not ? 1
+                               : n.kind == rules::BodyKind::ScanLeft || n.kind == rules::BodyKind::ScanRight ? 2
+                                                                                                          : n.count;
+        for (uint32_t k = 0, child = i + 1; k < count; k++, child = t.nodes[child].end) operands.push_back(child);
+        if (n.kind == rules::BodyKind::Or || n.kind == rules::BodyKind::And) {
+            std::ranges::stable_sort(operands, {}, [&](uint32_t child) { return Cost(t, child); });
+        }
+        for (const uint32_t child : operands) Reordered(t, child, base, out);
+    }
+    out[at].end = base + static_cast<uint32_t>(out.size());
+}
+
+// Reorders the condition at node root in place (Reordered).
+void Reorder(ConstructionTable& t, uint32_t root) {
+    std::vector<CxNode> out;
+    Reordered(t, root, root, out);
+    std::ranges::copy(out, t.nodes.begin() + root);
+}
 
 // A condition with each token :NAME replaced by the condition named so (a //: line above it).
 bool ExpandNamed(std::string_view text, const std::vector<std::pair<std::string, std::string>>& named, std::string& out,
@@ -1200,13 +1300,39 @@ ConstructionTable ParseConstructions(std::span<const std::string_view> lines, st
             }
         }
     }
+    // The atoms with one value, by the first of each kind (SameAtom).
+    std::unordered_map<std::string_view, std::vector<uint32_t>> byValue;
+    for (uint32_t i = 0; i < t.atoms.size(); i++) {
+        CxAtom& a = t.atoms[i];
+        std::vector<uint32_t>& same = byValue[a.value];
+        const auto found = std::ranges::find_if(same, [&](uint32_t b) { return SameAtom(a, t.atoms[b]); });
+        if (found != same.end()) {
+            a.slot = t.atoms[*found].slot;
+        } else {
+            a.slot = t.slots++;
+            same.push_back(i);
+        }
+    }
     return t;
+}
+
+void OrderOperands(ConstructionTable& t) {
+    // The first scan of a row whose actions are placed by it is found in the written order.
+    for (const CxRow& r : t.rows) {
+        if (!r.scans) Reorder(t, r.root);
+    }
+    for (const CxFamily& c : t.families) {
+        if (c.guard != kNoGuard) Reorder(t, c.guard);
+    }
 }
 
 const ConstructionTable& BuiltinConstructions() {
     static const ConstructionTable table = [] {
         for (const dict::internal::BuiltinTable& b : dict::internal::BuiltinTables()) {
-            if (b.name == "constructions.tsv") return ParseConstructions(b.lines, TextPassNames());
+            if (b.name != "constructions.tsv") continue;
+            ConstructionTable t = ParseConstructions(b.lines, TextPassNames());
+            OrderOperands(t);
+            return t;
         }
         return ConstructionTable{};
     }();
@@ -1226,9 +1352,10 @@ using internal::CxNode;
 // The item delta items away; rightwards from a ruby base, past its reading (Item::Object).
 template <typename T>
 T* Neighbour(T* it, int delta) {
-    const bool base = it != nullptr && it->w != nullptr && it->w->RubyPart(it->tokenIndex) == 1;
-    for (; it != nullptr && delta > 0; delta--) it = base ? it->After() : it->next;
     for (; it != nullptr && delta < 0; delta++) it = it->prev;
+    if (it == nullptr || delta == 0) return it;
+    const bool base = it->w != nullptr && it->w->RubyPart(it->tokenIndex) == 1;
+    for (; it != nullptr && delta > 0; delta--) it = base ? it->After() : it->next;
     return it;
 }
 
@@ -1311,9 +1438,31 @@ bool Holds(Flusher& f, const Item* origin, const CxAtom& a) {
     return v != a.negated;
 }
 
+// Holds, remembered on the word being tried (Flusher::constructions), where nothing changes until a
+// row fires.
+bool Held(Flusher& f, const Item* it, const CxAtom& a) {
+    Flusher::Constructions& c = f.constructions;
+    if (it != c.word) return Holds(f, it, a);
+    uint32_t& slot = c.slots[a.slot];
+    if (slot >> 1 == c.stamp) return (slot & 1) != 0;
+    const bool v = Holds(f, it, a);
+    slot = c.stamp << 1 | static_cast<uint32_t>(v);
+    return v;
+}
+
+// Starts a try of the families on it: the values Held remembers are those found on it from now.
+void Try(Flusher& f, const Item* it) {
+    Flusher::Constructions& c = f.constructions;
+    if (++c.stamp == 1u << 31) {
+        std::ranges::fill(c.slots, 0);
+        c.stamp = 1;
+    }
+    c.word = it;
+}
+
 bool Eval(Flusher& f, const ConstructionTable& t, uint32_t i, const Item* it) {
     const CxNode& n = t.nodes[i];
-    if (n.atom) return Holds(f, it, t.atoms[n.count]);
+    if (n.atom) return Held(f, it, t.atoms[n.count]);
     switch (n.kind) {
         case rules::BodyKind::Not: return !Eval(f, t, i + 1, it);
         case rules::BodyKind::ScanLeft:
@@ -1373,6 +1522,8 @@ const Item* Scanned(Flusher& f, const ConstructionTable& t, uint32_t i, const It
 // with that sign (しな 하지 $DH@ becomes 하다 $Kz@), else '&'.
 char VerbSigil(const Item* it) { return At(it->Code(it->selected), 0) == '7' ? '$' : '&'; }
 
+// An action may change the candidates, targets and endings of words but no surface and no link of the
+// chain: RunConstructions numbers the surfaces of the chain once per pass.
 void Apply(Flusher& f, const ConstructionTable& t, Item* origin, Item* scanned, const internal::CxAction& a,
            Selection source) {
     Item* it = Neighbour(a.scanned ? scanned : origin, a.delta);
@@ -1607,22 +1758,39 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
         tally->constructionRuns.resize(t.rows.size());
         tally->constructionFires.resize(t.rows.size());
     }
+    if (t.afterPass[pass].empty()) return;
+    // The actions change no surface and no link of the chain.
+    Flusher::Constructions& c = f.constructions;
+    if (c.slots.size() < t.slots) c.slots.resize(t.slots);
+    constexpr uint32_t kNoSurface = UINT32_MAX;
+    c.surfaces.clear();
+    for (const Item* it = f.w.chain.head; it != nullptr; it = it->next) {
+        const auto found = t.surfaces.find(std::string_view(it->group->surface));
+        c.surfaces.push_back(found != t.surfaces.end() ? found->second : kNoSurface);
+    }
     for (const int k : t.afterPass[pass]) {
         const internal::CxFamily& family = t.families[static_cast<std::size_t>(k)];
         if (skip != nullptr && skip(family.name)) continue;
-        for (Item* it = f.w.chain.head; it != nullptr; it = it->next) {
-            if (family.guardKeyed && !family.guardSurfaces.contains(std::string_view(it->group->surface))) continue;
+        std::size_t at = 0;
+        for (Item* it = f.w.chain.head; it != nullptr; it = it->next, at++) {
+            const uint32_t surface = c.surfaces[at];
+            if (family.guardKeyed && !std::ranges::binary_search(family.guardSurfaces, surface)) continue;
+            Try(f, it);
             if (family.guard != internal::kNoGuard && !Eval(f, t, family.guard, it)) continue;
             // Rule counts try every row.
             const std::vector<int>* rows = &family.rows;
             if (family.indexed && tally == nullptr) {
-                const auto found = family.bySurface.find(std::string_view(it->group->surface));
-                rows = found != family.bySurface.end() ? &found->second : &family.open;
+                rows = &family.open;
+                if (surface != kNoSurface) {
+                    const auto found =
+                        std::ranges::lower_bound(family.bySurface, surface, {}, [](const auto& e) { return e.first; });
+                    if (found != family.bySurface.end() && found->first == surface) rows = &found->second;
+                }
                 if (rows->empty()) continue;
             }
             // An atom all rows need that is false here: none fires (rule counts try every row).
             if (tally == nullptr &&
-                !std::ranges::all_of(family.shared, [&](uint32_t a) { return Holds(f, it, t.atoms[a]); }))
+                !std::ranges::all_of(family.shared, [&](uint32_t a) { return Held(f, it, t.atoms[a]); }))
                 continue;
             for (const int r : *rows) {
                 const internal::CxRow& row = t.rows[static_cast<std::size_t>(r)];
@@ -1640,6 +1808,7 @@ void internal::RunConstructions(Flusher& f, const ConstructionTable& t, std::siz
             }
         }
     }
+    c.word = nullptr;
 }
 
 std::string_view ConstructionId(int index) {

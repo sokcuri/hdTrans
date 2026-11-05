@@ -1,0 +1,29 @@
+# 규칙: GRM-3759
+rule	input	expected	kind	layer
+normalize:negative-n-end	つまらんぞ	시시해	fix	normalize
+normalize:negative-n-end	つまらんよ	시시해	fix	normalize
+normalize:negative-n-end	つまらん。	시시하다.	fix	normalize
+normalize:negative-n-end	つまらん、	시시하다,	fix	normalize
+normalize:negative-n-end	知らんぞ	몰라	keep	normalize
+normalize:negative-n-end	知らんよ	몰라	keep	normalize
+normalize:negative-n-end	知らん。	모른다.	keep	normalize
+normalize:negative-n-end	知らん、	모른다,	keep	normalize
+normalize:negative-n-end	足らんぞ	부족해	keep	normalize
+normalize:negative-n-end	足らんよ	부족해	keep	normalize
+normalize:negative-n-end	足らん。	부족하다.	keep	normalize
+normalize:negative-n-end	足らん、	부족하다,	keep	normalize
+normalize:negative-n-end	止まらんぞ	멈추지 않아	fix	normalize
+normalize:negative-n-end	止まらんよ	멈추지 않아	fix	normalize
+normalize:negative-n-end	止まらん。	멈추지 않는다.	fix	normalize
+normalize:negative-n-end	止まらん、	멈추지 않는다,	fix	normalize
+normalize:negative-n-end	くだらんぞ	시시해	fix	normalize
+normalize:negative-n-end	くだらんよ	시시해	fix	normalize
+normalize:negative-n-end	くだらん。	시시하다.	fix	normalize
+normalize:negative-n-end	くだらん、	시시하다,	fix	normalize
+normalize:negative-n-end	ふむー。それだと普通すぎてつまらんな	흐음. 그것이라면 보통 지나 재미없구나	fix	normalize
+normalize:negative-n-end	なんじゃ、つまらん。	뭐냐, 시시하다.	fix	normalize
+normalize:negative-n-end	くぅ～出撃かいな！たまらんなぁ。	크으~ 출격이야! 견딜 수 없다.	fix	normalize
+normalize:negative-n-end	格納庫では 繋がらん	격납고에서는 연결되지 않는다	fix	normalize
+normalize:negative-n-end	分からんぞ	모르겠어	keep	normalize
+normalize:negative-n-end	嘘やん！	거짓말이잖아!	keep	normalize
+normalize:negative-n-end	来たん？	왔어?	keep	normalize

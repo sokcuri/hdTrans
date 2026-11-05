@@ -1,0 +1,34 @@
+# 규칙: GRM-3833
+rule	input	expected	kind	layer
+segment:stray-kana	さっきの言葉は本当ですからね？	조금 전의 말은 사실이니까요?	fix	segment
+segment:stray-kana	手に吸い付きそうなほどになめらかな肌が	손에 달라붙을 것 같을 정도로 매끈매끈한 피부가	fix	segment
+segment:stray-kana	んだてめぇ。	has:너.	fix	segment
+segment:stray-kana	下働きのおばちゃんですら正妃が俺を殺すと思っている。	has:아줌마로조차	fix	segment
+segment:stray-kana	スレの書き込みですら怖かったんだから	has:글로조차 무서웠으니까	fix	segment
+segment:stray-kana	誰も引き受けたがらない現場の安全管理	has:하고 싶어하지 않는 현장	fix	segment
+segment:stray-kana	徹底して話したがらない。	has:하고 싶어하지 않는다.	fix	segment
+segment:stray-kana	と眉間にしわを寄せて答える。	라고 미간에 주름을 잡아 대답한다.	fix	segment
+segment:stray-kana	とからかうように言う。	라고 놀리도록 말한다.	fix	segment
+segment:stray-kana	壁に控えめに空いた穴みたいな通路だ。	벽에 조심스럽게 빈 구멍 같은 통로다.	fix	segment
+segment:stray-kana	「無理そうならやめておくけど」	「무리하면 그만두는데」	fix	segment
+segment:stray-kana	無理そうだったら無理しなくていいよ	무리하면 무리하지 않아도 돼	fix	segment
+segment:stray-kana	アヴェにあいつらを呼ぶための金がまだできてねえんだ。	has:저 녀석들을 부르기 위한 돈	fix	segment
+segment:stray-kana	お前って奴は、どうしていつもそうなんだ。	has:왜 언제나	fix	segment
+segment:stray-kana	その彼に突然なわとびで叩かれ始めた。	has:갑자기 줄넘기로	fix	segment
+segment:stray-kana	「サブミッションは、マスターといつもやってるからねぇ」	「서브미션은, 마스터와 언제나 하고 있으니까」	fix	segment
+segment:stray-kana	と聞いた俺にそいつは──	라고 들은 나에게 그 녀석은──	fix	segment
+segment:stray-kana	わからないレベルのためらいだ。	모르는 레벨의 망설임이다.	fix	segment
+segment:stray-kana	今日は、特別かわいく見えた。	has:특별 귀엽게 보였다	fix	segment
+segment:stray-kana	私にしつこく言っていた	나에게 끈질기게 말했다	fix	segment
+segment:stray-kana	でも、今やらないと、	하지만, 지금 하지 않으면,	fix	segment
+segment:stray-kana	あいつらが来た	저 녀석들이 왔다	keep	segment
+segment:stray-kana	彼らが来た	그들이 왔다	keep	segment
+segment:stray-kana	タイトルのついたショートカット	타이틀이 붙은 숏컷	keep	segment
+segment:stray-kana	ガシャーン……心臓がいっぱいですわ	has:심장이 가득해요	keep	segment
+segment:stray-kana	はぁっ、さわられてます	has:만져지고 있습니다	keep	segment
+segment:stray-kana	雫さんの仰る通りでしたわね。	has:대로였네요	keep	segment
+segment:stray-kana	「それともうひとつ」	「그것과 또 하나」	keep	segment
+segment:stray-kana	「もちろんなのよさ」	「물론이야」	keep	segment
+segment:stray-kana	どうも タヌキといいます	has:너구리라고 합니다	keep	segment
+segment:stray-kana	どうかお気を付けて。	제발 조심해.	keep	segment
+segment:stray-kana	ならばギアゴッド	has:그러면	keep	segment

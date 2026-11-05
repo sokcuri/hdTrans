@@ -1,0 +1,32 @@
+# 규칙: LEX-4639, GRM-3756, LEX-4646
+rule	input	expected	kind	layer
+cx:notice-words-1:87	彼女の新曲は、配信開始から一週間で百万回再生を突破した。	has:그녀의 신곡은, 공개 개시부터	fix	rewrites
+cx:notice-words-1:87	新曲は配信開始から一週間で話題になった。	has:신곡은 공개 개시부터	fix	rewrites
+cx:notice-words-1:87	アルバムは来月配信予定だ。	앨범은 내달 공개 예정이다.	fix	rewrites
+cx:notice-words-1:87	この曲は配信中です。	이 곡은 공개 중입니다.	fix	rewrites
+cx:notice-words-1:87	配信開始は来週です。	방송 개시는 다음주입니다.	keep	rewrites
+cx:notice-words-1:87	ゲームの配信開始は来週です。	게임 방송 개시는 다음주입니다.	keep	rewrites
+cx:notice-words-1:87	新曲は、今日の配信で歌います。	!rule:cx:notice-words-1:87	keep	rewrites
+cx:notice-words-1:87	この曲、配信で聴いた。	!rule:cx:notice-words-1:87	keep	rewrites
+cx:notice-words-1:94	俺が気づかないとでも思ってんの？	내가 눈치채지 못한다고 생각하는 거야?	fix	rewrites
+cx:notice-words-1:94	俺が気づかないとでも思ってるの？	내가 눈치채지 못한다고 생각하는 거야?	fix	rewrites
+cx:notice-words-1:94	バレないとでも思ったか？	들키지 않는다고 생각했나?	fix	rewrites
+cx:notice-words-1:94	私が知らないとでも思っているのですか。	제가 모른다고 생각합니까.	fix	rewrites
+cx:notice-words-1:94	冗談だとでも思ってるのか。	농담이라고 생각하는 거야.	fix	rewrites
+cx:notice-words-1:94	俺がそんなことするとでも思ってるのか？	has:한다고 생각하는 거야?	fix	rewrites
+cx:notice-words-1:94	そうとでも思わないとやってられない。	그렇다고라도 생각하지 않으면 할 수 없다.	keep	rewrites
+cx:notice-words-1:94	夢だとでも思え。	꿈이라고라도 생각해라.	keep	rewrites
+cx:notice-words-1:94	そうとでも思わなきゃ、やってられないよ。	!rule:cx:notice-words-1:94	keep	rewrites
+cx:notice-words-1:95	俺が気づかないとでも思ってんの？	rule:cx:notice-words-1:95=0 거야	fix	rewrites
+cx:notice-words-1:95	冗談だとでも思ってるのか。	!rule:cx:notice-words-1:95	keep	rewrites
+cx:notice-words-1:96	俺は道が分からなくて困っている。	나는 길을 몰라서 곤란하다.	fix	rewrites
+cx:notice-words-1:96	「分からなくて困っている」	「몰라서 곤란해」	fix	rewrites
+cx:notice-words-1:96	私は分からなくて困っている。	has:몰라서 곤란하다	fix	rewrites
+cx:notice-words-1:96	分からなくて困っている。	몰라서 곤란해한다.	keep	rewrites
+cx:notice-words-1:96	彼は道が分からなくて困っている。	그는 길을 몰라서 곤란해한다.	keep	rewrites
+cx:notice-words-1:96	店員が分からなくて困っていた。	!rule:cx:notice-words-1:96	keep	rewrites
+cx:notice-words-1:96	困っている人を助ける。	!rule:cx:notice-words-1:96	keep	rewrites
+cx:notice-words-1:96	「でも、最近、少し困っているのです」	has:조금 곤란합니다	fix	rewrites
+cx:notice-words-1:96	「飛び出したってどうにかなるよ。困っているあなたを助けてくれる人もいるだろうし」	has:곤란해하는 당신을	keep	rewrites
+cx:notice-words-1:96	「恋人が困っている時に、それを放り投げるような男に見えるか？」	has:애인이 곤란해할 때	keep	rewrites
+cx:notice-words-1:96	「彼は分からなくて困っている」	has:곤란해해	keep	rewrites

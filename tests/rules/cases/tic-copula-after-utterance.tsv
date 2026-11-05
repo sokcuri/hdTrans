@@ -2,7 +2,7 @@
 rule	input	expected	kind	layer
 cx:copula-after-utterance:10	ごちそうさまでち！	잘 먹었어요!	fix	rewrites
 cx:copula-after-utterance:10	わーお！ ごちそうさまでち！	와우! 잘 먹었어요!	fix	rewrites
-cx:copula-after-utterance:10	司令、お返しありがとっす。	사령, 답례 고마워요.	fix	rewrites
+cx:copula-after-utterance:10	司令、お返しありがとっす。	사령관, 답례 고마워요.	fix	rewrites
 cx:copula-after-utterance:10	ありがとでち！	고마워요!	fix	rewrites
 cx:copula-after-utterance:10	おめでとうでち！	축하해요!	fix	rewrites
 cx:copula-after-utterance:10	北上様、ありがとーでしたー！	!rule:cx:copula-after-utterance:10	keep	rewrites

@@ -253,11 +253,26 @@ char32_t Voiced(char32_t c) {
 std::string RespellIterationMarks(std::string_view line, WordHoldsRun holds, WordHoldsRun noun, const void* context) {
     std::string out;
     size_t copied = 0;
-    char32_t prev = 0;
-    size_t prevAt = 0;
+    char32_t prev = 0, prev2 = 0;
+    size_t prevAt = 0, prev2At = 0;
     for (size_t pos = 0; pos < line.size();) {
         const text::Rune r = text::DecodeRune(line.substr(pos));
         const size_t end = pos + std::max<size_t>(1, r.size);
+        // A doubled mark after a word of two kanji says the word again (毎日々々 毎日毎日, 一歩々々 一歩一歩,
+        // 馬鹿々々しい 馬鹿馬鹿しい); not after a kanji whose 々 is a word that the kanji before it does not
+        // make one with (鉢等々々 is 鉢 and 等々々).
+        if (r.cp == U'々' && line.substr(end).starts_with("々") && prev != U'々' && prev2 != U'々' && text::IsKanji(prev) &&
+            text::IsKanji(prev2) && !(holds(context, line, prevAt, end) && !holds(context, line, prev2At, pos))) {
+            out.append(line.substr(copied, pos - copied));
+            text::AppendRune(out, prev2);
+            text::AppendRune(out, prev);
+            copied = end + std::string_view("々").size();
+            prev2At = prevAt;
+            prevAt = pos;
+            pos = copied;
+            prev2 = U'々';  // no further pair from the copy
+            continue;
+        }
         char32_t repeat = 0;
         // A mark after a particle that ends a phrase starts a word of its own (これはゝです).
         const bool afterParticle = prevAt > 0 && std::u32string_view(U"はがをにでとも").find(prev) != std::u32string_view::npos;
@@ -273,6 +288,8 @@ std::string RespellIterationMarks(std::string_view line, WordHoldsRun holds, Wor
             text::AppendRune(out, repeat);
             copied = end;
         }
+        prev2 = prev;
+        prev2At = prevAt;
         prev = repeat != 0 ? repeat : r.cp;
         prevAt = pos;
         pos = end;

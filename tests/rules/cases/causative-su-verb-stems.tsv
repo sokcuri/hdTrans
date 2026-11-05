@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 conjugation:godan-causative	真帆を迷わせているのは、俺だ。	마호를 헤매게 하고 있는 것은, 나다.	fix	lookup
 conjugation:godan-causative	往く先を迷わせる、霧のような雨。	가는 앞을 헤매게 하는, 안개와 같은 비.	fix	lookup
 conjugation:godan-causative	多岐川さんが焦った様子で、モニターの上で手を迷わせる。	타키가와 씨가 초조해한 모습으로, 모니터 위에서 손을 헤매게 한다.	fix	lookup
-conjugation:godan-causative	『元気か？』という味も素っ気もないタイトルが、指先を迷わせた。	『건강한가?』라는 무미 건조한 타이틀이, 손가락끝을 헤매게 했다.	fix	lookup
+conjugation:godan-causative	『元気か？』という味も素っ気もないタイトルが、指先を迷わせた。	『잘 지내?』라는 무미 건조한 타이틀이, 손가락끝을 헤매게 했다.	fix	lookup
 conjugation:godan-causative	舌を絡ませて、互いの唾液を混ぜ合わせる。	혀를 얽히게 하고, 서로의 타액을 혼합한다.	fix	lookup
 conjugation:godan-causative	お互いの体温を確かめるように、指を絡ませる。	서로의 체온을 확인하듯이, 손가락을 얽히게 한다.	fix	lookup
 conjugation:godan-causative	俺もそれに応え、舌を絡ませていく。	나도 거기에 응해, 혀를 얽히게 해 간다.	fix	lookup

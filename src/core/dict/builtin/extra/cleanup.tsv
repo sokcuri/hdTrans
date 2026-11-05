@@ -87,3 +87,23 @@
 것일지	걸지
 비비어	비벼
 비비었	비볐
+// The 하오 ending: -소 after a final consonant, -오 after a vowel (있으오 있소, 좋으오 좋소; 기쁘오 stays).
+// The ㄷ verbs whose stem the 으 form writes in ㄹ (걸으오 걷다) keep it.
+걸으오	걸으오
+들으오	들으오
+물으오	물으오
+깨달으오	깨달으오
+실으오	실으오
+불으오	불으오
+으오	소	final
+// The ㅂ adjectives, written in 우 before 오 (고마우오 고맙소); 배우오 and 싸우오 are verbs in 우.
+스러우오	스럽소
+고마우오	고맙소
+즐거우오	즐겁소
+무거우오	무겁소
+어려우오	어렵소
+무서우오	무섭소
+가까우오	가깝소
+아름다우오	아름답소
+반가우오	반갑소
+괴로우오	괴롭소

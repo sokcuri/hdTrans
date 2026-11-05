@@ -23,6 +23,9 @@ struct RunLookup {
     // Whether text ends with the dictionary form of a dictionary verb that starts at a word boundary
     // (SpokenForms: the verb of a rebuke in んじゃない); null to take every such form as a verb.
     bool (*verb)(const void* context, std::string_view text) = nullptr;
+    // Whether text ends with the dictionary form of a verb of the dictionary, with no guess for kana
+    // the dictionary lacks (RewriteCasual: the stem before a casual negative ねえ); null for none.
+    bool (*dictionaryVerb)(const void* context, std::string_view text) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
@@ -179,11 +182,12 @@ std::string RewriteInterjections(std::string_view text);
 
 // Words said with an emphatic っ or ん inside written plain (さっすが さすが, しっかたない
 // しかたない, すんごい すごい, あったりまえ あたりまえ, くっさい くさい, バッカ バカ, ばっかじゃ
-// バカじゃ where a clause starts).
+// バカじゃ where a clause starts, 大っ嫌い 大嫌い).
 std::string RewriteEmphaticSpellings(std::string_view text);
 
 // Casual contractions written in full (見てねぇな 見てないな, わかんねぇ わからない,
-// やらねー やらない, 渡しちまった 渡しちゃった, なめんなよ なめるなよ, 貰っとく 貰っておく,
+// やらねー やらない, 渡しちまった 渡しちゃった, 行っちった 行っちゃった, やってもうた やってしまった,
+// なめんなよ なめるなよ, 貰っとく 貰っておく,
 // 置いてく 置いていく, 行くんすか 行くんですか, わかるっス わかるっす, そだね そうだね). With runs.holds,
 // a contracted ておく that a dictionary word holds stays as written (言っとくけど). With contracted
 // (the dialect and contracted forms of the line), てんす is てるんです and ないんす after a noun

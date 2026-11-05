@@ -1,9 +1,9 @@
 # 규칙: LEX-30
 rule	input	expected	kind	layer
-lookup:suffix-after-person	田中っち、元気？	타나카치, 건강?	fix	lookup
+lookup:suffix-after-person	田中っち、元気？	타나카치, 잘 지내?	fix	lookup
 lookup:suffix-after-person	ねー田中っち、私も作ろっかな。	그런데-타나카치, 나도 만들까.	fix	lookup
 lookup:suffix-after-person	田中っちが笑うよ。	타나카치가 웃어.	fix	lookup
-lookup:suffix-after-person	小沢っちは元気？	오자와치는 건강?	fix	lookup
+lookup:suffix-after-person	小沢っちは元気？	오자와치는 잘 지내?	fix	lookup
 lookup:suffix-after-person	もしかしてリサっちかな？	혹시 리사치일까?	fix	lookup
 lookup:suffix-after-person	佐藤っち、おはよ。	사토치, 안녕.	fix	lookup
 lookup:suffix-after-person	先輩、モモっち、お茶淹れました！	선배, 모모치, 차 끓였습니다!	fix	lookup
@@ -43,7 +43,7 @@ lookup:suffix-after-person	母たんすの中	어머니 장롱 안	keep	lookup
 lookup:suffix-after-person	姉たんぽぽが咲いた	has:언니	keep	lookup
 lookup:suffix-after-person	姉たんぽぽが咲いた	lacks:짱	keep	lookup
 lookup:suffix-after-person	クララたん、おはよ	클라라짱, 안녕	keep	lookup
-lookup:suffix-after-person	ミラっち、元気？	미라치, 건강?	keep	lookup
+lookup:suffix-after-person	ミラっち、元気？	미라치, 잘 지내?	keep	lookup
 lookup:suffix-after-person	子供たん	아이짱	keep	lookup
 lookup:suffix-after-person	子供っち	아이치	keep	lookup
 lookup:suffix-after-person	友達たん	has:친구짱	keep	lookup

@@ -1,0 +1,36 @@
+# 규칙: GRM-40, GRM-175, GRM-177
+rule	input	expected	kind	layer
+rewrite:past-sequence	顔をあげると、正面には誰もいなかった。	has:드니,	fix	rewrites
+rewrite:past-sequence	カプセルを開けると、中にはフォークとナイフを携えたニワトリが入っていた。	has:여니,	fix	rewrites
+rewrite:past-sequence	ドアを開けると、そこには誰もいなかった。	has:여니,	fix	rewrites
+rewrite:past-sequence	窓を開けると、新鮮な空気が流れ込んできた。	has:열자,	keep	rewrites
+rewrite:past-sequence	渡されたメニューを開くと、ぱらりと紙が落ちた。	has:열자,	keep	rewrites
+rewrite:past-sequence	それを知ると、彼は笑った。	has:알자,	keep	rewrites
+rewrite:past-sequence	お茶をすすっていると、緊急記者会見が始まった。	has:있는데,	fix	rewrites
+rewrite:past-sequence	小説のページを繰っていると、ドアがノックされた。	has:있는데,	fix	rewrites
+rewrite:past-sequence	歩いていると、校門の前に誰か立っていた。	has:있는데,	fix	rewrites
+rewrite:past-sequence	夢の空を眺めていると、架子が覗き込んできた。	has:있는데,	fix	rewrites
+rewrite:past-sequence	半年も両親の会話を聞いていると、言語もそれなりに理解できるようになってきた。	has:있으니,	keep	rewrites
+rewrite:past-sequence	衣更の笑顔を見ていると、なんだか、胸がドキドキしてきた。	has:있으니,	keep	rewrites
+rewrite:past-sequence	ケラケラと笑う小太刀を見ていると、何かが気に掛かった。	has:있으니,	keep	rewrites
+rewrite:past-sequence	でも、こうして絡み合っていると、彼女は十分に大人だった。	has:있으니,	keep	rewrites
+rewrite:past-sequence	荷物を片付けてしまうと、部屋を出た。	has:버리자,	fix	rewrites
+rewrite:past-sequence	そう言うと、朔夜は嬉しそうに微笑んだ。	has:말하자,	fix	rewrites
+rewrite:past-sequence	エナはチョコレートを受けると、そのまま服のポケットにしまい込んだ。	has:받고는,	fix	rewrites
+rewrite:past-sequence	手を伸ばすと、それを掴んだ。	has:뻗자,	fix	rewrites
+rewrite:past-sequence	子供の頃は雨が降ると外で遊んだ。	has:오면	keep	rewrites
+rewrite:past-sequence	隠岐島の東郷という村では、昔この浜の人が釣りをしていると、魚は釣れずに石を一つ釣り上げました。	has:있는데,	keep	rewrites
+rewrite:past-sequence	富竹さんは陽気に手を振るとひぐらしの声の中に消えて行った。	has:흔들고는	fix	rewrites
+rewrite:past-sequence	楽しそうな笑みを浮かべると、千里は俺の手を包み込んだ。	has:짓자,	fix	rewrites
+rewrite:past-sequence	初めて口を開くと、それは連れの若者に言っていた。	has:열자,	fix	rewrites
+rewrite:past-sequence	おかんはそっと窺っていると、やがてお朝は湯呑みの茶を飲んだ。	has:있는데,	fix	rewrites
+rewrite:past-sequence	指を上下に動かし続けると、少しずつ声が高くなってきた。	has:움직이니,	fix	rewrites
+rewrite:past-sequence	彼女はカーテンを開くと、同時に叫んだ。	has:열자,	fix	rewrites
+rewrite:past-sequence	少しすると、ページをめくる音が聞こえてきた。	has:잠시 후,	fix	rewrites
+rewrite:past-sequence	霎時すると、彼は戻ってきた。	has:잠시 후,	fix	rewrites
+rewrite:past-sequence	頭を撫でると、彼女は嬉しそうに目を細めた。	has:쓰다듬자,	keep	rewrites
+rewrite:past-sequence	ドアを開けると、そこには誰もいなかった。	has:여니,	keep	rewrites
+rewrite:past-sequence	衣更の笑顔を見ていると、なんだか、胸がドキドキしてきた。	has:있으니,	keep	rewrites
+rewrite:past-sequence	お茶をすすっていると、緊急記者会見が始まった。	has:있는데,	keep	rewrites
+rewrite:past-sequence	千莉は小さく笑うと、キッチンへと向かった。	has:웃고는,	keep	rewrites
+rewrite:past-sequence	少し休むと、元気が出た。	has:조금 쉬니,	keep	rewrites

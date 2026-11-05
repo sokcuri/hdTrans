@@ -56,6 +56,22 @@ public:
     Journal journal;       // the writes of the rule running now
     const void* ruleItem = nullptr;  // the item whose rule is running
     int current = -1;  // the token being processed
+    // The memo of MarksEnd while Flush runs (the texts of the chain's words stay put then): for a
+    // few texts and mark sets, where the run of marks from each offset ends, so that each word of a
+    // long run of marks (ー, ～, 、 by the thousand) costs no scan of the rest. A text is known by
+    // where it ends, so the rest of a line after each of its words shares one entry.
+    struct MarkRuns {
+        const char* end = nullptr;
+        std::size_t size = 0;
+        const char* set = nullptr;
+        std::vector<uint32_t> stops;  // by distance from the end: the distance where the run stops
+    };
+    struct MarkRunMemo {
+        bool on = false;
+        std::size_t next = 0;
+        MarkRuns runs[4];
+    };
+    mutable MarkRunMemo markRuns;
     int insertedLength = 0;
     int candidateRetryCount = 0;
     // While set, a verb takes only an ending shorter than this one, which left text that no
@@ -167,6 +183,10 @@ private:
     bool ProcessCandidateRecord(std::string_view full, int cursor, int token, Record* records, Item* parent);
     // Whether a dictionary word starts at full[cursor:].
     bool WordAt(std::string_view full, int cursor, int token);
+    // The shorter readings to take at full[cursor:] instead of c when c leaves one stray hiragana
+    // that a shorter reading lets the next word take; null when c stands.
+    Record* OverStrayKana(std::string_view full, int cursor, int token, const Item& c);
+    Record* OverFusedParticle(std::string_view full, int cursor, int token, const Item& c);
     // Whether the verb shorter, read from records at full[cursor:] with a shorter ending, reads the
     // same where the text ends after it.
     bool StandsAlone(std::string_view full, int cursor, int token, Record* records, const Item& shorter);
@@ -193,6 +213,7 @@ private:
     bool KanaBounded(std::string_view key, std::string_view query) const;
     bool StandsApart(std::string_view key, std::string_view query) const;
     bool KanaWord(const dict::UserEntry& u, std::string_view query) const;
+    bool KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const;
     bool KanaBeforeCopula(const dict::UserEntry& u, std::string_view query) const;
     void ApplyConstraints(dict::Candidates& found, std::string_view query);
     void ReadGivenNames(dict::Candidates& found, std::string_view query);

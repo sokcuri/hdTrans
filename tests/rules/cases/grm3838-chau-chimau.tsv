@@ -1,0 +1,14 @@
+# 규칙: GRM-3838
+rule	input	expected	kind	layer
+lookup:chau-chimau	「でも……あんまり責めたら辞めちゃうかも」	「하지만……너무 꾸짖으면 그만둬버릴지도」	fix	lookup
+lookup:chau-chimau	「私は夢なんだよ？　いつか消えちゃうかもしれないんだよ？」	「나는 꿈이야? 언젠가 사라져버릴지도 몰라?」	fix	lookup
+lookup:chau-chimau	司令官と長波姉さまに、チョコレート作っちゃったかも…。	사령관과 장파언니님에게, 초콜릿 만들어버렸을지도….	fix	lookup
+lookup:chau-chimau	もう切っちゃっていい？	이제 잘라버려도 좋아?	fix	lookup
+lookup:chau-chimau	「殺しちゃっていいのよねぇ？　後で揉めるのやだよ」	「죽여버려도 좋아? 나중에 다투는 거 싫어」	fix	lookup
+lookup:chau-chimau	飯の話をしてたら腹へってきちまった……。	밥 이야기를 하고 있으면 배에는 와버렸다…….	fix	lookup
+lookup:chau-chimau	俺と縁ができちまって、俺のところに来たんだ	나와 인연이 생겨서, 나에게 온 거야	fix	lookup
+lookup:chau-chimau	四人目で力尽きちまったが……	네 번째에 힘이 다해버렸다가……	fix	lookup
+lookup:chau-chimau	食べちゃってよ	먹어버려	keep	lookup
+lookup:chau-chimau	行っちゃうかも	가버릴지도	keep	lookup
+lookup:chau-chimau	食べちゃって	먹어서	keep	lookup
+lookup:chau-chimau	死んじまえ	죽어버려	keep	lookup

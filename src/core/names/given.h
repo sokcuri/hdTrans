@@ -36,6 +36,12 @@ namespace internal {
 // none.
 std::string_view HeadReading(char32_t kanji);
 std::string_view OnReading(char32_t kanji);
+// The kana the names of the name dictionaries give kanji at the head (tail false) or the tail of a
+// two-kanji name (name_kana.tsv: 千 ち, 莉 り); "" for none.
+std::string_view NameKana(char32_t kanji, bool tail);
+// The Korean guessed for a two-kanji name no dictionary reads, from NameKana (千莉 치리); "" when
+// either kanji has no reading there (spec LEX-4827).
+std::string GuessedName(std::string_view kanji);
 
 }  // namespace internal
 

@@ -69,6 +69,6 @@ dict:w:31078	俺は自分の五十倍以上の重量を持つトラックに跳�
 dict:jisjk:121507	コンビニぐらいは歩いてればあるかもしれないが、金は持っていない。	has:있을지도 모르지만	fix	lookup
 dict:jisjk:137510	医者にはなりたくない。	has:의사는 되고 싶지 않다	fix	lookup
 sense:toru-nutrient	もっとカルシウムを取っておけばと、生まれて初めて思った。	has:칼슘을 섭취해 둘걸	fix	senses
-sense:toru-nutrient	水分をしっかり取ってください。	has:수분을 확실히 섭취해	fix	senses
+sense:toru-nutrient	水分をしっかり取ってください。	has:수분을 제대로 섭취해	fix	senses
 sense:toru-nutrient	写真を取った。	has:사진을 찍었다	keep	senses
 cx:novel-fixes-2:1205	一番には言えない。	!rule:cx:novel-fixes-2:1205	keep	rewrites

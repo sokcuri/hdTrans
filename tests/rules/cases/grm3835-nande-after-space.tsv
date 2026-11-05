@@ -1,0 +1,12 @@
+# 규칙: GRM-3835
+rule	input	expected	kind	layer
+cx:web-fixes-j:240	いや なんで行かせない？	아니 왜 가게 하지 않아?	fix	rewrites
+cx:web-fixes-j:240	んなもん なんで 俺が解かなきゃいけねえんだよ！	그런 거 왜 내가 풀어야 해!	fix	rewrites
+cx:web-fixes-j:240	アモル なんでヨイヤミの体を ヨクラータは言ったわ	아모르 왜 요이야미의 몸을 요크라타는 말했어	fix	rewrites
+cx:web-fixes-j:240	そんなもん なんで	그런 것 왜	fix	rewrites
+cx:web-fixes-j:240	あいつ　なんで来たの？	저 녀석 왜 왔어?	keep	rewrites
+cx:web-fixes-j:240	それなのに なんで…	그런데도 왜…	keep	rewrites
+cx:web-fixes-j:240	じゃあ なんで みんなヒーローを	그럼 왜 모두 히어로를	keep	rewrites
+cx:web-fixes-j:240	雨なんで帰ります	비이니까 돌아갑니다	keep	rewrites
+cx:web-fixes-j:240	訳なんで、すみません	것이니까, 죄송합니다	keep	rewrites
+cx:web-fixes-j:240	なんでですか なんで どうして いじわるんですか	어째서입니까 왜 왜 심술쟁이입니까	keep	rewrites

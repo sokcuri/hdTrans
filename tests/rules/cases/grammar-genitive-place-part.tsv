@@ -1,7 +1,7 @@
 # 규칙: GRM-3250
 rule	input	expected	kind	layer
 dict:jisjk:341889	一人で村の外に出て活動することは普通のことだった。	혼자서 마을 밖에 나와 활동하는 것은 보통 일이었다.	fix	local
-dict:jisjk:341889	そう言うとトイレの外に出ていった。	그렇게 말하니 화장실 밖에 나갔다.	fix	local
+dict:jisjk:341889	そう言うとトイレの外に出ていった。	그렇게 말하자 화장실 밖에 나갔다.	fix	local
 dict:jisjk:341889	アナスタシアは颯爽と船の先端に立った。	아나스타샤는 씩씩하게 배 끝에 섰다.	fix	local
 dict:jisjk:341889	敵は南街区の寂れた教会の地下にいるらしい。	적은 낭가이구가 쇠퇴해진 교회 지하에 있는 것 같다.	fix	local
 dict:jisjk:341889	山の頂上にいた。	산 정상에 있었다.	fix	local

@@ -570,6 +570,33 @@ bool MilitaryTime(std::string_view s, size_t pos, Match& m) {
     return true;
 }
 
+// A time cut off after two or three of its words, ヒト or フタ first, between pauses
+// (ヒトサン…あっ, ヒトヨンマル わ): no katakana right before it, and a pause mark, a comma, a
+// space, a cry or the end right after it.
+bool ShortMilitaryTime(std::string_view s, size_t pos, Match& m) {
+    if (pos > 0) {
+        size_t b = pos;
+        do { b--; } while (b > 0 && (static_cast<unsigned char>(s[b]) & 0xC0) == 0x80);
+        const char32_t c = At(s, b).cp;
+        if ((c >= U'ァ' && c <= U'ヶ') || c == U'ー') return false;
+    }
+    size_t p = pos;
+    if (!Lit(s, p, "ヒト") && !Lit(s, p, "フタ")) return false;
+    int n = 1;
+    for (; n < 3; n++) {
+        size_t q = p;
+        if (!AnyWord(s, q, kMilitaryWords)) break;
+        p = q;
+    }
+    if (n < 2) return false;
+    if (p < s.size()) {
+        size_t q = p;
+        if (!OneOf(s, q, U"…‥、 　！？!?。")) return false;
+    }
+    m.end = p;
+    return true;
+}
+
 bool IsKanaOrMark(char32_t c) {
     return (c >= U'ぁ' && c <= U'ゖ') || (c >= U'ァ' && c <= U'ヶ') || c == U'ー' || c == U'～';
 }
@@ -749,9 +776,39 @@ std::string RewriteInterjections(std::string_view text) {
     });
 }
 
+// The cut-off times of ShortMilitaryTime in digits (ヒトサン… 13…).
+std::string RewriteShortMilitaryTime(std::string_view text) {
+    if (text.find("ヒト") == std::string_view::npos && text.find("フタ") == std::string_view::npos) {
+        return std::string(text);
+    }
+    {
+        std::string out;
+        size_t at = 0;
+        Match m;
+        for (size_t from = 0; Find(text, from, ShortMilitaryTime, m); from = m.end) {
+            out.append(text.substr(at, m.begin - at));
+            for (std::string_view w = m.group[0]; !w.empty();) {
+                const MilitaryDigit* digit = nullptr;
+                for (const MilitaryDigit& d : kMilitaryDigits) {
+                    if (w.starts_with(d.word)) {
+                        digit = &d;
+                        break;
+                    }
+                }
+                if (digit == nullptr) break;
+                out.push_back(digit->digit);
+                w.remove_prefix(digit->word.size());
+            }
+            at = m.end;
+        }
+        out.append(text.substr(at));
+        return out;
+    }
+}
+
 std::string RewriteMilitaryTime(std::string_view text) {
     if (text.find("マル") == std::string_view::npos && text.find("まる") == std::string_view::npos) {
-        return std::string(text);
+        return RewriteShortMilitaryTime(text);
     }
     std::string out;
     size_t at = 0;
@@ -785,7 +842,7 @@ std::string RewriteMilitaryTime(std::string_view text) {
         at = m.end;
     }
     out.append(text.substr(at));
-    return out;
+    return RewriteShortMilitaryTime(out);
 }
 
 std::string CollapseDoubledWo(std::string_view text) {

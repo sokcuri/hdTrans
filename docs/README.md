@@ -10,7 +10,8 @@
 | [JavaScript와 TypeScript API](typescript-api.md) | npm 설치, 초기화, 버전 조회와 번역 |
 | [사용자 사전](dictionary-files.md#사용자-사전) | 사용자 사전 경로, 파일 형식과 품사 |
 | [이름 목록](dictionary-files.md#문서-이름-목록) | 작품의 이름을 적는 `names*.txt`, 종류와 `hon`, `--names`와 `SetNames` |
-| [대사의 말투 수준](../README.md#대사의-말투-수준) | 대사 줄의 말투를 다시 쓰는 단계, 끄는 방법과 보고서 |
+| [말투와 번역 방식](translation-modes.md) | `strict`와 `soft`, 한 줄씩 번역과 문서 번역, 문서에서 배우는 이름 |
+| [대사의 말투 수준](translation-modes.md#대사의-말투-수준) | 대사 줄의 말투를 다시 쓰는 단계, 끄는 방법과 보고서 |
 | [CLI 옵션](api.md#명령줄-hdtrans) | 파일 입력과 출력, 줄별 번역, 명령줄 옵션 |
 | [설정 파일](api.md#설정-파일) | 사용자 설정 경로와 옵션 |
 | [Ehnd 호환 안내](ehnd-compat.md) | Ehnd 사전과 필터를 켜는 방법, 지원 형식 |

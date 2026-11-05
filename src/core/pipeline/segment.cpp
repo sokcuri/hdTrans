@@ -62,6 +62,64 @@ int CharsBeforeEnd(const output::Pieces& text, size_t k, size_t from) {
     return n;
 }
 
+// The length of the personal pronoun that s starts with, 0 for none: one of the speaker or the
+// listener, or 彼 and 彼女 with their plurals; not あいつ, そいつ or 奴, which a clause before them
+// often describes (悪口ばっか言ってる あいつら, と呼ばれている 奴).
+std::size_t Person(std::string_view s) {
+    std::size_t n = 0;
+    auto take = [&](std::string_view m) {
+        if (m.size() > n && s.starts_with(m)) n = m.size();
+    };
+    for (const dict::ClassId set : {HDTRANS_CLASS("pronoun.first-person"), HDTRANS_CLASS("pronoun.listener")}) {
+        for (const std::string_view m : dict::ClassMembers(set)) take(m);
+    }
+    for (const std::string_view m : {"彼", "彼女", "彼ら", "彼女ら"}) take(m);
+    return n;
+}
+
+// Whether s opens with a personal pronoun that starts a phrase of its own: not one before の (a
+// clause before a space describes the noun after 彼女の) or one running into a longer word (君主).
+bool PersonOpens(std::string_view s) {
+    const std::size_t n = Person(s);
+    if (n == 0) return false;
+    std::string_view rest = s.substr(n);
+    for (const std::string_view plural : {"たち", "達", "ら", "等", "ども"}) {
+        if (rest.starts_with(plural)) {
+            rest.remove_prefix(plural.size());
+            break;
+        }
+    }
+    return !rest.starts_with("の") && !IsKanjiRune(text::DecodeRune(rest).cp);
+}
+
+// Whether s ends with a whole personal pronoun word, after a space, a mark or the start (ぼく, おれ たち).
+bool PronounEnds(std::string_view s) {
+    std::size_t start = s.size();
+    while (start > 0) {
+        const text::Rune r = LastRune(s.substr(0, start));
+        const char32_t cp = r.cp;
+        const std::size_t before = start - r.size;
+        if (r.size == 0 || !IsJapaneseRune(cp) || cp == U'、' || cp == U'。' || cp == U'「' || cp == U'」' || cp == U'…') break;
+        start = before;
+    }
+    const std::string_view word = s.substr(start);
+    std::size_t n = Person(word);
+    if (n == 0) return false;
+    std::string_view rest = word.substr(n);
+    for (const std::string_view plural : {"たち", "達", "ら", "等", "ども"}) {
+        if (rest == plural) return true;
+    }
+    return rest.empty();
+}
+
+// Whether a form before a pronoun goes on into it: the quoting という and the よう of a purpose,
+// which describe or lead to it (きさまという やつ, 助かるよう 俺が), the なく of "not this but"
+// (父さんじゃなく 俺を), and the explanatory んだ, after which the pronoun is the subject said last
+// (どんだけ私のこと好きなんだ お前).
+bool ClauseRunsOn(std::string_view s) {
+    return s.ends_with("いう") || s.ends_with("よう") || s.ends_with("なく") || s.ends_with("んだ");
+}
+
 }  // namespace
 
 bool KanaSpace(std::string_view s, size_t i) {
@@ -72,8 +130,31 @@ bool KanaSpace(std::string_view s, size_t i) {
     while (!rest.empty() && rest[0] == ' ') rest.remove_prefix(1);
     const char32_t first = text::DecodeRune(rest).cp;
     if (!IsJapaneseRune(first)) return false;
+    // だって and たって before a space go on into what follows: the "even" of a noun and the
+    // concession of a past (花奈だって 先輩の 카나도, どう考えたって 彼女を 어떻게 생각해도); only at the
+    // end of the sentence, or before what asks about it, are they the hearsay (帰ってきたって 돌아왔대). The
+// のだって of a nominalized verb, 何だって (뭐라고) and the て form of 当たる (に当たって) keep the space as it
+// was.
+    // A だって standing between spaces opens a clause (じゃなくて だって 頭に 아니고 그치만 머리에): the space
+    // before it parts it from what it follows. After a pronoun spelled in kana it is that pronoun's
+    // "even" (ぼく だって がんばる 나도), so the space goes on.
+    if (rest.starts_with("だって") && (rest.substr(std::string_view("だって").size()).starts_with(" ") ||
+                                     rest.substr(std::string_view("だって").size()).starts_with("、"))) {
+        return !PronounEnds(s.substr(0, i));
+    }
+    // A hearsay asked about stays apart (帰ってきたって 本当か？ 돌아왔대 진짜야?).
+    if (const std::string_view head = s.substr(0, i); (head.ends_with("だって") || head.ends_with("たって")) &&
+                                                       !head.ends_with("のだって") && !head.ends_with("何だって") &&
+                                                       !head.ends_with("なんだって") && !head.ends_with("当たって") &&
+                                                       !head.ends_with("あたって")) {
+        for (const std::string_view q : {"本当", "ほんと", "ホント", "マジ", "嘘", "うそ"}) {
+            if (rest.starts_with(q)) return true;
+        }
+        return false;
+    }
     return RuneIn(last, U"ねよさわぞぜ") ||
-           (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか"));
+           (IsKanjiRune(first) && !RuneIn(last, U"いただるうくすつぬむぶぐなのはがをにでともへやか")) ||
+           (RuneIn(last, U"いただるうくすつぬむぶぐ") && PersonOpens(rest) && !ClauseRunsOn(s.substr(0, i)));
 }
 
 bool Conjunctive(std::string_view s) {

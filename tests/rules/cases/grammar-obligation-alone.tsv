@@ -13,7 +13,7 @@ cx:fused-obligation:5	「では、俺はそこで何かしなければいけな�
 cx:fused-obligation:10	ミキさんとお揃いの水着、買わなくちゃ。	미키 씨와 세트의 수영복, 사야 한다.	fix	rewrites
 cx:fused-obligation:20	「強くならなきゃいけなかったんだから」	「강해지지 않으면 안됐으니까」	fix	rewrites
 cx:obligation-alone:20	そう。それよりお礼を言わなくちゃね。	그래. 그것보다 감사 인사를 해야지.	fix	rewrites
-cx:obligation-alone:20	まずは基本操作を覚えなきゃね。	우선은 기본 조작을 기억해야지.	fix	rewrites
+cx:obligation-alone:20	まずは基本操作を覚えなきゃね。	우선은 기본 조작을 익혀야지.	fix	rewrites
 cx:obligation-alone:20	『教会』本部から、メカニックを呼んでこなきゃな。	『교회』본부에서, 메카닉을 불러 와야지.	fix	rewrites
 cx:obligation-alone:20	「そういえば、歓迎会をしなきゃね」	「그러고 보니, 환영회를 해야지」	fix	rewrites
 cx:obligation-alone:30	助けなきゃ、と思った。	도와야 한다고 생각했다.	fix	rewrites
@@ -43,4 +43,4 @@ cx:fused-obligation:5	そろそろ風呂に入って寝る準備をしなけれ�
 cx:fused-obligation:5	後で姉にもお礼をしなくちゃ。	나중에 언니에게도 감사 인사를 해야 한다.	fix	rewrites
 cx:obligation-alone:10	むしろ、そうしなきゃいけなかったような……	오히려, 그렇게 해야 했던 것 같은……	fix	rewrites
 cx:obligation-alone:70	でも、言わなきゃ……言わなきゃいけない。	하지만, 말해야 한다……말해야 한다.	fix	rewrites
-dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨의 곳에 가야 해!!	fix	local-ending
+dict:jisjk:344317	ミキさんの所に行かなくては！！	미키 씨에게 가야 해!!	fix	local-ending

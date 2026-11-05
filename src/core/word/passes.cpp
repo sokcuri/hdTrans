@@ -483,19 +483,80 @@ void ReadUnplacedHeads(Flusher& f) {
             Adjacent(prev->prev, prev) && At(prev->prev->Code(0), 0) == '1' && !prev->prev->EntryText(0).empty()) {
             boundary = true;
         }
-        if (!boundary) continue;
+        // Also right after a noun read in kanji or katakana (その時ぱんにゃの声, 昨日ぱんにゃを見た; spec MNG-5);
+        // a noun read in kana is itself a piece of the run (のらりくらり: ら).
+        const bool afterNoun = !boundary && Adjacent(prev, it) && !UnplacedKana(prev) && At(prev->Code(0), 0) == '1' &&
+                               !prev->EntryText(0).empty() && Classify(LastChar(prev->group->surface)) != 13;
+        if (!boundary && !afterNoun) continue;
         Item* last = it;
         while (Adjacent(last, last->next) && UnplacedKana(last->next)) last = last->next;
         Item* next = last->next;
-        if (!Adjacent(last, next) || next->group == nullptr) continue;
-        bool bound = false;
-        for (int slot = 0; slot < static_cast<int>(next->group->entries.size()); slot++) {
+        const int length = last->start + last->length - it->start;
+        const std::string_view raw = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(length));
+        if (afterNoun) {
+            // Three full kana or more (not 高峰ばりに), not a case particle the next pass reads (俺がやろか), and not
+            // okurigana or a suffix (太り, 不満げ, お姉ちゃ).
+            int full = 0;
+            for (std::string_view rest = raw; !rest.empty(); rest.remove_prefix(FirstChar(rest).size())) {
+                if (!Has("ぁぃぅぇぉゃゅょゎっゕゖー〜～", FirstChar(rest))) full++;
+            }
+            if (full < 3 || std::find(std::begin(kCaseParticles), std::end(kCaseParticles), it->group->surface) !=
+                                std::end(kCaseParticles)) {
+                continue;
+            }
+            // Nor a suffix or contraction (っぷり, っちまう, んち), nor the kana after a verb or adjective
+            // stem the analysis left out (走らす, 平和いうんじゃろう).
+            if (Has("ぁぃぅぇぉゃゅょゎっゕゖんー〜～", FirstChar(raw))) continue;
+            // Nor a run that ends the way a verb, adjective or sentence does (視えぬ, 付ければ, 食べた,
+            // だろう, 腐れるぞ): those are the tail of a word the analysis split, not a word of their own.
+            std::string_view final;
+            for (std::string_view rest = raw; !rest.empty(); rest.remove_prefix(FirstChar(rest).size())) final = FirstChar(rest);
+            if (Has("るたすくぬつむぶぐうだばれろいぞぜ", final)) continue;
+            bool stem = false;
+            for (const std::string_view stemmed : {it->group->surface, prev->group->surface}) {
+                for (const dict::Candidate& c : w.snapshot.RetrieveRecords(stemmed, dict::LookupMode::General)) {
+                    if (c.source != stemmed || c.codes == nullptr) continue;
+                    const char part = c.codes->part.ClassDigit();
+                    if (part == '4' || part == '7') stem = true;
+                }
+            }
+            // Nor a run that a word of the dictionary starts (らしいにゃり: らしい).
+            const std::size_t second = FirstChar(raw).size() + FirstChar(raw.substr(FirstChar(raw).size())).size();
+            for (std::size_t e = second; !stem && e < raw.size(); e += FirstChar(raw.substr(e)).size()) {
+                const std::string_view head = raw.substr(0, e);
+                for (const dict::Candidate& c : w.snapshot.RetrieveRecords(head, dict::LookupMode::General)) {
+                    if (c.source == head && c.codes != nullptr && !c.target.empty() && (c.user == nullptr || !c.user->nameLayer) &&
+                        !c.codes->sem.Text().starts_with("QPN")) {
+                        stem = true;
+                    }
+                }
+            }
+            if (stem) continue;
+        }
+        // The run ends its token here, before a mark or another token.
+        const bool ends = next == nullptr || !Adjacent(last, next) || next->group == nullptr || At(next->Code(0), 0) == '6';
+        // A sound of two kana or more said twice at a boundary is a mimetic word (わふわふ): not one kana held
+        // (おおおお), not one that starts on ん or a small kana (んぐんぐ), and not one the sound stage reads with
+        // what follows it (ちゅばちゅばっ, ぎゅぎゅぎゅっと).
+        const std::string_view half = raw.substr(0, raw.size() / 2);
+        const std::string_view tail = it->text.substr(static_cast<std::size_t>(it->start) + raw.size());
+        bool doubled = boundary && raw.size() % 2 == 0 && half == raw.substr(raw.size() / 2) &&
+                       !Has("ぁぃぅぇぉゃゅょゎっゕゖんー〜～", FirstChar(raw)) &&
+                       (tail.empty() || (!Has("っッぁぃぅぇぉゃゅょゎー〜～", FirstChar(tail)) && !tail.starts_with(FirstChar(half))));
+        for (std::string_view rest = half; doubled && !rest.empty(); rest.remove_prefix(FirstChar(rest).size())) {
+            if (FirstChar(rest) != FirstChar(half)) break;
+            if (rest.size() == FirstChar(rest).size()) doubled = false;
+        }
+        // It is read here where it ends the token or comes before する (わふわふした, もふもふする); before
+        // another word the later stages read it with its space (ごちゅごちゅ当たって).
+        if (doubled && !ends && !Has("さしすせ", FirstChar(next->group->surface))) doubled = false;
+        // The run after a noun is read where it ends the token; any run before a read particle or ending.
+        bool bound = (afterNoun && ends) || doubled;
+        for (int slot = 0; !bound && !ends && slot < static_cast<int>(next->group->entries.size()); slot++) {
             const char part = At(next->Code(slot), 0);
             if ((part == '2' || part == '5') && !next->EntryText(slot).empty()) bound = true;
         }
         if (!bound) continue;
-        const int length = last->start + last->length - it->start;
-        const std::string_view raw = it->text.substr(static_cast<std::size_t>(it->start), static_cast<std::size_t>(length));
         bool word = false;
         for (const dict::Candidate& c : w.snapshot.RetrieveRecords(raw, dict::LookupMode::General)) {
             if (c.source != raw || c.codes == nullptr || c.target.empty() ||

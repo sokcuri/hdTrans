@@ -127,6 +127,14 @@ bool SenseTrigger(const Item* x, const Item* it, std::string_view trigger) {
     return false;
 }
 
+// Whether every word between x and it (both left out) is a degree adverb (word.degree-adverb).
+bool OnlyDegreeAdverbsBetween(const Item* x, const Item* it) {
+    for (const Item* y = x->next; y != nullptr && y != it; y = y->next) {
+        if (!dict::InClass(HDTRANS_CLASS("word.degree-adverb"), y->group->surface)) return false;
+    }
+    return true;
+}
+
 bool SenseTriggers(const Item* x, const Item* it, const userdict::Sense& sense) {
     for (const auto& trigger : sense.triggers) {
         if (SenseTrigger(x, it, trigger)) return true;
@@ -170,6 +178,16 @@ bool Triggered(Flusher& f, const Item* it, const userdict::Sense& s) {
             // is still the noun's own.
             if (n == 0 && s.side == userdict::Side::After) continue;
         }
+        // Before an adjective, a comma right before it (or before the degree adverbs in front of it)
+        // ends a topic said without its particle (ラーメン、めっちゃうまい): the noun before the comma
+        // can be the trigger.
+        if (x != nullptr && x->group->surface == "、" && s.side == userdict::Side::Before && OnlyDegreeAdverbsBetween(x, it)) {
+            const char key = At(it->Code(it->selected), 0);
+            const Item* y = x->prev;
+            if ((key == '7' || key == '8') && y != nullptr && y->selected >= 0 && At(y->Code(y->selected), 0) == '1') {
+                return SenseTriggers(y, it, s);
+            }
+        }
         if (x == nullptr || x->selected < 0) return false;
         if (SenseTriggers(x, it, s)) return true;
         // A word right after a numeral is its counter (この後11時): the words before the numeral
@@ -194,7 +212,7 @@ struct InitialConjunction {
 };
 
 constexpr InitialConjunction kInitialConjunctions[] = {
-    {"でも", "하지만"}, {"では", "그럼"}, {"なんで", "왜"}, {"だって", "왜냐하면"},
+    {"でも", "하지만"}, {"では", "그럼"}, {"なんで", "왜"}, {"だって", "그치만"},
 };
 
 // Whether the text ends in a dash, or with ellipsis also in an ellipsis, after trailing
@@ -286,8 +304,24 @@ void ChooseSenses(Flusher& f) {
         if (it->group->At(it->selected)->neighbourAssigned) continue;
         const auto senses = snapshot.Senses().find(it->group->surface);
         if (senses == snapshot.Senses().end()) continue;
+        // A verb sense is of the verb of its dictionary form: a stem whose verbs in the word are all of
+        // another conjugation takes none of it (転がす is no 転がる).
+        const auto otherVerb = [&](const userdict::Sense& s) {
+            if (s.kind < '0' || s.kind > '8') return false;
+            bool verb = false;
+            for (int slot = 0; slot < static_cast<int>(it->group->entries.size()); slot++) {
+                const std::string_view code = it->Code(slot);
+                if (At(code, 0) != '4') continue;
+                // The る of an ichidan and a godan verb look alike in a sense key (ひねる), so the two count as one.
+                const char kind = At(code, 2);
+                const auto ru = [](char k) { return k == '7' || k == '8'; };
+                if (kind < '0' || kind > '8' || kind == s.kind || (ru(kind) && ru(s.kind))) return false;
+                verb = true;
+            }
+            return verb;
+        };
         for (const userdict::Sense& s : senses->second) {
-            if (At(it->Code(it->selected), 0) == s.classDigit && Triggered(f, it, s)) {
+            if (At(it->Code(it->selected), 0) == s.classDigit && !otherVerb(s) && Triggered(f, it, s)) {
                 TakeTarget(it, s.classDigit, s.target, {s.triggers.empty() ? Provenance::SenseDefault : Provenance::Sense, s.row});
                 it->adjectival = s.adjective;
                 break;

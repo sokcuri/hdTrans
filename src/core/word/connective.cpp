@@ -34,13 +34,66 @@ bool PredicateFollows(const Item* it) {
     return false;
 }
 
+namespace {
+
+constexpr std::string_view kUtteranceTail = "…‥」』）)≫》】〉＞。．、ーっッ～";
+
+std::size_t ScanMarks(std::string_view text, std::size_t at, std::string_view set) {
+    while (at < text.size()) {
+        const text::Rune r = text::DecodeRune(text.substr(at));
+        if (!RuneIn(r.cp, set)) return at;
+        at += std::max<std::size_t>(r.size, 1);
+    }
+    return text.size();
+}
+
+}  // namespace
+
+std::size_t MarksEnd(const Worker& w, std::string_view text, std::size_t at, std::string_view set) {
+    if (at >= text.size()) return text.size();
+    Worker::MarkRunMemo& memo = w.markRuns;
+    // A short rest is scanned: it costs less than the memo, and keeps the long texts in it.
+    constexpr std::size_t kShort = 256;
+    if (!memo.on || text.size() - at < kShort) return ScanMarks(text, at, set);
+    const char* end = text.data() + text.size();
+    Worker::MarkRuns* found = nullptr;
+    for (Worker::MarkRuns& m : memo.runs) {
+        if (m.end == end && m.set == set.data() && m.size >= text.size()) found = &m;
+    }
+    if (found == nullptr) {
+        found = &memo.runs[memo.next++ % std::size(memo.runs)];
+        found->end = end;
+        found->size = text.size();
+        found->set = set.data();
+        // stops[d] for each rune that starts d bytes before the end: how far before the end the run
+        // of marks of set from it stops (0: it reaches the end). An offset inside a rune keeps the scan.
+        found->stops.assign(text.size() + 1, UINT32_MAX);
+        std::vector<std::size_t> starts;
+        for (std::size_t k = 0; k < text.size();) {
+            starts.push_back(k);
+            k += std::max<std::size_t>(text::DecodeRune(text.substr(k)).size, 1);
+        }
+        uint32_t stop = 0;
+        found->stops[0] = 0;
+        for (auto k = starts.rbegin(); k != starts.rend(); ++k) {
+            const auto d = static_cast<uint32_t>(text.size() - *k);
+            if (!RuneIn(text::DecodeRune(text.substr(*k)).cp, set)) stop = d;
+            found->stops[d] = stop;
+        }
+    }
+    const uint32_t stop = found->stops[text.size() - at];
+    return stop != UINT32_MAX ? text.size() - stop : ScanMarks(text, at, set);
+}
+
 bool UtteranceEnd(const Worker& w, const Item* it) {
-    std::string_view rest = From(it->text, it->start + it->length);
-    if (rest.empty() && it->tokenIndex + 1 < w.TokenCount()) {
+    std::string_view rest = it->text;
+    std::size_t at = static_cast<std::size_t>(it->start + it->length);
+    if (at >= rest.size() && it->tokenIndex + 1 < w.TokenCount()) {
         if (w.Span(it->tokenIndex + 1) != 0) return false;
         rest = w.Tok(it->tokenIndex + 1).text;
+        at = 0;
     }
-    return TrimRunes(rest, "…‥」』）)。．、ーっッ～").empty();
+    return MarksEnd(w, rest, at, kUtteranceTail) == rest.size();
 }
 
 // Words of thanks, apology and feeling after which a て or 連用 form gives the reason (어서:

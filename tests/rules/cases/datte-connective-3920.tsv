@@ -1,0 +1,173 @@
+# 규칙: GRM-3920
+rule	input	expected	kind	layer
+segment:datte-space	そんな仲間を 俺は ただの１人だって 見捨てることはできねえ！	그런 동료를 나는 그냥 1명이라도 버릴 수 없어!	fix	segment
+segment:datte-space	え… だ… だってロボットじゃん 本気なの!?	어… 그… 그치만 로봇이잖아 진심이야!?	fix	segment
+segment:datte-space	学校がこんなこと考えてたって 分かったら 大人を信じることが できなくなりますよ｡	학교가 이런 것 생각하고 있었다는 걸 알면 어른을 믿을 수가 없게 돼요.	fix	segment
+segment:datte-space	私だって 我慢できることなら我慢します	저도 참을 수 있는 것이라면 참습니다	fix	segment
+segment:datte-space	この前だって 天道と メダルゲームしたんだろ？	일전에도 덴토와 메달 게임한 거지?	fix	segment
+segment:datte-space	どっちだって 変わんねえっつうの	어느 쪽이라도 변함없다고 해	fix	segment
+segment:datte-space	勝ち目ないの向こうでしょ だって 教師と生徒だよ	승산 없는 것 저편이지 그치만 교사와 학생이야	fix	segment
+segment:datte-space	よかっただと⁉ ひぃ～！ だ だ だ… だって 一度 勝ってますし…。	좋았다라면!? 히이~! 다다다… 그치만 한 번 이겨 해….	fix	segment
+segment:datte-space	だ… だって—	그… 그치만—	fix	segment
+segment:datte-space	あたいだって 頑張って パートしてんだよ	나도 열심히 파트하는 거야	fix	segment
+segment:datte-space	船長が行方不明になったって ホント？	선장이 행방불명이 되었대 진짜?	fix	segment
+segment:datte-space	今朝だって 無垢(むく)な赤子のように 甘える私を―	오늘 아침이라도 순수한 갓난아이처럼 응석부리는 나를-	fix	segment
+segment:datte-space	だから 今日だって 勝ちにいくさ	그러니까 오늘도 승리에 전쟁	fix	segment
+segment:datte-space	それで受けたの？ えっ だって そんなこと書いてあったら 受けたくなるでしょ 普通。	그래서 받았어? 어 그치만 그런 일 써 있으면 받고 싶어지겠지 보통.	fix	segment
+segment:datte-space	あの人が気にするのは 人の目だけ｡ 僕の事だって 恥だから 人に言わなかったのよ｡ おたくの事だって… 信じちゃいないよ あの人は｡	그 사람이 신경 쓰는 것은 사람의 눈만. 내 일도 수치니까 사람에게 말하지 않았어. 댁의 일이라도… 믿지는 않는다 그 사람은.	fix	segment
+segment:datte-space	人類誕生の歴史とか 分かっちゃうし あ～ 未来には こんな すごい文明 生まれてたんだって 分かっちゃうし！	인류 탄생의 역사라든지 알아버리고 아~ 미래에는 이런 대단한 문명 태어나고 있었다는 걸 알아버리고!	fix	segment
+segment:datte-space	なんか ふられたって 噂だよ｡ 小高先生｡	뭔가 차였다는 소문이야. 코다카 선생님.	fix	segment
+segment:datte-space	この人たちを怒ったって 守は帰ってこないんだよ >> 理恵	이 사람들을 화내도 수는 돌아오지 않아 >> 리에	fix	segment
+segment:datte-space	放っといたって 腐るだけなんだからいいじゃない？	내버려 두어도 썩을 뿐이니까 좋잖아?	fix	segment
+segment:datte-space	許嫁と結婚したって 幸せにはならないって	정혼자와 결혼해도 행복하게는 안된다고	fix	segment
+segment:datte-space	まだまだ これからだよ！ 今日 負けたって 全部 パワーに変えればいいんだ！ ピカチュ～！	아직도 지금부터야! 오늘 져도 전부 파워로 바꾸면 돼! 피카츄~!	fix	segment
+segment:datte-space	どっちにしたって 間違いなく怒られちゃうよな	어느 쪽으로 해도 틀림없이 혼나버린다	fix	segment
+segment:datte-space	今すぐと言ったって 家内を連れてこなくちゃ…	당장이라고 해도 아내를 데려와야 한다…	fix	segment
+segment:datte-space	なあﾃﾂﾔ 魔王竜っつったって 大した防御力ね～んだから ｻｸｯと倒しちまおうぜ｡	테츠야 마왕용이라고 말해도 대단한 방어력이네 니까 싹둑 쓰러뜨려버리자.	fix	segment
+segment:datte-space	なくなったって 警察には届けられねえんだから	없어져도 경찰에게는 도착되지 않을 거니까	fix	segment
+segment:datte-space	何やったって 無駄だもん！ 事実上の敗北ですよ？	뭐 해도 쓸데없는걸! 사실상의 패배예요?	fix	segment
+segment:datte-space	こんな難しい手術 僕に代われって言われたって 無理ですよ｡	이런 어려운 수술 저에 대신하라고 해도 무리예요.	fix	segment
+segment:datte-space	チアだって 全国優勝して 私の欲しいもの全部 かなたが 持ってっちゃった気がしたんだ。	치어도 전국 우승해 내 갖고 싶은 것 전부 저쪽이 가져가버렸다 생각이 든 거야.	fix	segment
+segment:datte-space	安心してください！ 何が出たって 俺が やっつけてやりますよ。 う… うん。	안심해 주세요! 무엇이 나와도 내가 해치워 줘요. 으… 응.	fix	segment
+segment:datte-space	あっしにだって 孫の１人や２人 いても おかしくはねえやなあ｡	저에도 손자의 1명이나 2명 있어도 이상하지는 응이구나.	fix	segment
+segment:datte-space	でも どう考えたって 彼女を幸せにできんのは—	하지만 어떻게 생각해도 그녀를 행복하게 할 수 없는 것은—	fix	segment
+segment:datte-space	でもでも りんちゃんだって 昔	하지만 하지만 린짱도 옛날	fix	segment
+segment:datte-space	牙王のﾐﾗｰｼﾞｭｶｰﾄﾞを 奪ったﾔﾂなんかと比べたって 意味はない!	가오의 신기루 카드를 빼앗은 녀석 같은 것과 비교해도 의미는 없어!	fix	segment
+segment:datte-space	あんたの後継ぎにしたって 悪いわけは なかろう？	너의 후계로 해도 나쁜 것은 없을 것이다?	fix	segment
+segment:datte-space	まさか… あの波動が原因だって 言うんですか？	설마… 그 파동이 원인이라고 말합니까?	fix	segment
+segment:datte-space	目を閉じたって 閉じきれないよ	눈을 감았다고 닫지 못할	fix	segment
+segment:datte-space	きっと僕にも悪いところがあったって 思うからかな	분명 나에게도 나쁜 곳이 있었다고 생각하기 때문일까	fix	segment
+segment:datte-space	いや 替わったって 言ってましたよ	아니 바뀌었다고 했었어요	fix	segment
+segment:datte-space	かわいいじゃないですか。 いいから 心配したって 言ってあげてください。 とりあえず あれだ。	귀엽잖아요. 좋으니까 걱정했다고 해 주세요. 우선 저것이다.	fix	segment
+segment:datte-space	いや でも さっきはﾃﾚﾋﾞ用に ﾄﾞﾀｷｬﾝして迷惑かけたって 言ってたけど 光石さんが謝りたいのは それだけじゃないからさ｡	아니 하지만 조금 전은 텔레비전용으로 펑크해 폐를 끼쳤다고 했지만 코우세키 씨가 사과하고 싶은 것은 그것만이 아니니까.	fix	segment
+segment:datte-space	そのとおりだ で こっちの彼女は あんたの上官の大佐殿だって 言ってるわけね	그대로다로 여기의 그녀는 너의 상관의 대령님이라고 말하는 것이네	fix	segment
+segment:datte-space	松吉でおまんな。 そうだ。 確か そいつなら なかなか達者な指使いするやつだって 聞いてます。	마츠요시로 만인. 그래. 분명 그 녀석이라면 꽤 능숙한 손가락 써 하는 녀석이라고 듣고 있습니다.	fix	segment
+segment:datte-space	ルイスはとても元気で いい子にしてたって 言っておくわ	루이스는 무척 건강하고 좋은 아이로 하고 있었다고 해	fix	segment
+segment:datte-space	自分だけで悩んでたって 解決しませんよ｡	자신만으로 고민하고 있었다고 해결하지 않아요.	fix	segment
+segment:datte-space	確かに｡ 範子の いびつな正義が あそこから さらに ｴｽｶﾚｰﾄしてたって 考えたら 悪夢どころじゃない 怖さだよね｡	확실히. 노리코의 찌그러진 정의가 저기에서 더욱 에스컬레이트하고 있었다고 생각하면 악몽어디 가 아닌 무서움이지.	fix	segment
+segment:datte-space	都が 俺の親父が来てたって 言うんだけど 見た？	도가 내 아버지가 오고 있었다고 하는데 봤어?	fix	segment
+segment:datte-space	でも いろいろあって強くなるんだって 本人も分かったみたいです。	하지만 여러 가지 있어 강해진다고 본인도 안 것 같습니다.	fix	segment
+segment:datte-space	私たちが 何回インタビューを受けたら どうだって 言うんだ?	우리가 몇 번 인터뷰를 받으면 어때라고 말하는 거야?	fix	segment
+segment:datte-space	タイリースが死んだって 思ってるのかい?	타이 리스가 죽었다고 생각하는 거야?	fix	segment
+segment:datte-space	大体 食べたら食べたって 言えばいいんだ	대개 먹었더니 먹었다고 하면 된다	fix	segment
+segment:datte-space	ぬれぎぬだって 言ってるだろ。	누명이라고 말하잖아.	fix	segment
+segment:datte-space	この名刺があったって 言ったんじゃないですか?	이 명함이 있었다고 한 거 아니에요?	fix	segment
+sense:initial-datte	「だって、それは自分のことを守るためで{k=-5.0}―――{/k} 」	「그치만, 그건 자신을 지키기 때문에{k=-5.0}―――{/k} 」	fix	senses
+sense:initial-datte	だって、社交界デビューすら嫌でしかたないのに……	그치만, 사교계 데뷔조차 싫어서 어쩔 수 없는데……	fix	senses
+sense:initial-datte	だって、この状況から穴熊なんて崩し方わかんないよ。角も、香車も、桂馬もないのに	그치만, 이 상황에서 오소리 같은 건 무너뜨리는 방법 몰라. 모퉁이도, 향차도, 계마도 없는데	fix	senses
+sense:initial-datte	だって お兄ちゃんが違うって言ってるだもん	그치만 오빠가 다르다고 하는인걸	fix	senses
+sense:initial-datte	だって そうでもしないと 娯楽とか楽しめないじゃん｡	그치만 그래도 하지 않으면 오락이라든지 즐길 수 없잖아.	fix	senses
+sense:initial-datte	だって、その……そんなの……」	그치만, 그……그런 것……」	fix	senses
+sense:initial-datte	だって…ああっ、あああっ、伊月の赤ちゃんを…ひうっ、あうっ、ああっ…作る練習を…ああっ、しないとダメですからぁ	그치만…아앗, 아아앗, 이츠키의 아기를…히읏, 아읏, 아앗…만드는 연습을…아앗, 하지 않으면 안되니까요	fix	senses
+sense:initial-datte	「だって、裕樹の体温感じないと、安心できないんだもん」	「그치만, 유우키의 체온 느끼지 않으면, 안심할 수 없는걸」	fix	senses
+sense:initial-datte	「だって、私はずっと、最初から最後まで{k=-5.0}―――{/k} 」	「그치만, 나는 계속, 처음부터 끝까지{k=-5.0}―――{/k} 」	fix	senses
+sense:initial-datte	「だって！　よく分かんないけど、行こう」	「그치만! 잘 모르지만, 가자」	fix	senses
+sense:initial-datte	だって… あ あんまり てれてる ところも見たことないし… ね	그치만… 별로 쑥스러워하고 있는 곳도 본 적 없고… 저기	fix	senses
+segment:datte-space	ユークが帰ってきたって 本当か？	유크가 돌아왔대 사실인가?	keep	segment
+segment:datte-space	ん？ ユークが帰ってきたって⁉	응? 유크가 돌아왔대!?	keep	segment
+segment:datte-space	仕事だってさ。	일이래.	keep	segment
+segment:datte-space	瑠奈が また胃痛だって～？	루나가 또 위통이래~?	keep	segment
+segment:datte-space	私だって そう思う	나도 그렇게 생각한다	keep	segment
+segment:datte-space	子供だって分かる	아이라도 안다	keep	segment
+segment:datte-space	今朝だって無垢な赤子のように甘える	오늘 아침이라도 순수한 갓난아이처럼 응석부린다	keep	segment
+segment:datte-space	つくったって言ってみればレヴィの護衛でしょ	만들어도 말하자면 레비의 호위지	keep	segment
+segment:datte-space	頑張りましょうって言った。	힘냅시다라고 말했다.	keep	segment
+segment:datte-space	私だって言うよ	나도 말해	keep	segment
+cx:datte-quote:10	まだ喜多野くんが犯人だって 決まったわけやないにか	아직 기타들 군이 범인이라고 정해진 것이 아닌 인가	fix	rewrites
+cx:datte-quote:10	状況証拠は 完全に 田中斗真が犯人だって 告げてるな これ｡	정황증거는 완전히 타나카 토마가 범인이라고 고하고 있는이것.	fix	rewrites
+cx:datte-quote:10	ＵＳＪをねじ込んだのは 堀川の手腕だって 俺 知ってるよ！	USJ를 틀어넣은 것은 호리카와의 수완이라고 나 알고 있어!	fix	rewrites
+cx:datte-quote:10	((俺が守りたいのは紗奈だって 気付いたんだ))	((내가 지키고 싶은 것은 사나라고 깨달았다))	fix	rewrites
+cx:datte-quote:10	私だって そう思う	나도 그렇게 생각한다	keep	rewrites
+cx:datte-quote:15	出来高制だって 最初に言ったよな	거래량제라고 처음에 말했지	fix	rewrites
+cx:datte-quote:15	ぬれぎぬだって 言ってるだろ。	누명이라고 말하잖아.	fix	rewrites
+cx:datte-quote:15	バカ！ １番もっと上だって 言ってんだろ！	바보! 1번 좀 더 위라고 말하잖아!	fix	rewrites
+cx:datte-quote:15	私だって言うよ	나도 말해	keep	rewrites
+cx:datte-quote:20	前田は 答えを見つけたって 伝えておくよ。	마에다는 대답을 찾아냈다고 전달해 둬.	fix	rewrites
+cx:datte-quote:20	つくったって言ってみればレヴィの護衛でしょ	만들어도 말하자면 레비의 호위지	keep	rewrites
+cx:datte-quote:30	珍しい希少石をカットしてたって 知ってるか？	드문 희소석을 컷하고 있었다고 알고 있어?	fix	rewrites
+cx:datte-quote:30	見ていたって 意味ないよ	보고 있어도 의미 없어	keep	rewrites
+cx:datte-quote:40	相当ひどかったって言ってたじゃん	상당히 심했다고 말했잖아	fix	rewrites
+cx:datte-quote:40	頑張りましょうって言った。	힘냅시다라고 말했다.	keep	rewrites
+cx:datte-quote:5	ここだって 自由な学校に見えても みんな何かに縛られてる	여기도 자유로운 학교로 보여도 모두 무언가에 속박되어 있다	keep	rewrites
+cx:datte-quote:5	〈これだって 入ったの ５話からだし 誰かが降りたら 私が書く	〈이것도 들어간 것 5화로부터이고 누군가가 내리면 내가 쓴다	keep	rewrites
+segment:datte-space	>> 佐伯有美香さんですが 彼女は 店をｵｰﾌﾟﾝするに当たって 大隣さんから資金を借りて	>> 사에키유미카 씨입니다만 그녀는 가게를 오픈하기에 앞서 오오토나리 씨에게서 자금을 빌려	keep	segment
+segment:datte-space	黒の暴牛に入ったのだって 自分たちのためだ	검은 폭우에 들어갔던 것은 자신들을 위해서다	keep	segment
+segment:datte-space	今日 協力するのだって 自分のためよ。	오늘 협력한다고 자신을 위해.	keep	segment
+segment:datte-space	おまけに せんじ薬だと！？ 何だって 素人が 勝手に診断して 勝手に投薬するんだ！！	게다가 달인 약이라고!? 뭐라고 아마추어가 마음대로 진단해 마음대로 투약하는 거야!!	keep	segment
+cx:datte-quote:5	こっちだって もう１人くらい—	여기도 이제 1명 정도—	keep	rewrites
+cx:datte-quote:5	それだって君が言う 人の命を弄んだ結果だろ？	그것도 네가 말하는 사람의 생명을 희롱한 결과지?	keep	rewrites
+cx:datte-quote:5	先生 こっちだって	선생님 여기래	keep	rewrites
+cx:datte-quote:5	蒔奈が帰り道はこっちだって言うから信用したのに	시내가 돌아가는 길은 여기라고 말하니까 신용했는데	keep	rewrites
+cx:datte-quote:5	それだって思い出に変わりはないでしょう	그것도 추억에 변함은 없을 거예요	keep	rewrites
+cx:datte-quote:5	こっちだってな 毎日 我慢してんだ お前に！	여기도매일 참는 거야 너에게!	keep	rewrites
+cx:datte-quote:5	ここだって自由な学校に見えても みんな何かに縛られてる	여기도 자유로운 학교로 보여도 모두 무언가에 속박되어 있다	fix	rewrites
+cx:datte-quote:5	これだって入ったの ５話からだし	이것도 들어간 것 5화로부터이고	fix	rewrites
+cx:datte-quote:5	あそこだって昔は賑やかだった	저기도 옛날은 떠들썩했다	keep	rewrites
+segment:datte-space	あなた だって その美貌ですものね~。	당신도 그 미모인 거야~.	fix	segment
+segment:datte-space	でも あなた だって うそ	하지만 당신도 거짓말	fix	segment
+segment:datte-space	わたしたち だって こんな コソコソ したく ないんですが。	저희도 이런 슬금슬금 하고 싶지 않습니다만.	fix	segment
+segment:datte-space	あんた だって 昨日は 自分の机もロッカーも 忘れたっていって	너도 어제는 자신의 책상도 로커도 잊었다고 해	fix	segment
+segment:datte-space	バカだよ あんた だって こうなるじゃん...	바보야 너도 이렇게 되잖아...	fix	segment
+segment:datte-space	あたし だって ちゃんと しゃべれてないし	나도 제대로 말하지 못하고	fix	segment
+segment:datte-space	大体 あなた だって あれだもんね	대개 당신도 저것이군	fix	segment
+segment:datte-space	店 ほっといていいんか？ おまえ。 おまえ だって 今… 客少ねえだろ 今。	가게 가만히 두어도 되는 건가? 너. 너도 지금… 손님 적지 지금.	fix	segment
+segment:datte-space	《これは あなた だって そりゃ もう この香りだよ》	《이것은 당신도 그야 이제 이 향기야》	fix	segment
+segment:datte-space	社長殺されたんですよ あんた だって しょうがないでしょう	사장 살해당한 거예요 너라도 어쩔 수 없을 거예요	fix	segment
+segment:datte-space	えっ？あんた だって さっき 裏千家とか何か言ってたじゃん。	어? 너도 조금 전 우라센케라든가 뭔가 말했잖아.	fix	segment
+segment:datte-space	あなた だって エールワン？	당신도 에일 원?	fix	segment
+segment:datte-space	お茶 買ったの？ あんた だって 佐藤さん 来たから	차 샀어? 너도 사토 씨 왔으니까	fix	segment
+segment:datte-space	あらっ あなた だって 完成版しか見てないでしょう？	어머나 당신도 완성판밖에 보지 않을 거예요?	fix	segment
+segment:datte-space	本気で言ってる？ あんた だって 踊り子だよ？	진심으로 말해? 너도 무희야?	fix	segment
+segment:datte-space	でも だって ほら あたしだけ事件とかそういうの関係ないじゃないですか	하지만 그치만 자 저만 사건이라든지 그러한 것 관계없잖아요	keep	segment
+segment:datte-space	だって だって 近いよ…	그치만 그치만 가까워…	keep	segment
+segment:datte-space	いいでしょ 何でも こんな時間に わざわざ何でもええもん買いに行かんでも だって ないんだもん	좋지 뭐든 이런 시간에 일부러 뭐든지 좋은 걸 사러 가지 않아도 그치만 없는걸	keep	segment
+segment:datte-space	でも だって このお店がやばかったとき➡	하지만 그치만 이 가게가 위험했을 때 ➡	keep	segment
+segment:datte-space	だって だって あたしを 本気で 怒らせちゃったんですからね	그치만 그치만 저를 진심으로 화나게 해버렸으니까요	keep	segment
+segment:datte-space	ですから でも だって だから→	그러니까라도 그치만이니까→	keep	segment
+segment:datte-space	え？ え… だって もう…	어? 어… 그치만 이제…	keep	segment
+segment:datte-space	だ… だって やつの３連投は オーナーが大々的に 宣伝しちゃったんだから	그… 그치만 녀석의 3연투는 오너가 대대적으로 홍보해버렸으니까	keep	segment
+cx:datte-quote:15	(さざえ)フン 何度だって言ってやる	(소라) 흥 몇 번이라도 말한다	fix	rewrites
+dict:jisjk:260890	何回だって 言うわよ!!	몇 번이라도 말할 거야!!	fix	local
+cx:datte-quote:15	何度だって言ってやる	몇 번이라도 말한다	fix	rewrites
+dict:jisjk:260890	何度だって言っちゃうんだから	몇 번이라도 말해버리니까	fix	local
+dict:jisjk:260890	何度だって言います	몇 번이라도 말합니다	fix	local
+dict:jisjk:260890	もう何回だって言えます。 好きです 好きです…。	이제 몇 번이라도 말할 수 있습니다. 좋아합니다 좋아합니다….	fix	local
+dict:jisjk:260890	もう 何回だって言えます	이제 몇 번이라도 말할 수 있습니다	fix	local
+dict:jisjk:260890	何度だって言う！	몇 번이라도 말한다!	fix	local
+dict:jisjk:260890	何度だって言うぜ	몇 번이라도 말한다	fix	local
+dict:jisjk:260890	何度だって言うけど 私は貴方の…。	몇 번이라도 말하는데 나는 당신의….	fix	local
+dict:jisjk:260890	何度だって言うけど 私は あなたの…	몇 번이라도 말하는데 나는 당신의…	fix	local
+dict:jisjk:260890	何遍だって言っちゃうよ	몇 번이라도 말해버릴 거야	fix	local
+cx:datte-quote:15	何度だって 言わせてもらうさ	몇 번이라도 말하게 해 주지	fix	rewrites
+dict:jisjk:260890	何度だって言うわよ	몇 번이라도 말할 거야	fix	local
+cx:datte-quote:20	そんなん考えてたって答えは出ないし	그런 생각하고 있어도 대답은 나오지 않고	fix	rewrites
+cx:datte-quote:20	正解なくても なくたって答えは僕らの胸の中に 沸騰した思いて掴むんだ	정답 없어도 않아도 대답은 우리의 가슴속에 비등한 생각이라고 잡는 거야	fix	rewrites
+cx:datte-quote:20	考えなくたって答えは出てる	생각하지 않아도 대답은 나오고 있다	fix	rewrites
+cx:datte-quote:20	そうやって かいがいしく 世話を焼いたって答えは出ないわよ	그렇게 바지런하게 보살펴 주어도 대답은 나오지 않아	fix	rewrites
+cx:datte-quote:20	正解なんてもうなくたって 答えは僕らの胸の中にある	정답 같은 건 이제 없어도 대답은 우리의 가슴속에 있다	fix	rewrites
+cx:datte-quote:20	そんなこと聞かれたって 答えは １つしかないよ	그런 것 질문을 받아도 대답은 1개밖에 없어	fix	rewrites
+cx:datte-quote:20	[TEL] あんなこと いくらやったって答えは同じだ。	[TEL] 저런 일 아무리 해도 대답은 같다.	fix	rewrites
+cx:datte-quote:20	誰に何を聞いたって 答えは同じですよ？	누구에게 무엇을 들어도 대답은 같아요?	fix	rewrites
+cx:datte-quote:20	話し合ったって 答えは同じよ。	서로 이야기해도 대답은 같아.	fix	rewrites
+cx:datte-quote:20	あいつの了解 得なくたって 答えは わかってたし	저 녀석의 이해 유리한 이라고 해도 대답은 알고 있었고	fix	rewrites
+cx:datte-quote:20	何べん来たって答えは同じだ｡ ここいらは養蚕業で成り立ってんだ｡	몇 번 와도 대답은 같다. 이 근처는 양잠으로 성립되는 거야.	fix	rewrites
+cx:datte-quote:20	逆に 考え方を知らなければ １年たったって答えは出せないぞ｡	반대로 생각을 모르면 1년 지나도 대답은 낼 수 없어.	fix	rewrites
+cx:datte-quote:20	殴ったって答えは同じだ。	때려도 대답은 같다.	fix	rewrites
+cx:datte-quote:20	わかったって答えると思う?	알았다고 대답한다고 생각해?	keep	rewrites
+cx:datte-quote:20	一緒に「仮面ヤイバー」を 見てたって答えたの	함께 「가면 야이버」를 보고 있었다고 대답했어	keep	rewrites
+cx:datte-quote:20	知ってたって答えるわけないんだ	알고 있었다고 대답할 리가 없다	keep	rewrites
+cx:datte-quote:20	どうしてようが 税金BOXに入れたって答えますよ	어떻게 하고 있든 세금 BOX에 넣었다고 대답해요	keep	rewrites
+dict:jisjk:260890	一条君も誤解だって言ってるんだし	이치조 군도 오해라고 말해	keep	local
+dict:jisjk:260890	俺が犯人だって言うなら 根拠を示せよ	내가 범인이라고 말한다면 근거를 나타내	keep	local
+dict:jisjk:260890	吾妻さん お願い 嘘だって言って。	아즈마 씨 부탁 거짓말이라고 말해.	keep	local
+dict:jisjk:260890	本当だって言っただろ	사실이라고 말했지	keep	local
+dict:jisjk:260890	これも偶然だって言うのか?	이것도 우연이라고 말하는 건가?	keep	local
+dict:jisjk:260890	誤解だって言ったわ	오해라고 말했어	keep	local
+dict:jisjk:260890	事故だって言ってる	사고라고 말하고 있다	keep	local
+dict:jisjk:260890	会社に電話したら病気だって言うから	회사에 전화하면 병이라고 말하니까	keep	local
+dict:jisjk:260890	まさか 本気だって言いたいの	설마 진심이라고 말하고 싶어	keep	local
+cx:datte-quote:15	出来高制だって 最初に言ったよな	거래량제라고 처음에 말했지	keep	rewrites
+cx:datte-quote:20	酷いことしたって 自覚してる	심한 일 했다고 자각하고 있다	keep	rewrites
+cx:datte-quote:20	過去から逃げるのはやめたって決めたし	과거부터 도망치는 것은 그만두었다고 결정했고	keep	rewrites
+dict:jisjk:260890	これが自分だって確認をしておかないと、不安になるって言ってたの	이것이 자신이라고 확인을 해 두지 않으면, 불안해진다고 했어	keep	local
+cx:datte-quote:20	ちょっと話して帰ってもらったってミドリさんが説明してくれた	조금 이야기해 돌아갔다고 미도리 씨가 설명해 주었다	keep	rewrites

@@ -1,0 +1,17 @@
+# 규칙: GRM-3837
+rule	input	expected	kind	layer
+lookup:past-final-particle	あれは不幸な事故だったわ	저것은 불행한 사고였다	fix	lookup
+lookup:past-final-particle	競りの会場は毎回変わるみたい。もぬけの殻だったわ	경매의 회장은 매번 바뀌는 것 같다. 허물이었다	fix	lookup
+lookup:past-final-particle	「長い一日だったわね」	「긴 하루였네」	fix	lookup
+lookup:past-final-particle	「……姉の家は、銀地町だったわよね？」	「……언니의 집은, 은지마을이었지?」	fix	lookup
+lookup:past-final-particle	カレーの香りを嗅ぎながら空腹に耐える姿は、痛々しいほどだったぞ	카레의 향기를 맡으면서 공복을 견디는 모습은, 안쓰러울 정도였어	fix	lookup
+lookup:past-final-particle	まったく。雫さんの仰る通りでしたわね。	정말이지. 시즈쿠 씨의 말씀하신 대로였네요.	fix	lookup
+lookup:past-final-particle	お祖父様は全部ご存じでしたのね	조부님은 전부 아시는 바였군요	fix	lookup
+lookup:past-final-particle	ひとりで寂しかったわよね？	혼자서 외로웠지?	fix	lookup
+lookup:past-final-particle	「……聞くだけ無駄だったわね。」	「……들어 봤자 쓸데없었네.」	fix	lookup
+lookup:past-final-particle	きれいだわね	예쁘네	fix	lookup
+lookup:past-final-particle	事故だわね	사고네	fix	lookup
+lookup:past-final-particle	付き合いだったわけだし……。	교제였던 것이고…….	keep	lookup
+lookup:past-final-particle	楽しかったわ	즐거웠어	keep	lookup
+lookup:past-final-particle	行ったわよね	갔지	keep	lookup
+lookup:past-final-particle	そうだったのね	그랬구나	keep	lookup

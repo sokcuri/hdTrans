@@ -12,7 +12,7 @@ normalize:kansai-conjecture	京都大学の学生さんやったら分かるけ�
 normalize:kansai-conjecture	まあ　曜子と結婚する気はないやろけどな。	뭐 요코와 결혼할 생각은 없겠지만.	fix	normalize
 normalize:kansai-conjecture	(あや子)さあな どやろね｡	(아야코) 글쎄 어떨까.	fix	normalize
 normalize:kansai-conjecture	お赤飯は 祇園に帰るための保険やろか｡	팥찰밥은 기온에 돌아가기 위한 보험일까.	fix	normalize
-normalize:kansai-conjecture	さっきの子らも　ひもじいんやろな。	조금 전의 아이등도 시장하겠지.	fix	normalize
+normalize:kansai-conjecture	さっきの子らも　ひもじいんやろな。	조금 전의 아이들도 시장하겠지.	fix	normalize
 normalize:kansai-conjecture	何じゃろな？	무엇일까?	fix	normalize
 normalize:kansai-conjecture	たまげたなぁ 何年ぶりじゃろか元気で何よりでした	has:몇 년만일까	fix	normalize
 normalize:kansai-conjecture	(清十郎)う～ん 二丁はあるじゃろうな	has:2정은 있겠지	fix	normalize
@@ -32,7 +32,7 @@ normalize:kansai-conjecture	うそやろか	거짓말일까	fix	normalize
 normalize:kansai-conjecture	ほんまやろな	진짜일 것이다	fix	normalize
 normalize:kansai-conjecture	乗ってんねやろな乗ってんねやろな	타겠지타겠지	fix	normalize
 normalize:kansai-conjecture	この桜たちも来週には 散ってんねやろなぁ｡	이 벚꽃들도 다음주에는 지겠지.	fix	normalize
-normalize:kansai-conjecture	どないかして店開けられんやろかって 相談に	없는가 해 가게 열리지 않을까는 상담에	fix	normalize
+normalize:kansai-conjecture	どないかして店開けられんやろかって 相談に	어떻게 빌려주어 가게 열리지 않을까는 상담에	fix	normalize
 normalize:kansai-conjecture	ミチコちゃん。　おじいさんにみんなの前で　話　してもらえんやろか？	미치코짱. 할아버지에게 모두의 앞에서 이야기 해 줄 수 없을까?	fix	normalize
 normalize:kansai-conjecture	一緒にやろう	함께 하자	keep	normalize
 normalize:kansai-conjecture	やろうぜ	하자구	keep	normalize

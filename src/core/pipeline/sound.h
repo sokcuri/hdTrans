@@ -100,7 +100,7 @@ namespace hdTrans::pipeline {
 
 // The normalized line after the sound stage: WriteSpacedCopies, JoinSpacedOut, JoinSpelledOut, WriteMasked, CompleteCutOffs,
 // RewriteDrawnHonorifics,
-// RewriteVolitionalSo, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
+// RewriteVolitionalSo, RewriteRaLessIchidan, RewriteKansaiNegativeKana, RewriteContractedN, RewriteContractedOru, RewriteContractedIku,
 // RewriteContractedAuxiliaries, RewriteRaLessKuru, RewriteContractedNo,
 // RewriteOnbinU, RewriteCasualAdjectives, then WriteSounds;
 // when RewriteEmphasis changes that text, WriteSounds of the rewritten text instead; then
@@ -208,6 +208,20 @@ std::string RewriteContractedAuxiliaries(std::string_view text, const LineContex
 // of the て form before them.
 std::string RewriteRaLessKuru(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
 
+// The potential of an ichidan verb said without its ら (逃げれる 逃げられる, 起きれない 起きられない) written in
+// full: a れ before a form of the potential stem, after the stem of an ichidan verb of the dictionary,
+// when no word of the dictionary from where that stem starts goes on over the れ (入れる, 切れない,
+// 呆れない; the rows of 見れ, 食べれ and 来れ). After an honoured subject, where the word stage reads られる as
+// respect, a form that is not negative takes ることができ instead (社長は起きれる 일어날 수가 있다).
+std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The Kansai negative へん after a kana stem that the spoken forms leave (足りへん 足りない, ならへん,
+// 脱いでくれへん, 格好がつかへん, 合わせられへん) as ない, and a tail of KansaiNegativeTail after it with it, when
+// the kana from a kanji before them, from where they start or from after a particle or a て form among them
+// spell a verb's stem before ない; not the polite まへん, the 辺 of ここらへん nor 変な before a noun in kanji or
+// katakana (またへんな奴).
+std::string RewriteKansaiNegativeKana(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
 // The の after a noun in kanji or katakana said ん before a member of contraction.n-no
 // (頭ん中 頭の中, 先生んとこ 先生のとこ), when the dictionary has the noun and no word that
 // spans the ん (真ん中), and no kanji follows a member that ends in kanji (いったん中断).
@@ -249,6 +263,16 @@ std::string RewriteVolitionalSo(std::string_view text, const dict::Snapshot& sna
 std::string RewriteClippedVolitional(std::string_view text, const dict::Snapshot& snap);
 std::string RewriteDrawnObject(std::string_view text, const dict::Snapshot& snap);
 
+// The spellings of baby talk and cat speech (しゅき 好き, ごめんなちゃい, にゃい), long marks inside
+// words (いーから, しょーに合わない) and loanwords written in hiragana (ちょこれいと チョコレート), spelled
+// as the dictionary keys them where only the respelling reads as words (spec LEX-4822).
+std::string RewriteSpellingVariants(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+
+// The pause comma inside a unit dropped: between a predicate and a final particle that ends the
+// utterance (ない、よ？), a word and さま (ご主人、さま) and the halves of a katakana word
+// (クリ、トリス) (spec GRM-3870).
+std::string JoinPauseCommas(std::string_view text, const dict::Snapshot& snap);
+
 // The fused and clipped adjective endings written in full (spec SPC-19): an adjective stem of the
 // dictionary said with its last syllable and い fused (うるせぇ うるさい, すげーな すごいな, 若え！ 若い！,
 // 汚ねえ 汚い, さみい さむい, 分からねえ 分からない) before the end of a clause, a sentence particle or the
@@ -265,7 +289,7 @@ bool HoldsCasualAdjective(std::string_view text, const LineContext& ctx, const d
 // included) of three kana or more, or a shorter one that starts the kana run or follows a particle of
 // particle.verb-boundary (ふざける, 冗談を言う); not a kanji name and one kana (翔く of 翔くん) nor two kana
 // inside a longer kana word (まく of おーしまく).
-bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap);
+bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, bool strict = false);
 
 // An honorific of honorific.drawn-out drawn out before its final ん after a name in kanji,
 // katakana or two or more hiragana that are no verb continuative (圭ちゃ～ん, 田中さぁあん,

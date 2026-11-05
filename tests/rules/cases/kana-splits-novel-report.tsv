@@ -25,7 +25,7 @@ dict:lex:towaie-na	ザイダイバの公爵家のリュカ様も変わり者と�
 dict:lex:towaie-na	夏とはいえ寒い。	여름이라고는 해도 춥다.	keep	lookup
 constraint:verb-before-kurai	三つぐらい違った。	세 개 정도 달랐다.	fix	lookup
 constraint:verb-before-kurai	五歩くらいの距離	5보만한 거리	fix	lookup
-constraint:verb-before-kurai	「それにそもそも、全国大会は会場が四つくらいに分かれるし」	「게다가 애초에, 전국 대회는 회장이 네 개정도 나뉘고」	fix	lookup
+constraint:verb-before-kurai	「それにそもそも、全国大会は会場が四つくらいに分かれるし」	「게다가 애초에, 전국 대회는 회장이 네 개정도 나뉘거든」	fix	lookup
 constraint:verb-before-kurai	乗り物としてだされた鳥カゴの中は、ゆうにベッドが二つくらい入る広さがあった。	탈 것으로서 나온 새장 안은, 우아하게 침대가 두 개 정도 들어가는 넓이가 있었다.	fix	lookup
 constraint:verb-before-kurai	本気を出せば街一つくらいは焼き払えますのに。	진심을 보이면 거리 하나 정도는 다 태울 수 있는데요.	keep	lookup
 constraint:verb-before-kurai	十歩ぐらい	10보 정도	keep	lookup

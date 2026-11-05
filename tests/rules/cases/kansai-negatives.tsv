@@ -12,13 +12,13 @@ normalize:kansai-akan	「私、もうあかんねん……」	「나, 이제 안
 normalize:kansai-akan	これはアカンです。	이것은 안됩니다.	fix	normalize
 normalize:kansai-akan	ウチ、もうあかん……。さいならぁ～……。	우리, 이제 안돼……. 다시 봅시다~…….	fix	normalize
 normalize:kansai-akan	司令はん、チョコのお返し、まだやね？ 忘れてたらあかんで？	has:잊어선 안돼	fix	normalize
-normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안돼, 요우 고조되지 않는」	keep	normalize
+normalize:kansai-akan	「あかん、よう盛り上がらんわ」	「안돼, 요우 고조되지 않아」	keep	normalize
 normalize:kansai-akan	行ったらアカン！）	가면 안돼!)	keep	normalize
 normalize:kansai-akan	埒があかん。	결말이 나지 않아.	keep	normalize
 normalize:kansai-akan	ミチョアカン州	미초아칸주	keep	normalize
 normalize:old-wish-negative	うち このまま負けとうない。	has:이대로 지고 싶지 않다	fix	normalize
-normalize:old-wish-negative	「妾は浦島と離れとうない！」	「첩은 우라시마와 떨어지고 싶지 않아!」	fix	normalize
-normalize:old-wish-negative	妾は死にとうない！	첩은 죽고 싶지 않아!	fix	normalize
+normalize:old-wish-negative	「妾は浦島と離れとうない！」	「이 몸은 우라시마와 떨어지고 싶지 않아!」	fix	normalize
+normalize:old-wish-negative	妾は死にとうない！	이 몸은 죽고 싶지 않아!	fix	normalize
 normalize:old-wish-negative	謝りとうない。	사과하고 싶지 않다.	fix	normalize
 normalize:old-wish-negative	（い、嫌じゃ……食いとうない！	(시, 싫지……먹고 싶지 않아!	fix	normalize
 normalize:old-wish-negative	ありがとうな。	고마워.	keep	normalize

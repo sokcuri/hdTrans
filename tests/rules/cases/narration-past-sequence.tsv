@@ -1,16 +1,16 @@
 rule	input	expected	kind	layer
 rewrite:past-sequence	先日、薬草を探しに森に出かけてみれば出会ったのは、人さらいだった。	요전날, 약초를 찾으러 숲에 나가 보니 만난 것은, 유괴범이었다.	fix	rewrites
 rewrite:past-sequence	今日の授業は長いように感じたけど、終わってみればあっという間だった。	오늘의 수업은 길도록 느꼈지만, 끝나고 보니 순식간이었다.	fix	rewrites
-rewrite:past-sequence	彼女がそんなことを考えていると、目の前の二人が噴火した。	그녀가 그런 것을 생각하고 있으니, 눈앞의 두 사람이 분화했다.	fix	rewrites
+rewrite:past-sequence	彼女がそんなことを考えていると、目の前の二人が噴火した。	그녀가 그런 것을 생각하고 있는데, 눈앞의 두 사람이 분화했다.	fix	rewrites
 rewrite:past-sequence	長期的に見れば、マイナスだった。	장기적으로 보면, 마이너스였다.	keep	rewrites
 rewrite:past-sequence	やってみれば分かる。	해 보면 안다.	keep	rewrites
 dict:gram:iuto:正直言うと	「……正直言うと、心配した」	「……솔직히 말하면, 걱정했어」	keep	defaults
-rewrite:past-sequence	そう言うと、友人は言った。	그렇게 말하니, 친구는 말했다.	fix	rewrites
-rewrite:past-sequence	「行こう」と言った。籠を置くと、そばの建物の中にある並べられた籠を見る。	has:바구니를 두니,	fix	rewrites
-rewrite:past-sequence	「行こう」と言った。足早に洗濯籠を届けると、中央に位置する赤塗の建物を見る。	has:전달하니,	fix	rewrites
+rewrite:past-sequence	そう言うと、友人は言った。	그렇게 말하자, 친구는 말했다.	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。籠を置くと、そばの建物の中にある並べられた籠を見る。	has:바구니를 두자,	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。足早に洗濯籠を届けると、中央に位置する赤塗の建物を見る。	has:전달하자,	fix	rewrites
 rewrite:past-sequence	「行こう」と言った。西方の血を色濃く継ぐ玉葉妃は顔を上げると医者の顔を見る。	has:고개를 들자	fix	rewrites
-rewrite:past-sequence	「行こう」と言った。ダリヤはオレンジジュースを飲み干すと、昼食を食べ終えたマルチェラにきりだす。	has:마시니,	fix	rewrites
-rewrite:past-sequence	「行こう」と言った。玄関を出ると中学から愛用するチャリに飛び乗り、ペダルを全力で回す。	has:나오니	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。ダリヤはオレンジジュースを飲み干すと、昼食を食べ終えたマルチェラにきりだす。	has:마시자,	fix	rewrites
+rewrite:past-sequence	「行こう」と言った。玄関を出ると中学から愛用するチャリに飛び乗り、ペダルを全力で回す。	has:나오자	fix	rewrites
 rewrite:past-sequence	「行こう」と言った。春になると花が咲く。	has:봄이 되면	keep	rewrites
 rewrite:past-sequence	「行こう」と言った。ボタンを押すと扉が開く。	has:누르면	keep	rewrites
 rewrite:past-sequence	「行こう」と言った。この薬を飲むと眠くなる。	has:먹으면	keep	rewrites

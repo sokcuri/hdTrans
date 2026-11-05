@@ -1,0 +1,14 @@
+# 규칙: GRM-3842
+rule	input	expected	kind	layer
+normalize:verb-ssu	「ナオの姐御なら、駐車場の方に行きましたッスよ」	「나오의 누님이라면, 주차장에 갔어요」	fix	normalize
+normalize:verb-ssu	後からどんな罰でも受けるッスから	나중에 어떤 벌이라도 받으니까	fix	normalize
+normalize:verb-ssu	「なんかラジコンみたいなのが並んでるッスね」	「뭔가 무선조종 같은 게 늘어서 있네요」	fix	normalize
+normalize:verb-ssu	「……わかりましたッス」	「……알았어요」	fix	normalize
+normalize:verb-ssu	首を洗って待ってるっすよー！	목을 씻고 기다리고 있어요~!	fix	normalize
+normalize:verb-ssu	分かってるじゃないっすかー！	알고 있잖아요~!	fix	normalize
+normalize:verb-ssu	「あ、フランの姐御、おつかれッス！」	「아, 프랑의 누님, 수고했어요!」	fix	normalize
+normalize:verb-ssu	そっすねー	그렇네요~	fix	normalize
+normalize:verb-ssu	どうッスか！	어때요!	keep	normalize
+normalize:verb-ssu	行くっす	가요	keep	normalize
+normalize:verb-ssu	「くたばれッス！」	「죽을 수 있는 스!」	keep	normalize
+normalize:verb-ssu	ボスッス	보스예요	keep	normalize

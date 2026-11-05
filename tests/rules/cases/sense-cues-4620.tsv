@@ -1,0 +1,22 @@
+# 규칙: LEX-4620
+rule	input	expected	kind	layer
+cx:sense-cues-1:210	そうなの？言われてみれば、仲はまったく進展してなかったわね	그래? 듣고 보니, 사이는 전혀 진전하고 있지 않았네	fix	rewrites
+cx:sense-cues-1:210	「しかも、思い切ってスマホにしてみました。まったく使い方がわかりませんけど」	「게다가, 과감히 스마트폰으로 해 보았습니다. 전혀 사용법을 모르지만」	fix	rewrites
+cx:sense-cues-1:210	まったく強大で迷惑極まりない結婚活動	완전히 강대해 민폐 짝이 없는 결혼 활동	keep	rewrites
+cx:sense-cues-1:210	彼は我々とはまったく違った	그는 우리와는 완전히 달랐다	keep	rewrites
+cx:sense-cues-1:212	まったくもうっ！	정말이지 이제!	fix	rewrites
+cx:sense-cues-1:212	食べ切れないんなら注文すんなってーの、まったく！	다 먹을 수 없는다면 주문하지 말라니까~, 정말이지!	fix	rewrites
+cx:sense-cues-1:212	「いえ、まったく。どちらかというと、ありがとうございますという気持ちの方が…」	「아뇨, 완전히. 어느 쪽인가 하면, 감사합니다라는 기분이…」	keep	rewrites
+cx:sense-cues-1:220	そういう場合たいてい ドアは開いてたんだ	그런 경우 대부분 문은 열려 있었어	fix	rewrites
+cx:sense-cues-1:220	開いたドアから部室を覗く。	열린 문에서 동아리방을 들여다 본다.	fix	rewrites
+cx:sense-cues-1:220	そう言って、千里は携帯を取り出し、ぱかっと開いた。	그렇게 말해, 천리는 휴대폰을 꺼내고, 딸깍 열었다.	keep	rewrites
+cx:sense-cues-1:220	敵艦発見！全砲門、開け！	적함 발견! 전포문, 열어라!	keep	rewrites
+cx:sense-cues-1:240	お前だって、３日くらい前に路面電車の中でスルーしただろうが。	너도, 3일 정도 전에 노면 전차 안에서 무시했겠지만.	fix	rewrites
+cx:sense-cues-1:240	箱の中で何かが動いた。	상자 안에서 뭔가가 움직였다.	fix	rewrites
+cx:sense-cues-1:240	前世の自分がプレイした数多の乙女ゲームの中でまさかこれが選ばれるとは	전생의 자신이 플레이한 많은 여성향 게임 중에서 설마 이것이 선택되다니	keep	rewrites
+cx:sense-cues-1:240	集めた情報の中でも特に重要なことだ	모은 정보 중에서도 특히 중요한 일이다	keep	rewrites
+cx:sense-cues-1:250	声が聞こえない。もうちょっと近づこう	목소리가 들리지 않는다. 좀 더 다가가자	fix	rewrites
+cx:sense-cues-1:250	近づきながら、スカートの中から何かを取り出した。	다가가면서, 스커트 중에서 뭔가를 꺼냈다.	fix	rewrites
+cx:sense-cues-1:250	あやしげな集団に近づくな。	수상한 집단에 다가가지 마.	fix	rewrites
+cx:sense-cues-1:250	限界が近づいていた。	한계가 가까워지고 있었다.	keep	rewrites
+cx:sense-cues-1:250	アンジェ、これでまた動物マスターに一歩近づいた気がします	앙제, 이것으로 또 동물 마스터에 한 걸음 가까워진 것 같습니다	keep	rewrites

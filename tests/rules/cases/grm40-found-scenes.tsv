@@ -1,0 +1,21 @@
+# 규칙: GRM-40
+rule	input	expected	kind	layer
+rewrite:past-sequence	横になると急に眠気が来た。	has:누우니	fix	rewrites
+rewrite:past-sequence	部室に近づくと、中で物音がした。	has:가까워지니,	fix	rewrites
+rewrite:past-sequence	学食に入ると元気な声が迎えてくれた。	has:들어가니	fix	rewrites
+rewrite:past-sequence	玄関を出て足を動かすと、少し視界が揺れた。	has:움직이니,	fix	rewrites
+rewrite:past-sequence	家まで帰ってくると、廊下で小太刀と遭遇した。	has:돌아오니,	fix	rewrites
+rewrite:past-sequence	音楽棟を出ようとすると、見知った顔に出会った。	has:하니,	fix	rewrites
+rewrite:past-sequence	少しすると、ぺらぺらとページをめくる音が聞こえてきた。	has:잠시 후,	fix	rewrites
+rewrite:past-sequence	数分歩くと、みいちゃんが住んでいるマンションが見えてきた。	has:걸으니,	fix	rewrites
+rewrite:past-sequence	図書館に入ると、カウンターで何かしている御園さんを見つけた。	has:들어가니,	fix	rewrites
+rewrite:past-sequence	スプーンでご飯を皿に掻き出すと、白いものに続いて黒いものが出てきた。	has:긁어내니,	fix	rewrites
+rewrite:past-sequence	スカイデッキにあがると、無数の星が散りばめられた夜空が頭上に広がった。	has:오르니,	fix	rewrites
+rewrite:past-sequence	漫画を手渡して帰ろうとすると、廊下の奥から驚いたような声が聞こえてきた。	has:하니,	fix	rewrites
+rewrite:past-sequence	そう決意して、さらに足を進めると、奇妙なふたり組の会話がハッキリと聞こえてきた。	has:옮기니,	fix	rewrites
+rewrite:past-sequence	菊の門にぎゅっと力を込めると、それが堰となって熱の暴走を一時的にせき止められた気がした。	has:집중하니,	fix	rewrites
+rewrite:past-sequence	テレジアの父、ヴァーゲル公爵が憤然として言うと、貴族から次々に「賛成」の声が上がった。	has:말하자,	keep	rewrites
+rewrite:past-sequence	未だ蒼ざめているテレジアが微かに首を振ると、ハッとしたように口を押えて言い直した。	has:젓자,	keep	rewrites
+rewrite:past-sequence	元気よく朝の挨拶をすると、クラスメイトがどーっと集まってきた。	has:하자,	keep	rewrites
+rewrite:past-sequence	そこまで話すとお爺さんがお茶を持って部屋に入ってきた。	has:이야기하자	keep	rewrites
+rewrite:past-sequence	彼は立ち上がると、部屋を出て行った。	has:일어서고는,	keep	rewrites

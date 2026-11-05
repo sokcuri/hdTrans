@@ -3,7 +3,7 @@ rule	input	expected	kind	layer
 cx:wakaru-object:10	要領がわかっていない。	has:요령을 모른다.	fix	rewrites
 cx:wakaru-object:10	まだ要領が分かってないんでいろいろ迷惑をかけますが	has:요령을 몰라서	fix	rewrites
 cx:wakaru-object:10	あいつが分かってないのね。	!rule:cx:wakaru-object:10	keep	rewrites
-cx:wakaru-object:10	彼女の気持ちが分かってないのね。	has:기분을 모르는구나.	fix	rewrites
+cx:wakaru-object:10	彼女の気持ちが分かってないのね。	has:마음을 모르는구나.	fix	rewrites
 cx:wakaru-object:10	状況がわかっているのか	!rule:cx:wakaru-object:10	keep	rewrites
 cx:wakaru-object:10	俺が分かってないとでも思ったか	!rule:cx:wakaru-object:10	keep	rewrites
 dict:variant:wakaru-neg:3	アイツは何もわかってない。	has:아무것도 모른다.	fix	lookup

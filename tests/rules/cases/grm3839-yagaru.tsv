@@ -1,0 +1,15 @@
+# 규칙: GRM-3839
+rule	input	expected	kind	layer
+normalize:yagaru	小太刀が完全に遊んでいやがる。	작은 칼이 완전히 놀고 있다.	fix	normalize
+normalize:yagaru	あいつ、笑っていやがる	저 녀석, 웃고 있다	fix	normalize
+normalize:yagaru	「覚えていやがりましたか」	「기억했습니까」	fix	normalize
+normalize:yagaru	本当で勝てるつもりでいやがるッ！！！	사실로 이길 수 있을 생각으로 싫어하는!!!	keep	normalize
+normalize:yagaru	おおお…二人とも、良い子でやがりますな！	오오오…두 사람 모두, 좋은 아이입니다!	fix	normalize
+normalize:yagaru	あ、兄上は関係ないでやがりますよ。	아, 형님은 관계없어요.	fix	normalize
+normalize:yagaru	夕霧は戻るでやがりますよ	저녁 안개는 돌아오는 거예요	fix	normalize
+normalize:yagaru	一刻ほど前、下山より異変を報せるのろしが上がったでやがる。	일각만큼 전, 하산보다 이변을 알리는 것 여과지가 올랐습니다.	fix	normalize
+normalize:yagaru	詳しいことはまだ分からないでやがりますが	자세한 것은 아직 모릅니다만	fix	normalize
+normalize:yagaru	ただそれは…我らのためだけでやがりますか？	다만 그것은…우리들을 위해서 뿐입니까?	fix	normalize
+normalize:yagaru	泳いでやがる	헤엄치고 있다	keep	normalize
+normalize:yagaru	見てやがる	보고 있다	keep	normalize
+normalize:yagaru	覚えてやがれ！	두고 보자!	keep	normalize

@@ -852,6 +852,115 @@ std::string_view Registry::KanaHonorificAt(std::string_view s) {
 // animal noun (うさぎさん) or as a creature, fruit or food noun or an adverb (ひよこさん,
 // いちごちゃん, いつか), that starts with no お or ご and that joins the honorific into no
 // dictionary word (みなさん, たくさん).
+bool Registry::InflectedRun(std::string_view t) {
+    if (snap_ == nullptr) return false;
+    dict::LookupContext ctx;
+    ctx.plain = &snap_->Plain();
+    for (const dict::Candidate& c : snap_->GetWordInfo(t, dict::LookupMode::General, ctx).list) {
+        if (c.user != nullptr || c.codes == nullptr || c.codes->partText.size() != 4 || c.source.size() > t.size()) continue;
+        const char tag = c.codes->partText[0];
+        const std::string_view tail = t.substr(c.source.size());
+        if (tag == 'H' && (tail == "い" || tail == "く" || tail.empty())) return true;
+        if (tag != 'M') continue;
+        for (int branch = 0; branch < word::kConjugationBranches; branch++) {
+            const std::string_view conj = word::Conjugation(c.codes->partText[3] - '0', branch);
+            if (!conj.empty() && conj.find_first_of("(X") == std::string_view::npos && tail == conj) return true;
+        }
+    }
+    return false;
+}
+
+std::vector<Registry::LooseUse> Registry::FreeKanaNames(std::string_view line) {
+    std::vector<LooseUse> out;
+    for (std::size_t start = 0; start < line.size();) {
+        const text::Rune r = RuneAt(line, start);
+        if (!IsHiragana(r.cp) || (start > 0 && (IsHiragana(RuneBefore(line, start).cp) || IsKanji(RuneBefore(line, start).cp) ||
+                                                IsKatakana(RuneBefore(line, start).cp) || RuneBefore(line, start).cp == U'ー'))) {
+            start += std::max<std::size_t>(1, r.size);
+            continue;
+        }
+        std::size_t end = start;
+        while (end < line.size() && IsHiragana(RuneAt(line, end).cp)) end += RuneAt(line, end).size;
+        const std::string_view whole = line.substr(start, end - start);
+        // A reading in brackets after a kanji word glosses it (用途(ようと)).
+        if (start > 0 && InRunes(RuneBefore(line, start).cp, "(（「") && start > RuneBefore(line, start).size &&
+            IsKanji(RuneBefore(line, start - RuneBefore(line, start).size).cp)) {
+            start = end;
+            continue;
+        }
+        // The name, then one particle that ends the run before a kanji, katakana or mark.
+        const text::Rune last = RuneBefore(whole, whole.size());
+        const std::string_view after = line.substr(end);
+        const bool closed = after.empty() || !IsHiragana(FirstRune(after).cp);
+        if (closed && whole.size() > last.size && InRunes(last.cp, "がはものをにとへ")) {
+            const std::string_view t = whole.substr(0, whole.size() - last.size);
+            const std::size_t n = RuneCount(t);
+            bool ok = n >= 2 && n <= 5 && !AllRunes(t, [&](char32_t c) { return c == FirstRune(t).cp; }) &&
+                      FirstRune(t).cp != U'お' && FirstRune(t).cp != U'ご';
+            for (std::size_t i = 0; ok && i < t.size(); i += RuneAt(t, i).size) {
+                ok = !InRunes(RuneAt(t, i).cp, "ぁぃぅぇぉっゎー");
+            }
+            if (ok && Flags(t).records == 0 && Flags(whole).records == 0) {
+                for (std::size_t e = RuneAt(t, 0).size; ok && e < t.size(); e += RuneAt(t, e).size) {
+                    if (RuneCount(t.substr(0, e)) >= 2 && Flags(t.substr(0, e)).records > 0) ok = false;
+                    if (RuneCount(t.substr(e)) >= 2 && Flags(t.substr(e)).records > 0) ok = false;
+                }
+                if (ok) out.push_back({std::string(t), true, last.cp});
+            }
+        }
+        start = end;
+    }
+    return out;
+}
+
+std::vector<Registry::LooseUse> Registry::LooseKanaUses(std::string_view line) {
+    std::vector<LooseUse> out;
+    std::vector<text::Rune> runes;
+    std::vector<std::size_t> at;
+    for (std::size_t i = 0; i < line.size();) {
+        const text::Rune r = RuneAt(line, i);
+        runes.push_back(r);
+        at.push_back(i);
+        i += std::max<std::size_t>(1, r.size);
+    }
+    auto hiragana = [&](std::size_t i) { return i < runes.size() && IsHiragana(runes[i].cp); };
+    auto candidate = [&](std::size_t from, std::size_t n) {
+        if (from + n >= runes.size()) return std::string();
+        for (std::size_t i = from; i < from + n; i++) {
+            if (!hiragana(i) || InRunes(runes[i].cp, "ぁぃぅぇぉゃゅょゎっゕゖ") || (i > from && runes[i].cp == runes[i - 1].cp)) {
+                return std::string();
+            }
+        }
+        if (!InRunes(runes[from + n].cp, "がはものをにとへ") || InRunes(runes[from].cp, "おご")) return std::string();
+        const std::string t(line.substr(at[from], at[from + n] - at[from]));
+        if (Flags(t).records > 0 || RoleLike(t) || dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), t)) {
+            return std::string();
+        }
+        // Not a name and its honorific (ゆうくん).
+        for (const std::string_view x : dict::ClassMembers(HDTRANS_CLASS("honorific.kana-name"))) {
+            if (t.size() > x.size() && std::string_view(t).ends_with(x)) return std::string();
+        }
+        // Not a word and a particle (ここが, それも) read whole.
+        const std::size_t lastSize = runes[from + n - 1].size;
+        if (InRunes(runes[from + n - 1].cp, "がはものをにとへでや") && Flags(std::string_view(t).substr(0, t.size() - lastSize)).records > 0) {
+            return std::string();
+        }
+        return t;
+    };
+    for (std::size_t i = 0; i < runes.size(); i++) {
+        if (!hiragana(i)) continue;
+        const bool start = i == 0 || (!hiragana(i - 1) && !IsKanji(runes[i - 1].cp) && !IsKatakana(runes[i - 1].cp) && runes[i - 1].cp != U'ー');
+        // Or after a case particle kana inside a run (僕とあいかは).
+        const bool inner = i > 0 && hiragana(i - 1) && InRunes(runes[i - 1].cp, "とのがはをにもへで");
+        if (!start && !inner) continue;
+        for (std::size_t n = 3; n <= 4; n++) {
+            const std::string t = candidate(i, n);
+            if (!t.empty()) out.push_back({t, start && !hiragana(i + n + 1), runes[i + n].cp});
+        }
+    }
+    return out;
+}
+
 std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
     std::vector<std::string> out;
     for (std::size_t pos = 0; pos < line.size(); pos += RuneAt(line, pos).size) {
@@ -873,7 +982,45 @@ std::vector<std::string> Registry::KanaHonorificNames(std::string_view line) {
             return (f.layerGiven || f.layerSurname) && !f.role && !f.thing &&
                    Flags(std::string(t) + std::string(h)).records == 0;
         };
+        // Kana no dictionary has, standing as the whole run before the honorific, which no word of two
+        // kana or more starts (みいちゃん, のんちゃん; spec LEX-4826): a name written as it is spelled.
+        auto unknown = [&](std::string_view t) {
+            const char32_t first = FirstRune(t).cp;
+            if (first == U'お' || first == U'ご' || !AllRunes(t, IsHiragana) || RoleLike(t) || Flags(t).records > 0 ||
+                InRunes(first, "はがをにともへでやの") || t.ends_with("っ") ||
+                dict::InClass(HDTRANS_CLASS("kana.kin-before-chan"), t)) {
+                return false;
+            }
+            // No form of a verb or adjective of the dictionary (いい先生: いい).
+            if (InflectedRun(t)) return false;
+            // No small vowel (あぁいう先生), no kana said twice in a row (ぐぬぬ先生) and no sound said twice
+            // (どくんどくん).
+            for (std::size_t b = 0; b < t.size(); b += RuneAt(t, b).size) {
+                if (InRunes(RuneAt(t, b).cp, "ぁぃぅぇぉゎ")) return false;
+                if (b > 0 && RuneAt(t, b).cp == RuneBefore(t, b).cp) return false;
+            }
+            const std::string withHonorific = std::string(t) + std::string(h);
+            if (withHonorific.size() % 2 == 0 && withHonorific.substr(0, withHonorific.size() / 2) == withHonorific.substr(withHonorific.size() / 2)) {
+                return false;
+            }
+            // No word ends in the honorific from inside the run (をたくさん: たくさん).
+            for (std::size_t b = 0; b < t.size(); b += RuneAt(t, b).size) {
+                if (Flags(std::string_view(withHonorific).substr(b)).records > 0) return false;
+            }
+            for (std::size_t e = RuneAt(t, 0).size; e < t.size(); e += RuneAt(t, e).size) {
+                if (e >= RuneAt(t, 0).size * 2 && Flags(t.substr(0, e)).records > 0) return false;
+            }
+            return true;
+        };
         bool found = false;
+        // The whole run, two to four kana after no kana, kanji or katakana, when no dictionary has it.
+        if (!afterWord) {
+            const std::size_t n = RuneCount(run);
+            if (n >= 2 && n <= 4 && unknown(run)) {
+                out.emplace_back(run);
+                continue;
+            }
+        }
         for (int k = 0; k < 2 && !run.empty(); k++) {
             const std::size_t n = RuneCount(run);
             const bool particle = IsParticleRune(FirstRune(run).cp);

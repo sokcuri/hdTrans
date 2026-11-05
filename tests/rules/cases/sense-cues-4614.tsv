@@ -1,0 +1,29 @@
+# 규칙: LEX-4614, LEX-4615
+rule	input	expected	kind	layer
+cx:sense-cues-1:149	「ビート・イット」（うせろ）って事だな	「비트·성적매력」(없어져라)라는 것이네	fix	rewrites
+cx:sense-cues-1:149	オレの勝ちって事で、文句ないよな。	내 승리라는 것으로, 불만 없지.	fix	rewrites
+cx:sense-cues-1:149	俺はダストボックス行きって事になった	나는 더스트 박스행이라는 일이 되었다	keep	rewrites
+cx:sense-cues-1:150	これが“好き”って事	이것이 “좋아”라는 것	fix	rewrites
+cx:sense-cues-1:150	つまり、彼は来ないってことだ	즉, 그는 오지 않는다는 것이다	keep	rewrites
+cx:sense-cues-1:152	はい…ふむふむ…ぁっ…そういう事ですか。なるほど…	네…흠흠…앗…그런 것입니까. 그렇구나…	fix	rewrites
+cx:sense-cues-1:152	「こういう事の解明をするのも俺達の仕事だからね！」	「이런 일 규명을 하는 것도 우리의 일이니까!」	keep	rewrites
+cx:sense-cues-1:154	「煽る？　なんのこと？」	「부추겨? 무슨 말?」	fix	rewrites
+cx:sense-cues-1:154	何のことだ？	무슨 말이야?	fix	rewrites
+cx:sense-cues-1:154	何のことを話しているの	무슨 것을 이야기해	keep	rewrites
+cx:sense-cues-1:156	桜庭が一つため息をついた。	사쿠라바가 한 번 한숨을 쉬었다.	fix	rewrites
+cx:sense-cues-1:156	親父さんは一つ小さく溜息をついた。	아버지는 한 번 작게 한숨을 쉬었다.	fix	rewrites
+cx:sense-cues-1:156	「なあ……一つだけ頼みがあるんだけど」	「나아……하나만 부탁이 있는데」	keep	rewrites
+cx:sense-cues-1:160	「やっ、ちょっと……」	「얏, 잠깐……」	fix	rewrites
+cx:sense-cues-1:160	ちょっと…疲れました。	조금…지쳤습니다.	keep	rewrites
+cx:sense-cues-1:160	そう思うと、ちょっと……いや、かなりうれしい。	그렇게 생각하면, 조금……아니, 꽤 기쁘다.	keep	rewrites
+cx:sense-cues-1:162	いっぱい、愛してね	많이, 사랑해	fix	rewrites
+cx:sense-cues-1:162	いっぱいスキンシップしてもらえて、嬉しいなあって	많이 스킨십해 줄 수 있어서, 기쁘다고	fix	rewrites
+cx:sense-cues-1:162	お腹いっぱい食べた	배불리 먹었다	keep	rewrites
+cx:sense-cues-1:162	涙がいっぱい溢れた	눈물이 많이 흘러넘쳤다	keep	rewrites
+dict:w:32606	今まで、本当に長いこと考えました	지금까지, 정말 오랫동안 생각했습니다	fix	lookup
+dict:w:32606	長い時間考えた	긴 시간 생각했다	keep	lookup
+dict:w:32608	「フランさえその気なら、オレから先生にかけあってみるぜ」	「프랑만 그럴 생각이라면, 나로부터 선생님에게 흥정해 본다」	fix	lookup
+dict:w:32608	その気になれば何でもできる	마음만 먹으면 뭐든 할 수 있다	keep	lookup
+cx:sense-cues-1:148	嘘だったってことか。	거짓말이었다는 건가.	fix	rewrites
+cx:sense-cues-1:148	本当だったって事？	사실이었다는 것?	fix	rewrites
+cx:sense-cues-1:148	来たってことか	왔다는 건가	keep	rewrites

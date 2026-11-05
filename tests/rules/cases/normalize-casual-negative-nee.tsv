@@ -46,8 +46,8 @@ normalize:casual-negative-nee	季節は秋ねー。	계절은 가을이네―.	k
 normalize:casual-negative-nee	ねぇ、長波ねぇ！	저기, 장파네!	keep	normalize
 normalize:casual-negative-nee	仕方ねぇな	어쩔 수 없네	keep	normalize
 normalize:casual-negative-nee	でもねー、それは	그런데―, 그것은	keep	normalize
-normalize:casual-negative-nee	血は一滴も流れてねえもん。	has:흐르지 않은 걸	fix	normalize
-normalize:casual-negative-nee	見てねえもん	has:보지 않은 걸	fix	normalize
+normalize:casual-negative-nee	血は一滴も流れてねえもん。	has:흐르지 않은걸	fix	normalize
+normalize:casual-negative-nee	見てねえもん	has:보지 않은걸	fix	normalize
 normalize:casual-negative-nee	ノーマルENDでも救いがねぇ！	has:구원이 없	fix	normalize
 normalize:casual-negative-nee	時間がねぇし	has:시간이 없고	fix	normalize
 normalize:casual-negative-nee	ここには何もねえぞ	has:없어	keep	normalize

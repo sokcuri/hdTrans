@@ -1658,6 +1658,11 @@ std::pair<std::string, bool> Composer::Spacing(int i, std::string t, std::string
             return Result(std::move(t), true);
         }
         if (nextKind == '1' && WidthOf(nextEntry) > 2) return Result(std::move(t), true);
+        // A pronoun in kanji after a name is a word of its own, also of one syllable (ノガッパ 拙者 노갓파 나).
+        if (nextKind == '1' && Code(next).starts_with("12") && IsKanji(FirstRune(next.surface)) &&
+            !Contains(nextTags, "Z7")) {
+            return Result(std::move(t), true);
+        }
     }
     if (kind == '1' && At(Code(item), 1) == '3' && nextKind == '1' && At(Code(next), 1) == '3') {
         return Result(std::move(t), true);

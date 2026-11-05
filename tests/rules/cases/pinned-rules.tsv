@@ -10,7 +10,7 @@ dict:jisjk:355685	この市場では新鮮な魚が安く買える。	rule:dict:
 dict:jisjk:6285	犬などの小さい動物がいる。	!rule:dict:jisjk:6285	fix	local
 dict:jisjk:6588	どんな感じの部屋ですか。	rule:dict:jisjk:6588=느낌	current	local
 dict:jisjk:266239	あたしの好きな色は青だよ。	rule:dict:jisjk:266239=(이)가	current	local
-dict:jisjk:115173	バスは学校へ進む。	rule:dict:jisjk:115173=진학&AV@	current	local
+dict:jisjk:115173	大学に進む	rule:dict:jisjk:115173=진학&AV@	current	local
 dict:jisjk:137573	この資料を前提に話を進めます。	rule:dict:jisjk:137573=진행시&AQ@	current	local
 dict:jisjk:341095	友達と英語で話す。	rule:dict:jisjk:341095=&AV@	current	local
 sense:高い	その服は高くないですよ。	그 옷은 비싸지 않아요.	current	senses
@@ -40,12 +40,12 @@ dict:jisjk:341736	値段より品質で選びます。	rule:dict:jisjk:341736=�
 dict:jisjk:4154	この問題について皆で話し合った。	rule:dict:jisjk:4154=(이)가	current	local
 dict:jisjk:342062	彼は犯人じゃないよ。	그는 범인이 아니야.	current	local-ending
 dict:jisjk:342185	買います品物が決まりました。	사는 물건이 정해졌습니다.	current	local-ending
-dict:jisjk:342197	食べてないと困る。	먹지 않았다고 곤란하다.	current	local-ending
+dict:jisjk:342197	食べてないと困る。	먹지 않으면 곤란하다.	current	local-ending
 dict:jisjk:342458	そんな話があるかっ！	그런 이야기가 있어!	current	local-ending
 dict:jisjk:342710	つまらないって人もいるけど私は好きだ。	시시하다는 사람도 있지만 나는 좋아한다.	current	local-ending
 dict:jisjk:343126	お送りしました資料をご確認ください。	보내 드렸던 자료를 확인해 주십시오.	current	local-ending
 dict:jisjk:343569	君もそう思うよねえ。	rule:dict:jisjk:343569=	current	local
-dict:jisjk:344514	電話ないし、メールで連絡する。	rule:dict:jisjk:344514=없고	current	local
+dict:jisjk:344514	電話ないし、メールで連絡する。	rule:dict:jisjk:344514= 없고	current	local
 dict:jisjk:266225	この辺りはとても静かだそうだ。	이 주위는 무척 조용하다고 한다.	current	local-ending
 dict:jisjk:345267	試験に合格するには努力が必要だ。	rule:dict:jisjk:345267= 	current	local
 dict:jisjk:346541	彼の自由に行動させた。	rule:dict:jisjk:346541=자유에	current	local
@@ -56,20 +56,20 @@ dict:jisjk:4092	走ったら足が速くなった。	달리자 발이 빨라졌�
 dict:jisjk:353400	毎日薬を飲んで欲しい。	rule:dict:jisjk:353400=$DE@	current	local
 dict:jisjk:355019	彼は話を聞かれた。	rule:dict:jisjk:355019=들&AA@	current	local
 dict:jisjk:358632	一日だけで終わる。	rule:dict:jisjk:358632=에만	current	local
-dict:jisjk:359335	分かったものの不安は残る。	안 것의 불안은 남는다.	current	local-ending
+dict:jisjk:359335	分かったものの不安は残る。	알았지만 불안은 남는다.	current	local-ending
 dict:jisjk:362124	はい、了解です。	rule:dict:jisjk:362124=%EF@	current	local
 sense:高い	値段は高いものの品質が良い。	가격은 비싸기는 하지만 품질이 좋다.	current	senses
 dict:jisjk:142505	彼は医者であり、作家でもある。	rule:dict:jisjk:142505=이기도 &Mf@	current	local
 dict:jisjk:364338	それが男というものさ。	rule:dict:jisjk:364338=(이)야	current	local
-dict:jisjk:364499	電話とかで話す。	rule:dict:jisjk:364499=등에서	current	local
+dict:jisjk:364499	マスコミとかで話す	rule:dict:jisjk:364499=등에서	current	local
 dict:jisjk:373336	今度友達と旅行に行きます。	rule:dict:jisjk:373336=이번에	current	local
 dict:jisjk:373524	早く寝ようという計画です。	빨리 자려는 계획입니다.	current	local-ending
 dict:jisjk:373549	天気がよくなくて残念だ。	날씨가 좋지 않아 유감이다.	current	local-ending
 dict:jisjk:4209	兄より弟の方が背が高い。	rule:dict:jisjk:4209=보다	current	local
 dict:jisjk:342560	右へどうぞ進んでください。	오른쪽으로 부디 진행해 주세요.	fix	local
-dict:jisjk:374896	犯人は彼とのことです。	rule:dict:jisjk:374896=(와)과의 일	current	local
+dict:jisjk:374896	彼とのことは忘れた	rule:dict:jisjk:374896=(와)과의 일	current	local
 dict:jisjk:375007	ステンレス流しを買う。	rule:dict:jisjk:375007=흘려 보내기	current	local
-dict:jisjk:375216	健康のため歩く。	rule:dict:jisjk:375216=이기 때문에	current	local
+dict:jisjk:375216	「なんだかんだで全部邪神のせいになる」という流れのため「痴呆」	has:라는 흐름 때문에 「치매」	fix	local
 dict:jisjk:92417	愚王の話を本で読んだ。	우왕 이야기를 책에서 읽었다.	current	local
 sense:見かける	駅で先生をお見かけしました。	역에서 선생님을 보았습니다.	current	senses
 dict:jisjk:3829	裏の通りを歩く。	뒤의 거리를 걷는다.	fix	local

@@ -1,0 +1,53 @@
+# 규칙: LEX-4831
+rule	input	expected	kind	layer
+names:layer-rows	………………私はあの少女の言葉を思い出していた。	………………나는 그 소녀의 말을 떠올리고 있었다.	fix	names
+names:layer-rows	千莉も赤い目をしていた。	천리도 붉은 눈을 하고 있었다.	fix	names
+names:layer-rows	「スポーツゲームとか格闘ゲームだな」	「스포츠 게임이라든지 격투 게임이네」	fix	names
+names:layer-rows	それとも、内部調査が動いてることに気付いて、内通者が連絡を絶ったのだろうか？	아니면, 내부 조사가 움직이고 있는 일을 알아차려, 내통자가 연락을 끊은 걸까?	fix	names
+names:layer-rows	大斧は鉄平の頭の天辺と額の角に当る部分に、ばっくりとめり込んだ。	대도끼는 텟페이 머리 꼭대기와 이마의 모퉁이에 해당되는 부분에, 밧쿠리와 처박혔다.	fix	names
+names:layer-rows	どうよ！オラオラ！	어떻게! 이봐 이봐!	fix	names
+names:layer-rows	フランが姿を消した後に、背後からナゾの視線を感じた俺はゆっくりと振り返る。	프랑이 자취를 감춘 후에, 뒤에서 수수께끼의 시선을 느낀 나는 천천히 돌아본다.	fix	names
+names:layer-rows	「オラオラ、どうしたザコども！！！！！！！」	「이봐 이봐, 무슨 일이야 자코들!!!!!!!」	fix	names
+names:layer-rows	…鬼ヶ淵死守同盟の会計監査の牧野氏と同一人物？）	…무서운 후치 사수 동맹의 회계감사의 마키노 씨와 동일 인물?)	fix	names
+names:layer-rows	なんとこれこそは…ジオン広告社が引き起こした独立戦争の幕開けだったのだッ！！」	무려 이것이야말로는…지온 관고사가 일으킨 독립전쟁 개막이었던 것이다!!」	fix	names
+names:layer-rows	…老人（牧野氏というらしい。	…노인(마키노 씨라는 것 같다.	fix	names
+names:layer-rows	……頭の悪い人は嫌いなタイプなんだろうなと思った。	……머리가 나쁜 사람은 싫어하는 타입이겠지라고 생각했다.	fix	names
+names:layer-rows	あの お色気で 下級生だけでなく	그 성적 매력으로 하급생뿐만이 아니라	fix	names
+names:layer-rows	お、ありがたい。サンキューな。	오, 고맙다. 땡큐.	fix	names
+names:layer-rows	なんかこう、巨大ロボとかが発進しそうな雰囲気だ。	왠지 이렇게, 거대 로봇이라든지가 발진할 것 같은 분위기다.	fix	names
+names:layer-rows	実際、格闘ゲームの中ではそういうキャラだというから仕方ない。	실제, 격투 게임 중에서는 그런 캐릭터라고 하니까 어쩔 수 없다.	fix	names
+names:layer-rows	「いえいえー、あの高笑いも格闘ゲームのキャラ設定そのままですから」	「아니오―, 그 큰 웃음도 격투 게임의 캐릭터 설정 그대로니까요」	fix	names
+names:layer-rows	「クズ女の独断専行が作戦行動を乱したという報告も受けているが」	「쓰레기녀 독단전행이 작전 행동을 어지럽혔다는 보고도 받고 있지만」	fix	names
+names:layer-rows	千里も同じ時代を思い出しているのか、わずかに目を細めた。	천리도 같은 시대를 떠올리고 있는지, 조금 눈을 가늘게 떴다.	fix	names
+names:layer-rows	料理名と、その料理がどのようなものかを解説する一文が載っている料理を見る。	요리명과, 그 요리가 어떠한 건지를 해설하는 일문이 실려 있는 요리를 본다.	fix	names
+names:layer-rows	≪全員に偽のスケジュールを伝えて内通者をあぶり出す予定だった……≫	≪전원에게 가짜의 스케줄을 전해 내통자를 굽기 시작할 예정이었다……≫	fix	names
+names:layer-rows	だが個人的な野次馬根性としては、彼女の研究ノートは読んでいて面白い。	하지만 개인적인 구경꾼 근성으로서는, 그녀의 연구 노트는 읽고 있어 재미있다.	fix	names
+names:layer-rows	「沙都子、こっちだよ！」	「사토코, 여기야!」	keep	names
+names:layer-rows	梨花ちゃんは笑った。	리카짱은 웃었다.	keep	names
+names:layer-rows	「魅音、待って！」	「미온, 기다려!」	keep	names
+names:layer-rows	佳奈すけが突っ込んでくる。	카나스케가 돌진해 온다.	keep	names
+names:layer-rows	開け 処女宮のトビラ。 バルゴ。	열고 처녀궁의 트비라. 바르고.	fix	names
+names:layer-rows	猫又 百鬼とは そんなに恐ろしい妖怪なのか？	늙은 고양이 백귀란 그렇게 무서운 요괴인가?	fix	names
+names:layer-rows	ﾎﾟｯﾎﾟさん｡	폽포 씨.	fix	names
+names:layer-rows	いえ… ﾎﾟｯﾎﾟさんを｡	아뇨… 폽포 씨를.	fix	names
+names:layer-rows	《そういえば こんなに あったかい言葉だったね ユメ先輩》	《그러고 보니 이렇게 따뜻한 말이었다 유메 선배》	fix	names
+names:layer-rows	２番コンテナ分離 30秒前 総員退避	2번 컨테이너 분리 30초 전 총원 대피	fix	names
+names:layer-rows	ソロシップとイデオンは 地球連合軍に引き渡してもらう	솔로 쉽과 이데온은 지구 연합군에 인도해 준다	fix	names
+names:layer-rows	これはペコポン存亡の危機でありますぞ	이것은 페코폰 존망의 위기입니다	fix	names
+names:layer-rows	モクバのもとへ向かいたければ	모쿠바의 곁으로 향하고 싶다면	fix	names
+names:layer-rows	新連邦と取り引きいたしました	신연방과 거래했습니다	fix	names
+names:layer-rows	けれど 百鬼の行いゆえに 人間と妖怪は 引き裂かれてしまったのです｡	하지만 백귀의 행동이기 때문에 인간과 요괴는 찢겨버렸습니다.	fix	names
+names:layer-rows	俺たちゃ 万事屋だ！	우리 만사가게야!	fix	names
+names:layer-rows	ゲリラになって 新連邦と戦う理由は 俺にはない	게릴라가 되어 신연방과 싸우는 이유는 나에게는 없다	fix	names
+names:layer-rows	その妖怪は 百鬼と名乗っておりましたが…｡	그 요괴는 백귀라고 자칭하고 있었습니다만….	fix	names
+names:layer-rows	炎のごとき情熱で 魔に侵された百鬼の鬼に ﾊﾞｰﾝとﾔｷを叩っこむ｡	불길과 같은 정열로 마에 침범된 백귀의 귀신에 쾅 야키를 때려 넣는다.	fix	names
+names:layer-rows	シェスカも ロゼッタと会いたいだろうし。	시에스카도 로제타와 만나고 싶을 테고.	fix	names
+names:layer-rows	足利将軍家は 室町という地に邸宅を置き 栄華を極めました｡	아시카가 쇼군가는 무로마치라는 땅에 저택을 둬 부귀영화를 누렸습니다.	fix	names
+names:layer-rows	ﾎﾟｯﾎﾟちゃん 今日も お休み？	폽포짱 오늘도 휴가?	fix	names
+names:layer-rows	セブンが 君たちのインプラントの 設計ミスをしたのは⸺	세븐이 자네들의 임플란트 설계 실수를 한 것은 ⸺	fix	names
+names:layer-rows	ありがとう キバゴ	고마워 터검니	keep	names
+names:layer-rows	頑張れ ユキワラシ	힘내라 눈꼬마	keep	names
+names:layer-rows	あたしも風紀委員になろうかな	나도 풍기위원이 될까	fix	names
+names:layer-rows	高野警部には 申し訳ないことをした	타카노 경감에게는 미안한 것을 했다	fix	names
+names:layer-rows	滝本警部が？ ああ	타키모토 경감이? 아	fix	names
+names:layer-rows	だったら滝本警部はなぜ 中原刑事の家宅捜索を？	그렇다면 타키모토 경감은 왜 나카하라 형사의 가택 수색을?	fix	names

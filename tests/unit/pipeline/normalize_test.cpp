@@ -357,6 +357,36 @@ HD_TEST(pipeline_spoken_forms) {
         {"一つしか食わんかったし。"sv, "一つしか食わんかったし。"sv},
         {"そういうとこ変わんないなぁ"sv, "そういうとこ変わんないなぁ"sv},
         {"それはできぬ相談でござる"sv, "それはできない相談でござる"sv},
+        {"拙者は知らぬ"sv, "拙者は知らない"sv},
+        {"わしにも分からぬ。"sv, "わしにも分からない。"sv},
+        {"言っても分からぬか？"sv, "言っても分からないのか？"sv},
+        {"行方が分からぬ"sv, "行方が分からぬ"sv},  // after が: 알 수 없다
+        {"知らぬ間に"sv, "知らぬ間に"sv},
+        {"見知らぬ人"sv, "見知らぬ人"sv},
+        {"知らぬわらわは"sv, "知らぬわらわは"sv},
+        {"ならぬ！"sv, "ならない！"sv},
+        {"戦わなくてはならぬ？"sv, "戦わなくてはならない？"sv},
+        {"見てはならぬ！"sv, "見てはならぬ！"sv},  // the prohibition
+        {"そうはならぬ"sv, "そうはならぬ"sv},
+        {"人ならぬ神"sv, "人ならぬ神"sv},
+        {"女子には分からんだろう"sv, "女子には分からないだろう"sv},
+        {"まだ終わらんじゃろう"sv, "まだ終わらないじゃろう"sv},
+        {"何も知らんかっただろ"sv, "何も知らなかっただろ"sv},
+        {"誰にもわからんじゃろ、今日"sv, "誰にもわからないだろ、今日"sv},
+        {"使えんだろ"sv, "使えんだろ"sv},  // a potential with るんだ said short
+        {"暗いしつまらんぞ"sv, "暗いしつまらないぞ"sv},
+        {"くだらん。"sv, "くだらない。"sv},
+        {"いらんよ"sv, "いらないよ"sv},
+        {"つまらんな"sv, "つまらないな"sv},
+        {"止まらんぞ"sv, "止まらないぞ"sv},
+        {"終わらん！"sv, "終わらない！"sv},
+        {"いらんなら"sv, "いらんなら"sv},
+        {"嘘やん！"sv, "嘘やん！"sv},
+        {"来たん？"sv, "来たん？"sv},
+        {"いかんでしょ"sv, "いかんでしょ"sv},
+        {"何なんだろう"sv, "何なんだろう"sv},
+        {"わかったんでしょう"sv, "わかったんでしょう"sv},
+        {"強盗さんでしょうか"sv, "強盗さんでしょうか"sv},
         {"させんなよ"sv, "させんなよ"sv},
         {"田中さん！"sv, "田中さん！"sv},
         {"ハズい"sv, "ハズい"sv},
@@ -370,6 +400,29 @@ HD_TEST(pipeline_spoken_forms) {
         {"血筋かしらねぇ、あんたも"sv, "血筋かしら、あんたも"sv},
         {"そういえば、どうしてかしらね？"sv, "そういえば、どうしてかしら？"sv},
         {"毎日どっかしらでイベント"sv, "毎日どっかしらでイベント"sv},
+    };
+    Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
+}
+
+// The short やだ of いやだ after kanji, katakana, の, と, も or もう, or with plain kana after it; not the や
+// ending a kana word, nor a やだ standing alone, which the phrase rows read.
+HD_TEST(pipeline_spoken_forms_short_iyada) {
+    const Case cases[] = {
+        {"絶対やだよ！"sv, "絶対いやだよ！"sv},
+        {"ウェルダンやだ"sv, "ウェルダンいやだ"sv},
+        {"こんなのやだよ"sv, "こんなのいやだよ"sv},
+        {"もうやだ、帰りたい"sv, "もういやだ、帰りたい"sv},
+        {"やだもう！"sv, "いやだもう！"sv},
+        {"やだって聞かない"sv, "いやだって聞かない"sv},
+        {"やだ！"sv, "やだ！"sv},
+        {"やだやだ"sv, "やだやだ"sv},
+        {"やだっやだっ"sv, "やだっやだっ"sv},
+        {"やだね。"sv, "やだね。"sv},
+        {"やだ何それ"sv, "やだ何それ"sv},
+        {"もーやだ"sv, "もーやだ"sv},
+        {"ひやひやだった"sv, "ひやひやだった"sv},
+        {"ろうやだ"sv, "ろうやだ"sv},
+        {"いやだ"sv, "いやだ"sv},
     };
     Check([](std::string_view text) { return SpokenForms(text, false); }, cases);
 }
@@ -679,6 +732,24 @@ HD_TEST(pipeline_rewrite_casual_held_toku) {
     HD_CHECK_EQ(RewriteCasual("言っとくが", runs), std::string("言っておくが"));
 }
 
+// A casual negative ねえ after a negative stem with more kana than Nee takes reads as ない where a verb of the
+// dictionary ends there in its dictionary form (GRM-3843); the particle after から or ですか stays.
+HD_TEST(pipeline_rewrite_casual_verb_nee) {
+    const auto verb = [](const void*, std::string_view text) {
+        for (const std::string_view v : {"見当たる", "止まる", "もらえる", "かる"}) {
+            if (text.ends_with(v)) return true;
+        }
+        return false;
+    };
+    RunLookup runs;
+    runs.dictionaryVerb = verb;
+    HD_CHECK_EQ(RewriteCasual("見当たらねぇな", runs), std::string("見当たらないな"));
+    HD_CHECK_EQ(RewriteCasual("止まらねえ", runs), std::string("止まらない"));
+    HD_CHECK_EQ(RewriteCasual("もらえねぇか", runs), std::string("もらえないか"));
+    HD_CHECK_EQ(RewriteCasual("ですからねえ。", runs), std::string("ですからねえ。"));
+    HD_CHECK_EQ(RewriteCasual("そうかねえ", runs), std::string("そうかねえ"));
+}
+
 HD_TEST(pipeline_rewrite_military_time) {
     const Case cases[] = {
         {"マルフタマルマル。夜です。"sv, "0200。夜です。"sv},
@@ -704,7 +775,11 @@ HD_TEST(pipeline_rewrite_military_time) {
         {"マルサン…マルマル！"sv, "0300！"sv},
         {"フタサン……マルマル……。"sv, "2300……。"sv},
         {"ヒトサンマルマル～フタマルマルマル"sv, "1300～2000"sv},
-        {"ヒトヨン、マル…ああ"sv, "ヒトヨン、マル…ああ"sv},
+        {"ヒトヨン、マル…ああ"sv, "14、マル…ああ"sv},
+        {"ヒトサン…あっ"sv, "13…あっ"sv},
+        {"ヒトヨンマル わ"sv, "140 わ"sv},
+        {"ヒトリで行く"sv, "ヒトリで行く"sv},
+        {"ヒトの子"sv, "ヒトの子"sv},
         {"現在時刻ヒトキュマルマル。"sv, "現在時刻1900。"sv},
         {"マルサン・・マルマル！"sv, "0300！"sv},
         {"ヒトフタマルマルゥ！"sv, "1200！"sv},
@@ -866,7 +941,7 @@ HD_TEST(pipeline_respell_old_forms) {
 HD_TEST(pipeline_respell_iteration_marks) {
     // Stand-ins for the dictionary: 時々 is a word, 星 a noun of its own.
     const WordHoldsRun words = [](const void*, std::string_view line, size_t at, size_t) {
-        return line.substr(at).starts_with("時々");
+        return line.substr(at).starts_with("時々") || line.substr(at).starts_with("等々");
     };
     const WordHoldsRun nouns = [](const void*, std::string_view line, size_t at, size_t end) {
         return line.substr(at, end - at) == "星";
@@ -884,6 +959,11 @@ HD_TEST(pipeline_respell_iteration_marks) {
         {"「ゝ」"sv, "「ゝ」"sv},
         {"ゝ"sv, "ゝ"sv},
         {"これは々です"sv, "これは々です"sv},
+        {"毎日々々"sv, "毎日毎日"sv},
+        {"一枚々々丁寧に"sv, "一枚一枚丁寧に"sv},
+        {"馬鹿々々しい"sv, "馬鹿馬鹿しい"sv},
+        {"人々々"sv, "人人人"sv},
+        {"鉢等々々"sv, "鉢等々々"sv},
     };
     for (const Case& c : cases) HD_CHECK_EQ(RespellIterationMarks(c.in, words, nouns, nullptr), std::string(c.want));
 }
@@ -891,7 +971,7 @@ HD_TEST(pipeline_respell_iteration_marks) {
 HD_TEST(pipeline_write_kin_terms) {
     const Case female[] = {
         {"お兄様！"sv, "오빠！"sv},
-        {"お兄様、俺は"sv, "お兄様、俺は"sv},
+        {"お兄様、俺は"sv, "兄さん、俺は"sv},  // a man's お兄様, read 형님 (spec LEX-4619)
         {"お姉ちゃんとお兄さま"sv, "언니と오빠"sv},
     };
     for (const Case& c : female) HD_CHECK_EQ(WriteKinTerms(c.in, true), std::string(c.want));
@@ -902,6 +982,32 @@ HD_TEST(pipeline_write_kin_terms) {
         {"お兄ちゃん、早く"sv, "お兄ちゃん、早く"sv},   // no cue: the dictionary's 오빠
     };
     for (const Case& c : male) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
+    // The words the dictionary reads for the other sex switch on a clear cue only (spec LEX-4619).
+    const Case other[] = {
+        {"兄さん、あたしも行くわよ"sv, "お兄ちゃん、あたしも行くわよ"sv},
+        {"兄は来ないわよ"sv, "お兄ちゃんは来ないわよ"sv},
+        {"お兄さんに会いに来たのかしら"sv, "お兄ちゃんに会いに来たのかしら"sv},
+        {"兄弟なのよ"sv, "兄弟なのよ"sv},                          // 兄 in a compound
+        {"兄さん、甘くねぇのよ"sv, "兄さん、甘くねぇのよ"sv},          // rough speech
+        {"兄の手、光の滴のような涙"sv, "兄の手、光の滴のような涙"sv},  // のよう is no cue
+        {"お姉ちゃん、俺も行くぜ"sv, "누나、俺も行くぜ"sv},
+        {"姉は俺の自慢だ"sv, "누나は俺の自慢だ"sv},
+        {"姉さん、僕も行く"sv, "姉さん、僕も行く"sv},                // 僕 is also a girl's
+        {"お兄、早く"sv, "お兄ちゃん、早く"sv},                      // お兄 alone is a sister's word
+        {"お兄様、早く"sv, "お兄様、早く"sv},
+        {"お兄、俺だ"sv, "お兄、俺だ"sv},
+        {"お兄様、俺はもう子供じゃないんだぜ"sv, "兄さん、俺はもう子供じゃないんだぜ"sv},
+    };
+    for (const Case& c : other) HD_CHECK_EQ(WriteKinTerms(c.in, false), std::string(c.want));
+    // In a document that shows a woman's speech elsewhere, a line with no cue of its own keeps the
+    // dictionary reading of 兄, 兄さん and 兄貴 (spec LEX-4619).
+    const Case neutral[] = {
+        {"兄が朝食を作っていた"sv, "兄が朝食を作っていた"sv},
+        {"「兄貴はもう出かけたよ」"sv, "「兄貴はもう出かけたよ」"sv},
+        {"兄さんは笑って答えた"sv, "兄さんは笑って答えた"sv},
+        {"兄さん、あたしも行くわよ"sv, "お兄ちゃん、あたしも行くわよ"sv},
+    };
+    for (const Case& c : neutral) HD_CHECK_EQ(WriteKinTerms(c.in, true), std::string(c.want));
     // A word that holds the kanji before the term and its first character (義姉) is left as written.
     const auto holds = [](const void*, std::string_view line, size_t at, size_t end) {
         const std::string_view word = line.substr(at, end - at);

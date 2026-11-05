@@ -1,0 +1,35 @@
+# 규칙: LEX-4720
+rule	input	expected	kind	layer
+segment:short-adjective-after-noun	でも 梓川が来てくれて ホントよかった。	하지만 아즈사강이 와 주어 진짜 좋았다.	fix	segment
+segment:short-adjective-after-noun	マリアにケガとかなくて ホントよかった。	마리아에 상처라든지 없어서 진짜 좋았다.	fix	segment
+segment:short-adjective-after-noun	ウーン ３４話よかったな～。	으음 34화 좋았네~.	fix	segment
+segment:short-adjective-after-noun	当時 仲よかった子と 今でも会ったりしてるのかな？	당시 사이 좋았던 아이와 지금도 만나거나 하고 있을까?	fix	segment
+segment:short-adjective-after-noun	えっ 凜ちゃんって正樹くんと あんなに仲よかったっけ？	어 린짱은 마사키 군과 그렇게 사이 좋았나?	fix	segment
+segment:short-adjective-after-noun	ほんと 来てよかったです｡ 音楽も 超よかったし｡	정말 와서 좋았습니다. 음악도 매우 좋았고.	fix	segment
+segment:short-adjective-after-noun	詩桜先輩が誉めるほど話の内容よかったんですか？	시사쿠라 선배가 칭찬하는 만큼 이야기의 내용 좋았습니까?	fix	segment
+segment:short-adjective-after-noun	でも １番よかったのはね	하지만 1번 좋았던 것은	fix	segment
+segment:short-adjective-after-noun	ミドリさんよかったよ～	미도리 씨 좋았어~	fix	segment
+segment:short-adjective-after-noun	「……ミートパイ、やっぱり焼いてくればよかったわ。	「……미트 파이, 역시 구워 오면 좋았어.	fix	segment
+segment:short-adjective-after-noun	それならよかった	그렇다면 좋았다	keep	segment
+segment:short-adjective-after-noun	君よかったら来て	너 괜찮다면 와	keep	segment
+segment:short-adjective-after-noun	ホントよくない	진짜 좋지 않다	keep	segment
+segment:short-adjective-after-noun	天気よくて	날씨 좋아서	keep	segment
+segment:short-adjective-after-noun	時間なかった	시간 없었다	keep	segment
+normalize:short-iyada	ひやひやだった	조마조마였다	keep	normalize
+normalize:short-iyada	ろうやだ！	감옥이야!	keep	normalize
+normalize:short-iyada	やだ！	싫어!	keep	normalize
+normalize:short-iyada	やだやだ	싫어 싫어	keep	normalize
+normalize:short-iyada	もーやだ沙理泣いちゃった	정말 싫어 사리 울어버렸다	keep	normalize
+normalize:short-iyada	やだ何それ怖い	싫어 뭐야 그거 무서워	keep	normalize
+normalize:short-iyada	ウェルダンやだ	웰던 싫다	fix	normalize
+normalize:short-iyada	石鹸(せっけん)やだー！	비누 싫어~!	fix	normalize
+normalize:short-iyada	レイン こんなのやだよ！	레인 이런 건 싫어!	fix	normalize
+normalize:short-iyada	〔そんなの 絶対やだよ！〕	〔그런 것 절대 싫어!〕	fix	normalize
+normalize:short-iyada	もっと一緒にいてくれないとやだぁ	좀 더 함께 있어 주지 않으면 싫다	fix	normalize
+normalize:short-iyada	その言い方、本当やだ	그 말투, 사실 싫다	fix	normalize
+normalize:short-iyada	…もうやだ、帰りたい。	…이제 싫다, 돌아가고 싶다.	fix	normalize
+normalize:short-iyada	やだもう！ あっ！ 覗くなよ！	싫다 이제! 앗! 들여다 보지 마!	fix	normalize
+normalize:short-iyada	どうしても山田君じゃないと やだって聞かなくて	아무래도 야마다 군이 아니라고 싫다고 듣지 않아서	fix	normalize
+normalize:short-iyada	「…や、やや、やだよ圭一くん、そんなのや…！」	「…야, 약간, 싫어 케이이치 군, 그런 것이나…!」	fix	normalize
+phrase:あらやだ	あらやだ 風邪かしら…｡	어머 싫어 감기일까….	fix	builtin-phrase
+phrase:あらやだ	あらやだ、私もウトウトしちゃった…。	어머 싫어, 나도 꾸벅꾸벅해버렸다….	fix	builtin-phrase

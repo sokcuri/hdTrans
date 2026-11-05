@@ -1,0 +1,35 @@
+# 규칙: LEX-4708, LEX-4709
+rule	input	expected	kind	layer
+normalize:short-military	ヒトサン…あっ、瑞鶴！	13…앗, 즈이카쿠!	fix	normalize
+normalize:short-military	ヒトヨンマル わ、危ないっ！	140 위, 위험해!	fix	normalize
+normalize:short-military	フタフタ…あら、赤城さん！	22…어머나, 아카기 씨!	fix	normalize
+normalize:short-military	ヒトリで行く	히토리로 간다	keep	normalize
+normalize:short-military	フタリで	후타리로	keep	normalize
+normalize:short-military	ヒトの子	사람의 아이	keep	normalize
+cx:notice-words-1:124	一三〇〇となりました。	1300이 되었습니다.	fix	rewrites
+cx:notice-words-1:124	一二〇〇です。	1200입니다.	fix	rewrites
+cx:notice-words-1:124	一人で行く	혼자서 간다	keep	rewrites
+cx:notice-words-1:124	二〇二五年	2025년	keep	rewrites
+normalize:tteNda	まあ いいや おいらさ バットってんだ よろしく	뭐 아니 저야 배트라고 한다 잘 부탁드립니다	fix	normalize
+normalize:tteNda	これは何ってんだ？	이것은 뭐라는 거야?	fix	normalize
+normalize:tteNda	言ってんだ	말하는 거야	keep	normalize
+normalize:anno	あたいは、戦いが終わっても……やることが、あんのによ……。	나는, 싸움이 끝나도……하는 것이, 있는 것에…….	fix	normalize
+normalize:anno	あんな人	저런 사람	keep	normalize
+lexical:sino-gloss	流石だね。	역시구나.	fix	lookup
+lexical:sino-gloss	精強「第十七駆逐隊」を編成せよ！	정예 「제17구축대」를 편성하라!	fix	lookup
+lexical:sino-gloss	そして彼女の船はあなたの惑星を去る	그리고 그녀의 배는 당신의 행성을 간다	fix	lookup
+lexical:sino-gloss	早急に対処する。	시급하게 대처한다.	fix	lookup
+lexical:sino-gloss	上品な女性	품위있는 여성	fix	lookup
+lexical:sino-gloss	唐突な話だ。	갑작스러운 이야기다.	fix	lookup
+lexical:sino-gloss	彼は絶句した。	그는 말을 잃었다.	fix	lookup
+lexical:sino-gloss	手品を披露する。	마술을 공개한다.	fix	lookup
+lexical:sino-gloss	異母の兄	이복의 형	fix	lookup
+lexical:sino-gloss	１日中 君を待ったよ	1일중 군을 기다렸어	keep	lookup
+lexical:sino-gloss	日中関係が悪化した。	일중 관계가 악화되었다.	keep	lookup
+lexical:marker	噂を言い散らす。	소문을 퍼뜨린다.	fix	lookup
+lexical:marker	声がうわずる。	목소리가 들뜬다.	fix	lookup
+lexical:marker	大成功を収めた。	대성공을 거두었다.	fix	lookup
+lexical:numeral-name	四万円	4만엔	fix	lookup
+lexical:numeral-name	「三式弾」と「九一式徹甲弾」	「3식탄」과「91식 철갑탄」	fix	lookup
+lexical:numeral-name	ただそれは…我らのためだけでやがりますか？一二三、湖衣	다만 그것은…우리들을 위해서 뿐입니까? 히후미, 코이	keep	lookup
+lexical:numeral-name	いらっしゃい 十三ちゃん	어서 오세요 주조짱	keep	lookup

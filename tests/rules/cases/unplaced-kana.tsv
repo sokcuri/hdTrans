@@ -50,7 +50,7 @@ lexical:spoken-words	かえりうちにする	has:반격	fix	lookup
 lexical:spoken-words	ワレトトモニ…エイエンニシズミナサイ……ッ！	has:나와 함께	fix	lookup
 lexical:spoken-words	野次馬の中にひとりわれ関せずという下女がいた	lacks:깨지고	fix	lookup
 lexical:spoken-words	皿がわれる	접시가 깨진다	keep	lookup
-pre-select:unplaced-head	まりやん！	마리잖아!	fix	pre-select
+pre-select:unplaced-head	まりやん！	마리얀!	fix	pre-select
 pre-select:unplaced-head	まりです。	마리입니다.	fix	pre-select
 pre-select:unplaced-head	ぬぺです。	누페입니다.	fix	pre-select
 pre-select:unplaced-head	ぽぺやん！	포페잖아!	fix	pre-select
@@ -79,3 +79,23 @@ pre-select:unplaced-head	殺しはやんねぇ。	lacks:잖아	keep	pre-select
 pre-select:unplaced-head	やんちゃな子供だった。	has:장난스러운 아이였다	keep	pre-select
 pre-select:unplaced-head	相変わらずやんちゃ	has:변함없이	keep	pre-select
 pre-select:unplaced-head	鼻がぽぺるまで	lacks:코가 까지	keep	pre-select
+pre-select:unplaced-run-after-noun	その時ぱんにゃの声がした	그 때 판냐의 목소리가 들렸다	fix	pre-select
+pre-select:unplaced-run-after-noun	昨日ぱんにゃを見た	어제 판냐를 보았다	fix	pre-select
+pre-select:unplaced-doubled-sound	わふわふした顔をしている。	has:와후와후	fix	pre-select
+pre-select:unplaced-doubled-sound	「私の耳をもふもふするのはやめていただけませんか、くすぐったいので。」	has:모후모후	fix	pre-select
+pre-select:unplaced-doubled-sound	《フフフッ ほどほどに あっぱれ あっぱれ》	has:앗파레	fix	pre-select
+pre-select:unplaced-run-after-noun	高峰ばりに手を合わす。	lacks:바리	keep	pre-select
+pre-select:unplaced-run-after-noun	スポーツ飲料のＣＭばりの爽やかさで、小太刀が立ち去った。	lacks:바리	keep	pre-select
+pre-select:unplaced-run-after-noun	視線を走らす。	lacks:라스	keep	pre-select
+pre-select:unplaced-run-after-noun	新参はROMってろ	lacks:테로	keep	pre-select
+pre-select:unplaced-run-after-noun	「まったく……ほら、美冬んちに行くわよっ！！」	lacks:치에	keep	pre-select
+pre-select:unplaced-run-after-noun	あんなに朝食べたのにもうお腹がすいてきちゃった。	lacks:베타	keep	pre-select
+pre-select:unplaced-run-after-noun	お前の為す術 全てが お前には視えぬのだな。	lacks:에누	keep	pre-select
+pre-select:unplaced-run-after-noun	「日本語ペラペラって条件付ければ？」	lacks:레바	keep	pre-select
+pre-select:unplaced-doubled-sound	ん、はぁむ…んむ、んむ…ちゅばちゅばっ、んっ…	lacks:츄바츄바,	keep	pre-select
+pre-select:unplaced-doubled-sound	ぎゅぎゅぎゅっと人混みに圧迫される。	lacks:규규	keep	pre-select
+pre-select:unplaced-doubled-sound	くｓっそそおおおおおおおお！！！	lacks:오오오오	keep	pre-select
+pre-select:unplaced-doubled-sound	あっ、ごちゅごちゅ当たってうっ	lacks:고츄고츄당	keep	pre-select
+pre-select:unplaced-run-after-noun	さっきからのらりくらりとビリを回避し続けている。	lacks:리쿠라리	keep	pre-select
+pre-select:unplaced-run-after-noun	「そう言えばＢＴさんは最近、殴りプリらしいにゃりね。」	lacks:라시이냐리	keep	pre-select
+pre-select:unplaced-run-after-noun	てーとく、んん～んぐんぐ	lacks:궁구	keep	pre-select

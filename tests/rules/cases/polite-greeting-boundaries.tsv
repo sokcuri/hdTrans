@@ -26,6 +26,6 @@ dict:greeting:polite-copula	御久しぶりです。	오랜만이에요.	keep	lo
 dict:greeting:polite-copula	お久しぶりですけど。	오랜만이에요이지만.	keep	local
 dict:greeting:polite-copula	お久しぶりですから。	오랜만이에요니까.	keep	local
 dict:greeting:polite-copula	お久しぶりですよね。	오랜만이에요군요.	keep	local
-dict:greeting:polite-copula	お久しぶりですが、元気ですか。	오랜만이에요입니다만, 건강합니까.	keep	local
+dict:greeting:polite-copula	お久しぶりですが、元気ですか。	오랜만이에요입니다만, 잘 지냅니까.	keep	local
 dict:greeting:polite-copula	お久しぶり。	!rule:dict:greeting:polite-copula	keep	local
 dict:greeting:polite-copula	お久しぶりですね。	!rule:dict:greeting:polite-copula	keep	local

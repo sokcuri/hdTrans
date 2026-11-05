@@ -1,0 +1,29 @@
+# 규칙: GRM-3755, LEX-4645
+rule	input	expected	kind	layer
+cx:notice-words-1:91	あの店のラーメン、めっちゃうまいって噂だよ	그 가게의 라면, 엄청 맛있다는 소문이야	fix	rewrites
+cx:notice-words-1:91	あの店のラーメン、うまいって噂だよ	그 가게의 라면, 맛있다는 소문이야	fix	rewrites
+cx:notice-words-1:91	この料理、めっちゃうまいな	이 요리, 엄청 맛있네	fix	rewrites
+cx:notice-words-1:91	この料理、すごくうまいな	이 요리, 정말 맛있네	fix	rewrites
+cx:notice-words-1:91	この料理はめっちゃうまい。	이 요리는 엄청 맛있다.	fix	rewrites
+cx:notice-words-1:91	この料理は本当にうまい。	이 요리는 정말 맛있다.	fix	rewrites
+cx:notice-words-1:91	この料理、マジでうまい！	이 요리, 진짜로 맛있어!	fix	rewrites
+cx:notice-words-1:91	母の料理がめっちゃうまい。	어머니의 요리가 엄청 맛있다.	fix	rewrites
+cx:notice-words-1:91	この店、ラーメンがかなりうまい。	has:라면이 꽤 맛있다	fix	rewrites
+cx:notice-words-1:91	この料理、うまいな	이 요리, 맛있네	keep	rewrites
+cx:notice-words-1:91	ここの酒はとてもうまい。	여기의 술은 무척 맛있다.	keep	rewrites
+cx:notice-words-1:91	彼は歌がうまい。	그는 노래가 능숙하다.	keep	rewrites
+cx:notice-words-1:91	彼は歌がめっちゃうまい。	그는 노래가 엄청 능숙하다.	keep	rewrites
+cx:notice-words-1:91	彼は歌がとてもうまい。	그는 노래가 무척 능숙하다.	keep	rewrites
+cx:notice-words-1:91	説明がすごくうまい。	설명이 정말 능숙하다.	keep	rewrites
+cx:notice-words-1:91	彼は一番うまい。	그는 제일 능숙하다.	keep	rewrites
+cx:notice-words-1:91	彼女の料理はうまい。	그녀의 요리는 맛있다.	keep	rewrites
+cx:notice-words-1:92	彼女は料理がうまい。	그녀는 요리가 능숙하다.	fix	rewrites
+cx:notice-words-1:92	彼女は料理がかなりうまい。	그녀는 요리가 꽤 능숙하다.	fix	rewrites
+cx:notice-words-1:92	彼は料理がめっちゃうまいらしい。	has:요리가 엄청 능숙한	fix	rewrites
+cx:notice-words-1:92	彼女の料理はうまい。	!rule:cx:notice-words-1:92	keep	rewrites
+cx:notice-words-1:92	母の料理がめっちゃうまい。	!rule:cx:notice-words-1:92	keep	rewrites
+cx:notice-words-1:92	この料理はめっちゃうまい。	!rule:cx:notice-words-1:92	keep	rewrites
+dict:jisjk:257416	「いいから、タオルちょうだいよ。めっちゃ濡れてるんだから」	has:엄청 젖어 있	fix	defaults
+dict:jisjk:257416	ミドリと松のコンビめっちゃよかった	has:콤비 엄청 좋았다	fix	defaults
+dict:jisjk:257416	「おぉ～っ、めっちゃ美人！」	has:엄청 미인!	fix	defaults
+cx:notice-words-1:91	料理をうまい方法で作る。	요리를 능숙한 방법으로 만든다.	keep	rewrites

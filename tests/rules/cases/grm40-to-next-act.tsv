@@ -1,0 +1,62 @@
+# 규칙: GRM-40
+rule	input	expected	kind	layer
+rewrite:past-sequence	彼は立ち上がると、部屋を出て行った。	그는 일어서고는, 방을 나갔다.	fix	rewrites
+rewrite:past-sequence	剣を抜くと、駆け出した。	검을 뽑자, 달리기 시작했다.	fix	rewrites
+rewrite:past-sequence	彼女は溜息をつくと、本を閉じた。	그녀는 한숨을 쉬고는, 책을 덮었다.	fix	rewrites
+rewrite:past-sequence	山本らは一礼するとソファーに腰をかけた。	has:목례하고는	fix	rewrites
+rewrite:past-sequence	彼はにっこりすると、手を振った。	has:방긋하고는	fix	rewrites
+rewrite:past-sequence	男はそうつぶやくと、海の方へ向き直った。	has:중얼거리고는	fix	rewrites
+rewrite:past-sequence	俺がそう言うと、犬はゆっくりと目を閉じた。	내가 그렇게 말하자, 개는 천천히 눈을 감았다.	fix	rewrites
+rewrite:past-sequence	頭を撫でると、彼女は嬉しそうに目を細めた。	has:쓰다듬자	fix	rewrites
+rewrite:past-sequence	佳奈を見ると、視線をあさっての方向に向けた。	has:보니	fix	rewrites
+rewrite:past-sequence	「彼は立ち上がると、部屋を出て行った」	has:일어서고는	fix	rewrites
+rewrite:past-sequence	俺は手早く弁当箱を引っ張り出すと、イスを引っ張って彼女らの輪に加わっていった。	has:끄집어내자	fix	rewrites
+rewrite:past-sequence	玄関を出て足を動かすと、少し視界が揺れた。	has:움직이니	fix	rewrites
+rewrite:past-sequence	振り返ると、そこに彼女がいた。	돌아보니, 거기에 그녀가 있었다.	keep	rewrites
+rewrite:past-sequence	部屋に入ると、誰もいなかった。	방에 들어가니, 아무도 없었다.	keep	rewrites
+rewrite:past-sequence	部屋に入ると、静かだった。	방에 들어가니, 조용했다.	keep	rewrites
+rewrite:past-sequence	外に出ると、雨が降っていた。	밖에 나오니, 비가 오고 있었다.	keep	rewrites
+rewrite:past-sequence	窓の外を見ると、雪が降っていた。	has:보니,	keep	rewrites
+rewrite:past-sequence	耳を澄ますと、鳥の声が聞こえた。	has:기울이니,	keep	rewrites
+rewrite:past-sequence	部室に近づくと、ドアが開いているのが目に入った。	has:가까워지니,	keep	rewrites
+rewrite:past-sequence	読み進めていくと、いくつか基本的なことがわかった。	has:나가니,	keep	rewrites
+rewrite:past-sequence	そう思うと、腕の中ののぞみが急に気になってきた。	has:생각하니,	keep	rewrites
+rewrite:past-sequence	彼女のそばに寄ると、砂に『架子』と書かれていた。	has:니, 모래에	keep	rewrites
+rewrite:past-sequence	ドアを開けると、そこには誰もいなかった。	문을 여니, 거기에는 아무도 없었다.	keep	rewrites
+rewrite:past-sequence	春になると、桜が咲く。	봄이 되면, 벚꽃이 핀다.	keep	rewrites
+rewrite:past-sequence	ボタンを押すと、音が鳴る。	버튼을 누르면, 소리가 울린다.	keep	rewrites
+rewrite:past-sequence	「ボタンを押すと、音が鳴る」	has:누르면,	keep	rewrites
+rewrite:past-sequence	寒いと、体が震えた。	추우면, 몸이 떨렸다.	keep	rewrites
+rewrite:past-sequence	毎朝起きると、顔を洗った。	has:일어나면,	keep	rewrites
+rewrite:past-sequence	彼は剣と盾を持った。	그는 검과 방패를 가졌다.	keep	rewrites
+rewrite:past-sequence	それでも、夕暮れになると子どもたちは必ずその前を通って家へ帰った。	has:황혼이 되면	keep	rewrites
+rewrite:past-sequence	すっきりすると、帰った。	개운하니, 돌아갔다.	keep	rewrites
+rewrite:past-sequence	すっきりすると、彼は帰った。	개운하니, 그는 돌아갔다.	keep	rewrites
+rewrite:past-sequence	はっきりすると、彼は頷いた。	확실하니, 그는 끄덕였다.	keep	rewrites
+rewrite:past-sequence	お腹が痛むと、横になった。	배가 아프니, 누웠다.	keep	rewrites
+rewrite:past-sequence	落ち着くと、彼は話し始めた。	침착하니, 그는 이야기를 시작했다.	keep	rewrites
+rewrite:past-sequence	落ち着くと、窓を開けた。	침착하니, 창을 열었다.	keep	rewrites
+rewrite:past-sequence	彼女は落ち着くと、口を開いた。	그녀는 침착하니, 입을 열었다.	keep	rewrites
+rewrite:past-sequence	すっきりすると、眠くなった。	개운하니, 졸려졌다.	keep	rewrites
+rewrite:past-sequence	一通り納得すると、彼もまたレナの姿を求め駆け出して行った。	has:납득하자	fix	rewrites
+rewrite:past-sequence	状況を確認すると、彼は頷いた。	has:확인하자	fix	rewrites
+rewrite:past-sequence	すっきりすると、気分がいい。	개운하면, 기분이 좋다.	keep	rewrites
+rewrite:past-sequence	落ち着くと、話す。	침착하면, 이야기한다.	keep	rewrites
+rewrite:past-sequence	そう尋ねると、ティルは目を瞬かせたのだった。	그렇게 묻자, 틸은 눈을 깜박였다.	fix	rewrites
+rewrite:past-sequence	俺たちはレナの持ってきてくれた麦茶で喉を潤すと、すっかり冷えてしまった汗を拭き、帰路についたのだった。	has:축이고는	fix	rewrites
+rewrite:past-sequence	俺は骨のずいまで我らが部活の恐ろしさを堪能すると、次回こそ魅音に一泡ふかせてやろうと心に誓うのだった。	has:즐기자	fix	rewrites
+rewrite:past-sequence	彼は立ち上がると、部屋を出て行ったのだった。	그는 일어서고는, 방을 나갔다.	fix	rewrites
+rewrite:past-sequence	剣を抜くと、駆け出したのだった。	검을 뽑자, 달리기 시작했다.	fix	rewrites
+rewrite:past-sequence	ドアを叩くと、中に入ったのであった。	문을 두드리자, 안에 들어왔다.	fix	rewrites
+rewrite:past-sequence	彼女は笑うと、手を振ったのでした。	has:웃고는	fix	rewrites
+rewrite:past-sequence	外から見ると、その姿は道化師そのものだった。	밖에서 보니, 그 모습은 어릿광대 그 자체였다.	keep	rewrites
+rewrite:past-sequence	部屋に入ると、静かだった。	방에 들어가니, 조용했다.	keep	rewrites
+rewrite:past-sequence	部屋に入ると、誰もいなかったのだった。	방에 들어가니, 아무도 없었다.	keep	rewrites
+rewrite:past-sequence	写真を取り出すと、彼女に見せた。	has:꺼내자	fix	rewrites
+rewrite:past-sequence	ご飯を作ると、食卓を整えた。	밥을 만들자, 식탁을 정돈했다.	keep	rewrites
+rewrite:past-sequence	「こうやって指摘すると、みなさんもおかしな話だと思われるでしょうが、これまで誰も問題にしてきませんでした」	has:지적하면,	fix	rewrites
+rewrite:past-sequence	そこを拾い読みしてみると、彼はにわかに気がついた。	has:보니,	keep	rewrites
+rewrite:past-sequence	目を開くと、桶側胴の鎧を着た若武者が自分のそばに立っているのを見た。	has:뜨니,	fix	rewrites
+rewrite:past-sequence	お雪は何心なく小梨平の方を仰ぐと、そこの坂道を、こちらへ人の下りて来るのを認めました。	has:우러러보니,	fix	rewrites
+rewrite:past-sequence	気づくと目の前につぐみがいた。	has:눈치채니	fix	rewrites
+rewrite:past-sequence	気がつくと、ベッドの上にいた。	has:정신을 차려 보니,	keep	rewrites

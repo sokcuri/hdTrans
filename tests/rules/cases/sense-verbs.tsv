@@ -22,7 +22,7 @@ dict:jisjk:364119	責任をもって対応する。	책임을 져 대응한다.	
 dict:jisjk:364119	時価をもって計算する。	시가로써 계산한다.	fix	local
 dict:jisjk:373295	パスタを茹でる。	파스타를 삶는다.	fix	local
 dict:jisjk:373295	中華麺を茹でる。	중화면을 삶는다.	keep	local
-dict:jisjk:115307	式典がすんだ。	식전이 끝났다.	fix	local
+dict:jisjk:115307	式典がすんだ。	의식이 끝났다.	fix	local
 dict:jisjk:115307	試験がすんだ。	시험이 끝났다.	keep	local
 dict:jisjk:267484	私にできる仕事だ。	내가 할 수 있는 일이다.	fix	local
 dict:jisjk:267484	彼にできる仕事だ。	그가 할 수 있는 일이다.	keep	local
@@ -31,7 +31,7 @@ dict:jisjk:267484	私にできません。	제가 할 수 없습니다.	fix	loca
 dict:jisjk:341799	友人について来る。	친구를 따라 온다.	fix	local
 dict:jisjk:341799	計画について話す。	계획에 대해 이야기한다.	keep	local
 dict:jisjk:341799	友人について話す。	친구에 대해 이야기한다.	keep	local
-dict:jisjk:90581	パンにソースをかけた。	빵에 소스를 끼얹었다.	fix	local
+dict:jisjk:90581	パンにソースをかけた。	빵에 소스를 뿌렸다.	fix	local
 dict:jisjk:90581	壁に時計をかけた。	벽에 시계를 걸었다.	keep	local
 dict:jisjk:93609	パンを焼いた。	빵을 구웠다.	fix	local
 dict:jisjk:93609	鍋で焼いた。	냄비로 구웠다.	keep	local
@@ -65,7 +65,7 @@ sense:早まる	判断が早まった。	판단이 성급하게 굴었다.	keep	
 sense:許される	入学を許された。	입학이 허락되었다.	fix	senses
 sense:許される	罪を許された。	죄가 용서되었다.	keep	senses
 sense:取り上げられる	切り札を取り上げられた。	비장의 카드를 빼앗겼다.	fix	senses
-sense:取り上げられる	ニュースで取り上げられた。	뉴스로 다루어졌다.	keep	senses
+sense:取り上げられる	ニュースで取り上げられた。	뉴스에서 다루어졌다.	keep	senses
 sense:触れる	犬に触れていた。	개에게 손을 대고 있었다.	fix	senses
 sense:触れる	法律に触れた。	법률에 저촉되었다.	keep	senses
 sense:寄せ付け	人を寄せ付けない。	사람을 접근시키지 않는다.	fix	senses

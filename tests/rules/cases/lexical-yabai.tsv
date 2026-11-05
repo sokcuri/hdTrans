@@ -19,7 +19,7 @@ cx:yabai-exclaim:10	「やばいよっ、またさっきのが来る！？」	�
 cx:yabai-exclaim:20	（ヤバイ、カツアゲされる！）	(큰일이다, 삥 뜯긴다!)	fix	rewrites
 cx:yabai-exclaim:20	「ヤバイ……ウチらの戦闘力の低さがばれてるっ」	「큰일이야……우리의 전투력의 낮음이 발각되고 있어」	fix	rewrites
 cx:yabai-exclaim:20	「あの刀持ったヤツ、マジでヤバイ」	「그 칼 든 녀석, 진짜로 위험해」	keep	rewrites
-cx:yabai-exclaim:5	「やばいわ、めっちゃ嬉しい！」	「대박이야, 굉장히 기뻐!」	fix	rewrites
+cx:yabai-exclaim:5	「やばいわ、めっちゃ嬉しい！」	「대박이야, 엄청 기뻐!」	fix	rewrites
 cx:yabai-exclaim:7	格好良すぎてやばいですね	너무 근사해 대박이네요	fix	rewrites
 cx:yabai-exclaim:5	やばい、可愛い	대박이다, 귀엽다	fix	rewrites
 cx:yabai-exclaim:7	かわいすぎてやばい	너무 귀여워 대박이다	fix	rewrites
@@ -27,7 +27,7 @@ cx:yabai-exclaim:7	強すぎてやばい奴	!rule:cx:yabai-exclaim:7	keep	rewrit
 cx:yabai-exclaim:7	やばい薬だろう	!rule:cx:yabai-exclaim:7	keep	rewrites
 dict:i:7790	「ここで会ったが百年目だ！」	「여기서 만난 이상 끝장이야!」	fix	lookup
 cx:hyakunen-me:10	お前の悪運も今日で百年目だ	네 악운도 오늘로 끝장이다	fix	rewrites
-cx:hyakunen-me:10	貴様の命も百年目だ！	네놈의 생명도 끝장이다!	fix	rewrites
+cx:hyakunen-me:10	貴様の命も百年目だ！	네놈의 목숨도 끝장이다!	fix	rewrites
 cx:hyakunen-me:10	創業百年目の老舗	!rule:cx:hyakunen-me:10	keep	rewrites
 cx:hyakunen-me:10	今年で百年目になる	!rule:cx:hyakunen-me:10	keep	rewrites
 cx:yabai-exclaim:10	ヤバい？ どうしよう	!rule:cx:yabai-exclaim:10	keep	rewrites

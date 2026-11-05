@@ -1,0 +1,53 @@
+# 규칙: GRM-3757, LEX-4713
+rule	input	expected	kind	layer
+cx:notice-words-1:132	「京太郎、京太郎……っ、また、来そう……っ、来る、来ちゃう……っ」	「교타로, 교타로……, 또, 올 것 같아……, 오는, 와버린다……」	fix	rewrites
+cx:notice-words-1:132	支障を来す	지장을 초래한다	keep	rewrites
+cx:notice-words-1:134	京太郎さんに、あっさり留学しろって言われるのが」	교타로 씨에게, 간단히 유학하라고 말을 듣는 것이」	fix	rewrites
+cx:notice-words-1:134	天才だと言われている。	천재라고들 하고 있다.	keep	rewrites
+cx:notice-words-1:135	と言われたくはない。	그런 말을 듣고 싶지는 않다.	fix	rewrites
+cx:notice-words-1:135	と言われた。	이렇게 말했다.	keep	rewrites
+cx:notice-words-1:136	突然、自分が欲しいなどと言われては、更にそこにあまり良くない意味合いが混じっていれば。	갑자기, 자신을 갖고 싶다는 둥 말을 들어서는, 더욱 거기에 그다지 좋지 않은 의미가 섞여 있으면.	fix	rewrites
+cx:notice-words-1:136	天才と言われている。	천재라고 불리고 있다.	keep	rewrites
+cx:notice-words-1:138	無理矢理聞かれて仕方なくなのっ！	억지로 질문을 받아 어쩔 수 없이야!	fix	rewrites
+cx:notice-words-1:138	名前を聞かれた。	이름을 물었다.	keep	rewrites
+cx:notice-words-1:139	俺も あの子のことを 見捨てられなかった	나도 그 아이를 버릴 수 없었다	fix	rewrites
+cx:notice-words-1:139	親に見捨てられなかった。	부모에게 버림받지 않았다.	keep	rewrites
+cx:notice-words-1:140	仲間を見捨てられるか！	동료를 버릴 수 있을까!	fix	rewrites
+cx:notice-words-1:140	親に見捨てられた。	부모에게 버림받았다.	keep	rewrites
+cx:notice-words-1:142	「ま、この方が自然だもんな」	「뭐, 이 편이 자연스럽잖아」	fix	rewrites
+cx:notice-words-1:142	そなたもあの方が心配で 堪らないのだな	그대도 그 분이 걱정이어서 견딜 수 없구나	keep	rewrites
+cx:notice-words-1:142	あの方が優しい人だ。	그 분이 다정한 사람이다.	keep	rewrites
+cx:notice-words-1:144	後で電話をいただけますか？	나중에 전화를 주실 수 있습니까?	fix	rewrites
+cx:notice-words-1:144	許可はいただけませんでした。	허가는 받을 수 없었습니다.	keep	rewrites
+cx:notice-words-1:145	お水をいただけませんか？	물을 주실 수 없습니까?	fix	rewrites
+cx:notice-words-1:145	許可はいただけませんでした。	허가는 받을 수 없었습니다.	keep	rewrites
+cx:notice-words-1:146	奴が10分で逃げ出すから、思うままにさせろ	놈이 10분에 도망가니까, 생각하는 대로 하게 두어라	fix	rewrites
+cx:notice-words-1:146	勉強するようにさせる	공부하도록 시킨다	keep	rewrites
+cx:notice-words-1:148	人質になっていただきます	인질이 되어 주셔야겠습니다	fix	rewrites
+cx:notice-words-1:148	来ていただきますか？	와 주시겠습니까?	keep	rewrites
+cx:notice-words-1:150	協力していただきます。	협력해 주셔야겠습니다.	fix	rewrites
+cx:notice-words-1:150	先生に教えていただきました。	선생님이 가르쳐 주셨습니다.	keep	rewrites
+cx:permission:58	「その前に一度……確認させてもらっていいかしら？」	「그 전에 한 번……확인해도 될까?」	fix	rewrites
+cx:permission:58	や、やっぱり！その、わたし、フミさんの寮に住まわせてもらっていて	여, 역시! 그, 나, 후미 씨의 기숙사에 살게 해 주고 있어	keep	rewrites
+cx:permission-verb:15	私も、少し食べさせてもらっていいですか？	저도, 조금 먹어도 됩니까?	fix	rewrites
+cx:permission-verb:15	子供に食べさせてあげて	아이에게 먹여 줘	keep	rewrites
+lexical:voice-row	「これがあれば、どこかに連れ去られても、場所は確認できるわ」	「이게 있으면, 어디엔가 끌려가도, 장소는 확인할 수 있어」	fix	lookup
+lexical:voice-row	「それにほら、お米も持ってもらってるし」	「게다가 자, 쌀도 들어 주고 있잖아」	fix	lookup
+lexical:voice-row	脅かしてやろうと思ったんだけど、逃げ足が速くてさ。校舎中を探し回ったんだけど逃げ切られた	위협해 주려고 했는데, 도망치는 발걸음이 빨라서. 교사 중을 찾아다녔는데 놓쳤다	fix	lookup
+lexical:voice-row	だからどうした。睦季にも私にも、お前たちに手出しはさせない	그래서 어쨌다는 거냐. 무츠미계에도 나에게도, 너희에게 손대게 두지 않는다	fix	lookup
+lexical:reading	奥の間で、武田の衆と次の戦について談合している。	안쪽 방에서, 타케다의 사람들과 다음 전에 대해 담합하고 있다.	fix	lookup
+lexical:reading	しかし取り巻き達は庶民の主人公が皇帝に近づく事が許せず	하지만 추종자들은 서민의 주인공이 황제에게 다가가는 것이 용서하지 못하고	fix	lookup
+lexical:reading	出来の良すぎる婚約者といると、自分の至らなさを見せつけられるようでとても居心地が悪い。	됨됨이가 너무 좋은 약혼자와 있으면, 자신의 미흡함을 보게 되는 것 같아서 무척 지내기가 불편하다.	fix	lookup
+lexical:reading	「あ、でも、おふたりは、お茶よりコーラの方がいいんでしたっけ？」	「아, 하지만, 두 사람은, 차 보다 콜라가 좋았던가요?」	fix	lookup
+lexical:reading	「素の私を好きだって言ってくれる人たちが、傍にいてくれる」	「있는 그대로의 나를 좋아한다고 말해 주는 사람들이, 옆에 있어 준다」	fix	lookup
+lexical:reading	発生した魔素の塊に、リンクした魂。	발생한 마소의 덩어리에, 링크한 영혼.	keep	lookup
+lexical:reading	要素の一つ	요소의 하나	keep	lookup
+lexical:reading	新しい時代も来そうだし……。	새로운 시대도 올 것 같고…….	fix	lookup
+cx:notice-words-1:141	「エルはもう連れ去られてしまった。今更どうやって？」	「엘은 벌써 끌려가버렸다. 이제 와서 어떻게?」	keep	rewrites
+cx:notice-words-1:141	≪彼女を連れ去られてしまっては、何百万の命が失われる≫	≪그녀가 끌려가버려서는, 몇백만의 생명이 없어진다≫	fix	rewrites
+lexical:humble-causative	御社へ伺わせていただきます。	귀사에 방문하겠습니다.	fix	lookup
+lexical:humble-causative	明日伺わせていただきます。	내일 방문하겠습니다.	fix	lookup
+lexical:humble-causative	お話を伺わせてください	이야기를 듣게 해 주세요	fix	lookup
+cx:notice-words-1:148	人質になっていただきます。	인질이 되어 주셔야겠습니다.	keep	rewrites
+lexical:reading	「お母さん、ルーっていつ入れるの？」	「엄마, 루는 언제 넣는 거야?」	fix	lookup
+lexical:reading	もう入れるよ	이제 들어갈 수 있어	keep	lookup

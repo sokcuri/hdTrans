@@ -1,0 +1,23 @@
+# 규칙: GRM-3836
+rule	input	expected	kind	layer
+protect:katakana-predicate	「それがマジなのよ。なんだかズルイわよね」	「그게 진짜야. 왠지 치사해」	fix	protect
+protect:katakana-predicate	「デモ、ほんとうにヨカッタの？」	「데모, 정말로 좋았어?」	fix	protect
+protect:katakana-predicate	気持ちイイか？	기분 좋은가?	fix	protect
+protect:katakana-predicate	こういう田舎の 雰囲気がイイねぇ	이런 시골의 분위기가 좋네	fix	protect
+protect:katakana-predicate	イイ男にイイ女はつきものさ	좋은 남자에게 좋은 여자는 으레 따르는 것이야	fix	protect
+protect:katakana-predicate	野球ってシンドイなあ	야구는 힘들구나	fix	protect
+protect:katakana-predicate	「チョロイ連中ね」	「아주 쉬운 무리네」	fix	protect
+protect:katakana-predicate	あんなバカデカイ岩を押したせいだ。	저런 엄청나게 큰 바위를 누른 탓이다.	fix	protect
+protect:katakana-predicate	「いいからジッとしてろ」	「됐으니까 가만히 해라」	fix	protect
+protect:katakana-predicate	テレフォンでも伝えマシタね。	텔레폰이라도 전했어요.	fix	protect
+protect:katakana-predicate	監視しているのかもしれマセン	감시하고 있는지도 모릅니다	fix	protect
+protect:katakana-predicate	施しを与えるはずデスからね	자선을 줄 것이니까요	fix	protect
+protect:katakana-predicate	どういう意味デスか？	무슨 뜻입니까?	fix	protect
+protect:katakana-predicate	ここ美浜の校舎内ッスよ	여기 미하마의 교사내예요	keep	protect
+protect:katakana-predicate	アオイ！	아오이!	keep	protect
+protect:katakana-predicate	ミドリ！	미도리!	keep	protect
+protect:katakana-predicate	タイの"マンコ"と結婚	타이의"보지"와 결혼	keep	protect
+protect:katakana-predicate	一マス進む	1매스 나아간다	keep	protect
+protect:katakana-predicate	…何か俺のコマだけ堅実なマスにしか止まらないぞ？！	…뭔가 내 팽이만 견실한 매스밖에 멈추지 않아?!	keep	protect
+protect:katakana-predicate	デス・スターは予定通り 完成いたします	데스 스타는 예정대로 완성됩니다	keep	protect
+protect:katakana-predicate	カナリはクロノスの在処に関する情報を手に入れていたのか。	카나리는 크로노스의 있는 곳에 관한 정보를 손에 넣고 있던 건가.	keep	protect

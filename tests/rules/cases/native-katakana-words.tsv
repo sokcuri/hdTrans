@@ -1,0 +1,22 @@
+# 규칙: LEX-4823
+rule	input	expected	kind	layer
+lex:native-katakana	ねぇ、今日はドコ寄ってく？	저기, 오늘은 어디 다가가?	fix	protect
+lex:native-katakana	エッ？あなた…ソノ手……？	엣? 당신…그 손……?	fix	protect
+lex:native-katakana	マダマダ……ッ！ニガシハ……シナイヨッ！	아직도……! 에가 하지는……하지 않아!	fix	protect
+lex:native-katakana	「エルより強いよ。ヨロシクねっと」	「엘보다 강해. 잘 부탁해 와」	fix	protect
+lex:native-katakana	司令、今年もヨロシクなっ！	사령관, 올해도 잘 부탁해!	fix	protect
+lex:native-katakana	ホンキデ……ヤッテ…ヤルゼッ！	진심으로……해…준다!	fix	protect
+lex:native-katakana	「……ホンキ」	「……진심」	fix	protect
+lex:native-katakana	ここまで読んできたけど、ミドリはエセ霊能力者	여기까지 읽어 왔지만, 미도리는 사이비 영능력자	fix	protect
+lex:native-katakana	私の研究のマネゴトだ	내 연구의 흉내다	fix	protect
+lex:native-katakana	サイコーの友達(ともだち)ね	최고의 친구네	fix	protect
+lex:native-katakana	ね、サイコーでしょ？	저기, 최고지?	fix	protect
+lex:native-katakana	イタイッ…ドウシテ…	이타잇…왜…	fix	protect
+lex:native-katakana	「おー、なんかイラついてるわねぇー……アノ日？」	「오오, 왠지 화가 나~……그 날?」	fix	protect
+lex:native-katakana	一瞬、コヨイがこちらを見る。	순간, 코요이가 이쪽을 본다.	keep	protect
+lex:native-katakana	カナリがインカムの向こうで沈黙する。	카나리가 인컴 저편에서 침묵한다.	keep	protect
+lex:native-katakana	カナタは、夕日を見ながら、そう嘆いた。	카나타는, 석양을 보면서, 그렇게 한탄했다.	keep	protect
+lex:native-katakana	ミナトやカケルは無理でも、	미나토나 카케루는 무리여도,	keep	protect
+lex:native-katakana	《さあ どうする？ サクラ》	《자 어떻게 해? 사쿠라》	keep	protect
+lex:native-katakana	ソノさんが来た。	소노 씨가 왔다.	keep	protect
+lex:native-katakana	ドコモの店に行った。	도코모의 가게에 갔다.	keep	protect

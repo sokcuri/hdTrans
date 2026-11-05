@@ -44,6 +44,8 @@ bool Titled(std::string_view text, std::string_view key) {
         const std::string_view after = text.substr(at + key.size());
         if (before.ends_with("艦")) return true;
         if (dict::StartsWithMember(HDTRANS_CLASS("honorific.person-title"), after) > 0) return true;
+        // A rank after a surname (滝本警部; spec LEX-4831).
+        if (text::RuneCount(key) >= 2 && dict::StartsWithMember(HDTRANS_CLASS("name.rank-after"), after) > 0) return true;
         i = at + key.size();
     }
 }
@@ -272,14 +274,19 @@ std::unique_ptr<DocumentContext> BuildDocument(const dict::Snapshot& snap, std::
         maleKin = maleKin || speech.maleKin;
         quoted = quoted || speech.quoted;
         for (const names::NameCue& c : CuesOf(*doc, line)) {
-            if (c.strong) doc->cued.insert(c.key);
-            if (c.recurring) recurring[c.key]++;
+            if (c.strong || c.person) doc->cued.insert(c.key);
+            if (c.recurring || c.acted) recurring[c.key]++;
         }
     }
     std::vector<const names::HistoricalLine*> historical;
     for (const names::HistoricalLine& h : historicalLines) historical.push_back(&h);
     for (const auto& [key, count] : recurring) {
         if (count >= 2) doc->cued.insert(key);
+    }
+    // The parts of a full name the document writes (古手梨花) name the person alone too (梨花は; spec
+    // LEX-4829).
+    for (const std::string& key : r.FullNameParts()) {
+        if (!snap.NameRecords(key).empty()) doc->cued.insert(key);
     }
     doc->female = female && !maleKin;
     doc->key = doc->registryKey;

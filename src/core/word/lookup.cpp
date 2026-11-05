@@ -386,6 +386,20 @@ bool Worker::EndRowFits(const dict::UserEntry& u, std::string_view query) const 
             return IsDigit(b) || IsAlpha(b);
         };
         if (!wordBefore()) return false;
+        // After a person's name of the name layer, やん is the nickname -やん (まりやん 마리얀), not the
+        // Kansai ending (学生やん 학생이잖아; spec GRM-3832).
+        if (u.key.starts_with("やん")) {
+            std::string_view head = left.substr(0, static_cast<std::size_t>(before));
+            // The name fills its kana run: two characters or more after a break, not the tail of a
+            // predicate (関係あるんやん).
+            for (int n = 0; n < 6 && !head.empty(); n++) {
+                const std::size_t cut = head.size() - DecodeLastRune(head).size;
+                const char32_t prior = cut > 0 ? DecodeLastRune(left.substr(0, cut)).cp : U' ';
+                const bool start = !(prior >= U'ぁ' && prior <= U'ゖ') && !(prior >= U'ァ' && prior <= U'ヺ') && !text::IsKanji(prior);
+                if (n >= 1 && start && snapshot.NamePerson(left.substr(cut, static_cast<std::size_t>(before) - cut))) return false;
+                head = head.substr(0, cut);
+            }
+        }
         bool particleRow = true;
         for (const std::string_view c : {"だ", "で", "じゃ", "や"}) {
             if (u.key.starts_with(c)) particleRow = false;
@@ -532,11 +546,40 @@ bool Worker::KanaWord(const dict::UserEntry& u, std::string_view query) const {
     case kClassHiragana:
         // な and がら after it are the ながら of a verb stem (みながら 보면서).
         if (u.key.ends_with("な") && rest.starts_with("がら")) return false;
-        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query);
+        return Has(kKanaAfter, next) || KanaBeforeCopula(u, query) || KanaBeforeDe(u, rest);
     case kClassKanji:
         return dict::InClass(HDTRANS_CLASS("word.kana-before-word"), u.key);
     }
     return text::RuneCount(u.key) >= 3;
+}
+
+// Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name layer
+// does not hold as a person, is followed by the particle で (このへんで, ぶんざいで; LEX-4721): not where the
+// key without a last い or ん is the stem of a godan verb whose て form that で ends (およいで, ならんで), as
+// for the copula だ (KanaBeforeCopula), nor after a last ま or の, whose まで or ので it is (こうまで), nor where
+// the end of the key and で are a word of their own (みたところで).
+bool Worker::KanaBeforeDe(const dict::UserEntry& u, std::string_view rest) const {
+    const std::string_view pc = u.codes->partText;
+    if (!rest.starts_with("で") || text::RuneCount(u.key) < 3 || pc.size() < 2 || (pc[1] != '1' && pc[1] != '8') ||
+        snapshot.NamePerson(u.key)) {
+        return false;
+    }
+    const std::string_view last = LastChar(u.key);
+    // The まで and ので its last kana starts with that で ends (こうまで, not 仔馬 + で), and a word of the
+    // dictionary that the end of the key and で spell (みたところで, ところで).
+    if (last == "ま" || last == "の") return false;
+    for (std::size_t at = 0; at < u.key.size(); at += text::DecodeRune(std::string_view(u.key).substr(at)).size) {
+        const std::string tail = std::string(u.key.substr(at)) + "で";
+        if (text::RuneCount(tail) >= 3 && !snapshot.RetrieveRecords(tail, dict::LookupMode::General).empty()) return false;
+    }
+    const std::string_view rows = last == "い" ? "2" : last == "ん" ? "56<" : "";
+    if (rows.empty()) return true;
+    const std::string_view stem = std::string_view(u.key).substr(0, u.key.size() - last.size());
+    for (const dict::Candidate& c : snapshot.RetrieveRecords(stem, dict::LookupMode::General)) {
+        const std::string_view vp = c.codes->partText;
+        if (vp.size() == 4 && vp[1] == '4' && Has(rows, vp.substr(3, 1))) return false;
+    }
+    return true;
 }
 
 // Whether the kana spelling u, a noun or adjectival noun of three letters or more that the name
@@ -945,7 +988,7 @@ bool Worker::SentenceFinal(std::string_view rest, int token, bool comma) const {
     // The punctuation that may follow a sentence-final predicate in its token, and the
     // small kana that only lengthen or stop its last sound (書くなっ, 来たぁ).
     static constexpr std::string_view kClosing[] = {"。", "．", "！", "？", "…", "‥", "・", "」", "』", "）", "～",
-                                                    "ー", "―", "—", "─", "♪", "♡", "♥", "❤", "☆", "★", "／", ".", "!", "?", "っ", "ッ",
+                                                    "ー", "―", "—", "─", "♪", "♡", "♥", "❤", "☆", "★", "／", "≫", "》", "】", "〉", "＞", ".", "!", "?", "っ", "ッ",
                                                     "ぁ", "ぃ", "ぅ", "ぇ", "ぉ", "ァ", "ィ", "ゥ", "ェ", "ォ"};
     auto closing = [](std::string_view t) {
         while (!t.empty()) {
@@ -1125,10 +1168,9 @@ bool OwnedGroup(const Group* g) { return g != nullptr && !g->entries.empty() && 
 bool Worker::MatchDictionary(std::string_view following, std::string_view source, char first, char second) {
     std::string query;
     for (const ValidityRule& r : ValidityRules()) {
-        const std::string_view rs = r.source;
-        if (rs.starts_with("XX")) {
-            if (r.sourceClass != first) continue;
-        } else if (first != r.sourceClass || second != r.followClass || rs != source) {
+        if (r.sourceClass != first) continue;
+        // A source of XX applies to every word of its class.
+        if ((r.source[0] != 'X' || r.source[1] != 'X') && (second != r.followClass || std::string_view(r.source) != source)) {
             continue;
         }
         std::string_view list = r.first;

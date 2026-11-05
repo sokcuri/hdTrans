@@ -1,0 +1,45 @@
+# 규칙: GRM-3720, GRM-3726, GRM-3727, GRM-3728, LEX-4603, LEX-4604
+rule	input	expected	kind	layer
+dict:jisjk:264511	静かにしないと、本気で怒るよ？	조용하게 하지 않으면, 정말로 화내?	fix	local-ending
+dict:jisjk:264511	静かにしないと、怒るよ	조용하게 하지 않으면, 화내	fix	local-ending
+dict:jisjk:264511	きれいにしないと、母に叱られる	예쁘게 하지 않으면, 어머니에게 야단맞는다	keep	local-ending
+dict:jisjk:264511	高いと、本気で怒る	높다고, 정말로 화낸다	keep	local-ending
+cx:benefactive-provider:10	私は母に本を読んでもらえた。	나는 어머니가 책을 읽어 주었다.	fix	rewrites
+cx:benefactive-provider:10	彼に助けてもらえた	그가 도와 주었다	fix	rewrites
+cx:benefactive-provider:10	彼に助けてもらえない。	그가 도와 주지 않는다.	fix	rewrites
+cx:benefactive-provider:10	ありがとうございます。先輩に聞いてもらえて、すごくすっきりしました！	감사합니다. 선배가 들어 주고, 정말 개운했습니다!	fix	rewrites
+cx:benefactive-provider:10	まぁ あんたに そう言ってもらえるの その… うれしいわよ。	뭐 네가 그렇게 말해 줄 수 있는 것 그… 기뻐.	fix	rewrites
+cx:benefactive-provider:10	病気や怪我をすれば医師に診てもらえ、少々の娯楽を楽しめる	병이나 다치면 의사가 진찰해 줄 수 있어, 조금 오락을 즐길 수 있다	fix	rewrites
+cx:benefactive-provider:10	誰かに手伝ってもらえますか？	누군가에게 도움을 받을 수 있습니까?	keep	rewrites
+cx:benefactive-provider:10	彼にも手伝ってもらえない	그에게도 도움을 받을 수 없다	keep	rewrites
+cx:benefactive-provider:20	「……やはり自分には与えてもらえないのですね。」	「……역시 자신에게는 주어 주지 않는군요.」	keep	rewrites
+cx:meaning-flips-1:100	母に買ってもらいたい。	어머니가 사주었으면 좋겠다.	fix	rewrites
+cx:meaning-flips-1:100	先生に教えてもらいたい	선생님이 가르쳐 주었으면 좋겠다	fix	rewrites
+cx:meaning-flips-1:100	これを買ってもらいたい	이것을 사주었으면 좋겠다	fix	rewrites
+cx:meaning-flips-1:100	手紙を書いて貰いたい	편지를 써 주었으면 한다	fix	rewrites
+cx:meaning-flips-1:100	本を買ってあげたい	책을 사 주고 싶다	keep	rewrites
+cx:meaning-flips-1:100	手伝ってやりたい	도와 주고 싶다	keep	rewrites
+cx:meaning-flips-1:100	これを貰いたい。	이것을 받고 싶다.	keep	rewrites
+dict:jisjk:344514	今日、部活ないし、暇なんだってばー！	오늘, 동아리 없고, 시간이야는 정말~!	fix	local
+dict:jisjk:344514	わあ！お腹空いてたんだよね～！でも時間ないし、諦めてたのに！	와아! 배고팠지~! 하지만 시간 없고, 포기했었는데!	fix	local
+dict:jisjk:344514	顔 隠れてるか 隠し撮りで ボヤけてるかでさ 意味ないし	얼굴 숨어 있어 은폐 촬영으로 투덜댈 수 있어로 의미 없고	fix	local
+dict:jisjk:344514	あたし他の掲示板で慣らしてるからカキコ抵抗ないしｗ	나 다른 게시판에서 길들이고 있으니 글쓰기 저항 없고 ㅋ	fix	local
+dict:jisjk:344514	金もないし、暇もない	돈도 없고, 시간도 없다	keep	local
+dict:jisjk:6280	三ないし五人	3 내지 다섯 명	fix	local
+dict:jisjk:6280	二年ないし三年かかる	2년 내지 3년 걸린다	fix	local
+dict:jisjk:6280	電話ないしメールで	전화 내지 메일로	fix	local
+dict:jisjk:359335	分かったものの不安は残る。	알았지만 불안은 남는다.	fix	local-ending
+dict:jisjk:359335	え～？ もっと手の込んだものの ほうがいいのではなくて？	에에~? 좀 더 공들인 것의 편이 좋은 것이 아니야?	keep	local-ending
+dict:jisjk:359335	買ったものの、使わない。	샀지만, 쓰지 않는다.	keep	local-ending
+dict:jisjk:359335	見たものの中で一番だ	본 것의 중에서 제일이다	keep	local-ending
+dict:jisjk:374896	犯人は彼とのことです。	범인은 그라는 것입니다.	fix	local
+dict:jisjk:374896	彼とのことは忘れた	그와의 일은 잊었다	keep	local
+dict:jisjk:342397	先生が本を説明された。	선생님이 책을 설명하셨다.	keep	local
+dict:jisjk:342397	問題が説明された。	문제가 설명되었다.	keep	local
+dict:jisjk:342485	嫌がらせをされた。	괴롭힘을 당했다.	keep	local
+dict:jisjk:342485	先生が電話をされた。	선생님이 전화를 하셨다.	keep	local
+dict:jisjk:365756	彼に本を読んでもらった。	그가 책을 읽어 주었다.	keep	local
+dict:jisjk:114918	友人とする相談です。	친구와 하는 상담입니다.	keep	local
+dict:jisjk:341733	彼は起きていないで、寝ていた。	그는 깨지 않고, 자고 있었다.	keep	local
+dict:jisjk:344512	寒いといったらありはしない。	춥기 짝이 없다.	keep	local
+dict:jisjk:263606	教えていただくことになった	가르쳐 주시게 되었다	keep	local

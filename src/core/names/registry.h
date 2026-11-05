@@ -89,6 +89,11 @@ public:
 
     // The accepted surfaces, in byte order.
     std::vector<std::string> Names();
+    // The surname and given name of each full name the document writes as one kanji run,
+    // each of one to three kanji with a person row of the name layer (古手梨花: 古手, 梨花; spec LEX-4829):
+    // the document means the person where it writes either alone. A part of one kanji counts only when it
+    // is no common word.
+    std::vector<std::string> FullNameParts();
     // The accepted surfaces that are names only before an honorific (Name::honorificOnly).
     std::vector<std::string> HonorificOnlyNames();
     // Whether t is an accepted name or stands where a name stands in the lines added.
@@ -145,6 +150,24 @@ private:
     std::string HonorificRun(std::string_view line, const internal::Run& run);
     bool NoNounWord(std::string_view t);
     std::vector<std::string> KanaHonorificNames(std::string_view line);
+    // The runs of two to five kana in line that no dictionary has and that stand where a name does:
+    // a whole run of hiragana after no kana, kanji or katakana, before が, は, も, の, を, に, と or へ and
+    // then no hiragana (みいは自分の); not with a long mark, a small vowel or tsu, or one kana said over
+    // (spec LEX-4826).
+    // A use of kana where a name stands, and the particle after it.
+    struct LooseUse {
+        std::string t;
+        bool closed = false;
+        char32_t particle = 0;
+    };
+    std::vector<LooseUse> FreeKanaNames(std::string_view line);
+    // The uses in line of three or four kana that no dictionary has, before a particle, where the
+    // sub-word check of FreeKanaNames does not hold: the run of kana of a name whose halves are words
+    // (spec LEX-4828). A use that starts a run and whose particle closes it is closed; one after a case
+    // particle inside a run, or one with hiragana after its particle, is open.
+    std::vector<LooseUse> LooseKanaUses(std::string_view line);
+    // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
+    bool InflectedRun(std::string_view t);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool LayerReading(std::string_view t);
@@ -175,6 +198,9 @@ private:
     // reading before its transliteration.
     std::string RenderPart(std::string_view t, bool whole = false);
     std::string PersonName(std::string_view t);
+    // Whether a guessed reading of the kanji run t is kept out: the document writes it once only, it
+    // names a shop, or its last kanji and 様 are a word (皆一様).
+    bool GuessedNameBlocked(std::string_view t);
     // The word of x in the name-layer person reading of an accepted chain name
     // (ミレイユ・ベルクロア 미레유 베르크로아) that has x as a part and a word per part,
     // so that x reads alike in the chain and alone; "" for none.
@@ -196,6 +222,15 @@ private:
     std::map<std::string, std::string> actors_;         // script actor variables
     std::map<std::string, int> hon_;                    // surfaces before an honorific
     std::map<std::string, int> kanaHon_;                // hiragana name-layer persons before an honorific
+    std::map<std::string, int> kanaFree_;               // unknown hiragana runs where a name stands (FreeKanaNames)
+    std::map<std::string, int> kanaBare_;               // the closed uses of those runs before は, を or へ
+    struct Loose {
+        int closed = 0;
+        int open = 0;
+        int bare = 0;  // closed uses before は, を or へ
+        std::set<char32_t> particles;
+    };
+    std::map<std::string, Loose> kanaLoose_;            // LooseKanaUses
     std::map<std::string, int> gloss_;                  // surfaces with a kana gloss or ruby
     std::map<std::string, std::string> reading_;        // first gloss or ruby reading
     std::map<std::string, int> runs_;                   // kanji runs
@@ -210,6 +245,10 @@ private:
     std::set<std::string> siblings_;                    // SiblingNames, valid while scoresValid_
     std::map<std::string, std::string> numbered_;       // numbered names to their name, valid while scoresValid_
     bool scoresValid_ = false;
+    unsigned scoresBuilt_ = 0;  // the times scores_ was built
+    // The accepted names by first rune, longest first, as of build byFirstBuilt_ of scores_.
+    std::map<char32_t, std::vector<std::string>> byFirst_;
+    unsigned byFirstBuilt_ = 0;
 };
 
 // The labels of the speaker cues of text: a name at a line start followed by 「, です,

@@ -154,6 +154,14 @@ HD_TEST(pipeline_segment_rules) {
     HD_CHECK(!internal::KanaSpace("かがやく おでこ", std::string("かがやく").size()));
     HD_CHECK(!internal::KanaSpace("基本操作 について", std::string("基本操作").size()));
     HD_CHECK(!internal::KanaSpace("だよ  ", std::string("だよ").size()));
+    // A predicate before a pronoun that opens a phrase (GRM-3834).
+    HD_CHECK(internal::KanaSpace("分かってる 僕とティナを", std::string("分かってる").size()));
+    HD_CHECK(internal::KanaSpace("あった 俺は刑事", std::string("あった").size()));
+    HD_CHECK(!internal::KanaSpace("落ちてきた 私の運命", std::string("落ちてきた").size()));
+    HD_CHECK(!internal::KanaSpace("きさまという やつは", std::string("きさまという").size()));
+    HD_CHECK(!internal::KanaSpace("言ってる あいつらと", std::string("言ってる").size()));
+    HD_CHECK(!internal::KanaSpace("好きなんだ お前…", std::string("好きなんだ").size()));
+    HD_CHECK(!internal::KanaSpace("持ってる 攻撃を", std::string("持ってる").size()));
 
     HD_CHECK(internal::BetweenWords("第一章　完", std::string("第一章").size()));
     HD_CHECK(!internal::BetweenWords("猫　犬", std::string("猫").size()));

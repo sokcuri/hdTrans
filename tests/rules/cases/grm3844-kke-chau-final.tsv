@@ -1,0 +1,13 @@
+# 규칙: GRM-3844
+rule	input	expected	kind	layer
+lookup:kke-chau-final	愛乃亜って、昔からこんなに偉そうでしたっけ？	아이노아는, 옛날부터 이렇게 거만했던가요?	fix	lookup
+lookup:kke-chau-final	寂しそうでしたっけ？	외로워 보였던가요?	fix	lookup
+lookup:kke-chau-final	元気でしたっけ	건강했던가요	fix	lookup
+lookup:kke-chau-final	そうでしたっけ？	그랬던가요?	keep	lookup
+lookup:kke-chau-final	雨が降りそうでしたっけ	비가 올 것 같았던가요	fix	lookup
+lookup:kke-chau-final	だって、ハマっちゃったんだもん	그치만, 빠져버렸는걸	fix	lookup
+lookup:kke-chau-final	目移りしちゃうわよね	눈 지나 해버리지	fix	lookup
+lookup:kke-chau-final	やだ、私どんどん強くなっちゃうわね。	싫어, 나 점점 강해져버리네.	fix	lookup
+lookup:kke-chau-final	行っちゃうわよ	가버릴 거야	keep	lookup
+lookup:kke-chau-final	名前、何でしたっけ？	이름, 뭐였죠?	keep	lookup
+lookup:kke-chau-final	何だっけ	뭐였더라	keep	lookup

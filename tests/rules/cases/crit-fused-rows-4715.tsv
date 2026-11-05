@@ -1,0 +1,39 @@
+# 규칙: LEX-4715
+rule	input	expected	kind	layer
+cx:notice-words-1:156	もし コペルニクスの元に戻りー	만약 코페르니쿠스의 곁으로 돌아가~	fix	rewrites
+cx:notice-words-1:156	じきに元に戻るでしょ	곧 원래대로 돌아가겠지	keep	rewrites
+cx:notice-words-1:158	ただ少し死の国に旅立つ方のお手伝いができるだけなのです	다만 조금 죽음의 나라에 여행을 떠나는 편의 조력이 할 수 있을 뿐인 것입니다	fix	rewrites
+cx:notice-words-1:158	できるだけ早く来て	가능한 한 빨리 와	keep	rewrites
+cx:notice-words-1:160	それでも 指環はその主の物になる	그래도 반지는 그 주인의 것이 된다	fix	rewrites
+cx:notice-words-1:160	形にしないと物にならないからね	형태로 하지 않으면 쓸모 있게 되지 않으니까	keep	rewrites
+cx:notice-words-1:161	...それが何物にも変えられない物になる	...그것이 무엇에도 바꿀 수 없는 것이 된다	fix	rewrites
+cx:notice-words-1:161	この刀は物になる	이 칼은 쓸모 있게 된다	keep	rewrites
+lexical:fused-row	俺はティラナスという 男に雇われたんだ	나는 티라나스라는 남자에게 고용된 거야	fix	lookup
+lexical:fused-row	スーツと呼び名が要るな	슈트와 호칭이 필요하구나	fix	lookup
+lexical:fused-row	恋愛とか勉強とか 家族のこととか	연애라든지 공부라든지 가족의 일이라든지	fix	lookup
+lexical:fused-row	手に吸い付きそうなほどになめらかな肌	손에 달라붙을 것 같을 정도로 매끈매끈한 피부	fix	lookup
+lexical:fused-row	そういう意味じゃ、人は誰でも、誰かにとっての羊飼いになれるのかもしれない。	그런 의미는, 사람은 누구라도, 누군가에게 있어 양치기가 될 수 있을지도 모른다.	fix	lookup
+lexical:fused-row	今思い出したけど、それで警戒心を抱かなかったのかも？	지금 생각해 냈지만, 그래서 경계심을 품지 않았던 걸지도?	fix	lookup
+lexical:fused-row	「でも、羊飼いがメールくれたなら、喜んでいいんじゃないの？	「하지만, 양치기가 메일 줬다면, 기뻐해도 되는 거 아니야?	fix	lookup
+lexical:fused-row	お兄ちゃんが満足するまで愛していいから	오빠가 만족할 때까지 사랑해도 되니까	fix	lookup
+lexical:fused-row	足がクサそう！」	다리가 냄새가 날 것 같아!」	fix	lookup
+lexical:fused-row	「こうしたら楽しくなりそう！」	「이렇게 하면 즐거워질 것 같아!」	fix	lookup
+lexical:fused-row	どうかなさいましたか、マスター？	무슨 일 있으십니까, 마스터?	fix	lookup
+lexical:fused-row	大丈夫な訳ないよね	괜찮은 리가 없지	fix	lookup
+lexical:fused-row	でも、さっきの言葉は本当ですからね？	하지만, 조금 전의 말은 사실이니까요?	fix	lookup
+lexical:fused-row	なにかと思えば。まあ、幸せそうなのはなによりだが	뭔가 했더니. 뭐, 행복한 것은 다행이지만	fix	lookup
+lexical:fused-row	「一週間も様子見れば大体の方向性はわかるだろ」	「일주일도 지켜보면 대개의 방향성은 알지」	fix	lookup
+lexical:fused-row	なぜ用済みのキミを体よく処分しなかったのか	왜 쓸모없어진 너를 그럴듯하게 처분하지 않았던 건가	fix	lookup
+lexical:fused-row	私、先輩からいただいてばかりですね。	저, 선배에게서 받고만 있네요.	fix	lookup
+lexical:fused-row	隠密作戦をいちいち命令書付きでやるのか	은밀 작전을 일일이 명령서 첨부로 하는 건가	fix	lookup
+lexical:fused-row	暴力大革命を起こす。	폭력 대혁명을 일으킨다.	fix	lookup
+lexical:fused-row	私が鳥海です。	제가 초카이입니다.	fix	lookup
+lexical:fused-row	疲労からか、二人とも無言になる。	피로때문인지, 두 사람 모두 무언이 된다.	keep	lookup
+lexical:fused-row	剣丞、と呼び捨てにさせて頂きます	검승, 이라고 불러 버리기에 하겠습니다	keep	lookup
+lexical:fused-row	じきに元に戻るでしょ	곧 원래대로 돌아가겠지	keep	lookup
+lexical:fused-row	誰かに聞こえちゃったでしょうか？	누군가에게 들려버렸다입니까?	keep	lookup
+lexical:fused-row	様子見するつもりでしたが	관망할 생각이었지만	keep	lookup
+lexical:fused-row	喜んでいる。	기뻐하고 있다.	keep	lookup
+lexical:fused-row	それはどうかな？	그것은 어떨까?	keep	lookup
+cx:notice-words-1:162	あとねあとね。お昼に教えてもらったのは	그리고네 나머지네. 점심에 가르쳐 준 것은	fix	rewrites
+cx:notice-words-1:162	先生に教えてもらいたい	선생님이 가르쳐 주었으면 좋겠다	keep	rewrites

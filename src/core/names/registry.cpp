@@ -1,4 +1,5 @@
 #include "core/names/registry.h"
+#include "core/names/given.h"
 
 #include <algorithm>
 #include <array>
@@ -536,6 +537,17 @@ void Registry::Add(std::string_view rawLine) {
         }
     }
     for (const std::string& t : KanaHonorificNames(line)) count(kanaHon_, t);
+    const auto bare = [](char32_t p) { return p == U'は' || p == U'を' || p == U'へ'; };
+    for (const LooseUse& u : FreeKanaNames(line)) {
+        count(kanaFree_, u.t);
+        if (bare(u.particle)) count(kanaBare_, u.t);
+    }
+    for (const LooseUse& u : LooseKanaUses(line)) {
+        Loose& l = kanaLoose_[u.t];
+        (u.closed ? l.closed : l.open)++;
+        if (u.closed && bare(u.particle)) l.bare++;
+        l.particles.insert(u.particle);
+    }
     // A line that is a name alone, a speaker line before a quote, names the speaker of the
     // quote.
     const std::string_view body = TrimSpace(line);
@@ -619,6 +631,36 @@ std::vector<std::string> Registry::Names() {
     return out;
 }
 
+std::vector<std::string> Registry::FullNameParts() {
+    std::set<std::string> out;
+    for (const auto& [t, c] : runs_) {
+        (void)c;
+        if (!AllRunes(t, IsKanji) || RuneCount(t) < 3 || RuneCount(t) > 6) continue;
+        const DictFlags ft = Flags(t);
+        // A common word or a place (竜宮城) is no full name.
+        if (ft.common || ft.place || ft.city) continue;
+        bool whole = false;
+        if (snap_ != nullptr) {
+            for (const dict::Record& rec : snap_->NameRecords(t)) whole = whole || (rec.codes != nullptr && rec.codes->sem.HasPrefix("QPN"));
+        }
+        for (std::size_t at = RuneAt(t, 0).size; at < t.size(); at += RuneAt(t, at).size) {
+            const std::string x = t.substr(0, at), y = t.substr(at);
+            if (RuneCount(x) > 3 || RuneCount(y) > 3) continue;
+            const DictFlags fx = Flags(x), fy = Flags(y);
+            if (!fx.layerSurname || !fy.layerGiven || fy.role) continue;
+            // The name layer writes the whole run as a person (古手梨花 후루데 리카), or the given name is no
+            // common word (竜宮礼奈: 礼奈); not two common words (砂糖菓子: 菓子).
+            if (!whole && fy.common) continue;
+            // A part of one kanji needs the whole run written as a person (見目麗しい: 見目 and 麗 are no name).
+            if (!whole && (RuneCount(x) == 1 || RuneCount(y) == 1)) continue;
+            // A part of one kanji names the person alone only when it is no common word (林 숲, 誠 진심).
+            if (RuneCount(x) >= 2 || !fx.common) out.insert(x);
+            if (RuneCount(y) >= 2 || !fy.common) out.insert(y);
+        }
+    }
+    return {out.begin(), out.end()};
+}
+
 std::vector<std::string> Registry::HonorificOnlyNames() {
     std::vector<std::string> out;
     for (const auto& [t, n] : Accepted()) {
@@ -671,11 +713,40 @@ const std::map<std::string, Name>& Registry::Accepted() {
         }
         Name& n = all[t];
         n.score += static_cast<double>(std::min(c, kHonorificCap)) * w;
+        // A kanji name no dictionary has stands for the person after one honorific, as it is no
+        // word a bare use could mean (千莉ちゃん … 千莉は; spec LEX-4827).
+        if (f.records == 0 && AllRunes(t, IsKanji) && !GuessedNameBlocked(t) && !internal::GuessedName(t).empty()) n.score += 1;
         n.person = true;
     }
     for (const auto& [t, c] : kanaHon_) {
         Name& n = all[t];
         n.score += static_cast<double>(std::min(c, kHonorificCap));
+        // Kana no dictionary has stand for the person after one honorific (みいちゃん … みいは; spec
+        // LEX-4826): they are no word a bare use could mean.
+        if (Flags(t).records == 0) n.score += 1;
+        n.person = true;
+    }
+    // Kana no dictionary has that the document writes three times or more where a name stands, before a
+    // particle and a word (みいは自分の, みいが来た), are a name there too (spec LEX-4826).
+    // Kana whose halves are words (あい, いか) need more: five uses or more before two particles or more,
+    // three of them a whole run closed by its particle; the uses after a particle inside a run and those
+    // with kana after the particle count once those three are there (spec LEX-4828).
+    // A run that is also a verb or adjective form of the dictionary (しのぶ: 忍ぶ) may be one before の, が, と
+    // or に (a nominaliser, but, if, to): it needs two closed uses before は, を or へ, which no plain predicate
+    // form takes, before the counts apply. Not も, which also ends names (やくも: やく and も).
+    const auto inflectedOk = [&](const std::string& t, int bare) { return bare >= 2 || !InflectedRun(t); };
+    std::set<std::string> free;
+    for (const auto& [t, c] : kanaFree_) {
+        const auto b = kanaBare_.find(t);
+        if (c >= 3 && inflectedOk(t, b == kanaBare_.end() ? 0 : b->second)) free.insert(t);
+    }
+    for (const auto& [t, l] : kanaLoose_) {
+        if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2 && inflectedOk(t, l.bare)) free.insert(t);
+    }
+    for (const std::string& t : free) {
+        if (Flags(t).records > 0) continue;
+        Name& n = all[t];
+        n.score += kThreshold;
         n.person = true;
     }
     for (const auto& [t, c] : gloss_) {
@@ -910,6 +981,10 @@ const std::map<std::string, Name>& Registry::Accepted() {
             // the threshold for a common word (ひかり), and it is no predicate form (あおいさん,
             // but あおい空).
             const auto k = kanaHon_.find(t);
+            if (k == kanaHon_.end() && free.count(t) != 0 && n.score >= need && Flags(t).records == 0) {
+                scores_[t] = n;
+                continue;
+            }
             if (k == kanaHon_.end()) {
                 // A name given in parentheses (Add) stands alone.
                 if (gloss_.count(t) != 0 && n.score >= need) scores_[t] = n;
@@ -955,6 +1030,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
             SplitReading(n.parts[0], n.parts[1], kana);
         }
     }
+    scoresBuilt_++;
     return scores_;
 }
 
@@ -1241,14 +1317,18 @@ std::string Registry::Key() {
 }
 
 std::vector<Occurrence> Registry::Occurrences(std::string_view line) {
-    const std::map<std::string, Name> acc = Accepted();
+    const std::map<std::string, Name>& acc = Accepted();
     std::vector<Occurrence> out;
     if (acc.empty()) return out;
-    std::map<char32_t, std::vector<std::string>> byFirst;
-    for (const auto& [t, n] : acc) byFirst[RuneAt(t, 0).cp].push_back(t);
-    for (auto& [c, list] : byFirst) {
-        std::stable_sort(list.begin(), list.end(), [](const std::string& a, const std::string& b) { return a.size() > b.size(); });
+    if (byFirstBuilt_ != scoresBuilt_) {
+        byFirst_.clear();
+        for (const auto& [t, n] : acc) byFirst_[RuneAt(t, 0).cp].push_back(t);
+        for (auto& [c, list] : byFirst_) {
+            std::stable_sort(list.begin(), list.end(), [](const std::string& a, const std::string& b) { return a.size() > b.size(); });
+        }
+        byFirstBuilt_ = scoresBuilt_;
     }
+    const std::map<char32_t, std::vector<std::string>>& byFirst = byFirst_;
     const std::vector<Run> runs = RunsOf(line);
     auto okRight = [&](std::string_view p) {
         if (p.empty() || acc.count(std::string(p)) > 0) return true;

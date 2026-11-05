@@ -1,6 +1,6 @@
 # 규칙: GRM-3200, GRM-3201, GRM-3202, GRM-3203, GRM-3204, LEX-3701
 rule	input	expected	kind	layer
-dict:lex:tteba-imperative	「出てけっ！　オラ、出てけってば！」	「나가라! 오라, 나가라니까!」	fix	lookup
+dict:lex:tteba-imperative	「出てけっ！　オラ、出てけってば！」	「나가라! 이봐, 나가라니까!」	fix	lookup
 dict:lex:tteba-imperative	ちょっと、その手を離せってば！	잠깐, 그 손을 떼어 놓으라니까!	fix	lookup
 dict:lex:tteba-imperative	「いいからどけってば！」	「됐으니까 비키라니까!」	fix	lookup
 dict:lex:tteba-imperative	起きろってば！	일어나라니까!	fix	lookup

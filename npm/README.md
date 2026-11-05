@@ -108,7 +108,7 @@ Files and stdin are UTF-8. `--file` is an alias of `--in`. `--out` writes the re
 
 ## License
 
-Copyright (c) Sokcuri (https://github.com/sokcuri). Licensed under MPL-2.0, see `LICENSE`. Dependency licenses are in `THIRD-PARTY-NOTICES.txt`. Source and dictionary updates are available at [sokcuri/hdTrans](https://github.com/sokcuri/hdTrans).
+Copyright (c) Sokcuri (https://github.com/sokcuri). Licensed under AGPL-3.0-only, see `LICENSE`. For other terms, such as a commercial license, contact sokcuri@gmail.com. Dependency licenses are in `THIRD-PARTY-NOTICES.txt`. Source and dictionary updates are available at [sokcuri/hdTrans](https://github.com/sokcuri/hdTrans).
 
 ## Building the package from source
 

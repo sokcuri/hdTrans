@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-cx:de-scene:20	この状況で一番大事なのは一つだけだ。	이 상황에서 제일 소중한 것은 하나뿐이다.	fix	rewrites
+cx:de-scene:20	この状況で一番大事なのは一つだけだ。	이 상황에서 제일 중요한 것은 하나뿐이다.	fix	rewrites
 cx:de-scene:20	こんな状況で言うのもなんだが	이런 상황에서 말하는 것도 좀 그렇지만	fix	rewrites
 cx:de-scene:20	何かが後ろで光った気がした。	뭔가가 뒤에서 빛난 것 같았다.	fix	rewrites
 cx:de-scene:20	中でお待ちしております。	안에서 기다리고 있습니다.	fix	rewrites

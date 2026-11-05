@@ -1,0 +1,20 @@
+# 규칙: LEX-4714
+rule	input	expected	kind	layer
+cx:notice-words-1:152	この戦で我らが出来ることはただ一つ。影ながら応援することのみなのですよ	이 전에서 우리들이 할 수 있는 것은 다만 하나. 남몰래 응원하는 것뿐인 것입니다	fix	rewrites
+cx:notice-words-1:152	お茶をのみたい	차를 마시고 싶다	keep	rewrites
+cx:notice-words-1:154	やなおばさんだねぇ。	싫은 아줌마구나.	fix	rewrites
+cx:notice-words-1:154	「……やな人だと思ってたけど、案外いい人なのかも」	「……싫은 사람이라고 생각했지만, 의외로 좋은 사람인지도」	fix	rewrites
+cx:notice-words-1:154	まったくだな、やないわドアホ！	정말 그래, 가 아니어 멍청이!	keep	rewrites
+lexical:kana-homograph	いつもより強い刺激に膣内がきゅうと収縮する。	평소보다 강한 자극에 질내가 꼬옥 수축한다.	fix	lookup
+lexical:kana-homograph	ぐい、ぐい、と腰をグラインドさせてみると	꾹, 꾹, 하고 허리를 그라인드 시켜 본다고	fix	lookup
+lexical:kana-homograph	緩慢な動きでぐい呑みを受け取り	완만한 움직임으로 술잔을 받아	fix	lookup
+lexical:kana-homograph	「筧君、や、優しい、さわり方……」	「카케이 군, 다, 다정한, 만지는 법……」	fix	lookup
+lexical:kana-homograph	イミハ…アル……？	의미는…있어……?	fix	lookup
+lexical:kana-homograph	じじ、かなりショックだろうぜ。	할아버지, 꽤 쇼크일 것이다.	fix	lookup
+lexical:kana-homograph	せやからウチは	그러니까 우리는	fix	lookup
+lexical:kana-homograph	自作のつけ耳を作って	자작의 가짜 귀를 만들어	fix	lookup
+lexical:kana-homograph	あ、きたきた。おはよー	아, 왔다 왔다. 안녕~	fix	lookup
+lexical:kana-homograph	そんじゃ みんなに すてきなお知らせだ｡	그럼 모두에게 멋진 알림이다.	fix	lookup
+lexical:kana-homograph	現在正面ゲートからのみ民間人の通行が許可されております。	현재 정면 게이트에서만 민간인의 통행이 허가되고 있습니다.	fix	lookup
+lexical:kana-homograph	ぐいっと押し返された。	확 밀어내졌다.	keep	lookup
+lexical:kana-homograph	いみがわからない	의미를 모른다	fix	lookup

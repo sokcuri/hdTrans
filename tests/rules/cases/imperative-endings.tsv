@@ -18,7 +18,7 @@ conjugation:potential-imperative	「会いに行けよ」	「만나러 가」	fi
 conjugation:potential-imperative	「もっと笑えよ」	「좀 더 웃어」	fix	conjugation
 conjugation:potential-imperative	「いいから行けよ」	「됐으니까 가」	fix	conjugation
 conjugation:potential-imperative	「ちゃんと言えよな」	「제대로 말해」	fix	conjugation
-conjugation:potential-imperative	「しっかり食えよ！」	「확실히 먹어!」	fix	conjugation
+conjugation:potential-imperative	「しっかり食えよ！」	「제대로 먹어!」	fix	conjugation
 conjugation:potential-imperative	「早く書けよ」	「빨리 써」	keep	conjugation
 conjugation:potential-imperative	「人の話、聞けよな」	「사람의 이야기, 들어」	keep	conjugation
 conjugation:potential-imperative	「ゆっくり休めよ」	「천천히 쉬어」	keep	conjugation
@@ -31,7 +31,7 @@ conjugation:potential-imperative	「笑えなかった」	「웃을 수 없었�
 lookup:te-imperative	「待てばいいのに」	「기다리면 좋을 텐데」	fix	lookup
 G270	「お前もちゃんと食えよ」	「너도 제대로 먹어」	fix	global-stem
 G270	「お前もちゃんと食え！」	「너도 제대로 먹어라!」	fix	global-stem
-G270	「お前もしっかり食えよ」	「너도 확실히 먹어」	fix	global-stem
+G270	「お前もしっかり食えよ」	「너도 제대로 먹어」	fix	global-stem
 G270	「肉をちゃんと食え」	「고기를 제대로 먹어라」	keep	global-stem
 sound:drawn-yo	「ねぇ、あたしも連れてってよ～」	「저기, 나도 데려가~」	fix	sound
 sound:drawn-yo	「見ててよ～」	「보고 있어~」	fix	sound

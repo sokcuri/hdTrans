@@ -1,0 +1,5 @@
+# 규칙: LEX-4828
+rule	input	expected	kind	layer
+names:doc-kana-inflected-names	しのぶが来た。\nしのぶの家は遠い。\nしのぶは笑った。\n今日、しのぶは休んだ。\n先生がしのぶに話した。	시노부가 왔다.\n시노부의 집은 멀다.\n시노부는 웃었다.\n오늘, 시노부는 쉬었다.\n선생님이 시노부에게 이야기했다.	fix	fixed
+names:doc-kana-inflected-names	「……でん、わ……やく、も？」\n「……やくも……」\n「……やくも……」\n「……やくも……へやに、くるたび、ないてた……」	lacks:야쿠	keep	fixed
+names:doc-kana-inflected-names	あそぶのが好き。\n外であそぶと楽しい。\nあそぶのはいい。\nあそぶが、すぐ飽きる。\nあそぶと疲れる。	노는 것이 좋아.\n밖에서 놀면 즐겁다.\n노는 것은 좋다.\n놀지만, 바로 질린다.\n놀면 지친다.	keep	fixed

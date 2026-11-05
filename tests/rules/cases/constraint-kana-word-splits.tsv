@@ -3,8 +3,8 @@ rule	input	expected	kind	layer
 constraint:ni-before-shimau	上着のポケットにしまった。	윗도리의 포켓에 넣었다.	fix	lookup
 constraint:ni-before-shimau	古泉は缶を鞄にしまった。	고이즈미는 캔을 가방에 넣었다.	fix	lookup
 constraint:ni-before-shimau	先生が教室に入ってきて、俺はスマホをポケットにしまった。	선생님이 교실에 들어 와, 나는 스마트폰을 포켓에 넣었다.	fix	lookup
-constraint:ni-before-shimau	エナはチョコレートを受けると、そのまま服のポケットにしまい込んだ。	태는 초콜릿을 받으면, 그대로 옷의 포켓에 넣어 두었다.	fix	lookup
-dict:jisjk:202286	金貨の入った袋を謎のポケットにしまうと、女は立ち上がった。	금화가 들어온 봉투를 수수께끼의 포켓에 넣으니, 여자는 일어섰다.	fix	local
+constraint:ni-before-shimau	エナはチョコレートを受けると、そのまま服のポケットにしまい込んだ。	태는 초콜릿을 받고는, 그대로 옷의 포켓에 넣어 두었다.	fix	lookup
+dict:jisjk:202286	金貨の入った袋を謎のポケットにしまうと、女は立ち上がった。	금화가 들어온 봉투를 수수께끼의 포켓에 넣자, 여자는 일어섰다.	fix	local
 dict:jisjk:202286	それから、忘れ物をポケットにしまって、俺のところに戻ってくる。	그리고, 두고 온 물건을 포켓에 넣어, 내 곳으로 돌아온다.	fix	local
 constraint:ni-before-shimau	「今日はこれにしましょう」	「오늘은 이걸로 합시다」	keep	lookup
 constraint:ni-before-shimau	あ、これにしましょう。	아, 이것으로 합시다.	keep	lookup

@@ -1,0 +1,29 @@
+# 규칙: LEX-4711
+rule	input	expected	kind	layer
+lexical:sino-gloss	製油所地帯を防衛せよ！	정유소 지대를 방위하라!	fix	lookup
+lexical:sino-gloss	精強な「水上反撃部隊」を再編成せよ！	막강한 「수상 반격 부대」를 재편성하라!	fix	lookup
+lexical:sino-gloss	名艦長の板倉艦長の指揮で	이름난 함장의 이타쿠라 함장의 지휘로	fix	lookup
+lexical:sino-gloss	数々の戦いを生き抜いた名艦だ。	수많은 싸움을 살아 남은 이름난 함선이다.	fix	lookup
+lexical:sino-gloss	いたたっ退避していい？	아야야 대피해도 돼?	fix	lookup
+lexical:sino-gloss	俺は前世で三食カップラーメンという生活を体験している。	나는 전생에서 세 끼 컵라면이라는 생활을 체험하고 있다.	fix	lookup
+lexical:sino-gloss	補給品と真水も積んだ。	보급품과 담수도 쌓았다.	fix	lookup
+lexical:sino-gloss	ふたりの間にはなんらかの確執があるんだよな……	두 사람 사이에는 어떤 불화가 있는 거지……	fix	lookup
+lexical:sino-gloss	その点 あなた方は ユーモアの権化	그 점 여러분은 유머의 화신	fix	lookup
+lexical:sino-gloss	レーダーが機影をとらえた。	레이더가 기체를 파악했다.	fix	lookup
+lexical:sino-gloss	「音叉は俺が探しとくから」	「소리굽쇠는 내가 찾기 푸니까」	fix	lookup
+lexical:false-friend	月食と同時に コダン艦隊は進攻を開始する	월식과 동시에 코단 함대는 진격을 개시한다	fix	lookup
+lexical:sino-gloss	"空爆は政府上層部の命令"	"공습은 정부 상층부의 명령"	fix	lookup
+lexical:sino-gloss	「ポイントは減点制ね。着順がそのままマイナス点。」	「포인트는 감점제네. 도착순이 그대로 마이너스점.」	fix	lookup
+lexical:false-friend	「一緒に実演してみてもらえませんか？」	「함께 시연해 봐주실 수 있겠습니까?」	fix	lookup
+lexical:false-friend	司祭や百姓を殺すことは さらに悪化させる	사제나 농민을 죽이는 것은 더욱 악화시킨다	fix	lookup
+lexical:false-friend	正月はやっぱり、のんびりしたいよねぇ～	설날은 역시, 빈둥거리고 싶지~	fix	lookup
+lexical:sino-gloss	興奮するというよりは、感心が先に立つ。	흥분한다기보다는, 감탄이 앞장선다.	fix	lookup
+lexical:sino-gloss	総員起こしかけますね？	총원 기상 거네요?	keep	lookup
+lexical:sino-gloss	総員、配置につけ！	총원, 배치 조림!	keep	lookup
+lexical:sino-gloss	小細工は無用と言ったはずだ。	세공은 무용이라고 말했을 것이다.	keep	lookup
+lexical:sino-gloss	三歳児並みの体格しかないわたしには一段降りるのが怖い	3세아 같은 수준의 체격밖에 없어 더해에는 일단 내리는 것이 무섭다	keep	lookup
+lexical:sino-gloss	洋服を着るとなんだか違和感があるんよ	양복을 입으면 왠지 위화감이 있는 이야	keep	lookup
+lexical:sino-gloss	だが 本当の目的は オレではなく 遊星 お前だ。	하지만 진정한 목적은 내가 아니고 유성 너다.	keep	lookup
+lexical:sino-gloss	春香殿、お弁当って知ってるの？	하루카님, 도시락은 알아?	keep	lookup
+lexical:sino-gloss	披露宴に招かれた。	피로연에 초대되었다.	keep	lookup
+lexical:sino-gloss	空爆を受けた。	공습을 받았다.	fix	lookup

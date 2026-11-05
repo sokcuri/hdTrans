@@ -6,7 +6,7 @@ sound:open-tteka	……っていうか、誰？	……그보다, 누구?	fix	sou
 sound:open-tteka	っていうかさ、それ本当？	그보다, 그것 정말?	fix	sound
 sound:open-tteka	てかてかに光る。	번들번들하게 빛난다.	keep	sound
 sound:lead-naa	なあ、ちょっと来て。	저기, 잠깐 와.	fix	sound
-sound:lead-naa	大事なことだ。なあ？	소중한 일이다. 그렇지?	fix	sound
+sound:lead-naa	大事なことだ。なあ？	중요한 일이다. 그렇지?	fix	sound
 sound:lead-naa	なあなあ、聞いてよ。	저기 저기, 들어.	keep	sound
 sound:lead-naa	そうだなあ、うん。	그래~, 응.	keep	sound
 phrase:なんていうか	なんていうか、変だね。	뭐랄까, 이상하네.	fix	builtin-phrase
@@ -65,7 +65,7 @@ dict:jisjk:94308	え、違うの？	어, 아니야?	fix	local
 dict:jisjk:94308	あっ、え…違う。	앗, 어…아니다.	fix	local
 dict:jisjk:94308	今日は火曜…違う、水曜だ	오늘은 화요일…아니다, 수요일이다	fix	local
 dict:jisjk:94308	なにか…違う…。	뭔가…달라….	keep	local
-dict:jisjk:94308	それは…違う。	그것은…다르다.	keep	local
+dict:jisjk:94308	それは…違う。	그것은…아니다.	keep	local
 dict:jisjk:94308	いつもと……違う……	평상시와……달라……	keep	local
 dict:jisjk:94308	「……普通の、女の子と……違う？」	「……보통, 여자아이와……달라?」	keep	local
 dict:jisjk:94308	違います。	아닙니다.	fix	local

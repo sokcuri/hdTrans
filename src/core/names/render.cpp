@@ -10,6 +10,7 @@
 
 #include "core/names/chars.h"
 #include "core/names/readings.h"
+#include "core/names/given.h"
 #include "core/names/registry.h"
 #include "core/text/hangul.h"
 #include "core/word/kana.h"
@@ -217,7 +218,23 @@ std::string Registry::RenderPart(std::string_view t, bool whole) {
     if (AllRunes(t, IsHiragana)) {
         if (std::string kr = text::FromKana(t, text::Preset::Fan); IsHangulText(kr)) return kr;
     }
+    // A two-kanji name no dictionary reads takes the readings names give its kanji (千莉 치리).
+    if (AllRunes(t, IsKanji) && Flags(t).records == 0 && !GuessedNameBlocked(t)) {
+        if (std::string kr = internal::GuessedName(t); IsHangulText(kr)) return kr;
+    }
     return "";
+}
+
+bool Registry::GuessedNameBlocked(std::string_view t) {
+    // The document writes the run twice or more: a run said once may be a name read on its kanji's
+    // Chinese readings (龍鳳さん 류호 씨), which no guess from given names catches.
+    const auto seen = runs_.find(std::string(t));
+    if (seen == runs_.end() || seen->second < 2) return true;
+    // A shop (氷屋さん) is no name.
+    if (t.ends_with("屋")) return true;
+    // The last kanji and 様 make a word, which the 様 seen after the run belongs to (皆一様に: 一様).
+    const text::Rune last = RuneBefore(t, t.size());
+    return Flags(std::string(t.substr(t.size() - last.size)) + "様").records > 0;
 }
 
 std::string Registry::PersonName(std::string_view t) {

@@ -1,0 +1,83 @@
+# 규칙: LEX-4, LEX-4820
+rule	input	expected	kind	layer
+names:person-predicate	玉藻がはにかむ。	타마모가 수줍어한다.	fix	lookup
+names:person-predicate	小太刀がじっと俺を見た。	코다치가 가만히 나를 보았다.	fix	lookup
+names:person-predicate	瞬間、皐月の顔が赤く染まる。	순간, 사츠키의 얼굴이 붉게 물든다.	fix	lookup
+names:person-predicate	のぞみの手をぐっと引き寄せる。	노조미의 손을 꾹 끌어당긴다.	fix	lookup
+names:person-predicate	何か言いたげに、口をパクパクさせる玉藻。	뭔가 말하고 싶은 듯하게, 입을 뻐끔거리는 타마모.	fix	lookup
+names:person-predicate	知らないはずのことを、小太刀が知っている。	몰라야 할 것을, 코다치가 알고 있다.	fix	lookup
+names:person-predicate	小太刀が黙然と腕を組んだ。	코다치가 묵연하게 팔짱을 꼈다.	fix	lookup
+names:person-predicate	千里が俺に手を差し出す。	치사토가 나에게 손을 내민다.	fix	lookup
+names:person-predicate	高峰はちらりと俺を見て、かすかに笑っただけだった。	타카미네는 힐끗 나를 보고, 희미하게 웃었을 뿐이었다.	fix	lookup
+names:person-predicate	「わかったよ、皐月」	「알았어, 사츠키」	fix	lookup
+names:person-predicate	「イクっ……イクよ、皐月っ！」	「가버려……가, 사츠키!」	fix	lookup
+names:person-predicate	え…？弥生、怒ってなんかないですよ？	어…? 야요이, 화내고 있지 않아요?	fix	lookup
+names:person-predicate	エナは唐突に呟く。	에나는 갑자기 중얼거린다.	fix	lookup
+names:person-predicate	口の端を上げて笑い、小太刀はテレビのスイッチを入れた。	입가를 올려 웃어, 코다치는 텔레비전의 스위치를 켰다.	fix	lookup
+names:person-predicate	露骨に嫌そうな顔をする高峰。	노골적으로 싫은 듯한 얼굴을 하는 타카미네.	fix	lookup
+names:person-predicate	白木は答える。	시라키는 대답한다.	fix	lookup
+names:person-predicate	「その時になって玉藻が初耳だったら申し訳ないんで、いま打ち明けたんだ」	「그 때가 돼 타마모가 금시초문이라면 미안해서, 지금 털어 놓은 거야」	fix	lookup
+names:person-predicate	小太刀がベッドから立ち上がり、ふらついた足取りで玄関へと向かった。	코다치가 침대에서 일어서, 휘청거린 발걸음으로 현관으로 향했다.	fix	lookup
+names:person-predicate	高峰が苦笑する。	타카미네가 쓴웃음을 짓는다.	fix	lookup
+names:person-predicate	嬉しそうに笑う玉藻。	기쁜 듯이 웃는 타마모.	fix	lookup
+names:person-predicate	皐月は可愛く笑った。	사츠키는 귀엽게 웃었다.	fix	lookup
+names:person-predicate	皐月の手が止まる。	사츠키의 손이 멈춘다.	fix	lookup
+names:person-predicate	玉藻も小さくうなずいた。	타마모도 작게 끄덕였다.	fix	lookup
+names:person-predicate	これも、あいかが毎日お世話してくれたからだね	이것도, 아이카가 매일돌봐 주었기 때문이구나	fix	lookup
+names:person-predicate	この花は虫除けとしての効き目があり、広く使われていた。	이 꽃은 방충으로서의 효력이 있어, 넓게 사용되고 있었다.	keep	lookup
+names:person-predicate	「夢だよ、夢」	「꿈이야, 꿈」	keep	lookup
+names:person-predicate	剣の腕を磨くのです。	검의 솜씨를 연마합니다.	keep	lookup
+names:person-predicate	大阪は緑が少ないとよく言われる。	오사카는 초록이 적다고 자주 듣는다.	keep	lookup
+names:person-predicate	心が落ち着きますね。	마음이 진정되네요.	keep	lookup
+names:person-predicate	未来が私を待っている	미래가 나를 기다리고 있다	keep	lookup
+names:person-predicate	外の世界がこの俺っちを呼んでるっすよ！	밖의 세계가 이 나를 부르고 있어요!	keep	lookup
+names:person-predicate	右手の指が痛い。	오른손의 손가락이 아프다.	keep	lookup
+names:person-predicate	大きく見開かれた榛色の瞳が見る間に潤んでいく。	크게 크게 떠진 헤이즐색 눈동자가 순식간에 물기를 띠어 간다.	keep	lookup
+names:person-predicate	深緑の髪と瞳が印象的な青年が立っていた。	진녹색의 머리카락과 눈동자가 인상적인 청년이 서 있었다.	keep	lookup
+names:person-predicate	見たことのない菓子が出れば真っ先に手を伸ばす。	본 적이 없는 과자가 나오면 먼저 손을 뻗는다.	keep	lookup
+names:person-predicate	明日、陽が昇ってから出口を探そう。	내일, 햇빛이 오르고 나서 출구를 찾자.	keep	lookup
+names:person-predicate	左の頬ばっかり見て。	왼쪽의 뺨뿐 봐.	keep	lookup
+names:person-predicate	黒板消しに石が入れてある。	지우개에 돌이 들어 있다.	keep	lookup
+names:person-predicate	桃は食べた。	복숭아는 먹었다.	keep	lookup
+names:person-predicate	桃が食べたい。	복숭아를 먹고 싶다.	keep	lookup
+names:person-predicate	小太刀を抜いた。	작은 칼을 뽑았다.	keep	lookup
+names:person-predicate	時雨が降る。	늦가을 비가 내린다.	keep	lookup
+names:person-predicate	玉藻が揺れる。	말이 흔들린다.	keep	lookup
+names:person-predicate	皐月の空は青い。	5월의 하늘은 푸르다.	keep	lookup
+names:person-predicate	お前と王子殿下の仲が進展していないとは聞いていた	너와 왕자 전하의 사이가 진전하고 있지 않다고는 듣고 있었다	keep	lookup
+names:person-predicate	羆は原島さんを食べる時に言ってくれませんからね。	비는 하라시마 씨를 먹을 때 말해 주지 않으니까요.	keep	lookup
+names:person-predicate	それじゃみんな、いくよー！	그럼 모두, 가~!	keep	lookup
+names:person-predicate	「な、中っ……！」	「아, 안……!」	keep	lookup
+names:person-predicate	富竹さんの姿がないことを知った俺は、斜面を降りていった。	토미타케 씨의 모습이 없는 것을 안 나는, 경사면을 내려 갔다.	keep	lookup
+names:person-predicate	泉が湧いている。	샘이 솟아나고 있다.	keep	lookup
+names:person-predicate	やや紫がかった銀髪をしている。	약간 보라색이 산 은발을 하고 있다.	keep	lookup
+names:person-predicate	「心はもう泣いてる」	「마음은 이제 울고 있어」	keep	lookup
+names:person-predicate	花が笑う。	꽃이 웃는다.	keep	lookup
+names:person-predicate	夢が叫ぶ。	꿈이 외친다.	keep	lookup
+names:person-predicate	桜の顔が見える。	벚꽃의 얼굴이 보인다.	keep	lookup
+names:person-predicate	空は泣いていた。	하늘은 울고 있었다.	keep	lookup
+names:person-predicate	春が微笑んだ。	봄이 미소 지었다.	keep	lookup
+names:person-predicate	海は知っている。	바다는 알고 있다.	keep	lookup
+names:person-predicate	星がじっと私を見た。	별이 가만히 나를 보았다.	keep	lookup
+names:person-predicate	風が囁いた。	바람이 속삭였다.	keep	lookup
+names:person-predicate	月は黙っていた。	달은 입을 다물고 있었다.	keep	lookup
+names:person-predicate	雪が頷いた。	눈이 끄덕였다.	keep	lookup
+names:person-predicate	光の手を握る。	빛의 손을 잡는다.	keep	lookup
+names:person-predicate	未来が微笑んだ。	미래가 미소 지었다.	keep	lookup
+names:person-predicate	希望が囁いた。	희망이 속삭였다.	keep	lookup
+names:person-predicate	運命が笑う。	운명이 웃는다.	keep	lookup
+names:person-predicate	太陽がじっと私を見た。	태양이 가만히 나를 보았다.	keep	lookup
+names:person-predicate	宇宙は黙っていた。	우주는 입을 다물고 있었다.	keep	lookup
+names:person-predicate	世界が叫ぶ。	세계가 외친다.	keep	lookup
+names:person-predicate	向日葵が笑う。	해바라기가 웃는다.	keep	lookup
+names:person-predicate	季節は首を振った。	계절은 고개를 저었다.	keep	lookup
+names:person-predicate	時間が知っている。	시간이 알고 있다.	keep	lookup
+names:person-predicate	青空が微笑んだ。	푸른 하늘이 미소 지었다.	keep	lookup
+names:person-predicate	夕日の顔が見える。	석양의 얼굴이 보인다.	keep	lookup
+names:person-predicate	永遠が囁いた。	영원이 속삭였다.	keep	lookup
+names:person-predicate	大地が言った。	대지가 말했다.	keep	lookup
+names:person-predicate	三日月が笑う。	초승달이 웃는다.	keep	lookup
+names:person-predicate	そっと目を細めて微笑む太陽。	살며시 눈을 가늘게 떠 미소 짓는 태양.	keep	lookup
+names:person-predicate	ボクは、月が笑ってるのを見るのが一番幸せなんだから。	나는, 달이 웃고 있는 것을 보는 것이 제일 행복하니까.	keep	lookup
+names:person-predicate	ぱっと花が咲いたように微笑む。	확 꽃이 핀 것처럼 미소 짓는다.	keep	lookup
+names:person-predicate	凪ちゃんが微笑む。	나기짱이 미소 짓는다.	keep	lookup

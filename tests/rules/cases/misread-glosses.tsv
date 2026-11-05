@@ -1,6 +1,6 @@
 # 규칙: LEX-3474
 rule	input	expected	kind	layer
-dict:jisjk:115236	眼鏡の男はルナを抱きかかえ、ベットに寝かせると手当を始めた。	has:침대에 재우니	fix	defaults
+dict:jisjk:115236	眼鏡の男はルナを抱きかかえ、ベットに寝かせると手当を始めた。	has:침대에 재우고는	fix	defaults
 dict:jisjk:115236	彼は椅子ではなくベットに腰を下ろす。	has:침대에 앉는다	fix	defaults
 dict:w:23018	ドデカグマらは互いに押し合い、蜜を奪い合う。	has:꿀을 서로 빼앗는다	fix	defaults
 dict:w:23018	だがしかし、そばの蜂蜜は家族からは不評だった。	has:벌꿀은	keep	defaults

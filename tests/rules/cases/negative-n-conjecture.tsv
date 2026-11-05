@@ -1,0 +1,34 @@
+# 규칙: GRM-3807, GRM-3803
+rule	input	expected	kind	layer
+normalize:negative-conjecture	女子には分からんだろう	여자는 모를 것이다	fix	normalize
+normalize:negative-conjecture	女子には分からんじゃろう	여자는 모르겠지	fix	normalize
+normalize:negative-conjecture	お前には分からんだろうな	너는 모르겠지	fix	normalize
+normalize:negative-conjecture	のぉ、鬼どもよ。お前らにはもう分からんだろうがな…ワシにはワシの役目がある	의, 무서운 들이야. 너희들은 이제 모를 테지만…나에는 나의 역할이 있다	fix	normalize
+normalize:negative-conjecture	そんなこと知らんだろう	그런 것 모를 것이다	fix	normalize
+normalize:negative-conjecture	何も知らんかっただろ？	아무것도 몰랐지?	fix	normalize
+normalize:negative-conjecture	何も知らんかったじゃろ？	아무것도 몰랐겠지?	fix	normalize
+normalize:negative-conjecture	だがこれでは 君たちも気持ちが収まらんだろう	하지만 이것으로는 자네들도 기분이 들어가지 않을 것이다	fix	normalize
+normalize:negative-conjecture	似合わんだろう	어울리지 않을 것이다	fix	normalize
+normalize:negative-conjecture	すぐには走らんだろうな	곧바로는 달리지 않겠지	fix	normalize
+normalize:negative-conjecture	仮にも一国の主どもが相手だ。そう上手くは運ばんだろうな	명색이 한 나라의 주인들이 상대다. 그렇게 잘은 옮기지 않겠지	fix	normalize
+normalize:negative-conjecture	勝手って 別に誰の許可もいらんだろ｡ 俺たちで決めることだ｡	제멋대로라는 것은 별로 누구의 허가도 필요 없지. 우리로 결정하는 것이다.	fix	normalize
+normalize:negative-conjecture	まさかとは思うが、悪い遊びに手を出したりしておらんだろうな	설마 하는 생각이 들지만, 나쁜 놀이에 손을 대거나 하고 있지 않겠지	fix	normalize
+normalize:negative-conjecture	ところが、あなたはそれになんの意味も認めていらっしゃらんでしょう？	그런데, 당신은 거기에 무슨 의미도 인정하고 계시지 않을 거예요?	fix	normalize
+normalize:negative-conjecture	そいつは誰にもわからんじゃろ、今日	그 녀석은 아무도 모르겠지, 오늘	fix	normalize
+normalize:negative-conjecture	言われずとも体は動かんだろうがのう	듣지 않아도 몸은 움직이지 않겠지만 말이야	fix	normalize
+normalize:negative-conjecture	見ないとわからんだろ	보지 않으면 모르지	fix	normalize
+normalize:negative-conjecture	使えんだろ? キック	쓸 수 있는 거지? 킥	keep	normalize
+normalize:negative-conjecture	いかんでしょ！	안돼지!	keep	normalize
+normalize:negative-conjecture	昨日から一睡もしとらんじゃろ	어제부터 한 잠도 하고 있지 않겠지	keep	normalize
+normalize:negative-conjecture	まず無事では済まんじゃろ	우선 무사한 것은 끝나지 않겠지	keep	normalize
+normalize:negative-conjecture	あれを 見てもらうのが いちばんだろう。	저것을 보이는 것이 가장일 것이다.	keep	normalize
+normalize:negative-conjecture	何なんだろう	무엇일까	keep	normalize
+normalize:negative-conjecture	ですが、どうして西園寺先生はこの場所がわかったんでしょう	그렇지만, 왜 사이온지 선생님은 이 장소를 알 수 있었을까요	keep	normalize
+normalize:negative-conjecture	挙動不審な態度で店内を物色しています。強盗さんでしょうか	거동 의심스러운 태도로 가게 안을 물색하고 있습니다. 강도입니까	keep	normalize
+normalize:negative-conjecture	見りゃわかんだろ	보면 끓지 않아지	keep	normalize
+normalize:negative-conjecture	） どうせ大したことねえんだろ？	) 어차피 별일 아닌 거지?	keep	normalize
+normalize:negative-conjecture	イヤだって 言ってんでしょう	싫다고 말해 지요	keep	normalize
+normalize:negative-conjecture	教えてくれんだろ？ 正しいデート。	가르쳐 주는 거지? 올바른 데이트.	keep	normalize
+normalize:old-suru-negative	わしを許しはせんだろう	내를 용서하지는 않을 것이다	fix	normalize
+normalize:old-suru-negative	そんなことはせんだろう	그런 일은 하지 않을 것이다	fix	normalize
+normalize:old-suru-negative	心配せんでええ	걱정하지 않아도 된다	keep	normalize

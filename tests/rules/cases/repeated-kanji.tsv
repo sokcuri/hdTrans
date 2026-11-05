@@ -18,4 +18,4 @@ G30	第三次ソロモン海海戦では	제3차 솔로몬해 해전에서는	ke
 G30	業務管理部部長	업무 관리부 부장	keep	global-stem
 G160	中国国内はもとより	중국 국내는 원래	keep	defaults
 lexical:four-kanji-idiom	空空如也	공공여야	keep	lookup
-G170	「紫電一一型」x4	「자전11형」x4	fix	defaults
+G170	「紫電一一型」x4	「시덴 11형」x4	fix	defaults

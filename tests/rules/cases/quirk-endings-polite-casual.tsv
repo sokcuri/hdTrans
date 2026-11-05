@@ -1,6 +1,6 @@
 # 규칙: LEX-31, SPC-1
 rule	input	expected	kind	layer
-ending:dechi	節分でち！	절분이에요!	fix	builtin-ending
+ending:dechi	節分でち！	세츠분이에요!	fix	builtin-ending
 ending:dechi	雨が多い季節でち。	비가 많은 계절이에요.	fix	builtin-ending
 ending:dechi	朝でち！	아침이에요!	fix	builtin-ending
 ending:dechi	遅めの晩ご飯でちか？	늦은 저녁밥인가요?	fix	builtin-ending

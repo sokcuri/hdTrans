@@ -30,7 +30,7 @@ dict:permission:5	死ななくてよかった人々が死んだ。	죽지 않아
 dict:permission:4	これもう帰っても良いんじゃね？	!rule:dict:permission:4	keep	local
 dict:permission:4	「私もエル君って呼んでも良い？」	!rule:dict:permission:4	keep	local
 dict:permission:1	「でもさ、誰もけがしなくてよかったじゃん。あはは」	「하지만, 아무도 다치지 않아서 다행이었잖아. 아하하」	fix	local
-dict:permission:1	本当に、今日一人にさせなくてよかったよ。	정말, 오늘 한 사람에 시키지 않아서 다행이었어.	fix	local
+dict:permission:1	本当に、今日一人にさせなくてよかったよ。	정말, 오늘 혼자에 시키지 않아서 다행이었어.	fix	local
 dict:permission:1	私の担当の場所には幽霊が居なくてよかった。	내 담당의 장소에는 유령이 없어서 다행이다.	fix	local
 dict:permission:1	（うわーっ、試着しなくてよかった。	(우와앗, 시착하지 않아서 다행이다.	fix	local
 dict:permission:1	「失礼しました。あなたに怪我がなくてよかった」	「실례했습니다. 당신에게 상처가 없어서 다행이다」	fix	local

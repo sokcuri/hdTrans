@@ -397,6 +397,12 @@ bool EndsInVerb(const void* context, std::string_view text) {
     return d.line != nullptr && pipeline::internal::EndsInDictionaryVerb(text, *d.line, d.snap);
 }
 
+// Whether text ends with a verb of the dictionary, no guess (pipeline::RunLookup::dictionaryVerb).
+bool EndsInDictionaryVerb(const void* context, std::string_view text) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    return d.line != nullptr && pipeline::internal::EndsInDictionaryVerb(text, *d.line, d.snap, true);
+}
+
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
 // past it, as written or with the っ dropped (あったりまえ as あたりまえ): the earliest that starts up
 // to kRunLookBackRunes Japanese runes before it, npos for none (pipeline::CollapseTsuRuns).
@@ -566,9 +572,31 @@ bool JoinAfterSpace(const tokenizer::Tokens& tokens, int first, int& last, std::
             const int tail = to[static_cast<std::size_t>(j - 1)];
             if (tail >= 0) {
                 output::ResolvedItem& previous = items[static_cast<std::size_t>(tail)];
+                // A noun after the space starts a word of its own, as the space shows (海斗 お前 카이토 너,
+                // あんた これ 너 이것); a particle, a copula, a quoting と or a する after it still attaches
+                // (関係 している 관계하고), and so do the letters of a word spaced out one by one (ミ ラ ノ,
+                // 明 家が) and a word after a mark (スプリット･ ドロー).
+                const output::ResolvedItem* lead = head >= 0 ? &items[static_cast<std::size_t>(head)] : nullptr;
+                const auto one = [&](int k) { return text::RuneCount(tokens.Raw(static_cast<std::size_t>(k))) == 1; };
+                // A kanji standing alone before kanji, after the start or a mark, may spell a compound
+                // across the space (明 家が, (避 難者).
+                const auto lastRune = [](std::string_view s) {
+                    std::size_t at = s.size();
+                    while (at > 0 && (static_cast<unsigned char>(s[at - 1]) & 0xC0) == 0x80) at--;
+                    return at > 0 ? std::pair{text::DecodeRune(s.substr(at - 1)).cp, at - 1} : std::pair{char32_t{0}, std::size_t{0}};
+                };
+                const auto [lastCp, at] = lastRune(tokens.Raw(static_cast<std::size_t>(j - 1)));
+                const char32_t prior = lastRune(tokens.Raw(static_cast<std::size_t>(j - 1)).substr(0, at)).first;
+                const bool kanjiAlone = text::IsKanji(lastCp) && !text::IsKanji(prior) && !(prior >= U'ぁ' && prior <= U'ヿ') &&
+                                        text::IsKanji(text::DecodeRune(tokens.Raw(static_cast<std::size_t>(j))).cp);
+                const bool spelled = kanjiAlone ||
+                                     (one(j) && (one(j - 1) || (j + 1 < n && tokens[static_cast<std::size_t>(j + 1)].afterSpace && one(j + 1))));
+                const bool noun = lead != nullptr && lead->entry.code.starts_with("1") && !lead->entry.text.empty() &&
+                                  !previous.entry.code.starts_with("6") && !previous.entry.text.empty() && !spelled;
                 if (previous.entry.code.starts_with("32") ||
                     (previous.detailClass == output::DetailClass::None &&
-                     dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1))))) {
+                     dict::InClass(HDTRANS_CLASS("word.pause-filler"), tokens.Raw(static_cast<std::size_t>(j - 1)))) ||
+                    noun) {
                     previous.spaceAfter = true;
                 }
             }
@@ -710,6 +738,9 @@ struct LineSpeech {
     bool markedOnly = false;
     bool asked = false;
     bool poiTic = false;
+    bool humble = false;
+    bool threat = false;
+    bool oldSelf = false;
     output::QuoteState quotes;
     std::vector<std::uint8_t> styles;
 };
@@ -987,6 +1018,9 @@ void TranslateChunk(const dict::Snapshot& snap, const dict::LookupContext& looku
         settings.quoteLevels = s.quoteLevels;
     }
     settings.poiTic = speech.poiTic;
+    settings.humbleLine = speech.humble;
+    settings.threatLine = speech.threat;
+    settings.oldSelfLine = speech.oldSelf;
     settings.narrated = speech.narrated;
     word::Analyze(s.tokens, snap, lookup, settings, s.arena, analysis);
     if (observer.analysis) observer.analysis(observer.context, index, s.tokens, analysis);
@@ -1064,7 +1098,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
         std::string normalized = pipeline::JoinBraceRuby(
             pipeline::Normalize(text, ctx,
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
-                                 options.reference ? nullptr : EndsInVerb}),
+                                 options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
@@ -1123,6 +1157,11 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
     if (!options.reference) {
         speech.asked = true;
         speech.poiTic = word::PoiTicLine(facts.text);
+        speech.humble = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.humble-cue")),
+                                        dict::ClassMembers(HDTRANS_CLASS("speech.humble-lookalike")));
+        speech.threat = word::LineHolds(facts.text, dict::ClassMembers(HDTRANS_CLASS("speech.threat-cue")), {});
+        speech.oldSelf = word::LineHolds(body, dict::ClassMembers(HDTRANS_CLASS("speech.old-self-cue")),
+                                         dict::ClassMembers(HDTRANS_CLASS("speech.old-self-lookalike")));
         speech.narrated = ctx.narrated;
         speech.quotes = {carry.depth, carry.depth > 0 ? 1 : 0};
         speech.styles = pipeline::QuoteStyles(output::String(marked), carry.depth);

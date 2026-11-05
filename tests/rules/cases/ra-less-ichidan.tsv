@@ -1,0 +1,26 @@
+# 규칙: LEX-35
+rule	input	expected	kind	layer
+sound:ra-less-ichidan	奴らからは 逃げれない	놈들에게서는 도망칠 수 없다	fix	sound
+sound:ra-less-ichidan	簡単に避けれる。	간단하게 피할 수 있다.	fix	sound
+sound:ra-less-ichidan	避けれねぇ！	피할 수 없어!	fix	sound
+sound:ra-less-ichidan	マジで上げれない	진짜로 올릴 수 없다	fix	sound
+sound:ra-less-ichidan	俺のほうが 捕まえれるからね	나 쪽이 잡을 수 있으니까	fix	sound
+sound:ra-less-ichidan	いっぱいの人で隠れれるというか｡	가득한 사람으로 숨을 수 있다고 할까.	fix	sound
+sound:ra-less-ichidan	だって 私 顔 覚えれないし	그치만 나 얼굴 기억할 수 없고	fix	sound
+sound:ra-less-ichidan	制服着れなくなっちゃうから！	제복 입을 수 없게 되어버리니까!	fix	sound
+sound:ra-less-ichidan	チェンソー 引っ込めれたの!?	체인톱 거둘 수 있었어!?	fix	sound
+sound:ra-less-ichidan	でもね 注意｡ あぁ 避けれた！	그런데 주의. 아아 피할 수 있었다!	fix	sound
+sound:ra-less-ichidan	畳まれたらどうなってたか、考えたくもねーな…	접어지면 어떻게 되어 있었는지, 생각하고 싶은 것도 아니네…	keep	sound
+sound:ra-less-ichidan	お茶をいれる	차를 탄다	keep	sound
+sound:ra-less-ichidan	よく考えれば分かる	잘 생각하면 안다	keep	sound
+sound:ra-less-ichidan	君のことは忘れない	너는 잊지 않는다	keep	sound
+sound:ra-less-ichidan	それで呆れないの？	그래서 기가 막히지 않는 거야?	keep	sound
+sound:ra-less-ichidan	彼と連絡が取れない	그와 연락이 되지 않는다	keep	sound
+sound:ra-less-ichidan	そこで流れる曲	거기서 흐르는 곡	keep	sound
+sound:ra-less-ichidan	窓ガラスが割れた	유리창이 깨졌다	keep	sound
+sound:ra-less-ichidan	部屋が汚れた	방이 더러워졌다	keep	sound
+sound:ra-less-ichidan	家族と離れて暮らす	가족과 떨어져 산다	keep	sound
+sound:ra-less-ichidan	社長は朝早く起きれる	사장은 아침 일찍 일어날 수가 있다	fix	sound
+sound:ra-less-ichidan	これが誘拐であれば、もしかしたら白馬に乗った王子様が助けてくれるかも……なんて甘い夢を見れるのだけれども	이것이 유괴이면, 혹시 백마를 탄 왕자님이 도와 줄지도……는 단 꿈을 꿀 수가 있는데	fix	sound
+sound:ra-less-ichidan	社長は起きれない	사장은 일어날 수 없다	keep	sound
+sound:ra-less-ichidan	簡単に避けれる。	간단하게 피할 수 있다.	keep	sound

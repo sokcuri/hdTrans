@@ -1,0 +1,34 @@
+# 규칙: GRM-3903, GRM-3904, LEX-4800, LEX-4801, LEX-4802, LEX-4804, LEX-4805
+rule	input	expected	kind	layer
+cx:meaning-flips-1:132	本を探すのに、ここより適した場所はない。	책을 찾는데, 여기보다 적합한 장소는 없다.	fix	rewrites
+cx:meaning-flips-1:132	これより上はない	이것보다 위는 없다	keep	rewrites
+cx:meaning-flips-1:132	ここより北へ向かう	여기에서 북쪽을 향한다	keep	rewrites
+cx:meaning-flips-1:132	東京より参りました。	도쿄에서 왔습니다.	keep	rewrites
+cx:meaning-flips-1:134	それと謝らなければならないことが二つあるな。	그리고 사과해야 하는 것이 두 개 있구나.	fix	rewrites
+cx:meaning-flips-1:134	それと、もう一つ	그리고, 하나 더	keep	rewrites
+cx:meaning-flips-1:134	それと同じだ	그것과 같다	keep	rewrites
+cx:meaning-flips-1:134	「それと言ったでしょ」	「그것이라고 말했잖아」	keep	rewrites
+cx:meaning-flips-1:138	彼には妙なところがあった	그에게는 이상한 점이 있었다	fix	rewrites
+cx:meaning-flips-1:138	今度も不思議なところなの	이번에도 이상한 곳이야	keep	rewrites
+cx:meaning-flips-1:138	変なところに来た	이상한 곳에 왔다	keep	rewrites
+cx:meaning-flips-1:140	佳奈すけのあえぎ声が一際高く響く。	카나스케의 헐떡이는 소리가 한층 더 높게 울린다.	fix	rewrites
+cx:meaning-flips-1:140	値段が一際高く	가격이 한층 더 비싸고	keep	rewrites
+cx:meaning-flips-1:150	都合よく黙らないで欲しいわ！	때마침 입을 다물지 말았으면 좋겠어!	fix	rewrites
+cx:meaning-flips-1:150	行かないで欲しいです	가지 말았으면 좋겠습니다	fix	rewrites
+cx:meaning-flips-1:150	早く来て欲しい	빨리 왔으면 좋겠다	keep	rewrites
+cx:meaning-flips-1:160	いや、そうじゃなくて	아니, 그게 아니라	fix	rewrites
+cx:meaning-flips-1:160	「アッ、そうじゃなくて」	「앗, 그게 아니라」	fix	rewrites
+cx:meaning-flips-1:160	だって、今まではそうじゃなくて、それでここへ流れ着いてきた人達だっていた	그치만, 지금까지는 그렇지 않아서, 그래서 여기에 표류해 온 사람들이라고 있었다	keep	rewrites
+cx:meaning-flips-1:162	行けば？ そうでなくて！	가면? 그게 아니라!	fix	rewrites
+cx:meaning-flips-1:162	そうでなくても一日中	그렇지 않아도 하루종일	keep	rewrites
+phrase:待ちな	待ちな。とりあえず、この船じゃなくて	기다려. 우선, 이 배가 아니고	fix	builtin-phrase
+phrase:待ちな	ここで待ちな！	여기서 기다려!	keep	builtin-phrase
+phrase:待ちな	待ちなさい	기다려	keep	builtin-phrase
+phrase:行きな	行きなさい	가	keep	builtin-phrase
+phrase:言いな	言いなりになる	하라는 대로 된다	keep	builtin-phrase
+dict:jisjk:357444	タイヨウの海賊団は ３つの派閥に分かれ—	태양 해적단은 3개의 파벌로 나누어지고—	fix	local
+dict:jisjk:165403	はいおじさま 私頑張っちゃいます	네아저씨 저 노력해버립니다	fix	local
+dict:jisjk:114662	「まずは子供から拘束して。細心の注意を払って。双子は？」	「우선은 아이에게서 구속해. 세심한 주의를 기울여. 쌍둥이는?」	fix	local
+dict:jisjk:114662	お金を払って	돈을 지불해	keep	local
+dict:jisjk:353400	判断を誤らないで欲しい	판단을 잘못하지 말았으면 좋겠다	fix	local-ending
+dict:jisjk:353400	手伝って欲しい	도왔으면 좋겠다	keep	local-ending

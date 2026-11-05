@@ -25,11 +25,12 @@ bool RuleG20([[maybe_unused]] Item* p) {
 }
 
 // global 1003 stem pos 1 prio 30
-//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**) and gram lacks Rw
+//     pos is 1** and gram within Z7 and pos[-1] is 1** and gram[-1] lacks Pn|Kh and (gram lacks Hp or pos[+1] is 6**) and gram lacks Rw and src[-1] not ends "は" and src[-1] not ends "が" and src[-1] not ends "も" and src[-1] not ends "を" and src[-1] not ends "に" and src != "味" and (src != "ら" or sem[-1] lacks VHn)
 //     pos is 1** and gram has Zs and pos[-1] is 1** and gram[-1] has Kh
 bool RuleG30([[maybe_unused]] Item* p) {
     return (PumsaEq(p, 0, "1**"sv) && GramMinusEq(p, 0, "Z7"sv) && PumsaEq(p, -1, "1**"sv) && GramNe(p, -1, "PnKh"sv) && (GramNe(p, 0, "Hp"sv) ||
-           PumsaEq(p, 1, "6**"sv)) && GramNe(p, 0, "Rw"sv)) ||
+           PumsaEq(p, 1, "6**"sv)) && GramNe(p, 0, "Rw"sv) && SrcNe(p, -1, "Rは"sv) && SrcNe(p, -1, "Rが"sv) && SrcNe(p, -1, "Rも"sv) && SrcNe(p, -1, "Rを"sv) && SrcNe(p, -1, "Rに"sv) && SrcNe(p, 0, "味"sv) && (SrcNe(p, 0, "ら"sv) ||
+           AttrNe(p, -1, "VHn"sv))) ||
            (PumsaEq(p, 0, "1**"sv) && GramEq(p, 0, "Zs"sv) && PumsaEq(p, -1, "1**"sv) && GramEq(p, -1, "Kh"sv));
 }
 
@@ -266,7 +267,7 @@ constexpr CompiledRule kLocal[] = {
 constexpr CompiledRule kGlobal[] = {
     {RuleG10, 0x1da32235fa639a85ull},
     {RuleG20, 0xba5aa5138273e5faull},
-    {RuleG30, 0x3814c2a55021b968ull},
+    {RuleG30, 0x590e94927bc61937ull},
     {RuleG40, 0x5f341a8f2d4eb31full},
     {RuleG50, 0x9e2674aca5fe2b0aull},
     {RuleG60, 0xd50f7cc2a29ed7b9ull},
