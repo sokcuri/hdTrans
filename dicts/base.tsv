@@ -124034,6 +124034,7 @@ ttt	ttt	K110			GN				jisjk:201744
 併進	병진	N110			GN				jisjk:23625		
 使	&AF@	M440	VMySFl		GN				jisjk:142104		
 使	심부름&AV@	M440			GN	4782	||1 &&2 S-1== "お" S+1== "に"	使가 お와 に 사이에 있으면 심부름하다를 고른다. (미발동: rare-context)	jisjk:373525		
+使い魔	사역마	N110			GN			使い魔는 `사역마`다(LEX-3833).	lex:3833:使い魔-1		
 使い	사용	N110		Hd	GN				jisjk:7714		
 使い	심부름꾼	N110			GN	1294	||1 &&3 P+1== "2**" P+2== "4**" A+2== "UMv"	조사를 사이에 두고 이동 의미 동사가 뒤따르는 使い를 '사자(심부름꾼)'로 고른다. (미발동: rare-context)	jisjk:116960		
 使いきりの	다 사용한	E0H0			GN				jisjk:149981		
@@ -144205,6 +144206,7 @@ ttt	ttt	K110			GN				jisjk:201744
 千分率	천분율	N110			GN				jisjk:239598		
 千切	채침	N110			GN				jisjk:12420		
 千切	잘게 &LI@	M438			GN				jisjk:141160		
+ねじ千切	비틀어 &HW@	M438			GN			ねじ千切る는 `비틀어 찢다`다(LEX-3833).	lex:3833:ねじ千切-1		
 千切	치기레	N130	QCTVPl		GN				jisjk:308479		
 千切り	채침	N110			GN				jisjk:12421		
 千切りに	채썰기로 &AV@	M449		Pn	GN				jisjk:266856		
@@ -149025,6 +149027,7 @@ ttt	ttt	K110			GN				jisjk:201744
 友逹	친구	N110	VHn		GN				jisjk:30141		
 友逹同士	친구들끼리	I110	VHn		GN				jisjk:78893		
 友道	토모미치	N130	QCTVPl		GN				jisjk:312200		
+友達面	친구 행세	N110			GN			友達面은 `친구 행세`다(LEX-3833).	lex:3833:友達面-1		
 友達	친구	N110	VHn		GN				jisjk:114511		
 友達時代	친구 시절	K110	UMe		GN				jisjk:264163		
 友邦	우방	N110	VPl		GN				jisjk:30143		
@@ -150176,6 +150179,10 @@ ttt	ttt	K110			GN				jisjk:201744
 受け付け後	접수후	I110	UMe		GN				jisjk:126643		
 受け入れ	수락	N110		Hd	GN				jisjk:9486		
 受け入れ	받아들&AJ@	M437			GN				jisjk:9487		
+招き寄せ	불러들&AJ@	M437			GN			招き寄せる, 招きよせる는 `불러들이다`다(LEX-3833).	lex:3833:招き寄せ-1		
+招きよせ	불러들&AJ@	M437			GN			招き寄せる, 招きよせる는 `불러들이다`다(LEX-3833).	lex:3833:招きよせ-1		
+受けいれ	받아들&AJ@	M437			GN			가나를 섞어 쓴 受けいれる는 受け入れる다(LEX-3833).	lex:3833:受けいれ-1		
+受けいれ	수락	N110			GN			가나를 섞어 쓴 受けいれ는 受け入れ다(LEX-3833).	lex:3833:受けいれ-2		
 受け入れなくな	받아들이지 않게 &C6@	M428			GN				jisjk:145365		
 受け入れられ	받아들여&AL@	M427			GN				jisjk:145372		
 受け入れる取り決め	받아들이는 결정	I110			GN				jisjk:110101		
@@ -155184,6 +155191,8 @@ ttt	ttt	K110			GN				jisjk:201744
 吟詠	음영	N110			GN				jisjk:30924		
 吟遊詩人	음유시인	I110	VHn		GN				jisjk:79668		
 吠え	&HP@	M417			GN				jisjk:95744		
+吠えかか	&HP@	M418			GN			吠えかかる, 吠え掛かる는 `짖어 대다`다(LEX-3833).	lex:3833:吠えかか-1		
+吠え掛か	&HP@	M418			GN			吠えかかる, 吠え掛かる는 `짖어 대다`다(LEX-3833).	lex:3833:吠え掛か-1		
 吠えたて	짖어&C5@	M427			GN				jisjk:340326		
 吠え面	울상	N110			GN				jisjk:250793		
 吠猿	원숭이	N110	VAm		GN				jisjk:250792		
@@ -157572,6 +157581,7 @@ ttt	ttt	K110			GN				jisjk:201744
 問いかけ	물어 &AY@	M437	UTs		GN				jisjk:92840		
 問いかけ	&J7@	M447			GN				jisjk:144912		
 問いかけ	질문	N110			GN				jisjk:153675		
+問い掛け	질문	N110			GN			問い掛け는 問いかけ와 같이 `질문`이다(LEX-3833).	lex:3833:問い掛け-1		
 問いかけてみ	물어 &AY@	M447			GN				jisjk:142652		
 問いかけに対して	질문에 대해	E300			GN				jisjk:149353		
 問いかけられ	질문을 &FD@	M427			GN				jisjk:144907		
@@ -162828,6 +162838,7 @@ ttt	ttt	K110			GN				jisjk:201744
 垂ら	늘어뜨&AA@	M443	VCp		GN				jisjk:140817		
 垂り穂	고개숙인 이삭	N110			GN				jisjk:241749		
 垂り雪	나뭇가지에서 떨어지는 눈	N110			GN				jisjk:233843		
+垂れ込み	제보	N110			GN			垂れ込み는 `제보`다(LEX-3833).	lex:3833:tarekomi		
 垂れ	늘어뜨린 것	N110			GN				jisjk:9492		
 垂れ	늘어&AL@	M417			GN				jisjk:9493		
 垂れ	떨어&AL@	M417	VLq		GN				jisjk:9494		
@@ -185333,6 +185344,7 @@ ttt	ttt	K110			GN				jisjk:201744
 小三女児	초등학교 3학년 여학생	N110	VHn		GN				jisjk:190865		
 小三条蝶	애기세줄나비	N110	VAm		GN				jisjk:231447		
 小三蔵	코미조우	N130	QPN	Wb	GN				jisjk:346883		
+小上がり	다다미 마루	N110			GN			小上がり는 `다다미 마루`다(LEX-3833).	lex:3833:小上がり-1		
 小上町	코가미마치	N130	QCTVPl		GN				jisjk:293035		
 小上馬	코죠우마	N130	QPN	Wa	GN				jisjk:74879		
 小下倉	코시타구라	N130	QCTVPl		GN				jisjk:293289		
@@ -190096,6 +190108,7 @@ ttt	ttt	K110			GN				jisjk:201744
 山だに	야마다니	N130	QCTVPl		GN				jisjk:336340		
 山っ気	모험심	I110	UFl		GN				jisjk:72090		
 山てん	산정	N110	VPl		GN				jisjk:186034		
+山なり	포물선	N110			GN			山なり는 `포물선`이다(LEX-3833).	lex:3833:山なり-1		
 山なす	산더미같은	C0D1			GN				jisjk:4700		
 山なみ	산줄기	I110	VPl		GN				jisjk:72091		
 山の上町	야마노우에마치	I130	QCTVPl		GN				jisjk:336452		
@@ -215661,6 +215674,8 @@ ttt	ttt	K110			GN				jisjk:201744
 振り向きもしな	거들떠 보지 $DH@	H7U0		Xn	GN				jisjk:267497		
 振り向け	돌&AA@	M437			GN				jisjk:95098		
 振り回	휘&E1@	M433			GN				jisjk:95099		
+振り捲	마구 흔&L4@	M418			GN			振り捲る(振りまくる)는 `마구 흔들다`다(LEX-3833).	lex:3833:振り捲-1		
+頭を振り捲	머리를 마구 흔&L4@	M418			GN			振り捲る(振りまくる)는 `마구 흔들다`다(LEX-3833).	lex:3833:頭を振り捲-1		
 振り回	남용&AV@	M433	URt		GN				jisjk:95100		
 振り回され	좌지우지&C6@	M427			GN				jisjk:358653		
 振り売り	행상	I110	QID		GN				jisjk:85277		
@@ -218969,6 +218984,8 @@ ttt	ttt	K110			GN				jisjk:201744
 散ら	흩뜨&AA@	M443			GN				jisjk:93364		
 散らか	어&E7@	M433			GN				jisjk:93365		
 散らか	흩어&AL@	M418		Dx	GN				jisjk:93366		
+巻き散ら	뿌&AA@	M423			GN			撒き散らす를 巻き散らす로 잘못 써도 `흩뿌리다`다(LEX-3833).	lex:3833:巻き散ら-1		
+散らかり	어질러짐	N110			GN			散らかり는 `어질러짐`이다(LEX-3833).	lex:3833:散らかり-1		
 散らかし放題に散らか	어지럽힐대로 마구 어지럽&AW@	M463			GN				jisjk:353454		
 散らかってい	어질러져 &HN@	M427			GN				jisjk:265681		
 散らし	광고지	N110	VSw		GN				jisjk:7998		
@@ -273342,7 +273359,7 @@ ttt	ttt	K110			GN				jisjk:201744
 現つ神	천황	N110	VHn		GN				jisjk:227028		
 現なま	현금	I110	VMo		GN				jisjk:88874		
 現に	실제로	E311			GN				jisjk:2072		
-現れ	현상	N110			GN				jisjk:13430		
+現れ	표현	N110			GN			現れ는 무엇이 겉으로 드러난 `표현`이다(潜在意識の現れ, LEX-3833).	jisjk:13430		
 現れ	나타&A5@	M417			GN				jisjk:13431		
 現わ	나타&A6@	M433			GN				jisjk:95945		
 現われ	현상	N110			GN				jisjk:13432		
@@ -298611,6 +298628,7 @@ ttt	ttt	K110			GN				jisjk:201744
 細か	인색$AB@	H7N0	VMyVMo		GN				jisjk:120752		
 細か	섬세%A1@	G8U0			GN				jisjk:121481		
 細か	사소$AB@	H7U0			GN				jisjk:263997		
+事細か	세세$AB@	H7N0			GN			事細かく는 `세세하게`다(LEX-3833).	lex:3833:事細か-1		
 細かい事項	상세한 사항	I110			GN				jisjk:107428		
 細かい所	자세한 데	I110			GN				jisjk:107442		
 細かい金	잔 돈	H110	VMo		GN				jisjk:343772		
@@ -364697,3 +364715,4 @@ ttt	ttt	K110			GN				jisjk:201744
 たのだ	1고 있었던 거다	S570			GN				drops-conj:16		
 たんだよね	1고 있었지	S570			GN				drops-conj:31		
 たんだよな	1고 있었지	S570			GN				drops-conj:32		
+汗っかき	땀이 많은 사람	N110	VHn		GN			汗っかき는 `땀이 많은 사람`이다(LEX-3833).	lex:3833:汗っかき-1		

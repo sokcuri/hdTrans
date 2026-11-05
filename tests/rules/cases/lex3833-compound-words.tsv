@@ -1,0 +1,23 @@
+# 규칙: LEX-3833
+rule	input	expected	kind	layer
+dict:lex:3833:吠え掛か-1	大太法師に吠え掛かる。	다이다라 봇치에게 짖는다.	fix	lookup
+dict:lex:3833:吠えかか-1	犬が吠えかかってきた	개가 짖어 왔다	fix	lookup
+dict:lex:3833:招きよせ-1	要するにその人のアイデンティティ（人格）が招きよせてるんですから。	요컨대 그 사람의 아이덴티티(인격)가 불러들이고 있으니까요.	fix	lookup
+dict:lex:3833:受けいれ-1	なぜ俺のプロポーズを受けいれた？	왜 내 프러포즈를 받아들였어?	fix	lookup
+dict:lex:3833:受けいれ-1	受け入れよう	받아들이자	keep	lookup
+dict:lex:3833:頭を振り捲-1	気が狂った様に頭を振り捲っていた。	미친 것처럼 머리를 마구 흔들고 있었다.	fix	lookup
+dict:lex:3833:ねじ千切-1	無理矢理ねじ千切られるような重圧	억지로 비틀어 찢기는 것 같은 중압	fix	lookup
+dict:lex:3833:巻き散ら-1	土埃を巻き散らし迫ってくる。	흙먼지를 뿌려 다가온다.	fix	lookup
+dict:lex:3833:巻き散ら-1	ごみを撒き散らす	쓰레기를 뿌린다	keep	lookup
+dict:lex:3833:散らかり-1	ひとりの部屋の散らかりは	혼자 방의 어질러짐은	fix	lookup
+dict:lex:3833:使い魔-1	そして その使い魔たちと	그리고 그 사역마들과	fix	lookup
+dict:lex:3833:山なり-1	山なりに弧を描いてこちらに飛んでくる矢に	포물선에 호를 그려 이쪽으로 날아 오는 화살에	fix	lookup
+dict:lex:3833:汗っかき-1	ただの汗っかきですので。	그냥 땀이 많은 사람이므로.	fix	lookup
+dict:lex:3833:事細か-1	その日にあった、ちょっとした俺の異変まで事細かく。	그날에 있던, 약간의 내 이변까지 세세하고.	fix	lookup
+dict:lex:3833:小上がり-1	小上がりに戻る前に支払いを済ませて	다다미 마루로 돌아가기 전에 지불을 끝마쳐	fix	lookup
+dict:lex:3833:友達面-1	「うるさい友達面すんな！」	「시끄러운 친구 행세하지 마!」	fix	lookup
+dict:lex:3833:問い掛け-1	という問い掛けで脚が動かせなくなる。	라는 질문으로 다리를 움직일 수 없게 된다.	fix	lookup
+dict:lex:3833:tarekomi	東京？ で その垂れ込みの 内容っていうのは？	도쿄? 그리고 그 제보의 내용이라는 것은?	fix	lookup
+dict:lex:3833:tarekomi	首を垂れる	고개를 늘어진다	keep	lookup
+dict:lex:3833:使い魔-1	使い道がない	용도가 없다	keep	lookup
+dict:lex:3833:山なり-1	山に登る	산에 오른다	keep	lookup
