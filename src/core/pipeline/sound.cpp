@@ -3464,7 +3464,7 @@ bool OldSuruNegative(const std::u32string& rs, const std::string& s, const std::
 
 }  // namespace
 
-bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
+bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap, bool strict) {
     // the hiragana that end text: the okurigana of a verb in kanji or katakana, or a verb in kana
     constexpr int kLongestKanaRun = 8;  // runes
     size_t kana = text.size();
@@ -3487,7 +3487,7 @@ bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const d
         }
         for (size_t at = kana; at < text.size(); at += text::DecodeRune(text.substr(at)).size)
             if (VerbFormIs(text.substr(at), kDictionaryForm, AnyKind, ctx, snap)) return true;
-        return okurigana >= 2 && !snap.NamePerson(text.substr(0, text.size() - LastRune(text).size).substr(start));
+        return !strict && okurigana >= 2 && !snap.NamePerson(text.substr(0, text.size() - LastRune(text).size).substr(start));
     }
     // a verb in kana of three kana or more anywhere in the kana run (そんなせっつく), or a shorter one that starts
     // the run or follows a particle of particle.verb-boundary (ふざける, 冗談を言う); not two kana inside a longer kana
@@ -3497,6 +3497,7 @@ bool EndsInDictionaryVerb(std::string_view text, const LineContext& ctx, const d
                               dict::InClassRune(HDTRANS_CLASS("particle.verb-boundary"), LastRune(text.substr(0, at)).cp);
         if (boundary && VerbFormIs(text.substr(at), kDictionaryForm, AnyKind, ctx, snap)) return true;
     }
+    if (strict) return false;
     // A kana verb the dictionary lacks still counts (がっつく, わめく), but not where the kana before the last
     // one end in a person's name of the name layer or hold a long-vowel mark, as a name before くん does
     // (ゆきあくん, おーしまくん).

@@ -732,6 +732,24 @@ HD_TEST(pipeline_rewrite_casual_held_toku) {
     HD_CHECK_EQ(RewriteCasual("言っとくが", runs), std::string("言っておくが"));
 }
 
+// A casual negative ねえ after a negative stem with more kana than Nee takes reads as ない where a verb of the
+// dictionary ends there in its dictionary form (GRM-3843); the particle after から or ですか stays.
+HD_TEST(pipeline_rewrite_casual_verb_nee) {
+    const auto verb = [](const void*, std::string_view text) {
+        for (const std::string_view v : {"見当たる", "止まる", "もらえる", "かる"}) {
+            if (text.ends_with(v)) return true;
+        }
+        return false;
+    };
+    RunLookup runs;
+    runs.dictionaryVerb = verb;
+    HD_CHECK_EQ(RewriteCasual("見当たらねぇな", runs), std::string("見当たらないな"));
+    HD_CHECK_EQ(RewriteCasual("止まらねえ", runs), std::string("止まらない"));
+    HD_CHECK_EQ(RewriteCasual("もらえねぇか", runs), std::string("もらえないか"));
+    HD_CHECK_EQ(RewriteCasual("ですからねえ。", runs), std::string("ですからねえ。"));
+    HD_CHECK_EQ(RewriteCasual("そうかねえ", runs), std::string("そうかねえ"));
+}
+
 HD_TEST(pipeline_rewrite_military_time) {
     const Case cases[] = {
         {"マルフタマルマル。夜です。"sv, "0200。夜です。"sv},
