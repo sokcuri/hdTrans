@@ -56,3 +56,12 @@ dict:w:32697	お前とは 口も利きたくねえんだからな！	너와는 �
 dict:w:32698	殿下に対してその口の利き方は何かね！	전하에 대해서 그 말버릇은 뭔가!	fix	lookup
 cx:fic-polysemy-1:42	飴を舐めてから寝た	엿을 핥고 나서 잤다	keep	rewrites
 cx:fic-polysemy-1:50	ある時女史はスクリアビンのゾナーテ（多分第四番）を弾こうかと言った	has:연주할까	keep	rewrites
+cx:fic-polysemy-1:60	生きているうちに、本物をこの目で拝めるとはまさに僥倖。	has:볼 수 있다고는	fix	rewrites
+cx:fic-polysemy-1:60	久方ぶりに、あの方を拝めたのが、嬉しかっただけです	has:볼 수 있었던	fix	rewrites
+cx:fic-polysemy-1:60	100,000ドルを拝みたいんだ	has:보고 싶다	fix	rewrites
+cx:fic-polysemy-1:60	その目でとくと拝みやがれ！	has:봐라	fix	rewrites
+cx:fic-polysemy-1:60	「ありがたやありがたや」とばかりに手を合わせて拝む。	has:빈다	keep	rewrites
+cx:fic-polysemy-1:62	今日は彼女の傍についていたい。	has:붙어 있고 싶다	fix	rewrites
+cx:fic-polysemy-1:62	駅についていた	lacks:붙어	keep	rewrites
+cx:fic-polysemy-1:64	私が おそばについていながら！	has:곁에 붙어	fix	rewrites
+cx:fic-polysemy-1:64	おそばを食べた	has:국수	keep	rewrites
