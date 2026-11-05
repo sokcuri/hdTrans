@@ -3082,10 +3082,29 @@ bool PlainVerbOver(std::string_view s, size_t byte, size_t at, const LineContext
     return false;
 }
 
+// Whether head, the text of a sentence before a verb, has a subject は, が or も after a person the
+// speaker honours (honorific.honoured-person: 社長は, 王子様が), as the word stage reads the respect of
+// られる (grammar.cpp RespectfulReading).
+bool HonouredSubjectBefore(std::string_view head) {
+    std::size_t start = 0;
+    for (const std::string_view mark : {"。", "！", "？", "!", "?", "「", "」", "『", "』"}) {
+        if (const std::size_t m = head.rfind(mark); m != std::string_view::npos) start = std::max(start, m + mark.size());
+    }
+    head = head.substr(start);
+    for (std::size_t at = 0; at < head.size(); at += text::DecodeRune(head.substr(at)).size) {
+        for (const std::string_view p : {"は", "が", "も"}) {
+            if (head.substr(at).starts_with(p) && dict::EndsWithMember(HDTRANS_CLASS("honorific.honoured-person"), head.substr(0, at)) > 0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 }  // namespace
 
 std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, const dict::Snapshot& snap) {
-    constexpr std::string_view kRe = "れ", kRu = "る";
+    constexpr std::string_view kRe = "れ", kRu = "る", kCan = "ることができ";
     if (text.find(kRe) == std::string_view::npos) return std::string(text);
     // The ら that the potential られ of an ichidan verb starts with.
     const std::string_view potential = word::Conjugation(7, 4);
@@ -3112,8 +3131,18 @@ std::string RewriteRaLessIchidan(std::string_view text, const LineContext& ctx, 
         }
         if (!found) continue;
         out.append(s, byte[done], byte[i] - byte[done]);
-        out += ra;
-        done = i;
+        // The ら-less form is only ever the potential: after an honoured subject, where the word stage
+        // would read られる as respect (社長は起きられる 일어나신다), it is ることができ (일어날 수가 있다).
+        // A negative stays られ: the word stage reads it as the potential (社長は起きられない).
+        const std::string_view after = std::string_view(s).substr(byte[i + 1]);
+        const bool negative = after.starts_with("な") || after.starts_with("ず") || after.starts_with("ん") || after.starts_with("ね");
+        if (!negative && HonouredSubjectBefore(std::string_view(s).substr(0, byte[from]))) {
+            out += kCan;
+            done = i + 1;
+        } else {
+            out += ra;
+            done = i;
+        }
     }
     if (done == 0) return std::string(text);
     out.append(s, byte[done], std::string::npos);
