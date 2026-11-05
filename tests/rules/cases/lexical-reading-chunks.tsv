@@ -16,7 +16,7 @@ cx:reading-chunks:45	んでもって久々の再会って感じで… ねっ？	
 cx:reading-chunks:45	そんでもって帝都公認のアマゾネスってんだからよー。	!rule:cx:reading-chunks:45	keep	rewrites
 dict:lex:3840:微動だに-1	だが俺はまだ砂の上に立ったままで、微動だにしていなかった。	has:미동도 하고 있지 않았다	fix	lookup
 dict:lex:3840:微動だにも-1	微動だにもしてはいけん！	has:미동도 해선	fix	lookup
-dict:lex:3840:ごまんと-1	この世には 世界に絶望した若者が ごまんと居る。	has:얼마든지 있다	fix	lookup
-dict:lex:3840:ごまんと-1	そんなことを言ってる奴らをごまんと見て来たんだ	has:얼마든지	fix	lookup
+dict:lex:3840:ごまんと-1	この世には 世界に絶望した若者が ごまんと居る。	has:수두룩하게 있다	fix	lookup
+dict:lex:3840:ごまんと-1	そんなことを言ってる奴らをごまんと見て来たんだ	has:수두룩하게	fix	lookup
 dict:lex:3840:おやっさん-1	おやっさんが言ってたんだけどよ。	has:아저씨가 말했는데	fix	lookup
 dict:lex:3840:いまだから-1	こういうのは、いまだからこそ楽しめるの	has:지금이니까	fix	lookup
