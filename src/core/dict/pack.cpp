@@ -383,8 +383,10 @@ void ParsePackRows(std::string_view file, std::string_view text, const Dict* bas
             std::string joined(cond);
             if (idiom) {
                 const std::vector<std::string_view> parts = Split(cond, ' ');
-                if (parts.size() != 3 || parts[0].empty() || parts[1].empty() || parts[2].empty())
-                    return fail("an idiom pattern is a noun, a particle and a verb apart by spaces, not " + userdict::internal::Quote(cond));
+                const bool modified = parts.size() == 4 && parts[3] == "+mod";
+                if ((parts.size() != 3 && !modified) || parts[0].empty() || parts[1].empty() || parts[2].empty())
+                    return fail("an idiom pattern is a noun, a particle and a verb apart by spaces (and +mod), not " + userdict::internal::Quote(cond));
+                c.modified = modified;
                 c.loose = true;
                 c.noun = parts[0];
                 c.idiomParticle = parts[1];

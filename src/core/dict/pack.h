@@ -87,6 +87,7 @@ struct Colloc {
     // or a space to an end, a mark or a space, and its target is written as it is.
     bool anchored = false;
     std::string noun, idiomParticle, verb;
+    bool modified = false;  // the idiom's noun may take a word that describes it (酷い目に遭う; cond … +mod)
 };
 
 struct PackTable {
