@@ -1449,6 +1449,11 @@ Voice VoiceOf(Flusher& f, const Item* it, VoiceForm form, std::string_view stem,
     }
     if (object && dict::StartsWithMember(HDTRANS_CLASS("ending.voice-desire"), rest) > 0) return Voice::Passive;
     if (AbilityScope(it, rest)) return Voice::Potential;
+    // The られ of an ichidan verb with an object before しまう (てしまう, ちゃう, ちまう) is what befell
+    // someone (猫に食べられちゃった 먹혀 버렸다, 見られてしまった), not an ability: one does not "end up able to",
+    // but where a word of ability scope says one can (誰でも食べられちゃう). A verb with no object has no
+    // Korean passive and is left to the rules below.
+    if (ichidan && object && dict::StartsWithMember(HDTRANS_CLASS("ending.voice-shimau"), rest) > 0) return Voice::Passive;
     // A trouble and a verb of feeling tell the passive from the potential, which only the られ of an
     // ichidan or くる verb also reads.
     if (ichidan && object && AdverseCondition(it, rest)) return Voice::Passive;

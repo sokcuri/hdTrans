@@ -1,0 +1,27 @@
+# 규칙: GRM-3939
+rule	input	expected	kind	layer
+voice:rare-shimau	食べられてしまいました	먹혀버렸습니다	fix	voice
+voice:rare-shimau	結局　百目鬼に食べられちまった	결국 도메키에 먹혀버렸다	fix	voice
+voice:rare-shimau	首をはねられてしまうのでしょう。	목을 베어져버리겠죠.	fix	voice
+voice:rare-shimau	顔を変えられてしまったんだ	얼굴이 바꾸어져버린 거야	fix	voice
+voice:rare-shimau	あからさまに避けられてしまうと	명백하게 피해져버리면	fix	voice
+voice:rare-shimau	魔水晶に変えられてしまい―	마수정으로 바꾸어져버려-	fix	voice
+voice:rare-shimau	覚えられてしまう恐れがある	기억되어버리는 우려가 있다	fix	voice
+voice:rare-shimau	入れられちゃうよ｡	넣어져버릴 거야.	fix	voice
+dict:w:34230	もう食べられちゃったの!?	벌써 먹혀버렸어!?	fix	lookup
+dict:w:34230	僕の分まで全部食べられちゃうよ	내 몫까지 전부 먹혀버려	fix	lookup
+dict:w:34230	時計ワニに食べられちゃう	시계 악어에게 먹혀버린다	fix	lookup
+dict:w:34230	その前に食べられちゃうよ！	그 전에 먹혀버려!	fix	lookup
+dict:w:34230	食べられちゃったんじゃ…	먹혀버렸지…	fix	lookup
+dict:w:34230	わたし食べられちゃうかもだからぁ	나 먹혀버릴지도니까	fix	lookup
+voice:rare-shimau	うわさを立てられてしまい…。➡	소문이 세워져버려…. ➡	fix	voice
+voice:rare-shimau	という渾名をつけられてしまったのである。	라는 별명이 붙여져버렸다.	fix	voice
+dict:w:34230	食べられちゃったらしいわよ｡	먹혀버린 것 같아.	fix	lookup
+dict:w:34231	いくらでも食べられちゃう｡	얼마든지 먹을 수 있게 된다.	keep	lookup
+dict:w:34231	何個でも食べられちゃう！	몇 개라도 먹을 수 있게 돼!	keep	lookup
+dict:w:34231	どんどん食べられちゃうよ	점점 먹을 수 있게 돼	keep	lookup
+dict:w:34231	ねー！　甘すぎないからどんどん食べられちゃう！	저기~! 너무 달지 않으니까 점점 먹을 수 있게 돼!	keep	lookup
+dict:w:34231	何杯でも食べられちゃう	몇 잔이라도 먹을 수 있게 된다	keep	lookup
+dict:w:34231	幾つでも食べられちゃうくらい おいしいんだよ。	몇이라도 먹을 수 있게 될 정도로 맛있어.	keep	lookup
+voice:rare-shimau	見られちゃった	들켜버렸다	keep	voice
+voice:rare-shimau	殴られてしまった	맞아버렸다	keep	voice

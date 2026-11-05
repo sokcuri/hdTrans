@@ -30,6 +30,7 @@
 //= noun.time-ni	Times of day, week and year that take 에 in Korean (夜, 朝, 週末, 冬): its だって before a predicate is 에도 (夜だって働く 밤에도 일한다; spec GRM-3923).
 //= verb.warning-act	Stems of acts one threatens or announces before a line-final よ (怒る, 殴る, 撃つ, 燃やす): their dictionary form with よ is a warning aimed at the listener, -ㄹ 거야 (怒るよ 화낼 거야; spec GRM-3940).
 //= verb.announce-move	Stems of the speaker's own move announced to the listener before a line-final よ (帰る, 戻る, 寝る, 行く): -ㄹ게 (先に帰るよ 먼저 돌아갈게, もう寝るよ 이제 잘게; spec GRM-3940).
+//= ending.voice-shimau	What follows the られ of an ichidan verb when しまう comes next (てしまう, ちゃう, ちまった): the passive of what befell someone, not the potential (食べられちゃった 먹혀 버렸다; spec GRM-3939).
 //= noun.least-able	Who is the least able to do or know a thing (子供, 素人, 赤ん坊, 猿): its だって before an ability or knowing is the extreme case, (이)라도 (子供だって分かる 애라도 안다; spec GRM-3923).
 //= noun.relation-person	A person named by a tie to someone (友達, 仲間, 家族, 味方): its だって right before a verb of thinking or knowing is said of someone, quoted (友達だって思ってた 친구라고; spec GRM-3923).
 //= word.direction-demonstrative	Demonstratives of a side or a way (そっち, こちら): before an abstract noun the の stays a space (そっちの意味 그쪽 의미; spec GRM-3721).
@@ -11533,6 +11534,22 @@ verb.announce-move	寝
 verb.announce-move	出かけ
 verb.announce-move	でかけ
 verb.announce-move	行
+ending.voice-shimau	てしま
+ending.voice-shimau	でしま
+ending.voice-shimau	ちゃった
+ending.voice-shimau	ちゃって
+ending.voice-shimau	ちまった
+ending.voice-shimau	ちまって
+ending.voice-shimau	じゃった
+ending.voice-shimau	じまった
+ending.voice-shimau	ちゃう
+ending.voice-shimau	ちゃい
+ending.voice-shimau	ちゃわ
+ending.voice-shimau	ちまう
+ending.voice-shimau	ちまい
+ending.voice-shimau	ちまわ
+ending.voice-shimau	じゃう
+ending.voice-shimau	じまう
 noun.least-able	子供
 noun.least-able	子ども
 noun.least-able	こども
