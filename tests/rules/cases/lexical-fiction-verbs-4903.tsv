@@ -1,0 +1,23 @@
+# 규칙: LEX-4903
+rule	input	expected	kind	layer
+sense:osamaru-subside	吐き気はいつの間にか収まっていた。	has:가라앉고	fix	senses
+sense:osamaru-subside	やべえオレも鳥肌が収まらない	has:가라앉지 않는다	fix	senses
+sense:osamaru-subside	事態が収まったことを、私は王子に報告しに行く。	has:가라앉은	fix	senses
+sense:osamaru-subside	と、そろそろ地震の揺れも収まってきたな……	has:가라앉아	fix	senses
+sense:osamaru-subside	二人で見てたら、どんどん光が収まって……	has:가라앉아	fix	senses
+sense:osamaru-subside	沙漠での紛争がおさまりつつある	has:가라앉고	fix	senses
+sense:osamaru-subside	今回は丸く収まったみたいでよかったねー！	has:원만하게 해결된	fix	senses
+sense:osamaru-subside	全て丸く収まるよ	has:원만하게 해결돼	fix	senses
+sense:osamaru-subside	私の軽い体はあっさりとメイドの腕の中に収まってしまう。	has:들어가	keep	senses
+sense:osamaru-subside	容疑者っていう枠組みに、すっぽりと収まっちまう	has:들어가	keep	senses
+cx:fic-polysemy-3:10	誰も引かなかった。	has:물러서지 않았다	fix	rewrites
+cx:fic-polysemy-3:10	これはもしかして、絶対引かないモード？	has:물러서지 않는	fix	rewrites
+cx:fic-polysemy-3:10	一度言い出したら引かないタイプだし	has:물러서지 않는	fix	rewrites
+cx:fic-polysemy-3:10	どうしても出てほしいって引かないんですよ	has:물러서지 않아요	fix	rewrites
+cx:fic-polysemy-3:10	一線引くところは、きちんと引かないと、ずるずるいってしまいそうな気がする。	lacks:물러서	keep	rewrites
+cx:fic-polysemy-3:10	「お前は風邪なんか引かない。」	lacks:물러서	keep	rewrites
+cx:fic-polysemy-3:10	自分で引き金は引かないぞ	lacks:물러서	keep	rewrites
+cx:fic-polysemy-3:10	「桜庭、腰を引かないでくれ」	lacks:물러서	keep	rewrites
+sense:shikomu-plant	僕がわざわざ毒を仕込むことはありませんが	has:독을 넣을	fix	senses
+sense:shikomu-plant	例えば、左腕にマシンガンを仕込む改造手術でもですか？	has:넣는	fix	senses
+sense:shikomu-plant	「私たちに戦い方を仕込んだ事を後悔しながら死になさい」	has:가르친	keep	senses
