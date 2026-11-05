@@ -565,6 +565,14 @@ void Registry::Add(std::string_view rawLine) {
         const Run& run = runs[i];
         if (run.kanji) {
             count(runs_, std::string(run.text));
+            // A name written with a kanji honorific in the same run (甲児君, 夢結様) is written there
+            // too (spec LEX-4827). Not 殿, 嬢 or the titles, which also end words (大魔殿, 令嬢).
+            for (const std::string_view h : {std::string_view("君"), std::string_view("様"), std::string_view("氏")}) {
+                if (run.text.size() > h.size() && run.text.ends_with(h) && RuneCount(run.text.substr(0, run.text.size() - h.size())) >= 2) {
+                    count(runs_, std::string(run.text.substr(0, run.text.size() - h.size())));
+                    break;
+                }
+            }
             if (NameEnd(line.substr(run.end))) count(ended_, std::string(run.text));
         } else {
             count(kana_, std::string(run.text));
@@ -588,7 +596,15 @@ void Registry::Add(std::string_view rawLine) {
             if (chain < i) count(chains_, std::string(line.substr(runs[chain].start, run.end - runs[chain].start)));
             chain = i + 1;
         }
-        if (const std::string t = HonorificRun(line, run); !t.empty()) count(hon_, t);
+        if (const std::string t = HonorificRun(line, run); !t.empty()) {
+            count(hon_, t);
+            // The honorific after it, in the run or after it. 殿 also ends words (大魔殿) and 様 follows
+            // gods and spirits (水虎様), so a guessed name needs those twice (spec LEX-4827).
+            const std::string_view after = run.text.size() > t.size() && run.text.starts_with(t)
+                                               ? run.text.substr(t.size())
+                                               : std::string_view(line).substr(run.end);
+            if (!after.starts_with("殿") && !after.starts_with("様") && !after.starts_with("さま")) honGuess_.insert(t);
+        }
         if (!run.kanji && RuneCount(run.text) >= 2 && AgentCue(std::string_view(line).substr(run.end))) {
             count(agents_, std::string(run.text));
         }
