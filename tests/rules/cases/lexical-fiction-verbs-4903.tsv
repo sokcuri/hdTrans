@@ -40,3 +40,12 @@ cx:amari-not:22	その愛くるしい仕草を見るに、とてもそんなこ�
 cx:amari-not:22	一人ではとても無理だわ。	has:도저히 무리	fix	rewrites
 cx:amari-not:22	正直、とても面倒なことになったとしか思えない。	has:무척	keep	rewrites
 cx:amari-not:22	でもきっと、それはとても小さくて気付けない何かなのだ。	has:무척	keep	rewrites
+cx:fic-polysemy-3:29	イヤ、違うんだ。	has:아니, 다른 거야	fix	rewrites
+cx:fic-polysemy-3:29	イヤ、そうじゃない。	has:아니, 그렇지 않다	fix	rewrites
+cx:fic-polysemy-3:29	イヤ、行こう。	has:아니, 가자	fix	rewrites
+cx:fic-polysemy-3:29	「イヤ、待ってくれ」	has:「아니, 기다려 줘」	fix	rewrites
+cx:fic-polysemy-3:29	イヤ、俺は行く。	has:아니, 나는 간다	fix	rewrites
+cx:fic-polysemy-3:29	「イヤ、まさか」	has:「아니, 설마」	fix	rewrites
+cx:fic-polysemy-3:30	イヤ、待って、本当に	has:아니, 기다려	fix	rewrites
+cx:fic-polysemy-3:30	「イヤ、違うから、マジで……」	has:「아니, 아니니까	fix	rewrites
+cx:fic-polysemy-3:29	イヤだ、もう！	has:싫다	keep	rewrites
