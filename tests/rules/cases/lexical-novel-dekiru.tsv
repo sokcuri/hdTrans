@@ -7,7 +7,7 @@ dict:novel-dekiru:4	父が帰宅する頃には夕飯の準備はできたよう
 dict:novel-dekiru:4	準備が出来ましたら別邸に向かいましょう	has:준비가 되면	fix	local
 dict:novel-dekiru:3	夕食の用意ができました。	has:준비가 되었습니다	fix	local
 dict:novel-dekiru:3	朝食の支度ができた。	has:준비가 되었다	fix	local
-dict:novel-dekiru:3	準備はできてる？	has:준비는 되고	fix	local
+dict:novel-dekiru:3	準備はできてる？	has:준비는 됐	fix	local
 dict:novel-dekiru:4	用意は出来ましたか？	has:준비는 되었습니까	fix	local
 dict:novel-dekiru:3	こちらの準備ができるまでいろいろ時間がかかった	has:준비가 될 때까지	fix	local
 dict:novel-dekiru:3	夕食の支度もできると思いますよ。	has:준비도 된다고	fix	local
