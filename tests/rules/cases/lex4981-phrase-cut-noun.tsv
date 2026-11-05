@@ -1,0 +1,20 @@
+# 규칙: LEX-4981
+rule	input	expected	kind	layer
+segment:phrase-cut	次の日曜日にまた来るわ、と約束した。	다음 일요일에 또 와, 라고 약속했다.	fix	segment
+segment:phrase-cut	完璧な王太子妃で、完璧な王妃であり、公爵家の後ろ盾もあるソランジュは、社交界でも実務でも優秀だった。	완벽한 왕태자비로, 완벽한 왕비이며, 공작가의 후원자도 있는 솔란지는, 사교계에서도 실무라도 우수했다.	fix	segment
+segment:phrase-cut	父にとってアデライドは公爵家の後継者でしかなかった。	아버지에게 아델라이드는 공작가의 후계자에 지나지 않았다.	fix	segment
+segment:phrase-cut	「まあ、落ち着け小太刀。俺もこいつの頭の中身はわからない」	「뭐, 진정해 작은 칼. 나도 이 녀석의 머리의 내용물은 몰라」	fix	segment
+segment:phrase-cut	ったく… それにしても コンテナの中身って何なんだ？	참나… 그나저나 컨테이너의 내용물은 뭐야?	fix	segment
+segment:phrase-cut	脾臓があるのは 体の中心ではなく 左側だろう。	지라가 있는 것은 몸의 중심이 아니고 좌측일 것이다.	fix	segment
+segment:phrase-cut	「いえ、自分の力不足を痛感させられて……」	「아뇨, 자신의 역부족을 통감하지 않을 수 없어……」	fix	segment
+segment:phrase-cut	自分の力量も知らないで、結果を他人のせいにして泣き言を言ってるだけの情けない男さ……	자신의 역량도 모르고, 결과를 타인 탓으로 해 푸념을 말할 뿐의 한심한 남자야……	fix	segment
+segment:phrase-cut	「神社は公共の場所だぞ。勝手に独占するな。」	「신사는 공공의 장소다. 마음대로 독점하지 마.」	fix	segment
+segment:phrase-cut	女の子守唄	여자의 자장가	fix	segment
+segment:phrase-cut	それは暗闇の中の一筋の光明	그것은 어둠 속의 한 줄기의 광명	fix	segment
+segment:phrase-cut	日の出前の東の空だ	일출 전의 동쪽의 하늘이다	keep	segment
+segment:phrase-cut	男の子達は遊びます	남자아이들은 놉니다	keep	segment
+segment:phrase-cut	「かいじん」海の神様の意味だとしたら	「수상한 사람」바다의 신님의 의미라고 하면	keep	segment
+segment:phrase-cut	目の前の席にヤツが座っていた。	눈앞의 자리에 녀석이 앉아 있었다.	keep	segment
+segment:phrase-cut	そのとき、学園長が静かに口を開いた。	그 때, 학원장이 조용하게 입을 열었다.	keep	segment
+segment:phrase-cut	「探すだけ無駄、と申したのです。もっと言いましょうか。時間の無駄です。諦めましょう」	「찾아 봤자 헛수고, 라고 했습니다. 좀 더 말할까요. 시간 낭비입니다. 포기합시다」	keep	segment
+segment:phrase-cut	父の手の中で、グラスがかちりと鳴った。	아버지의 손안으로, 잔이 딸깍 울렸다.	keep	segment
