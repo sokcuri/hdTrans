@@ -623,6 +623,17 @@ bool UtteranceEdge(const Item* x, const Item* inside) {
     return false;
 }
 
+// The last rune of t that is no space, or 0.
+char32_t LastVisibleRune(std::string_view t) {
+    char32_t found = 0;
+    for (std::size_t q = 0; q < t.size();) {
+        const text::Rune r = text::DecodeRune(t.substr(q));
+        q += std::max<std::size_t>(r.size, 1);
+        if (r.cp != U' ' && r.cp != U'\t' && r.cp != U'\u3000') found = r.cp;
+    }
+    return found;
+}
+
 // Whether the words from items[i] write text exactly and make the whole utterance (^text$): [i, end).
 bool Utterance(const Worker& w, const std::vector<Item*>& items, std::size_t i, std::string_view text, std::size_t& end) {
     std::size_t k = i;
@@ -694,6 +705,15 @@ bool Utterance(const Worker& w, const std::vector<Item*>& items, std::size_t i, 
     if (const int t = first->tokenIndex - 1; t >= 1 && t < w.TokenCount() && (w.Tok(t).text.starts_with("…") || w.Tok(t).text.starts_with("‥"))) {
         const tokenizer::TokenView prev = w.Tok(t - 1);
         if (prev.type == tokenizer::kTypeJapanese && !prev.text.ends_with("、") && !prev.text.ends_with("。")) return false;
+    }
+    // a row that may go on from the word before it (the copula of だからね, the じゃん of ジャン, the って of
+    // てことで, なんだって) does not start after a word, with or without a space (卒業 だからね, 卒業だからね)
+    bool attaches = false;
+    for (const std::string_view a : {"だ", "で", "じゃ", "ジャ", "て", "な"}) attaches = attaches || text.starts_with(a);
+    if (attaches) {
+        char32_t open = LastVisibleRune(before);
+        for (int t = first->tokenIndex - 1; open == 0 && t >= 0; t--) open = LastVisibleRune(w.Tok(t).text);
+        if (open != 0 && std::u32string_view(U"。．.！？!?…‥「『（(“《≪【［[、，,").find(open) == std::u32string_view::npos) return false;
     }
     end = k;
     return true;
@@ -1027,7 +1047,7 @@ void ApplyCollocs(Flusher& f, const dict::PackTable& t, std::set<const Item*>& t
             if (carrier == best.end) {
                 // written after its emptied words, the target takes the space a comma before it leaves
                 const bool comma = i > 0 && (items[i - 1]->group->surface == "、" || items[i - 1]->group->surface == "，");
-                head->appended += comma ? " " + c.headRaw : c.headRaw;
+                head->appended += comma ? " " + c.headRaw : carried;
             }
             head->packRows.push_back(r.global);
             i = best.end - 1;

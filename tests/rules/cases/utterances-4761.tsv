@@ -45,3 +45,15 @@ dict:lex4762	お前ら何やってんだよ	너희들 뭐 하는 거야	fix	look
 dict:lex4762	お義母さんが来た	어머님이 왔다	fix	lookup
 dict:lex4762	一刻も早く逃げろ	한시라도 빨리 도망쳐라	fix	lookup
 dict:lex4762	やかましい！	시끄러워!	fix	lookup
+pack:utterance	プリズムストーン よこせ！	프리즘 스톤 내놔!	fix	packs
+pack:utterance	プリズムストーン よこせ！ 全部！	프리즘 스톤 내놔! 전부!	fix	packs
+pack:utterance	おい 何すんだよ	이봐 무슨 짓이야	fix	packs
+pack:utterance	これでも 食らえ！	이것이라도 받아라!	fix	packs
+pack:utterance	そんなこと 知るか！	그런 것 알 게 뭐야!	fix	packs
+pack:utterance	部屋に 入れ	방에 들어와	fix	packs
+pack:utterance	卒業 だからね。	졸업이니까.	keep	packs
+pack:utterance	卒業だからね。	졸업이니까.	keep	packs
+pack:utterance	春先だからね。	초봄이니까.	keep	packs
+pack:utterance	僕はこれで真実の尊皇だからね。	나는 이것으로 진실의 존왕이니까.	keep	packs
+pack:utterance	なんか、兄貴元気ないっすね？そんなんじゃ、ここの生活がただ厳しくなるだけっすよ。	왠지, 형 기운이 없네요? 그런 것은, 여기의 생활이 다만 엄격해질 뿐입니다.	keep	packs
+pack:utterance	もう種々な物を一杯飾った店ばかりなんだって。	이제 다양한 물건을 많이 장식한 가게만 라고.	keep	packs

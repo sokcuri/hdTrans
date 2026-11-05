@@ -37,3 +37,8 @@ pack:idiom	頭にいっぱい入れた。	머리에 가득 넣었다.	keep	packs
 pack:idiom	今居る場所はなぜか開けているが、それでも遠方が見えるほどではない。	지금 있는 장소는 왠지 트여 있지만, 그래도 먼 곳이 보일 정도는 아니다.	keep	packs
 pack:idiom	先越されてもうたし	앞 넘어져버렸고	keep	packs
 pack:idiom	でかい事して 女房の鼻を 明かしてやりたいんだよ｡	큰 일 해 부인의 코를 밝혀 주고 싶어.	keep	packs
+pack:idiom	バランスが とれた食事。	균형이 잡힌 식사.	fix	packs
+pack:idiom	バランスが よく とれる。	has:잘 잡힌다	fix	packs
+dict:jisjk:257670	バランスがとれた重武装ボディでしょ？	균형이 잡힌 중무장 보디지?	fix	lookup
+dict:jisjk:257670	栄養のバランスがとれている。	has:균형이 잡히	fix	lookup
+dict:jisjk:257670	バランスがとれていない。	균형이 잡히지 않았다.	fix	lookup
