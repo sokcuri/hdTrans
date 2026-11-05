@@ -46,6 +46,15 @@ bool SuruAfterMo(std::string_view s) {
     return r.starts_with("し") || r.starts_with("せ") || r.starts_with("す");
 }
 
+// Whether さえ at the start of s is followed by a condition of する (纏いさえすれば, 気付きさえすりゃ,
+// 戦いさえしたら): the continuative before it is the verb, the only act the condition needs, not a noun
+// (spec GRM-3848). Other forms (盗みさえする, even that; しなければ) keep their reading.
+bool SuruAfterSae(std::string_view s) {
+    if (!s.starts_with("さえ")) return false;
+    const std::string_view r = s.substr(std::string_view("さえ").size());
+    return r.starts_with("すれ") || r.starts_with("すりゃ") || r.starts_with("したら");
+}
+
 // Whether は at the start of s is followed by a negative of する (負けはしない, 変わりはしません, 許しはせず):
 // the continuative before it is the verb, denied with stress, not a noun.
 bool SuruNegativeAfterWa(std::string_view s) {
@@ -530,6 +539,13 @@ bool Item::AcceptVerbContinuation(Record* following) {
         }
         return true;
     };
+    // A continuative before さえ and する (SuruAfterSae) that is no noun of what one senses, whose する is 들다
+    // or 나다 (感じさえする 느낌마저 든다: noun.sensed, noun.feeling-suru).
+    auto suruAfterSae = [&]() {
+        if (!SuruAfterSae(after())) return false;
+        const std::string form = surface + std::string(tail.substr(0, static_cast<std::size_t>(pattern())));
+        return !dict::InClass(HDTRANS_CLASS("noun.sensed"), form) && !dict::InClass(HDTRANS_CLASS("noun.feeling-suru"), form);
+    };
     Window two, four, six;
     if (const std::string_view r = after(); WidthOf(r) >= 2) two = Left(r, 2);
     if (const std::string_view r = after(); WidthOf(r) >= 4) four = Left(r, 4);
@@ -555,7 +571,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
          (two == kJaKa && !(four == kJaKane) && !(four == kJaKake)) ||
          (two == kJaYo && !(WayOfDoing(base.patternKind, after(), base.nextText) && !NounOfManner(surface))) ||
          four == kJaNado ||
-         four == kJaNazo || four == kJaShika || four == kJaMade || four == kJaSae)) {
+         four == kJaNazo || four == kJaShika || four == kJaMade || (four == kJaSae && !suruAfterSae()))) {
         return false;
     }
     // The し of a する word before まう, まっ, まわ, まえ or まお starts the verb しまう, put away after
@@ -671,7 +687,7 @@ bool Item::AcceptVerbContinuation(Record* following) {
         (surface == kJaOyo && Conjugation(base.patternKind, base.kind) == kJaBi)) {
         if (!(base.ClassifyTrailingPunctuation(after()) == 1 || four == kJaNiku || four == kJaTsutsu || four == kJaKire ||
               four == kJaKireKanji || four == kJaSou || after().starts_with("\"") || two == kJaMa || two == kJaHajiKanji ||
-              two == kJaNasai || two == kJaNi || ((SuruAfterMo(after()) || stressedNegative()) && !OneKana(surface)))) {
+              two == kJaNasai || two == kJaNi || ((SuruAfterMo(after()) || suruAfterSae() || stressedNegative()) && !OneKana(surface)))) {
             const std::pair<const Window*, std::string_view> compounds[] = {
                 {&six, kJaNagara},     {&six, kJaNasai},       {&six, kJaTsutsua},     {&six, kJaHaji},
                 {&four, kJaGata},      {&four, kJaGachi},      {&two, kJaGataKanji},   {&four, kJaYasu},
