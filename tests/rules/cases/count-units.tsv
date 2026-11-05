@@ -310,3 +310,8 @@ cx:tai-count:30	エルフの少女がゴブリンを3体倒した。	엘프의 �
 cx:tai-count:28	エルフが森の奥に3体いた。	엘프가 숲속에 3명 있었다.	fix	rewrites
 cx:tai-count:49	一体だけですよぅ。	한 체 뿐이에요.	keep	rewrites
 cx:tai-count:49	ゴブリン一体一体を倒す。	고블린 하나하나를 쓰러뜨린다.	fix	rewrites
+cx:tai-count:50	ランクＳの魔物一体かＡの集団を倒せる程度の実力	has:마물 한 마리	fix	rewrites
+cx:tai-count:50	ゴーレム一体は倒した	has:골렘 한 마리는	fix	rewrites
+cx:tai-count:50	ゴーレム一体ずつ	has:한 마리씩	fix	rewrites
+cx:tai-count:40	ロボット一体で十分だ	has:로봇 1기로	fix	rewrites
+cx:tai-count:50	ここは一体、どうなっているの	has:도대체	keep	rewrites
