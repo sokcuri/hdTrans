@@ -15,5 +15,5 @@ normalize:kin-man	じゃ… じゃあ インカㇻマッが俺のお姉ちゃん
 normalize:kin-man	お姉ちゃん、宿題手伝ってくれよ。俺、数学が苦手なんだ。	누나, 숙제 도와 줘. 나, 수학에 약하다.	fix	normalize
 normalize:kin-man	姉さん、俺が駅まで送るよ。	누나, 내가 역까지 배웅할게.	fix	normalize
 normalize:kin-man	お兄様、俺はもう子供じゃないんだぜ。	형님, 나는 이제 아이가 아니다.	fix	normalize
-normalize:kin-man	よし、僕が行く。初月出るぞ！姉さん、ここは任せて。	좋아, 내가 간다. 처음달 나오겠어! 언니, 여기는 맡겨.	keep	normalize
+normalize:kin-man	よし、僕が行く。出るぞ！姉さん、ここは任せて。	좋아, 내가 간다. 나가겠어! 언니, 여기는 맡겨.	keep	normalize
 normalize:kin-man	姉妹で俺を挟むなよ	자매로 나를 사이에 두지 마	keep	normalize
