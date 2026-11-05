@@ -1231,6 +1231,110 @@ std::string RewriteEmphaticSpellings(std::string_view in) {
     return ReplaceAll(in, EmphaticAt, [](const Match& m) { return std::string(m.group[1]); });
 }
 
+// Slurred and colloquial spellings of standard words, read as the standard spelling (SpokenSpelling): from,
+// to, the characters one of which must stand before from (empty: any), whether the start of the text also
+// does, and the characters that may not follow from.
+struct Respelling {
+    std::string_view from, to;
+    std::u32string_view before;
+    std::u32string_view notAfter;
+    bool atStart = true;
+};
+constexpr Respelling kRespellings[] = {
+    {"ちったぁ", "ちっとは", U"", U""},          // ちったぁ教育の必要が ちっとは
+    {"ちったあ", "ちっとは", U"", U""},
+    {"ぐれぇ", "ぐらい", U"", U""},              // 捻り潰すぐれぇ簡単 ぐらい (not くれぇ, the drawn くれ)
+    {"ぐれえ", "ぐらい", U"", U""},
+    {"ばっか", "ばかり", U"たてだで", U"りじ", false},  // 新調したばっか ばかり; not ばっかじゃない (ばか)
+    {"あーゆー", "ああいう", U"", U""},          // あーゆーいい子 ああいう, as こーゆー and そーゆー
+    {"つうか", "つーか", U"、「『 　", U""},    // つうか、世間セマ (not the 通過 of 通過)
+    {"ましぇ", "ませ", U"", U""},                // お答えできましぇん ません
+    {"どぉーせ", "どうせ", U"", U""},            // どぉーせラブラブ どうせ
+    {"どぉせ", "どうせ", U"", U""},
+};
+
+bool SpokenSpelling(std::string_view s, size_t pos, Match& m) {
+    for (const Respelling& r : kRespellings) {
+        if (!s.substr(pos).starts_with(r.from)) continue;
+        if (!r.before.empty()) {
+            const char32_t b = Before(s, pos);
+            if (b == 0 ? !r.atStart : !In(b, r.before)) continue;
+        }
+        const size_t end = pos + r.from.size();
+        if (end < s.size() && In(At(s, end).cp, r.notAfter)) continue;
+        m.group[1] = r.to;
+        m.end = end;
+        return true;
+    }
+    return false;
+}
+
+// なきゃ said with a copula for "must" (行かなきゃだし, しなきゃだよ): なきゃいけない, the obligation; not
+// なきゃだめ, which reads whole.
+bool NakyaDa(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!Lit(s, p, "なきゃだ")) return false;
+    if (p < s.size() && !In(At(s, p).cp, U"しよねな。、！？!?…‥」』）) 　")) return false;
+    m.end = p;
+    return true;
+}
+
+// The て form with こねえ, こねー, こねぇ, the casual negative of くる (かかってこねーのか): てこない.
+bool TeKoNee(std::string_view s, size_t pos, Match& m) {
+    size_t p = pos;
+    if (!OneOf(s, p, U"てで")) return false;
+    m.group[1] = Span(s, pos, p);
+    if (!Lit(s, p, "こね") || !OneOf(s, p, U"ぇえー")) return false;
+    m.end = p;
+    return true;
+}
+
+// The る (or るの) of a verb said ん before の, だ, じゃ, です or なら (喋んの, 馬鹿にすんの, 過ぎんだよ, 待たせんのよ):
+// the verb in its dictionary form. Only where the ん can be no other: a godan verb in る of one kanji before の
+// (喋んの; not 死んだ, 飲んじゃ, the past and the て form of godan verbs in む, ぶ, ぬ), and する said す. The ん after an
+// ichidan stem (疲れんだろ, 出来んのか) is as often the old or western negative, so it stays.
+const RunLookup* ruContractionRuns = nullptr;
+bool RuContraction(std::string_view s, size_t pos, Match& m) {
+    const RunLookup* runs = ruContractionRuns;
+    if (runs == nullptr || runs->verbForm == nullptr || runs->dictionaryVerb == nullptr || pos == 0) return false;
+    size_t p = pos;
+    if (!Lit(s, p, "ん")) return false;
+    const std::string_view after = s.substr(p);
+    const bool no = after.starts_with("の") || after.starts_with("なら");
+    if (!no && !after.starts_with("だ") && !after.starts_with("じゃ") && !after.starts_with("です")) return false;
+    const std::string_view head = s.substr(0, pos);
+    const text::Rune last = LastRune(head);
+    const std::string_view rest = head.substr(0, head.size() - last.size);
+    const char32_t before = rest.empty() ? 0 : LastRune(rest).cp;
+    bool verb = false;
+    if (IsKanjiClass(last.cp) && no) {
+        // A godan verb in る of one kanji (喋んの, 帰んの); not an ichidan one (見んの, 居んの, 出来んのか), whose ん is
+        // as often the old or western negative.
+        verb = !In(last.cp, U"見居着寝似煮干射得経来出") && runs->verbForm(runs->context, std::string(head.substr(rest.size())) + "る");
+    } else if (last.cp == U'す') {
+        // する said す after を, に, も, は or どう, そう, こう, 何 (馬鹿にすんの, どうすんの), before の, なら, じゃ or だろ; not
+        // すんだ, the past of 済む (落ちずにすんだ), nor the す of a verb (落とすんだ, 脱がすんだ).
+        const bool when = no || after.starts_with("じゃ") || after.starts_with("だろ");
+        const bool word = In(before, U"をにもは何") || rest.ends_with("どう") || rest.ends_with("そう") || rest.ends_with("こう");
+        verb = when && word;
+    }
+    if (!verb) return false;
+    // ん stands for る before の and なら (するの, するなら), and for るん before だ, じゃ and です (過ぎるんだ).
+    m.group[1] = no ? "る" : "るん";
+    m.end = p;
+    return true;
+}
+
+std::string RewriteSlurred(std::string_view in, const RunLookup& runs) {
+    std::string text = ReplaceAll(in, SpokenSpelling, [](const Match& m) { return std::string(m.group[1]); });
+    text = ReplaceAll(text, NakyaDa, [](const Match&) { return std::string("なきゃいけない"); });
+    text = ReplaceAll(text, TeKoNee, [](const Match& m) { return Cat({m.group[1], "こない"}); });
+    ruContractionRuns = &runs;
+    text = ReplaceAll(text, RuContraction, [](const Match& m) { return std::string(m.group[1]); });
+    ruContractionRuns = nullptr;
+    return text;
+}
+
 std::string RewriteCasual(std::string_view in, const RunLookup& runs, bool contracted) {
     std::string text = ReplaceAll(in, Shiren, [](const Match& m) { return Cat({"かも", m.group[1], "ない"}); });
     text = ReplaceAll(text, TeNeTsuNo, [](const Match& m) { return Cat({m.group[1], "いないっての"}); });
