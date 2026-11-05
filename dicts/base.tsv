@@ -3897,6 +3897,7 @@ ttt	ttt	K110			GN				jisjk:201744
 いますぐ	지금 곧	E300			GN				jisjk:148993		
 いまだ	아직도	E301			GN				jisjk:97		
 いまだ	지금 &A6@	M443			GN				jisjk:144819		
+いまだから	지금이니까	E311			GN			いまだから는 いまだ(아직)와 から가 아니라 `지금이니까`다(LEX-3840).	lex:3840:いまだから-1		
 いまだし	미숙$AB@	H7U0			GN				jisjk:4871		
 いまだに	아직껏	E311			GN				jisjk:98		
 いまでき	지금 할 수 &HN@	M427			GN				jisjk:144822		
@@ -7004,6 +7005,7 @@ ttt	ttt	K110			GN				jisjk:201744
 おやすみ	잘자요	I110			GN	3463	||1 G+0== "Td"	おやすみ가 문장에 홀로 있거나 Td 코드가 있으면 잘자요를 고른다. (미발동: rare-context)	jisjk:343540		
 おやすみなさい	안녕히 주무십시오	I110			GN				jisjk:150768		
 おやだま	우두 머리	I110	VHn		GN				jisjk:40530		
+おやっさん	아저씨	N110	VHn		GN			おやっさん은 親父さん의 구어, `아저씨`다(LEX-3840).	lex:3840:おやっさん-1		
 おやつ	간식	I110	VFdVFd		GN				jisjk:40531		
 おやのすねをかじ	부모의 등골을 빼&HU@	M428			GN				jisjk:117223		
 おやばか	자식을 자랑하는 것	N110	SFlVHn		GN				jisjk:166145		-1
@@ -18714,6 +18716,7 @@ ttt	ttt	K110			GN				jisjk:201744
 ごますり	아첨	I110	UTs		GN				jisjk:41013		
 ごまめ	마른 멸치 새끼	I110	VFdQAAQACQAC		GN				jisjk:41014		
 ごまをす	아부를 &AV@	M428			GN				jisjk:117425		
+ごまんと	수두룩하게	E311			GN			ごまんと는 아주 많이, `수두룩하게`다(LEX-3840).	lex:3840:ごまんと-1		
 ごま塩	깨소금	I110	VFd		GN				jisjk:41015		
 ごま油	참기름	N110	VFd		GN				jisjk:184011		
 ごみ	쓰레기	N110			GN				jisjk:13894		
@@ -205825,6 +205828,8 @@ ttt	ttt	K110			GN				jisjk:201744
 微力	미력	N110			GN				jisjk:22378		
 微力ながら	변변치 않은 힘이나마	E300			GN				jisjk:266933		
 微動	미동	N110		Hd	GN				jisjk:22375		
+微動だに	미동도	E311			GN			微動だに는 뒤의 せず, せん, しない와 함께 `미동도`다(LEX-3840).	lex:3840:微動だに-1		
+微動だにも	미동도	E311			GN			微動だにも는 뒤의 する와 함께 `미동도`다(LEX-3840).	lex:3840:微動だにも-1		
 微動だにしな	끄떡도 $DH@	H7N0			GN				jisjk:137785		
 微吟	미음	N110		Hd	GN				jisjk:154508		
 微圧計	미압계	I110	VPe		GN				jisjk:69395		

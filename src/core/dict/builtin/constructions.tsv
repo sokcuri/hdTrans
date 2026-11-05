@@ -296,6 +296,12 @@ cx:split-compounds:20	GRM-3849	&&4 S+0== "目に" U+0== "Rて" ||2 S-1== @Lnumer
 cx:split-compounds:30	LEX-3835	&&2 S+0== "なる程" S+1== "度"	set-target "될    " set-target@+1 "정도"	いびつになる程度で 찌그러지게 될 정도로
 cx:split-compounds:40	LEX-3836	&&3 ||2 S+0== "一振り" S+0== "ひと振り" S+1== "の" S+2== @Rnoun.count-blade	set-target "한 자루"	一振りの剣 한 자루의 검
 cx:split-compounds:42	LEX-3836	&&5 ||2 S+0== "一振り" S+0== "ひと振り" S-1== "の" ||2 S-2== "うち" S-2== "内" S-3== "の" S-4== @Rnoun.count-blade	set-target "한 자루"	霧隠れ七刀のうちの一振り 키리가쿠레 일곱 칼 가운데 한 자루
+//= reading-chunks	after Select 147	Set chunks the words split apart (spec LEX-3841): なるほど after an adjectival noun in に is なる and ほど, 될 만큼 (イヤになるほど 싫게 될 만큼), not 그렇구나; せい after a verbal noun at the end of a phrase is the old imperative of する, 해라 (安心せい 안심해라), not 탓; 様 after a closing bracket honours the title in it, 님 (『放浪の貴公子』様ですね 『방랑의 귀공자』님이네요); でもって after a noun is the means, (으)로 (地位でもって 지위로), but not a でも quoted before a verb of thinking or saying (ケーキでもって思った); んでもって, そんでもって clipped, goes on to what comes next, 그리고.
+cx:reading-chunks:10	LEX-3841	&&3 S+0== "なるほど" D+0== "그렇구나" Y-1== "1게"	set-target "될 만큼    "	イヤになるほどたっぷりある 싫게 될 만큼 듬뿍 있다
+cx:reading-chunks:20	LEX-3841	&&4 S+0== "せい" D+0== "탓" P-1== "1**" ||2 F+0== "last" S+1== "00。！？!?、」』…"	set-target "해라    "	安心せい。 안심해라.
+cx:reading-chunks:30	LEX-3841	&&3 S+0== "様" D+0== "%B3@" ||2 S-1== "』" S-1== "」"	set-target "님%D4@"	『放浪の貴公子』様ですね。 『방랑의 귀공자』님이네요.
+cx:reading-chunks:40	LEX-3841	&&5 S+0== "でも" S+1== "って" P-1== "1**" !1 ||3 S-1== "ん" S-1== "ン" S-1== "Rん" !1 ||8 S+2== "L思" S+2== "L言" S+2== "Lいう" S+2== "L話" S+2== "L考" S+2== "Lこと" S+2== "Lね" S+2== "L聞"	set-target "(으)로" set-target@+1 " "	地位でもって礼を強要し 지위로 예를 강요해
+cx:reading-chunks:45	LEX-3841	&&3 S+0== "でも" S+1== "って" ||2 S-1== "ん" S-1== "ン"	set-target "그리고" set-target@-1 "" set-target@+1 " "	んでもって久々の再会って感じで 그리고 오래간만 재회라는 느낌으로
 //= know-that	after QuoteTo 40	A clause quoted with と before 分かる, 気づく or 知る is what is found out, -다는 걸 and (이)라는 걸 (来ると分かった 온다는 걸 알았다, 犯人だと気づいた 범인이라는 걸 눈치챘다), not -다고.
 cx:know-that:10	GRM-3450	&&4 ||4 S+0== "分か" S+0== "気づ" S+0== "気付" S+0== "知" F-1== "conjugating" Y-1== "R다고" !1 S-1== "Rって"	replace-ending-tail@-1 "다고" "다는 걸"	来ると分かった 온다는 걸 알았다
 cx:know-that:20	GRM-3450	&&3 ||4 S+0== "分か" S+0== "気づ" S+0== "気付" S+0== "知" S-1== "だと" D-1== "(이)라고"	set-target@-1 "(이)라는 걸"	犯人だと気づいた 범인이라는 걸 눈치챘다
