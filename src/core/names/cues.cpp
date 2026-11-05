@@ -870,6 +870,18 @@ bool Registry::InflectedRun(std::string_view t) {
     return false;
 }
 
+// Whether the kanji k with い is an adjective of the dictionaries (太い), whose く (太く) is no verb's.
+bool Registry::AdjectiveKanji(std::string_view k) {
+    if (snap_ == nullptr) return false;
+    dict::LookupContext ctx;
+    ctx.plain = &snap_->Plain();
+    const std::string t = std::string(k) + "い";
+    for (const dict::Candidate& c : snap_->GetWordInfo(t, dict::LookupMode::General, ctx).list) {
+        if (c.user == nullptr && c.codes != nullptr && c.codes->partText.size() == 4 && c.codes->partText[0] == 'H' && c.source == k) return true;
+    }
+    return false;
+}
+
 // A particle of two kana or more ends any word (どこまで, これだけ, それから); one of one kana only a
 // pronoun or a demonstrative (どこで, それに), as names end in か, で, の or と (まどか, かなで).
 bool Registry::WordThenParticle(std::string_view t) {
