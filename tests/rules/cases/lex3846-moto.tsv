@@ -1,0 +1,32 @@
+# 규칙: LEX-3846
+rule	input	expected	kind	layer
+dict:jisjk:115676	元フィギュアスケーターかよ	전 피겨 스케이팅 선수인가	fix	local
+dict:jisjk:115676	しかも中身は元野猿のオタク女子。	게다가 내용물은 전 야생 원숭이의 오타쿠 여자.	fix	local
+dict:jisjk:115676	あのハゲじじい、死者を冒とくする気か！？元聖職者とは思えねぇぜ！	그 대머리 할아범, 죽은 자를 모독 할 생각인가!? 전 성직자라고는 생각되지 않아!	fix	local
+dict:jisjk:115676	まさか あの人が 元X-LAWSだったなんて	설마 그 사람이 전 X-LAWS였다는	fix	local
+dict:jisjk:115676	ちなみに 僕が尊敬するカカシ先輩も元暗部	참고로 내가 존경하는 카카시 선배도 전 암부	fix	local
+dict:jisjk:115676	女子テニス 元世界ランキング３位の―	여자 테니스 전 세계 랭킹 3위의-	fix	local
+dict:jisjk:115676	この先は元ゲブラー基地です。	이 앞은 전 게브라 기지입니다.	fix	local
+dict:jisjk:115676	元ダイート支部の所属。	전 다이트 지부의 소속.	fix	local
+dict:jisjk:115676	うちの会社の元課長です｡	우리 회사의 전 과장입니다.	keep	local
+dict:jisjk:115676	元婚約者である王太子だ。	전 약혼자인 왕태자다.	keep	local
+dict:jisjk:115676	シンシア様の“元”ご婚約者	신시아님의 “전” 약혼자	keep	local
+dict:jisjk:339655	神の使者といっても 元は人間 天命には逆らえないようですね	신의 사자라고 해도 원래는 인간 천명에는 거역할 수 없는 것 같네요	fix	local
+dict:jisjk:339655	元は俺のアイデアだぞ	원래는 내 아이디어다	fix	local
+dict:jisjk:339655	元は僕の責任だし	원래는 내 책임이고	fix	local
+dict:jisjk:339655	わたしが元いた世界と同じ	내가 원래 있던 세계와 같다	fix	local
+dict:jisjk:339655	あらかた料理が並んだところで、俺は元いた席に戻った。	대강 요리가 늘어섰더니, 나는 원래 있던 석으로 돌아갔다.	fix	local
+dict:jisjk:339655	元はといえば、その声の主が悪い。	따지고 보면, 그 목소리의 주인이 나쁘다.	keep	local
+dict:jisjk:339655	魔物を生み出す元となる。	마물을 만들어 내는 근원이 된다.	keep	local
+lex:3846:moto-cause	これで腱鞘炎になって それが元で剣筋が鈍って…	이것으로 건초염이 되어 그것이 원인으로 검근이 무디어져…	fix	local
+lex:3846:moto-cause	ライフ社の情報が元で	라이프사의 정보가 원인으로	fix	local
+lex:3846:moto-cause	情報を元に作戦を立てる	정보를 바탕으로 작전을 세운다	keep	local
+lex:3846:moto-ni-modosu	非ヒロインで結構！ とにかく すぐ元に戻せ	비히로인으로 상당히! 어쨌든 바로 원래대로 되돌려라	fix	local
+lex:3846:moto-ni-modosu	一度 味わうと 元には戻れない	한 번 맛보면 원래대로는 돌아갈 수 없다	fix	local
+lex:3846:moto-ni-modosu	元に戻せないのはわかってる	원래대로 되돌릴 수 없는 것은 알고 있다	fix	local
+lex:3846:moto-ni-modosu	すでに議論の余地はなく 元に戻す以外にはない	이미 논의의 여지는 없고 원래대로 되돌리는 것 외에는 없다	fix	local
+lex:3846:moto-ni-modosu	ならば、邪魔をして元に戻すこともない。	그러면, 방해를 해 원래대로 되돌릴 일도 없다.	fix	local
+lex:3846:moto-ni-modosu	「元に戻すほどの話をしていたかしら？」	「원래대로 되돌릴 정도의 이야기를 하고 있었던가?」	fix	local
+lex:3846:moto-ni-modosu	元の場所に戻した。	원래의 장소에 되돌렸다.	keep	local
+lex:3846:moto-ni-modosu	彼の元に戻る	그의 곁으로 돌아간다	keep	local
+lex:3846:moto-ni-modosu	情報を元に考える	정보를 바탕으로 생각한다	keep	local

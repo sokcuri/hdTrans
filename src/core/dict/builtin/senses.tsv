@@ -1069,8 +1069,6 @@
 // Context senses of frequent keys (build/words/defaults.py)
 家	가	侯爵,公爵,伯爵,子爵,男爵,貴族,王,辺境伯,騎士	before	n
 名	명	一,二,三,四,五,六,七,八,九,十,数,百,千,何	before	n
-元	전	sem:VHn,sem:UQf,sem:UAq	after	n
-元	원래	は,の	after	n
 並ぶ	나란히 서다	隣,横,傍	before	v
 並ぶ	줄서다	列,行列,順番	before	v
 押さえる	가리다	口,口元	before	v1
