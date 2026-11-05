@@ -168,6 +168,7 @@
 //= name.person-transitive	Starts of verbs of looking and handling that a person does to something, matched after an object in を in the clause after Xが, Xは or Xも (小太刀がじっと俺を見た, 小太刀はスイッチを入れた; not 石が入れてある; spec LEX-4820).
 //= name.person-clause-stop	What ends the clause of a subject for the person cues of spec LEX-4820: a condition, a cause, a quotation or a clause made a noun (菓子が出れば, 心が若いと言って, 世界が無数にあることを知ってた).
 //= name.personified-word	Common words of nature, the sky, the seasons and ideas that writers make laugh, speak or look like a person (未来が微笑む, 向日葵が笑う, 運命が囁く): a person cue of spec LEX-4820 does not make them names; an honorific or a name the document carries still does.
+//= name.side-word	Single kanji of a side or a position (左, 右, 上, 下, 前, 後) that no person cue makes a name, though the name layer has a person row of them (左が言った 왼쪽이 말했다; spec LEX-4832).
 //= char.ascii-alnum	ASCII digits and letters: a kanji right after one in its token follows a number or a unit (10cm砲).
 //= sign.final-vowel	Signs read as a word whose Korean reading ends in a vowel: units and currencies (° 도, ℃ 도, ㎝ 센티미터, € 유로, $ 달러) and letters and numbers written as one symbol (② 이, α 알파); Roman numerals, read either way (Ⅲ 삼, 쓰리), are left out. A particle after one takes its vowel form (100℃였다).
 //= sign.final-consonant	Signs of the same kinds whose reading ends in a consonant other than ㄹ (㎏ 킬로그램, ₩ 원, ③ 삼, ε 엡실론).
@@ -2229,6 +2230,12 @@ name.personified-word	朝焼け
 name.personified-word	満月
 name.personified-word	黄昏
 name.personified-word	夕暮れ
+name.side-word	左
+name.side-word	右
+name.side-word	上
+name.side-word	下
+name.side-word	前
+name.side-word	後
 char.ascii-alnum	0
 char.ascii-alnum	1
 char.ascii-alnum	2
@@ -7160,6 +7167,7 @@ verb.receiver-passive	託
 verb.receiver-passive	奪
 verb.receiver-passive	盗
 verb.receiver-passive	取り上げ
+verb.receiver-passive	秘
 verb.object-passive	つけ
 verb.object-passive	付け
 verb.object-passive	着け
