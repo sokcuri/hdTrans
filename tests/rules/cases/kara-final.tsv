@@ -1,5 +1,5 @@
 rule	input	expected	kind	layer
-ending:書くからな	「あとで迎えに行くからな」	「나중에 마중하러 가니까」	fix	builtin-ending
+ending:書くからな	「あとで迎えに行くからな」	「나중에 마중하러 갈 테니까」	fix	builtin-ending
 ending:書いたからね	「もう宿題は終わったからね」	「이제 숙제는 끝났으니까」	fix	builtin-ending
 ending:書いてるから	「雨が降ってるから」	「비가 오고 있으니까」	fix	builtin-ending
 ending:静かだから	「僕は平気だから」	「나는 괜찮으니까」	fix	builtin-ending
