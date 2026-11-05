@@ -36,3 +36,6 @@ cx:honorific-nasareru:30	起こるがまま なされるがまま	일어나는 �
 cx:honorific-nasareru:30	どうなされた？	어떻게 하셨어?	keep	rewrites
 voice:respectful	あそこの鍵を付け替えたから賊に入られたんだって	저기의 열쇠를 새로 붙였으니까 도적에 들어와졌다고	keep	voice
 cx:honorific-sareru:10	お尻ペンペンされながら	엉덩이 때리기 되면서	keep	rewrites
+voice:respectful	誰かに入られた。	누군가에게 들어가졌다.	keep	voice
+voice:respectful	何者かに入られたらしい。	누군가에게 들어와진 것 같다.	keep	voice
+voice:respectful	先生は誰にも頼らず行かれた。	선생님은 누구에게도 의지하지 않고 가셨다.	fix	voice
