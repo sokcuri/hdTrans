@@ -1,0 +1,22 @@
+# 규칙: LEX-4616, LEX-4617, LEX-4618
+rule	input	expected	kind	layer
+cx:sense-cues-1:170	そんな気するよね	그런 생각이 들지	fix	rewrites
+cx:sense-cues-1:171	そんな気しない？	그런 생각이 들지 않아?	fix	rewrites
+cx:sense-cues-1:171	むっくんはそんなに気しなくても平気だよ？	뭇 군은 그렇게 기분 하지 않아도 괜찮아?	keep	rewrites
+cx:sense-cues-1:170	気にしないで	신경 쓰지 마	keep	rewrites
+cx:sense-cues-1:172	だからよぉ、嫌な予感すんだって	그러니까, 불길한 예감 든대	fix	rewrites
+cx:sense-cues-1:172	嫌な予感がする	불길한 예감이 든다	keep	rewrites
+cx:sense-cues-1:180	あと数秒でこの戦いを終わらせる	앞으로 몇 초로 이 싸움을 끝낸다	fix	rewrites
+cx:sense-cues-1:180	あと何回改装したら、戦艦になれるのかなぁ…。	앞으로 몇 번 개장하면, 전함이 될 수 있는지….	fix	rewrites
+cx:sense-cues-1:180	んじゃ、ウチも参加しますか。あと何人か腕のいいのを連れて	그럼, 우리도 참가할까요. 그리고 여러 명 솜씨 좋은의를 따라	keep	rewrites
+cx:sense-cues-1:181	服や薬、あとは武具の補修も足りない	옷이나 약, 그리고 무기 보수도 부족하다	fix	rewrites
+cx:sense-cues-1:181	「よし、全部のクラスの記入完了っと、あとはバグの洗い出しだな」	「좋아, 전부의 반 기입 완료, 나머지는 버그의 찾아내기네」	keep	rewrites
+cx:sense-cues-1:182	普通のご飯と、あと特製ジャーキーもつけてあげる	보통 밥과, 그리고 특제 육포도 붙여 준다	fix	rewrites
+cx:sense-cues-1:182	HarrierやMiG、あとKfirまで！	Harrier나 MiG, 그리고 Kfir까지!	fix	rewrites
+cx:sense-cues-1:182	あと。太ももとか、腋とか、髪とか	그리고. 허벅지라든지, 겨드랑이라든지, 머리카락이라든지	fix	rewrites
+cx:sense-cues-1:182	あとは任せた	나머지는 맡겼다	keep	rewrites
+cx:sense-cues-1:190	多分、気付いていないと思います。	아마, 알아차리지 못한다고 생각합니다.	fix	rewrites
+cx:sense-cues-1:190	改良された私の魅力はどう？…… へ？気付かなかったの？ひどーい！	개량된 내 매력은 어때? …… 에? 알아차리지 못했어? 심해~!	fix	rewrites
+cx:sense-cues-1:190	その時になるまで、私は彼の連絡先を知らないことに気付いていなかったのだ。	그 때가 될 때까지, 나는 그의 연락처를 모르는 것을 깨닫지 못했던 것이다.	keep	rewrites
+cx:sense-cues-1:190	……ゲーム開始時にそれに気付けなかったのは痛かったな。	……게임 시작 시에 그것을 알아차릴 수 없었던 것은 아팠네.	keep	rewrites
+cx:sense-cues-1:190	俺はこの弁当が５人を想定して作られていることに気付く。	나는 이 도시락이 5명을 상정해 만들어져 있는 것을 깨닫는다.	keep	rewrites
