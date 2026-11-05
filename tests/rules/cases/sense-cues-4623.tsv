@@ -5,7 +5,10 @@ cx:sense-cues-1:370	それは残念だね。私はケーキの事は詳しくな
 cx:sense-cues-1:370	「また、今度誘ってください。もう少し、将棋の勉強しておきますんで」	「또, 다음에 불러 주세요. 좀 더, 쇼기가 공부해 두기 때문에」	fix	rewrites
 cx:sense-cues-1:370	今度こそ完璧だ	이번이야말로 완벽하다	keep	rewrites
 cx:sense-cues-1:370	今度は座れず、出口際に並んで立つ。	이번에는 앉지 못하고, 출구때에 나란히 선다.	keep	rewrites
-cx:sense-cues-1:380	並んで歩きだす。	나란히 서 걷기 시작한다.	fix	rewrites
+cx:sense-cues-1:380	並んで歩きだす。	나란히 걷기 시작한다.	fix	rewrites
+cx:sense-cues-1:380	二人は並んで立っていた	has:나란히 서 있었다	fix	rewrites
+cx:sense-cues-1:380	並んで寝た	has:나란히 잤다	fix	rewrites
+cx:sense-cues-1:380	並んで腰掛けた	has:나란히 앉았다	fix	rewrites
 cx:sense-cues-1:380	二人ベランダに並び、ぼんやりと街を眺める。	두 사람 베란다에 늘어서, 멍하니 거리를 바라본다.	keep	rewrites
 cx:sense-cues-1:382	「タオルの方はこちらに並んでくださーい！」	「수건은 이쪽에 줄을 서 주세요~!」	fix	rewrites
 cx:sense-cues-1:382	「あーもー、湿っぽいのはいいから。ほら、早く並んでっ」	「아-도―, 눅눅한 건 좋으니까. 자, 빨리 줄을 서」	fix	rewrites
