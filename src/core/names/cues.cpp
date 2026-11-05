@@ -906,6 +906,98 @@ bool Registry::WordThenParticle(std::string_view t) {
     return false;
 }
 
+std::vector<Registry::Coordination> Registry::CoordinatedKana(std::string_view line) {
+    std::u32string u;
+    for (std::size_t k = 0; k < line.size();) {
+        const text::Rune r = text::DecodeRune(line.substr(k));
+        u.push_back(r.cp);
+        k += r.size;
+    }
+    const auto utf8 = [&](std::size_t a, std::size_t b) {
+        std::string s;
+        for (std::size_t k = a; k < b; k++) text::AppendRune(s, u[k]);
+        return s;
+    };
+    const auto joins = [&](std::size_t k) { return k < u.size() && dict::InClassRune(HDTRANS_CLASS("name.kana-coordinator"), u[k]); };
+    // The end of a word at k: the end, a mark or a particle (そらは, そら、); not kanji or katakana, which
+    // go on with the word or start the one it describes (アデラインとその夫).
+    const auto closes = [&](std::size_t k) {
+        return k >= u.size() || (!IsHiragana(u[k]) && !IsKanji(u[k]) && !IsKatakana(u[k]) && u[k] != U'々') ||
+               dict::InClassRune(HDTRANS_CLASS("name.kana-coordinated-after"), u[k]);
+    };
+    // An end in の or で (なごみとうららの), which also ends a copula (あやとりなの).
+    const auto weakly = [&](std::size_t k) {
+        return k < u.size() && dict::InClassRune(HDTRANS_CLASS("name.kana-coordinated-after-weak"), u[k]);
+    };
+    // A kana word of the dictionary that the name layer also has as a person (そら, ひかり; not それ, うち),
+    // no pronoun, no word with a particle, no plain form of a verb (いくと: a condition), and no word
+    // with the と or や after it (ちょっと, もっと).
+    const auto word = [&](const std::string& x, char32_t joiner) {
+        const DictFlags f = Flags(x);
+        std::string joined = x;
+        text::AppendRune(joined, joiner);
+        return f.records > 0 && (f.layerGiven || f.layerSurname) && !f.pronoun && !WordThenParticle(x) && !(PredicateForm(x) && !x.ends_with("い")) &&
+               !Flags(joined).word;
+    };
+    std::vector<Coordination> out;
+    for (std::size_t i = 0; i < u.size(); i++) {
+        if (!IsHiragana(u[i]) || (i > 0 && (IsHiragana(u[i - 1]) || u[i - 1] == U'ー'))) continue;
+        std::size_t e = i;
+        while (e < u.size() && IsHiragana(u[e])) e++;
+        // A word starts the line or follows a mark or a space; kana after kanji or katakana are their
+        // ending or particle (荷物をまとめると, サッちゃんや).
+        const bool wordStart = i == 0 || !(IsKanji(u[i - 1]) || IsKatakana(u[i - 1]) || u[i - 1] == U'々');
+        // Whether a dictionary word starts at a and goes on past the と or や at k (あやとり, ひとりで).
+        const auto spans = [&](std::size_t a, std::size_t k) {
+            for (std::size_t b = k + 2; b <= e; b++) {
+                if (Flags(utf8(a, b)).records > 0) return true;
+            }
+            return false;
+        };
+        // The word first: そらとみゆきは, そらと美幸は.
+        for (std::size_t l = 2; wordStart && l <= 4 && i + l < e; l++) {
+            if (!joins(i + l) || spans(i, i + l)) continue;
+            const std::string x = utf8(i, i + l);
+            if (!word(x, u[i + l])) continue;
+            const std::size_t j = i + l + 1;
+            if (j == e) {
+                std::size_t k = j;
+                while (k < u.size() && (IsKanji(u[k]) || IsKatakana(u[k]))) k++;
+                if (k > j) out.push_back({x, utf8(j, k), false});
+                continue;
+            }
+            for (std::size_t m = 2; m <= 5 && j + m <= e; m++) {
+                if (closes(j + m) || weakly(j + m)) out.push_back({x, utf8(j, j + m), !closes(j + m)});
+            }
+        }
+        // The name first: みゆきとそらは, 美幸とそらは.
+        const auto after = [&](std::size_t j, const std::string& n) {
+            for (std::size_t l = 2; l <= 4 && j + l <= e; l++) {
+                const std::string x = utf8(j, j + l);
+                // Not a word that goes on with the particle after it (エディとさらに: さらに).
+                if (!(closes(j + l) || weakly(j + l)) || !word(x, u[j - 1])) continue;
+                if (j + l < u.size() && IsHiragana(u[j + l])) {
+                    std::string longer = x;
+                    text::AppendRune(longer, u[j + l]);
+                    if (Flags(longer).records > 0) continue;
+                }
+                out.push_back({x, n, !closes(j + l)});
+            }
+        };
+        for (std::size_t m = 2; wordStart && m <= 5 && i + m < e; m++) {
+            if (joins(i + m) && !spans(i, i + m)) after(i + m + 1, utf8(i, i + m));
+        }
+        if (i > 0 && joins(i) && (IsKanji(u[i - 1]) || IsKatakana(u[i - 1]))) {
+            std::size_t k = i;
+            const bool kanji = IsKanji(u[i - 1]);
+            while (k > 0 && (kanji ? IsKanji(u[k - 1]) : IsKatakana(u[k - 1]))) k--;
+            after(i + 1, utf8(k, i));
+        }
+        i = e - 1;
+    }
+    return out;
+}
+
 std::vector<Registry::LooseUse> Registry::FreeKanaNames(std::string_view line) {
     std::vector<LooseUse> out;
     for (std::size_t start = 0; start < line.size();) {

@@ -1,0 +1,18 @@
+# 규칙: LEX-4954, LEX-4955
+rule	input	expected	kind	layer
+names:doc-kana-coordinated	そらとみゆきは幼なじみだ\nそら、ちょっと来て	소라와 미유키는 소꿉친구다\n소라, 잠깐 와	fix	fixed
+names:doc-kana-coordinated	みゆきとそらは幼なじみだ\nそらが言った	미유키와 소라는 소꿉친구다\n소라가 말했다	fix	fixed
+names:doc-kana-coordinated	そら、ちょっと来て	자, 잠깐 와	keep	fixed
+names:doc-kana-coordinated	それと伊勢脇の島荒しと どう関係あるいうんですか？	그것과 이세옆의 도황 해와 어떻게 관계 있다 말합니까?	keep	fixed
+names:doc-kana-coordinated	うちと志帆の家と まあ ２時間ぐらいかけて	집과 시호의 집과 뭐 2시간 정도 들여	keep	fixed
+names:doc-kana-coordinated	あんたと倉橋の命 俺に預けてくれ｡	너와 쿠라하시의 생명 나에게 맡겨 줘.	keep	fixed
+names:doc-kana-coordinated	メアリーは下級メイドに与えられた裏庭の小屋で寝起きしているが、原作の進み具合からすると今はエディとさらに山の方の湖のほとりで待ち合わせ、夜ごとににゃんにゃこにゃんしているはずだ。	has:에디와 더욱 산의 쪽	keep	fixed
+names:doc-kana-coordinated	高力とけんかになってたら 今時分 命がなかったかもしれないな	코우리키와 싸움이 되어 있으면 이맘때 생명이 없었던 걸지도 모르네	keep	fixed
+names:doc-kana-coordinated	おやじや照子は？	아버지나 테루코는?	keep	fixed
+names:doc-kana-coordinated	松田といや 関東でも名の通った組	마츠다와 아니 관동에서도 이름이 알려진 조	keep	fixed
+names:doc-katakana-compound	スーパーマンさん！\nスーパーマンさん、行こう	슈퍼맨 씨!\n슈퍼맨 씨, 가자	keep	fixed
+names:doc-katakana-compound	バットマンさん！\nバットマンさん、行こう	배트맨 씨!\n배트맨 씨, 가자	keep	fixed
+names:doc-kana-coordinated	ひかりとみゆきが来た\nひかり、こっちだよ	히카리와 미유키가 왔다\n히카리, 여기야	fix	fixed
+names:doc-kana-coordinated	ひかり、こっちだよ	빛나, 여기야	keep	fixed
+names:doc-kana-coordinated	いくとみゆきがいた	가니 미유키가 있었다	keep	fixed
+names:doc-kana-coordinated	あ～ こっちが こうで…｡ 基本は オート操作なんだけど 最初だけ なぜか あやとりなの｡\nあやとりはね｡ ウフフフ！	has:무늬	keep	fixed
