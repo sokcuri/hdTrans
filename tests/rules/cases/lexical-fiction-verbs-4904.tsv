@@ -1,0 +1,14 @@
+# 규칙: LEX-4904
+rule	input	expected	kind	layer
+sense:nagasu-play	「ひたすら映画を流して、その中に入り込むことで……」	has:영화를 틀고	fix	senses
+sense:nagasu-play	ちょっとばかしヒステリックな母親と、それを鷹揚に流す父親。	has:대범하게 넘기는	fix	senses
+sense:nagasu-play	それに対し彼女は「あははは、ごめん、ごめん」と軽く笑って流した。	has:웃어 넘겼다	fix	senses
+sense:nagasu-play	涙を流す者もいた。	has:눈물을 흘리는	keep	senses
+sense:nagasu-play	見ると２人とも汗を流して顔色が悪い。	has:땀을 흘려	keep	senses
+cx:fic-polysemy-2:30	制服に着替えて、顔だけ水でさっと流すと	has:물로 휙 씻	fix	rewrites
+cx:fic-polysemy-2:30	顔を水で流した	has:얼굴을 물로 씻었다	fix	rewrites
+cx:fic-polysemy-2:30	かまどの水を流した	has:물을 흘렸다	keep	rewrites
+sense:toreru-come-off	勝手に前の装備は取れるかと思っていたが、そうでもない	has:벗겨질	fix	senses
+sense:toreru-come-off	私のカレーは…南の島でとれた、ココナツ入りなのです。	has:섬에서 난	fix	senses
+sense:toreru-come-off	瓶は全く取れない。	has:떨어지지 않는다	keep	senses
+sense:toreru-come-off	練習時間すらも満足に取れないなら、素直に諦めましょう。	has:잡히지 않으면	keep	senses
