@@ -21,3 +21,22 @@ cx:fic-polysemy-3:10	「桜庭、腰を引かないでくれ」	lacks:물러서	
 sense:shikomu-plant	僕がわざわざ毒を仕込むことはありませんが	has:독을 넣을	fix	senses
 sense:shikomu-plant	例えば、左腕にマシンガンを仕込む改造手術でもですか？	has:넣는	fix	senses
 sense:shikomu-plant	「私たちに戦い方を仕込んだ事を後悔しながら死になさい」	has:가르친	keep	senses
+cx:fic-polysemy-3:20	外から見てたら、思ったよりもずっと大きな爆発だったから	has:훨씬 큰	fix	rewrites
+cx:fic-polysemy-3:20	日本で探すよりはずっと難しいかもしれないが	has:훨씬 어려울	fix	rewrites
+cx:fic-polysemy-3:20	それはね、肌を重ねるよりも…ずっと近い距離。	has:훨씬 가까운	fix	rewrites
+cx:fic-polysemy-3:20	好きな人と、ずっと近くにいられる気がしますから。	has:계속	keep	rewrites
+cx:fic-polysemy-3:22	ずっと前から好きなんだもん！！	has:훨씬 전부터	fix	rewrites
+cx:fic-polysemy-3:22	消えたほうが、ずっとマシだって思っちゃってるもん	has:훨씬 낫다고	fix	rewrites
+cx:fic-polysemy-3:22	天井はずっと上、多分高さ１００メートルくらいまである	has:훨씬 위	fix	rewrites
+cx:fic-polysemy-3:22	「今日だけは、ずっと近くにいさせてほしいんだ」	has:계속	keep	rewrites
+cx:fic-polysemy-3:30	「イヤ、違うから、マジで……」	has:「아니,	fix	rewrites
+cx:fic-polysemy-3:30	イヤだよ、返り討ちなんて！	has:싫어	keep	rewrites
+cx:fic-polysemy-3:30	夏は…イヤ、です。	has:싫다	keep	rewrites
+cx:fic-polysemy-3:32	「どうしたお前ら？	has:무슨 일이야, 너희들	fix	rewrites
+cx:fic-polysemy-3:32	「おい、どうしたおまえたち！」	has:무슨 일이야	fix	rewrites
+cx:fic-polysemy-3:32	どうしたらいいの	lacks:무슨 일이야	keep	rewrites
+cx:amari-not:22	……とにかく、とても真っ当なウェイトレスさんには見えない。	has:도저히	fix	rewrites
+cx:amari-not:22	その愛くるしい仕草を見るに、とてもそんなことをするような人間には見えない。	has:도저히	fix	rewrites
+cx:amari-not:22	一人ではとても無理だわ。	has:도저히 무리	fix	rewrites
+cx:amari-not:22	正直、とても面倒なことになったとしか思えない。	has:무척	keep	rewrites
+cx:amari-not:22	でもきっと、それはとても小さくて気付けない何かなのだ。	has:무척	keep	rewrites

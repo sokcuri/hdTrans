@@ -25,5 +25,5 @@ sense:yoku-often	　よく通る声。	 잘 들리는 목소리.	keep	senses
 builtin-ending:もん	「師匠は臆病でもいいって言ってるもん。」	「스승은 겁이 많아도 좋다고 말하는걸.」	fix	builtin-ending
 builtin-ending:もん	「うん。私、あんな上手に銃を撃てないもん」	「응. 나, 저런 능숙하게 총을 쏠 수 없는걸」	fix	builtin-ending
 builtin-ending:もん	だって嬉しいんですもん。気持ちいいんですもんっ。	그치만 기쁜걸요. 기분 좋은걸요.	fix	builtin-ending
-builtin-ending:もん	消えたほうが、ずっとマシだって思っちゃってるもん	사라지는 편이, 계속 낫다고 생각해 버렸는걸	keep	builtin-ending
+builtin-ending:もん	消えたほうが、ずっとマシだって思っちゃってるもん	사라지는 편이, 훨씬 낫다고 생각해 버렸는걸	keep	builtin-ending
 builtin-ending:もん	会長はウチの鍵持ってたもんね	회장은 우리의 열쇠 가지고 있었잖아	keep	builtin-ending
