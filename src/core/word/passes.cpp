@@ -151,6 +151,39 @@ bool CopulaAfter(const Item* next) {
     return false;
 }
 
+// Whether an ichidan stem the dictionary also has as a noun (現れ 표현, 求め 요구) is the verb's
+// continuative linking two clauses: its object or subject stands right before it with を or が, and a
+// word in kanji starts the next clause right after it (美女が現れ異世界を救う 미녀가 나타나 이세계를,
+// 星を求め星となった 별을 구해 별이 되었다; spec GRM-3847). A noun takes no を or が. The same stem said
+// again (萌え萌え), a noun the continuative runs into (考え中, 伸び放題, 助け甲斐: suffix.stem-noun) and a
+// plural suffix after a kana pronoun (おれ達) stay the noun.
+bool ClauseLink(const Item* it, const Item* next) {
+    const Item* prev = it->prev;
+    if (prev == nullptr || At(prev->Code(0), 0) != '2' || (prev->group->surface != "を" && prev->group->surface != "が")) {
+        return false;
+    }
+    const std::string_view after = std::string_view(it->text).substr(static_cast<std::size_t>(it->start + it->length));
+    if (after.empty() || !text::IsKanji(text::DecodeRune(after).cp)) return false;
+    if (next->group->surface == it->group->surface || dict::StartsWithMember(HDTRANS_CLASS("suffix.stem-noun"), after) != 0 ||
+        dict::StartsWithMember(HDTRANS_CLASS("suffix.plural-pronoun"), after) != 0 || it->w == nullptr) {
+        return false;
+    }
+    // The stem and the next word that start a compound verb of the dictionary (受け継ぐ, 下げ渡す), or a next
+    // word that is itself an ichidan stem in kanji and kana (抱え上げ, 調べ上げ), make one verb, no link.
+    const std::string_view stem = it->group->surface;
+    const std::string compound = std::string(stem) + std::string(next->group->surface);
+    for (const Record* r = it->w->DoLookup(compound, kModeGeneral).records; r != nullptr; r = r->child) {
+        if (r->source.size() > stem.size() && compound.starts_with(r->source) && At(r->partCode, 1) == '4') return false;
+    }
+    const std::string_view word = next->group->surface;
+    if (!word.empty() && Has("えけげせぜてでねべめれ", LastChar(word))) {
+        for (const Record* r = it->w->DoLookup(word, kModeGeneral).records; r != nullptr; r = r->child) {
+            if (r->source == word && At(r->partCode, 1) == '4') return false;
+        }
+    }
+    return true;
+}
+
 struct Phrase {
     std::string_view text;
     int start = 0;
@@ -232,7 +265,8 @@ Phrase FindPhrase(Flusher& f) {
                                 accepted = true;
                             } else if (At(next->Code(0), 0) == '2' || Has(next->GAttr(0), "Pj")) {
                                 accepted = true;
-                            } else if (At(next->Code(0), 0) == '1' && At(it->Code(0), 2) == '7') {
+                            } else if (At(next->Code(0), 0) == '1' && At(it->Code(0), 2) == '7' &&
+                                       !ClauseLink(it, next)) {
                                 for (int direct = 0; direct < it->DirectCount(); direct++) {
                                     if (it->detail->enabled[direct]) {
                                         accepted = At(it->DirectCode(direct), 1) == '8';

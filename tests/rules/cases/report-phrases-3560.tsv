@@ -1,13 +1,15 @@
 # 규칙: GRM-3560~3562, LEX-4250~4252, LEX-4350
 rule	input	expected	kind	layer
-cx:caption-fixes-1:10	この決定を受け日本サッカー協会は…。	has:결정을 받아 일본 축구 협회는	fix	rewrites
-cx:caption-fixes-1:10	盛り込まれたことを受け賛成に転じました。	has:포함된 것을 받아	fix	rewrites
-cx:caption-fixes-1:10	サイバー攻撃を受け攻撃者とみられる者から	has:사이버 공격을 받아	fix	rewrites
+cx:caption-fixes-1:11	この決定を受け日本サッカー協会は…。	has:결정을 받아 일본 축구 협회는	fix	rewrites
+cx:caption-fixes-1:11	盛り込まれたことを受け賛成に転じました。	has:포함된 것을 받아	fix	rewrites
+cx:caption-fixes-1:11	サイバー攻撃を受け攻撃者とみられる者から	has:사이버 공격을 받아	fix	rewrites
 cx:caption-fixes-1:10	日本航空は、予約システムの委託先が不正アクセスを受け	has:액세스를 받아	fix	rewrites
-cx:caption-fixes-1:10	「現地保全員の報告を受け救援チームを向かわせた」	has:보고를 받아 구원 팀을	fix	rewrites
-cx:caption-fixes-1:10	しかし、移送中に襲撃を受け怪我人を出した。	has:습격을 받아 부상자를	fix	rewrites
+cx:caption-fixes-1:11	「現地保全員の報告を受け救援チームを向かわせた」	has:보고를 받아 구원 팀을	fix	rewrites
+cx:caption-fixes-1:11	しかし、移送中に襲撃を受け怪我人を出した。	has:습격을 받아 부상자를	fix	rewrites
 cx:caption-fixes-1:10	外部評価を受けその結果を公表する	!rule:cx:caption-fixes-1:10	keep	rewrites
 cx:caption-fixes-1:10	受けを狙ったネタ	!rule:cx:caption-fixes-1:10	keep	rewrites
+cx:caption-fixes-1:11	外部評価を受けその結果を公表する	!rule:cx:caption-fixes-1:11	keep	rewrites
+cx:caption-fixes-1:11	受けを狙ったネタ	!rule:cx:caption-fixes-1:11	keep	rewrites
 cx:caption-fixes-1:5	「一般幹部候補試験」を受け合格。	has:시험」을 치러 합격	fix	rewrites
 cx:caption-fixes-1:5	この決定を受け日本サッカー協会は…。	!rule:cx:caption-fixes-1:5	keep	rewrites
 cx:crit-fixes-1:10	議員定数削減を巡り	has:정수 삭감을 둘러싸고	fix	rewrites

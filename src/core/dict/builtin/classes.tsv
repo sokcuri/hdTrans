@@ -437,6 +437,7 @@
 //= suffix.label-role	Ends of a speaker label that make it a role, not a name (サッカー部員, 担当者, 女子生徒).
 //= suffix.person-after-surname	Person suffixes that follow a surname without being a given name (田中家, 佐藤夫妻).
 //= suffix.plural-pronoun	Plural suffixes that a pronoun runs into as one plural pronoun (私たち, 僕ら, 俺ども).
+//= suffix.stem-noun	Nouns a verb's continuative runs into as one noun (考え中, 取調べ側, 伸び放題, 助け甲斐, 掛け率, 出来次第): an ichidan stem before one stays the noun, even after を or が (spec GRM-3847).
 //= suffix.title-in-name	Title words that may follow a name inside its run (茜たち, 水無月家).
 //= suru.predicate-noun	Starts of the する after a verbal noun that make the noun the predicate (回復した, 回復できる).
 //= suru.tail	Starts of the rest of a form of する after its stem し (しない, してる, しちゃう, しよう), not the first kana of まで, なら or たくさん after 今年.
@@ -6293,6 +6294,13 @@ suffix.plural-pronoun	達
 suffix.plural-pronoun	ら
 suffix.plural-pronoun	ども
 
+suffix.stem-noun	中
+suffix.stem-noun	側
+suffix.stem-noun	放題
+suffix.stem-noun	甲斐
+suffix.stem-noun	率
+suffix.stem-noun	次第
+
 suffix.title-in-name	先生
 suffix.title-in-name	先輩
 suffix.title-in-name	選手
@@ -6436,6 +6444,10 @@ verb.observed-state	あり得
 verb.observed-state	間に合
 verb.observed-state	でき
 verb.observed-state	出来
+verb.observed-state	気にな
+verb.observed-state	始ま
+verb.observed-state	ツイて
+verb.observed-state	ついて
 verb.adnominal-state	優れる
 verb.adnominal-state	すぐれる
 verb.adnominal-state	秀でる
