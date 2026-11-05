@@ -1,0 +1,22 @@
+# 규칙: LEX-3830
+rule	input	expected	kind	layer
+dict:lex:3830:sono-te	そうね その手があったわ！	그래 그 수가 있었어!	fix	local
+dict:lex:3830:sono-te	その手があったか	그 수가 있었나	fix	local
+dict:lex:3830:sono-te	その手で何をした	그 손으로 무엇을 했다	keep	local
+dict:lex:3830:sono-te	その手がいい	그 손이 좋다	keep	local
+dict:lex:3830:te-means	検察官はきっと理解してくれる そんな手には乗らないわ	검찰관은 분명 이해해 주는 그런 수에는 타지 않아	fix	local
+dict:lex:3830:te-means	どんな手を使おうが 諦めてなるものか…。	어떤 수를 사용하자가 포기할 수는 없어….	fix	local
+dict:lex:3830:te-means	綺麗な手だ	예쁜 손이다	keep	local
+dict:lex:3830:te-means	その手を離せ	그 손을 떼어 놓아라	keep	local
+dict:lex:3830:teate	「クズ女の生徒か……気を失っているが、命に別状はなさそうだ。おい誰か、手当を！」	「쓰레기녀의 학생이나……정신을 잃고 있지만, 생명에 이상은 없을 것 같다. 어이 누군가, 치료를!」	fix	local
+dict:lex:3830:teate	傷の手当をする	상처의 치료를 한다	keep	local
+dict:lex:3830:teate	手当が出る	수당이 나온다	keep	local
+dict:lex:3830:teate	手当をもらう	수당을 받는다	keep	local
+dict:lex:3830:me-ga-au	呆然と立ち尽くす、千里と目があった。	멍하니 우두커니 서는, 천리와 시선이 마주쳤다.	fix	local
+dict:lex:3830:me-ga-au	彼は見る目がある	그는 보는 안목이 있다	keep	local
+dict:lex:3830:me-ga-au	見る目がありません	보는 안목이 없습니다	keep	local
+dict:lex:3830:temae-you	手前、何しやがる	네놈, 뭐한다	fix	local
+dict:lex:3830:temae-you	手前の部屋	앞의 방	keep	local
+dict:lex:3830:手配犯	何でも屋の手配犯を追っている	만능 해결사의 수배범을 쫓고 있다	fix	lookup
+cx:harsh-lesson:10	さもなくば 痛い目を見ることになるぜ	그렇지 않으면 따끔한 맛을 보게 된다	fix	rewrites
+cx:harsh-lesson:10	痛い目をこする	아픈 눈을 비빈다	keep	rewrites
