@@ -23597,12 +23597,10 @@ key	ko	pos	sem	gram	dict	rule	ctx	note	flags	prio	reading	id
 許し色	허용된 색	N110			GN				xxx llm	1		w:23542
 許可証	허가증	N110			GN						きょかしょう	w:23543
 訳	것	N110		Oq	GN				xxx llm	1		w:23544
-訳がな	$GF@	H7U0			GN				llm		わけがない	w:23545
 訳が無	$GF@	H7U0			GN				llm		わけがない	w:23546
 訳では無い	는 것은 아니다	A9D0			GN				llm		わけではない	w:23548
 訳なく	쉬이	E300			GN						わけなく	w:23549
 訳の分からない	영문 모를	E010			GN				llm			w:23550
-訳無	$GF@	H7U0			GN				llm		わけない	w:23551
 訳無く	쉬이	E300			GN						わけなく	w:23552
 訴えられ	고소당&AV@	M427			GN				xxx llm	1		w:23553
 訴訟人	소송인	N110			GN						そしょうにん	w:23554

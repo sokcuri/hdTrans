@@ -24,7 +24,7 @@ dict:w:32680	場所を開けると、背を向けて横に	자리를 비켜 주�
 dict:w:32678	膣内に精を放つ。	질내에 정액을 쏟아 낸다.	fix	lookup
 sense:ageru-shout	魔物は最期の叫びをあげながら燃え尽きていった。	마물은 최후의 비명을 지르면서 모두 불타 갔다.	fix	senses
 sense:ageru-shout	赤組、勝利の雄叫びを上げるんだぜーっ！	적조, 승리의 함성을 지른다~!	fix	senses
-sense:ageru-shout	横一列に並んだ鹿たちが「応！」と一斉に雄叫びをあげると土埃を巻き散らし迫ってくる。	가로 일렬에 나란히 선 사슴들이 「응!」이라고 일제히 함성을 지르자 흙먼지를 마구 감아 다가온다.	fix	senses
+sense:ageru-shout	横一列に並んだ鹿たちが「応！」と一斉に雄叫びをあげると土埃を巻き散らし迫ってくる。	가로 일렬에 나란히 선 사슴들이 「응!」이라고 일제히 함성을 지르자 흙먼지를 뿌려 다가온다.	fix	senses
 sense:ageru-shout	子供の叫びが聞こえた	아이의 절규가 들렸다	keep	senses
 sense:otosu-light	明かりを落としてから、３０分くらい経っただろうか	불을 끄고 나서, 30분 정도 지났을까	fix	senses
 sense:otosu-light	電気落とされると冷蔵庫も機能しない	전기 꺼지면 냉장고도 기능하지 않는다	fix	senses
