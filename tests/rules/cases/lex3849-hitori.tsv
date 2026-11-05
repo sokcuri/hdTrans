@@ -1,0 +1,21 @@
+# 규칙: LEX-3849, LEX-4810
+rule	input	expected	kind	layer
+cx:sense-cues-1:12	お前は一人じゃない	너는 혼자가 아니다	fix	rewrites
+cx:sense-cues-1:12	バーカ。 お前は一人じゃねえだろ。	바보. 너는 혼자가 아니지.	fix	rewrites
+cx:sense-cues-1:12	｢一人じゃないから きっと｣	｢혼자가 아니니까 분명｣	fix	rewrites
+cx:sense-cues-1:12	奴らの一人だと思うか？	놈들의 한 사람이라고 생각할까?	fix	rewrites
+cx:sense-cues-1:12	一人じゃ何もできない	혼자는 아무것도 할 수 없다	keep	rewrites
+cx:sense-cues-1:13	いつも一人だ	언제나 혼자다	fix	rewrites
+cx:sense-cues-1:13	一人だった俺に	혼자였던 나에게	fix	rewrites
+cx:sense-cues-1:13	私も いつも一人	나도 언제나 한 사람	keep	rewrites
+cx:sense-cues-1:13	犯人は一人だ	범인은 한 사람이다	keep	rewrites
+cx:sense-cues-1:13	あと一人だ	더 한 사람이다	keep	rewrites
+cx:sense-cues-1:15	こんな日に一人は寂しいわ	이런 날에 혼자는 외로워	fix	rewrites
+cx:sense-cues-1:15	初日から一人は心細いわよね。	첫날부터 혼자는 불안해.	fix	rewrites
+cx:sense-cues-1:15	一人は残って見張れ	한 사람은 남아 감시해라	keep	rewrites
+cx:sense-cues-1:16	一人の時は 何を穿けばいいの？	혼자일 때는 뭘 입으면 되는 거야?	fix	rewrites
+cx:sense-cues-1:16	一人の男が立っていた	한 사람의 남자가 서 있었다	keep	rewrites
+cx:sense-cues-1:17	西日で赤熱したような台所で、彼女は一人、ダイニングの椅子に座っていた。	저녁 햇볕으로 적열한 것 같은 부엌에서, 그녀는 혼자, 다이닝의 의자에 앉아 있었다.	fix	rewrites
+cx:sense-cues-1:17	一人、また一人と倒れていく	한 사람, 또 한 사람 쓰러져 간다	keep	rewrites
+dict:lex:3849:hitori-atama	とすると 一人頭 およそ2300万	로 하면 1인당 대략 2300만	fix	lookup
+dict:lex:3849:hitori-atama	一人頭 およそ304万ペリカ	1인당 대략 304만 펠리카	fix	lookup
