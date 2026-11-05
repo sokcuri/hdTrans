@@ -1,0 +1,34 @@
+# 규칙: LEX-3842, LEX-3843, LEX-4355
+rule	input	expected	kind	layer
+dict:jisjk:121675	もう逝ってしまったんですか。だらしないですわね	has:죽어버렸습니까	fix	lookup
+dict:jisjk:121675	長屋のゴン爺も風邪をこじらせて逝っちまったし	has:죽어버렸	fix	lookup
+dict:lex:3842:翻-1	本丸近くに翻る旗。	has:나부끼는 기	fix	lookup
+dict:lex:3842:翻-1	見慣れぬ旗が翻っていたとか	has:나부끼고 있었다	fix	lookup
+dict:lex:3842:抗-1	そうじゃ、飲み込め。抗わなければ苦しみは少ない	has:저항하지 않으면	fix	lookup
+dict:lex:3842:抗-1	でも、抗えなくて、つい！	has:저항할 수 없어서	fix	lookup
+dict:lex:3842:謂え-1	リスクを考慮する必要がないと謂えるレベルです	has:말할 수 있는	fix	lookup
+dict:lex:3842:刮-1	笹搔き状に刮いだ大鋸屑と薄皮	has:깎은	fix	lookup
+dict:lex:3842:秘-1	「名前を秘された姫様の従者？	has:숨겨진	fix	lookup
+dict:lex:3842:扮-1	だから夫婦に扮して 覆面捜査をしてる	has:분장해	fix	lookup
+dict:lex:3842:勃-1	血の繋がってない妹にしかアソコが勃たない。	has:서지 않는다	fix	lookup
+dict:lex:3842:身嗜み-1	化粧法や身嗜み・・・まあ	has:몸가짐	fix	lookup
+dict:lex:3842:饑-1	︽饑に冒されよ。	has:굶주림에	fix	lookup
+dict:lex:3842:糎-1	九二式十糎加農砲が搭載されていた	has:10센티	fix	lookup
+dict:lex:3842:其の-1	其の疾きこと風の如く	has:그 빠른	fix	lookup
+dict:lex:3842:謂え-1	謂れは知らない	lacks:말	keep	lookup
+normalize:old-attributive	思い出の深き家へと歩くたび	has:깊은 집	fix	normalize
+normalize:old-attributive	月のマナよ。碧き光よ。	has:푸른 빛	fix	normalize
+normalize:old-attributive	み～つ、醜き江都の鬼を	has:추악한	fix	normalize
+normalize:old-attributive	弱きを助け強きを挫く。	약자를 돕고 강자를 꺾는다.	keep	normalize
+normalize:old-attributive	打ち首の憂き目に合うやもしれませぬ	has:쓰라림	keep	normalize
+normalize:old-attributive	古き良き時代	has:좋았던 옛	keep	normalize
+normalize:old-attributive	ガキの頃 恋多き年頃 いろいろとな	has:사랑 많은	keep	normalize
+normalize:stem-suffix	なんとも心地良さげに目を細めると	has:기분 좋은 듯이	fix	normalize
+normalize:stem-suffix	自信なさげですね	has:자신감 없을 것 같네요	fix	normalize
+normalize:stem-suffix	何か有りそうだ...	has:있을 것이다	fix	normalize
+normalize:stem-suffix	『処理仕切れない事』	has:다 처리할 수 없는	fix	normalize
+normalize:stem-suffix	部屋を仕切れない	has:나눌 수 없다	keep	normalize
+normalize:stem-suffix	なにもなさげ、けど短い	has:아무것도 없음	keep	normalize
+cx:stem-suffix:10	うん、この配色で良さそう	has:좋을 것 같다	fix	rewrites
+cx:stem-suffix:10	そ、そうですね。その方がよさそう	has:좋을 것 같다	fix	rewrites
+cx:stem-suffix:10	良さそうな店	!rule:cx:stem-suffix:10	keep	rewrites

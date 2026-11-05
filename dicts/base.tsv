@@ -132289,6 +132289,7 @@ ttt	ttt	K110			GN				jisjk:201744
 兵隊	군인	N110	VHnVGt		GN				jisjk:23633		
 兵馬	병마	N110	VTp		GN				jisjk:23639		
 兵馬節度使	병마절도사	N110	UAq		GN				jisjk:204937		
+其の	그	N0H1			GN			其の는 その와 같은 `그`다(LEX-3842).	lex:3842:其の-1		
 其の	다른	P251			GN				jisjk:6358		
 其の上	그 당시	N110			GN				jisjk:240508		
 其の他	그 외	I110			GN				jisjk:63652		
@@ -136999,6 +137000,7 @@ ttt	ttt	K110			GN				jisjk:201744
 利高	높은 이자	N110			GN				jisjk:20976		
 利高工業	리코 공업	I130	QIDVGt		GN				jisjk:68099		
 刪定	글을 다듬음	N110			GN				jisjk:233134		
+刮	&F3@	M422			GN			刮ぐ는 긁어 `깎다`다(LEX-3842).	lex:3842:刮-1		
 刮げ	긁어&A6@	M447			GN				jisjk:119980		
 刮目	괄목	N110		Hd	GN				jisjk:16421		
 到	도달&AV@	M428			GN				jisjk:142742		
@@ -139776,6 +139778,7 @@ ttt	ttt	K110			GN				jisjk:201744
 勁	츠요시	N130	VHnQPN	Wb	GN				jisjk:339796		
 勁一郎	케이이치로우	N130	QPN	Wb	GN				jisjk:356776		
 勁文社	케이분사	I130			GN				jisjk:96594		
+勃	&AD@	M424			GN			勃つ는 `서다`다(LEX-3842).	lex:3842:勃-1		
 勃勃たる	용솟음치는	E0H0			GN				jisjk:123657		
 勃発	발발	N110		Hd	GN				jisjk:22863		
 勃興	발흥	N110		Hd	GN				jisjk:22864		
@@ -213549,6 +213552,7 @@ ttt	ttt	K110			GN				jisjk:201744
 扞格	서로 상대를 받아들이지 않음	N110		Hd	GN				jisjk:229755		
 扨借	제쳐&F6@	M441			GN				jisjk:121442		
 扨置	접어&C7@	M441			GN				jisjk:121439		
+扮	분장&AV@	M439			GN			扮する는 `분장하다`다(LEX-3842).	lex:3842:扮-1		
 扮争	분쟁	N110			GN				jisjk:24527		
 扮装	분장	N110		Hd	GN				jisjk:24526		
 扱	취급&AV@	M430			GN				jisjk:92179		
@@ -213980,6 +213984,7 @@ ttt	ttt	K110			GN				jisjk:201744
 投銭	던져 주는 돈	N110			GN				jisjk:247175		
 投降	투항	N110		Hd	GN				jisjk:37174		
 抗	저항&AV@	M419			GN				jisjk:95875		
+抗	저항&AV@	M410			GN			抗う는 `저항하다`다(LEX-3842).	lex:3842:抗-1		
 抗い	논쟁	N110			GN				jisjk:227686		
 抗うつ剤	항우울제	N110	QHPQHP		GN				jisjk:179700		
 抗かいよう剤	항궤양제	N110	QHPQHP		GN				jisjk:179819		
@@ -290370,6 +290375,7 @@ ttt	ttt	K110			GN				jisjk:201744
 秕	벼쭉정이	N110			GN				jisjk:186647		
 秘	감&CL@	M439			GN				jisjk:93198		
 秘	은밀%A1@	G8U0			GN				jisjk:143657		
+秘	숨&A2@	M433			GN			秘す는 `숨기다`다(秘された 숨겨진)(LEX-3842).	lex:3842:秘-1		
 秘けつ	비결	I110			GN				jisjk:71580		
 秘し隠	감&CL@	M433			GN				jisjk:93199		
 秘し隠し	비밀	N110			GN				jisjk:71581		
@@ -296174,6 +296180,7 @@ ttt	ttt	K110			GN				jisjk:201744
 米	요네	N130	QPN	Wa	GN				jisjk:118399		
 米	쌀	N110	QAOVFd		GN	1927	||4 &&2 ||2 S+2== "買" S+2== "売" P+2== "4**" &&2 S-1== "の" P-1== "2**" S+1== "を" S+1== "の"	米는 앞이 조사 の이거나 뒤가 を, の이거나 두 단어 뒤에 買나 売 동사가 있으면 쌀로 고른다.	jisjk:259217		
 米	미	N110	XXX	MoOn	GN				jisjk:340897		
+糎	센티	N110			GN			糎는 길이 단위 `센티`다(LEX-3842).	lex:3842:糎-1		
 米I. B. M	미국I B M	I110	VGt		GN				jisjk:69447		
 米々沢	메메자와	N130	QCTVPl		GN				jisjk:334304		
 米がよく出来	쌀 농사가 잘 &C6@	M427			GN				jisjk:119623		
@@ -303742,6 +303749,7 @@ ttt	ttt	K110			GN				jisjk:201744
 翰長	내각 관방 장관	N110	VHn		GN				jisjk:230119		
 翳目	침침한 눈	N110	VBp		GN				jisjk:228683		
 翻	바&C3@	M443			GN				jisjk:364617		
+翻	나부&A4@	M418			GN			翻る는 깃발 따위가 `나부끼다`다(LEX-3842).	lex:3842:翻-1		
 翻字	음역	N110		Hd	GN				jisjk:251158		
 翻波式衣文	혼파식 의복문양	N110			GN				jisjk:251200		
 翻訳	번역	N110	UTsUTh	Hd	GN				jisjk:114547		
@@ -327333,6 +327341,7 @@ ttt	ttt	K110			GN				jisjk:201744
 謁見	알현	N110		Hi	GN				jisjk:28489		
 謂	이유	N110			GN				jisjk:126397		
 謂	위	N110		On	GN				jisjk:259487		
+謂え	말할 수 &HN@	M437			GN			謂える는 言える와 같은 `말할 수 있다`다(LEX-3842).	lex:3842:謂え-1		
 謂れ	까닭	N110			GN				jisjk:104374		
 謂れ因縁	사물의 유래	I110			GN				jisjk:79424		
 謂われ因縁	사물의 유래	I110			GN				jisjk:79425		
@@ -332890,6 +332899,7 @@ ttt	ttt	K110			GN				jisjk:201744
 身口意	신구의	N110	UCl		GN				jisjk:235980		
 身命	신명	N110			GN				jisjk:28071		
 身命を睹	목숨을 &L1@	M429			GN				jisjk:136293		
+身嗜み	몸가짐	N110			GN			身嗜み는 `몸가짐`이다(LEX-3842).	lex:3842:身嗜み-1		
 身回品	소지품	N110			GN				jisjk:160313		
 身売り	양도	I110			GN				jisjk:76972		
 身寄り	친척	I110	VHn		GN				jisjk:76966		
@@ -336179,7 +336189,7 @@ ttt	ttt	K110			GN				jisjk:201744
 通風機	통풍기	N110	VPe		GN				jisjk:243744		
 通風計	통풍계	I110			GN				jisjk:87405		
 逝	돌아가&AE@	M411			GN				jisjk:93487		
-逝	&HT@	M451			GN				jisjk:121675		
+逝	&HT@	M45?			GN			逝く는 行く처럼 逝った, 逝って로 활용한다(LEX-3842).	jisjk:121675		
 逝く年	가는 해	I110	UMe		GN				jisjk:74094		
 逝く春	가는 봄	I110	UMe		GN				jisjk:74095		
 逝去	서거	N110		HdHi	GN				jisjk:100867		
@@ -357389,6 +357399,7 @@ ttt	ttt	K110			GN				jisjk:201744
 饅頭蟹	게	N110	VAm		GN				jisjk:252085		
 饅頭貝	만두 조개	N110	VAm		GN				jisjk:252083		
 饅頭長根	만쥬우나가네	I130	QCTVPl		GN				jisjk:330091		
+饑	굶주림	N110			GN			饑는 飢え와 같은 `굶주림`이다(LEX-3842).	lex:3842:饑-1		
 饑餓	기아	N110			GN				jisjk:17895		
 饑餓死	기아사	N110			GN				jisjk:230522		
 饑餓輪出	기아 수출	N110	VMo		GN				jisjk:230523		

@@ -2183,6 +2183,27 @@ std::string RewriteEmphasis(std::string_view text, const LineContext& ctx, const
         rs = kept >= gone ? hiragana : dropped;
         changed = true;
     }
+    // The old attributive き of an adjective right before the noun it describes (深き家, 強き者, 深きものども) is
+    // its い (spec LEX-4355): the stem is an adjective key, the き form is no key of its own (美しき, 好き, 亡き have
+    // rows), and a word in kanji or もの, こと or ところ follows; before a particle it is the noun (弱きを助け).
+    for (size_t k = 1; k + 1 < rs.size(); k++) {
+        if (rs[k] != U'き' || !(IsKanjiRune(rs[k - 1]) || IsHiraganaRune(rs[k - 1]))) continue;
+        const std::u32string_view next = std::u32string_view(rs).substr(k + 1);
+        if (!IsKanjiRune(rs[k + 1]) && !next.starts_with(U"もの") && !next.starts_with(U"こと") && !next.starts_with(U"ところ")) continue;
+        size_t from = k - 1;
+        while (from > 0 && k - from < 4 && (IsHiraganaRune(rs[from - 1]) || IsKanjiRune(rs[from - 1])) && !IsKanjiRune(rs[from])) from--;
+        if (!HasKanji(std::u32string_view(rs).substr(from, k - from))) continue;
+        // The stem starts the run of kanji (古き, not the 深き of 欲深き), and no key read from it reaches the き
+        // (憂き目, 憂き世 have rows) nor a word after it that is another old attributive (古き良き).
+        // One kanji and its kana (古き, 美しき, 親しき); two kanji are a compound the dictionary reads (恋多き, 欲深き).
+        if ((k - from > 1 && IsKanjiRune(rs[from + 1])) || (from > 0 && IsKanjiRune(rs[from - 1]))) continue;
+        const std::u32string_view head = std::u32string_view(rs).substr(from);
+        if (e.Tags(head.substr(0, k - from)).find('H') == std::string::npos) continue;
+        if (e.LongestKey(head) > k - from) continue;
+        if (k + 2 < rs.size() && rs[k + 2] == U'き') continue;
+        rs[k] = U'い';
+        changed = true;
+    }
     // The tic っぽい drawn out after a word (行くっぽーい, 寝ちゃったっぽ～い) is っぽい with the
     // lengthening mark.
     for (size_t i = 1; i + 2 < rs.size(); i++) {
