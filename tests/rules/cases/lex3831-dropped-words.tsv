@@ -1,0 +1,21 @@
+# 규칙: LEX-3831
+rule	input	expected	kind	layer
+L4198	人を好きになるってなんだろう	사람을 좋아하게 된다는 것은 무엇일까	fix	local
+L4198	生きるってなんだろう	산다는 것은 무엇일까	fix	local
+L4198	幸せってなんだろうね	행복하다는 것은 무엇일까	fix	local
+L4198	それってなんだろう	그거 무엇일까	fix	local
+L4198	愛ってなんだろう	사랑은 무엇일까	keep	local
+L4198	彼は医者なんだろう	그는 의사겠지	keep	local
+L4198	きっと本当なんだろうね	분명 사실이겠지	keep	local
+L3729	強さってなんですか	강함은 무엇입니까	fix	local
+L3729	生きるってなんですか	산다는 것은 무엇입니까	fix	local
+L3729	それってなんですか	그거 무엇입니까	fix	local
+L3729	これは何ですか	이것은 무엇입니까	keep	local
+dict:lex:3831:onnaji-3	せつない毎日もおんなじ	안타까운 매일도 같다	fix	local
+dict:lex:3831:onnaji-3	おんなじ顔	같은 얼굴	fix	local
+dict:lex:3831:onnaji-3	おんなじだね	같네	keep	local
+phrase:うるせ	でも うるせ	하지만 시끄러	fix	phrases
+phrase:うるせ	うるせえ	시끄러	keep	phrases
+dict:lex:3831:ご機嫌を取	上司のご機嫌をとる	상사의 비위를 맞춘다	fix	local
+dict:lex:3831:ご機嫌を取	あぁ～ ご機嫌ななめなユキも かわいい	아아~ 저기압인 유키도 귀엽다	keep	local
+dict:lex:3831:ご機嫌を取	ご機嫌なおしてよ	기분 고쳐	keep	local
