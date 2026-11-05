@@ -92,3 +92,19 @@ argument-senses:97	取る	v5	sense	obj=@thing	집다	LEX-4909		鍵を取る 열�
 argument-senses:98	取る	v5	sense	obj=@headwear|@eyewear	벗다	LEX-4909		帽子を取った 모자를 벗었다			
 argument-senses:99	取る	v5	sense	obj=@weapon|@writing.tool	들다	LEX-4909		剣を取る 검을 들다			
 argument-senses:100	取る	v5	sense	obj=@thing next=に|くる|来る|いく|行く|おく|置く|あげる|やる|くれる|もらう	-	LEX-4909		タオルを取りに来た 수건을 가지러 왔다(그대로)			
+argument-senses:116	返す	v5	sense	arg=恩|借り|借金|お金|金|貸し|恩義|ご恩	갚다	LEX-4912		借りは返します 빚은 갚겠습니다			
+argument-senses:117	回す	v5	sense	obj=腕|両腕|手|両手|片手|右腕|左腕 dat=肩|腰|首|背中|背|体|身体|胴|首筋|肩口|腹	두르다	LEX-4912		両腕を回す 두 팔을 두르다			
+argument-senses:118	切る	v5	sense	obj=シールド|音|音声|電源|スイッチ|エンジン|ライト|照明|テレビ|ラジオ|モーター|ブースター|マイク|カメラ|レーダー|サイレン|アラーム|ヘッドライト	끄다	LEX-4912		電源を切る 전원을 끄다			
+argument-senses:119	切る	v5	sense	obj=電話|通話|通信|無線	끊다	LEX-4912		電話を切る 전화를 끊다			
+argument-senses:120	切る	v5	sense	obj=指先|手の平|手のひら|唇|頬|足の裏|膝	베다	LEX-4912		指を切る 손가락을 베다			
+argument-senses:121	切る	v5	sense	obj=ハンドル|急ハンドル|舵	꺾다	LEX-4912		急ハンドルを切る 핸들을 급히 꺾다			
+argument-senses:122	引く	v5	sense	obj=くじ|クジ|籤|おみくじ|ガチャ|カード|札|貧乏くじ|当たり|ハズレ|はずれ|アタリ	뽑다	LEX-4912		くじを引く 제비를 뽑다			
+argument-senses:123	引く	v5	sense	obj=- after=ちょっと|さすがに|マジで|普通に|正直|かなり|ドン	질리다	LEX-4912		さすがに引いたわ 정말 질렸어			
+argument-senses:124	落とす	v5	sense	obj=城|砦|要塞|拠点|都市|首都|王都|陣地|基地|本丸|城塞	함락하다	LEX-4912		ついに砦を落とした 마침내 요새를 함락했다			
+argument-senses:125	落とす	v5	sense	obj=影|陰|暗い影	드리우다	LEX-4912		影を落とす 그림자를 드리우다			
+argument-senses:126	落とす	v5	sense	obj=化粧|メイク|口紅|汚れ|泡|血|匂い|臭い	씻어내다	LEX-4912		汗と火薬の匂いをしっかりと落とす 땀과 화약 냄새를 꼼꼼히 씻어내다			
+argument-senses:127	落とす	v5	sense	obj=視線|目|目線	떨구다	LEX-4912		手元に目を落とす 손으로 시선을 떨구다			
+argument-senses:128	落とす	v5	sense	obj=敵機|飛行機|戦闘機|艦載機|爆撃機|ヘリ|ドローン|攻撃機	격추하다	LEX-4912		敵機を落とす 적기를 격추하다			
+argument-senses:129	入れる	v1:규칙	sense	obj=一発|蹴り|拳|パンチ|膝蹴り|肘打ち|ボディブロー	먹이다	LEX-4912		一発を入れる 한 방 먹이다			
+argument-senses:130	入れる	v1	sense	obj=一票|票	던지다	LEX-4912		一票を入れる 한 표를 던지다			
+argument-senses:131	入れる	v1	sense	obj=予定|仕事|お仕事|バイト|シフト|アポ|アポイント	잡다	LEX-4912		バイトを入れる 아르바이트를 잡다			
