@@ -1,0 +1,43 @@
+# 규칙: LEX-3847
+rule	input	expected	kind	layer
+cx:genki-greeting:10	よお！元気か？	요오! 잘 지내?	fix	rewrites
+cx:genki-greeting:10	パパとママは元気？	아빠와 엄마는 잘 지내?	fix	rewrites
+cx:genki-greeting:10	ねえねえねえ、提督、今日も元気？	있잖아 있잖아 있잖아, 제독, 오늘도 잘 지내?	fix	rewrites
+cx:genki-greeting:20	よう 四宮 元気か？	요우 시노미야잘 지내?	fix	rewrites
+cx:genki-greeting:20	元気かい？	잘 지내?	fix	rewrites
+cx:genki-greeting:31	ああ～ よう来たね！ 元気だった？	아~ 요우 왔네! 잘 지냈어?	fix	rewrites
+cx:genki-greeting:30	元気だったか フランク･フラニガン？	잘 지냈어 프랭크·플래니건?	fix	rewrites
+cx:genki-greeting:29	千石ちゃんは 元気だったかな?	센고쿠짱은 잘 지냈을까?	fix	rewrites
+cx:genki-greeting:40	ホームの皆さんも元気ですか？	홈의 여러분도 잘 지냅니까?	fix	rewrites
+cx:genki-greeting:40	お兄さん！ 元気ですかー！	오빠! 잘 지냅니까~!	fix	rewrites
+cx:genki-greeting:35	やっほー お母さん 元気してる？	야호 엄마 잘 지내고 있어?	fix	rewrites
+cx:genki-greeting:35	久しぶりだね 元気してた	오래간만이구나 잘 지냈다	fix	rewrites
+cx:genki-greeting:50	元気でな！ ありがとう！ 助かったよ	잘 지내! 고마워! 도움이 됐어	fix	rewrites
+cx:genki-greeting:50	ｶﾂｶﾚｰ元気でな！	가츠카레 잘 지내!	fix	rewrites
+cx:genki-greeting:52	では お元気で	그럼 잘 지내요	fix	rewrites
+cx:genki-greeting:38	うん、そだねー。ぱにゃちゃん、元気にしてるかな～	응, 그러게~. 파냐짱, 잘 지내고 있을까~	fix	rewrites
+cx:genki-greeting:38	お兄ちゃんと杏璃ちゃんは元気にしてるかい？	오빠와 안리짱은 잘 지내고 있어?	fix	rewrites
+dict:lex:3847:genki-dase-2	元気だせよ 作田久美子	힘내 사쿠타 쿠미코	fix	lookup
+dict:lex:3847:genki-dase-3	元気だして…	힘내…	fix	lookup
+cx:genki-greeting:10	元気がない？	기운이 없어?	keep	rewrites
+cx:genki-greeting:10	元気な子？	건강한 아이?	keep	rewrites
+cx:genki-greeting:54	元気でいられるんだ	건강해 있을 수 있는 거야	keep	rewrites
+cx:genki-greeting:10	カケル 元気出して	카케루 기운 내	keep	rewrites
+cx:genki-greeting:10	うふふ、元気が良くていいじゃありませんか	우후후, 건강이 좋아서 좋지 않습니까	keep	rewrites
+cx:genki-greeting:10	お元気ですか？	안녕하십니까?	keep	rewrites
+dict:lex:3847:genki-dase-1	元気だそうだ	건강하다고 한다	keep	lookup
+dict:lex:3847:genki-dase-1	元気だし、	건강하고,	keep	lookup
+cx:genki-greeting:15	あぁ～ うんめ～お母さん元気かな～？	아아~ 응 ~엄마 잘 지낼까~?	fix	rewrites
+cx:genki-greeting:15	元気な子かな	건강한 아이일까	keep	rewrites
+cx:genki-greeting:20	元気が出るかい？	활기가 생길까?	keep	rewrites
+cx:genki-greeting:29	あの頃は元気だったな	그 무렵은 건강했네	keep	rewrites
+cx:genki-greeting:30	元気だったから安心した	건강했으니까 안심했다	keep	rewrites
+cx:genki-greeting:31	昔は元気だった。	옛날은 건강했다.	keep	rewrites
+cx:genki-greeting:35	元気を出してる？	힘내고 있어?	keep	rewrites
+cx:genki-greeting:40	元気ですよ	건강해요	keep	rewrites
+cx:genki-greeting:41	父さん、元気でしたか？	아버지, 잘 지냈습니까?	fix	rewrites
+cx:genki-greeting:41	元気でしたよ	건강했어요	keep	rewrites
+cx:genki-greeting:50	元気でなくてもいい	건강하지 않아도 괜찮다	keep	rewrites
+cx:genki-greeting:52	お元気でいらっしゃる	건강하시다	keep	rewrites
+cx:genki-greeting:54	じゃあね、元気で！	그럼 안녕, 잘 지내!	fix	rewrites
+cx:genki-greeting:38	メカニズムはよくわからぬが、他人を元気にするだけでなく、呪うこともできるということだ	메카니즘은 잘 알지 않는이, 타인을 건강하게 지낼 뿐만 아니라, 저주할 수도 있다는 것이다	keep	rewrites
