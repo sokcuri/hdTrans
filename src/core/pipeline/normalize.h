@@ -30,6 +30,9 @@ struct RunLookup {
     // ichidan stem before ねえ, 通じねえ, where a kana verb that ends the form, きる of 好きる, does not count);
     // null for none.
     bool (*verbForm)(const void* context, std::string_view form) = nullptr;
+    // Whether stem, whole, is the stem of an adjective in い of the dictionary (DialectForms: 暑う, よか);
+    // null for none.
+    bool (*adjectiveStem)(const void* context, std::string_view stem) = nullptr;
 };
 
 // The line (without "\n" or a final "\r") after the normalising rewrites; the order is
@@ -154,6 +157,14 @@ std::string JoinPausedCopula(std::string_view text);
 // A を repeated after a word written once (素振りをを見せる 素振りを見せる); a run of を
 // that does not follow a word stays.
 std::string CollapseDoubledWo(std::string_view text);
+
+// The endings and copulas of regional and old speech as standard Japanese (spec GRM-3950): the
+// copula や and じゃ (アホや アホだ, 雨やけど 雨だけど, 家じゃのう 家だなあ), the から of western
+// speech (行くけん 行くから, 無理じゃけえ), ずら and だべ (だろう), the onbin う of verbs and
+// adjectives (言うた 言った, 暑うて 暑くて), the adjective in か (よか声 よい声), ちょる (てる), rough
+// orders (降りい 降りろ, しっかりせえ しっかりしろ, 引かんかい 引け), the Kansai ねん (んだ) and でがんす,
+// ざます (です). With runs.verbForm and runs.adjectiveStem the stems are words of the dictionary.
+std::string DialectForms(std::string_view text, const RunLookup& runs);
 
 // The spoken and old-fashioned spellings the dictionary does not read in their plain
 // form: an adjective or verb stem in katakana (ウザい うざい), じゃね？ and 良くね？,

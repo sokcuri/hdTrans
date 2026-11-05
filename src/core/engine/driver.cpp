@@ -499,6 +499,15 @@ bool DictionaryVerbIs(const void* context, std::string_view form) {
     return d.line != nullptr && pipeline::internal::IsDictionaryVerb(form, *d.line, d.snap);
 }
 
+// Whether stem, whole, is the stem of an adjective in い of the dictionary (pipeline::RunLookup::adjectiveStem).
+bool AdjectiveStemIs(const void* context, std::string_view stem) {
+    const auto& d = *static_cast<const RespellLookup*>(context);
+    for (const dict::Candidate& c : Find(d, stem).list) {
+        if (c.source == stem && c.codes != nullptr && (c.codes->part.Tag() == 'H' || c.codes->part.Tag() == 'M') && c.codes->part.ClassDigit() == '7') return true;
+    }
+    return false;
+}
+
 // The start of the word other than an ending or a particle that holds the っ at line[at] and goes on
 // past it, as written or with the っ dropped (あったりまえ as あたりまえ): the earliest that starts up
 // to kRunLookBackRunes Japanese runes before it, npos for none (pipeline::CollapseTsuRuns).
@@ -1195,7 +1204,7 @@ std::string TranslateBody(const dict::Snapshot& snap, pipeline::DocumentContext&
             pipeline::Normalize(text, ctx,
                                 {WordHoldsRun, options.reference ? nullptr : StressedWordStart, &respell,
                                  options.reference ? nullptr : EndsInVerb, options.reference ? nullptr : EndsInDictionaryVerb,
-                                 options.reference ? nullptr : DictionaryVerbIs}),
+                                 options.reference ? nullptr : DictionaryVerbIs, options.reference ? nullptr : AdjectiveStemIs}),
             ReadBase, &snap);
         if (!options.reference) {
             normalized = pipeline::RespellVariants(normalized, WordKeepsVariant, &respell);
