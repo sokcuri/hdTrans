@@ -810,7 +810,7 @@ const std::map<std::string, Name>& Registry::Accepted() {
         if (l.closed >= 3 && l.closed + l.open >= 5 && l.particles.size() >= 2 && inflectedOk(t, l.bare)) free.insert(t);
     }
     for (const std::string& t : free) {
-        if (Flags(t).records > 0) continue;
+        if (Flags(t).records > 0 || WordThenParticle(t)) continue;
         Name& n = all[t];
         n.score += kThreshold;
         n.person = true;

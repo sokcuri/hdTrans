@@ -870,6 +870,30 @@ bool Registry::InflectedRun(std::string_view t) {
     return false;
 }
 
+// A particle of two kana or more ends any word (どこまで, これだけ, それから); one of one kana only a
+// pronoun or a demonstrative (どこで, それに), as names end in か, で, の or と (まどか, かなで).
+bool Registry::WordThenParticle(std::string_view t) {
+    static constexpr std::string_view kLong[] = {"まで", "から", "より", "だけ", "しか", "ほど", "くらい", "ぐらい", "など",
+                                                 "でも", "には", "とか", "って", "ばかり", "なんて", "こそ", "さえ"};
+    static constexpr std::string_view kShort[] = {"で", "に", "を", "へ", "は", "が", "も", "の", "と", "や", "か"};
+    static constexpr std::string_view kDeictic[] = {"どこ", "ここ", "そこ", "あそこ", "これ", "それ", "あれ", "どれ", "なに",
+                                                    "いつ", "だれ", "どなた", "こちら", "そちら", "あちら", "どちら", "どう"};
+    for (const std::string_view p : kLong) {
+        if (!t.ends_with(p) || t.size() == p.size()) continue;
+        const std::string_view w = t.substr(0, t.size() - p.size());
+        if (RuneCount(w) >= 2 && Flags(w).common) return true;
+    }
+    for (const std::string_view p : kShort) {
+        if (!t.ends_with(p)) continue;
+        const std::string_view w = t.substr(0, t.size() - p.size());
+        for (const std::string_view d : kDeictic) {
+            if (w == d) return true;
+        }
+        if (Flags(w).pronoun) return true;
+    }
+    return false;
+}
+
 std::vector<Registry::LooseUse> Registry::FreeKanaNames(std::string_view line) {
     std::vector<LooseUse> out;
     for (std::size_t start = 0; start < line.size();) {

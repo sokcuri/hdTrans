@@ -168,6 +168,9 @@ private:
     std::vector<LooseUse> LooseKanaUses(std::string_view line);
     // Whether the hiragana t is a form of a verb or an adjective of the dictionaries (いい, 来た).
     bool InflectedRun(std::string_view t);
+    // Whether the hiragana t is a word of the dictionary and a particle after it (どこまで: どこ まで,
+    // それから), which is no name however often the document writes it (spec LEX-4828).
+    bool WordThenParticle(std::string_view t);
     std::string_view KanaHonorificAt(std::string_view s);
     bool PredicateForm(std::string_view run);
     bool LayerReading(std::string_view t);
