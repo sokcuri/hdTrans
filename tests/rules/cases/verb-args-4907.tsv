@@ -1,0 +1,40 @@
+# 규칙: LEX-4907
+rule	input	expected	kind	layer
+cx:verb-args-1:5	変な気は起こさないでね	has:이상한 마음은 먹지 마	fix	rewrites
+cx:verb-args-1:5	何も起こらない	has:아무것도 일어나지 않는다	keep	rewrites
+cx:verb-args-1:10	「……ごめんね、起こしてしまって……」	has:깨워버려	fix	rewrites
+cx:verb-args-1:10	「夏休み前、朝起こしに来てくれてたじゃん」	has:깨우러 와	fix	rewrites
+cx:verb-args-1:10	起こすの かわいそうだけど…。	has:깨우는 것	fix	rewrites
+cx:verb-args-1:10	提督、私が見ています。疲れているようだ。起こさないようにしてあげよう。	has:깨우지 않도록	fix	rewrites
+cx:verb-args-1:10	ゆっくりと体を起こす。	has:몸을 일으킨다	keep	rewrites
+cx:verb-args-1:10	一連の事件は彼が起こした。	has:일으켰다	keep	rewrites
+cx:verb-args-1:10	目眩でも起こしたのか、目頭を押さえた。	has:일으켰는지	keep	rewrites
+cx:verb-args-1:10	こんなところでラフ起こすのやめてよ～！	lacks:깨우	keep	rewrites
+cx:verb-args-1:10	指先や腕が動く感触はあるのだが、上半身が起こせない。	has:일으킬 수 없다	keep	rewrites
+cx:verb-args-1:20	「先に断っとくけど。ままごと遊びみたいなレベルじゃないからね！」	has:먼저 말해 두는데	fix	rewrites
+cx:verb-args-1:20	退路を断った	has:퇴로를 끊었다	keep	rewrites
+cx:verb-args-1:25	「何度も断ったさ、当たり前だろ。でも、刃物を出された……」	has:몇 번이나 거절했	fix	rewrites
+cx:verb-args-1:25	えっと…断ったのに、御礼を言われましても	has:거절했는데	fix	rewrites
+cx:verb-args-1:25	彼女との接触を断って約半年	has:접촉을 끊어	keep	rewrites
+cx:verb-args-1:30	「お誘いは昼休みに断ったばかりですよね」	has:거절한	fix	rewrites
+cx:verb-args-1:30	付き添いを断った私の名前を、使わないでほしい。	has:거절한	fix	rewrites
+cx:verb-args-1:30	罪を断つ	has:끊는다	keep	rewrites
+pack:argument-senses:64	ある店の前を通った時、看板に風車が飾られていた。	has:앞을 지나갔을 때	fix	packs
+pack:argument-senses:64	毎日学校に通っている	has:학교에 다니고 있다	keep	packs
+pack:argument-senses:65	ここから先は一般街区だ。貴様のような囚人を通すわけにはいかん！	has:죄수를 들여보낼 수는 없다	fix	packs
+pack:argument-senses:65	「どいていろ！　おい、僕を通せ！！」	has:나를 들여보내라	fix	packs
+pack:argument-senses:66	彼を通して知り合った	has:그를 통해	keep	packs
+pack:argument-senses:67	あれほど民間人を通してはならないと注意しているのに。	has:민간인을 들여보내서는	fix	packs
+pack:argument-senses:68	そして、リビングに通してもらい――	has:거실에 안내해	fix	packs
+pack:argument-senses:69	ホットプレートの上に箸を伸ばした。	has:젓가락을 뻗었다	fix	packs
+pack:argument-senses:69	銃を握ったまま腕を彼女の方へ伸ばして銃口を押し当てようとする。	has:팔을 그녀쪽으로 뻗어	fix	packs
+pack:argument-senses:69	背筋を伸ばした	has:등을 폈다	keep	packs
+pack:argument-senses:70	俺の口のあちこちに舌を伸ばしてくる。	has:혀를 내밀어 온다	fix	packs
+pack:argument-senses:71	灰色の髪は肩まで伸ばしてハーフアップに結っている	has:어깨까지 길러	fix	packs
+pack:argument-senses:72	閉塞感を覚えながら、みんなの方へ視線を移す。	has:폐색감을 느끼면서	fix	packs
+pack:argument-senses:72	今でも覚えている。	has:기억하고 있다	keep	packs
+pack:argument-senses:73	「一度、火の使い方を覚えた人の文明から火を奪えると思いますか？」	has:사용법을 익힌	fix	packs
+pack:argument-senses:73	その名前を覚えておいて	has:이름을 기억해	keep	packs
+伸ばす/のばす/v5#1	姉の胸に触れて、鼻の下を伸ばした時点で浮気よ	has:헤벌쭉해진	fix	packs
+伸ばす/のばす/v5#2	たまには、羽を伸ばしてみませんか？	has:마음껏 쉬어 보지	fix	packs
+通す/とおす/v5#1	役に立つかどうかは知らんが目は通しておいたほうがいい……。	has:훑어봐 두는	fix	packs
